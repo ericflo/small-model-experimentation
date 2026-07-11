@@ -47,7 +47,7 @@ tool-found solutions, on-policy RL at residual failures, and
 failure-forensics curricula are the queued beyond-recipe mechanisms
 (see C53 next tests). Same-recipe scaling is closed.
 
-## Active Registered Test (2026-07-11; no model result yet)
+## Active Registered Test (2026-07-11; incumbent gate passed)
 
 `qwen35_4b_specialist_policy_integration` is the accepted next experiment.
 It reuses the live-state curriculum as four independent capability producers,
@@ -57,6 +57,13 @@ primitive, and state-aware-expert CPU gates at every L1-L4 cell. This is
 substrate validation only; no capability or integration claim is licensed
 until the specialist, prefix/locality, matched-control, and held-out-composition
 gates resolve.
+
+Reached evidence: the regenerated C53 incumbent passed source/encoding/merge
+and 7/7 paired behavioral-installation checks. On the disjoint four-family
+compound calibration it scored 0.135 macro versus the registered `<0.60`
+headroom ceiling (`cipherkiln` 0.227, `mazeferry` 0.296, `patchferry` 0.012,
+`tripleforge` 0.005; 288 episodes). This licenses specialist production but is
+not a capability-gain result.
 
 ## qwen35_4b_think_ftpo_round1 (2026-07-11, C52 — Negative)
 

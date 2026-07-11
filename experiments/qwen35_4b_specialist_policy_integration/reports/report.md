@@ -3,8 +3,8 @@
 ## Status
 
 Implementation and the complete runtime/training/merge preflight passed. The
-C53 incumbent was regenerated and passed its structural and behavioral
-installation gates; compound-headroom calibration is running. No specialist
+C53 incumbent was regenerated and passed its structural, behavioral, and
+compound-headroom gates. Matched incumbent baselines are next. No specialist
 or integration capability claim is available.
 
 ## Research Program Fit
@@ -50,9 +50,19 @@ all source-data, encoding, hyperparameter, optimizer, merge, and installation
 checks. This proves the intended checkpoint was installed; it does not yet
 show compound headroom or improvement.
 
+The disjoint compound-only calibration then evaluated 288 greedy episodes at
+L2-L4 (24 per family/level) under episode seed base 80500, with atom generation
+disabled. The family means were 0.2271 `cipherkiln`, 0.2961 `mazeferry`,
+0.0115 `patchferry`, and 0.0053 `tripleforge`, for macro 0.1350 against the
+pre-registered exclusive ceiling 0.60. Exact success was 5.56%, 1.39%, 0%,
+and 0%. Every protocol check passed, and the compacted artifact contains no
+simulator spec, expert label, message transcript, or raw top-20 payload. This
+establishes the intended headroom and licenses specialist production; it is
+not evidence that a training method improved the model.
+
 ## Pending
 
-- disjoint C53 incumbent compound-headroom calibration;
+- matched all-process incumbent greedy and execution-filtered best-of-8 baselines;
 - four specialist/control runs and qualification receipts;
 - same-prefix teacher/locality audit;
 - MOPD and matched integration controls;

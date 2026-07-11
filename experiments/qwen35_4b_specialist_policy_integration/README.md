@@ -1,8 +1,9 @@
 # Qwen3.5-4B Specialist Policy Integration
 
-Status: the C53 incumbent was regenerated and passed structural plus paired
-behavioral installation gates on 2026-07-11. Its disjoint compound-headroom
-calibration is running; no specialist or integration result exists yet.
+Status: the C53 incumbent was regenerated, installed, and passed the disjoint
+compound-headroom gate on 2026-07-11 (macro 0.135 versus the `<0.60` bar).
+Matched incumbent baselines are next; no specialist or integration result
+exists yet.
 
 This experiment tests whether independently execution-improved, same-origin
 specialists can be consolidated on the student's own trajectories into one
@@ -95,7 +96,8 @@ Reached model stages are resumable and fail closed on missing upstream receipts:
 ```bash
 python3 experiments/qwen35_4b_specialist_policy_integration/scripts/run.py --stage model-smoke
 python3 experiments/qwen35_4b_specialist_policy_integration/scripts/run.py --stage incumbent
-python3 experiments/qwen35_4b_specialist_policy_integration/scripts/run.py --stage calibrate
+python3 experiments/qwen35_4b_specialist_policy_integration/scripts/run.py --stage calibration-gate
+python3 experiments/qwen35_4b_specialist_policy_integration/scripts/run.py --stage baseline-eval
 python3 experiments/qwen35_4b_specialist_policy_integration/scripts/run.py --stage dagger-collect --domain discover
 python3 experiments/qwen35_4b_specialist_policy_integration/scripts/run.py --stage dagger-train --domain discover
 python3 experiments/qwen35_4b_specialist_policy_integration/scripts/run.py --stage rl-collect --domain discover
@@ -133,9 +135,13 @@ Current pre-task evidence is limited to substrate and runtime validity:
 - all 7/7 frozen visible-prefix canaries changed versus the pinned base under
   identical greedy prompts, runner hash, sampling, CUDA graphs, and runtime
   lock. The aggregate incumbent provenance/install gate passed every check.
+- on a disjoint 288-episode compound calibration (four families, L2-L4,
+  24/cell), the incumbent scored 0.135 macro: `cipherkiln` 0.227,
+  `mazeferry` 0.296, `patchferry` 0.012, and `tripleforge` 0.005. The strict
+  `<0.60` headroom gate and every scope/decode/seed/atom-firewall check passed.
 
-This licenses incumbent evaluation, not a capability, teacher, integration,
-transfer, or benchmark conclusion.
+This licenses the matched incumbent baseline and specialist-production stages,
+not a teacher, integration, transfer, or benchmark conclusion.
 
 ## Artifacts
 

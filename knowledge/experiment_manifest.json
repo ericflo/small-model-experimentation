@@ -3776,8 +3776,8 @@
   },
   {
     "file_counts": {
-      ".gz": 2,
-      ".json": 12,
+      ".gz": 4,
+      ".json": 14,
       ".jsonl": 6,
       ".md": 7,
       ".py": 50,
@@ -3795,7 +3795,7 @@
       "process_control_and_tool_use"
     ],
     "source_track": "new",
-    "summary": "Status: the C53 incumbent was regenerated and passed structural plus paired behavioral installation gates on 2026-07-11. Its disjoint compound-headroom calibration is running; no specialist or integration result exists yet.",
+    "summary": "Status: the C53 incumbent was regenerated, installed, and passed the disjoint compound-headroom gate on 2026-07-11 (macro 0.135 versus the `<0.60` bar). Matched incumbent baselines are next; no specialist or integration result exists yet.",
     "tags": [
       "policy",
       "small-model"
@@ -3811,8 +3811,8 @@
       "src",
       "tests"
     ],
-    "total_files": 82,
-    "total_size_bytes": 969860
+    "total_files": 86,
+    "total_size_bytes": 4507005
   },
   {
     "file_counts": {

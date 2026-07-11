@@ -8,6 +8,9 @@
   integrate them on-policy and test fully held-out composition. CPU substrate
   smoke is complete; model work is in progress. This experiment owns the next
   capability/integration claim slot until its registered stop hierarchy resolves.
+  The regenerated incumbent and disjoint compound-headroom gate have passed;
+  matched baseline measurement and four specialist/control pipelines are the
+  current reached work.
 
 - Precursor: `qwen35_4b_interactive_policy_curriculum` — its state-aware DAgger
   and guarded execution-reward machinery is copied into the active standalone

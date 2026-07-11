@@ -1,0 +1,29 @@
+{
+  "compound_family_scores": {
+    "cipherkiln": 0.22712742504409172,
+    "mazeferry": 0.29606481481481484,
+    "patchferry": 0.011507936507936507,
+    "tripleforge": 0.005263447971781305
+  },
+  "compound_macro_score": 0.13499090608465608,
+  "frozen_confirmatory_levels": [
+    2,
+    3,
+    4
+  ],
+  "gate": {
+    "passed": true
+  },
+  "protocol_checks": {
+    "atoms_disabled": true,
+    "decode": true,
+    "episode_seed_base": true,
+    "episodes_per_level": true,
+    "families": true,
+    "levels": true,
+    "scope": true
+  },
+  "scores": "/workspace/small-model-experimentation/experiments/qwen35_4b_specialist_policy_integration/runs/proxy_eval/incumbent_compound_calibration/scores.json",
+  "stage": "incumbent_compound_calibration",
+  "threshold_exclusive": 0.6
+}

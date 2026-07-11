@@ -1,0 +1,6052 @@
+{
+  "atom_summary": {
+    "by_family": {},
+    "family_macro_score": null
+  },
+  "atoms_enabled": false,
+  "behavior_diagnostics": {
+    "correction_marker_turn_rate": 0.703901656867985,
+    "entropy_token_positions": 1942775,
+    "execution_filtered_coverage": 0.017361111111111112,
+    "forced_close_turn_rate": 0.12533404596472475,
+    "logical_model_input_tokens": 2229494,
+    "mean_reported_top20_tail_lumped_entropy_nats": 0.13079647891221355,
+    "mean_unique_valid_action_sequences_per_episode": 0.03125,
+    "sampled_tokens": 1942775,
+    "turns": 3742
+  },
+  "best_of_k_summary": {
+    "by_family": {
+      "cipherkiln": {
+        "mean_score": 0.22712742504409172,
+        "n": 72
+      },
+      "mazeferry": {
+        "mean_score": 0.29606481481481484,
+        "n": 72
+      },
+      "patchferry": {
+        "mean_score": 0.011507936507936507,
+        "n": 72
+      },
+      "tripleforge": {
+        "mean_score": 0.005263447971781305,
+        "n": 72
+      }
+    },
+    "family_macro_score": 0.13499090608465608,
+    "n_episode_groups": 288
+  },
+  "config": "/workspace/small-model-experimentation/experiments/qwen35_4b_specialist_policy_integration/configs/default.yaml",
+  "config_sha256": "02f74d800975a789409fd8018096dee73d84d4375f20d4542799c59bd1d7ba33",
+  "decode": "greedy",
+  "episode_seed_base": 80500,
+  "episode_summary": {
+    "by_family": {
+      "cipherkiln": {
+        "action_valid_rate": 0.2075476992143659,
+        "exact_rate": 0.05555555555555555,
+        "mean_score": 0.22712742504409172,
+        "mean_turns": 10.930555555555555,
+        "n": 72,
+        "natural_close_rate": 0.8547453703703703
+      },
+      "mazeferry": {
+        "action_valid_rate": 0.8517481319785029,
+        "exact_rate": 0.013888888888888888,
+        "mean_score": 0.29606481481481484,
+        "mean_turns": 21.041666666666668,
+        "n": 72,
+        "natural_close_rate": 0.9805325857930561
+      },
+      "patchferry": {
+        "action_valid_rate": 0.04683641975308642,
+        "exact_rate": 0.0,
+        "mean_score": 0.011507936507936507,
+        "mean_turns": 9.0,
+        "n": 72,
+        "natural_close_rate": 0.7968364197530864
+      },
+      "tripleforge": {
+        "action_valid_rate": 0.07598905723905724,
+        "exact_rate": 0.0,
+        "mean_score": 0.005263447971781305,
+        "mean_turns": 11.0,
+        "n": 72,
+        "natural_close_rate": 0.7583333333333333
+      }
+    },
+    "family_macro_score": 0.13499090608465608,
+    "generation": {
+      "calls": 30,
+      "counts": {
+        "completions": 3742,
+        "injected_tokens": 948,
+        "logical_model_input_tokens": 2229494,
+        "requests": 3742,
+        "sampled_tokens": 1942775,
+        "stage1_logical_prompt_tokens": 1572150,
+        "stage2_logical_prompt_tokens": 657344,
+        "unique_input_prompt_tokens": 1572150
+      },
+      "engine": {
+        "adapter": null,
+        "cudagraph_capture_sizes": [
+          1,
+          2,
+          4,
+          8,
+          16,
+          24,
+          32,
+          40,
+          48
+        ],
+        "enable_prefix_caching": false,
+        "enforce_eager": false,
+        "gpu_memory_utilization": 0.85,
+        "max_model_len": 16384,
+        "max_num_batched_tokens": 16384,
+        "max_num_seqs": 48,
+        "model_override": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_specialist_policy_integration/merged/incumbent_blend"
+      },
+      "engine_args": {
+        "async_scheduling": false,
+        "cudagraph_capture_sizes": [
+          1,
+          2,
+          4,
+          8,
+          16,
+          24,
+          32,
+          40,
+          48
+        ],
+        "dtype": "bfloat16",
+        "enable_prefix_caching": false,
+        "enforce_eager": false,
+        "generation_config": "vllm",
+        "gpu_memory_utilization": 0.85,
+        "language_model_only": true,
+        "mamba_cache_mode": "none",
+        "max_cudagraph_capture_size": 48,
+        "max_logprobs": 20,
+        "max_model_len": 16384,
+        "max_num_batched_tokens": 16384,
+        "max_num_seqs": 48,
+        "model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_specialist_policy_integration/merged/incumbent_blend",
+        "seed": 0,
+        "tensor_parallel_size": 1,
+        "trust_remote_code": true
+      },
+      "generation_seconds": 2030.7811540216208,
+      "model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_specialist_policy_integration/merged/incumbent_blend",
+      "model_config_sha256": "f64803e92c6b93971a8e4fa89a811c8607b9b4efd6d0df0e6ca6016404f42630",
+      "model_revision": null,
+      "resolved_cudagraph": {
+        "cudagraph_capture_sizes": [
+          1,
+          2,
+          4,
+          8,
+          16,
+          24,
+          32,
+          40,
+          48
+        ],
+        "decode_mode": "FULL",
+        "has_full_cudagraphs": true,
+        "max_cudagraph_capture_size": 48,
+        "mixed_mode": "PIECEWISE",
+        "mode": "FULL_AND_PIECEWISE",
+        "source": "llm_engine.vllm_config.compilation_config"
+      },
+      "resolved_sampling": {
+        "frequency_penalty": 0.0,
+        "min_p": 0.0,
+        "presence_penalty": 0.0,
+        "repetition_penalty": 1.0,
+        "temperature": 0.0,
+        "top_k": 0,
+        "top_p": 1.0
+      },
+      "runner_sha256": "95b78cd1a32172a9e46e883b011afe6100592c0155e794f9d60b189074e1f70c",
+      "runtime": {
+        "cuda_toolkit": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Fri_Feb_21_20:23:50_PST_2025\nCuda compilation tools, release 12.8, V12.8.93\nBuild cuda_12.8.r12.8/compiler.35583870_0",
+        "environment_lock": {
+          "path": "/workspace/small-model-experimentation/requirements-vllm.lock.txt",
+          "sha256": "64c3dde1e24f2b18a83cda3a3d84daf8701aad728e864c508854b10e3e3734c6"
+        },
+        "git_commit": "22033dd03018f95ee93571d1ec8b6e53185f9142",
+        "git_dirty": true,
+        "gpu": "NVIDIA L40, 550.127.08, 46068",
+        "platform": "Linux-5.15.0-122-generic-x86_64-with-glibc2.39",
+        "python": "3.12.3",
+        "python_executable": "/workspace/small-model-experimentation/.venv-vllm/bin/python",
+        "uv": "uv 0.9.0"
+      },
+      "sampling": {
+        "allow_custom_prompts": false,
+        "answer_max_tokens": 96,
+        "frequency_penalty": 0.0,
+        "greedy": true,
+        "logprob_token_ids": [],
+        "logprobs": 20,
+        "max_tokens": 512,
+        "min_p": 0.0,
+        "n": 1,
+        "presence_penalty": 0.0,
+        "prompt_logprobs": null,
+        "repetition_penalty": 1.0,
+        "run_seed": 80571,
+        "shuffle_thinking": false,
+        "temperature": null,
+        "thinking": "budget",
+        "thinking_budget": 1024,
+        "top_k": null,
+        "top_p": null
+      }
+    },
+    "groups": [
+      {
+        "constant_outcome": true,
+        "ep_seed": 82500,
+        "episode_key": "cipherkiln-L2-e82500",
+        "family": "cipherkiln",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 82501,
+        "episode_key": "cipherkiln-L2-e82501",
+        "family": "cipherkiln",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 82502,
+        "episode_key": "cipherkiln-L2-e82502",
+        "family": "cipherkiln",
+        "level": 2,
+        "mean_score": 0.42857142857142855,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 82503,
+        "episode_key": "cipherkiln-L2-e82503",
+        "family": "cipherkiln",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 82504,
+        "episode_key": "cipherkiln-L2-e82504",
+        "family": "cipherkiln",
+        "level": 2,
+        "mean_score": 0.42857142857142855,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 82505,
+        "episode_key": "cipherkiln-L2-e82505",
+        "family": "cipherkiln",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 82506,
+        "episode_key": "cipherkiln-L2-e82506",
+        "family": "cipherkiln",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 82507,
+        "episode_key": "cipherkiln-L2-e82507",
+        "family": "cipherkiln",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 82508,
+        "episode_key": "cipherkiln-L2-e82508",
+        "family": "cipherkiln",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 82509,
+        "episode_key": "cipherkiln-L2-e82509",
+        "family": "cipherkiln",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 82510,
+        "episode_key": "cipherkiln-L2-e82510",
+        "family": "cipherkiln",
+        "level": 2,
+        "mean_score": 0.7142857142857143,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 82511,
+        "episode_key": "cipherkiln-L2-e82511",
+        "family": "cipherkiln",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 82512,
+        "episode_key": "cipherkiln-L2-e82512",
+        "family": "cipherkiln",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 82513,
+        "episode_key": "cipherkiln-L2-e82513",
+        "family": "cipherkiln",
+        "level": 2,
+        "mean_score": 1.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 82514,
+        "episode_key": "cipherkiln-L2-e82514",
+        "family": "cipherkiln",
+        "level": 2,
+        "mean_score": 0.7142857142857143,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 82515,
+        "episode_key": "cipherkiln-L2-e82515",
+        "family": "cipherkiln",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 82516,
+        "episode_key": "cipherkiln-L2-e82516",
+        "family": "cipherkiln",
+        "level": 2,
+        "mean_score": 1.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 82517,
+        "episode_key": "cipherkiln-L2-e82517",
+        "family": "cipherkiln",
+        "level": 2,
+        "mean_score": 0.5714285714285714,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 82518,
+        "episode_key": "cipherkiln-L2-e82518",
+        "family": "cipherkiln",
+        "level": 2,
+        "mean_score": 0.42857142857142855,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 82519,
+        "episode_key": "cipherkiln-L2-e82519",
+        "family": "cipherkiln",
+        "level": 2,
+        "mean_score": 0.42857142857142855,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 82520,
+        "episode_key": "cipherkiln-L2-e82520",
+        "family": "cipherkiln",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 82521,
+        "episode_key": "cipherkiln-L2-e82521",
+        "family": "cipherkiln",
+        "level": 2,
+        "mean_score": 1.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 82522,
+        "episode_key": "cipherkiln-L2-e82522",
+        "family": "cipherkiln",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 82523,
+        "episode_key": "cipherkiln-L2-e82523",
+        "family": "cipherkiln",
+        "level": 2,
+        "mean_score": 1.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 83500,
+        "episode_key": "cipherkiln-L3-e83500",
+        "family": "cipherkiln",
+        "level": 3,
+        "mean_score": 0.625,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 83501,
+        "episode_key": "cipherkiln-L3-e83501",
+        "family": "cipherkiln",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 83502,
+        "episode_key": "cipherkiln-L3-e83502",
+        "family": "cipherkiln",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 83503,
+        "episode_key": "cipherkiln-L3-e83503",
+        "family": "cipherkiln",
+        "level": 3,
+        "mean_score": 0.625,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 83504,
+        "episode_key": "cipherkiln-L3-e83504",
+        "family": "cipherkiln",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 83505,
+        "episode_key": "cipherkiln-L3-e83505",
+        "family": "cipherkiln",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 83506,
+        "episode_key": "cipherkiln-L3-e83506",
+        "family": "cipherkiln",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 83507,
+        "episode_key": "cipherkiln-L3-e83507",
+        "family": "cipherkiln",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 83508,
+        "episode_key": "cipherkiln-L3-e83508",
+        "family": "cipherkiln",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 83509,
+        "episode_key": "cipherkiln-L3-e83509",
+        "family": "cipherkiln",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 83510,
+        "episode_key": "cipherkiln-L3-e83510",
+        "family": "cipherkiln",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 83511,
+        "episode_key": "cipherkiln-L3-e83511",
+        "family": "cipherkiln",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 83512,
+        "episode_key": "cipherkiln-L3-e83512",
+        "family": "cipherkiln",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 83513,
+        "episode_key": "cipherkiln-L3-e83513",
+        "family": "cipherkiln",
+        "level": 3,
+        "mean_score": 0.625,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 83514,
+        "episode_key": "cipherkiln-L3-e83514",
+        "family": "cipherkiln",
+        "level": 3,
+        "mean_score": 0.25,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 83515,
+        "episode_key": "cipherkiln-L3-e83515",
+        "family": "cipherkiln",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 83516,
+        "episode_key": "cipherkiln-L3-e83516",
+        "family": "cipherkiln",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 83517,
+        "episode_key": "cipherkiln-L3-e83517",
+        "family": "cipherkiln",
+        "level": 3,
+        "mean_score": 0.5,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 83518,
+        "episode_key": "cipherkiln-L3-e83518",
+        "family": "cipherkiln",
+        "level": 3,
+        "mean_score": 0.75,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 83519,
+        "episode_key": "cipherkiln-L3-e83519",
+        "family": "cipherkiln",
+        "level": 3,
+        "mean_score": 0.375,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 83520,
+        "episode_key": "cipherkiln-L3-e83520",
+        "family": "cipherkiln",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 83521,
+        "episode_key": "cipherkiln-L3-e83521",
+        "family": "cipherkiln",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 83522,
+        "episode_key": "cipherkiln-L3-e83522",
+        "family": "cipherkiln",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 83523,
+        "episode_key": "cipherkiln-L3-e83523",
+        "family": "cipherkiln",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 84500,
+        "episode_key": "cipherkiln-L4-e84500",
+        "family": "cipherkiln",
+        "level": 4,
+        "mean_score": 0.6666666666666666,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 84501,
+        "episode_key": "cipherkiln-L4-e84501",
+        "family": "cipherkiln",
+        "level": 4,
+        "mean_score": 0.4444444444444444,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 84502,
+        "episode_key": "cipherkiln-L4-e84502",
+        "family": "cipherkiln",
+        "level": 4,
+        "mean_score": 0.3333333333333333,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 84503,
+        "episode_key": "cipherkiln-L4-e84503",
+        "family": "cipherkiln",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 84504,
+        "episode_key": "cipherkiln-L4-e84504",
+        "family": "cipherkiln",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 84505,
+        "episode_key": "cipherkiln-L4-e84505",
+        "family": "cipherkiln",
+        "level": 4,
+        "mean_score": 0.7777777777777778,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 84506,
+        "episode_key": "cipherkiln-L4-e84506",
+        "family": "cipherkiln",
+        "level": 4,
+        "mean_score": 0.2222222222222222,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 84507,
+        "episode_key": "cipherkiln-L4-e84507",
+        "family": "cipherkiln",
+        "level": 4,
+        "mean_score": 0.4444444444444444,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 84508,
+        "episode_key": "cipherkiln-L4-e84508",
+        "family": "cipherkiln",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 84509,
+        "episode_key": "cipherkiln-L4-e84509",
+        "family": "cipherkiln",
+        "level": 4,
+        "mean_score": 0.4444444444444444,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 84510,
+        "episode_key": "cipherkiln-L4-e84510",
+        "family": "cipherkiln",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 84511,
+        "episode_key": "cipherkiln-L4-e84511",
+        "family": "cipherkiln",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 84512,
+        "episode_key": "cipherkiln-L4-e84512",
+        "family": "cipherkiln",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 84513,
+        "episode_key": "cipherkiln-L4-e84513",
+        "family": "cipherkiln",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 84514,
+        "episode_key": "cipherkiln-L4-e84514",
+        "family": "cipherkiln",
+        "level": 4,
+        "mean_score": 0.3333333333333333,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 84515,
+        "episode_key": "cipherkiln-L4-e84515",
+        "family": "cipherkiln",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 84516,
+        "episode_key": "cipherkiln-L4-e84516",
+        "family": "cipherkiln",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 84517,
+        "episode_key": "cipherkiln-L4-e84517",
+        "family": "cipherkiln",
+        "level": 4,
+        "mean_score": 0.5555555555555556,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 84518,
+        "episode_key": "cipherkiln-L4-e84518",
+        "family": "cipherkiln",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 84519,
+        "episode_key": "cipherkiln-L4-e84519",
+        "family": "cipherkiln",
+        "level": 4,
+        "mean_score": 0.1111111111111111,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 84520,
+        "episode_key": "cipherkiln-L4-e84520",
+        "family": "cipherkiln",
+        "level": 4,
+        "mean_score": 0.4444444444444444,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 84521,
+        "episode_key": "cipherkiln-L4-e84521",
+        "family": "cipherkiln",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 84522,
+        "episode_key": "cipherkiln-L4-e84522",
+        "family": "cipherkiln",
+        "level": 4,
+        "mean_score": 0.1111111111111111,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 84523,
+        "episode_key": "cipherkiln-L4-e84523",
+        "family": "cipherkiln",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 182500,
+        "episode_key": "mazeferry-L2-e182500",
+        "family": "mazeferry",
+        "level": 2,
+        "mean_score": 0.75,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 182501,
+        "episode_key": "mazeferry-L2-e182501",
+        "family": "mazeferry",
+        "level": 2,
+        "mean_score": 0.5,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 182502,
+        "episode_key": "mazeferry-L2-e182502",
+        "family": "mazeferry",
+        "level": 2,
+        "mean_score": 0.75,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 182503,
+        "episode_key": "mazeferry-L2-e182503",
+        "family": "mazeferry",
+        "level": 2,
+        "mean_score": 0.25,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 182504,
+        "episode_key": "mazeferry-L2-e182504",
+        "family": "mazeferry",
+        "level": 2,
+        "mean_score": 0.25,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 182505,
+        "episode_key": "mazeferry-L2-e182505",
+        "family": "mazeferry",
+        "level": 2,
+        "mean_score": 0.75,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 182506,
+        "episode_key": "mazeferry-L2-e182506",
+        "family": "mazeferry",
+        "level": 2,
+        "mean_score": 0.25,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 182507,
+        "episode_key": "mazeferry-L2-e182507",
+        "family": "mazeferry",
+        "level": 2,
+        "mean_score": 0.5,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 182508,
+        "episode_key": "mazeferry-L2-e182508",
+        "family": "mazeferry",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 182509,
+        "episode_key": "mazeferry-L2-e182509",
+        "family": "mazeferry",
+        "level": 2,
+        "mean_score": 0.5,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 182510,
+        "episode_key": "mazeferry-L2-e182510",
+        "family": "mazeferry",
+        "level": 2,
+        "mean_score": 0.25,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 182511,
+        "episode_key": "mazeferry-L2-e182511",
+        "family": "mazeferry",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 182512,
+        "episode_key": "mazeferry-L2-e182512",
+        "family": "mazeferry",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 182513,
+        "episode_key": "mazeferry-L2-e182513",
+        "family": "mazeferry",
+        "level": 2,
+        "mean_score": 0.5,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 182514,
+        "episode_key": "mazeferry-L2-e182514",
+        "family": "mazeferry",
+        "level": 2,
+        "mean_score": 0.25,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 182515,
+        "episode_key": "mazeferry-L2-e182515",
+        "family": "mazeferry",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 182516,
+        "episode_key": "mazeferry-L2-e182516",
+        "family": "mazeferry",
+        "level": 2,
+        "mean_score": 1.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 182517,
+        "episode_key": "mazeferry-L2-e182517",
+        "family": "mazeferry",
+        "level": 2,
+        "mean_score": 0.25,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 182518,
+        "episode_key": "mazeferry-L2-e182518",
+        "family": "mazeferry",
+        "level": 2,
+        "mean_score": 0.25,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 182519,
+        "episode_key": "mazeferry-L2-e182519",
+        "family": "mazeferry",
+        "level": 2,
+        "mean_score": 0.25,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 182520,
+        "episode_key": "mazeferry-L2-e182520",
+        "family": "mazeferry",
+        "level": 2,
+        "mean_score": 0.25,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 182521,
+        "episode_key": "mazeferry-L2-e182521",
+        "family": "mazeferry",
+        "level": 2,
+        "mean_score": 0.5,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 182522,
+        "episode_key": "mazeferry-L2-e182522",
+        "family": "mazeferry",
+        "level": 2,
+        "mean_score": 0.5,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 182523,
+        "episode_key": "mazeferry-L2-e182523",
+        "family": "mazeferry",
+        "level": 2,
+        "mean_score": 0.75,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 183500,
+        "episode_key": "mazeferry-L3-e183500",
+        "family": "mazeferry",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 183501,
+        "episode_key": "mazeferry-L3-e183501",
+        "family": "mazeferry",
+        "level": 3,
+        "mean_score": 0.2,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 183502,
+        "episode_key": "mazeferry-L3-e183502",
+        "family": "mazeferry",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 183503,
+        "episode_key": "mazeferry-L3-e183503",
+        "family": "mazeferry",
+        "level": 3,
+        "mean_score": 0.2,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 183504,
+        "episode_key": "mazeferry-L3-e183504",
+        "family": "mazeferry",
+        "level": 3,
+        "mean_score": 0.2,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 183505,
+        "episode_key": "mazeferry-L3-e183505",
+        "family": "mazeferry",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 183506,
+        "episode_key": "mazeferry-L3-e183506",
+        "family": "mazeferry",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 183507,
+        "episode_key": "mazeferry-L3-e183507",
+        "family": "mazeferry",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 183508,
+        "episode_key": "mazeferry-L3-e183508",
+        "family": "mazeferry",
+        "level": 3,
+        "mean_score": 0.4,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 183509,
+        "episode_key": "mazeferry-L3-e183509",
+        "family": "mazeferry",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 183510,
+        "episode_key": "mazeferry-L3-e183510",
+        "family": "mazeferry",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 183511,
+        "episode_key": "mazeferry-L3-e183511",
+        "family": "mazeferry",
+        "level": 3,
+        "mean_score": 0.6,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 183512,
+        "episode_key": "mazeferry-L3-e183512",
+        "family": "mazeferry",
+        "level": 3,
+        "mean_score": 0.6,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 183513,
+        "episode_key": "mazeferry-L3-e183513",
+        "family": "mazeferry",
+        "level": 3,
+        "mean_score": 0.6,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 183514,
+        "episode_key": "mazeferry-L3-e183514",
+        "family": "mazeferry",
+        "level": 3,
+        "mean_score": 0.6,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 183515,
+        "episode_key": "mazeferry-L3-e183515",
+        "family": "mazeferry",
+        "level": 3,
+        "mean_score": 0.8,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 183516,
+        "episode_key": "mazeferry-L3-e183516",
+        "family": "mazeferry",
+        "level": 3,
+        "mean_score": 0.2,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 183517,
+        "episode_key": "mazeferry-L3-e183517",
+        "family": "mazeferry",
+        "level": 3,
+        "mean_score": 0.6,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 183518,
+        "episode_key": "mazeferry-L3-e183518",
+        "family": "mazeferry",
+        "level": 3,
+        "mean_score": 0.2,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 183519,
+        "episode_key": "mazeferry-L3-e183519",
+        "family": "mazeferry",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 183520,
+        "episode_key": "mazeferry-L3-e183520",
+        "family": "mazeferry",
+        "level": 3,
+        "mean_score": 0.4,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 183521,
+        "episode_key": "mazeferry-L3-e183521",
+        "family": "mazeferry",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 183522,
+        "episode_key": "mazeferry-L3-e183522",
+        "family": "mazeferry",
+        "level": 3,
+        "mean_score": 0.6,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 183523,
+        "episode_key": "mazeferry-L3-e183523",
+        "family": "mazeferry",
+        "level": 3,
+        "mean_score": 0.2,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 184500,
+        "episode_key": "mazeferry-L4-e184500",
+        "family": "mazeferry",
+        "level": 4,
+        "mean_score": 0.3333333333333333,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 184501,
+        "episode_key": "mazeferry-L4-e184501",
+        "family": "mazeferry",
+        "level": 4,
+        "mean_score": 0.16666666666666666,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 184502,
+        "episode_key": "mazeferry-L4-e184502",
+        "family": "mazeferry",
+        "level": 4,
+        "mean_score": 0.16666666666666666,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 184503,
+        "episode_key": "mazeferry-L4-e184503",
+        "family": "mazeferry",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 184504,
+        "episode_key": "mazeferry-L4-e184504",
+        "family": "mazeferry",
+        "level": 4,
+        "mean_score": 0.5,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 184505,
+        "episode_key": "mazeferry-L4-e184505",
+        "family": "mazeferry",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 184506,
+        "episode_key": "mazeferry-L4-e184506",
+        "family": "mazeferry",
+        "level": 4,
+        "mean_score": 0.5,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 184507,
+        "episode_key": "mazeferry-L4-e184507",
+        "family": "mazeferry",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 184508,
+        "episode_key": "mazeferry-L4-e184508",
+        "family": "mazeferry",
+        "level": 4,
+        "mean_score": 0.16666666666666666,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 184509,
+        "episode_key": "mazeferry-L4-e184509",
+        "family": "mazeferry",
+        "level": 4,
+        "mean_score": 0.3333333333333333,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 184510,
+        "episode_key": "mazeferry-L4-e184510",
+        "family": "mazeferry",
+        "level": 4,
+        "mean_score": 0.16666666666666666,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 184511,
+        "episode_key": "mazeferry-L4-e184511",
+        "family": "mazeferry",
+        "level": 4,
+        "mean_score": 0.16666666666666666,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 184512,
+        "episode_key": "mazeferry-L4-e184512",
+        "family": "mazeferry",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 184513,
+        "episode_key": "mazeferry-L4-e184513",
+        "family": "mazeferry",
+        "level": 4,
+        "mean_score": 0.3333333333333333,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 184514,
+        "episode_key": "mazeferry-L4-e184514",
+        "family": "mazeferry",
+        "level": 4,
+        "mean_score": 0.5,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 184515,
+        "episode_key": "mazeferry-L4-e184515",
+        "family": "mazeferry",
+        "level": 4,
+        "mean_score": 0.3333333333333333,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 184516,
+        "episode_key": "mazeferry-L4-e184516",
+        "family": "mazeferry",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 184517,
+        "episode_key": "mazeferry-L4-e184517",
+        "family": "mazeferry",
+        "level": 4,
+        "mean_score": 0.5,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 184518,
+        "episode_key": "mazeferry-L4-e184518",
+        "family": "mazeferry",
+        "level": 4,
+        "mean_score": 0.3333333333333333,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 184519,
+        "episode_key": "mazeferry-L4-e184519",
+        "family": "mazeferry",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 184520,
+        "episode_key": "mazeferry-L4-e184520",
+        "family": "mazeferry",
+        "level": 4,
+        "mean_score": 0.16666666666666666,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 184521,
+        "episode_key": "mazeferry-L4-e184521",
+        "family": "mazeferry",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 184522,
+        "episode_key": "mazeferry-L4-e184522",
+        "family": "mazeferry",
+        "level": 4,
+        "mean_score": 0.6666666666666666,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 184523,
+        "episode_key": "mazeferry-L4-e184523",
+        "family": "mazeferry",
+        "level": 4,
+        "mean_score": 0.3333333333333333,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 282500,
+        "episode_key": "patchferry-L2-e282500",
+        "family": "patchferry",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 282501,
+        "episode_key": "patchferry-L2-e282501",
+        "family": "patchferry",
+        "level": 2,
+        "mean_score": 0.4,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 282502,
+        "episode_key": "patchferry-L2-e282502",
+        "family": "patchferry",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 282503,
+        "episode_key": "patchferry-L2-e282503",
+        "family": "patchferry",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 282504,
+        "episode_key": "patchferry-L2-e282504",
+        "family": "patchferry",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 282505,
+        "episode_key": "patchferry-L2-e282505",
+        "family": "patchferry",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 282506,
+        "episode_key": "patchferry-L2-e282506",
+        "family": "patchferry",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 282507,
+        "episode_key": "patchferry-L2-e282507",
+        "family": "patchferry",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 282508,
+        "episode_key": "patchferry-L2-e282508",
+        "family": "patchferry",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 282509,
+        "episode_key": "patchferry-L2-e282509",
+        "family": "patchferry",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 282510,
+        "episode_key": "patchferry-L2-e282510",
+        "family": "patchferry",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 282511,
+        "episode_key": "patchferry-L2-e282511",
+        "family": "patchferry",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 282512,
+        "episode_key": "patchferry-L2-e282512",
+        "family": "patchferry",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 282513,
+        "episode_key": "patchferry-L2-e282513",
+        "family": "patchferry",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 282514,
+        "episode_key": "patchferry-L2-e282514",
+        "family": "patchferry",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 282515,
+        "episode_key": "patchferry-L2-e282515",
+        "family": "patchferry",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 282516,
+        "episode_key": "patchferry-L2-e282516",
+        "family": "patchferry",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 282517,
+        "episode_key": "patchferry-L2-e282517",
+        "family": "patchferry",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 282518,
+        "episode_key": "patchferry-L2-e282518",
+        "family": "patchferry",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 282519,
+        "episode_key": "patchferry-L2-e282519",
+        "family": "patchferry",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 282520,
+        "episode_key": "patchferry-L2-e282520",
+        "family": "patchferry",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 282521,
+        "episode_key": "patchferry-L2-e282521",
+        "family": "patchferry",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 282522,
+        "episode_key": "patchferry-L2-e282522",
+        "family": "patchferry",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 282523,
+        "episode_key": "patchferry-L2-e282523",
+        "family": "patchferry",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 283500,
+        "episode_key": "patchferry-L3-e283500",
+        "family": "patchferry",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 283501,
+        "episode_key": "patchferry-L3-e283501",
+        "family": "patchferry",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 283502,
+        "episode_key": "patchferry-L3-e283502",
+        "family": "patchferry",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 283503,
+        "episode_key": "patchferry-L3-e283503",
+        "family": "patchferry",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 283504,
+        "episode_key": "patchferry-L3-e283504",
+        "family": "patchferry",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 283505,
+        "episode_key": "patchferry-L3-e283505",
+        "family": "patchferry",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 283506,
+        "episode_key": "patchferry-L3-e283506",
+        "family": "patchferry",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 283507,
+        "episode_key": "patchferry-L3-e283507",
+        "family": "patchferry",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 283508,
+        "episode_key": "patchferry-L3-e283508",
+        "family": "patchferry",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 283509,
+        "episode_key": "patchferry-L3-e283509",
+        "family": "patchferry",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 283510,
+        "episode_key": "patchferry-L3-e283510",
+        "family": "patchferry",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 283511,
+        "episode_key": "patchferry-L3-e283511",
+        "family": "patchferry",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 283512,
+        "episode_key": "patchferry-L3-e283512",
+        "family": "patchferry",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 283513,
+        "episode_key": "patchferry-L3-e283513",
+        "family": "patchferry",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 283514,
+        "episode_key": "patchferry-L3-e283514",
+        "family": "patchferry",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 283515,
+        "episode_key": "patchferry-L3-e283515",
+        "family": "patchferry",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 283516,
+        "episode_key": "patchferry-L3-e283516",
+        "family": "patchferry",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 283517,
+        "episode_key": "patchferry-L3-e283517",
+        "family": "patchferry",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 283518,
+        "episode_key": "patchferry-L3-e283518",
+        "family": "patchferry",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 283519,
+        "episode_key": "patchferry-L3-e283519",
+        "family": "patchferry",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 283520,
+        "episode_key": "patchferry-L3-e283520",
+        "family": "patchferry",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 283521,
+        "episode_key": "patchferry-L3-e283521",
+        "family": "patchferry",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 283522,
+        "episode_key": "patchferry-L3-e283522",
+        "family": "patchferry",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 283523,
+        "episode_key": "patchferry-L3-e283523",
+        "family": "patchferry",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 284500,
+        "episode_key": "patchferry-L4-e284500",
+        "family": "patchferry",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 284501,
+        "episode_key": "patchferry-L4-e284501",
+        "family": "patchferry",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 284502,
+        "episode_key": "patchferry-L4-e284502",
+        "family": "patchferry",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 284503,
+        "episode_key": "patchferry-L4-e284503",
+        "family": "patchferry",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 284504,
+        "episode_key": "patchferry-L4-e284504",
+        "family": "patchferry",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 284505,
+        "episode_key": "patchferry-L4-e284505",
+        "family": "patchferry",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 284506,
+        "episode_key": "patchferry-L4-e284506",
+        "family": "patchferry",
+        "level": 4,
+        "mean_score": 0.42857142857142855,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 284507,
+        "episode_key": "patchferry-L4-e284507",
+        "family": "patchferry",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 284508,
+        "episode_key": "patchferry-L4-e284508",
+        "family": "patchferry",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 284509,
+        "episode_key": "patchferry-L4-e284509",
+        "family": "patchferry",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 284510,
+        "episode_key": "patchferry-L4-e284510",
+        "family": "patchferry",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 284511,
+        "episode_key": "patchferry-L4-e284511",
+        "family": "patchferry",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 284512,
+        "episode_key": "patchferry-L4-e284512",
+        "family": "patchferry",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 284513,
+        "episode_key": "patchferry-L4-e284513",
+        "family": "patchferry",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 284514,
+        "episode_key": "patchferry-L4-e284514",
+        "family": "patchferry",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 284515,
+        "episode_key": "patchferry-L4-e284515",
+        "family": "patchferry",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 284516,
+        "episode_key": "patchferry-L4-e284516",
+        "family": "patchferry",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 284517,
+        "episode_key": "patchferry-L4-e284517",
+        "family": "patchferry",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 284518,
+        "episode_key": "patchferry-L4-e284518",
+        "family": "patchferry",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 284519,
+        "episode_key": "patchferry-L4-e284519",
+        "family": "patchferry",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 284520,
+        "episode_key": "patchferry-L4-e284520",
+        "family": "patchferry",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 284521,
+        "episode_key": "patchferry-L4-e284521",
+        "family": "patchferry",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 284522,
+        "episode_key": "patchferry-L4-e284522",
+        "family": "patchferry",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 284523,
+        "episode_key": "patchferry-L4-e284523",
+        "family": "patchferry",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "REVISE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 382500,
+        "episode_key": "tripleforge-L2-e382500",
+        "family": "tripleforge",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 382501,
+        "episode_key": "tripleforge-L2-e382501",
+        "family": "tripleforge",
+        "level": 2,
+        "mean_score": 0.14285714285714285,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 382502,
+        "episode_key": "tripleforge-L2-e382502",
+        "family": "tripleforge",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 382503,
+        "episode_key": "tripleforge-L2-e382503",
+        "family": "tripleforge",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 382504,
+        "episode_key": "tripleforge-L2-e382504",
+        "family": "tripleforge",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 382505,
+        "episode_key": "tripleforge-L2-e382505",
+        "family": "tripleforge",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 382506,
+        "episode_key": "tripleforge-L2-e382506",
+        "family": "tripleforge",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 382507,
+        "episode_key": "tripleforge-L2-e382507",
+        "family": "tripleforge",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 382508,
+        "episode_key": "tripleforge-L2-e382508",
+        "family": "tripleforge",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 382509,
+        "episode_key": "tripleforge-L2-e382509",
+        "family": "tripleforge",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 382510,
+        "episode_key": "tripleforge-L2-e382510",
+        "family": "tripleforge",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 382511,
+        "episode_key": "tripleforge-L2-e382511",
+        "family": "tripleforge",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 382512,
+        "episode_key": "tripleforge-L2-e382512",
+        "family": "tripleforge",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 382513,
+        "episode_key": "tripleforge-L2-e382513",
+        "family": "tripleforge",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 382514,
+        "episode_key": "tripleforge-L2-e382514",
+        "family": "tripleforge",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 382515,
+        "episode_key": "tripleforge-L2-e382515",
+        "family": "tripleforge",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 382516,
+        "episode_key": "tripleforge-L2-e382516",
+        "family": "tripleforge",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 382517,
+        "episode_key": "tripleforge-L2-e382517",
+        "family": "tripleforge",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 382518,
+        "episode_key": "tripleforge-L2-e382518",
+        "family": "tripleforge",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 382519,
+        "episode_key": "tripleforge-L2-e382519",
+        "family": "tripleforge",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 382520,
+        "episode_key": "tripleforge-L2-e382520",
+        "family": "tripleforge",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 382521,
+        "episode_key": "tripleforge-L2-e382521",
+        "family": "tripleforge",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 382522,
+        "episode_key": "tripleforge-L2-e382522",
+        "family": "tripleforge",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 382523,
+        "episode_key": "tripleforge-L2-e382523",
+        "family": "tripleforge",
+        "level": 2,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 383500,
+        "episode_key": "tripleforge-L3-e383500",
+        "family": "tripleforge",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 383501,
+        "episode_key": "tripleforge-L3-e383501",
+        "family": "tripleforge",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 383502,
+        "episode_key": "tripleforge-L3-e383502",
+        "family": "tripleforge",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 383503,
+        "episode_key": "tripleforge-L3-e383503",
+        "family": "tripleforge",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 383504,
+        "episode_key": "tripleforge-L3-e383504",
+        "family": "tripleforge",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 383505,
+        "episode_key": "tripleforge-L3-e383505",
+        "family": "tripleforge",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 383506,
+        "episode_key": "tripleforge-L3-e383506",
+        "family": "tripleforge",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 383507,
+        "episode_key": "tripleforge-L3-e383507",
+        "family": "tripleforge",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 383508,
+        "episode_key": "tripleforge-L3-e383508",
+        "family": "tripleforge",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 383509,
+        "episode_key": "tripleforge-L3-e383509",
+        "family": "tripleforge",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 383510,
+        "episode_key": "tripleforge-L3-e383510",
+        "family": "tripleforge",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 383511,
+        "episode_key": "tripleforge-L3-e383511",
+        "family": "tripleforge",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 383512,
+        "episode_key": "tripleforge-L3-e383512",
+        "family": "tripleforge",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 383513,
+        "episode_key": "tripleforge-L3-e383513",
+        "family": "tripleforge",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 383514,
+        "episode_key": "tripleforge-L3-e383514",
+        "family": "tripleforge",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 383515,
+        "episode_key": "tripleforge-L3-e383515",
+        "family": "tripleforge",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 383516,
+        "episode_key": "tripleforge-L3-e383516",
+        "family": "tripleforge",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 383517,
+        "episode_key": "tripleforge-L3-e383517",
+        "family": "tripleforge",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 383518,
+        "episode_key": "tripleforge-L3-e383518",
+        "family": "tripleforge",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 383519,
+        "episode_key": "tripleforge-L3-e383519",
+        "family": "tripleforge",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 383520,
+        "episode_key": "tripleforge-L3-e383520",
+        "family": "tripleforge",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 383521,
+        "episode_key": "tripleforge-L3-e383521",
+        "family": "tripleforge",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 383522,
+        "episode_key": "tripleforge-L3-e383522",
+        "family": "tripleforge",
+        "level": 3,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 383523,
+        "episode_key": "tripleforge-L3-e383523",
+        "family": "tripleforge",
+        "level": 3,
+        "mean_score": 0.125,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 384500,
+        "episode_key": "tripleforge-L4-e384500",
+        "family": "tripleforge",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 384501,
+        "episode_key": "tripleforge-L4-e384501",
+        "family": "tripleforge",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 384502,
+        "episode_key": "tripleforge-L4-e384502",
+        "family": "tripleforge",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 384503,
+        "episode_key": "tripleforge-L4-e384503",
+        "family": "tripleforge",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 384504,
+        "episode_key": "tripleforge-L4-e384504",
+        "family": "tripleforge",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 384505,
+        "episode_key": "tripleforge-L4-e384505",
+        "family": "tripleforge",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 384506,
+        "episode_key": "tripleforge-L4-e384506",
+        "family": "tripleforge",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 384507,
+        "episode_key": "tripleforge-L4-e384507",
+        "family": "tripleforge",
+        "level": 4,
+        "mean_score": 0.1111111111111111,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 384508,
+        "episode_key": "tripleforge-L4-e384508",
+        "family": "tripleforge",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 384509,
+        "episode_key": "tripleforge-L4-e384509",
+        "family": "tripleforge",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 384510,
+        "episode_key": "tripleforge-L4-e384510",
+        "family": "tripleforge",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 384511,
+        "episode_key": "tripleforge-L4-e384511",
+        "family": "tripleforge",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 384512,
+        "episode_key": "tripleforge-L4-e384512",
+        "family": "tripleforge",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 384513,
+        "episode_key": "tripleforge-L4-e384513",
+        "family": "tripleforge",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 384514,
+        "episode_key": "tripleforge-L4-e384514",
+        "family": "tripleforge",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 384515,
+        "episode_key": "tripleforge-L4-e384515",
+        "family": "tripleforge",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 384516,
+        "episode_key": "tripleforge-L4-e384516",
+        "family": "tripleforge",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "TOOL": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 384517,
+        "episode_key": "tripleforge-L4-e384517",
+        "family": "tripleforge",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 384518,
+        "episode_key": "tripleforge-L4-e384518",
+        "family": "tripleforge",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 384519,
+        "episode_key": "tripleforge-L4-e384519",
+        "family": "tripleforge",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 384520,
+        "episode_key": "tripleforge-L4-e384520",
+        "family": "tripleforge",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 384521,
+        "episode_key": "tripleforge-L4-e384521",
+        "family": "tripleforge",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 384522,
+        "episode_key": "tripleforge-L4-e384522",
+        "family": "tripleforge",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      },
+      {
+        "constant_outcome": true,
+        "ep_seed": 384523,
+        "episode_key": "tripleforge-L4-e384523",
+        "family": "tripleforge",
+        "level": 4,
+        "mean_score": 0.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      }
+    ],
+    "n_nonconstant_groups": 0,
+    "overall": {
+      "action_valid_rate": 0.2955303270462531,
+      "exact_rate": 0.017361111111111112,
+      "mean_score": 0.13499090608465608,
+      "mean_turns": 12.993055555555555,
+      "n": 288,
+      "natural_close_rate": 0.8476119273124616
+    }
+  },
+  "episodes_per_level": 24,
+  "families": [
+    "cipherkiln",
+    "mazeferry",
+    "patchferry",
+    "tripleforge"
+  ],
+  "levels": [
+    2,
+    3,
+    4
+  ],
+  "model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_specialist_policy_integration/merged/incumbent_blend",
+  "model_config_sha256": "f64803e92c6b93971a8e4fa89a811c8607b9b4efd6d0df0e6ca6016404f42630",
+  "model_fingerprint": {
+    "config_sha256": "f64803e92c6b93971a8e4fa89a811c8607b9b4efd6d0df0e6ca6016404f42630",
+    "merge_receipt": {
+      "adapter": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_specialist_policy_integration/adapters/incumbent_blend",
+      "adapter_config_sha256": "0b137897b3ff5fd82c32d92500d5510ac031764b61e02bef89570bc8496468f3",
+      "adapter_weights_sha256": "92c83bec79d7e756cd08830b13ce451c37d30c5e7cd54752d18cddbb8b8a2caa",
+      "applied_lora_modules": 128,
+      "base_model": "Qwen/Qwen3.5-4B",
+      "base_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+      "delta_frobenius_norm_max": 2.9034154415130615,
+      "delta_frobenius_norm_sum": 161.38736176490784,
+      "fp32_tf32_allowed": false,
+      "merge_device": "cuda",
+      "method": "explicit_composite_lora_merge",
+      "nonzero_lora_modules": 128,
+      "scale": 2.0,
+      "weight_files": [
+        {
+          "name": "model.safetensors",
+          "sha256": "56e2bec45199ebcc6e37f6ad0dbb2a4cf39bd60a0628df4f37e3cf0104b9aaf9"
+        }
+      ]
+    },
+    "merge_receipt_sha256": "2b94a86caa018d8653049042a832b0252304c65385da8a0b3a4ee9d5f049a0aa"
+  },
+  "scope": "calibration",
+  "seed_offset": 0,
+  "smoke": false,
+  "split": {
+    "payload": {
+      "specs": [
+        [
+          "cipherkiln",
+          2,
+          82500
+        ],
+        [
+          "cipherkiln",
+          2,
+          82501
+        ],
+        [
+          "cipherkiln",
+          2,
+          82502
+        ],
+        [
+          "cipherkiln",
+          2,
+          82503
+        ],
+        [
+          "cipherkiln",
+          2,
+          82504
+        ],
+        [
+          "cipherkiln",
+          2,
+          82505
+        ],
+        [
+          "cipherkiln",
+          2,
+          82506
+        ],
+        [
+          "cipherkiln",
+          2,
+          82507
+        ],
+        [
+          "cipherkiln",
+          2,
+          82508
+        ],
+        [
+          "cipherkiln",
+          2,
+          82509
+        ],
+        [
+          "cipherkiln",
+          2,
+          82510
+        ],
+        [
+          "cipherkiln",
+          2,
+          82511
+        ],
+        [
+          "cipherkiln",
+          2,
+          82512
+        ],
+        [
+          "cipherkiln",
+          2,
+          82513
+        ],
+        [
+          "cipherkiln",
+          2,
+          82514
+        ],
+        [
+          "cipherkiln",
+          2,
+          82515
+        ],
+        [
+          "cipherkiln",
+          2,
+          82516
+        ],
+        [
+          "cipherkiln",
+          2,
+          82517
+        ],
+        [
+          "cipherkiln",
+          2,
+          82518
+        ],
+        [
+          "cipherkiln",
+          2,
+          82519
+        ],
+        [
+          "cipherkiln",
+          2,
+          82520
+        ],
+        [
+          "cipherkiln",
+          2,
+          82521
+        ],
+        [
+          "cipherkiln",
+          2,
+          82522
+        ],
+        [
+          "cipherkiln",
+          2,
+          82523
+        ],
+        [
+          "cipherkiln",
+          3,
+          83500
+        ],
+        [
+          "cipherkiln",
+          3,
+          83501
+        ],
+        [
+          "cipherkiln",
+          3,
+          83502
+        ],
+        [
+          "cipherkiln",
+          3,
+          83503
+        ],
+        [
+          "cipherkiln",
+          3,
+          83504
+        ],
+        [
+          "cipherkiln",
+          3,
+          83505
+        ],
+        [
+          "cipherkiln",
+          3,
+          83506
+        ],
+        [
+          "cipherkiln",
+          3,
+          83507
+        ],
+        [
+          "cipherkiln",
+          3,
+          83508
+        ],
+        [
+          "cipherkiln",
+          3,
+          83509
+        ],
+        [
+          "cipherkiln",
+          3,
+          83510
+        ],
+        [
+          "cipherkiln",
+          3,
+          83511
+        ],
+        [
+          "cipherkiln",
+          3,
+          83512
+        ],
+        [
+          "cipherkiln",
+          3,
+          83513
+        ],
+        [
+          "cipherkiln",
+          3,
+          83514
+        ],
+        [
+          "cipherkiln",
+          3,
+          83515
+        ],
+        [
+          "cipherkiln",
+          3,
+          83516
+        ],
+        [
+          "cipherkiln",
+          3,
+          83517
+        ],
+        [
+          "cipherkiln",
+          3,
+          83518
+        ],
+        [
+          "cipherkiln",
+          3,
+          83519
+        ],
+        [
+          "cipherkiln",
+          3,
+          83520
+        ],
+        [
+          "cipherkiln",
+          3,
+          83521
+        ],
+        [
+          "cipherkiln",
+          3,
+          83522
+        ],
+        [
+          "cipherkiln",
+          3,
+          83523
+        ],
+        [
+          "cipherkiln",
+          4,
+          84500
+        ],
+        [
+          "cipherkiln",
+          4,
+          84501
+        ],
+        [
+          "cipherkiln",
+          4,
+          84502
+        ],
+        [
+          "cipherkiln",
+          4,
+          84503
+        ],
+        [
+          "cipherkiln",
+          4,
+          84504
+        ],
+        [
+          "cipherkiln",
+          4,
+          84505
+        ],
+        [
+          "cipherkiln",
+          4,
+          84506
+        ],
+        [
+          "cipherkiln",
+          4,
+          84507
+        ],
+        [
+          "cipherkiln",
+          4,
+          84508
+        ],
+        [
+          "cipherkiln",
+          4,
+          84509
+        ],
+        [
+          "cipherkiln",
+          4,
+          84510
+        ],
+        [
+          "cipherkiln",
+          4,
+          84511
+        ],
+        [
+          "cipherkiln",
+          4,
+          84512
+        ],
+        [
+          "cipherkiln",
+          4,
+          84513
+        ],
+        [
+          "cipherkiln",
+          4,
+          84514
+        ],
+        [
+          "cipherkiln",
+          4,
+          84515
+        ],
+        [
+          "cipherkiln",
+          4,
+          84516
+        ],
+        [
+          "cipherkiln",
+          4,
+          84517
+        ],
+        [
+          "cipherkiln",
+          4,
+          84518
+        ],
+        [
+          "cipherkiln",
+          4,
+          84519
+        ],
+        [
+          "cipherkiln",
+          4,
+          84520
+        ],
+        [
+          "cipherkiln",
+          4,
+          84521
+        ],
+        [
+          "cipherkiln",
+          4,
+          84522
+        ],
+        [
+          "cipherkiln",
+          4,
+          84523
+        ],
+        [
+          "mazeferry",
+          2,
+          182500
+        ],
+        [
+          "mazeferry",
+          2,
+          182501
+        ],
+        [
+          "mazeferry",
+          2,
+          182502
+        ],
+        [
+          "mazeferry",
+          2,
+          182503
+        ],
+        [
+          "mazeferry",
+          2,
+          182504
+        ],
+        [
+          "mazeferry",
+          2,
+          182505
+        ],
+        [
+          "mazeferry",
+          2,
+          182506
+        ],
+        [
+          "mazeferry",
+          2,
+          182507
+        ],
+        [
+          "mazeferry",
+          2,
+          182508
+        ],
+        [
+          "mazeferry",
+          2,
+          182509
+        ],
+        [
+          "mazeferry",
+          2,
+          182510
+        ],
+        [
+          "mazeferry",
+          2,
+          182511
+        ],
+        [
+          "mazeferry",
+          2,
+          182512
+        ],
+        [
+          "mazeferry",
+          2,
+          182513
+        ],
+        [
+          "mazeferry",
+          2,
+          182514
+        ],
+        [
+          "mazeferry",
+          2,
+          182515
+        ],
+        [
+          "mazeferry",
+          2,
+          182516
+        ],
+        [
+          "mazeferry",
+          2,
+          182517
+        ],
+        [
+          "mazeferry",
+          2,
+          182518
+        ],
+        [
+          "mazeferry",
+          2,
+          182519
+        ],
+        [
+          "mazeferry",
+          2,
+          182520
+        ],
+        [
+          "mazeferry",
+          2,
+          182521
+        ],
+        [
+          "mazeferry",
+          2,
+          182522
+        ],
+        [
+          "mazeferry",
+          2,
+          182523
+        ],
+        [
+          "mazeferry",
+          3,
+          183500
+        ],
+        [
+          "mazeferry",
+          3,
+          183501
+        ],
+        [
+          "mazeferry",
+          3,
+          183502
+        ],
+        [
+          "mazeferry",
+          3,
+          183503
+        ],
+        [
+          "mazeferry",
+          3,
+          183504
+        ],
+        [
+          "mazeferry",
+          3,
+          183505
+        ],
+        [
+          "mazeferry",
+          3,
+          183506
+        ],
+        [
+          "mazeferry",
+          3,
+          183507
+        ],
+        [
+          "mazeferry",
+          3,
+          183508
+        ],
+        [
+          "mazeferry",
+          3,
+          183509
+        ],
+        [
+          "mazeferry",
+          3,
+          183510
+        ],
+        [
+          "mazeferry",
+          3,
+          183511
+        ],
+        [
+          "mazeferry",
+          3,
+          183512
+        ],
+        [
+          "mazeferry",
+          3,
+          183513
+        ],
+        [
+          "mazeferry",
+          3,
+          183514
+        ],
+        [
+          "mazeferry",
+          3,
+          183515
+        ],
+        [
+          "mazeferry",
+          3,
+          183516
+        ],
+        [
+          "mazeferry",
+          3,
+          183517
+        ],
+        [
+          "mazeferry",
+          3,
+          183518
+        ],
+        [
+          "mazeferry",
+          3,
+          183519
+        ],
+        [
+          "mazeferry",
+          3,
+          183520
+        ],
+        [
+          "mazeferry",
+          3,
+          183521
+        ],
+        [
+          "mazeferry",
+          3,
+          183522
+        ],
+        [
+          "mazeferry",
+          3,
+          183523
+        ],
+        [
+          "mazeferry",
+          4,
+          184500
+        ],
+        [
+          "mazeferry",
+          4,
+          184501
+        ],
+        [
+          "mazeferry",
+          4,
+          184502
+        ],
+        [
+          "mazeferry",
+          4,
+          184503
+        ],
+        [
+          "mazeferry",
+          4,
+          184504
+        ],
+        [
+          "mazeferry",
+          4,
+          184505
+        ],
+        [
+          "mazeferry",
+          4,
+          184506
+        ],
+        [
+          "mazeferry",
+          4,
+          184507
+        ],
+        [
+          "mazeferry",
+          4,
+          184508
+        ],
+        [
+          "mazeferry",
+          4,
+          184509
+        ],
+        [
+          "mazeferry",
+          4,
+          184510
+        ],
+        [
+          "mazeferry",
+          4,
+          184511
+        ],
+        [
+          "mazeferry",
+          4,
+          184512
+        ],
+        [
+          "mazeferry",
+          4,
+          184513
+        ],
+        [
+          "mazeferry",
+          4,
+          184514
+        ],
+        [
+          "mazeferry",
+          4,
+          184515
+        ],
+        [
+          "mazeferry",
+          4,
+          184516
+        ],
+        [
+          "mazeferry",
+          4,
+          184517
+        ],
+        [
+          "mazeferry",
+          4,
+          184518
+        ],
+        [
+          "mazeferry",
+          4,
+          184519
+        ],
+        [
+          "mazeferry",
+          4,
+          184520
+        ],
+        [
+          "mazeferry",
+          4,
+          184521
+        ],
+        [
+          "mazeferry",
+          4,
+          184522
+        ],
+        [
+          "mazeferry",
+          4,
+          184523
+        ],
+        [
+          "patchferry",
+          2,
+          282500
+        ],
+        [
+          "patchferry",
+          2,
+          282501
+        ],
+        [
+          "patchferry",
+          2,
+          282502
+        ],
+        [
+          "patchferry",
+          2,
+          282503
+        ],
+        [
+          "patchferry",
+          2,
+          282504
+        ],
+        [
+          "patchferry",
+          2,
+          282505
+        ],
+        [
+          "patchferry",
+          2,
+          282506
+        ],
+        [
+          "patchferry",
+          2,
+          282507
+        ],
+        [
+          "patchferry",
+          2,
+          282508
+        ],
+        [
+          "patchferry",
+          2,
+          282509
+        ],
+        [
+          "patchferry",
+          2,
+          282510
+        ],
+        [
+          "patchferry",
+          2,
+          282511
+        ],
+        [
+          "patchferry",
+          2,
+          282512
+        ],
+        [
+          "patchferry",
+          2,
+          282513
+        ],
+        [
+          "patchferry",
+          2,
+          282514
+        ],
+        [
+          "patchferry",
+          2,
+          282515
+        ],
+        [
+          "patchferry",
+          2,
+          282516
+        ],
+        [
+          "patchferry",
+          2,
+          282517
+        ],
+        [
+          "patchferry",
+          2,
+          282518
+        ],
+        [
+          "patchferry",
+          2,
+          282519
+        ],
+        [
+          "patchferry",
+          2,
+          282520
+        ],
+        [
+          "patchferry",
+          2,
+          282521
+        ],
+        [
+          "patchferry",
+          2,
+          282522
+        ],
+        [
+          "patchferry",
+          2,
+          282523
+        ],
+        [
+          "patchferry",
+          3,
+          283500
+        ],
+        [
+          "patchferry",
+          3,
+          283501
+        ],
+        [
+          "patchferry",
+          3,
+          283502
+        ],
+        [
+          "patchferry",
+          3,
+          283503
+        ],
+        [
+          "patchferry",
+          3,
+          283504
+        ],
+        [
+          "patchferry",
+          3,
+          283505
+        ],
+        [
+          "patchferry",
+          3,
+          283506
+        ],
+        [
+          "patchferry",
+          3,
+          283507
+        ],
+        [
+          "patchferry",
+          3,
+          283508
+        ],
+        [
+          "patchferry",
+          3,
+          283509
+        ],
+        [
+          "patchferry",
+          3,
+          283510
+        ],
+        [
+          "patchferry",
+          3,
+          283511
+        ],
+        [
+          "patchferry",
+          3,
+          283512
+        ],
+        [
+          "patchferry",
+          3,
+          283513
+        ],
+        [
+          "patchferry",
+          3,
+          283514
+        ],
+        [
+          "patchferry",
+          3,
+          283515
+        ],
+        [
+          "patchferry",
+          3,
+          283516
+        ],
+        [
+          "patchferry",
+          3,
+          283517
+        ],
+        [
+          "patchferry",
+          3,
+          283518
+        ],
+        [
+          "patchferry",
+          3,
+          283519
+        ],
+        [
+          "patchferry",
+          3,
+          283520
+        ],
+        [
+          "patchferry",
+          3,
+          283521
+        ],
+        [
+          "patchferry",
+          3,
+          283522
+        ],
+        [
+          "patchferry",
+          3,
+          283523
+        ],
+        [
+          "patchferry",
+          4,
+          284500
+        ],
+        [
+          "patchferry",
+          4,
+          284501
+        ],
+        [
+          "patchferry",
+          4,
+          284502
+        ],
+        [
+          "patchferry",
+          4,
+          284503
+        ],
+        [
+          "patchferry",
+          4,
+          284504
+        ],
+        [
+          "patchferry",
+          4,
+          284505
+        ],
+        [
+          "patchferry",
+          4,
+          284506
+        ],
+        [
+          "patchferry",
+          4,
+          284507
+        ],
+        [
+          "patchferry",
+          4,
+          284508
+        ],
+        [
+          "patchferry",
+          4,
+          284509
+        ],
+        [
+          "patchferry",
+          4,
+          284510
+        ],
+        [
+          "patchferry",
+          4,
+          284511
+        ],
+        [
+          "patchferry",
+          4,
+          284512
+        ],
+        [
+          "patchferry",
+          4,
+          284513
+        ],
+        [
+          "patchferry",
+          4,
+          284514
+        ],
+        [
+          "patchferry",
+          4,
+          284515
+        ],
+        [
+          "patchferry",
+          4,
+          284516
+        ],
+        [
+          "patchferry",
+          4,
+          284517
+        ],
+        [
+          "patchferry",
+          4,
+          284518
+        ],
+        [
+          "patchferry",
+          4,
+          284519
+        ],
+        [
+          "patchferry",
+          4,
+          284520
+        ],
+        [
+          "patchferry",
+          4,
+          284521
+        ],
+        [
+          "patchferry",
+          4,
+          284522
+        ],
+        [
+          "patchferry",
+          4,
+          284523
+        ],
+        [
+          "tripleforge",
+          2,
+          382500
+        ],
+        [
+          "tripleforge",
+          2,
+          382501
+        ],
+        [
+          "tripleforge",
+          2,
+          382502
+        ],
+        [
+          "tripleforge",
+          2,
+          382503
+        ],
+        [
+          "tripleforge",
+          2,
+          382504
+        ],
+        [
+          "tripleforge",
+          2,
+          382505
+        ],
+        [
+          "tripleforge",
+          2,
+          382506
+        ],
+        [
+          "tripleforge",
+          2,
+          382507
+        ],
+        [
+          "tripleforge",
+          2,
+          382508
+        ],
+        [
+          "tripleforge",
+          2,
+          382509
+        ],
+        [
+          "tripleforge",
+          2,
+          382510
+        ],
+        [
+          "tripleforge",
+          2,
+          382511
+        ],
+        [
+          "tripleforge",
+          2,
+          382512
+        ],
+        [
+          "tripleforge",
+          2,
+          382513
+        ],
+        [
+          "tripleforge",
+          2,
+          382514
+        ],
+        [
+          "tripleforge",
+          2,
+          382515
+        ],
+        [
+          "tripleforge",
+          2,
+          382516
+        ],
+        [
+          "tripleforge",
+          2,
+          382517
+        ],
+        [
+          "tripleforge",
+          2,
+          382518
+        ],
+        [
+          "tripleforge",
+          2,
+          382519
+        ],
+        [
+          "tripleforge",
+          2,
+          382520
+        ],
+        [
+          "tripleforge",
+          2,
+          382521
+        ],
+        [
+          "tripleforge",
+          2,
+          382522
+        ],
+        [
+          "tripleforge",
+          2,
+          382523
+        ],
+        [
+          "tripleforge",
+          3,
+          383500
+        ],
+        [
+          "tripleforge",
+          3,
+          383501
+        ],
+        [
+          "tripleforge",
+          3,
+          383502
+        ],
+        [
+          "tripleforge",
+          3,
+          383503
+        ],
+        [
+          "tripleforge",
+          3,
+          383504
+        ],
+        [
+          "tripleforge",
+          3,
+          383505
+        ],
+        [
+          "tripleforge",
+          3,
+          383506
+        ],
+        [
+          "tripleforge",
+          3,
+          383507
+        ],
+        [
+          "tripleforge",
+          3,
+          383508
+        ],
+        [
+          "tripleforge",
+          3,
+          383509
+        ],
+        [
+          "tripleforge",
+          3,
+          383510
+        ],
+        [
+          "tripleforge",
+          3,
+          383511
+        ],
+        [
+          "tripleforge",
+          3,
+          383512
+        ],
+        [
+          "tripleforge",
+          3,
+          383513
+        ],
+        [
+          "tripleforge",
+          3,
+          383514
+        ],
+        [
+          "tripleforge",
+          3,
+          383515
+        ],
+        [
+          "tripleforge",
+          3,
+          383516
+        ],
+        [
+          "tripleforge",
+          3,
+          383517
+        ],
+        [
+          "tripleforge",
+          3,
+          383518
+        ],
+        [
+          "tripleforge",
+          3,
+          383519
+        ],
+        [
+          "tripleforge",
+          3,
+          383520
+        ],
+        [
+          "tripleforge",
+          3,
+          383521
+        ],
+        [
+          "tripleforge",
+          3,
+          383522
+        ],
+        [
+          "tripleforge",
+          3,
+          383523
+        ],
+        [
+          "tripleforge",
+          4,
+          384500
+        ],
+        [
+          "tripleforge",
+          4,
+          384501
+        ],
+        [
+          "tripleforge",
+          4,
+          384502
+        ],
+        [
+          "tripleforge",
+          4,
+          384503
+        ],
+        [
+          "tripleforge",
+          4,
+          384504
+        ],
+        [
+          "tripleforge",
+          4,
+          384505
+        ],
+        [
+          "tripleforge",
+          4,
+          384506
+        ],
+        [
+          "tripleforge",
+          4,
+          384507
+        ],
+        [
+          "tripleforge",
+          4,
+          384508
+        ],
+        [
+          "tripleforge",
+          4,
+          384509
+        ],
+        [
+          "tripleforge",
+          4,
+          384510
+        ],
+        [
+          "tripleforge",
+          4,
+          384511
+        ],
+        [
+          "tripleforge",
+          4,
+          384512
+        ],
+        [
+          "tripleforge",
+          4,
+          384513
+        ],
+        [
+          "tripleforge",
+          4,
+          384514
+        ],
+        [
+          "tripleforge",
+          4,
+          384515
+        ],
+        [
+          "tripleforge",
+          4,
+          384516
+        ],
+        [
+          "tripleforge",
+          4,
+          384517
+        ],
+        [
+          "tripleforge",
+          4,
+          384518
+        ],
+        [
+          "tripleforge",
+          4,
+          384519
+        ],
+        [
+          "tripleforge",
+          4,
+          384520
+        ],
+        [
+          "tripleforge",
+          4,
+          384521
+        ],
+        [
+          "tripleforge",
+          4,
+          384522
+        ],
+        [
+          "tripleforge",
+          4,
+          384523
+        ]
+      ],
+      "train_families": [
+        "glyphgate",
+        "loomfix",
+        "kilnrite",
+        "burrowmaze",
+        "ferrier",
+        "cipherkiln",
+        "mazeferry"
+      ],
+      "transfer_families": [
+        "patchwheel",
+        "spindle",
+        "gatepost",
+        "patchferry",
+        "tripleforge"
+      ]
+    },
+    "sha256": "73226e8c994c007fb952f853193f81e049c5276aa248a4e54309d18c4b96b24c"
+  },
+  "stage": "proxy_eval",
+  "tag": "incumbent_compound_calibration",
+  "wall_seconds": 2225.4904303848743
+}

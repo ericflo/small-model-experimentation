@@ -80,3 +80,17 @@ post-training/adaptation, and benchmark generalization.
   metadata. The aggregate incumbent gate passed every registered check.
 - These receipts license the disjoint compound-headroom calibration only; they
   do not establish capability improvement.
+
+## 2026-07-11 — disjoint compound-headroom gate
+
+- Ran 288 greedy episodes over `cipherkiln`, `mazeferry`, `patchferry`, and
+  `tripleforge`, L2-L4 with 24 episodes/cell, at the separately frozen episode
+  seed base 80500. Atom generation was disabled.
+- Family means were 0.2271, 0.2961, 0.0115, and 0.0053 respectively; macro
+  0.1350 passed the preregistered exclusive `<0.60` ceiling by a wide margin.
+- Every protocol check passed. Generation used 1,942,775 sampled tokens and
+  2,229,494 logical input tokens across 3,742 turns in 2,225.5 wall seconds.
+- The post-run firewall check confirmed that neither hidden specs/expert labels
+  nor raw top-20 logprob payloads survived in the committed evaluation rows.
+- This is a headroom/measurement result only. It licenses matched baselines and
+  specialist production; it does not show a capability gain.
