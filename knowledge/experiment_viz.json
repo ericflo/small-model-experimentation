@@ -45445,6 +45445,39 @@
      "source": "experiments/qwen35_4b_interactive_policy_curriculum/configs/curriculum.yaml"
     }
    ]
+  },
+  "qwen35_4b_specialist_policy_integration": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Every capability stage has a locked improvement bar",
+     "categories": [
+      "specialist over incumbent",
+      "same-prefix teacher over incumbent",
+      "mean specialist headroom recovered",
+      "held-out compound over incumbent",
+      "held-out compound over best specialist"
+     ],
+     "series": [
+      {
+       "label": "registered minimum delta or fraction",
+       "values": [
+        0.1,
+        0.08,
+        0.75,
+        0.15,
+        0.1
+       ]
+      }
+     ],
+     "x_label": "decision stage",
+     "y_label": "registered threshold",
+     "y_format": "number",
+     "note": "These are preregistered thresholds, not observed model results. A failed capability, prefix, locality, integration, or composition gate stops downstream spend; measured outcomes will replace this design chart after the reached stages finish.",
+     "source": "experiments/qwen35_4b_specialist_policy_integration/configs/default.yaml"
+    }
+   ]
   }
  }
 }

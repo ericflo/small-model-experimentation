@@ -2,6 +2,11 @@
 
 ## Next Experiments
 
+- Active cross-program test: `qwen35_4b_specialist_policy_integration` compares
+  same-origin on-policy multi-teacher integration with end-to-end matched joint
+  RL, off-policy specialist SFT, parameter merging, and KL-matched wrong
+  routing. Do not start a competing multi-teacher claim until this registered
+  run resolves or stops.
 - Treat any C51 follow-up as a new close/commit-scoring experiment, not a larger rejection-sampling run;
   require autonomous termination and parse gates before training.
 - Treat any C52 follow-up as a locality experiment first: compare lower-dose

@@ -2,6 +2,11 @@
 
 ## Next Experiments
 
+- Active cross-program test: `qwen35_4b_specialist_policy_integration` uses
+  no-new-exposure primitive families plus fully held-out pairwise and
+  three-primitive compounds to distinguish capability union from composition.
+  Its confirmatory distribution is frozen after level-only calibration; items
+  may not be filtered against model outputs.
 - Build a common shift taxonomy: length, family, primitive, composition, prompt, format, and real-task shift.
 - Re-run top mechanisms on at least one non-original substrate.
 - Add bridge-composition and held-out-primitive splits to new experiments by default.

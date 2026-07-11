@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 181
-- Manifest files: 483
+- Experiments with manifests: 182
+- Manifest files: 484
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 63 |
 | `run-data` | 101 |
-| `standard-artifact` | 54 |
+| `standard-artifact` | 55 |
 
 ## Manifests
 
@@ -188,6 +188,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_simulation_keystone_repair` | `standard-artifact` | [manifest](../experiments/qwen35_4b_simulation_keystone_repair/reports/artifact_manifest.yaml) |
 | `qwen35_4b_sketch_coverage_shift_probe` | `dataset` | [manifest](../experiments/qwen35_4b_sketch_coverage_shift_probe/data/dataset_manifest.json) |
 | `qwen35_4b_sketch_coverage_shift_probe` | `large-artifact` | [manifest](../experiments/qwen35_4b_sketch_coverage_shift_probe/large_artifacts_manifest.md) |
+| `qwen35_4b_specialist_policy_integration` | `standard-artifact` | [manifest](../experiments/qwen35_4b_specialist_policy_integration/reports/artifact_manifest.yaml) |
 | `qwen35_4b_static_bridge_ceiling_breaker` | `dataset` | [manifest](../experiments/qwen35_4b_static_bridge_ceiling_breaker/data/dataset_manifest.json) |
 | `qwen35_4b_static_bridge_ceiling_breaker` | `large-artifact` | [manifest](../experiments/qwen35_4b_static_bridge_ceiling_breaker/large_artifacts_manifest.md) |
 | `qwen35_4b_strategy_token_diversity_lora` | `run-data` | [manifest](../experiments/qwen35_4b_strategy_token_diversity_lora/data/main_base_k4_records.manifest.json) |

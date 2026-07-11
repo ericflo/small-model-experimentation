@@ -10882,6 +10882,13 @@
    "plain_question": "Can learning from the consequences of its own multi-step choices make the model a better general-purpose agent than further practice on completed answers?",
    "plain_answer": "This is a locked plan, not a result yet. Five kinds of live tasks will teach the policy, three different kinds will remain untouched tests, and a reward-based update must beat extra answer training plus scrambled rewards before the held-out benchmark is opened.",
    "why_it_matters": "It tests the largest missing mechanism in the current research map: the model as a policy that changes its world, observes what happened, and decides again. The high bars prevent a prettier action format or extra training time from masquerading as a capability gain, while the untouched task types and final benchmark test whether any improvement is genuinely broad."
+  },
+  "qwen35_4b_specialist_policy_integration": {
+   "verdict_tag": "Registered: make specialists stronger, then test whether one student can compose them",
+   "concept_primer": "Training one model on many tasks at once can make the tasks fight for the same weights. This study first gives separate copies of the same starting model focused practice in discovery, long-horizon control, tool use, and two-skill composition. A fresh copy then generates its own attempts while the matching specialist scores every next-token choice, aiming to combine the specialists without copying only their finished answers.",
+   "plain_question": "Can several genuinely stronger specialist policies be consolidated into one small model that uses their skills together on compound tasks none of them practiced?",
+   "plain_answer": "This is a locked in-progress experiment, not a model result. Four new procedural worlds now pass exact-oracle and remove-one-skill checks: taking away any required discovery, control, navigation, repair, or tool primitive reduces full success to zero. Model training cannot begin until the common starting checkpoint and every specialist/control gate are reproduced.",
+   "why_it_matters": "It cleanly separates creating capability from merging capability. The final bar is not an average over familiar tasks: the integrated model must beat every individual specialist and eight-shot sampling on new pairings and a three-skill task, while wrong-teacher routing and equally funded joint training test whether the claimed integration mechanism is real."
   }
  }
 }

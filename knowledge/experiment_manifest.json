@@ -3741,6 +3741,44 @@
   },
   {
     "file_counts": {
+      ".json": 1,
+      ".md": 7,
+      ".py": 40,
+      ".yaml": 3,
+      "[none]": 2
+    },
+    "id": "qwen35_4b_specialist_policy_integration",
+    "path": "experiments/qwen35_4b_specialist_policy_integration",
+    "primary_readme": "experiments/qwen35_4b_specialist_policy_integration/README.md",
+    "primary_report": "experiments/qwen35_4b_specialist_policy_integration/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation",
+      "benchmark_generalization",
+      "posttraining_and_adaptation",
+      "process_control_and_tool_use"
+    ],
+    "source_track": "new",
+    "summary": "Status: implementation in progress; CPU compound-substrate smoke passed on 2026-07-11. No model baseline or training result exists yet.",
+    "tags": [
+      "policy",
+      "small-model"
+    ],
+    "title": "Qwen3.5-4B Specialist Policy Integration",
+    "top_level_dirs": [
+      "analysis",
+      "configs",
+      "data",
+      "reports",
+      "runs",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 53,
+    "total_size_bytes": 678367
+  },
+  {
+    "file_counts": {
       ".json": 13,
       ".jsonl": 10,
       ".log": 16,

@@ -47,6 +47,17 @@ tool-found solutions, on-policy RL at residual failures, and
 failure-forensics curricula are the queued beyond-recipe mechanisms
 (see C53 next tests). Same-recipe scaling is closed.
 
+## Active Registered Test (2026-07-11; no model result yet)
+
+`qwen35_4b_specialist_policy_integration` is the accepted next experiment.
+It reuses the live-state curriculum as four independent capability producers,
+then conditionally tests same-origin on-policy multi-teacher integration. Four
+new compound environments pass exact-oracle, random-floor, remove-one-
+primitive, and state-aware-expert CPU gates at every L1-L4 cell. This is
+substrate validation only; no capability or integration claim is licensed
+until the specialist, prefix/locality, matched-control, and held-out-composition
+gates resolve.
+
 ## qwen35_4b_think_ftpo_round1 (2026-07-11, C52 — Negative)
 
 The first different-mechanism recipe after C50's re-saturation: single-position

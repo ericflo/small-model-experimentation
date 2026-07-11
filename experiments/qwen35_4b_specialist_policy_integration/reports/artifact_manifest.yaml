@@ -1,0 +1,20 @@
+schema_version: 1
+experiment_id: "qwen35_4b_specialist_policy_integration"
+external_artifacts:
+  - name: incumbent, specialist, integration, and control adapters plus merged composites
+    storage: large_artifacts/qwen35_4b_specialist_policy_integration/{adapters,merged}/
+    required_for: result-bearing model evaluation and replication
+    checksum: recorded per artifact in runs/checkpoint_receipts.jsonl
+    regenerate: run the reached stages documented in README.md using the pinned environments
+omitted_artifacts:
+  - path: large_artifacts/qwen35_4b_specialist_policy_integration/
+    reason: multi-gigabyte model weights are gitignored and regenerable from committed data, seeds, and receipts
+reproducibility:
+  smoke_command: python3 experiments/qwen35_4b_specialist_policy_integration/scripts/run.py --smoke
+  full_command: see the staged Run section in README.md
+  required_external_artifacts: []
+notes: >-
+  Small aggregate trajectories, gate receipts, ledgers, and analyses stay in
+  git. Raw benchmark transcripts are never requested or retained. Every LoRA
+  used for evaluation is explicitly merged because runtime LoRA silently no-ops
+  for this architecture under the pinned vLLM stack.
