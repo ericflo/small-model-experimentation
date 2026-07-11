@@ -60,6 +60,14 @@ STANDARD_DIRS = [
     "reports/",
 ]
 
+EXCLUDED_DIR_NAMES = {
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".ruff_cache",
+    "__pycache__",
+}
+
 COMMAND_PATTERNS = [
     r"\bpython(?:3)?\s+",
     r"\bpython\s+-m\b",
@@ -175,7 +183,7 @@ def metadata_list(path: Path, key: str) -> list[str]:
 
 def excluded(path: Path) -> bool:
     parts = path.parts
-    if "__pycache__" in parts:
+    if EXCLUDED_DIR_NAMES.intersection(parts):
         return True
     if path.name.endswith(":Zone.Identifier") or path.suffix == ".pyc":
         return True
@@ -307,7 +315,11 @@ def file_stats(exp: Path) -> tuple[Counter[str], int, int]:
 
 
 def top_level_dirs(exp: Path) -> list[str]:
-    return sorted(path.name for path in exp.iterdir() if path.is_dir())
+    return sorted(
+        path.name
+        for path in exp.iterdir()
+        if path.is_dir() and path.name not in EXCLUDED_DIR_NAMES
+    )
 
 
 def tags_for(slug: str, title: str, summary: str) -> list[str]:

@@ -45337,6 +45337,33 @@
      "source": "runs/eval_gym_frontier/scores.json; runs/menagerie_log.jsonl"
     }
    ]
+  },
+  "qwen35_4b_think_ftpo_round2": {
+   "charts": [
+    {
+     "title": "Why round 2 has a plausible target: dominant failed fork tokens in the saved pool",
+     "kind": "bar",
+     "categories": [
+      "all saved pivots",
+      "failed token is argmax",
+      "argmax leads successful sibling by >=0.5 logits"
+     ],
+     "series": [
+      {
+       "label": "exploratory preflight count",
+       "values": [
+        615,
+        290,
+        172
+       ]
+      }
+     ],
+     "x_label": "row geometry",
+     "y_label": "saved pivot rows",
+     "y_format": "integer",
+     "note": "This is design evidence from replaying round 1's already-regularized real rows, not a round-2 outcome. Full thresholds also require focused entropy, non-degenerate varentropy, and matched shuffled-control dose before training."
+    }
+   ]
   }
  }
 }

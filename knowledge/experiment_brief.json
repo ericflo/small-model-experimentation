@@ -10868,6 +10868,13 @@
    "plain_question": "Can we push past the score plateau by training harder, broader, or smarter — and which ingredient caused the original jump?",
    "plain_answer": "No push moved the benchmark: nine careful paired tests all land the trained model in the same 0.38-0.45 band (from a ~0.12 baseline). Surprisingly, practicing on a single rich task world works almost as well as practicing on ten, so the jump comes from learning a general habit — finish thinking, commit to a short answer — not from broad content. Harder practice levels did teach the model to solve harder playground tasks, but the benchmark band still refused to move.",
    "why_it_matters": "It draws a clean map: one cheap training round buys a huge general improvement, and after that this whole style of self-training is spent. The remaining gap needs a different kind of lever — external tools finding solutions the model can't sample itself, or reinforcement-style training aimed at the specific failures — which is exactly where the program goes next."
+  },
+  "qwen35_4b_think_ftpo_round2": {
+   "verdict_tag": "Preregistered: pull up versus push down at confident thought forks",
+   "concept_primer": "The first thought-steering run nudged ordinary coin-flip-like word choices and made reasoning less likely to finish. This follow-up first measures the model's uncertainty at each fork. It keeps only cases where a failed word clearly dominates but a successful alternative is still plausible, then compares lowering the failed word with gently raising the successful one.",
+   "plain_question": "Can we unlock better reasoning by changing only overconfident wrong turns, and is lifting a fruitful alternative safer than suppressing the wrong turn?",
+   "plain_answer": "Not known yet. The experiment is fully built and registered before the main run. It will compare two models trained on exactly the same confident wrong-turn examples, plus a twin whose success labels are scrambled. The deciding test includes a real multi-step coding agent that reads files, runs tests, patches a small repository, and is graded on hidden tests against a same-compute sample-more baseline.",
+   "why_it_matters": "This is a clean second chance for thought steering without repeating the first run's mistake. It can distinguish three outcomes that lead to very different next steps: confident-turn filtering rescues the published method; positive-only lifting is the safer capability lever; or neither signal survives outside its training contexts, in which case a larger harvest is not justified."
   }
  }
 }
