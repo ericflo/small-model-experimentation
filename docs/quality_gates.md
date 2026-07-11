@@ -83,3 +83,7 @@ gate failures:
   Verify with `python3 scripts/site_content_status.py`.
 - **In-place edits mysteriously reverted** before a launch (observed with sed on training
   scripts): use a real editor/Edit tool and re-grep the file before trusting a run.
+- **A preregistration/design-commit guard fails after rebase.** Rebasing changes commit IDs even when
+  frozen design files are byte-identical. Re-anchor the configured design commit to the rebased commit,
+  verify every frozen-file digest is unchanged, and record both old and new IDs in the experiment log.
+  Never weaken the ancestry/digest guard or silently substitute the current `HEAD`.

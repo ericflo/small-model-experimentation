@@ -74,3 +74,13 @@ No scientific GPU work had run at this boundary. No benchmark content was read.
   prior was also strong (AUROC 0.700; top-1 22.46%). The calibration therefore supports running SFT but
   is not itself evidence that answer-potential banking transfers. No effectiveness gate was applied;
   the frozen 1,080-task N=64 harvest started unchanged.
+
+## 2026-07-11 — Main-Branch Integration
+
+- Paused the restartable harvest after 55 complete task shards, rebased eight experiment commits over
+  12 concurrent `main` commits, regenerated the combined knowledge indexes, passed `make check`, and
+  pushed the integrated tree. Both GitHub validation and Pages deployment passed on `d32f1a2c`.
+- Rebase changed the immutable design commit ID from original `6f97f0ce` to rebased `261680d3`. The
+  README, preregistration, and design-review hashes at both commits are byte-identical. The ancestry pin
+  was re-anchored to `261680d3`; no design content or threshold changed. A guard run failed closed before
+  model load, exposing the stale pointer, and this operational repair is committed before harvest resume.
