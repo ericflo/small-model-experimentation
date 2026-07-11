@@ -107,3 +107,15 @@ Created as a new experiment scaffold.
   +0.3692). The conjunctive both-tiers bar fails by ~0.013 on medium after
   exhausting dose, iteration, breadth, difficulty, recovery supervision,
   budget matching, oracle distillation, and mix-composition search.
+
+## 2026-07-11 (terminal) — blend2 closes the composition axis: blend is the Pareto point
+
+- BLEND2 (medium-tilted: 72% episode mass, 2,077 rows): quick
+  +0.3408/+0.2979 (arm-mean +0.3194), medium +0.2727/+0.3350/+0.2981
+  (arm-mean +0.3019). Tilting toward medium LOWERED quick without raising
+  medium beyond blend's +0.3070 — the composition gradient does not extend.
+- FINAL MAP (33 paired events, 11 arms): blend is the Pareto point of the
+  mix-composition axis (quick +0.4088 / medium +0.3070 arm-means; absolute
+  records 0.5224/0.5214). Medium arm-means cluster at ~0.26-0.31 across all
+  compositions; the conjunctive +0.32-both-tiers bar is not reachable by
+  any composition of this recipe family's data. Quick: decisively broken.
