@@ -14,13 +14,17 @@ research_programs:
   - "test_time_reasoning_budget"
 top_level_dirs:
   - "configs"
+  - "data"
   - "reports"
+  - "runs"
   - "scripts"
   - "src"
   - "tests"
 file_counts:
+  json: 5
+  jsonl: 11
   md: 7
-  py: 3
+  py: 36
   yaml: 3
-total_files: 13
-total_size_bytes: 113387
+total_files: 62
+total_size_bytes: 3758306

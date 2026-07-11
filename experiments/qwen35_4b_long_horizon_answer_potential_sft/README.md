@@ -206,17 +206,36 @@ made only after the complete seed-42 SFT matrix and fresh evaluation.
 
 ## Run
 
-Commands will be made real before the first GPU run. The intended staged interface is:
+The restartable staged interface is:
 
 ```bash
 .venv-vllm/bin/python experiments/qwen35_4b_long_horizon_answer_potential_sft/scripts/run.py --stage smoke
 .venv-vllm/bin/python experiments/qwen35_4b_long_horizon_answer_potential_sft/scripts/run.py --stage full
 ```
 
-Restartable sub-stages, sharding, external artifact paths, and exact training commands are registered in
-the artifact manifest and experiment log.
+Granular stages include `pilot`, `calibration-generate`, `scorer-parity`, `calibration-score`,
+`calibration-rollouts`, `harvest-generate`, `harvest-score`, `pivot-plan`, `branch-generate`,
+`branch-score`, `train-rollouts`, `select`, `train`, `merge`, `deployment-probe`, both evaluation modes,
+analysis, and conditional replication. Sharding, external paths, and exact commands are registered in the
+artifact manifest and experiment log.
 
 ## Results
+
+### Termination and training-envelope gates
+
+The registered 27-task termination pilot is complete (108 traces). Every trace exceeded the old
+512-token cutoff; median thought length was 4,636 tokens and p95/max was 14,336. The model closed
+naturally on 96/108 traces (88.9%), with zero exact periodic loops. Thirteen traces reached the initial
+12,288-token allowance; one then closed during the exact-prefix continuation. The 12 still-open traces
+were all loomfix and remain ineligible rather than being force-closed. Correctness was not inspected in
+this operational pilot.
+
+The exact-token QLoRA path was also validated before dataset construction. Ordinary 3--4k rows train in
+4.7 seconds per two-example optimizer step. A deliberately worst-case 14,687-token row initially exposed
+a quadratic SDPA backward workspace, then passed untruncated in 29.1 seconds at 15.0 GiB peak after the
+training-only full-attention kernel was moved to xFormers and >8k rows received explicit layer/loss
+checkpointing. The six-arm scientific matrix has not yet reported a result; calibration harvest is in
+progress.
 
 No scientific result yet. This file records the complete pre-run plan; later results are added above this
 boundary without rewriting the frozen preregistration.

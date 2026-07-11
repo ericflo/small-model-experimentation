@@ -2840,8 +2840,10 @@
   },
   {
     "file_counts": {
+      ".json": 5,
+      ".jsonl": 11,
       ".md": 7,
-      ".py": 3,
+      ".py": 36,
       ".yaml": 3
     },
     "id": "qwen35_4b_long_horizon_answer_potential_sft",
@@ -2861,13 +2863,15 @@
     "title": "Qwen3.5-4B Long-Horizon Answer-Potential SFT",
     "top_level_dirs": [
       "configs",
+      "data",
       "reports",
+      "runs",
       "scripts",
       "src",
       "tests"
     ],
-    "total_files": 13,
-    "total_size_bytes": 113387
+    "total_files": 62,
+    "total_size_bytes": 3758306
   },
   {
     "file_counts": {
