@@ -80,6 +80,16 @@ performance dissociates under mix composition (quick record: concentrate;
 medium record: sharp1024 +0.342); no arm clears both decisively — the
 conjunctive bar trades against itself at this model capacity.
 
+## Blend addendum — convex mix composition breaks the quick tier
+
+The blend arm (concentrate + L3+ episode mass) dominates both parents on
+both tiers, holds both absolute records (0.522 quick / 0.521 medium), and
+decisively breaks the quick plateau (arm-mean +0.409). Medium arm-mean
+converges at +0.307 over five no-exclusion events. Final map (28 paired
+events, 10 arms): mix composition is a convex optimization axis; the
+quick-tier ceiling yields to it, the medium tier does not clear +0.32 at
+arm-mean within this recipe family.
+
 ## Next Experiments
 
 - Failure forensics on the residual axes at deployed budgets (gym proxies).

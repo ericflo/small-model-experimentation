@@ -37,12 +37,12 @@ This is a repository-level inventory. Each experiment remains the source of trut
 
 | Extension | Files |
 | --- | ---: |
-| `.json` | 2283 |
+| `.json` | 2297 |
 | `.csv` | 2138 |
 | `.py` | 1219 |
 | `.md` | 873 |
 | `.png` | 848 |
-| `.jsonl` | 668 |
+| `.jsonl` | 669 |
 | `.log` | 527 |
 | `.yaml` | 317 |
 | `.html` | 90 |
@@ -75,6 +75,7 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | 7.1 | `experiments/qwen35_4b_verified_macro_long_context_rerun/runs/interface/think_16384/designed_ceiling.jsonl` |
 | 7.0 | `experiments/qwen35_4b_learned_active_trace_policy/data/eval/dsl_eval_ceiling.jsonl` |
 | 7.0 | `experiments/qwen35_4b_active_counterexample_trace_selection/data/eval/dsl_eval_ceiling.jsonl` |
+| 6.9 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_blend.jsonl` |
 | 6.4 | `experiments/qwen35_4b_active_counterexample_trace_selection/reports/eval/active_support.json` |
 | 6.0 | `experiments/feature_factorized_rule_diversity/data/repair_all.jsonl` |
 | 5.8 | `experiments/qwen35_4b_active_counterexample_trace_selection/data/eval/dsl_eval_support.jsonl` |
@@ -85,4 +86,3 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | 5.6 | `experiments/qwen35_4b_learned_active_trace_policy/data/base_anchor/dsl_train_static60_base.jsonl` |
 | 5.5 | `experiments/qwen35_4b_verified_macro_long_context_rerun/runs/budget_calibration/think_16384/calibration.jsonl` |
 | 5.4 | `experiments/qwen35_4b_foofah_selective_program_fallback/reports/selective_records.jsonl` |
-| 5.2 | `experiments/qwen35_4b_answer_potential_trace_sft/runs/calibration/potential_foreign.jsonl` |

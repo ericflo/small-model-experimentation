@@ -90,3 +90,20 @@ Created as a new experiment scaffold.
   both tiers decisively. The goal's conjunctive bar is unreachable within
   this recipe family and provenance; per-tier specialists exist, a
   both-tier generalist at that level does not.
+
+## 2026-07-11 (final) — blend arm: convexity confirmed, quick decisively broken, medium converges just under the bar
+
+- BLEND arm (concentrate + 800 L3+ episode turns, 2.5 epochs, 2,240 rows):
+  quick +0.4286/+0.3891 (arm-mean +0.4088; absolute 0.5224 = overall
+  record); medium +0.3692/+0.2688/+0.2562/+0.2854/+0.3554 — five
+  no-exclusion events, arm-mean +0.3070 (absolute record 0.5214 at 53023).
+- CONVEXITY CONFIRMED: the blend dominates BOTH parents on BOTH tiers
+  (concentrate quick +0.374/medium +0.259; sharp1024 quick ~+0.266/medium
+  +0.342 single-event) and holds both absolute records — the tier
+  dissociation is convex, so mix composition is a real optimization axis.
+- FINAL LEDGER (28 paired events, 10 arms, 9 lever/mix classes): the
+  goal's quick bar is DECISIVELY broken (+0.4088 arm-mean vs +0.32); the
+  medium bar converges just below (+0.3070 arm-mean, best single event
+  +0.3692). The conjunctive both-tiers bar fails by ~0.013 on medium after
+  exhausting dose, iteration, breadth, difficulty, recovery supervision,
+  budget matching, oracle distillation, and mix-composition search.
