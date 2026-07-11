@@ -171,8 +171,11 @@ class CurriculumTests(unittest.TestCase):
     def test_eval_compacts_top20_payload_to_entropy_sufficient_statistics(self):
         rows = [
             {
+                "spec": {"hidden": "never persist in eval rows"},
                 "turns": [
                     {
+                        "expert": {"answer": "hidden label"},
+                        "messages_before": [{"role": "user", "content": "visible"}],
                         "policy": {
                             "stage1_logprobs": [
                                 {
@@ -188,6 +191,9 @@ class CurriculumTests(unittest.TestCase):
         ]
         _compact_logprob_receipts(rows)
         policy = rows[0]["turns"][0]["policy"]
+        self.assertNotIn("spec", rows[0])
+        self.assertNotIn("expert", rows[0]["turns"][0])
+        self.assertNotIn("messages_before", rows[0]["turns"][0])
         self.assertNotIn("stage1_logprobs", policy)
         self.assertNotIn("stage2_logprobs", policy)
         self.assertEqual(policy["reported_top20_tail_lumped_entropy_positions"], 1)

@@ -26,6 +26,19 @@ def main() -> int:
     args = parser.parse_args()
     config, _ = load_config(args.config)
     result = json.loads(args.scores.read_text(encoding="utf-8"))
+    expected_levels = [int(value) for value in config["proxy_eval"]["levels"]]
+    expected_episodes = int(
+        config["proxy_eval"]["calibration_episodes_per_level"]
+    )
+    protocol_checks = {
+        "scope": result.get("scope") == "calibration",
+        "decode": result.get("decode") == "greedy",
+        "families": result.get("families") == list(COMPOUNDS),
+        "levels": result.get("levels") == expected_levels,
+        "episodes_per_level": result.get("episodes_per_level") == expected_episodes,
+    }
+    if not all(protocol_checks.values()):
+        raise SystemExit(f"calibration protocol mismatch: {protocol_checks}")
     by_family = result["episode_summary"]["by_family"]
     missing = set(COMPOUNDS) - set(by_family)
     if missing:
@@ -39,7 +52,8 @@ def main() -> int:
         "compound_family_scores": means,
         "compound_macro_score": macro,
         "threshold_exclusive": threshold,
-        "gate": {"passed": macro < threshold},
+        "protocol_checks": protocol_checks,
+        "gate": {"passed": macro < threshold and all(protocol_checks.values())},
         "frozen_confirmatory_levels": list(config["proxy_eval"]["levels"]),
     }
     write_json(args.out, payload)

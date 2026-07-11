@@ -27,6 +27,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
 
 EXP = Path(__file__).resolve().parents[1]
+REPO = EXP.parents[1]
 sys.path.insert(0, str(EXP / "src"))
 
 from io_utils import load_config, read_jsonl, sha256_file, training_seed  # noqa: E402
@@ -415,6 +416,16 @@ def main() -> int:
         "shuffle_advantages": bool(args.shuffle_advantages),
         "shuffle_mapping_sha256": shuffle_mapping_sha,
         "seed": seed,
+        "training_environment": {
+            "torch": torch.__version__,
+            "transformers": __import__("transformers").__version__,
+            "peft": __import__("peft").__version__,
+            "bitsandbytes": __import__("bitsandbytes").__version__,
+            "lock_path": str(REPO / "requirements-training.lock.txt"),
+            "lock_sha256": sha256_file(REPO / "requirements-training.lock.txt"),
+            "gpu": torch.cuda.get_device_name(0),
+            "peak_cuda_bytes": torch.cuda.max_memory_allocated(),
+        },
         "hyperparameters": {
             key: train_cfg[key]
             for key in (

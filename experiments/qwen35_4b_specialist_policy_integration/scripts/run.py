@@ -338,6 +338,60 @@ def _model_smoke(config: dict, config_path: Path) -> None:
     write_json(EXP / "runs" / "model_smoke" / "composite.json", receipt)
 
 
+def _incumbent_canary(config: dict, config_path: Path, merged: Path) -> None:
+    canary_dir = EXP / "runs" / "incumbent_merge_canary"
+    base_out = canary_dir / "base.jsonl"
+    candidate_out = canary_dir / "incumbent.jsonl"
+    gate_path = EXP / "analysis" / "incumbent_install_gate.json"
+    merge_receipt = merged / "merge_receipt.json"
+    current_merge_sha = sha256_file(merge_receipt)
+    if gate_path.exists():
+        existing = json.loads(gate_path.read_text(encoding="utf-8"))
+        if (
+            existing.get("gate", {}).get("passed")
+            and existing.get("merge_receipt_sha256") == current_merge_sha
+        ):
+            print("[resume] incumbent installation gate already passed", flush=True)
+            return
+    prompt_path = EXP / "data" / "incumbent_merge_canary.jsonl"
+    _run(
+        [
+            str(PY), str(EXP / "scripts" / "build_merge_canary.py"),
+            "--config", str(config_path), "--out", str(prompt_path),
+        ]
+    )
+    common = [
+        "--input", str(prompt_path), "--thinking", "budget",
+        "--thinking-budget", "256", "--answer-max-tokens", "96", "--greedy",
+        "--max-model-len", "4096", "--gpu-memory-utilization", "0.85",
+        "--max-num-seqs", "16", "--max-num-batched-tokens", "4096",
+        "--cudagraph-capture-size", "1", "--cudagraph-capture-size", "2",
+        "--cudagraph-capture-size", "4", "--cudagraph-capture-size", "8",
+        "--cudagraph-capture-size", "16",
+    ]
+    _run(
+        [
+            str(VLLM_PY), str(EXP / "src" / "vllm_runner.py"),
+            "--output", str(base_out), *common,
+        ]
+    )
+    _run(
+        [
+            str(VLLM_PY), str(EXP / "src" / "vllm_runner.py"),
+            "--output", str(candidate_out), "--model-override", str(merged), *common,
+        ]
+    )
+    _run(
+        [
+            str(PY), str(EXP / "scripts" / "analyze_merge_canary.py"),
+            "--base", str(base_out), "--candidate", str(candidate_out),
+            "--merged", str(merged), "--out", str(gate_path),
+        ],
+        allowed=(0, 4),
+    )
+    _require_gate(gate_path)
+
+
 def _eval(
     config_path: Path,
     config: dict,
@@ -380,6 +434,52 @@ def _eval(
     _run(command)
 
 
+def _calibration_gate(config: dict, config_path: Path, paths: dict[str, Path]) -> None:
+    if not _checkpoint_complete(paths["incumbent_adapter"], paths["incumbent"]):
+        raise SystemExit("incumbent checkpoint is incomplete")
+    _incumbent_canary(config, config_path, paths["incumbent"])
+    _run(
+        [
+            str(PY), str(EXP / "scripts" / "analyze_incumbent.py"),
+            "--config", str(config_path),
+            "--adapter", str(paths["incumbent_adapter"]),
+            "--merged", str(paths["incumbent"]),
+            "--encoding-audit", str(EXP / "runs" / "incumbent_encoding_audit.json"),
+            "--install-gate", str(EXP / "analysis" / "incumbent_install_gate.json"),
+        ],
+        allowed=(0, 4),
+    )
+    _require_gate(EXP / "analysis" / "incumbent_gate.json")
+    _eval(
+        config_path, config, paths["incumbent"],
+        "incumbent_eval_smoke", smoke=True,
+    )
+    _eval(
+        config_path, config, paths["incumbent"],
+        "incumbent_compound_calibration", families=COMPOUND_FAMILIES,
+    )
+    _run(
+        [
+            str(PY), str(EXP / "scripts" / "analyze_calibration.py"),
+            "--config", str(config_path),
+            "--scores", str(
+                EXP / "runs" / "proxy_eval" / "incumbent_compound_calibration" / "scores.json"
+            ),
+        ],
+        allowed=(0, 4),
+    )
+    _require_gate(EXP / "analysis" / "calibration_gate.json")
+
+
+def _baseline_eval(config: dict, config_path: Path, paths: dict[str, Path]) -> None:
+    _require_gate(EXP / "analysis" / "calibration_gate.json")
+    _eval(config_path, config, paths["incumbent"], "incumbent_calibration")
+    _eval(
+        config_path, config, paths["incumbent"],
+        "incumbent_best8_calibration", decode="sample8",
+    )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, default=EXP / "configs" / "default.yaml")
@@ -387,9 +487,10 @@ def main() -> int:
     parser.add_argument(
         "--stage",
         choices=(
-            "smoke", "model-smoke", "incumbent", "calibrate", "dagger-collect",
+            "smoke", "model-smoke", "incumbent", "incumbent-canary",
+            "calibration-gate", "baseline-eval", "calibrate", "dagger-collect",
             "dagger-train", "rl-collect", "specialist-train", "controls",
-            "specialist-eval", "specialist-analyze",
+            "specialist-eval", "specialist-analyze", "specialist-summary",
         ),
     )
     parser.add_argument("--domain", choices=DOMAINS)
@@ -417,31 +518,26 @@ def main() -> int:
             adapter=paths["incumbent_adapter"], merged=paths["incumbent"],
             cfg=config["incumbent_train"], seed=seed,
         )
+        audit_path = EXP / "runs" / "incumbent_encoding_audit.json"
+        if not audit_path.exists():
+            _run(
+                [
+                    str(PY), str(EXP / "scripts" / "audit_sft_encoding.py"),
+                    "--train", str(resolve_repo_path(config["model"]["incumbent_data"])),
+                    "--max-length", str(config["incumbent_train"]["max_length"]),
+                    "--w-think", str(config["incumbent_train"]["think_loss_weight"]),
+                    "--out", str(audit_path),
+                ]
+            )
+    elif stage == "incumbent-canary":
+        _incumbent_canary(config, config_path, paths["incumbent"])
+    elif stage == "calibration-gate":
+        _calibration_gate(config, config_path, paths)
+    elif stage == "baseline-eval":
+        _baseline_eval(config, config_path, paths)
     elif stage == "calibrate":
-        if not _checkpoint_complete(paths["incumbent_adapter"], paths["incumbent"]):
-            raise SystemExit("incumbent checkpoint is incomplete")
-        _eval(
-            config_path, config, paths["incumbent"],
-            "incumbent_eval_smoke", smoke=True,
-        )
-        _eval(
-            config_path, config, paths["incumbent"],
-            "incumbent_compound_calibration", families=COMPOUND_FAMILIES,
-        )
-        _run(
-            [
-                str(PY), str(EXP / "scripts" / "analyze_calibration.py"),
-                "--config", str(config_path),
-                "--scores", str(EXP / "runs" / "proxy_eval" / "incumbent_compound_calibration" / "scores.json"),
-            ],
-            allowed=(0, 4),
-        )
-        _require_gate(EXP / "analysis" / "calibration_gate.json")
-        _eval(config_path, config, paths["incumbent"], "incumbent_calibration")
-        _eval(
-            config_path, config, paths["incumbent"],
-            "incumbent_best8_calibration", decode="sample8",
-        )
+        _calibration_gate(config, config_path, paths)
+        _baseline_eval(config, config_path, paths)
     elif stage == "dagger-collect":
         _require_gate(EXP / "analysis" / "calibration_gate.json")
         _run(
@@ -468,6 +564,23 @@ def main() -> int:
             ]
         )
     elif stage == "specialist-train":
+        smoke_out = paths["root"] / "smoke" / "sequence_grpo" / args.domain
+        if not (smoke_out / "training_receipt.json").exists():
+            if smoke_out.exists():
+                raise SystemExit(f"partial sequence-GRPO smoke exists: {smoke_out}")
+            _run(
+                [
+                    str(PY), str(EXP / "scripts" / "train_sequence_grpo.py"),
+                    "--config", str(config_path), "--model", str(paths["dagger"]),
+                    "--trajectories", str(
+                        EXP / "runs" / "rl_collection" / args.domain / "trajectories.jsonl.gz"
+                    ),
+                    "--anchors", str(EXP / "data" / f"rl_anchor_{args.domain}.jsonl"),
+                    "--out", str(smoke_out), "--seed", str(seed),
+                    "--run-tag", f"smoke_sequence_grpo_{args.domain}", "--smoke",
+                ],
+                training=True,
+            )
         _train_grpo(
             tag=f"specialist_{args.domain}", model=paths["dagger"],
             trajectories=EXP / "runs" / "rl_collection" / args.domain / "trajectories.jsonl.gz",
@@ -519,6 +632,11 @@ def main() -> int:
             "--specialist", str(EXP / "runs" / "proxy_eval" / f"specialist_{args.domain}"),
         ]
         _run(command, allowed=(0, 4))
+    elif stage == "specialist-summary":
+        _run(
+            [str(PY), str(EXP / "scripts" / "aggregate_specialist_gates.py")],
+            allowed=(0, 4),
+        )
     return 0
 
 

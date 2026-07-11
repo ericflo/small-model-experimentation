@@ -91,9 +91,13 @@ def _lower_bound_entropy(logprob_rows: list | None) -> list[float]:
 
 
 def _compact_logprob_receipts(rows: list[dict]) -> None:
-    """Retain entropy sufficient statistics, not enormous top-20 payloads."""
+    """Retain auditable metrics, not hidden labels or enormous payloads."""
     for row in rows:
+        row.pop("spec", None)
         for turn in row["turns"]:
+            # Evaluation must not become an accidental expert-label bank.
+            turn.pop("expert", None)
+            turn.pop("messages_before", None)
             policy = turn["policy"]
             values = _lower_bound_entropy(policy.get("stage1_logprobs"))
             values.extend(_lower_bound_entropy(policy.get("stage2_logprobs")))

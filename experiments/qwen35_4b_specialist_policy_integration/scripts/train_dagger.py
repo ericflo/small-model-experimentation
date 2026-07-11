@@ -15,6 +15,7 @@ from __future__ import annotations
 import argparse
 import json
 import random
+from collections import Counter
 from pathlib import Path
 
 import torch
@@ -24,6 +25,7 @@ from transformers import (AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfi
                           Trainer, TrainingArguments)
 
 EXP = Path(__file__).resolve().parents[1]
+REPO = EXP.parents[1]
 MODEL_ID = "Qwen/Qwen3.5-4B"
 MODEL_REVISION = "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"  # matches src/vllm_runner.py pin
 TARGET = ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
@@ -116,6 +118,10 @@ def main():
                          "recovery-arm think is always 0.0)")
     ap.add_argument("--seed", type=int, default=42)
     ap.add_argument("--smoke", action="store_true")
+    ap.add_argument(
+        "--max-skip-rate", type=float, default=0.15,
+        help="fail rather than silently train if over-length rows exceed this fraction",
+    )
     args = ap.parse_args()
 
     recs = []
@@ -144,16 +150,29 @@ def main():
     assert probe.endswith("<think>\n"), f"unexpected think-template tail: {probe[-40:]!r}"
 
     encoded, skipped = [], 0
+    encoded_family_counts: Counter[str] = Counter()
+    skipped_family_counts: Counter[str] = Counter()
+    encoded_kind_counts: Counter[str] = Counter()
+    skipped_kind_counts: Counter[str] = Counter()
     for rec in recs:
         rec.setdefault("kind", "atom")
         row = encode_row(rec, tok, args.max_length, args.w_think)
         if row is None:
             skipped += 1
+            skipped_family_counts[str(rec.get("family", "unknown"))] += 1
+            skipped_kind_counts[str(rec.get("kind", "unknown"))] += 1
         else:
             encoded.append(row)
+            encoded_family_counts[str(rec.get("family", "unknown"))] += 1
+            encoded_kind_counts[str(rec.get("kind", "unknown"))] += 1
     print(f"[train_think] {len(encoded)} examples ({skipped} skipped as over-length)", flush=True)
     if not encoded:
         raise SystemExit("no trainable examples")
+    skip_rate = skipped / (len(encoded) + skipped)
+    if skip_rate > args.max_skip_rate:
+        raise SystemExit(
+            f"over-length skip rate {skip_rate:.3f} exceeds {args.max_skip_rate:.3f}"
+        )
 
     # Length-bucketed batching (this transformers version dropped
     # group_by_length): sort by length, chunk into microbatches, shuffle the
@@ -243,6 +262,12 @@ def main():
             sum(float(value) for value in row["loss_weights"]) for row in encoded
         ),
         "skipped_rows": skipped,
+        "skip_rate": skip_rate,
+        "max_skip_rate": args.max_skip_rate,
+        "encoded_family_counts": dict(sorted(encoded_family_counts.items())),
+        "skipped_family_counts": dict(sorted(skipped_family_counts.items())),
+        "encoded_kind_counts": dict(sorted(encoded_kind_counts.items())),
+        "skipped_kind_counts": dict(sorted(skipped_kind_counts.items())),
         "epochs": args.epochs,
         "max_steps": args.max_steps,
         "learning_rate": args.lr,
@@ -261,8 +286,17 @@ def main():
             "the preregistered batch-one datasets when their dataloader length is divisible."
         ),
         "train_metrics": train_result.metrics,
+        "log_history": trainer.state.log_history,
         "gpu": torch.cuda.get_device_name(0),
         "peak_cuda_bytes": torch.cuda.max_memory_allocated(),
+        "training_environment": {
+            "torch": torch.__version__,
+            "transformers": __import__("transformers").__version__,
+            "peft": __import__("peft").__version__,
+            "bitsandbytes": __import__("bitsandbytes").__version__,
+            "lock_path": str(REPO / "requirements-training.lock.txt"),
+            "lock_sha256": digest(REPO / "requirements-training.lock.txt"),
+        },
     }
     (args.out / "training_receipt.json").write_text(
         json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8"
