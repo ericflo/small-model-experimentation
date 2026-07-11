@@ -19,17 +19,17 @@ This is a repository-level inventory. Each experiment remains the source of trut
 
 | Directory | Experiments |
 | --- | ---: |
-| `reports/` | 206 |
-| `src/` | 194 |
-| `runs/` | 140 |
+| `reports/` | 207 |
+| `src/` | 195 |
+| `runs/` | 141 |
 | `analysis/` | 131 |
-| `scripts/` | 115 |
-| `configs/` | 112 |
-| `data/` | 103 |
+| `scripts/` | 116 |
+| `configs/` | 113 |
+| `data/` | 104 |
 | `logs/` | 64 |
 | `run_logs/` | 55 |
 | `figures/` | 10 |
-| `tests/` | 7 |
+| `tests/` | 8 |
 | `archive/` | 1 |
 | `suite_logs/` | 1 |
 
@@ -37,16 +37,16 @@ This is a repository-level inventory. Each experiment remains the source of trut
 
 | Extension | Files |
 | --- | ---: |
-| `.json` | 2237 |
+| `.json` | 2261 |
 | `.csv` | 2138 |
-| `.py` | 1190 |
-| `.md` | 869 |
+| `.py` | 1218 |
+| `.md` | 873 |
 | `.png` | 848 |
-| `.jsonl` | 660 |
+| `.jsonl` | 666 |
 | `.log` | 527 |
-| `.yaml` | 313 |
+| `.yaml` | 317 |
 | `.html` | 90 |
-| `.gz` | 48 |
+| `.gz` | 75 |
 | `.sh` | 19 |
 | `.txt` | 5 |
 | `[none]` | 2 |
@@ -56,8 +56,10 @@ This is a repository-level inventory. Each experiment remains the source of trut
 
 | Size MB | File |
 | ---: | --- |
+| 15.7 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_sharp1024.jsonl` |
 | 14.1 | `experiments/qwen35_4b_active_counterexample_trace_selection/reports/policy_rows.json` |
 | 11.9 | `experiments/qwen35_4b_partial_structure_search/data/calibration_candidates.jsonl` |
+| 11.4 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_frontier.jsonl` |
 | 10.7 | `experiments/qwen35_4b_gauntlet_breadth_round1/data/sft_round3_fast.jsonl` |
 | 10.4 | `experiments/qwen35_4b_reliability_exec_opsd_audit/data/exec_token_pressure_scores.jsonl` |
 | 8.5 | `experiments/qwen35_4b_learned_active_trace_policy/data/static_bridge_80/dsl_train.jsonl` |
@@ -84,5 +86,3 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | 5.5 | `experiments/qwen35_4b_verified_macro_long_context_rerun/runs/budget_calibration/think_16384/calibration.jsonl` |
 | 5.4 | `experiments/qwen35_4b_foofah_selective_program_fallback/reports/selective_records.jsonl` |
 | 5.2 | `experiments/qwen35_4b_answer_potential_trace_sft/runs/calibration/potential_foreign.jsonl` |
-| 5.1 | `experiments/qwen35_4b_answer_potential_trace_sft/runs/calibration/potential.jsonl` |
-| 5.0 | `experiments/qwen35_4b_answer_potential_trace_sft/runs/calibration/potential_format_variant.jsonl` |

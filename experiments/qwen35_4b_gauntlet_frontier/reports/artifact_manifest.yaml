@@ -1,0 +1,24 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_gauntlet_frontier"
+external_artifacts:
+  - name: "ablation + frontier + sharp1024 QLoRA adapters and merged composite checkpoints"
+    storage: "large_artifacts/qwen35_4b_gauntlet_frontier/{adapters,merged}/"
+    required_for: "re-running paired menagerie events and gym evals"
+    checksum: ""
+    regenerate: >-
+      see README Run section: ablation slices from rounds 2-3 data;
+      frontier harvest via scripts/harvest.py --config configs/frontier.yaml
+      --merged <round3 merged>; train via scripts/train_think.py; merge via
+      scripts/merge_adapter.py
+omitted_artifacts:
+  - path: "runs/harvest_frontier/"
+    reason: "gzipped harvest row files, fully regenerable from seeds in configs/frontier.yaml"
+reproducibility:
+  smoke_command: "python3 scripts/run.py --smoke"
+  full_command: "see README Run section (staged pipeline; single-tenant GPU)"
+  required_external_artifacts:
+    - "large_artifacts/qwen35_4b_gauntlet_breadth_round1/merged/round3_fast (harvest policy)"
+notes: >-
+  Menagerie events append aggregate-only records to runs/menagerie_log.jsonl
+  (seeds 53001-53009); per-run JSONs are rewritten to aggregate-only fields.

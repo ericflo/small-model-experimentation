@@ -1,0 +1,262 @@
+{
+  "tag": "ablation_recovery",
+  "adapter": null,
+  "merged": "../../large_artifacts/qwen35_4b_gauntlet_frontier/merged/ablation_recovery",
+  "gen_seed": 90001,
+  "think_budget": 1024,
+  "seconds": 302.9,
+  "cells": {
+    "brinework/atom/L1": {
+      "n": 15,
+      "mean": 0.3333,
+      "parse_fail": 0,
+      "forced_close": 15
+    },
+    "brinework/atom/L2": {
+      "n": 15,
+      "mean": 0.5333,
+      "parse_fail": 0,
+      "forced_close": 15
+    },
+    "brinework/atom/L3": {
+      "n": 15,
+      "mean": 0.4,
+      "parse_fail": 0,
+      "forced_close": 15
+    },
+    "brinework/atom/L4": {
+      "n": 15,
+      "mean": 0.4,
+      "parse_fail": 0,
+      "forced_close": 15
+    },
+    "brinework/atom/L5": {
+      "n": 15,
+      "mean": 0.0667,
+      "parse_fail": 0,
+      "forced_close": 15
+    },
+    "brinework/atom/L6": {
+      "n": 15,
+      "mean": 0.3333,
+      "parse_fail": 0,
+      "forced_close": 15
+    },
+    "caravan/atom/L1": {
+      "n": 15,
+      "mean": 0.6667,
+      "parse_fail": 0,
+      "forced_close": 15
+    },
+    "caravan/atom/L2": {
+      "n": 15,
+      "mean": 0.7333,
+      "parse_fail": 0,
+      "forced_close": 15
+    },
+    "caravan/atom/L3": {
+      "n": 15,
+      "mean": 0.4667,
+      "parse_fail": 0,
+      "forced_close": 15
+    },
+    "caravan/atom/L4": {
+      "n": 15,
+      "mean": 0.3333,
+      "parse_fail": 0,
+      "forced_close": 15
+    },
+    "caravan/atom/L5": {
+      "n": 15,
+      "mean": 0.0,
+      "parse_fail": 0,
+      "forced_close": 15
+    },
+    "caravan/atom/L6": {
+      "n": 15,
+      "mean": 0.1333,
+      "parse_fail": 0,
+      "forced_close": 15
+    },
+    "ferrier/atom/L1": {
+      "n": 15,
+      "mean": 0.9333,
+      "parse_fail": 0,
+      "forced_close": 15
+    },
+    "ferrier/atom/L2": {
+      "n": 15,
+      "mean": 0.6667,
+      "parse_fail": 0,
+      "forced_close": 15
+    },
+    "ferrier/atom/L3": {
+      "n": 15,
+      "mean": 0.6667,
+      "parse_fail": 0,
+      "forced_close": 15
+    },
+    "ferrier/atom/L4": {
+      "n": 15,
+      "mean": 0.6667,
+      "parse_fail": 0,
+      "forced_close": 15
+    },
+    "ferrier/atom/L5": {
+      "n": 15,
+      "mean": 0.5333,
+      "parse_fail": 0,
+      "forced_close": 15
+    },
+    "ferrier/atom/L6": {
+      "n": 15,
+      "mean": 0.2667,
+      "parse_fail": 0,
+      "forced_close": 15
+    },
+    "ferrier/episode/L2": {
+      "n": 6,
+      "mean": 0.6111,
+      "parse_fail": 0,
+      "forced_close": 6
+    },
+    "ferrier/episode/L3": {
+      "n": 6,
+      "mean": 0.8667,
+      "parse_fail": 0,
+      "forced_close": 6
+    },
+    "ferrier/episode/L5": {
+      "n": 6,
+      "mean": 0.8542,
+      "parse_fail": 0,
+      "forced_close": 6
+    },
+    "runeward/atom/L1": {
+      "n": 15,
+      "mean": 0.6,
+      "parse_fail": 0,
+      "forced_close": 15
+    },
+    "runeward/atom/L2": {
+      "n": 15,
+      "mean": 0.4667,
+      "parse_fail": 0,
+      "forced_close": 15
+    },
+    "runeward/atom/L3": {
+      "n": 15,
+      "mean": 0.1333,
+      "parse_fail": 0,
+      "forced_close": 15
+    },
+    "runeward/atom/L4": {
+      "n": 15,
+      "mean": 0.3333,
+      "parse_fail": 0,
+      "forced_close": 15
+    },
+    "runeward/atom/L5": {
+      "n": 15,
+      "mean": 0.0667,
+      "parse_fail": 0,
+      "forced_close": 15
+    },
+    "runeward/atom/L6": {
+      "n": 15,
+      "mean": 0.2,
+      "parse_fail": 0,
+      "forced_close": 15
+    },
+    "spindle/atom/L1": {
+      "n": 15,
+      "mean": 0.1333,
+      "parse_fail": 0,
+      "forced_close": 15
+    },
+    "spindle/atom/L2": {
+      "n": 15,
+      "mean": 0.0,
+      "parse_fail": 0,
+      "forced_close": 15
+    },
+    "spindle/atom/L3": {
+      "n": 15,
+      "mean": 0.0,
+      "parse_fail": 0,
+      "forced_close": 15
+    },
+    "spindle/atom/L4": {
+      "n": 15,
+      "mean": 0.0,
+      "parse_fail": 0,
+      "forced_close": 15
+    },
+    "spindle/atom/L5": {
+      "n": 15,
+      "mean": 0.0,
+      "parse_fail": 0,
+      "forced_close": 15
+    },
+    "spindle/atom/L6": {
+      "n": 15,
+      "mean": 0.0,
+      "parse_fail": 0,
+      "forced_close": 15
+    },
+    "spindle/episode/L2": {
+      "n": 6,
+      "mean": 1.0,
+      "parse_fail": 0,
+      "forced_close": 6
+    },
+    "spindle/episode/L3": {
+      "n": 6,
+      "mean": 1.0,
+      "parse_fail": 0,
+      "forced_close": 6
+    },
+    "spindle/episode/L5": {
+      "n": 6,
+      "mean": 0.9524,
+      "parse_fail": 0,
+      "forced_close": 6
+    },
+    "stallwright/atom/L1": {
+      "n": 15,
+      "mean": 0.2364,
+      "parse_fail": 0,
+      "forced_close": 15
+    },
+    "stallwright/atom/L2": {
+      "n": 15,
+      "mean": 0.265,
+      "parse_fail": 0,
+      "forced_close": 15
+    },
+    "stallwright/atom/L3": {
+      "n": 15,
+      "mean": 0.3214,
+      "parse_fail": 0,
+      "forced_close": 15
+    },
+    "stallwright/atom/L4": {
+      "n": 15,
+      "mean": 0.1608,
+      "parse_fail": 0,
+      "forced_close": 15
+    },
+    "stallwright/atom/L5": {
+      "n": 15,
+      "mean": 0.2493,
+      "parse_fail": 0,
+      "forced_close": 15
+    },
+    "stallwright/atom/L6": {
+      "n": 15,
+      "mean": 0.0357,
+      "parse_fail": 0,
+      "forced_close": 15
+    }
+  }
+}

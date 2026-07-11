@@ -1,0 +1,77 @@
+# Frontier round: difficulty-escalated harvest with the round-3 merged model.
+# L1-L2 are largely solved (round-3 keeper rates 80-100%); mass sits on L3-L6.
+# The two new weak-axis families (patchwheel, packhouse) harvest all levels.
+# Seeds: gen 15001 / episodes 25000 (fresh train-pool namespaces; rounds 1-3
+# used 11001/13001 and 21000/23000); menagerie events use 53000+.
+
+round: 4
+artifacts_dir: large_artifacts/qwen35_4b_gauntlet_frontier
+
+engine:
+  max_model_len: 16384
+  gpu_memory_utilization: 0.85
+  max_num_seqs: 64
+  max_num_batched_tokens: 16384
+
+harvest:
+  run_seed: 44001
+  temperature: 0.8
+  top_p: 0.95
+  top_k: 20
+  think_budget: 4096
+  think_budget_by_family:
+    stallwright: 6144
+    glyphgate: 6144
+    loomfix: 6144
+    packhouse: 6144
+  episode_think_budget: 2048
+  answer_max_tokens: 192
+  atoms:
+    families: [caravan, foundry_ledger, stallwright, runeward, kilnrite, glyphgate, loomfix, ferrier, burrowmaze, gatepost, patchwheel, packhouse]
+    gen_seed: 15001
+    k: 3
+    per_level: {3: 24, 4: 32, 5: 32, 6: 24}
+    per_level_by_family:
+      patchwheel: {1: 24, 2: 24, 3: 24, 4: 24, 5: 20, 6: 16}
+      packhouse: {1: 24, 2: 24, 3: 24, 4: 24, 5: 20, 6: 16}
+  episodes:
+    families: [kilnrite, glyphgate, loomfix, ferrier, burrowmaze, gatepost, patchwheel]
+    seed_base: 25000
+    k: 2
+    per_level: {3: 16, 4: 16, 5: 12, 6: 8}
+    per_level_by_family:
+      patchwheel: {1: 8, 2: 8, 3: 12, 4: 12, 5: 10, 6: 8}
+
+sft:
+  out: data/sft_frontier.jsonl
+  max_think_tokens: 2000
+  max_answer_tokens: 96
+  max_per_item: 2
+  max_rollouts_per_episode: 2
+  family_cap: 500
+  fc_trim_chars: 5200        # recovery contexts trimmed to FIT the encode window
+                             # (round-2/3 fc examples silently never trained; see C50 correction)
+
+train:
+  # From BASE on the union of all rounds' data + frontier data.
+  adapter_out: large_artifacts/qwen35_4b_gauntlet_frontier/adapters/frontier
+  epochs: 2.0
+  lr: 2.0e-4
+  rank: 32
+  alpha: 64
+  grad_accum: 16
+  batch_size: 1
+  max_length: 2048
+  seed: 42
+
+eval_gym:
+  gen_seed: 90001
+  atoms_per_level: 15
+  episodes_per_level: 6
+  episode_levels: [2, 3, 5]
+  think_budget: 1024
+  answer_max_tokens: 96
+
+menagerie:
+  tier: quick
+  think: default

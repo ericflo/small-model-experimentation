@@ -78,6 +78,7 @@ Top-level README files are required for all experiments. Generated entries shoul
 | `qwen35_4b_foofah_selective_program_fallback` | [README](../experiments/qwen35_4b_foofah_selective_program_fallback/README.md) | [report](../experiments/qwen35_4b_foofah_selective_program_fallback/reports/report.md) |
 | `qwen35_4b_foofah_strategy_discovery_live` | [README](../experiments/qwen35_4b_foofah_strategy_discovery_live/README.md) | [report](../experiments/qwen35_4b_foofah_strategy_discovery_live/reports/report.md) |
 | `qwen35_4b_gauntlet_breadth_round1` | [README](../experiments/qwen35_4b_gauntlet_breadth_round1/README.md) | [report](../experiments/qwen35_4b_gauntlet_breadth_round1/reports/report.md) |
+| `qwen35_4b_gauntlet_frontier` | [README](../experiments/qwen35_4b_gauntlet_frontier/README.md) | [report](../experiments/qwen35_4b_gauntlet_frontier/reports/report.md) |
 | `qwen35_4b_generator_verifier_gap` | [README](../experiments/qwen35_4b_generator_verifier_gap/README.md) | [report](../experiments/qwen35_4b_generator_verifier_gap/reports/report.md) |
 | `qwen35_4b_graphir_self_repair` | [README](../experiments/qwen35_4b_graphir_self_repair/README.md) | [report](../experiments/qwen35_4b_graphir_self_repair/reports/qwen35_4b_graphir_self_repair_report.md) |
 | `qwen35_4b_humaneval_adaptive_budget` | [README](../experiments/qwen35_4b_humaneval_adaptive_budget/README.md) | [report](../experiments/qwen35_4b_humaneval_adaptive_budget/reports/qwen35_4b_humaneval_adaptive_budget_report.md) |

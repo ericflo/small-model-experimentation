@@ -2,7 +2,7 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 52
+- Claims: 53
 
 ## Status Counts
 
@@ -11,21 +11,21 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | Confirmed | 7 |
 | Negative | 3 |
 | Open | 2 |
-| Promising | 40 |
+| Promising | 41 |
 
 ## Program Counts
 
 | Program | Claims |
 | --- | ---: |
 | `active_evidence_acquisition` | 1 |
-| `agentic_breadth_installation` | 3 |
+| `agentic_breadth_installation` | 4 |
 | `algorithmic_memory_and_retrieval` | 1 |
-| `benchmark_generalization` | 12 |
+| `benchmark_generalization` | 13 |
 | `collective_experimentation_infrastructure` | 2 |
 | `evidence_conditioned_selection` | 9 |
 | `interpretability_and_diagnostics` | 8 |
 | `operator_and_skill_inventories` | 1 |
-| `posttraining_and_adaptation` | 26 |
+| `posttraining_and_adaptation` | 27 |
 | `process_control_and_tool_use` | 3 |
 | `reliability_and_safety` | 5 |
 | `structured_execution_and_compilers` | 29 |
@@ -1363,7 +1363,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 
 - Status: `Promising`
 - Programs: `agentic_breadth_installation`, `posttraining_and_adaptation`, `benchmark_generalization`
-- Summary: Experiment qwen35_4b_gauntlet_breadth_round1. Built a 12-family procedurally-generated agentic gym (10 trained + 2 held out; atoms with final-line ANSWER scoring + lockstep multi-turn episodes; machine-checkable verifiers; content invented under the benchmark firewall against public axis descriptions only). Fast loop: ~80-min harvest (K=2, L1-L2, family-adaptive think budgets 2048/4096) -> verified-sample SFT build -> ~40-min think-channel QLoRA r32/a64 -> menagerie quick base-vs-install on a fresh seed. Round 1 (849 naturally-closed verified examples, full think-channel loss) installed NOTHING measurable: training a model on its own verbatim chains is near-self-distillation (loss 0.27->0.20), and the deployment-critical post-force-close state was excluded by the naturally-closed-only filter. Round 2 (same harvest, 925 examples) added (a) terse-target canonicalization (own verified value as 'ANSWER: x'), (b) a forced-close RECOVERY arm (76 correct-after-cut samples; truncated chain as pure context, loss weight 0), (c) per-token loss weights prompt 0/think 0.2/answer+action 1.0. RESULTS (deployed greedy, think 1024): gym mean 0.184->0.701 (+0.518); parse failures collapse (caravan 98->8/100); HELD-OUT never-trained families brinework +0.540 and spindle +0.608; harvest-starved stallwright (zero training examples) 0.000->0.395 by pure transfer. BLACKBOX (menagerie quick, HF parity backend both arms, paired by fresh seed, deterministic): base 0.1396 -> 0.3625 (+0.2229, seed 52004) and 0.1521 -> 0.4458 (+0.2938, seed 52005) vs a pre-registered +0.03 bar; per-family deltas concentrate on trained axes (chronicle +0.750, siftstack +0.625, toolsmith +0.354 to 1.000, mirage +0.250) while untrained/starved axes stay flat or dip (menders 0, sirens 0, stockade -0.125) -- the transfer-not-leakage signature. Mechanism read: the binding deployed constraint was the truncation cascade at the answer-emission seam (consume any budget -> force-close -> verbose restart -> no parseable answer); training the model on its own verified outputs to conclude within budget and to COMMIT from a truncated chain removes the constraint substrate-generally. MEDIUM-TIER CONFIRMATION (seed 52006, HF backend, paired): base 0.1217 -> 0.4453 (+0.3237) with EVERY family positive -- including axes flat on quick (mirage/abstention +0.600, lockpick/induction +0.200, siftstack +0.700, chronicle +0.700, menders +0.100, sirens +0.200, warren +0.200, stockade +0.053) -- so the install reaches multi-turn episodes and L3-L4 atoms, and the pre-registered three-leg decision rule (two positive quick seeds, mean >= +0.03; medium >= +0.02) is met at 8-16x its bars. Null-calibration bycatch: same-seed vLLM quick base-vs-base spread is ~0.034 aggregate (3x the published cross-backend 0.011); single vLLM quick arms only detect large effects. ROUND-3 (expert iteration proper, re-harvest with the round-2 model, fresh item seeds, 2,276 new examples incl. the previously-starved families -- stallwright 0->81 recovery examples, glyphgate L1 correct 2/80->60/60): the frontier OPENED at harvest but blackbox gains did NOT compound -- quick +0.2854/+0.2271 (seeds 52007/52008) vs round-2's +0.2229/+0.2938; medium +0.2637 (seed 52009) vs +0.3237; gym-internal +0.019. The install is a one-time step change from the recipe (emission-seam repair + breadth), and same-recipe iteration re-saturates: C11's coverage-boundedness reappears one level up, at the recipe frontier rather than the sampling frontier.
+- Summary: Experiment qwen35_4b_gauntlet_breadth_round1. Built a 12-family procedurally-generated agentic gym (10 trained + 2 held out; atoms with final-line ANSWER scoring + lockstep multi-turn episodes; machine-checkable verifiers; content invented under the benchmark firewall against public axis descriptions only). Fast loop: ~80-min harvest (K=2, L1-L2, family-adaptive think budgets 2048/4096) -> verified-sample SFT build -> ~40-min think-channel QLoRA r32/a64 -> menagerie quick base-vs-install on a fresh seed. Round 1 (849 naturally-closed verified examples, full think-channel loss) installed NOTHING measurable: training a model on its own verbatim chains is near-self-distillation (loss 0.27->0.20), and the deployment-critical post-force-close state was excluded by the naturally-closed-only filter. Round 2 (same harvest, 925 examples) added (a) terse-target canonicalization (own verified value as 'ANSWER: x'), (b) a forced-close RECOVERY arm (76 correct-after-cut samples; truncated chain as pure context, loss weight 0), (c) per-token loss weights prompt 0/think 0.2/answer+action 1.0. RESULTS (deployed greedy, think 1024): gym mean 0.184->0.701 (+0.518); parse failures collapse (caravan 98->8/100); HELD-OUT never-trained families brinework +0.540 and spindle +0.608; harvest-starved stallwright (zero training examples) 0.000->0.395 by pure transfer. BLACKBOX (menagerie quick, HF parity backend both arms, paired by fresh seed, deterministic): base 0.1396 -> 0.3625 (+0.2229, seed 52004) and 0.1521 -> 0.4458 (+0.2938, seed 52005) vs a pre-registered +0.03 bar; per-family deltas concentrate on trained axes (chronicle +0.750, siftstack +0.625, toolsmith +0.354 to 1.000, mirage +0.250) while untrained/starved axes stay flat or dip (menders 0, sirens 0, stockade -0.125) -- the transfer-not-leakage signature. Mechanism read: the binding deployed constraint was the truncation cascade at the answer-emission seam (consume any budget -> force-close -> verbose restart -> no parseable answer); training the model on its own verified outputs to conclude within budget and to COMMIT from a truncated chain removes the constraint substrate-generally. MEDIUM-TIER CONFIRMATION (seed 52006, HF backend, paired): base 0.1217 -> 0.4453 (+0.3237) with EVERY family positive -- including axes flat on quick (mirage/abstention +0.600, lockpick/induction +0.200, siftstack +0.700, chronicle +0.700, menders +0.100, sirens +0.200, warren +0.200, stockade +0.053) -- so the install reaches multi-turn episodes and L3-L4 atoms, and the pre-registered three-leg decision rule (two positive quick seeds, mean >= +0.03; medium >= +0.02) is met at 8-16x its bars. Null-calibration bycatch: same-seed vLLM quick base-vs-base spread is ~0.034 aggregate (3x the published cross-backend 0.011); single vLLM quick arms only detect large effects. ROUND-3 (expert iteration proper, re-harvest with the round-2 model, fresh item seeds, 2,276 new examples incl. the previously-starved families -- stallwright 0->81 recovery examples, glyphgate L1 correct 2/80->60/60): the frontier OPENED at harvest but blackbox gains did NOT compound -- quick +0.2854/+0.2271 (seeds 52007/52008) vs round-2's +0.2229/+0.2938; medium +0.2637 (seed 52009) vs +0.3237; gym-internal +0.019. The install is a one-time step change from the recipe (emission-seam repair + breadth), and same-recipe iteration re-saturates: C11's coverage-boundedness reappears one level up, at the recipe frontier rather than the sampling frontier. ATTRIBUTION CORRECTION (2026-07-10, post-hoc encode audit): ALL 76 forced-close recovery examples were silently skipped at training time (over the 2048-token encode window), so the round-2 adapter trained on ZERO recovery examples — the step change is attributable to terse-target canonicalization (448 atoms) + episode action turns (363) + emission-seam loss weighting alone, and the observed commit-from-truncated-chain behavior at deployment is GENERALIZATION from those, not direct supervision of the force-closed state. The recovery arm as designed never fired; a length-trimmed recovery arm that actually fits the window is now a frontier-round treatment, and the recovery-only ablation tests it directly.
 - Implication: The deployable recipe for general agentic uplift on the fixed 4B: harvest own verified episodes at generous think budgets across MANY diverse substrates, canonicalize targets to the terse deployable shape, include forced-close recovery states as context-only examples, and concentrate loss on the emission seam (think 0.2/answer 1.0). Breadth transfers: axis-matched supervision lifts blackbox families the gym never saw content from. Signal placement beats dose.
 
 ### Evidence
@@ -1673,6 +1673,146 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - 9
 - )
 - .
+-  
+- A
+- l
+- w
+- a
+- y
+- s
+-  
+- a
+- u
+- d
+- i
+- t
+-  
+- e
+- n
+- c
+- o
+- d
+- e
+- -
+- t
+- i
+- m
+- e
+-  
+- s
+- k
+- i
+- p
+-  
+- c
+- o
+- u
+- n
+- t
+- s
+-  
+- a
+- g
+- a
+- i
+- n
+- s
+- t
+-  
+- t
+- h
+- e
+-  
+- b
+- u
+- i
+- l
+- t
+-  
+- d
+- a
+- t
+- a
+- s
+- e
+- t
+-  
+- (
+- s
+- i
+- l
+- e
+- n
+- t
+-  
+- o
+- v
+- e
+- r
+- -
+- l
+- e
+- n
+- g
+- t
+- h
+-  
+- s
+- k
+- i
+- p
+- p
+- i
+- n
+- g
+-  
+- r
+- e
+- w
+- r
+- o
+- t
+- e
+-  
+- t
+- h
+- i
+- s
+-  
+- e
+- x
+- p
+- e
+- r
+- i
+- m
+- e
+- n
+- t
+- '
+- s
+-  
+- o
+- w
+- n
+-  
+- m
+- e
+- c
+- h
+- a
+- n
+- i
+- s
+- m
+-  
+- s
+- t
+- o
+- r
+- y
+- )
+- .
 
 ## C51: Answer-only potential after cap-bound thoughts is a real but NON-ACTIONABLE selector: it detects relevant trace content yet fails G0 because the teacher-forced answer seam is rarely deployable
 
@@ -1722,3 +1862,397 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - Do not spend blackbox menagerie events before the whitebox mechanism gate passes
 - Do not assume repetition loops exist at deployed budgets: measure with the fingerprint census first (it is free on existing logs)
 - Do not left-pad (or trust right-padded batching without an equivalence gate) for exact-logit work on the hybrid GDN/Mamba architecture: measured 0.30-0.44 logit divergence; use batch-of-1
+
+## C53: THE SECOND WALL: the emission-policy install is a large ONE-TIME step to a robust ~0.40-0.45 menagerie ceiling — no variant of train-on-own-verified-outputs (dose, iteration, breadth, difficulty escalation, recovery supervision, deploy-budget matching) moves the blackbox band further, even as in-gym frontier competence installs
+
+- Status: `Promising`
+- Programs: `agentic_breadth_installation`, `posttraining_and_adaptation`, `benchmark_generalization`
+- Summary: Experiment qwen35_4b_gauntlet_frontier (follow-up to C50). Levers executed against the +0.22..+0.33 plateau, all with paired same-seed same-backend menagerie events (9 decision events; treated absolute 0.375-0.447 vs base 0.070-0.161): (1) ABLATIONS at matched dose (665 examples, trained from base, merged deployment): recovery-only +0.1216; ferrier-ONLY +0.3141 vs breadth-matched +0.3302 — a single rich verified family installs nearly the full effect AND nearly full cross-substrate gym transfer (spindle 0.748 vs 0.752; runeward 0.944 vs 0.933), so the install is a substrate-agnostic BEHAVIORAL POLICY (conclude-within-budget, terse commit, one-line actions), not breadth-dependent content; breadth buys only axis-aligned increments (chronicle +0.750 vs +0.375). (2) DIFFICULTY ESCALATION: all 12 gym families extended to L5/L6 (L1-L4 byte-identical; horizons to 22) + two new weak-axis families (patchwheel rewrite-rule repair; packhouse assignment optimization); frontier harvest with the round-3 model (2,514 new examples, mass L3-L6); union-trained adapter: quick +0.2716/+0.3135, medium +0.3196 — in-band, even though gym-internal L5-L6 competence went from ~0 to 0.466 (the install WORKS in-distribution at the frontier; the blackbox band does not respond). (3) DEPLOY-BUDGET MATCHING (think<=900 so quick's 1024 budget is on-policy): quick +0.2934/+0.2376, medium +0.3418 (highest medium delta; same ~0.41 absolute). ATTRIBUTION CORRECTION carried from C50: rounds 2-3 trained on ZERO recovery examples (encode-window skip); with trimmed recovery examples actually training (1,018 in sharp1024), the band still holds. Reading: the recipe family installs protocol/emission/commitment competence worth ~+0.30 aggregate as a step function; the residual menagerie deficit (menders/lockpick/stockade/rites/warren cores at L2+) is capability the model's own verified outputs cannot teach it — consistent with C36/C48's capability core, now measured blackbox. Instrument bycatch: recurring cudaErrorMemoryAllocation after long engine cycling on the WSL host is fixed by PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True on the trainer.
+- Implication: For general agentic uplift on the fixed 4B: spend ONE cheap round installing the emission policy (any rich verified substrate suffices; breadth optional), then STOP scaling that recipe — the next capability increment requires a different mechanism (candidates: on-policy RL with execution reward at the residual failure modes, scaffold-distillation of tool-assisted solutions the model cannot sample alone, targeted axis curricula from failure forensics).
+
+### Evidence
+
+- [`qwen35_4b_gauntlet_frontier`](../../experiments/qwen35_4b_gauntlet_frontier/reports/report.md)
+
+### Next Tests
+
+- Failure forensics on the residual: which menagerie-axis analogues fail in-gym at deployed budgets AFTER the install (gym proxies only), and are the failures sampling-reachable at all (pass@K ceiling at K=64)?
+- Scaffold-distillation arm: tool/search-assisted gym solutions (interpreter-verified) banked into the think channel — does externally-found structure move the band where self-sampled data cannot (C22-24 said yes for depth; test blackbox)
+- On-policy RL (GRPO with execution reward) at the residual failure modes, guarded by C29's collapse warnings
+- Slow/deep-tier confirmation of the ceiling; multi-seed band quantification
+
+### Avoid
+
+- D
+- o
+-  
+- n
+- o
+- t
+-  
+- r
+- u
+- n
+-  
+- f
+- u
+- r
+- t
+- h
+- e
+- r
+-  
+- s
+- a
+- m
+- e
+- -
+- r
+- e
+- c
+- i
+- p
+- e
+-  
+- r
+- o
+- u
+- n
+- d
+- s
+-  
+- e
+- x
+- p
+- e
+- c
+- t
+- i
+- n
+- g
+-  
+- c
+- o
+- m
+- p
+- o
+- u
+- n
+- d
+- i
+- n
+- g
+-  
+- (
+- t
+- h
+- r
+- e
+- e
+-  
+- i
+- n
+- d
+- e
+- p
+- e
+- n
+- d
+- e
+- n
+- t
+-  
+- e
+- s
+- c
+- a
+- l
+- a
+- t
+- i
+- o
+- n
+- s
+-  
+- l
+- a
+- n
+- d
+- e
+- d
+-  
+- i
+- n
+- -
+- b
+- a
+- n
+- d
+- )
+- ;
+-  
+- d
+- o
+-  
+- n
+- o
+- t
+-  
+- a
+- t
+- t
+- r
+- i
+- b
+- u
+- t
+- e
+-  
+- t
+- h
+- e
+-  
+- p
+- l
+- a
+- t
+- e
+- a
+- u
+-  
+- t
+- o
+-  
+- g
+- y
+- m
+-  
+- d
+- i
+- f
+- f
+- i
+- c
+- u
+- l
+- t
+- y
+-  
+- (
+- i
+- n
+- -
+- g
+- y
+- m
+-  
+- f
+- r
+- o
+- n
+- t
+- i
+- e
+- r
+-  
+- c
+- o
+- m
+- p
+- e
+- t
+- e
+- n
+- c
+- e
+-  
+- i
+- n
+- s
+- t
+- a
+- l
+- l
+- s
+- ;
+-  
+- t
+- h
+- e
+-  
+- b
+- l
+- a
+- c
+- k
+- b
+- o
+- x
+-  
+- b
+- a
+- n
+- d
+-  
+- s
+- t
+- i
+- l
+- l
+-  
+- h
+- o
+- l
+- d
+- s
+- )
+- .
+-  
+- W
+- h
+- e
+- n
+-  
+- t
+- w
+- o
+-  
+- s
+- e
+- s
+- s
+- i
+- o
+- n
+- s
+-  
+- r
+- u
+- n
+-  
+- c
+- o
+- n
+- c
+- u
+- r
+- r
+- e
+- n
+- t
+- l
+- y
+- ,
+-  
+- c
+- l
+- a
+- i
+- m
+-  
+- I
+- D
+- s
+-  
+- m
+- u
+- s
+- t
+-  
+- b
+- e
+-  
+- r
+- e
+- s
+- e
+- r
+- v
+- e
+- d
+-  
+- a
+- t
+-  
+- a
+- p
+- p
+- e
+- n
+- d
+-  
+- t
+- i
+- m
+- e
+-  
+- a
+- g
+- a
+- i
+- n
+- s
+- t
+-  
+- o
+- r
+- i
+- g
+- i
+- n
+-  
+- (
+- t
+- h
+- i
+- s
+-  
+- c
+- l
+- a
+- i
+- m
+-  
+- w
+- a
+- s
+-  
+- l
+- o
+- s
+- t
+-  
+- o
+- n
+- c
+- e
+-  
+- t
+- o
+-  
+- a
+- n
+-  
+- I
+- D
+-  
+- c
+- o
+- l
+- l
+- i
+- s
+- i
+- o
+- n
+-  
+- +
+-  
+- d
+- e
+- d
+- u
+- p
+- e
+- )
+- .
