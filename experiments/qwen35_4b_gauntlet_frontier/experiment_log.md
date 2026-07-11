@@ -70,3 +70,23 @@ Created as a new experiment scaffold.
   tiers" bar is unreachable within this recipe family and provenance; the
   wall itself, its attribution, and the one-time +0.30 step are the
   program's deliverables.
+
+## 2026-07-11 (cont.) — clearance campaign: quick decisively cleared, medium does not follow; tier dissociation found
+
+- Breadth-matched arm medium (seed 53013): +0.3304 — momentarily clearing
+  both tiers (quick +0.3302 at 53003) — but replication regressed to the
+  band (quick +0.2669 at 53017, medium +0.2806 at 53018): arm means quick
+  ~+0.299 / medium ~+0.306. Not decisive.
+- CONCENTRATE arm (1,440 curated rows: 800 short-think self-examples + 420
+  L1-L4 oracle traces + 220 trimmed recovery; 3 epochs): quick +0.3301
+  (53014) and +0.4172 (53015; ABSOLUTE 0.5053 — first 0.50+ ever); medium
+  +0.2783/+0.2432/+0.2552 (53016/53019/53020; pre-declared arm-mean metric,
+  no exclusions): quick mean +0.374 DECISIVELY beyond +0.32; medium mean
+  +0.259 — below.
+- NEW FINDING — TIER DISSOCIATION: the short-curated mix optimizes the
+  quick regime (L1-L2 atoms) at measurable cost to medium (episodes +
+  L3-L4): concentrate holds the quick record (+0.417) while sharp1024
+  holds the medium record (+0.342); across 19 paired events NO arm clears
+  both tiers decisively. The goal's conjunctive bar is unreachable within
+  this recipe family and provenance; per-tier specialists exist, a
+  both-tier generalist at that level does not.

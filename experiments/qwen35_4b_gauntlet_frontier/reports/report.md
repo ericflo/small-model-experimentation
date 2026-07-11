@@ -70,6 +70,16 @@ highest absolute levels observed (0.474/0.482) but paired deltas in-band.
 Twelve paired events, seven lever classes, one band: the second wall holds
 even against gold procedure supervision the model cannot self-generate.
 
+## Clearance campaign addendum — tier dissociation
+
+A curated concentrate mix decisively clears quick (paired +0.330/+0.417,
+mean +0.374, absolute 0.505) but not medium (arm-mean +0.259 over three
+events, pre-declared metric); the breadth-matched arm's momentary double
+clearance regressed on replication. Across 19 paired events, tier
+performance dissociates under mix composition (quick record: concentrate;
+medium record: sharp1024 +0.342); no arm clears both decisively — the
+conjunctive bar trades against itself at this model capacity.
+
 ## Next Experiments
 
 - Failure forensics on the residual axes at deployed budgets (gym proxies).
