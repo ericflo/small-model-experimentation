@@ -516,6 +516,14 @@
     "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
    ]
   },
+  "qwen35_4b_gauntlet_frontier": {
+   "start": "2026-07-10",
+   "end": "2026-07-11",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_generator_verifier_gap": {
    "start": "2026-06-29",
    "end": "2026-06-30",
