@@ -1,0 +1,43 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_think_ftpo_round1"
+external_artifacts:
+  - name: "pivot FTPO LoRA adapter"
+    storage: "large_artifacts/qwen35_4b_think_ftpo_round1/adapters/pivot"
+    required_for: "merge + trained-arm evaluation"
+    checksum: ""
+    regenerate: >-
+      .venv-vllm/bin/python scripts/harvest.py &&
+      .venv/bin/python scripts/build_rows.py --arm pivot &&
+      .venv/bin/python scripts/train_ftpo.py --arm pivot --out <storage>
+  - name: "shuffled-control FTPO LoRA adapter"
+    storage: "large_artifacts/qwen35_4b_think_ftpo_round1/adapters/shuffled"
+    required_for: "targeting-control arm"
+    checksum: ""
+    regenerate: "same pipeline with --arm shuffled (label permutation seed 3407)"
+  - name: "merged composite checkpoints (pivot, shuffled)"
+    storage: "large_artifacts/qwen35_4b_think_ftpo_round1/merged/"
+    required_for: "vLLM evaluation arms (C49: runtime LoRA is a silent no-op)"
+    checksum: ""
+    regenerate: ".venv/bin/python scripts/merge_ftpo.py --adapter <adapter> --out <dir>"
+omitted_artifacts:
+  - path: "large_artifacts/qwen35_4b_think_ftpo_round1/harvest/ (moved out of tree)"
+    reason: >-
+      gzipped n=16 rollout shards with full token IDs are large; regenerable
+      from closed seed ranges in configs/default.yaml (note: vLLM sampling is
+      seed-stable only for identical batch geometry on Ada — the mined
+      data/rows_*.jsonl.gz are committed as the reproducibility anchor)
+  - path: "runs/harvest_smoke/"
+    reason: "smoke shards; regenerable"
+  - path: "runs/harvest_probe/"
+    reason: "n=16 probe shard behind amendment decisions; summary retained"
+reproducibility:
+  smoke_command: "python3 scripts/run.py --smoke"
+  full_command: "see README Run section (staged pipeline; single-tenant GPU)"
+  required_external_artifacts: []
+notes: >-
+  Menagerie events append aggregate-only records to runs/menagerie_log.jsonl;
+  per-run JSONs under runs/menagerie/ contain score-level fields only
+  (--debug-artifacts never used). Seeds fresh per event, union-checked against
+  the gauntlet log and suite baseline 31337. Training rows (data/rows_*.jsonl.gz)
+  are committed: they are the exact training inputs and are small.

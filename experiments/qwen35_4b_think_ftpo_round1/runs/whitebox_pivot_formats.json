@@ -1,0 +1,26 @@
+{
+  "arm": "pivot",
+  "stage": "formats",
+  "model": "../../large_artifacts/qwen35_4b_think_ftpo_round1/merged/pivot",
+  "variant1": {
+    "n": 140,
+    "success": 0.007142857142857143,
+    "mean_score": 0.007142857142857143,
+    "loop_rate": 0.0,
+    "unresolved_rate": 1.0,
+    "answer_limit_rate": 0.5785714285714286,
+    "natural_close_rate": 0.0,
+    "mean_think_tokens": 1024.0
+  },
+  "variant2": {
+    "n": 140,
+    "success": 0.39285714285714285,
+    "mean_score": 0.39285714285714285,
+    "loop_rate": 0.0,
+    "unresolved_rate": 1.0,
+    "answer_limit_rate": 0.5642857142857143,
+    "natural_close_rate": 0.0,
+    "mean_think_tokens": 1024.0
+  },
+  "wall_s": 201.5766885280609
+}

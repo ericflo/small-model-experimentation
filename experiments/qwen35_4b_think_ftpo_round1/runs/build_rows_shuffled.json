@@ -1,0 +1,85 @@
+{
+  "arm": "shuffled",
+  "counts": {
+    "groups": 2800,
+    "groups_with_node": 749,
+    "rows": 945,
+    "chosen_case_variant_dropped": 2,
+    "no_chosen_after_filters": 2,
+    "pool_rows": 945,
+    "rows_dropped_empty_chosen": 0,
+    "train_rows": 661
+  },
+  "train_rows": 661,
+  "pool_rows": 945,
+  "min_train_rows_gate": 600,
+  "gate_pass": true,
+  "chosen_per_row_hist": {
+    "1": 633,
+    "2": 22,
+    "3": 6
+  },
+  "top_rejected_surfaces": [
+    [
+      "the",
+      20
+    ],
+    [
+      "a",
+      18
+    ],
+    [
+      "`",
+      17
+    ],
+    [
+      "and",
+      17
+    ],
+    [
+      ".",
+      14
+    ],
+    [
+      "",
+      14
+    ],
+    [
+      "has",
+      14
+    ],
+    [
+      "examples",
+      14
+    ],
+    [
+      "to",
+      13
+    ],
+    [
+      "holds",
+      13
+    ],
+    [
+      "\"",
+      13
+    ],
+    [
+      "specific",
+      13
+    ],
+    [
+      "based",
+      11
+    ],
+    [
+      "input",
+      11
+    ],
+    [
+      "determine",
+      10
+    ]
+  ],
+  "median_context_tokens": 296
+}

@@ -1,0 +1,114 @@
+{
+  "arm": "pivot",
+  "rows": 615,
+  "per_device_batch": 1,
+  "accum": 16,
+  "steps_run": 39,
+  "total_steps": 39,
+  "stopped_early": false,
+  "padding_equivalence_max_diff": 0.296875,
+  "wall_s": 798.6871476173401,
+  "history": [
+    {
+      "step": 5,
+      "of": 39,
+      "chosen_win": 0.4583,
+      "pref_loss": 0.791,
+      "margin_win": 0.0,
+      "lr": 1.4166666666666666e-05,
+      "elapsed_s": 110.5
+    },
+    {
+      "step": 10,
+      "of": 39,
+      "chosen_win": 0.4333,
+      "pref_loss": 2.5789,
+      "margin_win": 0.0,
+      "lr": 1.2083333333333333e-05,
+      "elapsed_s": 217.8
+    },
+    {
+      "step": 15,
+      "of": 39,
+      "chosen_win": 0.6021,
+      "pref_loss": 2.4639,
+      "margin_win": 0.0,
+      "lr": 9.999999999999999e-06,
+      "elapsed_s": 323.2
+    },
+    {
+      "step": 20,
+      "of": 39,
+      "chosen_win": 0.3875,
+      "pref_loss": 2.812,
+      "margin_win": 0.0,
+      "lr": 7.916666666666667e-06,
+      "elapsed_s": 425.6
+    },
+    {
+      "step": 25,
+      "of": 39,
+      "chosen_win": 0.425,
+      "pref_loss": 1.8916,
+      "margin_win": 0.0,
+      "lr": 5.833333333333334e-06,
+      "elapsed_s": 528.5
+    },
+    {
+      "step": 30,
+      "of": 39,
+      "chosen_win": 0.5875,
+      "pref_loss": 3.0486,
+      "margin_win": 0.0,
+      "lr": 3.75e-06,
+      "elapsed_s": 630.5
+    },
+    {
+      "step": 35,
+      "of": 39,
+      "chosen_win": 0.5687,
+      "pref_loss": 0.6566,
+      "margin_win": 0.0,
+      "lr": 1.6666666666666667e-06,
+      "elapsed_s": 729.0
+    },
+    {
+      "step": 39,
+      "of": 39,
+      "chosen_win": 0.3182,
+      "final": true
+    }
+  ],
+  "config": {
+    "lora_r": 256,
+    "lora_alpha": 128,
+    "lora_dropout": 0.0,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "gate_proj",
+      "up_proj",
+      "down_proj"
+    ],
+    "learning_rate": 1.5e-05,
+    "warmup_ratio": 0.1,
+    "num_epochs": 1,
+    "effective_batch": 16,
+    "per_device_batch": 2,
+    "max_seq_length": 6144,
+    "optimizer": "adamw_torch",
+    "weight_decay": 0.01,
+    "max_grad_norm": 2.5,
+    "seed": 3407,
+    "clip_epsilon_logits": 2.0,
+    "lambda_mse": 0.4,
+    "lambda_mse_target": 0.05,
+    "tau_mse_target": 0.5,
+    "early_stopping_chosen_win": 0.85,
+    "early_stop_min_progress": 0.2,
+    "log_every_steps": 5,
+    "padding_equivalence_tolerance": 0.05
+  }
+}

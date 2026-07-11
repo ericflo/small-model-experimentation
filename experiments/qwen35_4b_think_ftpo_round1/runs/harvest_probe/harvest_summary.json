@@ -1,0 +1,139 @@
+{
+  "prompts": 80,
+  "slices": 1,
+  "groups_with_node": 22,
+  "census_group_rate": 0.275,
+  "mixed_outcome_rate": 0.5,
+  "mined_rows_estimate": 30,
+  "chosen_per_row_hist": {
+    "1": 29,
+    "2": 1
+  },
+  "p0_gate": [
+    0.15,
+    0.3
+  ],
+  "p0_pass": true,
+  "wall_s": 780.8247058391571,
+  "sampling": {
+    "temperature": 0.6,
+    "top_p": 0.95,
+    "top_k": 20,
+    "n": 16,
+    "think_budget": 1024
+  },
+  "band_cells_used": [
+    {
+      "source": "code",
+      "family": "listxform",
+      "level": 2,
+      "n": 12,
+      "success": 0.16666666666666666,
+      "in_band": true
+    },
+    {
+      "source": "gym",
+      "family": "caravan",
+      "level": 3,
+      "n": 12,
+      "success": 0.16666666666666666,
+      "in_band": true
+    },
+    {
+      "source": "gym",
+      "family": "ferrier",
+      "level": 3,
+      "n": 12,
+      "success": 0.5833333333333334,
+      "in_band": true
+    },
+    {
+      "source": "gym",
+      "family": "foundry_ledger",
+      "level": 2,
+      "n": 12,
+      "success": 0.3333333333333333,
+      "in_band": true
+    },
+    {
+      "source": "gym",
+      "family": "gatepost",
+      "level": 2,
+      "n": 12,
+      "success": 0.75,
+      "in_band": true
+    },
+    {
+      "source": "gym",
+      "family": "gatepost",
+      "level": 3,
+      "n": 12,
+      "success": 0.8333333333333334,
+      "in_band": true
+    },
+    {
+      "source": "gym",
+      "family": "glyphgate",
+      "level": 1,
+      "n": 12,
+      "success": 0.25,
+      "in_band": true
+    },
+    {
+      "source": "gym",
+      "family": "kilnrite",
+      "level": 2,
+      "n": 12,
+      "success": 0.75,
+      "in_band": true
+    },
+    {
+      "source": "gym",
+      "family": "kilnrite",
+      "level": 3,
+      "n": 12,
+      "success": 0.5,
+      "in_band": true
+    },
+    {
+      "source": "gym",
+      "family": "loomfix",
+      "level": 1,
+      "n": 12,
+      "success": 0.5,
+      "in_band": true
+    },
+    {
+      "source": "gym",
+      "family": "loomfix",
+      "level": 2,
+      "n": 12,
+      "success": 0.5,
+      "in_band": true
+    },
+    {
+      "source": "gym",
+      "family": "loomfix",
+      "level": 3,
+      "n": 12,
+      "success": 0.3333333333333333,
+      "in_band": true
+    },
+    {
+      "source": "gym",
+      "family": "runeward",
+      "level": 2,
+      "n": 12,
+      "success": 0.6666666666666666,
+      "in_band": true
+    },
+    {
+      "source": "gym",
+      "family": "runeward",
+      "level": 3,
+      "n": 12,
+      "success": 0.16666666666666666,
+      "in_band": true
+    }
+  ]
+}

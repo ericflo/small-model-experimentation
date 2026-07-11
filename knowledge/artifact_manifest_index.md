@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 177
-- Manifest files: 479
+- Experiments with manifests: 178
+- Manifest files: 480
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 63 |
 | `run-data` | 101 |
-| `standard-artifact` | 50 |
+| `standard-artifact` | 51 |
 
 ## Manifests
 
@@ -210,6 +210,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_structure_or_values` | `standard-artifact` | [manifest](../experiments/qwen35_4b_structure_or_values/reports/artifact_manifest.yaml) |
 | `qwen35_4b_structure_search_scaling` | `standard-artifact` | [manifest](../experiments/qwen35_4b_structure_search_scaling/reports/artifact_manifest.yaml) |
 | `qwen35_4b_substrate_coverage_ladder` | `dataset` | [manifest](../experiments/qwen35_4b_substrate_coverage_ladder/data/dataset_manifest.json) |
+| `qwen35_4b_think_ftpo_round1` | `standard-artifact` | [manifest](../experiments/qwen35_4b_think_ftpo_round1/reports/artifact_manifest.yaml) |
 | `qwen35_4b_thinking_budget_controller` | `standard-artifact` | [manifest](../experiments/qwen35_4b_thinking_budget_controller/reports/artifact_manifest.yaml) |
 | `qwen35_4b_thinking_budget_scaling` | `standard-artifact` | [manifest](../experiments/qwen35_4b_thinking_budget_scaling/reports/artifact_manifest.yaml) |
 | `qwen35_4b_thinking_content_vs_compute` | `standard-artifact` | [manifest](../experiments/qwen35_4b_thinking_content_vs_compute/reports/artifact_manifest.yaml) |

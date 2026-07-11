@@ -2,14 +2,14 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 51
+- Claims: 52
 
 ## Status Counts
 
 | Status | Claims |
 | --- | ---: |
 | Confirmed | 7 |
-| Negative | 2 |
+| Negative | 3 |
 | Open | 2 |
 | Promising | 40 |
 
@@ -18,18 +18,18 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | Program | Claims |
 | --- | ---: |
 | `active_evidence_acquisition` | 1 |
-| `agentic_breadth_installation` | 2 |
+| `agentic_breadth_installation` | 3 |
 | `algorithmic_memory_and_retrieval` | 1 |
 | `benchmark_generalization` | 12 |
 | `collective_experimentation_infrastructure` | 2 |
 | `evidence_conditioned_selection` | 9 |
 | `interpretability_and_diagnostics` | 8 |
 | `operator_and_skill_inventories` | 1 |
-| `posttraining_and_adaptation` | 25 |
+| `posttraining_and_adaptation` | 26 |
 | `process_control_and_tool_use` | 3 |
 | `reliability_and_safety` | 5 |
 | `structured_execution_and_compilers` | 29 |
-| `test_time_reasoning_budget` | 6 |
+| `test_time_reasoning_budget` | 7 |
 
 ## C1: Structured intermediates improve small-model reliability
 
@@ -1697,3 +1697,28 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - Do not generalize this result to all answer-conditioned scoring; it tests answer-only potential after mostly force-closed 512-token thoughts on fresh procedural atoms.
 - Do not increase N or tune thresholds on these results. At 99.37% cap contact, more sampling mostly multiplies unfinished traces.
 - Do not claim an SFT result: the gate correctly stopped before harvest, selection, or training.
+
+## C52: Single-position preference training (FTPO) on the think channel REQUIRES the rejected token to be a confident distributional outlier: applied to near-parity outcome-conditioned pivot points it installs nothing and mildly degrades think-flow, with damage reproduced exactly by a shuffled-label control -- and the loop pathology FTPO was published on is ABSENT (~0.1%) at deployed budgets
+
+- Status: `Negative`
+- Programs: `agentic_breadth_installation`, `posttraining_and_adaptation`, `test_time_reasoning_budget`
+- Summary: Experiment qwen35_4b_think_ftpo_round1. Census: the published fingerprint loop detector flags 1/1200 greedy base gym atoms at think@1024 (0.08%), 0/786 episode turns, 0.2-0.4% on fresh 500-prompt evals -- the corpus's exact-loop pathology (81/144 at think@32,768) does not exist two orders of magnitude below its regime, killing the loop-repair variant of FTPO at deployed budgets before any GPU spend. Pivot variant: n=16 verifier-scored think rollouts per learnable-band task (base greedy success in (0.1,0.9)), prefix-tree divergence mining (>=2/>=2 rollouts per sibling, success gap >=0.5), 879-row pool -> 615 rows, published FTPO objective (eps=2.0 margin, two-tier logit tether 0.4/0.05 tau 0.5), LoRA r=256, merged composite + C49 on-vs-off gate. RESULT (greedy, held-out seeds, N=500/arm/budget): P1 mechanism FAIL -- success -0.039 (think@1024) / -0.076 (think@2048) vs a +0.05 preregistered bar; natural-close HALVES at 2048 (0.167->0.076); answer-limit contacts +6pp; 12-family gym aggregate 0.517->0.484. The SHUFFLED-LABEL control (identical pipeline, permuted outcomes, matched 615 rows) degrades near-identically (-0.022/-0.055, natural-close 0.076): the damage is generic to the training regime, not the steering signal. Guards: C29-style collapse ABSENT (code substrate greedy 0.058->0.067, pass@8 0.108->0.100 -- the tether works); no-think channel CLEAN (0.367->0.408); loop rate unchanged. Menagerie correctly NOT run (mechanism-gate rule; zero benchmark seeds consumed). Mechanism read: published FTPO successes reject argmax-dominant attractors (loop initiators, lexical patterns) where demotion is a small local edit; pivot rows reject near-parity sampled tokens (initial chosen_win ~0.43), so the eps=2 margin objective must manufacture separations at ~600 scattered early-think positions -- pure think-flow collateral that permuted labels reproduce. UNDERDOSED caveat preregistered: 879-row pool << published 15-20k, so a weak positive signal beneath the collateral is not excluded; the sign and the control-equivalence are the finding.
+- Implication: C29 hardened one level down: preference training on the model's own samples damages even at single-position granularity unless the rejected token is a confident outlier (the attractor precondition). The two-tier logit tether DOES prevent C29-style sequence collapse -- the surviving harm channel is think-flow convergence (delayed closure, budget exhaustion). Loop-targeted FTPO belongs to the 16k+ regime where loops actually occur; deployed-budget think pathology is non-repetitive non-convergence (consistent with C50's truncation-cascade account).
+
+### Evidence
+
+- [`qwen35_4b_think_ftpo_round1`](../../experiments/qwen35_4b_think_ftpo_round1/reports/report.md)
+
+### Next Tests
+
+- Confident-wrong-turn filter: mine only pivot nodes where the failing branch's token is also the locally dominant continuation (restores the attractor precondition); dose-gate for the much lower yield
+- eps ablation (0.25-0.5): demote toward parity instead of manufacturing 2-logit margins
+- n=32 rollouts and/or gap=1.0-only nodes for cleaner Monte-Carlo labels at matched GPU
+- Long-context (16k+) loop-FTPO as its own experiment under the loop-control mandate (training-context cap vs 32k loop regime is the open transfer problem)
+
+### Avoid
+
+- Do not train single-position preferences against near-parity rejected tokens (initial chosen_win ~0.5): the margin objective's collateral exceeds the signal at sub-1k-row doses
+- Do not spend blackbox menagerie events before the whitebox mechanism gate passes
+- Do not assume repetition loops exist at deployed budgets: measure with the fingerprint census first (it is free on existing logs)
+- Do not left-pad (or trust right-padded batching without an equivalence gate) for exact-logit work on the hybrid GDN/Mamba architecture: measured 0.30-0.44 logit divergence; use batch-of-1

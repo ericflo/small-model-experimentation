@@ -918,6 +918,14 @@
    ],
    "caveat": "data/mbpp_train_library.jsonl contains 2026-01-02 (task data)"
   },
+  "qwen35_4b_think_ftpo_round1": {
+   "start": "2026-07-10",
+   "end": "2026-07-11",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_thinking_budget_controller": {
    "start": "2026-06-30",
    "end": "2026-06-30",

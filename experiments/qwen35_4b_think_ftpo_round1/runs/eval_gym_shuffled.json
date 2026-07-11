@@ -1,0 +1,25 @@
+{
+  "arm": "shuffled",
+  "model": "../../large_artifacts/qwen35_4b_think_ftpo_round1/merged/shuffled",
+  "per_family": {
+    "brinework": 0.4166666666666667,
+    "burrowmaze": 0.7142857142857143,
+    "caravan": 0.4166666666666667,
+    "ferrier": 0.7857142857142857,
+    "foundry_ledger": 0.4166666666666667,
+    "gatepost": 0.8571428571428571,
+    "glyphgate": 0.2857142857142857,
+    "kilnrite": 0.6428571428571429,
+    "loomfix": 0.2857142857142857,
+    "runeward": 0.6666666666666666,
+    "spindle": 0.6785714285714286,
+    "stallwright": 0.0
+  },
+  "aggregate_all": 0.513888888888889,
+  "aggregate_trained": 0.5071428571428571,
+  "aggregate_heldout": 0.5476190476190477,
+  "forced_close_rate_atoms": 0.9722222222222222,
+  "n_atoms": 144,
+  "n_episodes": 14,
+  "wall_s": 216.24292087554932
+}

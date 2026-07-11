@@ -3859,6 +3859,46 @@
   },
   {
     "file_counts": {
+      ".gz": 2,
+      ".json": 28,
+      ".md": 12,
+      ".py": 38,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_think_ftpo_round1",
+    "path": "experiments/qwen35_4b_think_ftpo_round1",
+    "primary_readme": "experiments/qwen35_4b_think_ftpo_round1/README.md",
+    "primary_report": "experiments/qwen35_4b_think_ftpo_round1/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation",
+      "posttraining_and_adaptation",
+      "structured_execution_and_compilers",
+      "test_time_reasoning_budget"
+    ],
+    "source_track": "new",
+    "summary": "cross-cutting `posttraining_and_adaptation` (preference-objective mechanics; C29 prior) and `test_time_reasoning_budget` (whose loop-control mandate this experiment's census phase informs). install capability that transfers to the blackbox menagerie instrument? Round 3 of the SFT recipe re-saturated (C50); the open frontier is whether a **different-mechanism recipe** moves the instrument where same-recipe iteration cannot. the truncation cascade \u2014 non-repetitive verbose non-convergence), C9 (thinking content is load-bearing), C29 (sequence-level DPO on own preference pairs COLLAPSED generation \u2014 the strongest in-corpus prior against preference training; FTPO's single-position, tether-constrained design is the published escape and this experiment adjudicates it), C44/C45 (serial-compute law), C48 (trained think-channel adapters can interfere outside their substrate \u2014 drives the format-transfer slice).",
+    "tags": [
+      "abi",
+      "lora",
+      "small-model"
+    ],
+    "title": "Think-block FTPO round 1: outcome-conditioned pivot steering as an agentic install recipe",
+    "top_level_dirs": [
+      ".ipynb_checkpoints",
+      "analysis",
+      "configs",
+      "data",
+      "reports",
+      "runs",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 83,
+    "total_size_bytes": 859591
+  },
+  {
+    "file_counts": {
       ".json": 2,
       ".jsonl": 2,
       ".md": 5,

@@ -1,0 +1,883 @@
+{
+  "census_existing_logs": {
+    "detector": "fingerprint, published thresholds (>=4 repeats, >=60 chars, period<=1024)",
+    "note": "Census over existing GREEDY base-model gym completions (think@1024 atoms; multi-turn episode turns). This is the empirical basis for descoping the v1 loop-repair arm at deployed budgets; loops dominate only at 16k+ per the verified-macro ladder.",
+    "sources": {
+      "eval_gym_base_atoms_greedy_think1024": {
+        "total": 1200,
+        "flagged": 1,
+        "rate": 0.0008333333333333334,
+        "mean_think_chars": 2864.8141666666666,
+        "examples": [
+          {
+            "id": "foundry_ledger-L2-s90001-0014",
+            "period": 21,
+            "repeats": 89,
+            "snippet": " Guild\"\n    - \"Torbek"
+          }
+        ]
+      },
+      "eval_gym_base_episode_turns_greedy": {
+        "total": 786,
+        "flagged": 0,
+        "rate": 0.0
+      },
+      "harvest_round1_atoms_temp0.8": {
+        "total": 160,
+        "flagged": 1,
+        "rate": 0.00625,
+        "mean_think_chars": 4709.08125,
+        "examples": [
+          {
+            "id": "burrowmaze-L2-s11001-0013",
+            "period": 35,
+            "repeats": 5,
+            "snippet": "            |\n                     "
+          }
+        ]
+      }
+    }
+  },
+  "harvest_extension_slices": {
+    "prompts": 800,
+    "slices": 7,
+    "groups_with_node": 196,
+    "census_group_rate": 0.245,
+    "mixed_outcome_rate": 0.4925,
+    "mined_rows_estimate": 237,
+    "chosen_per_row_hist": {
+      "1": 224,
+      "2": 12,
+      "3": 1
+    },
+    "p0_gate": [
+      0.15,
+      0.3
+    ],
+    "p0_pass": true,
+    "wall_s": 7958.538434505463,
+    "sampling": {
+      "temperature": 0.6,
+      "top_p": 0.95,
+      "top_k": 20,
+      "n": 16,
+      "think_budget": 1024
+    },
+    "band_cells_used": [
+      {
+        "source": "code",
+        "family": "listxform",
+        "level": 2,
+        "n": 12,
+        "success": 0.16666666666666666,
+        "in_band": true
+      },
+      {
+        "source": "gym",
+        "family": "caravan",
+        "level": 3,
+        "n": 12,
+        "success": 0.16666666666666666,
+        "in_band": true
+      },
+      {
+        "source": "gym",
+        "family": "ferrier",
+        "level": 3,
+        "n": 12,
+        "success": 0.5833333333333334,
+        "in_band": true
+      },
+      {
+        "source": "gym",
+        "family": "foundry_ledger",
+        "level": 2,
+        "n": 12,
+        "success": 0.3333333333333333,
+        "in_band": true
+      },
+      {
+        "source": "gym",
+        "family": "gatepost",
+        "level": 2,
+        "n": 12,
+        "success": 0.75,
+        "in_band": true
+      },
+      {
+        "source": "gym",
+        "family": "gatepost",
+        "level": 3,
+        "n": 12,
+        "success": 0.8333333333333334,
+        "in_band": true
+      },
+      {
+        "source": "gym",
+        "family": "glyphgate",
+        "level": 1,
+        "n": 12,
+        "success": 0.25,
+        "in_band": true
+      },
+      {
+        "source": "gym",
+        "family": "kilnrite",
+        "level": 2,
+        "n": 12,
+        "success": 0.75,
+        "in_band": true
+      },
+      {
+        "source": "gym",
+        "family": "kilnrite",
+        "level": 3,
+        "n": 12,
+        "success": 0.5,
+        "in_band": true
+      },
+      {
+        "source": "gym",
+        "family": "loomfix",
+        "level": 1,
+        "n": 12,
+        "success": 0.5,
+        "in_band": true
+      },
+      {
+        "source": "gym",
+        "family": "loomfix",
+        "level": 2,
+        "n": 12,
+        "success": 0.5,
+        "in_band": true
+      },
+      {
+        "source": "gym",
+        "family": "loomfix",
+        "level": 3,
+        "n": 12,
+        "success": 0.3333333333333333,
+        "in_band": true
+      },
+      {
+        "source": "gym",
+        "family": "runeward",
+        "level": 2,
+        "n": 12,
+        "success": 0.6666666666666666,
+        "in_band": true
+      },
+      {
+        "source": "gym",
+        "family": "runeward",
+        "level": 3,
+        "n": 12,
+        "success": 0.16666666666666666,
+        "in_band": true
+      }
+    ]
+  },
+  "build_rows_pivot": {
+    "arm": "pivot",
+    "counts": {
+      "groups": 2800,
+      "groups_with_node": 717,
+      "rows": 879,
+      "chosen_case_variant_dropped": 3,
+      "no_chosen_after_filters": 3,
+      "pool_rows": 879,
+      "rows_dropped_empty_chosen": 0,
+      "train_rows": 615
+    },
+    "train_rows": 615,
+    "pool_rows": 879,
+    "min_train_rows_gate": 600,
+    "gate_pass": true,
+    "chosen_per_row_hist": {
+      "1": 582,
+      "2": 28,
+      "3": 5
+    },
+    "top_rejected_surfaces": [
+      [
+        "specific",
+        19
+      ],
+      [
+        "a",
+        18
+      ],
+      [
+        "the",
+        16
+      ],
+      [
+        "and",
+        16
+      ],
+      [
+        "`",
+        15
+      ],
+      [
+        ".",
+        14
+      ],
+      [
+        "to",
+        13
+      ],
+      [
+        "\"",
+        13
+      ],
+      [
+        "examples",
+        13
+      ],
+      [
+        "",
+        12
+      ],
+      [
+        "state",
+        11
+      ],
+      [
+        "holds",
+        11
+      ],
+      [
+        "based",
+        10
+      ],
+      [
+        "whole",
+        10
+      ],
+      [
+        "has",
+        10
+      ]
+    ],
+    "median_context_tokens": 297
+  },
+  "build_rows_shuffled": {
+    "arm": "shuffled",
+    "counts": {
+      "groups": 2800,
+      "groups_with_node": 749,
+      "rows": 945,
+      "chosen_case_variant_dropped": 2,
+      "no_chosen_after_filters": 2,
+      "pool_rows": 945,
+      "rows_dropped_empty_chosen": 0,
+      "train_rows": 661
+    },
+    "train_rows": 661,
+    "pool_rows": 945,
+    "min_train_rows_gate": 600,
+    "gate_pass": true,
+    "chosen_per_row_hist": {
+      "1": 633,
+      "2": 22,
+      "3": 6
+    },
+    "top_rejected_surfaces": [
+      [
+        "the",
+        20
+      ],
+      [
+        "a",
+        18
+      ],
+      [
+        "`",
+        17
+      ],
+      [
+        "and",
+        17
+      ],
+      [
+        ".",
+        14
+      ],
+      [
+        "",
+        14
+      ],
+      [
+        "has",
+        14
+      ],
+      [
+        "examples",
+        14
+      ],
+      [
+        "to",
+        13
+      ],
+      [
+        "holds",
+        13
+      ],
+      [
+        "\"",
+        13
+      ],
+      [
+        "specific",
+        13
+      ],
+      [
+        "based",
+        11
+      ],
+      [
+        "input",
+        11
+      ],
+      [
+        "determine",
+        10
+      ]
+    ],
+    "median_context_tokens": 296
+  },
+  "whitebox": {
+    "base_main": {
+      "arm": "base",
+      "stage": "main",
+      "model": "base",
+      "think@1024": {
+        "n": 490,
+        "success": 0.49795918367346936,
+        "mean_score": 0.49795918367346936,
+        "loop_rate": 0.0020408163265306124,
+        "unresolved_rate": 0.9836734693877551,
+        "answer_limit_rate": 0.44285714285714284,
+        "natural_close_rate": 0.014285714285714285,
+        "mean_think_tokens": 1020.8938775510204
+      },
+      "think@1024_per_source": {
+        "gym": {
+          "n": 455,
+          "success": 0.5142857142857142,
+          "mean_score": 0.5142857142857142,
+          "loop_rate": 0.002197802197802198,
+          "unresolved_rate": 0.9824175824175824,
+          "answer_limit_rate": 0.43956043956043955,
+          "natural_close_rate": 0.015384615384615385,
+          "mean_think_tokens": 1020.6549450549451
+        },
+        "code": {
+          "n": 35,
+          "success": 0.2857142857142857,
+          "mean_score": 0.2857142857142857,
+          "loop_rate": 0.0,
+          "unresolved_rate": 1.0,
+          "answer_limit_rate": 0.4857142857142857,
+          "natural_close_rate": 0.0,
+          "mean_think_tokens": 1024.0
+        }
+      },
+      "think@2048": {
+        "n": 490,
+        "success": 0.5408163265306123,
+        "mean_score": 0.5408163265306123,
+        "loop_rate": 0.004081632653061225,
+        "unresolved_rate": 0.8285714285714286,
+        "answer_limit_rate": 0.4204081632653061,
+        "natural_close_rate": 0.1673469387755102,
+        "mean_think_tokens": 1954.7571428571428
+      },
+      "think@2048_per_source": {
+        "gym": {
+          "n": 455,
+          "success": 0.5560439560439561,
+          "mean_score": 0.5560439560439561,
+          "loop_rate": 0.004395604395604396,
+          "unresolved_rate": 0.8197802197802198,
+          "answer_limit_rate": 0.4065934065934066,
+          "natural_close_rate": 0.17582417582417584,
+          "mean_think_tokens": 1950.2087912087911
+        },
+        "code": {
+          "n": 35,
+          "success": 0.34285714285714286,
+          "mean_score": 0.34285714285714286,
+          "loop_rate": 0.0,
+          "unresolved_rate": 0.9428571428571428,
+          "answer_limit_rate": 0.6,
+          "natural_close_rate": 0.05714285714285714,
+          "mean_think_tokens": 2013.8857142857144
+        }
+      },
+      "wall_s": 848.3690950870514
+    },
+    "base_formats": {
+      "arm": "base",
+      "stage": "formats",
+      "model": "base",
+      "variant1": {
+        "n": 140,
+        "success": 0.014285714285714285,
+        "mean_score": 0.014285714285714285,
+        "loop_rate": 0.0,
+        "unresolved_rate": 1.0,
+        "answer_limit_rate": 0.5071428571428571,
+        "natural_close_rate": 0.0,
+        "mean_think_tokens": 1024.0
+      },
+      "variant2": {
+        "n": 140,
+        "success": 0.45714285714285713,
+        "mean_score": 0.45714285714285713,
+        "loop_rate": 0.0,
+        "unresolved_rate": 0.9857142857142858,
+        "answer_limit_rate": 0.5214285714285715,
+        "natural_close_rate": 0.014285714285714285,
+        "mean_think_tokens": 1020.7
+      },
+      "wall_s": 201.48683834075928
+    },
+    "base_coverage": {
+      "arm": "base",
+      "stage": "coverage",
+      "model": "base",
+      "coverage_at_8": 0.7295918367346939,
+      "label": "NON-DEPLOYABLE oracle ceiling (best-of-8, no selector)",
+      "wall_s": 2006.4867465496063
+    },
+    "base_collapse": {
+      "arm": "base",
+      "stage": "collapse",
+      "model": "base",
+      "greedy": {
+        "n": 120,
+        "success": 0.058333333333333334,
+        "mean_score": 0.058333333333333334,
+        "loop_rate": 0.0,
+        "unresolved_rate": 1.0,
+        "answer_limit_rate": 0.7,
+        "natural_close_rate": 0.0,
+        "mean_think_tokens": 1024.0
+      },
+      "pass@8": 0.10833333333333334,
+      "wall_s": 867.8146548271179
+    },
+    "base_nothink": {
+      "arm": "base",
+      "stage": "nothink",
+      "model": "base",
+      "nothink": {
+        "n": 120,
+        "success": 0.36666666666666664,
+        "mean_score": 0.36666666666666664,
+        "loop_rate": 0.0,
+        "unresolved_rate": 0.0,
+        "answer_limit_rate": 0.625,
+        "natural_close_rate": 1.0,
+        "mean_think_tokens": 0.0
+      },
+      "wall_s": 11.793559074401855
+    },
+    "pivot_main": {
+      "arm": "pivot",
+      "stage": "main",
+      "model": "../../large_artifacts/qwen35_4b_think_ftpo_round1/merged/pivot",
+      "think@1024": {
+        "n": 490,
+        "success": 0.45918367346938777,
+        "mean_score": 0.45918367346938777,
+        "loop_rate": 0.0020408163265306124,
+        "unresolved_rate": 0.9959183673469387,
+        "answer_limit_rate": 0.47551020408163264,
+        "natural_close_rate": 0.0020408163265306124,
+        "mean_think_tokens": 1023.5979591836734
+      },
+      "think@1024_per_source": {
+        "gym": {
+          "n": 455,
+          "success": 0.4747252747252747,
+          "mean_score": 0.4747252747252747,
+          "loop_rate": 0.002197802197802198,
+          "unresolved_rate": 0.9956043956043956,
+          "answer_limit_rate": 0.4703296703296703,
+          "natural_close_rate": 0.002197802197802198,
+          "mean_think_tokens": 1023.567032967033
+        },
+        "code": {
+          "n": 35,
+          "success": 0.2571428571428571,
+          "mean_score": 0.2571428571428571,
+          "loop_rate": 0.0,
+          "unresolved_rate": 1.0,
+          "answer_limit_rate": 0.5428571428571428,
+          "natural_close_rate": 0.0,
+          "mean_think_tokens": 1024.0
+        }
+      },
+      "think@2048": {
+        "n": 490,
+        "success": 0.46530612244897956,
+        "mean_score": 0.46530612244897956,
+        "loop_rate": 0.0020408163265306124,
+        "unresolved_rate": 0.9224489795918367,
+        "answer_limit_rate": 0.4897959183673469,
+        "natural_close_rate": 0.07551020408163266,
+        "mean_think_tokens": 2013.5816326530612
+      },
+      "think@2048_per_source": {
+        "gym": {
+          "n": 455,
+          "success": 0.47912087912087914,
+          "mean_score": 0.47912087912087914,
+          "loop_rate": 0.002197802197802198,
+          "unresolved_rate": 0.9164835164835164,
+          "answer_limit_rate": 0.47912087912087914,
+          "natural_close_rate": 0.08131868131868132,
+          "mean_think_tokens": 2010.934065934066
+        },
+        "code": {
+          "n": 35,
+          "success": 0.2857142857142857,
+          "mean_score": 0.2857142857142857,
+          "loop_rate": 0.0,
+          "unresolved_rate": 1.0,
+          "answer_limit_rate": 0.6285714285714286,
+          "natural_close_rate": 0.0,
+          "mean_think_tokens": 2048.0
+        }
+      },
+      "wall_s": 858.7652988433838
+    },
+    "pivot_formats": {
+      "arm": "pivot",
+      "stage": "formats",
+      "model": "../../large_artifacts/qwen35_4b_think_ftpo_round1/merged/pivot",
+      "variant1": {
+        "n": 140,
+        "success": 0.007142857142857143,
+        "mean_score": 0.007142857142857143,
+        "loop_rate": 0.0,
+        "unresolved_rate": 1.0,
+        "answer_limit_rate": 0.5785714285714286,
+        "natural_close_rate": 0.0,
+        "mean_think_tokens": 1024.0
+      },
+      "variant2": {
+        "n": 140,
+        "success": 0.39285714285714285,
+        "mean_score": 0.39285714285714285,
+        "loop_rate": 0.0,
+        "unresolved_rate": 1.0,
+        "answer_limit_rate": 0.5642857142857143,
+        "natural_close_rate": 0.0,
+        "mean_think_tokens": 1024.0
+      },
+      "wall_s": 201.5766885280609
+    },
+    "pivot_collapse": {
+      "arm": "pivot",
+      "stage": "collapse",
+      "model": "../../large_artifacts/qwen35_4b_think_ftpo_round1/merged/pivot",
+      "greedy": {
+        "n": 120,
+        "success": 0.06666666666666667,
+        "mean_score": 0.06666666666666667,
+        "loop_rate": 0.008333333333333333,
+        "unresolved_rate": 0.9916666666666667,
+        "answer_limit_rate": 0.7083333333333334,
+        "natural_close_rate": 0.0,
+        "mean_think_tokens": 1024.0
+      },
+      "pass@8": 0.1,
+      "wall_s": 838.4791285991669
+    },
+    "pivot_nothink": {
+      "arm": "pivot",
+      "stage": "nothink",
+      "model": "../../large_artifacts/qwen35_4b_think_ftpo_round1/merged/pivot",
+      "nothink": {
+        "n": 120,
+        "success": 0.4083333333333333,
+        "mean_score": 0.4083333333333333,
+        "loop_rate": 0.0,
+        "unresolved_rate": 0.0,
+        "answer_limit_rate": 0.5916666666666667,
+        "natural_close_rate": 1.0,
+        "mean_think_tokens": 0.0
+      },
+      "wall_s": 11.63565969467163
+    },
+    "shuffled_main": {
+      "arm": "shuffled",
+      "stage": "main",
+      "model": "../../large_artifacts/qwen35_4b_think_ftpo_round1/merged/shuffled",
+      "think@1024": {
+        "n": 490,
+        "success": 0.47551020408163264,
+        "mean_score": 0.47551020408163264,
+        "loop_rate": 0.0020408163265306124,
+        "unresolved_rate": 0.9959183673469387,
+        "answer_limit_rate": 0.47959183673469385,
+        "natural_close_rate": 0.0020408163265306124,
+        "mean_think_tokens": 1023.9795918367347
+      },
+      "think@1024_per_source": {
+        "gym": {
+          "n": 455,
+          "success": 0.49230769230769234,
+          "mean_score": 0.49230769230769234,
+          "loop_rate": 0.002197802197802198,
+          "unresolved_rate": 0.9956043956043956,
+          "answer_limit_rate": 0.4725274725274725,
+          "natural_close_rate": 0.002197802197802198,
+          "mean_think_tokens": 1023.978021978022
+        },
+        "code": {
+          "n": 35,
+          "success": 0.2571428571428571,
+          "mean_score": 0.2571428571428571,
+          "loop_rate": 0.0,
+          "unresolved_rate": 1.0,
+          "answer_limit_rate": 0.5714285714285714,
+          "natural_close_rate": 0.0,
+          "mean_think_tokens": 1024.0
+        }
+      },
+      "think@2048": {
+        "n": 490,
+        "success": 0.4857142857142857,
+        "mean_score": 0.4857142857142857,
+        "loop_rate": 0.00816326530612245,
+        "unresolved_rate": 0.9163265306122449,
+        "answer_limit_rate": 0.48367346938775513,
+        "natural_close_rate": 0.07551020408163266,
+        "mean_think_tokens": 2013.0795918367346
+      },
+      "think@2048_per_source": {
+        "gym": {
+          "n": 455,
+          "success": 0.4967032967032967,
+          "mean_score": 0.4967032967032967,
+          "loop_rate": 0.006593406593406593,
+          "unresolved_rate": 0.9120879120879121,
+          "answer_limit_rate": 0.4747252747252747,
+          "natural_close_rate": 0.08131868131868132,
+          "mean_think_tokens": 2010.3934065934066
+        },
+        "code": {
+          "n": 35,
+          "success": 0.34285714285714286,
+          "mean_score": 0.34285714285714286,
+          "loop_rate": 0.02857142857142857,
+          "unresolved_rate": 0.9714285714285714,
+          "answer_limit_rate": 0.6,
+          "natural_close_rate": 0.0,
+          "mean_think_tokens": 2048.0
+        }
+      },
+      "wall_s": 857.4539268016815
+    },
+    "shuffled_collapse": {
+      "arm": "shuffled",
+      "stage": "collapse",
+      "model": "../../large_artifacts/qwen35_4b_think_ftpo_round1/merged/shuffled",
+      "greedy": {
+        "n": 120,
+        "success": 0.058333333333333334,
+        "mean_score": 0.058333333333333334,
+        "loop_rate": 0.016666666666666666,
+        "unresolved_rate": 0.9833333333333333,
+        "answer_limit_rate": 0.8333333333333334,
+        "natural_close_rate": 0.0,
+        "mean_think_tokens": 1024.0
+      },
+      "pass@8": 0.10833333333333334,
+      "wall_s": 849.3442122936249
+    }
+  },
+  "eval_gym": {
+    "base": {
+      "arm": "base",
+      "model": "base",
+      "per_family": {
+        "brinework": 0.5,
+        "burrowmaze": 0.7142857142857143,
+        "caravan": 0.5,
+        "ferrier": 0.7857142857142857,
+        "foundry_ledger": 0.4166666666666667,
+        "gatepost": 0.8571428571428571,
+        "glyphgate": 0.14285714285714285,
+        "kilnrite": 0.7000000000000001,
+        "loomfix": 0.21428571428571427,
+        "runeward": 0.75,
+        "spindle": 0.625,
+        "stallwright": 0.0
+      },
+      "aggregate_all": 0.5171626984126984,
+      "aggregate_trained": 0.508095238095238,
+      "aggregate_heldout": 0.5625,
+      "forced_close_rate_atoms": 0.9166666666666666,
+      "n_atoms": 144,
+      "n_episodes": 14,
+      "wall_s": 203.39925861358643
+    },
+    "pivot": {
+      "arm": "pivot",
+      "model": "../../large_artifacts/qwen35_4b_think_ftpo_round1/merged/pivot",
+      "per_family": {
+        "brinework": 0.4166666666666667,
+        "burrowmaze": 0.7142857142857143,
+        "caravan": 0.5833333333333334,
+        "ferrier": 0.9285714285714286,
+        "foundry_ledger": 0.4166666666666667,
+        "gatepost": 0.7857142857142857,
+        "glyphgate": 0.14285714285714285,
+        "kilnrite": 0.6714285714285715,
+        "loomfix": 0.07142857142857142,
+        "runeward": 0.5833333333333334,
+        "spindle": 0.5,
+        "stallwright": 0.0
+      },
+      "aggregate_all": 0.4845238095238095,
+      "aggregate_trained": 0.4897619047619048,
+      "aggregate_heldout": 0.45833333333333337,
+      "forced_close_rate_atoms": 0.9652777777777778,
+      "n_atoms": 144,
+      "n_episodes": 14,
+      "wall_s": 212.71113443374634
+    },
+    "shuffled": {
+      "arm": "shuffled",
+      "model": "../../large_artifacts/qwen35_4b_think_ftpo_round1/merged/shuffled",
+      "per_family": {
+        "brinework": 0.4166666666666667,
+        "burrowmaze": 0.7142857142857143,
+        "caravan": 0.4166666666666667,
+        "ferrier": 0.7857142857142857,
+        "foundry_ledger": 0.4166666666666667,
+        "gatepost": 0.8571428571428571,
+        "glyphgate": 0.2857142857142857,
+        "kilnrite": 0.6428571428571429,
+        "loomfix": 0.2857142857142857,
+        "runeward": 0.6666666666666666,
+        "spindle": 0.6785714285714286,
+        "stallwright": 0.0
+      },
+      "aggregate_all": 0.513888888888889,
+      "aggregate_trained": 0.5071428571428571,
+      "aggregate_heldout": 0.5476190476190477,
+      "forced_close_rate_atoms": 0.9722222222222222,
+      "n_atoms": 144,
+      "n_episodes": 14,
+      "wall_s": 216.24292087554932
+    }
+  },
+  "gates": {
+    "pivot_c49": "PASS (0/8 identical)",
+    "shuffled_c49": "see eval_chain.log"
+  },
+  "headline_table": [
+    {
+      "arm": "base",
+      "budget": "think@1024",
+      "success": 0.498,
+      "natural_close": 0.0143,
+      "loop_rate": 0.002,
+      "unresolved": 0.9837,
+      "answer_limit": 0.4429
+    },
+    {
+      "arm": "base",
+      "budget": "think@2048",
+      "success": 0.5408,
+      "natural_close": 0.1673,
+      "loop_rate": 0.0041,
+      "unresolved": 0.8286,
+      "answer_limit": 0.4204
+    },
+    {
+      "arm": "pivot",
+      "budget": "think@1024",
+      "success": 0.4592,
+      "natural_close": 0.002,
+      "loop_rate": 0.002,
+      "unresolved": 0.9959,
+      "answer_limit": 0.4755,
+      "success_delta_vs_base": -0.0388
+    },
+    {
+      "arm": "pivot",
+      "budget": "think@2048",
+      "success": 0.4653,
+      "natural_close": 0.0755,
+      "loop_rate": 0.002,
+      "unresolved": 0.9224,
+      "answer_limit": 0.4898,
+      "success_delta_vs_base": -0.0755
+    },
+    {
+      "arm": "shuffled",
+      "budget": "think@1024",
+      "success": 0.4755,
+      "natural_close": 0.002,
+      "loop_rate": 0.002,
+      "unresolved": 0.9959,
+      "answer_limit": 0.4796,
+      "success_delta_vs_base": -0.0224
+    },
+    {
+      "arm": "shuffled",
+      "budget": "think@2048",
+      "success": 0.4857,
+      "natural_close": 0.0755,
+      "loop_rate": 0.0082,
+      "unresolved": 0.9163,
+      "answer_limit": 0.4837,
+      "success_delta_vs_base": -0.0551
+    }
+  ],
+  "verdicts": {
+    "P0_census": {
+      "eligible_rate": null,
+      "note": "combined across main+extension; see report"
+    },
+    "P1_mechanism": {
+      "bar": "+0.05 absolute greedy success on held-out band tasks",
+      "measured_1024": -0.0388,
+      "measured_2048": -0.0755,
+      "verdict": "FAIL"
+    },
+    "control_read": {
+      "shuffled_delta_1024": -0.0224,
+      "shuffled_delta_2048": -0.0551,
+      "note": "shuffled ~= pivot degradation -> damage is generic to the training regime, not the outcome-conditioned signal"
+    },
+    "collapse_guard": {
+      "greedy_rel_change": 0.1429,
+      "pass8_rel_change": -0.0769,
+      "flag_damaging": false
+    },
+    "nothink_guard": {
+      "base": 0.3667,
+      "pivot": 0.4083,
+      "flag": false
+    },
+    "P3_gym": {
+      "base_aggregate": 0.5172,
+      "pivot_aggregate": 0.4845,
+      "shuffled_aggregate": 0.5139,
+      "guard_fail": true
+    },
+    "P4_menagerie": {
+      "verdict": "NOT RUN \u2014 preregistered rule: mechanism prediction (P1) failed, so the round is a training-recipe failure with no capability read; blackbox spend cancelled"
+    }
+  }
+}

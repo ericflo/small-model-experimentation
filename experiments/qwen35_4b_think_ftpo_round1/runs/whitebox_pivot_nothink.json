@@ -1,0 +1,16 @@
+{
+  "arm": "pivot",
+  "stage": "nothink",
+  "model": "../../large_artifacts/qwen35_4b_think_ftpo_round1/merged/pivot",
+  "nothink": {
+    "n": 120,
+    "success": 0.4083333333333333,
+    "mean_score": 0.4083333333333333,
+    "loop_rate": 0.0,
+    "unresolved_rate": 0.0,
+    "answer_limit_rate": 0.5916666666666667,
+    "natural_close_rate": 1.0,
+    "mean_think_tokens": 0.0
+  },
+  "wall_s": 11.63565969467163
+}

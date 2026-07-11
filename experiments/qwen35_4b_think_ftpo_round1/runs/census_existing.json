@@ -1,0 +1,39 @@
+{
+  "detector": "fingerprint, published thresholds (>=4 repeats, >=60 chars, period<=1024)",
+  "note": "Census over existing GREEDY base-model gym completions (think@1024 atoms; multi-turn episode turns). This is the empirical basis for descoping the v1 loop-repair arm at deployed budgets; loops dominate only at 16k+ per the verified-macro ladder.",
+  "sources": {
+    "eval_gym_base_atoms_greedy_think1024": {
+      "total": 1200,
+      "flagged": 1,
+      "rate": 0.0008333333333333334,
+      "mean_think_chars": 2864.8141666666666,
+      "examples": [
+        {
+          "id": "foundry_ledger-L2-s90001-0014",
+          "period": 21,
+          "repeats": 89,
+          "snippet": " Guild\"\n    - \"Torbek"
+        }
+      ]
+    },
+    "eval_gym_base_episode_turns_greedy": {
+      "total": 786,
+      "flagged": 0,
+      "rate": 0.0
+    },
+    "harvest_round1_atoms_temp0.8": {
+      "total": 160,
+      "flagged": 1,
+      "rate": 0.00625,
+      "mean_think_chars": 4709.08125,
+      "examples": [
+        {
+          "id": "burrowmaze-L2-s11001-0013",
+          "period": 35,
+          "repeats": 5,
+          "snippet": "            |\n                     "
+        }
+      ]
+    }
+  }
+}

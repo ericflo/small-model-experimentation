@@ -69,3 +69,9 @@
 - Branch a new program if a thinking-budget *controller* becomes a rich line of its own.
 - Stop answer-only trace-potential scaling when the thought pool is cap-bound; changing N does not repair
   an injected close/commit seam.
+
+- Experiment: long-context loop-FTPO (the loop-control mandate's intervention
+  branch): loops are ~0.1% at deployed budgets but 56–83% of cap contacts at
+  32k–61k (C52 census + verified-macro ladder). Mine loop-initiation rows at
+  16k+ budgets, train with contexts ≤6k (short-to-long transfer is the open
+  question), preregister the symmetric-arms rule from the model playbook.

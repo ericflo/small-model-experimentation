@@ -1,0 +1,85 @@
+{
+  "arm": "pivot",
+  "counts": {
+    "groups": 2800,
+    "groups_with_node": 717,
+    "rows": 879,
+    "chosen_case_variant_dropped": 3,
+    "no_chosen_after_filters": 3,
+    "pool_rows": 879,
+    "rows_dropped_empty_chosen": 0,
+    "train_rows": 615
+  },
+  "train_rows": 615,
+  "pool_rows": 879,
+  "min_train_rows_gate": 600,
+  "gate_pass": true,
+  "chosen_per_row_hist": {
+    "1": 582,
+    "2": 28,
+    "3": 5
+  },
+  "top_rejected_surfaces": [
+    [
+      "specific",
+      19
+    ],
+    [
+      "a",
+      18
+    ],
+    [
+      "the",
+      16
+    ],
+    [
+      "and",
+      16
+    ],
+    [
+      "`",
+      15
+    ],
+    [
+      ".",
+      14
+    ],
+    [
+      "to",
+      13
+    ],
+    [
+      "\"",
+      13
+    ],
+    [
+      "examples",
+      13
+    ],
+    [
+      "",
+      12
+    ],
+    [
+      "state",
+      11
+    ],
+    [
+      "holds",
+      11
+    ],
+    [
+      "based",
+      10
+    ],
+    [
+      "whole",
+      10
+    ],
+    [
+      "has",
+      10
+    ]
+  ],
+  "median_context_tokens": 297
+}

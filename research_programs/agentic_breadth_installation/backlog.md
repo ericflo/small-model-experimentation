@@ -27,3 +27,8 @@ Two consecutive rounds with menagerie quick delta inside the noise floor AND
 flat gym-internal held-out-family transfer would establish "locality survives
 breadth" — codify the negative claim, then pivot the program to targeted
 variants (think-economy-only mixture, abstention-only install) or retire.
+
+- Experiment: think-FTPO round 2 (contingent) — confident-wrong-turn filter
+  (rejected token must be locally dominant at its context: logit-readout
+  filter), ε ablation 0.25–0.5, n=32/gap=1.0 labels; mechanism gate before any
+  menagerie exposure, per C52.

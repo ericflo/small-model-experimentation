@@ -1,0 +1,112 @@
+# Preregistered constants for think-block FTPO round 1 (v2, pivot-primary).
+# See reports/preregistration.md — changes require a numbered amendment there.
+# scripts/run.py --smoke asserts these values against its frozen literals.
+
+engine:                        # compared-arm eval geometry (frozen)
+  max_model_len: 12288
+  gpu_memory_utilization: 0.90
+  max_num_seqs: 64
+  max_num_batched_tokens: 16384
+
+engine_harvest:                # harvest-only throughput geometry (amendment 1)
+  max_model_len: 12288
+  gpu_memory_utilization: 0.90
+  max_num_seqs: 128
+  max_num_batched_tokens: 32768
+
+harvest_pivot:
+  slice_prompts: 400            # amendment 2; adaptive slices until pool projection met or gpu cap
+  max_harvest_hours: 5.0
+  target_pool_rows: 1200        # projected post-regularization pool target
+  gym_fraction: 0.6             # 10 TRAINED families only (no brinework/spindle)
+  gym_levels: [1, 2, 3]         # candidates; band calibration selects cells
+  code_depths: [2, 3, 4]
+  gym_seed_range: [72001, 72999]
+  code_seed_range: [73001, 73999]
+  temperature: 0.6
+  top_p: 0.95
+  top_k: 20
+  n: 16                          # amendment 2
+  think_budget: 1024            # quick-tier deployment budget
+  answer_max_tokens: 512
+  run_seed: 72500
+  band_low: 0.1
+  band_high: 0.9
+  band_items_per_cell: 12
+
+detector:                        # census + whitebox termination triple
+  min_repeats: 4
+  max_period: 1024
+  min_period: 1
+  min_total_repeated: 60
+  sample_len: 16
+  sample_interval: 128
+
+mining:
+  context_cap_tokens: 6144
+  pivot_min_depth: 2
+  pivot_min_branch_rollouts: 2
+  pivot_min_gap: 0.5
+  pivot_max_nodes_per_prompt: 3
+  census_gate_group_rate: 0.15   # P0 (amendment 1)
+  census_gate_mixed_rate: 0.30   # P0 companion (amendment 1)
+  shuffle_seed: 3407
+
+regularization:
+  rejected_strength: 0.3
+  chosen_strength: 0.5
+  chosen_ref_percentile: 95
+  chosen_ref_min_count: 50
+  min_chosen_tokens: 1
+  max_train_fraction: 0.70
+  max_train_examples: 12000
+  min_train_rows: 600            # training floor (power caveat below 1200)
+  negative_label_min_rows: 1200  # dose-sufficiency precondition for NEGATIVE
+
+train:
+  lora_r: 256
+  lora_alpha: 128
+  lora_dropout: 0.0
+  target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+  learning_rate: 1.5e-5
+  warmup_ratio: 0.1
+  num_epochs: 1
+  effective_batch: 16
+  per_device_batch: 2
+  max_seq_length: 6144
+  optimizer: adamw_torch
+  weight_decay: 0.01
+  max_grad_norm: 2.5
+  seed: 3407
+  clip_epsilon_logits: 2.0
+  lambda_mse: 0.4
+  lambda_mse_target: 0.05
+  tau_mse_target: 0.5
+  early_stopping_chosen_win: 0.85   # amendment 3
+  early_stop_min_progress: 0.2      # amendment 3
+  log_every_steps: 5
+  padding_equivalence_tolerance: 0.05   # max |Δ final logit| batched vs batch-of-1
+
+eval:
+  whitebox_n_prompts: 500
+  whitebox_seed_range: [75001, 75999]
+  whitebox_budgets: [1024, 2048]
+  p1_success_gain: 0.05          # P1 absolute greedy-success bar on held-out band tasks
+  format_slice_scaffolds: 2
+  gym_eval_seed: 91001
+  gym_eval_atoms_per_cell: 3
+  gym_eval_episodes_per_family: 2
+  collapse_guard_n_tasks: 120
+  collapse_guard_pass_k: 8
+  collapse_guard_seed_base: 76001
+  collapse_guard_max_rel_drop: 0.10
+  nothink_guard_n_atoms: 120
+  nothink_guard_max_drop_pp: 2.0
+
+menagerie:
+  seed_base: 61001               # fresh per event; union-check incl. gauntlet log + 31337
+  quick_seeds_needed: 3
+  quick_positive_floor: 0.03     # threshold = max(this, 2*SD_null/sqrt(3))
+  quick_negative_ceiling: 0.01
+  medium_positive_floor: 0.02
+  null_quick_repeats: 3          # 2 on seed A + 1 on seed B

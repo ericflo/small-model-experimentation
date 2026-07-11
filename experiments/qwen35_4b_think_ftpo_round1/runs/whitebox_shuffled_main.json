@@ -1,0 +1,70 @@
+{
+  "arm": "shuffled",
+  "stage": "main",
+  "model": "../../large_artifacts/qwen35_4b_think_ftpo_round1/merged/shuffled",
+  "think@1024": {
+    "n": 490,
+    "success": 0.47551020408163264,
+    "mean_score": 0.47551020408163264,
+    "loop_rate": 0.0020408163265306124,
+    "unresolved_rate": 0.9959183673469387,
+    "answer_limit_rate": 0.47959183673469385,
+    "natural_close_rate": 0.0020408163265306124,
+    "mean_think_tokens": 1023.9795918367347
+  },
+  "think@1024_per_source": {
+    "gym": {
+      "n": 455,
+      "success": 0.49230769230769234,
+      "mean_score": 0.49230769230769234,
+      "loop_rate": 0.002197802197802198,
+      "unresolved_rate": 0.9956043956043956,
+      "answer_limit_rate": 0.4725274725274725,
+      "natural_close_rate": 0.002197802197802198,
+      "mean_think_tokens": 1023.978021978022
+    },
+    "code": {
+      "n": 35,
+      "success": 0.2571428571428571,
+      "mean_score": 0.2571428571428571,
+      "loop_rate": 0.0,
+      "unresolved_rate": 1.0,
+      "answer_limit_rate": 0.5714285714285714,
+      "natural_close_rate": 0.0,
+      "mean_think_tokens": 1024.0
+    }
+  },
+  "think@2048": {
+    "n": 490,
+    "success": 0.4857142857142857,
+    "mean_score": 0.4857142857142857,
+    "loop_rate": 0.00816326530612245,
+    "unresolved_rate": 0.9163265306122449,
+    "answer_limit_rate": 0.48367346938775513,
+    "natural_close_rate": 0.07551020408163266,
+    "mean_think_tokens": 2013.0795918367346
+  },
+  "think@2048_per_source": {
+    "gym": {
+      "n": 455,
+      "success": 0.4967032967032967,
+      "mean_score": 0.4967032967032967,
+      "loop_rate": 0.006593406593406593,
+      "unresolved_rate": 0.9120879120879121,
+      "answer_limit_rate": 0.4747252747252747,
+      "natural_close_rate": 0.08131868131868132,
+      "mean_think_tokens": 2010.3934065934066
+    },
+    "code": {
+      "n": 35,
+      "success": 0.34285714285714286,
+      "mean_score": 0.34285714285714286,
+      "loop_rate": 0.02857142857142857,
+      "unresolved_rate": 0.9714285714285714,
+      "answer_limit_rate": 0.6,
+      "natural_close_rate": 0.0,
+      "mean_think_tokens": 2048.0
+    }
+  },
+  "wall_s": 857.4539268016815
+}
