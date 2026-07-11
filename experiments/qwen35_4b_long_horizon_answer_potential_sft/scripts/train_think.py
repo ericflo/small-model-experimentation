@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import gzip
 import hashlib
+import importlib.metadata
 import json
 import os
 import random
@@ -467,6 +468,22 @@ def main() -> int:
         "smoke": args.smoke,
         "model": MODEL_ID,
         "revision": MODEL_REVISION,
+        "packages": {
+            name: importlib.metadata.version(name)
+            for name in (
+                "torch",
+                "transformers",
+                "peft",
+                "bitsandbytes",
+                "accelerate",
+                "xformers",
+                "flash-linear-attention",
+                "causal-conv1d",
+            )
+        },
+        "full_attention_backend": "xformers_memory_efficient",
+        "long_row_threshold": FULL_LOGIT_MAX_LENGTH,
+        "long_loss_chunk": LONG_LOSS_CHUNK,
         "dataset": str(dataset),
         "dataset_sha256": sha256_file(dataset),
         "rows": len(encoded),
