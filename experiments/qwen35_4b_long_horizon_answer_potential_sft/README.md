@@ -234,8 +234,18 @@ The exact-token QLoRA path was also validated before dataset construction. Ordin
 4.7 seconds per two-example optimizer step. A deliberately worst-case 14,687-token row initially exposed
 a quadratic SDPA backward workspace, then passed untruncated in 29.1 seconds at 15.0 GiB peak after the
 training-only full-attention kernel was moved to xFormers and >8k rows received explicit layer/loss
-checkpointing. The six-arm scientific matrix has not yet reported a result; calibration harvest is in
-progress.
+checkpointing. The six-arm scientific matrix has not yet reported a result. The complete calibration
+harvest is now banked: 8,640 independent traces over 135 tasks (N=64), totaling 45,728,102 sampled
+thought tokens. Of these, 7,814 closed naturally and 27 exact periodic loops were detected; loops and
+every unresolved allowance contact remain mechanically ineligible. The preregistered 32-row HF/vLLM
+canonical-answer likelihood parity gate passed with a maximum difference of 0.000448 nats per answer
+token (threshold 0.15). Calibration answer rollouts and full-prefix scoring are in progress.
+
+Loomfix is the important termination stress case: its 960 calibration traces consumed 12,676,528
+sampled tokens, but only 204 (21.3%) closed naturally within 12,288 plus the single exact-prefix 2,048
+continuation. This is preserved as evidence that even the enlarged protocol does not cover every search
+horizon; it does not veto the complete SFT matrix, and unresolved traces are never force-closed or used
+as training examples.
 
 No scientific result yet. This file records the complete pre-run plan; later results are added above this
 boundary without rewriting the frozen preregistration.

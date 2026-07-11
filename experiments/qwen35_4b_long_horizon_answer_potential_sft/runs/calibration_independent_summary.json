@@ -1,0 +1,13 @@
+{
+  "elapsed_seconds_this_invocation": 34641.61319771875,
+  "external_index": "/workspace/large_artifacts/qwen35_4b_long_horizon_answer_potential_sft/pools/calibration_independent/index.json",
+  "loops": 27,
+  "natural_close": 7814,
+  "prior_available": 8640,
+  "rows": 8640,
+  "sampled_tokens": 45728102,
+  "schema_version": 1,
+  "split": "calibration",
+  "stage": "calibration_independent",
+  "tasks": 135
+}

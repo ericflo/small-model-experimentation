@@ -47,3 +47,17 @@ No scientific GPU work had run at this boundary. No benchmark content was read.
   plus 256-token recomputed vocabulary chunks only above 8,192 tokens. The exact untruncated 14,687-token
   row passed in 29.1 s at 15.0 GiB peak; the ordinary path remained 4.7 s/two rows. These are operational
   kernel/memory repairs made before any SFT dataset exists, not result-conditioned design changes.
+
+## 2026-07-11 — Calibration Harvest and Scorer Parity
+
+- The preregistered 32-row HF/vLLM canonical-answer likelihood parity gate passed. Maximum absolute
+  difference was 0.000448 nats per answer token against the frozen 0.15 threshold.
+- Completed all 135 calibration tasks at N=64: 8,640 traces and 45,728,102 sampled thought tokens.
+  There were 7,814 natural closes, 27 exact periodic loops, and finite sampled-trace priors on all 8,640
+  rows. Loops and unresolved allowance contacts remain ineligible for scoring and selection.
+- Loomfix was the clear outlier: 204/960 natural closes (21.3%) and 12,676,528 sampled tokens. Its harder
+  tiers frequently remained open after the exact 12,288+2,048 protocol. This is recorded as a support
+  boundary, not used to abort the experiment, and no incomplete trace is force-closed into training.
+- Generation was restart-safe at per-task atomic/checksummed shard boundaries. Calibration answer
+  rollouts and full-prefix scoring began only after the full harvest completed; no score/outcome was
+  inspected during generation.
