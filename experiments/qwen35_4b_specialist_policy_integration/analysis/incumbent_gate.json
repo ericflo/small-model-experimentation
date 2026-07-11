@@ -1,0 +1,31 @@
+{
+  "config": "/workspace/small-model-experimentation/experiments/qwen35_4b_specialist_policy_integration/configs/default.yaml",
+  "config_sha256": "02f74d800975a789409fd8018096dee73d84d4375f20d4542799c59bd1d7ba33",
+  "encoded_rows": 2117,
+  "encoding_audit": "/workspace/small-model-experimentation/experiments/qwen35_4b_specialist_policy_integration/runs/incumbent_encoding_audit.json",
+  "encoding_audit_sha256": "30b72b2607583bfc44e360bbc392e6a1cf42295761c9f4991643e1740a1f6c08",
+  "gate": {
+    "checks": {
+      "behavioral_installation": true,
+      "encoding_counts_match": true,
+      "frozen_hyperparameters": true,
+      "install_targets_this_merge": true,
+      "nonzero_explicit_merge": true,
+      "optimizer_ran": true,
+      "pinned_source_model": true,
+      "skip_rate_below_cap": true,
+      "source_data_hash": true
+    },
+    "passed": true
+  },
+  "input_rows": 2240,
+  "install_gate": "/workspace/small-model-experimentation/experiments/qwen35_4b_specialist_policy_integration/analysis/incumbent_install_gate.json",
+  "install_gate_sha256": "54da4416bf12a237045e1d8a6b1689c9ba6f0cbdf374b32bd8a6414e6dead79b",
+  "merge_receipt": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_specialist_policy_integration/merged/incumbent_blend/merge_receipt.json",
+  "merge_receipt_sha256": "2b94a86caa018d8653049042a832b0252304c65385da8a0b3a4ee9d5f049a0aa",
+  "skip_rate": 0.054910714285714285,
+  "skipped_rows": 123,
+  "stage": "incumbent_gate",
+  "training_receipt": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_specialist_policy_integration/adapters/incumbent_blend/training_receipt.json",
+  "training_receipt_sha256": "6845efc849383753be45b05aae3512e23007c051a7ca2983db929c9be2ac8e41"
+}

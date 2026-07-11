@@ -1,0 +1,358 @@
+{
+  "atom_summary": {
+    "by_family": {
+      "brinework": {
+        "forced_close_rate": 0.0,
+        "mean_score": 1.0,
+        "n": 1,
+        "parse_rate": 1.0
+      },
+      "burrowmaze": {
+        "forced_close_rate": 1.0,
+        "mean_score": 1.0,
+        "n": 1,
+        "parse_rate": 1.0
+      },
+      "caravan": {
+        "forced_close_rate": 0.0,
+        "mean_score": 1.0,
+        "n": 1,
+        "parse_rate": 1.0
+      },
+      "ferrier": {
+        "forced_close_rate": 0.0,
+        "mean_score": 1.0,
+        "n": 1,
+        "parse_rate": 1.0
+      },
+      "foundry_ledger": {
+        "forced_close_rate": 0.0,
+        "mean_score": 1.0,
+        "n": 1,
+        "parse_rate": 1.0
+      },
+      "gatepost": {
+        "forced_close_rate": 0.0,
+        "mean_score": 1.0,
+        "n": 1,
+        "parse_rate": 1.0
+      },
+      "glyphgate": {
+        "forced_close_rate": 0.0,
+        "mean_score": 1.0,
+        "n": 1,
+        "parse_rate": 1.0
+      },
+      "kilnrite": {
+        "forced_close_rate": 0.0,
+        "mean_score": 1.0,
+        "n": 1,
+        "parse_rate": 1.0
+      },
+      "loomfix": {
+        "forced_close_rate": 0.0,
+        "mean_score": 1.0,
+        "n": 1,
+        "parse_rate": 1.0
+      },
+      "packhouse": {
+        "forced_close_rate": 0.0,
+        "mean_score": 0.0,
+        "n": 1,
+        "parse_rate": 1.0
+      },
+      "patchwheel": {
+        "forced_close_rate": 0.0,
+        "mean_score": 1.0,
+        "n": 1,
+        "parse_rate": 1.0
+      },
+      "runeward": {
+        "forced_close_rate": 0.0,
+        "mean_score": 1.0,
+        "n": 1,
+        "parse_rate": 1.0
+      },
+      "spindle": {
+        "forced_close_rate": 1.0,
+        "mean_score": 0.0,
+        "n": 1,
+        "parse_rate": 1.0
+      },
+      "stallwright": {
+        "forced_close_rate": 1.0,
+        "mean_score": 1.0,
+        "n": 1,
+        "parse_rate": 1.0
+      }
+    },
+    "family_macro_forced_close_rate": 0.21428571428571427,
+    "family_macro_parse_rate": 1.0,
+    "family_macro_score": 0.8571428571428571
+  },
+  "atoms_enabled": true,
+  "behavior_diagnostics": {
+    "correction_marker_turn_rate": 1.0,
+    "entropy_token_positions": 2066,
+    "execution_filtered_coverage": 1.0,
+    "forced_close_turn_rate": 1.0,
+    "logical_model_input_tokens": 3122,
+    "mean_reported_top20_tail_lumped_entropy_nats": 0.14820104571944176,
+    "mean_unique_valid_action_sequences_per_episode": 1.0,
+    "sampled_tokens": 2066,
+    "turns": 2
+  },
+  "best_of_k_summary": {
+    "by_family": {
+      "glyphgate": {
+        "mean_score": 1.0,
+        "n": 1
+      }
+    },
+    "family_macro_score": 1.0,
+    "n_episode_groups": 1
+  },
+  "config": "/workspace/small-model-experimentation/experiments/qwen35_4b_specialist_policy_integration/configs/default.yaml",
+  "config_sha256": "02f74d800975a789409fd8018096dee73d84d4375f20d4542799c59bd1d7ba33",
+  "decode": "greedy",
+  "episode_seed_base": 71100,
+  "episode_summary": {
+    "by_family": {
+      "glyphgate": {
+        "action_valid_rate": 1.0,
+        "exact_rate": 1.0,
+        "mean_score": 1.0,
+        "mean_turns": 2.0,
+        "n": 1,
+        "natural_close_rate": 0.0
+      }
+    },
+    "family_macro_score": 1.0,
+    "generation": {
+      "calls": 2,
+      "counts": {
+        "completions": 2,
+        "injected_tokens": 4,
+        "logical_model_input_tokens": 3122,
+        "requests": 2,
+        "sampled_tokens": 2066,
+        "stage1_logical_prompt_tokens": 535,
+        "stage2_logical_prompt_tokens": 2587,
+        "unique_input_prompt_tokens": 535
+      },
+      "engine": {
+        "adapter": null,
+        "cudagraph_capture_sizes": [
+          1,
+          2,
+          4,
+          8,
+          16,
+          24,
+          32,
+          40,
+          48
+        ],
+        "enable_prefix_caching": false,
+        "enforce_eager": false,
+        "gpu_memory_utilization": 0.85,
+        "max_model_len": 16384,
+        "max_num_batched_tokens": 16384,
+        "max_num_seqs": 48,
+        "model_override": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_specialist_policy_integration/merged/incumbent_blend"
+      },
+      "engine_args": {
+        "async_scheduling": false,
+        "cudagraph_capture_sizes": [
+          1,
+          2,
+          4,
+          8,
+          16,
+          24,
+          32,
+          40,
+          48
+        ],
+        "dtype": "bfloat16",
+        "enable_prefix_caching": false,
+        "enforce_eager": false,
+        "generation_config": "vllm",
+        "gpu_memory_utilization": 0.85,
+        "language_model_only": true,
+        "mamba_cache_mode": "none",
+        "max_cudagraph_capture_size": 48,
+        "max_logprobs": 20,
+        "max_model_len": 16384,
+        "max_num_batched_tokens": 16384,
+        "max_num_seqs": 48,
+        "model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_specialist_policy_integration/merged/incumbent_blend",
+        "seed": 0,
+        "tensor_parallel_size": 1,
+        "trust_remote_code": true
+      },
+      "generation_seconds": 32.27839705348015,
+      "model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_specialist_policy_integration/merged/incumbent_blend",
+      "model_config_sha256": "f64803e92c6b93971a8e4fa89a811c8607b9b4efd6d0df0e6ca6016404f42630",
+      "model_revision": null,
+      "resolved_cudagraph": {
+        "cudagraph_capture_sizes": [
+          1,
+          2,
+          4,
+          8,
+          16,
+          24,
+          32,
+          40,
+          48
+        ],
+        "decode_mode": "FULL",
+        "has_full_cudagraphs": true,
+        "max_cudagraph_capture_size": 48,
+        "mixed_mode": "PIECEWISE",
+        "mode": "FULL_AND_PIECEWISE",
+        "source": "llm_engine.vllm_config.compilation_config"
+      },
+      "resolved_sampling": {
+        "frequency_penalty": 0.0,
+        "min_p": 0.0,
+        "presence_penalty": 0.0,
+        "repetition_penalty": 1.0,
+        "temperature": 0.0,
+        "top_k": 0,
+        "top_p": 1.0
+      },
+      "runner_sha256": "95b78cd1a32172a9e46e883b011afe6100592c0155e794f9d60b189074e1f70c",
+      "runtime": {
+        "cuda_toolkit": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Fri_Feb_21_20:23:50_PST_2025\nCuda compilation tools, release 12.8, V12.8.93\nBuild cuda_12.8.r12.8/compiler.35583870_0",
+        "environment_lock": {
+          "path": "/workspace/small-model-experimentation/requirements-vllm.lock.txt",
+          "sha256": "64c3dde1e24f2b18a83cda3a3d84daf8701aad728e864c508854b10e3e3734c6"
+        },
+        "git_commit": "22033dd03018f95ee93571d1ec8b6e53185f9142",
+        "git_dirty": true,
+        "gpu": "NVIDIA L40, 550.127.08, 46068",
+        "platform": "Linux-5.15.0-122-generic-x86_64-with-glibc2.39",
+        "python": "3.12.3",
+        "python_executable": "/workspace/small-model-experimentation/.venv-vllm/bin/python",
+        "uv": "uv 0.9.0"
+      },
+      "sampling": {
+        "allow_custom_prompts": false,
+        "answer_max_tokens": 96,
+        "frequency_penalty": 0.0,
+        "greedy": true,
+        "logprob_token_ids": [],
+        "logprobs": 20,
+        "max_tokens": 512,
+        "min_p": 0.0,
+        "n": 1,
+        "presence_penalty": 0.0,
+        "prompt_logprobs": null,
+        "repetition_penalty": 1.0,
+        "run_seed": 71171,
+        "shuffle_thinking": false,
+        "temperature": null,
+        "thinking": "budget",
+        "thinking_budget": 1024,
+        "top_k": null,
+        "top_p": null
+      }
+    },
+    "groups": [
+      {
+        "constant_outcome": true,
+        "ep_seed": 72100,
+        "episode_key": "glyphgate-L1-e72100",
+        "family": "glyphgate",
+        "level": 1,
+        "mean_score": 1.0,
+        "n": 1,
+        "operator_counts": {
+          "PROBE": 1
+        },
+        "operator_entropy": -0.0,
+        "outcome_varentropy": 0.0,
+        "outcome_variance": 0.0
+      }
+    ],
+    "n_nonconstant_groups": 0,
+    "overall": {
+      "action_valid_rate": 1.0,
+      "exact_rate": 1.0,
+      "mean_score": 1.0,
+      "mean_turns": 2.0,
+      "n": 1,
+      "natural_close_rate": 0.0
+    }
+  },
+  "episodes_per_level": 1,
+  "families": [
+    "glyphgate"
+  ],
+  "levels": [
+    1
+  ],
+  "model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_specialist_policy_integration/merged/incumbent_blend",
+  "model_config_sha256": "f64803e92c6b93971a8e4fa89a811c8607b9b4efd6d0df0e6ca6016404f42630",
+  "model_fingerprint": {
+    "config_sha256": "f64803e92c6b93971a8e4fa89a811c8607b9b4efd6d0df0e6ca6016404f42630",
+    "merge_receipt": {
+      "adapter": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_specialist_policy_integration/adapters/incumbent_blend",
+      "adapter_config_sha256": "0b137897b3ff5fd82c32d92500d5510ac031764b61e02bef89570bc8496468f3",
+      "adapter_weights_sha256": "92c83bec79d7e756cd08830b13ce451c37d30c5e7cd54752d18cddbb8b8a2caa",
+      "applied_lora_modules": 128,
+      "base_model": "Qwen/Qwen3.5-4B",
+      "base_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+      "delta_frobenius_norm_max": 2.9034154415130615,
+      "delta_frobenius_norm_sum": 161.38736176490784,
+      "fp32_tf32_allowed": false,
+      "merge_device": "cuda",
+      "method": "explicit_composite_lora_merge",
+      "nonzero_lora_modules": 128,
+      "scale": 2.0,
+      "weight_files": [
+        {
+          "name": "model.safetensors",
+          "sha256": "56e2bec45199ebcc6e37f6ad0dbb2a4cf39bd60a0628df4f37e3cf0104b9aaf9"
+        }
+      ]
+    },
+    "merge_receipt_sha256": "2b94a86caa018d8653049042a832b0252304c65385da8a0b3a4ee9d5f049a0aa"
+  },
+  "scope": "calibration",
+  "seed_offset": 0,
+  "smoke": true,
+  "split": {
+    "payload": {
+      "specs": [
+        [
+          "glyphgate",
+          1,
+          72100
+        ]
+      ],
+      "train_families": [
+        "glyphgate",
+        "loomfix",
+        "kilnrite",
+        "burrowmaze",
+        "ferrier",
+        "cipherkiln",
+        "mazeferry"
+      ],
+      "transfer_families": [
+        "patchwheel",
+        "spindle",
+        "gatepost",
+        "patchferry",
+        "tripleforge"
+      ]
+    },
+    "sha256": "ad996019561c9c11ede9bbe28378f2bcdc6655832512b70869fec0bc04de34d1"
+  },
+  "stage": "proxy_eval",
+  "tag": "incumbent_eval_smoke",
+  "wall_seconds": 169.43999924510717
+}

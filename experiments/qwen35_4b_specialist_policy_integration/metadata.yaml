@@ -5,7 +5,7 @@ source_track: "new"
 path: "experiments/qwen35_4b_specialist_policy_integration"
 primary_readme: "experiments/qwen35_4b_specialist_policy_integration/README.md"
 primary_report: "experiments/qwen35_4b_specialist_policy_integration/reports/report.md"
-summary: "Status: specialist implementation and full runtime preflight passed on 2026-07-11. No gym model baseline or result-bearing training result exists yet."
+summary: "Status: the C53 incumbent was regenerated and passed structural plus paired behavioral installation gates on 2026-07-11. Its disjoint compound-headroom calibration is running; no specialist or integration result exists yet."
 tags:
   - "policy"
   - "small-model"
@@ -24,11 +24,12 @@ top_level_dirs:
   - "src"
   - "tests"
 file_counts:
-  json: 7
-  jsonl: 4
+  gz: 2
+  json: 12
+  jsonl: 6
   md: 7
   py: 50
   yaml: 3
   [none]: 2
-total_files: 73
-total_size_bytes: 828547
+total_files: 82
+total_size_bytes: 969860

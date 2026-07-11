@@ -392,6 +392,124 @@ def _incumbent_canary(config: dict, config_path: Path, merged: Path) -> None:
     _require_gate(gate_path)
 
 
+def _checkpoint_canary_output(
+    config_path: Path,
+    model: Path,
+    cache_tag: str,
+) -> Path:
+    """Generate or verify one reusable local-composite behavioral canary."""
+    output_dir = EXP / "runs" / "checkpoint_canaries"
+    output = output_dir / f"{cache_tag}.jsonl"
+    metadata = output.with_name(output.name + ".meta.json")
+    receipt_path = output.with_name(output.name + ".receipt.json")
+    merge_path = model / "merge_receipt.json"
+    merge_sha = sha256_file(merge_path)
+    runner_sha = sha256_file(EXP / "src" / "vllm_runner.py")
+    protocol = {
+        "thinking": "budget",
+        "thinking_budget": 256,
+        "answer_max_tokens": 96,
+        "greedy": True,
+        "max_model_len": 4096,
+        "gpu_memory_utilization": 0.85,
+        "max_num_seqs": 16,
+        "max_num_batched_tokens": 4096,
+        "cudagraph_capture_sizes": [1, 2, 4, 8, 16],
+    }
+    protocol_sha = canonical_hash(protocol)
+    if output.exists() or metadata.exists() or receipt_path.exists():
+        if not all(path.is_file() for path in (output, metadata, receipt_path)):
+            raise SystemExit(f"partial checkpoint canary exists for {cache_tag}")
+        receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+        meta = json.loads(metadata.read_text(encoding="utf-8"))
+        if not (
+            receipt.get("model") == str(model.resolve())
+            and receipt.get("merge_receipt_sha256") == merge_sha
+            and receipt.get("runner_sha256") == runner_sha
+            and receipt.get("protocol_sha256") == protocol_sha
+            and receipt.get("output_sha256") == sha256_file(output)
+            and receipt.get("metadata_sha256") == sha256_file(metadata)
+            and meta.get("model") == str(model.resolve())
+            and meta.get("model_revision") is None
+            and meta.get("runner_sha256") == runner_sha
+        ):
+            raise SystemExit(f"stale checkpoint canary exists for {cache_tag}")
+        print(f"[resume] checkpoint canary output {cache_tag} is current", flush=True)
+        return output
+    prompt_path = EXP / "data" / "incumbent_merge_canary.jsonl"
+    _run(
+        [
+            str(PY), str(EXP / "scripts" / "build_merge_canary.py"),
+            "--config", str(config_path), "--out", str(prompt_path),
+        ]
+    )
+    _run(
+        [
+            str(VLLM_PY), str(EXP / "src" / "vllm_runner.py"),
+            "--output", str(output), "--model-override", str(model),
+            "--input", str(prompt_path), "--thinking", "budget",
+            "--thinking-budget", "256", "--answer-max-tokens", "96", "--greedy",
+            "--max-model-len", "4096", "--gpu-memory-utilization", "0.85",
+            "--max-num-seqs", "16", "--max-num-batched-tokens", "4096",
+            "--cudagraph-capture-size", "1", "--cudagraph-capture-size", "2",
+            "--cudagraph-capture-size", "4", "--cudagraph-capture-size", "8",
+            "--cudagraph-capture-size", "16",
+        ]
+    )
+    meta = json.loads(metadata.read_text(encoding="utf-8"))
+    receipt = {
+        "stage": "checkpoint_canary_output",
+        "model": str(model.resolve()),
+        "merge_receipt_sha256": merge_sha,
+        "runner_sha256": runner_sha,
+        "protocol": protocol,
+        "protocol_sha256": protocol_sha,
+        "output_sha256": sha256_file(output),
+        "metadata_sha256": sha256_file(metadata),
+        "model_config_sha256": meta.get("model_config_sha256"),
+    }
+    write_json(receipt_path, receipt)
+    return output
+
+
+def _checkpoint_canary(
+    config_path: Path,
+    *,
+    base: Path,
+    candidate: Path,
+    base_tag: str,
+    candidate_tag: str,
+    pair_tag: str,
+) -> None:
+    """Require a structural and greedy behavioral installation proof."""
+    gate_path = EXP / "analysis" / "checkpoint_installation" / f"{pair_tag}.json"
+    base_merge_sha = sha256_file(base / "merge_receipt.json")
+    candidate_merge_sha = sha256_file(candidate / "merge_receipt.json")
+    if gate_path.exists():
+        gate = json.loads(gate_path.read_text(encoding="utf-8"))
+        if (
+            gate.get("gate", {}).get("passed")
+            and gate.get("base_merge_receipt_sha256") == base_merge_sha
+            and gate.get("merge_receipt_sha256") == candidate_merge_sha
+        ):
+            print(f"[resume] checkpoint installation gate {pair_tag} passed", flush=True)
+            return
+    base_output = _checkpoint_canary_output(config_path, base, base_tag)
+    candidate_output = _checkpoint_canary_output(
+        config_path, candidate, candidate_tag
+    )
+    _run(
+        [
+            str(PY), str(EXP / "scripts" / "analyze_merge_canary.py"),
+            "--base", str(base_output), "--candidate", str(candidate_output),
+            "--base-model", str(base), "--merged", str(candidate),
+            "--out", str(gate_path),
+        ],
+        allowed=(0, 4),
+    )
+    _require_gate(gate_path)
+
+
 def _eval(
     config_path: Path,
     config: dict,
@@ -590,7 +708,17 @@ def main() -> int:
             adapter=paths["dagger_adapter"], merged=paths["dagger"],
             cfg=config["dagger_train"], seed=seed,
         )
+        _checkpoint_canary(
+            config_path,
+            base=paths["incumbent"], candidate=paths["dagger"],
+            base_tag="incumbent_blend", candidate_tag=f"dagger_{args.domain}",
+            pair_tag=f"dagger_{args.domain}",
+        )
     elif stage == "rl-collect":
+        _require_gate(EXP / "analysis" / "calibration_gate.json")
+        _require_gate(
+            EXP / "analysis" / "checkpoint_installation" / f"dagger_{args.domain}.json"
+        )
         _run(
             [
                 str(VLLM_PY), str(EXP / "scripts" / "collect_rl.py"),
@@ -623,6 +751,13 @@ def main() -> int:
             adapter=paths["specialist_adapter"], merged=paths["specialist"],
             config_path=config_path, seed=seed, shuffled=False,
         )
+        _checkpoint_canary(
+            config_path,
+            base=paths["dagger"], candidate=paths["specialist"],
+            base_tag=f"dagger_{args.domain}",
+            candidate_tag=f"specialist_{args.domain}",
+            pair_tag=f"specialist_{args.domain}",
+        )
     elif stage == "controls":
         control_cfg = {
             "epochs": 1.0,
@@ -640,6 +775,13 @@ def main() -> int:
             adapter=paths["extra_sft_adapter"], merged=paths["extra_sft"],
             cfg=control_cfg, seed=seed, max_steps=int(config["controls"]["matched_sft_steps"]),
         )
+        _checkpoint_canary(
+            config_path,
+            base=paths["dagger"], candidate=paths["extra_sft"],
+            base_tag=f"dagger_{args.domain}",
+            candidate_tag=f"extra_sft_{args.domain}",
+            pair_tag=f"extra_sft_{args.domain}",
+        )
         _train_grpo(
             tag=f"shuffled_{args.domain}", model=paths["dagger"],
             trajectories=EXP / "runs" / "rl_collection" / args.domain / "trajectories.jsonl.gz",
@@ -647,7 +789,23 @@ def main() -> int:
             adapter=paths["shuffled_adapter"], merged=paths["shuffled"],
             config_path=config_path, seed=int(config["seeds"]["shuffled_reward"]), shuffled=True,
         )
+        _checkpoint_canary(
+            config_path,
+            base=paths["dagger"], candidate=paths["shuffled"],
+            base_tag=f"dagger_{args.domain}",
+            candidate_tag=f"shuffled_{args.domain}",
+            pair_tag=f"shuffled_{args.domain}",
+        )
     elif stage == "specialist-eval":
+        for gate_tag in (
+            f"dagger_{args.domain}",
+            f"extra_sft_{args.domain}",
+            f"shuffled_{args.domain}",
+            f"specialist_{args.domain}",
+        ):
+            _require_gate(
+                EXP / "analysis" / "checkpoint_installation" / f"{gate_tag}.json"
+            )
         for tag, model in (
             (f"dagger_{args.domain}", paths["dagger"]),
             (f"extra_sft_{args.domain}", paths["extra_sft"]),

@@ -1,0 +1,35 @@
+{
+  "base_metadata_sha256": "56d10fcc3cc094b38dcd267e320c607fc85b156fcb47fc37ccb59796de0fdb20",
+  "base_output": "/workspace/small-model-experimentation/experiments/qwen35_4b_specialist_policy_integration/runs/incumbent_merge_canary/base.jsonl",
+  "candidate_metadata_sha256": "ee9ccc90ca0125c14a434a1ef1ce76c09d5254e87307fc57f981934d7882ae11",
+  "candidate_output": "/workspace/small-model-experimentation/experiments/qwen35_4b_specialist_policy_integration/runs/incumbent_merge_canary/incumbent.jsonl",
+  "changed_by_id": {
+    "incumbent-canary-burrowmaze": true,
+    "incumbent-canary-cipherkiln": true,
+    "incumbent-canary-ferrier": true,
+    "incumbent-canary-glyphgate": true,
+    "incumbent-canary-kilnrite": true,
+    "incumbent-canary-loomfix": true,
+    "incumbent-canary-mazeferry": true
+  },
+  "changed_canaries": 7,
+  "gate": {
+    "checks": {
+      "base_is_pinned": true,
+      "behavior_changed": true,
+      "candidate_is_local_composite": true,
+      "cudagraph_parity": true,
+      "engine_parity": true,
+      "environment_lock_parity": true,
+      "nonzero_mapped_delta": true,
+      "paired_prompts": true,
+      "runner_parity": true,
+      "sampling_parity": true
+    },
+    "passed": true
+  },
+  "merge_receipt_sha256": "2b94a86caa018d8653049042a832b0252304c65385da8a0b3a4ee9d5f049a0aa",
+  "merged": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_specialist_policy_integration/merged/incumbent_blend",
+  "paired_canaries": 7,
+  "stage": "incumbent_installation_gate"
+}

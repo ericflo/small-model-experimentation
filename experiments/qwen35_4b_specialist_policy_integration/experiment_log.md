@@ -61,3 +61,22 @@ post-training/adaptation, and benchmark generalization.
   DAgger/GRPO runs, stale evaluation-to-merge fingerprints, adapter hash
   mismatches, zero/partial merge mappings, and compute-short controls. Stopped
   checkpoints remain preserved and evaluable for diagnosis but cannot qualify.
+- The preregistered behavioral installation rule is enforced before downstream
+  use for every DAgger, extra-SFT, shuffled-reward, and real-reward composite.
+  Reusable seven-prefix canaries are hash-bound to the source and candidate
+  merge receipts; a candidate must change at least one greedy token sequence
+  under identical runner, sampling, graph, prompt, and environment metadata.
+
+## 2026-07-11 — incumbent regeneration and installation gate
+
+- The frozen C53 recipe completed all 333 optimizer steps over 2,117 encoded
+  rows in 3,054.4 seconds on the L40 (12.82 GB peak allocated CUDA memory).
+- The independent encoder audit found 123/2,240 skips (5.49%): 116 forced-close
+  atom rows and seven episode rows. No row was truncated or silently relabeled.
+- Explicit CUDA FP32/no-TF32 merge applied 128/128 nonzero deltas, with summed
+  Frobenius norm 161.39 and merged-weight SHA-256 `56e2bec45199ebcc...`.
+- All 7/7 frozen visible-prefix greedy canaries changed relative to the pinned
+  base with identical prompt, runner, engine, sampling, graph, and environment
+  metadata. The aggregate incumbent gate passed every registered check.
+- These receipts license the disjoint compound-headroom calibration only; they
+  do not establish capability improvement.

@@ -3776,8 +3776,9 @@
   },
   {
     "file_counts": {
-      ".json": 7,
-      ".jsonl": 4,
+      ".gz": 2,
+      ".json": 12,
+      ".jsonl": 6,
       ".md": 7,
       ".py": 50,
       ".yaml": 3,
@@ -3794,7 +3795,7 @@
       "process_control_and_tool_use"
     ],
     "source_track": "new",
-    "summary": "Status: specialist implementation and full runtime preflight passed on 2026-07-11. No gym model baseline or result-bearing training result exists yet.",
+    "summary": "Status: the C53 incumbent was regenerated and passed structural plus paired behavioral installation gates on 2026-07-11. Its disjoint compound-headroom calibration is running; no specialist or integration result exists yet.",
     "tags": [
       "policy",
       "small-model"
@@ -3810,8 +3811,8 @@
       "src",
       "tests"
     ],
-    "total_files": 73,
-    "total_size_bytes": 828547
+    "total_files": 82,
+    "total_size_bytes": 969860
   },
   {
     "file_counts": {

@@ -1,7 +1,8 @@
 # Qwen3.5-4B Specialist Policy Integration
 
-Status: specialist implementation and full runtime preflight passed on
-2026-07-11. No gym model baseline or result-bearing training result exists yet.
+Status: the C53 incumbent was regenerated and passed structural plus paired
+behavioral installation gates on 2026-07-11. Its disjoint compound-headroom
+calibration is running; no specialist or integration result exists yet.
 
 This experiment tests whether independently execution-improved, same-origin
 specialists can be consolidated on the student's own trajectories into one
@@ -125,9 +126,16 @@ Current pre-task evidence is limited to substrate and runtime validity:
 - a one-step QLoRA smoke exited successfully but yielded an all-zero adapter;
   the merge gate rejected and preserved it, demonstrating that Trainer exit
   status alone is not an installation check.
+- the full incumbent ran all 333 optimizer steps over 2,117 encoded rows
+  (123/2,240 rows skipped at the frozen 2,048-token cap), then produced
+  128/128 nonzero explicitly mapped deltas with summed Frobenius norm 161.39;
+  the CUDA FP32/no-TF32 merged composite is weight-hashed in its receipt.
+- all 7/7 frozen visible-prefix canaries changed versus the pinned base under
+  identical greedy prompts, runner hash, sampling, CUDA graphs, and runtime
+  lock. The aggregate incumbent provenance/install gate passed every check.
 
-No capability, teacher, integration, transfer, or benchmark conclusion is yet
-licensed.
+This licenses incumbent evaluation, not a capability, teacher, integration,
+transfer, or benchmark conclusion.
 
 ## Artifacts
 

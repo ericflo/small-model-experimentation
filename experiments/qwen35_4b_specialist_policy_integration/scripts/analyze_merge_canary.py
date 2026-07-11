@@ -23,6 +23,11 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--base", type=Path, required=True)
     parser.add_argument("--candidate", type=Path, required=True)
+    parser.add_argument(
+        "--base-model",
+        type=Path,
+        help="expected local source composite; omit only for the pinned official base",
+    )
     parser.add_argument("--merged", type=Path, required=True)
     parser.add_argument(
         "--out", type=Path, default=EXP / "analysis" / "incumbent_install_gate.json"
@@ -46,22 +51,50 @@ def main() -> int:
     candidate_meta = json.loads(candidate_meta_path.read_text(encoding="utf-8"))
     merge_path = args.merged / "merge_receipt.json"
     merge = json.loads(merge_path.read_text(encoding="utf-8"))
+    if args.base_model is None:
+        expected_base_model = MODEL_ID
+        expected_base_revision = MODEL_REVISION
+        expected_base_config_sha = None
+        base_merge_path = None
+        merge_chain = (
+            merge.get("base_model") == MODEL_ID
+            and merge.get("base_revision") == MODEL_REVISION
+        )
+    else:
+        expected_base_model = str(args.base_model.resolve())
+        expected_base_revision = None
+        expected_base_config_sha = sha256_file(args.base_model / "config.json")
+        base_merge_path = args.base_model / "merge_receipt.json"
+        merge_chain = (
+            merge.get("base_model") == expected_base_model
+            and merge.get("base_revision") is None
+            and base_merge_path.is_file()
+        )
     base_engine = dict(base_meta.get("engine", {}))
     candidate_engine = dict(candidate_meta.get("engine", {}))
     base_engine.pop("model_override", None)
     candidate_engine.pop("model_override", None)
     checks = {
         "paired_prompts": all(prompt_equal),
-        "base_is_pinned": (
-            base_meta.get("model") == MODEL_ID
-            and base_meta.get("model_revision") == MODEL_REVISION
+        "base_identity": (
+            base_meta.get("model") == expected_base_model
+            and base_meta.get("model_revision") == expected_base_revision
+            and base_meta.get("model_config_sha256") == expected_base_config_sha
         ),
         "candidate_is_local_composite": (
             candidate_meta.get("model") == str(args.merged.resolve())
             and candidate_meta.get("model_revision") is None
-            and bool(candidate_meta.get("model_config_sha256"))
+            and candidate_meta.get("model_config_sha256")
+            == sha256_file(args.merged / "config.json")
         ),
-        "nonzero_mapped_delta": int(merge.get("nonzero_lora_modules", 0)) > 0,
+        "merge_chain": merge_chain,
+        "nonzero_mapped_delta": (
+            int(merge.get("applied_lora_modules", 0)) > 0
+            and int(merge.get("nonzero_lora_modules", 0))
+            == int(merge.get("applied_lora_modules", -1))
+            and merge.get("merge_device") == "cuda"
+            and merge.get("fp32_tf32_allowed") is False
+        ),
         "behavior_changed": any(changed),
         "runner_parity": base_meta.get("runner_sha256") == candidate_meta.get("runner_sha256"),
         "engine_parity": base_engine == candidate_engine,
@@ -79,13 +112,20 @@ def main() -> int:
         ),
     }
     result = {
-        "stage": "incumbent_installation_gate",
+        "stage": (
+            "incumbent_installation_gate"
+            if args.base_model is None
+            else "checkpoint_installation_gate"
+        ),
         "base_output": str(args.base.resolve()),
         "candidate_output": str(args.candidate.resolve()),
         "merged": str(args.merged.resolve()),
         "base_metadata_sha256": sha256_file(base_meta_path),
         "candidate_metadata_sha256": sha256_file(candidate_meta_path),
         "merge_receipt_sha256": sha256_file(merge_path),
+        "base_merge_receipt_sha256": (
+            sha256_file(base_merge_path) if base_merge_path is not None else None
+        ),
         "paired_canaries": len(changed),
         "changed_canaries": sum(changed),
         "changed_by_id": {
