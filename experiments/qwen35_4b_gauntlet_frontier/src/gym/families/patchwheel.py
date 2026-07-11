@@ -19,6 +19,10 @@ Episodes: observe the shown wheel and evidence; replace rules via
 all-match (score 1.0), else the match fraction at the last RUN (0 if never
 run). Horizons 4/6/10/14/18/22 across levels L1-L6; levels scale rule count
 3..8, tape length 4..9, evidence count 2..4, and the rule-kind pool.
+
+``oracle_trace`` renders the evidence-elimination solve of an atom as
+first-person think-channel text (truth-blind: derived by re-running the
+procedure, never by citing the gold).
 """
 
 from __future__ import annotations
@@ -355,39 +359,43 @@ def _gen_instance(rng, level: int) -> dict:
 
 
 def gen_atoms(seed: int, level: int, n: int) -> list[dict]:
-    items = []
-    for index in range(n):
-        picked = None
-        fallback = None
-        item = None
-        for attempt in range(40):
-            item = _gen_one(seed, level, index, attempt)
-            if len(item["prompt"]) > base.atom_prompt_limit(level):
-                continue
-            if fallback is None:
-                fallback = item
-            gold = item["gold"]
-            if gold["kind"] == "loc" and len(gold["fixable"]) > _MAX_FIXABLE[level]:
-                continue
-            if gold["kind"] == "out" and not gold["determined"]:
-                continue
-            picked = item
-            break
-        items.append(picked or fallback or item)
-    return items
+    return [_pick_full(seed, level, index)["item"] for index in range(n)]
 
 
-def _gen_one(seed: int, level: int, index: int, attempt: int) -> dict:
+def _pick_full(seed: int, level: int, index: int) -> dict:
+    """The generation pick for one atom slot: item plus solving internals."""
+    picked = None
+    fallback = None
+    full = None
+    for attempt in range(40):
+        full = _gen_full(seed, level, index, attempt)
+        if len(full["item"]["prompt"]) > base.atom_prompt_limit(level):
+            continue
+        if fallback is None:
+            fallback = full
+        gold = full["item"]["gold"]
+        if gold["kind"] == "loc" and len(gold["fixable"]) > _MAX_FIXABLE[level]:
+            continue
+        if gold["kind"] == "out" and not gold["determined"]:
+            continue
+        picked = full
+        break
+    return picked or fallback or full
+
+
+def _gen_full(seed: int, level: int, index: int, attempt: int) -> dict:
     rng = base.rng_for(FAMILY, seed, level, index, attempt)
     inst = _gen_instance(rng, level)
     kind = "loc" if index % 2 == 0 else "out"
+    query = None
     if kind == "loc":
         prompt, gold = _loc_atom(inst)
         answer_domain = len(inst["shown"])
     else:
-        prompt, gold = _out_atom(rng, inst)
+        query, gold_tokens, determined = _pick_query(rng, inst)
+        prompt, gold = _out_atom(inst, query, gold_tokens, determined)
         answer_domain = 50  # exact token tapes: a wide answer space
-    return {
+    item = {
         "id": f"{FAMILY}-L{level}-s{seed}-{index:04d}",
         "family": FAMILY,
         "level": level,
@@ -395,6 +403,7 @@ def _gen_one(seed: int, level: int, index: int, attempt: int) -> dict:
         "gold": gold,
         "answer_domain": answer_domain,
     }
+    return {"item": item, "inst": inst, "query": query}
 
 
 def _evidence_lines(inst: dict) -> list[str]:
@@ -432,7 +441,8 @@ def _loc_atom(inst: dict) -> tuple[str, dict]:
     return "\n".join(lines), gold
 
 
-def _out_atom(rng, inst: dict) -> tuple[str, dict]:
+def _pick_query(rng, inst: dict) -> tuple[list[str], list[str], bool]:
+    """Draw the fresh input tape for an out atom (rng order is load-bearing)."""
     tape_len = len(inst["tapes"][0])
     query = None
     gold_tokens = None
@@ -456,6 +466,12 @@ def _out_atom(rng, inst: dict) -> tuple[str, dict]:
             list(inst["wants"][0]),
         )
     determined = _query_determined(inst, query, gold_tokens)
+    return query, gold_tokens, determined
+
+
+def _out_atom(
+    inst: dict, query: list[str], gold_tokens: list[str], determined: bool
+) -> tuple[str, dict]:
     lines = [
         _SEMANTICS,
         "",
@@ -492,6 +508,307 @@ def oracle_atom(item: dict) -> str:
     if gold["kind"] == "loc":
         return f"ANSWER: {gold['planted']}"
     return "ANSWER: " + " ".join(gold["tokens"])
+
+
+# ---------------------------------------------------------------------------
+# Oracle traces (think-channel distillation text)
+# ---------------------------------------------------------------------------
+
+_ID_RE = re.compile(rf"^{FAMILY}-L(\d+)-s(-?\d+)-(\d+)$")
+_TRACE_HARD_CAP = 800  # words; deploy think budget is 1024 tokens
+_TRACE_SOFT_CAP = 740  # above this the condensed rendering is used
+_RECONSTRUCT_CACHE: dict[tuple[int, int, int], dict] = {}
+
+
+def _reconstruct(item: dict) -> dict:
+    """Regenerate the instance behind an item id (generation is deterministic)."""
+    match = _ID_RE.match(item["id"])
+    if match is None:
+        raise ValueError(f"unrecognized {FAMILY} item id: {item['id']!r}")
+    level, seed, index = (
+        int(match.group(1)),
+        int(match.group(2)),
+        int(match.group(3)),
+    )
+    key = (seed, level, index)
+    full = _RECONSTRUCT_CACHE.get(key)
+    if full is None:
+        full = _pick_full(seed, level, index)
+        if len(_RECONSTRUCT_CACHE) < 4096:
+            _RECONSTRUCT_CACHE[key] = full
+    if full["item"]["prompt"] != item["prompt"]:
+        raise ValueError(f"cannot reconstruct the instance behind {item['id']}")
+    return full
+
+
+def _tape(tokens: list[str]) -> str:
+    return " ".join(tokens)
+
+
+def _names(indices: list[int]) -> str:
+    names = [f"E{i + 1}" for i in indices]
+    if len(names) == 1:
+        return names[0]
+    return ", ".join(names[:-1]) + " and " + names[-1]
+
+
+def _walk(wheel: list[list], tape: list[str]) -> list[tuple[list, list[str]]]:
+    steps = []
+    current = list(tape)
+    for rule in wheel:
+        current = _apply_rule(rule, current)
+        steps.append((rule, current))
+    return steps
+
+
+def _step_line(variant: int, j: int, text: str, after: str) -> str:
+    return (
+        f"Rule {j}, {text}: {after}.",
+        f"Apply rule {j} ({text}): {after}.",
+        f"Rule {j} is {text}, giving {after}.",
+    )[variant]
+
+
+def _divergence_lines(got: list[str], want: list[str]) -> list[str]:
+    lines = []
+    if len(got) != len(want):
+        lines.append(
+            f"My tape has {len(got)} tokens; the original's has {len(want)}."
+        )
+    p = next(
+        (i for i in range(min(len(got), len(want))) if got[i] != want[i]), None
+    )
+    if p is not None:
+        lines.append(
+            f"The first difference is at slot {p + 1}:"
+            f" I have {got[p]} where it should be {want[p]}."
+        )
+    # A one-line reading of what the corruption did on this input.
+    if len(got) != len(want):
+        lines.append("So the corruption changes how many tokens survive.")
+    elif sorted(got) == sorted(want):
+        lines.append("Same tokens, different order, so positions got scrambled.")
+    else:
+        lines.append("Same length, but the token identities are off.")
+    return lines
+
+
+def oracle_trace(item: dict) -> str:
+    full = _reconstruct(item)
+    text = _build_trace(item, full, condensed=False)
+    if len(text.split()) > _TRACE_SOFT_CAP:
+        text = _build_trace(item, full, condensed=True)
+    return text
+
+
+def _build_trace(item: dict, full: dict, condensed: bool) -> str:
+    inst = full["inst"]
+    gold = item["gold"]
+    rng = base.rng_for(FAMILY, "trace", item["id"])
+    v = rng.randrange(3)
+    sv = 0 if condensed else v
+    n = len(inst["shown"])
+    m = len(inst["tapes"])
+    kp = inst["k"] + 1
+    shown_txt = _render_rule(inst["shown"][inst["k"]])
+    orig_txt = _render_rule(inst["wheel"][inst["k"]])
+    mism = [i for i in range(m) if inst["gots"][i] != inst["wants"][i]]
+    star = mism[0]
+    tape0 = inst["tapes"][star]
+    want = inst["wants"][star]
+    shown_steps = _walk(inst["shown"], tape0)
+    got = shown_steps[-1][1]
+    paragraphs: list[str] = []
+
+    # 1. Goal + evidence scan.
+    if gold["kind"] == "loc":
+        opener = (
+            f"I need to work out which rule of this {n}-rule wheel was"
+            " corrupted.",
+            f"One of the {n} rules in this wheel is wrong, and I have to name"
+            " its number.",
+            f"Let me find the corrupted rule in this {n}-rule wheel.",
+        )[v]
+    else:
+        qs = _tape(full["query"])
+        opener = (
+            f"I need to find the corrupted rule in this {n}-rule wheel, repair"
+            f" it, and run the corrected wheel on the fresh tape: {qs}.",
+            "One rule in this wheel is wrong. I have to fix it, then push the"
+            f" fresh tape {qs} through the corrected wheel.",
+            f"The plan: locate the bad rule among the {n} shown, restore it,"
+            f" then apply the corrected wheel to {qs}.",
+        )[v]
+    matched = [i for i in range(m) if i not in mism]
+    if matched:
+        scan = (
+            f"The evidence says {_names(matched)}"
+            f" {'matches' if len(matched) == 1 else 'match'} under the shown"
+            f" wheel, while {_names(mism)}"
+            f" {'comes' if len(mism) == 1 else 'come'} out wrong."
+        )
+    else:
+        scan = "Under the shown wheel, every example comes out wrong."
+    lines = [opener, scan]
+    if matched and not condensed:
+        lines.append(
+            f"Whatever repair I settle on has to keep {_names(matched)}"
+            f" matching too."
+        )
+    paragraphs.append("\n".join(lines))
+
+    # 2. Rule-by-rule walk of the first mismatching example.
+    lines = [
+        (
+            f"I'll trace E{star + 1} through the shown wheel rule by rule.",
+            f"Let me push E{star + 1}'s tape through the shown wheel and watch"
+            " each step.",
+            f"First, E{star + 1} under the shown wheel, one rule at a time.",
+        )[v],
+        f"Start: {_tape(tape0)}.",
+    ]
+    for j, (rule, after) in enumerate(shown_steps, start=1):
+        lines.append(_step_line(sv, j, _render_rule(rule), _tape(after)))
+    lines.append(
+        f"That leaves {_tape(got)}, but the original wheel gave {_tape(want)}."
+    )
+    lines.extend(_divergence_lines(got, want))
+    paragraphs.append("\n".join(lines))
+
+    # 3. Localize the fault and re-run the example with the repair in place.
+    lines = [
+        (
+            "Exactly one rule was changed, so I need a slot where a single"
+            " repair makes every example come out right.",
+            "Only one rule is corrupted, so I look for a slot where one"
+            " replacement squares all the evidence.",
+            "Since just one rule was tampered with, one well-chosen repair has"
+            " to fix every example at once.",
+        )[v]
+    ]
+    if not condensed and (gold["kind"] == "loc" or n <= 5):
+        # Genuine dead ends: slots the exhaustive repair search ruled out.
+        if gold["kind"] == "loc":
+            fixable = set(gold["fixable"])
+        else:
+            fixable = set(_fixable_rules(inst))
+        nonfix = [j for j in range(1, n + 1) if j not in fixable]
+        ruled = ([j for j in nonfix if j < kp] + [j for j in nonfix if j > kp])[:2]
+        if ruled:
+            entry = tape0 if ruled[0] == 1 else shown_steps[ruled[0] - 2][1]
+            lines.append(
+                f"Rule {ruled[0]} is a dead end: the tape reaching it in"
+                f" E{star + 1} is {_tape(entry)}, and no single replacement"
+                f" there makes all {m} examples match."
+            )
+        if len(ruled) > 1:
+            lines.append(f"Rule {ruled[1]} fails the same way.")
+    lines.append(
+        (
+            f"Try rule {kp}. The shown wheel says '{shown_txt}'. Suppose it"
+            f" originally read '{orig_txt}'.",
+            f"My suspicion is rule {kp}, shown as '{shown_txt}'. What if the"
+            f" original was '{orig_txt}'?",
+            f"Consider rule {kp}, currently '{shown_txt}'. Test it as"
+            f" '{orig_txt}'.",
+        )[v]
+    )
+    entry = tape0 if kp == 1 else shown_steps[kp - 2][1]
+    if kp == 1:
+        lines.append(
+            f"Rule {kp} acts first, straight on the input {_tape(tape0)}."
+        )
+    else:
+        span = (
+            "Rule 1 is"
+            if kp == 2
+            else "Rules 1 and 2 are"
+            if kp == 3
+            else f"Rules 1 through {kp - 1} are"
+        )
+        lines.append(
+            f"{span} untouched, so the tape entering slot {kp} is still"
+            f" {_tape(entry)}."
+        )
+    if gold["kind"] == "out" and condensed:
+        redo = _apply_wheel(inst["wheel"], tape0)
+        lines.append(
+            f"With rule {kp} read as '{orig_txt}', E{star + 1} comes out"
+            f" {_tape(redo)} - match."
+        )
+    else:
+        current = list(entry)
+        for j in range(kp, n + 1):
+            rule = inst["wheel"][j - 1]
+            current = _apply_rule(rule, current)
+            lines.append(_step_line(sv, j, _render_rule(rule), _tape(current)))
+        lines.append(
+            f"Final: {_tape(current)} - exactly what the original wheel gave"
+            f" for E{star + 1}."
+        )
+    paragraphs.append("\n".join(lines))
+
+    # 4. Cross-check the remaining examples under the repaired wheel.
+    others = [i for i in range(m) if i != star]
+    if others:
+        lines = [
+            (
+                f"Now check the other example{'s' if len(others) != 1 else ''}"
+                f" with rule {kp} repaired.",
+                f"Cross-check the rest with rule {kp} repaired.",
+                "Does that repair hold everywhere?",
+            )[v]
+        ]
+        for i in others:
+            out = _apply_wheel(inst["wheel"], inst["tapes"][i])
+            if condensed:
+                lines.append(f"E{i + 1} comes out {_tape(out)} - match.")
+            else:
+                lines.append(
+                    f"E{i + 1}: {_tape(inst['tapes'][i])} comes out"
+                    f" {_tape(out)}; the original gave"
+                    f" {_tape(inst['wants'][i])} - match."
+                )
+        paragraphs.append("\n".join(lines))
+
+    # 5. Conclude (loc) or run the fresh tape through the corrected wheel.
+    if gold["kind"] == "loc":
+        paragraphs.append(
+            (
+                f"Every example lines up once rule {kp} reads '{orig_txt}', so"
+                f" that is where the corruption sits. The corrupted rule is"
+                f" number {kp}.",
+                f"That single repair squares all {m} examples. So the"
+                f" corrupted rule is rule {kp}.",
+                f"With rule {kp} restored, everything matches. The corrupted"
+                f" rule is number {kp}.",
+            )[v]
+        )
+    else:
+        query = full["query"]
+        lines = [
+            (
+                "Now run the fresh tape through the corrected wheel.",
+                "Time to push the fresh tape through the corrected wheel.",
+                "With the wheel fixed, I apply it to the fresh tape.",
+            )[v],
+            f"Start: {_tape(query)}.",
+        ]
+        current = list(query)
+        for j, rule in enumerate(inst["wheel"], start=1):
+            current = _apply_rule(rule, current)
+            lines.append(_step_line(sv, j, _render_rule(rule), _tape(current)))
+        final = _tape(current)
+        lines.append(
+            (
+                f"The final output tape is {final}.",
+                f"So the final output tape is {final}.",
+                f"That gives the final output tape: {final}.",
+            )[v]
+        )
+        paragraphs.append("\n".join(lines))
+
+    return "\n\n".join(paragraphs)
 
 
 # ---------------------------------------------------------------------------
@@ -669,9 +986,51 @@ class OraclePolicy:
         return "RUN"
 
 
+def _selftest_traces(n_per_level: int = 12) -> dict:
+    stats: dict = {"family": FAMILY, "levels": {}}
+    for level in LEVELS:
+        items = gen_atoms(7, level, n_per_level)
+        n_exact = 0
+        max_words = 0
+        for item in items:
+            trace = oracle_trace(item)
+            if trace != oracle_trace(item):
+                raise base.SelftestError(
+                    f"{FAMILY} L{level} {item['id']}: trace not deterministic"
+                )
+            words = len(trace.split())
+            max_words = max(max_words, words)
+            if words > _TRACE_HARD_CAP:
+                raise base.SelftestError(
+                    f"{FAMILY} L{level} {item['id']}: trace has {words} words"
+                    f" > {_TRACE_HARD_CAP}"
+                )
+            lowered = trace.lower()
+            for word in base.FORBIDDEN_WORDS:
+                if word in lowered:
+                    raise base.SelftestError(
+                        f"{FAMILY}: forbidden word {word!r} in trace"
+                    )
+            reply = trace + "\n\n" + oracle_atom(item)
+            if score_atom(item, reply) == 1.0:
+                n_exact += 1
+        exact = n_exact / len(items)
+        if exact < 0.95:
+            raise base.SelftestError(
+                f"{FAMILY} L{level}: trace+answer replies score 1.0 on only"
+                f" {exact:.3f} of items (< 0.95)"
+            )
+        stats["levels"][level] = {
+            "trace_exact": round(exact, 4),
+            "max_words": max_words,
+        }
+    return stats
+
+
 def selftest() -> dict:
     module = __import__(__name__, fromlist=["x"])
     return {
         "atoms": base.selftest_atoms(module),
         "episodes": base.selftest_episodes(module),
+        "traces": _selftest_traces(),
     }

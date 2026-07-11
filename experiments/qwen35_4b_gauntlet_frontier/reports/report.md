@@ -61,6 +61,15 @@ capability residual cannot be taught by the model's own verified outputs.
 Next mechanisms (queued): scaffold-distillation of tool-found solutions,
 on-policy RL at residual failures, failure-forensics curricula.
 
+## Oracle-trace distillation addendum
+
+Hand-coded solver procedures for the seven residual families, narrated as
+1,680 truth-blind think-channel traces (selftest-gated) and trained from
+base with the sharp1024 mix: quick +0.282/+0.268, medium +0.289 — the
+highest absolute levels observed (0.474/0.482) but paired deltas in-band.
+Twelve paired events, seven lever classes, one band: the second wall holds
+even against gold procedure supervision the model cannot self-generate.
+
 ## Next Experiments
 
 - Failure forensics on the residual axes at deployed budgets (gym proxies).

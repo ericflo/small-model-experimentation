@@ -25,6 +25,8 @@ repaired (fixing either alone still fails a test); atoms stay single-bug.
 
 from __future__ import annotations
 
+import re
+
 from .. import base
 
 FAMILY = "loomfix"
@@ -435,6 +437,470 @@ def oracle_atom(item: dict) -> str:
 
 
 # ---------------------------------------------------------------------------
+# Oracle traces (think-channel SFT text; truth-blind procedure narration)
+# ---------------------------------------------------------------------------
+
+_TRACE_SOFT_CAP_WORDS = 760
+
+_PROGRAM_ROW_RE = re.compile(r"^(\d+): ([A-Z].*)$")
+_TEST_ROW_RE = re.compile(
+    r"^T(\d+): start (.+?) \| correct (.+?) \| buggy (.+?) -> (pass|FAIL)$"
+)
+_REG_PAIR_RE = re.compile(r"([A-D])=(\d+)")
+
+
+def _parse_regs_text(text: str) -> dict[str, int]:
+    return {m.group(1): int(m.group(2)) for m in _REG_PAIR_RE.finditer(text)}
+
+
+def _parse_prompt_program(prompt: str) -> list[list]:
+    program = []
+    for line in prompt.splitlines():
+        match = _PROGRAM_ROW_RE.match(line)
+        if match:
+            program.append(_parse_instruction(match.group(2).split()))
+    return program
+
+
+def _parse_prompt_tests(prompt: str) -> list[dict]:
+    tests = []
+    for line in prompt.splitlines():
+        match = _TEST_ROW_RE.match(line)
+        if match:
+            tests.append(
+                {
+                    "label": f"T{match.group(1)}",
+                    "start": _parse_regs_text(match.group(2)),
+                    "expect": _parse_regs_text(match.group(3)),
+                    "got": _parse_regs_text(match.group(4)),
+                    "fail": match.group(5) == "FAIL",
+                }
+            )
+    return tests
+
+
+def _written_regs(ins: list) -> list[str]:
+    op = ins[0]
+    if op == "SWAP":
+        return [ins[1], ins[2]]
+    if op == "IFZ":
+        return []
+    return [ins[1]]
+
+
+def _line_fixable(program: list[list], idx: int, tests: list[dict]) -> bool:
+    trial = [list(line) for line in program]
+    for candidate in _candidate_instructions():
+        trial[idx] = candidate
+        if _passes_all(trial, tests):
+            return True
+    return False
+
+
+def _narrate_run(
+    program: list[list], start: dict[str, int], style: int, verbose: bool
+) -> tuple[list[str], dict[str, int], list[tuple]]:
+    """Prose per executed line, final registers, and every register change."""
+    sentences: list[str] = []
+    regs = dict(start)
+    history: list[tuple] = []  # (line_no, reg, new_value) whenever a value moves
+    pc = 0
+    while pc < len(program):
+        ins = program[pc]
+        op = ins[0]
+        lineno = pc + 1
+        jump = 1
+        if op == "ADD":
+            before = regs[ins[1]]
+            regs[ins[1]] = before + ins[2]
+            if ins[2] == 0:
+                note = f"adding 0 leaves {ins[1]} at {before}"
+            else:
+                note = f"{ins[1]} goes from {before} to {regs[ins[1]]}"
+                history.append((lineno, ins[1], regs[ins[1]]))
+        elif op == "SUB":
+            before = regs[ins[1]]
+            after = max(0, before - ins[2])
+            regs[ins[1]] = after
+            if ins[2] == 0:
+                note = f"subtracting 0 leaves {ins[1]} at {before}"
+            elif before - ins[2] < 0:
+                note = (
+                    f"{before} minus {ins[2]} would go negative,"
+                    f" so {ins[1]} floors at 0"
+                )
+            else:
+                note = f"{ins[1]} drops from {before} to {after}"
+            if after != before:
+                history.append((lineno, ins[1], after))
+        elif op == "COPY":
+            before = regs[ins[1]]
+            regs[ins[1]] = regs[ins[2]]
+            note = f"{ins[1]} takes {ins[2]}'s value, so {ins[1]}={regs[ins[1]]}"
+            if regs[ins[1]] != before:
+                history.append((lineno, ins[1], regs[ins[1]]))
+        elif op == "SWAP":
+            first_before = regs[ins[1]]
+            regs[ins[1]], regs[ins[2]] = regs[ins[2]], regs[ins[1]]
+            note = f"now {ins[1]}={regs[ins[1]]} and {ins[2]}={regs[ins[2]]}"
+            if regs[ins[1]] != first_before:
+                history.append((lineno, ins[1], regs[ins[1]]))
+                history.append((lineno, ins[2], regs[ins[2]]))
+        elif op == "ZERO":
+            before = regs[ins[1]]
+            regs[ins[1]] = 0
+            if before:
+                note = f"{ins[1]} clears from {before} to 0"
+                history.append((lineno, ins[1], 0))
+            else:
+                note = f"{ins[1]} is already 0 and stays 0"
+        else:  # IFZ
+            if regs[ins[1]] == 0:
+                if pc + 1 < len(program):
+                    note = (
+                        f"{ins[1]} is 0, so line {pc + 2}"
+                        f" ({_render_ins(program[pc + 1])}) is skipped"
+                    )
+                else:
+                    note = f"{ins[1]} is 0, but there is no next line to skip"
+                jump = 2
+            else:
+                note = (
+                    f"{ins[1]} is {regs[ins[1]]}, not zero,"
+                    " so nothing is skipped"
+                )
+        if style == 0:
+            sentence = f"Line {lineno} is {_render_ins(ins)}: {note}."
+            if verbose:
+                sentence += f" Now {_render_regs(regs)}."
+        else:
+            sentence = f"Line {lineno}, {_render_ins(ins)} — {note}."
+            if verbose:
+                sentence += f" Registers: {_render_regs(regs)}."
+        sentences.append(sentence)
+        pc += jump
+    return sentences, regs, history
+
+
+def _exec_trace_text(item: dict, picks: dict, verbose: bool) -> str:
+    prompt = item["prompt"]
+    program = _parse_prompt_program(prompt)
+    start = _parse_regs_text(
+        re.search(r"Start registers: ([^.\n]+)\.", prompt).group(1)
+    )
+    target = re.search(r"what value does register ([A-D]) hold", prompt).group(1)
+
+    openers = (
+        f"I need to run this routine exactly as printed and report what"
+        f" register {target} holds when it finishes.",
+        f"The job is to trace this routine line by line from the given start"
+        f" registers and read off register {target} at the end.",
+        f"Let me execute this routine carefully, one line at a time, keeping"
+        f" an eye on register {target}.",
+    )
+    starters = (
+        f"The registers start at {_render_regs(start)}.",
+        f"Starting state: {_render_regs(start)}.",
+        f"I begin with {_render_regs(start)}.",
+    )
+    head = [openers[picks["opener"]], starters[picks["start"]]]
+    if "BUGGY copy" in prompt:
+        head.append(
+            "The label says this is the buggy copy, but the question asks"
+            f" what this printed routine leaves in {target}, so I trace it"
+            " exactly as shown."
+        )
+
+    touched = sorted(
+        {i + 1 for i, ins in enumerate(program) if target in _written_regs(ins)}
+    )
+    has_ifz = any(ins[0] == "IFZ" for ins in program)
+    if not touched:
+        plan = (
+            f"Scanning first: no line ever touches {target} directly, so it"
+            " should keep its start value — I'll trace the whole routine"
+            " anyway to be sure."
+        )
+    else:
+        if len(touched) == 1:
+            plan = f"Scanning first: only line {touched[0]} touches {target}"
+        else:
+            listed = ", ".join(str(n) for n in touched)
+            plan = f"Scanning first: lines {listed} touch {target}"
+        if has_ifz:
+            plan += (
+                ", but an IFZ can change which lines actually run, so I trace"
+                " everything in order."
+            )
+        else:
+            plan += (
+                "; I'll still trace the whole routine in order to keep every"
+                " register straight."
+            )
+
+    sentences, finals, history = _narrate_run(
+        program, start, picks["line_style"], verbose
+    )
+    tail = (
+        f"That was the last line, so the routine ends with"
+        f" {_render_regs(finals)}."
+    )
+
+    checks = (
+        f"Before I commit, let me double-check {target}'s history.",
+        f"Quick second pass on {target} to be safe.",
+        f"Let me re-verify how {target} moved.",
+    )
+    target_moves = [(ln, v) for (ln, r, v) in history if r == target]
+    if target_moves:
+        walk = f"{target} begins at {start[target]}" + "".join(
+            f", then line {ln} ({_render_ins(program[ln - 1])}) makes it {v}"
+            for ln, v in target_moves
+        ) + ", and it never changes again. That matches my trace."
+    else:
+        walk = (
+            f"No line ever changed {target}, so it stays at {start[target]}"
+            " from start to finish. That matches my trace."
+        )
+    conclusions = (
+        f"So register {target} finishes holding {finals[target]}.",
+        f"Register {target}'s final value is {finals[target]}.",
+        f"So at the end of the routine, {target} holds {finals[target]}.",
+    )
+    paragraphs = [
+        "\n".join(head),
+        plan,
+        "\n".join(sentences + [tail]),
+        "\n".join([checks[picks["check"]], walk, conclusions[picks["conclusion"]]]),
+    ]
+    return "\n\n".join(paragraphs)
+
+
+def _loc_trace_text(
+    item: dict, picks: dict, verbose: bool, with_dead_end: bool
+) -> str:
+    prompt = item["prompt"]
+    program = _parse_prompt_program(prompt)
+    tests = _parse_prompt_tests(prompt)
+    planted = item["gold"]["planted"]  # 1-based line number
+    fails = [t for t in tests if t["fail"]]
+    first = fails[0]
+
+    openers = (
+        "Exactly one line of this routine was changed, and I need to name a"
+        " line whose single replacement makes every test pass. The"
+        " correct-versus-buggy finals are my evidence.",
+        "One planted bug, one line to find. I'll compare what the buggy"
+        " routine produces against the correct finals, then test suspect"
+        " lines by mental substitution.",
+        "I need to find the changed line. Plan: read the test diffs, trace a"
+        " failing test to see what the routine really does, then try"
+        " single-line replacements until every test passes.",
+    )
+
+    diff_sentences = []
+    mismatched: list[str] = []
+    for t in tests:
+        if not t["fail"]:
+            diff_sentences.append(f"{t['label']} passes as-is.")
+            continue
+        bits = []
+        for r in REGS:
+            if t["got"][r] != t["expect"][r]:
+                bits.append(
+                    f"{r} ends {t['got'][r]} but should be {t['expect'][r]}"
+                )
+                if r not in mismatched:
+                    mismatched.append(r)
+        diff_sentences.append(f"{t['label']} fails: " + ", ".join(bits) + ".")
+    mismatched.sort(key=REGS.index)
+    if len(mismatched) == 1:
+        reg = mismatched[0]
+        diffs = [t["got"][reg] - t["expect"][reg] for t in fails]
+        if all(d == diffs[0] for d in diffs):
+            direction = "low" if diffs[0] < 0 else "high"
+            summary = (
+                f"So every failure is register {reg}, exactly"
+                f" {abs(diffs[0])} {direction} each time."
+            )
+        else:
+            summary = (
+                f"So every failure lands on register {reg}, though the miss"
+                " differs between tests."
+            )
+    else:
+        summary = (
+            f"So the failures touch registers {', '.join(mismatched)} — a"
+            " pattern that can come from a copy, a swap, or a skipped guard."
+        )
+
+    intros = (
+        f"Let me trace {first['label']} on the routine as printed to see the"
+        " mechanics.",
+        f"First I trace {first['label']} through the shown routine.",
+        f"I'll walk {first['label']} line by line through the routine exactly"
+        " as shown.",
+    )
+    run_sentences, run_finals, _ = _narrate_run(
+        program, first["start"], picks["line_style"], verbose
+    )
+    confirm = (
+        f"Final state {_render_regs(run_finals)} — exactly the buggy finals"
+        f" listed for {first['label']}, so I am reading the routine"
+        " correctly."
+    )
+
+    methods = (
+        "Now the substitution test: change one line in my head, rerun every"
+        " test, and see whether all the finals match the correct column.",
+        "Now I test candidate lines one at a time: a line is the culprit only"
+        " if some single replacement of it makes every test pass.",
+        "Time to try repairs: pick a suspect line, imagine a replacement"
+        " there, and rerun all the tests mentally.",
+    )
+
+    dead_end = None
+    if with_dead_end:
+        suspects = [
+            i
+            for i, ins in enumerate(program)
+            if i + 1 != planted
+            and any(r in mismatched for r in _written_regs(ins))
+        ]
+        for j in suspects[:3]:
+            if _line_fixable(program, j, tests):
+                continue
+            showcase = None
+            trial = [list(line) for line in program]
+            for candidate in _candidate_instructions():
+                if candidate == program[j]:
+                    continue
+                trial[j] = candidate
+                if _execute(trial, first["start"]) == first["expect"]:
+                    showcase = candidate
+                    break
+            lead = (
+                f"Line {j + 1} ({_render_ins(program[j])}) is a tempting"
+                " suspect."
+            )
+            if showcase is not None:
+                trial = [list(line) for line in program]
+                trial[j] = showcase
+                mid = ""
+                for t in tests:
+                    got = _execute(trial, t["start"])
+                    if got != t["expect"]:
+                        bad = next(
+                            r for r in REGS if got[r] != t["expect"][r]
+                        )
+                        mid = (
+                            f"If it read {_render_ins(showcase)} instead,"
+                            f" {first['label']} would come out fully correct,"
+                            f" but then {t['label']} ends {bad}={got[bad]}"
+                            f" where it needs {t['expect'][bad]}."
+                        )
+                        break
+            else:
+                mid = (
+                    f"But no single replacement there even repairs"
+                    f" {first['label']}: I swept other constants, the"
+                    f" opposite op, copies and swaps, and {first['label']}"
+                    " stays wrong."
+                )
+            dead_end = "\n".join(
+                [
+                    lead,
+                    mid,
+                    f"No one-line change at line {j + 1} satisfies every"
+                    f" test, so line {j + 1} is out.",
+                ]
+            )
+            break
+
+    repair = None
+    trial = [list(line) for line in program]
+    for candidate in _candidate_instructions():
+        if candidate == program[planted - 1]:
+            continue
+        trial[planted - 1] = candidate
+        if _passes_all(trial, tests):
+            repair = candidate
+            break
+
+    success = None
+    if repair is not None:
+        verify_bits = [
+            f"Now line {planted} ({_render_ins(program[planted - 1])})."
+            f" Suppose it read {_render_ins(repair)} instead."
+        ]
+        for i, t in enumerate(tests):
+            got = _execute(trial, t["start"])
+            if i == 0:
+                verify_bits.append(
+                    f"{t['label']} reruns to {_render_regs(got)} — the"
+                    " correct finals exactly."
+                )
+            else:
+                verify_bits.append(
+                    f"{t['label']} reruns to {_render_regs(got)}, also"
+                    " correct."
+                )
+        verify_bits.append(
+            f"One replacement at line {planted} fixes every test at once."
+        )
+        success = "\n".join(verify_bits)
+
+    conclusions = (
+        f"So the planted bug is on line {planted}.",
+        f"The changed line is line {planted}.",
+        f"Everything points to line {planted} — that is where the bug sits.",
+    )
+    paragraphs = [
+        openers[picks["opener"]],
+        "\n".join(diff_sentences + [summary]),
+        "\n".join([intros[picks["check"]], *run_sentences, confirm]),
+        methods[picks["method"]],
+    ]
+    if dead_end:
+        paragraphs.append(dead_end)
+    if success:
+        paragraphs.append(success)
+    paragraphs.append(conclusions[picks["conclusion"]])
+    return "\n\n".join(paragraphs)
+
+
+def oracle_trace(item: dict) -> str:
+    """First-person think-channel narration that derives the atom's answer.
+
+    Truth-blind: the text re-parses the prompt and walks the family's own
+    solving procedure (trace the routine line by line; for loc atoms, diff
+    the tests then test candidate lines by mental substitution) until the
+    answer falls out. Deterministic per item id; phrasing varies across
+    items via base.rng_for.
+    """
+    rng = base.rng_for(FAMILY, "trace", item["id"])
+    picks = {
+        "opener": rng.randrange(3),
+        "start": rng.randrange(3),
+        "line_style": rng.randrange(2),
+        "check": rng.randrange(3),
+        "method": rng.randrange(3),
+        "conclusion": rng.randrange(3),
+    }
+    if item["gold"]["kind"] == "exec":
+        text = _exec_trace_text(item, picks, verbose=True)
+        if len(text.split()) > _TRACE_SOFT_CAP_WORDS:
+            text = _exec_trace_text(item, picks, verbose=False)
+    else:
+        text = _loc_trace_text(item, picks, verbose=True, with_dead_end=True)
+        if len(text.split()) > _TRACE_SOFT_CAP_WORDS:
+            text = _loc_trace_text(
+                item, picks, verbose=False, with_dead_end=False
+            )
+    return text
+
+
+# ---------------------------------------------------------------------------
 # Episodes
 # ---------------------------------------------------------------------------
 
@@ -633,9 +1099,54 @@ class OraclePolicy:
         return "RUN"
 
 
+def _selftest_traces(module, *, n_per_level: int = 12, perfect_min: float = 0.95) -> dict:
+    """Oracle-trace checks: score, word cap, forbidden words, determinism."""
+    stats: dict = {"family": module.FAMILY, "levels": {}}
+    for level in module.LEVELS:
+        items = module.gen_atoms(7, level, n_per_level)
+        n_perfect = 0
+        max_words = 0
+        for item in items:
+            trace = module.oracle_trace(item)
+            if trace != module.oracle_trace(item):
+                raise base.SelftestError(
+                    f"{module.FAMILY} L{level} {item['id']}: trace not deterministic"
+                )
+            words = len(trace.split())
+            max_words = max(max_words, words)
+            if words > 800:
+                raise base.SelftestError(
+                    f"{module.FAMILY} L{level} {item['id']}: trace is {words}"
+                    " words (cap 800)"
+                )
+            lowered = trace.lower()
+            for word in base.FORBIDDEN_WORDS:
+                if word in lowered:
+                    raise base.SelftestError(
+                        f"{module.FAMILY} L{level} {item['id']}: forbidden"
+                        f" word {word!r} in trace"
+                    )
+            reply = trace + "\n\n" + module.oracle_atom(item)
+            if module.score_atom(item, reply) == 1.0:
+                n_perfect += 1
+        frac = n_perfect / len(items)
+        if frac < perfect_min:
+            raise base.SelftestError(
+                f"{module.FAMILY} L{level}: trace+answer scores 1.0 on only"
+                f" {frac:.3f} < {perfect_min}"
+            )
+        stats["levels"][level] = {
+            "n": len(items),
+            "perfect_frac": round(frac, 4),
+            "max_words": max_words,
+        }
+    return stats
+
+
 def selftest() -> dict:
     module = __import__(__name__, fromlist=["x"])
     return {
         "atoms": base.selftest_atoms(module),
         "episodes": base.selftest_episodes(module),
+        "traces": _selftest_traces(module),
     }

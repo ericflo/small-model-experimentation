@@ -402,6 +402,287 @@ def oracle_atom(item: dict) -> str:
 
 
 # ---------------------------------------------------------------------------
+# Oracle trace: think-channel narration of the hand-coded solving procedure.
+# Truth-blind: everything is re-derived from the prompt's exploration log
+# (map rebuilt edge by edge, then counted / read off / breadth-first searched)
+# rather than read from the gold answer.
+# ---------------------------------------------------------------------------
+
+_LOG_LINE_RE = re.compile(r"^\d+\.\s+From (.+?) we went ([a-z]+) into (.+?)\.\s*$")
+_DIRECTION_Q_RE = re.compile(
+    r"^From (.+?), which single direction leads directly to (.+?)\?\s*$"
+)
+
+
+def _parse_log(prompt: str) -> list[tuple[str, str, str]]:
+    """Recover the (chamber, direction, chamber) steps from the prompt's log."""
+    steps: list[tuple[str, str, str]] = []
+    for raw in prompt.splitlines():
+        match = _LOG_LINE_RE.match(raw.strip())
+        if match and match.group(2) in _OPP:
+            steps.append((match.group(1), match.group(2), match.group(3)))
+    return steps
+
+
+def oracle_trace(item: dict) -> str:
+    rng = base.rng_for(FAMILY, "trace", item["id"])
+    voice = rng.randrange(3)
+    steps = _parse_log(item["prompt"])
+    kind = item["gold"]["kind"]
+    if kind == "count":
+        return _trace_count(voice, steps)
+    if kind == "direction":
+        return _trace_direction(voice, steps, item["prompt"])
+    return _trace_route(voice, steps, item["gold"]["src"], item["gold"]["dst"])
+
+
+def _trace_count(voice: int, steps: list[tuple[str, str, str]]) -> str:
+    start = steps[0][0]
+    lines = [
+        (
+            "I need to count how many distinct chambers this log names. "
+            "I'll replay the trek entry by entry, keeping a running list and "
+            "counting each chamber only the first time it appears.",
+            "The question is how many distinct chambers are named in the log. "
+            "So let me walk the entries in order, adding each chamber to my "
+            "list the first time it comes up and skipping repeats.",
+            "So I have to work out how many different chambers this log "
+            "mentions. I'll go through it one entry at a time and grow a list, "
+            "counting a chamber only when it's new.",
+        )[voice],
+        (
+            f"The trek starts in {start}, so that's one chamber before any move.",
+            f"Before any move we're already standing in {start} — chamber number one.",
+            f"{start} is where the trek begins, so my list opens with it: 1 so far.",
+        )[voice],
+    ]
+    seen = [start]
+    for i, (a, d, b) in enumerate(steps, start=1):
+        if b not in seen:
+            seen.append(b)
+            n = len(seen)
+            lines.append(
+                (
+                    f"Entry {i}: from {a} we went {d} into {b}. {b} is new — that makes {n}.",
+                    f"Entry {i} goes {d} from {a} into {b}, a chamber I haven't "
+                    f"listed yet, so the count is {n}.",
+                    f"Entry {i}: {a}, {d}, into {b}. A new chamber — {n} so far.",
+                )[(voice + i) % 3]
+            )
+        else:
+            lines.append(
+                (
+                    f"Entry {i} goes {d} from {a} back into {b}, which is already "
+                    f"on my list — nothing new.",
+                    f"Entry {i} just returns to {b}; I've counted that one already.",
+                    f"Entry {i} leads {d} into {b}, but {b} is old ground, so the "
+                    f"count stays at {len(seen)}.",
+                )[(voice + i) % 3]
+            )
+    roster = ", ".join(seen)
+    lines.append(f"That's the whole log. Let me recheck my list: {roster}.")
+    lines.append(
+        "Scanning the entries once more, every name that appears is on that "
+        f"list, and counting it off gives {len(seen)}."
+    )
+    lines.append(f"So the number of distinct chambers named in the log is {len(seen)}.")
+    return "\n".join(lines)
+
+
+def _trace_direction(voice: int, steps: list[tuple[str, str, str]], prompt: str) -> str:
+    a = b = None
+    for raw in prompt.splitlines():
+        match = _DIRECTION_Q_RE.match(raw.strip())
+        if match:
+            a, b = match.group(1), match.group(2)
+    lines = [
+        (
+            f"I need the single direction that leads from {a} directly to {b}. "
+            "First I'll rebuild the map from the log, edge by edge, remembering "
+            "that the way back along any corridor is the exact reverse direction.",
+            f"The question asks which direction goes from {a} straight into {b}. "
+            "Let me reconstruct the burrow map from the log first; every corridor "
+            "runs both ways, with the return being the exact reverse.",
+            f"So: from {a}, which way leads directly to {b}? I'll read the log "
+            "in order and lay out the corridors, keeping the reverse-direction "
+            "rule in mind for the way back.",
+        )[voice]
+    ]
+    adj: dict[str, dict[str, str]] = {}
+    pair_entry: tuple[int, str, str] | None = None
+    for i, (u, d, v) in enumerate(steps, start=1):
+        known = adj.get(u, {}).get(d) == v
+        adj.setdefault(u, {})[d] = v
+        adj.setdefault(v, {})[_OPP[d]] = u
+        if known:
+            line = (
+                f"Entry {i} retraces the corridor between {u} and {v} that I "
+                f"already have.",
+                f"Entry {i} walks the {u}-{v} corridor again; nothing new to map.",
+                f"Entry {i} re-covers {u} to {v}, already on my map.",
+            )[(voice + i) % 3]
+        else:
+            line = (
+                f"Entry {i}: {u} leads {d} to {v}, so from {v} the way back is "
+                f"{_OPP[d]}.",
+                f"Entry {i}: from {u}, going {d}, we reach {v}; the return "
+                f"corridor from {v} runs {_OPP[d]}.",
+                f"Entry {i} maps {u} {d} to {v} (and {v} {_OPP[d]} back to {u}).",
+            )[(voice + i) % 3]
+        if pair_entry is None and {u, v} == {a, b}:
+            pair_entry = (i, u, d)
+            line += " That's the very pair the question asks about."
+        lines.append(line)
+    exits = adj[a]
+    listing = ", ".join(f"{d} to {exits[d]}" for d in _DIRS if d in exits)
+    lines.append(f"Now I read my map at {a}. Its known exits: {listing}.")
+    answer = next(d for d in _DIRS if exits.get(d) == b)
+    others = [d for d in _DIRS if d in exits and exits[d] != b]
+    if others:
+        listed = (
+            " and ".join(others)
+            if len(others) <= 2
+            else ", ".join(others[:-1]) + ", and " + others[-1]
+        )
+        verb = "leads" if len(others) == 1 else "lead"
+        lines.append(
+            f"Of those, {listed} {verb} elsewhere; the exit that reaches {b} "
+            f"is {answer}."
+        )
+    else:
+        lines.append(f"The only exit recorded there is the one into {b}: {answer}.")
+    idx, logged_from, logged_dir = pair_entry
+    if logged_from == b:
+        lines.append(
+            f"Note that entry {idx} recorded this corridor from {b}'s side, "
+            f"going {logged_dir}. The reverse pairs are north-south, east-west, "
+            f"up-down, so from {a} it must run {answer}. That checks out."
+        )
+    else:
+        lines.append(
+            f"Entry {idx} recorded it in exactly this orientation: from {a}, "
+            f"going {answer}, into {b}."
+        )
+    lines.append(
+        f"So from {a}, the single direction that leads directly to {b} is {answer}."
+    )
+    return "\n".join(lines)
+
+
+def _trace_route(
+    voice: int, steps: list[tuple[str, str, str]], src: str, dst: str
+) -> str:
+    lines = [
+        (
+            f"I need the shortest sequence of directions from {src} to {dst}, "
+            "using only corridors named in the log. First, the map: I'll take "
+            "the log edge by edge, and since every corridor runs both ways, "
+            "each entry also gives me the reverse direction back.",
+            f"The task is a shortest route from {src} to {dst} over the "
+            "corridors the log reveals. Let me rebuild that map first, entry "
+            "by entry; the way back along any corridor is the exact reverse "
+            "direction.",
+            f"So I want the shortest run of directions from {src} to {dst}, "
+            "staying on logged corridors. Step one is reconstructing the map "
+            "from the log, and each corridor is two-way with a reversed return.",
+        )[voice]
+    ]
+    radj: dict[str, dict[str, str]] = {}
+    seen_pairs: set[frozenset] = set()
+    for i, (u, d, v) in enumerate(steps, start=1):
+        pair = frozenset((u, v))
+        if pair in seen_pairs:
+            lines.append(
+                (
+                    f"Entry {i} retraces the {u}-{v} corridor I already mapped.",
+                    f"Entry {i} walks {u} to {v} again; already on the map.",
+                    f"Entry {i} re-covers the corridor between {u} and {v}.",
+                )[(voice + i) % 3]
+            )
+            continue
+        seen_pairs.add(pair)
+        radj.setdefault(u, {})[d] = v
+        radj.setdefault(v, {})[_OPP[d]] = u
+        lines.append(
+            (
+                f"Entry {i}: {u} leads {d} to {v}, so back from {v} is {_OPP[d]}.",
+                f"Entry {i}: from {u}, going {d}, we reach {v}; return from {v} "
+                f"runs {_OPP[d]}.",
+                f"Entry {i} maps {u} {d} to {v} (reverse: {_OPP[d]}).",
+            )[(voice + i) % 3]
+        )
+    lines.append(
+        (
+            f"Map done. Now I search outward from {src} one move at a time — "
+            f"breadth-first — so the first time {dst} appears, that distance "
+            "is the shortest possible.",
+            f"That's the revealed map. Now I fan out from {src} move by move; "
+            f"whichever wave first touches {dst} gives the shortest distance.",
+            f"With the map rebuilt, I explore from {src} in waves of one move "
+            f"each, so {dst} first shows up at its shortest distance.",
+        )[voice]
+    )
+    dist = {src: 0}
+    prev: dict[str, tuple[str, str]] = {}
+    frontier = [src]
+    layer = 0
+    while frontier and dst not in dist:
+        layer += 1
+        discoveries: list[tuple[str, list[tuple[str, str]]]] = []
+        stuck: list[str] = []
+        nxt: list[str] = []
+        for node in frontier:
+            found: list[tuple[str, str]] = []
+            for d in _DIRS:
+                dest = radj.get(node, {}).get(d)
+                if dest is not None and dest not in dist:
+                    dist[dest] = layer
+                    prev[dest] = (node, d)
+                    found.append((d, dest))
+                    nxt.append(dest)
+            if found:
+                discoveries.append((node, found))
+            else:
+                stuck.append(node)
+        parts = []
+        for node, found in discoveries:
+            reached = " and ".join(f"{dest} ({d})" for d, dest in found)
+            parts.append(f"from {node} I newly reach {reached}")
+        if layer == 1:
+            lines.append(f"One move out: {'; '.join(parts)}.")
+        else:
+            lines.append(f"At {layer} moves: {'; '.join(parts)}.")
+        if stuck:
+            named = ", ".join(stuck[:3])
+            tail = f" and {len(stuck) - 3} more" if len(stuck) > 3 else ""
+            lines.append(
+                f"{named}{tail} only lead back to chambers I've already "
+                "reached, so nothing new comes from there."
+            )
+        frontier = nxt
+    parent, last_dir = prev[dst]
+    lines.append(
+        f"There it is: {dst} turns up at distance {layer}, entered from "
+        f"{parent} going {last_dir}, and no earlier wave touched it, so "
+        f"{layer} moves is the minimum."
+    )
+    path = _path_dirs(prev, src, dst)
+    nodes = [src]
+    for d in path:
+        nodes.append(radj[nodes[-1]][d])
+    walkthrough = ", then ".join(
+        f"{d} to {node}" for d, node in zip(path, nodes[1:])
+    )
+    lines.append(f"Reading the route back off the search: from {src} go {walkthrough}.")
+    lines.append(f"That's {len(path)} moves, matching the distance.")
+    lines.append(
+        f"So the shortest sequence of directions from {src} to {dst} is: "
+        f"{', '.join(path)}."
+    )
+    return "\n".join(lines)
+
+
+# ---------------------------------------------------------------------------
 # Episodes
 # ---------------------------------------------------------------------------
 
@@ -634,5 +915,53 @@ def selftest() -> dict:
         stats["random_direction"][level] = {
             "exact_mean": round(exact_mean, 4),
             "empirical_mean": round(empirical_mean, 4),
+        }
+    # Oracle traces: think-channel narrations must actually solve the atoms
+    # (trace + terse ANSWER scores 1.0), stay inside the deploy think budget,
+    # avoid firewalled vocabulary, be deterministic, and end by stating the
+    # very answer value the terse line carries.
+    stats["traces"] = {}
+    for level in LEVELS:
+        items = gen_atoms(11, level, 12)
+        scores = []
+        word_counts = []
+        for item in items:
+            trace = oracle_trace(item)
+            if trace != oracle_trace(item):
+                raise base.SelftestError(
+                    f"{FAMILY} L{level} {item['id']}: trace not deterministic"
+                )
+            n_words = len(trace.split())
+            word_counts.append(n_words)
+            if n_words > 800:
+                raise base.SelftestError(
+                    f"{FAMILY} L{level} {item['id']}: trace is {n_words} words > 800"
+                )
+            lowered = trace.lower()
+            for word in base.FORBIDDEN_WORDS:
+                if word in lowered:
+                    raise base.SelftestError(
+                        f"{FAMILY} L{level}: forbidden word {word!r} in trace"
+                    )
+            gold = item["gold"]
+            expected = (
+                ", ".join(gold["path"]) if gold["kind"] == "route" else str(gold["value"])
+            )
+            last_line = trace.strip().splitlines()[-1].lower()
+            if expected.lower() not in last_line:
+                raise base.SelftestError(
+                    f"{FAMILY} L{level} {item['id']}: trace does not end by "
+                    f"stating the answer value"
+                )
+            scores.append(score_atom(item, trace + "\n\n" + oracle_atom(item)))
+        trace_mean = sum(scores) / len(scores)
+        if trace_mean < 0.95:
+            raise base.SelftestError(
+                f"{FAMILY} L{level}: trace+answer score {trace_mean:.3f} < 0.95"
+            )
+        stats["traces"][level] = {
+            "score": round(trace_mean, 4),
+            "words_mean": round(sum(word_counts) / len(word_counts), 1),
+            "words_max": max(word_counts),
         }
     return stats

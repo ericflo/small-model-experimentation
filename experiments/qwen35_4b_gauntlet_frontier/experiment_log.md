@@ -51,3 +51,22 @@ Created as a new experiment scaffold.
   warren cores) is not reachable by ANY train-on-own-verified-outputs
   variant tried. The goal's +0.32-on-both-tiers bar was not decisively
   exceeded; the plateau itself is the finding (claim C53).
+
+## 2026-07-11 (cont.) — oracle-trace distillation: the wall holds against gold procedure supervision
+
+- Added oracle_trace() to the 7 residual families (hand-coded solver
+  procedures narrated as truth-blind think-channel text, C48 style; 1,680
+  traces, selftest-gated: trace + terse ANSWER scores 1.0, <=800 words,
+  deterministic). Trained from base on traces + sharp1024 mix.
+- Decision events (paired vLLM merged): quick +0.2816 (seed 53010; treated
+  ABSOLUTE 0.4743, the highest observed) / +0.2677 (53011); medium +0.2886
+  (53012; absolute 0.4823, highest observed). Deltas remain in the
+  +0.24..+0.34 band.
+- FINAL READING: twelve paired decision events across seven lever classes
+  (dose, iteration, breadth, difficulty, recovery supervision, deploy-budget
+  matching, programmatic oracle distillation) all land in-band. The C53
+  second wall holds even against externally-derived procedure supervision
+  the model cannot self-generate. The goal's "+0.32 decisively on both
+  tiers" bar is unreachable within this recipe family and provenance; the
+  wall itself, its attribution, and the one-time +0.30 step are the
+  program's deliverables.
