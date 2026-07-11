@@ -1,0 +1,25 @@
+{
+  "arm": "uplift_shuffled",
+  "model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_think_ftpo_round2/merged/uplift_shuffled",
+  "per_family": {
+    "brinework": 0.5,
+    "burrowmaze": 0.5714285714285714,
+    "caravan": 0.5,
+    "ferrier": 0.8571428571428571,
+    "foundry_ledger": 0.5,
+    "gatepost": 0.5,
+    "glyphgate": 0.2857142857142857,
+    "kilnrite": 0.6428571428571429,
+    "loomfix": 0.2857142857142857,
+    "runeward": 0.5,
+    "spindle": 0.5,
+    "stallwright": 0.0
+  },
+  "aggregate_all": 0.4702380952380952,
+  "aggregate_trained": 0.46428571428571425,
+  "aggregate_heldout": 0.5,
+  "forced_close_rate_atoms": 0.9305555555555556,
+  "n_atoms": 144,
+  "n_episodes": 14,
+  "wall_s": 188.84514093399048
+}

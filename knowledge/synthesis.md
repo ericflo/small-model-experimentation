@@ -24,6 +24,8 @@ For the machine-checkable claim ledger, use [claims/index.md](claims/index.md).
 
 14. `Stopped`: **canonical-answer likelihood after a cap-bound thought is a real but non-actionable selector** (`qwen35_4b_answer_potential_trace_sft`, claim C51, 2026-07-10). The RL-free idea passed meaningful mechanism controls—real thoughts beat token-shuffled (+0.555 nats) and foreign (+4.791) thoughts, and answer-format ranks were stable (tau 0.830)—but failed its preregistered outcome gate: within-task AUROC 0.617 < 0.65, top-choice uplifts +0.073/+0.058 < +0.10, and only 56.9% passed before answer mention. The key diagnosis is deployment mismatch: 99.37% of 2,048 thoughts hit the 512-token cap; fresh forced-close answers parsed only 13.2%, although parsed answers were 86.9% correct. Teacher forcing measured a useful counterfactual answer state after an injected close, not one the model reliably reached. G0 correctly refused N=128 and SFT. This sharpens C50 at the selection seat: **the close/commit seam must be part of the scored event**, and more samples cannot repair a cap-bound interface.
 
+15. `Negative`: **entropy-routed pull-up finds real thought-direction signal but does not unlock capability when the weight edit is non-local** (`qwen35_4b_think_ftpo_round2`, claim C52, 2026-07-11). Round 1's near-parity pivot FTPO harm motivated the strongest rescue: retain only failed argmax tokens with a ≥0.5-logit lead, focused entropy, and non-degenerate varentropy; compare conventional demotion, bounded +0.5 successful-token uplift, and shuffled uplift on 155 matched forks. Pull-up cut non-target drift 36.6% and true labels beat shuffled labels on the parent gym (+6.25pp) and fresh repository agent (+13.89pp, CI touching zero), so the pivot directions were not empty. But every LoRA arm failed the exact-logit locality ceiling; uplift lost to deep base on hidden-tested coding (39/72 vs 43/72) and was flat/negative on fresh whitebox (+0.3pp/−3.1pp). The design stopped before menagerie. The durable rule is **token-local loss is not a context-local model edit**: entropy/varentropy are routing diagnostics, not monotone correctness or pressure scores, and a larger harvest is unjustified until the intervention itself clears locality.
+
 ## How To Read Prior Results
 
 Do not read the imported tracks as a closed agenda. Read them as seed data for research-program design:
@@ -157,6 +159,13 @@ C51 adds a termination corollary. A thinking budget is not just how many tokens 
 every trace contacts the cap, injecting `</think>` and teacher-forcing an answer evaluates a state the model
 did not autonomously reach. For trace-valuing or trace-SFT work, calibrate on the actual workload, gate
 natural closure and parseability before scaling, and score the close/commit event rather than assuming it.
+
+C52 adds an intervention-locality corollary. Entropy/varentropy can identify focused, conflicted thought
+forks, and outcome labels at those forks can beat shuffled labels, without producing a capability gain.
+Positive-only pull-up is safer than pairwise demotion, but shared LoRA weights still move neighboring logits
+enough to erase transfer. Require an exact-logit locality preflight—then an absolute base and matched-compute
+agentic win—before treating thought-token steering as capability elicitation. Higher varentropy is not a
+license to push harder; its measured safety relationship was non-monotone.
 
 ## Portfolio Implications
 

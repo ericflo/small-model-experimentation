@@ -40,6 +40,14 @@
   answers parsed. The preregistered guard stopped before N=128, selection, or training, so this is a scorer
   negative—not an SFT negative.
 
+- [qwen35_4b_think_ftpo_round2](../../experiments/qwen35_4b_think_ftpo_round2/reports/report.md)
+  (claim C52): selecting only low-entropy, non-degenerate-varentropy confident wrong turns did not rescue
+  single-token preference training. Positive-only chosen-token uplift was safer than conventional demotion
+  and true labels separated from shuffled labels on the parent gym (+6.25pp) and fresh repository agent
+  (+13.89pp, CI touching zero), but every LoRA arm failed the exact-logit locality ceiling. Held-out coding
+  remained below base (39/72 vs 43/72), so the registered result is a low-dose capability null, not a new
+  adaptation recipe.
+
 ## Current Read
 
 Adaptation is useful only when the target behavior is well specified and controls expose whether training
@@ -53,3 +61,10 @@ C51 sharpens the curation prerequisite: before comparing posttraining arms, prov
 label selects deployably better traces at useful effect size. A teacher-forced answer state after an injected
 close is not automatically a valid SFT target source, even when corruption controls say the score notices
 relevant content.
+
+C52 adds a separate intervention prerequisite: a label can contain real
+directional information while its shared-parameter update is too non-local to
+transfer. Confident-outlier geometry and entropy/varentropy routing do not
+replace an exact-logit locality gate. Positive-only pressure is preferable to
+pairwise demotion, but do not scale it until the update clears ≤0.10 median
+non-target drift on independent contexts.

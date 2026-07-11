@@ -3932,9 +3932,9 @@
   },
   {
     "file_counts": {
-      ".gz": 2,
-      ".json": 2,
-      ".md": 7,
+      ".gz": 4,
+      ".json": 35,
+      ".md": 8,
       ".py": 38,
       ".yaml": 3
     },
@@ -3945,15 +3945,19 @@
     "research_programs": [
       "agentic_breadth_installation",
       "posttraining_and_adaptation",
+      "structured_execution_and_compilers",
       "test_time_reasoning_budget"
     ],
     "source_track": "new",
-    "summary": "This frozen-before-run follow-up tests whether entropy-routed, outcome-labeled thought pivots make Qwen3.5-4B better at held-out reasoning and multi-turn coding, comparing bounded successful-token uplift against conventional FTPO demotion and a shuffled-outcome control.",
+    "summary": "This completed follow-up tested whether entropy-routed, outcome-labeled thought pivots make Qwen3.5-4B better at held-out reasoning and multi-turn coding, comparing bounded successful-token uplift against conventional FTPO demotion and a shuffled-outcome control. The preregistered verdict is `LOW_DOSE_NULL`: true labels retained a local signal, but no trained arm elicited general capability.",
     "tags": [
+      "abi",
+      "latent-state",
       "small-model"
     ],
     "title": "Entropy-routed think-pivot optimization round 2",
     "top_level_dirs": [
+      "analysis",
       "configs",
       "data",
       "reports",
@@ -3962,8 +3966,8 @@
       "src",
       "tests"
     ],
-    "total_files": 52,
-    "total_size_bytes": 699989
+    "total_files": 88,
+    "total_size_bytes": 4270270
   },
   {
     "file_counts": {

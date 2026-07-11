@@ -4,6 +4,9 @@
 
 - Treat any C51 follow-up as a new close/commit-scoring experiment, not a larger rejection-sampling run;
   require autonomous termination and parse gates before training.
+- Treat any C52 follow-up as a locality experiment first: compare lower-dose
+  positive-only uplift with a context-gated intervention, and stop before
+  downstream training/evaluation if exact-logit non-target drift exceeds 0.10.
 - Compare DPO, SFT, process distillation, and DAgger on one shared candidate/evidence substrate.
 - Add adapter-free reproducibility manifests for every trained run.
 - Measure catastrophic narrowing: does an update improve one substrate while hurting direct baselines?

@@ -1,0 +1,25 @@
+{
+  "arm": "base",
+  "model": "base",
+  "per_family": {
+    "brinework": 0.5,
+    "burrowmaze": 0.6428571428571429,
+    "caravan": 0.5,
+    "ferrier": 0.7857142857142857,
+    "foundry_ledger": 0.5,
+    "gatepost": 0.5714285714285714,
+    "glyphgate": 0.42857142857142855,
+    "kilnrite": 0.5285714285714286,
+    "loomfix": 0.21428571428571427,
+    "runeward": 0.5833333333333334,
+    "spindle": 0.5714285714285714,
+    "stallwright": 0.0
+  },
+  "aggregate_all": 0.485515873015873,
+  "aggregate_trained": 0.4754761904761905,
+  "aggregate_heldout": 0.5357142857142857,
+  "forced_close_rate_atoms": 0.9513888888888888,
+  "n_atoms": 144,
+  "n_episodes": 14,
+  "wall_s": 216.1816635131836
+}

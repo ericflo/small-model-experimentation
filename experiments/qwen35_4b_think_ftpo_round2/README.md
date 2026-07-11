@@ -1,9 +1,11 @@
 # Entropy-routed think-pivot optimization round 2
 
-This frozen-before-run follow-up tests whether entropy-routed, outcome-labeled
+This completed follow-up tested whether entropy-routed, outcome-labeled
 thought pivots make Qwen3.5-4B better at held-out reasoning and multi-turn
 coding, comparing bounded successful-token uplift against conventional FTPO
-demotion and a shuffled-outcome control.
+demotion and a shuffled-outcome control. The preregistered verdict is
+`LOW_DOSE_NULL`: true labels retained a local signal, but no trained arm
+elicited general capability.
 
 ## Research Program
 
@@ -85,7 +87,8 @@ python3 scripts/run.py --full \
   --artifact-root ../../large_artifacts/qwen35_4b_think_ftpo_round2
 ```
 
-If `analysis/summary.json` sets `menagerie_eligible=true`, run the two frozen
+If a future exact reproduction sets `analysis/summary.json` to
+`menagerie_eligible=true`, run the two frozen
 paired quick events and regenerate analysis:
 
 ```bash
@@ -96,13 +99,27 @@ python3 scripts/bench.py --tier quick --seed 62012 --arms base uplift \
 python3 scripts/analyze.py
 ```
 
-## Pre-run status
+## Result
 
-The implementation and preregistration are complete; no full row-scoring,
-training, or scientific evaluation has run in this design commit. Smoke found
-and removed a saturated one-line repair suite. The hardened semantic suite's
-six-task calibration put base final-workspace success at 2/6 and the matched
-short-trajectory baseline at 1/6—headroom evidence only, not a scored result.
+P0 and every broad P4 guard passed, but P1 locality, P2 fresh whitebox, and P3
+agentic coding all failed. The selector retained 155 confident-wrong-turn rows.
+Positive-only uplift moved its target on 75.5% of them and reduced median
+non-target drift from demotion's 0.229 logits to 0.145, but missed the 0.10
+locality ceiling.
+
+On 72 fresh repository repairs, deep base passed 43, `uplift` 39, `demote` 34,
+and shuffled uplift 29. Uplift's +13.89pp separation from shuffled labels
+(paired-bootstrap 95% CI `[0.00,+27.78]`) and +6.25pp gym separation show that
+the outcome directions were not empty; neither effect overcame the generic
+shared-weight update. Whitebox uplift was +0.26pp at think@1024 and −3.06pp at
+think@2048 versus base. Menagerie was ineligible and zero benchmark seeds were
+consumed. See the [final report](reports/report.md).
+
+Entropy/varentropy were diagnostically useful but not monotone steering
+coordinates: the lowest-varentropy uplift quartile had the cleanest update
+(0.122 median non-target drift), while the third quartile was worst (0.176).
+The next lever is parameter locality—a lower-dose or genuinely context-gated
+intervention that clears P1—not simply more rows or higher-varentropy pivots.
 
 ## Interpretation boundary
 

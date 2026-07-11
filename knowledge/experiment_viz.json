@@ -45341,27 +45341,79 @@
   "qwen35_4b_think_ftpo_round2": {
    "charts": [
     {
-     "title": "Why round 2 has a plausible target: dominant failed fork tokens in the saved pool",
+     "title": "Pulling up is less disruptive than pushing down, but still misses locality",
      "kind": "bar",
      "categories": [
-      "all saved pivots",
-      "failed token is argmax",
-      "argmax leads successful sibling by >=0.5 logits"
+      "push failed token down",
+      "pull successful token up",
+      "pull up, scrambled labels"
      ],
      "series": [
       {
-       "label": "exploratory preflight count",
+       "label": "median neighboring-logit movement",
        "values": [
-        615,
-        290,
-        172
+        0.229,
+        0.145,
+        0.12
        ]
       }
      ],
-     "x_label": "row geometry",
-     "y_label": "saved pivot rows",
-     "y_format": "integer",
-     "note": "This is design evidence from replaying round 1's already-regularized real rows, not a round-2 outcome. Full thresholds also require focused entropy, non-degenerate varentropy, and matched shuffled-control dose before training."
+     "x_label": "training arm",
+     "y_label": "absolute logit drift",
+     "y_format": "number",
+     "note": "The frozen safety ceiling was 0.10 logits. Positive-only pull-up cut collateral by 36.6% versus demotion, but every arm still failed locality; even scrambled labels moved the network broadly."
+    },
+    {
+     "title": "The unchanged deep coding agent remains the capability bar",
+     "kind": "bar",
+     "categories": [
+      "base, 8 serial turns",
+      "push down",
+      "pull up",
+      "pull up, scrambled",
+      "base, two 4-turn tries"
+     ],
+     "series": [
+      {
+       "label": "hidden-test repository repairs",
+       "values": [
+        59.72,
+        47.22,
+        54.17,
+        40.28,
+        30.56
+       ]
+      }
+     ],
+     "x_label": "agent arm",
+     "y_label": "final-workspace success",
+     "y_format": "percent100",
+     "note": "Pull-up solved 39/72 versus deep base 43/72, so it failed the preregistered capability gate. It beat matched-compute branching, showing that preserving a long feedback loop mattered more than splitting the calls."
+    },
+    {
+     "title": "True outcome directions help locally, but not consistently across reasoning budgets",
+     "kind": "bar",
+     "categories": [
+      "fresh reasoning, 1024",
+      "fresh reasoning, 2048",
+      "parent-style gym",
+      "repository agent"
+     ],
+     "series": [
+      {
+       "label": "real pull-up minus scrambled pull-up",
+       "values": [
+        2.55,
+        -2.04,
+        6.25,
+        13.89
+       ]
+      }
+     ],
+     "x_label": "evaluation",
+     "y_label": "success difference",
+     "y_format": "percent100",
+     "note": "Real labels separated on the gym and coding agent (the coding 95% interval touches zero), but the sign flipped at the longer whitebox budget. This is evidence for label signal, not a general capability gain."
     }
    ]
   }

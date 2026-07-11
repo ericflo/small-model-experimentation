@@ -1,0 +1,16 @@
+{
+  "arm": "uplift",
+  "stage": "nothink",
+  "model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_think_ftpo_round2/merged/uplift",
+  "nothink": {
+    "n": 120,
+    "success": 0.375,
+    "mean_score": 0.375,
+    "loop_rate": 0.0,
+    "unresolved_rate": 0.0,
+    "answer_limit_rate": 0.6166666666666667,
+    "natural_close_rate": 1.0,
+    "mean_think_tokens": 0.0
+  },
+  "wall_s": 11.791482210159302
+}

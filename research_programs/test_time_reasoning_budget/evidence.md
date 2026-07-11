@@ -28,6 +28,9 @@
   (foreign-task-thinking ladder) — the decisive content control.
 - [`qwen35_4b_answer_potential_trace_sft`](../../experiments/qwen35_4b_answer_potential_trace_sft/reports/report.md)
   (claim C51) — answer-potential selection over sampled thinking, stopped at its scorer gate.
+- [`qwen35_4b_think_ftpo_round2`](../../experiments/qwen35_4b_think_ftpo_round2/reports/report.md)
+  (claim C52) — entropy/varentropy-routed single-token thought steering, a
+  low-dose capability null after exact-logit locality and agentic transfer gates.
 - [`qwen35_4b_verified_macro_long_context_rerun`](../../experiments/qwen35_4b_verified_macro_long_context_rerun/)
   (contamination-free procedural macro induction) — a workload-shift stress test for budget
   calibration and anti-censoring, still in progress.
@@ -94,6 +97,12 @@
   of 2,048 thoughts hit the 512-token cap. Canonical-answer gain after an injected close contained real
   trace information, but fresh answers parsed only 13.2% and the scorer missed its actionable G0 bars.
   Natural closure and autonomous commit must be launch gates when thinking traces feed selection or SFT.
+- **Entropy/varentropy localize interesting forks but do not make weight edits local.** C52 round 2
+  selected 155 low-entropy, non-degenerate-varentropy confident wrong turns and compared demotion,
+  positive-only uplift, and shuffled uplift. Pull-up was safer and true labels separated from shuffled
+  locally, but every LoRA arm exceeded the 0.10 non-target-logit-drift ceiling and held-out coding stayed
+  below base (39/72 vs 43/72). Higher varentropy was not monotonically safer; the lowest quartile was
+  cleanest. Treat uncertainty as a routing/diagnostic variable, not a correctness label or pressure scale.
 - **The model uses thinking as CONTENT (separability probe + foreign control).** Linear probes show
   correctness is moderately decodable from the answer-token activation (AUC 0.64–0.76). The
   foreign-task-thinking ladder is decisive: splicing a *different* task's thinking collapses accuracy to
@@ -134,3 +143,6 @@ defeated? (This is the most load-bearing open question given MBPP is basic and l
 C51 adds that a thinking budget is not merely a token count: when almost every trace is force-closed, a
 teacher-forced answer score can describe a counterfactual state rather than deployable reasoning. Calibrate
 termination on the actual workload and include the close/commit event in any trace-value measurement.
+C52 adds that editing one thought token in the loss is not the same as making a context-local model edit:
+future steering must pass an exact-logit locality preflight before a larger harvest. This does not weaken
+the separate long-context loop-control mandate, whose pathology begins only at 16k+.
