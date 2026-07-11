@@ -401,11 +401,39 @@ def _eval(
     *,
     smoke: bool = False,
     families: tuple[str, ...] | None = None,
+    scope: str = "calibration",
+    episode_seed_base: int | None = None,
+    no_atoms: bool = False,
 ) -> None:
     out_dir = EXP / "runs" / "proxy_eval" / tag
     scores = out_dir / "scores.json"
     merge_receipt = model / "merge_receipt.json"
     current_receipt_sha = sha256_file(merge_receipt) if merge_receipt.exists() else None
+    expected_families = (
+        list(families)
+        if families is not None
+        else list(config["split"]["train_families"])
+        + list(config["split"]["transfer_families"])
+    )
+    if smoke:
+        expected_families = expected_families[:1]
+    expected_levels = [1] if smoke else [int(value) for value in config["proxy_eval"]["levels"]]
+    expected_episodes = (
+        1
+        if smoke
+        else int(
+            config["proxy_eval"][
+                "confirmatory_episodes_per_level"
+                if scope == "confirmatory"
+                else "calibration_episodes_per_level"
+            ]
+        )
+    )
+    expected_seed_base = int(
+        episode_seed_base
+        if episode_seed_base is not None
+        else config["seeds"]["proxy_eval_base"]
+    )
     if scores.exists():
         previous = json.loads(scores.read_text(encoding="utf-8"))
         fingerprint = previous.get("model_fingerprint", {})
@@ -414,10 +442,12 @@ def _eval(
             and fingerprint.get("merge_receipt_sha256") == current_receipt_sha
             and previous.get("decode") == decode
             and bool(previous.get("smoke")) == smoke
-            and (
-                families is None
-                or previous.get("families") == list(families)
-            )
+            and previous.get("scope") == scope
+            and previous.get("families") == expected_families
+            and previous.get("levels") == expected_levels
+            and int(previous.get("episodes_per_level", -1)) == expected_episodes
+            and int(previous.get("episode_seed_base", -1)) == expected_seed_base
+            and bool(previous.get("atoms_enabled")) == (not no_atoms)
         ):
             print(f"[resume] evaluation {tag} already complete", flush=True)
             return
@@ -425,12 +455,15 @@ def _eval(
     command = [
             str(VLLM_PY), str(EXP / "scripts" / "eval_proxy.py"),
             "--config", str(config_path), "--model", str(model), "--tag", tag,
-            "--scope", "calibration", "--decode", decode,
+            "--scope", scope, "--decode", decode,
+            "--episode-seed-base", str(expected_seed_base),
         ]
     if smoke:
         command.append("--smoke")
     if families is not None:
         command.extend(("--families", *families))
+    if no_atoms:
+        command.append("--no-atoms")
     _run(command)
 
 
@@ -457,6 +490,8 @@ def _calibration_gate(config: dict, config_path: Path, paths: dict[str, Path]) -
     _eval(
         config_path, config, paths["incumbent"],
         "incumbent_compound_calibration", families=COMPOUND_FAMILIES,
+        episode_seed_base=int(config["split"]["calibration_seed_base"]),
+        no_atoms=True,
     )
     _run(
         [

@@ -189,6 +189,14 @@ def main() -> int:
     parser.add_argument("--families", nargs="*")
     parser.add_argument("--levels", type=int, nargs="*")
     parser.add_argument("--episodes-per-level", type=int)
+    parser.add_argument(
+        "--episode-seed-base",
+        type=int,
+        help=(
+            "explicit episode seed namespace; defaults to seeds.proxy_eval_base "
+            "and is then shifted by --seed-offset"
+        ),
+    )
     parser.add_argument("--seed-offset", type=int, default=0)
     parser.add_argument("--no-atoms", action="store_true")
     parser.add_argument("--smoke", action="store_true")
@@ -220,10 +228,15 @@ def main() -> int:
     if episodes_per_level < 1:
         raise SystemExit("episodes-per-level must be positive")
 
+    episode_seed_base = int(
+        args.episode_seed_base
+        if args.episode_seed_base is not None
+        else config["seeds"]["proxy_eval_base"]
+    ) + int(args.seed_offset)
     specs = make_specs(
         process_families,
         {level: episodes_per_level for level in episode_levels},
-        int(config["seeds"]["proxy_eval_base"]) + int(args.seed_offset),
+        episode_seed_base,
     )
     atom_items = []
     if not args.no_atoms:
@@ -248,7 +261,7 @@ def main() -> int:
             rollouts_per_episode=8 if args.decode == "sample8" else 1,
             think_budget=config["proxy_eval"]["thinking_budget"],
             answer_max_tokens=config["proxy_eval"]["answer_max_tokens"],
-            run_seed=int(config["seeds"]["proxy_eval_base"]) + int(args.seed_offset) + 71,
+            run_seed=episode_seed_base + 71,
             greedy=args.decode == "greedy",
             temperature=config["collection"]["temperature"],
             top_p=config["collection"]["top_p"],
@@ -291,6 +304,9 @@ def main() -> int:
         "families": process_families,
         "levels": episode_levels,
         "episodes_per_level": episodes_per_level,
+        "episode_seed_base": episode_seed_base,
+        "seed_offset": int(args.seed_offset),
+        "atoms_enabled": not args.no_atoms,
         "episode_summary": episode_summary,
         "best_of_k_summary": _best_of_k(trajectories),
         "behavior_diagnostics": behavior_diagnostics,

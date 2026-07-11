@@ -213,9 +213,20 @@ class CurriculumTests(unittest.TestCase):
                     }
                 )
         before = sorted(abs(row["advantage"]) for row in trajectories)
+        before_by_group = {
+            group: [row["advantage"] for row in trajectories if row["episode_key"] == group]
+            for group in ("a", "b", "c")
+        }
         digest = _shuffle_group_advantages(trajectories, 43)
         after = sorted(abs(row["advantage"]) for row in trajectories)
         self.assertEqual(before, after)
+        for group in before_by_group:
+            moved = [
+                row["advantage"]
+                for row in trajectories
+                if row["episode_key"] == group
+            ]
+            self.assertNotEqual(moved, before_by_group[group])
         self.assertEqual(len(digest), 64)
 
 

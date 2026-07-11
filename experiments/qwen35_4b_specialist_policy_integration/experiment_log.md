@@ -48,3 +48,12 @@ post-training/adaptation, and benchmark generalization.
   adds `-p_student + p_teacher` to each teacher-top-k reverse-KL summand. The
   earlier “corrected tail mass” wording was inaccurate; no lumped tail bucket
   will be implemented. The registered top-50 choice and all gates are unchanged.
+- A second pre-output orchestration audit found that the compound headroom
+  call would have inherited `seeds.proxy_eval_base` instead of the separately
+  frozen `split.calibration_seed_base`. Before any gym-model generation, the
+  call and its analyzer were made explicit and fail-closed on seed namespace;
+  unrelated atom generation was also disabled for this compound-only gate.
+- The same audit strengthened the frozen shuffled-reward control: advantage
+  vectors are now deranged within each family/level cell with no fixed-point
+  groups. A plain permutation would retain roughly one correctly routed group
+  per cell in expectation and unnecessarily dilute the negative control.

@@ -36,6 +36,9 @@ def main() -> int:
         "families": result.get("families") == list(COMPOUNDS),
         "levels": result.get("levels") == expected_levels,
         "episodes_per_level": result.get("episodes_per_level") == expected_episodes,
+        "episode_seed_base": int(result.get("episode_seed_base", -1))
+        == int(config["split"]["calibration_seed_base"]),
+        "atoms_disabled": result.get("atoms_enabled") is False,
     }
     if not all(protocol_checks.values()):
         raise SystemExit(f"calibration protocol mismatch: {protocol_checks}")

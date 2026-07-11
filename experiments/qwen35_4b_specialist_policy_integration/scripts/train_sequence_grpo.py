@@ -45,7 +45,7 @@ TARGET_MODULES = [
 
 
 def _shuffle_group_advantages(trajectories: list[dict[str, Any]], seed: int) -> str:
-    """Permute complete advantage vectors across groups within family/level."""
+    """Derange complete advantage vectors across groups within family/level."""
     groups: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for row in trajectories:
         groups[row["episode_key"]].append(row)
@@ -57,7 +57,18 @@ def _shuffle_group_advantages(trajectories: list[dict[str, Any]], seed: int) -> 
     for _, keys in sorted(cells.items()):
         keys = sorted(keys)
         donors = list(keys)
-        rng.shuffle(donors)
+        if len(donors) < 2:
+            raise ValueError(
+                "shuffled-reward control needs at least two groups per family/level"
+            )
+        # Sattolo's algorithm creates one cycle, so no group silently retains
+        # its own reward vector. A plain shuffle has about one fixed point per
+        # cell in expectation and weakens this mechanism control.
+        for index in range(len(donors) - 1, 0, -1):
+            donor_index = rng.randrange(index)
+            donors[index], donors[donor_index] = donors[donor_index], donors[index]
+        if any(key == donor for key, donor in zip(keys, donors)):
+            raise AssertionError("advantage-vector derangement retained a fixed point")
         mapping.update(dict(zip(keys, donors)))
     original = {
         key: [float(row["advantage"]) for row in sorted(rows, key=lambda x: x["rollout"])]
