@@ -218,7 +218,12 @@ def sft_record(
         raise RuntimeError(
             f"selected record exceeds max length instead of being truncated: {item['id']} {total}"
         )
-    trace_id = "empty" if trace is None else str(trace["trace_id"])
+    trace_id = "empty" if trace is None else str(
+        trace.get("shuffle_source_trace_id", trace["trace_id"])
+    )
+    source_task_id = None if trace is None else trace.get(
+        "shuffle_source_task_id", trace.get("task_id")
+    )
     return {
         "schema_version": 1,
         "record_id": f"{arm}::{item['id']}::{ordinal:02d}::{trace_id}",
@@ -234,7 +239,7 @@ def sft_record(
         "eos_token_id": eos_id,
         "canonical_answer": item["canonical_answer"],
         "source_trace_id": None if trace is None else trace_id,
-        "source_task_id": None if trace is None else trace.get("task_id"),
+        "source_task_id": source_task_id,
         "source_kind": "empty" if trace is None else trace.get("source_kind"),
         "trace_tokens": len(trace_ids),
         "total_tokens": total,

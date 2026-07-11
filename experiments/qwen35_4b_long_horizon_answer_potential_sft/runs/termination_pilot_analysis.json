@@ -1,0 +1,16 @@
+{
+  "correctness_inspected": false,
+  "exact_periodic_loops": 0,
+  "greater_than_512_tokens": 108,
+  "initial_allowance_contacts": 13,
+  "max_tokens": 14336,
+  "median_tokens": 4636,
+  "natural_close": 96,
+  "natural_close_rate": 0.8888888888888888,
+  "p95_tokens": 14336,
+  "sampled_tokens": 552490,
+  "schema_version": 1,
+  "still_unclosed_after_continuation": 12,
+  "tasks": 27,
+  "traces": 108
+}

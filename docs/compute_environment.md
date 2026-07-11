@@ -17,6 +17,23 @@ environment or model changes.
   `uv venv --python 3.12 .venv && uv pip install --python .venv/bin/python --torch-backend=cu129
   -r requirements-training.txt`. Keep it separate from `.venv-vllm`; vLLM pins Torch and should not
   be allowed to rewrite the training stack.
+- Both Qwen3.5 training fast-path checks currently pass: flash-linear-attention **0.5.1** and
+  causal-conv1d **1.6.2.post1**. The latter has no matching wheel and must be installed *after* the
+  base requirements (so torch, ninja, and the build backend already exist):
+
+  ```bash
+  CUDA_HOME=/usr/local/cuda TORCH_CUDA_ARCH_LIST=8.9 CAUSAL_CONV1D_FORCE_BUILD=TRUE MAX_JOBS=8 \
+    uv pip install --python .venv/bin/python --no-build-isolation \
+    --no-binary causal-conv1d causal-conv1d==1.6.2.post1
+  ```
+
+  Do not spell this as `--no-binary :all:`: that also source-builds ninja before its undeclared
+  `scikit_build_core` backend is available and fails before causal-conv1d compilation starts.
+- Long-context QLoRA uses xFormers **0.0.35** for Qwen3.5's 256-d full-attention heads. PyTorch
+  SDPA's backward requested a 12.86 GiB workspace at 14,687 tokens and OOMed even after loss/layer
+  checkpointing; the xFormers causal kernel completed the same full-token backward in 29.1 s at
+  15.0 GiB peak. Keep the batch at one, use the experiment's >8k layer-checkpoint/chunked-loss path,
+  and retain the pre-run 14k stress test whenever this stack changes.
 - The Transformers throughput, OOM, and training measurements later in this document came from the
   previous single **RTX 4090 (24 GB), WSL** environment. They remain recovery/reference evidence, not
   measurements of this RunPod.

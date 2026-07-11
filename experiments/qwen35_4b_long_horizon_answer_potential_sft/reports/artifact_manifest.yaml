@@ -5,21 +5,31 @@ external_artifacts:
   - name: raw generation, score, rollout, and branch shards
     storage: /workspace/large_artifacts/qwen35_4b_long_horizon_answer_potential_sft/pools
     required_for: exact selector reconstruction and alternate diagnostics
-    checksum: populated per shard in runs/artifact_index.json
-    regenerate: .venv-vllm/bin/python experiments/qwen35_4b_long_horizon_answer_potential_sft/scripts/run.py --stage harvest
+    checksum: atomic per-shard SHA-256 receipts in each external stage index.json
+    regenerate: .venv-vllm/bin/python experiments/qwen35_4b_long_horizon_answer_potential_sft/scripts/run.py --stage full
+  - name: exact-token six-arm SFT datasets
+    storage: /workspace/large_artifacts/qwen35_4b_long_horizon_answer_potential_sft/sft
+    required_for: matched QLoRA training matrix
+    checksum: data/sft_manifest.json after selection
+    regenerate: .venv-vllm/bin/python experiments/qwen35_4b_long_horizon_answer_potential_sft/scripts/run.py --stage select
   - name: QLoRA adapters
     storage: /workspace/large_artifacts/qwen35_4b_long_horizon_answer_potential_sft/adapters
     required_for: trained-arm reproduction
-    checksum: populated after training
-    regenerate: experiments/qwen35_4b_long_horizon_answer_potential_sft/scripts/train_all.sh
+    checksum: per-arm training_receipt.json
+    regenerate: .venv-vllm/bin/python experiments/qwen35_4b_long_horizon_answer_potential_sft/scripts/run.py --stage train
   - name: merged composite checkpoints
     storage: /workspace/large_artifacts/qwen35_4b_long_horizon_answer_potential_sft/merged
     required_for: vLLM trained-arm evaluation
-    checksum: populated after merge
-    regenerate: experiments/qwen35_4b_long_horizon_answer_potential_sft/scripts/merge_all.sh
+    checksum: per-arm merge_receipt.json plus behavioral_difference_probe.json
+    regenerate: .venv-vllm/bin/python experiments/qwen35_4b_long_horizon_answer_potential_sft/scripts/run.py --stage merge
+  - name: raw long-horizon evaluation generations
+    storage: /workspace/large_artifacts/qwen35_4b_long_horizon_answer_potential_sft/evaluation
+    required_for: exact paired analysis, k=8, and alternate parsing
+    checksum: external evaluation index.json files contain per-split SHA-256 receipts
+    regenerate: .venv-vllm/bin/python experiments/qwen35_4b_long_horizon_answer_potential_sft/scripts/run.py --stage evaluate-greedy
 omitted_artifacts:
   - path: raw token-level candidate shards
-    reason: planned pool is hundreds of MB to GB; compact checksummed selection datasets remain in git
+    reason: planned pool and exact-token SFT rows are large; tracked manifests retain paths, counts, and SHA-256 receipts
 reproducibility:
   smoke_command: .venv-vllm/bin/python experiments/qwen35_4b_long_horizon_answer_potential_sft/scripts/run.py --stage smoke
   full_command: .venv-vllm/bin/python experiments/qwen35_4b_long_horizon_answer_potential_sft/scripts/run.py --stage full

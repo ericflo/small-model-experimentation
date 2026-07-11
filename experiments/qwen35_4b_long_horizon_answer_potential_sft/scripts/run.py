@@ -26,7 +26,7 @@ import yaml  # noqa: E402
 
 from hf_scorer import HFAnswerPotentialScorer  # noqa: E402
 from io_utils import read_json, read_jsonl, sha256_file, write_json, write_jsonl  # noqa: E402
-from model_ops import AnswerPotentialModel  # noqa: E402
+from model_ops import AnswerPotentialModel, answer_mention  # noqa: E402
 from pivot import choose_pivot, natural_checkpoint_indices  # noqa: E402
 from selector import (  # noqa: E402
     deranged_sources,
@@ -48,6 +48,10 @@ from vllm_runner import (  # noqa: E402
 CONFIG_PATH = EXP / "configs" / "default.yaml"
 DATA_DIR = EXP / "data" / "procedural"
 RUNS_DIR = EXP / "runs"
+
+
+def optional_mean(values: list[float | int | bool]) -> float | None:
+    return sum(float(value) for value in values) / len(values) if values else None
 
 
 def _run(command: list[str], *, check: bool = True) -> subprocess.CompletedProcess[str]:
@@ -401,6 +405,28 @@ def score_pool(
                 flush=True,
             )
             scored = [scorer.score_trace(items[task_id], row) for row in eligible]
+            if split == "calibration":
+                variants = {
+                    str(row["trace_id"]): scorer.score_trace(
+                        items[task_id], row, boundary="format_variant"
+                    )
+                    for row in eligible
+                }
+                scored = [
+                    {
+                        **row,
+                        "format_variant_answer_gain_per_answer_token": variants[
+                            str(row["trace_id"])
+                        ]["answer_gain_per_answer_token"],
+                        "format_variant_joint_gain_per_answer_token": variants[
+                            str(row["trace_id"])
+                        ]["joint_gain_per_answer_token"],
+                        "format_variant_answer_ll_sum": variants[str(row["trace_id"])][
+                            "answer_ll_sum"
+                        ],
+                    }
+                    for row in scored
+                ]
             artifact = write_jsonl_gz(
                 output_root / "scores" / f"{task_id}.jsonl.gz", scored
             )
@@ -507,17 +533,39 @@ def analyze_calibration(config: dict[str, Any]) -> dict[str, Any]:
             [float(row["answer_gain_per_answer_token"]) for row in joined],
             [float(row["joint_gain_per_answer_token"]) for row in joined],
         )
+        format_tau = kendall_tau_b(
+            [float(row["answer_gain_per_answer_token"]) for row in joined],
+            [
+                float(row["format_variant_answer_gain_per_answer_token"])
+                for row in joined
+            ],
+        )
         per_task.append(
             {
                 "task_id": task_id,
                 "family": items[task_id]["family"],
                 "level": items[task_id]["level"],
                 "raw_traces": len(raw),
+                "natural_close_rate": mean([bool(row["natural_close"]) for row in raw]),
+                "loop_rate": mean([bool(row["loop_flag"]) for row in raw]),
+                "answer_mention_rate": mean(
+                    [
+                        answer_mention(
+                            str(row.get("text", "")),
+                            str(items[task_id]["canonical_answer"]),
+                        )
+                        is not None
+                        for row in raw
+                    ]
+                ),
                 "eligible_scored": len(scores),
                 "rollout_traces": len(joined),
-                "success_rate": mean([row["success_fraction"] for row in joined]),
+                "success_rate": optional_mean(
+                    [row["success_fraction"] for row in joined]
+                ),
                 "auroc": aucs,
                 "answer_joint_kendall_tau_b": tau,
+                "canonical_format_kendall_tau_b": format_tau,
             }
         )
     result = {
@@ -526,29 +574,40 @@ def analyze_calibration(config: dict[str, Any]) -> dict[str, Any]:
         "raw_candidates": sum(row["raw_traces"] for row in per_task),
         "eligible_candidates": sum(row["eligible_scored"] for row in per_task),
         "task_macro_auroc": {
-            name: mean(
+            name: optional_mean(
                 [row["auroc"][name] for row in per_task if row["auroc"][name] is not None]
             )
             for name in metric_names
         },
         "top_k_mean_rollout_success": {
-            name: {str(k): mean(values) for k, values in curves.items()}
+            name: {str(k): optional_mean(values) for k, values in curves.items()}
             for name, curves in top_curves.items()
         },
-        "task_macro_answer_joint_kendall_tau_b": mean(
+        "task_macro_answer_joint_kendall_tau_b": optional_mean(
             [
                 row["answer_joint_kendall_tau_b"]
                 for row in per_task
                 if row["answer_joint_kendall_tau_b"] is not None
             ]
         ),
+        "task_macro_canonical_format_kendall_tau_b": optional_mean(
+            [
+                row["canonical_format_kendall_tau_b"]
+                for row in per_task
+                if row["canonical_format_kendall_tau_b"] is not None
+            ]
+        ),
         "family": {
             family: {
                 "tasks": sum(row["family"] == family for row in per_task),
-                "mean_success": mean(
-                    [row["success_rate"] for row in per_task if row["family"] == family]
+                "mean_success": optional_mean(
+                    [
+                        row["success_rate"]
+                        for row in per_task
+                        if row["family"] == family and row["success_rate"] is not None
+                    ]
                 ),
-                "answer_auroc": mean(
+                "answer_auroc": optional_mean(
                     [
                         row["auroc"]["answer_gain"]
                         for row in per_task
@@ -664,7 +723,16 @@ def plan_pivots(config: dict[str, Any]) -> dict[str, Any]:
                 Path(score_index["shards"][task_id]["artifact"]["path"])
             )
             if not scores:
-                raise RuntimeError(f"no eligible independent root for {task_id}")
+                index.setdefault("excluded", {})[task_id] = (
+                    "no eligible natural independent root after registered top-ups"
+                )
+                write_json(index_path, index)
+                print(
+                    f"[train_pivots] {task_number}/{len(raw_index['shards'])} "
+                    f"{task_id} excluded: no natural root",
+                    flush=True,
+                )
+                continue
             root_score = max(
                 scores,
                 key=lambda row: (
@@ -750,6 +818,8 @@ def plan_pivots(config: dict[str, Any]) -> dict[str, Any]:
         "schema_version": 1,
         "stage": "train_pivots",
         "tasks": len(index["shards"]),
+        "excluded_tasks": len(index.get("excluded", {})),
+        "exclusions": index.get("excluded", {}),
         "elapsed_seconds_this_invocation": time.perf_counter() - started,
         "external_index": str(index_path),
     }
@@ -927,7 +997,10 @@ def build_sft_datasets(config: dict[str, Any]) -> dict[str, Any]:
     seed = int(config["sampling"]["control_seed"])
     selections: dict[str, dict[str, list[dict[str, Any]]]] = {}
     details_root = root / "selection" / "tasks"
-    for task_number, task_id in enumerate(sorted(items), 1):
+    available_tasks = sorted(
+        set.intersection(*(set(index["shards"]) for index in indices.values()))
+    )
+    for task_number, task_id in enumerate(available_tasks, 1):
         traces: list[dict[str, Any]] = []
         scores: list[dict[str, Any]] = []
         for key in ("independent", "branch"):
@@ -964,7 +1037,7 @@ def build_sft_datasets(config: dict[str, Any]) -> dict[str, Any]:
             ],
         )
         if task_number % 50 == 0:
-            print(f"[selection] {task_number}/{len(items)}", flush=True)
+            print(f"[selection] {task_number}/{len(available_tasks)}", flush=True)
 
     required = int(selector_config["minimum_natural_per_task"])
     core_tasks = [
@@ -1587,6 +1660,216 @@ def _stable_analysis_offset(text_value: str) -> int:
     ) % 100_000
 
 
+def run_seed43_replication(
+    config: dict[str, Any], analysis: dict[str, Any] | None = None
+) -> dict[str, Any]:
+    """Run only the preregistered treatment/baseline pairs that triggered."""
+    if analysis is None:
+        analysis = read_json(RUNS_DIR / "final_analysis.json")
+    triggered = {
+        treatment: verdict["strongest_trace_baseline"]
+        for treatment, verdict in analysis["treatment_verdicts"].items()
+        if verdict["seed43_triggered"]
+    }
+    if not triggered:
+        result = {
+            "schema_version": 1,
+            "triggered": False,
+            "reason": "no seed-42 treatment met the frozen replication trigger",
+        }
+        write_json(RUNS_DIR / "replication_analysis.json", result)
+        return result
+
+    python = ROOT / ".venv" / "bin" / "python"
+    artifact_root = external_root(config)
+    arms = sorted(set(triggered) | set(triggered.values()))
+    seed = int(config["sft"]["replication_seed"])
+    for arm in arms:
+        dataset = artifact_root / "sft" / f"{arm}.jsonl.gz"
+        adapter = artifact_root / "adapters" / "seed43" / arm
+        train_receipt = adapter / "training_receipt.json"
+        if not train_receipt.is_file():
+            print(f"[replication] training seed43 {arm}", flush=True)
+            subprocess.run(
+                [
+                    str(python),
+                    str(EXP / "scripts" / "train_think.py"),
+                    "--arm",
+                    arm,
+                    "--dataset",
+                    str(dataset),
+                    "--out",
+                    str(adapter),
+                    "--seed",
+                    str(seed),
+                ],
+                cwd=ROOT,
+                check=True,
+            )
+        merged = artifact_root / "merged" / "seed43" / arm
+        merge_receipt_path = merged / "merge_receipt.json"
+        adapter_receipt = read_json(train_receipt)
+        adapter_hash = adapter_receipt["artifacts"]["adapter_model.safetensors"][
+            "sha256"
+        ]
+        if not merge_receipt_path.is_file():
+            print(f"[replication] merging seed43 {arm}", flush=True)
+            subprocess.run(
+                [
+                    str(python),
+                    str(EXP / "scripts" / "merge_adapter.py"),
+                    "--adapter",
+                    str(adapter),
+                    "--out",
+                    str(merged),
+                ],
+                cwd=ROOT,
+                check=True,
+            )
+            write_json(
+                merge_receipt_path,
+                {
+                    "schema_version": 1,
+                    "arm": arm,
+                    "seed": seed,
+                    "adapter_sha256": adapter_hash,
+                    "config_sha256": sha256_file(merged / "config.json"),
+                    "weight_files": [
+                        {"name": path.name, "bytes": path.stat().st_size}
+                        for path in sorted(merged.glob("*.safetensors"))
+                    ],
+                },
+            )
+
+    iid_items = load_split("iid_eval")
+    item_by_id = {str(item["id"]): item for item in iid_items}
+    records = [
+        {
+            "id": item["id"],
+            "messages": [{"role": "user", "content": item["prompt"]}],
+            "meta": {"family": item["family"], "level": item["level"]},
+        }
+        for item in iid_items
+    ]
+    sampling = SamplingConfig(
+        thinking="natural",
+        n=1,
+        max_tokens=int(config["evaluation"]["natural_max_tokens"]),
+        greedy=True,
+        run_seed=int(config["evaluation"]["seeds"][0]),
+    )
+    evaluation_rows = {}
+    for arm in arms:
+        output_path = (
+            artifact_root / "evaluation" / "seed43" / "greedy" / arm / "iid_eval.jsonl.gz"
+        )
+        receipt_path = output_path.with_suffix(".receipt.json")
+        if receipt_path.is_file() and valid_receipt(read_json(receipt_path)):
+            evaluation_rows[arm] = read_jsonl_gz(output_path)
+            continue
+        with VLLMRunner(
+            engine_config(
+                config,
+                model_override=artifact_root / "merged" / "seed43" / arm,
+            )
+        ) as runner:
+            raw, metadata = runner.generate(records, sampling)
+        scored, summary = _score_evaluation_rows(item_by_id, raw)
+        receipt = write_jsonl_gz(output_path, scored)
+        write_json(
+            receipt_path,
+            {**receipt, "summary": summary, "generation_metadata": metadata},
+        )
+        evaluation_rows[arm] = scored
+
+    seed42_index = read_json(
+        artifact_root / "evaluation" / "seed42" / "greedy" / "index.json"
+    )
+    base_rows = read_jsonl_gz(
+        Path(seed42_index["arms"]["base"]["iid_eval"]["artifact"]["path"])
+    )
+    base_tokens = {
+        str(row["id"]): row["outputs"][0]["token_ids"] for row in base_rows
+    }
+    behavior = {
+        arm: sum(
+            base_tokens[str(row["id"])] != row["outputs"][0]["token_ids"]
+            for row in evaluation_rows[arm]
+        )
+        for arm in arms
+    }
+    if any(count == 0 for count in behavior.values()):
+        raise RuntimeError(f"seed43 merged behavioral no-op: {behavior}")
+
+    contrasts = {}
+    for treatment, baseline in triggered.items():
+        t43 = {
+            str(row["id"]): float(row["outputs"][0]["score"])
+            for row in evaluation_rows[treatment]
+        }
+        b43 = {
+            str(row["id"]): float(row["outputs"][0]["score"])
+            for row in evaluation_rows[baseline]
+        }
+        seed43_pairs = {
+            task_id: (t43[task_id], b43[task_id]) for task_id in t43
+        }
+        seed42_t = task_scores_from_eval_index(
+            seed42_index, treatment, "iid_eval"
+        )
+        seed42_b = task_scores_from_eval_index(seed42_index, baseline, "iid_eval")
+        pooled = {
+            **{
+                f"seed42::{task_id}": (seed42_t[task_id], seed42_b[task_id])
+                for task_id in seed42_t
+            },
+            **{
+                f"seed43::{task_id}": pair for task_id, pair in seed43_pairs.items()
+            },
+        }
+        seed43_stats = paired_bootstrap(
+            seed43_pairs,
+            resamples=int(config["evaluation"]["bootstrap_resamples"]),
+            seed=int(config["evaluation"]["bootstrap_seed"]) + 43,
+        )
+        pooled_stats = paired_bootstrap(
+            pooled,
+            resamples=int(config["evaluation"]["bootstrap_resamples"]),
+            seed=int(config["evaluation"]["bootstrap_seed"]) + 4243,
+        )
+        contrasts[treatment] = {
+            "baseline": baseline,
+            "seed43": seed43_stats,
+            "pooled": pooled_stats,
+            "replicated_banking_positive": (
+                float(seed43_stats["mean_delta"]) > 0
+                and float(pooled_stats["ci95_low"]) > 0
+            ),
+        }
+    result = {
+        "schema_version": 1,
+        "triggered": True,
+        "seed": seed,
+        "arms": arms,
+        "behavioral_differences_vs_base": behavior,
+        "contrasts": contrasts,
+    }
+    write_json(RUNS_DIR / "replication_analysis.json", result)
+    analysis["seed43_replication"] = result
+    write_json(RUNS_DIR / "final_analysis.json", analysis)
+    return result
+
+
+def task_scores_from_eval_index(
+    index: dict[str, Any], arm: str, split: str
+) -> dict[str, float]:
+    rows = read_jsonl_gz(Path(index["arms"][arm][split]["artifact"]["path"]))
+    return {
+        str(row["id"]): float(row["outputs"][0]["score"])
+        for row in rows
+    }
+
+
 def run_smoke(config: dict[str, Any]) -> dict[str, Any]:
     design_boundary_receipt(config)
     build_data()
@@ -1701,6 +1984,7 @@ def main(argv: list[str] | None = None) -> int:
             "evaluate-greedy",
             "evaluate-sample8",
             "analyze",
+            "replicate",
             "full",
         ),
         default="smoke",
@@ -1801,6 +2085,8 @@ def main(argv: list[str] | None = None) -> int:
         evaluate_matrix(config, mode="sample8")
     elif args.stage == "analyze":
         analyze_evaluation(config)
+    elif args.stage == "replicate":
+        run_seed43_replication(config)
     else:
         build_data()
         generate_pool(
@@ -1865,7 +2151,8 @@ def main(argv: list[str] | None = None) -> int:
         behavioral_difference_probe(config)
         evaluate_matrix(config, mode="greedy")
         evaluate_matrix(config, mode="sample8")
-        analyze_evaluation(config)
+        analysis = analyze_evaluation(config)
+        run_seed43_replication(config, analysis)
     return 0
 
 

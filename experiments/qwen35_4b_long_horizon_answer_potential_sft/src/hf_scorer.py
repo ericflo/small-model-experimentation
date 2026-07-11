@@ -12,6 +12,7 @@ from transformers import AutoModelForImageTextToText, AutoTokenizer
 from vllm_runner import MODEL_ID, MODEL_REVISION
 
 ANSWER_BOUNDARY = "</think>\n\nANSWER: "
+FORMAT_VARIANT_BOUNDARY = "</think>\nANSWER: "
 
 
 class HFAnswerPotentialScorer:
@@ -40,14 +41,20 @@ class HFAnswerPotentialScorer:
             attn_implementation="sdpa",
             local_files_only=local_files_only,
         ).to("cuda").eval()
-        self.boundary_ids = self.tokenizer.encode(
-            ANSWER_BOUNDARY, add_special_tokens=False
-        )
+        self.boundary_ids_by_name = {
+            "canonical": self.tokenizer.encode(
+                ANSWER_BOUNDARY, add_special_tokens=False
+            ),
+            "format_variant": self.tokenizer.encode(
+                FORMAT_VARIANT_BOUNDARY, add_special_tokens=False
+            ),
+        }
+        self.boundary_ids = self.boundary_ids_by_name["canonical"]
         close_id = self.tokenizer.encode("</think>", add_special_tokens=False)
         if len(close_id) != 1 or self.boundary_ids[0] != close_id[0]:
             raise RuntimeError("unexpected close/boundary tokenization")
         self._prompt_cache: dict[str, list[int]] = {}
-        self._empty_cache: dict[str, dict[str, Any]] = {}
+        self._empty_cache: dict[tuple[str, str], dict[str, Any]] = {}
 
     def close(self) -> None:
         del self.model
@@ -103,40 +110,57 @@ class HFAnswerPotentialScorer:
         return output
 
     def _condition(
-        self, item: Mapping[str, Any], trace_token_ids: Sequence[int]
+        self,
+        item: Mapping[str, Any],
+        trace_token_ids: Sequence[int],
+        *,
+        boundary: str,
     ) -> dict[str, Any]:
         prompt = self.prompt_ids(item)
+        if boundary not in self.boundary_ids_by_name:
+            raise ValueError(f"unknown answer boundary: {boundary}")
+        boundary_ids = self.boundary_ids_by_name[boundary]
         answer_ids = self.tokenizer.encode(
             str(item["canonical_answer"]), add_special_tokens=False
         )
-        target = [*self.boundary_ids, *answer_ids]
+        target = [*boundary_ids, *answer_ids]
         values = self._score_target(
             prefix_ids=[*prompt, *[int(value) for value in trace_token_ids]],
             target_ids=target,
         )
-        answer_values = values[len(self.boundary_ids) :]
+        answer_values = values[len(boundary_ids) :]
         return {
+            "boundary": boundary,
             "joint_ll_sum": sum(values),
             "answer_ll_sum": sum(answer_values),
-            "close_boundary_ll_sum": sum(values[: len(self.boundary_ids)]),
+            "close_boundary_ll_sum": sum(values[: len(boundary_ids)]),
             "joint_token_logprobs": values,
             "answer_token_logprobs": answer_values,
-            "boundary_token_ids": self.boundary_ids,
+            "boundary_token_ids": boundary_ids,
             "answer_token_ids": answer_ids,
             "full_sequence_tokens": len(prompt) + len(trace_token_ids) + len(target),
         }
 
-    def empty(self, item: Mapping[str, Any]) -> dict[str, Any]:
+    def empty(
+        self, item: Mapping[str, Any], *, boundary: str = "canonical"
+    ) -> dict[str, Any]:
         task_id = str(item["id"])
-        if task_id not in self._empty_cache:
-            self._empty_cache[task_id] = self._condition(item, [])
-        return self._empty_cache[task_id]
+        key = (task_id, boundary)
+        if key not in self._empty_cache:
+            self._empty_cache[key] = self._condition(item, [], boundary=boundary)
+        return self._empty_cache[key]
 
     def score_trace(
-        self, item: Mapping[str, Any], trace: Mapping[str, Any]
+        self,
+        item: Mapping[str, Any],
+        trace: Mapping[str, Any],
+        *,
+        boundary: str = "canonical",
     ) -> dict[str, Any]:
-        condition = self._condition(item, trace["token_ids"])
-        baseline = self.empty(item)
+        condition = self._condition(
+            item, trace["token_ids"], boundary=boundary
+        )
+        baseline = self.empty(item, boundary=boundary)
         answer_tokens = len(condition["answer_token_ids"])
         return {
             "trace_id": trace["trace_id"],

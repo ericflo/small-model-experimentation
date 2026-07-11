@@ -7,10 +7,14 @@ import argparse
 import gzip
 import hashlib
 import json
+import os
 import random
 import time
+import types
 from pathlib import Path
 from typing import Any
+
+os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
 
 import torch
 import yaml
@@ -26,12 +30,19 @@ from transformers import (
     Trainer,
     TrainingArguments,
 )
+from transformers.modeling_outputs import BaseModelOutputWithPast
+from transformers.modeling_utils import ALL_ATTENTION_FUNCTIONS
+from transformers.models.qwen3_5.modeling_qwen3_5 import (
+    create_recurrent_attention_mask,
+)
 
 EXP = Path(__file__).resolve().parents[1]
 CONFIG_PATH = EXP / "configs" / "default.yaml"
 MODEL_ID = "Qwen/Qwen3.5-4B"
 MODEL_REVISION = "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
 TARGET = ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+FULL_LOGIT_MAX_LENGTH = 8192
+LONG_LOSS_CHUNK = 256
 
 
 def sha256_file(path: Path) -> str:
@@ -131,6 +142,121 @@ def text_checkpoint_key_mapping() -> dict[str, str]:
     return mapping
 
 
+def xformers_causal_attention(
+    module: Any,
+    query: torch.Tensor,
+    key: torch.Tensor,
+    value: torch.Tensor,
+    attention_mask: torch.Tensor | None,
+    dropout: float = 0.0,
+    scaling: float | None = None,
+    **kwargs: Any,
+) -> tuple[torch.Tensor, None]:
+    """Memory-efficient causal attention for Qwen's 256-d full heads."""
+    del kwargs
+    if attention_mask is not None:
+        raise ValueError("xFormers training path requires unpadded batch-one rows")
+    from xformers.ops import LowerTriangularMask, memory_efficient_attention
+
+    if module.num_key_value_groups > 1:
+        key = key.repeat_interleave(module.num_key_value_groups, dim=1)
+        value = value.repeat_interleave(module.num_key_value_groups, dim=1)
+    output = memory_efficient_attention(
+        query.transpose(1, 2).contiguous(),
+        key.transpose(1, 2).contiguous(),
+        value.transpose(1, 2).contiguous(),
+        attn_bias=LowerTriangularMask(),
+        p=dropout,
+        scale=scaling,
+    )
+    return output, None
+
+
+def memory_bounded_text_forward(
+    self: Any,
+    input_ids: torch.LongTensor | None = None,
+    attention_mask: torch.Tensor | None = None,
+    position_ids: torch.LongTensor | None = None,
+    past_key_values: Any = None,
+    inputs_embeds: torch.FloatTensor | None = None,
+    use_cache: bool | None = None,
+    **kwargs: Any,
+) -> BaseModelOutputWithPast:
+    """Qwen3.5 text forward with the missing long-row layer checkpoints.
+
+    Transformers 5.13 sets ``gradient_checkpointing=True`` on this model but
+    its generated Qwen3.5 text loop never calls ``_gradient_checkpointing_func``.
+    For >8k training rows we checkpoint each decoder layer explicitly.  Short
+    rows retain the stock direct loop and its measured 4.2 s smoke speed.
+    """
+    del kwargs
+    if (input_ids is None) == (inputs_embeds is None):
+        raise ValueError("specify exactly one of input_ids or inputs_embeds")
+    if use_cache:
+        raise ValueError("training forward does not permit cache state")
+    if past_key_values is not None:
+        raise ValueError("training forward does not accept past_key_values")
+    if inputs_embeds is None:
+        inputs_embeds = self.embed_tokens(input_ids)
+    if position_ids is None:
+        position_ids = torch.arange(
+            inputs_embeds.shape[1], device=inputs_embeds.device
+        )
+        position_ids = position_ids.view(1, 1, -1).expand(
+            4, inputs_embeds.shape[0], -1
+        )
+    elif position_ids.ndim == 2:
+        position_ids = position_ids[None, ...].expand(
+            4, position_ids.shape[0], -1
+        )
+    if position_ids.ndim == 3 and position_ids.shape[0] == 4:
+        text_position_ids = position_ids[0]
+        rope_position_ids = position_ids[1:]
+    else:
+        text_position_ids = None
+        rope_position_ids = position_ids
+    if attention_mask is not None and not bool(torch.all(attention_mask == 1)):
+        raise ValueError("batch-one exact-token training may not contain padding")
+    masks = {
+        "full_attention": None,
+        "linear_attention": create_recurrent_attention_mask(
+            config=self.config,
+            inputs_embeds=inputs_embeds,
+            attention_mask=attention_mask,
+            past_key_values=None,
+            position_ids=text_position_ids,
+        ),
+    }
+    hidden_states = inputs_embeds
+    position_embeddings = self.rotary_emb(hidden_states, rope_position_ids)
+    checkpoint_layers = hidden_states.shape[1] > FULL_LOGIT_MAX_LENGTH
+    for index, decoder_layer in enumerate(
+        self.layers[: self.config.num_hidden_layers]
+    ):
+        layer_mask = masks[self.config.layer_types[index]]
+        def layer_forward(
+            values: torch.Tensor,
+            layer: Any = decoder_layer,
+            selected_mask: Any = layer_mask,
+        ) -> torch.Tensor:
+            return layer(
+                values,
+                position_embeddings=position_embeddings,
+                attention_mask=selected_mask,
+                position_ids=text_position_ids,
+                past_key_values=None,
+                use_cache=False,
+            )
+
+        hidden_states = (
+            checkpoint(layer_forward, hidden_states, use_reentrant=True)
+            if checkpoint_layers
+            else layer_forward(hidden_states)
+        )
+    hidden_states = self.norm(hidden_states)
+    return BaseModelOutputWithPast(last_hidden_state=hidden_states)
+
+
 def load_text_model(rank: int, alpha: int, dropout: float) -> Any:
     outer = AutoConfig.from_pretrained(
         MODEL_ID,
@@ -155,6 +281,12 @@ def load_text_model(rank: int, alpha: int, dropout: float) -> Any:
         dtype=torch.bfloat16,
         quantization_config=bnb,
         attn_implementation="sdpa",
+    )
+    ALL_ATTENTION_FUNCTIONS.register("xformers_memory_efficient", xformers_causal_attention)
+    model.config._attn_implementation = "xformers_memory_efficient"
+    model.model.config._attn_implementation = "xformers_memory_efficient"
+    model.model.forward = types.MethodType(
+        memory_bounded_text_forward, model.model
     )
     model = prepare_model_for_kbit_training(model, use_gradient_checkpointing=True)
     model = get_peft_model(
@@ -265,41 +397,52 @@ def main() -> int:
         ) -> Any:
             weights = inputs.pop("loss_weights")[:, 1:].contiguous()
             labels = inputs.pop("labels")[:, 1:].contiguous()
-            causal_model = peft_model.get_base_model()
-            outputs = causal_model.model(
-                input_ids=inputs["input_ids"],
-                attention_mask=inputs["attention_mask"],
-                use_cache=False,
-                return_dict=True,
-            )
-            hidden = outputs.last_hidden_state[:, :-1, :]
             mask = (labels != -100).float() * weights
-            denominator = mask.sum().clamp(min=1.0)
-
-            def chunk_numerator(
-                chunk_hidden: torch.Tensor,
-                chunk_labels: torch.Tensor,
-                chunk_mask: torch.Tensor,
-            ) -> torch.Tensor:
-                logits = causal_model.lm_head(chunk_hidden).float()
+            if inputs["input_ids"].shape[1] <= FULL_LOGIT_MAX_LENGTH:
+                outputs = peft_model(**inputs, use_cache=False, return_dict=True)
+                logits = outputs.logits[:, :-1, :].contiguous()
+                # Keep logits bf16.  This path is ~23x faster on 3--4k rows
+                # and remains comfortably inside 48 GB through 8k.
                 losses = torch.nn.functional.cross_entropy(
                     logits.reshape(-1, logits.size(-1)),
-                    chunk_labels.reshape(-1).clamp(min=0),
+                    labels.reshape(-1).clamp(min=0),
                     reduction="none",
-                ).view_as(chunk_labels)
-                return (losses * chunk_mask).sum()
-
-            numerator = hidden.new_zeros((), dtype=torch.float32)
-            for start in range(0, hidden.shape[1], 128):
-                stop = min(hidden.shape[1], start + 128)
-                numerator = numerator + checkpoint(
-                    chunk_numerator,
-                    hidden[:, start:stop, :],
-                    labels[:, start:stop],
-                    mask[:, start:stop],
-                    use_reentrant=False,
+                ).view_as(labels)
+                loss = (losses * mask).sum() / mask.sum().clamp(min=1.0)
+            else:
+                causal_model = peft_model.get_base_model()
+                outputs = causal_model.model(
+                    input_ids=inputs["input_ids"],
+                    attention_mask=inputs["attention_mask"],
+                    use_cache=False,
+                    return_dict=True,
                 )
-            loss = numerator / denominator
+                hidden = outputs.last_hidden_state[:, :-1, :]
+
+                def chunk_numerator(
+                    chunk_hidden: torch.Tensor,
+                    chunk_labels: torch.Tensor,
+                    chunk_mask: torch.Tensor,
+                ) -> torch.Tensor:
+                    chunk_logits = causal_model.lm_head(chunk_hidden)
+                    chunk_losses = torch.nn.functional.cross_entropy(
+                        chunk_logits.reshape(-1, chunk_logits.size(-1)),
+                        chunk_labels.reshape(-1).clamp(min=0),
+                        reduction="none",
+                    ).view_as(chunk_labels)
+                    return (chunk_losses * chunk_mask).sum()
+
+                numerator = hidden.new_zeros((), dtype=torch.float32)
+                for start in range(0, hidden.shape[1], LONG_LOSS_CHUNK):
+                    stop = min(hidden.shape[1], start + LONG_LOSS_CHUNK)
+                    numerator = numerator + checkpoint(
+                        chunk_numerator,
+                        hidden[:, start:stop, :],
+                        labels[:, start:stop],
+                        mask[:, start:stop],
+                        use_reentrant=True,
+                    )
+                loss = numerator / mask.sum().clamp(min=1.0)
             return (loss, outputs) if return_outputs else loss
 
     trainer = ExactWeightedTrainer(
@@ -330,6 +473,12 @@ def main() -> int:
         "forward_tokens": sum(len(row["input_ids"]) for row in encoded),
         "supervised_weighted_tokens": sum(sum(row["loss_weights"]) for row in encoded),
         "skipped_rows": 0,
+        "full_logit_rows": sum(
+            len(row["input_ids"]) <= FULL_LOGIT_MAX_LENGTH for row in encoded
+        ),
+        "chunked_loss_rows": sum(
+            len(row["input_ids"]) > FULL_LOGIT_MAX_LENGTH for row in encoded
+        ),
         "epochs": epochs,
         "elapsed_seconds": time.perf_counter() - started,
         "peak_cuda_bytes": torch.cuda.max_memory_allocated(),

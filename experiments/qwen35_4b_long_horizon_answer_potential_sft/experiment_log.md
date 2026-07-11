@@ -31,3 +31,19 @@ No scientific GPU work had run at this boundary. No benchmark content was read.
 - Transformers' causal-LM auto mapping passed Qwen3.5's multimodal wrapper config to its text-only class
   and failed on the missing outer `vocab_size`. The scorer now uses the checkpoint-native conditional
   generation class in text-only mode; a real 4,096-token forward and the integrated parity gate passed.
+
+## 2026-07-11 — Termination Pilot and Training Envelope
+
+- Registered pilot complete: 108 traces, 108/108 longer than 512 tokens, median 4,636, p95/max 14,336,
+  96/108 natural closes, zero exact periodic loops, and 13 initial allowance contacts. The one
+  non-loomfix contact closed after continuation; all 12 residual open traces were loomfix and remain
+  mechanically ineligible rather than force-closed. Correctness was not inspected.
+- Built an isolated pinned training environment. Both Qwen hybrid fast-path checks pass. Exact text-only
+  loading maps all 426 language weights and exposes 42,467,328 rank-32 LoRA parameters.
+- The first checkpointed 3--4k loss implementation was unnecessarily slow (96.5 s/two rows). Bounded
+  bf16 full logits preserved the same loss and reduced it to 4.2 s at 17.7 GiB peak.
+- The required 14,687-token stress row exposed a quadratic SDPA backward allocation (12.86 GiB) and
+  OOMed. Training now uses xFormers memory-efficient causal attention, explicit per-layer checkpoints
+  plus 256-token recomputed vocabulary chunks only above 8,192 tokens. The exact untruncated 14,687-token
+  row passed in 29.1 s at 15.0 GiB peak; the ordinary path remained 4.7 s/two rows. These are operational
+  kernel/memory repairs made before any SFT dataset exists, not result-conditioned design changes.

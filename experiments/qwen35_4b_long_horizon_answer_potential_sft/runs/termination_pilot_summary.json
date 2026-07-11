@@ -1,0 +1,13 @@
+{
+  "elapsed_seconds_this_invocation": 2479.866644232534,
+  "external_index": "/workspace/large_artifacts/qwen35_4b_long_horizon_answer_potential_sft/pools/termination_pilot/index.json",
+  "loops": 0,
+  "natural_close": 96,
+  "prior_available": 108,
+  "rows": 108,
+  "sampled_tokens": 552490,
+  "schema_version": 1,
+  "split": "termination_pilot",
+  "stage": "termination_pilot",
+  "tasks": 27
+}
