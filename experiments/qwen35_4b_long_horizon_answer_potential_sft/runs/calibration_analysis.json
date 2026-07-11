@@ -1,0 +1,2796 @@
+{
+  "effectiveness_gate_used": false,
+  "eligible_candidates": 7814,
+  "family": {
+    "burrowmaze": {
+      "answer_auroc": 0.5426989229306163,
+      "mean_success": 0.18411458333333333,
+      "tasks": 15
+    },
+    "caravan": {
+      "answer_auroc": 0.8664051226551227,
+      "mean_success": 0.0078125,
+      "tasks": 15
+    },
+    "ferrier": {
+      "answer_auroc": 0.5541366504514164,
+      "mean_success": 0.19480820105820104,
+      "tasks": 15
+    },
+    "foundry_ledger": {
+      "answer_auroc": 0.5931899641577061,
+      "mean_success": 0.2429728835978836,
+      "tasks": 15
+    },
+    "gatepost": {
+      "answer_auroc": 0.6590262045730494,
+      "mean_success": 0.7659655969275522,
+      "tasks": 15
+    },
+    "glyphgate": {
+      "answer_auroc": null,
+      "mean_success": 0.0,
+      "tasks": 15
+    },
+    "kilnrite": {
+      "answer_auroc": 0.38732059495272236,
+      "mean_success": 0.005577956989247312,
+      "tasks": 15
+    },
+    "loomfix": {
+      "answer_auroc": null,
+      "mean_success": 0.0,
+      "tasks": 15
+    },
+    "runeward": {
+      "answer_auroc": null,
+      "mean_success": 0.0,
+      "tasks": 15
+    }
+  },
+  "per_task": [
+    {
+      "answer_joint_kendall_tau_b": 0.3055555555555556,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 0.6365914786967418,
+        "joint_gain": 0.46867167919799496,
+        "negative_length": 0.5338345864661654,
+        "trace_prior": 0.6716791979949874
+      },
+      "canonical_format_kendall_tau_b": 0.8015873015873016,
+      "eligible_scored": 64,
+      "family": "burrowmaze",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.02734375,
+      "task_id": "burrowmaze-L1-s72001-0000"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.24503968253968253,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 0.7323717948717948,
+        "joint_gain": 0.5897435897435898,
+        "negative_length": 0.780448717948718,
+        "trace_prior": 0.7644230769230769
+      },
+      "canonical_format_kendall_tau_b": 0.8551587301587301,
+      "eligible_scored": 64,
+      "family": "burrowmaze",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.06640625,
+      "task_id": "burrowmaze-L1-s72001-0001"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.37996031746031744,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.9513888888888888,
+      "eligible_scored": 64,
+      "family": "burrowmaze",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.9921875,
+      "task_id": "burrowmaze-L1-s72001-0002"
+    },
+    {
+      "answer_joint_kendall_tau_b": -0.09325396825396826,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 0.2594871794871795,
+        "joint_gain": 0.8317948717948718,
+        "negative_length": 0.7728205128205128,
+        "trace_prior": 0.6687179487179488
+      },
+      "canonical_format_kendall_tau_b": 0.8263888888888888,
+      "eligible_scored": 64,
+      "family": "burrowmaze",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.18359375,
+      "task_id": "burrowmaze-L1-s72001-0003"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.20932539682539683,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 0.6516290726817042,
+        "joint_gain": 0.6942355889724311,
+        "negative_length": 0.7819548872180451,
+        "trace_prior": 0.6416040100250626
+      },
+      "canonical_format_kendall_tau_b": 0.7827380952380952,
+      "eligible_scored": 64,
+      "family": "burrowmaze",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.046875,
+      "task_id": "burrowmaze-L1-s72001-0004"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.30753968253968256,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 0.5541666666666667,
+        "joint_gain": 0.4583333333333333,
+        "negative_length": 0.8916666666666667,
+        "trace_prior": 0.8541666666666666
+      },
+      "canonical_format_kendall_tau_b": 0.8541666666666666,
+      "eligible_scored": 64,
+      "family": "burrowmaze",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.796875,
+      "task_id": "burrowmaze-L2-s72001-0000"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.5029761904761905,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.7797619047619048,
+      "eligible_scored": 64,
+      "family": "burrowmaze",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "burrowmaze-L2-s72001-0001"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.12797619047619047,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.7827380952380952,
+      "eligible_scored": 64,
+      "family": "burrowmaze",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "burrowmaze-L2-s72001-0002"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.4255952380952381,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 0.605072463768116,
+        "joint_gain": 0.7210144927536232,
+        "negative_length": 0.7367149758454107,
+        "trace_prior": 0.6654589371980676
+      },
+      "canonical_format_kendall_tau_b": 0.8928571428571429,
+      "eligible_scored": 64,
+      "family": "burrowmaze",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.12109375,
+      "task_id": "burrowmaze-L2-s72001-0003"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.3482142857142857,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8005952380952381,
+      "eligible_scored": 64,
+      "family": "burrowmaze",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "burrowmaze-L2-s72001-0004"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.44246031746031744,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 0.49318181818181817,
+        "joint_gain": 0.5056818181818182,
+        "negative_length": 0.8471590909090909,
+        "trace_prior": 0.8454545454545455
+      },
+      "canonical_format_kendall_tau_b": 0.9017857142857143,
+      "eligible_scored": 64,
+      "family": "burrowmaze",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.38671875,
+      "task_id": "burrowmaze-L3-s72001-0000"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.3869047619047619,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8343253968253969,
+      "eligible_scored": 64,
+      "family": "burrowmaze",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "burrowmaze-L3-s72001-0001"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.2013888888888889,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8293650793650794,
+      "eligible_scored": 64,
+      "family": "burrowmaze",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "burrowmaze-L3-s72001-0002"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.48115079365079366,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 0.4090909090909091,
+        "joint_gain": 0.3340909090909091,
+        "negative_length": 0.7840909090909091,
+        "trace_prior": 0.7159090909090909
+      },
+      "canonical_format_kendall_tau_b": 0.9523809523809523,
+      "eligible_scored": 64,
+      "family": "burrowmaze",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.140625,
+      "task_id": "burrowmaze-L3-s72001-0003"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.4791666666666667,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8581349206349206,
+      "eligible_scored": 64,
+      "family": "burrowmaze",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "burrowmaze-L3-s72001-0004"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.37996031746031744,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 0.9841269841269841,
+        "joint_gain": 0.9206349206349206,
+        "negative_length": 0.9841269841269841,
+        "trace_prior": 0.5238095238095238
+      },
+      "canonical_format_kendall_tau_b": 0.8809523809523809,
+      "eligible_scored": 64,
+      "family": "caravan",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.00390625,
+      "task_id": "caravan-L1-s72001-0000"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.38095238095238093,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 0.49206349206349204,
+        "joint_gain": 0.09523809523809523,
+        "negative_length": 0.25396825396825395,
+        "trace_prior": 0.4603174603174603
+      },
+      "canonical_format_kendall_tau_b": 0.816468253968254,
+      "eligible_scored": 64,
+      "family": "caravan",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.015625,
+      "task_id": "caravan-L1-s72001-0001"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.4642857142857143,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.871031746031746,
+      "eligible_scored": 64,
+      "family": "caravan",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "caravan-L1-s72001-0002"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.43353174603174605,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 0.7767857142857143,
+        "joint_gain": 0.6986607142857143,
+        "negative_length": 0.6741071428571429,
+        "trace_prior": 0.7008928571428571
+      },
+      "canonical_format_kendall_tau_b": 0.8581349206349206,
+      "eligible_scored": 64,
+      "family": "caravan",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.05078125,
+      "task_id": "caravan-L1-s72001-0003"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.6736111111111112,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8968253968253969,
+      "eligible_scored": 64,
+      "family": "caravan",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "caravan-L1-s72001-0004"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.5863095238095238,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8680555555555556,
+      "eligible_scored": 64,
+      "family": "caravan",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "caravan-L2-s72001-0000"
+    },
+    {
+      "answer_joint_kendall_tau_b": -0.3898809523809524,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.7926587301587301,
+      "eligible_scored": 64,
+      "family": "caravan",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "caravan-L2-s72001-0001"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.7083333333333334,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 0.9454545454545454,
+        "joint_gain": 0.9131313131313131,
+        "negative_length": 0.898989898989899,
+        "trace_prior": 0.8848484848484849
+      },
+      "canonical_format_kendall_tau_b": 0.8915902035702534,
+      "eligible_scored": 64,
+      "family": "caravan",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.03515625,
+      "task_id": "caravan-L2-s72001-0002"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.6666666666666666,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 1.0,
+        "joint_gain": 0.9841269841269841,
+        "negative_length": 1.0,
+        "trace_prior": 0.9682539682539683
+      },
+      "canonical_format_kendall_tau_b": 0.8611111111111112,
+      "eligible_scored": 64,
+      "family": "caravan",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.00390625,
+      "task_id": "caravan-L2-s72001-0003"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.7033730158730159,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 1.0,
+        "joint_gain": 1.0,
+        "negative_length": 0.9838709677419355,
+        "trace_prior": 0.9919354838709677
+      },
+      "canonical_format_kendall_tau_b": 0.8125,
+      "eligible_scored": 64,
+      "family": "caravan",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0078125,
+      "task_id": "caravan-L2-s72001-0004"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.3978174603174603,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8161746716043777,
+      "eligible_scored": 64,
+      "family": "caravan",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "caravan-L3-s72001-0000"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.5615079365079365,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8551587301587301,
+      "eligible_scored": 64,
+      "family": "caravan",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "caravan-L3-s72001-0001"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.4176587301587302,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.876984126984127,
+      "eligible_scored": 64,
+      "family": "caravan",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "caravan-L3-s72001-0002"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.5496031746031746,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8511904761904762,
+      "eligible_scored": 64,
+      "family": "caravan",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "caravan-L3-s72001-0003"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.5714285714285714,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8194444444444444,
+      "eligible_scored": 64,
+      "family": "caravan",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "caravan-L3-s72001-0004"
+    },
+    {
+      "answer_joint_kendall_tau_b": -0.2857142857142857,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 0.2923076923076923,
+        "joint_gain": 0.48717948717948717,
+        "negative_length": 0.5482051282051282,
+        "trace_prior": 0.48
+      },
+      "canonical_format_kendall_tau_b": 0.7946428571428571,
+      "eligible_scored": 64,
+      "family": "ferrier",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.34375,
+      "task_id": "ferrier-L1-s72001-0000"
+    },
+    {
+      "answer_joint_kendall_tau_b": -0.0855094726062468,
+      "answer_mention_rate": 0.984375,
+      "auroc": {
+        "answer_gain": 0.34173387096774194,
+        "joint_gain": 0.5917338709677419,
+        "negative_length": 0.8266129032258065,
+        "trace_prior": 0.7792338709677419
+      },
+      "canonical_format_kendall_tau_b": 0.8095238095238095,
+      "eligible_scored": 63,
+      "family": "ferrier",
+      "level": 1,
+      "loop_rate": 0.015625,
+      "natural_close_rate": 0.984375,
+      "raw_traces": 64,
+      "rollout_traces": 63,
+      "success_rate": 0.30158730158730157,
+      "task_id": "ferrier-L1-s72001-0001"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.3759920634920635,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 0.750795334040297,
+        "joint_gain": 0.7953340402969247,
+        "negative_length": 0.8488865323435844,
+        "trace_prior": 0.7571580063626723
+      },
+      "canonical_format_kendall_tau_b": 0.7182539682539683,
+      "eligible_scored": 64,
+      "family": "ferrier",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.21484375,
+      "task_id": "ferrier-L1-s72001-0002"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.09623015873015874,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 0.3697916666666667,
+        "joint_gain": 0.6302083333333334,
+        "negative_length": 0.7760416666666666,
+        "trace_prior": 0.7322916666666667
+      },
+      "canonical_format_kendall_tau_b": 0.6805555555555556,
+      "eligible_scored": 64,
+      "family": "ferrier",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.31640625,
+      "task_id": "ferrier-L1-s72001-0003"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.5297619047619048,
+      "answer_mention_rate": 0.984375,
+      "auroc": {
+        "answer_gain": 0.6552734375,
+        "joint_gain": 0.6162109375,
+        "negative_length": 0.728515625,
+        "trace_prior": 0.7275390625
+      },
+      "canonical_format_kendall_tau_b": 0.8353174603174603,
+      "eligible_scored": 64,
+      "family": "ferrier",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.26171875,
+      "task_id": "ferrier-L1-s72001-0004"
+    },
+    {
+      "answer_joint_kendall_tau_b": -0.17063492063492064,
+      "answer_mention_rate": 0.984375,
+      "auroc": {
+        "answer_gain": 0.4184184184184184,
+        "joint_gain": 0.8168168168168168,
+        "negative_length": 0.7812812812812813,
+        "trace_prior": 0.7107107107107107
+      },
+      "canonical_format_kendall_tau_b": 0.6359126984126984,
+      "eligible_scored": 64,
+      "family": "ferrier",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.20703125,
+      "task_id": "ferrier-L2-s72001-0000"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.5327380952380952,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 0.7934782608695652,
+        "joint_gain": 0.7198067632850241,
+        "negative_length": 0.7349033816425121,
+        "trace_prior": 0.6014492753623188
+      },
+      "canonical_format_kendall_tau_b": 0.933531746031746,
+      "eligible_scored": 64,
+      "family": "ferrier",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.1640625,
+      "task_id": "ferrier-L2-s72001-0001"
+    },
+    {
+      "answer_joint_kendall_tau_b": -0.3531746031746032,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 0.40350877192982454,
+        "joint_gain": 0.4994152046783626,
+        "negative_length": 0.5245614035087719,
+        "trace_prior": 0.5426900584795321
+      },
+      "canonical_format_kendall_tau_b": 0.8353174603174603,
+      "eligible_scored": 64,
+      "family": "ferrier",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.41796875,
+      "task_id": "ferrier-L2-s72001-0002"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.5238095238095238,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 0.7947434292866082,
+        "joint_gain": 0.7521902377972466,
+        "negative_length": 0.77909887359199,
+        "trace_prior": 0.7809762202753442
+      },
+      "canonical_format_kendall_tau_b": 0.8511904761904762,
+      "eligible_scored": 64,
+      "family": "ferrier",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.12890625,
+      "task_id": "ferrier-L2-s72001-0003"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.020833333333333332,
+      "answer_mention_rate": 0.984375,
+      "auroc": {
+        "answer_gain": 0.6410256410256411,
+        "joint_gain": 0.8253205128205128,
+        "negative_length": 0.6955128205128205,
+        "trace_prior": 0.7163461538461539
+      },
+      "canonical_format_kendall_tau_b": 0.7946428571428571,
+      "eligible_scored": 64,
+      "family": "ferrier",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.078125,
+      "task_id": "ferrier-L2-s72001-0004"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.2986111111111111,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 0.45169082125603865,
+        "joint_gain": 0.6497584541062802,
+        "negative_length": 0.6026570048309179,
+        "trace_prior": 0.4504830917874396
+      },
+      "canonical_format_kendall_tau_b": 0.9017857142857143,
+      "eligible_scored": 64,
+      "family": "ferrier",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.08203125,
+      "task_id": "ferrier-L3-s72001-0000"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.4930555555555556,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 0.5833333333333334,
+        "joint_gain": 0.9006410256410257,
+        "negative_length": 0.842948717948718,
+        "trace_prior": 0.6586538461538461
+      },
+      "canonical_format_kendall_tau_b": 0.9464285714285714,
+      "eligible_scored": 64,
+      "family": "ferrier",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.09765625,
+      "task_id": "ferrier-L3-s72001-0001"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.5347222222222222,
+      "answer_mention_rate": 0.984375,
+      "auroc": {
+        "answer_gain": 0.9491525423728814,
+        "joint_gain": 0.8271186440677966,
+        "negative_length": 0.9254237288135593,
+        "trace_prior": 0.8203389830508474
+      },
+      "canonical_format_kendall_tau_b": 0.9523809523809523,
+      "eligible_scored": 64,
+      "family": "ferrier",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.03125,
+      "task_id": "ferrier-L3-s72001-0002"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.5739887352790578,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 0.593939393939394,
+        "joint_gain": 0.7828282828282829,
+        "negative_length": 0.36262626262626263,
+        "trace_prior": 0.3505050505050505
+      },
+      "canonical_format_kendall_tau_b": 0.9252432155657963,
+      "eligible_scored": 63,
+      "family": "ferrier",
+      "level": 3,
+      "loop_rate": 0.015625,
+      "natural_close_rate": 0.984375,
+      "raw_traces": 64,
+      "rollout_traces": 63,
+      "success_rate": 0.21428571428571427,
+      "task_id": "ferrier-L3-s72001-0003"
+    },
+    {
+      "answer_joint_kendall_tau_b": -0.3115079365079365,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 0.27285714285714285,
+        "joint_gain": 0.8385714285714285,
+        "negative_length": 0.49714285714285716,
+        "trace_prior": 0.4757142857142857
+      },
+      "canonical_format_kendall_tau_b": 0.8611111111111112,
+      "eligible_scored": 64,
+      "family": "ferrier",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0625,
+      "task_id": "ferrier-L3-s72001-0004"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.6805555555555556,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8923078021917329,
+      "eligible_scored": 64,
+      "family": "foundry_ledger",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.90625,
+      "task_id": "foundry_ledger-L1-s72001-0000"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.7361111111111112,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8938492063492064,
+      "eligible_scored": 64,
+      "family": "foundry_ledger",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.94921875,
+      "task_id": "foundry_ledger-L1-s72001-0001"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.6160714285714286,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8965517517259031,
+      "eligible_scored": 64,
+      "family": "foundry_ledger",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.93359375,
+      "task_id": "foundry_ledger-L1-s72001-0002"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.6686507936507936,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 0.4444444444444444,
+        "joint_gain": 0.4126984126984127,
+        "negative_length": 0.2698412698412698,
+        "trace_prior": 1.0
+      },
+      "canonical_format_kendall_tau_b": 0.8323412698412699,
+      "eligible_scored": 64,
+      "family": "foundry_ledger",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.8515625,
+      "task_id": "foundry_ledger-L1-s72001-0003"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.5386904761904762,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.814484126984127,
+      "eligible_scored": 64,
+      "family": "foundry_ledger",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "foundry_ledger-L1-s72001-0004"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.3501984126984127,
+      "answer_mention_rate": 0.984375,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.876984126984127,
+      "eligible_scored": 64,
+      "family": "foundry_ledger",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "foundry_ledger-L2-s72001-0000"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.6140873015873016,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.9047619047619048,
+      "eligible_scored": 64,
+      "family": "foundry_ledger",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "foundry_ledger-L2-s72001-0001"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.3531746031746032,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8234126984126984,
+      "eligible_scored": 64,
+      "family": "foundry_ledger",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "foundry_ledger-L2-s72001-0002"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.4226190476190476,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8244047619047619,
+      "eligible_scored": 64,
+      "family": "foundry_ledger",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "foundry_ledger-L2-s72001-0003"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.5922619047619048,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8402777777777778,
+      "eligible_scored": 64,
+      "family": "foundry_ledger",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "foundry_ledger-L2-s72001-0004"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.5350877192982456,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8245614035087719,
+      "eligible_scored": 57,
+      "family": "foundry_ledger",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 0.890625,
+      "raw_traces": 64,
+      "rollout_traces": 57,
+      "success_rate": 0.0,
+      "task_id": "foundry_ledger-L3-s72001-0000"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.5625,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.878968253968254,
+      "eligible_scored": 64,
+      "family": "foundry_ledger",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "foundry_ledger-L3-s72001-0001"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.4055598046589241,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8453712941666435,
+      "eligible_scored": 64,
+      "family": "foundry_ledger",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "foundry_ledger-L3-s72001-0002"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.1626984126984127,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8419747220137562,
+      "eligible_scored": 64,
+      "family": "foundry_ledger",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "foundry_ledger-L3-s72001-0003"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.32206861239119305,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 0.7419354838709677,
+        "joint_gain": 0.9838709677419355,
+        "negative_length": 0.0967741935483871,
+        "trace_prior": 0.6935483870967742
+      },
+      "canonical_format_kendall_tau_b": 0.880184331797235,
+      "eligible_scored": 63,
+      "family": "foundry_ledger",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 0.984375,
+      "raw_traces": 64,
+      "rollout_traces": 63,
+      "success_rate": 0.003968253968253968,
+      "task_id": "foundry_ledger-L3-s72001-0004"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.38146441372247825,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 1.0,
+        "joint_gain": 0.930188679245283,
+        "negative_length": 0.4037735849056604,
+        "trace_prior": 0.3584905660377358
+      },
+      "canonical_format_kendall_tau_b": 0.9651817716333846,
+      "eligible_scored": 63,
+      "family": "gatepost",
+      "level": 1,
+      "loop_rate": 0.015625,
+      "natural_close_rate": 0.984375,
+      "raw_traces": 64,
+      "rollout_traces": 63,
+      "success_rate": 0.15873015873015872,
+      "task_id": "gatepost-L1-s72001-0000"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.30830248545742994,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 1.0,
+        "joint_gain": 0.9191489361702128,
+        "negative_length": 0.4219858156028369,
+        "trace_prior": 0.5290780141843971
+      },
+      "canonical_format_kendall_tau_b": 0.970386039132734,
+      "eligible_scored": 62,
+      "family": "gatepost",
+      "level": 1,
+      "loop_rate": 0.03125,
+      "natural_close_rate": 0.96875,
+      "raw_traces": 64,
+      "rollout_traces": 62,
+      "success_rate": 0.23790322580645162,
+      "task_id": "gatepost-L1-s72001-0001"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.39099941554646406,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.7638807714786674,
+      "eligible_scored": 59,
+      "family": "gatepost",
+      "level": 1,
+      "loop_rate": 0.046875,
+      "natural_close_rate": 0.921875,
+      "raw_traces": 64,
+      "rollout_traces": 59,
+      "success_rate": 0.9830508474576272,
+      "task_id": "gatepost-L1-s72001-0002"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.2832080200501253,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.9385964912280702,
+      "eligible_scored": 57,
+      "family": "gatepost",
+      "level": 1,
+      "loop_rate": 0.09375,
+      "natural_close_rate": 0.890625,
+      "raw_traces": 64,
+      "rollout_traces": 57,
+      "success_rate": 0.9736842105263158,
+      "task_id": "gatepost-L1-s72001-0003"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.1367231638418079,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.9096045197740112,
+      "eligible_scored": 60,
+      "family": "gatepost",
+      "level": 1,
+      "loop_rate": 0.046875,
+      "natural_close_rate": 0.9375,
+      "raw_traces": 64,
+      "rollout_traces": 60,
+      "success_rate": 0.9875,
+      "task_id": "gatepost-L1-s72001-0004"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.4722222222222222,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8065476190476191,
+      "eligible_scored": 64,
+      "family": "gatepost",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.96484375,
+      "task_id": "gatepost-L2-s72001-0000"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.30952380952380953,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 0.6349206349206349,
+        "joint_gain": 0.4444444444444444,
+        "negative_length": 0.3492063492063492,
+        "trace_prior": 0.06349206349206349
+      },
+      "canonical_format_kendall_tau_b": 0.875,
+      "eligible_scored": 64,
+      "family": "gatepost",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.890625,
+      "task_id": "gatepost-L2-s72001-0001"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.566468253968254,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.810515873015873,
+      "eligible_scored": 64,
+      "family": "gatepost",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.9609375,
+      "task_id": "gatepost-L2-s72001-0002"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.5748281332628239,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.812797461660497,
+      "eligible_scored": 62,
+      "family": "gatepost",
+      "level": 2,
+      "loop_rate": 0.015625,
+      "natural_close_rate": 0.96875,
+      "raw_traces": 64,
+      "rollout_traces": 62,
+      "success_rate": 0.9838709677419355,
+      "task_id": "gatepost-L2-s72001-0003"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.2636968766001024,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 0.8032786885245902,
+        "joint_gain": 0.16393442622950818,
+        "negative_length": 0.4672131147540984,
+        "trace_prior": 0.4918032786885246
+      },
+      "canonical_format_kendall_tau_b": 0.7644649257552484,
+      "eligible_scored": 63,
+      "family": "gatepost",
+      "level": 2,
+      "loop_rate": 0.015625,
+      "natural_close_rate": 0.984375,
+      "raw_traces": 64,
+      "rollout_traces": 63,
+      "success_rate": 0.8690476190476191,
+      "task_id": "gatepost-L2-s72001-0004"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.04352278545826933,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 0.05555555555555555,
+        "joint_gain": 0.25,
+        "negative_length": 0.8888888888888888,
+        "trace_prior": 0.8277777777777777
+      },
+      "canonical_format_kendall_tau_b": 0.7982590885816693,
+      "eligible_scored": 63,
+      "family": "gatepost",
+      "level": 3,
+      "loop_rate": 0.015625,
+      "natural_close_rate": 0.984375,
+      "raw_traces": 64,
+      "rollout_traces": 63,
+      "success_rate": 0.9246031746031746,
+      "task_id": "gatepost-L3-s72001-0000"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.46924603174603174,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 0.5714285714285714,
+        "joint_gain": 0.3169642857142857,
+        "negative_length": 0.6540178571428571,
+        "trace_prior": 0.8035714285714286
+      },
+      "canonical_format_kendall_tau_b": 0.8611111111111112,
+      "eligible_scored": 64,
+      "family": "gatepost",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.69921875,
+      "task_id": "gatepost-L3-s72001-0001"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.3740079365079365,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 0.9598997493734336,
+        "joint_gain": 0.8095238095238095,
+        "negative_length": 0.5939849624060151,
+        "trace_prior": 0.7418546365914787
+      },
+      "canonical_format_kendall_tau_b": 0.9513888888888888,
+      "eligible_scored": 64,
+      "family": "gatepost",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0859375,
+      "task_id": "gatepost-L3-s72001-0002"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.24206349206349206,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8581349206349206,
+      "eligible_scored": 64,
+      "family": "gatepost",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.9921875,
+      "task_id": "gatepost-L3-s72001-0003"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.3005952380952381,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 0.2471264367816092,
+        "joint_gain": 0.13505747126436782,
+        "negative_length": 0.6724137931034483,
+        "trace_prior": 0.75
+      },
+      "canonical_format_kendall_tau_b": 0.8859126984126984,
+      "eligible_scored": 64,
+      "family": "gatepost",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.77734375,
+      "task_id": "gatepost-L3-s72001-0004"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.07738095238095238,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8234126984126984,
+      "eligible_scored": 64,
+      "family": "glyphgate",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "glyphgate-L1-s72001-0000"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.5059523809523809,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8680555555555556,
+      "eligible_scored": 64,
+      "family": "glyphgate",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "glyphgate-L1-s72001-0001"
+    },
+    {
+      "answer_joint_kendall_tau_b": -0.16567460317460317,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8432539682539683,
+      "eligible_scored": 64,
+      "family": "glyphgate",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "glyphgate-L1-s72001-0002"
+    },
+    {
+      "answer_joint_kendall_tau_b": -0.11011904761904762,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.7559523809523809,
+      "eligible_scored": 64,
+      "family": "glyphgate",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "glyphgate-L1-s72001-0003"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.34325396825396826,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.9007936507936508,
+      "eligible_scored": 64,
+      "family": "glyphgate",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "glyphgate-L1-s72001-0004"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.01488095238095238,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8333333333333334,
+      "eligible_scored": 64,
+      "family": "glyphgate",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "glyphgate-L2-s72001-0000"
+    },
+    {
+      "answer_joint_kendall_tau_b": -0.0248015873015873,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.7658730158730159,
+      "eligible_scored": 64,
+      "family": "glyphgate",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "glyphgate-L2-s72001-0001"
+    },
+    {
+      "answer_joint_kendall_tau_b": -0.031746031746031744,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8759920634920635,
+      "eligible_scored": 64,
+      "family": "glyphgate",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "glyphgate-L2-s72001-0002"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.3704918032786885,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.7737704918032787,
+      "eligible_scored": 61,
+      "family": "glyphgate",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 0.953125,
+      "raw_traces": 64,
+      "rollout_traces": 61,
+      "success_rate": 0.0,
+      "task_id": "glyphgate-L2-s72001-0003"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.3630952380952381,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8630952380952381,
+      "eligible_scored": 64,
+      "family": "glyphgate",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "glyphgate-L2-s72001-0004"
+    },
+    {
+      "answer_joint_kendall_tau_b": -0.1378968253968254,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.7797619047619048,
+      "eligible_scored": 64,
+      "family": "glyphgate",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "glyphgate-L3-s72001-0000"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.07539682539682539,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.7361111111111112,
+      "eligible_scored": 64,
+      "family": "glyphgate",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "glyphgate-L3-s72001-0001"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.30654761904761907,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8859126984126984,
+      "eligible_scored": 64,
+      "family": "glyphgate",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "glyphgate-L3-s72001-0002"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.24206349206349206,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8809523809523809,
+      "eligible_scored": 64,
+      "family": "glyphgate",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "glyphgate-L3-s72001-0003"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.37590711175616837,
+      "answer_mention_rate": 0.984375,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8490566037735849,
+      "eligible_scored": 53,
+      "family": "glyphgate",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 0.828125,
+      "raw_traces": 64,
+      "rollout_traces": 53,
+      "success_rate": 0.0,
+      "task_id": "glyphgate-L3-s72001-0004"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.47329455314648333,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8138551031200423,
+      "eligible_scored": 62,
+      "family": "kilnrite",
+      "level": 1,
+      "loop_rate": 0.03125,
+      "natural_close_rate": 0.96875,
+      "raw_traces": 64,
+      "rollout_traces": 62,
+      "success_rate": 0.0,
+      "task_id": "kilnrite-L1-s72001-0000"
+    },
+    {
+      "answer_joint_kendall_tau_b": -0.49404761904761907,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.7738095238095238,
+      "eligible_scored": 64,
+      "family": "kilnrite",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "kilnrite-L1-s72001-0001"
+    },
+    {
+      "answer_joint_kendall_tau_b": -0.49702380952380953,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8472222222222222,
+      "eligible_scored": 64,
+      "family": "kilnrite",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "kilnrite-L1-s72001-0002"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.5515873015873016,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8849206349206349,
+      "eligible_scored": 64,
+      "family": "kilnrite",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "kilnrite-L1-s72001-0003"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.42993125330512955,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 0.7789661319073083,
+        "joint_gain": 0.8110516934046346,
+        "negative_length": 0.7361853832442068,
+        "trace_prior": 0.7718360071301248
+      },
+      "canonical_format_kendall_tau_b": 0.7715494447382337,
+      "eligible_scored": 62,
+      "family": "kilnrite",
+      "level": 1,
+      "loop_rate": 0.03125,
+      "natural_close_rate": 0.96875,
+      "raw_traces": 64,
+      "rollout_traces": 62,
+      "success_rate": 0.04838709677419355,
+      "task_id": "kilnrite-L1-s72001-0004"
+    },
+    {
+      "answer_joint_kendall_tau_b": -0.526176626123744,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 0.11475409836065574,
+        "joint_gain": 0.9508196721311475,
+        "negative_length": 0.5901639344262295,
+        "trace_prior": 0.9180327868852459
+      },
+      "canonical_format_kendall_tau_b": 0.7958751983077736,
+      "eligible_scored": 62,
+      "family": "kilnrite",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 0.96875,
+      "raw_traces": 64,
+      "rollout_traces": 62,
+      "success_rate": 0.004032258064516129,
+      "task_id": "kilnrite-L2-s72001-0000"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.125,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 0.20161290322580644,
+        "joint_gain": 0.9435483870967742,
+        "negative_length": 1.0,
+        "trace_prior": 1.0
+      },
+      "canonical_format_kendall_tau_b": 0.8333333333333334,
+      "eligible_scored": 64,
+      "family": "kilnrite",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0234375,
+      "task_id": "kilnrite-L2-s72001-0001"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.18452380952380953,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 0.6825396825396826,
+        "joint_gain": 0.8253968253968254,
+        "negative_length": 0.8571428571428571,
+        "trace_prior": 0.9047619047619048
+      },
+      "canonical_format_kendall_tau_b": 0.7609126984126984,
+      "eligible_scored": 64,
+      "family": "kilnrite",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.00390625,
+      "task_id": "kilnrite-L2-s72001-0002"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.3898809523809524,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8263888888888888,
+      "eligible_scored": 64,
+      "family": "kilnrite",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "kilnrite-L2-s72001-0003"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.5257936507936508,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8938492063492064,
+      "eligible_scored": 64,
+      "family": "kilnrite",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "kilnrite-L2-s72001-0004"
+    },
+    {
+      "answer_joint_kendall_tau_b": -0.2113095238095238,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.7043650793650794,
+      "eligible_scored": 64,
+      "family": "kilnrite",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "kilnrite-L3-s72001-0000"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.22817460317460317,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": 0.15873015873015872,
+        "joint_gain": 1.0,
+        "negative_length": 0.9523809523809523,
+        "trace_prior": 0.9841269841269841
+      },
+      "canonical_format_kendall_tau_b": 0.8561507936507936,
+      "eligible_scored": 64,
+      "family": "kilnrite",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.00390625,
+      "task_id": "kilnrite-L3-s72001-0001"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.41013824884792627,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8863287250384024,
+      "eligible_scored": 63,
+      "family": "kilnrite",
+      "level": 3,
+      "loop_rate": 0.015625,
+      "natural_close_rate": 0.984375,
+      "raw_traces": 64,
+      "rollout_traces": 63,
+      "success_rate": 0.0,
+      "task_id": "kilnrite-L3-s72001-0002"
+    },
+    {
+      "answer_joint_kendall_tau_b": -0.26091269841269843,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8025793650793651,
+      "eligible_scored": 64,
+      "family": "kilnrite",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "kilnrite-L3-s72001-0003"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.2777777777777778,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8412698412698413,
+      "eligible_scored": 64,
+      "family": "kilnrite",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "kilnrite-L3-s72001-0004"
+    },
+    {
+      "answer_joint_kendall_tau_b": null,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": null,
+      "eligible_scored": 0,
+      "family": "loomfix",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 0.0,
+      "raw_traces": 64,
+      "rollout_traces": 0,
+      "success_rate": null,
+      "task_id": "loomfix-L1-s72001-0000"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.29895451885762836,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8211359468811606,
+      "eligible_scored": 60,
+      "family": "loomfix",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 0.9375,
+      "raw_traces": 64,
+      "rollout_traces": 60,
+      "success_rate": 0.0,
+      "task_id": "loomfix-L1-s72001-0001"
+    },
+    {
+      "answer_joint_kendall_tau_b": null,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": null,
+      "eligible_scored": 0,
+      "family": "loomfix",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 0.0,
+      "raw_traces": 64,
+      "rollout_traces": 0,
+      "success_rate": null,
+      "task_id": "loomfix-L1-s72001-0002"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.3220518244315177,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.7789529349550502,
+      "eligible_scored": 62,
+      "family": "loomfix",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 0.96875,
+      "raw_traces": 64,
+      "rollout_traces": 62,
+      "success_rate": 0.0,
+      "task_id": "loomfix-L1-s72001-0003"
+    },
+    {
+      "answer_joint_kendall_tau_b": null,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": null,
+      "eligible_scored": 0,
+      "family": "loomfix",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 0.0,
+      "raw_traces": 64,
+      "rollout_traces": 0,
+      "success_rate": null,
+      "task_id": "loomfix-L1-s72001-0004"
+    },
+    {
+      "answer_joint_kendall_tau_b": null,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": null,
+      "eligible_scored": 0,
+      "family": "loomfix",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 0.0,
+      "raw_traces": 64,
+      "rollout_traces": 0,
+      "success_rate": null,
+      "task_id": "loomfix-L2-s72001-0000"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.5,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8571428571428571,
+      "eligible_scored": 8,
+      "family": "loomfix",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 0.125,
+      "raw_traces": 64,
+      "rollout_traces": 8,
+      "success_rate": 0.0,
+      "task_id": "loomfix-L2-s72001-0001"
+    },
+    {
+      "answer_joint_kendall_tau_b": -1.0,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 1.0,
+      "eligible_scored": 2,
+      "family": "loomfix",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 0.03125,
+      "raw_traces": 64,
+      "rollout_traces": 2,
+      "success_rate": 0.0,
+      "task_id": "loomfix-L2-s72001-0002"
+    },
+    {
+      "answer_joint_kendall_tau_b": null,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": null,
+      "eligible_scored": 1,
+      "family": "loomfix",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 0.015625,
+      "raw_traces": 64,
+      "rollout_traces": 1,
+      "success_rate": 0.0,
+      "task_id": "loomfix-L2-s72001-0003"
+    },
+    {
+      "answer_joint_kendall_tau_b": null,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": null,
+      "eligible_scored": 0,
+      "family": "loomfix",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 0.0,
+      "raw_traces": 64,
+      "rollout_traces": 0,
+      "success_rate": null,
+      "task_id": "loomfix-L2-s72001-0004"
+    },
+    {
+      "answer_joint_kendall_tau_b": null,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": null,
+      "eligible_scored": 1,
+      "family": "loomfix",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 0.015625,
+      "raw_traces": 64,
+      "rollout_traces": 1,
+      "success_rate": 0.0,
+      "task_id": "loomfix-L3-s72001-0000"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.48484848484848486,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.7878787878787878,
+      "eligible_scored": 12,
+      "family": "loomfix",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 0.1875,
+      "raw_traces": 64,
+      "rollout_traces": 12,
+      "success_rate": 0.0,
+      "task_id": "loomfix-L3-s72001-0001"
+    },
+    {
+      "answer_joint_kendall_tau_b": null,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": null,
+      "eligible_scored": 0,
+      "family": "loomfix",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 0.0,
+      "raw_traces": 64,
+      "rollout_traces": 0,
+      "success_rate": null,
+      "task_id": "loomfix-L3-s72001-0002"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.3781004234724743,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8281911675741077,
+      "eligible_scored": 58,
+      "family": "loomfix",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 0.90625,
+      "raw_traces": 64,
+      "rollout_traces": 58,
+      "success_rate": 0.0,
+      "task_id": "loomfix-L3-s72001-0003"
+    },
+    {
+      "answer_joint_kendall_tau_b": null,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": null,
+      "eligible_scored": 0,
+      "family": "loomfix",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 0.0,
+      "raw_traces": 64,
+      "rollout_traces": 0,
+      "success_rate": null,
+      "task_id": "loomfix-L3-s72001-0004"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.3466461853558628,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8177163338453661,
+      "eligible_scored": 63,
+      "family": "runeward",
+      "level": 1,
+      "loop_rate": 0.015625,
+      "natural_close_rate": 0.984375,
+      "raw_traces": 64,
+      "rollout_traces": 63,
+      "success_rate": 0.0,
+      "task_id": "runeward-L1-s72001-0000"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.13690476190476192,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8115079365079365,
+      "eligible_scored": 64,
+      "family": "runeward",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "runeward-L1-s72001-0001"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.2251984126984127,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8134920634920635,
+      "eligible_scored": 64,
+      "family": "runeward",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "runeward-L1-s72001-0002"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.2786885245901639,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.7979904812268641,
+      "eligible_scored": 62,
+      "family": "runeward",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 0.96875,
+      "raw_traces": 64,
+      "rollout_traces": 62,
+      "success_rate": 0.0,
+      "task_id": "runeward-L1-s72001-0003"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.47632963179427235,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8772647574517826,
+      "eligible_scored": 59,
+      "family": "runeward",
+      "level": 1,
+      "loop_rate": 0.0,
+      "natural_close_rate": 0.921875,
+      "raw_traces": 64,
+      "rollout_traces": 59,
+      "success_rate": 0.0,
+      "task_id": "runeward-L1-s72001-0004"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.4365079365079365,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8293650793650794,
+      "eligible_scored": 64,
+      "family": "runeward",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "runeward-L2-s72001-0000"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.3898809523809524,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8541666666666666,
+      "eligible_scored": 64,
+      "family": "runeward",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "runeward-L2-s72001-0001"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.13194444444444445,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8561507936507936,
+      "eligible_scored": 64,
+      "family": "runeward",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "runeward-L2-s72001-0002"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.01110523532522475,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8276044420941301,
+      "eligible_scored": 62,
+      "family": "runeward",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 0.96875,
+      "raw_traces": 64,
+      "rollout_traces": 62,
+      "success_rate": 0.0,
+      "task_id": "runeward-L2-s72001-0003"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.38948153021850246,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8439593412760161,
+      "eligible_scored": 64,
+      "family": "runeward",
+      "level": 2,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "runeward-L2-s72001-0004"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.254362771020624,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.817028027498678,
+      "eligible_scored": 62,
+      "family": "runeward",
+      "level": 3,
+      "loop_rate": 0.015625,
+      "natural_close_rate": 0.96875,
+      "raw_traces": 64,
+      "rollout_traces": 62,
+      "success_rate": 0.0,
+      "task_id": "runeward-L3-s72001-0000"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.1001984126984127,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.7777777777777778,
+      "eligible_scored": 64,
+      "family": "runeward",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "runeward-L3-s72001-0001"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.20436507936507936,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8303571428571429,
+      "eligible_scored": 64,
+      "family": "runeward",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "runeward-L3-s72001-0002"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.0011299435028248588,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.8813559322033898,
+      "eligible_scored": 60,
+      "family": "runeward",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 0.9375,
+      "raw_traces": 64,
+      "rollout_traces": 60,
+      "success_rate": 0.0,
+      "task_id": "runeward-L3-s72001-0003"
+    },
+    {
+      "answer_joint_kendall_tau_b": 0.050595238095238096,
+      "answer_mention_rate": 1.0,
+      "auroc": {
+        "answer_gain": null,
+        "joint_gain": null,
+        "negative_length": null,
+        "trace_prior": null
+      },
+      "canonical_format_kendall_tau_b": 0.7380952380952381,
+      "eligible_scored": 64,
+      "family": "runeward",
+      "level": 3,
+      "loop_rate": 0.0,
+      "natural_close_rate": 1.0,
+      "raw_traces": 64,
+      "rollout_traces": 64,
+      "success_rate": 0.0,
+      "task_id": "runeward-L3-s72001-0004"
+    }
+  ],
+  "raw_candidates": 8640,
+  "schema_version": 1,
+  "task_macro_answer_joint_kendall_tau_b": 0.2820176675443564,
+  "task_macro_auroc": {
+    "answer_gain": 0.596528736722962,
+    "joint_gain": 0.678298644578125,
+    "negative_length": 0.6898214713314696,
+    "trace_prior": 0.6995439856786309
+  },
+  "task_macro_canonical_format_kendall_tau_b": 0.840988735658666,
+  "tasks": 135,
+  "top_k_mean_rollout_success": {
+    "answer_gain": {
+      "1": 0.224609375,
+      "2": 0.2138671875,
+      "4": 0.20654296875,
+      "8": 0.19482421875
+    },
+    "joint_gain": {
+      "1": 0.21875,
+      "2": 0.2294921875,
+      "4": 0.22216796875,
+      "8": 0.21044921875
+    },
+    "negative_length": {
+      "1": 0.265625,
+      "2": 0.2470703125,
+      "4": 0.23486328125,
+      "8": 0.2197265625
+    },
+    "seeded_random": {
+      "1": 0.15625,
+      "2": 0.1572265625,
+      "4": 0.16552734375,
+      "8": 0.164794921875
+    },
+    "trace_prior": {
+      "1": 0.224609375,
+      "2": 0.228515625,
+      "4": 0.20849609375,
+      "8": 0.204345703125
+    }
+  }
+}

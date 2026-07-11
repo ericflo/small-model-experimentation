@@ -247,6 +247,15 @@ continuation. This is preserved as evidence that even the enlarged protocol does
 horizon; it does not veto the complete SFT matrix, and unresolved traces are never force-closed or used
 as training examples.
 
+Calibration scoring and R=4 answer rollouts are also complete for all 7,814 eligible traces (31,256
+answer rollouts). Answer gain has task-macro AUROC 0.597 and its top-1 trace averages 22.46% rollout
+success versus 15.63% for seeded random (+6.84 percentage points). Joint close+answer gain has AUROC
+0.678 and top-1 success 21.88% (+6.25 points). Canonical versus one-newline score rankings are stable
+(task-macro Kendall tau-b 0.841). These are encouraging selector diagnostics, not a banking result:
+negative length (AUROC 0.690; top-1 26.56%) and the sampled-trace prior (AUROC 0.700; top-1 22.46%) are
+strong controls. Per the preregistration, none of these diagnostics gates the 1,080-task harvest or the
+complete six-arm SFT matrix.
+
 No scientific result yet. This file records the complete pre-run plan; later results are added above this
 boundary without rewriting the frozen preregistration.
 

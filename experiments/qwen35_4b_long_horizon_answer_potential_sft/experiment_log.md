@@ -61,3 +61,16 @@ No scientific GPU work had run at this boundary. No benchmark content was read.
 - Generation was restart-safe at per-task atomic/checksummed shard boundaries. Calibration answer
   rollouts and full-prefix scoring began only after the full harvest completed; no score/outcome was
   inspected during generation.
+
+## 2026-07-11 — Calibration Informativeness
+
+- Completed full-prefix canonical and one-newline-variant scoring for all 7,814 eligible traces in
+  6,293 seconds, plus 31,256 fresh answer rollouts (R=4) in 14,033 seconds.
+- Task-macro AUROC was 0.597 for answer gain and 0.678 for joint close+answer gain. Mean top-1 rollout
+  success was 22.46% and 21.88%, respectively, versus 15.63% for seeded random: +6.84 and +6.25 points.
+- Canonical/format-variant rankings were stable (task-macro Kendall tau-b 0.841). Answer and joint
+  rankings were only moderately aligned (tau-b 0.282), justifying both preregistered treatment arms.
+- Important caution: negative trace length was stronger (AUROC 0.690; top-1 26.56%), and sampled-trace
+  prior was also strong (AUROC 0.700; top-1 22.46%). The calibration therefore supports running SFT but
+  is not itself evidence that answer-potential banking transfers. No effectiveness gate was applied;
+  the frozen 1,080-task N=64 harvest started unchanged.
