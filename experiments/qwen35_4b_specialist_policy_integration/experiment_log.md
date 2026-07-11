@@ -57,3 +57,7 @@ post-training/adaptation, and benchmark generalization.
   vectors are now deranged within each family/level cell with no fixed-point
   groups. A plain permutation would retain roughly one correctly routed group
   per cell in expectation and unnecessarily dilute the negative control.
+- Specialist qualification now also fails closed on partial or guard-stopped
+  DAgger/GRPO runs, stale evaluation-to-merge fingerprints, adapter hash
+  mismatches, zero/partial merge mappings, and compute-short controls. Stopped
+  checkpoints remain preserved and evaluable for diagnosis but cannot qualify.

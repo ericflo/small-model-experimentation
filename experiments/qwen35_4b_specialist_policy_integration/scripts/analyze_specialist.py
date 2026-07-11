@@ -14,7 +14,14 @@ from pathlib import Path
 EXP = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(EXP / "src"))
 
-from io_utils import domain_families, load_config, read_jsonl, write_json  # noqa: E402
+from io_utils import (  # noqa: E402
+    domain_families,
+    load_config,
+    read_jsonl,
+    resolve_repo_path,
+    sha256_file,
+    write_json,
+)
 
 
 CORRECTION_MARKERS = ("check", "verify", "reconsider", "backtrack", "revise", "mistake", "instead")
@@ -170,6 +177,80 @@ def _relative_retention(candidate: float | None, incumbent: float | None, max_dr
     return candidate >= incumbent * (1.0 - max_drop)
 
 
+def _checkpoint_integrity(
+    eval_directory: Path,
+    expected_model: Path,
+    expected_adapter: Path,
+) -> dict:
+    """Tie an evaluation fingerprint to its exact adapter, merge, and training receipt."""
+    scores_path = eval_directory / "scores.json"
+    scores = json.loads(scores_path.read_text(encoding="utf-8"))
+    model_path = Path(scores["model"]).resolve()
+    if model_path != expected_model.resolve():
+        raise ValueError(f"unexpected model in {scores_path}: {model_path}")
+    merge_path = model_path / "merge_receipt.json"
+    merge = json.loads(merge_path.read_text(encoding="utf-8"))
+    fingerprint = scores.get("model_fingerprint", {})
+    if fingerprint.get("merge_receipt_sha256") != sha256_file(merge_path):
+        raise ValueError(f"stale merge fingerprint in {scores_path}")
+    if fingerprint.get("merge_receipt") != merge:
+        raise ValueError(f"embedded merge receipt mismatch in {scores_path}")
+    adapter_path = Path(merge["adapter"]).resolve()
+    if adapter_path != expected_adapter.resolve():
+        raise ValueError(f"unexpected adapter in {merge_path}: {adapter_path}")
+    if merge.get("adapter_config_sha256") != sha256_file(
+        adapter_path / "adapter_config.json"
+    ):
+        raise ValueError(f"adapter-config hash mismatch in {merge_path}")
+    if merge.get("adapter_weights_sha256") != sha256_file(
+        adapter_path / "adapter_model.safetensors"
+    ):
+        raise ValueError(f"adapter-weight hash mismatch in {merge_path}")
+    training_path = adapter_path / "training_receipt.json"
+    training = json.loads(training_path.read_text(encoding="utf-8"))
+    structural_merge = (
+        int(merge.get("applied_lora_modules", 0)) > 0
+        and int(merge.get("nonzero_lora_modules", 0))
+        == int(merge.get("applied_lora_modules", -1))
+        and merge.get("merge_device") == "cuda"
+        and merge.get("fp32_tf32_allowed") is False
+    )
+    return {
+        "model": str(model_path),
+        "adapter": str(adapter_path),
+        "scores_sha256": sha256_file(scores_path),
+        "merge_receipt_sha256": sha256_file(merge_path),
+        "training_receipt_sha256": sha256_file(training_path),
+        "merge": merge,
+        "training": training,
+        "structural_merge": structural_merge,
+    }
+
+
+def _sft_completed(receipt: dict, *, source: Path, max_steps: int | None, epochs: float) -> bool:
+    return (
+        receipt.get("method") == "emission_weighted_dagger_sft"
+        and receipt.get("source_model") == str(source.resolve())
+        and math.isclose(float(receipt.get("epochs", -1)), float(epochs))
+        and int(receipt.get("max_steps", -2)) == (-1 if max_steps is None else max_steps)
+        and int(receipt.get("optimizer_steps", 0)) > 0
+        and (max_steps is None or int(receipt.get("optimizer_steps", -1)) == max_steps)
+        and float(receipt.get("skip_rate", 1.0)) <= 0.15
+    )
+
+
+def _grpo_completed(receipt: dict, *, source: Path, steps: int, shuffled: bool) -> bool:
+    return (
+        receipt.get("method") == "guarded_sequence_grpo"
+        and receipt.get("source_model") == str(source.resolve())
+        and int(receipt.get("requested_steps", -1)) == steps
+        and int(receipt.get("completed_steps", -1)) == steps
+        and receipt.get("stopped_reason") is None
+        and bool(receipt.get("shuffle_advantages")) is shuffled
+        and float(receipt.get("policy_skip_rate", 1.0)) <= 0.15
+    )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path)
@@ -209,13 +290,107 @@ def main() -> int:
     }
     atom = _atom_retention(args.incumbent, args.specialist)
     behavior = _behavior_diff(args.dagger, args.specialist, own)
-    specialist_scores_receipt = json.loads(
-        (args.specialist / "scores.json").read_text(encoding="utf-8")
+    root = resolve_repo_path(config["model"]["artifacts_root"])
+    incumbent_model = root / "merged" / "incumbent_blend"
+    dagger_model = root / "merged" / "dagger" / args.domain
+    checkpoint_paths = {
+        "dagger": (
+            args.dagger,
+            dagger_model,
+            root / "adapters" / "dagger" / args.domain,
+        ),
+        "extra_sft": (
+            args.extra_sft,
+            root / "merged" / "extra_sft" / args.domain,
+            root / "adapters" / "extra_sft" / args.domain,
+        ),
+        "shuffled": (
+            args.shuffled,
+            root / "merged" / "shuffled" / args.domain,
+            root / "adapters" / "shuffled" / args.domain,
+        ),
+        "specialist": (
+            args.specialist,
+            root / "merged" / "specialist" / args.domain,
+            root / "adapters" / "specialist" / args.domain,
+        ),
+    }
+    checkpoints = {
+        name: _checkpoint_integrity(*paths)
+        for name, paths in checkpoint_paths.items()
+    }
+    dagger_training = checkpoints["dagger"]["training"]
+    extra_training = checkpoints["extra_sft"]["training"]
+    shuffled_training = checkpoints["shuffled"]["training"]
+    specialist_training = checkpoints["specialist"]["training"]
+    grpo_steps = int(config["rl_train"]["max_steps"])
+    extra_steps = int(config["controls"]["matched_sft_steps"])
+    forward_counts = ("reference_forwards", "policy_forwards", "anchor_forwards")
+    specialist_forward_opportunities = sum(
+        int(specialist_training.get("compute_ledger", {}).get(key, 0))
+        for key in forward_counts
     )
-    merge = specialist_scores_receipt.get("model_fingerprint", {}).get("merge_receipt") or {}
+    shuffled_forward_opportunities = sum(
+        int(shuffled_training.get("compute_ledger", {}).get(key, 0))
+        for key in forward_counts
+    )
+    training_integrity = {
+        name: {
+            key: checkpoint[key]
+            for key in (
+                "model",
+                "adapter",
+                "scores_sha256",
+                "merge_receipt_sha256",
+                "training_receipt_sha256",
+                "structural_merge",
+            )
+        }
+        for name, checkpoint in checkpoints.items()
+    }
+    training_integrity["compute"] = {
+        "extra_sft_forward_opportunities": int(
+            extra_training.get("forward_example_upper_bound", 0)
+        ),
+        "specialist_forward_opportunities": specialist_forward_opportunities,
+        "shuffled_forward_opportunities": shuffled_forward_opportunities,
+    }
     gate = config["gates"]
     candidate = scores["specialist"]["macro"]
     checks = {
+        "all_merges_structurally_nonzero": all(
+            checkpoint["structural_merge"] for checkpoint in checkpoints.values()
+        ),
+        "dagger_training_completed": _sft_completed(
+            dagger_training,
+            source=incumbent_model,
+            max_steps=None,
+            epochs=float(config["dagger_train"]["epochs"]),
+        ),
+        "extra_sft_training_completed": _sft_completed(
+            extra_training,
+            source=dagger_model,
+            max_steps=extra_steps,
+            epochs=1.0,
+        ),
+        "specialist_training_completed": _grpo_completed(
+            specialist_training,
+            source=dagger_model,
+            steps=grpo_steps,
+            shuffled=False,
+        ),
+        "shuffled_training_completed": _grpo_completed(
+            shuffled_training,
+            source=dagger_model,
+            steps=grpo_steps,
+            shuffled=True,
+        ),
+        "extra_sft_forward_overmatch": int(
+            extra_training.get("forward_example_upper_bound", 0)
+        )
+        >= specialist_forward_opportunities,
+        "shuffled_forward_match": shuffled_forward_opportunities
+        == specialist_forward_opportunities,
         "vs_incumbent": candidate - scores["incumbent"]["macro"] >= float(gate["specialist_incumbent_delta"]),
         "vs_dagger": candidate - scores["dagger"]["macro"] >= float(gate["specialist_vs_dagger_delta"]),
         "vs_extra_sft": candidate - scores["extra_sft"]["macro"] >= float(gate["specialist_vs_extra_sft_delta"]),
@@ -242,7 +417,9 @@ def main() -> int:
             float(gate["specialist_max_correction_marker_relative_drop"]),
         ),
         "nonzero_behavioral_canary": behavior["passed"],
-        "nonzero_merged_delta": int(merge.get("nonzero_lora_modules", 0)) > 0,
+        "nonzero_merged_delta": int(
+            checkpoints["specialist"]["merge"].get("nonzero_lora_modules", 0)
+        ) > 0,
     }
     result = {
         "stage": "specialist_qualification",
@@ -255,6 +432,7 @@ def main() -> int:
         "diagnostics": diagnostics,
         "atom_retention": atom,
         "behavioral_canary_vs_dagger": behavior,
+        "training_integrity": training_integrity,
         "gate": {"passed": all(checks.values()), "checks": checks},
     }
     output = args.out or EXP / "analysis" / "specialists" / f"{args.domain}.json"

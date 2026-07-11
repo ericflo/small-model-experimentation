@@ -20,6 +20,7 @@ from gym.families import load as load_family  # noqa: E402
 from io_utils import domain_families, load_config, training_seed  # noqa: E402
 from rollout import collect_expert_demonstrations  # noqa: E402
 from eval_proxy import _compact_logprob_receipts  # noqa: E402
+from analyze_specialist import _grpo_completed, _sft_completed  # noqa: E402
 from train_sequence_grpo import _policy_sample, _shuffle_group_advantages  # noqa: E402
 
 
@@ -228,6 +229,48 @@ class CurriculumTests(unittest.TestCase):
             ]
             self.assertNotEqual(moved, before_by_group[group])
         self.assertEqual(len(digest), 64)
+
+    def test_partial_training_receipts_cannot_qualify(self):
+        source = Path("/tmp/frozen-source").resolve()
+        sft = {
+            "method": "emission_weighted_dagger_sft",
+            "source_model": str(source),
+            "epochs": 1.0,
+            "max_steps": 300,
+            "optimizer_steps": 300,
+            "skip_rate": 0.01,
+        }
+        self.assertTrue(
+            _sft_completed(sft, source=source, max_steps=300, epochs=1.0)
+        )
+        self.assertFalse(
+            _sft_completed(
+                dict(sft, optimizer_steps=299),
+                source=source,
+                max_steps=300,
+                epochs=1.0,
+            )
+        )
+        grpo = {
+            "method": "guarded_sequence_grpo",
+            "source_model": str(source),
+            "requested_steps": 120,
+            "completed_steps": 120,
+            "stopped_reason": None,
+            "shuffle_advantages": False,
+            "policy_skip_rate": 0.01,
+        }
+        self.assertTrue(
+            _grpo_completed(grpo, source=source, steps=120, shuffled=False)
+        )
+        self.assertFalse(
+            _grpo_completed(
+                dict(grpo, stopped_reason="KL guard"),
+                source=source,
+                steps=120,
+                shuffled=False,
+            )
+        )
 
 
 if __name__ == "__main__":
