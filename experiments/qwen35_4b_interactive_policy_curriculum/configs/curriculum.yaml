@@ -1,0 +1,125 @@
+schema_version: 1
+experiment_id: qwen35_4b_interactive_policy_curriculum
+
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+  artifacts_root: large_artifacts/qwen35_4b_interactive_policy_curriculum
+  incumbent_data: experiments/qwen35_4b_gauntlet_frontier/data/sft_blend.jsonl
+
+engine:
+  max_model_len: 16384
+  gpu_memory_utilization: 0.85
+  max_num_seqs: 64
+  max_num_batched_tokens: 16384
+
+split:
+  train_families: [kilnrite, glyphgate, loomfix, ferrier, burrowmaze]
+  transfer_families: [gatepost, patchwheel, spindle]
+  replay_excluded_families: [gatepost, patchwheel, spindle]
+  split_seed: 60001
+
+seeds:
+  oracle_demo_base: 61000
+  dagger_visit_base: 62000
+  rl_collect_base: 63000
+  proxy_eval_base: 71000
+  atom_retention: 72000
+  training: 42
+  shuffled_reward: 43
+  menagerie_first: 54001
+
+incumbent:
+  epochs: 2.5
+  learning_rate: 0.0002
+  rank: 32
+  alpha: 64
+  batch_size: 1
+  grad_accum: 16
+  max_length: 2048
+  think_loss_weight: 0.2
+
+collection:
+  thinking_budget: 768
+  answer_max_tokens: 96
+  temperature: 0.8
+  top_p: 0.95
+  top_k: 20
+  oracle_demo_per_level: {1: 4, 2: 4, 3: 4}
+  dagger_per_level: {2: 12, 3: 16, 4: 12}
+  dagger_sampled_rollouts_per_episode: 1
+  dagger_include_greedy: true
+  expert_demo_max_fraction: 0.20
+  max_rows_per_family: 360
+  max_rows_per_episode: 10
+  process_trace_word_cap: 120
+  replay_fraction: 0.30
+  replay_rows: 800
+  confident_failure_max_operator_entropy: 0.40
+  confident_failure_max_mean_score: 0.25
+
+dagger_train:
+  epochs: 1.5
+  learning_rate: 0.0001
+  rank: 32
+  alpha: 64
+  batch_size: 1
+  grad_accum: 16
+  max_length: 4096
+  think_loss_weight: 0.2
+
+rl_collection:
+  per_level: {2: 12, 3: 16, 4: 16, 5: 12}
+  group_size: 4
+  thinking_budget: 768
+  answer_max_tokens: 96
+  temperature: 0.8
+  top_p: 0.95
+  top_k: 20
+  success_turn_penalty: 0.01
+  min_outcome_std: 0.0001
+
+rl_train:
+  learning_rate: 0.00002
+  rank: 16
+  alpha: 32
+  batch_size: 1
+  grad_accum: 8
+  max_steps: 120
+  max_length: 4096
+  clip_epsilon: 0.20
+  kl_beta: 0.02
+  max_mean_sampled_token_kl: 0.10
+  max_grad_norm: 1.0
+  think_loss_weight: 0.2
+  anchor_coef: 0.10
+  anchor_every: 2
+  checkpoint_every: 20
+
+controls:
+  matched_sft_steps: 180
+  shuffled_reward_steps: 120
+  paired_bootstrap_samples: 10000
+
+proxy_eval:
+  levels: [2, 3, 4]
+  episodes_per_level: 20
+  thinking_budget: 1024
+  answer_max_tokens: 96
+  atom_levels: [1, 2, 3, 4]
+  atoms_per_level: 10
+
+gates:
+  dagger_train_macro_delta: 0.08
+  dagger_transfer_macro_min_delta: 0.00
+  dagger_one_transfer_family_delta: 0.03
+  max_retention_regression: 0.03
+  max_single_family_regression: 0.10
+  rl_vs_dagger_macro_delta: 0.05
+  rl_vs_matched_sft_macro_delta: 0.05
+  rl_vs_shuffled_macro_delta: 0.03
+  rl_min_improved_train_families: 3
+  rl_transfer_macro_min_delta: 0.00
+  menagerie_medium_mean_delta: 0.05
+  menagerie_quick_min_delta: -0.02
+  menagerie_slow_min_delta: 0.00

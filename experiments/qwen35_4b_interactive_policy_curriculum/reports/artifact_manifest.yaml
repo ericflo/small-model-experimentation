@@ -1,0 +1,23 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_interactive_policy_curriculum"
+external_artifacts:
+  - name: "incumbent, DAgger, RL, and control adapters plus merged composite checkpoints"
+    storage: "large_artifacts/qwen35_4b_interactive_policy_curriculum/{adapters,merged}/"
+    required_for: "result-bearing proxy and paired Menagerie evaluation"
+    checksum: "recorded per artifact in runs/checkpoint_receipts.jsonl"
+    regenerate: >-
+      run the staged commands in README.md from incumbent through reached
+      controls; every stage writes its command and input hashes
+omitted_artifacts:
+  - path: "large_artifacts/qwen35_4b_interactive_policy_curriculum/"
+    reason: "multi-gigabyte trained adapters and composite checkpoints are gitignored"
+reproducibility:
+  smoke_command: >-
+    .venv/bin/python experiments/qwen35_4b_interactive_policy_curriculum/scripts/run.py --smoke
+  full_command: "see the staged Run section in README.md"
+  required_external_artifacts: []
+notes: >-
+  The C53 incumbent is regenerated from the committed sft_blend.jsonl rows on
+  this host. Small trajectory/analyzer outputs stay in git; raw model weights
+  do not. Menagerie payloads are rewritten to permitted aggregate-only fields.

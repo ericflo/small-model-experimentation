@@ -2,6 +2,12 @@
 
 ## Next Experiments
 
+- Active experiment: `qwen35_4b_interactive_policy_curriculum` — test the
+  first beyond-C53 mechanism by training on current-policy live states via
+  state-aware DAgger, then guarded multi-turn execution-reward optimization.
+  It must beat compute-overmatched additional SFT and shuffled rewards on
+  frozen proxy families before one eligible checkpoint reaches Menagerie.
+
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.
 - Experiment: round 2 re-harvest with the round-1 adapter (does the frontier
@@ -13,6 +19,12 @@
   in-axis data vs transfer in from the mixture).
 
 ## Required Controls
+
+- For the interactive-policy line: C53 blend incumbent, DAgger-only,
+  compute-overmatched new-state SFT, shuffled trajectory rewards, exact oracle
+  ceiling, family holdout, atom/closure retention, and matched-compute sampling.
+- Semantic entropy/outcome variance may route state acquisition; it may not
+  scale token loss or serve as a correctness reward (C52).
 
 - Baseline: base model, same fresh menagerie seed, same tier/decode, every event.
 - Mechanism-falsifying control: held-out gym families (never trained) separate

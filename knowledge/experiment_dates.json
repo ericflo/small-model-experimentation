@@ -596,6 +596,14 @@
    ],
    "caveat": "data/verified_algorithm_library.jsonl contains 2026-01-02 (task data); scripts/make_report.py hardcodes the report date"
   },
+  "qwen35_4b_interactive_policy_curriculum": {
+   "start": "2026-07-11",
+   "end": "2026-07-11",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_inventory_shortlister_training": {
    "start": "2026-06-24",
    "end": "2026-06-24",

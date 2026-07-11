@@ -45416,6 +45416,35 @@
      "note": "Real labels separated on the gym and coding agent (the coding 95% interval touches zero), but the sign flipped at the longer whitebox budget. This is evidence for label signal, not a general capability gain."
     }
    ]
+  },
+  "qwen35_4b_interactive_policy_curriculum": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "The study must clear three locked improvement bars",
+     "categories": [
+      "live-state teaching over incumbent",
+      "reward learning over extra teaching",
+      "held-out medium benchmark over incumbent"
+     ],
+     "series": [
+      {
+       "label": "required absolute score gain",
+       "values": [
+        0.08,
+        0.05,
+        0.05
+       ]
+      }
+     ],
+     "x_label": "decision stage",
+     "y_label": "registered minimum score delta",
+     "y_format": "number",
+     "note": "These are preregistered decision thresholds, not observed results. A stage that misses its bar stops the downstream spend; the chart will be replaced by measured outcomes after the reached stages finish.",
+     "source": "experiments/qwen35_4b_interactive_policy_curriculum/configs/curriculum.yaml"
+    }
+   ]
   }
  }
 }
