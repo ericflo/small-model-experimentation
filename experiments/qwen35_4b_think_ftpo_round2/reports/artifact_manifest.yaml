@@ -1,0 +1,42 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_think_ftpo_round2"
+external_artifacts:
+  - name: "demote FTPO LoRA adapter"
+    storage: "large_artifacts/qwen35_4b_think_ftpo_round2/adapters/demote"
+    required_for: "targeted-logit audit and merged deployment"
+    checksum: ""
+    regenerate: >-
+      .venv/bin/python experiments/qwen35_4b_think_ftpo_round2/scripts/train_sparse.py
+      --arm demote --out <storage>
+  - name: "positive-only uplift LoRA adapter"
+    storage: "large_artifacts/qwen35_4b_think_ftpo_round2/adapters/uplift"
+    required_for: "primary evaluation"
+    checksum: ""
+    regenerate: >-
+      .venv/bin/python experiments/qwen35_4b_think_ftpo_round2/scripts/train_sparse.py
+      --arm uplift --out <storage>
+  - name: "outcome-shuffled uplift LoRA adapter"
+    storage: "large_artifacts/qwen35_4b_think_ftpo_round2/adapters/uplift_shuffled"
+    required_for: "mechanism-falsifying control"
+    checksum: ""
+    regenerate: >-
+      .venv/bin/python experiments/qwen35_4b_think_ftpo_round2/scripts/train_sparse.py
+      --arm uplift_shuffled --out <storage>
+  - name: "merged composite checkpoints"
+    storage: "large_artifacts/qwen35_4b_think_ftpo_round2/merged/{demote,uplift,uplift_shuffled}"
+    required_for: "vLLM evaluation; runtime LoRA is invalid under C49"
+    checksum: ""
+    regenerate: >-
+      .venv/bin/python experiments/qwen35_4b_think_ftpo_round2/scripts/merge_ftpo.py
+      --adapter <adapter> --out <storage>
+omitted_artifacts: []
+reproducibility:
+  smoke_command: "python3 experiments/qwen35_4b_think_ftpo_round2/scripts/run.py --gpu-smoke"
+  full_command: >-
+    python3 experiments/qwen35_4b_think_ftpo_round2/scripts/run.py --full
+    --artifact-root large_artifacts/qwen35_4b_think_ftpo_round2
+  required_external_artifacts: []
+notes: >-
+  Parent training rows are copied and committed, so the round-1 raw harvest is
+  not required. Menagerie is conditional and stores aggregate/per-family fields only.

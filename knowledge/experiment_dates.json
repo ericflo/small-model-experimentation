@@ -926,6 +926,14 @@
     "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
    ]
   },
+  "qwen35_4b_think_ftpo_round2": {
+   "start": "2026-07-11",
+   "end": "2026-07-11",
+   "confidence": "high",
+   "sources": [
+    "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_thinking_budget_controller": {
    "start": "2026-06-30",
    "end": "2026-06-30",

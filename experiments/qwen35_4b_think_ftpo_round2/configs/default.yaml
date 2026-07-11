@@ -1,0 +1,107 @@
+# Frozen constants for entropy-routed think-pivot optimization round 2.
+# See reports/preregistration.md. Scientific changes require an amendment.
+
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+
+engine:
+  max_model_len: 12288
+  gpu_memory_utilization: 0.90
+  max_num_seqs: 64
+  max_num_batched_tokens: 16384
+
+source_rows:
+  real: data/rows_pivot.jsonl.gz
+  shuffled: data/rows_shuffled.jsonl.gz
+  parent_experiment: qwen35_4b_think_ftpo_round1
+  harvest_temperature: 0.6
+
+geometry:
+  # A "spiky-conflicted wrong turn": the failed token dominates a focused
+  # distribution, while non-trivial tail mass still exists for a successful
+  # sibling. Entropy is in nats and varentropy in nats^2 at T=0.6.
+  rejected_must_be_argmax: true
+  min_rejected_minus_chosen_logits: 0.5
+  min_rejected_probability: 0.50
+  max_entropy: 1.50
+  min_varentropy: 0.10
+  min_chosen_relative_probability: 0.01
+  max_rows_per_arm: 256
+  min_rows_gate: 128
+  selection_seed: 4407
+  entropy_quartiles: 4
+
+train:
+  arms: [demote, uplift, uplift_shuffled]
+  lora_r: 256
+  lora_alpha: 128
+  lora_dropout: 0.0
+  target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+  learning_rate: 1.0e-5
+  warmup_ratio: 0.1
+  num_epochs: 2
+  effective_batch: 16
+  per_device_batch: 1
+  max_seq_length: 6144
+  optimizer: adamw_torch
+  weight_decay: 0.01
+  max_grad_norm: 2.5
+  seed: 4407
+  demote_margin_logits: 2.0
+  uplift_gain_logits: 0.5
+  lambda_mse: 0.4
+  lambda_mse_target: 0.05
+  tau_mse_target: 0.5
+  early_stop_hit_rate: 0.35
+  early_stop_min_progress: 0.2
+  log_every_steps: 2
+
+detector:
+  min_repeats: 4
+  max_period: 1024
+  min_period: 1
+  min_total_repeated: 60
+  sample_len: 16
+  sample_interval: 128
+
+eval:
+  whitebox_n_prompts: 400
+  whitebox_seed_range: [78001, 78999]
+  whitebox_budgets: [1024, 2048]
+  whitebox_success_bar: 0.03
+  whitebox_control_separation: 0.02
+  natural_close_max_drop: 0.02
+  answer_limit_max_rise: 0.02
+  gym_eval_seed: 92001
+  gym_eval_atoms_per_cell: 3
+  gym_eval_episodes_per_family: 2
+  gym_guard_max_drop: 0.02
+  collapse_guard_n_tasks: 120
+  collapse_guard_pass_k: 8
+  collapse_guard_seed_base: 79001
+  collapse_guard_max_rel_drop: 0.10
+  nothink_guard_n_atoms: 120
+  nothink_guard_max_drop: 0.02
+
+repo_agent:
+  families: [window_rollup, routing_table, dedup_merge, quota_allocator, interval_compactor, slug_index]
+  tasks_per_family: 12
+  seed: 88001
+  think_budget: 512
+  answer_max_tokens: 256
+  deep_turns: 8
+  sample_more_trajectories: 2
+  sample_more_turns_each: 4
+  max_sampled_tokens_per_task: 6144
+  sample_temperature: 0.6
+  sample_top_p: 0.95
+  sample_top_k: 20
+  uplift_vs_base_bar: 0.08
+  uplift_vs_sample_more_bar: 0.05
+  control_gain_fraction_max: 0.5
+
+menagerie:
+  quick_seeds: [62011, 62012]
+  positive_mean_bar: 0.05
+  require_nonnegative_each_seed: true

@@ -564,6 +564,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 - `qwen35_4b_structure_search_scaling` (new): [README](../experiments/qwen35_4b_structure_search_scaling/README.md)
 - `qwen35_4b_substrate_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_substrate_coverage_ladder/README.md)
 - `qwen35_4b_think_ftpo_round1` (new): [README](../experiments/qwen35_4b_think_ftpo_round1/README.md)
+- `qwen35_4b_think_ftpo_round2` (new): [README](../experiments/qwen35_4b_think_ftpo_round2/README.md)
 - `qwen35_4b_thinking_budget_controller` (new): [README](../experiments/qwen35_4b_thinking_budget_controller/README.md)
 - `qwen35_4b_thinking_budget_scaling` (new): [README](../experiments/qwen35_4b_thinking_budget_scaling/README.md)
 - `qwen35_4b_thinking_content_vs_compute` (new): [README](../experiments/qwen35_4b_thinking_content_vs_compute/README.md)
