@@ -19,6 +19,7 @@ from curriculum import (  # noqa: E402
 from gym.families import load as load_family  # noqa: E402
 from io_utils import domain_families, load_config, training_seed  # noqa: E402
 from rollout import collect_expert_demonstrations  # noqa: E402
+from eval_proxy import _compact_logprob_receipts  # noqa: E402
 from train_sequence_grpo import _policy_sample, _shuffle_group_advantages  # noqa: E402
 
 
@@ -166,6 +167,31 @@ class CurriculumTests(unittest.TestCase):
         }
         sample = _policy_sample(_FakeTokenizer(), trajectory, turn, 32, 0.2)
         self.assertEqual(sample["completion_weights"], [0.2, 0.2, 0.0, 0.0, 1.0, 1.0])
+
+    def test_eval_compacts_top20_payload_to_entropy_sufficient_statistics(self):
+        rows = [
+            {
+                "turns": [
+                    {
+                        "policy": {
+                            "stage1_logprobs": [
+                                {
+                                    "1": {"logprob": math.log(0.6)},
+                                    "2": {"logprob": math.log(0.3)},
+                                }
+                            ],
+                            "stage2_logprobs": None,
+                        }
+                    }
+                ]
+            }
+        ]
+        _compact_logprob_receipts(rows)
+        policy = rows[0]["turns"][0]["policy"]
+        self.assertNotIn("stage1_logprobs", policy)
+        self.assertNotIn("stage2_logprobs", policy)
+        self.assertEqual(policy["reported_top20_tail_lumped_entropy_positions"], 1)
+        self.assertGreater(policy["reported_top20_tail_lumped_entropy_sum"], 0.8)
 
     def test_shuffled_control_preserves_advantage_vectors(self):
         trajectories = []

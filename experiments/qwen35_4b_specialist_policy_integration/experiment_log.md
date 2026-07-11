@@ -44,3 +44,7 @@ post-training/adaptation, and benchmark generalization.
   pins. The work was rebased rather than overwritten, a full dependency lock
   was regenerated, and the entire finite-logit/train/merge/local-vLLM preflight
   passed again under that exact lock.
+- Primary-paper correction before any specialist output: MOPD equation (5)
+  adds `-p_student + p_teacher` to each teacher-top-k reverse-KL summand. The
+  earlier “corrected tail mass” wording was inaccurate; no lumped tail bucket
+  will be implemented. The registered top-50 choice and all gates are unchanged.

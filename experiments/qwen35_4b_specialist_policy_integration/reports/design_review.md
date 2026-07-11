@@ -53,9 +53,10 @@ inside this experiment with a new loss.
 
 ### Top-k truncation can optimize the wrong distribution
 
-Naively discarding the vocabulary tail biases reverse KL. Required fix: use the
-published corrected-tail term and unit-test it against full-vocabulary loss on
-a synthetic vocabulary before any GPU update.
+Naively truncating reverse KL shifts its optimum. Required fix: use MOPD
+equation (5)'s published `-p_student + p_teacher` correction on every
+teacher-top-k token, and unit-test the `k = |V|` case against full-vocabulary
+reverse KL before any GPU update. Do not invent a lumped tail bucket.
 
 ### “On-policy” can quietly mean stale replay
 

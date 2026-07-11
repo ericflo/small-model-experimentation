@@ -74,7 +74,8 @@ def _diagnostics(directory: Path, families: list[str]) -> dict:
     rows = [row for row in _rows(directory) if row["family"] in families]
     action_valid = []
     natural_close = []
-    entropies = []
+    entropy_sum = 0.0
+    entropy_positions = 0
     correction = []
     sampled_tokens = 0
     logical_input_tokens = 0
@@ -85,8 +86,19 @@ def _diagnostics(directory: Path, families: list[str]) -> dict:
             policy = turn["policy"]
             text = str(policy.get("text", "")).lower()
             correction.append(float(any(marker in text for marker in CORRECTION_MARKERS)))
-            entropies.extend(_entropy(policy.get("stage1_logprobs")))
-            entropies.extend(_entropy(policy.get("stage2_logprobs")))
+            stored_positions = int(
+                policy.get("reported_top20_tail_lumped_entropy_positions") or 0
+            )
+            if stored_positions:
+                entropy_sum += float(
+                    policy["reported_top20_tail_lumped_entropy_sum"]
+                )
+                entropy_positions += stored_positions
+            else:
+                values = _entropy(policy.get("stage1_logprobs"))
+                values.extend(_entropy(policy.get("stage2_logprobs")))
+                entropy_sum += sum(values)
+                entropy_positions += len(values)
             sampled_tokens += int(policy.get("n_sampled_tokens") or 0)
             logical_input_tokens += int(policy.get("n_stage1_prompt_tokens") or 0)
             logical_input_tokens += int(policy.get("n_stage2_prompt_tokens") or 0)
@@ -94,8 +106,8 @@ def _diagnostics(directory: Path, families: list[str]) -> dict:
         "episodes": len(rows),
         "action_valid_rate": sum(action_valid) / len(action_valid),
         "natural_close_rate": sum(natural_close) / len(natural_close),
-        "entropy": sum(entropies) / len(entropies) if entropies else None,
-        "entropy_positions": len(entropies),
+        "entropy": entropy_sum / entropy_positions if entropy_positions else None,
+        "entropy_positions": entropy_positions,
         "correction_marker_rate": sum(correction) / len(correction) if correction else 0.0,
         "sampled_tokens": sampled_tokens,
         "logical_model_input_tokens": logical_input_tokens,

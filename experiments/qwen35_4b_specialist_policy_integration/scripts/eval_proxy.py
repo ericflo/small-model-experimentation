@@ -77,13 +77,30 @@ def _lower_bound_entropy(logprob_rows: list | None) -> list[float]:
         for item in token_row.values():
             if isinstance(item, dict) and item.get("logprob") is not None:
                 probs.append(math.exp(float(item["logprob"])))
-        mass = min(1.0, sum(probs))
-        tail = max(0.0, 1.0 - mass)
+        mass = sum(probs)
+        if mass > 1.0 + 1e-5:
+            probs = [value / mass for value in probs]
+            tail = 0.0
+        else:
+            tail = max(0.0, 1.0 - mass)
         entropy = -sum(p * math.log(max(p, 1e-30)) for p in probs)
         if tail > 0.0:
             entropy -= tail * math.log(tail)
         values.append(entropy)
     return values
+
+
+def _compact_logprob_receipts(rows: list[dict]) -> None:
+    """Retain entropy sufficient statistics, not enormous top-20 payloads."""
+    for row in rows:
+        for turn in row["turns"]:
+            policy = turn["policy"]
+            values = _lower_bound_entropy(policy.get("stage1_logprobs"))
+            values.extend(_lower_bound_entropy(policy.get("stage2_logprobs")))
+            policy["reported_top20_tail_lumped_entropy_sum"] = sum(values)
+            policy["reported_top20_tail_lumped_entropy_positions"] = len(values)
+            policy.pop("stage1_logprobs", None)
+            policy.pop("stage2_logprobs", None)
 
 
 def _behavior_diagnostics(rows: list[dict]) -> dict:
@@ -247,6 +264,8 @@ def main() -> int:
         runner.close()
 
     merge_receipt = args.model / "merge_receipt.json"
+    behavior_diagnostics = _behavior_diagnostics(trajectories)
+    _compact_logprob_receipts(trajectories)
     result = {
         "stage": "proxy_eval",
         "tag": args.tag,
@@ -270,7 +289,7 @@ def main() -> int:
         "episodes_per_level": episodes_per_level,
         "episode_summary": episode_summary,
         "best_of_k_summary": _best_of_k(trajectories),
-        "behavior_diagnostics": _behavior_diagnostics(trajectories),
+        "behavior_diagnostics": behavior_diagnostics,
         "atom_summary": _atom_summary(atom_rows),
         "wall_seconds": time.perf_counter() - started,
         "smoke": bool(args.smoke),

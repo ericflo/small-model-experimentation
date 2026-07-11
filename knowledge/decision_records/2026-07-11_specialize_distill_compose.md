@@ -333,9 +333,18 @@ Initialize a fresh rank-matched QLoRA student from `S0`. On every step:
 2. the prompt's training-domain metadata routes that trajectory to exactly one
    frozen, qualified specialist;
 3. that specialist prefills the identical observable prompt and student prefix;
-4. store the specialist's top 50 logits plus corrected tail mass; and
+4. store the specialist's top 50 logits/probabilities; and
 5. update the student with MOPD's bias-corrected top-k reverse KL and 20%
-   `S0`/C53 identity-retention replay.
+`S0`/C53 identity-retention replay.
+
+The canonical top-k summand from MOPD equation (5) is
+`p_student(v) * log(p_student(v) / p_teacher(v)) - p_student(v) + p_teacher(v)`
+for each token in the teacher's top-k set. The final two terms are the
+truncation-bias correction. They are not a lumped vocabulary-tail term; an
+earlier “corrected tail mass” shorthand in the proposal was inaccurate. The
+synthetic full-vocabulary test sets `k = |V|`, where this expression must equal
+full reverse KL exactly (the linear correction cancels when summed over the
+whole vocabulary).
 
 Every rollout records the exact student checkpoint digest, is consumed by at
 most one optimizer step, and is discarded; policy lag may not exceed one

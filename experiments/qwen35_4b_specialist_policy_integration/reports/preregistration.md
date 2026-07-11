@@ -123,9 +123,13 @@ generated on-policy, tagged with the exact student checkpoint digest, routed
 to the matching frozen teacher using trainer-only metadata, consumed by at
 most one update, and discarded. Policy lag must be at most one update.
 
-The primary loss is MOPD's bias-corrected top-50 reverse KL with corrected tail
-mass. A synthetic-vocabulary unit test must match the full-vocabulary objective
-before training. All trainable integration arms receive the same 20% retention
+The primary loss is MOPD's bias-corrected top-50 reverse KL: on the teacher's
+top-50 set, each summand is
+`p_student log(p_student/p_teacher) - p_student + p_teacher`, exactly equation
+(5) of the primary paper. This is a per-token truncation correction, not a
+lumped tail-mass approximation. A synthetic-vocabulary unit test with
+`k = |V|` must match full-vocabulary reverse KL before training. All trainable
+integration arms receive the same 20% retention
 dose. Rank is chosen once from a memory-only smoke and cannot be selected from
 task performance.
 

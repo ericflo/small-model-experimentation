@@ -209,6 +209,7 @@ def scientific_smoke(config: dict, config_path: Path) -> dict:
     for path in sorted(list((EXP / "src").rglob("*.py")) + list((EXP / "scripts").glob("*.py"))):
         ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
     _run([str(PY), str(EXP / "tests" / "test_curriculum.py")])
+    _run([str(PY), str(EXP / "tests" / "test_mopd_loss.py")])
     _run([str(VLLM_PY), str(EXP / "tests" / "test_vllm_runner.py")])
     completed = subprocess.run(
         [str(PY), str(EXP / "scripts" / "selftest_gym.py"), "--families", *COMPOUND_FAMILIES],
@@ -337,7 +338,16 @@ def _model_smoke(config: dict, config_path: Path) -> None:
     write_json(EXP / "runs" / "model_smoke" / "composite.json", receipt)
 
 
-def _eval(config_path: Path, config: dict, model: Path, tag: str, decode: str = "greedy") -> None:
+def _eval(
+    config_path: Path,
+    config: dict,
+    model: Path,
+    tag: str,
+    decode: str = "greedy",
+    *,
+    smoke: bool = False,
+    families: tuple[str, ...] | None = None,
+) -> None:
     out_dir = EXP / "runs" / "proxy_eval" / tag
     scores = out_dir / "scores.json"
     merge_receipt = model / "merge_receipt.json"
@@ -349,17 +359,25 @@ def _eval(config_path: Path, config: dict, model: Path, tag: str, decode: str = 
             previous.get("model") == str(model.resolve())
             and fingerprint.get("merge_receipt_sha256") == current_receipt_sha
             and previous.get("decode") == decode
+            and bool(previous.get("smoke")) == smoke
+            and (
+                families is None
+                or previous.get("families") == list(families)
+            )
         ):
             print(f"[resume] evaluation {tag} already complete", flush=True)
             return
         raise SystemExit(f"stale evaluation directory exists: {out_dir}")
-    _run(
-        [
+    command = [
             str(VLLM_PY), str(EXP / "scripts" / "eval_proxy.py"),
             "--config", str(config_path), "--model", str(model), "--tag", tag,
             "--scope", "calibration", "--decode", decode,
         ]
-    )
+    if smoke:
+        command.append("--smoke")
+    if families is not None:
+        command.extend(("--families", *families))
+    _run(command)
 
 
 def main() -> int:
@@ -402,15 +420,27 @@ def main() -> int:
     elif stage == "calibrate":
         if not _checkpoint_complete(paths["incumbent_adapter"], paths["incumbent"]):
             raise SystemExit("incumbent checkpoint is incomplete")
-        _eval(config_path, config, paths["incumbent"], "incumbent_calibration")
-        _eval(config_path, config, paths["incumbent"], "incumbent_best8_calibration", decode="sample8")
+        _eval(
+            config_path, config, paths["incumbent"],
+            "incumbent_eval_smoke", smoke=True,
+        )
+        _eval(
+            config_path, config, paths["incumbent"],
+            "incumbent_compound_calibration", families=COMPOUND_FAMILIES,
+        )
         _run(
             [
                 str(PY), str(EXP / "scripts" / "analyze_calibration.py"),
                 "--config", str(config_path),
-                "--scores", str(EXP / "runs" / "proxy_eval" / "incumbent_calibration" / "scores.json"),
+                "--scores", str(EXP / "runs" / "proxy_eval" / "incumbent_compound_calibration" / "scores.json"),
             ],
             allowed=(0, 4),
+        )
+        _require_gate(EXP / "analysis" / "calibration_gate.json")
+        _eval(config_path, config, paths["incumbent"], "incumbent_calibration")
+        _eval(
+            config_path, config, paths["incumbent"],
+            "incumbent_best8_calibration", decode="sample8",
         )
     elif stage == "dagger-collect":
         _require_gate(EXP / "analysis" / "calibration_gate.json")
