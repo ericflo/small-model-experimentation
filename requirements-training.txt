@@ -1,5 +1,6 @@
 # Separate Transformers/QLoRA environment. Install with:
-# uv pip install --python .venv/bin/python --torch-backend=cu129 -r requirements-training.txt
+# uv pip sync --python .venv/bin/python --torch-backend=cu129 requirements-training.lock.txt
+# Then build causal-conv1d exactly as documented in docs/compute_environment.md.
 torch==2.11.0
 transformers==5.13.0
 peft==0.19.1
@@ -12,3 +13,6 @@ ninja==1.13.0
 scikit-build-core==1.0.2
 wheel==0.47.0
 xformers==0.0.35
+numpy==2.3.5
+scipy==1.17.0
+matplotlib==3.10.8

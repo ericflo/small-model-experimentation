@@ -223,6 +223,12 @@ def main():
                 value.update(chunk)
         return value.hexdigest()
 
+    optimizer_steps = int(trainer.state.global_step)
+    forward_example_upper_bound = optimizer_steps * args.grad_accum * args.batch_size
+    lengths = [len(row["input_ids"]) for row in encoded]
+    forward_input_token_upper_bound = sum(
+        lengths[index % len(lengths)] for index in range(forward_example_upper_bound)
+    )
     receipt = {
         "method": "emission_weighted_dagger_sft",
         "source_model": model_source,
@@ -232,6 +238,10 @@ def main():
         ],
         "input_rows": len(recs),
         "encoded_rows": len(encoded),
+        "encoded_input_tokens_one_pass": sum(lengths),
+        "encoded_target_weight_one_pass": sum(
+            sum(float(value) for value in row["loss_weights"]) for row in encoded
+        ),
         "skipped_rows": skipped,
         "epochs": args.epochs,
         "max_steps": args.max_steps,
@@ -243,7 +253,16 @@ def main():
         "max_length": args.max_length,
         "think_loss_weight": args.w_think,
         "seed": args.seed,
+        "optimizer_steps": optimizer_steps,
+        "forward_example_upper_bound": forward_example_upper_bound,
+        "forward_input_token_upper_bound": forward_input_token_upper_bound,
+        "compute_ledger_note": (
+            "Upper bound assumes every gradient-accumulation slot is full; exact for "
+            "the preregistered batch-one datasets when their dataloader length is divisible."
+        ),
         "train_metrics": train_result.metrics,
+        "gpu": torch.cuda.get_device_name(0),
+        "peak_cuda_bytes": torch.cuda.max_memory_allocated(),
     }
     (args.out / "training_receipt.json").write_text(
         json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8"

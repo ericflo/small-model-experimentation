@@ -17,7 +17,7 @@ thinking semantics.
 ## Install on the current RunPod
 
 Keep vLLM isolated from a Transformers training environment because vLLM pins its own Torch build.
-The current box has an RTX 6000 Ada (48 GB), driver 550.127, Python 3.12, and CUDA 12.8 toolkit. The
+The current box has an NVIDIA L40 (48 GB), driver 550.127.08, Python 3.12, and CUDA 12.8 toolkit. The
 driver exposes CUDA 12.4, but NVIDIA's CUDA 12 minor-version compatibility permits the pinned CUDA
 12.9 runtime on this driver. A real CUDA allocation and full Qwen3.5 model load have passed here.
 
@@ -272,7 +272,8 @@ actual computed tokens are measured.
 
 On fixed hardware and software, explicit request seeds and `async_scheduling=False` make an
 otherwise fixed vLLM call reproducible, but they do not make different batch shapes or token budgets
-common-random-number continuations on the RTX 6000 Ada. In a long-context calibration, changing only
+common-random-number continuations on Ada GPUs such as the current L40. In a prior RTX 6000 Ada
+long-context calibration, changing only
 `max_tokens` changed 32/64 sampled prefixes after the first `max_num_seqs=32` scheduling wave; the
 same boundary effect occurred with asynchronous scheduling both enabled and disabled. vLLM's true
 batch-invariant mode requires NVIDIA compute capability 9.0 or newer, while Ada is 8.9.

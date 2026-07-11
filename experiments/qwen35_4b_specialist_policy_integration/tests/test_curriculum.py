@@ -17,6 +17,7 @@ from curriculum import (  # noqa: E402
     semantic_group_diagnostics,
 )
 from gym.families import load as load_family  # noqa: E402
+from io_utils import domain_families, load_config, training_seed  # noqa: E402
 from rollout import collect_expert_demonstrations  # noqa: E402
 from train_sequence_grpo import _policy_sample, _shuffle_group_advantages  # noqa: E402
 
@@ -72,6 +73,14 @@ def _expert_rollout(family_name: str, seed: int, level: int, inject_bad: bool = 
 
 
 class CurriculumTests(unittest.TestCase):
+    def test_frozen_domains_partition_training_split_and_seed_list(self):
+        config, _ = load_config(EXP / "configs" / "default.yaml")
+        resolved = [domain_families(config, name) for name in ("discover", "control", "tools", "compose")]
+        flattened = [family for group in resolved for family in group]
+        self.assertEqual(flattened, config["split"]["train_families"])
+        self.assertEqual(len(flattened), len(set(flattened)))
+        self.assertEqual([training_seed(config, index) for index in range(3)], [42, 43, 44])
+
     def test_state_aware_experts_solve_all_families_and_levels(self):
         for family_name in ALL_PROCESS_FAMILIES:
             family = load_family(family_name)

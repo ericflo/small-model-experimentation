@@ -9,6 +9,8 @@ external_artifacts:
 omitted_artifacts:
   - path: large_artifacts/qwen35_4b_specialist_policy_integration/
     reason: multi-gigabyte model weights are gitignored and regenerable from committed data, seeds, and receipts
+  - path: large_artifacts/qwen35_4b_specialist_policy_integration/smoke_pre_rebase_stack/failed_zero_step_adapter/
+    reason: preserved all-zero preflight adapter; compact failure evidence is runs/model_smoke/zero_step_failure.json
 reproducibility:
   smoke_command: python3 experiments/qwen35_4b_specialist_policy_integration/scripts/run.py --smoke
   full_command: see the staged Run section in README.md

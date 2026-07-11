@@ -41,6 +41,8 @@ POLICY_OUTPUT_FIELDS = (
     "stage1_cumulative_logprob",
     "stage2_cumulative_logprob",
     "sampled_cumulative_logprob",
+    "stage1_logprobs",
+    "stage2_logprobs",
 )
 
 
@@ -58,6 +60,7 @@ def sampling_config(
     temperature: float | None = None,
     top_p: float | None = None,
     top_k: int | None = None,
+    logprobs: int | None = None,
 ) -> SamplingConfig:
     return SamplingConfig(
         thinking="budget",
@@ -68,6 +71,7 @@ def sampling_config(
         temperature=None if greedy else temperature,
         top_p=None if greedy else top_p,
         top_k=None if greedy else top_k,
+        logprobs=logprobs,
         run_seed=int(run_seed),
     )
 
@@ -105,6 +109,7 @@ def collect_policy_episodes(
     temperature: float | None = None,
     top_p: float | None = None,
     top_k: int | None = None,
+    logprobs: int | None = None,
     progress: bool = True,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """Roll out a policy and label every pre-action live state with an expert.
@@ -128,8 +133,10 @@ def collect_policy_episodes(
         temperature=temperature,
         top_p=top_p,
         top_k=top_k,
+        logprobs=logprobs,
     )
     max_horizon = max((r["episode"].max_turns for r in rollouts), default=0)
+    generation_summaries: list[dict[str, Any]] = []
     for turn_index in range(max_horizon):
         active = [
             rollout
@@ -152,7 +159,8 @@ def collect_policy_episodes(
                     "messages": messages_before,
                 }
             )
-        rows, _ = runner.generate(records, sampling)
+        rows, generation_summary = runner.generate(records, sampling)
+        generation_summaries.append(generation_summary)
         for rollout, row, (decision, messages_before) in zip(active, rows, decisions):
             output = row["outputs"][0]
             action = base.extract_action(output["text"])
@@ -232,6 +240,52 @@ def collect_policy_episodes(
         )
         group_rows.append(diagnostic)
     summary = summarize_trajectories(results, group_rows)
+    if generation_summaries:
+        first = generation_summaries[0]
+        count_keys = (
+            "requests",
+            "completions",
+            "unique_input_prompt_tokens",
+            "stage1_logical_prompt_tokens",
+            "stage2_logical_prompt_tokens",
+            "logical_model_input_tokens",
+            "sampled_tokens",
+            "injected_tokens",
+        )
+        summary["generation"] = {
+            "calls": len(generation_summaries),
+            "model": first["model"],
+            "model_revision": first.get("model_revision"),
+            "model_config_sha256": first.get("model_config_sha256"),
+            "runner_sha256": first["runner_sha256"],
+            "engine": first["engine"],
+            "engine_args": first["engine_args"],
+            "resolved_cudagraph": first["resolved_cudagraph"],
+            "sampling": first["sampling"],
+            "resolved_sampling": first["resolved_sampling"],
+            "counts": {
+                key: sum(int(item["counts"][key]) for item in generation_summaries)
+                for key in count_keys
+            },
+            "generation_seconds": sum(
+                float(item["timing"]["generation_seconds"])
+                for item in generation_summaries
+            ),
+            "runtime": {
+                key: first["runtime"].get(key)
+                for key in (
+                    "python",
+                    "python_executable",
+                    "platform",
+                    "environment_lock",
+                    "uv",
+                    "cuda_toolkit",
+                    "gpu",
+                    "git_commit",
+                    "git_dirty",
+                )
+            },
+        }
     return results, summary
 
 

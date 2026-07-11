@@ -29,7 +29,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 EXP = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(EXP / "src"))
 
-from io_utils import load_config, read_jsonl, sha256_file  # noqa: E402
+from io_utils import load_config, read_jsonl, sha256_file, training_seed  # noqa: E402
 
 
 TARGET_MODULES = [
@@ -199,6 +199,8 @@ def main() -> int:
     parser.add_argument("--model", type=Path, required=True)
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--max-steps", type=int)
+    parser.add_argument("--seed", type=int)
+    parser.add_argument("--run-tag")
     parser.add_argument("--shuffle-advantages", action="store_true")
     parser.add_argument("--smoke", action="store_true")
     args = parser.parse_args()
@@ -250,7 +252,8 @@ def main() -> int:
     if not anchors:
         raise SystemExit("no trainable supervised anchors")
 
-    rng = random.Random(int(config["seeds"]["training"]) + (1 if args.shuffle_advantages else 0))
+    seed = int(args.seed if args.seed is not None else training_seed(config))
+    rng = random.Random(seed + (1 if args.shuffle_advantages else 0))
     rng.shuffle(samples)
     rng.shuffle(anchors)
 
@@ -300,11 +303,27 @@ def main() -> int:
     sample_index = 0
     anchor_index = 0
     stopped_reason = None
+    compute_ledger = {
+        "reference_forward_input_tokens": 0,
+        "policy_forward_input_tokens": 0,
+        "anchor_forward_input_tokens": 0,
+        "policy_target_tokens": 0,
+        "anchor_target_tokens": 0,
+        "reference_forwards": 0,
+        "policy_forwards": 0,
+        "anchor_forwards": 0,
+    }
     model.train()
 
     while optimizer_step < max_steps:
         sample = samples[sample_index % len(samples)]
         sample_index += 1
+        sample_input_tokens = len(sample["input_ids"])
+        compute_ledger["reference_forward_input_tokens"] += sample_input_tokens
+        compute_ledger["policy_forward_input_tokens"] += sample_input_tokens
+        compute_ledger["policy_target_tokens"] += len(sample["completion_ids"])
+        compute_ledger["reference_forwards"] += 1
+        compute_ledger["policy_forwards"] += 1
         with torch.no_grad(), model.disable_adapter():
             reference_log_probs = _completion_log_probs(model, sample).detach()
         policy_log_probs = _completion_log_probs(model, sample)
@@ -326,6 +345,9 @@ def main() -> int:
         if micro_step % anchor_every == 0:
             anchor = anchors[anchor_index % len(anchors)]
             anchor_index += 1
+            compute_ledger["anchor_forward_input_tokens"] += len(anchor["input_ids"])
+            compute_ledger["anchor_target_tokens"] += len(anchor["completion_ids"])
+            compute_ledger["anchor_forwards"] += 1
             anchor_log_probs = _completion_log_probs(model, anchor)
             anchor_weights = torch.tensor(
                 anchor["completion_weights"], dtype=torch.float32, device=model.device
@@ -388,9 +410,11 @@ def main() -> int:
         "requested_steps": max_steps,
         "completed_steps": optimizer_step,
         "micro_steps": micro_step,
+        "compute_ledger": compute_ledger,
         "stopped_reason": stopped_reason,
         "shuffle_advantages": bool(args.shuffle_advantages),
         "shuffle_mapping_sha256": shuffle_mapping_sha,
+        "seed": seed,
         "hyperparameters": {
             key: train_cfg[key]
             for key in (
@@ -413,7 +437,11 @@ def main() -> int:
     (args.out / "training_receipt.json").write_text(
         json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
-    report_name = "shuffled_grpo_training.json" if args.shuffle_advantages else "grpo_training.json"
+    report_name = (
+        f"{args.run_tag}.json"
+        if args.run_tag
+        else ("shuffled_grpo_training.json" if args.shuffle_advantages else "grpo_training.json")
+    )
     (EXP / "runs").mkdir(parents=True, exist_ok=True)
     (EXP / "runs" / report_name).write_text(
         json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8"

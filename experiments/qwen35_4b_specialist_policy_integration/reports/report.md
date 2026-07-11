@@ -2,8 +2,9 @@
 
 ## Status
 
-Implementation in progress. CPU compound-substrate smoke passed; no model has
-yet been loaded for this experiment, so no capability claim is available.
+Implementation and the complete runtime/training/merge preflight passed. No
+gym baseline or result-bearing training result exists, so no capability claim
+is available.
 
 ## Research Program Fit
 
@@ -26,9 +27,18 @@ held-out composition.
 This establishes substrate validity only. It does not show that the fixed model
 can learn any primitive or composition.
 
+The generic runtime smoke loaded the pinned revision on the live NVIDIA L40,
+resolved the requested full-decode CUDA-graph sizes exactly, and answered 4/4
+format/semantic probes. It validates the inference path only.
+
+The Transformers smoke found finite padded-vocabulary logits and both required
+Qwen fast paths. A two-step rank-32 QLoRA produced 128 nonzero composite-mapped
+deltas (summed Frobenius norm 8.742), and the merged checkpoint loaded through
+the same vLLM path. The first one-step attempt is a preserved negative: Trainer
+reported success, but every delta was zero and the merge correctly refused it.
+
 ## Pending
 
-- runtime environment and pinned model smoke;
 - C53 incumbent regeneration and calibration;
 - four specialist/control runs and qualification receipts;
 - same-prefix teacher/locality audit;

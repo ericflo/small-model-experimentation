@@ -3776,9 +3776,10 @@
   },
   {
     "file_counts": {
-      ".json": 1,
+      ".json": 6,
+      ".jsonl": 3,
       ".md": 7,
-      ".py": 40,
+      ".py": 43,
       ".yaml": 3,
       "[none]": 2
     },
@@ -3793,7 +3794,7 @@
       "process_control_and_tool_use"
     ],
     "source_track": "new",
-    "summary": "Status: implementation in progress; CPU compound-substrate smoke passed on 2026-07-11. No model baseline or training result exists yet.",
+    "summary": "Status: specialist implementation and full runtime preflight passed on 2026-07-11. No gym model baseline or result-bearing training result exists yet.",
     "tags": [
       "policy",
       "small-model"
@@ -3809,8 +3810,8 @@
       "src",
       "tests"
     ],
-    "total_files": 53,
-    "total_size_bytes": 678367
+    "total_files": 64,
+    "total_size_bytes": 773306
   },
   {
     "file_counts": {

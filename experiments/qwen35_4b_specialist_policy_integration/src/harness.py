@@ -33,6 +33,11 @@ def make_runner(
             max_num_batched_tokens=int(engine_cfg.get("max_num_batched_tokens", 16384)),
             adapter=Path(adapter) if adapter else None,
             model_override=Path(model_override) if model_override else None,
+            cudagraph_capture_sizes=(
+                tuple(int(value) for value in engine_cfg["cudagraph_capture_sizes"])
+                if engine_cfg.get("cudagraph_capture_sizes") is not None
+                else None
+            ),
         )
     )
 

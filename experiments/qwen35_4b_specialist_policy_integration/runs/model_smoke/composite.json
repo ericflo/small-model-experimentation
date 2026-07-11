@@ -1,0 +1,10 @@
+{
+  "config": "/workspace/small-model-experimentation/experiments/qwen35_4b_specialist_policy_integration/configs/default.yaml",
+  "config_sha256": "02f74d800975a789409fd8018096dee73d84d4375f20d4542799c59bd1d7ba33",
+  "local_model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_specialist_policy_integration/smoke/merged",
+  "local_model_config_sha256": "f64803e92c6b93971a8e4fa89a811c8607b9b4efd6d0df0e6ca6016404f42630",
+  "merge_receipt_sha256": "bacaf4de86c4c29b26dd6aa05d7593fbbd225fa0855715c97676723d50947382",
+  "nonzero_lora_modules": 128,
+  "status": "pass",
+  "vllm_metadata_sha256": "bda765045d64d5659b62d382e5e37fcb26b364413bccc95d3fccaebad6c5e02d"
+}

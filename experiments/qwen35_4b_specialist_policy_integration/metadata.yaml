@@ -5,7 +5,7 @@ source_track: "new"
 path: "experiments/qwen35_4b_specialist_policy_integration"
 primary_readme: "experiments/qwen35_4b_specialist_policy_integration/README.md"
 primary_report: "experiments/qwen35_4b_specialist_policy_integration/reports/report.md"
-summary: "Status: implementation in progress; CPU compound-substrate smoke passed on 2026-07-11. No model baseline or training result exists yet."
+summary: "Status: specialist implementation and full runtime preflight passed on 2026-07-11. No gym model baseline or result-bearing training result exists yet."
 tags:
   - "policy"
   - "small-model"
@@ -24,10 +24,11 @@ top_level_dirs:
   - "src"
   - "tests"
 file_counts:
-  json: 1
+  json: 6
+  jsonl: 3
   md: 7
-  py: 40
+  py: 43
   yaml: 3
   [none]: 2
-total_files: 53
-total_size_bytes: 678367
+total_files: 64
+total_size_bytes: 773306

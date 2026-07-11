@@ -26,6 +26,8 @@ from io_utils import (  # noqa: E402
     resolve_repo_path,
     sha256_file,
     split_receipt,
+    domain_families,
+    training_seed,
     write_json,
     write_jsonl,
 )
@@ -147,7 +149,7 @@ def _stratified_replay(config: dict, n: int) -> list[dict]:
     excluded = set(config["split"]["replay_excluded_families"])
     source = [row for row in read_jsonl(source_path) if row.get("family") not in excluded]
     cells: dict[tuple[str, str], deque] = {}
-    rng = random.Random(int(config["seeds"]["training"]) + 991)
+    rng = random.Random(training_seed(config) + 991)
     grouped: dict[tuple[str, str], list[dict]] = defaultdict(list)
     for row in source:
         grouped[(str(row.get("kind", "unknown")), str(row.get("family", "unknown")))].append(row)
@@ -175,8 +177,12 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path)
     parser.add_argument("--model", type=Path)
-    parser.add_argument("--output-dir", type=Path, default=EXP / "runs" / "dagger_collection")
-    parser.add_argument("--data-out", type=Path, default=EXP / "data" / "dagger_train.jsonl")
+    parser.add_argument(
+        "--domain", choices=("discover", "control", "tools", "compose", "joint"),
+        default="joint",
+    )
+    parser.add_argument("--output-dir", type=Path)
+    parser.add_argument("--data-out", type=Path)
     parser.add_argument("--smoke", action="store_true")
     args = parser.parse_args()
 
@@ -186,20 +192,28 @@ def main() -> int:
     if not (model_path / "config.json").exists():
         raise SystemExit(f"merged incumbent missing: {model_path}")
 
-    train_families = list(config["split"]["train_families"])
+    train_families = domain_families(config, args.domain)
+    domain_index = ["discover", "control", "tools", "compose", "joint"].index(args.domain)
+    seed_offset = domain_index * 10_000_000
+    output_dir = args.output_dir or EXP / "runs" / "dagger_collection" / args.domain
+    data_out = args.data_out or EXP / "data" / f"dagger_{args.domain}.jsonl"
     if args.smoke:
-        sampled_specs = make_specs(train_families[:2], {1: 1}, config["seeds"]["dagger_visit_base"])
-        demo_specs = make_specs(train_families[:2], {1: 1}, config["seeds"]["oracle_demo_base"])
+        sampled_specs = make_specs(
+            train_families[:2], {1: 1}, config["seeds"]["dagger_visit_base"] + seed_offset
+        )
+        demo_specs = make_specs(
+            train_families[:2], {1: 1}, config["seeds"]["oracle_demo_base"] + seed_offset
+        )
     else:
         sampled_specs = make_specs(
             train_families,
             config["collection"]["dagger_per_level"],
-            config["seeds"]["dagger_visit_base"],
+            config["seeds"]["dagger_visit_base"] + seed_offset,
         )
         demo_specs = make_specs(
             train_families,
             config["collection"]["oracle_demo_per_level"],
-            config["seeds"]["oracle_demo_base"],
+            config["seeds"]["oracle_demo_base"] + seed_offset,
         )
 
     runner = make_runner(config["engine"], model_override=str(model_path))
@@ -210,7 +224,7 @@ def main() -> int:
             rollouts_per_episode=1,
             think_budget=config["collection"]["thinking_budget"],
             answer_max_tokens=config["collection"]["answer_max_tokens"],
-            run_seed=config["seeds"]["dagger_visit_base"] + 17,
+            run_seed=config["seeds"]["dagger_visit_base"] + seed_offset + 17,
             greedy=True,
             rollout_offset=0,
         )
@@ -220,7 +234,7 @@ def main() -> int:
             rollouts_per_episode=config["collection"]["dagger_sampled_rollouts_per_episode"],
             think_budget=config["collection"]["thinking_budget"],
             answer_max_tokens=config["collection"]["answer_max_tokens"],
-            run_seed=config["seeds"]["dagger_visit_base"] + 29,
+            run_seed=config["seeds"]["dagger_visit_base"] + seed_offset + 29,
             greedy=False,
             temperature=config["collection"]["temperature"],
             top_p=config["collection"]["top_p"],
@@ -272,15 +286,17 @@ def main() -> int:
     if demo_fraction > float(config["collection"]["expert_demo_max_fraction"]) + 1e-9:
         raise SystemExit(f"expert-demo fraction {demo_fraction:.4f} exceeds cap")
 
-    args.output_dir.mkdir(parents=True, exist_ok=True)
-    write_jsonl(args.output_dir / "trajectories.jsonl.gz", trajectories)
-    write_jsonl(args.output_dir / "expert_trajectories.jsonl.gz", expert_trajectories)
-    write_jsonl(args.output_dir / "group_diagnostics.jsonl", group_rows)
-    write_jsonl(args.data_out, dataset)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    write_jsonl(output_dir / "trajectories.jsonl.gz", trajectories)
+    write_jsonl(output_dir / "expert_trajectories.jsonl.gz", expert_trajectories)
+    write_jsonl(output_dir / "group_diagnostics.jsonl", group_rows)
+    write_jsonl(data_out, dataset)
     counts = Counter(row.get("kind", "unknown") for row in dataset)
     family_counts = Counter(row.get("family", "unknown") for row in dataset)
     receipt = {
         "stage": "dagger_collection",
+        "domain": args.domain,
+        "families": train_families,
         "config": str(config_path),
         "config_sha256": sha256_file(config_path),
         "model": str(model_path),
@@ -297,10 +313,11 @@ def main() -> int:
         "kind_counts": dict(sorted(counts.items())),
         "family_counts": dict(sorted(family_counts.items())),
         "trajectory_summary": summary,
-        "data_sha256": sha256_file(args.data_out),
+        "data_path": str(data_out.resolve()),
+        "data_sha256": sha256_file(data_out),
         "smoke": bool(args.smoke),
     }
-    write_json(args.output_dir / "summary.json", receipt)
+    write_json(output_dir / "summary.json", receipt)
     print(json.dumps(receipt, indent=2, sort_keys=True))
     return 0
 

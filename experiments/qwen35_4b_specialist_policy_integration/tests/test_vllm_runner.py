@@ -8,6 +8,7 @@ import os
 import sys
 import types
 import unittest
+import tempfile
 from pathlib import Path
 from types import SimpleNamespace
 from unittest import mock
@@ -55,6 +56,18 @@ def _compilation_config(
 
 
 class EngineConfigCaptureGeometryTests(unittest.TestCase):
+    def test_local_composite_is_explicit_and_mutually_exclusive_with_lora(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            composite = Path(directory)
+            (composite / "config.json").write_text("{}\n", encoding="utf-8")
+            runner.EngineConfig(model_override=composite).validate()
+            with self.assertRaisesRegex(ValueError, "mutually exclusive"):
+                runner.EngineConfig(
+                    model_override=composite, adapter=composite / "adapter"
+                ).validate()
+        with self.assertRaisesRegex(ValueError, "no config.json"):
+            runner.EngineConfig(model_override=Path("/definitely/missing/composite")).validate()
+
     def test_explicit_capture_list_requires_strict_positive_tied_geometry(self) -> None:
         runner.EngineConfig(
             max_num_seqs=19,

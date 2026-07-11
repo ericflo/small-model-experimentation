@@ -2,6 +2,18 @@
 
 Date locked: 2026-07-11, before any model baseline, training, or benchmark run.
 
+## Pre-baseline Implementation Amendment
+
+On 2026-07-11, after only generic runtime smoke prompts and before any gym
+baseline or training output, `controls.matched_sft_steps` was corrected from
+120 to 300. The real GRPO arm performs a frozen-reference forward, a trainable
+policy forward, and a periodic trainable anchor forward; matching only its 120
+optimizer steps would underfund the stated compute-overmatched SFT control.
+The new value conservatively overmatches forward opportunities and is frozen
+for every domain. No threshold, task split, decode setting, or candidate result
+was observed or changed. The config hash in the rerun CPU smoke is the
+authoritative post-amendment preregistration hash.
+
 ## Primary Hypothesis
 
 Four independently execution-improved policies descended from the merged C53

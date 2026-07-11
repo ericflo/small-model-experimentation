@@ -1,7 +1,7 @@
 # Qwen3.5-4B Specialist Policy Integration
 
-Status: implementation in progress; CPU compound-substrate smoke passed on
-2026-07-11. No model baseline or training result exists yet.
+Status: specialist implementation and full runtime preflight passed on
+2026-07-11. No gym model baseline or result-bearing training result exists yet.
 
 This experiment tests whether independently execution-improved, same-origin
 specialists can be consolidated on the student's own trajectories into one
@@ -89,19 +89,42 @@ python3 experiments/qwen35_4b_specialist_policy_integration/scripts/run.py --smo
 The smoke writes `runs/smoke/summary.json` and verifies all compound oracles,
 necessity ablations, state-aware experts, and split/replay invariants.
 
-Model stages will be exposed through `scripts/run.py --stage ...` as each
-implementation checkpoint passes its tests. Until then, a requested unimplemented
-stage fails closed rather than pretending the scaffold is complete.
+Reached model stages are resumable and fail closed on missing upstream receipts:
+
+```bash
+python3 experiments/qwen35_4b_specialist_policy_integration/scripts/run.py --stage model-smoke
+python3 experiments/qwen35_4b_specialist_policy_integration/scripts/run.py --stage incumbent
+python3 experiments/qwen35_4b_specialist_policy_integration/scripts/run.py --stage calibrate
+python3 experiments/qwen35_4b_specialist_policy_integration/scripts/run.py --stage dagger-collect --domain discover
+python3 experiments/qwen35_4b_specialist_policy_integration/scripts/run.py --stage dagger-train --domain discover
+python3 experiments/qwen35_4b_specialist_policy_integration/scripts/run.py --stage rl-collect --domain discover
+python3 experiments/qwen35_4b_specialist_policy_integration/scripts/run.py --stage specialist-train --domain discover
+python3 experiments/qwen35_4b_specialist_policy_integration/scripts/run.py --stage controls --domain discover
+python3 experiments/qwen35_4b_specialist_policy_integration/scripts/run.py --stage specialist-eval --domain discover
+python3 experiments/qwen35_4b_specialist_policy_integration/scripts/run.py --stage specialist-analyze --domain discover
+```
+
+Replace `discover` with `control`, `tools`, or `compose`. Teacher-audit and
+integration stages remain deliberately unavailable until all specialist gates
+pass; a request cannot silently bypass the stop hierarchy.
 
 ## Current Results
 
-Only CPU substrate evidence exists:
+Current pre-task evidence is limited to substrate and runtime validity:
 
 - four compound families deterministic and JSON-safe;
 - exact oracle 1.0 at every L1-L4 cell;
 - generic random policy 0.0;
 - every registered primitive-removal policy full-success 0.0; and
 - state-aware live experts solve every cell at 1.0.
+- the pinned model/runtime answered 4/4 generic semantic smoke prompts and
+  honored the explicit CUDA-graph geometry on the live L40.
+- the pinned Transformers path produced finite logits with both Qwen fast-path
+  extensions, a two-step QLoRA made 128/128 nonzero mapped deltas, and vLLM
+  loaded the explicitly merged local composite.
+- a one-step QLoRA smoke exited successfully but yielded an all-zero adapter;
+  the merge gate rejected and preserved it, demonstrating that Trainer exit
+  status alone is not an installation check.
 
 No capability, teacher, integration, transfer, or benchmark conclusion is yet
 licensed.

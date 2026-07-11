@@ -137,6 +137,16 @@ revise training.
 - A null at the specialist stage says nothing about MOPD in settings with
   stronger teachers. It does decisively stop this repository's proposed path.
 
+## Pre-baseline Implementation Note
+
+The first runtime pass exposed two issues before any gym model output. The
+copied harness accepted a merged-checkpoint argument while the copied current
+runner lacked the corresponding engine field; the runner now loads and hashes
+the local composite explicitly. Also, the original 120-step extra-SFT setting
+matched optimizer steps but not GRPO's multiple forward passes, so it was
+raised to 300 as documented in the preregistration amendment. Both fixes make
+the existing controls stricter and were frozen before incumbent calibration.
+
 ## Decision Receipt
 
 - CPU compound oracle/necessity gate: required before environment commit.

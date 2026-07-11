@@ -61,6 +61,10 @@ def main() -> int:
     model = AutoModelForImageTextToText.from_pretrained(
         base_source, **source_kwargs, trust_remote_code=True,
         dtype=torch.bfloat16, device_map="cpu")
+    merge_device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    if merge_device.type == "cuda":
+        torch.backends.cuda.matmul.allow_tf32 = False
+    print(f"[merge] LoRA products use {merge_device} with FP32 matmul", flush=True)
 
     # Map "N.<suffix>" tails (as the adapter names them) to the composite's
     # full module paths. Qwen3.5 is a hybrid: not every layer has attention
@@ -74,6 +78,9 @@ def main() -> int:
     print(f"[merge] example composite tail: {sample!r} -> {tail_to_path[sample]}", flush=True)
 
     applied = 0
+    nonzero_deltas = 0
+    delta_norm_sum = 0.0
+    delta_norm_max = 0.0
     with safe_open(str(args.adapter / "adapter_model.safetensors"), "pt") as tensors:
         keys = [k for k in tensors.keys() if k.endswith(".lora_A.weight")]
         for key_a in keys:
@@ -84,18 +91,28 @@ def main() -> int:
             if len(paths) != 1:
                 raise SystemExit(f"ambiguous or missing composite module for {core!r}: {paths}")
             module = model.get_submodule(paths[0])
-            lora_a = tensors.get_tensor(key_a).float()
-            lora_b = tensors.get_tensor(key_a.replace(".lora_A.", ".lora_B.")).float()
+            lora_a = tensors.get_tensor(key_a).to(device=merge_device, dtype=torch.float32)
+            lora_b = tensors.get_tensor(
+                key_a.replace(".lora_A.", ".lora_B.")
+            ).to(device=merge_device, dtype=torch.float32)
             delta = (lora_b @ lora_a) * scale
             if delta.shape != module.weight.shape:
                 raise SystemExit(
                     f"shape mismatch at {core}: {delta.shape} vs {module.weight.shape}"
                 )
-            module.weight.data = (module.weight.data.float() + delta).to(torch.bfloat16)
+            base_weight = module.weight.data.to(device=merge_device, dtype=torch.float32)
+            module.weight.data = (base_weight + delta).to(device="cpu", dtype=torch.bfloat16)
+            delta_norm = float(torch.linalg.vector_norm(delta).item())
+            nonzero_deltas += delta_norm > 0.0
+            delta_norm_sum += delta_norm
+            delta_norm_max = max(delta_norm_max, delta_norm)
             applied += 1
+            del base_weight, delta, lora_a, lora_b
     print(f"[merge] applied {applied} LoRA deltas (expected 7 modules x layers)", flush=True)
     if applied == 0:
         raise SystemExit("no deltas applied — refusing to save a no-op checkpoint")
+    if nonzero_deltas == 0:
+        raise SystemExit("every applied LoRA delta is numerically zero — refusing no-op merge")
 
     args.out.mkdir(parents=True, exist_ok=True)
     print(f"[merge] saving composite merged model to {args.out} ...", flush=True)
@@ -126,7 +143,15 @@ def main() -> int:
         "adapter_config_sha256": digest(args.adapter / "adapter_config.json"),
         "adapter_weights_sha256": digest(args.adapter / "adapter_model.safetensors"),
         "applied_lora_modules": applied,
+        "nonzero_lora_modules": nonzero_deltas,
+        "delta_frobenius_norm_sum": delta_norm_sum,
+        "delta_frobenius_norm_max": delta_norm_max,
         "scale": scale,
+        "merge_device": str(merge_device),
+        "fp32_tf32_allowed": (
+            bool(torch.backends.cuda.matmul.allow_tf32)
+            if merge_device.type == "cuda" else None
+        ),
         "weight_files": [
             {"name": path.name, "sha256": digest(path)}
             for path in sorted(args.out.glob("*.safetensors"))

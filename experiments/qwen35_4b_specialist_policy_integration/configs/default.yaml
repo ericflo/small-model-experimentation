@@ -12,6 +12,7 @@ engine:
   gpu_memory_utilization: 0.85
   max_num_seqs: 48
   max_num_batched_tokens: 16384
+  cudagraph_capture_sizes: [1, 2, 4, 8, 16, 24, 32, 40, 48]
 
 domains:
   discover: [glyphgate, loomfix]
@@ -136,7 +137,10 @@ mopd:
   consume_rollout_once: true
 
 controls:
-  matched_sft_steps: 120
+  # GRPO uses a frozen-reference forward plus a policy forward and periodic
+  # anchor forward. 300 SFT steps conservatively overmatch its forward-token
+  # opportunity rather than merely matching optimizer-step count.
+  matched_sft_steps: 300
   joint_rl_steps: 600
   wrong_route_steps: 120
   paired_bootstrap_samples: 10000
@@ -160,6 +164,9 @@ gates:
   specialist_vs_extra_sft_delta: 0.05
   specialist_vs_shuffled_delta: 0.03
   specialist_max_retention_regression: 0.05
+  specialist_max_natural_close_regression: 0.10
+  specialist_max_entropy_relative_drop: 0.10
+  specialist_max_correction_marker_relative_drop: 0.10
   specialist_required_primitive_count: 3
   integration_mean_headroom_recovery: 0.75
   integration_min_domain_headroom_recovery: 0.50

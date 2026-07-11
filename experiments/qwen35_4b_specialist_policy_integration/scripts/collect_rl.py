@@ -23,6 +23,8 @@ from io_utils import (  # noqa: E402
     resolve_repo_path,
     sha256_file,
     split_receipt,
+    domain_families,
+    training_seed,
     write_json,
     write_jsonl,
 )
@@ -60,8 +62,12 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path)
     parser.add_argument("--model", type=Path)
-    parser.add_argument("--output-dir", type=Path, default=EXP / "runs" / "rl_collection")
-    parser.add_argument("--anchor-out", type=Path, default=EXP / "data" / "rl_anchor.jsonl")
+    parser.add_argument(
+        "--domain", choices=("discover", "control", "tools", "compose", "joint"),
+        default="joint",
+    )
+    parser.add_argument("--output-dir", type=Path)
+    parser.add_argument("--anchor-out", type=Path)
     parser.add_argument("--smoke", action="store_true")
     args = parser.parse_args()
 
@@ -71,10 +77,16 @@ def main() -> int:
     if not (model_path / "config.json").exists():
         raise SystemExit(f"merged DAgger checkpoint missing: {model_path}")
 
-    families = list(config["split"]["train_families"])
+    families = domain_families(config, args.domain)
+    domain_index = ["discover", "control", "tools", "compose", "joint"].index(args.domain)
+    seed_offset = domain_index * 10_000_000
+    output_dir = args.output_dir or EXP / "runs" / "rl_collection" / args.domain
+    anchor_out = args.anchor_out or EXP / "data" / f"rl_anchor_{args.domain}.jsonl"
     per_level = {1: 1} if args.smoke else config["rl_collection"]["per_level"]
     use_families = families[:2] if args.smoke else families
-    specs = make_specs(use_families, per_level, config["seeds"]["rl_collect_base"])
+    specs = make_specs(
+        use_families, per_level, config["seeds"]["rl_collect_base"] + seed_offset
+    )
 
     runner = make_runner(config["engine"], model_override=str(model_path))
     try:
@@ -84,7 +96,7 @@ def main() -> int:
             rollouts_per_episode=(2 if args.smoke else config["rl_collection"]["group_size"]),
             think_budget=config["rl_collection"]["thinking_budget"],
             answer_max_tokens=config["rl_collection"]["answer_max_tokens"],
-            run_seed=config["seeds"]["rl_collect_base"] + 37,
+            run_seed=config["seeds"]["rl_collect_base"] + seed_offset + 37,
             greedy=False,
             temperature=config["rl_collection"]["temperature"],
             top_p=config["rl_collection"]["top_p"],
@@ -141,20 +153,22 @@ def main() -> int:
     # Match the intended supervised guard/control pool without letting long
     # trajectories dominate a family/level cell.
     anchor_cap = min(1200, max(64, len(anchors) // 3))
-    anchors = _cap_anchor_rows(anchors, anchor_cap, config["seeds"]["training"] + 17)
+    anchors = _cap_anchor_rows(anchors, anchor_cap, training_seed(config) + seed_offset + 17)
     for row in anchors:
         row["kind"] = "rl_visited_anchor"
         row["source"] = "rl_policy_visited"
 
-    args.output_dir.mkdir(parents=True, exist_ok=True)
-    trajectory_path = args.output_dir / "trajectories.jsonl.gz"
+    output_dir.mkdir(parents=True, exist_ok=True)
+    trajectory_path = output_dir / "trajectories.jsonl.gz"
     write_jsonl(trajectory_path, trajectories)
-    write_jsonl(args.output_dir / "group_diagnostics.jsonl", group_rows)
-    write_jsonl(args.anchor_out, anchors)
+    write_jsonl(output_dir / "group_diagnostics.jsonl", group_rows)
+    write_jsonl(anchor_out, anchors)
     summary = summarize_trajectories(trajectories, group_rows)
     active_groups = sum(bool(row["advantage_active"]) for row in group_rows)
     receipt = {
         "stage": "rl_collection",
+        "domain": args.domain,
+        "families": families,
         "config": str(config_path),
         "config_sha256": sha256_file(config_path),
         "model": str(model_path),
@@ -176,10 +190,11 @@ def main() -> int:
         ),
         "summary": summary,
         "trajectory_sha256": sha256_file(trajectory_path),
-        "anchor_sha256": sha256_file(args.anchor_out),
+        "anchor_path": str(anchor_out.resolve()),
+        "anchor_sha256": sha256_file(anchor_out),
         "smoke": bool(args.smoke),
     }
-    write_json(args.output_dir / "summary.json", receipt)
+    write_json(output_dir / "summary.json", receipt)
     print(json.dumps(receipt, indent=2, sort_keys=True))
     return 0
 

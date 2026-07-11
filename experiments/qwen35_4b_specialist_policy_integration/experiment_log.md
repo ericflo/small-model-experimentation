@@ -14,3 +14,33 @@ post-training/adaptation, and benchmark generalization.
 - Locked the preregistration and adversarial design review before model output.
 - CPU scientific smoke passed all L1-L4 oracle, random, necessity, live-expert,
   split, and replay-exclusion checks. No model baseline or training was run.
+
+## 2026-07-11 — runtime implementation checkpoint
+
+- Discovered that the live GPU is an NVIDIA L40 (46,068 MiB), not the RTX
+  6000 Ada recorded by the previous pod; updated the shared environment docs.
+- Recreated separate pinned vLLM and Transformers environments from committed
+  locks. The first pinned vLLM load resolved the explicit CUDA-graph geometry
+  and answered four generic semantic probes correctly. These probes contain no
+  gym item and license no capability claim.
+- Fixed the merged-composite path so the current runner genuinely loads and
+  fingerprints a local checkpoint instead of accepting an unusable harness
+  argument.
+- Added resumable domain-isolated DAgger, GRPO, extra-SFT, shuffled-reward,
+  paired evaluation, diagnostic, and gate stages.
+- Pre-baseline amendment: increased extra-SFT from 120 to 300 steps because
+  GRPO has multiple forward passes per optimizer step. This preserves the
+  preregistered compute-overmatched control; no task model output existed.
+- The first one-step QLoRA preflight ran for 110.1 seconds and exited normally,
+  but all 128 reconstructed LoRA deltas were zero; explicit merge refused it.
+  The adapter remains under the external smoke artifacts and its compact
+  failure receipt is committed.
+- A two-step, accumulation-one rerun exercised a nonzero optimizer update:
+  all 128 mapped deltas were nonzero (summed Frobenius norm 8.742), explicit
+  FP32/no-TF32 merge succeeded, and vLLM loaded and generated from the local
+  composite. HF/vLLM prompt-token counts matched 4/4.
+- A concurrent main-branch environment update introduced the repository's
+  canonical PEFT 0.19.1, bitsandbytes 0.49.2, accelerate 1.14.0, and xFormers
+  pins. The work was rebased rather than overwritten, a full dependency lock
+  was regenerated, and the entire finite-logit/train/merge/local-vLLM preflight
+  passed again under that exact lock.

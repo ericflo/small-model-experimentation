@@ -30,6 +30,34 @@ def resolve_repo_path(value: str | Path) -> Path:
     return path if path.is_absolute() else REPO / path
 
 
+def training_seed(config: dict[str, Any], index: int = 0) -> int:
+    """Return one frozen training seed while accepting the preregistered list."""
+    seeds = config["seeds"]["training"]
+    if isinstance(seeds, list):
+        if not seeds:
+            raise ValueError("seeds.training must not be empty")
+        return int(seeds[index % len(seeds)])
+    return int(seeds)
+
+
+def domain_families(config: dict[str, Any], domain: str) -> list[str]:
+    """Resolve one specialist domain, or the frozen joint training mixture."""
+    if domain == "joint":
+        return list(config["split"]["train_families"])
+    domains = config.get("domains", {})
+    if domain not in domains:
+        raise ValueError(
+            f"unknown domain {domain!r}; expected one of {sorted(domains)} or 'joint'"
+        )
+    families = [str(value) for value in domains[domain]]
+    if not families:
+        raise ValueError(f"domain {domain!r} has no families")
+    outside = set(families) - set(config["split"]["train_families"])
+    if outside:
+        raise ValueError(f"domain {domain!r} contains non-training families: {sorted(outside)}")
+    return families
+
+
 def sha256_file(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as handle:

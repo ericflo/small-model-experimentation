@@ -5,18 +5,17 @@ environment or model changes.
 
 ## Current box
 
-- RunPod Linux container with one **RTX 6000 Ada (48 GB)**, driver **550.127.05** (CUDA 12.4
+- RunPod Linux container with one **NVIDIA L40 (48 GB)**, driver **550.127.08** (CUDA 12.4
   interface), CUDA 12.8 toolkit, Python 3.12.3, and `uv 0.9.0`.
 - The high-throughput environment is **`.venv-vllm`** (gitignored), created with `uv`. Its validated
   core stack is vLLM **0.24.0+cu129**, torch **2.11.0+cu129**, and transformers **5.13.0**. CUDA 12
   minor-version compatibility works on this driver: a CUDA allocation and full Qwen3.5 load/generate
   smoke both passed. Install the complete pinned graph from `requirements-vllm.lock.txt`.
-- The separate Transformers training environment is **`.venv`** (gitignored), created with `uv` from
-  `requirements-training.txt`. Its current core stack is torch **2.11.0+cu129**, transformers
+- The separate Transformers training environment is **`.venv`** (gitignored), reproduced with `uv`
+  from `requirements-training.lock.txt`. Its current core stack is torch **2.11.0+cu129**, transformers
   **5.13.0**, PEFT **0.19.1**, bitsandbytes **0.49.2**, and accelerate **1.14.0**. Rebuild it with
-  `uv venv --python 3.12 .venv && uv pip install --python .venv/bin/python --torch-backend=cu129
-  -r requirements-training.txt`. Keep it separate from `.venv-vllm`; vLLM pins Torch and should not
-  be allowed to rewrite the training stack.
+  the commands below. Keep it separate from `.venv-vllm`; vLLM pins Torch and should not be allowed
+  to rewrite the training stack.
 - Both Qwen3.5 training fast-path checks currently pass: flash-linear-attention **0.5.1** and
   causal-conv1d **1.6.2.post1**. The latter has no matching wheel and must be installed *after* the
   base requirements (so torch, ninja, and the build backend already exist):
@@ -38,6 +37,22 @@ environment or model changes.
   previous single **RTX 4090 (24 GB), WSL** environment. They remain recovery/reference evidence, not
   measurements of this RunPod.
 
+Recreate and validate the training environment without allowing it to modify the vLLM environment:
+
+```bash
+uv venv --python 3.12 .venv
+uv pip sync --python .venv/bin/python --torch-backend=cu129 requirements-training.lock.txt
+CUDA_HOME=/usr/local/cuda TORCH_CUDA_ARCH_LIST=8.9 CAUSAL_CONV1D_FORCE_BUILD=TRUE MAX_JOBS=8 \
+  uv pip install --python .venv/bin/python --no-build-isolation \
+  --no-binary causal-conv1d causal-conv1d==1.6.2.post1
+uv pip check --python .venv/bin/python
+```
+
+`requirements-training.txt` is the human-maintained input. Regenerate the lock with the exact command
+in its header, then rerun the Qwen forward smoke and both fast-path import checks. The separate
+`causal-conv1d` build needs the already-installed Torch environment plus `--no-build-isolation`;
+do not use `--no-binary :all:`, which also source-builds ninja before its undeclared backend exists.
+
 ## Model
 
 All experiments use **Qwen/Qwen3.5-4B** (`model_type: qwen3_5`) — never an older model. It is a hybrid
@@ -52,11 +67,13 @@ at `templates/experiment/src/vllm_runner.py`; new experiment scaffolds copy it a
 CLI examples, thinking-budget semantics, parity gates, and backend-mixing rules live in
 [`docs/vllm_inference.md`](vllm_inference.md).
 
-Validated current behavior:
+Validated current-L40 behavior:
 
 - pinned Qwen3.5 revision loads in text-only bf16 using about **8.0 GiB VRAM**;
-- cached checkpoint weight loading is about **2 seconds**; a full cached engine startup is about
-  **16 seconds** for the 4k/32-sequence smoke configuration;
+- the first 4k/16-sequence engine startup took **210.7 seconds**, including one-time downloads,
+  compilation, profiling, and CUDA-graph capture; weight loading itself took about **2 seconds**;
+- the L40 smoke resolved the explicit `[1,2,4,8,16]` CUDA-graph list exactly and answered all four
+  semantic probes correctly;
 - the first launch builds FlashInfer's sampling extension and may take roughly a minute; the result
   is cached under `/root/.cache/flashinfer`;
 - the wrapper's no-thinking and legacy two-stage forced-thinking smoke paths both complete and write
@@ -66,7 +83,7 @@ Validated current behavior:
 - invoke all prompts together and use `n` sampling so continuous batching can eliminate HF's
   slowest-sequence batch gate.
 
-Warm measurements on this RTX 6000 Ada, excluding engine load but including all generation stages:
+Historical warm measurements on the preceding RTX 6000 Ada, excluding engine load but including all generation stages:
 
 | workload | sampled completions | sampled tokens | wall time | aggregate tok/s |
 | --- | ---: | ---: | ---: | ---: |
@@ -90,8 +107,8 @@ parity gate after restoration.
 ## Historical Transformers fast path (previous 4090 only)
 
 The recipe below describes the previous WSL/torch-cu130 environment. Do not run it verbatim on the
-current RunPod; there is no shared Transformers environment here yet, and its Torch/CUDA pins must be
-chosen and validated separately when an internals-dependent experiment needs one.
+current RunPod; use `requirements-training.lock.txt` and revalidate the two fast-path imports after
+installation.
 
 The qwen3_5 fast path needs **both** `flash-linear-attention` (Triton; `is_flash_linear_attention_available()`)
 and **`causal-conv1d`** (`is_causal_conv1d_available()`). If either is missing the model prints
@@ -218,7 +235,7 @@ The full-vocab logits tensor is the recurring OOM source (~150K vocab):
   to requests admitted after a mixed-termination first `max_num_seqs=32` scheduling wave. This
   happened with vLLM 0.24 asynchronous scheduling both enabled *and disabled*. vLLM's true
   batch-invariant mode (`VLLM_BATCH_INVARIANT=1`) requires compute capability >=9.0 and is therefore
-  unavailable on the RTX 6000 Ada (8.9). Keep explicit seeds and freeze every tier, but treat
+  unavailable on Ada GPUs including the current L40 (8.9). Keep explicit seeds and freeze every tier, but treat
   different budgets/batch compositions as independent reproducible protocols rather than common-
   random-number continuations. The shared runner disables async scheduling and records that choice,
   but this simplifies scheduling; it does not make pre-Hopper inference batch-invariant.

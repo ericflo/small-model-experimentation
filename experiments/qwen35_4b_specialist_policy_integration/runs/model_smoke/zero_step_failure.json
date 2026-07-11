@@ -1,0 +1,13 @@
+{
+  "status": "failed_as_designed",
+  "stage": "training_merge_preflight",
+  "source_model": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "requested_optimizer_steps": 1,
+  "training_runtime_seconds": 110.0644,
+  "adapter_location": "large_artifacts/qwen35_4b_specialist_policy_integration/smoke_pre_rebase_stack/failed_zero_step_adapter",
+  "applied_module_candidates": 128,
+  "nonzero_lora_modules": 0,
+  "failure": "explicit merge refused an adapter whose every reconstructed LoRA delta was numerically zero",
+  "interpretation": "A successful Trainer exit is not evidence that an adapter changed the model. The one-step smoke is preserved, and the preflight was raised to two optimizer steps with a nonzero-delta merge gate. No task output was observed."
+}
