@@ -94,3 +94,8 @@ post-training/adaptation, and benchmark generalization.
   nor raw top-20 logprob payloads survived in the committed evaluation rows.
 - This is a headroom/measurement result only. It licenses matched baselines and
   specialist production; it does not show a capability gain.
+- Before matched baseline output, unused atom passes were removed from the
+  best-of-8, DAgger, extra-SFT, and shuffled-reward evaluations. Qualification
+  reads atom retention only from the paired incumbent and real specialist;
+  episode prompts, seeds, decoding, and every registered comparison are
+  unchanged.

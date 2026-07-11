@@ -629,7 +629,7 @@ def _baseline_eval(config: dict, config_path: Path, paths: dict[str, Path]) -> N
     _eval(config_path, config, paths["incumbent"], "incumbent_calibration")
     _eval(
         config_path, config, paths["incumbent"],
-        "incumbent_best8_calibration", decode="sample8",
+        "incumbent_best8_calibration", decode="sample8", no_atoms=True,
     )
 
 
@@ -806,13 +806,13 @@ def main() -> int:
             _require_gate(
                 EXP / "analysis" / "checkpoint_installation" / f"{gate_tag}.json"
             )
-        for tag, model in (
-            (f"dagger_{args.domain}", paths["dagger"]),
-            (f"extra_sft_{args.domain}", paths["extra_sft"]),
-            (f"shuffled_{args.domain}", paths["shuffled"]),
-            (f"specialist_{args.domain}", paths["specialist"]),
+        for tag, model, no_atoms in (
+            (f"dagger_{args.domain}", paths["dagger"], True),
+            (f"extra_sft_{args.domain}", paths["extra_sft"], True),
+            (f"shuffled_{args.domain}", paths["shuffled"], True),
+            (f"specialist_{args.domain}", paths["specialist"], False),
         ):
-            _eval(config_path, config, model, tag)
+            _eval(config_path, config, model, tag, no_atoms=no_atoms)
     elif stage == "specialist-analyze":
         command = [
             str(PY), str(EXP / "scripts" / "analyze_specialist.py"),
