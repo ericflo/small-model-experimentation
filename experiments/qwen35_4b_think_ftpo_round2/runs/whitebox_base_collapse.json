@@ -1,0 +1,17 @@
+{
+  "arm": "base",
+  "stage": "collapse",
+  "model": "base",
+  "greedy": {
+    "n": 120,
+    "success": 0.041666666666666664,
+    "mean_score": 0.041666666666666664,
+    "loop_rate": 0.008333333333333333,
+    "unresolved_rate": 0.9916666666666667,
+    "answer_limit_rate": 0.7,
+    "natural_close_rate": 0.0,
+    "mean_think_tokens": 1024.0
+  },
+  "pass@8": 0.09166666666666666,
+  "wall_s": 886.1527574062347
+}

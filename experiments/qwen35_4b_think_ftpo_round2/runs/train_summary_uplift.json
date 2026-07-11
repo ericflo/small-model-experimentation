@@ -1,0 +1,68 @@
+{
+  "arm": "uplift",
+  "objective": "uplift",
+  "rows": 155,
+  "steps_run": 5,
+  "total_steps": 20,
+  "stopped_early": true,
+  "wall_s": 103.54137420654297,
+  "history": [
+    {
+      "step": 2,
+      "of": 20,
+      "hit_rate": 0.0,
+      "primary_loss": 0.9740769863128662,
+      "mse_nt": 0.0,
+      "mse_t": 0.0,
+      "lr": 1e-05,
+      "elapsed_s": 40.58215665817261
+    },
+    {
+      "step": 4,
+      "of": 20,
+      "hit_rate": 0.0625,
+      "primary_loss": 0.7378386612981558,
+      "mse_nt": 0.0052198354751453735,
+      "mse_t": 0.0087890625,
+      "lr": 8.888888888888888e-06,
+      "elapsed_s": 81.06591725349426
+    }
+  ],
+  "config": {
+    "arms": [
+      "demote",
+      "uplift",
+      "uplift_shuffled"
+    ],
+    "lora_r": 256,
+    "lora_alpha": 128,
+    "lora_dropout": 0.0,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "gate_proj",
+      "up_proj",
+      "down_proj"
+    ],
+    "learning_rate": 1e-05,
+    "warmup_ratio": 0.1,
+    "num_epochs": 2,
+    "effective_batch": 16,
+    "per_device_batch": 1,
+    "max_seq_length": 6144,
+    "optimizer": "adamw_torch",
+    "weight_decay": 0.01,
+    "max_grad_norm": 2.5,
+    "seed": 4407,
+    "demote_margin_logits": 2.0,
+    "uplift_gain_logits": 0.5,
+    "lambda_mse": 0.4,
+    "lambda_mse_target": 0.05,
+    "tau_mse_target": 0.5,
+    "early_stop_hit_rate": 0.35,
+    "early_stop_min_progress": 0.2,
+    "log_every_steps": 2
+  }
+}

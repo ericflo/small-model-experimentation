@@ -59,6 +59,13 @@ changes a rule here, update the rule in the same commit.
   execution-filtering recovers the coverage ceiling for free (C17).
 - **Per-step confidence localizes the first error** (dips at the first slip, surviving
   de-trending; C42) — use it for targeted repair instead of full resampling.
+- **Treat thought-fork uncertainty as routing, not as a safe edit certificate.** C52 found
+  useful outcome direction at low-entropy, non-degenerate-varentropy confident wrong turns,
+  but neither pairwise demotion nor positive-only uplift elicited held-out capability.
+  Positive-only was safer; higher varentropy was not monotonically safer. Before scaling any
+  thought-token intervention, require an exact-logit locality audit on independent contexts
+  (current ceiling: ≤0.10 median absolute non-target drift), then require an absolute base and
+  matched-compute win. A token-local loss is not a context-local parameter update.
 - **To install a missing capability, bank verified solutions — and seed rungs the model
   cannot sample.** Self-training on execution-verified self-solutions banks deployable
   capability (C11, C18) but only for depths the base already samples (C21); deeper rungs need
@@ -105,6 +112,11 @@ changes a rule here, update the rule in the same commit.
   silently matched cross-family rows, inflating a published contrast +0.050 → +0.083 until an
   adversarial audit caught it (C48). Never hand-compute a published statistic: extend the
   committed analyzer so the number is regenerable.
+- **Exact-logit work on Qwen3.5-4B is batch-sensitive.** The hybrid GDN/Mamba architecture
+  produced 0.30–0.44-logit divergence under padded batching in C52. Use one context per
+  forward for reference logits and locality audits unless an explicit padded-equivalence
+  test passes; never infer edit locality from a convenience batch that changes the base
+  logits.
 - **Forced-answer evals (argmax over the answer-token set after `Answer: `)** give a fast,
   deterministic, fair comparison between base and SFT'd models — the base otherwise rambles
   without concluding (C43). Compare the SAME model in forced vs generation mode to localize

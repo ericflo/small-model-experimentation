@@ -5,28 +5,34 @@ external_artifacts:
   - name: "demote FTPO LoRA adapter"
     storage: "large_artifacts/qwen35_4b_think_ftpo_round2/adapters/demote"
     required_for: "targeted-logit audit and merged deployment"
-    checksum: ""
+    checksum: "sha256:dc1cafd0f7e40ac1e03723fe2de8dec114523c411fa7748c7224d9206cad5278"
     regenerate: >-
       .venv/bin/python experiments/qwen35_4b_think_ftpo_round2/scripts/train_sparse.py
       --arm demote --out <storage>
   - name: "positive-only uplift LoRA adapter"
     storage: "large_artifacts/qwen35_4b_think_ftpo_round2/adapters/uplift"
     required_for: "primary evaluation"
-    checksum: ""
+    checksum: "sha256:46dffde0c2e4d0b91f5e1c594352dee558643971c14a4c8d354cd43113383896"
     regenerate: >-
       .venv/bin/python experiments/qwen35_4b_think_ftpo_round2/scripts/train_sparse.py
       --arm uplift --out <storage>
   - name: "outcome-shuffled uplift LoRA adapter"
     storage: "large_artifacts/qwen35_4b_think_ftpo_round2/adapters/uplift_shuffled"
     required_for: "mechanism-falsifying control"
-    checksum: ""
+    checksum: "sha256:f49c4d41c8eca0159d2573bc3accc16a6e733dd21bed09e25e3f0bc8f1e2cfeb"
     regenerate: >-
       .venv/bin/python experiments/qwen35_4b_think_ftpo_round2/scripts/train_sparse.py
       --arm uplift_shuffled --out <storage>
   - name: "merged composite checkpoints"
     storage: "large_artifacts/qwen35_4b_think_ftpo_round2/merged/{demote,uplift,uplift_shuffled}"
     required_for: "vLLM evaluation; runtime LoRA is invalid under C49"
-    checksum: ""
+    checksum: >-
+      model.safetensors sha256: demote
+      f8d1dee34879834ddb52cc88a3e76ed7be1e925e5a01c0b324191e4e137e2d78;
+      uplift
+      aa8b9a7adfb053131987db6c148cf8c738e82dcfbc4c7b0fc15f846f9a82192c;
+      uplift_shuffled
+      21b96c2b753120c99887c12076761c40d6187fb1804184ccb562847900cb9fb2
     regenerate: >-
       .venv/bin/python experiments/qwen35_4b_think_ftpo_round2/scripts/merge_ftpo.py
       --adapter <adapter> --out <storage>
@@ -39,4 +45,6 @@ reproducibility:
   required_external_artifacts: []
 notes: >-
   Parent training rows are copied and committed, so the round-1 raw harvest is
-  not required. Menagerie is conditional and stores aggregate/per-family fields only.
+  not required. Checksums for adapter directories are deterministic tree hashes
+  emitted by the run; merged hashes bind each model.safetensors file. Menagerie
+  was ineligible and not run (zero benchmark seeds consumed).

@@ -28,7 +28,10 @@ flat gym-internal held-out-family transfer would establish "locality survives
 breadth" — codify the negative claim, then pivot the program to targeted
 variants (think-economy-only mixture, abstention-only install) or retire.
 
-- Experiment: think-FTPO round 2 (contingent) — confident-wrong-turn filter
-  (rejected token must be locally dominant at its context: logit-readout
-  filter), ε ablation 0.25–0.5, n=32/gap=1.0 labels; mechanism gate before any
-  menagerie exposure, per C52.
+- Completed: `qwen35_4b_think_ftpo_round2` — confident-wrong-turn filtering
+  plus positive-only uplift. P1/P2/P3 failed; true labels separated from
+  shuffled locally but shared-weight collateral erased held-out capability.
+- Candidate only after a new intake/design review: locality-first think-pivot
+  steering. Compare +0.25 uplift with a context-gated last-layer/activation
+  intervention and stop at P1 unless median non-target drift is ≤0.10. Do not
+  fund n=32/gap=1.0 harvesting until a mechanism passes that preflight.

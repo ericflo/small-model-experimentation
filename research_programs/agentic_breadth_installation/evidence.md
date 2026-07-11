@@ -56,5 +56,27 @@ FTPO's safety/efficacy requires the rejected token to be a CONFIDENT OUTLIER
 precondition and the ε-margin objective's collateral dominates. Menagerie was
 correctly never exposed (mechanism-gate rule). Census bonus: repetition loops
 are ~0.1% at deployed budgets — the loop-FTPO variant belongs to 16k+ only.
-Next lever here: confident-wrong-turn filtering (failing branch's token must
-also be locally dominant) to restore the precondition inside the pivot recipe.
+That result queued confident-wrong-turn filtering (failing branch's token also
+locally dominant); round 2 below has now tested it.
+
+## qwen35_4b_think_ftpo_round2 (2026-07-11, C52 — Low-dose null)
+
+The registered confident-wrong-turn rescue also failed, but isolated the next
+bottleneck. A frozen entropy/varentropy selector retained 155 failed-argmax
+pivots. Conventional demotion, bounded positive-only uplift, and shuffled
+uplift all failed exact-logit locality (mean per-row median non-target drift
+0.229/0.145/0.120 logits vs a 0.10 ceiling). Pull-up was materially safer than
+push-down and true labels beat shuffled labels on the gym (+6.25pp) and fresh
+repository agent (+13.89pp, paired-bootstrap CI touching zero), so the steering
+directions contain some signal. They did not elicit breadth: repository hidden-
+test pass was base 43/72, uplift 39/72, demote 34/72, shuffled 29/72; fresh
+whitebox uplift was +0.26pp at think@1024 and −3.06pp at think@2048. Every
+coarse C49/collapse/no-think/gym guard passed, but P1/P2/P3 did not, so
+menagerie remained sealed (zero seeds consumed).
+
+Read: confident-outlier geometry is necessary but not sufficient; the active
+constraint is context locality of the parameter update. Entropy/varentropy can
+route and diagnose pivots, but higher varentropy was not safer (lowest-V
+quartile had the cleanest uplift drift). Do not scale this LoRA recipe. Require
+a lower-dose or context-gated mechanism to clear P1 before another harvest or
+agentic transfer run.

@@ -465,6 +465,18 @@ Two roles for the sampler:
   vs 0.8–0.9 for lexical; rejected-side flattening 0.3 vs 0.8; layer freezing off vs on. The
   two published recipes differ wherever the pathology differs — port the machinery, not the
   numbers.
+- **Do not generalize pathology suppression into capability steering without a locality
+  gate.** C52 round 1 showed that pairwise FTPO on near-parity outcome pivots disrupts
+  think flow; round 2 restored confident-outlier geometry and still found 0.229-logit
+  median non-target drift under demotion. Positive-only +0.5 uplift reduced this to 0.145
+  and retained some real-label signal, but held-out capability stayed below base. A
+  single-position loss is not a single-context model edit. Audit exact logits on every row
+  and stop before downstream evaluation when neighboring drift exceeds the frozen bar.
+- **Entropy and varentropy route; they do not label correctness or prescribe pressure.** In
+  C52 round 2, low entropy plus nonzero varentropy found focused confident wrong turns, but
+  uplift safety was non-monotone across varentropy quartiles: the lowest quartile was
+  cleanest and Q3 worst. Do not assume higher varentropy means a more fruitful token to pull
+  up or down; any new band needs independent confirmation.
 
 ## Relevance to this corpus
 
@@ -491,11 +503,19 @@ Two roles for the sampler:
   rare on reasoning prompt mixes) keeps any adaptation compliant. (The published prompt mix is a 478k-row prompts-only mixture of
   math/code/QA/instruction sources with answers and rationales deliberately excluded; an
   analogous mix can be assembled from our own task substrates.)
+- **The deployed-budget pivot adaptation has now failed twice (C52).** Near-parity
+  outcome-conditioned forks produced shuffled-control-equivalent think-flow harm. Filtering
+  to failed argmax tokens with focused entropy/non-degenerate varentropy and switching from
+  demotion to positive-only uplift preserved a local true-label advantage, but did not beat
+  base on fresh whitebox or a hidden-tested repository agent. This narrows FTPO's current
+  corpus warrant to confident pathology suppression; capability elicitation needs a more
+  context-local parameterization before a larger harvest.
 - **Cheap enough to run here.** Detection is a text scan over completions we already log;
   data generation is one low-temperature pass over a prompt mix; training is a 1–2 GPU-hour
-  LoRA. A natural first experiment: run the periodic-repetition scanner over existing
-  long-context run logs to get the corpus's own initiator-token statistics, then a single
-  FTPO round, then re-run the long-context ladder that was previously loop-censored — with a
+  LoRA. The corpus-wide scanner step is complete: loops are ~0.1% at deployed budgets but
+  dominate many 32k+ contacts. The remaining natural long-context experiment is to mine the
+  initiator-token statistics, run a single loop-specific FTPO round, and re-run the
+  long-context ladder that was previously loop-censored — with a
   matched-compute control arm per the [quality gates](quality_gates.md). Note the published
   generation stage seeds its sampler non-deterministically, so archive the generated pairs
   and generations JSONL files as the reproducibility anchor, not the generation config.

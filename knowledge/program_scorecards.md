@@ -52,10 +52,10 @@ For evidence-linked durable claims, use [claims/index.md](claims/index.md).
 ## Posttraining And Adaptation
 
 - Program: [charter](../research_programs/posttraining_and_adaptation/charter.md)
-- Current read: adaptation can reshape behavior, but C50/C51 locate a decisive prerequisite at the answer-emission seam: train on deployable commit states, and do not promote a dense trace label to SFT until it predicts autonomous outcomes at useful effect size.
-- Best next experiment: C50 recovery-arm/breadth ablations; separately, a new joint close-plus-answer scorer gate before any answer-potential SFT.
-- Strong anchors: `qwen35_4b_gauntlet_breadth_round1`, `qwen35_4b_bank_the_thoughts`, `qwen35_4b_answer_potential_trace_sft`.
-- Avoid repeating: adapter or preference runs whose artifacts cannot be audited, hidden-label wins without frozen alternatives, or SFT launched from a scorer that missed its outcome gate.
+- Current read: adaptation can reshape behavior, but C50/C51/C52 identify two prerequisites: train on deployable commit states with an outcome-valid label, and prove that the parameter update is local enough to preserve neighboring behavior. A true label can beat shuffled labels yet still lose to base when shared-weight collateral dominates.
+- Best next experiment: C50 recovery-arm/breadth ablations; separately, locality-first positive thought steering (+0.25 or context-gated) stopped at an exact-logit preflight before any larger harvest.
+- Strong anchors: `qwen35_4b_gauntlet_breadth_round1`, `qwen35_4b_bank_the_thoughts`, `qwen35_4b_answer_potential_trace_sft`, `qwen35_4b_think_ftpo_round2`.
+- Avoid repeating: adapter or preference runs whose artifacts cannot be audited, hidden-label wins without frozen alternatives, SFT launched from a scorer that missed its outcome gate, or scaling a sparse steering recipe whose non-target drift already failed locality.
 - Evidence that advances the program: a trained behavior beats strong frozen/tool baselines without hidden-label leakage.
 
 ## Process Control And Tool Use
@@ -106,17 +106,17 @@ For evidence-linked durable claims, use [claims/index.md](claims/index.md).
 ## Test-Time Reasoning Budget
 
 - Program: [charter](../research_programs/test_time_reasoning_budget/charter.md)
-- Current read: native thinking is a real coherent-content lever, but its budget and termination are workload-specific. C51 shows that 99.37% cap contact can make an answer-potential score describe a counterfactual forced-close state instead of deployable reasoning.
-- Best next experiment: the registered loop-control line; for trace value, a fresh close-plus-answer potential gate with natural-closure and autonomous-parse prerequisites.
-- Strong anchors: `qwen35_4b_thinking_content_vs_compute`, `qwen35_4b_overthinking_content_ladder`, `qwen35_4b_answer_potential_trace_sft`.
-- Avoid repeating: thinking-budget wins without content controls, calibration on a different workload class, cap-bound score interpretation, or larger-N trace harvesting before termination works.
+- Current read: native thinking is a real coherent-content lever, but its budget and termination are workload-specific. C51 shows that cap-bound traces can make a score counterfactual; C52 shows that entropy/varentropy can route useful forks without making a shared-weight edit context-local.
+- Best next experiment: the registered 16k+ loop-control line; for deployed-budget thought steering, require an exact-logit locality preflight before any fresh outcome harvest.
+- Strong anchors: `qwen35_4b_thinking_content_vs_compute`, `qwen35_4b_overthinking_content_ladder`, `qwen35_4b_answer_potential_trace_sft`, `qwen35_4b_think_ftpo_round2`.
+- Avoid repeating: thinking-budget wins without content controls, calibration on a different workload class, cap-bound score interpretation, larger-N harvesting before termination/locality works, or treating high varentropy as a monotone “push harder” signal.
 - Evidence that advances the program: a controller or distillation that Pareto-beats fixed budgets, and a content control that isolates genuine reasoning from compute + scaffold + token-presence.
 
 ## Agentic Breadth Installation
 
 - Program: [charter](../research_programs/agentic_breadth_installation/charter.md)
-- Current read: the first blackbox-arbitrated install in the corpus — breadth-first expert iteration on a firewall-clean 12-family gym moved menagerie quick +0.223/+0.294 on two fresh paired seeds (HF backend, deterministic; claims C49/C50), with gym-internal transfer to never-trained families (+0.54/+0.61); the C43/C45/C48 locality laws do not extend to this regime, and the causal lever was gradient placement at the answer-emission seam (recovery arm + weighted loss), not dose.
-- Best next experiment: round-3 re-harvest with the round-2 model (queued: `gauntlet_round3_expert_iteration`) plus the recovery-arm-only and breadth-vs-matched-dose ablations that split emission-seam repair from axis competence.
-- Strong anchors: `qwen35_4b_gauntlet_breadth_round1`.
-- Avoid repeating: evaluating adapters through vLLM runtime LoRA (C49 silent no-op — on-vs-off gate mandatory); training full-weight on the model's own verbatim naturally-closed chains (near-self-distillation); filtering training data to naturally-closed chains only (excludes the deployment-critical force-closed state); comparing HF-backend and vLLM-backend menagerie scores.
+- Current read: breadth-first expert iteration remains the first blackbox-arbitrated install (+0.223/+0.294 menagerie quick; C49/C50). A very different attempt to install breadth by editing outcome-conditioned thought forks failed twice: round 2's confident-outlier pull-up preserved a real-label advantage over shuffled training, but missed exact-logit locality and held-out repository coding (39/72 vs base 43/72). Signal placement at the answer-emission seam still transfers; sparse thought-token loss does not imply a sparse model change.
+- Best next experiment: round-3 gauntlet re-harvest plus recovery-arm-only and breadth-vs-matched-dose ablations. Keep any further think steering behind a locality-only preflight rather than another full capability run.
+- Strong anchors: `qwen35_4b_gauntlet_breadth_round1`, `qwen35_4b_think_ftpo_round2`.
+- Avoid repeating: evaluating adapters through vLLM runtime LoRA (C49 silent no-op — on-vs-off gate mandatory); full-weight near-self-distillation; filtering away deployment-critical force-closed states; comparing HF and vLLM menagerie scores; or scaling confident-wrong-turn LoRA while non-target drift exceeds 0.10.
 - Evidence that advances the program: compounding menagerie deltas across iteration rounds on fresh paired seeds; ablations attributing the delta between protocol-emission repair and axis competence; medium/slow-tier confirmations once the host fla-kernel fault is resolved.

@@ -1,0 +1,25 @@
+{
+  "arm": "demote",
+  "model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_think_ftpo_round2/merged/demote",
+  "per_family": {
+    "brinework": 0.3333333333333333,
+    "burrowmaze": 0.5714285714285714,
+    "caravan": 0.6666666666666666,
+    "ferrier": 0.9285714285714286,
+    "foundry_ledger": 0.5,
+    "gatepost": 0.5714285714285714,
+    "glyphgate": 0.2857142857142857,
+    "kilnrite": 0.7000000000000001,
+    "loomfix": 0.35714285714285715,
+    "runeward": 0.5,
+    "spindle": 0.5,
+    "stallwright": 0.0
+  },
+  "aggregate_all": 0.4928571428571429,
+  "aggregate_trained": 0.508095238095238,
+  "aggregate_heldout": 0.41666666666666663,
+  "forced_close_rate_atoms": 0.9236111111111112,
+  "n_atoms": 144,
+  "n_episodes": 14,
+  "wall_s": 207.64830374717712
+}

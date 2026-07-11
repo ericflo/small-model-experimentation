@@ -1,0 +1,17 @@
+{
+  "arm": "demote",
+  "stage": "collapse",
+  "model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_think_ftpo_round2/merged/demote",
+  "greedy": {
+    "n": 120,
+    "success": 0.05,
+    "mean_score": 0.05,
+    "loop_rate": 0.0,
+    "unresolved_rate": 1.0,
+    "answer_limit_rate": 0.7333333333333333,
+    "natural_close_rate": 0.0,
+    "mean_think_tokens": 1024.0
+  },
+  "pass@8": 0.125,
+  "wall_s": 855.4281435012817
+}

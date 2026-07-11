@@ -1491,32 +1491,38 @@
   },
   {
    "id": "C52",
-   "title": "Single-position preference training (FTPO) on the think channel REQUIRES the rejected token to be a confident distributional outlier: applied to near-parity outcome-conditioned pivot points it installs nothing and mildly degrades think-flow, with damage reproduced exactly by a shuffled-label control -- and the loop pathology FTPO was published on is ABSENT (~0.1%) at deployed budgets",
+   "title": "Think-channel FTPO requires both outlier geometry AND parameter locality: near-parity pivots cause generic think-flow harm, while confident-wrong-turn filtering plus positive-only uplift preserves some label signal but still fails held-out capability because shared-weight collateral remains too large; exact loops are absent (~0.1%) at deployed budgets",
    "status": "Negative",
    "programs": [
     "agentic_breadth_installation",
     "posttraining_and_adaptation",
     "test_time_reasoning_budget"
    ],
-   "summary": "Experiment qwen35_4b_think_ftpo_round1. Census: the published fingerprint loop detector flags 1/1200 greedy base gym atoms at think@1024 (0.08%), 0/786 episode turns, 0.2-0.4% on fresh 500-prompt evals -- the corpus's exact-loop pathology (81/144 at think@32,768) does not exist two orders of magnitude below its regime, killing the loop-repair variant of FTPO at deployed budgets before any GPU spend. Pivot variant: n=16 verifier-scored think rollouts per learnable-band task (base greedy success in (0.1,0.9)), prefix-tree divergence mining (>=2/>=2 rollouts per sibling, success gap >=0.5), 879-row pool -> 615 rows, published FTPO objective (eps=2.0 margin, two-tier logit tether 0.4/0.05 tau 0.5), LoRA r=256, merged composite + C49 on-vs-off gate. RESULT (greedy, held-out seeds, N=500/arm/budget): P1 mechanism FAIL -- success -0.039 (think@1024) / -0.076 (think@2048) vs a +0.05 preregistered bar; natural-close HALVES at 2048 (0.167->0.076); answer-limit contacts +6pp; 12-family gym aggregate 0.517->0.484. The SHUFFLED-LABEL control (identical pipeline, permuted outcomes, matched 615 rows) degrades near-identically (-0.022/-0.055, natural-close 0.076): the damage is generic to the training regime, not the steering signal. Guards: C29-style collapse ABSENT (code substrate greedy 0.058->0.067, pass@8 0.108->0.100 -- the tether works); no-think channel CLEAN (0.367->0.408); loop rate unchanged. Menagerie correctly NOT run (mechanism-gate rule; zero benchmark seeds consumed). Mechanism read: published FTPO successes reject argmax-dominant attractors (loop initiators, lexical patterns) where demotion is a small local edit; pivot rows reject near-parity sampled tokens (initial chosen_win ~0.43), so the eps=2 margin objective must manufacture separations at ~600 scattered early-think positions -- pure think-flow collateral that permuted labels reproduce. UNDERDOSED caveat preregistered: 879-row pool << published 15-20k, so a weak positive signal beneath the collateral is not excluded; the sign and the control-equivalence are the finding.",
+   "summary": "Round 1 established the geometry failure. The published fingerprint loop detector found 1/1200 greedy gym atoms at think@1024 (0.08%), 0/786 episode turns, and 0.2-0.4% on fresh 500-prompt evals; the 32k exact-loop pathology is absent at deployed budgets. Outcome-conditioned prefix-tree pivots were near-parity siblings, so eps=2 FTPO manufactured large separations and degraded held-out success -0.039/-0.076 at think@1024/2048; a shuffled-label arm degraded nearly identically and natural closure halved. Round 2 tested the strongest registered rescue on the same source: keep only failed argmax tokens with >=0.5-logit lead, P>=0.5, entropy<=1.5, varentropy>=0.1, and a plausible successful sibling; compare conventional demotion, bounded +0.5 chosen-token uplift, and shuffled uplift on 155 matched rows. P0 passed but P1 locality failed for every LoRA arm: objective-hit / mean per-row median non-target drift were 40.0%/0.229 logits (demote), 75.5%/0.145 (uplift), and 76.1%/0.120 (shuffled), against >=35%/<=0.10 bars. Positive-only uplift reduced collateral 36.6% and retained true-label separation on the parent gym (+6.25pp vs shuffled) and fresh repository agent (+13.89pp, paired-bootstrap CI [0,+27.78]), showing that the outcome directions were not empty. But absolute capability did not transfer: whitebox uplift was +0.003/-0.031 vs base at think@1024/2048, and hidden-tested eight-turn repository repair was 39/72 versus base 43/72 (-0.056, CI [-0.194,+0.083]); demotion was significantly worse at 34/72. All C49/collapse/no-think/gym guards passed, so this is not C29-style collapse. Entropy/varentropy were diagnostic but not monotone: uplift's lowest-varentropy quartile had the cleanest drift (0.122), while Q3 was worst (0.176). Both rounds were correctly stopped before menagerie; zero blackbox seeds were consumed.",
    "evidence": [
     {
      "kind": "experiment",
      "id": "qwen35_4b_think_ftpo_round1"
+    },
+    {
+     "kind": "experiment",
+     "id": "qwen35_4b_think_ftpo_round2"
     }
    ],
-   "implication": "C29 hardened one level down: preference training on the model's own samples damages even at single-position granularity unless the rejected token is a confident outlier (the attractor precondition). The two-tier logit tether DOES prevent C29-style sequence collapse -- the surviving harm channel is think-flow convergence (delayed closure, budget exhaustion). Loop-targeted FTPO belongs to the 16k+ regime where loops actually occur; deployed-budget think pathology is non-repetitive non-convergence (consistent with C50's truncation-cascade account).",
+   "implication": "Confident-outlier geometry is necessary but not sufficient. Outcome-conditioned fork labels can contain useful local direction, and positive-only pressure is safer than demotion, but a shared LoRA update is not context-local enough at this dose: generic neighboring-logit movement erases transfer before coarse collapse guards fire. Future weight-space steering must first clear an exact-logit locality gate; adding rows while P1 fails is not a justified capability experiment. Loop-targeted FTPO remains a separate 16k+ intervention, because deployed-budget non-convergence is not repetition (consistent with C50's truncation-cascade account).",
    "next_tests": [
-    "Confident-wrong-turn filter: mine only pivot nodes where the failing branch's token is also the locally dominant continuation (restores the attractor precondition); dose-gate for the much lower yield",
-    "eps ablation (0.25-0.5): demote toward parity instead of manufacturing 2-logit margins",
-    "n=32 rollouts and/or gap=1.0-only nodes for cleaner Monte-Carlo labels at matched GPU",
-    "Long-context (16k+) loop-FTPO as its own experiment under the loop-control mandate (training-context cap vs 32k loop regime is the open transfer problem)"
+    "Locality preflight: compare +0.25 positive-only uplift with a genuinely context-gated last-layer/activation intervention on independently frozen rows; require <=0.10 median non-target drift before any downstream run.",
+    "Only after P1 passes, collect a fresh larger n=32/gap=1.0 outcome harvest and repeat the held-out repository-agent transfer test against deep base and matched-compute sample-more.",
+    "Replicate the low-varentropy routing observation on an independent harvest; treat varentropy as a stratum, not a correctness label or monotone 'push harder' score.",
+    "Run long-context (16k+) loop-FTPO as its own experiment under the loop-control mandate; the training-context-cap versus 32k loop regime remains open."
    ],
    "avoid": [
-    "Do not train single-position preferences against near-parity rejected tokens (initial chosen_win ~0.5): the margin objective's collateral exceeds the signal at sub-1k-row doses",
-    "Do not spend blackbox menagerie events before the whitebox mechanism gate passes",
-    "Do not assume repetition loops exist at deployed budgets: measure with the fingerprint census first (it is free on existing logs)",
-    "Do not left-pad (or trust right-padded batching without an equivalence gate) for exact-logit work on the hybrid GDN/Mamba architecture: measured 0.30-0.44 logit divergence; use batch-of-1"
+    "Do not train single-position preferences against near-parity rejected tokens, and do not treat confident-outlier filtering alone as a safety certificate: both failure modes are measured.",
+    "Do not scale the round-2 LoRA recipe while its non-target drift exceeds P1, even though true labels beat shuffled labels locally.",
+    "Do not select higher-varentropy rows on the assumption that more conflict is better; the measured relationship was non-monotone and Q1 was cleanest.",
+    "Do not spend blackbox menagerie events before the whitebox mechanism and capability gates pass.",
+    "Do not assume repetition loops exist at deployed budgets: measure with the fingerprint census first (it is free on existing logs).",
+    "Do not left-pad (or trust right-padded batching without an equivalence gate) for exact-logit work on the hybrid GDN/Mamba architecture: measured 0.30-0.44 logit divergence; use batch-of-1."
    ]
   }
  ]
