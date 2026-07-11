@@ -3861,8 +3861,8 @@
     "file_counts": {
       ".gz": 2,
       ".json": 28,
-      ".md": 12,
-      ".py": 38,
+      ".md": 8,
+      ".py": 37,
       ".yaml": 3
     },
     "id": "qwen35_4b_think_ftpo_round1",
@@ -3884,7 +3884,6 @@
     ],
     "title": "Think-block FTPO round 1: outcome-conditioned pivot steering as an agentic install recipe",
     "top_level_dirs": [
-      ".ipynb_checkpoints",
       "analysis",
       "configs",
       "data",
@@ -3894,8 +3893,8 @@
       "src",
       "tests"
     ],
-    "total_files": 83,
-    "total_size_bytes": 859591
+    "total_files": 78,
+    "total_size_bytes": 839333
   },
   {
     "file_counts": {

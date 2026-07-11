@@ -16,7 +16,6 @@ research_programs:
   - "structured_execution_and_compilers"
   - "test_time_reasoning_budget"
 top_level_dirs:
-  - ".ipynb_checkpoints"
   - "analysis"
   - "configs"
   - "data"
@@ -28,8 +27,8 @@ top_level_dirs:
 file_counts:
   gz: 2
   json: 28
-  md: 12
-  py: 38
+  md: 8
+  py: 37
   yaml: 3
-total_files: 83
-total_size_bytes: 859591
+total_files: 78
+total_size_bytes: 839333

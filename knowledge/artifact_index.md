@@ -30,7 +30,6 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | `run_logs/` | 55 |
 | `figures/` | 10 |
 | `tests/` | 7 |
-| `.ipynb_checkpoints/` | 1 |
 | `archive/` | 1 |
 | `suite_logs/` | 1 |
 
@@ -40,8 +39,8 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | --- | ---: |
 | `.json` | 2237 |
 | `.csv` | 2138 |
-| `.py` | 1191 |
-| `.md` | 873 |
+| `.py` | 1190 |
+| `.md` | 869 |
 | `.png` | 848 |
 | `.jsonl` | 660 |
 | `.log` | 527 |
