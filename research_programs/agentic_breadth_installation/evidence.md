@@ -65,6 +65,26 @@ headroom ceiling (`cipherkiln` 0.227, `mazeferry` 0.296, `patchferry` 0.012,
 `tripleforge` 0.005; 288 episodes). This licenses specialist production but is
 not a capability-gain result.
 
+## qwen35_4b_interactive_policy_curriculum (2026-07-11/12 — Negative)
+
+The full-sequence live-state DAgger warm start failed its preregistered
+mechanism gate before RL or Menagerie. Against the regenerated C53 incumbent,
+train-family episode macro fell 0.6048→0.3517 (−0.2531; paired-bootstrap 95%
+CI [−0.2954, −0.2103]) and three untouched families fell 0.6850→0.3519
+(−0.3331; CI [−0.3804, −0.2869]). Atom retention stayed inside its −0.03
+guard (−0.0215), parsing stayed perfect, and natural closure improved by
+10–13pp, ruling out generic collapse.
+
+The failure was semantic-operator capture: only 55/2,270 training targets were
+`VERIFY`; after training, loomfix produced 600 `PATCH` and zero `RUN` actions,
+while the untouched analogous patchwheel produced 599 `RULE` and one `RUN`.
+Thus DAgger taught a fluent shared observe/revise trace but erased the scarce
+verify/commit pivots that make the loop effective. Live-state correctness is
+not enough: a shared update must preserve the incumbent operator distribution
+and behavior outside corrected states. Entropy/outcome variance can route
+state acquisition, but must not become token pressure. RL, matched controls,
+and Menagerie were correctly cancelled; zero benchmark seeds were consumed.
+
 ## qwen35_4b_think_ftpo_round1 (2026-07-11, C52 — Negative)
 
 The first different-mechanism recipe after C50's re-saturation: single-position

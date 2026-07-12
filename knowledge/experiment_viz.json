@@ -45452,27 +45452,27 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "The study must clear three locked improvement bars",
+     "title": "Live-state DAgger damaged the interactive policy",
      "categories": [
-      "live-state teaching over incumbent",
-      "reward learning over extra teaching",
-      "held-out medium benchmark over incumbent"
+      "trained task families",
+      "untouched task families",
+      "atom retention"
      ],
      "series": [
       {
-       "label": "required absolute score gain",
+       "label": "DAgger minus C53 incumbent",
        "values": [
-        0.08,
-        0.05,
-        0.05
+        -0.2531071429,
+        -0.3331481481,
+        -0.0215186644
        ]
       }
      ],
-     "x_label": "decision stage",
-     "y_label": "registered minimum score delta",
-     "y_format": "number",
-     "note": "These are preregistered decision thresholds, not observed results. A stage that misses its bar stops the downstream spend; the chart will be replaced by measured outcomes after the reached stages finish.",
-     "source": "experiments/qwen35_4b_interactive_policy_curriculum/configs/curriculum.yaml"
+     "x_label": "frozen proxy slice",
+     "y_label": "absolute score delta",
+     "y_format": "percent100",
+     "note": "Parsing remained perfect and natural closure improved, but trained and untouched multi-turn policies collapsed. The preregistered gate stopped reward training and Menagerie.",
+     "source": "experiments/qwen35_4b_interactive_policy_curriculum/analysis/dagger_gate.json"
     }
    ]
   },

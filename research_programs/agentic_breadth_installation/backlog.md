@@ -12,11 +12,13 @@
   matched baseline measurement and four specialist/control pipelines are the
   current reached work.
 
-- Precursor: `qwen35_4b_interactive_policy_curriculum` — its state-aware DAgger
-  and guarded execution-reward machinery is copied into the active standalone
-  experiment. Do not launch the full mixed-policy GPU run independently while
-  specialist production is active; that mixed arm is a registered control in
-  the new experiment.
+- Completed negative: `qwen35_4b_interactive_policy_curriculum` — the run was
+  already underway when the specialist experiment became active. Its
+  full-sequence state-aware DAgger arm failed the mechanism gate (−25.3pp
+  trained, −33.3pp untouched) through semantic-operator capture despite clean
+  atom and closure guards. RL, controls, and Menagerie stopped. The active
+  specialist experiment retains its copied machinery and registered mixed
+  control, but do not independently rerun this broad warm start.
 
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.
@@ -35,6 +37,9 @@
   ceiling, family holdout, atom/closure retention, and matched-compute sampling.
 - Semantic entropy/outcome variance may route state acquisition; it may not
   scale token loss or serve as a correctness reward (C52).
+- Any future live-state warm start must gate the scarce `VERIFY`/`COMMIT`
+  operator rates and neighboring-policy/logit locality before trajectory RL;
+  full-sequence correctness labels alone are insufficient.
 - For specialist integration: require all four specialists to beat
   sample-more, DAgger, extra SFT, and shuffled reward before MOPD; require
   correct-teacher continuation and exact-logit locality before integration;

@@ -21,11 +21,11 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | --- | ---: |
 | `reports/` | 211 |
 | `src/` | 199 |
-| `runs/` | 144 |
-| `analysis/` | 133 |
+| `runs/` | 145 |
+| `analysis/` | 134 |
 | `scripts/` | 120 |
 | `configs/` | 117 |
-| `data/` | 107 |
+| `data/` | 108 |
 | `logs/` | 64 |
 | `run_logs/` | 55 |
 | `tests/` | 12 |
@@ -37,16 +37,16 @@ This is a repository-level inventory. Each experiment remains the source of trut
 
 | Extension | Files |
 | --- | ---: |
-| `.json` | 2366 |
+| `.json` | 2370 |
 | `.csv` | 2138 |
 | `.py` | 1378 |
 | `.md` | 902 |
 | `.png` | 848 |
-| `.jsonl` | 687 |
+| `.jsonl` | 690 |
 | `.log` | 527 |
 | `.yaml` | 329 |
 | `.html` | 90 |
-| `.gz` | 83 |
+| `.gz` | 89 |
 | `.sh` | 19 |
 | `.txt` | 5 |
 | `[none]` | 4 |
@@ -78,6 +78,7 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | 6.9 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_blend.jsonl` |
 | 6.4 | `experiments/qwen35_4b_active_counterexample_trace_selection/reports/eval/active_support.json` |
 | 6.4 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_blend2.jsonl` |
+| 6.3 | `experiments/qwen35_4b_interactive_policy_curriculum/data/dagger_train.jsonl` |
 | 6.0 | `experiments/feature_factorized_rule_diversity/data/repair_all.jsonl` |
 | 5.8 | `experiments/qwen35_4b_active_counterexample_trace_selection/data/eval/dsl_eval_support.jsonl` |
 | 5.8 | `experiments/qwen35_4b_learned_active_trace_policy/data/eval/dsl_eval_support.jsonl` |
@@ -85,4 +86,3 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | 5.7 | `experiments/qwen35_4b_foofah_selective_program_fallback/reports/final_records.jsonl` |
 | 5.6 | `experiments/qwen35_4b_bucket_belief_probe_ranker/data/bucket_eval_examples.jsonl` |
 | 5.6 | `experiments/qwen35_4b_learned_active_trace_policy/data/base_anchor/dsl_train_static60_base.jsonl` |
-| 5.5 | `experiments/qwen35_4b_verified_macro_long_context_rerun/runs/budget_calibration/think_16384/calibration.jsonl` |

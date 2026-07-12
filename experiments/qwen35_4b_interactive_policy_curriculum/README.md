@@ -1,9 +1,10 @@
 # Interactive policy curriculum: oracle DAgger to execution-reward RL
 
-This preregistered study tests whether correction at the model's own live
-multi-turn states, followed by guarded whole-episode reward training, can
-improve Qwen3.5-4B beyond the incumbent C53 blend and transfer to unseen
-agentic task families.
+This completed preregistered study tested whether correction at the model's
+own live multi-turn states could improve Qwen3.5-4B beyond the incumbent C53
+blend and unlock guarded whole-episode reward training. It did not: the
+DAgger warm start failed its mechanism gate decisively, so RL, controls, and
+Menagerie were correctly cancelled.
 
 ## Research Program
 
@@ -117,12 +118,14 @@ its registered gate:
 
 ```bash
 .venv/bin/python experiments/qwen35_4b_interactive_policy_curriculum/scripts/run.py --stage incumbent
-.venv-vllm/bin/python experiments/qwen35_4b_interactive_policy_curriculum/scripts/run.py --stage dagger-collect
+.venv/bin/python experiments/qwen35_4b_interactive_policy_curriculum/scripts/run.py --stage dagger-collect
 .venv/bin/python experiments/qwen35_4b_interactive_policy_curriculum/scripts/run.py --stage dagger-train
-.venv-vllm/bin/python experiments/qwen35_4b_interactive_policy_curriculum/scripts/run.py --stage proxy-eval
-.venv-vllm/bin/python experiments/qwen35_4b_interactive_policy_curriculum/scripts/run.py --stage rl-collect
+.venv/bin/python experiments/qwen35_4b_interactive_policy_curriculum/scripts/run.py --stage proxy-eval
+.venv/bin/python experiments/qwen35_4b_interactive_policy_curriculum/scripts/run.py --stage dagger-gate
+.venv/bin/python experiments/qwen35_4b_interactive_policy_curriculum/scripts/run.py --stage rl-collect
 .venv/bin/python experiments/qwen35_4b_interactive_policy_curriculum/scripts/run.py --stage rl-train
-.venv-vllm/bin/python experiments/qwen35_4b_interactive_policy_curriculum/scripts/run.py --stage controls-and-gate
+.venv/bin/python experiments/qwen35_4b_interactive_policy_curriculum/scripts/run.py --stage controls
+.venv/bin/python experiments/qwen35_4b_interactive_policy_curriculum/scripts/run.py --stage rl-gate
 ```
 
 Menagerie is a separate, conditional CLI-only stage documented after the
@@ -130,22 +133,60 @@ whitebox decision receipt is written.
 
 ## Results
 
-This section is intentionally preregistered before GPU execution. Result
-tables and the final verdict will replace this sentence after all reached
-stages finish; stopped stages remain explicitly reported.
+Verdict: **negative training-recipe result; DAgger gate failed.** The frozen
+paired proxy produced:
+
+| Metric | C53 incumbent | DAgger | Delta | Registered decision |
+| --- | ---: | ---: | ---: | --- |
+| train-family episode macro | 0.6048 | 0.3517 | **-0.2531** | `>= +0.08` — fail |
+| unseen-family episode macro | 0.6850 | 0.3519 | **-0.3331** | `>= 0`, one `>= +0.03` — fail |
+| atom-retention macro | 0.6926 | 0.6711 | -0.0215 | `>= -0.03` — pass |
+| atom parse macro | 1.0000 | 1.0000 | 0.0000 | `>= -0.03` — pass |
+
+Paired bootstrap 95% intervals exclude zero by a wide margin: train macro
+`[-0.2954, -0.2103]`, unseen macro `[-0.3804, -0.2869]`. Mean action validity
+fell 5.7pp on trained families and 25.2pp on unseen families, even though
+natural thinking closure improved 10.3pp and 12.9pp. This is not a global
+parser or atom-capability collapse; it is a multi-turn policy collapse.
+
+The collection itself was valid: 400 live trajectories yielded 1,386 unique
+visited-state corrections, 203 expert demonstrations (12.8%, below the 20%
+cap), and 681 C53 replay rows. All 2,270 training rows fit the 4,096-token
+window. The diagnostic failure is semantic-operator imbalance: only 55/2,270
+targets (2.4%) were `VERIFY`, including 19/1,386 visited rows. At evaluation
+the DAgger model emitted `PATCH` on all 600 loomfix turns and `RULE` on 599/600
+unseen patchwheel turns, effectively deleting the `RUN` verify/commit pivot.
+Glyphgate fell 0.667 to 0.017 and unseen spindle 0.977 to 0.322.
+
+Entropy/varentropy were useful only within their actual information regime:
+67/200 collection groups were confident failures and 25/200 had outcome
+variance, while only 2/200 diverged at the coarse first semantic operator.
+With two siblings, outcome varentropy is degenerate; exact outcome variance
+still identifies forks. Do not turn either diagnostic into token pressure.
+
+This was not classified as the preregistered mechanical-repair exception:
+parsing, truncation, expert selftests, merge hashes, and atom retention were
+all healthy. Rebalancing operators, adding a behavior/KL tether, or replacing
+full-sequence SFT with context-local pivot control is a new training design
+and belongs in a standalone follow-up. No RL, matched controls, or Menagerie
+seed was run.
 
 ## Interpretation
 
-The interpretation will distinguish three outcomes: live-state imitation is
-the missing lever; consequence optimization adds beyond imitation; or neither
-crosses C53's second wall. Proxy-only movement is not evidence of general
-agentic capability.
+Live-state labels were not empty, but broad full-sequence imitation installed
+the common trace/closure surface more strongly than the state-conditional
+decision policy. The result sharpens C52's locality lesson: supervising the
+right next action does not make a shared-weight update local to that state,
+and operator-frequency skew can erase precisely the pivot tokens needed for
+looping agents. A future warm start must prove semantic-pivot retention and
+neighboring-policy locality before execution-reward training is licensed.
 
 ## Knowledgebase Update
 
-After the registered stopping point, update the owning program evidence and
-backlog, the scorecard and synthesis if strategy changes, and the claim ledger
-only when a durable result is supported.
+The owning program evidence, backlog, scorecard, synthesis, practitioner
+brief, and result visualization record the negative. The concurrently active
+specialist-policy experiment owns the next integration test; this mixed-policy
+arm should not be rerun independently.
 
 ## Artifacts
 

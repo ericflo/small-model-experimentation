@@ -2,13 +2,13 @@
 schema_version: 1
 experiment_id: "qwen35_4b_interactive_policy_curriculum"
 external_artifacts:
-  - name: "incumbent, DAgger, RL, and control adapters plus merged composite checkpoints"
+  - name: "reached incumbent and DAgger adapters plus merged composite checkpoints"
     storage: "large_artifacts/qwen35_4b_interactive_policy_curriculum/{adapters,merged}/"
-    required_for: "result-bearing proxy and paired Menagerie evaluation"
+    required_for: "reproducing the reached paired proxy mechanism gate"
     checksum: "recorded per artifact in runs/checkpoint_receipts.jsonl"
     regenerate: >-
-      run the staged commands in README.md from incumbent through reached
-      controls; every stage writes its command and input hashes
+      run the incumbent, DAgger collection/training, proxy-eval, and DAgger-gate
+      stages in README.md; every stage writes its command and input hashes
 omitted_artifacts:
   - path: "large_artifacts/qwen35_4b_interactive_policy_curriculum/"
     reason: "multi-gigabyte trained adapters and composite checkpoints are gitignored"
@@ -20,4 +20,5 @@ reproducibility:
 notes: >-
   The C53 incumbent is regenerated from the committed sft_blend.jsonl rows on
   this host. Small trajectory/analyzer outputs stay in git; raw model weights
-  do not. Menagerie payloads are rewritten to permitted aggregate-only fields.
+  do not. The DAgger gate failed, so no RL/control checkpoint and no Menagerie
+  payload exists; zero benchmark seeds were consumed.

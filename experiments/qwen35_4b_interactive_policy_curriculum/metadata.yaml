@@ -5,7 +5,7 @@ source_track: "new"
 path: "experiments/qwen35_4b_interactive_policy_curriculum"
 primary_readme: "experiments/qwen35_4b_interactive_policy_curriculum/README.md"
 primary_report: "experiments/qwen35_4b_interactive_policy_curriculum/reports/report.md"
-summary: "This preregistered study tests whether correction at the model's own live multi-turn states, followed by guarded whole-episode reward training, can improve Qwen3.5-4B beyond the incumbent C53 blend and transfer to unseen agentic task families."
+summary: "This completed preregistered study tested whether correction at the model's own live multi-turn states could improve Qwen3.5-4B beyond the incumbent C53 blend and unlock guarded whole-episode reward training. It did not: the DAgger warm start failed its mechanism gate decisively, so RL, controls, and Menagerie were correctly cancelled."
 tags:
   - "active-learning"
   - "curriculum"
@@ -26,14 +26,20 @@ research_programs:
   - "reliability_and_safety"
   - "structured_execution_and_compilers"
 top_level_dirs:
+  - "analysis"
   - "configs"
+  - "data"
   - "reports"
+  - "runs"
   - "scripts"
   - "src"
   - "tests"
 file_counts:
+  gz: 6
+  json: 4
+  jsonl: 3
   md: 7
   py: 35
   yaml: 3
-total_files: 45
-total_size_bytes: 648648
+total_files: 58
+total_size_bytes: 14828113
