@@ -6,6 +6,7 @@ import io
 import json
 import os
 import sys
+import tempfile
 import types
 import unittest
 from pathlib import Path
@@ -55,6 +56,53 @@ def _compilation_config(
 
 
 class EngineConfigCaptureGeometryTests(unittest.TestCase):
+    def test_model_override_requires_a_pinned_qwen_composite_receipt_chain(self) -> None:
+        with tempfile.TemporaryDirectory() as root:
+            incumbent = Path(root) / "incumbent"
+            candidate = Path(root) / "candidate"
+            for path in (incumbent, candidate):
+                path.mkdir()
+                (path / "config.json").write_text(
+                    json.dumps({"model_type": "qwen3_5"}), encoding="utf-8"
+                )
+            (incumbent / "merge_receipt.json").write_text(
+                json.dumps(
+                    {
+                        "method": "explicit_composite_lora_merge",
+                        "base_model": runner.MODEL_ID,
+                        "base_revision": runner.MODEL_REVISION,
+                    }
+                ),
+                encoding="utf-8",
+            )
+            (candidate / "merge_receipt.json").write_text(
+                json.dumps(
+                    {
+                        "method": "explicit_composite_lora_merge",
+                        "base_model": str(incumbent),
+                        "base_revision": None,
+                    }
+                ),
+                encoding="utf-8",
+            )
+            runner.EngineConfig(model_override=candidate).validate()
+            with self.assertRaisesRegex(ValueError, "mutually exclusive"):
+                runner.EngineConfig(
+                    adapter=Path(root) / "adapter", model_override=candidate
+                ).validate()
+            (incumbent / "merge_receipt.json").write_text(
+                json.dumps(
+                    {
+                        "method": "explicit_composite_lora_merge",
+                        "base_model": runner.MODEL_ID,
+                        "base_revision": "wrong",
+                    }
+                ),
+                encoding="utf-8",
+            )
+            with self.assertRaisesRegex(ValueError, "does not pin revision"):
+                runner.EngineConfig(model_override=candidate).validate()
+
     def test_explicit_capture_list_requires_strict_positive_tied_geometry(self) -> None:
         runner.EngineConfig(
             max_num_seqs=19,

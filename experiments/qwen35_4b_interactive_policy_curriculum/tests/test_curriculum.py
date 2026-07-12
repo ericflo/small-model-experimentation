@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import math
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -16,8 +17,10 @@ from curriculum import (  # noqa: E402
     expert_decision,
     semantic_group_diagnostics,
 )
+from collect_dagger import _assemble_incremental_rows  # noqa: E402
 from gym.families import load as load_family  # noqa: E402
 from rollout import collect_expert_demonstrations  # noqa: E402
+from bench import parse_model_arms  # noqa: E402
 from train_sequence_grpo import _policy_sample, _shuffle_group_advantages  # noqa: E402
 
 
@@ -176,6 +179,50 @@ class CurriculumTests(unittest.TestCase):
         after = sorted(abs(row["advantage"]) for row in trajectories)
         self.assertEqual(before, after)
         self.assertEqual(len(digest), 64)
+
+    def test_paired_benchmark_arms_are_distinct_named_merged_checkpoints(self):
+        with tempfile.TemporaryDirectory() as root:
+            incumbent = Path(root) / "incumbent"
+            candidate = Path(root) / "candidate"
+            for path in (incumbent, candidate):
+                path.mkdir()
+                (path / "config.json").write_text("{}\n", encoding="utf-8")
+            arms = parse_model_arms(
+                [f"incumbent={incumbent}", f"candidate={candidate}"]
+            )
+            self.assertEqual([label for label, _ in arms], ["incumbent", "candidate"])
+            with self.assertRaisesRegex(ValueError, "duplicate"):
+                parse_model_arms([f"same={incumbent}", f"same={candidate}"])
+            with self.assertRaisesRegex(ValueError, "distinct checkpoint"):
+                parse_model_arms([f"left={incumbent}", f"right={incumbent}"])
+
+    def test_expert_demo_quota_is_computed_after_visited_state_dedup(self):
+        visited = []
+        for index in range(4):
+            row = {
+                "id": f"visit-{index}",
+                "messages": [{"role": "user", "content": f"state-{index}"}],
+                "think": f"think-{index}",
+                "answer": f"action-{index}",
+                "source": "policy_visited",
+            }
+            visited.extend([dict(row), dict(row, id=f"visit-{index}-duplicate")])
+        experts = [
+            {
+                "id": f"expert-{index}",
+                "messages": [{"role": "user", "content": f"expert-state-{index}"}],
+                "think": f"expert-think-{index}",
+                "answer": f"expert-action-{index}",
+                "source": "expert_demo",
+            }
+            for index in range(2)
+        ]
+        incremental, visits_kept, experts_kept = _assemble_incremental_rows(
+            visited, experts, 0.20
+        )
+        self.assertEqual(len(visits_kept), 4)
+        self.assertEqual(len(experts_kept), 1)
+        self.assertEqual(len(incremental), 5)
 
 
 if __name__ == "__main__":

@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
-"""Menagerie evaluation event: base and/or adapter on ONE fresh seed + tier.
+"""Menagerie evaluation event: paired checkpoints on ONE fresh seed + tier.
 
 Firewall-compliant wrapper: invokes the benchmark suite's run.py CLI as a
 subprocess (under the required repo .venv interpreter), reads ONLY the
 aggregate and per_family numbers from the output JSON, and appends them to
 runs/menagerie_log.jsonl. Never reuse a seed across evaluation events.
 
-  python3 scripts/bench.py --seed 52001 --tier quick --arms base adapter \
-      --adapter large_artifacts/qwen35_4b_gauntlet_breadth_round1/adapters/round1
+  python3 scripts/bench.py --seed 52001 --tier medium \
+      --model-arm incumbent=/absolute/path/to/incumbent \
+      --model-arm candidate=/absolute/path/to/candidate
 """
 
 from __future__ import annotations
@@ -15,6 +16,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import subprocess
 import sys
 import time
@@ -25,6 +27,32 @@ REPO = EXP.parents[1]
 VENV_PY = REPO / ".venv" / "bin" / "python"
 MENAGERIE = REPO / "benchmarks" / "menagerie" / "run.py"
 LOG = EXP / "runs" / "menagerie_log.jsonl"
+
+
+def parse_model_arms(values: list[str]) -> list[tuple[str, Path]]:
+    """Parse repeatable LABEL=MERGED_CHECKPOINT arguments without ambiguity."""
+    arms: list[tuple[str, Path]] = []
+    seen: set[str] = set()
+    seen_paths: set[Path] = set()
+    for value in values:
+        label, separator, raw_path = value.partition("=")
+        if not separator or not raw_path:
+            raise ValueError(f"model arm must be LABEL=PATH, got {value!r}")
+        if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]*", label):
+            raise ValueError(f"invalid model-arm label {label!r}")
+        if label in seen:
+            raise ValueError(f"duplicate model-arm label {label!r}")
+        path = Path(raw_path).expanduser().resolve()
+        if not (path / "config.json").exists():
+            raise ValueError(f"merged checkpoint lacks config.json: {path}")
+        if path in seen_paths:
+            raise ValueError(f"model arms must use distinct checkpoint paths: {path}")
+        seen.add(label)
+        seen_paths.add(path)
+        arms.append((label, path))
+    if len(arms) != 2:
+        raise ValueError(f"paired evaluation requires exactly two --model-arm values, got {len(arms)}")
+    return arms
 
 
 def used_seeds() -> set[int]:
@@ -97,10 +125,14 @@ def main() -> int:
     parser.add_argument("--tier", default="quick")
     parser.add_argument("--seed", type=int, required=True)
     parser.add_argument("--arms", nargs="+", choices=["base", "adapter", "merged"],
-                        default=["base", "merged"])
+                        default=None, help="legacy single-checkpoint interface")
     parser.add_argument("--adapter", type=str, default=None)
     parser.add_argument("--merged", type=str, default=None,
                         help="merged full checkpoint dir (deployed via menagerie --model-id)")
+    parser.add_argument(
+        "--model-arm", action="append", default=[], metavar="LABEL=PATH",
+        help="repeat exactly twice for paired merged-checkpoint evaluation",
+    )
     parser.add_argument("--backend", type=str, default=None,
                         help="menagerie backend override (e.g. qwen for the HF parity oracle; "
                              "never compare across backends)")
@@ -110,10 +142,32 @@ def main() -> int:
                         help="only for re-running a failed arm of the SAME event")
     args = parser.parse_args()
 
-    if "adapter" in args.arms and not args.adapter:
-        parser.error("--adapter path required when running the adapter arm")
-    if "merged" in args.arms and not args.merged:
-        parser.error("--merged path required when running the merged arm")
+    if args.model_arm:
+        if args.arms is not None or args.adapter or args.merged:
+            parser.error("--model-arm cannot be combined with --arms/--adapter/--merged")
+        try:
+            execution_arms = [
+                {"label": label, "adapter": None, "merged": str(path)}
+                for label, path in parse_model_arms(args.model_arm)
+            ]
+        except ValueError as error:
+            parser.error(str(error))
+    else:
+        legacy_arms = args.arms or ["base", "merged"]
+        if "adapter" in legacy_arms and not args.adapter:
+            parser.error("--adapter path required when running the adapter arm")
+        if "merged" in legacy_arms and not args.merged:
+            parser.error("--merged path required when running the merged arm")
+        execution_arms = []
+        for occurrence, arm in enumerate(legacy_arms):
+            label = f"{arm}{occurrence}" if legacy_arms.count(arm) > 1 else arm
+            execution_arms.append(
+                {
+                    "label": label,
+                    "adapter": args.adapter if arm == "adapter" else None,
+                    "merged": args.merged if arm == "merged" else None,
+                }
+            )
     if args.seed == 31337:
         parser.error("31337 is the published baseline seed; pick a fresh one")
     if not args.allow_seed_reuse and args.seed in used_seeds():
@@ -124,10 +178,10 @@ def main() -> int:
     LOG.parent.mkdir(parents=True, exist_ok=True)
 
     results = {}
-    for occurrence, arm in enumerate(args.arms):
-        adapter = args.adapter if arm == "adapter" else None
-        merged = args.merged if arm == "merged" else None
-        arm_label = f"{arm}{occurrence}" if args.arms.count(arm) > 1 else arm
+    for arm in execution_arms:
+        adapter = arm["adapter"]
+        merged = arm["merged"]
+        arm_label = arm["label"]
         out_path = out_dir / f"{args.tier}_seed{args.seed}_{arm_label}.json"
         print(f"[bench] {args.tier} seed={args.seed} arm={arm_label} ...", flush=True)
         results[arm_label] = run_arm(args.tier, args.seed, out_path, adapter, merged,
@@ -139,6 +193,7 @@ def main() -> int:
             "seed": args.seed,
             "arm": arm_label,
             "adapter": adapter,
+            "merged": merged,
             "note": args.note,
             **results[arm_label],
         }

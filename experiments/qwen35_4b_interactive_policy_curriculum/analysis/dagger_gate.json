@@ -1,0 +1,86 @@
+{
+  "gate": {
+    "checks": {
+      "action_valid_retention": false,
+      "atom_parse_retention": true,
+      "atom_score_retention": true,
+      "natural_close_retention": true,
+      "one_transfer_family": false,
+      "single_family_retention": true,
+      "train_macro": false,
+      "transfer_macro": false
+    },
+    "passed": false
+  },
+  "incumbent_vs_candidate": {
+    "atom_retention": {
+      "family_delta": {
+        "brinework": -0.075,
+        "burrowmaze": -0.075,
+        "caravan": 0.0,
+        "ferrier": 0.025,
+        "foundry_ledger": 0.025,
+        "gatepost": -0.05,
+        "glyphgate": 0.0,
+        "kilnrite": -0.025,
+        "loomfix": -0.1,
+        "packhouse": -0.03518727742612412,
+        "patchwheel": 0.025,
+        "runeward": 0.0,
+        "spindle": -0.025,
+        "stallwright": 0.008925975632101759
+      },
+      "family_macro_delta": -0.021518664413858742,
+      "family_macro_parse_delta": 0.0,
+      "n_pairs": 560,
+      "worst_family_delta": -0.1
+    },
+    "baseline": "/workspace/small-model-experimentation/experiments/qwen35_4b_interactive_policy_curriculum/runs/proxy_eval/incumbent",
+    "candidate": "/workspace/small-model-experimentation/experiments/qwen35_4b_interactive_policy_curriculum/runs/proxy_eval/dagger",
+    "train_episodes": {
+      "families": [
+        "kilnrite",
+        "glyphgate",
+        "loomfix",
+        "ferrier",
+        "burrowmaze"
+      ],
+      "family_delta": {
+        "burrowmaze": 0.016666666666666666,
+        "ferrier": -0.021984126984126984,
+        "glyphgate": -0.65,
+        "kilnrite": -0.2657738095238095,
+        "loomfix": -0.34444444444444444
+      },
+      "macro_delta": -0.25310714285714286,
+      "macro_delta_ci95": [
+        -0.29540873015873015,
+        -0.21029761904761904
+      ],
+      "mean_action_valid_delta": -0.0566502109002109,
+      "mean_natural_close_delta": 0.10334354534354535,
+      "n_pairs": 300
+    },
+    "transfer_episodes": {
+      "families": [
+        "gatepost",
+        "patchwheel",
+        "spindle"
+      ],
+      "family_delta": {
+        "gatepost": -0.05,
+        "patchwheel": -0.29444444444444445,
+        "spindle": -0.655
+      },
+      "macro_delta": -0.33314814814814814,
+      "macro_delta_ci95": [
+        -0.3803703703703704,
+        -0.2869444444444445
+      ],
+      "mean_action_valid_delta": -0.25243807118807116,
+      "mean_natural_close_delta": 0.1293037518037518,
+      "n_pairs": 180
+    }
+  },
+  "phase": "dagger"
+}

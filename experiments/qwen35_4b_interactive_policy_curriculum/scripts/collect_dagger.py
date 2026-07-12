@@ -142,6 +142,22 @@ def _dedup(rows: list[dict]) -> list[dict]:
     return kept
 
 
+def _assemble_incremental_rows(
+    visited_rows: list[dict], expert_rows: list[dict], expert_max_fraction: float
+) -> tuple[list[dict], list[dict], list[dict]]:
+    """Deduplicate visits before computing the expert-demo quota."""
+    if not 0.0 <= expert_max_fraction < 1.0:
+        raise ValueError("expert_max_fraction must be in [0, 1)")
+    visited_unique = _dedup(visited_rows)
+    max_demo = math.floor(
+        len(visited_unique) * expert_max_fraction / (1.0 - expert_max_fraction)
+    )
+    candidates = sorted(expert_rows, key=lambda row: row["id"])[:max_demo]
+    incremental = _dedup(visited_unique + candidates)
+    experts_kept = [row for row in incremental if row.get("source") == "expert_demo"]
+    return incremental, visited_unique, experts_kept
+
+
 def _stratified_replay(config: dict, n: int) -> list[dict]:
     source_path = resolve_repo_path(config["model"]["incumbent_data"])
     excluded = set(config["split"]["replay_excluded_families"])
@@ -236,13 +252,11 @@ def main() -> int:
     expert_trajectories, expert_rows = collect_expert_demonstrations(demo_specs)
     visited = _select_visited_rows(visited_dagger_rows(trajectories), group_rows, config)
 
-    max_demo = math.floor(
-        len(visited)
-        * float(config["collection"]["expert_demo_max_fraction"])
-        / (1.0 - float(config["collection"]["expert_demo_max_fraction"]))
+    incremental, visited, expert_rows = _assemble_incremental_rows(
+        visited,
+        expert_rows,
+        float(config["collection"]["expert_demo_max_fraction"]),
     )
-    expert_rows = sorted(expert_rows, key=lambda row: row["id"])[:max_demo]
-    incremental = _dedup(visited + expert_rows)
     target_replay = math.ceil(
         len(incremental)
         * float(config["collection"]["replay_fraction"])
@@ -307,4 +321,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

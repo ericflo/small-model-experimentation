@@ -347,6 +347,46 @@ def _validate_explicit_cudagraph_resolution(
         )
 
 
+def _validate_merged_model_override(model_override: Path) -> Path:
+    """Verify a local composite's receipt chain reaches the pinned base."""
+    current = Path(model_override).expanduser().resolve()
+    origin = current
+    seen: set[Path] = set()
+    for _ in range(16):
+        if current in seen:
+            raise ValueError(f"cycle in merged checkpoint receipt chain at {current}")
+        seen.add(current)
+        config_path = current / "config.json"
+        receipt_path = current / "merge_receipt.json"
+        if not config_path.is_file():
+            raise ValueError(f"model_override has no config.json: {current}")
+        if not receipt_path.is_file():
+            raise ValueError(f"model_override has no merge_receipt.json: {current}")
+        model_config = json.loads(config_path.read_text(encoding="utf-8"))
+        if model_config.get("model_type") != "qwen3_5":
+            raise ValueError(
+                f"model_override is not a Qwen3.5 composite: {current} "
+                f"(model_type={model_config.get('model_type')!r})"
+            )
+        receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+        if receipt.get("method") != "explicit_composite_lora_merge":
+            raise ValueError(f"unrecognized merge receipt method at {current}")
+        base = str(receipt.get("base_model", ""))
+        if base == MODEL_ID:
+            if receipt.get("base_revision") != MODEL_REVISION:
+                raise ValueError(
+                    f"merge receipt at {current} does not pin revision {MODEL_REVISION}"
+                )
+            return origin
+        if not base:
+            raise ValueError(f"merge receipt at {current} has no base_model")
+        base_path = Path(base).expanduser()
+        if not base_path.is_absolute():
+            base_path = (current / base_path).resolve()
+        current = base_path.resolve()
+    raise ValueError("merged checkpoint receipt chain exceeds 16 composites")
+
+
 @dataclasses.dataclass(frozen=True)
 class EngineConfig:
     """Engine settings chosen once, before the model is loaded."""
@@ -358,11 +398,19 @@ class EngineConfig:
     enable_prefix_caching: bool = False
     enforce_eager: bool = False
     adapter: Path | None = None
+    # Full merged checkpoints are the only trustworthy deployment path for
+    # this hybrid architecture (runtime LoRA is a verified silent no-op).
+    # The receipt chain is validated back to the pinned official model.
+    model_override: Path | None = None
     cudagraph_capture_sizes: tuple[int, ...] | None = None
 
     def validate(self) -> None:
         if self.max_model_len < 256:
             raise ValueError("max_model_len must be at least 256")
+        if self.adapter is not None and self.model_override is not None:
+            raise ValueError("adapter and model_override are mutually exclusive")
+        if self.model_override is not None:
+            _validate_merged_model_override(self.model_override)
         if not 0.1 <= self.gpu_memory_utilization < 1.0:
             raise ValueError("gpu_memory_utilization must be in [0.1, 1.0)")
         if self.max_num_seqs < 1 or self.max_num_batched_tokens < 1:
@@ -637,14 +685,21 @@ class VLLMRunner:
         # depend on vLLM's chat endpoint or reasoning parser.
         from transformers import AutoConfig, AutoTokenizer
 
+        if config.model_override is not None:
+            model_source = str(_validate_merged_model_override(config.model_override))
+            source_kwargs: dict[str, Any] = {"local_files_only": True}
+        else:
+            model_source = MODEL_ID
+            source_kwargs = {"revision": MODEL_REVISION}
+        self.model_source = model_source
         self.tokenizer = AutoTokenizer.from_pretrained(
-            MODEL_ID,
-            revision=MODEL_REVISION,
+            model_source,
             trust_remote_code=True,
             use_fast=True,
+            **source_kwargs,
         )
         model_config = AutoConfig.from_pretrained(
-            MODEL_ID, revision=MODEL_REVISION, trust_remote_code=True
+            model_source, trust_remote_code=True, **source_kwargs
         )
         self.hf_eos_id = int(model_config.text_config.eos_token_id)
         if self.hf_eos_id != 248044:
@@ -673,9 +728,12 @@ class VLLMRunner:
         )
 
         engine_args: dict[str, Any] = {
-            "model": MODEL_ID,
-            "revision": MODEL_REVISION,
-            "tokenizer_revision": MODEL_REVISION,
+            "model": model_source,
+            **(
+                {"revision": MODEL_REVISION, "tokenizer_revision": MODEL_REVISION}
+                if config.model_override is None
+                else {}
+            ),
             "trust_remote_code": True,
             "dtype": "bfloat16",
             "tensor_parallel_size": 1,
@@ -1281,6 +1339,7 @@ class VLLMRunner:
             "schema_version": RUNNER_SCHEMA_VERSION,
             "model": MODEL_ID,
             "model_revision": MODEL_REVISION,
+            "model_source": self.model_source,
             "runner_sha256": _sha256_file(Path(__file__).resolve()),
             "engine": {
                 key: str(value) if isinstance(value, Path) else value
@@ -1433,6 +1492,10 @@ def _parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
         help="allow raw prompts whose think-channel suffix does not match --thinking",
     )
     parser.add_argument("--adapter", type=Path)
+    parser.add_argument(
+        "--model-override", type=Path,
+        help="local merged checkpoint whose receipt chain reaches the pinned base",
+    )
     parser.add_argument("--max-model-len", type=int, default=16_384)
     parser.add_argument("--gpu-memory-utilization", type=float, default=0.90)
     parser.add_argument("--max-num-seqs", type=int, default=128)
@@ -1493,6 +1556,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         enable_prefix_caching=args.enable_prefix_caching,
         enforce_eager=args.enforce_eager,
         adapter=args.adapter,
+        model_override=args.model_override,
     )
     sampling = SamplingConfig(
         thinking=args.thinking,
