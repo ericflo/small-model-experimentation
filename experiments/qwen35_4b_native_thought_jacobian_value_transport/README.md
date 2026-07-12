@@ -60,7 +60,8 @@ PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m pytest \
 .venv/bin/python experiments/qwen35_4b_native_thought_jacobian_value_transport/scripts/run.py --stage causal-confirmation
 ```
 
-Every stage is fatal-gated; unavailable stages currently refuse placeholders.
+Every stage is fatal-gated. Model smoke and seam calibration are implemented;
+later stages still refuse placeholders until their audited implementations land.
 
 ## Results
 

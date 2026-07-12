@@ -28,3 +28,15 @@ Created as a new experiment scaffold.
 - Frozen preregistration SHA-256:
   `62b975cae27bfdf842bdccc06ce395735469c3fbff3f596a5987aee803a56040`.
 - No model call has occurred.
+
+## 2026-07-12 — native generation and seam implementation
+
+- Added pinned Transformers batch-one native-thinking generation with explicit
+  temperature/top-p/top-k, natural-close-only stopping, full-prefix
+  recomputation, and `use_cache=False` on every token.
+- Added historical thought-token activation capture, frozen J coordinate reads,
+  alias token/rank contracts, and exact causal suffix-invariance smoke checks.
+- Implemented the 16-task/48-trace frozen seam gate. It stores natural close,
+  parse, correctness, token, seed, and stopping receipts without forcing close.
+- CPU suite passes four tests. No model call has occurred; implementation will
+  be committed and pushed before model smoke.
