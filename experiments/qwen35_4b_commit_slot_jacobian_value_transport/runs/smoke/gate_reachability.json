@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "receipts": {
+    "seam_confirmation": {
+      "maximum_successes": 38,
+      "minimum_mixed_tasks": 6,
+      "minimum_successes": 10,
+      "passed": true,
+      "tasks": 16,
+      "traces": 48
+    },
+    "seam_selection": {
+      "maximum_successes": 38,
+      "minimum_mixed_tasks": 6,
+      "minimum_successes": 10,
+      "passed": true,
+      "tasks": 16,
+      "traces": 48
+    }
+  },
+  "schema_version": 1,
+  "scientific_result": false,
+  "stage": "gate_reachability"
+}

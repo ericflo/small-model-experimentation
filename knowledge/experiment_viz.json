@@ -2,6 +2,27 @@
  "note": "Native chart specs for the research site, extracted from each experiment's own result files (runs/reports/analysis JSON+CSV and README/report tables) by per-experiment agent passes and kept only when every plotted value was located verbatim in the cited source by machine verification. Rendered by scripts/build_site.py (chart_svg/chart_figure); raw matplotlib figures remain available further down each experiment page.",
  "extracted_on": "2026-07-10",
  "experiments": {
+  "qwen35_4b_commit_slot_jacobian_value_transport": {
+   "charts": [
+    {
+     "title": "Frozen fresh-task allocation by stage",
+     "kind": "bar",
+     "categories": ["slot selection", "slot confirmation", "value fit", "causal confirmation"],
+     "series": [
+      {
+       "label": "tasks",
+       "values": [16, 16, 32, 32]
+      }
+     ],
+     "x_label": "preregistered stage",
+     "y_label": "fresh procedural tasks",
+     "y_format": "integer",
+     "note": "All 96 rows are unique, exact-depth-two, and disjoint from four direct parents. This is a design allocation, not a model result; every later split stays sealed until its prior gate passes.",
+     "source": "experiments/qwen35_4b_commit_slot_jacobian_value_transport/runs/smoke/data_receipt.json",
+     "headline": true
+    }
+   ]
+  },
   "qwen35_4b_forced_commit_jacobian_value_transport": {
    "charts": [
     {

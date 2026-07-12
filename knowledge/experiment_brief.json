@@ -2,6 +2,39 @@
  "note": "Plain-language practitioner briefs shown above the fold on each experiment page (verdict + the-one-idea/question/finding/why-it-matters + KPI numbers + per-chart how-to-read/takeaway). Authored per experiment from its own README/report and verified chart specs under a strict no-jargon ban-list; all jargon-precise detail stays below the fold. Regenerate with scripts/enrichment/generate_briefs.workflow.js (see docs/site_maintenance.md).",
  "generated_on": "2026-07-05",
  "experiments": {
+  "qwen35_4b_commit_slot_jacobian_value_transport": {
+   "verdict_tag": "Design frozen; the answer-slot test has not run yet",
+   "concept_primer": "The model kept restarting analysis when earlier tests inserted only a stop marker. This study adds fixed answer syntax without adding the answer, restricts the next choice to 12 public words, and checks whether real reasoning helps more than no generated reasoning or the same reasoning tokens in shuffled order.",
+   "plain_question": "Can a fixed answer slot reveal a correct choice already supported by the model's unfinished reasoning, and can one compact internal signal later make weak choices better?",
+   "plain_answer": "No model result is open yet. Before any model call, the study froze 96 fresh two-step tasks, found zero overlap with four parent studies, and locked selection, confirmation, comparison, and stop rules after a 58-point hostile review.",
+   "why_it_matters": "This separates an output-format repair from a reasoning gain. The answer slot must first beat both an immediate slot and shuffled reasoning on new tasks; only then may the study examine and change an internal promise signal.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Fresh procedural tasks",
+     "value": "96/96",
+     "sub": "all unique, exact-depth, and generated before model work"
+    },
+    {
+     "label": "Overlap with four parent studies",
+     "value": "0/96",
+     "sub": "the first colliding seed block was discarded before any model call"
+    },
+    {
+     "label": "Adversarial failure modes reviewed",
+     "value": "58",
+     "sub": "the machine-readable gates and data hashes are locked to the design"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Fresh tasks are reserved before each stage opens",
+     "chart_read": "The first two bars reserve smaller task sets for choosing one reasoning limit and checking it once; the last two reserve larger untouched sets for learning and then testing the internal signal.",
+     "chart_takeaway": "Later stages cannot reuse the tasks that chose the answer interface, and they remain sealed until earlier checks pass."
+    }
+   ]
+  },
   "qwen35_4b_forced_commit_jacobian_value_transport": {
    "verdict_tag": "A stop token did not make the model commit to an answer",
    "concept_primer": "The model kept reasoning past every natural finishing limit. This study makes stopping an explicit controller action, checks whether the resulting answers are usable, and only then looks for an internal signal that separates promising from weak unfinished work.",

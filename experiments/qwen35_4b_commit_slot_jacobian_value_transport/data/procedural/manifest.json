@@ -1,0 +1,106 @@
+{
+  "firewall": {
+    "benchmark_content_used": false,
+    "fresh_procedural_only": true,
+    "visible_depth_one_fit_rejected": true,
+    "visible_first_type_identifiable": true
+  },
+  "lens_sha256": "e373b6e93956fdfc5cb446e9bee8249655707c8258a7868f0653d11f1ffd0213",
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "parent_fingerprint_counts": {
+    "qwen35_4b_forced_commit_jacobian_value_transport": 96,
+    "qwen35_4b_jacobian_value_transport": 336,
+    "qwen35_4b_native_thought_jacobian_value_transport": 80,
+    "qwen35_4b_native_thought_seam_budget_ladder": 40
+  },
+  "schema_version": 1,
+  "scientific_result": false,
+  "splits": {
+    "causal_confirmation": {
+      "depth_one_fit_count": 0,
+      "first_op_counts": {
+        "abs_all": 3,
+        "add_k": 3,
+        "adjacent_diff": 3,
+        "mul_k": 3,
+        "reverse": 3,
+        "rotate_k": 3,
+        "running_sum": 3,
+        "sort_asc": 2,
+        "sort_desc": 3,
+        "square": 3,
+        "take_k": 3
+      },
+      "items": 32,
+      "parent_overlap": 0,
+      "path": "data/procedural/causal_confirmation.jsonl",
+      "sha256": "7f4df036207f1f9314ed4a8293c68fc8cefe92573b5c753e4af6b72e5194070f",
+      "unique_fingerprints": 32
+    },
+    "seam_confirmation": {
+      "depth_one_fit_count": 0,
+      "first_op_counts": {
+        "abs_all": 1,
+        "add_k": 2,
+        "adjacent_diff": 2,
+        "mul_k": 2,
+        "reverse": 1,
+        "rotate_k": 2,
+        "running_sum": 1,
+        "sort_asc": 1,
+        "sort_desc": 1,
+        "square": 1,
+        "take_k": 2
+      },
+      "items": 16,
+      "parent_overlap": 0,
+      "path": "data/procedural/seam_confirmation.jsonl",
+      "sha256": "70e72f00e9d2bde5a88e10c2794487609831e7a6bb8baec4fa5636449de9190a",
+      "unique_fingerprints": 16
+    },
+    "seam_selection": {
+      "depth_one_fit_count": 0,
+      "first_op_counts": {
+        "abs_all": 2,
+        "add_k": 1,
+        "adjacent_diff": 1,
+        "mul_k": 1,
+        "reverse": 2,
+        "rotate_k": 2,
+        "running_sum": 1,
+        "sort_asc": 2,
+        "sort_desc": 2,
+        "square": 1,
+        "take_k": 1
+      },
+      "items": 16,
+      "parent_overlap": 0,
+      "path": "data/procedural/seam_selection.jsonl",
+      "sha256": "ac037aec985aa84456323c50fb5ae05e086460bd11dce7ae321291071d78bd2d",
+      "unique_fingerprints": 16
+    },
+    "value_fit": {
+      "depth_one_fit_count": 0,
+      "first_op_counts": {
+        "abs_all": 3,
+        "add_k": 3,
+        "adjacent_diff": 3,
+        "mul_k": 3,
+        "reverse": 3,
+        "rotate_k": 3,
+        "running_sum": 3,
+        "sort_asc": 2,
+        "sort_desc": 3,
+        "square": 3,
+        "take_k": 3
+      },
+      "items": 32,
+      "parent_overlap": 0,
+      "path": "data/procedural/value_fit.jsonl",
+      "sha256": "64d42304de1efe1394380604c17c5066df735f14cd65445a12fd0e95e78fc93d",
+      "unique_fingerprints": 32
+    }
+  },
+  "total_unique_fingerprints": 96
+}

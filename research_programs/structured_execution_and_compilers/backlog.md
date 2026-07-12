@@ -2,6 +2,11 @@
 
 ## Next Experiments
 
+- Cross-program interface probe in progress:
+  `qwen35_4b_commit_slot_jacobian_value_transport` asks whether a fixed latent
+  answer slot exposes semantic choice after native thought. It must beat the
+  same slot with no thought and shuffled thought before the interface can
+  license any J-space value work; constrained choice is not free-form execution.
 - Measure the exact behavioral quotient at fresh depth 6 before assuming model-guided pruning is economically
   needed; record wall time, memory, physical transitions, coverage, and selector success.
 - If a real search wall appears, test a residualized partial state (feasible parameter domains, materialized

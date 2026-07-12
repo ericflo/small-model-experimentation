@@ -11,11 +11,11 @@
   1/48 at every cap, and 85%--96% of answers exhausted 16 tokens, usually by
   restarting analysis. An EOS-tolerant parser diagnostic stayed <=22.9%. No cap,
   confirmation, value fit, or J causal outcome opened.
-- **Next:** create a fresh commit-slot experiment that appends close plus fixed
-  syntax `First:` and reads the next alias choice, while retaining close-only
-  free-form output as the interface control. Syntax may be supplied; answer
-  identity may not. Gate semantic accuracy/headroom and mixed tasks before
-  reopening J value, and keep task-held-out alias/identity controls load-bearing.
+- **In progress:** `qwen35_4b_commit_slot_jacobian_value_transport` appends close
+  plus fixed syntax `First:` and reads the next alias choice without supplying
+  identity. It now gates semantic accuracy/headroom against both an immediate
+  slot and an exact-length shuffled-token trace before reopening J value, while
+  preserving close-only free-form and unmasked-logit diagnostics.
 - If native thought-state transport passes, train a non-oracle prefix controller
   and require a replicated held-out capability gain over frozen Qwen3.5-4B and
   matched-compute sampling. Oracle donor selection is a mechanism control, not

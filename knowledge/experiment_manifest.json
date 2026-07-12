@@ -1116,6 +1116,44 @@
   },
   {
     "file_counts": {
+      ".json": 3,
+      ".jsonl": 4,
+      ".md": 7,
+      ".pt": 1,
+      ".py": 5,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_commit_slot_jacobian_value_transport",
+    "path": "experiments/qwen35_4b_commit_slot_jacobian_value_transport",
+    "primary_readme": "experiments/qwen35_4b_commit_slot_jacobian_value_transport/README.md",
+    "primary_report": "experiments/qwen35_4b_commit_slot_jacobian_value_transport/reports/report.md",
+    "research_programs": [
+      "interpretability_and_diagnostics",
+      "structured_execution_and_compilers",
+      "test_time_reasoning_budget"
+    ],
+    "source_track": "new",
+    "summary": "This study tests whether a syntax-only forced answer slot reveals a usable alias decision and, if so, whether a scalar Jacobian certainty coordinate can improve that decision.",
+    "tags": [
+      "latent-state",
+      "small-model"
+    ],
+    "title": "Qwen3.5-4B Commit-Slot Jacobian Value Transport",
+    "top_level_dirs": [
+      "assets",
+      "configs",
+      "data",
+      "reports",
+      "runs",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 23,
+    "total_size_bytes": 3331776
+  },
+  {
+    "file_counts": {
       ".json": 2,
       ".log": 2,
       ".md": 4,

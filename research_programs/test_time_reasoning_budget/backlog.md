@@ -37,10 +37,11 @@
   wall on fresh exact-depth tasks: forced parse 12.5%--18.8%, success 2.1%, and
   answer-cap contact 85%--96% across 256/512/1024. Close alone often restarted
   reasoning; no cap or downstream value stage opened.
-- **Next, fixed answer slot:** test `</think>` plus `First:` as the deployed
-  syntax-only controller, with a constrained next-alias readout and close-only
-  free-form arm. This changes the interface rather than relaxing the failed
-  parser; use fresh selection/confirmation tasks and matched trace budgets.
+- **In progress, fixed answer slot:**
+  `qwen35_4b_commit_slot_jacobian_value_transport` tests `</think>` plus
+  `First:` as the deployed syntax-only controller, with constrained next-alias,
+  no-thought, exact-length shuffled-thought, unmasked-logit, and close-only
+  free-form arms on fresh selection/confirmation tasks.
 - Completed cross-program qualification negative:
   `qwen35_4b_pareto_policy_integration` found that C54's short/deep tier labels
   did not become a clean procedural teacher crossover. `blend` lost both quick
