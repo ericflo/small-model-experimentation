@@ -3,14 +3,14 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 13
-- Experiments: 213
+- Experiments: 214
 
 ## Structured Execution And Compilers
 
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 154
+- Assigned experiments: 155
 
 ### Seed Evidence
 
@@ -71,6 +71,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_hypothesize_verify_wall` (new): [README](../experiments/qwen35_4b_hypothesize_verify_wall/README.md)
 - `qwen35_4b_independent_code_abi_coverage_gate` (track-z): [README](../experiments/qwen35_4b_independent_code_abi_coverage_gate/README.md)
 - `qwen35_4b_interactive_policy_curriculum` (new): [README](../experiments/qwen35_4b_interactive_policy_curriculum/README.md)
+- `qwen35_4b_jacobian_value_transport` (new): [README](../experiments/qwen35_4b_jacobian_value_transport/README.md)
 - `qwen35_4b_joint_shortlister_ladder` (track-z): [README](../experiments/qwen35_4b_joint_shortlister_ladder/README.md)
 - `qwen35_4b_latent_composition_probe` (new): [README](../experiments/qwen35_4b_latent_composition_probe/README.md)
 - `qwen35_4b_latent_decomposition` (new): [README](../experiments/qwen35_4b_latent_decomposition/README.md)
@@ -625,7 +626,7 @@ Stress whether mechanisms transfer across substrates, families, lengths, distrib
 Measure why methods work or fail through attribution, probes, pressure audits, and controlled ablations.
 
 - Charter: [interpretability_and_diagnostics](../research_programs/interpretability_and_diagnostics/charter.md)
-- Assigned experiments: 55
+- Assigned experiments: 56
 
 ### Seed Evidence
 
@@ -648,6 +649,7 @@ Measure why methods work or fail through attribution, probes, pressure audits, a
 - `qwen35_4b_humaneval_code_confidence` (new): [README](../experiments/qwen35_4b_humaneval_code_confidence/README.md)
 - `qwen35_4b_hypothesize_verify_wall` (new): [README](../experiments/qwen35_4b_hypothesize_verify_wall/README.md)
 - `qwen35_4b_interactive_policy_curriculum` (new): [README](../experiments/qwen35_4b_interactive_policy_curriculum/README.md)
+- `qwen35_4b_jacobian_value_transport` (new): [README](../experiments/qwen35_4b_jacobian_value_transport/README.md)
 - `qwen35_4b_opsd_pressure_locality_audit` (track-z): [README](../experiments/qwen35_4b_opsd_pressure_locality_audit/README.md)
 - `qwen35_4b_oracle_distilled_semantic_verifier` (track-z): [README](../experiments/qwen35_4b_oracle_distilled_semantic_verifier/README.md)
 - `qwen35_4b_oracle_probe_synthesis_mdp` (track-z): [README](../experiments/qwen35_4b_oracle_probe_synthesis_mdp/README.md)
@@ -793,11 +795,12 @@ Make the repository itself better at spawning, comparing, validating, and rememb
 Study the native thinking-token budget as a first-class controllable test-time-compute axis for Qwen3.5-4B, which the corpus has universally disabled.
 
 - Charter: [test_time_reasoning_budget](../research_programs/test_time_reasoning_budget/charter.md)
-- Assigned experiments: 12
+- Assigned experiments: 13
 
 ### Assigned Experiments
 
 - `qwen35_4b_answer_potential_trace_sft` (new): [README](../experiments/qwen35_4b_answer_potential_trace_sft/README.md)
+- `qwen35_4b_jacobian_value_transport` (new): [README](../experiments/qwen35_4b_jacobian_value_transport/README.md)
 - `qwen35_4b_long_horizon_answer_potential_sft` (new): [README](../experiments/qwen35_4b_long_horizon_answer_potential_sft/README.md)
 - `qwen35_4b_overthinking_content_ladder` (new): [README](../experiments/qwen35_4b_overthinking_content_ladder/README.md)
 - `qwen35_4b_think_ftpo_round1` (new): [README](../experiments/qwen35_4b_think_ftpo_round1/README.md)

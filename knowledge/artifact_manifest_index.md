@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 185
-- Manifest files: 487
+- Experiments with manifests: 186
+- Manifest files: 488
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 63 |
 | `run-data` | 101 |
-| `standard-artifact` | 58 |
+| `standard-artifact` | 59 |
 
 ## Manifests
 
@@ -120,6 +120,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_interactive_policy_curriculum` | `standard-artifact` | [manifest](../experiments/qwen35_4b_interactive_policy_curriculum/reports/artifact_manifest.yaml) |
 | `qwen35_4b_inventory_shortlister_training` | `dataset` | [manifest](../experiments/qwen35_4b_inventory_shortlister_training/data/dataset_manifest.json) |
 | `qwen35_4b_inventory_shortlister_training` | `large-artifact` | [manifest](../experiments/qwen35_4b_inventory_shortlister_training/large_artifacts_manifest.md) |
+| `qwen35_4b_jacobian_value_transport` | `standard-artifact` | [manifest](../experiments/qwen35_4b_jacobian_value_transport/reports/artifact_manifest.yaml) |
 | `qwen35_4b_joint_shortlister_ladder` | `dataset` | [manifest](../experiments/qwen35_4b_joint_shortlister_ladder/data/dataset_manifest.json) |
 | `qwen35_4b_joint_shortlister_ladder` | `large-artifact` | [manifest](../experiments/qwen35_4b_joint_shortlister_ladder/large_artifacts_manifest.md) |
 | `qwen35_4b_language_proposal_wall` | `standard-artifact` | [manifest](../experiments/qwen35_4b_language_proposal_wall/reports/artifact_manifest.yaml) |

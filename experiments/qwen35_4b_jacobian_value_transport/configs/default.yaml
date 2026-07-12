@@ -1,0 +1,77 @@
+schema_version: 1
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+  dtype: bfloat16
+  attention: sdpa
+  device: cuda:0
+  think_open_id: 248068
+  think_close_id: 248069
+
+seeds:
+  split: 2026071201
+  lens_corpus: 2026071202
+  generation: 2026071203
+  continuation: 2026071204
+  controls: 2026071205
+  bootstrap: 2026071206
+
+data:
+  lens_fit_prompts: 64
+  positive_control_items: 48
+  value_calibration_tasks: 48
+  iid_eval_tasks: 96
+  held_family_tasks_per_family: 48
+  hard_eval_tasks: 96
+  visible_examples: 8
+  hidden_examples: 8
+  anchor_depth: 2
+  hard_depth: 3
+
+lens:
+  source_layers: [8, 12, 16, 20, 24]
+  target_layer: 31
+  skip_first_positions: 16
+  max_sequence_tokens: 128
+  full_fit_prompts_after_targeted_gate: 20
+  dimension_batch: 16
+  sparse_k: 25
+
+generation:
+  temperature: 0.6
+  top_p: 0.95
+  top_k: 20
+  max_think_tokens: 192
+  max_answer_tokens: 24
+  traces_per_task: 4
+  continuations_per_prefix: 4
+  minimum_prefix_tokens: 16
+  prefix_fractions: [0.33, 0.67]
+  full_recompute_without_cache: true
+
+gates:
+  positive_control:
+    clean_accuracy_min: 0.70
+    verbal_target_shift_min: 0.20
+    consequence_target_shift_min: 0.15
+    j_minus_random_min: 0.10
+    adjacent_layers_required: 2
+    max_parse_rate_drop: 0.10
+  prefix_value:
+    minimum_mixed_tasks: 24
+    minimum_scored_prefixes: 100
+    task_macro_transport_auroc_min: 0.65
+    transport_minus_activity_auroc_min: 0.03
+    shuffled_label_auroc_abs_from_chance_max: 0.05
+  causal_patch:
+    exact_success_uplift_min: 0.10
+    j_minus_random_min: 0.08
+    j_minus_wrong_min: 0.08
+    j_minus_non_j_min: 0.05
+    bootstrap_ci_lower_min: 0.0
+    max_parse_rate_drop: 0.05
+
+design_boundary:
+  commit:
+  preregistration_sha256:
+  readme_sha256:

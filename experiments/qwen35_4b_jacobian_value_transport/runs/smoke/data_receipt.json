@@ -1,0 +1,16 @@
+{
+  "benchmark_content_used": false,
+  "counts": {
+    "hard_eval": 96,
+    "held_register_eval": 48,
+    "held_string_eval": 48,
+    "iid_eval": 96,
+    "lens_fit": 64,
+    "positive_control": 48,
+    "value_calibration": 48
+  },
+  "manifest_sha256": "85105ad45e42416b3420576d2d3035155c4fcc7faaac9511125f3d9204742d9f",
+  "passed": true,
+  "schema_version": 1,
+  "scientific_evidence": false
+}

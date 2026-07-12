@@ -2547,6 +2547,41 @@
   },
   {
     "file_counts": {
+      ".json": 2,
+      ".jsonl": 7,
+      ".md": 7,
+      ".py": 10,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_jacobian_value_transport",
+    "path": "experiments/qwen35_4b_jacobian_value_transport",
+    "primary_readme": "experiments/qwen35_4b_jacobian_value_transport/README.md",
+    "primary_report": "experiments/qwen35_4b_jacobian_value_transport/reports/report.md",
+    "research_programs": [
+      "interpretability_and_diagnostics",
+      "structured_execution_and_compilers",
+      "test_time_reasoning_budget"
+    ],
+    "source_track": "new",
+    "summary": "This experiment tests whether token-aligned Jacobian coordinates can carry causal value from native thinking into fresh, exactly scored answers more specifically than ordinary activation steering.",
+    "tags": [
+      "small-model"
+    ],
+    "title": "Qwen3.5-4B Jacobian Value Transport",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "runs",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 29,
+    "total_size_bytes": 560584
+  },
+  {
+    "file_counts": {
       ".csv": 4,
       ".json": 4,
       ".jsonl": 4,

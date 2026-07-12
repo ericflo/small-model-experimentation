@@ -547,6 +547,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 - `qwen35_4b_independent_retrieval_consensus` (track-z): [README](../experiments/qwen35_4b_independent_retrieval_consensus/README.md)
 - `qwen35_4b_interactive_policy_curriculum` (new): [README](../experiments/qwen35_4b_interactive_policy_curriculum/README.md)
 - `qwen35_4b_inventory_shortlister_training` (track-z): [README](../experiments/qwen35_4b_inventory_shortlister_training/README.md)
+- `qwen35_4b_jacobian_value_transport` (new): [README](../experiments/qwen35_4b_jacobian_value_transport/README.md)
 - `qwen35_4b_joint_shortlister_ladder` (track-z): [README](../experiments/qwen35_4b_joint_shortlister_ladder/README.md)
 - `qwen35_4b_language_proposal_wall` (new): [README](../experiments/qwen35_4b_language_proposal_wall/README.md)
 - `qwen35_4b_language_reasoning_wall` (new): [README](../experiments/qwen35_4b_language_reasoning_wall/README.md)

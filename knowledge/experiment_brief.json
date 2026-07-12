@@ -2,6 +2,39 @@
  "note": "Plain-language practitioner briefs shown above the fold on each experiment page (verdict + the-one-idea/question/finding/why-it-matters + KPI numbers + per-chart how-to-read/takeaway). Authored per experiment from its own README/report and verified chart specs under a strict no-jargon ban-list; all jargon-precise detail stays below the fold. Regenerate with scripts/enrichment/generate_briefs.workflow.js (see docs/site_maintenance.md).",
  "generated_on": "2026-07-05",
  "experiments": {
+  "qwen35_4b_jacobian_value_transport": {
+   "verdict_tag": "Causal test is designed; model result pending",
+   "concept_primer": "Imagine knowing that a clue is written somewhere in a machine, but not knowing whether the machine can actually use it. This experiment follows the connection from an internal clue to the later answer, then carefully changes that connection.",
+   "plain_question": "Can we change a useful idea inside the model's private reasoning and thereby improve what it eventually answers?",
+   "plain_answer": "We do not know yet. The fresh tasks, failure checks, and comparison methods are frozen before the first scientific model run. The current result only proves that the data path is reproducible and does not touch benchmark material.",
+   "why_it_matters": "A signal that merely predicts success is not a new ability. A controlled change that improves fresh verified answers would provide a much stronger route for turning hidden knowledge into useful behavior.",
+   "verdict_tone": "pending",
+   "key_numbers": [
+    {
+     "label": "Fresh value-mapping tasks",
+     "value": "48",
+     "sub": "used to connect partial reasoning with later verified success"
+    },
+    {
+     "label": "Fresh main evaluation tasks",
+     "value": "96",
+     "sub": "kept separate from fitting and calibration"
+    },
+    {
+     "label": "Held-family evaluation tasks",
+     "value": "96",
+     "sub": "48 string and 48 register tasks"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "The frozen fresh-data ladder",
+     "chart_read": "Each bar counts tasks or prompts in one part of the study. These are design and plumbing counts, not model scores; the larger bars are held back for evaluation.",
+     "chart_takeaway": "Fitting, calibration, ordinary evaluation, new task families, and harder tasks are separated before the model is tested."
+    }
+   ]
+  },
   "adaptive_cognitive_kernel": {
    "verdict_tag": "Self-rewiring runtime ties the plain baseline",
    "concept_primer": "Imagine a calculator that rewrites its own wiring for each instruction in a program, versus an ordinary fixed calculator. This test asks whether the self-rewiring one follows long instruction lists better.",

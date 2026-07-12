@@ -1,0 +1,69 @@
+{
+  "artifacts": {
+    "hard_eval": {
+      "bytes": 113179,
+      "path": "/workspace/small-model-experimentation/experiments/qwen35_4b_jacobian_value_transport/data/procedural/hard_eval.jsonl",
+      "rows": 96,
+      "sha256": "8164aec8c436c1fd767bd63cacb844604a68cc6e020fca56c5d90ab8107391ad"
+    },
+    "held_register_eval": {
+      "bytes": 43138,
+      "path": "/workspace/small-model-experimentation/experiments/qwen35_4b_jacobian_value_transport/data/procedural/held_register_eval.jsonl",
+      "rows": 48,
+      "sha256": "272749b7dc645cb013a8be930de6ccf75fddc406621e0131c28e81e404df8b89"
+    },
+    "held_string_eval": {
+      "bytes": 38026,
+      "path": "/workspace/small-model-experimentation/experiments/qwen35_4b_jacobian_value_transport/data/procedural/held_string_eval.jsonl",
+      "rows": 48,
+      "sha256": "a867386832c4de69bbf4665c1e25502a4d129485053311debad238b3e21ba465"
+    },
+    "iid_eval": {
+      "bytes": 112529,
+      "path": "/workspace/small-model-experimentation/experiments/qwen35_4b_jacobian_value_transport/data/procedural/iid_eval.jsonl",
+      "rows": 96,
+      "sha256": "beae3d379eae131b376a045021bce6aaa93c3e81cbc3f0d5b5573dc44aacab0e"
+    },
+    "lens_fit": {
+      "bytes": 24942,
+      "path": "/workspace/small-model-experimentation/experiments/qwen35_4b_jacobian_value_transport/data/procedural/lens_fit.jsonl",
+      "rows": 64,
+      "sha256": "23b3ada8d972131413f58fa2e2ee07189a63355e667976a90197144fd0dacb31"
+    },
+    "positive_control": {
+      "bytes": 23217,
+      "path": "/workspace/small-model-experimentation/experiments/qwen35_4b_jacobian_value_transport/data/procedural/positive_control.jsonl",
+      "rows": 48,
+      "sha256": "3fe4f360c5a9e6a1a3d6bd7ff299c2fdf1d6b4cdf32228b3c9b061fb37e06142"
+    },
+    "value_calibration": {
+      "bytes": 57007,
+      "path": "/workspace/small-model-experimentation/experiments/qwen35_4b_jacobian_value_transport/data/procedural/value_calibration.jsonl",
+      "rows": 48,
+      "sha256": "85138d84bb5b1322632570c40003099628d2d72ee280e6a02072104705984547"
+    }
+  },
+  "counts": {
+    "hard_eval": 96,
+    "held_register_eval": 48,
+    "held_string_eval": 48,
+    "iid_eval": 96,
+    "lens_fit": 64,
+    "positive_control": 48,
+    "value_calibration": 48
+  },
+  "firewall": {
+    "benchmark_content_used": false,
+    "fresh_procedural_only": true
+  },
+  "generator": "src/task_data.py",
+  "schema_version": 1,
+  "split_seed": 2026071201,
+  "task_split_digests": {
+    "hard_eval": "c4e7f5cc44c05264a8ff950833a2b6361bd1346917eea5ba0791ee34aa0193d1",
+    "held_register_eval": "3928e2bb200e66b2fe1255a1c63bbe698ddaec1034613ae3caf0c7e9cf387ee1",
+    "held_string_eval": "e97024d515e51aa8b17f5c95fe64f0b3e83e947b7bc0b5b7a94ff3a21eb85f3b",
+    "iid_eval": "fb630a694fe445b64dcbb6123610e61ee89e05ce88afdb65346a837ef47b0c4a",
+    "value_calibration": "916dc04999d5ae781b3fd842a75c66214d9bd95d0fe9bfae226e08106e7466e6"
+  }
+}
