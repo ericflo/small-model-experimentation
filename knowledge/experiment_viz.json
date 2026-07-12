@@ -46609,6 +46609,43 @@
     }
    ]
   },
+  "qwen35_4b_deep_advantage_mopd": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Every routed training arm gets the same frozen dose",
+     "categories": [
+      "deep-advantage MOPD",
+      "matched non-advantage MOPD",
+      "wrong-teacher MOPD"
+     ],
+     "series": [
+      {
+       "label": "routed capability units",
+       "values": [
+        60,
+        60,
+        60
+       ]
+      },
+      {
+       "label": "shared frozen-soup anchors",
+       "values": [
+        20,
+        20,
+        20
+       ]
+      }
+     ],
+     "x_label": "training arm",
+     "y_label": "consume-once units per round",
+     "y_format": "integer",
+     "note": "Pre-run design chart. The proposed method gets no dose advantage: each MOPD arm consumes 60 capability states plus the identical 20 starting-soup anchors per round. The controls change only whether deep truly had a measured advantage there, or which teacher supplies the target.",
+     "source": "experiments/qwen35_4b_deep_advantage_mopd/configs/default.yaml and reports/preregistration.md"
+    }
+   ]
+  },
   "qwen35_4b_same_prefix_advantage_routing": {
    "charts": [
     {

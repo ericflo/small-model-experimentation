@@ -391,6 +391,14 @@
     "runs/bank_run.log:wall-clock-only stamps '=== TRAIN 16:39:45 ===' consistent with mtimes"
    ]
   },
+  "qwen35_4b_deep_advantage_mopd": {
+   "start": "2026-07-12",
+   "end": "2026-07-12",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_deployable_information_ceiling_sweep": {
    "start": "2026-06-24",
    "end": "2026-06-24",
@@ -928,6 +936,14 @@
    "confidence": "high",
    "sources": [
     "logs/experiment_log.md:3: 'Date: 2026-06-25'"
+   ]
+  },
+  "qwen35_4b_recovery_payload_budget_harness": {
+   "start": "2026-07-12",
+   "end": "2026-07-12",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
    ]
   },
   "qwen35_4b_recovery_reason_locality_interpolation": {

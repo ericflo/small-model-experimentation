@@ -1,0 +1,42 @@
+schema_version: 1
+experiment_id: "qwen35_4b_deep_advantage_mopd"
+external_artifacts:
+  - name: quick source adapter and explicit composite
+    storage: large_artifacts/qwen35_4b_pareto_policy_integration/{adapters/quick_blend,merged/quick_blend}
+    required_for: route alternate, wrong-teacher control, source comparison, and parameter soups
+    checksum: bound by checkpoint_receipts.json and source merge/training receipts
+    regenerate: python3 experiments/qwen35_4b_pareto_policy_integration/scripts/run.py --stage specialists
+  - name: deep source adapter and explicit composite
+    storage: large_artifacts/qwen35_4b_pareto_policy_integration/{adapters/deep_apex,merged/deep_apex}
+    required_for: route teacher, dense targets, source comparison, and parameter soups
+    checksum: bound by checkpoint_receipts.json and source merge/training receipts
+    regenerate: python3 experiments/qwen35_4b_pareto_policy_integration/scripts/run.py --stage specialists
+  - name: immutable 40/60 soup student
+    storage: large_artifacts/qwen35_4b_same_prefix_advantage_routing/merged/soup40
+    required_for: initialization, anchors, no-update baseline, and sample-more
+    checksum: 04610723f3f46d0a094ae0e5bc1a491bb6ad9e0fb6c8a84417dfe5e527f15b50
+    regenerate: python3 experiments/qwen35_4b_same_prefix_advantage_routing/scripts/run.py --stage build-student
+  - name: deep-MOPD adapters, explicit composites, target caches, and online state artifacts
+    storage: large_artifacts/qwen35_4b_deep_advantage_mopd
+    required_for: locality, integration, controls, confirmation, and reproduction
+    checksum: per-artifact receipts plus checkpoint_receipts.json
+    regenerate: >-
+      Run verify-student, route-qualify, locality, three integrate seeds,
+      controls, and confirm only as authorized by each gate.
+omitted_artifacts:
+  - path: large_artifacts/qwen35_4b_deep_advantage_mopd
+    reason: checkpoints, adapters, online branches, and tensor caches are too large for git
+reproducibility:
+  smoke_command: python3 experiments/qwen35_4b_deep_advantage_mopd/scripts/run.py --smoke
+  full_command: >-
+    Run explicit stages in README order; every stage verifies the immutable
+    preregistration and prior machine-readable gate.
+  required_external_artifacts:
+    - large_artifacts/qwen35_4b_pareto_policy_integration/adapters/quick_blend
+    - large_artifacts/qwen35_4b_pareto_policy_integration/adapters/deep_apex
+    - large_artifacts/qwen35_4b_pareto_policy_integration/merged/quick_blend
+    - large_artifacts/qwen35_4b_pareto_policy_integration/merged/deep_apex
+    - large_artifacts/qwen35_4b_same_prefix_advantage_routing/merged/soup40
+notes: >-
+  Raw branch continuations may be gzip-compressed in git when reasonably
+  sized; any omitted result-bearing output remains hash-bound by a small receipt.

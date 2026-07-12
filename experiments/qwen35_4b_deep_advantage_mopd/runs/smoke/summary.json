@@ -1,0 +1,64 @@
+{
+  "config": "configs/default.yaml",
+  "config_sha256": "2cb3f3a751bc316624ba49134a90dd339a6c0bc47c0ba92c7db21831ab400d08",
+  "families": [
+    "caravan",
+    "foundry_ledger",
+    "stallwright",
+    "runeward",
+    "kilnrite",
+    "glyphgate",
+    "loomfix",
+    "ferrier",
+    "burrowmaze",
+    "gatepost",
+    "patchwheel",
+    "packhouse",
+    "brinework",
+    "spindle"
+  ],
+  "final_joint_delta_threshold": 0.0,
+  "immutable_student": {
+    "merge_receipt_sha256": "6447540351caf9b20be01c8750db09a9506cfb1261bf711f5ee00cd2c8c4107e",
+    "model_sha256": "04610723f3f46d0a094ae0e5bc1a491bb6ad9e0fb6c8a84417dfe5e527f15b50",
+    "path": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_same_prefix_advantage_routing/merged/soup40"
+  },
+  "model": "Qwen/Qwen3.5-4B",
+  "reachable_counts": {
+    "anchor_units_per_round": 20,
+    "capability_units_per_round": 60,
+    "micro_steps_per_round": 80,
+    "minimum_deep_per_block": 16,
+    "non_advantage_route_control_units_per_round": 60,
+    "qualification_states_per_block": 192,
+    "qualified_teacher": "deep"
+  },
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "route_advantage_threshold": 0.0,
+  "selftest_tail": [
+    "PASS spindle (0.1s): {\"family\": \"spindle\", \"atoms\": {\"1\": {\"oracle_mean\": 1.0, \"degenerate_max\": 0.0}, \"2\": {\"oracle_mean\": 1.0, \"degenerate_max\": 0.0}, \"3\": {\"oracle_mean\": 1.0, \"degenerate_max\": 0.0}, \"4\": {\"oracle_mean\": 1.0, \"degenerate_max\": 0.0}, \"5\": {\"oracle_mean\": 1.0, \"degenerate_max\": 0.0}, \"6\": {\"oracle_mean\": 1.0, \"degenerate_max\": 0.0}}, \"episodes\": {\"1\": {\"oracle_mean\": 1.0, \"random_mean\": 0.0}, \"2\": {\"oracle_mean\": 1.0, \"random_mean\": 0.0}, \"3\": {\"oracle_mean\": 1.0, \"random_mean\": 0.0}, \"4\": {\"oracle_mean\": 1.0, \"random_mean\": 0.0}, \"5\": {\"oracle_mean\": 1.0, \"random_mean\": 0.0}, \"6\": {\"oracle_mean\": 1.0, \"random_mean\": 0.0}}}",
+    "",
+    "all 14 families pass"
+  ],
+  "source_artifacts": {
+    "deep": {
+      "adapter_config_sha256": "7d3cb9e5e650b1fa497dc4a75c36b024ebc3d8e8e3af7ad83dc3d6bd647fc881",
+      "adapter_weights_sha256": "1d1c1050bd65bf2ff417b2b3eaef2ef9e15056c322a53e799ce89129895ff06e",
+      "merge_receipt_sha256": "16316211c0c8da9c176ad7fb7c132ff648a7c8d398d3f96a1e153f52b97ea475",
+      "model_weights_sha256": "3bf936150a0a68e80a7a2ef3564334503fdfc3dfb3dcc5f6dfa0b1b12b7cf28b",
+      "training_receipt_sha256": "eef085e765108458b79dcd69ad6e895f59a3d36405b603a87e2ae3c32217393d"
+    },
+    "quick": {
+      "adapter_config_sha256": "7be75fa307645d2b373bf7fe3ad1ce3ce6b9b4ac5a7b8e6adf4f62948ad983d2",
+      "adapter_weights_sha256": "a40bb45d992f09a5266a62b76279e726641a683d153f2f1858a24acb2724ae6f",
+      "merge_receipt_sha256": "be852a5134a7ba47c479eb412e9f07b497cb0c4c201bc6f07bf118d0ad22f126",
+      "model_weights_sha256": "97bb30362c130fab6525586b39dff9d72ca31be57b72edc879bf03e304ce91cb",
+      "training_receipt_sha256": "cf3505c98398ac192a670be1a5244792ae10a29d5dfb977ff8443330c0d3de32"
+    }
+  },
+  "status": "pass",
+  "transfer_families": [
+    "brinework",
+    "spindle"
+  ]
+}

@@ -4,21 +4,21 @@ Generated from tracked experiment contents. Use this as a triage surface for tur
 
 Anchor-ready means the experiment has a human-authored README, a detected primary report, recognized local artifacts, and an assigned research program. It does not mean the result is correct or final.
 
-- Experiments: 226
-- Anchor-ready: 211
-- Human-authored READMEs: 213
+- Experiments: 227
+- Anchor-ready: 212
+- Human-authored READMEs: 214
 - Generated README stubs: 13
-- Primary reports: 226
-- Experiment logs: 130
-- Smoke commands: 95
-- Artifact manifests: 198
+- Primary reports: 227
+- Experiment logs: 131
+- Smoke commands: 96
+- Artifact manifests: 199
 
 ## Run Surface Counts
 
 | Run surface | Experiments |
 | --- | ---: |
 | `documented-command` | 38 |
-| `documented-scripts` | 115 |
+| `documented-scripts` | 116 |
 | `scripts-undocumented` | 20 |
 | `source-or-analysis` | 53 |
 
@@ -80,6 +80,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | yes | [`qwen35_4b_crossfamily_laws`](../experiments/qwen35_4b_crossfamily_laws/README.md) | benchmark_generalization, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_crossfamily_laws/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_crosssubstrate_structure`](../experiments/qwen35_4b_crosssubstrate_structure/README.md) | structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_crosssubstrate_structure/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_decompose_compose_frontier`](../experiments/qwen35_4b_decompose_compose_frontier/README.md) | posttraining_and_adaptation, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_decompose_compose_frontier/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
+| yes | [`qwen35_4b_deep_advantage_mopd`](../experiments/qwen35_4b_deep_advantage_mopd/README.md) | agentic_breadth_installation, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_deep_advantage_mopd/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_deployable_information_ceiling_sweep`](../experiments/qwen35_4b_deployable_information_ceiling_sweep/README.md) | evidence_conditioned_selection, posttraining_and_adaptation, process_control_and_tool_use | `human-authored` | [report](../experiments/qwen35_4b_deployable_information_ceiling_sweep/reports/qwen35_4b_deployable_information_ceiling_sweep_report.md) | no | `documented-scripts` | no | large-artifact | add-experiment-log, add-smoke-command |
 | yes | [`qwen35_4b_depth3_dose_response`](../experiments/qwen35_4b_depth3_dose_response/README.md) | algorithmic_memory_and_retrieval, evidence_conditioned_selection, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_depth3_dose_response/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_depth_scaling_controls`](../experiments/qwen35_4b_depth_scaling_controls/README.md) | structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_depth_scaling_controls/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |

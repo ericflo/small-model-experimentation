@@ -65,6 +65,7 @@ Top-level README files are required for all experiments. Generated entries shoul
 | `qwen35_4b_crossfamily_laws` | [README](../experiments/qwen35_4b_crossfamily_laws/README.md) | [report](../experiments/qwen35_4b_crossfamily_laws/reports/report.md) |
 | `qwen35_4b_crosssubstrate_structure` | [README](../experiments/qwen35_4b_crosssubstrate_structure/README.md) | [report](../experiments/qwen35_4b_crosssubstrate_structure/reports/report.md) |
 | `qwen35_4b_decompose_compose_frontier` | [README](../experiments/qwen35_4b_decompose_compose_frontier/README.md) | [report](../experiments/qwen35_4b_decompose_compose_frontier/reports/report.md) |
+| `qwen35_4b_deep_advantage_mopd` | [README](../experiments/qwen35_4b_deep_advantage_mopd/README.md) | [report](../experiments/qwen35_4b_deep_advantage_mopd/reports/report.md) |
 | `qwen35_4b_deployable_information_ceiling_sweep` | [README](../experiments/qwen35_4b_deployable_information_ceiling_sweep/README.md) | [report](../experiments/qwen35_4b_deployable_information_ceiling_sweep/reports/qwen35_4b_deployable_information_ceiling_sweep_report.md) |
 | `qwen35_4b_depth3_dose_response` | [README](../experiments/qwen35_4b_depth3_dose_response/README.md) | [report](../experiments/qwen35_4b_depth3_dose_response/reports/report.md) |
 | `qwen35_4b_depth_scaling_controls` | [README](../experiments/qwen35_4b_depth_scaling_controls/README.md) | [report](../experiments/qwen35_4b_depth_scaling_controls/reports/report.md) |

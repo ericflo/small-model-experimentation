@@ -15,11 +15,12 @@
   soup-relative audit macro reversed from `+0.2009` to `-0.0253`; no MOPD,
   locality, or Menagerie event ran. Post-result diagnostics show conditional
   winner noise, not a missing `+0.10` threshold.
-- Candidate follow-up, new experiment only: use the already validated deep
-  route to test the MOPD update kernel from the joint soup on fresh states.
-  Preserve quick behavior through the frozen-soup anchor and require one
-  checkpoint to beat both sources, visible routing, and sample-more before
-  Menagerie escalation.
+- Active experiment: `qwen35_4b_deep_advantage_mopd` uses fresh states to
+  requalify the already validated deep route, then conditionally tests the MOPD
+  update kernel from the immutable joint soup. It preserves quick behavior
+  through the frozen-soup anchor and requires one checkpoint to beat both
+  sources, visible routing, matched controls, and sample-more before Menagerie
+  escalation.
 - A new two-teacher attempt needs cross-fitted direct advantage prediction and
   a third untouched route block. If quick again lacks independent support,
   retire it as a complementary teacher; do not tune an observed-margin cutoff.
