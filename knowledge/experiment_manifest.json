@@ -1608,7 +1608,8 @@
   },
   {
     "file_counts": {
-      ".json": 2,
+      ".json": 10,
+      ".jsonl": 6,
       ".md": 8,
       ".py": 56,
       ".yaml": 3
@@ -1623,13 +1624,14 @@
       "structured_execution_and_compilers"
     ],
     "source_track": "new",
-    "summary": "**Immutable design locked at `1ef1f5ad`; CPU/scientific smoke passes, and no task-model output exists for this experiment.** This is a new result-bearing successor to `qwen35_4b_same_prefix_advantage_routing`, not an extension of its terminal result.",
+    "summary": "**Immutable design locked at `1ef1f5ad`; pinned-model preflight and the repeated source/soup installation canary pass. Fresh route qualification is next.** This is a new result-bearing successor to `qwen35_4b_same_prefix_advantage_routing`, not an extension of its terminal result.",
     "tags": [
       "small-model",
       "table-transform"
     ],
     "title": "Qwen3.5-4B Deep-Advantage MOPD",
     "top_level_dirs": [
+      "analysis",
       "configs",
       "reports",
       "runs",
@@ -1637,8 +1639,8 @@
       "src",
       "tests"
     ],
-    "total_files": 69,
-    "total_size_bytes": 830300
+    "total_files": 83,
+    "total_size_bytes": 1071815
   },
   {
     "file_counts": {

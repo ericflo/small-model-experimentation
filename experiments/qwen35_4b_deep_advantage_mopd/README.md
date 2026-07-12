@@ -2,8 +2,8 @@
 
 ## Status
 
-**Immutable design locked at `1ef1f5ad`; CPU/scientific smoke passes, and no
-task-model output exists for this experiment.** This is a new result-bearing successor to
+**Immutable design locked at `1ef1f5ad`; pinned-model preflight and the repeated
+source/soup installation canary pass. Fresh route qualification is next.** This is a new result-bearing successor to
 `qwen35_4b_same_prefix_advantage_routing`, not an extension of its terminal
 result.
 

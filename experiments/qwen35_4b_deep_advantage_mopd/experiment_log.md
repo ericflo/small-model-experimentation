@@ -26,3 +26,14 @@
 - Committed the complete frozen design at `1ef1f5ad`, pushed it to shared
   `main`, and wrote `runs/preregistration_receipt.json` with byte hashes for all
   frozen files before any Qwen load.
+
+## 2026-07-12 — pinned-model and installation preflight
+
+- Passed all four pinned-runtime semantic probes and a finite Transformers
+  training forward pass; vLLM resolved the registered full/piecewise graph
+  geometry.
+- Revalidated exact quick, deep, and soup checkpoint hashes and merge receipts.
+  On the eight fixed canary prompts, every installed checkpoint differed from
+  base; quick/deep differed on 8/8, soup/quick on 8/8, and soup/deep on 7/8.
+- The installation gate authorizes the fresh two-block route qualification.
+  No route evidence or training output exists yet.

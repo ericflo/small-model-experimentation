@@ -5,7 +5,7 @@ source_track: "new"
 path: "experiments/qwen35_4b_deep_advantage_mopd"
 primary_readme: "experiments/qwen35_4b_deep_advantage_mopd/README.md"
 primary_report: "experiments/qwen35_4b_deep_advantage_mopd/reports/report.md"
-summary: "**Immutable design locked at `1ef1f5ad`; CPU/scientific smoke passes, and no task-model output exists for this experiment.** This is a new result-bearing successor to `qwen35_4b_same_prefix_advantage_routing`, not an extension of its terminal result."
+summary: "**Immutable design locked at `1ef1f5ad`; pinned-model preflight and the repeated source/soup installation canary pass. Fresh route qualification is next.** This is a new result-bearing successor to `qwen35_4b_same_prefix_advantage_routing`, not an extension of its terminal result."
 tags:
   - "small-model"
   - "table-transform"
@@ -14,6 +14,7 @@ research_programs:
   - "benchmark_generalization"
   - "structured_execution_and_compilers"
 top_level_dirs:
+  - "analysis"
   - "configs"
   - "reports"
   - "runs"
@@ -21,9 +22,10 @@ top_level_dirs:
   - "src"
   - "tests"
 file_counts:
-  json: 2
+  json: 10
+  jsonl: 6
   md: 8
   py: 56
   yaml: 3
-total_files: 69
-total_size_bytes: 830300
+total_files: 83
+total_size_bytes: 1071815

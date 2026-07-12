@@ -3,9 +3,10 @@
 ## Status
 
 The preregistered CPU/scientific smoke passes: all 50 experiment tests and all
-14 procedural-family oracle/random/degenerate selftests are green; exact source
-and soup hashes agree with their external receipts. No task-model output has
-been generated for this experiment.
+14 procedural-family oracle/random/degenerate selftests are green. Pinned-model
+preflight then passed four of four semantic probes, a finite Transformers
+training forward pass, and the exact vLLM graph-geometry checks. Exact source
+and soup hashes agree with their external receipts.
 
 ## Research Program Fit
 
@@ -26,8 +27,11 @@ best deep continuation off-policy.
 
 ## Results
 
-Only the non-scientific smoke result exists. Fresh route qualification is the
-first scientific stage and remains unrun.
+Preflight and installation checks pass. On the eight fixed canary prompts,
+quick, deep, and soup each changed all 8 outputs relative to base; quick and
+deep differed on 8/8, while soup differed from quick on 8/8 and deep on 7/8.
+The source/soup gate therefore authorizes fresh route qualification, which
+remains unrun. These are instrumentation results, not capability evidence.
 
 ## Oracle Versus Deployable Boundary
 
