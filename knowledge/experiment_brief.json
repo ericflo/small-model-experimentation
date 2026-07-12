@@ -767,7 +767,7 @@
    "verdict_tag": "Models master each fix but cannot blend skills",
    "concept_primer": "Each bug fix pairs two skills the model already knows, say sorting and counting. Trained on hundreds of such pairings, it aces every pair it practiced. But hand it a fresh combination of two familiar skills, and it can no longer fix the code.",
    "plain_question": "If a model learns to fix broken code by combining skills, can it handle a fresh pairing of two skills it already knows but never saw combined?",
-   "plain_answer": "No. Trained on worked solutions, the model fixed about 81% of bugs when two skills were paired the way it saw in training, but only 8 to 10% when the same familiar skills were paired in a new way. Adding skill labels or richer worked steps lifted familiar cases yet moved that wall not at all. It learns each pairing, not how to recombine skills.",
+   "plain_answer": "No. Trained on worked solutions, the model fixed about 81% of bugs when two skills were paired the way it saw in training, but only 8 to 10% when the same familiar skills were paired in a new way. Adding skill labels lifted some familiar cases yet moved that wall not at all. It learns each pairing, not how to recombine skills.",
    "why_it_matters": "If you fine-tune a small model to repair code or solve tasks, cover every skill combination you actually need in the training data. Do not count on it to bridge to unseen pairings of skills it already knows.",
    "verdict_tone": "negative",
    "key_numbers": [
@@ -779,7 +779,7 @@
     {
      "label": "Bugs fixed on brand-new skill pairings",
      "value": "8-10%",
-     "sub": "familiar skills combined in a way unseen of training"
+     "sub": "familiar skills combined in a way unseen in training"
     },
     {
      "label": "Fixing from prompting alone, no fine-tuning",
@@ -797,7 +797,7 @@
      "index": 0,
      "chart_plain_title": "Fixing familiar bugs versus brand-new skill combinations",
      "chart_read": "Each cluster is one training setup; three bars show the share of bugs fixed (taller is better) on familiar pairings, the same bugs reworded, and brand-new skill combinations.",
-     "chart_takeaway": "Brand-new-combination bars stay tiny, about 8 to 10% for every setup, while familiar bars reach 64 to 81%. Recombining known skills is a hard wall."
+     "chart_takeaway": "Brand-new-combination bars stay tiny, about 8 to 10% for every trained setup, while familiar bars reach 64 to 81%. Recombining known skills is a hard wall."
     },
     {
      "index": 1,
@@ -808,8 +808,8 @@
     {
      "index": 2,
      "chart_plain_title": "Which brand-new problem types ever get fixed",
-     "chart_read": "Each cluster is one brand-new problem type unseen of training; bars show the share fixed (taller is better) for three ways of training the model.",
-     "chart_takeaway": "Only one problem type reaches 33 to 50%; the rest sit flat at zero, so nearly every novel skill combination is never solved."
+     "chart_read": "Each cluster is one brand-new problem type unseen in training; bars show the share fixed (taller is better) for three ways of training the model.",
+     "chart_takeaway": "Only one problem type reaches 33 to 50%; two others barely register near 8%, and the rest sit at zero, so nearly every novel skill combination is never solved."
     },
     {
      "index": 3,
@@ -2263,7 +2263,7 @@
      "index": 2,
      "chart_plain_title": "How many tries it takes to ever hit the right program",
      "chart_read": "Horizontal axis is number of guesses drawn, from 1 to about 29; vertical axis is the chance at least one guess is correct. Four rising curves, one per puzzle depth on the register machine. Higher and steeper is better.",
-     "chart_takeaway": "Depth 1 climbs toward 90 percent; each deeper curve starts lower and flattens sooner, depth 4 barely reaching 10 percent — deeper puzzles are drawn right far less often."
+     "chart_takeaway": "Depth 1 climbs toward 90 percent; each deeper curve tops out lower and depth 4 flattens soonest, barely reaching 10 percent — deeper puzzles are drawn right far less often."
     }
    ]
   },
@@ -4930,7 +4930,7 @@
    "verdict_tag": "Simple copying nearly matched every fancier method",
    "concept_primer": "Picture \"Guess Who?\", but the hidden faces are secret math rules. The model never guesses the rule itself. It only picks which of eight test-inputs to try; a search engine runs that test and crosses off every rule that disagrees, for up to three rounds.",
    "plain_question": "Can a small model get better at solving puzzles by learning which diagnostic questions to ask, instead of trying to guess the answer outright?",
-   "plain_answer": "Yes, but with sharp limits. Teaching the model to copy a flawless test-picker lifted its success from about a third of puzzles to 44%, versus roughly 31% for picking blindly. Layering on preference-based and reward-based training gained almost nothing more. And where the available tests simply can't tell two rules apart, even perfect choices topped out near 9%.",
+   "plain_answer": "Yes, but with sharp limits. Teaching the model to copy a flawless test-picker lifted its success from about a third of puzzles to 43%, versus roughly 31% for picking blindly. Layering on preference-based and reward-based training gained almost nothing more. And where the available tests simply can't tell two rules apart, even perfect choices topped out near 9%.",
    "why_it_matters": "For small-model agents that pick tools or diagnostic steps, plainly imitating good decisions can capture nearly all the gain; heavier reward-based training may add little. But no training beats an information ceiling: fix which tests are available first.",
    "verdict_tone": "mixed",
    "key_numbers": [
@@ -4959,8 +4959,8 @@
     {
      "index": 0,
      "chart_plain_title": "Puzzles solved within three tests, by test-picker",
-     "chart_read": "Each bar is one test-picking method; height is the share of puzzles where it pinned down the hidden rule within three tests. Taller is better. The far-right bar is a flawless picker; two bars are scrambled-input controls.",
-     "chart_takeaway": "Trained pickers rise well above blind guessing and the untrained model, nearly reaching the flawless picker, while copying almost ties the fancier methods and scrambled controls collapse toward guessing."
+     "chart_read": "Each bar is one test-picking method; height is the share of puzzles where it pinned down the hidden rule within three tests. Taller is better. The far-right bar is a flawless picker; two bars are controls — one shuffles the training rewards, the other scrambles the puzzle clues.",
+     "chart_takeaway": "Trained pickers rise well above blind guessing and the untrained model, nearly reaching the flawless picker, while copying almost ties the fancier methods; shuffling the rewards drops scores partway back, and scrambling the clues collapses all the way to blind guessing."
     },
     {
      "index": 1,
@@ -7116,9 +7116,9 @@
      "sub": "but the small gain did not carry over to new problems"
     },
     {
-     "label": "Distinct attempts made per problem",
+     "label": "Candidate solutions offered per problem",
      "value": "3.7 → 3.4",
-     "sub": "fewer after retraining, so variety collapsed"
+     "sub": "fewer after retraining on its own wins, so the pool of attempts shrank"
     }
    ],
    "charts": [
@@ -7136,9 +7136,9 @@
     },
     {
      "index": 2,
-     "chart_plain_title": "Retraining leaves the model offering fewer distinct attempts",
-     "chart_read": "Each bar is one approach; height is the average number of distinct attempts the model produces per unseen problem, and more attempts give more chances to land a working one. Rightmost is the sample-more approach.",
-     "chart_takeaway": "Retrained bars are shorter than the frozen model's, meaning retraining narrows the variety of attempts and undercuts the chance of a passing one."
+     "chart_plain_title": "Retraining leaves the model offering fewer candidate attempts",
+     "chart_read": "Each bar is one approach; height is the average number of candidate solutions the model produces per unseen problem, and more candidates give more chances to land a working one. Rightmost is the sample-more approach.",
+     "chart_takeaway": "The two self-training bars sit below the frozen model's, so retraining on its own code shrinks the pool of attempts, while sampling more lifts it far higher."
     },
     {
      "index": 3,
@@ -8215,7 +8215,7 @@
     {
      "index": 5,
      "chart_plain_title": "Where rules existed, there were often many",
-     "chart_read": "Each bar is one task; height is how many valid fixed rules were found; only the ten tasks that had any rule at all are shown.",
+     "chart_read": "Each bar is one task; height is how many valid fixed rules were found; of the 11 tasks that had any rule at all, 10 are shown.",
      "chart_takeaway": "Counts ranged from about two dozen up to 400, one hitting the cap, but this covered just 11 of 40 tasks while the rest had none."
     },
     {
@@ -9692,9 +9692,9 @@
      "sub": "share of the reachable gain the proofreader recovered"
     },
     {
-     "label": "Hardest reworded tasks",
+     "label": "Tougher reworded tasks",
      "value": "23% → 31%",
-     "sub": "same proofreader on tougher paraphrased prompts"
+     "sub": "proofreader on hard reworded prompts; the very hardest reworded split barely moves, near 6%"
     }
    ],
    "charts": [
@@ -10790,12 +10790,12 @@
     },
     {
      "label": "Final-answer-only training",
-     "value": "about 1%",
+     "value": "about 2%",
      "sub": "chance level, one in 97; never found the interface"
     },
     {
      "label": "Two wordings of one task agree",
-     "value": "99% → 3%",
+     "value": "98% → 3%",
      "sub": "matching hidden program, twelve vs twenty-four steps"
     }
    ],
@@ -10834,7 +10834,7 @@
      "index": 5,
      "chart_plain_title": "Two phrasings stop agreeing at twenty-four steps",
      "chart_read": "The horizontal axis is chain length; the vertical axis, higher is better, shows two rates on paired prompts: how often both phrasings reach the same hidden program, and how often both are correct.",
-     "chart_takeaway": "Both rates hold near 98 to 99 percent through twelve steps, then crash to about 3 percent at twenty-four: identical tasks now compile to different hidden programs."
+     "chart_takeaway": "Same-program agreement holds near 98 to 99 percent through twelve steps, while the both-correct rate runs lower and bumpier at 88 to 96 percent; at twenty-four both collapse near chance, about 3 and 2 percent: identical tasks now compile to different hidden programs."
     }
    ]
   },
@@ -11882,7 +11882,7 @@
      "index": 4,
      "chart_plain_title": "Guess-and-check stays ahead of unaided answering every round",
      "chart_read": "Two lines across self-training rounds on fresh problems; higher is better. The lower line is the model answering unaided, the upper line is it allowed to guess-and-check toward the right answer.",
-     "chart_takeaway": "The guess-and-check line sits a steady 14-16 points above the unaided line throughout, meaning fixable mistakes remain in the model's first answers."
+     "chart_takeaway": "The guess-and-check line starts about 20 points above the unaided line at the seed round, then settles into a 14-16 point lead through the later rounds, meaning fixable mistakes remain in the model's first answers."
     },
     {
      "index": 5,
@@ -12196,7 +12196,7 @@
      "index": 0,
      "chart_plain_title": "Fixing brand-new problem types only takes off at the widest variety",
      "chart_read": "Horizontal axis is how many problem-type varieties were in training (3, 6, 12); vertical axis is the share of buggy tasks fixed, higher is better. One line tracks familiar problems, one the same problems in new formats, one brand-new problem types.",
-     "chart_takeaway": "The brand-new-type line sits at zero until 12 varieties, where it jumps to 29%, while familiar-problem fixes stay high throughout."
+     "chart_takeaway": "The brand-new-type line barely lifts off zero, going 0% then just 4%, until 12 varieties, where it jumps to 29%, while familiar-problem fixes stay high throughout."
     },
     {
      "index": 1,
