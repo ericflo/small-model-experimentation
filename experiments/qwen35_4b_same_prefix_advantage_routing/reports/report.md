@@ -2,9 +2,9 @@
 
 ## Status
 
-**Design locked and conditional implementation smoke passed; outcome-bearing
-execution not yet started.** The next legal stage is the pinned model preflight,
-followed by soup construction/canary and the split-branch route gate.
+**Design locked, conditional implementation smoke passed, and pinned model
+preflight passed; outcome-bearing execution not yet started.** The next legal
+stage is soup construction/canary followed by the split-branch route gate.
 
 ## Research Program Fit
 
@@ -24,10 +24,11 @@ controls, two confirmatory blocks, three seeds, visible routing, and best-of-8.
 
 ## Evidence
 
-No task-model evidence exists yet. Forty-eight unit/invariant tests, all 14
-procedural-family selftests, source hashes, frozen count geometry, and the full
-fail-closed stage graph pass. These are engineering evidence only and cannot
-support the hypothesis.
+No task-model evidence exists yet. The unit/invariant suite, all 14 procedural
+family selftests, source hashes, frozen count geometry, and full fail-closed
+stage graph pass. Pinned vLLM semantic generation and an independent finite
+Transformers/QLoRA-path forward pass also succeeded. These are engineering
+evidence only and cannot support the hypothesis.
 
 ## Oracle Versus Deployable Boundary
 

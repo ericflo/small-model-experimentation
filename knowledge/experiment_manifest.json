@@ -4049,9 +4049,10 @@
   },
   {
     "file_counts": {
-      ".json": 2,
+      ".json": 4,
+      ".jsonl": 1,
       ".md": 8,
-      ".py": 52,
+      ".py": 53,
       ".yaml": 3
     },
     "id": "qwen35_4b_same_prefix_advantage_routing",
@@ -4083,8 +4084,8 @@
       "src",
       "tests"
     ],
-    "total_files": 65,
-    "total_size_bytes": 813499
+    "total_files": 69,
+    "total_size_bytes": 832543
   },
   {
     "file_counts": {

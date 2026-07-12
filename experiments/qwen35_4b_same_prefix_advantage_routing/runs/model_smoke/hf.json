@@ -1,0 +1,81 @@
+{
+  "cuda_runtime": "12.9",
+  "fast_path": {
+    "causal_conv1d": true,
+    "flash_linear_attention": true
+  },
+  "forward_logits_finite": true,
+  "forward_logits_shape": [
+    1,
+    1,
+    248320
+  ],
+  "gpu": "NVIDIA L40",
+  "model": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "peak_cuda_bytes": 3178848768,
+  "prompt_token_counts": [
+    20,
+    26,
+    25,
+    25
+  ],
+  "semantic_checks": [
+    {
+      "expected": "VLLM_OK",
+      "id": "smoke-0000",
+      "observed": "VLLM_OK",
+      "passed": true
+    },
+    {
+      "expected": "42",
+      "id": "smoke-0001",
+      "observed": "42",
+      "passed": true
+    },
+    {
+      "expected": "fedcba",
+      "id": "smoke-0002",
+      "observed": "fedcba",
+      "passed": true
+    },
+    {
+      "expected": "[1, 3, 5, 7, 9]",
+      "id": "smoke-0003",
+      "observed": "[1, 3, 5, 7, 9]",
+      "passed": true
+    }
+  ],
+  "status": "pass",
+  "training_lock": {
+    "path": "/workspace/small-model-experimentation/requirements-training.lock.txt",
+    "sha256": "05546fe977583116d6169ea0dfa7b27e1184dd4a2b61d556dfb3f889d5b2b7b1"
+  },
+  "training_prompt_thinking_channel": true,
+  "versions": {
+    "bitsandbytes": "0.49.2",
+    "peft": "0.19.1",
+    "python": "3.12.3",
+    "torch": "2.11.0+cu129",
+    "transformers": "5.13.0"
+  },
+  "vllm_metadata": "/workspace/small-model-experimentation/experiments/qwen35_4b_same_prefix_advantage_routing/runs/model_smoke/base.jsonl.meta.json",
+  "vllm_metadata_sha256": "ce5a3dfdba6dbe4740792c895ec06b03f74adefcd867a031ea1d39209cefcfa3",
+  "vllm_output": "/workspace/small-model-experimentation/experiments/qwen35_4b_same_prefix_advantage_routing/runs/model_smoke/base.jsonl",
+  "vllm_output_sha256": "c99433adf4a392f079e6914e3593b0c101d521f798ded5af7f223ef45f8d7b69",
+  "vllm_resolved_cudagraph": {
+    "cudagraph_capture_sizes": [
+      1,
+      2,
+      4,
+      8,
+      16
+    ],
+    "decode_mode": "FULL",
+    "has_full_cudagraphs": true,
+    "max_cudagraph_capture_size": 16,
+    "mixed_mode": "PIECEWISE",
+    "mode": "FULL_AND_PIECEWISE",
+    "source": "llm_engine.vllm_config.compilation_config"
+  }
+}

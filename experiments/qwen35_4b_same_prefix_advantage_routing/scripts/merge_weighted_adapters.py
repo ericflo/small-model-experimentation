@@ -9,8 +9,6 @@ import json
 from pathlib import Path
 
 import torch
-from safetensors import safe_open
-from transformers import AutoModelForImageTextToText, AutoTokenizer
 
 
 MODEL_ID = "Qwen/Qwen3.5-4B"
@@ -31,7 +29,21 @@ def _config(adapter: Path) -> tuple[dict, float]:
     return payload, float(payload["lora_alpha"]) / float(payload["r"])
 
 
+def _target_module_set(config: dict) -> frozenset[str]:
+    values = config.get("target_modules")
+    if not isinstance(values, list) or not values or not all(
+        isinstance(value, str) and value for value in values
+    ):
+        raise ValueError("adapter target_modules must be a non-empty string list")
+    if len(values) != len(set(values)):
+        raise ValueError("adapter target_modules contains duplicates")
+    return frozenset(values)
+
+
 def main() -> int:
+    from safetensors import safe_open
+    from transformers import AutoModelForImageTextToText, AutoTokenizer
+
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--quick-adapter", type=Path, required=True)
     parser.add_argument("--deep-adapter", type=Path, required=True)
@@ -42,7 +54,9 @@ def main() -> int:
         raise SystemExit("deep weight must be in [0, 1]")
     quick_config, quick_scale = _config(args.quick_adapter)
     deep_config, deep_scale = _config(args.deep_adapter)
-    if quick_config.get("target_modules") != deep_config.get("target_modules"):
+    # PEFT serializes target_modules from a set, so list order is not semantic.
+    # The exact tensor-key equality check below remains the stronger layout gate.
+    if _target_module_set(quick_config) != _target_module_set(deep_config):
         raise SystemExit("adapter target modules differ")
     print(f"[weighted-merge] loading {MODEL_ID}", flush=True)
     model = AutoModelForImageTextToText.from_pretrained(
