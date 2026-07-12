@@ -18,3 +18,13 @@ Created as a new experiment scaffold.
   first-operation certificate.
 - Completed the 24-threat adversarial review before implementation or any model
   call. Current state is design/CPU smoke only.
+
+## 2026-07-12 — immutable design boundary
+
+- Rebased onto current `origin/main`, then froze design commit
+  `b87b67f28586687954c89ba653d22cafe93d6073`.
+- Frozen README SHA-256:
+  `221992f5ff29f74db16d29996d46a87e3162c49b41e03516812a3959aec692b1`.
+- Frozen preregistration SHA-256:
+  `62b975cae27bfdf842bdccc06ce395735469c3fbff3f596a5987aee803a56040`.
+- No model call has occurred.

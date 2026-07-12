@@ -107,3 +107,8 @@ gates:
     bootstrap_lower_bound_min: 0.0
     max_parse_rate_drop: 0.05
     bootstrap_resamples: 10000
+
+design_boundary:
+  commit: b87b67f28586687954c89ba653d22cafe93d6073
+  readme_sha256: 221992f5ff29f74db16d29996d46a87e3162c49b41e03516812a3959aec692b1
+  preregistration_sha256: 62b975cae27bfdf842bdccc06ce395735469c3fbff3f596a5987aee803a56040

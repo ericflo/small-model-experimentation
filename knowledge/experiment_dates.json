@@ -309,6 +309,14 @@
     "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
    ]
   },
+  "qwen35_4b_context_local_jacobian_clamp": {
+   "start": "2026-07-12",
+   "end": "2026-07-12",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_counterexample_directed_dsl": {
    "start": "2026-06-22",
    "end": "2026-06-22",
@@ -613,6 +621,14 @@
    ],
    "caveat": "run_logs/*_console.log contain only relative tqdm timers, no dates"
   },
+  "qwen35_4b_jacobian_transport_control_replication": {
+   "start": "2026-07-12",
+   "end": "2026-07-12",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_jacobian_value_transport": {
    "start": "2026-07-12",
    "end": "2026-07-12",
@@ -721,6 +737,14 @@
     "logs/experiment_log.md:3 single dated heading '## 2026-06-22' covering the whole workflow (Dataset Build -> Report)"
    ],
    "caveat": "configs/experiment.json has no date key (unlike dpo/foofah/grpo siblings), so single-source"
+  },
+  "qwen35_4b_native_thought_jacobian_value_transport": {
+   "start": "2026-07-12",
+   "end": "2026-07-12",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
   },
   "qwen35_4b_neurosymbolic_repl_substrate": {
    "start": "2026-06-30",
