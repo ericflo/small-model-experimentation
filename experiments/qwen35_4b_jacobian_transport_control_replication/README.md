@@ -1,0 +1,73 @@
+# Qwen3.5-4B Jacobian Transport Control Replication
+
+This experiment independently replicates the perfect-but-invalid result from
+`qwen35_4b_context_local_jacobian_clamp`. It freezes that experiment's lens and
+band, generates fresh mappings, and repairs the only failed measurement: random
+controls must satisfy both perturbation norm and J-span orthogonality **after**
+bf16 application.
+
+## Research Program
+
+- Primary: `interpretability_and_diagnostics`
+- Conditional secondary: `structured_execution_and_compilers` and
+  `test_time_reasoning_budget` only after a valid replication.
+- Closest near-duplicate: `qwen35_4b_context_local_jacobian_clamp`, terminal
+  `INVALID_CONTROL` despite 48/48 J transport because one of 96 random rows had
+  norm error 1.155e-5 >1e-5.
+
+## Question
+
+Does the frozen early context-local J clamp again change a separately computed
+lookup consequence on fresh mappings when every random control is valid after
+quantization?
+
+## Fixed mechanism
+
+- Only `Qwen/Qwen3.5-4B`, revision
+  `851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a`.
+- Frozen prior 24-concept lens, SHA-256
+  `e373b6e93956fdfc5cb446e9bee8249655707c8258a7868f0653d11f1ffd0213`.
+- Frozen band `[4,5,6,7,8]`, alpha one, selected-key token position.
+- Fresh 24-item numeric-control calibration and 48-item untouched confirmation.
+- Two independent random controls per item and prompt kind.
+- Every random layer delta must have post-bf16 relative norm error <=1e-5 and
+  post-bf16 J-span projection fraction <=0.01. Requested vectors are projected
+  orthogonal before quantization.
+- Same-subspace specificity: wrong-donor J must produce the wrong donor's own
+  digit, not the registered target.
+- No digit direction or consequence gradient can construct any intervention.
+
+The frozen rules are in [`reports/preregistration.md`](reports/preregistration.md)
+and the pre-run adversarial review is in
+[`reports/design_review.md`](reports/design_review.md).
+
+## Run
+
+```bash
+.venv/bin/python -m pytest experiments/qwen35_4b_jacobian_transport_control_replication/tests -q
+.venv/bin/python experiments/qwen35_4b_jacobian_transport_control_replication/scripts/run.py --stage smoke
+.venv/bin/python experiments/qwen35_4b_jacobian_transport_control_replication/scripts/run.py --stage model-smoke
+.venv/bin/python experiments/qwen35_4b_jacobian_transport_control_replication/scripts/run.py --stage control-calibration
+.venv/bin/python experiments/qwen35_4b_jacobian_transport_control_replication/scripts/run.py --stage confirmation
+```
+
+## Results
+
+Pre-run. Design, data roles, thresholds, and review are being pushed before any
+model call. CPU smoke is not scientific evidence.
+
+## Scope
+
+Even a valid replication is oracle causal-mechanism evidence. The target concept
+and donor coordinates are supplied. It would license, but not itself constitute,
+a new experiment on native thinking and a learned non-oracle controller.
+
+## Knowledgebase Update
+
+- Remain unclaimed while the repository claim re-grade is open.
+- Update program evidence only after the frozen terminal decision.
+
+## Artifacts
+
+All small data, the frozen lens copy, control receipts, rows, metrics, and reports
+will be committed. No training or adapter is used.

@@ -1,0 +1,25 @@
+{
+  "band": [
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "lens_sha256": "e373b6e93956fdfc5cb446e9bee8249655707c8258a7868f0653d11f1ffd0213",
+  "norm_tolerance": 1e-05,
+  "parent_overlap_count": 0,
+  "passed": true,
+  "projection_tolerance": 0.01,
+  "random_arms": [
+    "random_a",
+    "random_b"
+  ],
+  "schema_version": 1,
+  "scientific_result": false,
+  "split_sizes": {
+    "confirmation": 48,
+    "control_calibration": 24
+  },
+  "stage": "cpu_smoke"
+}

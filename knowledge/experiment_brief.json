@@ -2,6 +2,39 @@
  "note": "Plain-language practitioner briefs shown above the fold on each experiment page (verdict + the-one-idea/question/finding/why-it-matters + KPI numbers + per-chart how-to-read/takeaway). Authored per experiment from its own README/report and verified chart specs under a strict no-jargon ban-list; all jargon-precise detail stays below the fold. Regenerate with scripts/enrichment/generate_briefs.workflow.js (see docs/site_maintenance.md).",
  "generated_on": "2026-07-05",
  "experiments": {
+  "qwen35_4b_jacobian_transport_control_replication": {
+   "verdict_tag": "Fresh exact-control replication is frozen; result pending",
+   "concept_primer": "A prior internal edit changed every fresh lookup answer, but one extremely strict comparison row was a hair outside its allowed edit size. This study starts over on new tables and repairs that measurement before checking answers.",
+   "plain_question": "Does the internal reasoning edit still work when every random comparison is equally large and stays outside the edited word space after numerical rounding?",
+   "plain_answer": "We do not know yet. The earlier internal directions and depths are frozen, the new lookup tables do not overlap prior data, and a separate numeric-only split must validate every comparison before answers are opened.",
+   "why_it_matters": "A fresh replication can distinguish a real reusable internal state from a spectacular but measurement-sensitive one-off result.",
+   "verdict_tone": "pending",
+   "key_numbers": [
+    {
+     "label": "Numeric-only calibration tables",
+     "value": "24",
+     "sub": "answers are discarded while comparison edits are validated"
+    },
+    {
+     "label": "Fresh untouched confirmation tables",
+     "value": "48",
+     "sub": "none overlap either parent experiment"
+    },
+    {
+     "label": "Independent random comparisons per item",
+     "value": "2",
+     "sub": "both must pass after low-precision rounding"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Numeric feasibility is separated from answer replication",
+     "chart_read": "The first bar counts tables used only to validate edit geometry; the second counts fresh tables whose answers are kept untouched until that gate passes.",
+     "chart_takeaway": "The comparison method must work everywhere before the study is allowed to inspect whether the reasoning edit succeeds again."
+    }
+   ]
+  },
   "qwen35_4b_context_local_jacobian_clamp": {
    "verdict_tag": "Perfect causal signal; one exact control row invalidates the claim",
    "concept_primer": "The first study could make the model say a replacement word, but the model did not reason from it. This follow-up edits the earlier place where that word is represented and checks whether a later lookup answer changes.",

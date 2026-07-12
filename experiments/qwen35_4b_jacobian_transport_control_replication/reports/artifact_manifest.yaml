@@ -1,0 +1,21 @@
+schema_version: 1
+experiment_id: "qwen35_4b_jacobian_transport_control_replication"
+external_artifacts: []
+omitted_artifacts: []
+reproducibility:
+  smoke_command: >-
+    .venv/bin/python -m pytest
+    experiments/qwen35_4b_jacobian_transport_control_replication/tests -q &&
+    .venv/bin/python
+    experiments/qwen35_4b_jacobian_transport_control_replication/scripts/run.py
+    --stage smoke
+  full_command: >-
+    .venv/bin/python
+    experiments/qwen35_4b_jacobian_transport_control_replication/scripts/run.py
+    --stage control-calibration && .venv/bin/python
+    experiments/qwen35_4b_jacobian_transport_control_replication/scripts/run.py
+    --stage confirmation
+  required_external_artifacts: []
+notes: >-
+  No training or adapter. A byte-identical 3.08 MB copy of the parent frozen
+  lens is committed under assets/. All controls and rows will be committed.

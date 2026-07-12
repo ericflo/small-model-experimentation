@@ -1,0 +1,57 @@
+schema_version: 1
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+  dtype: bfloat16
+  attention: sdpa
+  device: cuda:0
+
+seeds:
+  calibration: 2026071221
+  confirmation: 2026071222
+  random_a: 2026071223
+  random_b: 2026071224
+  bootstrap: 2026071225
+
+data:
+  control_calibration_items: 24
+  confirmation_items: 48
+
+lens:
+  path: assets/context_lens.pt
+  sha256: e373b6e93956fdfc5cb446e9bee8249655707c8258a7868f0653d11f1ffd0213
+  pseudoinverse_rtol: 1.0e-5
+  concepts: 24
+
+intervention:
+  band: [4, 5, 6, 7, 8]
+  alpha: 1.0
+  patch_batch_size: 1
+  max_sequence_tokens: 256
+  random_arms: [random_a, random_b]
+  candidate_draws: 32
+  correction_iterations: 512
+  correction_damping: 0.5
+  binary_search_steps: 64
+  norm_relative_tolerance: 1.0e-5
+  realized_span_projection_max: 1.0e-2
+  causal_activation_atol: 1.0e-3
+
+gates:
+  clean_accuracy_min: 0.80
+  clean_parse_rate_min: 0.95
+  donor_direct_target_rate_min: 0.60
+  donor_consequence_target_rate_min: 0.50
+  j_direct_shift_min: 0.20
+  j_consequence_shift_min: 0.15
+  j_minus_random_min: 0.10
+  j_minus_wrong_target_min: 0.10
+  wrong_own_digit_shift_min: 0.10
+  max_parse_rate_drop: 0.05
+  bootstrap_resamples: 10000
+  bootstrap_lower_bound_min: 0.0
+
+design_boundary:
+  commit: TO_BE_RECORDED_AFTER_DESIGN_COMMIT
+  preregistration_sha256: TO_BE_RECORDED_AFTER_DESIGN_COMMIT
+  readme_sha256: TO_BE_RECORDED_AFTER_DESIGN_COMMIT

@@ -2585,6 +2585,42 @@
   },
   {
     "file_counts": {
+      ".json": 2,
+      ".jsonl": 2,
+      ".md": 7,
+      ".pt": 1,
+      ".py": 8,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_jacobian_transport_control_replication",
+    "path": "experiments/qwen35_4b_jacobian_transport_control_replication",
+    "primary_readme": "experiments/qwen35_4b_jacobian_transport_control_replication/README.md",
+    "primary_report": "experiments/qwen35_4b_jacobian_transport_control_replication/reports/report.md",
+    "research_programs": [
+      "interpretability_and_diagnostics"
+    ],
+    "source_track": "new",
+    "summary": "This experiment independently replicates the perfect-but-invalid result from `qwen35_4b_context_local_jacobian_clamp`. It freezes that experiment's lens and band, generates fresh mappings, and repairs the only failed measurement: random controls must satisfy both perturbation norm and J-span orthogonality **after** bf16 application.",
+    "tags": [
+      "repair",
+      "small-model"
+    ],
+    "title": "Qwen3.5-4B Jacobian Transport Control Replication",
+    "top_level_dirs": [
+      "assets",
+      "configs",
+      "data",
+      "reports",
+      "runs",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 23,
+    "total_size_bytes": 3233989
+  },
+  {
+    "file_counts": {
       ".json": 7,
       ".jsonl": 8,
       ".md": 8,
