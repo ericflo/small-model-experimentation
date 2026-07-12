@@ -1,0 +1,104 @@
+{
+  "firewall": {
+    "benchmark_content_used": false,
+    "fresh_procedural_only": true,
+    "visible_first_type_identifiable_by_exhaustive_enumeration": true
+  },
+  "frozen_lens_concepts": 24,
+  "frozen_lens_sha256": "e373b6e93956fdfc5cb446e9bee8249655707c8258a7868f0653d11f1ffd0213",
+  "identifiable_first_operations": [
+    "reverse",
+    "sort_asc",
+    "sort_desc",
+    "abs_all",
+    "square",
+    "running_sum",
+    "adjacent_diff",
+    "add_k",
+    "mul_k",
+    "take_k",
+    "rotate_k"
+  ],
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "operation_aliases": {
+    "abs_all": "tiger",
+    "add_k": "silver",
+    "adjacent_diff": "ocean",
+    "mul_k": "gold",
+    "negate": "lemon",
+    "reverse": "cat",
+    "rotate_k": "square",
+    "running_sum": "river",
+    "sort_asc": "dog",
+    "sort_desc": "horse",
+    "square": "apple",
+    "take_k": "circle"
+  },
+  "parent_fingerprint_count": 336,
+  "schema_version": 1,
+  "scientific_result": false,
+  "splits": {
+    "causal_confirmation": {
+      "first_op_counts": {
+        "abs_all": 3,
+        "add_k": 3,
+        "adjacent_diff": 2,
+        "mul_k": 3,
+        "reverse": 3,
+        "rotate_k": 3,
+        "running_sum": 3,
+        "sort_asc": 3,
+        "sort_desc": 3,
+        "square": 3,
+        "take_k": 3
+      },
+      "items": 32,
+      "parent_overlap": 0,
+      "path": "data/procedural/causal_confirmation.jsonl",
+      "sha256": "912486b7a8b8dea4568d19c1b70a350f6244126b1c3705317024fb5b8e1d623d",
+      "unique_fingerprints": 32
+    },
+    "seam_calibration": {
+      "first_op_counts": {
+        "abs_all": 2,
+        "add_k": 2,
+        "adjacent_diff": 2,
+        "mul_k": 1,
+        "reverse": 1,
+        "rotate_k": 1,
+        "running_sum": 2,
+        "sort_asc": 1,
+        "sort_desc": 1,
+        "square": 2,
+        "take_k": 1
+      },
+      "items": 16,
+      "parent_overlap": 0,
+      "path": "data/procedural/seam_calibration.jsonl",
+      "sha256": "95226ab93e4b71ced48a6c5c8dc797ff12ae399a3887e24fec07d7fc1d0c62af",
+      "unique_fingerprints": 16
+    },
+    "value_fit": {
+      "first_op_counts": {
+        "abs_all": 3,
+        "add_k": 3,
+        "adjacent_diff": 3,
+        "mul_k": 3,
+        "reverse": 3,
+        "rotate_k": 3,
+        "running_sum": 3,
+        "sort_asc": 3,
+        "sort_desc": 2,
+        "square": 3,
+        "take_k": 3
+      },
+      "items": 32,
+      "parent_overlap": 0,
+      "path": "data/procedural/value_fit.jsonl",
+      "sha256": "fdf2b967cde208d08fc716800b0ef106048e2bf4d5a03143718311da71a8fa75",
+      "unique_fingerprints": 32
+    }
+  },
+  "total_unique_fingerprints": 80
+}

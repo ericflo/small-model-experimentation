@@ -565,6 +565,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 - `qwen35_4b_meta_induction` (new): [README](../experiments/qwen35_4b_meta_induction/README.md)
 - `qwen35_4b_metacognitive_boundary` (new): [README](../experiments/qwen35_4b_metacognitive_boundary/README.md)
 - `qwen35_4b_model_in_loop_counterexamples` (track-z): [README](../experiments/qwen35_4b_model_in_loop_counterexamples/README.md)
+- `qwen35_4b_native_thought_jacobian_value_transport` (new): [README](../experiments/qwen35_4b_native_thought_jacobian_value_transport/README.md)
 - `qwen35_4b_neurosymbolic_repl_substrate` (new): [README](../experiments/qwen35_4b_neurosymbolic_repl_substrate/README.md)
 - `qwen35_4b_offline_hard_negative_coverage_dpo` (track-z): [README](../experiments/qwen35_4b_offline_hard_negative_coverage_dpo/README.md)
 - `qwen35_4b_operator_inventory_scaling_stress` (track-z): [README](../experiments/qwen35_4b_operator_inventory_scaling_stress/README.md)

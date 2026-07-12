@@ -1,0 +1,17 @@
+{
+  "alias_count": 12,
+  "first_target_types": 11,
+  "items": 80,
+  "lens_sha256": "e373b6e93956fdfc5cb446e9bee8249655707c8258a7868f0653d11f1ffd0213",
+  "parent_overlap": 0,
+  "passed": true,
+  "schema_version": 1,
+  "scientific_result": false,
+  "split_sizes": {
+    "causal_confirmation": 32,
+    "seam_calibration": 16,
+    "value_fit": 32
+  },
+  "stage": "cpu_smoke",
+  "unique_fingerprints": 80
+}

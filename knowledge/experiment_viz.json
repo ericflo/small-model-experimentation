@@ -2,6 +2,27 @@
  "note": "Native chart specs for the research site, extracted from each experiment's own result files (runs/reports/analysis JSON+CSV and README/report tables) by per-experiment agent passes and kept only when every plotted value was located verbatim in the cited source by machine verification. Rendered by scripts/build_site.py (chart_svg/chart_figure); raw matplotlib figures remain available further down each experiment page.",
  "extracted_on": "2026-07-10",
  "experiments": {
+  "qwen35_4b_native_thought_jacobian_value_transport": {
+   "charts": [
+    {
+     "title": "Frozen fresh task roles before model inference",
+     "kind": "bar",
+     "categories": ["natural seam calibration", "J-space value fit", "causal confirmation"],
+     "series": [
+      {
+       "label": "fresh identifiable tasks",
+       "values": [16, 32, 32]
+      }
+     ],
+     "x_label": "frozen split role",
+     "y_label": "tasks",
+     "y_format": "number",
+     "note": "CPU receipt only. All 80 tasks have unique fingerprints, zero overlap with the direct Jacobian parent, and one visible-data-identifiable first-operation type.",
+     "source": "experiments/qwen35_4b_native_thought_jacobian_value_transport/runs/smoke/data_receipt.json",
+     "headline": true
+    }
+   ]
+  },
   "qwen35_4b_jacobian_transport_control_replication": {
    "charts": [
     {

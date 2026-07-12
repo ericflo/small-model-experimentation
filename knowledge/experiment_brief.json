@@ -2,6 +2,39 @@
  "note": "Plain-language practitioner briefs shown above the fold on each experiment page (verdict + the-one-idea/question/finding/why-it-matters + KPI numbers + per-chart how-to-read/takeaway). Authored per experiment from its own README/report and verified chart specs under a strict no-jargon ban-list; all jargon-precise detail stays below the fold. Regenerate with scripts/enrichment/generate_briefs.workflow.js (see docs/site_maintenance.md).",
  "generated_on": "2026-07-05",
  "experiments": {
+  "qwen35_4b_native_thought_jacobian_value_transport": {
+   "verdict_tag": "Natural-thought certainty edit is frozen; model result pending",
+   "concept_primer": "A prior experiment proved that an early internal word state can be replaced and then used in a later lookup. This study asks whether one internal 'this path is promising' quantity can be found and changed while the model is naturally thinking.",
+   "plain_question": "Can we recognize a promising thought prefix from the model's internal state and make a weak prefix finish correctly by changing only that promise signal?",
+   "plain_answer": "We do not know yet. The study has frozen fresh tasks, natural checkpoints, separate continuation labels, and exact comparison edits before any model call.",
+   "why_it_matters": "A causal promise signal could become the bridge from understanding internal reasoning to a controller that improves this 4B model. The current study is deliberately oracle-only; deployment still requires a later test without hidden labels.",
+   "verdict_tone": "pending",
+   "key_numbers": [
+    {
+     "label": "Fresh procedural tasks",
+     "value": "80",
+     "sub": "16 interface checks, 32 value-fit, 32 causal confirmation"
+    },
+    {
+     "label": "Natural checkpoints per trace",
+     "value": "2",
+     "sub": "one-third and two-thirds through the model's own thinking"
+    },
+    {
+     "label": "Independent continuations per prefix",
+     "value": "3",
+     "sub": "prefix value comes from new futures, not the original answer"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Interface, value learning, and causal confirmation stay separate",
+     "chart_read": "The bars count fresh tasks assigned to each role before the model runs. Confirmation tasks are never used to fit the promise signal.",
+     "chart_takeaway": "The natural-thinking interface must work first, then the internal value signal must generalize by task, before any causal answer result is opened."
+    }
+   ]
+  },
   "qwen35_4b_jacobian_transport_control_replication": {
    "verdict_tag": "Fresh exact-control replication confirms causal internal state transport",
    "concept_primer": "A prior internal edit changed every fresh lookup answer, but one extremely strict comparison row invalidated that result. This study started over on new tables, made every rounded comparison exact, and then opened the answers once.",
