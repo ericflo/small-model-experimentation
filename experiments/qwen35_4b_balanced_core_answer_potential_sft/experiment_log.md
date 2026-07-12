@@ -31,3 +31,16 @@ or evaluation generation has run under this experiment.
   `cb3d64e3`. All three frozen-file SHA-256 values remained identical.
 - The configured ancestry pointer was re-anchored to the rebased commit without changing any design text,
   threshold, split, arm, or code. No experiment GPU call had run.
+
+## 2026-07-12 — Balanced Harvest And Scorer Instrument Stop
+
+- Imported all 331 parent shards at the frozen index digest, then completed exactly 29 Runeward-L3 tasks.
+  Final pool: 360 tasks, 23,040 traces, 108,759,239 sampled thought tokens, 22,681 natural closes, four exact
+  loops, finite priors on every trace, and no task requiring a top-up.
+- The registered task-diverse 32-row joint parity gate then failed closed at 0.692447 > 0.15. No training
+  score, R1 train rollout, selection, adapter update, or evaluation had run.
+- Inspection of the instrument receipt showed the known long-prefix batch-sensitivity boundary: answer gain
+  max 0.147865, joint-likelihood mean-token max 0.054477, empty-answer max 0.156281, and parent-normalized
+  joint-gain max 0.692447. No threshold or row was changed.
+- Added the pre-outcome amendment to retire vLLM bulk likelihoods and use the single-context Transformers bf16
+  reference uniformly. The failed receipt remains evidence; all generation and later evaluation stay on vLLM.

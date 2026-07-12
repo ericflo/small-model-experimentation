@@ -2,8 +2,8 @@
 
 ## Summary
 
-Experiment in progress. The prospective balanced-core protocol is frozen; no trained capability result has
-been observed.
+Experiment in progress. The balanced raw pool is complete and the failed candidate scoring instrument has
+been replaced prospectively by its single-context reference; no trained capability result has been observed.
 
 ## Plain-Language Question
 
@@ -18,8 +18,10 @@ and family-held tasks before any optional expansion.
 
 ## Results
 
-Pending. The inherited operational checkpoint is 331/360 tasks, 21,184 traces, and 97,883,041 sampled
-thought tokens.
+Operational results: 360/360 tasks, 23,040 traces, 108,759,239 sampled thought tokens, 22,681 natural closes,
+four loops, and no top-ups. The task-diverse joint HF/vLLM gate failed at 0.692447 > 0.15 before any bulk
+score. The frozen threshold was preserved; vLLM likelihood scoring was retired in favor of the
+single-context Transformers reference. Capability results remain pending.
 
 ## Controls
 

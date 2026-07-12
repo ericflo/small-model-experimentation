@@ -52,8 +52,9 @@ sampling:
   logprobs: 0
 
 scoring:
-  backend: vllm_targeted_bf16
-  parity_reference_backend: transformers_bf16_sdpa
+  backend: transformers_bf16_sdpa_single_context
+  retired_candidate_backend: vllm_targeted_bf16
+  parity_reference_backend: transformers_bf16_sdpa_single_context
   parity_rows: 32
   parity_source_stage: calibration_independent
   max_abs_mean_token_delta: 0.15

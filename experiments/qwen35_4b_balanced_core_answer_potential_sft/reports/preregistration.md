@@ -148,3 +148,25 @@ test, and no compression claim is allowed from shortest winning alone.
 
 Only pre-outcome operational amendments may be appended below. Candidate scores, rollout labels, SFT
 outcomes, or evaluation outputs must not be observed before such an amendment is committed.
+
+### 2026-07-12 — Retire Batch-Sensitive vLLM Train Scoring
+
+The registered 32-row cross-backend gate ran after the 360-task raw harvest and before any training-pool
+score, R1 rollout, selection, SFT, or evaluation. It failed closed: maximum registered discrepancy was
+0.692447 nats/token-equivalent versus the unchanged 0.15 maximum. The failed receipt is preserved at
+`runs/scorer_parity_joint_32.json`.
+
+Diagnosis was limited to the instrument receipt. Answer gain remained within 0.147865 and joint likelihood
+within 0.054477 mean nats/target-token, but task-diverse long-prefix batching exposed Qwen3.5's known
+batch-sensitive logits. Joint-gain discrepancy reached 0.692447 after boundary-token differences accumulated
+and the parent metric normalized by a one-token canonical answer; an empty-answer condition also reached
+0.156281. The threshold is not relaxed, the rows are not replaced, and the failed candidate backend is not
+used for any bulk score.
+
+Operational amendment: all training-pool canonical answer and joint scores use the existing Transformers
+bf16 SDPA single-context reference scorer, one trace per forward, uniformly for every task and arm. This is
+the reference side of the failed gate and the scorer already used for the parent's complete calibration.
+Because there is no backend comparison after this change, no cross-backend parity claim is made. The
+canonical-only format decision, score definitions, eligibility, selectors, arms, thresholds, and staged
+evaluation remain unchanged. Expected cost is about 2.5 GPU-hours from the parent's measured reference
+throughput, within the balanced funnel.

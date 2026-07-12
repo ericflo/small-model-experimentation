@@ -498,9 +498,9 @@ def score_pool(
     config: dict[str, Any], *, source_stage: str, output_stage: str, split: str
 ) -> dict[str, Any]:
     design_boundary_receipt(config)
-    parity_path = RUNS_DIR / "scorer_parity_joint_32.json"
-    if not parity_path.is_file() or not bool(read_json(parity_path).get("passed")):
-        raise RuntimeError("bulk vLLM scoring requires the passed joint 32-row parity gate")
+    backend = str(config["scoring"]["backend"])
+    if backend != "transformers_bf16_sdpa_single_context":
+        raise RuntimeError(f"unsupported amended bulk scoring backend: {backend}")
     items = {
         str(item["id"]): item
         for item in (load_core_train(config) if split == "train" else load_split(split))
@@ -512,8 +512,17 @@ def score_pool(
     output_index = _stage_index(
         output_index_path, stage=output_stage, split=split
     )
+    if output_index.get("backend", backend) != backend:
+        raise RuntimeError("refusing to mix scoring backends in one stage index")
+    output_index["backend"] = backend
+    output_index["vllm_candidate_instrument"] = {
+        "receipt": str(RUNS_DIR / "scorer_parity_joint_32.json"),
+        "passed": False,
+        "retired_before_bulk_scoring": True,
+    }
     started = time.perf_counter()
-    with AnswerPotentialModel(engine_config(config)) as model:
+    scorer = HFAnswerPotentialScorer()
+    try:
         for task_number, task_id in enumerate(sorted(source_index["shards"]), 1):
             previous = output_index["shards"].get(task_id)
             if previous and valid_receipt(previous["artifact"]):
@@ -521,8 +530,8 @@ def score_pool(
             rows = read_jsonl_gz(
                 Path(source_index["shards"][task_id]["artifact"]["path"])
             )
-            _, prompt_ids = model.thinking_prompt(items[task_id])
-            answer_ids = model.runner.tokenizer.encode(
+            prompt_ids = scorer.prompt_ids(items[task_id])
+            answer_ids = scorer.tokenizer.encode(
                 str(items[task_id]["canonical_answer"]), add_special_tokens=False
             )
             max_train_length = int(config["selector"]["max_train_length"])
@@ -534,7 +543,7 @@ def score_pool(
                 and math.isfinite(float(row["prior_logprob_mean"]))
                 and len(prompt_ids)
                 + len(row["token_ids"])
-                + len(model.answer_boundary_ids)
+                + len(scorer.boundary_ids)
                 + len(answer_ids)
                 <= max_train_length
             ]
@@ -543,11 +552,8 @@ def score_pool(
                 f"{task_id}: {len(eligible)} eligible",
                 flush=True,
             )
-            scored, metadata = model.score_canonical_joint(
-                [items[task_id]],
-                eligible,
-                chunk_size=int(config["scoring"]["chunk_size"]),
-            )
+            task_started = time.perf_counter()
+            scored = [scorer.score_trace(items[task_id], row) for row in eligible]
             artifact = write_jsonl_gz(
                 output_root / "scores" / f"{task_id}.jsonl.gz", scored
             )
@@ -558,13 +564,14 @@ def score_pool(
                 ]["sha256"],
                 "eligible": len(eligible),
                 "excluded": len(rows) - len(eligible),
-                "scoring_elapsed_seconds": metadata["elapsed_seconds"],
+                "scoring_elapsed_seconds": time.perf_counter() - task_started,
             }
-            output_index["logical_counts"] = metadata["logical_counts"]
-            output_index["runtime"] = metadata["runtime"]
-            output_index["engine"] = metadata["engine"]
-            output_index["readout"] = metadata["operation"]
+            output_index["readout"] = (
+                "transformers_bf16_single_context_full_prefix_target_logits"
+            )
             write_json(output_index_path, output_index)
+    finally:
+        scorer.close()
     summary = {
         "schema_version": 1,
         "stage": output_stage,

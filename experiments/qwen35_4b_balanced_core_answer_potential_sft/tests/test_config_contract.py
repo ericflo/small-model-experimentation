@@ -44,6 +44,10 @@ class ConfigContractTests(unittest.TestCase):
         self.assertEqual(config["splits"]["core_hard_tasks"], 60)
         self.assertEqual(config["splits"]["held_stage_a_tasks"], 60)
         self.assertTrue(config["scoring"]["canonical_only"])
+        self.assertEqual(
+            config["scoring"]["backend"],
+            "transformers_bf16_sdpa_single_context",
+        )
 
     def test_frozen_files_materialize_balanced_scopes(self) -> None:
         config = yaml.safe_load((EXP / "configs" / "default.yaml").read_text())

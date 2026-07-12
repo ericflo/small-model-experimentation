@@ -105,7 +105,7 @@ answer_gain(z) = log p(y* | x, z, b) - log p(y* | x, empty, b)
 joint_gain(z)  = log p(b, y* | x, z) - log p(b, y* | x, empty)
 ```
 
-Training-pool scores use the experiment-local vLLM exact targeted-token readout. It teacher-forces the
+The initial candidate instrument used the experiment-local vLLM exact targeted-token readout. It teacher-forces the
 observed prefix, reads raw target-token log probabilities, never constrains the sampled token, and bypasses
 only the unused vocabulary-rank reduction. Before bulk scoring, 32 fixed inherited calibration traces must
 match the Transformers bf16 full-prefix scorer within 0.15 mean nats/token for answer likelihood, joint
@@ -114,6 +114,11 @@ likelihood, both empty baselines, and both gains. Any parity failure blocks scor
 Only the canonical boundary is scored at train scale. The parent's calibration already measured canonical
 versus one-newline rank stability (task-macro Kendall tau-b 0.841), so recomputing the second format would
 spend substantial prefix work without changing the frozen selector.
+
+The broadened 32-row gate failed before bulk scoring (maximum 0.692447 versus 0.15), exposing known
+batch-sensitive long-prefix logits. The threshold was not relaxed. Per the dated preregistration amendment,
+vLLM is retired for train likelihoods and every canonical answer/joint score is now computed by the
+single-context Transformers bf16 reference uniformly. Generative comparisons remain vLLM-only.
 
 ## Selection And SFT Arms
 
@@ -192,8 +197,10 @@ deployment-probe -> evaluate-stage-a -> analyze-stage-a`, followed only conditio
 
 ## Results
 
-No capability result yet. The inherited operational bank is complete through 331/360 tasks; the GPU is
-idle at the design boundary.
+No capability result yet. The balanced bank is complete: 360 tasks, 23,040 traces, 108,759,239 sampled
+thought tokens, 22,681 natural closes, four loops, and zero deficient tasks. The candidate vLLM scoring
+instrument failed its strict cross-backend gate before bulk scoring; the reference-scoring amendment above
+is frozen before any training score or outcome.
 
 ## Artifacts
 

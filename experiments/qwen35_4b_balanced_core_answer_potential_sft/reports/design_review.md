@@ -70,3 +70,11 @@ the frozen design.
 Authorized only after the design commit is pushed, the implementation test suite passes, inherited receipts
 validate, the 32-row joint parity gate passes, and the exact long-row training stress receipt remains valid on
 the current environment.
+
+## Post-Freeze Instrument Audit — 2026-07-12
+
+The candidate vLLM scorer did not earn authorization: its task-diverse 32-row maximum was 0.692447 against
+the frozen 0.15 ceiling. No bulk score existed. The scientifically conservative repair is not a softer gate
+or friendlier row set; it is uniform use of the single-context Transformers reference that defined the other
+side of the comparison. This removes batching from the measurement and preserves every scientific selector,
+control, and decision threshold. Bulk scoring is authorized only under that amended backend.

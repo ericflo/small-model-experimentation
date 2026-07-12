@@ -1389,35 +1389,42 @@
    ]
   },
   "qwen35_4b_balanced_core_answer_potential_sft": {
-   "verdict_tag": "Which self-generated reasoning is worth teaching back",
-   "concept_primer": "A small model solves each problem many different ways in its head. For every attempt, a scorer asks: does this line of thinking make the model surer of the correct final answer? The plan banks the most answer-boosting thoughts and retrains the model on them.",
-   "plain_question": "If a model reasons through a problem many different ways, can we spot which reasoning to train on by which one makes the right answer likelier?",
-   "plain_answer": "Not run yet — the data is collected but no model has been trained. The test compares six ways to pick which self-generated reasoning to teach back, then measures fresh-task accuracy. It matters because early tuning checks hinted that simply picking the shortest complete reasoning ranked answers better than the clever answer-likelihood score, so the smart method has real competition to beat.",
-   "why_it_matters": "When building training data from a small model's own reasoning, don't assume a sophisticated answer-probability score beats the boring shortest-complete trace. Test against that cheap control before spending compute scoring every attempt.",
+   "verdict_tag": "Pool complete; reference scoring underway",
+   "concept_primer": "A small model solves each problem many different ways in its head. For every attempt, a scorer asks whether that line of thinking makes the correct final answer likelier. The test teaches back the best-scoring thoughts and compares them with simpler choices.",
+   "plain_question": "If a model reasons through a problem many different ways, can we identify which reasoning to train on by which one makes the right answer likelier?",
+   "plain_answer": "No capability answer yet. The fixed three-family pool is complete at 360 tasks. A strict cross-backend scoring check failed before any training score was produced, so the fast batched scorer was rejected and the slower single-context reference is now used uniformly.",
+   "why_it_matters": "When building training data from a model's own reasoning, a sophisticated score must beat cheap controls such as shortest complete reasoning. This design preserves 108.8 million tokens of work while refusing both an open-ended harvest and a scorer that missed its accuracy gate.",
    "verdict_tone": "neutral",
    "key_numbers": [
     {
-     "label": "Reasoning tasks banked",
-     "value": "331 of 360",
-     "sub": "collections of self-generated thoughts finished before the design was frozen"
+     "label": "Balanced tasks safely banked",
+     "value": "360 / 360",
+     "sub": "the fixed harvest hard stop is complete"
+    },
+    {
+     "label": "Reasoning chains preserved",
+     "value": "23,040",
+     "sub": "108.8 million sampled thinking tokens behind checksums"
     },
     {
      "label": "Selection strategies compared",
      "value": "6 ways",
-     "sub": "methods for choosing which reasoning to teach, including a shortest-reasoning control"
+     "sub": "including successful, random, shortest, and task-shuffled controls"
     },
     {
-     "label": "Bar to declare a winner",
-     "value": "3 points",
-     "sub": "minimum fresh-task accuracy gain the smart selector must beat its best control by"
-    },
-    {
-     "label": "Reasoning generated so far",
-     "value": "97.9 million",
-     "sub": "thinking tokens the model produced across all attempts"
+     "label": "Rejected fast-scorer discrepancy",
+     "value": "0.692 vs 0.15",
+     "sub": "the frozen maximum was preserved; no bulk score used that backend"
     }
    ],
-   "charts": []
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Preserved reasoning chains versus the balanced hard stop",
+     "chart_read": "The first bar is the 331-task inherited checkpoint; the second is the exact N=64 total after all 360 balanced tasks. The gap is the only additional harvest this fork allowed.",
+     "chart_takeaway": "The focused run reused nearly all prior work and stopped exactly at its balanced target instead of reopening the nine-family schedule."
+    }
+   ]
   },
   "qwen35_4b_balanced_discriminative_bridge": {
    "verdict_tag": "Hand-picking hard examples backfired",

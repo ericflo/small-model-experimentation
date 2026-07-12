@@ -1,0 +1,11 @@
+{
+  "experiment_id": "qwen35_4b_long_horizon_answer_potential_sft",
+  "passed": true,
+  "rows": 21184,
+  "sampled_tokens": 97883041,
+  "schema_version": 1,
+  "source_index": "/workspace/large_artifacts/qwen35_4b_long_horizon_answer_potential_sft/pools/train_independent/index.json",
+  "source_index_sha256": "da09176ddf05918712913b4c66ca893f47ed141986f8ed37ef289a63dc37fb63",
+  "target_index": "/workspace/large_artifacts/qwen35_4b_balanced_core_answer_potential_sft/pools/train_independent/index.json",
+  "tasks": 331
+}

@@ -1,0 +1,13 @@
+{
+  "elapsed_seconds_this_invocation": 10510.789083499461,
+  "external_index": "/workspace/large_artifacts/qwen35_4b_balanced_core_answer_potential_sft/pools/train_independent/index.json",
+  "loops": 4,
+  "natural_close": 22681,
+  "prior_available": 23040,
+  "rows": 23040,
+  "sampled_tokens": 108759239,
+  "schema_version": 1,
+  "split": "train",
+  "stage": "train_independent",
+  "tasks": 360
+}
