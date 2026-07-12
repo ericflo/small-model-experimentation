@@ -11,6 +11,7 @@ EXP = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(EXP / "scripts"))
 
 from train_mopd_round import _training_units  # noqa: E402
+from score_routed_teachers import _flatten_candidates  # noqa: E402
 
 
 def sample(index: int, stratum: str) -> dict:
@@ -22,9 +23,23 @@ def sample(index: int, stratum: str) -> dict:
 
 
 class MopdRoundTests(unittest.TestCase):
+    def test_multiple_samples_become_distinct_rollouts(self):
+        rows = [{
+            "id": "prompt-1", "meta": {"stratum": "deep"},
+            "outputs": [
+                {"sample_index": 0, "token_ids": [1]},
+                {"sample_index": 1, "token_ids": [2]},
+            ],
+        }]
+        candidates = _flatten_candidates(rows)
+        self.assertEqual(
+            [row["id"] for row in candidates["deep"]],
+            ["prompt-1::sample_0", "prompt-1::sample_1"],
+        )
+
     def test_units_honor_retention_fraction_without_reusing_target_chunk(self):
         samples = [sample(index, "quick") for index in range(96)] + [
-            sample(index, "deep") for index in range(96)
+            sample(index, "deep") for index in range(192)
         ]
         units = _training_units(samples, quick_fraction=0.25, micro_steps=160, seed=42)
         self.assertEqual(len(units), 160)
@@ -34,7 +49,7 @@ class MopdRoundTests(unittest.TestCase):
         self.assertEqual(
             sum(unit["sample"]["meta"]["stratum"] == "deep" for unit in units), 120
         )
-        identities = {(unit["sample"]["id"], unit["chunk"]) for unit in units}
+        identities = {unit["sample"]["id"] for unit in units}
         self.assertEqual(len(identities), len(units))
 
 

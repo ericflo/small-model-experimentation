@@ -7,6 +7,7 @@ import argparse
 import gc
 import hashlib
 import json
+import random
 import sys
 import time
 from pathlib import Path
@@ -79,6 +80,34 @@ def _score_subset(model_path: Path, rows: list[dict], top_k: int, max_length: in
     return results
 
 
+def _flatten_candidates(rows: list[dict]) -> dict[str, list[dict]]:
+    candidates: dict[str, list[dict]] = {"quick": [], "deep": []}
+    for row in rows:
+        stratum = str(row.get("meta", {}).get("stratum"))
+        if stratum not in candidates:
+            raise ValueError(f"invalid rollout stratum: {stratum!r}")
+        for fallback_index, output in enumerate(row.get("outputs") or []):
+            if not output.get("token_ids") or len(output["token_ids"]) <= len(
+                output.get("injected_token_ids") or []
+            ):
+                continue
+            sample_index = int(output.get("sample_index", fallback_index))
+            copied = dict(row)
+            copied["id"] = f"{row['id']}::sample_{sample_index}"
+            copied["outputs"] = [output]
+            copied["meta"] = {
+                **dict(row.get("meta") or {}),
+                "source_prompt_id": str(row["id"]),
+                "sample_index": sample_index,
+            }
+            candidates[stratum].append(copied)
+    for stratum, values in candidates.items():
+        ids = [row["id"] for row in values]
+        if len(ids) != len(set(ids)):
+            raise ValueError(f"duplicate flattened rollout ids in {stratum}")
+    return candidates
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path)
@@ -86,18 +115,39 @@ def main() -> int:
     parser.add_argument("--quick-teacher", type=Path, required=True)
     parser.add_argument("--deep-teacher", type=Path, required=True)
     parser.add_argument("--routing", choices=("correct", "wrong"), required=True)
+    parser.add_argument("--optimizer-updates", type=int)
+    parser.add_argument("--selection-seed", type=int, required=True)
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
     config, config_path = load_config(args.config)
     rows = read_jsonl(args.rollouts)
     if not rows:
         raise SystemExit("empty student rollout file")
-    by_stratum = {
-        name: [row for row in rows if row.get("meta", {}).get("stratum") == name]
-        for name in ("quick", "deep")
-    }
-    if any(not values for values in by_stratum.values()):
+    candidates = _flatten_candidates(rows)
+    if any(not values for values in candidates.values()):
         raise SystemExit("rollout file must contain both quick and deep strata")
+    updates = int(
+        args.optimizer_updates
+        if args.optimizer_updates is not None
+        else config["mopd"]["updates_per_round"]
+    )
+    if updates < 1:
+        raise SystemExit("optimizer updates must be positive")
+    micro_steps = updates * int(config["mopd"]["grad_accum"])
+    required = {
+        "quick": round(micro_steps * float(config["mopd"]["retention_fraction"])),
+    }
+    required["deep"] = micro_steps - required["quick"]
+    by_stratum = {}
+    for index, stratum in enumerate(("quick", "deep")):
+        values = sorted(candidates[stratum], key=lambda row: row["id"])
+        random.Random(args.selection_seed + index).shuffle(values)
+        if len(values) < required[stratum]:
+            raise SystemExit(
+                f"only {len(values)} distinct {stratum} rollouts for "
+                f"{required[stratum]} consume-once units"
+            )
+        by_stratum[stratum] = values[:required[stratum]]
     paths = {
         "quick": args.quick_teacher.resolve(),
         "deep": args.deep_teacher.resolve(),
@@ -132,6 +182,11 @@ def main() -> int:
             for stratum, path in paths.items()
         },
         "sample_count": len(samples),
+        "candidate_counts": {
+            stratum: len(values) for stratum, values in candidates.items()
+        },
+        "selection_seed": args.selection_seed,
+        "optimizer_updates": updates,
         "quick_count": sum(row["meta"]["stratum"] == "quick" for row in samples),
         "deep_count": sum(row["meta"]["stratum"] == "deep" for row in samples),
         "active_positions": sum(int(row["policy_mask"].sum()) for row in samples),

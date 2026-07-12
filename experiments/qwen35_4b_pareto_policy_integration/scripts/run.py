@@ -386,7 +386,12 @@ def _teacher_audit(config: dict, config_path: Path) -> None:
         "--input", str(input_path), "--thinking", "budget",
         "--thinking-budget", str(remaining_budget),
         "--answer-max-tokens", str(config["evaluation"]["answer_max_tokens"]),
-        "--greedy", "--allow-custom-prompts", "--include-prompt-token-ids",
+        "--n", str(config["teacher_audit"]["continuations_per_branch"]),
+        "--temperature", str(config["evaluation"]["sample_temperature"]),
+        "--top-p", str(config["evaluation"]["sample_top_p"]),
+        "--top-k", str(config["teacher_audit"]["branch_top_k"]),
+        "--seed", str(int(config["seeds"]["qualification_blocks"][0]) + 777),
+        "--allow-custom-prompts", "--include-prompt-token-ids",
         "--max-model-len", str(config["engine"]["max_model_len"]),
         "--gpu-memory-utilization", str(config["engine"]["gpu_memory_utilization"]),
         "--max-num-seqs", str(config["engine"]["max_num_seqs"]),
@@ -434,7 +439,7 @@ def _generation_engine_args(config: dict) -> list[str]:
 def _mopd_round(
     *, config: dict, config_path: Path, paths: dict[str, Path], arm: str,
     seed: int, round_index: int, current: Path, routing: str,
-    rollout_source: str = "student",
+    rollout_source: str = "student", updates_override: int | None = None,
 ) -> Path:
     prompt_path = EXP / "data" / "mopd_prompts" / f"{arm}_s{seed}_r{round_index}.jsonl"
     if not prompt_path.exists():
@@ -449,14 +454,25 @@ def _mopd_round(
     rollout_path = round_root / "student_rollouts.jsonl"
     rollout_meta = rollout_path.with_name(rollout_path.name + ".meta.json")
     routed_receipt = rollout_path.with_name(rollout_path.name + ".routed_receipt.json")
+    optimizer_updates = int(
+        updates_override
+        if updates_override is not None
+        else config["mopd"]["updates_per_round"]
+    )
     if rollout_source == "student" and rollout_path.exists() and rollout_meta.exists():
         meta = json.loads(rollout_meta.read_text())
-        if meta.get("model") != str(current.resolve()):
+        if (
+            meta.get("model") != str(current.resolve())
+            or int(meta.get("sampling", {}).get("n", -1)) != 2
+        ):
             raise SystemExit(f"stale rollout policy at {rollout_path}")
         print(f"[resume] MOPD {arm} round {round_index} rollouts", flush=True)
     elif rollout_source == "teacher_routed" and rollout_path.exists() and routed_receipt.exists():
         receipt = json.loads(routed_receipt.read_text())
-        if receipt.get("prompt_sha256") != sha256_file(prompt_path):
+        if (
+            receipt.get("prompt_sha256") != sha256_file(prompt_path)
+            or int(receipt.get("samples_per_prompt", -1)) != 2
+        ):
             raise SystemExit(f"stale routed rollout prompts at {rollout_path}")
         print(f"[resume] MOPD {arm} round {round_index} routed rollouts", flush=True)
     elif rollout_source == "student":
@@ -467,7 +483,7 @@ def _mopd_round(
                 "--model-override", str(current), "--thinking", "budget",
                 "--thinking-budget", str(config["mopd"]["rollout_thinking_budget"]),
                 "--answer-max-tokens", str(config["mopd"]["rollout_answer_max_tokens"]),
-                "--n", "1", "--temperature", str(config["mopd"]["rollout_temperature"]),
+                "--n", "2", "--temperature", str(config["mopd"]["rollout_temperature"]),
                 "--top-p", str(config["mopd"]["rollout_top_p"]),
                 "--top-k", str(config["mopd"]["rollout_top_k"]),
                 "--seed", str(config["seeds"]["rollout_rounds"][round_index]),
@@ -490,7 +506,7 @@ def _mopd_round(
                     "--model-override", str(model), "--thinking", "budget",
                     "--thinking-budget", str(config["mopd"]["rollout_thinking_budget"]),
                     "--answer-max-tokens", str(config["mopd"]["rollout_answer_max_tokens"]),
-                    "--n", "1", "--temperature", str(config["mopd"]["rollout_temperature"]),
+                    "--n", "2", "--temperature", str(config["mopd"]["rollout_temperature"]),
                     "--top-p", str(config["mopd"]["rollout_top_p"]),
                     "--top-k", str(config["mopd"]["rollout_top_k"]),
                     "--seed", str(config["seeds"]["rollout_rounds"][round_index]),
@@ -509,6 +525,7 @@ def _mopd_round(
                 "quick_teacher": str(paths["quick"].resolve()),
                 "deep_teacher": str(paths["deep"].resolve()),
                 "rows": len(partial_outputs),
+                "samples_per_prompt": 2,
                 "component_runner_metadata": partial_meta,
             },
         )
@@ -518,7 +535,12 @@ def _mopd_round(
     cache_receipt = cache.with_suffix(cache.suffix + ".receipt.json")
     if cache.exists() and cache_receipt.exists():
         receipt = json.loads(cache_receipt.read_text())
-        if receipt.get("rollouts_sha256") != sha256_file(rollout_path) or receipt.get("routing") != routing:
+        if (
+            receipt.get("rollouts_sha256") != sha256_file(rollout_path)
+            or receipt.get("routing") != routing
+            or int(receipt.get("selection_seed", -1)) != seed + round_index
+            or int(receipt.get("optimizer_updates", -1)) != optimizer_updates
+        ):
             raise SystemExit(f"stale teacher cache: {cache}")
         print(f"[resume] MOPD {arm} round {round_index} teacher cache", flush=True)
     else:
@@ -528,23 +550,34 @@ def _mopd_round(
                 "--config", str(config_path), "--rollouts", str(rollout_path),
                 "--quick-teacher", str(paths["quick"]), "--deep-teacher", str(paths["deep"]),
                 "--routing", routing, "--out", str(cache),
+                "--optimizer-updates", str(optimizer_updates),
+                "--selection-seed", str(seed + round_index),
             ],
             training=True,
         )
     adapter = paths["root"] / "adapters" / arm / f"seed_{seed}" / f"round_{round_index}"
     merged = paths["root"] / "merged" / arm / f"seed_{seed}" / f"round_{round_index}"
     if _checkpoint_complete(adapter, merged):
+        training_receipt = json.loads((adapter / "training_receipt.json").read_text())
+        if (
+            int(training_receipt.get("optimizer_steps", -1)) != optimizer_updates
+            or training_receipt.get("routing") != routing
+        ):
+            raise SystemExit(f"stale MOPD checkpoint: {adapter}")
         print(f"[resume] MOPD {arm} round {round_index} checkpoint", flush=True)
         return merged
     if adapter.exists() or merged.exists():
         raise SystemExit(f"partial MOPD round checkpoint: {adapter} / {merged}")
-    return_code = _run(
-        [
+    train_command = [
             str(PY), str(EXP / "scripts" / "train_mopd_round.py"),
             "--config", str(config_path), "--base-model", str(current),
             "--teacher-cache", str(cache), "--out", str(adapter),
             "--round", str(round_index), "--seed", str(seed + round_index),
-        ],
+    ]
+    if updates_override is not None:
+        train_command.extend(("--updates", str(updates_override)))
+    return_code = _run(
+        train_command,
         training=True,
         allowed=(0, 3),
     )
@@ -564,6 +597,43 @@ def _mopd_round(
     return merged
 
 
+def _locality(config: dict, config_path: Path) -> None:
+    _require_gate(EXP / "analysis" / "teacher_audit.json")
+    paths = _paths(config)
+    seed = int(config["seeds"]["integration_training"][0])
+    merged = _mopd_round(
+        config=config, config_path=config_path, paths=paths,
+        arm="locality", seed=seed, round_index=0, current=paths["quick"],
+        routing="correct", updates_override=5,
+    )
+    cache = paths["root"] / "teacher_cache" / "locality" / f"seed_{seed}" / "round_0.pt"
+    adapter = paths["root"] / "adapters" / "locality" / f"seed_{seed}" / "round_0"
+    analysis_path = EXP / "analysis" / "locality_pilot.json"
+    if analysis_path.exists():
+        payload = json.loads(analysis_path.read_text())
+        if (
+            payload.get("after_model") == str(merged.resolve())
+            and payload.get("teacher_cache_sha256") == sha256_file(cache)
+            and payload.get("training_receipt_sha256")
+            == sha256_file(adapter / "training_receipt.json")
+        ):
+            print("[resume] locality analysis already complete", flush=True)
+            _require_gate(analysis_path)
+            return
+        raise SystemExit(f"stale locality analysis: {analysis_path}")
+    _run(
+        [
+            str(PY), str(EXP / "scripts" / "analyze_locality.py"),
+            "--config", str(config_path), "--before-model", str(paths["quick"]),
+            "--after-model", str(merged), "--teacher-cache", str(cache),
+            "--training-receipt", str(adapter / "training_receipt.json"),
+        ],
+        training=True,
+        allowed=(0, 4),
+    )
+    _require_gate(analysis_path)
+
+
 def _run_mopd_arm(
     config: dict, config_path: Path, *, arm: str, seed: int, routing: str,
     rollout_source: str = "student",
@@ -580,7 +650,7 @@ def _run_mopd_arm(
 
 
 def _integrate(config: dict, config_path: Path, seed: int | None) -> None:
-    _require_gate(EXP / "analysis" / "teacher_audit.json")
+    _require_gate(EXP / "analysis" / "locality_pilot.json")
     selected = int(seed if seed is not None else config["seeds"]["integration_training"][0])
     if selected not in [int(value) for value in config["seeds"]["integration_training"]]:
         raise SystemExit(f"integration seed {selected} was not preregistered")
@@ -591,7 +661,7 @@ def _integrate(config: dict, config_path: Path, seed: int | None) -> None:
 
 
 def _controls(config: dict, config_path: Path) -> None:
-    _require_gate(EXP / "analysis" / "teacher_audit.json")
+    _require_gate(EXP / "analysis" / "locality_pilot.json")
     paths = _paths(config)
     _run_mopd_arm(
         config, config_path, arm="wrong_route",
@@ -656,7 +726,7 @@ def main() -> int:
     parser.add_argument("--smoke", action="store_true")
     parser.add_argument(
         "--stage",
-        choices=("smoke", "model-smoke", "specialists", "calibrate", "qualify", "teacher-audit", "integrate", "controls", "confirm"),
+        choices=("smoke", "model-smoke", "specialists", "calibrate", "qualify", "teacher-audit", "locality", "integrate", "controls", "confirm"),
     )
     parser.add_argument("--seed", type=int)
     args = parser.parse_args()
@@ -682,6 +752,9 @@ def main() -> int:
         return 0
     if stage == "teacher-audit":
         _teacher_audit(config, config_path)
+        return 0
+    if stage == "locality":
+        _locality(config, config_path)
         return 0
     if stage == "integrate":
         _integrate(config, config_path, args.seed)

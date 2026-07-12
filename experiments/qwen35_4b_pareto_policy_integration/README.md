@@ -79,8 +79,10 @@ Reached model stages will be resumable:
 ```bash
 python3 experiments/qwen35_4b_pareto_policy_integration/scripts/run.py --stage model-smoke
 python3 experiments/qwen35_4b_pareto_policy_integration/scripts/run.py --stage specialists
+python3 experiments/qwen35_4b_pareto_policy_integration/scripts/run.py --stage calibrate
 python3 experiments/qwen35_4b_pareto_policy_integration/scripts/run.py --stage qualify
 python3 experiments/qwen35_4b_pareto_policy_integration/scripts/run.py --stage teacher-audit
+python3 experiments/qwen35_4b_pareto_policy_integration/scripts/run.py --stage locality
 python3 experiments/qwen35_4b_pareto_policy_integration/scripts/run.py --stage integrate --seed 42
 python3 experiments/qwen35_4b_pareto_policy_integration/scripts/run.py --stage controls
 python3 experiments/qwen35_4b_pareto_policy_integration/scripts/run.py --stage confirm

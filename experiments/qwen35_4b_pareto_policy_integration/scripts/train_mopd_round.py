@@ -38,11 +38,10 @@ def _training_units(samples: list[dict], quick_fraction: float, micro_steps: int
         active = torch.nonzero(sample["policy_mask"], as_tuple=False).flatten().tolist()
         if not active:
             continue
-        if stratum == "quick":
-            chunks = [active[-256:]]
-        else:
-            midpoint = max(1, len(active) // 2)
-            chunks = [active[:midpoint][-256:], active[midpoint:][-256:]]
+        # Each cached sample is a distinct student trajectory. Consume one
+        # target span from it exactly once; never manufacture extra units by
+        # splitting or replaying a rollout.
+        chunks = [active[-256:]]
         for chunk_index, positions in enumerate(chunks):
             if positions:
                 pools[stratum].append({
@@ -70,6 +69,7 @@ def main() -> int:
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--round", type=int, required=True)
     parser.add_argument("--seed", type=int, required=True)
+    parser.add_argument("--updates", type=int)
     parser.add_argument("--smoke", action="store_true")
     args = parser.parse_args()
     config, config_path = load_config(args.config)
@@ -82,11 +82,19 @@ def main() -> int:
     payload = torch.load(args.teacher_cache, map_location="cpu", weights_only=False)
     samples = payload["samples"]
     cfg = config["mopd"]
-    updates = 1 if args.smoke else int(cfg["updates_per_round"])
+    updates = 1 if args.smoke else int(
+        args.updates if args.updates is not None else cfg["updates_per_round"]
+    )
+    if updates < 1 or updates > int(cfg["updates_per_round"]):
+        raise SystemExit(
+            f"updates must be in [1, {int(cfg['updates_per_round'])}], got {updates}"
+        )
     grad_accum = 1 if args.smoke else int(cfg["grad_accum"])
     units = _training_units(
         samples, float(cfg["retention_fraction"]), updates * grad_accum, args.seed
     )
+    if len({unit["sample"]["id"] for unit in units}) != len(units):
+        raise RuntimeError("consume-once violation: a rollout was selected more than once")
 
     tokenizer = AutoTokenizer.from_pretrained(
         args.base_model, local_files_only=True, trust_remote_code=True, use_fast=True
@@ -179,6 +187,9 @@ def main() -> int:
         "quick_units": sum(unit["sample"]["meta"]["stratum"] == "quick" for unit in units),
         "deep_units": sum(unit["sample"]["meta"]["stratum"] == "deep" for unit in units),
         "unique_rollouts": len({unit["sample"]["id"] for unit in units}),
+        "consume_once_verified": (
+            len({unit["sample"]["id"] for unit in units}) == len(units)
+        ),
         "mean_corrected_topk_loss": mean_loss,
         "round_loss_gate": {
             "passed": gate_passed,

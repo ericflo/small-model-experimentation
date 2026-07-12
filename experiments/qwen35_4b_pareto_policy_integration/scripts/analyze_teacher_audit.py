@@ -42,23 +42,47 @@ def main() -> int:
     )
     paired = {"quick": [], "deep": []}
     scores = []
+    expected_continuations = int(config["teacher_audit"]["continuations_per_branch"])
     for key in sorted(items):
         item = items[key]
         family = load_family(item["family"])
         prefix = [int(value) for value in item["prefix_ids"]]
-        quick_ids = prefix + [int(value) for value in quick[key]["outputs"][0]["token_ids"]]
-        deep_ids = prefix + [int(value) for value in deep[key]["outputs"][0]["token_ids"]]
+        if (
+            len(quick[key]["outputs"]) != expected_continuations
+            or len(deep[key]["outputs"]) != expected_continuations
+        ):
+            raise SystemExit(f"teacher-audit continuation count mismatch for {key}")
         scoring_item = {
             "id": item["source_id"], "family": item["family"],
             "level": item["level"], "prompt": item["prompt"], "gold": item["gold"],
             "answer_domain": item.get("answer_domain"),
         }
-        quick_score = float(
-            family.score_atom(scoring_item, tokenizer.decode(quick_ids, skip_special_tokens=False))
-        )
-        deep_score = float(
-            family.score_atom(scoring_item, tokenizer.decode(deep_ids, skip_special_tokens=False))
-        )
+        quick_scores = [
+            float(
+                family.score_atom(
+                    scoring_item,
+                    tokenizer.decode(
+                        prefix + [int(value) for value in output["token_ids"]],
+                        skip_special_tokens=False,
+                    ),
+                )
+            )
+            for output in quick[key]["outputs"]
+        ]
+        deep_scores = [
+            float(
+                family.score_atom(
+                    scoring_item,
+                    tokenizer.decode(
+                        prefix + [int(value) for value in output["token_ids"]],
+                        skip_special_tokens=False,
+                    ),
+                )
+            )
+            for output in deep[key]["outputs"]
+        ]
+        quick_score = sum(quick_scores) / len(quick_scores)
+        deep_score = sum(deep_scores) / len(deep_scores)
         correct = quick_score if item["stratum"] == "quick" else deep_score
         wrong = deep_score if item["stratum"] == "quick" else quick_score
         row = {
@@ -68,7 +92,9 @@ def main() -> int:
         scores.append({
             "id": key, "family": item["family"], "level": item["level"],
             "stratum": item["stratum"], "quick_score": quick_score,
-            "deep_score": deep_score, "correct_minus_wrong": correct - wrong,
+            "deep_score": deep_score, "quick_continuation_scores": quick_scores,
+            "deep_continuation_scores": deep_scores,
+            "correct_minus_wrong": correct - wrong,
         })
     result_by_stratum = {}
     samples = int(config["evaluation"]["paired_bootstrap_samples"])
@@ -92,6 +118,11 @@ def main() -> int:
         "stage": "same_prefix_teacher_audit",
         "config": str(config_path),
         "prefix_identity": "both teachers continued the exact same token-id prefix",
+        "branch_sampling": {
+            "top_k": int(config["teacher_audit"]["branch_top_k"]),
+            "continuations_per_prefix": expected_continuations,
+            "aggregation": "mean verified outcome across sampled top-k branches",
+        },
         "by_stratum": result_by_stratum,
         "scores": scores,
         "gate": {"passed": passed},
