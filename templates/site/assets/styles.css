@@ -141,8 +141,8 @@ h1, h2, h3, h4, .crumbs, figcaption { overflow-wrap: break-word; }
 
 /* --------------------------------------------------------------- layout */
 
-main { max-width: 1200px; margin: 0 auto; padding: 28px 24px 80px; }
-.band { margin-top: 44px; }
+main { max-width: 1200px; margin: 0 auto; padding: 34px 28px 96px; }
+.band { margin-top: 60px; }
 .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
 .section-head h2 { margin: 0; font-size: 25px; font-weight: 550; }
 .section-head .more { font-size: 13.5px; white-space: nowrap; font-family: var(--mono); }
