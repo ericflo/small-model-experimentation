@@ -1,0 +1,22 @@
+{
+  "design_commit": "1ef1f5ad",
+  "experiment_id": "qwen35_4b_deep_advantage_mopd",
+  "frozen_file_order": [
+    "configs/default.yaml",
+    "idea_intake.md",
+    "reports/preregistration.md",
+    "reports/design_review.md",
+    "reports/literature_review.md"
+  ],
+  "frozen_files": {
+    "configs/default.yaml": "2fe8ce9acb1fbdcb83ce2f19ed4de111906ae943fcaccf1425a826fae4cca2a7",
+    "idea_intake.md": "b899b28e70af6fad4842e9776300ce0f52219c171935a8401a93258840d7e3ba",
+    "reports/design_review.md": "cdeaad5b7bb363d0d650af6080d2d0be6c41d0873328e810965d017da271dd5b",
+    "reports/literature_review.md": "353ab37db39059ab4aa7f90b4647c7283851ef1dab56a01e9e047b1cc2576d08",
+    "reports/preregistration.md": "02d175850252e4c2b15a3b716b59fdf52f9ea5ad51f87cc06c79c10714509a48"
+  },
+  "model_output_precedes_lock": false,
+  "note": "No task-model output existed before this immutable design lock.",
+  "schema_version": 1,
+  "status": "locked"
+}

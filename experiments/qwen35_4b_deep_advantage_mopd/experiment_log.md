@@ -23,3 +23,6 @@
 - Passed 50 isolated tests and all 14 family selftests; verified the exact
   quick, deep, and immutable-soup file hashes. The smoke receipt contains no
   task-model generation.
+- Committed the complete frozen design at `1ef1f5ad`, pushed it to shared
+  `main`, and wrote `runs/preregistration_receipt.json` with byte hashes for all
+  frozen files before any Qwen load.

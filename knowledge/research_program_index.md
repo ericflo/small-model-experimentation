@@ -532,7 +532,7 @@ Train or evaluate small models as controllers over tools, verifiers, budgets, an
 Stress whether mechanisms transfer across substrates, families, lengths, distributions, and real tasks.
 
 - Charter: [benchmark_generalization](../research_programs/benchmark_generalization/charter.md)
-- Assigned experiments: 101
+- Assigned experiments: 102
 
 ### Seed Evidence
 
@@ -557,6 +557,7 @@ Stress whether mechanisms transfer across substrates, families, lengths, distrib
 - `qwen35_4b_confidence_guided_compute` (new): [README](../experiments/qwen35_4b_confidence_guided_compute/README.md)
 - `qwen35_4b_counterexample_directed_dsl` (track-z): [README](../experiments/qwen35_4b_counterexample_directed_dsl/README.md)
 - `qwen35_4b_crossfamily_laws` (new): [README](../experiments/qwen35_4b_crossfamily_laws/README.md)
+- `qwen35_4b_deep_advantage_mopd` (new): [README](../experiments/qwen35_4b_deep_advantage_mopd/README.md)
 - `qwen35_4b_error_localization` (new): [README](../experiments/qwen35_4b_error_localization/README.md)
 - `qwen35_4b_executable_program_posttraining` (track-z): [README](../experiments/qwen35_4b_executable_program_posttraining/README.md)
 - `qwen35_4b_foofah_adaptive_program_budget_router` (track-z): [README](../experiments/qwen35_4b_foofah_adaptive_program_budget_router/README.md)
