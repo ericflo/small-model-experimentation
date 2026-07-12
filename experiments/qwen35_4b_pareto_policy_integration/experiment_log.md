@@ -19,3 +19,10 @@ Created as a new experiment scaffold.
 - New experiment directory created rather than rewriting the predecessor.
 - No task-model output existed when the config, preregistration, and design
   review were authored.
+
+## 2026-07-12 — design lock
+
+- Pre-output design commit: `6bb8530ac5b1c289fbf9682846317607d46e9673`.
+- `runs/preregistration_receipt.json` freezes SHA-256 digests for the config,
+  intake, preregistration, and design review. Every non-smoke stage verifies
+  both those digests and commit ancestry before loading a model.

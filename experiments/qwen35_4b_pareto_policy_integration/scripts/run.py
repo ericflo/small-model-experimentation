@@ -73,6 +73,27 @@ def _require_gate(path: Path) -> dict:
     return payload
 
 
+def _verify_preregistration() -> dict:
+    path = EXP / "runs" / "preregistration_receipt.json"
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if payload.get("status") != "locked":
+        raise SystemExit("preregistration receipt is not locked")
+    for relative, expected in payload.get("frozen_files", {}).items():
+        actual = sha256_file(EXP / relative)
+        if actual != expected:
+            raise SystemExit(
+                f"frozen preregistration file changed: {relative} {actual} != {expected}"
+            )
+    completed = subprocess.run(
+        ["git", "merge-base", "--is-ancestor", payload["design_commit"], "HEAD"],
+        cwd=REPO,
+        check=False,
+    )
+    if completed.returncode != 0:
+        raise SystemExit("design commit is not an ancestor of HEAD")
+    return payload
+
+
 def _record_checkpoint(tag: str, adapter: Path, merged: Path) -> None:
     receipt = {
         "tag": tag,
@@ -262,6 +283,7 @@ def main() -> int:
     if stage == "smoke":
         print(json.dumps(scientific_smoke(config, config_path), indent=2, sort_keys=True))
         return 0
+    _verify_preregistration()
     if stage == "specialists":
         _specialists(config)
         return 0
