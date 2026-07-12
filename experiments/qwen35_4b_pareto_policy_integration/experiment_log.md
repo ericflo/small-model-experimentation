@@ -123,3 +123,15 @@ Created as a new experiment scaffold.
   vLLM resolved full decode graphs at all nine requested sizes without a Mamba
   clamp or process re-exec, reported 807,029 KV-cache tokens and 49.26x maximum
   full-length concurrency, and bound the output to the quick merge receipt.
+
+## 2026-07-12 — first calibration attempt exposed post-generation ledger bug
+
+- The quick policy completed all 1,344 calibration atoms and 144 interactive
+  episodes through turn 17, then failed before writing a score because the
+  token ledger expected `turn["policy"]["n_sampled_tokens"]`. The copied
+  harness actually stores the slim policy fields directly on each turn.
+- This was a bookkeeping-only failure after generation: no score, cell role,
+  gate, or analysis artifact existed, and the output directory remained empty.
+  The fix reads `turn["n_sampled_tokens"]` through a schema-specific helper;
+  a regression test exercises both atom and episode token layouts. The suite is
+  now 32/32. The identical frozen calibration seed and protocol will be rerun.

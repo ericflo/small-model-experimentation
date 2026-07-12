@@ -12,10 +12,18 @@ sys.path.insert(0, str(EXP / "src"))
 sys.path.insert(0, str(EXP / "scripts"))
 
 import harness  # noqa: E402
-from eval_policy import _engine_protocol  # noqa: E402
+from eval_policy import _engine_protocol, _sampled_token_count  # noqa: E402
 
 
 class HarnessEngineGeometryTests(unittest.TestCase):
+    def test_evaluation_ledger_reads_episode_turn_slim_schema(self) -> None:
+        atoms = [{"outputs": [{"n_sampled_tokens": 11}, {"n_sampled_tokens": 13}]}]
+        episodes = [
+            {"turns": [{"n_sampled_tokens": 17}, {"n_sampled_tokens": 19}]},
+            {"turns": [{"n_sampled_tokens": 23}]},
+        ]
+        self.assertEqual(_sampled_token_count(atoms, episodes), 83)
+
     def test_make_runner_forwards_frozen_capture_geometry(self) -> None:
         captured = []
 

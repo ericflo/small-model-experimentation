@@ -83,6 +83,21 @@ def _engine_protocol(
     }
 
 
+def _sampled_token_count(atom_rows: list[dict], episode_rows: list[dict]) -> int:
+    """Count sampled tokens from the exact slim schemas emitted by the harness."""
+    atom_tokens = sum(
+        int(output["n_sampled_tokens"])
+        for row in atom_rows
+        for output in row["outputs"]
+    )
+    episode_tokens = sum(
+        int(turn["n_sampled_tokens"])
+        for row in episode_rows
+        for turn in row["turns"]
+    )
+    return atom_tokens + episode_tokens
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path)
@@ -167,11 +182,10 @@ def main() -> int:
 
     items: list[dict] = []
     token_ledger = defaultdict(int)
+    token_ledger["sampled_tokens"] = _sampled_token_count(atom_rows, episode_rows)
     for row in atom_rows:
         outputs = row["outputs"]
         best = max(outputs, key=lambda value: (float(value["score"]), -int(value["sample_index"])))
-        for output in outputs:
-            token_ledger["sampled_tokens"] += int(output["n_sampled_tokens"])
         items.append({
             "key": row["id"], "family": row["family"], "kind": "atom",
             "level": int(row["level"]), "stratum": item_strata[row["id"]],
@@ -180,8 +194,6 @@ def main() -> int:
     grouped: dict[tuple[str, int, int], list[dict]] = defaultdict(list)
     for row in episode_rows:
         grouped[(row["family"], int(row["level"]), int(row["ep_seed"]))].append(row)
-        for turn in row["turns"]:
-            token_ledger["sampled_tokens"] += int(turn["policy"]["n_sampled_tokens"])
     for (family, level, seed), rows in sorted(grouped.items()):
         best = max(rows, key=lambda value: (float(value["score"]), -int(value["rollout"])))
         items.append({
