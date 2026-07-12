@@ -292,6 +292,45 @@ const ROOT = document.body.dataset.root || "";
   setTab(statusTab); // sets aria-selected + roving tabindex (one focusable tab) + applies filters
 })();
 
+/* ----------------------------------------------------------- claims filter */
+
+(function initClaims() {
+  const board = document.getElementById("claims-board");
+  if (!board) return;
+  const search = document.getElementById("claims-search");
+  const count = document.getElementById("claims-count");
+  const empty = document.getElementById("claims-empty");
+  const filters = Array.from(document.querySelectorAll(".claim-filter"));
+  const cards = Array.from(board.querySelectorAll(".claim-card"));
+  const groups = Array.from(board.querySelectorAll(".claim-group"));
+  let status = "";
+
+  function apply() {
+    const tokens = (search.value || "").trim().toLowerCase().split(/\s+/).filter(Boolean);
+    let shown = 0;
+    cards.forEach((c) => {
+      const okStatus = !status || c.dataset.status === status;
+      const hay = c.dataset.text || "";
+      const show = okStatus && tokens.every((t) => hay.includes(t));
+      c.hidden = !show;
+      if (show) shown += 1;
+    });
+    groups.forEach((g) => { g.hidden = !g.querySelector(".claim-card:not([hidden])"); });
+    count.textContent = `${shown}${status ? " " + status.toLowerCase() : ""} of ${cards.length}`;
+    if (empty) empty.hidden = shown !== 0;
+  }
+  filters.forEach((f) => f.addEventListener("click", () => {
+    status = f.dataset.claimStatus;
+    filters.forEach((o) => o.setAttribute("aria-pressed", String(o === f)));
+    apply();
+  }));
+  let timer = 0;
+  search.addEventListener("input", () => { window.clearTimeout(timer); timer = window.setTimeout(apply, 120); });
+  const q = new URLSearchParams(window.location.search).get("q");
+  if (q) search.value = q;
+  apply();
+})();
+
 /* -------------------------------------------------------- sortable tables */
 
 (function initTables() {

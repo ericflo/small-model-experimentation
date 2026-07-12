@@ -2227,10 +2227,15 @@ class SiteBuilder:
     def claims_page(self) -> None:
         prefix = "../"
         counts = Counter(str(claim.get("status")) for claim in self.claims)
-        tiles = "".join(
-            stat_tile(status, str(counts.get(status, 0)), CLAIM_STATUS_META[status][1])
-            for status in CLAIM_STATUS_ORDER
-            if counts.get(status)
+        filter_tiles = (
+            f'<button type="button" class="claim-filter" data-claim-status="" aria-pressed="true">'
+            f'<span class="stat-label">All</span><span class="stat-value">{len(self.claims)}</span></button>'
+            + "".join(
+                f'<button type="button" class="claim-filter" data-claim-status="{esc(status)}" aria-pressed="false" '
+                f'title="{esc(CLAIM_STATUS_META[status][1])}"><span class="stat-label">{esc(status)}</span>'
+                f'<span class="stat-value">{counts.get(status, 0)}</span></button>'
+                for status in CLAIM_STATUS_ORDER if counts.get(status)
+            )
         )
         groups: list[str] = []
         for status in CLAIM_STATUS_ORDER:
@@ -2268,8 +2273,10 @@ class SiteBuilder:
                     items = "".join(f"<li>{esc(t)}</li>" for t in avoid)
                     extras.append(f'<details><summary>Avoid</summary><ul class="plain">{items}</ul></details>')
                 chips = "".join(program_chip(pid, prefix, self.slots, self.program_titles) for pid in claim.get("programs", []))
+                ctext = " ".join([cid, str(claim.get("title", "")), str(claim.get("summary", "")), str(claim.get("implication", "")),
+                                  " ".join(self.program_titles.get(p, p) for p in claim.get("programs", []))]).lower()
                 cards.append(
-                    f'<article class="claim-card" id="{esc(slugify(cid))}">'
+                    f'<article class="claim-card" id="{esc(slugify(cid))}" data-status="{esc(status)}" data-text="{esc(ctext)}">'
                     f'<div class="card-meta">{status_chip(status)}<span class="claim-id">{esc(cid)}</span></div>'
                     f"<h3>{esc(claim.get('title'))}</h3><p>{esc(claim.get('summary'))}</p>"
                     f'{"".join(extras)}<div class="card-chips">{chips}</div></article>'
@@ -2279,7 +2286,12 @@ class SiteBuilder:
         content = (
             '<header class="page-head"><h1>Claims under test</h1>'
             '<p class="lede">The shared, evidence-linked belief ledger. Every claim points at the experiments that support or challenge it.</p></header>'
-            f'<div class="stat-row">{tiles}</div><div id="claims-board">{"".join(groups)}</div>'
+            '<form id="claims-controls" class="filter-row" onsubmit="return false">'
+            '<input id="claims-search" type="search" placeholder="Search claims…" aria-label="Search claims">'
+            '<span id="claims-count" class="result-count" aria-live="polite"></span></form>'
+            f'<div class="claim-filters" role="group" aria-label="Filter by status">{filter_tiles}</div>'
+            f'<div id="claims-board">{"".join(groups)}</div>'
+            '<p id="claims-empty" class="empty-note" hidden>No claims match.</p>'
         )
         self.write_page(
             "claims/index.html",
