@@ -125,6 +125,6 @@ gates:
     bootstrap_resamples: 10000
 
 design_boundary:
-  commit: PENDING_DESIGN_COMMIT
-  readme_sha256: PENDING_DESIGN_COMMIT
-  preregistration_sha256: PENDING_DESIGN_COMMIT
+  commit: 25a93b5cce1344b3e1dc6a3da378ae422b82a84d
+  readme_sha256: 3b5201548938ac7170fc54c2856d844842d1894aa4d52ddda2516c39e36f3e9e
+  preregistration_sha256: 081e2b76c290fcffb8cf911f78758918b4bd82122845a41dbc2b99636a16000f
