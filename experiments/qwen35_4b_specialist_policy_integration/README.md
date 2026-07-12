@@ -12,7 +12,8 @@ specialists can be consolidated on the student's own trajectories into one
 ## Research Programs
 
 - Primary: `agentic_breadth_installation`.
-- Supporting: `posttraining_and_adaptation`, `benchmark_generalization`.
+- Supporting: `posttraining_and_adaptation`, `benchmark_generalization`,
+  `process_control_and_tool_use`.
 - Closest near-duplicate: `qwen35_4b_interactive_policy_curriculum`, which
   trains one mixed policy and does not test specialist integration.
 - Strategic source:
@@ -124,7 +125,7 @@ Reached evidence:
 - exact oracle 1.0 at every L1-L4 cell;
 - generic random policy 0.0;
 - every registered primitive-removal policy full-success 0.0; and
-- state-aware live experts solve every cell at 1.0.
+- state-aware live experts solve every cell at 1.0;
 - the pinned model/runtime answered 4/4 generic semantic smoke prompts and
   honored the explicit CUDA-graph geometry on the live L40.
 - the pinned Transformers path produced finite logits with both Qwen fast-path

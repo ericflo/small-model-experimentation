@@ -10,3 +10,10 @@
 ## Current Read
 
 Tool-state policies are a promising way to make small models useful inside iterative systems, but they need visible-only evaluation discipline.
+
+- [qwen35_4b_specialist_policy_integration](../../experiments/qwen35_4b_specialist_policy_integration/reports/report.md):
+  no new tool policy was trained. The only registered tools family scored
+  0.994 under the installed incumbent, leaving 0.006 maximum headroom against a
+  frozen `+0.10` qualification rule. This is a substrate-selection negative:
+  tool-policy experiments need an unsaturated core before adaptation quality is
+  testable.

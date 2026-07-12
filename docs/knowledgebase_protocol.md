@@ -82,3 +82,6 @@ Update `knowledge/program_scorecards.md` when the best next experiment, stronges
 Use `knowledge/decision_records/` for strategic pivots that affect multiple experiments or programs.
 
 Update `knowledge/claims/claim_ledger.json` when a result changes a durable claim. The generated claim index validates claim ids, statuses, programs, and evidence references.
+Keep `next_tests` and `avoid` as JSON arrays even when either has only one
+entry; a string is iterable character-by-character and previously produced a
+corrupt claim index and site card.

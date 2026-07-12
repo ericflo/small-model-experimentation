@@ -45481,31 +45481,47 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "Every capability stage has a locked improvement bar",
+     "title": "One mandatory specialist threshold exceeded the score ceiling",
      "categories": [
-      "specialist over incumbent",
-      "same-prefix teacher over incumbent",
-      "mean specialist headroom recovered",
-      "held-out compound over incumbent",
-      "held-out compound over best specialist"
+      "discover",
+      "control",
+      "tools",
+      "compose"
      ],
      "series": [
       {
-       "label": "registered minimum delta or fraction",
+       "label": "incumbent score",
        "values": [
-        0.1,
-        0.08,
-        0.75,
-        0.15,
-        0.1
+        0.5127314814814814,
+        0.523015873015873,
+        0.9940476190476191,
+        0.17971781305114637
+       ]
+      },
+      {
+       "label": "required specialist score",
+       "values": [
+        0.6127314814814814,
+        0.623015873015873,
+        1.0940476190476192,
+        0.2797178130511464
+       ]
+      },
+      {
+       "label": "score ceiling",
+       "values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
        ]
       }
      ],
-     "x_label": "decision stage",
-     "y_label": "registered threshold",
-     "y_format": "number",
-     "note": "These are preregistered thresholds, not observed model results. A failed capability, prefix, locality, integration, or composition gate stops downstream spend; measured outcomes will replace this design chart after the reached stages finish.",
-     "source": "experiments/qwen35_4b_specialist_policy_integration/configs/default.yaml"
+     "x_label": "specialist domain",
+     "y_label": "mean normalized score",
+     "y_format": "percent100",
+     "note": "The tools incumbent was already 0.994, so its frozen +0.10 qualification bar required 1.094 despite a hard ceiling of 1.0. The preregistered gate stopped before best-of-8 or specialist training; this does not test the integration mechanism.",
+     "source": "experiments/qwen35_4b_specialist_policy_integration/analysis/specialist_headroom_gate.json"
     }
    ]
   }

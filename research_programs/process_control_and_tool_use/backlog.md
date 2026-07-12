@@ -2,6 +2,11 @@
 
 ## Next Experiments
 
+- The specialist-policy integration attempt stopped before policy learning:
+  its sole tools core was already at 0.994, making a mandatory `+0.10` gain
+  impossible under the 1.0 score cap. Any successor must add a harder,
+  independently calibrated tools/provenance core and run a per-core
+  ceiling/headroom gate before best-of-k or training.
 - Build a common tool-state schema for direct answer, executable program, verifier result, repair history, and budget.
 - Compare learned controllers with simple heuristics on identical pools.
 - Train STOP/MORE policies under visible-only labels and evaluate under hidden labels.

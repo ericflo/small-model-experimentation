@@ -57,8 +57,10 @@ disabled. The family means were 0.2271 `cipherkiln`, 0.2961 `mazeferry`,
 pre-registered exclusive ceiling 0.60. Exact success was 5.56%, 1.39%, 0%,
 and 0%. Every protocol check passed, and the compacted artifact contains no
 simulator spec, expert label, message transcript, or raw top-20 payload. This
-establishes the intended headroom and licenses specialist production; it is
-not evidence that a training method improved the model.
+establishes endpoint headroom and provisionally passed that gate; the later
+per-core feasibility result shows that the complete specialist-production plan
+still could not satisfy its frozen qualification rules. It is not evidence
+that a training method improved the model.
 
 ## Terminal Feasibility Result
 

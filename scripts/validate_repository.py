@@ -132,6 +132,13 @@ def validate_claim_ledger(errors: list[str], program_ids: set[str], exp_ids: set
             if unknown_programs:
                 fail(errors, f"claim {claim_id} references unknown programs: {', '.join(unknown_programs)}")
 
+        for field in ("next_tests", "avoid"):
+            values = claim.get(field, [])
+            if not isinstance(values, list):
+                fail(errors, f"claim {claim_id} field {field} must be a list")
+            elif any(not str(value).strip() for value in values):
+                fail(errors, f"claim {claim_id} field {field} contains an empty item")
+
         evidence_items = claim.get("evidence", [])
         if not isinstance(evidence_items, list) or not evidence_items:
             fail(errors, f"claim {claim_id} must include evidence")

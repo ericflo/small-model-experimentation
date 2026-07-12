@@ -3782,11 +3782,11 @@
   },
   {
     "file_counts": {
-      ".gz": 4,
-      ".json": 14,
+      ".gz": 6,
+      ".json": 16,
       ".jsonl": 6,
       ".md": 7,
-      ".py": 50,
+      ".py": 51,
       ".yaml": 3,
       "[none]": 2
     },
@@ -3797,14 +3797,19 @@
     "research_programs": [
       "agentic_breadth_installation",
       "benchmark_generalization",
+      "evidence_conditioned_selection",
       "posttraining_and_adaptation",
-      "process_control_and_tool_use"
+      "process_control_and_tool_use",
+      "reliability_and_safety"
     ],
     "source_track": "new",
-    "summary": "Status: the C53 incumbent was regenerated, installed, and passed the disjoint compound-headroom gate on 2026-07-11 (macro 0.135 versus the `<0.60` bar). Matched incumbent baselines are next; no specialist or integration result exists yet.",
+    "summary": "Status: **stopped negative** on 2026-07-12 before best-of-8 or specialist training. The tools core's incumbent score is 0.994, making its frozen `S0 + 0.10` qualification target 1.094 on a score bounded by 1.0. Because all four specialists were mandatory, teacher audit and integration are unlicensed.",
     "tags": [
+      "counterexamples",
+      "distillation",
       "policy",
-      "small-model"
+      "small-model",
+      "tools"
     ],
     "title": "Qwen3.5-4B Specialist Policy Integration",
     "top_level_dirs": [
@@ -3817,8 +3822,8 @@
       "src",
       "tests"
     ],
-    "total_files": 86,
-    "total_size_bytes": 4507388
+    "total_files": 91,
+    "total_size_bytes": 12486100
   },
   {
     "file_counts": {

@@ -1433,7 +1433,11 @@
     "Patch or upstream the vLLM LoRA name-mapping for hybrid Qwen3.5 (or add a translation shim rewriting adapter keys at load) and re-verify with the on-off probe",
     "Add the on-vs-off adapter gate to validate_repository or a pre-eval smoke so no future experiment can silently measure base"
    ],
-   "avoid": "Never validate LoRA plumbing with a zero adapter; never trust wall-time differences as evidence an adapter loaded; never compare HF-backend scores with vLLM-backend scores."
+   "avoid": [
+    "Never validate LoRA plumbing with a zero adapter.",
+    "Never trust wall-time differences as evidence an adapter loaded.",
+    "Never compare HF-backend scores with vLLM-backend scores."
+   ]
   },
   {
    "id": "C50",
@@ -1458,7 +1462,12 @@
     "Recovery-arm-only ablation (emission-seam repair vs axis competence split); breadth-vs-matched-dose single-family ablation (is breadth causal for held-out-family transfer?)",
     "Re-measure the locality laws (C43/C45/C48) under the weighted-loss + recovery-arm recipe: were they laws about the recipe rather than the model?"
    ],
-   "avoid": "Do not train full-weight on the model's own verbatim thinking and expect behavior change (near-self-distillation); do not filter training data to naturally-closed chains only (it excludes the deployment-critical force-closed state); do not claim menagerie movement from vLLM adapter arms (C49). Always audit encode-time skip counts against the built dataset (silent over-length skipping rewrote this experiment's own mechanism story)."
+   "avoid": [
+    "Do not train full-weight on the model's own verbatim thinking and expect behavior change (near-self-distillation).",
+    "Do not filter training data to naturally-closed chains only (it excludes the deployment-critical force-closed state).",
+    "Do not claim menagerie movement from vLLM adapter arms (C49).",
+    "Always audit encode-time skip counts against the built dataset (silent over-length skipping rewrote this experiment's own mechanism story)."
+   ]
   },
   {
    "id": "C51",
@@ -1552,7 +1561,12 @@
     "Slow/deep-tier ceiling confirmation; multi-seed band quantification",
     "Episode-mode trace distillation (traces for multi-turn procedures; atoms-only tested here)"
    ],
-   "avoid": "Do not run further same-recipe rounds expecting compounding (three independent escalations landed in-band); do not attribute the plateau to gym difficulty (in-gym frontier competence installs; the blackbox band still holds). Do not begin a mandatory multi-specialist run from downstream endpoint headroom alone: every teacher's absolute gain bar must be reachable under its score ceiling. When two sessions run concurrently, claim IDs must be reserved at append time against origin (this claim was lost once to an ID collision + dedupe)."
+   "avoid": [
+    "Do not run further same-recipe rounds expecting compounding (three independent escalations landed in-band).",
+    "Do not attribute the plateau to gym difficulty (in-gym frontier competence installs; the blackbox band still holds).",
+    "Do not begin a mandatory multi-specialist run from downstream endpoint headroom alone: every teacher's absolute gain bar must be reachable under its score ceiling.",
+    "When two sessions run concurrently, claim IDs must be reserved at append time against origin (this claim was lost once to an ID collision + dedupe)."
+   ]
   }
  ]
 }

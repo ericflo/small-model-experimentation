@@ -48,6 +48,14 @@
   remained below base (39/72 vs 43/72), so the registered result is a low-dose capability null, not a new
   adaptation recipe.
 
+- [qwen35_4b_specialist_policy_integration](../../experiments/qwen35_4b_specialist_policy_integration/reports/report.md):
+  the first same-origin specialist/MOPD test stopped before best-of-8 or any
+  specialist update. Its full paired baseline put the only tools family at
+  0.994, making the mandatory `S0 + 0.10` target 1.094 under a hard score cap
+  of 1.0. This is a posttraining-design feasibility negative, not evidence for
+  or against MOPD; every mandatory arm now needs a ceiling/headroom check before
+  production.
+
 ## Current Read
 
 Adaptation is useful only when the target behavior is well specified and controls expose whether training
@@ -68,3 +76,8 @@ transfer. Confident-outlier geometry and entropy/varentropy routing do not
 replace an exact-logit locality gate. Positive-only pressure is preferable to
 pairwise demotion, but do not scale it until the update clears ≤0.10 median
 non-target drift on independent contexts.
+
+The specialist stop adds a still earlier prerequisite: prove that each
+mandatory arm can mathematically clear its frozen gain rule. Aggregate endpoint
+headroom can coexist with a saturated arm, so average calibration cannot license
+a multi-arm adaptation run by itself.

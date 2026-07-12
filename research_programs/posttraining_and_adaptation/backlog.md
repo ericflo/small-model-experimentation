@@ -2,11 +2,12 @@
 
 ## Next Experiments
 
-- Active cross-program test: `qwen35_4b_specialist_policy_integration` compares
-  same-origin on-policy multi-teacher integration with end-to-end matched joint
-  RL, off-policy specialist SFT, parameter merging, and KL-matched wrong
-  routing. Do not start a competing multi-teacher claim until this registered
-  run resolves or stops.
+- Stopped cross-program test: `qwen35_4b_specialist_policy_integration` reached
+  a design-feasibility negative before any specialist or integration update.
+  Its sole tools core scored 0.994 at baseline, so the mandatory `+0.10` gain
+  required 1.094 on a score capped at 1.0. A new run must use a harder,
+  independently calibrated tools/provenance core and prove every arm's
+  theoretical headroom before best-of-k or training; do not amend this result.
 - Treat any C51 follow-up as a new close/commit-scoring experiment, not a larger rejection-sampling run;
   require autonomous termination and parse gates before training.
 - Treat any C52 follow-up as a locality experiment first: compare lower-dose
@@ -32,3 +33,7 @@ Do not retain trained adapters in git. Do not claim a posttraining method works 
 
 Do not spend SFT compute on a trace score that has not cleared a preregistered within-task outcome gate and
 practical top-selection margin. C51 is stopped before training under its current answer-only potential event.
+
+Do not spend posttraining compute on a mandatory arm whose frozen absolute
+gain criterion exceeds its score ceiling. Endpoint-average headroom does not
+establish per-arm feasibility.

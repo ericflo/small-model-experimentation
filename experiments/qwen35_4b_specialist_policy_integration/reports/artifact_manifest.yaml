@@ -1,9 +1,9 @@
 schema_version: 1
 experiment_id: "qwen35_4b_specialist_policy_integration"
 external_artifacts:
-  - name: incumbent, specialist, integration, and control adapters plus merged composites
+  - name: reached incumbent adapter and merged composite
     storage: large_artifacts/qwen35_4b_specialist_policy_integration/{adapters,merged}/
-    required_for: result-bearing model evaluation and replication
+    required_for: reproducing the reached installation and paired-baseline result
     checksum: recorded per artifact in runs/checkpoint_receipts.jsonl
     regenerate: run the reached stages documented in README.md using the pinned environments
 omitted_artifacts:

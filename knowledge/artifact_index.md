@@ -37,16 +37,16 @@ This is a repository-level inventory. Each experiment remains the source of trut
 
 | Extension | Files |
 | --- | ---: |
-| `.json` | 2370 |
+| `.json` | 2372 |
 | `.csv` | 2138 |
-| `.py` | 1378 |
+| `.py` | 1379 |
 | `.md` | 902 |
 | `.png` | 848 |
 | `.jsonl` | 690 |
 | `.log` | 527 |
 | `.yaml` | 329 |
+| `.gz` | 91 |
 | `.html` | 90 |
-| `.gz` | 89 |
 | `.sh` | 19 |
 | `.txt` | 5 |
 | `[none]` | 4 |
@@ -76,6 +76,7 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | 7.0 | `experiments/qwen35_4b_learned_active_trace_policy/data/eval/dsl_eval_ceiling.jsonl` |
 | 7.0 | `experiments/qwen35_4b_active_counterexample_trace_selection/data/eval/dsl_eval_ceiling.jsonl` |
 | 6.9 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_blend.jsonl` |
+| 6.6 | `experiments/qwen35_4b_specialist_policy_integration/runs/proxy_eval/incumbent_calibration/episode_rows.jsonl.gz` |
 | 6.4 | `experiments/qwen35_4b_active_counterexample_trace_selection/reports/eval/active_support.json` |
 | 6.4 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_blend2.jsonl` |
 | 6.3 | `experiments/qwen35_4b_interactive_policy_curriculum/data/dagger_train.jsonl` |
@@ -85,4 +86,3 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | 5.7 | `experiments/qwen35_4b_foofah_selective_program_fallback/reports/program_probe_records.jsonl` |
 | 5.7 | `experiments/qwen35_4b_foofah_selective_program_fallback/reports/final_records.jsonl` |
 | 5.6 | `experiments/qwen35_4b_bucket_belief_probe_ranker/data/bucket_eval_examples.jsonl` |
-| 5.6 | `experiments/qwen35_4b_learned_active_trace_policy/data/base_anchor/dsl_train_static60_base.jsonl` |

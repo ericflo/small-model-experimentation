@@ -10922,11 +10922,32 @@
    "why_it_matters": "Correct labels at the model's own states are not enough when one shared update can overwrite neighboring decisions. A useful looping curriculum must explicitly preserve scarce semantic pivots such as verify and commit, plus the incumbent policy outside corrected states; entropy and outcome variance are useful for deciding where to collect data, not for deciding how hard to push tokens."
   },
   "qwen35_4b_specialist_policy_integration": {
-   "verdict_tag": "Registered: make specialists stronger, then test whether one student can compose them",
-   "concept_primer": "Training one model on many tasks at once can make the tasks fight for the same weights. This study first gives separate copies of the same starting model focused practice in discovery, long-horizon control, tool use, and two-skill composition. A fresh copy then generates its own attempts while the matching specialist scores every next-token choice, aiming to combine the specialists without copying only their finished answers.",
-   "plain_question": "Can several genuinely stronger specialist policies be consolidated into one small model that uses their skills together on compound tasks none of them practiced?",
-   "plain_answer": "This is a locked in-progress experiment, not a model result. Four new procedural worlds now pass exact-oracle and remove-one-skill checks: taking away any required discovery, control, navigation, repair, or tool primitive reduces full success to zero. Model training cannot begin until the common starting checkpoint and every specialist/control gate are reproduced.",
-   "why_it_matters": "It cleanly separates creating capability from merging capability. The final bar is not an average over familiar tasks: the integrated model must beat every individual specialist and eight-shot sampling on new pairings and a three-skill task, while wrong-teacher routing and equally funded joint training test whether the claimed integration mechanism is real."
+   "verdict_tag": "Required tool-use gain was impossible",
+   "concept_primer": "Imagine requiring four climbers to clear fixed height gains. A plan can fail before training if one climber starts near the ceiling but must still rise by the same fixed amount.",
+   "plain_question": "Could every required task-focused copy improve enough to qualify before their abilities were combined?",
+   "plain_answer": "Stopped. The starting model scored 99.4% on the only tool-use task, while the rule demanded 109.4%—above the 100% maximum. No task-focused model or merging method was tested, so the central idea remains unanswered.",
+   "why_it_matters": "Check whether every required improvement is mathematically reachable before spending on repeated sampling or training. A task collection can look difficult overall while one mandatory lane is already too close to perfect.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Tool-use start → required",
+     "value": "99.4% → 109.4%",
+     "sub": "the locked improvement rule exceeded a perfect score"
+    },
+    {
+     "label": "Highest possible score",
+     "value": "100%",
+     "sub": "the ceiling for every task group"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "One required score was higher than perfect",
+     "chart_read": "Each task group has bars for its starting score, required task-focused score, and highest possible score. Higher is better, but a required bar above the maximum bar cannot be reached.",
+     "chart_takeaway": "Only tool use has its required bar above 100%, so one mandatory path was impossible before any training began."
+    }
+   ]
   }
  }
 }
