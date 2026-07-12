@@ -1,0 +1,26 @@
+# Generated starter metadata. Run make check after adding artifacts.
+id: "qwen35_4b_balanced_core_answer_potential_sft"
+title: "Qwen3.5-4B Balanced-Core Answer-Potential SFT"
+source_track: "new"
+path: "experiments/qwen35_4b_balanced_core_answer_potential_sft"
+primary_readme: "experiments/qwen35_4b_balanced_core_answer_potential_sft/README.md"
+primary_report: "experiments/qwen35_4b_balanced_core_answer_potential_sft/reports/report.md"
+summary: "Prospectively tests answer- and joint-potential full-thought SFT against random, successful, shortest, and task-shuffled controls on a checksum-preserved balanced three-family pool."
+tags:
+  - "qwen3.5-4b"
+  - "answer-potential"
+  - "reasoning-sft"
+  - "rejection-sampling"
+  - "natural-thinking"
+research_programs:
+  - "posttraining_and_adaptation"
+  - "evidence_conditioned_selection"
+  - "test_time_reasoning_budget"
+top_level_dirs:
+  - "configs"
+  - "reports"
+  - "scripts"
+  - "src"
+file_counts: {}
+total_files: 0
+total_size_bytes: 0

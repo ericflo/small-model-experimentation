@@ -1,0 +1,104 @@
+schema_version: 1
+experiment_id: qwen35_4b_balanced_core_answer_potential_sft
+design_boundary:
+  commit: PENDING_DESIGN_COMMIT
+  readme_sha256: PENDING
+  preregistration_sha256: PENDING
+  design_review_sha256: PENDING
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+
+inherit:
+  experiment_id: qwen35_4b_long_horizon_answer_potential_sft
+  external_root: /workspace/large_artifacts/qwen35_4b_long_horizon_answer_potential_sft
+  stage: train_independent
+  source_index_sha256: da09176ddf05918712913b4c66ca893f47ed141986f8ed37ef289a63dc37fb63
+  expected_tasks: 331
+  expected_rows: 21184
+  expected_sampled_tokens: 97883041
+
+engine:
+  max_model_len: 16384
+  gpu_memory_utilization: 0.90
+  max_num_seqs: 32
+  max_num_batched_tokens: 16384
+  cudagraph_capture_sizes: [1, 2, 4, 8, 16, 32]
+  async_scheduling: false
+  prefix_caching: false
+
+splits:
+  core_families: [caravan, foundry_ledger, runeward]
+  train_levels: [1, 2, 3]
+  train_per_family_level: 40
+  held_stage_a_per_family_level: 10
+  full_train_tasks: 360
+  core_iid_tasks: 180
+  core_hard_tasks: 60
+  held_stage_a_tasks: 60
+
+sampling:
+  train_independent_n: 64
+  temperature: 1.0
+  top_p: 0.95
+  top_k: 20
+  natural_close_allowance: 12288
+  nonloop_continuation_tokens: 2048
+  answer_max_tokens: 96
+  train_rollouts_per_trace: 1
+  run_seed: 71117
+  continuation_seed: 71171
+  control_seed: 71231
+  logprobs: 0
+
+scoring:
+  backend: vllm_targeted_bf16
+  parity_reference_backend: transformers_bf16_sdpa
+  parity_rows: 32
+  parity_source_stage: calibration_independent
+  max_abs_mean_token_delta: 0.15
+  chunk_size: 256
+  canonical_only: true
+
+selector:
+  top_candidates: 12
+  max_per_task: 2
+  near_best_nats_per_answer_token: 0.25
+  trigram_duplicate_jaccard: 0.90
+  minimum_natural_per_task: 2
+  max_train_length: 16000
+
+sft:
+  arms: [random_natural, success_rft, shortest_natural, answer_potential, joint_potential, potential_shuffle]
+  epochs: 2.0
+  learning_rate: 2.0e-4
+  rank: 32
+  alpha: 64
+  dropout: 0.05
+  batch_size: 1
+  gradient_accumulation: 16
+  max_length: 16000
+  weight_prompt: 0.0
+  weight_think: 0.5
+  weight_close_answer: 1.0
+  screen_seed: 42
+  replication_seed: 43
+
+evaluation:
+  natural_max_tokens: 12288
+  sampled_k: 8
+  sampling_temperature: 0.6
+  sampling_top_p: 0.95
+  sampling_top_k: 20
+  greedy_seed: 74917
+  sample_seed: 74971
+  bootstrap_resamples: 10000
+  bootstrap_seed: 74991
+  positive_delta: 0.03
+  noninferiority_delta: -0.02
+  stage_a_splits: [core_iid, core_hard, held_stage_a]
+  stage_b_full_splits: [iid_eval, hard_eval, held_family_eval, rendering_eval]
+
+artifacts:
+  external_root: /workspace/large_artifacts/qwen35_4b_balanced_core_answer_potential_sft
+  raw_shard_max_rows: 256

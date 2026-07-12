@@ -1,0 +1,40 @@
+schema_version: 1
+experiment_id: qwen35_4b_balanced_core_answer_potential_sft
+external_root: /workspace/large_artifacts/qwen35_4b_balanced_core_answer_potential_sft
+external_artifacts:
+  - name: inherited parent train pool
+    storage: /workspace/large_artifacts/qwen35_4b_long_horizon_answer_potential_sft/pools/train_independent
+    required_for: first 331 balanced-core task shards
+    checksum: source index da09176ddf05918712913b4c66ca893f47ed141986f8ed37ef289a63dc37fb63 plus per-shard SHA-256 receipts
+    regenerate: run the parent experiment's harvest-generate stage from its frozen design
+  - name: balanced independent pool, scores, and R1 rollouts
+    storage: /workspace/large_artifacts/qwen35_4b_balanced_core_answer_potential_sft/pools
+    required_for: exact selection reconstruction
+    checksum: atomic per-task SHA-256 receipts and stage indexes
+    regenerate: .venv-vllm/bin/python experiments/qwen35_4b_balanced_core_answer_potential_sft/scripts/run.py --stage harvest
+  - name: six exact-token SFT datasets
+    storage: /workspace/large_artifacts/qwen35_4b_balanced_core_answer_potential_sft/sft
+    required_for: matched seed-42 training matrix
+    checksum: tracked selection summary plus per-dataset SHA-256 receipt
+    regenerate: .venv-vllm/bin/python experiments/qwen35_4b_balanced_core_answer_potential_sft/scripts/run.py --stage select
+  - name: QLoRA adapters and merged composite checkpoints
+    storage: /workspace/large_artifacts/qwen35_4b_balanced_core_answer_potential_sft/adapters and /workspace/large_artifacts/qwen35_4b_balanced_core_answer_potential_sft/merged
+    required_for: trained-arm evaluation
+    checksum: training and merge receipts with adapter/model hashes
+    regenerate: .venv-vllm/bin/python experiments/qwen35_4b_balanced_core_answer_potential_sft/scripts/run.py --stage train
+  - name: staged evaluation generations
+    storage: /workspace/large_artifacts/qwen35_4b_balanced_core_answer_potential_sft/evaluation
+    required_for: paired Stage-A and conditional Stage-B analysis
+    checksum: per-arm/split SHA-256 receipts in evaluation indexes
+    regenerate: .venv-vllm/bin/python experiments/qwen35_4b_balanced_core_answer_potential_sft/scripts/run.py --stage evaluate-stage-a
+omitted_artifacts:
+  - path: raw token-level pools and model weights
+    reason: too large for git; exact external locations, counts, and checksums are retained
+reproducibility:
+  smoke_command: .venv-vllm/bin/python experiments/qwen35_4b_balanced_core_answer_potential_sft/scripts/run.py --stage smoke
+  full_command: .venv-vllm/bin/python experiments/qwen35_4b_balanced_core_answer_potential_sft/scripts/run.py --stage full
+  required_external_artifacts:
+    - checksum-matching inherited parent train-pool index and shards
+notes: >-
+  The parent pool is immutable input. New outputs are restartable per task. No adapter or merged model is
+  placed inside the repository tree.

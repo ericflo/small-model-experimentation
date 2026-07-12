@@ -1378,6 +1378,39 @@
     }
    ]
   },
+  "qwen35_4b_balanced_core_answer_potential_sft": {
+   "verdict_tag": "Balanced training test underway",
+   "concept_primer": "The model can produce dozens of different scratch-work paths for one problem. This test asks whether the paths that make the known answer more likely are actually better lessons than paths chosen by success, chance, or simple brevity.",
+   "plain_question": "Can we teach a small model more effectively by banking its most answer-supporting complete reasoning, or is choosing its shortest complete reasoning just as good?",
+   "plain_answer": "No capability answer yet. The expensive nine-family run has been narrowed to a checksum-preserved three-family core: 331 of 360 tasks are already safely banked, and the mandatory training comparison now includes the strongest early rival, choosing the shortest complete reasoning.",
+   "why_it_matters": "This preserves almost one hundred million tokens of completed work without letting sunk cost dictate an open-ended run. It also makes the test harder to fool: answer-based selection must beat ordinary success filtering, random reasoning, shortest reasoning, and reasoning copied from another task.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Balanced tasks safely banked",
+     "value": "331 / 360",
+     "sub": "only 29 more tasks are allowed before the hard stop"
+    },
+    {
+     "label": "Reasoning chains already preserved",
+     "value": "21,184",
+     "sub": "97.9 million sampled thinking tokens behind checksums"
+    },
+    {
+     "label": "Training strategies compared",
+     "value": "6",
+     "sub": "answer score, joint score, random, successful, shortest, and task-shuffled"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Preserved reasoning chains versus the balanced hard stop",
+     "chart_read": "The first bar is the number of complete reasoning chains already stored; the second is the exact N=64 total when all 360 balanced tasks are done. The small remaining gap is the only additional harvest allowed.",
+     "chart_takeaway": "Most of the balanced pool is already preserved, so finishing the focused test reuses the sunk cost without reopening the much larger nine-family schedule."
+    }
+   ]
+  },
   "qwen35_4b_balanced_discriminative_bridge": {
    "verdict_tag": "Hand-picking hard examples backfired",
    "concept_primer": "Think of teaching someone to fix broken code by handing them a few practice problems first. The question: does an even, balanced practice set teach better, or a set hand-picked to be the trickiest?",

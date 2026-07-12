@@ -1,0 +1,221 @@
+{
+  "audit": {
+    "collisions": {
+      "family_generator_seed": [],
+      "id": [],
+      "prompt": [],
+      "prompt_sha256": []
+    },
+    "family_counts": {
+      "calibration": {
+        "burrowmaze": 15,
+        "caravan": 15,
+        "ferrier": 15,
+        "foundry_ledger": 15,
+        "gatepost": 15,
+        "glyphgate": 15,
+        "kilnrite": 15,
+        "loomfix": 15,
+        "runeward": 15
+      },
+      "hard_eval": {
+        "burrowmaze": 20,
+        "caravan": 20,
+        "ferrier": 20,
+        "foundry_ledger": 20,
+        "gatepost": 20,
+        "glyphgate": 20,
+        "kilnrite": 20,
+        "loomfix": 20,
+        "runeward": 20
+      },
+      "held_family_eval": {
+        "brinework": 90,
+        "spindle": 90
+      },
+      "iid_eval": {
+        "burrowmaze": 60,
+        "caravan": 60,
+        "ferrier": 60,
+        "foundry_ledger": 60,
+        "gatepost": 60,
+        "glyphgate": 60,
+        "kilnrite": 60,
+        "loomfix": 60,
+        "runeward": 60
+      },
+      "rendering_eval": {
+        "stallwright": 80
+      },
+      "termination_pilot": {
+        "burrowmaze": 3,
+        "caravan": 3,
+        "ferrier": 3,
+        "foundry_ledger": 3,
+        "gatepost": 3,
+        "glyphgate": 3,
+        "kilnrite": 3,
+        "loomfix": 3,
+        "runeward": 3
+      },
+      "train": {
+        "burrowmaze": 120,
+        "caravan": 120,
+        "ferrier": 120,
+        "foundry_ledger": 120,
+        "gatepost": 120,
+        "glyphgate": 120,
+        "kilnrite": 120,
+        "loomfix": 120,
+        "runeward": 120
+      }
+    },
+    "passed": true,
+    "scorable_counts": {
+      "calibration": 135,
+      "hard_eval": 180,
+      "held_family_eval": 180,
+      "iid_eval": 540,
+      "rendering_eval": 0,
+      "termination_pilot": 27,
+      "train": 1080
+    },
+    "split_counts": {
+      "calibration": 135,
+      "hard_eval": 180,
+      "held_family_eval": 180,
+      "iid_eval": 540,
+      "rendering_eval": 80,
+      "termination_pilot": 27,
+      "train": 1080
+    }
+  },
+  "schema_version": 1,
+  "split_specs": {
+    "calibration": {
+      "families": [
+        "caravan",
+        "foundry_ledger",
+        "runeward",
+        "kilnrite",
+        "glyphgate",
+        "loomfix",
+        "ferrier",
+        "burrowmaze",
+        "gatepost"
+      ],
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "per_family_level": 5,
+      "seed": 72001
+    },
+    "hard_eval": {
+      "families": [
+        "caravan",
+        "foundry_ledger",
+        "runeward",
+        "kilnrite",
+        "glyphgate",
+        "loomfix",
+        "ferrier",
+        "burrowmaze",
+        "gatepost"
+      ],
+      "levels": [
+        4
+      ],
+      "per_family_level": 20,
+      "seed": 75001
+    },
+    "held_family_eval": {
+      "families": [
+        "brinework",
+        "spindle"
+      ],
+      "heldout": true,
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "per_family_level": 30,
+      "seed": 76001
+    },
+    "iid_eval": {
+      "families": [
+        "caravan",
+        "foundry_ledger",
+        "runeward",
+        "kilnrite",
+        "glyphgate",
+        "loomfix",
+        "ferrier",
+        "burrowmaze",
+        "gatepost"
+      ],
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "per_family_level": 20,
+      "seed": 74001
+    },
+    "rendering_eval": {
+      "families": [
+        "stallwright"
+      ],
+      "levels": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "per_family_level": 20,
+      "seed": 77001
+    },
+    "termination_pilot": {
+      "families": [
+        "caravan",
+        "foundry_ledger",
+        "runeward",
+        "kilnrite",
+        "glyphgate",
+        "loomfix",
+        "ferrier",
+        "burrowmaze",
+        "gatepost"
+      ],
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "per_family_level": 1,
+      "seed": 71001
+    },
+    "train": {
+      "families": [
+        "caravan",
+        "foundry_ledger",
+        "runeward",
+        "kilnrite",
+        "glyphgate",
+        "loomfix",
+        "ferrier",
+        "burrowmaze",
+        "gatepost"
+      ],
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "per_family_level": 40,
+      "seed": 73001
+    }
+  }
+}

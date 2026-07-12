@@ -7,6 +7,11 @@ it removes the operative 512-token cutoff, requires naturally closed thoughts, s
 95,000 candidate traces, banks complete traces before any compression, and runs the SFT comparison even
 if calibration shows only modest predictive signal.
 
+The original run is now paused after 331/1,080 train tasks because its measured wall time exceeded the
+available budget. Its design and partial artifacts remain intact; no terminal SFT claim is made here. The
+checksum-preserving, prospectively frozen completion is
+[`qwen35_4b_balanced_core_answer_potential_sft`](../qwen35_4b_balanced_core_answer_potential_sft/README.md).
+
 The immutable protocol is in [`reports/preregistration.md`](reports/preregistration.md), and the
 pre-run adversarial review is in [`reports/design_review.md`](reports/design_review.md).
 

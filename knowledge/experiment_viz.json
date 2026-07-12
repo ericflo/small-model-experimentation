@@ -8802,6 +8802,33 @@
     }
    ]
   },
+  "qwen35_4b_balanced_core_answer_potential_sft": {
+   "charts": [
+    {
+     "title": "Preserved candidate thoughts versus the balanced-core hard stop",
+     "kind": "bar",
+     "categories": [
+      "331-task checkpoint",
+      "360-task hard stop"
+     ],
+     "series": [
+      {
+       "label": "independent candidate thoughts",
+       "values": [
+        21184,
+        23040
+       ]
+      }
+     ],
+     "x_label": "Balanced-core harvest state",
+     "y_label": "Candidate thoughts",
+     "y_format": "integer",
+     "note": "Operational progress only, not a capability result. The second bar is fixed at 360 tasks x N=64; pivot branches and additional families are prohibited.",
+     "source": "experiments/qwen35_4b_balanced_core_answer_potential_sft/README.md and configs/default.yaml",
+     "headline": true
+    }
+   ]
+  },
   "qwen35_4b_balanced_discriminative_bridge": {
    "charts": [
     {

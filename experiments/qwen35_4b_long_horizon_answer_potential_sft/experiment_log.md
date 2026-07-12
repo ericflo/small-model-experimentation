@@ -84,3 +84,16 @@ No scientific GPU work had run at this boundary. No benchmark content was read.
   README, preregistration, and design-review hashes at both commits are byte-identical. The ancestry pin
   was re-anchored to `261680d3`; no design content or threshold changed. A guard run failed closed before
   model load, exposing the stale pointer, and this operational repair is committed before harvest resume.
+
+## 2026-07-12 — Parent Paused; Balanced-Core Forked
+
+- Paused after 331/1,080 train tasks at a safe atomic boundary: 21,184 traces, 97,883,041 sampled thought
+  tokens, 20,917 natural closes, and four exact periodic loops. The in-flight 332nd task was discarded; no
+  completed shard was lost.
+- Observed throughput made the remaining nine-family plus pivot protocol incompatible with the user's time
+  budget. The original design and partial artifacts remain preserved and this experiment makes no terminal
+  banking claim.
+- The user selected a prospectively frozen, resource-constrained follow-up at
+  [`qwen35_4b_balanced_core_answer_potential_sft`](../qwen35_4b_balanced_core_answer_potential_sft/README.md).
+  It imports the 331 shards by checksum, finishes the balanced 360-task three-family core, adds the observed
+  strongest shortest-trace control, skips branches, and gates all expansion on fresh SFT outcomes.
