@@ -1,0 +1,116 @@
+schema_version: 1
+experiment_id: qwen35_4b_pareto_policy_integration
+
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+  artifacts_root: large_artifacts/qwen35_4b_pareto_policy_integration
+  quick_data: experiments/qwen35_4b_gauntlet_frontier/data/sft_blend.jsonl
+  deep_data: experiments/qwen35_4b_gauntlet_frontier/data/sft_apex.jsonl
+
+engine:
+  max_model_len: 16384
+  gpu_memory_utilization: 0.85
+  max_num_seqs: 48
+  max_num_batched_tokens: 16384
+  cudagraph_capture_sizes: [1, 2, 4, 8, 16, 24, 32, 40, 48]
+
+strata:
+  trained_families:
+    [caravan, foundry_ledger, stallwright, runeward, kilnrite, glyphgate,
+     loomfix, ferrier, burrowmaze, gatepost, patchwheel, packhouse]
+  transfer_families: [brinework, spindle]
+  quick_atom_levels: [1, 2]
+  deep_atom_levels: [3, 4, 5, 6]
+  deep_episode_levels: [2, 3, 5]
+  retention_anchor_families: [ferrier]
+
+seeds:
+  model_smoke: 96001
+  calibration: 96100
+  qualification_blocks: [96200, 96300]
+  rollout_rounds: [96400, 96410, 96420, 96430]
+  integration_training: [42, 43, 44]
+  wrong_routing: 54
+  confirmatory_blocks: [96500, 96600]
+  benchmark_first: 54201
+
+specialist_train:
+  epochs: 2.5
+  learning_rate: 0.0002
+  rank: 32
+  alpha: 64
+  batch_size: 1
+  grad_accum: 16
+  max_length: 3072
+  think_loss_weight: 0.2
+  seed: 42
+
+evaluation:
+  thinking_budget: 1024
+  answer_max_tokens: 96
+  calibration_atoms_per_level: 16
+  calibration_episodes_per_level: 6
+  qualification_atoms_per_level: 48
+  qualification_episodes_per_level: 16
+  confirmatory_atoms_per_level: 96
+  confirmatory_episodes_per_level: 32
+  paired_bootstrap_samples: 20000
+  confidence: 0.95
+  sample_more_k: 8
+  sample_temperature: 0.8
+  sample_top_p: 0.95
+  sample_top_k: 20
+
+qualification:
+  # Scientific existence gate: no arbitrary minimum effect size.
+  require_positive_paired_mean: true
+  require_one_sided_bootstrap_lcb_above_zero: true
+  require_each_seed_block_positive: true
+  saturation_score: 0.98
+  minimum_effective_deficit_items: 8
+  maximum_anchor_regression: 0.02
+  maximum_transfer_regression: 0.02
+
+teacher_audit:
+  prefixes_per_stratum: 128
+  branch_top_k: 4
+  continuations_per_branch: 4
+  require_correct_route_lcb_above_wrong_route: true
+  maximum_median_non_target_logit_drift: 0.10
+  maximum_entropy_relative_drop: 0.10
+
+mopd:
+  top_k: 50
+  rollout_prompts_per_stratum: 96
+  rollout_thinking_budget: 1024
+  rollout_answer_max_tokens: 96
+  rollout_temperature: 0.8
+  rollout_top_p: 0.95
+  rollout_top_k: 20
+  rounds: 4
+  updates_per_round: 20
+  consume_rollout_once: true
+  learning_rate: 0.00002
+  rank: 32
+  alpha: 64
+  grad_accum: 8
+  max_length: 3072
+  max_grad_norm: 1.0
+  retention_fraction: 0.25
+  maximum_round_mean_kl: 0.10
+
+controls:
+  wrong_route_updates: 80
+  offpolicy_updates: 80
+  parameter_merge_weights: [0.25, 0.5, 0.75]
+  matched_sft_steps: 320
+
+decision:
+  # A tiny real gain counts. Reliability is supplied by pairing and replication,
+  # not by an arbitrary absolute-delta hurdle.
+  specialist_delta_threshold: 0.0
+  integrated_joint_delta_threshold: 0.0
+  require_joint_lcb_above_each_single_policy: true
+  require_final_above_matched_sample_more: true
+  maximum_retention_regression: 0.02

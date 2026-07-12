@@ -1,0 +1,74 @@
+{
+  "config": "configs/default.yaml",
+  "config_sha256": "802c52e4dc2fad86a04337ddf4c455b482c98e1c1a5a9dcac3273e2ae474da55",
+  "datasets": {
+    "deep_data": {
+      "families": [
+        "burrowmaze",
+        "caravan",
+        "ferrier",
+        "foundry_ledger",
+        "gatepost",
+        "glyphgate",
+        "kilnrite",
+        "loomfix",
+        "packhouse",
+        "patchwheel",
+        "runeward",
+        "stallwright"
+      ],
+      "path": "experiments/qwen35_4b_gauntlet_frontier/data/sft_apex.jsonl",
+      "rows": 4669,
+      "sha256": "474d9c97588b762a3835395f109fcb44386195f82874c50e448fe0b6f3c96100"
+    },
+    "quick_data": {
+      "families": [
+        "burrowmaze",
+        "caravan",
+        "ferrier",
+        "foundry_ledger",
+        "gatepost",
+        "glyphgate",
+        "kilnrite",
+        "loomfix",
+        "packhouse",
+        "patchwheel",
+        "runeward",
+        "stallwright"
+      ],
+      "path": "experiments/qwen35_4b_gauntlet_frontier/data/sft_blend.jsonl",
+      "rows": 2240,
+      "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+    }
+  },
+  "model": "Qwen/Qwen3.5-4B",
+  "retention_anchor_families": [
+    "ferrier"
+  ],
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "selftest_tail": [
+    "PASS spindle (0.1s): {\"family\": \"spindle\", \"atoms\": {\"1\": {\"oracle_mean\": 1.0, \"degenerate_max\": 0.0}, \"2\": {\"oracle_mean\": 1.0, \"degenerate_max\": 0.0}, \"3\": {\"oracle_mean\": 1.0, \"degenerate_max\": 0.0}, \"4\": {\"oracle_mean\": 1.0, \"degenerate_max\": 0.0}, \"5\": {\"oracle_mean\": 1.0, \"degenerate_max\": 0.0}, \"6\": {\"oracle_mean\": 1.0, \"degenerate_max\": 0.0}}, \"episodes\": {\"1\": {\"oracle_mean\": 1.0, \"random_mean\": 0.0}, \"2\": {\"oracle_mean\": 1.0, \"random_mean\": 0.0}, \"3\": {\"oracle_mean\": 1.0, \"random_mean\": 0.0}, \"4\": {\"oracle_mean\": 1.0, \"random_mean\": 0.0}, \"5\": {\"oracle_mean\": 1.0, \"random_mean\": 0.0}, \"6\": {\"oracle_mean\": 1.0, \"random_mean\": 0.0}}}",
+    "",
+    "all 14 families pass"
+  ],
+  "specialist_delta_threshold": 0.0,
+  "status": "pass",
+  "trained_families": [
+    "caravan",
+    "foundry_ledger",
+    "stallwright",
+    "runeward",
+    "kilnrite",
+    "glyphgate",
+    "loomfix",
+    "ferrier",
+    "burrowmaze",
+    "gatepost",
+    "patchwheel",
+    "packhouse"
+  ],
+  "transfer_families": [
+    "brinework",
+    "spindle"
+  ]
+}

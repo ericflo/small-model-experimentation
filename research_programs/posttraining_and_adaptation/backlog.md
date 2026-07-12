@@ -2,6 +2,11 @@
 
 ## Next Experiments
 
+- Active cross-program test: `qwen35_4b_pareto_policy_integration` asks whether
+  refreshed same-prefix MOPD can consolidate C54's complementary quick/deep
+  source policies where data interpolation failed. It replaces arbitrary
+  absolute teacher-gain bars with replicated paired `delta > 0`; the final
+  artifact still must beat matched sampling and integration controls.
 - Stopped cross-program test: `qwen35_4b_specialist_policy_integration` reached
   a design-feasibility negative before any specialist or integration update.
   Its sole tools core scored 0.994 at baseline, so the mandatory `+0.10` gain

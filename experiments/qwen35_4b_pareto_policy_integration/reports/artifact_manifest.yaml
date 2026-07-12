@@ -1,0 +1,20 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_pareto_policy_integration"
+external_artifacts:
+  - name: "quick/deep specialist, integrated, and control adapters plus merged composites"
+    storage: "large_artifacts/qwen35_4b_pareto_policy_integration/{adapters,merged}/"
+    required_for: "trained-policy evaluation and replication"
+    checksum: "recorded per checkpoint in runs/checkpoint_receipts.jsonl"
+    regenerate: "use the staged commands in README.md with the pinned environments"
+omitted_artifacts:
+  - path: "large_artifacts/qwen35_4b_pareto_policy_integration/"
+    reason: "multi-gigabyte model weights are gitignored and regenerated from committed data/config/receipts"
+reproducibility:
+  smoke_command: "python3 experiments/qwen35_4b_pareto_policy_integration/scripts/run.py --smoke"
+  full_command: "see the staged Run section in README.md"
+  required_external_artifacts: []
+notes: >-
+  Small calibration/evaluation rows, gate receipts, token ledgers, and analyses
+  remain in git. Benchmark items and transcripts are never retained. Every
+  evaluated LoRA is explicitly merged into the composite checkpoint.

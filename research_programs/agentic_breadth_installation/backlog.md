@@ -2,6 +2,13 @@
 
 ## Next Experiments
 
+- Active corrected successor: `qwen35_4b_pareto_policy_integration` regenerates
+  C54's quick-optimal `blend` and deep-optimal `apex` policies and tests whether
+  correct same-prefix on-policy MOPD can consolidate their non-convex frontier
+  into one checkpoint. Teacher qualification is paired `delta > 0` with two
+  positive blocks and a bootstrap lower bound; saturated cells are retention
+  anchors, not vetoes. Do not launch a competing Pareto-integration claim while
+  this registered run is active.
 - Stopped experiment: `qwen35_4b_specialist_policy_integration` — incumbent and
   compound-headroom gates passed, but `ferrier = 0.994` made the mandatory
   tools specialist's frozen `+0.10` bar mathematically impossible. Zero

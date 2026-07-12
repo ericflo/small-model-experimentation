@@ -1,0 +1,20 @@
+# Generated starter metadata. Run make check after adding artifacts.
+id: "qwen35_4b_pareto_policy_integration"
+title: "Qwen3.5-4B Pareto Policy Integration"
+source_track: "new"
+path: "experiments/qwen35_4b_pareto_policy_integration"
+primary_readme: "experiments/qwen35_4b_pareto_policy_integration/README.md"
+primary_report: "experiments/qwen35_4b_pareto_policy_integration/reports/report.md"
+summary: "Can on-policy multi-teacher distillation consolidate the complementary C54 quick and deep policies into one Qwen3.5-4B without their measured capacity tradeoff?"
+tags:
+  - "experiment"
+research_programs:
+  - "agentic_breadth_installation"
+top_level_dirs:
+  - "configs"
+  - "reports"
+  - "scripts"
+  - "src"
+file_counts: {}
+total_files: 0
+total_size_bytes: 0
