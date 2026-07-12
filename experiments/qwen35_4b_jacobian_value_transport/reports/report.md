@@ -2,9 +2,10 @@
 
 ## Status
 
-Pre-run design state. No scientific result has been observed. The experiment is
-being committed before the real-model stages so the preregistration can be verified
-against an immutable ancestor commit.
+Pre-run scientific state. No scientific result has been observed. The immutable
+design boundary, tokenizer/layout audit, targeted vector-Jacobian product, and a
+cache-free coordinate-write smoke all pass. The smoke result is explicitly
+non-scientific.
 
 ## Research Program Fit
 
@@ -22,7 +23,11 @@ frozen control set.
 
 ## Results
 
-Pending. Smoke receipts will be labeled non-scientific and cannot satisfy a gate.
+The real-model smoke used the pinned Qwen3.5-4B revision on an RTX 6000 Ada. Four
+single-token concepts produced finite nonzero pullback directions at layers 8, 16,
+and 24. Peak allocated memory was 9.25 GiB. A cat-to-dog coordinate swap at layer 16
+produced a nonzero mean residual delta norm of 0.4045 without cache use. These checks
+validate plumbing only and cannot satisfy G0.
 
 ## Controls
 

@@ -22,8 +22,8 @@ sys.path.insert(0, str(SRC))
 
 import yaml  # noqa: E402
 
-from io_utils import sha256_file, write_json  # noqa: E402
-from task_data import build_splits  # noqa: E402
+from io_utils import read_jsonl, sha256_file, write_json  # noqa: E402
+from task_data import CONCEPT_CANDIDATES, build_splits  # noqa: E402
 
 CONFIG_PATH = EXP / "configs" / "default.yaml"
 DATA_DIR = EXP / "data" / "procedural"
@@ -106,6 +106,113 @@ def run_smoke(config: dict[str, Any]) -> dict[str, Any]:
     return receipt
 
 
+def run_model_smoke(config: dict[str, Any]) -> dict[str, Any]:
+    design = design_boundary_receipt(config)
+    if not (DATA_DIR / "manifest.json").exists():
+        build_splits(DATA_DIR, config)
+    import torch
+    import transformers
+    from model_ops import QwenTransportModel
+
+    started = __import__("time").perf_counter()
+    model = QwenTransportModel(config)
+    concepts = tuple(CONCEPT_CANDIDATES[:4])
+    concept_ids = model.audit_concepts(concepts)
+    corpus = [row["text"] for row in read_jsonl(DATA_DIR / "lens_fit.jsonl")[:2]]
+    lens, prompt_receipts = model.fit_targeted_lens(
+        corpus,
+        concepts,
+        source_layers=(8, 16, 24),
+        target_layer=int(config["lens"]["target_layer"]),
+        concept_batch=4,
+        max_sequence_tokens=64,
+        skip_first_positions=int(config["lens"]["skip_first_positions"]),
+    )
+    smoke_dir = RUNS_DIR / "model_smoke"
+    smoke_dir.mkdir(parents=True, exist_ok=True)
+    torch.save(lens.state_dict(), smoke_dir / "targeted_lens.pt")
+    rendered = model.render(
+        "Think briefly, then answer with exactly `Concept: cat`.", enable_thinking=True
+    )
+    generation = model.generate_full_recompute(
+        rendered,
+        max_new_tokens=8,
+        do_sample=False,
+        temperature=1.0,
+        top_p=1.0,
+        top_k=0,
+        seed=int(config["seeds"]["generation"]),
+    )
+    patched_generation = model.generate_full_recompute(
+        rendered,
+        max_new_tokens=2,
+        do_sample=False,
+        temperature=1.0,
+        top_p=1.0,
+        top_k=0,
+        seed=int(config["seeds"]["generation"]),
+        layer_directions={
+            16: (lens.directions[16][0], lens.directions[16][1]),
+        },
+        alpha=1.0,
+    )
+    finite = all(
+        bool(torch.isfinite(value).all()) and float(value.norm()) > 0
+        for value in lens.directions.values()
+    )
+    result = {
+        "schema_version": 1,
+        "scientific_evidence": False,
+        "passed": bool(
+            design["passed"]
+            and model.n_layers == 32
+            and model.d_model == 2560
+            and len(concept_ids) == 4
+            and finite
+            and generation["sampled_tokens"] > 0
+            and patched_generation["sampled_tokens"] > 0
+            and patched_generation["mean_patch_delta_norm"] > 0
+        ),
+        "model": {
+            "id": config["model"]["id"],
+            "revision": config["model"]["revision"],
+            "layers": model.n_layers,
+            "hidden_size": model.d_model,
+            "vocab_size": model.vocab_size,
+            "dtype": config["model"]["dtype"],
+            "attention": config["model"]["attention"],
+            "load_seconds": model.load_seconds,
+        },
+        "environment": {
+            "torch": torch.__version__,
+            "transformers": transformers.__version__,
+            "gpu": torch.cuda.get_device_name(0),
+            "peak_allocated_bytes": torch.cuda.max_memory_allocated(),
+        },
+        "concept_token_ids": concept_ids,
+        "lens": {
+            "source_layers": list(lens.source_layers),
+            "target_layer": lens.target_layer,
+            "n_prompts": lens.n_prompts,
+            "pair_weighting": lens.pair_weighting,
+            "direction_norms": {
+                str(layer): lens.directions[layer].norm(dim=1).tolist()
+                for layer in lens.source_layers
+            },
+            "prompt_receipts": prompt_receipts,
+            "artifact_sha256": sha256_file(smoke_dir / "targeted_lens.pt"),
+        },
+        "generation": generation,
+        "patched_generation": patched_generation,
+        "elapsed_seconds": __import__("time").perf_counter() - started,
+    }
+    write_json(smoke_dir / "result.json", result)
+    if not result["passed"]:
+        raise RuntimeError(f"model smoke failed: {result}")
+    print(json.dumps(result, indent=2, sort_keys=True))
+    return result
+
+
 def unavailable_stage(stage: str) -> None:
     raise RuntimeError(
         f"stage {stage!r} is not implemented yet; refusing to emit a placeholder result"
@@ -123,6 +230,9 @@ def main() -> int:
     config = load_config()
     if args.stage == "smoke":
         run_smoke(config)
+        return 0
+    if args.stage == "model-smoke":
+        run_model_smoke(config)
         return 0
     design_boundary_receipt(config)
     unavailable_stage(args.stage)

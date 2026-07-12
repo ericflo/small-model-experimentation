@@ -33,9 +33,9 @@ def normalized_columns(directions: torch.Tensor, eps: float = 1e-8) -> torch.Ten
 
 def read_coordinates(residual: torch.Tensor, directions: torch.Tensor) -> torch.Tensor:
     """Least-squares coordinates of row-vector residuals in normalized directions."""
-    v = normalized_columns(directions)
+    v = normalized_columns(directions.float().to(residual.device))
     pinv = torch.linalg.pinv(v)
-    return residual @ pinv.T
+    return residual.float() @ pinv.T
 
 
 def swap_coordinates(
@@ -52,12 +52,12 @@ def swap_coordinates(
     """
     if residual.shape[-1] != source_direction.numel() or source_direction.shape != target_direction.shape:
         raise ValueError("residual and direction dimensions do not match")
-    v = torch.stack([source_direction, target_direction], dim=1).to(residual)
+    v = torch.stack([source_direction, target_direction], dim=1).float().to(residual.device)
     v = normalized_columns(v)
-    coordinates = residual @ torch.linalg.pinv(v).T
+    coordinates = residual.float() @ torch.linalg.pinv(v).T
     swapped = coordinates.flip(-1)
     delta = alpha * ((swapped - coordinates) @ v.T)
-    return residual + delta, delta
+    return residual + delta.to(residual.dtype), delta
 
 
 def replace_coordinates(
@@ -68,17 +68,18 @@ def replace_coordinates(
     alpha: float = 1.0,
 ) -> tuple[torch.Tensor, torch.Tensor]:
     """Set selected coordinates toward ``replacement`` by fraction ``alpha``."""
-    v = normalized_columns(directions.to(residual))
-    current = residual @ torch.linalg.pinv(v).T
-    desired = replacement.to(residual).expand_as(current)
+    v = normalized_columns(directions.float().to(residual.device))
+    current = residual.float() @ torch.linalg.pinv(v).T
+    desired = replacement.float().to(residual.device).expand_as(current)
     delta = alpha * ((desired - current) @ v.T)
-    return residual + delta, delta
+    return residual + delta.to(residual.dtype), delta
 
 
 def project_onto_span(vector: torch.Tensor, directions: torch.Tensor) -> torch.Tensor:
     """Orthogonal projection onto the span of normalized direction columns."""
-    v = normalized_columns(directions.to(vector))
-    return (vector @ torch.linalg.pinv(v).T) @ v.T
+    v = normalized_columns(directions.float().to(vector.device))
+    projected = (vector.float() @ torch.linalg.pinv(v).T) @ v.T
+    return projected.to(vector.dtype)
 
 
 def orthogonal_norm_matched(

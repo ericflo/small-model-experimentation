@@ -1,0 +1,101 @@
+{
+  "concept_token_ids": {
+    "cat": 7993,
+    "dog": 5388,
+    "horse": 14780,
+    "tiger": 49993
+  },
+  "elapsed_seconds": 9.25186601281166,
+  "environment": {
+    "gpu": "NVIDIA RTX 6000 Ada Generation",
+    "peak_allocated_bytes": 9257234432,
+    "torch": "2.11.0+cu129",
+    "transformers": "5.13.0"
+  },
+  "generation": {
+    "forward_tokens": 300,
+    "mean_patch_delta_norm": 0.0,
+    "prompt_tokens": 34,
+    "sampled_tokens": 8,
+    "text": "Thinking Process:\n\n1.  **",
+    "token_ids": [
+      90700,
+      8340,
+      25,
+      271,
+      16,
+      13,
+      220,
+      2972
+    ]
+  },
+  "lens": {
+    "artifact_sha256": "9542565b787ff479235ba9c0beec2ff400bee4c8b405296fc342415360833877",
+    "direction_norms": {
+      "16": [
+        0.06567679345607758,
+        0.07125861197710037,
+        0.08048956841230392,
+        0.06681529432535172
+      ],
+      "24": [
+        0.05167819932103157,
+        0.05005982890725136,
+        0.0492887906730175,
+        0.04574551433324814
+      ],
+      "8": [
+        0.08459370583295822,
+        0.09398891031742096,
+        0.099472776055336,
+        0.08138269186019897
+      ]
+    },
+    "n_prompts": 2,
+    "pair_weighting": "equal_valid_causal_source_target_pairs",
+    "prompt_receipts": [
+      {
+        "causal_pairs": 1128,
+        "prompt_index": 0,
+        "sequence_tokens": 64,
+        "valid_positions": 47
+      },
+      {
+        "causal_pairs": 1128,
+        "prompt_index": 1,
+        "sequence_tokens": 64,
+        "valid_positions": 47
+      }
+    ],
+    "source_layers": [
+      8,
+      16,
+      24
+    ],
+    "target_layer": 31
+  },
+  "model": {
+    "attention": "sdpa",
+    "dtype": "bfloat16",
+    "hidden_size": 2560,
+    "id": "Qwen/Qwen3.5-4B",
+    "layers": 32,
+    "load_seconds": 6.0068871304392815,
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "vocab_size": 248320
+  },
+  "passed": true,
+  "patched_generation": {
+    "forward_tokens": 69,
+    "mean_patch_delta_norm": 0.4044909179210663,
+    "prompt_tokens": 34,
+    "sampled_tokens": 2,
+    "text": "Thinking Process",
+    "token_ids": [
+      90700,
+      8340
+    ]
+  },
+  "schema_version": 1,
+  "scientific_evidence": false
+}

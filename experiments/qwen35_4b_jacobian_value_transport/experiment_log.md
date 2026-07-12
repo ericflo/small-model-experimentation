@@ -25,3 +25,20 @@
   `119b20dcbb41dbc578cc8aabbbcb7cf65739fc734180654dcfd0f5f69d12fdf0`.
 - The run harness now fails closed unless this commit is an ancestor and both
   frozen-file digests match. Scientific GPU work remains unstarted.
+
+## 2026-07-12 — real-model plumbing gate
+
+- Recreated the pinned Transformers environment and verified torch 2.11.0,
+  Transformers 5.13.0, flash-linear-attention 0.5.1, and causal-conv1d
+  1.6.2.post1.
+- Tokenizer audit confirmed the configured think tokens and all 24 positive-
+  control concepts as single leading-space tokens.
+- The first real targeted pullback fitted four token directions at layers 8,
+  16, and 24 from two 64-token prompts with explicit equal causal-pair
+  weighting. All directions were finite and nonzero.
+- A first coordinate-write attempt exposed that `torch.linalg.pinv` rejects
+  bf16 inputs. The implementation now reads coordinates in fp32 and casts only
+  the final residual delta back to bf16; a regression test covers this path.
+- The rerun passed: 26 CPU tests, 9.25 GiB peak allocated model memory, and a
+  nonzero mean patch delta norm of 0.4045 in cache-free full-prefix generation.
+  These are plumbing checks and carry no scientific evidence.

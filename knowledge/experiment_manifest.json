@@ -2547,10 +2547,11 @@
   },
   {
     "file_counts": {
-      ".json": 3,
+      ".json": 4,
       ".jsonl": 7,
       ".md": 7,
-      ".py": 10,
+      ".pt": 1,
+      ".py": 12,
       ".yaml": 3
     },
     "id": "qwen35_4b_jacobian_value_transport",
@@ -2577,8 +2578,8 @@
       "src",
       "tests"
     ],
-    "total_files": 30,
-    "total_size_bytes": 561867
+    "total_files": 34,
+    "total_size_bytes": 649660
   },
   {
     "file_counts": {

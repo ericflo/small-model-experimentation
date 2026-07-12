@@ -38,6 +38,16 @@ def test_coordinate_swap_exchanges_read_coordinates() -> None:
     assert float(delta[2]) == 0.0
 
 
+def test_coordinate_swap_supports_bfloat16_residual() -> None:
+    source = torch.tensor([1.0, 0.0, 0.0])
+    target = torch.tensor([0.0, 1.0, 0.0])
+    residual = torch.tensor([2.0, -1.0, 4.0], dtype=torch.bfloat16)
+    patched, delta = swap_coordinates(residual, source, target)
+    assert patched.dtype == torch.bfloat16
+    assert delta.dtype == torch.float32
+    torch.testing.assert_close(patched.float(), torch.tensor([-1.0, 2.0, 4.0]))
+
+
 def test_random_control_is_orthogonal_and_norm_matched() -> None:
     directions = torch.tensor([[1.0, 0.0], [0.0, 1.0], [0.0, 0.0]])
     reference = torch.tensor([0.0, 0.0, 4.0])
