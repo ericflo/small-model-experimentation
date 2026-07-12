@@ -2442,12 +2442,15 @@ class SiteBuilder:
             + "</dl></details>"
         )
 
-        imported_count = sum(1 for exp in self.experiments if exp["track"] != "new")
+        n_finished = sum(1 for exp in self.experiments if exp["status"] == "finished")
+        n_inprog = len(self.experiments) - n_finished
         content = (
             '<section class="hero"><h1>What has this corpus learned?</h1>'
-            '<p class="lede">One fixed Qwen3.5-4B, no scaling, no teachers: the mission is to unearth latent capability. '
-            'This site is the reading surface for that effort — the latest findings, the evidence behind every claim, and each experiment rendered in full. '
-            f'{imported_count} of the {len(self.experiments)} experiments were imported on 2026-06-28 from the predecessor working repo; new work lands here first.</p>'
+            '<p class="lede">One fixed Qwen3.5-4B — no scaling, no bigger teacher — pushed to see how much capability you can '
+            'draw out of it and install back in. This is the reading surface: '
+            f'<a href="experiments/">{n_finished} finished experiments</a> and '
+            f'<a href="experiments/?status=in-progress">{n_inprog} in progress</a>, every claim tied to its evidence, '
+            'every result rendered from its own data — newest first.</p>'
             f'<div class="stat-row">{tiles}</div>'
             f'{claim_strip}{strip_legend}{glossary}</section>'
             f'<section id="latest-feed" class="band"><div class="section-head"><h2>Latest findings</h2>'

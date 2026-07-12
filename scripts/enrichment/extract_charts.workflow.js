@@ -16,25 +16,30 @@ const CHART_SCHEMA = {
       type: 'array', maxItems: 4,
       items: {
         type: 'object',
-        required: ['title', 'kind', 'y_label', 'y_format', 'series', 'note', 'source', 'headline'],
+        required: ['title', 'kind', 'y_label', 'y_format', 'note', 'source', 'headline'],
         properties: {
           title: { type: 'string', description: 'plain-language chart title, no slugs' },
-          kind: { enum: ['bar', 'line'] },
+          kind: { enum: ['bar', 'line', 'heatmap', 'scatter'] },
           x_label: { type: 'string' },
           y_label: { type: 'string' },
-          y_format: { enum: ['number', 'percent01', 'percent100'] },
+          y_format: { enum: ['number', 'percent01', 'percent100', 'integer'] },
           categories: { type: 'array', items: { type: 'string' }, maxItems: 10, description: 'bar charts only: x-axis category labels' },
           series: {
-            type: 'array', minItems: 1, maxItems: 5,
+            type: 'array', maxItems: 6,
+            description: 'bar/line/scatter only (omit for heatmap)',
             items: {
               type: 'object', required: ['label'],
               properties: {
                 label: { type: 'string' },
                 values: { type: 'array', items: { type: 'number' }, maxItems: 10, description: 'bar: one value per category' },
-                points: { type: 'array', items: { type: 'array', items: { type: 'number' }, minItems: 2, maxItems: 2 }, maxItems: 40, description: 'line: [x,y] pairs, x numeric' },
+                points: { type: 'array', items: { type: 'array', items: { type: 'number' }, minItems: 2, maxItems: 2 }, maxItems: 120, description: 'line: [x,y] pairs sorted by x. scatter: [x,y] pairs, any order' },
               },
             },
           },
+          x_categories: { type: 'array', items: { type: 'string' }, maxItems: 24, description: 'heatmap only: column labels' },
+          y_categories: { type: 'array', items: { type: 'string' }, maxItems: 24, description: 'heatmap only: row labels' },
+          values: { type: 'array', items: { type: 'array', items: { type: ['number', 'null'] } }, description: 'heatmap only: rows[y][x] grid of values (null = no data); one row per y_category, one column per x_category' },
+          value_format: { enum: ['number', 'percent01', 'percent100', 'integer'], description: 'heatmap cell number format' },
           note: { type: 'string', description: 'one plain sentence: the takeaway a reader should get (<=140 chars)' },
           source: { type: 'string', description: "where every number comes from: repo-relative file path(s) inside the experiment dir, or 'README table' / 'report table'" },
           headline: { type: 'boolean', description: 'exactly one chart per experiment is the headline' },
@@ -54,11 +59,13 @@ You are extracting CHART SPECS so the research site can render this experiment's
 
 HARD RULES:
 - Every plotted number must be copied exactly from a cited source (file path or 'README table'/'report table'). NEVER read numbers off PNG figures. NEVER estimate or invent.
-- kind 'bar' for categorical comparisons (conditions, arms, ablations): give 'categories' (<=10) and each series 'values' aligned to them (<=5 series; total bars <= 20).
-- kind 'line' for sweeps over a numeric x (thinking budget, composition depth, training round, dose, steps): each series has 'points' [[x,y],...] sorted by x (<=40 points).
-- y_format: 'percent01' when values are rates in 0-1; 'percent100' when already 0-100; else 'number'. All series in one chart share the y scale — do not mix metrics with different scales in one chart.
+- kind 'bar' for categorical comparisons (conditions, arms, ablations): give 'categories' (<=10) and each series 'values' aligned to them (<=6 series; total bars <= 24). Long category labels are fine — the renderer lays crowded/long-label bars out horizontally, so never truncate a label to fit.
+- kind 'line' for sweeps over a numeric x (thinking budget, composition depth, training round, dose, steps): each series has 'points' [[x,y],...] sorted by x (<=120 points). Many series are fine — the renderer gives 5+ series an interactive legend.
+- kind 'heatmap' for a 2D categorical GRID of one measured value — e.g. a rate/count per (family x condition), per (seed x stage), a confusion-style matrix, coverage by (task x sketch). Give 'x_categories' (columns, <=24), 'y_categories' (rows, <=24), and 'values' as rows[y][x] (one inner array per y_category, each with one number-or-null per x_category); set 'value_format'. Omit 'series'. Use this instead of cramming a genuinely 2D result into stacked bars.
+- kind 'scatter' for the relationship between two continuous quantities measured per item (e.g. validity rate vs correct-execution rate, confidence vs accuracy): each series has 'points' [[x,y],...] (order-free); set x_label/y_label.
+- y_format / value_format: 'percent01' when values are rates in 0-1; 'percent100' when already 0-100; 'integer' for counts; else 'number'. In bar/line/scatter, all series share one y scale — do not mix metrics with different scales in one chart.
 - Labels are plain language ('frozen', 'self-trained', 'greedy@1'), not file keys. Titles state what is compared, notes state what it means.
-- Small is beautiful: 2-6 bars beats 20; pick the conditions the report itself highlights.
+- Pick the representation that TEACHES the result: a real 2D grid deserves a heatmap, an x-y relationship a scatter, a sweep a line, a small set of conditions a bar. Prefer the conditions the report itself highlights over dumping everything.
 - If the experiment genuinely has no meaningful numeric result series (pure infra/source-only), return {"charts": []}.
 
 Your structured output is consumed by a build script — return only the object.`
@@ -67,7 +74,7 @@ Your structured output is consumed by a build script — return only the object.
 function verifyPrompt(id, charts) {
   return `Repo: /home/ericflo/Development/small-model-experimentation. Experiment: experiments/${id}/
 
-You are the NUMBER VERIFIER for chart specs extracted for the research site. For EVERY series value/point in the specs below, open the cited source (file in the experiment dir, or the README/report markdown table) and confirm the number appears there exactly or as a trivial transform (0.224 <-> 22.4%; 43.2 <-> '43.2%'). Also check: series lengths match categories; y_format matches the value scale; x points sorted; labels/titles/notes are faithful to what the source measures (no overclaiming); exactly one headline chart.
+You are the NUMBER VERIFIER for chart specs extracted for the research site. For EVERY number in the specs below (bar 'values', line/scatter 'points', heatmap 'values[y][x]' cells), open the cited source (file in the experiment dir, or the README/report markdown table) and confirm it appears there exactly or as a trivial transform (0.224 <-> 22.4%; 43.2 <-> '43.2%'). Also check: bar series lengths match 'categories'; heatmap grid is exactly len(y_categories) rows by len(x_categories) columns; y_format/value_format matches the value scale; line points sorted by x; labels/titles/notes are faithful to what the source measures (no overclaiming); exactly one headline chart.
 
 - Fix any wrong value, label, y_format, or note USING ONLY the sources.
 - DROP any chart whose numbers you cannot locate, and any chart that misrepresents the experiment.
