@@ -170,6 +170,15 @@ enough to erase transfer. Require an exact-logit locality preflight—then an ab
 agentic win—before treating thought-token steering as capability elicitation. Higher varentropy is not a
 license to push harder; its measured safety relationship was non-monotone.
 
+The unclaimed Jacobian transport result adds a causal-representation corollary. An averaged J coordinate at
+layer 24 redirected 18/24 direct concept reports, but the same edit changed 0/24 separately mapped
+consequences at every tested layer; the consequence margin was flat even while the direct margin crossed
+zero. **Decodability, local writability, and downstream transport are distinct gates.** A token-aligned
+direction that controls an imminent word is not yet a reusable reasoning variable. Future J-space work must
+use a true context-local set clamp, exact realized-delta-norm controls, and a consequence firewall before it
+can license thought-prefix valuation or capability claims. See
+[qwen35_4b_jacobian_value_transport](../experiments/qwen35_4b_jacobian_value_transport/reports/report.md).
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.

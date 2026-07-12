@@ -116,10 +116,10 @@ an earlier layer band, and exact per-example delta-norm controls.
 
 ## Knowledgebase Update
 
-- Program evidence: update after synchronizing this result to `origin/main`.
+- Program evidence: updated after synchronizing the terminal result to `origin/main`.
 - Program backlog: branch to context-local clamped transport in a new experiment.
-- Claim ledger: allocate a scoped claim only after a fresh pull of current
-  `origin/main`; no number was reserved from stale state.
+- Claim ledger: unclaimed while the repository-wide adversarial claim re-grade
+  is open; no number is reserved.
 
 ## Artifacts
 
