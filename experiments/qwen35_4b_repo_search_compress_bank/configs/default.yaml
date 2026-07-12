@@ -82,8 +82,9 @@ training:
   rank: 32
   alpha: 64
   dropout: 0.05
-  batch_size: 2
-  gradient_accumulation_steps: 8
+  batch_size: 4
+  gradient_accumulation_steps: 4
+  loss_chunk_positions: 128
   max_length: 4096
   default_think_loss_weight: 0.2
   arms: [apex_replay, action_only, compact]

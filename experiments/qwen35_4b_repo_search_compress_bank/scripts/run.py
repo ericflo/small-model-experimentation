@@ -138,6 +138,7 @@ def main() -> int:
             "--batch-size", str(cfg["training"]["batch_size"]),
             "--grad-accum", str(cfg["training"]["gradient_accumulation_steps"]),
             "--max-length", str(cfg["training"]["max_length"]),
+            "--loss-chunk-positions", str(cfg["training"]["loss_chunk_positions"]),
             "--seed", str(cfg["training"]["seed"]),
         ])
         merged = artifact_root / "merged" / arm

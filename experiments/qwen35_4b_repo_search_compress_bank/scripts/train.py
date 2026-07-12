@@ -21,6 +21,7 @@ os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
 import torch
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
 from torch.utils.data import Dataset
+from torch.utils.checkpoint import checkpoint
 from transformers import (
     AutoModelForCausalLM,
     AutoTokenizer,
@@ -35,6 +36,45 @@ TARGET_MODULES = [
     "q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"
 ]
 OPERATORS = ("INSPECT", "PATCH", "VERIFY", "COMMIT")
+
+
+def checkpointed_weighted_cross_entropy(
+    logits: torch.Tensor,
+    labels: torch.Tensor,
+    signed_weights: torch.Tensor,
+    chunk_positions: int,
+) -> torch.Tensor:
+    """Exact weighted CE without retaining a full-vocabulary FP32 temporary."""
+    if chunk_positions < 1:
+        raise ValueError("chunk_positions must be positive")
+    flat_logits = logits.reshape(-1, logits.size(-1))
+    flat_labels = labels.reshape(-1)
+    flat_weights = signed_weights.reshape(-1)
+
+    def chunk_loss(
+        chunk_logits: torch.Tensor,
+        chunk_labels: torch.Tensor,
+        chunk_weights: torch.Tensor,
+    ) -> torch.Tensor:
+        losses = torch.nn.functional.cross_entropy(
+            chunk_logits, chunk_labels.clamp(min=0), reduction="none"
+        )
+        return (losses * chunk_weights).sum()
+
+    total = logits.new_zeros((), dtype=torch.float32)
+    for start in range(0, flat_logits.size(0), chunk_positions):
+        end = min(start + chunk_positions, flat_logits.size(0))
+        # Reentrant checkpoint runs the expensive softmax under no_grad and
+        # recomputes it chunk-by-chunk during backward, avoiding the 9.5 GiB
+        # all-position FP32 allocation that exceeded the 48 GB device.
+        total = total + checkpoint(
+            chunk_loss,
+            flat_logits[start:end],
+            flat_labels[start:end],
+            flat_weights[start:end],
+            use_reentrant=True,
+        )
+    return total
 
 
 def sha256_file(path: Path) -> str:
@@ -184,13 +224,15 @@ def main() -> int:
     parser.add_argument("--lr", type=float, default=2e-4)
     parser.add_argument("--rank", type=int, default=32)
     parser.add_argument("--alpha", type=int, default=64)
-    parser.add_argument("--batch-size", type=int, default=2)
-    parser.add_argument("--grad-accum", type=int, default=8)
+    parser.add_argument("--batch-size", type=int, default=4)
+    parser.add_argument("--grad-accum", type=int, default=4)
+    parser.add_argument("--loss-chunk-positions", type=int, default=128)
     parser.add_argument("--max-length", type=int, default=4096)
     parser.add_argument("--w-think", type=float, default=0.2)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--encode-only", action="store_true")
     parser.add_argument("--smoke", action="store_true")
+    parser.add_argument("--stress-longest", action="store_true")
     args = parser.parse_args()
 
     records = []
@@ -271,7 +313,13 @@ def main() -> int:
     print(json.dumps(encoding_receipt, indent=2), flush=True)
     if args.encode_only:
         return 0
-    if args.smoke:
+    if args.stress_longest:
+        ordered = sorted(encoded, key=lambda row: len(row["input_ids"]), reverse=True)[:8]
+        if len(ordered) != 8 or len({row["source"] for row in ordered}) != 1:
+            raise SystemExit("long-target stress requires eight rows from one source")
+        args.max_steps = 2
+        args.grad_accum = 1
+    elif args.smoke:
         ordered = ordered[:8]
         args.max_steps = 2
         args.grad_accum = 1
@@ -334,14 +382,11 @@ def main() -> int:
             shifted_labels = labels[:, 1:].contiguous()
             shifted_weights = weights[:, 1:].contiguous()
             shifted_answer_mask = answer_mask[:, 1:].contiguous()
-            losses = torch.nn.functional.cross_entropy(
-                logits.reshape(-1, logits.size(-1)),
-                shifted_labels.reshape(-1).clamp(min=0),
-                reduction="none",
-            ).view_as(shifted_labels)
             active = (shifted_labels != -100).float()
             signed = active * shifted_weights
-            numerator = (losses * signed).sum()
+            numerator = checkpointed_weighted_cross_entropy(
+                logits, shifted_labels, signed, args.loss_chunk_positions
+            )
             if int(source_codes[0].item()) == 0:
                 denominator = signed.abs().sum().clamp(min=1.0)  # exact C54 objective
             else:
@@ -381,6 +426,8 @@ def main() -> int:
             "apex": "absolute signed loss-weight mass (C54 replay)",
             "repository": "unweighted answer-token count (same action denominator in both controls)",
         },
+        "loss_chunk_positions": args.loss_chunk_positions,
+        "loss_implementation": "exact_sequence_chunked_checkpointed_cross_entropy",
     }
     (args.out / "training_receipt.json").write_text(
         json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8"

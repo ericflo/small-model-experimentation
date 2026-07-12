@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "scientific_result": false,
+  "registered_seed_consumed": false,
+  "arm": "apex_replay_stress_canary",
+  "rows": 8,
+  "selection": "eight longest encoded apex rows",
+  "max_encoded_tokens": 3193,
+  "batch_size": 4,
+  "optimizer_steps": 2,
+  "loss_chunk_positions": 128,
+  "loss_implementation": "exact_sequence_chunked_checkpointed_cross_entropy",
+  "training_loss": 0.13966979086399078,
+  "wall_seconds": 45.17663103342056,
+  "peak_cuda_bytes": 48375846912,
+  "gpu": "NVIDIA RTX 6000 Ada Generation",
+  "dense_equivalence": {
+    "scalar_loss_atol": 0.000001,
+    "all_logit_gradients_atol": 0.000001,
+    "passed": true
+  },
+  "formerly_failing_allocation_path_passed": true,
+  "adapter_is_deployable_result": false
+}

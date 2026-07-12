@@ -26,3 +26,5 @@
 
 - Apex replay with batch 4 × accumulation 4 stopped at optimizer step 52 on a 3,193-token batch: the 9.54 GiB logits allocation exceeded 9.09 GiB free. Loss/gradients were finite, but no adapter or checkpoint was saved.
 - Froze the compute-equivalent recovery before rerun: batch 2 × accumulation 8, effective batch 16, 584 steps, 9,344 examples, three apex padding duplicates, and exactly two control epochs. Enabled expandable CUDA segments. All arms share the corrected geometry.
+- The 2 × 8 fallback completed three unsaved steps but measured 19–23 s/step. Root cause was dense cross-entropy's full 248k-vocabulary FP32 temporary, not forward activations. Restored the original 4 × 4 geometry with exact gradient-checkpointed 128-position loss chunks; CPU loss/gradient equivalence passes at 1e-6.
+- A two-step canary on the eight longest 3,193-token rows passed at batch four, peaking at 48,375,846,912 CUDA bytes. This directly covers the formerly failing allocation path; the smoke adapter is not eligible for evaluation.

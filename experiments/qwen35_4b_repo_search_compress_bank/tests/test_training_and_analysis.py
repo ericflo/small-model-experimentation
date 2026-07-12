@@ -6,6 +6,8 @@ import sys
 import unittest
 from pathlib import Path
 
+import torch
+
 EXP = Path(__file__).resolve().parents[1]
 
 
@@ -24,6 +26,25 @@ analyze_repo = load_script("analyze_repo")
 
 
 class TrainingAndAnalysisTests(unittest.TestCase):
+    def test_checkpointed_cross_entropy_matches_dense_loss_and_gradient(self):
+        generator = torch.Generator().manual_seed(11)
+        logits_dense = torch.randn(2, 5, 7, generator=generator, requires_grad=True)
+        logits_chunked = logits_dense.detach().clone().requires_grad_(True)
+        labels = torch.tensor([[1, 2, 3, 4, -100], [0, 6, 2, 1, 5]])
+        weights = torch.tensor([[1.0, 0.2, -0.3, 0.0, 0.0], [1.0, 2.0, 0.5, 1.0, 0.1]])
+        active = (labels != -100).float()
+        dense_losses = torch.nn.functional.cross_entropy(
+            logits_dense.reshape(-1, 7), labels.reshape(-1).clamp(min=0), reduction="none"
+        ).view_as(labels)
+        dense = (dense_losses * weights * active).sum()
+        chunked = train.checkpointed_weighted_cross_entropy(
+            logits_chunked, labels, weights * active, chunk_positions=3
+        )
+        dense.backward()
+        chunked.backward()
+        self.assertTrue(torch.allclose(dense, chunked, atol=1e-6, rtol=1e-6))
+        self.assertTrue(torch.allclose(logits_dense.grad, logits_chunked.grad, atol=1e-6, rtol=1e-6))
+
     def test_batches_keep_apex_and_four_operator_repository_rows_separate(self):
         apex = [
             {"source": "apex", "input_ids": list(range(10 + index)), "source_code": 0}

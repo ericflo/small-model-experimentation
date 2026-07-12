@@ -39,7 +39,7 @@ Entropy and varentropy may be recorded later to route which live states deserve 
 5. Gate trained-family retention, family-disjoint transfer, compact-vs-action-only advantage, matched-call sampling, verification/commit retention, invalid actions, and unrelated-context logit locality.
 6. Confirm on a second transfer block. Only then assign fresh union-checked Menagerie seeds and compare aggregate quick/medium scores through the benchmark CLI.
 
-Exact thresholds, seeds, and interpretation rules are frozen in [the preregistration](reports/preregistration.md), its pre-harvest [token-mass implementation amendment](reports/preregistration_amendment.md), the compute-equivalent [memory-feasibility amendment](reports/preregistration_amendment_2.md), and [configuration](configs/default.yaml). The adversarial review is in [reports/design_review.md](reports/design_review.md).
+Exact thresholds, seeds, and interpretation rules are frozen in [the preregistration](reports/preregistration.md), its pre-harvest [token-mass implementation amendment](reports/preregistration_amendment.md), the [memory-feasibility audit](reports/preregistration_amendment_2.md), the final exact [chunked-loss amendment](reports/preregistration_amendment_3.md), and [configuration](configs/default.yaml). The adversarial review is in [reports/design_review.md](reports/design_review.md).
 
 ## Run
 
