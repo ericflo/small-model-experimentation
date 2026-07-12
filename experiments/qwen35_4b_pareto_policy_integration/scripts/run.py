@@ -442,6 +442,8 @@ def _mopd_round(
     *, config: dict, config_path: Path, paths: dict[str, Path], arm: str,
     seed: int, round_index: int, current: Path, routing: str,
     rollout_source: str = "student", updates_override: int | None = None,
+    selection_seed_base: int | None = None,
+    target_initial_loss: float | None = None,
 ) -> Path:
     prompt_path = EXP / "data" / "mopd_prompts" / f"{arm}_s{seed}_r{round_index}.jsonl"
     if not prompt_path.exists():
@@ -460,6 +462,9 @@ def _mopd_round(
         updates_override
         if updates_override is not None
         else config["mopd"]["updates_per_round"]
+    )
+    selection_seed = int(
+        (selection_seed_base if selection_seed_base is not None else seed) + round_index
     )
     if rollout_source == "student" and rollout_path.exists() and rollout_meta.exists():
         meta = json.loads(rollout_meta.read_text())
@@ -540,7 +545,7 @@ def _mopd_round(
         if (
             receipt.get("rollouts_sha256") != sha256_file(rollout_path)
             or receipt.get("routing") != routing
-            or int(receipt.get("selection_seed", -1)) != seed + round_index
+            or int(receipt.get("selection_seed", -1)) != selection_seed
             or int(receipt.get("optimizer_updates", -1)) != optimizer_updates
         ):
             raise SystemExit(f"stale teacher cache: {cache}")
@@ -553,7 +558,7 @@ def _mopd_round(
                 "--quick-teacher", str(paths["quick"]), "--deep-teacher", str(paths["deep"]),
                 "--routing", routing, "--out", str(cache),
                 "--optimizer-updates", str(optimizer_updates),
-                "--selection-seed", str(seed + round_index),
+                "--selection-seed", str(selection_seed),
             ],
             training=True,
         )
@@ -561,9 +566,15 @@ def _mopd_round(
     merged = paths["root"] / "merged" / arm / f"seed_{seed}" / f"round_{round_index}"
     if _checkpoint_complete(adapter, merged):
         training_receipt = json.loads((adapter / "training_receipt.json").read_text())
+        if not training_receipt.get("round_loss_gate", {}).get("passed"):
+            raise SystemExit(f"preserved MOPD checkpoint failed its loss/safety gate: {adapter}")
         if (
             int(training_receipt.get("optimizer_steps", -1)) != optimizer_updates
             or training_receipt.get("routing") != routing
+            or not training_receipt.get("consume_once_verified")
+            or training_receipt.get("initial_probe", {}).get(
+                "target_mean_corrected_topk_loss"
+            ) != target_initial_loss
         ):
             raise SystemExit(f"stale MOPD checkpoint: {adapter}")
         print(f"[resume] MOPD {arm} round {round_index} checkpoint", flush=True)
@@ -578,6 +589,8 @@ def _mopd_round(
     ]
     if updates_override is not None:
         train_command.extend(("--updates", str(updates_override)))
+    if target_initial_loss is not None:
+        train_command.extend(("--target-initial-loss", repr(target_initial_loss)))
     return_code = _run(
         train_command,
         training=True,
@@ -590,6 +603,11 @@ def _mopd_round(
         ],
         training=True,
     )
+    merge_receipt = json.loads((merged / "merge_receipt.json").read_text())
+    if int(merge_receipt.get("nonzero_lora_modules", 0)) != int(
+        merge_receipt.get("applied_lora_modules", -1)
+    ):
+        raise SystemExit(f"MOPD merge contains zero deltas: {merged}")
     _record_checkpoint(f"{arm}_seed{seed}_round{round_index}", adapter, merged)
     if return_code == 3:
         raise SystemExit(
@@ -638,15 +656,35 @@ def _locality(config: dict, config_path: Path) -> None:
 
 def _run_mopd_arm(
     config: dict, config_path: Path, *, arm: str, seed: int, routing: str,
-    rollout_source: str = "student",
+    rollout_source: str = "student", selection_seed_base: int | None = None,
+    initial_match_arm: str | None = None, initial_match_seed: int | None = None,
 ) -> Path:
     paths = _paths(config)
     current = paths["quick"]
     for round_index in range(int(config["mopd"]["rounds"])):
+        target_initial_loss = None
+        if initial_match_arm is not None:
+            if initial_match_seed is None:
+                raise ValueError("initial_match_seed is required with initial_match_arm")
+            reference = (
+                paths["root"] / "adapters" / initial_match_arm
+                / f"seed_{initial_match_seed}" / f"round_{round_index}"
+                / "training_receipt.json"
+            )
+            if not reference.is_file():
+                raise SystemExit(f"initial-loss reference is missing: {reference}")
+            reference_receipt = json.loads(reference.read_text())
+            if not reference_receipt.get("round_loss_gate", {}).get("passed"):
+                raise SystemExit(f"initial-loss reference failed its gate: {reference}")
+            target_initial_loss = float(
+                reference_receipt["initial_probe"]["mean_corrected_topk_loss"]
+            )
         current = _mopd_round(
             config=config, config_path=config_path, paths=paths, arm=arm,
             seed=seed, round_index=round_index, current=current, routing=routing,
             rollout_source=rollout_source,
+            selection_seed_base=selection_seed_base,
+            target_initial_loss=target_initial_loss,
         )
     return current
 
@@ -665,14 +703,26 @@ def _integrate(config: dict, config_path: Path, seed: int | None) -> None:
 def _controls(config: dict, config_path: Path) -> None:
     _require_gate(EXP / "analysis" / "locality_pilot.json")
     paths = _paths(config)
+    primary_seed = int(config["seeds"]["integration_training"][0])
+    scheduled_updates = int(config["mopd"]["rounds"]) * int(
+        config["mopd"]["updates_per_round"]
+    )
+    if scheduled_updates != int(config["controls"]["wrong_route_updates"]):
+        raise SystemExit("wrong-route update schedule does not match the frozen control")
+    if scheduled_updates != int(config["controls"]["offpolicy_updates"]):
+        raise SystemExit("off-policy update schedule does not match the frozen control")
     _run_mopd_arm(
         config, config_path, arm="wrong_route",
         seed=int(config["seeds"]["wrong_routing"]), routing="wrong",
+        selection_seed_base=primary_seed,
+        initial_match_arm="correct", initial_match_seed=primary_seed,
     )
     _run_mopd_arm(
         config, config_path, arm="offpolicy",
         seed=int(config["seeds"]["wrong_routing"]), routing="correct",
         rollout_source="teacher_routed",
+        selection_seed_base=primary_seed,
+        initial_match_arm="correct", initial_match_seed=primary_seed,
     )
     for weight in config["controls"]["parameter_merge_weights"]:
         tag = f"parameter_merge_deep_{int(round(float(weight) * 100)):02d}"

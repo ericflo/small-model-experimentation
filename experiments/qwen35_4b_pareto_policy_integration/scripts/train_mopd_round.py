@@ -61,6 +61,30 @@ def _training_units(samples: list[dict], quick_fraction: float, micro_steps: int
     return units
 
 
+def _unit_loss(model, unit: dict) -> tuple[torch.Tensor, int, int]:
+    """Evaluate one rollout span against its cached full-softmax teacher top-k."""
+    sample = unit["sample"]
+    positions = unit["positions"]
+    end = max(positions) + 1
+    prompt = sample["prompt_ids"].to(dtype=torch.long).tolist()
+    completion = sample["completion_ids"].to(dtype=torch.long).tolist()[:end]
+    ids = torch.tensor([prompt + completion], dtype=torch.long, device=model.device)
+    outputs = model(
+        input_ids=ids, attention_mask=torch.ones_like(ids),
+        logits_to_keep=end + 1, use_cache=False,
+    )
+    prediction = outputs.logits[0, -(end + 1):-1]
+    pos = torch.tensor(positions, dtype=torch.long, device=model.device)
+    selected_logits = prediction.index_select(0, pos)
+    cpu_pos = torch.tensor(positions, dtype=torch.long)
+    teacher_indices = sample["teacher_indices"].index_select(0, cpu_pos)
+    teacher_log_probs = sample["teacher_log_probs"].index_select(0, cpu_pos)
+    loss = sparse_teacher_topk_reverse_kl(
+        selected_logits, teacher_indices, teacher_log_probs, reduction="mean"
+    )
+    return loss, int(ids.shape[1]), len(positions)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path)
@@ -70,9 +94,13 @@ def main() -> int:
     parser.add_argument("--round", type=int, required=True)
     parser.add_argument("--seed", type=int, required=True)
     parser.add_argument("--updates", type=int)
+    parser.add_argument("--target-initial-loss", type=float)
     parser.add_argument("--smoke", action="store_true")
     args = parser.parse_args()
     config, config_path = load_config(args.config)
+    random.seed(args.seed)
+    torch.manual_seed(args.seed)
+    torch.cuda.manual_seed_all(args.seed)
     if not (args.base_model / "config.json").is_file():
         raise SystemExit("base merged composite is incomplete")
     receipt_path = args.teacher_cache.with_suffix(args.teacher_cache.suffix + ".receipt.json")
@@ -120,56 +148,96 @@ def main() -> int:
     trainable = [parameter for parameter in model.parameters() if parameter.requires_grad]
     optimizer = torch.optim.AdamW(trainable, lr=float(cfg["learning_rate"]))
     optimizer.zero_grad(set_to_none=True)
+    probe_quick_n = round(grad_accum * float(cfg["retention_fraction"]))
+    probe_deep_n = grad_accum - probe_quick_n
+    probe_units = (
+        sorted(
+            [unit for unit in units if unit["sample"]["meta"]["stratum"] == "quick"],
+            key=lambda unit: unit["sample"]["id"],
+        )[:probe_quick_n]
+        + sorted(
+            [unit for unit in units if unit["sample"]["meta"]["stratum"] == "deep"],
+            key=lambda unit: unit["sample"]["id"],
+        )[:probe_deep_n]
+    )
+    model.eval()
+    with torch.inference_mode():
+        initial_probe_losses = [
+            float(_unit_loss(model, unit)[0].detach().cpu()) for unit in probe_units
+        ]
+    initial_probe_loss = sum(initial_probe_losses) / len(initial_probe_losses)
+    if not math.isfinite(initial_probe_loss) or initial_probe_loss <= 0.0:
+        raise RuntimeError(f"invalid initial MOPD probe loss: {initial_probe_loss}")
+    if args.target_initial_loss is not None:
+        if not math.isfinite(args.target_initial_loss) or args.target_initial_loss <= 0.0:
+            raise SystemExit("target initial loss must be finite and positive")
+        loss_scale = args.target_initial_loss / initial_probe_loss
+    else:
+        loss_scale = 1.0
+    if not math.isfinite(loss_scale) or loss_scale <= 0.0:
+        raise RuntimeError(f"invalid MOPD loss scale: {loss_scale}")
+    print(json.dumps({
+        "initial_probe_loss": initial_probe_loss,
+        "target_initial_loss": args.target_initial_loss,
+        "loss_scale": loss_scale,
+        "probe_units": len(probe_units),
+    }, sort_keys=True), flush=True)
     logs = []
     started = time.perf_counter()
     token_ledger = {"forward_input_tokens": 0, "distilled_positions": 0}
+    unsafe_reason = None
+    completed_updates = 0
     model.train()
     for micro_step, unit in enumerate(units, 1):
         sample = unit["sample"]
         positions = unit["positions"]
-        end = max(positions) + 1
-        prompt = sample["prompt_ids"].to(dtype=torch.long).tolist()
-        completion = sample["completion_ids"].to(dtype=torch.long).tolist()[:end]
-        ids = torch.tensor([prompt + completion], dtype=torch.long, device=model.device)
-        outputs = model(
-            input_ids=ids, attention_mask=torch.ones_like(ids),
-            logits_to_keep=end + 1, use_cache=False,
-        )
-        prediction = outputs.logits[0, -(end + 1):-1]
-        pos = torch.tensor(positions, dtype=torch.long, device=model.device)
-        selected_logits = prediction.index_select(0, pos)
-        teacher_indices = sample["teacher_indices"].index_select(
-            0, torch.tensor(positions, dtype=torch.long)
-        )
-        teacher_log_probs = sample["teacher_log_probs"].index_select(
-            0, torch.tensor(positions, dtype=torch.long)
-        )
-        loss = sparse_teacher_topk_reverse_kl(
-            selected_logits, teacher_indices, teacher_log_probs, reduction="mean"
-        )
-        if not torch.isfinite(loss):
-            raise RuntimeError(f"non-finite MOPD loss at micro-step {micro_step}")
-        (loss / grad_accum).backward()
-        token_ledger["forward_input_tokens"] += ids.shape[1]
-        token_ledger["distilled_positions"] += len(positions)
+        loss, input_tokens, distilled_positions = _unit_loss(model, unit)
+        token_ledger["forward_input_tokens"] += input_tokens
+        token_ledger["distilled_positions"] += distilled_positions
         row = {
             "micro_step": micro_step, "sample_id": sample["id"],
             "stratum": sample["meta"]["stratum"], "chunk": unit["chunk"],
-            "positions": len(positions), "loss": float(loss.detach().cpu()),
+            "positions": len(positions),
+            "loss": float(loss.detach().cpu()) if torch.isfinite(loss) else None,
+            "scaled_loss": (
+                float((loss.detach() * loss_scale).cpu())
+                if torch.isfinite(loss) else None
+            ),
         }
+        if not torch.isfinite(loss):
+            unsafe_reason = f"non-finite loss at micro-step {micro_step}"
+            row["unsafe_stop"] = unsafe_reason
+            logs.append(row)
+            print(json.dumps(row, sort_keys=True), flush=True)
+            break
+        (loss * loss_scale / grad_accum).backward()
         if micro_step % grad_accum == 0:
             grad_norm = float(
                 torch.nn.utils.clip_grad_norm_(trainable, float(cfg["max_grad_norm"])).detach().cpu()
             )
-            optimizer.step()
-            optimizer.zero_grad(set_to_none=True)
             row["optimizer_step"] = micro_step // grad_accum
             row["grad_norm"] = grad_norm
+            if not math.isfinite(grad_norm):
+                unsafe_reason = f"non-finite gradient norm at micro-step {micro_step}"
+                row["unsafe_stop"] = unsafe_reason
+                optimizer.zero_grad(set_to_none=True)
+            else:
+                optimizer.step()
+                optimizer.zero_grad(set_to_none=True)
+                completed_updates += 1
             print(json.dumps(row, sort_keys=True), flush=True)
         logs.append(row)
+        if unsafe_reason is not None:
+            break
 
-    mean_loss = sum(row["loss"] for row in logs) / len(logs)
-    gate_passed = mean_loss <= float(cfg["maximum_round_mean_kl"])
+    finite_losses = [float(row["loss"]) for row in logs if row["loss"] is not None]
+    mean_loss = sum(finite_losses) / len(finite_losses) if finite_losses else None
+    gate_passed = (
+        unsafe_reason is None
+        and completed_updates == updates
+        and mean_loss is not None
+        and mean_loss <= float(cfg["maximum_round_mean_kl"])
+    )
     args.out.mkdir(parents=True, exist_ok=True)
     model.save_pretrained(args.out)
     tokenizer.save_pretrained(args.out)
@@ -183,7 +251,9 @@ def main() -> int:
         "routing": payload["routing"],
         "config": str(config_path), "config_sha256": sha256_file(config_path),
         "seed": args.seed, "smoke": bool(args.smoke),
-        "optimizer_steps": updates, "micro_steps": len(units),
+        "requested_optimizer_steps": updates,
+        "optimizer_steps": completed_updates,
+        "requested_micro_steps": len(units), "micro_steps": len(logs),
         "quick_units": sum(unit["sample"]["meta"]["stratum"] == "quick" for unit in units),
         "deep_units": sum(unit["sample"]["meta"]["stratum"] == "deep" for unit in units),
         "unique_rollouts": len({unit["sample"]["id"] for unit in units}),
@@ -191,9 +261,18 @@ def main() -> int:
             len({unit["sample"]["id"] for unit in units}) == len(units)
         ),
         "mean_corrected_topk_loss": mean_loss,
+        "initial_probe": {
+            "units": len(probe_units),
+            "mean_corrected_topk_loss": initial_probe_loss,
+            "unit_losses": initial_probe_losses,
+            "target_mean_corrected_topk_loss": args.target_initial_loss,
+            "backward_loss_scale": loss_scale,
+        },
         "round_loss_gate": {
             "passed": gate_passed,
             "maximum": float(cfg["maximum_round_mean_kl"]),
+            "unsafe_reason": unsafe_reason,
+            "completed_all_updates": completed_updates == updates,
         },
         "token_ledger": token_ledger,
         "wall_seconds": time.perf_counter() - started,

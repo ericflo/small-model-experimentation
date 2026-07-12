@@ -42,3 +42,22 @@ Created as a new experiment scaffold.
   23.00) on CUDA FP32 with TF32 disabled.
 - The merged composite then loaded through vLLM, produced the 4/4 semantic
   smoke outputs, and preserved the requested full CUDA-graph decode geometry.
+
+## 2026-07-12 — integration harness locked before policy evaluation
+
+- Corrected teacher-top-50 MOPD now caches full-softmax probabilities at the
+  exact student token prefix and consumes 160 distinct trajectories per round;
+  no rollout or target span is split or replayed to manufacture update count.
+- The five-update locality pilot measures centered non-target logit drift and
+  full-vocabulary entropy change before authorizing the four-round run.
+- Wrong-route and off-policy controls use the primary arm's deterministic
+  rollout selection and rescale backward loss to the primary arm's measured
+  initial corrected-top-k pressure in each round. Update count, data pressure,
+  and initial objective magnitude are therefore matched explicitly.
+- Non-finite loss or gradients and the frozen round-loss ceiling now preserve
+  an auditable stopped adapter receipt instead of disappearing as a crashed
+  process.
+- The two-block final analyzer uses equal quick/deep macro weight, paired
+  one-sided bounds against both source policies and every one-checkpoint
+  control, separate anchor/transfer retention checks, three training seeds,
+  and the execution-filtered best-of-8 hurdle.
