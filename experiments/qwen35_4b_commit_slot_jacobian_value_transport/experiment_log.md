@@ -25,3 +25,6 @@
   fixed-slot, finite-logit, and cached forward contracts.
 - Peak allocated GPU memory: 8,515,461,632 bytes. Correctness, trace text, and
   the chosen alias were not recorded; no scientific result opened.
+- A second outcome-blind implementation audit added runtime exact-multiset
+  shuffle hashes, full-vocabulary alias mass, row cardinality, control-finiteness,
+  and observed-baseline feasibility receipts before selection.

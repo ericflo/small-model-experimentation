@@ -54,24 +54,33 @@ def test_thought_prefix_obeys_close_and_cap_boundaries() -> None:
 def test_slot_metrics_keep_close_only_and_no_thought_controls_separate() -> None:
     full_probs = {"cat": 0.01}
     slot_rows = [
-        {"task_id": "a", "cap": 256, "correct": True, "finite": True,
+        {"task_id": "a", "cap": 256, "commit_mode": "forced_at_cap",
+         "correct": True, "finite": True,
          "correct_alias_probability": 0.7, "constrained_margin": 1.0,
          "correct_alias": "cat", "alias_full_vocab_probabilities": full_probs,
          "full_vocab_alias_probability_mass": 0.1, "full_vocab_top_is_alias": True},
-        {"task_id": "a", "cap": 256, "correct": False, "finite": True,
+        {"task_id": "a", "cap": 256, "commit_mode": "forced_at_cap",
+         "correct": False, "finite": True,
          "correct_alias_probability": 0.1, "constrained_margin": 0.4,
          "correct_alias": "cat", "alias_full_vocab_probabilities": full_probs,
          "full_vocab_alias_probability_mass": 0.1, "full_vocab_top_is_alias": False},
-        {"task_id": "b", "cap": 256, "correct": True, "finite": True,
+        {"task_id": "b", "cap": 256, "commit_mode": "forced_at_cap",
+         "correct": True, "finite": True,
          "correct_alias_probability": 0.6, "constrained_margin": 0.8,
          "correct_alias": "cat", "alias_full_vocab_probabilities": full_probs,
          "full_vocab_alias_probability_mass": 0.1, "full_vocab_top_is_alias": True},
     ]
     shuffled = [
-        {"task_id": row["task_id"], "cap": 256, "correct": False}
+        {
+            "task_id": row["task_id"], "cap": 256, "correct": False,
+            "finite": True, "correct_alias_probability": 0.1,
+        }
         for row in slot_rows
     ]
-    no_thought = [{"correct": False}, {"correct": False}]
+    no_thought = [
+        {"correct": False, "finite": True, "correct_alias_probability": 0.1},
+        {"correct": False, "finite": True, "correct_alias_probability": 0.1},
+    ]
     freeform = [
         {"cap": 256, "parseable": False, "correct": False, "answer_stopped_by": "answer_cap"}
         for _ in slot_rows
@@ -84,6 +93,9 @@ def test_slot_metrics_keep_close_only_and_no_thought_controls_separate() -> None
     assert metrics["no_thought_slot_accuracy"] == 0.0
     assert metrics["shuffled_thought_slot_accuracy"] == 0.0
     assert metrics["close_only_answer_cap_rate"] == 1.0
+    assert run.observed_gate_reachability(
+        metrics, config()["gates"]["seam_selection"]
+    )["all_observed_gain_gates_reachable"]
 
 
 def test_shuffled_thought_is_deterministic_exact_length_multiset() -> None:

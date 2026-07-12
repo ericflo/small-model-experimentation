@@ -101,7 +101,10 @@ caught an exact prior-split generator-seed collision. The subsequent
 outcome-blind model smoke passes exact revision/architecture, five rank-24 lens
 matrices, 12 unique one-token aliases, fixed-slot tokenization, finite logits,
 and cached batch-one forward contracts while recording no answer or correctness.
-Scientific outcomes remain unopened.
+The post-smoke implementation audit adds exact shuffle/cardinality receipts,
+unmasked probability mass, control-finiteness aborts, and observed gate
+feasibility without changing the frozen scientific rules. Scientific outcomes
+remain unopened.
 
 ## Scope
 
@@ -123,3 +126,5 @@ untouched contamination-free tasks.
 - `runs/smoke/`: CPU/gate receipts.
 - `reports/preregistration.md` and `reports/design_review.md`: immutable rules;
   both prose and the semantic config payload are design-commit hash-anchored.
+- `reports/pre_selection_implementation_audit.md`: outcome-blind code audit
+  completed before the selection run.

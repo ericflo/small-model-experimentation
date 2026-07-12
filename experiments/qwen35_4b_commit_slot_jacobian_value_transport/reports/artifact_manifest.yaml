@@ -14,5 +14,6 @@ reproducibility:
   required_external_artifacts: []
 notes: >-
   The byte-identical lens, 96 fresh task rows, CPU receipts, immutable design
-  receipt, and outcome-blind model-smoke receipt are committed. The smoke saved
-  no chosen answer or correctness. No artifact is external or omitted.
+  receipt, outcome-blind model-smoke receipt, and pre-selection implementation
+  audit are committed. The smoke saved no chosen answer or correctness. No
+  artifact is external or omitted.

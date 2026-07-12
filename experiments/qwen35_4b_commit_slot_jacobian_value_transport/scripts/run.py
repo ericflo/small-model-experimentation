@@ -97,6 +97,10 @@ def _config_payload_sha256(config: dict[str, Any]) -> str:
     })
 
 
+def _token_ids_sha256(values: list[int]) -> str:
+    return _canonical_sha256([int(value) for value in values])
+
+
 def design_boundary_receipt(config: dict[str, Any]) -> dict[str, Any]:
     boundary = config["design_boundary"]
     commit = str(boundary["commit"])
@@ -489,6 +493,7 @@ def slot_metrics(
     real_accuracy = successes / len(rows) if rows else 0.0
     no_thought_accuracy = no_thought_success / len(no_thought_rows) if no_thought_rows else 0.0
     shuffled_accuracy = sum(bool(row["correct"]) for row in shuffled) / len(shuffled)
+    commit_mode_counts = Counter(str(row["commit_mode"]) for row in rows)
     return {
         "cap": int(cap),
         "slot_rows": len(rows),
@@ -496,6 +501,13 @@ def slot_metrics(
         "slot_success_rate": real_accuracy,
         "mixed_slot_tasks": mixed,
         "finite_slot_rows_rate": sum(bool(row["finite"]) for row in rows) / len(rows) if rows else 0.0,
+        "finite_shuffled_slot_rows_rate": sum(
+            bool(row["finite"]) for row in shuffled
+        ) / len(shuffled),
+        "finite_no_thought_slot_rows_rate": sum(
+            bool(row["finite"]) for row in no_thought_rows
+        ) / len(no_thought_rows),
+        "commit_mode_counts": dict(sorted(commit_mode_counts.items())),
         "mean_correct_alias_probability": sum(float(row["correct_alias_probability"]) for row in rows) / len(rows),
         "mean_constrained_margin": sum(float(row["constrained_margin"]) for row in rows) / len(rows),
         "mean_full_vocab_alias_probability_mass": sum(
@@ -516,7 +528,13 @@ def slot_metrics(
         "real_minus_no_thought_accuracy": real_accuracy - no_thought_accuracy,
         "shuffled_thought_slot_successes": sum(bool(row["correct"]) for row in shuffled),
         "shuffled_thought_slot_accuracy": shuffled_accuracy,
+        "shuffled_mean_correct_alias_probability": sum(
+            float(row["correct_alias_probability"]) for row in shuffled
+        ) / len(shuffled),
         "real_minus_shuffled_thought_accuracy": real_accuracy - shuffled_accuracy,
+        "no_thought_mean_correct_alias_probability": sum(
+            float(row["correct_alias_probability"]) for row in no_thought_rows
+        ) / len(no_thought_rows),
         "close_only_parse_rate": sum(bool(row["parseable"]) for row in controls) / len(controls),
         "close_only_success_rate": sum(bool(row["correct"]) for row in controls) / len(controls),
         "close_only_answer_cap_rate": sum(row["answer_stopped_by"] == "answer_cap" for row in controls) / len(controls),
@@ -535,6 +553,25 @@ def seam_gate(metrics: dict[str, Any], gates: dict[str, Any]) -> bool:
         >= float(gates["real_minus_shuffled_thought_accuracy_min"])
         and metrics["finite_slot_rows_rate"] >= float(gates["finite_slot_rows_rate_min"])
     )
+
+
+def observed_gate_reachability(metrics: dict[str, Any], gates: dict[str, Any]) -> dict[str, bool]:
+    maximum = float(gates["slot_success_rate_max"])
+    no_thought = bool(
+        metrics["no_thought_slot_accuracy"]
+        + float(gates["real_minus_no_thought_accuracy_min"])
+        <= maximum + 1e-12
+    )
+    shuffled = bool(
+        metrics["shuffled_thought_slot_accuracy"]
+        + float(gates["real_minus_shuffled_thought_accuracy_min"])
+        <= maximum + 1e-12
+    )
+    return {
+        "no_thought_gain_gate_reachable_under_accuracy_ceiling": no_thought,
+        "shuffled_gain_gate_reachable_under_accuracy_ceiling": shuffled,
+        "all_observed_gain_gates_reachable": no_thought and shuffled,
+    }
 
 
 def _thought_prefix(model: Any, trace: dict[str, Any], cap: int) -> tuple[list[int] | None, str]:
@@ -593,6 +630,8 @@ def _slot_row(
             "thought_contains_any_alias": False,
             "thought_contains_correct_alias": False,
             "thought_last_mentioned_alias": None,
+            "thought_tokens": 0,
+            "thought_token_ids_sha256": None,
         }, None)
     readout = model.slot_readout(
         prepared["input_ids"],
@@ -618,6 +657,8 @@ def _slot_row(
         "thought_contains_any_alias": bool(mentioned_aliases),
         "thought_contains_correct_alias": correct_alias in mentioned_aliases,
         "thought_last_mentioned_alias": mentioned_aliases[-1] if mentioned_aliases else None,
+        "thought_tokens": len(thought),
+        "thought_token_ids_sha256": _token_ids_sha256(thought),
         **readout,
     }, thought)
 
@@ -726,6 +767,12 @@ def _generate_seam(
                         task["task_id"], str(trace_index), str(cap),
                     )
                     shuffled_thought, moved_rate = _shuffled_thought(thought, shuffle_seed)
+                    token_multiset_match = bool(
+                        len(shuffled_thought) == len(thought)
+                        and sorted(shuffled_thought) == sorted(thought)
+                    )
+                    if not token_multiset_match:
+                        raise RuntimeError("shuffled thought changed the token multiset")
                     shuffled_readout = model.slot_readout(
                         prepared["input_ids"], shuffled_thought,
                         slot_text=str(config["slot"]["text"]),
@@ -740,6 +787,12 @@ def _generate_seam(
                         "control": "shuffled_thought",
                         "shuffle_seed": shuffle_seed,
                         "shuffle_moved_position_rate": moved_rate,
+                        "source_thought_token_ids_sha256": _token_ids_sha256(thought),
+                        "shuffled_thought_token_ids_sha256": _token_ids_sha256(
+                            shuffled_thought
+                        ),
+                        "token_multiset_match": token_multiset_match,
+                        "thought_tokens": len(shuffled_thought),
                         "correct_alias": correct_alias,
                         "correct": shuffled_readout["chosen_alias"] == correct_alias,
                         "correct_alias_probability": shuffled_readout[
@@ -761,6 +814,32 @@ def _generate_seam(
         raise RuntimeError("a trace row failed the cache audit")
     if not all(row["answer_cache_contract_pass"] for row in freeform_rows):
         raise RuntimeError("a close-only control failed the cache audit")
+    valid_shuffled_rows = [
+        row for row in shuffled_slot_rows if row["commit_mode"] != "malformed_pre_cap"
+    ]
+    if not all(row["finite"] for row in valid_shuffled_rows):
+        raise RuntimeError("a shuffled-thought slot control is nonfinite")
+    if not all(row["finite"] for row in no_thought_rows):
+        raise RuntimeError("a no-thought slot control is nonfinite")
+    expected_slot_rows = total * len(caps)
+    observed_counts = {
+        "traces": len(trace_rows),
+        "slots": len(slot_rows),
+        "shuffled_slots": len(shuffled_slot_rows),
+        "freeform": len(freeform_rows),
+        "no_thought": len(no_thought_rows),
+    }
+    expected_counts = {
+        "traces": total,
+        "slots": expected_slot_rows,
+        "shuffled_slots": expected_slot_rows,
+        "freeform": expected_slot_rows,
+        "no_thought": len(tasks),
+    }
+    if observed_counts != expected_counts:
+        raise RuntimeError(
+            f"incomplete seam rows: observed={observed_counts}, expected={expected_counts}"
+        )
     environment = {
         "elapsed_seconds": time.perf_counter() - started,
         "peak_allocated_bytes": torch.cuda.max_memory_allocated(),
@@ -771,6 +850,7 @@ def _generate_seam(
         "shuffled_slot_prefill_tokens": sum(
             int(row.get("prefill_tokens", 0)) for row in shuffled_slot_rows
         ),
+        "row_counts": observed_counts,
     }
     return trace_rows, slot_rows, shuffled_slot_rows, freeform_rows, no_thought_rows, environment
 
@@ -812,6 +892,9 @@ def run_seam_selection(config: dict[str, Any]) -> dict[str, Any]:
     selected = None
     for cap in caps:
         value = slot_metrics(slots, shuffled_slots, no_thought, freeform, task_ids, cap)
+        value["observed_gate_reachability"] = observed_gate_reachability(
+            value, config["gates"]["seam_selection"]
+        )
         value["gate_pass"] = seam_gate(value, config["gates"]["seam_selection"])
         metrics.append(value)
         if selected is None and value["gate_pass"]:
@@ -875,6 +958,9 @@ def run_seam_confirmation(config: dict[str, Any]) -> dict[str, Any]:
     task_ids = [row["task_id"] for row in read_jsonl(DATA_DIR / "seam_confirmation.jsonl")]
     metrics = slot_metrics(
         slots, shuffled_slots, no_thought, freeform, task_ids, cap
+    )
+    metrics["observed_gate_reachability"] = observed_gate_reachability(
+        metrics, config["gates"]["seam_confirmation"]
     )
     passed = bool(design["passed"] and seam_gate(metrics, config["gates"]["seam_confirmation"]))
     result = {
