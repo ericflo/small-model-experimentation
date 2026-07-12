@@ -21,3 +21,8 @@
 - Built 516 rows: exactly 129 each for INSPECT/PATCH/VERIFY/COMMIT. Exact weighted action-token mass is 36,110 per operator and compact-plan mass 3,125.8 per operator. Longest target sequence is 879 tokens.
 - Tokenizer preflight encoded all 4,669 C54 rows and all 516 repository rows with zero skips. Apex replay is exactly 2.0 dataset epochs at 584 steps; both candidates are exactly 1.8011 union epochs at the same 584 steps.
 - Every registered pre-training gate passed; training authorized. Menagerie remains sealed.
+
+## Training feasibility recovery
+
+- Apex replay with batch 4 × accumulation 4 stopped at optimizer step 52 on a 3,193-token batch: the 9.54 GiB logits allocation exceeded 9.09 GiB free. Loss/gradients were finite, but no adapter or checkpoint was saved.
+- Froze the compute-equivalent recovery before rerun: batch 2 × accumulation 8, effective batch 16, 584 steps, 9,344 examples, three apex padding duplicates, and exactly two control epochs. Enabled expandable CUDA segments. All arms share the corrected geometry.

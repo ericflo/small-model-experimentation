@@ -34,12 +34,33 @@ class TrainingAndAnalysisTests(unittest.TestCase):
              "task_id": "task-1", "operator": operator}
             for operator in train.OPERATORS
         ]
-        ordered, receipt = train.make_batches(apex + repo, batch_size=4, seed=42)
+        ordered, receipt = train.make_batches(
+            apex + repo, batch_size=4, gradient_accumulation_steps=4, seed=42
+        )
         chunks = [ordered[index:index + 4] for index in range(0, len(ordered), 4)]
         self.assertTrue(all(len({row["source"] for row in chunk}) == 1 for chunk in chunks))
         repo_chunk = next(chunk for chunk in chunks if chunk[0]["source"] == "repo")
         self.assertEqual({row["operator"] for row in repo_chunk}, set(train.OPERATORS))
+        self.assertEqual(receipt["apex_padding_duplicates"], 11)
+
+    def test_two_row_microbatches_preserve_effective_batch_and_task_blocks(self):
+        apex = [
+            {"source": "apex", "input_ids": list(range(10)), "source_code": 0}
+            for _ in range(13)
+        ]
+        repo = [
+            {"source": "repo", "input_ids": list(range(20)), "source_code": 1,
+             "task_id": "task-1", "operator": operator}
+            for operator in train.OPERATORS
+        ]
+        ordered, receipt = train.make_batches(
+            apex + repo, batch_size=2, gradient_accumulation_steps=8, seed=42
+        )
+        chunks = [ordered[index:index + 2] for index in range(0, len(ordered), 2)]
+        self.assertTrue(all(len({row["source"] for row in chunk}) == 1 for chunk in chunks))
+        self.assertEqual(receipt["effective_batch_size"], 16)
         self.assertEqual(receipt["apex_padding_duplicates"], 3)
+        self.assertEqual(receipt["repository_microbatches_per_epoch"], 2)
 
     def test_paired_bootstrap_uses_taskwise_differences(self):
         left = {f"t{i}": {"success": value} for i, value in enumerate([1, 1, 0, 1])}

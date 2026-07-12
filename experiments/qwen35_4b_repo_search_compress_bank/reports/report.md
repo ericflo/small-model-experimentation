@@ -6,4 +6,6 @@ The frozen C53 search policy covered 129/144 fresh training-family repositories 
 
 Exact tokenizer calibration equalized action loss mass at 36,110 per operator and compact-plan mass at 3,125.8 per operator. The longest bank row is 879 tokens versus the frozen 4,096 limit. Compact and action-only have identical contexts, invariant text, actions, and action weights; only compact has plan-span gradient. All pre-training gates pass. See [the compact receipt](harvest_bank_receipt.json).
 
+The first apex training preflight stopped at step 52 when a long batch of four exceeded GPU memory; no checkpoint was saved. The compute-equivalent recovery uses microbatch 2 × accumulation 8 for the same effective batch 16 and 584 steps across every arm. See [amendment 2](preregistration_amendment_2.md).
+
 The final report will add trained-family retention, unseen-family transfer, matched-call sampling, locality, and—only if licensed—paired aggregate Menagerie outcomes.

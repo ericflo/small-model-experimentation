@@ -8,10 +8,15 @@ import copy
 import hashlib
 import json
 import math
+import os
 import random
 import time
 from collections import Counter, defaultdict
 from pathlib import Path
+
+# The long-target Qwen logits allocation otherwise leaves large unusable CUDA
+# fragments after checkpoint preparation on 48 GB devices.
+os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
 
 import torch
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
@@ -87,14 +92,17 @@ def encode_row(record: dict, tokenizer, max_length: int, default_think_weight: f
     }
 
 
-def make_batches(encoded: list[dict], batch_size: int, seed: int) -> tuple[list[dict], dict]:
-    """Keep repository microbatches four-operator complete and apex batches homogeneous."""
-    if batch_size != 4:
-        raise ValueError("registered operator batching requires batch_size=4")
+def make_batches(
+    encoded: list[dict], batch_size: int, gradient_accumulation_steps: int, seed: int
+) -> tuple[list[dict], dict]:
+    """Keep source-homogeneous microbatches and complete operator task blocks."""
+    if batch_size not in (2, 4):
+        raise ValueError("supported registered microbatch sizes are 2 and 4")
     apex = [row for row in encoded if row["source"] == "apex"]
     repo = [row for row in encoded if row["source"] == "repo"]
     apex.sort(key=lambda row: len(row["input_ids"]))
-    apex_padding = (-len(apex)) % batch_size
+    effective_batch = batch_size * gradient_accumulation_steps
+    apex_padding = (-len(apex)) % effective_batch
     if apex and apex_padding:
         apex.extend(copy.deepcopy(apex[index % len(apex)]) for index in range(apex_padding))
     chunks = [apex[index:index + batch_size] for index in range(0, len(apex), batch_size)]
@@ -110,7 +118,10 @@ def make_batches(encoded: list[dict], batch_size: int, seed: int) -> tuple[list[
                 f"repository task {task_id} is not one-row-per-operator: {dict(operators)}"
             )
         ordered = [next(row for row in group if row["operator"] == operator) for operator in OPERATORS]
-        chunks.append(ordered)
+        chunks.extend(
+            ordered[index:index + batch_size]
+            for index in range(0, len(ordered), batch_size)
+        )
     random.Random(seed).shuffle(chunks)
     flattened = [row for chunk in chunks for row in chunk]
     return flattened, {
@@ -119,9 +130,10 @@ def make_batches(encoded: list[dict], batch_size: int, seed: int) -> tuple[list[
         "repository_rows": len(repo),
         "repository_tasks": len(by_task),
         "microbatches_per_epoch": len(chunks),
-        "repository_microbatches_per_epoch": len(by_task),
+        "repository_microbatches_per_epoch": len(repo) // batch_size,
         "homogeneous_batches": True,
-        "operator_complete_repository_batches": True,
+        "four_operator_repository_task_blocks": True,
+        "effective_batch_size": effective_batch,
     }
 
 
@@ -172,8 +184,8 @@ def main() -> int:
     parser.add_argument("--lr", type=float, default=2e-4)
     parser.add_argument("--rank", type=int, default=32)
     parser.add_argument("--alpha", type=int, default=64)
-    parser.add_argument("--batch-size", type=int, default=4)
-    parser.add_argument("--grad-accum", type=int, default=4)
+    parser.add_argument("--batch-size", type=int, default=2)
+    parser.add_argument("--grad-accum", type=int, default=8)
     parser.add_argument("--max-length", type=int, default=4096)
     parser.add_argument("--w-think", type=float, default=0.2)
     parser.add_argument("--seed", type=int, default=42)
@@ -220,7 +232,9 @@ def main() -> int:
         raise SystemExit(f"repository rows would truncate or merge at token boundary: {skipped['repo']}")
     if not encoded:
         raise SystemExit("no trainable rows")
-    ordered, batch_receipt = make_batches(encoded, args.batch_size, args.seed)
+    ordered, batch_receipt = make_batches(
+        encoded, args.batch_size, args.grad_accum, args.seed
+    )
     microbatches_required = args.max_steps * args.grad_accum
     effective_epochs = microbatches_required / batch_receipt["microbatches_per_epoch"]
     encoding_receipt = {
