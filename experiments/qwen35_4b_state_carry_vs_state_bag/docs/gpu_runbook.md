@@ -50,6 +50,10 @@ python3 -m unittest discover -s experiments/qwen35_4b_state_carry_vs_state_bag/t
 ```
 
 Inspect `experiments/qwen35_4b_state_carry_vs_state_bag/data/generated/manifest.json`. It must report zero structural duplicates and zero benchmark files read.
+It must also contain the current critical-source digest, distinct pilot/confirmation seeds,
+balanced node/checksum counts by cell, and the dedicated `pilot_validation`, `pilot_depth`,
+`pilot_joint`, and `pilot_counterfactual` splits. The historical committed CPU receipt is
+superseded; do not reuse it.
 
 ## 3. G0 Live Model Smoke
 
@@ -65,56 +69,64 @@ Inspect `runs/model_smoke/receipt.json`. Require:
 - exact model/revision/backend;
 - K=1 error ≤ `1e-5`;
 - state slot count 8;
-- Carry/Bag parameter equality;
-- matching initial-value and cumulative training-compute receipts for every later Carry/Bag seed pair;
-- nonzero LoRA, state, and sufficiency gradients;
-- no OOM and credible peak VRAM.
+- the expected shared-wrapper trainable parameter identity;
+- nonzero finite LoRA, state, step, and sufficiency gradients for both Carry and Bag;
+- successful worst-format K=12 evaluation forward;
+- matching config/source/training-lock receipts; and
+- no OOM plus credible K=4-backward/K=12-forward timing and peak VRAM.
 
-Do not train if any receipt is absent. Fix mechanics without changing the scientific contract, add a regression test, rerun G0, and record the fix in `experiment_log.md`.
+Later Carry/Bag initialization, ordered-row, and cumulative training-compute equality cannot exist at
+G0; inspect those immediately after each pair completes and again in analysis. Do not train if any
+G0 receipt is absent. Fix mechanics without changing the scientific contract, add a regression test,
+regenerate source-bound data, write a new smoke path, and record the fix in `experiment_log.md`.
 
 ## 4. G1 Paired Pilot
 
-Use the same default config and seed; `--pilot` changes only the registered step/evaluation limits.
+Use the same default config and the pilot-only seed 7401; `--pilot` selects the registered 300-step
+phase and dedicated pilot splits. The CLI rejects confirmatory seeds in pilot mode.
 
 ```bash
 PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True \
 .venv/bin/python experiments/qwen35_4b_state_carry_vs_state_bag/scripts/run.py \
-  --stage train --pilot --arm carry --seed 7411 \
-  --output large_artifacts/qwen35_4b_state_carry_vs_state_bag/pilot_carry_seed7411
+  --stage train --pilot --arm carry --seed 7401 \
+  --output large_artifacts/qwen35_4b_state_carry_vs_state_bag/pilot_carry_seed7401
 
 PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True \
 .venv/bin/python experiments/qwen35_4b_state_carry_vs_state_bag/scripts/run.py \
-  --stage train --pilot --arm bag --seed 7411 \
-  --output large_artifacts/qwen35_4b_state_carry_vs_state_bag/pilot_bag_seed7411
+  --stage train --pilot --arm bag --seed 7401 \
+  --output large_artifacts/qwen35_4b_state_carry_vs_state_bag/pilot_bag_seed7401
 ```
 
 Evaluate the fixed 300-step checkpoints:
 
 ```bash
 .venv/bin/python experiments/qwen35_4b_state_carry_vs_state_bag/scripts/run.py \
-  --stage evaluate --pilot --arm carry --seed 7411 \
-  --checkpoint large_artifacts/qwen35_4b_state_carry_vs_state_bag/pilot_carry_seed7411/checkpoint_000300 \
-  --output experiments/qwen35_4b_state_carry_vs_state_bag/runs/pilot_carry_seed7411
+  --stage evaluate --pilot --arm carry --seed 7401 \
+  --checkpoint large_artifacts/qwen35_4b_state_carry_vs_state_bag/pilot_carry_seed7401/checkpoint_000300 \
+  --output experiments/qwen35_4b_state_carry_vs_state_bag/runs/pilot_carry_seed7401
 
 .venv/bin/python experiments/qwen35_4b_state_carry_vs_state_bag/scripts/run.py \
-  --stage evaluate --pilot --arm bag --seed 7411 \
-  --checkpoint large_artifacts/qwen35_4b_state_carry_vs_state_bag/pilot_bag_seed7411/checkpoint_000300 \
-  --output experiments/qwen35_4b_state_carry_vs_state_bag/runs/pilot_bag_seed7411
+  --stage evaluate --pilot --arm bag --seed 7401 \
+  --checkpoint large_artifacts/qwen35_4b_state_carry_vs_state_bag/pilot_bag_seed7401/checkpoint_000300 \
+  --output experiments/qwen35_4b_state_carry_vs_state_bag/runs/pilot_bag_seed7401
 ```
 
-Run analysis, but remember the expected label is under-replicated:
+Run analysis and require its machine promotion decision:
 
 ```bash
 .venv/bin/python experiments/qwen35_4b_state_carry_vs_state_bag/scripts/run.py --stage analyze
 ```
 
-Apply G1 exactly. Do not try another seed after a miss. Diagnose whether the failure is optimization, state formation, coda use, or collapse.
+Require `analysis/summary.json` to say `PILOT_PROMOTION_READY`; full training refuses any other
+status. Do not try another seed after `PILOT_MECHANISM_MISS`. Diagnose whether the failure is
+optimization, state formation, coda use, or collapse without touching confirmation data.
 
 ## 5. G2 Full Continuous Carry/Bag
 
 If G1 promotes, train all six fixed runs from scratch:
 
 ```bash
+set -euo pipefail
 for seed in 7411 7412 7413; do
   for arm in carry bag; do
     PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True \
@@ -128,6 +140,7 @@ done
 Evaluate only fixed final checkpoints:
 
 ```bash
+set -euo pipefail
 for seed in 7411 7412 7413; do
   for arm in carry bag; do
     .venv/bin/python experiments/qwen35_4b_state_carry_vs_state_bag/scripts/run.py \
@@ -149,34 +162,30 @@ Then analyze:
 For every trained Carry checkpoint, evaluate the exact same weights in Bag mode. Use separate output directories; checkpoint metadata preserves `train_arm=carry`, while rows record `eval_mode=bag`.
 
 ```bash
+set -euo pipefail
 for seed in 7411 7412 7413; do
   .venv/bin/python experiments/qwen35_4b_state_carry_vs_state_bag/scripts/run.py \
     --stage evaluate --arm bag --seed "$seed" \
     --checkpoint "large_artifacts/qwen35_4b_state_carry_vs_state_bag/carry_seed${seed}/checkpoint_001500" \
     --output "experiments/qwen35_4b_state_carry_vs_state_bag/runs/edge_cut_seed${seed}"
 done
-```
 
-Donor swaps are already included in Carry evaluation summaries. Inspect `counterfactual_swaps.jsonl`; aggregate damage without donor following is not a causal pass.
-
-## 7. G4 Mixed Semantic Echo, Only If Triggered
-
-Use `configs/mixed_echo.yaml` without modifying `default.yaml`. Run model smoke under that config, then paired Carry/Bag pilot and full multiseed only if the preregistered interface signature exists.
-
-```bash
 .venv/bin/python experiments/qwen35_4b_state_carry_vs_state_bag/scripts/run.py \
-  --config experiments/qwen35_4b_state_carry_vs_state_bag/configs/mixed_echo.yaml \
-  --stage model-smoke \
-  --output experiments/qwen35_4b_state_carry_vs_state_bag/runs/model_smoke_mixed/receipt.json
+  --stage analyze
 ```
 
-Every later mixed command must pass the same `--config`. Analyze mixed and continuous configs separately; config hashes prevent accidental pooling.
+The harness recognizes this exact same-checkpoint edge cut and evaluates only the full primary
+matched-depth cells used by the gate. Donor swaps are included in Carry evaluation summaries in both
+directions. Inspect the hashed `counterfactual_swaps.jsonl`; require geometry equality, the full 1,024
+directed rows per seed, positive pre/post donor following, and donor following rather than generic
+recipient damage.
 
-## 8. G5 Explicit-CoT and Sample-More
+## 7. G4 Explicit-CoT and Sample-More
 
 Only after a mechanistic pass:
 
 ```bash
+set -euo pipefail
 for seed in 7411 7412 7413; do
   .venv/bin/python experiments/qwen35_4b_state_carry_vs_state_bag/scripts/run.py \
     --stage text-baseline --seed "$seed" \
@@ -187,9 +196,31 @@ for seed in 7411 7412 7413; do
     --checkpoint "large_artifacts/qwen35_4b_state_carry_vs_state_bag/text_seed${seed}" \
     --output "experiments/qwen35_4b_state_carry_vs_state_bag/runs/sample_more_seed${seed}"
 done
+
+.venv/bin/python experiments/qwen35_4b_state_carry_vs_state_bag/scripts/run.py \
+  --stage analyze
 ```
 
-The current text baseline saves its final adapter at the run root. Verify every sample row has `sample_layer_token_budget <= recurrent_layer_token_budget`; any violation invalidates the comparator. A deployable verdict also requires all three seed-matched comparisons and a positive paired lower bound against oracle `pass@N`.
+The current text baseline saves its final adapter at the run root. The sampler uses the frozen
+depth-aware allowance and stores raw token IDs/text. Verify every row has
+`sample_layer_token_budget <= recurrent_layer_token_budget`; require exactly 3,200 common IDs per
+seed, Carry answer-mode ≥95%, explicit-CoT parse ≥95%, and cap contact ≤5%. Any violation makes the
+deployment comparator interface-invalid. A deployable verdict also requires all three seed-matched
+comparisons and a positive crossed task×seed lower bound against oracle `pass@N`.
+
+## 8. Resource and interruption policy
+
+The frozen full plan is intentionally large: six recurrent trainings consume 144,000 microforwards
+plus periodic validation; the original evaluation geometry is roughly 123,000 item-level forwards,
+and G4 adds 72,000 text-training microforwards plus 9,600 generation calls. Edge-cut primary-only
+mode removes most of its former redundant evaluation. Use the G0 and pilot receipts to project wall
+time before G2; record the projection and free durable storage. Do not infer throughput from an older
+L40 label—the runtime receipt is authoritative for the actual ≥44 GiB Ada device.
+
+Training is deliberately non-resumable because exact optimizer/RNG/data-cursor state is not stored.
+On interruption, preserve the partial attempt, record the failure, and restart from step zero in a
+fresh attempt directory. Never evaluate a partial/intermediate checkpoint. Evaluation and generation
+partial files are likewise preserved, not appended into a new attempt.
 
 ## 9. Finalize Evidence
 
@@ -203,10 +234,19 @@ After a terminal result:
 6. Run `make check`.
 7. Commit, push, and inspect `gh run list`.
 
+If a valid terminal LoRA outcome fails to establish deep state formation, this is not the terminal end
+of the research goal. Create **and execute** the fresh zero-initialized full-rank extra-R-delta
+successor specified in preregistration section 10. Mechanics/data failures and mathematically
+infeasible gates instead require repair or design review. If state is strongly readable but causally
+unused, execute the controlled interface successor; a sample-more-only loss requires neither capacity
+follow-up. Keep Qwen/Qwen3.5-4B, the ordinary K=1 path, pilot firewall, Carry/Bag equality, crossed
+analysis, and causal gates fixed. Do not retrofit either follow-up into this result-bearing directory.
+
 ## Recovery
 
 - Never overwrite an existing run directory; the harness refuses.
+- Never approximate-resume training; restart at step zero in a new attempt directory and preserve the partial one.
 - If OOM occurs, stop concurrent processes and follow the CUDA recovery section in `docs/compute_environment.md`.
-- Do not lower K, sequence content, state slots, or layer count in a result-bearing retry.
+- Do not lower K, sequence content, state slots, layer count, sample allowance, or validity gates in a result-bearing retry.
 - A mechanics-only code fix requires a new smoke receipt but not a new scientific experiment.
 - A design change requires a successor experiment directory.

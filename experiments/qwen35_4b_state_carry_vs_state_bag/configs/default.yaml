@@ -1,5 +1,6 @@
 schema_version: 1
 experiment_id: qwen35_4b_state_carry_vs_state_bag
+evidence_profile: confirmatory
 
 model:
   id: Qwen/Qwen3.5-4B
@@ -30,8 +31,6 @@ architecture:
   aggregate_last_initial: 0.90
   semantic_echo:
     mode: continuous
-    top_k: 32
-    continuous_initial: 0.90
   lora:
     rank: 32
     alpha: 64
@@ -55,8 +54,11 @@ substrate:
   extrapolation_depths: [5, 6, 7, 8, 9, 10, 11, 12]
   train_examples: 12000
   validation_examples: 1024
+  pilot_validation_examples: 256
   evaluation_examples_per_split: 3200
+  pilot_examples_per_split: 256
   counterfactual_pairs: 512
+  pilot_counterfactual_pairs: 64
   seeds:
     train: 73101
     validation: 73102
@@ -64,6 +66,11 @@ substrate:
     family: 73104
     template: 73105
     counterfactual: 73106
+    joint: 73107
+    pilot_depth: 73108
+    pilot_joint: 73109
+    pilot_counterfactual: 73110
+    pilot_validation: 73111
 
 training:
   train_k: 4
@@ -79,34 +86,44 @@ training:
   state_loss_weight: 0.50
   fixed_point_loss_weight: 0.05
   eval_every_steps: 100
-  save_every_steps: 100
+  save_every_steps: 1500
+  pilot_seed: 7401
   train_seeds: [7411, 7412, 7413]
 
 evaluation:
   k_values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
   primary_depths: [5, 6, 7, 8, 9, 10, 11, 12]
-  pilot_items_per_cell: 256
   curve_items_per_depth: 64
   holdout_items_per_depth: 128
   bootstrap_resamples: 10000
   bootstrap_seed: 75101
-  min_items_per_cell: 1000
-  primary_min_absolute_gain: 0.05
   sample_more_compute_unit: decoder_layer_token_applications
+  sample_more:
+    desired_tokens_per_transition: 24
+    fixed_overhead_tokens: 32
+    max_new_tokens: 512
+    max_samples: 8
+    do_sample: true
+    temperature: 0.6
+    top_p: 0.95
+    top_k: 20
   require_same_backend: true
 
 gates:
   # Mechanics and scientific gates are deliberately independent.
   k1_max_logit_abs_error: 0.00001
   exact_parameter_count_match: true
-  min_state_node_accuracy: 0.60
   min_state_joint_accuracy: 0.40
   min_carry_minus_bag: 0.05
+  min_edge_cut_gain: 0.0
+  min_joint_holdout_carry_minus_bag: 0.0
+  min_carry_answer_mode_rate: 0.95
+  min_sample_more_parse_rate: 0.95
+  max_sample_more_cap_contact_rate: 0.05
   min_positive_primary_depths: 6
   require_paired_lower_bound_above_zero: true
   require_unseen_k_gain: true
   min_donor_follow_gain: 0.10
-  max_k1_retention_drop: 0.01
   require_sample_more_win_for_deployable_claim: true
 
 paths:

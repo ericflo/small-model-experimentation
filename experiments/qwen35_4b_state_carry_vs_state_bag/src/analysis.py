@@ -1,4 +1,4 @@
-"""Paired analysis and fail-closed verdict assignment."""
+"""Crossed paired analysis and fail-closed verdict assignment."""
 
 from __future__ import annotations
 
@@ -6,12 +6,18 @@ import csv
 import hashlib
 import json
 import math
+import re
 from collections import defaultdict
 from pathlib import Path
-from typing import Any, Mapping
+from typing import Any, Mapping, Sequence
 
-from .config import config_sha256
-from .mechanics import hierarchical_paired_bootstrap_interval
+from .config import config_sha256, is_confirmatory_config, source_contract_sha256
+from .mechanics import (
+    crossed_paired_bootstrap_interval,
+    gate_reachability,
+    paired_bootstrap_interval,
+    recurrent_compute_receipt,
+)
 
 
 def _read_jsonl(path: Path) -> list[dict[str, Any]]:
@@ -27,10 +33,96 @@ def _sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def _canonical_sha256(payload: Mapping[str, Any]) -> str:
+    encoded = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode(
+        "utf-8"
+    )
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def _is_sha256(value: Any) -> bool:
+    if not isinstance(value, str) or len(value) != 64:
+        return False
+    try:
+        int(value, 16)
+    except ValueError:
+        return False
+    return True
+
+
+def _checkpoint_identity(metadata: Mapping[str, Any]) -> str:
+    return _canonical_sha256(
+        {
+            key: value
+            for key, value in metadata.items()
+            if key != "checkpoint_identity_sha256"
+        }
+    )
+
+
+def _verify_receipt_identity(receipt: Mapping[str, Any], *, kind: str, path: Path) -> None:
+    identity = receipt.get("receipt_identity_sha256")
+    payload = {key: value for key, value in receipt.items() if key != "receipt_identity_sha256"}
+    if not _is_sha256(identity) or identity != _canonical_sha256(payload):
+        raise RuntimeError(f"{kind} receipt identity digest mismatch: {path}")
+
+
+def _current_requirements_lock_sha256() -> str:
+    path = Path(__file__).resolve().parents[3] / "requirements-training.lock.txt"
+    if not path.is_file():
+        raise RuntimeError(f"requirements training lock is missing: {path}")
+    return _sha256(path)
+
+
+def _resolve_receipted_rows(
+    summary_path: Path,
+    path_value: Any,
+    expected_hash: Any,
+    *,
+    kind: str,
+) -> tuple[Path, list[dict[str, Any]]]:
+    if not isinstance(path_value, str) or not path_value:
+        raise RuntimeError(f"{kind} has no row-file receipt: {summary_path}")
+    if not _is_sha256(expected_hash):
+        raise RuntimeError(f"{kind} has no valid row hash: {summary_path}")
+    rows_path = Path(path_value)
+    if not rows_path.is_absolute():
+        rows_path = summary_path.parent / rows_path
+    if not rows_path.is_file():
+        raise RuntimeError(f"{kind} row file is missing: {rows_path}")
+    if _sha256(rows_path) != expected_hash:
+        raise RuntimeError(f"{kind} row hash mismatch: {rows_path}")
+    return rows_path, _read_jsonl(rows_path)
+
+
+def _index_rows(bundle: Mapping[str, Any]) -> dict[tuple[str, int, str], dict[str, Any]]:
+    indexed: dict[tuple[str, int, str], dict[str, Any]] = {}
+    for row in bundle["rows"]:
+        try:
+            key = (str(row["id"]), int(row["k"]), str(row["split"]))
+        except (KeyError, TypeError, ValueError) as exc:
+            raise RuntimeError(
+                f"malformed evaluation row in {bundle.get('summary_path', '<memory>')}"
+            ) from exc
+        if key in indexed:
+            raise RuntimeError(
+                f"duplicate evaluation row key {key} in "
+                f"{bundle.get('summary_path', '<memory>')}"
+            )
+        indexed[key] = row
+    return indexed
+
+
 def _evaluation_bundles(
-    runs_dir: Path, expected_config_sha256: str
+    runs_dir: Path,
+    expected_config_sha256: str,
+    config: Mapping[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
-    bundles = []
+    """Load evaluation bundles only after verifying every scientific receipt."""
+    bundles: list[dict[str, Any]] = []
+    expected_source_contract = source_contract_sha256()
+    expected_requirements_lock = _current_requirements_lock_sha256()
+    seen_bundle_keys: set[tuple[bool, int, str, str]] = set()
     for summary_path in sorted(runs_dir.rglob("summary.json")):
         try:
             summary = json.loads(summary_path.read_text(encoding="utf-8"))
@@ -40,36 +132,134 @@ def _evaluation_bundles(
             continue
         if summary.get("config_sha256") != expected_config_sha256:
             continue
-        rows_path = Path(summary["row_file"])
-        if not rows_path.is_absolute():
-            rows_path = summary_path.parent / rows_path
-        if not rows_path.exists():
-            continue
-        expected_rows_hash = summary.get("row_file_sha256")
-        if expected_rows_hash is not None and _sha256(rows_path) != expected_rows_hash:
-            raise RuntimeError(f"evaluation row hash mismatch: {rows_path}")
-        metadata = summary.get("setup", {}).get("checkpoint_metadata", {})
-        if (
-            metadata.get("data_manifest_sha256") is not None
-            and summary.get("data_manifest_sha256") is not None
-            and metadata.get("data_manifest_sha256")
-            != summary.get("data_manifest_sha256")
-        ):
-            raise RuntimeError(
-                f"checkpoint/evaluation data-manifest mismatch: {summary_path}"
-            )
-        bundles.append(
-            {
-                "summary_path": summary_path,
-                "summary": summary,
-                "rows": _read_jsonl(rows_path),
-                "checkpoint_metadata": metadata,
-                "train_seed": metadata.get("train_seed"),
-                "train_arm": summary.get("train_arm"),
-                "eval_mode": summary.get("eval_mode"),
-                "pilot": bool(summary.get("pilot", False)),
-            }
+        _verify_receipt_identity(summary, kind="evaluation", path=summary_path)
+        _, rows = _resolve_receipted_rows(
+            summary_path,
+            summary.get("row_file"),
+            summary.get("row_file_sha256"),
+            kind="evaluation",
         )
+        metadata = summary.get("setup", {}).get("checkpoint_metadata")
+        if not isinstance(metadata, Mapping):
+            raise RuntimeError(f"evaluation has no checkpoint metadata: {summary_path}")
+        for receipt_key in (
+            "data_manifest_sha256",
+            "source_contract_sha256",
+            "requirements_training_lock_sha256",
+        ):
+            summary_value = summary.get(receipt_key)
+            metadata_value = metadata.get(receipt_key)
+            if not _is_sha256(summary_value) or summary_value != metadata_value:
+                raise RuntimeError(
+                    f"checkpoint/evaluation {receipt_key} mismatch: {summary_path}"
+                )
+            if (
+                receipt_key == "source_contract_sha256"
+                and summary_value != expected_source_contract
+            ):
+                raise RuntimeError(
+                    f"evaluation source contract is stale: {summary_path}"
+                )
+            if (
+                receipt_key == "requirements_training_lock_sha256"
+                and summary_value != expected_requirements_lock
+            ):
+                raise RuntimeError(
+                    f"evaluation requirements lock is stale: {summary_path}"
+                )
+        expected_checkpoint_fields = {
+            "experiment_id": config["experiment_id"] if config is not None else None,
+            "model_id": config["model"]["id"] if config is not None else None,
+            "model_revision": config["model"]["revision"] if config is not None else None,
+            "backend": config["model"]["backend"] if config is not None else None,
+            "config_sha256": expected_config_sha256,
+        }
+        for key, expected_value in expected_checkpoint_fields.items():
+            if expected_value is not None and metadata.get(key) != expected_value:
+                raise RuntimeError(
+                    f"evaluation checkpoint {key} mismatch: {summary_path}"
+                )
+        identity = metadata.get("checkpoint_identity_sha256")
+        if not _is_sha256(identity) or identity != _checkpoint_identity(metadata):
+            raise RuntimeError(f"checkpoint identity digest mismatch: {summary_path}")
+        if summary.get("checkpoint_identity_sha256") != identity:
+            raise RuntimeError(
+                f"checkpoint/evaluation identity mismatch: {summary_path}"
+            )
+        try:
+            train_seed = int(metadata["train_seed"])
+        except (KeyError, TypeError, ValueError) as exc:
+            raise RuntimeError(f"evaluation has no valid train seed: {summary_path}") from exc
+        train_arm = str(summary.get("train_arm"))
+        eval_mode = str(summary.get("eval_mode"))
+        if train_arm != metadata.get("train_arm"):
+            raise RuntimeError(f"checkpoint/evaluation arm mismatch: {summary_path}")
+        pilot = bool(summary.get("pilot", False))
+        bundle_key = (pilot, train_seed, train_arm, eval_mode)
+        if bundle_key in seen_bundle_keys:
+            raise RuntimeError(f"duplicate evaluation bundle {bundle_key}")
+        seen_bundle_keys.add(bundle_key)
+
+        if config is not None:
+            expected_phase = "pilot" if pilot else "full"
+            expected_step = int(
+                config["training"]["pilot_steps" if pilot else "train_steps"]
+            )
+            expected_seeds = (
+                {int(config["training"]["pilot_seed"])}
+                if pilot
+                else set(map(int, config["training"]["train_seeds"]))
+            )
+            if metadata.get("phase") != expected_phase:
+                raise RuntimeError(
+                    f"checkpoint phase mismatch for {summary_path}: "
+                    f"{metadata.get('phase')!r} != {expected_phase!r}"
+                )
+            if summary.get("phase") != expected_phase:
+                raise RuntimeError(f"evaluation summary phase mismatch: {summary_path}")
+            if metadata.get("pilot") is not pilot:
+                raise RuntimeError(f"checkpoint pilot flag mismatch: {summary_path}")
+            if int(metadata.get("step", -1)) != expected_step:
+                raise RuntimeError(
+                    f"checkpoint is not the registered final {expected_phase} step: "
+                    f"{summary_path}"
+                )
+            if train_seed not in expected_seeds:
+                raise RuntimeError(
+                    f"unexpected {expected_phase} model seed {train_seed}: {summary_path}"
+                )
+            if int(summary.get("expected_seed", -1)) != train_seed:
+                raise RuntimeError(f"evaluation expected-seed mismatch: {summary_path}")
+
+        bundle = {
+            "summary_path": summary_path,
+            "summary": summary,
+            "rows": rows,
+            "checkpoint_metadata": dict(metadata),
+            "checkpoint_identity_sha256": identity,
+            "data_manifest_sha256": summary["data_manifest_sha256"],
+            "source_contract_sha256": summary["source_contract_sha256"],
+            "requirements_training_lock_sha256": summary[
+                "requirements_training_lock_sha256"
+            ],
+            "train_seed": train_seed,
+            "train_arm": train_arm,
+            "eval_mode": eval_mode,
+            "pilot": pilot,
+        }
+        _index_rows(bundle)
+        bundles.append(bundle)
+
+    for receipt_key in (
+        "data_manifest_sha256",
+        "source_contract_sha256",
+        "requirements_training_lock_sha256",
+    ):
+        values = {bundle[receipt_key] for bundle in bundles}
+        if len(values) > 1:
+            raise RuntimeError(
+                f"scientific evaluation bundles disagree on {receipt_key}"
+            )
     return bundles
 
 
@@ -79,34 +269,112 @@ def _prefer_full_bundles(bundles: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return full if full else bundles
 
 
-def _index_rows(bundle: Mapping[str, Any]) -> dict[tuple[Any, ...], dict[str, Any]]:
+def _expected_seeds(config: Mapping[str, Any], pilot: bool) -> set[int]:
+    return (
+        {int(config["training"]["pilot_seed"])}
+        if pilot
+        else set(map(int, config["training"]["train_seeds"]))
+    )
+
+
+def _expected_depth_tasks(config: Mapping[str, Any], pilot: bool) -> int:
+    total = int(
+        config["substrate"][
+            "pilot_examples_per_split" if pilot else "evaluation_examples_per_split"
+        ]
+    )
+    depths = len(config["substrate"]["extrapolation_depths"])
+    if total % depths:
+        raise RuntimeError(
+            f"registered item count {total} is not divisible across {depths} depths"
+        )
+    return total // depths
+
+
+def _assert_exact_keys(
+    left: Mapping[Any, Any], right: Mapping[Any, Any], *, comparison: str
+) -> None:
+    left_keys, right_keys = set(left), set(right)
+    if left_keys != right_keys:
+        missing = sorted(left_keys - right_keys, key=str)
+        extra = sorted(right_keys - left_keys, key=str)
+        raise RuntimeError(
+            f"{comparison} requires exact paired key equality; "
+            f"right missing={missing[:5]} right extra={extra[:5]}"
+        )
+
+
+def _assert_paired_row_contract(
+    left: Mapping[str, Any],
+    right: Mapping[str, Any],
+    *,
+    comparison: str,
+    fields: Sequence[str] = (
+        "depth",
+        "family",
+        "template",
+        "query_kind",
+        "correct_choice",
+        "prompt_tokens",
+        "layer_token_applications",
+    ),
+) -> None:
+    for field in fields:
+        if field not in left or field not in right or left[field] != right[field]:
+            raise RuntimeError(
+                f"{comparison} immutable row mismatch for {field}: "
+                f"{left.get(field)!r} != {right.get(field)!r}"
+            )
+
+
+def _crossed_summary(
+    matrix: Mapping[int, Mapping[str, float]],
+    *,
+    config: Mapping[str, Any],
+    bootstrap_seed_offset: int,
+    effect_name: str,
+) -> dict[str, Any]:
+    mean, lower, upper = crossed_paired_bootstrap_interval(
+        matrix,
+        resamples=int(config["evaluation"]["bootstrap_resamples"]),
+        seed=int(config["evaluation"]["bootstrap_seed"]) + bootstrap_seed_offset,
+    )
+    first = next(iter(matrix.values()))
     return {
-        (row["id"], int(row["k"]), row["split"]): row
-        for row in bundle["rows"]
+        effect_name: mean,
+        "ci95": [lower, upper],
+        "unique_tasks": len(first),
+        "model_seeds": sorted(map(int, matrix)),
+        "model_seed_count": len(matrix),
+        "per_seed": {
+            str(seed): sum(values.values()) / len(values)
+            for seed, values in sorted(matrix.items())
+        },
     }
 
 
 def _paired_carry_bag(
-    bundles: list[dict[str, Any]], config: Mapping[str, Any]
+    bundles: list[dict[str, Any]], config: Mapping[str, Any], *, pilot: bool = False
 ) -> dict[str, Any]:
+    expected_seeds = _expected_seeds(config, pilot)
     by_seed: dict[int, dict[str, dict[str, Any]]] = defaultdict(dict)
     for bundle in bundles:
-        seed = bundle["train_seed"]
-        arm = bundle["train_arm"]
-        mode = bundle["eval_mode"]
-        if seed is None or arm not in {"carry", "bag"} or mode != arm:
+        seed, arm, mode = bundle["train_seed"], bundle["train_arm"], bundle["eval_mode"]
+        if arm not in {"carry", "bag"} or mode != arm:
             continue
-        if arm in by_seed[int(seed)]:
-            raise RuntimeError(f"duplicate full {arm} evaluation for seed {seed}")
-        by_seed[int(seed)][arm] = bundle
+        if seed not in expected_seeds:
+            raise RuntimeError(f"unexpected Carry/Bag model seed {seed}")
+        if arm in by_seed[seed]:
+            raise RuntimeError(f"duplicate {arm} evaluation for seed {seed}")
+        by_seed[seed][arm] = bundle
 
+    split = "pilot_depth" if pilot else "depth_extrapolation"
     primary_depths = set(map(int, config["evaluation"]["primary_depths"]))
-    resamples = int(config["evaluation"]["bootstrap_resamples"])
-    bootstrap_seed = int(config["evaluation"]["bootstrap_seed"])
-    differences_by_seed: dict[int, list[float]] = defaultdict(list)
-    per_depth_seed: dict[int, dict[int, list[float]]] = defaultdict(
-        lambda: defaultdict(list)
-    )
+    differences_by_seed: dict[int, dict[str, float]] = {}
+    per_depth_seed: dict[int, dict[int, dict[str, float]]] = defaultdict(dict)
+    per_query_seed: dict[str, dict[int, dict[str, float]]] = defaultdict(dict)
+    interface_by_seed: dict[int, list[float]] = defaultdict(list)
+    bag_accuracy_by_seed: dict[int, list[float]] = defaultdict(list)
     seed_receipts = []
     for seed, arms in sorted(by_seed.items()):
         if set(arms) != {"carry", "bag"}:
@@ -115,9 +383,7 @@ def _paired_carry_bag(
         bag_metadata = arms["bag"]["checkpoint_metadata"]
         allowed_k1_error = float(config["gates"]["k1_max_logit_abs_error"])
         for arm_name, bundle in arms.items():
-            parity_error = bundle["summary"].get(
-                "checkpoint_k1_max_logit_abs_error"
-            )
+            parity_error = bundle["summary"].get("checkpoint_k1_max_logit_abs_error")
             if (
                 parity_error is None
                 or not math.isfinite(float(parity_error))
@@ -128,16 +394,17 @@ def _paired_carry_bag(
                 )
         for receipt_key in (
             "data_manifest_sha256",
+            "source_contract_sha256",
             "training_prompt_tokens",
             "training_layer_token_applications",
+            "training_order_sha256",
         ):
             if (
                 receipt_key not in carry_metadata
                 or carry_metadata.get(receipt_key) != bag_metadata.get(receipt_key)
             ):
                 raise RuntimeError(
-                    f"Carry/Bag training-compute receipt mismatch for seed {seed}: "
-                    f"{receipt_key}"
+                    f"Carry/Bag training receipt mismatch for seed {seed}: {receipt_key}"
                 )
         carry_parameters = carry_metadata.get("trainable_parameters", {})
         bag_parameters = bag_metadata.get("trainable_parameters", {})
@@ -150,12 +417,18 @@ def _paired_carry_bag(
                     f"Carry/Bag initialization receipt mismatch for seed {seed}: "
                     f"{receipt_key}"
                 )
+
         carry = _index_rows(arms["carry"])
         bag = _index_rows(arms["bag"])
-        keys = sorted(set(carry).intersection(bag))
-        paired = 0
-        for key in keys:
+        _assert_exact_keys(carry, bag, comparison=f"Carry/Bag seed {seed}")
+        seed_differences: dict[str, float] = {}
+        depth_values: dict[int, dict[str, float]] = defaultdict(dict)
+        query_values: dict[str, dict[str, float]] = defaultdict(dict)
+        for key in sorted(carry):
             c, b = carry[key], bag[key]
+            _assert_paired_row_contract(
+                c, b, comparison=f"Carry/Bag seed {seed}, task {c.get('id')}"
+            )
             for receipt_key in ("prompt_tokens", "layer_token_applications"):
                 if c.get(receipt_key) != b.get(receipt_key):
                     raise RuntimeError(
@@ -163,262 +436,937 @@ def _paired_carry_bag(
                         f"item {c['id']}: {receipt_key}"
                     )
             depth = int(c["depth"])
-            if (
-                c["split"] != "depth_extrapolation"
-                or depth not in primary_depths
-                or int(c["k"]) != depth
-            ):
+            if c["split"] != split or depth not in primary_depths or int(c["k"]) != depth:
                 continue
+            item_id = str(c["id"])
+            if item_id in seed_differences:
+                raise RuntimeError(f"duplicate primary task id {item_id} for seed {seed}")
+            if c.get("query_kind") != b.get("query_kind") or c.get("query_kind") not in {
+                "node",
+                "checksum",
+            }:
+                raise RuntimeError(f"missing/mismatched query kind for task {item_id}")
             difference = float(bool(c["correct"])) - float(bool(b["correct"]))
-            differences_by_seed[seed].append(difference)
-            per_depth_seed[depth][seed].append(difference)
-            paired += 1
+            seed_differences[item_id] = difference
+            depth_values[depth][item_id] = difference
+            query_values[str(c["query_kind"])][item_id] = difference
+            top_is_answer = c.get("full_top_is_answer")
+            if top_is_answer is None:
+                raise RuntimeError(f"Carry row has no full-vocabulary answer-mode receipt: {item_id}")
+            interface_by_seed[seed].append(float(bool(top_is_answer)))
+            bag_accuracy_by_seed[seed].append(float(bool(b["correct"])))
+        if seed_differences:
+            differences_by_seed[seed] = seed_differences
+            for depth, values in depth_values.items():
+                per_depth_seed[depth][seed] = values
+            for query_kind, values in query_values.items():
+                per_query_seed[query_kind][seed] = values
         seed_receipts.append(
             {
                 "seed": seed,
-                "paired_primary_rows": paired,
+                "unique_primary_tasks": len(seed_differences),
+                "checkpoint_phase": carry_metadata.get("phase"),
                 "training_compute_equal": True,
+                "training_order_equal": True,
                 "initialization_equal": True,
                 "post_checkpoint_k1_parity": True,
             }
         )
 
+    observed_seeds = set(differences_by_seed)
     if not differences_by_seed:
         return {
             "available": False,
             "reason": "no separately trained carry/bag matched-depth rows",
+            "expected_model_seeds": sorted(expected_seeds),
+            "observed_model_seeds": sorted(observed_seeds),
             "seed_receipts": seed_receipts,
         }
-    mean, lower, upper = hierarchical_paired_bootstrap_interval(
-        differences_by_seed, resamples=resamples, seed=bootstrap_seed
+    overall = _crossed_summary(
+        differences_by_seed,
+        config=config,
+        bootstrap_seed_offset=0,
+        effect_name="carry_minus_bag",
     )
-    depth_results = {}
-    for depth, grouped_values in sorted(per_depth_seed.items()):
-        dmean, dlower, dupper = hierarchical_paired_bootstrap_interval(
-            grouped_values, resamples=resamples, seed=bootstrap_seed + depth
+    depth_results: dict[str, Any] = {}
+    for depth, matrix in sorted(per_depth_seed.items()):
+        depth_results[str(depth)] = _crossed_summary(
+            matrix,
+            config=config,
+            bootstrap_seed_offset=depth,
+            effect_name="difference",
         )
-        depth_results[str(depth)] = {
-            "n": sum(len(values) for values in grouped_values.values()),
-            "difference": dmean,
-            "ci95": [dlower, dupper],
-        }
-    positive_depths = sum(
-        result["difference"] > 0 for result in depth_results.values()
+    query_results: dict[str, Any] = {}
+    for index, (query_kind, matrix) in enumerate(sorted(per_query_seed.items())):
+        query_results[query_kind] = _crossed_summary(
+            matrix,
+            config=config,
+            bootstrap_seed_offset=40 + index,
+            effect_name="difference",
+        )
+
+    expected_per_depth = _expected_depth_tasks(config, pilot)
+    complete_depths = 0
+    for depth in primary_depths:
+        matrix = per_depth_seed.get(depth, {})
+        if set(matrix) != expected_seeds:
+            continue
+        first_ids = set(next(iter(matrix.values())))
+        if len(first_ids) != expected_per_depth:
+            continue
+        if all(set(values) == first_ids for values in matrix.values()):
+            complete_depths += 1
+    query_kinds_complete = set(query_results) == {"node", "checksum"}
+    query_kinds_positive = query_kinds_complete and all(
+        query_results[kind]["difference"] > 0 for kind in ("node", "checksum")
     )
-    required_per_depth = int(config["evaluation"]["min_items_per_cell"])
-    required_per_seed_depth = int(
-        config["substrate"]["evaluation_examples_per_split"]
-    ) // len(config["substrate"]["extrapolation_depths"])
-    required_seeds = set(map(int, config["training"]["train_seeds"]))
-    complete_depths = sum(
-        depth_results.get(str(depth), {}).get("n", 0) >= required_per_depth
-        and set(per_depth_seed.get(depth, {})) == required_seeds
-        and all(
-            len(values) >= required_per_seed_depth
-            for values in per_depth_seed.get(depth, {}).values()
-        )
-        for depth in primary_depths
+    carry_answer_mode_rate = sum(map(sum, interface_by_seed.values())) / sum(
+        map(len, interface_by_seed.values())
+    )
+    answer_mode_per_seed = {
+        str(seed): sum(values) / len(values)
+        for seed, values in sorted(interface_by_seed.items())
+    }
+    bag_primary_accuracy = sum(map(sum, bag_accuracy_by_seed.values())) / sum(
+        map(len, bag_accuracy_by_seed.values())
     )
     return {
         "available": True,
-        "n": sum(len(values) for values in differences_by_seed.values()),
-        "train_seed_pairs": len(
-            [receipt for receipt in seed_receipts if receipt["paired_primary_rows"]]
-        ),
-        "carry_minus_bag": mean,
-        "ci95": [lower, upper],
+        **overall,
+        "expected_model_seeds": sorted(expected_seeds),
+        "seed_set_complete": observed_seeds == expected_seeds,
         "per_depth": depth_results,
-        "positive_depths": positive_depths,
-        "required_items_per_primary_depth": required_per_depth,
-        "required_items_per_seed_depth": required_per_seed_depth,
+        "positive_depths": sum(
+            result["difference"] > 0 for result in depth_results.values()
+        ),
+        "expected_unique_tasks_per_primary_depth": expected_per_depth,
         "complete_primary_depths": complete_depths,
         "required_primary_depths": len(primary_depths),
+        "per_query_kind": query_results,
+        "query_kinds_complete": query_kinds_complete,
+        "query_kinds_positive": query_kinds_positive,
+        "carry_full_top_is_answer_rate": carry_answer_mode_rate,
+        "carry_full_top_is_answer_rate_per_seed": answer_mode_per_seed,
+        "bag_primary_accuracy": bag_primary_accuracy,
+        "carry_answer_interface_valid": all(
+            value >= float(config["gates"]["min_carry_answer_mode_rate"])
+            for value in answer_mode_per_seed.values()
+        ),
         "seed_receipts": seed_receipts,
     }
 
 
 def _unseen_k_scaling(
-    bundles: list[dict[str, Any]], config: Mapping[str, Any]
+    bundles: list[dict[str, Any]], config: Mapping[str, Any], *, pilot: bool = False
 ) -> dict[str, Any]:
     train_k = int(config["training"]["train_k"])
-    gains_by_seed: dict[int, list[float]] = defaultdict(list)
+    split = "pilot_depth" if pilot else "depth_extrapolation"
+    expected_seeds = _expected_seeds(config, pilot)
+    gains_by_seed: dict[int, dict[str, float]] = {}
+    seen_seeds: set[int] = set()
     for bundle in bundles:
         if bundle["train_arm"] != "carry" or bundle["eval_mode"] != "carry":
             continue
+        seed = int(bundle["train_seed"])
+        if seed not in expected_seeds:
+            raise RuntimeError(f"unexpected Carry scaling seed {seed}")
+        if seed in seen_seeds:
+            raise RuntimeError(f"duplicate Carry scaling bundle for seed {seed}")
+        seen_seeds.add(seed)
         rows_by_id: dict[str, dict[int, dict[str, Any]]] = defaultdict(dict)
         for row in bundle["rows"]:
-            if row["split"] == "depth_extrapolation":
-                rows_by_id[row["id"]][int(row["k"])] = row
-        for item in rows_by_id.values():
-            depth = int(next(iter(item.values()))["depth"])
-            if depth <= train_k or train_k not in item or depth not in item:
+            if row["split"] != split:
                 continue
-            gains_by_seed[int(bundle["train_seed"])].append(
-                float(bool(item[depth]["correct"]))
-                - float(bool(item[train_k]["correct"]))
+            item_id, k = str(row["id"]), int(row["k"])
+            if k in rows_by_id[item_id]:
+                raise RuntimeError(f"duplicate K={k} scaling row for task {item_id}")
+            rows_by_id[item_id][k] = row
+        gains: dict[str, float] = {}
+        for item_id, item in rows_by_id.items():
+            depth = int(next(iter(item.values()))["depth"])
+            if depth <= train_k:
+                continue
+            if train_k not in item or depth not in item:
+                raise RuntimeError(
+                    f"scaling task {item_id} lacks exact K={train_k}/K=depth pair"
+                )
+            gains[item_id] = float(bool(item[depth]["correct"])) - float(
+                bool(item[train_k]["correct"])
             )
+        if gains:
+            gains_by_seed[seed] = gains
     if not gains_by_seed:
         return {
             "available": False,
             "reason": "no paired K=train_k versus K=depth carry rows",
         }
-    mean, lower, upper = hierarchical_paired_bootstrap_interval(
+    result = _crossed_summary(
         gains_by_seed,
-        resamples=int(config["evaluation"]["bootstrap_resamples"]),
-        seed=int(config["evaluation"]["bootstrap_seed"]) + 100,
+        config=config,
+        bootstrap_seed_offset=100,
+        effect_name="gain",
+    )
+    expected_tasks = int(
+        config["substrate"][
+            "pilot_examples_per_split" if pilot else "evaluation_examples_per_split"
+        ]
     )
     return {
         "available": True,
-        "n": sum(len(values) for values in gains_by_seed.values()),
-        "training_seeds": len(gains_by_seed),
-        "gain": mean,
-        "ci95": [lower, upper],
+        **result,
+        "expected_unique_tasks": expected_tasks,
+        "complete": set(gains_by_seed) == expected_seeds
+        and result["unique_tasks"] == expected_tasks,
     }
 
 
 def _state_sufficiency(
-    bundles: list[dict[str, Any]], config: Mapping[str, Any]
+    bundles: list[dict[str, Any]], config: Mapping[str, Any], *, pilot: bool = False
 ) -> dict[str, Any]:
-    node_values = []
-    joint_values = []
+    split = "pilot_depth" if pilot else "depth_extrapolation"
+    expected_seeds = _expected_seeds(config, pilot)
     primary_depths = set(map(int, config["evaluation"]["primary_depths"]))
+    by_seed: dict[int, dict[str, tuple[float, float]]] = defaultdict(dict)
     for bundle in bundles:
         if bundle["train_arm"] != "carry" or bundle["eval_mode"] != "carry":
             continue
+        seed = int(bundle["train_seed"])
+        if seed not in expected_seeds:
+            raise RuntimeError(f"unexpected state-sufficiency seed {seed}")
         for row in bundle["rows"]:
             depth = int(row["depth"])
-            if (
-                row["split"] == "depth_extrapolation"
-                and depth in primary_depths
-                and int(row["k"]) == depth
-            ):
-                node_values.append(float(row.get("node_step_accuracy", 0.0)))
-                joint_values.append(float(row.get("joint_step_accuracy", 0.0)))
-    if not node_values:
+            if row["split"] == split and depth in primary_depths and int(row["k"]) == depth:
+                item_id = str(row["id"])
+                if item_id in by_seed[seed]:
+                    raise RuntimeError(f"duplicate state-sufficiency task {item_id}")
+                by_seed[seed][item_id] = (
+                    float(row["node_step_accuracy"]),
+                    float(row["joint_step_accuracy"]),
+                )
+    if not by_seed:
         return {"available": False}
-    node = sum(node_values) / len(node_values)
-    joint = sum(joint_values) / len(joint_values)
+    task_ids = set(next(iter(by_seed.values())))
+    if any(set(values) != task_ids for values in by_seed.values()):
+        raise RuntimeError("state sufficiency requires common task ids across model seeds")
+    node = sum(value[0] for values in by_seed.values() for value in values.values()) / (
+        len(by_seed) * len(task_ids)
+    )
+    joint = sum(value[1] for values in by_seed.values() for value in values.values()) / (
+        len(by_seed) * len(task_ids)
+    )
     return {
         "available": True,
-        "n": len(node_values),
+        "unique_tasks": len(task_ids),
+        "model_seeds": sorted(by_seed),
         "node_step_accuracy": node,
         "joint_step_accuracy": joint,
-        "passes": node >= float(config["gates"]["min_state_node_accuracy"])
-        or joint >= float(config["gates"]["min_state_joint_accuracy"]),
+        # Joint node+phase+checksum sufficiency is mandatory; node alone cannot pass.
+        "passes": joint >= float(config["gates"]["min_state_joint_accuracy"]),
     }
 
 
-def _swap_summary(bundles: list[dict[str, Any]]) -> dict[str, Any]:
-    summaries = []
+def _joint_holdout_summary(
+    bundles: list[dict[str, Any]], config: Mapping[str, Any], *, pilot: bool = False
+) -> dict[str, Any]:
+    split = "pilot_joint" if pilot else "joint_holdout"
+    expected_seeds = _expected_seeds(config, pilot)
+    by_seed: dict[int, dict[str, dict[str, Any]]] = defaultdict(dict)
+    for bundle in bundles:
+        if bundle["train_arm"] not in {"carry", "bag"} or bundle["eval_mode"] != bundle["train_arm"]:
+            continue
+        seed = int(bundle["train_seed"])
+        if seed not in expected_seeds:
+            raise RuntimeError(f"unexpected joint-holdout seed {seed}")
+        arm = str(bundle["train_arm"])
+        if arm in by_seed[seed]:
+            raise RuntimeError(f"duplicate joint-holdout {arm} bundle for seed {seed}")
+        by_seed[seed][arm] = bundle
+    matrix: dict[int, dict[str, float]] = {}
+    per_depth: dict[int, dict[int, dict[str, float]]] = defaultdict(dict)
+    for seed, arms in sorted(by_seed.items()):
+        if set(arms) != {"carry", "bag"}:
+            continue
+        carry, bag = _index_rows(arms["carry"]), _index_rows(arms["bag"])
+        _assert_exact_keys(carry, bag, comparison=f"joint holdout seed {seed}")
+        values: dict[str, float] = {}
+        depth_values: dict[int, dict[str, float]] = defaultdict(dict)
+        for key in sorted(carry):
+            c, b = carry[key], bag[key]
+            _assert_paired_row_contract(
+                c, b, comparison=f"joint holdout seed {seed}, task {c.get('id')}"
+            )
+            if c["split"] != split or int(c["k"]) != int(c["depth"]):
+                continue
+            for receipt_key in ("prompt_tokens", "layer_token_applications"):
+                if c.get(receipt_key) != b.get(receipt_key):
+                    raise RuntimeError(
+                        f"joint-holdout compute mismatch for seed {seed}, task {c['id']}"
+                    )
+            item_id = str(c["id"])
+            if item_id in values:
+                raise RuntimeError(f"duplicate joint-holdout task {item_id}")
+            difference = float(bool(c["correct"])) - float(bool(b["correct"]))
+            values[item_id] = difference
+            depth_values[int(c["depth"])][item_id] = difference
+        if values:
+            matrix[seed] = values
+            for depth, depth_matrix in depth_values.items():
+                per_depth[depth][seed] = depth_matrix
+    if not matrix:
+        return {"available": False}
+    result = _crossed_summary(
+        matrix,
+        config=config,
+        bootstrap_seed_offset=150,
+        effect_name="carry_minus_bag",
+    )
+    expected_per_depth = (
+        _expected_depth_tasks(config, True)
+        if pilot
+        else int(config["evaluation"]["holdout_items_per_depth"])
+    )
+    complete_depths = sum(
+        set(seed_matrix) == expected_seeds
+        and len(next(iter(seed_matrix.values()))) == expected_per_depth
+        and all(
+            set(values) == set(next(iter(seed_matrix.values())))
+            for values in seed_matrix.values()
+        )
+        for seed_matrix in per_depth.values()
+    )
+    threshold = float(config["gates"]["min_joint_holdout_carry_minus_bag"])
+    return {
+        "available": True,
+        **result,
+        "expected_unique_tasks_per_depth": expected_per_depth,
+        "complete_depths": complete_depths,
+        "required_depths": len(config["evaluation"]["primary_depths"]),
+        "seed_set_complete": set(matrix) == expected_seeds,
+        "non_reversal_all_seeds": all(value >= 0 for value in result["per_seed"].values()),
+        "passes": result["carry_minus_bag"] >= threshold
+        and result["ci95"][0] > 0
+        and all(value >= 0 for value in result["per_seed"].values()),
+    }
+
+
+def _swap_summary(
+    bundles: list[dict[str, Any]], config: Mapping[str, Any], *, pilot: bool = False
+) -> dict[str, Any]:
+    expected_seeds = _expected_seeds(config, pilot)
+    expected_pairs = int(
+        config["substrate"][
+            "pilot_counterfactual_pairs" if pilot else "counterfactual_pairs"
+        ]
+    )
+    per_seed = []
+    seen_seeds: set[int] = set()
     for bundle in bundles:
         if bundle["train_arm"] != "carry" or bundle["eval_mode"] != "carry":
             continue
+        seed = int(bundle["train_seed"])
+        if seed not in expected_seeds:
+            raise RuntimeError(f"unexpected counterfactual-swap seed {seed}")
+        if seed in seen_seeds:
+            raise RuntimeError(f"duplicate swap bundle for seed {seed}")
+        seen_seeds.add(seed)
         swap = bundle["summary"].get("counterfactual_swaps")
-        if swap:
-            summaries.append(
-                {
-                    "train_seed": bundle["train_seed"],
-                    **swap,
-                    "donor_follow_gain": swap["donor_follow_rate"]
-                    - swap["recipient_preserve_rate"],
-                }
+        if not isinstance(swap, Mapping):
+            continue
+        path_value = swap.get("counterfactual_swap_row_file")
+        hash_value = swap.get("counterfactual_swap_row_file_sha256")
+        # Also accept top-level receipts while the runner schema is migrated.
+        if path_value is None:
+            path_value = bundle["summary"].get("counterfactual_swap_row_file")
+            hash_value = bundle["summary"].get("counterfactual_swap_row_file_sha256")
+        _, rows = _resolve_receipted_rows(
+            bundle["summary_path"], path_value, hash_value, kind="counterfactual swap"
+        )
+        indexed: dict[tuple[str, str], dict[str, Any]] = {}
+        directions_by_pair: dict[str, set[str]] = defaultdict(set)
+        differences_by_pair: dict[str, list[float]] = defaultdict(list)
+        donor_over_recipient_by_pair: dict[str, list[float]] = defaultdict(list)
+        for row in rows:
+            key = (str(row["pair_id"]), str(row["direction"]))
+            if key in indexed:
+                raise RuntimeError(f"duplicate counterfactual swap row {key}")
+            indexed[key] = row
+            directions_by_pair[key[0]].add(key[1])
+            for required in (
+                "baseline_prediction",
+                "baseline_correct",
+                "baseline_donor_follow",
+                "baseline_recipient_correct",
+                "donor_choice_in_recipient",
+                "donor_follow",
+                "recipient_preserve",
+                "geometry_equal",
+            ):
+                if required not in row:
+                    raise RuntimeError(f"swap row {key} lacks {required}")
+            if row["geometry_equal"] is not True:
+                raise RuntimeError(f"swap row {key} has unequal token/state geometry")
+            baseline_donor_follow = (
+                int(row["baseline_prediction"])
+                == int(row["donor_choice_in_recipient"])
             )
-    return {"available": bool(summaries), "seeds": summaries}
+            if bool(row["baseline_donor_follow"]) is not baseline_donor_follow:
+                raise RuntimeError(f"swap row {key} baseline-donor receipt mismatch")
+            if bool(row["baseline_recipient_correct"]) is not bool(
+                row["baseline_correct"]
+            ):
+                raise RuntimeError(f"swap row {key} baseline-recipient receipt mismatch")
+            differences_by_pair[key[0]].append(
+                float(bool(row["donor_follow"]))
+                - float(baseline_donor_follow)
+            )
+            donor_over_recipient_by_pair[key[0]].append(
+                float(bool(row["donor_follow"]))
+                - float(bool(row["recipient_preserve"]))
+            )
+        if len(rows) != 2 * expected_pairs or len(directions_by_pair) != expected_pairs:
+            raise RuntimeError(
+                f"swap seed {seed} has {len(rows)} directions across "
+                f"{len(directions_by_pair)} pairs; expected {2 * expected_pairs} directions"
+            )
+        expected_directions = {"a_to_b", "b_to_a"}
+        if any(directions != expected_directions for directions in directions_by_pair.values()):
+            raise RuntimeError(f"swap seed {seed} is not bidirectional for every pair")
+        if int(swap.get("directions", -1)) != 2 * expected_pairs:
+            raise RuntimeError(f"swap summary direction count mismatch for seed {seed}")
+        pair_differences = [
+            sum(values) / len(values)
+            for _, values in sorted(differences_by_pair.items())
+        ]
+        pair_donor_over_recipient = [
+            sum(values) / len(values)
+            for _, values in sorted(donor_over_recipient_by_pair.items())
+        ]
+        mean, lower, upper = paired_bootstrap_interval(
+            pair_differences,
+            resamples=int(config["evaluation"]["bootstrap_resamples"]),
+            seed=int(config["evaluation"]["bootstrap_seed"]) + 300 + seed,
+        )
+        donor_recipient_mean = sum(pair_donor_over_recipient) / len(
+            pair_donor_over_recipient
+        )
+        raw_rates = {
+            "baseline_donor_follow_rate": sum(
+                int(row["baseline_prediction"])
+                == int(row["donor_choice_in_recipient"])
+                for row in rows
+            )
+            / len(rows),
+            "donor_follow_rate": sum(bool(row["donor_follow"]) for row in rows)
+            / len(rows),
+            "recipient_preserve_rate": sum(
+                bool(row["recipient_preserve"]) for row in rows
+            )
+            / len(rows),
+        }
+        for summary_key, recomputed in raw_rates.items():
+            if not math.isclose(
+                float(swap.get(summary_key, float("nan"))),
+                recomputed,
+                rel_tol=0.0,
+                abs_tol=1e-12,
+            ):
+                raise RuntimeError(
+                    f"swap summary/raw mismatch for seed {seed}: {summary_key}"
+                )
+        per_seed.append(
+            {
+                "train_seed": seed,
+                "unique_pairs": expected_pairs,
+                "directions": len(rows),
+                "bootstrap_unit": "counterfactual_pair_mean_over_two_directions",
+                "baseline_donor_follow_rate": raw_rates[
+                    "baseline_donor_follow_rate"
+                ],
+                "post_swap_donor_follow_rate": raw_rates["donor_follow_rate"],
+                "post_swap_recipient_preserve_rate": raw_rates[
+                    "recipient_preserve_rate"
+                ],
+                "donor_follow_gain": mean,
+                "donor_follow_minus_recipient_preserve": donor_recipient_mean,
+                "ci95": [lower, upper],
+            }
+        )
+    threshold = float(config["gates"]["min_donor_follow_gain"])
+    complete = {entry["train_seed"] for entry in per_seed} == expected_seeds
+    return {
+        "available": bool(per_seed),
+        "model_seeds": sorted(entry["train_seed"] for entry in per_seed),
+        "expected_model_seeds": sorted(expected_seeds),
+        "complete": complete,
+        "seeds": per_seed,
+        "passes": complete
+        and all(
+            entry["donor_follow_gain"] >= threshold
+            and entry["donor_follow_minus_recipient_preserve"] >= threshold
+            and entry["ci95"][0] > 0
+            for entry in per_seed
+        ),
+    }
+
+
+def _parse_raw_sample_choice(text: str) -> int | None:
+    if "</think>" not in text:
+        return None
+    visible = text.rsplit("</think>", 1)[1]
+    matches = re.findall(
+        r"(?:Answer\s*:\s*)?\b([ABCD])\b", visible, flags=re.IGNORECASE
+    )
+    return "ABCD".index(matches[-1].upper()) if matches else None
 
 
 def _edge_cut_summary(
-    bundles: list[dict[str, Any]], config: Mapping[str, Any]
+    bundles: list[dict[str, Any]], config: Mapping[str, Any], *, pilot: bool = False
 ) -> dict[str, Any]:
-    """Pair each Carry checkpoint with itself evaluated after cutting the carry edge."""
+    """Pair each Carry checkpoint with itself after cutting the carried edge."""
+    expected_seeds = _expected_seeds(config, pilot)
+    split = "pilot_depth" if pilot else "depth_extrapolation"
     by_seed: dict[int, dict[str, dict[str, Any]]] = defaultdict(dict)
     for bundle in bundles:
         if bundle["train_arm"] != "carry" or bundle["eval_mode"] not in {"carry", "bag"}:
             continue
-        seed = bundle["train_seed"]
-        if seed is None:
-            continue
+        seed = int(bundle["train_seed"])
+        if seed not in expected_seeds:
+            raise RuntimeError(f"unexpected edge-cut seed {seed}")
         mode = str(bundle["eval_mode"])
-        if mode in by_seed[int(seed)]:
-            raise RuntimeError(f"duplicate full Carry-checkpoint {mode} evaluation for seed {seed}")
-        by_seed[int(seed)][mode] = bundle
+        if mode in by_seed[seed]:
+            raise RuntimeError(f"duplicate Carry-checkpoint {mode} evaluation for seed {seed}")
+        by_seed[seed][mode] = bundle
 
     primary_depths = set(map(int, config["evaluation"]["primary_depths"]))
-    per_seed = []
+    matrix: dict[int, dict[str, float]] = {}
+    per_depth: dict[int, dict[int, dict[str, float]]] = defaultdict(dict)
+    identities: dict[int, str] = {}
     for seed, modes in sorted(by_seed.items()):
         if set(modes) != {"carry", "bag"}:
             continue
-        intact = _index_rows(modes["carry"])
-        cut = _index_rows(modes["bag"])
-        differences = []
-        for key in sorted(set(intact).intersection(cut)):
+        intact_bundle, cut_bundle = modes["carry"], modes["bag"]
+        if (
+            intact_bundle["checkpoint_identity_sha256"]
+            != cut_bundle["checkpoint_identity_sha256"]
+        ):
+            raise RuntimeError(f"edge cut seed {seed} did not use the same checkpoint")
+        identities[seed] = intact_bundle["checkpoint_identity_sha256"]
+        intact_all, cut_all = _index_rows(intact_bundle), _index_rows(cut_bundle)
+        intact = {
+            key: row
+            for key, row in intact_all.items()
+            if row["split"] == split
+            and int(row["depth"]) in primary_depths
+            and int(row["k"]) == int(row["depth"])
+        }
+        cut = {
+            key: row
+            for key, row in cut_all.items()
+            if row["split"] == split
+            and int(row["depth"]) in primary_depths
+            and int(row["k"]) == int(row["depth"])
+        }
+        _assert_exact_keys(intact, cut, comparison=f"edge cut seed {seed}")
+        values: dict[str, float] = {}
+        depth_values: dict[int, dict[str, float]] = defaultdict(dict)
+        for key in sorted(intact):
             intact_row, cut_row = intact[key], cut[key]
-            depth = int(intact_row["depth"])
-            if (
-                intact_row["split"] == "depth_extrapolation"
-                and depth in primary_depths
-                and int(intact_row["k"]) == depth
-            ):
-                differences.append(
-                    float(bool(intact_row["correct"]))
-                    - float(bool(cut_row["correct"]))
-                )
-        if differences:
-            per_seed.append(
-                {
-                    "train_seed": seed,
-                    "n": len(differences),
-                    "intact_minus_edge_cut": sum(differences) / len(differences),
-                }
+            _assert_paired_row_contract(
+                intact_row,
+                cut_row,
+                comparison=f"edge cut seed {seed}, task {intact_row.get('id')}",
             )
+            depth = int(intact_row["depth"])
+            if intact_row["split"] != split or depth not in primary_depths or int(intact_row["k"]) != depth:
+                continue
+            for receipt_key in ("prompt_tokens", "layer_token_applications"):
+                if intact_row.get(receipt_key) != cut_row.get(receipt_key):
+                    raise RuntimeError(
+                        f"edge-cut compute mismatch for seed {seed}, task {intact_row['id']}"
+                    )
+            item_id = str(intact_row["id"])
+            if item_id in values:
+                raise RuntimeError(f"duplicate edge-cut task {item_id}")
+            difference = float(bool(intact_row["correct"])) - float(
+                bool(cut_row["correct"])
+            )
+            values[item_id] = difference
+            depth_values[depth][item_id] = difference
+        if values:
+            matrix[seed] = values
+            for depth, depth_matrix in depth_values.items():
+                per_depth[depth][seed] = depth_matrix
+    if not matrix:
+        return {"available": False, "model_seeds": []}
+    result = _crossed_summary(
+        matrix,
+        config=config,
+        bootstrap_seed_offset=250,
+        effect_name="intact_minus_edge_cut",
+    )
+    expected_per_depth = _expected_depth_tasks(config, pilot)
+    complete_depths = sum(
+        set(seed_matrix) == expected_seeds
+        and len(next(iter(seed_matrix.values()))) == expected_per_depth
+        and all(
+            set(values) == set(next(iter(seed_matrix.values())))
+            for values in seed_matrix.values()
+        )
+        for seed_matrix in per_depth.values()
+    )
+    threshold = float(config["gates"]["min_edge_cut_gain"])
+    complete = (
+        set(matrix) == expected_seeds
+        and complete_depths == len(primary_depths)
+    )
     return {
-        "available": bool(per_seed),
-        "training_seed_pairs": len(per_seed),
-        "seeds": per_seed,
-        "diagnostic_only": True,
+        "available": True,
+        **result,
+        "checkpoint_identities": {str(seed): identity for seed, identity in identities.items()},
+        "expected_unique_tasks_per_depth": expected_per_depth,
+        "complete_primary_depths": complete_depths,
+        "required_primary_depths": len(primary_depths),
+        "complete": complete,
+        "positive_all_seeds": all(value > 0 for value in result["per_seed"].values()),
+        "passes": complete
+        and all(value > 0 for value in result["per_seed"].values())
+        and result["ci95"][0] > threshold,
     }
 
 
-def _sample_more(runs_dir: Path, expected_config_sha256: str) -> dict[str, Any]:
-    rows = []
-    seed_receipts = []
-    seen_seeds: set[int] = set()
-    sampled_tokens = 0
-    generation_seconds = 0.0
+def _sample_more_bundles(
+    runs_dir: Path,
+    expected_config_sha256: str,
+    *,
+    expected_data_manifest_sha256: str | None = None,
+    expected_source_contract_sha256: str | None = None,
+    expected_requirements_lock_sha256: str | None = None,
+) -> dict[int, dict[str, Any]]:
+    bundles: dict[int, dict[str, Any]] = {}
     for summary_path in sorted(runs_dir.rglob("summary.json")):
         try:
             summary = json.loads(summary_path.read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError):
             continue
-        if summary.get("status") != "SAMPLE_MORE_COMPLETE":
+        if summary.get("status") != "SAMPLE_MORE_COMPLETE" or summary.get(
+            "config_sha256"
+        ) != expected_config_sha256:
             continue
-        if summary.get("config_sha256") != expected_config_sha256:
-            continue
-        train_seed = int(summary["text_train_seed"])
-        if train_seed in seen_seeds:
-            raise RuntimeError(f"duplicate sample-more evaluation for seed {train_seed}")
-        seen_seeds.add(train_seed)
-        path = Path(summary["rows"])
-        if not path.is_absolute():
-            path = summary_path.parent / path
-        if path.exists():
-            expected_rows_hash = summary.get("rows_sha256")
-            if expected_rows_hash is not None and _sha256(path) != expected_rows_hash:
-                raise RuntimeError(f"sample-more row hash mismatch: {path}")
-            seed_rows = _read_jsonl(path)
-            rows.extend(seed_rows)
-            seed_receipts.append({"train_seed": train_seed, "n": len(seed_rows)})
-            sampled_tokens += int(summary.get("sampled_tokens", 0))
-            generation_seconds += float(summary.get("generation_seconds", 0.0))
-    if not rows:
+        _verify_receipt_identity(summary, kind="sample-more", path=summary_path)
+        if summary.get("phase") != "sample_more":
+            raise RuntimeError(f"sample-more phase mismatch: {summary_path}")
+        if not _is_sha256(summary.get("checkpoint_identity_sha256")):
+            raise RuntimeError(
+                f"sample-more checkpoint identity is missing: {summary_path}"
+            )
+        for key, expected in (
+            ("data_manifest_sha256", expected_data_manifest_sha256),
+            ("source_contract_sha256", expected_source_contract_sha256),
+            ("requirements_training_lock_sha256", expected_requirements_lock_sha256),
+        ):
+            value = summary.get(key)
+            if not _is_sha256(value) or (expected is not None and value != expected):
+                raise RuntimeError(f"sample-more {key} mismatch: {summary_path}")
+        try:
+            seed = int(summary["text_train_seed"])
+        except (KeyError, TypeError, ValueError) as exc:
+            raise RuntimeError(f"sample-more seed is invalid: {summary_path}") from exc
+        if seed in bundles:
+            raise RuntimeError(f"duplicate sample-more evaluation for seed {seed}")
+        if int(summary.get("expected_seed", -1)) != seed:
+            raise RuntimeError(f"sample-more expected-seed mismatch: {summary_path}")
+        _, rows = _resolve_receipted_rows(
+            summary_path,
+            summary.get("rows"),
+            summary.get("rows_sha256"),
+            kind="sample-more",
+        )
+        by_id: dict[str, dict[str, Any]] = {}
+        for row in rows:
+            item_id = str(row["id"])
+            if item_id in by_id:
+                raise RuntimeError(f"duplicate sample-more task id {item_id} for seed {seed}")
+            if int(row.get("text_train_seed", -1)) != seed:
+                raise RuntimeError(
+                    f"sample-more row seed mismatch for task {item_id}: {summary_path}"
+                )
+            if (
+                row.get("checkpoint_identity_sha256")
+                != summary["checkpoint_identity_sha256"]
+            ):
+                raise RuntimeError(
+                    f"sample-more row checkpoint mismatch for task {item_id}: {summary_path}"
+                )
+            by_id[item_id] = row
+        bundles[seed] = {
+            "summary_path": summary_path,
+            "summary": summary,
+            "rows": by_id,
+        }
+    for receipt_key in (
+        "data_manifest_sha256",
+        "source_contract_sha256",
+        "requirements_training_lock_sha256",
+    ):
+        values = {bundle["summary"][receipt_key] for bundle in bundles.values()}
+        if len(values) > 1:
+            raise RuntimeError(f"sample-more bundles disagree on {receipt_key}")
+    return bundles
+
+
+def _sample_more(
+    runs_dir: Path,
+    expected_config_sha256: str,
+    config: Mapping[str, Any],
+    *,
+    expected_data_manifest_sha256: str | None = None,
+    expected_source_contract_sha256: str | None = None,
+    expected_requirements_lock_sha256: str | None = None,
+) -> dict[str, Any]:
+    bundles = _sample_more_bundles(
+        runs_dir,
+        expected_config_sha256,
+        expected_data_manifest_sha256=expected_data_manifest_sha256,
+        expected_source_contract_sha256=expected_source_contract_sha256,
+        expected_requirements_lock_sha256=expected_requirements_lock_sha256,
+    )
+    if not bundles:
         return {"available": False}
+    expected_seeds = set(map(int, config["training"]["train_seeds"]))
+    unexpected = set(bundles) - expected_seeds
+    if unexpected:
+        raise RuntimeError(f"unexpected sample-more seeds: {sorted(unexpected)}")
+    expected_tasks = int(config["substrate"]["evaluation_examples_per_split"])
+    common_ids: set[str] | None = None
+    parse_numerator = parse_denominator = 0.0
+    cap_contacts = sample_count = 0
+    sampled_tokens = 0
+    generation_seconds = 0.0
+    seed_receipts = []
+    all_rows: list[dict[str, Any]] = []
+    by_depth: dict[int, dict[str, float]] = defaultdict(
+        lambda: {
+            "tasks": 0.0,
+            "samples": 0.0,
+            "parsed": 0.0,
+            "natural_closes": 0.0,
+            "cap_contacts": 0.0,
+        }
+    )
+    expected_sampling = dict(config["evaluation"]["sample_more"])
+    expected_layers = int(config["architecture"]["expected_num_layers"])
+    expected_loop_layers = int(config["architecture"]["loop_end"]) - int(
+        config["architecture"]["loop_start"]
+    )
+    for seed, bundle in sorted(bundles.items()):
+        if bundle["summary"].get("sampling_config") != expected_sampling:
+            raise RuntimeError(f"sample-more frozen sampling config mismatch for seed {seed}")
+        task_ids = set(bundle["rows"])
+        if common_ids is None:
+            common_ids = task_ids
+        elif task_ids != common_ids:
+            raise RuntimeError("sample-more model seeds do not share exact task ids")
+        seed_parse_numerator = seed_parse_denominator = 0.0
+        seed_cap_contacts = seed_sample_count = 0
+        seed_sampled_tokens = 0
+        seed_allocated_new_tokens = 0
+        seed_natural_closes = 0
+        for row in bundle["rows"].values():
+            if row.get("sampling_config") != expected_sampling:
+                raise RuntimeError(
+                    f"sample-more row sampling config mismatch for task {row['id']}"
+                )
+            recurrent_prompt_tokens = int(row["recurrent_prompt_tokens"])
+            sample_prompt_tokens = int(row["sample_prompt_tokens"])
+            layer_count = int(row["model_layers"])
+            loop_layers = int(row["loop_layers"])
+            depth = int(row["depth"])
+            if layer_count != expected_layers or loop_layers != expected_loop_layers:
+                raise RuntimeError(f"sample-more model geometry mismatch for task {row['id']}")
+            recurrent_budget = int(row["recurrent_layer_token_budget"])
+            sample_budget = int(row["sample_layer_token_budget"])
+            expected_recurrent_budget = recurrent_compute_receipt(
+                sequence_tokens=recurrent_prompt_tokens,
+                total_layers=layer_count,
+                loop_layers=loop_layers,
+                k=depth,
+            ).total_layer_token_applications
+            if recurrent_budget != expected_recurrent_budget:
+                raise RuntimeError(
+                    f"sample-more recurrent budget mismatch for task {row['id']}"
+                )
+            if sample_budget > recurrent_budget:
+                raise RuntimeError(
+                    f"sample-more budget exceeds recurrence for task {row['id']} seed {seed}"
+                )
+            n = int(row["n"])
+            counts = list(map(int, row["generated_token_counts"]))
+            max_new = int(row["max_new_tokens"])
+            if n < 1 or len(counts) != n or max_new < 1:
+                raise RuntimeError(f"invalid sample allocation for task {row['id']}")
+            desired_new = min(
+                int(expected_sampling["max_new_tokens"]),
+                int(expected_sampling["fixed_overhead_tokens"])
+                + int(expected_sampling["desired_tokens_per_transition"]) * depth,
+            )
+            feasible = [
+                candidate_n
+                for candidate_n in range(1, int(expected_sampling["max_samples"]) + 1)
+                if recurrent_budget // (layer_count * candidate_n)
+                - sample_prompt_tokens
+                >= desired_new
+            ]
+            if not feasible or n != feasible[-1]:
+                raise RuntimeError(f"sample-more N allocation mismatch for task {row['id']}")
+            expected_max_new = min(
+                int(expected_sampling["max_new_tokens"]),
+                recurrent_budget // (layer_count * n) - sample_prompt_tokens,
+            )
+            if max_new != expected_max_new or max_new < desired_new:
+                raise RuntimeError(
+                    f"sample-more token allocation mismatch for task {row['id']}"
+                )
+            expected_sample_budget = n * layer_count * (
+                sample_prompt_tokens + max_new
+            )
+            if sample_budget != expected_sample_budget:
+                raise RuntimeError(f"sample-more allocated budget mismatch for task {row['id']}")
+            expected_sample_seed = int.from_bytes(
+                hashlib.blake2b(str(row["id"]).encode("utf-8"), digest_size=8).digest(),
+                "big",
+            ) % (2**31)
+            if int(row["sample_seed"]) != expected_sample_seed:
+                raise RuntimeError(f"sample-more RNG seed mismatch for task {row['id']}")
+            token_ids = row.get("continuation_token_ids")
+            decoded = row.get("decoded_samples")
+            natural_close = row.get("natural_close")
+            choices = row.get("choices")
+            if not all(
+                isinstance(values, list) and len(values) == n
+                for values in (token_ids, decoded, natural_close, choices)
+            ):
+                raise RuntimeError(f"sample-more raw rows are incomplete for task {row['id']}")
+            if counts != [len(values) for values in token_ids] or any(
+                count < 1 or count > max_new for count in counts
+            ):
+                raise RuntimeError(f"sample-more token-count mismatch for task {row['id']}")
+            recomputed_natural_close = ["</think>" in text for text in decoded]
+            recomputed_choices = [_parse_raw_sample_choice(text) for text in decoded]
+            if natural_close != recomputed_natural_close or choices != recomputed_choices:
+                raise RuntimeError(f"sample-more raw parse mismatch for task {row['id']}")
+            valid = [choice for choice in choices if choice is not None]
+            choice_counts = {choice: valid.count(choice) for choice in range(4)}
+            majority = (
+                max(choice_counts, key=lambda choice: (choice_counts[choice], -choice))
+                if valid
+                else None
+            )
+            correct_choice = int(row["correct_choice"])
+            if not 0 <= correct_choice < 4:
+                raise RuntimeError(f"invalid correct choice for task {row['id']}")
+            if bool(row["majority_correct"]) is not (majority == correct_choice):
+                raise RuntimeError(f"sample-more majority mismatch for task {row['id']}")
+            if bool(row["pass_at_n"]) is not (correct_choice in valid):
+                raise RuntimeError(f"sample-more oracle mismatch for task {row['id']}")
+            parse_rate = float(row["parse_rate"])
+            if not 0.0 <= parse_rate <= 1.0 or not math.isclose(
+                parse_rate, len(valid) / n, rel_tol=0.0, abs_tol=1e-12
+            ):
+                raise RuntimeError(f"invalid parse rate for task {row['id']}")
+            parse_numerator += parse_rate * n
+            parse_denominator += n
+            seed_parse_numerator += parse_rate * n
+            seed_parse_denominator += n
+            cap_flags = row.get("cap_contact")
+            if not isinstance(cap_flags, list) or len(cap_flags) != n:
+                raise RuntimeError(f"invalid cap-contact receipt for task {row['id']}")
+            if any(bool(flag) and count != max_new for flag, count in zip(cap_flags, counts)):
+                raise RuntimeError(f"invalid cap-contact count for task {row['id']}")
+            cap_contacts += sum(bool(value) for value in cap_flags)
+            sample_count += n
+            seed_cap_contacts += sum(bool(value) for value in cap_flags)
+            seed_sample_count += n
+            row_sampled_tokens = sum(counts)
+            row_allocated_new_tokens = n * max_new
+            if int(row["sampled_tokens"]) != row_sampled_tokens or int(
+                row["allocated_new_tokens"]
+            ) != row_allocated_new_tokens:
+                raise RuntimeError(f"sample-more row totals mismatch for task {row['id']}")
+            seed_sampled_tokens += row_sampled_tokens
+            seed_allocated_new_tokens += row_allocated_new_tokens
+            seed_natural_closes += sum(recomputed_natural_close)
+            depth_totals = by_depth[depth]
+            depth_totals["tasks"] += 1
+            depth_totals["samples"] += n
+            depth_totals["parsed"] += len(valid)
+            depth_totals["natural_closes"] += sum(recomputed_natural_close)
+            depth_totals["cap_contacts"] += sum(bool(value) for value in cap_flags)
+            all_rows.append(row)
+        if int(bundle["summary"].get("sampled_tokens", -1)) != seed_sampled_tokens:
+            raise RuntimeError(f"sample-more sampled-token summary mismatch for seed {seed}")
+        if int(bundle["summary"].get("allocated_new_tokens", -1)) != seed_allocated_new_tokens:
+            raise RuntimeError(f"sample-more allocation summary mismatch for seed {seed}")
+        if int(bundle["summary"].get("natural_closes", -1)) != seed_natural_closes:
+            raise RuntimeError(f"sample-more natural-close summary mismatch for seed {seed}")
+        if int(bundle["summary"].get("cap_contacts", -1)) != seed_cap_contacts:
+            raise RuntimeError(f"sample-more cap-contact summary mismatch for seed {seed}")
+        sampled_tokens += int(bundle["summary"].get("sampled_tokens", 0))
+        generation_seconds += float(bundle["summary"].get("generation_seconds", 0.0))
+        seed_receipts.append(
+            {
+                "train_seed": seed,
+                "unique_tasks": len(task_ids),
+                "parse_rate": seed_parse_numerator / seed_parse_denominator,
+                "natural_close_rate": seed_natural_closes / seed_sample_count,
+                "cap_contact_rate": seed_cap_contacts / seed_sample_count,
+            }
+        )
+    parse_rate = parse_numerator / parse_denominator
+    cap_contact_rate = cap_contacts / sample_count
+    by_depth_rates = {
+        str(depth): {
+            "tasks": int(values["tasks"]),
+            "samples": int(values["samples"]),
+            "parse_rate": values["parsed"] / values["samples"],
+            "natural_close_rate": values["natural_closes"] / values["samples"],
+            "cap_contact_rate": values["cap_contacts"] / values["samples"],
+        }
+        for depth, values in sorted(by_depth.items())
+    }
+    complete = (
+        set(bundles) == expected_seeds
+        and common_ids is not None
+        and len(common_ids) == expected_tasks
+    )
+    interface_valid = (
+        complete
+        and all(
+            receipt["parse_rate"]
+            >= float(config["gates"]["min_sample_more_parse_rate"])
+            and receipt["cap_contact_rate"]
+            <= float(config["gates"]["max_sample_more_cap_contact_rate"])
+            for receipt in seed_receipts
+        )
+    )
     return {
         "available": True,
-        "n": len(rows),
-        "majority_accuracy": sum(bool(row["majority_correct"]) for row in rows)
-        / len(rows),
-        "oracle_pass_at_n": sum(bool(row["pass_at_n"]) for row in rows) / len(rows),
-        "parse_rate": sum(float(row["parse_rate"]) for row in rows) / len(rows),
-        "training_seeds": len(seed_receipts),
+        "complete": complete,
+        "valid_for_deployment": interface_valid,
+        "unique_tasks": len(common_ids or ()),
+        "expected_unique_tasks": expected_tasks,
+        "model_seeds": sorted(bundles),
+        "expected_model_seeds": sorted(expected_seeds),
+        "majority_accuracy": sum(bool(row["majority_correct"]) for row in all_rows)
+        / len(all_rows),
+        "oracle_pass_at_n": sum(bool(row["pass_at_n"]) for row in all_rows)
+        / len(all_rows),
+        "parse_rate": parse_rate,
+        "natural_close_rate": sum(
+            values["natural_closes"] for values in by_depth.values()
+        )
+        / sample_count,
+        "cap_contact_rate": cap_contact_rate,
+        "by_depth": by_depth_rates,
         "seed_receipts": seed_receipts,
         "sampled_tokens": sampled_tokens,
         "generation_seconds": generation_seconds,
@@ -431,92 +1379,83 @@ def _deployment_comparison(
     expected_config_sha256: str,
     config: Mapping[str, Any],
 ) -> dict[str, Any]:
-    """Paired Carry-minus-explicit-CoT-oracle comparison, nested by train seed."""
+    """Crossed Carry-minus-explicit-CoT-oracle comparison."""
+    expected_seeds = set(map(int, config["training"]["train_seeds"]))
     carry_by_seed: dict[int, dict[str, dict[str, Any]]] = {}
-    carry_data_hashes: set[str] = set()
     for bundle in bundles:
         if bundle["train_arm"] != "carry" or bundle["eval_mode"] != "carry":
             continue
-        seed = bundle["train_seed"]
-        if seed is None:
-            continue
-        if int(seed) in carry_by_seed:
+        seed = int(bundle["train_seed"])
+        if seed in carry_by_seed:
             raise RuntimeError(f"duplicate full Carry evaluation for seed {seed}")
-        data_hash = bundle.get("summary", {}).get("data_manifest_sha256")
-        if data_hash is not None:
-            carry_data_hashes.add(str(data_hash))
-        carry_by_seed[int(seed)] = {
-            row["id"]: row
-            for row in bundle["rows"]
-            if row["split"] == "depth_extrapolation"
-            and int(row["k"]) == int(row["depth"])
-        }
-    if len(carry_data_hashes) > 1:
-        raise RuntimeError("Carry evaluations disagree on the data manifest")
-    carry_data_hash = next(iter(carry_data_hashes), None)
-
-    sample_by_seed: dict[int, dict[str, dict[str, Any]]] = {}
-    for summary_path in sorted(runs_dir.rglob("summary.json")):
-        try:
-            summary = json.loads(summary_path.read_text(encoding="utf-8"))
-        except (OSError, json.JSONDecodeError):
-            continue
-        if (
-            summary.get("status") != "SAMPLE_MORE_COMPLETE"
-            or summary.get("config_sha256") != expected_config_sha256
-        ):
-            continue
-        seed = int(summary["text_train_seed"])
-        if (
-            carry_data_hash is not None
-            and summary.get("data_manifest_sha256") != carry_data_hash
-        ):
-            raise RuntimeError("Carry and sample-more data manifests differ")
-        if seed in sample_by_seed:
-            raise RuntimeError(f"duplicate sample-more evaluation for seed {seed}")
-        path = Path(summary["rows"])
-        if not path.is_absolute():
-            path = summary_path.parent / path
-        if path.exists():
-            expected_rows_hash = summary.get("rows_sha256")
-            if expected_rows_hash is not None and _sha256(path) != expected_rows_hash:
-                raise RuntimeError(f"sample-more row hash mismatch: {path}")
-            sample_by_seed[seed] = {row["id"]: row for row in _read_jsonl(path)}
-
-    differences_by_seed: dict[int, list[float]] = defaultdict(list)
+        selected: dict[str, dict[str, Any]] = {}
+        for row in bundle["rows"]:
+            if row["split"] == "depth_extrapolation" and int(row["k"]) == int(row["depth"]):
+                item_id = str(row["id"])
+                if item_id in selected:
+                    raise RuntimeError(f"duplicate deployment Carry task {item_id}")
+                selected[item_id] = row
+        carry_by_seed[seed] = selected
+    if set(carry_by_seed) - expected_seeds:
+        raise RuntimeError("unexpected Carry seed in deployment comparison")
+    expected_manifest = next(
+        (bundle["data_manifest_sha256"] for bundle in bundles), None
+    )
+    expected_source = next(
+        (bundle["source_contract_sha256"] for bundle in bundles), None
+    )
+    expected_lock = next(
+        (bundle["requirements_training_lock_sha256"] for bundle in bundles), None
+    )
+    sample_bundles = _sample_more_bundles(
+        runs_dir,
+        expected_config_sha256,
+        expected_data_manifest_sha256=expected_manifest,
+        expected_source_contract_sha256=expected_source,
+        expected_requirements_lock_sha256=expected_lock,
+    )
+    if set(sample_bundles) - expected_seeds:
+        raise RuntimeError("unexpected sample-more seed in deployment comparison")
+    matrix: dict[int, dict[str, float]] = {}
     seed_receipts = []
-    for seed in sorted(set(carry_by_seed).intersection(sample_by_seed)):
+    for seed in sorted(expected_seeds.intersection(carry_by_seed, sample_bundles)):
         carry_rows = carry_by_seed[seed]
-        sample_rows = sample_by_seed[seed]
-        for item_id in sorted(set(carry_rows).intersection(sample_rows)):
-            differences_by_seed[seed].append(
-                float(bool(carry_rows[item_id]["correct"]))
-                - float(bool(sample_rows[item_id]["pass_at_n"]))
+        sample_rows = sample_bundles[seed]["rows"]
+        _assert_exact_keys(carry_rows, sample_rows, comparison=f"deployment seed {seed}")
+        matrix[seed] = {
+            item_id: float(bool(carry_rows[item_id]["correct"]))
+            - float(bool(sample_rows[item_id]["pass_at_n"]))
+            for item_id in sorted(carry_rows)
+        }
+        for item_id in sorted(carry_rows):
+            _assert_paired_row_contract(
+                carry_rows[item_id],
+                sample_rows[item_id],
+                comparison=f"deployment seed {seed}, task {item_id}",
+                fields=("depth", "query_kind", "correct_choice"),
             )
-        seed_receipts.append(
-            {"train_seed": seed, "paired_rows": len(differences_by_seed[seed])}
-        )
-    required_seeds = len(config["training"]["train_seeds"])
-    if len(differences_by_seed) < required_seeds or any(
-        not values for values in differences_by_seed.values()
-    ):
+        seed_receipts.append({"train_seed": seed, "unique_tasks": len(matrix[seed])})
+    expected_tasks = int(config["substrate"]["evaluation_examples_per_split"])
+    if not matrix:
         return {
             "available": False,
-            "training_seed_pairs": len(differences_by_seed),
-            "required_training_seed_pairs": required_seeds,
+            "model_seeds": [],
+            "expected_model_seeds": sorted(expected_seeds),
             "seed_receipts": seed_receipts,
         }
-    mean, lower, upper = hierarchical_paired_bootstrap_interval(
-        differences_by_seed,
-        resamples=int(config["evaluation"]["bootstrap_resamples"]),
-        seed=int(config["evaluation"]["bootstrap_seed"]) + 200,
+    result = _crossed_summary(
+        matrix,
+        config=config,
+        bootstrap_seed_offset=200,
+        effect_name="carry_minus_sample_more_oracle",
     )
+    complete = set(matrix) == expected_seeds and result["unique_tasks"] == expected_tasks
     return {
-        "available": True,
-        "n": sum(len(values) for values in differences_by_seed.values()),
-        "training_seed_pairs": len(differences_by_seed),
-        "carry_minus_sample_more_oracle": mean,
-        "ci95": [lower, upper],
+        "available": complete,
+        "complete": complete,
+        **result,
+        "expected_unique_tasks": expected_tasks,
+        "expected_model_seeds": sorted(expected_seeds),
         "seed_receipts": seed_receipts,
     }
 
@@ -538,15 +1477,7 @@ def _write_curve_csv(path: Path, bundles: list[dict[str, Any]]) -> None:
     with path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(
             handle,
-            fieldnames=(
-                "train_arm",
-                "eval_mode",
-                "split",
-                "depth",
-                "k",
-                "n",
-                "accuracy",
-            ),
+            fieldnames=("train_arm", "eval_mode", "split", "depth", "k", "n", "accuracy"),
             lineterminator="\n",
         )
         writer.writeheader()
@@ -567,71 +1498,176 @@ def _write_curve_csv(path: Path, bundles: list[dict[str, Any]]) -> None:
 def analyze_runs(
     config: Mapping[str, Any], runs_dir: Path, output: Path
 ) -> dict[str, Any]:
+    expected_config = config_sha256(config)
+    if not is_confirmatory_config(config):
+        summary = {
+            "schema_version": 2,
+            "experiment_id": config["experiment_id"],
+            "config_sha256": expected_config,
+            "source_contract_sha256": source_contract_sha256(),
+            "requirements_training_lock_sha256": _current_requirements_lock_sha256(),
+            "data_manifest_sha256": None,
+            "phase": "setup",
+            "verdict": "NONCONFIRMATORY_SMOKE_ONLY",
+            "warning": (
+                "Reduced/smoke configurations may test mechanics and data plumbing but "
+                "cannot emit pilot promotion or scientific evidence."
+            ),
+        }
+        summary["receipt_identity_sha256"] = _canonical_sha256(summary)
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(
+            json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+        )
+        _write_curve_csv(output.parent / "k_depth_curves.csv", [])
+        return summary
     bundles = _prefer_full_bundles(
-        _evaluation_bundles(runs_dir, config_sha256(config))
+        _evaluation_bundles(runs_dir, expected_config, config)
     )
-    carry_bag = _paired_carry_bag(bundles, config)
-    scaling = _unseen_k_scaling(bundles, config)
-    state_sufficiency = _state_sufficiency(bundles, config)
-    swaps = _swap_summary(bundles)
-    edge_cut = _edge_cut_summary(bundles, config)
-    sample_more = _sample_more(runs_dir, config_sha256(config))
-    deployment = _deployment_comparison(
-        bundles, runs_dir, config_sha256(config), config
+    pilot = bool(bundles) and all(bundle["pilot"] for bundle in bundles)
+    carry_bag = _paired_carry_bag(bundles, config, pilot=pilot)
+    scaling = _unseen_k_scaling(bundles, config, pilot=pilot)
+    state_sufficiency = _state_sufficiency(bundles, config, pilot=pilot)
+    joint_holdout = _joint_holdout_summary(bundles, config, pilot=pilot)
+    swaps = _swap_summary(bundles, config, pilot=pilot)
+    edge_cut = _edge_cut_summary(bundles, config, pilot=pilot)
+    manifest_hash = next((bundle["data_manifest_sha256"] for bundle in bundles), None)
+    source_hash = next(
+        (bundle["source_contract_sha256"] for bundle in bundles),
+        source_contract_sha256(),
     )
+    requirements_hash = next(
+        (bundle["requirements_training_lock_sha256"] for bundle in bundles),
+        _current_requirements_lock_sha256(),
+    )
+    sample_more = _sample_more(
+        runs_dir,
+        expected_config,
+        config,
+        expected_data_manifest_sha256=manifest_hash,
+        expected_source_contract_sha256=source_hash,
+        expected_requirements_lock_sha256=requirements_hash,
+    )
+    deployment = _deployment_comparison(bundles, runs_dir, expected_config, config)
     gate = config["gates"]
 
-    if not carry_bag["available"]:
+    pilot_gate: dict[str, Any] | None = None
+    if pilot:
+        reachability = (
+            gate_reachability(
+                float(carry_bag["bag_primary_accuracy"]),
+                float(gate["min_carry_minus_bag"]),
+            )
+            if carry_bag.get("available")
+            else None
+        )
+        checks = {
+            "complete_registered_cells": bool(
+                carry_bag.get("seed_set_complete")
+                and carry_bag.get("complete_primary_depths")
+                == carry_bag.get("required_primary_depths")
+            ),
+            "k4_diagnostic_complete": bool(
+                scaling.get("available") and scaling.get("complete")
+            ),
+            "joint_holdout_diagnostic_complete": bool(
+                joint_holdout.get("available")
+                and joint_holdout.get("seed_set_complete")
+                and joint_holdout.get("complete_depths")
+                == joint_holdout.get("required_depths")
+            ),
+            "swap_diagnostic_complete": bool(
+                swaps.get("available") and swaps.get("complete")
+            ),
+            "positive_carry_minus_bag": bool(
+                carry_bag.get("available") and carry_bag.get("carry_minus_bag", 0) > 0
+            ),
+            "joint_state_sufficient": bool(
+                state_sufficiency.get("available") and state_sufficiency.get("passes")
+            ),
+            "query_kinds_positive": bool(carry_bag.get("query_kinds_positive")),
+            "answer_interface_valid": bool(carry_bag.get("carry_answer_interface_valid")),
+            "gate_reachable": bool(reachability and reachability["reachable"]),
+        }
+        complete = all(
+            checks[key]
+            for key in (
+                "complete_registered_cells",
+                "k4_diagnostic_complete",
+                "joint_holdout_diagnostic_complete",
+                "swap_diagnostic_complete",
+            )
+        )
+        promote = complete and all(checks.values())
+        pilot_gate = {
+            "status": "PILOT_PROMOTION_READY" if promote else "PILOT_MECHANISM_MISS",
+            "complete": complete,
+            "promote": promote,
+            "expected_model_seed": int(config["training"]["pilot_seed"]),
+            "reachability": reachability,
+            "failure_reason": (
+                "GATE_INFEASIBLE"
+                if reachability is not None and not reachability["reachable"]
+                else None
+            ),
+            "checks": checks,
+        }
+        verdict = str(pilot_gate["status"])
+    elif not carry_bag["available"]:
         verdict = "SETUP_ONLY"
     elif (
-        carry_bag["train_seed_pairs"] < len(config["training"]["train_seeds"])
-        or carry_bag["complete_primary_depths"]
-        < carry_bag["required_primary_depths"]
+        not carry_bag.get("seed_set_complete")
+        or carry_bag["complete_primary_depths"] < carry_bag["required_primary_depths"]
     ):
         verdict = "UNDER_REPLICATED"
     elif (
         carry_bag["carry_minus_bag"] < float(gate["min_carry_minus_bag"])
         or carry_bag["ci95"][0] <= 0
-        or carry_bag["positive_depths"] < int(gate["min_positive_primary_depths"])
     ):
         verdict = "NO_SERIAL_STATE_ADVANTAGE"
-    elif (
-        not scaling["available"]
-        or scaling["gain"] <= 0
-        or scaling["ci95"][0] <= 0
-    ):
+    elif not scaling["available"] or not scaling.get("complete") or scaling["gain"] <= 0 or scaling["ci95"][0] <= 0:
         verdict = "TRAINED_UNROLLING_ONLY"
     elif not state_sufficiency["available"] or not state_sufficiency["passes"]:
         verdict = "SERIAL_BUT_STATE_NOT_SUFFICIENT"
     elif (
-        not edge_cut["available"]
-        or edge_cut["training_seed_pairs"] < len(config["training"]["train_seeds"])
-        or not swaps["available"]
-        or len(swaps["seeds"]) < len(config["training"]["train_seeds"])
-        or not all(
-            seed["donor_follow_gain"] >= float(gate["min_donor_follow_gain"])
-            for seed in swaps["seeds"]
-        )
+        carry_bag["positive_depths"] < int(gate["min_positive_primary_depths"])
+        or not carry_bag["query_kinds_positive"]
+        or not joint_holdout.get("passes", False)
+        or joint_holdout.get("complete_depths") != joint_holdout.get("required_depths")
     ):
+        verdict = "DEPTH_NOT_ROBUST"
+    elif not edge_cut.get("passes", False) or not swaps.get("passes", False):
         verdict = "DEEP_BUT_NOT_CAUSALLY_IDENTIFIED"
-    elif not sample_more["available"] or not deployment["available"]:
+    elif not sample_more["available"]:
         verdict = "MECHANISTIC_DEPTH_POSITIVE"
+    elif (
+        not deployment["available"]
+        or not carry_bag["carry_answer_interface_valid"]
+        or not sample_more.get("valid_for_deployment", False)
+    ):
+        verdict = "SAMPLE_MORE_INTERFACE_INVALID"
+    elif (
+        deployment["carry_minus_sample_more_oracle"] > 0
+        and deployment["ci95"][0] > 0
+    ):
+        verdict = "DEPLOYABLE_DEPTH_BREAKTHROUGH"
     else:
-        if (
-            deployment["carry_minus_sample_more_oracle"] > 0
-            and deployment["ci95"][0] > 0
-        ):
-            verdict = "DEPLOYABLE_DEPTH_BREAKTHROUGH"
-        else:
-            verdict = "MECHANISTIC_DEPTH_POSITIVE_SAMPLE_MORE_LOSS"
+        verdict = "MECHANISTIC_DEPTH_POSITIVE_SAMPLE_MORE_LOSS"
 
     summary = {
-        "schema_version": 1,
+        "schema_version": 2,
         "experiment_id": config["experiment_id"],
+        "config_sha256": expected_config,
+        "source_contract_sha256": source_hash,
+        "requirements_training_lock_sha256": requirements_hash,
+        "data_manifest_sha256": manifest_hash,
+        "phase": "pilot" if pilot else ("full" if bundles else "setup"),
         "verdict": verdict,
+        "pilot_gate": pilot_gate,
         "evaluation_bundles": len(bundles),
         "carry_vs_bag": carry_bag,
         "unseen_k_scaling": scaling,
+        "joint_holdout_carry_vs_bag": joint_holdout,
         "state_sufficiency": state_sufficiency,
         "trained_checkpoint_edge_cut": edge_cut,
         "counterfactual_swaps": swaps,
@@ -642,9 +1678,8 @@ def analyze_runs(
             "mechanistic labels remain valuable but narrower."
         ),
     }
+    summary["receipt_identity_sha256"] = _canonical_sha256(summary)
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(
-        json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8"
-    )
+    output.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     _write_curve_csv(output.parent / "k_depth_curves.csv", bundles)
     return summary

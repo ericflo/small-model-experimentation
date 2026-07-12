@@ -46,3 +46,42 @@ No Qwen model was loaded or called. Live model smoke remains the first task on t
 - Fixed portable row receipts, pilot/full isolation, primary-cell completeness enforcement, and edge-cut analysis; corrupted rows, datasets, adapters, and loop states now fail hash checks.
 - Added initial-value and cumulative training-compute receipts that analysis enforces for every Carry/Bag seed pair.
 - Matched the explicit-CoT optimizer schedule and upgraded deployment analysis to a three-seed task-paired hierarchical comparison against oracle `pass@N`, with actual sampled-token and synchronized timing receipts.
+
+## 2026-07-12 — Final Adversarial Pre-Run Revision
+
+No model was loaded or called. Three independent read-only reviews covered scientific design,
+implementation, statistics, artifacts, and GPU operations; the primary agent then re-read every
+experiment file and traced config→data→model→training→evaluation→analysis.
+
+- Fixed cross-process corpus nondeterminism from set iteration and added a multi-`PYTHONHASHSEED` regression.
+- Moved G1 to seed 7401 and dedicated pilot-only depth, joint, and counterfactual splits; confirmation keeps seeds 7411–7413 and all scored rows untouched.
+- Replaced the nested seed/task bootstrap with a crossed bootstrap over the common task×training-seed matrix and added strict duplicate/key/corpus checks.
+- Made exact checkpoint phase, fixed-final step, seed, critical-source digest, environment-lock digest, tensor identity, and ordered training-row digest mandatory.
+- Converted the same-checkpoint edge cut from artifact availability into a positive causal gate with complete cells, per-seed direction, and crossed uncertainty.
+- Balanced and retained query type, made joint state accuracy mandatory, and added a joint family+surface holdout gate.
+- Geometry-matched counterfactual pairs at a shared initial node, evaluated both swap directions, hashed raw interventions, and added pre/post donor-following evidence.
+- Hardened the explicit-CoT comparator with frozen sampling/allocation, raw generations, exact full coverage, compute rechecks, and close/parse/cap plus Carry answer-mode gates.
+- Removed the conditional mixed semantic-echo variant; any interface follow-up now requires a separate experiment and its missing shuffled/wrong-task controls.
+- Declared training non-resumable rather than allowing approximate recovery, reduced checkpoints to fixed finals, made shell loops fail-fast, and added a worst-format K=12 G0/resource receipt.
+
+The prior CPU-smoke receipt predates these changes and is historical only. Unit/static validation is
+rerun after the patch; a fresh CPU smoke/data manifest remains the first operational step before G0.
+
+The user additionally required the low-rank capacity ambiguity to be resolved rather than left as a
+caveat. Rank-32 LoRA remains first. A valid miss that fails to establish deep state formation mandates
+creating and executing a new zero-initialized full-rank extra-loop-delta successor that preserves the
+exact K=1 base path. Mechanics/data failures and infeasible gates require repair/review; a readable but
+unused state routes to the controlled interface successor, and a sample-more-only loss triggers neither
+because LoRA has then already formed the representation.
+
+## 2026-07-12 — Integrated Audit Closure
+
+- Added a dedicated pilot-validation seed/split and removed the last pre-promotion read of confirmatory validation rows.
+- Pinned an exact confirmatory-config digest; every model-bearing entry rejects smoke/reduced geometry, and nonconfirmatory analysis cannot emit evidence.
+- Removed dead mixed-interface scalars and the orphaned static-LoRA arm.
+- Made pilot promotion require complete K=4, joint-holdout, and bidirectional-swap diagnostics without requiring favorable diagnostic signs.
+- Implemented every documented verdict label, full receipt identities, current lock/source checks, exact immutable row pairing, and correct pair-clustered swap inference.
+- Reanalyze raw sample-more allocations, parses, labels, totals, and by-depth natural-close/parse/cap rates.
+- Final validation: 41 tests pass, Python compilation passes, and `git diff --check` is clean.
+
+No fresh CPU smoke/data generation, model load, GPU call, training, evaluation, or benchmark access occurred.

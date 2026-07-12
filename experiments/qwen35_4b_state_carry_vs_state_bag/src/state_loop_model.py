@@ -119,10 +119,6 @@ class StateLoopModel(nn.Module):
         self.damping_logit = nn.Parameter(torch.tensor(math.log(damping / (1.0 - damping))))
         aggregate = float(self.arch["aggregate_last_initial"])
         self.aggregate_logit = nn.Parameter(torch.tensor(math.log(aggregate / (1.0 - aggregate))))
-        echo_continuous = float(self.arch["semantic_echo"]["continuous_initial"])
-        self.echo_logit = nn.Parameter(
-            torch.tensor(math.log(echo_continuous / (1.0 - echo_continuous)))
-        )
         self.sufficiency = StateSufficiencyHeads(
             self.hidden_size,
             int(self.substrate["node_count"]),
@@ -228,17 +224,9 @@ class StateLoopModel(nn.Module):
         return hidden
 
     def _semantic_echo(self, state: torch.Tensor) -> torch.Tensor:
-        if self.arch["semantic_echo"]["mode"] == "continuous":
-            return state
-        top_k = int(self.arch["semantic_echo"]["top_k"])
-        weights = self.core.lm_head.weight
-        scores = F.linear(state, weights)
-        values, indices = torch.topk(scores, k=top_k, dim=-1)
-        probabilities = F.softmax(values.float(), dim=-1).to(dtype=state.dtype)
-        token_vectors = self.text.embed_tokens.weight[indices]
-        echo = (probabilities.unsqueeze(-1) * token_vectors).sum(dim=-2)
-        continuous = torch.sigmoid(self.echo_logit).to(dtype=state.dtype)
-        return continuous * state + (1.0 - continuous) * echo
+        if self.arch["semantic_echo"]["mode"] != "continuous":
+            raise RuntimeError("only the identity continuous-state interface is registered")
+        return state
 
     def _state_losses(
         self,
@@ -284,21 +272,16 @@ class StateLoopModel(nn.Module):
         depths: torch.Tensor | None = None,
         state_override: Mapping[int, torch.Tensor] | None = None,
     ) -> StateLoopOutput:
-        if mode not in {"carry", "bag", "static"}:
-            raise ValueError("mode must be carry, bag, or static")
+        if mode not in {"carry", "bag"}:
+            raise ValueError("mode must be carry or bag")
         if not 1 <= k <= self.max_recurrence:
             raise ValueError(f"k must be in [1, {self.max_recurrence}]")
-        if mode == "static" and k != 1:
-            raise ValueError("static mode is defined only at K=1")
-
         embeds, masks, text_position_ids, position_embeddings = self._prepare_geometry(
             input_ids, attention_mask
         )
-        first_adapters = mode == "static"
         # Prelude and the untouched first R application do not need gradients in
         # recurrent modes; they are a frozen source state.
-        first_context = contextlib.nullcontext() if first_adapters else torch.no_grad()
-        with first_context:
+        with torch.no_grad():
             hidden = self._run_layers(
                 embeds,
                 0,
@@ -315,9 +298,9 @@ class StateLoopModel(nn.Module):
                 masks=masks,
                 text_position_ids=text_position_ids,
                 position_embeddings=position_embeddings,
-                adapters_enabled=first_adapters,
+                adapters_enabled=False,
             )
-        memory = hidden.detach() if not first_adapters else hidden
+        memory = hidden.detach()
         raw_first_state = self._gather_state(memory, state_mask)
 
         if k == 1:
@@ -415,9 +398,7 @@ class StateLoopModel(nn.Module):
                 "aggregate_last_weight": float(
                     torch.sigmoid(self.aggregate_logit).detach().cpu()
                 ),
-                "semantic_continuous_weight": float(
-                    torch.sigmoid(self.echo_logit).detach().cpu()
-                ),
+                "state_interface": "continuous_identity",
             },
         )
 
@@ -431,7 +412,6 @@ class StateLoopModel(nn.Module):
         result["scalars"] = {
             "damping_logit": self.damping_logit.detach(),
             "aggregate_logit": self.aggregate_logit.detach(),
-            "echo_logit": self.echo_logit.detach(),
         }
         return result
 
@@ -442,4 +422,3 @@ class StateLoopModel(nn.Module):
         with torch.no_grad():
             self.damping_logit.copy_(payload["scalars"]["damping_logit"])
             self.aggregate_logit.copy_(payload["scalars"]["aggregate_logit"])
-            self.echo_logit.copy_(payload["scalars"]["echo_logit"])

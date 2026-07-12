@@ -110,14 +110,18 @@ def _gpu_stage(stage: str, args: argparse.Namespace, config: dict) -> int:
     if stage == "model-smoke":
         gpu_runner.model_smoke(config, Path(args.output))
     elif stage == "train":
-        if args.arm not in {"carry", "bag", "static"}:
-            raise SystemExit("--arm must be carry, bag, or static for training")
+        if args.arm not in {"carry", "bag"}:
+            raise SystemExit("--arm must be carry or bag for recurrent training")
         gpu_runner.train(
             config,
             arm=args.arm,
             seed=args.seed,
             output_dir=Path(args.output),
             pilot=args.pilot,
+            model_smoke_receipt=Path(args.model_smoke_receipt),
+            promotion_receipt=(
+                Path(args.promotion_receipt) if args.promotion_receipt else None
+            ),
         )
     elif stage == "evaluate":
         if not args.checkpoint:
@@ -126,16 +130,26 @@ def _gpu_stage(stage: str, args: argparse.Namespace, config: dict) -> int:
             config,
             checkpoint=Path(args.checkpoint),
             arm=args.arm,
+            expected_seed=args.seed,
             output_dir=Path(args.output),
             pilot=args.pilot,
         )
     elif stage == "text-baseline":
-        gpu_runner.train_text_baseline(config, seed=args.seed, output_dir=Path(args.output))
+        gpu_runner.train_text_baseline(
+            config,
+            seed=args.seed,
+            output_dir=Path(args.output),
+            mechanism_receipt=Path(args.mechanism_receipt),
+        )
     elif stage == "sample-more":
         if not args.checkpoint:
             raise SystemExit("--checkpoint is required for sample-more")
         gpu_runner.evaluate_sample_more(
-            config, checkpoint=Path(args.checkpoint), output_dir=Path(args.output)
+            config,
+            checkpoint=Path(args.checkpoint),
+            expected_seed=args.seed,
+            output_dir=Path(args.output),
+            mechanism_receipt=Path(args.mechanism_receipt),
         )
     return 0
 
@@ -159,9 +173,24 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     )
     parser.add_argument("--smoke", action="store_true", help="alias for --stage cpu-smoke")
     parser.add_argument("--arm", default="carry")
-    parser.add_argument("--seed", type=int, default=7411)
+    parser.add_argument("--seed", type=int)
     parser.add_argument("--checkpoint")
     parser.add_argument("--pilot", action="store_true", help="run the phase-one limited evaluation")
+    parser.add_argument(
+        "--model-smoke-receipt",
+        default=str(ROOT / "runs" / "model_smoke" / "receipt.json"),
+        help="matching MODEL_SMOKE_PASS receipt required by recurrent training",
+    )
+    parser.add_argument(
+        "--promotion-receipt",
+        default=str(ROOT / "analysis" / "summary.json"),
+        help="matching PILOT_PROMOTION_READY receipt required by full recurrent training",
+    )
+    parser.add_argument(
+        "--mechanism-receipt",
+        default=str(ROOT / "analysis" / "summary.json"),
+        help="matching MECHANISTIC_DEPTH_POSITIVE receipt required by text/sample-more stages",
+    )
     parser.add_argument("--output")
     return parser.parse_args(argv)
 
@@ -171,14 +200,20 @@ def main(argv: list[str] | None = None) -> int:
     if args.smoke:
         args.stage = "cpu-smoke"
     config = load_config(args.config)
+    if args.stage in {"train", "evaluate", "text-baseline", "sample-more"} and args.seed is None:
+        raise SystemExit(f"--seed is required for the {args.stage} stage")
     os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
     if args.output is None:
         defaults = {
             "cpu-smoke": ROOT / "runs" / "cpu_smoke" / "receipt.json",
             "prepare-data": ROOT / config["paths"]["data_dir"],
             "model-smoke": ROOT / "runs" / "model_smoke" / "receipt.json",
-            "train": ROOT / config["paths"]["large_artifacts_dir"] / f"{args.arm}_seed{args.seed}",
-            "evaluate": ROOT / "runs" / f"eval_{args.arm}_seed{args.seed}",
+            "train": ROOT
+            / config["paths"]["large_artifacts_dir"]
+            / f"{'pilot_' if args.pilot else ''}{args.arm}_seed{args.seed}",
+            "evaluate": ROOT
+            / "runs"
+            / f"{'pilot_' if args.pilot else 'full_'}{args.arm}_seed{args.seed}",
             "text-baseline": ROOT / config["paths"]["large_artifacts_dir"] / f"text_seed{args.seed}",
             "sample-more": ROOT / "runs" / f"sample_more_seed{args.seed}",
             "analyze": ROOT / "analysis" / "summary.json",

@@ -94,7 +94,9 @@ def _labels(rng: random.Random, count: int) -> tuple[str, ...]:
     labels: set[str] = set()
     while len(labels) < count:
         labels.add(rng.choice(SYLLABLES) + rng.choice(SYLLABLES) + rng.choice(SYLLABLES))
-    result = list(labels)
+    # Set iteration for strings depends on PYTHONHASHSEED. Canonicalize before
+    # applying the seeded permutation so generation is stable across processes.
+    result = sorted(labels)
     rng.shuffle(result)
     return tuple(result)
 
@@ -243,6 +245,8 @@ def generate_example(
 ) -> dict[str, Any]:
     if family not in FAMILIES or template not in TEMPLATES:
         raise ValueError("unknown family or template")
+    if query_kind not in {None, "node", "checksum"}:
+        raise ValueError("query_kind must be node or checksum")
     if depth < 1:
         raise ValueError("depth must be positive")
     rng = random.Random(seed)
@@ -312,7 +316,6 @@ def generate_example(
             "nodes": [dataclasses.asdict(node) for node in candidate_world.nodes],
             "initial": dataclasses.asdict(candidate_initial),
             "depth": depth,
-            "query_kind": selected_query,
         }
         core = {
             "world": _canonical_world(candidate_world),
@@ -355,6 +358,8 @@ def deserialize_world(payload: dict[str, Any]) -> World:
 
 
 def verify_example(row: dict[str, Any], state_token: str, state_slots: int) -> None:
+    if row.get("query_kind") not in {"node", "checksum"}:
+        raise AssertionError("query kind is not a registered target field")
     world = deserialize_world(row["world"])
     initial = State(**row["initial"])
     trajectory = unroll(world, initial, int(row["depth"]))
@@ -393,25 +398,30 @@ def generate_counterfactual_pair(
     state_token: str,
     state_slots: int,
     max_attempts: int,
+    query_kind: str | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
+    if query_kind not in {None, "node", "checksum"}:
+        raise ValueError("query_kind must be node or checksum")
     rng = random.Random(seed)
     for attempt in range(max_attempts):
         world = _world(rng, family, node_count, checksum_modulus)
-        first_initial = State(rng.randrange(node_count), rng.randrange(2), rng.randrange(checksum_modulus))
-        second_initial = State(rng.randrange(node_count), rng.randrange(2), rng.randrange(checksum_modulus))
-        if first_initial == second_initial:
-            continue
+        initial_node = rng.randrange(node_count)
+        first_initial = State(initial_node, rng.randrange(2), rng.randrange(checksum_modulus))
+        second_checksum = rng.randrange(checksum_modulus - 1)
+        if second_checksum >= first_initial.checksum:
+            second_checksum += 1
+        second_initial = State(initial_node, first_initial.phase ^ 1, second_checksum)
         first_path = unroll(world, first_initial, depth)
         second_path = unroll(world, second_initial, depth)
         if len(set(first_path)) != len(first_path) or len(set(second_path)) != len(second_path):
             continue
-        query_kind = rng.choice(("node", "checksum"))
+        selected_query = query_kind or rng.choice(("node", "checksum"))
         first_query_path = [
-            state.node if query_kind == "node" else state.checksum
+            state.node if selected_query == "node" else state.checksum
             for state in first_path
         ]
         second_query_path = [
-            state.node if query_kind == "node" else state.checksum
+            state.node if selected_query == "node" else state.checksum
             for state in second_path
         ]
         if (
@@ -419,14 +429,22 @@ def generate_counterfactual_pair(
             or second_query_path[-1] in second_query_path[:-1]
         ):
             continue
-        first_value = first_path[-1].node if query_kind == "node" else first_path[-1].checksum
-        second_value = second_path[-1].node if query_kind == "node" else second_path[-1].checksum
+        first_value = (
+            first_path[-1].node
+            if selected_query == "node"
+            else first_path[-1].checksum
+        )
+        second_value = (
+            second_path[-1].node
+            if selected_query == "node"
+            else second_path[-1].checksum
+        )
         if first_value == second_value:
             continue
         pair_id = f"cf-{seed}-{attempt}"
         universe = (
             list(range(node_count))
-            if query_kind == "node"
+            if selected_query == "node"
             else list(range(checksum_modulus))
         )
         shared_choices = [first_value, second_value]
@@ -452,7 +470,7 @@ def generate_counterfactual_pair(
             pair_id=pair_id,
             world=world,
             initial=first_initial,
-            query_kind=query_kind,
+            query_kind=selected_query,
             fixed_choices=shared_choices,
             table_order=shared_order,
         )
@@ -471,7 +489,7 @@ def generate_counterfactual_pair(
             pair_id=pair_id,
             world=world,
             initial=second_initial,
-            query_kind=query_kind,
+            query_kind=selected_query,
             fixed_choices=shared_choices,
             table_order=shared_order,
         )

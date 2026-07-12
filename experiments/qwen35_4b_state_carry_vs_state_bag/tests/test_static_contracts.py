@@ -34,11 +34,60 @@ class StaticContractTests(unittest.TestCase):
         source = (ROOT / "src" / "gpu_runner.py").read_text(encoding="utf-8")
         self.assertIn("sample_budget > recurrent_budget", source)
         self.assertIn('if "</think>" not in text', source)
+        self.assertIn('config["evaluation"]["sample_more"]', source)
+        for field in (
+            '"continuation_token_ids"',
+            '"decoded_samples"',
+            '"natural_close"',
+            '"cap_contact"',
+        ):
+            self.assertIn(field, source)
 
     def test_gpu_loader_fails_on_transformers_drift(self) -> None:
         source = (ROOT / "src" / "gpu_runner.py").read_text(encoding="utf-8")
         self.assertIn("Transformers drift", source)
         self.assertIn("loaded model commit", source)
+
+    def test_model_stages_are_phase_and_source_gated(self) -> None:
+        source = (ROOT / "src" / "gpu_runner.py").read_text(encoding="utf-8")
+        for contract in (
+            "source_contract_sha256",
+            "requirements_training_lock_sha256",
+            "checkpoint_identity_sha256",
+            "training_order_sha256",
+            "MODEL_SMOKE_PASS",
+            "PILOT_PROMOTION_READY",
+            "MECHANISTIC_DEPTH_POSITIVE",
+            "expected_seed",
+            "expected_step",
+            "expected_phase",
+        ):
+            self.assertIn(contract, source)
+
+    def test_g0_checks_both_edges_step_gradients_and_worst_k(self) -> None:
+        source = (ROOT / "src" / "gpu_runner.py").read_text(encoding="utf-8")
+        self.assertIn('for arm in ("carry", "bag")', source)
+        self.assertIn('("lora", "state", "sufficiency", "step")', source)
+        self.assertIn('"k1_carry_bag_max_logit_abs_error"', source)
+        self.assertIn('"worst_k_finite"', source)
+
+    def test_pilot_and_causal_outputs_are_firewalled(self) -> None:
+        source = (ROOT / "src" / "gpu_runner.py").read_text(encoding="utf-8")
+        for split in ("pilot_validation", "pilot_depth", "pilot_joint", "pilot_counterfactual"):
+            self.assertIn(split, source)
+        self.assertIn('"edge_cut_primary_only"', source)
+        self.assertIn('"a_to_b"', source)
+        self.assertIn('"b_to_a"', source)
+        self.assertIn('"geometry_equal"', source)
+        self.assertIn('"counterfactual_swap_row_file_sha256"', source)
+
+    def test_cli_passes_explicit_seed_and_gate_receipts(self) -> None:
+        source = (ROOT / "scripts" / "run.py").read_text(encoding="utf-8")
+        self.assertIn("expected_seed=args.seed", source)
+        self.assertIn("--model-smoke-receipt", source)
+        self.assertIn("--promotion-receipt", source)
+        self.assertIn("--mechanism-receipt", source)
+        self.assertIn("--seed is required", source)
 
 
 if __name__ == "__main__":

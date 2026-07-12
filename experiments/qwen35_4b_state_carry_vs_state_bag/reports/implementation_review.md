@@ -2,9 +2,9 @@
 
 ## Scope and Disposition
 
-This is a pre-GPU review of the complete experiment harness. It is not a model result. The CPU implementation, procedural corpus, statistics, receipts, and orchestration are ready; the private Transformers/Qwen execution path remains contingent on the mandatory live G0 smoke on the 48 GiB Ada host.
+This records the initial pre-GPU review and the final adversarial amendment below. It is not a model result. The original review found the first harness ready for G0, but a deeper independent pass subsequently found launch blockers in pilot isolation, cross-process determinism, crossed statistics, checkpoint provenance, causal enforcement, and deployment-baseline validity. The amendment supersedes any conflicting readiness statement in the historical sections.
 
-Disposition: **ready for G0, not authorized for training until `MODEL_SMOKE_PASS`.**
+Disposition after amendment: **CPU unit/static contracts pass; fresh CPU smoke and full-corpus regeneration remain required before G0, which is the first model-bearing action. Training remains machine-blocked until `MODEL_SMOKE_PASS`.**
 
 ## Contracts Audited
 
@@ -35,7 +35,10 @@ Disposition: **ready for G0, not authorized for training until `MODEL_SMOKE_PASS
 14. **Sample-more omitted promised cost diagnostics.** Per-item actual sampled-token counts and synchronized generation seconds are preserved alongside the conservative layer-token allocation.
 15. **Corrupt or partial numerics could pass comparisons.** G0 and both training paths now fail on nonfinite parity error, loss, or gradient norm; every trained Carry/Bag checkpoint repeats direct-model K=1 parity before evaluation.
 
-## CPU Evidence
+## Historical CPU Evidence
+
+The counts below describe the initial implementation before the final source-bound amendment. They
+are retained as setup history, not accepted as current receipts.
 
 - 25 unit and static-contract tests pass.
 - CPU smoke returns `CPU_SMOKE_PASS`, distinct Carry/Bag reference mechanics, equal compute receipts, three task families, and zero benchmark reads.
@@ -57,3 +60,18 @@ Disposition: **ready for G0, not authorized for training until `MODEL_SMOKE_PASS
 ## Reviewer Conclusion
 
 The harness now fails closed on the main ways this experiment could fool us: extra compute, different initialization, shallow-equivalent tasks, probe-only state, generic swap damage, pilot leakage, incomplete cells, corrupt artifacts, and a weak or under-replicated sample-more baseline. The remaining uncertainty is exactly the uncertainty the Ada run is meant to resolve: whether the patched Qwen middle block can learn a stationary, serial state transition that keeps improving beyond its trained unrolling horizon.
+
+## Final Amendment Validation
+
+- 41 CPU unit/static-contract tests pass after the integrated audit.
+- Every experiment Python source and script passes `py_compile`; `git diff --check` is clean.
+- Dedicated pilot validation now prevents pilot training logs and checkpoint parity from reading the
+  confirmatory validation corpus.
+- Only the exact frozen default config can enter model-bearing stages or emit a scientific verdict;
+  smoke/reduced configs are machine-labeled setup-only.
+- Swap uncertainty bootstraps 512 counterfactual-pair means, not 1,024 correlated directions, while
+  both preregistered donor contrasts are enforced per seed.
+- Immutable labels/geometry are checked across Carry/Bag, edge-cut, and deployment pairs; sample-more
+  allocation, parses, raw totals, and by-depth interface rates are recomputed in analysis.
+- No fresh CPU smoke, full corpus, Qwen load, GPU inference, training, or benchmark access occurred
+  during this final review. The historical receipt is explicitly superseded.

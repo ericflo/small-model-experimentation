@@ -68,5 +68,6 @@
     10
   ],
   "scientific_evidence": false,
-  "status": "CPU_SMOKE_PASS"
+  "status": "SUPERSEDED_CPU_SMOKE",
+  "superseded_reason": "Predates the final adversarial source/config/data-contract revision; retain as setup history only and regenerate before G0."
 }

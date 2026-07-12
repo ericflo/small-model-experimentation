@@ -12,7 +12,7 @@ The goal was not to find a paper to replicate. It was to identify the easiest wa
 | [Teaching Pretrained Language Models to Think Deeper with Retrofitted Recurrence](https://arxiv.org/abs/2511.07384) | Recurrence can be retrofitted into pretrained models using a recurrence curriculum. | A recurrence retrofit is now a baseline rather than a breakthrough; performance can still reflect compute or training recipe. | Exact reset-state twin, same initialization/data/parameters, and a fixed final checkpoint. |
 | [Loop, Think, & Generalize](https://arxiv.org/abs/2604.07822) | Properly trained recurrent-depth models can extrapolate by increasing inference recurrence. | Excess recurrence produces overthinking; trained depth extrapolation can be fragile. | K=4 training, K=5–12 evaluation, stationary step encoding, fixed-point loss, and overthinking curves. |
 | [Training-Free Looped Transformers](https://arxiv.org/abs/2605.23872) | Naive block reapplication commonly degrades; damped substeps can stabilize it. | Training-free gains may be small and do not identify semantic state. | Damped recurrence is an engineering prior; it cannot pass without Carry>Bag and state causality. |
-| [DiscoLoop](https://arxiv.org/abs/2607.00341) | A bridge entity may be decoded yet misaligned with its token embedding; mixed discrete/continuous recurrence repairs the interface. | A mixed channel alone is no longer a novel deeper-representation contribution. | Semantic echo is a triggered ablation. A positive is labeled interface-only unless continuous serial state and causal gates also pass. |
+| [DiscoLoop](https://arxiv.org/abs/2607.00341) | A bridge entity may be decoded yet misaligned with its token embedding; mixed discrete/continuous recurrence repairs the interface. | A mixed channel alone is no longer a novel deeper-representation contribution, and opening one after continuous outcomes is design search. | Keep this experiment continuous-only. A readable-but-unused signature may motivate a separately preregistered mixed-interface successor with shuffled/wrong-task controls. |
 
 ## Repository Evidence That Changes the Bet
 
@@ -30,7 +30,7 @@ C13/C16/C32/C36 show Qwen executes a supplied procedure well but struggles to pr
 
 ### Readable is not usable
 
-C19 decodes shallow composition information; C20's ActAdd is inert. C30 gains only when a complete decoded operation is externalized into an interface the model consumes. The later Jacobian transport replication demonstrates that a properly chosen context-local state can be causally consumed. This motivates both donor-following swaps and the semantic-echo branch.
+C19 decodes shallow composition information; C20's ActAdd is inert. C30 gains only when a complete decoded operation is externalized into an interface the model consumes. The later Jacobian transport replication demonstrates that a properly chosen context-local state can be causally consumed. This motivates donor-following swaps here and, only if licensed by a readable-but-unused result, a separately controlled interface successor.
 
 ### Thin recurrence already failed
 
@@ -41,7 +41,7 @@ C19 decodes shallow composition information; C20's ActAdd is inert. C30 gains on
 - **Longer native CoT:** already establishes serial token computation, not silent deeper representation.
 - **Naive layer looping:** now a literature replication and vulnerable to instability.
 - **Continuous-state feedback alone:** close to Coconut and insufficiently causal.
-- **Mixed discrete/continuous recurrence alone:** close to DiscoLoop and primarily an interface result.
+- **Mixed discrete/continuous recurrence in this directory:** close to DiscoLoop, primarily an interface result, and an outcome-dependent follow-up that belongs in a successor experiment.
 - **Another small fast-weight adapter:** directly contradicted by the nearest repository experiment at its tested bandwidth/supervision.
 - **Untied added layers:** changes parameter count and confounds optimization with scaling.
 - **External DSL/VM repair:** gives structure to an external executor rather than demonstrating deeper internal representation.

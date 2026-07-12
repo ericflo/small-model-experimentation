@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import json
+import os
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -54,6 +57,38 @@ class SubstrateTests(unittest.TestCase):
                 query_values = [state[first["query_kind"]] for state in first["trajectory"]]
                 self.assertNotIn(query_values[-1], query_values[:-1])
 
+    def test_dataset_archives_are_deterministic_across_python_hash_seeds(self) -> None:
+        code = """
+import json
+import sys
+from pathlib import Path
+from src.config import load_config
+from src.data_pipeline import build_datasets
+root = Path.cwd()
+manifest = build_datasets(load_config(root / "configs" / "smoke.yaml"), sys.argv[1])
+print(json.dumps(
+    {name: receipt["sha256"] for name, receipt in manifest["files"].items()},
+    sort_keys=True,
+    separators=(",", ":"),
+))
+"""
+        with tempfile.TemporaryDirectory() as directory:
+            outputs = []
+            for index, hash_seed in enumerate(("1", "987654")):
+                environment = os.environ.copy()
+                environment["PYTHONHASHSEED"] = hash_seed
+                environment["PYTHONPATH"] = str(ROOT)
+                outputs.append(
+                    subprocess.check_output(
+                        [sys.executable, "-c", code, str(Path(directory) / str(index))],
+                        cwd=ROOT,
+                        env=environment,
+                        text=True,
+                    )
+                )
+        self.assertEqual(outputs[0], outputs[1])
+        self.assertIn("train", json.loads(outputs[0]))
+
     def test_query_is_causally_after_every_state_slot(self) -> None:
         row = self.make(201, "phase_branch", 4)
         prompt = row["prompt"]
@@ -83,12 +118,18 @@ class SubstrateTests(unittest.TestCase):
             state_token=self.architecture["state_token"],
             state_slots=self.architecture["state_slots"],
             max_attempts=self.substrate["max_generation_attempts"],
+            query_kind="checksum",
         )
         self.assertEqual(first["pair_id"], second["pair_id"])
         self.assertEqual(first["world"], second["world"])
         self.assertEqual(first["table_order"], second["table_order"])
         self.assertEqual(first["choices"], second["choices"])
+        self.assertEqual(first["query_kind"], "checksum")
+        self.assertEqual(second["query_kind"], "checksum")
         self.assertNotEqual(first["initial"], second["initial"])
+        self.assertEqual(first["initial"]["node"], second["initial"]["node"])
+        self.assertNotEqual(first["initial"]["phase"], second["initial"]["phase"])
+        self.assertNotEqual(first["initial"]["checksum"], second["initial"]["checksum"])
         first_value = first["choices"][first["correct_choice"]]
         second_value = second["choices"][second["correct_choice"]]
         self.assertNotEqual(first_value, second_value)
@@ -104,6 +145,18 @@ class SubstrateTests(unittest.TestCase):
             self.assertEqual(manifest["cross_split_structural_duplicates"], 0)
             self.assertEqual(manifest["benchmark_files_read"], 0)
             self.assertEqual(manifest["files"]["train"]["rows"], 24)
+            self.assertEqual(manifest["files"]["pilot_depth"]["rows"], 8)
+            self.assertEqual(manifest["files"]["pilot_joint"]["rows"], 8)
+            self.assertEqual(manifest["files"]["pilot_counterfactual"]["rows"], 4)
+            self.assertEqual(manifest["files"]["pilot_validation"]["rows"], 8)
+            self.assertEqual(len(manifest["source_contract_sha256"]), 64)
+            for receipt in manifest["files"].values():
+                self.assertEqual(receipt["query_kinds"].get("node"), receipt["rows"] // 2)
+                self.assertEqual(
+                    receipt["query_kinds"].get("checksum"), receipt["rows"] // 2
+                )
+                for cell in receipt["query_kind_grid"].values():
+                    self.assertEqual(cell.get("node"), cell.get("checksum"))
             rows = read_jsonl(Path(directory) / "train.jsonl.gz")
             self.assertEqual(len(rows), 24)
 

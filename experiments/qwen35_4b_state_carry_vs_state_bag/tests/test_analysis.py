@@ -1,22 +1,41 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from src.analysis import (
+from src.analysis import (  # noqa: E402
     _deployment_comparison,
+    _edge_cut_summary,
     _evaluation_bundles,
     _prefer_full_bundles,
     analyze_runs,
 )
-from src.config import config_sha256, load_config
+from src.config import config_sha256, load_config, source_contract_sha256  # noqa: E402
+
+
+MANIFEST_HASH = "a" * 64
+SOURCE_HASH = source_contract_sha256(ROOT)
+REQUIREMENTS_HASH = hashlib.sha256(
+    (ROOT.parents[1] / "requirements-training.lock.txt").read_bytes()
+).hexdigest()
+
+
+def sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def canonical_sha256(payload: dict) -> str:
+    encoded = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()
+    return hashlib.sha256(encoded).hexdigest()
 
 
 def write_jsonl(path: Path, rows: list[dict]) -> None:
@@ -24,42 +43,307 @@ def write_jsonl(path: Path, rows: list[dict]) -> None:
     path.write_text("".join(json.dumps(row) + "\n" for row in rows), encoding="utf-8")
 
 
+def scientific_config() -> dict:
+    config = load_config(ROOT / "configs" / "smoke.yaml")
+    config["substrate"]["extrapolation_depths"] = [5]
+    config["substrate"]["evaluation_examples_per_split"] = 20
+    config["substrate"]["pilot_examples_per_split"] = 20
+    config["evaluation"]["primary_depths"] = [5]
+    config["evaluation"]["holdout_items_per_depth"] = 20
+    config["evaluation"]["bootstrap_resamples"] = 2000
+    config["gates"]["min_positive_primary_depths"] = 1
+    return config
+
+
+def checkpoint_metadata(
+    config: dict,
+    *,
+    arm: str,
+    seed: int,
+    pilot: bool = False,
+) -> dict:
+    metadata = {
+        "schema_version": 1,
+        "experiment_id": config["experiment_id"],
+        "model_id": config["model"]["id"],
+        "model_revision": config["model"]["revision"],
+        "backend": "transformers",
+        "config_sha256": config_sha256(config),
+        "source_contract_sha256": SOURCE_HASH,
+        "requirements_training_lock_sha256": REQUIREMENTS_HASH,
+        "phase": "pilot" if pilot else "full",
+        "train_arm": arm,
+        "train_seed": seed,
+        "step": int(
+            config["training"]["pilot_steps" if pilot else "train_steps"]
+        ),
+        "pilot": pilot,
+        "data_manifest_sha256": MANIFEST_HASH,
+        "training_prompt_tokens": 100,
+        "training_layer_token_applications": 1000,
+        "training_order_sha256": f"same-order-{seed}",
+        "trainable_parameters": {
+            "total": 10,
+            "names_sha256": "same-names",
+            "values_sha256": f"same-init-{seed}",
+        },
+        "adapter_files": {"adapter.safetensors": f"adapter-{arm}-{seed}"},
+    }
+    metadata["checkpoint_identity_sha256"] = canonical_sha256(metadata)
+    return metadata
+
+
+def swap_rows(pair_count: int) -> list[dict]:
+    return [
+        {
+            "pair_id": f"pair-{pair_index}",
+            "direction": direction,
+            "geometry_equal": True,
+            "baseline_prediction": 0,
+            "swapped_prediction": 1,
+            "recipient_choice": 0,
+            "donor_choice_in_recipient": 1,
+            "baseline_correct": True,
+            "baseline_donor_follow": False,
+            "baseline_recipient_correct": True,
+            "donor_follow": True,
+            "recipient_preserve": False,
+        }
+        for pair_index in range(pair_count)
+        for direction in ("a_to_b", "b_to_a")
+    ]
+
+
+def write_evaluation(
+    run: Path,
+    config: dict,
+    *,
+    metadata: dict,
+    eval_mode: str,
+    rows: list[dict],
+    pilot: bool = False,
+    swaps: list[dict] | None = None,
+) -> None:
+    rows_path = run / "rows.jsonl"
+    write_jsonl(rows_path, rows)
+    swap_summary = None
+    if swaps is not None:
+        swap_path = run / "counterfactual_swaps.jsonl"
+        write_jsonl(swap_path, swaps)
+        swap_summary = {
+            "pairs": len(swaps) // 2,
+            "directions": len(swaps),
+            "baseline_accuracy": 1.0,
+            "baseline_donor_follow_rate": 0.0,
+            "donor_follow_rate": 1.0,
+            "recipient_preserve_rate": 0.0,
+            "counterfactual_swap_row_file": swap_path.name,
+            "counterfactual_swap_row_file_sha256": sha256(swap_path),
+        }
+    summary = {
+        "status": "EVALUATION_COMPLETE",
+        "config_sha256": config_sha256(config),
+        "source_contract_sha256": SOURCE_HASH,
+        "requirements_training_lock_sha256": REQUIREMENTS_HASH,
+        "data_manifest_sha256": MANIFEST_HASH,
+        "pilot": pilot,
+        "phase": "pilot" if pilot else "full",
+        "row_file": rows_path.name,
+        "row_file_sha256": sha256(rows_path),
+        "train_arm": metadata["train_arm"],
+        "eval_mode": eval_mode,
+        "expected_seed": metadata["train_seed"],
+        "checkpoint_identity_sha256": metadata["checkpoint_identity_sha256"],
+        "checkpoint_k1_max_logit_abs_error": 0.0,
+        "setup": {"checkpoint_metadata": metadata},
+        "counterfactual_swaps": swap_summary,
+    }
+    summary["receipt_identity_sha256"] = canonical_sha256(summary)
+    run.mkdir(parents=True, exist_ok=True)
+    (run / "summary.json").write_text(json.dumps(summary), encoding="utf-8")
+
+
+def evaluation_rows(*, carry: bool) -> list[dict]:
+    rows = []
+    for item in range(20):
+        query_kind = "node" if item % 2 == 0 else "checksum"
+        common = {
+            "family": "family",
+            "template": "template",
+            "depth": 5,
+            "query_kind": query_kind,
+            "correct_choice": 0,
+            "prompt_tokens": 10,
+            "layer_token_applications": 100,
+            "full_top_is_answer": True,
+            "node_step_accuracy": 1.0,
+            "joint_step_accuracy": 1.0,
+        }
+        rows.append(
+            {
+                **common,
+                "id": f"depth-{item}",
+                "split": "depth_extrapolation",
+                "k": 4,
+                "correct": False,
+            }
+        )
+        rows.append(
+            {
+                **common,
+                "id": f"depth-{item}",
+                "split": "depth_extrapolation",
+                "k": 5,
+                "correct": carry,
+            }
+        )
+        rows.append(
+            {
+                **common,
+                "id": f"joint-{item}",
+                "split": "joint_holdout",
+                "k": 5,
+                "correct": carry,
+            }
+        )
+    return rows
+
+
 class AnalysisTests(unittest.TestCase):
-    def test_relative_row_receipt_resolves_next_to_summary(self) -> None:
+    def test_reduced_config_cannot_emit_scientific_verdict(self) -> None:
         config = load_config(ROOT / "configs" / "smoke.yaml")
         with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            result = analyze_runs(config, root / "runs", root / "summary.json")
+        self.assertEqual(result["verdict"], "NONCONFIRMATORY_SMOKE_ONLY")
+        self.assertEqual(result["phase"], "setup")
+
+    def test_relative_row_receipt_resolves_next_to_summary(self) -> None:
+        config = scientific_config()
+        with tempfile.TemporaryDirectory() as directory:
             run = Path(directory) / "eval"
-            rows_path = run / "rows.jsonl"
-            write_jsonl(rows_path, [{"id": "one", "k": 1, "split": "validation"}])
-            summary = {
-                "status": "EVALUATION_COMPLETE",
-                "config_sha256": config_sha256(config),
-                "row_file": "rows.jsonl",
-                "train_arm": "carry",
-                "eval_mode": "carry",
-                "setup": {"checkpoint_metadata": {"train_seed": 1}},
+            metadata = checkpoint_metadata(config, arm="carry", seed=7411)
+            row = {
+                "id": "one",
+                "k": 1,
+                "split": "validation",
+                "depth": 1,
+                "correct": True,
+                "family": "family",
+                "template": "template",
+                "query_kind": "node",
+                "correct_choice": 0,
             }
-            (run / "summary.json").write_text(json.dumps(summary), encoding="utf-8")
-            bundles = _evaluation_bundles(Path(directory), config_sha256(config))
+            write_evaluation(
+                run,
+                config,
+                metadata=metadata,
+                eval_mode="carry",
+                rows=[row],
+            )
+            bundles = _evaluation_bundles(
+                Path(directory), config_sha256(config), config
+            )
             self.assertEqual(len(bundles), 1)
             self.assertEqual(bundles[0]["rows"][0]["id"], "one")
 
+    def test_duplicate_evaluation_rows_are_rejected(self) -> None:
+        config = scientific_config()
+        with tempfile.TemporaryDirectory() as directory:
+            run = Path(directory) / "eval"
+            metadata = checkpoint_metadata(config, arm="carry", seed=7411)
+            row = {
+                "id": "duplicate",
+                "k": 1,
+                "split": "validation",
+                "depth": 1,
+                "correct": True,
+            }
+            write_evaluation(
+                run,
+                config,
+                metadata=metadata,
+                eval_mode="carry",
+                rows=[row, dict(row)],
+            )
+            with self.assertRaisesRegex(RuntimeError, "duplicate evaluation row key"):
+                _evaluation_bundles(Path(directory), config_sha256(config), config)
+
+    def test_checkpoint_phase_and_identity_are_enforced(self) -> None:
+        config = scientific_config()
+        with tempfile.TemporaryDirectory() as directory:
+            run = Path(directory) / "eval"
+            metadata = checkpoint_metadata(config, arm="carry", seed=7411)
+            metadata["step"] = 1
+            # Deliberately recompute the digest so step enforcement, not digest
+            # enforcement, is the reason this fixture is rejected.
+            metadata["checkpoint_identity_sha256"] = canonical_sha256(
+                {k: v for k, v in metadata.items() if k != "checkpoint_identity_sha256"}
+            )
+            row = {
+                "id": "one",
+                "k": 1,
+                "split": "validation",
+                "depth": 1,
+                "correct": True,
+            }
+            write_evaluation(
+                run,
+                config,
+                metadata=metadata,
+                eval_mode="carry",
+                rows=[row],
+            )
+            with self.assertRaisesRegex(RuntimeError, "registered final full step"):
+                _evaluation_bundles(Path(directory), config_sha256(config), config)
+
     def test_full_evaluations_exclude_retained_pilots(self) -> None:
-        bundles = [
-            {"pilot": True, "name": "pilot"},
-            {"pilot": False, "name": "full"},
-        ]
+        bundles = [{"pilot": True, "name": "pilot"}, {"pilot": False, "name": "full"}]
         self.assertEqual(_prefer_full_bundles(bundles), [bundles[1]])
 
-    def test_deployment_comparator_is_paired_and_seed_complete(self) -> None:
-        config = load_config(ROOT / "configs" / "smoke.yaml")
-        config["training"]["train_seeds"] = [1, 2, 3]
-        config["evaluation"]["bootstrap_resamples"] = 2000
+    def test_identical_edge_cut_can_never_pass(self) -> None:
+        config = scientific_config()
+        bundles = []
+        rows = [
+            {
+                "id": f"depth-{item}",
+                "split": "depth_extrapolation",
+                "depth": 5,
+                "k": 5,
+                "correct": True,
+                "family": "family",
+                "template": "template",
+                "query_kind": "node" if item % 2 == 0 else "checksum",
+                "correct_choice": 0,
+                "prompt_tokens": 10,
+                "layer_token_applications": 100,
+            }
+            for item in range(20)
+        ]
+        for seed in config["training"]["train_seeds"]:
+            identity = hashlib.sha256(f"checkpoint-{seed}".encode()).hexdigest()
+            for mode in ("carry", "bag"):
+                bundles.append(
+                    {
+                        "train_seed": seed,
+                        "train_arm": "carry",
+                        "eval_mode": mode,
+                        "rows": [dict(row) for row in rows],
+                        "checkpoint_identity_sha256": identity,
+                    }
+                )
+        result = _edge_cut_summary(bundles, config)
+        self.assertTrue(result["available"])
+        self.assertEqual(result["intact_minus_edge_cut"], 0.0)
+        self.assertFalse(result["passes"])
+
+    def test_deployment_comparator_requires_exact_full_task_ids(self) -> None:
+        config = scientific_config()
         expected_hash = config_sha256(config)
         bundles = []
         with tempfile.TemporaryDirectory() as directory:
             runs = Path(directory)
-            for seed in (1, 2, 3):
+            for seed in config["training"]["train_seeds"]:
                 carry_rows = [
                     {
                         "id": f"item-{item}",
@@ -67,6 +351,8 @@ class AnalysisTests(unittest.TestCase):
                         "depth": 5,
                         "k": 5,
                         "correct": True,
+                        "query_kind": "node" if item % 2 == 0 else "checksum",
+                        "correct_choice": 0,
                     }
                     for item in range(20)
                 ]
@@ -76,122 +362,106 @@ class AnalysisTests(unittest.TestCase):
                         "train_arm": "carry",
                         "eval_mode": "carry",
                         "rows": carry_rows,
+                        "data_manifest_sha256": MANIFEST_HASH,
+                        "source_contract_sha256": SOURCE_HASH,
+                        "requirements_training_lock_sha256": REQUIREMENTS_HASH,
                     }
                 )
                 run = runs / f"sample_{seed}"
                 sample_rows = [
-                    {"id": f"item-{item}", "pass_at_n": False}
+                    {
+                        "id": f"item-{item}",
+                        "depth": 5,
+                        "query_kind": "node" if item % 2 == 0 else "checksum",
+                        "correct_choice": 0,
+                        "n": 1,
+                        "max_new_tokens": 10,
+                        "generated_token_counts": [5],
+                        "cap_contact": [False],
+                        "recurrent_layer_token_budget": 1000,
+                        "sample_layer_token_budget": 900,
+                        "parse_rate": 1.0,
+                        "majority_correct": False,
+                        "pass_at_n": False,
+                        "text_train_seed": seed,
+                        "checkpoint_identity_sha256": "d" * 64,
+                    }
                     for item in range(20)
                 ]
                 write_jsonl(run / "rows.jsonl", sample_rows)
-                (run / "summary.json").write_text(
-                    json.dumps(
-                        {
+                sample_summary = {
                             "status": "SAMPLE_MORE_COMPLETE",
+                            "phase": "sample_more",
                             "config_sha256": expected_hash,
+                            "source_contract_sha256": SOURCE_HASH,
+                            "requirements_training_lock_sha256": REQUIREMENTS_HASH,
+                            "data_manifest_sha256": MANIFEST_HASH,
+                            "checkpoint_identity_sha256": "d" * 64,
                             "text_train_seed": seed,
+                            "expected_seed": seed,
                             "rows": "rows.jsonl",
+                            "rows_sha256": sha256(run / "rows.jsonl"),
                         }
-                    ),
-                    encoding="utf-8",
+                sample_summary["receipt_identity_sha256"] = canonical_sha256(
+                    sample_summary
                 )
-            result = _deployment_comparison(
-                bundles, runs, expected_hash, config
-            )
+                (run / "summary.json").write_text(
+                    json.dumps(sample_summary), encoding="utf-8"
+                )
+            result = _deployment_comparison(bundles, runs, expected_hash, config)
             self.assertTrue(result["available"])
-            self.assertEqual(result["training_seed_pairs"], 3)
+            self.assertEqual(result["model_seed_count"], 3)
+            self.assertEqual(result["unique_tasks"], 20)
             self.assertGreater(result["ci95"][0], 0)
 
     def test_fail_closed_ladder_reaches_mechanistic_positive(self) -> None:
-        config = load_config(ROOT / "configs" / "smoke.yaml")
-        config["training"]["train_seeds"] = [1, 2, 3]
-        config["evaluation"]["bootstrap_resamples"] = 2000
-        config["evaluation"]["primary_depths"] = [5]
-        config["gates"]["min_positive_primary_depths"] = 1
+        config = scientific_config()
         with tempfile.TemporaryDirectory() as directory:
             runs = Path(directory)
-            for seed in (1, 2, 3):
-                for arm in ("carry", "bag"):
-                    run = runs / f"eval_{arm}_{seed}"
-                    rows = []
-                    for item in range(20):
-                        item_id = f"item-{item}"
-                        rows.append(
-                            {
-                                "id": item_id,
-                                "split": "depth_extrapolation",
-                                "depth": 5,
-                                "k": 4,
-                                "correct": False,
-                                "node_step_accuracy": 1.0,
-                                "joint_step_accuracy": 1.0,
-                            }
-                        )
-                        rows.append(
-                            {
-                                "id": item_id,
-                                "split": "depth_extrapolation",
-                                "depth": 5,
-                                "k": 5,
-                                "correct": arm == "carry",
-                                "node_step_accuracy": 1.0,
-                                "joint_step_accuracy": 1.0,
-                            }
-                        )
-                    rows_path = run / "rows.jsonl"
-                    write_jsonl(rows_path, rows)
-                    summary = {
-                        "status": "EVALUATION_COMPLETE",
-                        "config_sha256": config_sha256(config),
-                        "row_file": str(rows_path),
-                        "train_arm": arm,
-                        "eval_mode": arm,
-                        "checkpoint_k1_max_logit_abs_error": 0.0,
-                        "setup": {
-                            "checkpoint_metadata": {
-                                "train_seed": seed,
-                                "data_manifest_sha256": "same-data",
-                                "training_prompt_tokens": 100,
-                                "training_layer_token_applications": 1000,
-                                "trainable_parameters": {
-                                    "total": 10,
-                                    "names_sha256": "same-names",
-                                    "values_sha256": f"same-init-{seed}",
-                                },
-                            }
-                        },
-                        "counterfactual_swaps": (
-                            {
-                                "pairs": 20,
-                                "baseline_accuracy": 0.8,
-                                "donor_follow_rate": 0.8,
-                                "recipient_preserve_rate": 0.1,
-                            }
-                            if arm == "carry"
-                            else None
-                        ),
-                    }
-                    (run / "summary.json").write_text(
-                        json.dumps(summary), encoding="utf-8"
-                    )
-                    if arm == "carry":
-                        edge_run = runs / f"edge_cut_{seed}"
-                        edge_rows = edge_run / "rows.jsonl"
-                        write_jsonl(edge_rows, rows)
-                        edge_summary = {
-                            **summary,
-                            "row_file": str(edge_rows),
-                            "eval_mode": "bag",
-                            "counterfactual_swaps": None,
-                        }
-                        (edge_run / "summary.json").write_text(
-                            json.dumps(edge_summary), encoding="utf-8"
-                        )
-            result = analyze_runs(config, runs, runs / "analysis" / "summary.json")
+            for seed in config["training"]["train_seeds"]:
+                carry_metadata = checkpoint_metadata(config, arm="carry", seed=seed)
+                bag_metadata = checkpoint_metadata(config, arm="bag", seed=seed)
+                write_evaluation(
+                    runs / f"eval_carry_{seed}",
+                    config,
+                    metadata=carry_metadata,
+                    eval_mode="carry",
+                    rows=evaluation_rows(carry=True),
+                    swaps=swap_rows(config["substrate"]["counterfactual_pairs"]),
+                )
+                write_evaluation(
+                    runs / f"eval_bag_{seed}",
+                    config,
+                    metadata=bag_metadata,
+                    eval_mode="bag",
+                    rows=evaluation_rows(carry=False),
+                )
+                edge_rows = [
+                    row
+                    for row in evaluation_rows(carry=False)
+                    if row["split"] == "depth_extrapolation" and row["k"] == row["depth"]
+                ]
+                write_evaluation(
+                    runs / f"edge_cut_{seed}",
+                    config,
+                    metadata=carry_metadata,
+                    eval_mode="bag",
+                    rows=edge_rows,
+                )
+            with patch("src.analysis.is_confirmatory_config", return_value=True):
+                result = analyze_runs(config, runs, runs / "analysis" / "summary.json")
             self.assertEqual(result["verdict"], "MECHANISTIC_DEPTH_POSITIVE")
-            self.assertEqual(result["carry_vs_bag"]["train_seed_pairs"], 3)
-            self.assertEqual(result["carry_vs_bag"]["complete_primary_depths"], 1)
-            self.assertGreater(result["unseen_k_scaling"]["ci95"][0], 0)
+            self.assertEqual(result["carry_vs_bag"]["model_seed_count"], 3)
+            self.assertEqual(result["carry_vs_bag"]["unique_tasks"], 20)
+            self.assertTrue(result["trained_checkpoint_edge_cut"]["passes"])
+            self.assertTrue(result["counterfactual_swaps"]["passes"])
+            self.assertTrue(
+                all(
+                    seed["bootstrap_unit"]
+                    == "counterfactual_pair_mean_over_two_directions"
+                    for seed in result["counterfactual_swaps"]["seeds"]
+                )
+            )
 
 
 if __name__ == "__main__":

@@ -11,6 +11,7 @@ sys.path.insert(0, str(ROOT))
 from src.mechanics import (
     bag_unroll,
     carry_unroll,
+    crossed_paired_bootstrap_interval,
     gate_reachability,
     hierarchical_paired_bootstrap_interval,
     last_mean_aggregate,
@@ -54,6 +55,28 @@ class MechanicsTests(unittest.TestCase):
         self.assertAlmostEqual(mean, 5 / 6)
         self.assertGreater(lower, 0)
         self.assertGreaterEqual(upper, mean)
+
+    def test_crossed_bootstrap_uses_one_common_task_axis(self) -> None:
+        mean, lower, upper = crossed_paired_bootstrap_interval(
+            {
+                1: {f"task-{item}": 1.0 for item in range(20)},
+                2: {f"task-{item}": 1.0 for item in range(20)},
+                3: {f"task-{item}": 0.5 for item in range(20)},
+            },
+            resamples=2000,
+            seed=11,
+        )
+        self.assertAlmostEqual(mean, 5 / 6)
+        self.assertGreater(lower, 0)
+        self.assertGreaterEqual(upper, mean)
+
+    def test_crossed_bootstrap_rejects_ragged_task_ids(self) -> None:
+        with self.assertRaisesRegex(ValueError, "identical task ids"):
+            crossed_paired_bootstrap_interval(
+                {1: {"a": 1.0}, 2: {"b": 1.0}},
+                resamples=1000,
+                seed=1,
+            )
 
     def test_gate_reachability_fails_closed(self) -> None:
         self.assertTrue(gate_reachability(0.4, 0.05)["reachable"])

@@ -5,7 +5,7 @@ source_track: "new"
 path: "experiments/qwen35_4b_state_carry_vs_state_bag"
 primary_readme: "experiments/qwen35_4b_state_carry_vs_state_bag/README.md"
 primary_report: "experiments/qwen35_4b_state_carry_vs_state_bag/reports/report.md"
-summary: "**Status: implementation-ready, CPU-validated, no Qwen model call yet. This is not a result.**"
+summary: "**Status: adversarially revised before launch; CPU unit-validated, no Qwen model call yet. This is not a result.**"
 tags:
   - "latent-state"
   - "small-model"
@@ -26,7 +26,7 @@ file_counts:
   json: 2
   md: 13
   py: 15
-  yaml: 5
+  yaml: 4
   [none]: 1
-total_files: 38
-total_size_bytes: 255030
+total_files: 37
+total_size_bytes: 385326

@@ -17,7 +17,7 @@
 
 ## Novelty Claim
 
-No prior repository experiment or located paper directly trains and compares a serially carried Qwen state against an equal-parameter, equal-FLOP, separately optimized ensemble of reset shallow states while also requiring query-independent state sufficiency, unseen-recurrence extrapolation, and donor-consistent causal swaps.
+No prior repository experiment or located paper directly trains and compares a serially carried Qwen state against an equal-parameter, equal-decoder-layer-token, separately optimized ensemble of reset shallow states while also requiring query-independent state sufficiency, unseen-recurrence extrapolation, and donor-consistent causal swaps.
 
 ## Mechanism
 
@@ -26,16 +26,16 @@ Repeated computation is useful only if later computation consumes what earlier c
 ## Control Plan
 
 - Baseline: same model, prompt, recurrent block, trainable parameterization, optimizer, data, K, and readout with the state edge reset on every extra call.
-- Mechanism-falsifying control: separately trained State-Bag plus inference-time edge cutting of the trained Carry checkpoint.
+- Mechanism-falsifying control: separately trained State-Bag plus an inference-time edge cut of the exact same trained Carry checkpoint, each required to show a positive complete-cell effect rather than mere artifact availability.
 - Shift or robustness check: depth 5–12, held-out transition family, held-out surface template, and joint holdout.
-- Hidden-label boundary: procedural trajectories may supervise training-state heads, but evaluation labels never select checkpoints, K, layers, echo mode, prompts, or thresholds.
+- Hidden-label boundary: procedural trajectories may supervise training-state heads, but a disjoint pilot seed/split only decides stop/proceed; confirmation labels never select checkpoints, K, layers, prompts, sampling policy, or thresholds. Interface variants require successor experiments.
 
 ## Evidence Output
 
 - Program evidence update: only after a result-bearing run changes belief.
 - Claim ledger or synthesis update: only a multiseed terminal verdict may create or amend a claim.
 - Reusable artifact: Qwen3.5 recurrent-middle-block wrapper, query-after-state procedural generator, paired swap harness, and equal-compute receipts.
-- Stop or branch condition: see `reports/preregistration.md`; early raw gains never skip the trained Bag control or sample-more gate.
+- Stop condition: see `reports/preregistration.md`; early raw gains never skip the trained Bag, crossed-task confirmation, causal edge-cut/swap, joint-holdout, or valid sample-more gates.
 
 ## Decision
 

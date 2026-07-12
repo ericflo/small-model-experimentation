@@ -1,8 +1,0 @@
-schema_version: 1
-experiment_id: qwen35_4b_state_carry_vs_state_bag
-inherits: default.yaml
-architecture:
-  semantic_echo:
-    mode: mixed
-    top_k: 32
-    continuous_initial: 0.90

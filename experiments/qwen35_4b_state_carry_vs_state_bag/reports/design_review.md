@@ -4,13 +4,13 @@ Completed before any model-bearing call. The review assumes the attractive story
 
 ## Verdict
 
-**Proceed only through the live model-smoke gate.** The design is capable of falsifying its central mechanism because Carry and Bag differ by one edge in the computation graph while matching parameters, training, data, calls, and readout. The remaining irreducible risks—whether frozen Qwen state is usable, whether 48 GiB is enough, and whether recurrence optimization converges—require the target GPU and are explicitly gated rather than hand-waved.
+**Proceed only through the live model-smoke gate after the amended CPU checks pass.** The design is capable of falsifying its central mechanism because Carry and Bag differ by one edge in the computation graph while matching parameters, training, data, calls, and readout. The final adversarial pass below repaired pilot/confirmation leakage, crossed-design inference, causal-gate, artifact-identity, and baseline-interface failures before any model call. The remaining irreducible risks—whether frozen Qwen state is usable, whether 48 GiB is enough, and whether recurrence optimization converges—require the target GPU and are explicitly gated rather than hand-waved.
 
 ## 1. Extra compute is mistaken for depth
 
 If Carry is compared only to K=1, any gain is “more R calls.”
 
-**Hardening:** the primary control is a separately trained State-Bag with the same number of R calls and the same coda/aggregator. K=1 and dummy/static arms are diagnostics only.
+**Hardening:** the primary control is a separately trained State-Bag with the same number of R calls and the same coda/aggregator. K=1 parity is a mechanics diagnostic only; the orphaned static-LoRA arm was removed before launch.
 
 ## 2. Bag is deliberately crippled
 
@@ -124,7 +124,7 @@ Then donor following is impossible for superficial reasons.
 
 DiscoLoop already diagnoses embedding alignment.
 
-**Hardening:** continuous Carry-vs-Bag is primary. Mixed echo is a branch for “represented but unusable,” and any echo-only result is labeled an interface result. Mixed Carry must be paired with mixed Bag.
+**Hardening:** the final pre-run review removed mixed echo from this result-bearing experiment. A “represented but unusable” outcome may motivate a fresh successor with paired Carry/Bag plus shuffled/wrong-task controls; it cannot branch this confirmation in place.
 
 ## 21. Naive repeated blocks diverge
 
@@ -148,13 +148,13 @@ Noisy early K gains fooled the prior hook.
 
 One pair can produce an unstable story.
 
-**Hardening:** the pilot is explicitly non-evidentiary. G2 requires all three predeclared seed pairs and pooled paired intervals.
+**Hardening:** the pilot is explicitly non-evidentiary and now uses seed 7401 plus dedicated pilot-only depth/joint/counterfactual splits. G2 uses different seeds and tasks, requires all three predeclared seed pairs, and uses crossed task×seed intervals.
 
 ## 25. The primary cell is underpowered
 
 Depth subdivision can leave small n despite thousands pooled.
 
-**Hardening:** 3,200 depth items give 400/depth/seed; three seeds give 1,200 paired observations per depth. Small K curves use 64/depth and are diagnostic only.
+**Hardening:** 3,200 depth items give 400 unique tasks/depth crossed with three training seeds. Inference resamples the 400 task IDs once across sampled seeds; it never treats 1,200 model×task rows as independent observations. Small K curves use 64/depth and are diagnostic only.
 
 ## 26. Evaluation cost makes the protocol practically unrunnable
 
@@ -208,7 +208,7 @@ Repository history documents persistent CUDA corruption.
 
 Repeated tweaks after every miss could guarantee a winner.
 
-**Hardening:** pilot promotes or stops the continuous design. Mixed echo has one predeclared trigger and fixed config. Other repairs require successor experiments.
+**Hardening:** pilot promotes or stops the continuous design. Every architecture or interface repair—including semantic echo—requires a successor experiment.
 
 ## 35. A result is claimed before sample-more
 
@@ -251,3 +251,145 @@ Pooling Carry and explicit-CoT results without matching task and training seed c
 Checkpoint metadata can look valid while tensors or row files moved, changed, or resolve relative to a different working directory.
 
 **Hardening:** summaries store row filenames relative to themselves; analysis verifies row hashes. Model reload verifies model/config identity and every adapter/loop-state hash, while data loading verifies the clean manifest and data-contract hash.
+
+## 42. Pilot selection leaks into confirmation
+
+The original pilot reused seed 7411 and confirmation rows, then required a favorable sign to proceed.
+
+**Hardening:** pilot seed 7401 is excluded from confirmation, and dedicated `pilot_validation`,
+`pilot_depth`, `pilot_joint`, and `pilot_counterfactual` splits are inside the structural-duplicate firewall. The
+analyzer emits a machine promotion decision that full training requires.
+
+## 43. Identical tasks are pseudoreplicated across model seeds
+
+The original nested bootstrap independently resampled the same task set within every model seed.
+
+**Hardening:** the design is explicitly crossed. Task IDs are sampled once per replicate and shared
+across sampled training seeds; reports distinguish unique tasks from model×task rows and require the
+complete common task matrix.
+
+## 44. An edge-cut file exists but the edge need not matter
+
+The original verdict checked for three cut bundles without requiring intact accuracy to exceed cut.
+
+**Hardening:** same-checkpoint identity, exact paired keys/compute, positive per-seed effects, complete
+cells, and a crossed-bootstrap lower bound above zero are now causal gates. Identical intact/cut rows
+must terminate as `DEEP_BUT_NOT_CAUSALLY_IDENTIFIED`.
+
+## 45. Pilot and intermediate checkpoints can masquerade as full
+
+The caller-controlled `--pilot` flag originally overrode checkpoint provenance.
+
+**Hardening:** checkpoint metadata binds `pilot`/`full`/`text`, exact registered seed, and exact final
+step. GPU loading and analysis both reject a phase/step mismatch. Interrupted training cannot resume
+approximately or donate an intermediate checkpoint; it restarts from step zero in a new attempt.
+
+## 46. Old code can consume new-looking artifacts
+
+Configuration hashes did not change when generator or recurrence source changed.
+
+**Hardening:** data, model-smoke, checkpoints, evaluations, and sample-more bind a versioned critical-
+source digest plus the pinned environment-lock digest. A canonical checkpoint identity also binds
+tensor hashes, seed, arm, phase, and step.
+
+## 47. Corpus hashes depend on `PYTHONHASHSEED`
+
+Random labels were accumulated in a set and converted directly to a list.
+
+**Hardening:** labels are sorted before the seeded shuffle, and a subprocess regression compares
+archives under different Python hash seeds.
+
+## 48. Deep accepted rows silently skew query type
+
+Randomly choosing node/checksum before rejecting repeated terminal values gives the two query types
+different acceptance rates.
+
+**Hardening:** query kind is scheduled explicitly and balanced inside each family×template×depth
+cell; manifests and scored rows retain it, and both query strata must show a positive mechanism effect.
+
+## 49. State sufficiency can pass on node-only information
+
+The original OR gate accepted node accuracy even if phase/checksum were absent.
+
+**Hardening:** the gate requires joint node+phase+checksum correctness. Documentation now calls the
+metric current-state tracking, not increasing terminal sufficiency, which was never directly tested.
+
+## 50. Swaps mix position geometry and use only one direction
+
+Different initial node labels could move slot positions, and one directed swap per pair left the
+intervention undercontrolled.
+
+**Hardening:** pair members share the initial node and differ only in fixed-width phase/checksum
+values; runtime asserts identical prompt/state-slot geometry. Both directions are evaluated, raw rows
+are hashed and reloaded, and post-swap donor following is compared with its pre-swap rate as well as
+recipient preservation.
+
+## 51. Registered joint holdouts cannot affect the verdict
+
+A substrate-local effect could previously receive the strongest mechanistic label.
+
+**Hardening:** the joint held-out family+surface endpoint must be positive with a crossed-bootstrap
+lower bound above zero. Other holdouts remain reported diagnostics.
+
+## 52. Sample-more can lose only because it cannot close or parse
+
+Carry uses a constrained four-letter readout while explicit CoT originally needed a natural close
+and parse under an arbitrary 64-token minimum and 256-token cap.
+
+**Hardening:** sampling parameters and a depth-aware allowance are frozen. Raw tokens/text, natural
+close, parse, cap contact, and independently checked compute are preserved. No deployment verdict is
+available unless Carry is in answer mode on at least 95% of rows, explicit CoT parses at least 95%,
+and cap contact is at most 5%; failure is an interface-invalid baseline, not a recurrence win.
+
+## 53. Long jobs have no exact resume
+
+Optimizer, RNG, and data cursor were not checkpointed, while intermediate adapters looked loadable.
+
+**Hardening:** this experiment intentionally chooses the simpler exact policy: result-bearing training
+is non-resumable, only fixed final checkpoints are saved/evaluable, partial attempts are preserved,
+and an interruption restarts from step zero in a fresh directory. Shell loops fail on the first error.
+
+## 54. The registered run is much larger than G0 represents
+
+One fixed K=4 smoke did not cover worst prompt geometry or K=12 evaluation, and saving every 100
+steps would create 90 full adapters.
+
+**Hardening:** G0 includes a worst-format K=12 forward and timing/memory receipt; `save_every_steps`
+is the fixed final 1,500 step (pilot still saves its final 300 step); edge-cut evaluation runs only the
+primary cells it analyzes. The runbook records the static workload geometry and requires pilot timing
+before projecting the full run.
+
+## 55. A reduced config can counterfeit a terminal verdict
+
+Config hashes prove provenance but do not make a two-step, twelve-row smoke run scientific evidence.
+
+**Hardening:** the exact default confirmatory config has a pinned canonical digest. Every model-bearing
+entry point rejects any other geometry, and analysis emits `NONCONFIRMATORY_SMOKE_ONLY` for reduced
+profiles. A regression test covers both boundaries.
+
+## 56. Pilot metrics still read confirmation validation
+
+Dedicated extrapolation splits did not prevent pilot validation logs and checkpoint parity from
+reading the first confirmatory validation rows.
+
+**Hardening:** a separately seeded `pilot_validation` split is inside the global structural firewall.
+Pilot training and checkpoint parity use it exclusively; the 1,024 confirmatory validation rows are
+unopened until G2.
+
+## 57. Two swap directions are not independent tasks
+
+Bootstrapping 1,024 directed interventions would double-count the 512 shared worlds and understate
+uncertainty.
+
+**Hardening:** analysis averages the two directions within each pair, bootstraps 512 pair means, and
+still requires both donor-follow-minus-baseline and donor-follow-minus-recipient-preserve to exceed
++0.10 in every seed.
+
+## 58. Frozen fields and diagnostics can become unearned claims
+
+Unused mixed-interface scalars, config gates, and a supported but unscheduled static-LoRA arm made the
+registered surface larger than the experiment actually analyzed.
+
+**Hardening:** dead semantic-echo parameters, unused config fields, unreachable mixed verdicts, and the
+orphaned static arm were removed. Remaining boolean invariants are frozen and enforced rather than
+presented as configurable no-ops.

@@ -19,7 +19,7 @@ Everything else is matched. This is the closest operational test of “deep repr
 
 It does not mean that a linear probe becomes more accurate at a later layer. It means all of the following:
 
-1. A single bounded state becomes more sufficient for multiple future queries as recurrence proceeds.
+1. A single bounded state accurately tracks the registered joint state for multiple future query types.
 2. Later computation requires the earlier state edge: cutting it removes the benefit even in the trained checkpoint.
 3. Replacing that state with a semantically valid donor state causes the corresponding donor consequence.
 4. The transition remains useful when executed more times than it was trained.
@@ -49,17 +49,14 @@ Here recurrence LoRA and state initialization are activated only when K>1. K=1 i
 
 This property is strategically important, not just a unit test.
 
-## Why the Primary State Is Continuous
+## Why This Experiment Is Continuous-Only
 
 A semantic decode/re-embed interface is plausible and may be necessary, but recent literature already makes it an expected engineering lever. Starting mixed would leave an ambiguous positive: did serial computation matter, or did a token-like interface merely make an already-computed concept consumable?
 
-Continuous is therefore primary. Mixed echo is opened only by a recognizable signature:
-
-- state heads improve with iteration;
-- Carry exceeds Bag internally or under edge cutting;
-- final answers or donor following do not improve enough.
-
-That is the “represented but unusable” branch. If state heads themselves remain poor, echo is not a principled rescue.
+The final pre-run review removed the outcome-dependent mixed branch entirely. It was a distinct
+architecture, its promised shuffled/wrong-task controls were not implemented, and opening it after
+seeing continuous outcomes would mix discovery with confirmation. A readable-but-unused continuous
+result licenses a fresh successor experiment; it does not license editing or branching this one.
 
 ## Why State-Bag Gets a Step Signal
 
@@ -88,8 +85,8 @@ Do not claim a formal transformer circuit-depth lower bound. The task supplies s
 
 Likely optimization/interface failure. Read state-head curves:
 
-- state heads flat: initializer or training signal failed; do not open echo;
-- state heads learn but answer flat: coda/interface failure; mixed echo branch is licensed;
+- state heads flat: initializer or training signal failed;
+- state heads learn but answer flat: coda/interface failure; record the signature and propose a fresh interface successor;
 - training loss falls but fresh state heads flat: memorization or format capture.
 
 ### Carry and Bag both improve equally
@@ -137,7 +134,7 @@ Mechanical compatibility fixes are allowed if Transformers/PEFT APIs differ desp
 - chat-template argument spelling; and
 - output/checkpoint path bugs.
 
-Every fix must preserve K=1 parity, layer boundaries, adapter locality, state/query ordering, arm equality, data, and preregistered thresholds. Add a test and document the operational lesson.
+Every fix must preserve K=1 parity, layer boundaries, adapter locality, state/query ordering, arm equality, data, and preregistered thresholds. Because every generated corpus and checkpoint binds the critical-source digest, regenerate downstream artifacts after any such fix. Add a test and document the operational lesson.
 
 ## What Requires a Successor Experiment
 
@@ -152,9 +149,18 @@ Every fix must preserve K=1 parity, layer boundaries, adapter locality, state/qu
 - adding a new substrate after results; or
 - using a different backend for any comparator.
 
+One successor is mandatory rather than optional under a specific result: if a valid rank-32 LoRA
+outcome fails to establish deep state formation, create and execute the full-rank-delta Carry/Bag
+successor defined in `reports/preregistration.md`. Its zero-initialized full-rank deltas are active only
+on extra R applications, preserving the exact K=1 base path while directly testing whether low rank
+blocked the deeper representation. Mechanics/data failures and infeasible gates are repaired or
+reviewed instead. A sample-more-only loss does not trigger it; a strongly readable but causally unused
+state instead requires the separately controlled interface successor because representation formation
+has already occurred.
+
 ## First Commands
 
-Do not start training immediately. The correct sequence is environment verification, CPU tests, deterministic data, live model smoke, receipt inspection, then one paired pilot. [`gpu_runbook.md`](gpu_runbook.md) contains copy-paste commands.
+Do not start training immediately. The correct sequence is environment verification, CPU tests, deterministic data, live model smoke, receipt inspection, then the independent-seed paired pilot. The CLI enforces those prerequisites and will not accept a pilot checkpoint as confirmation. [`gpu_runbook.md`](gpu_runbook.md) contains copy-paste commands.
 
 ## The Research Attitude
 

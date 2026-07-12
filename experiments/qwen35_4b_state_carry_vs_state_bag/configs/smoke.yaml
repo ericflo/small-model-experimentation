@@ -1,11 +1,15 @@
 schema_version: 1
 experiment_id: qwen35_4b_state_carry_vs_state_bag
+evidence_profile: smoke
 inherits: default.yaml
 substrate:
   train_examples: 24
   validation_examples: 12
+  pilot_validation_examples: 8
   evaluation_examples_per_split: 12
+  pilot_examples_per_split: 8
   counterfactual_pairs: 4
+  pilot_counterfactual_pairs: 2
 training:
   train_steps: 2
   pilot_steps: 2
@@ -14,4 +18,3 @@ training:
   save_every_steps: 1
 evaluation:
   k_values: [1, 2, 4]
-  min_items_per_cell: 4

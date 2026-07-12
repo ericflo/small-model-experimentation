@@ -4441,7 +4441,7 @@
       ".json": 2,
       ".md": 13,
       ".py": 15,
-      ".yaml": 5,
+      ".yaml": 4,
       "[none]": 1
     },
     "id": "qwen35_4b_state_carry_vs_state_bag",
@@ -4452,7 +4452,7 @@
       "structured_execution_and_compilers"
     ],
     "source_track": "new",
-    "summary": "**Status: implementation-ready, CPU-validated, no Qwen model call yet. This is not a result.**",
+    "summary": "**Status: adversarially revised before launch; CPU unit-validated, no Qwen model call yet. This is not a result.**",
     "tags": [
       "latent-state",
       "small-model"
@@ -4469,8 +4469,8 @@
       "src",
       "tests"
     ],
-    "total_files": 38,
-    "total_size_bytes": 255030
+    "total_files": 37,
+    "total_size_bytes": 385326
   },
   {
     "file_counts": {

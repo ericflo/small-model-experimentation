@@ -8,11 +8,10 @@ without the pinned training environment is expected to fail clearly.
 from __future__ import annotations
 
 import contextlib
-import dataclasses
 import hashlib
 import json
 import math
-import os
+import platform
 import random
 import re
 import time
@@ -29,7 +28,13 @@ from transformers.utils.import_utils import (
     is_flash_linear_attention_available,
 )
 
-from .config import MODEL_ID, MODEL_REVISION, config_sha256
+from .config import (
+    MODEL_ID,
+    MODEL_REVISION,
+    config_sha256,
+    require_confirmatory_config,
+    source_contract_sha256,
+)
 from .data_pipeline import data_contract_sha256, read_jsonl
 from .mechanics import recurrent_compute_receipt
 from .state_loop_model import StateLoopModel
@@ -37,7 +42,9 @@ from .substrate import LETTERS, trajectory_targets
 
 
 ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = ROOT.parents[1]
 ANSWER_STRINGS = tuple(f" {letter}" for letter in LETTERS)
+REQUIREMENTS_LOCK = REPO_ROOT / "requirements-training.lock.txt"
 
 
 def _write_json(path: Path, payload: object) -> None:
@@ -57,6 +64,112 @@ def _sha256(path: Path) -> str:
         for block in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(block)
     return digest.hexdigest()
+
+
+def _canonical_sha256(payload: Mapping[str, Any]) -> str:
+    encoded = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def _requirements_lock_sha256() -> str:
+    if not REQUIREMENTS_LOCK.is_file():
+        raise RuntimeError(f"pinned requirements lock is missing: {REQUIREMENTS_LOCK}")
+    return _sha256(REQUIREMENTS_LOCK)
+
+
+def _environment_receipt(*, include_device: bool) -> dict[str, Any]:
+    import peft
+
+    receipt: dict[str, Any] = {
+        "python": platform.python_version(),
+        "python_implementation": platform.python_implementation(),
+        "platform": platform.platform(),
+        "torch": torch.__version__,
+        "transformers": transformers.__version__,
+        "peft": peft.__version__,
+        "cuda_runtime": torch.version.cuda,
+    }
+    if include_device:
+        receipt["device"] = _require_cuda()
+    return receipt
+
+
+def _identity_receipt(config: Mapping[str, Any], *, phase: str) -> dict[str, Any]:
+    return {
+        "experiment_id": config["experiment_id"],
+        "model_id": MODEL_ID,
+        "model_revision": MODEL_REVISION,
+        "backend": "transformers",
+        "config_sha256": config_sha256(config),
+        "source_contract_sha256": source_contract_sha256(ROOT),
+        "requirements_training_lock_sha256": _requirements_lock_sha256(),
+        "phase": phase,
+    }
+
+
+def _checkpoint_identity(metadata: Mapping[str, Any]) -> str:
+    return _canonical_sha256(
+        {key: value for key, value in metadata.items() if key != "checkpoint_identity_sha256"}
+    )
+
+
+def _with_receipt_identity(payload: Mapping[str, Any]) -> dict[str, Any]:
+    receipt = dict(payload)
+    receipt["receipt_identity_sha256"] = _canonical_sha256(receipt)
+    return receipt
+
+
+def _require_new_output(path: Path, *, kind: str, directory: bool) -> None:
+    """Fail closed on every prior or partial artifact; result stages are non-resumable."""
+    if path.exists():
+        raise RuntimeError(f"refusing to resume or overwrite existing {kind}: {path}")
+    if directory:
+        path.mkdir(parents=True, exist_ok=False)
+    else:
+        path.parent.mkdir(parents=True, exist_ok=True)
+
+
+def _read_gate_receipt(
+    path: Path,
+    config: Mapping[str, Any],
+    *,
+    allowed_statuses: set[str],
+    gate_name: str,
+    expected_phase: str,
+) -> dict[str, Any]:
+    if not path.is_file():
+        raise RuntimeError(f"{gate_name} receipt is missing: {path}")
+    try:
+        receipt = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise RuntimeError(f"{gate_name} receipt is unreadable: {path}") from exc
+    status = str(receipt.get("status", receipt.get("verdict", "")))
+    if status not in allowed_statuses:
+        raise RuntimeError(
+            f"{gate_name} did not pass: expected one of {sorted(allowed_statuses)}, got {status!r}"
+        )
+    if receipt.get("phase") != expected_phase:
+        raise RuntimeError(
+            f"{gate_name} phase mismatch: {receipt.get('phase')!r} != {expected_phase!r}"
+        )
+    receipt_identity = receipt.get("receipt_identity_sha256")
+    identity_payload = {
+        key: value for key, value in receipt.items() if key != "receipt_identity_sha256"
+    }
+    if receipt_identity != _canonical_sha256(identity_payload):
+        raise RuntimeError(f"{gate_name} receipt identity digest mismatch")
+    expected = _identity_receipt(config, phase=str(receipt.get("phase", "gate")))
+    for key in (
+        "experiment_id",
+        "config_sha256",
+        "source_contract_sha256",
+        "requirements_training_lock_sha256",
+    ):
+        if receipt.get(key) != expected[key]:
+            raise RuntimeError(
+                f"{gate_name} identity mismatch for {key}: {receipt.get(key)!r} != {expected[key]!r}"
+            )
+    return receipt
 
 
 def _require_cuda(minimum_gib: float = 44.0) -> dict[str, Any]:
@@ -244,6 +357,9 @@ def _build_new(config: Mapping[str, Any]) -> tuple[Any, StateLoopModel, dict[str
         "lora_targets": targets,
         "lora_targets_sha256": hashlib.sha256("\n".join(targets).encode("utf-8")).hexdigest(),
         "trainable_parameters": _trainable_parameter_receipt(wrapper),
+        "environment": _environment_receipt(include_device=True),
+        "source_contract_sha256": source_contract_sha256(ROOT),
+        "requirements_training_lock_sha256": _requirements_lock_sha256(),
     }
     return tokenizer, wrapper, receipt
 
@@ -254,6 +370,9 @@ def _validate_checkpoint_files(
     metadata: Mapping[str, Any],
     *,
     require_loop_state: bool,
+    expected_phase: str | None = None,
+    expected_step: int | None = None,
+    expected_seed: int | None = None,
 ) -> None:
     expected = {
         "experiment_id": config["experiment_id"],
@@ -261,6 +380,8 @@ def _validate_checkpoint_files(
         "model_revision": MODEL_REVISION,
         "backend": "transformers",
         "config_sha256": config_sha256(config),
+        "source_contract_sha256": source_contract_sha256(ROOT),
+        "requirements_training_lock_sha256": _requirements_lock_sha256(),
     }
     mismatches = {
         key: (metadata.get(key), value)
@@ -269,6 +390,31 @@ def _validate_checkpoint_files(
     }
     if mismatches:
         raise RuntimeError(f"checkpoint identity mismatch: {mismatches}")
+    if expected_phase is not None and metadata.get("phase") != expected_phase:
+        raise RuntimeError(
+            f"checkpoint phase mismatch: {metadata.get('phase')!r} != {expected_phase!r}"
+        )
+    if expected_step is not None and int(metadata.get("step", -1)) != expected_step:
+        raise RuntimeError(
+            f"checkpoint step mismatch: {metadata.get('step')!r} != {expected_step}"
+        )
+    if expected_seed is not None and int(metadata.get("train_seed", -1)) != expected_seed:
+        raise RuntimeError(
+            f"checkpoint seed mismatch: {metadata.get('train_seed')!r} != {expected_seed}"
+        )
+    expected_identity = _checkpoint_identity(metadata)
+    if metadata.get("checkpoint_identity_sha256") != expected_identity:
+        raise RuntimeError("checkpoint identity digest mismatch")
+    stored_environment = metadata.get("environment")
+    current_environment = _environment_receipt(include_device=False)
+    if not isinstance(stored_environment, Mapping):
+        raise RuntimeError("checkpoint has no environment receipt")
+    for key in ("python", "torch", "transformers", "peft", "cuda_runtime"):
+        if stored_environment.get(key) != current_environment.get(key):
+            raise RuntimeError(
+                f"checkpoint runtime mismatch for {key}: "
+                f"{stored_environment.get(key)!r} != {current_environment.get(key)!r}"
+            )
     adapter_files = metadata.get("adapter_files")
     if not isinstance(adapter_files, Mapping) or not adapter_files:
         raise RuntimeError("checkpoint has no adapter-file hash receipt")
@@ -286,10 +432,24 @@ def _validate_checkpoint_files(
 
 
 def _load_checkpoint(
-    config: Mapping[str, Any], checkpoint: Path, *, trainable: bool = False
+    config: Mapping[str, Any],
+    checkpoint: Path,
+    *,
+    trainable: bool = False,
+    expected_phase: str | None = None,
+    expected_step: int | None = None,
+    expected_seed: int | None = None,
 ) -> tuple[Any, StateLoopModel, dict[str, Any]]:
     metadata = json.loads((checkpoint / "checkpoint.json").read_text(encoding="utf-8"))
-    _validate_checkpoint_files(config, checkpoint, metadata, require_loop_state=True)
+    _validate_checkpoint_files(
+        config,
+        checkpoint,
+        metadata,
+        require_loop_state=True,
+        expected_phase=expected_phase,
+        expected_step=expected_step,
+        expected_seed=expected_seed,
+    )
     tokenizer, base, token_receipt = _load_base(config)
     peft_model = PeftModel.from_pretrained(
         base, str(checkpoint / "adapter"), is_trainable=trainable
@@ -421,17 +581,19 @@ def _k1_parity_error(wrapper: StateLoopModel, batch: Mapping[str, Any]) -> float
     return float((k1.answer_logits - direct).abs().max().cpu())
 
 
-def _smoke_row(config: Mapping[str, Any]) -> dict[str, Any]:
+def _smoke_row(config: Mapping[str, Any], *, worst_case: bool = False) -> dict[str, Any]:
     from .substrate import generate_example
 
     substrate = config["substrate"]
     architecture = config["architecture"]
     return generate_example(
-        seed=99101,
+        seed=99103 if worst_case else 99101,
         split="model_smoke",
-        family=substrate["train_families"][0],
-        template=substrate["train_templates"][0],
-        depth=4,
+        family=(substrate["heldout_family"] if worst_case else substrate["train_families"][0]),
+        # Prose has the longest registered per-node rendering; paired with the
+        # longest braided rule this is the conservative K=max geometry smoke.
+        template="prose" if worst_case else substrate["train_templates"][0],
+        depth=(int(architecture["max_recurrence"]) if worst_case else 4),
         node_count=int(substrate["node_count"]),
         checksum_modulus=int(substrate["checksum_modulus"]),
         num_choices=int(substrate["num_choices"]),
@@ -442,57 +604,110 @@ def _smoke_row(config: Mapping[str, Any]) -> dict[str, Any]:
 
 
 def model_smoke(config: Mapping[str, Any], output: Path) -> None:
+    require_confirmatory_config(config)
+    _require_new_output(output, kind="model-smoke receipt", directory=False)
     started = time.time()
     device_receipt = _require_cuda()
+    torch.cuda.reset_peak_memory_stats()
     torch.manual_seed(99102)
     tokenizer, wrapper, setup = _build_new(config)
     row = _smoke_row(config)
+    worst_row = _smoke_row(config, worst_case=True)
     batch = _encode_row(tokenizer, row, config, k=4, device=torch.device("cuda"))
+    worst_k = int(config["architecture"]["max_recurrence"])
+    worst_batch = _encode_row(
+        tokenizer, worst_row, config, k=worst_k, device=torch.device("cuda")
+    )
     wrapper.eval()
     with torch.no_grad(), torch.autocast("cuda", dtype=torch.bfloat16):
         carry = _forward(wrapper, batch, k=4, mode="carry")
         bag = _forward(wrapper, batch, k=4, mode="bag")
+        carry_k1 = _forward(wrapper, batch, k=1, mode="carry")
+        bag_k1 = _forward(wrapper, batch, k=1, mode="bag")
+    torch.cuda.synchronize()
+    worst_started = time.time()
+    with torch.no_grad(), torch.autocast("cuda", dtype=torch.bfloat16):
+        carry_worst = _forward(wrapper, worst_batch, k=worst_k, mode="carry")
+        bag_worst = _forward(wrapper, worst_batch, k=worst_k, mode="bag")
+    torch.cuda.synchronize()
+    worst_forward_seconds = time.time() - worst_started
     max_error = _k1_parity_error(wrapper, batch)
     allowed = float(config["gates"]["k1_max_logit_abs_error"])
     if max_error > allowed:
         raise RuntimeError(f"K=1 parity failed: max logit error {max_error} > {allowed}")
     if carry.answer_logits.shape != bag.answer_logits.shape:
         raise RuntimeError("carry and bag answer shapes differ")
+    k1_mode_error = float((carry_k1.answer_logits - bag_k1.answer_logits).abs().max().cpu())
+    if k1_mode_error != 0.0:
+        raise RuntimeError(f"Carry/Bag K=1 equality failed: {k1_mode_error}")
+    worst_finite = {
+        "carry": bool(torch.isfinite(carry_worst.answer_logits).all().item()),
+        "bag": bool(torch.isfinite(bag_worst.answer_logits).all().item()),
+    }
+    if not all(worst_finite.values()):
+        raise RuntimeError(f"worst-K forward produced nonfinite logits: {worst_finite}")
 
+    arm_parameter_receipts = {
+        arm: dict(setup["trainable_parameters"]) for arm in ("carry", "bag")
+    }
+    parameter_receipts_equal = (
+        _canonical_sha256(arm_parameter_receipts["carry"])
+        == _canonical_sha256(arm_parameter_receipts["bag"])
+    )
+    if not parameter_receipts_equal:
+        raise RuntimeError("Carry/Bag shared-wrapper parameter receipts differ")
+    gradients_by_arm = {}
+    backward_seconds = {}
     wrapper.train()
-    wrapper.zero_grad(set_to_none=True)
-    with torch.autocast("cuda", dtype=torch.bfloat16):
-        backward = _forward(wrapper, batch, k=4, mode="carry")
-    assert backward.loss is not None
-    backward.loss.backward()
-    gradients = _gradient_receipt(wrapper)
-    for required in ("lora", "state", "sufficiency"):
-        norm = float(gradients[required]["summed_norm"])
-        if not math.isfinite(norm) or norm <= 0:
-            raise RuntimeError(f"model smoke found no {required} gradient")
+    for arm in ("carry", "bag"):
+        wrapper.zero_grad(set_to_none=True)
+        torch.cuda.synchronize()
+        backward_started = time.time()
+        with torch.autocast("cuda", dtype=torch.bfloat16):
+            backward = _forward(wrapper, batch, k=4, mode=arm)
+        assert backward.loss is not None
+        backward.loss.backward()
+        torch.cuda.synchronize()
+        backward_seconds[arm] = time.time() - backward_started
+        gradients = _gradient_receipt(wrapper)
+        for required in ("lora", "state", "sufficiency", "step"):
+            norm = float(gradients[required]["summed_norm"])
+            if not math.isfinite(norm) or norm <= 0:
+                raise RuntimeError(f"model smoke found no {required} gradient for {arm}")
+        gradients_by_arm[arm] = gradients
     if not math.isfinite(max_error):
         raise RuntimeError("K=1 parity produced a nonfinite error")
 
-    receipt = {
+    receipt = _with_receipt_identity({
         "status": "MODEL_SMOKE_PASS",
+        **_identity_receipt(config, phase="g0"),
         "scientific_evidence": False,
-        "model_id": MODEL_ID,
-        "model_revision": MODEL_REVISION,
-        "backend": "transformers",
-        "config_sha256": config_sha256(config),
         "device": device_receipt,
+        "environment": setup["environment"],
         "setup": setup,
         "prompt_tokens": batch["prompt_tokens"],
         "state_slots": int(batch["state_mask"].sum().item()),
         "k1_max_logit_abs_error": max_error,
+        "k1_carry_bag_max_logit_abs_error": k1_mode_error,
         "k1_allowed_error": allowed,
-        "carry_bag_parameter_count_equal": True,
+        "carry_bag_shared_wrapper": True,
+        "carry_bag_parameter_receipts": arm_parameter_receipts,
+        "carry_bag_parameter_receipts_equal": parameter_receipts_equal,
         "carry_shape": list(carry.answer_logits.shape),
         "bag_shape": list(bag.answer_logits.shape),
-        "gradient_receipt": gradients,
+        "gradient_receipts": gradients_by_arm,
+        "k4_forward_backward_seconds": backward_seconds,
+        "worst_k": worst_k,
+        "worst_k_prompt_tokens": worst_batch["prompt_tokens"],
+        "worst_k_forward_seconds": worst_forward_seconds,
+        "worst_k_finite": worst_finite,
+        "worst_k_shapes": {
+            "carry": list(carry_worst.answer_logits.shape),
+            "bag": list(bag_worst.answer_logits.shape),
+        },
         "peak_allocated_gib": torch.cuda.max_memory_allocated() / (1024**3),
         "elapsed_seconds": time.time() - started,
-    }
+    })
     _write_json(output, receipt)
     print(json.dumps(receipt, indent=2, sort_keys=True), flush=True)
 
@@ -523,6 +738,10 @@ def _data_dir(config: Mapping[str, Any]) -> Path:
         "template_holdout",
         "joint_holdout",
         "counterfactual",
+        "pilot_depth",
+        "pilot_joint",
+        "pilot_counterfactual",
+        "pilot_validation",
     }
     if set(files) != required_splits:
         raise RuntimeError("prepared-data manifest has missing or unexpected splits")
@@ -549,35 +768,38 @@ def _save_checkpoint(
     arm: str,
     seed: int,
     step: int,
+    phase: str,
+    pilot: bool,
     setup: Mapping[str, Any],
     data_manifest_sha256: str,
     training_prompt_tokens: int,
     training_layer_token_applications: int,
+    training_order_sha256: str,
 ) -> None:
-    output.mkdir(parents=True, exist_ok=True)
+    _require_new_output(output, kind="checkpoint", directory=True)
     wrapper.peft_model.save_pretrained(output / "adapter", safe_serialization=True)
     loop_state_path = output / "loop_state.pt"
     torch.save(wrapper.extra_state_dict(), loop_state_path)
     metadata = {
         "schema_version": 1,
-        "experiment_id": config["experiment_id"],
-        "model_id": MODEL_ID,
-        "model_revision": MODEL_REVISION,
-        "backend": "transformers",
-        "config_sha256": config_sha256(config),
+        **_identity_receipt(config, phase=phase),
         "train_arm": arm,
         "train_seed": seed,
         "step": step,
+        "pilot": pilot,
         "trainable_parameters": setup["trainable_parameters"],
+        "environment": setup["environment"],
         "data_manifest_sha256": data_manifest_sha256,
         "training_prompt_tokens": training_prompt_tokens,
         "training_layer_token_applications": training_layer_token_applications,
+        "training_order_sha256": training_order_sha256,
         "adapter_files": {},
         "loop_state_sha256": _sha256(loop_state_path),
     }
     for path in (output / "adapter").glob("*"):
         if path.is_file():
             metadata["adapter_files"][path.name] = _sha256(path)
+    metadata["checkpoint_identity_sha256"] = _checkpoint_identity(metadata)
     _write_json(output / "checkpoint.json", metadata)
 
 
@@ -611,38 +833,72 @@ def train(
     seed: int,
     output_dir: Path,
     pilot: bool = False,
+    model_smoke_receipt: Path,
+    promotion_receipt: Path | None = None,
 ) -> None:
+    require_confirmatory_config(config)
     _require_cuda()
-    if arm not in {"carry", "bag", "static"}:
+    if arm not in {"carry", "bag"}:
         raise ValueError(arm)
+    training = config["training"]
+    expected_seeds = (
+        {int(training["pilot_seed"])}
+        if pilot
+        else set(map(int, training["train_seeds"]))
+    )
+    if seed not in expected_seeds:
+        raise RuntimeError(
+            f"seed {seed} is not registered for {'pilot' if pilot else 'full'} training: "
+            f"{sorted(expected_seeds)}"
+        )
+    _read_gate_receipt(
+        model_smoke_receipt,
+        config,
+        allowed_statuses={"MODEL_SMOKE_PASS"},
+        gate_name="G0 model-smoke",
+        expected_phase="g0",
+    )
+    if not pilot:
+        if promotion_receipt is None:
+            raise RuntimeError("full training requires the G1 promotion receipt")
+        _read_gate_receipt(
+            promotion_receipt,
+            config,
+            allowed_statuses={"PILOT_PROMOTION_READY"},
+            gate_name="G1 pilot promotion",
+            expected_phase="pilot",
+        )
+    _require_new_output(
+        output_dir,
+        kind=f"{'pilot' if pilot else 'full'} {arm} training run",
+        directory=True,
+    )
     random.seed(seed)
     torch.manual_seed(seed)
     tokenizer, wrapper, setup = _build_new(config)
     data_dir = _data_dir(config)
     data_manifest_hash = _sha256(data_dir / "manifest.json")
     train_rows = read_jsonl(data_dir / "train.jsonl.gz")
-    validation = read_jsonl(data_dir / "validation.jsonl.gz")
+    validation_split = "pilot_validation" if pilot else "validation"
+    validation = read_jsonl(data_dir / f"{validation_split}.jsonl.gz")
     rng = random.Random(seed)
     rng.shuffle(train_rows)
-    training = config["training"]
     total_steps = int(training["pilot_steps"] if pilot else training["train_steps"])
     accumulation = int(training["gradient_accumulation"])
-    train_k = 1 if arm == "static" else int(training["train_k"])
+    train_k = int(training["train_k"])
     parameters = [parameter for parameter in wrapper.parameters() if parameter.requires_grad]
     optimizer = torch.optim.AdamW(
         parameters,
         lr=float(training["learning_rate"]),
         weight_decay=float(training["weight_decay"]),
     )
-    output_dir.mkdir(parents=True, exist_ok=True)
     metrics_path = output_dir / "train_metrics.jsonl"
-    if metrics_path.exists():
-        raise RuntimeError(f"refusing to overwrite existing run: {output_dir}")
     wrapper.train()
     optimizer.zero_grad(set_to_none=True)
     example_index = 0
     training_prompt_tokens = 0
     training_layer_token_applications = 0
+    training_order_digest = hashlib.sha256()
     loop_layers = int(config["architecture"]["loop_end"]) - int(
         config["architecture"]["loop_start"]
     )
@@ -655,6 +911,26 @@ def train(
             batch = _encode_row(
                 tokenizer, row, config, k=train_k, device=torch.device("cuda")
             )
+            example_layer_token_applications = recurrent_compute_receipt(
+                sequence_tokens=int(batch["prompt_tokens"]),
+                total_layers=int(config["architecture"]["expected_num_layers"]),
+                loop_layers=loop_layers,
+                k=train_k,
+            ).total_layer_token_applications
+            training_order_digest.update(
+                json.dumps(
+                    {
+                        "index": example_index,
+                        "id": row["id"],
+                        "k": train_k,
+                        "prompt_tokens": int(batch["prompt_tokens"]),
+                        "layer_token_applications": example_layer_token_applications,
+                    },
+                    sort_keys=True,
+                    separators=(",", ":"),
+                ).encode("utf-8")
+            )
+            training_order_digest.update(b"\n")
             with torch.autocast("cuda", dtype=torch.bfloat16):
                 output = _forward(wrapper, batch, k=train_k, mode=arm)
                 if output.loss is None:
@@ -664,12 +940,7 @@ def train(
                 scaled = output.loss / accumulation
             scaled.backward()
             training_prompt_tokens += int(batch["prompt_tokens"])
-            training_layer_token_applications += recurrent_compute_receipt(
-                sequence_tokens=int(batch["prompt_tokens"]),
-                total_layers=int(config["architecture"]["expected_num_layers"]),
-                loop_layers=loop_layers,
-                k=train_k,
-            ).total_layer_token_applications
+            training_layer_token_applications += example_layer_token_applications
             totals["loss"] += float(output.loss.detach().cpu()) / accumulation
             totals["answer"] += float(output.answer_loss.detach().cpu()) / accumulation
             totals["state"] += float(output.state_loss.detach().cpu()) / accumulation
@@ -721,26 +992,31 @@ def train(
                 arm=arm,
                 seed=seed,
                 step=step,
+                phase="pilot" if pilot else "full",
+                pilot=pilot,
                 setup=setup,
                 data_manifest_sha256=data_manifest_hash,
                 training_prompt_tokens=training_prompt_tokens,
                 training_layer_token_applications=training_layer_token_applications,
+                training_order_sha256=training_order_digest.hexdigest(),
             )
     _write_json(
         output_dir / "run.json",
-        {
+        _with_receipt_identity({
             "status": "TRAINING_COMPLETE",
+            **_identity_receipt(config, phase="pilot" if pilot else "full"),
             "arm": arm,
             "seed": seed,
             "steps": total_steps,
             "pilot": pilot,
-            "config_sha256": config_sha256(config),
             "data_manifest_sha256": data_manifest_hash,
             "training_prompt_tokens": training_prompt_tokens,
             "training_layer_token_applications": training_layer_token_applications,
+            "training_order_sha256": training_order_digest.hexdigest(),
             "elapsed_seconds": time.time() - started,
+            "environment": setup["environment"],
             "setup": setup,
-        },
+        }),
     )
 
 
@@ -783,6 +1059,17 @@ def _evaluate_cell(
             phase_matches = phase_predictions == batch["state_targets"]["phase"]
             checksum_matches = checksum_predictions == batch["state_targets"]["checksum"]
             joint_matches = node_matches & phase_matches & checksum_matches
+            state_delta_rms_by_step = [
+                float(
+                    (output.states[index] - output.states[index - 1])
+                    .float()
+                    .pow(2)
+                    .mean()
+                    .sqrt()
+                    .cpu()
+                )
+                for index in range(1, len(output.states))
+            ]
             node_correct += int(node_matches.all().item())
             phase_correct += int(phase_matches.all().item())
             checksum_correct += int(
@@ -809,6 +1096,7 @@ def _evaluate_cell(
                     "split": split,
                     "family": row["family"],
                     "template": row["template"],
+                    "query_kind": row["query_kind"],
                     "depth": row["depth"],
                     "k": k,
                     "train_arm": train_arm,
@@ -825,6 +1113,13 @@ def _evaluate_cell(
                     "phase_step_accuracy": phase_step_accuracy,
                     "checksum_step_accuracy": checksum_step_accuracy,
                     "joint_step_accuracy": joint_step_accuracy,
+                    "state_delta_rms_by_step": state_delta_rms_by_step,
+                    "mean_state_delta_rms": (
+                        sum(state_delta_rms_by_step) / len(state_delta_rms_by_step)
+                        if state_delta_rms_by_step
+                        else 0.0
+                    ),
+                    "loop_diagnostics": output.diagnostics,
                     "prompt_tokens": batch["prompt_tokens"],
                     "layer_token_applications": compute.total_layer_token_applications,
                 },
@@ -861,65 +1156,115 @@ def _counterfactual_swaps(
     for row in rows:
         pairs.setdefault(row["pair_id"], []).append(row)
     selected = sorted(pairs.items())[:limit_pairs] if limit_pairs else sorted(pairs.items())
-    donor_follow = recipient_preserve = baseline_correct = 0
-    evaluated = 0
+    donor_follow = recipient_preserve = baseline_correct = baseline_donor_follow = 0
+    evaluated_pairs = evaluated_directions = 0
     wrapper.eval()
     with torch.no_grad():
         for pair_id, pair in selected:
             if len(pair) != 2:
                 raise RuntimeError(f"counterfactual pair {pair_id} does not have exactly two rows")
-            recipient, donor = pair
-            k = int(recipient["depth"])
+            first, second = pair
+            if int(first["depth"]) != int(second["depth"]):
+                raise RuntimeError(f"counterfactual pair {pair_id} has unequal depths")
+            k = int(first["depth"])
             swap_step = max(1, k // 2)
-            donor_batch = _encode_row(tokenizer, donor, config, k=k, device=torch.device("cuda"))
-            recipient_batch = _encode_row(
-                tokenizer, recipient, config, k=k, device=torch.device("cuda")
-            )
-            with torch.autocast("cuda", dtype=torch.bfloat16):
-                donor_output = _forward(wrapper, donor_batch, k=k, mode="carry")
-                recipient_output = _forward(wrapper, recipient_batch, k=k, mode="carry")
-                swapped_output = _forward(
-                    wrapper,
-                    recipient_batch,
-                    k=k,
-                    mode="carry",
-                    state_override={swap_step: donor_output.states[swap_step - 1]},
+            first_batch = _encode_row(tokenizer, first, config, k=k, device=torch.device("cuda"))
+            second_batch = _encode_row(tokenizer, second, config, k=k, device=torch.device("cuda"))
+            geometry_equal = (
+                first_batch["input_ids"].shape == second_batch["input_ids"].shape
+                and torch.equal(first_batch["state_mask"], second_batch["state_mask"])
+                and torch.equal(
+                    first_batch["answer_positions"], second_batch["answer_positions"]
                 )
-            donor_value = donor["choices"][donor["correct_choice"]]
-            donor_choice_in_recipient = recipient["choices"].index(donor_value)
-            baseline_prediction, _, _ = _choice_prediction(
-                recipient_output, recipient_batch["answer_token_ids"]
+                and int(first_batch["prompt_tokens"]) == int(second_batch["prompt_tokens"])
             )
-            swapped_prediction, _, _ = _choice_prediction(
-                swapped_output, recipient_batch["answer_token_ids"]
-            )
-            baseline_hit = baseline_prediction == int(recipient["correct_choice"])
-            follows = swapped_prediction == donor_choice_in_recipient
-            preserves = swapped_prediction == int(recipient["correct_choice"])
-            baseline_correct += baseline_hit
-            donor_follow += follows
-            recipient_preserve += preserves
-            evaluated += 1
-            _append_jsonl(
-                output_path,
-                {
-                    "pair_id": pair_id,
-                    "depth": k,
-                    "swap_step": swap_step,
-                    "baseline_prediction": baseline_prediction,
-                    "swapped_prediction": swapped_prediction,
-                    "recipient_choice": recipient["correct_choice"],
-                    "donor_choice_in_recipient": donor_choice_in_recipient,
-                    "baseline_correct": baseline_hit,
-                    "donor_follow": follows,
-                    "recipient_preserve": preserves,
-                },
-            )
+            if not geometry_equal:
+                raise RuntimeError(
+                    f"counterfactual pair {pair_id} has incompatible token/state geometry"
+                )
+            with torch.autocast("cuda", dtype=torch.bfloat16):
+                first_output = _forward(wrapper, first_batch, k=k, mode="carry")
+                second_output = _forward(wrapper, second_batch, k=k, mode="carry")
+            for direction, donor, recipient, donor_batch, recipient_batch, donor_output, recipient_output in (
+                (
+                    "a_to_b",
+                    first,
+                    second,
+                    first_batch,
+                    second_batch,
+                    first_output,
+                    second_output,
+                ),
+                (
+                    "b_to_a",
+                    second,
+                    first,
+                    second_batch,
+                    first_batch,
+                    second_output,
+                    first_output,
+                ),
+            ):
+                with torch.autocast("cuda", dtype=torch.bfloat16):
+                    swapped_output = _forward(
+                        wrapper,
+                        recipient_batch,
+                        k=k,
+                        mode="carry",
+                        state_override={swap_step: donor_output.states[swap_step - 1]},
+                    )
+                donor_value = donor["choices"][donor["correct_choice"]]
+                donor_choice_in_recipient = recipient["choices"].index(donor_value)
+                baseline_prediction, _, _ = _choice_prediction(
+                    recipient_output, recipient_batch["answer_token_ids"]
+                )
+                donor_baseline_prediction, _, _ = _choice_prediction(
+                    donor_output, donor_batch["answer_token_ids"]
+                )
+                swapped_prediction, _, _ = _choice_prediction(
+                    swapped_output, recipient_batch["answer_token_ids"]
+                )
+                baseline_hit = baseline_prediction == int(recipient["correct_choice"])
+                baseline_follows_donor = baseline_prediction == donor_choice_in_recipient
+                follows = swapped_prediction == donor_choice_in_recipient
+                preserves = swapped_prediction == int(recipient["correct_choice"])
+                baseline_correct += baseline_hit
+                baseline_donor_follow += baseline_follows_donor
+                donor_follow += follows
+                recipient_preserve += preserves
+                evaluated_directions += 1
+                _append_jsonl(
+                    output_path,
+                    {
+                        "pair_id": pair_id,
+                        "direction": direction,
+                        "depth": k,
+                        "swap_step": swap_step,
+                        "geometry_equal": True,
+                        "prompt_tokens": int(recipient_batch["prompt_tokens"]),
+                        "baseline_prediction": baseline_prediction,
+                        "donor_baseline_prediction": donor_baseline_prediction,
+                        "swapped_prediction": swapped_prediction,
+                        "recipient_choice": recipient["correct_choice"],
+                        "donor_choice_in_recipient": donor_choice_in_recipient,
+                        "baseline_correct": baseline_hit,
+                        "baseline_recipient_correct": baseline_hit,
+                        "baseline_donor_follow": baseline_follows_donor,
+                        "donor_baseline_correct": (
+                            donor_baseline_prediction == int(donor["correct_choice"])
+                        ),
+                        "donor_follow": follows,
+                        "recipient_preserve": preserves,
+                    },
+                )
+            evaluated_pairs += 1
     return {
-        "pairs": evaluated,
-        "baseline_accuracy": baseline_correct / evaluated,
-        "donor_follow_rate": donor_follow / evaluated,
-        "recipient_preserve_rate": recipient_preserve / evaluated,
+        "pairs": evaluated_pairs,
+        "directions": evaluated_directions,
+        "baseline_accuracy": baseline_correct / evaluated_directions,
+        "baseline_donor_follow_rate": baseline_donor_follow / evaluated_directions,
+        "donor_follow_rate": donor_follow / evaluated_directions,
+        "recipient_preserve_rate": recipient_preserve / evaluated_directions,
     }
 
 
@@ -928,23 +1273,37 @@ def evaluate(
     *,
     checkpoint: Path,
     arm: str,
+    expected_seed: int,
     output_dir: Path,
     pilot: bool = False,
 ) -> None:
+    require_confirmatory_config(config)
     _require_cuda()
-    tokenizer, wrapper, setup = _load_checkpoint(config, checkpoint)
+    _require_new_output(output_dir, kind="evaluation run", directory=True)
+    expected_phase = "pilot" if pilot else "full"
+    expected_step = int(
+        config["training"]["pilot_steps"] if pilot else config["training"]["train_steps"]
+    )
+    tokenizer, wrapper, setup = _load_checkpoint(
+        config,
+        checkpoint,
+        expected_phase=expected_phase,
+        expected_step=expected_step,
+        expected_seed=expected_seed,
+    )
     train_arm = setup["checkpoint_metadata"]["train_arm"]
-    if arm not in {"carry", "bag", "static"}:
+    if bool(setup["checkpoint_metadata"].get("pilot")) != pilot:
+        raise RuntimeError("checkpoint pilot flag disagrees with evaluation phase")
+    if arm not in {"carry", "bag"}:
         raise ValueError(arm)
-    if arm == "static" and train_arm != "static":
-        raise RuntimeError("static evaluation requires a static checkpoint")
     data_dir = _data_dir(config)
     data_manifest_hash = _sha256(data_dir / "manifest.json")
     if setup["checkpoint_metadata"].get("data_manifest_sha256") != data_manifest_hash:
         raise RuntimeError("checkpoint and evaluation data manifests differ")
     checkpoint_k1_error = None
     if train_arm in {"carry", "bag"}:
-        parity_row = read_jsonl(data_dir / "validation.jsonl.gz")[0]
+        parity_split = "pilot_validation" if pilot else "validation"
+        parity_row = read_jsonl(data_dir / f"{parity_split}.jsonl.gz")[0]
         parity_batch = _encode_row(
             tokenizer, parity_row, config, k=1, device=torch.device("cuda")
         )
@@ -954,10 +1313,7 @@ def evaluate(
             raise RuntimeError(
                 f"checkpoint K=1 parity failed: {checkpoint_k1_error} > {allowed}"
             )
-    output_dir.mkdir(parents=True, exist_ok=True)
     rows_path = output_dir / "rows.jsonl"
-    if rows_path.exists():
-        raise RuntimeError(f"refusing to overwrite existing evaluation: {output_dir}")
     summaries = []
     started = time.time()
     evaluation_config = config["evaluation"]
@@ -978,15 +1334,30 @@ def evaluate(
             )
         )
 
-    if arm == "static":
-        for split in ("validation", "depth_extrapolation", "joint_holdout"):
-            rows = read_jsonl(data_dir / f"{split}.jsonl.gz")
-            run_cell(
-                split,
-                rows,
-                1,
-                int(evaluation_config["pilot_items_per_cell"]) if pilot else None,
-            )
+    edge_cut = train_arm == "carry" and arm == "bag"
+    if edge_cut:
+        if pilot:
+            raise RuntimeError("edge-cut evaluation is a full-phase causal endpoint")
+        depth_rows = read_jsonl(data_dir / "depth_extrapolation.jsonl.gz")
+        grouped: dict[int, list[dict[str, Any]]] = {}
+        for row in depth_rows:
+            grouped.setdefault(int(row["depth"]), []).append(row)
+        for depth, group in sorted(grouped.items()):
+            run_cell("depth_extrapolation", group, depth, None)
+    elif pilot:
+        depth_rows = read_jsonl(data_dir / "pilot_depth.jsonl.gz")
+        by_depth: dict[int, list[dict[str, Any]]] = {}
+        for row in depth_rows:
+            by_depth.setdefault(int(row["depth"]), []).append(row)
+        for depth, group in sorted(by_depth.items()):
+            for k in sorted({int(config["training"]["train_k"]), depth}):
+                run_cell("pilot_depth", group, k, None)
+        joint_rows = read_jsonl(data_dir / "pilot_joint.jsonl.gz")
+        joint_grouped: dict[int, list[dict[str, Any]]] = {}
+        for row in joint_rows:
+            joint_grouped.setdefault(int(row["depth"]), []).append(row)
+        for depth, group in sorted(joint_grouped.items()):
+            run_cell("pilot_joint", group, depth, None)
     else:
         validation = read_jsonl(data_dir / "validation.jsonl.gz")
         for k in (1, 4, 8, 12):
@@ -994,36 +1365,26 @@ def evaluate(
                 "validation",
                 validation,
                 k,
-                int(evaluation_config["pilot_items_per_cell"]) if pilot else None,
+                None,
             )
 
         depth_rows = read_jsonl(data_dir / "depth_extrapolation.jsonl.gz")
         by_depth: dict[int, list[dict[str, Any]]] = {}
         for row in depth_rows:
             by_depth.setdefault(int(row["depth"]), []).append(row)
-        pilot_per_depth = max(
-            1,
-            int(evaluation_config["pilot_items_per_cell"]) // max(len(by_depth), 1),
-        )
         for depth, group in sorted(by_depth.items()):
-            if pilot:
-                # The same items receive K=train_K and K=semantic-depth, making
-                # the first unseen-recurrence comparison genuinely paired.
-                for k in sorted({int(config["training"]["train_k"]), depth}):
-                    run_cell("depth_extrapolation", group, k, pilot_per_depth)
-            else:
-                full_ks = {int(config["training"]["train_k"]), depth}
-                for k in evaluation_config["k_values"]:
-                    run_cell(
-                        "depth_extrapolation",
-                        group,
-                        int(k),
-                        None
-                        if int(k) in full_ks
-                        else int(evaluation_config["curve_items_per_depth"]),
-                    )
+            full_ks = {int(config["training"]["train_k"]), depth}
+            for k in evaluation_config["k_values"]:
+                run_cell(
+                    "depth_extrapolation",
+                    group,
+                    int(k),
+                    None
+                    if int(k) in full_ks
+                    else int(evaluation_config["curve_items_per_depth"]),
+                )
 
-        holdout_splits = ("joint_holdout",) if pilot else (
+        holdout_splits = (
             "family_holdout",
             "template_holdout",
             "joint_holdout",
@@ -1038,28 +1399,35 @@ def evaluate(
                     split,
                     group,
                     depth,
-                    pilot_per_depth
-                    if pilot
-                    else int(evaluation_config["holdout_items_per_depth"]),
+                    int(evaluation_config["holdout_items_per_depth"]),
                 )
     swap_summary = None
     if arm == "carry":
-        counterfactual = read_jsonl(data_dir / "counterfactual.jsonl.gz")
+        swap_split = "pilot_counterfactual" if pilot else "counterfactual"
+        counterfactual = read_jsonl(data_dir / f"{swap_split}.jsonl.gz")
+        swap_path = output_dir / "counterfactual_swaps.jsonl"
         swap_summary = _counterfactual_swaps(
             wrapper,
             tokenizer,
             counterfactual,
             config,
-            output_dir / "counterfactual_swaps.jsonl",
-            limit_pairs=64 if pilot else None,
+            swap_path,
+            limit_pairs=None,
         )
-    receipt = {
+        swap_summary["counterfactual_swap_row_file"] = swap_path.name
+        swap_summary["counterfactual_swap_row_file_sha256"] = _sha256(swap_path)
+    receipt = _with_receipt_identity({
         "status": "EVALUATION_COMPLETE",
+        **_identity_receipt(config, phase=expected_phase),
         "pilot": pilot,
+        "edge_cut_primary_only": edge_cut,
         "train_arm": train_arm,
         "eval_mode": arm,
+        "expected_seed": expected_seed,
         "checkpoint": str(checkpoint),
-        "config_sha256": config_sha256(config),
+        "checkpoint_identity_sha256": setup["checkpoint_metadata"][
+            "checkpoint_identity_sha256"
+        ],
         "data_manifest_sha256": data_manifest_hash,
         "checkpoint_k1_max_logit_abs_error": checkpoint_k1_error,
         "backend": "transformers",
@@ -1068,13 +1436,18 @@ def evaluate(
         "row_file": rows_path.name,
         "row_file_sha256": _sha256(rows_path),
         "elapsed_seconds": time.time() - started,
+        "environment": _environment_receipt(include_device=False),
         "setup": setup,
-    }
+    })
     _write_json(output_dir / "summary.json", receipt)
 
 
 def train_text_baseline(
-    config: Mapping[str, Any], *, seed: int, output_dir: Path
+    config: Mapping[str, Any],
+    *,
+    seed: int,
+    output_dir: Path,
+    mechanism_receipt: Path,
 ) -> None:
     """Train the explicit-state-trace baseline on the identical procedural rows.
 
@@ -1082,7 +1455,19 @@ def train_text_baseline(
     standard Qwen autoregression.  It is phase-gated and should run only after
     the carry-vs-bag mechanism gate opens.
     """
+    require_confirmatory_config(config)
     _require_cuda()
+    expected_seeds = set(map(int, config["training"]["train_seeds"]))
+    if seed not in expected_seeds:
+        raise RuntimeError(f"text seed {seed} is not registered: {sorted(expected_seeds)}")
+    _read_gate_receipt(
+        mechanism_receipt,
+        config,
+        allowed_statuses={"MECHANISTIC_DEPTH_POSITIVE"},
+        gate_name="G2/G3 mechanism",
+        expected_phase="full",
+    )
+    _require_new_output(output_dir, kind="text-baseline training run", directory=True)
     random.seed(seed)
     torch.manual_seed(seed)
     tokenizer, base, token_receipt = _load_base(config)
@@ -1097,15 +1482,15 @@ def train_text_baseline(
         lr=float(training["learning_rate"]),
         weight_decay=float(training["weight_decay"]),
     )
-    output_dir.mkdir(parents=True, exist_ok=True)
     metrics = output_dir / "train_metrics.jsonl"
-    if metrics.exists():
-        raise RuntimeError(f"refusing to overwrite {output_dir}")
     peft_model.train()
     optimizer.zero_grad(set_to_none=True)
     accumulation = int(training["gradient_accumulation"])
     total_steps = int(training["train_steps"])
     index = 0
+    training_order_digest = hashlib.sha256()
+    training_prompt_tokens = 0
+    training_layer_token_applications = 0
     for step in range(1, total_steps + 1):
         loss_sum = 0.0
         for _ in range(accumulation):
@@ -1125,6 +1510,25 @@ def train_text_baseline(
             if full_ids[: len(prompt_ids)] != prompt_ids:
                 raise RuntimeError("text-baseline target retokenized the frozen prompt prefix")
             target_ids = full_ids[len(prompt_ids) :]
+            example_layer_token_applications = len(full_ids) * int(
+                config["architecture"]["expected_num_layers"]
+            )
+            training_order_digest.update(
+                json.dumps(
+                    {
+                        "index": index,
+                        "id": row["id"],
+                        "k": None,
+                        "prompt_tokens": len(prompt_ids),
+                        "layer_token_applications": example_layer_token_applications,
+                    },
+                    sort_keys=True,
+                    separators=(",", ":"),
+                ).encode("utf-8")
+            )
+            training_order_digest.update(b"\n")
+            training_prompt_tokens += len(prompt_ids)
+            training_layer_token_applications += example_layer_token_applications
             ids = torch.tensor([full_ids], device="cuda", dtype=torch.long)
             labels = torch.tensor(
                 [[-100] * len(prompt_ids) + target_ids], device="cuda", dtype=torch.long
@@ -1165,24 +1569,44 @@ def train_text_baseline(
         for path in (output_dir / "adapter").glob("*")
         if path.is_file()
     }
-    _write_json(
-        output_dir / "checkpoint.json",
-        {
+    checkpoint_metadata = {
             "schema_version": 1,
-            "experiment_id": config["experiment_id"],
-            "model_id": MODEL_ID,
-            "model_revision": MODEL_REVISION,
-            "backend": "transformers",
-            "config_sha256": config_sha256(config),
+            **_identity_receipt(config, phase="text"),
             "train_arm": "text_baseline",
             "train_seed": seed,
             "step": total_steps,
+            "pilot": False,
             "data_manifest_sha256": _sha256(data_dir / "manifest.json"),
             "lora_targets": targets,
             "trainable_parameters": trainable_receipt,
+            "environment": _environment_receipt(include_device=True),
             "tokenizer": token_receipt,
             "adapter_files": adapter_files,
-        },
+            "training_prompt_tokens": training_prompt_tokens,
+            "training_layer_token_applications": training_layer_token_applications,
+            "training_order_sha256": training_order_digest.hexdigest(),
+        }
+    checkpoint_metadata["checkpoint_identity_sha256"] = _checkpoint_identity(
+        checkpoint_metadata
+    )
+    _write_json(output_dir / "checkpoint.json", checkpoint_metadata)
+    _write_json(
+        output_dir / "run.json",
+        _with_receipt_identity(
+            {
+                "status": "TEXT_TRAINING_COMPLETE",
+                **_identity_receipt(config, phase="text"),
+                "seed": seed,
+                "step": total_steps,
+                "checkpoint_identity_sha256": checkpoint_metadata[
+                    "checkpoint_identity_sha256"
+                ],
+                "training_prompt_tokens": training_prompt_tokens,
+                "training_layer_token_applications": training_layer_token_applications,
+                "training_order_sha256": training_order_digest.hexdigest(),
+                "environment": checkpoint_metadata["environment"],
+            }
+        ),
     )
 
 
@@ -1199,15 +1623,35 @@ def _parse_generated_choice(text: str) -> int | None:
 
 
 def evaluate_sample_more(
-    config: Mapping[str, Any], *, checkpoint: Path, output_dir: Path
+    config: Mapping[str, Any],
+    *,
+    checkpoint: Path,
+    expected_seed: int,
+    output_dir: Path,
+    mechanism_receipt: Path,
 ) -> None:
-    """Explicit-CoT sample-more comparator under layer-token compute matching."""
+    """Explicit-CoT sample-more comparator under frozen layer-token allocation."""
+    require_confirmatory_config(config)
     _require_cuda()
+    _read_gate_receipt(
+        mechanism_receipt,
+        config,
+        allowed_statuses={"MECHANISTIC_DEPTH_POSITIVE"},
+        gate_name="G2/G3 mechanism",
+        expected_phase="full",
+    )
+    _require_new_output(output_dir, kind="sample-more evaluation", directory=True)
     metadata = json.loads((checkpoint / "checkpoint.json").read_text(encoding="utf-8"))
     if metadata["train_arm"] != "text_baseline":
         raise RuntimeError("sample-more requires an explicit text-baseline checkpoint")
     _validate_checkpoint_files(
-        config, checkpoint, metadata, require_loop_state=False
+        config,
+        checkpoint,
+        metadata,
+        require_loop_state=False,
+        expected_phase="text",
+        expected_step=int(config["training"]["train_steps"]),
+        expected_seed=expected_seed,
     )
     tokenizer, base, token_receipt = _load_base(config)
     model = PeftModel.from_pretrained(
@@ -1219,22 +1663,26 @@ def evaluate_sample_more(
     if metadata.get("data_manifest_sha256") != data_manifest_hash:
         raise RuntimeError("text checkpoint and sample-more data manifests differ")
     rows = read_jsonl(data_dir / "depth_extrapolation.jsonl.gz")
-    output_dir.mkdir(parents=True, exist_ok=True)
     rows_path = output_dir / "rows.jsonl"
-    if rows_path.exists():
-        raise RuntimeError(f"refusing to overwrite {output_dir}")
     layer_count = int(config["architecture"]["expected_num_layers"])
-    loop_layers = int(config["architecture"]["loop_end"]) - int(config["architecture"]["loop_start"])
+    loop_layers = int(config["architecture"]["loop_end"]) - int(
+        config["architecture"]["loop_start"]
+    )
+    sampling = config["evaluation"]["sample_more"]
     total_generation_seconds = 0.0
     total_sampled_tokens = 0
     total_allocated_new_tokens = 0
+    total_natural_closes = 0
+    total_cap_contacts = 0
     for row in rows:
         recurrent_rendered = _render(tokenizer, row, thinking=False)
         recurrent_prompt_tokens = len(
             tokenizer.encode(recurrent_rendered, add_special_tokens=False)
         )
         rendered = _render(tokenizer, _without_workspace(row, config), thinking=True)
-        prompt_ids = tokenizer(rendered, add_special_tokens=False, return_tensors="pt").input_ids.cuda()
+        prompt_ids = tokenizer(
+            rendered, add_special_tokens=False, return_tensors="pt"
+        ).input_ids.cuda()
         k = int(row["depth"])
         recurrent_budget = recurrent_compute_receipt(
             sequence_tokens=recurrent_prompt_tokens,
@@ -1242,45 +1690,69 @@ def evaluate_sample_more(
             loop_layers=loop_layers,
             k=k,
         ).total_layer_token_applications
-        # Allocate at least 64 reasoning tokens per sample, then maximize the
-        # number of independent samples under the same layer-token budget.
-        candidates = []
-        for n in range(1, 9):
-            remaining = recurrent_budget // (layer_count * n) - prompt_ids.shape[1]
-            if remaining >= 64:
-                candidates.append((n, min(int(remaining), 256)))
-        n, max_new = candidates[-1] if candidates else (1, 1)
+        desired_new = min(
+            int(sampling["max_new_tokens"]),
+            int(sampling["fixed_overhead_tokens"])
+            + int(sampling["desired_tokens_per_transition"]) * k,
+        )
+        feasible = [
+            candidate_n
+            for candidate_n in range(1, int(sampling["max_samples"]) + 1)
+            if recurrent_budget // (layer_count * candidate_n) - prompt_ids.shape[1]
+            >= desired_new
+        ]
+        if not feasible:
+            raise RuntimeError(
+                "sample-more budget cannot fund the frozen per-sample reasoning allowance"
+            )
+        n = feasible[-1]
+        max_new = min(
+            int(sampling["max_new_tokens"]),
+            int(recurrent_budget // (layer_count * n) - prompt_ids.shape[1]),
+        )
         sample_seed = int.from_bytes(
             hashlib.blake2b(row["id"].encode("utf-8"), digest_size=8).digest(), "big"
         ) % (2**31)
         torch.manual_seed(sample_seed)
+        generation_kwargs: dict[str, Any] = {
+            "input_ids": prompt_ids,
+            "do_sample": bool(sampling["do_sample"]),
+            "max_new_tokens": max_new,
+            "num_return_sequences": n,
+            "use_cache": True,
+            "pad_token_id": tokenizer.eos_token_id,
+        }
+        if bool(sampling["do_sample"]):
+            generation_kwargs.update(
+                {
+                    "temperature": float(sampling["temperature"]),
+                    "top_p": float(sampling["top_p"]),
+                    "top_k": int(sampling["top_k"]),
+                }
+            )
         torch.cuda.synchronize()
         generation_started = time.time()
         with torch.no_grad():
-            generated = model.generate(
-                input_ids=prompt_ids,
-                do_sample=True,
-                temperature=0.6,
-                top_p=0.95,
-                top_k=20,
-                max_new_tokens=max_new,
-                num_return_sequences=n,
-                use_cache=True,
-                pad_token_id=tokenizer.eos_token_id,
-            )
+            generated = model.generate(**generation_kwargs)
         torch.cuda.synchronize()
         generation_seconds = time.time() - generation_started
         continuations = generated[:, prompt_ids.shape[1] :]
         generated_token_counts = []
+        cap_contacts = []
+        continuation_token_ids = []
         for continuation in continuations:
             token_list = continuation.tolist()
             try:
-                generated_token_counts.append(token_list.index(tokenizer.eos_token_id) + 1)
+                generated_count = token_list.index(tokenizer.eos_token_id) + 1
             except ValueError:
-                generated_token_counts.append(len(token_list))
-        samples = tokenizer.batch_decode(
-            continuations, skip_special_tokens=False
-        )
+                generated_count = len(token_list)
+            generated_token_counts.append(generated_count)
+            cap_contacts.append(
+                tokenizer.eos_token_id not in token_list and generated_count >= max_new
+            )
+            continuation_token_ids.append(token_list[:generated_count])
+        samples = tokenizer.batch_decode(continuations, skip_special_tokens=False)
+        natural_closes = ["</think>" in sample for sample in samples]
         choices = [_parse_generated_choice(sample) for sample in samples]
         valid = [choice for choice in choices if choice is not None]
         counts = {choice: valid.count(choice) for choice in range(4)}
@@ -1294,18 +1766,34 @@ def evaluate_sample_more(
         total_generation_seconds += generation_seconds
         total_sampled_tokens += sum(generated_token_counts)
         total_allocated_new_tokens += n * max_new
+        total_natural_closes += sum(natural_closes)
+        total_cap_contacts += sum(cap_contacts)
         _append_jsonl(
             rows_path,
             {
                 "id": row["id"],
                 "depth": row["depth"],
+                "query_kind": row["query_kind"],
+                "correct_choice": correct,
                 "n": n,
                 "max_new_tokens": max_new,
+                "recurrent_prompt_tokens": recurrent_prompt_tokens,
+                "sample_prompt_tokens": int(prompt_ids.shape[1]),
+                "model_layers": layer_count,
+                "loop_layers": loop_layers,
                 "recurrent_layer_token_budget": recurrent_budget,
                 "sample_layer_token_budget": sample_budget,
                 "sample_seed": sample_seed,
                 "text_train_seed": metadata["train_seed"],
+                "checkpoint_identity_sha256": metadata[
+                    "checkpoint_identity_sha256"
+                ],
+                "sampling_config": dict(sampling),
                 "generated_token_counts": generated_token_counts,
+                "continuation_token_ids": continuation_token_ids,
+                "decoded_samples": samples,
+                "natural_close": natural_closes,
+                "cap_contact": cap_contacts,
                 "sampled_tokens": sum(generated_token_counts),
                 "allocated_new_tokens": n * max_new,
                 "generation_seconds": generation_seconds,
@@ -1317,18 +1805,27 @@ def evaluate_sample_more(
         )
     _write_json(
         output_dir / "summary.json",
-        {
-            "status": "SAMPLE_MORE_COMPLETE",
-            "backend": "transformers",
-            "config_sha256": config_sha256(config),
-            "checkpoint": str(checkpoint),
-            "data_manifest_sha256": data_manifest_hash,
-            "text_train_seed": metadata["train_seed"],
-            "rows": rows_path.name,
-            "rows_sha256": _sha256(rows_path),
-            "sampled_tokens": total_sampled_tokens,
-            "allocated_new_tokens": total_allocated_new_tokens,
-            "generation_seconds": total_generation_seconds,
-            "tokenizer": token_receipt,
-        },
+        _with_receipt_identity(
+            {
+                "status": "SAMPLE_MORE_COMPLETE",
+                **_identity_receipt(config, phase="sample_more"),
+                "checkpoint": str(checkpoint),
+                "checkpoint_identity_sha256": metadata[
+                    "checkpoint_identity_sha256"
+                ],
+                "data_manifest_sha256": data_manifest_hash,
+                "expected_seed": expected_seed,
+                "text_train_seed": metadata["train_seed"],
+                "rows": rows_path.name,
+                "rows_sha256": _sha256(rows_path),
+                "sampled_tokens": total_sampled_tokens,
+                "allocated_new_tokens": total_allocated_new_tokens,
+                "natural_closes": total_natural_closes,
+                "cap_contacts": total_cap_contacts,
+                "generation_seconds": total_generation_seconds,
+                "sampling_config": dict(sampling),
+                "environment": _environment_receipt(include_device=False),
+                "tokenizer": token_receipt,
+            }
+        ),
     )

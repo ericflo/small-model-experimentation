@@ -1,33 +1,59 @@
 {
   "carry_vs_bag": {
     "available": false,
+    "expected_model_seeds": [
+      7411,
+      7412,
+      7413
+    ],
+    "observed_model_seeds": [],
     "reason": "no separately trained carry/bag matched-depth rows",
     "seed_receipts": []
   },
+  "config_sha256": "70e4a2d6df7acb0c5a21c7c945c66499a0ede8e98321c7b56da1c080c819744b",
   "counterfactual_swaps": {
     "available": false,
+    "complete": false,
+    "expected_model_seeds": [
+      7411,
+      7412,
+      7413
+    ],
+    "model_seeds": [],
+    "passes": false,
     "seeds": []
   },
+  "data_manifest_sha256": null,
   "deployment_comparison": {
     "available": false,
-    "required_training_seed_pairs": 3,
-    "seed_receipts": [],
-    "training_seed_pairs": 0
+    "expected_model_seeds": [
+      7411,
+      7412,
+      7413
+    ],
+    "model_seeds": [],
+    "seed_receipts": []
   },
   "evaluation_bundles": 0,
   "experiment_id": "qwen35_4b_state_carry_vs_state_bag",
+  "joint_holdout_carry_vs_bag": {
+    "available": false
+  },
+  "phase": "setup",
+  "pilot_gate": null,
+  "receipt_identity_sha256": "b885226f0a9d10ab575141264cc67d036ff7b0d6f0101e538cbcc8c9071bb579",
+  "requirements_training_lock_sha256": "05546fe977583116d6169ea0dfa7b27e1184dd4a2b61d556dfb3f889d5b2b7b1",
   "sample_more": {
     "available": false
   },
-  "schema_version": 1,
+  "schema_version": 2,
+  "source_contract_sha256": "2df7e3400ba1c01841c5557dd02011020b9f1cb2b5b93efc92cd4393263402a0",
   "state_sufficiency": {
     "available": false
   },
   "trained_checkpoint_edge_cut": {
     "available": false,
-    "diagnostic_only": true,
-    "seeds": [],
-    "training_seed_pairs": 0
+    "model_seeds": []
   },
   "unseen_k_scaling": {
     "available": false,

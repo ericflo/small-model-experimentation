@@ -88,7 +88,15 @@ LoRA is disabled during:
 - coda; and
 - direct K=1 parity evaluation.
 
-It is enabled during every extra R application. The static diagnostic instead enables the same LoRA during the one ordinary R application and never claims base parity.
+It is enabled during every extra R application and nowhere on the ordinary K=1 path.
+
+Rank 32 constrains each learned weight update, not the dimensionality of the recurrent activation.
+Every update is added to a full pretrained projection; eight nonlinear Qwen layers, residual paths,
+and repeated applications can therefore move the full-width hidden state through a high-dimensional
+trajectory. The genuine risk is narrower: the task-specific change available at each projection may
+be too low-rank to install the required transition operator. Dense joint-state supervision and the
+full-width eight-slot workspace make LoRA plausible, while preregistration section 10's full-rank
+extra-call successor resolves that remaining capacity counterfactual if state formation fails.
 
 ## Stabilization
 
@@ -101,11 +109,14 @@ It is enabled during every extra R application. The static diagnostic instead en
 
 These choices make the first extra computation a small refinement while leaving room for training to increase its magnitude.
 
-## Semantic Echo Branch
+## Interface Scope
 
-Primary mode carries the continuous Qwen state unchanged. Mixed mode computes the frozen LM-head logits at every state slot, takes top 32 tokens, softmaxes their logits, re-embeds them through the frozen token table, and mixes this semantic echo with the continuous state through one learned scalar.
-
-The mixed branch exists because readable-but-unusable representations are a demonstrated failure mode. It is not the principal novelty and cannot be evaluated without its own Bag twin.
+This experiment carries the continuous Qwen state unchanged. An earlier conditional semantic
+decode/re-embed branch was removed in the final pre-run review: it changes the architecture,
+lacked its promised shuffled/wrong-task controls, and would turn a confirmatory experiment into
+outcome-dependent design search. If the continuous run produces a readable-but-unused signature,
+that interface intervention belongs in a separately preregistered successor experiment with its own
+Carry/Bag pair and controls.
 
 ## Compute Accounting
 
@@ -115,7 +126,7 @@ For sequence length `L`, K recurrent applications, 32 total layers, and 8 loop l
 layer-token applications = L * (32 + 8 * (K - 1))
 ```
 
-Prelude and coda run once; the first R is already part of the 32-layer base pass. Carry and Bag have identical receipts. Explicit-CoT sampling may spend no more than this many decoder-layer token applications, computed from its own prompt and generated-token lengths.
+Prelude and coda run once; the first R is already part of the 32-layer base pass. Carry and Bag have identical receipts. Explicit-CoT sampling may spend no more than this many decoder-layer token applications, computed from its own prompt and allocated generation lengths. Its sampling parameters and depth-aware minimum allowance are frozen before confirmation; cap contact or parse failure beyond the registered limits invalidates a deployment comparison rather than manufacturing a recurrence win.
 
 This unit is transparent and architecture-local, not a claim of exact wall-clock FLOP equivalence. GPU seconds and peak VRAM are retained as diagnostics.
 
@@ -125,6 +136,6 @@ Every checkpoint contains:
 
 - PEFT adapter directory;
 - `loop_state.pt` for initializer, step projection, sufficiency heads, and scalars;
-- `checkpoint.json` with model/revision/backend/config hash, arm, seed, step, parameter receipt, and adapter hashes.
+- `checkpoint.json` with model/revision/backend/config hash, arm, seed, phase, fixed-final step, parameter receipt, ordered-row digest, critical-source digest, training-lock digest, package/device inventory, canonical checkpoint identity, and adapter hashes.
 
-Loading rejects a config hash mismatch. Checkpoints are external under `large_artifacts/` and must never be committed.
+Loading rejects stale config, source, lock, phase, step, seed, or tensor identity. Checkpoints are external under `large_artifacts/` and must never be committed. Interrupted training is deliberately non-resumable: preserve the partial attempt and restart step zero in a fresh attempt directory; never evaluate an intermediate checkpoint.

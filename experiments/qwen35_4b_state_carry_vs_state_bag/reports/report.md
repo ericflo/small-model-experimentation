@@ -2,7 +2,7 @@
 
 ## Status
 
-`SETUP_ONLY`: code, CPU mechanics, protocol, and handoff documentation are complete; no result-bearing `Qwen/Qwen3.5-4B` call has occurred in this experiment.
+`SETUP_ONLY`: the protocol and harness received a final adversarial pre-run revision; no result-bearing `Qwen/Qwen3.5-4B` call has occurred. The historical CPU-smoke receipt predates that revision, so fresh CPU contracts/data are required before G0.
 
 ## Question
 
@@ -17,14 +17,14 @@ Not run. Do not infer evidence from CPU reference mechanics, compilation, or the
 The eventual report must include:
 
 - all three training seeds for continuous Carry and Bag;
-- K-by-depth curves and exact paired Carry-minus-Bag uncertainty;
-- K=1 parity and parameter/FLOP receipts;
+- K-by-depth curves and exact crossed task×training-seed Carry-minus-Bag uncertainty;
+- K=1 parity plus parameter and decoder-layer-token compute receipts;
 - seed-paired initialization and cumulative training-compute hash equality;
-- state-sufficiency trajectories;
-- trained-checkpoint edge cuts and donor-state swaps;
+- joint-state tracking trajectories and both query strata;
+- identical-checkpoint edge-cut effects and bidirectional geometry-matched donor-state swaps with raw hashes;
 - every held-out split;
-- mixed-echo branch status;
-- three seed-matched explicit-CoT majority and oracle `pass@N` comparisons at matched compute, including paired uncertainty;
+- joint family+surface holdout robustness;
+- three seed-matched explicit-CoT majority and oracle `pass@N` comparisons at matched compute, including crossed uncertainty, raw generations, and interface-validity gates;
 - retention/overthinking results; and
 - the exact fail-closed verdict emitted by `src/analysis.py`.
 
