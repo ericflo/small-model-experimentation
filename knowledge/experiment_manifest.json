@@ -1194,10 +1194,10 @@
     "file_counts": {
       ".json": 9,
       ".jsonl": 14,
-      ".md": 9,
+      ".md": 12,
       ".pt": 1,
-      ".py": 7,
-      ".yaml": 3
+      ".py": 10,
+      ".yaml": 4
     },
     "id": "qwen35_4b_commit_slot_semantic_power_replication",
     "path": "experiments/qwen35_4b_commit_slot_semantic_power_replication",
@@ -1226,8 +1226,8 @@
       "src",
       "tests"
     ],
-    "total_files": 43,
-    "total_size_bytes": 14360048
+    "total_files": 50,
+    "total_size_bytes": 14464789
   },
   {
     "file_counts": {

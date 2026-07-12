@@ -100,6 +100,17 @@ After anchoring the design boundary:
 .venv/bin/python experiments/qwen35_4b_commit_slot_semantic_power_replication/scripts/run.py --stage seam-confirmation
 ```
 
+After the replicated seam and the separately anchored value implementation:
+
+```bash
+.venv/bin/python experiments/qwen35_4b_commit_slot_semantic_power_replication/scripts/run.py --stage value-model-smoke
+.venv/bin/python experiments/qwen35_4b_commit_slot_semantic_power_replication/scripts/run.py --stage prefix-value
+```
+
+Both commands currently fail closed while the new implementation boundary is
+`PENDING_VALUE_IMPLEMENTATION_COMMIT`. `control-calibration` and
+`causal-confirmation` remain unimplemented regardless of value outcome.
+
 ## Status
 
 Terminal seam decision: `POWERED_COMMIT_SLOT_SEAM_REPLICATED`. Qualification
@@ -128,8 +139,12 @@ The remaining identity nuisance is load-bearing: confirmation had no successful
 `horse` target rows, while `tiger` and `river` were favored by shuffle. The seam
 is replicated, but any J/value model must be task-held-out and prove incremental
 value beyond correct-alias activity, ordinary slot margin, and alias identity.
-J/value/control/causal implementation remains unavailable until a new
-outcome-blind adversarial audit and code boundary are committed.
+The outcome-blind prefix-value implementation and adversarial audit are complete
+with 16 passing tests, but its boundary remains deliberately pending until this
+exact code is committed and pushed. Neither reserved split has been opened and
+no new model call has occurred. The frozen primary asks whether midpoint J
+coordinates prospectively rank final commit value beyond gold-alias activity,
+slot margin, alias identity, and an equal-width non-J residual readout.
 
 ## Scope
 
@@ -157,3 +172,9 @@ and matched-compute sampling on untouched procedural tasks.
   hash-locked passing stages.
 - `analysis/analyze_replication.py` and `analysis/replication_audit.json`:
   deterministic stagewise and descriptive cross-stage audit.
+- `configs/prefix_value.yaml`, `reports/prefix_value_preregistration.md`, and
+  `reports/pre_value_design_review.md`: frozen prospective-value rules.
+- `reports/pre_value_implementation_audit.md`: outcome-blind code/firewall
+  audit before the pending implementation boundary is anchored.
+- `src/coordinates.py` and `src/value_probe.py`: exact coordinate geometry and
+  pure task-held-out analysis; no causal patcher is implemented.

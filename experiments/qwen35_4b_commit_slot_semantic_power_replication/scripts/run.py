@@ -36,6 +36,7 @@ from task_data import (  # noqa: E402
 
 
 CONFIG_PATH = EXP / "configs" / "default.yaml"
+VALUE_CONFIG_PATH = EXP / "configs" / "prefix_value.yaml"
 DATA_DIR = EXP / "data" / "procedural"
 RUNS_DIR = EXP / "runs"
 
@@ -44,6 +45,13 @@ def load_config() -> dict[str, Any]:
     value = yaml.safe_load(CONFIG_PATH.read_text(encoding="utf-8"))
     if not isinstance(value, dict):
         raise ValueError("configuration must be a mapping")
+    return value
+
+
+def load_value_config() -> dict[str, Any]:
+    value = yaml.safe_load(VALUE_CONFIG_PATH.read_text(encoding="utf-8"))
+    if not isinstance(value, dict):
+        raise ValueError("prefix-value configuration must be a mapping")
     return value
 
 
@@ -163,6 +171,152 @@ def design_boundary_receipt(config: dict[str, Any]) -> dict[str, Any]:
     write_json(RUNS_DIR / "design_boundary_receipt.json", result)
     if not result["passed"]:
         raise RuntimeError(f"immutable design boundary failed: {result}")
+    return result
+
+
+def _value_config_payload_sha256(value_config: dict[str, Any]) -> str:
+    return _canonical_sha256({
+        key: value
+        for key, value in value_config.items()
+        if key != "value_implementation_boundary"
+    })
+
+
+def validate_value_config(
+    config: dict[str, Any], value_config: dict[str, Any]
+) -> None:
+    if value_config.get("stage") != "prefix_value":
+        raise RuntimeError("prefix-value stage label changed")
+    if int(value_config["outcome"]["full_cap"]) != 1024:
+        raise RuntimeError("prefix value must retain fixed cap 1024")
+    expected_fractions = {
+        float(value) for value in config["generation"]["prefix_fractions"]
+    }
+    observed_fractions = {
+        float(value_config["outcome"]["prospective_fraction"]),
+        float(value_config["outcome"]["endpoint_fraction"]),
+    }
+    if observed_fractions != expected_fractions:
+        raise RuntimeError("prefix fractions differ from the original preregistration")
+    if tuple(value_config["features"]["layers"]) != tuple(config["lens"]["band"]):
+        raise RuntimeError("prefix-value layers differ from the frozen lens band")
+    if float(value_config["features"]["pseudoinverse_rtol"]) != float(
+        config["lens"]["pseudoinverse_rtol"]
+    ):
+        raise RuntimeError("prefix-value pseudoinverse tolerance changed")
+    cv = value_config["cross_validation"]
+    if (
+        int(cv["folds"]) != int(config["value_model"]["group_folds"])
+        or float(cv["l2"]) != float(config["value_model"]["l2"])
+        or bool(value_config["features"]["standardize_from_training_tasks_only"])
+        != bool(config["value_model"]["standardize"])
+    ):
+        raise RuntimeError("prefix-value fit differs from the inherited frozen model")
+    inherited = config["gates"]["prefix_value"]
+    current = value_config["gates"]
+    for key in (
+        "mixed_tasks_min",
+        "scored_prefixes_min",
+        "task_macro_pairwise_auc_min",
+        "j_minus_correct_alias_activity_min",
+        "j_minus_slot_margin_min",
+        "shuffled_auc_abs_from_chance_max",
+    ):
+        if float(current[key]) != float(inherited[key]):
+            raise RuntimeError(f"inherited prefix-value gate changed: {key}")
+
+
+def value_implementation_boundary_receipt(
+    config: dict[str, Any], value_config: dict[str, Any]
+) -> dict[str, Any]:
+    validate_value_config(config, value_config)
+    boundary = value_config["value_implementation_boundary"]
+    commit = str(boundary["commit"])
+    if commit.startswith("PENDING_"):
+        raise RuntimeError("prefix-value implementation boundary is not anchored")
+    head = _git(["rev-parse", "HEAD"]).stdout.strip()
+    ancestor = _git(
+        ["merge-base", "--is-ancestor", commit, head], check=False
+    ).returncode == 0
+    paths = {
+        "preregistration": (
+            "experiments/qwen35_4b_commit_slot_semantic_power_replication/"
+            "reports/prefix_value_preregistration.md"
+        ),
+        "design_review": (
+            "experiments/qwen35_4b_commit_slot_semantic_power_replication/"
+            "reports/pre_value_design_review.md"
+        ),
+        "run_script": (
+            "experiments/qwen35_4b_commit_slot_semantic_power_replication/"
+            "scripts/run.py"
+        ),
+        "model_ops": (
+            "experiments/qwen35_4b_commit_slot_semantic_power_replication/"
+            "src/model_ops.py"
+        ),
+        "coordinates": (
+            "experiments/qwen35_4b_commit_slot_semantic_power_replication/"
+            "src/coordinates.py"
+        ),
+        "value_probe": (
+            "experiments/qwen35_4b_commit_slot_semantic_power_replication/"
+            "src/value_probe.py"
+        ),
+        "tests": (
+            "experiments/qwen35_4b_commit_slot_semantic_power_replication/"
+            "tests/test_prefix_value.py"
+        ),
+        "implementation_audit": (
+            "experiments/qwen35_4b_commit_slot_semantic_power_replication/"
+            "reports/pre_value_implementation_audit.md"
+        ),
+    }
+    expected = {
+        name: str(boundary[f"{name}_sha256"]) for name in paths
+    }
+    observed_commit = {
+        name: hashlib.sha256(
+            _git(["show", f"{commit}:{path}"]).stdout.encode("utf-8")
+        ).hexdigest()
+        for name, path in paths.items()
+    }
+    observed_current = {
+        name: sha256_file(ROOT / path) for name, path in paths.items()
+    }
+    config_path = (
+        "experiments/qwen35_4b_commit_slot_semantic_power_replication/"
+        "configs/prefix_value.yaml"
+    )
+    committed_config = yaml.safe_load(_git(["show", f"{commit}:{config_path}"]).stdout)
+    committed_payload = _value_config_payload_sha256(committed_config)
+    current_payload = _value_config_payload_sha256(value_config)
+    expected_payload = str(boundary["config_payload_sha256"])
+    passed = bool(
+        ancestor
+        and observed_commit == expected
+        and observed_current == expected
+        and committed_payload == expected_payload
+        and current_payload == expected_payload
+    )
+    result = {
+        "schema_version": 1,
+        "stage": "value_implementation_boundary",
+        "scientific_result": False,
+        "passed": passed,
+        "design_commit": commit,
+        "head": head,
+        "design_is_ancestor": ancestor,
+        "observed_commit_sha256": observed_commit,
+        "observed_current_sha256": observed_current,
+        "expected_sha256": expected,
+        "committed_config_payload_sha256": committed_payload,
+        "current_config_payload_sha256": current_payload,
+        "expected_config_payload_sha256": expected_payload,
+    }
+    write_json(RUNS_DIR / "value_implementation_boundary_receipt.json", result)
+    if not passed:
+        raise RuntimeError(f"prefix-value implementation boundary failed: {result}")
     return result
 
 
@@ -514,6 +668,256 @@ def _require_model_smoke() -> str:
     if result.get("outcomes_recorded") is not False or result.get("correctness_recorded") is not False:
         raise RuntimeError("model smoke outcome-blind contract changed")
     return sha256_file(path)
+
+
+def require_replicated_seam(
+    value_config: dict[str, Any], *, verify_value_split: bool = True
+) -> dict[str, Any]:
+    selection_path = RUNS_DIR / "seam_selection.json"
+    confirmation_path = RUNS_DIR / "seam_confirmation.json"
+    if not selection_path.exists() or not confirmation_path.exists():
+        raise RuntimeError("both seam stages are required before prefix value")
+    selection = read_json(selection_path)
+    confirmation = read_json(confirmation_path)
+    if not (
+        selection.get("passed") is True
+        and selection.get("decision") == "POWERED_COMMIT_SLOT_SEAM_QUALIFIED"
+        and int(selection.get("selected_cap", -1)) == int(
+            value_config["outcome"]["full_cap"]
+        )
+        and confirmation.get("passed") is True
+        and confirmation.get("decision")
+        == str(value_config["licensed_by_decision"])
+        and int(confirmation.get("selected_cap", -1))
+        == int(value_config["outcome"]["full_cap"])
+    ):
+        raise RuntimeError("replicated seam license is absent")
+    if confirmation.get("selection_summary_sha256") != sha256_file(selection_path):
+        raise RuntimeError("confirmation no longer points to the frozen selection")
+    paths = {}
+    for stage, summary in (
+        ("seam_selection", selection),
+        ("seam_confirmation", confirmation),
+    ):
+        for name in (
+            "trace_rows",
+            "slot_rows",
+            "shuffled_slot_rows",
+            "freeform_rows",
+            "no_thought_rows",
+        ):
+            path = RUNS_DIR / f"{stage}_{name.replace('_rows', '')}_rows.jsonl"
+            if name == "trace_rows":
+                path = RUNS_DIR / f"{stage}_traces.jsonl"
+            if sha256_file(path) != summary[f"{name}_sha256"]:
+                raise RuntimeError(f"{stage} {name} changed after decision")
+            paths[f"{stage}_{name}_sha256"] = summary[f"{name}_sha256"]
+    expected_value_hash = confirmation["data_receipt"]["split_sha256"][
+        value_config["value_split"]
+    ]
+    observed_value_hash = None
+    if verify_value_split:
+        value_path = DATA_DIR / f"{value_config['value_split']}.jsonl"
+        observed_value_hash = sha256_file(value_path)
+        if observed_value_hash != expected_value_hash:
+            raise RuntimeError("reserved value split changed after seam confirmation")
+    return {
+        "selection_summary_sha256": sha256_file(selection_path),
+        "confirmation_summary_sha256": sha256_file(confirmation_path),
+        "expected_value_split_sha256": expected_value_hash,
+        "observed_value_split_sha256": observed_value_hash,
+        "value_split_opened": verify_value_split,
+        "causal_split_opened": False,
+        **paths,
+    }
+
+
+def _require_value_model_smoke() -> str:
+    path = RUNS_DIR / "value_model_smoke" / "result.json"
+    if not path.exists():
+        raise RuntimeError("prefix-value model smoke is required")
+    result = read_json(path)
+    if not (
+        result.get("passed") is True
+        and result.get("outcomes_recorded") is False
+        and result.get("value_split_opened") is False
+        and result.get("causal_split_opened") is False
+    ):
+        raise RuntimeError("prefix-value model smoke lost its outcome firewall")
+    return sha256_file(path)
+
+
+def run_value_model_smoke(
+    config: dict[str, Any], value_config: dict[str, Any]
+) -> dict[str, Any]:
+    design = design_boundary_receipt(config)
+    boundary = value_implementation_boundary_receipt(config, value_config)
+    license_receipt = require_replicated_seam(
+        value_config, verify_value_split=False
+    )
+    import torch
+    import transformers
+
+    from coordinates import (
+        dictionary_stats,
+        non_j_random_dictionary,
+        pseudoinverse,
+    )
+    from model_ops import ContextLens
+
+    started = time.perf_counter()
+    torch.cuda.reset_peak_memory_stats()
+    model = _load_model(config)
+    lens = ContextLens.load(str(EXP / config["lens"]["path"]))
+    layers = tuple(int(value) for value in value_config["features"]["layers"])
+    if tuple(sorted(lens.directions)) != tuple(sorted(lens.source_layers)):
+        raise RuntimeError("frozen lens layer metadata is inconsistent")
+    ranks = {
+        layer: dictionary_stats(
+            lens.directions[layer],
+            rtol=float(value_config["features"]["pseudoinverse_rtol"]),
+        ).effective_rank
+        for layer in layers
+    }
+    coordinate_inverses = {
+        layer: pseudoinverse(
+            lens.directions[layer],
+            rtol=float(value_config["features"]["pseudoinverse_rtol"]),
+        )[1]
+        for layer in layers
+    }
+    non_j_directions = {}
+    non_j_projection = {}
+    for layer in layers:
+        non_j_directions[layer], non_j_projection[layer] = non_j_random_dictionary(
+            lens.directions[layer],
+            width=int(value_config["features"]["non_j_random_coordinates_per_layer"]),
+            seed=_stable_seed(
+                int(value_config["features"]["non_j_random_seed"]), str(layer)
+            ),
+            rtol=float(value_config["features"]["pseudoinverse_rtol"]),
+            max_span_projection=float(
+                value_config["features"]["non_j_max_span_projection"]
+            ),
+        )
+    aliases = dict(config["data"]["operation_aliases"])
+    if not set(aliases.values()).issubset(lens.concepts):
+        raise RuntimeError("operation aliases are absent from frozen concepts")
+    task = read_jsonl(DATA_DIR / "seam_selection.jsonl")[0]
+    prepared = model.prepare(
+        task_prompt(task, aliases),
+        prompt_max_tokens=int(config["generation"]["prompt_max_tokens"]),
+    )
+    trace = model.generate_trace(
+        prepared["input_ids"],
+        seed=_stable_seed(
+            int(config["seeds"]["value_trace"]), task["task_id"], "value-smoke"
+        ),
+        thought_cap=8,
+        **_generation_kwargs(config),
+    )
+    if trace["natural_close"] or trace["stopped_by"] == "eos_before_close":
+        raise RuntimeError("value smoke unexpectedly terminated before eight tokens")
+    thought = [int(value) for value in trace["generated_token_ids"][:8]]
+    capture = model.capture_thought_prefix(
+        prepared["input_ids"],
+        thought,
+        layers=layers,
+        coordinate_inverses_by_layer=coordinate_inverses,
+        total_max_tokens=int(config["generation"]["total_max_tokens"]),
+    )
+    slot = model.slot_readout(
+        prepared["input_ids"],
+        thought,
+        slot_text=str(config["slot"]["text"]),
+        aliases=list(aliases.values()),
+        total_max_tokens=int(config["generation"]["total_max_tokens"]),
+    )
+    feature_width = sum(
+        int(capture["coordinates"][layer].numel()) for layer in layers
+    )
+    expected_width = len(layers) * int(
+        value_config["features"]["coordinates_per_layer"]
+    )
+    non_j_features = torch.cat([
+        capture["activations"][layer].float() @ non_j_directions[layer]
+        for layer in layers
+    ])
+    passed = bool(
+        design["passed"]
+        and boundary["passed"]
+        and license_receipt["value_split_opened"] is False
+        and license_receipt["causal_split_opened"] is False
+        and model.n_layers == 32
+        and model.d_model == 2560
+        and set(ranks.values()) == {24}
+        and trace["cache_contract_pass"]
+        and capture["finite"]
+        and not capture["close_present"]
+        and not capture["slot_present"]
+        and feature_width == expected_width == 120
+        and int(non_j_features.numel()) == expected_width
+        and bool(torch.isfinite(non_j_features).all())
+        and slot["finite"]
+        and int(slot["prefill_tokens"]) > int(capture["sequence_tokens"])
+    )
+    result = {
+        "schema_version": 1,
+        "stage": "value_model_smoke",
+        "scientific_result": False,
+        "outcomes_recorded": False,
+        "correctness_recorded": False,
+        "chosen_alias_recorded": False,
+        "trace_text_recorded": False,
+        "value_split_opened": False,
+        "causal_split_opened": False,
+        "passed": passed,
+        "model": {
+            "id": config["model"]["id"],
+            "revision": config["model"]["revision"],
+            "layers": model.n_layers,
+            "hidden_size": model.d_model,
+            "vocab_size": model.vocab_size,
+            "load_seconds": model.load_seconds,
+        },
+        "environment": {
+            "torch": torch.__version__,
+            "transformers": transformers.__version__,
+            "gpu": torch.cuda.get_device_name(0),
+            "peak_allocated_bytes": torch.cuda.max_memory_allocated(),
+        },
+        "lens_sha256": sha256_file(EXP / config["lens"]["path"]),
+        "lens_concepts": len(lens.concepts),
+        "lens_ranks": {str(layer): ranks[layer] for layer in layers},
+        "feature_layers": list(layers),
+        "feature_width": feature_width,
+        "non_j_feature_width": int(non_j_features.numel()),
+        "non_j_max_span_projection_by_layer": {
+            str(layer): non_j_projection[layer] for layer in layers
+        },
+        "feature_sequence_tokens": capture["sequence_tokens"],
+        "feature_position": capture["position"],
+        "feature_close_present": capture["close_present"],
+        "feature_slot_present": capture["slot_present"],
+        "feature_finite": capture["finite"],
+        "slot_prefill_tokens": slot["prefill_tokens"],
+        "slot_token_ids": slot["slot_token_ids"],
+        "slot_finite": slot["finite"],
+        "trace_cache_contract_pass": trace["cache_contract_pass"],
+        "design_boundary_sha256": sha256_file(
+            RUNS_DIR / "design_boundary_receipt.json"
+        ),
+        "value_boundary_sha256": sha256_file(
+            RUNS_DIR / "value_implementation_boundary_receipt.json"
+        ),
+        "seam_license": license_receipt,
+        "elapsed_seconds": time.perf_counter() - started,
+    }
+    write_json(RUNS_DIR / "value_model_smoke" / "result.json", result)
+    if not passed:
+        raise RuntimeError(f"prefix-value model smoke failed: {result}")
+    print(json.dumps(result, indent=2, sort_keys=True))
+    return result
 
 
 def _mean(values: list[float]) -> float:
@@ -1116,6 +1520,398 @@ def run_seam_confirmation(config: dict[str, Any]) -> dict[str, Any]:
     return result
 
 
+def _value_prefix_token_count(
+    available_tokens: int, fraction: float, minimum_tokens: int
+) -> int | None:
+    if available_tokens < minimum_tokens:
+        return None
+    if not 0.0 < fraction <= 1.0:
+        raise ValueError("prefix fraction must be in (0,1]")
+    count = int(math.floor(available_tokens * fraction + 0.5))
+    return min(available_tokens, max(minimum_tokens, count))
+
+
+def load_value_tasks(
+    config: dict[str, Any], value_config: dict[str, Any]
+) -> list[dict[str, Any]]:
+    split = str(value_config["value_split"])
+    if split != "value_fit" or split == str(
+        value_config["causal_split_must_remain_unopened"]
+    ):
+        raise RuntimeError("prefix-value loader may open only value_fit")
+    path = DATA_DIR / f"{split}.jsonl"
+    rows = read_jsonl(path)
+    if len(rows) != int(config["data"]["value_fit_tasks"]):
+        raise RuntimeError("reserved value task count changed")
+    return rows
+
+
+def run_prefix_value(
+    config: dict[str, Any], value_config: dict[str, Any]
+) -> dict[str, Any]:
+    design = design_boundary_receipt(config)
+    boundary = value_implementation_boundary_receipt(config, value_config)
+    seam_license = require_replicated_seam(value_config, verify_value_split=True)
+    smoke_sha256 = _require_value_model_smoke()
+    import torch
+
+    from coordinates import (
+        dictionary_stats,
+        non_j_random_dictionary,
+        pseudoinverse,
+    )
+    from model_ops import ContextLens
+    from value_probe import evaluate_prefix_value, ordered_rows
+
+    started = time.perf_counter()
+    torch.cuda.reset_peak_memory_stats()
+    tasks = load_value_tasks(config, value_config)
+    expected_tasks = int(config["data"]["value_fit_tasks"])
+    if len(tasks) != expected_tasks:
+        raise RuntimeError("reserved value task count changed")
+    model = _load_model(config)
+    lens = ContextLens.load(str(EXP / config["lens"]["path"]))
+    layers = tuple(int(value) for value in value_config["features"]["layers"])
+    rtol = float(value_config["features"]["pseudoinverse_rtol"])
+    lens_stats = {
+        layer: dictionary_stats(lens.directions[layer], rtol=rtol)
+        for layer in layers
+    }
+    coordinate_inverses = {
+        layer: pseudoinverse(lens.directions[layer], rtol=rtol)[1]
+        for layer in layers
+    }
+    non_j_directions = {}
+    non_j_projection = {}
+    for layer in layers:
+        non_j_directions[layer], non_j_projection[layer] = non_j_random_dictionary(
+            lens.directions[layer],
+            width=int(value_config["features"]["non_j_random_coordinates_per_layer"]),
+            seed=_stable_seed(
+                int(value_config["features"]["non_j_random_seed"]), str(layer)
+            ),
+            rtol=rtol,
+            max_span_projection=float(
+                value_config["features"]["non_j_max_span_projection"]
+            ),
+        )
+    if any(stat.effective_rank != 24 for stat in lens_stats.values()):
+        raise RuntimeError("a frozen J dictionary lost rank")
+    if tuple(lens.source_layers) != tuple(sorted(lens.directions)):
+        raise RuntimeError("lens source-layer metadata changed")
+    aliases = dict(config["data"]["operation_aliases"])
+    alias_order = list(aliases.values())
+    if len(alias_order) != len(set(alias_order)) or not set(alias_order).issubset(
+        lens.concepts
+    ):
+        raise RuntimeError("alias/lens concept mapping changed")
+    concept_indices = {concept: index for index, concept in enumerate(lens.concepts)}
+    cap = int(value_config["outcome"]["full_cap"])
+    fractions = (
+        float(value_config["outcome"]["prospective_fraction"]),
+        float(value_config["outcome"]["endpoint_fraction"]),
+    )
+    minimum_tokens = int(config["generation"]["minimum_prefix_tokens"])
+    traces_per_task = int(config["generation"]["traces_per_task"])
+    trace_rows: list[dict[str, Any]] = []
+    feature_rows: list[dict[str, Any]] = []
+    total_traces = len(tasks) * traces_per_task
+    completed = 0
+    for task in tasks:
+        prepared = model.prepare(
+            task_prompt(task, aliases),
+            prompt_max_tokens=int(config["generation"]["prompt_max_tokens"]),
+        )
+        correct_alias = aliases[str(task["first_op"])]
+        correct_concept_index = concept_indices[correct_alias]
+        identity = [float(alias == correct_alias) for alias in alias_order]
+        prompt_token_ids = [int(value) for value in prepared["input_ids"][0].tolist()]
+        for trace_index in range(traces_per_task):
+            trace_seed = _stable_seed(
+                int(config["seeds"]["value_trace"]),
+                str(task["task_id"]),
+                str(trace_index),
+                str(cap),
+            )
+            trace = model.generate_trace(
+                prepared["input_ids"],
+                seed=trace_seed,
+                thought_cap=cap,
+                **_generation_kwargs(config),
+            )
+            thought, commit_mode = _thought_prefix(model, trace, cap)
+            usable = thought is not None and len(thought) >= minimum_tokens
+            trace_rows.append({
+                "task_id": task["task_id"],
+                "trace_index": trace_index,
+                "trace_seed": trace_seed,
+                "cap": cap,
+                "natural_close": bool(trace["natural_close"]),
+                "stopped_by": trace["stopped_by"],
+                "commit_mode": commit_mode,
+                "usable_for_prefix_value": usable,
+                "think_tokens": int(trace["think_tokens"]),
+                "answer_tokens": int(trace["answer_tokens"]),
+                "cache_contract_pass": bool(trace["cache_contract_pass"]),
+                "forward_calls": int(trace["forward_calls"]),
+                "elapsed_seconds": float(trace["elapsed_seconds"]),
+                "generated_token_ids": [
+                    int(value) for value in trace["generated_token_ids"]
+                ],
+                "generated_token_ids_sha256": _token_ids_sha256(
+                    trace["generated_token_ids"]
+                ),
+            })
+            if usable:
+                assert thought is not None
+                terminal_slot = model.slot_readout(
+                    prepared["input_ids"],
+                    thought,
+                    slot_text=str(config["slot"]["text"]),
+                    aliases=alias_order,
+                    total_max_tokens=int(config["generation"]["total_max_tokens"]),
+                )
+                if not terminal_slot["finite"]:
+                    raise RuntimeError("a terminal value slot is nonfinite")
+                terminal_value = float(
+                    terminal_slot["alias_probabilities"][correct_alias]
+                )
+                terminal_correct = terminal_slot["chosen_alias"] == correct_alias
+                for fraction in fractions:
+                    prefix_tokens = _value_prefix_token_count(
+                        len(thought), fraction, minimum_tokens
+                    )
+                    if prefix_tokens is None:
+                        continue
+                    prefix = [int(value) for value in thought[:prefix_tokens]]
+                    capture = model.capture_thought_prefix(
+                        prepared["input_ids"],
+                        prefix,
+                        layers=layers,
+                        coordinate_inverses_by_layer=coordinate_inverses,
+                        total_max_tokens=int(
+                            config["generation"]["total_max_tokens"]
+                        ),
+                    )
+                    prefix_slot = (
+                        terminal_slot
+                        if prefix_tokens == len(thought)
+                        else model.slot_readout(
+                            prepared["input_ids"],
+                            prefix,
+                            slot_text=str(config["slot"]["text"]),
+                            aliases=alias_order,
+                            total_max_tokens=int(
+                                config["generation"]["total_max_tokens"]
+                            ),
+                        )
+                    )
+                    if not (
+                        capture["finite"]
+                        and prefix_slot["finite"]
+                        and not capture["close_present"]
+                        and not capture["slot_present"]
+                    ):
+                        raise RuntimeError("a prefix feature/readout contract failed")
+                    j_features = [
+                        float(value)
+                        for layer in layers
+                        for value in capture["coordinates"][layer].tolist()
+                    ]
+                    correct_activity = [
+                        float(capture["coordinates"][layer][correct_concept_index])
+                        for layer in layers
+                    ]
+                    non_j_features = [
+                        float(value)
+                        for layer in layers
+                        for value in (
+                            capture["activations"][layer].float()
+                            @ non_j_directions[layer]
+                        ).tolist()
+                    ]
+                    feature_rows.append({
+                        "task_id": task["task_id"],
+                        "trace_index": trace_index,
+                        "trace_seed": trace_seed,
+                        "cap": cap,
+                        "fraction": fraction,
+                        "prefix_tokens": prefix_tokens,
+                        "terminal_thought_tokens": len(thought),
+                        "commit_mode": commit_mode,
+                        "correct_alias": correct_alias,
+                        "alias_count": len(alias_order),
+                        "j_feature_layers": list(layers),
+                        "j_concept_order": list(lens.concepts),
+                        "j_features": j_features,
+                        "non_j_random_features": non_j_features,
+                        "correct_alias_activity_features": correct_activity,
+                        "slot_margin_features": [
+                            float(prefix_slot["constrained_margin"])
+                        ],
+                        "alias_identity_features": identity,
+                        "prefix_slot_margin": float(
+                            prefix_slot["constrained_margin"]
+                        ),
+                        "prefix_slot_entropy": float(
+                            prefix_slot["constrained_entropy"]
+                        ),
+                        "prefix_slot_chosen_alias": prefix_slot["chosen_alias"],
+                        "prefix_slot_correct": prefix_slot["chosen_alias"]
+                        == correct_alias,
+                        "prefix_slot_correct_alias_probability": float(
+                            prefix_slot["alias_probabilities"][correct_alias]
+                        ),
+                        "terminal_value": terminal_value,
+                        "terminal_chosen_alias": terminal_slot["chosen_alias"],
+                        "terminal_correct": terminal_correct,
+                        "terminal_label_source": value_config["outcome"]["label"],
+                        "feature_capture_position": int(capture["position"]),
+                        "feature_sequence_tokens": int(
+                            capture["sequence_tokens"]
+                        ),
+                        "feature_context_token_ids_sha256": _token_ids_sha256(
+                            prompt_token_ids + prefix
+                        ),
+                        "prefix_thought_token_ids_sha256": _token_ids_sha256(
+                            prefix
+                        ),
+                        "terminal_thought_token_ids_sha256": _token_ids_sha256(
+                            thought
+                        ),
+                        "feature_close_present": False,
+                        "feature_slot_present": False,
+                        "finite": True,
+                    })
+            completed += 1
+            if completed % 4 == 0 or completed == total_traces:
+                print(
+                    f"prefix_value: {completed}/{total_traces} traces", flush=True
+                )
+    expected_prefix_rows = total_traces * len(fractions)
+    trace_contract_pass = bool(
+        len(trace_rows) == total_traces
+        and all(row["cache_contract_pass"] for row in trace_rows)
+    )
+    row_contract_pass = len(feature_rows) == expected_prefix_rows
+    if not (trace_contract_pass and row_contract_pass):
+        trace_path = RUNS_DIR / "prefix_value_traces.jsonl"
+        row_path = RUNS_DIR / "prefix_value_rows.jsonl"
+        write_jsonl(trace_path, trace_rows)
+        write_jsonl(row_path, ordered_rows(feature_rows))
+        result = {
+            "schema_version": 1,
+            "stage": "prefix_value",
+            "scientific_result": True,
+            "passed": False,
+            "decision": value_config["decision_labels"]["invalid"],
+            "reason": "trace_or_prefix_cardinality_contract_failed",
+            "causal_split_opened": False,
+            "expected_traces": total_traces,
+            "observed_traces": len(trace_rows),
+            "expected_prefix_rows": expected_prefix_rows,
+            "observed_prefix_rows": len(feature_rows),
+            "trace_cache_contract_pass": all(
+                row["cache_contract_pass"] for row in trace_rows
+            ),
+            "trace_rows_sha256": sha256_file(trace_path),
+            "prefix_rows_sha256": sha256_file(row_path),
+            "value_model_smoke_sha256": smoke_sha256,
+            "seam_license": seam_license,
+            "elapsed_seconds": time.perf_counter() - started,
+            "peak_allocated_bytes": torch.cuda.max_memory_allocated(),
+        }
+        write_json(RUNS_DIR / "prefix_value.json", result)
+        print(json.dumps(result, indent=2, sort_keys=True))
+        return result
+    feature_rows = ordered_rows(feature_rows)
+    analysis = evaluate_prefix_value(feature_rows, value_config)
+    oof_scores = analysis.pop("oof_scores")
+    for index, row in enumerate(feature_rows):
+        row["oof_j_score"] = float(oof_scores["j_features"][index])
+        row["oof_non_j_random_score"] = float(
+            oof_scores["non_j_random_features"][index]
+        )
+        row["oof_correct_alias_activity_score"] = float(
+            oof_scores["correct_alias_activity_features"][index]
+        )
+        row["oof_slot_margin_score"] = float(
+            oof_scores["slot_margin_features"][index]
+        )
+        row["oof_alias_identity_score"] = float(
+            oof_scores["alias_identity_features"][index]
+        )
+    final_model = analysis.pop("final_model")
+    trace_path = RUNS_DIR / "prefix_value_traces.jsonl"
+    row_path = RUNS_DIR / "prefix_value_rows.jsonl"
+    model_path = RUNS_DIR / "prefix_value_model.json"
+    write_jsonl(trace_path, trace_rows)
+    write_jsonl(row_path, feature_rows)
+    write_json(model_path, final_model)
+    passed = bool(design["passed"] and boundary["passed"] and analysis["passed"])
+    result = {
+        "schema_version": 1,
+        "stage": "prefix_value",
+        "scientific_result": True,
+        "passed": passed,
+        "decision": (
+            value_config["decision_labels"]["pass"]
+            if passed
+            else value_config["decision_labels"]["no_value"]
+        ),
+        "model_id": config["model"]["id"],
+        "model_revision": config["model"]["revision"],
+        "counterfactual_commit_policy": True,
+        "causal_split_opened": False,
+        "value_tasks": len(tasks),
+        "traces": len(trace_rows),
+        "usable_traces": sum(
+            bool(row["usable_for_prefix_value"]) for row in trace_rows
+        ),
+        "prefix_rows": len(feature_rows),
+        "cap": cap,
+        "fractions": list(fractions),
+        "lens_sha256": sha256_file(EXP / config["lens"]["path"]),
+        "lens_concepts": list(lens.concepts),
+        "lens_stats": {
+            str(layer): {
+                "effective_rank": lens_stats[layer].effective_rank,
+                "condition_number": lens_stats[layer].condition_number,
+            }
+            for layer in layers
+        },
+        "non_j_max_span_projection_by_layer": {
+            str(layer): non_j_projection[layer] for layer in layers
+        },
+        "analysis": analysis,
+        "trace_rows_sha256": sha256_file(trace_path),
+        "prefix_rows_sha256": sha256_file(row_path),
+        "value_model_sha256": sha256_file(model_path),
+        "value_model_smoke_sha256": smoke_sha256,
+        "design_boundary_sha256": sha256_file(
+            RUNS_DIR / "design_boundary_receipt.json"
+        ),
+        "value_implementation_boundary_sha256": sha256_file(
+            RUNS_DIR / "value_implementation_boundary_receipt.json"
+        ),
+        "seam_license": seam_license,
+        "trace_sampled_tokens": sum(
+            len(row["generated_token_ids"]) for row in trace_rows
+        ),
+        "trace_forward_calls": sum(
+            int(row["forward_calls"]) for row in trace_rows
+        ),
+        "feature_prefill_tokens": sum(
+            int(row["feature_sequence_tokens"]) for row in feature_rows
+        ),
+        "elapsed_seconds": time.perf_counter() - started,
+        "peak_allocated_bytes": torch.cuda.max_memory_allocated(),
+    }
+    write_json(RUNS_DIR / "prefix_value.json", result)
+    print(json.dumps(result, indent=2, sort_keys=True))
+    return result
+
+
 def unavailable(stage: str) -> None:
     raise RuntimeError(f"stage {stage!r} is not implemented; refusing a placeholder result")
 
@@ -1127,6 +1923,7 @@ def main() -> int:
         choices=(
             "smoke",
             "model-smoke",
+            "value-model-smoke",
             "seam-selection",
             "seam-confirmation",
             "prefix-value",
@@ -1141,10 +1938,14 @@ def main() -> int:
         run_smoke(config)
     elif args.stage == "model-smoke":
         run_model_smoke(config)
+    elif args.stage == "value-model-smoke":
+        run_value_model_smoke(config, load_value_config())
     elif args.stage == "seam-selection":
         run_seam_selection(config)
     elif args.stage == "seam-confirmation":
         run_seam_confirmation(config)
+    elif args.stage == "prefix-value":
+        run_prefix_value(config, load_value_config())
     else:
         unavailable(args.stage)
     return 0

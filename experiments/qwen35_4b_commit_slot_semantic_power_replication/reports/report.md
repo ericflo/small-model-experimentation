@@ -136,6 +136,26 @@ or installed capability. Gold labels evaluate the seam. J/value/control/causal
 commands still fail closed until a separately committed outcome-blind audit and
 implementation boundary.
 
+## Prefix-value implementation boundary
+
+After the seam decision, a new preregistration and 30-point adversarial design
+review froze a prospective rather than merely endpoint readout: midpoint
+coordinates must rank each path's later full-cap correct-alias probability, and
+endpoint signal cannot rescue a midpoint miss. The primary 120 J features use
+all 24 coordinates at layers 4--8 with task-held-out, within-task/fraction
+centered ridge evaluation. Mandatory matched pipelines use five gold-alias J
+activities, ordinary slot margin, alias identity, and 120 layer-matched random
+coordinates orthogonal to the complete J span. Task bootstrap and 32 within-
+group shuffled refits are load-bearing.
+
+Implementation is complete and 16 outcome-blind tests pass, including exact
+three-path groups, future-label timing, whole-task folds, train-only scaling,
+non-J projection <=1e-5, reserved-data loader isolation, and pending-boundary
+failure before model load. The new boundary is intentionally still pending
+until this exact code/audit is committed and pushed. No `value_fit` or
+`causal_confirmation` row has been opened and no new model call has occurred.
+Control calibration and causal confirmation remain fatal-unavailable.
+
 ## Artifact Manifest
 
 See `artifact_manifest.yaml`.

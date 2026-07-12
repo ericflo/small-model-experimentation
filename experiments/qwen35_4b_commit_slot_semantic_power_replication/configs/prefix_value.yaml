@@ -1,0 +1,94 @@
+schema_version: 1
+
+stage: prefix_value
+licensed_by_decision: POWERED_COMMIT_SLOT_SEAM_REPLICATED
+value_split: value_fit
+causal_split_must_remain_unopened: causal_confirmation
+
+outcome:
+  label: full_cap_constrained_correct_alias_probability
+  endpoint_fraction: 1.0
+  prospective_fraction: 0.5
+  minimum_pair_label_gap: 0.01
+  full_cap: 1024
+  counterfactual_commit_policy: true
+
+features:
+  primary: concatenated_frozen_j_coordinates
+  layers: [4, 5, 6, 7, 8]
+  coordinates_per_layer: 24
+  capture_position: last_included_thought_token
+  capture_context: prompt_plus_live_thought_prefix_without_close_or_slot
+  pseudoinverse_rtol: 1.0e-5
+  detrend_within_task_and_fraction: true
+  standardize_from_training_tasks_only: true
+  non_j_random_coordinates_per_layer: 24
+  non_j_random_seed: 2026071515
+  non_j_max_span_projection: 1.0e-5
+
+baselines:
+  correct_alias_activity:
+    feature: five_layer_gold_alias_j_coordinates
+    oracle_identity_used: true
+  slot_margin:
+    feature: constrained_top1_minus_top2_margin_at_same_prefix
+    answer_side_readout: true
+  alias_identity:
+    feature: one_hot_gold_alias
+    oracle_identity_used: true
+  non_j_random:
+    feature: layer_matched_random_coordinates_orthogonal_to_j_span
+    dimensions: 120
+    oracle_identity_used: false
+
+cross_validation:
+  folds: 4
+  split_unit: task
+  alias_stratified: true
+  seed: 2026071514
+  estimator: ridge
+  l2: 1.0
+
+null:
+  feature_shuffle_within_task_and_fraction: true
+  repeats: 32
+  seed: 2026071507
+
+uncertainty:
+  bootstrap_unit: task
+  bootstrap_resamples: 10000
+  seed: 2026071511
+  one_sided_tail_probability: 0.05
+
+gates:
+  mixed_tasks_min: 24
+  scored_prefixes_min: 192
+  task_macro_pairwise_auc_min: 0.65
+  prospective_half_pairwise_auc_min: 0.58
+  j_minus_correct_alias_activity_min: 0.03
+  j_minus_slot_margin_min: 0.02
+  j_minus_alias_identity_min: 0.10
+  j_minus_non_j_random_min: 0.02
+  task_bootstrap_auc_lower_min: 0.50
+  task_bootstrap_j_minus_correct_alias_lower_min: 0.0
+  task_bootstrap_j_minus_slot_margin_lower_min: 0.0
+  task_bootstrap_j_minus_non_j_random_lower_min: 0.0
+  shuffled_auc_abs_from_chance_max: 0.05
+  finite_feature_rows_rate_min: 1.0
+
+decision_labels:
+  pass: PREFIX_J_VALUE_PASS
+  no_value: NO_PREFIX_J_VALUE
+  invalid: INVALID_PREFIX_VALUE
+
+value_implementation_boundary:
+  commit: PENDING_VALUE_IMPLEMENTATION_COMMIT
+  config_payload_sha256: PENDING
+  preregistration_sha256: PENDING
+  design_review_sha256: PENDING
+  run_script_sha256: PENDING
+  model_ops_sha256: PENDING
+  coordinates_sha256: PENDING
+  value_probe_sha256: PENDING
+  tests_sha256: PENDING
+  implementation_audit_sha256: PENDING

@@ -58,3 +58,19 @@
   activity, and ordinary slot margin on task-held-out units.
 - Confirmation licenses a new code/audit boundary only. J/value/control/causal
   commands remain fatal-unavailable until that boundary is committed.
+
+## 2026-07-12 — Outcome-blind prospective-value implementation
+
+- Froze the half-prefix question before any new data/model access: predict each
+  sampled path's later full-cap correct-alias probability, not an immediate
+  half-prefix label. Endpoint performance cannot rescue prospective failure.
+- Completed a 30-point adversarial design review and 36-assertion implementation
+  audit. Added task-held-out within-task/fraction ridge ranking, task bootstrap,
+  correct-alias activity, slot margin, identity, and equal-width non-J controls.
+- Added a deterministic 120-dimensional layer-matched random readout orthogonal
+  to J-space (exact-lens tests require projection <=1e-5), after catching that
+  scalar baselines alone would not establish J specificity.
+- Removed a pre-run efficiency footgun by computing the five coordinate
+  pseudoinverses once instead of once per prefix.
+- All 16 experiment tests and Python syntax checks pass. The pending boundary
+  stops before model load; `value_fit` and `causal_confirmation` remain unopened.

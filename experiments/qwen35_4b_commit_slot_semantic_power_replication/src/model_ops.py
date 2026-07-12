@@ -3,9 +3,65 @@
 from __future__ import annotations
 
 import time
+from collections.abc import Sequence
+from dataclasses import dataclass
 from typing import Any
 
 import torch
+
+def _tensor_from_output(output: Any) -> torch.Tensor:
+    return output if torch.is_tensor(output) else output[0]
+
+
+@dataclass(frozen=True)
+class ContextLens:
+    concepts: tuple[str, ...]
+    token_ids: tuple[int, ...]
+    source_layers: tuple[int, ...]
+    directions: dict[int, torch.Tensor]
+    n_prompts: int
+    estimator: str
+
+    @classmethod
+    def load(cls, path: str) -> "ContextLens":
+        state = torch.load(path, map_location="cpu", weights_only=True)
+        return cls(
+            concepts=tuple(str(value) for value in state["concepts"]),
+            token_ids=tuple(int(value) for value in state["token_ids"]),
+            source_layers=tuple(int(value) for value in state["source_layers"]),
+            directions={
+                int(layer): value.float()
+                for layer, value in state["directions"].items()
+            },
+            n_prompts=int(state["n_prompts"]),
+            estimator=str(state["estimator"]),
+        )
+
+
+class ActivationRecorder:
+    def __init__(self, layers: Sequence[torch.nn.Module], at: Sequence[int]):
+        self.layers = layers
+        self.indices = tuple(sorted(set(int(value) for value in at)))
+        self.activations: dict[int, torch.Tensor] = {}
+        self.handles: list[Any] = []
+
+    def _hook(self, index: int):
+        def hook(_module: Any, _inputs: tuple[Any, ...], output: Any) -> None:
+            self.activations[index] = _tensor_from_output(output)
+
+        return hook
+
+    def __enter__(self):
+        for index in self.indices:
+            self.handles.append(
+                self.layers[index].register_forward_hook(self._hook(index))
+            )
+        return self
+
+    def __exit__(self, *_exc: Any) -> None:
+        for handle in self.handles:
+            handle.remove()
+        self.handles = []
 
 
 class _TraceStopper:
@@ -58,6 +114,7 @@ class QwenCommitModel:
         ).eval()
         for parameter in self.model.parameters():
             parameter.requires_grad_(False)
+        self.layers = self.model.model.layers
         self.device = self.model.lm_head.weight.device
         text_config = self.model.config.get_text_config()
         self.n_layers = int(text_config.num_hidden_layers)
@@ -325,4 +382,60 @@ class QwenCommitModel:
                 and torch.isfinite(probabilities).all()
                 and torch.isfinite(alias_full_probabilities).all()
             ),
+        }
+
+    @torch.no_grad()
+    def capture_thought_prefix(
+        self,
+        prompt_ids: torch.Tensor,
+        thought_token_ids: list[int],
+        *,
+        layers: Sequence[int],
+        coordinate_inverses_by_layer: dict[int, torch.Tensor],
+        total_max_tokens: int,
+    ) -> dict[str, Any]:
+        """Read J coordinates at the final token of a live thought prefix.
+
+        The input contains no close token, slot, answer, or future thought.
+        """
+        if not thought_token_ids:
+            raise RuntimeError("coordinate capture requires a nonempty thought")
+        if self.think_close_id in thought_token_ids or self.eos_id in thought_token_ids:
+            raise RuntimeError("coordinate prefix contains close or EOS")
+        layer_tuple = tuple(int(layer) for layer in layers)
+        if set(layer_tuple) != set(coordinate_inverses_by_layer):
+            raise RuntimeError("capture layers and coordinate inverses differ")
+        suffix = torch.tensor(
+            [thought_token_ids], device=self.device, dtype=prompt_ids.dtype
+        )
+        full_ids = torch.cat([prompt_ids.to(self.device), suffix], dim=1)
+        if int(full_ids.shape[1]) > int(total_max_tokens):
+            raise RuntimeError("coordinate prefix exceeds total context cap")
+        position = int(full_ids.shape[1]) - 1
+        with ActivationRecorder(self.layers, at=layer_tuple) as recorder:
+            self.model(input_ids=full_ids, use_cache=False, logits_to_keep=1)
+        activations = {
+            layer: recorder.activations[layer][0, position].float().detach().cpu()
+            for layer in layer_tuple
+        }
+        coordinates = {
+            layer: (
+                activations[layer].reshape(1, -1).float()
+                @ coordinate_inverses_by_layer[layer].float().T
+            )[0].detach().cpu()
+            for layer in layer_tuple
+        }
+        return {
+            "sequence_tokens": int(full_ids.shape[1]),
+            "position": position,
+            "thought_tokens": len(thought_token_ids),
+            "layers": list(layer_tuple),
+            "activations": activations,
+            "coordinates": coordinates,
+            "finite": bool(
+                all(torch.isfinite(value).all() for value in activations.values())
+                and all(torch.isfinite(value).all() for value in coordinates.values())
+            ),
+            "close_present": bool((full_ids == self.think_close_id).any()),
+            "slot_present": False,
         }
