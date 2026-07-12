@@ -65,10 +65,17 @@ later stages still refuse placeholders until their audited implementations land.
 
 ## Results
 
-Design and CPU smoke only. The generator produced 16 seam, 32 value-fit, and 32
+Design, CPU smoke, and model plumbing smoke only. The generator produced 16 seam, 32 value-fit, and 32
 causal-confirmation tasks: 80/80 unique fingerprints, zero overlap with the
 direct Jacobian parent, balanced identifiable first-operation targets, and the
-exact frozen lens hash. No model call or scientific outcome has occurred.
+exact frozen lens hash.
+
+The two-task model smoke validates revision, token IDs, one-token aliases, full
+24-rank dictionaries, cache-free generation, and finite J coordinates without
+recording correctness. Both traces hit the frozen 160-token cap without natural
+close, and historical-token activations changed by up to 0.0625 across suffix
+lengths, so causal invariance currently fails. These are scientific seam/control
+risks; the frozen 16-task seam gate will decide rather than changing budgets.
 
 ## Scope
 

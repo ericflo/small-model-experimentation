@@ -2,7 +2,7 @@
 
 ## Status
 
-Pre-run design and CPU data smoke. No model outcome is recorded.
+Model plumbing smoke passed; no correctness outcome is recorded.
 
 ## Purpose
 
@@ -31,9 +31,12 @@ from being counted as model failures.
 
 ## Current inference boundary
 
-No conclusion about native thinking, value decodability, or causal transport is
-licensed. Model stages remain unavailable until the immutable design boundary is
-committed and pushed.
+Revision, token, alias, lens rank, generation, capture, and J-coordinate plumbing
+pass. Both two-task smoke traces reached the frozen 160-token cap without natural
+close. Historical-token activations also changed by 0.0625 when evaluated under
+different suffix lengths, above the frozen causal-invariance threshold. The
+smoke is not a scientific sample and records no correctness, so the 16-task seam
+calibration remains the next decision. No value or causal conclusion is licensed.
 
 ## Oracle boundary
 

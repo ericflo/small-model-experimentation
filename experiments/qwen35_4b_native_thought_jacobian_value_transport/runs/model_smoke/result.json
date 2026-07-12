@@ -1,0 +1,75 @@
+{
+  "alias_token_ids": {
+    "apple": 22544,
+    "cat": 7993,
+    "circle": 12307,
+    "dog": 5388,
+    "gold": 6414,
+    "horse": 14780,
+    "lemon": 28503,
+    "ocean": 17415,
+    "river": 14367,
+    "silver": 14527,
+    "square": 9057,
+    "tiger": 49993
+  },
+  "causal_activation_max_abs": 0.0625,
+  "causal_invariance_pass": false,
+  "causal_invariance_required_before_causal_confirmation": true,
+  "elapsed_seconds": 23.263534769415855,
+  "environment": {
+    "gpu": "NVIDIA RTX 6000 Ada Generation",
+    "peak_allocated_bytes": 8535972352,
+    "torch": "2.11.0+cu129",
+    "transformers": "5.13.0"
+  },
+  "lens_effective_ranks": {
+    "4": 24,
+    "5": 24,
+    "6": 24,
+    "7": 24,
+    "8": 24
+  },
+  "model": {
+    "hidden_size": 2560,
+    "id": "Qwen/Qwen3.5-4B",
+    "layers": 32,
+    "load_seconds": 4.990831166505814,
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "vocab_size": 248320
+  },
+  "outcomes_recorded": false,
+  "passed": true,
+  "rows": [
+    {
+      "answer_parseable": false,
+      "checkpoint_position": 492,
+      "coordinate_finite": true,
+      "generated_tokens": 159,
+      "natural_close": false,
+      "outcome_correctness_recorded": false,
+      "prompt_tokens": 414,
+      "task_id": "seam_calibration-00000",
+      "think_tokens": 160
+    },
+    {
+      "answer_parseable": false,
+      "checkpoint_position": 619,
+      "coordinate_finite": true,
+      "generated_tokens": 159,
+      "natural_close": false,
+      "outcome_correctness_recorded": false,
+      "prompt_tokens": 541,
+      "task_id": "seam_calibration-00001",
+      "think_tokens": 160
+    }
+  ],
+  "schema_version": 1,
+  "scientific_result": false,
+  "stage": "model_smoke",
+  "think_token_ids": {
+    "close": 248069,
+    "eos": 248044,
+    "open": 248068
+  }
+}

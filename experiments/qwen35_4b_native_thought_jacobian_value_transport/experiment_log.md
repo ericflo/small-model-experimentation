@@ -58,3 +58,28 @@ Created as a new experiment scaffold.
 - Raised that cap to 768 so the frozen prompt plus 160-thought/8-answer allowance
   fits. Task data, output budget, sampling, checkpoints, gates, and controls are
   unchanged; no correctness outcome was observed or written.
+
+## 2026-07-12 — model-smoke attempt 003
+
+- Token IDs, prompt cardinality, model shape/revision, lens rank, J-coordinate
+  finiteness, and generation plumbing passed on two tasks.
+- Both traces hit the frozen 160-token thought cap without natural close; no
+  final alias was parseable. Correctness was deliberately not computed.
+- The same historical thought token differed by 0.0625 across short-prefix and
+  full-suffix forwards, above the frozen 1e-3 causal-invariance bar. This is
+  consistent with the Qwen hybrid sequence-length numerical sensitivity already
+  seen for batch geometry.
+- Preserved the failed receipt as `runs/model_smoke/attempt_003_failed.json`.
+  Plumbing pass is now reported separately from scientific causal invariance;
+  the latter remains fatal before causal confirmation. Neither the 160-token cap
+  nor invariance threshold is changed.
+
+## 2026-07-12 — model plumbing pass
+
+- Reran the identical two-task smoke with plumbing and scientific controls
+  reported separately. Model/revision, alias/think token IDs, lens ranks, finite
+  coordinates, full-recompute generation, and capture pass.
+- The receipt remains explicit that causal invariance fails (max 0.0625) and
+  both traces were cap-bound. Correctness outcomes remain absent.
+- Model smoke now unlocks only the frozen seam calibration; it cannot unlock
+  value fitting or causal work by itself.

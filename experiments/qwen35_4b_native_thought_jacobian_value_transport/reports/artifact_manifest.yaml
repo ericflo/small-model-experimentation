@@ -16,5 +16,6 @@ reproducibility:
   required_external_artifacts: []
 notes: >-
   No model call, adapter, or external artifact at design time. The byte-identical
-  3.08 MB replicated context lens is committed under assets/. Later stages are
-  fatal-gated and will be added to the command only after implementation.
+  3.08 MB replicated context lens is committed under assets/. Model-smoke
+  receipts preserve a failed causal-invariance/natural-close diagnostic and a
+  separate plumbing pass. Later stages remain fatal-gated.

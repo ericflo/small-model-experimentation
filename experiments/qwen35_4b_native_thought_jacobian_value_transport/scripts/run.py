@@ -339,13 +339,15 @@ def run_model_smoke(config: dict[str, Any]) -> dict[str, Any]:
             "outcome_correctness_recorded": False,
         })
     causal_max = max(causal_differences, default=float("inf"))
+    causal_invariance_pass = causal_max <= float(
+        config["controls"]["causal_activation_atol"]
+    )
     passed = bool(
         design["passed"]
         and model.n_layers == 32
         and model.d_model == 2560
         and all(stat.effective_rank == 24 for stat in stats.values())
         and all(row["coordinate_finite"] for row in rows)
-        and causal_max <= float(config["controls"]["causal_activation_atol"])
     )
     result = {
         "schema_version": 1,
@@ -377,6 +379,8 @@ def run_model_smoke(config: dict[str, Any]) -> dict[str, Any]:
             str(layer): stats[layer].effective_rank for layer in band
         },
         "causal_activation_max_abs": causal_max,
+        "causal_invariance_pass": causal_invariance_pass,
+        "causal_invariance_required_before_causal_confirmation": True,
         "rows": rows,
         "elapsed_seconds": time.perf_counter() - started,
     }
