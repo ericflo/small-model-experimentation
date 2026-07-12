@@ -243,11 +243,14 @@ def run_episodes(
     specs: list[tuple[RepoTask, int]],
     sampling,
     max_turns: int,
+    progress: bool = True,
 ) -> list[dict[str, Any]]:
     """Continuously batch independent repositories until submit or turn cap."""
     episodes = [Episode(task, trajectory) for task, trajectory in specs]
     active = episodes
+    loop_round = 0
     while active:
+        loop_round += 1
         records = [{"id": ep.record_id, "messages": ep.messages} for ep in active]
         rows, _summary = runner.generate(records, sampling)
         if len(rows) != len(active):
@@ -260,5 +263,13 @@ def run_episodes(
             episode.consume(outputs[0])
             if not episode.done and episode.turns < max_turns:
                 next_active.append(episode)
+        if progress:
+            completed = len(episodes) - len(next_active)
+            print(
+                f"[repo-agent] turn={loop_round} "
+                f"active_before={len(active)} active_after={len(next_active)} "
+                f"completed={completed}/{len(episodes)}",
+                flush=True,
+            )
         active = next_active
     return [episode.finish() for episode in episodes]

@@ -81,6 +81,13 @@ def run_command(command: list[str]) -> None:
     subprocess.run(command, cwd=ROOT, check=True)
 
 
+def run_if_missing(output: Path, command: list[str]) -> None:
+    if output.exists():
+        print(f"[resume] {output} exists", flush=True)
+        return
+    run_command(command)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--smoke", action="store_true")
@@ -110,11 +117,86 @@ def main() -> int:
             "--output-dir", str(artifact_root / "smoke" / "bank"),
         ])
         return 0
-    # The full path is intentionally explicit and gate-stopping. Later stages
-    # are added only after their predecessor has produced a passing receipt.
-    run_command([str(ROOT / ".venv-vllm" / "bin" / "python"), str(EXP / "scripts" / "harvest.py")])
-    run_command([str(ROOT / ".venv" / "bin" / "python"), str(EXP / "scripts" / "build_bank.py")])
-    print("[run] harvest and bank complete; training continuation requires a passing bank receipt", flush=True)
+    py = str(ROOT / ".venv" / "bin" / "python")
+    vpy = str(ROOT / ".venv-vllm" / "bin" / "python")
+    harvest = artifact_root / "harvest" / "trajectories.json"
+    bank_dir = artifact_root / "bank"
+    run_if_missing(harvest, [vpy, str(EXP / "scripts" / "harvest.py")])
+    run_if_missing(bank_dir / "receipt.json", [py, str(EXP / "scripts" / "build_bank.py")])
+
+    c54 = ROOT / cfg["model"]["c54_apex_data"]
+    for arm, repo_file in (
+        ("apex_replay", None),
+        ("action_only", bank_dir / "action_only.jsonl"),
+        ("compact", bank_dir / "compact.jsonl"),
+    ):
+        adapter = artifact_root / "adapters" / arm
+        train_files = [str(c54)] + ([str(repo_file)] if repo_file else [])
+        run_if_missing(adapter / "training_receipt.json", [
+            py, str(EXP / "scripts" / "train.py"), "--arm", arm,
+            "--train", *train_files, "--out", str(adapter),
+            "--max-steps", str(cfg["training"]["max_steps"]),
+            "--lr", str(cfg["training"]["learning_rate"]),
+            "--rank", str(cfg["training"]["rank"]),
+            "--alpha", str(cfg["training"]["alpha"]),
+            "--batch-size", str(cfg["training"]["batch_size"]),
+            "--grad-accum", str(cfg["training"]["gradient_accumulation_steps"]),
+            "--max-length", str(cfg["training"]["max_length"]),
+            "--seed", str(cfg["training"]["seed"]),
+        ])
+        merged = artifact_root / "merged" / arm
+        run_if_missing(merged / "merge_receipt.json", [
+            py, str(EXP / "scripts" / "merge_adapter.py"),
+            "--adapter", str(adapter), "--out", str(merged),
+        ])
+
+    def evaluate(arm: str, block: str, mode: str = "deep") -> Path:
+        output = artifact_root / "eval" / f"{block}_{arm}_{mode}.json"
+        run_if_missing(output, [
+            vpy, str(EXP / "scripts" / "eval_repo_agent.py"),
+            "--arm", arm, "--model", str(artifact_root / "merged" / arm),
+            "--block", block, "--mode", mode, "--output", str(output),
+        ])
+        return output
+
+    apex_trained = evaluate("apex_replay", "trained_dev")
+    compact_trained = evaluate("compact", "trained_dev")
+    apex_transfer = evaluate("apex_replay", "transfer_dev")
+    action_transfer = evaluate("action_only", "transfer_dev")
+    compact_transfer = evaluate("compact", "transfer_dev")
+    apex_sample = evaluate("apex_replay", "transfer_dev", "sample_more")
+    locality = artifact_root / "eval" / "locality.json"
+    run_if_missing(locality, [
+        py, str(EXP / "scripts" / "audit_locality.py"),
+        "--before-model", str(artifact_root / "merged" / "apex_replay"),
+        "--after-model", str(artifact_root / "merged" / "compact"),
+        "--contexts", str(EXP / "data" / "locality_contexts.json"),
+        "--out", str(locality),
+        "--ceiling", str(cfg["locality"]["median_non_target_logit_drift_max"]),
+        "--max-context-tokens", str(cfg["locality"]["max_context_tokens"]),
+    ])
+    dev_gate = EXP / "analysis" / "repo_dev_gate.json"
+    run_command([
+        py, str(EXP / "scripts" / "analyze_repo.py"),
+        "--candidate-trained", str(compact_trained), "--apex-trained", str(apex_trained),
+        "--candidate-transfer", str(compact_transfer), "--apex-transfer", str(apex_transfer),
+        "--action-transfer", str(action_transfer), "--sample-more-transfer", str(apex_sample),
+        "--locality", str(locality), "--out", str(dev_gate),
+    ])
+
+    apex_confirm = evaluate("apex_replay", "transfer_confirm")
+    action_confirm = evaluate("action_only", "transfer_confirm")
+    compact_confirm = evaluate("compact", "transfer_confirm")
+    apex_sample_confirm = evaluate("apex_replay", "transfer_confirm", "sample_more")
+    run_command([
+        py, str(EXP / "scripts" / "analyze_repo.py"),
+        "--candidate-trained", str(compact_trained), "--apex-trained", str(apex_trained),
+        "--candidate-transfer", str(compact_confirm), "--apex-transfer", str(apex_confirm),
+        "--action-transfer", str(action_confirm),
+        "--sample-more-transfer", str(apex_sample_confirm),
+        "--locality", str(locality), "--out", str(EXP / "analysis" / "repo_confirm_gate.json"),
+    ])
+    print("[run] whitebox gates passed; assign fresh Menagerie seeds before benchmark use", flush=True)
     return 0
 
 

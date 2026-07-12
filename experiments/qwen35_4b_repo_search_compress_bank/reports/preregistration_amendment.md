@@ -10,7 +10,10 @@ The implementation is therefore tightened, without changing any task, model, see
 - choose shared per-operator row weights so supervised **action-token** loss mass is equal across all four operators;
 - choose compact-only per-operator plan-span weights so supervised **plan-token** loss mass is also equal;
 - copy the calibrated contexts, actions, and row weights byte-for-byte into `action_only`, then set only its plan-span loss to zero;
+- normalize both repository arms by the same unweighted answer-token count, so compact planning adds its registered plan signal without diluting or increasing the shared action dose;
 - stop before training if any row crosses the frozen 4,096-token limit or either exact token-mass equality check fails.
+
+The compact plan is not generic “apply the patch” prose. For each of the six training families, a frozen one-sentence invariant mechanically paraphrases the public issue specification (for example, stable tie order or segment-boundary flushing) and is used at inspect/patch states. No private test, oracle edit, benchmark content, or post-harvest outcome chooses these invariants. The action-only control receives the identical teacher-forced invariant text and differs only by zero plan-span gradient.
 
 The smoke also revealed that a private edge-case test can pass while a visible regression fails. Repository success and submission success are now explicitly the conjunction of final visible and private tests. This corrects scoring to the preregistered phrase “fresh replay passes both visible and hidden tests”; it does not use an experimental outcome.
 

@@ -65,4 +65,4 @@ Result-bearing model outputs and weights live under `large_artifacts/qwen35_4b_r
 
 ## Status
 
-`PREREGISTERED / IMPLEMENTATION SMOKE IN PROGRESS`. No result-bearing harvest, training, evaluation, or Menagerie event has run yet.
+`PRE-TRAINING GATE PASSED`. The registered harvest covered 129/144 tasks and produced 516 replay-verified, exact-token-balanced rows. Matched-step training is authorized; no trained capability result or Menagerie event exists yet.

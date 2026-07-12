@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "stage": "registered_harvest_and_pretraining_bank",
+  "status": "PASS",
+  "model": "large_artifacts/qwen35_4b_interactive_policy_curriculum/merged/incumbent_blend",
+  "backend": "vLLM 0.24.0",
+  "harvest": {
+    "tasks": 144,
+    "trajectories": 576,
+    "covered_tasks": 129,
+    "task_coverage": 0.8958333333333334,
+    "successful_trajectories": 376,
+    "submitted_trajectories": 361,
+    "verified_after_final_patch": 370,
+    "commit_after_pass": 351,
+    "sampled_tokens": 1225314,
+    "per_family_coverage": {
+      "collision_index": 1.0,
+      "label_intervals": 1.0,
+      "segmented_rollup": 0.9166666666666666,
+      "specificity_router": 1.0,
+      "stable_merge": 0.875,
+      "weighted_quota": 0.5833333333333334
+    },
+    "sha256": "c69d44ee9f3df9d62fd47349dccb3b11f39619ba82d716f772a5d97c0bf93a16"
+  },
+  "bank": {
+    "covered_tasks": 129,
+    "compact_rows": 516,
+    "rows_per_operator": 129,
+    "source_patch_counts": {
+      "one": 122,
+      "two": 7
+    },
+    "collapsed_patch_count": 1,
+    "canonical_replay_pass_rate": 1.0,
+    "max_total_tokens": 879,
+    "weighted_action_token_mass_per_operator": 36110.0,
+    "weighted_plan_token_mass_per_operator": 3125.8,
+    "compact_sha256": "806fd5e96cef476cc3921f038f2fd502b4c1e8e20739f29c6b1d45bde81c7155",
+    "action_only_sha256": "0bcca1f2e4c586fca629869f906183cca95134faaa3a587c014126d46c5710e4",
+    "receipt_sha256": "81bc69b0a0e8fa54f3816b3862b0caea9319955900bbe2e7da409c7d6f4aed42"
+  },
+  "encoding": {
+    "c54_rows": 4669,
+    "repository_rows": 516,
+    "apex_skipped_rows": 0,
+    "repository_skipped_rows": 0,
+    "max_encoded_tokens": 3193,
+    "apex_control_effective_epochs": 2.0,
+    "candidate_effective_epochs": 1.8010794140323825,
+    "operator_complete_repository_microbatches": 129,
+    "compact_repository_target_tokens": 51739,
+    "action_only_repository_target_tokens": 36110
+  },
+  "gates": {
+    "overall_coverage": true,
+    "per_family_coverage": true,
+    "minimum_rows": true,
+    "canonical_replay": true,
+    "operator_presence": true,
+    "action_token_mass_equal": true,
+    "plan_token_mass_equal": true,
+    "no_overlength_rows": true,
+    "compact_action_control_byte_match": true,
+    "firewall_clean": true
+  },
+  "downstream_authorization": "matched_step_training"
+}

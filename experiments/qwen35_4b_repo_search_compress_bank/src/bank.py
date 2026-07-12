@@ -14,6 +14,33 @@ from repo_tasks import RepoEnv, RepoTask
 
 OPERATORS = ("INSPECT", "PATCH", "VERIFY", "COMMIT")
 
+FAMILY_INSIGHTS = {
+    "segmented_rollup": (
+        "Treat each None as a hard boundary: flush even a partial chunk before resetting, "
+        "so aggregation never crosses segments."
+    ),
+    "specificity_router": (
+        "Scan every qualifying rule and retain the largest min_priority; replace the best "
+        "only on a strict increase so equal-specificity input order survives."
+    ),
+    "stable_merge": (
+        "Map each identity to its first output position, then let later duplicates fill only "
+        "fields that are absent or None without mutating the inputs."
+    ),
+    "weighted_quota": (
+        "Floor each exact weighted share, then give leftover units to descending fractional "
+        "remainders with mapping order as the tie-break."
+    ),
+    "label_intervals": (
+        "Keep overlap chains independent by label: merge touching ranges only with a prior "
+        "compatible label, never merely with the most recent different label."
+    ),
+    "collision_index": (
+        "Normalize arbitrary whitespace with split/join and collect every original label per "
+        "normalized key instead of overwriting collisions."
+    ),
+}
+
 
 def _action_key(action: dict[str, Any]) -> str:
     return json.dumps(action, sort_keys=True, separators=(",", ":"))
@@ -123,12 +150,17 @@ def canonical_actions(patches: list[dict[str, Any]]) -> list[dict[str, Any]]:
     )
 
 
-def compact_plan(action: dict[str, Any], observation_before: str | None = None) -> str:
+def compact_plan(
+    task: RepoTask, action: dict[str, Any], observation_before: str | None = None
+) -> str:
     tool = action["tool"]
+    insight = FAMILY_INSIGHTS.get(task.family)
+    if insight is None:
+        raise KeyError(f"no frozen compact invariant for training family {task.family}")
     if tool == "read":
-        return f"Inspect {action['path']} to locate the issue-relevant implementation before editing."
+        return f"Inspect {action['path']} and trace it against this invariant: {insight}"
     if tool == "patch":
-        return f"Apply the minimal exact repair in {action['path']}; verification must follow the final edit."
+        return f"Implement the invariant directly in {action['path']}: {insight} Keep the edit scoped, then verify."
     if tool == "test":
         return "The intended edit is in place. Run the visible tests before committing the workspace."
     if tool == "submit":
@@ -149,7 +181,7 @@ def replay_canonical(task: RepoTask, patches: list[dict[str, Any]]) -> tuple[lis
             operator = operator_for(action)
             if operator not in OPERATORS:
                 raise AssertionError(operator)
-            plan = compact_plan(action, previous_observation)
+            plan = compact_plan(task, action, previous_observation)
             answer = _action_key(action)
             row = {
                 "id": f"{task.task_id}-compact-{step_index:02d}",
@@ -219,7 +251,9 @@ def action_only_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     for row in result:
         row["id"] = row["id"].replace("-compact-", "-action-only-")
         row["kind"] = "repo_action_only"
-        row["think"] = "Choose the next tool action."
+        # Keep the teacher-forced sequence byte-identical. The control removes
+        # only gradient on the compact plan span, not the plan context seen by
+        # its matched action target.
         row["think_weight"] = 0.0
     return result
 

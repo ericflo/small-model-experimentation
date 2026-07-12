@@ -91,11 +91,23 @@ def main() -> int:
     if args.oracle_smoke:
         trajectories = oracle_trajectories(tasks)
         source = "HOST_ORACLE_SMOKE_ONLY"
+        harvest_gate = {"overall_coverage": True, "per_family_coverage": True}
     else:
         harvest_path = args.harvest or artifact_root / "harvest" / "trajectories.json"
         harvest = json.loads(harvest_path.read_text())
         trajectories = harvest["trajectories"]
         source = str(harvest_path.resolve())
+        summary = harvest["summary"]
+        harvest_gate_observed = {
+            "overall_coverage": float(summary["task_coverage"]) >= float(hcfg["minimum_task_coverage"]),
+            "per_family_coverage": all(
+                float(row["coverage"]) >= float(hcfg["minimum_per_family_coverage"])
+                for row in summary["per_family"].values()
+            ),
+        }
+        harvest_gate = {
+            key: value or args.smoke for key, value in harvest_gate_observed.items()
+        }
         expected_ids = {task.task_id for task in tasks}
         observed_ids = {row["task_id"] for row in trajectories}
         if observed_ids != expected_ids:
@@ -132,6 +144,7 @@ def main() -> int:
     )
     compact_rows = sum(1 for _ in compact_path.open(encoding="utf-8"))
     gate = {
+        **harvest_gate,
         "minimum_rows": compact_rows >= int(hcfg["minimum_compact_rows"]) or args.oracle_smoke or args.smoke,
         "replay_pass_rate": replay_rate >= float(cfg["bank"]["require_replay_pass_rate"]),
         "operator_presence": set(built["operator_balance"]["counts"]) == set(cfg["bank"]["required_operators"]),
@@ -144,6 +157,7 @@ def main() -> int:
         "source": source,
         "oracle_smoke": args.oracle_smoke,
         "real_harvest_smoke": args.smoke,
+        "harvest_gate_observed": harvest_gate_observed if not args.oracle_smoke else harvest_gate,
         "task_manifest_sha256": repo_tasks.manifest_digest(tasks),
         "tasks": len(tasks),
         "covered_tasks": len(built["replay_receipts"]),

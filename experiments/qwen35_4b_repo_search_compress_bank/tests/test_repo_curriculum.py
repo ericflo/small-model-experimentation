@@ -68,6 +68,11 @@ class RepoCurriculumTests(unittest.TestCase):
         masses = built["operator_balance"]["loss_mass"]
         self.assertEqual(len({round(value, 8) for value in masses.values()}), 1)
         self.assertTrue(built["replay_receipts"][0]["hidden_pass"])
+        for compact, action_only in zip(built["compact_rows"], built["action_only_rows"]):
+            self.assertEqual(compact["messages"], action_only["messages"])
+            self.assertEqual(compact["think"], action_only["think"])
+            self.assertEqual(compact["answer"], action_only["answer"])
+            self.assertEqual(action_only["think_weight"], 0.0)
         bank.assert_firewall_clean(built, [task])
         rendered = json.dumps(built)
         self.assertNotIn(task.hidden_test, rendered)

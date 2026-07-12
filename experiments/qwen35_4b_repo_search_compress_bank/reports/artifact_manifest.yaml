@@ -4,17 +4,20 @@ experiment_id: "qwen35_4b_repo_search_compress_bank"
 external_artifacts:
   - name: harvest trajectories
     storage: large_artifacts/qwen35_4b_repo_search_compress_bank/harvest/trajectories.json
-    status: not_generated
+    status: generated
     required_for: replay-minimized repository bank
-    checksum: pending
+    checksum: sha256:c69d44ee9f3df9d62fd47349dccb3b11f39619ba82d716f772a5d97c0bf93a16
     regenerate: >-
       .venv-vllm/bin/python
       experiments/qwen35_4b_repo_search_compress_bank/scripts/harvest.py
   - name: replay-verified compact and action-only banks
     storage: large_artifacts/qwen35_4b_repo_search_compress_bank/bank
-    status: not_generated
+    status: generated
     required_for: registered mechanism and control training
-    checksum: pending
+    checksum: >-
+      compact.jsonl sha256:806fd5e96cef476cc3921f038f2fd502b4c1e8e20739f29c6b1d45bde81c7155;
+      action_only.jsonl sha256:0bcca1f2e4c586fca629869f906183cca95134faaa3a587c014126d46c5710e4;
+      receipt.json sha256:81bc69b0a0e8fa54f3816b3862b0caea9319955900bbe2e7da409c7d6f4aed42
     regenerate: >-
       .venv/bin/python
       experiments/qwen35_4b_repo_search_compress_bank/scripts/build_bank.py
