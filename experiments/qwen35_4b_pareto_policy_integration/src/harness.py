@@ -31,6 +31,11 @@ def make_runner(
             gpu_memory_utilization=float(engine_cfg.get("gpu_memory_utilization", 0.85)),
             max_num_seqs=int(engine_cfg.get("max_num_seqs", 64)),
             max_num_batched_tokens=int(engine_cfg.get("max_num_batched_tokens", 16384)),
+            cudagraph_capture_sizes=(
+                tuple(int(value) for value in engine_cfg["cudagraph_capture_sizes"])
+                if engine_cfg.get("cudagraph_capture_sizes") is not None
+                else None
+            ),
             adapter=Path(adapter) if adapter else None,
             model_override=Path(model_override) if model_override else None,
         )
