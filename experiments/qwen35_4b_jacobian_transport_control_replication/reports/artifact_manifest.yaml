@@ -12,13 +12,11 @@ reproducibility:
   full_command: >-
     .venv/bin/python
     experiments/qwen35_4b_jacobian_transport_control_replication/scripts/run.py
-    --stage control-calibration && .venv/bin/python
-    experiments/qwen35_4b_jacobian_transport_control_replication/scripts/run.py
     --stage confirmation
   required_external_artifacts: []
 notes: >-
   No training or adapter. A byte-identical 3.08 MB copy of the parent frozen
   lens is committed under assets/. Outcome-blind model-smoke receipts include
   three preserved failures and one passing exact-lattice result. The complete
-  480-row numeric calibration and summary are committed locally; confirmation
-  remains unopened.
+  480-row numeric calibration and summary are committed and hash-locked; do not
+  overwrite them before confirmation. Confirmation remains unopened.

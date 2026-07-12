@@ -152,3 +152,42 @@ This repair can only make the random control more stringently orthogonal to the
 J span. It cannot select an inert model outcome. The adversarial verdict remains
 proceed-to-calibration only if a fresh rerun of the original 20-row model smoke
 passes in full.
+
+## Pre-confirmation implementation audit
+
+Completed after the committed 480/480 numeric calibration pass and before any
+confirmation outcome was opened.
+
+1. **Calibration could be overwritten or selectively rerun.** Confirmation is
+   locked to commit `2bd6376c28283546a111e54ec2dd2e92a0fd6a64` and exact SHA-256
+   hashes for both committed calibration files. The runner also reconstructs
+   all 480 expected identities, enforces the outcome-blind schema, and recomputes
+   both maxima.
+2. **A missing arm could silently improve the endpoint.** Pure decision logic
+   requires exactly 48 items x 2 prompt kinds x 8 registered arms = 768 unique
+   outcome rows, plus exactly 480 unique random-control layer rows.
+3. **The easier random draw could be reported.** Primary effect uses the larger
+   target rate of `random_a` and `random_b`; paired 10,000-resample lower bounds
+   must independently exceed zero against both arms.
+4. **Wrong-donor J could merely act like target J.** The frozen gate separately
+   requires target-vs-wrong specificity and an increase in the wrong donor's own
+   mapped digit. Unit tests make a nonspecific wrong arm fail.
+5. **Controls could drift between calibration and confirmation.** Both stages
+   call the same quantization-aware constructor with the same frozen 32 draws,
+   correction/search budgets, exact lattice solver, and post-bf16 checks. Fresh
+   confirmation IDs produce disjoint fixed seeds.
+6. **Raw logits or a target-digit gradient could construct the intervention.**
+   Interventions use only target/wrong activations, the frozen concept lens, or
+   the preregistered concept unembedding control. Serialized rows retain only
+   top-token flags and two prespecified scalar margins; no digit direction or
+   gradient exists.
+7. **Backend or batching could recreate the known Qwen discrepancy.** Every arm
+   is an unpadded, cache-free Transformers bf16 SDPA batch-one full forward. No
+   vLLM/HF mixing or batch-two scoring is implemented.
+8. **Implementation could be changed after looking.** The runner, unlock hashes,
+   arm-completeness tests, decision tests, and this audit must be committed and
+   pushed before the one confirmation run.
+
+Verdict: proceed once the implementation commit is on `main` and local/remote
+release gates are green. A passing result remains oracle mechanism evidence,
+not a deployable capability claim.

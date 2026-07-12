@@ -108,3 +108,19 @@ Created as a new experiment scaffold.
   absent.
 - Decision: `CONTROL_CALIBRATION_PASS`. Confirmation remains unopened pending a
   separate calibration commit/push.
+
+## 2026-07-12 — confirmation implementation and adversarial audit
+
+- Locked confirmation to calibration commit
+  `2bd6376c28283546a111e54ec2dd2e92a0fd6a64` and exact summary/row SHA-256
+  hashes. The unlock reconstructs all 480 numeric identities and maxima.
+- Implemented exactly the eight frozen arms, 768-row completeness contract, and
+  a separate 480-row realized-control artifact.
+- Implemented the frozen endpoint against the worse of two random target rates,
+  paired bootstrap lower bounds against both arms, wrong-donor own-value
+  specificity, parse, clean, donor, causal, and numeric gates.
+- Added pure tests for committed calibration integrity, complete arm pairing,
+  both bootstrap comparisons, and failure of nonspecific wrong-donor behavior.
+- Completed and saved the pre-confirmation adversarial implementation audit.
+  No confirmation outcome has been opened; implementation must be committed and
+  pushed before the one run.

@@ -47,9 +47,12 @@ and the pre-run adversarial review is in
 .venv/bin/python -m pytest experiments/qwen35_4b_jacobian_transport_control_replication/tests -q
 .venv/bin/python experiments/qwen35_4b_jacobian_transport_control_replication/scripts/run.py --stage smoke
 .venv/bin/python experiments/qwen35_4b_jacobian_transport_control_replication/scripts/run.py --stage model-smoke
-.venv/bin/python experiments/qwen35_4b_jacobian_transport_control_replication/scripts/run.py --stage control-calibration
 .venv/bin/python experiments/qwen35_4b_jacobian_transport_control_replication/scripts/run.py --stage confirmation
 ```
+
+Confirmation consumes the exact committed calibration artifacts; do not rerun
+and overwrite calibration in this result-bearing checkout. The calibration
+command is retained as a stage for independent clean-checkout reproduction.
 
 ## Results
 
@@ -68,7 +71,9 @@ fraction was `0.00999293`, and exact causal-suffix difference remained zero.
 Thirty-seven rows used lattice repair (34 at layer 8), with at most three pairs.
 The calibration artifacts contain only numeric geometry and explicitly record
 that logits/outcomes were not written. These are still plumbing results, not
-causal evidence; all untouched confirmation outcomes remain unopened.
+causal evidence. The hash-locked eight-arm confirmation runner and a second
+pre-run adversarial implementation audit are now complete; all untouched
+confirmation outcomes remain unopened.
 
 ## Scope
 

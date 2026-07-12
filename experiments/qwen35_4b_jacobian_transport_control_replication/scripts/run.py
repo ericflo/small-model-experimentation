@@ -36,6 +36,11 @@ from task_data import (  # noqa: E402
 CONFIG_PATH = EXP / "configs" / "default.yaml"
 DATA_DIR = EXP / "data" / "procedural"
 RUNS_DIR = EXP / "runs"
+CALIBRATION_UNLOCK = {
+    "commit": "2bd6376c28283546a111e54ec2dd2e92a0fd6a64",
+    "summary_sha256": "58ac9086b86efcae78180476e5631024f1e6c3afe08cc3f562ba5d35ea7ba22b",
+    "rows_sha256": "be7c73edfff88b79bd9f4f115c5086cf56bcf5927f77ee95a92135244f3ea27d",
+}
 
 
 def load_config() -> dict[str, Any]:
@@ -533,6 +538,345 @@ def run_control_calibration(config: dict[str, Any]) -> dict[str, Any]:
     return result
 
 
+def confirmation_unlock(config: dict[str, Any]) -> dict[str, Any]:
+    """Require the exact committed, outcome-blind calibration firewall."""
+    from confirmation import validate_calibration_contract
+
+    summary_path = RUNS_DIR / "control_calibration.json"
+    rows_path = RUNS_DIR / "control_calibration_rows.jsonl"
+    if not summary_path.exists() or not rows_path.exists():
+        raise RuntimeError("committed calibration artifacts are missing")
+    head = _git(["rev-parse", "HEAD"]).stdout.strip()
+    commit = str(CALIBRATION_UNLOCK["commit"])
+    ancestor = (
+        _git(["merge-base", "--is-ancestor", commit, head], check=False).returncode
+        == 0
+    )
+    observed = {
+        "summary_sha256": sha256_file(summary_path),
+        "rows_sha256": sha256_file(rows_path),
+    }
+    expected = {
+        "summary_sha256": str(CALIBRATION_UNLOCK["summary_sha256"]),
+        "rows_sha256": str(CALIBRATION_UNLOCK["rows_sha256"]),
+    }
+    contract = validate_calibration_contract(
+        read_json(summary_path), read_jsonl(rows_path), config
+    )
+    passed = bool(ancestor and observed == expected and contract["passed"])
+    result = {
+        "schema_version": 1,
+        "stage": "confirmation_unlock",
+        "passed": passed,
+        "scientific_result": False,
+        "calibration_commit": commit,
+        "head": head,
+        "calibration_is_ancestor": ancestor,
+        "observed_sha256": observed,
+        "expected_sha256": expected,
+        "calibration_contract": contract,
+    }
+    write_json(RUNS_DIR / "confirmation_unlock.json", result)
+    if not passed:
+        raise RuntimeError(f"confirmation calibration firewall failed: {result}")
+    return result
+
+
+def run_confirmation(config: dict[str, Any]) -> dict[str, Any]:
+    design = design_boundary_receipt(config)
+    unlock = confirmation_unlock(config)
+    import time
+
+    import torch
+
+    from confirmation import evaluate_confirmation, scored_row
+    from coordinates import read_coordinates
+    from model_ops import CoordinateClampPatcher, FullActivationPatcher
+
+    started = time.perf_counter()
+    torch.cuda.reset_peak_memory_stats()
+    model, lens = _load_model_and_lens(config)
+    items = read_jsonl(DATA_DIR / "confirmation.jsonl")
+    expected_items = int(config["data"]["confirmation_items"])
+    if len(items) != expected_items:
+        raise RuntimeError("untouched confirmation cardinality changed")
+    band = tuple(int(layer) for layer in config["intervention"]["band"])
+    rtol = float(config["lens"]["pseudoinverse_rtol"])
+    max_length = int(config["intervention"]["max_sequence_tokens"])
+    concept_index = {concept: index for index, concept in enumerate(lens.concepts)}
+    j_directions = {layer: lens.directions[layer] for layer in band}
+    logit_dictionary = (
+        model.lm_head.weight[list(lens.token_ids)].float().T.detach().cpu()
+    )
+    logit_directions = {layer: logit_dictionary for layer in band}
+    result_rows: list[dict[str, Any]] = []
+    control_rows: list[dict[str, Any]] = []
+    causal_differences: list[float] = []
+    position_contract_items = 0
+
+    def record(
+        item: dict[str, Any],
+        *,
+        kind: str,
+        condition: str,
+        score: dict[str, Any],
+        row_band: tuple[int, ...],
+    ) -> dict[str, Any]:
+        row = scored_row(
+            model,
+            item,
+            kind=kind,
+            condition=condition,
+            band=row_band,
+            score=score,
+            concepts=CONCEPTS,
+            digits=DIGITS,
+        )
+        result_rows.append(row)
+        return row
+
+    for item in items:
+        prepared = {
+            (kind, selected): _prepare_item(
+                model, item, kind=kind, selected=selected, max_length=max_length
+            )
+            for kind in ("direct", "consequence")
+            for selected in (item["source"], item["target"], item["wrong"])
+        }
+        if len({value["position"] for value in prepared.values()}) != 1:
+            raise RuntimeError(
+                f"confirmation position contract failed: {item['item_id']}"
+            )
+        for kind in ("direct", "consequence"):
+            lengths = {
+                prepared[(kind, selected)]["sequence_tokens"]
+                for selected in (item["source"], item["target"], item["wrong"])
+            }
+            if len(lengths) != 1:
+                raise RuntimeError(
+                    f"confirmation length contract failed: {item['item_id']}/{kind}"
+                )
+        position_contract_items += 1
+        captures = {
+            key: model.capture(value, layers=band) for key, value in prepared.items()
+        }
+        for selected in (item["source"], item["target"], item["wrong"]):
+            for layer in band:
+                causal_differences.append(float((
+                    captures[("direct", selected)]["activations"][layer]
+                    - captures[("consequence", selected)]["activations"][layer]
+                ).abs().max()))
+
+        for kind in ("direct", "consequence"):
+            source_prepared = prepared[(kind, item["source"])]
+            source_capture = captures[(kind, item["source"])]
+            target_capture = captures[(kind, item["target"])]
+            wrong_capture = captures[(kind, item["wrong"])]
+            record(
+                item,
+                kind=kind,
+                condition="baseline",
+                score=source_capture,
+                row_band=(),
+            )
+
+            full_patcher = FullActivationPatcher(
+                model.layers,
+                source_prepared["position"],
+                {layer: target_capture["activations"][layer] for layer in band},
+            )
+            record(
+                item,
+                kind=kind,
+                condition="full_target_donor",
+                score=model.score(source_prepared, patcher=full_patcher),
+                row_band=band,
+            )
+
+            desired_j = model.donor_coordinates(
+                target_capture["activations"], j_directions, rtol=rtol
+            )
+            j_patcher = CoordinateClampPatcher(
+                model.layers,
+                source_prepared["position"],
+                j_directions,
+                desired_j,
+                rtol=rtol,
+            )
+            j_score = model.score(source_prepared, patcher=j_patcher)
+            record(
+                item,
+                kind=kind,
+                condition="j_all24",
+                score=j_score,
+                row_band=band,
+            )
+            reference_deltas = dict(j_score["deltas"])
+
+            for arm in config["intervention"]["random_arms"]:
+                control_patcher = _control_patcher(
+                    model,
+                    source_prepared,
+                    config=config,
+                    item_id=item["item_id"],
+                    kind=kind,
+                    arm=arm,
+                    directions=j_directions,
+                    reference_deltas=reference_deltas,
+                )
+                control_score = model.score(
+                    source_prepared, patcher=control_patcher
+                )
+                numeric = _numeric_rows(
+                    control_patcher,
+                    item_id=item["item_id"],
+                    kind=kind,
+                    arm=arm,
+                )
+                control_rows.extend(numeric)
+                outcome = record(
+                    item,
+                    kind=kind,
+                    condition=arm,
+                    score=control_score,
+                    row_band=band,
+                )
+                outcome.update({
+                    "control_geometry_pass": all(row["passed"] for row in numeric),
+                    "control_max_norm_relative_error": max(
+                        row["norm_relative_error"] for row in numeric
+                    ),
+                    "control_max_realized_span_projection_fraction": max(
+                        row["realized_span_projection_fraction"] for row in numeric
+                    ),
+                    "control_lattice_pair_steps": sum(
+                        row["lattice_pair_steps"] for row in numeric
+                    ),
+                })
+
+            desired_wrong = model.donor_coordinates(
+                wrong_capture["activations"], j_directions, rtol=rtol
+            )
+            wrong_patcher = CoordinateClampPatcher(
+                model.layers,
+                source_prepared["position"],
+                j_directions,
+                desired_wrong,
+                rtol=rtol,
+            )
+            record(
+                item,
+                kind=kind,
+                condition="j_wrong_donor",
+                score=model.score(source_prepared, patcher=wrong_patcher),
+                row_band=band,
+            )
+
+            pair_indices = [
+                concept_index[item["source"]], concept_index[item["target"]]
+            ]
+            pair_directions = {
+                layer: lens.directions[layer][:, pair_indices] for layer in band
+            }
+            pair_desired = {
+                layer: read_coordinates(
+                    target_capture["activations"][layer].reshape(1, -1),
+                    pair_directions[layer],
+                    rtol=rtol,
+                )[0]
+                for layer in band
+            }
+            pair_patcher = CoordinateClampPatcher(
+                model.layers,
+                source_prepared["position"],
+                pair_directions,
+                pair_desired,
+                rtol=rtol,
+            )
+            record(
+                item,
+                kind=kind,
+                condition="j_pair",
+                score=model.score(source_prepared, patcher=pair_patcher),
+                row_band=band,
+            )
+
+            desired_logit = model.donor_coordinates(
+                target_capture["activations"], logit_directions, rtol=rtol
+            )
+            logit_patcher = CoordinateClampPatcher(
+                model.layers,
+                source_prepared["position"],
+                logit_directions,
+                desired_logit,
+                rtol=rtol,
+            )
+            record(
+                item,
+                kind=kind,
+                condition="logit_lens_all24",
+                score=model.score(source_prepared, patcher=logit_patcher),
+                row_band=band,
+            )
+
+    causal_max_abs = max(causal_differences, default=float("inf"))
+    evaluation = evaluate_confirmation(
+        result_rows,
+        control_rows,
+        config,
+        design_pass=bool(design["passed"]),
+        calibration_pass=bool(unlock["passed"]),
+        causal_max_abs=causal_max_abs,
+    )
+    result = {
+        "schema_version": 1,
+        "stage": "confirmation",
+        "passed": bool(evaluation["passed"]),
+        "decision": evaluation["decision"],
+        "scientific_result": True,
+        "oracle_mechanism_only": True,
+        "band": list(band),
+        "confirmation_n": len(items),
+        "summaries": evaluation["summaries"],
+        "gate_metrics": evaluation["gate_metrics"],
+        "control_audit": {
+            **evaluation["control_audit"],
+            "norm_tolerance": float(
+                config["intervention"]["norm_relative_tolerance"]
+            ),
+            "projection_tolerance": float(
+                config["intervention"]["realized_span_projection_max"]
+            ),
+            "causal_activation_max_abs": causal_max_abs,
+            "target_digit_gradient_used": False,
+            "patch_batch_size": 1,
+            "use_cache": False,
+            "calibration_commit": unlock["calibration_commit"],
+            "calibration_hashes": unlock["observed_sha256"],
+        },
+        "contracts": {
+            "design_pass": bool(design["passed"]),
+            "calibration_unlock_pass": bool(unlock["passed"]),
+            "position_contract_items": position_contract_items,
+            "model_id": config["model"]["id"],
+            "model_revision": config["model"]["revision"],
+            "backend": "transformers_bfloat16_sdpa_batch_one_no_cache",
+        },
+        "counts": {
+            "items": len(items),
+            "outcome_rows": len(result_rows),
+            "numeric_control_rows": len(control_rows),
+        },
+        "elapsed_seconds": time.perf_counter() - started,
+        "peak_allocated_bytes": torch.cuda.max_memory_allocated(),
+    }
+    write_jsonl(RUNS_DIR / "confirmation_rows.jsonl", result_rows)
+    write_jsonl(RUNS_DIR / "confirmation_control_rows.jsonl", control_rows)
+    write_json(RUNS_DIR / "confirmation.json", result)
+    print(json.dumps(result, indent=2, sort_keys=True))
+    return result
+
+
 def unavailable(stage: str) -> None:
     raise RuntimeError(f"stage {stage!r} is not implemented; refusing a placeholder result")
 
@@ -554,6 +898,9 @@ def main() -> int:
         return 0
     if args.stage == "control-calibration":
         run_control_calibration(config)
+        return 0
+    if args.stage == "confirmation":
+        run_confirmation(config)
         return 0
     design_boundary_receipt(config)
     unavailable(args.stage)
