@@ -77,3 +77,20 @@ Created as a new experiment scaffold.
   rendered prompt length 438 tokens). Calibration now requires both merged
   specialists to differ from base and from each other under the same greedy
   vLLM runner; the canary has no task-success threshold.
+
+## 2026-07-12 — pre-evaluation protocol hardening and upstream closure
+
+- Before any calibration or qualification score existed, audit found that the
+  imported procedural harness did not forward the config's explicit CUDA-graph
+  capture list even though CLI generation did. Commit `ce45c383` forwards the
+  frozen geometry and adds a regression test.
+- Commit `437a1b87` additionally makes every procedural score fail closed unless
+  all generation calls prove the exact local composite, config hash, engine
+  dimensions, and resolved full-decode graph geometry. The scientific suite is
+  31/31 and repository CI is green.
+- C54 concurrently closed its simple adapter-capacity alternative after this
+  experiment's design lock: rank-128/alpha-256 APEX scored quick `+0.249` and
+  medium `+0.229`, below rank-32 APEX (`+0.308`/`+0.345`). Extra LoRA capacity
+  therefore did not dissolve the frontier. This strengthens the motivation for
+  the already-frozen policy-space test but does not change an arm, seed, gate,
+  or hypothesis here.
