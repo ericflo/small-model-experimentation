@@ -1,0 +1,16 @@
+{
+  "decision": "NO_NATURAL_SEAM",
+  "elapsed_seconds": 389.9447855055332,
+  "items": 16,
+  "mean_think_tokens": 160.0,
+  "mixed_tasks": 0,
+  "natural_close_rate": 0.0,
+  "parse_rate": 0.0,
+  "passed": false,
+  "peak_allocated_bytes": 8516670976,
+  "schema_version": 1,
+  "scientific_result": true,
+  "stage": "seam_calibration",
+  "success_rate": 0.0,
+  "traces": 48
+}

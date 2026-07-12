@@ -54,3 +54,13 @@ Diagnostics should become standard infrastructure. They are how future agents av
   [1,1]. This establishes an oracle, context-local, causally consumed concept
   state on the procedural lookup substrate and unlocks native-thought work. It
   does not install capability: target donor identity remains supplied.
+
+- [qwen35_4b_native_thought_jacobian_value_transport](../../experiments/qwen35_4b_native_thought_jacobian_value_transport/reports/report.md)
+  (unclaimed; terminal `NO_NATURAL_SEAM`): the first licensed native-thought
+  successor stopped before value fitting. All 48/48 frozen 160-token traces on
+  16 fresh identifiable tasks hit the thought cap without natural close; parse,
+  success, and mixed-task counts were zero. Model smoke also found up to 0.0625
+  historical-token activation drift across different suffix lengths. This is not
+  evidence against J-space value: the natural answer seam was unreachable. It
+  requires a fresh cap-selection/confirmation experiment and dynamic per-length
+  control geometry before causal patching.

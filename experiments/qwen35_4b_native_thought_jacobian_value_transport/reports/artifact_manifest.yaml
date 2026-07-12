@@ -18,4 +18,5 @@ notes: >-
   No model call, adapter, or external artifact at design time. The byte-identical
   3.08 MB replicated context lens is committed under assets/. Model-smoke
   receipts preserve a failed causal-invariance/natural-close diagnostic and a
-  separate plumbing pass. Later stages remain fatal-gated.
+  separate plumbing pass. The terminal seam summary and all 48 traces are
+  committed; later stages were correctly canceled. No artifact is omitted.

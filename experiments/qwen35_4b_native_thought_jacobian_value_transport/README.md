@@ -65,7 +65,7 @@ later stages still refuse placeholders until their audited implementations land.
 
 ## Results
 
-Design, CPU smoke, and model plumbing smoke only. The generator produced 16 seam, 32 value-fit, and 32
+Terminal frozen decision: `NO_NATURAL_SEAM`. The generator produced 16 seam, 32 value-fit, and 32
 causal-confirmation tasks: 80/80 unique fingerprints, zero overlap with the
 direct Jacobian parent, balanced identifiable first-operation targets, and the
 exact frozen lens hash.
@@ -75,14 +75,27 @@ The two-task model smoke validates revision, token IDs, one-token aliases, full
 recording correctness. Both traces hit the frozen 160-token cap without natural
 close, and historical-token activations changed by up to 0.0625 across suffix
 lengths, so causal invariance currently fails. These are scientific seam/control
-risks; the frozen 16-task seam gate will decide rather than changing budgets.
+risks.
+
+The frozen 16-task seam confirmed the failure on all 48 traces:
+
+- natural close: 0/48;
+- parseable final alias: 0/48;
+- exact success: 0/48;
+- mixed correct/incorrect tasks: 0/16; and
+- thought-cap contact: 48/48 at exactly 160 tokens (7,632 cache-free forwards).
+
+The natural-close/parse/headroom gates fail, so prefix-value fitting, numeric
+controls, and causal confirmation are canceled. This is an interface-budget
+failure, not evidence that a J-space value coordinate is absent. The result is
+preserved rather than raising the budget in place.
 
 ## Scope
 
-Ground-truth continuation outcomes will fit the value readout and select causal
-donors. Therefore even a positive terminal result is oracle mechanism evidence,
-not installed capability. A separate non-oracle controller must beat frozen and
-matched-compute sampling on new tasks.
+Had the seam passed, ground-truth continuation outcomes would have fit the value
+readout and selected causal donors, making later evidence oracle-only. Those
+stages did not run. Any successor still requires a separate non-oracle controller
+to beat frozen and matched-compute sampling on new tasks.
 
 ## Knowledgebase Update
 

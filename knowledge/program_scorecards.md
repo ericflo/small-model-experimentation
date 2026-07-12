@@ -79,9 +79,9 @@ For evidence-linked durable claims, use [claims/index.md](claims/index.md).
 ## Interpretability And Diagnostics
 
 - Program: [charter](../research_programs/interpretability_and_diagnostics/charter.md)
-- Current read: diagnostics are useful when they explain why a mechanism transfers or fails, not when they are post-hoc decoration. Late answer-position J coordinates are writable but non-transporting; the early context-local clamp now replicates 48/48 semantic consequences on fresh mappings with 1,440/1,440 calibration-plus-confirmation exact control rows valid. This is oracle causal-state evidence, not installed capability.
-- Best next experiment: native `<think>`-prefix value transport on fresh verifier-scored procedural tasks, followed only on a causal pass by a learned non-oracle controller against matched-compute sampling.
-- Strong anchors: `qwen_structural_compiler_attribution_ablation`, `qwen35_4b_probe_to_prompt`, `qwen35_4b_jacobian_value_transport`, `qwen35_4b_context_local_jacobian_clamp`, `qwen35_4b_jacobian_transport_control_replication`.
+- Current read: diagnostics are useful when they explain why a mechanism transfers or fails, not when they are post-hoc decoration. Late answer-position J coordinates are writable but non-transporting; the early context-local clamp replicates 48/48 consequences with 1,440/1,440 exact control rows. The first native-thought transfer did not test value because all 48 traces were still thinking at the frozen 160-token cap and variable sequence length moved historical activations numerically.
+- Best next experiment: a fresh selection/confirmation ladder that earns a natural-close cap and separates same-length semantic invariance from sequence-length kernel drift; only then resume J-space prefix value and causal patching.
+- Strong anchors: `qwen_structural_compiler_attribution_ablation`, `qwen35_4b_probe_to_prompt`, `qwen35_4b_jacobian_value_transport`, `qwen35_4b_context_local_jacobian_clamp`, `qwen35_4b_jacobian_transport_control_replication`, `qwen35_4b_native_thought_jacobian_value_transport`.
 - Avoid repeating: probes that do not change the next experiment, next-token writing tests presented as reasoning transport, promoting a perfect point estimate past a failed control gate, or presenting an oracle donor as a deployable gain.
 - Evidence that advances the program: a diagnostic predicts which variants will fail before the final metric is observed.
 

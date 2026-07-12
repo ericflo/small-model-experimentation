@@ -3102,11 +3102,11 @@
   },
   {
     "file_counts": {
-      ".json": 5,
-      ".jsonl": 3,
+      ".json": 7,
+      ".jsonl": 4,
       ".md": 7,
       ".pt": 1,
-      ".py": 8,
+      ".py": 9,
       ".yaml": 3
     },
     "id": "qwen35_4b_native_thought_jacobian_value_transport",
@@ -3123,6 +3123,7 @@
     ],
     "title": "Qwen3.5-4B Native-Thought Jacobian Value Transport",
     "top_level_dirs": [
+      "analysis",
       "assets",
       "configs",
       "data",
@@ -3132,8 +3133,8 @@
       "src",
       "tests"
     ],
-    "total_files": 27,
-    "total_size_bytes": 3317392
+    "total_files": 31,
+    "total_size_bytes": 3403065
   },
   {
     "file_counts": {

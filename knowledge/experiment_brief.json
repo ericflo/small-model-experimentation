@@ -3,35 +3,35 @@
  "generated_on": "2026-07-05",
  "experiments": {
   "qwen35_4b_native_thought_jacobian_value_transport": {
-   "verdict_tag": "Natural-thought certainty edit is frozen; model result pending",
+   "verdict_tag": "Stopped before value: every trace was still thinking at the cap",
    "concept_primer": "A prior experiment proved that an early internal word state can be replaced and then used in a later lookup. This study asks whether one internal 'this path is promising' quantity can be found and changed while the model is naturally thinking.",
    "plain_question": "Can we recognize a promising thought prefix from the model's internal state and make a weak prefix finish correctly by changing only that promise signal?",
-   "plain_answer": "We do not know yet. The study has frozen fresh tasks, natural checkpoints, separate continuation labels, and exact comparison edits before any model call.",
-   "why_it_matters": "A causal promise signal could become the bridge from understanding internal reasoning to a controller that improves this 4B model. The current study is deliberately oracle-only; deployment still requires a later test without hidden labels.",
-   "verdict_tone": "pending",
+   "plain_answer": "This run could not test it. All 48 traces reached the 160-token reasoning limit without naturally ending, so none produced a final answer and no prefix-value model was fit.",
+   "why_it_matters": "The failure cleanly locates the next bottleneck: first earn a naturally closing reasoning budget, then measure internal value. Treating cap-bound prefixes as completed thoughts would score states the model never reached.",
+   "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Fresh procedural tasks",
-     "value": "80",
-     "sub": "16 interface checks, 32 value-fit, 32 causal confirmation"
+     "label": "Traces that hit the thought cap",
+     "value": "48/48",
+     "sub": "every trace used all 160 allowed reasoning tokens"
     },
     {
-     "label": "Natural checkpoints per trace",
-     "value": "2",
-     "sub": "one-third and two-thirds through the model's own thinking"
+     "label": "Naturally closed traces",
+     "value": "0/48",
+     "sub": "the required answer seam was never reached"
     },
     {
-     "label": "Independent continuations per prefix",
-     "value": "3",
-     "sub": "prefix value comes from new futures, not the original answer"
+     "label": "Mixed-success tasks",
+     "value": "0/16",
+     "sub": "value fitting required at least six and was canceled"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Interface, value learning, and causal confirmation stay separate",
-     "chart_read": "The bars count fresh tasks assigned to each role before the model runs. Confirmation tasks are never used to fit the promise signal.",
-     "chart_takeaway": "The natural-thinking interface must work first, then the internal value signal must generalize by task, before any causal answer result is opened."
+     "chart_plain_title": "The model never reached the natural answer seam",
+     "chart_read": "The first three bars show shares of traces that naturally closed, parsed, or answered correctly. The last shows contact with the reasoning cap.",
+     "chart_takeaway": "Every trace was still reasoning at 160 tokens, so the study correctly stopped before learning or editing an internal value signal."
     }
    ]
   },

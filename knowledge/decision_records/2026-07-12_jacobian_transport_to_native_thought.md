@@ -43,3 +43,13 @@ Return to representation construction if native high-value donors fail to move
 verifier-scored continuations under valid controls. Retire the deployment line
 if a learned controller cannot replicate a contamination-free held-out gain over
 matched sampling, even when the oracle native-thought mechanism is positive.
+
+## First successor outcome
+
+`qwen35_4b_native_thought_jacobian_value_transport` stopped at
+`NO_NATURAL_SEAM`: 48/48 traces hit its preregistered 160-token cap without
+natural close, and variable suffix length changed historical-token activations
+by up to 0.0625. No prefix value or causal outcome was opened. This does not
+reverse the decision to enter native thought; it inserts a required interface
+stage. The next successor must select and confirm a naturally closing budget on
+fresh data and use per-length dynamic control geometry before revisiting value.

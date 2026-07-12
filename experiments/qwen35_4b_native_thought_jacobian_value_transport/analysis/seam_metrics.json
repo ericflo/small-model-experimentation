@@ -1,0 +1,19 @@
+{
+  "decision": "NO_NATURAL_SEAM",
+  "rates": {
+    "natural_close": 0.0,
+    "parseable_answer": 0.0,
+    "exact_success": 0.0,
+    "think_cap_contact": 1.0
+  },
+  "counts": {
+    "tasks": 16,
+    "traces": 48,
+    "mixed_tasks": 0,
+    "total_forward_calls": 7632
+  },
+  "mean_think_tokens": 160.0,
+  "model_smoke_historical_activation_max_abs": 0.0625,
+  "source_summary_sha256": "2ea28a7c77a66663da70f414c18edcfaca82a9262342ce5c894c7a1c58e018d4",
+  "source_rows_sha256": "47cb8237e86e3e7a880cd762f8cfb2f24f603f827bccd42839fd2bc9be8bf220"
+}

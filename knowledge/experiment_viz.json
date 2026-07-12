@@ -5,20 +5,20 @@
   "qwen35_4b_native_thought_jacobian_value_transport": {
    "charts": [
     {
-     "title": "Frozen fresh task roles before model inference",
+     "title": "Natural-thinking seam gate",
      "kind": "bar",
-     "categories": ["natural seam calibration", "J-space value fit", "causal confirmation"],
+     "categories": ["natural close", "parseable answer", "exact success", "thought-cap contact"],
      "series": [
       {
-       "label": "fresh identifiable tasks",
-       "values": [16, 32, 32]
+       "label": "share of 48 traces",
+       "values": [0.0, 0.0, 0.0, 1.0]
       }
      ],
-     "x_label": "frozen split role",
-     "y_label": "tasks",
-     "y_format": "number",
-     "note": "CPU receipt only. All 80 tasks have unique fingerprints, zero overlap with the direct Jacobian parent, and one visible-data-identifiable first-operation type.",
-     "source": "experiments/qwen35_4b_native_thought_jacobian_value_transport/runs/smoke/data_receipt.json",
+     "x_label": "seam outcome",
+     "y_label": "trace rate",
+     "y_format": "percent100",
+     "note": "Sixteen fresh tasks, three traces each, under the frozen 160-token thought cap. All 48 stopped as think_cap_without_close; value and causal stages were canceled.",
+     "source": "experiments/qwen35_4b_native_thought_jacobian_value_transport/analysis/seam_metrics.json",
      "headline": true
     }
    ]

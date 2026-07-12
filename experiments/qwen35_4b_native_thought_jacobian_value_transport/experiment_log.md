@@ -83,3 +83,17 @@ Created as a new experiment scaffold.
   both traces were cap-bound. Correctness outcomes remain absent.
 - Model smoke now unlocks only the frozen seam calibration; it cannot unlock
   value fitting or causal work by itself.
+
+## 2026-07-12 — terminal natural-seam gate
+
+- Ran the 16 frozen seam tasks once, three traces each, after publishing the
+  model-smoke boundary.
+- All 48/48 rows contacted the 160-token cap without natural close; natural
+  close, parse, and exact success were each 0/48, and mixed tasks were 0/16.
+- The cache-free full-prefix run used 7,632 forwards over 389.9 seconds. Every
+  stop reason was `think_cap_without_close`.
+- Frozen decision: `NO_NATURAL_SEAM`. Prefix-value, control-calibration, and
+  causal-confirmation stages are canceled without opening their outcomes.
+- Preserve as an interface-budget negative. Next work requires a separate
+  preregistered natural-close budget ladder and dynamic per-length patch/control
+  geometry; do not rescue this experiment in place.

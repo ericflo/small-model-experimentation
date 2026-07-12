@@ -202,6 +202,17 @@ mechanism—not a capability gain. It unlocks native-thought value transport and
 controller, which must still beat frozen and matched-compute sampling. See
 [qwen35_4b_jacobian_transport_control_replication](../experiments/qwen35_4b_jacobian_transport_control_replication/reports/report.md).
 
+The first native-thought transfer then failed one step earlier than value. On 16 fresh,
+first-operation-identifiable tasks, every one of 48 natural traces contacted the frozen 160-token thought
+cap without `</think>`; natural close, parse, success, and mixed-task counts were all zero. Model smoke also
+measured up to 0.0625 historical-token activation drift when only suffix length changed, exposing Qwen hybrid
+kernel geometry as a nuisance for fixed-delta patching. The frozen `NO_NATURAL_SEAM` decision correctly
+canceled value fitting and causal outcomes. **This does not falsify J-space certainty**: it shows that prefix
+value cannot be evaluated until the model naturally reaches the answer seam, and that later controls must be
+matched dynamically per live sequence length. The warranted successor is a selection/confirmation budget
+ladder, not an in-place cap increase. See
+[qwen35_4b_native_thought_jacobian_value_transport](../experiments/qwen35_4b_native_thought_jacobian_value_transport/reports/report.md).
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.
