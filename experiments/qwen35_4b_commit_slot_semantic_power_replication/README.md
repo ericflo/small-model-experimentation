@@ -142,8 +142,10 @@ is replicated, but any J/value model must be task-held-out and prove incremental
 value beyond correct-alias activity, ordinary slot margin, and alias identity.
 The outcome-blind prefix-value implementation and adversarial audit are complete
 with 16 passing tests and hash-anchored to pushed commit `ddbc1969`. Neither
-reserved split has been opened and no new model call has occurred. The frozen
-primary asks whether midpoint J
+reserved split has been opened. The outcome-blind value-model smoke passed with
+five rank-24 dictionaries, finite 120-wide J/non-J features, and maximum non-J
+span leakage `2.67e-7`; it recorded no outcome or trace text. The single
+scientific prefix-value run is now authorized. The frozen primary asks whether midpoint J
 coordinates prospectively rank final commit value beyond gold-alias activity,
 slot margin, alias identity, and an equal-width non-J residual readout.
 
@@ -177,5 +179,7 @@ and matched-compute sampling on untouched procedural tasks.
   `reports/pre_value_design_review.md`: frozen prospective-value rules.
 - `reports/pre_value_implementation_audit.md`: outcome-blind code/firewall
   audit covered by the anchored implementation boundary.
+- `reports/post_value_model_smoke_audit.md`: outcome-free context, rank,
+  dimension, non-J geometry, and reserved-data firewall receipt.
 - `src/coordinates.py` and `src/value_probe.py`: exact coordinate geometry and
   pure task-held-out analysis; no causal patcher is implemented.

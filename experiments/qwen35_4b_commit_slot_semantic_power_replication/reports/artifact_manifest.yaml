@@ -18,5 +18,6 @@ notes: >-
   independently passing qualification/confirmation rows and summaries, and the
   deterministic replication audit are committed. The prospective prefix-value
   code and adversarial audits are outcome-blind and anchored to pushed commit
-  ddbc1969; both reserved splits and all downstream causal stages remain
-  unopened. No artifact is external or omitted.
+  ddbc1969. The outcome-blind value-model smoke is committed and both reserved
+  splits and all downstream causal stages remain unopened. No artifact is
+  external or omitted.

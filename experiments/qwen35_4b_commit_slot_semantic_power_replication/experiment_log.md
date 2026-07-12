@@ -77,3 +77,14 @@
 - Committed and pushed the implementation, caught/fixed an unquoted YAML `null`
   key during hash anchoring, reran all checks, and anchored the corrected payload
   plus code/test/audit hashes to commit `ddbc1969`. Value-model smoke is next.
+
+## 2026-07-12 — Outcome-blind value-model smoke
+
+- Passed exact model/revision, five rank-24 lens dictionaries, cached generation,
+  separate live-prefix/slot contexts, and finite 120-wide J/non-J features.
+- Feature context was 384 tokens and contained no close/slot; slot prefill was
+  388. Maximum non-J projection into J-space was 2.67e-7 versus 1e-5 allowed.
+- Recorded no outcome, correctness, choice, probability, or trace text.
+  `value_fit` and `causal_confirmation` both remained unopened.
+- The one scientific prefix-value run is authorized after this receipt is
+  committed and pushed; all causal stages remain unavailable.

@@ -1,0 +1,85 @@
+{
+  "causal_split_opened": false,
+  "chosen_alias_recorded": false,
+  "correctness_recorded": false,
+  "design_boundary_sha256": "bcbfad036cd8680858af5034564e7a0cdd60c8ae4c14520ad137b6b47402fb47",
+  "elapsed_seconds": 8.306884929537773,
+  "environment": {
+    "gpu": "NVIDIA RTX 6000 Ada Generation",
+    "peak_allocated_bytes": 8510865408,
+    "torch": "2.11.0+cu129",
+    "transformers": "5.13.0"
+  },
+  "feature_close_present": false,
+  "feature_finite": true,
+  "feature_layers": [
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "feature_position": 383,
+  "feature_sequence_tokens": 384,
+  "feature_slot_present": false,
+  "feature_width": 120,
+  "lens_concepts": 24,
+  "lens_ranks": {
+    "4": 24,
+    "5": 24,
+    "6": 24,
+    "7": 24,
+    "8": 24
+  },
+  "lens_sha256": "e373b6e93956fdfc5cb446e9bee8249655707c8258a7868f0653d11f1ffd0213",
+  "model": {
+    "hidden_size": 2560,
+    "id": "Qwen/Qwen3.5-4B",
+    "layers": 32,
+    "load_seconds": 5.31516582518816,
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "vocab_size": 248320
+  },
+  "non_j_feature_width": 120,
+  "non_j_max_span_projection_by_layer": {
+    "4": 1.8109962240941968e-07,
+    "5": 2.279738566812739e-07,
+    "6": 2.6700374178290076e-07,
+    "7": 2.15789754065554e-07,
+    "8": 1.837559722162041e-07
+  },
+  "outcomes_recorded": false,
+  "passed": true,
+  "schema_version": 1,
+  "scientific_result": false,
+  "seam_license": {
+    "causal_split_opened": false,
+    "confirmation_summary_sha256": "081039a6d3cf1aa20c4621afb5cf276d90dc2568591fbffa5db2c283796984be",
+    "expected_value_split_sha256": "fa4a1592d293db69d4aaa34f4bad737c2f3b104a144a2912013bcbb5e0db5afa",
+    "observed_value_split_sha256": null,
+    "seam_confirmation_freeform_rows_sha256": "1b2f6c108b5c3ee71ba4515443c520db0d69139425f136536b67f2b3ccad8f12",
+    "seam_confirmation_no_thought_rows_sha256": "a50b5c5eb420f8b8c548b3d5739f32e02a09093d777a21c02e7fd50a0ea97ea2",
+    "seam_confirmation_shuffled_slot_rows_sha256": "bd3de3660ee0524e69e606c97f4ff2cfb6a2ba431cff84ce73542da094a6d2ad",
+    "seam_confirmation_slot_rows_sha256": "6d64eb2d3662367579b5440c3e26d3c99e500bf3f570b9d38a96848153ded1d0",
+    "seam_confirmation_trace_rows_sha256": "8a20c74572905e6d40a05c2c45a5a63c20817650dd1e0efa48ca761818d7fed7",
+    "seam_selection_freeform_rows_sha256": "9d6f86cca68369de23c225dc6a65882ae60258ae56955d868e0e5a8562fb17ab",
+    "seam_selection_no_thought_rows_sha256": "5e0670cc06eec0c5a7b4441b108a379bf22f4b95f0f9a57f88cd2fdee941c6e8",
+    "seam_selection_shuffled_slot_rows_sha256": "7e3728ef4c9f5dcf02b9fb1ede29e4cc3c7057fc9ba7763fbd36e3970ebb311b",
+    "seam_selection_slot_rows_sha256": "00e81f4cf7cf281fc5bfe0bf94544b5906b9d3d0303e2fde69e87c985bd8d82d",
+    "seam_selection_trace_rows_sha256": "b5822382dffb31222ed800248f51fa3110e31e57ff800bb23087139e21bc2060",
+    "selection_summary_sha256": "1831c36a97cbfd064867d06f5a9932b21fbd43cb5fc4b7ac49b580425178f04b",
+    "value_split_opened": false
+  },
+  "slot_finite": true,
+  "slot_prefill_tokens": 388,
+  "slot_token_ids": [
+    271,
+    5170,
+    25
+  ],
+  "stage": "value_model_smoke",
+  "trace_cache_contract_pass": true,
+  "trace_text_recorded": false,
+  "value_boundary_sha256": "94eb7c09457edd6d7561b55aa9cd5c6c14489232cd5193e185b6d867db057717",
+  "value_split_opened": false
+}

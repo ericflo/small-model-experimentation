@@ -153,8 +153,16 @@ three-path groups, future-label timing, whole-task folds, train-only scaling,
 non-J projection <=1e-5, reserved-data loader isolation, and pending-boundary
 failure before model load. The exact code/audit is anchored to pushed commit
 `ddbc1969`; only the outcome-blind value-model smoke is now authorized. No
-`value_fit` or `causal_confirmation` row has been opened and no new model call
-has occurred. Control calibration and causal confirmation remain fatal-
+`value_fit` or `causal_confirmation` row had been opened at that boundary.
+
+The subsequent one outcome-blind model smoke passed at 8,510,865,408 peak
+allocated bytes. All five J dictionaries retained rank 24; J and non-J feature
+widths were each 120 and finite; non-J projection into J-space was at most
+`2.67e-7`. The live feature sequence was 384 tokens with no close/slot, while
+the separate slot prefill was exactly four tokens longer. The receipt stores no
+outcome, correctness, chosen alias, probability, or trace text, and both
+reserved splits remained unopened. The single scientific prefix-value run is
+now authorized. Control calibration and causal confirmation remain fatal-
 unavailable.
 
 ## Artifact Manifest
