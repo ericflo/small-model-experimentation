@@ -10,7 +10,7 @@ reproducibility:
   full_command: >-
     .venv/bin/python
     experiments/qwen35_4b_commit_slot_semantic_power_replication/scripts/run.py
-    --stage seam-confirmation
+    --stage prefix-value
   required_external_artifacts: []
 notes: >-
   The exact lens, 322 fresh task rows, CPU/gate and parent-hash-locked power
@@ -18,6 +18,7 @@ notes: >-
   independently passing qualification/confirmation rows and summaries, and the
   deterministic replication audit are committed. The prospective prefix-value
   code and adversarial audits are outcome-blind and anchored to pushed commit
-  ddbc1969. The outcome-blind value-model smoke is committed and both reserved
-  splits and all downstream causal stages remain unopened. No artifact is
-  external or omitted.
+  ddbc1969. The smoke and complete terminal NO_PREFIX_J_VALUE rows/model/summary
+  are committed. The value split was opened exactly once; causal confirmation
+  and all downstream causal stages remain unopened. No artifact is external or
+  omitted.

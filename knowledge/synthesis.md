@@ -321,6 +321,24 @@ transactional validate-copy-commit invariant across diverse families, mixed
 with the existing conditional recovery replay—not another selector, branch, or
 global reason dose.
 
+The licensed J-value measurement is now a clean negative for the shared
+coordinate. All 144 value traces and 288 midpoint/endpoint states completed,
+but task-held-out shared J AUC was 0.5021 with one-sided task-bootstrap lower
+0.4417. Ordinary slot margin reached 0.5448 and a layer/dimension-matched non-J
+residual readout reached 0.5292; all paired incremental uncertainty bounds
+crossed below zero. The shuffled-within-task null averaged 0.5061, and every
+rank/context/cardinality/finite control passed, so this is `NO_PREFIX_J_VALUE`,
+not an invalid run. Causal confirmation stayed sealed.
+
+The diagnostic lead is a **phase reversal**: the shared model's midpoint states
+ranked later full-cap value at 0.6083, while endpoint states ranked it at 0.3958.
+This means the replicated semantic seam does not imply a phase-invariant scalar
+J certainty coordinate. It also means “no value anywhere” is too strong: the
+midpoint point estimate warrants outcome-labeled diagnostics on already-open
+rows. It cannot rescue the experiment. Any midpoint-specific axis must be frozen
+and replicated on fresh tasks, beat equal-width non-J and margin controls with
+task uncertainty, and pass cross-phase tests before causal data can open.
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.

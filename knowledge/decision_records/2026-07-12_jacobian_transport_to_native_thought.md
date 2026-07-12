@@ -128,3 +128,28 @@ This does not yet satisfy the original deployment objective. Gold-labeled value
 and donor interventions remain oracle diagnostics. A later label-free
 controller must beat frozen Qwen3.5-4B and matched-compute sampling on new
 contamination-free tasks before the line becomes a capability result.
+
+## Sixth successor outcome
+
+The separately audited prefix-value stage completed all 48 value-fit tasks, 144
+cap-1,024 traces, and 288 finite live-prefix rows. Its automatic decision is
+`NO_PREFIX_J_VALUE`. The shared 120-coordinate, task-held-out J ridge reached
+0.5021 task-macro pairwise AUC against 0.65 required; its one-sided task lower
+bound was 0.4417 against >0.50. It was weaker than ordinary slot margin (0.5448)
+and an equal-width layer-matched non-J residual readout (0.5292). Paired lower
+bounds against gold-alias activity, margin, and non-J state all crossed below
+zero. The within-task shuffled null passed at 0.5061 and every implementation
+control was valid.
+
+Do not proceed to causal patching: `causal_confirmation` remains unopened. The
+replicated seam establishes that coherent thought content reaches the answer
+interface; it does not establish one shared scalar J value coordinate across
+thinking phases.
+
+The only retained lead is phase-specific and post-decision: midpoint J scores
+ranked later endpoint value at 0.6083, while endpoint J scores reversed to
+0.3958. Diagnose that interaction on already-open value rows without changing
+the terminal decision. If it survives stronger outcome-labeled controls, the
+next experiment must freeze a midpoint-specific model on fresh tasks and
+independently replicate it against margin and non-J baselines before any new
+causal split or controller work.

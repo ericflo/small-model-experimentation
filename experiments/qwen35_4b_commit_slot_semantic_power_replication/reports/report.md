@@ -161,9 +161,50 @@ widths were each 120 and finite; non-J projection into J-space was at most
 `2.67e-7`. The live feature sequence was 384 tokens with no close/slot, while
 the separate slot prefill was exactly four tokens longer. The receipt stores no
 outcome, correctness, chosen alias, probability, or trace text, and both
-reserved splits remained unopened. The single scientific prefix-value run is
-now authorized. Control calibration and causal confirmation remain fatal-
-unavailable.
+reserved splits remained unopened.
+
+## Prefix-value result
+
+The one authorized value run then opened only `value_fit` and completed all 48
+tasks, 144 cap-1,024 traces, and 288 live prefix states. Every trace reached the
+cap without natural close; all cache, cardinality, lens-rank, context-separation,
+feature-width, finite, fold, and non-J geometry contracts passed. The terminal
+slot scored 41/144 paths; the midpoint slot scored 28/144. Mean terminal correct-
+alias probability was 0.228749.
+
+The automatic decision is `NO_PREFIX_J_VALUE`:
+
+| frozen metric | observed | requirement | pass |
+| --- | ---: | ---: | --- |
+| eligible mixed-value tasks | 40 | >=24 | yes |
+| finite prefix rows | 288/288 | >=192 and 100% finite | yes |
+| shared task-macro pairwise AUC | 0.502083 | >=0.65 | no |
+| midpoint prospective AUC | 0.608333 | >=0.58 | yes |
+| endpoint AUC | 0.395833 | diagnostic | — |
+| gold-alias-activity AUC | 0.450000 | J minus >=0.03 | yes point (+0.052083) |
+| slot-margin AUC | 0.544792 | J minus >=0.02 | no (-0.042708) |
+| equal-width non-J AUC | 0.529167 | J minus >=0.02 | no (-0.027083) |
+| alias-identity AUC | 0.500000 | J minus >=0.10 | no (+0.002083) |
+| shuffled-null mean AUC | 0.506120 | abs from 0.50 <=0.05 | yes |
+
+The one-sided 95% task-bootstrap lower bound for primary AUC was 0.441667.
+Lower bounds for J minus gold-alias activity, slot margin, and non-J residual
+features were -0.039583, -0.138542, and -0.104167. Fold AUCs were 0.4917,
+0.5750, 0.4667, and 0.4750. Thus neither the headline nor any incremental
+uncertainty gate passed.
+
+The scientifically interesting pattern is phase reversal: the same shared OOF
+model ranked terminal outcomes above chance from midpoint states but below
+chance from endpoint states, cancelling to chance overall. That midpoint point
+estimate does not rescue the registered decision, and the equal-width non-J
+baseline also beat shared J. It motivates only outcome-labeled post-decision
+diagnostics and, if warranted, a new fresh phase-specific replication—not causal
+access inside this experiment.
+
+The run sampled 147,456 thought tokens and processed 346,146 feature-prefill
+tokens in 4,835.588 seconds, with 8,670,490,112 peak allocated bytes.
+`causal_confirmation` remained unopened. Control calibration and causal
+confirmation remain fatal-unavailable.
 
 ## Artifact Manifest
 

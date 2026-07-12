@@ -33,9 +33,10 @@
   Qualification passed with correct support across all 11 targets and choices
   across all 12 aliases; confirmation independently passed with 98/339 ordered
   versus 47/339 shuffled and support across 10/11 targets and all 12 choices.
-  Use this interface for task-held-out value measurement, while treating strong
-  target-identity heterogeneity as an explicit nuisance rather than a compiler
-  capability result.
+  The licensed shared J-value measurement was then chance (0.502) and weaker
+  than slot margin/non-J state, with midpoint/end phase reversal. Treat the slot
+  as a stable output seam, not a stable scalar compiler-state coordinate; causal
+  work is not licensed.
 - Measure the exact behavioral quotient at fresh depth 6 before assuming model-guided pruning is economically
   needed; record wall time, memory, physical transitions, coverage, and selector success.
 - If a real search wall appears, test a residualized partial state (feasible parameter domains, materialized

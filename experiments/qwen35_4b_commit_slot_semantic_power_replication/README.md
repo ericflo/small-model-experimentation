@@ -108,9 +108,9 @@ After the replicated seam and the separately anchored value implementation:
 ```
 
 The value boundary is anchored to pushed implementation commit `ddbc1969`.
-`value-model-smoke` is now authorized; `prefix-value` remains locked behind that
-outcome-blind smoke. `control-calibration` and `causal-confirmation` remain
-unimplemented regardless of value outcome.
+Both value commands have run exactly once. `control-calibration` and
+`causal-confirmation` remain unimplemented and sealed by the negative value
+decision.
 
 ## Status
 
@@ -140,21 +140,39 @@ The remaining identity nuisance is load-bearing: confirmation had no successful
 `horse` target rows, while `tiger` and `river` were favored by shuffle. The seam
 is replicated, but any J/value model must be task-held-out and prove incremental
 value beyond correct-alias activity, ordinary slot margin, and alias identity.
-The outcome-blind prefix-value implementation and adversarial audit are complete
+The outcome-blind prefix-value implementation and adversarial audit completed
 with 16 passing tests and hash-anchored to pushed commit `ddbc1969`. Neither
-reserved split has been opened. The outcome-blind value-model smoke passed with
+reserved split was opened before the outcome-blind value-model smoke, which passed with
 five rank-24 dictionaries, finite 120-wide J/non-J features, and maximum non-J
-span leakage `2.67e-7`; it recorded no outcome or trace text. The single
-scientific prefix-value run is now authorized. The frozen primary asks whether midpoint J
-coordinates prospectively rank final commit value beyond gold-alias activity,
-slot margin, alias identity, and an equal-width non-J residual readout.
+span leakage `2.67e-7`; it recorded no outcome or trace text.
+
+The one scientific value run is terminal `NO_PREFIX_J_VALUE`. All 144 traces and
+288 prefix rows were complete and finite, but the shared task-held-out J score
+was 0.5021 AUC with one-sided task-bootstrap lower 0.4417, missing the 0.65/0.50
+gates. It lost to slot margin (0.5448) and equal-width non-J residual features
+(0.5292). Midpoint prospective AUC was 0.6083, but endpoint AUC reversed to
+0.3958, so the frozen shared coordinate cancelled to chance. This phase-specific
+hint cannot rescue the decision. `causal_confirmation` remains unopened and all
+causal stages stay unavailable.
+
+| value metric | observed | gate | pass |
+| --- | ---: | ---: | --- |
+| shared task-macro pairwise AUC | 0.5021 | >=0.65 | no |
+| midpoint prospective AUC | 0.6083 | >=0.58 | yes |
+| endpoint AUC | 0.3958 | diagnostic | — |
+| J minus gold-alias activity | +0.0521 | >=+0.03 | yes point / no bootstrap |
+| J minus slot margin | -0.0427 | >=+0.02 | no |
+| J minus equal-width non-J | -0.0271 | >=+0.02 | no |
+| shuffled-null mean AUC | 0.5061 | within 0.05 of 0.50 | yes |
 
 ## Scope
 
-This pass replicates constrained semantic elicitation, not J value and not
-installed capability. Gold labels score gates. A later J stage remains a
-measurement/oracle stage until a label-free controller beats frozen inference
-and matched-compute sampling on untouched procedural tasks.
+This experiment replicates constrained semantic elicitation but rejects one
+fixed shared J-value readout. It does not show that no prospective state exists:
+the registered midpoint slice was above chance while endpoint geometry reversed.
+It does show that this all-coordinate shared ridge is neither J-specific nor
+stable enough to license causal patching or capability work. A phase-specific
+successor must be a new experiment with fresh data and independent replication.
 
 ## Knowledgebase Update
 
@@ -181,5 +199,9 @@ and matched-compute sampling on untouched procedural tasks.
   audit covered by the anchored implementation boundary.
 - `reports/post_value_model_smoke_audit.md`: outcome-free context, rank,
   dimension, non-J geometry, and reserved-data firewall receipt.
+- `reports/post_prefix_value_adversarial_audit.md`: terminal negative scope and
+  the only allowed phase-specific post-decision diagnostics.
 - `src/coordinates.py` and `src/value_probe.py`: exact coordinate geometry and
   pure task-held-out analysis; no causal patcher is implemented.
+- `runs/prefix_value*.json*`: complete negative value rows, trace receipt,
+  frozen final fit, and automatic terminal summary. Causal data remain sealed.

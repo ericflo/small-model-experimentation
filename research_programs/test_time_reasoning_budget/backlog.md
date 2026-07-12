@@ -43,7 +43,7 @@
   the equivalent 12/48 no-thought and 11/48 shuffled. Five mixed tasks missed
   the frozen six-task gate, and task-level intervals included zero; no cap or J
   stage opened.
-- **Completed replicated seam:** `qwen35_4b_commit_slot_semantic_power_replication` held the
+- **Completed replicated seam / value stop:** `qwen35_4b_commit_slot_semantic_power_replication` held the
   budget at 1,024 and assigns 113 fresh tasks to each of qualification and
   untouched confirmation. It requires a positive one-sided task-bootstrap lower
   bound over exact-length shuffle, +3pp over no-thought, broad alias support,
@@ -51,8 +51,11 @@
   shuffle and +17.40pp over no-thought; confirmation independently repeated
   +15.04pp and +21.83pp with task lower +9.44pp. This validates fixed-cap
   coherent-content transport into the deployed slot, not natural termination.
-  Do not increase the cap; test value/controller decisions at the replicated
-  1,024 state with the same counterfactual-commit label.
+  Holding the cap fixed, the task-held-out shared J-value readout then failed at
+  chance (0.502) despite midpoint 0.608 because endpoint reversed to 0.396; slot
+  margin and generic non-J state were stronger. Do not increase the cap or open
+  causal work. A fresh successor may test a phase-specific prospective readout
+  only if post-decision diagnostics support it.
 - Completed cross-program qualification negative:
   `qwen35_4b_pareto_policy_integration` found that C54's short/deep tier labels
   did not become a clean procedural teacher crossover. `blend` lost both quick

@@ -1891,12 +1891,12 @@
    ]
   },
   "qwen35_4b_commit_slot_semantic_power_replication": {
-   "verdict_tag": "Scramble the reasoning and accuracy halves—twice",
+   "verdict_tag": "Reasoning order matters; one J-value map does not work",
    "concept_primer": "The model works through its reasoning, then must pick its answer from a fixed twelve-word menu. Like a recipe: keep every step but shuffle their order and the same ingredients lead nowhere. Only the right sequence of steps produces the finished dish.",
    "plain_question": "When a small model thinks out loud before answering, is it the actual order of that reasoning that helps, or just having extra text on the page?",
-   "plain_answer": "It's the order, and the result repeated independently. On the untouched check, reasoning in sequence picked the right word 29% of the time; shuffling those exact same reasoning words dropped it to 14%, and skipping reasoning gave 7%. The first equally large stage had already found 27%, 14%, and 10%. Each 113-problem stage passed its own task-level uncertainty and breadth gates without pooling.",
-   "why_it_matters": "Before trusting that a scratchpad helps your small model, shuffle its words and re-score. Here the ordered-versus-shuffled gap survived a fresh confirmation, so it is not just prompt padding, copied answer words, or the answer format. That licenses the next internal-state experiment, but does not yet prove a J-space mechanism, natural free-form answering, or installed capability.",
-   "verdict_tone": "positive",
+   "plain_answer": "The reasoning result is real, but the proposed internal value meter failed. Ordered scratch work beat the same words shuffled in two independent stages (about 29% versus 14% on confirmation). Yet a task-held-out model of all 120 J-space coordinates ranked better and worse final paths no better than chance overall (50.2%). It looked useful halfway through the thought (60.8%) but reversed near the answer (39.6%), while simpler margin and generic hidden-state readouts were stronger.",
+   "why_it_matters": "A scratchpad can carry useful content without exposing one stable internal certainty number across the whole thought. Test internal readouts against ordinary confidence and equally wide generic hidden-state controls, and test whether their meaning changes with phase. This result blocks causal J steering here; the halfway hint needs a new independent experiment before use.",
+   "verdict_tone": "mixed",
    "key_numbers": [
     {
      "label": "Confirmation: ordered vs shuffled",
@@ -1904,19 +1904,19 @@
      "sub": "identical words, only their order changed"
     },
     {
-     "label": "Confirmation gain lower bound",
-     "value": "+9.44pp",
-     "sub": "one-sided 95% task-bootstrap lower bound, without pooling"
+     "label": "Shared J-value ranking",
+     "value": "50.2%",
+     "sub": "chance overall; the frozen gate required 65%"
     },
     {
-     "label": "Independent stages passed",
-     "value": "2/2",
-     "sub": "113 fresh task units in each stage"
+     "label": "Midpoint → endpoint J ranking",
+     "value": "60.8% → 39.6%",
+     "sub": "the apparent value direction reverses with phase"
     },
     {
-     "label": "Reasoning that named the answer word",
-     "value": "about 1 in 5",
-     "sub": "mentioning it did not improve confirmation accuracy"
+     "label": "Simpler comparison readouts",
+     "value": "54.5% / 52.9%",
+     "sub": "answer margin / equal-width non-J hidden state"
     }
    ],
    "charts": [
@@ -1925,6 +1925,12 @@
      "chart_plain_title": "The untouched check repeats the ordered-reasoning advantage",
      "chart_read": "Four confirmation bars compare ordered thought, the same words shuffled, no thought, and open-ended free-form. Taller means more exact answers; the first three share one identical fixed twelve-word answer slot.",
      "chart_takeaway": "Ordered reasoning remains about twice as accurate as shuffling the identical tokens, and about five times as accurate as close-only free-form answering."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "The shared J-space value meter cancels to chance",
+     "chart_read": "Bars compare task-held-out path-ranking accuracy. Fifty percent is chance. Midpoint J-state rises above chance, endpoint J-state reverses below it, and their shared model lands at chance; ordinary answer margin and generic non-J hidden state are both higher.",
+     "chart_takeaway": "J coordinates do not carry one stable value meaning across thinking phases, so the halfway hint cannot justify causal steering."
     }
    ]
   },

@@ -30,6 +30,36 @@
      "note": "Ordered, shuffled, and no-thought use the identical fixed slot; close-only free-form is diagnostic. Ordered thought independently passed every frozen confirmation gate on 113 tasks/339 traces after qualification had passed the same gates.",
      "source": "experiments/qwen35_4b_commit_slot_semantic_power_replication/runs/seam_confirmation.json",
      "headline": true
+    },
+    {
+     "title": "Shared J-value ranking reverses across thought phase",
+     "kind": "bar",
+     "categories": [
+      "shared J",
+      "midpoint J",
+      "endpoint J",
+      "slot margin",
+      "non-J state",
+      "shuffled J null"
+     ],
+     "series": [
+      {
+       "label": "task-macro pairwise AUC",
+       "values": [
+        0.5020833333333333,
+        0.6083333333333333,
+        0.3958333333333333,
+        0.5447916666666666,
+        0.5291666666666667,
+        0.5061197916666667
+       ]
+      }
+     ],
+     "x_label": "task-held-out value readout",
+     "y_label": "path-ranking AUC",
+     "y_format": "percent01",
+     "note": "Chance is 50%. The registered shared J readout failed at 50.2%; midpoint J passed its point gate but endpoint J reversed below chance. Slot margin and an equal-width J-orthogonal hidden-state readout were stronger. The shuffled null stayed near chance.",
+     "source": "experiments/qwen35_4b_commit_slot_semantic_power_replication/runs/prefix_value.json"
     }
    ]
   },

@@ -112,4 +112,11 @@ Diagnostics should become standard infrastructure. They are how future agents av
   target identity remains heterogeneous (one confirmation target 0/30; shuffle
   favored two targets). Any J result must add task-held-out signal beyond
   correct-alias activity, slot margin, and alias identity, with live-length
-  post-bf16 controls. This is not yet a J or installed-capability claim.
+  post-bf16 controls. The licensed value run was complete but terminal
+  `NO_PREFIX_J_VALUE`: shared J AUC 0.5021 (task lower 0.4417), below slot margin
+  0.5448 and equal-width non-J 0.5292. Midpoint prospective AUC reached 0.6083,
+  but endpoint AUC reversed to 0.3958 and every incremental uncertainty bound
+  crossed zero. The shuffled null passed at 0.5061, so this is a scientific
+  negative, not invalid control. Causal data stayed sealed. A phase-specific
+  midpoint hypothesis requires a distinct fresh replication and cannot rescue
+  this shared-coordinate failure.

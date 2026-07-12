@@ -16,7 +16,7 @@
   beat no-thought/shuffled by +6.25pp/+8.33pp, but only five tasks mixed outcomes
   versus six required and task-bootstrap intervals crossed zero. J value stayed
   sealed.
-- **Replicated seam:** `qwen35_4b_commit_slot_semantic_power_replication` froze
+- **Replicated seam, terminal value negative:** `qwen35_4b_commit_slot_semantic_power_replication` froze
   cap 1,024 and uses the calculated 113 fresh tasks per seam stage (~80% power
   at the parent ordered-over-shuffled effect), a task-bootstrap lower bound,
   28 mixed tasks, and eight-alias success/choice support. It keeps no-thought as
@@ -25,7 +25,11 @@
   then confirmation independently passed (98/339 versus 47/339; lower +9.44pp).
   Correct/chosen breadth was 11/12 then 10/12. Resume task-held-out prefix-value
   work only with alias-identity, correct-logit, margin, and dynamic-length
-  controls; the seam result itself is not a J or capability claim.
+  controls. The one value run then returned `NO_PREFIX_J_VALUE`: shared J AUC
+  0.502 (lower 0.442), below slot margin 0.545 and equal-width non-J 0.529.
+  Midpoint prospective AUC was 0.608 but endpoint reversed to 0.396, so causal
+  work stayed sealed. Diagnose phase-specific geometry only post-decision; any
+  confirmation requires a new fresh experiment.
 - If native thought-state transport passes, train a non-oracle prefix controller
   and require a replicated held-out capability gain over frozen Qwen3.5-4B and
   matched-compute sampling. Oracle donor selection is a mechanism control, not

@@ -88,3 +88,22 @@
   `value_fit` and `causal_confirmation` both remained unopened.
 - The one scientific prefix-value run is authorized after this receipt is
   committed and pushed; all causal stages remain unavailable.
+
+## 2026-07-12 — Terminal prefix-value negative
+
+- Completed 144/144 cap-1,024 traces and 288/288 finite prefix rows in
+  4,835.588 seconds. Every path was forced at cap; terminal slot accuracy was
+  41/144 and the midpoint slot was 28/144.
+- Automatic `NO_PREFIX_J_VALUE`: shared task-held-out J AUC 0.5021 versus 0.65
+  required; task-bootstrap lower 0.4417 versus >0.50 required.
+- Midpoint prospective AUC passed its point bar at 0.6083, but endpoint AUC
+  reversed to 0.3958. The registered shared readout therefore cancelled to
+  chance and the midpoint slice cannot rescue it.
+- Shared J lost to slot margin (0.5448) and the equal-width non-J residual
+  baseline (0.5292). J exceeded gold-alias activity by +0.0521 at the point
+  estimate, but its paired task lower bound was -0.0396.
+- Shuffled-null mean was 0.5061 and all implementation controls passed, so this
+  is a scientific negative rather than an invalid run.
+- `causal_confirmation` remains unopened. No control-calibration or causal stage
+  is licensed. Preserve the phase-reversal hint only as a post-decision lead for
+  a distinct fresh experiment.
