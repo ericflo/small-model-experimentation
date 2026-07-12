@@ -2,16 +2,16 @@
 
 ## Next Experiments
 
-- **In progress:** `qwen35_4b_native_thought_seam_budget_ladder` freezes the
-  required selection-only natural-close ladder (256/512/1024), smallest-cap
-  rule, and fresh same-cap confirmation. Its 32-threat adversarial review
-  forbids forced close, a larger-cap confirmation rescue, and pseudo-replicating
-  the paired rungs. Any future patch must replay the exact live prefix and
-  construct exact random controls dynamically at every sequence length.
-- Only after that seam passes, retry the frozen thought-prefix value design:
-  continuation labels, held-out-by-task J value, then scalar causal patching
-  against exact random, shuffled-axis, identity, logit, ActAdd, raw, and non-J
-  controls.
+- `qwen35_4b_native_thought_seam_budget_ladder` is terminal
+  `NO_BUDGET_SELECTED`: all 48/48 traces contacted even the 1,024 ceiling, with
+  zero natural closes at every rung. Confirmation was correctly unopened. Do
+  not add a larger natural-close rung or treat these rows as completed thoughts.
+- **Next:** create a fresh forced-commit Jacobian/value experiment whose injected
+  close is the explicit deployed policy. First gate parsing, success headroom,
+  and mixed tasks under that exact policy (C51); then label exact prefixes with
+  disjoint forced-commit continuations. Replay the live prefix and construct
+  exact random controls dynamically at every sequence length. Call every stage
+  counterfactual/forced-commit, never natural.
 - If native thought-state transport passes, train a non-oracle prefix controller
   and require a replicated held-out capability gain over frozen Qwen3.5-4B and
   matched-compute sampling. Oracle donor selection is a mechanism control, not

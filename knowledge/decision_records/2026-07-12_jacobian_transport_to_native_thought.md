@@ -53,3 +53,19 @@ by up to 0.0625. No prefix value or causal outcome was opened. This does not
 reverse the decision to enter native thought; it inserts a required interface
 stage. The next successor must select and confirm a naturally closing budget on
 fresh data and use per-length dynamic control geometry before revisiting value.
+
+## Second successor outcome
+
+`qwen35_4b_native_thought_seam_budget_ladder` exhausted the separate frozen
+256/512/1024 selector with `NO_BUDGET_SELECTED`: all 48/48 fresh traces reached
+1,024 without natural close, yielding zero parseable/usable rows at every paired
+rung. All cache audits passed, no exact short-period tail loops were detected,
+and confirmation correctly remained unopened. The natural-cap repair branch is
+closed for this workload.
+
+This does not reverse the decision to test native thought or weaken the
+replicated J mechanism. It changes the interface: the next experiment may use
+forced close only as an explicit deployed commit action, with fresh
+parse/headroom calibration and C51's counterfactual-state label. If that gate
+passes, continuation value and causal edits must be evaluated under the same
+forced policy with exact-prefix replay and dynamic per-length post-bf16 controls.

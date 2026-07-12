@@ -5,20 +5,24 @@
   "qwen35_4b_native_thought_seam_budget_ladder": {
    "charts": [
     {
-     "title": "Preregistered natural-thinking budget ladder",
+     "title": "Natural close versus cap contact across the frozen ladder",
      "kind": "bar",
      "categories": ["256 cap", "512 cap", "1024 cap"],
      "series": [
       {
-       "label": "maximum thought-generation steps",
-       "values": [256, 512, 1024]
+       "label": "natural close rate",
+       "values": [0.0, 0.0, 0.0]
+      },
+      {
+       "label": "cap-contact rate",
+       "values": [1.0, 1.0, 1.0]
       }
      ],
      "x_label": "frozen selection rung",
-     "y_label": "thought-generation steps",
-     "y_format": "integer",
-     "note": "Design-state chart before model outcomes. The smallest rung passing every selection gate is frozen, and only that cap may be opened on untouched confirmation tasks.",
-     "source": "experiments/qwen35_4b_native_thought_seam_budget_ladder/configs/default.yaml",
+     "y_label": "share of 48 paired traces",
+     "y_format": "percent100",
+     "note": "All 48 paired traces reached the 1,024 ceiling without emitting the natural close token; lower rungs are exact right-censored views of those same paths. No cap was selected and confirmation was ineligible.",
+     "source": "experiments/qwen35_4b_native_thought_seam_budget_ladder/analysis/selection_metrics.json",
      "headline": true
     }
    ]

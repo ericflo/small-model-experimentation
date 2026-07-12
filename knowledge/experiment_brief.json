@@ -3,35 +3,35 @@
  "generated_on": "2026-07-05",
  "experiments": {
   "qwen35_4b_native_thought_seam_budget_ladder": {
-   "verdict_tag": "A fresh natural-reasoning budget test is frozen and ready",
+   "verdict_tag": "No natural finish even after 1,024 reasoning steps",
    "concept_primer": "The previous study stopped before its main question because every model response was still reasoning when the 160-token limit arrived. This follow-up first finds a limit at which the model can finish naturally, then checks that choice on new tasks.",
    "plain_question": "What is the smallest reasoning allowance that lets the model naturally finish and give a usable answer often enough for the next internal-state experiment?",
-   "plain_answer": "Not yet: the model and fast-generation plumbing check passed, but no scientific selection result has been opened. The study will compare 256, 512, and 1,024 reasoning steps on 16 fresh tasks, choose the smallest passing allowance, and test only that choice on 24 untouched tasks.",
-   "why_it_matters": "A promising-looking score after forcing the model to stop would describe an artificial state. Confirming a naturally reached answer boundary first keeps the later search for an internal promise signal honest.",
-   "verdict_tone": "neutral",
+   "plain_answer": "None of the three allowances worked. All 48 responses were still reasoning when the 1,024-step ceiling arrived, so the study selected no allowance and correctly left its untouched check unopened.",
+   "why_it_matters": "The search for an internal promise signal still has not failed—the model never reached the answer boundary needed to test it. The next test must treat an external stop command as the actual deployed method, not pretend the model chose to finish naturally.",
+   "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Fresh procedural tasks",
-     "value": "40",
-     "sub": "16 for selection and 24 untouched for confirmation"
+     "label": "Responses still reasoning at 1,024",
+     "value": "48/48",
+     "sub": "every selection response used the full allowance"
     },
     {
-     "label": "Frozen reasoning limits",
-     "value": "3",
-     "sub": "256, 512, and 1,024 steps"
+     "label": "Naturally finished responses",
+     "value": "0/48",
+     "sub": "at 256, 512, and 1,024 steps alike"
     },
     {
-     "label": "Scientific outcomes opened",
-     "value": "0",
-     "sub": "the design review and outcome-blind plumbing check came first"
+     "label": "Untouched confirmation tasks opened",
+     "value": "0/24",
+     "sub": "no allowance passed selection, so confirmation stayed sealed"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "The three reasoning allowances are fixed in advance",
-     "chart_read": "The bars show the three maximum reasoning lengths the selection stage will test. The experiment must choose the smallest one that clears every finish, format, and answer-variation check.",
-     "chart_takeaway": "The ladder ends at 1,024; no extra rung can be added after seeing results, and confirmation gets only the selected allowance."
+     "chart_plain_title": "Every reasoning allowance ended at its ceiling",
+     "chart_read": "For each allowance, the finish bar is zero and the ceiling-contact bar is full height. The same 48 sampled paths are viewed at each limit.",
+     "chart_takeaway": "The model never reached a natural answer boundary, so no allowance was selected and no internal-value test was licensed."
     }
    ]
   },

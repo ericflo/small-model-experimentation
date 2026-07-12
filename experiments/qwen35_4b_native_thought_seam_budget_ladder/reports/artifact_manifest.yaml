@@ -10,12 +10,11 @@ reproducibility:
   full_command: >-
     .venv/bin/python
     experiments/qwen35_4b_native_thought_seam_budget_ladder/scripts/run.py
-    --stage budget-selection && .venv/bin/python
-    experiments/qwen35_4b_native_thought_seam_budget_ladder/scripts/run.py
-    --stage seam-confirmation
+    --stage budget-selection
   required_external_artifacts: []
 notes: >-
   All generated procedural data, CPU receipts, the immutable design receipt, and
-  the outcome-blind model-smoke receipt are committed. No artifact is external
-  or omitted. Scientific rows will be buffered to stage completion and committed
-  if their stage runs.
+  the outcome-blind model-smoke receipt are committed. The complete 48-row
+  selection, frozen terminal summary, and derived diagnostics are also
+  committed. Confirmation was ineligible and produced no artifact. Nothing is
+  external or omitted.

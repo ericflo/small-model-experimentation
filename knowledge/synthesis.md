@@ -213,6 +213,21 @@ matched dynamically per live sequence length. The warranted successor is a selec
 ladder, not an in-place cap increase. See
 [qwen35_4b_native_thought_jacobian_value_transport](../experiments/qwen35_4b_native_thought_jacobian_value_transport/reports/report.md).
 
+The separate natural-close repair then exhausted its full registered ladder.
+On 16 new tasks, all 48 paired traces reached 1,024 thought tokens without
+`</think>`, so close, parse, and usable-prefix rates were 0% at 256, 512, and
+1,024; no cap was selected and the 24-task confirmation remained sealed. Every
+row passed the cached-forward audit, and a post-decision scan found no exact
+short-period pattern across any final 256-token tail. This rules out neither
+coherent ongoing reasoning nor J-space certainty—it rules out **autonomous
+termination as the measurement interface** at the deployed budget scale for
+this workload. Do not keep extending the natural cap. A forced close can now be
+studied only as an explicit test-time commit policy: calibrate and deploy the
+same action, preserve C51's counterfactual-state label, require fresh
+parse/headroom evidence, and use live-prefix/per-length controls before any
+causal claim. See
+[qwen35_4b_native_thought_seam_budget_ladder](../experiments/qwen35_4b_native_thought_seam_budget_ladder/reports/report.md).
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.

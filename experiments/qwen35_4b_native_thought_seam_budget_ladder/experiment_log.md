@@ -22,3 +22,18 @@
   is active rather than a silently repeated full-prefix path.
 - Eight diagnostic tokens were sampled; no answer correctness was computed or
   recorded. Scientific selection remains unopened.
+
+## 2026-07-12 — Budget selection terminal
+
+- Opened the 48-trace selection once under the frozen 1,024 maximum rung.
+- Completed all 48 rows under one model instance; all passed the audited cache
+  contract and all stopped as `think_cap_without_close` at exactly 1,024 tokens.
+- Nested metrics were zero natural close, parse, and usable traces at 256, 512,
+  and 1,024. Decision: `NO_BUDGET_SELECTED`.
+- Sampled 49,152 tokens/forwards in 1,618.080 seconds. Rows hash:
+  `17e3b107154079ecd857af45544c92c2e11b13cd495edfeb6eb24dcf97f5d39c`.
+- Confirmation is ineligible and was not opened; no cap or threshold changed.
+- Post-decision diagnostics found no exact 1--32-token periodicity across any
+  256-token tail. This does not turn cap-bound reasoning into a natural seam.
+- Next branch: a separate forced-commit protocol whose injected close is an
+  explicit deployed action, not evidence of autonomous termination.

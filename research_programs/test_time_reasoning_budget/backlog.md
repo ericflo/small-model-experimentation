@@ -26,11 +26,17 @@
 
 ## Next Experiments
 
-- **In progress, cross-program seam calibration:**
-  `qwen35_4b_native_thought_seam_budget_ladder` selects the smallest natural
-  close-and-commit cap from 256/512/1024 on fresh list-operation tasks, then
-  opens only that cap on an untouched confirmation split. It is setup for a
-  Jacobian value study, not a budget-policy or capability result.
+- **Completed negative, cross-program seam calibration:**
+  `qwen35_4b_native_thought_seam_budget_ladder` ended
+  `NO_BUDGET_SELECTED`: 48/48 fresh traces were still reasoning at 1,024, so
+  natural close was 0% at 256/512/1024 and confirmation stayed sealed. Exact
+  short-period tail loops were 0/48, so this is unresolved reasoning rather than
+  a registered loop-control target. Stop raising the natural cap on this task.
+- **Next, explicit commit policy:** test a forced-close/answer controller on new
+  tasks, using the identical forced action at calibration, value labeling,
+  causal intervention, and deployment. Keep C51's counterfactual-state label and
+  parseability gate; a deployable policy can be artificial, but it cannot be
+  described as autonomous termination.
 - Completed cross-program qualification negative:
   `qwen35_4b_pareto_policy_integration` found that C54's short/deep tier labels
   did not become a clean procedural teacher crossover. `blend` lost both quick

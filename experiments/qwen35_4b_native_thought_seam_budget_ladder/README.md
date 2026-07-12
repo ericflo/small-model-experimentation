@@ -89,25 +89,47 @@ After the immutable design boundary is anchored:
 
 ## Status
 
-Design and adversarial review were frozen before any model call. CPU smoke
-passes: 40/40 fresh unique tasks, zero parent overlap, and every terminal gate
-is mathematically reachable. The outcome-blind model smoke also passes: exact
-model/token contracts and a 472-token prefill followed only by one-token cached
-forwards. It generated eight diagnostic tokens and recorded no correctness.
-Scientific selection outcomes remain unopened.
+Terminal `NO_BUDGET_SELECTED`. Design and the 32-threat adversarial review were
+frozen before model calls. CPU and outcome-blind model smokes passed, including
+the exact cached-forward contract. The complete selection then found zero
+natural closes at every rung: all 48 traces consumed all 1,024 allowed thought
+steps. Confirmation is ineligible and remains unopened.
+
+## Results
+
+| cap | natural close | parseable | usable | cap contact | gate |
+| ---: | ---: | ---: | ---: | ---: | --- |
+| 256 | 0/48 | 0/48 | 0/48 | 48/48 | fail |
+| 512 | 0/48 | 0/48 | 0/48 | 48/48 | fail |
+| 1024 | 0/48 | 0/48 | 0/48 | 48/48 | fail |
+
+The cached runner made 49,152 audited one-step generation forwards and sampled
+49,152 thought tokens in 1,618.1 seconds. All 48 rows passed the cache contract.
+Post-decision token diagnostics found no exact short-period repetition across
+the final 256 tokens of any trace; absence of an exact loop does not prove
+semantic progress.
+
+Per the frozen smallest-cap rule, no cap is selected. The 24 confirmation tasks
+are never loaded into a model stage. Raising the ceiling or adding a rung here
+is prohibited.
 
 ## Scope
 
-This experiment selects an interface budget. It does not fit a value coordinate,
-patch an activation, train a controller, compare capability against sampling, or
-license a claim. A positive result merely fixes the natural seam for the next
-result-bearing experiment, which must use exact-prefix replay and construct
-post-bf16 controls at every live sequence length.
+This experiment selected no natural interface budget. It did not fit a value
+coordinate, patch an activation, train a controller, compare capability against
+sampling, or license a claim. The result does not count against J-space value:
+the close-and-answer event remained unreachable.
+
+The warranted branch is a new experiment that makes forced commit an explicit,
+deployable protocol rather than mislabeling it natural. It must first pass fresh
+force-close parse/headroom controls, preserve C51's counterfactual-state warning,
+and use exact-prefix replay plus post-bf16 controls at every live sequence length
+before any causal value conclusion.
 
 ## Knowledgebase Update
 
-- Program evidence: update after the terminal confirmation decision.
-- Program backlog: records this as the required successor to the 160-token stop.
+- Program evidence: records terminal `NO_BUDGET_SELECTED`.
+- Program backlog: pivots from natural close to an explicit forced-commit policy.
 - Claim ledger: no claim ID; the repository claim re-grade remains open.
 
 ## Artifacts

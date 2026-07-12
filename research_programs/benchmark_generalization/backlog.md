@@ -14,6 +14,12 @@
   reproduce: `blend` lost both quick blocks. Future distillation work must
   distinguish instrument-specific ranking from teacher advantage on the
   training-state distribution; neither can stand in for the other.
+- Completed termination-transport negative:
+  `qwen35_4b_native_thought_seam_budget_ladder` found 0/48 natural closes at
+  1,024 on fresh list induction, so an MBPP-era budget scale is not a portable
+  answer-seam guarantee. Calibrate termination on every new workload; the next
+  forced-commit experiment must keep selection and confirmation tasks fresh and
+  treat the commit action as part of the interface under test.
 - Build a common shift taxonomy: length, family, primitive, composition, prompt, format, and real-task shift.
 - Re-run top mechanisms on at least one non-original substrate.
 - Add bridge-composition and held-out-primitive splits to new experiments by default.

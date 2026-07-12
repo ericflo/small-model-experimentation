@@ -28,6 +28,9 @@
   (foreign-task-thinking ladder) — the decisive content control.
 - [`qwen35_4b_answer_potential_trace_sft`](../../experiments/qwen35_4b_answer_potential_trace_sft/reports/report.md)
   (claim C51) — answer-potential selection over sampled thinking, stopped at its scorer gate.
+- [`qwen35_4b_native_thought_seam_budget_ladder`](../../experiments/qwen35_4b_native_thought_seam_budget_ladder/reports/report.md)
+  (unclaimed) — a fresh natural-close selector that exhausted 256/512/1024 with
+  0/48 closes and left confirmation unopened.
 - [`qwen35_4b_think_ftpo_round2`](../../experiments/qwen35_4b_think_ftpo_round2/reports/report.md)
   (claim C52) — entropy/varentropy-routed single-token thought steering, a
   low-dose capability null after exact-logit locality and agentic transfer gates.
@@ -101,6 +104,15 @@
   of 2,048 thoughts hit the 512-token cap. Canonical-answer gain after an injected close contained real
   trace information, but fresh answers parsed only 13.2% and the scorer missed its actionable G0 bars.
   Natural closure and autonomous commit must be launch gates when thinking traces feed selection or SFT.
+- **Natural termination is absent through the deployed 1,024 scale on the fresh
+  list-composition workload.** The frozen paired selector observed 0/48 closes
+  at 256, 512, and 1,024; all rows hit the largest cap and the untouched
+  confirmation remained sealed. No exact 1--32-token periodicity occupied any
+  final 256-token tail, so this does not join the 16k+ exact-loop line. Do not
+  keep raising a natural cap. An external commit action is now a distinct
+  deployable policy: valid only if the same forced interface clears parse and
+  headroom gates at calibration and deployment, and always labeled
+  counterfactual relative to autonomous close.
 - **Entropy/varentropy localize interesting forks but do not make weight edits local.** C52 round 2
   selected 155 low-entropy, non-degenerate-varentropy confident wrong turns and compared demotion,
   positive-only uplift, and shuffled uplift. Pull-up was safer and true labels separated from shuffled

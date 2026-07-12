@@ -42,3 +42,11 @@ The imported tracks include strong shift probes. Future work should make shift e
 - [qwen35_4b_humaneval_code_confidence](../../experiments/qwen35_4b_humaneval_code_confidence/reports/report.md) (claim C46, HumanEval replication): the same P(True) selector wins on all 164 HumanEval tasks with no public probes: P(True) 0.835 vs mean-logprob 0.787 and random 0.766, oracle 0.872. Greedy solvability AUROC is 0.862 for P(True), supporting the cross-benchmark code-confidence law.
 
 - [qwen35_4b_error_localization](../../experiments/qwen35_4b_error_localization/reports/report.md) (claim C42): the model can localize its own errors -- per-step confidence dips exactly at the first slip (surviving de-trending; single-slip localization 0.56 >> position-prior 0.36). C40's metacognition is step-resolved; deployable targeted repair (redo from the located step, cheaper than redo-all).
+
+- [qwen35_4b_native_thought_seam_budget_ladder](../../experiments/qwen35_4b_native_thought_seam_budget_ladder/reports/report.md)
+  (unclaimed setup negative): the MBPP-derived 512--1024 native-thinking scale
+  did not transport into autonomous termination on fresh list induction. All
+  48/48 traces reached 1,024 without close, versus prior benchmark-dependent
+  closure. This is not an accuracy comparison; it demonstrates that termination
+  calibration itself is a workload-specific interface property. Future
+  thought-state mechanisms must calibrate on their actual task/prompt/backend.

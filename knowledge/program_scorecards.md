@@ -70,7 +70,7 @@ For evidence-linked durable claims, use [claims/index.md](claims/index.md).
 ## Benchmark Generalization
 
 - Program: [charter](../research_programs/benchmark_generalization/charter.md)
-- Current read: many mechanisms look good in-family; the repository needs standard transfer stress before strategic claims harden. C46 shows the confidence toolkit survives MBPP->HumanEval only after the signal is re-expressed as a single-token P(True) readout. The Pareto qualification negative adds the reverse warning: a held-out instrument ranking can be real on that instrument yet fail to define a useful teacher ordering on the clean training proxy.
+- Current read: many mechanisms look good in-family; the repository needs standard transfer stress before strategic claims harden. C46 shows the confidence toolkit survives MBPP->HumanEval only after the signal is re-expressed as a single-token P(True) readout. The Pareto qualification negative adds the reverse warning: a held-out instrument ranking can be real on that instrument yet fail to define a useful teacher ordering on the clean training proxy. Native-thinking termination is also non-portable: a 512--1024 scale that often closed on MBPP produced 0/48 natural closes at 1,024 on fresh list induction.
 - Best next experiment: compositional-grammar induction as the C45 stress test, plus a small cross-program generalization suite used by compiler, selector, memory, and adaptation work.
 - Strong anchors: `factor_recombination_ladder`, `feature_factorized_rule_diversity`, `targeted_bridge_allocation`.
 - Avoid repeating: reporting only IID or narrow held-out splits for a mechanism meant to generalize.
@@ -79,9 +79,9 @@ For evidence-linked durable claims, use [claims/index.md](claims/index.md).
 ## Interpretability And Diagnostics
 
 - Program: [charter](../research_programs/interpretability_and_diagnostics/charter.md)
-- Current read: diagnostics are useful when they explain why a mechanism transfers or fails, not when they are post-hoc decoration. Late answer-position J coordinates are writable but non-transporting; the early context-local clamp replicates 48/48 consequences with 1,440/1,440 exact control rows. The first native-thought transfer did not test value because all 48 traces were still thinking at the frozen 160-token cap and variable sequence length moved historical activations numerically.
-- Best next experiment: a fresh selection/confirmation ladder that earns a natural-close cap and separates same-length semantic invariance from sequence-length kernel drift; only then resume J-space prefix value and causal patching.
-- Strong anchors: `qwen_structural_compiler_attribution_ablation`, `qwen35_4b_probe_to_prompt`, `qwen35_4b_jacobian_value_transport`, `qwen35_4b_context_local_jacobian_clamp`, `qwen35_4b_jacobian_transport_control_replication`, `qwen35_4b_native_thought_jacobian_value_transport`.
+- Current read: diagnostics are useful when they explain why a mechanism transfers or fails, not when they are post-hoc decoration. Late answer-position J coordinates are writable but non-transporting; the early context-local clamp replicates 48/48 consequences with 1,440/1,440 exact control rows. Native-thought value remains untested because both the 160 parent and a separate 256/512/1024 selector had 0/48 natural closes; the latter passed every cache audit and found no exact short-period tail loops.
+- Best next experiment: define forced close as an explicit deployed commit action, gate that exact interface on fresh parse/headroom/mixed-task evidence, then test forced-policy prefix value and causal J transport with live-prefix replay and dynamic per-length controls.
+- Strong anchors: `qwen_structural_compiler_attribution_ablation`, `qwen35_4b_probe_to_prompt`, `qwen35_4b_jacobian_value_transport`, `qwen35_4b_context_local_jacobian_clamp`, `qwen35_4b_jacobian_transport_control_replication`, `qwen35_4b_native_thought_jacobian_value_transport`, `qwen35_4b_native_thought_seam_budget_ladder`.
 - Avoid repeating: probes that do not change the next experiment, next-token writing tests presented as reasoning transport, promoting a perfect point estimate past a failed control gate, or presenting an oracle donor as a deployable gain.
 - Evidence that advances the program: a diagnostic predicts which variants will fail before the final metric is observed.
 
@@ -106,9 +106,9 @@ For evidence-linked durable claims, use [claims/index.md](claims/index.md).
 ## Test-Time Reasoning Budget
 
 - Program: [charter](../research_programs/test_time_reasoning_budget/charter.md)
-- Current read: native thinking is a real coherent-content lever, but its budget and termination are workload-specific. C51 shows that cap-bound traces can make a score counterfactual; C52 shows that entropy/varentropy can route useful forks without making a shared-weight edit context-local. The stopped Pareto run further shows that short/deep checkpoint labels are not automatically same-prefix teacher labels; route on measured continuation advantage if this line continues.
-- Best next experiment: the registered 16k+ loop-control line; for deployed-budget thought steering, require an exact-logit locality preflight before any fresh outcome harvest.
-- Strong anchors: `qwen35_4b_thinking_content_vs_compute`, `qwen35_4b_overthinking_content_ladder`, `qwen35_4b_answer_potential_trace_sft`, `qwen35_4b_think_ftpo_round2`.
+- Current read: native thinking is a real coherent-content lever, but its budget and termination are workload-specific. C51 shows that cap-bound traces can make a score counterfactual; the fresh list-composition selector strengthens the interface warning with 0/48 natural closes even at 1,024 and no exact tail loops. C52 shows that entropy/varentropy can route useful forks without making a shared-weight edit context-local. An artificial commit can still be a deployable policy, but only when calibration and deployment use the same forced action and label it honestly.
+- Best next experiment: the explicit forced-commit/value interface on fresh tasks with parse/headroom gates; separately retain the registered 16k+ loop-control line. For deployed-budget thought steering, require an exact-logit locality preflight before any outcome harvest.
+- Strong anchors: `qwen35_4b_thinking_content_vs_compute`, `qwen35_4b_overthinking_content_ladder`, `qwen35_4b_answer_potential_trace_sft`, `qwen35_4b_native_thought_seam_budget_ladder`, `qwen35_4b_think_ftpo_round2`.
 - Avoid repeating: thinking-budget wins without content controls, calibration on a different workload class, cap-bound score interpretation, larger-N harvesting before termination/locality works, or treating high varentropy as a monotone “push harder” signal.
 - Evidence that advances the program: a controller or distillation that Pareto-beats fixed budgets, and a content control that isolates genuine reasoning from compute + scaffold + token-presence.
 

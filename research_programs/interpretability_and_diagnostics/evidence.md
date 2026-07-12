@@ -64,3 +64,15 @@ Diagnostics should become standard infrastructure. They are how future agents av
   evidence against J-space value: the natural answer seam was unreachable. It
   requires a fresh cap-selection/confirmation experiment and dynamic per-length
   control geometry before causal patching.
+
+- [qwen35_4b_native_thought_seam_budget_ladder](../../experiments/qwen35_4b_native_thought_seam_budget_ladder/reports/report.md)
+  (unclaimed; terminal `NO_BUDGET_SELECTED`): the separate frozen
+  256/512/1024 selector also found no natural seam. All 48/48 selection traces
+  used all 1,024 thought tokens, so natural close, parse, usable-prefix, and
+  mixed-task counts were zero at every paired rung; the 24-task confirmation
+  split remained unopened. All rows passed the cached-forward audit. A
+  post-decision token diagnostic found 0/48 exact short-period 256-token tail
+  loops, so loop breaking is not licensed. This still precedes J-space value.
+  It closes the natural-cap branch on this workload and redirects the next test
+  to an explicitly deployed forced-commit policy with C51 parse/headroom gates
+  and per-length post-bf16 controls.

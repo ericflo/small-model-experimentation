@@ -1,0 +1,83 @@
+{
+  "cache_contract_pass_count": 48,
+  "decision": "NO_BUDGET_SELECTED",
+  "exact_periodic_256_token_tails": 0,
+  "interpretation": "The close failure is universal at the frozen ceiling. Exact short-period tail loops are reported separately; their absence cannot prove semantic progress.",
+  "maximum_trigram_count": {
+    "maximum": 34,
+    "median": 17.5,
+    "minimum": 10
+  },
+  "metrics_by_cap": [
+    {
+      "cap": 256,
+      "cap_contact_rate": 1.0,
+      "cap_contacts": 48,
+      "conditional_parse_rate": 0.0,
+      "gate_pass": false,
+      "max_close_step": null,
+      "mixed_usable_tasks": 0,
+      "natural_close_rate": 0.0,
+      "natural_close_wilson_lower": 6.424720965888271e-18,
+      "natural_closes": 0,
+      "parse_rate_all": 0.0,
+      "parseable": 0,
+      "traces": 48,
+      "usable_success_rate": 0.0,
+      "usable_successes": 0,
+      "usable_traces": 0
+    },
+    {
+      "cap": 512,
+      "cap_contact_rate": 1.0,
+      "cap_contacts": 48,
+      "conditional_parse_rate": 0.0,
+      "gate_pass": false,
+      "max_close_step": null,
+      "mixed_usable_tasks": 0,
+      "natural_close_rate": 0.0,
+      "natural_close_wilson_lower": 6.424720965888271e-18,
+      "natural_closes": 0,
+      "parse_rate_all": 0.0,
+      "parseable": 0,
+      "traces": 48,
+      "usable_success_rate": 0.0,
+      "usable_successes": 0,
+      "usable_traces": 0
+    },
+    {
+      "cap": 1024,
+      "cap_contact_rate": 1.0,
+      "cap_contacts": 48,
+      "conditional_parse_rate": 0.0,
+      "gate_pass": false,
+      "max_close_step": null,
+      "mixed_usable_tasks": 0,
+      "natural_close_rate": 0.0,
+      "natural_close_wilson_lower": 6.424720965888271e-18,
+      "natural_closes": 0,
+      "parse_rate_all": 0.0,
+      "parseable": 0,
+      "traces": 48,
+      "usable_success_rate": 0.0,
+      "usable_successes": 0,
+      "usable_traces": 0
+    }
+  ],
+  "natural_close_count": 0,
+  "schema_version": 1,
+  "source_rows": "runs/budget_selection_rows.jsonl",
+  "source_rows_sha256": "17e3b107154079ecd857af45544c92c2e11b13cd495edfeb6eb24dcf97f5d39c",
+  "tail_periods": [],
+  "think_tokens": {
+    "maximum": 1024,
+    "median": 1024.0,
+    "minimum": 1024
+  },
+  "traces": 48,
+  "unique_token_ratio": {
+    "maximum": 0.251953125,
+    "median": 0.1884765625,
+    "minimum": 0.0849609375
+  }
+}
