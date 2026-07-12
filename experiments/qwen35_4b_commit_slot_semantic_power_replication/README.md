@@ -107,9 +107,10 @@ After the replicated seam and the separately anchored value implementation:
 .venv/bin/python experiments/qwen35_4b_commit_slot_semantic_power_replication/scripts/run.py --stage prefix-value
 ```
 
-Both commands currently fail closed while the new implementation boundary is
-`PENDING_VALUE_IMPLEMENTATION_COMMIT`. `control-calibration` and
-`causal-confirmation` remain unimplemented regardless of value outcome.
+The value boundary is anchored to pushed implementation commit `2634ad93`.
+`value-model-smoke` is now authorized; `prefix-value` remains locked behind that
+outcome-blind smoke. `control-calibration` and `causal-confirmation` remain
+unimplemented regardless of value outcome.
 
 ## Status
 
@@ -140,9 +141,9 @@ The remaining identity nuisance is load-bearing: confirmation had no successful
 is replicated, but any J/value model must be task-held-out and prove incremental
 value beyond correct-alias activity, ordinary slot margin, and alias identity.
 The outcome-blind prefix-value implementation and adversarial audit are complete
-with 16 passing tests, but its boundary remains deliberately pending until this
-exact code is committed and pushed. Neither reserved split has been opened and
-no new model call has occurred. The frozen primary asks whether midpoint J
+with 16 passing tests and hash-anchored to pushed commit `2634ad93`. Neither
+reserved split has been opened and no new model call has occurred. The frozen
+primary asks whether midpoint J
 coordinates prospectively rank final commit value beyond gold-alias activity,
 slot margin, alias identity, and an equal-width non-J residual readout.
 
@@ -175,6 +176,6 @@ and matched-compute sampling on untouched procedural tasks.
 - `configs/prefix_value.yaml`, `reports/prefix_value_preregistration.md`, and
   `reports/pre_value_design_review.md`: frozen prospective-value rules.
 - `reports/pre_value_implementation_audit.md`: outcome-blind code/firewall
-  audit before the pending implementation boundary is anchored.
+  audit covered by the anchored implementation boundary.
 - `src/coordinates.py` and `src/value_probe.py`: exact coordinate geometry and
   pure task-held-out analysis; no causal patcher is implemented.

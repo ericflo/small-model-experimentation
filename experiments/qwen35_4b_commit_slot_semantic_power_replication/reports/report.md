@@ -151,10 +151,11 @@ group shuffled refits are load-bearing.
 Implementation is complete and 16 outcome-blind tests pass, including exact
 three-path groups, future-label timing, whole-task folds, train-only scaling,
 non-J projection <=1e-5, reserved-data loader isolation, and pending-boundary
-failure before model load. The new boundary is intentionally still pending
-until this exact code/audit is committed and pushed. No `value_fit` or
-`causal_confirmation` row has been opened and no new model call has occurred.
-Control calibration and causal confirmation remain fatal-unavailable.
+failure before model load. The exact code/audit is anchored to pushed commit
+`2634ad93`; only the outcome-blind value-model smoke is now authorized. No
+`value_fit` or `causal_confirmation` row has been opened and no new model call
+has occurred. Control calibration and causal confirmation remain fatal-
+unavailable.
 
 ## Artifact Manifest
 

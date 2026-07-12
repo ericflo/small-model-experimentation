@@ -74,3 +74,6 @@
   pseudoinverses once instead of once per prefix.
 - All 16 experiment tests and Python syntax checks pass. The pending boundary
   stops before model load; `value_fit` and `causal_confirmation` remain unopened.
+- Committed and pushed the implementation, caught/fixed an unquoted YAML `null`
+  key during hash anchoring, reran all checks, and anchored the corrected payload
+  plus code/test/audit hashes to commit `2634ad93`. Value-model smoke is next.

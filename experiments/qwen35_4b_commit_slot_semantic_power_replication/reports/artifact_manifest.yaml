@@ -17,6 +17,6 @@ notes: >-
   receipts, immutable design/model-smoke receipts, adversarial audits, complete
   independently passing qualification/confirmation rows and summaries, and the
   deterministic replication audit are committed. The prospective prefix-value
-  code and adversarial audits are outcome-blind and pending their separate
-  anchored commit; both reserved splits and all downstream causal stages remain
+  code and adversarial audits are outcome-blind and anchored to pushed commit
+  2634ad93; both reserved splits and all downstream causal stages remain
   unopened. No artifact is external or omitted.

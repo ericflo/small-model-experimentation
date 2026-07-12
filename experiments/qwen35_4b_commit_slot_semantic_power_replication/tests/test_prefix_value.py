@@ -181,8 +181,12 @@ def test_prefix_value_loader_opens_only_value_fit(monkeypatch: pytest.MonkeyPatc
 
 
 def test_unanchored_value_boundary_fails_before_model_or_data() -> None:
+    pending = value_config()
+    pending["value_implementation_boundary"]["commit"] = (
+        "PENDING_VALUE_IMPLEMENTATION_COMMIT"
+    )
     with pytest.raises(RuntimeError, match="not anchored"):
-        run.value_implementation_boundary_receipt(base_config(), value_config())
+        run.value_implementation_boundary_receipt(base_config(), pending)
 
 
 def test_frozen_non_j_dictionaries_are_deterministic_and_orthogonal() -> None:
