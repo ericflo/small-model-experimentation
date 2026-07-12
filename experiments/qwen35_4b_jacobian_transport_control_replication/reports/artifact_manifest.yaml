@@ -18,4 +18,6 @@ reproducibility:
   required_external_artifacts: []
 notes: >-
   No training or adapter. A byte-identical 3.08 MB copy of the parent frozen
-  lens is committed under assets/. All controls and rows will be committed.
+  lens is committed under assets/. Outcome-blind model-smoke receipts include
+  three preserved failures and one passing exact-lattice result. All controls
+  and rows will be committed.

@@ -390,7 +390,9 @@ class QuantizationAwareOrthogonalPatcher:
         self.projection_fractions: dict[int, float] = {}
         self.chosen_indices: dict[int, int] = {}
         self.iterations_used: dict[int, int] = {}
+        self.lattice_pair_steps: dict[int, int] = {}
         self.passed_by_layer: dict[int, bool] = {}
+        self.input_activations: dict[int, torch.Tensor] = {}
 
     @staticmethod
     def _actual(current: torch.Tensor, requested: torch.Tensor) -> torch.Tensor:
@@ -403,18 +405,27 @@ class QuantizationAwareOrthogonalPatcher:
     ) -> torch.Tensor:
         return (vectors.float() @ inverse.T) @ dictionary.T
 
-    def _norm_match(
+    def _geometry_match(
         self,
         current: torch.Tensor,
         candidates: torch.Tensor,
         target_norm: float,
-    ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+        dictionary: torch.Tensor,
+        inverse: torch.Tensor,
+    ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
+        """Scale-search while retaining the best joint realized geometry.
+
+        Bfloat16 scale plateaus can contain several deltas with essentially the
+        same norm but materially different J-span leakage.  Selecting solely by
+        closest norm silently discards a jointly feasible state.  The frozen
+        decision constraints therefore define the numeric objective at every
+        visited binary-search scale.
+        """
         draws = candidates.shape[0]
         if target_norm == 0.0:
             actual = torch.zeros_like(candidates)
-            return actual, torch.zeros(draws, device=candidates.device), torch.zeros(
-                draws, device=candidates.device
-            )
+            zeros = torch.zeros(draws, device=candidates.device)
+            return actual, zeros, zeros, zeros
         low = torch.zeros(draws, device=candidates.device)
         high = torch.ones(draws, device=candidates.device)
         for _ in range(12):
@@ -424,20 +435,159 @@ class QuantizationAwareOrthogonalPatcher:
                 break
             high = torch.where(below, high * 2.0, high)
         best_actual = self._actual(current, candidates * high[:, None])
-        best_error = (best_actual.norm(dim=-1) - target_norm).abs() / target_norm
+        best_norm = best_actual.norm(dim=-1)
+        best_error = (best_norm - target_norm).abs() / target_norm
+        best_projection = self._project(
+            best_actual, dictionary, inverse
+        ).norm(dim=-1) / best_norm.clamp_min(1e-12)
+        best_objective = torch.maximum(
+            best_error / self.norm_tolerance,
+            best_projection / self.projection_tolerance,
+        )
         best_scale = high.clone()
         for _ in range(self.binary_search_steps):
             midpoint = (low + high) / 2.0
             actual = self._actual(current, candidates * midpoint[:, None])
             norms = actual.norm(dim=-1)
             errors = (norms - target_norm).abs() / target_norm
-            better = errors < best_error
+            projection = self._project(
+                actual, dictionary, inverse
+            ).norm(dim=-1) / norms.clamp_min(1e-12)
+            objective = torch.maximum(
+                errors / self.norm_tolerance,
+                projection / self.projection_tolerance,
+            )
+            better = objective < best_objective
+            best_objective = torch.where(better, objective, best_objective)
             best_error = torch.where(better, errors, best_error)
+            best_projection = torch.where(better, projection, best_projection)
             best_scale = torch.where(better, midpoint, best_scale)
             low = torch.where(norms < target_norm, midpoint, low)
             high = torch.where(norms < target_norm, high, midpoint)
         best_actual = self._actual(current, candidates * best_scale[:, None])
-        return best_actual, best_error, best_scale
+        return best_actual, best_error, best_projection, best_scale
+
+    def _lattice_pair_repair(
+        self,
+        current: torch.Tensor,
+        initial_actual: torch.Tensor,
+        target_norm: float,
+        dictionary: torch.Tensor,
+        inverse: torch.Tensor,
+    ) -> tuple[torch.Tensor, float, float, int]:
+        """Improve joint geometry with exact pairs of neighboring bf16 moves.
+
+        For an orthogonal projector P, changing coordinate i by s changes
+        ||P delta||^2 by 2*s*(P delta)_i + s^2*P_ii.  This lets us score every
+        distinct pair of one-ULP bf16 moves exactly, in bounded blocks, without
+        another model evaluation or any outcome signal.  Pairing is important:
+        one move generally cannot preserve the 1e-5 norm tolerance.
+        """
+        if target_norm == 0.0:
+            return torch.zeros_like(initial_actual), 0.0, 0.0, 0
+        current_flat = current.reshape(-1)
+        changed = (
+            current_flat.float() + initial_actual.reshape(-1).float()
+        ).to(current.dtype)
+        projection_matrix = dictionary @ inverse
+        diagonal = projection_matrix.diagonal()
+        width = current_flat.numel()
+        coordinate = torch.arange(width, device=current.device).repeat(2)
+        last = None
+        # Reuse the preregistered correction bound rather than introduce a new
+        # optimizer budget.  In practice smoke feasibility required 1--2 pairs.
+        for step in range(self.correction_iterations + 1):
+            delta = changed.float() - current_flat.float()
+            projection = self._project(delta, dictionary, inverse).reshape(-1)
+            norm = delta.norm()
+            projection_fraction = projection.norm() / norm.clamp_min(1e-12)
+            norm_error = (norm - target_norm).abs() / target_norm
+            objective = torch.maximum(
+                norm_error / self.norm_tolerance,
+                projection_fraction / self.projection_tolerance,
+            )
+            last = (
+                delta.reshape_as(initial_actual),
+                float(norm_error),
+                float(projection_fraction),
+                step,
+            )
+            if float(objective) <= 1.0 or step == self.correction_iterations:
+                return last
+            upper = torch.nextafter(
+                changed, torch.full_like(changed, float("inf"))
+            )
+            lower = torch.nextafter(
+                changed, torch.full_like(changed, float("-inf"))
+            )
+            move = torch.cat((
+                upper.float() - changed.float(),
+                lower.float() - changed.float(),
+            ))
+            norm_change = 2.0 * move * delta[coordinate] + move.square()
+            projection_change = (
+                2.0 * move * projection[coordinate]
+                + move.square() * diagonal[coordinate]
+            )
+            best_value = float(objective)
+            best_pair: tuple[int, int] | None = None
+            block = 256
+            for start in range(0, move.numel(), block):
+                stop = min(move.numel(), start + block)
+                first = torch.arange(start, stop, device=current.device)
+                cross = (
+                    2.0
+                    * move[first, None]
+                    * move[None, :]
+                    * projection_matrix[
+                        coordinate[first, None], coordinate[None, :]
+                    ]
+                )
+                candidate_norm_sq = (
+                    norm.square()
+                    + norm_change[first, None]
+                    + norm_change[None, :]
+                ).clamp_min(0.0)
+                candidate_projection_sq = (
+                    projection.square().sum()
+                    + projection_change[first, None]
+                    + projection_change[None, :]
+                    + cross
+                ).clamp_min(0.0)
+                candidate_norm = candidate_norm_sq.sqrt()
+                candidate_error = (
+                    candidate_norm - target_norm
+                ).abs() / target_norm
+                candidate_fraction = (
+                    candidate_projection_sq.sqrt()
+                    / candidate_norm.clamp_min(1e-12)
+                )
+                candidate_objective = torch.maximum(
+                    candidate_error / self.norm_tolerance,
+                    candidate_fraction / self.projection_tolerance,
+                )
+                candidate_objective = candidate_objective.masked_fill(
+                    coordinate[first, None] == coordinate[None, :],
+                    float("inf"),
+                )
+                local_value, local_flat = candidate_objective.flatten().min(dim=0)
+                if float(local_value) < best_value:
+                    local_row = int(local_flat) // move.numel()
+                    local_column = int(local_flat) % move.numel()
+                    best_value = float(local_value)
+                    best_pair = (int(first[local_row]), local_column)
+            if best_pair is None:
+                return last
+            first, second = best_pair
+            first_coordinate = int(coordinate[first])
+            second_coordinate = int(coordinate[second])
+            changed[first_coordinate] = (
+                upper if first < width else lower
+            )[first_coordinate]
+            changed[second_coordinate] = (
+                upper if second < width else lower
+            )[second_coordinate]
+        raise AssertionError("bounded lattice repair did not return")
 
     def _hook(self, layer: int):
         bases_cpu = self.bases_by_layer[layer]
@@ -451,6 +601,7 @@ class QuantizationAwareOrthogonalPatcher:
             patched = tensor.clone()
             current = patched[:, self.position, :]
             current_float = current.float().clone()
+            self.input_activations[layer] = current_float.detach().cpu()
             candidates = bases_cpu.to(device=tensor.device, dtype=torch.float32)
             dictionary = dictionary_cpu.to(tensor.device)
             inverse = inverse_cpu.to(tensor.device)
@@ -463,18 +614,39 @@ class QuantizationAwareOrthogonalPatcher:
             best_iteration = torch.zeros(
                 candidates.shape[0], dtype=torch.long, device=tensor.device
             )
+            # The live bf16 map is discontinuous.  A correction trajectory can
+            # briefly visit a better quantization cell between the relatively
+            # expensive scale-search checkpoints below.  Retain, separately
+            # for each of the 32 preregistered starts, the request whose raw
+            # realized delta has the smallest span projection.  At the frozen
+            # 512-iteration boundary we scale-search these retained requests as
+            # well.  This is geometry-only bookkeeping: it neither creates new
+            # random draws nor inspects logits or labels.
+            best_requested = candidates.clone()
+            initial_actual = self._actual(current, candidates)
+            if target_norm == 0.0:
+                best_requested_projection = torch.zeros(
+                    candidates.shape[0], device=tensor.device
+                )
+            else:
+                best_requested_projection = self._project(
+                    initial_actual, dictionary, inverse
+                ).norm(dim=-1) / initial_actual.norm(dim=-1).clamp_min(1e-12)
+            best_requested_iteration = torch.zeros(
+                candidates.shape[0], dtype=torch.long, device=tensor.device
+            )
             completed = 0
             chosen = None
             while True:
-                actual, norm_error, _scales = self._norm_match(
-                    current, candidates, target_norm
+                actual, norm_error, projection_fraction, _scales = (
+                    self._geometry_match(
+                        current,
+                        candidates,
+                        target_norm,
+                        dictionary,
+                        inverse,
+                    )
                 )
-                if target_norm == 0.0:
-                    projection_fraction = torch.zeros_like(norm_error)
-                else:
-                    projection_fraction = self._project(
-                        actual, dictionary, inverse
-                    ).norm(dim=-1) / actual.norm(dim=-1).clamp_min(1e-12)
                 objective = torch.maximum(
                     norm_error / self.norm_tolerance,
                     projection_fraction / self.projection_tolerance,
@@ -502,6 +674,54 @@ class QuantizationAwareOrthogonalPatcher:
                     chosen_iteration = completed
                     break
                 if completed >= self.correction_iterations:
+                    (
+                        retained_actual,
+                        retained_norm_error,
+                        retained_projection,
+                        _retained_scales,
+                    ) = self._geometry_match(
+                        current,
+                        best_requested,
+                        target_norm,
+                        dictionary,
+                        inverse,
+                    )
+                    retained_objective = torch.maximum(
+                        retained_norm_error / self.norm_tolerance,
+                        retained_projection / self.projection_tolerance,
+                    )
+                    retained_better = retained_objective < best_objective
+                    best_objective = torch.where(
+                        retained_better, retained_objective, best_objective
+                    )
+                    best_actual = torch.where(
+                        retained_better[:, None], retained_actual, best_actual
+                    )
+                    best_norm_error = torch.where(
+                        retained_better, retained_norm_error, best_norm_error
+                    )
+                    best_projection = torch.where(
+                        retained_better, retained_projection, best_projection
+                    )
+                    best_iteration = torch.where(
+                        retained_better,
+                        best_requested_iteration,
+                        best_iteration,
+                    )
+                    retained_eligible = (
+                        (retained_norm_error <= self.norm_tolerance)
+                        & (retained_projection <= self.projection_tolerance)
+                    )
+                    retained_passing = retained_eligible.nonzero(
+                        as_tuple=False
+                    ).flatten()
+                    if retained_passing.numel():
+                        chosen = int(retained_passing[0].item())
+                        chosen_actual = retained_actual[chosen : chosen + 1]
+                        chosen_norm_error = float(retained_norm_error[chosen])
+                        chosen_projection = float(retained_projection[chosen])
+                        chosen_iteration = int(best_requested_iteration[chosen])
+                        break
                     chosen = int(torch.argmin(best_objective).item())
                     chosen_actual = best_actual[chosen : chosen + 1]
                     chosen_norm_error = float(best_norm_error[chosen])
@@ -518,7 +738,49 @@ class QuantizationAwareOrthogonalPatcher:
                     orthogonal_norm = orthogonal.norm(dim=-1, keepdim=True).clamp_min(1e-12)
                     desired = orthogonal * (target_norm / orthogonal_norm)
                     candidates = candidates + self.correction_damping * (desired - actual)
-                completed += steps
+                    completed += 1
+                    corrected_actual = self._actual(current, candidates)
+                    if target_norm == 0.0:
+                        corrected_projection = torch.zeros(
+                            candidates.shape[0], device=tensor.device
+                        )
+                    else:
+                        corrected_projection = self._project(
+                            corrected_actual, dictionary, inverse
+                        ).norm(dim=-1) / corrected_actual.norm(dim=-1).clamp_min(1e-12)
+                    request_better = (
+                        corrected_projection < best_requested_projection
+                    )
+                    best_requested_projection = torch.where(
+                        request_better,
+                        corrected_projection,
+                        best_requested_projection,
+                    )
+                    best_requested = torch.where(
+                        request_better[:, None], candidates, best_requested
+                    )
+                    best_requested_iteration = torch.where(
+                        request_better,
+                        torch.full_like(best_requested_iteration, completed),
+                        best_requested_iteration,
+                    )
+            lattice_steps = 0
+            if not (
+                chosen_norm_error <= self.norm_tolerance
+                and chosen_projection <= self.projection_tolerance
+            ):
+                (
+                    chosen_actual,
+                    chosen_norm_error,
+                    chosen_projection,
+                    lattice_steps,
+                ) = self._lattice_pair_repair(
+                    current,
+                    chosen_actual,
+                    target_norm,
+                    dictionary,
+                    inverse,
+                )
             patched[:, self.position, :] = (
                 current_float + chosen_actual
             ).to(tensor.dtype)
@@ -539,6 +801,7 @@ class QuantizationAwareOrthogonalPatcher:
             self.projection_fractions[layer] = chosen_projection
             self.chosen_indices[layer] = int(chosen)
             self.iterations_used[layer] = int(chosen_iteration)
+            self.lattice_pair_steps[layer] = int(lattice_steps)
             self.passed_by_layer[layer] = bool(
                 chosen_norm_error <= self.norm_tolerance
                 and chosen_projection <= self.projection_tolerance

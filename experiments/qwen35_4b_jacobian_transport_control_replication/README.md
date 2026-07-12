@@ -53,8 +53,16 @@ and the pre-run adversarial review is in
 
 ## Results
 
-Pre-run. Design, data roles, thresholds, and review are being pushed before any
-model call. CPU smoke is not scientific evidence.
+The outcome-blind model smoke passes all 20/20 random layer deltas. Maximum
+post-bf16 relative norm error is `9.0113e-6` and maximum realized J-span
+projection fraction is `0.0098674`, both inside the frozen gates. Exact lattice
+repair was needed for four layer-8 rows (three one-pair repairs and one two-pair
+repair). Model, lens, token, position, length, and causal-suffix contracts pass.
+
+Three preceding failed smoke receipts are preserved. The implementation history
+and post-smoke adversarial audit explain the geometry-only repair. These are
+plumbing results, not causal evidence: the 480-row numeric calibration and all
+untouched confirmation outcomes remain unopened.
 
 ## Scope
 

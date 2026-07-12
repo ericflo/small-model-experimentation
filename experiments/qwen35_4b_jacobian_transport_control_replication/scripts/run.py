@@ -275,6 +275,7 @@ def _numeric_rows(patcher, *, item_id: str, kind: str, arm: str) -> list[dict[st
             ),
             "chosen_candidate_index": int(patcher.chosen_indices[layer]),
             "correction_iterations": int(patcher.iterations_used[layer]),
+            "lattice_pair_steps": int(patcher.lattice_pair_steps[layer]),
         }
         for layer in sorted(patcher.deltas)
     ]

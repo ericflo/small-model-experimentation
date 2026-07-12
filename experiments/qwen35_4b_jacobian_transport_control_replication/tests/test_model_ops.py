@@ -152,3 +152,37 @@ def test_quantization_aware_control_meets_both_realized_constraints() -> None:
     assert patcher.passed_by_layer[0]
     assert patcher.norm_errors[0] <= 1e-5
     assert patcher.projection_fractions[0] <= 1e-2
+
+
+def test_exact_bf16_pair_repair_preserves_norm_while_removing_span() -> None:
+    directions = torch.zeros(4, 1)
+    directions[0, 0] = 1.0
+    layers = torch.nn.ModuleList([torch.nn.Identity()])
+    patcher = QuantizationAwareOrthogonalPatcher(
+        layers,
+        0,
+        {0: torch.tensor([[0.0, 1.0, 0.0, 0.0]])},
+        {0: directions},
+        {0: 1.0},
+        rtol=1e-5,
+        norm_tolerance=1e-5,
+        projection_tolerance=0.1,
+        correction_iterations=8,
+        correction_damping=0.5,
+        binary_search_steps=8,
+    )
+    current = torch.ones(1, 4, dtype=torch.bfloat16)
+    initial = torch.tensor([[0.0078125, 0.0625, 0.0, 0.0]])
+    target_norm = float(initial.norm())
+    dictionary, inverse = patcher.geometry[0]
+    repaired, norm_error, projection, steps = patcher._lattice_pair_repair(
+        current,
+        initial,
+        target_norm,
+        dictionary,
+        inverse,
+    )
+    assert steps == 1
+    assert norm_error <= 1e-5
+    assert projection == 0.0
+    assert float(repaired.norm()) == target_norm

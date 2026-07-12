@@ -129,3 +129,26 @@ program strategy only after the frozen decision.
 8. no target digit direction or gradient;
 9. confirmation inaccessible before calibration pass;
 10. frozen endpoint and paired bootstrap rules.
+
+## Post-smoke implementation audit (before calibration)
+
+Three outcome-blind model-smoke attempts localized a discrete bf16 failure at
+layer 8. No calibration or confirmation outcome was opened. Adding an exact
+lattice repair after observing numeric smoke geometry creates a post-design
+implementation risk, so it is constrained as follows:
+
+- it runs only when the already-frozen continuous optimizer fails;
+- it scores exact pairs of one-ULP bf16 coordinate moves against only the two
+  frozen numeric constraints, never logits, labels, or answer identity;
+- it preserves the original candidate identity, seeds, 32 draws, damping,
+  continuous correction/search budgets, layer band, target norm, and thresholds;
+- it reuses the frozen 512 bound and stops at the first passing lattice state or
+  when no exact pair improves the joint objective;
+- every applied pair count and final realized geometry is recorded; and
+- calibration still requires 480/480 passing layer deltas and remains a fatal
+  firewall before untouched confirmation.
+
+This repair can only make the random control more stringently orthogonal to the
+J span. It cannot select an inert model outcome. The adversarial verdict remains
+proceed-to-calibration only if a fresh rerun of the original 20-row model smoke
+passes in full.
