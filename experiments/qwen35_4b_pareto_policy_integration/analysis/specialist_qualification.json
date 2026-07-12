@@ -1,0 +1,1213 @@
+{
+  "block_results": {
+    "deep": [
+      {
+        "by_cell": {
+          "burrowmaze/atom/3": {
+            "mean_delta": 0.020833333333333332,
+            "n": 48
+          },
+          "burrowmaze/atom/4": {
+            "mean_delta": 0.14583333333333334,
+            "n": 48
+          },
+          "burrowmaze/atom/5": {
+            "mean_delta": 0.20833333333333334,
+            "n": 48
+          },
+          "burrowmaze/atom/6": {
+            "mean_delta": 0.20833333333333334,
+            "n": 48
+          },
+          "burrowmaze/episode/2": {
+            "mean_delta": 0.0625,
+            "n": 16
+          },
+          "burrowmaze/episode/3": {
+            "mean_delta": 0.0,
+            "n": 16
+          },
+          "burrowmaze/episode/5": {
+            "mean_delta": -0.0625,
+            "n": 16
+          },
+          "caravan/atom/3": {
+            "mean_delta": 0.020833333333333332,
+            "n": 48
+          },
+          "caravan/atom/4": {
+            "mean_delta": 0.0625,
+            "n": 48
+          },
+          "caravan/atom/5": {
+            "mean_delta": 0.08333333333333333,
+            "n": 48
+          },
+          "caravan/atom/6": {
+            "mean_delta": 0.0,
+            "n": 48
+          },
+          "foundry_ledger/atom/3": {
+            "mean_delta": 0.041666666666666664,
+            "n": 48
+          },
+          "foundry_ledger/atom/4": {
+            "mean_delta": 0.041666666666666664,
+            "n": 48
+          },
+          "foundry_ledger/atom/5": {
+            "mean_delta": 0.020833333333333332,
+            "n": 48
+          },
+          "foundry_ledger/atom/6": {
+            "mean_delta": -0.041666666666666664,
+            "n": 48
+          },
+          "glyphgate/atom/3": {
+            "mean_delta": 0.10416666666666667,
+            "n": 48
+          },
+          "glyphgate/atom/4": {
+            "mean_delta": 0.0,
+            "n": 48
+          },
+          "glyphgate/atom/5": {
+            "mean_delta": 0.0,
+            "n": 48
+          },
+          "glyphgate/atom/6": {
+            "mean_delta": 0.0,
+            "n": 48
+          },
+          "kilnrite/atom/3": {
+            "mean_delta": 0.020833333333333332,
+            "n": 48
+          },
+          "kilnrite/atom/5": {
+            "mean_delta": 0.0625,
+            "n": 48
+          },
+          "kilnrite/atom/6": {
+            "mean_delta": 0.16666666666666666,
+            "n": 48
+          },
+          "loomfix/atom/3": {
+            "mean_delta": 0.08333333333333333,
+            "n": 48
+          },
+          "loomfix/atom/4": {
+            "mean_delta": 0.125,
+            "n": 48
+          },
+          "loomfix/atom/5": {
+            "mean_delta": -0.0625,
+            "n": 48
+          },
+          "loomfix/atom/6": {
+            "mean_delta": 0.020833333333333332,
+            "n": 48
+          },
+          "loomfix/episode/2": {
+            "mean_delta": 0.15625,
+            "n": 16
+          },
+          "loomfix/episode/3": {
+            "mean_delta": 0.0625,
+            "n": 16
+          },
+          "loomfix/episode/5": {
+            "mean_delta": -0.04166666666666667,
+            "n": 16
+          },
+          "packhouse/atom/3": {
+            "mean_delta": -0.023354111107541153,
+            "n": 48
+          },
+          "packhouse/atom/4": {
+            "mean_delta": -0.06907967123424644,
+            "n": 48
+          },
+          "packhouse/atom/5": {
+            "mean_delta": -0.02570984997741611,
+            "n": 48
+          },
+          "packhouse/atom/6": {
+            "mean_delta": -0.026493341774790836,
+            "n": 48
+          },
+          "patchwheel/atom/3": {
+            "mean_delta": 0.020833333333333332,
+            "n": 48
+          },
+          "patchwheel/atom/4": {
+            "mean_delta": 0.08333333333333333,
+            "n": 48
+          },
+          "patchwheel/atom/5": {
+            "mean_delta": 0.020833333333333332,
+            "n": 48
+          },
+          "patchwheel/atom/6": {
+            "mean_delta": -0.0625,
+            "n": 48
+          },
+          "patchwheel/episode/2": {
+            "mean_delta": 0.0625,
+            "n": 16
+          },
+          "patchwheel/episode/3": {
+            "mean_delta": -0.125,
+            "n": 16
+          },
+          "patchwheel/episode/5": {
+            "mean_delta": 0.03125,
+            "n": 16
+          },
+          "runeward/atom/3": {
+            "mean_delta": 0.041666666666666664,
+            "n": 48
+          },
+          "runeward/atom/4": {
+            "mean_delta": 0.0625,
+            "n": 48
+          },
+          "runeward/atom/5": {
+            "mean_delta": 0.10416666666666667,
+            "n": 48
+          },
+          "runeward/atom/6": {
+            "mean_delta": 0.125,
+            "n": 48
+          },
+          "stallwright/atom/3": {
+            "mean_delta": 0.09310175829237237,
+            "n": 48
+          },
+          "stallwright/atom/4": {
+            "mean_delta": 0.1819116362431079,
+            "n": 48
+          },
+          "stallwright/atom/5": {
+            "mean_delta": 0.04779042033513833,
+            "n": 48
+          },
+          "stallwright/atom/6": {
+            "mean_delta": -0.011209589572830468,
+            "n": 48
+          }
+        },
+        "n": 2016,
+        "one_sided_lcb": 0.02639542260253901,
+        "paired_macro_delta": 0.0425407760667457,
+        "positive_lcb": true,
+        "positive_mean": true
+      },
+      {
+        "by_cell": {
+          "burrowmaze/atom/3": {
+            "mean_delta": 0.08333333333333333,
+            "n": 48
+          },
+          "burrowmaze/atom/4": {
+            "mean_delta": 0.08333333333333333,
+            "n": 48
+          },
+          "burrowmaze/atom/5": {
+            "mean_delta": 0.3125,
+            "n": 48
+          },
+          "burrowmaze/atom/6": {
+            "mean_delta": 0.14583333333333334,
+            "n": 48
+          },
+          "burrowmaze/episode/2": {
+            "mean_delta": 0.0,
+            "n": 16
+          },
+          "burrowmaze/episode/3": {
+            "mean_delta": -0.0625,
+            "n": 16
+          },
+          "burrowmaze/episode/5": {
+            "mean_delta": 0.0,
+            "n": 16
+          },
+          "caravan/atom/3": {
+            "mean_delta": -0.020833333333333332,
+            "n": 48
+          },
+          "caravan/atom/4": {
+            "mean_delta": 0.020833333333333332,
+            "n": 48
+          },
+          "caravan/atom/5": {
+            "mean_delta": -0.0625,
+            "n": 48
+          },
+          "caravan/atom/6": {
+            "mean_delta": 0.0625,
+            "n": 48
+          },
+          "foundry_ledger/atom/3": {
+            "mean_delta": 0.0625,
+            "n": 48
+          },
+          "foundry_ledger/atom/4": {
+            "mean_delta": 0.041666666666666664,
+            "n": 48
+          },
+          "foundry_ledger/atom/5": {
+            "mean_delta": 0.020833333333333332,
+            "n": 48
+          },
+          "foundry_ledger/atom/6": {
+            "mean_delta": 0.0,
+            "n": 48
+          },
+          "glyphgate/atom/3": {
+            "mean_delta": 0.041666666666666664,
+            "n": 48
+          },
+          "glyphgate/atom/4": {
+            "mean_delta": 0.041666666666666664,
+            "n": 48
+          },
+          "glyphgate/atom/5": {
+            "mean_delta": 0.0,
+            "n": 48
+          },
+          "glyphgate/atom/6": {
+            "mean_delta": 0.0,
+            "n": 48
+          },
+          "kilnrite/atom/3": {
+            "mean_delta": 0.020833333333333332,
+            "n": 48
+          },
+          "kilnrite/atom/5": {
+            "mean_delta": 0.08333333333333333,
+            "n": 48
+          },
+          "kilnrite/atom/6": {
+            "mean_delta": 0.10416666666666667,
+            "n": 48
+          },
+          "loomfix/atom/3": {
+            "mean_delta": 0.0625,
+            "n": 48
+          },
+          "loomfix/atom/4": {
+            "mean_delta": -0.041666666666666664,
+            "n": 48
+          },
+          "loomfix/atom/5": {
+            "mean_delta": 0.0625,
+            "n": 48
+          },
+          "loomfix/atom/6": {
+            "mean_delta": 0.125,
+            "n": 48
+          },
+          "loomfix/episode/2": {
+            "mean_delta": 0.21875,
+            "n": 16
+          },
+          "loomfix/episode/3": {
+            "mean_delta": 0.2708333333333333,
+            "n": 16
+          },
+          "loomfix/episode/5": {
+            "mean_delta": -0.04166666666666667,
+            "n": 16
+          },
+          "packhouse/atom/3": {
+            "mean_delta": -0.033010933914258835,
+            "n": 48
+          },
+          "packhouse/atom/4": {
+            "mean_delta": -0.11422347091831063,
+            "n": 48
+          },
+          "packhouse/atom/5": {
+            "mean_delta": -0.0735101257444959,
+            "n": 48
+          },
+          "packhouse/atom/6": {
+            "mean_delta": -0.042944397229825716,
+            "n": 48
+          },
+          "patchwheel/atom/3": {
+            "mean_delta": -0.020833333333333332,
+            "n": 48
+          },
+          "patchwheel/atom/4": {
+            "mean_delta": 0.0,
+            "n": 48
+          },
+          "patchwheel/atom/5": {
+            "mean_delta": 0.125,
+            "n": 48
+          },
+          "patchwheel/atom/6": {
+            "mean_delta": -0.020833333333333332,
+            "n": 48
+          },
+          "patchwheel/episode/2": {
+            "mean_delta": 0.0625,
+            "n": 16
+          },
+          "patchwheel/episode/3": {
+            "mean_delta": 3.469446951953614e-18,
+            "n": 16
+          },
+          "patchwheel/episode/5": {
+            "mean_delta": -0.0625,
+            "n": 16
+          },
+          "runeward/atom/3": {
+            "mean_delta": 0.1875,
+            "n": 48
+          },
+          "runeward/atom/4": {
+            "mean_delta": 0.10416666666666667,
+            "n": 48
+          },
+          "runeward/atom/5": {
+            "mean_delta": 0.0625,
+            "n": 48
+          },
+          "runeward/atom/6": {
+            "mean_delta": 0.20833333333333334,
+            "n": 48
+          },
+          "stallwright/atom/3": {
+            "mean_delta": 0.08556579601513019,
+            "n": 48
+          },
+          "stallwright/atom/4": {
+            "mean_delta": 0.052118349050332115,
+            "n": 48
+          },
+          "stallwright/atom/5": {
+            "mean_delta": 0.10813064592277603,
+            "n": 48
+          },
+          "stallwright/atom/6": {
+            "mean_delta": 0.0747708003477758,
+            "n": 48
+          }
+        },
+        "n": 2016,
+        "one_sided_lcb": 0.0325606429298396,
+        "paired_macro_delta": 0.048711388823523404,
+        "positive_lcb": true,
+        "positive_mean": true
+      }
+    ],
+    "quick": [
+      {
+        "by_cell": {
+          "loomfix/atom/1": {
+            "mean_delta": 0.041666666666666664,
+            "n": 48
+          },
+          "loomfix/atom/2": {
+            "mean_delta": 0.020833333333333332,
+            "n": 48
+          },
+          "packhouse/atom/1": {
+            "mean_delta": 0.16593442061620975,
+            "n": 48
+          },
+          "packhouse/atom/2": {
+            "mean_delta": 0.06795277546897391,
+            "n": 48
+          },
+          "patchwheel/atom/1": {
+            "mean_delta": -0.1875,
+            "n": 48
+          },
+          "patchwheel/atom/2": {
+            "mean_delta": -0.041666666666666664,
+            "n": 48
+          },
+          "stallwright/atom/1": {
+            "mean_delta": -0.015146397250796709,
+            "n": 48
+          },
+          "stallwright/atom/2": {
+            "mean_delta": -0.10747840728003327,
+            "n": 48
+          }
+        },
+        "n": 384,
+        "one_sided_lcb": -0.04302004355130161,
+        "paired_macro_delta": -0.006925534389039124,
+        "positive_lcb": false,
+        "positive_mean": false
+      },
+      {
+        "by_cell": {
+          "loomfix/atom/1": {
+            "mean_delta": -0.08333333333333333,
+            "n": 48
+          },
+          "loomfix/atom/2": {
+            "mean_delta": -0.08333333333333333,
+            "n": 48
+          },
+          "packhouse/atom/1": {
+            "mean_delta": -0.0066431986915368,
+            "n": 48
+          },
+          "packhouse/atom/2": {
+            "mean_delta": 0.17844387204788667,
+            "n": 48
+          },
+          "patchwheel/atom/1": {
+            "mean_delta": -0.16666666666666666,
+            "n": 48
+          },
+          "patchwheel/atom/2": {
+            "mean_delta": -0.0625,
+            "n": 48
+          },
+          "stallwright/atom/1": {
+            "mean_delta": 0.006989786527563054,
+            "n": 48
+          },
+          "stallwright/atom/2": {
+            "mean_delta": -0.08605644592453394,
+            "n": 48
+          }
+        },
+        "n": 384,
+        "one_sided_lcb": -0.07720456424215545,
+        "paired_macro_delta": -0.03788741492174429,
+        "positive_lcb": false,
+        "positive_mean": false
+      }
+    ]
+  },
+  "calibration_roles": {
+    "capability_cells": [
+      "deep/burrowmaze/atom/L3",
+      "deep/burrowmaze/atom/L4",
+      "deep/burrowmaze/atom/L5",
+      "deep/burrowmaze/atom/L6",
+      "deep/burrowmaze/episode/L2",
+      "deep/burrowmaze/episode/L3",
+      "deep/burrowmaze/episode/L5",
+      "deep/caravan/atom/L3",
+      "deep/caravan/atom/L4",
+      "deep/caravan/atom/L5",
+      "deep/caravan/atom/L6",
+      "deep/foundry_ledger/atom/L3",
+      "deep/foundry_ledger/atom/L4",
+      "deep/foundry_ledger/atom/L5",
+      "deep/foundry_ledger/atom/L6",
+      "deep/glyphgate/atom/L3",
+      "deep/glyphgate/atom/L4",
+      "deep/glyphgate/atom/L5",
+      "deep/glyphgate/atom/L6",
+      "deep/kilnrite/atom/L3",
+      "deep/kilnrite/atom/L5",
+      "deep/kilnrite/atom/L6",
+      "deep/loomfix/atom/L3",
+      "deep/loomfix/atom/L4",
+      "deep/loomfix/atom/L5",
+      "deep/loomfix/atom/L6",
+      "deep/loomfix/episode/L2",
+      "deep/loomfix/episode/L3",
+      "deep/loomfix/episode/L5",
+      "deep/packhouse/atom/L3",
+      "deep/packhouse/atom/L4",
+      "deep/packhouse/atom/L5",
+      "deep/packhouse/atom/L6",
+      "deep/patchwheel/atom/L3",
+      "deep/patchwheel/atom/L4",
+      "deep/patchwheel/atom/L5",
+      "deep/patchwheel/atom/L6",
+      "deep/patchwheel/episode/L2",
+      "deep/patchwheel/episode/L3",
+      "deep/patchwheel/episode/L5",
+      "deep/runeward/atom/L3",
+      "deep/runeward/atom/L4",
+      "deep/runeward/atom/L5",
+      "deep/runeward/atom/L6",
+      "deep/stallwright/atom/L3",
+      "deep/stallwright/atom/L4",
+      "deep/stallwright/atom/L5",
+      "deep/stallwright/atom/L6",
+      "quick/loomfix/atom/L1",
+      "quick/loomfix/atom/L2",
+      "quick/packhouse/atom/L1",
+      "quick/packhouse/atom/L2",
+      "quick/patchwheel/atom/L1",
+      "quick/patchwheel/atom/L2",
+      "quick/stallwright/atom/L1",
+      "quick/stallwright/atom/L2"
+    ],
+    "retention_cells": [
+      "deep/brinework/atom/L3",
+      "deep/brinework/atom/L4",
+      "deep/brinework/atom/L5",
+      "deep/brinework/atom/L6",
+      "deep/ferrier/atom/L3",
+      "deep/ferrier/atom/L4",
+      "deep/ferrier/atom/L5",
+      "deep/ferrier/atom/L6",
+      "deep/ferrier/episode/L2",
+      "deep/ferrier/episode/L3",
+      "deep/ferrier/episode/L5",
+      "deep/gatepost/atom/L3",
+      "deep/gatepost/atom/L4",
+      "deep/gatepost/atom/L5",
+      "deep/gatepost/atom/L6",
+      "deep/gatepost/episode/L2",
+      "deep/gatepost/episode/L3",
+      "deep/gatepost/episode/L5",
+      "deep/glyphgate/episode/L2",
+      "deep/glyphgate/episode/L3",
+      "deep/glyphgate/episode/L5",
+      "deep/kilnrite/atom/L4",
+      "deep/kilnrite/episode/L2",
+      "deep/kilnrite/episode/L3",
+      "deep/kilnrite/episode/L5",
+      "deep/spindle/atom/L3",
+      "deep/spindle/atom/L4",
+      "deep/spindle/atom/L5",
+      "deep/spindle/atom/L6",
+      "deep/spindle/episode/L2",
+      "deep/spindle/episode/L3",
+      "deep/spindle/episode/L5",
+      "quick/brinework/atom/L1",
+      "quick/brinework/atom/L2",
+      "quick/burrowmaze/atom/L1",
+      "quick/burrowmaze/atom/L2",
+      "quick/caravan/atom/L1",
+      "quick/caravan/atom/L2",
+      "quick/ferrier/atom/L1",
+      "quick/ferrier/atom/L2",
+      "quick/foundry_ledger/atom/L1",
+      "quick/foundry_ledger/atom/L2",
+      "quick/gatepost/atom/L1",
+      "quick/gatepost/atom/L2",
+      "quick/glyphgate/atom/L1",
+      "quick/glyphgate/atom/L2",
+      "quick/kilnrite/atom/L1",
+      "quick/kilnrite/atom/L2",
+      "quick/runeward/atom/L1",
+      "quick/runeward/atom/L2",
+      "quick/spindle/atom/L1",
+      "quick/spindle/atom/L2"
+    ]
+  },
+  "config": "/workspace/small-model-experimentation/experiments/qwen35_4b_pareto_policy_integration/configs/default.yaml",
+  "decision_rule": "paired delta > 0 with both blocks positive and one-sided stratified-bootstrap LCB > 0; no effect-size floor",
+  "decisions": {
+    "deep": {
+      "every_block_positive": true,
+      "passed": false,
+      "positive_pooled_lcb": true,
+      "positive_pooled_mean": true,
+      "retention_passed": false
+    },
+    "quick": {
+      "every_block_positive": false,
+      "passed": false,
+      "positive_pooled_lcb": false,
+      "positive_pooled_mean": false,
+      "retention_passed": false
+    }
+  },
+  "downstream_authorization": "stop_before_teacher_audit",
+  "gate": {
+    "passed": false
+  },
+  "pooled": {
+    "deep": {
+      "by_cell": {
+        "burrowmaze/atom/3": {
+          "mean_delta": 0.052083333333333336,
+          "n": 96
+        },
+        "burrowmaze/atom/4": {
+          "mean_delta": 0.11458333333333333,
+          "n": 96
+        },
+        "burrowmaze/atom/5": {
+          "mean_delta": 0.2604166666666667,
+          "n": 96
+        },
+        "burrowmaze/atom/6": {
+          "mean_delta": 0.17708333333333334,
+          "n": 96
+        },
+        "burrowmaze/episode/2": {
+          "mean_delta": 0.03125,
+          "n": 32
+        },
+        "burrowmaze/episode/3": {
+          "mean_delta": -0.03125,
+          "n": 32
+        },
+        "burrowmaze/episode/5": {
+          "mean_delta": -0.03125,
+          "n": 32
+        },
+        "caravan/atom/3": {
+          "mean_delta": 0.0,
+          "n": 96
+        },
+        "caravan/atom/4": {
+          "mean_delta": 0.041666666666666664,
+          "n": 96
+        },
+        "caravan/atom/5": {
+          "mean_delta": 0.010416666666666666,
+          "n": 96
+        },
+        "caravan/atom/6": {
+          "mean_delta": 0.03125,
+          "n": 96
+        },
+        "foundry_ledger/atom/3": {
+          "mean_delta": 0.052083333333333336,
+          "n": 96
+        },
+        "foundry_ledger/atom/4": {
+          "mean_delta": 0.041666666666666664,
+          "n": 96
+        },
+        "foundry_ledger/atom/5": {
+          "mean_delta": 0.020833333333333332,
+          "n": 96
+        },
+        "foundry_ledger/atom/6": {
+          "mean_delta": -0.020833333333333332,
+          "n": 96
+        },
+        "glyphgate/atom/3": {
+          "mean_delta": 0.07291666666666667,
+          "n": 96
+        },
+        "glyphgate/atom/4": {
+          "mean_delta": 0.020833333333333332,
+          "n": 96
+        },
+        "glyphgate/atom/5": {
+          "mean_delta": 0.0,
+          "n": 96
+        },
+        "glyphgate/atom/6": {
+          "mean_delta": 0.0,
+          "n": 96
+        },
+        "kilnrite/atom/3": {
+          "mean_delta": 0.020833333333333332,
+          "n": 96
+        },
+        "kilnrite/atom/5": {
+          "mean_delta": 0.07291666666666667,
+          "n": 96
+        },
+        "kilnrite/atom/6": {
+          "mean_delta": 0.13541666666666666,
+          "n": 96
+        },
+        "loomfix/atom/3": {
+          "mean_delta": 0.07291666666666667,
+          "n": 96
+        },
+        "loomfix/atom/4": {
+          "mean_delta": 0.041666666666666664,
+          "n": 96
+        },
+        "loomfix/atom/5": {
+          "mean_delta": 0.0,
+          "n": 96
+        },
+        "loomfix/atom/6": {
+          "mean_delta": 0.07291666666666667,
+          "n": 96
+        },
+        "loomfix/episode/2": {
+          "mean_delta": 0.1875,
+          "n": 32
+        },
+        "loomfix/episode/3": {
+          "mean_delta": 0.16666666666666666,
+          "n": 32
+        },
+        "loomfix/episode/5": {
+          "mean_delta": -0.04166666666666667,
+          "n": 32
+        },
+        "packhouse/atom/3": {
+          "mean_delta": -0.028182522510899994,
+          "n": 96
+        },
+        "packhouse/atom/4": {
+          "mean_delta": -0.09165157107627853,
+          "n": 96
+        },
+        "packhouse/atom/5": {
+          "mean_delta": -0.049609987860956,
+          "n": 96
+        },
+        "packhouse/atom/6": {
+          "mean_delta": -0.034718869502308285,
+          "n": 96
+        },
+        "patchwheel/atom/3": {
+          "mean_delta": 0.0,
+          "n": 96
+        },
+        "patchwheel/atom/4": {
+          "mean_delta": 0.041666666666666664,
+          "n": 96
+        },
+        "patchwheel/atom/5": {
+          "mean_delta": 0.07291666666666667,
+          "n": 96
+        },
+        "patchwheel/atom/6": {
+          "mean_delta": -0.041666666666666664,
+          "n": 96
+        },
+        "patchwheel/episode/2": {
+          "mean_delta": 0.0625,
+          "n": 32
+        },
+        "patchwheel/episode/3": {
+          "mean_delta": -0.0625,
+          "n": 32
+        },
+        "patchwheel/episode/5": {
+          "mean_delta": -0.015625,
+          "n": 32
+        },
+        "runeward/atom/3": {
+          "mean_delta": 0.11458333333333333,
+          "n": 96
+        },
+        "runeward/atom/4": {
+          "mean_delta": 0.08333333333333333,
+          "n": 96
+        },
+        "runeward/atom/5": {
+          "mean_delta": 0.08333333333333333,
+          "n": 96
+        },
+        "runeward/atom/6": {
+          "mean_delta": 0.16666666666666666,
+          "n": 96
+        },
+        "stallwright/atom/3": {
+          "mean_delta": 0.08933377715375128,
+          "n": 96
+        },
+        "stallwright/atom/4": {
+          "mean_delta": 0.11701499264672001,
+          "n": 96
+        },
+        "stallwright/atom/5": {
+          "mean_delta": 0.07796053312895718,
+          "n": 96
+        },
+        "stallwright/atom/6": {
+          "mean_delta": 0.031780605387472675,
+          "n": 96
+        }
+      },
+      "n": 4032,
+      "one_sided_lcb": 0.03401178660716478,
+      "paired_macro_delta": 0.04562608244513455,
+      "positive_lcb": true,
+      "positive_mean": true
+    },
+    "quick": {
+      "by_cell": {
+        "loomfix/atom/1": {
+          "mean_delta": -0.020833333333333332,
+          "n": 96
+        },
+        "loomfix/atom/2": {
+          "mean_delta": -0.03125,
+          "n": 96
+        },
+        "packhouse/atom/1": {
+          "mean_delta": 0.07964561096233647,
+          "n": 96
+        },
+        "packhouse/atom/2": {
+          "mean_delta": 0.12319832375843028,
+          "n": 96
+        },
+        "patchwheel/atom/1": {
+          "mean_delta": -0.17708333333333334,
+          "n": 96
+        },
+        "patchwheel/atom/2": {
+          "mean_delta": -0.052083333333333336,
+          "n": 96
+        },
+        "stallwright/atom/1": {
+          "mean_delta": -0.004078305361616828,
+          "n": 96
+        },
+        "stallwright/atom/2": {
+          "mean_delta": -0.0967674266022836,
+          "n": 96
+        }
+      },
+      "n": 768,
+      "one_sided_lcb": -0.04896794341091201,
+      "paired_macro_delta": -0.022406474655391712,
+      "positive_lcb": false,
+      "positive_mean": false
+    }
+  },
+  "protocol_checks": {
+    "all_greedy": true,
+    "all_qualification_scope": true,
+    "all_same_families": true,
+    "calibration_gate_passed": true,
+    "calibration_roles_partition_cells": true,
+    "deep_block_seeds": true,
+    "deep_capability_cells_exist": true,
+    "quick_block_seeds": true,
+    "quick_capability_cells_exist": true
+  },
+  "retention": {
+    "deep": {
+      "cells": {
+        "deep/brinework/atom/L3": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": 0.07291666666666667,
+          "n": 96,
+          "passed": true
+        },
+        "deep/brinework/atom/L4": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": 0.052083333333333336,
+          "n": 96,
+          "passed": true
+        },
+        "deep/brinework/atom/L5": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": 0.08333333333333333,
+          "n": 96,
+          "passed": true
+        },
+        "deep/brinework/atom/L6": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": -0.041666666666666664,
+          "n": 96,
+          "passed": false
+        },
+        "deep/ferrier/atom/L3": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": 0.0,
+          "n": 96,
+          "passed": true
+        },
+        "deep/ferrier/atom/L4": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": 0.0,
+          "n": 96,
+          "passed": true
+        },
+        "deep/ferrier/atom/L5": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": 0.041666666666666664,
+          "n": 96,
+          "passed": true
+        },
+        "deep/ferrier/atom/L6": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": 0.11458333333333333,
+          "n": 96,
+          "passed": true
+        },
+        "deep/ferrier/episode/L2": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": 0.0,
+          "n": 32,
+          "passed": true
+        },
+        "deep/ferrier/episode/L3": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": 0.0,
+          "n": 32,
+          "passed": true
+        },
+        "deep/ferrier/episode/L5": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": 0.0,
+          "n": 32,
+          "passed": true
+        },
+        "deep/gatepost/atom/L3": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": 0.125,
+          "n": 96,
+          "passed": true
+        },
+        "deep/gatepost/atom/L4": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": 0.14583333333333334,
+          "n": 96,
+          "passed": true
+        },
+        "deep/gatepost/atom/L5": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": 0.0625,
+          "n": 96,
+          "passed": true
+        },
+        "deep/gatepost/atom/L6": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": 0.0,
+          "n": 96,
+          "passed": true
+        },
+        "deep/gatepost/episode/L2": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": 0.125,
+          "n": 32,
+          "passed": true
+        },
+        "deep/gatepost/episode/L3": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": 0.1875,
+          "n": 32,
+          "passed": true
+        },
+        "deep/gatepost/episode/L5": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": 0.1875,
+          "n": 32,
+          "passed": true
+        },
+        "deep/glyphgate/episode/L2": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": -0.0625,
+          "n": 32,
+          "passed": false
+        },
+        "deep/glyphgate/episode/L3": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": -0.09375,
+          "n": 32,
+          "passed": false
+        },
+        "deep/glyphgate/episode/L5": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": -0.03125,
+          "n": 32,
+          "passed": false
+        },
+        "deep/kilnrite/atom/L4": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": 0.09375,
+          "n": 96,
+          "passed": true
+        },
+        "deep/kilnrite/episode/L2": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": -0.0625,
+          "n": 32,
+          "passed": false
+        },
+        "deep/kilnrite/episode/L3": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": 0.0625,
+          "n": 32,
+          "passed": true
+        },
+        "deep/kilnrite/episode/L5": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": -0.021875,
+          "n": 32,
+          "passed": false
+        },
+        "deep/spindle/atom/L3": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": 0.2708333333333333,
+          "n": 96,
+          "passed": true
+        },
+        "deep/spindle/atom/L4": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": 0.20833333333333334,
+          "n": 96,
+          "passed": true
+        },
+        "deep/spindle/atom/L5": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": 0.14583333333333334,
+          "n": 96,
+          "passed": true
+        },
+        "deep/spindle/atom/L6": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": 0.1875,
+          "n": 96,
+          "passed": true
+        },
+        "deep/spindle/episode/L2": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": -0.015625,
+          "n": 32,
+          "passed": true
+        },
+        "deep/spindle/episode/L3": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": 3.469446951953614e-18,
+          "n": 32,
+          "passed": true
+        },
+        "deep/spindle/episode/L5": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": -0.013392857142857144,
+          "n": 32,
+          "passed": true
+        }
+      },
+      "n": 2112,
+      "passed": false
+    },
+    "quick": {
+      "cells": {
+        "quick/brinework/atom/L1": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": 0.041666666666666664,
+          "n": 96,
+          "passed": true
+        },
+        "quick/brinework/atom/L2": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": -0.03125,
+          "n": 96,
+          "passed": false
+        },
+        "quick/burrowmaze/atom/L1": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": 0.0,
+          "n": 96,
+          "passed": true
+        },
+        "quick/burrowmaze/atom/L2": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": 0.010416666666666666,
+          "n": 96,
+          "passed": true
+        },
+        "quick/caravan/atom/L1": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": -0.010416666666666666,
+          "n": 96,
+          "passed": true
+        },
+        "quick/caravan/atom/L2": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": 0.0,
+          "n": 96,
+          "passed": true
+        },
+        "quick/ferrier/atom/L1": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": -0.010416666666666666,
+          "n": 96,
+          "passed": true
+        },
+        "quick/ferrier/atom/L2": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": -0.03125,
+          "n": 96,
+          "passed": false
+        },
+        "quick/foundry_ledger/atom/L1": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": 0.0,
+          "n": 96,
+          "passed": true
+        },
+        "quick/foundry_ledger/atom/L2": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": -0.052083333333333336,
+          "n": 96,
+          "passed": false
+        },
+        "quick/gatepost/atom/L1": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": -0.13541666666666666,
+          "n": 96,
+          "passed": false
+        },
+        "quick/gatepost/atom/L2": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": -0.08333333333333333,
+          "n": 96,
+          "passed": false
+        },
+        "quick/glyphgate/atom/L1": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": -0.052083333333333336,
+          "n": 96,
+          "passed": false
+        },
+        "quick/glyphgate/atom/L2": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": -0.13541666666666666,
+          "n": 96,
+          "passed": false
+        },
+        "quick/kilnrite/atom/L1": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": 0.0,
+          "n": 96,
+          "passed": true
+        },
+        "quick/kilnrite/atom/L2": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": -0.010416666666666666,
+          "n": 96,
+          "passed": true
+        },
+        "quick/runeward/atom/L1": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": 0.041666666666666664,
+          "n": 96,
+          "passed": true
+        },
+        "quick/runeward/atom/L2": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": 0.020833333333333332,
+          "n": 96,
+          "passed": true
+        },
+        "quick/spindle/atom/L1": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": 0.010416666666666666,
+          "n": 96,
+          "passed": true
+        },
+        "quick/spindle/atom/L2": {
+          "maximum_allowed_regression": 0.02,
+          "mean_delta": -0.21875,
+          "n": 96,
+          "passed": false
+        }
+      },
+      "n": 1920,
+      "passed": false
+    }
+  },
+  "retention_anchor_families": [
+    "ferrier"
+  ],
+  "stage": "specialist_qualification"
+}

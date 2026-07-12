@@ -180,3 +180,27 @@ Created as a new experiment scaffold.
   establishes that the two regenerated policies cross over on this clean
   procedural proxy. No arm, seed, cell role, gate, or interpretation rule was
   changed in response.
+
+## 2026-07-12 — terminal specialist-qualification stop
+
+- Deep policy block 1 completed all 4,416 items in 3,013.91 seconds using
+  4,319,026 sampled tokens. Broad raw means were `0.8268` quick and `0.5819`
+  deep, and every exact-model, runner, engine, seed, and scope check passed.
+- Across all four frozen qualification arms, 17,664 paired item evaluations
+  used 18,049,063 sampled tokens and 12,713.08 seconds. No item, family, seed,
+  or arm was filtered after observation.
+- The quick policy's intended-stratum capability delta was negative in both
+  independent blocks (`-0.00693`, `-0.03789`) and pooled to `-0.02241` with a
+  one-sided 95% stratified-bootstrap lower bound of `-0.04897`. It therefore
+  fails the corrected `delta > 0` existence gate without any effect-size
+  floor.
+- The deep policy did show replicated capability: block deltas `+0.04254` and
+  `+0.04871`, pooled `+0.04563`, one-sided lower bound `+0.03401`. However, it
+  exceeded the frozen 0.02 regression allowance on six retention cells, so it
+  is not a clean dominating teacher either.
+- The pair is not complementary on this contamination-safe procedural proxy.
+  `analysis/specialist_qualification.json` authorizes
+  `stop_before_teacher_audit`; no teacher audit, locality pilot, MOPD update,
+  integration control, confirmation, or benchmark invocation ran. Per the
+  preregistration, this is a teacher-transport/qualification negative, not an
+  MOPD result.
