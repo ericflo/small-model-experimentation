@@ -2,8 +2,9 @@
 
 ## Summary
 
-**Status: preregistered; prospective run pending.** Two frozen recovery policies
-are branched under equal compute and selected with one public visible-test bit.
+**Status: `PROSPECTIVE_DEV_INFEASIBLE`; stopped before selector scoring.** The
+old policy complementarity did not transfer to four new families, and the mixed
+union could not beat equal-compute same-policy sampling.
 
 ## Research program fit
 
@@ -25,9 +26,18 @@ cases. Controls and union feasibility precede selector scoring on each block.
 
 ## Results
 
-Pending. Retrospective qualification is fixed at 60/80 public-selected success
-on each predecessor block, versus 63/80 hidden union; it is not prospective
-evidence.
+Base scored 49/80 (61.25%). Candidate and action-only each scored 59/80
+(73.75%). Two complete candidate trajectories still scored 59/80, while two
+action trajectories scored 60/80 (75.0%). The deterministic candidate/action
+union was also 60/80. Its preregistered ceiling needed to exceed each comparator
+by 3pp, so all feasibility checks failed and the selector was not applied.
+
+Paired source outcomes were 58 both-correct, one candidate-only, one
+action-only, and 20 both-wrong. Every shared failure belonged to
+`atomic_reservations`. Both greedy policies nevertheless changed code within
+two turns in 100% of rejected-patch and failed-test cases, localizing the miss to
+semantic conjunction rather than process control. Across deterministic and
+stochastic action runs, only one of 40 atomic trajectories solved.
 
 ## Controls
 
@@ -43,12 +53,19 @@ passes. No benchmark source or result is accessed.
 
 ## Interpretation
 
-Pending the frozen prospective run.
+Visible-test arbitration is useful only when source policies propose different
+successful workspaces. On the new tasks, their diversity collapsed: the same
+transactional conjunction defeated both. The next capability producer must
+shift proposals with executable supervision for atomic validate-copy-commit
+patterns, not add branches or tune a selector.
 
 ## Next experiment
 
-Only a two-block positive authorizes mining the public-selected winner traces
-and building a new conditional-transition-balanced training experiment.
+Build diverse transactional repository families, obtain executable tool-found
+solutions the incumbent almost never proposes, and train an action-seam
+curriculum mixed with the existing conditional recovery replay. Gate locality,
+ordinary recovery retention, unseen transactional transfer, and sample-more
+before Menagerie.
 
 ## Artifact manifest
 

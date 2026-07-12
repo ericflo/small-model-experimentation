@@ -92,21 +92,54 @@ Exact thresholds and statistical details are frozen in
 
 ## Results
 
-Pending prospective execution. The 75% retrospective score is selector-design
-evidence, not a prospective capability result.
+**Verdict: `PROSPECTIVE_DEV_INFEASIBLE`; stopped before selector scoring.**
+Confirmation, winner banking, and Menagerie remained sealed.
+
+| Prospective-dev arm | Success | Mean sampled tokens | Atomic reservations |
+| --- | ---: | ---: | ---: |
+| C54 base | 61.25% | 2,248 | 0/20 |
+| λ=.18 greedy | 73.75% | 1,439 | 0/20 |
+| action-only greedy | 73.75% | 1,537 | 0/20 |
+| λ=.18 pass-if-either ×2 | 73.75% | 3,384 | 0/20 |
+| action pass-if-either ×2 | **75.0%** | 3,395 | 1/20 |
+| deterministic mixed-policy union | **75.0%** | — | 0/20 |
+
+The deterministic source policies each solved 59/80 cases, with only one
+exclusive win apiece; their union was 60/80. That ceiling could not reach the
+registered 61.4/80-equivalent bar over either source, much less beat action
+sample-more by 3pp. All three feasibility checks failed, so the public selector
+was never scored prospectively.
+
+The negative is sharply localized. Fifty-eight cases were solved by both
+sources and all 20 shared failures were `atomic_reservations`; both policies
+retained 100% changed-patch-within-two behavior. The traces repeatedly fixed
+atomic validation or input immutability separately, then regressed the other
+constraint. Action sample-more found the full conjunction once in 20 cases.
+Full metrics and hashes are in `reports/result_receipt.json`.
 
 ## Interpretation
 
-Pending. A positive result identifies a public capability producer whose
-winner traces may seed the requested conditionally balanced curriculum. A null
-would show that the predecessor's replicated union is not capturable by this
-minimal visible-test rule.
+The predecessor's complementarity was algorithm-specific and did not transfer
+to four new families. Public branch selection cannot create proposal coverage
+when both sources share the same failure core; spending the same compute on
+more action trajectories is at least as good.
+
+This redirects the curriculum from *selecting among local policies* to
+*installing a missing compositional invariant*. The shared failure is not a
+loop-policy defect: agents inspect, patch, test, and revise, but oscillate
+between “validate the whole request before any update” and “copy state before
+updating.” A successor should use executable tool-found solutions across
+multiple transactional families, preserve the existing conditional transition
+bank as replay, and require transfer to unseen transactional families plus the
+broad recovery suite before Menagerie.
 
 ## Knowledgebase Update
 
-- Program evidence: pending prospective result.
-- Program backlog: marks this as the active recovery capability producer.
-- Claim ledger: deferred; no model checkpoint or Menagerie result yet.
+- Program evidence: records the non-transferring union and shared
+  multi-constraint failure core.
+- Program backlog: retires public portfolio selection here and queues
+  transaction-invariant scaffold distillation with recovery replay.
+- Claim ledger: unchanged; no checkpoint or Menagerie result was produced.
 
 ## Artifacts
 

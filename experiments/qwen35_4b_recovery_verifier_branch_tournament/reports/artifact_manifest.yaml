@@ -15,7 +15,7 @@ external_artifacts:
   - name: detailed prospective tournament evaluations
     storage: large_artifacts/qwen35_4b_recovery_verifier_branch_tournament
     required_for: development, confirmation, and reproduction
-    checksum: pending result receipt
+    checksum: per-file SHA-256 values in reports/result_receipt.json
     regenerate: .venv/bin/python experiments/qwen35_4b_recovery_verifier_branch_tournament/scripts/run.py --full
 
 omitted_artifacts:
@@ -33,5 +33,6 @@ reproducibility:
     - large_artifacts/qwen35_4b_recovery_payload_budget_harness/eval
 
 notes: >-
-  This experiment trains no weights and never opens Menagerie. Passing both
-  prospective blocks authorizes a separate winner-bank experiment only.
+  This experiment trained no weights and never opened Menagerie. Prospective
+  development failed union feasibility before selector scoring; confirmation
+  and winner banking are absent.

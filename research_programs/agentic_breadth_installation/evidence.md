@@ -281,3 +281,29 @@ is bounded public-verifier branching between the two local policies, compared
 to equal-compute sampling, followed only conditionally by transition-balanced
 winner banking. Do not tune another scalar reason dose or route on family
 identity.
+
+## qwen35_4b_recovery_verifier_branch_tournament (2026-07-12 — Prospective infeasibility)
+
+The predecessor's replicated 0.7875 action/reason union did not transfer to
+four new procedural repository families. On 80 prospective-dev recovery cases,
+C54 base scored 0.6125, λ=.18 and action-only each scored 0.7375, and their
+deterministic hidden union reached only 0.7500. Equal-reservation pass-if-either
+sample-more scored 0.7375 for λ=.18 and 0.7500 for action. The union therefore
+failed every frozen +0.03 feasibility contrast before the public selector was
+scored. Confirmation, winner banking, and Menagerie stayed sealed.
+
+The paired failure anatomy is more useful than the aggregate null: 58 cases
+were solved by both sources, one by candidate only, one by action only, and 20
+by neither. Every shared failure was the new `atomic_reservations` family.
+Both source policies retained 1.00 changed-patch-within-two on both controlled
+states, so this is not another recovery-loop deletion. Traces repeatedly fixed
+whole-request validation or input immutability separately and then regressed
+the other; action sample-more assembled the full conjunction once in 20 cases.
+
+Read: public selection cannot manufacture proposal coverage from globally local
+policies with the same semantic core. Retire branch arbitration for this
+recovery line. The next intervention should install the missing transactional
+validate-copy-commit invariant from executable tool-found solutions across
+diverse training families, mix the existing conditional recovery bank as
+replay, and require transfer to structurally different transactional families
+plus broad recovery retention before Menagerie.

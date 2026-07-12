@@ -54,21 +54,21 @@
   independent confirmation; every other gate passed and Menagerie stayed
   sealed. The larger payload and two-turn transition metric were validated,
   but reason mixing is complementary rather than uniformly superior.
-- Highest-priority recovery successor: run a bounded, public-verifier branch
-  tournament between action-only and λ=.18 from the same recovery state. Freeze
-  branch compute and visible selection before evaluation; compare against
-  equal-reservation independent sampling, scaffold, both source policies, and
-  an uninformative/random branch selector. If it transfers, bank only
-  verifier-selected winners while preserving conditional state→action cells,
-  then test whether one local checkpoint can compress the tournament. Never
-  route on family identity or hidden outcomes. The oracle ceiling is 0.7875 on
-  each completed transfer block, but it is not a result claim.
-- Active implementation:
-  `qwen35_4b_recovery_verifier_branch_tournament` freezes the minimal
-  visible-pass selector prospectively on four new repository families. It must
-  beat pass-if-either candidate and action sample-more at identical 12-call
-  reservation on dev and confirm before a separate transition-balanced winner
-  bank is authorized. Menagerie remains sealed in this harness-only stage.
+- Completed prospective infeasibility:
+  `qwen35_4b_recovery_verifier_branch_tournament`. On four new families, both
+  sources scored 0.7375 and their union only 0.7500, tying action pass-if-either
+  sample-more. Feasibility stopped the selector; confirm, banking, and
+  Menagerie remained sealed. Do not tune the tie break or try another public
+  source router—the two policies had only one exclusive win each.
+- Highest-priority curriculum successor: create diverse transactional coding
+  families whose solutions require whole-request validation, state copying,
+  and atomic commit. Use executable tool-found/oracle repairs because the
+  incumbent proposed the full conjunction only once in 40 stochastic atomic
+  trajectories. Train action-seam targets from the recovery-action checkpoint,
+  mix the existing seven-transition recovery bank as retention replay, and
+  compare against matched replay-only training and sample-more. Require exact
+  locality, transition retention, unseen transactional-family transfer, and
+  broad recovery non-regression before Menagerie.
 - Future retraining should calibrate plan dose by realized gradient/surprisal
   and avoid supervising plan starts already rank 1 or wildly off-policy lexical
   templates.

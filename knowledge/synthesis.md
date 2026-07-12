@@ -303,6 +303,24 @@ branching selected by public verifier evidence, followed only conditionally by
 state→action-balanced winner banking; do not tune another scalar reason dose or
 route on family identity.
 
+**Policy complementarity did not transfer; the residual is conjunctive semantic
+proposal, not recovery control (2026-07-12, Negative,
+[qwen35_4b_recovery_verifier_branch_tournament](../experiments/qwen35_4b_recovery_verifier_branch_tournament/reports/report.md)).**
+The action-only and reason-mixture recovery policies each scored 73.75% on four
+new procedural families, but their deterministic union reached only 75.0%,
+exactly tying equal-reservation action pass-if-either sampling. Frozen
+feasibility correctly stopped the public selector before confirmation,
+curriculum production, or Menagerie. Paired outcomes isolate the boundary:
+58/80 were solved by both, one by each alone, and all 20 shared failures were
+atomic reservations. Both policies still changed patches within two turns on
+every controlled state; traces instead oscillated between whole-request
+validation and input immutability, composing both only once across 40
+stochastic action trajectories. Public routing cannot create a proposal neither
+source makes. The warranted curriculum is executable supervision for the
+transactional validate-copy-commit invariant across diverse families, mixed
+with the existing conditional recovery replay—not another selector, branch, or
+global reason dose.
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.

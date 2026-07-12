@@ -18,3 +18,18 @@
   control-first union feasibility, and the separation between a capability
   producer and later curriculum compression.
 - No prospective Qwen output or Menagerie seed has been exposed.
+
+## 2026-07-12 — prospective development and feasibility stop
+
+- Base 49/80; λ=.18 greedy 59/80; action greedy 59/80.
+- Equal-reservation pass-if-either controls: λ=.18 59/80, action 60/80.
+- Deterministic mixed-policy union: 60/80, only one exclusive win per source.
+- All three frozen union-feasibility checks failed; recorded
+  `PROSPECTIVE_DEV_INFEASIBLE` before public selector scoring.
+- Confirmation, winner-bank production, and Menagerie remained sealed.
+- Forensics: all 20 shared failures were `atomic_reservations`, despite 100%
+  two-turn changed-patch behavior. Traces oscillated between atomic validation
+  and input-copy invariants; action sample-more solved one of 20 cases.
+- Strategic pivot: source selection is closed for this line. Queue diverse
+  transactional scaffold-distillation with existing recovery replay to shift
+  proposal coverage while preserving conditional transitions.

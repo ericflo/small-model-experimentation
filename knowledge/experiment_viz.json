@@ -45341,39 +45341,68 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "A visible-pass rule captures most of the two-policy recovery union",
+     "title": "The mixed-policy ceiling only ties same-policy sampling",
      "categories": [
-      "retrospective development",
-      "retrospective confirmation"
+      "base",
+      "reason mix",
+      "action only",
+      "reason sample more",
+      "action sample more",
+      "mixed-policy union"
      ],
      "series": [
       {
-       "label": "expected random policy choice",
+       "label": "prospective development recovery",
        "values": [
-        0.6875,
-        0.6875
-       ]
-      },
-      {
-       "label": "frozen public selector",
-       "values": [
+        0.6125,
+        0.7375,
+        0.7375,
+        0.7375,
         0.75,
         0.75
        ]
+      }
+     ],
+     "x_label": "frozen policy or matched-compute control",
+     "y_label": "recovery success",
+     "y_format": "percent01",
+     "note": "The two deterministic source policies have only one exclusive win each, so their 75% union cannot clear the frozen +3-point bars and exactly ties two action-only trajectories. Feasibility stops before selector scoring.",
+     "source": "experiments/qwen35_4b_recovery_verifier_branch_tournament/reports/result_receipt.json"
+    },
+    {
+     "kind": "bar",
+     "title": "Both source policies share the atomic-reservation failure core",
+     "categories": [
+      "atomic reservations",
+      "deadline queue",
+      "fallback resolver",
+      "interval coalescer"
+     ],
+     "series": [
+      {
+       "label": "reason mix",
+       "values": [
+        0.0,
+        1.0,
+        0.95,
+        1.0
+       ]
       },
       {
-       "label": "hidden-success union ceiling",
+       "label": "action only",
        "values": [
-        0.7875,
-        0.7875
+        0.0,
+        1.0,
+        1.0,
+        0.95
        ]
       }
      ],
-     "x_label": "completed predecessor block",
+     "x_label": "new procedural family",
      "y_label": "recovery success",
      "y_format": "percent01",
-     "note": "Pre-run design evidence only. The frozen rule chooses action-only when it alone passes visible tests and otherwise chooses the reason mixture; prospective scoring uses four new families and cannot change this rule.",
-     "source": "experiments/qwen35_4b_recovery_verifier_branch_tournament/analysis/selector_transfer_dev.json and experiments/qwen35_4b_recovery_verifier_branch_tournament/analysis/selector_transfer_confirm.json"
+     "note": "Every one of 20 atomic-reservation cases is a shared deterministic failure. The only source-policy differences are one five-point family swap elsewhere, leaving no useful portfolio diversity.",
+     "source": "experiments/qwen35_4b_recovery_verifier_branch_tournament/reports/result_receipt.json"
     }
    ]
   },

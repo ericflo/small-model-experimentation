@@ -1,0 +1,253 @@
+{
+  "confirmation_exposed": false,
+  "experiment": "qwen35_4b_recovery_verifier_branch_tournament",
+  "feasibility": {
+    "block": "prospective_dev",
+    "checks": {
+      "union_vs_action_sample_more": false,
+      "union_vs_best_single": false,
+      "union_vs_candidate_sample_more": false
+    },
+    "control_success": {
+      "action": 0.7375,
+      "action_sample_more": 0.75,
+      "candidate": 0.7375,
+      "candidate_sample_more": 0.7375
+    },
+    "downstream_authorization": "stop_before_selector",
+    "gate": {
+      "passed": false
+    },
+    "oracle_union_ceiling": 0.75,
+    "schema_version": 1
+  },
+  "headline": {
+    "action_success": 0.7375,
+    "best_sample_more": 0.75,
+    "candidate_success": 0.7375,
+    "mixed_policy_union_ceiling": 0.75,
+    "shared_failure_cases": 20
+  },
+  "menagerie_exposed": false,
+  "paired_source_forensics": {
+    "action_only": 1,
+    "both_success": 58,
+    "candidate_only": 1,
+    "shared_fail": 20,
+    "shared_fail_by_family": {
+      "atomic_reservations": 20
+    },
+    "union_success": 0.75
+  },
+  "prospective_dev": {
+    "action_deep": {
+      "answer_cap_hit_rate_per_turn": 0.10324483775811209,
+      "failed_test_changed_patch_within_two": 1.0,
+      "failed_test_success": 0.725,
+      "invalid_action_rate_per_turn": 0.02359882005899705,
+      "mean_sampled_tokens": 1537.3625,
+      "mean_turns": 4.2375,
+      "per_family": {
+        "atomic_reservations": {
+          "n": 20,
+          "submit_rate": 0.05,
+          "success": 0.0
+        },
+        "deadline_queue": {
+          "n": 20,
+          "submit_rate": 1.0,
+          "success": 1.0
+        },
+        "fallback_resolver": {
+          "n": 20,
+          "submit_rate": 1.0,
+          "success": 1.0
+        },
+        "interval_coalescer": {
+          "n": 20,
+          "submit_rate": 0.85,
+          "success": 0.95
+        }
+      },
+      "rejected_patch_changed_patch_within_two": 1.0,
+      "rejected_patch_success": 0.75,
+      "submit_rate": 0.725,
+      "success": 0.7375
+    },
+    "action_sample_more": {
+      "answer_cap_hit_rate_per_turn": 0.09585121602288985,
+      "failed_test_changed_patch_within_two": 1.0,
+      "failed_test_success": 0.775,
+      "invalid_action_rate_per_turn": 0.024320457796852647,
+      "mean_sampled_tokens": 3395.075,
+      "mean_turns": 8.7375,
+      "per_family": {
+        "atomic_reservations": {
+          "n": 20,
+          "submit_rate": 0.1,
+          "success": 0.05
+        },
+        "deadline_queue": {
+          "n": 20,
+          "submit_rate": 1.0,
+          "success": 1.0
+        },
+        "fallback_resolver": {
+          "n": 20,
+          "submit_rate": 0.95,
+          "success": 0.95
+        },
+        "interval_coalescer": {
+          "n": 20,
+          "submit_rate": 1.0,
+          "success": 1.0
+        }
+      },
+      "rejected_patch_changed_patch_within_two": 1.0,
+      "rejected_patch_success": 0.725,
+      "submit_rate": 0.7625,
+      "success": 0.75
+    },
+    "base_deep": {
+      "answer_cap_hit_rate_per_turn": 0.25304136253041365,
+      "failed_test_changed_patch_within_two": 0.55,
+      "failed_test_success": 0.575,
+      "invalid_action_rate_per_turn": 0.043795620437956206,
+      "mean_sampled_tokens": 2248.05,
+      "mean_turns": 5.1375,
+      "per_family": {
+        "atomic_reservations": {
+          "n": 20,
+          "submit_rate": 0.0,
+          "success": 0.0
+        },
+        "deadline_queue": {
+          "n": 20,
+          "submit_rate": 0.8,
+          "success": 0.9
+        },
+        "fallback_resolver": {
+          "n": 20,
+          "submit_rate": 0.6,
+          "success": 0.6
+        },
+        "interval_coalescer": {
+          "n": 20,
+          "submit_rate": 0.7,
+          "success": 0.95
+        }
+      },
+      "rejected_patch_changed_patch_within_two": 0.85,
+      "rejected_patch_success": 0.65,
+      "submit_rate": 0.525,
+      "success": 0.6125
+    },
+    "candidate_deep": {
+      "answer_cap_hit_rate_per_turn": 0.08130081300813008,
+      "failed_test_changed_patch_within_two": 1.0,
+      "failed_test_success": 0.75,
+      "invalid_action_rate_per_turn": 0.02981029810298103,
+      "mean_sampled_tokens": 1438.525,
+      "mean_turns": 4.6125,
+      "per_family": {
+        "atomic_reservations": {
+          "n": 20,
+          "submit_rate": 0.0,
+          "success": 0.0
+        },
+        "deadline_queue": {
+          "n": 20,
+          "submit_rate": 1.0,
+          "success": 1.0
+        },
+        "fallback_resolver": {
+          "n": 20,
+          "submit_rate": 0.75,
+          "success": 0.95
+        },
+        "interval_coalescer": {
+          "n": 20,
+          "submit_rate": 0.95,
+          "success": 1.0
+        }
+      },
+      "rejected_patch_changed_patch_within_two": 1.0,
+      "rejected_patch_success": 0.725,
+      "submit_rate": 0.675,
+      "success": 0.7375
+    },
+    "candidate_sample_more": {
+      "answer_cap_hit_rate_per_turn": 0.09523809523809523,
+      "failed_test_changed_patch_within_two": 1.0,
+      "failed_test_success": 0.75,
+      "invalid_action_rate_per_turn": 0.024489795918367346,
+      "mean_sampled_tokens": 3384.425,
+      "mean_turns": 9.1875,
+      "per_family": {
+        "atomic_reservations": {
+          "n": 20,
+          "submit_rate": 0.1,
+          "success": 0.0
+        },
+        "deadline_queue": {
+          "n": 20,
+          "submit_rate": 1.0,
+          "success": 1.0
+        },
+        "fallback_resolver": {
+          "n": 20,
+          "submit_rate": 0.95,
+          "success": 0.95
+        },
+        "interval_coalescer": {
+          "n": 20,
+          "submit_rate": 1.0,
+          "success": 1.0
+        }
+      },
+      "rejected_patch_changed_patch_within_two": 0.95,
+      "rejected_patch_success": 0.725,
+      "submit_rate": 0.7625,
+      "success": 0.7375
+    }
+  },
+  "retrospective_qualification": {
+    "transfer_confirm": {
+      "block": "transfer_confirm",
+      "expected_random_success": 0.6875,
+      "oracle_union_capture": 0.9523809523809523,
+      "oracle_union_success": 0.7875,
+      "public_success": 0.75,
+      "selection_counts": {
+        "action": 6,
+        "candidate": 74
+      }
+    },
+    "transfer_dev": {
+      "block": "transfer_dev",
+      "expected_random_success": 0.6875,
+      "oracle_union_capture": 0.9523809523809523,
+      "oracle_union_success": 0.7875,
+      "public_success": 0.75,
+      "selection_counts": {
+        "action": 5,
+        "candidate": 75
+      }
+    }
+  },
+  "schema_version": 1,
+  "selector_scored_prospectively": false,
+  "source_sha256": {
+    "evaluations": {
+      "action_deep": "85c86bb04e1820a12c74de32cdd44fb88bed871db89339cc48eb2e9d8129aa17",
+      "action_sample_more": "ca2c59deaa9af30fa92fd2d26b7101efcaf9e7ff5e790109e8f28ea30a6e5355",
+      "base_deep": "cf30ec9979aef4baddf0ca1b95808813069fb04516932173a320a080dfb60a0d",
+      "candidate_deep": "d24037c42191853091b9e5f9b09702c5850cd6152e48556df0390bba8867fa2f",
+      "candidate_sample_more": "a27135b88160980a90a580f92a94da22ca58d8005a090e28299cdcd95dfe514b"
+    },
+    "feasibility": "de11f5ba76470bd18eb0c2d6e11ea4704afa105a375ea89e72a7e8621f8ac2db"
+  },
+  "stopped_at": "prospective_dev_feasibility",
+  "verdict": "PROSPECTIVE_DEV_INFEASIBLE",
+  "winner_bank_authorized": false
+}

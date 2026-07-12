@@ -5433,35 +5433,48 @@
    "charts": []
   },
   "qwen35_4b_recovery_verifier_branch_tournament": {
-   "verdict_tag": "Can a visible-test check pick the better fix",
-   "concept_primer": "Two mechanics each attempt the same repair. Instead of guessing who is better, you run the quick smoke test on each finished car and keep whichever one passes — never peeking at the real answer key.",
-   "plain_question": "Can a fixed rule that just checks which of two repair attempts passes the visible tests build a stronger coding agent on brand-new problems?",
-   "plain_answer": "Not run yet — the test is built and locked, awaiting execution. It gives a small coding model two different repair strategies on each broken case, runs the visible test suite on both, and keeps the one that passes when the other fails. The live run will decide whether this simple public check beats each strategy alone on four unfamiliar code families, using the exact same compute budget.",
-   "why_it_matters": "If a cheap visible-test check can reliably pick the better of two repair attempts, teams get a stronger coding agent for free — no hidden answer keys, no bigger model, no retraining, just smarter use of the same compute.",
-   "verdict_tone": "neutral",
+   "verdict_tag": "Complementary repairs did not transfer",
+   "concept_primer": "Two mechanics only form a useful team when each can fix failures the other misses. If both get stuck on the same repair, choosing between them cannot create the missing solution.",
+   "plain_question": "Can visible tests combine two coding policies better than spending the same model budget on more attempts from either one?",
+   "plain_answer": "No. On four new problem types, both policies repaired 74%, and their combined best reached only 75%—exactly tied with two action-only attempts. The selector was correctly stopped before scoring.",
+   "why_it_matters": "The remaining gap needs a new kind of solution, not a better chooser. Training should target the shared validate-copy-commit pattern while replaying the reliable recovery behavior already learned.",
+   "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Past-data score of the rule",
-     "value": "60 of 80",
-     "sub": "cases the visible-test rule picked correctly on earlier data — design evidence only, not the live result"
+     "label": "Each source policy",
+     "value": "74%",
+     "sub": "same prospective recovery rate"
     },
     {
-     "label": "Best single strategy alone",
-     "value": "55 of 80",
-     "sub": "how each individual repair strategy scored on those same past cases"
+     "label": "Combined ceiling",
+     "value": "75%",
+     "sub": "tied two action-only attempts"
     },
     {
-     "label": "Best-possible coverage captured",
-     "value": "95%",
-     "sub": "share of the ideal combined outcome the simple rule reached on past data"
+     "label": "Shared failures",
+     "value": "20 of 80",
+     "sub": "all required atomic resource reservations"
     },
     {
-     "label": "New code families to be tested",
-     "value": "4",
-     "sub": "unfamiliar problem types: deadline queues, interval merging, atomic reservations, fallback resolution"
+     "label": "Benchmark exposure",
+     "value": "0",
+     "sub": "stopped before external tasks"
     }
    ],
-   "charts": []
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Combining policies only ties more attempts",
+     "chart_read": "Each horizontal category is a policy or equal-budget control, and taller bars mean more repaired repositories. The final mixed-policy bar should exceed both more-attempt bars to justify selection.",
+     "chart_takeaway": "The mixed bar stops at 75%, exactly level with action-only sampling and only one point above either deterministic policy."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "Atomic reservations defeat both policies",
+     "chart_read": "Problem families run horizontally and recovery success runs vertically, where taller is better. The two colors compare the reason-enhanced and action-only policies family by family.",
+     "chart_takeaway": "Both policies fall to zero on atomic reservations and nearly overlap everywhere else, leaving no useful complementary coverage."
+    }
+   ]
   },
   "qwen35_4b_reliability_exec_opsd_audit": {
    "verdict_tag": "Leans toward correct code yet still ships bugs",
