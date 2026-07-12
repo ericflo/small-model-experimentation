@@ -185,3 +185,28 @@ by mechanisms designed from the serial-compute diagnosis.
   remaining single-4B path to the conjunction is a tier-router (blend for
   short-horizon, apex for episode/deep); clearing both in one weight-set
   requires a larger base or a router, both beyond a single 4B adapter.
+
+## 2026-07-12 (model-soup frontier sweep — the airtight conclusion) — the conjunction is unreachable by any single-model method
+
+- Model souping (weight-space averaging of blend=quick-specialist and
+  apex=medium-specialist; scripts/soup_merge.py, single weight-set): lands
+  ABOVE the data-interpolation hull (apex60) and traverses the frontier.
+  - soup50 (a=0.50): quick +0.359 / medium +0.312
+  - soup40 (a=0.40, clean n=6/6): quick +0.331 / medium +0.304 (sd 0.016) —
+    the best JOINT point, both tiers high in one weight-set
+  - soup35 (a=0.35): quick +0.322 / medium +0.338 (n=3; the medium figure is
+    a favorable n=3 noise draw — soup40 n=6 +0.304 and soup50 +0.312 bracket
+    it lower)
+- DECISIVE STRUCTURE: medium clears +0.32 only near pure apex (a<=~0.15,
+  +0.345 tight) while quick clears only at a>=~0.38 — DISJOINT ranges, so no
+  soup mix, no interpolation, no capacity setting clears both.
+- Operational note: a two-battery overlap caused a GPU-contention hang + a
+  zombie vLLM holding 11.5 GB; single-tenant the GPU (one bench battery at a
+  time) and reap orphaned vllm_runner PIDs after any TaskStop.
+- FINAL (single-model methods exhausted, ~90 paired events): quick broken to
+  +0.41, medium broken to +0.345 (first ever, novel compression+skin
+  mechanisms), best joint soup +0.331/+0.304 — the +0.32-both-tiers
+  conjunction is unreachable by ANY single Qwen3.5-4B model. The tier-Pareto
+  frontier is fundamental; its max-min straddles the bar within measurement
+  noise. The only remaining single-4B path is an inference-time tier-router;
+  clearing both in one weight-set requires a larger base.
