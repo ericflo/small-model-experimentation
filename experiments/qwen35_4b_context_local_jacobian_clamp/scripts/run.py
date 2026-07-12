@@ -23,7 +23,7 @@ if str(SRC) not in sys.path:
 
 import yaml  # noqa: E402
 
-from io_utils import read_jsonl, sha256_file, write_json, write_jsonl  # noqa: E402
+from io_utils import read_json, read_jsonl, sha256_file, write_json, write_jsonl  # noqa: E402
 from task_data import (  # noqa: E402
     CONCEPTS,
     DIGITS,
@@ -415,6 +415,262 @@ def run_fit_lens(config: dict[str, Any]) -> dict[str, Any]:
     return result
 
 
+def _answer_contract(model, row: dict[str, Any], *, kind: str) -> dict[str, Any]:
+    if kind == "direct":
+        return {
+            "source_id": model.concept_token_id(row["source"]),
+            "target_id": model.concept_token_id(row["target"]),
+            "wrong_id": model.concept_token_id(row["wrong"]),
+            "parse_ids": {model.concept_token_id(concept) for concept in CONCEPTS},
+        }
+    if kind == "consequence":
+        return {
+            "source_id": model.bare_token_id(row["source_digit"]),
+            "target_id": model.bare_token_id(row["target_digit"]),
+            "wrong_id": model.bare_token_id(row["wrong_digit"]),
+            "parse_ids": {model.bare_token_id(digit) for digit in DIGITS},
+        }
+    raise ValueError(kind)
+
+
+def _scored_row(
+    model,
+    item: dict[str, Any],
+    *,
+    split: str,
+    kind: str,
+    condition: str,
+    band: tuple[int, ...],
+    score: dict[str, Any],
+) -> dict[str, Any]:
+    contract = _answer_contract(model, item, kind=kind)
+    logits = score["logits"]
+    top_id = int(score.get("top_id", int(__import__("torch").argmax(logits).item())))
+    delta_norms = {
+        str(layer): float(delta.float().norm()) for layer, delta in score.get("deltas", {}).items()
+    }
+    return {
+        "item_id": item["item_id"],
+        "split": split,
+        "prompt_kind": kind,
+        "condition": condition,
+        "band": list(band),
+        "source": item["source"],
+        "target": item["target"],
+        "wrong": item["wrong"],
+        "source_answer": item["source"] if kind == "direct" else item["source_digit"],
+        "target_answer": item["target"] if kind == "direct" else item["target_digit"],
+        "wrong_answer": item["wrong"] if kind == "direct" else item["wrong_digit"],
+        "source_id": contract["source_id"],
+        "target_id": contract["target_id"],
+        "wrong_id": contract["wrong_id"],
+        "top_id": top_id,
+        "top_text": model.tokenizer.decode([top_id]),
+        "source_correct": top_id == contract["source_id"],
+        "target_selected": top_id == contract["target_id"],
+        "wrong_selected": top_id == contract["wrong_id"],
+        "parsed": top_id in contract["parse_ids"],
+        "target_minus_source_logit": float(
+            logits[contract["target_id"]] - logits[contract["source_id"]]
+        ),
+        "wrong_minus_source_logit": float(
+            logits[contract["wrong_id"]] - logits[contract["source_id"]]
+        ),
+        "delta_norms": delta_norms,
+        "total_delta_norm": float(sum(value * value for value in delta_norms.values()) ** 0.5),
+        "sequence_tokens": int(score["sequence_tokens"]),
+    }
+
+
+def _summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    if not rows:
+        raise ValueError("cannot summarize empty rows")
+    n = len(rows)
+    return {
+        "n": n,
+        "source_accuracy": sum(bool(row["source_correct"]) for row in rows) / n,
+        "target_rate": sum(bool(row["target_selected"]) for row in rows) / n,
+        "wrong_rate": sum(bool(row["wrong_selected"]) for row in rows) / n,
+        "parse_rate": sum(bool(row["parsed"]) for row in rows) / n,
+        "mean_target_minus_source_logit": sum(
+            float(row["target_minus_source_logit"]) for row in rows
+        ) / n,
+        "mean_total_delta_norm": sum(float(row["total_delta_norm"]) for row in rows) / n,
+    }
+
+
+def run_donor_gate(config: dict[str, Any]) -> dict[str, Any]:
+    design = design_boundary_receipt(config)
+    lens_receipt_path = RUNS_DIR / "lens_fit.json"
+    if not lens_receipt_path.exists() or not read_json(lens_receipt_path).get("passed"):
+        raise RuntimeError("eligible full-rank lens receipt is missing; run --stage fit-lens first")
+    import time
+
+    import torch
+
+    from model_ops import FullActivationPatcher, QwenClampModel
+
+    started = time.perf_counter()
+    torch.cuda.reset_peak_memory_stats()
+    model = QwenClampModel(config)
+    rows = read_jsonl(DATA_DIR / "band_selection.jsonl")
+    source_layers = tuple(int(value) for value in config["lens"]["source_layers"])
+    bands = tuple(tuple(int(layer) for layer in band) for band in config["intervention"]["candidate_bands"])
+    max_length = int(config["lens"]["max_sequence_tokens"])
+    result_rows: list[dict[str, Any]] = []
+    causal_differences: list[float] = []
+    position_checks = 0
+
+    for item in rows:
+        prepared = {
+            (kind, selected): _prepare_item(
+                model, item, kind=kind, selected=selected, max_length=max_length
+            )
+            for kind in ("direct", "consequence")
+            for selected in (item["source"], item["target"], item["wrong"])
+        }
+        positions = {value["position"] for value in prepared.values()}
+        if len(positions) != 1:
+            raise RuntimeError(f"selected-token positions disagree for {item['item_id']}: {positions}")
+        for kind in ("direct", "consequence"):
+            lengths = {
+                prepared[(kind, selected)]["sequence_tokens"]
+                for selected in (item["source"], item["target"], item["wrong"])
+            }
+            if len(lengths) != 1:
+                raise RuntimeError(f"source/donor lengths disagree for {item['item_id']}/{kind}")
+        position_checks += 1
+        captures = {
+            key: model.capture(value, layers=source_layers) for key, value in prepared.items()
+        }
+        for selected in (item["source"], item["target"], item["wrong"]):
+            for layer in source_layers:
+                causal_differences.append(float(
+                    (
+                        captures[("direct", selected)]["activations"][layer]
+                        - captures[("consequence", selected)]["activations"][layer]
+                    ).abs().max()
+                ))
+
+        for kind in ("direct", "consequence"):
+            source_prepared = prepared[(kind, item["source"])]
+            baseline = captures[(kind, item["source"])]
+            result_rows.append(_scored_row(
+                model,
+                item,
+                split="band_selection",
+                kind=kind,
+                condition="baseline",
+                band=(),
+                score=baseline,
+            ))
+            for band in bands:
+                for condition, selected in (
+                    ("full_target_donor", item["target"]),
+                    ("full_wrong_donor", item["wrong"]),
+                ):
+                    desired = {
+                        layer: captures[(kind, selected)]["activations"][layer]
+                        for layer in band
+                    }
+                    patcher = FullActivationPatcher(
+                        model.layers, source_prepared["position"], desired
+                    )
+                    scored = model.score(source_prepared, patcher=patcher)
+                    result_rows.append(_scored_row(
+                        model,
+                        item,
+                        split="band_selection",
+                        kind=kind,
+                        condition=condition,
+                        band=band,
+                        score=scored,
+                    ))
+
+    def subset(*, kind: str, condition: str, band: tuple[int, ...]) -> list[dict[str, Any]]:
+        return [
+            row for row in result_rows
+            if row["prompt_kind"] == kind
+            and row["condition"] == condition
+            and row["band"] == list(band)
+        ]
+
+    baseline = {
+        kind: _summary(subset(kind=kind, condition="baseline", band=()))
+        for kind in ("direct", "consequence")
+    }
+    gates = config["gates"]
+    clean_pass = all(
+        baseline[kind]["source_accuracy"] >= float(gates["clean_accuracy_min"])
+        and baseline[kind]["parse_rate"] >= float(gates["clean_parse_rate_min"])
+        for kind in ("direct", "consequence")
+    )
+    candidates = []
+    selected_band: tuple[int, ...] | None = None
+    for band in bands:
+        target = {
+            kind: _summary(subset(kind=kind, condition="full_target_donor", band=band))
+            for kind in ("direct", "consequence")
+        }
+        wrong = {
+            kind: _summary(subset(kind=kind, condition="full_wrong_donor", band=band))
+            for kind in ("direct", "consequence")
+        }
+        candidate_pass = bool(
+            clean_pass
+            and target["direct"]["target_rate"] >= float(gates["donor_direct_target_rate_min"])
+            and target["consequence"]["target_rate"] >= float(gates["donor_consequence_target_rate_min"])
+            and target["consequence"]["target_rate"] - wrong["consequence"]["target_rate"]
+            >= float(gates["donor_target_minus_wrong_min"])
+            and target["direct"]["parse_rate"] >= float(gates["clean_parse_rate_min"])
+            and target["consequence"]["parse_rate"] >= float(gates["clean_parse_rate_min"])
+        )
+        candidates.append({
+            "band": list(band),
+            "passed": candidate_pass,
+            "target_donor": target,
+            "wrong_donor": wrong,
+            "consequence_target_minus_wrong_target_rate": (
+                target["consequence"]["target_rate"] - wrong["consequence"]["target_rate"]
+            ),
+        })
+        if candidate_pass and selected_band is None:
+            selected_band = band
+
+    causal_max_abs = max(causal_differences, default=float("inf"))
+    causal_pass = causal_max_abs <= float(config["intervention"]["causal_activation_atol"])
+    passed = bool(design["passed"] and clean_pass and causal_pass and selected_band is not None)
+    if not causal_pass:
+        decision = "INVALID_CONTROL"
+    elif passed:
+        decision = "DONOR_GATE_PASS"
+    else:
+        decision = "NO_CAUSAL_SITE"
+    result = {
+        "schema_version": 1,
+        "stage": "donor_gate",
+        "passed": passed,
+        "decision": decision,
+        "scientific_result": True,
+        "baseline": baseline,
+        "clean_pass": clean_pass,
+        "causal_activation_max_abs": causal_max_abs,
+        "causal_invariance_pass": causal_pass,
+        "position_contract_items": position_checks,
+        "candidates": candidates,
+        "selected_band": list(selected_band) if selected_band is not None else None,
+        "selection_rule": "earliest_registered_passing_full_activation_donor_band",
+        "j_outcomes_observed": False,
+        "counts": {"items": len(rows), "rows": len(result_rows)},
+        "elapsed_seconds": time.perf_counter() - started,
+        "peak_allocated_bytes": torch.cuda.max_memory_allocated(),
+    }
+    write_jsonl(RUNS_DIR / "donor_gate_rows.jsonl", result_rows)
+    write_json(RUNS_DIR / "donor_gate.json", result)
+    print(json.dumps(result, indent=2, sort_keys=True))
+    return result
+
+
 def unavailable(stage: str) -> None:
     raise RuntimeError(f"stage {stage!r} is not implemented yet; refusing a placeholder result")
 
@@ -436,6 +692,9 @@ def main() -> int:
         return 0
     if args.stage == "fit-lens":
         run_fit_lens(config)
+        return 0
+    if args.stage == "donor-gate":
+        run_donor_gate(config)
         return 0
     design_boundary_receipt(config)
     unavailable(args.stage)

@@ -69,3 +69,14 @@ Created as a new experiment scaffold.
   `e373b6e93956fdfc5cb446e9bee8249655707c8258a7868f0653d11f1ffd0213`.
 - Fit time was 27.7 seconds and peak allocated memory was 11.08 GB. Band-selection
   and confirmation outcomes remained unopened.
+
+## 2026-07-12 — donor gate implementation
+
+- Implemented the registered selection-only full-activation donor sweep over six
+  five-layer bands under cache-free batch-one inference.
+- The code captures source, target, and wrong-donor states under both suffixes,
+  enforces equal positions/lengths and causal activation equality at all 25
+  fitted layers, and selects the earliest passing band.
+- The selection stage contains no J-coordinate intervention and writes
+  `j_outcomes_observed: false`; confirmation remains inaccessible unless the
+  stored donor gate passes.
