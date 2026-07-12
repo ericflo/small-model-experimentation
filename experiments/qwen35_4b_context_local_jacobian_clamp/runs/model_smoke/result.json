@@ -1,0 +1,129 @@
+{
+  "causal_activation_max_abs": 0.0,
+  "clean_batch_equivalent_at_registered_tolerance": false,
+  "clean_batch_logit_max_abs": 0.21875,
+  "clean_batch_top_ids_equal": true,
+  "clean_batched_top_ids": [
+    9057,
+    6414
+  ],
+  "clean_single_top_ids": [
+    9057,
+    6414
+  ],
+  "coordinate_delta_norm": 0.6716152429580688,
+  "donor_delta_norm": 7.636753559112549,
+  "elapsed_seconds": 8.365663073956966,
+  "environment": {
+    "gpu": "NVIDIA RTX 6000 Ada Generation",
+    "peak_allocated_bytes": 9683981312,
+    "torch": "2.11.0+cu129",
+    "transformers": "5.13.0"
+  },
+  "model": {
+    "hidden_size": 2560,
+    "id": "Qwen/Qwen3.5-4B",
+    "layers": 32,
+    "load_seconds": 5.327891521155834,
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "vocab_size": 248320
+  },
+  "passed": true,
+  "position_contract": {
+    "consequence_gold": {
+      "position": 62,
+      "sequence_tokens": 83,
+      "token_id": 6414
+    },
+    "consequence_square": {
+      "position": 62,
+      "sequence_tokens": 83,
+      "token_id": 9057
+    },
+    "direct_gold": {
+      "position": 62,
+      "sequence_tokens": 81,
+      "token_id": 6414
+    },
+    "direct_square": {
+      "position": 62,
+      "sequence_tokens": 81,
+      "token_id": 9057
+    }
+  },
+  "schema_version": 1,
+  "scientific_patch_batch_size": 1,
+  "scientific_result": false,
+  "smoke_lens": {
+    "artifact_sha256": "c4b9d3314ae1f34465d2a38d648f17c8083d4efe7be7adf44adffd974532c9af",
+    "condition_numbers": {
+      "16": 2.474991798400879,
+      "28": 2.272251844406128,
+      "4": 2.1958181858062744
+    },
+    "effective_ranks": {
+      "16": 4,
+      "28": 4,
+      "4": 4
+    },
+    "layers": [
+      4,
+      16,
+      28
+    ],
+    "n_prompts": 2,
+    "prompt_receipts": [
+      {
+        "position": 62,
+        "prompt_index": 0,
+        "sequence_tokens": 81
+      },
+      {
+        "position": 64,
+        "prompt_index": 1,
+        "sequence_tokens": 83
+      }
+    ]
+  },
+  "stage": "model_smoke",
+  "token_contract": {
+    "concepts": {
+      "apple": 22544,
+      "bread": 15530,
+      "cat": 7993,
+      "circle": 12307,
+      "cloud": 9158,
+      "dance": 14810,
+      "dog": 5388,
+      "glass": 8720,
+      "gold": 6414,
+      "green": 5983,
+      "horse": 14780,
+      "lemon": 28503,
+      "music": 4477,
+      "north": 9897,
+      "ocean": 17415,
+      "purple": 24142,
+      "river": 14367,
+      "silver": 14527,
+      "south": 9514,
+      "square": 9057,
+      "stone": 9506,
+      "summer": 7094,
+      "tiger": 49993,
+      "winter": 12050
+    },
+    "digits": {
+      "0": 15,
+      "1": 16,
+      "2": 17,
+      "3": 18,
+      "4": 19,
+      "5": 20,
+      "6": 21,
+      "7": 22,
+      "8": 23,
+      "9": 24
+    }
+  }
+}

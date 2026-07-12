@@ -45,3 +45,16 @@ Created as a new experiment scaffold.
   passed, all three smoke dictionaries had rank 4, and both patch deltas were
   finite/nonzero.
 - No target-answer outcome was inspected or used.
+
+## 2026-07-12 — model smoke passed
+
+- Cache-free batch-one plumbing passed on the pinned Qwen3.5-4B revision.
+- All 24 concept tokens and all 10 bare digit tokens are single-token; source,
+  target, direct, and consequence selected positions agreed at index 62.
+- Causal antecedent activations were exactly suffix-invariant at layers 4, 16,
+  and 28. Equal-length batch-two top IDs agreed with batch-one even though full
+  logits did not, confirming the registered batch-one policy.
+- Small context-local dictionaries were full rank at all three smoke layers;
+  coordinate and full-donor patch deltas were finite and nonzero.
+- Peak allocated GPU memory was 9.68 GB. This was plumbing-only and did not
+  inspect target-answer success.
