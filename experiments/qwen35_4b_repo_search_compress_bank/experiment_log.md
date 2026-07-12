@@ -8,3 +8,5 @@
 - Verified on CPU that every family starts visible/hidden broken and becomes visible/hidden correct under its host-only oracle.
 - Implemented constrained real filesystem tools, answer-region JSON parsing, terminal hidden grading, replay patch deletion, canonical trace reconstruction, operator balancing, and firewall checks.
 - Froze seeds, arms, doses, gates, and the conditional benchmark license before result-bearing generation.
+- After preregistration commit `462f6274`, the first GPU smoke stopped before model load because the current runner template lacked its older local-checkpoint field. Added exact Qwen3.5-4B local-checkpoint support plus an architecture fingerprint test; no scientific seed or output was consumed by the failed attempt.
+- The corrected GPU smoke loaded the merged C53 checkpoint under vLLM 0.24 and repaired 5/6 one-task-per-family repositories within four turns (implementation evidence only). Its full trajectories remain external and firewall-clean.

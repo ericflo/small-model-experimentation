@@ -11,6 +11,7 @@ from collections import Counter
 from pathlib import Path
 
 import yaml
+from transformers import AutoTokenizer
 
 EXP = Path(__file__).resolve().parents[1]
 ROOT = EXP.parents[1]
@@ -76,6 +77,7 @@ def main() -> int:
     parser.add_argument("--harvest", type=Path, default=None)
     parser.add_argument("--output-dir", type=Path, default=None)
     parser.add_argument("--oracle-smoke", action="store_true")
+    parser.add_argument("--smoke", action="store_true", help="allow a small real-harvest bank")
     parser.add_argument("--tasks-per-family", type=int, default=None)
     args = parser.parse_args()
 
@@ -104,18 +106,22 @@ def main() -> int:
 
     built = bank.build_banks(tasks, trajectories)
     multiplier = float(cfg["bank"]["repo_loss_multiplier"])
-    for key in ("compact_rows", "action_only_rows"):
-        for row in built[key]:
-            row["row_weight"] *= multiplier
-    if built["operator_balance"]:
-        built["operator_balance"]["repo_loss_multiplier"] = multiplier
-        built["operator_balance"]["scaled_loss_mass"] = {
-            key: value * multiplier
-            for key, value in built["operator_balance"]["loss_mass"].items()
-        }
+    tokenizer = AutoTokenizer.from_pretrained(
+        cfg["model"]["id"], revision=cfg["model"]["revision"],
+        trust_remote_code=True, use_fast=True,
+    )
+    if tokenizer.pad_token is None:
+        tokenizer.pad_token = tokenizer.eos_token
+    token_balance = bank.calibrate_token_loss_mass(
+        built["compact_rows"], tokenizer, repo_multiplier=multiplier,
+        max_length=int(cfg["training"]["max_length"]),
+    )
+    built["action_only_rows"] = bank.action_only_rows(built["compact_rows"])
 
     bank.assert_firewall_clean(built, tasks)
-    output_dir = args.output_dir or artifact_root / ("bank_smoke" if args.oracle_smoke else "bank")
+    output_dir = args.output_dir or artifact_root / (
+        "bank_smoke" if (args.oracle_smoke or args.smoke) else "bank"
+    )
     compact_path = output_dir / "compact.jsonl"
     action_path = output_dir / "action_only.jsonl"
     write_jsonl(compact_path, built.pop("compact_rows"))
@@ -126,15 +132,18 @@ def main() -> int:
     )
     compact_rows = sum(1 for _ in compact_path.open(encoding="utf-8"))
     gate = {
-        "minimum_rows": compact_rows >= int(hcfg["minimum_compact_rows"]) or args.oracle_smoke,
+        "minimum_rows": compact_rows >= int(hcfg["minimum_compact_rows"]) or args.oracle_smoke or args.smoke,
         "replay_pass_rate": replay_rate >= float(cfg["bank"]["require_replay_pass_rate"]),
         "operator_presence": set(built["operator_balance"]["counts"]) == set(cfg["bank"]["required_operators"]),
-        "operator_mass_equal": len({round(value, 8) for value in built["operator_balance"]["scaled_loss_mass"].values()}) == 1,
+        "action_token_mass_equal": len({round(value, 8) for value in token_balance["weighted_action_token_mass"].values()}) == 1,
+        "plan_token_mass_equal": len({round(value, 8) for value in token_balance["weighted_plan_token_mass"].values()}) == 1,
+        "no_overlength_rows": not token_balance["overlength_row_ids"],
     }
     receipt = {
         "schema_version": 1,
         "source": source,
         "oracle_smoke": args.oracle_smoke,
+        "real_harvest_smoke": args.smoke,
         "task_manifest_sha256": repo_tasks.manifest_digest(tasks),
         "tasks": len(tasks),
         "covered_tasks": len(built["replay_receipts"]),
@@ -142,12 +151,13 @@ def main() -> int:
         "compact_rows": compact_rows,
         "operator_counts": Counter(row["family"] for row in built["replay_receipts"]),
         "replay_pass_rate": replay_rate,
+        "gates": gate,
+        **built,
+        "token_balance": token_balance,
         "compact_path": str(compact_path.resolve()),
         "compact_sha256": file_digest(compact_path),
         "action_only_path": str(action_path.resolve()),
         "action_only_sha256": file_digest(action_path),
-        "gates": gate,
-        **built,
     }
     bank.assert_firewall_clean(receipt, tasks)
     receipt_path = output_dir / "receipt.json"

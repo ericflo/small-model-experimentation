@@ -97,7 +97,9 @@ def execute_action(env: RepoEnv, action: dict[str, Any]) -> tuple[str, bool, boo
     if tool == "test":
         return env.run_visible(), False, False
     if tool == "submit":
-        return "SUBMITTED", True, env.hidden_pass()
+        # Submission grading is the conjunction of public regression tests and
+        # private edge cases. Neither result is revealed to the model.
+        return "SUBMITTED", True, env.visible_pass() and env.hidden_pass()
     return f"TOOL_ERROR: unknown tool {tool!r}", False, False
 
 
@@ -179,7 +181,9 @@ class Episode:
             )
 
     def finish(self) -> dict[str, Any]:
-        workspace_success = self.env.hidden_pass()
+        final_visible_pass = self.env.visible_pass()
+        final_hidden_pass = self.env.hidden_pass()
+        workspace_success = final_visible_pass and final_hidden_pass
         patch_turns = [
             step["turn"]
             for step in self.steps
@@ -214,6 +218,8 @@ class Episode:
             "trajectory": self.trajectory,
             "success": workspace_success,
             "workspace_success": workspace_success,
+            "final_visible_pass": final_visible_pass,
+            "final_hidden_pass": final_hidden_pass,
             "submitted": self.submitted,
             "submitted_success": self.submitted_success,
             "turns": self.turns,

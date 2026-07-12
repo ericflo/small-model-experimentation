@@ -23,7 +23,7 @@ def _valid_patch_steps(trajectory: dict[str, Any]) -> list[dict[str, Any]]:
     return [
         copy.deepcopy(step["action"])
         for step in trajectory["steps"]
-        if step.get("action", {}).get("tool") == "patch"
+        if (step.get("action") or {}).get("tool") == "patch"
         and step.get("before_digest") != step.get("after_digest")
     ]
 
@@ -68,6 +68,31 @@ def minimize_patches(task: RepoTask, patches: list[dict[str, Any]]) -> list[dict
     return kept
 
 
+def collapse_patches_by_file(task: RepoTask, patches: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Turn a necessary edit sequence into one exact initial→final edit per file."""
+    env = RepoEnv(task)
+    try:
+        initial = env.source_snapshot()
+        for action in patches:
+            observation, done, _ = execute_action(env, action)
+            if done or not observation.startswith("PATCH_OK"):
+                raise AssertionError(f"cannot collapse failed patch: {observation}")
+        if not (env.visible_pass() and env.hidden_pass()):
+            raise AssertionError("cannot collapse an incorrect patch sequence")
+        final = env.source_snapshot()
+        result = []
+        for path in sorted(initial):
+            if initial[path] != final[path]:
+                result.append({"tool": "patch", "path": path,
+                               "old": initial[path], "new": final[path]})
+        replay = replay_patch_set(task, result)
+        if not (replay["visible"] and replay["hidden"]):
+            raise AssertionError("collapsed per-file patches do not replay")
+        return result
+    finally:
+        env.close()
+
+
 def select_success(task: RepoTask, trajectories: Iterable[dict[str, Any]]) -> dict[str, Any] | None:
     candidates = [row for row in trajectories if row.get("workspace_success")]
     if not candidates:
@@ -76,9 +101,13 @@ def select_success(task: RepoTask, trajectories: Iterable[dict[str, Any]]) -> di
     for row in candidates:
         patches = _valid_patch_steps(row)
         minimized = minimize_patches(task, patches)
-        replay = replay_patch_set(task, minimized)
+        try:
+            collapsed = collapse_patches_by_file(task, minimized)
+        except AssertionError:
+            continue
+        replay = replay_patch_set(task, collapsed)
         if replay["visible"] and replay["hidden"]:
-            ranked.append((len(minimized), row.get("sampled_tokens", 0), row.get("turns", 0), row, minimized))
+            ranked.append((len(collapsed), row.get("sampled_tokens", 0), row.get("turns", 0), row, collapsed))
     if not ranked:
         return None
     _n, _tokens, _turns, selected, patches = min(ranked, key=lambda item: item[:3])
@@ -195,6 +224,105 @@ def action_only_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return result
 
 
+def calibrate_token_loss_mass(
+    rows: list[dict[str, Any]], tokenizer, *, repo_multiplier: float, max_length: int
+) -> dict[str, Any]:
+    """Equalize exact action-token and plan-token mass across operators.
+
+    Action weights are shared byte-for-byte with the action-only control. Plan
+    weights are calibrated separately in the compact arm and set to zero only
+    after copying that control, so patch JSON cannot crowd out test/submit.
+    """
+    token_rows = []
+    for row in rows:
+        prompt = tokenizer.apply_chat_template(
+            row["messages"], tokenize=False, add_generation_prompt=True,
+            enable_thinking=True,
+        )
+        think_part = row["think"].strip() + "\n</think>\n\n"
+        answer_part = row["answer"].strip() + tokenizer.eos_token
+        prompt_ids = tokenizer(prompt, add_special_tokens=False)["input_ids"]
+        think_ids = tokenizer(prompt + think_part, add_special_tokens=False)["input_ids"]
+        full_ids = tokenizer(prompt + think_part + answer_part, add_special_tokens=False)["input_ids"]
+        if full_ids[: len(prompt_ids)] != prompt_ids or full_ids[: len(think_ids)] != think_ids:
+            raise AssertionError(f"token boundary merge in {row['id']}")
+        token_rows.append({
+            "row": row,
+            "operator": row["operator"],
+            "prompt_tokens": len(prompt_ids),
+            "think_tokens": len(think_ids) - len(prompt_ids),
+            "answer_tokens": len(full_ids) - len(think_ids),
+            "total_tokens": len(full_ids),
+        })
+
+    answer_raw = {
+        operator: sum(item["answer_tokens"] for item in token_rows if item["operator"] == operator)
+        for operator in OPERATORS
+    }
+    think_raw = {
+        operator: sum(item["think_tokens"] for item in token_rows if item["operator"] == operator)
+        for operator in OPERATORS
+    }
+    if any(answer_raw[operator] <= 0 or think_raw[operator] <= 0 for operator in OPERATORS):
+        raise AssertionError("every operator needs positive action and plan token mass")
+
+    target_action = sum(answer_raw.values()) / len(OPERATORS)
+    action_weights = {
+        operator: target_action / answer_raw[operator] for operator in OPERATORS
+    }
+    # Keep the repository-wide nominal plan dose at 0.2 while making its four
+    # operator totals equal after action weights are applied.
+    target_plan = 0.2 * sum(think_raw.values()) / len(OPERATORS)
+    weighted_plan_raw = {
+        operator: sum(
+            item["think_tokens"] * action_weights[operator]
+            for item in token_rows if item["operator"] == operator
+        )
+        for operator in OPERATORS
+    }
+    plan_weights = {
+        operator: target_plan / weighted_plan_raw[operator] for operator in OPERATORS
+    }
+    for item in token_rows:
+        row = item["row"]
+        row["row_weight"] = action_weights[item["operator"]] * repo_multiplier
+        row["think_weight"] = plan_weights[item["operator"]]
+        row["token_counts"] = {
+            "prompt": item["prompt_tokens"],
+            "think": item["think_tokens"],
+            "answer": item["answer_tokens"],
+            "total": item["total_tokens"],
+        }
+
+    action_mass = {
+        operator: sum(
+            item["answer_tokens"] * item["row"]["row_weight"]
+            for item in token_rows if item["operator"] == operator
+        )
+        for operator in OPERATORS
+    }
+    plan_mass = {
+        operator: sum(
+            item["think_tokens"] * item["row"]["row_weight"] * item["row"]["think_weight"]
+            for item in token_rows if item["operator"] == operator
+        )
+        for operator in OPERATORS
+    }
+    return {
+        "raw_action_tokens": answer_raw,
+        "raw_plan_tokens": think_raw,
+        "action_row_weights_before_multiplier": action_weights,
+        "plan_token_weights": plan_weights,
+        "repo_loss_multiplier": repo_multiplier,
+        "weighted_action_token_mass": action_mass,
+        "weighted_plan_token_mass": plan_mass,
+        "max_total_tokens": max(item["total_tokens"] for item in token_rows),
+        "overlength_row_ids": [
+            item["row"]["id"] for item in token_rows if item["total_tokens"] > max_length
+        ],
+    }
+
+
 def build_banks(tasks: list[RepoTask], trajectories: list[dict[str, Any]]) -> dict[str, Any]:
     by_task: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for row in trajectories:
@@ -231,7 +359,7 @@ def build_banks(tasks: list[RepoTask], trajectories: list[dict[str, Any]]) -> di
         "selections": selections,
         "uncovered_task_ids": uncovered,
         "operator_balance": balance,
-        "compact_sha256": hashlib.sha256(payload).hexdigest(),
+        "compact_rows_sha256_before_token_calibration": hashlib.sha256(payload).hexdigest(),
     }
 
 

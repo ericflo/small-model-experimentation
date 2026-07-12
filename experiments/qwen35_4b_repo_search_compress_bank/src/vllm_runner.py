@@ -358,6 +358,7 @@ class EngineConfig:
     enable_prefix_caching: bool = False
     enforce_eager: bool = False
     adapter: Path | None = None
+    model_override: Path | None = None
     cudagraph_capture_sizes: tuple[int, ...] | None = None
 
     def validate(self) -> None:
@@ -367,6 +368,35 @@ class EngineConfig:
             raise ValueError("gpu_memory_utilization must be in [0.1, 1.0)")
         if self.max_num_seqs < 1 or self.max_num_batched_tokens < 1:
             raise ValueError("max_num_seqs and max_num_batched_tokens must be positive")
+        if self.adapter is not None and self.model_override is not None:
+            raise ValueError("adapter and model_override are mutually exclusive")
+        if self.model_override is not None:
+            config_path = Path(self.model_override).expanduser() / "config.json"
+            if not config_path.is_file():
+                raise ValueError(f"model_override has no config.json: {self.model_override}")
+            local_config = json.loads(config_path.read_text(encoding="utf-8"))
+            text_config = local_config.get("text_config") or {}
+            fingerprint = (
+                local_config.get("model_type"),
+                tuple(local_config.get("architectures") or ()),
+                text_config.get("model_type"),
+                text_config.get("vocab_size"),
+                text_config.get("hidden_size"),
+                text_config.get("num_hidden_layers"),
+            )
+            expected = (
+                "qwen3_5",
+                ("Qwen3_5ForConditionalGeneration",),
+                "qwen3_5_text",
+                248320,
+                2560,
+                32,
+            )
+            if fingerprint != expected:
+                raise ValueError(
+                    "model_override is not a merged Qwen/Qwen3.5-4B checkpoint: "
+                    f"fingerprint={fingerprint!r}"
+                )
         if self.cudagraph_capture_sizes is not None:
             sizes = self.cudagraph_capture_sizes
             if not sizes or any(
@@ -637,14 +667,24 @@ class VLLMRunner:
         # depend on vLLM's chat endpoint or reasoning parser.
         from transformers import AutoConfig, AutoTokenizer
 
+        model_source = (
+            str(Path(config.model_override).expanduser().resolve())
+            if config.model_override is not None
+            else MODEL_ID
+        )
+        source_kwargs = (
+            {"revision": MODEL_REVISION}
+            if config.model_override is None
+            else {"local_files_only": True}
+        )
         self.tokenizer = AutoTokenizer.from_pretrained(
-            MODEL_ID,
-            revision=MODEL_REVISION,
+            model_source,
+            **source_kwargs,
             trust_remote_code=True,
             use_fast=True,
         )
         model_config = AutoConfig.from_pretrained(
-            MODEL_ID, revision=MODEL_REVISION, trust_remote_code=True
+            model_source, **source_kwargs, trust_remote_code=True
         )
         self.hf_eos_id = int(model_config.text_config.eos_token_id)
         if self.hf_eos_id != 248044:
@@ -673,9 +713,7 @@ class VLLMRunner:
         )
 
         engine_args: dict[str, Any] = {
-            "model": MODEL_ID,
-            "revision": MODEL_REVISION,
-            "tokenizer_revision": MODEL_REVISION,
+            "model": model_source,
             "trust_remote_code": True,
             "dtype": "bfloat16",
             "tensor_parallel_size": 1,
@@ -696,6 +734,11 @@ class VLLMRunner:
             # cross-budget prefix-identical samples.
             "async_scheduling": False,
         }
+        if config.model_override is None:
+            engine_args.update(
+                revision=MODEL_REVISION,
+                tokenizer_revision=MODEL_REVISION,
+            )
         if config.cudagraph_capture_sizes is None:
             engine_args["max_cudagraph_capture_size"] = config.max_num_seqs
         else:
@@ -1279,8 +1322,8 @@ class VLLMRunner:
         )
         summary = {
             "schema_version": RUNNER_SCHEMA_VERSION,
-            "model": MODEL_ID,
-            "model_revision": MODEL_REVISION,
+            "model": str(self.config.model_override.resolve()) if self.config.model_override else MODEL_ID,
+            "model_revision": None if self.config.model_override else MODEL_REVISION,
             "runner_sha256": _sha256_file(Path(__file__).resolve()),
             "engine": {
                 key: str(value) if isinstance(value, Path) else value

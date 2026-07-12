@@ -103,6 +103,12 @@ def main() -> int:
             "--tasks-per-family", "1", "--trajectories", "1", "--max-turns", "4",
             "--output", str(artifact_root / "smoke" / "trajectories.json"),
         ])
+        run_command([
+            str(ROOT / ".venv" / "bin" / "python"), str(EXP / "scripts" / "build_bank.py"),
+            "--tasks-per-family", "1", "--smoke",
+            "--harvest", str(artifact_root / "smoke" / "trajectories.json"),
+            "--output-dir", str(artifact_root / "smoke" / "bank"),
+        ])
         return 0
     # The full path is intentionally explicit and gate-stopping. Later stages
     # are added only after their predecessor has produced a passing receipt.
