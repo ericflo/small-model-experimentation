@@ -166,3 +166,17 @@ Created as a new experiment scaffold.
   4,737,106 sampled tokens. Broad raw means were `0.7892` quick and `0.5191`
   deep, with every provenance check passing. Deep block 1 remains required
   before any qualification statistic is computed.
+
+## 2026-07-12 — upstream C54 model-soup context arrived during qualification
+
+- After this experiment's design lock and while the frozen qualification run
+  was active, C54 added a five-point weight-space sweep between `blend` and
+  `apex`. Its best reported joint point (`soup40`) reached paired menagerie
+  deltas of `+0.331` quick and `+0.304` medium; the source experiment reports
+  disjoint mixture ranges for clearing its chosen `+0.32` target on both
+  tiers.
+- This is relevant negative evidence for parameter interpolation, one of this
+  experiment's already-frozen controls. It neither tests same-prefix MOPD nor
+  establishes that the two regenerated policies cross over on this clean
+  procedural proxy. No arm, seed, cell role, gate, or interpretation rule was
+  changed in response.
