@@ -1,0 +1,22 @@
+{
+  "actual_gate_uses_nonparametric_task_bootstrap": true,
+  "expected_normal_approximation_lower_bound": 0.02842407072433767,
+  "method": "one-sided normal approximation using parent task-level differences",
+  "one_sided_alpha": 0.05,
+  "parent_analysis_sha256": "b36c0a074d22cca60b6adb0e686df1c5f3e3ad0b734e3ae6bb7b39789dfa11b9",
+  "parent_experiment": "qwen35_4b_commit_slot_jacobian_value_transport",
+  "parent_real_minus_shuffled_mean": 0.08333333333333333,
+  "parent_task_standard_deviation": 0.35486043161491804,
+  "parent_task_units": 16,
+  "parent_terminal_decision": "COMMIT_SLOT_SEAM_FAIL",
+  "passed": true,
+  "planned_approximate_power": 0.8027450606015709,
+  "planned_confirmation_tasks": 113,
+  "planned_selection_tasks": 113,
+  "planned_traces_per_seam_stage": 339,
+  "required_tasks_per_seam_stage": 113,
+  "schema_version": 1,
+  "scientific_result": false,
+  "scope": "powered for the parent's observed real-minus-shuffled task effect; not a promise that the effect replicates and not power for no-thought",
+  "target_power": 0.8
+}

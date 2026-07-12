@@ -8,6 +8,10 @@
   concentrated (15/48 real versus 11/48 shuffled at 1,024; five mixed tasks
   versus six required). A powered fresh replication must clear task-level
   uncertainty before the interface can license any J-space value work.
+- Powered cross-program replication in progress:
+  `qwen35_4b_commit_slot_semantic_power_replication` fixes the same slot/cap on
+  113+113 fresh tasks and requires both task-level ordered-content evidence and
+  eight-alias semantic breadth before treating the latent interface as usable.
 - Measure the exact behavioral quotient at fresh depth 6 before assuming model-guided pruning is economically
   needed; record wall time, memory, physical transitions, coverage, and selector success.
 - If a real search wall appears, test a residualized partial state (feasible parameter domains, materialized

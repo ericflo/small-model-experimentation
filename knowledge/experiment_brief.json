@@ -2,6 +2,39 @@
  "note": "Plain-language practitioner briefs shown above the fold on each experiment page (verdict + the-one-idea/question/finding/why-it-matters + KPI numbers + per-chart how-to-read/takeaway). Authored per experiment from its own README/report and verified chart specs under a strict no-jargon ban-list; all jargon-precise detail stays below the fold. Regenerate with scripts/enrichment/generate_briefs.workflow.js (see docs/site_maintenance.md).",
  "generated_on": "2026-07-05",
  "experiments": {
+  "qwen35_4b_commit_slot_semantic_power_replication": {
+   "verdict_tag": "A properly powered answer-slot replication is frozen",
+   "concept_primer": "The previous answer-slot study showed a small benefit from ordered reasoning, but it was concentrated in too few tasks. This study keeps the exact same model, 1,024-step limit, answer syntax, and comparisons while using enough fresh tasks to distinguish a broad effect from a lucky cluster.",
+   "plain_question": "Does ordered reasoning reliably improve the model's fixed answer-slot choice over no generated reasoning and the same reasoning tokens in shuffled order?",
+   "plain_answer": "No model result is open yet. The design reserves 113 fresh tasks for the first decision and another 113 for an untouched check, the calculated amount needed for about 80% directional power at the previous task-level effect.",
+   "why_it_matters": "The earlier study fixed formatting but could not justify examining the model's internal promise signal. This larger replication requires the gain to survive task-level uncertainty and spread across at least eight answer types before that internal work can resume.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Fresh procedural tasks",
+     "value": "322/322",
+     "sub": "all unique, exact-depth, and disjoint from five parent studies"
+    },
+    {
+     "label": "Tasks per answer-slot decision",
+     "value": "113",
+     "sub": "339 independent reasoning paths across three paths per task"
+    },
+    {
+     "label": "Approximate directional power",
+     "value": "80.3%",
+     "sub": "planning only; the actual gate resamples whole tasks"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Fresh tasks are reserved before each stage opens",
+     "chart_read": "The two tall bars are equally powered answer-slot qualification and untouched confirmation sets. The two smaller sets stay sealed for later internal-signal learning and testing.",
+     "chart_takeaway": "The original near miss cannot choose the result, and neither new answer-slot stage can borrow tasks from the other."
+    }
+   ]
+  },
   "qwen35_4b_commit_slot_jacobian_value_transport": {
    "verdict_tag": "The answer slot worked, but the reasoning gain was too clustered",
    "concept_primer": "The model kept restarting analysis when earlier tests inserted only a stop marker. This study added fixed answer syntax without adding the answer, restricted the next choice to 12 public words, and checked whether real reasoning helped more than no generated reasoning or the same reasoning tokens in shuffled order.",

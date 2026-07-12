@@ -16,10 +16,11 @@
   beat no-thought/shuffled by +6.25pp/+8.33pp, but only five tasks mixed outcomes
   versus six required and task-bootstrap intervals crossed zero. J value stayed
   sealed.
-- **Next:** create a powered, fresh, fixed-1,024 seam replication. Increase task
-  units rather than relaxing the mixed gate, require task-level intervals above
-  zero for real-minus-no-thought and real-minus-shuffled, balance alias support,
-  and open value only after an untouched replication. Do not raise the cap yet.
+- **In progress:** `qwen35_4b_commit_slot_semantic_power_replication` freezes
+  cap 1,024 and uses the calculated 113 fresh tasks per seam stage (~80% power
+  at the parent ordered-over-shuffled effect), a task-bootstrap lower bound,
+  28 mixed tasks, and eight-alias success/choice support. It keeps no-thought as
+  a +3pp point gate and opens value only after an identical untouched pass.
 - If native thought-state transport passes, train a non-oracle prefix controller
   and require a replicated held-out capability gain over frozen Qwen3.5-4B and
   matched-compute sampling. Oracle donor selection is a mechanism control, not

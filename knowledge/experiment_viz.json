@@ -2,6 +2,27 @@
  "note": "Native chart specs for the research site, extracted from each experiment's own result files (runs/reports/analysis JSON+CSV and README/report tables) by per-experiment agent passes and kept only when every plotted value was located verbatim in the cited source by machine verification. Rendered by scripts/build_site.py (chart_svg/chart_figure); raw matplotlib figures remain available further down each experiment page.",
  "extracted_on": "2026-07-10",
  "experiments": {
+  "qwen35_4b_commit_slot_semantic_power_replication": {
+   "charts": [
+    {
+     "title": "Frozen fresh-task allocation for the powered replication",
+     "kind": "bar",
+     "categories": ["seam qualification", "seam confirmation", "value fit", "causal confirmation"],
+     "series": [
+      {
+       "label": "tasks",
+       "values": [113, 113, 48, 48]
+      }
+     ],
+     "x_label": "preregistered stage",
+     "y_label": "fresh procedural tasks",
+     "y_format": "integer",
+     "note": "All 322 rows are unique, exact-depth-two, and disjoint from five direct parents. The two 113-task seam stages are independently gated; future 48-task splits remain sealed.",
+     "source": "experiments/qwen35_4b_commit_slot_semantic_power_replication/runs/smoke/data_receipt.json",
+     "headline": true
+    }
+   ]
+  },
   "qwen35_4b_commit_slot_jacobian_value_transport": {
    "charts": [
     {

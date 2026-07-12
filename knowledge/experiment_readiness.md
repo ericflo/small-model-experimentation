@@ -4,21 +4,21 @@ Generated from tracked experiment contents. Use this as a triage surface for tur
 
 Anchor-ready means the experiment has a human-authored README, a detected primary report, recognized local artifacts, and an assigned research program. It does not mean the result is correct or final.
 
-- Experiments: 220
-- Anchor-ready: 205
-- Human-authored READMEs: 207
+- Experiments: 221
+- Anchor-ready: 206
+- Human-authored READMEs: 208
 - Generated README stubs: 13
-- Primary reports: 220
-- Experiment logs: 124
-- Smoke commands: 89
-- Artifact manifests: 192
+- Primary reports: 221
+- Experiment logs: 125
+- Smoke commands: 90
+- Artifact manifests: 193
 
 ## Run Surface Counts
 
 | Run surface | Experiments |
 | --- | ---: |
 | `documented-command` | 38 |
-| `documented-scripts` | 109 |
+| `documented-scripts` | 110 |
 | `scripts-undocumented` | 20 |
 | `source-or-analysis` | 53 |
 
@@ -68,6 +68,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | yes | [`qwen35_4b_code_abi_oracle_coverage_ladder`](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/README.md) | algorithmic_memory_and_retrieval, benchmark_generalization, evidence_conditioned_selection, interpretability_and_diagnostics, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/reports/final_report.md) | no | `documented-scripts` | no | large-artifact | add-experiment-log, add-smoke-command |
 | yes | [`qwen35_4b_code_confidence`](../experiments/qwen35_4b_code_confidence/README.md) | benchmark_generalization, evidence_conditioned_selection, interpretability_and_diagnostics, process_control_and_tool_use, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_code_confidence/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_commit_slot_jacobian_value_transport`](../experiments/qwen35_4b_commit_slot_jacobian_value_transport/README.md) | interpretability_and_diagnostics, structured_execution_and_compilers, test_time_reasoning_budget | `human-authored` | [report](../experiments/qwen35_4b_commit_slot_jacobian_value_transport/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
+| yes | [`qwen35_4b_commit_slot_semantic_power_replication`](../experiments/qwen35_4b_commit_slot_semantic_power_replication/README.md) | interpretability_and_diagnostics, structured_execution_and_compilers, test_time_reasoning_budget | `human-authored` | [report](../experiments/qwen35_4b_commit_slot_semantic_power_replication/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_confidence_guided_compute`](../experiments/qwen35_4b_confidence_guided_compute/README.md) | benchmark_generalization | `human-authored` | [report](../experiments/qwen35_4b_confidence_guided_compute/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_constrained_coverage_dpo`](../experiments/qwen35_4b_constrained_coverage_dpo/README.md) | algorithmic_memory_and_retrieval, evidence_conditioned_selection, posttraining_and_adaptation | `human-authored` | [report](../experiments/qwen35_4b_constrained_coverage_dpo/reports/final_report.md) | no | `scripts-undocumented` | no | large-artifact, run-data | add-experiment-log, document-run-path, add-smoke-command |
 | yes | [`qwen35_4b_context_composition`](../experiments/qwen35_4b_context_composition/README.md) | process_control_and_tool_use, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_context_composition/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |

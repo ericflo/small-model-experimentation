@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 192
-- Manifest files: 494
+- Experiments with manifests: 193
+- Manifest files: 495
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 63 |
 | `run-data` | 101 |
-| `standard-artifact` | 65 |
+| `standard-artifact` | 66 |
 
 ## Manifests
 
@@ -64,6 +64,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_code_abi_oracle_coverage_ladder` | `large-artifact` | [manifest](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/large_artifacts_manifest.md) |
 | `qwen35_4b_code_confidence` | `standard-artifact` | [manifest](../experiments/qwen35_4b_code_confidence/reports/artifact_manifest.yaml) |
 | `qwen35_4b_commit_slot_jacobian_value_transport` | `standard-artifact` | [manifest](../experiments/qwen35_4b_commit_slot_jacobian_value_transport/reports/artifact_manifest.yaml) |
+| `qwen35_4b_commit_slot_semantic_power_replication` | `standard-artifact` | [manifest](../experiments/qwen35_4b_commit_slot_semantic_power_replication/reports/artifact_manifest.yaml) |
 | `qwen35_4b_confidence_guided_compute` | `standard-artifact` | [manifest](../experiments/qwen35_4b_confidence_guided_compute/reports/artifact_manifest.yaml) |
 | `qwen35_4b_constrained_coverage_dpo` | `run-data` | [manifest](../experiments/qwen35_4b_constrained_coverage_dpo/data/eval_base_hot_k4_records.manifest.json) |
 | `qwen35_4b_constrained_coverage_dpo` | `run-data` | [manifest](../experiments/qwen35_4b_constrained_coverage_dpo/data/eval_base_hot_k8_records.manifest.json) |

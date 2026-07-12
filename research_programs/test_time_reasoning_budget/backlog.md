@@ -43,9 +43,11 @@
   the equivalent 12/48 no-thought and 11/48 shuffled. Five mixed tasks missed
   the frozen six-task gate, and task-level intervals included zero; no cap or J
   stage opened.
-- **Next:** powered fixed-1,024 replication on more fresh tasks with task-level
-  uncertainty gates. Keep exact-length shuffle and no-thought controls; do not
-  interpret a pooled gain or increase the cap before that replication.
+- **In progress:** `qwen35_4b_commit_slot_semantic_power_replication` holds the
+  budget at 1,024 and assigns 113 fresh tasks to each of qualification and
+  untouched confirmation. It requires a positive one-sided task-bootstrap lower
+  bound over exact-length shuffle, +3pp over no-thought, broad alias support,
+  and no pooled rescue. Do not increase the cap while this is unresolved.
 - Completed cross-program qualification negative:
   `qwen35_4b_pareto_policy_integration` found that C54's short/deep tier labels
   did not become a clean procedural teacher crossover. `blend` lost both quick
