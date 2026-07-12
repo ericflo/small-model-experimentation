@@ -158,3 +158,7 @@ Created as a new experiment scaffold.
   and `0.5297` deep; all evaluator provenance checks passed.
 - This single-arm output is checkpointed without an advantage interpretation.
   The paired deep arm and second independent block remain frozen and required.
+- Deep policy block 0 completed the identical 4,416 items in 2,970.32 seconds
+  using 4,244,434 sampled tokens. Broad raw means were `0.8089` quick and
+  `0.5813` deep; every provenance check passed. The run proceeded to seed
+  96300 without an interim paired decision or any protocol change.
