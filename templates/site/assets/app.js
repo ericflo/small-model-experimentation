@@ -393,17 +393,30 @@ const ROOT = document.body.dataset.root || "";
       pt.addEventListener("mousemove", moveTip);
       pt.addEventListener("mouseleave", () => { tip.hidden = true; });
     });
-    chart.querySelectorAll(".viz-key").forEach((key) => {
-      key.addEventListener("click", () => {
-        const index = key.dataset.vizToggle;
-        const off = key.classList.toggle("off");
-        chart
-          .querySelectorAll(`[data-viz-series="${index}"], [data-viz-series-line="${index}"], [data-viz-series-label="${index}"]`)
-          .forEach((el) => {
-            el.style.opacity = off ? "0.1" : "";
-            if (el.hasAttribute("data-viz-pt")) el.style.pointerEvents = off ? "none" : "";
-          });
+    const keys = chart.querySelectorAll(".viz-key");
+    const sel = (i) => `[data-viz-series="${i}"], [data-viz-series-line="${i}"], [data-viz-series-label="${i}"]`;
+    // reconcile every series to its toggle state (off = dimmed + inert)
+    function applyState() {
+      keys.forEach((key) => {
+        const off = key.classList.contains("off");
+        chart.querySelectorAll(sel(key.dataset.vizToggle)).forEach((el) => {
+          el.style.opacity = off ? "0.1" : "";
+          if (el.hasAttribute("data-viz-pt")) el.style.pointerEvents = off ? "none" : "";
+        });
       });
+    }
+    keys.forEach((key) => {
+      const index = key.dataset.vizToggle;
+      key.addEventListener("click", () => { key.classList.toggle("off"); applyState(); });
+      // hover one series to spotlight it; the rest fade until mouseout
+      key.addEventListener("mouseenter", () => {
+        if (key.classList.contains("off")) return;
+        keys.forEach((other) => {
+          if (other === key) return;
+          chart.querySelectorAll(sel(other.dataset.vizToggle)).forEach((el) => { el.style.opacity = "0.14"; });
+        });
+      });
+      key.addEventListener("mouseleave", applyState);
     });
   });
 })();

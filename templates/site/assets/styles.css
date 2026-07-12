@@ -271,7 +271,11 @@ a.chip:hover { text-decoration: none; border-color: var(--baseline); color: var(
 .viz-chart figcaption { margin-bottom: 12px; }
 .viz-chart figcaption strong { display: block; font-weight: 650; font-size: 15.5px; line-height: 1.4; }
 .viz-chart figcaption .muted { display: block; font-size: 13.5px; margin-top: 3px; max-width: 62ch; }
+.viz-axes { font-size: 12px; margin: 0 0 8px; letter-spacing: 0.01em; }
+.viz-axes b { color: var(--ink-2); font-weight: 600; }
 .viz-svg { display: block; width: 100%; height: auto; }
+.viz-svg text { paint-order: stroke; }
+.viz-svg [data-viz-series-line] { transition: opacity 0.12s; }
 .viz-svg [data-viz-pt] { cursor: pointer; }
 .viz-svg [data-viz-pt]:hover { opacity: 0.8; }
 .viz-legend { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 2px; }

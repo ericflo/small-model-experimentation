@@ -1023,12 +1023,25 @@ def load_briefs() -> dict[str, dict]:
 
 
 def _valid_spec(spec: object) -> bool:
-    if not isinstance(spec, dict) or spec.get("kind") not in {"bar", "line"}:
+    if not isinstance(spec, dict) or spec.get("kind") not in {"bar", "line", "heatmap", "scatter"}:
         return False
+    kind = spec["kind"]
+    if kind == "heatmap":
+        xc, yc, vals = spec.get("x_categories"), spec.get("y_categories"), spec.get("values")
+        if not (isinstance(xc, list) and xc and isinstance(yc, list) and yc):
+            return False
+        if not isinstance(vals, list) or len(vals) != len(yc):
+            return False
+        for row in vals:
+            if not isinstance(row, list) or len(row) != len(xc):
+                return False
+            if not all(v is None or isinstance(v, (int, float)) for v in row):
+                return False
+        return True
     series = spec.get("series")
     if not isinstance(series, list) or not series:
         return False
-    if spec["kind"] == "bar":
+    if kind == "bar":
         cats = spec.get("categories")
         if not isinstance(cats, list) or not cats:
             return False
@@ -1038,7 +1051,7 @@ def _valid_spec(spec: object) -> bool:
                 return False
             if not all(isinstance(v, (int, float)) for v in values):
                 return False
-    else:
+    else:  # line, scatter
         for entry in series:
             points = entry.get("points") if isinstance(entry, dict) else None
             if not isinstance(points, list) or not points:  # single points render as reference markers
@@ -1091,206 +1104,382 @@ def _spec_values(spec: dict) -> list[float]:
     return out
 
 
-def chart_svg(spec: dict, *, mini: bool = False, uid: str = "", plain_axes: bool = False) -> str:
-    """Render one chart spec as a clean SVG (single scale, palette slots,
-    thin bars, light gridlines). Interactive polish rides on data attrs.
+def _tw(text: str, fs: float) -> float:
+    """Approximate rendered text width in px (system-ui, average glyph ~0.56em)."""
+    return len(str(text)) * fs * 0.56
 
-    plain_axes suppresses the jargon axis-title line — used when a
-    practitioner "how to read" panel already translates the axes."""
-    values = _spec_values(spec)
-    lo = min(0.0, min(values))
-    hi = max(0.0, max(values))
+
+def _bar_svg(spec: dict, W: int, mini: bool) -> tuple[list[str], float]:
+    """Bar chart. Auto-selects horizontal layout when category labels are long or
+    numerous — the clean fix for the label overflow the old vertical bars suffered."""
+    series = spec["series"]
+    cats = [str(c) for c in spec.get("categories", [])]
+    n_series, n_groups = len(series), len(cats)
+    yf = spec.get("y_format", "number")
+    vals = [v for e in series for v in e["values"]]
+    lo, hi = min(0.0, min(vals)), max(0.0, max(vals))
     if lo == hi:
         hi = lo + 1
-    pad_hi = (hi - lo) * 0.12
-    hi += pad_hi
-    y_format = spec.get("y_format", "number")
-    ticks = _nice_ticks(lo, hi)
-
-    is_line = spec["kind"] == "line"
-    width = 360 if mini else 720
-    plot_h = 128 if mini else 250
-    m_left = 8 if mini else 50
-    m_right = 10 if mini else 16
-    if is_line and not mini:  # room for direct series labels at line ends
-        longest = max(len(str(entry["label"])[:20]) for entry in spec["series"])
-        m_right = max(70, min(140, longest * 6 + 16))
-    show_axis_title = bool(spec.get("y_label")) and not plain_axes
-    m_top = 18 if mini else (30 if show_axis_title else 16)
-    m_bottom = 22 if mini else 36
-    plot_w = width - m_left - m_right
-    height = plot_h + m_top + m_bottom
-
-    def sy(v: float) -> float:
-        return m_top + plot_h - (v - lo) / (hi - lo) * plot_h
-
+    hi += (hi - lo) * 0.02
+    longest_cat = max((len(c) for c in cats), default=0)
+    horizontal = (not mini) and (longest_cat > 10 or n_groups > 7 or n_groups * n_series > 20)
     parts: list[str] = []
-    if not mini and show_axis_title:
-        parts.append(
-            f'<text x="4" y="13" font-size="11.5" fill="var(--muted)">{esc(str(spec["y_label"]))}'
-            + (f' <tspan fill="var(--baseline)">·</tspan> {esc(str(spec["x_label"]))} →' if spec["kind"] == "line" and spec.get("x_label") else "")
-            + "</text>"
-        )
-    for tick in ticks:
-        y = sy(tick)
-        parts.append(f'<line x1="{m_left}" x2="{width - m_right}" y1="{y:.1f}" y2="{y:.1f}" stroke="var(--grid)" stroke-width="1"/>')
-        if not mini:
-            parts.append(
-                f'<text x="{m_left - 7}" y="{y + 3.5:.1f}" text-anchor="end" font-size="11" fill="var(--muted)">{esc(_fmt_val(tick, y_format))}</text>'
-            )
-    zero_y = sy(0)
-    parts.append(f'<line x1="{m_left}" x2="{width - m_right}" y1="{zero_y:.1f}" y2="{zero_y:.1f}" stroke="var(--baseline)" stroke-width="1"/>')
 
-    series = spec["series"]
-    total_pts = 0
-    if spec["kind"] == "bar":
-        cats = [str(c) for c in spec.get("categories", [])]
-        n_groups = len(cats)
-        n_series = len(series)
-        group_w = plot_w / max(n_groups, 1)
-        gap = 2 if mini else 3
-        bar_w = min(30.0 if mini else 38.0, max(7.0, (group_w * 0.74) / n_series - gap))
-        cluster_w = n_series * bar_w + (n_series - 1) * gap
-        total_bars = n_groups * n_series
-        show_labels = bar_w >= 17 and total_bars <= (6 if mini else 16)
-        label_font = 10 if mini else 10.5
-        for gi, cat in enumerate(cats):
-            gx = m_left + gi * group_w + (group_w - cluster_w) / 2
-            for si, entry in enumerate(series):
-                value = entry["values"][gi]
-                x = gx + si * (bar_w + gap)
-                y0, y1 = sy(max(0.0, value)), sy(min(0.0, value))
-                bar_h = max(1.5, y1 - y0)
-                label = f'{esc(entry["label"])} · {esc(cat)}: {esc(_fmt_val(value, y_format))}' if len(series) > 1 else f'{esc(cat)}: {esc(_fmt_val(value, y_format))}'
-                parts.append(
-                    f'<rect x="{x:.1f}" y="{y0:.1f}" width="{bar_w:.1f}" height="{bar_h:.1f}" rx="2.5" '
-                    f'fill="{_series_color(si)}" data-viz-pt data-viz-series="{si}" data-viz-label="{label}"/>'
-                )
-                if show_labels:
-                    ly = y1 + 12 if value < 0 else y0 - 4
-                    if bar_w < 27 and n_series > 1 and si % 2:
-                        ly += 12 if value < 0 else -11  # stagger: narrow neighbors collide
-                    parts.append(
-                        f'<text x="{x + bar_w / 2:.1f}" y="{ly:.1f}" text-anchor="middle" font-size="{label_font}" '
-                        f'font-weight="600" fill="var(--ink-2)" data-viz-series-label="{si}">{esc(_fmt_val(value, y_format))}</text>'
-                    )
-                total_pts += 1
-            if not mini or n_groups <= 4:  # crowded mini labels collide; the card links to the full chart
-                label_font = 10 if mini else 11
-                max_chars = max(4, int(group_w / (5.4 if mini else 6.2)))
-                cat_text = cat if len(cat) <= max_chars else cat[: max_chars - 1] + "…"
-                parts.append(
-                    f'<text x="{m_left + gi * group_w + group_w / 2:.1f}" y="{m_top + plot_h + (14 if mini else 16)}" '
-                    f'text-anchor="middle" font-size="{label_font}" fill="var(--ink-2)">{esc(cat_text)}</text>'
-                )
-    else:
-        xs = [p[0] for entry in series for p in entry["points"]]
-        x_lo, x_hi = min(xs), max(xs)
-        if x_lo == x_hi:
-            x_hi = x_lo + 1
+    if horizontal:
+        left = int(min(232, max(72, longest_cat * 6.5 + 10)))
+        top, right = 12, 56
+        band = int(max(24, min(48, n_series * 15 + 14)))
+        plot_h = n_groups * band
+        H = top + plot_h + 34
+        plot_w = W - left - right
+        ticks = _nice_ticks(lo, hi)
 
         def sx(v: float) -> float:
-            return m_left + (v - x_lo) / (x_hi - x_lo) * plot_w
+            return left + (v - lo) / (hi - lo) * plot_w
+        for t in ticks:
+            x = sx(t)
+            parts.append(f'<line x1="{x:.1f}" x2="{x:.1f}" y1="{top}" y2="{top + plot_h}" stroke="var(--grid)"/>')
+            parts.append(f'<text x="{x:.1f}" y="{top + plot_h + 16:.1f}" text-anchor="middle" font-size="11" fill="var(--muted)">{esc(_fmt_val(t, yf))}</text>')
+        x0 = sx(0)
+        parts.append(f'<line x1="{x0:.1f}" x2="{x0:.1f}" y1="{top}" y2="{top + plot_h}" stroke="var(--baseline)" stroke-width="1.3"/>')
+        bar_h = min(20.0, (band - 8) / n_series)
+        for gi, cat in enumerate(cats):
+            gy = top + gi * band
+            ctxt = cat if len(cat) <= 34 else cat[:33] + "…"
+            parts.append(f'<text x="{left - 8}" y="{gy + band / 2 + 4:.1f}" text-anchor="end" font-size="11.5" fill="var(--ink-2)"><title>{esc(cat)}</title>{esc(ctxt)}</text>')
+            cluster_h = n_series * bar_h + (n_series - 1) * 2
+            for si, e in enumerate(series):
+                v = e["values"][gi]
+                y = gy + (band - cluster_h) / 2 + si * (bar_h + 2)
+                xa, xb = sx(min(0.0, v)), sx(max(0.0, v))
+                w = max(1.2, xb - xa)
+                lbl = f'{esc(e["label"])} · {esc(cat)}: {esc(_fmt_val(v, yf))}' if n_series > 1 else f'{esc(cat)}: {esc(_fmt_val(v, yf))}'
+                parts.append(f'<rect x="{xa:.1f}" y="{y:.1f}" width="{w:.1f}" height="{bar_h:.1f}" rx="2" fill="{_series_color(si)}" data-viz-pt data-viz-series="{si}" data-viz-label="{lbl}"/>')
+                if bar_h >= 11:
+                    parts.append(f'<text x="{xb + 4:.1f}" y="{y + bar_h / 2 + 3.5:.1f}" font-size="10" font-weight="600" fill="var(--ink-2)" data-viz-series-label="{si}">{esc(_fmt_val(v, yf))}</text>')
+        return parts, H
 
-        end_labels: list[tuple[float, int, str]] = []
-        for si, entry in enumerate(series):
-            pts = sorted(entry["points"], key=lambda p: p[0])
-            if len(pts) > 1:
-                path = " ".join(f"{sx(p[0]):.1f},{sy(p[1]):.1f}" for p in pts)
-                parts.append(
-                    f'<polyline points="{path}" fill="none" stroke="{_series_color(si)}" stroke-width="2.25" '
-                    f'stroke-linejoin="round" stroke-linecap="round" data-viz-series-line="{si}"/>'
-                )
-            marker_r = (3 if mini else 3.5) if len(pts) > 1 else (4.5 if mini else 5.5)
-            for p in pts:
-                label = f'{esc(entry["label"])} · {esc(_fmt_val(p[0], "number"))}: {esc(_fmt_val(p[1], y_format))}'
-                parts.append(
-                    f'<circle cx="{sx(p[0]):.1f}" cy="{sy(p[1]):.1f}" r="{marker_r}" fill="{_series_color(si)}" '
-                    f'data-viz-pt data-viz-series="{si}" data-viz-label="{label}"/>'
-                )
-                total_pts += 1
-            end_labels.append((sy(pts[-1][1]), si, str(entry["label"])[:20]))
-        if not mini:  # name each series at its line end: no eye travel to a legend
-            end_labels.sort()
-            placed: list[float] = []
-            for y, si, text in end_labels:
-                for prev in placed:
-                    if abs(y - prev) < 13:
-                        y = prev + 13
-                y = min(max(y, m_top + 6), m_top + plot_h - 2)
-                placed.append(y)
-                parts.append(
-                    f'<text x="{width - m_right + 7}" y="{y + 3.5:.1f}" font-size="11" font-weight="600" '
-                    f'fill="{_series_color(si)}" data-viz-series-label="{si}">{esc(text)}</text>'
-                )
-        x_ticks = _nice_ticks(x_lo, x_hi)[:6]
-        if mini and len(x_ticks) > 3:
-            x_ticks = [x_ticks[0], x_ticks[len(x_ticks) // 2], x_ticks[-1]]
-        for tick in x_ticks:
-            parts.append(
-                f'<text x="{sx(tick):.1f}" y="{m_top + plot_h + (14 if mini else 16)}" text-anchor="middle" '
-                f'font-size="{10 if mini else 11}" fill="var(--ink-2)">{esc(_fmt_val(tick, "number"))}</text>'
-            )
-        # (x_label rides in the top-left metric line for line charts)
+    # vertical bars
+    top, left, right = 16, 46, 14
+    group_w0 = (W - left - right) / max(n_groups, 1)
+    rotate = (not mini) and any(_tw(c, 11) > group_w0 * 0.92 for c in cats)
+    bottom = 58 if rotate else 30
+    plot_h = 128 if mini else 240
+    H = top + plot_h + bottom
+    plot_w = W - left - right
+    group_w = plot_w / max(n_groups, 1)
+    ticks = _nice_ticks(lo, hi)
 
+    def sy(v: float) -> float:
+        return top + plot_h - (v - lo) / (hi - lo) * plot_h
+    for t in ticks:
+        y = sy(t)
+        parts.append(f'<line x1="{left}" x2="{W - right}" y1="{y:.1f}" y2="{y:.1f}" stroke="var(--grid)"/>')
+        if not mini:
+            parts.append(f'<text x="{left - 7}" y="{y + 3.5:.1f}" text-anchor="end" font-size="11" fill="var(--muted)">{esc(_fmt_val(t, yf))}</text>')
+    parts.append(f'<line x1="{left}" x2="{W - right}" y1="{sy(0):.1f}" y2="{sy(0):.1f}" stroke="var(--baseline)" stroke-width="1.3"/>')
+    gap = 2 if mini else 3
+    bar_w = min(30.0 if mini else 46.0, max(6.0, (group_w * 0.76) / n_series - gap))
+    cluster_w = n_series * bar_w + (n_series - 1) * gap
+    show_val = (not mini) and bar_w >= 16 and n_groups * n_series <= 16
+    for gi, cat in enumerate(cats):
+        gx = left + gi * group_w + (group_w - cluster_w) / 2
+        for si, e in enumerate(series):
+            v = e["values"][gi]
+            x = gx + si * (bar_w + gap)
+            ya, yb = sy(max(0.0, v)), sy(min(0.0, v))
+            h = max(1.2, yb - ya)
+            lbl = f'{esc(e["label"])} · {esc(cat)}: {esc(_fmt_val(v, yf))}' if n_series > 1 else f'{esc(cat)}: {esc(_fmt_val(v, yf))}'
+            parts.append(f'<rect x="{x:.1f}" y="{ya:.1f}" width="{bar_w:.1f}" height="{h:.1f}" rx="2.5" fill="{_series_color(si)}" data-viz-pt data-viz-series="{si}" data-viz-label="{lbl}"/>')
+            if show_val:
+                parts.append(f'<text x="{x + bar_w / 2:.1f}" y="{ya - 4:.1f}" text-anchor="middle" font-size="10" font-weight="600" fill="var(--ink-2)" data-viz-series-label="{si}">{esc(_fmt_val(v, yf))}</text>')
+        cx = left + gi * group_w + group_w / 2
+        if mini and n_groups > 4:
+            continue
+        if rotate:
+            ctxt = cat if len(cat) <= 26 else cat[:25] + "…"
+            parts.append(f'<text x="{cx:.1f}" y="{top + plot_h + 14:.1f}" transform="rotate(-35 {cx:.1f} {top + plot_h + 14:.1f})" text-anchor="end" font-size="10.5" fill="var(--ink-2)">{esc(ctxt)}</text>')
+        else:
+            max_chars = max(4, int(group_w / (5.4 if mini else 6.4)))
+            ctxt = cat if len(cat) <= max_chars else cat[:max_chars - 1] + "…"
+            parts.append(f'<text x="{cx:.1f}" y="{top + plot_h + (13 if mini else 16):.1f}" text-anchor="middle" font-size="{10 if mini else 11}" fill="var(--ink-2)">{esc(ctxt)}</text>')
+    return parts, H
+
+
+def _line_svg(spec: dict, W: int, mini: bool) -> tuple[list[str], float]:
+    """Line chart. Few series get direct end-labels (dodged); many series drop the
+    labels (an interactive legend identifies them) and cycle dash patterns."""
+    series = spec["series"]
+    yf = spec.get("y_format", "number")
+    n = len(series)
+    many = n > 4
+    vals = [p[1] for e in series for p in e["points"]]
+    lo, hi = min(0.0, min(vals)), max(0.0, max(vals))
+    if lo == hi:
+        hi = lo + 1
+    hi += (hi - lo) * 0.06
+    xs = [p[0] for e in series for p in e["points"]]
+    xlo, xhi = min(xs), max(xs)
+    if xlo == xhi:
+        xhi = xlo + 1
+    top, left, bottom = 14, 46, 30
+    if mini or many:
+        right = 12
+    else:
+        right = int(min(150, max(64, max(len(str(e["label"])[:18]) for e in series) * 6.2 + 14)))
+    plot_h = 128 if mini else 240
+    H = top + plot_h + bottom
+    plot_w = W - left - right
+
+    def sy(v: float) -> float:
+        return top + plot_h - (v - lo) / (hi - lo) * plot_h
+
+    def sx(v: float) -> float:
+        return left + (v - xlo) / (xhi - xlo) * plot_w
+    parts: list[str] = []
+    for t in _nice_ticks(lo, hi):
+        y = sy(t)
+        parts.append(f'<line x1="{left}" x2="{W - right}" y1="{y:.1f}" y2="{y:.1f}" stroke="var(--grid)"/>')
+        if not mini:
+            parts.append(f'<text x="{left - 7}" y="{y + 3.5:.1f}" text-anchor="end" font-size="11" fill="var(--muted)">{esc(_fmt_val(t, yf))}</text>')
+    parts.append(f'<line x1="{left}" x2="{W - right}" y1="{sy(0):.1f}" y2="{sy(0):.1f}" stroke="var(--baseline)" stroke-width="1.3"/>')
+    if not mini:
+        xt = _nice_ticks(xlo, xhi)[:7]
+        for t in xt:
+            parts.append(f'<text x="{sx(t):.1f}" y="{top + plot_h + 16:.1f}" text-anchor="middle" font-size="11" fill="var(--ink-2)">{esc(_fmt_val(t, "number"))}</text>')
+    dashes = ["", "5 3", "2 3", "7 3 2 3"]
+    ends: list[tuple[float, int, str]] = []
+    for si, e in enumerate(series):
+        pts = sorted(e["points"], key=lambda p: p[0])
+        dash = f' stroke-dasharray="{dashes[(si // 8) % len(dashes)]}"' if many else ""
+        if len(pts) > 1:
+            path = " ".join(f"{sx(p[0]):.1f},{sy(p[1]):.1f}" for p in pts)
+            parts.append(f'<polyline points="{path}" fill="none" stroke="{_series_color(si)}" stroke-width="2.25" stroke-linejoin="round" stroke-linecap="round"{dash} data-viz-series-line="{si}"/>')
+        r = (3 if mini else 3.5) if len(pts) > 1 else (4.5 if mini else 5.5)
+        for p in pts:
+            lbl = f'{esc(e["label"])} · {esc(_fmt_val(p[0], "number"))}: {esc(_fmt_val(p[1], yf))}'
+            parts.append(f'<circle cx="{sx(p[0]):.1f}" cy="{sy(p[1]):.1f}" r="{r}" fill="{_series_color(si)}" data-viz-pt data-viz-series="{si}" data-viz-label="{lbl}"/>')
+        lab = str(e["label"])
+        ends.append((sy(pts[-1][1]), si, lab if len(lab) <= 18 else lab[:17] + "…"))
+    if not many and not mini:
+        ends.sort(key=lambda t: t[0])
+        ys = [y for y, _, _ in ends]
+        for i in range(1, len(ys)):
+            if ys[i] < ys[i - 1] + 13:
+                ys[i] = ys[i - 1] + 13
+        overflow = ys[-1] - (top + plot_h - 2)
+        if overflow > 0:
+            ys = [y - overflow for y in ys]
+        ys = [max(y, top + 6) for y in ys]
+        for (y0, si, txt), y in zip(ends, ys):
+            parts.append(f'<text x="{W - right + 7:.1f}" y="{y + 3.5:.1f}" font-size="11" font-weight="600" fill="{_series_color(si)}" data-viz-series-label="{si}">{esc(txt)}</text>')
+    return parts, H
+
+
+def _heatmap_svg(spec: dict, W: int, uid: str) -> tuple[list[str], float]:
+    """Categorical grid, colored by a sequential value scale — a chart kind the
+    old bar/line engine could not represent at all."""
+    xcats = [str(c) for c in spec["x_categories"]]
+    ycats = [str(c) for c in spec["y_categories"]]
+    rows = spec["values"]
+    yf = spec.get("value_format", spec.get("y_format", "number"))
+    flat = [v for r in rows for v in r if isinstance(v, (int, float))]
+    vlo, vhi = (min(flat), max(flat)) if flat else (0.0, 1.0)
+    if vlo == vhi:
+        vhi = vlo + 1
+    longest_y = max((len(c) for c in ycats), default=0)
+    left = int(min(200, max(60, longest_y * 6 + 8)))
+    top, right = 12, 20
+    cell_w = (W - left - right) / max(len(xcats), 1)
+    longest_x = max((len(c) for c in xcats), default=0)
+    rotate_x = any(_tw(c, 10) > cell_w for c in xcats)
+    bottom = int(min(150, max(30, longest_x * 6))) if rotate_x else 30
+    cell_h = min(46.0, max(20.0, cell_w * 0.7))
+    H = top + len(ycats) * cell_h + bottom + 30
+
+    def color(v: float) -> str:
+        t = (v - vlo) / (vhi - vlo)
+        return f"rgb({int(247 - 107 * t)},{int(249 - 129 * t)},{int(251 - 37 * t)})"
+    parts: list[str] = [f'<defs><linearGradient id="hm-{esc(uid)}"><stop offset="0" stop-color="{color(vlo)}"/><stop offset="1" stop-color="{color(vhi)}"/></linearGradient></defs>']
+    for yi, yc in enumerate(ycats):
+        cy = top + yi * cell_h
+        ytxt = yc if len(yc) <= 30 else yc[:29] + "…"
+        parts.append(f'<text x="{left - 6}" y="{cy + cell_h / 2 + 4:.1f}" text-anchor="end" font-size="11" fill="var(--ink-2)"><title>{esc(yc)}</title>{esc(ytxt)}</text>')
+        for xi in range(len(xcats)):
+            v = rows[yi][xi] if (yi < len(rows) and xi < len(rows[yi])) else None
+            cx = left + xi * cell_w
+            if not isinstance(v, (int, float)):
+                parts.append(f'<rect x="{cx:.1f}" y="{cy:.1f}" width="{cell_w:.1f}" height="{cell_h:.1f}" fill="var(--page)" stroke="var(--surface)"/>')
+                continue
+            lbl = f'{esc(xcats[xi])} · {esc(yc)}: {esc(_fmt_val(v, yf))}'
+            parts.append(f'<rect x="{cx:.1f}" y="{cy:.1f}" width="{cell_w:.1f}" height="{cell_h:.1f}" fill="{color(v)}" stroke="var(--surface)" data-viz-pt data-viz-label="{lbl}"/>')
+            if cell_w >= 30 and cell_h >= 18:
+                ink = "#fff" if (v - vlo) / (vhi - vlo) > 0.62 else "var(--ink-2)"
+                parts.append(f'<text x="{cx + cell_w / 2:.1f}" y="{cy + cell_h / 2 + 3.5:.1f}" text-anchor="middle" font-size="10" fill="{ink}">{esc(_fmt_val(v, yf))}</text>')
+    yb = top + len(ycats) * cell_h
+    for xi, xc in enumerate(xcats):
+        cx = left + xi * cell_w + cell_w / 2
+        if rotate_x:
+            xtxt = xc if len(xc) <= 24 else xc[:23] + "…"
+            parts.append(f'<text x="{cx:.1f}" y="{yb + 14:.1f}" transform="rotate(-40 {cx:.1f} {yb + 14:.1f})" text-anchor="end" font-size="10" fill="var(--ink-2)">{esc(xtxt)}</text>')
+        else:
+            parts.append(f'<text x="{cx:.1f}" y="{yb + 16:.1f}" text-anchor="middle" font-size="10.5" fill="var(--ink-2)">{esc(xc)}</text>')
+    ly = yb + bottom + 6
+    parts.append(f'<rect x="{left}" y="{ly}" width="140" height="10" fill="url(#hm-{esc(uid)})" stroke="var(--grid)"/>')
+    parts.append(f'<text x="{left - 4}" y="{ly + 9}" text-anchor="end" font-size="10" fill="var(--muted)">{esc(_fmt_val(vlo, yf))}</text>')
+    parts.append(f'<text x="{left + 146}" y="{ly + 9}" font-size="10" fill="var(--muted)">{esc(_fmt_val(vhi, yf))}</text>')
+    return parts, H
+
+
+def _scatter_svg(spec: dict, W: int, mini: bool) -> tuple[list[str], float]:
+    """Point cloud with real axes; series distinguished by color."""
+    series = spec["series"]
+    yf = spec.get("y_format", "number")
+    pts_all = [(p[0], p[1]) for e in series for p in e["points"]]
+    xs = [p[0] for p in pts_all]
+    ys = [p[1] for p in pts_all]
+    xlo, xhi = min(xs), max(xs)
+    ylo, yhi = min(ys), max(ys)
+    xpad = (xhi - xlo) * 0.06 or 1
+    ypad = (yhi - ylo) * 0.08 or 1
+    xlo, xhi = xlo - xpad, xhi + xpad
+    ylo, yhi = min(0.0, ylo) - 0, yhi + ypad
+    top, left, right, bottom = 14, 48, 16, 30
+    plot_h = 128 if mini else 240
+    plot_w = W - left - right
+    H = top + plot_h + bottom
+
+    def sy(v: float) -> float:
+        return top + plot_h - (v - ylo) / (yhi - ylo) * plot_h
+
+    def sx(v: float) -> float:
+        return left + (v - xlo) / (xhi - xlo) * plot_w
+    parts: list[str] = []
+    for t in _nice_ticks(ylo, yhi):
+        y = sy(t)
+        parts.append(f'<line x1="{left}" x2="{W - right}" y1="{y:.1f}" y2="{y:.1f}" stroke="var(--grid)"/>')
+        if not mini:
+            parts.append(f'<text x="{left - 7}" y="{y + 3.5:.1f}" text-anchor="end" font-size="11" fill="var(--muted)">{esc(_fmt_val(t, yf))}</text>')
+    for t in _nice_ticks(xlo, xhi)[:7]:
+        if not mini:
+            parts.append(f'<text x="{sx(t):.1f}" y="{top + plot_h + 16:.1f}" text-anchor="middle" font-size="11" fill="var(--ink-2)">{esc(_fmt_val(t, "number"))}</text>')
+    for si, e in enumerate(series):
+        for p in e["points"]:
+            lbl = f'{esc(e["label"])} · ({esc(_fmt_val(p[0], "number"))}, {esc(_fmt_val(p[1], yf))})'
+            parts.append(f'<circle cx="{sx(p[0]):.1f}" cy="{sy(p[1]):.1f}" r="{3 if mini else 4}" fill="{_series_color(si)}" fill-opacity="0.78" data-viz-pt data-viz-series="{si}" data-viz-label="{lbl}"/>')
+    return parts, H
+
+
+def chart_svg(spec: dict, *, mini: bool = False, uid: str = "", plain_axes: bool = False) -> str:
+    """Render one chart spec as a clean SVG. Bar auto-orients (horizontal for long
+    labels), line switches to legend mode past 4 series, and heatmap/scatter are
+    first-class kinds. plain_axes is accepted for API compatibility (axis titles
+    are surfaced by chart_figure)."""
+    kind = spec.get("kind")
+    W = 360 if mini else 720
+    if kind == "bar":
+        parts, H = _bar_svg(spec, W, mini)
+    elif kind == "line":
+        parts, H = _line_svg(spec, W, mini)
+    elif kind == "heatmap":
+        parts, H = _heatmap_svg(spec, W, uid or "0")
+    elif kind == "scatter":
+        parts, H = _scatter_svg(spec, W, mini)
+    else:
+        return ""
     title = str(spec.get("title", ""))
     aria = f'{title}: {spec.get("note", "")}' if spec.get("note") else title
     return (
-        f'<svg viewBox="0 0 {width} {height}" role="img" aria-label="{esc(aria)}" preserveAspectRatio="xMidYMid meet" '
-        f'class="viz-svg{" viz-mini" if mini else ""}">{"".join(parts)}</svg>'
+        f'<svg viewBox="0 0 {W} {int(round(H))}" role="img" aria-label="{esc(aria)}" '
+        f'preserveAspectRatio="xMidYMid meet" class="viz-svg{" viz-mini" if mini else ""}">{"".join(parts)}</svg>'
     )
 
 
-def chart_figure(spec: dict, exp: dict, index: int, plain: dict | None = None) -> str:
-    """Full chart block: caption, svg, legend, data-table twin, source.
-
-    When `plain` (chart_plain_title/chart_read/chart_takeaway) is present, the
-    chart is framed for a practitioner — plain headline, a "how to read" helper
-    before the chart, a bold takeaway after — and the jargon title+note are
-    demoted to a muted technical line."""
-    plain = plain or {}
-    has_plain = bool(str(plain.get("chart_read", "")).strip() or str(plain.get("chart_plain_title", "")).strip())
-    svg = chart_svg(spec, mini=False, uid=f'{exp["id"]}-{index}', plain_axes=has_plain)
-    legend = ""
-    if spec["kind"] == "bar" and len(spec["series"]) > 1:  # lines carry direct end labels
-        chips = "".join(
-            f'<button type="button" class="viz-key" data-viz-toggle="{si}">'
-            f'<span class="dot" style="background:{_series_color(si)}"></span>{esc(entry["label"])}</button>'
-            for si, entry in enumerate(spec["series"])
-        )
-        legend = f'<div class="viz-legend">{chips}</div>'
-    y_format = spec.get("y_format", "number")
-    if spec["kind"] == "bar":
-        head = "".join(f"<th>{esc(entry['label'])}</th>" for entry in spec["series"])
+def _chart_table(spec: dict) -> str:
+    """A data-table twin of the chart, so every number is reachable and sortable."""
+    yf = spec.get("y_format", "number")
+    kind = spec["kind"]
+    if kind == "bar":
+        head = "".join(f"<th>{esc(e['label'])}</th>" for e in spec["series"])
         rows = "".join(
-            "<tr><td>"
-            + esc(str(cat))
-            + "</td>"
-            + "".join(f'<td style="text-align:right">{esc(_fmt_val(entry["values"][ci], y_format))}</td>' for entry in spec["series"])
+            "<tr><td>" + esc(str(cat)) + "</td>"
+            + "".join(f'<td style="text-align:right">{esc(_fmt_val(e["values"][ci], yf))}</td>' for e in spec["series"])
             + "</tr>"
             for ci, cat in enumerate(spec["categories"])
         )
-        table_head = f"<tr><th>{esc(spec.get('x_label') or 'condition')}</th>{head}</tr>"
-    else:
-        xs = sorted({p[0] for entry in spec["series"] for p in entry["points"]})
-        head = "".join(f"<th>{esc(entry['label'])}</th>" for entry in spec["series"])
-        table_head = f"<tr><th>{esc(spec.get('x_label') or 'x')}</th>{head}</tr>"
+        thead = f"<tr><th>{esc(spec.get('x_label') or 'condition')}</th>{head}</tr>"
+    elif kind == "line" or kind == "scatter":
+        xs = sorted({p[0] for e in spec["series"] for p in e["points"]})
+        head = "".join(f"<th>{esc(e['label'])}</th>" for e in spec["series"])
+        thead = f"<tr><th>{esc(spec.get('x_label') or 'x')}</th>{head}</tr>"
         rows = ""
         for x in xs:
             cells = ""
-            for entry in spec["series"]:
-                match = next((p[1] for p in entry["points"] if p[0] == x), None)
-                cells += f'<td style="text-align:right">{esc(_fmt_val(match, y_format)) if match is not None else "—"}</td>'
+            for e in spec["series"]:
+                match = next((p[1] for p in e["points"] if p[0] == x), None)
+                cells += f'<td style="text-align:right">{esc(_fmt_val(match, yf)) if match is not None else "—"}</td>'
             rows += f"<tr><td>{esc(_fmt_val(x, 'number'))}</td>{cells}</tr>"
-    table = (
+    elif kind == "heatmap":
+        xcats = [str(c) for c in spec["x_categories"]]
+        head = "".join(f"<th>{esc(c)}</th>" for c in xcats)
+        thead = f"<tr><th></th>{head}</tr>"
+        vf = spec.get("value_format", spec.get("y_format", "number"))
+        rows = ""
+        for yi, yc in enumerate(spec["y_categories"]):
+            cells = "".join(
+                f'<td style="text-align:right">{esc(_fmt_val(v, vf)) if isinstance(v, (int, float)) else "—"}</td>'
+                for v in (spec["values"][yi] if yi < len(spec["values"]) else [])
+            )
+            rows += f"<tr><td>{esc(str(yc))}</td>{cells}</tr>"
+    else:
+        return ""
+    return (
         '<details class="chart-table"><summary>Data table</summary><div class="table-wrap">'
-        f'<table class="md-table"><thead>{table_head}</thead><tbody>{rows}</tbody></table></div></details>'
+        f'<table class="md-table" data-sortable><thead>{thead}</thead><tbody>{rows}</tbody></table></div></details>'
     )
+
+
+def _chart_legend(spec: dict) -> str:
+    """Interactive series legend — for multi-series bars and many-series lines
+    (few-series lines carry direct end labels instead)."""
+    kind = spec["kind"]
+    series = spec["series"]
+    need = (kind == "bar" and len(series) > 1) or (kind == "line" and len(series) > 4) or (kind == "scatter" and len(series) > 1)
+    if not need:
+        return ""
+    chips = "".join(
+        f'<button type="button" class="viz-key" data-viz-toggle="{si}">'
+        f'<span class="dot" style="background:{_series_color(si)}"></span>{esc(e["label"])}</button>'
+        for si, e in enumerate(series)
+    )
+    return f'<div class="viz-legend">{chips}</div>'
+
+
+def chart_figure(spec: dict, exp: dict, index: int, plain: dict | None = None) -> str:
+    """Full chart block: caption, optional plain framing, svg, legend, data-table
+    twin, source. Practitioner framing (plain) demotes the jargon title+note."""
+    plain = plain or {}
+    has_plain = bool(str(plain.get("chart_read", "")).strip() or str(plain.get("chart_plain_title", "")).strip())
+    svg = chart_svg(spec, mini=False, uid=f'{exp["id"]}-{index}', plain_axes=has_plain)
+    legend = _chart_legend(spec)
+    table = _chart_table(spec)
     source = str(spec.get("source", ""))
     if "/" in source or source.endswith((".json", ".csv")):
         src_html = f'<a href="{GITHUB}/blob/main/experiments/{esc(exp["id"])}/{esc(source)}"><code>{esc(source)}</code></a>'
     else:
         src_html = esc(source)
+    # axis line (only when no plain "how to read" panel already translates the axes)
+    axes = ""
+    if not has_plain and spec["kind"] in {"bar", "line", "scatter"}:
+        yl, xl = str(spec.get("y_label", "")).strip(), str(spec.get("x_label", "")).strip()
+        bits = []
+        if yl:
+            bits.append(f'<b>{esc(yl)}</b>' + (" ↑" if spec["kind"] != "bar" else ""))
+        if xl:
+            bits.append(f'{esc(xl)} →')
+        if bits:
+            axes = f'<p class="viz-axes muted">{" · ".join(bits)}</p>'
+
     plain_title = str(plain.get("chart_plain_title", "")).strip()
     read = str(plain.get("chart_read", "")).strip()
     takeaway = str(plain.get("chart_takeaway", "")).strip()
@@ -1299,27 +1488,21 @@ def chart_figure(spec: dict, exp: dict, index: int, plain: dict | None = None) -
     if plain_title or read or takeaway:
         headline = plain_title or str(spec.get("title", ""))
         caption = f'<figcaption><strong>{esc(headline)}</strong></figcaption>'
-        read_html = (
-            f'<div class="viz-read"><p class="kicker">How to read</p><p>{esc(read)}</p></div>' if read else ""
-        )
-        take_html = (
-            f'<p class="viz-takeaway"><span>Takeaway →</span> {esc(takeaway)}</p>' if takeaway else ""
-        )
+        read_html = f'<div class="viz-read"><p class="kicker">How to read</p><p>{esc(read)}</p></div>' if read else ""
+        take_html = f'<p class="viz-takeaway"><span>Takeaway →</span> {esc(takeaway)}</p>' if takeaway else ""
         tech_bits = [b for b in (str(spec.get("title", "")).strip() if plain_title else "", tech_note) if b]
         tech_html = (
             f'<details class="viz-technical"><summary>Technical framing</summary><p class="muted">{esc(" — ".join(tech_bits))}</p></details>'
-            if tech_bits
-            else ""
+            if tech_bits else ""
         )
         return (
             f'<figure class="viz-chart">{caption}{read_html}{svg}{take_html}{legend}{table}'
             f'<p class="viz-src muted">Numbers from {src_html}</p>{tech_html}</figure>'
         )
-
     note = f' <span class="muted">{esc(tech_note)}</span>' if tech_note else ""
     return (
         f'<figure class="viz-chart"><figcaption><strong>{esc(spec.get("title", ""))}</strong>{note}</figcaption>'
-        f"{svg}{legend}{table}"
+        f'{axes}{svg}{legend}{table}'
         f'<p class="viz-src muted">Numbers from {src_html}</p></figure>'
     )
 
