@@ -28,3 +28,16 @@ Diagnostics should become standard infrastructure. They are how future agents av
   the random control was not exact realized-delta-norm matched, so direct J
   specificity remains provisional; the transport failure and adjacency failure
   are unaffected.
+
+- [qwen35_4b_context_local_jacobian_clamp](../../experiments/qwen35_4b_context_local_jacobian_clamp/reports/report.md)
+  (unclaimed while the ledger re-grade is open; terminal `INVALID_CONTROL`): the
+  corrected early selected-token clamp produced the full semantic-transport
+  signature on 48 untouched mappings. All-24 J changed direct key and mapped
+  digit on 48/48; pair J changed the digit on 47/48; wrong-donor J changed 48/48
+  to its own digit; concept logit lens and random changed 0/48. Full donors also
+  exposed a sharp causal window: four bands through 16–20 were 24/24, bands
+  20–24 and 24–28 were inert. Yet one of 96 random rows missed the frozen
+  realized-norm tolerance (1.155e-5 > 1e-5), and bf16 rounding left up to 5.7%
+  realized J-span projection despite pre-cast orthogonality. The result cannot be
+  promoted. It sharply prioritizes a fresh quantization-aware control
+  replication and keeps native-thinking continuation gated.

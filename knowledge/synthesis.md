@@ -179,6 +179,17 @@ use a true context-local set clamp, exact realized-delta-norm controls, and a co
 can license thought-prefix valuation or capability claims. See
 [qwen35_4b_jacobian_value_transport](../experiments/qwen35_4b_jacobian_value_transport/reports/report.md).
 
+Its context-local follow-up produced the opposite mechanistic signature but is not yet promotable. At the
+earlier selected-key token, all-24 J clamping changed 48/48 direct keys **and 48/48 separately mapped digits**;
+pair-only J reached 47/48 consequences, wrong-donor J produced its own digit 48/48, and logit-lens/random
+controls produced 0/48. Full-state donors localized transport to early/middle bands and became inert after
+layer 20. This is the first evidence here consistent with a compact causally consumed concept state rather
+than an output motor. But the frozen verdict is `INVALID_CONTROL`: one of 96 random rows had realized-norm
+error 1.155e-5 versus the 1e-5 bar, and bf16 rounding introduced up to 5.7% realized J-span projection.
+Therefore native-thought continuation remains gated. Replicate on fresh mappings with simultaneous
+post-quantization norm and span-orthogonality constraints. See
+[qwen35_4b_context_local_jacobian_clamp](../experiments/qwen35_4b_context_local_jacobian_clamp/reports/report.md).
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.

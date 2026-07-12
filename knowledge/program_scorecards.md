@@ -79,10 +79,10 @@ For evidence-linked durable claims, use [claims/index.md](claims/index.md).
 ## Interpretability And Diagnostics
 
 - Program: [charter](../research_programs/interpretability_and_diagnostics/charter.md)
-- Current read: diagnostics are useful when they explain why a mechanism transfers or fails, not when they are post-hoc decoration. The Jacobian result adds a sharper ladder: a representation can be decodable and even locally writable while remaining causally unavailable to downstream computation.
-- Best next experiment: context-local, set-to-target Jacobian clamping at represented prompt positions with exact per-example perturbation-norm controls; require a separately computed consequence to move before native-thinking work.
-- Strong anchors: `qwen_structural_compiler_attribution_ablation`, `qwen35_4b_opsd_pressure_locality_audit`, `qwen35_4b_probe_to_prompt`, `qwen35_4b_jacobian_value_transport`.
-- Avoid repeating: probes that do not change the next experiment, and next-token writing tests presented as evidence of reasoning transport.
+- Current read: diagnostics are useful when they explain why a mechanism transfers or fails, not when they are post-hoc decoration. Late answer-position J coordinates can be writable yet non-transporting; early context-local clamps provisionally transport perfectly through a new mapping, but the first confirmation is formally invalid because one exact control row missed tolerance.
+- Best next experiment: fresh fixed-band replication of `qwen35_4b_context_local_jacobian_clamp` with quantization-aware random controls constrained on both realized norm and realized J-span projection. Do not enter native thoughts first.
+- Strong anchors: `qwen_structural_compiler_attribution_ablation`, `qwen35_4b_probe_to_prompt`, `qwen35_4b_jacobian_value_transport`, `qwen35_4b_context_local_jacobian_clamp`.
+- Avoid repeating: probes that do not change the next experiment, next-token writing tests presented as reasoning transport, or promoting a perfect point estimate past a failed control gate.
 - Evidence that advances the program: a diagnostic predicts which variants will fail before the final metric is observed.
 
 ## Reliability And Safety
