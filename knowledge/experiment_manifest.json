@@ -5207,6 +5207,48 @@
   },
   {
     "file_counts": {
+      ".json": 2,
+      ".md": 7,
+      ".py": 19,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_verifier_conditioned_recovery_bank",
+    "path": "experiments/qwen35_4b_verifier_conditioned_recovery_bank",
+    "primary_readme": "experiments/qwen35_4b_verifier_conditioned_recovery_bank/README.md",
+    "primary_report": "experiments/qwen35_4b_verifier_conditioned_recovery_bank/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation",
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "posttraining_and_adaptation",
+      "process_control_and_tool_use",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "Can Qwen/Qwen3.5-4B learn a transferable coding-agent recovery policy when supervision is balanced at conditional state\u2192action transitions\u2014especially rejected-patch\u2192changed-patch and failed-test\u2192diagnose/revise\u2014rather than only at global INSPECT/PATCH/VERIFY/COMMIT totals?",
+    "tags": [
+      "curriculum",
+      "latent-state",
+      "policy",
+      "small-model",
+      "verification"
+    ],
+    "title": "Verifier-conditioned recovery banking curriculum",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 31,
+    "total_size_bytes": 306033
+  },
+  {
+    "file_counts": {
       ".json": 29,
       ".jsonl": 17,
       ".log": 5,

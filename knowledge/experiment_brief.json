@@ -2,305 +2,6 @@
  "note": "Plain-language practitioner briefs shown above the fold on each experiment page (verdict + the-one-idea/question/finding/why-it-matters + KPI numbers + per-chart how-to-read/takeaway). Authored per experiment from its own README/report and verified chart specs under a strict no-jargon ban-list; all jargon-precise detail stays below the fold. Regenerate with scripts/enrichment/generate_briefs.workflow.js (see docs/site_maintenance.md).",
  "generated_on": "2026-07-05",
  "experiments": {
-  "qwen35_4b_commit_slot_semantic_power_replication": {
-   "verdict_tag": "A properly powered answer-slot replication is frozen",
-   "concept_primer": "The previous answer-slot study showed a small benefit from ordered reasoning, but it was concentrated in too few tasks. This study keeps the exact same model, 1,024-step limit, answer syntax, and comparisons while using enough fresh tasks to distinguish a broad effect from a lucky cluster.",
-   "plain_question": "Does ordered reasoning reliably improve the model's fixed answer-slot choice over no generated reasoning and the same reasoning tokens in shuffled order?",
-   "plain_answer": "No model result is open yet. The design reserves 113 fresh tasks for the first decision and another 113 for an untouched check, the calculated amount needed for about 80% directional power at the previous task-level effect.",
-   "why_it_matters": "The earlier study fixed formatting but could not justify examining the model's internal promise signal. This larger replication requires the gain to survive task-level uncertainty and spread across at least eight answer types before that internal work can resume.",
-   "verdict_tone": "neutral",
-   "key_numbers": [
-    {
-     "label": "Fresh procedural tasks",
-     "value": "322/322",
-     "sub": "all unique, exact-depth, and disjoint from five parent studies"
-    },
-    {
-     "label": "Tasks per answer-slot decision",
-     "value": "113",
-     "sub": "339 independent reasoning paths across three paths per task"
-    },
-    {
-     "label": "Approximate directional power",
-     "value": "80.3%",
-     "sub": "planning only; the actual gate resamples whole tasks"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Fresh tasks are reserved before each stage opens",
-     "chart_read": "The two tall bars are equally powered answer-slot qualification and untouched confirmation sets. The two smaller sets stay sealed for later internal-signal learning and testing.",
-     "chart_takeaway": "The original near miss cannot choose the result, and neither new answer-slot stage can borrow tasks from the other."
-    }
-   ]
-  },
-  "qwen35_4b_commit_slot_jacobian_value_transport": {
-   "verdict_tag": "The answer slot worked, but the reasoning gain was too clustered",
-   "concept_primer": "The model kept restarting analysis when earlier tests inserted only a stop marker. This study added fixed answer syntax without adding the answer, restricted the next choice to 12 public words, and checked whether real reasoning helped more than no generated reasoning or the same reasoning tokens in shuffled order.",
-   "plain_question": "Can a fixed answer slot reveal a correct choice already supported by the model's unfinished reasoning, and can one compact internal signal later make weak choices better?",
-   "plain_answer": "Not reliably enough. At the 1,024-step limit, real reasoning found 15 correct choices out of 48, versus the equivalent of 12 for an immediate slot and 11 after shuffling the same reasoning tokens. But correct and incorrect runs coexisted on only five tasks, one short of the frozen six-task requirement, and task-level uncertainty still included no gain.",
-   "why_it_matters": "Fixed syntax solved most of the output-format failure: on 41 of 48 long runs, one of the 12 answer words was already the model's unrestricted next choice. The remaining bottleneck is semantic and uneven across tasks, so the internal-signal test correctly stayed sealed pending a larger fresh replication.",
-   "verdict_tone": "negative",
-   "key_numbers": [
-    {
-     "label": "Correct choices after 1,024 steps",
-     "value": "15/48",
-     "sub": "31.2%, versus 25.0% immediate and 22.9% shuffled"
-    },
-    {
-     "label": "Tasks with mixed outcomes",
-     "value": "5/16",
-     "sub": "the frozen gate required six, so no limit was selected"
-    },
-    {
-     "label": "Unrestricted next token was an answer word",
-     "value": "41/48",
-     "sub": "fixed syntax repaired answer mode without relying mainly on the mask"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Only the longest real reasoning beat both comparisons",
-     "chart_read": "For each reasoning limit, compare real ordered reasoning with an immediate answer slot and with the same reasoning tokens shuffled. The longest real bar reaches 31.2%, but the task-variation requirement still failed.",
-     "chart_takeaway": "The 1,024-step hint is promising but clustered; it cannot open the internal-signal test until a larger fresh study confirms it."
-    },
-    {
-     "index": 1,
-     "chart_plain_title": "Fixed syntax repaired answer mode, not semantic reliability",
-     "chart_read": "The two tall bars show that answer words held most probability and were usually the unrestricted next token. The short bar shows that free-form output after only a stop marker still rarely used the required format.",
-     "chart_takeaway": "Adding the slot solved formatting, while choosing the right answer remained the limiting problem."
-    }
-   ]
-  },
-  "qwen35_4b_forced_commit_jacobian_value_transport": {
-   "verdict_tag": "A stop token did not make the model commit to an answer",
-   "concept_primer": "The model kept reasoning past every natural finishing limit. This study makes stopping an explicit controller action, checks whether the resulting answers are usable, and only then looks for an internal signal that separates promising from weak unfinished work.",
-   "plain_question": "If a fixed budget controller tells the model to stop reasoning and answer now, can an internal promise signal identify and improve the unfinished thoughts that will answer correctly?",
-   "plain_answer": "No. After the controller inserted the stop marker, only 6 to 9 of 48 answers used the required format, just one was correct at each limit, and most responses spent all 16 answer tokens restarting analysis. No limit was selected, so the internal-value test stayed sealed.",
-   "why_it_matters": "A mode delimiter is not the same as an answer slot. Before looking for an internal promise signal, the controller must provide fixed output syntax without supplying the answer itself; otherwise formatting failure overwhelms the science.",
-   "verdict_tone": "negative",
-   "key_numbers": [
-    {
-     "label": "Best forced-answer format rate",
-     "value": "9/48",
-     "sub": "18.8% at the 1,024-step limit versus a 90% gate"
-    },
-    {
-     "label": "Correct forced answers",
-     "value": "1/48",
-     "sub": "the same 2.1% at every reasoning limit"
-    },
-    {
-     "label": "Answers that exhausted their answer budget",
-     "value": "41–46/48",
-     "sub": "the model usually restarted analysis after the stop marker"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Forced answers rarely used the slot and usually hit the limit",
-     "chart_read": "For each reasoning limit, the short bars are usable-format and correct-answer rates; the tall bar is the share that consumed all 16 answer tokens.",
-     "chart_takeaway": "Longer thinking did not repair the emission interface. The stop token alone usually caused more analysis, not a concise answer."
-    }
-   ]
-  },
-  "qwen35_4b_native_thought_seam_budget_ladder": {
-   "verdict_tag": "No natural finish even after 1,024 reasoning steps",
-   "concept_primer": "The previous study stopped before its main question because every model response was still reasoning when the 160-token limit arrived. This follow-up first finds a limit at which the model can finish naturally, then checks that choice on new tasks.",
-   "plain_question": "What is the smallest reasoning allowance that lets the model naturally finish and give a usable answer often enough for the next internal-state experiment?",
-   "plain_answer": "None of the three allowances worked. All 48 responses were still reasoning when the 1,024-step ceiling arrived, so the study selected no allowance and correctly left its untouched check unopened.",
-   "why_it_matters": "The search for an internal promise signal still has not failed—the model never reached the answer boundary needed to test it. The next test must treat an external stop command as the actual deployed method, not pretend the model chose to finish naturally.",
-   "verdict_tone": "negative",
-   "key_numbers": [
-    {
-     "label": "Responses still reasoning at 1,024",
-     "value": "48/48",
-     "sub": "every selection response used the full allowance"
-    },
-    {
-     "label": "Naturally finished responses",
-     "value": "0/48",
-     "sub": "at 256, 512, and 1,024 steps alike"
-    },
-    {
-     "label": "Untouched confirmation tasks opened",
-     "value": "0/24",
-     "sub": "no allowance passed selection, so confirmation stayed sealed"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Every reasoning allowance ended at its ceiling",
-     "chart_read": "For each allowance, the finish bar is zero and the ceiling-contact bar is full height. The same 48 sampled paths are viewed at each limit.",
-     "chart_takeaway": "The model never reached a natural answer boundary, so no allowance was selected and no internal-value test was licensed."
-    }
-   ]
-  },
-  "qwen35_4b_native_thought_jacobian_value_transport": {
-   "verdict_tag": "Stopped before value: every trace was still thinking at the cap",
-   "concept_primer": "A prior experiment proved that an early internal word state can be replaced and then used in a later lookup. This study asks whether one internal 'this path is promising' quantity can be found and changed while the model is naturally thinking.",
-   "plain_question": "Can we recognize a promising thought prefix from the model's internal state and make a weak prefix finish correctly by changing only that promise signal?",
-   "plain_answer": "This run could not test it. All 48 traces reached the 160-token reasoning limit without naturally ending, so none produced a final answer and no prefix-value model was fit.",
-   "why_it_matters": "The failure cleanly locates the next bottleneck: first earn a naturally closing reasoning budget, then measure internal value. Treating cap-bound prefixes as completed thoughts would score states the model never reached.",
-   "verdict_tone": "negative",
-   "key_numbers": [
-    {
-     "label": "Traces that hit the thought cap",
-     "value": "48/48",
-     "sub": "every trace used all 160 allowed reasoning tokens"
-    },
-    {
-     "label": "Naturally closed traces",
-     "value": "0/48",
-     "sub": "the required answer seam was never reached"
-    },
-    {
-     "label": "Mixed-success tasks",
-     "value": "0/16",
-     "sub": "value fitting required at least six and was canceled"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "The model never reached the natural answer seam",
-     "chart_read": "The first three bars show shares of traces that naturally closed, parsed, or answered correctly. The last shows contact with the reasoning cap.",
-     "chart_takeaway": "Every trace was still reasoning at 160 tokens, so the study correctly stopped before learning or editing an internal value signal."
-    }
-   ]
-  },
-  "qwen35_4b_jacobian_transport_control_replication": {
-   "verdict_tag": "Fresh exact-control replication confirms causal internal state transport",
-   "concept_primer": "A prior internal edit changed every fresh lookup answer, but one extremely strict comparison row invalidated that result. This study started over on new tables, made every rounded comparison exact, and then opened the answers once.",
-   "plain_question": "Does the internal reasoning edit still work when every random comparison is equally large and stays outside the edited word space after numerical rounding?",
-   "plain_answer": "Yes. The frozen internal edit changed all 48 replacement words and all 48 separately computed lookup values. Two independent equally large random edits changed none, and an edit copied from a different word reliably produced that different word's value.",
-   "why_it_matters": "This confirms that the edited early state is used by a later computation, not merely read out as the next word. The edit is still told which target state to copy, so it unlocks a native-thinking controller experiment rather than proving a capability gain.",
-   "verdict_tone": "positive",
-   "key_numbers": [
-    {
-     "label": "Fresh mapped answers changed",
-     "value": "48/48",
-     "sub": "the internal edit changed every separately computed lookup value"
-    },
-    {
-     "label": "Two independent random comparisons",
-     "value": "0/48",
-     "sub": "neither equally large rounded control changed the target answer"
-    },
-    {
-     "label": "Wrong copied state produced its own value",
-     "value": "48/48",
-     "sub": "the effect follows donor identity instead of generic disruption"
-    },
-    {
-     "label": "Valid rounded control layers",
-     "value": "1,440/1,440",
-     "sub": "480 calibration plus 960 untouched-confirmation comparisons"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "The internal state edit changes both the word and its later lookup value",
-     "chart_read": "Each pair of bars shows how often an intervention produced the requested replacement word and the separately computed mapped value. The two random controls are independent.",
-     "chart_takeaway": "The full internal state and compact coordinates change both outputs; ordinary output directions and two equally large random edits do nothing."
-    },
-    {
-     "index": 1,
-     "chart_plain_title": "The edit reverses the model's preference while controls stay at baseline",
-     "chart_read": "Positive values favor the replacement and negative values favor the original, shown for the direct word and mapped value.",
-     "chart_takeaway": "The compact internal edit crosses both decision boundaries; both random controls and the ordinary output-direction edit remain strongly original."
-    }
-   ]
-  },
-  "qwen35_4b_context_local_jacobian_clamp": {
-   "verdict_tag": "Perfect causal signal; one exact control row invalidates the claim",
-   "concept_primer": "The first study could make the model say a replacement word, but the model did not reason from it. This follow-up edits the earlier place where that word is represented and checks whether a later lookup answer changes.",
-   "plain_question": "Can an internal edit change what the model computes from a chosen key, instead of only changing the next word it says?",
-   "plain_answer": "Provisionally yes, but formally not yet. The corrected early edit changed every fresh mapped answer, while equally large random edits changed none. One of 96 random-control rows missed an extremely strict size match by a tiny amount, so the frozen rules invalidate the result until a fresh replication.",
-   "why_it_matters": "This is the first evidence here that a compact internal word state can be changed and then used in a different computation. Honoring the failed control prevents an exciting near-perfect result from outrunning its measurement.",
-   "verdict_tone": "mixed",
-   "key_numbers": [
-    {
-     "label": "Fresh mapped answers changed",
-     "value": "48/48",
-     "sub": "the early internal edit recomputed every target lookup value"
-    },
-    {
-     "label": "Equally large random edits",
-     "value": "0/48",
-     "sub": "none changed the mapped answer"
-    },
-    {
-     "label": "Exact control rows outside tolerance",
-     "value": "1/96",
-     "sub": "enough to force the formal invalid-control verdict"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "The early edit changes both the word and its mapped answer",
-     "chart_read": "Each pair of bars shows how often an edit produced the intended replacement word and the separate lookup value. Taller is stronger; the ordinary output-direction and random edits are controls.",
-     "chart_takeaway": "The full internal state and compact early word coordinates nearly or fully saturate both outputs; ordinary output directions and random edits do nothing."
-    },
-    {
-     "index": 1,
-     "chart_plain_title": "The edit flips the model's preference, not just the final choice",
-     "chart_read": "Positive bars favor the replacement and negative bars favor the original. Direct word and mapped answer are shown separately.",
-     "chart_takeaway": "The compact early edit moves both scores from strongly original to strongly replacement; random and ordinary output controls remain at baseline."
-    },
-    {
-     "index": 2,
-     "chart_plain_title": "The selected key matters early, then becomes too late to replace",
-     "chart_read": "Each point is the share of selection items redirected when the complete internal state is replaced over one five-layer window.",
-     "chart_takeaway": "Four early windows redirect every word and lookup answer; the two late windows are inert, locating when the key is consumed."
-    }
-   ]
-  },
-  "qwen35_4b_jacobian_value_transport": {
-   "verdict_tag": "Can change the word, not the reasoning",
-   "concept_primer": "Imagine knowing that a clue is written somewhere in a machine, but not knowing whether the machine can actually use it. This experiment follows the connection from an internal clue to the later answer, then carefully changes that connection.",
-   "plain_question": "If we change an internal clue, will the model actually use the changed clue when it computes a different answer?",
-   "plain_answer": "Not with this method. A late change made the model say the replacement word three quarters of the time, but the model never used that replacement to recompute a simple mapped answer.",
-   "why_it_matters": "Making a model say a chosen word is much weaker than changing what it reasons from. Future work must prove that an internal edit survives into a new consequence before treating it as a route to better capabilities.",
-   "verdict_tone": "negative",
-   "key_numbers": [
-    {
-     "label": "Direct replacement word",
-     "value": "18/24",
-     "sub": "the strongest late internal edit changed 75% of direct reports"
-    },
-    {
-     "label": "Recomputed mapped answer",
-     "value": "0/24",
-     "sub": "the same edit never changed the downstream consequence"
-    },
-    {
-     "label": "Ordinary output-direction control",
-     "value": "5/24",
-     "sub": "also changed some direct words but no downstream consequences"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "The edit changes an imminent word, not its consequence",
-     "chart_read": "Each line shows how often an internal edit produced the intended replacement as the edit moved through five model depths. Higher is a stronger effect.",
-     "chart_takeaway": "The direct word jumps to 75% only near the output, while the separately computed mapped answer stays at zero everywhere."
-    },
-    {
-     "index": 1,
-     "chart_plain_title": "A stronger edit crosses the word boundary only",
-     "chart_read": "Values above zero favor the replacement; values below zero favor the original. The edit strength increases from left to right.",
-     "chart_takeaway": "The direct word steadily flips toward the replacement, but the mapped answer does not move at all."
-    }
-   ]
-  },
   "adaptive_cognitive_kernel": {
    "verdict_tag": "Self-rewiring runtime ties the plain baseline",
    "concept_primer": "Imagine a calculator that rewrites its own wiring for each instruction in a program, versus an ordinary fixed calculator. This test asks whether the self-rewiring one follows long instruction lists better.",
@@ -2005,6 +1706,78 @@
    ],
    "charts": []
   },
+  "qwen35_4b_commit_slot_jacobian_value_transport": {
+   "verdict_tag": "The answer slot worked, but the reasoning gain was too clustered",
+   "concept_primer": "The model kept restarting analysis when earlier tests inserted only a stop marker. This study added fixed answer syntax without adding the answer, restricted the next choice to 12 public words, and checked whether real reasoning helped more than no generated reasoning or the same reasoning tokens in shuffled order.",
+   "plain_question": "Can a fixed answer slot reveal a correct choice already supported by the model's unfinished reasoning, and can one compact internal signal later make weak choices better?",
+   "plain_answer": "Not reliably enough. At the 1,024-step limit, real reasoning found 15 correct choices out of 48, versus the equivalent of 12 for an immediate slot and 11 after shuffling the same reasoning tokens. But correct and incorrect runs coexisted on only five tasks, one short of the frozen six-task requirement, and task-level uncertainty still included no gain.",
+   "why_it_matters": "Fixed syntax solved most of the output-format failure: on 41 of 48 long runs, one of the 12 answer words was already the model's unrestricted next choice. The remaining bottleneck is semantic and uneven across tasks, so the internal-signal test correctly stayed sealed pending a larger fresh replication.",
+   "verdict_tone": "negative",
+   "key_numbers": [
+    {
+     "label": "Correct choices after 1,024 steps",
+     "value": "15/48",
+     "sub": "31.2%, versus 25.0% immediate and 22.9% shuffled"
+    },
+    {
+     "label": "Tasks with mixed outcomes",
+     "value": "5/16",
+     "sub": "the frozen gate required six, so no limit was selected"
+    },
+    {
+     "label": "Unrestricted next token was an answer word",
+     "value": "41/48",
+     "sub": "fixed syntax repaired answer mode without relying mainly on the mask"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Only the longest real reasoning beat both comparisons",
+     "chart_read": "For each reasoning limit, compare real ordered reasoning with an immediate answer slot and with the same reasoning tokens shuffled. The longest real bar reaches 31.2%, but the task-variation requirement still failed.",
+     "chart_takeaway": "The 1,024-step hint is promising but clustered; it cannot open the internal-signal test until a larger fresh study confirms it."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "Fixed syntax repaired answer mode, not semantic reliability",
+     "chart_read": "The two tall bars show that answer words held most probability and were usually the unrestricted next token. The short bar shows that free-form output after only a stop marker still rarely used the required format.",
+     "chart_takeaway": "Adding the slot solved formatting, while choosing the right answer remained the limiting problem."
+    }
+   ]
+  },
+  "qwen35_4b_commit_slot_semantic_power_replication": {
+   "verdict_tag": "A properly powered answer-slot replication is frozen",
+   "concept_primer": "The previous answer-slot study showed a small benefit from ordered reasoning, but it was concentrated in too few tasks. This study keeps the exact same model, 1,024-step limit, answer syntax, and comparisons while using enough fresh tasks to distinguish a broad effect from a lucky cluster.",
+   "plain_question": "Does ordered reasoning reliably improve the model's fixed answer-slot choice over no generated reasoning and the same reasoning tokens in shuffled order?",
+   "plain_answer": "No model result is open yet. The design reserves 113 fresh tasks for the first decision and another 113 for an untouched check, the calculated amount needed for about 80% directional power at the previous task-level effect.",
+   "why_it_matters": "The earlier study fixed formatting but could not justify examining the model's internal promise signal. This larger replication requires the gain to survive task-level uncertainty and spread across at least eight answer types before that internal work can resume.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Fresh procedural tasks",
+     "value": "322/322",
+     "sub": "all unique, exact-depth, and disjoint from five parent studies"
+    },
+    {
+     "label": "Tasks per answer-slot decision",
+     "value": "113",
+     "sub": "339 independent reasoning paths across three paths per task"
+    },
+    {
+     "label": "Approximate directional power",
+     "value": "80.3%",
+     "sub": "planning only; the actual gate resamples whole tasks"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Fresh tasks are reserved before each stage opens",
+     "chart_read": "The two tall bars are equally powered answer-slot qualification and untouched confirmation sets. The two smaller sets stay sealed for later internal-signal learning and testing.",
+     "chart_takeaway": "The original near miss cannot choose the result, and neither new answer-slot stage can borrow tasks from the other."
+    }
+   ]
+  },
   "qwen35_4b_confidence_guided_compute": {
    "verdict_tag": "Trust the confident sample, not the common one",
    "concept_primer": "A common way to boost a model is to sample many answers and take a majority vote ('sample-more'). This asks whether the model's own internal confidence can do better -- picking which of its many tries to trust, and knowing when trying more is hopeless.",
@@ -2123,6 +1896,51 @@
      "chart_plain_title": "Nothing helps the model invent an answer on its own",
      "chart_read": "Two bars, the general model and the trained specialist, both trying to propose an answer from scratch with no options given. Higher is better; both sit near the floor.",
      "chart_takeaway": "Both bars barely rise off the ground: no procedure, worked examples, or trained specialist helps the model come up with an answer by itself."
+    }
+   ]
+  },
+  "qwen35_4b_context_local_jacobian_clamp": {
+   "verdict_tag": "Perfect causal signal; one exact control row invalidates the claim",
+   "concept_primer": "The first study could make the model say a replacement word, but the model did not reason from it. This follow-up edits the earlier place where that word is represented and checks whether a later lookup answer changes.",
+   "plain_question": "Can an internal edit change what the model computes from a chosen key, instead of only changing the next word it says?",
+   "plain_answer": "Provisionally yes, but formally not yet. The corrected early edit changed every fresh mapped answer, while equally large random edits changed none. One of 96 random-control rows missed an extremely strict size match by a tiny amount, so the frozen rules invalidate the result until a fresh replication.",
+   "why_it_matters": "This is the first evidence here that a compact internal word state can be changed and then used in a different computation. Honoring the failed control prevents an exciting near-perfect result from outrunning its measurement.",
+   "verdict_tone": "mixed",
+   "key_numbers": [
+    {
+     "label": "Fresh mapped answers changed",
+     "value": "48/48",
+     "sub": "the early internal edit recomputed every target lookup value"
+    },
+    {
+     "label": "Equally large random edits",
+     "value": "0/48",
+     "sub": "none changed the mapped answer"
+    },
+    {
+     "label": "Exact control rows outside tolerance",
+     "value": "1/96",
+     "sub": "enough to force the formal invalid-control verdict"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "The early edit changes both the word and its mapped answer",
+     "chart_read": "Each pair of bars shows how often an edit produced the intended replacement word and the separate lookup value. Taller is stronger; the ordinary output-direction and random edits are controls.",
+     "chart_takeaway": "The full internal state and compact early word coordinates nearly or fully saturate both outputs; ordinary output directions and random edits do nothing."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "The edit flips the model's preference, not just the final choice",
+     "chart_read": "Positive bars favor the replacement and negative bars favor the original. Direct word and mapped answer are shown separately.",
+     "chart_takeaway": "The compact early edit moves both scores from strongly original to strongly replacement; random and ordinary output controls remain at baseline."
+    },
+    {
+     "index": 2,
+     "chart_plain_title": "The selected key matters early, then becomes too late to replace",
+     "chart_read": "Each point is the share of selection items redirected when the complete internal state is replaced over one five-layer window.",
+     "chart_takeaway": "Four early windows redirect every word and lookup answer; the two late windows are inert, locating when the key is consumed."
     }
    ]
   },
@@ -3194,6 +3012,39 @@
     }
    ]
   },
+  "qwen35_4b_forced_commit_jacobian_value_transport": {
+   "verdict_tag": "A stop token did not make the model commit to an answer",
+   "concept_primer": "The model kept reasoning past every natural finishing limit. This study makes stopping an explicit controller action, checks whether the resulting answers are usable, and only then looks for an internal signal that separates promising from weak unfinished work.",
+   "plain_question": "If a fixed budget controller tells the model to stop reasoning and answer now, can an internal promise signal identify and improve the unfinished thoughts that will answer correctly?",
+   "plain_answer": "No. After the controller inserted the stop marker, only 6 to 9 of 48 answers used the required format, just one was correct at each limit, and most responses spent all 16 answer tokens restarting analysis. No limit was selected, so the internal-value test stayed sealed.",
+   "why_it_matters": "A mode delimiter is not the same as an answer slot. Before looking for an internal promise signal, the controller must provide fixed output syntax without supplying the answer itself; otherwise formatting failure overwhelms the science.",
+   "verdict_tone": "negative",
+   "key_numbers": [
+    {
+     "label": "Best forced-answer format rate",
+     "value": "9/48",
+     "sub": "18.8% at the 1,024-step limit versus a 90% gate"
+    },
+    {
+     "label": "Correct forced answers",
+     "value": "1/48",
+     "sub": "the same 2.1% at every reasoning limit"
+    },
+    {
+     "label": "Answers that exhausted their answer budget",
+     "value": "41–46/48",
+     "sub": "the model usually restarted analysis after the stop marker"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Forced answers rarely used the slot and usually hit the limit",
+     "chart_read": "For each reasoning limit, the short bars are usable-format and correct-answer rates; the tall bar is the share that consumed all 16 answer tokens.",
+     "chart_takeaway": "Longer thinking did not repair the emission interface. The stop token alone usually caused more analysis, not a concise answer."
+    }
+   ]
+  },
   "qwen35_4b_gauntlet_breadth_round1": {
    "verdict_tag": "Broad self-practice moved the held-out benchmark",
    "concept_primer": "We built a private training playground of twelve invented task worlds — tracking caravan cargo, probing hidden glyph machines, fixing tiny programs, navigating burrows — each with an automatic grader. The model practiced on its own verified successes from ten of the worlds, and we tested it on the two worlds it never practiced plus a completely separate held-out benchmark it has never seen any content from.",
@@ -3575,6 +3426,89 @@
      "chart_plain_title": "Training loss falls fast then levels off",
      "chart_read": "The line tracks training error as teaching progresses from step 1 to 80; lower means the model is fitting the lesson format better.",
      "chart_takeaway": "The line drops sharply and then flattens around a low level, confirming the model did learn the format, so the zero score is not a fitting failure."
+    }
+   ]
+  },
+  "qwen35_4b_jacobian_transport_control_replication": {
+   "verdict_tag": "Fresh exact-control replication confirms causal internal state transport",
+   "concept_primer": "A prior internal edit changed every fresh lookup answer, but one extremely strict comparison row invalidated that result. This study started over on new tables, made every rounded comparison exact, and then opened the answers once.",
+   "plain_question": "Does the internal reasoning edit still work when every random comparison is equally large and stays outside the edited word space after numerical rounding?",
+   "plain_answer": "Yes. The frozen internal edit changed all 48 replacement words and all 48 separately computed lookup values. Two independent equally large random edits changed none, and an edit copied from a different word reliably produced that different word's value.",
+   "why_it_matters": "This confirms that the edited early state is used by a later computation, not merely read out as the next word. The edit is still told which target state to copy, so it unlocks a native-thinking controller experiment rather than proving a capability gain.",
+   "verdict_tone": "positive",
+   "key_numbers": [
+    {
+     "label": "Fresh mapped answers changed",
+     "value": "48/48",
+     "sub": "the internal edit changed every separately computed lookup value"
+    },
+    {
+     "label": "Two independent random comparisons",
+     "value": "0/48",
+     "sub": "neither equally large rounded control changed the target answer"
+    },
+    {
+     "label": "Wrong copied state produced its own value",
+     "value": "48/48",
+     "sub": "the effect follows donor identity instead of generic disruption"
+    },
+    {
+     "label": "Valid rounded control layers",
+     "value": "1,440/1,440",
+     "sub": "480 calibration plus 960 untouched-confirmation comparisons"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "The internal state edit changes both the word and its later lookup value",
+     "chart_read": "Each pair of bars shows how often an intervention produced the requested replacement word and the separately computed mapped value. The two random controls are independent.",
+     "chart_takeaway": "The full internal state and compact coordinates change both outputs; ordinary output directions and two equally large random edits do nothing."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "The edit reverses the model's preference while controls stay at baseline",
+     "chart_read": "Positive values favor the replacement and negative values favor the original, shown for the direct word and mapped value.",
+     "chart_takeaway": "The compact internal edit crosses both decision boundaries; both random controls and the ordinary output-direction edit remain strongly original."
+    }
+   ]
+  },
+  "qwen35_4b_jacobian_value_transport": {
+   "verdict_tag": "Can change the word, not the reasoning",
+   "concept_primer": "Imagine knowing that a clue is written somewhere in a machine, but not knowing whether the machine can actually use it. This experiment follows the connection from an internal clue to the later answer, then carefully changes that connection.",
+   "plain_question": "If we change an internal clue, will the model actually use the changed clue when it computes a different answer?",
+   "plain_answer": "Not with this method. A late change made the model say the replacement word three quarters of the time, but the model never used that replacement to recompute a simple mapped answer.",
+   "why_it_matters": "Making a model say a chosen word is much weaker than changing what it reasons from. Future work must prove that an internal edit survives into a new consequence before treating it as a route to better capabilities.",
+   "verdict_tone": "negative",
+   "key_numbers": [
+    {
+     "label": "Direct replacement word",
+     "value": "18/24",
+     "sub": "the strongest late internal edit changed 75% of direct reports"
+    },
+    {
+     "label": "Recomputed mapped answer",
+     "value": "0/24",
+     "sub": "the same edit never changed the downstream consequence"
+    },
+    {
+     "label": "Ordinary output-direction control",
+     "value": "5/24",
+     "sub": "also changed some direct words but no downstream consequences"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "The edit changes an imminent word, not its consequence",
+     "chart_read": "Each line shows how often an internal edit produced the intended replacement as the edit moved through five model depths. Higher is a stronger effect.",
+     "chart_takeaway": "The direct word jumps to 75% only near the output, while the separately computed mapped answer stays at zero everywhere."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "A stronger edit crosses the word boundary only",
+     "chart_read": "Values above zero favor the replacement; values below zero favor the original. The edit strength increases from left to right.",
+     "chart_takeaway": "The direct word steadily flips toward the replacement, but the mapped answer does not move at all."
     }
    ]
   },
@@ -4035,6 +3969,72 @@
      "chart_plain_title": "The worked-out steps genuinely guide the answer",
      "chart_read": "Bars show how often the model gets the whole program right when its prompt has correct worked-out steps, no steps, or scrambled steps; taller is better.",
      "chart_takeaway": "Accuracy drops from near-perfect to about a third once the steps are scrambled, proving the model reads the steps rather than treating them as decoration."
+    }
+   ]
+  },
+  "qwen35_4b_native_thought_jacobian_value_transport": {
+   "verdict_tag": "Stopped before value: every trace was still thinking at the cap",
+   "concept_primer": "A prior experiment proved that an early internal word state can be replaced and then used in a later lookup. This study asks whether one internal 'this path is promising' quantity can be found and changed while the model is naturally thinking.",
+   "plain_question": "Can we recognize a promising thought prefix from the model's internal state and make a weak prefix finish correctly by changing only that promise signal?",
+   "plain_answer": "This run could not test it. All 48 traces reached the 160-token reasoning limit without naturally ending, so none produced a final answer and no prefix-value model was fit.",
+   "why_it_matters": "The failure cleanly locates the next bottleneck: first earn a naturally closing reasoning budget, then measure internal value. Treating cap-bound prefixes as completed thoughts would score states the model never reached.",
+   "verdict_tone": "negative",
+   "key_numbers": [
+    {
+     "label": "Traces that hit the thought cap",
+     "value": "48/48",
+     "sub": "every trace used all 160 allowed reasoning tokens"
+    },
+    {
+     "label": "Naturally closed traces",
+     "value": "0/48",
+     "sub": "the required answer seam was never reached"
+    },
+    {
+     "label": "Mixed-success tasks",
+     "value": "0/16",
+     "sub": "value fitting required at least six and was canceled"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "The model never reached the natural answer seam",
+     "chart_read": "The first three bars show shares of traces that naturally closed, parsed, or answered correctly. The last shows contact with the reasoning cap.",
+     "chart_takeaway": "Every trace was still reasoning at 160 tokens, so the study correctly stopped before learning or editing an internal value signal."
+    }
+   ]
+  },
+  "qwen35_4b_native_thought_seam_budget_ladder": {
+   "verdict_tag": "No natural finish even after 1,024 reasoning steps",
+   "concept_primer": "The previous study stopped before its main question because every model response was still reasoning when the 160-token limit arrived. This follow-up first finds a limit at which the model can finish naturally, then checks that choice on new tasks.",
+   "plain_question": "What is the smallest reasoning allowance that lets the model naturally finish and give a usable answer often enough for the next internal-state experiment?",
+   "plain_answer": "None of the three allowances worked. All 48 responses were still reasoning when the 1,024-step ceiling arrived, so the study selected no allowance and correctly left its untouched check unopened.",
+   "why_it_matters": "The search for an internal promise signal still has not failed—the model never reached the answer boundary needed to test it. The next test must treat an external stop command as the actual deployed method, not pretend the model chose to finish naturally.",
+   "verdict_tone": "negative",
+   "key_numbers": [
+    {
+     "label": "Responses still reasoning at 1,024",
+     "value": "48/48",
+     "sub": "every selection response used the full allowance"
+    },
+    {
+     "label": "Naturally finished responses",
+     "value": "0/48",
+     "sub": "at 256, 512, and 1,024 steps alike"
+    },
+    {
+     "label": "Untouched confirmation tasks opened",
+     "value": "0/24",
+     "sub": "no allowance passed selection, so confirmation stayed sealed"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Every reasoning allowance ended at its ceiling",
+     "chart_read": "For each allowance, the finish bar is zero and the ceiling-contact bar is full height. The same 48 sampled paths are viewed at each limit.",
+     "chart_takeaway": "The model never reached a natural answer boundary, so no allowance was selected and no internal-value test was licensed."
     }
    ]
   },
@@ -4900,6 +4900,50 @@
      "chart_plain_title": "Every automatic picker commits as many wrong answers as right ones",
      "chart_read": "For each picking method there are paired bars, one for correct answers committed and one for wrong ones, out of 24 stuck tasks; fewer wrong is better. Only the last method, a cheat that peeks at hidden answers, has no wrong bar.",
      "chart_takeaway": "The wrong-commit bar matches the correct-commit bar for every real method, meaning the checks cannot separate right from wrong; only the peeking baseline avoids mistakes."
+    }
+   ]
+  },
+  "qwen35_4b_same_prefix_advantage_routing": {
+   "verdict_tag": "The local-teacher test is frozen and ready",
+   "concept_primer": "Two specialist models can swap rank from one situation to the next. This test lets both continue from the exact same unfinished attempt, uses one set of outcomes to choose, and a separate set to check whether that choice was genuinely better.",
+   "plain_question": "Can verified local teacher choices teach one small model capabilities that neither source model nor their best weight blend has alone?",
+   "plain_answer": "Not yet: this is the preregistered launch state. Each of 384 fresh failed states gets 24 same-state continuations—eight from each teacher and the current student. Half choose a teacher and half independently test the choice. Training is forbidden unless both teachers beat both alternatives twice.",
+   "why_it_matters": "The previous test fixed its impossible ten-point hurdle but discovered that broad short-versus-deep labels still picked the wrong teacher locally. This design measures the missing premise directly, abstains when no teacher is better, and makes any learned model beat the strongest existing blend, visible routing, controls, and eight-sample search.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Fresh qualification states",
+     "value": "384",
+     "sub": "192 in each of two independent blocks"
+    },
+    {
+     "label": "Continuations per state",
+     "value": "24",
+     "sub": "eight each from quick, deep, and current student"
+    },
+    {
+     "label": "Arbitrary gain floor",
+     "value": "0",
+     "sub": "any replicated advantage above zero can qualify"
+    },
+    {
+     "label": "Full-update units per round",
+     "value": "80",
+     "sub": "30 per specialist plus 20 preservation anchors"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Teacher choice and teacher proof use equal, separate evidence",
+     "chart_read": "The two bars count planned continuation branches across both fresh blocks. The first half may choose a teacher; the second half alone measures whether that choice helped.",
+     "chart_takeaway": "The design spends just as much evidence checking a teacher choice as making it, preventing a lucky winner from certifying itself."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "Every update round balances both teachers with preservation",
+     "chart_read": "Bars show the consume-once training units assigned to the quick teacher, deep teacher, and frozen starting-model anchor in each round.",
+     "chart_takeaway": "Neither specialist can dominate the update stream, and one quarter of the pressure explicitly preserves the strongest starting blend."
     }
    ]
   },
@@ -6084,6 +6128,39 @@
      "chart_plain_title": "Enough reasoning made exact shortcut rewrites usable",
      "chart_read": "The dark bar counts supplied plans rewritten exactly at least once across four attempts; the comparison bar is the pre-set pass requirement.",
      "chart_takeaway": "All 16 plans cleared the 12-plan requirement, repairing the original low-budget interface diagnosis."
+    }
+   ]
+  },
+  "qwen35_4b_verifier_conditioned_recovery_bank": {
+   "verdict_tag": "Recovery-policy study is frozen; model result pending",
+   "concept_primer": "A coding assistant may know the right fix yet get stuck after a patch is rejected or a test fails. This study teaches what to do specifically at those moments, while keeping ordinary inspect, test, and submit behavior intact.",
+   "plain_question": "Can training on real patch rejections and failed tests make this 4B coding assistant recover more often on completely different kinds of repositories?",
+   "plain_answer": "We do not know yet. The study has frozen ten fresh repository families, seven recovery steps, three matched training versions, and strict comparisons before the full model run.",
+   "why_it_matters": "A useful coding agent must revise its approach when tools reject an edit or tests expose an underfix. Any trained gain must beat both a simple reminder and spending the same generation budget on another try.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Fresh repository families",
+     "value": "10",
+     "sub": "six for training, four different families for transfer"
+    },
+    {
+     "label": "Condition-specific recovery steps",
+     "value": "7",
+     "sub": "from first inspection through test pass and submit"
+    },
+    {
+     "label": "Matched training versions",
+     "value": "3",
+     "sub": "ordinary states, recovery actions, and recovery actions plus brief planning"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Every planned recovery step is covered in the smoke check",
+     "chart_read": "Each bar counts the checked examples for one step in the coding loop, from first inspection to submit after tests pass. Equal height is the intended result before training begins.",
+     "chart_takeaway": "All seven bars contain ten checked examples, so no rare recovery or completion step disappears from the training design before the model run."
     }
    ]
   },
@@ -11317,50 +11394,6 @@
      "chart_plain_title": "Give the model enough room to write the whole fix",
      "chart_read": "Two setups differ only in how much output length the model is allowed. Bars show whether the edit is usable and whether it fixes the code, on a small pilot. Taller is better. The tight-limit setup is flat; the roomier one fills up.",
      "chart_takeaway": "With too little output room the model cannot finish a usable edit at all, but doubling the room flips it to fully fixing the pilot cases."
-    }
-   ]
-  },
-  "qwen35_4b_same_prefix_advantage_routing": {
-   "verdict_tag": "The local-teacher test is frozen and ready",
-   "concept_primer": "Two specialist models can swap rank from one situation to the next. This test lets both continue from the exact same unfinished attempt, uses one set of outcomes to choose, and a separate set to check whether that choice was genuinely better.",
-   "plain_question": "Can verified local teacher choices teach one small model capabilities that neither source model nor their best weight blend has alone?",
-   "plain_answer": "Not yet: this is the preregistered launch state. Each of 384 fresh failed states gets 24 same-state continuations—eight from each teacher and the current student. Half choose a teacher and half independently test the choice. Training is forbidden unless both teachers beat both alternatives twice.",
-   "why_it_matters": "The previous test fixed its impossible ten-point hurdle but discovered that broad short-versus-deep labels still picked the wrong teacher locally. This design measures the missing premise directly, abstains when no teacher is better, and makes any learned model beat the strongest existing blend, visible routing, controls, and eight-sample search.",
-   "verdict_tone": "neutral",
-   "key_numbers": [
-    {
-     "label": "Fresh qualification states",
-     "value": "384",
-     "sub": "192 in each of two independent blocks"
-    },
-    {
-     "label": "Continuations per state",
-     "value": "24",
-     "sub": "eight each from quick, deep, and current student"
-    },
-    {
-     "label": "Arbitrary gain floor",
-     "value": "0",
-     "sub": "any replicated advantage above zero can qualify"
-    },
-    {
-     "label": "Full-update units per round",
-     "value": "80",
-     "sub": "30 per specialist plus 20 preservation anchors"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Teacher choice and teacher proof use equal, separate evidence",
-     "chart_read": "The two bars count planned continuation branches across both fresh blocks. The first half may choose a teacher; the second half alone measures whether that choice helped.",
-     "chart_takeaway": "The design spends just as much evidence checking a teacher choice as making it, preventing a lucky winner from certifying itself."
-    },
-    {
-     "index": 1,
-     "chart_plain_title": "Every update round balances both teachers with preservation",
-     "chart_read": "Bars show the consume-once training units assigned to the quick teacher, deep teacher, and frozen starting-model anchor in each round.",
-     "chart_takeaway": "Neither specialist can dominate the update stream, and one quarter of the pressure explicitly preserves the strongest starting blend."
     }
    ]
   }

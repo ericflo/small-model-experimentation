@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 194
-- Manifest files: 496
+- Experiments with manifests: 195
+- Manifest files: 497
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 63 |
 | `run-data` | 101 |
-| `standard-artifact` | 67 |
+| `standard-artifact` | 68 |
 
 ## Manifests
 
@@ -273,6 +273,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_verified_macro_long_context_rerun` | `dataset` | [manifest](../experiments/qwen35_4b_verified_macro_long_context_rerun/data/dataset_manifest.json) |
 | `qwen35_4b_verified_macro_long_context_rerun` | `dataset` | [manifest](../experiments/qwen35_4b_verified_macro_long_context_rerun/data/smoke_v1_frozen/dataset_manifest.json) |
 | `qwen35_4b_verified_macro_long_context_rerun` | `standard-artifact` | [manifest](../experiments/qwen35_4b_verified_macro_long_context_rerun/reports/artifact_manifest.yaml) |
+| `qwen35_4b_verifier_conditioned_recovery_bank` | `standard-artifact` | [manifest](../experiments/qwen35_4b_verifier_conditioned_recovery_bank/reports/artifact_manifest.yaml) |
 | `qwen35_4b_verifier_free_banking` | `standard-artifact` | [manifest](../experiments/qwen35_4b_verifier_free_banking/reports/artifact_manifest.yaml) |
 | `qwen35_4b_verifier_guided_self_improvement` | `run-data` | [manifest](../experiments/qwen35_4b_verifier_guided_self_improvement/data/base_heldout_records.manifest.json) |
 | `qwen35_4b_verifier_guided_self_improvement` | `run-data` | [manifest](../experiments/qwen35_4b_verifier_guided_self_improvement/data/base_train_records.manifest.json) |

@@ -44889,6 +44889,35 @@
     }
    ]
   },
+  "qwen35_4b_verifier_conditioned_recovery_bank": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "CPU smoke covers every registered recovery transition",
+     "categories": [
+      "start→inspect",
+      "inspect→patch",
+      "rejected→changed patch",
+      "failed test→diagnose",
+      "diagnosis→changed patch",
+      "patch OK→verify",
+      "passed test→commit"
+     ],
+     "series": [
+      {
+       "label": "replay-verified rows per arm",
+       "values": [10, 10, 10, 10, 10, 10, 10]
+      }
+     ],
+     "x_label": "conditional transition",
+     "y_label": "smoke rows",
+     "y_format": "number",
+     "note": "Deterministic substrate smoke only, not a model result. Ten fresh repositories each produced one row at all seven transition strata; all three arms had equal operator action mass, unresolved partial states failed visible and hidden tests, and the firewall stayed clean.",
+     "source": "experiments/qwen35_4b_verifier_conditioned_recovery_bank/reports/smoke_receipt.json"
+    }
+   ]
+  },
   "qwen35_4b_verifier_free_banking": {
    "charts": [
     {

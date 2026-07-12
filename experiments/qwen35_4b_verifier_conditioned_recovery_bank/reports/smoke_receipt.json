@@ -1,0 +1,45 @@
+{
+  "families": 10,
+  "firewall_clean": true,
+  "operator_action_mass": {
+    "happy_action": {
+      "COMMIT": 6298.0,
+      "INSPECT": 6298.0,
+      "PATCH": 6298.0,
+      "VERIFY": 6298.0
+    },
+    "recovery_action": {
+      "COMMIT": 6298.0,
+      "INSPECT": 6298.0,
+      "PATCH": 6298.0,
+      "VERIFY": 6298.0
+    },
+    "recovery_reason": {
+      "COMMIT": 6298.0,
+      "INSPECT": 6298.0,
+      "PATCH": 6298.0,
+      "VERIFY": 6298.0
+    }
+  },
+  "partial_states_fail_visible_and_hidden": true,
+  "reason_plan_mass_fraction": 0.05,
+  "rows_per_arm": {
+    "happy_action": 70,
+    "recovery_action": 70,
+    "recovery_reason": 70
+  },
+  "runtime_cache_hidden": true,
+  "schema_version": 1,
+  "split_ids_disjoint": true,
+  "status": "PASS",
+  "tasks_selftested": 10,
+  "transitions": [
+    "start_to_inspect",
+    "inspect_to_patch",
+    "rejected_patch_to_changed_patch",
+    "failed_test_to_diagnose",
+    "diagnosis_to_changed_patch",
+    "patch_ok_to_verify",
+    "passed_test_to_commit"
+  ]
+}

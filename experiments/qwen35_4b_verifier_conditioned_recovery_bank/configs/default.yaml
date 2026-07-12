@@ -1,0 +1,135 @@
+schema_version: 1
+
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+  # Frozen C54 apex replay checkpoint: the strongest regenerated control in
+  # qwen35_4b_repo_search_compress_bank, and itself only Qwen3.5-4B.
+  start_checkpoint: large_artifacts/qwen35_4b_repo_search_compress_bank/merged/apex_replay
+  search_teacher: large_artifacts/qwen35_4b_repo_search_compress_bank/merged/apex_replay
+
+artifacts:
+  root: large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank
+
+engine:
+  max_model_len: 8192
+  gpu_memory_utilization: 0.85
+  max_num_seqs: 32
+  max_num_batched_tokens: 16384
+
+families:
+  train:
+    - layered_settings
+    - retry_backoff
+    - alias_registry
+    - window_unique
+    - priority_intervals
+    - stable_topology
+  transfer:
+    - lease_cache
+    - quorum_value
+    - pattern_router
+    - rate_buckets
+
+harvest:
+  split: harvest
+  seed: 84610
+  tasks_per_family: 12
+  trajectories: 4
+  max_turns: 8
+  think_budget: 512
+  answer_max_tokens: 256
+  temperature: 0.8
+  top_p: 0.95
+  top_k: 20
+  run_seed: 84611
+  minimum_task_coverage: 0.35
+  minimum_per_family_coverage: 0.15
+  minimum_covered_tasks: 24
+
+bank:
+  # Set each operator's weighted action mass to the bank's entire raw action
+  # mass, matching the prior successful operator-equalization convention.
+  operator_mass_multiplier: 1.0
+  reason_plan_mass_fraction: 0.05
+  require_replay_pass_rate: 1.0
+
+training:
+  seed: 42
+  epochs: 8
+  learning_rate: 0.00005
+  rank: 32
+  alpha: 64
+  dropout: 0.05
+  batch_size: 4
+  gradient_accumulation_steps: 7
+  loss_chunk_positions: 128
+  max_length: 4096
+  arms: [happy_action, recovery_action, recovery_reason]
+
+evaluation:
+  think_budget: 512
+  answer_max_tokens: 256
+  sample_temperature: 0.8
+  sample_top_p: 0.95
+  sample_top_k: 20
+  deep_run_seed: 84791
+  sample_run_seed: 84792
+  recovery:
+    deep_turns: 6
+    sample_more_trajectories: 2
+    sample_more_turns_each: 3
+  normal:
+    deep_turns: 8
+    sample_more_trajectories: 2
+    sample_more_turns_each: 4
+  blocks:
+    calibration:
+      families: train
+      seed: 84700
+      tasks_per_family: 5
+    transfer_dev:
+      families: transfer
+      seed: 84800
+      tasks_per_family: 10
+    transfer_confirm:
+      families: transfer
+      seed: 84900
+      tasks_per_family: 10
+
+selection_gates:
+  success_delta_vs_base_min: -0.02
+  success_delta_vs_happy_min: 0.03
+  transition_delta_vs_happy_min: 0.08
+
+locality:
+  seed: 85000
+  contexts: 48
+  max_context_tokens: 1024
+  median_non_target_logit_drift_max: 0.15
+
+gates:
+  recovery_delta_vs_base_min: 0.05
+  recovery_delta_vs_happy_min: 0.03
+  recovery_delta_vs_sample_more_min: 0.03
+  recovery_delta_vs_scaffold_min: 0.03
+  paired_bootstrap_lower_bound_min: 0.0
+  rejected_patch_transition_absolute_min: 0.60
+  rejected_patch_transition_delta_min: 0.05
+  failed_test_transition_absolute_min: 0.60
+  failed_test_transition_delta_min: 0.05
+  normal_success_delta_min: -0.03
+  normal_verified_absolute_min: 0.70
+  normal_verified_delta_min: -0.05
+  normal_commit_absolute_min: 0.65
+  normal_commit_delta_min: -0.05
+  invalid_action_rate_delta_max: 0.02
+  minimum_nonnegative_transfer_families: 3
+  maximum_single_family_regression: -0.10
+
+menagerie:
+  sealed_until_repo_gates_pass: true
+  tiers: [quick, medium]
+  paired_seeds: []
+  maximum_tier_regression: 0.03
+  minimum_positive_tier_delta: 0.02

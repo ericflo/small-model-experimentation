@@ -1,0 +1,28 @@
+schema_version: 1
+experiment_id: "qwen35_4b_verifier_conditioned_recovery_bank"
+external_artifacts:
+  - name: "immutable C54 warm start"
+    storage: "large_artifacts/qwen35_4b_repo_search_compress_bank/merged/apex_replay"
+    required_for: "harvest, all arm training, and frozen-base controls"
+    checksum: "model.safetensors sha256 c933168075a0fc011f31ee54f83d722cc91423ce1a0ac19bfe40dfab92f608d5"
+    regenerate: "See experiments/qwen35_4b_repo_search_compress_bank."
+  - name: "recovery experiment artifacts"
+    storage: "large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank"
+    required_for: "reproduce trained checkpoints, evaluations, and analyses without rerunning GPU work"
+    checksum: "Recorded per file in receipts; final manifest receipt is written after the run."
+    regenerate: ".venv/bin/python experiments/qwen35_4b_verifier_conditioned_recovery_bank/scripts/run.py --full"
+omitted_artifacts:
+  - path: "large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/adapters/"
+    reason: "QLoRA adapters are external large artifacts."
+  - path: "large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/merged/"
+    reason: "Merged 4B checkpoints are external large artifacts."
+  - path: "large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/harvest/"
+    reason: "Model trajectories are large and remain outside git."
+  - path: "large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/eval/"
+    reason: "Detailed model trajectories remain external; aggregate receipts are committed."
+reproducibility:
+  smoke_command: ".venv/bin/python experiments/qwen35_4b_verifier_conditioned_recovery_bank/scripts/run.py --smoke"
+  full_command: ".venv/bin/python experiments/qwen35_4b_verifier_conditioned_recovery_bank/scripts/run.py --full"
+  required_external_artifacts:
+    - "large_artifacts/qwen35_4b_repo_search_compress_bank/merged/apex_replay"
+notes: "The benchmark firewall remains closed unless both registered transfer blocks pass."
