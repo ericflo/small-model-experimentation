@@ -39,10 +39,10 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | --- | ---: |
 | `.json` | 2424 |
 | `.csv` | 2138 |
-| `.py` | 1438 |
+| `.py` | 1440 |
 | `.md` | 918 |
 | `.png` | 848 |
-| `.jsonl` | 699 |
+| `.jsonl` | 700 |
 | `.log` | 527 |
 | `.yaml` | 336 |
 | `.gz` | 103 |

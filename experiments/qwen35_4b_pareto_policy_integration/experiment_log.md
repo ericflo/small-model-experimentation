@@ -72,3 +72,8 @@ Created as a new experiment scaffold.
   summed Frobenius norm 164.55 (CUDA FP32, TF32 disabled). The merged model
   weight hash is `97bb30362c130fab6525586b39dff9d72ca31be57b72edc879bf03e304ce91cb`.
 - No task score was inspected before the independent deep specialist began.
+- Before either full specialist was behavior-scored, an eight-prompt
+  same-prefix installation canary was fixed (four quick, four deep; maximum
+  rendered prompt length 438 tokens). Calibration now requires both merged
+  specialists to differ from base and from each other under the same greedy
+  vLLM runner; the canary has no task-success threshold.

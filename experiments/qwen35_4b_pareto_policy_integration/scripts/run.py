@@ -276,6 +276,64 @@ def _specialists(config: dict) -> None:
     )
 
 
+def _specialist_canary(config: dict, config_path: Path) -> None:
+    paths = _paths(config)
+    if not _checkpoint_complete(paths["quick_adapter"], paths["quick"]):
+        raise SystemExit("quick specialist checkpoint incomplete")
+    if not _checkpoint_complete(paths["deep_adapter"], paths["deep"]):
+        raise SystemExit("deep specialist checkpoint incomplete")
+    root = EXP / "runs" / "specialist_canary"
+    input_path = root / "prompts.jsonl"
+    if not input_path.exists():
+        _run([
+            str(PY), str(EXP / "scripts" / "build_specialist_canary.py"),
+            "--config", str(config_path), "--out", str(input_path),
+        ])
+    outputs = {
+        "base": root / "base.jsonl",
+        "quick": root / "quick.jsonl",
+        "deep": root / "deep.jsonl",
+    }
+    common = [
+        "--input", str(input_path), "--thinking", "budget",
+        "--thinking-budget", "256", "--answer-max-tokens", "64",
+        "--greedy", "--seed", str(config["seeds"]["model_smoke"]),
+        "--max-model-len", "4096", "--gpu-memory-utilization", "0.85",
+        "--max-num-seqs", "16", "--max-num-batched-tokens", "4096",
+        "--cudagraph-capture-size", "1", "--cudagraph-capture-size", "2",
+        "--cudagraph-capture-size", "4", "--cudagraph-capture-size", "8",
+        "--cudagraph-capture-size", "16",
+    ]
+    for name, model in (("base", None), ("quick", paths["quick"]), ("deep", paths["deep"])):
+        output = outputs[name]
+        metadata = output.with_name(output.name + ".meta.json")
+        if output.exists() and metadata.exists():
+            print(f"[resume] specialist canary {name} output", flush=True)
+            continue
+        if output.exists() or metadata.exists():
+            raise SystemExit(f"partial specialist canary output: {output}")
+        command = [
+            str(VLLM_PY), str(EXP / "src" / "vllm_runner.py"),
+            "--output", str(output), *common,
+        ]
+        if model is not None:
+            command.extend(("--model-override", str(model)))
+        _run(command)
+        if model is not None:
+            _stamp_local_model_output(output, model)
+    _run(
+        [
+            str(PY), str(EXP / "scripts" / "analyze_specialist_canary.py"),
+            "--config", str(config_path), "--input", str(input_path),
+            "--base", str(outputs["base"]), "--quick", str(outputs["quick"]),
+            "--deep", str(outputs["deep"]), "--quick-model", str(paths["quick"]),
+            "--deep-model", str(paths["deep"]),
+        ],
+        allowed=(0, 4),
+    )
+    _require_gate(EXP / "analysis" / "specialist_canary.json")
+
+
 def _eval_if_needed(
     *, model: Path, tag: str, scope: str, block_seed: int, config_path: Path,
     decode: str = "greedy",
@@ -342,6 +400,7 @@ def _qualify(config: dict, config_path: Path) -> None:
 
 
 def _calibrate(config: dict, config_path: Path) -> None:
+    _require_gate(EXP / "analysis" / "specialist_canary.json")
     paths = _paths(config)
     if not _checkpoint_complete(paths["quick_adapter"], paths["quick"]):
         raise SystemExit("quick specialist checkpoint incomplete")
@@ -922,7 +981,7 @@ def main() -> int:
     parser.add_argument("--smoke", action="store_true")
     parser.add_argument(
         "--stage",
-        choices=("smoke", "model-smoke", "specialists", "calibrate", "qualify", "teacher-audit", "locality", "integrate", "controls", "confirm"),
+        choices=("smoke", "model-smoke", "specialists", "specialist-canary", "calibrate", "qualify", "teacher-audit", "locality", "integrate", "controls", "confirm"),
     )
     parser.add_argument("--seed", type=int)
     args = parser.parse_args()
@@ -939,6 +998,9 @@ def main() -> int:
         return 0
     if stage == "model-smoke":
         _model_smoke(config)
+        return 0
+    if stage == "specialist-canary":
+        _specialist_canary(config, config_path)
         return 0
     if stage == "qualify":
         _qualify(config, config_path)
