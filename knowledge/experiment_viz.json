@@ -15670,6 +15670,95 @@
      "note": "With coverage, 2-3 oracle queries reach 100%; without coverage (primitive shift, auto sketch) extra queries change nothing.",
      "source": "experiments/qwen35_4b_sketch_coverage_shift_probe/reports/active_by_shift.csv",
      "headline": false
+    },
+    {
+     "title": "Does the correct program survive each task family and sketch mode? (cap 28)",
+     "kind": "heatmap",
+     "x_categories": [
+      "auto",
+      "manual",
+      "erased"
+     ],
+     "y_categories": [
+      "control_length_contains",
+      "control_sum_mod",
+      "control_tuple_mod_gate",
+      "alias_length_contains",
+      "alias_sum_mod",
+      "alias_tuple_mod_gate",
+      "primitive_abs_min_delta",
+      "primitive_max_gate",
+      "primitive_max_mod",
+      "primitive_mul_sum",
+      "primitive_prefix_gate",
+      "primitive_prod_mod"
+     ],
+     "values": [
+      [
+       100.0,
+       100.0,
+       0.0
+      ],
+      [
+       100.0,
+       100.0,
+       0.0
+      ],
+      [
+       100.0,
+       100.0,
+       100.0
+      ],
+      [
+       100.0,
+       100.0,
+       0.0
+      ],
+      [
+       100.0,
+       100.0,
+       0.0
+      ],
+      [
+       100.0,
+       100.0,
+       0.0
+      ],
+      [
+       0.0,
+       100.0,
+       0.0
+      ],
+      [
+       0.0,
+       100.0,
+       0.0
+      ],
+      [
+       0.0,
+       100.0,
+       0.0
+      ],
+      [
+       100.0,
+       100.0,
+       0.0
+      ],
+      [
+       0.0,
+       100.0,
+       0.0
+      ],
+      [
+       0.0,
+       100.0,
+       0.0
+      ]
+     ],
+     "value_format": "percent100",
+     "note": "Share of tasks where the correct program stayed in the candidate set. Manual sketches keep it everywhere; auto sketches lose it on the primitive families; erasing the sketch loses it almost everywhere.",
+     "source": "reports/coverage_by_family.csv",
+     "headline": false
     }
    ]
   },

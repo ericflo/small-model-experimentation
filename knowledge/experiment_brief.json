@@ -5308,6 +5308,12 @@
      "chart_plain_title": "Extra check-queries sharpen a choice but cannot create a missing program",
      "chart_read": "Lines show how often the chosen program is actually correct as the system spends more clarifying queries (left to right). Higher is better. Two lines have the right program available; one line (new operation, auto blueprint) does not.",
      "chart_takeaway": "The two lines with the right program available climb to 100% within two or three queries, while the line missing that program stays flat, showing queries help only after the answer already exists."
+    },
+    {
+     "index": 3,
+     "chart_plain_title": "Where the correct answer survives: by task family and sketch style",
+     "chart_read": "A grid: each row is a task family, each column a way of giving the model a template (auto-built, hand-written, or none). Colour is the share of tasks where the correct program stayed reachable — darker is higher.",
+     "chart_takeaway": "The hand-written column is dark all the way down, but the auto column turns pale on the primitive families and the no-template column is pale almost everywhere — the template, not the family, decides survival."
     }
    ]
   },

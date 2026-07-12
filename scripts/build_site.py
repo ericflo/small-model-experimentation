@@ -1509,7 +1509,7 @@ def _chart_legend(spec: dict) -> str:
     """Interactive series legend — for multi-series bars and many-series lines
     (few-series lines carry direct end labels instead)."""
     kind = spec["kind"]
-    series = spec["series"]
+    series = spec.get("series") or []  # heatmap has no series (its color scale is the legend)
     need = (kind == "bar" and len(series) > 1) or (kind == "line" and len(series) > 4) or (kind == "scatter" and len(series) > 1)
     if not need:
         return ""
