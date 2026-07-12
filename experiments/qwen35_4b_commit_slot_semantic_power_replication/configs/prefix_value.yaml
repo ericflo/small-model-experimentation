@@ -49,7 +49,7 @@ cross_validation:
   estimator: ridge
   l2: 1.0
 
-null:
+"null":
   feature_shuffle_within_task_and_fraction: true
   repeats: 32
   seed: 2026071507

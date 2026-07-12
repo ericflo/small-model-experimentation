@@ -105,7 +105,9 @@ def synthetic_rows() -> list[dict]:
 
 
 def test_value_config_preserves_inherited_frozen_choices() -> None:
-    run.validate_value_config(base_config(), value_config())
+    loaded = value_config()
+    assert "null" in loaded and None not in loaded
+    run.validate_value_config(base_config(), loaded)
     changed = value_config()
     changed["gates"]["task_macro_pairwise_auc_min"] = 0.64
     with pytest.raises(RuntimeError, match="inherited prefix-value gate changed"):
