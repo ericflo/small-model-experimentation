@@ -80,3 +80,17 @@ Created as a new experiment scaffold.
 - The selection stage contains no J-coordinate intervention and writes
   `j_outcomes_observed: false`; confirmation remains inaccessible unless the
   stored donor gate passes.
+
+## 2026-07-12 — full-activation donor gate passed
+
+- Clean direct and consequence accuracy were both 24/24 with parse rate 1.0.
+- Target-donor clamps at bands 4–8, 8–12, 12–16, and 16–20 redirected both the
+  direct key and mapped digit on 24/24 items. Wrong donors redirected 24/24 to
+  their own key/digit and 0/24 to the registered target.
+- Bands 20–24 and 24–28 failed both endpoints, exposing a sharp early causal
+  transport window rather than generic activation replacement.
+- The frozen earliest-passing rule selected band `[4,5,6,7,8]`. Causal suffix
+  invariance remained exact at all 25 layers. Runtime was 44.2 seconds, peak
+  allocated memory 8.44 GB, and the stage stored 624 batch-one rows.
+- The receipt confirms `j_outcomes_observed: false`; the 48-item confirmation
+  split remains unopened.
