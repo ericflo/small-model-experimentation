@@ -72,6 +72,6 @@ gates:
     max_parse_rate_drop: 0.05
 
 design_boundary:
-  commit:
-  preregistration_sha256:
-  readme_sha256:
+  commit: 57fe5249e38f1e498e53a63ea4e9a72c0b48e2f0
+  preregistration_sha256: a7e5711236f9c0dd0c39182c1ccad4c881cf18b604247a12f5362faafc627bae
+  readme_sha256: 119b20dcbb41dbc578cc8aabbbcb7cf65739fc734180654dcfd0f5f69d12fdf0

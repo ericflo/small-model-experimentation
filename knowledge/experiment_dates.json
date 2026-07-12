@@ -613,6 +613,14 @@
    ],
    "caveat": "run_logs/*_console.log contain only relative tqdm timers, no dates"
   },
+  "qwen35_4b_jacobian_value_transport": {
+   "start": "2026-07-12",
+   "end": "2026-07-12",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_joint_shortlister_ladder": {
    "start": "2026-06-24",
    "end": "2026-06-24",

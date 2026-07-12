@@ -1,0 +1,15 @@
+{
+  "design_commit": "57fe5249e38f1e498e53a63ea4e9a72c0b48e2f0",
+  "design_is_ancestor": true,
+  "expected_sha256": {
+    "preregistration": "a7e5711236f9c0dd0c39182c1ccad4c881cf18b604247a12f5362faafc627bae",
+    "readme": "119b20dcbb41dbc578cc8aabbbcb7cf65739fc734180654dcfd0f5f69d12fdf0"
+  },
+  "head": "57fe5249e38f1e498e53a63ea4e9a72c0b48e2f0",
+  "observed_sha256": {
+    "preregistration": "a7e5711236f9c0dd0c39182c1ccad4c881cf18b604247a12f5362faafc627bae",
+    "readme": "119b20dcbb41dbc578cc8aabbbcb7cf65739fc734180654dcfd0f5f69d12fdf0"
+  },
+  "passed": true,
+  "schema_version": 1
+}
