@@ -1663,6 +1663,12 @@ class SiteBuilder:
         self.by_id = {exp["id"]: exp for exp in self.experiments}
         ledger = read_json(KNOWLEDGE / "claims" / "claim_ledger.json")
         self.claims = list(ledger.get("claims", [])) if isinstance(ledger, dict) else []
+        # Optional plain-language layer for claims (knowledge/claims/claim_plain.json):
+        # a fact-checked, jargon-free rewrite of each claim's title/summary/implication
+        # keyed by claim id. Falls back to the raw ledger fields when absent.
+        plain_path = KNOWLEDGE / "claims" / "claim_plain.json"
+        plain_claims = read_json(plain_path) if plain_path.exists() else {}
+        self.claim_plain = plain_claims.get("claims", {}) if isinstance(plain_claims, dict) else {}
         queue = read_json(KNOWLEDGE / "future_experiment_queue.json")
         self.queue = [p for p in queue.get("proposals", []) if isinstance(p, dict)]
         self.candidate_programs = [c for c in queue.get("candidate_programs", []) if isinstance(c, dict)]
@@ -2246,6 +2252,13 @@ class SiteBuilder:
                 if str(claim.get("status")) != status:
                     continue
                 cid = str(claim.get("id"))
+                _p = self.claim_plain.get(cid)
+                _p = _p if isinstance(_p, dict) else {}
+                c_title = _p.get("title") or claim.get("title")
+                c_summary = _p.get("summary") or claim.get("summary")
+                c_implication = _p.get("implication") or claim.get("implication")
+                c_next_tests = _p.get("next_tests") or claim.get("next_tests", [])
+                c_avoid = _p.get("avoid") or claim.get("avoid", [])
                 evidence_items = []
                 for evidence in claim.get("evidence", []):
                     if evidence.get("kind") == "experiment" and str(evidence.get("id")) in self.roster:
@@ -2262,25 +2275,25 @@ class SiteBuilder:
                         pid = str(evidence.get("id"))
                         evidence_items.append(f'<li><a href="{prefix}programs/{esc(pid)}/">{esc(self.program_titles.get(pid, pid))}</a></li>')
                 extras = []
-                if claim.get("implication"):
-                    extras.append(f'<p class="claim-implication"><strong>Implication.</strong> {esc(claim["implication"])}</p>')
+                if c_implication:
+                    extras.append(f'<p class="claim-implication"><strong>Implication.</strong> {esc(c_implication)}</p>')
                 if evidence_items:
                     extras.append(f'<details><summary>Evidence ({len(evidence_items)})</summary><ul class="plain">{"".join(evidence_items)}</ul></details>')
-                next_tests = [str(t) for t in claim.get("next_tests", [])]
+                next_tests = [str(t) for t in c_next_tests]
                 if next_tests:
                     items = "".join(f"<li>{esc(t)}</li>" for t in next_tests)
                     extras.append(f'<details><summary>Next tests ({len(next_tests)})</summary><ul class="plain">{items}</ul></details>')
-                avoid = [str(t) for t in claim.get("avoid", [])]
+                avoid = [str(t) for t in c_avoid]
                 if avoid:
                     items = "".join(f"<li>{esc(t)}</li>" for t in avoid)
                     extras.append(f'<details><summary>Avoid</summary><ul class="plain">{items}</ul></details>')
                 chips = "".join(program_chip(pid, prefix, self.slots, self.program_titles) for pid in claim.get("programs", []))
-                ctext = " ".join([cid, str(claim.get("title", "")), str(claim.get("summary", "")), str(claim.get("implication", "")),
+                ctext = " ".join([cid, str(c_title or ""), str(c_summary or ""), str(c_implication or ""),
                                   " ".join(self.program_titles.get(p, p) for p in claim.get("programs", []))]).lower()
                 cards.append(
                     f'<article class="claim-card" id="{esc(slugify(cid))}" data-status="{esc(status)}" data-text="{esc(ctext)}">'
                     f'<div class="card-meta">{status_chip(status)}<span class="claim-id">{esc(cid)}</span></div>'
-                    f"<h3>{esc(claim.get('title'))}</h3><p>{esc(claim.get('summary'))}</p>"
+                    f"<h3>{esc(c_title)}</h3><p>{esc(c_summary)}</p>"
                     f'{"".join(extras)}<div class="card-chips">{chips}</div></article>'
                 )
             if cards:
@@ -2687,13 +2700,20 @@ class SiteBuilder:
                 }
             )
         for claim in self.claims:
+            _cp = self.claim_plain.get(str(claim.get("id")))
+            _cp = _cp if isinstance(_cp, dict) else {}
+            _ct = _cp.get("title") or claim.get("title")
+            _cs = _cp.get("summary") or claim.get("summary")
+            _ci = _cp.get("implication") or claim.get("implication", "")
             search.append(
                 {
                     "k": "claim",
-                    "t": f"{claim.get('id')} · {claim.get('title')}",
+                    "t": f"{claim.get('id')} · {_ct}",
                     "u": f"claims/#{slugify(str(claim.get('id')))}",
                     "d": "",
-                    "x": f"{claim.get('status')} {claim.get('summary')} {claim.get('implication', '')}",
+                    # index the plain rewrite plus the raw summary so search hits
+                    # whether the reader types plain words or the original jargon.
+                    "x": f"{claim.get('status')} {_cs} {_ci} {claim.get('summary')}",
                 }
             )
         for program in self.programs:

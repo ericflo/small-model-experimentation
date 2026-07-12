@@ -1,0 +1,825 @@
+{
+  "claims": {
+    "C1": {
+      "title": "Make small models show their work, not just answers",
+      "summary": "Across many experiments, small models got more reliable when they produced a checkable step-by-step output — like a short program a calculator can run, or filled-in operation slots — instead of writing a final answer directly. On 250 table tasks this lifted exact-match accuracy from 55% to 62%, fixing 18 previously wrong answers.",
+      "implication": "For any task where you ask a small model for a direct answer, first try a version that emits a checkable, runnable intermediate step and measure whether accuracy improves.",
+      "next_tests": [
+        "On one shared test set, compare plain text answers, calculator-runnable programs, filled operation slots, and step-by-step executors head to head.",
+        "Separately test what changes the output format versus what changes the training signal, so you know which one actually helped."
+      ],
+      "avoid": [
+        "Reporting another win for step-by-step output without also testing plain direct answers and deliberately broken intermediate steps as controls."
+      ]
+    },
+    "C2": {
+      "title": "A right answer in the pile is useless if you can't pick it",
+      "summary": "Across these experiments, a set of guesses often contained a correct answer, yet the model — judging only from what it could actually see — still picked or committed to a wrong one. Pulling a similar past solution surfaced fixes but couldn't reliably choose them; trusting a program because it matched the shown examples still shipped errors.",
+      "implication": "Never claim progress from \"a correct answer exists in the list.\" Measure how often the model, using only visible evidence, actually picks the right one and how often it commits to a wrong one.",
+      "next_tests": [
+        "Score selection systems only on what they can actually see at decision time, using guesses from problem types they were never trained on.",
+        "Rewrite 'a correct answer exists somewhere' reports as scorecards showing the gap to what actually gets picked and shipped."
+      ],
+      "avoid": [
+        "Treating 'the right answer is somewhere in the list' as evidence that the system can pick it."
+      ]
+    },
+    "C3": {
+      "title": "Pasting relevant examples into the prompt rarely helps",
+      "summary": "Fetching a similar past example and dropping it into the prompt as reference did not improve small models. A matched, verified worked example actually nudged accuracy down slightly (about 48% versus 50% with no example). Retrieval only paid off when it handed over reusable code the model could adapt, rescuing a few otherwise-stuck problems.",
+      "implication": "When testing memory, feed retrieval something the model can act on or check — reusable code, tests, constraints — not just relevant-looking text, and compare against random and mismatched examples to prove content, not relevance, is what helped.",
+      "next_tests": [
+        "On one task family, compare four kinds of retrieved help side by side — worked examples, reusable algorithms, test cases, and past failure cases — to see which actually lifts success."
+      ],
+      "avoid": [
+        "Assuming retrieved material helps just because it looks topically relevant, without checking that it actually changes outcomes."
+      ]
+    },
+    "C4": {
+      "title": "Gather extra evidence to improve the decision, not curiosity",
+      "summary": "Letting a model request extra examples or test cases can help, but only when the choice is aimed at the actual decision it must make: commit, fix, or pick the best answer. One well-targeted example nudged results up; extra inputs chosen for general informativeness added noise and sometimes made things worse.",
+      "implication": "Judge any evidence-gathering method by how much it improves the final commit, repair, or pick per extra query gathered, not by how informative the extra checks look on their own.",
+      "next_tests": [
+        "Compare evidence-picking strategies by how much each improves the final choice, given the same number of extra queries.",
+        "Separate extra checks the model can run on its own from ones that need the hidden correct answer to be useful."
+      ],
+      "avoid": [
+        "Tuning which examples or test cases to gather without showing it improves the final commit, repair, or pick."
+      ]
+    },
+    "C5": {
+      "title": "Prove fine-tuning beats cheap no-training tricks first",
+      "summary": "Fine-tuning a small model often helps, but those gains are frequently matched — or beaten — by cheap tricks that need no training at all: sampling several answers and keeping the best, letting the model check or run its own code, or copying a strong example. Judge any training method only against these free baselines.",
+      "implication": "Before crediting a fine-tuning run, run the same task with untrained alternatives — more sampling attempts, answer-checking, tool use — and claim a win only if training clearly beats them.",
+      "next_tests": [
+        "Pit one fine-tuning method against untrained tricks — extra sampling attempts and answer-checking — on the exact same task."
+      ],
+      "avoid": [
+        "Claiming a fine-tuning win when the scoring labels are hidden or the outputs cannot be independently inspected."
+      ]
+    },
+    "C6": {
+      "title": "A finding you can trust needs a control that could break it",
+      "summary": "Across this work, the results that held up were the ones tested against a deliberately broken version of themselves — inputs scrambled, labels shuffled, a part frozen, or the model faced with genuinely new combinations instead of familiar ones. Without such a check, an apparent effect is often just the setup rewarding memorized patterns.",
+      "implication": "Before running costly experiments, decide which control would make the effect vanish if it were fake, and run that control alongside the real test.",
+      "next_tests": [
+        "Build one shared test suite of these break-it controls and reuse it across every line of work."
+      ],
+      "avoid": [
+        "Do not count gains on the same kind of examples the model trained on as proof it will generalize to new ones."
+      ]
+    },
+    "C7": {
+      "title": "Never let answer-key scores pose as real-world scores",
+      "summary": "Across experiments, trustworthy conclusions depended on strict record-keeping. Keep the small files needed to rerun a result, but keep bulky trained model weights out of version control. Above all, clearly flag any score that was only reachable because the true answers were known during scoring, kept separate from scores earned without that peek.",
+      "implication": "Tag every result by whether it used a hidden answer key; report the answer-key number and the honest no-peek number separately, and keep trained model weights out of git.",
+      "next_tests": [
+        "Add automatic checks that flag missing rerun files and catch results that quietly relied on knowing the true answers."
+      ],
+      "avoid": [
+        "Committing trained model weights to git, or letting a score that only works when the true answers are known become your headline real-world claim."
+      ]
+    },
+    "C8": {
+      "title": "Treat your research repo as an instrument, not just storage",
+      "summary": "Across this work, the shared repository — its plans, auto-built indexes, running list of tested claims, scorecards, intake notes, templates, and automated checks — turned out to decide whether later experiments build on earlier ones or repeat them. Well-kept records are what let findings accumulate instead of getting lost or rediscovered from scratch.",
+      "implication": "When an experiment changes what future work should believe, update the shared claims and evidence records right away — not just your own notes — so the next person inherits the conclusion.",
+      "next_tests": [
+        "Check whether keeping scorecards and intake notes actually cuts duplicate proposals and makes new work cite prior evidence more often."
+      ],
+      "avoid": [
+        "Calling the process 'done' once it stops actually improving how well past findings are remembered and reused."
+      ]
+    },
+    "C9": {
+      "title": "Real reasoning content drives the gain, not extra compute",
+      "summary": "Turning on the model's built-in reasoning (off by default) lifted its pass rate on basic Python tasks from 76% to 91%. Controls prove the gain is genuine reasoning: same-length blank filler or scrambled reasoning scored like no reasoning, and feeding it another task's reasoning collapsed accuracy to near zero. The benefit grew with longer reasoning.",
+      "implication": "Before crediting any reasoning boost as real, compare it against blank filler and scrambled reasoning of the same length — not one best-guess score, which misled here. Re-baseline reasoning-substitute tricks against fair built-in reasoning.",
+      "next_tests": [
+        "Test very long reasoning budgets to check whether the coherent-reasoning advantage shrinks once the model starts overthinking.",
+        "Retry on harder, uncontaminated tasks where the no-reasoning baseline is weaker, leaving more room to improve.",
+        "Trigger deeper reasoning from the model's own uncertainty signals instead of a single visible test case."
+      ],
+      "avoid": [
+        "Calling a reasoning boost 'real reasoning' without checking that same-length blank filler doesn't produce the same gain.",
+        "Pinning an exact best reasoning length from a single small run of about 100 tasks."
+      ]
+    },
+    "C10": {
+      "title": "A small model picks its best answer only after reasoning",
+      "summary": "A frozen 4B coding model, asked to judge its own guesses as right or wrong, rubber-stamps almost everything (calls 91% correct when only 77% pass) unless it reasons first. Given room to think, its self-judgment sharpens enough to pick the best of 8 tries and close roughly three-quarters of the gap to a perfect picker.",
+      "implication": "To pick the winning guess among several, prefer a cheap actual test plus a free instant self-rating; save slow reasoning-based self-checking for when no test can run. Always compare picking methods at equal token cost.",
+      "next_tests": [
+        "Use the reasoning-based self-check to steer answer selection, with and without a real test, and chart accuracy against token cost.",
+        "Retest self-checking against harder wrong guesses the model reasoned its way into, on data known to be uncontaminated.",
+        "Build a loop where the model generates, checks itself by reasoning, then revises, and measure whether it keeps improving."
+      ],
+      "avoid": [
+        "Do not call snap self-judgment reliable: without reasoning the model approves 91% of guesses and barely distinguishes right from wrong.",
+        "Do not treat the self-checker's chosen answer as a ceiling: it ships real accuracy but stays below what a perfect picker could reach."
+      ]
+    },
+    "C11": {
+      "title": "Bank the model's own verified wins into its weights",
+      "summary": "On a fresh coding task built with no training-data leakage, two approaches split apart. Letting the model run its code, read the real error, and retry did not beat simply drawing more independent attempts at equal compute. But retraining the model on its own answers that passed the tests reliably raised single-shot success, and kept compounding over repeated rounds without hurting answer variety.",
+      "implication": "Skip test-time self-correction loops; instead collect the answers your model already gets right on your checks, retrain on them, and repeat. Expect it to sharpen problems it can already sometimes solve, not unlock ones it never can.",
+      "next_tests": [
+        "The gains plateau and never crack the hardest problems the model can't solve even occasionally — find what pushes that frontier (richer building blocks, a curriculum, or a genuinely new training signal) without leaning on a stronger teacher model.",
+        "Test whether capability banked this way carries over to a different clean task, or only helps within the same family of problems.",
+        "Re-run the earlier failed self-improvement on a standard coding benchmark, this time with leakage controls, to confirm that contaminated data — not the method — caused that failure."
+      ],
+      "avoid": [
+        "Don't read this as 'execution feedback is useless' — it specifically failed to beat equal-compute sampling for this one model on this one task.",
+        "This still rests on a single task and a single model; whether it holds across other tasks and models is untested."
+      ]
+    },
+    "C12": {
+      "title": "A step-checking tool, not smarter planning, extends the frontier",
+      "summary": "A fixed small model stalls on 3-step synthesis problems it can't reach by training on its own guesses. Solving one step at a time with a tool that runs each step, then fine-tuning on the solutions found, extends its reach — from 1 in 8 solved to about 2 in 5. But blind trial-and-error solves them too, so the tool, not the model's planning, does the work, and true gains stay small.",
+      "implication": "To push a small model past its own ceiling without a bigger teacher, harvest verified solutions via step-by-step search with a code-runner, then fine-tune on them — credit the tool, not the model's planning.",
+      "next_tests": [
+        "Repeat the loop — harvest solutions, fine-tune, then harvest again with the improved model — and see whether the gains compound or stall.",
+        "Use a much larger set of building-block operations, where blind enumeration becomes infeasible and the model's guidance must actually carry the search — does it hold up?",
+        "Test deeper problems (4-5 steps) to see whether the fine-tuned model generalizes beyond any depth it was trained on."
+      ],
+      "avoid": [
+        "Don't claim the model out-searches blind trial-and-error — it solves no more problems overall; its planning only saves steps.",
+        "Don't overstate the fine-tuning gain — absolute solve rates stay low, and the strongest single-attempt improvement is within noise on one small run.",
+        "Don't treat a problem's nominal step-count as its difficulty without checking behavior — 40% of random 3-step problems are actually solvable in 2 or fewer steps."
+      ]
+    },
+    "C13": {
+      "title": "Small models run plans but can't reverse-engineer them",
+      "summary": "This 4-billion-parameter model reliably turns a given step-by-step plan into correct code, even four operations deep. What it can't do is work backwards from observed behavior to the plan that produced it: each added step drops its odds of naming the right sequence roughly 30-fold. The deficit is multi-step mental simulation, not execution.",
+      "implication": "Hand the model the plan and let cheap tools (enumeration plus an interpreter) do the step-finding; don't train on execution, which is already near-perfect. Verify a task's true step-depth behaviorally before trusting its label.",
+      "next_tests": [
+        "Test the simulator directly: give a fixed recipe and input, ask only for the output (no code), and watch accuracy fall as the recipe lengthens.",
+        "See whether training on worked traces (input to each intermediate state to final output) can teach the model to simulate multi-step behavior.",
+        "Probe whether showing each step as its own mini-example fixes things, to learn if the deficit lives in splitting a chain into steps.",
+        "Ask the model to pick which of two candidate recipes produced a given behavior, with no code writing involved.",
+        "Sweep how much extra thinking time helps at a fixed step-depth, to see if a longer scratchpad unlocks simulation.",
+        "Check whether the roughly 30-fold-per-step drop in step-identification holds on a different task domain."
+      ],
+      "avoid": [
+        "Don't read near-perfect plan-following as 'composition solved' — figuring out the steps is still the binding constraint end to end.",
+        "Don't assume the exact 30-fold-per-step drop carries over to other task types until you've tested one."
+      ]
+    },
+    "C14": {
+      "title": "Fixing one skill in a small model doesn't spread",
+      "summary": "Training a 4B model to trace a multi-step process fixed that skill almost perfectly — even on longer chains it never studied, so it truly learned, not memorized. Yet no related task needing the same skill improved. Its abilities are keyed to specific input-to-output formats, not shared inner components; the repaired skill still works when explicitly invoked but won't spread on its own.",
+      "implication": "Don't assume a mechanistic explanation predicts what training transfers. Fine-tuning buys only the trained format and close neighbors, and narrow training can damage unrelated instruction-following — so add missing skills via external tools and mix formats.",
+      "next_tests": [
+        "Teach the skill in several formats at once — does that stop the model locking to one format and let it reuse the skill elsewhere?",
+        "Can prompting alone get the model to apply its repaired skill inside a different task that fine-tuning failed to reach?",
+        "Full fine-tuning versus the lightweight adapter method on the same setup — is the failure to spread just an artifact of adapters?"
+      ],
+      "avoid": [
+        "Don't read the model's collapse on the two-choice question as lost reasoning — for these fine-tuned models it reflects forcing answers into their trained output format.",
+        "Don't generalize past this one lightweight-tuning method and model until full fine-tuning and other model families are tested."
+      ]
+    },
+    "C15": {
+      "title": "Prompts compose a model's skills but can't create idea-generation",
+      "summary": "Three ways to add capability to a frozen small model each do a different job. A step-by-step prompt composes skills the model already has (a hard two-choice task rises from 74% to 83%). Training installs the sharpest skill, but it often answers in its trained format instead — cutting usable accuracy roughly in half. Only external tools let the model invent a genuinely new idea; no prompt does.",
+      "implication": "Let tools generate candidate ideas, let the prompt supply the step-by-step procedure, and let the model do the comparing. If you train a skill in, also train mixed answer formats, or the skill stays trapped behind its own output style.",
+      "next_tests": [
+        "Train in about 10% mixed answer formats and check whether the skill's 95%-when-well-formatted accuracy becomes usable in practice.",
+        "Test whether offering a fixed menu of idea choices unlocks the model where free-form idea generation fails.",
+        "Re-measure the earlier 'thinking is at chance' result while varying token budget, answer-parser strictness, and required answer format together."
+      ],
+      "avoid": [
+        "Don't treat the 95% figure as real accuracy — it counts only the half of answers that came out in the required form, so it's an upper bound.",
+        "Don't read the idea-generation score nudging from 9% to 13% as real progress — it's within measurement noise."
+      ]
+    },
+    "C16": {
+      "title": "Execution is free; mental simulation needs compact state",
+      "summary": "Hand a fixed 4-billion-parameter model the exact step-by-step procedure and it runs it correctly nearly every time across three unrelated task types — that reliability is a stable trait. But ask it to infer the procedure from examples and it collapses toward guessing as steps deepen. Whether it can predict a procedure's result in its head, though, depends entirely on how compact the working state is.",
+      "implication": "Spend external tools on figuring out the procedure, and on running steps only when the state is bulky — text edits always, growing lists past a few steps. For a handful of small numbers the model tracks it reliably, so a tool call there wastes effort.",
+      "next_tests": [
+        "Try a task whose procedure cannot be written as code (walking a named graph described in words) to see whether reliable execution still holds.",
+        "Keep a task equally easy to track in the head but vary how many possible operations exist, and measure whether a bigger menu makes inferring the procedure harder.",
+        "Re-encode text-edit tasks as small tuples of numbers and check whether in-head prediction jumps to the reliable level, proving the state representation, not the task, drives it."
+      ],
+      "avoid": [
+        "Do not treat one task type's simulation-decay curve as a fixed model trait — it depends on the task's state; compact-number tasks barely decay while text tasks fail immediately.",
+        "Do not conclude the model cannot simulate from a single task type; the ability to track outcomes in its head is a property of how the state is represented.",
+        "Do not read a small nonzero inference score as 'no wall' — inferring the procedure still collapses, just to a raised floor when the operation set is small and easy to track."
+      ]
+    },
+    "C17": {
+      "title": "The wall is never guessing the answer, not picking it",
+      "summary": "When the correct program shows up anywhere in a batch of tries, picking it out is trivial: running each guess against a handful of known examples finds it every time, and even a random pick among the ones that pass works just as well. So the real limit is that hard problems never get guessed at all. Sampling many times and filtering recovers 2-5x the accuracy of a single try at easier difficulty.",
+      "implication": "Don't build smarter answer-pickers — with a few test examples, picking is already solved. To beat plain sample-more, change what the model proposes: give it tools, or bake verified solutions into its weights so the right answer comes up first.",
+      "next_tests": [
+        "Shrink the known examples from eight down to three, then one, and find the point where picking actually gets hard and a real judge beats a random pick.",
+        "Test whether giving the model tools or baking in verified solutions raises first-try accuracy to where sample-many-and-filter already sits today.",
+        "See if the model's confidence or agreement across guesses can flag tasks where a program passes the known examples but is secretly wrong, so it declines instead of shipping it."
+      ],
+      "avoid": [
+        "Don't read the self-check's perfect score as proof it's a strong judge — with eight known examples any pick works, even a random one.",
+        "Don't build fancier answer-pickers to beat sample-more here; picking is free, so spend effort on changing what gets proposed.",
+        "Don't assume picking stays free with fewer examples — with only a couple, wrong-but-passing programs multiply and picking gets genuinely hard.",
+        "Don't explain the deep-difficulty floor as the model understanding some tasks better — simpler tasks just have fewer possible answers, so the right one gets guessed more often."
+      ]
+    },
+    "C18": {
+      "title": "Retraining on its own verified solutions expands what a model reaches",
+      "summary": "Retraining a small model only on answers it generated and machine-checked as correct does two different things by difficulty. On easy one-step problems it just moves answers it already knew into its first guess (60% to 80%), no new skill. On harder two-step problems it genuinely learns to solve some it previously couldn't — by sharpening its guesses toward correct answers, not guessing more widely. Deep problems, lacking any training examples, don't budge, and the exact size of the two-step gain is still unsettled.",
+      "implication": "Bank your model's own verified-correct solutions, retrain on them, then let it sample many times: the ceiling rises wherever you have training examples. For problems too deep to ever solve by luck, seed examples another way first.",
+      "next_tests": [
+        "Seed the training set with three-step solutions found by a tool-assisted search (plain sampling finds almost none), retrain, and test whether the model can newly reach those deeper problems.",
+        "Run a second round of self-training to see whether the newly reachable two-step problems become solvable on the first guess, not just after many tries.",
+        "Vary how many two-step training examples you use (a handful up to a few dozen) to map how the gain grows with example count."
+      ],
+      "avoid": [
+        "Don't claim self-training beats plain repeated sampling on the first guess — it doesn't; it widens what repeated sampling can reach, so bank first, then sample.",
+        "Don't expect gains at a difficulty level with too few verified examples; plain sampling can't harvest deep solutions, so you must seed them another way.",
+        "Don't read the two-step gain as more varied guesses — the count of distinct programs actually dropped; the model concentrated its guesses onto correct answers.",
+        "Don't cite the tripled two-step result as the effect size — it shrank to nothing under a stricter leak-proof re-run at matched training amount; larger-dose replications are the reliable evidence."
+      ]
+    },
+    "C19": {
+      "title": "The reasoning wall is two different failures by depth",
+      "summary": "On one- and two-step tasks the model's internal state clearly holds the answer's first step even when its written answer leaves it out: it knows but stays quiet. Push to three steps and that internal signal nearly vanishes — it barely computes the answer at all. So a shallow wall is silence; a deep wall is genuine absence.",
+      "implication": "Nudging the model to voice what it already computes can only help where that information exists — shallow tasks. At the deep wall there is nothing to surface; install the missing step via training or external tools.",
+      "next_tests": [
+        "Push the internal 'first-step' pattern into the model while it writes a two-step answer — does accuracy rise? That is the real test of whether hidden information is actually usable.",
+        "Take a model trained to overcome the wall and check whether that training makes the first step more readable in its internal state on two- and three-step tasks.",
+        "Read out the second and third steps internally too, not just the first, to map how much of the whole multi-step pipeline is hidden versus only its opening move."
+      ],
+      "avoid": [
+        "Do not call the three-step wall mere silence — internally the answer barely forms there, so it is a real knowledge gap, not just an unspoken one.",
+        "Do not assume 'readable inside the model' means 'usable for the answer' — presence is not use; the nudging test decides that.",
+        "Do not measure this with a simple yes/no 'is the operation present' check — base rates inflate it; decoding which operation came first is the honest target.",
+        "Do not over-read the one-step gap — the model does use its first step to answer about two-thirds of the time, so it is partly a quirk of the naming task; two-step tasks give the cleanest example of known-but-unspoken."
+      ]
+    },
+    "C20": {
+      "title": "Reading a model's mind doesn't let you steer it",
+      "summary": "Before answering a two-step problem, the model internally settles on which operation to do first, and a simple reader can pick that out of its internal state about 99% of the time. But pushing that exact signal back into the model during generation barely changed what it actually said — the largest effect stayed within measurement noise. A signal you can read is not one you can control.",
+      "implication": "Don't assume a skill you can detect inside a model is one you can inject to change its output. When simple activation nudging fails, add the skill by editing weights or giving the model a tool.",
+      "next_tests": [
+        "Try a stronger intervention — replace the internal signal outright, or optimize the nudge to change the output rather than just match the reader — and see if behavior finally moves.",
+        "Check whether directly editing the model's weights to install the skill also strengthens this internal signal, testing whether weight edits add what nudging cannot."
+      ],
+      "avoid": [
+        "Don't claim a model's readable internal skill can be steered out for free — simple activation nudging didn't move it, even for the signal a reader could pick out almost perfectly.",
+        "Don't read the tiny two-step effect as a win — it sat within noise of a random-nudge control and below the bar set in advance.",
+        "Don't generalize this to all steering — it's a clean failure for one simple method at one layer; stronger, targeted interventions weren't tested."
+      ]
+    },
+    "C21": {
+      "title": "Self-training installs skills the model already has, never new depth",
+      "summary": "Feeding a model its own verified two-step solutions and retraining tripled its two-step success on fresh problems (from 12% to 36%), but three-step success stayed at exactly zero. A strong two-step skill does not stretch into three steps. Self-training spreads what a model can already do; it cannot invent the next rung.",
+      "implication": "To reach a harder composition depth, generate correct solutions at that depth externally (tool-assisted search), verify them, and only then retrain. Do not expect plain self-training to climb.",
+      "next_tests": [
+        "Seed retraining with three-step solutions found by tool-assisted search rather than sampling, then check whether three-step success on fresh problems finally rises.",
+        "Re-probe the retrained model to confirm it now internally represents two-step structure while three-step structure remains absent."
+      ],
+      "avoid": [
+        "Do not expect retraining a model on its own outputs to reach a harder problem depth it cannot already solve.",
+        "Do not misread the zero three-step result as a weak install: the two-step install was strong (tripled on fresh tasks); only cross-depth transfer failed.",
+        "To extend one depth further, you must generate correct solutions at that depth externally, since plain sampling produces almost none.",
+        "The same wall holds for teaching the process, not just answers: training on two-step reasoning traces improved two-step planning but still moved three-step success not at all."
+      ]
+    },
+    "C22": {
+      "title": "Outside search finds hard skills; retraining installs them, weakly",
+      "summary": "A small model almost never solves three-step problems, so it has nothing of its own to learn from. But an outside brute-force search over the allowed operations does find working three-step solutions; retraining the model on those lifts three-step success from a hard zero to 5 of 40 fresh, never-seen tasks. The gain is real but weak, and shows mainly when the model reasons step-by-step, not in one shot.",
+      "implication": "To push a model past a difficulty wall, pair an outside search that reaches each harder rung with retraining that installs it — but expect weaker, mostly reasoning-time gains the deeper you go, and seed every rung.",
+      "next_tests": [
+        "Feed more three-step examples and more training passes, and check whether one-shot three-step success actually climbs or just plateaus.",
+        "After installing the three-step skill, test whether searching on the improved model finds four-step solutions more cheaply than before."
+      ],
+      "avoid": [
+        "Don't claim retraining cleanly installs the three-step skill — the gain is weak and appears only when the model reasons step-by-step, not in a single shot.",
+        "Don't expect installing one difficulty rung to unlock the next — four-step stayed at zero; each rung needs its own found examples.",
+        "Don't confuse the outside search with the model — the search finds the hard solutions; the model and retraining only install them."
+      ]
+    },
+    "C23": {
+      "title": "The hard reasoning wall was missing data, not a model limit",
+      "summary": "A fixed 4-billion-parameter model kept failing three-layer composition puzzles. The block turned out to be too few training examples, not the model's size. Feeding it more solutions found by an external search tool lifted its solve rate on fresh puzzles from 0% to 38% (in sixteen tries), rising steadily with no sign of leveling off.",
+      "implication": "When a small model stalls on hard multi-step tasks, try harvesting more verified solutions with an external search tool and training on them before assuming you need a bigger model.",
+      "next_tests": [
+        "Keep adding solutions past the current amount to find where, if ever, the gains stop.",
+        "Separate having more distinct examples from simply training longer, since the current test bundles the two together.",
+        "Test whether the same search-and-train recipe now unlocks even deeper four-layer puzzles more cheaply."
+      ],
+      "avoid": [
+        "Do not treat the model's earlier weak results as proof it hit a hard capability limit; it was just short on training examples.",
+        "Do not claim a pure data limit, since more examples also meant more training passes in this test; the safe claim is that more distinct found solutions install more skill.",
+        "Do not over-trust the numbers: they come from a single run with no seed-to-seed error bars, and harder puzzles past the tested range are still untested."
+      ]
+    },
+    "C24": {
+      "title": "Variety of solved examples keeps teaching, with no plateau",
+      "summary": "An automated searcher finds verified solutions to small coding puzzles, and training a compact model on them installs the skill. Improvement is driven by the number of DISTINCT solved problems, not repeated passes: rereading 40 examples barely helped (9% to 16%), while adding new ones kept lifting the solve rate with no plateau past 1,150 distinct problems.",
+      "implication": "To grow a small model's skill, feed it more distinct verified solutions rather than more training passes over the same set, and expect gains to keep coming well past a thousand examples.",
+      "next_tests": [
+        "Run a data ladder (80, 320, 1,280 examples) on harder four-step tool chains to see if they become reliable with enough distinct examples.",
+        "Repeat the training with at least three random seeds at the key points to get real error bars, since current ranges reflect only test-set noise.",
+        "Push the three-step case well past 1,280 examples with faster training to find where improvement finally stops."
+      ],
+      "avoid": [
+        "Do not claim a statistically clean gap between adjacent data amounts or for the four-step result; only the broad upward trend and the more-variety comparison are solid.",
+        "Do not credit the gains to extra training passes: rereading the same examples stayed within noise, while adding distinct new problems is what actually helped.",
+        "Do not measure the four-step gain against a from-scratch baseline near zero; the three-step training already carries over to about 7%, so compare against that.",
+        "Do not treat the four-step skill as reliably learned: its single-best-guess solve rate stayed flat near 3% and the result is only marginal."
+      ]
+    },
+    "C25": {
+      "title": "Self-training sharpens step-by-step guidance, not real planning",
+      "summary": "Given a fixed list of 32 operations to build a program, a fresh 4-billion-parameter model ranks its opening move — three steps from the goal — no better than random guessing, though it does well one step out. Retraining it on problems it already solved sharpens these step-by-step rankings, making its search competitive with brute force at low effort — better guessing, not real planning.",
+      "implication": "Don't trust a fresh model's early planning moves. Train it on its own solved problems, then measure whether the sharper next-step guidance actually beats brute-force search at your compute budget.",
+      "next_tests": [
+        "Map the full trade-off between search effort and problems solved for the trained guide — does it ever beat brute force, or just tie it?",
+        "Test whether the improvement survives when the model freely proposes operations instead of picking from the fixed 32-item menu.",
+        "Train the model one level deeper and check whether it installs useful guidance one step further from the goal."
+      ],
+      "avoid": [
+        "Don't call this planning: it's better move-ranking near the goal, not a demonstrated internal search mechanism.",
+        "Don't claim the fresh model is reliably worse than random — it solved one task versus random's two, a gap within noise; say only 'no better than random'.",
+        "Don't credit the built-in distance shortcut for the solves — shortcut-plus-random barely helps; you still need to try every operation.",
+        "Don't oversell training: it makes the guide competitive with brute force at low effort, not better, and only one search width was tested.",
+        "Don't claim improvement on the opening move — training helped only on moves closer to the goal, not the first step."
+      ]
+    },
+    "C26": {
+      "title": "Thinking longer sharpens recognition but can't teach planning",
+      "summary": "Letting an untrained model think longer before answering helps it recognize which single step fits when the situation is already spelled out. But it cannot plan the first of several moves toward a distant goal — that stayed at pure guessing, about 1 in 32, even with 2,048 thinking tokens. Extra thinking amplifies pattern-matching, not forward planning.",
+      "implication": "Spend thinking budget on recognition-heavy subproblems where the situation is already laid out. Don't expect longer thinking to close a multi-step planning gap — that needs training on verified solutions, not more compute at answer time.",
+      "next_tests": [
+        "Push thinking budgets much higher (8,000-16,000 tokens) to confirm planning stays flat rather than just being starved of compute.",
+        "Take a model already trained to plan, give it thinking time, and see whether thinking amplifies the planning it now has.",
+        "Re-run with the model freely writing out its answer instead of scoring ranked guesses, to confirm the result holds outside the scoring shortcut."
+      ],
+      "avoid": [
+        "Don't conclude thinking can never help planning — this model was never trained to reason about this task, so training the thinking process itself remains untested.",
+        "Don't claim longer thinking unlocks planning: naming the first of three moves stayed at chance up to 2,048 thinking tokens.",
+        "Don't count gains on the later steps as planning — the setup hands the model the true intermediate result, so those only measure recognition.",
+        "Don't treat the two levers as interchangeable: training on verified solutions lifts planning; thinking time lifts only recognition.",
+        "Don't compare a freely written answer against ranked-guess scores — that's an unfair channel mismatch; compare think-then-rank against plain rank."
+      ]
+    },
+    "C27": {
+      "title": "Two boosts stack for easy moves, not for planning",
+      "summary": "Two separate boosts — extra fine-tuning and letting the model think out loud at answer time — combine cleanly when the goal is one move away, each adding roughly what it adds alone. When the goal is three moves away, thinking out loud adds almost nothing, boosted or not. Caveat: this model was never trained to reason, so this is a baseline, not proof thinking can't plan.",
+      "implication": "Don't expect answer-time thinking to help multi-step planning on a model trained only to emit answers. Test whether training the model on correct reasoning traces actually installs planning before assuming it helps.",
+      "next_tests": [
+        "Collect step-by-step reasoning that leads to correct three-move answers, fine-tune the model to produce that reasoning before its answer, and check whether it can then actually plan.",
+        "Repeat the four-way comparison with twice as many test cases to tighten the shaky planning numbers if that question needs a firmer answer."
+      ],
+      "avoid": [
+        "Don't cite this as proof that thinking can't help planning: this model was never trained to reason, so it only tests thinking bolted onto an answer-only model.",
+        "Don't headline this as a positive 'the boosts stack' result: they only stack on easy one-move goals; on planning there's nothing to stack because thinking barely helps.",
+        "Don't treat the flat planning result as a solid zero: with only 40 test cases the numbers are too shaky to call it a firm no-effect."
+      ]
+    },
+    "C28": {
+      "title": "Train on the plan, not the answer or the after-the-fact story",
+      "summary": "On fresh three-step problems, a small model trained on short correct plans (break the task into steps, then solve) beat one trained on bare answers — roughly 33% versus 20% solved when allowed multiple tries. But feeding it a wrong plan dropped it below the answer-only model, and training on the model's own rambling successful thoughts helped nothing over answers.",
+      "implication": "Train on prompt to explicit step-by-step plan to solution, and let the model think at answer time. Skip its own after-the-fact reasoning — that just narrates an answer it already had.",
+      "next_tests": [
+        "Check whether these plans actually teach the model to pick the right next step in one shot, or only help it cover more solutions by thinking through them.",
+        "Retrain the answer-only model with a matched amount of text and more than one random seed, to rule out that extra training text or luck explains the plan model's edge."
+      ],
+      "avoid": [
+        "Don't train on the model's own successful reasoning and expect gains — it tied plain answers and lost badly to real plans; those thoughts are after-the-fact justifications, not plans.",
+        "Don't claim the plan-trained model learned to pick the right first step in one shot — it solves more only by thinking things through, which is a different and untested skill.",
+        "Don't credit the plan model's win to it simply thinking longer — a matched model given a wrong plan thought just as long and did worse, so it's the correct plan content that mattered.",
+        "Don't deploy the plan-trained model with thinking turned off — it nearly breaks (about 1% solved); it needs to reason at answer time to work."
+      ]
+    },
+    "C29": {
+      "title": "Teaching a model to prefer its right answers wrecks its writing",
+      "summary": "A small model already rates its own correct answers above its wrong ones about 80% of the time, so it seems like a good judge of itself. But training it to actively favor its correct answers destroyed its ability to generate them: single-best-guess success crashed to near zero. Simply training longer on the correct answers alone worked far better.",
+      "implication": "To turn a model's occasional right answers into reliable first-try answers, keep training on those correct answers longer; do not train it to rank its right answers over its wrong ones.",
+      "next_tests": [
+        "Try a gentler version of the prefer-correct training (far fewer steps, a strong pull back toward the original model, stop early on a held-aside score) to see if any careful setting gives a gain instead of a collapse.",
+        "Keep doubling the amount of plain training on correct answers (3, 6, 12, 24 passes) and track whether first-try success keeps climbing toward the model's best-of-many-tries rate.",
+        "Test whether the model's 80% self-judging ability can be used at answer time to pick the correct guess out of several, with no extra training and no collapse."
+      ],
+      "avoid": [
+        "Don't assume anchoring the prefer-correct training to the original model fixes the collapse: it softens the damage but still ends up worse than plain longer training.",
+        "Don't claim the prefer-correct training helps first-try reliability: both first-try success and best-of-many-tries success crashed, and it never beat simply training longer.",
+        "Don't read the model's 80% self-rating as proof it can pick its own correct answer at answer time: rating two answers side by side is not the same as choosing one while writing, and that remains untested.",
+        "Don't credit the tiny early bump before collapse: it was inside the noise for a single task and vanished immediately.",
+        "Don't compare against an undertrained baseline: doubling the training passes tripled first-try success, so always match training length before judging any method."
+      ]
+    },
+    "C30": {
+      "title": "Feed the model its own next step as a hint",
+      "summary": "A small model often \"knows\" the first step of a two-step problem in its internal activity even when it can't act on it. Reading that step out and writing it into the prompt as a hint lifted the single-best-guess solve rate on two-step tasks sixfold (3% to 19%) — the first test-time trick to actually raise capability. But only the exact step value helps; naming the step's type alone just widens the guesses.",
+      "implication": "Extract the model's own implied next step and inject it as a text hint rather than editing internal activations. Give the concrete value, not just the operation type — the type alone won't fix the top guess.",
+      "next_tests": [
+        "Check whether the exact step value (not just its type) can be read out of the model's internal activity — if it can, the hint could be generated automatically with no extra training; if it can't, that pinpoints what the model never actually computes.",
+        "Test the hint on problems where the exact step is guessable from the input numbers versus where it is hidden, to see when automatic hinting can work.",
+        "Instrument whether the model actually uses the injected step, and repeat across at least two random seeds."
+      ],
+      "avoid": [
+        "Don't assume reading out just the step TYPE deploys capability — a type-only hint performed no better than no hint at all, because the readout is only right about a third of the time.",
+        "Don't confuse 'more of the guesses are now correct somewhere' with 'the top single guess is correct' — the step type widens the spread of guesses but doesn't fix the best one; you need the exact value for reliable one-shot answers.",
+        "Don't read the hint's benefit as the model just copying the answer from the input: a check on the raw input embedding scored at chance, so the read-out step is genuinely computed internally, and the gains concentrate on the cases where the readout was correct.",
+        "Don't expect this to rescue three-step problems: the internal signal there is too faint, and even a perfect exact-step hint barely moved the needle (about 1%)."
+      ]
+    },
+    "C31": {
+      "title": "The model computes the operation but just reads off the number",
+      "summary": "On multi-step tasks, we split what the model knows into two parts: which kind of operation to do, and what number it uses. Reading the model's internal activity names the operation kind far better than the input-output examples alone (41% vs 27%). But the number is fully readable from the examples themselves — a trivial classifier gets it as well as the model does. The operation is genuinely internal; the number is not.",
+      "implication": "To supply the missing number, skip the model and use a cheap classifier over the raw inputs and outputs — lengths, sums, min/max, differences. The model holds no special representation of it to extract.",
+      "next_tests": [
+        "Combine the model's read-out of the operation kind with a cheap classifier's read-out of the number into one hint pipeline, and check whether it lifts accuracy as much as being handed both answers directly.",
+        "Recheck other quantities we thought were 'internal to the model' against a plain classifier over inputs and outputs, to see which are truly model-computed versus just readable from the data."
+      ],
+      "avoid": [
+        "Don't treat the number as hidden model knowledge to extract: a plain classifier over the inputs and outputs reads it as well as the model's internals and actually helps more when used as a hint.",
+        "Don't judge whether something is 'internal to the model' by probing the very first layer — a quirk of the position encoding makes that layer look blank for every task, so it wrongly implies nothing is there. Compare against a real classifier over raw inputs and outputs instead.",
+        "Don't over-read the tiny gain from reading the model's internals: it faithfully reflects what the model decoded, but it's capped because the model only gets the concrete step right about a quarter of the time.",
+        "Don't claim the operation kind is just readable from the examples: the model's internals beat the plain input-output classifier on naming it (41% vs 27%), so that part really is computed inside the model."
+      ]
+    },
+    "C32": {
+      "title": "Deep tasks fail on the plan, not the numbers",
+      "summary": "On three-step chained problems the model almost never proposes the right sequence of operations — under 2% of the time. But hand it the correct sequence and a cheap search over numbers finished every task (100%), while random sequences mostly failed (about 11%). So failures are wrong-plan, not wrong-value; picking which operations in what order is the real wall.",
+      "implication": "To clear the wall, search over operation sequences with a tool or enumerator, then cheaply fill in numbers. Don't expect number-side hints or fine-tuning to help — the bottleneck is proposing the plan.",
+      "next_tests": [
+        "Check whether wrong-plan-not-wrong-number holds across other task types, or is specific to this list-manipulation task.",
+        "Sweep the number of chained steps to find exactly where the model's ability to propose the right plan collapses.",
+        "Test whether the 'banking' training method specifically teaches plans: does a banked model propose correct operation sequences more often than the base model?"
+      ],
+      "avoid": [
+        "Don't call this a wrong-number problem: given the right plan the model gets the numbers essentially for free, so its actual failures are wrong-plan.",
+        "Don't over-read the 100% number-fill success as deep — the search is handed the exact set of allowed values, so it only shows numbers are easy once the plan is known.",
+        "Don't measure structural skill by asking the model to write out the operation sequence — formatting alone makes it fail even on one-step tasks; judge by whether its own code behaves like the correct plan.",
+        "Don't treat plan-then-fill as a single forward-pass gain: it's tool-augmented search (generate many, filter), and the win comes from supplying or searching the plan, not from the model."
+      ]
+    },
+    "C33": {
+      "title": "Training installs the plan; the base model can't invent it",
+      "summary": "On a hard task needing a 3-step chained procedure, the untrained 4-billion-parameter model NEVER proposed the right step-sequence (0%). Training it on worked examples lifted that to about 51% on brand-new tasks it had never seen — a real, generalizable skill. What remains is a smaller gap: it picks the right steps but sometimes plugs in wrong values (right plan, about 36% fully correct).",
+      "implication": "Spend your training budget teaching the step-by-step plan, not tuning values — the base model's failure is structural. Once the plan is installed, add a cheap pass to fill in correct values, lifting results from ~36% to ~51%.",
+      "next_tests": [
+        "Actually run the two-stage pipeline end-to-end (train the plan, then fill in values) to confirm the ~51% result, which is so far only inferred.",
+        "Check whether a lighter training dose installs proportionally less of the plan.",
+        "Test whether 'training installs the plan' holds across different model families and task types."
+      ],
+      "avoid": [
+        "Don't credit the gain to memorization: the plan-proposal skill rose on brand-new tasks the model never trained on, so it genuinely generalized.",
+        "Don't expect value-tuning tricks to help the untrained base — it proposes no correct plans at all, so there's nothing to fix on the value side.",
+        "Don't over-trust the size of the leftover value gap or the ~51% end-to-end figure: the sample was small (80 tasks) and the pipeline wasn't run in full."
+      ]
+    },
+    "C34": {
+      "title": "With a code interpreter, searching structure beats a trained model",
+      "summary": "On depth-3 program tasks, letting a machine enumerate every possible step-skeleton, fill in values by running each against known outputs, then pick the answer most guesses agree on solved about 97% of tasks. Using the trained model's own proposed skeleton solved only about 46%, because the model proposes the right shape only half the time.",
+      "implication": "When you have an interpreter and the space of possible program shapes is small enough to list exhaustively, enumerate-and-run instead of trusting the model's structure; the model's guess only wins in a single forward pass with no tool.",
+      "next_tests": [
+        "Grow the space of possible program shapes past what you can list exhaustively (more operations, deeper programs) and check whether the model's shape-guessing then beats blind enumeration at equal compute.",
+        "Measure the gap with no interpreter at all, one forward pass only: the trained model solves about 48% here where the untrained base solves none.",
+        "Stress the agree-on-the-answer picker with more probe inputs and adversarial parameters to see if it still avoids answers that only look right on the visible examples."
+      ],
+      "avoid": [
+        "Do not call the trained-model-structure recipe the best real-world approach: it solves only about 46%, capped by how often the model proposes the right shape, and blind enumeration beats it.",
+        "Do not report how many tasks were merely covered by some candidate: enumeration covers nearly all of them by construction. Only the single final pick that must be correct is a meaningful score.",
+        "Do not assume enumeration always wins: it wins here because roughly four thousand possible shapes is small enough to list; for much larger spaces the model's shape-pruning may become necessary and is untested.",
+        "Do not conclude training the model is useless: it installs the right program structure into a single forward pass, which is the asset when no interpreter is available."
+      ]
+    },
+    "C35": {
+      "title": "Brute-force search still beats trained models at program synthesis",
+      "summary": "For a small list-manipulation language, exhaustively trying every program shape and then filling in its values solved about 97% of tasks even as target programs grew larger. Trained models proposed the correct shape far less often — roughly 51% at one size, dropping to 10% at the next. Even one step deeper, brute force stayed cheap: under two minutes on eight CPUs. Whether a trained guide could ever win is still untested.",
+      "implication": "Make exhaustive search your default solver for these small-program tasks. Before betting effort on a trained model to guide it, measure where brute force actually becomes too slow or memory-hungry at greater program sizes.",
+      "next_tests": [
+        "Push to the next program size up and find where exhaustive search finally becomes too slow or memory-hungry in real wall time and memory.",
+        "Test whether training can fix the model's collapsing shape-proposal rate on bigger programs — via curriculum or training on deeper examples — or whether it is a genuine ceiling; note the two rates came from different models, so this is not yet a clean comparison.",
+        "Without an interpreter, using only a single model forward pass, measure how often the trained model outputs a usable program shape by program size, versus the base model's zero."
+      ],
+      "avoid": [
+        "Do not declare a universal law that trained guidance can never win — no trained guide was ever accurate enough to even run the search here.",
+        "Do not dismiss the model's 10% shape rate on bigger programs as a measurement glitch: exhaustive search solves 97% of those same tasks, so they are solvable — the model simply fails to propose the right shape.",
+        "Do not assume the model can cheaply narrow the search: reading out a program's behavior costs a full enumeration anyway, and the model's guess at whether a half-finished program was completable was barely better than a coin flip.",
+        "Do not read the 51%-to-10% drop as caused by program size — the two numbers come from different, unmatched trained models."
+      ]
+    },
+    "C36": {
+      "title": "Small models pick the wrong plan, not wrong numbers",
+      "summary": "Across three unrelated programming task types, a 4-billion-parameter model almost never solved a problem alone (0-2 percent), and its failures were the wrong sequence of steps, not right steps with bad values. Given the correct skeleton, filling in values is trivial. So the model computes values; it cannot propose deep structure.",
+      "implication": "Stop trying to sample more from the model to find the plan. Wrap it in a tool that brute-force searches over step-sequences, fills in values, and runs the code to pick the answer that works.",
+      "next_tests": [
+        "Check whether training the model to reuse learned skeletons, and its breakdown on deeper problems, also holds across these three task types (so far only tested on one).",
+        "Test whether the split — the model knows which operation to use but must read parameters off the surface — generalizes across task types.",
+        "Investigate why one task type (small-number register machines) lets random guessed values succeed more often; likely the smaller value space causes accidental matches, not a real difference."
+      ],
+      "avoid": [
+        "Do not assume this is a quirk of one hand-built task language; it repeats on text-character edits and integer register machines too — the wall is always planning, and brute-force search always beats the raw model.",
+        "Do not over-read that random values succeed more often on register machines (about a third of the time); that is just its smaller value space causing accidental matches, not a break in the pattern — the plan is still what fails.",
+        "Remember the scope: this confirms the raw-model finding across task types, but the training-and-depth results and the internal-representation probes were tested on only one task type and still need cross-type checks."
+      ]
+    },
+    "C37": {
+      "title": "The reasoning wall is about code, not multi-step thinking",
+      "summary": "This small model hits a wall linking three or more formal, procedural steps. But give it the same multi-step chain as plain English sentences over made-up names, and it follows the trail near-perfectly through four hops (94-100% correct, versus about 4% for a blind guess). So the limit is specific to code-like formats, not a general inability to reason in steps. Plain-English chains only start slipping at five to six hops.",
+      "implication": "Present multi-step tasks as ordinary sentences, not as code or dictionary-style structures, to unlock the model's intact step-by-step reasoning. Watch for it degrading past four or five linked hops.",
+      "next_tests": [
+        "Test whether the plain-English advantage also holds when the model must INFER a hidden multi-hop rule from examples, not just follow a chain it was given.",
+        "Rerun the compare-thinking-vs-not test with a bigger thinking budget and cleaner answer extraction, since the current budget cut answers off.",
+        "Pin down what causes the five-to-six-hop slip: is it chain depth itself, or the number of distracting facts the model must hold in mind?"
+      ],
+      "avoid": [
+        "Do not claim this fixes the harder task of inferring an unknown structure from examples; this only tests following a chain the model is handed.",
+        "Do not read the code-format failure as proof the model can't reason about formal steps: the dictionary format makes it echo the input as a code block instead of reasoning, so that result is muddied by presentation.",
+        "Do not read anything into the thinking-mode results: the thinking budget was too small and cut answers off before completion.",
+        "Do not overclaim there is no wall in plain English at any depth: it does degrade at five to six hops; the finding is only that the three-hop wall seen with code formats is absent."
+      ]
+    },
+    "C38": {
+      "title": "The model can follow a rule but not discover one",
+      "summary": "Given a made-up rule stated outright, the model applied it correctly about 86% of the time. Asked to infer that same simple rule from worked examples, it scored 0% in a single pass — below random guessing. Step-by-step thinking helped partway (about 50%) but stayed error-prone. Discovering rules is hard even in plain language, where executing them is easy.",
+      "implication": "Hand the model the rule or structure to apply — its reliable strength — rather than asking it to figure out the underlying rule from examples, which it does poorly even with room to reason.",
+      "next_tests": [
+        "Test rule-discovery with step-by-step thinking on harder cases where the model can still reliably apply a known rule, so the discovery limit is measured on its own.",
+        "Check whether many practice examples, or few-shot prompting, can teach the model to discover rules the way they can install a rule it merely executes.",
+        "Find where the model shifts from applying a rule to failing to discover one — e.g. a vaguely stated rule, or one example versus many."
+      ],
+      "avoid": [
+        "Do not call rule-discovery impossible in plain language: step-by-step thinking lifted it from 0% to about 50%, so it persists as a difficulty, not a hard wall.",
+        "Do not compare discovery against application on harder multi-step versions of this task — applying the rule itself breaks down there, so the two can only be cleanly compared on the simplest one-step case.",
+        "Do not read this as contradicting the finding that the model executes rules well in language; the two are complementary — executing is easy, discovering is hard.",
+        "Only the simplest depth and a single run were tested; the deeper step-by-step discovery curve is still owed."
+      ]
+    },
+    "C39": {
+      "title": "Models follow a new rule but can't discover one",
+      "summary": "Learning from examples surfaces patterns the model already knows rather than inventing new ones. Told an unusual counting order outright, the model applied it almost perfectly (97%). Shown examples of that same order and asked to figure it out, it scored at chance (12%) — and more examples made it worse, not better.",
+      "implication": "When you need the model to follow an unusual rule, state the rule explicitly instead of hoping it infers one from examples — and don't add more examples expecting it to crack a genuinely novel pattern.",
+      "next_tests": [
+        "Gradually scramble the counting order in small steps and check whether the model's ability to work it out from examples fades smoothly as the order drifts further from the normal one.",
+        "Train the model on many unusual orders, then test a brand-new one, to see whether discovering novel patterns can be taught or is a fixed limit.",
+        "Repeat with a different familiar structure, like sorting by a familiar key versus an arbitrary given one, to confirm the follow-versus-discover split isn't specific to counting orders."
+      ],
+      "avoid": [
+        "Don't claim the model learns nothing from examples — it does work out familiar patterns (45%, well above the 10% chance level). The limit is that this only works for patterns it already knows.",
+        "Don't blame the failure on the rule being hard to apply — when simply told the rule, the model used it 97% correctly. The bottleneck is discovering the rule, not applying it.",
+        "Don't rely on the model's step-by-step thinking mode here — it makes the model write code, which muddies the results; plain prose reasoning is cleaner.",
+        "Don't test this with character-by-character string puzzles — the small model fails at assembling characters regardless, which hides the real signal.",
+        "This is a single run, and even familiar-pattern discovery was imperfect (45%); the real result is the contrast between telling versus showing and familiar versus novel, not the exact scores."
+      ]
+    },
+    "C40": {
+      "title": "The model shows its doubt in numbers, not words",
+      "summary": "When this small model answers, the probability it silently assigns to the digit it writes reveals whether it's right. Within one hard question type, that inner probability sorted right from wrong answers about 95% of the time, far beating surface cues. But when asked out loud to rate itself, it says \"100\" every time and its yes/no self-checks are no better than a coin flip.",
+      "implication": "Use the model's answer-token probability (or its sharpness) as a confidence signal to skip or reroute shaky answers; ignore anything the model says about its own confidence.",
+      "next_tests": [
+        "Check whether answer-token probability works as a skip signal on other task types (like coding problems), or only on this puzzle format.",
+        "On the same task, compare the model judging its own answer versus judging someone else's, to see why its self-check fails while it can verify code well elsewhere.",
+        "Build a deployment rule that skips or reroutes low-confidence answers and attempts high-confidence ones, then measure how much accuracy you gain per answer you're willing to skip."
+      ],
+      "avoid": [
+        "Don't say the model 'knows itself' outright: the self-knowledge lives only in its output probabilities, never in what it can state.",
+        "Don't treat the fact that average confidence tracks difficulty across question types as real self-knowledge; that's confounded by surface features. The clean result is sorting right from wrong WITHIN one question type.",
+        "Don't ask a small model for a 0-to-100 confidence number: it just answers 100 every time. Read the answer-token probability instead.",
+        "Results are from a single run and the broken self-rating may partly depend on how it was prompted."
+      ]
+    },
+    "C41": {
+      "title": "Pick the model's most confident answer, not the most common",
+      "summary": "Generate several answers, then keep the one the model itself scored as most probable — no code-running or checker needed. That beats majority voting, which stays flat near 48% no matter how many answers you draw, because the model keeps confidently repeating the same wrong rule. Confidence-picking instead climbs from about 47% to 62% as you sample more.",
+      "implication": "When you spend compute on multiple samples, choose the answer by the model's own confidence rather than by vote, and skip or escalate problems where even its most confident answer scores low.",
+      "next_tests": [
+        "Test whether reading one yes/no confidence token beats averaging word-by-word probabilities as the confidence signal on real code tasks, then pit the full pick-plus-skip policy against simply sampling more at the same compute.",
+        "Find why steering extra samples toward uncertain problems only tied with spreading samples evenly — look for a cheap early signal, like how varied the first two answers are, that flags which problems more sampling would actually solve.",
+        "Combine the tactics: pick by confidence, skip low-confidence problems, route the unsolvable ones to a tool or bigger model, and chart accuracy against compute cost."
+      ],
+      "avoid": [
+        "Don't claim that steering more samples toward hard problems helps — here it merely tied with spreading samples evenly; the gain came from picking by confidence and skipping, not from where the budget went.",
+        "Don't select answers by majority vote for this model — accuracy stays flat however many you sample, because the model often confidently repeats the same wrong answer.",
+        "Remember this was shown on one toy task; on real code the signal that transfers is a focused yes/no confidence judgment, not an average of word probabilities.",
+        "Treat this as a single-run, self-reviewed result — the independent design check didn't happen — so confirm it before relying on it."
+      ]
+    },
+    "C42": {
+      "title": "A model's confidence dips at its first mistake",
+      "summary": "When a small model works through a multi-step arithmetic chain, its per-step confidence drops right at the step where it first slipped, not just vaguely late in the chain. Confidence naturally rises deeper in, so you must subtract that trend first; once you do, the dip reliably marks the mistake, letting you redo only from there.",
+      "implication": "Read the model's confidence at each step, find the lowest (after removing the natural rising trend), and re-do the chain from that step instead of restarting. This works best when the model slipped only once.",
+      "next_tests": [
+        "Test whether re-doing the located step with some randomness (not a plain retry, which reproduces the same wrong answer) actually fixes chains without peeking at the true answer.",
+        "Reduce messy multi-mistake chains by using shorter/easier chains, or find-and-fix the first error one at a time and re-run until clean.",
+        "Check whether the confidence-dip trick also finds mistakes in non-math step-by-step reasoning, or if it only works for arithmetic."
+      ],
+      "avoid": [
+        "Do not headline the raw confidence numbers: confidence climbs the deeper the model goes, so you must subtract that per-position trend before the dip actually points at the mistake.",
+        "Do not run this on unfamiliar or scrambled step orders under forced step-by-step output: the model applies one wrong rule everywhere, so every step looks wrong and there is no single mistake to locate.",
+        "Do not claim clean first-mistake location on chains with several mistakes: the dip finds a mistake most of the time but the FIRST one only about a quarter of the time. The clean story holds only for single-mistake chains, which are under half of the error cases.",
+        "A plain retry of the bad step just reproduces the same wrong digit; the reported fixes assumed the right step was found. A real fix needs randomized re-sampling. Results are from one run on familiar-order arithmetic only."
+      ]
+    },
+    "C43": {
+      "title": "Fine-tuning nudges rule-discovery but can't fully install it",
+      "summary": "Show a small model six examples of a hidden rule and ask it to infer the rule and apply it. Untrained, it scores at chance (~9%). Answer-only fine-tuning lifts it to ~40% and is still climbing with data, but stalls well below the ~72% it hits when simply handed the rule, and it learns one specific rule type, not a general knack.",
+      "implication": "Don't expect answer-only fine-tuning to install general rule-discovery: it half-works and keeps improving with data, but plateaus below full skill, transfers poorly to new rule types, and erases the model's ability to apply rules it's given.",
+      "next_tests": [
+        "Train on several rule families while holding one type out entirely, so you test whether the model learns general rule-discovery instead of memorizing one rule type.",
+        "Teach the step-by-step reasoning for working out the rule rather than just the final answer: does explaining the procedure install it better and avoid the forgetting? If answers-only fails but reasoning works, the limit is single-pass depth, not missing knowledge.",
+        "Mix in examples of applying already-given rules during training, to check whether learning to infer rules and retaining the ability to apply them can coexist.",
+        "Keep increasing training data (16k, 32k) to see whether rule-inference eventually reaches the ~72% ceiling for applying a known rule or permanently plateaus below it."
+      ],
+      "avoid": [
+        "Don't claim fine-tuning cleanly installs rule-discovery: it plateaus around 40%, far below the ~72% ceiling for applying a known rule, and only learns one specific rule type (~30% on a new type).",
+        "Don't claim rule-discovery is impossible to install: fine-tuning lifts it from ~9% to ~40% and keeps rising with more data.",
+        "Don't judge poor transfer to a new rule type without first checking the model can even apply that rule when told it (~46% there); part of the shortfall is application difficulty, not failure to transfer the inference skill.",
+        "Don't read the rule-inference gain without noting the cost: answer-only training crashed the ability to apply given rules from ~72% to ~9%. Single seed, and testing one rule type then another is not a real general-inference test."
+      ]
+    },
+    "C44": {
+      "title": "Reasoning limits are missing compute, not missing knowledge",
+      "summary": "Asked to apply a brand-new hidden rule in a single answer, a small model scores at chance — roughly 1 in 100 — even after being trained on that exact rule. Let it write out the steps first and it gets every case right. The knowledge is there; what it lacks is room to compute across tokens.",
+      "implication": "Always give the model a scratchpad to work through multi-step rules step by step. Never train it to blurt a one-shot answer, which forces work it cannot do and erases skills it already had.",
+      "next_tests": [
+        "Train on several different hidden rules while holding one out, to see whether writing out reasoning teaches general rule-cracking or just memorizes each taught procedure.",
+        "Give an untrained model a strategy it can actually follow (counting steps, not hard arithmetic) to test whether thinking out loud helps even without being taught the specific rule.",
+        "Chart accuracy against the number of reasoning steps written to find the minimum thinking length below which the model fails."
+      ],
+      "avoid": [
+        "Do not claim writing out reasoning installs general rule-cracking: it only nails the one specific rule it was taught to execute, and a different rule from the same family transfers at only about 13%.",
+        "Do not read the untrained model's 0% with a strategy hint as 'thinking out loud does not help' — the hint's arithmetic was itself too hard for it; you need an easy-to-follow strategy to test this cleanly.",
+        "Findings are from a single run, and the general-rule test (train on several rules, hold one out) is still owed."
+      ]
+    },
+    "C45": {
+      "title": "Teach guess-and-check reasoning and it transfers to unseen rules",
+      "summary": "A small model was taught a general guess-and-check habit: for a hidden rule, try each candidate, work out the rest from one example, verify on another, keep what fits, and apply it. Trained on several rules and tested on one never shown as the answer, it solved that unseen rule about as well (~91%) as the trained ones — learning the procedure, not just the rules. But only while reasoning out loud.",
+      "implication": "To install a missing skill like inferring a rule from examples, teach the general step-by-step strategy across many varied cases and always run it with its reasoning shown — never as a direct one-shot answer.",
+      "next_tests": [
+        "Test a structurally different rule — a two-step or reordering rule — to see if the guess-and-check habit generalizes beyond the single rule shape it was trained on.",
+        "Use a never-trained-on rule whose arithmetic never appeared even as a rejected guess, to prove it learned general inference rather than reusing familiar arithmetic.",
+        "Test whether the same guess-and-check habit carries over to entirely different material, like text strings or lists, instead of just numbers."
+      ],
+      "avoid": [
+        "Don't claim unlimited general inference: every rule tested has the same shape (multiply then add), and the unseen rule is only a new multiplier within that shape, not a genuinely new kind of rule.",
+        "What generalized is accepting the right answer through verification (the inference logic), not new arithmetic — the never-trained-on rule's math already showed up in training as a rejected guess.",
+        "This works only while the model generates its reasoning out loud; forced to answer in one shot it drops to about 1 in 100. Always run it with reasoning shown and enough output room to finish, since a too-short limit truncates it to zero.",
+        "Results come from a single training run using a small-batch workaround, and the reasoning is long, so allow ample output length for it to complete.",
+        "This habit generalizes only within the same kind of material it was trained on; applied to different material like lists or strings it transfers at essentially zero and even interferes, so don't reuse the trained add-on outside its original domain."
+      ]
+    },
+    "C46": {
+      "title": "On real code, asking the model to grade itself beats averaging its confidence",
+      "summary": "The confidence tricks that worked on toy math carry over to real programming (tested on two standard coding benchmarks), but the winner flips. Averaging the model's word-by-word certainty barely beats random picking. Better: have the model write the code, then answer a strict yes/no \"is this correct?\" prompt in one shot, and trust that single judgment.",
+      "implication": "When no test is available, sample several answers, ask the model to self-grade each with a yes/no prompt, keep the highest-rated, and flag or reroute low-confidence cases. If any runnable test exists, run it first — it beats every confidence signal.",
+      "next_tests": [
+        "Let the model think before it self-grades and see if the better judgment is worth the extra work.",
+        "Compare the full grade-and-reroute policy against simply generating more samples for the same compute cost.",
+        "Grade code step by step to pinpoint the shaky part and rewrite only that section.",
+        "Try confidence-based pruning of guesses in the grammar-learning line once each guess has its own check step."
+      ],
+      "avoid": [
+        "Do not pick code by averaging word-by-word confidence — it barely beats a plain majority vote among tries. Use the model's yes/no self-grade instead.",
+        "Do not claim confidence beats running a test: one visible test outperforms every confidence signal. Confidence is only for when no test can be run.",
+        "Do not measure self-consistency when there are no visible tests to cluster on — it is undefined there; use the smaller test-backed slice only as a rough ceiling check.",
+        "Score confidence signals problem-by-problem against a code-length baseline, not pooled across all problems, since verbose code and problem difficulty otherwise inflate the numbers.",
+        "Results are still one random seed, eight samples, no deliberation; the coding gains are real but small in absolute terms."
+      ]
+    },
+    "C47": {
+      "title": "Confidence ranks answers but can't clean training data",
+      "summary": "When choosing which of a model's own code answers to train on, keeping only the high-confidence ones did no better than a random grab — even though the confident set was far purer. Only answers checked by actually running the code reliably helped (single-shot accuracy rose from 8% to 24%). Confidence still ranks finished answers well, just can't replace execution.",
+      "implication": "Keep running the code to verify answers you train on. Use confidence only to rank finished candidates within a single task, and re-rank every round rather than trusting a fixed cutoff.",
+      "next_tests": [
+        "Collect far more attempts and train on the top-ranked slice — does a larger, purer batch finally beat random selection without running the code?",
+        "Run a real second training round comparing rank-based filtering against a fixed confidence cutoff to see which one quietly decays.",
+        "Try tasks written in plain language instead of code — does cheap no-reasoning confidence become a useful filter there?",
+        "Give the judge more thinking room — does that improve its ranking of the hardest answers, which currently get cut off before it finishes?"
+      ],
+      "avoid": [
+        "Don't judge a filter by its accuracy averaged across all tasks — that hid that it was no better than a coin flip within any single task; measure within-task and control for difficulty.",
+        "Don't set training quotas by counting candidates — wrong answers explode at harder levels; weight by how confident the judge is instead.",
+        "Don't reuse a fixed confidence cutoff across training rounds — scores drift upward on the model's own output while the ranking stays honest; re-rank every round.",
+        "Don't read a drop in no-reasoning accuracy as lost ability — the model just shifted its default outputs onto the trained topic; check its reasoning-mode performance before concluding damage.",
+        "Don't assume that ranking finished programs works on half-finished ones — that was tested separately and came out at chance (about 51% correct).",
+        "Don't trust the default thinking budget for a new judging job — here almost all judgments were forced to stop before finishing."
+      ]
+    },
+    "C48": {
+      "title": "Teaching a search routine helps only at the depth you drilled",
+      "summary": "Fine-tuning a 4-billion-parameter model on ~1,500 worked guess-and-check traces made it far better at the two-step puzzles it practiced (lists rose from 37% to 70% success), but gave no measurable help one step deeper. The skill also failed to carry across problem types, and a routine trained elsewhere actively hurt. Deeper problems may still yield to more thinking budget, which stays untested.",
+      "implication": "Train the exact difficulty and problem type you need, and put the reasoning in the model's scratch-thinking channel, not its answer, to avoid erasing skills it already had.",
+      "next_tests": [
+        "Give the model far more room to think (double and quadruple its current thinking budget) on the three-step puzzles and see whether success keeps climbing or flattens out — base success already doubled from 5% to 10% when budget doubled, but answers were still cut off most of the time.",
+        "Train the guess-and-check traces on one problem type only, then test on the others at the same difficulty, to check whether a taught routine stays stuck to its practice material the way a borrowed routine did.",
+        "Rerun the plain instruction-prompt version with cleaner output formatting, since long prompts wrecked the answer format before they could change the actual search behavior.",
+        "Retry judging half-finished programs while showing the model the allowed value ranges and per-example constraints, since judging from the program shape alone currently does no better than a coin flip."
+      ],
+      "avoid": [
+        "Do not conclude that instruction-prompting fails until you check whether the long prompt simply broke the answer format — formatting collapsed from 89% clean to as low as 44% before search behavior changed at all.",
+        "Do not judge whether a model can propose the right solution shape using only its visible practice cases — require the same proposed shape to also work on fresh unseen inputs, or memorized lookup-table answers will pass by construction.",
+        "Do not reuse a search routine trained on one problem type on a different type — it transferred nothing and actively made performance worse (one two-step task dropped from 37% to 0%).",
+        "Do not set a reproduction check's passing bar from a neighboring result's headline number — use the original experiment's own recorded figure.",
+        "Do not fine-tune the reasoning traces into the answer itself — keeping them in the scratch-thinking channel is what preserved the model's one-step skill (85% held steady) where answer-channel training destroyed it.",
+        "Do not treat the three-step failure at the current thinking budget as a permanent ceiling — success doubled with more budget and answers were still cut off most of the time.",
+        "Do not treat a single fine-tuning run as proof of a general cross-difficulty rule."
+      ]
+    },
+    "C49": {
+      "title": "Your fine-tuned adapter may silently never load",
+      "summary": "One serving tool silently ignored trained fine-tuning adapters for this model: it looked for weights under names the adapter didn't use, matched nothing, and raised no error. Result: two different trained adapters produced byte-for-byte identical outputs because every run was secretly testing the untouched base model. A quick \"does anything change\" check exposed it.",
+      "implication": "Before trusting any fine-tuning evaluation, run the exact same prompt with the adapter on versus off. If outputs are identical, the adapter never loaded and the results are meaningless.",
+      "next_tests": [
+        "Fix the tool's weight-name matching so it finds this model's adapter layers, then re-confirm with the on-versus-off check",
+        "Bake the adapter on-versus-off check into pre-run validation so no future experiment can silently measure the base model"
+      ],
+      "avoid": [
+        "Don't test whether adapters load using an empty adapter — an empty one matches the base model whether or not it loaded",
+        "Don't treat a difference in run time as proof the adapter loaded",
+        "Don't compare scores from two different serving tools against each other — only compare runs from the same tool"
+      ]
+    },
+    "C50": {
+      "title": "Broad self-training installs general agent skill that transfers",
+      "summary": "On a blind benchmark a 4B model scored about 14 percent — usually reasoning correctly but hitting its thinking-length limit, restarting its explanation, and never writing a scoreable answer. Training it on its own verified wins across many varied task types, to finish within budget and commit an answer, roughly tripled scores and lifted even task families it never trained on.",
+      "implication": "Collect the model's own verified successes across many varied tasks, rewrite each target to a short final answer, and concentrate training on the answer-writing step; where the signal goes beats how much data you add.",
+      "next_tests": [
+        "Confirm the gains hold on the slower, deeper, multi-turn task tiers, not just the quick single-answer ones.",
+        "Push toward harder, longer, multi-step tasks as the next source of gain, since simply repeating the same recipe stops helping.",
+        "Run controlled tests: does fixing the answer-writing step alone drive the gain, and is training across many task types (versus one) what makes unseen tasks improve?",
+        "Recheck earlier findings that gains stay confined to what you trained — were those really about the old recipe rather than the model itself?"
+      ],
+      "avoid": [
+        "Do not just fine-tune the model on copies of its own reasoning and expect behavior to change — that barely differs from doing nothing.",
+        "Do not keep only the runs that finished on their own; that discards the cut-off cases that matter most in real use.",
+        "Do not claim benchmark movement from one serving setup's runs alone; measure with a paired, matched setup on both sides.",
+        "Always check how many training examples were silently dropped for being too long — that quietly rewrote this experiment's own explanation."
+      ]
+    },
+    "C51": {
+      "title": "Answer confidence can't pick training traces the model never finishes",
+      "summary": "We tested whether the model's confidence in the correct answer, measured right after a reasoning trace, could pick which traces are worth keeping for training. That confidence did carry real signal about what a trace actually said, but its best picks lifted fresh-answer success only from about 13% to 20% — below the bar — because 99% of traces hit the length limit and never finished on their own.",
+      "implication": "Before keeping a trace, confirm the model reaches and states its answer on its own; never score a trace at an answer point you injected, and don't fix low finish rates by sampling more.",
+      "next_tests": [
+        "Run a new preregistered test that scores the model's confidence in the whole self-produced ending — the stop signal, the answer, and the correct value together — instead of the answer alone, using the same fresh-continuation and corruption checks.",
+        "Tune the finish-and-readability check on the real workload until it passes, then see whether the confidence score helps on traces that end early on their own, and report how much data you lose by keeping only those.",
+        "Record each trace's own generation probabilities at the moment it is produced, and confirm every planned comparison is actually captured before any analysis begins."
+      ],
+      "avoid": [
+        "Don't call this a working answer-picker just because the confidence tracked real trace content — the preset action-size bars still failed.",
+        "Don't generalize to all answer-based scoring; this only tested answer-only confidence after mostly force-cut, length-capped traces on fresh step-by-step problems.",
+        "Don't raise sample counts or retune thresholds on these results; with 99% of traces hitting the length limit, more sampling mostly multiplies unfinished traces.",
+        "Don't claim any training result; the check correctly stopped before any traces were kept, selected, or used to train."
+      ]
+    },
+    "C52": {
+      "title": "Word-level nudges leak into unrelated predictions and backfire",
+      "summary": "They tried improving a small model by nudging its next-word choices at moments it took a wrong turn. Even after keeping only confident mistakes and gently raising the better word — which carried real signal, beating scrambled-label controls — the shared weight change bled into unrelated predictions, so success on fresh tasks fell instead of rising.",
+      "implication": "Before running these weight nudges again, first prove the update stays local: measure how much it moves unrelated predictions and require near-zero spillover before spending effort on capability tests.",
+      "next_tests": [
+        "Before any full run, test a smaller positive-only nudge against a genuinely context-limited last-layer method on separately frozen examples, and require unrelated predictions to move only slightly first.",
+        "Only after spillover is controlled, gather a fresh, larger batch of wrong-turn examples and re-test whether fixes carry to new repository-repair tasks, versus the untouched model and a compute-matched sampling baseline.",
+        "Re-check on independent data the hunch that lower-conflict examples nudge more cleanly; treat conflict level as a way to group examples, not a 'push harder' score.",
+        "Run long-context repetition-loop fixing as its own separate experiment; whether loops appear only past the training length limit is still open."
+      ],
+      "avoid": [
+        "Don't train single-word preferences against near-tie wrong choices, and don't treat 'it was a confident mistake' as proof the tweak is safe; both failed in measurement.",
+        "Don't scale up this nudging recipe while it still moves unrelated predictions too much, even though real labels beat scrambled ones locally.",
+        "Don't pick higher-conflict examples assuming more conflict is better; the cleanest results came from the lowest-conflict ones.",
+        "Don't spend scarce blind-test runs before the tweak proves both its mechanism and a real capability gain.",
+        "Don't assume repetition loops exist at normal output lengths; count them first from existing logs, where it's free.",
+        "Don't batch multiple prompts together for exact next-word-probability work on this model; it shifts the numbers — run one prompt at a time."
+      ]
+    },
+    "C53": {
+      "title": "Self-practice installs good habits once, then hits a wall",
+      "summary": "Teaching a small model a disciplined working style — finish within its time budget, commit answers tersely, act one step at a time — gave a big one-time jump, mostly from a single rich set of worked examples. But more, harder, or more varied practice on the model's own verified answers never pushed past that ceiling; even hand-written expert solutions it couldn't discover itself stayed stuck. Only carefully blending different training data broke the easy-task ceiling past 50 percent, while hard-task scores stayed capped.",
+      "implication": "Spend one cheap round installing the working style, then stop scaling that recipe — it won't compound. The next real gain needs a different mechanism: reward-based practice on the exact failures, or distilling solutions the model can't produce on its own.",
+      "next_tests": [
+        "Test a genuinely different mechanism — combining several specialist models — but first confirm each one has real room left to improve so the merge target is actually reachable.",
+        "On the task types that still fail after training, check whether the model can reach the right answer at all given many tries — is the skill even within reach, or truly absent?",
+        "Confirm the hardest-task score ceiling with several random seeds to pin down the true range rather than one noisy number.",
+        "Try teaching multi-step procedures with full worked-out traces, not just single-step examples."
+      ],
+      "avoid": [
+        "Don't run more rounds of the same self-practice recipe expecting gains to stack — three separate escalations all landed in the same band.",
+        "Don't blame the plateau on the practice tasks being too easy: the model masters even the hardest practice tasks, yet the real-world score still won't move.",
+        "Before merging several specialist models, verify every one has room to hit its improvement target — a skill already sitting near a perfect score cannot gain the required amount, which quietly kills the plan."
+      ]
+    },
+    "C54": {
+      "title": "One small model can't master both easy and hard tasks",
+      "summary": "A 4-billion-parameter model can be pushed well past the target score on quick tasks OR on hard multi-step tasks, but no single trained model clears both at once. Every method tried — more capacity, blending data, averaging model weights, self-generated practice — hit the same wall. The two skill types compete for the model's fixed capacity.",
+      "implication": "Don't chase one small model that wins everywhere. Deploy separate specialists (one tuned for quick tasks, one for hard ones) and route each request to the right one, or move to a bigger model.",
+      "next_tests": [
+        "Re-measure any 'we beat the bar on hard tasks' result across at least eight runs — single small samples swing by enough to fake a pass",
+        "Test whether picking the right specialist per task at inference time is the only way one small model can cover both skill types",
+        "Harvest a much larger pool of the model's own long solutions, then compress them, and check if hard-task scores jump further",
+        "Try the 'compress the model's own long solutions into short ones' trick on a genuinely larger model to see if the trade-off is just a small-model limit"
+      ],
+      "avoid": [
+        "Don't blend a quick-task model with a hard-task model hoping the midpoint wins both — the midpoint loses to both ends",
+        "Don't graft the hard-task training onto an already-broad model; it crowds out the breadth. Train the combined skill from the base model instead",
+        "Don't assume hand-written expert solutions unlock hard tasks — only the model's OWN compressed successful attempts moved the needle",
+        "Don't expect self-generated practice to teach a skill the model can't already do; it can only shorten what the model already solves, never add the missing capability"
+      ]
+    }
+  }
+}
