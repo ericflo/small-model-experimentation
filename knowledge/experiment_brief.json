@@ -316,77 +316,77 @@
    ]
   },
   "dense_latent_query_executor": {
-   "verdict_tag": "Step-by-step helps but stays approximate",
-   "concept_primer": "Picture a model with a small fixed scratchpad that can take internal thinking steps, one per line of a short program, before answering a question about the result.",
-   "plain_question": "Can a model with a small fixed scratchpad learn to work through a program step by step and answer questions about the outcome?",
-   "plain_answer": "Partly. The step-by-step model does real sequential work and clearly beats a model that reads the whole program in one pass, but its answers stay rough and get rougher as programs grow longer.",
-   "why_it_matters": "Giving a model more internal thinking steps genuinely helps when each step consumes another line of work, but a small scratchpad alone cannot track a program precisely, so longer tasks need more structure.",
+   "verdict_tag": "Step-by-step memory partly tracks hidden numbers",
+   "concept_primer": "Picture keeping a running tally in your head as someone reads out steps that change two hidden numbers. A model can hold such a small memory, updating it one step at a time as it reads each step.",
+   "plain_question": "Can a model with a small step-by-step memory track two hidden numbers through a list of instructions, taught only by one final answer per example?",
+   "plain_answer": "It depends. The step-by-step memory partly learned to track the hidden numbers, clearly beating a model that reads the whole list in one glance. But it stayed rough — on the longest programs only about a fifth of its confidence landed on correct answers.",
+   "why_it_matters": "If you need a model to track a changing state across many steps, updating memory one step at a time beats one-glance reading — but plain memory stays approximate on long chains and needs extra training pressure.",
    "verdict_tone": "mixed",
    "key_numbers": [
     {
-     "label": "Right-answer share, longest programs",
-     "value": "6% → 21%",
-     "sub": "step-by-step model, before vs after it gets enough internal steps"
+     "label": "Short programs: one-glance vs step-by-step",
+     "value": "50% → 70%",
+     "sub": "share of confidence on correct answers, short four-step programs"
     },
     {
-     "label": "Same longest programs, one-pass model",
-     "value": "5.5%",
-     "sub": "reads everything at once, no step-by-step work"
+     "label": "Longest programs: one-glance vs step-by-step",
+     "value": "6% → 22%",
+     "sub": "share of confidence on correct answers, longest twenty-four-step programs"
     },
     {
-     "label": "Right-answer share, medium programs",
-     "value": "49% vs 27%",
-     "sub": "step-by-step vs one-pass, on 8-line programs"
+     "label": "At the training-length limit",
+     "value": "49%",
+     "sub": "step-by-step memory's confidence on correct answers for eight-step programs"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Step-by-step model beats one-pass model at every program length",
-     "chart_read": "Bars show the share of probability the model puts on correct answers (taller is better) as programs get longer left to right; one color is the step-by-step model, the other reads the whole program at once.",
-     "chart_takeaway": "The step-by-step bars stand taller at every length, so working through instructions in order genuinely outperforms reading them all at once."
+     "chart_plain_title": "Step-by-step memory beats one-glance reading at every program length",
+     "chart_read": "Bars show how much of the model's confidence landed on correct answers (taller is better) for each program length, from short to long. Dark bars are the step-by-step memory model; light bars read the whole program in one glance.",
+     "chart_takeaway": "Dark bars sit above light bars at every length — the step-by-step model always does more, though both shrink sharply as programs grow longer."
     },
     {
      "index": 1,
-     "chart_plain_title": "Answers jump only once the model has enough internal thinking steps",
-     "chart_read": "Each line is a program of a fixed length; the horizontal axis is how many internal thinking steps the model takes and the vertical axis is the share of probability on correct answers, where higher is better.",
-     "chart_takeaway": "Every line stays flat then jumps up exactly when the number of thinking steps reaches the program length, showing extra steps only help when they process more instructions."
+     "chart_plain_title": "Extra thinking steps only help once they cover the whole program",
+     "chart_read": "Each line is one program length. The horizontal axis is how many internal thinking steps the model takes; the vertical axis is confidence on correct answers (higher is better). Lines stay flat, then jump.",
+     "chart_takeaway": "Every line stays flat until the thinking steps reach the program's length, then leaps up — extra steps help only when they read more instructions."
     },
     {
      "index": 2,
-     "chart_plain_title": "The scratchpad holds only a fraction of the true situation",
-     "chart_read": "Bars show how much of the true underlying situation can be read back out of the model's scratchpad (taller is better) as programs lengthen left to right, comparing the step-by-step model against the one-pass model.",
-     "chart_takeaway": "The step-by-step bars recover far more than the one-pass model, but both shrink quickly, so even the better scratchpad never holds a precise picture."
+     "chart_plain_title": "How much of the hidden numbers the memory still held afterward",
+     "chart_read": "Bars show how much of the true hidden numbers could be recovered from the model's memory after the fact (taller is better), by program length. Dark bars are the step-by-step model; light bars read everything in one glance.",
+     "chart_takeaway": "The step-by-step model's dark bars tower over the one-glance bars, yet even they fade to almost nothing on long programs — no near-perfect memory."
     },
     {
      "index": 3,
-     "chart_plain_title": "Scrambling instruction order erases the step-by-step advantage",
-     "chart_read": "On an easier version of the task, bars show the share of probability on correct answers (taller is better) by program length, comparing the step-by-step model, the one-pass model, and a model fed the same instructions in scrambled order.",
-     "chart_takeaway": "The scrambled-order model falls to roughly the one-pass level, showing the advantage comes from processing instructions in their real sequence."
+     "chart_plain_title": "Scrambling the instruction order erases the step-by-step advantage",
+     "chart_read": "Bars show confidence on correct answers (taller is better) by program length in an easier setting. Three models: step-by-step memory, one-glance reading, and step-by-step memory with its instructions scrambled out of order.",
+     "chart_takeaway": "The scrambled-order bars drop down near the one-glance model, well below the properly ordered step-by-step model — reading in order is what drives the gain."
     },
     {
      "index": 4,
-     "chart_plain_title": "Combined questions are harder than single-variable questions",
-     "chart_read": "Bars show the share of probability on correct answers (taller is better) by program length, split into four question types: two ask about a single value and two ask about a combination of both values.",
-     "chart_takeaway": "The two single-value questions sit above the two combined questions at every length, so relating both values together stays the harder job."
+     "chart_plain_title": "Single-number questions are easier than combined-number questions",
+     "chart_read": "Bars show confidence on correct answers (taller is better) by program length for four question types: asking one hidden number, the other, their sum, or their difference.",
+     "chart_takeaway": "The two single-number questions stay above the sum and difference questions at every length — combining both hidden numbers is consistently harder."
     },
     {
      "index": 5,
-     "chart_plain_title": "Training climbs, then a read-out check recovers much of the situation",
-     "chart_read": "Two lines over separate training runs: one shows the model's share of correct-answer probability rising over 5000 steps, the other shows a later read-out check on the frozen model climbing over 2000 steps; higher is better on both.",
-     "chart_takeaway": "The model climbs from about 38% to nearly 69% correct-answer share, and the follow-up read-out recovers up to 64% of the true situation."
+     "chart_plain_title": "Learning over time: answering first, then a memory read-back test",
+     "chart_read": "Two separate training runs move rightward over time. One line tracks the model learning to answer questions; the other tracks a later test of how much its frozen memory reveals about the hidden numbers. Higher is better.",
+     "chart_takeaway": "Both curves climb steeply then level off — the model learns to answer, and its memory turns out to hold much of the hidden-number information."
     },
     {
      "index": 6,
-     "chart_plain_title": "On unfamiliar longer programs, only the step-by-step model retains the situation",
-     "chart_read": "On the easier task, bars show how much of the true situation can be read back out (taller is better) by program length, including lengths longer than any seen in training, for the step-by-step, one-pass, and scrambled-order models.",
-     "chart_takeaway": "At the longer untrained lengths the step-by-step model keeps roughly a third recoverable while both other models collapse to almost nothing."
+     "chart_plain_title": "Only ordered step-by-step memory keeps information on longer, unseen programs",
+     "chart_read": "Bars show how much of the hidden numbers could be recovered from memory (taller is better) by program length, including two lengths longer than any seen in training. Three models: step-by-step, one-glance, and scrambled-order.",
+     "chart_takeaway": "On the longer unseen programs the step-by-step bars stay tall while both other models collapse to near zero — only ordered stepping carries over."
     },
     {
      "index": 7,
-     "chart_plain_title": "Best-guess accuracy: step-by-step model multiplies the one-pass model",
-     "chart_read": "Two lines show how often the model's single best guess is a genuinely possible answer (higher is better) as programs lengthen, for the step-by-step model versus the one-pass model.",
-     "chart_takeaway": "The step-by-step line runs several times higher than the one-pass line, and the gap widens on the longer programs beyond the training range."
+     "chart_plain_title": "Best-guess accuracy: step-by-step memory versus one-glance reading",
+     "chart_read": "Two lines by program length show how often the model's single best guess was actually a correct answer (higher is better). One line is the step-by-step memory model, the other reads the whole program in one glance.",
+     "chart_takeaway": "The step-by-step line runs far above the one-glance line, and the gap widens on the longest programs — stepping helps most when programs get hard."
     }
    ]
   },
@@ -1335,46 +1335,46 @@
    ]
   },
   "qwen35_4b_answer_potential_trace_sft": {
-   "verdict_tag": "The score sees something, but the model cannot reliably cash it out",
-   "concept_primer": "A known correct answer can be used as a measuring probe: after each sampled reasoning trace, ask how probable that answer is without actually sampling it. The probe is useful only if high-scoring traces also produce better fresh answers on their own.",
-   "plain_question": "Can answer scores identify the model's most useful self-written reasoning, so those examples teach it better than ordinary success filtering?",
-   "plain_answer": "No under this protocol. High answer-potential traces did beat random and short traces modestly, and relevance controls passed, but the score missed the pre-set ranking and effect-size gates. Almost every reasoning trace was force-closed; fresh answers rarely appeared in the expected form. The guard therefore stopped before data harvesting or training.",
-   "why_it_matters": "A dense score can contain genuine information while still measuring a state the model rarely reaches in deployment. Validating the score first avoided a much larger sample-and-train run and exposed the next real problem: make closing and committing part of the scored event.",
+   "verdict_tag": "Answer-fit scoring can't reliably pick good reasoning",
+   "concept_primer": "Imagine grading a student's scratch work not by their final answer, but by how neatly it sets up the correct answer to be written next. This project scored an AI's own step-by-step reasoning that same way.",
+   "plain_question": "When a model writes out its reasoning, can we score each attempt by how well it sets up the known correct answer, then keep only the best-scoring attempts to train on?",
+   "plain_answer": "No. This way of scoring reasoning was ruled out as a way to choose what to train on. Its top pick did edge out picking at random, but the gap was too small to meet the bar, and the model almost never finished its reasoning or produced a readable answer on its own.",
+   "why_it_matters": "Before spending effort curating self-generated reasoning for training, first prove your scoring method picks reasoning the model can actually finish and voice into a real answer on its own. A signal that is statistically real can still be far too weak to act on.",
    "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Gate checks passed",
-     "value": "3 / 8",
-     "sub": "terminal scorer-negative verdict; no training launched"
+     "label": "Telling better reasoning from worse",
+     "value": "62%",
+     "sub": "just under the 65% mark it had to clear to go ahead"
     },
     {
-     "label": "Within-problem ranking",
-     "value": "0.617 vs 0.650",
-     "sub": "observed AUROC versus the pre-set launch bar"
+     "label": "Edge over picking at random",
+     "value": "+7 points",
+     "sub": "real, but short of the +10 points needed to justify training"
     },
     {
-     "label": "Fresh-answer success",
-     "value": "20.3% vs 12.9% / 14.4%",
-     "sub": "top answer-potential trace versus seeded random / shortest"
+     "label": "Reasoning that finished on its own",
+     "value": "0.6%",
+     "sub": "nearly every attempt ran until it was cut off at a length limit"
     },
     {
-     "label": "Close → parse → correct",
-     "value": "0.63% → 13.2% → 86.9%",
-     "sub": "natural thought closure; rollout parsing; correctness if parsed"
+     "label": "Answers correct when readable",
+     "value": "87%",
+     "sub": "on the rare occasions it did commit, it was usually right"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "The answer score helps, but not enough to launch training",
-     "chart_read": "Each pair compares the observed validation statistic with its pre-set minimum. The observed bar must reach the gate bar in all four groups; none does.",
-     "chart_takeaway": "The score has measurable signal, including positive top-choice gains, but it misses every outcome and anti-copying launch threshold."
+     "chart_plain_title": "Answer-fit scoring fell short on every launch requirement",
+     "chart_read": "Four launch checks run along the bottom. For each, one bar shows what the scoring method actually reached and a second bar the minimum needed to proceed. Taller is better; the reached bar sits below the required bar every time.",
+     "chart_takeaway": "Every reached bar sits under its required bar, so not one launch check was met and no training was authorized."
     },
     {
      "index": 1,
-     "chart_plain_title": "The real bottleneck is closing and committing",
-     "chart_read": "The first bar is the share of thoughts that ended naturally, the second is the share of forced-close rollouts that produced a parseable answer, and the third is correctness among those parsed answers.",
-     "chart_takeaway": "When an answer appears in the expected form it is usually right, but the model almost never closes the thought naturally and rarely emits that form after a forced close."
+     "chart_plain_title": "Reasoning almost never finished, so answers rarely landed",
+     "chart_read": "Three bars trace the answer stage: how often reasoning stopped on its own, how often a forced answer came out readable, and how often readable answers were correct. The first two are tiny; the last is tall.",
+     "chart_takeaway": "The first two bars are near zero while the last is tall: reasoning rarely finished or produced a readable answer, yet when it did, it was usually correct."
     }
    ]
   },
@@ -1803,31 +1803,48 @@
    ]
   },
   "qwen35_4b_confidence_guided_compute": {
-   "verdict_tag": "Trust the confident sample, not the common one",
-   "concept_primer": "A common way to boost a model is to sample many answers and take a majority vote ('sample-more'). This asks whether the model's own internal confidence can do better -- picking which of its many tries to trust, and knowing when trying more is hopeless.",
-   "plain_question": "Can the model's own confidence make 'sample many answers' actually pay off -- and tell you when it won't?",
-   "plain_answer": "Yes, in two ways. First, the standard trick -- sample a dozen answers and take the majority vote -- does NOTHING for this model: accuracy stays flat no matter how many you draw, because on hard problems the model confidently repeats the SAME wrong answer. But if you instead pick the single answer the model was most confident in (readable straight from its output probabilities, no checking required), accuracy climbs from 0.47 to 0.62 and keeps rising with more samples. The reason: when the model actually works out the right answer it is confident about it, so the most-confident try beats the most-common try. Second, that same confidence tells you when sampling is futile -- it flags the problems the model simply can't do, so you can skip them (or hand them off) and be right ~100% of the time on the ones you keep.",
-   "why_it_matters": "It's a free, verifier-free way to get more out of a small model's test-time compute. Don't majority-vote its samples -- pick its most-confident sample, and abstain on the ones where even its best guess is low-confidence. Both signals come straight from the model's output probabilities, no extra model and no answer-checking needed.",
+   "verdict_tag": "Picking the most confident answer beats majority vote",
+   "concept_primer": "Imagine a student who, with each answer, also says how sure they are, and their \"very sure\" answers really do turn out right more often. This small model gives that kind of trustworthy confidence rating alongside every answer it produces.",
+   "plain_question": "When a small model answers the same puzzle a dozen times, can its own sense of which answer it is surest about beat simply taking its most common answer?",
+   "plain_answer": "Yes. Picking the answer the model was surest about lifted accuracy from about 47% to 62% as more tries were gathered, while taking its most common answer stayed stuck near 48% no matter how many tries, and low confidence flagged the problems worth skipping entirely.",
+   "why_it_matters": "When running a small model many times on one problem, rank its answers by how sure it is rather than how often each appears, and let low confidence tell you when to stop or hand the problem off.",
    "verdict_tone": "positive",
    "key_numbers": [
     {
-     "label": "majority vote (self-consistency)",
-     "value": "0.48 (flat)"
+     "label": "Taking the most common answer",
+     "value": "≈ 48%",
+     "sub": "stayed flat no matter how many tries were gathered"
     },
     {
-     "label": "pick most-confident sample",
-     "value": "0.62"
+     "label": "Taking the most confident answer",
+     "value": "47% → 62%",
+     "sub": "rose as more tries were gathered"
     },
     {
-     "label": "best possible (oracle)",
-     "value": "0.83"
+     "label": "Best possible pick",
+     "value": "83%",
+     "sub": "if a perfect judge always chose the right try"
     },
     {
-     "label": "predicting solvability for abstention (AUROC)",
-     "value": "0.83"
+     "label": "Accuracy on the surest problems",
+     "value": "≈ 100%",
+     "sub": "after skipping the ones it was unsure about"
     }
    ],
-   "charts": []
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "More tries only help if you pick by confidence, not popularity",
+     "chart_read": "The horizontal axis is how many answers you collect per problem, more to the right; the vertical axis is accuracy, higher is better. One line picks the most confident answer, another the most common, and a flat top line marks the best-possible pick.",
+     "chart_takeaway": "The most-confident line climbs steadily while the most-common line stays flat, so extra tries only pay off when you rank answers by the model's own confidence."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "When gathering more answers helps, and when it barely can",
+     "chart_read": "Each problem type shows two bars: accuracy from a single answer, and accuracy from the best of twelve answers. The three groups are routine problems, ones needing recall, and ones needing a brand-new rule. Higher is better.",
+     "chart_takeaway": "For recall problems the best-of-twelve bar jumps far above the single answer, but for brand-new-rule problems both bars stay low, so extra tries barely help there."
+    }
+   ]
   },
   "qwen35_4b_constrained_coverage_dpo": {
    "verdict_tag": "Cheaper nudge, but more tries still wins",
@@ -2883,52 +2900,52 @@
    ]
   },
   "qwen35_4b_foofah_program_strategy_portfolio": {
-   "verdict_tag": "Executable recipes help but cost too much",
-   "concept_primer": "Instead of asking the model to write out the fixed table directly, you can have it write a small step-by-step recipe, run that recipe, and keep only recipes that reproduce the example you were shown.",
-   "plain_question": "Does having the model write and test small table-fixing recipes beat just asking it for the finished table directly, on new kinds of tables?",
-   "plain_answer": "It depends. Writing and testing recipes lifted exactly-correct tables from 42% to 48% with the chosen rule, and up to 56% with a simpler keep-first-working rule, but at roughly twelve times the computing cost.",
-   "why_it_matters": "Spend recipe-writing effort only where it pays off: a few well-structured table types gain a lot while others just burn compute for nothing. Route effort adaptively and prefer keeping the first recipe that works.",
+   "verdict_tag": "Test-checked recipes help modestly but cost more",
+   "concept_primer": "When cleaning a messy spreadsheet, you can either type out the fixed version by hand, or write a short reusable recipe that rearranges it automatically, then test that recipe against one worked example before trusting it.",
+   "plain_question": "When a model reshapes messy tables into a clean target layout, does letting it write and test small recipes beat simply typing out the answer table directly?",
+   "plain_answer": "Yes, but only a little. Writing and testing recipes lifted correctly cleaned tables from 42% to 48%, a real gain over typing answers directly. A simpler rule, trusting the first recipe that passes its example, did better at 56%. All of it cost roughly twelve times more effort.",
+   "why_it_matters": "Recipes add genuine coverage on a few structural table shapes but spend heavily on every table. Route recipe attempts only to tables likely to benefit, and trust the first recipe that passes its example rather than demanding that several recipes agree.",
    "verdict_tone": "mixed",
    "key_numbers": [
     {
-     "label": "Tables solved asking directly",
+     "label": "Cleaned right, typing by hand",
      "value": "42%",
-     "sub": "share of 50 new tables made exactly right"
+     "sub": "of 50 messy tables"
     },
     {
-     "label": "Tables solved, chosen recipe rule",
+     "label": "Cleaned right, cautious recipe rule",
      "value": "48%",
-     "sub": "a real but modest gain over asking directly"
+     "sub": "the frozen chosen policy"
     },
     {
-     "label": "Tables solved, keep-first-working rule",
+     "label": "Cleaned right, trust-first recipe",
      "value": "56%",
-     "sub": "simpler rule, nearly the 58% best possible"
+     "sub": "a simpler rule that did better"
     },
     {
-     "label": "Extra computing used by recipes",
-     "value": "12x more",
-     "sub": "recipes cost far more than asking directly"
+     "label": "Extra effort the recipes cost",
+     "value": "≈ 12x",
+     "sub": "more computation than typing directly"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "New tables solved exactly: asking directly versus recipes",
-     "chart_read": "Each bar is one way to produce the table, from asking directly on the left to the best possible pick on the right; bar height is the share of 50 unseen tables made exactly right. Taller is better.",
-     "chart_takeaway": "The direct bar is lowest and the best-possible bar highest; the chosen recipe rule sits only slightly above direct, while a simple keep-first-working rule nearly reaches the best possible."
+     "chart_plain_title": "How often each approach cleaned the table correctly",
+     "chart_read": "Each bar is one approach to cleaning the same 50 messy tables; taller means more tables cleaned correctly. The left bar types the answer directly, and the others write and test recipes under different rules for when to trust a recipe.",
+     "chart_takeaway": "Every recipe approach beats typing directly, but the tallest is trusting the first recipe that passes its example, nearly matching the best-possible pick."
     },
     {
      "index": 1,
-     "chart_plain_title": "How each recipe-keeping rule trades fixes against mistakes",
-     "chart_read": "Three rules for deciding when to keep a recipe are compared. Colored bars per rule show recipes kept, previous misses newly fixed, and previously-correct tables accidentally broken. Many fixes with few breaks is better.",
-     "chart_takeaway": "The keep-first-working rule commits the most recipes and fixes eight misses while breaking just one, showing the cautious rules leave easy fixes unused."
+     "chart_plain_title": "Recipes trusted, tables rescued, and tables spoiled per rule",
+     "chart_read": "For three rules about when to trust a recipe, grouped bars count how many recipes were trusted, how many rescued a table the direct answer got wrong, and how many spoiled a table the direct answer had right. More rescues with fewer spoils is better.",
+     "chart_takeaway": "The trust-first rule trusts the most recipes and rescues eight otherwise-wrong tables while spoiling only one; the cautious rules rescue far fewer."
     },
     {
      "index": 2,
-     "chart_plain_title": "Computing cost: recipes versus asking directly",
-     "chart_read": "Two bars show total computing used on the same 50 tables: asking directly on the left, the five-recipe approach on the right. Shorter is better because it is cheaper.",
-     "chart_takeaway": "The recipe bar towers about twelve times higher than the direct bar, so the accuracy gain comes at a steep, not-yet-efficient cost."
+     "chart_plain_title": "Computing effort: recipes versus typing the answer directly",
+     "chart_read": "Two bars compare total computing effort across the same 50 tables. The left bar types answers directly; the right bar writes and tests five recipes per table. Shorter is cheaper.",
+     "chart_takeaway": "The recipe bar towers about twelve times higher than the direct bar, so the modest accuracy gain comes at a steep effort cost."
     }
    ]
   },
@@ -3920,53 +3937,58 @@
    ]
   },
   "qwen35_4b_learned_active_trace_policy": {
-   "verdict_tag": "Learned test-picker helps on some sets",
-   "concept_primer": "After the model drafts many possible answers, it can ask one more test input to rule some out, like a game of twenty questions where a sharper question eliminates more wrong guesses at once.",
-   "plain_question": "Can the model learn to pick the single most useful follow-up test, the one that rules out the most wrong answers?",
-   "plain_answer": "It depends. With one extra test the trained picker beat a simple hand-coded rule on two of three problem sets, but not on the main set, and its picks ruled out under half as many wrong answers as the best-possible choice.",
-   "why_it_matters": "The model can learn to ask informative follow-up tests, but a picker trained on single best-first choices only partly beats a simple rule; a reliable gain likely needs training on its own multi-step choices.",
+   "verdict_tag": "Learned tester wins on some task types",
+   "concept_primer": "Imagine guessing a hidden rule from a handful of worked examples, then being allowed to try a few extra inputs to narrow it down. A good tester picks the inputs that rule out the most wrong guesses.",
+   "plain_question": "Can a small AI learn on its own which extra inputs to test, so it rules out wrong guesses better than a fixed, hand-written testing rule?",
+   "plain_answer": "It depends. The trained tester chose better inputs than the hand-written rule on two of the three task types, but lost on the main target task. And overall its chosen tests ruled out only about half as many wrong guesses as a perfect tester would.",
+   "why_it_matters": "If you want a model to choose its own diagnostic tests, expect real gains on some task types but not automatically the one you care about most. Always check each task type before trusting a learned tester over a simple rule.",
    "verdict_tone": "mixed",
    "key_numbers": [
     {
-     "label": "Harder set, one extra test",
+     "label": "Simpler everyday tasks, one extra test",
+     "value": "85% → 88%",
+     "sub": "share of tasks fully solved: fixed rule versus the learned tester"
+    },
+    {
+     "label": "Sparse-example tasks, one extra test",
      "value": "69% → 71%",
-     "sub": "learned picker edged out the hand-coded rule"
+     "sub": "learned tester edged ahead of the fixed rule here"
     },
     {
-     "label": "Main set, one extra test",
-     "value": "91% → 87%",
-     "sub": "learned picker slipped below the simple rule"
+     "label": "Main target task, one extra test",
+     "value": "91% vs 87%",
+     "sub": "the fixed rule stayed ahead of the learned tester"
     },
     {
-     "label": "Wrong answers ruled out per test",
-     "value": "8 vs 20",
-     "sub": "learned pick vs best-possible pick, main set"
+     "label": "Wrong guesses ruled out per test",
+     "value": "about half",
+     "sub": "learned tester's picks versus a perfect tester's best picks"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "One extra test: learned picker vs simpler rules, three problem sets",
-     "chart_read": "Bars grouped by problem set (main, harder, everyday); four bars each show random pick, hand-coded rule, the learned picker, and the best-possible pick. Bar height is the share of problems fully solved; taller is better.",
-     "chart_takeaway": "The learned picker (third bar) tops the hand-coded rule on the harder and everyday sets but dips just below it on the main set, while the best-possible pick stays tallest everywhere."
+     "chart_plain_title": "With one extra test, who solves the most tasks?",
+     "chart_read": "Each cluster is a task type. Bars show the share of tasks fully solved after one extra test, comparing a random pick, a fixed hand-written rule, the learned tester, and a perfect tester. Taller is better.",
+     "chart_takeaway": "The learned tester's bar tops the fixed rule on the two right-hand task types but falls short on the main task at left; the perfect tester leads everywhere."
     },
     {
      "index": 1,
-     "chart_plain_title": "Main problem set: success as more follow-up tests are allowed",
-     "chart_read": "The horizontal axis is how many extra tests are allowed (none up to three); the vertical axis is the share of problems fully solved. Four lines track random pick, the hand-coded rule, the learned picker, and the best-possible pick; higher is better.",
-     "chart_takeaway": "The learned line sits just under the hand-coded rule at one test, then climbs to match it by three tests, while the best-possible line pulls ahead fastest."
+     "chart_plain_title": "Main task: solving rate as extra tests are added",
+     "chart_read": "On the main target task type, each line tracks the share of tasks fully solved as the tester is allowed more extra tests, left to right. Higher lines are better, with a perfect tester on top.",
+     "chart_takeaway": "The learned tester's line starts below the fixed rule at one test, then climbs to match it by three tests; the perfect tester stays clearly above both."
     },
     {
      "index": 2,
-     "chart_plain_title": "Harder problem set: success as more follow-up tests are allowed",
-     "chart_read": "Same axes as the main set: extra tests allowed on the horizontal axis, share of problems fully solved on the vertical axis, with lines for random pick, the hand-coded rule, the learned picker, and the best-possible pick; higher is better.",
-     "chart_takeaway": "The learned line leads the hand-coded rule at one and two tests but slips below it at three, showing the gain fades as more tests pile up."
+     "chart_plain_title": "Sparse-example tasks: solving rate as extra tests are added",
+     "chart_read": "For tasks that give only a few worked examples, each line shows the share fully solved as extra tests increase from left to right. Higher is better, with a perfect tester as the top reference.",
+     "chart_takeaway": "The learned tester's line leads the fixed rule for the first one to two tests, then dips below it at three; the perfect tester leads the whole way."
     },
     {
      "index": 3,
-     "chart_plain_title": "Wrong answers ruled out per test: learned pick vs best possible",
-     "chart_read": "Bars grouped by problem set, two per set: the learned picker's chosen test and the best-possible test. Height is the average number of wrong candidate answers eliminated per test; higher means a more informative choice.",
-     "chart_takeaway": "The learned bar is under half the best-possible bar on every set, showing its choices carry a real but weak signal."
+     "chart_plain_title": "How many wrong guesses each test rules out",
+     "chart_read": "Each pair of bars is a task type. Bar height shows how many wrong guesses a single test rules out on average, comparing the learned tester's pick with a perfect tester's best pick. Taller means more informative.",
+     "chart_takeaway": "Across all three task types the learned bar is under half the height of the perfect tester's, showing its chosen tests carry a real but only mild signal."
     }
    ]
   },
@@ -4100,31 +4122,43 @@
    ]
   },
   "qwen35_4b_metacognitive_boundary": {
-   "verdict_tag": "It knows in its logits, not its words",
-   "concept_primer": "A useful AI should know when it doesn't know -- so it can flag a guess instead of confidently making something up. This tests whether the model can tell, on tasks where we KNOW in advance which ones it can and can't do, whether it is about to be right or wrong.",
-   "plain_question": "Does the model know when it is about to fail -- and if so, can it tell you?",
-   "plain_answer": "It knows, but it can't tell you. When you look at the model's internal probability on the answer it gives, that number tracks its actual accuracy almost perfectly, and it predicts which specific problems it will get right about as well as a near-perfect detector -- far better than guessing from the surface of the problem. But when you simply ASK the model 'is your answer correct?' or 'how confident are you?', its answer is useless: it says it's confident about equally on the problems it aces and the ones it fails (and its verbal confidence is a flat 100 every time). So the model's uncertainty is real and readable -- but it lives in its output probabilities, not in anything it can say.",
-   "why_it_matters": "This is directly deployable and it unearths a genuinely useful hidden capability. If you want a small model to flag its own likely mistakes (to abstain, ask for help, or route to a bigger model), read its answer-token probability -- NOT its self-reported confidence, which is worthless. Filtering by that internal signal lifts accuracy on the problems it chooses to attempt from 23% to nearly 100%. The practical rule: trust the model's math (logits), never its self-assessment (words).",
-   "verdict_tone": "positive",
+   "verdict_tag": "Its answers reveal doubt its words hide",
+   "concept_primer": "Picture a student who writes an answer faintly when guessing but firmly when certain — yet always says \"yes, I'm sure\" if asked aloud. Their real doubt shows in how firmly they commit, not in what they say.",
+   "plain_question": "When this model answers a puzzle it may only be guessing on, can it sense which of its own answers are about to be wrong?",
+   "plain_answer": "It depends where you look. Yes — how firmly the model commits to each answer reveals which ones are wrong, flagging them almost perfectly. No — asking it directly whether it's right gives a flat, coin-flip reply you cannot trust at all.",
+   "why_it_matters": "When you need a model to flag its own likely mistakes, measure how firmly it commits to each answer rather than asking it whether it's right — the direct question tells you nothing reliable.",
+   "verdict_tone": "mixed",
    "key_numbers": [
     {
-     "label": "implicit P(answer) predicts correctness (AUROC)",
-     "value": "0.95"
+     "label": "Spotting its own wrong answers from how firmly it commits",
+     "value": "95%",
+     "sub": "the firmness behind each answer flags nearly every wrong one"
     },
     {
-     "label": "guessing from surface features (AUROC)",
-     "value": "0.61"
+     "label": "Spotting them by asking it directly instead",
+     "value": "≈ coin flip",
+     "sub": "the direct self-check is no better than random guessing"
     },
     {
-     "label": "explicit 'is my answer right?' (AUROC)",
-     "value": "0.46"
-    },
-    {
-     "label": "accuracy on attempted after abstaining",
-     "value": "0.23 -> ~1.0"
+     "label": "Accuracy once it skips the answers it commits to weakly",
+     "value": "23% → nearly 100%",
+     "sub": "abstaining on low-confidence answers cleans up the results"
     }
    ],
-   "charts": []
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Internal answer-strength tracks accuracy; asking it directly does not",
+     "chart_read": "Four task types line up left to right, from ones the model has mastered to ones it can only guess at. Each shows three bars: how often it's actually right, how firmly it commits to its answer, and its reply to a direct 'are you right?'. Bars matching the accuracy bar mean the confidence is honest.",
+     "chart_takeaway": "The commitment-strength bars rise and fall in step with actual accuracy across all four tasks, while the direct self-check bars stay flat — the internal signal is honest, the spoken one isn't."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "Which clue best spots the model's own wrong answers",
+     "chart_read": "Within the single task type where the model is right about four times in ten, five different clues compete to predict which specific answers are correct. Taller bars predict better; the halfway mark is pure coin-flip.",
+     "chart_takeaway": "The commitment-strength bar stands tallest, while the direct self-check bar sits at coin-flip level — even below a plain guess from prompt features — so only the internal signal truly knows."
+    }
+   ]
   },
   "qwen35_4b_model_in_loop_counterexamples": {
    "verdict_tag": "Fancier case-picking did not beat simple",
@@ -4172,35 +4206,35 @@
    ]
   },
   "qwen35_4b_native_thought_jacobian_value_transport": {
-   "verdict_tag": "Model ran out of room before answering",
-   "concept_primer": "This AI works a problem out in a private scratch space before giving its answer, like a student scribbling on scratch paper. That space has a fixed length limit; if the working runs long, it stops without ever writing an answer.",
-   "plain_question": "When this AI works through a puzzle in its private scratch space, does it actually finish and reach an answer before it runs out of room?",
-   "plain_answer": "No. On all 48 attempts the model filled its entire scratch space and stopped without ever reaching an answer. Because it never finished thinking, the planned follow-up test, reading and nudging its internal sense of how the work was going, could not even begin.",
-   "why_it_matters": "Before trying to read or steer a model's mid-reasoning state, first confirm it can actually finish and answer within its allowed scratch space. If it always runs out of room on your tasks, give it more room or simpler tasks before building anything on top.",
+   "verdict_tag": "Model never finished thinking within its budget",
+   "concept_primer": "Imagine a student who must work out a problem on a small scratch pad with a fixed amount of space, then write a final answer. If they fill the whole pad without finishing, no answer ever appears.",
+   "plain_question": "When a small AI model works through a puzzle in its own words on a limited scratch pad, does it ever reach a final answer before running out of room?",
+   "plain_answer": "No. On every one of the 48 attempts, the model filled its entire scratch pad and stopped without writing any final answer. Because it never reached an answer on its own, the rest of this study, which needed finished answers to examine, was canceled.",
+   "why_it_matters": "Before building tools that read or steer a model's internal confidence from its own reasoning, first confirm it actually finishes that reasoning in the space allowed. Give more room or simpler puzzles, otherwise there is nothing to measure.",
    "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Attempts that reached an answer",
-     "value": "0 of 48",
-     "sub": "none finished thinking within the space allowed"
+     "label": "Attempts that reached a final answer",
+     "value": "0%",
+     "sub": "none of the 48 tries finished on their own"
     },
     {
-     "label": "Attempts that ran out of room",
-     "value": "48 of 48",
-     "sub": "every try hit the length limit and stopped short"
+     "label": "Attempts that ran out of scratch-pad room",
+     "value": "100%",
+     "sub": "all 48 tries filled the space and stopped"
     },
     {
-     "label": "Fresh puzzles tried",
+     "label": "Puzzles tried",
      "value": "16",
-     "sub": "each one attempted three separate times"
+     "sub": "each attempted three separate times"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Every attempt ran out of room before reaching an answer",
-     "chart_read": "Bars show what share of the 48 attempts ended in each outcome: finished thinking, gave a readable answer, gave a correct answer, or ran out of room. For the goal, reaching an answer is the good outcome.",
-     "chart_takeaway": "Only the 'ran out of room' bar is full height; the other three sit flat at zero, so the model never once finished and answered."
+     "chart_plain_title": "How often the model reached an answer versus ran out of room",
+     "chart_read": "Four bars, one per outcome, with height showing the share of all 48 attempts. Bars for reaching a natural stop, a readable answer, and a correct answer are what you want to be tall; the last bar tracks running out of room.",
+     "chart_takeaway": "The three answer bars sit flat at zero while the run-out-of-room bar stands at full height, meaning the model exhausted its scratch pad every single time without answering."
     }
    ]
   },
@@ -4339,108 +4373,103 @@
    ]
   },
   "qwen35_4b_operator_inventory_scaling_stress": {
-   "verdict_tag": "Bigger toolboxes crowd two-slot searches",
-   "concept_primer": "Picture filling blanks in a recipe by trying every tool in a drawer. One blank is easy; two blanks means testing every tool-pair, and many pairs cook up identical-looking results.",
-   "plain_question": "As the tool drawer grows from a handful to hundreds, can plain trial-and-error still pick the one correct program?",
-   "plain_answer": "It depends. For one-blank programs, trying every tool still lands the right answer nearly every time. For two-blank programs it stalls: at 512 tools the correct pick lands under half the time, because too many tool-pairs look identical on the examples given.",
-   "why_it_matters": "When you must fill two slots from a large drawer, brute force stops being enough. You need a smart shortlister to narrow candidates first, then a few clarifying checks to break remaining ties.",
+   "verdict_tag": "Answer stays reachable but hard to pin down",
+   "concept_primer": "Picture a mini-program as a fill-in-the-blank recipe: each blank takes one interchangeable step from a growing toolbox. You watch a few example inputs and their outputs, then try every step to guess which recipe produced them.",
+   "plain_question": "As the toolbox of interchangeable steps grows into the hundreds, can you still guess the mystery recipe from a few examples by trying every combination of steps?",
+   "plain_answer": "It depends. The correct recipe always stays somewhere in the pile you search, even with hundreds of steps. Recipes with a single blank still get picked out from a few examples nearly every time, but recipes with two blanks spawn so many look-alikes that examples alone pin the right one under half the time.",
+   "why_it_matters": "When your toolbox is large and recipes have two blanks, don't trust a few examples to single out the answer on their own. Plan to narrow the candidates first, or ask for a few extra targeted examples to break the tie.",
    "verdict_tone": "neutral",
    "key_numbers": [
     {
-     "label": "Two-blank programs picked correctly",
-     "value": "75% → 46%",
-     "sub": "drops as the drawer grows from 8 to 512 tools"
+     "label": "Right recipe picked from examples alone, at 512 steps",
+     "value": "100% → 46%",
+     "sub": "single blank always solved; two blanks under half"
     },
     {
-     "label": "One-blank programs picked correctly",
-     "value": "~100%",
-     "sub": "stays reliable at every drawer size"
-    },
-    {
-     "label": "Tool-pairs to test at 512 tools",
+     "label": "Combinations checked per puzzle (two blanks, 512 steps)",
      "value": "262,144",
-     "sub": "combinations checked per two-blank problem"
+     "sub": "every possible pair of steps is tried"
     },
     {
-     "label": "Short list still holds the answer",
-     "value": "down to 0%",
-     "sub": "a small fixed candidate list stops containing the right pick"
+     "label": "Correct recipe still somewhere in the searched pile",
+     "value": "100%",
+     "sub": "the answer never falls out of reach"
+    },
+    {
+     "label": "After three extra targeted examples (two blanks, 512 steps)",
+     "value": "46% → 83%",
+     "sub": "asking for more clues recovers most accuracy"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Correct picks as the tool drawer grows",
-     "chart_read": "Horizontal axis is how many tools are in the drawer; vertical axis is how often the correct program is picked with no follow-up questions; higher is better. One line is easy one-blank programs, the other harder two-blank programs.",
-     "chart_takeaway": "The one-blank line stays near the top while the two-blank line sags toward half, showing two-blank search gets crowded as the drawer grows."
+     "chart_plain_title": "Picking the right recipe from examples as the toolbox grows",
+     "chart_read": "The horizontal axis is the toolbox size, from a handful of steps to hundreds. The vertical axis is how often a few examples alone pick the exact right recipe; higher is better. One line is single-blank recipes, one is two-blank.",
+     "chart_takeaway": "Single-blank recipes stay high throughout, dipping only slightly, while two-blank recipes sag toward half as the toolbox grows and look-alike combinations pile up."
     },
     {
      "index": 1,
-     "chart_plain_title": "Does a short candidate list still hold the answer?",
-     "chart_read": "Horizontal axis is drawer size; vertical axis is how often the right tool-pair still sits inside a fixed short list of candidates; higher is better. Each line is a different list length, for two-blank programs.",
-     "chart_takeaway": "Every line dives toward the floor once the drawer passes a few dozen tools, so plainly capping the list length loses the answer."
+     "chart_plain_title": "Would checking only a fixed shortlist still catch the answer?",
+     "chart_read": "The horizontal axis is toolbox size. The vertical axis is how often the correct two-blank recipe still falls inside a capped shortlist of combinations you agree to check; higher is better. Each line is a different shortlist size.",
+     "chart_takeaway": "All three capped shortlists catch the answer for small toolboxes, then collapse toward zero once the toolbox passes roughly sixty steps, so a fixed shortlist stops working."
     },
     {
      "index": 2,
-     "chart_plain_title": "A few clarifying questions recover correct picks",
-     "chart_read": "Horizontal axis is how many clarifying questions are allowed; vertical axis is how often the correct two-blank program is then picked; higher is better. One line is a practical question-picking rule, the other an ideal best-case rule.",
-     "chart_takeaway": "Both lines climb steeply from under half toward two-thirds or more, showing a handful of questions breaks most remaining ties."
+     "chart_plain_title": "Asking for a few extra examples to recover the right pick",
+     "chart_read": "The horizontal axis is how many extra targeted examples you request. The vertical axis is how often you then pick the exact right two-blank recipe at the largest toolbox; higher is better. One line is a practical question-picking rule, one is the best-possible questions.",
+     "chart_takeaway": "Both lines climb sharply from under half with no extra examples to the seventies or eighties after three, so a few well-chosen clues recover most of the lost accuracy."
     },
     {
      "index": 3,
-     "chart_plain_title": "Which two-blank recipe is the hard one",
-     "chart_read": "Bars grouped by drawer size (128 and 512 tools); height is how often the correct program is picked with no questions; taller is better. One color is the arithmetic recipe, the other the comparison-gate recipe.",
-     "chart_takeaway": "The comparison-gate bars are far shorter, showing that low-information recipe is what drags overall correct picks down."
+     "chart_plain_title": "One two-blank recipe shape is far harder to pin down",
+     "chart_read": "Bars show how often examples pick the exact right two-blank recipe, at two toolbox sizes, for two recipe shapes: an arithmetic scale-and-remainder shape versus a compare-two-things-and-choose shape. Taller bars are better.",
+     "chart_takeaway": "The compare-and-choose shape sits near zero to a quarter while the arithmetic shape stays two-thirds or better, because comparing reveals too little to separate look-alikes."
     }
    ]
   },
   "qwen35_4b_operator_inventory_search_pilot": {
-   "verdict_tag": "Right toolbox recovers hidden operations",
-   "concept_primer": "Many operations take a list of numbers and return one number (add them, take the biggest, multiply them). They look identical from the outside, so you can only tell them apart by the answers they produce on example inputs.",
-   "plain_question": "Can the model recover a hidden number-crunching operation by searching a toolbox, even when several operations look identical from the outside?",
-   "plain_answer": "Yes, as long as the operation is in the toolbox. A limited three-tool set never found the missing operations, while a complete seven-tool set identified the right one on 93% of new tasks straight away, rising to every task after one or two follow-up checks.",
-   "why_it_matters": "The bottleneck is toolbox coverage, not the search itself. Make sure candidate operations are stocked and add a couple of clarifying checks when several fit; searching harder on a missing tool cannot help.",
+   "verdict_tag": "Search recovers any operation on its list",
+   "concept_primer": "Picture guessing which hidden rule turns a list of numbers into one number: add them up, keep the biggest, keep the first. You can only ever land on a rule that already sits on your list of guesses.",
+   "plain_question": "When several hidden rules all take a list of numbers and return a single number, can testing them against examples reveal exactly which rule a program uses?",
+   "plain_answer": "Yes, as long as the rule sits on the search's list of options. Given the full list of seven rules, the search always contained the right one and picked it correctly about nine times in ten with no extra help. A shorter list that left the rule out found it zero times.",
+   "why_it_matters": "When building a system that identifies hidden rules from worked examples, invest in a complete list of candidate rules. The matching machinery already works well; the real limit is making sure every rule you might need is actually on the list.",
    "verdict_tone": "positive",
    "key_numbers": [
     {
-     "label": "New tasks solved, limited toolbox",
-     "value": "0%",
-     "sub": "three-tool set never contains the answer"
+     "label": "Right rule was among the search's guesses",
+     "value": "0% → 100%",
+     "sub": "short list that omitted it, versus the full list of seven rules"
     },
     {
-     "label": "New tasks solved, complete toolbox",
-     "value": "93%",
-     "sub": "seven-tool set, no follow-up checks"
+     "label": "Picked the exact right rule with no extra questions",
+     "value": "about 9 in 10",
+     "sub": "full list of seven rules, judged on the rules it had never carried before"
     },
     {
-     "label": "After one or two follow-up checks",
-     "value": "100%",
-     "sub": "complete toolbox, every new task solved"
-    },
-    {
-     "label": "Candidates weighed per task",
-     "value": "about 56",
-     "sub": "search stayed cheap"
+     "label": "Picked the right rule after a couple of probing checks",
+     "value": "92% → 100%",
+     "sub": "one or two extra example checks close the remaining gap"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Complete toolbox recovers operations a small toolbox never can",
-     "chart_read": "Bars compare two toolboxes on new tasks: a limited three-tool set versus a complete seven-tool set. One bar per group shows whether the right operation was even available, the other whether it was actually picked; taller means more tasks solved, so higher is better.",
-     "chart_takeaway": "The limited-toolbox bars sit flat at zero while the complete toolbox reaches near-full height, showing the answer must be stocked in the toolbox to be found."
+     "chart_plain_title": "Only a full rule list recovers the hidden operations",
+     "chart_read": "Two groups of bars compare a short three-rule list against the full seven-rule list. In each group, one bar shows whether the right rule was even among the guesses, the other whether it was actually picked. Taller is better.",
+     "chart_takeaway": "Both bars sit flat at zero for the short list but leap to full and near-full height for the complete list; the omitted rules are recoverable only once they are included."
     },
     {
      "index": 1,
-     "chart_plain_title": "A couple of follow-up checks solve every remaining new task",
-     "chart_read": "The horizontal axis is how many extra clarifying checks are run; the vertical axis is the share of new tasks solved, where higher is better. Two lines are strategies using the complete toolbox; the flat bottom line is the limited toolbox.",
-     "chart_takeaway": "Both complete-toolbox lines climb from about 93% to 100% within one or two checks, while the limited-toolbox line stays flat at zero no matter how many checks are run."
+     "chart_plain_title": "A couple of extra checks push accuracy to perfect",
+     "chart_read": "Lines track how often the right rule gets picked as the number of extra probing checks rises from none up to three. Two lines use the full seven-rule list; a flat bottom line uses the short list. Higher is better.",
+     "chart_takeaway": "The full-list lines climb from about nine in ten to a perfect score within one or two checks, while the short-list line never leaves zero."
     },
     {
      "index": 2,
-     "chart_plain_title": "Most operations are picked correctly nearly every time",
-     "chart_read": "Each bar is one operation; taller means a larger share of its example tasks were identified correctly, so higher is better. The first four are new operations and the last three are familiar ones.",
-     "chart_takeaway": "Most bars sit near the top, but gcd is lowest at about 77%, meaning it overlaps most with other operations and most often needs a follow-up check."
+     "chart_plain_title": "How often each rule gets picked correctly",
+     "chart_read": "One bar per rule shows how often the search picked it correctly using the full seven-rule list, spanning both rules newly added to the list and rules it already carried. Taller is better.",
+     "chart_takeaway": "Most bars reach near the top; greatest-common-divisor and first-element sit lowest because they most often look identical to other rules on the examples."
     }
    ]
   },
@@ -4702,35 +4731,35 @@
    ]
   },
   "qwen35_4b_partial_structure_search": {
-   "verdict_tag": "The perfect pruning signal existed, but the model could not read it",
-   "concept_primer": "Imagine a maze with more than a million complete routes. A perfect map can keep only four promising routes at each step. This test asks whether the small model can imitate that map by judging unfinished routes.",
-   "plain_question": "Can the fixed small model recognize which unfinished program routes can still reach the right answer well enough to prune the search?",
-   "plain_answer": "No for this route description. The perfect checker reduced more than a million complete routes to four and kept a solution every time, but the model's thinking-based scores ranked sibling routes about as well as chance. A cheaper immediate score was slightly better, yet still far below the launch requirement. The planned full search and training follow-up were stopped.",
-   "why_it_matters": "A useful hidden signal is not automatically a usable model signal. Measuring rankings within the same problem prevented a misleading overall score from triggering a large, expensive search. It also showed that exact depth-five search already finishes quickly on this task family, so learned pruning must clear a real cost bar.",
+   "verdict_tag": "Small model cannot judge unfinished program skeletons",
+   "concept_primer": "Imagine seeing only the first few step-labels of a recipe, with no ingredients or amounts filled in, and guessing whether it could ever be finished into a working dish. That guess is what this experiment tested.",
+   "plain_question": "Can the model look at an unfinished list of program steps and reliably tell whether it can still be completed into a working solution, so search can skip dead ends?",
+   "plain_answer": "No. Its guesses landed at random-guess level within each problem, and letting it think longer did slightly worse than a quick one-glance read. Because it could not separate finishable skeletons from dead ends, it could not steer the search, so that path was stopped before any search ran.",
+   "why_it_matters": "Before trusting a small model to prune a search by judging half-finished plans, check that it can actually rank finishable versus dead-end options within a single problem. Extra thinking time will not rescue a signal that carries no information.",
    "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Perfect-checker development paths",
-     "value": "12 / 12",
-     "sub": "four retained leaves instead of 1,048,576; 262,144x compression"
+     "label": "Thinking's skill at telling finishable from dead-end skeletons",
+     "value": "≈ random",
+     "sub": "landed at coin-flip level, no real information"
     },
     {
-     "label": "Thinking route ranking",
-     "value": "50.6%",
-     "sub": "chance within each problem; cheaper immediate scoring reached 55.6%"
+     "label": "A quick one-glance read's skill at the same job",
+     "value": "56%",
+     "sub": "the best of the group, still far too weak to trust"
     },
     {
-     "label": "Exact depth-five reference",
-     "value": "112 seconds",
-     "sub": "60/60 pools contained a solution; visible-only choice succeeded on 56/60"
+     "label": "Good finishable options kept when narrowing to the top four",
+     "value": "25% vs 30%",
+     "sub": "thinking retained fewer than the quick read"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Ranking unfinished routes within each problem",
-     "chart_read": "For each method, the first bar measures whether viable routes rank above dead routes within the same problem; 50% is chance. The second bar measures how many viable children survive when only four are kept; taller is better.",
-     "chart_takeaway": "Thinking sits at chance and retains fewer viable children than the cheaper immediate score. Since neither clears the pre-set requirement, the experiment correctly stops before full search."
+     "chart_plain_title": "Judging half-finished skeletons was no better than guessing",
+     "chart_read": "Five ways to score unfinished skeletons, left to right: the model thinking, a quick one-glance read, next-step likelihood, a surface shortcut, and random. One bar-color rates telling finishable from dead-end; the other rates keeping good options. Taller bars are better; near the middle means guessing.",
+     "chart_takeaway": "Every bar clusters near the middle of the scale, none standing out. The thinking bars are no taller than the random bars, so its judgment carried no usable signal."
     }
    ]
   },
@@ -4971,47 +5000,47 @@
    ]
   },
   "qwen35_4b_reliability_exec_opsd_audit": {
-   "verdict_tag": "Cheap reliability shortcuts all fell short",
-   "concept_primer": "Think of a proofreader choosing which draft to trust. The test here: does handing them a specific worked example of a mistake help more than handing them the same notes randomly shuffled?",
-   "plain_question": "Can a cheap trick — a worked failing example, or the model's own confidence — reliably pick the correct code before doing any training?",
-   "plain_answer": "No. A real worked failing example pointed the model toward the fix no better than randomly shuffled notes, and ranking drafts by the model's own confidence picked fewer correct answers than simply taking the first draft that passed the visible checks.",
-   "why_it_matters": "Before teaching a model to judge its own code, confirm the judging signal actually beats a shuffled control. Here it didn't, so the payoff lies in gathering independent behavioral evidence rather than another learned judge.",
+   "verdict_tag": "Cheap tricks could not spot correct code",
+   "concept_primer": "A small AI writes several versions of a program. Some pass the quick sample checks a user can see, yet are secretly wrong on hidden cases. The goal here is a cheap way to tell the genuinely-correct version from the secretly-wrong one.",
+   "plain_question": "When a small coding AI writes several programs that all pass the quick sample checks, can cheap tricks reliably pick out the version that is actually correct?",
+   "plain_answer": "No. Three low-cost tricks all failed. Ranking programs by the model's own confidence picked fewer genuinely-correct versions than simply taking the first that passed the sample checks; making the writing more predictable did not help; and giving a helper a worked failing example nudged the AI no better than scrambled nonsense did.",
+   "why_it_matters": "Before paying to train a picker, cheaply check that your reliability signal beats both a scrambled-nonsense control and a plain first-pass rule. If a hint helps no more than nonsense, it carries no real information, so look for independent evidence instead.",
    "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Nudge toward the fix from a real worked example",
-     "value": "0.063 vs 0.079",
-     "sub": "real evidence nudged less than randomly shuffled fake evidence — so it added nothing genuine"
+     "label": "Genuinely-correct programs picked when ranking by the model's own confidence",
+     "value": "8 of 24 → 6 of 24",
+     "sub": "fewer than simply taking the first program that passes the sample checks"
     },
     {
-     "label": "Correct drafts picked by model's own confidence",
-     "value": "6 of 24",
-     "sub": "fewer than the 8 you get by just taking the first draft that passes"
-    },
-    {
-     "label": "Wrong drafts mistakenly committed by that confidence rule",
+     "label": "Secretly-wrong programs picked by that same confidence ranking",
      "value": "8 of 24",
-     "sub": "more mistakes than the 6 from the simple first-pass rule"
+     "sub": "more wrong picks than the simple first-pass rule, which made selection worse"
+    },
+    {
+     "label": "Tasks actually solved at the best writing setting",
+     "value": "17%",
+     "sub": "making the AI's writing more predictable did not raise this"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "A real worked example didn't help the teacher find the fix",
-     "chart_read": "Each bar is a kind of hint given to the teacher; height shows how much more it leans toward the correct fix. A bar only counts as real help if it clears the shuffled-evidence bar; the far-right bar shows what happens when the answer is essentially leaked.",
-     "chart_takeaway": "The real worked-example bar sits just below the shuffled-evidence bar and far below the answer-leaked bar, so genuine evidence added nothing the audit could trust."
+     "chart_plain_title": "Does a worked failing example point the AI at the correct code?",
+     "chart_read": "Each bar is a type of hint given to a helper model; taller means it nudged the AI more strongly toward the genuinely-correct code. Bars include a scrambled-nonsense hint and an answer-leaking hint for comparison. Taller is a stronger nudge.",
+     "chart_takeaway": "The real hint's bar sits below the scrambled-nonsense bar and far below the answer-leak bar, so the hint carries no genuine task-specific information."
     },
     {
      "index": 1,
-     "chart_plain_title": "Ranking by the model's confidence picks worse than the simplest rule",
-     "chart_read": "Bars are grouped by selection method. The dark bar is drafts that were actually correct (taller is better); the light bar is drafts that were actually wrong (shorter is better). Compare model-confidence against just taking the first passing draft, and against a best-possible answer-key pick.",
-     "chart_takeaway": "Under model-confidence the correct bar shrinks and the wrong bar grows versus the first-pass rule, meaning confidence-ranking commits more mistakes, not fewer."
+     "chart_plain_title": "Ranking by the model's own confidence picks worse programs",
+     "chart_read": "Two bars per method count committed programs out of 24 tasks: one for genuinely-correct picks, one for secretly-wrong picks. More correct and fewer wrong is better. Methods are the first passing program, the confidence ranking, and a perfect picker.",
+     "chart_takeaway": "The confidence-ranking method has a shorter correct bar and a taller wrong bar than simply taking the first passing program, so it makes selection worse."
     },
     {
      "index": 2,
-     "chart_plain_title": "Colder, less-random decoding didn't improve the fixes",
-     "chart_read": "Bars are grouped by how randomly the model writes code, coldest on the left. The dark bar is the share of tasks where a working draft existed; the light bar is the share solved on the first try. Higher is better on both; no setting clearly wins.",
-     "chart_takeaway": "The bars stay essentially level across temperatures — the coldest setting nudges first-try success up but drops coverage, so nothing beats the existing baseline."
+     "chart_plain_title": "Making the AI's writing more predictable does not solve more tasks",
+     "chart_read": "Across three writing settings, from most predictable to most varied, two rates over 24 tasks: how often a workable program appeared and how often the chosen program was actually correct. Higher is better for both.",
+     "chart_takeaway": "No setting stands out: the most predictable setting solves slightly more tasks but yields fewer workable candidates, a wash with no clear winner."
     }
    ]
   },
@@ -5047,6 +5076,12 @@
    "charts": [
     {
      "index": 0,
+     "chart_plain_title": "Training helped the family it practiced on, but hurt brand-new families",
+     "chart_read": "Two groups of coding tasks: the repository family the model trained on, and four families it never saw. Each shows the share of tasks solved before training versus after. Taller is better.",
+     "chart_takeaway": "After training, the practiced family reached every task while the unseen families dropped from about two-thirds to a third — the skill did not carry over."
+    },
+    {
+     "index": 1,
      "chart_plain_title": "Training examples balanced equally across the four repair steps",
      "chart_read": "Each bar is one step of fixing code — inspect it, edit it, run the test, submit it — and its height counts the practice examples for that step. Equal-height bars mean the training set weights every step the same, not skewed toward one.",
      "chart_takeaway": "All four bars sit at the same height, confirming the practice set covered inspecting, editing, testing, and submitting in equal amounts, so no single repair step was starved of examples."
@@ -6303,46 +6338,41 @@
    ]
   },
   "qwen35_4b_verified_macro_invention": {
-   "verdict_tag": "Original shortcut test was budget-censored",
-   "concept_primer": "Imagine replacing a repeated two-step instruction with a short nickname. Before asking whether those nicknames help solve new puzzles, we first handed the model the full correct instruction list and checked whether it could rewrite that list faithfully.",
-   "plain_question": "Can the model reliably rewrite a supplied five-step plan using exact named shortcuts?",
-   "plain_answer": "This original run could not answer. Its reasoning-enabled attempts hit their token limits, while turning reasoning off fixed formatting but changed the computation being tested. A dedicated long-context follow-up later rewrote all 16 separate supplied plans exactly at least once, showing that this stop was a setup limit rather than a durable shortcut-interface failure.",
-   "why_it_matters": "A well-formatted tool call is not necessarily correct, but a token-capped one is not clean negative evidence either. Test a new action language on known plans, provision the real workload, and separate resource exhaustion from semantic failure before judging harder tasks.",
-   "verdict_tone": "mixed",
+   "verdict_tag": "AI used shortcuts fluently but not faithfully",
+   "concept_primer": "Picture giving someone a set of named shortcuts, where each single word stands for a fixed, exact sequence of steps. Instead of spelling out every step, they can just name the shortcut and mean the whole sequence.",
+   "plain_question": "Can a small AI take a set of pre-built, verified shortcuts and use them to rewrite hard step-by-step tasks correctly and more simply?",
+   "plain_answer": "No answer either way. Before testing whether shortcuts make hard tasks easier, the team checked something simpler: given the shortcuts and the exact plan, could the AI rewrite a task faithfully? It used shortcuts smoothly but reproduced the exact steps in at most two of four tasks, short of the bar, so the study stopped.",
+   "why_it_matters": "If you plan to have a small model rewrite problems using pre-built shortcuts, test faithful substitution first. Fluent, well-formatted shortcut use can hide wrong meaning, so confirm each shortcut expands to the exact intended steps before trusting it.",
+   "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Original task-smoke answers cut off",
-     "value": "607 / 1,440",
-     "sub": "the first smoke used too little reasoning room"
+     "label": "Tasks rewritten exactly right",
+     "value": "at most 2 of 4",
+     "sub": "3 of 4 were required to keep going"
     },
     {
-     "label": "No-think outputs formatted and using shortcuts",
-     "value": "16 / 16",
-     "sub": "formatting alone looked perfect"
+     "label": "Outputs in valid format, thinking turned off",
+     "value": "16 of 16",
+     "sub": "up from 4 of 16 when the AI thought out loud"
     },
     {
-     "label": "Supplied plans rewritten exactly at least once",
-     "value": "1 / 4",
-     "sub": "below the required 3 of 4"
-    },
-    {
-     "label": "Failed no-think samples that grew past the limit",
-     "value": "13 / 13",
-     "sub": "extra nicknames changed the supplied plan"
+     "label": "Answers cut off before finishing",
+     "value": "0 of 16",
+     "sub": "down from 12 of 16 with thinking on"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "The original low-budget rewrites stayed below the pass line",
-     "chart_read": "Each group shows one interface attempt. The dark bar counts supplied plans with at least one exact rewrite; the comparison bar marks the three-of-four requirement.",
-     "chart_takeaway": "Neither original attempt reached the pass line, so this run correctly stopped; a later long-context follow-up showed the budgeted interface itself was recoverable."
+     "chart_plain_title": "Neither setting let the AI rewrite enough tasks exactly right",
+     "chart_read": "Each pair of bars is one setting the AI ran under. Out of four tasks, one bar shows how many it rewrote perfectly and the other shows the three-of-four target it had to reach. More perfect rewrites is better.",
+     "chart_takeaway": "In both settings the exact-rewrite bar falls short of the target line, at most two of four, so the AI never cleared the bar to move forward."
     },
     {
      "index": 1,
-     "chart_plain_title": "No-think repaired formatting inside the original setup",
-     "chart_read": "Bars count well-formatted and cut-off outputs among 16 tries. Turning reasoning off moves every output into the well-formatted bar and removes the cut-off bar.",
-     "chart_takeaway": "Perfect formatting did not make those no-think rewrites faithful, but the condition was not equivalent to adequately budgeted reasoning."
+     "chart_plain_title": "Turning off thinking fixed the format but not the meaning",
+     "chart_read": "Two settings side by side, out of sixteen attempts each. One bar counts cleanly formatted answers, where higher is better; the other counts answers cut off before finishing, where lower is better. The right group had the AI's think-out-loud step off.",
+     "chart_takeaway": "With thinking off, all sixteen answers came out clean and none were cut off, yet the steps were still wrong, so tidy formatting alone did not fix the task."
     }
    ]
   },
@@ -7937,70 +7967,65 @@
    ]
   },
   "qwen_episodic_soft_prompt_task_vectors": {
-   "verdict_tag": "Custom warm-up hint did not beat plain prompting",
-   "concept_primer": "Think of giving the model a short custom warm-up note, tuned from a handful of a task's own examples, before it works fresh items of that same task.",
-   "plain_question": "Does tuning a small custom warm-up note from each task's examples make the model more consistent on new items of that task?",
-   "plain_answer": "No. The tuned warm-up note matched plain prompting exactly on fully-solved tasks (both 52.5%) and never beat it, though it did beat a scrambled-example version, showing the tuning itself worked.",
-   "why_it_matters": "Spending effort to tune a per-task warm-up note buys nothing over just prompting the model directly. For these text-cleanup tasks, skip it and use straightforward prompting.",
+   "verdict_tag": "Learned hint no better than direct answering",
+   "concept_primer": "Imagine clipping a small custom note to every request a fixed model sees. The note is learned from a handful of the task's own solved examples. The model never changes; only the note tries to steer better answers.",
+   "plain_question": "If we give a fixed model a small custom note learned from a task's own solved examples, does it copy the task's format more reliably than plain instructions do?",
+   "plain_answer": "No. The learned note matched plain direct answering but never beat it: about 53% of tasks were solved perfectly either way. The note did outperform one trained on scrambled examples, so the training itself worked; it simply added nothing over asking the model directly.",
+   "why_it_matters": "Before investing in per-task learned notes to make a model's output format more consistent, confirm they actually beat plain instructions on your own tasks. Here the extra training paid off no better than simply asking the model directly.",
    "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Tasks fully solved, plain vs tuned note",
-     "value": "52.5% → 52.5%",
-     "sub": "identical; no gain from the tuned warm-up"
+     "label": "Tasks solved perfectly: plain vs learned note",
+     "value": "53% → 53%",
+     "sub": "no improvement from adding the learned note"
     },
     {
-     "label": "Tasks the note helped vs hurt",
-     "value": "1 helped, 1 hurt",
-     "sub": "out of 40; the other 38 unchanged"
+     "label": "Tasks solved perfectly with a scrambled-example note",
+     "value": "45%",
+     "sub": "worse; the learned note did beat this control"
     },
     {
-     "label": "Single-item accuracy, plain vs tuned",
+     "label": "Single answers matched exactly: plain vs learned note",
      "value": "70% → 71%",
-     "sub": "a tiny drift, not a real improvement"
-    },
-    {
-     "label": "Tuning difficulty, start to finish",
-     "value": "1.06 → 0.25",
-     "sub": "note learned cleanly, so the null is not a training failure"
+     "sub": "too small a change to be real"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "How each method does on new items, plain prompting vs tuned note",
-     "chart_read": "Bars show accuracy for six methods; taller is better. Two measures per method: whole tasks fully solved and individual items correct. The tuned warm-up note sits level with plain row-by-row prompting.",
-     "chart_takeaway": "The tuned-note bar is the same height as plain prompting on fully-solved tasks, meaning the extra tuning added nothing."
+     "chart_plain_title": "How often each method got answers right on new examples",
+     "chart_read": "Bars show how often each method produced correct answers on new examples it never trained on; taller is better. Each method has two bars: the whole task fully correct, and single answers correct. Six methods are compared, including plain direct answering.",
+     "chart_takeaway": "The plain-answering bar and the learned-note bar reach the same height for whole tasks, so the note added nothing over asking directly."
     },
     {
      "index": 1,
-     "chart_plain_title": "Change in fully-solved tasks versus plain prompting",
-     "chart_read": "Bars show each method's gap from plain row-by-row prompting on fully-solved tasks; zero is the baseline and bars above zero would mean improvement. Every bar is at or below zero.",
-     "chart_takeaway": "No bar rises above zero and the tuned note sits exactly at zero, so nothing beat plain prompting."
+     "chart_plain_title": "Change in fully-solved tasks compared with plain answering",
+     "chart_read": "Bars show each method's change in fully-solved tasks against plain direct answering, which sits at the zero line. Bars rising above zero would mean improvement; every bar here sits on or dips below the line.",
+     "chart_takeaway": "The learned note's bar sits exactly on the zero line and all the others dip below it, so nothing beat plain direct answering."
     },
     {
      "index": 2,
-     "chart_plain_title": "The warm-up note learned cleanly during tuning",
-     "chart_read": "Lines show tuning difficulty falling over six steps; lower is better. One line uses the task's real examples, the other uses scrambled examples. The real-example line drops much lower.",
-     "chart_takeaway": "The real-example line falls smoothly to a low value, confirming the note trained properly, so the flat result is not a tuning failure."
+     "chart_plain_title": "Training progress: real examples versus scrambled examples",
+     "chart_read": "Two lines track how far off the note's fit is as training proceeds step by step; lower is better. One line trains on the task's real examples, the other on deliberately scrambled ones.",
+     "chart_takeaway": "The real-example line drops steadily and far lower, showing the note genuinely learned, so the flat overall result is not a training failure."
     },
     {
      "index": 3,
-     "chart_plain_title": "How many of the 40 tasks each method helped, hurt, or left unchanged",
-     "chart_read": "Stacked bars count tasks helped, hurt, or unchanged versus plain prompting; more helped and fewer hurt is better. Almost every task is unchanged for the tuned note.",
-     "chart_takeaway": "For the tuned note, 38 of 40 tasks are unchanged with one helped and one hurt, a wash; the control versions only ever hurt."
+     "chart_plain_title": "Tasks made better, worse, or unchanged versus plain answering",
+     "chart_read": "For each method, three bars count how many of the forty tasks it improved, worsened, or left unchanged compared with plain direct answering. More improved and fewer worsened is better.",
+     "chart_takeaway": "Nearly every task lands in the unchanged pile; the learned note helped one task and hurt one, a wash overall."
     },
     {
      "index": 4,
-     "chart_plain_title": "Change in single-item accuracy versus plain prompting",
-     "chart_read": "Bars show each method's shift in per-item accuracy from plain prompting; above zero is better. The tuned note and an untrained blank note sit at nearly the same tiny positive height.",
-     "chart_takeaway": "The untrained blank note gains as much as the tuned one, meaning any prefix at all, not the tuning, drives the sliver of change."
+     "chart_plain_title": "Change in single-answer accuracy versus plain answering",
+     "chart_read": "Bars show each method's change in how often individual answers matched exactly, compared with plain direct answering at the zero line; above zero is better. Both the learned note and an untrained note rise slightly.",
+     "chart_takeaway": "An untrained note rises just as much as the learned one, so the tiny gain comes from having any note, not from training it."
     },
     {
      "index": 5,
-     "chart_plain_title": "Item accuracy holds up across small and larger test sets",
-     "chart_read": "Paired bars show per-item accuracy for each method on a 20-task set and a 40-task set; taller is better. The method ordering barely shifts between the two sizes.",
-     "chart_takeaway": "The ranking stays roughly the same across both test sizes, with the tuned note's edge over plain prompting staying tiny throughout."
+     "chart_plain_title": "Single-answer accuracy at two different test-set sizes",
+     "chart_read": "Bars show how often single answers matched exactly for each method, measured on a smaller and a larger set of test tasks; taller is better. The two sizes let you check the ranking holds up.",
+     "chart_takeaway": "Method ordering barely shifts between the two test sizes, and the learned note's edge over plain answering stays tiny either way."
     }
    ]
   },
@@ -10215,133 +10240,133 @@
    ]
   },
   "qwen_shared_parser_compiler": {
-   "verdict_tag": "A trained reader works but stays brittle",
-   "concept_primer": "Think of the frozen model's internal notes as a foreign transcript. A small add-on \"reader\" is trained to translate that transcript, step by step, into a math recipe a calculator can run exactly.",
-   "plain_question": "Can a tiny add-on read a frozen model's internal notes and turn a word problem into exact runnable math steps?",
-   "plain_answer": "It depends. On the exact wording it was trained on, the reader turns short recipes into correct answers most of the time, far beating the do-nothing baselines. But it falls apart on longer recipes and on reworded problems.",
-   "why_it_matters": "Structured step-by-step teaching can install a real skill that plain answer-only training never finds. But the skill stays glued to one exact phrasing and short problems, so it is not yet a general capability.",
+   "verdict_tag": "Teaching each step works but stays brittle",
+   "concept_primer": "A large AI reads a math word problem and works out the answer silently, inside itself. Imagine attaching a small reader that peeks at its internal scratch notes and tries to reconstruct the exact steps it took, one by one.",
+   "plain_question": "When a large AI quietly works through a multi-step math problem in its head, can a small reader peek at its internal notes and rebuild the exact steps it took?",
+   "plain_answer": "It depends. Taught each step directly, the reader rebuilds short programs well — about 78% of four-step problems come out exactly right — but accuracy fades to 39% by twelve steps and collapses to random-guess level on longer or reworded problems. Reading only the final answer never beats chance.",
+   "why_it_matters": "To make an AI's hidden reasoning auditable and re-runnable, teach the reader each step directly rather than hoping it emerges from final answers alone. But expect it to break on longer or reworded problems, so keep the teaching broad.",
    "verdict_tone": "mixed",
    "key_numbers": [
     {
-     "label": "Short recipe, trained wording",
-     "value": "79%",
-     "sub": "share of programs run exactly right"
+     "label": "Four-step problems, steps taught",
+     "value": "78% correct",
+     "sub": "exact final answer, trained wording"
     },
     {
-     "label": "Same recipes, reworded",
-     "value": "4%",
-     "sub": "collapses to near random-guess"
+     "label": "Twelve-step problems, same method",
+     "value": "39% correct",
+     "sub": "accuracy fades as programs lengthen"
     },
     {
-     "label": "Longest recipe (24 steps)",
-     "value": "≈ chance",
-     "sub": "execution fails almost completely"
+     "label": "Reading only the final answer",
+     "value": "≈ random-guess level",
+     "sub": "about 1 in 97 — no better than chance"
     },
     {
-     "label": "Simple answer-only reader",
-     "value": "2%",
-     "sub": "never finds the skill (random-guess)"
+     "label": "Same programs, reworded",
+     "value": "≈ random-guess level",
+     "sub": "reader keyed on phrasing, not meaning"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Accuracy as the math recipe gets longer, trained wording",
-     "chart_read": "The horizontal axis is how many steps the math recipe has; the vertical axis is how often the final answer is exactly right, higher is better. Three lines compare the step-by-step-trained reader against two do-nothing baselines.",
-     "chart_takeaway": "Only the trained reader's line rises high on short recipes and then slides toward the flat, near-zero baselines as recipes lengthen, meaning the skill works but does not scale to long recipes."
+     "chart_plain_title": "Rebuilding the steps beats reading only the answer, until programs grow long",
+     "chart_read": "The horizontal axis is how many steps the problem has; the vertical axis is how often the final answer is exactly right, and higher is better. One line teaches each step directly; two lines just read the answer.",
+     "chart_takeaway": "The step-teaching line starts high and slides down as programs lengthen, while both answer-reading lines hug the bottom near random-guess level the whole way."
     },
     {
      "index": 1,
-     "chart_plain_title": "Same reader on trained wording versus reworded problems",
-     "chart_read": "The horizontal axis is recipe length; the vertical axis is how often the final answer is exactly right, higher is better. One line is the exact wording the reader learned, the other is the same problems reworded.",
-     "chart_takeaway": "The reworded line sits flat near the bottom at every length while the trained-wording line starts high, showing the reader is locked to one exact phrasing."
+     "chart_plain_title": "Same programs, different wording drops accuracy to chance",
+     "chart_read": "Both lines are the step-teaching reader on the same math programs; one uses the exact training wording, the other reworded prompts. The vertical axis is how often the final answer is exactly right, higher better.",
+     "chart_takeaway": "The reworded line lies flat near random-guess level at every length while the trained-wording line rides far above it — the reader keyed on phrasing, not meaning."
     },
     {
      "index": 2,
-     "chart_plain_title": "Extra answer-only training erodes the installed skill",
-     "chart_read": "Bars are grouped by recipe length; bar height is how often the answer is exactly right, higher is better. Each group compares the freshly trained reader against two versions given more answer-only practice afterward.",
-     "chart_takeaway": "The follow-up-training bars are much shorter than the original bars except at the shortest recipe, meaning answer-only practice damages the skill it was supposed to reinforce."
+     "chart_plain_title": "Extra final-answer-only training erases the taught steps",
+     "chart_read": "Grouped bars at each program length compare the working step-teacher before extra training, after training on final answers only, and after the same at a gentler pace. Taller bars are better.",
+     "chart_takeaway": "After extra answer-only training the bars for longer programs fall to the floor; even the gentle version keeps only the four-step case standing."
     },
     {
      "index": 3,
-     "chart_plain_title": "Tiny per-step slips pile up into whole-recipe failure",
-     "chart_read": "The horizontal axis is recipe length; the vertical axis is accuracy, higher is better. Two lines track getting each individual instruction and number right, and a third tracks getting the entire recipe perfectly right.",
-     "chart_takeaway": "The per-step lines stay high while the whole-recipe line drops steeply, showing small slips on each number multiply into total failure on long recipes."
+     "chart_plain_title": "Tiny per-step reading errors pile up across a long program",
+     "chart_read": "Three lines track the step-teacher by program length: how often each operation is read right, each number is read right, and the whole program is exactly right. Higher is better.",
+     "chart_takeaway": "Per-step reading stays high, but the whole-program line falls far faster — one wrong step anywhere spoils the answer, so small errors compound."
     },
     {
      "index": 4,
-     "chart_plain_title": "Which reader designs handle longer recipes",
-     "chart_read": "The horizontal axis is recipe length; the vertical axis is how often the answer is exactly right, higher is better. Five lines compare reader designs, from shallow simple probes to the deeper, more-trained final design.",
-     "chart_takeaway": "The deepest, most-trained design's line stays highest across recipe lengths while the shallow probe collapses after four steps, showing design choices extend how far recipes can run."
+     "chart_plain_title": "Deeper notes and careful number-finding let longer programs run correctly",
+     "chart_read": "Each line is a different design of the reader, scored by how often the executed answer is right across program lengths. Higher is better. Designs differ in how deep they peek and how they locate each step's number.",
+     "chart_takeaway": "Reading deeper internal notes and pinning each number beside its operation lift the lines highest, while the shallowest design dies past four steps."
     },
     {
      "index": 5,
-     "chart_plain_title": "Confidence in the true answer falls to chance past four steps",
-     "chart_read": "The horizontal axis is recipe length; the vertical axis is how much probability the system places on the correct answer, higher is better. One line is the reader-plus-calculator, the other a do-nothing baseline.",
-     "chart_takeaway": "Beyond four steps the reader's line drops onto the flat baseline, meaning its confidence in the right answer becomes no better than a random guess."
+     "chart_plain_title": "Confidence in the right answer falls to chance beyond four steps",
+     "chart_read": "Two lines by program length show how much probability the step-teaching system versus a plain answer-reader places on the true answer. Higher is better; the flat lower line marks random-guess level.",
+     "chart_takeaway": "The step-teacher leads only at four steps, then drops to meet the flat answer-reader line at random-guess level — past four steps the edge disappears."
     }
    ]
   },
   "qwen_slot_repair_distillation": {
-   "verdict_tag": "Trained fixer did not transfer to new prompts",
-   "concept_primer": "A tool writes a short step-by-step math program to answer each question, but often gets a step wrong. Think of a proofreader trained to patch just the buggy steps in a draft.",
-   "plain_question": "Can we train a small fixer to patch the buggy steps in an auto-written math program so more answers come out right?",
-   "plain_answer": "No. A proofreader trained to patch the buggy math steps helped only on the practice questions it was tuned against; on new and reworded questions it matched or slightly hurt accuracy, even though about 86% were actually fixable.",
-   "why_it_matters": "A patch learned on one batch of questions can overfit that batch and fail elsewhere. Since most errors were fixable in principle, the bottleneck is reliably choosing which steps to edit, not the lack of a nearby correct answer.",
+   "verdict_tag": "Learned repair fails on fresh problems",
+   "concept_primer": "A machine turns word problems into short step-by-step arithmetic worksheets, but it often gets the final answer wrong. Imagine training a fast proofreader to spot and fix the few wrong steps in a single pass.",
+   "plain_question": "Can a small proofreader model learn to fix the few wrong steps in a math machine's worksheets, so more final answers come out correct on brand-new problems?",
+   "plain_answer": "No. On the practice problems it was tuned on, the proofreader nudged correct answers from about 33% to 35%. But on brand-new problems it matched or slightly hurt the plain machine, even though a corrected worksheet almost always existed nearby. The learned fixes did not carry over.",
+   "why_it_matters": "Being able to find a fix by searching offline does not mean a model can learn to apply it live in one pass. When teaching a repair step, test it on fresh, differently-worded problems before trusting it, since practice-set gains can vanish.",
    "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Correct answers on new questions",
-     "value": "25% → 25%",
-     "sub": "the trained fixer left new-question accuracy essentially unchanged"
-    },
-    {
-     "label": "Correct on reworded questions",
+     "label": "Correct answers on reworded new problems",
      "value": "25% → 19%",
-     "sub": "the fixer actually lowered accuracy here"
+     "sub": "the proofreader made these worse"
     },
     {
-     "label": "Share that were fixable",
-     "value": "about 86%",
-     "sub": "a best-possible repair could correct most of them"
+     "label": "Correct answers on tuned practice problems",
+     "value": "33% → 35%",
+     "sub": "a small gain where it was trained"
+    },
+    {
+     "label": "How often a correct fix existed nearby",
+     "value": "about 85%",
+     "sub": "fixes were available but not applied"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Fixer helps only on practice questions, not new ones",
-     "chart_read": "Each cluster is one set of questions. Within it, three bars: the original auto-written program, the trained fixer's version, and the best-possible repair. Taller means more correct answers; higher is better.",
-     "chart_takeaway": "The fixer bar tops the original only on the practice set and sits far below the best-possible bar everywhere, showing the gains never reach new questions."
+     "chart_plain_title": "Proofreader beats the machine only on practice problems, not new ones",
+     "chart_read": "Bars group four problem sets. Within each set, three bars: the plain machine, the proofreader-edited version, and a best-possible fix that always searches. Bar height is the share of correct final answers; taller is better.",
+     "chart_takeaway": "The proofreader bar tops the machine only on the leftmost practice set; on every fresh set it ties or drops, far below the tall best-possible-fix bars."
     },
     {
      "index": 1,
-     "chart_plain_title": "The fixer helps on practice sets but hurts on new ones",
-     "chart_read": "One bar per question set showing how much of the fixable room the fixer actually closed. Bars above the zero line mean it helped; bars below zero mean it made things worse.",
-     "chart_takeaway": "Bars sit above zero on the two practice sets but drop below zero on every new-prompt set, so the learned repair does not carry over."
+     "chart_plain_title": "Share of fixable errors closed flips to worse on new problems",
+     "chart_read": "Each bar shows, for one problem set, how much of the gap between the plain machine and a best-possible fix the proofreader closed. Above the zero line is progress; below the line means it made answers worse.",
+     "chart_takeaway": "Bars stand above zero for the two practice sets but fall below zero for all three fresh sets, so the fixing skill reverses on unseen problems."
     },
     {
      "index": 2,
-     "chart_plain_title": "Fixer barely beats the original, only on the last round",
-     "chart_read": "The jagged line is the fixer's share of correct practice answers after each training round; the flat line is the original program's fixed level. Higher is better.",
-     "chart_takeaway": "The fixer line bounces around and only pokes above the flat baseline on the final round, a fragile edge rather than steady skill."
+     "chart_plain_title": "The proofreader only edges past the machine at the last training step",
+     "chart_read": "The wavy line tracks the proofreader's share of correct answers on practice problems after each training round. The flat line is the plain machine's fixed score. Sitting above the flat line is better.",
+     "chart_takeaway": "The wavy line bounces around and only pokes above the flat machine line at the final round, so the small gain looks like luck rather than a stable skill."
     },
     {
      "index": 3,
-     "chart_plain_title": "Editing makes two phrasings of a question disagree more",
-     "chart_read": "Bars group by program source: original, best-possible repair, and the fixer. Height shows how often two wordings of the same question give the same answer (and both correct). Higher is better.",
-     "chart_takeaway": "The fixer nearly halves answer agreement across wordings versus the original, while the best-possible repair raises it, so editing adds inconsistency."
+     "chart_plain_title": "Editing makes the same problem get different answers when reworded",
+     "chart_read": "For three sources, the plain machine, a best-possible fix, and the proofreader, bars show how often one problem asked two ways gets a matching answer, and how often both wordings are right. Higher is better.",
+     "chart_takeaway": "The proofreader's bars are the shortest, so its edits make the two wordings disagree more often than even the unedited machine does."
     },
     {
      "index": 4,
-     "chart_plain_title": "No fixer setup wins on both practice and new questions",
-     "chart_read": "Each configuration has two bars: correct answers on the practice set and on a fresh set. Taller is better on each.",
-     "chart_takeaway": "The setup that tops the practice bars is not the one that tops the fresh bars, so no single design is best on both."
+     "chart_plain_title": "No proofreader setup wins on both practice and new problems",
+     "chart_read": "Each pair of bars is one proofreader setup: one bar for correct answers on practice problems, one for fresh problems. Taller is better, and a good setup would lift both bars together.",
+     "chart_takeaway": "The setup that is best on practice problems is not best on fresh ones, and no configuration raises both bars at the same time."
     },
     {
      "index": 5,
-     "chart_plain_title": "The fixer never settles on which steps to edit",
-     "chart_read": "Two lines track, over training rounds, how accurately the fixer picks which steps need editing versus how many needed steps it catches. Higher is better for both.",
-     "chart_takeaway": "The step-picking accuracy line swings widely round to round and never settles, so the edit decisions stay unreliable."
+     "chart_plain_title": "The proofreader never settles on which steps to fix",
+     "chart_read": "Two wavy lines across training rounds: how often the proofreader's edits land on genuinely wrong steps, and how many of the truly wrong steps it catches. Higher and steadier is better.",
+     "chart_takeaway": "Both lines keep swinging round after round and never flatten out, so the choice of which steps to fix stays unreliable throughout training."
     }
    ]
   },
@@ -11063,77 +11088,82 @@
    ]
   },
   "qwen_verified_skill_memory_rag": {
-   "verdict_tag": "Recipe cards from memory did not help",
-   "concept_primer": "Imagine a cook facing a new dish who is first handed a recipe card for a similar dish they nailed before. Here the model gets a verified how-to card for an analogous text-cleanup task, hoping it copies the recipe.",
-   "plain_question": "Does handing the model a recipe card from a library of past solved tasks make it clean up text more reliably?",
-   "plain_answer": "No. Giving the model a matching recipe card left it slightly worse (47% of tasks fully correct) than just working through rows plainly with no card (50%), and no better than handing it a random or scrambled card.",
-   "why_it_matters": "Pulling in a related worked example is not a free win for consistency. Before adding a retrieval library, check it beats plain step-by-step prompting and both a random and a scrambled-card control.",
+   "verdict_tag": "Retrieving a similar example did not help",
+   "concept_primer": "Imagine a worker reformatting messy data one field at a time — dates, phone numbers, addresses. Before each new batch, you hand them a worked example of a similar job solved earlier, hoping it guides them to fewer mistakes.",
+   "plain_question": "When a small language model reformats messy data like dates and phone numbers, does handing it a worked example of a similar past job help it get more batches perfectly right?",
+   "plain_answer": "No. Handing the model a matched worked example did not help. It got half of its batches perfectly right when working alone and slightly under half when given the example. A randomly chosen or scrambled example did no better, so the extra material was dead weight.",
+   "why_it_matters": "If you are pushing a small model through repetitive data-cleanup work, do not count on a library of similar solved examples to lift accuracy. The reliable gains here came from clean item-by-item prompting, not from looking up past work.",
    "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Tasks fully correct, plain vs with recipe card",
-     "value": "50% → 47%",
-     "sub": "share of tasks where every row was exactly right; the card slightly hurt"
+     "label": "Batches perfect, working alone",
+     "value": "50%",
+     "sub": "every field in the batch exactly right"
     },
     {
-     "label": "Card matched the task type",
-     "value": "77% vs 20%",
-     "sub": "how often the right-family card was fetched, versus a random card"
+     "label": "Batches perfect, given a matched example",
+     "value": "48%",
+     "sub": "slightly worse, not better"
     },
     {
-     "label": "Tasks the card improved",
+     "label": "Tasks the example improved",
      "value": "0 of 40",
-     "sub": "it helped none and made 1 worse"
+     "sub": "and it made one task worse"
+    },
+    {
+     "label": "Examples that were genuinely similar",
+     "value": "78%",
+     "sub": "the lookup worked; the help still didn't"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Share of tasks solved perfectly, by method",
-     "chart_read": "Bars show the share of tasks where every row came out exactly right; taller is better. Plain row-by-row work is leftmost; the recipe-card method and its scrambled, batched, and random-card comparisons follow.",
-     "chart_takeaway": "The plain no-card bar is the tallest, and the recipe-card bar sits just below it, near the random and scrambled controls, so the card gave no gain."
+     "chart_plain_title": "How often each approach got a whole batch perfectly right",
+     "chart_read": "Each bar is one working style; taller means more batches where every field was exactly right. The leftmost bar is the model working through items one at a time on its own; the rest add a looked-up example or process the whole batch at once.",
+     "chart_takeaway": "The plain one-at-a-time bar is tallest; every version that adds a looked-up example or batches the job sits lower, so the extra example never paid off."
     },
     {
      "index": 1,
-     "chart_plain_title": "Share of individual rows correct, by method",
-     "chart_read": "Bars show the share of individual rows cleaned up exactly right; taller is better. Same five methods as before, from plain row-by-row work to the recipe-card and control versions.",
-     "chart_takeaway": "Plain row-by-row work again has the tallest bar, and every card-based or batched version loses rows, confirming the card does not help even row by row."
+     "chart_plain_title": "How often each approach got a single field right",
+     "chart_read": "Each bar is one working style; taller means more individual fields exactly correct, a looser test than needing the whole batch perfect. The leftmost bar is the model working through items one at a time alone.",
+     "chart_takeaway": "Working alone stays tallest even under this gentler scoring; every added-example or batched version lands lower, confirming the pattern is not a fluke of strict grading."
     },
     {
      "index": 2,
-     "chart_plain_title": "Tasks the card helped versus hurt",
-     "chart_read": "For each method, one bar counts tasks it improved and one counts tasks it worsened, versus plain row-by-row work, out of 40; more helped and fewer hurt is better.",
-     "chart_takeaway": "The recipe-card method shows zero tasks helped and one hurt, and the controls hurt even more, so no variant produced a net win."
+     "chart_plain_title": "How many tasks each shortcut helped versus hurt",
+     "chart_read": "For each working style, two bars count the tasks it improved versus the tasks it worsened, compared against the model working one field at a time alone. A taller help bar and shorter hurt bar is better.",
+     "chart_takeaway": "The help bars sit at or near zero everywhere while the hurt bars climb; the matched example improved none of the forty tasks and worsened one."
     },
     {
      "index": 3,
-     "chart_plain_title": "Did the library fetch a truly similar card?",
-     "chart_read": "Two bars show how often the fetched card came from the same task family as the target: the real retriever versus picking a random card; taller means better-matched cards.",
-     "chart_takeaway": "The real retriever's bar is far taller (right family most of the time) than random, proving the null result came from useless cards, not bad fetching."
+     "chart_plain_title": "How often the lookup found a genuinely similar example",
+     "chart_read": "Two bars: the real lookup versus a random pick. Each shows how often the fetched example came from the same kind of task. Taller means the fetched example was more relevant to the job at hand.",
+     "chart_takeaway": "The real lookup fetched a genuinely similar example most of the time, far above the random pick, so the flat result is not a broken lookup."
     },
     {
      "index": 4,
-     "chart_plain_title": "Small pilot runs swung wildly before the main test",
-     "chart_read": "Across three tiny six-task warm-up runs, grouped bars show how often rows came out exactly right for each method; taller is better. The recipe-card method appears among plain and control methods.",
-     "chart_takeaway": "The recipe-card method jumps from worst to best across the three tiny runs, an unstable swing that motivated the larger 40-task test where its edge disappeared."
+     "chart_plain_title": "Tiny six-task trials swung wildly from run to run",
+     "chart_read": "Each group is one working style; the three bars within it are three separate tiny trials of only six tasks each. Height is the share of fields correct. The point is how much the matched-example bars jump between trials.",
+     "chart_takeaway": "The matched-example bars swing from worst to best across the three tiny trials, showing six tasks are too few to trust and motivating the full forty-task test."
     },
     {
      "index": 5,
-     "chart_plain_title": "On the hardest task type, cards still do not rescue accuracy",
-     "chart_read": "For ten tasks in the toughest (number-formatting) family, paired bars compare plain row-by-row work against the recipe-card version on share of rows correct; taller is better.",
-     "chart_takeaway": "On most of these hard tasks the recipe-card bar is shorter than or equal to the plain bar, showing the numeric-rounding failures are not fixed by fetching a card."
+     "chart_plain_title": "On the hardest task type, examples did not rescue accuracy",
+     "chart_read": "Ten of the hardest number-formatting tasks run along the bottom. For each, one bar is the model working alone and the other is the model given a matched example. Height is the share of fields correct; taller is better.",
+     "chart_takeaway": "On these number tasks the matched-example bars are mostly equal or shorter, losing on four and winning on two, so the failures are not about finding a relevant example."
     },
     {
      "index": 6,
-     "chart_plain_title": "Which method produced readable output",
-     "chart_read": "Bars show the share of tasks whose output could be read back cleanly; taller is better. The prompt-based methods sit beside the all-at-once batched method.",
-     "chart_takeaway": "Every method reads back cleanly except the batched all-at-once approach, which garbles output on a small slice of tasks, part of why it trails."
+     "chart_plain_title": "Only processing the whole batch at once broke the format",
+     "chart_read": "Each bar is one working style; height is the share of tasks whose output could be read back cleanly. Taller is better. The bar worth watching is the one that processes the whole batch in a single pass.",
+     "chart_takeaway": "Every style produced clean, readable output except processing the whole batch at once, which garbled the format on a small slice of tasks."
     },
     {
      "index": 7,
-     "chart_plain_title": "Fetched cards get less similar past the closest match",
-     "chart_read": "Lines track, by fetch position (closest match first), how similar the fetched card is and how often it is the right family; the closest match is at left and higher is better.",
-     "chart_takeaway": "Both lines slope downward from the first fetch onward, showing cards past the closest match are weaker and off-topic, which is why only the top match was used."
+     "chart_plain_title": "The single best-matched example is the most relevant",
+     "chart_read": "Two lines run across the first, second, and third best-matched examples. One line tracks how similar the match is; the other tracks how often it is the same kind of task. Both fall as you move to lower-ranked picks.",
+     "chart_takeaway": "Both lines slope downward from the top match, so lower-ranked examples are less relevant — the reason only the single best example was ever handed to the model."
     }
    ]
   },

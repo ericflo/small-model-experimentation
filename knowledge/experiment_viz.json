@@ -7,11 +7,21 @@
     {
      "title": "Powered commit-slot qualification accuracy",
      "kind": "bar",
-     "categories": ["ordered thought", "same tokens shuffled", "no generated thought", "close-only free-form"],
+     "categories": [
+      "ordered thought",
+      "same tokens shuffled",
+      "no generated thought",
+      "close-only free-form"
+     ],
      "series": [
       {
        "label": "exact semantic success",
-       "values": [0.2713864306784661, 0.13569321533923304, 0.09734513274336283, 0.058997050147492625]
+       "values": [
+        0.2713864306784661,
+        0.13569321533923304,
+        0.09734513274336283,
+        0.058997050147492625
+       ]
       }
      ],
      "x_label": "qualification interface",
@@ -40540,7 +40550,7 @@
      "headline": false
     },
     {
-     "kind": "line",
+     "kind": "scatter",
      "title": "Total bridge budget does not predict holdout repair",
      "x_label": "Total bridge examples in the 240-record budget",
      "y_label": "Recombination holdout repair",
@@ -46186,7 +46196,37 @@
   "qwen35_4b_repo_search_compress_bank": {
    "charts": [
     {
-     "headline": true,
+     "title": "Compact-bank training helped the trained family but broke transfer",
+     "kind": "bar",
+     "categories": [
+      "trained family (48 tasks)",
+      "4 unseen families (72 tasks)"
+     ],
+     "series": [
+      {
+       "label": "before training (frozen)",
+       "values": [
+        0.8333333333333334,
+        0.6805555555555556
+       ]
+      },
+      {
+       "label": "after compact-bank training",
+       "values": [
+        1.0,
+        0.3472222222222222
+       ]
+      }
+     ],
+     "x_label": "task family",
+     "y_label": "share of coding tasks solved",
+     "y_format": "percent01",
+     "note": "Trained-family success rose to perfect, but on four wholly unseen repository families it fell by a third — family-specific policy cloning, not transferable skill.",
+     "source": "reports/result_receipt.json",
+     "headline": true
+    },
+    {
+     "headline": false,
      "kind": "bar",
      "title": "Replay compression preserves all four coding operators in smoke",
      "categories": [
