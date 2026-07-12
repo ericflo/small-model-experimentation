@@ -30,6 +30,10 @@ def load_config(path: Path | None = None) -> tuple[dict[str, Any], Path]:
         raise ValueError("trained and transfer families must be non-empty and disjoint")
     if float(config["decision"]["specialist_delta_threshold"]) != 0.0:
         raise ValueError("successor forbids an arbitrary positive specialist delta bar")
+    if float(config["decision"]["integrated_joint_delta_threshold"]) != 0.0:
+        raise ValueError("successor forbids an arbitrary positive integration delta bar")
+    if int(config["mopd"]["rounds"]) != len(config["seeds"]["rollout_rounds"]):
+        raise ValueError("every MOPD round requires exactly one frozen rollout seed")
     return config, path
 
 

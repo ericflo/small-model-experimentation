@@ -199,6 +199,11 @@ def main() -> int:
             payload.get("scope") == "confirmatory"
             for payloads in arms.values() for payload in payloads
         ),
+        "all_model_receipts_match_manifest": all(
+            payload.get("model_merge_receipt_sha256")
+            == manifest.get("model_merge_receipts", {}).get(name)
+            for name, payloads in arms.items() for payload in payloads
+        ),
         "greedy_except_sample_more": all(
             payload.get("decode") == ("sample8" if name == manifest["sample_more_arm"] else "greedy")
             for name, payloads in arms.items() for payload in payloads

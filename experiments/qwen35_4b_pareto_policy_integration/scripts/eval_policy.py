@@ -17,7 +17,7 @@ sys.path.insert(0, str(EXP / "src"))
 
 import harness  # noqa: E402
 from gym.families import load as load_family  # noqa: E402
-from io_utils import all_families, load_config, write_json  # noqa: E402
+from io_utils import all_families, load_config, sha256_file, write_json  # noqa: E402
 
 
 def _counts(config: dict, scope: str) -> tuple[int, int]:
@@ -93,6 +93,9 @@ def main() -> int:
         top_k=None if greedy else int(config["evaluation"]["sample_top_k"]),
     )
     model_path = Path(args.model)
+    merge_receipt = model_path / "merge_receipt.json"
+    if model_path.exists() and not merge_receipt.is_file():
+        raise SystemExit(f"local evaluation model has no merge receipt: {model_path}")
     runner = harness.make_runner(
         config["engine"], model_override=str(model_path.resolve()) if model_path.exists() else args.model
     )
@@ -137,6 +140,9 @@ def main() -> int:
     result = {
         "stage": "policy_eval", "tag": args.tag, "scope": args.scope,
         "model": str(model_path.resolve()) if model_path.exists() else args.model,
+        "model_merge_receipt_sha256": (
+            sha256_file(merge_receipt) if merge_receipt.is_file() else None
+        ),
         "config": str(config_path), "block_seed": args.block_seed,
         "decode": args.decode, "k": k, "families": families,
         "atoms_per_level": atom_n, "episodes_per_level": episode_n,

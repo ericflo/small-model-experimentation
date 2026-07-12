@@ -284,10 +284,13 @@ def _eval_if_needed(
     scores = out / "scores.json"
     if scores.exists():
         payload = json.loads(scores.read_text())
+        merge_receipt = model / "merge_receipt.json"
         if (
             payload.get("scope") == scope
             and int(payload.get("block_seed", -1)) == block_seed
             and payload.get("model") == str(model.resolve())
+            and merge_receipt.is_file()
+            and payload.get("model_merge_receipt_sha256") == sha256_file(merge_receipt)
             and payload.get("decode") == decode
         ):
             print(f"[resume] evaluation {tag} already complete", flush=True)
@@ -405,7 +408,22 @@ def _teacher_audit(config: dict, config_path: Path) -> None:
         metadata = output.with_name(output.name + ".meta.json")
         if output.exists() and metadata.exists():
             payload = json.loads(metadata.read_text())
-            if payload.get("model") == str(model.resolve()):
+            sampling = payload.get("sampling", {})
+            if (
+                payload.get("model") == str(model.resolve())
+                and payload.get("input", {}).get("sha256") == sha256_file(input_path)
+                and int(sampling.get("n", -1))
+                == int(config["teacher_audit"]["continuations_per_branch"])
+                and int(sampling.get("top_k", -1))
+                == int(config["teacher_audit"]["branch_top_k"])
+                and int(sampling.get("run_seed", -1))
+                == int(config["seeds"]["qualification_blocks"][0]) + 777
+                and payload.get("local_model_provenance", {}).get(
+                    "merge_receipt_sha256"
+                ) == sha256_file(model / "merge_receipt.json")
+                and payload.get("local_model_provenance", {}).get("output_sha256")
+                == sha256_file(output)
+            ):
                 print(f"[resume] teacher audit output {output.name} already complete", flush=True)
                 continue
             raise SystemExit(f"stale teacher audit output: {output}")
@@ -415,6 +433,7 @@ def _teacher_audit(config: dict, config_path: Path) -> None:
                 "--output", str(output), "--model-override", str(model), *common,
             ]
         )
+        _stamp_local_model_output(output, model)
     _run(
         [
             str(PY), str(EXP / "scripts" / "analyze_teacher_audit.py"),
@@ -436,6 +455,21 @@ def _generation_engine_args(config: dict) -> list[str]:
     for size in config["engine"]["cudagraph_capture_sizes"]:
         values.extend(("--cudagraph-capture-size", str(size)))
     return values
+
+
+def _stamp_local_model_output(output: Path, model: Path) -> None:
+    metadata = output.with_name(output.name + ".meta.json")
+    merge_receipt = model / "merge_receipt.json"
+    if not output.is_file() or not metadata.is_file() or not merge_receipt.is_file():
+        raise SystemExit(f"cannot provenance-stamp local-model output: {output}")
+    payload = json.loads(metadata.read_text())
+    if payload.get("model") != str(model.resolve()):
+        raise SystemExit(f"runner loaded the wrong local model for {output}")
+    payload["local_model_provenance"] = {
+        "merge_receipt_sha256": sha256_file(merge_receipt),
+        "output_sha256": sha256_file(output),
+    }
+    write_json(metadata, payload)
 
 
 def _mopd_round(
@@ -468,9 +502,18 @@ def _mopd_round(
     )
     if rollout_source == "student" and rollout_path.exists() and rollout_meta.exists():
         meta = json.loads(rollout_meta.read_text())
+        sampling = meta.get("sampling", {})
         if (
             meta.get("model") != str(current.resolve())
+            or meta.get("input", {}).get("sha256") != sha256_file(prompt_path)
             or int(meta.get("sampling", {}).get("n", -1)) != 2
+            or int(sampling.get("run_seed", -1))
+            != int(config["seeds"]["rollout_rounds"][round_index])
+            or int(sampling.get("top_k", -1)) != int(config["mopd"]["rollout_top_k"])
+            or meta.get("local_model_provenance", {}).get("merge_receipt_sha256")
+            != sha256_file(current / "merge_receipt.json")
+            or meta.get("local_model_provenance", {}).get("output_sha256")
+            != sha256_file(rollout_path)
         ):
             raise SystemExit(f"stale rollout policy at {rollout_path}")
         print(f"[resume] MOPD {arm} round {round_index} rollouts", flush=True)
@@ -479,6 +522,11 @@ def _mopd_round(
         if (
             receipt.get("prompt_sha256") != sha256_file(prompt_path)
             or int(receipt.get("samples_per_prompt", -1)) != 2
+            or receipt.get("rollout_sha256") != sha256_file(rollout_path)
+            or receipt.get("teacher_merge_receipts") != {
+                "quick": sha256_file(paths["quick"] / "merge_receipt.json"),
+                "deep": sha256_file(paths["deep"] / "merge_receipt.json"),
+            }
         ):
             raise SystemExit(f"stale routed rollout prompts at {rollout_path}")
         print(f"[resume] MOPD {arm} round {round_index} routed rollouts", flush=True)
@@ -497,6 +545,7 @@ def _mopd_round(
                 "--include-prompt-token-ids", *_generation_engine_args(config),
             ]
         )
+        _stamp_local_model_output(rollout_path, current)
     elif rollout_source == "teacher_routed":
         prompts = read_jsonl(prompt_path)
         partial_outputs = []
@@ -520,6 +569,7 @@ def _mopd_round(
                     "--include-prompt-token-ids", *_generation_engine_args(config),
                 ]
             )
+            _stamp_local_model_output(output_path, model)
             partial_outputs.extend(read_jsonl(output_path))
             partial_meta.append(json.loads(output_path.with_name(output_path.name + ".meta.json").read_text()))
         partial_outputs.sort(key=lambda row: row["id"])
@@ -533,6 +583,11 @@ def _mopd_round(
                 "deep_teacher": str(paths["deep"].resolve()),
                 "rows": len(partial_outputs),
                 "samples_per_prompt": 2,
+                "rollout_sha256": sha256_file(rollout_path),
+                "teacher_merge_receipts": {
+                    "quick": sha256_file(paths["quick"] / "merge_receipt.json"),
+                    "deep": sha256_file(paths["deep"] / "merge_receipt.json"),
+                },
                 "component_runner_metadata": partial_meta,
             },
         )
@@ -540,6 +595,13 @@ def _mopd_round(
         raise ValueError(f"unknown rollout source: {rollout_source}")
     cache = paths["root"] / "teacher_cache" / arm / f"seed_{seed}" / f"round_{round_index}.pt"
     cache_receipt = cache.with_suffix(cache.suffix + ".receipt.json")
+    expected_teachers = {"quick": paths["quick"], "deep": paths["deep"]}
+    if routing == "wrong":
+        expected_teachers = {"quick": paths["deep"], "deep": paths["quick"]}
+    expected_teacher_receipts = {
+        stratum: sha256_file(model / "merge_receipt.json")
+        for stratum, model in expected_teachers.items()
+    }
     if cache.exists() and cache_receipt.exists():
         receipt = json.loads(cache_receipt.read_text())
         if (
@@ -548,6 +610,12 @@ def _mopd_round(
             or int(receipt.get("selection_seed", -1)) != selection_seed
             or int(receipt.get("optimizer_updates", -1)) != optimizer_updates
             or receipt.get("teacher_log_prob_dtype") != "float32"
+            or {
+                stratum: receipt.get("teachers", {}).get(stratum, {}).get(
+                    "merge_receipt_sha256"
+                )
+                for stratum in ("quick", "deep")
+            } != expected_teacher_receipts
         ):
             raise SystemExit(f"stale teacher cache: {cache}")
         print(f"[resume] MOPD {arm} round {round_index} teacher cache", flush=True)
@@ -830,6 +898,10 @@ def _confirm(config: dict, config_path: Path) -> None:
             "wrong_route", "offpolicy", *parameter_names, "matched_union_sft",
         ],
         "sample_more_arm": "quick_sample8", "arms": arm_scores,
+        "model_merge_receipts": {
+            name: sha256_file(model / "merge_receipt.json")
+            for name, (model, _) in models.items()
+        },
     }
     manifest_path = EXP / "runs" / "confirmatory_manifest.json"
     write_json(manifest_path, manifest)

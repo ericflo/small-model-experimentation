@@ -61,3 +61,14 @@ Created as a new experiment scaffold.
   one-sided bounds against both source policies and every one-checkpoint
   control, separate anchor/transfer retention checks, three training seeds,
   and the execution-filtered best-of-8 hurdle.
+
+## 2026-07-12 — quick specialist regenerated
+
+- The committed C54 blend corpus encoded 2,233/2,240 rows; the seven omitted
+  rows exactly match the pre-run encoding audit.
+- QLoRA completed 350/350 optimizer steps (2.5 epochs), final logged loss
+  0.8077 and whole-run train loss 2.0220 on the NVIDIA L40.
+- Explicit composite installation applied 128/128 nonzero LoRA deltas with
+  summed Frobenius norm 164.55 (CUDA FP32, TF32 disabled). The merged model
+  weight hash is `97bb30362c130fab6525586b39dff9d72ca31be57b72edc879bf03e304ce91cb`.
+- No task score was inspected before the independent deep specialist began.
