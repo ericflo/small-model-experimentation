@@ -284,6 +284,14 @@
     "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
    ]
   },
+  "qwen35_4b_commit_slot_jacobian_value_transport": {
+   "start": "2026-07-12",
+   "end": "2026-07-12",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_confidence_guided_compute": {
    "start": "2026-07-07",
    "end": "2026-07-07",

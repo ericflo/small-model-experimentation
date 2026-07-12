@@ -128,8 +128,8 @@ gates:
     bootstrap_resamples: 10000
 
 design_boundary:
-  commit: PENDING_DESIGN_COMMIT
-  readme_sha256: PENDING_DESIGN_COMMIT
-  preregistration_sha256: PENDING_DESIGN_COMMIT
-  design_review_sha256: PENDING_DESIGN_COMMIT
-  config_payload_sha256: PENDING_DESIGN_COMMIT
+  commit: 73deac8a22bc15bdda85343956657be9d8e281bf
+  readme_sha256: 1c8bc0ff7a7e57faa4d1c4a87cc5746d9e2c9024913722dff85c56d0ba99c4f7
+  preregistration_sha256: 2ee66cd0cf4330976201aa08647ccb8100c7880b455d574e6af5dc3e238e10a5
+  design_review_sha256: 55ee13782c1379ce10e323b5cf3874f847f078dbe043ee8d859bad2744c681a7
+  config_payload_sha256: 41559bbe1ccdbd5613ab5da7b7c6e3bd1468824b63dd7815b22c510336408b96
