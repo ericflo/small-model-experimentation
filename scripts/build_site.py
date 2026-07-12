@@ -2479,6 +2479,23 @@ class SiteBuilder:
                 )
                 break
 
+        # A plain-language, fact-checked "what we've learned" (knowledge/synthesis_plain.json)
+        # replaces the jargon-dense technical Executive Read as the home's answer.
+        plain_path = KNOWLEDGE / "synthesis_plain.json"
+        learned = read_json(plain_path) if plain_path.exists() else {}
+        learned = learned if isinstance(learned, dict) else {}
+        _tone_dot = {"positive": "var(--good)", "negative": "var(--critical)", "mixed": "var(--slot-3)", "open": "var(--baseline)"}
+        learned_items = "".join(
+            f'<li class="learned-item"><span class="learned-dot" style="background:{_tone_dot.get(str(t.get("tone")), "var(--baseline)")}" aria-hidden="true"></span>'
+            f'<div><h3>{esc(t.get("headline", ""))}</h3><p>{self.rich_text(str(t.get("body", "")), prefix)}</p></div></li>'
+            for t in learned.get("takeaways", []) if isinstance(t, dict) and t.get("headline")
+        )
+        learned_arc = str(learned.get("arc", "")).strip()
+        learned_html = (
+            (f'<p class="learned-arc">{esc(learned_arc)}</p>' if learned_arc else "")
+            + (f'<ol class="learned-list">{learned_items}</ol>' if learned_items else "")
+        )
+
         claim_counts = Counter(str(claim.get("status")) for claim in self.claims)
         confirmed = claim_counts.get("Confirmed", 0)
         figures_total = sum(len(exp["figures"]) for exp in self.experiments)
@@ -2544,15 +2561,17 @@ class SiteBuilder:
             f'<section id="latest-feed" class="band"><div class="section-head"><h2>Latest findings</h2>'
             f'<a class="more" href="experiments/">All experiments →</a></div><div class="feed-grid">{feed_cards}</div></section>'
             + (
-                f'<section class="band split-band"><div class="split-a"><div class="section-head"><h2>Executive read</h2>'
-                f'<a class="more" href="notebook/synthesis/">Full synthesis →</a></div>'
-                '<p class="muted">The numbered takeaways from the living synthesis, updated as evidence lands.</p>'
-                f'<div class="exec-read">{exec_read}</div></div>'
+                '<section class="band split-band"><div class="split-a"><div class="section-head">'
+                + (f'<h2>What we&rsquo;ve learned</h2>' if learned_html else '<h2>Executive read</h2>')
+                + f'<a class="more" href="notebook/synthesis/">Full technical synthesis →</a></div>'
+                + (learned_html or ('<p class="muted">The numbered takeaways from the living synthesis, updated as evidence lands.</p>'
+                                    f'<div class="exec-read">{exec_read}</div>'))
+                + '</div>'
                 f'<div class="split-b"><div class="section-head"><h2>Load-bearing results</h2>'
                 f'<a class="more" href="claims/">Claims →</a></div>'
                 '<p class="muted">The experiments most often cited as evidence by the claim ledger.</p>'
                 f'<ul class="plain exp-list">{bearing_cards}</ul></div></section>'
-                if exec_read
+                if (learned_html or exec_read)
                 else ""
             )
         )

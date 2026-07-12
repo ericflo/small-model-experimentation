@@ -660,6 +660,14 @@ pre code { border: 0; background: none; padding: 0; }
 .exec-read li { margin: 10px 0; color: var(--ink-2); }
 .exec-read li code { color: var(--ink); }
 
+/* plain-language "what we've learned" takeaways */
+.learned-arc { font-size: 18.5px; line-height: 1.6; color: var(--ink); max-width: 60ch; margin: 0 0 26px; }
+.learned-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 22px; }
+.learned-item { display: flex; gap: 14px; }
+.learned-dot { width: 10px; height: 10px; border-radius: 50%; margin-top: 9px; flex: none; box-shadow: 0 0 0 4px color-mix(in srgb, currentColor 0%, transparent); }
+.learned-item h3 { margin: 0 0 5px; font-size: 19px; font-weight: 550; line-height: 1.28; }
+.learned-item p { margin: 0; font-size: 15px; line-height: 1.62; color: var(--ink-2); max-width: 58ch; }
+
 /* ------------------------------------------------------------- responsive */
 
 @media (max-width: 980px) {
