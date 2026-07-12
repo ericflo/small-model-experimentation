@@ -34,6 +34,12 @@
 - [`qwen35_4b_forced_commit_jacobian_value_transport`](../../experiments/qwen35_4b_forced_commit_jacobian_value_transport/reports/report.md)
   (unclaimed) — close-only forced commit reproduced the low-parse interface wall
   and stopped before internal value.
+- [`qwen35_4b_commit_slot_jacobian_value_transport`](../../experiments/qwen35_4b_commit_slot_jacobian_value_transport/reports/report.md)
+  (unclaimed; terminal `COMMIT_SLOT_SEAM_FAIL`) — fixed syntax made an alias the
+  unmasked next token on 41/48 long traces and exposed a +6.25pp/+8.33pp
+  1,024-token hint over no-thought/shuffled controls, but only five of six
+  required tasks mixed outcomes and task-level intervals crossed zero. It
+  separates a repaired answer mode from still-unconfirmed semantic benefit.
 - [`qwen35_4b_think_ftpo_round2`](../../experiments/qwen35_4b_think_ftpo_round2/reports/report.md)
   (claim C52) — entropy/varentropy-routed single-token thought steering, a
   low-dose capability null after exact-logit locality and agentic transfer gates.

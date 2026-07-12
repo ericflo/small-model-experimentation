@@ -7,7 +7,7 @@ For evidence-linked durable claims, use [claims/index.md](claims/index.md).
 ## Structured Execution And Compilers
 
 - Program: [charter](../research_programs/structured_execution_and_compilers/charter.md)
-- Current read: structured intermediates remain strong, but type-only partial viability is oracle-useful and model-unreadable; exact depth-5 list-DSL search is also cheaper than projected.
+- Current read: structured intermediates remain strong, but type-only partial viability is oracle-useful and model-unreadable; exact depth-5 list-DSL search is also cheaper than projected. A fixed `First:` slot repaired answer mode (41/48 unmasked alias tops) without yet making semantic choice reliable: the 1,024 hint was task/alias concentrated and missed its mixed-task gate.
 - Best next experiment: measure the exact depth-6 resource crossover, then test residualized partial states only if learned pruning is actually needed.
 - Strong anchors: `qwen35_4b_partial_structure_search`, `qwen35_4b_crosssubstrate_structure`, `qwen35_4b_structure_search_scaling`.
 - Avoid repeating: another type-only P(viable) judge, pooled-AUROC launch, or model-guided search without measured brute wall time.
@@ -79,9 +79,9 @@ For evidence-linked durable claims, use [claims/index.md](claims/index.md).
 ## Interpretability And Diagnostics
 
 - Program: [charter](../research_programs/interpretability_and_diagnostics/charter.md)
-- Current read: diagnostics are useful when they explain why a mechanism transfers or fails, not when they are post-hoc decoration. Late answer-position J coordinates are writable but non-transporting; the early context-local clamp replicates 48/48 consequences with 1,440/1,440 exact control rows. Native-thought value remains untested after three interface stops: 0/48 natural closes at 160 and 1,024, then only 12.5%--18.8% forced parse with close-only injection. Close is a mode delimiter, not an answer slot.
-- Best next experiment: provide fixed `First:` syntax without answer identity, compare constrained next-alias choice against close-only free-form output, and require fresh semantic headroom before resuming J value with task-held-out identity and dynamic per-length controls.
-- Strong anchors: `qwen_structural_compiler_attribution_ablation`, `qwen35_4b_probe_to_prompt`, `qwen35_4b_jacobian_value_transport`, `qwen35_4b_context_local_jacobian_clamp`, `qwen35_4b_jacobian_transport_control_replication`, `qwen35_4b_native_thought_jacobian_value_transport`, `qwen35_4b_native_thought_seam_budget_ladder`, `qwen35_4b_forced_commit_jacobian_value_transport`.
+- Current read: diagnostics are useful when they explain why a mechanism transfers or fails, not when they are post-hoc decoration. Late answer-position J coordinates are writable but non-transporting; the early context-local clamp replicates 48/48 consequences with 1,440/1,440 exact control rows. Fixed `First:` syntax finally repaired answer mode after three interface stops, but its best semantic cell (15/48 at 1,024 versus 11/48 shuffled) had only five mixed tasks, missed the frozen six-task gate, and had task-level intervals crossing zero. Native-thought J value remains untested.
+- Best next experiment: a powered fresh fixed-1,024 seam replication with task-level real-minus-no-thought and real-minus-shuffled uncertainty gates; only an independently replicated pass may resume J value with identity and dynamic per-length controls.
+- Strong anchors: `qwen_structural_compiler_attribution_ablation`, `qwen35_4b_probe_to_prompt`, `qwen35_4b_jacobian_value_transport`, `qwen35_4b_context_local_jacobian_clamp`, `qwen35_4b_jacobian_transport_control_replication`, `qwen35_4b_native_thought_jacobian_value_transport`, `qwen35_4b_native_thought_seam_budget_ladder`, `qwen35_4b_forced_commit_jacobian_value_transport`, `qwen35_4b_commit_slot_jacobian_value_transport`.
 - Avoid repeating: probes that do not change the next experiment, next-token writing tests presented as reasoning transport, promoting a perfect point estimate past a failed control gate, or presenting an oracle donor as a deployable gain.
 - Evidence that advances the program: a diagnostic predicts which variants will fail before the final metric is observed.
 
@@ -106,9 +106,9 @@ For evidence-linked durable claims, use [claims/index.md](claims/index.md).
 ## Test-Time Reasoning Budget
 
 - Program: [charter](../research_programs/test_time_reasoning_budget/charter.md)
-- Current read: native thinking is a real coherent-content lever, but its budget, termination, and emission interface are workload-specific. C51's counterfactual warning now replicates: after 0/48 natural closes at 1,024, close-only injection still parsed just 12.5%--18.8% and usually restarted analysis. C52 separately shows that entropy/varentropy can route useful forks without making shared-weight edits local. Artificial commit is deployable only when the full syntax/action is calibrated and deployed identically.
-- Best next experiment: a fixed answer-slot controller (`</think>` plus `First:`) versus close-only free-form at matched trace budgets, on fresh selection/confirmation tasks; separately retain the 16k+ loop-control line.
-- Strong anchors: `qwen35_4b_thinking_content_vs_compute`, `qwen35_4b_overthinking_content_ladder`, `qwen35_4b_answer_potential_trace_sft`, `qwen35_4b_native_thought_seam_budget_ladder`, `qwen35_4b_forced_commit_jacobian_value_transport`, `qwen35_4b_think_ftpo_round2`.
+- Current read: native thinking is a real coherent-content lever, but its budget, termination, and emission interface are workload-specific. After 0/48 natural closes and 12.5%--18.8% close-only parse, fixed `First:` syntax repaired answer mode; at 1,024 real thought reached 31.2% versus 25.0% no-thought and 22.9% shuffled. That hint was not stable enough: five mixed tasks missed six required and task-bootstrap intervals crossed zero. C52 separately shows that uncertainty can route forks without making shared-weight edits local.
+- Best next experiment: a powered fixed-1,024 answer-slot replication with more fresh task units and task-level uncertainty gates; separately retain the 16k+ loop-control line.
+- Strong anchors: `qwen35_4b_thinking_content_vs_compute`, `qwen35_4b_overthinking_content_ladder`, `qwen35_4b_answer_potential_trace_sft`, `qwen35_4b_native_thought_seam_budget_ladder`, `qwen35_4b_forced_commit_jacobian_value_transport`, `qwen35_4b_commit_slot_jacobian_value_transport`, `qwen35_4b_think_ftpo_round2`.
 - Avoid repeating: thinking-budget wins without content controls, calibration on a different workload class, cap-bound score interpretation, larger-N harvesting before termination/locality works, or treating high varentropy as a monotone “push harder” signal.
 - Evidence that advances the program: a controller or distillation that Pareto-beats fixed budgets, and a content control that isolates genuine reasoning from compute + scaffold + token-presence.
 

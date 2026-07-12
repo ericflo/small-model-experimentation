@@ -94,17 +94,24 @@ committed after a replicated slot seam.
 
 ## Status
 
-Design and adversarial review completed before any model call. CPU smoke passes:
-96 unique fresh exact-depth tasks, zero overlap with four parents, exact lens
-hash, reachable gates, and a corrected seed block after the first CPU attempt
-caught an exact prior-split generator-seed collision. The subsequent
-outcome-blind model smoke passes exact revision/architecture, five rank-24 lens
-matrices, 12 unique one-token aliases, fixed-slot tokenization, finite logits,
-and cached batch-one forward contracts while recording no answer or correctness.
-The post-smoke implementation audit adds exact shuffle/cardinality receipts,
-unmasked probability mass, control-finiteness aborts, and observed gate
-feasibility without changing the frozen scientific rules. Scientific outcomes
-remain unopened.
+Terminal `COMMIT_SLOT_SEAM_FAIL`; confirmation, value, control, and causal
+stages are ineligible. All 48 traces remained open through 1,024. The fixed slot
+did repair answer mode—an alias was already the unmasked top token on 41/48
+1,024 rows—but did not clear the semantic-variation gate:
+
+| cap | real slot | no-thought | shuffled thought | mixed tasks | gate |
+| ---: | ---: | ---: | ---: | ---: | --- |
+| 256 | 10/48 | 4/16 | 11/48 | 2 | fail |
+| 512 | 9/48 | 4/16 | 15/48 | 2 | fail |
+| 1024 | 15/48 | 4/16 | 11/48 | 5 | fail |
+
+At 1,024, real thought met the 20%--80% headroom and both frozen accuracy-gap
+gates (+6.25pp over no-thought, +8.33pp over shuffled), but only five tasks had
+both correct and incorrect traces versus six required. The task-bootstrap
+intervals for both gains crossed zero. The +4 net real-over-shuffled successes
+were alias/task concentrated, not explained by correct-alias verbalization, and
+three exploratory label-free logit-residual policies did not improve 15/48.
+The near miss cannot select a cap or reopen J value.
 
 ## Scope
 
@@ -116,7 +123,7 @@ untouched contamination-free tasks.
 
 ## Knowledgebase Update
 
-- Update both program ledgers and synthesis at each terminal gate.
+- Update all three program ledgers and synthesis at each terminal gate.
 - No claim ID while the repository claim re-grade remains open.
 
 ## Artifacts
@@ -128,3 +135,7 @@ untouched contamination-free tasks.
   both prose and the semantic config payload are design-commit hash-anchored.
 - `reports/pre_selection_implementation_audit.md`: outcome-blind code audit
   completed before the selection run.
+- `runs/seam_selection*.json*`: complete hash-locked raw rows and terminal
+  selection summary.
+- `analysis/selection_diagnostics.json`: task/alias, verbalization, unmasked,
+  paired, bootstrap, and explicitly non-rescuing logit-residual diagnostics.

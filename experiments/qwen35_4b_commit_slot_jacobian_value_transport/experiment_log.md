@@ -28,3 +28,18 @@
 - A second outcome-blind implementation audit added runtime exact-multiset
   shuffle hashes, full-vocabulary alias mass, row cardinality, control-finiteness,
   and observed-baseline feasibility receipts before selection.
+
+## 2026-07-12 — Terminal seam selection
+
+- Completed 48 traces and all 448 slot/control rows with exact cardinality,
+  cache, finite, shuffle-multiset, and hash contracts.
+- Caps 256/512/1024 yielded real accuracy 10/48, 9/48, and 15/48. The 1,024 rung
+  beat no-thought by +6.25pp and shuffled thought by +8.33pp but had five mixed
+  tasks versus the frozen six-task gate.
+- Honored terminal `COMMIT_SLOT_SEAM_FAIL`; no confirmation, value, control, or
+  causal stage opened.
+- Post-decision task bootstrap intervals crossed zero; alias/task concentration
+  was strong; correct-alias mentions did not explain success; three label-free
+  logit-residual diagnostics all underperformed the registered 15/48 slot.
+- Next branch: a new powered fixed-1,024 seam replication with fresh tasks and a
+  task-level uncertainty gate. Do not relax this experiment or raise its cap.

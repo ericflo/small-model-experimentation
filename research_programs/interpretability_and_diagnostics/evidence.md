@@ -87,3 +87,15 @@ Diagnostics should become standard infrastructure. They are how future agents av
   value, and causal splits stayed sealed. This localizes the next interface
   change: close is a mode delimiter, not an answer slot. A fresh syntax-only
   `First:` slot may test semantic alias choice while close-only remains control.
+
+- [qwen35_4b_commit_slot_jacobian_value_transport](../../experiments/qwen35_4b_commit_slot_jacobian_value_transport/reports/report.md)
+  (unclaimed; terminal `COMMIT_SLOT_SEAM_FAIL`): fixed `First:` syntax repaired
+  answer mode but did not earn the semantic-variation gate. At cap 1,024, real
+  ordered thought reached 15/48 versus 4/16 no-thought and 11/48 exact-token-
+  multiset shuffle, clearing both frozen accuracy-gap bars, while an alias was
+  already the unmasked top token on 41/48. Yet only five tasks mixed correct and
+  incorrect traces versus six required; task-bootstrap intervals for both gains
+  crossed zero, and effects were alias/task concentrated. Correct-alias mentions
+  were not explanatory, and three post-decision label-free logit residuals all
+  underperformed 15/48. Confirmation and every J stage stayed sealed. Power a
+  fresh fixed-1,024 task-level replication before changing cap or fitting value.

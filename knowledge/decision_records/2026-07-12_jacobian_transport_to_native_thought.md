@@ -84,3 +84,24 @@ append close plus a fixed answer slot (`First:`) and measure the next alias
 choice, with close-only free-form output retained as a control. This supplies
 syntax, not identity. It may reopen value only on fresh data with semantic
 headroom and task-held-out identity controls.
+
+## Fourth successor outcome
+
+`qwen35_4b_commit_slot_jacobian_value_transport` supplied exactly that fixed
+slot plus a 12-alias constrained readout and exact-length shuffled/no-thought
+controls. It is terminal `COMMIT_SLOT_SEAM_FAIL`, but localizes the boundary
+again. At cap 1,024, an alias was the unmasked next token on 41/48 rows and total
+alias mass averaged 68.5%; matched close-only free-form parse remained 2/48.
+The syntax therefore repaired answer mode without usually depending on the
+mask. Ordered thought reached 15/48, versus 4/16 no-thought and 11/48 shuffled,
+clearing both frozen pooled gap gates. It nevertheless had only five mixed tasks
+versus six required, and task-bootstrap intervals crossed zero. Confirmation
+and all J stages remained sealed.
+
+Do not reverse the original move into native thought, but do not treat the near
+miss as permission to fit value. The next successor is a separate powered
+fixed-1,024 seam replication on more fresh task units, with task-level
+real-minus-no-thought and real-minus-shuffled uncertainty gates. It must keep
+alias support balanced and open a disjoint confirmation before J features. Do
+not relax this experiment, promote post-hoc residual decoders, or raise the cap
+until that fixed-budget semantic hint replicates.

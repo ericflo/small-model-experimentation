@@ -10,6 +10,14 @@
 
 ## Key Result
 
+- [qwen35_4b_commit_slot_jacobian_value_transport](../../experiments/qwen35_4b_commit_slot_jacobian_value_transport/reports/report.md)
+  (unclaimed; terminal `COMMIT_SLOT_SEAM_FAIL`): a fixed latent answer interface
+  repaired formatting—an alias was already the unmasked next token on 41/48 at
+  cap 1,024—but semantic correctness remained task/alias concentrated. Real
+  ordered thought was 15/48 versus 11/48 exact-length shuffled, with five mixed
+  tasks versus six required. A structured slot can expose a decision without
+  making that decision reliable; task-level confirmation remains mandatory.
+
 - [qwen35_4b_partial_structure_search](../../experiments/qwen35_4b_partial_structure_search/reports/report.md)
   (unclaimed while ledger re-grade is open): **type-only partial viability is oracle-useful but model-unreadable.**
   A width-4 exact live-prefix beam retained a hidden solver on 12/12 dedicated depth-5 development tasks at

@@ -5,21 +5,46 @@
   "qwen35_4b_commit_slot_jacobian_value_transport": {
    "charts": [
     {
-     "title": "Frozen fresh-task allocation by stage",
+     "title": "Commit-slot accuracy across paired thought caps",
      "kind": "bar",
-     "categories": ["slot selection", "slot confirmation", "value fit", "causal confirmation"],
+     "categories": ["256 cap", "512 cap", "1024 cap"],
      "series": [
       {
-       "label": "tasks",
-       "values": [16, 16, 32, 32]
+       "label": "real ordered thought",
+       "values": [0.20833333333333334, 0.1875, 0.3125]
+      },
+      {
+       "label": "no generated thought",
+       "values": [0.25, 0.25, 0.25]
+      },
+      {
+       "label": "same thought tokens shuffled",
+       "values": [0.22916666666666666, 0.3125, 0.22916666666666666]
       }
      ],
-     "x_label": "preregistered stage",
-     "y_label": "fresh procedural tasks",
-     "y_format": "integer",
-     "note": "All 96 rows are unique, exact-depth-two, and disjoint from four direct parents. This is a design allocation, not a model result; every later split stays sealed until its prior gate passes.",
-     "source": "experiments/qwen35_4b_commit_slot_jacobian_value_transport/runs/smoke/data_receipt.json",
+     "x_label": "paired thought cap",
+     "y_label": "exact alias accuracy",
+     "y_format": "percent100",
+     "note": "Each cap contains 48 paired real/shuffled trace rows; no-thought is one deterministic row per each of 16 tasks. The 1,024 real arm passed accuracy-gap gates but had only five mixed tasks versus six required, so no cap was selected.",
+     "source": "experiments/qwen35_4b_commit_slot_jacobian_value_transport/runs/seam_selection.json",
      "headline": true
+    },
+    {
+     "title": "Answer-mode diagnostics at the 1,024 cap",
+     "kind": "bar",
+     "categories": ["unmasked top is alias", "total alias probability mass", "close-only free-form parses"],
+     "series": [
+      {
+       "label": "share or mean mass",
+       "values": [0.8541666666666666, 0.6847406942397356, 0.041666666666666664]
+      }
+     ],
+     "x_label": "interface diagnostic",
+     "y_label": "rate",
+     "y_format": "percent100",
+     "note": "The first two values use the fixed `First:` slot before alias masking; the last uses matched close-only free-form output. Syntax repaired answer mode even though the semantic selection gate failed.",
+     "source": "experiments/qwen35_4b_commit_slot_jacobian_value_transport/runs/seam_selection.json",
+     "headline": false
     }
    ]
   },

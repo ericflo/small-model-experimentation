@@ -14,6 +14,7 @@ research_programs:
   - "structured_execution_and_compilers"
   - "test_time_reasoning_budget"
 top_level_dirs:
+  - "analysis"
   - "assets"
   - "configs"
   - "data"
@@ -23,11 +24,11 @@ top_level_dirs:
   - "src"
   - "tests"
 file_counts:
-  json: 5
-  jsonl: 4
+  json: 7
+  jsonl: 9
   md: 8
   pt: 1
-  py: 5
+  py: 6
   yaml: 3
-total_files: 26
-total_size_bytes: 3346889
+total_files: 34
+total_size_bytes: 4525848

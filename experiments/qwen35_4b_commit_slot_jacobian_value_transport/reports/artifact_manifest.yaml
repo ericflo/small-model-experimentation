@@ -13,7 +13,7 @@ reproducibility:
     --stage seam-selection
   required_external_artifacts: []
 notes: >-
-  The byte-identical lens, 96 fresh task rows, CPU receipts, immutable design
-  receipt, outcome-blind model-smoke receipt, and pre-selection implementation
-  audit are committed. The smoke saved no chosen answer or correctness. No
-  artifact is external or omitted.
+  The byte-identical lens, 96 fresh task rows, CPU/design/model-smoke receipts,
+  pre-selection audit, complete terminal selection rows, summary, and aggregate
+  diagnostics are committed. Confirmation/value/causal splits remain unopened.
+  No artifact is external or omitted.

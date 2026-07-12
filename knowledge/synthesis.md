@@ -242,6 +242,24 @@ a matched control; it must earn semantic headroom on fresh tasks before any
 internal-value result. See
 [qwen35_4b_forced_commit_jacobian_value_transport](../experiments/qwen35_4b_forced_commit_jacobian_value_transport/reports/report.md).
 
+Supplying the fixed answer slot repaired that emission boundary but did not yet
+earn semantic stability. In
+[qwen35_4b_commit_slot_jacobian_value_transport](../experiments/qwen35_4b_commit_slot_jacobian_value_transport/reports/report.md),
+an alias was already the unmasked full-vocabulary top token on 41/48 cap-1,024
+rows and the 12 aliases held 68.5% total probability mass, whereas matched
+close-only free-form parse was 2/48. Thus `First:` established answer mode; the
+alias mask itself was rarely the deciding repair. Ordered thought at 1,024
+scored 15/48 versus the equivalent 12/48 no-thought and 11/48 exact-token-
+multiset shuffle, passing both frozen pooled gap gates. But only five tasks mixed
+correct and incorrect traces versus six required, task-bootstrap intervals for
+both gains crossed zero, and the effect was concentrated in a few task/alias
+cells. Correct-alias verbalization was negatively rather than positively
+associated with success, and three label-free logit-residual diagnostics all
+underperformed the original slot. The terminal `COMMIT_SLOT_SEAM_FAIL` therefore
+keeps confirmation and J value unopened. **Formatting is now separated from
+semantic resolution:** power a fresh fixed-1,024 task-level replication before
+raising the cap, changing the decoder, or fitting any certainty coordinate.
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.

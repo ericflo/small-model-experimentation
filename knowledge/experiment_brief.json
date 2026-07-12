@@ -3,35 +3,41 @@
  "generated_on": "2026-07-05",
  "experiments": {
   "qwen35_4b_commit_slot_jacobian_value_transport": {
-   "verdict_tag": "Design frozen; the answer-slot test has not run yet",
-   "concept_primer": "The model kept restarting analysis when earlier tests inserted only a stop marker. This study adds fixed answer syntax without adding the answer, restricts the next choice to 12 public words, and checks whether real reasoning helps more than no generated reasoning or the same reasoning tokens in shuffled order.",
+   "verdict_tag": "The answer slot worked, but the reasoning gain was too clustered",
+   "concept_primer": "The model kept restarting analysis when earlier tests inserted only a stop marker. This study added fixed answer syntax without adding the answer, restricted the next choice to 12 public words, and checked whether real reasoning helped more than no generated reasoning or the same reasoning tokens in shuffled order.",
    "plain_question": "Can a fixed answer slot reveal a correct choice already supported by the model's unfinished reasoning, and can one compact internal signal later make weak choices better?",
-   "plain_answer": "No model result is open yet. Before any model call, the study froze 96 fresh two-step tasks, found zero overlap with four parent studies, and locked selection, confirmation, comparison, and stop rules after a 58-point hostile review.",
-   "why_it_matters": "This separates an output-format repair from a reasoning gain. The answer slot must first beat both an immediate slot and shuffled reasoning on new tasks; only then may the study examine and change an internal promise signal.",
-   "verdict_tone": "neutral",
+   "plain_answer": "Not reliably enough. At the 1,024-step limit, real reasoning found 15 correct choices out of 48, versus the equivalent of 12 for an immediate slot and 11 after shuffling the same reasoning tokens. But correct and incorrect runs coexisted on only five tasks, one short of the frozen six-task requirement, and task-level uncertainty still included no gain.",
+   "why_it_matters": "Fixed syntax solved most of the output-format failure: on 41 of 48 long runs, one of the 12 answer words was already the model's unrestricted next choice. The remaining bottleneck is semantic and uneven across tasks, so the internal-signal test correctly stayed sealed pending a larger fresh replication.",
+   "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Fresh procedural tasks",
-     "value": "96/96",
-     "sub": "all unique, exact-depth, and generated before model work"
+     "label": "Correct choices after 1,024 steps",
+     "value": "15/48",
+     "sub": "31.2%, versus 25.0% immediate and 22.9% shuffled"
     },
     {
-     "label": "Overlap with four parent studies",
-     "value": "0/96",
-     "sub": "the first colliding seed block was discarded before any model call"
+     "label": "Tasks with mixed outcomes",
+     "value": "5/16",
+     "sub": "the frozen gate required six, so no limit was selected"
     },
     {
-     "label": "Adversarial failure modes reviewed",
-     "value": "58",
-     "sub": "the machine-readable gates and data hashes are locked to the design"
+     "label": "Unrestricted next token was an answer word",
+     "value": "41/48",
+     "sub": "fixed syntax repaired answer mode without relying mainly on the mask"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Fresh tasks are reserved before each stage opens",
-     "chart_read": "The first two bars reserve smaller task sets for choosing one reasoning limit and checking it once; the last two reserve larger untouched sets for learning and then testing the internal signal.",
-     "chart_takeaway": "Later stages cannot reuse the tasks that chose the answer interface, and they remain sealed until earlier checks pass."
+     "chart_plain_title": "Only the longest real reasoning beat both comparisons",
+     "chart_read": "For each reasoning limit, compare real ordered reasoning with an immediate answer slot and with the same reasoning tokens shuffled. The longest real bar reaches 31.2%, but the task-variation requirement still failed.",
+     "chart_takeaway": "The 1,024-step hint is promising but clustered; it cannot open the internal-signal test until a larger fresh study confirms it."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "Fixed syntax repaired answer mode, not semantic reliability",
+     "chart_read": "The two tall bars show that answer words held most probability and were usually the unrestricted next token. The short bar shows that free-form output after only a stop marker still rarely used the required format.",
+     "chart_takeaway": "Adding the slot solved formatting, while choosing the right answer remained the limiting problem."
     }
    ]
   },

@@ -37,11 +37,15 @@
   wall on fresh exact-depth tasks: forced parse 12.5%--18.8%, success 2.1%, and
   answer-cap contact 85%--96% across 256/512/1024. Close alone often restarted
   reasoning; no cap or downstream value stage opened.
-- **In progress, fixed answer slot:**
-  `qwen35_4b_commit_slot_jacobian_value_transport` tests `</think>` plus
-  `First:` as the deployed syntax-only controller, with constrained next-alias,
-  no-thought, exact-length shuffled-thought, unmasked-logit, and close-only
-  free-form arms on fresh selection/confirmation tasks.
+- **Completed near-miss, fixed answer slot:**
+  `qwen35_4b_commit_slot_jacobian_value_transport` made the unmasked next token
+  an alias on 41/48 long traces and real 1,024-token thought scored 15/48 versus
+  the equivalent 12/48 no-thought and 11/48 shuffled. Five mixed tasks missed
+  the frozen six-task gate, and task-level intervals included zero; no cap or J
+  stage opened.
+- **Next:** powered fixed-1,024 replication on more fresh tasks with task-level
+  uncertainty gates. Keep exact-length shuffle and no-thought controls; do not
+  interpret a pooled gain or increase the cap before that replication.
 - Completed cross-program qualification negative:
   `qwen35_4b_pareto_policy_integration` found that C54's short/deep tier labels
   did not become a clean procedural teacher crossover. `blend` lost both quick
