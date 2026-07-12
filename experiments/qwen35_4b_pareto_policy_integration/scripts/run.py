@@ -690,6 +690,8 @@ def _mopd_round(
             ],
             training=True,
         )
+        receipt = json.loads(cache_receipt.read_text())
+    write_json(round_root / "teacher_cache_receipt.json", receipt)
     adapter = paths["root"] / "adapters" / arm / f"seed_{seed}" / f"round_{round_index}"
     merged = paths["root"] / "merged" / arm / f"seed_{seed}" / f"round_{round_index}"
     if _checkpoint_complete(adapter, merged):
@@ -852,23 +854,34 @@ def _controls(config: dict, config_path: Path) -> None:
         selection_seed_base=primary_seed,
         initial_match_arm="correct", initial_match_seed=primary_seed,
     )
+    quick_adapter_sha = sha256_file(paths["quick_adapter"] / "adapter_model.safetensors")
+    deep_adapter_sha = sha256_file(paths["deep_adapter"] / "adapter_model.safetensors")
     for weight in config["controls"]["parameter_merge_weights"]:
         tag = f"parameter_merge_deep_{int(round(float(weight) * 100)):02d}"
         out = paths["root"] / "merged" / tag
-        if (out / "merge_receipt.json").exists():
+        receipt_path = out / "merge_receipt.json"
+        if receipt_path.exists():
             print(f"[resume] {tag}", flush=True)
-            continue
-        if out.exists():
-            raise SystemExit(f"partial parameter merge exists: {out}")
-        _run(
-            [
-                str(PY), str(EXP / "scripts" / "merge_weighted_adapters.py"),
-                "--quick-adapter", str(paths["quick_adapter"]),
-                "--deep-adapter", str(paths["deep_adapter"]),
-                "--deep-weight", str(weight), "--out", str(out),
-            ],
-            training=True,
-        )
+        else:
+            if out.exists():
+                raise SystemExit(f"partial parameter merge exists: {out}")
+            _run(
+                [
+                    str(PY), str(EXP / "scripts" / "merge_weighted_adapters.py"),
+                    "--quick-adapter", str(paths["quick_adapter"]),
+                    "--deep-adapter", str(paths["deep_adapter"]),
+                    "--deep-weight", str(weight), "--out", str(out),
+                ],
+                training=True,
+            )
+        receipt = json.loads(receipt_path.read_text())
+        if (
+            float(receipt.get("deep_weight", -1.0)) != float(weight)
+            or receipt.get("quick_weights_sha256") != quick_adapter_sha
+            or receipt.get("deep_weights_sha256") != deep_adapter_sha
+        ):
+            raise SystemExit(f"stale parameter-merge control: {out}")
+        write_json(EXP / "runs" / "control_receipts" / f"{tag}.json", receipt)
     union_adapter = paths["root"] / "adapters" / "matched_union_sft"
     union_merged = paths["root"] / "merged" / "matched_union_sft"
     if not _checkpoint_complete(union_adapter, union_merged):

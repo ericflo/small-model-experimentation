@@ -32,6 +32,11 @@ context, not an amendment to the frozen experiment.
    mixed RL, cascade RL, off-policy fine-tuning, and parameter merging. Its
    top-k loss includes the correction term that makes the truncated objective
    stationary at the teacher distribution.
+6. **TurboQuant is real but orthogonal.** [TurboQuant: Online Vector
+   Quantization with Near-optimal Distortion
+   Rate](https://arxiv.org/abs/2504.19874) is an inference/storage compression
+   method for high-dimensional vectors, including KV-cache applications. It
+   neither supplies a teacher signal nor installs a capability.
 
 ## The failure literature matters just as much
 
@@ -70,7 +75,9 @@ distribution, and when drift is measured rather than assumed away.
 - “Dr. OPSD” is a joke expansion, but `2606.30406` is a real MOPD paper and the
   substantive summary—specialized RL first, multi-teacher distillation without
   a privileged hint afterward—is accurate.
-- “OPSD + turboquant” has no supplied scientific content.
+- “OPSD + turboquant” splices a post-training algorithm and an orthogonal
+  compression method into an “all you need” joke; both names are real, but the
+  conjunction is not an evidenced capability recipe.
 - The acronym pile-up is comedic, while OPSD, SDFT, SDPO, SSOPD, and MOPD are
   distinct real proposals with overlapping ingredients.
 

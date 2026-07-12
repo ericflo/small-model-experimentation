@@ -7,6 +7,11 @@ external_artifacts:
     required_for: "trained-policy evaluation and replication"
     checksum: "recorded per checkpoint in runs/checkpoint_receipts.jsonl"
     regenerate: "use the staged commands in README.md with the pinned environments"
+  - name: "exact-prefix teacher top-k caches"
+    storage: "large_artifacts/qwen35_4b_pareto_policy_integration/teacher_cache/"
+    required_for: "auditing and reproducing each MOPD optimizer round"
+    checksum: "each .pt cache has a mirrored runs/mopd/.../teacher_cache_receipt.json SHA-256 receipt"
+    regenerate: "rerun the corresponding locality/integrate/control stage"
 omitted_artifacts:
   - path: "large_artifacts/qwen35_4b_pareto_policy_integration/"
     reason: "multi-gigabyte model weights are gitignored and regenerated from committed data/config/receipts"
