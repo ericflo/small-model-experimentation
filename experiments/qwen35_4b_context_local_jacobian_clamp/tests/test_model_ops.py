@@ -15,6 +15,7 @@ from model_ops import (  # noqa: E402
     ContextLens,
     CoordinateClampPatcher,
     FullActivationPatcher,
+    NormMatchedDeltaPatcher,
 )
 
 
@@ -90,3 +91,22 @@ def test_context_lens_round_trip(tmp_path: Path) -> None:
     assert loaded.estimator == "mean_direct_logit_pullback_at_selected_token"
     for layer in lens.source_layers:
         torch.testing.assert_close(loaded.directions[layer], lens.directions[layer], atol=2e-3, rtol=0)
+
+
+def test_norm_matched_patcher_meets_realized_bfloat16_norm() -> None:
+    layers = torch.nn.ModuleList([torch.nn.Identity()])
+    generator = torch.Generator().manual_seed(29)
+    value = torch.randn(1, 2, 128, generator=generator).to(torch.bfloat16)
+    base = torch.randn(1, 128, generator=generator)
+    base = base * (0.73 / base.norm())
+    patcher = NormMatchedDeltaPatcher(
+        layers,
+        1,
+        {0: base},
+        {0: 0.73},
+        search_steps=64,
+    )
+    with patcher:
+        layers[0](value)
+    assert patcher.relative_errors[0] < 1e-3
+    assert abs(float(patcher.deltas[0].norm()) - 0.73) / 0.73 < 1e-3

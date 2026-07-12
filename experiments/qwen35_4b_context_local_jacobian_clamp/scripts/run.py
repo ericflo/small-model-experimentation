@@ -712,73 +712,55 @@ def _run_norm_matched_random(
 
     from coordinates import (
         orthogonal_norm_matched,
-        relative_norm_error,
         span_projection_fraction,
     )
-    from model_ops import AddDeltaPatcher
+    from model_ops import NormMatchedDeltaPatcher
 
+    target_norms = {
+        layer: float(reference_deltas[layer].float().norm()) for layer in directions
+    }
     requested = {}
     requested_projection = {}
     for layer in sorted(directions):
-        generator = torch.Generator().manual_seed(_stable_seed(seed, str(layer)))
-        requested[layer] = orthogonal_norm_matched(
-            reference_deltas[layer].float(),
-            directions[layer].float(),
-            generator=generator,
-            rtol=rtol,
-        )
+        candidates = []
+        for attempt in range(1, max_attempts + 1):
+            generator = torch.Generator().manual_seed(
+                _stable_seed(seed, str(attempt), str(layer))
+            )
+            candidates.append(orthogonal_norm_matched(
+                reference_deltas[layer].float(),
+                directions[layer].float(),
+                generator=generator,
+                rtol=rtol,
+            ))
+        requested[layer] = torch.cat(candidates, dim=0)
         requested_projection[layer] = float(span_projection_fraction(
             requested[layer], directions[layer], rtol=rtol
         ).max())
-
-    final_score = None
-    final_errors = None
-    for attempt in range(1, max_attempts + 1):
-        patcher = AddDeltaPatcher(model.layers, prepared["position"], requested)
-        final_score = model.score(prepared, patcher=patcher)
-        final_errors = {
-            layer: float(relative_norm_error(
-                reference_deltas[layer].float(), final_score["deltas"][layer].float()
-            ).max())
-            for layer in directions
-        }
-        if max(final_errors.values(), default=0.0) <= tolerance:
-            actual_projection = {
-                layer: float(span_projection_fraction(
-                    final_score["deltas"][layer].float(), directions[layer], rtol=rtol
-                ).max())
-                for layer in directions
-            }
-            return {
-                "passed": True,
-                "score": final_score,
-                "attempts": attempt,
-                "relative_errors": final_errors,
-                "requested_projection_fractions": requested_projection,
-                "actual_projection_fractions": actual_projection,
-            }
-        for layer in directions:
-            target_norm = float(reference_deltas[layer].float().norm())
-            actual_norm = float(final_score["deltas"][layer].float().norm())
-            if target_norm == 0.0:
-                requested[layer].zero_()
-            elif actual_norm == 0.0:
-                raise RuntimeError("nonzero J delta produced a zero random control delta")
-            else:
-                requested[layer] *= target_norm / actual_norm
-    assert final_score is not None and final_errors is not None
+    patcher = NormMatchedDeltaPatcher(
+        model.layers,
+        prepared["position"],
+        requested,
+        target_norms,
+        search_steps=64,
+    )
+    score = model.score(prepared, patcher=patcher)
+    actual_projection = {
+        layer: float(span_projection_fraction(
+            score["deltas"][layer].float(), directions[layer], rtol=rtol
+        ).max())
+        for layer in directions
+    }
     return {
-        "passed": False,
-        "score": final_score,
+        "passed": max(patcher.relative_errors.values(), default=0.0) <= tolerance,
+        "score": score,
         "attempts": max_attempts,
-        "relative_errors": final_errors,
+        "relative_errors": dict(patcher.relative_errors),
         "requested_projection_fractions": requested_projection,
-        "actual_projection_fractions": {
-            layer: float(span_projection_fraction(
-                final_score["deltas"][layer].float(), directions[layer], rtol=rtol
-            ).max())
-            for layer in directions
-        },
+        "actual_projection_fractions": actual_projection,
+        "match_scales": dict(patcher.scales),
+        "chosen_candidate_indices": dict(patcher.chosen_indices),
+        "binary_search_steps": patcher.search_steps,
     }
 
 

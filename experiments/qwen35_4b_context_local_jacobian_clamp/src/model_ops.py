@@ -235,6 +235,119 @@ class AddDeltaPatcher:
         self.handles = []
 
 
+class NormMatchedDeltaPatcher:
+    """Add span-orthogonal bases with bf16-realized norms matched in each hook."""
+
+    def __init__(
+        self,
+        layers: Sequence[torch.nn.Module],
+        position: int,
+        bases_by_layer: dict[int, torch.Tensor],
+        target_norms_by_layer: dict[int, float],
+        *,
+        search_steps: int = 64,
+    ):
+        if set(bases_by_layer) != set(target_norms_by_layer):
+            raise ValueError("control bases and target norms must cover the same layers")
+        self.layers = layers
+        self.position = int(position)
+        self.bases_by_layer = bases_by_layer
+        self.target_norms_by_layer = target_norms_by_layer
+        self.search_steps = int(search_steps)
+        self.handles: list[Any] = []
+        self.deltas: dict[int, torch.Tensor] = {}
+        self.relative_errors: dict[int, float] = {}
+        self.scales: dict[int, float] = {}
+        self.chosen_indices: dict[int, int] = {}
+
+    @staticmethod
+    def _candidate(
+        current: torch.Tensor, base: torch.Tensor, scale: float
+    ) -> tuple[torch.Tensor, torch.Tensor, float]:
+        changed = current + (base * scale).to(dtype=current.dtype)
+        actual = changed.float() - current.float()
+        return changed, actual, float(actual.norm())
+
+    def _hook(self, layer: int):
+        base_cpu = self.bases_by_layer[layer]
+        target_norm = float(self.target_norms_by_layer[layer])
+
+        def hook(_module, _inputs, output):
+            tensor = _tensor_from_output(output)
+            if tensor.shape[0] != 1 or not 0 <= self.position < tensor.shape[1]:
+                raise RuntimeError("scientific patching requires an in-range batch-one position")
+            patched = tensor.clone()
+            current = patched[:, self.position, :]
+            bases = base_cpu.to(device=tensor.device, dtype=torch.float32)
+            if bases.ndim == 1:
+                bases = bases[None, :]
+            if bases.ndim != 2 or bases.shape[1] != current.shape[1]:
+                raise RuntimeError("control base candidates must have shape [draws,d_model]")
+            if target_norm == 0.0:
+                changed = current
+                actual = torch.zeros_like(current, dtype=torch.float32)
+                best_scale = 0.0
+                best_error = 0.0
+                best_index = 0
+            else:
+                best = None
+                best_scale = 0.0
+                best_error = float("inf")
+                best_index = -1
+                for base_index, base in enumerate(bases):
+                    base = base.reshape_as(current)
+                    low, high = 0.0, 1.0
+                    high_candidate = self._candidate(current, base, high)
+                    while high_candidate[2] < target_norm and high < 1024.0:
+                        low, high = high, high * 2.0
+                        high_candidate = self._candidate(current, base, high)
+                    if high_candidate[2] < target_norm:
+                        continue
+                    local_best = high_candidate
+                    local_scale = high
+                    local_error = abs(high_candidate[2] - target_norm) / target_norm
+                    low_candidate = self._candidate(current, base, low)
+                    low_error = abs(low_candidate[2] - target_norm) / target_norm
+                    if low_error < local_error:
+                        local_best, local_scale, local_error = low_candidate, low, low_error
+                    for _ in range(self.search_steps):
+                        midpoint = (low + high) / 2.0
+                        candidate = self._candidate(current, base, midpoint)
+                        error = abs(candidate[2] - target_norm) / target_norm
+                        if error < local_error:
+                            local_best, local_scale, local_error = candidate, midpoint, error
+                        if candidate[2] < target_norm:
+                            low = midpoint
+                        else:
+                            high = midpoint
+                    if local_error < best_error:
+                        best = local_best
+                        best_scale = local_scale
+                        best_error = local_error
+                        best_index = base_index
+                if best is None:
+                    raise RuntimeError("could not bracket target perturbation norm")
+                changed, actual, _norm = best
+            patched[:, self.position, :] = changed
+            self.deltas[layer] = actual.detach().cpu()
+            self.relative_errors[layer] = float(best_error)
+            self.scales[layer] = float(best_scale)
+            self.chosen_indices[layer] = int(best_index)
+            return _with_tensor(output, patched)
+
+        return hook
+
+    def __enter__(self):
+        for layer in sorted(self.bases_by_layer):
+            self.handles.append(self.layers[layer].register_forward_hook(self._hook(layer)))
+        return self
+
+    def __exit__(self, *_exc):
+        for handle in self.handles:
+            handle.remove()
+        self.handles = []
+
+
 class QwenClampModel:
     def __init__(self, config: dict[str, Any]):
         from transformers import AutoModelForCausalLM, AutoTokenizer

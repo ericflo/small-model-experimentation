@@ -11,9 +11,9 @@
     9057,
     6414
   ],
-  "coordinate_delta_norm": 0.6730976104736328,
+  "coordinate_delta_norm": 0.6719887256622314,
   "donor_delta_norm": 7.636753559112549,
-  "elapsed_seconds": 8.757151171565056,
+  "elapsed_seconds": 9.716624818742275,
   "environment": {
     "gpu": "NVIDIA RTX 6000 Ada Generation",
     "peak_allocated_bytes": 9683981312,
@@ -24,18 +24,18 @@
     "hidden_size": 2560,
     "id": "Qwen/Qwen3.5-4B",
     "layers": 32,
-    "load_seconds": 5.359345383942127,
+    "load_seconds": 5.398339249193668,
     "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
     "vocab_size": 248320
   },
   "norm_matched_random_smoke": {
     "attempts": 24,
-    "max_actual_span_projection_fraction": 0.0009072241373360157,
-    "max_relative_error": 0.0,
-    "max_requested_span_projection_fraction": 5.170910455376543e-08,
-    "passed": true
+    "max_actual_span_projection_fraction": 0.0018200600752606988,
+    "max_relative_error": 2.6432264348841272e-05,
+    "max_requested_span_projection_fraction": 5.662923996396785e-08,
+    "passed": false
   },
-  "passed": true,
+  "passed": false,
   "position_contract": {
     "consequence_gold": {
       "position": 62,
@@ -62,11 +62,11 @@
   "scientific_patch_batch_size": 1,
   "scientific_result": false,
   "smoke_lens": {
-    "artifact_sha256": "13ef355ad17b6b008cb15b9b69e06f0c56e3ea86f60a4265f1a480c0889a28f0",
+    "artifact_sha256": "98eefe953922aa2da48c49524dbfe94009b834930ba6305e947ed49180aabe41",
     "condition_numbers": {
-      "16": 2.47506046295166,
+      "16": 2.4754538536071777,
       "28": 2.272251844406128,
-      "4": 2.1977808475494385
+      "4": 2.1986083984375
     },
     "effective_ranks": {
       "16": 4,

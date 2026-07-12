@@ -107,3 +107,16 @@ Created as a new experiment scaffold.
 - Added paired 10,000-resample confirmation bootstrap, wrong-donor own-digit
   specificity, causal-invariance audit, and a hard assertion that no target
   digit gradient is used. Confirmation has not yet been opened.
+
+## 2026-07-12 — exact bf16 norm-control preflight
+
+- The first norm smoke correctly failed: repeated global rescaling bottomed out
+  at relative error 2.64e-5, above the frozen 1e-5 threshold. The failed receipt
+  is preserved as `runs/model_smoke/failed_norm_preflight.json`.
+- Replaced global rescaling with an in-hook bf16-realized norm search. Each layer
+  receives 24 independently generated vectors orthogonal to the full J
+  dictionary; the hook selects solely by realized norm error and binary-searches
+  its scale using the current residual. No logits or answers enter selection.
+- The rerun matched the smoke J delta with relative error exactly 0.0. Requested
+  span projection was 5.2e-8; bf16-realized projection was 9.1e-4 and is recorded
+  rather than hidden. The untouched confirmation split remains unopened.
