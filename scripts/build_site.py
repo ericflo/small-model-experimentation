@@ -89,6 +89,22 @@ def prettify_slug(slug: str) -> str:
     return " ".join(out)
 
 
+_TITLE_SMALL = {"and", "or", "of", "for", "the", "to", "in", "a", "an", "on", "at", "by", "vs", "with", "from"}
+
+
+def _nice_title(title: str) -> str:
+    """Lowercase connective small-words in an already title-cased string
+    ('Interpretability And Diagnostics' -> 'Interpretability and Diagnostics')."""
+    words = title.split()
+    return " ".join(
+        w if i == 0 or w.lower() not in _TITLE_SMALL else w.lower() for i, w in enumerate(words)
+    )
+
+
+def _plural(n: int, word: str) -> str:
+    return f"{n} {word}{'' if n == 1 else 's'}"
+
+
 def png_size(path: Path) -> tuple[int, int] | None:
     """Width/height from a PNG IHDR header (no image libraries in CI)."""
     try:
@@ -1641,7 +1657,7 @@ class SiteBuilder:
         self.shell = load_shell()
         self.generated = dt.date.today().isoformat()
         self.programs = load_programs()
-        self.program_titles = {str(p["id"]): str(p.get("title") or p["id"]) for p in self.programs}
+        self.program_titles = {str(p["id"]): _nice_title(str(p.get("title") or p["id"])) for p in self.programs}
         self.experiments = build_experiments(self.programs)
         self.roster = {exp["id"] for exp in self.experiments}
         self.by_id = {exp["id"]: exp for exp in self.experiments}
@@ -1683,8 +1699,14 @@ class SiteBuilder:
     def render_doc(self, text: str, resolver: LinkResolver, slug_prefix: str) -> site_markdown.RenderResult:
         return render_markdown(strip_leading_h1(text), resolver=resolver, slug_prefix=slug_prefix, heading_shift=1)
 
-    def chip_row(self, exp: dict, prefix: str) -> str:
-        return "".join(program_chip(pid, prefix, self.slots, self.program_titles) for pid in exp["programs"])
+    def chip_row(self, exp: dict, prefix: str, limit: int | None = None) -> str:
+        pids = exp["programs"]
+        shown = pids if limit is None else pids[:limit]
+        chips = "".join(program_chip(pid, prefix, self.slots, self.program_titles) for pid in shown)
+        extra = len(pids) - len(shown)
+        if extra > 0:
+            chips += f'<span class="chip tag" title="{esc(", ".join(self.program_titles.get(p, p) for p in pids[limit:]))}">+{extra} more</span>'
+        return chips
 
     def rich_text(self, text: str, prefix: str) -> str:
         """Escape plain text, then link claim ids and experiment slugs it mentions."""
@@ -1820,7 +1842,8 @@ class SiteBuilder:
             if log_dates:
                 scent_bits.append(format_range(log_dates[0], log_dates[-1]))
             scent = f" ({', '.join(scent_bits)})" if scent_bits else ""
-            body = f'<details class="log-details"><summary>Show the running log{esc(scent)}</summary>{log.html}</details>'
+            log_html = linkify_experiments(linkify_claims(log.html, prefix, self.claim_anchor_ids), prefix, self.roster)
+            body = f'<details class="log-details"><summary>Show the running log{esc(scent)}</summary>{log_html}</details>'
             heading = "Experiment log" + (f' <span class="count">{entry_count}</span>' if entry_count else "")
             add_section("log", heading, body)
 
@@ -1959,7 +1982,7 @@ class SiteBuilder:
             f"<span>{esc(exp['title'])}</span></nav>"
             f"<h1>{esc(exp['title'])}</h1>"
             f'<div class="page-meta">{exp_status_chip(exp["status"])}{date_span(exp)}{track_chip(exp["track"])}'
-            f"{self.chip_row(exp, prefix)}"
+            f"{self.chip_row(exp, prefix, limit=4)}"
             f'<a class="chip gh" href="{GITHUB}/tree/main/{esc(exp["path"])}">GitHub ↗</a></div>'
         )
 
@@ -2103,9 +2126,9 @@ class SiteBuilder:
             slot = self.slots.get(pid, 0)
             cards.append(
                 f'<a class="program-card" data-slot="{slot}" href="{esc(pid)}/">'
-                f'<span class="dot" aria-hidden="true"></span><h3>{esc(program.get("title") or pid)}</h3>'
+                f'<span class="dot" aria-hidden="true"></span><h3>{esc(self.program_titles.get(pid, program.get("title") or pid))}</h3>'
                 f'<p>{esc(program.get("focus", ""))}</p>'
-                f'<p class="muted">{counts[pid]} experiments · {claim_counts[pid]} claims · {queue_counts[pid]} queued</p></a>'
+                f'<p class="muted">{_plural(counts[pid], "experiment")} · {_plural(claim_counts[pid], "claim")} · {queue_counts[pid]} queued</p></a>'
             )
         content = (
             '<header class="page-head"><h1>Research programs</h1>'
@@ -2185,9 +2208,10 @@ class SiteBuilder:
                     f'<ul class="plain">{queue_items}</ul></section>'
                 )
 
+            disp_title = _nice_title(title)
             header = (
-                f'<nav class="crumbs"><a href="{page_prefix}">Home</a> / <a href="{page_prefix}programs/">Programs</a> / <span>{esc(title)}</span></nav>'
-                f"<h1>{esc(title)}</h1><p class=\"lede\">{esc(program.get('focus', ''))}</p>"
+                f'<nav class="crumbs"><a href="{page_prefix}">Home</a> / <a href="{page_prefix}programs/">Programs</a> / <span>{esc(disp_title)}</span></nav>'
+                f"<h1>{esc(disp_title)}</h1><p class=\"lede\">{esc(program.get('focus', ''))}</p>"
             )
             self.write_page(
                 f"programs/{pid}/index.html",

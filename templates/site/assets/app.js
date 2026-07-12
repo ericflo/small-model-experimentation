@@ -289,8 +289,7 @@ const ROOT = document.body.dataset.root || "";
   if (outcome && outcomeParam) outcome.value = outcomeParam;
   const sortParam = params.get("sort");
   if (sortParam && Array.from(sort.options).some((option) => option.value === sortParam)) sort.value = sortParam;
-  tabs.forEach((t) => t.setAttribute("aria-selected", String(t.dataset.statusTab === statusTab)));
-  apply();
+  setTab(statusTab); // sets aria-selected + roving tabindex (one focusable tab) + applies filters
 })();
 
 /* -------------------------------------------------------- sortable tables */
