@@ -350,6 +350,8 @@ def _eval_if_needed(
             and merge_receipt.is_file()
             and payload.get("model_merge_receipt_sha256") == sha256_file(merge_receipt)
             and payload.get("decode") == decode
+            and payload.get("engine_protocol")
+            and all(payload["engine_protocol"].values())
         ):
             print(f"[resume] evaluation {tag} already complete", flush=True)
             return scores

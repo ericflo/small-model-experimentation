@@ -32,6 +32,57 @@ def _counts(config: dict, scope: str) -> tuple[int, int]:
     )
 
 
+def _engine_protocol(
+    summaries: list[dict], *, engine_cfg: dict, model: Path, model_config_sha256: str
+) -> dict[str, bool]:
+    """Fail closed unless every generation call used the frozen local engine."""
+    capture_sizes = tuple(int(value) for value in engine_cfg["cudagraph_capture_sizes"])
+    model_path = str(model.resolve())
+    return {
+        "summaries_exist": bool(summaries),
+        "same_runner": len({row.get("runner_sha256") for row in summaries}) == 1,
+        "exact_local_model": all(row.get("model") == model_path for row in summaries),
+        "exact_model_config": all(
+            row.get("model_config_sha256") == model_config_sha256 for row in summaries
+        ),
+        "exact_engine_geometry": all(
+            int(row.get("engine", {}).get("max_model_len", -1))
+            == int(engine_cfg["max_model_len"])
+            and float(row.get("engine", {}).get("gpu_memory_utilization", -1.0))
+            == float(engine_cfg["gpu_memory_utilization"])
+            and int(row.get("engine", {}).get("max_num_seqs", -1))
+            == int(engine_cfg["max_num_seqs"])
+            and int(row.get("engine", {}).get("max_num_batched_tokens", -1))
+            == int(engine_cfg["max_num_batched_tokens"])
+            and tuple(row.get("engine", {}).get("cudagraph_capture_sizes") or ())
+            == capture_sizes
+            for row in summaries
+        ),
+        "engine_args_match": all(
+            int(row.get("engine_args", {}).get("max_num_seqs", -1))
+            == int(engine_cfg["max_num_seqs"])
+            and int(row.get("engine_args", {}).get("max_num_batched_tokens", -1))
+            == int(engine_cfg["max_num_batched_tokens"])
+            and tuple(row.get("engine_args", {}).get("cudagraph_capture_sizes") or ())
+            == capture_sizes
+            for row in summaries
+        ),
+        "resolved_full_decode_graphs": all(
+            tuple(row.get("resolved_cudagraph", {}).get("cudagraph_capture_sizes") or ())
+            == capture_sizes
+            and int(
+                row.get("resolved_cudagraph", {}).get(
+                    "max_cudagraph_capture_size", -1
+                )
+            )
+            == capture_sizes[-1]
+            and row.get("resolved_cudagraph", {}).get("has_full_cudagraphs") is True
+            and row.get("resolved_cudagraph", {}).get("decode_mode") == "FULL"
+            for row in summaries
+        ),
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path)
@@ -105,6 +156,14 @@ def main() -> int:
     elapsed = time.perf_counter() - started
     metadata = getattr(runner, "eval_summaries", [])
     runner.close()
+    engine_protocol = _engine_protocol(
+        metadata,
+        engine_cfg=config["engine"],
+        model=model_path,
+        model_config_sha256=sha256_file(model_path / "config.json"),
+    )
+    if not all(engine_protocol.values()):
+        raise SystemExit(f"evaluation engine protocol failed: {engine_protocol}")
 
     items: list[dict] = []
     token_ledger = defaultdict(int)
@@ -148,7 +207,7 @@ def main() -> int:
         "atoms_per_level": atom_n, "episodes_per_level": episode_n,
         "by_stratum": by_stratum, "items": sorted(items, key=lambda value: value["key"]),
         "token_ledger": dict(token_ledger), "wall_seconds": elapsed,
-        "runner_summary": metadata,
+        "engine_protocol": engine_protocol, "runner_summary": metadata,
     }
     write_json(out_dir / "scores.json", result)
     with gzip.open(out_dir / "atom_rows.jsonl.gz", "wt", encoding="utf-8") as handle:
