@@ -2,9 +2,10 @@
 
 ## Status
 
-Preregistered successor to `qwen35_4b_pareto_policy_integration`. Pinned model
-preflight and the source/soup installation canary pass; split-branch route
-qualification is the next unresolved scientific gate.
+**Terminal negative at the preregistered split-branch route gate.** Deep had
+replicated positive continuation advantage, but quick was worse than the soup
+student in block 1 (`-0.0253` macro) after being strongly positive in block 0.
+MOPD, locality, controls, confirmation, and benchmarks were therefore not run.
 
 ## Research Program
 
@@ -75,6 +76,11 @@ selected-teacher minus alternate-teacher are positive in both state blocks and
 have pooled one-sided 95% lower bounds above zero on the untouched audit
 branches. This is the experiment's teacher-existence test. MOPD is forbidden if
 it fails.
+
+It failed exactly that test. Both teachers had ample support and the combined
+router was positive, but quick's selected states did not retain positive audit
+advantage over the current soup student in the independent block. The gate was
+not weakened to a pooled-only rule.
 
 ## Conditional Training and Controls
 

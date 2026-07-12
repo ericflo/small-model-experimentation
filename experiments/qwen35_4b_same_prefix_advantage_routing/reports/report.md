@@ -2,9 +2,10 @@
 
 ## Status
 
-**Design locked; implementation smoke, pinned model preflight, and source/soup
-installation all pass.** The split-branch route qualification is now the next
-legal and unresolved scientific gate.
+**Terminal negative at the preregistered route-qualification gate.** Both
+teachers had adequate support, deep replicated, and the combined router was
+positive, but quick's audit advantage over the soup student reversed sign in
+block 1. No MOPD or later stage is authorized.
 
 ## Research Program Fit
 
@@ -24,11 +25,22 @@ controls, two confirmatory blocks, three seeds, visible routing, and best-of-8.
 
 ## Evidence
 
-No task-model evidence exists yet. The unit/invariant suite, all 14 procedural
-family selftests, source hashes, frozen count geometry, and full fail-closed
-stage graph pass. Pinned vLLM semantic generation and an independent finite
-Transformers/QLoRA-path forward pass also succeeded. These are engineering
-evidence only and cannot support the hypothesis.
+The route study used 384 fresh soup states and 9,216 teacher/student
+continuations, plus soup-only acquisition rollouts: 12,726,694 sampled tokens
+total. It routed 111 states and abstained on 273. Support passed for quick
+(29/26 by block) and deep (22/34).
+
+Deep's audit advantage over the student was `+0.1216` and `+0.0655` by block,
+with pooled one-sided 95% LCB `+0.0657`; its alternate-teacher contrast also
+passed. Quick beat deep and had pooled student LCB `+0.0677`, but its
+student-relative block means were `+0.2009` and `-0.0253`. That negative
+replicate is terminal under the frozen rule. The combined router passed, but
+composition requires both named teachers to be independently useful.
+
+The key result is methodological: pooling would have declared quick useful and
+authorized MOPD, while the independent-block sign gate exposed a nonreplicable
+local teacher. The correct response is to preserve the negative, not lower the
+bar or train on the favorable block.
 
 The independently regenerated 40/60 soup has weight hash `04610723…`; all 128
 mapped adapter deltas were nonzero. On eight fixed same-prompt canaries, every
@@ -45,10 +57,9 @@ explicit baselines, not hidden components of the learned arm.
 
 ## Interpretation Contract
 
-The report will preserve the first terminal branch: route nonexistence,
-locality failure, integration/control failure, procedural pass with benchmark
-failure, or full pass. Unreached stages will remain listed as unreached rather
-than inferred.
+The first terminal branch is route nonexistence for the required *two-teacher*
+composition claim. Locality, integration, controls, confirmation, and
+benchmarks are unreached—not negative and not inferred.
 
 ## Artifact Manifest
 

@@ -5,10 +5,10 @@ source_track: "new"
 path: "experiments/qwen35_4b_same_prefix_advantage_routing"
 primary_readme: "experiments/qwen35_4b_same_prefix_advantage_routing/README.md"
 primary_report: "experiments/qwen35_4b_same_prefix_advantage_routing/reports/report.md"
-summary: "Preregistered successor to `qwen35_4b_pareto_policy_integration`. Pinned model preflight and the source/soup installation canary pass; split-branch route qualification is the next unresolved scientific gate."
+summary: "**Terminal negative at the preregistered split-branch route gate.** Deep had replicated positive continuation advantage, but quick was worse than the soup student in block 1 (`-0.0253` macro) after being strongly positive in block 0. MOPD, locality, controls, confirmation, and benchmarks were therefore not run."
 tags:
+  - "counterexamples"
   - "latent-state"
-  - "policy"
   - "small-model"
 research_programs:
   - "agentic_breadth_installation"
@@ -27,10 +27,11 @@ top_level_dirs:
   - "src"
   - "tests"
 file_counts:
-  json: 10
-  jsonl: 6
+  gz: 10
+  json: 21
+  jsonl: 8
   md: 8
   py: 53
   yaml: 3
-total_files: 80
-total_size_bytes: 1058024
+total_files: 103
+total_size_bytes: 25629971

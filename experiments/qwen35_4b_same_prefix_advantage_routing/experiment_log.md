@@ -91,3 +91,23 @@
 - Every source/soup merge was nonzero and every local path/receipt hash matched.
   The canary authorized split-branch route qualification. These are
   installation/no-op checks, not capability measurements.
+
+## 2026-07-12 — terminal split-branch route result
+
+- Generated two independent 192-state blocks, each with 144 exact mid-thought
+  atom states and 48 exactly replayed episode states. Across soup acquisition
+  and all quick/deep/student branches, the run consumed 12,726,694 sampled
+  tokens with no engine, replay, count, or provenance failure.
+- The strict selection rule routed 111/384 states (28.9%): quick had support
+  29/26 across blocks and deep 22/34, above the required 16 everywhere.
+- Deep passed. Its audit advantage over student was `+0.1216` and `+0.0655`
+  by block (pooled one-sided 95% LCB `+0.0657`); versus alternate it was
+  `+0.1599` and `+0.1210` (LCB `+0.1170`).
+- Quick did **not** pass. It beat the alternate in both blocks and had a
+  positive pooled bound, but selected-teacher-minus-student changed from
+  `+0.2009` in block 0 to `-0.0253` in block 1. The independent-block sign
+  requirement caught the instability that a pooled-only rule would hide.
+- The combined router passed both contrasts, including `+0.2034` and `+0.0195`
+  versus student, but this cannot substitute for separately identifying both
+  teachers. The experiment therefore stopped before teacher-logit caching,
+  locality, MOPD, controls, confirmation, or benchmarks.
