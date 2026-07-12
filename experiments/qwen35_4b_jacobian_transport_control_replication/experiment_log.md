@@ -20,3 +20,17 @@ Created as a new experiment scaffold.
   before model inference.
 - Recorded exact frozen README/preregistration hashes and the byte-identical
   parent lens hash.
+
+## 2026-07-12 — quantization-aware control implementation
+
+- Copied the parent's cache-free batch-one Qwen patching and coordinate code,
+  then added a numeric-only post-bf16 control optimizer.
+- For 32 fixed random candidates per layer, the hook alternates realized-span
+  removal/renormalization with 64-step scale search and chooses the first
+  candidate meeting both frozen constraints. Candidate selection cannot access
+  logits or labels.
+- Implemented a model smoke and the 480-layer numeric calibration gate. The
+  calibration writer rejects outcome-like fields and discards every forward's
+  logits before serialization.
+- CPU suite passes 24 tests plus 24 subtests; no model call has occurred in this
+  replication.
