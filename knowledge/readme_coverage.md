@@ -126,6 +126,7 @@ Top-level README files are required for all experiments. Generated entries shoul
 | `qwen35_4b_probe_the_parameter` | [README](../experiments/qwen35_4b_probe_the_parameter/README.md) | [report](../experiments/qwen35_4b_probe_the_parameter/reports/report.md) |
 | `qwen35_4b_probe_to_prompt` | [README](../experiments/qwen35_4b_probe_to_prompt/README.md) | [report](../experiments/qwen35_4b_probe_to_prompt/reports/report.md) |
 | `qwen35_4b_real_sample_verify_commit` | [README](../experiments/qwen35_4b_real_sample_verify_commit/README.md) | [report](../experiments/qwen35_4b_real_sample_verify_commit/reports/qwen35_4b_real_sample_verify_commit_report.md) |
+| `qwen35_4b_recovery_reason_locality_interpolation` | [README](../experiments/qwen35_4b_recovery_reason_locality_interpolation/README.md) | [report](../experiments/qwen35_4b_recovery_reason_locality_interpolation/reports/report.md) |
 | `qwen35_4b_reliability_exec_opsd_audit` | [README](../experiments/qwen35_4b_reliability_exec_opsd_audit/README.md) | [report](../experiments/qwen35_4b_reliability_exec_opsd_audit/reports/final_report.md) |
 | `qwen35_4b_repo_search_compress_bank` | [README](../experiments/qwen35_4b_repo_search_compress_bank/README.md) | [report](../experiments/qwen35_4b_repo_search_compress_bank/reports/report.md) |
 | `qwen35_4b_retrieval_adapt_verify_scale` | [README](../experiments/qwen35_4b_retrieval_adapt_verify_scale/README.md) | [report](../experiments/qwen35_4b_retrieval_adapt_verify_scale/reports/final_report.md) |

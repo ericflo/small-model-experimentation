@@ -596,6 +596,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 - `qwen35_4b_probe_the_parameter` (new): [README](../experiments/qwen35_4b_probe_the_parameter/README.md)
 - `qwen35_4b_probe_to_prompt` (new): [README](../experiments/qwen35_4b_probe_to_prompt/README.md)
 - `qwen35_4b_real_sample_verify_commit` (track-z): [README](../experiments/qwen35_4b_real_sample_verify_commit/README.md)
+- `qwen35_4b_recovery_reason_locality_interpolation` (new): [README](../experiments/qwen35_4b_recovery_reason_locality_interpolation/README.md)
 - `qwen35_4b_reliability_exec_opsd_audit` (track-z): [README](../experiments/qwen35_4b_reliability_exec_opsd_audit/README.md)
 - `qwen35_4b_repo_search_compress_bank` (new): [README](../experiments/qwen35_4b_repo_search_compress_bank/README.md)
 - `qwen35_4b_retrieval_adapt_verify_scale` (track-z): [README](../experiments/qwen35_4b_retrieval_adapt_verify_scale/README.md)

@@ -1,0 +1,130 @@
+schema_version: 1
+
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+  start_checkpoint: large_artifacts/qwen35_4b_repo_search_compress_bank/merged/apex_replay
+
+parent:
+  experiment: qwen35_4b_verifier_conditioned_recovery_bank
+  artifact_root: large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank
+  action_adapter: large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/adapters/recovery_action
+  reason_adapter: large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/adapters/recovery_reason
+  action_model: large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/merged/recovery_action
+  reason_model: large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/merged/recovery_reason
+  happy_model: large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/merged/happy_action
+  expected_sha256:
+    action_adapter_weights: a7df7b48e9b583ea310d6a1cec14f4c3a6236679caf820bd721fba1f87c87376
+    reason_adapter_weights: 7f779770cdb4fbf95c6e6ecaadaf0564ef0d994ce9ee27e9a64ae917c5e7cbc1
+    action_model_weights: 991d2da239ac2878dccac72ece419b00f37ac15d6a970538f384c36162b89aea
+    reason_model_weights: 01a29c265d8d070e7d4a16c9d1f309faa2fa3011c41a5787d75b37c446772b3f
+    calibration_base: d04c03f717fe57bd8525ac4235af922f33f1f7376ad23fbc76d3f1047847de04
+    calibration_happy: 73da347250ff4435028ed9f24bc9691a696458163e3a298e682c049cd42348ca
+    calibration_action: c603127131ad158cbc5396ab8c11a4abd71cfa3a35d4b085c339fb7b8e0cfd06
+    locality_screen: 117521df3794ca1def7bcc239997cde7514e97c7b2cd89310caedada9498f3b2
+    locality_confirm: a4450dc9a5692f82a5cc6d3e198dbcff7f97e4103a76d0ef7af63784dd8569bb
+
+artifacts:
+  root: large_artifacts/qwen35_4b_recovery_reason_locality_interpolation
+
+interpolation:
+  # W(lambda) = W_apex + (1-lambda) * delta_action + lambda * delta_reason.
+  # Endpoints are retained as controls but are not both eligible candidates.
+  candidate_lambdas: [0.10, 0.18, 0.24, 0.30]
+  action_anchor_lambda: 0.0
+  reason_endpoint_lambda: 1.0
+
+engine:
+  max_model_len: 8192
+  gpu_memory_utilization: 0.85
+  max_num_seqs: 32
+  max_num_batched_tokens: 16384
+
+families:
+  train:
+    - layered_settings
+    - retry_backoff
+    - alias_registry
+    - window_unique
+    - priority_intervals
+    - stable_topology
+  transfer:
+    - lease_cache
+    - quorum_value
+    - pattern_router
+    - rate_buckets
+
+evaluation:
+  think_budget: 512
+  answer_max_tokens: 256
+  sample_temperature: 0.8
+  sample_top_p: 0.95
+  sample_top_k: 20
+  deep_run_seed: 84791
+  sample_run_seed: 84792
+  recovery:
+    deep_turns: 6
+    sample_more_trajectories: 2
+    sample_more_turns_each: 3
+  normal:
+    deep_turns: 8
+    sample_more_trajectories: 2
+    sample_more_turns_each: 4
+  blocks:
+    calibration:
+      families: train
+      seed: 84700
+      tasks_per_family: 5
+    transfer_dev:
+      families: transfer
+      seed: 84800
+      tasks_per_family: 10
+    transfer_confirm:
+      families: transfer
+      seed: 84900
+      tasks_per_family: 10
+
+locality:
+  screen_contexts: experiments/qwen35_4b_recovery_reason_locality_interpolation/data/locality_screen.json
+  confirm_contexts: experiments/qwen35_4b_recovery_reason_locality_interpolation/data/locality_confirm.json
+  contexts_per_block: 48
+  max_context_tokens: 1024
+  median_non_target_logit_drift_max: 0.15
+  mean_entropy_delta_min: -0.05
+
+selection_gates:
+  recovery_delta_vs_base_min: 0.05
+  recovery_delta_vs_happy_min: 0.03
+  transition_delta_vs_happy_min: 0.08
+  invalid_action_delta_vs_base_max: 0.02
+  rejected_patch_transition_absolute_min: 0.60
+  failed_test_changed_patch_within_two_absolute_min: 0.60
+
+transfer_gates:
+  recovery_delta_vs_base_min: 0.05
+  recovery_delta_vs_happy_min: 0.03
+  recovery_delta_vs_sample_more_min: 0.03
+  recovery_delta_vs_scaffold_min: 0.03
+  recovery_delta_vs_action_min: -0.02
+  action_invalid_rate_improvement_min: 0.03
+  action_rejected_transition_improvement_min: 0.10
+  paired_bootstrap_lower_bound_min: 0.0
+  rejected_patch_transition_absolute_min: 0.60
+  rejected_patch_transition_delta_min: 0.05
+  failed_test_transition_absolute_min: 0.60
+  failed_test_transition_delta_min: 0.05
+  normal_success_delta_min: -0.03
+  normal_verified_absolute_min: 0.70
+  normal_verified_delta_min: -0.05
+  normal_commit_absolute_min: 0.65
+  normal_commit_delta_min: -0.05
+  invalid_action_rate_delta_max: 0.02
+  minimum_nonnegative_transfer_families: 3
+  maximum_single_family_regression: -0.10
+
+menagerie:
+  sealed_until_repo_gates_pass: true
+  tiers: [quick, medium]
+  paired_seeds: []
+  maximum_tier_regression: 0.03
+  minimum_positive_tier_delta: 0.02

@@ -5187,6 +5187,45 @@
     }
    ]
   },
+  "qwen35_4b_recovery_reason_locality_interpolation": {
+   "verdict_tag": "Frozen path awaits locality-first test",
+   "concept_primer": "The previous coding assistant recovered well after failed tests, but the extra planning lesson also changed unrelated language behavior. This follow-up searches only between the safer action lesson and the stronger planning lesson.",
+   "plain_question": "Can a small amount of the planning update keep its cleaner, more successful recovery while avoiding broad changes elsewhere?",
+   "plain_answer": "Not known yet. Four fixed mixtures will face an unrelated-language safety check before their coding behavior is examined, and one winner must repeat that safety result before any new task family is opened.",
+   "why_it_matters": "A successful point would preserve the useful response to failed tests without retraining or weakening the already-safe action lesson. A failure would show that better planning and broad collateral are inseparable along this simple path.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Frozen mixtures",
+     "value": "4",
+     "sub": "fixed before any scaled model is evaluated"
+    },
+    {
+     "label": "Safety blocks",
+     "value": "48 + 48",
+     "sub": "screen first, then an independent no-fallback confirmation"
+    },
+    {
+     "label": "Benchmark exposure",
+     "value": "0",
+     "sub": "new benchmark seeds remain sealed behind all white-box gates"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Planning improved recovery and reduced malformed tool calls",
+     "chart_read": "For each of the two starting models, one bar shows successful recovery and the other shows malformed tool calls. More recovery and fewer malformed calls are better.",
+     "chart_takeaway": "Adding plans raised familiar-task recovery from 85% to 92% while cutting malformed turns from 19% to 6%, creating a useful behavior target."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "The planning endpoint also exceeded the unrelated-change limit",
+     "chart_read": "Each model's unrelated next-word change is compared with the fixed 15% ceiling. Lower is safer, and any bar above the ceiling fails.",
+     "chart_takeaway": "Action-only stayed below the limit near 10%, but the plan endpoint rose above 30%; the four frozen mixtures bracket the likely boundary."
+    }
+   ]
+  },
   "qwen35_4b_reliability_exec_opsd_audit": {
    "verdict_tag": "Cheap tricks could not spot correct code",
    "concept_primer": "A small AI writes several versions of a program. Some pass the quick sample checks a user can see, yet are secretly wrong on hidden cases. The goal here is a cheap way to tell the genuinely-correct version from the secretly-wrong one.",

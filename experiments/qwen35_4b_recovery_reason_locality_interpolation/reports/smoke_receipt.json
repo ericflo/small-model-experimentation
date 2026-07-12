@@ -1,0 +1,39 @@
+{
+  "benchmark_content_accessed": false,
+  "calibration_gates_reachable": {
+    "failed_transition": true,
+    "invalid": true,
+    "rejected_transition": true,
+    "vs_base": true,
+    "vs_happy": true
+  },
+  "candidate_lambdas": [
+    0.1,
+    0.18,
+    0.24,
+    0.3
+  ],
+  "interpolation_endpoints_verified": true,
+  "interpolation_formula": "W_apex + (1-lambda)*delta_action + lambda*delta_reason",
+  "locality_blocks": [
+    48,
+    48
+  ],
+  "locality_blocks_disjoint": true,
+  "matched_compute_reservations": true,
+  "model": "Qwen/Qwen3.5-4B",
+  "parent_hashes": {
+    "action_adapter_weights": "a7df7b48e9b583ea310d6a1cec14f4c3a6236679caf820bd721fba1f87c87376",
+    "action_model_weights": "991d2da239ac2878dccac72ece419b00f37ac15d6a970538f384c36162b89aea",
+    "calibration_action": "c603127131ad158cbc5396ab8c11a4abd71cfa3a35d4b085c339fb7b8e0cfd06",
+    "calibration_base": "d04c03f717fe57bd8525ac4235af922f33f1f7376ad23fbc76d3f1047847de04",
+    "calibration_happy": "73da347250ff4435028ed9f24bc9691a696458163e3a298e682c049cd42348ca",
+    "locality_confirm": "a4450dc9a5692f82a5cc6d3e198dbcff7f97e4103a76d0ef7af63784dd8569bb",
+    "locality_screen": "117521df3794ca1def7bcc239997cde7514e97c7b2cd89310caedada9498f3b2",
+    "reason_adapter_weights": "7f779770cdb4fbf95c6e6ecaadaf0564ef0d994ce9ee27e9a64ae917c5e7cbc1",
+    "reason_model_weights": "01a29c265d8d070e7d4a16c9d1f309faa2fa3011c41a5787d75b37c446772b3f"
+  },
+  "schema_version": 1,
+  "split_ids_disjoint_by_family_seed_contract": true,
+  "status": "PASS"
+}

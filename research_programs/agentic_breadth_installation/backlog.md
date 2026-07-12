@@ -33,15 +33,16 @@
   a 42.1 pre-clip gradient and 29.5% larger delta norm. Transfer and Menagerie
   stayed sealed. Do not rerun this dose or reinterpret the exploratory
   action-only arm inside the result-bearing directory.
-- Immediate successor, new experiment only: locality-first reason-delta
-  interpolation. Merge the frozen reason adapter at a predeclared scale ladder,
-  run exact-logit locality before behavior, and select only among passing scales
-  plus the full-dose recovery-action anchor. Calibration may reuse the already
-  designated train-family block; the four transfer families/seeds remain
-  untouched. Require the winner to beat happy, an external scaffold, and
-  matched-compute sampling before Menagerie. Future retraining should calibrate
-  plan dose by realized gradient/surprisal and avoid supervising plan starts
-  already rank 1 or wildly off-policy lexical templates.
+- Active successor: `qwen35_4b_recovery_reason_locality_interpolation`.
+  Preserve the full locality-safe action delta and interpolate only its learned
+  contrast toward the reason delta at frozen lambdas 0.10/0.18/0.24/0.30.
+  Exact-logit/entropy locality precedes behavior, the single calibration winner
+  gets a disjoint no-fallback locality confirmation, and the four transfer
+  families/seeds remain untouched until then. Require the winner to beat happy,
+  full action, an external scaffold, and matched-compute sampling before
+  Menagerie. Future retraining should calibrate plan dose by realized
+  gradient/surprisal and avoid supervising plan starts already rank 1 or wildly
+  off-policy lexical templates.
 - Stopped experiment: `qwen35_4b_specialist_policy_integration` — incumbent and
   compound-headroom gates passed, but `ferrier = 0.994` made the mandatory
   tools specialist's frozen `+0.10` bar mathematically impossible. Zero

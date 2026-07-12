@@ -1,0 +1,46 @@
+schema_version: 1
+experiment_id: "qwen35_4b_recovery_reason_locality_interpolation"
+
+external_artifacts:
+  - name: frozen C54 apex checkpoint
+    storage: large_artifacts/qwen35_4b_repo_search_compress_bank/merged/apex_replay
+    required_for: every merge, locality audit, and incumbent evaluation
+    checksum: recorded by the parent merge receipt and validated as Qwen3.5-4B
+    regenerate: follow qwen35_4b_repo_search_compress_bank artifact manifest
+  - name: parent action and reason adapters
+    storage: large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/adapters
+    required_for: reconstructing the frozen interpolation ladder
+    checksum: frozen individually in configs/default.yaml
+    regenerate: follow the parent result receipt; do not retrain inside this experiment
+  - name: parent endpoint models and calibration controls
+    storage: large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank
+    required_for: endpoint locality controls and checksum-frozen selection baselines
+    checksum: frozen individually in configs/default.yaml
+    regenerate: follow the parent result receipt
+  - name: scaled merged checkpoints and detailed evaluation artifacts
+    storage: large_artifacts/qwen35_4b_recovery_reason_locality_interpolation
+    required_for: locality, calibration, transfer, and final reproduction
+    checksum: pending result receipts
+    regenerate: .venv/bin/python experiments/qwen35_4b_recovery_reason_locality_interpolation/scripts/run.py --full
+
+omitted_artifacts:
+  - path: large_artifacts/qwen35_4b_recovery_reason_locality_interpolation/merged
+    reason: four full 4B checkpoints are too large for git
+  - path: large_artifacts/qwen35_4b_recovery_reason_locality_interpolation/eval
+    reason: detailed logits and model trajectories are large and may expose generated fixtures
+
+reproducibility:
+  smoke_command: .venv/bin/python experiments/qwen35_4b_recovery_reason_locality_interpolation/scripts/run.py --smoke
+  gpu_smoke_command: .venv/bin/python experiments/qwen35_4b_recovery_reason_locality_interpolation/scripts/run.py --gpu-smoke
+  full_command: .venv/bin/python experiments/qwen35_4b_recovery_reason_locality_interpolation/scripts/run.py --full
+  required_external_artifacts:
+    - large_artifacts/qwen35_4b_repo_search_compress_bank/merged/apex_replay
+    - large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/adapters/recovery_action
+    - large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/adapters/recovery_reason
+    - large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/merged/recovery_action
+    - large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/merged/recovery_reason
+
+notes: >-
+  This follow-up performs no training. All result-bearing choices are frozen in
+  the preregistration; Menagerie artifacts remain absent unless both transfer
+  blocks pass.
