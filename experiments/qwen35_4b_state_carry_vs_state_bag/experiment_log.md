@@ -85,3 +85,14 @@ because LoRA has then already formed the representation.
 - Final validation: 41 tests pass, Python compilation passes, and `git diff --check` is clean.
 
 No fresh CPU smoke/data generation, model load, GPU call, training, evaluation, or benchmark access occurred.
+
+## 2026-07-12 — First Live G0 Attempt
+
+- Rebuilt the exact pinned Transformers environment and compiled `causal-conv1d==1.6.2.post1`.
+- Fresh CPU smoke, all 41 tests, and the complete source-bound corpus passed before model loading.
+- The first live G0 loaded only `Qwen/Qwen3.5-4B` at the pinned revision, then stopped before issuing
+  a receipt or starting training: the smoke harness reused a K=4-encoded target tensor for its K=1
+  Carry/Bag equality forward, producing a 1-versus-4 state-loss shape error.
+- Fixed the harness to encode and use a dedicated K=1 batch for both equality and direct-model parity;
+  added a static regression assertion. Because runtime source is identity-bound, the corpus and G0
+  receipt must be regenerated/reissued before proceeding.

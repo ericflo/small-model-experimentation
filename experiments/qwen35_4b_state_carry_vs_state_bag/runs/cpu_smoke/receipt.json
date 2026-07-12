@@ -11,7 +11,8 @@
   },
   "config": {
     "backend": "transformers",
-    "config_sha256": "fd5c09340ab4ed25f2841b3dd49461ee723326ef7180a8b71d339af857061556",
+    "config_sha256": "70e4a2d6df7acb0c5a21c7c945c66499a0ede8e98321c7b56da1c080c819744b",
+    "evidence_profile": "confirmatory",
     "experiment_id": "qwen35_4b_state_carry_vs_state_bag",
     "extrapolation_depths": [
       5,
@@ -31,6 +32,8 @@
     "model_id": "Qwen/Qwen3.5-4B",
     "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
     "schema_version": 1,
+    "source_contract_sha256": "eb7aef9d3a71ff316ae8143f5c4ae2f3efe9cccd45f2a3c7d9ecf6a300ef2d77",
+    "source_contract_version": 1,
     "train_depths": [
       1,
       2,
@@ -68,6 +71,5 @@
     10
   ],
   "scientific_evidence": false,
-  "status": "SUPERSEDED_CPU_SMOKE",
-  "superseded_reason": "Predates the final adversarial source/config/data-contract revision; retain as setup history only and regenerate before G0."
+  "status": "CPU_SMOKE_PASS"
 }

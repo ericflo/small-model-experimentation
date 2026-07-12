@@ -4438,7 +4438,8 @@
   {
     "file_counts": {
       ".csv": 2,
-      ".json": 2,
+      ".gz": 11,
+      ".json": 3,
       ".md": 13,
       ".py": 15,
       ".yaml": 4,
@@ -4469,8 +4470,8 @@
       "src",
       "tests"
     ],
-    "total_files": 37,
-    "total_size_bytes": 385326
+    "total_files": 49,
+    "total_size_bytes": 14862335
   },
   {
     "file_counts": {

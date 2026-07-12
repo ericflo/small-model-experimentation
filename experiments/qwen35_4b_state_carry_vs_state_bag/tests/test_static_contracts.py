@@ -68,6 +68,8 @@ class StaticContractTests(unittest.TestCase):
         source = (ROOT / "src" / "gpu_runner.py").read_text(encoding="utf-8")
         self.assertIn('for arm in ("carry", "bag")', source)
         self.assertIn('("lora", "state", "sufficiency", "step")', source)
+        self.assertIn("k1_batch = _encode_row", source)
+        self.assertIn("_forward(wrapper, k1_batch, k=1", source)
         self.assertIn('"k1_carry_bag_max_logit_abs_error"', source)
         self.assertIn('"worst_k_finite"', source)
 

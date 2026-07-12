@@ -614,6 +614,7 @@ def model_smoke(config: Mapping[str, Any], output: Path) -> None:
     row = _smoke_row(config)
     worst_row = _smoke_row(config, worst_case=True)
     batch = _encode_row(tokenizer, row, config, k=4, device=torch.device("cuda"))
+    k1_batch = _encode_row(tokenizer, row, config, k=1, device=torch.device("cuda"))
     worst_k = int(config["architecture"]["max_recurrence"])
     worst_batch = _encode_row(
         tokenizer, worst_row, config, k=worst_k, device=torch.device("cuda")
@@ -622,8 +623,8 @@ def model_smoke(config: Mapping[str, Any], output: Path) -> None:
     with torch.no_grad(), torch.autocast("cuda", dtype=torch.bfloat16):
         carry = _forward(wrapper, batch, k=4, mode="carry")
         bag = _forward(wrapper, batch, k=4, mode="bag")
-        carry_k1 = _forward(wrapper, batch, k=1, mode="carry")
-        bag_k1 = _forward(wrapper, batch, k=1, mode="bag")
+        carry_k1 = _forward(wrapper, k1_batch, k=1, mode="carry")
+        bag_k1 = _forward(wrapper, k1_batch, k=1, mode="bag")
     torch.cuda.synchronize()
     worst_started = time.time()
     with torch.no_grad(), torch.autocast("cuda", dtype=torch.bfloat16):
@@ -631,7 +632,7 @@ def model_smoke(config: Mapping[str, Any], output: Path) -> None:
         bag_worst = _forward(wrapper, worst_batch, k=worst_k, mode="bag")
     torch.cuda.synchronize()
     worst_forward_seconds = time.time() - worst_started
-    max_error = _k1_parity_error(wrapper, batch)
+    max_error = _k1_parity_error(wrapper, k1_batch)
     allowed = float(config["gates"]["k1_max_logit_abs_error"])
     if max_error > allowed:
         raise RuntimeError(f"K=1 parity failed: max logit error {max_error} > {allowed}")
