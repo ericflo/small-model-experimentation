@@ -1,0 +1,86 @@
+{
+  "correctness_recorded": false,
+  "counterfactual_policy_acknowledged": true,
+  "data_receipt": {
+    "manifest_sha256": "7b9b6cd6b29eefab35d945a2d662505204659ca68166026f57ea66ac426b8e39",
+    "receipt_sha256": "ee50fc053c68e2cb7dbf23fc3fb9799a450be4559fc462afcd5c209e901ed5e1",
+    "split_sha256": {
+      "causal_confirmation": "7f4df036207f1f9314ed4a8293c68fc8cefe92573b5c753e4af6b72e5194070f",
+      "seam_confirmation": "70e72f00e9d2bde5a88e10c2794487609831e7a6bb8baec4fa5636449de9190a",
+      "seam_selection": "ac037aec985aa84456323c50fb5ae05e086460bd11dce7ae321291071d78bd2d",
+      "value_fit": "64d42304de1efe1394380604c17c5066df735f14cd65445a12fd0e95e78fc93d"
+    }
+  },
+  "elapsed_seconds": 8.155695982277393,
+  "environment": {
+    "gpu": "NVIDIA RTX 6000 Ada Generation",
+    "peak_allocated_bytes": 8515461632,
+    "torch": "2.11.0+cu129",
+    "transformers": "5.13.0"
+  },
+  "forced_cache_contract_pass": true,
+  "forced_close_injected": true,
+  "forced_forward_input_lengths": [
+    397,
+    1
+  ],
+  "lens_ranks": {
+    "4": 24,
+    "5": 24,
+    "6": 24,
+    "7": 24,
+    "8": 24
+  },
+  "model": {
+    "hidden_size": 2560,
+    "id": "Qwen/Qwen3.5-4B",
+    "layers": 32,
+    "load_seconds": 5.409904919564724,
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "vocab_size": 248320
+  },
+  "outcomes_recorded": false,
+  "passed": true,
+  "schema_version": 1,
+  "scientific_result": false,
+  "slot_chosen_from_aliases": true,
+  "slot_constrained_to_aliases": true,
+  "slot_finite": true,
+  "slot_prefill_tokens": 400,
+  "slot_token_ids": [
+    271,
+    5170,
+    25
+  ],
+  "stage": "model_smoke",
+  "token_ids": {
+    "aliases": {
+      "apple": 22544,
+      "cat": 7993,
+      "circle": 12307,
+      "dog": 5388,
+      "gold": 6414,
+      "horse": 14780,
+      "lemon": 28503,
+      "ocean": 17415,
+      "river": 14367,
+      "silver": 14527,
+      "square": 9057,
+      "tiger": 49993
+    },
+    "eos": 248044,
+    "think_close": 248069,
+    "think_open": 248068
+  },
+  "trace_cache_contract_pass": true,
+  "trace_forward_input_lengths": [
+    388,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ]
+}

@@ -94,11 +94,14 @@ committed after a replicated slot seam.
 
 ## Status
 
-Design and adversarial review complete before any model call. CPU smoke passes:
+Design and adversarial review completed before any model call. CPU smoke passes:
 96 unique fresh exact-depth tasks, zero overlap with four parents, exact lens
 hash, reachable gates, and a corrected seed block after the first CPU attempt
-caught an exact prior-split generator-seed collision. Scientific outcomes are
-unopened.
+caught an exact prior-split generator-seed collision. The subsequent
+outcome-blind model smoke passes exact revision/architecture, five rank-24 lens
+matrices, 12 unique one-token aliases, fixed-slot tokenization, finite logits,
+and cached batch-one forward contracts while recording no answer or correctness.
+Scientific outcomes remain unopened.
 
 ## Scope
 

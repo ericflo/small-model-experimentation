@@ -13,5 +13,6 @@ reproducibility:
     --stage seam-selection
   required_external_artifacts: []
 notes: >-
-  At design time the byte-identical lens, 96 fresh task rows, and CPU receipts
-  are committed. No model call has occurred. No artifact is external or omitted.
+  The byte-identical lens, 96 fresh task rows, CPU receipts, immutable design
+  receipt, and outcome-blind model-smoke receipt are committed. The smoke saved
+  no chosen answer or correctness. No artifact is external or omitted.

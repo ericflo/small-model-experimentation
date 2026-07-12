@@ -16,3 +16,12 @@
 - Final CPU smoke: 96/96 unique fresh exact-depth tasks, zero overlap with four
   parents, exact lens hash, reachable gates.
 - Completed adversarial review before any model call; outcomes unopened.
+
+## 2026-07-12 — Outcome-blind model smoke
+
+- Anchored README, preregistration, 58-point adversarial review, semantic config,
+  lens, and all four procedural splits to design commit `73deac8a`.
+- Passed exact revision/architecture, tokenizer, rank-24 lens, one-token alias,
+  fixed-slot, finite-logit, and cached forward contracts.
+- Peak allocated GPU memory: 8,515,461,632 bytes. Correctness, trace text, and
+  the chosen alias were not recorded; no scientific result opened.
