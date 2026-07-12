@@ -11319,6 +11319,50 @@
      "chart_takeaway": "With too little output room the model cannot finish a usable edit at all, but doubling the room flips it to fully fixing the pilot cases."
     }
    ]
+  },
+  "qwen35_4b_same_prefix_advantage_routing": {
+   "verdict_tag": "The local-teacher test is frozen and ready",
+   "concept_primer": "Two specialist models can swap rank from one situation to the next. This test lets both continue from the exact same unfinished attempt, uses one set of outcomes to choose, and a separate set to check whether that choice was genuinely better.",
+   "plain_question": "Can verified local teacher choices teach one small model capabilities that neither source model nor their best weight blend has alone?",
+   "plain_answer": "Not yet: this is the preregistered launch state. Each of 384 fresh failed states gets 24 same-state continuations—eight from each teacher and the current student. Half choose a teacher and half independently test the choice. Training is forbidden unless both teachers beat both alternatives twice.",
+   "why_it_matters": "The previous test fixed its impossible ten-point hurdle but discovered that broad short-versus-deep labels still picked the wrong teacher locally. This design measures the missing premise directly, abstains when no teacher is better, and makes any learned model beat the strongest existing blend, visible routing, controls, and eight-sample search.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Fresh qualification states",
+     "value": "384",
+     "sub": "192 in each of two independent blocks"
+    },
+    {
+     "label": "Continuations per state",
+     "value": "24",
+     "sub": "eight each from quick, deep, and current student"
+    },
+    {
+     "label": "Arbitrary gain floor",
+     "value": "0",
+     "sub": "any replicated advantage above zero can qualify"
+    },
+    {
+     "label": "Full-update units per round",
+     "value": "80",
+     "sub": "30 per specialist plus 20 preservation anchors"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Teacher choice and teacher proof use equal, separate evidence",
+     "chart_read": "The two bars count planned continuation branches across both fresh blocks. The first half may choose a teacher; the second half alone measures whether that choice helped.",
+     "chart_takeaway": "The design spends just as much evidence checking a teacher choice as making it, preventing a lucky winner from certifying itself."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "Every update round balances both teachers with preservation",
+     "chart_read": "Bars show the consume-once training units assigned to the quick teacher, deep teacher, and frozen starting-model anchor in each round.",
+     "chart_takeaway": "Neither specialist can dominate the update stream, and one quarter of the pressure explicitly preserves the strongest starting blend."
+    }
+   ]
   }
  }
 }

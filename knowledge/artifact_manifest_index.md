@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 193
-- Manifest files: 495
+- Experiments with manifests: 194
+- Manifest files: 496
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 63 |
 | `run-data` | 101 |
-| `standard-artifact` | 66 |
+| `standard-artifact` | 67 |
 
 ## Manifests
 
@@ -190,6 +190,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_retrieval_adapt_verify_scale` | `run-data` | [manifest](../experiments/qwen35_4b_retrieval_adapt_verify_scale/data/selector_semantic_records.manifest.json) |
 | `qwen35_4b_retrieval_adapt_verify_scale` | `run-data` | [manifest](../experiments/qwen35_4b_retrieval_adapt_verify_scale/data/selector_shuffled_records.manifest.json) |
 | `qwen35_4b_retrieval_adapt_verify_scale` | `large-artifact` | [manifest](../experiments/qwen35_4b_retrieval_adapt_verify_scale/large_artifacts_manifest.md) |
+| `qwen35_4b_same_prefix_advantage_routing` | `standard-artifact` | [manifest](../experiments/qwen35_4b_same_prefix_advantage_routing/reports/artifact_manifest.yaml) |
 | `qwen35_4b_sampler_portfolio_scheduler` | `run-data` | [manifest](../experiments/qwen35_4b_sampler_portfolio_scheduler/data/eval_policy_union_records.manifest.json) |
 | `qwen35_4b_sampler_portfolio_scheduler` | `run-data` | [manifest](../experiments/qwen35_4b_sampler_portfolio_scheduler/data/subset_base_hot_k4_records.manifest.json) |
 | `qwen35_4b_sampler_portfolio_scheduler` | `run-data` | [manifest](../experiments/qwen35_4b_sampler_portfolio_scheduler/data/subset_base_hot_k8_records.manifest.json) |

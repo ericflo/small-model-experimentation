@@ -951,6 +951,14 @@
    ],
    "caveat": "data/verified_algorithm_library.jsonl contains date-format-conversion code and example dates (e.g. 2026-01-02, regex \\d{4})-(\\d{1,2})-(\\d{1,2}) — DATA, not run dates."
   },
+  "qwen35_4b_same_prefix_advantage_routing": {
+   "start": "2026-07-12",
+   "end": "2026-07-12",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_sampler_portfolio_scheduler": {
    "start": "2026-06-25",
    "end": "2026-06-26",

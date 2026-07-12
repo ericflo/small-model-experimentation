@@ -1,0 +1,34 @@
+schema_version: 1
+experiment_id: "qwen35_4b_same_prefix_advantage_routing"
+external_artifacts:
+  - name: quick source adapter and explicit composite
+    storage: large_artifacts/qwen35_4b_pareto_policy_integration/{adapters/quick_blend,merged/quick_blend}
+    required_for: teacher branching, soup reconstruction, and final source comparison
+    checksum: bound by source merge/training receipts and this experiment's checkpoint receipt
+    regenerate: python3 experiments/qwen35_4b_pareto_policy_integration/scripts/run.py --stage specialists
+  - name: deep source adapter and explicit composite
+    storage: large_artifacts/qwen35_4b_pareto_policy_integration/{adapters/deep_apex,merged/deep_apex}
+    required_for: teacher branching, soup reconstruction, and final source comparison
+    checksum: bound by source merge/training receipts and this experiment's checkpoint receipt
+    regenerate: python3 experiments/qwen35_4b_pareto_policy_integration/scripts/run.py --stage specialists
+  - name: regenerated soup and trained/control adapters and composites
+    storage: large_artifacts/qwen35_4b_same_prefix_advantage_routing
+    required_for: locality, integration, controls, confirmation, and reproduction
+    checksum: per-artifact merge/training receipts plus checkpoint_receipts.jsonl
+    regenerate: python3 experiments/qwen35_4b_same_prefix_advantage_routing/scripts/run.py --stage build-student; then reached conditional stages
+omitted_artifacts:
+  - path: large_artifacts/qwen35_4b_same_prefix_advantage_routing
+    reason: model checkpoints and adapters are too large for git
+reproducibility:
+  smoke_command: python3 experiments/qwen35_4b_same_prefix_advantage_routing/scripts/run.py --smoke
+  full_command: >-
+    Run model-smoke, build-student, route-qualify, then only the stages
+    authorized by each machine-readable gate receipt.
+  required_external_artifacts:
+    - large_artifacts/qwen35_4b_pareto_policy_integration/adapters/quick_blend
+    - large_artifacts/qwen35_4b_pareto_policy_integration/adapters/deep_apex
+    - large_artifacts/qwen35_4b_pareto_policy_integration/merged/quick_blend
+    - large_artifacts/qwen35_4b_pareto_policy_integration/merged/deep_apex
+notes: >-
+  Raw branch continuations may be gzip-compressed in git when small enough;
+  any omitted large run directory receives an added manifest entry and digest.

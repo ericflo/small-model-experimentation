@@ -45904,6 +45904,58 @@
      "source": "experiments/qwen35_4b_specialist_policy_integration/analysis/specialist_headroom_gate.json"
     }
    ]
+  },
+  "qwen35_4b_same_prefix_advantage_routing": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Preregistered split-branch evidence budget",
+     "categories": [
+      "teacher selection",
+      "independent teacher audit"
+     ],
+     "series": [
+      {
+       "label": "continuation branches across two blocks",
+       "values": [
+        4608,
+        4608
+       ]
+      }
+     ],
+     "x_label": "branch role",
+     "y_label": "continuations",
+     "y_format": "integer",
+     "note": "Pre-run design chart: 192 states per block × two blocks × three policies × four branches. Selection outcomes choose the teacher; only the equally sized disjoint audit split estimates advantage.",
+     "source": "experiments/qwen35_4b_same_prefix_advantage_routing/configs/default.yaml and reports/preregistration.md"
+    },
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Preregistered consume-once units per MOPD round",
+     "categories": [
+      "quick-routed",
+      "deep-routed",
+      "frozen-soup anchor"
+     ],
+     "series": [
+      {
+       "label": "training units",
+       "values": [
+        30,
+        30,
+        20
+       ]
+      }
+     ],
+     "x_label": "update source",
+     "y_label": "consume-once units",
+     "y_format": "integer",
+     "note": "Pre-run design chart: 20 optimizer updates × four microsteps = 80 units. Capability occupies 75%, split equally between teachers; the frozen starting soup anchors the remaining 25%.",
+     "source": "experiments/qwen35_4b_same_prefix_advantage_routing/configs/default.yaml and runs/smoke/summary.json"
+    }
+   ]
   }
  }
 }

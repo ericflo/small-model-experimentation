@@ -1,0 +1,140 @@
+schema_version: 1
+experiment_id: qwen35_4b_same_prefix_advantage_routing
+
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+  source_experiment: experiments/qwen35_4b_pareto_policy_integration
+  source_artifacts_root: large_artifacts/qwen35_4b_pareto_policy_integration
+  artifacts_root: large_artifacts/qwen35_4b_same_prefix_advantage_routing
+  quick_adapter: large_artifacts/qwen35_4b_pareto_policy_integration/adapters/quick_blend
+  deep_adapter: large_artifacts/qwen35_4b_pareto_policy_integration/adapters/deep_apex
+  quick_teacher: large_artifacts/qwen35_4b_pareto_policy_integration/merged/quick_blend
+  deep_teacher: large_artifacts/qwen35_4b_pareto_policy_integration/merged/deep_apex
+  student_initialization: explicit_convex_lora_delta_soup
+  student_quick_weight: 0.40
+  student_deep_weight: 0.60
+
+engine:
+  max_model_len: 16384
+  gpu_memory_utilization: 0.85
+  max_num_seqs: 48
+  max_num_batched_tokens: 16384
+  cudagraph_capture_sizes: [1, 2, 4, 8, 16, 24, 32, 40, 48]
+
+strata:
+  trained_families:
+    [caravan, foundry_ledger, stallwright, runeward, kilnrite, glyphgate,
+     loomfix, ferrier, burrowmaze, gatepost, patchwheel, packhouse]
+  transfer_families: [brinework, spindle]
+  quick_atom_levels: [1, 2]
+  deep_atom_levels: [3, 4, 5, 6]
+  deep_episode_levels: [2, 3, 5]
+  retention_anchor_families: [ferrier]
+
+seeds:
+  model_smoke: 97001
+  installation_canary: 97002
+  route_qualification_blocks: [97100, 97200]
+  rollout_rounds: [97300, 97400, 97500, 97600]
+  integration_training: [42, 43, 44]
+  shuffled_route: 54
+  coarse_route: 55
+  fixed_deep_route: 56
+  offpolicy_sft: 57
+  confirmatory_blocks: [97700, 97800]
+  benchmark_first: 55201
+
+generation:
+  thinking_budget: 1024
+  answer_max_tokens: 96
+  temperature: 0.8
+  top_p: 0.95
+  top_k: 20
+  atom_candidates_per_family_level: 16
+  episode_candidates_per_family_level: 8
+  atom_prefix_fraction: 0.50
+  atom_prefix_min_tokens: 8
+  atom_prefix_max_tokens: 128
+  state_failure_ceiling: 0.999999
+  qualification_atom_states_per_block: 144
+  qualification_episode_states_per_block: 48
+
+route:
+  # Selection and audit use independent sample-index/seed namespaces.
+  selection_branches_per_policy: 4
+  audit_branches_per_policy: 4
+  choose_only_if_strictly_above_student: true
+  choose_only_if_strictly_above_alternate_teacher: true
+  ties_abstain: true
+  minimum_routed_states_per_teacher_per_block: 16
+  require_each_teacher_each_block_positive: true
+  require_pooled_one_sided_lcb_above_zero: true
+  bootstrap_samples: 20000
+  confidence: 0.95
+
+locality:
+  updates: 5
+  maximum_median_centered_non_target_logit_drift: 0.10
+  maximum_entropy_relative_drop: 0.10
+  maximum_mean_corrected_topk_loss: 0.10
+
+mopd:
+  top_k: 50
+  rounds: 4
+  updates_per_round: 20
+  grad_accum: 4
+  capability_fraction: 0.75
+  anchor_fraction: 0.25
+  equal_teacher_units: true
+  consume_state_once_per_round: true
+  candidate_batches_per_round_maximum: 4
+  learning_rate: 0.00001
+  rank: 32
+  alpha: 64
+  max_length: 3072
+  max_target_positions: 256
+  max_grad_norm: 1.0
+  maximum_round_mean_corrected_topk_loss: 0.10
+  require_non_decreasing_student_teacher_topk_overlap: true
+
+controls:
+  matched_total_updates: 80
+  parameter_merge_deep_weights: [0.25, 0.50, 0.75]
+  visible_router_quick_levels: [1, 2]
+  visible_router_deep_levels: [3, 4, 5, 6]
+  sample_more_k: 8
+
+confirmation:
+  atoms_per_family_level: 48
+  episodes_per_family_level: 16
+  greedy: true
+  sample_more_temperature: 0.8
+  sample_more_top_p: 0.95
+  sample_more_top_k: 20
+  bootstrap_samples: 20000
+  confidence: 0.95
+
+benchmark:
+  # Upstream C54 correction landed before this experiment's design lock:
+  # medium/episode arm means require at least eight events; n=3 is provisional.
+  quick_events: 3
+  medium_events: 8
+  first_seed: 55201
+  require_every_event_reported: true
+  require_paired_positive_delta_each_tier: true
+
+decision:
+  # There is deliberately no arbitrary effect-size floor.
+  route_advantage_threshold: 0.0
+  final_joint_delta_threshold: 0.0
+  require_final_joint_lcb_above_each_teacher: true
+  require_final_joint_lcb_above_initial_soup: true
+  require_final_joint_lcb_above_every_matched_control: true
+  require_both_block_means_positive: true
+  require_each_stratum_above_better_source_mean_in_each_block: true
+  require_all_three_training_seeds_directionally_positive: true
+  require_final_above_visible_router: true
+  require_final_above_execution_filtered_sample_more: true
+  maximum_retention_regression: 0.02
+  maximum_transfer_regression: 0.02
