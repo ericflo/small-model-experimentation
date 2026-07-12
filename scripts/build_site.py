@@ -1668,7 +1668,9 @@ class SiteBuilder:
         self.candidate_programs = [c for c in queue.get("candidate_programs", []) if isinstance(c, dict)]
         counts = Counter(pid for exp in self.experiments for pid in exp["programs"])
         ranked = [pid for pid, _ in counts.most_common()]
-        self.slots = {pid: idx + 1 for idx, pid in enumerate(ranked[:8])}
+        # every program gets a colored dot — cycle the 8 hue slots rather than
+        # dropping the 9th+ programs to an indistinct grey.
+        self.slots = {pid: (idx % 8) + 1 for idx, pid in enumerate(ranked)}
         self.claims_by_exp: dict[str, list[dict]] = defaultdict(list)
         for claim in self.claims:
             for evidence in claim.get("evidence", []):
@@ -2198,7 +2200,7 @@ class SiteBuilder:
             queued = [item for item in self.queue if pid in item.get("programs", [])]
             if queued:
                 queue_items = "".join(
-                    f'<li><span class="chip effort" title="Queue priority: P0 = do next, P2 = later">{esc(item.get("priority", ""))}</span> '
+                    f'<li><span class="chip prio prio-{esc(str(item.get("priority", "")).lower())}" title="Queue priority: P0 = do next, P2 = later">{esc(item.get("priority", ""))}</span> '
                     f'<a href="{page_prefix}queue/#{esc(slugify(str(item.get("id") or item.get("title", ""))))}">'
                     f'{esc(item.get("title", ""))}</a></li>'
                     for item in queued
