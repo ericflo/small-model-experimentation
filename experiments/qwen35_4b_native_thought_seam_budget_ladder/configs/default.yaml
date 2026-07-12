@@ -1,0 +1,69 @@
+schema_version: 1
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+  dtype: bfloat16
+  attention: sdpa
+  device: cuda:0
+  think_open_id: 248068
+  think_close_id: 248069
+
+seeds:
+  split: 2026071251
+  budget_selection: 2026071252
+  seam_confirmation: 2026071253
+
+data:
+  budget_selection_tasks: 16
+  seam_confirmation_tasks: 24
+  depth: 2
+  visible_examples: 8
+  hidden_examples: 8
+  operation_aliases:
+    reverse: cat
+    sort_asc: dog
+    sort_desc: horse
+    abs_all: tiger
+    square: apple
+    negate: lemon
+    running_sum: river
+    adjacent_diff: ocean
+    add_k: silver
+    mul_k: gold
+    take_k: circle
+    rotate_k: square
+
+generation:
+  temperature: 0.6
+  top_p: 0.95
+  top_k: 20
+  budget_rungs: [256, 512, 1024]
+  answer_max_tokens: 16
+  prompt_max_tokens: 768
+  total_max_tokens: 2048
+  traces_per_task: 3
+  minimum_usable_think_tokens: 16
+  batch_size: 1
+  use_cache: true
+
+gates:
+  selection:
+    natural_close_rate_min: 0.80
+    conditional_parse_rate_min: 0.90
+    usable_traces_min: 32
+    usable_success_rate_min: 0.05
+    usable_success_rate_max: 0.95
+    mixed_usable_tasks_min: 6
+  confirmation:
+    natural_close_rate_min: 0.80
+    natural_close_wilson_lower_min: 0.70
+    conditional_parse_rate_min: 0.90
+    usable_traces_min: 48
+    usable_success_rate_min: 0.05
+    usable_success_rate_max: 0.95
+    mixed_usable_tasks_min: 8
+
+design_boundary:
+  commit: PENDING_DESIGN_COMMIT
+  readme_sha256: PENDING_DESIGN_COMMIT
+  preregistration_sha256: PENDING_DESIGN_COMMIT

@@ -1,0 +1,90 @@
+{
+  "budget_rungs": [
+    256,
+    512,
+    1024
+  ],
+  "firewall": {
+    "benchmark_content_used": false,
+    "fresh_procedural_only": true,
+    "visible_first_type_identifiable_by_exhaustive_enumeration": true
+  },
+  "identifiable_first_operations": [
+    "reverse",
+    "sort_asc",
+    "sort_desc",
+    "abs_all",
+    "square",
+    "running_sum",
+    "adjacent_diff",
+    "add_k",
+    "mul_k",
+    "take_k",
+    "rotate_k"
+  ],
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "operation_aliases": {
+    "abs_all": "tiger",
+    "add_k": "silver",
+    "adjacent_diff": "ocean",
+    "mul_k": "gold",
+    "negate": "lemon",
+    "reverse": "cat",
+    "rotate_k": "square",
+    "running_sum": "river",
+    "sort_asc": "dog",
+    "sort_desc": "horse",
+    "square": "apple",
+    "take_k": "circle"
+  },
+  "parent_fingerprint_counts": {
+    "qwen35_4b_jacobian_value_transport": 336,
+    "qwen35_4b_native_thought_jacobian_value_transport": 80
+  },
+  "schema_version": 1,
+  "scientific_result": false,
+  "splits": {
+    "budget_selection": {
+      "first_op_counts": {
+        "abs_all": 1,
+        "add_k": 2,
+        "adjacent_diff": 2,
+        "mul_k": 2,
+        "reverse": 1,
+        "rotate_k": 1,
+        "running_sum": 2,
+        "sort_asc": 1,
+        "sort_desc": 1,
+        "square": 1,
+        "take_k": 2
+      },
+      "items": 16,
+      "parent_overlap": 0,
+      "path": "data/procedural/budget_selection.jsonl",
+      "sha256": "11d70de5cfdb31d6fa618ac69f7a4c4ac9dfe4a6722f7dc8cb2c79a2592202cf",
+      "unique_fingerprints": 16
+    },
+    "seam_confirmation": {
+      "first_op_counts": {
+        "abs_all": 2,
+        "add_k": 2,
+        "adjacent_diff": 2,
+        "mul_k": 2,
+        "reverse": 2,
+        "rotate_k": 2,
+        "running_sum": 2,
+        "sort_asc": 3,
+        "sort_desc": 3,
+        "square": 2,
+        "take_k": 2
+      },
+      "items": 24,
+      "parent_overlap": 0,
+      "path": "data/procedural/seam_confirmation.jsonl",
+      "sha256": "58f77530b34b85af2f3ba882136cc1519d2fe2e8f7ddf6e3ab5ee8d8998352af",
+      "unique_fingerprints": 24
+    }
+  },
+  "total_unique_fingerprints": 40
+}

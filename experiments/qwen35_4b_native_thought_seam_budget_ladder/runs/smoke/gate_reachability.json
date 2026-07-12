@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "receipts": {
+    "confirmation": {
+      "minimum_close_count": 58,
+      "minimum_mixed_tasks": 8,
+      "minimum_usable_count": 48,
+      "passed": true,
+      "tasks": 24,
+      "traces": 72
+    },
+    "selection": {
+      "minimum_close_count": 39,
+      "minimum_mixed_tasks": 6,
+      "minimum_usable_count": 32,
+      "passed": true,
+      "tasks": 16,
+      "traces": 48
+    }
+  },
+  "schema_version": 1,
+  "scientific_result": false,
+  "stage": "gate_reachability"
+}

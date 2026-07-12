@@ -2,6 +2,39 @@
  "note": "Plain-language practitioner briefs shown above the fold on each experiment page (verdict + the-one-idea/question/finding/why-it-matters + KPI numbers + per-chart how-to-read/takeaway). Authored per experiment from its own README/report and verified chart specs under a strict no-jargon ban-list; all jargon-precise detail stays below the fold. Regenerate with scripts/enrichment/generate_briefs.workflow.js (see docs/site_maintenance.md).",
  "generated_on": "2026-07-05",
  "experiments": {
+  "qwen35_4b_native_thought_seam_budget_ladder": {
+   "verdict_tag": "A fresh natural-reasoning budget test is frozen and ready",
+   "concept_primer": "The previous study stopped before its main question because every model response was still reasoning when the 160-token limit arrived. This follow-up first finds a limit at which the model can finish naturally, then checks that choice on new tasks.",
+   "plain_question": "What is the smallest reasoning allowance that lets the model naturally finish and give a usable answer often enough for the next internal-state experiment?",
+   "plain_answer": "Not yet: the experiment is preregistered but no model outcome has been opened. It will compare 256, 512, and 1,024 reasoning steps on 16 fresh tasks, choose the smallest passing allowance, and test only that choice on 24 untouched tasks.",
+   "why_it_matters": "A promising-looking score after forcing the model to stop would describe an artificial state. Confirming a naturally reached answer boundary first keeps the later search for an internal promise signal honest.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Fresh procedural tasks",
+     "value": "40",
+     "sub": "16 for selection and 24 untouched for confirmation"
+    },
+    {
+     "label": "Frozen reasoning limits",
+     "value": "3",
+     "sub": "256, 512, and 1,024 steps"
+    },
+    {
+     "label": "Model outcomes opened",
+     "value": "0",
+     "sub": "the design review and CPU checks came first"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "The three reasoning allowances are fixed in advance",
+     "chart_read": "The bars show the three maximum reasoning lengths the selection stage will test. The experiment must choose the smallest one that clears every finish, format, and answer-variation check.",
+     "chart_takeaway": "The ladder ends at 1,024; no extra rung can be added after seeing results, and confirmation gets only the selected allowance."
+    }
+   ]
+  },
   "qwen35_4b_native_thought_jacobian_value_transport": {
    "verdict_tag": "Stopped before value: every trace was still thinking at the cap",
    "concept_primer": "A prior experiment proved that an early internal word state can be replaced and then used in a later lookup. This study asks whether one internal 'this path is promising' quantity can be found and changed while the model is naturally thinking.",

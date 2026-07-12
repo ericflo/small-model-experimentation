@@ -1,0 +1,20 @@
+schema_version: 1
+experiment_id: "qwen35_4b_native_thought_seam_budget_ladder"
+external_artifacts: []
+omitted_artifacts: []
+reproducibility:
+  smoke_command: >-
+    PYTHONDONTWRITEBYTECODE=1 .venv/bin/python
+    experiments/qwen35_4b_native_thought_seam_budget_ladder/scripts/run.py
+    --stage smoke
+  full_command: >-
+    .venv/bin/python
+    experiments/qwen35_4b_native_thought_seam_budget_ladder/scripts/run.py
+    --stage budget-selection && .venv/bin/python
+    experiments/qwen35_4b_native_thought_seam_budget_ladder/scripts/run.py
+    --stage seam-confirmation
+  required_external_artifacts: []
+notes: >-
+  At design time, all generated procedural data and CPU receipts are committed.
+  No model call has occurred and no artifact is external or omitted. Scientific
+  rows will be buffered to stage completion and committed if their stage runs.

@@ -26,6 +26,11 @@
 
 ## Next Experiments
 
+- **In progress, cross-program seam calibration:**
+  `qwen35_4b_native_thought_seam_budget_ladder` selects the smallest natural
+  close-and-commit cap from 256/512/1024 on fresh list-operation tasks, then
+  opens only that cap on an untouched confirmation split. It is setup for a
+  Jacobian value study, not a budget-policy or capability result.
 - Completed cross-program qualification negative:
   `qwen35_4b_pareto_policy_integration` found that C54's short/deep tier labels
   did not become a clean procedural teacher crossover. `blend` lost both quick

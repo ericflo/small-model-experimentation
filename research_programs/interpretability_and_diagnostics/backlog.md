@@ -2,12 +2,12 @@
 
 ## Next Experiments
 
-- Repair the native-thinking seam in a new experiment before retrying value:
-  preregister a selection-only natural-close cap ladder (256/512/1024), freeze
-  the smallest cap meeting close/parse/headroom gates, confirm it on fresh tasks,
-  and measure same-length semantic invariance separately from Qwen's observed
-  sequence-length numerical drift. Any future patch must construct exact random
-  controls dynamically at every live sequence length.
+- **In progress:** `qwen35_4b_native_thought_seam_budget_ladder` freezes the
+  required selection-only natural-close ladder (256/512/1024), smallest-cap
+  rule, and fresh same-cap confirmation. Its 32-threat adversarial review
+  forbids forced close, a larger-cap confirmation rescue, and pseudo-replicating
+  the paired rungs. Any future patch must replay the exact live prefix and
+  construct exact random controls dynamically at every sequence length.
 - Only after that seam passes, retry the frozen thought-prefix value design:
   continuation labels, held-out-by-task J value, then scalar causal patching
   against exact random, shuffled-axis, identity, logit, ActAdd, raw, and non-J

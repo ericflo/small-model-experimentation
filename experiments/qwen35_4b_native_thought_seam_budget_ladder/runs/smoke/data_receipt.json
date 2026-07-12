@@ -1,0 +1,14 @@
+{
+  "gate_reachability_pass": true,
+  "items": 40,
+  "parent_overlap": 0,
+  "passed": true,
+  "schema_version": 1,
+  "scientific_result": false,
+  "split_sizes": {
+    "budget_selection": 16,
+    "seam_confirmation": 24
+  },
+  "stage": "cpu_smoke",
+  "unique_fingerprints": 40
+}
