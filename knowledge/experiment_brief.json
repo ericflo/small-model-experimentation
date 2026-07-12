@@ -1770,35 +1770,35 @@
    ]
   },
   "qwen35_4b_commit_slot_semantic_power_replication": {
-   "verdict_tag": "The powered first stage passes; an untouched check remains",
-   "concept_primer": "Before answering, an AI can jot notes on a scratch pad, then choose a final answer from a short list of words. This test asks whether keeping those notes in their original order helps more than jumbling the exact same notes or skipping them.",
-   "plain_question": "Does letting a model work through its thoughts in a sensible order help it pick the right answer better than jumbling those same thoughts or skipping them?",
-   "plain_answer": "The first stage says yes. Across 113 fresh problems, ordered reasoning chose correctly on 92 of 339 paths, versus 46 after shuffling the identical reasoning tokens and the equivalent of 33 immediate-slot successes. The task-level lower bound stayed 8.85 points above zero, and correct choices covered all 11 target answer types. An equally large untouched check must still pass.",
-   "why_it_matters": "The earlier small hint grew into a broad ordered-content effect instead of disappearing with more problems. But this is still qualification, not replication or a proven internal mechanism; the sealed second stage remains decisive.",
-   "verdict_tone": "mixed",
+   "verdict_tag": "Ordered reasoning reliably improved the answer choice",
+   "concept_primer": "Imagine a student jotting rough working on scratch paper, then circling one of twelve short answer choices. Here a language model does the same: it writes out its reasoning, then must pick a single short word as its final answer.",
+   "plain_question": "When a model writes out its reasoning before picking one short answer, does that reasoning actually help it choose correctly, or would any jumble of the same words do just as well?",
+   "plain_answer": "Yes. Across a large fresh batch of problems, the model's ordered reasoning led to the right answer about 27% of the time, roughly double the 14% it managed when the exact same words were scrambled into random order, and clearly better than answering with no reasoning at all.",
+   "why_it_matters": "When you pin a model down to a fixed set of short answer choices, let it reason in its natural order first. Scrambling that reasoning, or skipping it, throws away a real and sizable chunk of its accuracy.",
+   "verdict_tone": "positive",
    "key_numbers": [
     {
-     "label": "Ordered reasoning choices correct",
-     "value": "92/339",
-     "sub": "27.1%, versus 13.6% with the same tokens shuffled"
+     "label": "Correct with ordered reasoning",
+     "value": "27%",
+     "sub": "share of problems answered correctly when reasoning stayed in order"
     },
     {
-     "label": "Task-level ordered gain lower bound",
-     "value": "+8.85pp",
-     "sub": "one-sided 95% lower bound over 113 whole-task units"
+     "label": "Correct with the same words scrambled",
+     "value": "14%",
+     "sub": "identical reasoning words shuffled into random order"
     },
     {
-     "label": "Correct answer types covered",
-     "value": "11/11",
-     "sub": "the frozen breadth gate required at least eight"
+     "label": "Correct with no reasoning at all",
+     "value": "10%",
+     "sub": "picking an answer straight away"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Ordered reasoning beats both matched answer-slot comparisons",
-     "chart_read": "Compare the ordered-reasoning bar with the same reasoning tokens shuffled and with an immediate answer slot. The free-form bar shows the old stop-marker interface for context.",
-     "chart_takeaway": "The first powered stage finds a broad ordered-content benefit, but the equally large untouched confirmation is still required."
+     "chart_plain_title": "How often each answering style picks the right word",
+     "chart_read": "Four bars, one per answering style along the bottom: ordered reasoning, the same words scrambled, no reasoning, and open free-form answering. Bar height is the share of problems answered correctly, so taller is better.",
+     "chart_takeaway": "The ordered-reasoning bar stands nearly twice as tall as every other bar, showing that keeping the reasoning in its natural order genuinely drives correct answers."
     }
    ]
   },
@@ -3056,35 +3056,35 @@
    ]
   },
   "qwen35_4b_forced_commit_jacobian_value_transport": {
-   "verdict_tag": "A stop token did not make the model commit to an answer",
-   "concept_primer": "The model kept reasoning past every natural finishing limit. This study makes stopping an explicit controller action, checks whether the resulting answers are usable, and only then looks for an internal signal that separates promising from weak unfinished work.",
-   "plain_question": "If a fixed budget controller tells the model to stop reasoning and answer now, can an internal promise signal identify and improve the unfinished thoughts that will answer correctly?",
-   "plain_answer": "No. After the controller inserted the stop marker, only 6 to 9 of 48 answers used the required format, just one was correct at each limit, and most responses spent all 16 answer tokens restarting analysis. No limit was selected, so the internal-value test stayed sealed.",
-   "why_it_matters": "A mode delimiter is not the same as an answer slot. Before looking for an internal promise signal, the controller must provide fixed output syntax without supplying the answer itself; otherwise formatting failure overwhelms the science.",
+   "verdict_tag": "Forcing a stop did not produce usable answers",
+   "concept_primer": "Some AI models work through a problem step by step on a hidden scratchpad before writing a final answer. Like a student still scribbling, they sometimes keep working and never decide to stop and write the answer down.",
+   "plain_question": "When a model keeps working on a problem and never wraps up on its own, can you force it to stop and get back a clean, usable answer?",
+   "plain_answer": "No. Forcing the model to stop mid-work did not flip it into answer mode. At every thinking length only about one in eight tries gave even a readable answer, and almost none were correct. It usually kept scribbling or restarted its work instead of filling the answer box.",
+   "why_it_matters": "If you run a model that sometimes never finishes reasoning, do not expect a plain stop signal to yield an answer. Give it an explicit answer slot to fill, not just a cue to quit working.",
    "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Best forced-answer format rate",
-     "value": "9/48",
-     "sub": "18.8% at the 1,024-step limit versus a 90% gate"
+     "label": "Forced stops that gave a readable answer",
+     "value": "about 1 in 8",
+     "sub": "at the tightest thinking length; still low at longer ones"
     },
     {
-     "label": "Correct forced answers",
-     "value": "1/48",
-     "sub": "the same 2.1% at every reasoning limit"
+     "label": "Forced stops that gave a correct answer",
+     "value": "2%",
+     "sub": "same tiny level at every thinking length"
     },
     {
-     "label": "Answers that exhausted their answer budget",
-     "value": "41–46/48",
-     "sub": "the model usually restarted analysis after the stop marker"
+     "label": "Tries that never finished on their own",
+     "value": "up to 96%",
+     "sub": "hit the limit and had to be forced to stop"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Forced answers rarely used the slot and usually hit the limit",
-     "chart_read": "For each reasoning limit, the short bars are usable-format and correct-answer rates; the tall bar is the share that consumed all 16 answer tokens.",
-     "chart_takeaway": "Longer thinking did not repair the emission interface. The stop token alone usually caused more analysis, not a concise answer."
+     "chart_plain_title": "How often forcing a stop yielded a usable answer, by thinking length",
+     "chart_read": "Each cluster is one thinking-length limit. Its three bars show, out of 48 tries, how often forcing a stop gave a readable answer, how often that answer was correct, and how often the model never finished on its own. Taller readable and correct is better.",
+     "chart_takeaway": "No thinking length helped: the readable and correct bars stay tiny while the never-finished bar towers near full height, so forcing a stop never produced usable answers."
     }
    ]
   },
@@ -5133,46 +5133,41 @@
    ]
   },
   "qwen35_4b_same_prefix_advantage_routing": {
-   "verdict_tag": "The local-teacher test is frozen and ready",
-   "concept_primer": "Two specialist models can swap rank from one situation to the next. This test lets both continue from the exact same unfinished attempt, uses one set of outcomes to choose, and a separate set to check whether that choice was genuinely better.",
-   "plain_question": "Can verified local teacher choices teach one small model capabilities that neither source model nor their best weight blend has alone?",
-   "plain_answer": "Not yet: this is the preregistered launch state. Each of 384 fresh failed states gets 24 same-state continuations—eight from each teacher and the current student. Half choose a teacher and half independently test the choice. Training is forbidden unless both teachers beat both alternatives twice.",
-   "why_it_matters": "The previous test fixed its impossible ten-point hurdle but discovered that broad short-versus-deep labels still picked the wrong teacher locally. This design measures the missing premise directly, abstains when no teacher is better, and makes any learned model beat the strongest existing blend, visible routing, controls, and eight-sample search.",
+   "verdict_tag": "Design locked; the decisive test hasn't run",
+   "concept_primer": "Picture a student stuck halfway through a problem. Two tutor versions of the same model, one fast and one careful, each try to finish from that exact spot. You watch which one finishes correctly more often.",
+   "plain_question": "When the model stalls partway through an answer, can we reliably tell which tutor version finishes it best, and then train the model to copy that tutor?",
+   "plain_answer": "Not yet. The plan is fully locked and the plumbing is verified: the model, the two tutors, and the scoring machinery all load and behave correctly. But the central test, whether a genuinely better tutor even exists at these stuck spots, has not been run.",
+   "why_it_matters": "Before teaching a model to imitate a helper that looks better, confirm the helper truly wins on a fresh, separate batch of attempts. A choice judged on the very same attempts used to make it can easily fool you.",
    "verdict_tone": "neutral",
    "key_numbers": [
     {
-     "label": "Fresh qualification states",
-     "value": "384",
-     "sub": "192 in each of two independent blocks"
+     "label": "Attempts to pick the better tutor",
+     "value": "4,608",
+     "sub": "finish-the-answer tries from stuck spots"
     },
     {
-     "label": "Continuations per state",
-     "value": "24",
-     "sub": "eight each from quick, deep, and current student"
+     "label": "Separate attempts to confirm the pick",
+     "value": "4,608",
+     "sub": "an untouched set, so the choice cannot fool itself"
     },
     {
-     "label": "Arbitrary gain floor",
-     "value": "0",
-     "sub": "any replicated advantage above zero can qualify"
-    },
-    {
-     "label": "Full-update units per round",
-     "value": "80",
-     "sub": "30 per specialist plus 20 preservation anchors"
+     "label": "Training batches each round: copy tutors vs stay near original",
+     "value": "60 vs 20",
+     "sub": "three-quarters imitates the tutors, one-quarter guards against drifting"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Teacher choice and teacher proof use equal, separate evidence",
-     "chart_read": "The two bars count planned continuation branches across both fresh blocks. The first half may choose a teacher; the second half alone measures whether that choice helped.",
-     "chart_takeaway": "The design spends just as much evidence checking a teacher choice as making it, preventing a lucky winner from certifying itself."
+     "chart_plain_title": "Equal attempts for picking a tutor and double-checking it",
+     "chart_read": "Two bars show how many finish-the-answer attempts the plan reserves. The left bar picks which tutor looks best; the right, equally tall bar is a separate untouched set kept only to confirm that pick. A large confirm set is the careful choice.",
+     "chart_takeaway": "The two bars are exactly the same height: every attempt spent picking a tutor is matched by a fresh, untouched attempt spent verifying that pick."
     },
     {
      "index": 1,
-     "chart_plain_title": "Every update round balances both teachers with preservation",
-     "chart_read": "Bars show the consume-once training units assigned to the quick teacher, deep teacher, and frozen starting-model anchor in each round.",
-     "chart_takeaway": "Neither specialist can dominate the update stream, and one quarter of the pressure explicitly preserves the strongest starting blend."
+     "chart_plain_title": "Each training round copies the tutors but keeps ties to the original",
+     "chart_read": "Three bars show how many training batches each round spends. Two equal bars copy the fast tutor and the careful tutor; a shorter third bar practices staying close to the original model so it does not drift. Taller copying bars mean more imitation.",
+     "chart_takeaway": "The two tutor bars are equal and each taller than the anchor bar: three-quarters of training imitates the tutors, one-quarter guards against drifting from the original."
     }
    ]
   },
