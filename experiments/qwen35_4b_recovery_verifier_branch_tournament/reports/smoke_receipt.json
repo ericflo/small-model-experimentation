@@ -1,0 +1,48 @@
+{
+  "benchmark_content_accessed": false,
+  "branch_reserved_sampled_tokens": 6144,
+  "input_hashes": {
+    "model/action": "991d2da239ac2878dccac72ece419b00f37ac15d6a970538f384c36162b89aea",
+    "model/base": "c933168075a0fc011f31ee54f83d722cc91423ce1a0ac19bfe40dfab92f608d5",
+    "model/candidate": "72a93f9030cffea741265849ea9ce404d6f4a0d74d887f7ce13eea3dfe9391ea",
+    "retrospective/transfer_confirm/action": "895e508e06c47ceaf0e41f5dd90fd1de4e3f3f3ec28fc44fd6f4c0a83e6b4c09",
+    "retrospective/transfer_confirm/candidate": "d64895e724c01e9b2e5235836ea878da0611cd136617607d4bd95998d2dd7472",
+    "retrospective/transfer_dev/action": "bad208cbb42d282f6643d9165c644215dccaa2c99f11778a94ee360e908a5513",
+    "retrospective/transfer_dev/candidate": "834ab2ac12561ca0c42a75e81351b08ff62bf50e05be2d9fb6d3636ae4804714"
+  },
+  "model": "Qwen/Qwen3.5-4B",
+  "prospective_blocks_disjoint": true,
+  "prospective_families": [
+    "deadline_queue",
+    "interval_coalescer",
+    "atomic_reservations",
+    "fallback_resolver"
+  ],
+  "retrospective_qualification": {
+    "transfer_confirm": {
+      "expected_random_success": 0.6875,
+      "oracle_union_capture": 0.9523809523809523,
+      "oracle_union_success": 0.7875,
+      "public_success": 0.75,
+      "selection_counts": {
+        "action": 6,
+        "candidate": 74
+      }
+    },
+    "transfer_dev": {
+      "expected_random_success": 0.6875,
+      "oracle_union_capture": 0.9523809523809523,
+      "oracle_union_success": 0.7875,
+      "public_success": 0.75,
+      "selection_counts": {
+        "action": 5,
+        "candidate": 75
+      }
+    }
+  },
+  "sample_more_reserved_sampled_tokens": 12288,
+  "schema_version": 1,
+  "selector_uses_hidden_outcomes": false,
+  "status": "PASS",
+  "tournament_reserved_sampled_tokens": 12288
+}

@@ -5439,6 +5439,44 @@
    ],
    "charts": []
   },
+  "qwen35_4b_recovery_verifier_branch_tournament": {
+   "verdict_tag": "Visible tests will arbitrate complementary repairs",
+   "concept_primer": "Two mechanics may each fix failures the other misses. Instead of guessing which one is better, let both work in separate copies and keep the repair that alone passes the visible checks.",
+   "plain_question": "Can visible tests combine two complementary coding policies better than spending the same model budget on more attempts from either one?",
+   "plain_answer": "Not known yet. The fixed rule recovered 75% on two completed design blocks, but it must now beat two full attempts from either policy on four entirely new problem types.",
+   "why_it_matters": "A win would provide stronger verified examples for later training without relying on secret outcomes or a fragile learned router. A loss prevents wasting compute on compressing accidental complementarity.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Design-block recovery",
+     "value": "75% twice",
+     "sub": "same frozen visible-test rule on two completed blocks"
+    },
+    {
+     "label": "Combined ceiling",
+     "value": "79% twice",
+     "sub": "either source policy produced a correct workspace"
+    },
+    {
+     "label": "Per-case model allowance",
+     "value": "12 calls",
+     "sub": "identical for mixed policies and more-attempt controls"
+    },
+    {
+     "label": "New problem types",
+     "value": "4",
+     "sub": "absent from all earlier recovery blocks"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Visible checks recover most complementary wins",
+     "chart_read": "The two horizontal groups are completed design blocks, and taller bars mean more repaired repositories. Bars compare random policy choice, the frozen visible-test rule, and the best possible combined ceiling.",
+     "chart_takeaway": "The middle bar repeats at 75%, six points above random choice and only four below the combined ceiling on both blocks."
+    }
+   ]
+  },
   "qwen35_4b_reliability_exec_opsd_audit": {
    "verdict_tag": "Leans toward correct code yet still ships bugs",
    "concept_primer": "The model writes several candidate programs by adapting retrieved algorithms. Wherever a correct and a buggy version diverge, it already leans the right way almost every time — yet, like a chess player who sees the best move but plays a worse one, it never assembles a working program.",

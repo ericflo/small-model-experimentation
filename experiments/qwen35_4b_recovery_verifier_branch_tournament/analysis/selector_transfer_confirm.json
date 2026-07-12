@@ -1,0 +1,1109 @@
+{
+  "action_default": {
+    "answer_cap_hit_rate_per_turn": 0.0783132530120482,
+    "invalid_action_rate_per_turn": 0.0030120481927710845,
+    "mean_selected_sampled_tokens": 1507.85,
+    "n": 80,
+    "per_family": {
+      "lease_cache": {
+        "n": 20,
+        "success": 1.0
+      },
+      "pattern_router": {
+        "n": 20,
+        "success": 0.4
+      },
+      "quorum_value": {
+        "n": 20,
+        "success": 1.0
+      },
+      "rate_buckets": {
+        "n": 20,
+        "success": 0.55
+      }
+    },
+    "per_scenario": {
+      "failed_test": {
+        "changed_patch_within_two": 1.0,
+        "n": 40,
+        "success": 0.525
+      },
+      "rejected_patch": {
+        "changed_patch_within_two": 1.0,
+        "n": 40,
+        "success": 0.95
+      }
+    },
+    "success": 0.7375,
+    "successes": 59,
+    "verified_rate": 1.0
+  },
+  "block": "transfer_confirm",
+  "cases": [
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-lease_cache-s84900-000::failed_test",
+      "family": "lease_cache",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-lease_cache-s84900-000::rejected_patch",
+      "family": "lease_cache",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-lease_cache-s84900-001::failed_test",
+      "family": "lease_cache",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-lease_cache-s84900-001::rejected_patch",
+      "family": "lease_cache",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-lease_cache-s84900-002::failed_test",
+      "family": "lease_cache",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-lease_cache-s84900-002::rejected_patch",
+      "family": "lease_cache",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-lease_cache-s84900-003::failed_test",
+      "family": "lease_cache",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-lease_cache-s84900-003::rejected_patch",
+      "family": "lease_cache",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-lease_cache-s84900-004::failed_test",
+      "family": "lease_cache",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-lease_cache-s84900-004::rejected_patch",
+      "family": "lease_cache",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-lease_cache-s84900-005::failed_test",
+      "family": "lease_cache",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-lease_cache-s84900-005::rejected_patch",
+      "family": "lease_cache",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-lease_cache-s84900-006::failed_test",
+      "family": "lease_cache",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-lease_cache-s84900-006::rejected_patch",
+      "family": "lease_cache",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-lease_cache-s84900-007::failed_test",
+      "family": "lease_cache",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-lease_cache-s84900-007::rejected_patch",
+      "family": "lease_cache",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-lease_cache-s84900-008::failed_test",
+      "family": "lease_cache",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-lease_cache-s84900-008::rejected_patch",
+      "family": "lease_cache",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-lease_cache-s84900-009::failed_test",
+      "family": "lease_cache",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-lease_cache-s84900-009::rejected_patch",
+      "family": "lease_cache",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": false,
+      "candidate_public_pass": true,
+      "candidate_success": false,
+      "case_id": "recovery-transfer_confirm-pattern_router-s84900-000::failed_test",
+      "family": "pattern_router",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": false,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-pattern_router-s84900-000::rejected_patch",
+      "family": "pattern_router",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": false,
+      "candidate_public_pass": true,
+      "candidate_success": false,
+      "case_id": "recovery-transfer_confirm-pattern_router-s84900-001::failed_test",
+      "family": "pattern_router",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": false,
+      "candidate_success": false,
+      "case_id": "recovery-transfer_confirm-pattern_router-s84900-001::rejected_patch",
+      "family": "pattern_router",
+      "public_arm": "action",
+      "random_arm": "action",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": false,
+      "candidate_public_pass": true,
+      "candidate_success": false,
+      "case_id": "recovery-transfer_confirm-pattern_router-s84900-002::failed_test",
+      "family": "pattern_router",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": false,
+      "candidate_success": false,
+      "case_id": "recovery-transfer_confirm-pattern_router-s84900-002::rejected_patch",
+      "family": "pattern_router",
+      "public_arm": "action",
+      "random_arm": "action",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": false,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-pattern_router-s84900-003::failed_test",
+      "family": "pattern_router",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": false,
+      "candidate_success": false,
+      "case_id": "recovery-transfer_confirm-pattern_router-s84900-003::rejected_patch",
+      "family": "pattern_router",
+      "public_arm": "action",
+      "random_arm": "action",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": false,
+      "candidate_public_pass": true,
+      "candidate_success": false,
+      "case_id": "recovery-transfer_confirm-pattern_router-s84900-004::failed_test",
+      "family": "pattern_router",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": false,
+      "case_id": "recovery-transfer_confirm-pattern_router-s84900-004::rejected_patch",
+      "family": "pattern_router",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": false,
+      "candidate_public_pass": true,
+      "candidate_success": false,
+      "case_id": "recovery-transfer_confirm-pattern_router-s84900-005::failed_test",
+      "family": "pattern_router",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": false,
+      "candidate_success": false,
+      "case_id": "recovery-transfer_confirm-pattern_router-s84900-005::rejected_patch",
+      "family": "pattern_router",
+      "public_arm": "action",
+      "random_arm": "action",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": false,
+      "candidate_public_pass": true,
+      "candidate_success": false,
+      "case_id": "recovery-transfer_confirm-pattern_router-s84900-006::failed_test",
+      "family": "pattern_router",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": false,
+      "candidate_success": false,
+      "case_id": "recovery-transfer_confirm-pattern_router-s84900-006::rejected_patch",
+      "family": "pattern_router",
+      "public_arm": "action",
+      "random_arm": "action",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": false,
+      "candidate_public_pass": true,
+      "candidate_success": false,
+      "case_id": "recovery-transfer_confirm-pattern_router-s84900-007::failed_test",
+      "family": "pattern_router",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-pattern_router-s84900-007::rejected_patch",
+      "family": "pattern_router",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": false,
+      "candidate_public_pass": true,
+      "candidate_success": false,
+      "case_id": "recovery-transfer_confirm-pattern_router-s84900-008::failed_test",
+      "family": "pattern_router",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": false,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-pattern_router-s84900-008::rejected_patch",
+      "family": "pattern_router",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": false,
+      "candidate_public_pass": true,
+      "candidate_success": false,
+      "case_id": "recovery-transfer_confirm-pattern_router-s84900-009::failed_test",
+      "family": "pattern_router",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": false,
+      "case_id": "recovery-transfer_confirm-pattern_router-s84900-009::rejected_patch",
+      "family": "pattern_router",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-quorum_value-s84900-000::failed_test",
+      "family": "quorum_value",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-quorum_value-s84900-000::rejected_patch",
+      "family": "quorum_value",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-quorum_value-s84900-001::failed_test",
+      "family": "quorum_value",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-quorum_value-s84900-001::rejected_patch",
+      "family": "quorum_value",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-quorum_value-s84900-002::failed_test",
+      "family": "quorum_value",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-quorum_value-s84900-002::rejected_patch",
+      "family": "quorum_value",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-quorum_value-s84900-003::failed_test",
+      "family": "quorum_value",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-quorum_value-s84900-003::rejected_patch",
+      "family": "quorum_value",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-quorum_value-s84900-004::failed_test",
+      "family": "quorum_value",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-quorum_value-s84900-004::rejected_patch",
+      "family": "quorum_value",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-quorum_value-s84900-005::failed_test",
+      "family": "quorum_value",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-quorum_value-s84900-005::rejected_patch",
+      "family": "quorum_value",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-quorum_value-s84900-006::failed_test",
+      "family": "quorum_value",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-quorum_value-s84900-006::rejected_patch",
+      "family": "quorum_value",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-quorum_value-s84900-007::failed_test",
+      "family": "quorum_value",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-quorum_value-s84900-007::rejected_patch",
+      "family": "quorum_value",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-quorum_value-s84900-008::failed_test",
+      "family": "quorum_value",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-quorum_value-s84900-008::rejected_patch",
+      "family": "quorum_value",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-quorum_value-s84900-009::failed_test",
+      "family": "quorum_value",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-quorum_value-s84900-009::rejected_patch",
+      "family": "quorum_value",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": false,
+      "candidate_public_pass": true,
+      "candidate_success": false,
+      "case_id": "recovery-transfer_confirm-rate_buckets-s84900-000::failed_test",
+      "family": "rate_buckets",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-rate_buckets-s84900-000::rejected_patch",
+      "family": "rate_buckets",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": false,
+      "candidate_public_pass": true,
+      "candidate_success": false,
+      "case_id": "recovery-transfer_confirm-rate_buckets-s84900-001::failed_test",
+      "family": "rate_buckets",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-rate_buckets-s84900-001::rejected_patch",
+      "family": "rate_buckets",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": false,
+      "candidate_public_pass": true,
+      "candidate_success": false,
+      "case_id": "recovery-transfer_confirm-rate_buckets-s84900-002::failed_test",
+      "family": "rate_buckets",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-rate_buckets-s84900-002::rejected_patch",
+      "family": "rate_buckets",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": false,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-rate_buckets-s84900-003::failed_test",
+      "family": "rate_buckets",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-rate_buckets-s84900-003::rejected_patch",
+      "family": "rate_buckets",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": false,
+      "candidate_public_pass": true,
+      "candidate_success": false,
+      "case_id": "recovery-transfer_confirm-rate_buckets-s84900-004::failed_test",
+      "family": "rate_buckets",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "candidate",
+      "action_public_pass": false,
+      "action_success": false,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-rate_buckets-s84900-004::rejected_patch",
+      "family": "rate_buckets",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": false,
+      "candidate_public_pass": true,
+      "candidate_success": false,
+      "case_id": "recovery-transfer_confirm-rate_buckets-s84900-005::failed_test",
+      "family": "rate_buckets",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "candidate",
+      "action_public_pass": false,
+      "action_success": false,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-rate_buckets-s84900-005::rejected_patch",
+      "family": "rate_buckets",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": false,
+      "candidate_public_pass": true,
+      "candidate_success": false,
+      "case_id": "recovery-transfer_confirm-rate_buckets-s84900-006::failed_test",
+      "family": "rate_buckets",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-rate_buckets-s84900-006::rejected_patch",
+      "family": "rate_buckets",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": false,
+      "candidate_public_pass": true,
+      "candidate_success": false,
+      "case_id": "recovery-transfer_confirm-rate_buckets-s84900-007::failed_test",
+      "family": "rate_buckets",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "candidate",
+      "action_public_pass": false,
+      "action_success": false,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-rate_buckets-s84900-007::rejected_patch",
+      "family": "rate_buckets",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": false,
+      "candidate_public_pass": false,
+      "candidate_success": false,
+      "case_id": "recovery-transfer_confirm-rate_buckets-s84900-008::failed_test",
+      "family": "rate_buckets",
+      "public_arm": "action",
+      "random_arm": "action",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-rate_buckets-s84900-008::rejected_patch",
+      "family": "rate_buckets",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "rejected_patch"
+    },
+    {
+      "action_default_arm": "action",
+      "action_public_pass": true,
+      "action_success": true,
+      "candidate_public_pass": true,
+      "candidate_success": false,
+      "case_id": "recovery-transfer_confirm-rate_buckets-s84900-009::failed_test",
+      "family": "rate_buckets",
+      "public_arm": "candidate",
+      "random_arm": "candidate",
+      "scenario": "failed_test"
+    },
+    {
+      "action_default_arm": "candidate",
+      "action_public_pass": false,
+      "action_success": false,
+      "candidate_public_pass": true,
+      "candidate_success": true,
+      "case_id": "recovery-transfer_confirm-rate_buckets-s84900-009::rejected_patch",
+      "family": "rate_buckets",
+      "public_arm": "candidate",
+      "random_arm": "action",
+      "scenario": "rejected_patch"
+    }
+  ],
+  "expected_random": {
+    "success": 0.6875
+  },
+  "mean_total_branch_sampled_tokens": 2800.9625,
+  "oracle_union": {
+    "public_capture": 0.9523809523809523,
+    "success": 0.7875,
+    "successes": 63
+  },
+  "public": {
+    "answer_cap_hit_rate_per_turn": 0.05387205387205387,
+    "invalid_action_rate_per_turn": 0.013468013468013467,
+    "mean_selected_sampled_tokens": 1176.175,
+    "n": 80,
+    "per_family": {
+      "lease_cache": {
+        "n": 20,
+        "success": 1.0
+      },
+      "pattern_router": {
+        "n": 20,
+        "success": 0.45
+      },
+      "quorum_value": {
+        "n": 20,
+        "success": 1.0
+      },
+      "rate_buckets": {
+        "n": 20,
+        "success": 0.55
+      }
+    },
+    "per_scenario": {
+      "failed_test": {
+        "changed_patch_within_two": 1.0,
+        "n": 40,
+        "success": 0.55
+      },
+      "rejected_patch": {
+        "changed_patch_within_two": 1.0,
+        "n": 40,
+        "success": 0.95
+      }
+    },
+    "success": 0.75,
+    "successes": 60,
+    "verified_rate": 1.0
+  },
+  "random": {
+    "answer_cap_hit_rate_per_turn": 0.0594059405940594,
+    "invalid_action_rate_per_turn": 0.0,
+    "mean_selected_sampled_tokens": 1246.7125,
+    "n": 80,
+    "per_family": {
+      "lease_cache": {
+        "n": 20,
+        "success": 1.0
+      },
+      "pattern_router": {
+        "n": 20,
+        "success": 0.55
+      },
+      "quorum_value": {
+        "n": 20,
+        "success": 1.0
+      },
+      "rate_buckets": {
+        "n": 20,
+        "success": 0.4
+      }
+    },
+    "per_scenario": {
+      "failed_test": {
+        "changed_patch_within_two": 1.0,
+        "n": 40,
+        "success": 0.525
+      },
+      "rejected_patch": {
+        "changed_patch_within_two": 1.0,
+        "n": 40,
+        "success": 0.95
+      }
+    },
+    "success": 0.7375,
+    "successes": 59,
+    "verified_rate": 0.975
+  },
+  "reserved_sampled_tokens_per_case": 12288,
+  "schema_version": 1,
+  "selection_counts": {
+    "action_default": {
+      "action": 76,
+      "candidate": 4
+    },
+    "public": {
+      "action": 6,
+      "candidate": 74
+    },
+    "random": {
+      "action": 43,
+      "candidate": 37
+    }
+  },
+  "selector_rule": "choose action iff action final_visible_pass and candidate not; otherwise choose candidate",
+  "task_manifest_sha256": "ad6f5dd2dc1fc2865a1a6622eb383842e0de360e9d66f13987a3668613a1048d"
+}

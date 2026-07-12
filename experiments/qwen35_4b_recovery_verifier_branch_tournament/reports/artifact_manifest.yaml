@@ -1,0 +1,37 @@
+schema_version: 1
+experiment_id: "qwen35_4b_recovery_verifier_branch_tournament"
+
+external_artifacts:
+  - name: frozen model checkpoints
+    storage: large_artifacts/qwen35_4b_repo_search_compress_bank/merged, large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/merged, and large_artifacts/qwen35_4b_recovery_reason_locality_interpolation/merged
+    required_for: prospective branches and controls
+    checksum: exact per-model SHA-256 values in configs/default.yaml
+    regenerate: follow source experiments; never retrain in this directory
+  - name: frozen retrospective branch trajectories
+    storage: large_artifacts/qwen35_4b_recovery_payload_budget_harness/eval
+    required_for: selector qualification only
+    checksum: exact per-file SHA-256 values in configs/default.yaml
+    regenerate: run the predecessor's frozen full command
+  - name: detailed prospective tournament evaluations
+    storage: large_artifacts/qwen35_4b_recovery_verifier_branch_tournament
+    required_for: development, confirmation, and reproduction
+    checksum: pending result receipt
+    regenerate: .venv/bin/python experiments/qwen35_4b_recovery_verifier_branch_tournament/scripts/run.py --full
+
+omitted_artifacts:
+  - path: large_artifacts/qwen35_4b_recovery_verifier_branch_tournament/eval
+    reason: detailed generated trajectories and fixture content are large
+
+reproducibility:
+  smoke_command: .venv/bin/python experiments/qwen35_4b_recovery_verifier_branch_tournament/scripts/run.py --smoke
+  gpu_smoke_command: .venv/bin/python experiments/qwen35_4b_recovery_verifier_branch_tournament/scripts/run.py --gpu-smoke
+  full_command: .venv/bin/python experiments/qwen35_4b_recovery_verifier_branch_tournament/scripts/run.py --full
+  required_external_artifacts:
+    - large_artifacts/qwen35_4b_repo_search_compress_bank/merged/apex_replay
+    - large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/merged/recovery_action
+    - large_artifacts/qwen35_4b_recovery_reason_locality_interpolation/merged/reason_mix_018
+    - large_artifacts/qwen35_4b_recovery_payload_budget_harness/eval
+
+notes: >-
+  This experiment trains no weights and never opens Menagerie. Passing both
+  prospective blocks authorizes a separate winner-bank experiment only.

@@ -63,6 +63,12 @@
   then test whether one local checkpoint can compress the tournament. Never
   route on family identity or hidden outcomes. The oracle ceiling is 0.7875 on
   each completed transfer block, but it is not a result claim.
+- Active implementation:
+  `qwen35_4b_recovery_verifier_branch_tournament` freezes the minimal
+  visible-pass selector prospectively on four new repository families. It must
+  beat pass-if-either candidate and action sample-more at identical 12-call
+  reservation on dev and confirm before a separate transition-balanced winner
+  bank is authorized. Menagerie remains sealed in this harness-only stage.
 - Future retraining should calibrate plan dose by realized gradient/surprisal
   and avoid supervising plan starts already rank 1 or wildly off-policy lexical
   templates.

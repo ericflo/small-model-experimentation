@@ -45336,6 +45336,47 @@
     }
    ]
   },
+  "qwen35_4b_recovery_verifier_branch_tournament": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "A visible-pass rule captures most of the two-policy recovery union",
+     "categories": [
+      "retrospective development",
+      "retrospective confirmation"
+     ],
+     "series": [
+      {
+       "label": "expected random policy choice",
+       "values": [
+        0.6875,
+        0.6875
+       ]
+      },
+      {
+       "label": "frozen public selector",
+       "values": [
+        0.75,
+        0.75
+       ]
+      },
+      {
+       "label": "hidden-success union ceiling",
+       "values": [
+        0.7875,
+        0.7875
+       ]
+      }
+     ],
+     "x_label": "completed predecessor block",
+     "y_label": "recovery success",
+     "y_format": "percent01",
+     "note": "Pre-run design evidence only. The frozen rule chooses action-only when it alone passes visible tests and otherwise chooses the reason mixture; prospective scoring uses four new families and cannot change this rule.",
+     "source": "experiments/qwen35_4b_recovery_verifier_branch_tournament/analysis/selector_transfer_dev.json and experiments/qwen35_4b_recovery_verifier_branch_tournament/analysis/selector_transfer_confirm.json"
+    }
+   ]
+  },
   "qwen35_4b_recovery_payload_budget_harness": {
    "charts": [
     {

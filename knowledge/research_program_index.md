@@ -3,14 +3,14 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 13
-- Experiments: 228
+- Experiments: 229
 
 ## Structured Execution And Compilers
 
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 163
+- Assigned experiments: 164
 
 ### Seed Evidence
 
@@ -91,6 +91,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_probe_the_parameter` (new): [README](../experiments/qwen35_4b_probe_the_parameter/README.md)
 - `qwen35_4b_probe_to_prompt` (new): [README](../experiments/qwen35_4b_probe_to_prompt/README.md)
 - `qwen35_4b_recovery_payload_budget_harness` (new): [README](../experiments/qwen35_4b_recovery_payload_budget_harness/README.md)
+- `qwen35_4b_recovery_verifier_branch_tournament` (new): [README](../experiments/qwen35_4b_recovery_verifier_branch_tournament/README.md)
 - `qwen35_4b_reliability_exec_opsd_audit` (track-z): [README](../experiments/qwen35_4b_reliability_exec_opsd_audit/README.md)
 - `qwen35_4b_repo_search_compress_bank` (new): [README](../experiments/qwen35_4b_repo_search_compress_bank/README.md)
 - `qwen35_4b_same_prefix_advantage_routing` (new): [README](../experiments/qwen35_4b_same_prefix_advantage_routing/README.md)
@@ -191,7 +192,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 Turn candidate-pool coverage into deployable decisions under visible evidence.
 
 - Charter: [evidence_conditioned_selection](../research_programs/evidence_conditioned_selection/charter.md)
-- Assigned experiments: 81
+- Assigned experiments: 82
 
 ### Seed Evidence
 
@@ -239,6 +240,7 @@ Turn candidate-pool coverage into deployable decisions under visible evidence.
 - `qwen35_4b_partial_structure_search` (new): [README](../experiments/qwen35_4b_partial_structure_search/README.md)
 - `qwen35_4b_passk_coverage_rl` (track-z): [README](../experiments/qwen35_4b_passk_coverage_rl/README.md)
 - `qwen35_4b_real_sample_verify_commit` (track-z): [README](../experiments/qwen35_4b_real_sample_verify_commit/README.md)
+- `qwen35_4b_recovery_verifier_branch_tournament` (new): [README](../experiments/qwen35_4b_recovery_verifier_branch_tournament/README.md)
 - `qwen35_4b_repo_search_compress_bank` (new): [README](../experiments/qwen35_4b_repo_search_compress_bank/README.md)
 - `qwen35_4b_retrieval_adapt_verify_scale` (track-z): [README](../experiments/qwen35_4b_retrieval_adapt_verify_scale/README.md)
 - `qwen35_4b_same_prefix_advantage_routing` (new): [README](../experiments/qwen35_4b_same_prefix_advantage_routing/README.md)
@@ -652,7 +654,7 @@ Stress whether mechanisms transfer across substrates, families, lengths, distrib
 Measure why methods work or fail through attribution, probes, pressure audits, and controlled ablations.
 
 - Charter: [interpretability_and_diagnostics](../research_programs/interpretability_and_diagnostics/charter.md)
-- Assigned experiments: 64
+- Assigned experiments: 65
 
 ### Seed Evidence
 
@@ -690,6 +692,7 @@ Measure why methods work or fail through attribution, probes, pressure audits, a
 - `qwen35_4b_probe_the_parameter` (new): [README](../experiments/qwen35_4b_probe_the_parameter/README.md)
 - `qwen35_4b_probe_to_prompt` (new): [README](../experiments/qwen35_4b_probe_to_prompt/README.md)
 - `qwen35_4b_real_sample_verify_commit` (track-z): [README](../experiments/qwen35_4b_real_sample_verify_commit/README.md)
+- `qwen35_4b_recovery_verifier_branch_tournament` (new): [README](../experiments/qwen35_4b_recovery_verifier_branch_tournament/README.md)
 - `qwen35_4b_reliability_exec_opsd_audit` (track-z): [README](../experiments/qwen35_4b_reliability_exec_opsd_audit/README.md)
 - `qwen35_4b_repo_search_compress_bank` (new): [README](../experiments/qwen35_4b_repo_search_compress_bank/README.md)
 - `qwen35_4b_retrieval_adapt_verify_scale` (track-z): [README](../experiments/qwen35_4b_retrieval_adapt_verify_scale/README.md)
@@ -733,7 +736,7 @@ Measure why methods work or fail through attribution, probes, pressure audits, a
 Improve precision, abstention, robustness, reproducibility, and safe artifact handling.
 
 - Charter: [reliability_and_safety](../research_programs/reliability_and_safety/charter.md)
-- Assigned experiments: 63
+- Assigned experiments: 64
 
 ### Seed Evidence
 
@@ -767,6 +770,7 @@ Improve precision, abstention, robustness, reproducibility, and safe artifact ha
 - `qwen35_4b_oracle_process_grpo` (track-z): [README](../experiments/qwen35_4b_oracle_process_grpo/README.md)
 - `qwen35_4b_pareto_policy_integration` (new): [README](../experiments/qwen35_4b_pareto_policy_integration/README.md)
 - `qwen35_4b_real_sample_verify_commit` (track-z): [README](../experiments/qwen35_4b_real_sample_verify_commit/README.md)
+- `qwen35_4b_recovery_verifier_branch_tournament` (new): [README](../experiments/qwen35_4b_recovery_verifier_branch_tournament/README.md)
 - `qwen35_4b_reliability_exec_opsd_audit` (track-z): [README](../experiments/qwen35_4b_reliability_exec_opsd_audit/README.md)
 - `qwen35_4b_repo_search_compress_bank` (new): [README](../experiments/qwen35_4b_repo_search_compress_bank/README.md)
 - `qwen35_4b_retrieval_adapt_verify_scale` (track-z): [README](../experiments/qwen35_4b_retrieval_adapt_verify_scale/README.md)
@@ -861,7 +865,7 @@ Study the native thinking-token budget as a first-class controllable test-time-c
 Install general agentic capability in Qwen3.5-4B via breadth-first expert iteration on a firewall-clean multi-family gym, arbitrated by the blackbox menagerie instrument.
 
 - Charter: [agentic_breadth_installation](../research_programs/agentic_breadth_installation/charter.md)
-- Assigned experiments: 13
+- Assigned experiments: 14
 
 ### Assigned Experiments
 
@@ -872,6 +876,7 @@ Install general agentic capability in Qwen3.5-4B via breadth-first expert iterat
 - `qwen35_4b_pareto_policy_integration` (new): [README](../experiments/qwen35_4b_pareto_policy_integration/README.md)
 - `qwen35_4b_recovery_payload_budget_harness` (new): [README](../experiments/qwen35_4b_recovery_payload_budget_harness/README.md)
 - `qwen35_4b_recovery_reason_locality_interpolation` (new): [README](../experiments/qwen35_4b_recovery_reason_locality_interpolation/README.md)
+- `qwen35_4b_recovery_verifier_branch_tournament` (new): [README](../experiments/qwen35_4b_recovery_verifier_branch_tournament/README.md)
 - `qwen35_4b_repo_search_compress_bank` (new): [README](../experiments/qwen35_4b_repo_search_compress_bank/README.md)
 - `qwen35_4b_same_prefix_advantage_routing` (new): [README](../experiments/qwen35_4b_same_prefix_advantage_routing/README.md)
 - `qwen35_4b_specialist_policy_integration` (new): [README](../experiments/qwen35_4b_specialist_policy_integration/README.md)

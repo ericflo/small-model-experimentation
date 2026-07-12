@@ -1,0 +1,87 @@
+schema_version: 1
+
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+  base: large_artifacts/qwen35_4b_repo_search_compress_bank/merged/apex_replay
+  action: large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/merged/recovery_action
+  candidate: large_artifacts/qwen35_4b_recovery_reason_locality_interpolation/merged/reason_mix_018
+  expected_weight_sha256:
+    base: c933168075a0fc011f31ee54f83d722cc91423ce1a0ac19bfe40dfab92f608d5
+    action: 991d2da239ac2878dccac72ece419b00f37ac15d6a970538f384c36162b89aea
+    candidate: 72a93f9030cffea741265849ea9ce404d6f4a0d74d887f7ce13eea3dfe9391ea
+
+artifacts:
+  root: large_artifacts/qwen35_4b_recovery_verifier_branch_tournament
+
+engine:
+  max_model_len: 8192
+  gpu_memory_utilization: 0.85
+  max_num_seqs: 32
+  max_num_batched_tokens: 16384
+
+families:
+  prospective:
+    - deadline_queue
+    - interval_coalescer
+    - atomic_reservations
+    - fallback_resolver
+
+evaluation:
+  think_budget: 512
+  answer_max_tokens: 512
+  deep_turns: 6
+  sample_more_trajectories: 2
+  sample_more_turns_each: 6
+  sample_temperature: 0.8
+  sample_top_p: 0.95
+  sample_top_k: 20
+  deep_run_seed: 85601
+  sample_run_seed: 85602
+  blocks:
+    prospective_dev:
+      families: prospective
+      seed: 85000
+      tasks_per_family: 10
+    prospective_confirm:
+      families: prospective
+      seed: 85100
+      tasks_per_family: 10
+
+selector:
+  # Public-only frozen rule: action replaces candidate iff action's final
+  # workspace passes visible tests and candidate's does not.
+  default_arm: candidate
+  alternate_arm: action
+  public_signal: final_visible_pass
+  random_control_seed: 85603
+
+retrospective_qualification:
+  transfer_dev:
+    candidate: large_artifacts/qwen35_4b_recovery_payload_budget_harness/eval/transfer_dev_recovery_candidate_deep.json
+    action: large_artifacts/qwen35_4b_recovery_payload_budget_harness/eval/transfer_dev_recovery_action_deep.json
+    candidate_sha256: 834ab2ac12561ca0c42a75e81351b08ff62bf50e05be2d9fb6d3636ae4804714
+    action_sha256: bad208cbb42d282f6643d9165c644215dccaa2c99f11778a94ee360e908a5513
+  transfer_confirm:
+    candidate: large_artifacts/qwen35_4b_recovery_payload_budget_harness/eval/transfer_confirm_recovery_candidate_deep.json
+    action: large_artifacts/qwen35_4b_recovery_payload_budget_harness/eval/transfer_confirm_recovery_action_deep.json
+    candidate_sha256: d64895e724c01e9b2e5235836ea878da0611cd136617607d4bd95998d2dd7472
+    action_sha256: 895e508e06c47ceaf0e41f5dd90fd1de4e3f3f3ec28fc44fd6f4c0a83e6b4c09
+
+gates:
+  success_delta_vs_best_single_min: 0.03
+  success_delta_vs_candidate_sample_more_min: 0.03
+  success_delta_vs_action_sample_more_min: 0.03
+  success_delta_vs_random_selector_min: 0.03
+  paired_bootstrap_lower_bound_min: 0.0
+  oracle_union_capture_min: 0.85
+  rejected_patch_transition_absolute_min: 0.80
+  failed_test_transition_absolute_min: 0.70
+  invalid_action_delta_vs_candidate_max: 0.02
+  answer_cap_hit_delta_vs_candidate_max: 0.02
+  minimum_nonnegative_families_vs_best_single: 3
+  maximum_single_family_regression: -0.10
+
+downstream:
+  authorize_winner_bank_only_after_both_blocks_pass: true
+  menagerie_sealed: true
