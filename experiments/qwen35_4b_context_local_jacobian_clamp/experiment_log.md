@@ -14,3 +14,10 @@ Created as a new experiment scaffold.
 - Prohibited target-digit gradients from intervention construction and band
   selection; they are diagnostic-only after confirmation is frozen.
 - Registered a full-activation donor site gate before any J conclusion.
+
+## 2026-07-12 — immutable design boundary
+
+- Pushed design commit `c1f06c035404bde62303439daa66dba3c1f026f9` to
+  `origin/main` before any result-bearing model call.
+- Recorded exact SHA-256 values for the frozen README and preregistration in the
+  config and `runs/design_boundary_receipt.json`.
