@@ -2,8 +2,9 @@
 
 ## Status
 
-Preregistered successor to `qwen35_4b_pareto_policy_integration`. No
-outcome-bearing model run had occurred when the design was frozen.
+Preregistered successor to `qwen35_4b_pareto_policy_integration`. Pinned model
+preflight and the source/soup installation canary pass; split-branch route
+qualification is the next unresolved scientific gate.
 
 ## Research Program
 

@@ -1,0 +1,112 @@
+{
+  "changed_prompt_counts": {
+    "deep_changed_from_base": 8,
+    "quick_changed_from_base": 8,
+    "quick_differs_from_deep": 8,
+    "soup_changed_from_base": 8,
+    "soup_differs_from_deep": 7,
+    "soup_differs_from_quick": 8
+  },
+  "changes": [
+    {
+      "deep_changed_from_base": true,
+      "id": "canary-deep-caravan-caravan-L4-s107002-0000",
+      "quick_changed_from_base": true,
+      "quick_differs_from_deep": true,
+      "soup_changed_from_base": true,
+      "soup_differs_from_deep": true,
+      "soup_differs_from_quick": true
+    },
+    {
+      "deep_changed_from_base": true,
+      "id": "canary-deep-foundry_ledger-foundry_ledger-L4-s107102-0000",
+      "quick_changed_from_base": true,
+      "quick_differs_from_deep": true,
+      "soup_changed_from_base": true,
+      "soup_differs_from_deep": true,
+      "soup_differs_from_quick": true
+    },
+    {
+      "deep_changed_from_base": true,
+      "id": "canary-deep-runeward-runeward-L4-s107302-0000",
+      "quick_changed_from_base": true,
+      "quick_differs_from_deep": true,
+      "soup_changed_from_base": true,
+      "soup_differs_from_deep": true,
+      "soup_differs_from_quick": true
+    },
+    {
+      "deep_changed_from_base": true,
+      "id": "canary-deep-stallwright-stallwright-L4-s107202-0000",
+      "quick_changed_from_base": true,
+      "quick_differs_from_deep": true,
+      "soup_changed_from_base": true,
+      "soup_differs_from_deep": true,
+      "soup_differs_from_quick": true
+    },
+    {
+      "deep_changed_from_base": true,
+      "id": "canary-quick-caravan-caravan-L1-s97002-0000",
+      "quick_changed_from_base": true,
+      "quick_differs_from_deep": true,
+      "soup_changed_from_base": true,
+      "soup_differs_from_deep": false,
+      "soup_differs_from_quick": true
+    },
+    {
+      "deep_changed_from_base": true,
+      "id": "canary-quick-foundry_ledger-foundry_ledger-L1-s97102-0000",
+      "quick_changed_from_base": true,
+      "quick_differs_from_deep": true,
+      "soup_changed_from_base": true,
+      "soup_differs_from_deep": true,
+      "soup_differs_from_quick": true
+    },
+    {
+      "deep_changed_from_base": true,
+      "id": "canary-quick-runeward-runeward-L1-s97302-0000",
+      "quick_changed_from_base": true,
+      "quick_differs_from_deep": true,
+      "soup_changed_from_base": true,
+      "soup_differs_from_deep": true,
+      "soup_differs_from_quick": true
+    },
+    {
+      "deep_changed_from_base": true,
+      "id": "canary-quick-stallwright-stallwright-L1-s97202-0000",
+      "quick_changed_from_base": true,
+      "quick_differs_from_deep": true,
+      "soup_changed_from_base": true,
+      "soup_differs_from_deep": true,
+      "soup_differs_from_quick": true
+    }
+  ],
+  "checks": {
+    "all_local_models_exact": true,
+    "all_merges_nonzero": true,
+    "base_revision_pinned": true,
+    "deep_changes_behavior": true,
+    "greedy": true,
+    "quick_changes_behavior": true,
+    "same_input_hash": true,
+    "same_prompt_ids": true,
+    "same_runner": true,
+    "soup_changes_behavior": true,
+    "soup_distinct_from_deep": true,
+    "soup_distinct_from_quick": true,
+    "teachers_distinct": true
+  },
+  "config": "/workspace/small-model-experimentation/experiments/qwen35_4b_same_prefix_advantage_routing/configs/default.yaml",
+  "downstream_authorization": "route_qualification",
+  "gate": {
+    "passed": true
+  },
+  "input": "/workspace/small-model-experimentation/experiments/qwen35_4b_same_prefix_advantage_routing/runs/installation_canary/prompts.jsonl",
+  "input_sha256": "18ee25b676542b0d9346d756e5d4f602da042d6e42881c1667ba045f9f76b342",
+  "models": {
+    "deep": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_pareto_policy_integration/merged/deep_apex",
+    "quick": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_pareto_policy_integration/merged/quick_blend",
+    "soup": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_same_prefix_advantage_routing/merged/soup40"
+  },
+  "stage": "source_and_soup_installation_canary"
+}

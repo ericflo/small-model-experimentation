@@ -2,9 +2,9 @@
 
 ## Status
 
-**Design locked, conditional implementation smoke passed, and pinned model
-preflight passed; outcome-bearing execution not yet started.** The next legal
-stage is soup construction/canary followed by the split-branch route gate.
+**Design locked; implementation smoke, pinned model preflight, and source/soup
+installation all pass.** The split-branch route qualification is now the next
+legal and unresolved scientific gate.
 
 ## Research Program Fit
 
@@ -29,6 +29,12 @@ family selftests, source hashes, frozen count geometry, and full fail-closed
 stage graph pass. Pinned vLLM semantic generation and an independent finite
 Transformers/QLoRA-path forward pass also succeeded. These are engineering
 evidence only and cannot support the hypothesis.
+
+The independently regenerated 40/60 soup has weight hash `04610723…`; all 128
+mapped adapter deltas were nonzero. On eight fixed same-prompt canaries, every
+adapted arm changed from base, quick and deep differed 8/8, and soup differed
+from quick 8/8 and deep 7/8. This rules out an installation/no-op failure but
+is deliberately not scored as task evidence.
 
 ## Oracle Versus Deployable Boundary
 

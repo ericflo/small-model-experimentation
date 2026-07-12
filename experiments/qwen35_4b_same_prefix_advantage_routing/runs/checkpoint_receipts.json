@@ -1,0 +1,20 @@
+{
+  "deep": {
+    "merge_receipt_sha256": "16316211c0c8da9c176ad7fb7c132ff648a7c8d398d3f96a1e153f52b97ea475",
+    "model_sha256": "3bf936150a0a68e80a7a2ef3564334503fdfc3dfb3dcc5f6dfa0b1b12b7cf28b",
+    "path": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_pareto_policy_integration/merged/deep_apex"
+  },
+  "model": "Qwen/Qwen3.5-4B",
+  "quick": {
+    "merge_receipt_sha256": "be852a5134a7ba47c479eb412e9f07b497cb0c4c201bc6f07bf118d0ad22f126",
+    "model_sha256": "97bb30362c130fab6525586b39dff9d72ca31be57b72edc879bf03e304ce91cb",
+    "path": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_pareto_policy_integration/merged/quick_blend"
+  },
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "schema_version": 1,
+  "soup": {
+    "merge_receipt_sha256": "6447540351caf9b20be01c8750db09a9506cfb1261bf711f5ee00cd2c8c4107e",
+    "model_sha256": "04610723f3f46d0a094ae0e5bc1a491bb6ad9e0fb6c8a84417dfe5e527f15b50",
+    "path": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_same_prefix_advantage_routing/merged/soup40"
+  }
+}

@@ -78,3 +78,16 @@
   PEFT configs serialized the same target-module set in different list orders.
   The merge guard now normalizes that unordered field while retaining the
   stronger exact tensor-key/layout check; a regression test binds the fix.
+
+## 2026-07-12 — source and soup installation gate
+
+- Independently regenerated the registered 40% quick / 60% deep LoRA-delta
+  soup. All 128 mapped modules had nonzero deltas; FP32 products used TF32
+  disabled; the explicit composite weight hash is
+  `04610723f3f46d0a094ae0e5bc1a491bb6ad9e0fb6c8a84417dfe5e527f15b50`.
+- Under identical greedy prompts and the frozen 16k vLLM geometry, quick,
+  deep, and soup each changed all 8 base completions. Quick differed from deep
+  on 8/8, soup from quick on 8/8, and soup from deep on 7/8.
+- Every source/soup merge was nonzero and every local path/receipt hash matched.
+  The canary authorized split-branch route qualification. These are
+  installation/no-op checks, not capability measurements.

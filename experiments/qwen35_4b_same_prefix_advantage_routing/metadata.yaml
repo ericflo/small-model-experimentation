@@ -5,7 +5,7 @@ source_track: "new"
 path: "experiments/qwen35_4b_same_prefix_advantage_routing"
 primary_readme: "experiments/qwen35_4b_same_prefix_advantage_routing/README.md"
 primary_report: "experiments/qwen35_4b_same_prefix_advantage_routing/reports/report.md"
-summary: "Preregistered successor to `qwen35_4b_pareto_policy_integration`. No outcome-bearing model run had occurred when the design was frozen."
+summary: "Preregistered successor to `qwen35_4b_pareto_policy_integration`. Pinned model preflight and the source/soup installation canary pass; split-branch route qualification is the next unresolved scientific gate."
 tags:
   - "latent-state"
   - "policy"
@@ -19,6 +19,7 @@ research_programs:
   - "reliability_and_safety"
   - "structured_execution_and_compilers"
 top_level_dirs:
+  - "analysis"
   - "configs"
   - "reports"
   - "runs"
@@ -26,10 +27,10 @@ top_level_dirs:
   - "src"
   - "tests"
 file_counts:
-  json: 4
-  jsonl: 1
+  json: 10
+  jsonl: 6
   md: 8
   py: 53
   yaml: 3
-total_files: 69
-total_size_bytes: 832543
+total_files: 80
+total_size_bytes: 1058024
