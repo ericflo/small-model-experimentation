@@ -1,0 +1,130 @@
+schema_version: 1
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+  dtype: bfloat16
+  attention: sdpa
+  device: cuda:0
+  think_open_id: 248068
+  think_close_id: 248069
+
+seeds:
+  split: 2026071271
+  seam_selection_trace: 2026071272
+  seam_selection_answer: 2026071273
+  seam_confirmation_trace: 2026071274
+  seam_confirmation_answer: 2026071275
+  value_trace: 2026071276
+  value_continuation: 2026071277
+  value_shuffle: 2026071278
+  causal_trace: 2026071279
+  causal_selection_continuation: 2026071280
+  causal_evaluation_continuation: 2026071281
+  random_a: 2026071282
+  random_b: 2026071283
+  bootstrap: 2026071284
+
+data:
+  seam_selection_tasks: 16
+  seam_confirmation_tasks: 16
+  value_fit_tasks: 32
+  causal_confirmation_tasks: 32
+  depth: 2
+  visible_examples: 8
+  hidden_examples: 8
+  reject_depth_one_fit: true
+  operation_aliases:
+    reverse: cat
+    sort_asc: dog
+    sort_desc: horse
+    abs_all: tiger
+    square: apple
+    negate: lemon
+    running_sum: river
+    adjacent_diff: ocean
+    add_k: silver
+    mul_k: gold
+    take_k: circle
+    rotate_k: square
+
+generation:
+  temperature: 0.6
+  top_p: 0.95
+  top_k: 20
+  cap_rungs: [256, 512, 1024]
+  answer_max_tokens: 16
+  prompt_max_tokens: 768
+  total_max_tokens: 2048
+  traces_per_task: 3
+  prefix_fractions: [0.5, 1.0]
+  minimum_prefix_tokens: 16
+  value_continuations_per_prefix: 3
+  causal_evaluation_continuations: 2
+  batch_size: 1
+  use_cache: true
+
+lens:
+  path: assets/context_lens.pt
+  sha256: e373b6e93956fdfc5cb446e9bee8249655707c8258a7868f0653d11f1ffd0213
+  concepts: 24
+  band: [4, 5, 6, 7, 8]
+  pseudoinverse_rtol: 1.0e-5
+
+value_model:
+  feature: concatenated_frozen_j_coordinates
+  group_folds: 4
+  l2: 1.0
+  standardize: true
+  task_and_fraction_detrended: true
+  high_quantile: 0.90
+
+controls:
+  random_arms: [random_a, random_b]
+  candidate_draws: 32
+  correction_iterations: 512
+  correction_damping: 0.5
+  binary_search_steps: 64
+  norm_relative_tolerance: 1.0e-5
+  realized_span_projection_max: 1.0e-2
+
+gates:
+  seam_selection:
+    policy_parse_rate_min: 0.90
+    forced_parse_rate_min: 0.90
+    forced_commit_rate_min: 0.50
+    policy_success_rate_min: 0.05
+    policy_success_rate_max: 0.95
+    mixed_policy_tasks_min: 6
+    answer_cap_rate_max: 0.05
+  seam_confirmation:
+    policy_parse_rate_min: 0.90
+    forced_parse_rate_min: 0.90
+    forced_commit_rate_min: 0.50
+    policy_success_rate_min: 0.05
+    policy_success_rate_max: 0.95
+    mixed_policy_tasks_min: 6
+    answer_cap_rate_max: 0.05
+  prefix_value:
+    mixed_tasks_min: 16
+    scored_prefixes_min: 128
+    task_macro_pairwise_auc_min: 0.65
+    j_minus_correct_alias_activity_min: 0.03
+    shuffled_auc_abs_from_chance_max: 0.05
+  control_calibration:
+    prefixes_min: 16
+  causal_patch:
+    eligible_task_pairs_min: 16
+    low_value_max: 0.3333333333333333
+    high_value_min: 0.6666666666666666
+    certainty_success_uplift_min: 0.10
+    certainty_minus_random_min: 0.08
+    certainty_minus_shuffled_axis_min: 0.08
+    certainty_minus_non_j_min: 0.05
+    bootstrap_lower_bound_min: 0.0
+    max_parse_rate_drop: 0.05
+    bootstrap_resamples: 10000
+
+design_boundary:
+  commit: PENDING_DESIGN_COMMIT
+  readme_sha256: PENDING_DESIGN_COMMIT
+  preregistration_sha256: PENDING_DESIGN_COMMIT

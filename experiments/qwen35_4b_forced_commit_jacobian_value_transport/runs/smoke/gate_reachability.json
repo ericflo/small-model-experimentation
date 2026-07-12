@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "receipts": {
+    "seam_confirmation": {
+      "minimum_forced_commits": 24,
+      "minimum_mixed_tasks": 6,
+      "passed": true,
+      "tasks": 16,
+      "traces": 48
+    },
+    "seam_selection": {
+      "minimum_forced_commits": 24,
+      "minimum_mixed_tasks": 6,
+      "passed": true,
+      "tasks": 16,
+      "traces": 48
+    }
+  },
+  "schema_version": 1,
+  "scientific_result": false,
+  "stage": "gate_reachability"
+}

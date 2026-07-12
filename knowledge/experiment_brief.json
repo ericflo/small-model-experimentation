@@ -2,6 +2,39 @@
  "note": "Plain-language practitioner briefs shown above the fold on each experiment page (verdict + the-one-idea/question/finding/why-it-matters + KPI numbers + per-chart how-to-read/takeaway). Authored per experiment from its own README/report and verified chart specs under a strict no-jargon ban-list; all jargon-precise detail stays below the fold. Regenerate with scripts/enrichment/generate_briefs.workflow.js (see docs/site_maintenance.md).",
  "generated_on": "2026-07-05",
  "experiments": {
+  "qwen35_4b_forced_commit_jacobian_value_transport": {
+   "verdict_tag": "A controlled commit-now test is frozen and ready",
+   "concept_primer": "The model kept reasoning past every natural finishing limit. This study makes stopping an explicit controller action, checks whether the resulting answers are usable, and only then looks for an internal signal that separates promising from weak unfinished work.",
+   "plain_question": "If a fixed budget controller tells the model to stop reasoning and answer now, can an internal promise signal identify and improve the unfinished thoughts that will answer correctly?",
+   "plain_answer": "Not yet: the design, adversarial review, fresh tasks, and CPU checks are complete, but no model outcome has been opened. The study must first prove that forced answers reliably finish and retain both successes and failures on new tasks.",
+   "why_it_matters": "An externally chosen stop can be a real deployed method, but only if it is tested honestly as the same action everywhere. This avoids pretending the model finished naturally and prevents another artificial answer boundary from producing a misleading internal score.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Fresh procedural tasks",
+     "value": "96",
+     "sub": "four disjoint stages with zero overlap against three parents"
+    },
+    {
+     "label": "Adversarial failure modes reviewed",
+     "value": "46",
+     "sub": "completed before any model call"
+    },
+    {
+     "label": "Model outcomes opened",
+     "value": "0",
+     "sub": "forced-answer usability must come first"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Fresh tasks are sealed behind four sequential gates",
+     "chart_read": "The bars show how many untouched tasks belong to each stage. A stage opens only after the one before it passes.",
+     "chart_takeaway": "Answer usability is tested twice before any internal-value fit, and the final cause-and-effect tasks remain untouched until every earlier gate passes."
+    }
+   ]
+  },
   "qwen35_4b_native_thought_seam_budget_ladder": {
    "verdict_tag": "No natural finish even after 1,024 reasoning steps",
    "concept_primer": "The previous study stopped before its main question because every model response was still reasoning when the 160-token limit arrived. This follow-up first finds a limit at which the model can finish naturally, then checks that choice on new tasks.",

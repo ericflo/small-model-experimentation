@@ -6,12 +6,12 @@
   `NO_BUDGET_SELECTED`: all 48/48 traces contacted even the 1,024 ceiling, with
   zero natural closes at every rung. Confirmation was correctly unopened. Do
   not add a larger natural-close rung or treat these rows as completed thoughts.
-- **Next:** create a fresh forced-commit Jacobian/value experiment whose injected
-  close is the explicit deployed policy. First gate parsing, success headroom,
-  and mixed tasks under that exact policy (C51); then label exact prefixes with
-  disjoint forced-commit continuations. Replay the live prefix and construct
-  exact random controls dynamically at every sequence length. Call every stage
-  counterfactual/forced-commit, never natural.
+- **In progress:** `qwen35_4b_forced_commit_jacobian_value_transport` treats
+  injected close as the explicit deployed policy. Its 46-threat review first
+  gates forced-only parsing, success headroom, mixed tasks, and answer
+  termination on selection/confirmation; only then may it label exact prefixes
+  and test scalar J value. Every causal replay uses the live prefix-plus-close
+  sequence and per-row exact post-bf16 controls. No stage is called natural.
 - If native thought-state transport passes, train a non-oracle prefix controller
   and require a replicated held-out capability gain over frozen Qwen3.5-4B and
   matched-compute sampling. Oracle donor selection is a mechanism control, not

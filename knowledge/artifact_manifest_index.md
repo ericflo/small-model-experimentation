@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 190
-- Manifest files: 492
+- Experiments with manifests: 191
+- Manifest files: 493
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 63 |
 | `run-data` | 101 |
-| `standard-artifact` | 63 |
+| `standard-artifact` | 64 |
 
 ## Manifests
 
@@ -103,6 +103,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_foofah_program_ensemble_consensus` | `large-artifact` | [manifest](../experiments/qwen35_4b_foofah_program_ensemble_consensus/large_artifacts_manifest.md) |
 | `qwen35_4b_foofah_program_repair_agent` | `large-artifact` | [manifest](../experiments/qwen35_4b_foofah_program_repair_agent/large_artifacts_manifest.md) |
 | `qwen35_4b_foofah_selective_program_fallback` | `large-artifact` | [manifest](../experiments/qwen35_4b_foofah_selective_program_fallback/large_artifacts_manifest.md) |
+| `qwen35_4b_forced_commit_jacobian_value_transport` | `standard-artifact` | [manifest](../experiments/qwen35_4b_forced_commit_jacobian_value_transport/reports/artifact_manifest.yaml) |
 | `qwen35_4b_gauntlet_breadth_round1` | `standard-artifact` | [manifest](../experiments/qwen35_4b_gauntlet_breadth_round1/reports/artifact_manifest.yaml) |
 | `qwen35_4b_gauntlet_frontier` | `standard-artifact` | [manifest](../experiments/qwen35_4b_gauntlet_frontier/reports/artifact_manifest.yaml) |
 | `qwen35_4b_generator_verifier_gap` | `standard-artifact` | [manifest](../experiments/qwen35_4b_generator_verifier_gap/reports/artifact_manifest.yaml) |

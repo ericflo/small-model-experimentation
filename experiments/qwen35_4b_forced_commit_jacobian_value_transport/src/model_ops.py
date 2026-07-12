@@ -1,0 +1,262 @@
+"""Pinned cached native trace generation and explicit forced-commit replay."""
+
+from __future__ import annotations
+
+import time
+from typing import Any
+
+import torch
+
+
+class _TraceStopper:
+    def __init__(
+        self,
+        *,
+        prompt_tokens: int,
+        close_id: int,
+        eos_id: int,
+        thought_cap: int,
+        answer_cap: int,
+    ) -> None:
+        self.prompt_tokens = int(prompt_tokens)
+        self.close_id = int(close_id)
+        self.eos_id = int(eos_id)
+        self.thought_cap = int(thought_cap)
+        self.answer_cap = int(answer_cap)
+
+    def __call__(self, input_ids: torch.Tensor, _scores: torch.Tensor, **_kwargs: Any) -> torch.BoolTensor:
+        if input_ids.shape[0] != 1:
+            raise RuntimeError("frozen generation requires batch one")
+        generated = input_ids[0, self.prompt_tokens :]
+        close = (generated == self.close_id).nonzero(as_tuple=False).flatten()
+        if close.numel() == 0:
+            stop = generated.numel() >= self.thought_cap
+        else:
+            answer_tokens = generated.numel() - int(close[0]) - 1
+            stop = answer_tokens >= self.answer_cap or int(generated[-1]) == self.eos_id
+        return torch.tensor([stop], device=input_ids.device, dtype=torch.bool)
+
+
+class QwenCommitModel:
+    def __init__(self, config: dict[str, Any]):
+        from transformers import AutoModelForCausalLM, AutoTokenizer
+
+        model_config = config["model"]
+        if model_config["id"] != "Qwen/Qwen3.5-4B":
+            raise RuntimeError("only Qwen/Qwen3.5-4B is permitted")
+        started = time.perf_counter()
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            model_config["id"], revision=model_config["revision"], trust_remote_code=True
+        )
+        self.model = AutoModelForCausalLM.from_pretrained(
+            model_config["id"],
+            revision=model_config["revision"],
+            trust_remote_code=True,
+            dtype=torch.bfloat16,
+            device_map=model_config["device"],
+            attn_implementation=model_config["attention"],
+        ).eval()
+        for parameter in self.model.parameters():
+            parameter.requires_grad_(False)
+        self.device = self.model.lm_head.weight.device
+        text_config = self.model.config.get_text_config()
+        self.n_layers = int(text_config.num_hidden_layers)
+        self.d_model = int(text_config.hidden_size)
+        self.vocab_size = int(text_config.vocab_size)
+        self.think_open_id = int(model_config["think_open_id"])
+        self.think_close_id = int(model_config["think_close_id"])
+        self.eos_id = int(text_config.eos_token_id)
+        observed = (
+            self.tokenizer.convert_tokens_to_ids("<think>"),
+            self.tokenizer.convert_tokens_to_ids("</think>"),
+        )
+        if observed != (self.think_open_id, self.think_close_id):
+            raise RuntimeError(f"native-thinking token IDs changed: {observed}")
+        self.load_seconds = time.perf_counter() - started
+
+    def render(self, user: str) -> str:
+        return self.tokenizer.apply_chat_template(
+            [
+                {"role": "system", "content": "Follow the requested output format exactly."},
+                {"role": "user", "content": user},
+            ],
+            tokenize=False,
+            add_generation_prompt=True,
+            enable_thinking=True,
+        )
+
+    def prepare(self, user: str, *, prompt_max_tokens: int) -> dict[str, Any]:
+        rendered = self.render(user)
+        ids = self.tokenizer(rendered, return_tensors="pt").input_ids
+        bos = self.tokenizer.bos_token_id
+        if bos is not None and ids.shape[1] and int(ids[0, 0]) != int(bos):
+            ids = torch.cat([torch.tensor([[bos]], dtype=ids.dtype), ids], dim=1)
+        if ids.shape[1] > int(prompt_max_tokens):
+            raise RuntimeError(f"prompt has {ids.shape[1]} tokens above cap {prompt_max_tokens}")
+        opens = (ids[0] == self.think_open_id).nonzero(as_tuple=False).flatten()
+        if opens.numel() != 1 or (ids[0] == self.think_close_id).any():
+            raise RuntimeError("prompt must contain one open and no close token")
+        return {
+            "rendered": rendered,
+            "input_ids": ids.to(self.device),
+            "prompt_tokens": int(ids.shape[1]),
+            "think_open_position": int(opens[0]),
+        }
+
+    def leading_space_token_id(self, text: str) -> int:
+        ids = self.tokenizer(" " + text, add_special_tokens=False).input_ids
+        if len(ids) != 1:
+            raise ValueError(f"alias {text!r} is not one leading-space token: {ids}")
+        return int(ids[0])
+
+    def _audit_hook(self, lengths: list[int]):
+        def hook(_module: Any, _args: tuple[Any, ...], kwargs: dict[str, Any]) -> None:
+            ids = kwargs.get("input_ids")
+            if ids is not None:
+                lengths.append(int(ids.shape[1]))
+
+        return hook
+
+    def _seed_context(self, seed: int):
+        devices = [self.device.index] if self.device.type == "cuda" else []
+        return torch.random.fork_rng(devices=devices)
+
+    @torch.no_grad()
+    def generate_trace(
+        self,
+        input_ids: torch.Tensor,
+        *,
+        seed: int,
+        thought_cap: int,
+        answer_cap: int,
+        total_max_tokens: int,
+        temperature: float,
+        top_p: float,
+        top_k: int,
+    ) -> dict[str, Any]:
+        from transformers import StoppingCriteriaList
+
+        prompt_tokens = int(input_ids.shape[1])
+        if prompt_tokens + thought_cap + answer_cap > total_max_tokens:
+            raise RuntimeError("trace allowance exceeds total context cap")
+        stopper = _TraceStopper(
+            prompt_tokens=prompt_tokens,
+            close_id=self.think_close_id,
+            eos_id=self.eos_id,
+            thought_cap=thought_cap,
+            answer_cap=answer_cap,
+        )
+        lengths: list[int] = []
+        handle = self.model.register_forward_pre_hook(self._audit_hook(lengths), with_kwargs=True)
+        started = time.perf_counter()
+        try:
+            with self._seed_context(seed):
+                torch.manual_seed(int(seed))
+                if self.device.type == "cuda":
+                    torch.cuda.manual_seed_all(int(seed))
+                output = self.model.generate(
+                    input_ids=input_ids,
+                    do_sample=True,
+                    temperature=float(temperature),
+                    top_p=float(top_p),
+                    top_k=int(top_k),
+                    max_new_tokens=int(thought_cap + answer_cap),
+                    stopping_criteria=StoppingCriteriaList([stopper]),
+                    eos_token_id=self.eos_id,
+                    pad_token_id=self.eos_id,
+                    use_cache=True,
+                    return_dict_in_generate=True,
+                )
+        finally:
+            handle.remove()
+        generated = output.sequences[0, prompt_tokens:]
+        closes = (generated == self.think_close_id).nonzero(as_tuple=False).flatten()
+        natural_close = closes.numel() == 1
+        close_index = int(closes[0]) if natural_close else None
+        close_step = close_index + 1 if close_index is not None else None
+        answer_ids = generated[close_index + 1 :] if close_index is not None else generated[:0]
+        return {
+            "generated_token_ids": generated.tolist(),
+            "generated_text": self.tokenizer.decode(generated.tolist(), skip_special_tokens=False),
+            "answer_text": self.tokenizer.decode(answer_ids.tolist(), skip_special_tokens=False),
+            "natural_close": natural_close,
+            "close_step": close_step,
+            "think_tokens": close_index if close_index is not None else int(generated.numel()),
+            "answer_tokens": int(answer_ids.numel()),
+            "stopped_by": (
+                "eos" if natural_close and answer_ids.numel() and int(answer_ids[-1]) == self.eos_id
+                else "answer_cap" if natural_close
+                else "eos_before_close" if generated.numel() and int(generated[-1]) == self.eos_id
+                else "think_cap_without_close"
+            ),
+            "forward_input_lengths": lengths,
+            "cache_contract_pass": bool(
+                lengths and lengths[0] == prompt_tokens and all(length == 1 for length in lengths[1:])
+            ),
+            "forward_calls": len(lengths),
+            "elapsed_seconds": time.perf_counter() - started,
+        }
+
+    @torch.no_grad()
+    def force_commit(
+        self,
+        prompt_ids: torch.Tensor,
+        thought_token_ids: list[int],
+        *,
+        seed: int,
+        answer_cap: int,
+        total_max_tokens: int,
+        temperature: float,
+        top_p: float,
+        top_k: int,
+    ) -> dict[str, Any]:
+        if self.think_close_id in thought_token_ids or self.eos_id in thought_token_ids:
+            raise RuntimeError("forced prefix contains a natural close or EOS")
+        suffix = torch.tensor(
+            [thought_token_ids + [self.think_close_id]],
+            device=self.device,
+            dtype=prompt_ids.dtype,
+        )
+        forced_ids = torch.cat([prompt_ids.to(self.device), suffix], dim=1)
+        prefill_tokens = int(forced_ids.shape[1])
+        if prefill_tokens + answer_cap > total_max_tokens:
+            raise RuntimeError("forced answer allowance exceeds total context cap")
+        lengths: list[int] = []
+        handle = self.model.register_forward_pre_hook(self._audit_hook(lengths), with_kwargs=True)
+        started = time.perf_counter()
+        try:
+            with self._seed_context(seed):
+                torch.manual_seed(int(seed))
+                if self.device.type == "cuda":
+                    torch.cuda.manual_seed_all(int(seed))
+                output = self.model.generate(
+                    input_ids=forced_ids,
+                    do_sample=True,
+                    temperature=float(temperature),
+                    top_p=float(top_p),
+                    top_k=int(top_k),
+                    max_new_tokens=int(answer_cap),
+                    eos_token_id=self.eos_id,
+                    pad_token_id=self.eos_id,
+                    use_cache=True,
+                    return_dict_in_generate=True,
+                )
+        finally:
+            handle.remove()
+        answer_ids = output.sequences[0, prefill_tokens:]
+        return {
+            "answer_token_ids": answer_ids.tolist(),
+            "answer_text": self.tokenizer.decode(answer_ids.tolist(), skip_special_tokens=False),
+            "answer_tokens": int(answer_ids.numel()),
+            "stopped_by": (
+                "eos" if answer_ids.numel() and int(answer_ids[-1]) == self.eos_id else "answer_cap"
+            ),
+            "forward_input_lengths": lengths,
+            "cache_contract_pass": bool(
+                lengths and lengths[0] == prefill_tokens and all(length == 1 for length in lengths[1:])
+            ),
+            "forward_calls": len(lengths),
+            "elapsed_seconds": time.perf_counter() - started,
+            "forced_close": True,
+            "counterfactual_to_natural_close": True,
+        }

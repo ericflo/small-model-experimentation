@@ -1,0 +1,18 @@
+schema_version: 1
+experiment_id: "qwen35_4b_forced_commit_jacobian_value_transport"
+external_artifacts: []
+omitted_artifacts: []
+reproducibility:
+  smoke_command: >-
+    PYTHONDONTWRITEBYTECODE=1 .venv/bin/python
+    experiments/qwen35_4b_forced_commit_jacobian_value_transport/scripts/run.py
+    --stage smoke
+  full_command: >-
+    .venv/bin/python
+    experiments/qwen35_4b_forced_commit_jacobian_value_transport/scripts/run.py
+    --stage seam-selection
+  required_external_artifacts: []
+notes: >-
+  At design time, the byte-identical 3.08 MB replicated lens, all fresh task
+  splits, and CPU receipts are committed. No model call has occurred. No
+  artifact is external or omitted; later gated artifacts will be preserved.

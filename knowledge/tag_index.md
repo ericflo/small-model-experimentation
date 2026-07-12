@@ -540,6 +540,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 - `qwen35_4b_foofah_program_strategy_portfolio` (track-z): [README](../experiments/qwen35_4b_foofah_program_strategy_portfolio/README.md)
 - `qwen35_4b_foofah_selective_program_fallback` (track-z): [README](../experiments/qwen35_4b_foofah_selective_program_fallback/README.md)
 - `qwen35_4b_foofah_strategy_discovery_live` (track-z): [README](../experiments/qwen35_4b_foofah_strategy_discovery_live/README.md)
+- `qwen35_4b_forced_commit_jacobian_value_transport` (new): [README](../experiments/qwen35_4b_forced_commit_jacobian_value_transport/README.md)
 - `qwen35_4b_gauntlet_breadth_round1` (new): [README](../experiments/qwen35_4b_gauntlet_breadth_round1/README.md)
 - `qwen35_4b_gauntlet_frontier` (new): [README](../experiments/qwen35_4b_gauntlet_frontier/README.md)
 - `qwen35_4b_generator_verifier_gap` (new): [README](../experiments/qwen35_4b_generator_verifier_gap/README.md)

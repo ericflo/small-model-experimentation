@@ -1,0 +1,17 @@
+{
+  "depth_one_fit_count": 0,
+  "gate_reachability_pass": true,
+  "items": 96,
+  "parent_overlap": 0,
+  "passed": true,
+  "schema_version": 1,
+  "scientific_result": false,
+  "split_sizes": {
+    "causal_confirmation": 32,
+    "seam_confirmation": 16,
+    "seam_selection": 16,
+    "value_fit": 32
+  },
+  "stage": "cpu_smoke",
+  "unique_fingerprints": 96
+}
