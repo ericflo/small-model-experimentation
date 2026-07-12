@@ -60,9 +60,15 @@ repair was needed for four layer-8 rows (three one-pair repairs and one two-pair
 repair). Model, lens, token, position, length, and causal-suffix contracts pass.
 
 Three preceding failed smoke receipts are preserved. The implementation history
-and post-smoke adversarial audit explain the geometry-only repair. These are
-plumbing results, not causal evidence: the 480-row numeric calibration and all
-untouched confirmation outcomes remain unopened.
+and post-smoke adversarial audit explain the geometry-only repair.
+
+The frozen numeric firewall subsequently passed all 480/480 calibration rows.
+Maximum relative norm error was `9.8216e-6`, maximum realized J-span projection
+fraction was `0.00999293`, and exact causal-suffix difference remained zero.
+Thirty-seven rows used lattice repair (34 at layer 8), with at most three pairs.
+The calibration artifacts contain only numeric geometry and explicitly record
+that logits/outcomes were not written. These are still plumbing results, not
+causal evidence; all untouched confirmation outcomes remain unopened.
 
 ## Scope
 

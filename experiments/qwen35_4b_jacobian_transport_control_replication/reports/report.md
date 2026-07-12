@@ -2,7 +2,7 @@
 
 ## Status
 
-`MODEL_SMOKE_PASS`; numeric calibration and confirmation are not run.
+`CONTROL_CALIBRATION_PASS`; confirmation is not run.
 
 ## Frozen purpose
 
@@ -27,7 +27,24 @@ engineering evidence about sequential bf16 quantization, not scientific model
 outcomes. The post-smoke section of `design_review.md` audits the implementation
 repair before calibration.
 
+## Numeric calibration firewall
+
+The frozen 24-item calibration passed all 480 expected rows:
+
+- maximum relative norm error: `9.8216e-6`;
+- maximum realized J-span projection fraction: `0.00999293`;
+- 37 rows used exact lattice repair, including 34/96 layer-8 rows;
+- maximum lattice repair: three neighboring-bf16 coordinate pairs;
+- both prompt kinds and both random arms contribute exactly 240 rows each; and
+- exact causal-suffix difference: `0.0`.
+
+The row schema contains only item/prompt/arm/layer identity, candidate and
+iteration indices, delta norms, the two numeric errors, lattice pair count, and
+pass state. The summary records `logits_recorded=false` and
+`outcomes_recorded=false`.
+
 ## Current inference boundary
 
-No transport conclusion is licensed. The frozen 24-item calibration must pass
-all 480 numeric rows before the 48-item confirmation can be opened.
+No transport conclusion is licensed yet. Calibration unlocks implementation of
+the preregistered confirmation runner, but the 48 untouched mappings remain
+unopened until this numeric boundary is committed and pushed.

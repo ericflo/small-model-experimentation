@@ -94,3 +94,17 @@ Created as a new experiment scaffold.
   causal-suffix contracts passed. The receipt records no outcomes.
 - Calibration and confirmation remain unopened pending commit/push of this
   complete smoke history and adversarial implementation audit.
+
+## 2026-07-12 — numeric calibration pass
+
+- After the passing smoke boundary was committed, pushed, and green in CI, ran
+  the frozen 24-item outcome-blind calibration once.
+- All 480/480 rows passed. Maximum relative norm error was 9.8216e-6; maximum
+  realized J-span projection fraction was 0.00999293; causal difference was 0.
+- Thirty-seven rows used lattice repair: one each at layers 5, 6, and 7, plus
+  34/96 at layer 8. Maximum repair was three coordinate pairs.
+- Both prompt kinds and both random arms contain exactly 240 rows. No logits or
+  outcome fields occur in the row artifact, and the summary records both as
+  absent.
+- Decision: `CONTROL_CALIBRATION_PASS`. Confirmation remains unopened pending a
+  separate calibration commit/push.
