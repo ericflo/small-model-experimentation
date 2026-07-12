@@ -18,5 +18,6 @@ notes: >-
   No training or adapter. A byte-identical 3.08 MB copy of the parent frozen
   lens is committed under assets/. Outcome-blind model-smoke receipts include
   three preserved failures and one passing exact-lattice result. The complete
-  480-row numeric calibration and summary are committed and hash-locked; do not
-  overwrite them before confirmation. Confirmation remains unopened.
+  480-row numeric calibration and summary were committed and hash-locked before
+  the one untouched run. Terminal artifacts include 768 outcome rows and 960
+  realized confirmation control-layer rows. No external artifacts are omitted.

@@ -41,3 +41,16 @@ Diagnostics should become standard infrastructure. They are how future agents av
   realized J-span projection despite pre-cast orthogonality. The result cannot be
   promoted. It sharply prioritizes a fresh quantization-aware control
   replication and keeps native-thinking continuation gated.
+
+- [qwen35_4b_jacobian_transport_control_replication](../../experiments/qwen35_4b_jacobian_transport_control_replication/reports/report.md)
+  (unclaimed while the ledger re-grade is open; terminal
+  `REPLICATED_J_TRANSPORT`): fresh exact-control replication resolves the parent
+  invalidity. All-24 J changed 48/48 direct keys and 48/48 separately computed
+  mapped digits. Two independent random arms and the concept logit lens changed
+  0/48; wrong-donor J produced its own key/digit 48/48 and the registered target
+  0/48; pair J reached 46/48 consequences. All 480 calibration and 960
+  confirmation post-bf16 control-layer rows met relative norm <=1e-5 and
+  realized J-span projection <=0.01. Both paired bootstrap intervals were
+  [1,1]. This establishes an oracle, context-local, causally consumed concept
+  state on the procedural lookup substrate and unlocks native-thought work. It
+  does not install capability: target donor identity remains supplied.

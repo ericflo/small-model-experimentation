@@ -79,10 +79,10 @@ For evidence-linked durable claims, use [claims/index.md](claims/index.md).
 ## Interpretability And Diagnostics
 
 - Program: [charter](../research_programs/interpretability_and_diagnostics/charter.md)
-- Current read: diagnostics are useful when they explain why a mechanism transfers or fails, not when they are post-hoc decoration. Late answer-position J coordinates can be writable yet non-transporting; early context-local clamps provisionally transport perfectly through a new mapping, but the first confirmation is formally invalid because one exact control row missed tolerance.
-- Best next experiment: fresh fixed-band replication of `qwen35_4b_context_local_jacobian_clamp` with quantization-aware random controls constrained on both realized norm and realized J-span projection. Do not enter native thoughts first.
-- Strong anchors: `qwen_structural_compiler_attribution_ablation`, `qwen35_4b_probe_to_prompt`, `qwen35_4b_jacobian_value_transport`, `qwen35_4b_context_local_jacobian_clamp`.
-- Avoid repeating: probes that do not change the next experiment, next-token writing tests presented as reasoning transport, or promoting a perfect point estimate past a failed control gate.
+- Current read: diagnostics are useful when they explain why a mechanism transfers or fails, not when they are post-hoc decoration. Late answer-position J coordinates are writable but non-transporting; the early context-local clamp now replicates 48/48 semantic consequences on fresh mappings with 1,440/1,440 calibration-plus-confirmation exact control rows valid. This is oracle causal-state evidence, not installed capability.
+- Best next experiment: native `<think>`-prefix value transport on fresh verifier-scored procedural tasks, followed only on a causal pass by a learned non-oracle controller against matched-compute sampling.
+- Strong anchors: `qwen_structural_compiler_attribution_ablation`, `qwen35_4b_probe_to_prompt`, `qwen35_4b_jacobian_value_transport`, `qwen35_4b_context_local_jacobian_clamp`, `qwen35_4b_jacobian_transport_control_replication`.
+- Avoid repeating: probes that do not change the next experiment, next-token writing tests presented as reasoning transport, promoting a perfect point estimate past a failed control gate, or presenting an oracle donor as a deployable gain.
 - Evidence that advances the program: a diagnostic predicts which variants will fail before the final metric is observed.
 
 ## Reliability And Safety

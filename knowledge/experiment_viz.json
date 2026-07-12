@@ -5,20 +5,45 @@
   "qwen35_4b_jacobian_transport_control_replication": {
    "charts": [
     {
-     "title": "Frozen fresh split sizes before model inference",
+     "title": "Target-answer rate on fresh exact-control confirmation",
      "kind": "bar",
-     "categories": ["numeric control calibration", "untouched confirmation"],
+     "categories": ["baseline", "full donor", "all-24 J", "pair J", "wrong-donor J", "logit lens", "random A", "random B"],
      "series": [
       {
-       "label": "fresh prompt-local mappings",
-       "values": [24, 48]
+       "label": "direct key target rate",
+       "values": [0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]
+      },
+      {
+       "label": "mapped digit target rate",
+       "values": [0.0, 1.0, 1.0, 0.9583333333333334, 0.0, 0.0, 0.0, 0.0]
       }
      ],
-     "x_label": "split role",
-     "y_label": "items",
+     "x_label": "intervention",
+     "y_label": "target-answer rate",
+     "y_format": "percent100",
+     "note": "Forty-eight untouched mappings at frozen band 4-8. Wrong-donor J produced its own key and digit on 48/48, while both independent random arms passed all post-bf16 geometry constraints.",
+     "source": "experiments/qwen35_4b_jacobian_transport_control_replication/runs/confirmation.json",
+     "headline": true
+    },
+    {
+     "title": "Mean target-minus-source logit margin",
+     "kind": "bar",
+     "categories": ["baseline", "all-24 J", "logit lens", "random A", "random B"],
+     "series": [
+      {
+       "label": "direct key margin",
+       "values": [-11.807942708333334, 11.1796875, -11.729817708333334, -11.810546875, -11.82421875]
+      },
+      {
+       "label": "mapped digit margin",
+       "values": [-9.424479166666666, 8.260416666666666, -9.4140625, -9.44140625, -9.440104166666666]
+      }
+     ],
+     "x_label": "intervention",
+     "y_label": "target minus source logit",
      "y_format": "number",
-     "note": "CPU design receipt only. The 72 mapping/source/target/wrong fingerprints are unique and have zero overlap with both parent experiments.",
-     "source": "experiments/qwen35_4b_jacobian_transport_control_replication/runs/smoke/data_receipt.json",
+     "note": "Positive values favor the target; negative values favor the source. The J clamp reverses both preferences while the logit-lens and both exact controls remain baseline-like.",
+     "source": "experiments/qwen35_4b_jacobian_transport_control_replication/runs/confirmation.json",
      "headline": true
     }
    ]

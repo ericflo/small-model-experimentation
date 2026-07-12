@@ -1,0 +1,25 @@
+{
+  "calibration_commit": "2bd6376c28283546a111e54ec2dd2e92a0fd6a64",
+  "calibration_contract": {
+    "items": 24,
+    "max_lattice_pair_steps": 3,
+    "max_norm_relative_error": 9.821595085668378e-06,
+    "max_realized_span_projection_fraction": 0.009992933832108974,
+    "numeric_rows": 480,
+    "passed": true
+  },
+  "calibration_is_ancestor": true,
+  "expected_sha256": {
+    "rows_sha256": "be7c73edfff88b79bd9f4f115c5086cf56bcf5927f77ee95a92135244f3ea27d",
+    "summary_sha256": "58ac9086b86efcae78180476e5631024f1e6c3afe08cc3f562ba5d35ea7ba22b"
+  },
+  "head": "e1de55cc14923cb4b8a219ac7f00d84e95ce0d78",
+  "observed_sha256": {
+    "rows_sha256": "be7c73edfff88b79bd9f4f115c5086cf56bcf5927f77ee95a92135244f3ea27d",
+    "summary_sha256": "58ac9086b86efcae78180476e5631024f1e6c3afe08cc3f562ba5d35ea7ba22b"
+  },
+  "passed": true,
+  "schema_version": 1,
+  "scientific_result": false,
+  "stage": "confirmation_unlock"
+}

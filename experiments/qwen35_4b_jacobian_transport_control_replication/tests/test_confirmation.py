@@ -157,3 +157,26 @@ def test_frozen_confirmation_requires_both_random_arms_and_wrong_specificity() -
     assert not failed["passed"]
     assert failed["gate_metrics"]["consequence_j_minus_wrong_target"] == 0.0
     assert failed["gate_metrics"]["wrong_donor_own_digit_shift"] == 0.0
+
+
+def test_saved_confirmation_recomputes_to_frozen_terminal_decision() -> None:
+    config = yaml.safe_load((EXP / "configs" / "default.yaml").read_text())
+    saved = json.loads((EXP / "runs" / "confirmation.json").read_text())
+    rows = _jsonl(EXP / "runs" / "confirmation_rows.jsonl")
+    controls = _jsonl(EXP / "runs" / "confirmation_control_rows.jsonl")
+    recomputed = evaluate_confirmation(
+        rows,
+        controls,
+        config,
+        design_pass=True,
+        calibration_pass=True,
+        causal_max_abs=float(saved["control_audit"]["causal_activation_max_abs"]),
+    )
+    assert len(rows) == 768
+    assert len(controls) == 960
+    assert recomputed["decision"] == "REPLICATED_J_TRANSPORT"
+    assert recomputed["summaries"] == saved["summaries"]
+    assert recomputed["gate_metrics"] == saved["gate_metrics"]
+    assert recomputed["control_audit"] == {
+        key: saved["control_audit"][key] for key in recomputed["control_audit"]
+    }

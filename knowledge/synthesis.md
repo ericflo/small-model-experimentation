@@ -179,16 +179,24 @@ use a true context-local set clamp, exact realized-delta-norm controls, and a co
 can license thought-prefix valuation or capability claims. See
 [qwen35_4b_jacobian_value_transport](../experiments/qwen35_4b_jacobian_value_transport/reports/report.md).
 
-Its context-local follow-up produced the opposite mechanistic signature but is not yet promotable. At the
-earlier selected-key token, all-24 J clamping changed 48/48 direct keys **and 48/48 separately mapped digits**;
-pair-only J reached 47/48 consequences, wrong-donor J produced its own digit 48/48, and logit-lens/random
-controls produced 0/48. Full-state donors localized transport to early/middle bands and became inert after
-layer 20. This is the first evidence here consistent with a compact causally consumed concept state rather
-than an output motor. But the frozen verdict is `INVALID_CONTROL`: one of 96 random rows had realized-norm
-error 1.155e-5 versus the 1e-5 bar, and bf16 rounding introduced up to 5.7% realized J-span projection.
-Therefore native-thought continuation remains gated. Replicate on fresh mappings with simultaneous
-post-quantization norm and span-orthogonality constraints. See
+Its first context-local follow-up produced the opposite mechanistic signature: at the earlier selected-key
+token, all-24 J clamping changed 48/48 direct keys **and 48/48 separately mapped digits**; pair-only J reached
+47/48 consequences, wrong-donor J produced its own digit 48/48, and logit-lens/random controls produced
+0/48. Full-state donors localized transport to early/middle bands and became inert after layer 20. But that
+experiment correctly remained `INVALID_CONTROL`: one of 96 random rows missed the realized-norm bar and
+bf16 rounding introduced up to 5.7% realized J-span projection. See
 [qwen35_4b_context_local_jacobian_clamp](../experiments/qwen35_4b_context_local_jacobian_clamp/reports/report.md).
+
+A fresh quantization-aware replication now resolves that invalidity. With the lens, band, scale, grammar,
+and model revision frozen, all-24 J again changed 48/48 direct keys and 48/48 mapped consequences; pair J
+reached 46/48, wrong-donor J produced its own consequence 48/48 and the target 0/48, while two independent
+random arms and the concept logit lens remained 0/48. All 480 calibration and 960 confirmation control-layer
+deltas met post-bf16 norm and <=1% J-span constraints; both paired bootstrap intervals were [1,1]. This is
+strong evidence for a compact **causally consumed context-local concept state**, not merely an output motor.
+The scope boundary is equally important: donor identity and coordinates are supplied, so this is an oracle
+mechanism—not a capability gain. It unlocks native-thought value transport and a learned non-oracle
+controller, which must still beat frozen and matched-compute sampling. See
+[qwen35_4b_jacobian_transport_control_replication](../experiments/qwen35_4b_jacobian_transport_control_replication/reports/report.md).
 
 ## Portfolio Implications
 

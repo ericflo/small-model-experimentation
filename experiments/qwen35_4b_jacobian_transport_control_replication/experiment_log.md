@@ -115,7 +115,7 @@ Created as a new experiment scaffold.
   `2bd6376c28283546a111e54ec2dd2e92a0fd6a64` and exact summary/row SHA-256
   hashes. The unlock reconstructs all 480 numeric identities and maxima.
 - Implemented exactly the eight frozen arms, 768-row completeness contract, and
-  a separate 480-row realized-control artifact.
+  a separate 960-row realized-control artifact.
 - Implemented the frozen endpoint against the worse of two random target rates,
   paired bootstrap lower bounds against both arms, wrong-donor own-value
   specificity, parse, clean, donor, causal, and numeric gates.
@@ -124,3 +124,23 @@ Created as a new experiment scaffold.
 - Completed and saved the pre-confirmation adversarial implementation audit.
   No confirmation outcome has been opened; implementation must be committed and
   pushed before the one run.
+
+## 2026-07-12 — untouched confirmation
+
+- Ran confirmation exactly once after implementation commit `e1de55cc` passed
+  both GitHub validation and site publication.
+- All-24 J selected the target on 48/48 direct prompts and 48/48 separately
+  computed mapped consequences. Baseline, random_a, random_b, and the concept
+  logit-lens selected the target on 0/48 for both prompt kinds.
+- Full target donors were 48/48 for both. Pair-only J was 48/48 direct and 46/48
+  consequence. Wrong-donor J selected its own key and mapped digit on 48/48 and
+  the registered target on 0/48.
+- All 960/960 confirmation control-layer rows passed. Maximum realized norm
+  error was 9.9709e-6; maximum J-span projection was 0.0099970. Forty-seven rows
+  used exact lattice repair, with at most three pairs.
+- Both paired 10,000-resample J-minus-random 95% intervals were exactly
+  `[1.0, 1.0]`; every clean, donor, specificity, parse, causal, and numeric gate
+  passed. Frozen decision: `REPLICATED_J_TRANSPORT`.
+- Scope remains oracle mechanism evidence: target donor identity is supplied,
+  the substrate is a fresh prompt-local lookup, and no model capability has
+  been installed or shown to beat matched-compute sampling.

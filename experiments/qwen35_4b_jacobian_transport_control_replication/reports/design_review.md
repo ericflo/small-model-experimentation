@@ -165,7 +165,8 @@ confirmation outcome was opened.
    both maxima.
 2. **A missing arm could silently improve the endpoint.** Pure decision logic
    requires exactly 48 items x 2 prompt kinds x 8 registered arms = 768 unique
-   outcome rows, plus exactly 480 unique random-control layer rows.
+   outcome rows, plus exactly 960 unique random-control layer rows
+   (`48 x 2 x 2 x 5`).
 3. **The easier random draw could be reported.** Primary effect uses the larger
    target rate of `random_a` and `random_b`; paired 10,000-resample lower bounds
    must independently exceed zero against both arms.

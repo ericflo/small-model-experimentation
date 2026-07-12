@@ -2,11 +2,16 @@
 
 ## Next Experiments
 
-- Replicate the invalid-but-perfect context-local J result on fresh mappings at
-  fixed band 4–8. Freeze the prior lens; require every post-bf16 random delta to
-  match J norm within 1e-5 **and** have realized J-span projection <=1e-3, with
-  multiple independent random draws. Native-thinking work remains forbidden
-  until this fresh control replication passes.
+- Move the replicated context-local J mechanism into native thinking. On fresh
+  verifier-scored procedural tasks, label thought-prefix value only on
+  train/selection continuations, freeze the layer/site/coordinate rule, and test
+  whether high-value J states causally improve untouched continuations against
+  two exact post-bf16 controls, wrong donors, ordinary logit directions,
+  activation addition, and matched extra-token/sample-more baselines.
+- If native thought-state transport passes, train a non-oracle prefix controller
+  and require a replicated held-out capability gain over frozen Qwen3.5-4B and
+  matched-compute sampling. Oracle donor selection is a mechanism control, not
+  the endpoint.
 - Build a standard failure-slicing template by operator, family, length, parse status, and evidence state.
 - Add attribution and ablation reports for high-performing compiler and selector lines.
 - Compare token-pressure and execution-pressure diagnostics across tasks.
@@ -26,5 +31,6 @@ Do not add diagnostics that cannot change an experiment decision or falsify an e
 Do not treat a coordinate that controls the next reported token as a reasoning
 variable until a separately computed consequence changes under a matched control.
 
-Do not promote the 48/48 context-local transport result while its frozen verdict
-is `INVALID_CONTROL`; repair the measurement on fresh items, not in place.
+Do not relabel the replicated 48/48 oracle context-local transport result as a
+capability gain. Target identity and clean donor coordinates are supplied; a
+native, non-oracle controller must earn deployment separately.

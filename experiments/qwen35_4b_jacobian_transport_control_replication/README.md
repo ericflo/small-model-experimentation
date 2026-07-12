@@ -72,14 +72,28 @@ Thirty-seven rows used lattice repair (34 at layer 8), with at most three pairs.
 The calibration artifacts contain only numeric geometry and explicitly record
 that logits/outcomes were not written. These are still plumbing results, not
 causal evidence. The hash-locked eight-arm confirmation runner and a second
-pre-run adversarial implementation audit are now complete; all untouched
-confirmation outcomes remain unopened.
+pre-run adversarial implementation audit were completed before the single run.
+
+Untouched confirmation returns `REPLICATED_J_TRANSPORT`:
+
+- all-24 J: 48/48 target keys and 48/48 target mapped digits;
+- full target donor: 48/48 and 48/48;
+- source/target pair J: 48/48 and 46/48;
+- wrong-donor J: 48/48 its own key and digit, 0/48 registered target;
+- concept logit lens, random_a, and random_b: 0/48 target in both prompt kinds;
+- both paired-bootstrap J-minus-random 95% intervals: `[1.0, 1.0]`; and
+- 960/960 realized confirmation control-layer rows valid, with maximum relative
+  norm error `9.9709e-6` and maximum J-span projection `0.0099970`.
+
+This independently confirms that the early context-local J coordinates carry a
+causally consumed concept state, not merely an imminent output direction.
 
 ## Scope
 
 Even a valid replication is oracle causal-mechanism evidence. The target concept
 and donor coordinates are supplied. It would license, but not itself constitute,
-a new experiment on native thinking and a learned non-oracle controller.
+a new experiment on native thinking and a learned non-oracle controller. It is
+not a capability gain and has not been compared with matched-compute sampling.
 
 ## Knowledgebase Update
 
@@ -88,5 +102,6 @@ a new experiment on native thinking and a learned non-oracle controller.
 
 ## Artifacts
 
-All small data, the frozen lens copy, control receipts, rows, metrics, and reports
-will be committed. No training or adapter is used.
+All small data, the frozen lens copy, failed and passing smoke receipts,
+calibration/confirmation controls, outcome rows, metrics, and reports are
+committed. No training or adapter is used.
