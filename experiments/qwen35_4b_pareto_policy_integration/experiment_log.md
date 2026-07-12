@@ -94,3 +94,18 @@ Created as a new experiment scaffold.
   therefore did not dissolve the frontier. This strengthens the motivation for
   the already-frozen policy-space test but does not change an arm, seed, gate,
   or hypothesis here.
+
+## 2026-07-12 — deep specialist regenerated
+
+- The committed C54 APEX corpus encoded 4,662/4,669 rows; the same seven
+  pre-audited non-training rows were omitted.
+- QLoRA completed the frozen 730/730 optimizer steps (2.5 epochs) with
+  whole-run train loss `0.882575`, 7,156.98 seconds wall time, and 16.13 GB
+  peak allocated CUDA memory on the NVIDIA L40.
+- Explicit composite installation applied 128/128 nonzero LoRA deltas in CUDA
+  FP32 with TF32 disabled. Their summed Frobenius norm is `248.5323` (maximum
+  `4.1774`), and the merged model weight hash is
+  `3bf936150a0a68e80a7a2ef3564334503fdfc3dfb3dcc5f6dfa0b1b12b7cf28b`.
+- Both specialist receipts now bind the pinned base revision, exact external
+  adapter/composite paths, and model-weight hashes. No specialist task score
+  was inspected during either training run.
