@@ -2,7 +2,7 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 53
+- Claims: 54
 
 ## Status Counts
 
@@ -11,25 +11,25 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | Confirmed | 7 |
 | Negative | 3 |
 | Open | 2 |
-| Promising | 41 |
+| Promising | 42 |
 
 ## Program Counts
 
 | Program | Claims |
 | --- | ---: |
 | `active_evidence_acquisition` | 1 |
-| `agentic_breadth_installation` | 4 |
+| `agentic_breadth_installation` | 5 |
 | `algorithmic_memory_and_retrieval` | 1 |
 | `benchmark_generalization` | 13 |
 | `collective_experimentation_infrastructure` | 2 |
 | `evidence_conditioned_selection` | 9 |
 | `interpretability_and_diagnostics` | 8 |
 | `operator_and_skill_inventories` | 1 |
-| `posttraining_and_adaptation` | 27 |
+| `posttraining_and_adaptation` | 28 |
 | `process_control_and_tool_use` | 3 |
 | `reliability_and_safety` | 5 |
 | `structured_execution_and_compilers` | 29 |
-| `test_time_reasoning_budget` | 7 |
+| `test_time_reasoning_budget` | 8 |
 
 ## C1: Structured intermediates improve small-model reliability
 
@@ -1292,3 +1292,27 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - Do not attribute the plateau to gym difficulty (in-gym frontier competence installs; the blackbox band still holds).
 - Do not begin a mandatory multi-specialist run from downstream endpoint headroom alone: every teacher's absolute gain bar must be reachable under its score ceiling.
 - When two sessions run concurrently, claim IDs must be reserved at append time against origin (this claim was lost once to an ID collision + dedupe).
+
+## C54: TIER-PARETO FRONTIER: novel serial-compute mechanisms (length-penalized compression advantage + skin-shuffle) DECISIVELY clear the +0.32 MEDIUM menagerie bar for the first time (+0.345, all events), but no single Qwen3.5-4B adapter clears quick AND medium together — the two tiers occupy a non-convex Pareto frontier and compete for the fixed model's representational budget
+
+- Status: `Promising`
+- Programs: `agentic_breadth_installation`, `posttraining_and_adaptation`, `test_time_reasoning_budget`
+- Summary: Experiment qwen35_4b_gauntlet_frontier, breakthrough phase. First-principles diagnosis of the C53 medium ceiling: the residual axes (menders/lockpick/stockade/rites = search/induction) are a SERIAL-COMPUTE wall (C44) — long derivations that do not fit the deployed budget, so the emission policy commits early to wrong answers. Three NEW mechanisms (exploiting the unique verifier+generator control, not a recipe remix): (1) LENGTH-PENALIZED COMPRESSION ADVANTAGE — a custom weighted loss (train_think.py compute_loss, abs-normalized) that banks the model's OWN shortest correct trace per hard item plus a positive-only brevity gradient active ONLY where it already succeeds, amortizing serial test-time compute into the weights; harvest confirmed 36% unreachable-at-K=6 and a 19% shorter path on the solvable 63%; (2) SKIN-SHUFFLING — fresh pseudo-vocabulary on every training row (base.skin_mapping/apply_skin, SKINNABLE on 10/12 families) so procedures bind to mechanics not tokens; (3) GRPO-lite contrast (wrong answers pushed down, answer-span only, C29 guard). RESULTS (paired vLLM merged events): the APEX arm (blend broad recipe + efficiency-compression + skin, co-trained FROM BASE) is the FIRST arm in ~50 paired events to DECISIVELY clear the +0.32 medium bar: medium +0.345 (n=3, all three events above: +0.353/+0.346/+0.336), lifting the residual axes (lockpick/induction, stockade/optimization) that every prior arm left flat. Its quick arm-mean is +0.308 (n=6), just under. The MIRROR arm blend clears quick (+0.409) not medium (+0.307). The dose-interpolation apex60 (blend + 60% residual) is STRICTLY DOMINATED (quick +0.313, medium +0.285): the trade-off is NON-CONVEX — the medium lift appears only at full residual dose while the quick cost appears even partially. Across 13 arms / ~50 events, both tiers are individually breakable past +0.32 (quick 0.41, medium 0.345) but no single 4B adapter clears both; they form a non-convex tier-Pareto frontier and compete for fixed representational capacity. Absolute levels reached: quick ~0.45-0.52, medium ~0.43-0.48, from a ~0.10-0.16 base (3-5x).
+- Implication: Two deployable laws for the fixed 4B: (a) the serial-compute ceiling on hard agentic tasks IS movable by amortizing the model's own long-budget successes into short-budget weights (compression distillation) — this broke the medium wall that gold-procedure supervision (C53) could not; (b) a single small model cannot simultaneously maximize short-atom and episode/deep-atom competence — deploy per-tier specialists (blend for quick regimes, apex for medium/deep) or accept the Pareto trade-off. The +0.32-both-tiers target sits just beyond a single 4B adapter's frontier; a larger model or a tier-router is required to clear both at once.
+
+### Evidence
+
+- [`qwen35_4b_gauntlet_frontier`](../../experiments/qwen35_4b_gauntlet_frontier/reports/report.md)
+
+### Next Tests
+
+- Tier-router or MoE-of-adapters: serve blend for short-horizon, apex for episode/deep — does the routed system clear both tiers where a single adapter cannot?
+- Compression distillation at LARGER harvest budget (8192) then distill to 1024: does a bigger long-budget success pool push medium past +0.40?
+- Quantify the Pareto frontier: sweep residual-dose 0/30/60/100% x 3 seeds x 2 tiers to trace the exact trade-off curve and confirm non-convexity
+- Does the compression mechanism transfer to a genuinely larger model (provenance permitting a separate line) — is the tier-Pareto a 4B-capacity artifact?
+
+### Avoid
+
+- Do not interpolate between the quick-optimal and medium-optimal arms expecting a both-clearing midpoint (apex60 proved the frontier non-convex; the midpoint is strictly dominated).
+- Do not warm-start the residual mechanisms onto the blend adapter (displaces breadth; co-train from base).
+- Do not read the medium result as reachable by gold-procedure supervision — it required the model's OWN compressed successes (C53 showed oracle traces do not clear it).

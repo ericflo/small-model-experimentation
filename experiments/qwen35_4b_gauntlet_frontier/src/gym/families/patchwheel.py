@@ -53,6 +53,13 @@ TOKENS = (
     "plim",
 )
 
+# Skin-shuffling: the invented tape-token vocabulary can be consistently
+# renamed without changing mechanics (scoring compares tokens as exact
+# strings). EXCLUDED: the rule-grammar words (every/becomes/swap/first/last/
+# reverse/all/rotate/left/right/drop/after/before/double), the RULE / RUN
+# action grammar, evidence labels (E1...), and the ANSWER protocol word.
+SKINNABLE: tuple[str, ...] = TOKENS
+
 MAX_TURNS = {1: 4, 2: 6, 3: 10, 4: 14, 5: 18, 6: 22}
 
 _LEVEL_SHAPE = {

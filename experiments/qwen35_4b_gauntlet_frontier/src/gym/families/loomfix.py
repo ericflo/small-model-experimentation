@@ -35,6 +35,10 @@ HAS_EPISODES = True
 
 REGS = ("A", "B", "C", "D")
 MAX_TURNS = {1: 4, 2: 6, 3: 10, 4: 14, 5: 18, 6: 22}
+
+# SPOOL is a formal register language (regs A-D, fixed op verbs): no invented
+# proper nouns to reskin, so it already binds to mechanics not surface words.
+SKINNABLE = ()
 _SEARCH_CONST_MAX = 12  # covers generated constants (<=9) plus +-3 mutations
 
 _LEVEL_SHAPE = {

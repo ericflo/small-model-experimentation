@@ -90,6 +90,29 @@ events, 10 arms): mix composition is a convex optimization axis; the
 quick-tier ceiling yields to it, the medium tier does not clear +0.32 at
 arm-mean within this recipe family.
 
+## Breakthrough addendum — novel serial-compute mechanisms clear medium; tier-Pareto frontier
+
+First-principles diagnosis (not a recipe remix): the medium ceiling is a
+serial-compute wall — the residual axes (search/induction) need long
+derivations that exceed the deployed budget, so the emission policy commits
+early to wrong answers. Three new mechanisms exploiting the verifier+generator
+control: (1) a custom length-penalized COMPRESSION ADVANTAGE that banks the
+model's own shortest correct trace per hard item (amortizing serial compute
+into weights), (2) SKIN-SHUFFLING (fresh pseudo-vocabulary every row -> bind
+mechanics not tokens), (3) GRPO-lite contrast (wrong pushed down, C29-guarded).
+
+The APEX arm (blend recipe + these mechanisms, co-trained from base) is the
+FIRST arm to decisively clear the +0.32 medium bar: **medium +0.345 (all three
+events above)**, lifting exactly the reasoning-heavy axes prior arms left flat
+(lockpick/induction +0.267, stockade/optimization +0.289). Its quick mean is
++0.308. The mirror arm blend clears quick (+0.409) not medium. The dose
+interpolation apex60 is strictly dominated (quick +0.313 / medium +0.285),
+proving the trade-off non-convex. Conclusion (claim C54): both tiers are
+individually breakable past +0.32, but no single 4B adapter clears both — the
+two tiers occupy a non-convex Pareto frontier and compete for the fixed model's
+representational budget. Absolute levels 0.45-0.52 (quick) / 0.43-0.48 (medium)
+from a ~0.12 base.
+
 ## Next Experiments
 
 - Failure forensics on the residual axes at deployed budgets (gym proxies).

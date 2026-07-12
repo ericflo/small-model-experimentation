@@ -45274,97 +45274,79 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "Nine paired events, six escalation levers, one unmoved band: the second wall",
+     "title": "The tier-Pareto frontier: each arm wins one tier, none wins both (+0.32 bar)",
      "categories": [
-      "recovery-only",
-      "ferrier-only",
-      "breadth-matched",
-      "frontier quick 53004",
-      "frontier quick 53005",
-      "frontier medium",
-      "sharp1024 quick 53007",
-      "sharp1024 quick 53008",
-      "sharp1024 medium"
+      "blend (quick-optimal)",
+      "apex (medium-optimal)",
+      "apex60 (interpolation)"
      ],
      "series": [
       {
-       "label": "paired delta over base (same seed & backend)",
+       "label": "quick arm-mean delta",
        "values": [
-        0.1216,
-        0.3141,
-        0.3302,
-        0.2716,
-        0.3135,
-        0.3196,
-        0.2934,
-        0.2376,
-        0.3418
+        0.409,
+        0.308,
+        0.313
+       ]
+      },
+      {
+       "label": "medium arm-mean delta",
+       "values": [
+        0.307,
+        0.345,
+        0.285
        ]
       }
      ],
-     "y_label": "menagerie aggregate delta (vLLM merged deployment)",
-     "note": "Except for pure emission repair (recovery-only), every treatment lands in the +0.24..+0.34 band; the goal bar of decisively exceeding +0.32 on both tiers was not met — the plateau is the finding (claim C51).",
+     "y_label": "menagerie aggregate delta over base (paired, vLLM merged)",
+     "note": "blend clears quick not medium; apex clears MEDIUM (first ever, all 3 events > +0.32) not quick; the 60% dose interpolation is strictly dominated, so the frontier is non-convex. No single 4B adapter clears both (claim C54).",
      "source": "runs/menagerie_log.jsonl"
     },
     {
      "kind": "bar",
-     "title": "One task world installs almost everything ten do",
+     "title": "The novel mechanisms broke medium by lifting the reasoning-heavy residual axes",
      "categories": [
-      "menagerie quick delta",
-      "gym transfer: spindle (held out)",
-      "gym transfer: runeward"
+      "lockpick (induction)",
+      "stockade (optimization)",
+      "mirage (abstention)",
+      "siftstack (triage)",
+      "menders (repair)"
      ],
      "series": [
       {
-       "label": "ferrier-only (665 examples)",
+       "label": "apex medium per-family delta",
        "values": [
-        0.3141,
-        0.748,
-        0.944
-       ]
-      },
-      {
-       "label": "breadth-matched (665 examples)",
-       "values": [
-        0.3302,
-        0.752,
-        0.933
+        0.267,
+        0.289,
+        0.767,
+        0.633,
+        -0.028
        ]
       }
      ],
-     "y_label": "score / delta",
-     "note": "The install is a substrate-agnostic behavioral policy (conclude, commit tersely); content breadth adds only axis-aligned increments (e.g. chronicle +0.750 vs +0.375 favors breadth).",
-     "source": "runs/menagerie_log.jsonl; runs/eval_gym_ablation_*/scores.json"
+     "y_label": "medium per-family delta over base (mean of 3 events)",
+     "note": "The compression-advantage + skin-shuffle mechanisms moved exactly the search/induction axes that all prior arms (including gold oracle traces, C53) left flat. menders (deep repair) remains the last stuck axis.",
+     "source": "runs/menagerie_log.jsonl"
     },
     {
      "kind": "bar",
-     "title": "Harder practice installed in the playground — and the benchmark still did not move",
+     "title": "The serial-compute diagnosis, confirmed by the harvest",
      "categories": [
-      "gym L1-L4 mean",
-      "gym L5-L6 mean (new frontier strata)",
-      "menagerie quick absolute (after)"
+      "unreachable at K=6 (too-hard tail)",
+      "solvable but slow (compressible)"
      ],
      "series": [
       {
-       "label": "before (base / round-1 reference)",
+       "label": "fraction of hard-strata items",
        "values": [
-        0.184,
-        0.02,
-        0.128
-       ]
-      },
-      {
-       "label": "after frontier training",
-       "values": [
-        0.681,
-        0.466,
-        0.423
+        0.36,
+        0.64
        ]
       }
      ],
-     "y_label": "mean score",
-     "note": "L5-L6 base reference is approximate (near-zero). In-distribution frontier competence installs; the blackbox aggregate stays in the same band as the un-escalated recipe — the residual is a capability core, not a difficulty-coverage gap.",
-     "source": "runs/eval_gym_frontier/scores.json; runs/menagerie_log.jsonl"
+     "y_label": "fraction of items",
+     "note": "36% of hard items the model cannot solve even in 6 tries (the genuine capability core); the other 64% it solves but 19% too slowly to fit budget — the compression mechanism's target.",
+     "source": "scripts/build_efficiency_data.py output"
     }
    ]
   },

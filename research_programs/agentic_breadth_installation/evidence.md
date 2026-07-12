@@ -33,6 +33,12 @@
   recipe variant moves the band; a single rich family installs nearly the
   full effect (breadth is an axis-aligned increment, not the mechanism).
 
+- Claim: C54 (Promising) — novel serial-compute mechanisms (compression
+  advantage + skin-shuffle, co-trained from base = the apex arm) DECISIVELY
+  clear the +0.32 MEDIUM bar for the first time (+0.345, all events), breaking
+  the wall gold-procedure supervision (C53) could not; but no single 4B adapter
+  clears quick AND medium — a non-convex tier-Pareto frontier.
+
 ## Current Read
 
 Breadth + strict verifiers + emission-seam supervision is the first recipe in

@@ -71,6 +71,10 @@ FLAG_POOL = (
     ("slip-ring", ("WHOLE", "CRACKED")),
 )
 
+_FLAG_NAMES = tuple(name for name, _ in FLAG_POOL)
+_FLAG_WORDS = tuple(w for _, words in FLAG_POOL for w in words)
+SKINNABLE = STEP_NAMES + _FLAG_NAMES + _FLAG_WORDS
+
 _LEVEL_SHAPE = {
     # level: (n_steps, n_flags, max_turns, (flag_pre lo,hi), (step_pre lo,hi), eff_hi)
     1: (4, 2, 4, (0, 1), (0, 1), 1),

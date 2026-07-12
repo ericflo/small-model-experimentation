@@ -45,10 +45,15 @@ def encode_row(rec: dict, tok, max_length: int, w_think: float) -> dict | None:
     # Forced-close recovery examples condition on a truncated chain; the chain
     # is context, not target behavior.
     row_w_think = 0.0 if rec["kind"].endswith("_fc") else w_think
+    row_weight = float(rec.get("row_weight", 1.0))
+    # Negative-advantage rows (GRPO-lite) push down the ANSWER span only;
+    # never apply negative gradient to thinking (C29 collapse guard).
+    if row_weight < 0:
+        row_w_think = 0.0
     weights = (
         [0.0] * len(pid)
-        + [row_w_think] * (len(mid) - len(pid))
-        + [1.0] * (len(fid) - len(mid))
+        + [row_w_think * abs(row_weight)] * (len(mid) - len(pid))
+        + [row_weight] * (len(fid) - len(mid))
     )
     labels = [
         -100 if weight == 0.0 else token
@@ -104,6 +109,8 @@ def main():
     ap.add_argument("--batch-size", type=int, default=4)
     ap.add_argument("--grad-accum", type=int, default=4)
     ap.add_argument("--max-length", type=int, default=3072)
+    ap.add_argument("--warm-start", type=Path, default=None,
+                    help="existing adapter dir to continue training from")
     ap.add_argument("--w-think", type=float, default=0.2,
                     help="loss weight on think tokens (answer/action tokens are 1.0; "
                          "recovery-arm think is always 0.0)")
@@ -156,8 +163,12 @@ def main():
         MODEL_ID, revision=MODEL_REVISION, trust_remote_code=True, device_map="cuda",
         dtype=torch.bfloat16, quantization_config=bnb, attn_implementation="sdpa")
     model = prepare_model_for_kbit_training(model, use_gradient_checkpointing=True)
-    model = get_peft_model(model, LoraConfig(r=args.rank, lora_alpha=args.alpha, lora_dropout=0.05,
-                                             bias="none", task_type="CAUSAL_LM", target_modules=TARGET))
+    if args.warm_start is not None:
+        from peft import PeftModel
+        model = PeftModel.from_pretrained(model, str(args.warm_start), is_trainable=True)
+    else:
+        model = get_peft_model(model, LoraConfig(r=args.rank, lora_alpha=args.alpha, lora_dropout=0.05,
+                                                 bias="none", task_type="CAUSAL_LM", target_modules=TARGET))
     model.config.use_cache = False
     model.print_trainable_parameters()
 
@@ -189,7 +200,9 @@ def main():
                 reduction="none",
             ).view_as(shift_labels)
             mask = (shift_labels != -100).float() * shift_weights
-            loss = (losses * mask).sum() / mask.sum().clamp(min=1.0)
+            # abs-normalize: negative (push-down) weights must not shrink or
+            # flip the denominator
+            loss = (losses * mask).sum() / mask.abs().sum().clamp(min=1.0)
             return (loss, outputs) if return_outputs else loss
 
     BucketOrderTrainer(model=model, args=targs, train_dataset=ThinkSftData(encoded),

@@ -119,3 +119,49 @@ Created as a new experiment scaffold.
   records 0.5224/0.5214). Medium arm-means cluster at ~0.26-0.31 across all
   compositions; the conjunctive +0.32-both-tiers bar is not reachable by
   any composition of this recipe family's data. Quick: decisively broken.
+
+## 2026-07-11 (BREAKTHROUGH + logical conclusion) — novel mechanisms clear MEDIUM; tier-Pareto frontier mapped
+
+First-principles reframing (user directive to invent, not remix): the medium
+ceiling is a SERIAL-COMPUTE wall — the residual axes (menders/lockpick/
+stockade/rites) are search/induction that need long derivations which do not
+fit the deployed budget, so the emission policy was teaching early commitment
+to WRONG answers. Three NEW weapons built (exploiting the unique verifier +
+generator control):
+- **Length-penalized compression advantage** (scripts/build_efficiency_data.py,
+  custom loss in train_think.py): rewards the model's OWN shortest correct
+  trace per hard item + a positive-only brevity gradient, active ONLY where it
+  already succeeds (safe by construction) — amortizes serial test-time compute
+  into the weights ("think faster"). Harvest confirmed the premise: 36%
+  unreachable-at-K=6, 19% shorter path on the solvable 63%.
+- **Skin-shuffling** (base.skin_mapping/apply_skin + SKINNABLE on 10 families,
+  build_skinshuffled_traces.py): fresh pseudo-vocabulary on EVERY training row
+  (kilnrite damper/OPEN -> draurdaush/Haurmorm) so procedures bind to mechanics,
+  not tokens — the only thing that transfers to the blackbox instrument.
+- **GRPO-lite contrast**: wrong answers pushed down (answer-span only, C29
+  guard: never negative gradient on thinking; abs-normalized loss).
+
+Arms (paired vLLM merged; quick n up to 6, medium n=3):
+- **effskin** (warm-start from blend): quick +0.333, medium +0.272 — the novel
+  mechanisms MOVED the targeted residual axes on medium (lockpick/induction
+  +0.267, stockade/optimization +0.289) but warm-start displaced blend breadth.
+- **apex** (blend + efficiency + skin, from BASE): quick +0.308 (n=6),
+  **medium +0.345 (n=3, ALL three events > +0.32: +0.353/+0.346/+0.336)** —
+  the FIRST arm in the entire campaign to DECISIVELY clear the +0.32 medium
+  bar. The residual-axis gains stacked on breadth when co-trained from base.
+- **apex60** (blend + 60% residual dose): quick +0.313, medium +0.285 —
+  STRICTLY DOMINATED (worse than blend on quick, worse than apex on medium):
+  the tier trade-off is NON-CONVEX. The medium lift materializes only at the
+  full residual dose; partial doses lose it while still paying the quick cost.
+
+DEFINITIVE CONCLUSION (~50 paired events, 13 arms across dose/iteration/
+breadth/difficulty/recovery/budget-matching/oracle-distillation/mix-composition/
+compression-advantage/skin-shuffle/GRPO-lite/from-base-union/dose-interpolation):
+both tiers are INDIVIDUALLY breakable past +0.32 — quick to +0.41 (blend),
+medium to +0.345 (apex) — but NO single Qwen3.5-4B adapter clears BOTH. The
+two tiers (short-atom vs episode/deep-atom) occupy a non-convex Pareto frontier
+and compete for the fixed model's representational budget; the arm that clears
+one falls ~0.01-0.03 short on the other. The goal's conjunctive +0.32-both-tiers
+bar sits just beyond a single 4B adapter's tier-Pareto frontier — but the
+medium half, long the harder wall, was genuinely broken here for the first time
+by mechanisms designed from the serial-compute diagnosis.

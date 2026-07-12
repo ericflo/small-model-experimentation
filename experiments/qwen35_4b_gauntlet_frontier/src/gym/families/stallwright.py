@@ -52,6 +52,18 @@ STALL_NAMES = (
 )
 CATEGORIES = ("food", "cloth", "charm", "herb", "spice", "toys")
 
+# Invented proper-noun lexemes that can be consistently renamed (whole-word
+# substitution) without changing task mechanics: the stall names and the fair
+# name. Stall names reach score_atom only through gold["stalls"][i]["name"]
+# (plain string values, compared case-insensitively against reply tokens), so
+# a skin that rewrites prompt and gold together stays consistent.
+# Excluded: CATEGORIES — they are gold["quotas"] dict KEYS, which whole-word
+# skinning of values does not rewrite, so renaming them would desynchronize
+# stall categories from quota keys; also plain English, not invented names.
+# Excluded: S<n> ids (score_atom parses int(sid[1:])), units (gilds, spans),
+# numbers, and the ANSWER protocol.
+SKINNABLE: tuple[str, ...] = STALL_NAMES + ("Tarnmoot",)
+
 _LEVEL_SHAPE = {
     # level: (n_stalls, n_categories, n_rival_pairs, n_quotas, n_bonds,
     #         cap_frac_range)

@@ -37,15 +37,15 @@ This is a repository-level inventory. Each experiment remains the source of trut
 
 | Extension | Files |
 | --- | ---: |
-| `.json` | 2372 |
+| `.json` | 2415 |
 | `.csv` | 2138 |
-| `.py` | 1379 |
+| `.py` | 1384 |
 | `.md` | 902 |
 | `.png` | 848 |
-| `.jsonl` | 690 |
+| `.jsonl` | 696 |
 | `.log` | 527 |
-| `.yaml` | 329 |
-| `.gz` | 91 |
+| `.yaml` | 330 |
+| `.gz` | 103 |
 | `.html` | 90 |
 | `.sh` | 19 |
 | `.txt` | 5 |
@@ -57,9 +57,12 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | Size MB | File |
 | ---: | --- |
 | 15.7 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_sharp1024.jsonl` |
+| 14.3 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_apex.jsonl` |
 | 14.1 | `experiments/qwen35_4b_active_counterexample_trace_selection/reports/policy_rows.json` |
 | 11.9 | `experiments/qwen35_4b_partial_structure_search/data/calibration_candidates.jsonl` |
 | 11.4 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_frontier.jsonl` |
+| 11.4 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_apex60.jsonl` |
+| 10.8 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_effskin.jsonl` |
 | 10.7 | `experiments/qwen35_4b_gauntlet_breadth_round1/data/sft_round3_fast.jsonl` |
 | 10.4 | `experiments/qwen35_4b_reliability_exec_opsd_audit/data/exec_token_pressure_scores.jsonl` |
 | 8.5 | `experiments/qwen35_4b_learned_active_trace_policy/data/static_bridge_80/dsl_train.jsonl` |
@@ -83,6 +86,3 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | 6.0 | `experiments/feature_factorized_rule_diversity/data/repair_all.jsonl` |
 | 5.8 | `experiments/qwen35_4b_active_counterexample_trace_selection/data/eval/dsl_eval_support.jsonl` |
 | 5.8 | `experiments/qwen35_4b_learned_active_trace_policy/data/eval/dsl_eval_support.jsonl` |
-| 5.7 | `experiments/qwen35_4b_foofah_selective_program_fallback/reports/program_probe_records.jsonl` |
-| 5.7 | `experiments/qwen35_4b_foofah_selective_program_fallback/reports/final_records.jsonl` |
-| 5.6 | `experiments/qwen35_4b_bucket_belief_probe_ranker/data/bucket_eval_examples.jsonl` |

@@ -333,3 +333,47 @@ def _run_episode(episode: Any, policy_class: Callable[[Any], Any]) -> float:
     score = episode.score()
     _check(0.0 <= score <= 1.0, "episode score outside [0,1]")
     return score
+
+
+# ---------------------------------------------------------------------------
+# Skin shuffling: consistent re-skinning of a family's invented lexicon so no
+# surface form repeats across training items (anti-surface-binding).
+# ---------------------------------------------------------------------------
+
+_SKIN_ONSETS = ("br", "cl", "dr", "fl", "gr", "kr", "pl", "sk", "tr", "vl",
+                "m", "n", "th", "qu", "z", "h")
+_SKIN_VOWELS = ("a", "e", "i", "o", "u", "au", "ei", "oa", "ur")
+_SKIN_CODAS = ("x", "n", "sh", "rm", "st", "ck", "p", "l", "rd", "v")
+
+
+def pseudo_word(rng: random.Random, capitalize: bool = False) -> str:
+    word = (rng.choice(_SKIN_ONSETS) + rng.choice(_SKIN_VOWELS)
+            + rng.choice(_SKIN_CODAS) + rng.choice(_SKIN_VOWELS)
+            + rng.choice(_SKIN_CODAS))
+    return word.capitalize() if capitalize else word
+
+
+def skin_mapping(skinnable: tuple, rng: random.Random) -> dict:
+    used: set = set()
+    mapping = {}
+    for word in skinnable:
+        while True:
+            fresh = pseudo_word(rng, capitalize=word[:1].isupper())
+            if fresh not in used and fresh.lower() not in (w.lower() for w in skinnable):
+                used.add(fresh)
+                break
+        mapping[word] = fresh
+    return mapping
+
+
+def apply_skin(value, mapping: dict):
+    """Recursively substitute whole-word lexemes in strings/lists/dicts."""
+    if isinstance(value, str):
+        for old, new in sorted(mapping.items(), key=lambda kv: -len(kv[0])):
+            value = re.sub(r"\b" + re.escape(old) + r"\b", new, value)
+        return value
+    if isinstance(value, list):
+        return [apply_skin(item, mapping) for item in value]
+    if isinstance(value, dict):
+        return {key: apply_skin(item, mapping) for key, item in value.items()}
+    return value

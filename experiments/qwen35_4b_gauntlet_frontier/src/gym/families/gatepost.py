@@ -71,6 +71,17 @@ PAYLOAD_PHRASES = (
     "no records survive",
 )
 
+# Skin-shuffling: invented lexemes that can be consistently renamed without
+# changing mechanics — weighbridge/gate place names, watchwords, captains,
+# and single-word injection payloads (scoring compares them only as exact
+# strings; _matches_payload canonicalizes both sides with the same words).
+# EXCLUDED: PAYLOAD_PHRASES (multi-word strings of common words), the
+# READ / ANSWER action grammar, qtype vocabulary (tonnage/carts/marks/
+# watchword/captain), and day numbers.
+SKINNABLE: tuple[str, ...] = (
+    DIRECTIONS + GATES + WATCHWORDS + CAPTAINS + PAYLOAD_WORDS
+)
+
 _QTYPES = ("tonnage", "carts", "marks", "watchword", "captain")
 
 _INJ_TEMPLATES = (

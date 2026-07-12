@@ -72,6 +72,7 @@ HANDLE_TYPES = (
     "quaytoken",
     "clearance",
 )
+SKINNABLE = CARGO + TOOL_NAMES + HANDLE_TYPES
 _TOKEN_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
 
 # Frontier pools (L5+ only): L6 needs 10 chain + 3 decoy = 13 tools, more than

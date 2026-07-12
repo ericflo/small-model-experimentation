@@ -79,6 +79,46 @@ FRONTIER_CHAMBERS = CHAMBERS + (
 )
 
 
+# Skin-shuffling: invented proper-noun lexemes that can be consistently
+# renamed without changing mechanics (every chamber name, frontier pool
+# included). The two-word chamber "Amber Sump" is listed as its two
+# single-word halves so each entry matches as one whole word; renaming both
+# renames the chamber. EXCLUDED: direction words (north/south/east/west/
+# up/down) — they are the action grammar and the reverse-direction rule the
+# verifier simulates — and the GO / ANSWER protocol words.
+SKINNABLE: tuple[str, ...] = (
+    "Sootway",
+    "Dripvault",
+    "Amber",
+    "Sump",
+    "Fernwell",
+    "Mosshollow",
+    "Grubline",
+    "Emberdeep",
+    "Rootgall",
+    "Tallowmere",
+    "Quartzrun",
+    "Palegrotto",
+    "Bramblehole",
+    "Cinderpit",
+    "Loamgate",
+    "Duskhollow",
+    "Wormcourt",
+    "Haldenook",
+    "Mirebend",
+    "Stonelap",
+    "Gnarlden",
+    "Veilscar",
+    "Chalkreach",
+    "Umberden",
+    "Saltgleam",
+    "Hushcavern",
+    "Twinesump",
+    "Marrowick",
+    "Coldfen",
+)
+
+
 def _name_pool(level: int) -> tuple:
     return CHAMBERS if level <= 4 else FRONTIER_CHAMBERS
 

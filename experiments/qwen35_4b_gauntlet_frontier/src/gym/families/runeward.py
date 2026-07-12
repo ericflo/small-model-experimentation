@@ -49,6 +49,15 @@ RUNES = (
     "osk",
 )
 
+# Invented proper-noun lexemes that can be consistently renamed (whole-word
+# substitution) without changing task mechanics: the rune-ward names. They
+# appear in prompts only as standalone lowercase words, never inside another
+# word, and the verifier compares an integer (or the protocol word
+# IMPOSSIBLE), so no skinnable string is ever consulted by score_atom.
+# Excluded: IMPOSSIBLE (protocol word score_atom matches exactly), mechanics
+# words (ward, charge, binding, vault), numbers, and the ANSWER protocol.
+SKINNABLE: tuple[str, ...] = RUNES
+
 _NUM_WORD = {3: "Three", 4: "Four", 5: "Five", 6: "Six", 7: "Seven"}
 
 _LEVEL_SHAPE = {

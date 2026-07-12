@@ -30,6 +30,16 @@ HAS_EPISODES = False
 CART_NAMES = ("Farrow", "Osselt", "Tinbar", "Quenby", "Marlock", "Veldane")
 KINDS = ("wet", "dry", "loose")
 
+# Skin-shuffling: invented lexemes that can be consistently renamed without
+# changing mechanics — the packhouse place name, cart names, and goods-kind
+# labels (scoring treats cart names and kinds as opaque strings: name lookup
+# and same-kind set equality only). EXCLUDED: crate ids (c1..c15; verifier
+# keys on them and they follow a protocol-like pattern), units (stone/marks),
+# and the ANSWER protocol word. Note gold["optimal_plan"] keys are cart
+# names; score_atom never reads optimal_plan, but a dict-KEY-aware skin is
+# needed if that mapping is ever compared directly.
+SKINNABLE: tuple[str, ...] = ("Verrowfield",) + CART_NAMES + KINDS
+
 _LEVEL_SHAPE = {
     # level: (n_crates, n_carts, n_kinds, cap_frac_range)
     1: (8, 2, 0, (0.52, 0.66)),

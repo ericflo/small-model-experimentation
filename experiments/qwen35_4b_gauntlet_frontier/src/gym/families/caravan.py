@@ -53,6 +53,21 @@ STOPS = (
     "Weirmarket",
 )
 
+# Invented proper-noun lexemes that can be consistently renamed (whole-word
+# substitution) without changing task mechanics: goods, crew names, and the
+# proper-noun stop words ("Harrow Fen" skins as two independent words).
+# Excluded: common-noun stops ("the ford", "the tollgate", "the salt road",
+# "the low bridge"), mechanics words (caravan, crates, crew, dawn), numbers,
+# and the ANSWER protocol. The verifier is exact-int, so no skinnable string
+# is ever consulted by score_atom.
+SKINNABLE: tuple[str, ...] = GOODS + CREW + (
+    "Gullwatch",
+    "Harrow",
+    "Fen",
+    "Cinderholt",
+    "Weirmarket",
+)
+
 _LEVEL_SHAPE = {
     # level: (n_events, n_goods, allow_crew, allow_conditional, allow_exchange)
     1: (6, 3, False, False, False),

@@ -44,6 +44,32 @@ STEMS = {
 }
 ORGS = ("Guild", "Lodge", "House", "Order")
 
+# Invented proper-noun lexemes that can be consistently renamed (whole-word
+# substitution) without changing task mechanics: patron stems, their derived
+# plural alias forms ("<stem>s"), every near-miss distractor spelling, the org
+# suffixes, and the alias suffix words Kin/Sons. All of these appear in
+# prompts only as standalone \b-delimited words, and the verifier is
+# exact-int, so no skinnable string is ever consulted by score_atom.
+#
+# Deliberate substring pairs: each stem is a raw substring of its plural form
+# and of some distractor variants (e.g. "Ostren" < "Ostrens"/"Ostrend").
+# This is safe under the skinning contract (base.apply_skin and the skin
+# harness both substitute longest-first with \b word boundaries): a shorter
+# entry can never whole-word-match inside a longer entry's occurrence.
+# Dropping the longer forms instead would leak the stems' spellings through
+# "Ostrens"/"Ostrend"-style surfaces on every skin, defeating the purpose.
+# Excluded: ledger scaffold words (commission, ledger, marks, bells, Note,
+# Amend), C<id>/d<day> codes, numbers, and the ANSWER protocol. "Order" is
+# safe against the scaffold's lowercase "clerk order (not day order)" because
+# skinning is case-sensitive.
+SKINNABLE: tuple[str, ...] = (
+    tuple(STEMS)                                    # patron stems
+    + tuple(f"{stem}s" for stem in STEMS)           # plural alias forms
+    + tuple(v for pair in STEMS.values() for v in pair)  # distractor spellings
+    + ORGS
+    + ("Kin", "Sons")                               # alias suffix words
+)
+
 _LEVEL_SHAPE = {
     # level: (n_commissions, n_amendments, n_real_patrons, n_distractors, max_chains)
     1: (8, 0, 3, 0, 0),

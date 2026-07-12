@@ -39,6 +39,12 @@ GLYPHS = ("za", "ke", "ro", "mu", "ti", "fen", "gor", "lus")
 _G_INDEX = {glyph: i for i, glyph in enumerate(GLYPHS)}
 N_GLYPHS = len(GLYPHS)
 
+# The glyph alphabet is already abstract pseudo-syllables AND the hidden rule
+# is re-drawn every item, so there is no fixed surface->answer mapping to
+# memorize (the scorer is glyph-identity-aware, so generic reskinning is not
+# applied here); skin-shuffling adds nothing this family does not already have.
+SKINNABLE = ()
+
 _LEVEL_SHAPE = {
     # level: string lengths, probe pairs shown (atoms), rule kinds,
     # compose = number of chained rule steps (1 = a single rule).
