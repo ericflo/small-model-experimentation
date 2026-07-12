@@ -162,3 +162,7 @@ Created as a new experiment scaffold.
   using 4,244,434 sampled tokens. Broad raw means were `0.8089` quick and
   `0.5813` deep; every provenance check passed. The run proceeded to seed
   96300 without an interim paired decision or any protocol change.
+- Quick policy block 1 (seed 96300) completed in 3,341.25 seconds using
+  4,737,106 sampled tokens. Broad raw means were `0.7892` quick and `0.5191`
+  deep, with every provenance check passing. Deep block 1 remains required
+  before any qualification statistic is computed.
