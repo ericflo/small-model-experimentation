@@ -98,3 +98,16 @@ def relative_norm_error(reference: torch.Tensor, candidate: torch.Tensor, *, eps
     reference_norm = reference.float().norm(dim=-1)
     candidate_norm = candidate.float().norm(dim=-1)
     return (candidate_norm - reference_norm).abs() / reference_norm.clamp_min(eps)
+
+
+def span_projection_fraction(
+    vectors: torch.Tensor,
+    directions: torch.Tensor,
+    *,
+    rtol: float,
+    eps: float = 1e-12,
+) -> torch.Tensor:
+    """Return the row-wise fraction of vector norm inside the dictionary span."""
+    dictionary, inverse = pseudoinverse(directions.to(vectors.device), rtol=rtol)
+    projected = (vectors.float() @ inverse.T) @ dictionary.T
+    return projected.norm(dim=-1) / vectors.float().norm(dim=-1).clamp_min(eps)

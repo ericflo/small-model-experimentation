@@ -16,6 +16,7 @@ from coordinates import (  # noqa: E402
     read_coordinates,
     relative_norm_error,
     replace_coordinates,
+    span_projection_fraction,
 )
 
 
@@ -46,6 +47,7 @@ def test_random_control_is_span_orthogonal_and_rowwise_norm_matched() -> None:
     dictionary = normalized_dictionary(directions)
     assert float((control @ dictionary).abs().max()) < 2e-5
     assert float(relative_norm_error(reference, control).max()) < 1e-6
+    assert float(span_projection_fraction(control, directions, rtol=1e-6).max()) < 2e-5
 
 
 def test_dictionary_stats_detect_rank() -> None:

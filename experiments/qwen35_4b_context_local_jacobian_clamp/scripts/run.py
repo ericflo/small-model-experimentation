@@ -253,7 +253,16 @@ def run_model_smoke(config: dict[str, Any]) -> dict[str, Any]:
         desired,
         rtol=1e-5,
     )
-    model.score(source_direct, patcher=coordinate_patcher)
+    coordinate_score = model.score(source_direct, patcher=coordinate_patcher)
+    random_smoke = _run_norm_matched_random(
+        model,
+        source_direct,
+        directions={16: lens.directions[16]},
+        reference_deltas=coordinate_score["deltas"],
+        seed=int(config["seeds"]["controls"]),
+        rtol=1e-5,
+        tolerance=float(config["intervention"]["norm_match_relative_tolerance"]),
+    )
     donor_patcher = FullActivationPatcher(
         model.layers,
         source_direct["position"],
@@ -282,6 +291,7 @@ def run_model_smoke(config: dict[str, Any]) -> dict[str, Any]:
         and source_direct["position"] == target_direct["position"]
         and float(coordinate_patcher.deltas[16].norm()) > 0
         and float(donor_patcher.deltas[16].norm()) > 0
+        and random_smoke["passed"]
     )
     result = {
         "schema_version": 1,
@@ -321,6 +331,17 @@ def run_model_smoke(config: dict[str, Any]) -> dict[str, Any]:
         },
         "coordinate_delta_norm": float(coordinate_patcher.deltas[16].norm()),
         "donor_delta_norm": float(donor_patcher.deltas[16].norm()),
+        "norm_matched_random_smoke": {
+            "passed": random_smoke["passed"],
+            "attempts": random_smoke["attempts"],
+            "max_relative_error": max(random_smoke["relative_errors"].values()),
+            "max_requested_span_projection_fraction": max(
+                random_smoke["requested_projection_fractions"].values()
+            ),
+            "max_actual_span_projection_fraction": max(
+                random_smoke["actual_projection_fractions"].values()
+            ),
+        },
         "elapsed_seconds": time.perf_counter() - started,
     }
     write_json(smoke_dir / "result.json", result)
@@ -671,6 +692,469 @@ def run_donor_gate(config: dict[str, Any]) -> dict[str, Any]:
     return result
 
 
+def _stable_seed(base: int, *parts: str) -> int:
+    payload = "\0".join((str(base), *parts)).encode("utf-8")
+    return int.from_bytes(hashlib.blake2b(payload, digest_size=8).digest(), "big") % (2**31)
+
+
+def _run_norm_matched_random(
+    model,
+    prepared: dict[str, Any],
+    *,
+    directions: dict[int, Any],
+    reference_deltas: dict[int, Any],
+    seed: int,
+    rtol: float,
+    tolerance: float,
+    max_attempts: int = 24,
+) -> dict[str, Any]:
+    import torch
+
+    from coordinates import (
+        orthogonal_norm_matched,
+        relative_norm_error,
+        span_projection_fraction,
+    )
+    from model_ops import AddDeltaPatcher
+
+    requested = {}
+    requested_projection = {}
+    for layer in sorted(directions):
+        generator = torch.Generator().manual_seed(_stable_seed(seed, str(layer)))
+        requested[layer] = orthogonal_norm_matched(
+            reference_deltas[layer].float(),
+            directions[layer].float(),
+            generator=generator,
+            rtol=rtol,
+        )
+        requested_projection[layer] = float(span_projection_fraction(
+            requested[layer], directions[layer], rtol=rtol
+        ).max())
+
+    final_score = None
+    final_errors = None
+    for attempt in range(1, max_attempts + 1):
+        patcher = AddDeltaPatcher(model.layers, prepared["position"], requested)
+        final_score = model.score(prepared, patcher=patcher)
+        final_errors = {
+            layer: float(relative_norm_error(
+                reference_deltas[layer].float(), final_score["deltas"][layer].float()
+            ).max())
+            for layer in directions
+        }
+        if max(final_errors.values(), default=0.0) <= tolerance:
+            actual_projection = {
+                layer: float(span_projection_fraction(
+                    final_score["deltas"][layer].float(), directions[layer], rtol=rtol
+                ).max())
+                for layer in directions
+            }
+            return {
+                "passed": True,
+                "score": final_score,
+                "attempts": attempt,
+                "relative_errors": final_errors,
+                "requested_projection_fractions": requested_projection,
+                "actual_projection_fractions": actual_projection,
+            }
+        for layer in directions:
+            target_norm = float(reference_deltas[layer].float().norm())
+            actual_norm = float(final_score["deltas"][layer].float().norm())
+            if target_norm == 0.0:
+                requested[layer].zero_()
+            elif actual_norm == 0.0:
+                raise RuntimeError("nonzero J delta produced a zero random control delta")
+            else:
+                requested[layer] *= target_norm / actual_norm
+    assert final_score is not None and final_errors is not None
+    return {
+        "passed": False,
+        "score": final_score,
+        "attempts": max_attempts,
+        "relative_errors": final_errors,
+        "requested_projection_fractions": requested_projection,
+        "actual_projection_fractions": {
+            layer: float(span_projection_fraction(
+                final_score["deltas"][layer].float(), directions[layer], rtol=rtol
+            ).max())
+            for layer in directions
+        },
+    }
+
+
+def run_confirmation(config: dict[str, Any]) -> dict[str, Any]:
+    design = design_boundary_receipt(config)
+    donor_path = RUNS_DIR / "donor_gate.json"
+    if not donor_path.exists():
+        raise RuntimeError("donor gate receipt is missing; run --stage donor-gate first")
+    donor_gate = read_json(donor_path)
+    if not donor_gate.get("passed") or donor_gate.get("decision") != "DONOR_GATE_PASS":
+        raise RuntimeError("confirmation is ineligible because the donor gate did not pass")
+    lens_path = RUNS_DIR / "context_lens.pt"
+    lens_receipt = read_json(RUNS_DIR / "lens_fit.json")
+    if not lens_receipt.get("passed") or sha256_file(lens_path) != lens_receipt["artifact"]["sha256"]:
+        raise RuntimeError("context lens is missing or does not match its eligible receipt")
+    import time
+
+    import torch
+
+    from coordinates import read_coordinates
+    from model_ops import ContextLens, CoordinateClampPatcher, FullActivationPatcher, QwenClampModel
+    from stats import paired_bootstrap_mean_ci
+
+    started = time.perf_counter()
+    torch.cuda.reset_peak_memory_stats()
+    model = QwenClampModel(config)
+    lens = ContextLens.load(str(lens_path))
+    if lens.concepts != tuple(CONCEPTS):
+        raise RuntimeError("loaded lens concept order disagrees with frozen dictionary")
+    rows = read_jsonl(DATA_DIR / "confirmation.jsonl")
+    source_layers = tuple(int(value) for value in config["lens"]["source_layers"])
+    band = tuple(int(value) for value in donor_gate["selected_band"])
+    if list(band) not in config["intervention"]["candidate_bands"]:
+        raise RuntimeError("stored donor band is not a registered candidate")
+    rtol = float(config["lens"]["pseudoinverse_rtol"])
+    tolerance = float(config["intervention"]["norm_match_relative_tolerance"])
+    max_length = int(config["lens"]["max_sequence_tokens"])
+    concept_index = {concept: index for index, concept in enumerate(lens.concepts)}
+    j_directions = {layer: lens.directions[layer] for layer in band}
+    logit_dictionary = model.lm_head.weight[list(lens.token_ids)].float().T.detach().cpu()
+    logit_directions = {layer: logit_dictionary for layer in band}
+    result_rows: list[dict[str, Any]] = []
+    causal_differences: list[float] = []
+    norm_audits = []
+
+    for item in rows:
+        prepared = {
+            (kind, selected): _prepare_item(
+                model, item, kind=kind, selected=selected, max_length=max_length
+            )
+            for kind in ("direct", "consequence")
+            for selected in (item["source"], item["target"], item["wrong"])
+        }
+        positions = {value["position"] for value in prepared.values()}
+        if len(positions) != 1:
+            raise RuntimeError(f"confirmation position contract failed: {item['item_id']}")
+        for kind in ("direct", "consequence"):
+            lengths = {
+                prepared[(kind, selected)]["sequence_tokens"]
+                for selected in (item["source"], item["target"], item["wrong"])
+            }
+            if len(lengths) != 1:
+                raise RuntimeError(f"confirmation length contract failed: {item['item_id']}/{kind}")
+        captures = {
+            key: model.capture(value, layers=source_layers) for key, value in prepared.items()
+        }
+        for selected in (item["source"], item["target"], item["wrong"]):
+            for layer in source_layers:
+                causal_differences.append(float(
+                    (
+                        captures[("direct", selected)]["activations"][layer]
+                        - captures[("consequence", selected)]["activations"][layer]
+                    ).abs().max()
+                ))
+
+        for kind in ("direct", "consequence"):
+            source_prepared = prepared[(kind, item["source"])]
+            source_capture = captures[(kind, item["source"])]
+            target_capture = captures[(kind, item["target"])]
+            wrong_capture = captures[(kind, item["wrong"])]
+            result_rows.append(_scored_row(
+                model,
+                item,
+                split="confirmation",
+                kind=kind,
+                condition="baseline",
+                band=(),
+                score=source_capture,
+            ))
+
+            full_patcher = FullActivationPatcher(
+                model.layers,
+                source_prepared["position"],
+                {layer: target_capture["activations"][layer] for layer in band},
+            )
+            result_rows.append(_scored_row(
+                model,
+                item,
+                split="confirmation",
+                kind=kind,
+                condition="full_target_donor",
+                band=band,
+                score=model.score(source_prepared, patcher=full_patcher),
+            ))
+
+            desired_j = model.donor_coordinates(
+                target_capture["activations"], j_directions, rtol=rtol
+            )
+            j_patcher = CoordinateClampPatcher(
+                model.layers,
+                source_prepared["position"],
+                j_directions,
+                desired_j,
+                rtol=rtol,
+            )
+            j_score = model.score(source_prepared, patcher=j_patcher)
+            result_rows.append(_scored_row(
+                model,
+                item,
+                split="confirmation",
+                kind=kind,
+                condition="j_all24",
+                band=band,
+                score=j_score,
+            ))
+
+            random_audit = _run_norm_matched_random(
+                model,
+                source_prepared,
+                directions=j_directions,
+                reference_deltas=j_score["deltas"],
+                seed=_stable_seed(int(config["seeds"]["controls"]), item["item_id"], kind),
+                rtol=rtol,
+                tolerance=tolerance,
+            )
+            random_row = _scored_row(
+                model,
+                item,
+                split="confirmation",
+                kind=kind,
+                condition="random_norm_orthogonal",
+                band=band,
+                score=random_audit["score"],
+            )
+            random_row.update({
+                "norm_match_passed": random_audit["passed"],
+                "norm_match_attempts": random_audit["attempts"],
+                "norm_match_max_relative_error": max(
+                    random_audit["relative_errors"].values(), default=0.0
+                ),
+                "requested_span_projection_fraction_max": max(
+                    random_audit["requested_projection_fractions"].values(), default=0.0
+                ),
+                "actual_span_projection_fraction_max": max(
+                    random_audit["actual_projection_fractions"].values(), default=0.0
+                ),
+            })
+            result_rows.append(random_row)
+            norm_audits.append(random_row)
+
+            desired_wrong = model.donor_coordinates(
+                wrong_capture["activations"], j_directions, rtol=rtol
+            )
+            wrong_patcher = CoordinateClampPatcher(
+                model.layers,
+                source_prepared["position"],
+                j_directions,
+                desired_wrong,
+                rtol=rtol,
+            )
+            result_rows.append(_scored_row(
+                model,
+                item,
+                split="confirmation",
+                kind=kind,
+                condition="j_wrong_donor",
+                band=band,
+                score=model.score(source_prepared, patcher=wrong_patcher),
+            ))
+
+            pair_indices = [concept_index[item["source"]], concept_index[item["target"]]]
+            pair_directions = {
+                layer: lens.directions[layer][:, pair_indices] for layer in band
+            }
+            pair_desired = {
+                layer: read_coordinates(
+                    target_capture["activations"][layer].reshape(1, -1),
+                    pair_directions[layer],
+                    rtol=rtol,
+                )[0]
+                for layer in band
+            }
+            pair_patcher = CoordinateClampPatcher(
+                model.layers,
+                source_prepared["position"],
+                pair_directions,
+                pair_desired,
+                rtol=rtol,
+            )
+            result_rows.append(_scored_row(
+                model,
+                item,
+                split="confirmation",
+                kind=kind,
+                condition="j_pair",
+                band=band,
+                score=model.score(source_prepared, patcher=pair_patcher),
+            ))
+
+            desired_logit = model.donor_coordinates(
+                target_capture["activations"], logit_directions, rtol=rtol
+            )
+            logit_patcher = CoordinateClampPatcher(
+                model.layers,
+                source_prepared["position"],
+                logit_directions,
+                desired_logit,
+                rtol=rtol,
+            )
+            result_rows.append(_scored_row(
+                model,
+                item,
+                split="confirmation",
+                kind=kind,
+                condition="logit_lens_all24",
+                band=band,
+                score=model.score(source_prepared, patcher=logit_patcher),
+            ))
+
+    def subset(*, kind: str, condition: str) -> list[dict[str, Any]]:
+        return [
+            row for row in result_rows
+            if row["prompt_kind"] == kind and row["condition"] == condition
+        ]
+
+    conditions = (
+        "baseline",
+        "full_target_donor",
+        "j_all24",
+        "random_norm_orthogonal",
+        "j_wrong_donor",
+        "j_pair",
+        "logit_lens_all24",
+    )
+    summaries = {
+        condition: {
+            kind: _summary(subset(kind=kind, condition=condition))
+            for kind in ("direct", "consequence")
+        }
+        for condition in conditions
+    }
+    baseline = summaries["baseline"]
+    primary = summaries["j_all24"]
+    random_control = summaries["random_norm_orthogonal"]
+    wrong_control = summaries["j_wrong_donor"]
+    gates = config["gates"]
+    clean_pass = all(
+        baseline[kind]["source_accuracy"] >= float(gates["clean_accuracy_min"])
+        and baseline[kind]["parse_rate"] >= float(gates["clean_parse_rate_min"])
+        for kind in ("direct", "consequence")
+    )
+    donor_pass = bool(
+        summaries["full_target_donor"]["direct"]["target_rate"]
+        >= float(gates["donor_direct_target_rate_min"])
+        and summaries["full_target_donor"]["consequence"]["target_rate"]
+        >= float(gates["donor_consequence_target_rate_min"])
+    )
+    norm_pass = all(bool(row["norm_match_passed"]) for row in norm_audits)
+    causal_max_abs = max(causal_differences, default=float("inf"))
+    causal_pass = causal_max_abs <= float(config["intervention"]["causal_activation_atol"])
+    j_by_item = {row["item_id"]: float(row["target_selected"]) for row in subset(
+        kind="consequence", condition="j_all24"
+    )}
+    random_by_item = {row["item_id"]: float(row["target_selected"]) for row in subset(
+        kind="consequence", condition="random_norm_orthogonal"
+    )}
+    if set(j_by_item) != set(random_by_item):
+        raise RuntimeError("paired J/random confirmation item sets disagree")
+    differences = [j_by_item[item_id] - random_by_item[item_id] for item_id in sorted(j_by_item)]
+    bootstrap = paired_bootstrap_mean_ci(
+        differences,
+        resamples=int(gates["bootstrap_resamples"]),
+        seed=int(config["seeds"]["bootstrap"]),
+    )
+    direct_shift = primary["direct"]["target_rate"] - baseline["direct"]["target_rate"]
+    consequence_shift = (
+        primary["consequence"]["target_rate"] - baseline["consequence"]["target_rate"]
+    )
+    j_minus_random = (
+        primary["consequence"]["target_rate"]
+        - random_control["consequence"]["target_rate"]
+    )
+    j_minus_wrong_target = (
+        primary["consequence"]["target_rate"] - wrong_control["consequence"]["target_rate"]
+    )
+    wrong_own_shift = (
+        wrong_control["consequence"]["wrong_rate"] - baseline["consequence"]["wrong_rate"]
+    )
+    parse_drop = baseline["consequence"]["parse_rate"] - primary["consequence"]["parse_rate"]
+    primary_pass = bool(
+        clean_pass
+        and donor_pass
+        and norm_pass
+        and causal_pass
+        and direct_shift >= float(gates["j_direct_shift_min"])
+        and consequence_shift >= float(gates["j_consequence_shift_min"])
+        and j_minus_random >= float(gates["j_minus_random_min"])
+        and j_minus_wrong_target >= float(gates["j_minus_wrong_target_min"])
+        and wrong_own_shift >= float(gates["wrong_own_digit_shift_min"])
+        and parse_drop <= float(gates["max_parse_rate_drop"])
+        and bootstrap["lower"] > float(gates["bootstrap_lower_bound_min"])
+    )
+    if not norm_pass or not causal_pass:
+        decision = "INVALID_CONTROL"
+    elif not donor_pass:
+        decision = "INVALID_CONTROL"
+    elif primary_pass:
+        decision = "J_TRANSPORT"
+    elif direct_shift >= float(gates["j_direct_shift_min"]):
+        decision = "DIRECT_ONLY"
+    else:
+        decision = "DONOR_ONLY"
+    result = {
+        "schema_version": 1,
+        "stage": "confirmation",
+        "passed": primary_pass,
+        "decision": decision,
+        "scientific_result": True,
+        "band": list(band),
+        "confirmation_n": len(rows),
+        "summaries": summaries,
+        "gate_metrics": {
+            "clean_pass": clean_pass,
+            "donor_pass": donor_pass,
+            "causal_invariance_pass": causal_pass,
+            "norm_match_pass": norm_pass,
+            "direct_target_shift": direct_shift,
+            "consequence_target_shift": consequence_shift,
+            "consequence_j_minus_random": j_minus_random,
+            "consequence_j_minus_wrong_target": j_minus_wrong_target,
+            "wrong_donor_own_digit_shift": wrong_own_shift,
+            "consequence_parse_drop": parse_drop,
+            "paired_bootstrap_j_minus_random": bootstrap,
+        },
+        "control_audit": {
+            "norm_tolerance": tolerance,
+            "max_norm_relative_error": max(
+                (float(row["norm_match_max_relative_error"]) for row in norm_audits),
+                default=0.0,
+            ),
+            "max_norm_match_attempts": max(
+                (int(row["norm_match_attempts"]) for row in norm_audits), default=0
+            ),
+            "max_requested_span_projection_fraction": max(
+                (float(row["requested_span_projection_fraction_max"]) for row in norm_audits),
+                default=0.0,
+            ),
+            "max_actual_span_projection_fraction": max(
+                (float(row["actual_span_projection_fraction_max"]) for row in norm_audits),
+                default=0.0,
+            ),
+            "causal_activation_max_abs": causal_max_abs,
+            "target_digit_gradient_used": False,
+            "patch_batch_size": 1,
+            "use_cache": False,
+        },
+        "counts": {"items": len(rows), "rows": len(result_rows)},
+        "elapsed_seconds": time.perf_counter() - started,
+        "peak_allocated_bytes": torch.cuda.max_memory_allocated(),
+    }
+    write_jsonl(RUNS_DIR / "confirmation_rows.jsonl", result_rows)
+    write_json(RUNS_DIR / "confirmation.json", result)
+    print(json.dumps(result, indent=2, sort_keys=True))
+    return result
+
+
 def unavailable(stage: str) -> None:
     raise RuntimeError(f"stage {stage!r} is not implemented yet; refusing a placeholder result")
 
@@ -695,6 +1179,9 @@ def main() -> int:
         return 0
     if args.stage == "donor-gate":
         run_donor_gate(config)
+        return 0
+    if args.stage == "confirmation":
+        run_confirmation(config)
         return 0
     design_boundary_receipt(config)
     unavailable(args.stage)

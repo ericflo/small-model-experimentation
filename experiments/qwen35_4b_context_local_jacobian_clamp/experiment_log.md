@@ -94,3 +94,16 @@ Created as a new experiment scaffold.
   allocated memory 8.44 GB, and the stage stored 624 batch-one rows.
 - The receipt confirms `j_outcomes_observed: false`; the 48-item confirmation
   split remains unopened.
+
+## 2026-07-12 — untouched confirmation implementation
+
+- Implemented the seven frozen arms at selected band 4–8: baseline, full donor,
+  all-24 J clamp, exact norm-matched span-orthogonal random, wrong-donor J,
+  source/target pair J, and all-24 concept logit lens.
+- Primary J deltas are measured after bf16 application. Random controls are then
+  executed, measured, rescaled, and rerun up to 24 times until every item/layer
+  is within the registered 1e-5 realized-norm tolerance; any miss yields
+  `INVALID_CONTROL`.
+- Added paired 10,000-resample confirmation bootstrap, wrong-donor own-digit
+  specificity, causal-invariance audit, and a hard assertion that no target
+  digit gradient is used. Confirmation has not yet been opened.
