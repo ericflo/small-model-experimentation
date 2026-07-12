@@ -13,3 +13,10 @@ Created as a new experiment scaffold.
 - Added post-bf16 gates for realized norm (1e-5 relative) and J-span projection
   fraction (0.01), plus wrong-donor same-span specificity.
 - Completed the adversarial review before implementation or any model call.
+
+## 2026-07-12 — immutable design boundary
+
+- Pushed design commit `27b9da2a0973dbddbdfd2b6f7acddbfc7f4f736f`
+  before model inference.
+- Recorded exact frozen README/preregistration hashes and the byte-identical
+  parent lens hash.

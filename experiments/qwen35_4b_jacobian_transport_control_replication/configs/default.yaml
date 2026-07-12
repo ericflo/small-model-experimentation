@@ -52,6 +52,6 @@ gates:
   bootstrap_lower_bound_min: 0.0
 
 design_boundary:
-  commit: TO_BE_RECORDED_AFTER_DESIGN_COMMIT
-  preregistration_sha256: TO_BE_RECORDED_AFTER_DESIGN_COMMIT
-  readme_sha256: TO_BE_RECORDED_AFTER_DESIGN_COMMIT
+  commit: 27b9da2a0973dbddbdfd2b6f7acddbfc7f4f736f
+  preregistration_sha256: 827525f29f23252bdbd1858187e2fb68c317dc2a3ea471a352130133a7beed67
+  readme_sha256: ba6356a5e7152e6eba1095219241852376ebcdeb39ed6c1a32bf9d03c54360a5
