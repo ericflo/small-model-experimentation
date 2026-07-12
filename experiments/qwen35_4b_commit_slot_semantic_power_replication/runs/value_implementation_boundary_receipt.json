@@ -1,0 +1,42 @@
+{
+  "committed_config_payload_sha256": "38c5bde60d9b43e930bdcd50c986fe6eaec8aeffd545c41b47ed7a1459d47eea",
+  "current_config_payload_sha256": "38c5bde60d9b43e930bdcd50c986fe6eaec8aeffd545c41b47ed7a1459d47eea",
+  "design_commit": "ddbc196943edfe5faa7f2baf681448c7e89fa023",
+  "design_is_ancestor": true,
+  "expected_config_payload_sha256": "38c5bde60d9b43e930bdcd50c986fe6eaec8aeffd545c41b47ed7a1459d47eea",
+  "expected_sha256": {
+    "coordinates": "b11bb2d643c0319ef5242f1cb9b2f0682a4b7483dd9116644d28477568fd5abc",
+    "design_review": "294e54142767b53980c21ef4f4fa49006fa399131b8a3bad85e98afb7e27db3d",
+    "implementation_audit": "c89263729f07fcbd23327df713b6ce07555893f54829aeeb8181c0bed2c40b10",
+    "model_ops": "b031b65c14df51fffcc36a8937e66b95e0cdffb31c28fc3627d8f7bf269f20e2",
+    "preregistration": "a07d9c5d4d69617dafbce44b9e65f28e29196c479bb5892e4ea9de2506c28f92",
+    "run_script": "0fcf36c9b55d71bec4f96d79c71a16c92ee37ecfdacf706919425c704aefaf21",
+    "tests": "3e00ba562039cd605d58b2128a83f495543036496746b84d8361ac5a7bfbd3f9",
+    "value_probe": "c1136a7ca1fd6195a916671b90ee926d191e9aae70bf8c977bc9ac085f677ba2"
+  },
+  "head": "ddbc196943edfe5faa7f2baf681448c7e89fa023",
+  "observed_commit_sha256": {
+    "coordinates": "b11bb2d643c0319ef5242f1cb9b2f0682a4b7483dd9116644d28477568fd5abc",
+    "design_review": "294e54142767b53980c21ef4f4fa49006fa399131b8a3bad85e98afb7e27db3d",
+    "implementation_audit": "c89263729f07fcbd23327df713b6ce07555893f54829aeeb8181c0bed2c40b10",
+    "model_ops": "b031b65c14df51fffcc36a8937e66b95e0cdffb31c28fc3627d8f7bf269f20e2",
+    "preregistration": "a07d9c5d4d69617dafbce44b9e65f28e29196c479bb5892e4ea9de2506c28f92",
+    "run_script": "0fcf36c9b55d71bec4f96d79c71a16c92ee37ecfdacf706919425c704aefaf21",
+    "tests": "3e00ba562039cd605d58b2128a83f495543036496746b84d8361ac5a7bfbd3f9",
+    "value_probe": "c1136a7ca1fd6195a916671b90ee926d191e9aae70bf8c977bc9ac085f677ba2"
+  },
+  "observed_current_sha256": {
+    "coordinates": "b11bb2d643c0319ef5242f1cb9b2f0682a4b7483dd9116644d28477568fd5abc",
+    "design_review": "294e54142767b53980c21ef4f4fa49006fa399131b8a3bad85e98afb7e27db3d",
+    "implementation_audit": "c89263729f07fcbd23327df713b6ce07555893f54829aeeb8181c0bed2c40b10",
+    "model_ops": "b031b65c14df51fffcc36a8937e66b95e0cdffb31c28fc3627d8f7bf269f20e2",
+    "preregistration": "a07d9c5d4d69617dafbce44b9e65f28e29196c479bb5892e4ea9de2506c28f92",
+    "run_script": "0fcf36c9b55d71bec4f96d79c71a16c92ee37ecfdacf706919425c704aefaf21",
+    "tests": "3e00ba562039cd605d58b2128a83f495543036496746b84d8361ac5a7bfbd3f9",
+    "value_probe": "c1136a7ca1fd6195a916671b90ee926d191e9aae70bf8c977bc9ac085f677ba2"
+  },
+  "passed": true,
+  "schema_version": 1,
+  "scientific_result": false,
+  "stage": "value_implementation_boundary"
+}

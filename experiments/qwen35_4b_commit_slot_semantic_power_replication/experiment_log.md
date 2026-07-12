@@ -76,4 +76,4 @@
   stops before model load; `value_fit` and `causal_confirmation` remain unopened.
 - Committed and pushed the implementation, caught/fixed an unquoted YAML `null`
   key during hash anchoring, reran all checks, and anchored the corrected payload
-  plus code/test/audit hashes to commit `2634ad93`. Value-model smoke is next.
+  plus code/test/audit hashes to commit `ddbc1969`. Value-model smoke is next.

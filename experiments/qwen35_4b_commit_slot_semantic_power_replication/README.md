@@ -107,7 +107,7 @@ After the replicated seam and the separately anchored value implementation:
 .venv/bin/python experiments/qwen35_4b_commit_slot_semantic_power_replication/scripts/run.py --stage prefix-value
 ```
 
-The value boundary is anchored to pushed implementation commit `2634ad93`.
+The value boundary is anchored to pushed implementation commit `ddbc1969`.
 `value-model-smoke` is now authorized; `prefix-value` remains locked behind that
 outcome-blind smoke. `control-calibration` and `causal-confirmation` remain
 unimplemented regardless of value outcome.
@@ -141,7 +141,7 @@ The remaining identity nuisance is load-bearing: confirmation had no successful
 is replicated, but any J/value model must be task-held-out and prove incremental
 value beyond correct-alias activity, ordinary slot margin, and alias identity.
 The outcome-blind prefix-value implementation and adversarial audit are complete
-with 16 passing tests and hash-anchored to pushed commit `2634ad93`. Neither
+with 16 passing tests and hash-anchored to pushed commit `ddbc1969`. Neither
 reserved split has been opened and no new model call has occurred. The frozen
 primary asks whether midpoint J
 coordinates prospectively rank final commit value beyond gold-alias activity,
