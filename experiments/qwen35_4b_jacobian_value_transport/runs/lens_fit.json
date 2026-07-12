@@ -1,0 +1,592 @@
+{
+  "artifact": {
+    "bytes": 617627,
+    "path": "experiments/qwen35_4b_jacobian_value_transport/runs/targeted_lens.pt",
+    "sha256": "9f255df88d9bb607f63a78b563e75089aa8d30e02a97676d4996292fa4a33d87"
+  },
+  "concepts": [
+    "cat",
+    "dog",
+    "horse",
+    "tiger",
+    "apple",
+    "lemon",
+    "river",
+    "ocean",
+    "silver",
+    "gold",
+    "circle",
+    "square",
+    "winter",
+    "summer",
+    "music",
+    "dance",
+    "bread",
+    "glass",
+    "stone",
+    "cloud",
+    "green",
+    "purple",
+    "north",
+    "south"
+  ],
+  "direction_norms": {
+    "12": [
+      0.07704624533653259,
+      0.08294830471277237,
+      0.08051934093236923,
+      0.06882178783416748,
+      0.07731401175260544,
+      0.06755094975233078,
+      0.08389569073915482,
+      0.07280924916267395,
+      0.08081252872943878,
+      0.08609875291585922,
+      0.0939885675907135,
+      0.10819987207651138,
+      0.0827174261212349,
+      0.0803118497133255,
+      0.08507143706083298,
+      0.07635670155286789,
+      0.06439658999443054,
+      0.07363379001617432,
+      0.07682393491268158,
+      0.07373616844415665,
+      0.0821208655834198,
+      0.07587051391601562,
+      0.09208186715841293,
+      0.07723281532526016
+    ],
+    "16": [
+      0.05717865750193596,
+      0.059052541851997375,
+      0.06043297052383423,
+      0.05269483104348183,
+      0.05796990543603897,
+      0.05076887831091881,
+      0.06153225526213646,
+      0.056630589067935944,
+      0.05898795276880264,
+      0.06148737296462059,
+      0.06836157292127609,
+      0.07679688930511475,
+      0.06183922663331032,
+      0.05877963453531265,
+      0.06510800123214722,
+      0.05719275400042534,
+      0.050933945924043655,
+      0.05504772812128067,
+      0.05649734288454056,
+      0.056136589497327805,
+      0.05981915816664696,
+      0.056033987551927567,
+      0.06604533642530441,
+      0.058312829583883286
+    ],
+    "20": [
+      0.04250192269682884,
+      0.04177695885300636,
+      0.04149215668439865,
+      0.038554538041353226,
+      0.04056187719106674,
+      0.03686368837952614,
+      0.04239007830619812,
+      0.04091643542051315,
+      0.04212614521384239,
+      0.04325481131672859,
+      0.04525037482380867,
+      0.04911983013153076,
+      0.044073812663555145,
+      0.04297845438122749,
+      0.045199181884527206,
+      0.039331819862127304,
+      0.0383489616215229,
+      0.04008214548230171,
+      0.03980564326047897,
+      0.04051625728607178,
+      0.042505938559770584,
+      0.040178101509809494,
+      0.04431604593992233,
+      0.042091090232133865
+    ],
+    "24": [
+      0.043160174041986465,
+      0.04132844880223274,
+      0.03849836438894272,
+      0.03697172552347183,
+      0.038950394839048386,
+      0.036443158984184265,
+      0.04027552530169487,
+      0.039275020360946655,
+      0.0415593683719635,
+      0.04205229505896568,
+      0.04347347468137741,
+      0.04526286944746971,
+      0.04023557901382446,
+      0.04000455513596535,
+      0.04072768613696098,
+      0.03635534644126892,
+      0.03880459442734718,
+      0.04043542221188545,
+      0.03944021835923195,
+      0.04119987040758133,
+      0.04215773940086365,
+      0.038911789655685425,
+      0.040063414722681046,
+      0.0392470583319664
+    ],
+    "8": [
+      0.08082401007413864,
+      0.09203484654426575,
+      0.08947718888521194,
+      0.07416099309921265,
+      0.08010752499103546,
+      0.06925230473279953,
+      0.09127189964056015,
+      0.07324633002281189,
+      0.087031289935112,
+      0.0902625322341919,
+      0.09875299036502838,
+      0.11495004594326019,
+      0.08677542954683304,
+      0.08246242254972458,
+      0.09006504714488983,
+      0.08465301245450974,
+      0.06829638034105301,
+      0.07975862175226212,
+      0.0855259820818901,
+      0.07232152670621872,
+      0.08881091326475143,
+      0.08147020637989044,
+      0.09942305833101273,
+      0.08057457208633423
+    ]
+  },
+  "elapsed_seconds": 29.282399266958237,
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "n_prompts": 64,
+  "pair_weighting": "equal_valid_causal_source_target_pairs",
+  "passed": true,
+  "peak_allocated_bytes": 12315241472,
+  "prompt_receipts": [
+    {
+      "causal_pairs": 1485,
+      "prompt_index": 0,
+      "sequence_tokens": 71,
+      "valid_positions": 54
+    },
+    {
+      "causal_pairs": 1540,
+      "prompt_index": 1,
+      "sequence_tokens": 72,
+      "valid_positions": 55
+    },
+    {
+      "causal_pairs": 1653,
+      "prompt_index": 2,
+      "sequence_tokens": 74,
+      "valid_positions": 57
+    },
+    {
+      "causal_pairs": 1596,
+      "prompt_index": 3,
+      "sequence_tokens": 73,
+      "valid_positions": 56
+    },
+    {
+      "causal_pairs": 1485,
+      "prompt_index": 4,
+      "sequence_tokens": 71,
+      "valid_positions": 54
+    },
+    {
+      "causal_pairs": 1540,
+      "prompt_index": 5,
+      "sequence_tokens": 72,
+      "valid_positions": 55
+    },
+    {
+      "causal_pairs": 1653,
+      "prompt_index": 6,
+      "sequence_tokens": 74,
+      "valid_positions": 57
+    },
+    {
+      "causal_pairs": 1540,
+      "prompt_index": 7,
+      "sequence_tokens": 72,
+      "valid_positions": 55
+    },
+    {
+      "causal_pairs": 1540,
+      "prompt_index": 8,
+      "sequence_tokens": 72,
+      "valid_positions": 55
+    },
+    {
+      "causal_pairs": 1540,
+      "prompt_index": 9,
+      "sequence_tokens": 72,
+      "valid_positions": 55
+    },
+    {
+      "causal_pairs": 1711,
+      "prompt_index": 10,
+      "sequence_tokens": 75,
+      "valid_positions": 58
+    },
+    {
+      "causal_pairs": 1596,
+      "prompt_index": 11,
+      "sequence_tokens": 73,
+      "valid_positions": 56
+    },
+    {
+      "causal_pairs": 1653,
+      "prompt_index": 12,
+      "sequence_tokens": 74,
+      "valid_positions": 57
+    },
+    {
+      "causal_pairs": 1596,
+      "prompt_index": 13,
+      "sequence_tokens": 73,
+      "valid_positions": 56
+    },
+    {
+      "causal_pairs": 1596,
+      "prompt_index": 14,
+      "sequence_tokens": 73,
+      "valid_positions": 56
+    },
+    {
+      "causal_pairs": 1653,
+      "prompt_index": 15,
+      "sequence_tokens": 74,
+      "valid_positions": 57
+    },
+    {
+      "causal_pairs": 1596,
+      "prompt_index": 16,
+      "sequence_tokens": 73,
+      "valid_positions": 56
+    },
+    {
+      "causal_pairs": 1596,
+      "prompt_index": 17,
+      "sequence_tokens": 73,
+      "valid_positions": 56
+    },
+    {
+      "causal_pairs": 1596,
+      "prompt_index": 18,
+      "sequence_tokens": 73,
+      "valid_positions": 56
+    },
+    {
+      "causal_pairs": 1653,
+      "prompt_index": 19,
+      "sequence_tokens": 74,
+      "valid_positions": 57
+    },
+    {
+      "causal_pairs": 1653,
+      "prompt_index": 20,
+      "sequence_tokens": 74,
+      "valid_positions": 57
+    },
+    {
+      "causal_pairs": 1540,
+      "prompt_index": 21,
+      "sequence_tokens": 72,
+      "valid_positions": 55
+    },
+    {
+      "causal_pairs": 1540,
+      "prompt_index": 22,
+      "sequence_tokens": 72,
+      "valid_positions": 55
+    },
+    {
+      "causal_pairs": 1596,
+      "prompt_index": 23,
+      "sequence_tokens": 73,
+      "valid_positions": 56
+    },
+    {
+      "causal_pairs": 1653,
+      "prompt_index": 24,
+      "sequence_tokens": 74,
+      "valid_positions": 57
+    },
+    {
+      "causal_pairs": 1540,
+      "prompt_index": 25,
+      "sequence_tokens": 72,
+      "valid_positions": 55
+    },
+    {
+      "causal_pairs": 1596,
+      "prompt_index": 26,
+      "sequence_tokens": 73,
+      "valid_positions": 56
+    },
+    {
+      "causal_pairs": 1653,
+      "prompt_index": 27,
+      "sequence_tokens": 74,
+      "valid_positions": 57
+    },
+    {
+      "causal_pairs": 1653,
+      "prompt_index": 28,
+      "sequence_tokens": 74,
+      "valid_positions": 57
+    },
+    {
+      "causal_pairs": 1596,
+      "prompt_index": 29,
+      "sequence_tokens": 73,
+      "valid_positions": 56
+    },
+    {
+      "causal_pairs": 1711,
+      "prompt_index": 30,
+      "sequence_tokens": 75,
+      "valid_positions": 58
+    },
+    {
+      "causal_pairs": 1653,
+      "prompt_index": 31,
+      "sequence_tokens": 74,
+      "valid_positions": 57
+    },
+    {
+      "causal_pairs": 1596,
+      "prompt_index": 32,
+      "sequence_tokens": 73,
+      "valid_positions": 56
+    },
+    {
+      "causal_pairs": 1596,
+      "prompt_index": 33,
+      "sequence_tokens": 73,
+      "valid_positions": 56
+    },
+    {
+      "causal_pairs": 1653,
+      "prompt_index": 34,
+      "sequence_tokens": 74,
+      "valid_positions": 57
+    },
+    {
+      "causal_pairs": 1653,
+      "prompt_index": 35,
+      "sequence_tokens": 74,
+      "valid_positions": 57
+    },
+    {
+      "causal_pairs": 1653,
+      "prompt_index": 36,
+      "sequence_tokens": 74,
+      "valid_positions": 57
+    },
+    {
+      "causal_pairs": 1653,
+      "prompt_index": 37,
+      "sequence_tokens": 74,
+      "valid_positions": 57
+    },
+    {
+      "causal_pairs": 1711,
+      "prompt_index": 38,
+      "sequence_tokens": 75,
+      "valid_positions": 58
+    },
+    {
+      "causal_pairs": 1540,
+      "prompt_index": 39,
+      "sequence_tokens": 72,
+      "valid_positions": 55
+    },
+    {
+      "causal_pairs": 1540,
+      "prompt_index": 40,
+      "sequence_tokens": 72,
+      "valid_positions": 55
+    },
+    {
+      "causal_pairs": 1653,
+      "prompt_index": 41,
+      "sequence_tokens": 74,
+      "valid_positions": 57
+    },
+    {
+      "causal_pairs": 1653,
+      "prompt_index": 42,
+      "sequence_tokens": 74,
+      "valid_positions": 57
+    },
+    {
+      "causal_pairs": 1540,
+      "prompt_index": 43,
+      "sequence_tokens": 72,
+      "valid_positions": 55
+    },
+    {
+      "causal_pairs": 1653,
+      "prompt_index": 44,
+      "sequence_tokens": 74,
+      "valid_positions": 57
+    },
+    {
+      "causal_pairs": 1653,
+      "prompt_index": 45,
+      "sequence_tokens": 74,
+      "valid_positions": 57
+    },
+    {
+      "causal_pairs": 1711,
+      "prompt_index": 46,
+      "sequence_tokens": 75,
+      "valid_positions": 58
+    },
+    {
+      "causal_pairs": 1596,
+      "prompt_index": 47,
+      "sequence_tokens": 73,
+      "valid_positions": 56
+    },
+    {
+      "causal_pairs": 1596,
+      "prompt_index": 48,
+      "sequence_tokens": 73,
+      "valid_positions": 56
+    },
+    {
+      "causal_pairs": 1653,
+      "prompt_index": 49,
+      "sequence_tokens": 74,
+      "valid_positions": 57
+    },
+    {
+      "causal_pairs": 1653,
+      "prompt_index": 50,
+      "sequence_tokens": 74,
+      "valid_positions": 57
+    },
+    {
+      "causal_pairs": 1596,
+      "prompt_index": 51,
+      "sequence_tokens": 73,
+      "valid_positions": 56
+    },
+    {
+      "causal_pairs": 1596,
+      "prompt_index": 52,
+      "sequence_tokens": 73,
+      "valid_positions": 56
+    },
+    {
+      "causal_pairs": 1596,
+      "prompt_index": 53,
+      "sequence_tokens": 73,
+      "valid_positions": 56
+    },
+    {
+      "causal_pairs": 1653,
+      "prompt_index": 54,
+      "sequence_tokens": 74,
+      "valid_positions": 57
+    },
+    {
+      "causal_pairs": 1653,
+      "prompt_index": 55,
+      "sequence_tokens": 74,
+      "valid_positions": 57
+    },
+    {
+      "causal_pairs": 1653,
+      "prompt_index": 56,
+      "sequence_tokens": 74,
+      "valid_positions": 57
+    },
+    {
+      "causal_pairs": 1596,
+      "prompt_index": 57,
+      "sequence_tokens": 73,
+      "valid_positions": 56
+    },
+    {
+      "causal_pairs": 1596,
+      "prompt_index": 58,
+      "sequence_tokens": 73,
+      "valid_positions": 56
+    },
+    {
+      "causal_pairs": 1596,
+      "prompt_index": 59,
+      "sequence_tokens": 73,
+      "valid_positions": 56
+    },
+    {
+      "causal_pairs": 1653,
+      "prompt_index": 60,
+      "sequence_tokens": 74,
+      "valid_positions": 57
+    },
+    {
+      "causal_pairs": 1596,
+      "prompt_index": 61,
+      "sequence_tokens": 73,
+      "valid_positions": 56
+    },
+    {
+      "causal_pairs": 1653,
+      "prompt_index": 62,
+      "sequence_tokens": 74,
+      "valid_positions": 57
+    },
+    {
+      "causal_pairs": 1653,
+      "prompt_index": 63,
+      "sequence_tokens": 74,
+      "valid_positions": 57
+    }
+  ],
+  "schema_version": 1,
+  "source_layers": [
+    8,
+    12,
+    16,
+    20,
+    24
+  ],
+  "target_layer": 31,
+  "token_ids": [
+    7993,
+    5388,
+    14780,
+    49993,
+    22544,
+    28503,
+    14367,
+    17415,
+    14527,
+    6414,
+    12307,
+    9057,
+    12050,
+    7094,
+    4477,
+    14810,
+    15530,
+    8720,
+    9506,
+    9158,
+    5983,
+    24142,
+    9897,
+    9514
+  ]
+}

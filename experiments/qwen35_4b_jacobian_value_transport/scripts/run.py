@@ -298,10 +298,10 @@ def _score_control_batch(
         target_ids = [model.concept_token_id(row["target"]) for row in rows]
         parse_ids = set(lens.token_ids)
     elif prompt_kind == "consequence":
-        prefixes = [model.render(row["consequence_prompt"], enable_thinking=False) + "Value:" for row in rows]
-        source_ids = [model.concept_token_id(str(row["source_value"])) for row in rows]
-        target_ids = [model.concept_token_id(str(row["target_value"])) for row in rows]
-        parse_ids = {model.concept_token_id(str(value)) for value in range(10)}
+        prefixes = [model.render(row["consequence_prompt"], enable_thinking=False) + "Value: " for row in rows]
+        source_ids = [model.bare_token_id(str(row["source_value"])) for row in rows]
+        target_ids = [model.bare_token_id(str(row["target_value"])) for row in rows]
+        parse_ids = {model.bare_token_id(str(value)) for value in range(10)}
     else:
         raise ValueError(prompt_kind)
 

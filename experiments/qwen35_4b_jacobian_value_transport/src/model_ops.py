@@ -242,6 +242,13 @@ class QwenTransportModel:
             raise ValueError(f"concept {concept!r} is not one leading-space token: {ids}")
         return int(ids[0])
 
+    def bare_token_id(self, text: str) -> int:
+        """Token after a fixed prefix that already ends in a literal space."""
+        ids = self.tokenizer(text, add_special_tokens=False).input_ids
+        if len(ids) != 1:
+            raise ValueError(f"answer {text!r} is not one bare token: {ids}")
+        return int(ids[0])
+
     def audit_concepts(self, concepts: Sequence[str]) -> dict[str, int]:
         return {concept: self.concept_token_id(concept) for concept in concepts}
 

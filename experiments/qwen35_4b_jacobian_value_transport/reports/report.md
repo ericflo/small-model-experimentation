@@ -29,6 +29,12 @@ and 24. Peak allocated memory was 9.25 GiB. A cat-to-dog coordinate swap at laye
 produced a nonzero mean residual delta norm of 0.4045 without cache use. These checks
 validate plumbing only and cannot satisfy G0.
 
+The preregistered 64-prompt targeted fit also completed: 24 single-token
+concepts at five source layers produced 120 finite, nonzero directions using
+equal weighting over valid causal source/target pairs. It took 29.3 seconds and
+12.3 GB peak allocated memory. This establishes the fitted intervention artifact;
+it is not an outcome result.
+
 ## Controls
 
 Frozen baseline, logit lens, ActAdd, raw donor, sparse J component, non-J remainder,

@@ -52,3 +52,14 @@
   and selection-half versus confirmation-half isolation.
 - G0 implementation changes will be committed and pushed before fitting the
   64-prompt scientific targeted lens.
+
+## 2026-07-12 — G0 tokenizer preflight stop
+
+- The 64-prompt targeted lens fit completed in 29.3 seconds at 12.3 GB peak;
+  all 120 layer/concept directions were finite and nonzero.
+- G0 then stopped before writing an outcome artifact because leading-space
+  digit strings tokenize as two tokens (`space`, `digit`). No gate result was
+  observed or reduced.
+- Corrected the contract: direct concepts are scored as their fitted leading-
+  space tokens after `Concept:`, while the `Value: ` prefix owns the space and
+  the following digit is scored as one bare token.
