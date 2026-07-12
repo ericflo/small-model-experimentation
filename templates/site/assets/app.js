@@ -144,10 +144,13 @@ const ROOT = document.body.dataset.root || "";
   const search = document.getElementById("explorer-search");
   const program = document.getElementById("explorer-program");
   const track = document.getElementById("explorer-track");
+  const outcome = document.getElementById("explorer-outcome");
   const sort = document.getElementById("explorer-sort");
   const count = document.getElementById("explorer-count");
   const empty = document.getElementById("explorer-empty");
+  const tabs = Array.from(document.querySelectorAll("[data-status-tab]"));
   const items = Array.from(listEl.querySelectorAll(".explorer-item"));
+  let statusTab = "finished"; // primary path: latest finished, newest first
 
   // deep text (full README/report vocabulary) rides in the shared search index
   // so the explorer page itself stays small; loaded on first keystroke
@@ -185,6 +188,8 @@ const ROOT = document.body.dataset.root || "";
     const tokens = (search.value || "").trim().toLowerCase().split(/\s+/).filter(Boolean);
     let shown = 0;
     items.forEach((item) => {
+      const okStatus = statusTab === "all" || item.dataset.status === statusTab;
+      const okOutcome = !outcome || !outcome.value || item.dataset.outcome === outcome.value;
       const programs = (item.dataset.programs || "").split(/\s+/);
       const okProgram = !program.value || programs.includes(program.value);
       const okTrack = !track.value || item.dataset.track === track.value;
@@ -192,7 +197,7 @@ const ROOT = document.body.dataset.root || "";
       const okSearch = tokens.every((token) => hay.includes(token));
       const date = item.dataset.date || "";
       const okRange = !rangeFilter || (date >= rangeFilter.from && date <= rangeFilter.to);
-      const show = okProgram && okTrack && okSearch && okRange;
+      const show = okStatus && okOutcome && okProgram && okTrack && okSearch && okRange;
       item.hidden = !show;
       if (show) shown += 1;
     });
@@ -206,11 +211,21 @@ const ROOT = document.body.dataset.root || "";
       return (b.dataset.date || "").localeCompare(a.dataset.date || "") || rank(a) - rank(b);
     });
     sorted.forEach((item) => listEl.appendChild(item));
-    count.textContent = `${shown} of ${items.length}` + (rangeFilter ? ` · ${rangeFilter.label}` : "");
+    const scope = statusTab === "all" ? "" : ` ${statusTab === "in-progress" ? "in progress" : statusTab}`;
+    count.textContent = `${shown}${scope}` + (rangeFilter ? ` · ${rangeFilter.label}` : "");
     if (empty) empty.hidden = shown !== 0;
     const reset = document.getElementById("filter-reset");
-    if (reset) reset.hidden = !(search.value || program.value || track.value || rangeFilter);
+    if (reset) {
+      reset.hidden = !(search.value || program.value || track.value || (outcome && outcome.value) || rangeFilter || statusTab !== "finished");
+    }
   }
+
+  function setTab(value) {
+    statusTab = value;
+    tabs.forEach((t) => t.setAttribute("aria-selected", String(t.dataset.statusTab === value)));
+    apply();
+  }
+  tabs.forEach((t) => t.addEventListener("click", () => setTab(t.dataset.statusTab)));
 
   let timer = 0;
   search.addEventListener("input", () => {
@@ -218,14 +233,15 @@ const ROOT = document.body.dataset.root || "";
     ensureDeepText().then(apply);
     timer = window.setTimeout(apply, 120);
   });
-  [program, track, sort].forEach((el) => el.addEventListener("change", apply));
+  [program, track, sort, outcome].forEach((el) => el && el.addEventListener("change", apply));
   function resetFilters() {
     search.value = "";
     program.value = "";
     track.value = "";
+    if (outcome) outcome.value = "";
     rangeFilter = null;
     window.history.replaceState(null, "", window.location.pathname);
-    apply();
+    setTab("finished");
   }
   ["explorer-clear", "filter-reset"].forEach((id) => {
     const el = document.getElementById(id);
@@ -241,11 +257,17 @@ const ROOT = document.body.dataset.root || "";
   }
   if (params.get("q")) {
     search.value = params.get("q");
+    statusTab = "all"; // a search from anywhere should span every experiment, not just finished
     ensureDeepText().then(apply);
   }
   if (params.get("program")) program.value = params.get("program");
+  const statusParam = params.get("status");
+  if (["finished", "in-progress", "all"].includes(statusParam)) statusTab = statusParam;
+  const outcomeParam = params.get("outcome");
+  if (outcome && outcomeParam) outcome.value = outcomeParam;
   const sortParam = params.get("sort");
   if (sortParam && Array.from(sort.options).some((option) => option.value === sortParam)) sort.value = sortParam;
+  tabs.forEach((t) => t.setAttribute("aria-selected", String(t.dataset.statusTab === statusTab)));
   apply();
 })();
 

@@ -1,0 +1,897 @@
+{
+ "_note": "Finished vs in-progress status per experiment. Seeded by the corpus-diagnostic (adversarially verified read of each report). build_site falls back to a deterministic heuristic for ids not listed here. Curated \u2014 safe to edit.",
+ "experiments": {
+  "adaptive_cognitive_kernel": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "belief_filter_executor": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "bridge_dose_recombination_curriculum": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "counterexample_rule_repair": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "cyclic_transition_ladder": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "dense_latent_query_executor": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "dense_supervision_ladder": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "dense_teacher_distillation": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "end_to_end_structured_slot_executor": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "episodic_echo_ttt": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "execution_conditioned_repair": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "factor_recombination_ladder": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "feature_factorized_rule_diversity": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "joint_register_executor": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "latent_executor": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "learned_sparse_slot_executor": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "query_filter_executor": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_activation_steering": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_active_counterexample_trace_selection": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_adaptive_evidence_budget_policy": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_adaptive_tool_controller": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_answer_potential_trace_sft": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_balanced_discriminative_bridge": {
+   "status": "finished",
+   "confidence": 0.9
+  },
+  "qwen35_4b_bank_the_thoughts": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_banking_installs_structure": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_banking_thinking_stack": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_bucket_belief_probe_ranker": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_code_abi_compiler_heldout_primitive_pilot": {
+   "status": "finished",
+   "confidence": 0.9
+  },
+  "qwen35_4b_code_abi_oracle_coverage_ladder": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_code_confidence": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "qwen35_4b_commit_slot_jacobian_value_transport": {
+   "status": "finished",
+   "confidence": 0.9
+  },
+  "qwen35_4b_commit_slot_semantic_power_replication": {
+   "status": "in-progress",
+   "confidence": 0.95
+  },
+  "qwen35_4b_confidence_guided_compute": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_constrained_coverage_dpo": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_context_composition": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_context_local_jacobian_clamp": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_counterexample_directed_dsl": {
+   "status": "finished",
+   "confidence": 0.92
+  },
+  "qwen35_4b_coverage_banking": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_coverage_vs_selection": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_crossfamily_laws": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_crosssubstrate_structure": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_decompose_compose_frontier": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_deployable_information_ceiling_sweep": {
+   "status": "finished",
+   "confidence": 0.68
+  },
+  "qwen35_4b_depth3_dose_response": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_depth_scaling_controls": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_depth_wall_anatomy": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_diversity_keyed_coverage_gate": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_error_localization": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_executable_program_posttraining": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_foofah_adaptive_program_budget_router": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_foofah_direct_vs_abi": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_foofah_ephemeral_program_induction": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_foofah_external_transform_gate": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_foofah_program_ensemble_consensus": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_foofah_program_repair_agent": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_foofah_program_strategy_portfolio": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_foofah_selective_program_fallback": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_foofah_strategy_discovery_live": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_forced_commit_jacobian_value_transport": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_gauntlet_breadth_round1": {
+   "status": "finished",
+   "confidence": 0.9
+  },
+  "qwen35_4b_gauntlet_frontier": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_generator_verifier_gap": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "qwen35_4b_graphir_self_repair": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "qwen35_4b_humaneval_adaptive_budget": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_humaneval_code_confidence": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "qwen35_4b_hypothesize_verify_wall": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_icl_retrieval_vs_induction": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_independent_code_abi_coverage_gate": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_independent_retrieval_consensus": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_interactive_policy_curriculum": {
+   "status": "finished",
+   "confidence": 0.92
+  },
+  "qwen35_4b_inventory_shortlister_training": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_jacobian_transport_control_replication": {
+   "status": "finished",
+   "confidence": 0.88
+  },
+  "qwen35_4b_jacobian_value_transport": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_joint_shortlister_ladder": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_language_proposal_wall": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_language_reasoning_wall": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_latent_composition_probe": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_latent_decomposition": {
+   "status": "finished",
+   "confidence": 0.9
+  },
+  "qwen35_4b_learn_from_failures": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "qwen35_4b_learned_active_trace_policy": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_live_tool_dagger": {
+   "status": "finished",
+   "confidence": 0.9
+  },
+  "qwen35_4b_long_horizon_answer_potential_sft": {
+   "status": "in-progress",
+   "confidence": 0.98
+  },
+  "qwen35_4b_meta_induction": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_metacognitive_boundary": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "qwen35_4b_model_in_loop_counterexamples": {
+   "status": "finished",
+   "confidence": 0.92
+  },
+  "qwen35_4b_native_thought_jacobian_value_transport": {
+   "status": "finished",
+   "confidence": 0.92
+  },
+  "qwen35_4b_native_thought_seam_budget_ladder": {
+   "status": "finished",
+   "confidence": 0.92
+  },
+  "qwen35_4b_neurosymbolic_repl_substrate": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "qwen35_4b_offline_hard_negative_coverage_dpo": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_operator_inventory_scaling_stress": {
+   "status": "finished",
+   "confidence": 0.9
+  },
+  "qwen35_4b_operator_inventory_search_pilot": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_opsd_pressure_locality_audit": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_oracle_distilled_semantic_verifier": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_oracle_probe_synthesis_mdp": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_oracle_process_grpo": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_overthinking_content_ladder": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_pareto_policy_integration": {
+   "status": "finished",
+   "confidence": 0.9
+  },
+  "qwen35_4b_partial_structure_search": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_passk_coverage_rl": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "qwen35_4b_prefix_value_guided_search": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "qwen35_4b_probe_the_parameter": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_probe_to_prompt": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_real_sample_verify_commit": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_reliability_exec_opsd_audit": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_repo_search_compress_bank": {
+   "status": "finished",
+   "confidence": 0.85
+  },
+  "qwen35_4b_retrieval_adapt_verify_scale": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_same_prefix_advantage_routing": {
+   "status": "in-progress",
+   "confidence": 0.95
+  },
+  "qwen35_4b_sampler_portfolio_scheduler": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_simulation_keystone_repair": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_sketch_coverage_shift_probe": {
+   "status": "finished",
+   "confidence": 0.85
+  },
+  "qwen35_4b_specialist_policy_integration": {
+   "status": "finished",
+   "confidence": 0.8
+  },
+  "qwen35_4b_static_bridge_ceiling_breaker": {
+   "status": "finished",
+   "confidence": 0.9
+  },
+  "qwen35_4b_strategy_token_diversity_lora": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "qwen35_4b_structure_or_values": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_structure_search_scaling": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_substrate_coverage_ladder": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_think_ftpo_round1": {
+   "status": "finished",
+   "confidence": 0.9
+  },
+  "qwen35_4b_think_ftpo_round2": {
+   "status": "finished",
+   "confidence": 0.9
+  },
+  "qwen35_4b_thinking_budget_controller": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_thinking_budget_scaling": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_thinking_content_vs_compute": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_thinking_lookahead": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_thinking_separability_probe": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "qwen35_4b_tool_seeded_banking": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_tool_state_policy_lora": {
+   "status": "finished",
+   "confidence": 0.9
+  },
+  "qwen35_4b_trained_vs_frozen_repair_mdp": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "qwen35_4b_transform_abi_compiler_pilot": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_typed_sketch_synthesis": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "qwen35_4b_unsaturated_frontier_active_bridge": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_verified_algorithm_retrieval_adaptation": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_verified_edit_closure": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_verified_macro_capacity_fit_rerun": {
+   "status": "finished",
+   "confidence": 0.5
+  },
+  "qwen35_4b_verified_macro_exact_cudagraph_rerun": {
+   "status": "finished",
+   "confidence": 0.6
+  },
+  "qwen35_4b_verified_macro_invention": {
+   "status": "finished",
+   "confidence": 0.8
+  },
+  "qwen35_4b_verified_macro_long_context_rerun": {
+   "status": "finished",
+   "confidence": 0.55
+  },
+  "qwen35_4b_verifier_conditioned_recovery_bank": {
+   "status": "in-progress",
+   "confidence": 0.95
+  },
+  "qwen35_4b_verifier_free_banking": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen35_4b_verifier_guided_self_improvement": {
+   "status": "finished",
+   "confidence": 0.98
+  },
+  "qwen35_4b_verifier_selector_showdown": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen35_4b_wall_climbing": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen_action_conditioned_vm_echo_policy_iteration": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen_active_crystallizer_public_gate": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen_active_example_acquisition": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen_batched_transduction_consistency": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "qwen_budgeted_action_value_compiler": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen_candidate_conditioned_trace_verifier": {
+   "status": "finished",
+   "confidence": 0.98
+  },
+  "qwen_candidate_trace_verifier": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen_checkpoint_scheduled_state_compiler": {
+   "status": "finished",
+   "confidence": 0.9
+  },
+  "qwen_compiler_multiseed_reattribution": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen_complete_program_trace_reranker": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen_compositional_curriculum_abi": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen_constrained_abi_parser": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen_context_trace_verifier": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen_counterexample_guided_ephemeral_program": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "qwen_counterexample_guided_projection": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "qwen_counterfactual_episodic_icl": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen_counterfactual_icl_public_multiseed": {
+   "status": "finished",
+   "confidence": 0.94
+  },
+  "qwen_counterfactual_trace_preference_distillation": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen_crystallized_trace_abi_tournament": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen_dense_state_dagger_vm_agent": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen_disagreement_probe_program_induction": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "qwen_episodic_soft_prompt_task_vectors": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "qwen_extrapolation_bound_abi": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen_fastweight_hook": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen_full_table_consistency_reranker": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "qwen_fuyu_vm_grpo_echo": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen_hidden_vm_curriculum_repair": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen_hidden_vm_mixed_domains": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "qwen_hidden_vm_onpolicy_canonical_repair": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "qwen_inpolicy_vm_echo_distillation": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen_iterative_repair_policy": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "qwen_large_abi_nested_compiler": {
+   "status": "finished",
+   "confidence": 0.92
+  },
+  "qwen_latent_beam_program_compiler": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen_learned_active_interrogation": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen_learned_repair_verifier": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen_lora_parser_compiler": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen_lora_typed_bytecode_trace_compiler": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen_mixed_domain_trace_verifier": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen_noisy_row_program_crystallizer": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "qwen_numeric_copy_compiler": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen_onpolicy_repair_compiler": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen_oracle_distilled_acquisition_policy": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen_pairwise_table_judge": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "qwen_prefix_state_process_verifier": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen_program_only_executable_abi": {
+   "status": "finished",
+   "confidence": 0.92
+  },
+  "qwen_progressive_repair_compiler": {
+   "status": "finished",
+   "confidence": 0.82
+  },
+  "qwen_public_prose_abi_gate": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "qwen_python_shaped_silent_executor": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen_readable_candidate_verifier": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "qwen_real_task_abi_coverage_gate": {
+   "status": "finished",
+   "confidence": 0.9
+  },
+  "qwen_recurrent_vm_repair_policy": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen_recursive_ephemeral_program_induction": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen_recursive_task_decomposition": {
+   "status": "finished",
+   "confidence": 0.9
+  },
+  "qwen_register_structured_runtime": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen_register_token_latent_compiler": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen_register_trace_refiner": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen_search_augmented_rollout_distillation": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen_semantic_prefix_value_model": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen_shared_parser_compiler": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen_slot_repair_distillation": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen_slot_stability_compiler": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen_span_free_compiler": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen_state_ladder_compiler": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "qwen_structural_compiler_attribution_ablation": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen_structural_latent_compiler_expansion": {
+   "status": "finished",
+   "confidence": 0.93
+  },
+  "qwen_structured_bridge": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "qwen_support_contrastive_meta_icl": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen_tail_repair_stability_critic": {
+   "status": "finished",
+   "confidence": 0.98
+  },
+  "qwen_teacher_distilled_slot_compiler": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen_trace_bootstrap_retention": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "qwen_trace_procedure_depth_stress": {
+   "status": "finished",
+   "confidence": 0.93
+  },
+  "qwen_typed_bytecode_expert_iteration": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen_verified_skill_memory_rag": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "qwen_verifier_guided_slot_repair": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen_vm_agent_echo_qlora": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "qwen_vm_echo_trace_distillation": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "real_transform_abi_gate_with_counterexamples": {
+   "status": "finished",
+   "confidence": 0.95
+  },
+  "rule_family_diversity_scaling": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "sampled_query_filter_executor": {
+   "status": "finished",
+   "confidence": 0.96
+  },
+  "sparse_support_memory_executor": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "structured_slot_initializer_ladder": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "targeted_bridge_allocation": {
+   "status": "finished",
+   "confidence": 0.97
+  },
+  "trace_keyed_symbol_repair": {
+   "status": "finished",
+   "confidence": 0.95
+  }
+ }
+}

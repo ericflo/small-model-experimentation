@@ -689,19 +689,56 @@ def build_experiments(programs: list[dict]) -> list[dict]:
             "total_size_bytes": int(row.get("total_size_bytes") or 0),
         }
         experiments.append(exp)
-    floor = min((exp["last"] for exp in experiments if exp["last"]), default="")
     for exp in experiments:
-        exp["recent"] = bool(exp["last"]) and exp["last"] > floor
-        # chronological anchor: post-import git activity wins, else the recorded run window
-        exp["when"] = exp["last"] if exp["recent"] else (exp["ran_end"] or exp["ran_start"] or exp["last"])
-    # day-level date first, then the exact commit timestamp so several experiments
-    # landed on the same day still list in true chronological order
-    experiments.sort(key=lambda exp: (exp["when"] or "0000-00-00", exp["last_ts"],
-                                      exp["ran_start"] or "0000-00-00", exp["id"]), reverse=True)
+        # True chronology is the experiment's OWN run window (curated dates, else the
+        # creation commit) — never git-last-touched. A sweeping mechanical commit (the
+        # bulk artifact removal) rewrote 155 folders' last-touched date to one day, so
+        # ordering on it kept bumping settled experiments back to the top.
+        exp["when"] = exp["ran_end"] or exp["ran_start"] or exp["first"] or exp["last"]
+        exp["recent"] = bool(exp["when"]) and exp["when"] > IMPORT_DATE
+    experiments.sort(
+        key=lambda exp: (exp["when"] or "0000-00-00", exp["ran_end"] or "", exp["ran_start"] or "", exp["first"] or "", exp["id"]),
+        reverse=True,
+    )
     known_programs = {str(program["id"]) for program in programs}
     for exp in experiments:
         exp["programs"] = [pid for pid in exp["programs"] if pid in known_programs] or exp["programs"]
     return experiments
+
+
+# finished/in-progress lifecycle status (slot, label, tooltip)
+EXPERIMENT_STATUS = {
+    "finished": ("done", "Finished", "Concluded — a result is recorded (a win, a null, or a ruled-out negative)."),
+    "in-progress": ("live", "In progress", "Running — set up and under way, no conclusion recorded yet."),
+}
+_INPROGRESS_RE = re.compile(
+    r"(?i)\b(?:pre-?run|preregist\w*|no (?:scientific )?result|design[- ]only|not (?:yet )?(?:run|started|concluded)"
+    r"|frozen design|to be run|sealed splits|(?:run|result-bearing run) pending|pending (?:the |a )?(?:frozen |result)"
+    r"|awaiting (?:the )?run|run is pending)\b"
+)
+
+
+def _fallback_status(exp: dict) -> str:
+    """Deterministic finished/in-progress guess for experiments absent from the
+    curated status file (e.g. added since the last diagnostic). Defaults to
+    finished — the overwhelming majority conclude — and flips to in-progress only
+    on explicit not-yet-concluded language."""
+    text = f'{exp.get("finding", "")} {exp.get("summary", "")}'
+    return "in-progress" if _INPROGRESS_RE.search(text) else "finished"
+
+
+def load_experiment_status() -> dict[str, str]:
+    path = KNOWLEDGE / "experiment_status.json"
+    if not path.exists():
+        return {}
+    payload = read_json(path)
+    entries = payload.get("experiments", {}) if isinstance(payload, dict) else {}
+    out: dict[str, str] = {}
+    for key, value in entries.items():
+        status = value.get("status") if isinstance(value, dict) else value
+        if status in EXPERIMENT_STATUS:
+            out[str(key)] = status
+    return out
 
 
 def full_command_from_manifest(exp_dir: Path) -> tuple[str, str, bool]:
@@ -800,6 +837,15 @@ def status_chip(status: str) -> str:
     return (
         f'<span class="chip status status-{icon_key}"><span aria-hidden="true">{STATUS_ICON[icon_key]}</span>'
         f" {esc(status)}</span>"
+    )
+
+
+def exp_status_chip(status: str) -> str:
+    """Finished / In progress lifecycle chip (distinct from a claim's status)."""
+    slot, label, tip = EXPERIMENT_STATUS.get(status, EXPERIMENT_STATUS["finished"])
+    return (
+        f'<span class="chip xstatus x-{slot}" title="{esc(tip)}">'
+        f'<span class="xdot" aria-hidden="true"></span>{esc(label)}</span>'
     )
 
 
@@ -1530,7 +1576,10 @@ def feed_card(
     chips = "".join(program_chip(pid, prefix, slots, titles) for pid in exp["programs"][:3])
     if not big:
         chips += "".join(f'<span class="chip tag">{esc(tag)}</span>' for tag in exp["tags"][:3])
-    meta_bits = [date_span(exp), track_chip(exp["track"])]
+    meta_bits = [date_span(exp)]
+    if exp.get("status") == "in-progress":  # finished is the norm; flag only the live frontier
+        meta_bits.append(exp_status_chip(exp["status"]))
+    meta_bits.append(track_chip(exp["track"]))
     if exp["figures"]:
         meta_bits.append(f'<span class="muted">{len(exp["figures"])} figure{"s" if len(exp["figures"]) != 1 else ""}</span>')
     finding = rich(exp["finding"], prefix) if rich else esc(exp["finding"])
@@ -1574,6 +1623,11 @@ class SiteBuilder:
         self.claim_anchor_ids = {slugify(str(claim.get("id"))) for claim in self.claims}
         self.viz = load_viz()
         self.briefs = load_briefs()
+        self.status_map = load_experiment_status()
+        for exp in self.experiments:
+            exp["status"] = self.status_map.get(exp["id"]) or _fallback_status(exp)
+            tone = str(self.briefs.get(exp["id"], {}).get("verdict_tone", "")).strip()
+            exp["outcome"] = tone if tone in {"positive", "negative", "mixed", "neutral"} else ""
         self.dropped_notes: list[str] = []
 
     # ------------------------------------------------------------- utilities
@@ -1848,14 +1902,11 @@ class SiteBuilder:
                 f'<p>{self.rich_text(exp["finding"], prefix)}</p></div>'
             )
 
-        updated = ""
-        if exp["recent"] and exp["ran_end"] and exp["last"] > exp["ran_end"]:
-            updated = f'<span class="muted">updated {esc(exp["last"])}</span>'
         header = (
             f'<nav class="crumbs"><a href="{prefix}">Home</a> / <a href="{prefix}experiments/">Experiments</a> / '
             f"<span>{esc(exp['title'])}</span></nav>"
             f"<h1>{esc(exp['title'])}</h1>"
-            f'<div class="page-meta">{date_span(exp)}{updated}{track_chip(exp["track"])}'
+            f'<div class="page-meta">{exp_status_chip(exp["status"])}{date_span(exp)}{track_chip(exp["track"])}'
             f"{self.chip_row(exp, prefix)}"
             f'<a class="chip gh" href="{GITHUB}/tree/main/{esc(exp["path"])}">GitHub ↗</a></div>'
         )
@@ -1917,36 +1968,64 @@ class SiteBuilder:
             ).lower()
             cards.append(
                 f'<li class="explorer-item" data-programs="{esc(" ".join(exp["programs"]))}" data-track="{esc(exp["track"])}" '
+                f'data-status="{esc(exp["status"])}" data-outcome="{esc(exp["outcome"])}" '
                 f'data-date="{esc(exp["when"] or "")}" data-figs="{len(exp["figures"])}" data-title="{esc(exp["title"].lower())}" '
                 f'data-rank="{index}" data-text="{esc(text)}">'
                 + feed_card(exp, prefix, self.slots, self.program_titles, big=False, rich=self.rich_text)
                 + "</li>"
             )
-        imported_count = sum(1 for exp in self.experiments if exp["track"] != "new")
+        n = len(self.experiments)
+        n_finished = sum(1 for e in self.experiments if e["status"] == "finished")
+        n_inprog = n - n_finished
+        n_import = sum(1 for exp in self.experiments if exp["track"] != "new")
+
+        def seg(value, label, count):
+            sel = "true" if value == "finished" else "false"
+            return (
+                f'<button type="button" role="tab" class="seg-btn" data-status-tab="{value}" aria-selected="{sel}">'
+                f'{label} <span class="seg-n">{count}</span></button>'
+            )
+        segmented = (
+            '<div class="seg" role="tablist" aria-label="Experiment status">'
+            + seg("finished", "Finished", n_finished)
+            + seg("in-progress", "In progress", n_inprog)
+            + seg("all", "All", n)
+            + "</div>"
+        )
+        outcomes = (
+            '<select id="explorer-outcome" aria-label="Outcome"><option value="">Any outcome</option>'
+            '<option value="positive">Wins</option><option value="mixed">Mixed</option>'
+            '<option value="negative">Ruled out</option><option value="neutral">Other</option></select>'
+        )
         content = (
             '<header class="page-head"><h1>Experiments</h1>'
-            f'<p class="lede">{len(self.experiments)} experiments, newest first. '
-            f'{imported_count} arrived in the 2026-06-28 import from the predecessor working repo — its two parallel '
-            'working tracks are labeled lines Y and Z here; their run dates are recovered from records inside each '
-            'experiment folder. Filters combine; search matches titles, findings, tags, programs, and overview text.</p></header>'
-            + activity_chart(self.experiments)
+            f'<p class="lede">Every experiment is self-contained — its own question, code, data, and result. '
+            f'{n} in all, newest first: <strong>{n_finished} finished</strong>, {n_inprog} in progress.</p>'
+            f'<details class="explorer-provenance"><summary>About dates &amp; provenance</summary>'
+            f'<p class="muted">Ordering follows each experiment’s own run window (recovered from records inside its '
+            f'folder), not when a file was last touched. {n_import} experiments arrived in the 2026-06-28 bulk import from '
+            'the predecessor working repo — its two parallel working tracks show here as provenance lines Y and Z.</p></details>'
+            '</header>'
+            + segmented
             + '<form id="explorer-controls" class="filter-row" onsubmit="return false">'
             '<input id="explorer-search" type="search" placeholder="Search experiments…" aria-label="Search experiments">'
-            f'<select id="explorer-program" aria-label="Program"><option value="">All programs</option>{options}</select>'
+            + outcomes
+            + f'<select id="explorer-program" aria-label="Program"><option value="">All programs</option>{options}</select>'
             f'<select id="explorer-track" aria-label="Provenance"><option value="">Any provenance</option>{tracks}</select>'
             '<select id="explorer-sort" aria-label="Sort"><option value="date">Newest first</option>'
             '<option value="date-asc">Oldest first</option>'
             '<option value="title">Title A–Z</option><option value="figs">Most figures</option></select>'
             '<span id="explorer-count" class="result-count" aria-live="polite"></span>'
             '<button id="filter-reset" type="button" hidden>Reset ✕</button></form>'
-            f'<ol id="explorer" class="explorer-list">{"".join(cards)}</ol>'
+            + activity_chart(self.experiments)
+            + f'<ol id="explorer" class="explorer-list">{"".join(cards)}</ol>'
             '<p id="explorer-empty" class="empty-note" hidden>No experiments match these filters. '
             '<button id="explorer-clear" type="button">Clear filters</button></p>'
         )
         self.write_page(
             "experiments/index.html",
             title=f"Experiments · {SITE_NAME}",
-            description="Every experiment in the corpus, newest activity first, with findings.",
+            description="Every experiment in the corpus, newest first, with its finished/in-progress status and outcome.",
             prefix=prefix,
             active="experiments",
             content=content,
