@@ -37,7 +37,7 @@ This is a repository-level inventory. Each experiment remains the source of trut
 
 | Extension | Files |
 | --- | ---: |
-| `.json` | 2516 |
+| `.json` | 2517 |
 | `.csv` | 2138 |
 | `.py` | 1472 |
 | `.md` | 935 |
