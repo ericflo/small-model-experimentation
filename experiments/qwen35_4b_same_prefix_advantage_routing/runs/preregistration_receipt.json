@@ -1,0 +1,22 @@
+{
+  "design_commit": "66827449",
+  "experiment_id": "qwen35_4b_same_prefix_advantage_routing",
+  "frozen_file_order": [
+    "configs/default.yaml",
+    "idea_intake.md",
+    "reports/preregistration.md",
+    "reports/design_review.md",
+    "reports/literature_review.md"
+  ],
+  "frozen_files": {
+    "configs/default.yaml": "bd9fc4066a4508f2c0a953b6320c7e9f08ee0b5ebe220a62997a392da35e59e0",
+    "idea_intake.md": "343e22761097f6b7223ec2a46bd60beefdef18e34ddaafcbf2fc6563f7310796",
+    "reports/design_review.md": "a558c3577ef42c67eb269a8e226eb739712abd6bdd4f39e99285c48f33f3efc5",
+    "reports/literature_review.md": "5c4cd9b94b55ddd6358ea5a9512355ea3c0efa2a5ebbdbfbccbcbfcd4ab96446",
+    "reports/preregistration.md": "1cac82ed643ab713ded3e989c96c11f2d791d99173710c24f1645af191a4186b"
+  },
+  "model_output_precedes_lock": false,
+  "note": "No task-model output existed before this immutable design lock.",
+  "schema_version": 1,
+  "status": "locked"
+}

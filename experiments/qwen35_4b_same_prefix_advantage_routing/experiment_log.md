@@ -33,3 +33,10 @@
 - The frozen downstream power rule now requires at least eight medium
   benchmark events. No task-model output had run, so this is a legitimate
   pre-lock correction rather than an outcome-dependent amendment.
+
+## 2026-07-12 — immutable design lock
+
+- Design commit: `668274493e0c150ed62fcca534ef99c3c06967ef`.
+- `runs/preregistration_receipt.json` binds SHA-256 digests of the config,
+  intake, preregistration, design review, and literature review. Every model
+  stage verifies both those digests and commit ancestry before loading Qwen.
