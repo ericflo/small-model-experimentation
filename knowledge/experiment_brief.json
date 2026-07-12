@@ -1389,37 +1389,35 @@
    ]
   },
   "qwen35_4b_balanced_core_answer_potential_sft": {
-   "verdict_tag": "Balanced training test underway",
-   "concept_primer": "The model can produce dozens of different scratch-work paths for one problem. This test asks whether the paths that make the known answer more likely are actually better lessons than paths chosen by success, chance, or simple brevity.",
-   "plain_question": "Can we teach a small model more effectively by banking its most answer-supporting complete reasoning, or is choosing its shortest complete reasoning just as good?",
-   "plain_answer": "No capability answer yet. The expensive nine-family run has been narrowed to a checksum-preserved three-family core: 331 of 360 tasks are already safely banked, and the mandatory training comparison now includes the strongest early rival, choosing the shortest complete reasoning.",
-   "why_it_matters": "This preserves almost one hundred million tokens of completed work without letting sunk cost dictate an open-ended run. It also makes the test harder to fool: answer-based selection must beat ordinary success filtering, random reasoning, shortest reasoning, and reasoning copied from another task.",
+   "verdict_tag": "Which self-generated reasoning is worth teaching back",
+   "concept_primer": "A small model solves each problem many different ways in its head. For every attempt, a scorer asks: does this line of thinking make the model surer of the correct final answer? The plan banks the most answer-boosting thoughts and retrains the model on them.",
+   "plain_question": "If a model reasons through a problem many different ways, can we spot which reasoning to train on by which one makes the right answer likelier?",
+   "plain_answer": "Not run yet — the data is collected but no model has been trained. The test compares six ways to pick which self-generated reasoning to teach back, then measures fresh-task accuracy. It matters because early tuning checks hinted that simply picking the shortest complete reasoning ranked answers better than the clever answer-likelihood score, so the smart method has real competition to beat.",
+   "why_it_matters": "When building training data from a small model's own reasoning, don't assume a sophisticated answer-probability score beats the boring shortest-complete trace. Test against that cheap control before spending compute scoring every attempt.",
    "verdict_tone": "neutral",
    "key_numbers": [
     {
-     "label": "Balanced tasks safely banked",
-     "value": "331 / 360",
-     "sub": "only 29 more tasks are allowed before the hard stop"
+     "label": "Reasoning tasks banked",
+     "value": "331 of 360",
+     "sub": "collections of self-generated thoughts finished before the design was frozen"
     },
     {
-     "label": "Reasoning chains already preserved",
-     "value": "21,184",
-     "sub": "97.9 million sampled thinking tokens behind checksums"
+     "label": "Selection strategies compared",
+     "value": "6 ways",
+     "sub": "methods for choosing which reasoning to teach, including a shortest-reasoning control"
     },
     {
-     "label": "Training strategies compared",
-     "value": "6",
-     "sub": "answer score, joint score, random, successful, shortest, and task-shuffled"
+     "label": "Bar to declare a winner",
+     "value": "3 points",
+     "sub": "minimum fresh-task accuracy gain the smart selector must beat its best control by"
+    },
+    {
+     "label": "Reasoning generated so far",
+     "value": "97.9 million",
+     "sub": "thinking tokens the model produced across all attempts"
     }
    ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Preserved reasoning chains versus the balanced hard stop",
-     "chart_read": "The first bar is the number of complete reasoning chains already stored; the second is the exact N=64 total when all 360 balanced tasks are done. The small remaining gap is the only additional harvest allowed.",
-     "chart_takeaway": "Most of the balanced pool is already preserved, so finishing the focused test reuses the sunk cost without reopening the much larger nine-family schedule."
-    }
-   ]
+   "charts": []
   },
   "qwen35_4b_balanced_discriminative_bridge": {
    "verdict_tag": "Hand-picking hard examples backfired",
@@ -2348,42 +2346,35 @@
    ]
   },
   "qwen35_4b_deep_advantage_mopd": {
-   "verdict_tag": "Deep must prove it twice",
-   "concept_primer": "Imagine a strong all-round apprentice and two specialists standing at the same half-finished job. The deep specialist is copied only when separate trial runs show that it finishes that exact job better than both the apprentice and the other specialist.",
-   "plain_question": "Can carefully chosen lessons from the deep specialist improve one already blended small model without sacrificing its faster skills?",
-   "plain_answer": "The test is registered but no model result exists yet. Deep first has to repeat its earlier advantage on two entirely fresh groups of half-finished problems. If it does, equal-size training controls will reveal whether any improvement comes from choosing the right states and the right teacher, rather than simply doing more training.",
-   "why_it_matters": "A successful result would turn two specialized behaviors into one checkpoint without needing a router or extra attempts at deployment. A failure will still distinguish a bad teacher choice, a bad state choice, harmful weight changes, and a gain that ordinary sampling already buys.",
+   "verdict_tag": "Can one trained model beat switching per problem",
+   "concept_primer": "Picture one cooking student who already blends a fast style and a slow, careful style. You coach them extra only on the exact dishes where slow clearly wins, while re-drilling old dishes so nothing slips. Can that beat hiring a different cook per dish?",
+   "plain_question": "When a slow, careful answering style beats a fast one on certain problems, can you bake that edge into a single model instead of switching styles at runtime?",
+   "plain_answer": "Not run yet. The test is built and its instrument checks pass, but the deciding stage has not executed. It will first confirm, on fresh problems, that a strict rule reliably flags cases where the careful style beats both the fast style and the current combined model. Only then does it coach the model on those cases and check whether the result beats picking a style per problem and beats sampling eight answers and keeping the best.",
+   "why_it_matters": "If targeted coaching works, you ship one model instead of running two models plus a runtime picker, cutting latency and cost. If it fails, switching styles or sampling many answers at deployment stays necessary.",
    "verdict_tone": "neutral",
    "key_numbers": [
     {
-     "label": "Fresh qualification blocks",
-     "value": "2",
-     "sub": "deep must beat both the starting blend and quick specialist in each untouched block"
+     "label": "The starting combined model's recipe",
+     "value": "60% careful / 40% fast",
+     "sub": "weight blend of the two styles it starts from"
     },
     {
-     "label": "Deep lessons per round",
-     "value": "60",
-     "sub": "each is selected from a failed state where deep won on separate trial continuations"
+     "label": "How often the careful style must clearly win",
+     "value": "about 1 in 12",
+     "sub": "minimum flagged problems required before coaching is allowed (16 of every 192)"
     },
     {
-     "label": "Starting-model reminders per round",
-     "value": "20",
-     "sub": "one quarter of the dose rehearses the original blend to resist forgetting"
+     "label": "Old-skill drilling mixed into training",
+     "value": "1 in 4",
+     "sub": "share of examples frozen to preserve existing behavior"
     },
     {
-     "label": "Final deployment artifact",
-     "value": "1 checkpoint",
-     "sub": "it must beat both specialists, the starting blend, visible routing, matched controls, and eight-attempt sampling"
+     "label": "Bar it must clear at deployment",
+     "value": "beat best of 8",
+     "sub": "must beat sampling eight answers and keeping the best-scored one"
     }
    ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "The proposed training and its two sharp controls receive identical lesson counts",
-     "chart_read": "Each group has a tall 60-unit capability bar and a shorter 20-unit reminder bar. Only the source of the 60 capability lessons changes: verified deep wins, matched places where deep did not win, or the wrong specialist on the verified-win states.",
-     "chart_takeaway": "Because all three arms get the same 80 lessons, a primary win can be attributed to choosing both the right state and the right specialist rather than to extra training."
-    }
-   ]
+   "charts": []
   },
   "qwen35_4b_deployable_information_ceiling_sweep": {
    "verdict_tag": "The bottleneck is missing clues, not strategy",
@@ -2944,60 +2935,35 @@
    ]
   },
   "qwen35_4b_foofah_program_ensemble_consensus": {
-   "verdict_tag": "Making programs agree beats no simpler pick",
-   "concept_primer": "Instead of answering directly, the model writes small programs that reshape a messy table, and each program can be checked against one worked example before you trust its answer.",
-   "plain_question": "When the model writes several table-reshaping programs, does requiring them to agree beat just using the first one that matches the worked example?",
-   "plain_answer": "No. Requiring several programs to agree was safer on each pick but far too cautious; simply using the first program that matched the worked example solved the most tables, 52% versus 44% for asking the model directly.",
-   "why_it_matters": "Prefer the simplest reliable filter — trust the first program that reproduces the worked example. Demanding agreement across programs raises confidence per answer but skips too many solvable tables to be worth it.",
-   "verdict_tone": "mixed",
+   "verdict_tag": "Trust the first working program, not a vote",
+   "concept_primer": "Think of fixing a messy spreadsheet: the model writes a few small transform-the-table programs, then checks each against one worked example whose answer is known. The question is whether making several programs agree beats simply running the first one that passes the example.",
+   "plain_question": "When a small model writes several little programs to reshape a table, does making them agree beat just running the first one that passes a checkable example?",
+   "plain_answer": "No. The simplest rule won: run the first program that passes a single worked example. It solved 52% of tables versus 44% when the model just answered directly, rescuing 23 tables it had otherwise botched while breaking only 4. Requiring several programs to agree was more careful but far too timid, recovering fewer mistakes and topping out at 49%.",
+   "why_it_matters": "For structured tasks where you can write code and check it against a known example, have the small model generate programs and deploy the first one that passes. Don't gate on ensemble agreement — it trades away most of the wins.",
+   "verdict_tone": "positive",
    "key_numbers": [
     {
-     "label": "Asking directly",
+     "label": "Answering directly",
      "value": "44%",
-     "sub": "share of tables solved by asking the model for the answer"
+     "sub": "tables solved out of 250"
     },
     {
-     "label": "First matching program",
+     "label": "First working program",
      "value": "52%",
-     "sub": "use the first program that reproduces the worked example"
+     "sub": "tables solved out of 250 — the best rule"
     },
     {
      "label": "Requiring agreement",
      "value": "49%",
-     "sub": "make at least two programs agree first — fewer tables solved"
+     "sub": "the more cautious voting rule fell short"
     },
     {
-     "label": "Best any program could do",
+     "label": "Best any rule could reach",
      "value": "54%",
-     "sub": "ceiling if you always picked a correct program when one existed"
+     "sub": "ceiling if selection were perfect"
     }
    ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "How many tables each answering strategy solves",
-     "chart_read": "Each bar is a way of picking the final answer, from asking directly, through the two agreement rules, to using the first program that matches the example, ending at a best-possible ceiling; the height is the share of tables solved exactly, and taller is better.",
-     "chart_takeaway": "The first-matching-program bar is the tallest usable strategy, standing above both agreement bars and above asking directly."
-    },
-    {
-     "index": 1,
-     "chart_plain_title": "Tables newly fixed versus newly broken by each strategy",
-     "chart_read": "For each picking strategy, one colored bar counts tables it newly gets right compared with asking directly, and the other counts tables it newly gets wrong; more fixes and fewer breaks is better.",
-     "chart_takeaway": "The first-matching-program strategy fixes 23 tables while breaking only 4, a far bigger net gain than either agreement rule."
-    },
-    {
-     "index": 2,
-     "chart_plain_title": "How often a committed program is actually correct",
-     "chart_read": "Each bar is a picking strategy, and the height shows how often the program it commits to turns out to be right; taller means more trustworthy picks.",
-     "chart_takeaway": "Requiring stricter agreement lifts per-pick correctness to 84% from 73%, but that small edge does not make up for the many tables it skips."
-    },
-    {
-     "index": 3,
-     "chart_plain_title": "Programs that match the example, before and after one fix",
-     "chart_read": "Each group is one of three prompt styles for writing the program, with one bar for programs that matched the example on the first try and another for extra matches gained after a single fix attempt; more matches is better.",
-     "chart_takeaway": "One fix round nearly doubles the matches for the middle prompt style while barely helping the other two."
-    }
-   ]
+   "charts": []
   },
   "qwen35_4b_foofah_program_repair_agent": {
    "verdict_tag": "Repair adds coverage but not a replacement",
@@ -5276,88 +5242,66 @@
    ]
   },
   "qwen35_4b_recovery_payload_budget_harness": {
-   "verdict_tag": "Fixed recovery model awaits fair tool test",
-   "concept_primer": "A strong recovery model was often producing the right long code edit, but the agent cut its command off before the closing JSON arrived. The earlier timing score also disliked a sensible re-read before patching.",
-   "plain_question": "Will the same model become a reliable coding agent when tool commands have enough output room and recovery can include one useful inspection?",
-   "plain_answer": "Not known yet. The model is frozen, every control gets the same larger answer allowance, and new task families remain sealed until fresh safety and familiar-task gates pass.",
-   "why_it_matters": "This separates missing model capability from an artificial agent-interface bottleneck. A win must still beat spending the same compute on more attempts, an explicit recovery hint, and the strongest action-only model.",
+   "verdict_tag": "Was a cramped answer box hiding the fix",
+   "concept_primer": "Picture a skilled mechanic forced to write every repair on a tiny form. When the fix runs long, the sentence gets cut off mid-word and rejected. This test doubles the form's size to see whether the skill was there all along.",
+   "plain_question": "When a small coding model kept failing to fix rejected edits, was the real cause just that its reply space was too short to finish writing the fix?",
+   "plain_answer": "Not run yet — this sets up the deciding test. The model that reruns is untouched; only its reply space is doubled, and the same larger space is given to every comparison version so no one gets a compute advantage. If the model then fixes rejected code on brand-new, unfamiliar problem types while others cannot, the cramped output space was the real bottleneck. If it still fails, the skill was never there.",
+   "why_it_matters": "Before concluding a small model can't do a task, check whether your output length limit is truncating its structured tool responses. A cut-off patch looks like incompetence but may just be a clipped answer.",
    "verdict_tone": "neutral",
    "key_numbers": [
     {
-     "label": "Think / answer",
-     "value": "512 / 512",
-     "sub": "identical per-call allowance for every arm"
+     "label": "Familiar recovery cases the model already solved",
+     "value": "58 of 60",
+     "sub": "success on the training-family checkpoint before this test"
     },
     {
-     "label": "Fresh safety prompts",
-     "value": "48",
-     "sub": "disjoint from both previous safety blocks"
+     "label": "Failed attempts that ran out of writing room",
+     "value": "all 24",
+     "sub": "every invalid action hit the old 256-token answer ceiling"
     },
     {
-     "label": "Benchmark exposure",
-     "value": "0",
-     "sub": "paired benchmark seeds remain sealed"
+     "label": "Rejected edits corrected within two tries",
+     "value": "30 of 30",
+     "sub": "evidence the fix-it behavior is present, just clipped"
+    },
+    {
+     "label": "Reply space per answer",
+     "value": "doubled",
+     "sub": "raised from 256 to 512 tokens, matched across all versions"
     }
    ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "The previous failures identify two agent-interface problems",
-     "chart_read": "The bars show immediate code changes after rejection, code changes within two turns, and invalid commands that hit the old output cap. The middle bar measures successful short recovery; the others diagnose the old stop.",
-     "chart_takeaway": "Every case changed code within two turns and every invalid command hit the cap, supporting a larger payload and a short transition window."
-    },
-    {
-     "index": 1,
-     "chart_plain_title": "The new harness doubles answer room without cutting thinking",
-     "chart_read": "For the old and new harnesses, one bar is private thinking capacity and the other is tool-answer capacity. The new allocation applies equally to all models and controls.",
-     "chart_takeaway": "Thinking stays at 512 tokens while answer room rises from 256 to 512, isolating command capacity instead of trading reasoning away."
-    }
-   ]
+   "charts": []
   },
   "qwen35_4b_recovery_reason_locality_interpolation": {
-   "verdict_tag": "Safe sweet spot blocked by tool payload",
-   "concept_primer": "The previous coding assistant recovered well after failed tests, but its planning lesson changed unrelated language behavior. This study mixed the safer action lesson with only part of that planning update.",
-   "plain_question": "Can a partial planning update improve recovery without causing broad changes elsewhere?",
-   "plain_answer": "Partly. One mixture solved 97% of familiar recovery cases and stayed safely local, but it did not qualify for new task families because long patch commands were cut off by the harness and a timing rule rejected sensible inspect-then-patch recovery.",
-   "why_it_matters": "The useful recovery behavior and broad collateral are separable after all. The next bottleneck is concrete: give tool commands enough output room and measure successful recovery across a short transition, not only the very next action.",
+   "verdict_tag": "Safe blend beat both parents, gates stopped it",
+   "concept_primer": "Two fine-tuned versions share one starting checkpoint: one only learned fix-it actions, the other also learned to explain its plan first. Rather than retrain, you average their learned weight changes on a dial and search for the mix that keeps the skill and drops the mistakes.",
+   "plain_question": "If you average two versions of a model, one that just acts and one that also explains, can you dial in a mix that fixes its mistakes without breaking unrelated behavior?",
+   "plain_answer": "Yes on skill, no on shipping. One dial setting recovered from broken code 97% of the time, about 12 points above the act-only version and 15 above a matched-training baseline, while barely moving unrelated behavior. But it tripped two automatic release checks, so the test halted before the transfer stage. On inspection, both checks were mis-specified, not the model.",
+   "why_it_matters": "When two fine-tunes each get part of a job right, averaging their weights can capture both without retraining. But write release gates around the real goal, not a proxy like doing it in one step, or genuinely good models get blocked.",
    "verdict_tone": "mixed",
    "key_numbers": [
     {
-     "label": "Best recovery",
-     "value": "97%",
-     "sub": "58 of 60 familiar failure cases at the safe mixture"
+     "label": "Recovering from broken code",
+     "value": "48% → 97%",
+     "sub": "baseline vs the best weight blend"
     },
     {
-     "label": "Unrelated change",
-     "value": "10.4%",
-     "sub": "well below the fixed 15% safety ceiling"
+     "label": "Best blend beats the act-only version",
+     "value": "+12 points",
+     "sub": "on repairing broken-code cases"
     },
     {
-     "label": "Changed within 2",
-     "value": "100%",
-     "sub": "all rejected-patch cases changed the code and solved"
+     "label": "Change to unrelated behavior",
+     "value": "stayed under the cap",
+     "sub": "the safe blend used about four-fifths of the allowed drift; the explain-only extreme hit twice the cap"
+    },
+    {
+     "label": "\"Invalid\" turns that were really just cut off",
+     "value": "all 24",
+     "sub": "hit the answer-length cap mid-patch, not broken output; 9 of 11 such runs still solved"
     }
    ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "The 18% planning mixture has the highest recovery",
-     "chart_read": "Each bar is successful recovery for one frozen model, from the original and action-only controls through four mixtures to the full planning endpoint. Taller is better.",
-     "chart_takeaway": "Recovery rises to 97% at the 18% mixture, above both endpoints, then falls again; this is a real interior behavior optimum."
-    },
-    {
-     "index": 1,
-     "chart_plain_title": "All four mixtures remain below the unrelated-change limit",
-     "chart_read": "The line follows unrelated next-word changes from action-only toward the full planning model, while the flat reference line marks the safety limit. Lower is safer.",
-     "chart_takeaway": "Every tested mixture stays safely below the limit through 30%, while moving all the way to the planning endpoint jumps far above it."
-    },
-    {
-     "index": 2,
-     "chart_plain_title": "The failed policy checks point to the harness, not missing recovery",
-     "chart_read": "The bars compare immediate code changes, code changes within two turns, and cut-off invalid commands at the best mixture. Higher is good only for the middle bar; the others diagnose the stop.",
-     "chart_takeaway": "Only one third patch immediately, but every case patches within two turns; every invalid command ends exactly at the output cap, isolating two measurement problems."
-    }
-   ]
+   "charts": []
   },
   "qwen35_4b_reliability_exec_opsd_audit": {
    "verdict_tag": "Cheap tricks could not spot correct code",
@@ -5721,42 +5665,35 @@
    ]
   },
   "qwen35_4b_state_carry_vs_state_bag": {
-   "verdict_tag": "Built and checked, not run yet",
-   "concept_primer": "Imagine comparing an assembly line, where each worker improves the same object, with a group where every worker starts over from the original and their drafts are combined at the end. Both groups get the same workers and time; only the handoff differs.",
-   "plain_question": "Does passing one private working memory through repeated model steps solve deeper problems better than combining the same number of independent one-step attempts?",
-   "plain_answer": "We do not know yet. The complete test has been built and its data, accounting, decision rules, and non-GPU mechanics pass locally, but the actual model has not been run. A larger graphics card must first prove that the untouched one-step path is identical and that both comparison arms really receive equal resources.",
-   "why_it_matters": "If the handoff wins, it would show that arranging fixed computation into a genuine sequence can create capabilities that a collection of shallow attempts misses. If it does not, the careful controls will tell us whether the problem was memory formation, memory use, extra-step generalization, or simply that shallow attempts were enough.",
+   "verdict_tag": "Does carrying memory forward beat repeating in parallel",
+   "concept_primer": "Imagine tracking a piece moving across a board. One method keeps a single running note, updating and feeding it into each next turn. The other re-reads the opening position many times independently and pools its guesses. Same total effort — does chaining the note win?",
+   "plain_question": "When a small model repeats the same computation to solve a step-by-step puzzle, does chaining its memory forward beat pooling many fresh, independent passes?",
+   "plain_answer": "Not run yet — no live model call has happened; only the test rig is built and checked on a laptop. It will decide whether wiring repeated computation as one evolving memory beats pooling equal-compute independent passes. The bar is strict: the chained version must win by at least five accuracy points on longer, unseen puzzles, hold across three separate training runs, and survive causal memory-swap checks.",
+   "why_it_matters": "If chaining wins, small models can get deeper by looping one shared memory instead of sampling in parallel — cheaper reliability on multi-step tasks. If it does not, extra loops are mere repetition, and that compute is better spent on wider sampling.",
    "verdict_tone": "neutral",
    "key_numbers": [
     {
-     "label": "Repeated middle section",
-     "value": "8 layers",
-     "sub": "two complete native processing patterns"
+     "label": "Practice length versus test length",
+     "value": "4 to 12 steps",
+     "sub": "trained on 4-step puzzles, tested on unseen puzzles up to 12 steps"
     },
     {
-     "label": "Training steps versus deeper test",
-     "value": "4 versus 12",
-     "sub": "tests whether the same update keeps working beyond practice"
+     "label": "Winning margin needed to count",
+     "value": "at least 5 points",
+     "sub": "chained-memory accuracy minus pooled-passes accuracy on unseen puzzles"
     },
     {
-     "label": "Private memory slots",
-     "value": "8",
-     "sub": "placed before the question so they cannot copy its answer"
+     "label": "Independent training runs that must agree",
+     "value": "3",
+     "sub": "the advantage must appear across all three, not cherry-picked"
     },
     {
-     "label": "Local checks passing",
-     "value": "25",
-     "sub": "actual model evidence remains zero until the GPU run"
+     "label": "Memory-swap causal test bar",
+     "value": "at least 10 points",
+     "sub": "how much more the answer must follow a swapped-in memory than resist it"
     }
    ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Both comparison arms are assigned exactly the same processing work",
-     "chart_read": "Four pairs of bars show the work assigned when the private middle section runs once, four, eight, or twelve times. Within every pair, the assembly-line version and the start-over version have equal-height bars.",
-     "chart_takeaway": "Any future difference cannot be credited to one side receiving more processing steps; this chart is a pre-run accounting check, not evidence that either side performs better."
-    }
-   ]
+   "charts": []
   },
   "qwen35_4b_static_bridge_ceiling_breaker": {
    "verdict_tag": "A few harder examples double transfer, then stall",
