@@ -24,8 +24,10 @@ from io_utils import (  # noqa: E402
     canonical_hash,
     load_config,
     resolve_repo_path,
+    read_jsonl,
     sha256_file,
     write_json,
+    write_jsonl,
 )
 
 
@@ -301,6 +303,7 @@ def _eval_if_needed(
 
 
 def _qualify(config: dict, config_path: Path) -> None:
+    _require_gate(EXP / "analysis" / "calibration.json")
     paths = _paths(config)
     if not _checkpoint_complete(paths["quick_adapter"], paths["quick"]):
         raise SystemExit("quick specialist checkpoint incomplete")
@@ -326,10 +329,36 @@ def _qualify(config: dict, config_path: Path) -> None:
             "--config", str(config_path),
             "--quick-policy-scores", *(str(path) for path in quick_scores),
             "--deep-policy-scores", *(str(path) for path in deep_scores),
+            "--calibration", str(EXP / "analysis" / "calibration.json"),
         ],
         allowed=(0, 4),
     )
     _require_gate(EXP / "analysis" / "specialist_qualification.json")
+
+
+def _calibrate(config: dict, config_path: Path) -> None:
+    paths = _paths(config)
+    if not _checkpoint_complete(paths["quick_adapter"], paths["quick"]):
+        raise SystemExit("quick specialist checkpoint incomplete")
+    if not _checkpoint_complete(paths["deep_adapter"], paths["deep"]):
+        raise SystemExit("deep specialist checkpoint incomplete")
+    seed = int(config["seeds"]["calibration"])
+    quick = _eval_if_needed(
+        model=paths["quick"], tag="quick_calibration", scope="calibration",
+        block_seed=seed, config_path=config_path,
+    )
+    deep = _eval_if_needed(
+        model=paths["deep"], tag="deep_calibration", scope="calibration",
+        block_seed=seed, config_path=config_path,
+    )
+    _run(
+        [
+            str(PY), str(EXP / "scripts" / "analyze_calibration.py"),
+            "--config", str(config_path), "--quick", str(quick), "--deep", str(deep),
+        ],
+        allowed=(0, 4),
+    )
+    _require_gate(EXP / "analysis" / "calibration.json")
 
 
 def _teacher_audit(config: dict, config_path: Path) -> None:
@@ -390,13 +419,244 @@ def _teacher_audit(config: dict, config_path: Path) -> None:
     _require_gate(EXP / "analysis" / "teacher_audit.json")
 
 
+def _generation_engine_args(config: dict) -> list[str]:
+    values = [
+        "--max-model-len", str(config["engine"]["max_model_len"]),
+        "--gpu-memory-utilization", str(config["engine"]["gpu_memory_utilization"]),
+        "--max-num-seqs", str(config["engine"]["max_num_seqs"]),
+        "--max-num-batched-tokens", str(config["engine"]["max_num_batched_tokens"]),
+    ]
+    for size in config["engine"]["cudagraph_capture_sizes"]:
+        values.extend(("--cudagraph-capture-size", str(size)))
+    return values
+
+
+def _mopd_round(
+    *, config: dict, config_path: Path, paths: dict[str, Path], arm: str,
+    seed: int, round_index: int, current: Path, routing: str,
+    rollout_source: str = "student",
+) -> Path:
+    prompt_path = EXP / "data" / "mopd_prompts" / f"{arm}_s{seed}_r{round_index}.jsonl"
+    if not prompt_path.exists():
+        _run(
+            [
+                str(PY), str(EXP / "scripts" / "build_rollout_prompts.py"),
+                "--config", str(config_path), "--round", str(round_index),
+                "--out", str(prompt_path),
+            ]
+        )
+    round_root = EXP / "runs" / "mopd" / arm / f"seed_{seed}" / f"round_{round_index}"
+    rollout_path = round_root / "student_rollouts.jsonl"
+    rollout_meta = rollout_path.with_name(rollout_path.name + ".meta.json")
+    routed_receipt = rollout_path.with_name(rollout_path.name + ".routed_receipt.json")
+    if rollout_source == "student" and rollout_path.exists() and rollout_meta.exists():
+        meta = json.loads(rollout_meta.read_text())
+        if meta.get("model") != str(current.resolve()):
+            raise SystemExit(f"stale rollout policy at {rollout_path}")
+        print(f"[resume] MOPD {arm} round {round_index} rollouts", flush=True)
+    elif rollout_source == "teacher_routed" and rollout_path.exists() and routed_receipt.exists():
+        receipt = json.loads(routed_receipt.read_text())
+        if receipt.get("prompt_sha256") != sha256_file(prompt_path):
+            raise SystemExit(f"stale routed rollout prompts at {rollout_path}")
+        print(f"[resume] MOPD {arm} round {round_index} routed rollouts", flush=True)
+    elif rollout_source == "student":
+        _run(
+            [
+                str(VLLM_PY), str(EXP / "src" / "vllm_runner.py"),
+                "--input", str(prompt_path), "--output", str(rollout_path),
+                "--model-override", str(current), "--thinking", "budget",
+                "--thinking-budget", str(config["mopd"]["rollout_thinking_budget"]),
+                "--answer-max-tokens", str(config["mopd"]["rollout_answer_max_tokens"]),
+                "--n", "1", "--temperature", str(config["mopd"]["rollout_temperature"]),
+                "--top-p", str(config["mopd"]["rollout_top_p"]),
+                "--top-k", str(config["mopd"]["rollout_top_k"]),
+                "--seed", str(config["seeds"]["rollout_rounds"][round_index]),
+                "--include-prompt-token-ids", *_generation_engine_args(config),
+            ]
+        )
+    elif rollout_source == "teacher_routed":
+        prompts = read_jsonl(prompt_path)
+        partial_outputs = []
+        partial_meta = []
+        for stratum, model in (("quick", paths["quick"]), ("deep", paths["deep"])):
+            subset = [row for row in prompts if row["meta"]["stratum"] == stratum]
+            subset_path = round_root / f"{stratum}_prompts.jsonl"
+            output_path = round_root / f"{stratum}_teacher_rollouts.jsonl"
+            write_jsonl(subset_path, subset)
+            _run(
+                [
+                    str(VLLM_PY), str(EXP / "src" / "vllm_runner.py"),
+                    "--input", str(subset_path), "--output", str(output_path),
+                    "--model-override", str(model), "--thinking", "budget",
+                    "--thinking-budget", str(config["mopd"]["rollout_thinking_budget"]),
+                    "--answer-max-tokens", str(config["mopd"]["rollout_answer_max_tokens"]),
+                    "--n", "1", "--temperature", str(config["mopd"]["rollout_temperature"]),
+                    "--top-p", str(config["mopd"]["rollout_top_p"]),
+                    "--top-k", str(config["mopd"]["rollout_top_k"]),
+                    "--seed", str(config["seeds"]["rollout_rounds"][round_index]),
+                    "--include-prompt-token-ids", *_generation_engine_args(config),
+                ]
+            )
+            partial_outputs.extend(read_jsonl(output_path))
+            partial_meta.append(json.loads(output_path.with_name(output_path.name + ".meta.json").read_text()))
+        partial_outputs.sort(key=lambda row: row["id"])
+        write_jsonl(rollout_path, partial_outputs)
+        write_json(
+            routed_receipt,
+            {
+                "method": "offpolicy_routed_teacher_rollouts",
+                "prompt_sha256": sha256_file(prompt_path),
+                "quick_teacher": str(paths["quick"].resolve()),
+                "deep_teacher": str(paths["deep"].resolve()),
+                "rows": len(partial_outputs),
+                "component_runner_metadata": partial_meta,
+            },
+        )
+    else:
+        raise ValueError(f"unknown rollout source: {rollout_source}")
+    cache = paths["root"] / "teacher_cache" / arm / f"seed_{seed}" / f"round_{round_index}.pt"
+    cache_receipt = cache.with_suffix(cache.suffix + ".receipt.json")
+    if cache.exists() and cache_receipt.exists():
+        receipt = json.loads(cache_receipt.read_text())
+        if receipt.get("rollouts_sha256") != sha256_file(rollout_path) or receipt.get("routing") != routing:
+            raise SystemExit(f"stale teacher cache: {cache}")
+        print(f"[resume] MOPD {arm} round {round_index} teacher cache", flush=True)
+    else:
+        _run(
+            [
+                str(PY), str(EXP / "scripts" / "score_routed_teachers.py"),
+                "--config", str(config_path), "--rollouts", str(rollout_path),
+                "--quick-teacher", str(paths["quick"]), "--deep-teacher", str(paths["deep"]),
+                "--routing", routing, "--out", str(cache),
+            ],
+            training=True,
+        )
+    adapter = paths["root"] / "adapters" / arm / f"seed_{seed}" / f"round_{round_index}"
+    merged = paths["root"] / "merged" / arm / f"seed_{seed}" / f"round_{round_index}"
+    if _checkpoint_complete(adapter, merged):
+        print(f"[resume] MOPD {arm} round {round_index} checkpoint", flush=True)
+        return merged
+    if adapter.exists() or merged.exists():
+        raise SystemExit(f"partial MOPD round checkpoint: {adapter} / {merged}")
+    return_code = _run(
+        [
+            str(PY), str(EXP / "scripts" / "train_mopd_round.py"),
+            "--config", str(config_path), "--base-model", str(current),
+            "--teacher-cache", str(cache), "--out", str(adapter),
+            "--round", str(round_index), "--seed", str(seed + round_index),
+        ],
+        training=True,
+        allowed=(0, 3),
+    )
+    _run(
+        [
+            str(PY), str(EXP / "scripts" / "merge_adapter.py"),
+            "--base-model", str(current), "--adapter", str(adapter), "--out", str(merged),
+        ],
+        training=True,
+    )
+    _record_checkpoint(f"{arm}_seed{seed}_round{round_index}", adapter, merged)
+    if return_code == 3:
+        raise SystemExit(
+            f"MOPD {arm} round {round_index} exceeded its frozen loss/KL guard; "
+            "stopped checkpoint was preserved"
+        )
+    return merged
+
+
+def _run_mopd_arm(
+    config: dict, config_path: Path, *, arm: str, seed: int, routing: str,
+    rollout_source: str = "student",
+) -> Path:
+    paths = _paths(config)
+    current = paths["quick"]
+    for round_index in range(int(config["mopd"]["rounds"])):
+        current = _mopd_round(
+            config=config, config_path=config_path, paths=paths, arm=arm,
+            seed=seed, round_index=round_index, current=current, routing=routing,
+            rollout_source=rollout_source,
+        )
+    return current
+
+
+def _integrate(config: dict, config_path: Path, seed: int | None) -> None:
+    _require_gate(EXP / "analysis" / "teacher_audit.json")
+    selected = int(seed if seed is not None else config["seeds"]["integration_training"][0])
+    if selected not in [int(value) for value in config["seeds"]["integration_training"]]:
+        raise SystemExit(f"integration seed {selected} was not preregistered")
+    result = _run_mopd_arm(
+        config, config_path, arm="correct", seed=selected, routing="correct"
+    )
+    print(f"integrated checkpoint: {result}")
+
+
+def _controls(config: dict, config_path: Path) -> None:
+    _require_gate(EXP / "analysis" / "teacher_audit.json")
+    paths = _paths(config)
+    _run_mopd_arm(
+        config, config_path, arm="wrong_route",
+        seed=int(config["seeds"]["wrong_routing"]), routing="wrong",
+    )
+    _run_mopd_arm(
+        config, config_path, arm="offpolicy",
+        seed=int(config["seeds"]["wrong_routing"]), routing="correct",
+        rollout_source="teacher_routed",
+    )
+    for weight in config["controls"]["parameter_merge_weights"]:
+        tag = f"parameter_merge_deep_{int(round(float(weight) * 100)):02d}"
+        out = paths["root"] / "merged" / tag
+        if (out / "merge_receipt.json").exists():
+            print(f"[resume] {tag}", flush=True)
+            continue
+        if out.exists():
+            raise SystemExit(f"partial parameter merge exists: {out}")
+        _run(
+            [
+                str(PY), str(EXP / "scripts" / "merge_weighted_adapters.py"),
+                "--quick-adapter", str(paths["quick_adapter"]),
+                "--deep-adapter", str(paths["deep_adapter"]),
+                "--deep-weight", str(weight), "--out", str(out),
+            ],
+            training=True,
+        )
+    union_adapter = paths["root"] / "adapters" / "matched_union_sft"
+    union_merged = paths["root"] / "merged" / "matched_union_sft"
+    if not _checkpoint_complete(union_adapter, union_merged):
+        if union_adapter.exists() or union_merged.exists():
+            raise SystemExit("partial matched-union SFT checkpoint exists")
+        _run(
+            [
+                str(PY), str(EXP / "scripts" / "train_specialist.py"),
+                "--train", str(resolve_repo_path(config["model"]["deep_data"])),
+                "--out", str(union_adapter), "--warm-start", str(paths["quick_adapter"]),
+                "--epochs", "1", "--max-steps", str(config["controls"]["matched_sft_steps"]),
+                "--lr", str(config["mopd"]["learning_rate"]),
+                "--rank", str(config["mopd"]["rank"]), "--alpha", str(config["mopd"]["alpha"]),
+                "--batch-size", "1", "--grad-accum", str(config["mopd"]["grad_accum"]),
+                "--max-length", str(config["mopd"]["max_length"]),
+                "--w-think", str(config["specialist_train"]["think_loss_weight"]),
+                "--seed", str(config["specialist_train"]["seed"]),
+            ],
+            training=True,
+        )
+        _run(
+            [
+                str(PY), str(EXP / "scripts" / "merge_adapter.py"),
+                "--base-model", config["model"]["id"],
+                "--adapter", str(union_adapter), "--out", str(union_merged),
+            ],
+            training=True,
+        )
+        _record_checkpoint("matched_union_sft", union_adapter, union_merged)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, default=EXP / "configs" / "default.yaml")
     parser.add_argument("--smoke", action="store_true")
     parser.add_argument(
         "--stage",
-        choices=("smoke", "model-smoke", "specialists", "qualify", "teacher-audit", "integrate", "controls", "confirm"),
+        choices=("smoke", "model-smoke", "specialists", "calibrate", "qualify", "teacher-audit", "integrate", "controls", "confirm"),
     )
     parser.add_argument("--seed", type=int)
     args = parser.parse_args()
@@ -417,8 +677,17 @@ def main() -> int:
     if stage == "qualify":
         _qualify(config, config_path)
         return 0
+    if stage == "calibrate":
+        _calibrate(config, config_path)
+        return 0
     if stage == "teacher-audit":
         _teacher_audit(config, config_path)
+        return 0
+    if stage == "integrate":
+        _integrate(config, config_path, args.seed)
+        return 0
+    if stage == "controls":
+        _controls(config, config_path)
         return 0
     raise SystemExit(f"stage {stage!r} is registered but not implemented yet")
 

@@ -161,11 +161,7 @@ def main() -> int:
         logs.append(row)
 
     mean_loss = sum(row["loss"] for row in logs) / len(logs)
-    if mean_loss > float(cfg["maximum_round_mean_kl"]):
-        raise SystemExit(
-            f"round mean corrected top-k loss {mean_loss:.6f} exceeds "
-            f"{cfg['maximum_round_mean_kl']}"
-        )
+    gate_passed = mean_loss <= float(cfg["maximum_round_mean_kl"])
     args.out.mkdir(parents=True, exist_ok=True)
     model.save_pretrained(args.out)
     tokenizer.save_pretrained(args.out)
@@ -184,6 +180,10 @@ def main() -> int:
         "deep_units": sum(unit["sample"]["meta"]["stratum"] == "deep" for unit in units),
         "unique_rollouts": len({unit["sample"]["id"] for unit in units}),
         "mean_corrected_topk_loss": mean_loss,
+        "round_loss_gate": {
+            "passed": gate_passed,
+            "maximum": float(cfg["maximum_round_mean_kl"]),
+        },
         "token_ledger": token_ledger,
         "wall_seconds": time.perf_counter() - started,
         "gpu": torch.cuda.get_device_name(0),
@@ -201,7 +201,7 @@ def main() -> int:
         json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
     print(json.dumps({key: value for key, value in receipt.items() if key != "logs"}, indent=2))
-    return 0
+    return 0 if gate_passed else 3
 
 
 if __name__ == "__main__":

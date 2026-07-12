@@ -117,6 +117,7 @@ def main():
                     help="loss weight on think tokens (answer/action tokens are 1.0; "
                          "recovery-arm think is always 0.0)")
     ap.add_argument("--seed", type=int, default=42)
+    ap.add_argument("--max-steps", type=int, default=-1)
     ap.add_argument("--smoke", action="store_true")
     args = ap.parse_args()
 
@@ -176,6 +177,7 @@ def main():
 
     targs = TrainingArguments(
         output_dir=str(args.out), num_train_epochs=args.epochs,
+        max_steps=args.max_steps,
         per_device_train_batch_size=args.batch_size,
         gradient_accumulation_steps=args.grad_accum, learning_rate=args.lr,
         lr_scheduler_type="cosine", warmup_ratio=0.03, bf16=True, logging_steps=10,
@@ -243,6 +245,8 @@ def main():
         "max_length": args.max_length,
         "think_loss_weight": args.w_think,
         "seed": args.seed,
+        "max_steps": args.max_steps,
+        "warm_start": str(args.warm_start.resolve()) if args.warm_start else None,
         "smoke": bool(args.smoke),
         "train_loss": float(result.training_loss),
         "global_step": int(result.global_step),
