@@ -2,17 +2,21 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import subprocess
 import sys
 import unittest
 from pathlib import Path
+from unittest import mock
 
 import torch
 
 EXP = Path(__file__).resolve().parents[1]
+SCRIPTS = EXP / "scripts"
+sys.path.insert(0, str(SCRIPTS))
 
 
 def load_script(name: str):
-    path = EXP / "scripts" / f"{name}.py"
+    path = SCRIPTS / f"{name}.py"
     spec = importlib.util.spec_from_file_location(f"repo_scb_{name}", path)
     assert spec and spec.loader
     module = importlib.util.module_from_spec(spec)
@@ -23,9 +27,47 @@ def load_script(name: str):
 
 train = load_script("train")
 analyze_repo = load_script("analyze_repo")
+run = load_script("run")
+summarize_primary = load_script("summarize_primary")
 
 
 class TrainingAndAnalysisTests(unittest.TestCase):
+    def test_orchestrator_accepts_only_explicit_expected_gate_codes(self):
+        command = ["gate"]
+        with mock.patch.object(
+            run.subprocess,
+            "run",
+            return_value=subprocess.CompletedProcess(command, 4),
+        ):
+            self.assertEqual(run.run_command(command, allowed_returncodes=(0, 4)), 4)
+            with self.assertRaises(subprocess.CalledProcessError):
+                run.run_command(command)
+
+    def test_transition_diagnostics_distinguish_repair_from_rigid_retry(self):
+        trajectories = [
+            {
+                "operator_sequence": ["INSPECT", "PATCH", "VERIFY", "PATCH"],
+                "steps": [
+                    {"observation": "source"},
+                    {"observation": "PATCH_OK"},
+                    {"observation": "FAIL(exit=1)"},
+                    {"observation": "PATCH_OK"},
+                ],
+            },
+            {
+                "operator_sequence": ["INSPECT", "PATCH", "INSPECT", "PATCH"],
+                "steps": [
+                    {"observation": "source"},
+                    {"observation": "ERROR: old text matched 0 times", "action": {"tool": "patch"}},
+                    {"observation": "source"},
+                    {"observation": "ERROR: old text matched 0 times", "action": {"tool": "patch"}},
+                ],
+            },
+        ]
+        result = summarize_primary.transition_diagnostics(trajectories)
+        self.assertEqual(result["after_failed_test"]["next_patch_rate"], 1.0)
+        self.assertEqual(result["tasks_repeating_identical_failed_patch"], 1)
+
     def test_checkpointed_cross_entropy_matches_dense_loss_and_gradient(self):
         generator = torch.Generator().manual_seed(11)
         logits_dense = torch.randn(2, 5, 7, generator=generator, requires_grad=True)

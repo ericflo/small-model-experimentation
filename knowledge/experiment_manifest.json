@@ -3810,9 +3810,9 @@
   },
   {
     "file_counts": {
-      ".json": 5,
+      ".json": 7,
       ".md": 10,
-      ".py": 18,
+      ".py": 19,
       ".yaml": 3
     },
     "id": "qwen35_4b_repo_search_compress_bank",
@@ -3843,6 +3843,7 @@
     ],
     "title": "Repository search-compress-bank coding curriculum",
     "top_level_dirs": [
+      "analysis",
       "configs",
       "data",
       "reports",
@@ -3850,8 +3851,8 @@
       "src",
       "tests"
     ],
-    "total_files": 36,
-    "total_size_bytes": 284186
+    "total_files": 39,
+    "total_size_bytes": 323428
   },
   {
     "file_counts": {

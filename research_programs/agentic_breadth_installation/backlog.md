@@ -16,6 +16,15 @@
   teacher. Compare any integrated checkpoint against both teachers, a visible
   two-checkpoint router, and matched-compute sampling. Do not reuse the observed
   qualification cells to select routes.
+- Completed negative: `qwen35_4b_repo_search_compress_bank` — exact-token
+  operator balance plus replay-minimized successful repository traces improved
+  trained families 40/48→48/48 but regressed wholly held-out families
+  49/72→25/72 and failed locality. Do not repeat the one-patch success-only
+  bank at another dose. Any successor needs a new intake, fresh families/seeds,
+  and either (a) verifier-conditioned recovery transitions balanced at the
+  state→action level or (b) external scaffold retrieval/execution that avoids a
+  broad shared-weight policy edit. Require a synthetic failed-patch/failed-test
+  recovery gate before training.
 - Stopped experiment: `qwen35_4b_specialist_policy_integration` — incumbent and
   compound-headroom gates passed, but `ferrier = 0.994` made the mandatory
   tools specialist's frozen `+0.10` bar mathematically impossible. Zero
@@ -56,6 +65,10 @@
 - Any future live-state warm start must gate the scarce `VERIFY`/`COMMIT`
   operator rates and neighboring-policy/logit locality before trajectory RL;
   full-sequence correctness labels alone are insufficient.
+- Any compressed trajectory bank must balance conditional transitions, not
+  only operator marginals: explicitly measure `failed_patch→changed_patch`,
+  `failed_test→revision`, and `passed_test→commit`. Success-only minimization
+  is not an agent-policy compression method.
 - For specialist integration: require all four specialists to beat
   sample-more, DAgger, extra SFT, and shuffled reward before MOPD; require
   correct-teacher continuation and exact-logit locality before integration;

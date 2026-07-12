@@ -23,25 +23,39 @@ external_artifacts:
       experiments/qwen35_4b_repo_search_compress_bank/scripts/build_bank.py
   - name: trained adapters
     storage: large_artifacts/qwen35_4b_repo_search_compress_bank/adapters
-    status: not_generated
+    status: generated
     required_for: merged deployment checkpoints
-    checksum: pending
+    checksum: >-
+      apex_replay adapter_model.safetensors sha256:b2ba9aad45bb0b9a84ad906b420c007b1fbf2db5f7df6205f6011fd094873ba0;
+      compact adapter_model.safetensors sha256:70fb8e3dff503863c041fa3a9290c2cafa50ae9759bc79103e64cc97deeee8a1;
+      apex training_receipt.json sha256:f82f38d943043c62c7a24d1cabde5b7a4bbe7c2a8c291e28566f5c2db94b0b91;
+      compact training_receipt.json sha256:3a0621de184ec211b186df525de7f075ecc96709b6057fb05a5b61e29d4c2f38
     regenerate: >-
       .venv/bin/python
       experiments/qwen35_4b_repo_search_compress_bank/scripts/run.py --full
   - name: merged checkpoints
     storage: large_artifacts/qwen35_4b_repo_search_compress_bank/merged
-    status: not_generated
+    status: generated
     required_for: vLLM evaluation; runtime LoRA is invalid under C49
-    checksum: pending
+    checksum: >-
+      apex_replay model.safetensors sha256:c933168075a0fc011f31ee54f83d722cc91423ce1a0ac19bfe40dfab92f608d5;
+      compact model.safetensors sha256:8024a1944e179e09f9486d6039f7b1a4fd3f731350594862adcf288c7621c80b;
+      apex merge_receipt.json sha256:ece3c696e1abfb071d33ba523d8007bb1506d22047a1c11aa57a48a280cd1b0c;
+      compact merge_receipt.json sha256:19ff48133f81760ff2065a3928c284facce012b0d666fa54427e222cfdabc44b
     regenerate: >-
       .venv/bin/python
       experiments/qwen35_4b_repo_search_compress_bank/scripts/run.py --full
-  - name: full evaluation outputs
+  - name: necessary-gate evaluation outputs
     storage: large_artifacts/qwen35_4b_repo_search_compress_bank/eval
-    status: not_generated
+    status: generated
     required_for: paired transfer and matched-sampling analysis
-    checksum: pending
+    checksum: >-
+      trained apex sha256:c231089d53020e827b6df1f3e3a0b8f426fb4ba99784cc507a6e0412d455fbb8;
+      trained compact sha256:7175be5d9def65857a0ca3d22ead9b50b8a5776dd2a6f26dd8af35e0fd65b03d;
+      transfer apex sha256:fb6c180b44886bfd8e091542e883ed2e44ded00e7d948fc126033112cfdbb2fc;
+      transfer compact sha256:5c2b765c363426e673baa98090872ac4ea616eb430fe344c176f84467c27e8da;
+      sample-more sha256:d87395ea959678747defdbeebb0a5fd97982fcefecfe3025e98eb25c24ab031f;
+      locality sha256:483cc5b13218c6bb8386b0ef8da4be10c297d7eb39c280f64074c4411f8123c8
     regenerate: >-
       .venv/bin/python
       experiments/qwen35_4b_repo_search_compress_bank/scripts/run.py --full
@@ -56,6 +70,7 @@ reproducibility:
   required_external_artifacts:
     - large_artifacts/qwen35_4b_interactive_policy_curriculum/merged/incumbent_blend
 notes: >-
-  Checksums and statuses are updated after each gated stage. Model weights and
-  verbose tool trajectories remain outside git; deterministic smoke and compact
-  aggregate receipts are committed.
+  The primary gate failed. Action-only, confirmation, and Menagerie were
+  intentionally not generated. Model weights and verbose tool trajectories
+  remain outside git; the deterministic result receipt and primary gate are
+  committed. Zero benchmark seeds were consumed.

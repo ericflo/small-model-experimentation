@@ -147,3 +147,25 @@ route and diagnose pivots, but higher varentropy was not safer (lowest-V
 quartile had the cleanest uplift drift). Do not scale this LoRA recipe. Require
 a lower-dose or context-gated mechanism to clear P1 before another harvest or
 agentic transfer run.
+
+## qwen35_4b_repo_search_compress_bank (2026-07-12 — Negative)
+
+Executable search and replay compression produced a superficially excellent
+install on the six trained repository families: apex 40/48 versus compact
+48/48, with every compact trajectory reduced to exactly
+`INSPECT→PATCH→VERIFY→COMMIT`. That behavior did not transfer. On four wholly
+held-out algorithm families, compact fell 49/72→25/72 (−33.3pp; paired 95% CI
+[−44.4,−22.2]) and lost to matched-compute sampling by 18.1pp. Locality also
+failed (0.386 centered-logit drift versus 0.15), invalid actions rose
+9.3%→26.0%, and verification retention fell 1.00→0.88. Menagerie remained
+sealed.
+
+The transition audit resolves why exact operator balance was insufficient.
+After a failed visible test, apex chose another patch on 24/26 next actions;
+compact did so on 0/48. It still committed after every passed test. All 18
+recursive-overlay trajectories repeated the same rejected patch. Success-only
+minimization installed a family-specific happy path while deleting the
+verifier-conditioned recovery policy. Marginal operator counts do not preserve
+conditional transition structure. Because the necessary gate cancelled the
+action-only arm, plan-gradient attribution remains open; the supported negative
+is the complete compact plan-plus-action recipe.

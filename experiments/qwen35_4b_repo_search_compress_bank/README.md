@@ -14,6 +14,14 @@ Long successful coding trajectories contain a small causal core: issue-directed 
 
 The hypothesis fails if the compact arm cannot beat (a) an identical action-only bank, (b) the regenerated C54 apex policy on family-disjoint repositories, and (c) two shorter apex samples under the same eight-call/token reservation.
 
+## Result
+
+`PRIMARY GATE FAILED`. The compact arm improved trained-family success from 40/48 to 48/48 (+16.7 points) and reduced the learned path to exactly four valid calls on every task, but this was family-specific policy cloning rather than transferable coding competence. On four wholly held-out repository families it fell from 49/72 to 25/72 (−33.3 points; paired 95% CI [−44.4, −22.2]) and also lost to matched-compute sampling by 18.1 points. Median unrelated-context centered-logit drift was 0.386 against the frozen 0.15 ceiling.
+
+The transition audit localizes the failure. After a failed visible test, the apex control patched again on 24/26 transitions; compact did so on 0/48, instead re-testing, re-inspecting, or emitting an invalid action. All 18 recursive-overlay tasks repeated the same exact patch after the patch tool had already rejected it. Operator-marginal balance preserved the happy-path vocabulary, but success-only compression deleted failure-conditioned recovery behavior.
+
+The necessary gate stopped action-only training, confirmation, and Menagerie. Therefore the result rejects the registered compact-bank recipe as a whole; it does not identify compact plan gradients rather than action gradients as the cause. See the [final report](reports/report.md), [primary gate](analysis/repo_primary_gate.json), and [result receipt](reports/result_receipt.json).
+
 ## Firewall-clean substrate
 
 Ten fresh Python repository generators materialize source files and a visible test. Six families are eligible for search/training; four algorithmically distinct families are never harvested or trained and are used only for transfer. Hidden test programs and oracle edits live in host memory, are never written into the repository, never enter a model message, and are reduced to pass/fail booleans in receipts. The benchmark directory is never read or imported.
@@ -38,6 +46,8 @@ Entropy and varentropy may be recorded later to route which live states deserve 
 4. Train the three registered arms from the pinned base at the same 584 optimizer steps.
 5. Gate trained-family retention, family-disjoint transfer, compact-vs-action-only advantage, matched-call sampling, verification/commit retention, invalid actions, and unrelated-context logit locality.
 6. Confirm on a second transfer block. Only then assign fresh union-checked Menagerie seeds and compare aggregate quick/medium scores through the benchmark CLI.
+
+The run stopped during stage 5. Stages 6 and Menagerie were not authorized.
 
 Exact thresholds, seeds, and interpretation rules are frozen in [the preregistration](reports/preregistration.md), its pre-harvest [token-mass implementation amendment](reports/preregistration_amendment.md), the [memory-feasibility audit](reports/preregistration_amendment_2.md), the final exact [chunked-loss amendment](reports/preregistration_amendment_3.md), and [configuration](configs/default.yaml). The adversarial review is in [reports/design_review.md](reports/design_review.md).
 
@@ -65,4 +75,4 @@ Result-bearing model outputs and weights live under `large_artifacts/qwen35_4b_r
 
 ## Status
 
-`PRE-TRAINING GATE PASSED`. The registered harvest covered 129/144 tasks and produced 516 replay-verified, exact-token-balanced rows. Matched-step training is authorized; no trained capability result or Menagerie event exists yet.
+`PRIMARY GATE FAILED; EXPERIMENT STOPPED`. Both licensed 584-step arms trained and merged successfully. The compact arm overfit the trained procedural families, regressed family-disjoint transfer, lost to matched sampling, failed verification/invalid-action retention, and exceeded the locality ceiling. Action-only, confirmation, and Menagerie were correctly cancelled; zero benchmark seeds were consumed.

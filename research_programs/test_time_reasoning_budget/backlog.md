@@ -32,6 +32,8 @@
   blocks; `apex` won deep capability but missed retention. The visible
   two-checkpoint tier router remains an external upper reference, not a
   one-checkpoint installation result.
+  Any future consolidation must first demonstrate state-local continuation
+  advantage and retain that visible router as a control.
 - **Close/commit potential follow-up (new experiment only):** compare joint probability of autonomously
   closing and emitting the canonical answer against answer-only potential, after a frozen natural-close and
   parseability calibration gate. Do not reuse C51's observed tasks to tune thresholds.

@@ -31,6 +31,10 @@
 - [`qwen35_4b_think_ftpo_round2`](../../experiments/qwen35_4b_think_ftpo_round2/reports/report.md)
   (claim C52) — entropy/varentropy-routed single-token thought steering, a
   low-dose capability null after exact-logit locality and agentic transfer gates.
+- [`qwen35_4b_pareto_policy_integration`](../../experiments/qwen35_4b_pareto_policy_integration/reports/report.md)
+  — C54's aggregate short/deep frontier did not transport into a clean
+  quick/deep teacher crossover on fresh procedural states; future consolidation
+  needs state-local continuation advantage rather than aggregate budget labels.
 - [`qwen35_4b_verified_macro_long_context_rerun`](../../experiments/qwen35_4b_verified_macro_long_context_rerun/)
   (contamination-free procedural macro induction) — a workload-shift stress test for budget
   calibration and anti-censoring, still in progress.

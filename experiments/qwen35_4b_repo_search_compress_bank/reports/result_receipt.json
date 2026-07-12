@@ -1,0 +1,459 @@
+{
+  "decision": "stop_before_action_only_confirmation_and_menagerie",
+  "downstream": {
+    "action_only_trained": false,
+    "confirmation_run": false,
+    "menagerie_authorized": false,
+    "menagerie_seeds_consumed": 0
+  },
+  "evaluation": {
+    "checks": {
+      "bootstrap_vs_apex": false,
+      "bootstrap_vs_sample_more": false,
+      "commit_absolute": true,
+      "commit_retention": true,
+      "invalid_actions": false,
+      "locality": false,
+      "trained_family_retention": true,
+      "transfer_vs_apex": false,
+      "transfer_vs_sample_more": false,
+      "verification_absolute": true,
+      "verification_retention": false
+    },
+    "contrasts": {
+      "compact_vs_apex": {
+        "ci95": [
+          -0.4444444444444444,
+          -0.2222222222222222
+        ],
+        "delta": -0.3333333333333333,
+        "left_only": 0,
+        "left_success": 0.3472222222222222,
+        "n": 72,
+        "right_only": 24,
+        "right_success": 0.6805555555555556
+      },
+      "compact_vs_apex_sample_more": {
+        "ci95": [
+          -0.2777777777777778,
+          -0.08333333333333333
+        ],
+        "delta": -0.18055555555555555,
+        "left_only": 1,
+        "left_success": 0.3472222222222222,
+        "n": 72,
+        "right_only": 14,
+        "right_success": 0.5277777777777778
+      },
+      "trained_compact_vs_apex": {
+        "ci95": [
+          0.0625,
+          0.2708333333333333
+        ],
+        "delta": 0.16666666666666666,
+        "left_only": 8,
+        "left_success": 1.0,
+        "n": 48,
+        "right_only": 0,
+        "right_success": 0.8333333333333334
+      }
+    },
+    "locality": {
+      "ceiling": 0.15,
+      "mean_entropy_delta": -0.009434346032018481,
+      "median_non_target_centered_logit_drift": 0.38596151769161224,
+      "passed": false
+    },
+    "trained_dev": {
+      "apex_replay": {
+        "commit_given_verified": 1.0,
+        "invalid_action_rate_per_turn": 0.23706896551724138,
+        "mean_sampled_tokens": 1643.2708333333333,
+        "mean_turns": 4.833333333333333,
+        "n_tasks": 48,
+        "per_family": {
+          "collision_index": {
+            "n": 8,
+            "submit_rate": 1.0,
+            "success": 1.0
+          },
+          "label_intervals": {
+            "n": 8,
+            "submit_rate": 1.0,
+            "success": 1.0
+          },
+          "segmented_rollup": {
+            "n": 8,
+            "submit_rate": 1.0,
+            "success": 1.0
+          },
+          "specificity_router": {
+            "n": 8,
+            "submit_rate": 1.0,
+            "success": 1.0
+          },
+          "stable_merge": {
+            "n": 8,
+            "submit_rate": 1.0,
+            "success": 1.0
+          },
+          "weighted_quota": {
+            "n": 8,
+            "submit_rate": 0.0,
+            "success": 0.0
+          }
+        },
+        "submit_rate": 0.8333333333333334,
+        "success": 0.8333333333333334,
+        "verified_given_success": 1.0
+      },
+      "compact": {
+        "commit_given_verified": 1.0,
+        "invalid_action_rate_per_turn": 0.0,
+        "mean_sampled_tokens": 401.8333333333333,
+        "mean_turns": 4,
+        "n_tasks": 48,
+        "per_family": {
+          "collision_index": {
+            "n": 8,
+            "submit_rate": 1.0,
+            "success": 1.0
+          },
+          "label_intervals": {
+            "n": 8,
+            "submit_rate": 1.0,
+            "success": 1.0
+          },
+          "segmented_rollup": {
+            "n": 8,
+            "submit_rate": 1.0,
+            "success": 1.0
+          },
+          "specificity_router": {
+            "n": 8,
+            "submit_rate": 1.0,
+            "success": 1.0
+          },
+          "stable_merge": {
+            "n": 8,
+            "submit_rate": 1.0,
+            "success": 1.0
+          },
+          "weighted_quota": {
+            "n": 8,
+            "submit_rate": 1.0,
+            "success": 1.0
+          }
+        },
+        "submit_rate": 1.0,
+        "success": 1.0,
+        "verified_given_success": 1.0
+      }
+    },
+    "transfer_dev": {
+      "apex_replay": {
+        "commit_given_verified": 0.9387755102040817,
+        "invalid_action_rate_per_turn": 0.09278350515463918,
+        "mean_sampled_tokens": 1426.3194444444443,
+        "mean_turns": 5.388888888888889,
+        "n_tasks": 72,
+        "per_family": {
+          "dependency_order": {
+            "n": 18,
+            "submit_rate": 0.6111111111111112,
+            "success": 0.7222222222222222
+          },
+          "recursive_overlay": {
+            "n": 18,
+            "submit_rate": 1.0,
+            "success": 0.0
+          },
+          "retry_schedule": {
+            "n": 18,
+            "submit_rate": 0.9444444444444444,
+            "success": 1.0
+          },
+          "ttl_cache": {
+            "n": 18,
+            "submit_rate": 1.0,
+            "success": 1.0
+          }
+        },
+        "submit_rate": 0.8888888888888888,
+        "success": 0.6805555555555556,
+        "verified_given_success": 1.0
+      },
+      "apex_sample_more": {
+        "commit_given_verified": 0.875,
+        "invalid_action_rate_per_turn": 0.09615384615384616,
+        "mean_sampled_tokens": 2452.4583333333335,
+        "mean_turns": 7.944444444444445,
+        "n_tasks": 72,
+        "per_family": {
+          "dependency_order": {
+            "n": 18,
+            "submit_rate": 0.0,
+            "success": 0.2777777777777778
+          },
+          "recursive_overlay": {
+            "n": 18,
+            "submit_rate": 0.4444444444444444,
+            "success": 0.05555555555555555
+          },
+          "retry_schedule": {
+            "n": 18,
+            "submit_rate": 0.5,
+            "success": 0.9444444444444444
+          },
+          "ttl_cache": {
+            "n": 18,
+            "submit_rate": 0.4444444444444444,
+            "success": 0.8333333333333334
+          }
+        },
+        "submit_rate": 0.3472222222222222,
+        "success": 0.5277777777777778,
+        "verified_given_success": 0.42105263157894735
+      },
+      "compact": {
+        "commit_given_verified": 1.0,
+        "invalid_action_rate_per_turn": 0.26,
+        "mean_sampled_tokens": 2422.5138888888887,
+        "mean_turns": 6.944444444444445,
+        "n_tasks": 72,
+        "per_family": {
+          "dependency_order": {
+            "n": 18,
+            "submit_rate": 0.0,
+            "success": 0.0
+          },
+          "recursive_overlay": {
+            "n": 18,
+            "submit_rate": 0.0,
+            "success": 0.0
+          },
+          "retry_schedule": {
+            "n": 18,
+            "submit_rate": 1.0,
+            "success": 1.0
+          },
+          "ttl_cache": {
+            "n": 18,
+            "submit_rate": 0.2222222222222222,
+            "success": 0.3888888888888889
+          }
+        },
+        "submit_rate": 0.3055555555555556,
+        "success": 0.3472222222222222,
+        "verified_given_success": 0.88
+      }
+    }
+  },
+  "input_sha256": {
+    "apex_merge": "ece3c696e1abfb071d33ba523d8007bb1506d22047a1c11aa57a48a280cd1b0c",
+    "apex_training": "f82f38d943043c62c7a24d1cabde5b7a4bbe7c2a8c291e28566f5c2db94b0b91",
+    "compact_merge": "19ff48133f81760ff2065a3928c284facce012b0d666fa54427e222cfdabc44b",
+    "compact_training": "3a0621de184ec211b186df525de7f075ecc96709b6057fb05a5b61e29d4c2f38",
+    "evaluation_config": "a1af957d0d95edfdc5b55bcd598243decfb5f0c0f7105da67e71d0da5a563313",
+    "evaluation_script": "dc54b20f623b16f884b00a21ac55f7ce4beaf8239e575bd2c835afee23371998",
+    "locality": "483cc5b13218c6bb8386b0ef8da4be10c297d7eb39c280f64074c4411f8123c8",
+    "merge_script": "8369ad49f3caf70b0802a4326afbaecc896a343912491dd2ad2c14f6e7eec927",
+    "primary_gate": "f7cf3c753155d82f3c1e082c7d5255f3a9c481fce8d5fd0c3c50e30190e022bd",
+    "sample_more": "d87395ea959678747defdbeebb0a5fd97982fcefecfe3025e98eb25c24ab031f",
+    "trained_apex": "c231089d53020e827b6df1f3e3a0b8f426fb4ba99784cc507a6e0412d455fbb8",
+    "trained_compact": "7175be5d9def65857a0ca3d22ead9b50b8a5776dd2a6f26dd8af35e0fd65b03d",
+    "training_script": "f81f470d3fa3499b2569e38ad61afd353c5ab1ed354304dae840f70eaf219996",
+    "transfer_apex": "fb6c180b44886bfd8e091542e883ed2e44ded00e7d948fc126033112cfdbb2fc",
+    "transfer_compact": "5c2b765c363426e673baa98090872ac4ea616eb430fe344c176f84467c27e8da",
+    "vllm_runner": "3908eb25ebf059a867c1d7581f1a98186470f5a6c597132a12095b6922d33dcf"
+  },
+  "merge": {
+    "apex_replay": {
+      "adapter_weights_sha256": "b2ba9aad45bb0b9a84ad906b420c007b1fbf2db5f7df6205f6011fd094873ba0",
+      "applied_lora_modules": 128,
+      "merged_weights_sha256": "c933168075a0fc011f31ee54f83d722cc91423ce1a0ac19bfe40dfab92f608d5",
+      "nonzero_lora_modules": 128
+    },
+    "compact": {
+      "adapter_weights_sha256": "70fb8e3dff503863c041fa3a9290c2cafa50ae9759bc79103e64cc97deeee8a1",
+      "applied_lora_modules": 128,
+      "merged_weights_sha256": "8024a1944e179e09f9486d6039f7b1a4fd3f731350594862adcf288c7621c80b",
+      "nonzero_lora_modules": 128
+    }
+  },
+  "model": "Qwen/Qwen3.5-4B",
+  "policy_transition_diagnostics": {
+    "trained_compact": {
+      "after_failed_patch": {
+        "next_operator_counts": {},
+        "total": 0
+      },
+      "after_failed_test": {
+        "next_operator_counts": {},
+        "next_patch_rate": null,
+        "total": 0
+      },
+      "after_passed_test": {
+        "next_commit_rate": 1.0,
+        "next_operator_counts": {
+          "COMMIT": 48
+        },
+        "total": 48
+      },
+      "canonical_inspect_patch_verify_commit": {
+        "count": 48,
+        "rate": 1.0
+      },
+      "n_trajectories": 48,
+      "tasks_repeating_identical_failed_patch": 0
+    },
+    "transfer_apex_replay": {
+      "after_failed_patch": {
+        "next_operator_counts": {
+          "INSPECT": 3
+        },
+        "total": 3
+      },
+      "after_failed_test": {
+        "next_operator_counts": {
+          "INVALID": 2,
+          "PATCH": 24
+        },
+        "next_patch_rate": 0.9230769230769231,
+        "total": 26
+      },
+      "after_passed_test": {
+        "next_commit_rate": 0.9846153846153847,
+        "next_operator_counts": {
+          "COMMIT": 64,
+          "VERIFY": 1
+        },
+        "total": 65
+      },
+      "canonical_inspect_patch_verify_commit": {
+        "count": 36,
+        "rate": 0.5
+      },
+      "n_trajectories": 72,
+      "tasks_repeating_identical_failed_patch": 0
+    },
+    "transfer_compact": {
+      "after_failed_patch": {
+        "next_operator_counts": {
+          "INSPECT": 54
+        },
+        "total": 54
+      },
+      "after_failed_test": {
+        "next_operator_counts": {
+          "INSPECT": 17,
+          "INVALID": 11,
+          "VERIFY": 20
+        },
+        "next_patch_rate": 0.0,
+        "total": 48
+      },
+      "after_passed_test": {
+        "next_commit_rate": 1.0,
+        "next_operator_counts": {
+          "COMMIT": 22
+        },
+        "total": 22
+      },
+      "canonical_inspect_patch_verify_commit": {
+        "count": 18,
+        "rate": 0.25
+      },
+      "n_trajectories": 72,
+      "tasks_repeating_identical_failed_patch": 18
+    }
+  },
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "runtime": {
+    "driver": "550.127.08",
+    "gpu": "NVIDIA RTX 6000 Ada Generation",
+    "gpu_memory_mib": 49140,
+    "inference_backend": {
+      "engine": {
+        "gpu_memory_utilization": 0.85,
+        "max_model_len": 8192,
+        "max_num_batched_tokens": 16384,
+        "max_num_seqs": 32
+      },
+      "evaluation": {
+        "answer_max_tokens": 256,
+        "blocks": {
+          "trained_dev": {
+            "families": "train",
+            "seed": 73200,
+            "tasks_per_family": 8
+          },
+          "transfer_confirm": {
+            "families": "transfer",
+            "seed": 73400,
+            "tasks_per_family": 18
+          },
+          "transfer_dev": {
+            "families": "transfer",
+            "seed": 73300,
+            "tasks_per_family": 18
+          }
+        },
+        "deep_run_seed": 73310,
+        "deep_turns": 8,
+        "sample_more_trajectories": 2,
+        "sample_more_turns_each": 4,
+        "sample_run_seed": 73311,
+        "sample_temperature": 0.8,
+        "sample_top_k": 20,
+        "sample_top_p": 0.95,
+        "think_budget": 512
+      },
+      "merged_composite_checkpoints": true,
+      "name": "vllm",
+      "runner_schema_version": 4,
+      "runtime_lora": false,
+      "same_backend_all_arms": true,
+      "torch": "2.11.0+cu129",
+      "transformers": "5.13.0",
+      "version": "0.24.0"
+    },
+    "python": "3.12.3",
+    "training_packages": {
+      "bitsandbytes": "0.49.2",
+      "peft": "0.19.1",
+      "torch": "2.11.0+cu129",
+      "transformers": "5.13.0"
+    }
+  },
+  "schema_version": 1,
+  "status": "PRIMARY_GATE_FAILED",
+  "training": {
+    "apex_replay": {
+      "effective_batch_size": 16,
+      "effective_dataset_epochs": 2.0,
+      "loss_implementation": "exact_sequence_chunked_checkpointed_cross_entropy",
+      "optimizer_steps": 584,
+      "peak_cuda_bytes": 48578297344,
+      "training_loss": 0.42299116484514654,
+      "wall_seconds": 10007.277540124953
+    },
+    "compact": {
+      "effective_batch_size": 16,
+      "effective_dataset_epochs": 1.8010794140323825,
+      "loss_implementation": "exact_sequence_chunked_checkpointed_cross_entropy",
+      "optimizer_steps": 584,
+      "peak_cuda_bytes": 48578178560,
+      "repository_operator_rows": {
+        "COMMIT": 129,
+        "INSPECT": 129,
+        "PATCH": 129,
+        "VERIFY": 129
+      },
+      "repository_rows": 516,
+      "repository_tasks": 129,
+      "training_loss": 0.437239117410085,
+      "wall_seconds": 9633.08647069335
+    }
+  }
+}

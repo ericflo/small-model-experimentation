@@ -76,16 +76,25 @@ def cpu_smoke() -> dict:
     }
 
 
-def run_command(command: list[str]) -> None:
+def run_command(
+    command: list[str], allowed_returncodes: tuple[int, ...] = (0,)
+) -> int:
     print("[run] " + " ".join(command), flush=True)
-    subprocess.run(command, cwd=ROOT, check=True)
+    completed = subprocess.run(command, cwd=ROOT, check=False)
+    if completed.returncode not in allowed_returncodes:
+        raise subprocess.CalledProcessError(completed.returncode, command)
+    return completed.returncode
 
 
-def run_if_missing(output: Path, command: list[str]) -> None:
+def run_if_missing(
+    output: Path,
+    command: list[str],
+    allowed_returncodes: tuple[int, ...] = (0,),
+) -> int:
     if output.exists():
         print(f"[resume] {output} exists", flush=True)
-        return
-    run_command(command)
+        return 0
+    return run_command(command, allowed_returncodes=allowed_returncodes)
 
 
 def main() -> int:
@@ -173,15 +182,28 @@ def main() -> int:
         "--out", str(locality),
         "--ceiling", str(cfg["locality"]["median_non_target_logit_drift_max"]),
         "--max-context-tokens", str(cfg["locality"]["max_context_tokens"]),
-    ])
+    ], allowed_returncodes=(0, 4))
     primary_gate = EXP / "analysis" / "repo_primary_gate.json"
-    run_command([
+    primary_returncode = run_command([
         py, str(EXP / "scripts" / "analyze_primary.py"),
         "--candidate-trained", str(compact_trained), "--apex-trained", str(apex_trained),
         "--candidate-transfer", str(compact_transfer), "--apex-transfer", str(apex_transfer),
         "--sample-more-transfer", str(apex_sample),
         "--locality", str(locality), "--out", str(primary_gate),
+    ], allowed_returncodes=(0, 4))
+    run_command([
+        py, str(EXP / "scripts" / "summarize_primary.py"),
+        "--artifact-root", str(artifact_root),
+        "--primary-gate", str(primary_gate),
+        "--out", str(EXP / "reports" / "result_receipt.json"),
     ])
+    if primary_returncode == 4:
+        print(
+            "[run] necessary compact gates failed; stopping before action-only, "
+            "confirmation, and Menagerie",
+            flush=True,
+        )
+        return 4
 
     # The mechanism control is scientifically necessary only for a compact
     # candidate that survives every gate it can fail without that control.
