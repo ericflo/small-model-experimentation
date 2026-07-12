@@ -199,3 +199,32 @@ locality because token-mass weighting ignores realized surprisal/gradient. The
 next experiment should interpolate the already-trained reason delta under a
 locality-first gate, with full-dose action-only as the safe anchor. Do not expose
 the untouched four-family transfer blocks until a scaled checkpoint passes.
+
+## qwen35_4b_recovery_reason_locality_interpolation (2026-07-12 — Local but policy-gated)
+
+The frozen action→reason path disproved the simplest non-separability reading.
+All four action-anchored mixtures passed the parent's exact locality instrument:
+drift was 0.100/0.104/0.111/0.121 for λ=.10/.18/.24/.30, with bounded entropy
+and varentropy change, while full reason reproduced 0.303. The two independently
+trained deltas strongly cancel in weight space: summed mixed-delta norm falls
+from 29.17 at action to 23.47 at λ=.30. This is not a monotone dose path.
+
+Behavior also has a sharp safe optimum. On the 60-case selection block λ=.18
+scored 0.967, versus 0.483 base, 0.817 happy, 0.850 action, and 0.917 full
+reason. It reached 0.933 failed-test and 1.000 rejected-patch success. However,
+no candidate cleared the registered policy gates: λ=.18 had 0.104 invalid
+actions/turn versus a 0.077 ceiling, and only 0.333 immediate rejected change
+versus the 0.60 bar. Confirmation, transfer, and Menagerie stayed sealed.
+
+Post-stop forensics distinguish the failures. Every one of λ=.18's 24 invalid
+steps closed thinking and exhausted the exact 256-answer-token cap inside a
+long exact-replacement JSON payload; this is a real harness payload bottleneck,
+not repetition or free-form slop. Conversely, all 30 rejected cases changed the
+patch within two turns and solved: 20 used sensible INSPECT→PATCH and 10 used
+PATCH→VERIFY. The immediate-only proxy rejected retained conditional recovery.
+
+Read: a locality-safe recovery policy exists on this weight path, but the
+registered harness cannot deploy it cleanly. The next experiment should freeze
+λ=.18, enlarge tool-answer capacity for every arm under matched compute, and
+measure rejected→changed-patch within two turns. This result does not support a
+transfer or benchmark claim.

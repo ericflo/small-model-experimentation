@@ -112,23 +112,60 @@ Resumable staged run:
 
 ## Results
 
-Pending the frozen result-bearing run. A calibration optimum is selection
-evidence only; no capability or breadth claim is allowed without independent
-locality and both held-out-family blocks.
+**Verdict: `LOCAL_BUT_NO_BEHAVIOR`; stopped at the frozen calibration policy
+gate.** Transfer and Menagerie remained sealed.
+
+All four mixtures passed the original locality screen. The path was much safer
+than endpoint-linear prediction: drift rose only from 0.100 at λ=.10 to 0.121 at
+λ=.30, while the reason endpoint remained the known 0.303 failure. Entropy and
+varentropy also stayed inside the registered bounds.
+
+| Arm | Recovery | Failed test | Rejected patch | Invalid/turn | Rejected immediate change | Drift |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| base | 48.3% | 53.3% | 43.3% | 5.7% | 0.0% | — |
+| happy action | 81.7% | 80.0% | 83.3% | 2.0% | 33.3% | 0.083* |
+| action endpoint | 85.0% | 73.3% | 96.7% | 19.1% | 16.7% | 0.098 |
+| λ=.10 | 88.3% | 76.7% | **100%** | 11.6% | 16.7% | 0.100 |
+| λ=.18 | **96.7%** | **93.3%** | **100%** | 10.4% | 33.3% | 0.104 |
+| λ=.24 | 95.0% | 90.0% | **100%** | 10.2% | 33.3% | 0.111 |
+| λ=.30 | 88.3% | 76.7% | **100%** | 10.0% | 33.3% | 0.121 |
+| reason endpoint | 91.7% | 100% | 83.3% | 5.9% | 83.3% | 0.303 |
+
+`*` Happy locality is the parent's same-method exploratory control, shown only
+for context. The selector admitted no candidate: every mixture exceeded the
+base+2pp invalid-turn ceiling and missed the registered 60% *immediate*
+rejected-patch transition bar. Full metrics and hashes are in
+`reports/result_receipt.json`.
 
 ## Interpretation
 
-Pending. If a scaled point passes locality but does not beat action-only, the
-correct deployable lesson is to omit plan pressure. If no behavior-improving
-point passes locality, the parent trade-off is locally non-separable along this
-weight direction and future work must change gradient placement rather than
-dose.
+The weight direction contains a real, locality-safe behavioral optimum: λ=.18
+adds +11.7pp over action-only and +15.0pp over happy on the selection block. It
+does **not** yet qualify as deployable capability because the registered policy
+guards failed.
+
+Exploratory failure forensics change the next intervention. All 24 “invalid”
+actions ended exactly at the 256-answer-token cap with thinking already closed;
+they are truncated long patch JSON, not free-form slop. Eleven trajectories had
+an invalid turn and nine still solved. Likewise, all 30 rejected-patch cases
+made a changed patch within two turns: 20 sensibly used `INSPECT→PATCH`, while
+only ten used immediate `PATCH→VERIFY`. Thus one failed gate detects a genuine
+tool-payload budget bottleneck, while the other over-specifies immediacy instead
+of the requested conditional transition.
+
+The next experiment should freeze λ=.18, give every arm a realistic larger
+answer payload under matched compute, and gate rejected recovery by changed
+patch within two turns. That is a new harness experiment, not a reinterpretation
+of this stopped result.
 
 ## Knowledgebase Update
 
-- Program evidence: pending.
-- Program backlog: pending.
-- Claim ledger/synthesis: pending all claim-grade gates.
+- Program evidence: updated with the safe interpolation curve and calibration
+  stop.
+- Program backlog: queues a λ=.18 matched-compute answer-budget harness
+  successor with semantically faithful two-turn transition retention.
+- Claim ledger/synthesis: deferred; no transfer family or Menagerie seed was
+  exposed.
 
 ## Artifacts
 

@@ -5188,41 +5188,47 @@
    ]
   },
   "qwen35_4b_recovery_reason_locality_interpolation": {
-   "verdict_tag": "Frozen path awaits locality-first test",
-   "concept_primer": "The previous coding assistant recovered well after failed tests, but the extra planning lesson also changed unrelated language behavior. This follow-up searches only between the safer action lesson and the stronger planning lesson.",
-   "plain_question": "Can a small amount of the planning update keep its cleaner, more successful recovery while avoiding broad changes elsewhere?",
-   "plain_answer": "Not known yet. Four fixed mixtures will face an unrelated-language safety check before their coding behavior is examined, and one winner must repeat that safety result before any new task family is opened.",
-   "why_it_matters": "A successful point would preserve the useful response to failed tests without retraining or weakening the already-safe action lesson. A failure would show that better planning and broad collateral are inseparable along this simple path.",
-   "verdict_tone": "neutral",
+   "verdict_tag": "Safe sweet spot blocked by tool payload",
+   "concept_primer": "The previous coding assistant recovered well after failed tests, but its planning lesson changed unrelated language behavior. This study mixed the safer action lesson with only part of that planning update.",
+   "plain_question": "Can a partial planning update improve recovery without causing broad changes elsewhere?",
+   "plain_answer": "Partly. One mixture solved 97% of familiar recovery cases and stayed safely local, but it did not qualify for new task families because long patch commands were cut off by the harness and a timing rule rejected sensible inspect-then-patch recovery.",
+   "why_it_matters": "The useful recovery behavior and broad collateral are separable after all. The next bottleneck is concrete: give tool commands enough output room and measure successful recovery across a short transition, not only the very next action.",
+   "verdict_tone": "mixed",
    "key_numbers": [
     {
-     "label": "Frozen mixtures",
-     "value": "4",
-     "sub": "fixed before any scaled model is evaluated"
+     "label": "Best recovery",
+     "value": "97%",
+     "sub": "58 of 60 familiar failure cases at the safe mixture"
     },
     {
-     "label": "Safety blocks",
-     "value": "48 + 48",
-     "sub": "screen first, then an independent no-fallback confirmation"
+     "label": "Unrelated change",
+     "value": "10.4%",
+     "sub": "well below the fixed 15% safety ceiling"
     },
     {
-     "label": "Benchmark exposure",
-     "value": "0",
-     "sub": "new benchmark seeds remain sealed behind all white-box gates"
+     "label": "Changed within 2",
+     "value": "100%",
+     "sub": "all rejected-patch cases changed the code and solved"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Planning improved recovery and reduced malformed tool calls",
-     "chart_read": "For each of the two starting models, one bar shows successful recovery and the other shows malformed tool calls. More recovery and fewer malformed calls are better.",
-     "chart_takeaway": "Adding plans raised familiar-task recovery from 85% to 92% while cutting malformed turns from 19% to 6%, creating a useful behavior target."
+     "chart_plain_title": "The 18% planning mixture has the highest recovery",
+     "chart_read": "Each bar is successful recovery for one frozen model, from the original and action-only controls through four mixtures to the full planning endpoint. Taller is better.",
+     "chart_takeaway": "Recovery rises to 97% at the 18% mixture, above both endpoints, then falls again; this is a real interior behavior optimum."
     },
     {
      "index": 1,
-     "chart_plain_title": "The planning endpoint also exceeded the unrelated-change limit",
-     "chart_read": "Each model's unrelated next-word change is compared with the fixed 15% ceiling. Lower is safer, and any bar above the ceiling fails.",
-     "chart_takeaway": "Action-only stayed below the limit near 10%, but the plan endpoint rose above 30%; the four frozen mixtures bracket the likely boundary."
+     "chart_plain_title": "All four mixtures remain below the unrelated-change limit",
+     "chart_read": "The line follows unrelated next-word changes from action-only toward the full planning model, while the flat reference line marks the safety limit. Lower is safer.",
+     "chart_takeaway": "Every tested mixture stays safely below the limit through 30%, while moving all the way to the planning endpoint jumps far above it."
+    },
+    {
+     "index": 2,
+     "chart_plain_title": "The failed policy checks point to the harness, not missing recovery",
+     "chart_read": "The bars compare immediate code changes, code changes within two turns, and cut-off invalid commands at the best mixture. Higher is good only for the middle bar; the others diagnose the stop.",
+     "chart_takeaway": "Only one third patch immediately, but every case patches within two turns; every invalid command ends exactly at the output cap, isolating two measurement problems."
     }
    ]
   },

@@ -33,16 +33,25 @@
   a 42.1 pre-clip gradient and 29.5% larger delta norm. Transfer and Menagerie
   stayed sealed. Do not rerun this dose or reinterpret the exploratory
   action-only arm inside the result-bearing directory.
-- Active successor: `qwen35_4b_recovery_reason_locality_interpolation`.
-  Preserve the full locality-safe action delta and interpolate only its learned
-  contrast toward the reason delta at frozen lambdas 0.10/0.18/0.24/0.30.
-  Exact-logit/entropy locality precedes behavior, the single calibration winner
-  gets a disjoint no-fallback locality confirmation, and the four transfer
-  families/seeds remain untouched until then. Require the winner to beat happy,
-  full action, an external scaffold, and matched-compute sampling before
-  Menagerie. Future retraining should calibrate plan dose by realized
-  gradient/surprisal and avoid supervising plan starts already rank 1 or wildly
-  off-policy lexical templates.
+- Completed policy-gated result:
+  `qwen35_4b_recovery_reason_locality_interpolation`. Every frozen mixture
+  passed locality; λ=.18 reached 0.967 trained-family recovery at 0.104 drift,
+  beating base/happy/action/full-reason. It still failed the frozen invalid-turn
+  and immediate-rejected-transition gates, so confirmation, transfer, and
+  Menagerie remained sealed. Do not extend the ladder or lower gates in that
+  result directory.
+- Immediate successor, new experiment only: freeze λ=.18 and repair the actual
+  deployment interface. All 24 invalid actions were closed-thinking JSON patch
+  payloads truncated exactly at the 256-answer-token cap; give every model arm
+  realistic answer payload capacity under matched total compute. Replace the
+  over-literal immediate rejected-patch proxy with changed patch within two
+  turns while retaining the intervening-operator census (all 30 λ=.18 cases
+  already changed within two and solved). Re-run selection-only calibration,
+  then independent locality and the untouched four-family blocks against base,
+  happy, action, external scaffold, and sample-more before Menagerie.
+- Future retraining should calibrate plan dose by realized gradient/surprisal
+  and avoid supervising plan starts already rank 1 or wildly off-policy lexical
+  templates.
 - Stopped experiment: `qwen35_4b_specialist_policy_integration` — incumbent and
   compound-headroom gates passed, but `ferrier = 0.994` made the mandatory
   tools specialist's frozen `+0.10` bar mathematically impossible. Zero

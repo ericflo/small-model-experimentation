@@ -20,7 +20,7 @@ external_artifacts:
   - name: scaled merged checkpoints and detailed evaluation artifacts
     storage: large_artifacts/qwen35_4b_recovery_reason_locality_interpolation
     required_for: locality, calibration, transfer, and final reproduction
-    checksum: pending result receipts
+    checksum: per-model and per-source SHA-256 values in reports/result_receipt.json
     regenerate: .venv/bin/python experiments/qwen35_4b_recovery_reason_locality_interpolation/scripts/run.py --full
 
 omitted_artifacts:
@@ -44,3 +44,23 @@ notes: >-
   This follow-up performs no training. All result-bearing choices are frozen in
   the preregistration; Menagerie artifacts remain absent unless both transfer
   blocks pass.
+
+result_artifacts:
+  root: large_artifacts/qwen35_4b_recovery_reason_locality_interpolation
+  merged_checkpoints:
+    - merged/reason_mix_010
+    - merged/reason_mix_018
+    - merged/reason_mix_024
+    - merged/reason_mix_030
+  locality_receipt: eval/locality_screen.json
+  calibration_receipts:
+    - eval/calibration_recovery_reason_mix_010_deep.json
+    - eval/calibration_recovery_reason_mix_018_deep.json
+    - eval/calibration_recovery_reason_mix_024_deep.json
+    - eval/calibration_recovery_reason_mix_030_deep.json
+  committed_summary: reports/result_receipt.json
+  omitted_by_gate:
+    - independent locality confirmation
+    - transfer_dev
+    - transfer_confirm
+    - Menagerie

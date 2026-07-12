@@ -930,6 +930,14 @@
     "logs/experiment_log.md:3: 'Date: 2026-06-25'"
    ]
   },
+  "qwen35_4b_recovery_reason_locality_interpolation": {
+   "start": "2026-07-12",
+   "end": "2026-07-12",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_reliability_exec_opsd_audit": {
    "start": "2026-06-26",
    "end": "2026-06-26",

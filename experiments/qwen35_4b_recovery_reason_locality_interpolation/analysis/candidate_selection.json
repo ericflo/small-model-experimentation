@@ -1,0 +1,146 @@
+{
+  "candidates": {
+    "action_anchor": {
+      "checks": {
+        "conditional_signal_vs_happy": true,
+        "failed_test_changed_patch": true,
+        "invalid_action_retention": false,
+        "locality_screen": true,
+        "recovery_vs_base": true,
+        "rejected_patch_transition": false
+      },
+      "eligible": false,
+      "invalid_action_delta_vs_base": 0.13452002245508982,
+      "model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/merged/recovery_action",
+      "reason_lambda": 0.0,
+      "score": [
+        0.85,
+        0.7333333333333333,
+        -0.19140625,
+        0.6111111111111112,
+        -0.0
+      ],
+      "success_delta_vs_base": 0.36666666666666664,
+      "success_delta_vs_happy": 0.033333333333333326,
+      "transition_delta_vs_happy": -0.14444444444444438
+    },
+    "reason_mix_010": {
+      "checks": {
+        "conditional_signal_vs_happy": true,
+        "failed_test_changed_patch": true,
+        "invalid_action_retention": false,
+        "locality_screen": true,
+        "recovery_vs_base": true,
+        "rejected_patch_transition": false
+      },
+      "eligible": false,
+      "invalid_action_delta_vs_base": 0.0588162517939328,
+      "model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_recovery_reason_locality_interpolation/merged/reason_mix_010",
+      "reason_lambda": 0.1,
+      "score": [
+        0.8833333333333333,
+        0.7666666666666667,
+        -0.11570247933884298,
+        0.6111111111111112,
+        -0.1
+      ],
+      "success_delta_vs_base": 0.39999999999999997,
+      "success_delta_vs_happy": 0.06666666666666665,
+      "transition_delta_vs_happy": -0.14444444444444438
+    },
+    "reason_mix_018": {
+      "checks": {
+        "conditional_signal_vs_happy": true,
+        "failed_test_changed_patch": true,
+        "invalid_action_retention": false,
+        "locality_screen": true,
+        "recovery_vs_base": true,
+        "rejected_patch_transition": false
+      },
+      "eligible": false,
+      "invalid_action_delta_vs_base": 0.04746159854204634,
+      "model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_recovery_reason_locality_interpolation/merged/reason_mix_018",
+      "reason_lambda": 0.18,
+      "score": [
+        0.9666666666666667,
+        0.9333333333333333,
+        -0.10434782608695652,
+        0.7111111111111111,
+        -0.18
+      ],
+      "success_delta_vs_base": 0.48333333333333334,
+      "success_delta_vs_happy": 0.15000000000000002,
+      "transition_delta_vs_happy": -0.0444444444444444
+    },
+    "reason_mix_024": {
+      "checks": {
+        "conditional_signal_vs_happy": true,
+        "failed_test_changed_patch": true,
+        "invalid_action_retention": false,
+        "locality_screen": true,
+        "recovery_vs_base": true,
+        "rejected_patch_transition": false
+      },
+      "eligible": false,
+      "invalid_action_delta_vs_base": 0.0452414320295579,
+      "model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_recovery_reason_locality_interpolation/merged/reason_mix_024",
+      "reason_lambda": 0.24,
+      "score": [
+        0.95,
+        0.9,
+        -0.10212765957446808,
+        0.6666666666666666,
+        -0.24
+      ],
+      "success_delta_vs_base": 0.4666666666666666,
+      "success_delta_vs_happy": 0.1333333333333333,
+      "transition_delta_vs_happy": -0.0888888888888889
+    },
+    "reason_mix_030": {
+      "checks": {
+        "conditional_signal_vs_happy": true,
+        "failed_test_changed_patch": true,
+        "invalid_action_retention": false,
+        "locality_screen": true,
+        "recovery_vs_base": true,
+        "rejected_patch_transition": false
+      },
+      "eligible": false,
+      "invalid_action_delta_vs_base": 0.043532182496930825,
+      "model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_recovery_reason_locality_interpolation/merged/reason_mix_030",
+      "reason_lambda": 0.3,
+      "score": [
+        0.8833333333333333,
+        0.7666666666666667,
+        -0.100418410041841,
+        0.6777777777777777,
+        -0.3
+      ],
+      "success_delta_vs_base": 0.39999999999999997,
+      "success_delta_vs_happy": 0.06666666666666665,
+      "transition_delta_vs_happy": -0.07777777777777783
+    }
+  },
+  "eligible_candidates": [],
+  "gate": {
+    "passed": false
+  },
+  "inputs": {
+    "base": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/eval/calibration_recovery_base_deep.json",
+    "candidates": {
+      "action_anchor": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/eval/calibration_recovery_recovery_action_deep.json",
+      "reason_mix_010": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_recovery_reason_locality_interpolation/eval/calibration_recovery_reason_mix_010_deep.json",
+      "reason_mix_018": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_recovery_reason_locality_interpolation/eval/calibration_recovery_reason_mix_018_deep.json",
+      "reason_mix_024": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_recovery_reason_locality_interpolation/eval/calibration_recovery_reason_mix_024_deep.json",
+      "reason_mix_030": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_recovery_reason_locality_interpolation/eval/calibration_recovery_reason_mix_030_deep.json"
+    },
+    "happy": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/eval/calibration_recovery_happy_action_deep.json",
+    "locality_screen": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_recovery_reason_locality_interpolation/eval/locality_screen.json"
+  },
+  "rule": "filter by locality, recovery, invalid-action, and transition gates; then lexicographic(overall success, worst-scenario success, -invalid rate, transition score, -reason lambda)",
+  "schema_version": 1,
+  "selected_arm": null,
+  "selected_model": null,
+  "selection_block": "calibration",
+  "task_manifest_sha256": "796b6621a0770c5b0becc4d0f0a785656165bcf3eeef9ed8b30a5847e09b9631"
+}

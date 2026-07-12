@@ -45341,45 +45341,58 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "The frozen endpoints trade valid recovery against locality",
+     "title": "A small action-to-reason mixture peaks at 97% recovery",
      "categories": [
-      "recovery actions",
-      "recovery actions + plans"
+      "base",
+      "happy actions",
+      "action endpoint",
+      "lambda .10",
+      "lambda .18",
+      "lambda .24",
+      "lambda .30",
+      "reason endpoint"
      ],
      "series": [
       {
        "label": "calibration recovery success",
        "values": [
+        0.48333333333333334,
+        0.8166666666666667,
         0.85,
+        0.8833333333333333,
+        0.9666666666666667,
+        0.95,
+        0.8833333333333333,
         0.9166666666666666
-       ]
-      },
-      {
-       "label": "invalid actions per turn",
-       "values": [
-        0.19140625,
-        0.058823529411764705
        ]
       }
      ],
-     "x_label": "parent endpoint",
-     "y_label": "rate",
+     "x_label": "frozen calibration arm",
+     "y_label": "hidden-test recovery success",
      "y_format": "percent01",
-     "note": "Pre-run design evidence from the direct parent: plan supervision improved trained-family recovery and sharply reduced malformed tool calls, motivating interpolation from the full action endpoint rather than scaling the whole update from zero.",
-     "source": "experiments/qwen35_4b_verifier_conditioned_recovery_bank/reports/result_receipt.json"
+     "note": "Lambda .18 solves 58/60 controlled cases, +11.7 points over action-only and +5.0 over full reason. This is a trained-family selection block only; the arm failed prerequisite policy gates, so transfer stayed sealed.",
+     "source": "experiments/qwen35_4b_recovery_reason_locality_interpolation/reports/result_receipt.json"
     },
     {
-     "kind": "bar",
-     "title": "The same plan endpoint crosses the frozen locality ceiling",
+     "kind": "line",
+     "title": "Every frozen mixture stays below the unrelated-change ceiling",
      "categories": [
-      "recovery actions",
-      "recovery actions + plans"
+      "action",
+      "lambda .10",
+      "lambda .18",
+      "lambda .24",
+      "lambda .30",
+      "reason"
      ],
      "series": [
       {
        "label": "median unrelated-logit drift",
        "values": [
         0.09815472364425659,
+        0.09994667768478394,
+        0.10387247800827026,
+        0.11070793867111206,
+        0.12073829770088196,
         0.30310505628585815
        ]
       },
@@ -45387,15 +45400,43 @@
        "label": "registered ceiling",
        "values": [
         0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
         0.15
        ]
       }
      ],
-     "x_label": "parent endpoint",
+     "x_label": "action-to-reason weight position",
      "y_label": "centered logit drift",
      "y_format": "number",
-     "note": "Pre-run design evidence: full action training passed locality while the reason endpoint doubled the safety ceiling. Frozen lambdas 0.10/0.18/0.24/0.30 bracket the endpoint-implied frontier near 0.25.",
-     "source": "experiments/qwen35_4b_verifier_conditioned_recovery_bank/reports/result_receipt.json"
+     "note": "The safe region extends through lambda .30 at 0.121 drift; only the full reason endpoint crosses the 0.15 limit. Entropy and varentropy also pass for all mixtures.",
+     "source": "experiments/qwen35_4b_recovery_reason_locality_interpolation/reports/result_receipt.json"
+    },
+    {
+     "kind": "bar",
+     "title": "Post-stop forensics isolate payload truncation and a timing-proxy mismatch",
+     "categories": [
+      "rejected: immediate changed patch",
+      "rejected: changed patch within 2",
+      "invalid steps ending at answer cap"
+     ],
+     "series": [
+      {
+       "label": "share",
+       "values": [
+        0.3333333333333333,
+        1.0,
+        1.0
+       ]
+      }
+     ],
+     "x_label": "lambda .18 diagnostic",
+     "y_label": "share of relevant cases or steps",
+     "y_format": "percent01",
+     "note": "The registered immediate-change gate fails, yet every rejected case changes the patch within two turns and solves. Separately, every invalid response stops exactly at the 256-token answer cap inside JSON.",
+     "source": "experiments/qwen35_4b_recovery_reason_locality_interpolation/reports/result_receipt.json"
     }
    ]
   },

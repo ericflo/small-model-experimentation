@@ -3960,9 +3960,9 @@
   },
   {
     "file_counts": {
-      ".json": 3,
+      ".json": 5,
       ".md": 7,
-      ".py": 16,
+      ".py": 17,
       ".yaml": 3
     },
     "id": "qwen35_4b_recovery_reason_locality_interpolation",
@@ -3981,6 +3981,7 @@
     ],
     "title": "Locality-first recovery-reason interpolation",
     "top_level_dirs": [
+      "analysis",
       "configs",
       "data",
       "reports",
@@ -3988,8 +3989,8 @@
       "src",
       "tests"
     ],
-    "total_files": 29,
-    "total_size_bytes": 308228
+    "total_files": 32,
+    "total_size_bytes": 344813
   },
   {
     "file_counts": {
