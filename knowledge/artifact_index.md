@@ -37,7 +37,7 @@ This is a repository-level inventory. Each experiment remains the source of trut
 
 | Extension | Files |
 | --- | ---: |
-| `.json` | 2515 |
+| `.json` | 2516 |
 | `.csv` | 2138 |
 | `.py` | 1472 |
 | `.md` | 935 |
@@ -49,8 +49,8 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | `.html` | 90 |
 | `.sh` | 19 |
 | `.txt` | 5 |
+| `.pt` | 4 |
 | `[none]` | 4 |
-| `.pt` | 3 |
 | `.npy` | 1 |
 
 ## Largest Files

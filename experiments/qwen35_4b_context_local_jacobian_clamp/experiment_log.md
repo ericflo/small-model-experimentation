@@ -58,3 +58,14 @@ Created as a new experiment scaffold.
   coordinate and full-donor patch deltas were finite and nonzero.
 - Peak allocated GPU memory was 9.68 GB. This was plumbing-only and did not
   inspect target-answer success.
+
+## 2026-07-12 — full context-local lens fit
+
+- Fitted the registered 24 direct-concept pullbacks at every layer 4–28 on all
+  48 disjoint lens prompts.
+- Every layer passed full effective rank 24 at SVD rtol 1e-5; condition numbers
+  ranged from about 3.28 to 6.43. All directions were finite and nonzero.
+- The 3,080,243-byte lens has SHA-256
+  `e373b6e93956fdfc5cb446e9bee8249655707c8258a7868f0653d11f1ffd0213`.
+- Fit time was 27.7 seconds and peak allocated memory was 11.08 GB. Band-selection
+  and confirmation outcomes remained unopened.
