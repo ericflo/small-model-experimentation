@@ -1,0 +1,51 @@
+{
+ "_note": "Plain-language, fact-checked summary of what the corpus has learned, for the home page. Authored by a best-of-3 + fact-check workflow from knowledge/synthesis.md + the claim ledger. Curated.",
+ "arc": "This corpus asks one disciplined question: how much more capability can you pull out of — and permanently install into — a single fixed small model, using no bigger model and no smarter teacher, when the bar to beat is simply sampling the model more times? The honest finding is that you cannot outwit the frozen weights at test time — cleverer answer-picking, run-and-revise feedback, and internal steering all fail to beat plain sampling — but you can bank the model's own verified successes back into its weights, and use external tools to reach the few solutions it cannot find alone. The one wall that held everywhere is that the model executes any plan it is handed almost perfectly yet cannot find the plan itself. Just as important is the ledger of honest dead-ends, and the repeated discovery that careful controls, not hopeful demos, decide whether a result is real at all.",
+ "takeaways": [
+  {
+   "headline": "Sample a few times, then filter — that's the bar",
+   "body": "A single answer undersells a small model several times over. Draw a handful of samples and keep one that passes a visible test — that alone recovers most of the hidden ability, cheaply. Every fancier method has to beat this baseline first, and most never do.",
+   "tone": "positive"
+  },
+  {
+   "headline": "No test-time trick beats sampling more",
+   "body": "The right answer is often already among the model's samples, so smarter answer-picking, running the code and revising against real errors, and steering its internal activations all seemed promising. Each merely matched plain sampling or did nothing at all. Proposing the right answer — not decoding frozen weights more cleverly — is the real bottleneck.",
+   "tone": "negative"
+  },
+  {
+   "headline": "Bank the model's own verified wins into its weights",
+   "body": "The one lever that genuinely installs new capability: fine-tune the model on answers it produced and verified itself, with no stronger teacher anywhere. This turns occasional lucky samples into dependable one-shot skill, raising single-shot success by about 40%, a gain that compounds to roughly 50% over several repeated rounds.",
+   "tone": "positive"
+  },
+  {
+   "headline": "Self-training saturates at the model's sampling edge",
+   "body": "Fine-tuning on its own verified work reliably solves what the model used to get only sometimes — but never what it can't already sample, and the gains plateau. An external search tool plus a code interpreter can harvest a few solutions beyond that edge to train on, roughly doubling the hardest cases: real, but modest.",
+   "tone": "mixed"
+  },
+  {
+   "headline": "Turn on the reasoning mode it left off",
+   "body": "The corpus ran the model with its built-in step-by-step reasoning switched off everywhere — its biggest self-inflicted wound. Turning it on lifted coding accuracy from about 76% to 91%, and controls prove the gain is genuine reasoning: feed it another problem's reasoning and accuracy collapses to about 4%. Too much thinking can still hurt.",
+   "tone": "positive"
+  },
+  {
+   "headline": "It knows it's wrong in numbers, not words",
+   "body": "Ask the model out loud whether it is sure and the answer is worthless — it claims confidence even when wrong. But the probability it quietly assigns its own answer closely tracks whether that answer is right. Read that internal number to pick among samples or abstain — it beats a majority vote, for free.",
+   "tone": "positive"
+  },
+  {
+   "headline": "The model follows a recipe but can't write one",
+   "body": "Hand the model a correct plan and it carries it out almost perfectly, even across long multi-step chains; ask it to find the plan itself and it fails almost at once. The scarce skill is deciding what to do, not doing it — so let cheap tools search and let the model execute.",
+   "tone": "mixed"
+  },
+  {
+   "headline": "Controls decide what's real; the failures are the asset",
+   "body": "The corpus's real worth is what it rules out. Careful controls quietly killed flattering wins: 40% of the 'hard' tasks were secretly easy, a serving bug silently trained and measured the untouched original model, and earlier 'self-improvement' failures were just contaminated test data. Audit your tools and data before believing any result.",
+   "tone": "mixed"
+  },
+  {
+   "headline": "Extending a fixed model's frontier without a teacher stays open",
+   "body": "Self-training and tools widen what a fixed model reliably does, and tools nudge its frontier slightly past its own sampling reach — but only modestly. Recent attempts to push further, by training tool-use agents on correct actions, backfired and erased working behavior: a narrow-looking signal still shifts the whole model. Cleanly extending a small model's frontier without a bigger teacher remains the open problem.",
+   "tone": "open"
+  }
+ ]
+}
