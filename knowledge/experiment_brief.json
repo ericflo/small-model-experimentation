@@ -1434,42 +1434,35 @@
    ]
   },
   "qwen35_4b_balanced_core_answer_potential_sft": {
-   "verdict_tag": "Pool complete; reference scoring underway",
-   "concept_primer": "A small model solves each problem many different ways in its head. For every attempt, a scorer asks whether that line of thinking makes the correct final answer likelier. The test teaches back the best-scoring thoughts and compares them with simpler choices.",
-   "plain_question": "If a model reasons through a problem many different ways, can we identify which reasoning to train on by which one makes the right answer likelier?",
-   "plain_answer": "No capability answer yet. The fixed three-family pool is complete at 360 tasks. A strict cross-backend scoring check failed before any training score was produced, so the fast batched scorer was rejected and the slower single-context reference is now used uniformly.",
-   "why_it_matters": "When building training data from a model's own reasoning, a sophisticated score must beat cheap controls such as shortest complete reasoning. This design preserves 108.8 million tokens of work while refusing both an open-ended harvest and a scorer that missed its accuracy gate.",
+   "verdict_tag": "Does answer likelihood pick the best reasoning to",
+   "concept_primer": "Imagine a student who solves one problem many different ways. To make a study example, do you keep the write-up that best predicts the correct final answer, or just the shortest complete one? This test bakes six such picking rules into six small models.",
+   "plain_question": "When choosing which of a model's own worked-out reasonings to train it on, does picking by how well each predicts the right answer beat simpler rules?",
+   "plain_answer": "Not run yet — the reasoning bank is fully built (360 tasks, six competing selection rules staged) but no model has been trained or scored. The built test will fine-tune six copies, each fed reasoning chosen a different way, then measure which answers fresh sealed problems most accurately. A key rival is simply keeping the shortest complete reasoning, which may quietly win.",
+   "why_it_matters": "If ranking reasoning by answer likelihood does not beat just keeping the shortest complete thought, teams can skip expensive scoring machinery and use a far cheaper selection rule with no loss.",
    "verdict_tone": "neutral",
    "key_numbers": [
     {
-     "label": "Balanced tasks safely banked",
-     "value": "360 / 360",
-     "sub": "the fixed harvest hard stop is complete"
+     "label": "Reasoning traces banked",
+     "value": "360 tasks",
+     "sub": "complete pool ready to train on, none deficient"
     },
     {
-     "label": "Reasoning chains preserved",
-     "value": "23,040",
-     "sub": "108.8 million sampled thinking tokens behind checksums"
+     "label": "Ways of picking reasoning tested",
+     "value": "6",
+     "sub": "each trains its own model copy, including a shortest-thought control"
     },
     {
-     "label": "Selection strategies compared",
-     "value": "6 ways",
-     "sub": "including successful, random, shortest, and task-shuffled controls"
+     "label": "Bar a method must clear",
+     "value": "3 points",
+     "sub": "accuracy gain over the best simple baseline required to advance"
     },
     {
-     "label": "Rejected fast-scorer discrepancy",
-     "value": "0.692 vs 0.15",
-     "sub": "the frozen maximum was preserved; no bulk score used that backend"
+     "label": "Task families balanced",
+     "value": "3",
+     "sub": "equal share of the training pool, no fourth added"
     }
    ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Preserved reasoning chains versus the balanced hard stop",
-     "chart_read": "The first bar is the 331-task inherited checkpoint; the second is the exact N=64 total after all 360 balanced tasks. The gap is the only additional harvest this fork allowed.",
-     "chart_takeaway": "The focused run reused nearly all prior work and stopped exactly at its balanced target instead of reopening the nine-family schedule."
-    }
-   ]
+   "charts": []
   },
   "qwen35_4b_balanced_discriminative_bridge": {
    "verdict_tag": "Even practice beats cramming only the hard cases",
@@ -5440,42 +5433,35 @@
    "charts": []
   },
   "qwen35_4b_recovery_verifier_branch_tournament": {
-   "verdict_tag": "Visible tests will arbitrate complementary repairs",
-   "concept_primer": "Two mechanics may each fix failures the other misses. Instead of guessing which one is better, let both work in separate copies and keep the repair that alone passes the visible checks.",
-   "plain_question": "Can visible tests combine two complementary coding policies better than spending the same model budget on more attempts from either one?",
-   "plain_answer": "Not known yet. The fixed rule recovered 75% on two completed design blocks, but it must now beat two full attempts from either policy on four entirely new problem types.",
-   "why_it_matters": "A win would provide stronger verified examples for later training without relying on secret outcomes or a fragile learned router. A loss prevents wasting compute on compressing accidental complementarity.",
+   "verdict_tag": "Can a visible-test check pick the better fix",
+   "concept_primer": "Two mechanics each attempt the same repair. Instead of guessing who is better, you run the quick smoke test on each finished car and keep whichever one passes — never peeking at the real answer key.",
+   "plain_question": "Can a fixed rule that just checks which of two repair attempts passes the visible tests build a stronger coding agent on brand-new problems?",
+   "plain_answer": "Not run yet — the test is built and locked, awaiting execution. It gives a small coding model two different repair strategies on each broken case, runs the visible test suite on both, and keeps the one that passes when the other fails. The live run will decide whether this simple public check beats each strategy alone on four unfamiliar code families, using the exact same compute budget.",
+   "why_it_matters": "If a cheap visible-test check can reliably pick the better of two repair attempts, teams get a stronger coding agent for free — no hidden answer keys, no bigger model, no retraining, just smarter use of the same compute.",
    "verdict_tone": "neutral",
    "key_numbers": [
     {
-     "label": "Design-block recovery",
-     "value": "75% twice",
-     "sub": "same frozen visible-test rule on two completed blocks"
+     "label": "Past-data score of the rule",
+     "value": "60 of 80",
+     "sub": "cases the visible-test rule picked correctly on earlier data — design evidence only, not the live result"
     },
     {
-     "label": "Combined ceiling",
-     "value": "79% twice",
-     "sub": "either source policy produced a correct workspace"
+     "label": "Best single strategy alone",
+     "value": "55 of 80",
+     "sub": "how each individual repair strategy scored on those same past cases"
     },
     {
-     "label": "Per-case model allowance",
-     "value": "12 calls",
-     "sub": "identical for mixed policies and more-attempt controls"
+     "label": "Best-possible coverage captured",
+     "value": "95%",
+     "sub": "share of the ideal combined outcome the simple rule reached on past data"
     },
     {
-     "label": "New problem types",
+     "label": "New code families to be tested",
      "value": "4",
-     "sub": "absent from all earlier recovery blocks"
+     "sub": "unfamiliar problem types: deadline queues, interval merging, atomic reservations, fallback resolution"
     }
    ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Visible checks recover most complementary wins",
-     "chart_read": "The two horizontal groups are completed design blocks, and taller bars mean more repaired repositories. Bars compare random policy choice, the frozen visible-test rule, and the best possible combined ceiling.",
-     "chart_takeaway": "The middle bar repeats at 75%, six points above random choice and only four below the combined ceiling on both blocks."
-    }
-   ]
+   "charts": []
   },
   "qwen35_4b_reliability_exec_opsd_audit": {
    "verdict_tag": "Leans toward correct code yet still ships bugs",
@@ -12391,7 +12377,7 @@
    "concept_primer": "Before the model computes, it must drop each possible hidden value into its own memory slot, like seating guests in numbered chairs. Left free, a plain network crowds several onto one chair and leaves others empty; a matching rule seats every value exactly once.",
    "plain_question": "Before a small model runs a step-by-step calculation, it loads its starting guesses into fixed memory slots. Does getting this right need a bigger network, or something else?",
    "plain_answer": "Structure, not scale. A plain general-purpose network placed only 55.5% of its belief on the correct starting setup and gave barely half the possible values their own slot, doubling several onto the same one. A rule that forces each value into a distinct slot lifted that to 98.1%, essentially matching a flawless setup. Learning the underlying math alone was not the missing piece.",
-   "why_it_matters": "When a small model must hold a set of distinct possibilities in fixed memory before a reliable backend runs, don't just enlarge the network. Add an explicit step that gives each possibility its own slot and leaves none uncovered.",
+   "why_it_matters": "When a small model must hold a set of distinct possibilities in fixed memory before a later step can use them reliably, don't just enlarge the network. Add an explicit step that gives each possibility its own slot and leaves none uncovered.",
    "verdict_tone": "positive",
    "key_numbers": [
     {

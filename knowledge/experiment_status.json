@@ -91,7 +91,7 @@
     },
     "qwen35_4b_balanced_core_answer_potential_sft": {
       "status": "in-progress",
-      "confidence": 0.99
+      "confidence": 0.98
     },
     "qwen35_4b_balanced_discriminative_bridge": {
       "status": "finished",
@@ -906,6 +906,10 @@
       "confidence": 0.98
     },
     "qwen35_4b_state_carry_vs_state_bag": {
+      "status": "in-progress",
+      "confidence": 0.98
+    },
+    "qwen35_4b_recovery_verifier_branch_tournament": {
       "status": "in-progress",
       "confidence": 0.98
     }
