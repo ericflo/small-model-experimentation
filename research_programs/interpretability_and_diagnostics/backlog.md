@@ -21,6 +21,8 @@
   at the parent ordered-over-shuffled effect), a task-bootstrap lower bound,
   28 mixed tasks, and eight-alias success/choice support. It keeps no-thought as
   a +3pp point gate and opens value only after an identical untouched pass.
+  Qualification passed strongly (92/339 real, 46/339 shuffled, task lower
+  +8.85pp, 32 mixed tasks, 11/12 correct/chosen breadth); confirmation is next.
 - If native thought-state transport passes, train a non-oracle prefix controller
   and require a replicated held-out capability gain over frozen Qwen3.5-4B and
   matched-compute sampling. Oracle donor selection is a mechanism control, not

@@ -5,20 +5,20 @@
   "qwen35_4b_commit_slot_semantic_power_replication": {
    "charts": [
     {
-     "title": "Frozen fresh-task allocation for the powered replication",
+     "title": "Powered commit-slot qualification accuracy",
      "kind": "bar",
-     "categories": ["seam qualification", "seam confirmation", "value fit", "causal confirmation"],
+     "categories": ["ordered thought", "same tokens shuffled", "no generated thought", "close-only free-form"],
      "series": [
       {
-       "label": "tasks",
-       "values": [113, 113, 48, 48]
+       "label": "exact semantic success",
+       "values": [0.2713864306784661, 0.13569321533923304, 0.09734513274336283, 0.058997050147492625]
       }
      ],
-     "x_label": "preregistered stage",
-     "y_label": "fresh procedural tasks",
-     "y_format": "integer",
-     "note": "All 322 rows are unique, exact-depth-two, and disjoint from five direct parents. The two 113-task seam stages are independently gated; future 48-task splits remain sealed.",
-     "source": "experiments/qwen35_4b_commit_slot_semantic_power_replication/runs/smoke/data_receipt.json",
+     "x_label": "qualification interface",
+     "y_label": "exact success rate",
+     "y_format": "percent100",
+     "note": "Ordered, shuffled, and no-thought use the identical fixed slot; close-only free-form is diagnostic. Ordered thought passed every frozen qualification gate on 113 tasks/339 traces, but untouched confirmation remains unopened.",
+     "source": "experiments/qwen35_4b_commit_slot_semantic_power_replication/runs/seam_selection.json",
      "headline": true
     }
    ]

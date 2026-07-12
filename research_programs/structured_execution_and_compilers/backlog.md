@@ -12,6 +12,8 @@
   `qwen35_4b_commit_slot_semantic_power_replication` fixes the same slot/cap on
   113+113 fresh tasks and requires both task-level ordered-content evidence and
   eight-alias semantic breadth before treating the latent interface as usable.
+  Qualification passed with correct support across all 11 targets and choices
+  across all 12 aliases; the equally powered confirmation remains unopened.
 - Measure the exact behavioral quotient at fresh depth 6 before assuming model-guided pruning is economically
   needed; record wall time, memory, physical transitions, coverage, and selector success.
 - If a real search wall appears, test a residualized partial state (feasible parameter domains, materialized

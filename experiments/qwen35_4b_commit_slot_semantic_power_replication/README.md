@@ -102,16 +102,24 @@ After anchoring the design boundary:
 
 ## Status
 
-Design and adversarial review completed before any model call. CPU smoke
-passes 322/322 unique fresh exact-depth tasks, zero overlap with five parents,
-balanced target support, exact lens hash, and reachable gates. The power receipt
-records 113 tasks required and planned per seam stage, approximate power 0.8027,
-and the exact parent diagnostic hash. The subsequent outcome-blind model smoke
-passes revision/architecture, five rank-24 lens matrices, tokenizer/slot,
-finite-logit, cache, data, and power contracts while storing no correctness or
-chosen alias. A post-smoke implementation audit confirms task-bootstrap,
-diversity, row-count, and confirmation-lock code. Scientific outcomes are
-unopened.
+Qualification returns `POWERED_COMMIT_SLOT_SEAM_QUALIFIED`; untouched
+confirmation is authorized but unopened. All 339 paths remained open to the
+fixed 1,024 cap and all row/control contracts passed.
+
+| frozen metric | observed | gate |
+| --- | ---: | ---: |
+| real slot accuracy | 92/339 (27.14%) | 20%--70% |
+| no-thought accuracy | 11/113 (9.73%) | real minus >=3pp |
+| shuffled-thought accuracy | 46/339 (13.57%) | real minus >=5pp |
+| task lower bound, real minus shuffled | +8.85pp | >0 |
+| mixed tasks | 32/113 | >=28 |
+| correct / chosen alias support | 11 / 12 | >=8 / >=8 |
+| unmasked top-is-alias / alias mass | 88.20% / 66.79% | >=75% / >=50% |
+
+The parent hint therefore generalizes across this fresh qualification block and
+is not merely alias-mask coercion. It is not yet replicated: the equally powered
+113-task confirmation must independently pass identical gates. J/value/control/
+causal stages remain unavailable.
 
 ## Scope
 
@@ -133,3 +141,5 @@ sampling on untouched procedural tasks.
 - `reports/preregistration.md` and `reports/design_review.md`: immutable rules.
 - `reports/pre_selection_implementation_audit.md`: outcome-blind code audit.
 - `scripts/run.py`: fixed-cap seam harness; later stages fail closed.
+- `runs/seam_selection*.json*`: complete qualification rows and hash-locked
+  passing summary.

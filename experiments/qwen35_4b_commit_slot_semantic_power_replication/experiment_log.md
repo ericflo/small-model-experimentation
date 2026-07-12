@@ -20,3 +20,15 @@
 - Stored no task correctness, chosen alias, trace text, or comparison.
 - Audited task-bootstrap units, strict lower-bound gate, alias diversity, exact
   row counts, shuffled multiset, and confirmation hash locks before selection.
+
+## 2026-07-12 — Powered seam qualification
+
+- Completed 339/339 fixed-cap paths and all 1,130 slot/control rows in
+  11,669.621 seconds; every native path contacted cap 1,024.
+- Real ordered thought scored 92/339 versus 46/339 exact shuffle and 11/113
+  no-thought: +13.57pp and +17.40pp.
+- One-sided task-bootstrap lower bound for real-minus-shuffle was +8.85pp;
+  32 tasks mixed outcomes; correct/chosen breadth reached 11/12 aliases; both
+  unmasked interface gates passed.
+- Automatic `POWERED_COMMIT_SLOT_SEAM_QUALIFIED`; only the hash-locked untouched
+  confirmation is authorized. J stages remain unopened.

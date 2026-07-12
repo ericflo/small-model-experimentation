@@ -47,7 +47,9 @@
   budget at 1,024 and assigns 113 fresh tasks to each of qualification and
   untouched confirmation. It requires a positive one-sided task-bootstrap lower
   bound over exact-length shuffle, +3pp over no-thought, broad alias support,
-  and no pooled rescue. Do not increase the cap while this is unresolved.
+  and no pooled rescue. Qualification passed all gates with +13.57pp over
+  shuffle and +17.40pp over no-thought; untouched confirmation is unopened. Do
+  not increase the cap while this is unresolved.
 - Completed cross-program qualification negative:
   `qwen35_4b_pareto_policy_integration` found that C54's short/deep tier labels
   did not become a clean procedural teacher crossover. `blend` lost both quick

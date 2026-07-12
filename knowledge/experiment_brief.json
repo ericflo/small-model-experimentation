@@ -1770,35 +1770,35 @@
    ]
   },
   "qwen35_4b_commit_slot_semantic_power_replication": {
-   "verdict_tag": "Powered test built and sealed before running",
-   "concept_primer": "Before answering, an AI can jot notes on a scratch pad, then choose a final answer from a short list of words. The question is whether those notes, and the order they come in, actually help it choose correctly.",
+   "verdict_tag": "The powered first stage passes; an untouched check remains",
+   "concept_primer": "Before answering, an AI can jot notes on a scratch pad, then choose a final answer from a short list of words. This test asks whether keeping those notes in their original order helps more than jumbling the exact same notes or skipping them.",
    "plain_question": "Does letting a model work through its thoughts in a sensible order help it pick the right answer better than jumbling those same thoughts or skipping them?",
-   "plain_answer": "Not yet known. This work carefully builds and locks the test: enough fresh problems, balanced answer choices, and strict pass marks to tell a real ordering benefit from luck. But it stops before running the actual comparison, so no scientific result has been opened.",
-   "why_it_matters": "If you lean on a model's scratch-pad reasoning, don't assume ordered thinking beats jumbled or no thinking until a properly sized test confirms it. Commit to enough problems and clear pass marks before you read any results.",
-   "verdict_tone": "neutral",
+   "plain_answer": "The first stage says yes. Across 113 fresh problems, ordered reasoning chose correctly on 92 of 339 paths, versus 46 after shuffling the identical reasoning tokens and the equivalent of 33 immediate-slot successes. The task-level lower bound stayed 8.85 points above zero, and correct choices covered all 11 target answer types. An equally large untouched check must still pass.",
+   "why_it_matters": "The earlier small hint grew into a broad ordered-content effect instead of disappearing with more problems. But this is still qualification, not replication or a proven internal mechanism; the sealed second stage remains decisive.",
+   "verdict_tone": "mixed",
    "key_numbers": [
     {
-     "label": "Fresh problems for each main ordering check",
-     "value": "113",
-     "sub": "new tasks locked per stage, sized to spot a real effect"
+     "label": "Ordered reasoning choices correct",
+     "value": "92/339",
+     "sub": "27.1%, versus 13.6% with the same tokens shuffled"
     },
     {
-     "label": "Problems held for sealed later stages",
-     "value": "48 + 48",
-     "sub": "reserved and untouched until the main test passes"
+     "label": "Task-level ordered gain lower bound",
+     "value": "+8.85pp",
+     "sub": "one-sided 95% lower bound over 113 whole-task units"
     },
     {
-     "label": "Total fresh problems prepared",
-     "value": "322",
-     "sub": "all unique, none reused from earlier work"
+     "label": "Correct answer types covered",
+     "value": "11/11",
+     "sub": "the frozen breadth gate required at least eight"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Fresh problems reserved for each stage of the plan",
-     "chart_read": "Each bar is one preregistered stage; bar height is how many brand-new problems were set aside for it. Two tall bars hold the main ordering checks; two shorter bars stay sealed for later stages.",
-     "chart_takeaway": "Two equally tall bars dominate: the main ordering checks each got the same large batch of fresh problems, enough to trust a genuine effect; the shorter bars stay sealed."
+     "chart_plain_title": "Ordered reasoning beats both matched answer-slot comparisons",
+     "chart_read": "Compare the ordered-reasoning bar with the same reasoning tokens shuffled and with an immediate answer slot. The free-form bar shows the old stop-marker interface for context.",
+     "chart_takeaway": "The first powered stage finds a broad ordered-content benefit, but the equally large untouched confirmation is still required."
     }
    ]
   },
