@@ -1,0 +1,24 @@
+{
+  "committed_config_payload_sha256": "a7113253a43d369b4505827f4cd1a0d0d8ae02e97cb1ddb4808310dc02660ff4",
+  "current_config_payload_sha256": "a7113253a43d369b4505827f4cd1a0d0d8ae02e97cb1ddb4808310dc02660ff4",
+  "design_commit": "c5c8c8166915772c393bc07ff5804d0aedb5de36",
+  "design_is_ancestor": true,
+  "expected_config_payload_sha256": "a7113253a43d369b4505827f4cd1a0d0d8ae02e97cb1ddb4808310dc02660ff4",
+  "expected_sha256": {
+    "design_review": "139e6314b425515ed7bd8d06fa2e72a65b89d37f3026f0a6dd88c54bd718732e",
+    "preregistration": "839a6c7d6af3599db989a74228ac90844f3b16b88a02c156ae88b130f23be065",
+    "readme": "8bd954b8b84e3074e25b99c5b37063e77ed739dd6ac9becd572250cc6803d0fe"
+  },
+  "head": "c5c8c8166915772c393bc07ff5804d0aedb5de36",
+  "lens_expected_sha256": "e373b6e93956fdfc5cb446e9bee8249655707c8258a7868f0653d11f1ffd0213",
+  "lens_observed_sha256": "e373b6e93956fdfc5cb446e9bee8249655707c8258a7868f0653d11f1ffd0213",
+  "observed_sha256": {
+    "design_review": "139e6314b425515ed7bd8d06fa2e72a65b89d37f3026f0a6dd88c54bd718732e",
+    "preregistration": "839a6c7d6af3599db989a74228ac90844f3b16b88a02c156ae88b130f23be065",
+    "readme": "8bd954b8b84e3074e25b99c5b37063e77ed739dd6ac9becd572250cc6803d0fe"
+  },
+  "passed": true,
+  "schema_version": 1,
+  "scientific_result": false,
+  "stage": "design_boundary"
+}
