@@ -111,3 +111,27 @@
   versus student, but this cannot substitute for separately identifying both
   teachers. The experiment therefore stopped before teacher-logit caching,
   locality, MOPD, controls, confirmation, or benchmarks.
+
+## 2026-07-12 — post-gate diagnosis and strategic close
+
+- Added a descriptive analysis over the already generated branches; it does
+  not alter the preregistered decision or authorize a later stage.
+- Absolute policy values were reproducible across branch halves (Pearson
+  `0.79`--`0.86`, MAE `0.093`--`0.117`), but statewise three-way winner labels
+  were not. Only 6/26 block-1 quick routes remained quick audit winners; the
+  same-state quick-route Jaccard across halves was `0.122`.
+- Quick block 1 showed selection optimism of `+0.339` versus the student. Its
+  apparent selection margin was `+0.319`, while the audit state mean was
+  `-0.019`. Posthoc `+0.10` and `+0.25` selection margins retained 24 and 22
+  states and remained negative, so reinstating an arbitrary effect-size floor
+  is not a repair.
+- Unconditional teacher-minus-soup audit means changed sign across blocks for
+  both teachers. Deep's passed result is genuinely conditional; neither source
+  endpoint can simply replace the soup.
+- All four posthoc cross-block grouping sensitivities were preserved. None
+  constitutes a qualified two-teacher router: exact cells were flat in one
+  direction, family and kind-level each failed a contrast, and family-kind had
+  no reverse-direction quick support.
+- Strategic close: test the validated deep route and MOPD kernel in a fresh
+  deep-only experiment; require a cross-fitted direct-advantage predictor and
+  a third untouched block before trying two-teacher composition again.

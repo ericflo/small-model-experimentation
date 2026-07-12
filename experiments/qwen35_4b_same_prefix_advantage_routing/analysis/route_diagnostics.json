@@ -1,0 +1,1560 @@
+{
+  "by_block": {
+    "0": {
+      "abstained": 141,
+      "policy_reliability": {
+        "deep": {
+          "audit_mean": 0.251383144110602,
+          "n": 192,
+          "selection_audit_mae": 0.09338839614972087,
+          "selection_audit_pearson": 0.8541959523073323,
+          "selection_mean": 0.24496074774268528
+        },
+        "quick": {
+          "audit_mean": 0.2551285804941322,
+          "n": 192,
+          "selection_audit_mae": 0.0997900447652897,
+          "selection_audit_pearson": 0.8570534831025312,
+          "selection_mean": 0.24780951562841766
+        },
+        "student": {
+          "audit_mean": 0.24508944541915575,
+          "n": 192,
+          "selection_audit_mae": 0.09472064291064626,
+          "selection_audit_pearson": 0.8425241463271255,
+          "selection_mean": 0.23792010192012986
+        }
+      },
+      "routed": 51,
+      "states": 192,
+      "teachers": {
+        "deep": {
+          "absolute_audit_cell_macro": {
+            "deep": 0.4014466651296634,
+            "quick": 0.2415587929994215,
+            "student": 0.2798821863004195
+          },
+          "audit_cell_macro": {
+            "alternate": 0.15988787213024191,
+            "student": 0.12156447882924393
+          },
+          "audit_dominator_precision": 0.5,
+          "audit_positive_fraction": {
+            "alternate": 0.6363636363636364,
+            "both": 0.5,
+            "student": 0.5
+          },
+          "audit_state_mean": {
+            "alternate": 0.1528096728587705,
+            "student": 0.11789849769138212
+          },
+          "cells": {
+            "burrowmaze/atom/L3": {
+              "n": 1,
+              "selected_minus_alternate": 1.0,
+              "selected_minus_student": 0.75,
+              "student_audit_mean": 0.25,
+              "teacher_audit_mean": 1.0
+            },
+            "burrowmaze/atom/L4": {
+              "n": 1,
+              "selected_minus_alternate": 0.25,
+              "selected_minus_student": 0.0,
+              "student_audit_mean": 0.25,
+              "teacher_audit_mean": 0.25
+            },
+            "burrowmaze/atom/L5": {
+              "n": 1,
+              "selected_minus_alternate": -0.5,
+              "selected_minus_student": -0.5,
+              "student_audit_mean": 0.5,
+              "teacher_audit_mean": 0.0
+            },
+            "foundry_ledger/atom/L3": {
+              "n": 1,
+              "selected_minus_alternate": 0.5,
+              "selected_minus_student": 0.5,
+              "student_audit_mean": 0.0,
+              "teacher_audit_mean": 0.5
+            },
+            "glyphgate/atom/L1": {
+              "n": 2,
+              "selected_minus_alternate": 0.0,
+              "selected_minus_student": 0.0,
+              "student_audit_mean": 0.5,
+              "teacher_audit_mean": 0.5
+            },
+            "loomfix/atom/L1": {
+              "n": 1,
+              "selected_minus_alternate": 0.25,
+              "selected_minus_student": 0.75,
+              "student_audit_mean": 0.0,
+              "teacher_audit_mean": 0.75
+            },
+            "loomfix/atom/L2": {
+              "n": 2,
+              "selected_minus_alternate": 0.25,
+              "selected_minus_student": 0.375,
+              "student_audit_mean": 0.0,
+              "teacher_audit_mean": 0.375
+            },
+            "loomfix/episode/L3": {
+              "n": 1,
+              "selected_minus_alternate": 0.4166666666666667,
+              "selected_minus_student": 0.08333333333333337,
+              "student_audit_mean": 0.41666666666666663,
+              "teacher_audit_mean": 0.5
+            },
+            "loomfix/episode/L5": {
+              "n": 1,
+              "selected_minus_alternate": -0.16666666666666663,
+              "selected_minus_student": -0.08333333333333326,
+              "student_audit_mean": 0.5833333333333333,
+              "teacher_audit_mean": 0.5
+            },
+            "packhouse/atom/L1": {
+              "n": 1,
+              "selected_minus_alternate": 0.5573476702508959,
+              "selected_minus_student": 0.21415770609318985,
+              "student_audit_mean": 0.6989247311827957,
+              "teacher_audit_mean": 0.9130824372759856
+            },
+            "packhouse/atom/L2": {
+              "n": 1,
+              "selected_minus_alternate": -0.23123324396782838,
+              "selected_minus_student": -0.45040214477211793,
+              "student_audit_mean": 0.6695710455764075,
+              "teacher_audit_mean": 0.21916890080428955
+            },
+            "packhouse/atom/L3": {
+              "n": 2,
+              "selected_minus_alternate": 0.03205128205128205,
+              "selected_minus_student": -0.19547460735985325,
+              "student_audit_mean": 0.5410457029309488,
+              "teacher_audit_mean": 0.34557109557109555
+            },
+            "packhouse/atom/L4": {
+              "n": 2,
+              "selected_minus_alternate": 0.2017798224973144,
+              "selected_minus_student": 0.22608093764386922,
+              "student_audit_mean": 0.19472543352601157,
+              "teacher_audit_mean": 0.4208063711698808
+            },
+            "packhouse/atom/L5": {
+              "n": 1,
+              "selected_minus_alternate": 0.0,
+              "selected_minus_student": -0.18361244019138756,
+              "student_audit_mean": 0.18361244019138756,
+              "teacher_audit_mean": 0.0
+            },
+            "packhouse/atom/L6": {
+              "n": 1,
+              "selected_minus_alternate": 0.20241116751269037,
+              "selected_minus_student": 0.20241116751269037,
+              "student_audit_mean": 0.0,
+              "teacher_audit_mean": 0.20241116751269037
+            },
+            "patchwheel/atom/L1": {
+              "n": 1,
+              "selected_minus_alternate": 0.5,
+              "selected_minus_student": 0.5,
+              "student_audit_mean": 0.25,
+              "teacher_audit_mean": 0.75
+            },
+            "stallwright/atom/L4": {
+              "n": 1,
+              "selected_minus_alternate": 0.0,
+              "selected_minus_student": 0.0,
+              "student_audit_mean": 0.0,
+              "teacher_audit_mean": 0.0
+            },
+            "stallwright/atom/L5": {
+              "n": 1,
+              "selected_minus_alternate": -0.384375,
+              "selected_minus_student": 0.0,
+              "student_audit_mean": 0.0,
+              "teacher_audit_mean": 0.0
+            }
+          },
+          "family_counts": {
+            "burrowmaze": 3,
+            "foundry_ledger": 1,
+            "glyphgate": 2,
+            "loomfix": 5,
+            "packhouse": 8,
+            "patchwheel": 1,
+            "stallwright": 2
+          },
+          "kind_counts": {
+            "atom": 20,
+            "episode": 2
+          },
+          "margin_audit_pearson": {
+            "alternate": 0.004002645892351608,
+            "student": 0.2232268069504935
+          },
+          "maximum_family_share": 0.36363636363636365,
+          "n": 22,
+          "posthoc_minimum_selection_margin_sensitivity": {
+            "0.00": {
+              "audit_dominator_precision": 0.5,
+              "audit_state_mean_student": 0.11789849769138212,
+              "n": 22
+            },
+            "0.10": {
+              "audit_dominator_precision": 0.5714285714285714,
+              "audit_state_mean_student": 0.1855063496181718,
+              "n": 14
+            },
+            "0.25": {
+              "audit_dominator_precision": 0.5,
+              "audit_state_mean_student": 0.1916331546023235,
+              "n": 12
+            },
+            "0.50": {
+              "audit_dominator_precision": 0.6666666666666666,
+              "audit_state_mean_student": 0.26653261840929404,
+              "n": 3
+            }
+          },
+          "selection_margin": {
+            "alternate_mean": 0.3193534222611619,
+            "student_mean": 0.2665081201187022
+          },
+          "selection_optimism": {
+            "alternate": 0.16654374940239142,
+            "student": 0.14860962242732006
+          },
+          "unique_cells": 18
+        },
+        "quick": {
+          "absolute_audit_cell_macro": {
+            "deep": 0.21008415969424976,
+            "quick": 0.4246120897194018,
+            "student": 0.22374879462265757
+          },
+          "audit_cell_macro": {
+            "alternate": 0.21452793002515202,
+            "student": 0.20086329509674425
+          },
+          "audit_dominator_precision": 0.41379310344827586,
+          "audit_positive_fraction": {
+            "alternate": 0.6896551724137931,
+            "both": 0.41379310344827586,
+            "student": 0.4482758620689655
+          },
+          "audit_state_mean": {
+            "alternate": 0.224978700217042,
+            "student": 0.1764411430261011
+          },
+          "cells": {
+            "burrowmaze/atom/L4": {
+              "n": 1,
+              "selected_minus_alternate": 0.25,
+              "selected_minus_student": 0.25,
+              "student_audit_mean": 0.0,
+              "teacher_audit_mean": 0.25
+            },
+            "burrowmaze/atom/L5": {
+              "n": 1,
+              "selected_minus_alternate": 0.25,
+              "selected_minus_student": -0.25,
+              "student_audit_mean": 0.5,
+              "teacher_audit_mean": 0.25
+            },
+            "caravan/atom/L3": {
+              "n": 1,
+              "selected_minus_alternate": 1.0,
+              "selected_minus_student": 1.0,
+              "student_audit_mean": 0.0,
+              "teacher_audit_mean": 1.0
+            },
+            "caravan/atom/L4": {
+              "n": 3,
+              "selected_minus_alternate": 0.25,
+              "selected_minus_student": 0.16666666666666666,
+              "student_audit_mean": 0.16666666666666666,
+              "teacher_audit_mean": 0.3333333333333333
+            },
+            "caravan/atom/L5": {
+              "n": 2,
+              "selected_minus_alternate": 0.25,
+              "selected_minus_student": 0.25,
+              "student_audit_mean": 0.25,
+              "teacher_audit_mean": 0.5
+            },
+            "caravan/atom/L6": {
+              "n": 2,
+              "selected_minus_alternate": 0.375,
+              "selected_minus_student": 0.0,
+              "student_audit_mean": 0.375,
+              "teacher_audit_mean": 0.375
+            },
+            "foundry_ledger/atom/L2": {
+              "n": 1,
+              "selected_minus_alternate": 0.0,
+              "selected_minus_student": 0.0,
+              "student_audit_mean": 0.0,
+              "teacher_audit_mean": 0.0
+            },
+            "glyphgate/episode/L3": {
+              "n": 2,
+              "selected_minus_alternate": 0.5,
+              "selected_minus_student": 0.0,
+              "student_audit_mean": 0.5,
+              "teacher_audit_mean": 0.5
+            },
+            "kilnrite/atom/L6": {
+              "n": 1,
+              "selected_minus_alternate": 0.75,
+              "selected_minus_student": 0.75,
+              "student_audit_mean": 0.0,
+              "teacher_audit_mean": 0.75
+            },
+            "packhouse/atom/L1": {
+              "n": 1,
+              "selected_minus_alternate": -0.2637614678899083,
+              "selected_minus_student": 0.14678899082568805,
+              "student_audit_mean": 0.2217125382262997,
+              "teacher_audit_mean": 0.36850152905198774
+            },
+            "packhouse/atom/L2": {
+              "n": 2,
+              "selected_minus_alternate": 0.011213879214300781,
+              "selected_minus_student": -0.21699696881492705,
+              "student_audit_mean": 0.5631894189559474,
+              "teacher_audit_mean": 0.3461924501410204
+            },
+            "packhouse/atom/L3": {
+              "n": 1,
+              "selected_minus_alternate": 0.25,
+              "selected_minus_student": -0.15416666666666667,
+              "student_audit_mean": 0.4041666666666667,
+              "teacher_audit_mean": 0.25
+            },
+            "packhouse/atom/L4": {
+              "n": 1,
+              "selected_minus_alternate": 0.5524096385542169,
+              "selected_minus_student": 0.7807228915662651,
+              "student_audit_mean": 0.0,
+              "teacher_audit_mean": 0.7807228915662651
+            },
+            "packhouse/atom/L5": {
+              "n": 1,
+              "selected_minus_alternate": -0.4288990825688074,
+              "selected_minus_student": -0.2184633027522936,
+              "student_audit_mean": 0.2184633027522936,
+              "teacher_audit_mean": 0.0
+            },
+            "packhouse/atom/L6": {
+              "n": 1,
+              "selected_minus_alternate": 0.6260416666666666,
+              "selected_minus_student": 0.4312499999999999,
+              "student_audit_mean": 0.19479166666666667,
+              "teacher_audit_mean": 0.6260416666666666
+            },
+            "patchwheel/atom/L4": {
+              "n": 1,
+              "selected_minus_alternate": -0.25,
+              "selected_minus_student": 0.0,
+              "student_audit_mean": 0.0,
+              "teacher_audit_mean": 0.0
+            },
+            "patchwheel/atom/L5": {
+              "n": 1,
+              "selected_minus_alternate": -0.25,
+              "selected_minus_student": 0.0,
+              "student_audit_mean": 0.0,
+              "teacher_audit_mean": 0.0
+            },
+            "runeward/atom/L1": {
+              "n": 1,
+              "selected_minus_alternate": 0.25,
+              "selected_minus_student": 0.75,
+              "student_audit_mean": 0.0,
+              "teacher_audit_mean": 0.75
+            },
+            "runeward/atom/L6": {
+              "n": 2,
+              "selected_minus_alternate": 0.375,
+              "selected_minus_student": 0.5,
+              "student_audit_mean": 0.375,
+              "teacher_audit_mean": 0.875
+            },
+            "stallwright/atom/L1": {
+              "n": 2,
+              "selected_minus_alternate": 0.008081896551724144,
+              "selected_minus_student": 0.032327586206896575,
+              "student_audit_mean": 0.929734427141268,
+              "teacher_audit_mean": 0.9620620133481645
+            },
+            "stallwright/atom/L6": {
+              "n": 1,
+              "selected_minus_alternate": 0.0,
+              "selected_minus_student": 0.0,
+              "student_audit_mean": 0.0,
+              "teacher_audit_mean": 0.0
+            }
+          },
+          "family_counts": {
+            "burrowmaze": 2,
+            "caravan": 8,
+            "foundry_ledger": 1,
+            "glyphgate": 2,
+            "kilnrite": 1,
+            "packhouse": 7,
+            "patchwheel": 2,
+            "runeward": 3,
+            "stallwright": 3
+          },
+          "kind_counts": {
+            "atom": 27,
+            "episode": 2
+          },
+          "margin_audit_pearson": {
+            "alternate": 0.4507212191155772,
+            "student": 0.38077223351203815
+          },
+          "maximum_family_share": 0.27586206896551724,
+          "n": 29,
+          "posthoc_minimum_selection_margin_sensitivity": {
+            "0.00": {
+              "audit_dominator_precision": 0.41379310344827586,
+              "audit_state_mean_student": 0.1764411430261011,
+              "n": 29
+            },
+            "0.10": {
+              "audit_dominator_precision": 0.4230769230769231,
+              "audit_state_mean_student": 0.20316170848176396,
+              "n": 26
+            },
+            "0.25": {
+              "audit_dominator_precision": 0.47619047619047616,
+              "audit_state_mean_student": 0.24175216186281595,
+              "n": 21
+            },
+            "0.50": {
+              "audit_dominator_precision": 0.5,
+              "audit_state_mean_student": 0.5,
+              "n": 4
+            }
+          },
+          "selection_margin": {
+            "alternate_mean": 0.3075422181225996,
+            "student_mean": 0.3342481236397848
+          },
+          "selection_optimism": {
+            "alternate": 0.08256351790555758,
+            "student": 0.1578069806136837
+          },
+          "unique_cells": 21
+        }
+      },
+      "unconditional_audit_delta_vs_student": {
+        "deep": 0.00629369869144622,
+        "quick": 0.010039135074976419
+      }
+    },
+    "1": {
+      "abstained": 132,
+      "policy_reliability": {
+        "deep": {
+          "audit_mean": 0.25197507286320564,
+          "n": 192,
+          "selection_audit_mae": 0.1094599110569033,
+          "selection_audit_pearson": 0.792366659767509,
+          "selection_mean": 0.26008741403377655
+        },
+        "quick": {
+          "audit_mean": 0.26190495873340586,
+          "n": 192,
+          "selection_audit_mae": 0.10621016560639235,
+          "selection_audit_pearson": 0.8351267992109412,
+          "selection_mean": 0.2638843072676663
+        },
+        "student": {
+          "audit_mean": 0.27158305647683645,
+          "n": 192,
+          "selection_audit_mae": 0.11666687289870337,
+          "selection_audit_pearson": 0.7911840036408816,
+          "selection_mean": 0.23779260554658016
+        }
+      },
+      "routed": 60,
+      "states": 192,
+      "teachers": {
+        "deep": {
+          "absolute_audit_cell_macro": {
+            "deep": 0.3746179845051407,
+            "quick": 0.25364573131968643,
+            "student": 0.30916489632910515
+          },
+          "audit_cell_macro": {
+            "alternate": 0.12097225318545428,
+            "student": 0.06545308817603557
+          },
+          "audit_dominator_precision": 0.35294117647058826,
+          "audit_positive_fraction": {
+            "alternate": 0.5294117647058824,
+            "both": 0.35294117647058826,
+            "student": 0.5
+          },
+          "audit_state_mean": {
+            "alternate": 0.10455462684423536,
+            "student": 0.059057427371135215
+          },
+          "cells": {
+            "burrowmaze/atom/L4": {
+              "n": 1,
+              "selected_minus_alternate": 0.25,
+              "selected_minus_student": 0.25,
+              "student_audit_mean": 0.0,
+              "teacher_audit_mean": 0.25
+            },
+            "burrowmaze/atom/L5": {
+              "n": 1,
+              "selected_minus_alternate": 0.0,
+              "selected_minus_student": 0.0,
+              "student_audit_mean": 0.25,
+              "teacher_audit_mean": 0.25
+            },
+            "burrowmaze/episode/L2": {
+              "n": 1,
+              "selected_minus_alternate": 0.5,
+              "selected_minus_student": -0.25,
+              "student_audit_mean": 0.75,
+              "teacher_audit_mean": 0.5
+            },
+            "caravan/atom/L5": {
+              "n": 1,
+              "selected_minus_alternate": -0.25,
+              "selected_minus_student": -0.5,
+              "student_audit_mean": 0.5,
+              "teacher_audit_mean": 0.0
+            },
+            "ferrier/atom/L2": {
+              "n": 1,
+              "selected_minus_alternate": 0.25,
+              "selected_minus_student": 0.0,
+              "student_audit_mean": 1.0,
+              "teacher_audit_mean": 1.0
+            },
+            "foundry_ledger/atom/L4": {
+              "n": 1,
+              "selected_minus_alternate": 0.5,
+              "selected_minus_student": 0.5,
+              "student_audit_mean": 0.0,
+              "teacher_audit_mean": 0.5
+            },
+            "gatepost/atom/L3": {
+              "n": 1,
+              "selected_minus_alternate": 0.25,
+              "selected_minus_student": 0.5,
+              "student_audit_mean": 0.5,
+              "teacher_audit_mean": 1.0
+            },
+            "glyphgate/atom/L4": {
+              "n": 1,
+              "selected_minus_alternate": -0.25,
+              "selected_minus_student": 0.0,
+              "student_audit_mean": 0.0,
+              "teacher_audit_mean": 0.0
+            },
+            "glyphgate/episode/L3": {
+              "n": 1,
+              "selected_minus_alternate": 0.25,
+              "selected_minus_student": 0.25,
+              "student_audit_mean": 0.0,
+              "teacher_audit_mean": 0.25
+            },
+            "kilnrite/atom/L5": {
+              "n": 1,
+              "selected_minus_alternate": 0.5,
+              "selected_minus_student": 0.5,
+              "student_audit_mean": 0.25,
+              "teacher_audit_mean": 0.75
+            },
+            "loomfix/atom/L1": {
+              "n": 2,
+              "selected_minus_alternate": 0.5,
+              "selected_minus_student": 0.125,
+              "student_audit_mean": 0.375,
+              "teacher_audit_mean": 0.5
+            },
+            "loomfix/atom/L3": {
+              "n": 1,
+              "selected_minus_alternate": 0.25,
+              "selected_minus_student": 0.25,
+              "student_audit_mean": 0.0,
+              "teacher_audit_mean": 0.25
+            },
+            "loomfix/episode/L2": {
+              "n": 1,
+              "selected_minus_alternate": 0.0,
+              "selected_minus_student": 0.0,
+              "student_audit_mean": 0.625,
+              "teacher_audit_mean": 0.625
+            },
+            "packhouse/atom/L1": {
+              "n": 2,
+              "selected_minus_alternate": -0.002688872568761741,
+              "selected_minus_student": -0.08778221316718396,
+              "student_audit_mean": 0.662969960436853,
+              "teacher_audit_mean": 0.575187747269669
+            },
+            "packhouse/atom/L2": {
+              "n": 3,
+              "selected_minus_alternate": -0.11720268640881899,
+              "selected_minus_student": 0.11649458326431061,
+              "student_audit_mean": 0.5442334795105921,
+              "teacher_audit_mean": 0.6607280627749027
+            },
+            "packhouse/atom/L3": {
+              "n": 1,
+              "selected_minus_alternate": -0.13928571428571426,
+              "selected_minus_student": 0.21428571428571427,
+              "student_audit_mean": 0.0,
+              "teacher_audit_mean": 0.21428571428571427
+            },
+            "packhouse/atom/L4": {
+              "n": 2,
+              "selected_minus_alternate": 0.0018421052631579227,
+              "selected_minus_student": -0.21964357095269818,
+              "student_audit_mean": 0.551748834110593,
+              "teacher_audit_mean": 0.33210526315789474
+            },
+            "packhouse/atom/L6": {
+              "n": 2,
+              "selected_minus_alternate": 0.019830870005432905,
+              "selected_minus_student": 0.005608855632933285,
+              "student_audit_mean": 0.19436907319602903,
+              "teacher_audit_mean": 0.19997792882896231
+            },
+            "patchwheel/atom/L1": {
+              "n": 1,
+              "selected_minus_alternate": -0.25,
+              "selected_minus_student": 0.0,
+              "student_audit_mean": 0.25,
+              "teacher_audit_mean": 0.25
+            },
+            "patchwheel/atom/L2": {
+              "n": 1,
+              "selected_minus_alternate": -0.25,
+              "selected_minus_student": -0.25,
+              "student_audit_mean": 0.25,
+              "teacher_audit_mean": 0.0
+            },
+            "patchwheel/atom/L3": {
+              "n": 2,
+              "selected_minus_alternate": 0.25,
+              "selected_minus_student": 0.125,
+              "student_audit_mean": 0.125,
+              "teacher_audit_mean": 0.25
+            },
+            "patchwheel/atom/L4": {
+              "n": 2,
+              "selected_minus_alternate": -0.125,
+              "selected_minus_student": 0.125,
+              "student_audit_mean": 0.0,
+              "teacher_audit_mean": 0.125
+            },
+            "runeward/atom/L6": {
+              "n": 1,
+              "selected_minus_alternate": -0.25,
+              "selected_minus_student": -0.5,
+              "student_audit_mean": 0.5,
+              "teacher_audit_mean": 0.0
+            },
+            "stallwright/atom/L2": {
+              "n": 1,
+              "selected_minus_alternate": 0.4866920152091255,
+              "selected_minus_student": 0.25,
+              "student_audit_mean": 0.23669201520912547,
+              "teacher_audit_mean": 0.4866920152091255
+            },
+            "stallwright/atom/L4": {
+              "n": 1,
+              "selected_minus_alternate": 0.4848993288590604,
+              "selected_minus_student": 0.4848993288590604,
+              "student_audit_mean": 0.0,
+              "teacher_audit_mean": 0.4848993288590604
+            },
+            "stallwright/atom/L6": {
+              "n": 1,
+              "selected_minus_alternate": 0.2861915367483296,
+              "selected_minus_student": -0.1870824053452116,
+              "student_audit_mean": 0.4732739420935412,
+              "teacher_audit_mean": 0.2861915367483296
+            }
+          },
+          "family_counts": {
+            "burrowmaze": 3,
+            "caravan": 1,
+            "ferrier": 1,
+            "foundry_ledger": 1,
+            "gatepost": 1,
+            "glyphgate": 2,
+            "kilnrite": 1,
+            "loomfix": 4,
+            "packhouse": 10,
+            "patchwheel": 6,
+            "runeward": 1,
+            "stallwright": 3
+          },
+          "kind_counts": {
+            "atom": 31,
+            "episode": 3
+          },
+          "margin_audit_pearson": {
+            "alternate": 0.330676219827363,
+            "student": 0.2521956166639696
+          },
+          "maximum_family_share": 0.29411764705882354,
+          "n": 34,
+          "posthoc_minimum_selection_margin_sensitivity": {
+            "0.00": {
+              "audit_dominator_precision": 0.35294117647058826,
+              "audit_state_mean_student": 0.059057427371135215,
+              "n": 34
+            },
+            "0.10": {
+              "audit_dominator_precision": 0.3870967741935484,
+              "audit_state_mean_student": 0.049694989123419464,
+              "n": 31
+            },
+            "0.25": {
+              "audit_dominator_precision": 0.4166666666666667,
+              "audit_state_mean_student": 0.054613035753941816,
+              "n": 24
+            },
+            "0.50": {
+              "audit_dominator_precision": 0.6666666666666666,
+              "audit_state_mean_student": 0.16666666666666666,
+              "n": 6
+            }
+          },
+          "selection_margin": {
+            "alternate_mean": 0.35040914237657944,
+            "student_mean": 0.404433046199868
+          },
+          "selection_optimism": {
+            "alternate": 0.24585451553234408,
+            "student": 0.34537561882873274
+          },
+          "unique_cells": 26
+        },
+        "quick": {
+          "absolute_audit_cell_macro": {
+            "deep": 0.2627045177045177,
+            "quick": 0.3822956406133409,
+            "student": 0.40762647980039285
+          },
+          "audit_cell_macro": {
+            "alternate": 0.11959112290882319,
+            "student": -0.025330839187051948
+          },
+          "audit_dominator_precision": 0.23076923076923078,
+          "audit_positive_fraction": {
+            "alternate": 0.5384615384615384,
+            "both": 0.23076923076923078,
+            "student": 0.3076923076923077
+          },
+          "audit_state_mean": {
+            "alternate": 0.13627373143242455,
+            "student": -0.019402882923119584
+          },
+          "cells": {
+            "burrowmaze/atom/L4": {
+              "n": 2,
+              "selected_minus_alternate": 0.375,
+              "selected_minus_student": 0.25,
+              "student_audit_mean": 0.25,
+              "teacher_audit_mean": 0.5
+            },
+            "caravan/atom/L1": {
+              "n": 1,
+              "selected_minus_alternate": 0.0,
+              "selected_minus_student": -0.25,
+              "student_audit_mean": 0.25,
+              "teacher_audit_mean": 0.0
+            },
+            "caravan/atom/L4": {
+              "n": 1,
+              "selected_minus_alternate": 0.5,
+              "selected_minus_student": 0.0,
+              "student_audit_mean": 0.5,
+              "teacher_audit_mean": 0.5
+            },
+            "caravan/atom/L6": {
+              "n": 1,
+              "selected_minus_alternate": 0.0,
+              "selected_minus_student": 0.0,
+              "student_audit_mean": 0.0,
+              "teacher_audit_mean": 0.0
+            },
+            "ferrier/atom/L6": {
+              "n": 1,
+              "selected_minus_alternate": 0.5,
+              "selected_minus_student": 0.0,
+              "student_audit_mean": 1.0,
+              "teacher_audit_mean": 1.0
+            },
+            "foundry_ledger/atom/L6": {
+              "n": 1,
+              "selected_minus_alternate": 0.0,
+              "selected_minus_student": -0.25,
+              "student_audit_mean": 0.5,
+              "teacher_audit_mean": 0.25
+            },
+            "glyphgate/episode/L3": {
+              "n": 1,
+              "selected_minus_alternate": -0.25,
+              "selected_minus_student": 0.25,
+              "student_audit_mean": 0.0,
+              "teacher_audit_mean": 0.25
+            },
+            "kilnrite/atom/L3": {
+              "n": 1,
+              "selected_minus_alternate": 0.0,
+              "selected_minus_student": 0.0,
+              "student_audit_mean": 0.5,
+              "teacher_audit_mean": 0.5
+            },
+            "kilnrite/episode/L5": {
+              "n": 1,
+              "selected_minus_alternate": 0.15000000000000002,
+              "selected_minus_student": 0.19999999999999996,
+              "student_audit_mean": 0.55,
+              "teacher_audit_mean": 0.75
+            },
+            "loomfix/atom/L1": {
+              "n": 1,
+              "selected_minus_alternate": -0.5,
+              "selected_minus_student": -0.5,
+              "student_audit_mean": 0.5,
+              "teacher_audit_mean": 0.0
+            },
+            "loomfix/atom/L2": {
+              "n": 2,
+              "selected_minus_alternate": 0.125,
+              "selected_minus_student": -0.25,
+              "student_audit_mean": 0.875,
+              "teacher_audit_mean": 0.625
+            },
+            "loomfix/atom/L3": {
+              "n": 2,
+              "selected_minus_alternate": 0.125,
+              "selected_minus_student": -0.125,
+              "student_audit_mean": 0.375,
+              "teacher_audit_mean": 0.25
+            },
+            "loomfix/atom/L4": {
+              "n": 1,
+              "selected_minus_alternate": 0.25,
+              "selected_minus_student": 0.0,
+              "student_audit_mean": 0.75,
+              "teacher_audit_mean": 0.75
+            },
+            "loomfix/atom/L5": {
+              "n": 1,
+              "selected_minus_alternate": 0.0,
+              "selected_minus_student": 0.25,
+              "student_audit_mean": 0.0,
+              "teacher_audit_mean": 0.25
+            },
+            "loomfix/atom/L6": {
+              "n": 2,
+              "selected_minus_alternate": 0.375,
+              "selected_minus_student": 0.125,
+              "student_audit_mean": 0.5,
+              "teacher_audit_mean": 0.625
+            },
+            "loomfix/episode/L3": {
+              "n": 1,
+              "selected_minus_alternate": -0.08333333333333331,
+              "selected_minus_student": -0.08333333333333331,
+              "student_audit_mean": 0.3333333333333333,
+              "teacher_audit_mean": 0.25
+            },
+            "packhouse/atom/L3": {
+              "n": 2,
+              "selected_minus_alternate": 0.03170343615775088,
+              "selected_minus_student": 0.02747266692698165,
+              "student_audit_mean": 0.0876923076923077,
+              "teacher_audit_mean": 0.11516497461928935
+            },
+            "packhouse/atom/L6": {
+              "n": 1,
+              "selected_minus_alternate": 0.16304347826086957,
+              "selected_minus_student": -0.17608695652173917,
+              "student_audit_mean": 0.33913043478260874,
+              "teacher_audit_mean": 0.16304347826086957
+            },
+            "patchwheel/atom/L5": {
+              "n": 1,
+              "selected_minus_alternate": 0.25,
+              "selected_minus_student": 0.0,
+              "student_audit_mean": 0.25,
+              "teacher_audit_mean": 0.25
+            },
+            "runeward/atom/L1": {
+              "n": 1,
+              "selected_minus_alternate": 0.5,
+              "selected_minus_student": 0.25,
+              "student_audit_mean": 0.75,
+              "teacher_audit_mean": 1.0
+            },
+            "stallwright/atom/L3": {
+              "n": 1,
+              "selected_minus_alternate": 0.0,
+              "selected_minus_student": -0.25,
+              "student_audit_mean": 0.25,
+              "teacher_audit_mean": 0.0
+            }
+          },
+          "family_counts": {
+            "burrowmaze": 2,
+            "caravan": 3,
+            "ferrier": 1,
+            "foundry_ledger": 1,
+            "glyphgate": 1,
+            "kilnrite": 2,
+            "loomfix": 10,
+            "packhouse": 3,
+            "patchwheel": 1,
+            "runeward": 1,
+            "stallwright": 1
+          },
+          "kind_counts": {
+            "atom": 23,
+            "episode": 3
+          },
+          "margin_audit_pearson": {
+            "alternate": 0.4244666109820241,
+            "student": 0.22485134774642018
+          },
+          "maximum_family_share": 0.38461538461538464,
+          "n": 26,
+          "posthoc_minimum_selection_margin_sensitivity": {
+            "0.00": {
+              "audit_dominator_precision": 0.23076923076923078,
+              "audit_state_mean_student": -0.019402882923119584,
+              "n": 26
+            },
+            "0.10": {
+              "audit_dominator_precision": 0.20833333333333334,
+              "audit_state_mean_student": -0.02588090094449066,
+              "n": 24
+            },
+            "0.25": {
+              "audit_dominator_precision": 0.22727272727272727,
+              "audit_state_mean_student": -0.008898045785598203,
+              "n": 22
+            },
+            "0.50": {
+              "audit_dominator_precision": 0.16666666666666666,
+              "audit_state_mean_student": 0.0539855072463768,
+              "n": 6
+            }
+          },
+          "selection_margin": {
+            "alternate_mean": 0.4234780979903506,
+            "student_mean": 0.31910643327604626
+          },
+          "selection_optimism": {
+            "alternate": 0.287204366557926,
+            "student": 0.33850931619916586
+          },
+          "unique_cells": 21
+        }
+      },
+      "unconditional_audit_delta_vs_student": {
+        "deep": -0.01960798361363081,
+        "quick": -0.009678097743430591
+      }
+    }
+  },
+  "config": "/workspace/small-model-experimentation/experiments/qwen35_4b_same_prefix_advantage_routing/configs/default.yaml",
+  "config_sha256": "bd9fc4066a4508f2c0a953b6320c7e9f08ee0b5ebe220a62997a392da35e59e0",
+  "cross_block_group_router_sensitivity": {
+    "exact_cell": {
+      "audit_only_fit": {
+        "directions": {
+          "fit_0_evaluate_1": {
+            "contrasts": {
+              "alternate": {
+                "cell_macro_mean": 0.04327972753781295,
+                "state_mean": 0.044288572663788855
+              },
+              "student": {
+                "cell_macro_mean": 0.001767146916919233,
+                "state_mean": -0.0012036295480985244
+              }
+            },
+            "evaluation_block": 1,
+            "fit_block": 0,
+            "kind_counts": {
+              "atom": 67,
+              "episode": 18
+            },
+            "selected_cells": 29,
+            "selected_states": 85,
+            "teacher_counts": {
+              "deep": 37,
+              "quick": 48
+            }
+          },
+          "fit_1_evaluate_0": {
+            "contrasts": {
+              "alternate": {
+                "cell_macro_mean": -0.004620028387790769,
+                "state_mean": -0.004578763283684206
+              },
+              "student": {
+                "cell_macro_mean": 0.024151646093373558,
+                "state_mean": 0.02518502109995685
+              }
+            },
+            "evaluation_block": 0,
+            "fit_block": 1,
+            "kind_counts": {
+              "atom": 64,
+              "episode": 15
+            },
+            "selected_cells": 27,
+            "selected_states": 79,
+            "teacher_counts": {
+              "deep": 35,
+              "quick": 44
+            }
+          }
+        },
+        "fit_rule": "unique teacher strictly wins group audit means",
+        "group_fields": [
+          "family",
+          "kind",
+          "level"
+        ]
+      },
+      "selection_audit_agreement_fit": {
+        "directions": {
+          "fit_0_evaluate_1": {
+            "contrasts": {
+              "alternate": {
+                "cell_macro_mean": 0.08446635403325134,
+                "state_mean": 0.09141079847769579
+              },
+              "student": {
+                "cell_macro_mean": 4.740099750687283e-06,
+                "state_mean": -0.0032003881053775185
+              }
+            },
+            "evaluation_block": 1,
+            "fit_block": 0,
+            "kind_counts": {
+              "atom": 33,
+              "episode": 6
+            },
+            "selected_cells": 13,
+            "selected_states": 39,
+            "teacher_counts": {
+              "deep": 10,
+              "quick": 29
+            }
+          },
+          "fit_1_evaluate_0": {
+            "contrasts": {
+              "alternate": {
+                "cell_macro_mean": 0.00514155982905983,
+                "state_mean": 0.0074358974358974365
+              },
+              "student": {
+                "cell_macro_mean": 0.05143881477129428,
+                "state_mean": 0.05063126218044251
+              }
+            },
+            "evaluation_block": 0,
+            "fit_block": 1,
+            "kind_counts": {
+              "atom": 21,
+              "episode": 4
+            },
+            "selected_cells": 8,
+            "selected_states": 25,
+            "teacher_counts": {
+              "deep": 13,
+              "quick": 12
+            }
+          }
+        },
+        "fit_rule": "same unique teacher strictly wins group means on selection and audit halves",
+        "group_fields": [
+          "family",
+          "kind",
+          "level"
+        ]
+      }
+    },
+    "family": {
+      "audit_only_fit": {
+        "directions": {
+          "fit_0_evaluate_1": {
+            "contrasts": {
+              "alternate": {
+                "cell_macro_mean": 0.015816326530612244,
+                "state_mean": 0.015441176470588236
+              },
+              "student": {
+                "cell_macro_mean": 0.011819727891156461,
+                "state_mean": 0.0029411764705882353
+              }
+            },
+            "evaluation_block": 1,
+            "fit_block": 0,
+            "kind_counts": {
+              "atom": 100,
+              "episode": 36
+            },
+            "selected_cells": 49,
+            "selected_states": 136,
+            "teacher_counts": {
+              "deep": 58,
+              "quick": 78
+            }
+          },
+          "fit_1_evaluate_0": {
+            "contrasts": {
+              "alternate": {
+                "cell_macro_mean": -0.01098645047549566,
+                "state_mean": -0.014690938024443743
+              },
+              "student": {
+                "cell_macro_mean": 0.025408634287319695,
+                "state_mean": 0.029586728993367308
+              }
+            },
+            "evaluation_block": 0,
+            "fit_block": 1,
+            "kind_counts": {
+              "atom": 54,
+              "episode": 14
+            },
+            "selected_cells": 25,
+            "selected_states": 68,
+            "teacher_counts": {
+              "deep": 37,
+              "quick": 31
+            }
+          }
+        },
+        "fit_rule": "unique teacher strictly wins group audit means",
+        "group_fields": [
+          "family"
+        ]
+      },
+      "selection_audit_agreement_fit": {
+        "directions": {
+          "fit_0_evaluate_1": {
+            "contrasts": {
+              "alternate": {
+                "cell_macro_mean": 0.026904761904761904,
+                "state_mean": 0.027659574468085105
+              },
+              "student": {
+                "cell_macro_mean": 0.03321428571428572,
+                "state_mean": 0.022872340425531913
+              }
+            },
+            "evaluation_block": 1,
+            "fit_block": 0,
+            "kind_counts": {
+              "atom": 67,
+              "episode": 27
+            },
+            "selected_cells": 35,
+            "selected_states": 94,
+            "teacher_counts": {
+              "deep": 31,
+              "quick": 63
+            }
+          },
+          "fit_1_evaluate_0": {
+            "contrasts": {
+              "alternate": {
+                "cell_macro_mean": -0.018333333333333333,
+                "state_mean": -0.037500000000000006
+              },
+              "student": {
+                "cell_macro_mean": 0.08791666666666667,
+                "state_mean": 0.09791666666666667
+              }
+            },
+            "evaluation_block": 0,
+            "fit_block": 1,
+            "kind_counts": {
+              "atom": 5,
+              "episode": 7
+            },
+            "selected_cells": 5,
+            "selected_states": 12,
+            "teacher_counts": {
+              "deep": 12
+            }
+          }
+        },
+        "fit_rule": "same unique teacher strictly wins group means on selection and audit halves",
+        "group_fields": [
+          "family"
+        ]
+      }
+    },
+    "family_kind": {
+      "audit_only_fit": {
+        "directions": {
+          "fit_0_evaluate_1": {
+            "contrasts": {
+              "alternate": {
+                "cell_macro_mean": 0.018902439024390243,
+                "state_mean": 0.01875
+              },
+              "student": {
+                "cell_macro_mean": 0.012093495934959349,
+                "state_mean": 0.001339285714285714
+              }
+            },
+            "evaluation_block": 1,
+            "fit_block": 0,
+            "kind_counts": {
+              "atom": 85,
+              "episode": 27
+            },
+            "selected_cells": 41,
+            "selected_states": 112,
+            "teacher_counts": {
+              "deep": 49,
+              "quick": 63
+            }
+          },
+          "fit_1_evaluate_0": {
+            "contrasts": {
+              "alternate": {
+                "cell_macro_mean": -0.008696724025184462,
+                "state_mean": -0.009392211596701738
+              },
+              "student": {
+                "cell_macro_mean": 0.03218784199316632,
+                "state_mean": 0.03715426190670393
+              }
+            },
+            "evaluation_block": 0,
+            "fit_block": 1,
+            "kind_counts": {
+              "atom": 36,
+              "episode": 26
+            },
+            "selected_cells": 22,
+            "selected_states": 62,
+            "teacher_counts": {
+              "deep": 31,
+              "quick": 31
+            }
+          }
+        },
+        "fit_rule": "unique teacher strictly wins group audit means",
+        "group_fields": [
+          "family",
+          "kind"
+        ]
+      },
+      "selection_audit_agreement_fit": {
+        "directions": {
+          "fit_0_evaluate_1": {
+            "contrasts": {
+              "alternate": {
+                "cell_macro_mean": 0.04436728395061728,
+                "state_mean": 0.048214285714285716
+              },
+              "student": {
+                "cell_macro_mean": 0.045910493827160496,
+                "state_mean": 0.03392857142857143
+              }
+            },
+            "evaluation_block": 1,
+            "fit_block": 0,
+            "kind_counts": {
+              "atom": 52,
+              "episode": 18
+            },
+            "selected_cells": 27,
+            "selected_states": 70,
+            "teacher_counts": {
+              "deep": 31,
+              "quick": 39
+            }
+          },
+          "fit_1_evaluate_0": {
+            "contrasts": {
+              "alternate": {
+                "cell_macro_mean": 0.025000000000000005,
+                "state_mean": 0.02450980392156863
+              },
+              "student": {
+                "cell_macro_mean": 0.10625,
+                "state_mean": 0.09068627450980393
+              }
+            },
+            "evaluation_block": 0,
+            "fit_block": 1,
+            "kind_counts": {
+              "atom": 5,
+              "episode": 12
+            },
+            "selected_cells": 5,
+            "selected_states": 17,
+            "teacher_counts": {
+              "deep": 17
+            }
+          }
+        },
+        "fit_rule": "same unique teacher strictly wins group means on selection and audit halves",
+        "group_fields": [
+          "family",
+          "kind"
+        ]
+      }
+    },
+    "kind_level": {
+      "audit_only_fit": {
+        "directions": {
+          "fit_0_evaluate_1": {
+            "contrasts": {
+              "alternate": {
+                "cell_macro_mean": 0.015380408492711928,
+                "state_mean": 0.020007721134078033
+              },
+              "student": {
+                "cell_macro_mean": -0.004836719310651004,
+                "state_mean": -0.009668702149481371
+              }
+            },
+            "evaluation_block": 1,
+            "fit_block": 0,
+            "kind_counts": {
+              "atom": 124,
+              "episode": 31
+            },
+            "selected_cells": 56,
+            "selected_states": 155,
+            "teacher_counts": {
+              "deep": 77,
+              "quick": 78
+            }
+          },
+          "fit_1_evaluate_0": {
+            "contrasts": {
+              "alternate": {
+                "cell_macro_mean": 0.00751559790130053,
+                "state_mean": 0.012935925273910845
+              },
+              "student": {
+                "cell_macro_mean": -0.0023126118865960782,
+                "state_mean": 0.006512563040296168
+              }
+            },
+            "evaluation_block": 0,
+            "fit_block": 1,
+            "kind_counts": {
+              "atom": 99,
+              "episode": 34
+            },
+            "selected_cells": 47,
+            "selected_states": 133,
+            "teacher_counts": {
+              "deep": 38,
+              "quick": 95
+            }
+          }
+        },
+        "fit_rule": "unique teacher strictly wins group audit means",
+        "group_fields": [
+          "kind",
+          "level"
+        ]
+      },
+      "selection_audit_agreement_fit": {
+        "directions": {
+          "fit_0_evaluate_1": {
+            "contrasts": {
+              "alternate": {
+                "cell_macro_mean": 0.05396867861096622,
+                "state_mean": 0.05913655336946327
+              },
+              "student": {
+                "cell_macro_mean": -0.00396061020172462,
+                "state_mean": -0.0065596065041846245
+              }
+            },
+            "evaluation_block": 1,
+            "fit_block": 0,
+            "kind_counts": {
+              "atom": 70
+            },
+            "selected_cells": 27,
+            "selected_states": 70,
+            "teacher_counts": {
+              "deep": 40,
+              "quick": 30
+            }
+          },
+          "fit_1_evaluate_0": {
+            "contrasts": {
+              "alternate": {
+                "cell_macro_mean": 0.007497160645724614,
+                "state_mean": 0.021935304171337777
+              },
+              "student": {
+                "cell_macro_mean": 0.021400877938460267,
+                "state_mean": 0.04369791218200703
+              }
+            },
+            "evaluation_block": 0,
+            "fit_block": 1,
+            "kind_counts": {
+              "atom": 55
+            },
+            "selected_cells": 20,
+            "selected_states": 55,
+            "teacher_counts": {
+              "quick": 55
+            }
+          }
+        },
+        "fit_rule": "same unique teacher strictly wins group means on selection and audit halves",
+        "group_fields": [
+          "kind",
+          "level"
+        ]
+      }
+    }
+  },
+  "inferential_status": "descriptive_only; does not alter the preregistered terminal gate",
+  "interpretive_flags": {
+    "combined_router_passed": true,
+    "deep_teacher_passed": true,
+    "point_10_margin_would_not_rescue_quick_block_1": true,
+    "pooled_only_rule_would_have_missed_quick_failure": true,
+    "quick_block_1_audit_dominator_precision_below_half": true,
+    "quick_student_block_sign_reversal": true,
+    "quick_teacher_failed": true,
+    "terminal_gate_failed": true
+  },
+  "route": "/workspace/small-model-experimentation/experiments/qwen35_4b_same_prefix_advantage_routing/analysis/route_qualification.json",
+  "route_by_kind": {
+    "atom": {
+      "route_rate": 0.3506944444444444,
+      "routed": 101,
+      "states": 288
+    },
+    "episode": {
+      "route_rate": 0.10416666666666667,
+      "routed": 10,
+      "states": 96
+    }
+  },
+  "route_gate": {
+    "passed": false
+  },
+  "route_sha256": "3cf3ba195ff4a180185da20e23b25f226aec13a1c8432d1f5da00cac9e641893",
+  "schema_version": 1,
+  "selected_cell_overlap": {
+    "deep": {
+      "block_0_cells": 18,
+      "block_1_cells": 26,
+      "intersection": 10,
+      "jaccard": 0.29411764705882354
+    },
+    "quick": {
+      "block_0_cells": 21,
+      "block_1_cells": 21,
+      "intersection": 8,
+      "jaccard": 0.23529411764705882
+    }
+  },
+  "selection_audit_label_stability": {
+    "0": {
+      "by_teacher": {
+        "deep": {
+          "first_half_precision_for_same_second_half_teacher": 0.5,
+          "first_half_routes": 22,
+          "jaccard": 0.28205128205128205,
+          "same_teacher_intersection": 11,
+          "second_half_routes": 28
+        },
+        "quick": {
+          "first_half_precision_for_same_second_half_teacher": 0.41379310344827586,
+          "first_half_routes": 29,
+          "jaccard": 0.26666666666666666,
+          "same_teacher_intersection": 12,
+          "second_half_routes": 28
+        }
+      },
+      "confusion_first_half_to_second_half": {
+        "abstain": {
+          "abstain": 115,
+          "deep": 13,
+          "quick": 13
+        },
+        "deep": {
+          "abstain": 8,
+          "deep": 11,
+          "quick": 3
+        },
+        "quick": {
+          "abstain": 13,
+          "deep": 4,
+          "quick": 12
+        }
+      },
+      "exact_three_way_agreement": 0.71875,
+      "n": 192
+    },
+    "1": {
+      "by_teacher": {
+        "deep": {
+          "first_half_precision_for_same_second_half_teacher": 0.35294117647058826,
+          "first_half_routes": 34,
+          "jaccard": 0.2608695652173913,
+          "same_teacher_intersection": 12,
+          "second_half_routes": 24
+        },
+        "quick": {
+          "first_half_precision_for_same_second_half_teacher": 0.23076923076923078,
+          "first_half_routes": 26,
+          "jaccard": 0.12244897959183673,
+          "same_teacher_intersection": 6,
+          "second_half_routes": 29
+        }
+      },
+      "confusion_first_half_to_second_half": {
+        "abstain": {
+          "abstain": 105,
+          "deep": 11,
+          "quick": 16
+        },
+        "deep": {
+          "abstain": 15,
+          "deep": 12,
+          "quick": 7
+        },
+        "quick": {
+          "abstain": 19,
+          "deep": 1,
+          "quick": 6
+        }
+      },
+      "exact_three_way_agreement": 0.640625,
+      "n": 192
+    }
+  },
+  "stage": "exploratory_route_diagnostics"
+}

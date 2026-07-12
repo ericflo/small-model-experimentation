@@ -82,6 +82,15 @@ router was positive, but quick's selected states did not retain positive audit
 advantage over the current soup student in the independent block. The gate was
 not weakened to a pooled-only rule.
 
+Post-result diagnostics localize the failure to conditional selection rather
+than weak absolute scoring. Selection/audit correlations for each policy were
+`0.79`--`0.86`, yet only 6/26 quick routes in block 1 remained the strict audit
+winner. Its apparent selection margin over the student was `+0.319`, so adding
+a `+0.10` or `+0.25` threshold would still have produced a negative audit
+mean. Independent route halves agreed on the same quick states with Jaccard
+only `0.267` and `0.122` across blocks. See
+[the exploratory diagnostic report](reports/route_diagnostics.md).
+
 ## Conditional Training and Controls
 
 If qualified, four rounds refresh exact current-student states and apply the
@@ -138,6 +147,7 @@ gains do not.
 - `reports/preregistration.md`: estimands and terminal decision rule.
 - `reports/design_review.md`: adversarial review before model output.
 - `reports/literature_review.md`: primary-paper basis for the design.
+- `reports/route_diagnostics.md`: post-gate mechanism diagnosis and next tests.
 - `runs/preregistration_receipt.json`: immutable design hashes and commit.
 - `analysis/`: gate and final machine-readable receipts.
 - `reports/artifact_manifest.yaml`: external checkpoints and regeneration.

@@ -9,13 +9,20 @@
   (`+0.0456`, lower bound `+0.0340`) but missed six retention cells. The run
   stopped before teacher audit or MOPD; do not describe it as an integration
   failure.
-- Candidate follow-up, new experiment only: replace assumed tier labels with a
-  disjoint same-prefix continuation-advantage router. Both same-origin teachers
-  must be sampled and verifier-scored at each calibration state; a frozen route
-  qualifies only with replicated positive advantage over the alternate
-  teacher. Compare any integrated checkpoint against both teachers, a visible
-  two-checkpoint router, and matched-compute sampling. Do not reuse the observed
-  qualification cells to select routes.
+- Completed route-qualification negative:
+  `qwen35_4b_same_prefix_advantage_routing` replaced tier labels with disjoint
+  same-prefix outcomes. Deep and the combined router passed, but quick's
+  soup-relative audit macro reversed from `+0.2009` to `-0.0253`; no MOPD,
+  locality, or Menagerie event ran. Post-result diagnostics show conditional
+  winner noise, not a missing `+0.10` threshold.
+- Candidate follow-up, new experiment only: use the already validated deep
+  route to test the MOPD update kernel from the joint soup on fresh states.
+  Preserve quick behavior through the frozen-soup anchor and require one
+  checkpoint to beat both sources, visible routing, and sample-more before
+  Menagerie escalation.
+- A new two-teacher attempt needs cross-fitted direct advantage prediction and
+  a third untouched route block. If quick again lacks independent support,
+  retire it as a complementary teacher; do not tune an observed-margin cutoff.
 - Completed negative: `qwen35_4b_repo_search_compress_bank` — exact-token
   operator balance plus replay-minimized successful repository traces improved
   trained families 40/48→48/48 but regressed wholly held-out families

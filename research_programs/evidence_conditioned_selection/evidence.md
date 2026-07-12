@@ -48,6 +48,16 @@
   beat token-shuffled and foreign controls and format ranks were stable, yet 99.37% of thoughts hit the
   cap and autonomous answers parsed only 13.2%. G0 failed and correctly stopped before SFT.
 
+- [qwen35_4b_same_prefix_advantage_routing](../../experiments/qwen35_4b_same_prefix_advantage_routing/reports/route_diagnostics.md)
+  adds a training-time selection boundary. Three policies' absolute
+  continuation estimates replicated well across disjoint four-branch halves
+  (`r=0.79`--`0.86`), but conditioning on the statewise maximum was unstable:
+  only 6/26 block-1 quick selections remained quick winners on audit, and its
+  apparent `+0.319` margin over the student became `-0.019`. Thresholds of
+  `+0.10` and `+0.25` did not repair the sign. Selection quality must be
+  measured after conditioning, on disjoint outcomes, rather than inferred
+  from component-score reliability.
+
 ## Current Read
 
 The biggest strategic gap is selection under deployable evidence — and C10/C46 say that gap is *fixable* with
@@ -68,3 +78,10 @@ C51 adds a second boundary: a score may contain trace-specific information and s
 unreachable deployment state. Oracle-side trace selectors must predict fresh autonomous outcomes within
 task, clear a practical top-choice effect-size gate, and include termination/parseability in validation.
 Do not scale a dense score because its corruption controls pass; first prove the scored seam is deployable.
+
+The same-prefix result adds winner conditioning to that checklist. Reliable
+component scores do not imply a reliable argmax label when differences are
+small and the selected tail is reused as the curriculum. For policy routing,
+estimate direct advantages with cross-fitting, expose abstention and per-route
+support, and retain independent block signs; a positive pooled router average
+cannot certify every named teacher.

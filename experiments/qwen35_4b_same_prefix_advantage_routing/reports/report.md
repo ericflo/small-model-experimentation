@@ -42,6 +42,30 @@ authorized MOPD, while the independent-block sign gate exposed a nonreplicable
 local teacher. The correct response is to preserve the negative, not lower the
 bar or train on the favorable block.
 
+## Post-Gate Mechanism Diagnosis
+
+Absolute continuation scores were not generally noisy: selection-to-audit
+correlations were `0.79`--`0.86` for all three policies. Conditioning on the
+largest of three four-branch estimates was the unstable step. Quick block 1
+had an apparent selection advantage of `+0.319` over the student but an audit
+state mean of `-0.019`; only 6/26 selected states remained strict quick winners
+on audit. Independent halves recovered the same quick route on 12/29 and 6/26
+states across blocks.
+
+A fixed positive margin does not solve that winner's curse. Retaining only
+quick block-1 states with observed selection margins of at least `0.10` or
+`0.25` left audit means of `-0.0259` and `-0.0089`. The six-state `0.50` tail
+was positive but had only 1/6 strict audit winners and is not inferential.
+
+The route was predominantly atom-level (101/288 atoms versus 10/96 episodes).
+Four fully reported posthoc cross-block grouping rules also failed to produce
+a credible replacement: the exact-cell rule was flat against the student in
+one direction, family and kind-level each lost a contrast, and family-kind's
+positive reverse result selected deep only. Details and the full
+machine-readable sensitivity are in
+[route_diagnostics.md](route_diagnostics.md) and
+`analysis/route_diagnostics.json`.
+
 The independently regenerated 40/60 soup has weight hash `04610723…`; all 128
 mapped adapter deltas were nonzero. On eight fixed same-prompt canaries, every
 adapted arm changed from base, quick and deep differed 8/8, and soup differed
@@ -60,6 +84,22 @@ explicit baselines, not hidden components of the learned arm.
 The first terminal branch is route nonexistence for the required *two-teacher*
 composition claim. Locality, integration, controls, confirmation, and
 benchmarks are unreached—not negative and not inferred.
+
+## Best Next Test
+
+Deep's replicated conditional advantage is the strongest surviving path. A
+new experiment should first requalify that frozen deep route on fresh states
+and test whether deep-only, verifier-backed MOPD can improve the existing soup
+without erasing its quick behavior. That is the shortest clean test of the
+still-untested update kernel.
+
+Two-teacher composition should not reuse four-branch statewise argmax. It needs
+cross-fitted direct estimates of each `teacher - student` advantage, sequential
+branch allocation for uncertain states, a frozen predictor, and a third
+untouched qualification block. If quick cannot independently replicate under
+that design, it should be retired as a complementary teacher rather than
+rescued with an observed-margin threshold. Any eventual checkpoint must still
+beat both sources, the soup, visible routing, matched controls, and sample-more.
 
 ## Artifact Manifest
 

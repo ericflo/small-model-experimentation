@@ -2,6 +2,11 @@
 
 ## Next Experiments
 
+- For training-time policy routing, replace four-branch three-way argmax with
+  cross-fitted direct `teacher - student` advantage estimates. Freeze the
+  predictor before a third block, allocate extra branches by uncertainty, and
+  report route support, precision, abstention, both block signs, and pooled
+  bounds. Do not promote a pooled-only or posthoc-margin route.
 - Only as a new preregistered experiment, compare joint close-plus-answer likelihood against C51's
   answer-only potential after first passing natural-close and autonomous-parse gates; retain within-task,
   length, prior, shuffled, and foreign controls.

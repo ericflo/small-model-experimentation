@@ -8,12 +8,23 @@
   transport to the clean distillation proxy. `blend` was negative on quick in
   both blocks; `apex` was positive on deep but failed retention. No MOPD update
   ran.
-- Candidate only after a new intake and design review: outcome-routed
-  same-prefix policy distillation. Estimate both teachers' verified
-  continuation values on disjoint states, freeze a positive-advantage routing
-  rule, and stop before training unless selected-teacher advantage replicates.
-  This tests the useful kernel behind the “advantage estimator” slogan without
-  treating a coarse external tier label as ground truth.
+- Completed route-qualification negative:
+  `qwen35_4b_same_prefix_advantage_routing` scored 384 fresh soup states with
+  disjoint selection/audit branches. Deep independently passed, and the
+  combined router passed, but quick reversed from `+0.2009` to `-0.0253`
+  versus the soup across blocks. Four-branch statewise argmax is stopped as a
+  two-teacher labeler; MOPD itself remains untested.
+- Highest-value new experiment: requalify the frozen deep selection/audit rule
+  on fresh states, then test deep-only verifier-backed MOPD from the 40/60
+  soup. Require locality before escalation and still compare the final single
+  checkpoint with quick, deep, soup, visible routing, matched controls, and
+  sample-more. This isolates the validated teacher signal from the failed
+  two-teacher estimator.
+- A later two-teacher successor must estimate each direct
+  `teacher - student` advantage with cross-fitting and uncertainty-aware branch
+  allocation, freeze the predictor, and confirm both teachers on a third
+  untouched block. Do not retry statewise three-way argmax or repair it with a
+  posthoc fixed margin.
 - Stopped cross-program test: `qwen35_4b_specialist_policy_integration` reached
   a design-feasibility negative before any specialist or integration update.
   Its sole tools core scored 0.994 at baseline, so the mandatory `+0.10` gain

@@ -65,6 +65,18 @@
   establishing a teacher-transport prerequisite rather than a distillation
   negative.
 
+- [qwen35_4b_same_prefix_advantage_routing](../../experiments/qwen35_4b_same_prefix_advantage_routing/reports/report.md):
+  the clean state-level successor used 384 fresh soup states and disjoint
+  four-branch selection/audit continuations. Deep passed both student and
+  alternate contrasts in both blocks (student macros `+0.1216`, `+0.0655`;
+  pooled one-sided LCB `+0.0657`), and the combined router passed. Quick did
+  not: its soup-relative audit macro changed from `+0.2009` to `-0.0253` even
+  though the pooled LCB was positive. The preregistered stop prevented MOPD.
+  Diagnostics localize the issue to winner-conditioned labels: only 6/26
+  block-1 quick routes remained strict audit winners, and `+0.10`/`+0.25`
+  observed margins remained negative. This is a two-teacher estimator
+  negative, not an MOPD negative.
+
 ## Current Read
 
 Adaptation is useful only when the target behavior is well specified and controls expose whether training
@@ -98,3 +110,12 @@ advantage, not a checkpoint label. The most informative continuation is a
 fresh outcome-routed pilot that estimates both teachers' verified continuation
 values before any update; reusing coarse quick/deep routing would repeat the
 measured mismatch.
+
+That continuation now resolves the next boundary. Same-prefix verification did
+find a replicated deep advantage, but four-branch three-way argmax did not
+produce a stable quick route. Absolute policy estimates correlated `0.79`--
+`0.86` across halves; conditioning on the largest noisy estimate caused the
+failure. The shortest clean update test is therefore fresh deep-only routed
+MOPD from the joint soup. Two-teacher composition should wait for cross-fitted
+direct advantage prediction and a third untouched block, not a larger fixed
+effect-size threshold.

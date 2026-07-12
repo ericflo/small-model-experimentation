@@ -228,3 +228,27 @@ registered harness cannot deploy it cleanly. The next experiment should freeze
 λ=.18, enlarge tool-answer capacity for every arm under matched compute, and
 measure rejected→changed-patch within two turns. This result does not support a
 transfer or benchmark claim.
+
+## qwen35_4b_same_prefix_advantage_routing (2026-07-12 — Route-gated negative)
+
+The clean successor to the two earlier specialist stops finally measured both
+same-origin policies on exact soup states. Across 384 fresh states and 9,216
+teacher/student continuations, deep independently passed both contrasts in
+both blocks; the combined router also passed. Quick did not: selected quick
+beat the soup by `+0.2009` in block 0 but lost by `-0.0253` in block 1. The
+frozen rule stopped before locality, MOPD, controls, or Menagerie.
+
+The mechanism audit rejects the tempting threshold repair. Quick block 1 had
+an apparent `+0.319` selection margin, yet only 6/26 states remained strict
+quick winners on independent audit. Requiring observed margins of `+0.10` or
+`+0.25` left the soup-relative audit mean negative. Absolute policy scores were
+reliable (`r=0.79`--`0.86`); statewise winner conditioning was not. Routing was
+also atom-heavy (101/288 atoms, 10/96 episodes), so composable episode evidence
+is especially thin.
+
+Read: deep is the first source policy to clear the intended local-teacher
+prerequisite, but the required two-teacher composition does not exist under
+this labeler. A new deep-only routed-MOPD experiment is the shortest test of
+the update kernel. Reintroducing quick requires cross-fitted direct advantage
+prediction and a third untouched block; otherwise retire it rather than tune a
+margin. This result is not evidence against MOPD.
