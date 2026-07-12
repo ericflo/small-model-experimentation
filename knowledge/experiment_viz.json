@@ -2,6 +2,27 @@
  "note": "Native chart specs for the research site, extracted from each experiment's own result files (runs/reports/analysis JSON+CSV and README/report tables) by per-experiment agent passes and kept only when every plotted value was located verbatim in the cited source by machine verification. Rendered by scripts/build_site.py (chart_svg/chart_figure); raw matplotlib figures remain available further down each experiment page.",
  "extracted_on": "2026-07-10",
  "experiments": {
+  "qwen35_4b_context_local_jacobian_clamp": {
+   "charts": [
+    {
+     "title": "Frozen fresh split sizes before scientific inference",
+     "kind": "bar",
+     "categories": ["lens fit", "causal-site selection", "untouched confirmation"],
+     "series": [
+      {
+       "label": "prompt-local lookup tables",
+       "values": [48, 24, 48]
+      }
+     ],
+     "x_label": "split role",
+     "y_label": "items",
+     "y_format": "number",
+     "note": "CPU design receipt only, not a model result. Every mapping tuple is unique across splits; source concepts are balanced.",
+     "source": "experiments/qwen35_4b_context_local_jacobian_clamp/runs/smoke/data_receipt.json",
+     "headline": true
+    }
+   ]
+  },
   "qwen35_4b_jacobian_value_transport": {
    "charts": [
     {

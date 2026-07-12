@@ -1,0 +1,60 @@
+schema_version: 1
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+  dtype: bfloat16
+  attention: sdpa
+  device: cuda:0
+
+seeds:
+  split: 2026071211
+  lens: 2026071212
+  selection: 2026071213
+  confirmation: 2026071214
+  controls: 2026071215
+  bootstrap: 2026071216
+
+data:
+  lens_fit_items: 48
+  band_selection_items: 24
+  confirmation_items: 48
+  concepts_per_table: 8
+
+lens:
+  source_layers: [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28]
+  concept_batch: 8
+  pseudoinverse_rtol: 1.0e-5
+  minimum_effective_rank: 24
+  max_sequence_tokens: 256
+
+intervention:
+  candidate_bands:
+    - [4, 5, 6, 7, 8]
+    - [8, 9, 10, 11, 12]
+    - [12, 13, 14, 15, 16]
+    - [16, 17, 18, 19, 20]
+    - [20, 21, 22, 23, 24]
+    - [24, 25, 26, 27, 28]
+  alpha: 1.0
+  patch_batch_size: 1
+  norm_match_relative_tolerance: 1.0e-5
+
+gates:
+  clean_accuracy_min: 0.80
+  clean_parse_rate_min: 0.95
+  donor_direct_target_rate_min: 0.60
+  donor_consequence_target_rate_min: 0.50
+  donor_target_minus_wrong_min: 0.30
+  j_direct_shift_min: 0.20
+  j_consequence_shift_min: 0.15
+  j_minus_random_min: 0.10
+  j_minus_wrong_target_min: 0.10
+  wrong_own_digit_shift_min: 0.10
+  max_parse_rate_drop: 0.05
+  bootstrap_resamples: 10000
+  bootstrap_lower_bound_min: 0.0
+
+design_boundary:
+  commit: TO_BE_RECORDED_AFTER_DESIGN_COMMIT
+  preregistration_sha256: TO_BE_RECORDED_AFTER_DESIGN_COMMIT
+  readme_sha256: TO_BE_RECORDED_AFTER_DESIGN_COMMIT

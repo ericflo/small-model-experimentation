@@ -2,6 +2,39 @@
  "note": "Plain-language practitioner briefs shown above the fold on each experiment page (verdict + the-one-idea/question/finding/why-it-matters + KPI numbers + per-chart how-to-read/takeaway). Authored per experiment from its own README/report and verified chart specs under a strict no-jargon ban-list; all jargon-precise detail stays below the fold. Regenerate with scripts/enrichment/generate_briefs.workflow.js (see docs/site_maintenance.md).",
  "generated_on": "2026-07-05",
  "experiments": {
+  "qwen35_4b_context_local_jacobian_clamp": {
+   "verdict_tag": "Stricter causal test is frozen; model result pending",
+   "concept_primer": "The first study could make the model say a replacement word, but the model did not reason from it. This follow-up edits the earlier place where that word is represented and checks whether a later lookup answer changes.",
+   "plain_question": "Can an internal edit change what the model computes from a chosen key, instead of only changing the next word it says?",
+   "plain_answer": "We do not know yet. The fresh lookup tables, untouched test split, stop rules, and failure checks are frozen before scientific model inference.",
+   "why_it_matters": "A real reasoning control should survive into a different consequence. This test blocks a tempting false positive in which an edit merely pushes the desired answer token directly.",
+   "verdict_tone": "pending",
+   "key_numbers": [
+    {
+     "label": "Separate fitting prompts",
+     "value": "48",
+     "sub": "used only to learn internal word directions"
+    },
+    {
+     "label": "Band-selection tables",
+     "value": "24",
+     "sub": "used only to locate a causal internal site"
+    },
+    {
+     "label": "Untouched confirmation tables",
+     "value": "48",
+     "sub": "opened once after the internal site is frozen"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Fresh data are separated by decision role",
+     "chart_read": "Each bar counts prompt-local lookup tables assigned to fitting, site selection, or untouched confirmation. These are design counts, not model scores.",
+     "chart_takeaway": "The final 48 tables cannot influence which internal depth is chosen."
+    }
+   ]
+  },
   "qwen35_4b_jacobian_value_transport": {
    "verdict_tag": "Can change the word, not the reasoning",
    "concept_primer": "Imagine knowing that a clue is written somewhere in a machine, but not knowing whether the machine can actually use it. This experiment follows the connection from an internal clue to the later answer, then carefully changes that connection.",

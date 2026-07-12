@@ -437,6 +437,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 
 - `qwen35_4b_adaptive_evidence_budget_policy` (track-z): [README](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md)
 - `qwen35_4b_bucket_belief_probe_ranker` (track-z): [README](../experiments/qwen35_4b_bucket_belief_probe_ranker/README.md)
+- `qwen35_4b_context_local_jacobian_clamp` (new): [README](../experiments/qwen35_4b_context_local_jacobian_clamp/README.md)
 - `qwen35_4b_deployable_information_ceiling_sweep` (track-z): [README](../experiments/qwen35_4b_deployable_information_ceiling_sweep/README.md)
 - `qwen35_4b_interactive_policy_curriculum` (new): [README](../experiments/qwen35_4b_interactive_policy_curriculum/README.md)
 - `qwen35_4b_learned_active_trace_policy` (track-z): [README](../experiments/qwen35_4b_learned_active_trace_policy/README.md)
@@ -513,6 +514,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 - `qwen35_4b_confidence_guided_compute` (new): [README](../experiments/qwen35_4b_confidence_guided_compute/README.md)
 - `qwen35_4b_constrained_coverage_dpo` (track-z): [README](../experiments/qwen35_4b_constrained_coverage_dpo/README.md)
 - `qwen35_4b_context_composition` (new): [README](../experiments/qwen35_4b_context_composition/README.md)
+- `qwen35_4b_context_local_jacobian_clamp` (new): [README](../experiments/qwen35_4b_context_local_jacobian_clamp/README.md)
 - `qwen35_4b_counterexample_directed_dsl` (track-z): [README](../experiments/qwen35_4b_counterexample_directed_dsl/README.md)
 - `qwen35_4b_coverage_banking` (new): [README](../experiments/qwen35_4b_coverage_banking/README.md)
 - `qwen35_4b_coverage_vs_selection` (new): [README](../experiments/qwen35_4b_coverage_vs_selection/README.md)

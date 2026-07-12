@@ -3,7 +3,7 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 13
-- Experiments: 214
+- Experiments: 215
 
 ## Structured Execution And Compilers
 
@@ -382,7 +382,7 @@ Grow, search, shortlist, compose, and stress-test reusable operator and skill ba
 Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and other update mechanisms.
 
 - Charter: [posttraining_and_adaptation](../research_programs/posttraining_and_adaptation/charter.md)
-- Assigned experiments: 63
+- Assigned experiments: 64
 
 ### Seed Evidence
 
@@ -404,6 +404,7 @@ Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and o
 - `qwen35_4b_banking_thinking_stack` (new): [README](../experiments/qwen35_4b_banking_thinking_stack/README.md)
 - `qwen35_4b_bucket_belief_probe_ranker` (track-z): [README](../experiments/qwen35_4b_bucket_belief_probe_ranker/README.md)
 - `qwen35_4b_constrained_coverage_dpo` (track-z): [README](../experiments/qwen35_4b_constrained_coverage_dpo/README.md)
+- `qwen35_4b_context_local_jacobian_clamp` (new): [README](../experiments/qwen35_4b_context_local_jacobian_clamp/README.md)
 - `qwen35_4b_decompose_compose_frontier` (new): [README](../experiments/qwen35_4b_decompose_compose_frontier/README.md)
 - `qwen35_4b_deployable_information_ceiling_sweep` (track-z): [README](../experiments/qwen35_4b_deployable_information_ceiling_sweep/README.md)
 - `qwen35_4b_gauntlet_breadth_round1` (new): [README](../experiments/qwen35_4b_gauntlet_breadth_round1/README.md)
@@ -462,7 +463,7 @@ Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and o
 Train or evaluate small models as controllers over tools, verifiers, budgets, and intermediate actions.
 
 - Charter: [process_control_and_tool_use](../research_programs/process_control_and_tool_use/charter.md)
-- Assigned experiments: 32
+- Assigned experiments: 33
 
 ### Seed Evidence
 
@@ -478,6 +479,7 @@ Train or evaluate small models as controllers over tools, verifiers, budgets, an
 - `qwen35_4b_bucket_belief_probe_ranker` (track-z): [README](../experiments/qwen35_4b_bucket_belief_probe_ranker/README.md)
 - `qwen35_4b_code_confidence` (new): [README](../experiments/qwen35_4b_code_confidence/README.md)
 - `qwen35_4b_context_composition` (new): [README](../experiments/qwen35_4b_context_composition/README.md)
+- `qwen35_4b_context_local_jacobian_clamp` (new): [README](../experiments/qwen35_4b_context_local_jacobian_clamp/README.md)
 - `qwen35_4b_deployable_information_ceiling_sweep` (track-z): [README](../experiments/qwen35_4b_deployable_information_ceiling_sweep/README.md)
 - `qwen35_4b_interactive_policy_curriculum` (new): [README](../experiments/qwen35_4b_interactive_policy_curriculum/README.md)
 - `qwen35_4b_latent_decomposition` (new): [README](../experiments/qwen35_4b_latent_decomposition/README.md)
@@ -626,7 +628,7 @@ Stress whether mechanisms transfer across substrates, families, lengths, distrib
 Measure why methods work or fail through attribution, probes, pressure audits, and controlled ablations.
 
 - Charter: [interpretability_and_diagnostics](../research_programs/interpretability_and_diagnostics/charter.md)
-- Assigned experiments: 56
+- Assigned experiments: 57
 
 ### Seed Evidence
 
@@ -640,6 +642,7 @@ Measure why methods work or fail through attribution, probes, pressure audits, a
 - `qwen35_4b_adaptive_evidence_budget_policy` (track-z): [README](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md)
 - `qwen35_4b_code_abi_oracle_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/README.md)
 - `qwen35_4b_code_confidence` (new): [README](../experiments/qwen35_4b_code_confidence/README.md)
+- `qwen35_4b_context_local_jacobian_clamp` (new): [README](../experiments/qwen35_4b_context_local_jacobian_clamp/README.md)
 - `qwen35_4b_coverage_banking` (new): [README](../experiments/qwen35_4b_coverage_banking/README.md)
 - `qwen35_4b_foofah_program_ensemble_consensus` (track-z): [README](../experiments/qwen35_4b_foofah_program_ensemble_consensus/README.md)
 - `qwen35_4b_gauntlet_breadth_round1` (new): [README](../experiments/qwen35_4b_gauntlet_breadth_round1/README.md)

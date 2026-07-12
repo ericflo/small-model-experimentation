@@ -1,0 +1,57 @@
+{
+  "alpha": 1.0,
+  "candidate_bands": [
+    [
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    [
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    [
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    [
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    [
+      20,
+      21,
+      22,
+      23,
+      24
+    ],
+    [
+      24,
+      25,
+      26,
+      27,
+      28
+    ]
+  ],
+  "data_manifest_sha256": "8903ba1f309b58a070fa79642f11dc1c5203b02c9abfa09c22eca7bf6fde1591",
+  "passed": true,
+  "schema_version": 1,
+  "scientific_result": false,
+  "split_sizes": {
+    "band_selection": 24,
+    "confirmation": 48,
+    "lens_fit": 48
+  },
+  "stage": "cpu_smoke"
+}
