@@ -24,11 +24,11 @@ def shared_prefix(item: dict[str, Any], *, selected: str | None = None) -> str:
 
 
 def direct_prompt(item: dict[str, Any], *, selected: str | None = None) -> str:
-    return shared_prefix(item, selected=selected) + "\nRepeat the selected key exactly. Key:"
+    return shared_prefix(item, selected=selected) + "\nRepeat the selected key exactly."
 
 
 def consequence_prompt(item: dict[str, Any], *, selected: str | None = None) -> str:
-    return shared_prefix(item, selected=selected) + "\nReturn its one-digit table value. Value: "
+    return shared_prefix(item, selected=selected) + "\nReturn its one-digit table value."
 
 
 def digit_for(item: dict[str, Any], concept: str) -> str:

@@ -26,7 +26,18 @@
       "north",
       "south"
     ],
-    "count": 24
+    "digits": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
+    ]
   },
   "model_id": "Qwen/Qwen3.5-4B",
   "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
@@ -43,8 +54,8 @@
   "splits": {
     "band_selection": {
       "example_character_lengths": {
-        "consequence": 157,
-        "direct": 153,
+        "consequence_user": 149,
+        "direct_user": 148,
         "shared_prefix": 115
       },
       "items": 24,
@@ -80,8 +91,8 @@
     },
     "confirmation": {
       "example_character_lengths": {
-        "consequence": 156,
-        "direct": 152,
+        "consequence_user": 148,
+        "direct_user": 147,
         "shared_prefix": 114
       },
       "items": 48,
@@ -117,8 +128,8 @@
     },
     "lens_fit": {
       "example_character_lengths": {
-        "consequence": 157,
-        "direct": 153,
+        "consequence_user": 149,
+        "direct_user": 148,
         "shared_prefix": 115
       },
       "items": 48,

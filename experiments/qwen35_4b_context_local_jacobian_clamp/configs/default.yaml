@@ -38,6 +38,8 @@ intervention:
   alpha: 1.0
   patch_batch_size: 1
   norm_match_relative_tolerance: 1.0e-5
+  causal_activation_atol: 1.0e-3
+  clean_batch_logit_atol: 5.0e-2
 
 gates:
   clean_accuracy_min: 0.80
