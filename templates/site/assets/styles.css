@@ -68,6 +68,8 @@ body {
 
 a { color: var(--accent-ink); text-decoration: none; overflow-wrap: anywhere; }
 a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+:focus:not(:focus-visible) { outline: none; }
 code, pre { font-family: var(--mono); font-size: 0.85em; }
 code { overflow-wrap: anywhere; } /* long paths/slugs must not widen the page */
 h1, h2, h3, h4 { font-family: var(--display); font-weight: 550; letter-spacing: -0.01em; line-height: 1.15; text-wrap: balance; }
