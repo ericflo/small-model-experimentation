@@ -2059,41 +2059,46 @@
    ]
   },
   "qwen35_4b_coverage_banking": {
-   "verdict_tag": "Self-study raises the solving ceiling",
-   "concept_primer": "Imagine a student who reviews only their own past correct solutions. That self-study could pay off two ways: nailing familiar problems on the first try, or finally cracking harder ones they never solved before.",
-   "plain_question": "If a small AI reviews its own correct answers, does it just get faster at what it already knew, or can it start solving problems it never could?",
-   "plain_answer": "Both. After the model studied its own verified correct answers, it solved easy problems on the first try far more often (60% to 80%) and tripled how many harder problems it could ever solve (15% to 45%) — beating the do-nothing option of just retrying the original model.",
-   "why_it_matters": "If you plan to let a model make several attempts anyway, first have it study its own past correct solutions: the ceiling of what it can solve rises, not just its speed. But self-study cannot teach a difficulty it never once solved.",
+   "verdict_tag": "Training on its own wins unlocks new problems",
+   "concept_primer": "Picture the model as an archer whose arrows scatter around wherever it aims. Training it on its own rare bullseyes does not widen the spread — it re-aims the whole cluster onto correct answers, so shots that always used to miss now land.",
+   "plain_question": "If a small model trains only on the coding problems it already solved on its own, does it just get faster at those, or start solving harder ones it never could?",
+   "plain_answer": "Both — and the second is the surprise. On easy problems it simply commits to the answer it already knew, lifting first-try success from 60% to 80%. On a harder tier it had cracked only 15% of the time even across 16 tries, self-training tripled that to 45% — on brand-new problems, proposing correct solutions it had never once sampled.",
+   "why_it_matters": "When a small model stalls, harvest its own checkable correct answers and fine-tune on them before paying for a bigger model or a teacher. Where you have enough verified examples, this lifts the whole ceiling, not just sharpens easy wins.",
    "verdict_tone": "positive",
    "key_numbers": [
     {
-     "label": "Easy problems solved on first try",
+     "label": "First-try success on easy problems",
      "value": "60% → 80%",
-     "sub": "faster at what it already knew (self-study)"
+     "sub": "one answer, no extra sampling — it commits to what it already knew"
     },
     {
-     "label": "Harder problems ever solved",
+     "label": "Hard problems solved within 16 tries",
      "value": "15% → 45%",
-     "sub": "tripled — cracked ones it never had before"
+     "sub": "tripled, on brand-new problems it never trained on"
     },
     {
-     "label": "Hardest problems solved",
-     "value": "0% (no change)",
-     "sub": "no self-solved examples to learn from"
+     "label": "Different programs tried per hard problem",
+     "value": "11.5 → 10.85",
+     "sub": "variety fell slightly, yet it solved more — aim shifted, not spread"
+    },
+    {
+     "label": "The two hardest tiers",
+     "value": "0%",
+     "sub": "stayed unsolved — no wins existed there to learn from"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Self-study helps easy problems on first try, harder problems overall",
-     "chart_read": "Bars are grouped by problem difficulty (level 1 easiest to level 4 hardest). Within each group, four bars: the original model's first try, the original with many tries, the self-taught model's first try, and the self-taught with many tries. Taller means more problems solved.",
-     "chart_takeaway": "For easy problems the self-taught first-try bar rises toward the many-tries level; for the next-harder problems the self-taught many-tries bar triples above the original, while the hardest groups stay flat at zero."
+     "chart_plain_title": "How self-training changed solve rates across four difficulty tiers",
+     "chart_read": "Four difficulty tiers along the bottom, easiest at left. Each tier shows four bars: the base model's single first answer, the base allowed 16 tries, the self-trained model's single answer, and the self-trained model over 16 tries. Taller means more solved; higher is better.",
+     "chart_takeaway": "At the easiest tier the self-trained single-answer bar jumps up; at the second tier its 16-try bar triples the base's — a whole tier's ceiling lifted. Deeper tiers stay empty."
     },
     {
      "index": 1,
-     "chart_plain_title": "On harder problems, self-study solves far more at every number of tries",
-     "chart_read": "Horizontal axis is how many tries the model gets (1 up to 16); vertical axis is the share of harder problems it solves. One line is the original model, the other the self-taught model. Higher is better.",
-     "chart_takeaway": "The self-taught line sits well above the original at every try count and ends about three times higher, meaning it reaches harder problems the original never solved even with all 16 tries."
+     "chart_plain_title": "On hard problems, more tries pay off far more after self-training",
+     "chart_read": "For the harder tier, the share of problems solved as attempts climb from one to sixteen. The lower, flatter line is the base model; the upper, steeper line is the self-trained model. Higher is better.",
+     "chart_takeaway": "The self-trained line sits above the base at every attempt count and keeps climbing, ending at three times the base's solve rate — the ceiling itself rose."
     }
    ]
   },
@@ -3167,52 +3172,52 @@
    ]
   },
   "qwen35_4b_gauntlet_frontier": {
-   "verdict_tag": "Each puzzle tier winnable, but not both together",
-   "concept_primer": "Think of a small AI as a tiny backpack with fixed room inside. You can pack it well for one kind of trip, but cramming in gear for a second trip means leaving something out. Skills compete for the same limited space.",
-   "plain_question": "Can training tricks push a small AI past the point where it stops improving on puzzles, and can one trained version handle both the quicker and the harder puzzles at once?",
-   "plain_answer": "It depends. Training the model on its own correct answers gave one jump, then stalled at a plateau. New tricks pushed it well past that plateau on either the quicker puzzles or the harder reasoning puzzles, but never both in one version. Skills competed for the small model's limited room.",
-   "why_it_matters": "When tuning a small model, expect to choose which skills to optimize for. Broad quick tasks and deep reasoning may not fit one trained version. Plan to train and deploy separate specialists, or knowingly accept a trade-off between them.",
+   "verdict_tag": "Small model wins speed or reasoning, never both",
+   "concept_primer": "Picture a small model as a hiker with one fixed-size backpack, packing for two races at once: a sprint and a marathon. Every item that helps win the sprint crowds out gear the marathon needs. One pack can win either race, never both.",
+   "plain_question": "If you fine-tune a small model to master both quick tasks and slow, deep reasoning tasks, can one model end up great at both at once?",
+   "plain_answer": "No. Tune a four-billion-parameter model until it clears the bar on quick tasks and it slips on deep reasoning; tune it the other way and the reverse happens. Each tier is beatable alone — scores climbed from about a tenth right to over half — but both skills draw on one fixed pool of capacity, so no single model holds both records, and splitting the difference loses on both.",
+   "why_it_matters": "Deploying one small model across mixed work? Don't expect a single fine-tune to top every task. Ship a specialist adapter per tier and route between them, or pick the tier that matters and accept the other slips.",
    "verdict_tone": "mixed",
    "key_numbers": [
     {
-     "label": "Best gain on the quicker puzzles",
-     "value": "+41%",
-     "sub": "one version's average lift in share of puzzles solved over the untrained model"
+     "label": "Best gain on quick tasks",
+     "value": "+41 points",
+     "sub": "the speed-tuned recipe — but only +31 on the deep tier"
     },
     {
-     "label": "Best gain on the harder puzzles",
-     "value": "+35%",
-     "sub": "a different version's lift, the first to clear the plateau on hard puzzles"
+     "label": "Best gain on deep reasoning tasks",
+     "value": "+35 points",
+     "sub": "a different recipe, first to clear the deep tier — but only +31 on quick tasks"
     },
     {
-     "label": "The plateau each version had to beat",
-     "value": "+32%",
-     "sub": "the point where training on the model's own answers stopped helping"
+     "label": "Recipes that aced both tiers",
+     "value": "0 of 10",
+     "sub": "none of ten tuning recipes cleared both tiers, across 28 paired tests"
     },
     {
-     "label": "Hardest items still out of reach",
-     "value": "about 1 in 3",
-     "sub": "puzzles the model cannot crack even given six tries"
+     "label": "Task success, untuned vs best tuned",
+     "value": "about 12% → 52%",
+     "sub": "base model vs best tuned model, on a 0-to-100 scale"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "No single version tops both the quick and the hard puzzles",
-     "chart_read": "Bars grouped by trained version: one tuned for the quicker puzzles, one for the harder ones, and an in-between mix. For each, one color is its gain on the quicker puzzles, the other on the harder puzzles, versus an untrained model. Higher is better; a line marks the plateau to beat.",
-     "chart_takeaway": "In every pair, one bar clears the line and the other falls short. No version shows two tall bars, so improving one tier costs the other."
+     "chart_plain_title": "Each recipe wins one task tier; none clears both",
+     "chart_read": "Three tuning recipes sit along the bottom; each shows two bars — its gain on quick tasks and its gain on deep reasoning tasks, both measured against the untuned model. A line marks the passing bar; taller bars are better. Watch which recipe crosses the line on which tier.",
+     "chart_takeaway": "The speed recipe's quick bar towers but its deep bar falls short; the reasoning recipe flips it; the middle compromise recipe clears neither — a trade-off you can't split."
     },
     {
      "index": 1,
-     "chart_plain_title": "Which harder puzzle skills the new training finally improved",
-     "chart_read": "Each bar is one kind of harder puzzle skill: spotting a hidden rule, finding the best arrangement, knowing when to say unknown, sorting by priority, and fixing broken items. Bar height is the gain over an untrained model; higher is better.",
-     "chart_takeaway": "Most skills rose, two of them sharply, but the deep-repair skill barely moved, sitting near zero, one stubborn puzzle type that still resists the training."
+     "chart_plain_title": "Where the reasoning fix helped, and the one task it didn't",
+     "chart_read": "Five kinds of deep reasoning task run along the bottom; each bar shows how much the reasoning-tuned recipe improved on that task over the untuned model. Taller is better, and a bar dipping below zero means the model actually got a little worse there.",
+     "chart_takeaway": "Four tasks jump — knowing when to decline and triage most of all — but deep repair sits just below zero, the single skill no recipe could teach."
     },
     {
      "index": 2,
-     "chart_plain_title": "Why the hardest puzzles fail: truly too hard versus just too slow",
-     "chart_read": "Two bars splitting the hardest puzzles. One is the share the model cannot solve even in six tries, a genuine skill gap. The other is the share it can solve but sometimes too slowly to finish in the allowed time. Taller means a bigger share.",
-     "chart_takeaway": "The taller bar shows most hard puzzles are solvable-but-slow, not impossible, meaning better use of thinking time, not raw ability, is the main gap."
+     "chart_plain_title": "Why deep tasks fail: mostly too slow, not truly impossible",
+     "chart_read": "The hardest items split into two bars: the share the model can't crack even given six tries, versus the share it can solve but sometimes thinks too slowly to fit its answer budget. A taller right bar means the ceiling is time, not ability.",
+     "chart_takeaway": "Nearly two-thirds are solvable-but-slow, so most of the ceiling is a time-budget wall the model can be trained to compress around — not a hard limit of ability."
     }
    ]
   },
@@ -4272,35 +4277,40 @@
    ]
   },
   "qwen35_4b_native_thought_seam_budget_ladder": {
-   "verdict_tag": "Model never finished its own reasoning",
-   "concept_primer": "Picture a student solving a puzzle on scratch paper. They are meant to work it out, draw a line to signal they are done, then write a final answer. This small AI does the same hidden scratch work before answering.",
-   "plain_question": "When a small AI works through list puzzles on hidden scratch paper, how much scratch space does it need before it naturally wraps up and writes a final answer?",
-   "plain_answer": "No. Given room for 256, 512, or even 1,024 thinking steps, the model never once drew its finish line to write an answer. All 48 tries ran straight into the ceiling, so no workable amount of scratch space could be found.",
-   "why_it_matters": "Do not assume a small reasoning model will stop and commit on its own. On these tasks it kept thinking until it ran out of room, so plan to cut it off and force a final answer.",
+   "verdict_tag": "It never stopped thinking to give an answer",
+   "concept_primer": "Picture a test-taker handed scratch paper and told to write DONE the moment they are ready to commit an answer. A small reasoning model works the same way: it thinks privately on scratch, then must signal it is finished before any answer comes out.",
+   "plain_question": "If you give a small reasoning model more and more room to think, will it eventually decide it is finished and hand you an answer on its own?",
+   "plain_answer": "No. Across all 48 runs the model never once signaled it was finished, even when given more than a thousand tokens of thinking room. It was not stuck in a loop — the scratch work showed it genuinely kept re-checking the task, just never deciding it was done. Extra room bought nothing: the test needed most runs to stop on their own, and none did.",
+   "why_it_matters": "If your pipeline waits for a small reasoning model to end its own thinking, it may wait forever. Build an explicit stop-and-answer step instead of trusting voluntary closure, and verify the forced answer actually parses.",
    "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Times it wrapped up on its own",
+     "label": "Times it stopped and answered on its own",
      "value": "0 of 48",
-     "sub": "tries that produced a finished answer"
+     "sub": "traces that ended reasoning voluntarily"
     },
     {
-     "label": "Times it ran out of room",
+     "label": "Times it used every token still thinking",
      "value": "48 of 48",
-     "sub": "tries that hit the thinking limit"
+     "sub": "hit the full 1,024-token ceiling"
     },
     {
-     "label": "Largest scratch space tried",
-     "value": "1,024 steps",
-     "sub": "still never reached a finish"
+     "label": "Stop rate the test demanded to pick a budget",
+     "value": "80%",
+     "sub": "minimum needed; it got zero"
+    },
+    {
+     "label": "Thinking tokens generated, none reaching a stop",
+     "value": "49,152",
+     "sub": "sampled across the whole ladder"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Never wrapped up, always hit the ceiling, at every budget",
-     "chart_read": "Three thinking budgets sit along the bottom (256, 512, 1,024 steps). Height shows the share of 48 tries. One bar per budget counts tries that wrapped up on their own (higher is better); the other counts tries that hit the ceiling (lower is better).",
-     "chart_takeaway": "The wrap-up bars sit flat at zero while the ceiling bars fill completely at all three budgets: the model never finished, no matter how much scratch space it got."
+     "chart_plain_title": "How often the model stopped on its own versus ran out of room",
+     "chart_read": "Three thinking-budget sizes along the bottom: 256, 512, and 1,024 tokens. Each has two bars — the share of 48 runs that stopped and answered on their own, where taller is better, and the share that used every token without stopping.",
+     "chart_takeaway": "The stopped-on-its-own bars sit flat at zero for every budget while the ran-out bars stand at full height, so more room changed nothing at all."
     }
    ]
   },
