@@ -2,7 +2,8 @@
 
 ## Status
 
-Design-frozen; no scientific model outcome has been opened.
+Design-frozen; model plumbing smoke passed; no scientific selection outcome has
+been opened.
 
 ## Purpose
 
@@ -18,7 +19,11 @@ close token is injected and no cap-bound trace receives an answer continuation.
 
 ## Results
 
-Pending model smoke, budget selection, and eligible confirmation.
+The non-result-bearing smoke loaded the exact pinned 32-layer, 2560-wide model,
+verified all special/alias token IDs, rendered a 472-token prompt, and sampled
+eight tokens. Its forward-input lengths were `[472, 1, 1, 1, 1, 1, 1, 1]`, so
+the prefill-plus-KV-cache contract passed. Correctness was not computed or
+stored. Budget selection and eligible confirmation remain pending.
 
 ## Interpretation Boundary
 

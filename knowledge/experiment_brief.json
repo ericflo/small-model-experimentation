@@ -6,7 +6,7 @@
    "verdict_tag": "A fresh natural-reasoning budget test is frozen and ready",
    "concept_primer": "The previous study stopped before its main question because every model response was still reasoning when the 160-token limit arrived. This follow-up first finds a limit at which the model can finish naturally, then checks that choice on new tasks.",
    "plain_question": "What is the smallest reasoning allowance that lets the model naturally finish and give a usable answer often enough for the next internal-state experiment?",
-   "plain_answer": "Not yet: the experiment is preregistered but no model outcome has been opened. It will compare 256, 512, and 1,024 reasoning steps on 16 fresh tasks, choose the smallest passing allowance, and test only that choice on 24 untouched tasks.",
+   "plain_answer": "Not yet: the model and fast-generation plumbing check passed, but no scientific selection result has been opened. The study will compare 256, 512, and 1,024 reasoning steps on 16 fresh tasks, choose the smallest passing allowance, and test only that choice on 24 untouched tasks.",
    "why_it_matters": "A promising-looking score after forcing the model to stop would describe an artificial state. Confirming a naturally reached answer boundary first keeps the later search for an internal promise signal honest.",
    "verdict_tone": "neutral",
    "key_numbers": [
@@ -21,9 +21,9 @@
      "sub": "256, 512, and 1,024 steps"
     },
     {
-     "label": "Model outcomes opened",
+     "label": "Scientific outcomes opened",
      "value": "0",
-     "sub": "the design review and CPU checks came first"
+     "sub": "the design review and outcome-blind plumbing check came first"
     }
    ],
    "charts": [

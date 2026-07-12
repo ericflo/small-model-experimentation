@@ -89,9 +89,12 @@ After the immutable design boundary is anchored:
 
 ## Status
 
-Design and adversarial review complete before any model call. CPU smoke passes:
-40/40 fresh unique tasks, zero parent overlap, and every terminal gate is
-mathematically reachable. Scientific outcomes remain unopened.
+Design and adversarial review were frozen before any model call. CPU smoke
+passes: 40/40 fresh unique tasks, zero parent overlap, and every terminal gate
+is mathematically reachable. The outcome-blind model smoke also passes: exact
+model/token contracts and a 472-token prefill followed only by one-token cached
+forwards. It generated eight diagnostic tokens and recorded no correctness.
+Scientific selection outcomes remain unopened.
 
 ## Scope
 

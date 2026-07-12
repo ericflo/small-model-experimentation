@@ -15,6 +15,7 @@ reproducibility:
     --stage seam-confirmation
   required_external_artifacts: []
 notes: >-
-  At design time, all generated procedural data and CPU receipts are committed.
-  No model call has occurred and no artifact is external or omitted. Scientific
-  rows will be buffered to stage completion and committed if their stage runs.
+  All generated procedural data, CPU receipts, the immutable design receipt, and
+  the outcome-blind model-smoke receipt are committed. No artifact is external
+  or omitted. Scientific rows will be buffered to stage completion and committed
+  if their stage runs.
