@@ -1,0 +1,67 @@
+{
+  "correctness_recorded": false,
+  "counterfactual_policy_acknowledged": true,
+  "elapsed_seconds": 7.225608788430691,
+  "environment": {
+    "gpu": "NVIDIA RTX 6000 Ada Generation",
+    "peak_allocated_bytes": 8511728640,
+    "torch": "2.11.0+cu129",
+    "transformers": "5.13.0"
+  },
+  "forced_cache_contract_pass": true,
+  "forced_close_injected": true,
+  "forced_forward_input_lengths": [
+    384,
+    1
+  ],
+  "lens_ranks": {
+    "4": 24,
+    "5": 24,
+    "6": 24,
+    "7": 24,
+    "8": 24
+  },
+  "model": {
+    "hidden_size": 2560,
+    "id": "Qwen/Qwen3.5-4B",
+    "layers": 32,
+    "load_seconds": 4.614151507616043,
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "vocab_size": 248320
+  },
+  "outcomes_recorded": false,
+  "passed": true,
+  "schema_version": 1,
+  "scientific_result": false,
+  "stage": "model_smoke",
+  "token_ids": {
+    "aliases": {
+      "apple": 22544,
+      "cat": 7993,
+      "circle": 12307,
+      "dog": 5388,
+      "gold": 6414,
+      "horse": 14780,
+      "lemon": 28503,
+      "ocean": 17415,
+      "river": 14367,
+      "silver": 14527,
+      "square": 9057,
+      "tiger": 49993
+    },
+    "eos": 248044,
+    "think_close": 248069,
+    "think_open": 248068
+  },
+  "trace_cache_contract_pass": true,
+  "trace_forward_input_lengths": [
+    375,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ]
+}

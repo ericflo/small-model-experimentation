@@ -2,7 +2,7 @@
 
 ## Status
 
-Design-frozen; no model outcome has been opened.
+Design-frozen; outcome-blind model smoke passed; scientific outcomes unopened.
 
 ## Purpose
 
@@ -20,9 +20,16 @@ causal stages are strictly gated and currently refuse placeholders.
 
 ## Results
 
-CPU smoke only: 96/96 unique fresh exact-depth-two tasks, zero overlap with all
-three scientific parents, no visible depth-one fits, exact replicated lens hash,
-and reachable seam gates. Model outcomes remain unopened.
+CPU smoke produced 96/96 unique fresh exact-depth-two tasks, zero overlap with
+all three scientific parents, no visible depth-one fits, exact replicated lens
+hash, and reachable seam gates.
+
+The non-result-bearing model smoke verified the exact pinned model, special and
+alias token IDs, and rank 24 at lens layers 4--8. Its native trace forward input
+lengths were `[375, 1, 1, 1, 1, 1, 1, 1]`; forced replay appended eight thought
+tokens plus close and used `[384, 1]`. Both cache audits passed. Close injection
+was explicitly marked counterfactual and no correctness was computed or stored.
+Scientific seam selection remains unopened.
 
 ## Interpretation Boundary
 

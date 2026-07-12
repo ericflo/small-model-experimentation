@@ -94,9 +94,12 @@ committed; the runner refuses to emit placeholder value or causal results.
 
 ## Status
 
-Design and adversarial review complete before any model call. CPU smoke passes:
-96 unique fresh exact-depth tasks, zero parent overlap, exact lens hash, and
-reachable seam gates. Scientific outcomes remain unopened.
+Design and the 46-threat adversarial review were frozen before model calls. CPU
+smoke passes: 96 unique fresh exact-depth tasks, zero parent overlap, exact lens
+hash, and reachable seam gates. The outcome-blind model smoke also passes: all
+five lens matrices have rank 24, native trace caching is `[375, 1x7]`, and the
+explicit forced replay is `[384, 1]`. It injected close but recorded no
+correctness. Scientific outcomes remain unopened.
 
 ## Scope
 

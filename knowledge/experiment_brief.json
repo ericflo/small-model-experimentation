@@ -6,7 +6,7 @@
    "verdict_tag": "A controlled commit-now test is frozen and ready",
    "concept_primer": "The model kept reasoning past every natural finishing limit. This study makes stopping an explicit controller action, checks whether the resulting answers are usable, and only then looks for an internal signal that separates promising from weak unfinished work.",
    "plain_question": "If a fixed budget controller tells the model to stop reasoning and answer now, can an internal promise signal identify and improve the unfinished thoughts that will answer correctly?",
-   "plain_answer": "Not yet: the design, adversarial review, fresh tasks, and CPU checks are complete, but no model outcome has been opened. The study must first prove that forced answers reliably finish and retain both successes and failures on new tasks.",
+   "plain_answer": "Not yet: the design, adversarial review, fresh tasks, and fast-generation plumbing all passed, but no scientific answer result has been opened. The study must first prove that forced answers reliably finish and retain both successes and failures on new tasks.",
    "why_it_matters": "An externally chosen stop can be a real deployed method, but only if it is tested honestly as the same action everywhere. This avoids pretending the model finished naturally and prevents another artificial answer boundary from producing a misleading internal score.",
    "verdict_tone": "neutral",
    "key_numbers": [
@@ -21,9 +21,9 @@
      "sub": "completed before any model call"
     },
     {
-     "label": "Model outcomes opened",
+     "label": "Scientific outcomes opened",
      "value": "0",
-     "sub": "forced-answer usability must come first"
+     "sub": "the outcome-blind close-and-cache check came first"
     }
    ],
    "charts": [

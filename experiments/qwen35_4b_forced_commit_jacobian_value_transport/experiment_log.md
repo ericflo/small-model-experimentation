@@ -13,3 +13,14 @@
 - CPU smoke generated 96/96 unique fresh tasks, zero parent overlap, no visible
   depth-one shortcut, exact lens hash, and reachable seam gates.
 - Scientific outcomes remain unopened.
+
+## 2026-07-12 — Outcome-blind model smoke
+
+- Ran only after the reviewed design and hash anchor were pushed.
+- Verified pinned Qwen3.5-4B, exact special/alias tokens, and rank-24 lens
+  matrices at all five frozen layers.
+- Native trace cache audit: `[375, 1, 1, 1, 1, 1, 1, 1]`.
+- Explicit forced replay audit: `[384, 1]` after appending eight thought tokens
+  and exactly one close token.
+- Recorded the action as counterfactual; no answer correctness was computed.
+- Scientific seam selection remains unopened.

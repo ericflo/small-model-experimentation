@@ -1,0 +1,19 @@
+{
+  "design_commit": "25a93b5cce1344b3e1dc6a3da378ae422b82a84d",
+  "design_is_ancestor": true,
+  "expected_sha256": {
+    "preregistration": "081e2b76c290fcffb8cf911f78758918b4bd82122845a41dbc2b99636a16000f",
+    "readme": "3b5201548938ac7170fc54c2856d844842d1894aa4d52ddda2516c39e36f3e9e"
+  },
+  "head": "70ee440fc5d70f8e2df3e43fe02748a76ae506cb",
+  "lens_expected_sha256": "e373b6e93956fdfc5cb446e9bee8249655707c8258a7868f0653d11f1ffd0213",
+  "lens_observed_sha256": "e373b6e93956fdfc5cb446e9bee8249655707c8258a7868f0653d11f1ffd0213",
+  "observed_sha256": {
+    "preregistration": "081e2b76c290fcffb8cf911f78758918b4bd82122845a41dbc2b99636a16000f",
+    "readme": "3b5201548938ac7170fc54c2856d844842d1894aa4d52ddda2516c39e36f3e9e"
+  },
+  "passed": true,
+  "schema_version": 1,
+  "scientific_result": false,
+  "stage": "design_boundary"
+}
