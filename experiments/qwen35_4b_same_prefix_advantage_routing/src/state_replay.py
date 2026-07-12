@@ -29,6 +29,7 @@ def build_atom_state(
     prefix_min_tokens: int,
     prefix_max_tokens: int,
     failure_ceiling: float,
+    require_failure: bool = True,
 ) -> dict[str, Any] | None:
     """Convert one failed autonomous atom completion into an exact prefix state."""
     outputs = row.get("outputs") or []
@@ -38,7 +39,10 @@ def build_atom_state(
     score = float(output["score"])
     if not math.isfinite(score):
         raise ValueError("atom score must be finite")
-    if score >= failure_ceiling:
+    is_failure = score < failure_ceiling
+    if require_failure and not is_failure:
+        return None
+    if not require_failure and is_failure:
         return None
     token_ids = [int(value) for value in output["token_ids"]]
     if think_close_token_id in token_ids:
@@ -63,6 +67,7 @@ def build_atom_state(
         "gold": row["gold"],
         "answer_domain": row.get("answer_domain"),
         "student_terminal_score": score,
+        "source_outcome": "failure" if is_failure else "success",
         "student_full_token_ids": token_ids,
         "student_prefix_ids": prefix_ids,
         "student_suffix_ids": token_ids[prefix_length:],
@@ -136,19 +141,27 @@ def build_episode_state(
     *,
     block: int,
     failure_ceiling: float,
+    require_failure: bool = True,
 ) -> dict[str, Any] | None:
     """Select the state before the first invalid action, else the final action."""
     score = float(row["score"])
     if not math.isfinite(score):
         raise ValueError("episode score must be finite")
-    if score >= failure_ceiling:
+    is_failure = score < failure_ceiling
+    if require_failure and not is_failure:
+        return None
+    if not require_failure and is_failure:
         return None
     turns = list(row.get("turns") or [])
     if not turns:
         return None
-    selected_index = next(
-        (index for index, turn in enumerate(turns) if not bool(turn["action_ok"])),
-        len(turns) - 1,
+    selected_index = (
+        next(
+            (index for index, turn in enumerate(turns) if not bool(turn["action_ok"])),
+            len(turns) - 1,
+        )
+        if is_failure
+        else len(turns) - 1
     )
     selected = turns[selected_index]
     past_turns = [
@@ -171,6 +184,7 @@ def build_episode_state(
         "ep_seed": int(row["ep_seed"]),
         "source_id": str(row["rid"]),
         "student_terminal_score": score,
+        "source_outcome": "failure" if is_failure else "success",
         "system_prompt": str(row["system_prompt"]),
         "initial_observation": str(row["initial_observation"]),
         "past_turns": past_turns,
@@ -188,7 +202,11 @@ def build_episode_state(
         "selection_reason": (
             "first_invalid_action"
             if not bool(selected["action_ok"])
-            else "final_action_after_terminal_failure"
+            else (
+                "final_action_after_terminal_failure"
+                if is_failure
+                else "successful_final_action_anchor"
+            )
         ),
     }
     payload["state_id"] = _state_id("episode", payload)
@@ -235,4 +253,3 @@ def select_balanced_states(
     if len(identities) != len(set(identities)):
         raise ValueError("balanced state selection produced duplicate IDs")
     return sorted(selected, key=lambda row: row["state_id"])
-

@@ -51,6 +51,9 @@ def main() -> int:
     parser.add_argument("--states", type=Path, required=True)
     parser.add_argument("--model", type=Path, required=True)
     parser.add_argument("--policy", choices=tuple(POLICY_OFFSET), required=True)
+    parser.add_argument(
+        "--branch-mode", choices=("qualification", "selection"), default="qualification"
+    )
     parser.add_argument("--block-seed", type=int, required=True)
     parser.add_argument("--out-dir", type=Path, required=True)
     args = parser.parse_args()
@@ -64,9 +67,13 @@ def main() -> int:
         raise SystemExit("branch policy must be an explicitly merged composite")
     args.out_dir.mkdir(parents=True, exist_ok=True)
     route = config["route"]
-    total_branches = int(route["selection_branches_per_policy"]) + int(
-        route["audit_branches_per_policy"]
+    selection_branches = int(route["selection_branches_per_policy"])
+    audit_branches = (
+        int(route["audit_branches_per_policy"])
+        if args.branch_mode == "qualification"
+        else 0
     )
+    total_branches = selection_branches + audit_branches
     generation = config["generation"]
     run_seed = int(args.block_seed) + POLICY_OFFSET[args.policy]
     tokenizer = AutoTokenizer.from_pretrained(
@@ -186,10 +193,11 @@ def main() -> int:
         "model": str(args.model.resolve()),
         "model_merge_receipt_sha256": sha256_file(args.model / "merge_receipt.json"),
         "policy": args.policy,
+        "branch_mode": args.branch_mode,
         "block_seed": int(args.block_seed),
         "run_seed": run_seed,
-        "selection_branches": int(route["selection_branches_per_policy"]),
-        "audit_branches": int(route["audit_branches_per_policy"]),
+        "selection_branches": selection_branches,
+        "audit_branches": audit_branches,
         "rows": len(results),
         "sampled_tokens": sampled_tokens,
         "branches_sha256": sha256_file(output_path),

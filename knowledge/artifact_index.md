@@ -40,7 +40,7 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | --- | ---: |
 | `.json` | 2629 |
 | `.csv` | 2138 |
-| `.py` | 1591 |
+| `.py` | 1599 |
 | `.md` | 995 |
 | `.png` | 848 |
 | `.jsonl` | 751 |

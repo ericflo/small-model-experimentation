@@ -1,0 +1,231 @@
+#!/usr/bin/env python3
+"""Freeze one online round's routed capability and soup-anchor units."""
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from collections import defaultdict
+from pathlib import Path
+
+
+EXP = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(EXP / "src"))
+
+from advantage_routing import select_teacher  # noqa: E402
+from io_utils import load_config, read_jsonl, sha256_file, write_json  # noqa: E402
+
+
+def _balanced_take(rows: list[dict], count: int) -> list[dict]:
+    buckets: dict[tuple[str, str, int], list[dict]] = defaultdict(list)
+    for row in rows:
+        buckets[(str(row["family"]), str(row["kind"]), int(row["level"]))].append(row)
+    for values in buckets.values():
+        values.sort(key=lambda value: value["state_id"])
+    keys = sorted(key for key, values in buckets.items() if values)
+    cursors = {key: 0 for key in keys}
+    selected = []
+    while len(selected) < count:
+        progressed = False
+        for key in keys:
+            cursor = cursors[key]
+            if cursor >= len(buckets[key]):
+                continue
+            selected.append(buckets[key][cursor])
+            cursors[key] += 1
+            progressed = True
+            if len(selected) == count:
+                break
+        if not progressed:
+            break
+    return selected
+
+
+def _best_offpolicy(branches: list[dict]) -> dict:
+    best = max(branches, key=lambda row: (float(row["score"]), -int(row["branch_index"])))
+    if best["kind"] == "atom":
+        completion = [int(value) for value in best["output"]["token_ids"]]
+        injected = [int(value) for value in best["output"].get("injected_token_ids") or []]
+    else:
+        if not best.get("turns"):
+            raise ValueError(f"episode branch {best['state_id']} has no action turns")
+        completion = [int(value) for value in best["turns"][0]["token_ids"]]
+        injected = [
+            int(value) for value in best["turns"][0].get("injected_token_ids") or []
+        ]
+    return {
+        "policy": best["policy"],
+        "branch_index": int(best["branch_index"]),
+        "terminal_score": float(best["score"]),
+        "completion_ids": completion,
+        "injected_token_ids": injected,
+    }
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--config", type=Path)
+    parser.add_argument("--states", action="append", type=Path, required=True)
+    parser.add_argument("--anchors", action="append", type=Path, required=True)
+    parser.add_argument("--quick", action="append", type=Path, required=True)
+    parser.add_argument("--deep", action="append", type=Path, required=True)
+    parser.add_argument("--student", action="append", type=Path, required=True)
+    parser.add_argument("--round", type=int, required=True)
+    parser.add_argument("--out", type=Path, required=True)
+    args = parser.parse_args()
+    config, config_path = load_config(args.config)
+    count = len(args.states)
+    if not (len(args.anchors) == len(args.quick) == len(args.deep) == len(args.student) == count):
+        raise SystemExit("training batch artifact lists must have identical lengths")
+    maximum = int(config["mopd"]["candidate_batches_per_round_maximum"])
+    if not 1 <= count <= maximum:
+        raise SystemExit(f"candidate batch count must be in [1, {maximum}]")
+    if not 0 <= args.round < int(config["mopd"]["rounds"]):
+        raise SystemExit("invalid round")
+    selection_n = int(config["route"]["selection_branches_per_policy"])
+    state_map: dict[str, dict] = {}
+    anchor_map: dict[str, dict] = {}
+    artifacts = []
+    branch_maps: dict[str, dict[tuple[str, int], dict]] = {
+        "quick": {}, "deep": {}, "student": {}
+    }
+    for batch_index in range(count):
+        states = read_jsonl(args.states[batch_index])
+        anchors = read_jsonl(args.anchors[batch_index])
+        for row in states:
+            if row["state_id"] in state_map or row["state_id"] in anchor_map:
+                raise SystemExit(f"duplicate state across candidate batches: {row['state_id']}")
+            state_map[row["state_id"]] = row
+        for row in anchors:
+            if row["state_id"] in state_map or row["state_id"] in anchor_map:
+                raise SystemExit(f"duplicate anchor across candidate batches: {row['state_id']}")
+            anchor_map[row["state_id"]] = row
+        record = {
+            "batch": batch_index,
+            "states": {"path": str(args.states[batch_index].resolve()), "sha256": sha256_file(args.states[batch_index])},
+            "anchors": {"path": str(args.anchors[batch_index].resolve()), "sha256": sha256_file(args.anchors[batch_index])},
+            "branches": {},
+        }
+        for policy, paths in (("quick", args.quick), ("deep", args.deep), ("student", args.student)):
+            rows = read_jsonl(paths[batch_index])
+            expected = {(state["state_id"], branch) for state in states for branch in range(selection_n)}
+            observed = {(row["state_id"], int(row["branch_index"])) for row in rows}
+            if observed != expected or len(observed) != len(rows):
+                raise SystemExit(f"{policy} branch mismatch in batch {batch_index}")
+            if any(row.get("policy") != policy for row in rows):
+                raise SystemExit(f"{policy} branch file has wrong policy tag")
+            branch_maps[policy].update(
+                {(row["state_id"], int(row["branch_index"])): row for row in rows}
+            )
+            record["branches"][policy] = {
+                "path": str(paths[batch_index].resolve()), "sha256": sha256_file(paths[batch_index])
+            }
+        artifacts.append(record)
+
+    routed: dict[str, list[dict]] = {"quick": [], "deep": []}
+    abstained = []
+    for state_id, state in sorted(state_map.items()):
+        scores = {
+            policy: [
+                float(branch_maps[policy][(state_id, branch)]["score"])
+                for branch in range(selection_n)
+            ]
+            for policy in ("quick", "deep", "student")
+        }
+        teacher = select_teacher(scores)
+        row = {
+            "state_id": state_id,
+            "family": state["family"],
+            "kind": state["kind"],
+            "level": int(state["level"]),
+            "state": state,
+            "selection_scores": scores,
+            "selection_means": {
+                policy: sum(values) / len(values) for policy, values in scores.items()
+            },
+            "primary_teacher": teacher,
+        }
+        if teacher is None:
+            abstained.append(row)
+        else:
+            teacher_branches = [
+                branch_maps[teacher][(state_id, branch)] for branch in range(selection_n)
+            ]
+            row["offpolicy_target"] = _best_offpolicy(teacher_branches)
+            routed[teacher].append(row)
+
+    micro_steps = int(config["mopd"]["updates_per_round"]) * int(config["mopd"]["grad_accum"])
+    capability_n = round(micro_steps * float(config["mopd"]["capability_fraction"]))
+    anchor_n = micro_steps - capability_n
+    per_teacher = capability_n // 2
+    supply = {teacher: len(rows) for teacher, rows in routed.items()}
+    supply["anchors"] = len(anchor_map)
+    enough = all(supply[teacher] >= per_teacher for teacher in ("quick", "deep")) and supply["anchors"] >= anchor_n
+    if not enough:
+        status = {
+            "status": "insufficient_route_supply",
+            "round": args.round,
+            "candidate_batches": count,
+            "required": {"quick": per_teacher, "deep": per_teacher, "anchors": anchor_n},
+            "available": supply,
+            "may_add_batch": count < maximum,
+        }
+        write_json(args.out.with_suffix(args.out.suffix + ".supply.json"), status)
+        print(json.dumps(status, indent=2))
+        return 3
+    capability_units = []
+    for teacher in ("quick", "deep"):
+        for row in _balanced_take(routed[teacher], per_teacher):
+            row = dict(row)
+            row["role"] = "capability"
+            capability_units.append(row)
+    anchor_rows = [
+        {
+            "state_id": state_id,
+            "family": state["family"],
+            "kind": state["kind"],
+            "level": int(state["level"]),
+            "state": state,
+            "role": "anchor",
+            "primary_teacher": "soup",
+            "selection_scores": None,
+            "selection_means": None,
+            "offpolicy_target": None,
+        }
+        for state_id, state in sorted(anchor_map.items())
+    ]
+    anchor_units = _balanced_take(anchor_rows, anchor_n)
+    units = sorted(capability_units + anchor_units, key=lambda row: row["state_id"])
+    if len(units) != micro_steps or len({row["state_id"] for row in units}) != micro_steps:
+        raise SystemExit("training unit count or consume-once identity failed")
+    payload = {
+        "schema_version": 1,
+        "stage": "online_advantage_training_round",
+        "config": str(config_path),
+        "config_sha256": sha256_file(config_path),
+        "round": args.round,
+        "candidate_batches": count,
+        "artifacts": artifacts,
+        "candidate_counts": {
+            "failed_states": len(state_map),
+            "successful_anchors": len(anchor_map),
+            "quick_routed": len(routed["quick"]),
+            "deep_routed": len(routed["deep"]),
+            "abstained": len(abstained),
+        },
+        "unit_counts": {
+            "total": len(units),
+            "quick": sum(row["primary_teacher"] == "quick" for row in units),
+            "deep": sum(row["primary_teacher"] == "deep" for row in units),
+            "soup_anchor": sum(row["primary_teacher"] == "soup" for row in units),
+        },
+        "units": units,
+    }
+    write_json(args.out, payload)
+    print(json.dumps({key: value for key, value in payload.items() if key != "units"}, indent=2))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

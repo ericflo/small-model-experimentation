@@ -79,16 +79,32 @@ def main() -> int:
     parser.add_argument("--model", type=Path, required=True)
     parser.add_argument("--block", type=int, required=True)
     parser.add_argument("--seed", type=int, required=True)
+    parser.add_argument("--mode", choices=("qualification", "training"), default="qualification")
+    parser.add_argument("--round", type=int)
+    parser.add_argument("--batch", type=int, default=0)
     parser.add_argument("--out-dir", type=Path, required=True)
     parser.add_argument("--smoke", action="store_true")
     args = parser.parse_args()
     config, config_path = load_config(args.config)
     expected_seeds = [int(value) for value in config["seeds"]["route_qualification_blocks"]]
-    if not args.smoke:
+    if not args.smoke and args.mode == "qualification":
         if args.block not in range(len(expected_seeds)):
             raise SystemExit(f"qualification block must index {expected_seeds}")
         if args.seed != expected_seeds[args.block]:
             raise SystemExit(f"block {args.block} seed {args.seed} != frozen {expected_seeds[args.block]}")
+    if not args.smoke and args.mode == "training":
+        if args.round is None or not 0 <= args.round < int(config["mopd"]["rounds"]):
+            raise SystemExit("training state generation needs a valid --round")
+        maximum = int(config["mopd"]["candidate_batches_per_round_maximum"])
+        if not 0 <= args.batch < maximum:
+            raise SystemExit(f"training batch must be in [0, {maximum - 1}]")
+        expected_seed = int(config["seeds"]["rollout_rounds"][args.round]) + args.batch * 10
+        expected_block = 100 + args.round * maximum + args.batch
+        if args.seed != expected_seed or args.block != expected_block:
+            raise SystemExit(
+                f"training state namespace mismatch: block/seed {args.block}/{args.seed} "
+                f"!= {expected_block}/{expected_seed}"
+            )
     if args.out_dir.exists() and any(args.out_dir.iterdir()):
         raise SystemExit(f"refusing non-empty state directory: {args.out_dir}")
     if not (args.model / "merge_receipt.json").is_file():
@@ -130,6 +146,7 @@ def main() -> int:
     )
     close_id = int(tokenizer.convert_tokens_to_ids("</think>"))
     candidates = []
+    anchor_candidates = []
     for row in atom_rows:
         rendered = tokenizer.apply_chat_template(
             [{"role": "user", "content": row["prompt"]}],
@@ -150,6 +167,20 @@ def main() -> int:
         )
         if state is not None:
             candidates.append(state)
+        if args.mode == "training":
+            anchor = build_atom_state(
+                row,
+                block=args.block,
+                prompt_token_ids=prompt_ids,
+                think_close_token_id=close_id,
+                prefix_fraction=float(generation["atom_prefix_fraction"]),
+                prefix_min_tokens=int(generation["atom_prefix_min_tokens"]),
+                prefix_max_tokens=int(generation["atom_prefix_max_tokens"]),
+                failure_ceiling=float(generation["state_failure_ceiling"]),
+                require_failure=False,
+            )
+            if anchor is not None:
+                anchor_candidates.append(anchor)
     for row in episode_rows:
         state = build_episode_state(
             row,
@@ -158,6 +189,15 @@ def main() -> int:
         )
         if state is not None:
             candidates.append(state)
+        if args.mode == "training":
+            anchor = build_episode_state(
+                row,
+                block=args.block,
+                failure_ceiling=float(generation["state_failure_ceiling"]),
+                require_failure=False,
+            )
+            if anchor is not None:
+                anchor_candidates.append(anchor)
 
     if args.smoke:
         atom_required = min(2, sum(row["kind"] == "atom" for row in candidates))
@@ -168,9 +208,21 @@ def main() -> int:
     selected = select_balanced_states(
         candidates, atom_count=atom_required, episode_count=episode_required
     )
+    anchors = []
+    if args.mode == "training":
+        anchors = select_balanced_states(
+            anchor_candidates,
+            atom_count=min(atom_required // 3, sum(row["kind"] == "atom" for row in anchor_candidates)),
+            episode_count=min(
+                episode_required // 2,
+                sum(row["kind"] == "episode" for row in anchor_candidates),
+            ),
+        )
     _write_gzip(args.out_dir / "student_atom_rows.jsonl.gz", atom_rows)
     _write_gzip(args.out_dir / "student_episode_rows.jsonl.gz", episode_rows)
     write_jsonl(args.out_dir / "states.jsonl", selected)
+    if args.mode == "training":
+        write_jsonl(args.out_dir / "anchors.jsonl", anchors)
     state_hash = state_digest({"states": selected})
     sampled_tokens = sum(
         int(output["n_sampled_tokens"])
@@ -190,6 +242,9 @@ def main() -> int:
         "model_merge_receipt_sha256": sha256_file(args.model / "merge_receipt.json"),
         "block": args.block,
         "seed": args.seed,
+        "mode": args.mode,
+        "round": args.round,
+        "batch": args.batch,
         "candidate_counts": {
             "atom": sum(row["kind"] == "atom" for row in candidates),
             "episode": sum(row["kind"] == "episode" for row in candidates),
@@ -198,8 +253,15 @@ def main() -> int:
             "atom": sum(row["kind"] == "atom" for row in selected),
             "episode": sum(row["kind"] == "episode" for row in selected),
         },
+        "anchor_counts": {
+            "atom": sum(row["kind"] == "atom" for row in anchors),
+            "episode": sum(row["kind"] == "episode" for row in anchors),
+        },
         "state_ids_sha256": state_hash,
         "states_sha256": sha256_file(args.out_dir / "states.jsonl"),
+        "anchors_sha256": (
+            sha256_file(args.out_dir / "anchors.jsonl") if args.mode == "training" else None
+        ),
         "sampled_tokens": sampled_tokens,
         "wall_seconds": elapsed,
         "engine_protocol": protocol,
@@ -216,4 +278,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

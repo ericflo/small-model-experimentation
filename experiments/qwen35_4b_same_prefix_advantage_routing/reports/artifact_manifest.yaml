@@ -14,7 +14,7 @@ external_artifacts:
   - name: regenerated soup and trained/control adapters and composites
     storage: large_artifacts/qwen35_4b_same_prefix_advantage_routing
     required_for: locality, integration, controls, confirmation, and reproduction
-    checksum: per-artifact merge/training receipts plus checkpoint_receipts.jsonl
+    checksum: per-artifact merge/training receipts plus checkpoint_receipts.json
     regenerate: python3 experiments/qwen35_4b_same_prefix_advantage_routing/scripts/run.py --stage build-student; then reached conditional stages
 omitted_artifacts:
   - path: large_artifacts/qwen35_4b_same_prefix_advantage_routing

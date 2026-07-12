@@ -2,9 +2,9 @@
 
 ## Status
 
-**Preregistered; outcome-bearing execution not yet started.** The next legal
-stage is implementation smoke followed by immutable design lock and model
-preflight.
+**Design locked and conditional implementation smoke passed; outcome-bearing
+execution not yet started.** The next legal stage is the pinned model preflight,
+followed by soup construction/canary and the split-branch route gate.
 
 ## Research Program Fit
 
@@ -24,8 +24,10 @@ controls, two confirmatory blocks, three seeds, visible routing, and best-of-8.
 
 ## Evidence
 
-No task-model evidence exists yet. Smoke outputs will be labeled engineering
-only and cannot support the hypothesis.
+No task-model evidence exists yet. Forty-eight unit/invariant tests, all 14
+procedural-family selftests, source hashes, frozen count geometry, and the full
+fail-closed stage graph pass. These are engineering evidence only and cannot
+support the hypothesis.
 
 ## Oracle Versus Deployable Boundary
 
@@ -47,4 +49,3 @@ Large source, soup, adapter, and merged checkpoints are external under
 `large_artifacts/qwen35_4b_same_prefix_advantage_routing/` as specified in
 `artifact_manifest.yaml`. Small configs, receipts, raw score tables, analyses,
 and narrative remain in git.
-

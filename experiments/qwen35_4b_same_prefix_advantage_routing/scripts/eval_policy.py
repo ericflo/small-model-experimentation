@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Paired procedural evaluation for quick/deep policy strata."""
+"""Paired sealed procedural confirmation for one explicit checkpoint."""
 
 from __future__ import annotations
 
@@ -21,15 +21,10 @@ from io_utils import all_families, load_config, sha256_file, write_json  # noqa:
 
 
 def _counts(config: dict, scope: str) -> tuple[int, int]:
-    cfg = config["evaluation"]
-    prefix = {
-        "calibration": "calibration",
-        "qualification": "qualification",
-        "confirmatory": "confirmatory",
-    }[scope]
-    return int(cfg[f"{prefix}_atoms_per_level"]), int(
-        cfg[f"{prefix}_episodes_per_level"]
-    )
+    if scope != "confirmatory":
+        raise ValueError("this experiment exposes only the sealed confirmatory scope")
+    cfg = config["confirmation"]
+    return int(cfg["atoms_per_family_level"]), int(cfg["episodes_per_family_level"])
 
 
 def _engine_protocol(
@@ -103,7 +98,7 @@ def main() -> int:
     parser.add_argument("--config", type=Path)
     parser.add_argument("--model", required=True)
     parser.add_argument("--tag", required=True)
-    parser.add_argument("--scope", choices=("calibration", "qualification", "confirmatory"), required=True)
+    parser.add_argument("--scope", choices=("confirmatory",), required=True)
     parser.add_argument("--block-seed", type=int, required=True)
     parser.add_argument("--decode", choices=("greedy", "sample8"), default="greedy")
     parser.add_argument("--families", nargs="*")
@@ -116,7 +111,7 @@ def main() -> int:
     if args.smoke:
         atom_n, episode_n = 1, 1
         families = families[:2]
-    k = 1 if args.decode == "greedy" else int(config["evaluation"]["sample_more_k"])
+    k = 1 if args.decode == "greedy" else int(config["controls"]["sample_more_k"])
     greedy = args.decode == "greedy"
     out_dir = args.out_dir or EXP / "runs" / "policy_eval" / args.tag
     if out_dir.exists() and any(out_dir.iterdir()):
@@ -150,13 +145,13 @@ def main() -> int:
                 episode_specs.append((family_name, int(level), seed))
 
     sampling = dict(
-        think_budget=int(config["evaluation"]["thinking_budget"]),
-        answer_max_tokens=int(config["evaluation"]["answer_max_tokens"]),
+        think_budget=int(config["generation"]["thinking_budget"]),
+        answer_max_tokens=int(config["generation"]["answer_max_tokens"]),
         run_seed=args.block_seed,
         greedy=greedy,
-        temperature=None if greedy else float(config["evaluation"]["sample_temperature"]),
-        top_p=None if greedy else float(config["evaluation"]["sample_top_p"]),
-        top_k=None if greedy else int(config["evaluation"]["sample_top_k"]),
+        temperature=None if greedy else float(config["confirmation"]["sample_more_temperature"]),
+        top_p=None if greedy else float(config["confirmation"]["sample_more_top_p"]),
+        top_k=None if greedy else int(config["confirmation"]["sample_more_top_k"]),
     )
     model_path = Path(args.model)
     merge_receipt = model_path / "merge_receipt.json"
@@ -214,7 +209,8 @@ def main() -> int:
         "model_merge_receipt_sha256": (
             sha256_file(merge_receipt) if merge_receipt.is_file() else None
         ),
-        "config": str(config_path), "block_seed": args.block_seed,
+        "config": str(config_path), "config_sha256": sha256_file(config_path),
+        "block_seed": args.block_seed,
         "decode": args.decode, "k": k, "families": families,
         "atoms_per_level": atom_n, "episodes_per_level": episode_n,
         "by_stratum": by_stratum, "items": sorted(items, key=lambda value: value["key"]),
