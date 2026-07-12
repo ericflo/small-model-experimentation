@@ -26,10 +26,12 @@
 
 ## Next Experiments
 
-- Active cross-program test: `qwen35_4b_pareto_policy_integration` attempts to
-  consolidate C54's short-budget `blend` and deep/serial-compute `apex` policies
-  into one checkpoint. A visibly routed two-checkpoint system is an upper
-  reference only; success requires one fixed Qwen3.5-4B policy.
+- Completed cross-program qualification negative:
+  `qwen35_4b_pareto_policy_integration` found that C54's short/deep tier labels
+  did not become a clean procedural teacher crossover. `blend` lost both quick
+  blocks; `apex` won deep capability but missed retention. The visible
+  two-checkpoint tier router remains an external upper reference, not a
+  one-checkpoint installation result.
 - **Close/commit potential follow-up (new experiment only):** compare joint probability of autonomously
   closing and emitting the canonical answer against answer-only potential, after a frozen natural-close and
   parseability calibration gate. Do not reuse C51's observed tasks to tune thresholds.

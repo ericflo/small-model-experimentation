@@ -146,3 +146,15 @@ termination on the actual workload and include the close/commit event in any tra
 C52 adds that editing one thought token in the loss is not the same as making a context-local model edit:
 future steering must pass an exact-logit locality preflight before a larger harvest. This does not weaken
 the separate long-context loop-control mandate, whose pathology begins only at 16k+.
+
+## Pareto Policy Integration Qualification (2026-07-12)
+
+The proposed short/deep policy consolidation did not reach distillation.
+Across two fresh blocks, C54's `blend` checkpoint was not a better quick teacher
+than `apex` (`-0.00693`, `-0.03789`; pooled `-0.02241`), while `apex` had a
+replicated deep advantage (`+0.04563`) but missed retention. Thus an external
+thinking-budget tier split does not by itself define a same-prefix teacher
+split. A future policy-space test should estimate verified continuation
+advantage at the actual state, then freeze and replicate the route before
+training; the visible two-checkpoint tier router remains only an inference
+upper reference.

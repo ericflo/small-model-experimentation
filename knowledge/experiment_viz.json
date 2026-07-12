@@ -45627,25 +45627,59 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "Pareto integration GPU smoke installed a real adapter",
+     "title": "Only the deep specialist won both qualification blocks",
      "categories": [
-      "applied LoRA modules",
-      "nonzero LoRA modules"
+      "quick block 0",
+      "quick block 1",
+      "deep block 0",
+      "deep block 1"
      ],
      "series": [
       {
-       "label": "module count",
+       "label": "intended teacher minus alternate",
        "values": [
-        128,
-        128
+        -0.006925534389039124,
+        -0.03788741492174429,
+        0.0425407760667457,
+        0.048711388823523404
        ]
       }
      ],
-     "x_label": "merge receipt check",
-     "y_label": "modules",
-     "y_format": "number",
-     "note": "This is an implementation smoke, not a policy result: all 128 applied LoRA modules carried nonzero deltas through the explicit composite merge.",
-     "source": "experiments/qwen35_4b_pareto_policy_integration/runs/checkpoint_receipts.jsonl"
+     "x_label": "frozen capability block",
+     "y_label": "paired macro delta",
+     "y_format": "percent100",
+     "note": "Positive means the policy assigned to that stratum beat the alternate checkpoint. Both quick blocks were negative; both deep blocks were positive. No effect-size floor was used.",
+     "source": "experiments/qwen35_4b_pareto_policy_integration/analysis/specialist_qualification.json"
+    },
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Pooled capability evidence passes only for the deep policy",
+     "categories": [
+      "quick blend",
+      "deep apex"
+     ],
+     "series": [
+      {
+       "label": "paired macro delta",
+       "values": [
+        -0.022406474655391712,
+        0.04562608244513455
+       ]
+      },
+      {
+       "label": "one-sided 95% lower bound",
+       "values": [
+        -0.04896794341091201,
+        0.03401178660716478
+       ]
+      }
+     ],
+     "x_label": "intended specialist role",
+     "y_label": "paired macro delta",
+     "y_format": "percent100",
+     "note": "The deep policy clears the capability criterion but fails six retention cells; the quick policy fails the capability sign in both blocks. The gate stops before teacher audit or MOPD.",
+     "source": "experiments/qwen35_4b_pareto_policy_integration/analysis/specialist_qualification.json"
     }
    ]
   },

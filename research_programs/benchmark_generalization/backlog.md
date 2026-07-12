@@ -8,6 +8,12 @@
   ceiling. A new experiment may reuse the generalization design only with a
   harder independently calibrated tools/provenance core and fresh frozen
   confirmatory seeds.
+- Completed proxy-transport negative: `qwen35_4b_pareto_policy_integration`
+  kept every benchmark seed sealed and tested C54's external quick/medium
+  labels on a fresh procedural quick/deep proxy. The required crossover did not
+  reproduce: `blend` lost both quick blocks. Future distillation work must
+  distinguish instrument-specific ranking from teacher advantage on the
+  training-state distribution; neither can stand in for the other.
 - Build a common shift taxonomy: length, family, primitive, composition, prompt, format, and real-task shift.
 - Re-run top mechanisms on at least one non-original substrate.
 - Add bridge-composition and held-out-primitive splits to new experiments by default.

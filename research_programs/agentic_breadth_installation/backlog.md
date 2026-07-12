@@ -2,23 +2,30 @@
 
 ## Next Experiments
 
-- Active corrected successor: `qwen35_4b_pareto_policy_integration` regenerates
-  C54's quick-optimal `blend` and deep-optimal `apex` policies and tests whether
-  correct same-prefix on-policy MOPD can consolidate their non-convex frontier
-  into one checkpoint. Teacher qualification is paired `delta > 0` with two
-  positive blocks and a bootstrap lower bound; saturated cells are retention
-  anchors, not vetoes. Do not launch a competing Pareto-integration claim while
-  this registered run is active.
+- Completed qualification negative: `qwen35_4b_pareto_policy_integration`
+  regenerated C54's `blend` and `apex` policies and exercised the corrected
+  paired `delta > 0` rule. `blend` lost quick capability in both blocks
+  (`-0.0069`, `-0.0379`; pooled `-0.0224`), while `apex` won deep capability
+  (`+0.0456`, lower bound `+0.0340`) but missed six retention cells. The run
+  stopped before teacher audit or MOPD; do not describe it as an integration
+  failure.
+- Candidate follow-up, new experiment only: replace assumed tier labels with a
+  disjoint same-prefix continuation-advantage router. Both same-origin teachers
+  must be sampled and verifier-scored at each calibration state; a frozen route
+  qualifies only with replicated positive advantage over the alternate
+  teacher. Compare any integrated checkpoint against both teachers, a visible
+  two-checkpoint router, and matched-compute sampling. Do not reuse the observed
+  qualification cells to select routes.
 - Stopped experiment: `qwen35_4b_specialist_policy_integration` — incumbent and
   compound-headroom gates passed, but `ferrier = 0.994` made the mandatory
   tools specialist's frozen `+0.10` bar mathematically impossible. Zero
   specialist or MOPD updates ran. Do not lower the bar or extend this directory.
-- Candidate follow-up: a new specialist-integration experiment with the same
-  controls and corrected MOPD objective, but a disjoint-calibrated harder
-  tools/provenance core and a mandatory per-core ceiling/headroom gate before
-  best-of-k or training. `gatepost`-style provenance has measured room, but any
-  new training/transfer split needs fresh confirmatory seeds and its own
-  experiment lifecycle.
+- Deferred predecessor repair: a harder disjoint-calibrated tools/provenance
+  core could still make the original four-specialist design feasible, but it
+  is no longer the best immediate test. The corrected successor shows that
+  feasible teachers also need same-prefix advantage on the distillation
+  distribution. Any revival must satisfy both prerequisites before best-of-k
+  or training and use a new experiment with fresh confirmatory seeds.
 
 - Completed negative: `qwen35_4b_interactive_policy_curriculum` — the run was
   already underway when the specialist experiment became active. Its
@@ -55,6 +62,9 @@
   compare end-to-end matched joint RL, off-policy SFT, parameter merge, and
   KL-matched wrong routing; keep all benchmark seeds sealed until held-out
   compound transfer passes.
+- For any state-routed successor: route on a predeclared observable state key or
+  a training-only verifier advantage, never on a hidden benchmark label; freeze
+  the routing rule on disjoint calibration prefixes before producing updates.
 
 - Baseline: base model, same fresh menagerie seed, same tier/decode, every event.
 - Mechanism-falsifying control: held-out gym families (never trained) separate

@@ -4298,30 +4298,41 @@
    ]
   },
   "qwen35_4b_pareto_policy_integration": {
-   "verdict_tag": "Installation works; research result pending",
-   "concept_primer": "Two task-specialized versions can each excel in a different setting yet lose strength when simply mixed. This study will test whether one small model can learn both behaviors directly.",
+   "verdict_tag": "The assumed expert pair did not reproduce",
+   "concept_primer": "Before combining two specialists, each one must actually be better on the situations assigned to it. A ranking from one test does not guarantee that ordering on the clean examples used for training.",
    "plain_question": "Can one small model combine the best short-task and deep-task behavior without weakening either side?",
-   "plain_answer": "Unknown. The research comparison has not run yet. The implementation smoke did prove that all 128 trained modules carried nonzero changes through the final model-building step.",
-   "why_it_matters": "The plumbing is ready, but no performance conclusion is licensed. Wait for paired task results before choosing this combined model over either specialist.",
-   "verdict_tone": "neutral",
+   "plain_answer": "Not with this proposed pair. On two fresh paired blocks, the supposed short-task specialist was slightly worse both times. The deep specialist was reliably better on deep capability, but it also lost too much on six preservation checks. Training stopped before any attempt to combine them.",
+   "why_it_matters": "The earlier fixed ten-point hurdle really was wrong, but removing it exposed a more basic issue: the specialist labels did not carry over to the clean training distribution. The next test should choose a teacher from measured continuation advantage at the current state, not from a coarse checkpoint label.",
+   "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Changed modules",
-     "value": "128 of 128",
-     "sub": "every applied module carried a real change"
+     "label": "Short-policy paired delta",
+     "value": "−2.24 points",
+     "sub": "both independent blocks were below zero"
     },
     {
-     "label": "Smoke examples",
-     "value": "8",
-     "sub": "implementation-only training cases"
+     "label": "Deep-policy paired delta",
+     "value": "+4.56 points",
+     "sub": "95% one-sided lower bound +3.40 points"
+    },
+    {
+     "label": "Combination updates",
+     "value": "0",
+     "sub": "the prerequisite gate stopped training"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Every installed module carried a real change",
-     "chart_read": "The two bars count modules applied during model building and modules with nonzero changes. Matching full-height bars are better because they show that no trained component vanished during installation.",
-     "chart_takeaway": "Both bars reach 128, confirming a real installed model while saying nothing yet about task performance."
+     "chart_plain_title": "Only the deep specialist won both assigned comparisons",
+     "chart_read": "Each bar is the assigned specialist's score minus the other checkpoint on one fresh block. Bars above zero support the assignment; bars below zero mean the supposedly better specialist actually lost.",
+     "chart_takeaway": "Both short-specialist bars are below zero, while both deep-specialist bars are above zero, so the proposed two-way specialist pairing was not present."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "Pooled evidence confirms the missing short specialist",
+     "chart_read": "For each assigned specialist, one bar is the average paired difference and the other is its conservative one-sided lower bound. Both must sit above zero to qualify.",
+     "chart_takeaway": "The short policy is negative even before uncertainty is considered. The deep policy clears the capability test, but separate preservation failures still stop the pair."
     }
    ]
   },

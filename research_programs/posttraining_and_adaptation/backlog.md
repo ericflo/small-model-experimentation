@@ -2,11 +2,18 @@
 
 ## Next Experiments
 
-- Active cross-program test: `qwen35_4b_pareto_policy_integration` asks whether
-  refreshed same-prefix MOPD can consolidate C54's complementary quick/deep
-  source policies where data interpolation failed. It replaces arbitrary
-  absolute teacher-gain bars with replicated paired `delta > 0`; the final
-  artifact still must beat matched sampling and integration controls.
+- Completed cross-program qualification negative:
+  `qwen35_4b_pareto_policy_integration` replaced the arbitrary absolute bar
+  with replicated paired `delta > 0`, then found that C54's labels did not
+  transport to the clean distillation proxy. `blend` was negative on quick in
+  both blocks; `apex` was positive on deep but failed retention. No MOPD update
+  ran.
+- Candidate only after a new intake and design review: outcome-routed
+  same-prefix policy distillation. Estimate both teachers' verified
+  continuation values on disjoint states, freeze a positive-advantage routing
+  rule, and stop before training unless selected-teacher advantage replicates.
+  This tests the useful kernel behind the “advantage estimator” slogan without
+  treating a coarse external tier label as ground truth.
 - Stopped cross-program test: `qwen35_4b_specialist_policy_integration` reached
   a design-feasibility negative before any specialist or integration update.
   Its sole tools core scored 0.994 at baseline, so the mandatory `+0.10` gain
@@ -42,3 +49,7 @@ practical top-selection margin. C51 is stopped before training under its current
 Do not spend posttraining compute on a mandatory arm whose frozen absolute
 gain criterion exceeds its score ceiling. Endpoint-average headroom does not
 establish per-arm feasibility.
+
+Do not distill from a teacher merely because it won an external aggregate
+instrument. Require positive same-prefix continuation advantage on the actual
+training-state distribution, replicated on a disjoint block.

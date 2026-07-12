@@ -70,6 +70,24 @@ portfolio rule: endpoint headroom is insufficient; every mandatory teacher's
 theoretical improvement bar must be feasible on a disjoint baseline before
 capability-production spend.
 
+## Pareto Policy Integration Qualification (2026-07-12 — Negative prerequisite)
+
+`qwen35_4b_pareto_policy_integration` corrected the earlier gate rather than
+lowering it. Independently regenerated and behavior-gated C54 `blend` and
+`apex` policies were compared on two fresh contamination-safe procedural
+blocks. `blend - apex` on quick capability was negative in both blocks
+(`-0.00693`, `-0.03789`), pooling to `-0.02241` with a one-sided 95% lower
+bound of `-0.04897`. `apex - blend` on deep capability was replicated
+(`+0.04563`, lower bound `+0.03401`) but six retention cells regressed beyond
+0.02. All protocol checks passed.
+
+The external menagerie tier ranking therefore did not supply a clean
+quick/deep teacher crossover on the distribution where distillation would run.
+The experiment stopped before teacher audit or any MOPD update, so MOPD remains
+untested. The strategic correction is to estimate teacher choice on same-prefix
+states: a future run should freeze a disjoint verified continuation-advantage
+router, not assume that an aggregate instrument label is a local teacher label.
+
 ## qwen35_4b_interactive_policy_curriculum (2026-07-11/12 — Negative)
 
 The full-sequence live-state DAgger warm start failed its preregistered

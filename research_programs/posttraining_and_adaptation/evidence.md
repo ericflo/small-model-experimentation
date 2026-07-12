@@ -56,6 +56,15 @@
   or against MOPD; every mandatory arm now needs a ceiling/headroom check before
   production.
 
+- [qwen35_4b_pareto_policy_integration](../../experiments/qwen35_4b_pareto_policy_integration/reports/report.md):
+  the corrected successor removed the fixed effect-size floor and completed
+  two paired qualification blocks. The assumed quick teacher was negative in
+  both (`-0.00693`, `-0.03789`; pooled `-0.02241`), while the deep teacher had
+  a credible `+0.04563` capability advantage but failed six retention cells.
+  Every protocol check passed. The stop occurred before teacher audit or MOPD,
+  establishing a teacher-transport prerequisite rather than a distillation
+  negative.
+
 ## Current Read
 
 Adaptation is useful only when the target behavior is well specified and controls expose whether training
@@ -81,3 +90,11 @@ The specialist stop adds a still earlier prerequisite: prove that each
 mandatory arm can mathematically clear its frozen gain rule. Aggregate endpoint
 headroom can coexist with a saturated arm, so average calibration cannot license
 a multi-arm adaptation run by itself.
+
+The corrected successor adds the next prerequisite: even a source policy that
+wins an external aggregate tier may not be locally better on the student's
+clean rollout distribution. Distillation needs replicated same-prefix teacher
+advantage, not a checkpoint label. The most informative continuation is a
+fresh outcome-routed pilot that estimates both teachers' verified continuation
+values before any update; reusing coarse quick/deep routing would repeat the
+measured mismatch.

@@ -4,7 +4,7 @@
 - Programs: `agentic_breadth_installation`, `posttraining_and_adaptation`,
   `test_time_reasoning_budget`, `benchmark_generalization`
 - Experiment: `qwen35_4b_pareto_policy_integration`
-- Status: accepted and preregistered; implementation in progress
+- Status: executed; stopped at teacher qualification
 
 ## Context
 
@@ -45,3 +45,30 @@ each intermediate teacher, must beat matched-compute sampling.
 Stop only for uninstalled artifacts, absent reproducible complementarity,
 failed correct-route/locality evidence, unsafe update drift, or integration
 failure against controls. A small positive effect is not a stop condition.
+
+## Execution outcome
+
+Both specialists were independently regenerated, explicitly merged, and
+behavior-gated. Two disjoint qualification blocks then tested the corrected
+rule on the contamination-safe procedural proxy. The quick `blend` policy's
+capability delta was negative in both blocks (`-0.00693`, `-0.03789`), pooling
+to `-0.02241` with a one-sided 95% lower bound of `-0.04897`. The deep `apex`
+policy had a replicated capability advantage (`+0.04563`, lower bound
+`+0.03401`) but regressed beyond 0.02 on six retention cells.
+
+The registered stop rule therefore fired for absent reproducible
+complementarity. No teacher audit, locality probe, MOPD update, integration
+control, confirmation, or benchmark invocation ran. This is not an MOPD
+negative; it shows that an external aggregate Pareto label does not by itself
+identify a better teacher on the state distribution where distillation occurs.
+
+## Successor decision
+
+Do not retry coarse quick/deep routing with more updates or a weaker gate. If
+the policy-space line continues, create a fresh experiment that treats teacher
+choice as an estimand: on disjoint same-prefix states, sample both same-origin
+teachers, estimate verified continuation advantage, and authorize distillation
+only where the selected teacher has a replicated positive advantage over the
+alternative. Freeze that state-routing rule before training and compare the
+final one-checkpoint policy against both teachers, a visible router, and
+matched-compute sampling.
