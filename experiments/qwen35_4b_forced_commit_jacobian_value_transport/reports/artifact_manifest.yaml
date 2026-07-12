@@ -14,6 +14,7 @@ reproducibility:
   required_external_artifacts: []
 notes: >-
   The byte-identical 3.08 MB replicated lens, all fresh task splits, CPU
-  receipts, immutable design receipt, and outcome-blind model-smoke receipt are
-  committed. No artifact is external or omitted; later gated artifacts will be
-  preserved.
+  receipts, immutable design receipt, outcome-blind model-smoke receipt, complete
+  48 traces, 144 policy rows, terminal summary, and parser diagnostic are
+  committed. Confirmation/value/causal stages were ineligible and produced no
+  artifact. Nothing is external or omitted.

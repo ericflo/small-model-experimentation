@@ -31,6 +31,9 @@
 - [`qwen35_4b_native_thought_seam_budget_ladder`](../../experiments/qwen35_4b_native_thought_seam_budget_ladder/reports/report.md)
   (unclaimed) — a fresh natural-close selector that exhausted 256/512/1024 with
   0/48 closes and left confirmation unopened.
+- [`qwen35_4b_forced_commit_jacobian_value_transport`](../../experiments/qwen35_4b_forced_commit_jacobian_value_transport/reports/report.md)
+  (unclaimed) — close-only forced commit reproduced the low-parse interface wall
+  and stopped before internal value.
 - [`qwen35_4b_think_ftpo_round2`](../../experiments/qwen35_4b_think_ftpo_round2/reports/report.md)
   (claim C52) — entropy/varentropy-routed single-token thought steering, a
   low-dose capability null after exact-logit locality and agentic transfer gates.
@@ -113,6 +116,13 @@
   deployable policy: valid only if the same forced interface clears parse and
   headroom gates at calibration and deployment, and always labeled
   counterfactual relative to autonomous close.
+- **A close token alone does not establish answer mode.** On a new exact-depth
+  workload, forced-only parse stayed 12.5%--18.8%, success was 1/48 at every cap,
+  and 85%--96% of post-close outputs exhausted 16 answer tokens. Decoded only
+  after the automatic failure, many rows restarted analysis. A tolerant parser
+  remained <=22.9%, so formatting edge cases do not explain the stop. The next
+  controller may supply a fixed answer slot but must treat that syntax as part
+  of deployment and retain close-only output as a control.
 - **Entropy/varentropy localize interesting forks but do not make weight edits local.** C52 round 2
   selected 155 low-entropy, non-degenerate-varentropy confident wrong turns and compared demotion,
   positive-only uplift, and shuffled uplift. Pull-up was safer and true labels separated from shuffled

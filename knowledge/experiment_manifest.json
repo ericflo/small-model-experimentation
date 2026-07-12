@@ -2105,11 +2105,11 @@
   },
   {
     "file_counts": {
-      ".json": 5,
-      ".jsonl": 4,
+      ".json": 7,
+      ".jsonl": 6,
       ".md": 7,
       ".pt": 1,
-      ".py": 6,
+      ".py": 8,
       ".yaml": 3
     },
     "id": "qwen35_4b_forced_commit_jacobian_value_transport",
@@ -2127,6 +2127,7 @@
     ],
     "title": "Qwen3.5-4B Forced-Commit Jacobian Value Transport",
     "top_level_dirs": [
+      "analysis",
       "assets",
       "configs",
       "data",
@@ -2136,8 +2137,8 @@
       "src",
       "tests"
     ],
-    "total_files": 26,
-    "total_size_bytes": 3309058
+    "total_files": 32,
+    "total_size_bytes": 3920362
   },
   {
     "file_counts": {

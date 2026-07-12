@@ -94,25 +94,45 @@ committed; the runner refuses to emit placeholder value or causal results.
 
 ## Status
 
-Design and the 46-threat adversarial review were frozen before model calls. CPU
-smoke passes: 96 unique fresh exact-depth tasks, zero parent overlap, exact lens
-hash, and reachable seam gates. The outcome-blind model smoke also passes: all
-five lens matrices have rank 24, native trace caching is `[375, 1x7]`, and the
-explicit forced replay is `[384, 1]`. It injected close but recorded no
-correctness. Scientific outcomes remain unopened.
+Terminal `FORCED_COMMIT_SEAM_FAIL`. Design and the 46-threat adversarial review
+were frozen before model calls; CPU and outcome-blind model smokes passed. The
+complete 48-trace/144-policy-row selection found that appending close alone did
+not reliably switch the model into answer mode. No cap was selected, and seam
+confirmation, value fitting, controls, and causal outcomes remain sealed.
+
+## Results
+
+| cap | forced parse | exact success | mixed tasks | answer-cap contact | gate |
+| ---: | ---: | ---: | ---: | ---: | --- |
+| 256 | 6/48 (12.5%) | 1/48 (2.1%) | 1 | 44/48 (91.7%) | fail |
+| 512 | 8/48 (16.7%) | 1/48 (2.1%) | 1 | 41/48 (85.4%) | fail |
+| 1024 | 9/48 (18.8%) | 1/48 (2.1%) | 1 | 46/48 (95.8%) | fail |
+
+All 48 traces required forced close at every cap. The run sampled 49,152 thought
+tokens plus 2,225 answer tokens in 1,640.539 seconds. Typical post-close outputs
+restarted analysis or emitted free-form reasoning instead of the requested slot.
+
+A post-decision regex diagnostic tolerated aliases attached directly to special
+EOS tokens. It raised parse counts only to 7/11/10 and correct counts to 1/2/2 at
+256/512/1024. Those remain far below every frozen parse, success, mixed-task, and
+answer-termination gate, so the parser edge case does not affect the decision.
 
 ## Scope
 
-Ground-truth continuations fit the value coordinate and choose causal donors, so
-even `FORCED_VALUE_CAUSAL` is oracle mechanism evidence. A separate non-oracle
-controller must improve untouched contamination-free tasks over frozen Qwen,
-strongest controls, and matched-compute sampling before capability is claimed.
+No value coordinate was fit and no activation was patched. The failure precedes
+J space: a lone close token is not a usable answer-emission interface. The next
+distinct experiment may supply syntax but not identity—append close plus the
+fixed `First:` slot and read only the alias choice—while retaining free-form
+forced answer as a control. It must use fresh tasks and a new adversarial review.
+
+If a later value/causal stage becomes eligible, ground-truth continuations and
+donors remain oracle. Capability still requires a non-oracle controller that
+beats frozen Qwen, strongest controls, and matched-compute sampling.
 
 ## Knowledgebase Update
 
-- Program ledgers: record the design launch; update again at every terminal gate.
-- Shared synthesis: update if the forced interface or value mechanism changes
-  strategy.
+- Program ledgers: record terminal close-only interface failure.
+- Shared synthesis: distinguishes close-token injection from an answer slot.
 - Claim ledger: no claim ID while the repository claim re-grade is open.
 
 ## Artifacts

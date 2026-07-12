@@ -228,6 +228,20 @@ parse/headroom evidence, and use live-prefix/per-length controls before any
 causal claim. See
 [qwen35_4b_native_thought_seam_budget_ladder](../experiments/qwen35_4b_native_thought_seam_budget_ladder/reports/report.md).
 
+Making close injection the explicit deployment action did not repair the seam.
+On another 48 fresh traces, forced-only parse was 12.5%/16.7%/18.8% at
+256/512/1024, exact success was 1/48 at every cap, only one task mixed outcomes,
+and 85%--96% of post-close generations exhausted all 16 answer tokens. Decoded
+only after the automatic failure, many answers simply restarted analysis. An
+EOS-tolerant parser raised parse at best to 22.9% and correctness to 2/48, so
+parser strictness cannot explain the stop. **A close delimiter is not an answer
+slot.** This independently strengthens C51 and keeps J-space value unopened.
+The warranted next interface supplies fixed syntax (`First:`) but never answer
+identity, reads the next alias choice, and retains close-only free-form output as
+a matched control; it must earn semantic headroom on fresh tasks before any
+internal-value result. See
+[qwen35_4b_forced_commit_jacobian_value_transport](../experiments/qwen35_4b_forced_commit_jacobian_value_transport/reports/report.md).
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.

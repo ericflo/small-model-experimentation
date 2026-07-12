@@ -6,12 +6,16 @@
   `NO_BUDGET_SELECTED`: all 48/48 traces contacted even the 1,024 ceiling, with
   zero natural closes at every rung. Confirmation was correctly unopened. Do
   not add a larger natural-close rung or treat these rows as completed thoughts.
-- **In progress:** `qwen35_4b_forced_commit_jacobian_value_transport` treats
-  injected close as the explicit deployed policy. Its 46-threat review first
-  gates forced-only parsing, success headroom, mixed tasks, and answer
-  termination on selection/confirmation; only then may it label exact prefixes
-  and test scalar J value. Every causal replay uses the live prefix-plus-close
-  sequence and per-row exact post-bf16 controls. No stage is called natural.
+- `qwen35_4b_forced_commit_jacobian_value_transport` is terminal
+  `FORCED_COMMIT_SEAM_FAIL`: forced-only parse was 12.5%--18.8%, exact success
+  1/48 at every cap, and 85%--96% of answers exhausted 16 tokens, usually by
+  restarting analysis. An EOS-tolerant parser diagnostic stayed <=22.9%. No cap,
+  confirmation, value fit, or J causal outcome opened.
+- **Next:** create a fresh commit-slot experiment that appends close plus fixed
+  syntax `First:` and reads the next alias choice, while retaining close-only
+  free-form output as the interface control. Syntax may be supplied; answer
+  identity may not. Gate semantic accuracy/headroom and mixed tasks before
+  reopening J value, and keep task-held-out alias/identity controls load-bearing.
 - If native thought-state transport passes, train a non-oracle prefix controller
   and require a replicated held-out capability gain over frozen Qwen3.5-4B and
   matched-compute sampling. Oracle donor selection is a mechanism control, not

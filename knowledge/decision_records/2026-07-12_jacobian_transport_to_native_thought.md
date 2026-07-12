@@ -69,3 +69,18 @@ forced close only as an explicit deployed commit action, with fresh
 parse/headroom calibration and C51's counterfactual-state label. If that gate
 passes, continuation value and causal edits must be evaluated under the same
 forced policy with exact-prefix replay and dynamic per-length post-bf16 controls.
+
+## Third successor outcome
+
+`qwen35_4b_forced_commit_jacobian_value_transport` made close injection the
+explicit deployed action, but terminal `FORCED_COMMIT_SEAM_FAIL` reproduced
+C51's expression failure. Forced parse reached only 6/48, 8/48, and 9/48 at
+256/512/1024; exact success was 1/48 throughout; 41--46 answers hit the 16-token
+cap; and only one task mixed outcomes. An EOS-tolerant diagnostic could not
+rescue the gates. No confirmation or J stage opened.
+
+The next interface change is narrower than another budget or parser relaxation:
+append close plus a fixed answer slot (`First:`) and measure the next alias
+choice, with close-only free-form output retained as a control. This supplies
+syntax, not identity. It may reopen value only on fresh data with semantic
+headroom and task-held-out identity controls.

@@ -24,3 +24,18 @@
   and exactly one close token.
 - Recorded the action as counterfactual; no answer correctness was computed.
 - Scientific seam selection remains unopened.
+
+## 2026-07-12 — Forced-commit seam terminal
+
+- Opened the 48-trace selection once and evaluated all three paired caps,
+  producing 144 complete policy rows.
+- Every trace required forced close. Forced parse was 6/48, 8/48, and 9/48 at
+  256/512/1024; exact success was 1/48 at every cap; only one task mixed outcomes.
+- Answer-cap contact was 44/48, 41/48, and 46/48, far above the 5% ceiling.
+- Terminal decision: `FORCED_COMMIT_SEAM_FAIL`; no cap selected and all later
+  task sets remained sealed.
+- Sampled 49,152 thought plus 2,225 answer tokens in 1,640.539 seconds.
+- A post-decision EOS-tolerant regex raised parse to 7/11/10 and correct to
+  1/2/2, still decisively below every gate. No parser repair can rescue the run.
+- Next branch: a fresh fixed answer-slot interface that supplies `First:` syntax
+  but never the alias identity; close-only free-form remains its control.

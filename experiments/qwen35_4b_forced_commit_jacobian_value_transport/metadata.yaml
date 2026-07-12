@@ -12,6 +12,7 @@ research_programs:
   - "interpretability_and_diagnostics"
   - "test_time_reasoning_budget"
 top_level_dirs:
+  - "analysis"
   - "assets"
   - "configs"
   - "data"
@@ -21,11 +22,11 @@ top_level_dirs:
   - "src"
   - "tests"
 file_counts:
-  json: 5
-  jsonl: 4
+  json: 7
+  jsonl: 6
   md: 7
   pt: 1
-  py: 6
+  py: 8
   yaml: 3
-total_files: 26
-total_size_bytes: 3309058
+total_files: 32
+total_size_bytes: 3920362

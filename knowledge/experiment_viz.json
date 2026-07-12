@@ -5,20 +5,28 @@
   "qwen35_4b_forced_commit_jacobian_value_transport": {
    "charts": [
     {
-     "title": "Preregistered fresh tasks by gated stage",
+     "title": "Forced-close answer usability across thought caps",
      "kind": "bar",
-     "categories": ["seam selection", "seam confirmation", "value fit", "causal confirmation"],
+     "categories": ["256 cap", "512 cap", "1024 cap"],
      "series": [
       {
-       "label": "fresh tasks",
-       "values": [16, 16, 32, 32]
+       "label": "parse rate",
+       "values": [0.125, 0.16666666666666666, 0.1875]
+      },
+      {
+       "label": "exact success rate",
+       "values": [0.020833333333333332, 0.020833333333333332, 0.020833333333333332]
+      },
+      {
+       "label": "answer-cap contact rate",
+       "values": [0.9166666666666666, 0.8541666666666666, 0.9583333333333334]
       }
      ],
-     "x_label": "stage",
-     "y_label": "tasks",
-     "y_format": "integer",
-     "note": "Design-state chart before model outcomes. Injected close is the explicit counterfactual deployment policy; each later split stays sealed until every preceding gate passes.",
-     "source": "experiments/qwen35_4b_forced_commit_jacobian_value_transport/configs/default.yaml",
+     "x_label": "forced-commit thought cap",
+     "y_label": "share of 48 paired traces",
+     "y_format": "percent100",
+     "note": "All rows used the explicit counterfactual close action. No cap met 90% parse, 5%--95% success, six mixed tasks, or <=5% answer-cap contact; confirmation and all J-space stages were canceled.",
+     "source": "experiments/qwen35_4b_forced_commit_jacobian_value_transport/analysis/seam_metrics.json",
      "headline": true
     }
    ]

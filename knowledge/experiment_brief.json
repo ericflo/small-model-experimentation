@@ -3,35 +3,35 @@
  "generated_on": "2026-07-05",
  "experiments": {
   "qwen35_4b_forced_commit_jacobian_value_transport": {
-   "verdict_tag": "A controlled commit-now test is frozen and ready",
+   "verdict_tag": "A stop token did not make the model commit to an answer",
    "concept_primer": "The model kept reasoning past every natural finishing limit. This study makes stopping an explicit controller action, checks whether the resulting answers are usable, and only then looks for an internal signal that separates promising from weak unfinished work.",
    "plain_question": "If a fixed budget controller tells the model to stop reasoning and answer now, can an internal promise signal identify and improve the unfinished thoughts that will answer correctly?",
-   "plain_answer": "Not yet: the design, adversarial review, fresh tasks, and fast-generation plumbing all passed, but no scientific answer result has been opened. The study must first prove that forced answers reliably finish and retain both successes and failures on new tasks.",
-   "why_it_matters": "An externally chosen stop can be a real deployed method, but only if it is tested honestly as the same action everywhere. This avoids pretending the model finished naturally and prevents another artificial answer boundary from producing a misleading internal score.",
-   "verdict_tone": "neutral",
+   "plain_answer": "No. After the controller inserted the stop marker, only 6 to 9 of 48 answers used the required format, just one was correct at each limit, and most responses spent all 16 answer tokens restarting analysis. No limit was selected, so the internal-value test stayed sealed.",
+   "why_it_matters": "A mode delimiter is not the same as an answer slot. Before looking for an internal promise signal, the controller must provide fixed output syntax without supplying the answer itself; otherwise formatting failure overwhelms the science.",
+   "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Fresh procedural tasks",
-     "value": "96",
-     "sub": "four disjoint stages with zero overlap against three parents"
+     "label": "Best forced-answer format rate",
+     "value": "9/48",
+     "sub": "18.8% at the 1,024-step limit versus a 90% gate"
     },
     {
-     "label": "Adversarial failure modes reviewed",
-     "value": "46",
-     "sub": "completed before any model call"
+     "label": "Correct forced answers",
+     "value": "1/48",
+     "sub": "the same 2.1% at every reasoning limit"
     },
     {
-     "label": "Scientific outcomes opened",
-     "value": "0",
-     "sub": "the outcome-blind close-and-cache check came first"
+     "label": "Answers that exhausted their answer budget",
+     "value": "41–46/48",
+     "sub": "the model usually restarted analysis after the stop marker"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Fresh tasks are sealed behind four sequential gates",
-     "chart_read": "The bars show how many untouched tasks belong to each stage. A stage opens only after the one before it passes.",
-     "chart_takeaway": "Answer usability is tested twice before any internal-value fit, and the final cause-and-effect tasks remain untouched until every earlier gate passes."
+     "chart_plain_title": "Forced answers rarely used the slot and usually hit the limit",
+     "chart_read": "For each reasoning limit, the short bars are usable-format and correct-answer rates; the tall bar is the share that consumed all 16 answer tokens.",
+     "chart_takeaway": "Longer thinking did not repair the emission interface. The stop token alone usually caused more analysis, not a concise answer."
     }
    ]
   },

@@ -76,3 +76,14 @@ Diagnostics should become standard infrastructure. They are how future agents av
   It closes the natural-cap branch on this workload and redirects the next test
   to an explicitly deployed forced-commit policy with C51 parse/headroom gates
   and per-length post-bf16 controls.
+
+- [qwen35_4b_forced_commit_jacobian_value_transport](../../experiments/qwen35_4b_forced_commit_jacobian_value_transport/reports/report.md)
+  (unclaimed; terminal `FORCED_COMMIT_SEAM_FAIL`): explicitly deploying the
+  close token did not create a usable emission seam. Across 48 paired traces,
+  forced parse was 6/48, 8/48, and 9/48 at caps 256/512/1024; exact success was
+  1/48 at every cap; only one task mixed outcomes; and 41--46/48 answers hit the
+  16-token answer cap. A post-decision EOS-tolerant parser raised parse only to
+  7/11/10 and correctness to 1/2/2, leaving every gate failed. Confirmation,
+  value, and causal splits stayed sealed. This localizes the next interface
+  change: close is a mode delimiter, not an answer slot. A fresh syntax-only
+  `First:` slot may test semantic alias choice while close-only remains control.

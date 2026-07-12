@@ -32,11 +32,15 @@
   natural close was 0% at 256/512/1024 and confirmation stayed sealed. Exact
   short-period tail loops were 0/48, so this is unresolved reasoning rather than
   a registered loop-control target. Stop raising the natural cap on this task.
-- **In progress, explicit commit policy:**
-  `qwen35_4b_forced_commit_jacobian_value_transport` uses the identical injected
-  close at calibration, value labeling, causal replay, and any later deployment.
-  C51-shaped forced-only parse and answer-termination gates precede internal
-  value; the fixed cap/action is counterfactual, never autonomous termination.
+- **Completed negative, explicit close-only commit:**
+  `qwen35_4b_forced_commit_jacobian_value_transport` reproduced C51's interface
+  wall on fresh exact-depth tasks: forced parse 12.5%--18.8%, success 2.1%, and
+  answer-cap contact 85%--96% across 256/512/1024. Close alone often restarted
+  reasoning; no cap or downstream value stage opened.
+- **Next, fixed answer slot:** test `</think>` plus `First:` as the deployed
+  syntax-only controller, with a constrained next-alias readout and close-only
+  free-form arm. This changes the interface rather than relaxing the failed
+  parser; use fresh selection/confirmation tasks and matched trace budgets.
 - Completed cross-program qualification negative:
   `qwen35_4b_pareto_policy_integration` found that C54's short/deep tier labels
   did not become a clean procedural teacher crossover. `blend` lost both quick
