@@ -150,3 +150,11 @@ Created as a new experiment scaffold.
   (quick) and `+0.0332` (deep). These calibration outcomes do not qualify or
   disqualify a teacher and were not used to alter cells, seeds, or thresholds;
   the two frozen qualification blocks remain the decision instrument.
+
+## 2026-07-12 — qualification execution in progress
+
+- Quick policy block 0 (seed 96200) completed all 4,416 items in 3,387.61
+  seconds using 4,748,497 sampled tokens. Broad raw means were `0.7876` quick
+  and `0.5297` deep; all evaluator provenance checks passed.
+- This single-arm output is checkpointed without an advantage interpretation.
+  The paired deep arm and second independent block remain frozen and required.
