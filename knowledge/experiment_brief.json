@@ -241,7 +241,7 @@
      "index": 0,
      "chart_plain_title": "Only the model trained to read failing examples fixes the bug",
      "chart_read": "Bars grouped by test set: familiar tasks, familiar rules shown in a new format, and a brand-new rule type. Each colored bar is one training setup; bar height is the share of bugs fully fixed, taller is better.",
-     "chart_takeaway": "Only the model trained on real failing examples rises high on familiar tasks and holds about half on the new format; every other setup hugs the floor, and all hit zero on the brand-new rule."
+     "chart_takeaway": "Only the model trained on real failing examples rises high on familiar tasks and holds about half on the new format; every other setup hugs the floor, and all sit at or near zero on the brand-new rule."
     },
     {
      "index": 1,
@@ -253,13 +253,13 @@
      "index": 2,
      "chart_plain_title": "Some rule types survive a new format, one collapses",
      "chart_read": "Bars grouped by rule type: arithmetic, text-formatting, threshold-labeling. Two colors compare familiar tasks against the same rules shown in a new format; height is the share of bugs fixed, taller is better.",
-     "chart_takeaway": "Threshold-labeling rules stay fully fixed in both formats and text-formatting mostly holds, but the arithmetic family collapses from most-fixed to zero once the format changes."
+     "chart_takeaway": "Threshold-labeling rules stay fully fixed in both formats and text-formatting mostly holds, but the arithmetic family collapses from largely fixed to zero once the format changes."
     },
     {
      "index": 3,
      "chart_plain_title": "Every trained version writes valid patches; only one fixes the logic",
      "chart_read": "Paired bars for each training setup on familiar tasks; one color is the share of patches well-formed enough to apply, the other the share that actually fixed the bug. Taller is better for both.",
-     "chart_takeaway": "Nearly every trained setup produces applicable patches, but only the model trained on real failing examples turns them into correct fixes; the rest apply cleanly yet fix nothing."
+     "chart_takeaway": "Nearly every trained setup produces applicable patches, but only the model trained on real failing examples turns them into correct fixes; the rest apply cleanly yet fix almost nothing."
     },
     {
      "index": 4,
@@ -409,7 +409,7 @@
    "verdict_tag": "Weak feedback, not the model, is the ceiling",
    "concept_primer": "Picture a card player tracking every hand an opponent could still hold as cards come down. Handing them one final answer teaches almost nothing; showing the full odds of every possibility at every step teaches the tracking skill itself.",
    "plain_question": "When a small model must track many still-possible answers through a step-by-step program, is the model too small, or is its training feedback too thin?",
-   "plain_answer": "It's the feedback. With the model held fixed, training it on only one sampled final answer left it weak; showing it the full odds of every possible answer at every step roughly doubled how often it solved the hardest 24-step programs, from 9% to 19%, and was the only recipe whose internal tracking stayed readable. Even the richest feedback, though, left it far from accurate.",
+   "plain_answer": "It's the feedback. With the model held fixed, training it on only one sampled final answer left it weak; showing it the full odds of every possible answer at every step roughly doubled how often it solved the hardest 24-step programs, from 9% to 19%, and left its internal tracking more readable than any other recipe. Even the richest feedback, though, left it far from accurate.",
    "why_it_matters": "When a small model underperforms at multi-step tracking, invest in richer training targets — full answer distributions and per-step labels — before assuming it needs to be bigger. Expect that to narrow the gap on long chains, not close it.",
    "verdict_tone": "mixed",
    "key_numbers": [
@@ -463,7 +463,7 @@
      "index": 4,
      "chart_plain_title": "Sums and differences are harder than direct reads",
      "chart_read": "Bars group four question kinds — read the first register, read the second, their sum, their difference — with one bar per training recipe. Taller means the top guess was a valid answer more often (higher is better).",
-     "chart_takeaway": "Sum and difference questions sit below plain reads for every recipe, and full feedback is tallest across all four."
+     "chart_takeaway": "Sum and difference questions sit below plain reads for every recipe, and full feedback is tallest on three of the four question kinds, edged out by prefix feedback on sums."
     },
     {
      "index": 5,
@@ -605,7 +605,7 @@
      "index": 5,
      "chart_plain_title": "The same ranking repeats on a smaller version",
      "chart_read": "Horizontal axis is puzzle length; vertical axis is confidence on the right answer, on a smaller version of the task with fewer possibilities. Each line is one build; higher and flatter is better.",
-     "chart_takeaway": "The same ordering holds: purpose-built builds stay above 99% while the generic-part lines fall off as puzzles get longer."
+     "chart_takeaway": "The same ordering holds: purpose-built builds stay near or above 99% while the generic-part lines fall off as puzzles get longer."
     },
     {
      "index": 6,
@@ -667,7 +667,7 @@
      "index": 3,
      "chart_plain_title": "Accuracy across three separate training runs, on unfamiliar episodes",
      "chart_read": "Grouped bars show accuracy after two study rounds for each of three independent training runs, colored by what was studied: no study, real clues, scrambled, or generic. Higher is better; 25% is blind guessing.",
-     "chart_takeaway": "Only the first run shows any spread between versions; the other two sit flat at 25%, meaning the apparent gains are run-to-run noise."
+     "chart_takeaway": "Only the first run shows the echo versions above chance; on the other two the arms sit at or below the 25% line (one control even dips to about 17%), so the apparent gains are run-to-run noise."
     },
     {
      "index": 4,
@@ -685,7 +685,7 @@
      "index": 6,
      "chart_plain_title": "Stability of the shared warm-up setup across training",
      "chart_read": "Each line tracks how wrong the model's observation guesses were over training steps, one line per training run; lower is better. There is no reference line.",
-     "chart_takeaway": "The lines wobble up and down with no steady descent, and no run ends better than it began, signaling an unstable warm-up setup."
+     "chart_takeaway": "The lines wobble up and down with no steady descent, with one run briefly halving its error mid-run before regressing back up, signaling an unstable warm-up setup."
     }
    ]
   },
@@ -747,7 +747,7 @@
      "index": 4,
      "chart_plain_title": "On new bugs, the fixer games the one visible test",
      "chart_read": "Bars group by five training methods on unseen bug types. One color is how often the patch applies, the other how often it passes the shown test but fails the hidden ones. A tall second bar is bad — it means gaming.",
-     "chart_takeaway": "For the repair-trained methods nearly every applied patch passes the visible test yet fails the hidden ones — satisfying the shown check, not fixing the bug."
+     "chart_takeaway": "For the repair-trained methods most applied patches pass the visible test yet fail the hidden ones — satisfying the shown check, not fixing the bug."
     },
     {
      "index": 5,
@@ -1092,7 +1092,7 @@
     {
      "index": 3,
      "chart_plain_title": "The small-task success does not carry over to the bigger task",
-     "chart_read": "Bars show the share of probability on the exact answer state at the longest program tested (taller is better): learned updates on the small task, then two learned setups on the bigger task.",
+     "chart_read": "Bars show the share of probability on the exact answer state at the longest program tested (taller is better): learned updates on the small task, then the same learned updates and a learned setup on the bigger task.",
      "chart_takeaway": "The tall small-task bar shrinks to a stub on the bigger task, showing the same method fails to scale rather than being unable to store the answer."
     },
     {
@@ -1849,7 +1849,7 @@
      "index": 2,
      "chart_plain_title": "Skip the answers it distrusts and accuracy climbs toward 95%",
      "chart_read": "The horizontal axis is the fraction of problems kept, most-confident first; the vertical axis is accuracy on those kept — up and to the left is better. One line ranks by the self-judge, one by average writing confidence, and a flat line marks keeping everything.",
-     "chart_takeaway": "The self-judge line climbs to about 95% when only the most-trusted third is kept and stays above averaged confidence everywhere — the model reliably knows which answers to trust."
+     "chart_takeaway": "The self-judge line climbs to about 95% when only the most-trusted third is kept and stays above averaged confidence across nearly the entire range — the model reliably knows which answers to trust."
     }
    ]
   },
@@ -1931,7 +1931,7 @@
      "index": 0,
      "chart_plain_title": "The untouched check repeats the ordered-reasoning advantage",
      "chart_read": "Four confirmation bars compare ordered thought, the same words shuffled, no thought, and open-ended free-form. Taller means more exact answers; the first three share one identical fixed twelve-word answer slot.",
-     "chart_takeaway": "Ordered reasoning remains about twice as accurate as shuffling the identical tokens, and about four times as accurate as close-only free-form answering."
+     "chart_takeaway": "Ordered reasoning remains about twice as accurate as shuffling the identical tokens, and about five times as accurate as close-only free-form answering."
     }
    ]
   },
@@ -2301,13 +2301,13 @@
      "index": 0,
      "chart_plain_title": "Given the exact steps, the model writes correct code at every length",
      "chart_read": "The horizontal axis is how many steps are chained into the plan, one to four; the vertical axis is the share of correct code written from a supplied plan. Three lines: integer lists, text strings, a three-number machine. Higher is better.",
-     "chart_takeaway": "All three lines sit pinned at the top across every depth — handed the exact steps, the model writes correct code regardless of task type or length."
+     "chart_takeaway": "All three lines sit at or near the top across every depth — handed the exact steps, the model writes correct code regardless of task type or length."
     },
     {
      "index": 1,
      "chart_plain_title": "Running steps in its head depends on how bulky the state is",
      "chart_read": "Same three task types and one-to-four step axis; the vertical axis is how often the model tracked the running state correctly in its head, with no code. The three-number machine stays high, integer lists sag, text strings sit at the floor. Higher is better.",
-     "chart_takeaway": "The number-machine line holds near three-quarters while the string line is flat at zero — head simulation is set by how heavy the state is to hold, not by depth."
+     "chart_takeaway": "The number-machine line holds near three-quarters while the string line starts low and falls to zero — head simulation is set by how heavy the state is to hold, not by depth."
     },
     {
      "index": 2,
@@ -2544,7 +2544,7 @@
   },
   "qwen35_4b_depth_scaling_controls": {
    "verdict_tag": "Variety keeps teaching, repetition barely helps",
-   "concept_primer": "A tireless robot bolts together the 16 tools in its kit until it finds combinations that solve a puzzle, then writes each solution into a cookbook the model studies. What teaches the model is how many DIFFERENT recipes fill the cookbook, not how often it rereads them.",
+   "concept_primer": "A tireless robot bolts together the tools in its kit until it finds combinations that solve a puzzle, then writes each solution into a cookbook the model studies. What teaches the model is how many DIFFERENT recipes fill the cookbook, not how often it rereads them.",
    "plain_question": "When you teach a small model from a solver's worked solutions, does piling on more eventually stop helping, and is it the variety or just the extra training that matters?",
    "plain_answer": "Variety, decisively, and the gains never plateaued. Rereading the same 40 solved examples sixteen times over barely moved the solve rate (9% to 16%, within noise), but replacing them with more distinct examples at the exact same training cost jumped it (16% to 38%). And coverage kept climbing to 54% as distinct examples grew past a thousand, with no ceiling in sight.",
    "why_it_matters": "When self-training a small model on a solver's verified solutions, spend your budget harvesting more DISTINCT solved problems, not more passes over the ones you have. Track distinct-solution count as the real lever, and keep collecting, because the curve never flattened.",
@@ -2962,7 +2962,7 @@
      "index": 3,
      "chart_plain_title": "Early prompt tests on easy versus harder samples",
      "chart_read": "Grouped bars per test show asking directly, the script route, and a perfect chooser. The first two tests use easy hand-picked cases; the last two use a harder mixed sample, where higher is better.",
-     "chart_takeaway": "On the easy cases every method hits 100%, but on the harder sample the script route collapses to 12% — the easy cases had flattered it."
+     "chart_takeaway": "On the easy cases direct answering and the perfect chooser hit 100% while the script route already trailed at 63% and 88%; on the harder sample the script route collapses to 12% — the easy cases had flattered it."
     }
    ]
   },
@@ -3005,7 +3005,7 @@
     {
      "index": 1,
      "chart_plain_title": "Showing more worked examples did not help",
-     "chart_read": "Each line tracks the share of tasks solved as the number of shown before-and-after example pairs rises from one to five. Higher is better. The fresh-table line and first-fit line stay flat; the fits-the-example line only falls to meet them.",
+     "chart_read": "Each line tracks the share of tasks solved as the number of shown before-and-after example pairs rises from one to five. Higher is better. The fresh-table line stays flat and the first-fit line barely moves; the fits-the-example line only falls to meet them.",
      "chart_takeaway": "The fresh-table line is dead flat across one to five examples, meaning failures come from missing moves in the toolbox, not from too few examples."
     },
     {
@@ -3934,7 +3934,7 @@
    "verdict_tag": "Emitting two looked-up codes at once fails",
    "concept_primer": "Each problem ships with a glossary pairing every building-block operation with a short code, freshly reshuffled so codes can't be memorized. From a few input-output examples the model must deduce which two operations ran and copy both of their exact codes in one shot.",
    "plain_question": "Can a small model read a fresh, reshuffled glossary and directly output the exact two codes that identify a hidden two-step program?",
-   "plain_answer": "No. Across every version — untrained, trained, and with the glossary's descriptions scrambled — the model got both codes exactly right zero percent of the time, even when allowed sixteen guesses. Training pushed single-code accuracy from near zero up to roughly one in eight, but scrambling the glossary left that unchanged, proving it was pattern-matching familiar-looking codes, not actually reading the lookup.",
+   "plain_answer": "No. Across every version — untrained, trained, and with the glossary's descriptions scrambled — the model got both codes exactly right zero percent of the time, even when allowed sixteen guesses. Training pushed single-code accuracy from near zero up to roughly one in eight, but scrambling the glossary barely changed that, proving it was pattern-matching familiar-looking codes, not actually reading the lookup.",
    "why_it_matters": "Don't ask a small model to both look up unfamiliar codes and commit to a multi-part answer in one generation. Split it: let a program-runner narrow the candidates, then have the model only rank a short list.",
    "verdict_tone": "negative",
    "key_numbers": [
@@ -3946,7 +3946,7 @@
     {
      "label": "One code right, before vs after training",
      "value": "0% → 1 in 8",
-     "sub": "but scrambling the glossary kept the same score, so not real reading"
+     "sub": "but scrambling the glossary barely changed it, so not real reading"
     },
     {
      "label": "Candidates left after the clues",
@@ -3964,7 +3964,7 @@
      "index": 0,
      "chart_plain_title": "The correct two-code answer never appeared, in any version",
      "chart_read": "Four clusters, one per version: untrained, trained, trained on the harder designed cases, and trained with the glossary scrambled. Within each, bars show how often the correct both-code answer, or just the left or right code, showed up among the guesses. Taller is better.",
-     "chart_takeaway": "The both-code bar sits flat at zero everywhere, and the single-code bars barely rise and don't drop when the glossary is scrambled, so the small lift isn't genuine reading."
+     "chart_takeaway": "The both-code bar sits flat at zero everywhere, and the single-code bars barely rise and stay nearly as high when the glossary is scrambled, so the small lift isn't genuine reading."
     },
     {
      "index": 1,
@@ -4184,19 +4184,19 @@
      "index": 0,
      "chart_plain_title": "Training longer on correct examples beats preference training on solve rate",
      "chart_read": "Each cluster is one training method, from the untrained base through training longer on correct examples to preference-trained versions. One bar per cluster is the best-of-16-tries rate, the other the single-best-guess rate; taller is better.",
-     "chart_takeaway": "The train-twice-as-long cluster stands tallest on both bars, while every preference-trained cluster sits at or below plain training — preferring correct over wrong added nothing."
+     "chart_takeaway": "The train-twice-as-long cluster stands tallest on both bars; apart from one tiny early single-shot bump, every preference-trained cluster falls back to or below plain training — preferring correct over wrong added nothing."
     },
     {
      "index": 1,
      "chart_plain_title": "Preference training's solve rate crashes the longer it runs",
      "chart_read": "The horizontal axis is how long preference training continues; the two lines are the single-best-guess and best-of-16 solve rates, and a flat line marks the train-longer winner. Higher is better.",
-     "chart_takeaway": "Both lines give a tiny early bump, then plunge toward zero, staying far below the flat winner line — more preference optimization steadily destroys generation."
+     "chart_takeaway": "Single-best-guess gives a tiny early bump while best-of-16 holds flat, then both plunge toward zero, ending far below the flat winner line — more preference optimization steadily destroys generation."
     },
     {
      "index": 2,
      "chart_plain_title": "A fix for the collapse helps a little but never recovers",
      "chart_read": "The horizontal axis strengthens a stabilizer meant to hold up the correct answers while pushing away wrong ones. The two rising lines are the preference-trained solve rates; two flat lines mark plain and longer training. Higher is better.",
-     "chart_takeaway": "Stronger stabilizing lifts the preference lines slightly, confirming the diagnosis, but they never reach even plain training — the fix mitigates without ever recovering."
+     "chart_takeaway": "Stronger stabilizing lifts the preference lines slightly, confirming the diagnosis, but single-best-guess never even reaches plain training and neither line approaches the longer-training winner — the fix mitigates without ever recovering."
     }
    ]
   },
@@ -4604,7 +4604,7 @@
      "index": 0,
      "chart_plain_title": "Run-and-fix loop versus just sampling more, at equal compute",
      "chart_read": "Four bars show the share of hidden puzzles solved: one attempt, the run-and-fix loop that reads its real error, a control told only to retry, and drawing five independent attempts then keeping the best. Taller is better.",
-     "chart_takeaway": "Sampling five and keeping the best (34%) is tallest; the fix-it loop (29%) barely tops one attempt and ties the retry control, so reading the real error buys almost nothing."
+     "chart_takeaway": "Sampling five and keeping the best (34%) is tallest; the fix-it loop (29%) barely tops one attempt and the retry control, which both sit at 26%, so reading the real error buys almost nothing."
     },
     {
      "index": 1,
@@ -5096,9 +5096,9 @@
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Every scoring method landed near a coin flip, and reasoning ranked lowest",
+     "chart_plain_title": "Every scoring method landed near a coin flip, and reasoning trailed the snap answer",
      "chart_read": "Five scoring methods across the bottom: step-by-step reasoning, a snap no-reasoning answer, next operation likelihood, a surface-feature guess, and random. Two bars each — ranking accuracy (50% is chance) and how often the top four kept a completable skeleton. Higher is better on both.",
-     "chart_takeaway": "All bars cluster near the 50% chance line; step-by-step reasoning sits at chance and below the snap answer on both measures — the reasoning added nothing and even hurt."
+     "chart_takeaway": "The five ranking-accuracy bars cluster near the 50% chance line, while the retention bars sit lower around a quarter; step-by-step reasoning sits at chance on ranking and below the snap answer on both measures — the reasoning added nothing and even hurt."
     }
    ]
   },
@@ -5142,7 +5142,7 @@
      "index": 1,
      "chart_plain_title": "First-try accuracy and how different the tries are",
      "chart_read": "For each drafting method, one bar shows how often the first try is correct and another shows how varied the tries are from each other; higher is better on both. The retrained model is the third group of bars.",
-     "chart_takeaway": "The retrained model scores lowest on both — it weakened first-try quality and made its tries more alike, the opposite of the goal."
+     "chart_takeaway": "The retrained model has the lowest first-try quality of any bar, and it made its tries more alike than its own base — the opposite of the goal (only the sample-more arm ends up less varied still)."
     },
     {
      "index": 2,
@@ -5429,7 +5429,7 @@
     {
      "label": "Change to unrelated behavior",
      "value": "stayed under the cap",
-     "sub": "the safe blend used about four-fifths of the allowed drift; the explain-only extreme hit twice the cap"
+     "sub": "the safe blend used about seven-tenths of the allowed drift; the explain-only extreme hit twice the cap"
     },
     {
      "label": "\"Invalid\" turns that were really just cut off",
@@ -5479,7 +5479,7 @@
   },
   "qwen35_4b_reliability_exec_opsd_audit": {
    "verdict_tag": "Leans toward correct code yet still ships bugs",
-   "concept_primer": "The model writes several candidate programs by adapting retrieved algorithms. Wherever a correct and a buggy version diverge, it already leans the right way almost every time — yet, like a chess player who sees the best move but plays a worse one, it never assembles a working program.",
+   "concept_primer": "The model writes several candidate programs by adapting retrieved algorithms. Wherever a correct and a buggy version diverge, it already leans the right way almost every time — yet, like a chess player who sees the best move but plays a worse one, it rarely assembles a working program (a workable one exists for only about a third of tasks).",
    "plain_question": "When a small coding model writes several programs that all pass the quick sample checks a user can see, can cheap tricks reliably pick the truly correct one?",
    "plain_answer": "No. All three cheap fixes failed. Ranking programs by the model's own confidence picked working code less often than just taking the first one that passed the visible sample tests (6 of 24 versus 8), and let more bugs slip through. Showing it one real failing test helped no more than scrambled nonsense — yet leaking the full answer clearly helped, so the test itself could see real signal.",
    "why_it_matters": "Don't trust a small model's confidence, steadier decoding, or a single failing example to screen out buggy code — it already knows the right branch and still fails. Gather independent evidence: run several distinct solutions and commit only when they agree.",
@@ -5609,9 +5609,9 @@
     },
     {
      "index": 1,
-     "chart_plain_title": "Every safe picker commits as many wrong answers as right",
+     "chart_plain_title": "Every safe picker commits at least as many wrong answers as right",
      "chart_read": "For each picking method, paired bars show correct fixes committed versus wrong ones, out of 24 stuck tasks; fewer wrong is better. Only the last method, a cheat that peeks at the hidden answers, has no wrong bar.",
-     "chart_takeaway": "The wrong bar matches the correct bar for every real method — the safe checks can't separate right from wrong; only the peeking baseline avoids mistakes."
+     "chart_takeaway": "For every real method the wrong bar is at least as tall as the correct bar — first-visible ties 7-to-7 while the other three commit even more wrong than right; the safe checks can't separate right from wrong, and only the peeking baseline avoids mistakes."
     }
    ]
   },
@@ -5619,9 +5619,9 @@
    "verdict_tag": "Being best overall isn't being best right here",
    "concept_primer": "Picture a lead actor who keeps fumbling one exact scene. Two understudies each do several takes of that same scene. You swap one in only if it clearly beats both the actor and the rival, and only after a fresh, separate batch of takes confirms it.",
    "plain_question": "When a small model stalls partway through a problem, can you tell which of two specialist helper models would actually finish it better from that exact spot?",
-   "plain_answer": "Not yet. The system is built and armed, but only its engineering checks pass, so no capability results exist. The insight is the reframe: a leaderboard tells you which teacher wins on average, not which one helps at a specific stuck moment, and here the stronger teacher's overall edge barely clears the bar. So each teacher must prove itself where the student fails, on fresh samples, or it sits out.",
+   "plain_answer": "Only when it replicates, and here one helper didn't. The test actually ran: the deep specialist's local edge held up on a fresh, separate batch, but the quick specialist looked strong on one batch of stuck points and then went slightly negative on a second, so the check refused to trust it and the whole plan was called off. The insight is the reframe: a leaderboard tells you which teacher wins on average, not which one helps at a specific stuck moment, and here the stronger teacher's overall edge barely clears the bar. So each teacher must prove itself where the student fails, on fresh samples, or it sits out.",
    "why_it_matters": "When merging specialist models into one small model, don't pick your teacher by leaderboard rank. Score each candidate on the exact states your model fails, copy its behavior only where it verifiably wins on separate samples, and skip the rest.",
-   "verdict_tone": "neutral",
+   "verdict_tone": "mixed",
    "key_numbers": [
     {
      "label": "The stronger teacher's edge on medium tasks",
@@ -5743,13 +5743,13 @@
      "index": 0,
      "chart_plain_title": "Step-by-step tracing collapses as the process gets longer",
      "chart_read": "Horizontal axis is how many steps are chained (one to five); vertical axis is the share of traces the untrained model got exactly right. Two lines: answering after deliberate thinking, and answering immediately. Higher is better; far below the 80% pass mark counts as broken.",
-     "chart_takeaway": "Both lines plunge from near-perfect at one step to about a third correct by four steps — the untrained model's tracing genuinely breaks at length, qualifying it for repair."
+     "chart_takeaway": "Both lines plunge to about a third correct by four steps — thinking from a near-perfect 96%, immediate answers from a lower 84% — so the untrained model's tracing genuinely breaks at length, qualifying it for repair."
     },
     {
      "index": 1,
      "chart_plain_title": "Thinking helps tracing at every length, with or without lossy steps",
      "chart_read": "Horizontal axis is chain length (one to five); vertical axis is the share of exactly-correct traces. Four lines split deliberate thinking versus immediate answers, each with and without steps that throw away information. Higher is better.",
-     "chart_takeaway": "Every thinking line sits above its immediate-answer twin, and information-losing steps hurt most without thinking — so slow deliberation is not the problem, chain length is."
+     "chart_takeaway": "Thinking lines mostly sit above their immediate-answer twins (the no-destructive pair briefly crosses at four steps), and information-losing steps hurt most without thinking — so slow deliberation is not the problem, chain length is."
     },
     {
      "index": 2,
@@ -5811,7 +5811,7 @@
      "index": 3,
      "chart_plain_title": "Which task families keep the correct program, by template style",
      "chart_read": "A grid: each row is one of twelve task families (familiar, renamed, and brand-new-operation groups); each column is a template style (auto-generated, hand-written, stripped). Cell shade is the share of that family's tasks keeping the correct program; brighter is higher.",
-     "chart_takeaway": "The hand-written column is fully lit down every row, the auto column goes dark across the brand-new-operation families, and the stripped column is dark almost everywhere — the template, not the family, decides survival."
+     "chart_takeaway": "The hand-written column is fully lit down every row, the auto column goes dark across most brand-new-operation families (one still keeps the program), and the stripped column is dark almost everywhere — the template, not the family, decides survival."
     }
    ]
   },
@@ -6569,9 +6569,9 @@
    "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Solved on the first pass",
+     "label": "Solved by the four-tries baseline",
      "value": "62%",
-     "sub": "of 150 coding tasks, before any extra effort"
+     "sub": "of 150 coding tasks, from four fresh tries before any repair or extra samples"
     },
     {
      "label": "Stuck tasks rescued: retry vs trained fixer",
@@ -6694,7 +6694,7 @@
      "index": 0,
      "chart_plain_title": "Passing hidden tests: writing the whole fix vs sketching for a solver",
      "chart_read": "Bars group by difficulty tier (easy, medium, hardest); height is the share of hidden tests passed, taller is better. Each tier shows writing the whole fix directly, the solver filling a template, the safe blend of both, and the best-possible candidate pick.",
-     "chart_takeaway": "On the hardest tier the sketch and blend bars tower over the short direct bar, reaching 88% versus 33%; the best-possible pick sits at 100% everywhere."
+     "chart_takeaway": "On the hardest tier the sketch bar reaches 78% and the safe-blend bar 88%, both towering over the short 33% direct bar; the best-possible pick sits at 100% everywhere."
     },
     {
      "index": 1,
@@ -7051,7 +7051,7 @@
     {
      "label": "Damage to unrelated knowledge",
      "value": "double the safe limit",
-     "sub": "unrelated-output drift of 31% versus the 15% ceiling — this stopped the run"
+     "sub": "unrelated-output drift of 30% versus the 15% ceiling — this stopped the run"
     },
     {
      "label": "New code families tested for transfer",
@@ -7320,7 +7320,7 @@
      "index": 0,
      "chart_plain_title": "Writing correct programs directly, across training methods",
      "chart_read": "Each cluster is a family of puzzles; taller bars mean more solved by writing one program with no retries. The four bars are the frozen starting model, two ways of reusing its own drafts, and a model simply shown the correct answers.",
-     "chart_takeaway": "Both reuse bars sit just barely above the starting model while the shown-answers bar towers far above, so self-teaching helps only slightly."
+     "chart_takeaway": "The reuse bars hover right around the starting model — sometimes a touch above, often a touch below — while the shown-answers bar towers far above, so self-teaching helps only slightly."
     },
     {
      "index": 1,
@@ -7332,7 +7332,7 @@
      "index": 2,
      "chart_plain_title": "How often the chosen program is actually correct",
      "chart_read": "Bars group practice puzzles and fresh ones; taller means the chosen draft is correct more often. Three bars per group: the model's raw hunch, its learned grader, and the score if it always grabbed its best available draft.",
-     "chart_takeaway": "The learned grader barely rises above the raw hunch while the best-possible bar sits far higher, showing weak judgment is the real bottleneck."
+     "chart_takeaway": "The learned grader barely differs from the raw hunch while the best-possible bar sits far higher, showing weak judgment is the real bottleneck."
     },
     {
      "index": 3,
@@ -7604,7 +7604,7 @@
      "index": 5,
      "chart_plain_title": "Exactly rebuilding the intended program stays low everywhere",
      "chart_read": "Bars show how often each method reproduces the exact intended program (taller is better) across four task sets, comparing plain search, the best learned scorer, and the answer-checking version.",
-     "chart_takeaway": "All bars stay well below half and drop to about a third on the hardest set, so exact program recovery is hard even with answer checking."
+     "chart_takeaway": "Even the answer-checking bars only reach the mid-fifties, and exact recovery drops to about a third on the hardest set, so rebuilding the canonical program is hard even with answer checking."
     },
     {
      "index": 6,
@@ -7914,7 +7914,7 @@
      "index": 2,
      "chart_plain_title": "Share of the reachable improvement the picker actually captured",
      "chart_read": "One bar per test set showing how much of the gap between the plain first pick and the best available candidate the picker closed. Above zero is good; below zero means it did worse than picking nothing.",
-     "chart_takeaway": "Bars reach at most a thin positive sliver and turn negative on the reworded and longer problems, so the picker captured almost none of the available headroom."
+     "chart_takeaway": "Bars reach at most a thin positive sliver on the shortest splits and turn negative on the paired split and every longer problem, so the picker captured almost none of the available headroom."
     },
     {
      "index": 3,
@@ -7932,7 +7932,7 @@
      "index": 5,
      "chart_plain_title": "Reworded questions widen the accuracy gap as problems lengthen",
      "chart_read": "Lines track accuracy as problems grow from six to ten steps, split into plainly worded and reworded versions, for both the plain system and the trained picker. Higher is better; reworded lines sit lower.",
-     "chart_takeaway": "Reworded lines fall well below plainly worded ones at every length, and the picker widens rather than closes that reworded gap on the longer problems."
+     "chart_takeaway": "Reworded lines fall well below plainly worded ones at every length, and the picker fails to close that reworded gap on the longer problems, dragging accuracy lower on both."
     }
    ]
   },
@@ -7970,7 +7970,7 @@
      "index": 0,
      "chart_plain_title": "Longer unseen problems solved correctly, by training mix",
      "chart_read": "Two groups, six-step and eight-step unseen problems; each has three bars: trained on single-step only, on a one-and-two-step mix, and on a one-two-and-three-step mix. Height is share solved correctly by the external checker; taller is better.",
-     "chart_takeaway": "Only the one-two-and-three-step mix rises in both groups (to 83% and 89%); the other two mixes tie at about 72%, so shallow practice alone helps."
+     "chart_takeaway": "Only the one-two-and-three-step mix rises in both groups (to 83% and 89%); the other two mixes stall near 72% (atomic-only edges up to 78% at eight steps), so shallow practice alone does not help."
     },
     {
      "index": 1,
@@ -8088,7 +8088,7 @@
      "index": 1,
      "chart_plain_title": "How much of the room to improve the judge actually captured",
      "chart_read": "Each bar is one difficulty level. Height shows how much of the gap between the model's own accuracy and best-possible the judge captured; the zero line means no change, above zero is better, below zero means it made things worse.",
-     "chart_takeaway": "Bars are only slightly positive on easy questions and drop below zero on paraphrased and longer questions, so the judge helps a little then backfires."
+     "chart_takeaway": "Bars are only slightly positive on easy questions and drop below zero on paired and longer questions, so the judge helps a little then backfires."
     },
     {
      "index": 2,
@@ -8100,7 +8100,7 @@
      "index": 3,
      "chart_plain_title": "Which training signal actually changed the judge's choices",
      "chart_read": "Bars grouped by the rule used to teach the judge what counts as a good program. Height is the share of mixed questions answered correctly, taller is better, with the model's own choice next to the trained judge.",
-     "chart_takeaway": "Four of five training rules leave the judge identical to the model; only rewarding a correct final answer nudged it above, and only slightly."
+     "chart_takeaway": "Three of five training rules leave the judge identical to the model; only rewarding a correct final answer nudged it above, and only slightly."
     },
     {
      "index": 4,
@@ -8167,7 +8167,7 @@
     {
      "index": 4,
      "chart_plain_title": "Which task families the programs break",
-     "chart_read": "Paired bars per task family give whole-task success for direct answering versus the counterexample program; taller is better. Direct is near-perfect everywhere; the program drops City, EmergencyCall, Log, and Product to zero.",
+     "chart_read": "Paired bars per task family give whole-task success for direct answering versus the counterexample program; taller is better. Direct solves most families cleanly but dips to 75% on DateTime and 33% on Number; the program drops City, EmergencyCall, Log, and Product to zero.",
      "chart_takeaway": "Programs match direct answering only on Abbreviation, Name, and Phone and wipe out whole families direct solves cleanly — the failure is broad, not one odd task."
     },
     {
@@ -8345,8 +8345,8 @@
     },
     {
      "label": "Public tasks improved vs worsened",
-     "value": "20 helped, 1 hurt",
-     "sub": "out of 45 tasks, in every training seed"
+     "value": "18–20 helped, 1 hurt",
+     "sub": "of 45 tasks per seed; exactly 1 hurt in every seed"
     }
    ],
    "charts": [
@@ -8457,7 +8457,7 @@
     {
      "index": 5,
      "chart_plain_title": "Repair training almost never reproduces the intended program",
-     "chart_read": "For four question sets, four bars: starting system, self-picked repair, answer-key repair, and full answer-key training. Height is how often the exact intended program is recovered; taller is better.",
+     "chart_read": "For four question sets, four bars: starting system, answer-key repair, self-picked repair, and full answer-key training. Height is how often the exact intended program is recovered; taller is better.",
      "chart_takeaway": "Every repair bar hugs zero while full training reaches roughly half to three-quarters, so repair barely changes the program the system writes."
     },
     {
@@ -8526,7 +8526,7 @@
      "index": 4,
      "chart_plain_title": "Reworded-problem accuracy by task type and output style",
      "chart_read": "Bars show percent correct (taller is better) on reworded prompts, grouped by task type, with one bar per output style: answer-only, two simple step styles, and the verbose structured-object style.",
-     "chart_takeaway": "Most styles stay above 83% across task types, but the verbose structured style drops to zero on table lookup and date math, failing whole categories."
+     "chart_takeaway": "Line-based styles stay above 83% on most task families (dipping as low as 67% on text cleanup), while the verbose structured style drops to zero on table lookup and date math, failing whole categories."
     }
    ]
   },
@@ -8970,9 +8970,9 @@
     },
     {
      "index": 3,
-     "chart_plain_title": "Stop-timing accuracy crashed while edit-picking held",
+     "chart_plain_title": "Stop-timing accuracy crashed; edit-picking dipped less",
      "chart_read": "Two groups — how often the model picks the right edit, and how often it correctly decides to stop — with bars for after copying and after each reward round. Taller is better.",
-     "chart_takeaway": "Stop accuracy falls from about 85% to under a third after either round, while edit-picking barely moves."
+     "chart_takeaway": "Stop accuracy falls from about 85% to under a third after either round; edit-picking drops less sharply, from about half to roughly a third."
     },
     {
      "index": 4,
@@ -9256,7 +9256,7 @@
      "index": 1,
      "chart_plain_title": "First-try success on paired puzzles stays flat until full answer keys",
      "chart_read": "One bar per training style, left to right; bar height is first-try success on paired puzzles. Taller is better. The rightmost style trained on complete answer keys.",
-     "chart_takeaway": "The first three bars sit flat at the same low height; only the full-answer-key bar leaps up, showing outcome-watching moved nothing."
+     "chart_takeaway": "The first three bars sit flat at the same low height; the gold-trace bar rises modestly and only the full-answer-key bar leaps far up, showing outcome-watching moved nothing."
     },
     {
      "index": 2,
@@ -9274,7 +9274,7 @@
      "index": 4,
      "chart_plain_title": "The small gain shows up at only one training setting",
      "chart_read": "Three training configurations run along the bottom; colors compare answer-key training against outcome-watching on two puzzle types. Taller is better. The other configs raise the weighting or add a second pass.",
-     "chart_takeaway": "Outcome-watching only beats answer-key training in the leftmost setting; stronger weighting or a second pass erases the edge."
+     "chart_takeaway": "Outcome-watching's clear edge over answer-key training shows only in the leftmost setting; stronger weighting or a second pass shrinks it to a near tie."
     },
     {
      "index": 5,
@@ -9317,8 +9317,8 @@
     {
      "index": 0,
      "chart_plain_title": "Editing steps one at a time nearly doubles fully-correct programs",
-     "chart_read": "Four bars on fresh problems; bar height is how often the whole step-by-step recipe runs exactly right (taller is better). Left to right: the model alone, a fixer that rewrites everything at once, the one-step-at-a-time fixer, then the best a perfect fixer could reach.",
-     "chart_takeaway": "The one-step fixer bar rises far above the model-alone bar, roughly doubling correct programs, and edges just past the rewrite-everything fixer."
+     "chart_read": "Four bars on fresh problems; bar height is how often the whole step-by-step recipe runs exactly right (taller is better). Left to right: the model alone, a fixer that picks the single best candidate in one shot, the one-step-at-a-time fixer, then the best a perfect fixer could reach.",
+     "chart_takeaway": "The one-step fixer bar rises far above the model-alone bar, roughly doubling correct programs, and edges just past the pick-the-best-in-one-shot fixer."
     },
     {
      "index": 1,
@@ -9454,7 +9454,7 @@
      "index": 6,
      "chart_plain_title": "Even the first working compiler favored reworded prompts",
      "chart_read": "Two program lengths (4 and 8 steps). Two bars each: plain template versus reworded template. Vertical axis is answer accuracy, which equals exact program recovery here, higher is better.",
-     "chart_takeaway": "At eight steps the plain bar drops to 78% while the reworded bar holds at 94.5% — prompt wording alone shifts reliability by thirteen points."
+     "chart_takeaway": "At eight steps the plain bar drops to 78% while the reworded bar holds at 94.5% — prompt wording alone shifts reliability by about sixteen points."
     }
    ]
   },
@@ -9534,7 +9534,7 @@
   },
   "qwen_learned_repair_verifier": {
    "verdict_tag": "The fix exists; picking it blind is hard",
-   "concept_primer": "A wrong program is surrounded by 1,299 nearby rewrites, and one is correct nearly nine times in ten. It is like a multiple-choice test where the right answer sits on the page most of the time, but you must circle it with no answer key.",
+   "concept_primer": "A wrong program sits in a pool of 1,299 candidate rewrites, itself included, and one of them is correct nearly nine times in ten. It is like a multiple-choice test where the right answer sits on the page most of the time, but you must circle it with no answer key.",
    "plain_question": "If a small model writes a wrong program, can a cheap judge that never sees the correct answer reliably pick a fixed version from many candidates?",
    "plain_answer": "Partly. Without ever seeing the true answer, the judge lifted correct execution from 30% to 47%. But a checker allowed to peek at the answer key found a correct fix already sitting in the candidate pile 88% of the time, so blind picking claimed only about a third of the fixable errors. Comparing two wordings of the same task and rewarding agreement did better, reaching 51%.",
    "why_it_matters": "When repairing small-model output, spend on the selector, not the candidate generator: the fix is almost always already in the pool. And if you can pose one task two ways, rewarding answers that agree beats a trained scorer alone.",
@@ -9558,7 +9558,7 @@
     {
      "label": "Rewrite candidates generated per program",
      "value": "1,299",
-     "sub": "nearby edits of the original, plus the original itself"
+     "sub": "the candidate pool per program, with the original itself included"
     }
    ],
    "charts": [
@@ -9622,7 +9622,7 @@
      "index": 2,
      "chart_plain_title": "Which parts of the recipe the model reads cleanly",
      "chart_read": "Each line shows how accurately one piece of the recipe reads as problems lengthen; higher is better. The starting-number line stays pinned at the top, the operation line sits just below, and the step-number line trails lowest.",
-     "chart_takeaway": "The step-number line sits near 80 percent and keeps sliding while the others stay near perfect, pinpointing number-reading as the weak link."
+     "chart_takeaway": "The step-number line sits near 80 percent and keeps sliding while the starting-number line holds perfect and the operation line stays high, pinpointing number-reading as the weak link."
     }
    ]
   },
@@ -9864,7 +9864,7 @@
    "verdict_tag": "Point to the numbers, don't recompute them",
    "concept_primer": "Instead of doing chained arithmetic in its head and reading the digits back, the four-billion-parameter model only points: which word is the starting number, which words are the operations, which are their arguments, and in what order. An exact calculator then copies those symbols and runs the math flawlessly.",
    "plain_question": "Can a small model reliably run multi-step arithmetic if it just locates the numbers and operations in the text and lets an exact calculator do the math?",
-   "plain_answer": "Yes. When the model just points to where each number and operation sits and copies the exact symbols for a hidden calculator to run, it solves four-step problems about 90% of the time. A version trained to write the answer itself never left the floor, near 3% at every length. A shortcut trained only on final answers aced four steps but crashed to zero at eight, never learning the ordered pointing that stretches to longer chains.",
+   "plain_answer": "Yes. When the model just points to where each number and operation sits and copies the exact symbols for a hidden calculator to run, it solves four-step problems about 90% of the time. A version trained to write the answer itself never left the floor, at most 3% at any length. A shortcut trained only on final answers aced four steps but crashed to zero at eight, never learning the ordered pointing that stretches to longer chains.",
    "why_it_matters": "For long step-by-step symbolic work, stop making a small model regenerate exact values from memory. Have it mark the right token positions and copy symbols verbatim into a real executor; reliability then hinges on locating slots, not doing arithmetic.",
    "verdict_tone": "positive",
    "key_numbers": [
@@ -9894,7 +9894,7 @@
      "index": 0,
      "chart_plain_title": "How often each method solves the whole chain, by length",
      "chart_read": "Bars are grouped by chain length (4, 8, 12, and 24 steps); bar height is the share of chains a method solves correctly end to end, so taller is better. The four colors are four methods, from point-and-copy down to writing the answer directly.",
-     "chart_takeaway": "The point-and-copy bars tower over the rest at every length; writing the answer directly stays pinned near the floor, and the shortcut method only spikes at four steps."
+     "chart_takeaway": "The point-and-copy bars tower over the rest at every length past four steps; at four steps the shortcut method spikes to a perfect score, just edging out point-and-copy, while writing the answer directly stays pinned near the floor throughout."
     },
     {
      "index": 1,
@@ -10346,7 +10346,7 @@
      "index": 2,
      "chart_plain_title": "Simple edits work; date rounding and ranges do not",
      "chart_read": "Each bar is a type of text operation; height is the share of those tasks the best toolbox solved. Left bars are simple surface edits, right bars are date and number rounding and ranges. Taller is better.",
-     "chart_takeaway": "Coverage falls from about two-in-five for plain substring edits to zero for date-range and rounding tasks, exactly where the toolbox runs out."
+     "chart_takeaway": "Coverage falls from about two-in-five for plain substring edits to zero for date rounding and range tasks (number rounding barely clears one-in-twenty), exactly where the toolbox runs out."
     },
     {
      "index": 3,
@@ -10414,19 +10414,19 @@
      "index": 1,
      "chart_plain_title": "More hidden steps on unseen long programs: ordered versus scrambled",
      "chart_read": "On unseen 32-step programs. The horizontal axis is the number of private hidden compute steps granted (4 to 32); the vertical axis is final-answer accuracy, higher is better. One line ordered, one scrambled-order.",
-     "chart_takeaway": "Both lines wander between 3% and 5% with no upward trend as steps increase; the scrambled control even peaks highest at 4.9%, so ordered steps buy nothing."
+     "chart_takeaway": "Both lines wander between about 2% and 5% with no upward trend as steps increase; the scrambled control even peaks highest at 4.9%, so ordered steps buy nothing."
     },
     {
      "index": 2,
      "chart_plain_title": "More hidden steps on unfamiliar operation mixes does not help",
      "chart_read": "On programs combining operations never mixed during training. The horizontal axis is the number of private hidden compute steps (4 to 32); the vertical axis is final-answer accuracy, higher is better. Ordered versus scrambled-order steps.",
-     "chart_takeaway": "Both lines flatline near 3% at every step count; piling on hidden compute never recovers execution when the operation mix is new."
+     "chart_takeaway": "Both lines hover near 3% at every step count, dipping as low as 1%; piling on hidden compute never recovers execution when the operation mix is new."
     },
     {
      "index": 3,
      "chart_plain_title": "How much accuracy swings from the training random seed alone",
      "chart_read": "Bars group by unseen split (length 32, composition 16, composition 24). Height is final-answer accuracy, higher is better. Three bars per group, one for each of three training seeds.",
-     "chart_takeaway": "On the same split accuracy swings from about 1% to over 8% just by changing the random seed, a lottery as large as any effect the method produces."
+     "chart_takeaway": "Just by changing the random seed, accuracy swings from about 1% to over 8% across these splits, and more than quadruples on a single split, a lottery as large as any effect the method produces."
     },
     {
      "index": 4,
@@ -11281,8 +11281,8 @@
     {
      "index": 1,
      "chart_plain_title": "Accuracy falls off a cliff past the practiced chain length",
-     "chart_read": "The horizontal axis is how many math steps the problem has; the vertical axis is how often the whole sequence comes out exactly right. Higher is better. Each line is one build of the system. All lines are high only at the practiced four-step length and crash toward zero beyond it.",
-     "chart_takeaway": "Every line plunges from near-perfect at four steps to near-zero at eight, twelve, and twenty-four steps, showing the skill is locked to one length."
+     "chart_read": "The horizontal axis is how many math steps the problem has; the vertical axis is how often the whole sequence comes out exactly right. Higher is better. Each line is one build of the system. The two trace-trained lines are high only at the practiced four-step length and crash toward zero beyond it, while the two control builds sit at random-guess level at every length.",
+     "chart_takeaway": "The two trace-trained lines plunge from near-perfect at four steps to near-zero at eight, twelve, and twenty-four steps, while the control lines never leave random-guess level, showing the skill is locked to one length."
     },
     {
      "index": 2,
@@ -11442,7 +11442,7 @@
      "index": 1,
      "chart_plain_title": "Accuracy stays high until programs reach full length",
      "chart_read": "The horizontal axis is program length from 8 to 24 steps; each line is one training approach; higher is better.",
-     "chart_takeaway": "Every approach is near-perfect at 8 and 16 steps, then all but the full-size easy-to-hard approach collapse toward zero at 24 steps."
+     "chart_takeaway": "Every approach stays high (81% or better) at 8 and 16 steps, then all but the full-size easy-to-hard approach collapse toward zero at 24 steps."
     },
     {
      "index": 2,
@@ -11472,7 +11472,7 @@
      "index": 6,
      "chart_plain_title": "Short-program skill dips mid-training as longer programs arrive",
      "chart_read": "The horizontal axis is training progress; the lines show accuracy on short, unfamiliar-wording programs for three approaches as longer programs enter training; higher is better.",
-     "chart_takeaway": "The lines sag mid-training as longer programs arrive; the winning approach rebounds to about 91%, while one control ends lower near 58%."
+     "chart_takeaway": "The winning approach sags mid-training as longer programs arrive, then rebounds to about 91%, while one control ends lower near 58%."
     }
    ]
   },
@@ -11628,7 +11628,7 @@
      "index": 3,
      "chart_plain_title": "Accuracy by task family: base model versus contrastive-tuned",
      "chart_read": "Ten task families (dates, numbers, phone, email, shipping codes and more) across the bottom; two bars each for the untrained base and the contrastive-tuned model, as share of tasks fully correct. A higher contrastive bar means the tuning helped.",
-     "chart_takeaway": "Contrastive lifts most families, several from 0% to 100%; only the address family regresses to 0% and one billing-code family stays stuck at 0%."
+     "chart_takeaway": "Contrastive lifts most families, several from 0% to 100%; no family regresses, and only the billing-code family stays stuck at 0% (with zip codes already tied at 100%)."
     },
     {
      "index": 4,
@@ -11740,7 +11740,7 @@
      "index": 0,
      "chart_plain_title": "Extra pointing hints do not beat plain training",
      "chart_read": "Three clusters, one per training setup: plain training and two hint-added versions. In each cluster, one bar is how often the final answer is exactly right, the other how often two rewordings of the same problem agree. Taller is better.",
-     "chart_takeaway": "The exact-answer bars are all roughly equal while plain training's agreement bar towers over both hint versions, so the hints added nothing and cost consistency."
+     "chart_takeaway": "The exact-answer bars for plain and full-hint training tie while the light-hint bar sits clearly lower, and plain training's agreement bar towers over both hint versions, so the hints added nothing and cost consistency."
     },
     {
      "index": 1,
@@ -12100,7 +12100,7 @@
      "index": 0,
      "chart_plain_title": "Editing in a loop beats a single guess; predicting outcomes adds nothing",
      "chart_read": "Grouped bars show the share of tasks solved across five test sets plus their average; taller is better. Each cluster has four bars: a single one-shot guess, the edit-and-run loop, that loop also predicting outputs, and a flawless step-by-step teacher.",
-     "chart_takeaway": "The loop's bars top the one-shot bars on average, the output-predicting bars are no taller and often shorter, and the teacher's bars tower over all, showing room still unclaimed."
+     "chart_takeaway": "The loop's bars top the one-shot bars on average, the output-predicting bars are no taller on average and often shorter, and the teacher's bars tower over all, showing room still unclaimed."
     }
    ]
   },
@@ -12488,7 +12488,7 @@
      "index": 2,
      "chart_plain_title": "Concentrating examples opens combinations even spreading leaves stuck",
      "chart_read": "Bars grouped by which never-seen skill-combination family; colored bars are spreading examples evenly, concentrating on the hardest families, and a control that concentrates on the easy families. Taller is better.",
-     "chart_takeaway": "Concentrating on hard families lifts two families off zero that even spreading never cracks, while the already-easy families stay maxed out."
+     "chart_takeaway": "Concentrating on hard families lifts two families off zero that even spreading never cracks, while the already-easy families stay high — one pinned at 100%, the other holding around a third."
     },
     {
      "index": 3,
