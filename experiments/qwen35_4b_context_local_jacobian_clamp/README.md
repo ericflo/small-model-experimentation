@@ -88,22 +88,47 @@ Scientific stages are restartable and refuse to cross a failed gate:
 
 ## Results
 
-Pre-run. The task contract, controls, thresholds, and adversarial review are
-being committed and pushed before any result-bearing GPU call. CPU smoke
-receipts are plumbing-only.
+Frozen terminal verdict: **`INVALID_CONTROL`**. The scientific signal was
+otherwise perfect, but one of 96 random-control rows missed the preregistered
+per-item/layer realized-norm tolerance, so this experiment cannot claim
+`J_TRANSPORT`.
+
+- The full-activation donor gate selected the earliest band 4–8. Target donors
+  changed both direct key and mapped digit on 24/24 selection items; wrong donors
+  changed 24/24 to their own key/digit. Four early bands passed; two late bands
+  failed.
+- On 48 untouched confirmation items, the all-24 J clamp changed both the direct
+  key and mapped digit on 48/48. The two-coordinate J clamp changed the mapped
+  digit on 47/48.
+- Wrong-donor J clamps changed 48/48 to the wrong donor's own key/digit, while
+  concept logit-lens clamps and span-orthogonal random controls changed 0/48.
+- The paired J-minus-random consequence difference was +1.00 with bootstrap
+  95% interval [1.00, 1.00]. Parsing remained 100%.
+- Formal failure: one consequence random-control row had realized-norm relative
+  error 1.155e-5 versus the frozen 1e-5 maximum. Requested controls were
+  orthogonal to numerical precision, but bf16 application left as much as 5.7%
+  of one realized random delta in the J span. Neither defect is rounded away.
+
+See [`reports/report.md`](reports/report.md) and
+[`analysis/summary.md`](analysis/summary.md).
 
 ## Interpretation
 
-No scientific interpretation is licensed yet. A failed full-donor gate means
-the chosen token/layer trajectory is not a usable causal site. A donor pass and
-J failure means the state is transportable but not captured by this J
-dictionary. A J pass licenses a separate native-thinking experiment; it is
-still oracle mechanism evidence, not a deployable gain.
+The parent experiment's late answer-position coordinate looked motor-like. The
+new early selected-token clamp instead exhibits the registered signature of a
+semantic state: it transports through a fresh arbitrary mapping, a wrong donor
+produces its own consequence, a logit lens is inert, and a two-coordinate clamp
+nearly saturates. This is high-priority evidence, not a valid positive claim,
+because the exact random-control contract failed. A separate fresh replication
+must enforce both realized norm and realized span orthogonality before any
+native-thinking continuation.
 
 ## Knowledgebase Update
 
-- Program evidence: update at a terminal scientific gate.
-- Program backlog: already names this follow-up.
+- Program evidence: update with the invalid-but-high-priority result after it is
+  synchronized to `origin/main`.
+- Program backlog: replicate with a quantization-aware realized-orthogonal
+  control on fresh mappings before native-thinking work.
 - Claim ledger: remain unclaimed while the repository-wide re-grade is open.
 
 ## Artifacts

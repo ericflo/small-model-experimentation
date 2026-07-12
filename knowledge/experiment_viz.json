@@ -5,20 +5,69 @@
   "qwen35_4b_context_local_jacobian_clamp": {
    "charts": [
     {
-     "title": "Frozen fresh split sizes before scientific inference",
+     "title": "Target-answer rate on untouched confirmation mappings",
      "kind": "bar",
-     "categories": ["lens fit", "causal-site selection", "untouched confirmation"],
+     "categories": ["full donor", "all-24 J", "pair J", "wrong-donor J", "logit lens", "random"],
      "series": [
       {
-       "label": "prompt-local lookup tables",
-       "values": [48, 24, 48]
+       "label": "direct key target rate",
+       "values": [1.0, 1.0, 1.0, 0.0, 0.0, 0.0]
+      },
+      {
+       "label": "mapped digit target rate",
+       "values": [1.0, 1.0, 0.9791666666666666, 0.0, 0.0, 0.0]
       }
      ],
-     "x_label": "split role",
-     "y_label": "items",
+     "x_label": "intervention",
+     "y_label": "target-answer rate",
+     "y_format": "percent100",
+     "note": "Forty-eight untouched mappings at frozen band 4–8. The wrong-donor arm produced its own key/digit on 48/48, not the registered target. Formal verdict remains INVALID_CONTROL because one of 96 random rows missed the exact realized-norm tolerance.",
+     "source": "experiments/qwen35_4b_context_local_jacobian_clamp/analysis/metrics.json",
+     "headline": true
+    },
+    {
+     "title": "Mean target-minus-source logit margin",
+     "kind": "bar",
+     "categories": ["baseline", "full donor", "all-24 J", "pair J", "logit lens", "random"],
+     "series": [
+      {
+       "label": "direct key margin",
+       "values": [-11.875, 11.970052083333334, 11.219401041666666, 10.833333333333334, -11.771484375, -11.875]
+      },
+      {
+       "label": "mapped digit margin",
+       "values": [-9.192708333333334, 9.41015625, 8.553385416666666, 8.1171875, -9.19140625, -9.209635416666666]
+      }
+     ],
+     "x_label": "intervention",
+     "y_label": "target minus source logit",
      "y_format": "number",
-     "note": "CPU design receipt only, not a model result. Every mapping tuple is unique across splits; source concepts are balanced.",
-     "source": "experiments/qwen35_4b_context_local_jacobian_clamp/runs/smoke/data_receipt.json",
+     "note": "Positive values favor the target; negative values favor the source. The J clamp crosses both decision boundaries while logit-lens and random controls remain at baseline.",
+     "source": "experiments/qwen35_4b_context_local_jacobian_clamp/analysis/metrics.json",
+     "headline": true
+    },
+    {
+     "title": "Full-donor causal transport by five-layer band",
+     "kind": "line",
+     "series": [
+      {
+       "label": "direct key target rate",
+       "points": [[4, 1.0], [8, 1.0], [12, 1.0], [16, 1.0], [20, 0.041666666666666664], [24, 0.0]]
+      },
+      {
+       "label": "mapped digit target rate",
+       "points": [[4, 1.0], [8, 1.0], [12, 1.0], [16, 1.0], [20, 0.0], [24, 0.0]]
+      },
+      {
+       "label": "wrong donor's own mapped digit",
+       "points": [[4, 1.0], [8, 1.0], [12, 1.0], [16, 1.0], [20, 0.0], [24, 0.0]]
+      }
+     ],
+     "x_label": "band start layer",
+     "y_label": "redirected-answer rate",
+     "y_format": "percent100",
+     "note": "Selection-only full-state positive control, 24 items per band. Bands are start through start+4. Earliest registered passing band 4–8 was frozen before J confirmation.",
+     "source": "experiments/qwen35_4b_context_local_jacobian_clamp/analysis/metrics.json",
      "headline": true
     }
    ]

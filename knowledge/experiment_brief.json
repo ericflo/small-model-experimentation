@@ -3,35 +3,47 @@
  "generated_on": "2026-07-05",
  "experiments": {
   "qwen35_4b_context_local_jacobian_clamp": {
-   "verdict_tag": "Stricter causal test is frozen; model result pending",
+   "verdict_tag": "Perfect causal signal; one exact control row invalidates the claim",
    "concept_primer": "The first study could make the model say a replacement word, but the model did not reason from it. This follow-up edits the earlier place where that word is represented and checks whether a later lookup answer changes.",
    "plain_question": "Can an internal edit change what the model computes from a chosen key, instead of only changing the next word it says?",
-   "plain_answer": "We do not know yet. The fresh lookup tables, untouched test split, stop rules, and failure checks are frozen before scientific model inference.",
-   "why_it_matters": "A real reasoning control should survive into a different consequence. This test blocks a tempting false positive in which an edit merely pushes the desired answer token directly.",
-   "verdict_tone": "pending",
+   "plain_answer": "Provisionally yes, but formally not yet. The corrected early edit changed every fresh mapped answer, while equally large random edits changed none. One of 96 random-control rows missed an extremely strict size match by a tiny amount, so the frozen rules invalidate the result until a fresh replication.",
+   "why_it_matters": "This is the first evidence here that a compact internal word state can be changed and then used in a different computation. Honoring the failed control prevents an exciting near-perfect result from outrunning its measurement.",
+   "verdict_tone": "mixed",
    "key_numbers": [
     {
-     "label": "Separate fitting prompts",
-     "value": "48",
-     "sub": "used only to learn internal word directions"
+     "label": "Fresh mapped answers changed",
+     "value": "48/48",
+     "sub": "the early internal edit recomputed every target lookup value"
     },
     {
-     "label": "Band-selection tables",
-     "value": "24",
-     "sub": "used only to locate a causal internal site"
+     "label": "Equally large random edits",
+     "value": "0/48",
+     "sub": "none changed the mapped answer"
     },
     {
-     "label": "Untouched confirmation tables",
-     "value": "48",
-     "sub": "opened once after the internal site is frozen"
+     "label": "Exact control rows outside tolerance",
+     "value": "1/96",
+     "sub": "enough to force the formal invalid-control verdict"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Fresh data are separated by decision role",
-     "chart_read": "Each bar counts prompt-local lookup tables assigned to fitting, site selection, or untouched confirmation. These are design counts, not model scores.",
-     "chart_takeaway": "The final 48 tables cannot influence which internal depth is chosen."
+     "chart_plain_title": "The early edit changes both the word and its mapped answer",
+     "chart_read": "Each pair of bars shows how often an edit produced the intended replacement word and the separate lookup value. Taller is stronger; the ordinary output-direction and random edits are controls.",
+     "chart_takeaway": "The full internal state and compact early word coordinates nearly or fully saturate both outputs; ordinary output directions and random edits do nothing."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "The edit flips the model's preference, not just the final choice",
+     "chart_read": "Positive bars favor the replacement and negative bars favor the original. Direct word and mapped answer are shown separately.",
+     "chart_takeaway": "The compact early edit moves both scores from strongly original to strongly replacement; random and ordinary output controls remain at baseline."
+    },
+    {
+     "index": 2,
+     "chart_plain_title": "The selected key matters early, then becomes too late to replace",
+     "chart_read": "Each point is the share of selection items redirected when the complete internal state is replaced over one five-layer window.",
+     "chart_takeaway": "Four early windows redirect every word and lookup answer; the two late windows are inert, locating when the key is consumed."
     }
    ]
   },

@@ -120,3 +120,21 @@ Created as a new experiment scaffold.
 - The rerun matched the smoke J delta with relative error exactly 0.0. Requested
   span projection was 5.2e-8; bf16-realized projection was 9.1e-4 and is recorded
   rather than hidden. The untouched confirmation split remains unopened.
+
+## 2026-07-12 — terminal confirmation: invalid control
+
+- Opened the 48-item confirmation split once at frozen band 4–8.
+- All-24 J changed direct key and mapped digit on 48/48; pair J changed direct
+  48/48 and consequence 47/48; wrong-donor J changed 48/48 to its own key/digit.
+  Full donor was 48/48, while logit lens and random were 0/48 target and retained
+  the source on 48/48.
+- Every scientific endpoint and specificity threshold passed with paired
+  J-minus-random bootstrap interval [1.00,1.00].
+- One of 96 random rows (`confirm-0046`, consequence) had max per-layer realized
+  norm error 1.155e-5, above the frozen 1e-5 limit. The terminal verdict is
+  therefore `INVALID_CONTROL`, not `J_TRANSPORT`.
+- Requested random vectors were orthogonal to 2.34e-7 maximum projection, but
+  bf16-realized deltas reached 5.71% J-span projection. This is recorded as an
+  additional replication requirement.
+- Runtime was 268.4 seconds, peak allocated memory 8.44 GB, 672 rows. Native
+  thinking remains ineligible; next work is a separate fresh control replication.

@@ -1227,11 +1227,11 @@
   },
   {
     "file_counts": {
-      ".json": 8,
-      ".jsonl": 4,
-      ".md": 7,
+      ".json": 10,
+      ".jsonl": 5,
+      ".md": 8,
       ".pt": 2,
-      ".py": 12,
+      ".py": 13,
       ".yaml": 3
     },
     "id": "qwen35_4b_context_local_jacobian_clamp",
@@ -1251,6 +1251,7 @@
     ],
     "title": "Qwen3.5-4B Context-Local Jacobian Clamp",
     "top_level_dirs": [
+      "analysis",
       "configs",
       "data",
       "reports",
@@ -1259,8 +1260,8 @@
       "src",
       "tests"
     ],
-    "total_files": 36,
-    "total_size_bytes": 3879710
+    "total_files": 41,
+    "total_size_bytes": 4398310
   },
   {
     "file_counts": {

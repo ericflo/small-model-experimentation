@@ -16,9 +16,10 @@ reproducibility:
     experiments/qwen35_4b_context_local_jacobian_clamp/scripts/run.py --stage
     donor-gate && .venv/bin/python
     experiments/qwen35_4b_context_local_jacobian_clamp/scripts/run.py --stage
-    confirmation
+    confirmation && .venv/bin/python
+    experiments/qwen35_4b_context_local_jacobian_clamp/scripts/analyze.py
   required_external_artifacts: []
 notes: >-
-  No training or adapter. The targeted lens is expected to remain below the
-  repository small-artifact limit; row-level results and receipts will be
-  committed. Update if the actual fitted artifact exceeds policy.
+  No training or adapter. The 3.08 MB targeted lens, all donor/confirmation
+  row-level outputs, exact-control failure receipts, metrics, and report are
+  committed. No artifact is external or omitted.
