@@ -1,0 +1,232 @@
+{
+  "backend": "transformers",
+  "bag_shape": [
+    1,
+    248320
+  ],
+  "carry_bag_parameter_receipts": {
+    "bag": {
+      "lora": 16232448,
+      "names_sha256": "6f4164ec62af84cd72ec54747e50902c426eb1f7bde88091798f8f231d3311da",
+      "state_modules": 568348,
+      "tensor_count": 139,
+      "total": 16800796,
+      "values_sha256": "a4e16c3f6c2135f6223707dcbc8ff2adb7c43c0742b2d458349a008730e5b006"
+    },
+    "carry": {
+      "lora": 16232448,
+      "names_sha256": "6f4164ec62af84cd72ec54747e50902c426eb1f7bde88091798f8f231d3311da",
+      "state_modules": 568348,
+      "tensor_count": 139,
+      "total": 16800796,
+      "values_sha256": "a4e16c3f6c2135f6223707dcbc8ff2adb7c43c0742b2d458349a008730e5b006"
+    }
+  },
+  "carry_bag_parameter_receipts_equal": true,
+  "carry_bag_shared_wrapper": true,
+  "carry_shape": [
+    1,
+    248320
+  ],
+  "config_sha256": "70e4a2d6df7acb0c5a21c7c945c66499a0ede8e98321c7b56da1c080c819744b",
+  "device": {
+    "compute_capability": "8.9",
+    "cuda_runtime": "12.9",
+    "name": "NVIDIA RTX 6000 Ada Generation",
+    "torch": "2.11.0+cu129",
+    "total_memory_gib": 47.5001220703125
+  },
+  "elapsed_seconds": 62.941203355789185,
+  "environment": {
+    "cuda_runtime": "12.9",
+    "device": {
+      "compute_capability": "8.9",
+      "cuda_runtime": "12.9",
+      "name": "NVIDIA RTX 6000 Ada Generation",
+      "torch": "2.11.0+cu129",
+      "total_memory_gib": 47.5001220703125
+    },
+    "peft": "0.19.1",
+    "platform": "Linux-6.5.0-41-generic-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "python_implementation": "CPython",
+    "torch": "2.11.0+cu129",
+    "transformers": "5.13.0"
+  },
+  "experiment_id": "qwen35_4b_state_carry_vs_state_bag",
+  "gradient_receipts": {
+    "bag": {
+      "lora": {
+        "summed_norm": 1.6165854515274987,
+        "tensors": 124
+      },
+      "state": {
+        "summed_norm": 2.0860829258308513,
+        "tensors": 6
+      },
+      "step": {
+        "summed_norm": 0.29070091247558594,
+        "tensors": 1
+      },
+      "sufficiency": {
+        "summed_norm": 10.94833917543292,
+        "tensors": 8
+      }
+    },
+    "carry": {
+      "lora": {
+        "summed_norm": 4.227237235521898,
+        "tensors": 124
+      },
+      "state": {
+        "summed_norm": 2.0061814930522814,
+        "tensors": 6
+      },
+      "step": {
+        "summed_norm": 0.7953561544418335,
+        "tensors": 1
+      },
+      "sufficiency": {
+        "summed_norm": 11.170922197401524,
+        "tensors": 8
+      }
+    }
+  },
+  "k1_allowed_error": 1e-05,
+  "k1_carry_bag_max_logit_abs_error": 0.0,
+  "k1_max_logit_abs_error": 0.0,
+  "k4_forward_backward_seconds": {
+    "bag": 0.39237499237060547,
+    "carry": 50.393731355667114
+  },
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "peak_allocated_gib": 11.207590579986572,
+  "phase": "g0",
+  "prompt_tokens": 470,
+  "receipt_identity_sha256": "9896e952f9df18f434713973ff0c080c6ccaeea973a78fec8eb32d08cd974e39",
+  "requirements_training_lock_sha256": "05546fe977583116d6169ea0dfa7b27e1184dd4a2b61d556dfb3f889d5b2b7b1",
+  "scientific_evidence": false,
+  "setup": {
+    "environment": {
+      "cuda_runtime": "12.9",
+      "device": {
+        "compute_capability": "8.9",
+        "cuda_runtime": "12.9",
+        "name": "NVIDIA RTX 6000 Ada Generation",
+        "torch": "2.11.0+cu129",
+        "total_memory_gib": 47.5001220703125
+      },
+      "peft": "0.19.1",
+      "platform": "Linux-6.5.0-41-generic-x86_64-with-glibc2.39",
+      "python": "3.12.3",
+      "python_implementation": "CPython",
+      "torch": "2.11.0+cu129",
+      "transformers": "5.13.0"
+    },
+    "lora_targets": [
+      "model.layers.12.linear_attn.in_proj_a",
+      "model.layers.12.linear_attn.in_proj_b",
+      "model.layers.12.linear_attn.in_proj_qkv",
+      "model.layers.12.linear_attn.in_proj_z",
+      "model.layers.12.linear_attn.out_proj",
+      "model.layers.12.mlp.down_proj",
+      "model.layers.12.mlp.gate_proj",
+      "model.layers.12.mlp.up_proj",
+      "model.layers.13.linear_attn.in_proj_a",
+      "model.layers.13.linear_attn.in_proj_b",
+      "model.layers.13.linear_attn.in_proj_qkv",
+      "model.layers.13.linear_attn.in_proj_z",
+      "model.layers.13.linear_attn.out_proj",
+      "model.layers.13.mlp.down_proj",
+      "model.layers.13.mlp.gate_proj",
+      "model.layers.13.mlp.up_proj",
+      "model.layers.14.linear_attn.in_proj_a",
+      "model.layers.14.linear_attn.in_proj_b",
+      "model.layers.14.linear_attn.in_proj_qkv",
+      "model.layers.14.linear_attn.in_proj_z",
+      "model.layers.14.linear_attn.out_proj",
+      "model.layers.14.mlp.down_proj",
+      "model.layers.14.mlp.gate_proj",
+      "model.layers.14.mlp.up_proj",
+      "model.layers.15.mlp.down_proj",
+      "model.layers.15.mlp.gate_proj",
+      "model.layers.15.mlp.up_proj",
+      "model.layers.15.self_attn.k_proj",
+      "model.layers.15.self_attn.o_proj",
+      "model.layers.15.self_attn.q_proj",
+      "model.layers.15.self_attn.v_proj",
+      "model.layers.16.linear_attn.in_proj_a",
+      "model.layers.16.linear_attn.in_proj_b",
+      "model.layers.16.linear_attn.in_proj_qkv",
+      "model.layers.16.linear_attn.in_proj_z",
+      "model.layers.16.linear_attn.out_proj",
+      "model.layers.16.mlp.down_proj",
+      "model.layers.16.mlp.gate_proj",
+      "model.layers.16.mlp.up_proj",
+      "model.layers.17.linear_attn.in_proj_a",
+      "model.layers.17.linear_attn.in_proj_b",
+      "model.layers.17.linear_attn.in_proj_qkv",
+      "model.layers.17.linear_attn.in_proj_z",
+      "model.layers.17.linear_attn.out_proj",
+      "model.layers.17.mlp.down_proj",
+      "model.layers.17.mlp.gate_proj",
+      "model.layers.17.mlp.up_proj",
+      "model.layers.18.linear_attn.in_proj_a",
+      "model.layers.18.linear_attn.in_proj_b",
+      "model.layers.18.linear_attn.in_proj_qkv",
+      "model.layers.18.linear_attn.in_proj_z",
+      "model.layers.18.linear_attn.out_proj",
+      "model.layers.18.mlp.down_proj",
+      "model.layers.18.mlp.gate_proj",
+      "model.layers.18.mlp.up_proj",
+      "model.layers.19.mlp.down_proj",
+      "model.layers.19.mlp.gate_proj",
+      "model.layers.19.mlp.up_proj",
+      "model.layers.19.self_attn.k_proj",
+      "model.layers.19.self_attn.o_proj",
+      "model.layers.19.self_attn.q_proj",
+      "model.layers.19.self_attn.v_proj"
+    ],
+    "lora_targets_sha256": "c7b8e521de33c854144a64d69d88469ce609c1b13988e0e668ba3b0f2e53bed7",
+    "requirements_training_lock_sha256": "05546fe977583116d6169ea0dfa7b27e1184dd4a2b61d556dfb3f889d5b2b7b1",
+    "source_contract_sha256": "eb7aef9d3a71ff316ae8143f5c4ae2f3efe9cccd45f2a3c7d9ecf6a300ef2d77",
+    "tokenizer": {
+      "answer_token_ids": [
+        357,
+        417,
+        351,
+        414
+      ],
+      "state_token_id": 248063
+    },
+    "trainable_parameters": {
+      "lora": 16232448,
+      "names_sha256": "6f4164ec62af84cd72ec54747e50902c426eb1f7bde88091798f8f231d3311da",
+      "state_modules": 568348,
+      "tensor_count": 139,
+      "total": 16800796,
+      "values_sha256": "a4e16c3f6c2135f6223707dcbc8ff2adb7c43c0742b2d458349a008730e5b006"
+    }
+  },
+  "source_contract_sha256": "eb7aef9d3a71ff316ae8143f5c4ae2f3efe9cccd45f2a3c7d9ecf6a300ef2d77",
+  "state_slots": 8,
+  "status": "MODEL_SMOKE_PASS",
+  "worst_k": 12,
+  "worst_k_finite": {
+    "bag": true,
+    "carry": true
+  },
+  "worst_k_forward_seconds": 0.8036892414093018,
+  "worst_k_prompt_tokens": 609,
+  "worst_k_shapes": {
+    "bag": [
+      1,
+      248320
+    ],
+    "carry": [
+      1,
+      248320
+    ]
+  }
+}

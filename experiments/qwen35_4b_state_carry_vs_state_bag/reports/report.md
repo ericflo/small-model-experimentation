@@ -2,7 +2,10 @@
 
 ## Status
 
-`SETUP_ONLY`: the protocol and harness received a final adversarial pre-run revision; no result-bearing `Qwen/Qwen3.5-4B` call has occurred. The historical CPU-smoke receipt predates that revision, so fresh CPU contracts/data are required before G0.
+`G0_MECHANICS_PASS` / `SETUP_ONLY`: fresh CPU contracts and the complete source-bound corpus pass.
+The pinned `Qwen/Qwen3.5-4B` live smoke also passes exact K=1 parity, both-arm gradient,
+worst-format K=12, parameter-identity, and memory gates. G0 is explicitly non-scientific; no training
+or outcome evaluation has occurred yet.
 
 ## Question
 
@@ -10,7 +13,9 @@ Does a serially inherited internal state produce deeper, causally useful represe
 
 ## Result
 
-Not run. Do not infer evidence from CPU reference mechanics, compilation, or the future model smoke.
+Not run. The live G0 receipt records mechanics only (`scientific_evidence: false`): K=1 maximum-logit
+error `0.0`, exact Carry/Bag K=1 equality, finite K=12, 11.21 GiB peak allocation, and identical
+16,800,796-parameter trainable receipts. Do not infer a State-Carry advantage from these checks.
 
 ## Required Terminal Evidence
 

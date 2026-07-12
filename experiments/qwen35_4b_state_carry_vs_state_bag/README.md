@@ -1,6 +1,6 @@
 # State-Carry Versus State-Bag Counterfactual
 
-**Status: adversarially revised before launch; CPU unit-validated, no Qwen model call yet. This is not a result.**
+**Status: live G0 mechanics passed; seed-7401 LoRA pilot is next. No training result exists yet.**
 
 ## Research Program
 

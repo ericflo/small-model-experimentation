@@ -9,9 +9,8 @@
   K=1 parity, crossed task×seed inference, unseen-K/depth extrapolation,
   same-checkpoint edge cuts, bidirectional geometry-matched state swaps, a joint
   holdout gate, and interface-qualified matched-layer-token-budget explicit-CoT sampling.
-  No model result exists yet; the next action is fresh CPU regeneration/tests,
-  then the live 48 GiB Ada model smoke followed by the seed-7401 paired pilot—not
-  an expensive full sweep. Mixed semantic echo was removed and requires a fresh
+  Fresh CPU/data contracts and the live 48 GiB Ada model smoke now pass; no training result exists.
+  The next action is the seed-7401 paired pilot—not an expensive full sweep. Mixed semantic echo was removed and requires a fresh
   successor if continuous state proves readable but unused.
 - Conditional capacity successor: if a valid rank-32 LoRA outcome fails to establish
   deep state formation, create and execute a fresh experiment that

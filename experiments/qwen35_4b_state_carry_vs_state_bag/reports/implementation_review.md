@@ -4,7 +4,8 @@
 
 This records the initial pre-GPU review and the final adversarial amendment below. It is not a model result. The original review found the first harness ready for G0, but a deeper independent pass subsequently found launch blockers in pilot isolation, cross-process determinism, crossed statistics, checkpoint provenance, causal enforcement, and deployment-baseline validity. The amendment supersedes any conflicting readiness statement in the historical sections.
 
-Disposition after amendment: **CPU unit/static contracts pass; fresh CPU smoke and full-corpus regeneration remain required before G0, which is the first model-bearing action. Training remains machine-blocked until `MODEL_SMOKE_PASS`.**
+Disposition after execution update: **fresh CPU/unit/data contracts and live G0 now pass. The first
+scientific action is the machine-gated seed-7401 Carry/Bag pilot; no training result exists yet.**
 
 ## Contracts Audited
 

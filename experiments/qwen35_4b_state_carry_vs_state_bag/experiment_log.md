@@ -96,3 +96,7 @@ No fresh CPU smoke/data generation, model load, GPU call, training, evaluation, 
 - Fixed the harness to encode and use a dedicated K=1 batch for both equality and direct-model parity;
   added a static regression assertion. Because runtime source is identity-bound, the corpus and G0
   receipt must be regenerated/reissued before proceeding.
+- Reissued the full source-bound corpus and reran G0. `MODEL_SMOKE_PASS`: K=1 direct parity `0.0`,
+  Carry/Bag K=1 difference `0.0`, identical 16,800,796-parameter/value receipts, nonzero finite LoRA,
+  state, step, and sufficiency gradients in both arms, finite worst-format K=12, and 11.21 GiB peak
+  allocation. No scientific claim is licensed; seed-7401 pilot is next.
