@@ -188,7 +188,8 @@ const ROOT = document.body.dataset.root || "";
     const tokens = (search.value || "").trim().toLowerCase().split(/\s+/).filter(Boolean);
     let shown = 0;
     items.forEach((item) => {
-      const okStatus = statusTab === "all" || item.dataset.status === statusTab;
+      // a search spans every status; only the tabs themselves scope by status
+      const okStatus = statusTab === "all" || tokens.length > 0 || item.dataset.status === statusTab;
       const okOutcome = !outcome || !outcome.value || item.dataset.outcome === outcome.value;
       const programs = (item.dataset.programs || "").split(/\s+/);
       const okProgram = !program.value || programs.includes(program.value);
@@ -211,21 +212,39 @@ const ROOT = document.body.dataset.root || "";
       return (b.dataset.date || "").localeCompare(a.dataset.date || "") || rank(a) - rank(b);
     });
     sorted.forEach((item) => listEl.appendChild(item));
-    const scope = statusTab === "all" ? "" : ` ${statusTab === "in-progress" ? "in progress" : statusTab}`;
+    const scoped = statusTab !== "all" && tokens.length === 0;
+    const scope = scoped ? ` ${statusTab === "in-progress" ? "in progress" : statusTab}` : "";
     count.textContent = `${shown}${scope}` + (rangeFilter ? ` · ${rangeFilter.label}` : "");
     if (empty) empty.hidden = shown !== 0;
+    const emptyScope = document.getElementById("empty-scope");
+    if (emptyScope) emptyScope.textContent = scoped ? `in the ${statusTab === "in-progress" ? "In progress" : "Finished"} tab — try “All”` : "";
     const reset = document.getElementById("filter-reset");
     if (reset) {
       reset.hidden = !(search.value || program.value || track.value || (outcome && outcome.value) || rangeFilter || statusTab !== "finished");
     }
   }
 
-  function setTab(value) {
+  function setTab(value, focus) {
     statusTab = value;
-    tabs.forEach((t) => t.setAttribute("aria-selected", String(t.dataset.statusTab === value)));
+    tabs.forEach((t) => {
+      const on = t.dataset.statusTab === value;
+      t.setAttribute("aria-selected", String(on));
+      t.tabIndex = on ? 0 : -1; // roving tabindex: one stop, arrows move within
+    });
+    if (focus) { const sel = tabs.find((t) => t.dataset.statusTab === value); if (sel) sel.focus(); }
     apply();
   }
-  tabs.forEach((t) => t.addEventListener("click", () => setTab(t.dataset.statusTab)));
+  tabs.forEach((t, i) => {
+    t.addEventListener("click", () => setTab(t.dataset.statusTab));
+    t.addEventListener("keydown", (e) => {
+      let j = null;
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") j = (i + 1) % tabs.length;
+      else if (e.key === "ArrowLeft" || e.key === "ArrowUp") j = (i - 1 + tabs.length) % tabs.length;
+      else if (e.key === "Home") j = 0;
+      else if (e.key === "End") j = tabs.length - 1;
+      if (j !== null) { e.preventDefault(); setTab(tabs[j].dataset.statusTab, true); }
+    });
+  });
 
   let timer = 0;
   search.addEventListener("input", () => {
@@ -239,6 +258,7 @@ const ROOT = document.body.dataset.root || "";
     program.value = "";
     track.value = "";
     if (outcome) outcome.value = "";
+    sort.value = "date";
     rangeFilter = null;
     window.history.replaceState(null, "", window.location.pathname);
     setTab("finished");
@@ -252,8 +272,10 @@ const ROOT = document.body.dataset.root || "";
   const weekParam = params.get("week");
   if (dayParam && /^\d{4}-\d{2}-\d{2}$/.test(dayParam)) {
     rangeFilter = { from: dayParam, to: dayParam, label: dayParam };
+    statusTab = "all"; // the activity bars count every run, so date-drilldown spans all statuses
   } else if (weekParam && /^\d{4}-\d{2}-\d{2}$/.test(weekParam)) {
     rangeFilter = { from: weekParam, to: weekEnd(weekParam), label: `week of ${weekParam}` };
+    statusTab = "all";
   }
   if (params.get("q")) {
     search.value = params.get("q");
@@ -421,6 +443,7 @@ const ROOT = document.body.dataset.root || "";
     function applyState() {
       keys.forEach((key) => {
         const off = key.classList.contains("off");
+        key.setAttribute("aria-pressed", String(!off));
         chart.querySelectorAll(sel(key.dataset.vizToggle)).forEach((el) => {
           el.style.opacity = off ? "0.1" : "";
           if (el.hasAttribute("data-viz-pt")) el.style.pointerEvents = off ? "none" : "";

@@ -16,7 +16,7 @@
      ],
      "x_label": "qualification interface",
      "y_label": "exact success rate",
-     "y_format": "percent100",
+     "y_format": "percent01",
      "note": "Ordered, shuffled, and no-thought use the identical fixed slot; close-only free-form is diagnostic. Ordered thought passed every frozen qualification gate on 113 tasks/339 traces, but untouched confirmation remains unopened.",
      "source": "experiments/qwen35_4b_commit_slot_semantic_power_replication/runs/seam_selection.json",
      "headline": true
@@ -28,24 +28,40 @@
     {
      "title": "Commit-slot accuracy across paired thought caps",
      "kind": "bar",
-     "categories": ["256 cap", "512 cap", "1024 cap"],
+     "categories": [
+      "256 cap",
+      "512 cap",
+      "1024 cap"
+     ],
      "series": [
       {
        "label": "real ordered thought",
-       "values": [0.20833333333333334, 0.1875, 0.3125]
+       "values": [
+        0.20833333333333334,
+        0.1875,
+        0.3125
+       ]
       },
       {
        "label": "no generated thought",
-       "values": [0.25, 0.25, 0.25]
+       "values": [
+        0.25,
+        0.25,
+        0.25
+       ]
       },
       {
        "label": "same thought tokens shuffled",
-       "values": [0.22916666666666666, 0.3125, 0.22916666666666666]
+       "values": [
+        0.22916666666666666,
+        0.3125,
+        0.22916666666666666
+       ]
       }
      ],
      "x_label": "paired thought cap",
      "y_label": "exact alias accuracy",
-     "y_format": "percent100",
+     "y_format": "percent01",
      "note": "Each cap contains 48 paired real/shuffled trace rows; no-thought is one deterministic row per each of 16 tasks. The 1,024 real arm passed accuracy-gap gates but had only five mixed tasks versus six required, so no cap was selected.",
      "source": "experiments/qwen35_4b_commit_slot_jacobian_value_transport/runs/seam_selection.json",
      "headline": true
@@ -53,16 +69,24 @@
     {
      "title": "Answer-mode diagnostics at the 1,024 cap",
      "kind": "bar",
-     "categories": ["unmasked top is alias", "total alias probability mass", "close-only free-form parses"],
+     "categories": [
+      "unmasked top is alias",
+      "total alias probability mass",
+      "close-only free-form parses"
+     ],
      "series": [
       {
        "label": "share or mean mass",
-       "values": [0.8541666666666666, 0.6847406942397356, 0.041666666666666664]
+       "values": [
+        0.8541666666666666,
+        0.6847406942397356,
+        0.041666666666666664
+       ]
       }
      ],
      "x_label": "interface diagnostic",
      "y_label": "rate",
-     "y_format": "percent100",
+     "y_format": "percent01",
      "note": "The first two values use the fixed `First:` slot before alias masking; the last uses matched close-only free-form output. Syntax repaired answer mode even though the semantic selection gate failed.",
      "source": "experiments/qwen35_4b_commit_slot_jacobian_value_transport/runs/seam_selection.json",
      "headline": false
@@ -74,24 +98,40 @@
     {
      "title": "Forced-close answer usability across thought caps",
      "kind": "bar",
-     "categories": ["256 cap", "512 cap", "1024 cap"],
+     "categories": [
+      "256 cap",
+      "512 cap",
+      "1024 cap"
+     ],
      "series": [
       {
        "label": "parse rate",
-       "values": [0.125, 0.16666666666666666, 0.1875]
+       "values": [
+        0.125,
+        0.16666666666666666,
+        0.1875
+       ]
       },
       {
        "label": "exact success rate",
-       "values": [0.020833333333333332, 0.020833333333333332, 0.020833333333333332]
+       "values": [
+        0.020833333333333332,
+        0.020833333333333332,
+        0.020833333333333332
+       ]
       },
       {
        "label": "answer-cap contact rate",
-       "values": [0.9166666666666666, 0.8541666666666666, 0.9583333333333334]
+       "values": [
+        0.9166666666666666,
+        0.8541666666666666,
+        0.9583333333333334
+       ]
       }
      ],
      "x_label": "forced-commit thought cap",
      "y_label": "share of 48 paired traces",
-     "y_format": "percent100",
+     "y_format": "percent01",
      "note": "All rows used the explicit counterfactual close action. No cap met 90% parse, 5%--95% success, six mixed tasks, or <=5% answer-cap contact; confirmation and all J-space stages were canceled.",
      "source": "experiments/qwen35_4b_forced_commit_jacobian_value_transport/analysis/seam_metrics.json",
      "headline": true
@@ -103,20 +143,32 @@
     {
      "title": "Natural close versus cap contact across the frozen ladder",
      "kind": "bar",
-     "categories": ["256 cap", "512 cap", "1024 cap"],
+     "categories": [
+      "256 cap",
+      "512 cap",
+      "1024 cap"
+     ],
      "series": [
       {
        "label": "natural close rate",
-       "values": [0.0, 0.0, 0.0]
+       "values": [
+        0.0,
+        0.0,
+        0.0
+       ]
       },
       {
        "label": "cap-contact rate",
-       "values": [1.0, 1.0, 1.0]
+       "values": [
+        1.0,
+        1.0,
+        1.0
+       ]
       }
      ],
      "x_label": "frozen selection rung",
      "y_label": "share of 48 paired traces",
-     "y_format": "percent100",
+     "y_format": "percent01",
      "note": "All 48 paired traces reached the 1,024 ceiling without emitting the natural close token; lower rungs are exact right-censored views of those same paths. No cap was selected and confirmation was ineligible.",
      "source": "experiments/qwen35_4b_native_thought_seam_budget_ladder/analysis/selection_metrics.json",
      "headline": true
@@ -128,16 +180,26 @@
     {
      "title": "Natural-thinking seam gate",
      "kind": "bar",
-     "categories": ["natural close", "parseable answer", "exact success", "thought-cap contact"],
+     "categories": [
+      "natural close",
+      "parseable answer",
+      "exact success",
+      "thought-cap contact"
+     ],
      "series": [
       {
        "label": "share of 48 traces",
-       "values": [0.0, 0.0, 0.0, 1.0]
+       "values": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+       ]
       }
      ],
      "x_label": "seam outcome",
      "y_label": "trace rate",
-     "y_format": "percent100",
+     "y_format": "percent01",
      "note": "Sixteen fresh tasks, three traces each, under the frozen 160-token thought cap. All 48 stopped as think_cap_without_close; value and causal stages were canceled.",
      "source": "experiments/qwen35_4b_native_thought_jacobian_value_transport/analysis/seam_metrics.json",
      "headline": true
@@ -149,20 +211,47 @@
     {
      "title": "Target-answer rate on fresh exact-control confirmation",
      "kind": "bar",
-     "categories": ["baseline", "full donor", "all-24 J", "pair J", "wrong-donor J", "logit lens", "random A", "random B"],
+     "categories": [
+      "baseline",
+      "full donor",
+      "all-24 J",
+      "pair J",
+      "wrong-donor J",
+      "logit lens",
+      "random A",
+      "random B"
+     ],
      "series": [
       {
        "label": "direct key target rate",
-       "values": [0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]
+       "values": [
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+       ]
       },
       {
        "label": "mapped digit target rate",
-       "values": [0.0, 1.0, 1.0, 0.9583333333333334, 0.0, 0.0, 0.0, 0.0]
+       "values": [
+        0.0,
+        1.0,
+        1.0,
+        0.9583333333333334,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+       ]
       }
      ],
      "x_label": "intervention",
      "y_label": "target-answer rate",
-     "y_format": "percent100",
+     "y_format": "percent01",
      "note": "Forty-eight untouched mappings at frozen band 4-8. Wrong-donor J produced its own key and digit on 48/48, while both independent random arms passed all post-bf16 geometry constraints.",
      "source": "experiments/qwen35_4b_jacobian_transport_control_replication/runs/confirmation.json",
      "headline": true
@@ -170,15 +259,33 @@
     {
      "title": "Mean target-minus-source logit margin",
      "kind": "bar",
-     "categories": ["baseline", "all-24 J", "logit lens", "random A", "random B"],
+     "categories": [
+      "baseline",
+      "all-24 J",
+      "logit lens",
+      "random A",
+      "random B"
+     ],
      "series": [
       {
        "label": "direct key margin",
-       "values": [-11.807942708333334, 11.1796875, -11.729817708333334, -11.810546875, -11.82421875]
+       "values": [
+        -11.807942708333334,
+        11.1796875,
+        -11.729817708333334,
+        -11.810546875,
+        -11.82421875
+       ]
       },
       {
        "label": "mapped digit margin",
-       "values": [-9.424479166666666, 8.260416666666666, -9.4140625, -9.44140625, -9.440104166666666]
+       "values": [
+        -9.424479166666666,
+        8.260416666666666,
+        -9.4140625,
+        -9.44140625,
+        -9.440104166666666
+       ]
       }
      ],
      "x_label": "intervention",
@@ -195,20 +302,41 @@
     {
      "title": "Target-answer rate on untouched confirmation mappings",
      "kind": "bar",
-     "categories": ["full donor", "all-24 J", "pair J", "wrong-donor J", "logit lens", "random"],
+     "categories": [
+      "full donor",
+      "all-24 J",
+      "pair J",
+      "wrong-donor J",
+      "logit lens",
+      "random"
+     ],
      "series": [
       {
        "label": "direct key target rate",
-       "values": [1.0, 1.0, 1.0, 0.0, 0.0, 0.0]
+       "values": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+       ]
       },
       {
        "label": "mapped digit target rate",
-       "values": [1.0, 1.0, 0.9791666666666666, 0.0, 0.0, 0.0]
+       "values": [
+        1.0,
+        1.0,
+        0.9791666666666666,
+        0.0,
+        0.0,
+        0.0
+       ]
       }
      ],
      "x_label": "intervention",
      "y_label": "target-answer rate",
-     "y_format": "percent100",
+     "y_format": "percent01",
      "note": "Forty-eight untouched mappings at frozen band 4–8. The wrong-donor arm produced its own key/digit on 48/48, not the registered target. Formal verdict remains INVALID_CONTROL because one of 96 random rows missed the exact realized-norm tolerance.",
      "source": "experiments/qwen35_4b_context_local_jacobian_clamp/analysis/metrics.json",
      "headline": true
@@ -216,15 +344,36 @@
     {
      "title": "Mean target-minus-source logit margin",
      "kind": "bar",
-     "categories": ["baseline", "full donor", "all-24 J", "pair J", "logit lens", "random"],
+     "categories": [
+      "baseline",
+      "full donor",
+      "all-24 J",
+      "pair J",
+      "logit lens",
+      "random"
+     ],
      "series": [
       {
        "label": "direct key margin",
-       "values": [-11.875, 11.970052083333334, 11.219401041666666, 10.833333333333334, -11.771484375, -11.875]
+       "values": [
+        -11.875,
+        11.970052083333334,
+        11.219401041666666,
+        10.833333333333334,
+        -11.771484375,
+        -11.875
+       ]
       },
       {
        "label": "mapped digit margin",
-       "values": [-9.192708333333334, 9.41015625, 8.553385416666666, 8.1171875, -9.19140625, -9.209635416666666]
+       "values": [
+        -9.192708333333334,
+        9.41015625,
+        8.553385416666666,
+        8.1171875,
+        -9.19140625,
+        -9.209635416666666
+       ]
       }
      ],
      "x_label": "intervention",
@@ -240,20 +389,95 @@
      "series": [
       {
        "label": "direct key target rate",
-       "points": [[4, 1.0], [8, 1.0], [12, 1.0], [16, 1.0], [20, 0.041666666666666664], [24, 0.0]]
+       "points": [
+        [
+         4,
+         1.0
+        ],
+        [
+         8,
+         1.0
+        ],
+        [
+         12,
+         1.0
+        ],
+        [
+         16,
+         1.0
+        ],
+        [
+         20,
+         0.041666666666666664
+        ],
+        [
+         24,
+         0.0
+        ]
+       ]
       },
       {
        "label": "mapped digit target rate",
-       "points": [[4, 1.0], [8, 1.0], [12, 1.0], [16, 1.0], [20, 0.0], [24, 0.0]]
+       "points": [
+        [
+         4,
+         1.0
+        ],
+        [
+         8,
+         1.0
+        ],
+        [
+         12,
+         1.0
+        ],
+        [
+         16,
+         1.0
+        ],
+        [
+         20,
+         0.0
+        ],
+        [
+         24,
+         0.0
+        ]
+       ]
       },
       {
        "label": "wrong donor's own mapped digit",
-       "points": [[4, 1.0], [8, 1.0], [12, 1.0], [16, 1.0], [20, 0.0], [24, 0.0]]
+       "points": [
+        [
+         4,
+         1.0
+        ],
+        [
+         8,
+         1.0
+        ],
+        [
+         12,
+         1.0
+        ],
+        [
+         16,
+         1.0
+        ],
+        [
+         20,
+         0.0
+        ],
+        [
+         24,
+         0.0
+        ]
+       ]
       }
      ],
      "x_label": "band start layer",
      "y_label": "redirected-answer rate",
-     "y_format": "percent100",
+     "y_format": "percent01",
      "note": "Selection-only full-state positive control, 24 items per band. Bands are start through start+4. Earliest registered passing band 4–8 was frozen before J confirmation.",
      "source": "experiments/qwen35_4b_context_local_jacobian_clamp/analysis/metrics.json",
      "headline": true
@@ -268,20 +492,83 @@
      "series": [
       {
        "label": "direct report, Jacobian coordinate",
-       "points": [[8, 0.0], [12, 0.0], [16, 0.0], [20, 0.041666666666666664], [24, 0.75]]
+       "points": [
+        [
+         8,
+         0.0
+        ],
+        [
+         12,
+         0.0
+        ],
+        [
+         16,
+         0.0
+        ],
+        [
+         20,
+         0.041666666666666664
+        ],
+        [
+         24,
+         0.75
+        ]
+       ]
       },
       {
        "label": "mapped consequence, Jacobian coordinate",
-       "points": [[8, 0.0], [12, 0.0], [16, 0.0], [20, 0.0], [24, 0.0]]
+       "points": [
+        [
+         8,
+         0.0
+        ],
+        [
+         12,
+         0.0
+        ],
+        [
+         16,
+         0.0
+        ],
+        [
+         20,
+         0.0
+        ],
+        [
+         24,
+         0.0
+        ]
+       ]
       },
       {
        "label": "direct report, logit-lens control",
-       "points": [[8, 0.0], [12, 0.0], [16, 0.0], [20, 0.0], [24, 0.20833333333333334]]
+       "points": [
+        [
+         8,
+         0.0
+        ],
+        [
+         12,
+         0.0
+        ],
+        [
+         16,
+         0.0
+        ],
+        [
+         20,
+         0.0
+        ],
+        [
+         24,
+         0.20833333333333334
+        ]
+       ]
       }
      ],
      "x_label": "model layer",
      "y_label": "target-answer rate",
-     "y_format": "percent100",
+     "y_format": "percent01",
      "note": "Untouched 24-item confirmation split at selection-chosen alpha 4. Baseline and random-control target rates were zero. The random control was not exact realized-delta-norm matched, so direct-control specificity is provisional; the zero consequence effect is the frozen gate failure.",
      "source": "experiments/qwen35_4b_jacobian_value_transport/analysis/metrics.json",
      "headline": true
@@ -292,11 +579,45 @@
      "series": [
       {
        "label": "direct report",
-       "points": [[0.5, -8.822916666666666], [1.0, -6.9765625], [2.0, -3.4270833333333335], [4.0, 3.22265625]]
+       "points": [
+        [
+         0.5,
+         -8.822916666666666
+        ],
+        [
+         1.0,
+         -6.9765625
+        ],
+        [
+         2.0,
+         -3.4270833333333335
+        ],
+        [
+         4.0,
+         3.22265625
+        ]
+       ]
       },
       {
        "label": "mapped consequence",
-       "points": [[0.5, -8.572916666666666], [1.0, -8.567708333333334], [2.0, -8.557291666666666], [4.0, -8.567708333333334]]
+       "points": [
+        [
+         0.5,
+         -8.572916666666666
+        ],
+        [
+         1.0,
+         -8.567708333333334
+        ],
+        [
+         2.0,
+         -8.557291666666666
+        ],
+        [
+         4.0,
+         -8.567708333333334
+        ]
+       ]
       }
      ],
      "x_label": "intervention strength (alpha)",
@@ -44907,7 +45228,15 @@
      "series": [
       {
        "label": "replay-verified rows per arm",
-       "values": [10, 10, 10, 10, 10, 10, 10]
+       "values": [
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10
+       ]
       }
      ],
      "x_label": "conditional transition",
@@ -45787,7 +46116,7 @@
      ],
      "x_label": "frozen proxy slice",
      "y_label": "absolute score delta",
-     "y_format": "percent100",
+     "y_format": "number",
      "note": "Parsing remained perfect and natural closure improved, but trained and untouched multi-turn policies collapsed. The preregistered gate stopped reward training and Menagerie.",
      "source": "experiments/qwen35_4b_interactive_policy_curriculum/analysis/dagger_gate.json"
     }
@@ -45818,7 +46147,7 @@
      ],
      "x_label": "frozen capability block",
      "y_label": "paired macro delta",
-     "y_format": "percent100",
+     "y_format": "number",
      "note": "Positive means the policy assigned to that stratum beat the alternate checkpoint. Both quick blocks were negative; both deep blocks were positive. No effect-size floor was used.",
      "source": "experiments/qwen35_4b_pareto_policy_integration/analysis/specialist_qualification.json"
     },
@@ -45848,7 +46177,7 @@
      ],
      "x_label": "intended specialist role",
      "y_label": "paired macro delta",
-     "y_format": "percent100",
+     "y_format": "number",
      "note": "The deep policy clears the capability criterion but fails six retention cells; the quick policy fails the capability sign in both blocks. The gate stops before teacher audit or MOPD.",
      "source": "experiments/qwen35_4b_pareto_policy_integration/analysis/specialist_qualification.json"
     }
@@ -45928,7 +46257,7 @@
      ],
      "x_label": "specialist domain",
      "y_label": "mean normalized score",
-     "y_format": "percent100",
+     "y_format": "number",
      "note": "The tools incumbent was already 0.994, so its frozen +0.10 qualification bar required 1.094 despite a hard ceiling of 1.0. The preregistered gate stopped before best-of-8 or specialist training; this does not test the integration mechanism.",
      "source": "experiments/qwen35_4b_specialist_policy_integration/analysis/specialist_headroom_gate.json"
     }

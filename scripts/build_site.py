@@ -1030,7 +1030,7 @@ def activity_chart(experiments: list[dict]) -> str:
     caption = f"Experiments by the {'day' if daily else 'week'} they last ran — click a bar to filter the list"
     return (
         f'<figure class="activity-chart"><figcaption>{caption}</figcaption>'
-        f'<svg viewBox="0 0 {width} {height}" role="img" aria-label="Experiments per {"day" if daily else "week"}, {entries[0][0]} to {entries[-1][0]}" '
+        f'<svg viewBox="0 0 {width} {height}" role="group" aria-label="Experiments per {"day" if daily else "week"}, {entries[0][0]} to {entries[-1][0]}; each bar links to that period" '
         f'preserveAspectRatio="xMinYMid meet">{baseline}{"".join(bars)}</svg>{table}</figure>'
     )
 
@@ -1133,6 +1133,26 @@ def _nice_ticks(lo: float, hi: float) -> list[float]:
     return ticks
 
 
+def _nice_axis(dmin: float, dmax: float) -> tuple[float, float, list[float]]:
+    """A value axis with a round top and bottom so the last gridline lands AT or
+    beyond the data — bars/lines never run past the final tick. Always spans zero."""
+    lo, hi = min(0.0, dmin), max(0.0, dmax)
+    if lo == hi:
+        return lo, lo + 1, [lo, lo + 1]
+    raw = (hi - lo) / 4
+    mag = 10 ** math.floor(math.log10(raw))
+    step = next((m * mag for m in (1, 2, 2.5, 5, 10) if raw <= m * mag), 10 * mag)
+    axis_lo = math.floor(lo / step) * step
+    axis_hi = math.ceil(hi / step) * step
+    if axis_hi <= axis_lo:
+        axis_hi = axis_lo + step
+    ticks, tick = [], axis_lo
+    while tick <= axis_hi + step * 1e-6:
+        ticks.append(round(tick, 10))
+        tick += step
+    return axis_lo, axis_hi, ticks
+
+
 _SERIES_SLOTS = [1, 2, 3, 5, 8, 6, 7, 4]  # hue-separated order (slots 2 and 4 are both greens)
 
 
@@ -1163,10 +1183,7 @@ def _bar_svg(spec: dict, W: int, mini: bool) -> tuple[list[str], float]:
     n_series, n_groups = len(series), len(cats)
     yf = spec.get("y_format", "number")
     vals = [v for e in series for v in e["values"]]
-    lo, hi = min(0.0, min(vals)), max(0.0, max(vals))
-    if lo == hi:
-        hi = lo + 1
-    hi += (hi - lo) * 0.02
+    lo, hi, ticks = _nice_axis(min(vals), max(vals))
     longest_cat = max((len(c) for c in cats), default=0)
     horizontal = (not mini) and (longest_cat > 10 or n_groups > 7 or n_groups * n_series > 20)
     parts: list[str] = []
@@ -1178,7 +1195,6 @@ def _bar_svg(spec: dict, W: int, mini: bool) -> tuple[list[str], float]:
         plot_h = n_groups * band
         H = top + plot_h + 34
         plot_w = W - left - right
-        ticks = _nice_ticks(lo, hi)
 
         def sx(v: float) -> float:
             return left + (v - lo) / (hi - lo) * plot_w
@@ -1202,7 +1218,9 @@ def _bar_svg(spec: dict, W: int, mini: bool) -> tuple[list[str], float]:
                 lbl = f'{esc(e["label"])} · {esc(cat)}: {esc(_fmt_val(v, yf))}' if n_series > 1 else f'{esc(cat)}: {esc(_fmt_val(v, yf))}'
                 parts.append(f'<rect x="{xa:.1f}" y="{y:.1f}" width="{w:.1f}" height="{bar_h:.1f}" rx="2" fill="{_series_color(si)}" data-viz-pt data-viz-series="{si}" data-viz-label="{lbl}"/>')
                 if bar_h >= 11:
-                    parts.append(f'<text x="{xb + 4:.1f}" y="{y + bar_h / 2 + 3.5:.1f}" font-size="10" font-weight="600" fill="var(--ink-2)" data-viz-series-label="{si}">{esc(_fmt_val(v, yf))}</text>')
+                    # label hugs the OUTER end of the bar (right for +, left for -)
+                    lx, anchor = (xa - 4, "end") if v < 0 else (xb + 4, "start")
+                    parts.append(f'<text x="{lx:.1f}" y="{y + bar_h / 2 + 3.5:.1f}" text-anchor="{anchor}" font-size="10" font-weight="600" fill="var(--ink-2)" data-viz-series-label="{si}">{esc(_fmt_val(v, yf))}</text>')
         return parts, H
 
     # vertical bars
@@ -1214,7 +1232,6 @@ def _bar_svg(spec: dict, W: int, mini: bool) -> tuple[list[str], float]:
     H = top + plot_h + bottom
     plot_w = W - left - right
     group_w = plot_w / max(n_groups, 1)
-    ticks = _nice_ticks(lo, hi)
 
     def sy(v: float) -> float:
         return top + plot_h - (v - lo) / (hi - lo) * plot_h
@@ -1238,17 +1255,21 @@ def _bar_svg(spec: dict, W: int, mini: bool) -> tuple[list[str], float]:
             lbl = f'{esc(e["label"])} · {esc(cat)}: {esc(_fmt_val(v, yf))}' if n_series > 1 else f'{esc(cat)}: {esc(_fmt_val(v, yf))}'
             parts.append(f'<rect x="{x:.1f}" y="{ya:.1f}" width="{bar_w:.1f}" height="{h:.1f}" rx="2.5" fill="{_series_color(si)}" data-viz-pt data-viz-series="{si}" data-viz-label="{lbl}"/>')
             if show_val:
-                parts.append(f'<text x="{x + bar_w / 2:.1f}" y="{ya - 4:.1f}" text-anchor="middle" font-size="10" font-weight="600" fill="var(--ink-2)" data-viz-series-label="{si}">{esc(_fmt_val(v, yf))}</text>')
+                # label sits just outside the bar end: above for +, below for -
+                ly = yb + 12 if v < 0 else ya - 4
+                parts.append(f'<text x="{x + bar_w / 2:.1f}" y="{ly:.1f}" text-anchor="middle" font-size="10" font-weight="600" fill="var(--ink-2)" data-viz-series-label="{si}">{esc(_fmt_val(v, yf))}</text>')
         cx = left + gi * group_w + group_w / 2
         if mini and n_groups > 4:
             continue
         if rotate:
             ctxt = cat if len(cat) <= 26 else cat[:25] + "…"
-            parts.append(f'<text x="{cx:.1f}" y="{top + plot_h + 14:.1f}" transform="rotate(-35 {cx:.1f} {top + plot_h + 14:.1f})" text-anchor="end" font-size="10.5" fill="var(--ink-2)">{esc(ctxt)}</text>')
+            title = f"<title>{esc(cat)}</title>" if len(cat) > 26 else ""
+            parts.append(f'<text x="{cx:.1f}" y="{top + plot_h + 14:.1f}" transform="rotate(-35 {cx:.1f} {top + plot_h + 14:.1f})" text-anchor="end" font-size="10.5" fill="var(--ink-2)">{title}{esc(ctxt)}</text>')
         else:
             max_chars = max(4, int(group_w / (5.4 if mini else 6.4)))
             ctxt = cat if len(cat) <= max_chars else cat[:max_chars - 1] + "…"
-            parts.append(f'<text x="{cx:.1f}" y="{top + plot_h + (13 if mini else 16):.1f}" text-anchor="middle" font-size="{10 if mini else 11}" fill="var(--ink-2)">{esc(ctxt)}</text>')
+            title = f"<title>{esc(cat)}</title>" if len(cat) > max_chars else ""
+            parts.append(f'<text x="{cx:.1f}" y="{top + plot_h + (13 if mini else 16):.1f}" text-anchor="middle" font-size="{10 if mini else 11}" fill="var(--ink-2)">{title}{esc(ctxt)}</text>')
     return parts, H
 
 
@@ -1260,10 +1281,7 @@ def _line_svg(spec: dict, W: int, mini: bool) -> tuple[list[str], float]:
     n = len(series)
     many = n > 4
     vals = [p[1] for e in series for p in e["points"]]
-    lo, hi = min(0.0, min(vals)), max(0.0, max(vals))
-    if lo == hi:
-        hi = lo + 1
-    hi += (hi - lo) * 0.06
+    lo, hi, y_ticks = _nice_axis(min(vals), max(vals))
     xs = [p[0] for e in series for p in e["points"]]
     xlo, xhi = min(xs), max(xs)
     if xlo == xhi:
@@ -1283,7 +1301,7 @@ def _line_svg(spec: dict, W: int, mini: bool) -> tuple[list[str], float]:
     def sx(v: float) -> float:
         return left + (v - xlo) / (xhi - xlo) * plot_w
     parts: list[str] = []
-    for t in _nice_ticks(lo, hi):
+    for t in y_ticks:
         y = sy(t)
         parts.append(f'<line x1="{left}" x2="{W - right}" y1="{y:.1f}" y2="{y:.1f}" stroke="var(--grid)"/>')
         if not mini:
@@ -1306,7 +1324,7 @@ def _line_svg(spec: dict, W: int, mini: bool) -> tuple[list[str], float]:
             lbl = f'{esc(e["label"])} · {esc(_fmt_val(p[0], "number"))}: {esc(_fmt_val(p[1], yf))}'
             parts.append(f'<circle cx="{sx(p[0]):.1f}" cy="{sy(p[1]):.1f}" r="{r}" fill="{_series_color(si)}" data-viz-pt data-viz-series="{si}" data-viz-label="{lbl}"/>')
         lab = str(e["label"])
-        ends.append((sy(pts[-1][1]), si, lab if len(lab) <= 18 else lab[:17] + "…"))
+        ends.append((sy(pts[-1][1]), si, lab))
     if not many and not mini:
         ends.sort(key=lambda t: t[0])
         ys = [y for y, _, _ in ends]
@@ -1317,8 +1335,10 @@ def _line_svg(spec: dict, W: int, mini: bool) -> tuple[list[str], float]:
         if overflow > 0:
             ys = [y - overflow for y in ys]
         ys = [max(y, top + 6) for y in ys]
-        for (y0, si, txt), y in zip(ends, ys):
-            parts.append(f'<text x="{W - right + 7:.1f}" y="{y + 3.5:.1f}" font-size="11" font-weight="600" fill="{_series_color(si)}" data-viz-series-label="{si}">{esc(txt)}</text>')
+        for (y0, si, full), y in zip(ends, ys):
+            txt = full if len(full) <= 18 else full[:17] + "…"
+            title = f"<title>{esc(full)}</title>" if len(full) > 18 else ""
+            parts.append(f'<text x="{W - right + 7:.1f}" y="{y + 3.5:.1f}" font-size="11" font-weight="600" fill="{_series_color(si)}" data-viz-series-label="{si}">{title}{esc(txt)}</text>')
     return parts, H
 
 
@@ -1494,7 +1514,7 @@ def _chart_legend(spec: dict) -> str:
     if not need:
         return ""
     chips = "".join(
-        f'<button type="button" class="viz-key" data-viz-toggle="{si}">'
+        f'<button type="button" class="viz-key" data-viz-toggle="{si}" aria-pressed="true">'
         f'<span class="dot" style="background:{_series_color(si)}"></span>{esc(e["label"])}</button>'
         for si, e in enumerate(series)
     )
@@ -1760,12 +1780,15 @@ class SiteBuilder:
         if exp["readme_text"]:
             resolver = ExperimentResolver(exp, exp["readme_path"], prefix, self.roster, copied)
             readme = self.render_doc(exp["readme_text"], resolver, "readme-")
-            add_section("readme", "Overview", readme.html)
+            # bare "C49"/experiment-slug mentions become links to their evidence
+            html = linkify_experiments(linkify_claims(readme.html, prefix, self.claim_anchor_ids), prefix, self.roster)
+            add_section("readme", "Overview", html)
         if exp["report_text"]:
             resolver = ExperimentResolver(exp, exp["report_path"], prefix, self.roster, copied)
             report = self.render_doc(exp["report_text"], resolver, "report-")
             gh = f"{GITHUB}/blob/main/{exp['report_path'].relative_to(ROOT).as_posix()}"
-            body = f'<p class="doc-src muted">Rendered from <a href="{esc(gh)}">{esc(exp["report_rel"])}</a></p>{report.html}'
+            html = linkify_experiments(linkify_claims(report.html, prefix, self.claim_anchor_ids), prefix, self.roster)
+            body = f'<p class="doc-src muted">Rendered from <a href="{esc(gh)}">{esc(exp["report_rel"])}</a></p>{html}'
             add_section("report", "Report", body, report.toc)
         if exp["log_path"]:
             resolver = ExperimentResolver(exp, exp["log_path"], prefix, self.roster, copied)
@@ -1932,8 +1955,14 @@ class SiteBuilder:
         top_block = brief_block or finding_block
         demoted_finding = ""
         if brief_block and finding_block:
-            demoted_finding = finding_block.replace(
-                'class="finding-callout"', 'class="finding-callout demoted"', 1
+            # the plain brief is the headline; collapse the report's raw technical
+            # phrasing behind a details so it doesn't re-wall the page below the charts
+            demoted_finding = (
+                finding_block
+                .replace('<div class="finding-callout">', '<details class="finding-callout demoted">', 1)
+                .replace('<p class="finding-label">', '<summary class="finding-label">', 1)
+                .replace("</p><p>", "</summary><p>", 1)
+                .replace("</div>", "</details>", 1)
             )
         body_parts: list[str] = []
         placed_finding = False
@@ -2030,7 +2059,8 @@ class SiteBuilder:
             '<button id="filter-reset" type="button" hidden>Reset ✕</button></form>'
             + activity_chart(self.experiments)
             + f'<ol id="explorer" class="explorer-list">{"".join(cards)}</ol>'
-            '<p id="explorer-empty" class="empty-note" hidden>No experiments match these filters. '
+            '<p id="explorer-empty" class="empty-note" hidden>No experiments match these filters '
+            '<span id="empty-scope" class="muted"></span>. '
             '<button id="explorer-clear" type="button">Clear filters</button></p>'
         )
         self.write_page(
@@ -2358,8 +2388,10 @@ class SiteBuilder:
 
     def home_page(self) -> None:
         prefix = ""
-        recent = [exp for exp in self.experiments if exp["recent"]]
-        feed = recent[:12] if recent else self.experiments[:12]
+        # "Latest findings" must lead with actual findings, not the in-progress frontier:
+        # show the newest FINISHED experiments (in-progress work is one click away via the tab).
+        finished_feed = [exp for exp in self.experiments if exp["status"] == "finished"]
+        feed = (finished_feed or self.experiments)[:12]
         feed_cards = "".join(
             feed_card(
                 exp, prefix, self.slots, self.program_titles,
