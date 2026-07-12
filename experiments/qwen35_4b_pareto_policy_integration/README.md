@@ -109,6 +109,8 @@ passes.
 - `idea_intake.md`: relation to the stopped predecessor and C54.
 - `reports/preregistration.md`: decision rules.
 - `reports/design_review.md`: adversarial pre-run review.
+- `reports/literature_review.md`: primary-paper map behind the social-post
+  acronyms and the experiment's collapse safeguards.
 - `src/gym/`: contamination-safe procedural substrate.
 - `src/mopd_loss.py`: corrected teacher-top-k reverse-KL objective.
 - `reports/artifact_manifest.yaml`: external checkpoint policy.
