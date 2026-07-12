@@ -1,0 +1,81 @@
+{
+  "changed_prompt_counts": {
+    "deep_changed_from_base": 8,
+    "quick_changed_from_base": 8,
+    "quick_differs_from_deep": 7
+  },
+  "changes": [
+    {
+      "deep_changed_from_base": true,
+      "id": "canary-deep-2c3df0c9d605e81b",
+      "quick_changed_from_base": true,
+      "quick_differs_from_deep": true
+    },
+    {
+      "deep_changed_from_base": true,
+      "id": "canary-deep-36b302ab725df7d1",
+      "quick_changed_from_base": true,
+      "quick_differs_from_deep": true
+    },
+    {
+      "deep_changed_from_base": true,
+      "id": "canary-deep-496b7bf49ea02320",
+      "quick_changed_from_base": true,
+      "quick_differs_from_deep": true
+    },
+    {
+      "deep_changed_from_base": true,
+      "id": "canary-deep-84b181735398cc18",
+      "quick_changed_from_base": true,
+      "quick_differs_from_deep": true
+    },
+    {
+      "deep_changed_from_base": true,
+      "id": "canary-quick-113184175de0935c",
+      "quick_changed_from_base": true,
+      "quick_differs_from_deep": true
+    },
+    {
+      "deep_changed_from_base": true,
+      "id": "canary-quick-4d9ff7445fa90b83",
+      "quick_changed_from_base": true,
+      "quick_differs_from_deep": true
+    },
+    {
+      "deep_changed_from_base": true,
+      "id": "canary-quick-b73283fe0ae81ff8",
+      "quick_changed_from_base": true,
+      "quick_differs_from_deep": false
+    },
+    {
+      "deep_changed_from_base": true,
+      "id": "canary-quick-c035a70fb2b723ce",
+      "quick_changed_from_base": true,
+      "quick_differs_from_deep": true
+    }
+  ],
+  "checks": {
+    "base_revision_pinned": true,
+    "deep_all_deltas_nonzero": true,
+    "deep_changes_behavior": true,
+    "deep_exact_merge": true,
+    "greedy": true,
+    "quick_all_deltas_nonzero": true,
+    "quick_changes_behavior": true,
+    "quick_exact_merge": true,
+    "same_input_hash": true,
+    "same_prompt_ids": true,
+    "same_runner": true,
+    "specialists_behaviorally_distinct": true
+  },
+  "config": "/workspace/small-model-experimentation/experiments/qwen35_4b_pareto_policy_integration/configs/default.yaml",
+  "deep_model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_pareto_policy_integration/merged/deep_apex",
+  "downstream_authorization": "calibration",
+  "gate": {
+    "passed": true
+  },
+  "input": "/workspace/small-model-experimentation/experiments/qwen35_4b_pareto_policy_integration/runs/specialist_canary/prompts.jsonl",
+  "input_sha256": "91250ea1492f6421acc27490737b662285410132f6491a7ee54ae40facb5f469",
+  "quick_model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_pareto_policy_integration/merged/quick_blend",
+  "stage": "full_specialist_installation_canary"
+}

@@ -3355,8 +3355,8 @@
   },
   {
     "file_counts": {
-      ".json": 7,
-      ".jsonl": 4,
+      ".json": 12,
+      ".jsonl": 8,
       ".md": 8,
       ".py": 46,
       ".yaml": 3
@@ -3381,6 +3381,7 @@
     ],
     "title": "Qwen3.5-4B Pareto Policy Integration",
     "top_level_dirs": [
+      "analysis",
       "configs",
       "reports",
       "runs",
@@ -3388,8 +3389,8 @@
       "src",
       "tests"
     ],
-    "total_files": 68,
-    "total_size_bytes": 780191
+    "total_files": 77,
+    "total_size_bytes": 943884
   },
   {
     "file_counts": {

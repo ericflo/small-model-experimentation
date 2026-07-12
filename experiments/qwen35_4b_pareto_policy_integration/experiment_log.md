@@ -109,3 +109,17 @@ Created as a new experiment scaffold.
 - Both specialist receipts now bind the pinned base revision, exact external
   adapter/composite paths, and model-weight hashes. No specialist task score
   was inspected during either training run.
+
+## 2026-07-12 — specialist installation canary and evaluation-engine preflight pass
+
+- On eight fixed same-prefix greedy prompts, quick and deep each changed all
+  8/8 base continuations; the two specialists differed from one another on
+  7/8. All prompt, runner, decode, merge-receipt, and nonzero-delta checks
+  passed, authorizing independent calibration. This is an installation test,
+  not a task-success measurement.
+- A separate one-token quick-composite preflight loaded the exact frozen
+  evaluation geometry: 16,384-token model/batch limits, 48 sequences, 0.85 GPU
+  utilization, and explicit capture sizes `[1,2,4,8,16,24,32,40,48]`.
+  vLLM resolved full decode graphs at all nine requested sizes without a Mamba
+  clamp or process re-exec, reported 807,029 KV-cache tokens and 49.26x maximum
+  full-length concurrency, and bound the output to the quick merge receipt.
