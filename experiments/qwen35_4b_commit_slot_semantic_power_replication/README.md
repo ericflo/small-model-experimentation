@@ -102,11 +102,16 @@ After anchoring the design boundary:
 
 ## Status
 
-Design and adversarial review are complete before any model call. CPU smoke
+Design and adversarial review completed before any model call. CPU smoke
 passes 322/322 unique fresh exact-depth tasks, zero overlap with five parents,
 balanced target support, exact lens hash, and reachable gates. The power receipt
 records 113 tasks required and planned per seam stage, approximate power 0.8027,
-and the exact parent diagnostic hash. Model and scientific outcomes are unopened.
+and the exact parent diagnostic hash. The subsequent outcome-blind model smoke
+passes revision/architecture, five rank-24 lens matrices, tokenizer/slot,
+finite-logit, cache, data, and power contracts while storing no correctness or
+chosen alias. A post-smoke implementation audit confirms task-bootstrap,
+diversity, row-count, and confirmation-lock code. Scientific outcomes are
+unopened.
 
 ## Scope
 
@@ -126,4 +131,5 @@ sampling on untouched procedural tasks.
 - `data/procedural/`: four frozen fresh splits and manifest.
 - `runs/smoke/`: CPU, reachability, and power receipts.
 - `reports/preregistration.md` and `reports/design_review.md`: immutable rules.
+- `reports/pre_selection_implementation_audit.md`: outcome-blind code audit.
 - `scripts/run.py`: fixed-cap seam harness; later stages fail closed.

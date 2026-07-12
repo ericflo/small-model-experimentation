@@ -12,3 +12,11 @@
 - CPU smoke passes 322 unique exact-depth tasks, zero overlap with five parents,
   balanced support, exact lens hash, and reachable gates.
 - Completed 60-point adversarial review before any model call. Outcomes unopened.
+
+## 2026-07-12 — Outcome-blind smoke and implementation audit
+
+- Passed pinned model, architecture, lens rank, tokenizer/slot, finite-logit,
+  cache, data-hash, and power-hash contracts at 8,514,319,872 peak bytes.
+- Stored no task correctness, chosen alias, trace text, or comparison.
+- Audited task-bootstrap units, strict lower-bound gate, alias diversity, exact
+  row counts, shuffled multiset, and confirmation hash locks before selection.

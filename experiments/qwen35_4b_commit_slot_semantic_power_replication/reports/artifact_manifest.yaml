@@ -13,6 +13,7 @@ reproducibility:
     --stage seam-selection
   required_external_artifacts: []
 notes: >-
-  At design time the exact lens, 322 fresh task rows, CPU/gate receipt, and
-  parent-hash-locked power receipt are committed. No model call has occurred.
-  No artifact is external or omitted.
+  The exact lens, 322 fresh task rows, CPU/gate and parent-hash-locked power
+  receipts, immutable design receipt, outcome-blind model-smoke receipt, and
+  pre-selection implementation audit are committed. No scientific outcome has
+  opened. No artifact is external or omitted.

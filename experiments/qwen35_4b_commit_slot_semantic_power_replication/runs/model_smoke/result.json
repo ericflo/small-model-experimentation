@@ -1,0 +1,109 @@
+{
+  "correctness_recorded": false,
+  "counterfactual_policy_acknowledged": true,
+  "data_receipt": {
+    "manifest_sha256": "b0aeb1e81da6b885d5792918c6acba20ee7474363f1b082343adfd5f104ca2f5",
+    "receipt_sha256": "ed5ba0bc730862cbc4d1c547203d45a43f20dd6583082a6f7c871a87c1394b28",
+    "split_sha256": {
+      "causal_confirmation": "84d8356cc5325986cc3cfab2b36005640dae8a8bc06ee0206dc20ca489f2e0d5",
+      "seam_confirmation": "710b2c411403dfaee3f01712cf527250b80b437a8d16159a853ed04f8c87a84b",
+      "seam_selection": "c570d766e122df6b03689334c5d86ae6b443e15914952fe7e6c25dfa4f8741ac",
+      "value_fit": "fa4a1592d293db69d4aaa34f4bad737c2f3b104a144a2912013bcbb5e0db5afa"
+    }
+  },
+  "elapsed_seconds": 7.825293391942978,
+  "environment": {
+    "gpu": "NVIDIA RTX 6000 Ada Generation",
+    "peak_allocated_bytes": 8514319872,
+    "torch": "2.11.0+cu129",
+    "transformers": "5.13.0"
+  },
+  "forced_cache_contract_pass": true,
+  "forced_close_injected": true,
+  "forced_forward_input_lengths": [
+    385,
+    1
+  ],
+  "lens_ranks": {
+    "4": 24,
+    "5": 24,
+    "6": 24,
+    "7": 24,
+    "8": 24
+  },
+  "model": {
+    "hidden_size": 2560,
+    "id": "Qwen/Qwen3.5-4B",
+    "layers": 32,
+    "load_seconds": 5.209859482944012,
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "vocab_size": 248320
+  },
+  "outcomes_recorded": false,
+  "passed": true,
+  "power_receipt": {
+    "actual_gate_uses_nonparametric_task_bootstrap": true,
+    "expected_normal_approximation_lower_bound": 0.02842407072433767,
+    "method": "one-sided normal approximation using parent task-level differences",
+    "one_sided_alpha": 0.05,
+    "parent_analysis_sha256": "b36c0a074d22cca60b6adb0e686df1c5f3e3ad0b734e3ae6bb7b39789dfa11b9",
+    "parent_experiment": "qwen35_4b_commit_slot_jacobian_value_transport",
+    "parent_real_minus_shuffled_mean": 0.08333333333333333,
+    "parent_task_standard_deviation": 0.35486043161491804,
+    "parent_task_units": 16,
+    "parent_terminal_decision": "COMMIT_SLOT_SEAM_FAIL",
+    "passed": true,
+    "planned_approximate_power": 0.8027450606015709,
+    "planned_confirmation_tasks": 113,
+    "planned_selection_tasks": 113,
+    "planned_traces_per_seam_stage": 339,
+    "required_tasks_per_seam_stage": 113,
+    "schema_version": 1,
+    "scientific_result": false,
+    "scope": "powered for the parent's observed real-minus-shuffled task effect; not a promise that the effect replicates and not power for no-thought",
+    "sha256": "03001be13f2bca9ca1ce3d58b9d90626d1e68ab2c32c3ceb457766a0e837cfae",
+    "target_power": 0.8
+  },
+  "schema_version": 1,
+  "scientific_result": false,
+  "slot_chosen_from_aliases": true,
+  "slot_constrained_to_aliases": true,
+  "slot_finite": true,
+  "slot_prefill_tokens": 388,
+  "slot_token_ids": [
+    271,
+    5170,
+    25
+  ],
+  "stage": "model_smoke",
+  "token_ids": {
+    "aliases": {
+      "apple": 22544,
+      "cat": 7993,
+      "circle": 12307,
+      "dog": 5388,
+      "gold": 6414,
+      "horse": 14780,
+      "lemon": 28503,
+      "ocean": 17415,
+      "river": 14367,
+      "silver": 14527,
+      "square": 9057,
+      "tiger": 49993
+    },
+    "eos": 248044,
+    "think_close": 248069,
+    "think_open": 248068
+  },
+  "trace_cache_contract_pass": true,
+  "trace_forward_input_lengths": [
+    376,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ]
+}

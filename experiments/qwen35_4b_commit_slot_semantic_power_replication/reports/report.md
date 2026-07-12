@@ -2,7 +2,8 @@
 
 ## Status
 
-Design-frozen; CPU and power receipts pass; no model outcome opened.
+Design-frozen; CPU, power, and outcome-blind model plumbing pass; no scientific
+outcome opened.
 
 ## Purpose
 
@@ -20,7 +21,15 @@ and seven passing unit tests. Parent-effect planning requires and assigns 113
 tasks per stage for approximate power 0.802745; the actual decision uses a
 10,000-resample task bootstrap.
 
-No Qwen call, correctness row, trace, or scientific summary exists yet.
+No correctness row, scientific trace, or scientific summary exists yet.
+
+After the immutable design boundary, outcome-blind model smoke passed the exact
+revision, 32-layer/2,560-wide architecture, five rank-24 lens matrices, 12
+distinct leading-space aliases, fixed slot tokens `[271, 5170, 25]`, finite
+logits, and native/free-form cache contracts. Peak allocation was 8,514,319,872
+bytes. The receipt stores no correctness, chosen alias, or trace text. A final
+implementation audit then verified task bootstrap, diversity, exact cardinality,
+and confirmation hash locks before any scientific run.
 
 ## Boundary
 
