@@ -45,7 +45,7 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | `.jsonl` | 715 |
 | `.log` | 527 |
 | `.yaml` | 342 |
-| `.gz` | 109 |
+| `.gz` | 111 |
 | `.html` | 90 |
 | `.sh` | 19 |
 | `.txt` | 5 |
