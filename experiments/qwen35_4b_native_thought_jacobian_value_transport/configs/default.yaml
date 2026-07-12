@@ -55,7 +55,7 @@ generation:
   top_k: 20
   max_think_tokens: 160
   max_answer_tokens: 8
-  max_sequence_tokens: 512
+  max_sequence_tokens: 768
   traces_per_task: 3
   continuations_per_prefix: 3
   evaluation_continuations_per_pair: 2

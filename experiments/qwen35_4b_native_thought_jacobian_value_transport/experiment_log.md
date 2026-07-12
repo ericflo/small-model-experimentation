@@ -49,3 +49,12 @@ Created as a new experiment scaffold.
 - No token was generated and no correctness outcome was observed or written.
 - Removed literal delimiter strings from the instruction while retaining native
   thinking through the frozen chat template. No scientific setting changed.
+
+## 2026-07-12 — model-smoke attempt 002
+
+- The repaired one-opener token contract passed. The second smoke stopped before
+  generation because an eight-example rendered prompt used 541 tokens, above an
+  implementation-only 512-token context safety cap.
+- Raised that cap to 768 so the frozen prompt plus 160-thought/8-answer allowance
+  fits. Task data, output budget, sampling, checkpoints, gates, and controls are
+  unchanged; no correctness outcome was observed or written.
