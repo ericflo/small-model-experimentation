@@ -18,9 +18,16 @@ or evaluation generation has run under this experiment.
 ## 2026-07-12 — Immutable Design Anchor
 
 - Prospective README, preregistration, adversarial review, full restartable harness, frozen data, and 40
-  passing CPU tests were committed at `c847615f` before any experiment GPU call.
+  passing CPU tests were committed at original `c847615f` before any experiment GPU call.
 - The configured guard now points to that commit and its three exact file digests. It fails before model
   load if ancestry or content identity changes.
 - After the anchor, the README's first relative link was moved below the generated summary paragraph so the
   repository catalog resolves it from the correct directory. This is a navigation-only repair; the guard
-  still verifies the byte-exact prospective design at `c847615f`.
+  still verifies that byte-exact prospective design.
+
+## 2026-07-12 — Concurrent-Main Rebase
+
+- Rebasing over three concurrent site commits changed the design anchor from original `c847615f` to
+  `cb3d64e3`. All three frozen-file SHA-256 values remained identical.
+- The configured ancestry pointer was re-anchored to the rebased commit without changing any design text,
+  threshold, split, arm, or code. No experiment GPU call had run.

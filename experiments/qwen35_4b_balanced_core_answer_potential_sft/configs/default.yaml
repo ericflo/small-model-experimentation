@@ -1,7 +1,7 @@
 schema_version: 1
 experiment_id: qwen35_4b_balanced_core_answer_potential_sft
 design_boundary:
-  commit: c847615fd38a3ca45697aa21dde7bddf301ac277
+  commit: cb3d64e3ace4639a385eb7d87a3eb58d2deee0e0
   readme_sha256: 6ae4ba1488742033ef12c2499acb96f0455285deb39ee137018369a0a1ca684f
   preregistration_sha256: 7fd02f22b948aa34bae1b17a1ec5690585ee2ec3f3f3cad8b298acc1f922e642
   design_review_sha256: 9d96154ab7238dfc4fc0da106e2c46f5cca1426ec125d515270db9ab705f6809
