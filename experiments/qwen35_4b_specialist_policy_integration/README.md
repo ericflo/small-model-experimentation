@@ -1,9 +1,9 @@
 # Qwen3.5-4B Specialist Policy Integration
 
-Status: the C53 incumbent was regenerated, installed, and passed the disjoint
-compound-headroom gate on 2026-07-11 (macro 0.135 versus the `<0.60` bar).
-Matched incumbent baselines are next; no specialist or integration result
-exists yet.
+Status: **stopped negative** on 2026-07-12 before best-of-8 or specialist
+training. The tools core's incumbent score is 0.994, making its frozen
+`S0 + 0.10` qualification target 1.094 on a score bounded by 1.0. Because all
+four specialists were mandatory, teacher audit and integration are unlicensed.
 
 This experiment tests whether independently execution-improved, same-origin
 specialists can be consolidated on the student's own trajectories into one
@@ -57,13 +57,16 @@ success 0.0 at every L1-L4 cell.
 
 1. Regenerate and merge the C53 incumbent `S0`; pass HF/vLLM and nonzero-
    composite gates.
-2. Produce four DAgger-to-execution-RL specialists. Every specialist must beat
+2. Verify that every frozen pass-one specialist gain bar has mathematical
+   headroom under the environment score ceiling. This postmortem gate now
+   stops before best-of-8 or training when a target is unreachable.
+3. Produce four DAgger-to-execution-RL specialists. Every specialist must beat
    DAgger, extra SFT, shuffled reward, and `S0` best-of-8.
-3. Audit correct versus KL-matched wrong teachers on exact `S0` prefixes and
+4. Audit correct versus KL-matched wrong teachers on exact `S0` prefixes and
    run the five-update exact-logit locality pilot.
-4. Integrate qualified teachers with corrected top-50 MOPD. Compare end-to-end
+5. Integrate qualified teachers with corrected top-50 MOPD. Compare end-to-end
    matched joint RL, off-policy SFT, parameter merge, and wrong routing.
-5. Evaluate three seeds on individual domains, primitive transfer, and held-out
+6. Evaluate three seeds on individual domains, primitive transfer, and held-out
    compounds. Open the benchmark CLI only if every whitebox gate passes.
 
 The exact thresholds, seeds, metrics, and interpretation are frozen in
@@ -109,11 +112,13 @@ python3 experiments/qwen35_4b_specialist_policy_integration/scripts/run.py --sta
 
 Replace `discover` with `control`, `tools`, or `compose`. Teacher-audit and
 integration stages remain deliberately unavailable until all specialist gates
-pass; a request cannot silently bypass the stop hierarchy.
+pass; a request cannot silently bypass the stop hierarchy. In the reached
+result, `--stage baseline-eval` resumes the committed greedy baseline, rewrites
+the negative headroom receipt deterministically, and stops before best-of-8.
 
 ## Current Results
 
-Current pre-task evidence is limited to substrate and runtime validity:
+Reached evidence:
 
 - four compound families deterministic and JSON-safe;
 - exact oracle 1.0 at every L1-L4 cell;
@@ -140,13 +145,33 @@ Current pre-task evidence is limited to substrate and runtime validity:
   `mazeferry` 0.296, `patchferry` 0.012, and `tripleforge` 0.005. The strict
   `<0.60` headroom gate and every scope/decode/seed/atom-firewall check passed.
 
-This licenses the matched incumbent baseline and specialist-production stages,
-not a teacher, integration, transfer, or benchmark conclusion.
+The full paired greedy baseline then resolved feasibility:
+
+| Specialist core | Frozen families | `S0` macro | Required score | Feasible under cap 1.0 |
+| --- | --- | ---: | ---: | --- |
+| discover | `glyphgate`, `loomfix` | 0.513 | 0.613 | yes |
+| control | `kilnrite`, `burrowmaze` | 0.523 | 0.623 | yes |
+| tools | `ferrier` | 0.994 | 1.094 | **no** |
+| compose | `cipherkiln`, `mazeferry` | 0.180 | 0.280 | yes |
+
+The all-process macro was 0.458 over 864 episodes; atom-retention macro was
+0.681 over 1,344 items. Every baseline protocol check passed. The originally
+scheduled all-family best-of-8 was interrupted during engine warmup before any
+sampled output, and the new feasibility gate now deterministically refuses it.
+
+This is a design-negative result, not evidence for or against MOPD/OPSD: the
+experiment failed to provide a falsifiable four-teacher test because one
+mandatory improvement bar was impossible before training. No DAgger, GRPO,
+specialist, teacher-audit, integration, confirmatory, or benchmark stage ran.
+Any follow-up must live in a new experiment, retain the 0.10 bar, and calibrate
+headroom independently for every specialist domain before GPU production.
 
 ## Artifacts
 
 - `src/gym/families/compound_core.py`: shared exact compound mechanics.
 - `src/curriculum.py`: state-aware expert interface.
 - `runs/smoke/summary.json`: committed CPU gate receipt.
+- `analysis/specialist_headroom_gate.json`: terminal negative stop receipt.
+- `runs/proxy_eval/incumbent_calibration/`: paired greedy/atom baseline.
 - `reports/artifact_manifest.yaml`: external checkpoint policy.
 - future large weights: `large_artifacts/qwen35_4b_specialist_policy_integration/`.

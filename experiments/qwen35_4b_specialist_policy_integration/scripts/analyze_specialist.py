@@ -288,6 +288,10 @@ def main() -> int:
         "incumbent": _diagnostics(args.incumbent, process),
         "specialist": _diagnostics(args.specialist, process),
     }
+    inference_ledger = {
+        "specialist_own_domain": _diagnostics(args.specialist, own),
+        "incumbent_best8_own_domain": _diagnostics(args.incumbent_best8, own),
+    }
     atom = _atom_retention(args.incumbent, args.specialist)
     behavior = _behavior_diff(args.dagger, args.specialist, own)
     root = resolve_repo_path(config["model"]["artifacts_root"])
@@ -397,8 +401,8 @@ def main() -> int:
         "vs_shuffled": candidate - scores["shuffled"]["macro"] >= float(gate["specialist_vs_shuffled_delta"]),
         "beats_incumbent_best8": candidate > scores["incumbent_best8"]["macro"],
         "inference_tokens_below_best8": (
-            diagnostics["specialist"]["sampled_tokens"]
-            < _diagnostics(args.incumbent_best8, process)["sampled_tokens"]
+            inference_ledger["specialist_own_domain"]["sampled_tokens"]
+            < inference_ledger["incumbent_best8_own_domain"]["sampled_tokens"]
         ),
         "every_retention_family": min(retention_delta.values()) >= -float(gate["specialist_max_retention_regression"]),
         "atom_retention": atom["worst_family_delta"] is not None
@@ -430,6 +434,7 @@ def main() -> int:
         "retention_scores": retention_scores,
         "retention_family_delta": retention_delta,
         "diagnostics": diagnostics,
+        "inference_token_ledger": inference_ledger,
         "atom_retention": atom,
         "behavioral_canary_vs_dagger": behavior,
         "training_integrity": training_integrity,

@@ -19,4 +19,6 @@ notes: >-
   Small aggregate trajectories, gate receipts, ledgers, and analyses stay in
   git. Raw benchmark transcripts are never requested or retained. Every LoRA
   used for evaluation is explicitly merged because runtime LoRA silently no-ops
-  for this architecture under the pinned vLLM stack.
+  for this architecture under the pinned vLLM stack. The terminal result
+  stopped before specialist production; only the incumbent adapter/composite
+  exists. The interrupted best-of-8 warmup produced no sampled artifact.

@@ -99,3 +99,30 @@ post-training/adaptation, and benchmark generalization.
   reads atom retention only from the paired incumbent and real specialist;
   episode prompts, seeds, decoding, and every registered comparison are
   unchanged.
+- Before best-of-8 output, its qualification scope was narrowed to the seven
+  specialist-training families and its token ledger made own-domain paired.
+  Primitive/compound transfer best-of-8 is not consumed by specialist gates;
+  the held-out compound comparison remains a separate 128/cell confirmatory
+  arm if integration is reached. This preserves the stop hierarchy and avoids
+  spending eight rollouts on five families before a teacher exists.
+
+## 2026-07-12 — terminal specialist-headroom stop
+
+- Completed the paired greedy baseline on all 12 process families: 864
+  episodes, macro 0.4582, plus 1,344 atom items at macro 0.6806. The clean
+  committed runner generated 3,893,188 episode tokens in 4,991.3 seconds.
+- Core macros were discover 0.5127, control 0.5230, tools 0.9940, and compose
+  0.1797. With the frozen `+0.10` pass-one bar and score ceiling 1.0, the tools
+  target is 1.0940 and its maximum possible gain is only 0.0060.
+- Interrupted the just-started old-scope best-of-8 subprocess during engine
+  warmup. It generated zero sampled requests and wrote no result artifact.
+- Added `analyze_specialist_headroom.py`; the resulting terminal receipt passes
+  every baseline protocol check, marks only `tools` impossible, and authorizes
+  `stop_before_best8_and_specialist_production`. A stage resume reproduces the
+  stop before GPU load.
+- No DAgger, GRPO, specialist, control, teacher-audit, MOPD, confirmatory, or
+  benchmark stage ran. The OPSD/MOPD mechanism remains untested here.
+- Durable design lesson: calibrate theoretical pass-one headroom independently
+  for every mandatory teacher before sampling baselines or producing teachers.
+  Any replacement tools core or split is a new preregistered experiment; the
+  current threshold and outcome are not amended.

@@ -2,23 +2,25 @@
 
 ## Next Experiments
 
-- Active experiment: `qwen35_4b_specialist_policy_integration` — split the
-  live-state DAgger/execution-RL curriculum into discovery, control, tools, and
-  pairwise-composition specialists, prove their same-prefix advantage, then
-  integrate them on-policy and test fully held-out composition. CPU substrate
-  smoke is complete; model work is in progress. This experiment owns the next
-  capability/integration claim slot until its registered stop hierarchy resolves.
-  The regenerated incumbent and disjoint compound-headroom gate have passed;
-  matched baseline measurement and four specialist/control pipelines are the
-  current reached work.
+- Stopped experiment: `qwen35_4b_specialist_policy_integration` — incumbent and
+  compound-headroom gates passed, but `ferrier = 0.994` made the mandatory
+  tools specialist's frozen `+0.10` bar mathematically impossible. Zero
+  specialist or MOPD updates ran. Do not lower the bar or extend this directory.
+- Candidate follow-up: a new specialist-integration experiment with the same
+  controls and corrected MOPD objective, but a disjoint-calibrated harder
+  tools/provenance core and a mandatory per-core ceiling/headroom gate before
+  best-of-k or training. `gatepost`-style provenance has measured room, but any
+  new training/transfer split needs fresh confirmatory seeds and its own
+  experiment lifecycle.
 
 - Completed negative: `qwen35_4b_interactive_policy_curriculum` — the run was
   already underway when the specialist experiment became active. Its
   full-sequence state-aware DAgger arm failed the mechanism gate (−25.3pp
   trained, −33.3pp untouched) through semantic-operator capture despite clean
   atom and closure guards. RL, controls, and Menagerie stopped. The active
-  specialist experiment retains its copied machinery and registered mixed
-  control, but do not independently rerun this broad warm start.
+  specialist experiment retained its copied machinery and registered mixed
+  control, but its earlier feasibility stop meant the control never ran. Do not
+  independently rerun this broad warm start.
 
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.

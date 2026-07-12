@@ -50,6 +50,21 @@ The README should include:
 
 Run a small version first. Save the smoke config and enough output to prove the path works. A smoke result is not evidence for the hypothesis, but it is evidence that the run path is alive.
 
+## 2.5 Prove Every Stop Gate Is Reachable
+
+Before best-of-k, training, or other expensive downstream work, combine the
+frozen baseline with each metric's hard range and verify that every mandatory
+absolute gate is mathematically attainable. For a score bounded by `U` and a
+required gain `delta`, require `baseline + delta <= U` independently for every
+required domain/subgroup—not only for the headline endpoint or pooled macro.
+
+Write a machine-readable receipt and stop if any mandatory arm is infeasible.
+Do not repair an observed impossibility by lowering the bar, dropping a
+required arm, or swapping its substrate inside the result-bearing experiment;
+those are new experiments. This check would have prevented the
+`qwen35_4b_specialist_policy_integration` tools core from demanding 1.094 on a
+score capped at 1.0 after `ferrier` baseline measured 0.994.
+
 ## 3. Run With Controls
 
 Prefer controls that test the mechanism:

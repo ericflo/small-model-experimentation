@@ -47,23 +47,22 @@ tool-found solutions, on-policy RL at residual failures, and
 failure-forensics curricula are the queued beyond-recipe mechanisms
 (see C53 next tests). Same-recipe scaling is closed.
 
-## Active Registered Test (2026-07-11; incumbent gate passed)
+## Specialist Integration Attempt (2026-07-12; stopped before training)
 
-`qwen35_4b_specialist_policy_integration` is the accepted next experiment.
-It reuses the live-state curriculum as four independent capability producers,
-then conditionally tests same-origin on-policy multi-teacher integration. Four
-new compound environments pass exact-oracle, random-floor, remove-one-
-primitive, and state-aware-expert CPU gates at every L1-L4 cell. This is
-substrate validation only; no capability or integration claim is licensed
-until the specialist, prefix/locality, matched-control, and held-out-composition
-gates resolve.
+`qwen35_4b_specialist_policy_integration` attempted the accepted next mechanism:
+four live-state DAgger/execution-RL capability producers followed conditionally
+by same-origin MOPD integration. Its new compound environments, runtime,
+regenerated incumbent, explicit merge, and 7/7 behavioral-installation gates
+passed. The disjoint compound macro was 0.135 versus the `<0.60` headroom bar.
 
-Reached evidence: the regenerated C53 incumbent passed source/encoding/merge
-and 7/7 paired behavioral-installation checks. On the disjoint four-family
-compound calibration it scored 0.135 macro versus the registered `<0.60`
-headroom ceiling (`cipherkiln` 0.227, `mazeferry` 0.296, `patchferry` 0.012,
-`tripleforge` 0.005; 288 episodes). This licenses specialist production but is
-not a capability-gain result.
+The full baseline exposed a terminal design error before training: the sole
+tools family `ferrier` scored 0.994, making its frozen `S0 + 0.10` target 1.094
+under a score ceiling of 1.0. Because all four specialists were mandatory, the
+run stopped before best-of-8, DAgger, GRPO, teacher audit, integration, or
+benchmark exposure. This does not test MOPD efficacy. It establishes a reusable
+portfolio rule: endpoint headroom is insufficient; every mandatory teacher's
+theoretical improvement bar must be feasible on a disjoint baseline before
+capability-production spend.
 
 ## qwen35_4b_interactive_policy_curriculum (2026-07-11/12 — Negative)
 

@@ -200,3 +200,16 @@ Benchmark output cannot revise any training choice.
 - Compound gain without primitive/blackbox transfer: substrate-local result.
 - All gates: evidence for stronger composable capability from same-origin
   specialist RL plus on-policy policy integration.
+
+## Outcome Receipt (2026-07-12; not a preregistration amendment)
+
+The experiment stopped before best-of-8 or training. On the frozen paired
+greedy baseline, the sole tools family `ferrier` scored 0.9940. Its registered
+specialist gate required `S0 + 0.10 = 1.0940`, while every environment score is
+bounded above by 1.0. Because all four specialists were mandatory, the tools
+teacher could not qualify under any possible training outcome.
+
+This outcome does not revise a threshold, split, or interpretation after
+seeing results. It applies the registered stop hierarchy to a mathematical
+feasibility failure the original design review missed. No specialist,
+teacher-audit, integration, confirmatory, or benchmark output exists.

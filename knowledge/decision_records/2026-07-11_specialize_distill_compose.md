@@ -1,7 +1,7 @@
 # Decision Record: Specialize, Distill, Then Test Composition
 
 - Date: 2026-07-11
-- Status: accepted
+- Status: executed; stopped at per-specialist feasibility
 - Programs: agentic_breadth_installation, posttraining_and_adaptation, benchmark_generalization
 - Experiments: qwen35_4b_interactive_policy_curriculum, qwen35_4b_specialist_policy_integration
 - Claims: C11, C12, C21, C22, C28, C29, C44, C48, C49, C50, C52, C53
@@ -40,6 +40,23 @@ ordinary standards. It is the first design in this repository that gives the
 fixed model a credible external capability-producing step, a distribution-
 matched way to consolidate several resulting policies, and a test that can
 distinguish a union of skills from their composition.
+
+## Execution Outcome (2026-07-12)
+
+The experiment did not reach capability production or integration. The
+regenerated incumbent and compound-headroom gate passed, but the complete
+paired baseline revealed that the mandatory tools core was saturated:
+`ferrier = 0.9940`, so its frozen `S0 + 0.10` target was 1.0940 under a score
+ceiling of 1.0. The all-four-teacher premise was therefore mathematically
+unreachable before any specialist training.
+
+The decision's mechanism argument remains open; this run is evidence about
+experimental feasibility, not OPSD/MOPD efficacy. The durable amendment to
+future strategy is procedural: before best-of-k or specialist production,
+require independent theoretical headroom for every mandatory teacher, not
+only for the downstream compound endpoint. A harder tools/provenance core and
+new split require a new experiment and fresh confirmatory seeds; the current
+bar is not lowered post hoc.
 
 ## What the Social Posts Actually Refer To
 

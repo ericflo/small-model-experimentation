@@ -1,0 +1,71 @@
+{
+  "domains": {
+    "compose": {
+      "families": [
+        "cipherkiln",
+        "mazeferry"
+      ],
+      "feasible": true,
+      "incumbent_macro": 0.17971781305114637,
+      "maximum_possible_gain": 0.8202821869488537,
+      "required_absolute_score": 0.2797178130511464,
+      "required_gain": 0.1,
+      "score_ceiling": 1.0
+    },
+    "control": {
+      "families": [
+        "kilnrite",
+        "burrowmaze"
+      ],
+      "feasible": true,
+      "incumbent_macro": 0.523015873015873,
+      "maximum_possible_gain": 0.47698412698412695,
+      "required_absolute_score": 0.623015873015873,
+      "required_gain": 0.1,
+      "score_ceiling": 1.0
+    },
+    "discover": {
+      "families": [
+        "glyphgate",
+        "loomfix"
+      ],
+      "feasible": true,
+      "incumbent_macro": 0.5127314814814814,
+      "maximum_possible_gain": 0.4872685185185186,
+      "required_absolute_score": 0.6127314814814814,
+      "required_gain": 0.1,
+      "score_ceiling": 1.0
+    },
+    "tools": {
+      "families": [
+        "ferrier"
+      ],
+      "feasible": false,
+      "incumbent_macro": 0.9940476190476191,
+      "maximum_possible_gain": 0.005952380952380931,
+      "required_absolute_score": 1.0940476190476192,
+      "required_gain": 0.1,
+      "score_ceiling": 1.0
+    }
+  },
+  "downstream_authorization": "stop_before_best8_and_specialist_production",
+  "gate": {
+    "passed": false
+  },
+  "impossible_domains": [
+    "tools"
+  ],
+  "interpretation": "at least one frozen pass-one gain bar is mathematically unreachable",
+  "protocol_checks": {
+    "atoms_enabled": true,
+    "decode": true,
+    "episode_seed_base": true,
+    "episodes_per_level": true,
+    "families": true,
+    "levels": true,
+    "scope": true
+  },
+  "score_contract": "all registered environment scores are bounded in [0, 1]",
+  "scores": "/workspace/small-model-experimentation/experiments/qwen35_4b_specialist_policy_integration/runs/proxy_eval/incumbent_calibration/scores.json",
+  "stage": "specialist_headroom_gate"
+}

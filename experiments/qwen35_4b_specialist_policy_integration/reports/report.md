@@ -2,10 +2,10 @@
 
 ## Status
 
-Implementation and the complete runtime/training/merge preflight passed. The
-C53 incumbent was regenerated and passed its structural, behavioral, and
-compound-headroom gates. Matched incumbent baselines are next. No specialist
-or integration capability claim is available.
+**Stopped negative on 2026-07-12.** Runtime, incumbent installation, and
+compound-headroom gates passed, but the paired greedy baseline made the tools
+specialist's frozen gain bar mathematically unreachable. No specialist or
+integration capability claim is available.
 
 ## Research Program Fit
 
@@ -60,14 +60,62 @@ simulator spec, expert label, message transcript, or raw top-20 payload. This
 establishes the intended headroom and licenses specialist production; it is
 not evidence that a training method improved the model.
 
-## Pending
+## Terminal Feasibility Result
 
-- matched all-process incumbent greedy and execution-filtered best-of-8 baselines;
-- four specialist/control runs and qualification receipts;
+The full paired greedy baseline evaluated all 12 process families at L2-L4,
+24 episodes/cell (864 episodes), plus 1,344 atom-retention items. It used the
+committed clean runner/environment, 3,893,188 sampled episode tokens,
+4,909,001 logical episode-input tokens, and 4,991.3 wall seconds. Process macro
+was 0.4582 and atom macro 0.6806.
+
+| Core | Incumbent macro | Frozen `+0.10` target | Maximum possible gain | Feasible? |
+| --- | ---: | ---: | ---: | --- |
+| discover | 0.5127 | 0.6127 | 0.4873 | yes |
+| control | 0.5230 | 0.6230 | 0.4770 | yes |
+| tools | **0.9940** | **1.0940** | **0.0060** | **no** |
+| compose | 0.1797 | 0.2797 | 0.8203 | yes |
+
+All registered environment scores are bounded in `[0, 1]`. Therefore no
+possible `ferrier` specialist can satisfy the frozen `S0 + 0.10` requirement
+on these paired cells. This is not sampling uncertainty: the decision rule
+uses the observed paired baseline, and its required score is above the score
+contract's hard ceiling. Because the preregistration requires all four
+specialists, the experiment stops before best-of-8, DAgger, execution RL,
+controls, teacher audit, or integration.
+
+The old all-family best-of-8 subprocess was interrupted during vLLM warmup,
+before any sampled request or output artifact. A committed fail-closed analyzer
+now reproduces the negative receipt and blocks that spend automatically.
+
+## Interpretation
+
+This experiment did **not** test whether specialist RL creates headroom or
+whether MOPD integrates it. It found a prior design error: compound-level
+headroom does not imply headroom for every mandatory teacher. The adversarial
+review correctly guarded average-masking after training but missed the simpler
+upper-bound feasibility check before training.
+
+The most promising follow-up is a new experiment—not a threshold amendment:
+
+1. keep the same regenerated incumbent, discovery/control/compose cores,
+   installation gates, corrected MOPD loss, and matched controls;
+2. replace or structurally harden the saturated tools/provenance core using a
+   disjoint calibration pool (an existing provenance candidate such as
+   `gatepost` has measured room, but requires a new split and held-out family);
+3. require every core's `1 - S0_macro` to exceed every frozen absolute gain bar
+   before best-of-8 or any training; and
+4. freeze fresh paired seeds only after this domain-level feasibility gate.
+
+Lowering the `+0.10` bar, dropping the tools teacher, or reusing the current
+evaluation cells to tune a replacement would answer a different question.
+
+## Unreached by Design
+
+- execution-filtered best-of-8 (zero sampled outputs);
+- all four specialist/control pipelines;
 - same-prefix teacher/locality audit;
 - MOPD and matched integration controls;
-- three-seed confirmatory evaluation and, only if eligible, benchmark CLI;
-- program/claim/synthesis updates based on the reached result.
+- confirmatory and benchmark evaluation.
 
 ## Artifact Manifest
 

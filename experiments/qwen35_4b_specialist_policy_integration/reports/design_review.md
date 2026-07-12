@@ -156,3 +156,24 @@ the existing controls stricter and were frozen before incumbent calibration.
 - Same-prefix and locality gate: required independently for all four teachers.
 - Integration and compound gates: required before benchmark.
 - Negative and stopped stages remain result-bearing artifacts.
+
+## Postmortem Finding (2026-07-12)
+
+### Compound headroom does not imply teacher headroom
+
+The review required a disjoint compound macro below 0.60 and guarded against a
+high-headroom domain hiding regressions after training, but it never checked
+whether each mandatory specialist's absolute improvement bar was reachable
+under its score ceiling. The paired baseline found `ferrier = 0.9940`; the
+frozen `+0.10` gate therefore demanded 1.0940 on a `[0,1]` score.
+
+Resolution: a reusable pre-production analyzer now computes every core's
+baseline, score ceiling, maximum possible gain, and required absolute target.
+It stops before best-of-8 and all training if any core is infeasible. Future
+multi-teacher designs must run both gates on disjoint calibration data:
+
+1. deployment-endpoint headroom (for example, held-out composition); and
+2. per-teacher theoretical headroom for every mandatory capability producer.
+
+The current experiment is terminal. Swapping the tools family, lowering the
+bar, or dropping a required teacher is a new experiment.

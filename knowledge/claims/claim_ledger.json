@@ -1539,16 +1539,20 @@
     {
      "kind": "experiment",
      "id": "qwen35_4b_gauntlet_frontier"
+    },
+    {
+     "kind": "experiment",
+     "id": "qwen35_4b_specialist_policy_integration"
     }
    ],
-   "implication": "For general agentic uplift on the fixed 4B: spend ONE cheap round installing the emission policy (any rich verified substrate suffices; breadth optional), then STOP scaling that recipe — the next capability increment requires a different mechanism (candidates: on-policy RL with execution reward at the residual failure modes, scaffold-distillation of tool-assisted solutions the model cannot sample alone, targeted axis curricula from failure forensics).",
+   "implication": "For general agentic uplift on the fixed 4B: spend ONE cheap round installing the emission policy (any rich verified substrate suffices; breadth optional), then STOP scaling that recipe — the next capability increment requires a different mechanism (candidates: on-policy RL with execution reward at the residual failure modes, scaffold-distillation of tool-assisted solutions the model cannot sample alone, targeted axis curricula from failure forensics). The first four-specialist/MOPD follow-up did not test that mechanism: it stopped before training because its sole tools family was already 0.994, making the frozen +0.10 teacher bar impossible. A replacement experiment must establish per-teacher theoretical headroom before capability-production spend.",
    "next_tests": [
-    "On-policy RL (GRPO, execution rewards) at residual failure modes — the one mechanism class left untried (C29-guarded)",
+    "New specialist-integration experiment with a harder disjoint-calibrated tools/provenance core and a per-core score-ceiling/headroom gate before best-of-k or GRPO; retain the C29 guards and full MOPD controls",
     "Failure forensics: pass@K ceilings on residual gym axes post-install (is the residual sampling-reachable at all?)",
     "Slow/deep-tier ceiling confirmation; multi-seed band quantification",
     "Episode-mode trace distillation (traces for multi-turn procedures; atoms-only tested here)"
    ],
-   "avoid": "Do not run further same-recipe rounds expecting compounding (three independent escalations landed in-band); do not attribute the plateau to gym difficulty (in-gym frontier competence installs; the blackbox band still holds). When two sessions run concurrently, claim IDs must be reserved at append time against origin (this claim was lost once to an ID collision + dedupe)."
+   "avoid": "Do not run further same-recipe rounds expecting compounding (three independent escalations landed in-band); do not attribute the plateau to gym difficulty (in-gym frontier competence installs; the blackbox band still holds). Do not begin a mandatory multi-specialist run from downstream endpoint headroom alone: every teacher's absolute gain bar must be reachable under its score ceiling. When two sessions run concurrently, claim IDs must be reserved at append time against origin (this claim was lost once to an ID collision + dedupe)."
   }
  ]
 }

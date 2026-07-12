@@ -83,3 +83,26 @@ single-domain union and fail held-out compounds.
 - Create program: no.
 - Write synthesis only: no.
 - Defer: no.
+
+## Reached Outcome and Follow-up Intake (2026-07-12)
+
+- Outcome: stopped before specialist production. `ferrier` scored 0.9940 on
+  the paired baseline, making the frozen `S0 + 0.10` tools target 1.0940 under
+  a hard score ceiling of 1.0. The proposed mechanism was not tested.
+- Novel durable lesson: a multi-teacher experiment needs a per-teacher
+  theoretical-headroom gate before best-of-k or training; endpoint/compound
+  headroom alone is insufficient.
+- Closest follow-up duplicate: this experiment itself. A replacement tools
+  family or split must therefore be a new standalone experiment, not an
+  extension of this result-bearing directory.
+- Candidate follow-up: preserve discover/control/compose and the full MOPD
+  control stack, but use a disjoint-calibrated harder tools/provenance core
+  (potentially fresh `gatepost`-style procedural seeds plus a new held-out
+  provenance chain) with `S0` far enough below 1.0 to clear every frozen bar.
+- Mechanism-falsifying controls remain DAgger, compute-overmatched SFT,
+  deranged rewards, correct-vs-wrong routing, and matched-compute joint RL.
+- Required pre-run evidence: every core must pass `1 - S0_macro >= required
+  gain` on calibration cells; replacement selection cannot use confirmatory
+  items.
+- Decision: queue as a new experiment candidate; do not silently rescue or
+  continue the stopped experiment.

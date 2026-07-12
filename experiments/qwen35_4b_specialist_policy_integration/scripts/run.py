@@ -627,9 +627,21 @@ def _calibration_gate(config: dict, config_path: Path, paths: dict[str, Path]) -
 def _baseline_eval(config: dict, config_path: Path, paths: dict[str, Path]) -> None:
     _require_gate(EXP / "analysis" / "calibration_gate.json")
     _eval(config_path, config, paths["incumbent"], "incumbent_calibration")
+    _run(
+        [
+            str(PY), str(EXP / "scripts" / "analyze_specialist_headroom.py"),
+            "--config", str(config_path),
+            "--scores", str(
+                EXP / "runs" / "proxy_eval" / "incumbent_calibration" / "scores.json"
+            ),
+        ],
+        allowed=(0, 4),
+    )
+    _require_gate(EXP / "analysis" / "specialist_headroom_gate.json")
     _eval(
         config_path, config, paths["incumbent"],
-        "incumbent_best8_calibration", decode="sample8", no_atoms=True,
+        "incumbent_best8_calibration", decode="sample8",
+        families=tuple(config["split"]["train_families"]), no_atoms=True,
     )
 
 
