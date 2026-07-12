@@ -40,3 +40,12 @@ Created as a new experiment scaffold.
   parse, correctness, token, seed, and stopping receipts without forcing close.
 - CPU suite passes four tests. No model call has occurred; implementation will
   be committed and pushed before model smoke.
+
+## 2026-07-12 — model-smoke attempt 001
+
+- The pinned model loaded, then the tokenizer contract stopped before generation:
+  the user instruction literally contained `<think>...</think>`, creating a
+  second special-token pair in addition to the chat template's native opener.
+- No token was generated and no correctness outcome was observed or written.
+- Removed literal delimiter strings from the instruction while retaining native
+  thinking through the frozen chat template. No scientific setting changed.

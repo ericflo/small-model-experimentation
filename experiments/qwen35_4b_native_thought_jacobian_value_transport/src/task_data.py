@@ -247,7 +247,7 @@ def task_prompt(task: dict[str, Any], aliases: dict[str, str]) -> str:
     return (
         "Infer the hidden sequence of exactly two list operations from these examples:\n"
         f"{examples}\n\nOperation aliases: {menu}.\n"
-        "Reason naturally inside <think>...</think>. Then answer with exactly "
+        "Reason naturally in the private reasoning section. Then answer with exactly "
         "`First: <alias>` and no other final text."
     )
 
