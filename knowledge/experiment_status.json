@@ -91,7 +91,7 @@
     },
     "qwen35_4b_balanced_core_answer_potential_sft": {
       "status": "in-progress",
-      "confidence": 0.98
+      "confidence": 0.99
     },
     "qwen35_4b_balanced_discriminative_bridge": {
       "status": "finished",
@@ -131,7 +131,7 @@
     },
     "qwen35_4b_commit_slot_semantic_power_replication": {
       "status": "in-progress",
-      "confidence": 0.95
+      "confidence": 0.99
     },
     "qwen35_4b_confidence_guided_compute": {
       "status": "finished",
@@ -246,8 +246,8 @@
       "confidence": 0.9
     },
     "qwen35_4b_gauntlet_frontier": {
-      "status": "finished",
-      "confidence": 0.95
+      "status": "in-progress",
+      "confidence": 0.99
     },
     "qwen35_4b_generator_verifier_gap": {
       "status": "finished",
@@ -330,8 +330,8 @@
       "confidence": 0.9
     },
     "qwen35_4b_long_horizon_answer_potential_sft": {
-      "status": "in-progress",
-      "confidence": 0.98
+      "status": "finished",
+      "confidence": 0.99
     },
     "qwen35_4b_meta_induction": {
       "status": "finished",
@@ -430,8 +430,8 @@
       "confidence": 0.95
     },
     "qwen35_4b_same_prefix_advantage_routing": {
-      "status": "in-progress",
-      "confidence": 0.95
+      "status": "finished",
+      "confidence": 0.99
     },
     "qwen35_4b_sampler_portfolio_scheduler": {
       "status": "finished",
@@ -546,8 +546,8 @@
       "confidence": 0.55
     },
     "qwen35_4b_verifier_conditioned_recovery_bank": {
-      "status": "in-progress",
-      "confidence": 0.95
+      "status": "finished",
+      "confidence": 0.99
     },
     "qwen35_4b_verifier_free_banking": {
       "status": "finished",
@@ -899,19 +899,19 @@
     },
     "qwen35_4b_deep_advantage_mopd": {
       "status": "in-progress",
-      "confidence": 0.98
+      "confidence": 0.99
     },
     "qwen35_4b_recovery_payload_budget_harness": {
-      "status": "in-progress",
-      "confidence": 0.98
+      "status": "finished",
+      "confidence": 0.99
     },
     "qwen35_4b_state_carry_vs_state_bag": {
       "status": "in-progress",
-      "confidence": 0.98
+      "confidence": 0.99
     },
     "qwen35_4b_recovery_verifier_branch_tournament": {
       "status": "in-progress",
-      "confidence": 0.98
+      "confidence": 0.99
     }
   }
 }
