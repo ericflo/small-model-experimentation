@@ -399,7 +399,7 @@ def search_vocab(*texts: str, cap: int = 700) -> str:
     return " ".join(seen)
 
 
-def extract_finding(readme: str, report: str, fallback: str, limit: int = 620) -> tuple[str, str]:
+def extract_finding(readme: str, report: str, fallback: str, limit: int = 760) -> tuple[str, str]:
     """Best-effort 'what we found' excerpt and its source label."""
     candidates: list[tuple[str, str]] = []
     for head, _, body in _sections(readme):
@@ -1582,7 +1582,8 @@ def feed_card(
     meta_bits.append(track_chip(exp["track"]))
     if exp["figures"]:
         meta_bits.append(f'<span class="muted">{len(exp["figures"])} figure{"s" if len(exp["figures"]) != 1 else ""}</span>')
-    finding = rich(exp["finding"], prefix) if rich else esc(exp["finding"])
+    summary = exp.get("card_summary") or exp["finding"]
+    finding = rich(summary, prefix) if rich else esc(summary)
     return (
         f'<article class="feed-card{" big" if big else ""}">{thumb}<div class="card-body">'
         f'<div class="card-meta">{"".join(meta_bits)}</div>'
@@ -1626,8 +1627,12 @@ class SiteBuilder:
         self.status_map = load_experiment_status()
         for exp in self.experiments:
             exp["status"] = self.status_map.get(exp["id"]) or _fallback_status(exp)
-            tone = str(self.briefs.get(exp["id"], {}).get("verdict_tone", "")).strip()
+            brief = self.briefs.get(exp["id"], {})
+            tone = str(brief.get("verdict_tone", "")).strip()
             exp["outcome"] = tone if tone in {"positive", "negative", "mixed", "neutral"} else ""
+            # cards/feed lead with the plain-language, standalone brief answer — not the
+            # jargon-dense finding excerpted from the report; the finding stays on the page.
+            exp["card_summary"] = str(brief.get("plain_answer", "")).strip() or exp["finding"]
         self.dropped_notes: list[str] = []
 
     # ------------------------------------------------------------- utilities
@@ -1891,15 +1896,21 @@ class SiteBuilder:
             source = exp["finding_source"]
             section_name = source.split("·", 1)[1].strip() if "·" in source else ""
             if source.lower().startswith("readme"):
-                origin = '<a href="#readme">the Overview</a>'
+                anchor, origin_label = "#readme", "the Overview"
             elif source.lower().startswith("report"):
-                origin = '<a href="#report">the Report</a>'
+                anchor, origin_label = "#report", "the Report"
             else:
-                origin = "the catalog summary"
+                anchor, origin_label = "", "the catalog summary"
+            origin = f'<a href="{anchor}">{origin_label}</a>' if anchor else origin_label
             src_label = f"from {origin}" + (f" · “{esc(section_name)}”" if section_name else "")
+            # never dead-end a truncated excerpt: link straight to the full section on-page
+            more = (
+                f' <a class="finding-more" href="{anchor}">Read the full result →</a>'
+                if exp["finding"].rstrip().endswith("…") and anchor else ""
+            )
             finding_block = (
-                f'<div class="finding-callout"><p class="finding-label">Finding <span class="muted">{src_label}</span></p>'
-                f'<p>{self.rich_text(exp["finding"], prefix)}</p></div>'
+                f'<div class="finding-callout"><p class="finding-label">In the author’s words <span class="muted">{src_label}</span></p>'
+                f'<p>{self.rich_text(exp["finding"], prefix)}{more}</p></div>'
             )
 
         header = (
@@ -2098,7 +2109,7 @@ class SiteBuilder:
             rows = "".join(
                 f'<li>{date_span(exp)} '
                 f'<a href="{page_prefix}experiments/{esc(exp["id"])}/">{esc(exp["title"])}</a>'
-                f'<p class="muted clamp">{esc(exp["finding"][:220])}</p></li>'
+                f'<p class="muted clamp">{esc((exp.get("card_summary") or exp["finding"])[:220])}</p></li>'
                 for exp in exps
             )
             parts.append(
@@ -2365,7 +2376,7 @@ class SiteBuilder:
         bearing_cards = "".join(
             f'<li><a href="experiments/{esc(exp["id"])}/">{esc(exp["title"])}</a>'
             f'<span class="muted"> · cited by {cited_counts[exp["id"]]} claim{"s" if cited_counts[exp["id"]] != 1 else ""}</span>'
-            f'<p class="muted clamp">{self.rich_text(exp["finding"][:200], prefix)}</p></li>'
+            f'<p class="muted clamp">{self.rich_text((exp.get("card_summary") or exp["finding"])[:200], prefix)}</p></li>'
             for exp in bearing
         )
 
@@ -2393,20 +2404,25 @@ class SiteBuilder:
             + stat_tile("Queued", str(len(self.queue)), "proposals waiting", "queue/")
         )
 
-        claim_strip = "".join(
-            f'<a class="claim-pill status-{CLAIM_STATUS_META.get(str(c.get("status")), ("open",))[0]}" href="claims/#{slugify(str(c.get("id")))}" '
-            f'title="{esc(c.get("status"))}: {esc(c.get("title"))}">'
-            f'<span aria-hidden="true">{STATUS_ICON[CLAIM_STATUS_META.get(str(c.get("status")), ("open",))[0]]}</span> {esc(c.get("id"))}</a>'
-            for c in self.claims
+        # A proportional status bar replaces the old wall of NN opaque C-id pills:
+        # it reads at a glance and links to the ledger, where the ids actually live.
+        claim_by_key = Counter(CLAIM_STATUS_META.get(str(c.get("status")), ("open",))[0] for c in self.claims)
+        seg_order = [("check", "confirmed"), ("half", "promising"), ("open", "open"), ("cross", "ruled out"), ("pause", "retired")]
+        bar_segs = "".join(
+            f'<span class="cg-seg cg-{key}" style="flex:{claim_by_key[key]}" title="{claim_by_key[key]} {label}"></span>'
+            for key, label in seg_order if claim_by_key.get(key)
         )
-        strip_legend = (
-            '<p class="strip-legend muted">The claims under test — '
-            f'<span class="status-check">{STATUS_ICON["check"]}</span> confirmed · '
-            f'<span class="status-half">{STATUS_ICON["half"]}</span> promising · '
-            f'<span class="status-open">{STATUS_ICON["open"]}</span> open · '
-            f'<span class="status-cross">{STATUS_ICON["cross"]}</span> negative. '
-            'Each links to its evidence.</p>'
+        counts_txt = " · ".join(
+            (f"<b>{claim_by_key[key]} {label}</b>" if key == "check" else f"{claim_by_key[key]} {label}")
+            for key, label in seg_order if claim_by_key.get(key)
         )
+        claim_strip = (
+            '<a class="claims-glance" href="claims/" aria-label="Claim ledger status breakdown">'
+            f'<span class="cg-bar">{bar_segs}</span>'
+            f'<span class="cg-legend">{len(self.claims)} durable claims, each tied to its evidence — '
+            f'{counts_txt} <span class="cg-more">Open the ledger →</span></span></a>'
+        )
+        strip_legend = ""
 
         glossary_terms = [
             ("deployable", "a setting you could actually ship: greedy decoding, one sample, no oracle reranking"),
@@ -2433,7 +2449,7 @@ class SiteBuilder:
             'This site is the reading surface for that effort — the latest findings, the evidence behind every claim, and each experiment rendered in full. '
             f'{imported_count} of the {len(self.experiments)} experiments were imported on 2026-06-28 from the predecessor working repo; new work lands here first.</p>'
             f'<div class="stat-row">{tiles}</div>'
-            f'<div class="claim-strip" aria-label="Claims">{claim_strip}</div>{strip_legend}{glossary}</section>'
+            f'{claim_strip}{strip_legend}{glossary}</section>'
             f'<section id="latest-feed" class="band"><div class="section-head"><h2>Latest findings</h2>'
             f'<a class="more" href="experiments/">All experiments →</a></div><div class="feed-grid">{feed_cards}</div></section>'
             + (

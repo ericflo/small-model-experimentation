@@ -163,6 +163,23 @@ a.stat-tile:hover { text-decoration: none; border-color: var(--baseline); }
 .strip-legend .status-half { color: var(--accent); }
 .strip-legend .status-open { color: var(--muted); }
 
+/* claims at a glance — a proportional status bar, not a wall of id pills */
+.claims-glance {
+  display: block; margin: 6px 0 0; padding: 13px 16px; color: var(--ink);
+  background: var(--surface); border: 1px solid var(--grid); border-radius: var(--radius); box-shadow: var(--shadow);
+}
+.claims-glance:hover { text-decoration: none; border-color: var(--baseline); }
+.cg-bar { display: flex; height: 12px; border-radius: 999px; overflow: hidden; background: var(--page); }
+.cg-seg { display: block; min-width: 4px; }
+.cg-check { background: var(--good); }
+.cg-half { background: var(--accent); }
+.cg-open { background: var(--baseline); }
+.cg-cross { background: var(--critical); }
+.cg-pause { background: var(--muted); }
+.cg-legend { display: block; margin-top: 9px; font-size: 13.5px; color: var(--ink-2); }
+.cg-legend b { color: var(--ink); }
+.cg-more { color: var(--accent-ink); font-weight: 600; margin-left: 4px; white-space: nowrap; }
+
 .glossary-box {
   margin: 14px 0 0; padding: 10px 16px; font-size: 14px;
   background: var(--surface); border: 1px solid var(--grid); border-radius: var(--radius);
@@ -395,6 +412,7 @@ a.chip:hover { text-decoration: none; border-color: var(--baseline); color: var(
   text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-ink);
 }
 .finding-callout p:last-child { margin: 0; color: var(--ink); }
+.finding-more { white-space: nowrap; font-weight: 600; font-size: 0.94em; }
 
 .doc-section { margin: 0 0 34px; }
 .doc-section > h2 {
