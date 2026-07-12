@@ -1,0 +1,58 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_repo_search_compress_bank"
+external_artifacts:
+  - name: harvest trajectories
+    storage: large_artifacts/qwen35_4b_repo_search_compress_bank/harvest/trajectories.json
+    status: not_generated
+    required_for: replay-minimized repository bank
+    checksum: pending
+    regenerate: >-
+      .venv-vllm/bin/python
+      experiments/qwen35_4b_repo_search_compress_bank/scripts/harvest.py
+  - name: replay-verified compact and action-only banks
+    storage: large_artifacts/qwen35_4b_repo_search_compress_bank/bank
+    status: not_generated
+    required_for: registered mechanism and control training
+    checksum: pending
+    regenerate: >-
+      .venv/bin/python
+      experiments/qwen35_4b_repo_search_compress_bank/scripts/build_bank.py
+  - name: trained adapters
+    storage: large_artifacts/qwen35_4b_repo_search_compress_bank/adapters
+    status: not_generated
+    required_for: merged deployment checkpoints
+    checksum: pending
+    regenerate: >-
+      .venv/bin/python
+      experiments/qwen35_4b_repo_search_compress_bank/scripts/run.py --full
+  - name: merged checkpoints
+    storage: large_artifacts/qwen35_4b_repo_search_compress_bank/merged
+    status: not_generated
+    required_for: vLLM evaluation; runtime LoRA is invalid under C49
+    checksum: pending
+    regenerate: >-
+      .venv/bin/python
+      experiments/qwen35_4b_repo_search_compress_bank/scripts/run.py --full
+  - name: full evaluation outputs
+    storage: large_artifacts/qwen35_4b_repo_search_compress_bank/eval
+    status: not_generated
+    required_for: paired transfer and matched-sampling analysis
+    checksum: pending
+    regenerate: >-
+      .venv/bin/python
+      experiments/qwen35_4b_repo_search_compress_bank/scripts/run.py --full
+omitted_artifacts: []
+reproducibility:
+  smoke_command: >-
+    .venv/bin/python
+    experiments/qwen35_4b_repo_search_compress_bank/scripts/run.py --smoke
+  full_command: >-
+    .venv/bin/python
+    experiments/qwen35_4b_repo_search_compress_bank/scripts/run.py --full
+  required_external_artifacts:
+    - large_artifacts/qwen35_4b_interactive_policy_curriculum/merged/incumbent_blend
+notes: >-
+  Checksums and statuses are updated after each gated stage. Model weights and
+  verbose tool trajectories remain outside git; deterministic smoke and compact
+  aggregate receipts are committed.

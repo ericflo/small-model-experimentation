@@ -45458,6 +45458,64 @@
     }
    ]
   },
+  "qwen35_4b_pareto_policy_integration": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Pareto integration GPU smoke installed a real adapter",
+     "categories": [
+      "applied LoRA modules",
+      "nonzero LoRA modules"
+     ],
+     "series": [
+      {
+       "label": "module count",
+       "values": [
+        128,
+        128
+       ]
+      }
+     ],
+     "x_label": "merge receipt check",
+     "y_label": "modules",
+     "y_format": "number",
+     "note": "This is an implementation smoke, not a policy result: all 128 applied LoRA modules carried nonzero deltas through the explicit composite merge.",
+     "source": "experiments/qwen35_4b_pareto_policy_integration/runs/checkpoint_receipts.jsonl"
+    }
+   ]
+  },
+  "qwen35_4b_repo_search_compress_bank": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Replay compression preserves all four coding operators in smoke",
+     "categories": [
+      "inspect",
+      "patch",
+      "verify",
+      "commit"
+     ],
+     "series": [
+      {
+       "label": "canonical target rows",
+       "values": [
+        20,
+        20,
+        20,
+        20
+       ]
+      }
+     ],
+     "x_label": "operator",
+     "y_label": "smoke rows",
+     "y_format": "number",
+     "note": "This is a deterministic substrate smoke, not a model result. All 20 test repositories replayed one target for each operator with equal loss mass and no hidden-test leakage.",
+     "source": "experiments/qwen35_4b_repo_search_compress_bank/reports/smoke_receipt.json"
+    }
+   ]
+  },
   "qwen35_4b_specialist_policy_integration": {
    "charts": [
     {

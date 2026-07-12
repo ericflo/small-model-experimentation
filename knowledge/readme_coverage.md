@@ -110,6 +110,7 @@ Top-level README files are required for all experiments. Generated entries shoul
 | `qwen35_4b_oracle_probe_synthesis_mdp` | [README](../experiments/qwen35_4b_oracle_probe_synthesis_mdp/README.md) | [report](../experiments/qwen35_4b_oracle_probe_synthesis_mdp/reports/qwen35_4b_oracle_probe_synthesis_mdp_report.md) |
 | `qwen35_4b_oracle_process_grpo` | [README](../experiments/qwen35_4b_oracle_process_grpo/README.md) | [report](../experiments/qwen35_4b_oracle_process_grpo/reports/qwen35_4b_oracle_process_grpo_report.md) |
 | `qwen35_4b_overthinking_content_ladder` | [README](../experiments/qwen35_4b_overthinking_content_ladder/README.md) | [report](../experiments/qwen35_4b_overthinking_content_ladder/reports/report.md) |
+| `qwen35_4b_pareto_policy_integration` | [README](../experiments/qwen35_4b_pareto_policy_integration/README.md) | [report](../experiments/qwen35_4b_pareto_policy_integration/reports/report.md) |
 | `qwen35_4b_partial_structure_search` | [README](../experiments/qwen35_4b_partial_structure_search/README.md) | [report](../experiments/qwen35_4b_partial_structure_search/reports/report.md) |
 | `qwen35_4b_passk_coverage_rl` | [README](../experiments/qwen35_4b_passk_coverage_rl/README.md) | [report](../experiments/qwen35_4b_passk_coverage_rl/reports/final_report.md) |
 | `qwen35_4b_prefix_value_guided_search` | [README](../experiments/qwen35_4b_prefix_value_guided_search/README.md) | [report](../experiments/qwen35_4b_prefix_value_guided_search/reports/final_report.md) |
@@ -117,6 +118,7 @@ Top-level README files are required for all experiments. Generated entries shoul
 | `qwen35_4b_probe_to_prompt` | [README](../experiments/qwen35_4b_probe_to_prompt/README.md) | [report](../experiments/qwen35_4b_probe_to_prompt/reports/report.md) |
 | `qwen35_4b_real_sample_verify_commit` | [README](../experiments/qwen35_4b_real_sample_verify_commit/README.md) | [report](../experiments/qwen35_4b_real_sample_verify_commit/reports/qwen35_4b_real_sample_verify_commit_report.md) |
 | `qwen35_4b_reliability_exec_opsd_audit` | [README](../experiments/qwen35_4b_reliability_exec_opsd_audit/README.md) | [report](../experiments/qwen35_4b_reliability_exec_opsd_audit/reports/final_report.md) |
+| `qwen35_4b_repo_search_compress_bank` | [README](../experiments/qwen35_4b_repo_search_compress_bank/README.md) | [report](../experiments/qwen35_4b_repo_search_compress_bank/reports/report.md) |
 | `qwen35_4b_retrieval_adapt_verify_scale` | [README](../experiments/qwen35_4b_retrieval_adapt_verify_scale/README.md) | [report](../experiments/qwen35_4b_retrieval_adapt_verify_scale/reports/final_report.md) |
 | `qwen35_4b_sampler_portfolio_scheduler` | [README](../experiments/qwen35_4b_sampler_portfolio_scheduler/README.md) | [report](../experiments/qwen35_4b_sampler_portfolio_scheduler/reports/final_report.md) |
 | `qwen35_4b_simulation_keystone_repair` | [README](../experiments/qwen35_4b_simulation_keystone_repair/README.md) | [report](../experiments/qwen35_4b_simulation_keystone_repair/reports/report.md) |

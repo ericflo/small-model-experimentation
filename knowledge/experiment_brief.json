@@ -2902,6 +2902,13 @@
    "plain_answer": "It generalizes — once the training signal points at the right spot. Practicing on its own correct answers verbatim changed nothing. The winning tweak taught the model to finish thinking and commit to a short final answer, even when its reasoning gets cut off mid-thought. Playground scores nearly quadrupled, the two never-practiced worlds improved just as much, and the held-out benchmark jumped from about 0.14 to 0.36-0.45 on two fresh test sets — roughly seven times the success bar we pre-registered. A separate hard-won lesson: our fast evaluation engine had been silently ignoring the trained weights, so two whole rounds initially looked like failures when the measurement itself was broken.",
    "why_it_matters": "This is the first time any training method in this project has been shown to improve the blackbox benchmark at all, and it breaks the running rule that installed skills never transfer. It also establishes the working recipe — practice broadly, grade strictly, and concentrate learning on the moment of commitment — plus a permanent warning to verify that trained weights are actually loaded before trusting any evaluation."
   },
+  "qwen35_4b_gauntlet_frontier": {
+   "verdict_tag": "Broke the hard tier for the first time; one model can't win both",
+   "concept_primer": "The benchmark has an easy tier (short single questions) and a hard tier (multi-step episodes and deep puzzles). Earlier work smashed the easy tier but kept stalling on the hard one. We diagnosed why — hard tasks need long reasoning that runs out of budget, so the model was committing to half-finished wrong answers — and invented three fixes: teach the model to reach its own correct answer in FEWER steps (compression), give every training example fresh made-up vocabulary so it learns the method not the words (skin-shuffling), and gently push down the wrong answers it produces.",
+   "plain_question": "Can genuinely new training tricks — not recipe remixes — break the hard-tier ceiling, and can one model top both tiers at once?",
+   "plain_answer": "Yes to the first: co-training the compression and vocabulary-shuffling signals from scratch broke the hard tier decisively for the first time (every measurement above the target), lifting exactly the reasoning-heavy skills (rule-induction, optimization) that everything before left flat. No to the second: the model that wins the hard tier gives up a little on the easy tier, and vice versa — and a deliberate blend of the two is worse than both. The two tiers compete for the small model's limited capacity along a curved trade-off, so no single model tops both; the target sits just past that frontier.",
+   "why_it_matters": "It converts a flat 'ceiling' into a precise map: the hard-tier wall IS movable, but by a specific new mechanism (amortizing the model's own long reasoning into fast weights), not by more or better-labeled data. And it establishes a capacity law — one small model can be a short-task specialist or a deep-task specialist but not both — pointing the next step at per-tier routing or a larger model. From a ~0.12 base the trained models reach ~0.45-0.52, a 3-5x gain."
+  },
   "qwen35_4b_generator_verifier_gap": {
    "verdict_tag": "Self-checking works, but only when it thinks",
    "concept_primer": "Think of a student who writes a coding answer, then proofreads their own attempts to spot which one is actually right—without running the code. This is the model grading its own work.",
@@ -3213,6 +3220,13 @@
      "chart_takeaway": "The diversified independent pool has the lower solve share and the taller wrong-answer bar, so forcing variety made the source material worse, not better."
     }
    ]
+  },
+  "qwen35_4b_interactive_policy_curriculum": {
+   "verdict_tag": "Live-state teaching improved closure but erased decision pivots",
+   "concept_primer": "Earlier training taught the model to finish its reasoning and emit usable actions, but repeated practice hit a firm score ceiling. This study instead followed the model through live tasks and supplied the best next move at the exact states its own choices created, with reward training reserved for a warm start that first proved it could preserve the policy.",
+   "plain_question": "Can learning from the consequences of its own multi-step choices make the model a better general-purpose agent than further practice on completed answers?",
+   "plain_answer": "No. Full-sequence live-state teaching dropped success by 25.3 points on the five trained task types and 33.3 points on three untouched types. Parsing and small atom skills survived, and natural reasoning closure actually improved, but the model nearly stopped using the crucial verify/commit action: on analogous trained and untouched repair tasks it repeated the preceding edit instead of running the check. The registered gate cancelled reward training, controls, and the held-out benchmark.",
+   "why_it_matters": "Correct labels at the model's own states are not enough when one shared update can overwrite neighboring decisions. A useful looping curriculum must explicitly preserve scarce semantic pivots such as verify and commit, plus the incumbent policy outside corrected states; entropy and outcome variance are useful for deciding where to collect data, not for deciding how hard to push tokens."
   },
   "qwen35_4b_inventory_shortlister_training": {
    "verdict_tag": "Training did not build a usable shortlist",
@@ -4155,6 +4169,34 @@
     }
    ]
   },
+  "qwen35_4b_pareto_policy_integration": {
+   "verdict_tag": "Installation works; research result pending",
+   "concept_primer": "Two task-specialized versions can each excel in a different setting yet lose strength when simply mixed. This study will test whether one small model can learn both behaviors directly.",
+   "plain_question": "Can one small model combine the best short-task and deep-task behavior without weakening either side?",
+   "plain_answer": "Unknown. The research comparison has not run yet. The implementation smoke did prove that all 128 trained modules carried nonzero changes through the final model-building step.",
+   "why_it_matters": "The plumbing is ready, but no performance conclusion is licensed. Wait for paired task results before choosing this combined model over either specialist.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Changed modules",
+     "value": "128 of 128",
+     "sub": "every applied module carried a real change"
+    },
+    {
+     "label": "Smoke examples",
+     "value": "8",
+     "sub": "implementation-only training cases"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Every installed module carried a real change",
+     "chart_read": "The two bars count modules applied during model building and modules with nonzero changes. Matching full-height bars are better because they show that no trained component vanished during installation.",
+     "chart_takeaway": "Both bars reach 128, confirming a real installed model while saying nothing yet about task performance."
+    }
+   ]
+  },
   "qwen35_4b_partial_structure_search": {
    "verdict_tag": "The perfect pruning signal existed, but the model could not read it",
    "concept_primer": "Imagine a maze with more than a million complete routes. A perfect map can keep only four promising routes at each step. This test asks whether the small model can imitate that map by judging unfinished routes.",
@@ -4474,6 +4516,39 @@
     }
    ]
   },
+  "qwen35_4b_repo_search_compress_bank": {
+   "verdict_tag": "Safe coding curriculum path is ready",
+   "concept_primer": "A successful coding run often contains detours. This study keeps only the edits that still pass executable checks, then teaches a balanced sequence of inspect, edit, verify, and submit actions.",
+   "plain_question": "Can compressed successful coding runs teach broader tool-using skill better than extra actions or extra sampling?",
+   "plain_answer": "Unknown. Model training has not started. The deterministic smoke passed 20 generated repositories and replayed 80 balanced action targets without exposing private test programs.",
+   "why_it_matters": "The test now isolates whether compact planning adds value while protecting the easy-to-erase verify and submit steps. Performance claims must wait for unseen repository families and matched-cost comparisons.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Repositories checked",
+     "value": "20",
+     "sub": "all started broken and passed after the known repair"
+    },
+    {
+     "label": "Replayed action targets",
+     "value": "80",
+     "sub": "balanced across four action types"
+    },
+    {
+     "label": "Action types preserved",
+     "value": "4",
+     "sub": "inspect, edit, verify, and submit"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "All four coding actions receive equal practice",
+     "chart_read": "The horizontal groups are inspect, edit, verify, and submit. Bar height counts smoke targets; equal bars are desirable because no frequent edit action should crowd out checking or submission.",
+     "chart_takeaway": "All four bars reach 20, so the smoke curriculum preserves the complete repair loop instead of over-teaching edits."
+    }
+   ]
+  },
   "qwen35_4b_retrieval_adapt_verify_scale": {
    "verdict_tag": "Lookups help but trusting them fails",
    "concept_primer": "Think of handing the model a cookbook of already-solved problems: for a task it can't crack alone, it finds the closest recipe and tweaks it to fit the new problem.",
@@ -4650,6 +4725,34 @@
      "chart_plain_title": "Extra check-queries sharpen a choice but cannot create a missing program",
      "chart_read": "Lines show how often the chosen program is actually correct as the system spends more clarifying queries (left to right). Higher is better. Two lines have the right program available; one line (new operation, auto blueprint) does not.",
      "chart_takeaway": "The two lines with the right program available climb to 100% within two or three queries, while the line missing that program stays flat, showing queries help only after the answer already exists."
+    }
+   ]
+  },
+  "qwen35_4b_specialist_policy_integration": {
+   "verdict_tag": "Required tool-use gain was impossible",
+   "concept_primer": "Imagine requiring four climbers to clear fixed height gains. A plan can fail before training if one climber starts near the ceiling but must still rise by the same fixed amount.",
+   "plain_question": "Could every required task-focused copy improve enough to qualify before their abilities were combined?",
+   "plain_answer": "Stopped. The starting model scored 99.4% on the only tool-use task, while the rule demanded 109.4%—above the 100% maximum. No task-focused model or merging method was tested, so the central idea remains unanswered.",
+   "why_it_matters": "Check whether every required improvement is mathematically reachable before spending on repeated sampling or training. A task collection can look difficult overall while one mandatory lane is already too close to perfect.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Tool-use start → required",
+     "value": "99.4% → 109.4%",
+     "sub": "the locked improvement rule exceeded a perfect score"
+    },
+    {
+     "label": "Highest possible score",
+     "value": "100%",
+     "sub": "the ceiling for every task group"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "One required score was higher than perfect",
+     "chart_read": "Each task group has bars for its starting score, required task-focused score, and highest possible score. Higher is better, but a required bar above the maximum bar cannot be reached.",
+     "chart_takeaway": "Only tool use has its required bar above 100%, so one mandatory path was impossible before any training began."
     }
    ]
   },
@@ -4875,6 +4978,20 @@
      "chart_takeaway": "The expanded hand-built method reached full coverage at about 15 tries per task, far cheaper than the combined pool's roughly 57."
     }
    ]
+  },
+  "qwen35_4b_think_ftpo_round1": {
+   "verdict_tag": "Surgical token-preference training backfired without its precondition",
+   "concept_primer": "When the model 'thinks' before answering, some single word choices early in its reasoning appear to steer it toward success or failure. We sampled sixteen reasoning attempts per task, found the exact fork points where attempts that went one way usually succeeded and attempts that went the other way usually failed, and nudged the model's preference at exactly those forks — using a published technique that had previously cured runaway repetition by demoting a handful of overconfident tokens.",
+   "plain_question": "Can we make the model a better agent by nudging single word-choices at the reasoning forks where its own successful and failed attempts diverge?",
+   "plain_answer": "No — at this dose it made things slightly worse, and a decisive control explains why. A twin model trained on the same forks with the success labels scrambled degraded by the same amount, so the harm came from the nudging procedure itself, not from bad steering directions. The published technique works when demoting a token that towers over its alternatives; our fork tokens sat at near-parity with their siblings, so the trainer had to force apart tokens that started as equals, which subtly disrupted the flow of thinking (the model finished its reasoning naturally only half as often). Bonus findings: the repetition-loop problem the technique was famous for fixing essentially does not exist at everyday thinking budgets (about 0.1% of attempts), and the technique's built-in safety tether did prevent the catastrophic collapse an earlier preference-training experiment suffered.",
+   "why_it_matters": "This closes off the naive version of a tempting idea — steering thought at its fork points — and pins down the precondition any future attempt must satisfy: only demote tokens the model is confidently over-choosing. It also saved the held-out benchmark from being spent on a broken recipe (a pre-registered gate cancelled that evaluation automatically), and banked a free measurement showing reasoning loops live only at very long thinking budgets, not everyday ones."
+  },
+  "qwen35_4b_think_ftpo_round2": {
+   "verdict_tag": "Pull-up preserved some signal, but non-local weight changes erased capability",
+   "concept_primer": "The first thought-steering run nudged ordinary coin-flip-like word choices and made reasoning less likely to finish. This follow-up measured entropy and varentropy at each fork, kept only cases where a failed word clearly dominated but a successful alternative remained plausible, then compared lowering the failed word with gently raising the successful one. A scrambled-label twin tested whether any benefit came from the real outcome direction or merely from training.",
+   "plain_question": "Can we unlock better reasoning by changing only overconfident wrong turns, and is lifting a fruitful alternative safer than suppressing the wrong turn?",
+   "plain_answer": "No capability unlock at this dose. Gently lifting the successful word was clearly safer than pushing the failed word down, and real outcome labels beat scrambled labels by 6.25 points on the parent-style gym and 13.89 points on the coding agent. But the edit was not truly local: nearby non-target logits still moved beyond the frozen safety bar. On 72 hidden-tested repository repairs, the unchanged model solved 43, pull-up solved 39, push-down 34, and scrambled pull-up 29. Fresh reasoning tests were flat at the short budget and negative at the long one, so the benchmark gate correctly stopped before any blackbox run.",
+   "why_it_matters": "The experiment separates useful steering information from a useful steering mechanism. The outcome-conditioned fork directions contain some real signal, but editing one token in the loss does not create a context-local change in a shared neural network. Entropy and varentropy are helpful routing diagnostics, not monotone correctness scores: the lowest-varentropy quartile was actually safest. The next experiment should first earn logit locality with a smaller or context-gated intervention; simply collecting more pivots or pushing harder is not justified."
   },
   "qwen35_4b_thinking_budget_controller": {
    "verdict_tag": "Cheaper thinking, same accuracy, not higher",
@@ -10890,62 +11007,6 @@
      "chart_plain_title": "Give the model enough room to write the whole fix",
      "chart_read": "Two setups differ only in how much output length the model is allowed. Bars show whether the edit is usable and whether it fixes the code, on a small pilot. Taller is better. The tight-limit setup is flat; the roomier one fills up.",
      "chart_takeaway": "With too little output room the model cannot finish a usable edit at all, but doubling the room flips it to fully fixing the pilot cases."
-    }
-   ]
-  },
-  "qwen35_4b_think_ftpo_round1": {
-   "verdict_tag": "Surgical token-preference training backfired without its precondition",
-   "concept_primer": "When the model 'thinks' before answering, some single word choices early in its reasoning appear to steer it toward success or failure. We sampled sixteen reasoning attempts per task, found the exact fork points where attempts that went one way usually succeeded and attempts that went the other way usually failed, and nudged the model's preference at exactly those forks — using a published technique that had previously cured runaway repetition by demoting a handful of overconfident tokens.",
-   "plain_question": "Can we make the model a better agent by nudging single word-choices at the reasoning forks where its own successful and failed attempts diverge?",
-   "plain_answer": "No — at this dose it made things slightly worse, and a decisive control explains why. A twin model trained on the same forks with the success labels scrambled degraded by the same amount, so the harm came from the nudging procedure itself, not from bad steering directions. The published technique works when demoting a token that towers over its alternatives; our fork tokens sat at near-parity with their siblings, so the trainer had to force apart tokens that started as equals, which subtly disrupted the flow of thinking (the model finished its reasoning naturally only half as often). Bonus findings: the repetition-loop problem the technique was famous for fixing essentially does not exist at everyday thinking budgets (about 0.1% of attempts), and the technique's built-in safety tether did prevent the catastrophic collapse an earlier preference-training experiment suffered.",
-   "why_it_matters": "This closes off the naive version of a tempting idea — steering thought at its fork points — and pins down the precondition any future attempt must satisfy: only demote tokens the model is confidently over-choosing. It also saved the held-out benchmark from being spent on a broken recipe (a pre-registered gate cancelled that evaluation automatically), and banked a free measurement showing reasoning loops live only at very long thinking budgets, not everyday ones."
-  },
-  "qwen35_4b_gauntlet_frontier": {
-   "verdict_tag": "Broke the hard tier for the first time; one model can't win both",
-   "concept_primer": "The benchmark has an easy tier (short single questions) and a hard tier (multi-step episodes and deep puzzles). Earlier work smashed the easy tier but kept stalling on the hard one. We diagnosed why — hard tasks need long reasoning that runs out of budget, so the model was committing to half-finished wrong answers — and invented three fixes: teach the model to reach its own correct answer in FEWER steps (compression), give every training example fresh made-up vocabulary so it learns the method not the words (skin-shuffling), and gently push down the wrong answers it produces.",
-   "plain_question": "Can genuinely new training tricks — not recipe remixes — break the hard-tier ceiling, and can one model top both tiers at once?",
-   "plain_answer": "Yes to the first: co-training the compression and vocabulary-shuffling signals from scratch broke the hard tier decisively for the first time (every measurement above the target), lifting exactly the reasoning-heavy skills (rule-induction, optimization) that everything before left flat. No to the second: the model that wins the hard tier gives up a little on the easy tier, and vice versa — and a deliberate blend of the two is worse than both. The two tiers compete for the small model's limited capacity along a curved trade-off, so no single model tops both; the target sits just past that frontier.",
-   "why_it_matters": "It converts a flat 'ceiling' into a precise map: the hard-tier wall IS movable, but by a specific new mechanism (amortizing the model's own long reasoning into fast weights), not by more or better-labeled data. And it establishes a capacity law — one small model can be a short-task specialist or a deep-task specialist but not both — pointing the next step at per-tier routing or a larger model. From a ~0.12 base the trained models reach ~0.45-0.52, a 3-5x gain."
-  },
-  "qwen35_4b_think_ftpo_round2": {
-   "verdict_tag": "Pull-up preserved some signal, but non-local weight changes erased capability",
-   "concept_primer": "The first thought-steering run nudged ordinary coin-flip-like word choices and made reasoning less likely to finish. This follow-up measured entropy and varentropy at each fork, kept only cases where a failed word clearly dominated but a successful alternative remained plausible, then compared lowering the failed word with gently raising the successful one. A scrambled-label twin tested whether any benefit came from the real outcome direction or merely from training.",
-   "plain_question": "Can we unlock better reasoning by changing only overconfident wrong turns, and is lifting a fruitful alternative safer than suppressing the wrong turn?",
-   "plain_answer": "No capability unlock at this dose. Gently lifting the successful word was clearly safer than pushing the failed word down, and real outcome labels beat scrambled labels by 6.25 points on the parent-style gym and 13.89 points on the coding agent. But the edit was not truly local: nearby non-target logits still moved beyond the frozen safety bar. On 72 hidden-tested repository repairs, the unchanged model solved 43, pull-up solved 39, push-down 34, and scrambled pull-up 29. Fresh reasoning tests were flat at the short budget and negative at the long one, so the benchmark gate correctly stopped before any blackbox run.",
-   "why_it_matters": "The experiment separates useful steering information from a useful steering mechanism. The outcome-conditioned fork directions contain some real signal, but editing one token in the loss does not create a context-local change in a shared neural network. Entropy and varentropy are helpful routing diagnostics, not monotone correctness scores: the lowest-varentropy quartile was actually safest. The next experiment should first earn logit locality with a smaller or context-gated intervention; simply collecting more pivots or pushing harder is not justified."
-  },
-  "qwen35_4b_interactive_policy_curriculum": {
-   "verdict_tag": "Live-state teaching improved closure but erased decision pivots",
-   "concept_primer": "Earlier training taught the model to finish its reasoning and emit usable actions, but repeated practice hit a firm score ceiling. This study instead followed the model through live tasks and supplied the best next move at the exact states its own choices created, with reward training reserved for a warm start that first proved it could preserve the policy.",
-   "plain_question": "Can learning from the consequences of its own multi-step choices make the model a better general-purpose agent than further practice on completed answers?",
-   "plain_answer": "No. Full-sequence live-state teaching dropped success by 25.3 points on the five trained task types and 33.3 points on three untouched types. Parsing and small atom skills survived, and natural reasoning closure actually improved, but the model nearly stopped using the crucial verify/commit action: on analogous trained and untouched repair tasks it repeated the preceding edit instead of running the check. The registered gate cancelled reward training, controls, and the held-out benchmark.",
-   "why_it_matters": "Correct labels at the model's own states are not enough when one shared update can overwrite neighboring decisions. A useful looping curriculum must explicitly preserve scarce semantic pivots such as verify and commit, plus the incumbent policy outside corrected states; entropy and outcome variance are useful for deciding where to collect data, not for deciding how hard to push tokens."
-  },
-  "qwen35_4b_specialist_policy_integration": {
-   "verdict_tag": "Required tool-use gain was impossible",
-   "concept_primer": "Imagine requiring four climbers to clear fixed height gains. A plan can fail before training if one climber starts near the ceiling but must still rise by the same fixed amount.",
-   "plain_question": "Could every required task-focused copy improve enough to qualify before their abilities were combined?",
-   "plain_answer": "Stopped. The starting model scored 99.4% on the only tool-use task, while the rule demanded 109.4%—above the 100% maximum. No task-focused model or merging method was tested, so the central idea remains unanswered.",
-   "why_it_matters": "Check whether every required improvement is mathematically reachable before spending on repeated sampling or training. A task collection can look difficult overall while one mandatory lane is already too close to perfect.",
-   "verdict_tone": "neutral",
-   "key_numbers": [
-    {
-     "label": "Tool-use start → required",
-     "value": "99.4% → 109.4%",
-     "sub": "the locked improvement rule exceeded a perfect score"
-    },
-    {
-     "label": "Highest possible score",
-     "value": "100%",
-     "sub": "the ceiling for every task group"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "One required score was higher than perfect",
-     "chart_read": "Each task group has bars for its starting score, required task-focused score, and highest possible score. Higher is better, but a required bar above the maximum bar cannot be reached.",
-     "chart_takeaway": "Only tool use has its required bar above 100%, so one mandatory path was impossible before any training began."
     }
    ]
   }

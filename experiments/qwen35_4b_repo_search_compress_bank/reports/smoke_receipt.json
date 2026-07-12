@@ -1,0 +1,31 @@
+{
+  "canonical_replay_pass_rate": 1.0,
+  "canonical_rows_replayed": 80,
+  "families": 10,
+  "firewall_clean": true,
+  "gate_feasibility": {
+    "commit_absolute": true,
+    "harvest_coverage": true,
+    "per_family_coverage": true,
+    "transfer_vs_action_only": true,
+    "transfer_vs_apex": true,
+    "transfer_vs_sample_more": true,
+    "verification_absolute": true
+  },
+  "operator_counts": {
+    "COMMIT": 20,
+    "INSPECT": 20,
+    "PATCH": 20,
+    "VERIFY": 20
+  },
+  "operator_loss_mass": {
+    "COMMIT": 20.0,
+    "INSPECT": 20.0,
+    "PATCH": 20.0,
+    "VERIFY": 20.0
+  },
+  "schema_version": 1,
+  "split_ids_disjoint": true,
+  "status": "PASS",
+  "tasks_selftested": 20
+}

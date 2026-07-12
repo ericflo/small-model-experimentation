@@ -800,6 +800,14 @@
    ],
    "caveat": "metadata.yaml 2026-07-01 17:03 catalog sweep"
   },
+  "qwen35_4b_pareto_policy_integration": {
+   "start": "2026-07-12",
+   "end": "2026-07-12",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_partial_structure_search": {
    "start": "2026-07-10",
    "end": "2026-07-10",
@@ -860,6 +868,14 @@
     "reports/final_report.md:2026-06-26 mention"
    ],
    "caveat": "data/verified_algorithm_library.jsonl 2026-01-02 is data"
+  },
+  "qwen35_4b_repo_search_compress_bank": {
+   "start": "2026-07-12",
+   "end": "2026-07-12",
+   "confidence": "high",
+   "sources": [
+    "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
   },
   "qwen35_4b_retrieval_adapt_verify_scale": {
    "start": "2026-06-26",

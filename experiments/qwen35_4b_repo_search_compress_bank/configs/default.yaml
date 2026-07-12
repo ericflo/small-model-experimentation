@@ -1,0 +1,115 @@
+schema_version: 1
+
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+  search_teacher: large_artifacts/qwen35_4b_interactive_policy_curriculum/merged/incumbent_blend
+  c54_apex_data: experiments/qwen35_4b_gauntlet_frontier/data/sft_apex.jsonl
+
+artifacts:
+  root: large_artifacts/qwen35_4b_repo_search_compress_bank
+
+engine:
+  max_model_len: 8192
+  gpu_memory_utilization: 0.85
+  max_num_seqs: 32
+  max_num_batched_tokens: 16384
+
+families:
+  train:
+    - segmented_rollup
+    - specificity_router
+    - stable_merge
+    - weighted_quota
+    - label_intervals
+    - collision_index
+  transfer:
+    - recursive_overlay
+    - dependency_order
+    - ttl_cache
+    - retry_schedule
+
+harvest:
+  split: harvest
+  seed: 73100
+  tasks_per_family: 24
+  trajectories: 4
+  max_turns: 8
+  think_budget: 512
+  answer_max_tokens: 256
+  temperature: 0.8
+  top_p: 0.95
+  top_k: 20
+  run_seed: 73101
+  minimum_task_coverage: 0.40
+  minimum_per_family_coverage: 0.20
+  minimum_compact_rows: 200
+
+bank:
+  repo_loss_multiplier: 4.0
+  required_operators: [INSPECT, PATCH, VERIFY, COMMIT]
+  require_replay_pass_rate: 1.0
+
+evaluation:
+  think_budget: 512
+  answer_max_tokens: 256
+  deep_turns: 8
+  sample_more_trajectories: 2
+  sample_more_turns_each: 4
+  sample_temperature: 0.8
+  sample_top_p: 0.95
+  sample_top_k: 20
+  deep_run_seed: 73310
+  sample_run_seed: 73311
+  blocks:
+    trained_dev:
+      families: train
+      seed: 73200
+      tasks_per_family: 8
+    transfer_dev:
+      families: transfer
+      seed: 73300
+      tasks_per_family: 18
+    transfer_confirm:
+      families: transfer
+      seed: 73400
+      tasks_per_family: 18
+
+training:
+  seed: 42
+  max_steps: 584
+  learning_rate: 0.0002
+  rank: 32
+  alpha: 64
+  dropout: 0.05
+  batch_size: 4
+  gradient_accumulation_steps: 4
+  max_length: 4096
+  default_think_loss_weight: 0.2
+  arms: [apex_replay, action_only, compact]
+
+locality:
+  seed: 73500
+  contexts: 48
+  max_context_tokens: 1024
+  median_non_target_logit_drift_max: 0.15
+
+gates:
+  trained_family_delta_min: -0.03
+  transfer_delta_vs_apex_min: 0.05
+  transfer_delta_vs_action_only_min: 0.03
+  transfer_delta_vs_apex_sample_more_min: 0.03
+  paired_bootstrap_lower_bound_min: 0.0
+  invalid_action_rate_delta_max: 0.02
+  verified_given_success_absolute_min: 0.70
+  verified_given_success_delta_min: -0.05
+  commit_given_verified_absolute_min: 0.65
+  commit_given_verified_delta_min: -0.05
+
+menagerie:
+  sealed_until_repo_gates_pass: true
+  tiers: [quick, medium]
+  # Assigned only after repository gates pass and benchmark seed-registry checks succeed.
+  paired_seeds: []
+  maximum_tier_regression: 0.03
+  minimum_positive_tier_delta: 0.02

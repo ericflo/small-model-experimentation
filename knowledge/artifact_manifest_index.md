@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 183
-- Manifest files: 485
+- Experiments with manifests: 185
+- Manifest files: 487
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 63 |
 | `run-data` | 101 |
-| `standard-artifact` | 56 |
+| `standard-artifact` | 58 |
 
 ## Manifests
 
@@ -162,6 +162,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_oracle_process_grpo` | `dataset` | [manifest](../experiments/qwen35_4b_oracle_process_grpo/data/dataset_manifest.json) |
 | `qwen35_4b_oracle_process_grpo` | `large-artifact` | [manifest](../experiments/qwen35_4b_oracle_process_grpo/large_artifacts_manifest.md) |
 | `qwen35_4b_overthinking_content_ladder` | `standard-artifact` | [manifest](../experiments/qwen35_4b_overthinking_content_ladder/reports/artifact_manifest.yaml) |
+| `qwen35_4b_pareto_policy_integration` | `standard-artifact` | [manifest](../experiments/qwen35_4b_pareto_policy_integration/reports/artifact_manifest.yaml) |
 | `qwen35_4b_partial_structure_search` | `standard-artifact` | [manifest](../experiments/qwen35_4b_partial_structure_search/reports/artifact_manifest.yaml) |
 | `qwen35_4b_probe_the_parameter` | `standard-artifact` | [manifest](../experiments/qwen35_4b_probe_the_parameter/reports/artifact_manifest.yaml) |
 | `qwen35_4b_probe_to_prompt` | `standard-artifact` | [manifest](../experiments/qwen35_4b_probe_to_prompt/reports/artifact_manifest.yaml) |
@@ -169,6 +170,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_reliability_exec_opsd_audit` | `run-data` | [manifest](../experiments/qwen35_4b_reliability_exec_opsd_audit/data/retrieval_adapt_semantic_t0p0_top3_records.manifest.json) |
 | `qwen35_4b_reliability_exec_opsd_audit` | `run-data` | [manifest](../experiments/qwen35_4b_reliability_exec_opsd_audit/data/retrieval_adapt_semantic_t0p1_top3_records.manifest.json) |
 | `qwen35_4b_reliability_exec_opsd_audit` | `large-artifact` | [manifest](../experiments/qwen35_4b_reliability_exec_opsd_audit/large_artifacts_manifest.md) |
+| `qwen35_4b_repo_search_compress_bank` | `standard-artifact` | [manifest](../experiments/qwen35_4b_repo_search_compress_bank/reports/artifact_manifest.yaml) |
 | `qwen35_4b_retrieval_adapt_verify_scale` | `run-data` | [manifest](../experiments/qwen35_4b_retrieval_adapt_verify_scale/data/base_direct_k4_records.manifest.json) |
 | `qwen35_4b_retrieval_adapt_verify_scale` | `run-data` | [manifest](../experiments/qwen35_4b_retrieval_adapt_verify_scale/data/qwen_rerank_copy_semantic_records.manifest.json) |
 | `qwen35_4b_retrieval_adapt_verify_scale` | `run-data` | [manifest](../experiments/qwen35_4b_retrieval_adapt_verify_scale/data/retrieval_adapt_random_top3_records.manifest.json) |

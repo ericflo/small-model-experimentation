@@ -3,14 +3,14 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 13
-- Experiments: 211
+- Experiments: 213
 
 ## Structured Execution And Compilers
 
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 152
+- Assigned experiments: 154
 
 ### Seed Evidence
 
@@ -80,11 +80,13 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_neurosymbolic_repl_substrate` (new): [README](../experiments/qwen35_4b_neurosymbolic_repl_substrate/README.md)
 - `qwen35_4b_oracle_distilled_semantic_verifier` (track-z): [README](../experiments/qwen35_4b_oracle_distilled_semantic_verifier/README.md)
 - `qwen35_4b_oracle_process_grpo` (track-z): [README](../experiments/qwen35_4b_oracle_process_grpo/README.md)
+- `qwen35_4b_pareto_policy_integration` (new): [README](../experiments/qwen35_4b_pareto_policy_integration/README.md)
 - `qwen35_4b_partial_structure_search` (new): [README](../experiments/qwen35_4b_partial_structure_search/README.md)
 - `qwen35_4b_prefix_value_guided_search` (track-z): [README](../experiments/qwen35_4b_prefix_value_guided_search/README.md)
 - `qwen35_4b_probe_the_parameter` (new): [README](../experiments/qwen35_4b_probe_the_parameter/README.md)
 - `qwen35_4b_probe_to_prompt` (new): [README](../experiments/qwen35_4b_probe_to_prompt/README.md)
 - `qwen35_4b_reliability_exec_opsd_audit` (track-z): [README](../experiments/qwen35_4b_reliability_exec_opsd_audit/README.md)
+- `qwen35_4b_repo_search_compress_bank` (new): [README](../experiments/qwen35_4b_repo_search_compress_bank/README.md)
 - `qwen35_4b_simulation_keystone_repair` (new): [README](../experiments/qwen35_4b_simulation_keystone_repair/README.md)
 - `qwen35_4b_static_bridge_ceiling_breaker` (track-z): [README](../experiments/qwen35_4b_static_bridge_ceiling_breaker/README.md)
 - `qwen35_4b_structure_or_values` (new): [README](../experiments/qwen35_4b_structure_or_values/README.md)
@@ -180,7 +182,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 Turn candidate-pool coverage into deployable decisions under visible evidence.
 
 - Charter: [evidence_conditioned_selection](../research_programs/evidence_conditioned_selection/charter.md)
-- Assigned experiments: 76
+- Assigned experiments: 77
 
 ### Seed Evidence
 
@@ -226,6 +228,7 @@ Turn candidate-pool coverage into deployable decisions under visible evidence.
 - `qwen35_4b_partial_structure_search` (new): [README](../experiments/qwen35_4b_partial_structure_search/README.md)
 - `qwen35_4b_passk_coverage_rl` (track-z): [README](../experiments/qwen35_4b_passk_coverage_rl/README.md)
 - `qwen35_4b_real_sample_verify_commit` (track-z): [README](../experiments/qwen35_4b_real_sample_verify_commit/README.md)
+- `qwen35_4b_repo_search_compress_bank` (new): [README](../experiments/qwen35_4b_repo_search_compress_bank/README.md)
 - `qwen35_4b_retrieval_adapt_verify_scale` (track-z): [README](../experiments/qwen35_4b_retrieval_adapt_verify_scale/README.md)
 - `qwen35_4b_sketch_coverage_shift_probe` (track-z): [README](../experiments/qwen35_4b_sketch_coverage_shift_probe/README.md)
 - `qwen35_4b_specialist_policy_integration` (new): [README](../experiments/qwen35_4b_specialist_policy_integration/README.md)
@@ -349,7 +352,7 @@ Use libraries of verified algorithms, examples, traces, skills, or failures as r
 Grow, search, shortlist, compose, and stress-test reusable operator and skill banks.
 
 - Charter: [operator_and_skill_inventories](../research_programs/operator_and_skill_inventories/charter.md)
-- Assigned experiments: 11
+- Assigned experiments: 12
 
 ### Seed Evidence
 
@@ -366,6 +369,7 @@ Grow, search, shortlist, compose, and stress-test reusable operator and skill ba
 - `qwen35_4b_operator_inventory_search_pilot` (track-z): [README](../experiments/qwen35_4b_operator_inventory_search_pilot/README.md)
 - `qwen35_4b_oracle_probe_synthesis_mdp` (track-z): [README](../experiments/qwen35_4b_oracle_probe_synthesis_mdp/README.md)
 - `qwen35_4b_oracle_process_grpo` (track-z): [README](../experiments/qwen35_4b_oracle_process_grpo/README.md)
+- `qwen35_4b_repo_search_compress_bank` (new): [README](../experiments/qwen35_4b_repo_search_compress_bank/README.md)
 - `qwen35_4b_verified_macro_capacity_fit_rerun` (new): [README](../experiments/qwen35_4b_verified_macro_capacity_fit_rerun/README.md)
 - `qwen35_4b_verified_macro_exact_cudagraph_rerun` (new): [README](../experiments/qwen35_4b_verified_macro_exact_cudagraph_rerun/README.md)
 - `qwen35_4b_verified_macro_invention` (new): [README](../experiments/qwen35_4b_verified_macro_invention/README.md)
@@ -377,7 +381,7 @@ Grow, search, shortlist, compose, and stress-test reusable operator and skill ba
 Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and other update mechanisms.
 
 - Charter: [posttraining_and_adaptation](../research_programs/posttraining_and_adaptation/charter.md)
-- Assigned experiments: 62
+- Assigned experiments: 63
 
 ### Seed Evidence
 
@@ -416,6 +420,7 @@ Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and o
 - `qwen35_4b_oracle_distilled_semantic_verifier` (track-z): [README](../experiments/qwen35_4b_oracle_distilled_semantic_verifier/README.md)
 - `qwen35_4b_oracle_probe_synthesis_mdp` (track-z): [README](../experiments/qwen35_4b_oracle_probe_synthesis_mdp/README.md)
 - `qwen35_4b_oracle_process_grpo` (track-z): [README](../experiments/qwen35_4b_oracle_process_grpo/README.md)
+- `qwen35_4b_pareto_policy_integration` (new): [README](../experiments/qwen35_4b_pareto_policy_integration/README.md)
 - `qwen35_4b_passk_coverage_rl` (track-z): [README](../experiments/qwen35_4b_passk_coverage_rl/README.md)
 - `qwen35_4b_sampler_portfolio_scheduler` (track-z): [README](../experiments/qwen35_4b_sampler_portfolio_scheduler/README.md)
 - `qwen35_4b_specialist_policy_integration` (new): [README](../experiments/qwen35_4b_specialist_policy_integration/README.md)
@@ -456,7 +461,7 @@ Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and o
 Train or evaluate small models as controllers over tools, verifiers, budgets, and intermediate actions.
 
 - Charter: [process_control_and_tool_use](../research_programs/process_control_and_tool_use/charter.md)
-- Assigned experiments: 30
+- Assigned experiments: 32
 
 ### Seed Evidence
 
@@ -480,7 +485,9 @@ Train or evaluate small models as controllers over tools, verifiers, budgets, an
 - `qwen35_4b_opsd_pressure_locality_audit` (track-z): [README](../experiments/qwen35_4b_opsd_pressure_locality_audit/README.md)
 - `qwen35_4b_oracle_probe_synthesis_mdp` (track-z): [README](../experiments/qwen35_4b_oracle_probe_synthesis_mdp/README.md)
 - `qwen35_4b_oracle_process_grpo` (track-z): [README](../experiments/qwen35_4b_oracle_process_grpo/README.md)
+- `qwen35_4b_pareto_policy_integration` (new): [README](../experiments/qwen35_4b_pareto_policy_integration/README.md)
 - `qwen35_4b_passk_coverage_rl` (track-z): [README](../experiments/qwen35_4b_passk_coverage_rl/README.md)
+- `qwen35_4b_repo_search_compress_bank` (new): [README](../experiments/qwen35_4b_repo_search_compress_bank/README.md)
 - `qwen35_4b_sampler_portfolio_scheduler` (track-z): [README](../experiments/qwen35_4b_sampler_portfolio_scheduler/README.md)
 - `qwen35_4b_specialist_policy_integration` (new): [README](../experiments/qwen35_4b_specialist_policy_integration/README.md)
 - `qwen35_4b_strategy_token_diversity_lora` (track-z): [README](../experiments/qwen35_4b_strategy_token_diversity_lora/README.md)
@@ -503,7 +510,7 @@ Train or evaluate small models as controllers over tools, verifiers, budgets, an
 Stress whether mechanisms transfer across substrates, families, lengths, distributions, and real tasks.
 
 - Charter: [benchmark_generalization](../research_programs/benchmark_generalization/charter.md)
-- Assigned experiments: 97
+- Assigned experiments: 98
 
 ### Seed Evidence
 
@@ -553,6 +560,7 @@ Stress whether mechanisms transfer across substrates, families, lengths, distrib
 - `qwen35_4b_oracle_process_grpo` (track-z): [README](../experiments/qwen35_4b_oracle_process_grpo/README.md)
 - `qwen35_4b_overthinking_content_ladder` (new): [README](../experiments/qwen35_4b_overthinking_content_ladder/README.md)
 - `qwen35_4b_partial_structure_search` (new): [README](../experiments/qwen35_4b_partial_structure_search/README.md)
+- `qwen35_4b_repo_search_compress_bank` (new): [README](../experiments/qwen35_4b_repo_search_compress_bank/README.md)
 - `qwen35_4b_sketch_coverage_shift_probe` (track-z): [README](../experiments/qwen35_4b_sketch_coverage_shift_probe/README.md)
 - `qwen35_4b_specialist_policy_integration` (new): [README](../experiments/qwen35_4b_specialist_policy_integration/README.md)
 - `qwen35_4b_static_bridge_ceiling_breaker` (track-z): [README](../experiments/qwen35_4b_static_bridge_ceiling_breaker/README.md)
@@ -617,7 +625,7 @@ Stress whether mechanisms transfer across substrates, families, lengths, distrib
 Measure why methods work or fail through attribution, probes, pressure audits, and controlled ablations.
 
 - Charter: [interpretability_and_diagnostics](../research_programs/interpretability_and_diagnostics/charter.md)
-- Assigned experiments: 54
+- Assigned experiments: 55
 
 ### Seed Evidence
 
@@ -648,6 +656,7 @@ Measure why methods work or fail through attribution, probes, pressure audits, a
 - `qwen35_4b_probe_to_prompt` (new): [README](../experiments/qwen35_4b_probe_to_prompt/README.md)
 - `qwen35_4b_real_sample_verify_commit` (track-z): [README](../experiments/qwen35_4b_real_sample_verify_commit/README.md)
 - `qwen35_4b_reliability_exec_opsd_audit` (track-z): [README](../experiments/qwen35_4b_reliability_exec_opsd_audit/README.md)
+- `qwen35_4b_repo_search_compress_bank` (new): [README](../experiments/qwen35_4b_repo_search_compress_bank/README.md)
 - `qwen35_4b_retrieval_adapt_verify_scale` (track-z): [README](../experiments/qwen35_4b_retrieval_adapt_verify_scale/README.md)
 - `qwen35_4b_sketch_coverage_shift_probe` (track-z): [README](../experiments/qwen35_4b_sketch_coverage_shift_probe/README.md)
 - `qwen35_4b_substrate_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_substrate_coverage_ladder/README.md)
@@ -688,7 +697,7 @@ Measure why methods work or fail through attribution, probes, pressure audits, a
 Improve precision, abstention, robustness, reproducibility, and safe artifact handling.
 
 - Charter: [reliability_and_safety](../research_programs/reliability_and_safety/charter.md)
-- Assigned experiments: 59
+- Assigned experiments: 60
 
 ### Seed Evidence
 
@@ -722,6 +731,7 @@ Improve precision, abstention, robustness, reproducibility, and safe artifact ha
 - `qwen35_4b_oracle_process_grpo` (track-z): [README](../experiments/qwen35_4b_oracle_process_grpo/README.md)
 - `qwen35_4b_real_sample_verify_commit` (track-z): [README](../experiments/qwen35_4b_real_sample_verify_commit/README.md)
 - `qwen35_4b_reliability_exec_opsd_audit` (track-z): [README](../experiments/qwen35_4b_reliability_exec_opsd_audit/README.md)
+- `qwen35_4b_repo_search_compress_bank` (new): [README](../experiments/qwen35_4b_repo_search_compress_bank/README.md)
 - `qwen35_4b_retrieval_adapt_verify_scale` (track-z): [README](../experiments/qwen35_4b_retrieval_adapt_verify_scale/README.md)
 - `qwen35_4b_sketch_coverage_shift_probe` (track-z): [README](../experiments/qwen35_4b_sketch_coverage_shift_probe/README.md)
 - `qwen35_4b_specialist_policy_integration` (new): [README](../experiments/qwen35_4b_specialist_policy_integration/README.md)
@@ -805,13 +815,15 @@ Study the native thinking-token budget as a first-class controllable test-time-c
 Install general agentic capability in Qwen3.5-4B via breadth-first expert iteration on a firewall-clean multi-family gym, arbitrated by the blackbox menagerie instrument.
 
 - Charter: [agentic_breadth_installation](../research_programs/agentic_breadth_installation/charter.md)
-- Assigned experiments: 6
+- Assigned experiments: 8
 
 ### Assigned Experiments
 
 - `qwen35_4b_gauntlet_breadth_round1` (new): [README](../experiments/qwen35_4b_gauntlet_breadth_round1/README.md)
 - `qwen35_4b_gauntlet_frontier` (new): [README](../experiments/qwen35_4b_gauntlet_frontier/README.md)
 - `qwen35_4b_interactive_policy_curriculum` (new): [README](../experiments/qwen35_4b_interactive_policy_curriculum/README.md)
+- `qwen35_4b_pareto_policy_integration` (new): [README](../experiments/qwen35_4b_pareto_policy_integration/README.md)
+- `qwen35_4b_repo_search_compress_bank` (new): [README](../experiments/qwen35_4b_repo_search_compress_bank/README.md)
 - `qwen35_4b_specialist_policy_integration` (new): [README](../experiments/qwen35_4b_specialist_policy_integration/README.md)
 - `qwen35_4b_think_ftpo_round1` (new): [README](../experiments/qwen35_4b_think_ftpo_round1/README.md)
 - `qwen35_4b_think_ftpo_round2` (new): [README](../experiments/qwen35_4b_think_ftpo_round2/README.md)

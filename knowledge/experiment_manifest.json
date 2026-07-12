@@ -3355,6 +3355,44 @@
   },
   {
     "file_counts": {
+      ".json": 7,
+      ".jsonl": 3,
+      ".md": 7,
+      ".py": 41,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_pareto_policy_integration",
+    "path": "experiments/qwen35_4b_pareto_policy_integration",
+    "primary_readme": "experiments/qwen35_4b_pareto_policy_integration/README.md",
+    "primary_report": "experiments/qwen35_4b_pareto_policy_integration/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation",
+      "posttraining_and_adaptation",
+      "process_control_and_tool_use",
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "Status: **preregistered and implementation in progress**. This clean successor tests whether corrected on-policy policy-space distillation can combine C54's quick-optimal `blend` and deep-optimal `apex` policies into one checkpoint. It removes the prior experiment's arbitrary `+0.10` teacher hurdle: any replicated, statistically credible positive paired gain qualifies.",
+    "tags": [
+      "distillation",
+      "latent-state",
+      "policy",
+      "small-model"
+    ],
+    "title": "Qwen3.5-4B Pareto Policy Integration",
+    "top_level_dirs": [
+      "configs",
+      "reports",
+      "runs",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 61,
+    "total_size_bytes": 708259
+  },
+  {
+    "file_counts": {
       ".json": 26,
       ".jsonl": 28,
       ".md": 6,
@@ -3618,6 +3656,50 @@
     ],
     "total_files": 46,
     "total_size_bytes": 15025584
+  },
+  {
+    "file_counts": {
+      ".json": 1,
+      ".md": 7,
+      ".py": 11,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_repo_search_compress_bank",
+    "path": "experiments/qwen35_4b_repo_search_compress_bank",
+    "primary_readme": "experiments/qwen35_4b_repo_search_compress_bank/README.md",
+    "primary_report": "experiments/qwen35_4b_repo_search_compress_bank/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation",
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "operator_and_skill_inventories",
+      "process_control_and_tool_use",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "This experiment asks whether `Qwen/Qwen3.5-4B` can acquire broader coding-agent competence by searching real procedural repositories, verifying candidate repairs with executable tests, compressing successful tool trajectories to their replay-necessary core, and banking compact plans and actions with explicit operator balance.",
+    "tags": [
+      "curriculum",
+      "execution",
+      "operator-search",
+      "repair",
+      "small-model",
+      "table-transform",
+      "tools",
+      "verification"
+    ],
+    "title": "Repository search-compress-bank coding curriculum",
+    "top_level_dirs": [
+      "configs",
+      "reports",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 22,
+    "total_size_bytes": 185602
   },
   {
     "file_counts": {
