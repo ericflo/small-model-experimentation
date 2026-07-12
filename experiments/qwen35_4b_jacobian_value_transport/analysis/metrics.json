@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "decision": "NO_J_WRITING",
+  "confirmation_n": 24,
+  "clean_accuracy": {
+    "direct": 1.0,
+    "consequence": 1.0
+  },
+  "direct_target_rate_by_layer": {
+    "8": 0.0,
+    "12": 0.0,
+    "16": 0.0,
+    "20": 0.041666666666666664,
+    "24": 0.75
+  },
+  "consequence_target_rate_by_layer": {
+    "8": 0.0,
+    "12": 0.0,
+    "16": 0.0,
+    "20": 0.0,
+    "24": 0.0
+  },
+  "layer24_controls": {
+    "direct_random_target_rate": 0.0,
+    "direct_logit_lens_target_rate": 0.20833333333333334,
+    "consequence_random_target_rate": 0.0,
+    "direct_j_mean_delta_norm": 13.64188281695048,
+    "direct_random_mean_delta_norm": 2.6400389915021756,
+    "consequence_j_mean_delta_norm": 4.956370636820793,
+    "consequence_random_mean_delta_norm": 4.035650130982201
+  },
+  "selection_layer24_margin_by_alpha": {
+    "0.5": {
+      "direct": -8.822916666666666,
+      "consequence": -8.572916666666666
+    },
+    "1.0": {
+      "direct": -6.9765625,
+      "consequence": -8.567708333333334
+    },
+    "2.0": {
+      "direct": -3.4270833333333335,
+      "consequence": -8.557291666666666
+    },
+    "4.0": {
+      "direct": 3.22265625,
+      "consequence": -8.567708333333334
+    }
+  },
+  "g1_run": false,
+  "g2_run": false
+}

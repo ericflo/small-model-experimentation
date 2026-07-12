@@ -3,35 +3,41 @@
  "generated_on": "2026-07-05",
  "experiments": {
   "qwen35_4b_jacobian_value_transport": {
-   "verdict_tag": "Causal test is designed; model result pending",
+   "verdict_tag": "Can change the word, not the reasoning",
    "concept_primer": "Imagine knowing that a clue is written somewhere in a machine, but not knowing whether the machine can actually use it. This experiment follows the connection from an internal clue to the later answer, then carefully changes that connection.",
-   "plain_question": "Can we change a useful idea inside the model's private reasoning and thereby improve what it eventually answers?",
-   "plain_answer": "We do not know yet. The fresh tasks, failure checks, and comparison methods are frozen before the first scientific model run. The current result only proves that the data path is reproducible and does not touch benchmark material.",
-   "why_it_matters": "A signal that merely predicts success is not a new ability. A controlled change that improves fresh verified answers would provide a much stronger route for turning hidden knowledge into useful behavior.",
-   "verdict_tone": "pending",
+   "plain_question": "If we change an internal clue, will the model actually use the changed clue when it computes a different answer?",
+   "plain_answer": "Not with this method. A late change made the model say the replacement word three quarters of the time, but the model never used that replacement to recompute a simple mapped answer.",
+   "why_it_matters": "Making a model say a chosen word is much weaker than changing what it reasons from. Future work must prove that an internal edit survives into a new consequence before treating it as a route to better capabilities.",
+   "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Fresh value-mapping tasks",
-     "value": "48",
-     "sub": "used to connect partial reasoning with later verified success"
+     "label": "Direct replacement word",
+     "value": "18/24",
+     "sub": "the strongest late internal edit changed 75% of direct reports"
     },
     {
-     "label": "Fresh main evaluation tasks",
-     "value": "96",
-     "sub": "kept separate from fitting and calibration"
+     "label": "Recomputed mapped answer",
+     "value": "0/24",
+     "sub": "the same edit never changed the downstream consequence"
     },
     {
-     "label": "Held-family evaluation tasks",
-     "value": "96",
-     "sub": "48 string and 48 register tasks"
+     "label": "Ordinary output-direction control",
+     "value": "5/24",
+     "sub": "also changed some direct words but no downstream consequences"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "The frozen fresh-data ladder",
-     "chart_read": "Each bar counts tasks or prompts in one part of the study. These are design and plumbing counts, not model scores; the larger bars are held back for evaluation.",
-     "chart_takeaway": "Fitting, calibration, ordinary evaluation, new task families, and harder tasks are separated before the model is tested."
+     "chart_plain_title": "The edit changes an imminent word, not its consequence",
+     "chart_read": "Each line shows how often an internal edit produced the intended replacement as the edit moved through five model depths. Higher is a stronger effect.",
+     "chart_takeaway": "The direct word jumps to 75% only near the output, while the separately computed mapped answer stays at zero everywhere."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "A stronger edit crosses the word boundary only",
+     "chart_read": "Values above zero favor the replacement; values below zero favor the original. The edit strength increases from left to right.",
+     "chart_takeaway": "The direct word steadily flips toward the replacement, but the mapped answer does not move at all."
     }
    ]
   },

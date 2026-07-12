@@ -87,23 +87,39 @@ Scientific stages are individually restartable and gate the next stage:
 
 ## Results
 
-Pre-run. The scaffold, gates, and design review are being committed before any
-result-bearing GPU call. Smoke outputs will be explicitly labeled plumbing-only.
+Terminal G0 verdict: **`NO_J_WRITING` under the frozen decision rule**, with a
+more informative mechanistic split: **late direct writing worked; causal
+transport did not**.
+
+- Clean confirmation accuracy was 24/24 for direct concept report and 24/24
+  for the prompt-local mapped consequence.
+- At layer 24 and the selection-chosen alpha 4, the J swap changed the direct
+  report to the target concept on 18/24 items (75%). Random stayed 0/24 and the
+  ordinary logit-lens swap reached 5/24 (20.8%).
+- The same J intervention changed the mapped downstream consequence on 0/24
+  items at every tested layer. Its target-minus-source margin was essentially
+  flat as alpha rose from 0.5 to 4.
+- Earlier layers were inert; layer 20 moved direct report on only 1/24, so no
+  adjacent-layer pair passed. G1 prefix value and G2 task patching were correctly
+  cancelled.
+
+The full terminal result is in [`reports/report.md`](reports/report.md).
 
 ## Interpretation
 
-No scientific interpretation is licensed yet. A failed positive control will
-mean the paper's coordinate-writing premise has not transferred to this model or
-implementation. A positive control without verifier uplift will mean the lens is
-readable/writable but not a capability lever. Only specific verifier uplift can
-authorize a non-oracle follow-up experiment.
+The averaged token pullback is a strong late output-control coordinate on this
+model, not yet evidence of a reusable reasoning workspace. It can overwrite what
+concept the model says, but the tested intervention does not make the model
+recompute an arbitrary consequence from that concept. The next warranted test is
+a separate experiment using context-local transport, set-to-target clamping across
+an earlier layer band, and exact per-example delta-norm controls.
 
 ## Knowledgebase Update
 
-- Program evidence: update after a terminal scientific gate.
-- Program backlog: branch to the next warranted mechanism after the result.
-- Claim ledger: allocate a claim only after pulling current `origin/main` and only
-  if the evidence changes shared strategy.
+- Program evidence: update after synchronizing this result to `origin/main`.
+- Program backlog: branch to context-local clamped transport in a new experiment.
+- Claim ledger: allocate a scoped claim only after a fresh pull of current
+  `origin/main`; no number was reserved from stale state.
 
 ## Artifacts
 

@@ -1,23 +1,18 @@
 schema_version: 1
 experiment_id: "qwen35_4b_jacobian_value_transport"
-external_artifacts:
-  - name: fitted full Jacobian matrices
-    storage: /workspace/large_artifacts/qwen35_4b_jacobian_value_transport/lens
-    required_for: full sparse J decomposition and G2 non-J remainder control
-    checksum: recorded per file in runs/lens_manifest.json after fitting
-    regenerate: .venv/bin/python experiments/qwen35_4b_jacobian_value_transport/scripts/run.py --stage fit-lens
-  - name: activation and local-gradient cache
-    storage: /workspace/large_artifacts/qwen35_4b_jacobian_value_transport/activations
-    required_for: prefix-value analysis and restartable causal patch construction
-    checksum: recorded per file in runs/activation_manifest.json after capture
-    regenerate: .venv/bin/python experiments/qwen35_4b_jacobian_value_transport/scripts/run.py --stage prefix-value
-omitted_artifacts:
-  - path: runs/full_jacobians
-    reason: matrices exceed the repository's small-artifact policy and are stored externally
-  - path: runs/activation_cache
-    reason: regenerable hidden-state tensors are stored externally
+external_artifacts: []
+omitted_artifacts: []
 reproducibility:
   smoke_command: .venv/bin/python experiments/qwen35_4b_jacobian_value_transport/scripts/run.py --stage smoke
-  full_command: .venv/bin/python experiments/qwen35_4b_jacobian_value_transport/scripts/run.py --stage full
+  full_command: >-
+    .venv/bin/python experiments/qwen35_4b_jacobian_value_transport/scripts/run.py
+    --stage fit-lens && .venv/bin/python
+    experiments/qwen35_4b_jacobian_value_transport/scripts/run.py --stage
+    positive-control && .venv/bin/python
+    experiments/qwen35_4b_jacobian_value_transport/scripts/analyze.py
   required_external_artifacts: []
-notes: No adapter is produced by this experiment. Small metrics and receipts are committed.
+notes: >-
+  No adapter is produced. The fitted targeted lens (runs/targeted_lens.pt), all
+  5,088 positive-control rows, metrics, and receipts are committed. The
+  conditional full-J and activation-cache artifacts were never generated:
+  frozen G0 failed, so G1 and G2 were ineligible.

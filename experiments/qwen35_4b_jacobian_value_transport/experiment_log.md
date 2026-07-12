@@ -63,3 +63,18 @@
 - Corrected the contract: direct concepts are scored as their fitted leading-
   space tokens after `Concept:`, while the `Value: ` prefix owns the space and
   the following digit is scored as one bare token.
+
+## 2026-07-12 — terminal G0 result
+
+- G0 completed in 40.5 seconds over 5,088 stored per-item rows.
+- Clean confirmation accuracy and parse rate were both 1.00.
+- The layer-24 alpha-4 J swap changed direct report to the target on 18/24
+  items, versus 0/24 random and 5/24 logit lens.
+- Every J layer changed the mapped consequence on 0/24 items. No adjacent layer
+  pair passed, so the frozen terminal decision is `NO_J_WRITING` and G1/G2 are
+  cancelled.
+- Audit found two scoped control limitations that do not rescue the failed gate:
+  random coordinate swaps were not exact realized-delta norm matches, and
+  repeated pairwise swaps are not a proper multi-layer set-to-target clamp.
+- Next branch: a separate context-local, set-clamped transport experiment with
+  exact per-example delta-norm controls.

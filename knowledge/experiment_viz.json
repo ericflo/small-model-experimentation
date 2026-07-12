@@ -5,28 +5,47 @@
   "qwen35_4b_jacobian_value_transport": {
    "charts": [
     {
-     "title": "Frozen procedural split sizes before scientific inference",
-     "kind": "bar",
-     "categories": [
-      "lens-fit prompts",
-      "positive controls",
-      "prefix-value tasks",
-      "IID evaluation",
-      "held string",
-      "held register",
-      "hard-depth evaluation"
-     ],
+     "title": "Target-answer rate by intervention layer",
+     "kind": "line",
      "series": [
       {
-       "label": "items",
-       "values": [64, 48, 48, 96, 48, 48, 96]
+       "label": "direct report, Jacobian coordinate",
+       "points": [[8, 0.0], [12, 0.0], [16, 0.0], [20, 0.041666666666666664], [24, 0.75]]
+      },
+      {
+       "label": "mapped consequence, Jacobian coordinate",
+       "points": [[8, 0.0], [12, 0.0], [16, 0.0], [20, 0.0], [24, 0.0]]
+      },
+      {
+       "label": "direct report, logit-lens control",
+       "points": [[8, 0.0], [12, 0.0], [16, 0.0], [20, 0.0], [24, 0.20833333333333334]]
       }
      ],
-     "x_label": "split",
-     "y_label": "items",
+     "x_label": "model layer",
+     "y_label": "target-answer rate",
+     "y_format": "percent100",
+     "note": "Untouched 24-item confirmation split at selection-chosen alpha 4. Baseline and random-control target rates were zero. The random control was not exact realized-delta-norm matched, so direct-control specificity is provisional; the zero consequence effect is the frozen gate failure.",
+     "source": "experiments/qwen35_4b_jacobian_value_transport/analysis/metrics.json",
+     "headline": true
+    },
+    {
+     "title": "Target-minus-source margin as intervention strength rises",
+     "kind": "line",
+     "series": [
+      {
+       "label": "direct report",
+       "points": [[0.5, -8.822916666666666], [1.0, -6.9765625], [2.0, -3.4270833333333335], [4.0, 3.22265625]]
+      },
+      {
+       "label": "mapped consequence",
+       "points": [[0.5, -8.572916666666666], [1.0, -8.567708333333334], [2.0, -8.557291666666666], [4.0, -8.567708333333334]]
+      }
+     ],
+     "x_label": "intervention strength (alpha)",
+     "y_label": "target minus source logit",
      "y_format": "number",
-     "note": "Design/plumbing receipt only, not a model result. Every result-bearing split is fresh and disjoint from lens fitting.",
-     "source": "experiments/qwen35_4b_jacobian_value_transport/runs/smoke/data_receipt.json",
+     "note": "Selection split at layer 24. Positive values favor the target. Direct reporting crosses zero; the mapped consequence remains flat and strongly favors the source.",
+     "source": "experiments/qwen35_4b_jacobian_value_transport/analysis/metrics.json",
      "headline": true
     }
    ]
