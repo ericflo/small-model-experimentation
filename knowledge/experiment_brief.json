@@ -6460,35 +6460,41 @@
    ]
   },
   "qwen35_4b_verifier_conditioned_recovery_bank": {
-   "verdict_tag": "Recovery-policy study is frozen; model result pending",
-   "concept_primer": "A coding assistant may know the right fix yet get stuck after a patch is rejected or a test fails. This study teaches what to do specifically at those moments, while keeping ordinary inspect, test, and submit behavior intact.",
-   "plain_question": "Can training on real patch rejections and failed tests make this 4B coding assistant recover more often on completely different kinds of repositories?",
-   "plain_answer": "We do not know yet. The study has frozen ten fresh repository families, seven recovery steps, three matched training versions, and strict comparisons before the full model run.",
-   "why_it_matters": "A useful coding agent must revise its approach when tools reject an edit or tests expose an underfix. Any trained gain must beat both a simple reminder and spending the same generation budget on another try.",
-   "verdict_tone": "neutral",
+   "verdict_tag": "Plans boost recovery but break locality",
+   "concept_primer": "A coding assistant may know the right fix yet get stuck after a patch is rejected or a test fails. This study trained those recovery moments directly, then checked whether the change disturbed unrelated language behavior.",
+   "plain_question": "Can training on real patch rejections and failed tests make this 4B coding assistant recover more often without changing it everywhere else?",
+   "plain_answer": "Not with the selected recipe. Recovery rose from 48% to 92% on familiar task families, but adding brief plans changed unrelated next-word predictions twice as much as the safety limit allowed, so new task families and the black-box benchmark were never opened.",
+   "why_it_matters": "Teaching recovery actions alone stayed local and worked well. The damaging part was forcing unnatural plan wording, showing that a small token weight can still create a very large update when those words are surprising to the model.",
+   "verdict_tone": "mixed",
    "key_numbers": [
     {
-     "label": "Fresh repository families",
-     "value": "10",
-     "sub": "six for training, four different families for transfer"
+     "label": "Recovery success",
+     "value": "48% → 92%",
+     "sub": "frozen base to selected plan arm on 60 calibration cases"
     },
     {
-     "label": "Condition-specific recovery steps",
-     "value": "7",
-     "sub": "from first inspection through test pass and submit"
+     "label": "Unrelated change",
+     "value": "30.3%",
+     "sub": "selected arm versus a 15.0% safety ceiling"
     },
     {
-     "label": "Matched training versions",
-     "value": "3",
-     "sub": "ordinary states, recovery actions, and recovery actions plus brief planning"
+     "label": "Action-only drift",
+     "value": "9.8%",
+     "sub": "failure-conditioned actions pass the same locality check"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Every planned recovery step is covered in the smoke check",
-     "chart_read": "Each bar counts the checked examples for one step in the coding loop, from first inspection to submit after tests pass. Equal height is the intended result before training begins.",
-     "chart_takeaway": "All seven bars contain ten checked examples, so no rare recovery or completion step disappears from the training design before the model run."
+     "chart_plain_title": "Recovery rises across the three training versions",
+     "chart_read": "Each bar is the share of 60 controlled failure cases ending with code that passes public and private tests. Taller is better, moving from the frozen model through ordinary action training, failure-state action training, and failure-state actions plus brief plans.",
+     "chart_takeaway": "The plan arm reaches 92%, ten points above ordinary action training, but this is only the familiar-family selection block and it could not proceed after failing locality."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "Only the plan arm crosses the unrelated-change limit",
+     "chart_read": "Each group compares measured movement in unrelated next-word scores with the fixed 15% ceiling. Lower movement is safer; a bar above the ceiling fails.",
+     "chart_takeaway": "Both action-only bars stay below the limit near 9%, while adding plans jumps above 30%, isolating the collateral to plan wording rather than recovery actions."
     }
    ]
   },

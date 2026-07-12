@@ -52,17 +52,32 @@ The orchestrator is resumable. It stops before confirmation and Menagerie whenev
 
 ## Results
 
-Pending the frozen result-bearing run.
+**Verdict: stopped at the registered locality gate.** Menagerie and both transfer blocks remained sealed.
+
+The harvest covered 58/72 tasks (80.6%); 57 tasks survived patch minimization and produced 399 replay-clean rows per arm. On the 60-case trained-family calibration block:
+
+| Arm | Recovery success | Failed-test success | Rejected-patch success | Invalid turns | Mean sampled tokens |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| frozen base | 48.3% | 53.3% | 43.3% | 5.7% | 2,340 |
+| happy action | 81.7% | 80.0% | 83.3% | 2.0% | 1,377 |
+| recovery action | 85.0% | 73.3% | 96.7% | 19.1% | 1,503 |
+| recovery reason | **91.7%** | **100%** | 83.3% | 5.9% | **480** |
+
+The frozen selector chose `recovery_reason`: +43.3pp over base, +10.0pp over happy, and +6.7pp over recovery action. It also improved the registered transition composite by +18.9pp over happy. But its centered non-target logit drift was **0.303** versus the 0.15 ceiling, so the run stopped.
+
+Exploratory mechanism controls isolated the damage: happy and recovery-action drift were only 0.083 and 0.098 and both passed locality. Their unrelated entropy changes were −0.016 and +0.006 nats, while recovery-reason reduced it by 0.106 nats. Full result and source checksums are in [reports/result_receipt.json](reports/result_receipt.json).
 
 ## Interpretation
 
-Pending. A gain that does not beat the explicit scaffold is promptable process control, not a weight-level capability unlock. A gain that does not beat matched sampling is not a compute-efficient agentic improvement. A train-family-only gain is memorized protocol, not breadth.
+Conditional transition banking contains a strong local signal, but this recipe does not establish capability transfer. Action-only failure-state learning is parameter-local and adds +3.3pp over the already-strong happy control, though it produces too many invalid actions. Concise plan supervision repairs those invalids and adds another +6.7pp, but its realized gradient is far larger than its nominal 5% token mass and violates locality.
+
+Entropy/varentropy explains why. Before training, the correct JSON action-start token was already rank 1 at every action seam, and failure-specific plan starts were also rank 1. The imposed plan starts at ordinary pivots were unnatural: rank ~8,404 at inspect→patch, ~1,163 at patch-ok→verify, ~135 at start→inspect, and 3 at pass→commit. Plan SFT forced every one to rank 1 and near-zero entropy. Future plan dose must be calibrated by realized gradient/surprisal, not weighted token count.
 
 ## Knowledgebase Update
 
-- Program evidence: pending.
-- Program backlog: pending.
-- Claim ledger/synthesis: pending.
+- Program evidence: updated with the locality-gated negative and action-only positive control.
+- Program backlog: queues a new locality-first interpolation experiment; transfer seeds remain untouched.
+- Claim ledger/synthesis: deferred until the interpolation follow-up determines whether the signal survives a compliant dose.
 
 ## Artifacts
 

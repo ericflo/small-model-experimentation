@@ -25,6 +25,23 @@
   state→action level or (b) external scaffold retrieval/execution that avoids a
   broad shared-weight policy edit. Require a synthetic failed-patch/failed-test
   recovery gate before training.
+- Completed locality-gated negative: `qwen35_4b_verifier_conditioned_recovery_bank`.
+  Conditional transition balance worked on fresh trained-family recovery
+  (base 0.483, happy 0.817, action-only 0.850, reason 0.917), and full-dose
+  recovery action-only passed locality at 0.098. The selected 5%-plan arm
+  failed locality at 0.303 because highly off-policy plan-start tokens created
+  a 42.1 pre-clip gradient and 29.5% larger delta norm. Transfer and Menagerie
+  stayed sealed. Do not rerun this dose or reinterpret the exploratory
+  action-only arm inside the result-bearing directory.
+- Immediate successor, new experiment only: locality-first reason-delta
+  interpolation. Merge the frozen reason adapter at a predeclared scale ladder,
+  run exact-logit locality before behavior, and select only among passing scales
+  plus the full-dose recovery-action anchor. Calibration may reuse the already
+  designated train-family block; the four transfer families/seeds remain
+  untouched. Require the winner to beat happy, an external scaffold, and
+  matched-compute sampling before Menagerie. Future retraining should calibrate
+  plan dose by realized gradient/surprisal and avoid supervising plan starts
+  already rank 1 or wildly off-policy lexical templates.
 - Stopped experiment: `qwen35_4b_specialist_policy_integration` — incumbent and
   compound-headroom gates passed, but `ferrier = 0.994` made the mandatory
   tools specialist's frozen `+0.10` bar mathematically impossible. Zero

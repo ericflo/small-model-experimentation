@@ -45341,35 +45341,61 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "CPU smoke covers every registered recovery transition",
+     "title": "Verifier-conditioned banking raises trained-family recovery",
      "categories": [
-      "start→inspect",
-      "inspect→patch",
-      "rejected→changed patch",
-      "failed test→diagnose",
-      "diagnosis→changed patch",
-      "patch OK→verify",
-      "passed test→commit"
+      "frozen base",
+      "happy actions",
+      "recovery actions",
+      "recovery actions + plans"
      ],
      "series": [
       {
-       "label": "replay-verified rows per arm",
+       "label": "hidden-test recovery success",
        "values": [
-        10,
-        10,
-        10,
-        10,
-        10,
-        10,
-        10
+        0.48333333333333334,
+        0.8166666666666667,
+        0.85,
+        0.9166666666666666
        ]
       }
      ],
-     "x_label": "conditional transition",
-     "y_label": "smoke rows",
+     "x_label": "calibration arm",
+     "y_label": "success on 60 controlled recovery cases",
+     "y_format": "percent01",
+     "note": "The frozen selector chose the plan arm at 91.7%, +10.0 points over the matched happy-path control. That is trained-family calibration only: the arm then failed locality, so no transfer task or Menagerie seed was exposed.",
+     "source": "experiments/qwen35_4b_verifier_conditioned_recovery_bank/reports/result_receipt.json"
+    },
+    {
+     "kind": "bar",
+     "title": "Plan supervision triples unrelated-logit drift and fails the safety ceiling",
+     "categories": [
+      "happy actions",
+      "recovery actions",
+      "recovery actions + plans"
+     ],
+     "series": [
+      {
+       "label": "median non-target logit drift",
+       "values": [
+        0.0833098292350769,
+        0.09815472364425659,
+        0.30310505628585815
+       ]
+      },
+      {
+       "label": "registered ceiling",
+       "values": [
+        0.15,
+        0.15,
+        0.15
+       ]
+      }
+     ],
+     "x_label": "trained arm",
+     "y_label": "centered logit drift",
      "y_format": "number",
-     "note": "Deterministic substrate smoke only, not a model result. Ten fresh repositories each produced one row at all seven transition strata; all three arms had equal operator action mass, unresolved partial states failed visible and hidden tests, and the firewall stayed clean.",
-     "source": "experiments/qwen35_4b_verifier_conditioned_recovery_bank/reports/smoke_receipt.json"
+     "note": "Both action-only arms pass. Adding nominally 5% plan-token mass increases merge-delta norm by 29.5% versus recovery action-only, pushes drift to 0.303, and lowers unrelated entropy by 0.106 nats. The run stopped here.",
+     "source": "experiments/qwen35_4b_verifier_conditioned_recovery_bank/reports/result_receipt.json"
     }
    ]
   },

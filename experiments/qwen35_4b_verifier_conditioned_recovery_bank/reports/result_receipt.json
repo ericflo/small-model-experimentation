@@ -1,0 +1,734 @@
+{
+  "bank": {
+    "covered_tasks": 57,
+    "gates": {
+      "all_transitions_present": true,
+      "exact_conditional_action_balance": true,
+      "exact_rows_per_arm": true,
+      "matched_arm_row_counts": true,
+      "minimum_covered_tasks": true,
+      "no_overlength_rows": true,
+      "overall_coverage": true,
+      "per_family_coverage": true,
+      "replay_pass_rate": true,
+      "required_operators_present": true
+    },
+    "reason_plan_mass_fraction": 0.05,
+    "replay_pass_rate": 1.0,
+    "rows_per_arm": {
+      "happy_action": 399,
+      "recovery_action": 399,
+      "recovery_reason": 399
+    },
+    "target_operator_action_mass": 38248.0
+  },
+  "calibration": {
+    "base": {
+      "commit_given_verified": 0.6,
+      "invalid_action_rate_per_turn": 0.05688622754491018,
+      "mean_sampled_tokens": 2339.9166666666665,
+      "mean_turns": 5.566666666666666,
+      "per_family": {
+        "alias_registry": {
+          "n": 10,
+          "submit_rate": 0.1,
+          "success": 0.4
+        },
+        "layered_settings": {
+          "n": 10,
+          "submit_rate": 0.0,
+          "success": 0.1
+        },
+        "priority_intervals": {
+          "n": 10,
+          "submit_rate": 0.2,
+          "success": 0.3
+        },
+        "retry_backoff": {
+          "n": 10,
+          "submit_rate": 0.5,
+          "success": 1.0
+        },
+        "stable_topology": {
+          "n": 10,
+          "submit_rate": 0.6,
+          "success": 0.7
+        },
+        "window_unique": {
+          "n": 10,
+          "submit_rate": 0.3,
+          "success": 0.4
+        }
+      },
+      "per_scenario": {
+        "failed_test": {
+          "changed_patch_within_two": 0.4,
+          "immediate_transition_rate": 0.7666666666666667,
+          "n": 30,
+          "submit_rate": 0.3333333333333333,
+          "success": 0.5333333333333333
+        },
+        "rejected_patch": {
+          "changed_patch_within_two": null,
+          "immediate_transition_rate": 0.0,
+          "n": 30,
+          "submit_rate": 0.23333333333333334,
+          "success": 0.43333333333333335
+        }
+      },
+      "submit_rate": 0.2833333333333333,
+      "success": 0.48333333333333334,
+      "verified_given_success": 0.8620689655172413
+    },
+    "happy_action": {
+      "commit_given_verified": 0.9787234042553191,
+      "invalid_action_rate_per_turn": 0.02,
+      "mean_sampled_tokens": 1377.4833333333333,
+      "mean_turns": 5,
+      "per_family": {
+        "alias_registry": {
+          "n": 10,
+          "submit_rate": 0.3,
+          "success": 0.5
+        },
+        "layered_settings": {
+          "n": 10,
+          "submit_rate": 0.6,
+          "success": 0.6
+        },
+        "priority_intervals": {
+          "n": 10,
+          "submit_rate": 0.7,
+          "success": 0.8
+        },
+        "retry_backoff": {
+          "n": 10,
+          "submit_rate": 1.0,
+          "success": 1.0
+        },
+        "stable_topology": {
+          "n": 10,
+          "submit_rate": 1.0,
+          "success": 1.0
+        },
+        "window_unique": {
+          "n": 10,
+          "submit_rate": 1.0,
+          "success": 1.0
+        }
+      },
+      "per_scenario": {
+        "failed_test": {
+          "changed_patch_within_two": 0.9666666666666667,
+          "immediate_transition_rate": 0.9666666666666667,
+          "n": 30,
+          "submit_rate": 0.8,
+          "success": 0.8
+        },
+        "rejected_patch": {
+          "changed_patch_within_two": null,
+          "immediate_transition_rate": 0.3333333333333333,
+          "n": 30,
+          "submit_rate": 0.7333333333333333,
+          "success": 0.8333333333333334
+        }
+      },
+      "submit_rate": 0.7666666666666667,
+      "success": 0.8166666666666667,
+      "verified_given_success": 0.9591836734693877
+    },
+    "recovery_action": {
+      "commit_given_verified": 1.0,
+      "invalid_action_rate_per_turn": 0.19140625,
+      "mean_sampled_tokens": 1502.8333333333333,
+      "mean_turns": 4.266666666666667,
+      "per_family": {
+        "alias_registry": {
+          "n": 10,
+          "submit_rate": 0.8,
+          "success": 1.0
+        },
+        "layered_settings": {
+          "n": 10,
+          "submit_rate": 1.0,
+          "success": 1.0
+        },
+        "priority_intervals": {
+          "n": 10,
+          "submit_rate": 0.5,
+          "success": 0.6
+        },
+        "retry_backoff": {
+          "n": 10,
+          "submit_rate": 1.0,
+          "success": 1.0
+        },
+        "stable_topology": {
+          "n": 10,
+          "submit_rate": 0.5,
+          "success": 0.5
+        },
+        "window_unique": {
+          "n": 10,
+          "submit_rate": 1.0,
+          "success": 1.0
+        }
+      },
+      "per_scenario": {
+        "failed_test": {
+          "changed_patch_within_two": 0.8333333333333334,
+          "immediate_transition_rate": 0.8333333333333334,
+          "n": 30,
+          "submit_rate": 0.6333333333333333,
+          "success": 0.7333333333333333
+        },
+        "rejected_patch": {
+          "changed_patch_within_two": null,
+          "immediate_transition_rate": 0.16666666666666666,
+          "n": 30,
+          "submit_rate": 0.9666666666666667,
+          "success": 0.9666666666666667
+        }
+      },
+      "submit_rate": 0.8,
+      "success": 0.85,
+      "verified_given_success": 0.9411764705882353
+    },
+    "recovery_reason": {
+      "commit_given_verified": 1.0,
+      "invalid_action_rate_per_turn": 0.058823529411764705,
+      "mean_sampled_tokens": 479.98333333333335,
+      "mean_turns": 3.683333333333333,
+      "per_family": {
+        "alias_registry": {
+          "n": 10,
+          "submit_rate": 1.0,
+          "success": 1.0
+        },
+        "layered_settings": {
+          "n": 10,
+          "submit_rate": 1.0,
+          "success": 1.0
+        },
+        "priority_intervals": {
+          "n": 10,
+          "submit_rate": 1.0,
+          "success": 1.0
+        },
+        "retry_backoff": {
+          "n": 10,
+          "submit_rate": 1.0,
+          "success": 1.0
+        },
+        "stable_topology": {
+          "n": 10,
+          "submit_rate": 0.7,
+          "success": 0.5
+        },
+        "window_unique": {
+          "n": 10,
+          "submit_rate": 1.0,
+          "success": 1.0
+        }
+      },
+      "per_scenario": {
+        "failed_test": {
+          "changed_patch_within_two": 1.0,
+          "immediate_transition_rate": 1.0,
+          "n": 30,
+          "submit_rate": 1.0,
+          "success": 1.0
+        },
+        "rejected_patch": {
+          "changed_patch_within_two": null,
+          "immediate_transition_rate": 0.8333333333333334,
+          "n": 30,
+          "submit_rate": 0.9,
+          "success": 0.8333333333333334
+        }
+      },
+      "submit_rate": 0.95,
+      "success": 0.9166666666666666,
+      "verified_given_success": 1.0
+    }
+  },
+  "downstream_authorization": "none; create a new experiment for any dose/interpolation follow-up",
+  "experiment": "qwen35_4b_verifier_conditioned_recovery_bank",
+  "harvest": {
+    "covered_tasks": 58,
+    "per_family": {
+      "alias_registry": {
+        "coverage": 0.5,
+        "covered": 6,
+        "tasks": 12
+      },
+      "layered_settings": {
+        "coverage": 0.9166666666666666,
+        "covered": 11,
+        "tasks": 12
+      },
+      "priority_intervals": {
+        "coverage": 1.0,
+        "covered": 12,
+        "tasks": 12
+      },
+      "retry_backoff": {
+        "coverage": 1.0,
+        "covered": 12,
+        "tasks": 12
+      },
+      "stable_topology": {
+        "coverage": 0.4166666666666667,
+        "covered": 5,
+        "tasks": 12
+      },
+      "window_unique": {
+        "coverage": 1.0,
+        "covered": 12,
+        "tasks": 12
+      }
+    },
+    "successful_trajectories": 143,
+    "task_coverage": 0.8055555555555556,
+    "tasks": 72
+  },
+  "locality": {
+    "happy_action": {
+      "ceiling": 0.15,
+      "mean_entropy_delta": -0.016402164163688837,
+      "median_non_target_centered_logit_drift": 0.0833098292350769,
+      "passed": true,
+      "status": "exploratory_control"
+    },
+    "recovery_action": {
+      "ceiling": 0.15,
+      "mean_entropy_delta": 0.005976233010490717,
+      "median_non_target_centered_logit_drift": 0.09815472364425659,
+      "passed": true,
+      "status": "exploratory_control"
+    },
+    "recovery_reason": {
+      "ceiling": 0.15,
+      "mean_entropy_delta": -0.1057640905492008,
+      "median_non_target_centered_logit_drift": 0.30310505628585815,
+      "passed": false,
+      "status": "registered"
+    }
+  },
+  "menagerie_exposed": false,
+  "merge": {
+    "happy_action": {
+      "applied_lora_modules": 128,
+      "delta_frobenius_norm_max": 0.33223801851272583,
+      "delta_frobenius_norm_sum": 28.02978090196848,
+      "nonzero_lora_modules": 128
+    },
+    "recovery_action": {
+      "applied_lora_modules": 128,
+      "delta_frobenius_norm_max": 0.3653321862220764,
+      "delta_frobenius_norm_sum": 29.173860266804695,
+      "nonzero_lora_modules": 128
+    },
+    "recovery_reason": {
+      "applied_lora_modules": 128,
+      "delta_frobenius_norm_max": 0.4621683955192566,
+      "delta_frobenius_norm_sum": 37.78386431932449,
+      "nonzero_lora_modules": 128
+    }
+  },
+  "schema_version": 1,
+  "selection": {
+    "gate": {
+      "passed": true
+    },
+    "scores": {
+      "base": [
+        0.48333333333333334,
+        0.43333333333333335,
+        0.3888888888888889
+      ],
+      "happy_action": [
+        0.8166666666666667,
+        0.8,
+        0.7555555555555555
+      ],
+      "recovery_action": [
+        0.85,
+        0.7333333333333333,
+        0.6111111111111112
+      ],
+      "recovery_reason": [
+        0.9166666666666666,
+        0.8333333333333334,
+        0.9444444444444445
+      ]
+    },
+    "selected_arm": "recovery_reason",
+    "success_delta_vs_base": 0.4333333333333333,
+    "success_delta_vs_happy": 0.09999999999999998,
+    "transition_delta_vs_happy": 0.188888888888889
+  },
+  "sources": {
+    "bank": {
+      "path": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/bank/receipt.json",
+      "sha256": "82f026a95e0687c443379902d8e1020ed4e0af48b286c3d5f60773e9866c17df"
+    },
+    "calibration_base": {
+      "path": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/eval/calibration_recovery_base_deep.json",
+      "sha256": "d04c03f717fe57bd8525ac4235af922f33f1f7376ad23fbc76d3f1047847de04"
+    },
+    "calibration_happy_action": {
+      "path": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/eval/calibration_recovery_happy_action_deep.json",
+      "sha256": "73da347250ff4435028ed9f24bc9691a696458163e3a298e682c049cd42348ca"
+    },
+    "calibration_recovery_action": {
+      "path": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/eval/calibration_recovery_recovery_action_deep.json",
+      "sha256": "c603127131ad158cbc5396ab8c11a4abd71cfa3a35d4b085c339fb7b8e0cfd06"
+    },
+    "calibration_recovery_reason": {
+      "path": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/eval/calibration_recovery_recovery_reason_deep.json",
+      "sha256": "b8dd5a15030165b57e0939b2551f61befec064c7f586a5c20e72c46f5c7a798c"
+    },
+    "harvest": {
+      "path": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/harvest/trajectories.json",
+      "sha256": "8ae6bbc9481bc4f6fddfb37176af028fc34d492dcf6f0a07a6fdca3f9fab1208"
+    },
+    "locality_happy_action": {
+      "path": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/eval/locality_happy_action_exploratory.json",
+      "sha256": "295def747d94a4ae62c4039225a2a429dec742221f022e0cb535141c691638a9"
+    },
+    "locality_recovery_action": {
+      "path": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/eval/locality_recovery_action_exploratory.json",
+      "sha256": "93373df456c4daa9948457894f21c4f1991d02e30a27ed83830c646ada685740"
+    },
+    "locality_recovery_reason": {
+      "path": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/eval/locality_recovery_reason.json",
+      "sha256": "1609e4fa460f64bd4fa53fa9a59d714b0c37da1f75bd6f538c294debfb0400f2"
+    },
+    "merge_happy_action": {
+      "path": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/merged/happy_action/merge_receipt.json",
+      "sha256": "6acd11a1f8093cf620919928079cf6f05f0036e90f78216b8bab368af5df33a1"
+    },
+    "merge_recovery_action": {
+      "path": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/merged/recovery_action/merge_receipt.json",
+      "sha256": "df30a05e3badb9c8ce984faa4b1efadad4dd130891709a5ab5885d4f2b2d36cd"
+    },
+    "merge_recovery_reason": {
+      "path": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/merged/recovery_reason/merge_receipt.json",
+      "sha256": "a69d384db503b46d4d2f671b43aac0ca6994f92459eff968b991cbdfbedec54f"
+    },
+    "selection": {
+      "path": "/workspace/small-model-experimentation/experiments/qwen35_4b_verifier_conditioned_recovery_bank/analysis/candidate_selection.json",
+      "sha256": "941b987cdc0b01730bbf69f9703da5e923be14d75b400f6b2877fd6f88048b48"
+    },
+    "training_happy_action": {
+      "path": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/adapters/happy_action/training_receipt.json",
+      "sha256": "800cb36351b452249ef325d1d9a348b0cbe372ba415bb2df04f5921911444ac6"
+    },
+    "training_recovery_action": {
+      "path": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/adapters/recovery_action/training_receipt.json",
+      "sha256": "046afd96cb1605868d717fac48717a308348143be6c2083641960f363f7731d7"
+    },
+    "training_recovery_reason": {
+      "path": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/adapters/recovery_reason/training_receipt.json",
+      "sha256": "bdc1b14ec93356d967cc721183f6547b31b5e6e7a5827e263171048b8c6b700b"
+    },
+    "uncertainty_recovery_action": {
+      "path": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/eval/transition_uncertainty_recovery_action_exploratory.json",
+      "sha256": "903f35344ef59aafbb46a3b4cb0948af7d38134db70420696846db68dfa36d8a"
+    },
+    "uncertainty_recovery_reason": {
+      "path": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/eval/transition_uncertainty_recovery_reason.json",
+      "sha256": "6721c6354d6373c3fc5fa0286c8303a22172e7f1eb3c09ca68cf2134f2cbdd1e"
+    }
+  },
+  "training": {
+    "happy_action": {
+      "max_encoded_tokens": 737,
+      "optimizer_steps": 120,
+      "peak_cuda_bytes": 15940236288,
+      "training_loss": 1.8143979827562968,
+      "wall_seconds": 1831.5596508830786,
+      "weighted_action_mass": 152992.0,
+      "weighted_plan_mass": 0.0
+    },
+    "recovery_action": {
+      "max_encoded_tokens": 1150,
+      "optimizer_steps": 120,
+      "peak_cuda_bytes": 21425294336,
+      "training_loss": 1.1022144387165704,
+      "wall_seconds": 2160.2160212919116,
+      "weighted_action_mass": 152992.0,
+      "weighted_plan_mass": 0.0
+    },
+    "recovery_reason": {
+      "max_encoded_tokens": 1150,
+      "optimizer_steps": 120,
+      "peak_cuda_bytes": 21425294336,
+      "training_loss": 3.8768510540326435,
+      "wall_seconds": 2132.3308879211545,
+      "weighted_action_mass": 152992.0,
+      "weighted_plan_mass": 7649.6
+    }
+  },
+  "transfer_blocks_exposed": false,
+  "uncertainty": {
+    "recovery_action": {
+      "diagnosis_to_changed_patch": {
+        "action": {
+          "entropy_after": 1.4742226236800585e-05,
+          "entropy_before": 0.029921714526911575,
+          "target_rank_after": 1,
+          "target_rank_before": 1,
+          "varentropy_after": 0.00022033323330106214,
+          "varentropy_before": 0.2361763616402944
+        },
+        "plan": {
+          "entropy_after": 0.13775367538134256,
+          "entropy_before": 0.1862576405207316,
+          "target_rank_after": 1,
+          "target_rank_before": 1,
+          "varentropy_after": 0.5273913145065308,
+          "varentropy_before": 0.5585048794746399
+        }
+      },
+      "failed_test_to_diagnose": {
+        "action": {
+          "entropy_after": 4.674719245182739e-06,
+          "entropy_before": 0.008911908759425083,
+          "target_rank_after": 1,
+          "target_rank_before": 1,
+          "varentropy_after": 7.225574033024411e-05,
+          "varentropy_before": 0.08802475531895955
+        },
+        "plan": {
+          "entropy_after": 0.045051888873179756,
+          "entropy_before": 0.05971878208220005,
+          "target_rank_after": 1,
+          "target_rank_before": 1,
+          "varentropy_after": 0.24316917608181635,
+          "varentropy_before": 0.26731622219085693
+        }
+      },
+      "inspect_to_patch": {
+        "action": {
+          "entropy_after": 4.7258705308195204e-05,
+          "entropy_before": 0.03791366517543793,
+          "target_rank_after": 1,
+          "target_rank_before": 1,
+          "varentropy_after": 0.0006370338378474116,
+          "varentropy_before": 0.2409236580133438
+        },
+        "plan": {
+          "entropy_after": 0.8485947251319885,
+          "entropy_before": 1.0773323774337769,
+          "target_rank_after": 8052,
+          "target_rank_before": 8404,
+          "varentropy_after": 0.5609617829322815,
+          "varentropy_before": 0.4385364353656769
+        }
+      },
+      "passed_test_to_commit": {
+        "action": {
+          "entropy_after": 2.7571461108285198e-06,
+          "entropy_before": 0.0035216837810973325,
+          "target_rank_after": 1,
+          "target_rank_before": 1,
+          "varentropy_after": 4.327393738397708e-05,
+          "varentropy_before": 0.036336894457538925
+        },
+        "plan": {
+          "entropy_after": 0.025474203440050285,
+          "entropy_before": 0.002233344227230797,
+          "target_rank_after": 3,
+          "target_rank_before": 3,
+          "varentropy_after": 0.14769122997919717,
+          "varentropy_before": 0.022444662327567737
+        }
+      },
+      "patch_ok_to_verify": {
+        "action": {
+          "entropy_after": 5.002901464952932e-06,
+          "entropy_before": 0.0032169489034761987,
+          "target_rank_after": 1,
+          "target_rank_before": 1,
+          "varentropy_after": 7.732985856515977e-05,
+          "varentropy_before": 0.03377422379950682
+        },
+        "plan": {
+          "entropy_after": 0.005975819930123786,
+          "entropy_before": 0.07592441141605377,
+          "target_rank_after": 7915.333333333333,
+          "target_rank_before": 1163,
+          "varentropy_after": 0.042980912451942764,
+          "varentropy_before": 0.3367180824279785
+        }
+      },
+      "rejected_patch_to_changed_patch": {
+        "action": {
+          "entropy_after": 8.107512257993221e-05,
+          "entropy_before": 0.02376040630042553,
+          "target_rank_after": 1,
+          "target_rank_before": 1,
+          "varentropy_after": 0.001024288940243423,
+          "varentropy_before": 0.17781910300254822
+        },
+        "plan": {
+          "entropy_after": 0.2244756668806076,
+          "entropy_before": 0.018401430919766426,
+          "target_rank_after": 1,
+          "target_rank_before": 1,
+          "varentropy_after": 0.5095641613006592,
+          "varentropy_before": 0.11321738362312317
+        }
+      },
+      "start_to_inspect": {
+        "action": {
+          "entropy_after": 1.789016641851049e-05,
+          "entropy_before": 0.050344955176115036,
+          "target_rank_after": 1,
+          "target_rank_before": 1,
+          "varentropy_after": 0.00026179637643508613,
+          "varentropy_before": 0.231653094291687
+        },
+        "plan": {
+          "entropy_after": 0.7931808829307556,
+          "entropy_before": 0.8186135292053223,
+          "target_rank_after": 215,
+          "target_rank_before": 135,
+          "varentropy_after": 0.42453381419181824,
+          "varentropy_before": 0.2880033254623413
+        }
+      }
+    },
+    "recovery_reason": {
+      "diagnosis_to_changed_patch": {
+        "action": {
+          "entropy_after": 4.2809691876755096e-05,
+          "entropy_before": 0.029921714526911575,
+          "target_rank_after": 1,
+          "target_rank_before": 1,
+          "varentropy_after": 0.0005549807101488113,
+          "varentropy_before": 0.2361763616402944
+        },
+        "plan": {
+          "entropy_after": 0.005716143408790231,
+          "entropy_before": 0.1862576405207316,
+          "target_rank_after": 1,
+          "target_rank_before": 1,
+          "varentropy_after": 0.0419327300041914,
+          "varentropy_before": 0.5585048794746399
+        }
+      },
+      "failed_test_to_diagnose": {
+        "action": {
+          "entropy_after": 1.3071550104844695e-05,
+          "entropy_before": 0.008911908759425083,
+          "target_rank_after": 1,
+          "target_rank_before": 1,
+          "varentropy_after": 0.00019957916326044747,
+          "varentropy_before": 0.08802475531895955
+        },
+        "plan": {
+          "entropy_after": 1.7444319685940474e-05,
+          "entropy_before": 0.05971878208220005,
+          "target_rank_after": 1,
+          "target_rank_before": 1,
+          "varentropy_after": 0.0002921220996843961,
+          "varentropy_before": 0.26731622219085693
+        }
+      },
+      "inspect_to_patch": {
+        "action": {
+          "entropy_after": 1.7878022845252417e-05,
+          "entropy_before": 0.03791366517543793,
+          "target_rank_after": 1,
+          "target_rank_before": 1,
+          "varentropy_after": 0.0002589995274320245,
+          "varentropy_before": 0.2409236580133438
+        },
+        "plan": {
+          "entropy_after": 0.0009734776103869081,
+          "entropy_before": 1.0773323774337769,
+          "target_rank_after": 1,
+          "target_rank_before": 8404,
+          "varentropy_after": 0.010642977431416512,
+          "varentropy_before": 0.4385364353656769
+        }
+      },
+      "passed_test_to_commit": {
+        "action": {
+          "entropy_after": 9.858866633294383e-06,
+          "entropy_before": 0.0035216837810973325,
+          "target_rank_after": 1,
+          "target_rank_before": 1,
+          "varentropy_after": 0.00014518751413561404,
+          "varentropy_before": 0.036336894457538925
+        },
+        "plan": {
+          "entropy_after": 0.00017425090967056653,
+          "entropy_before": 0.002233344227230797,
+          "target_rank_after": 1,
+          "target_rank_before": 3,
+          "varentropy_after": 0.0022602256503887475,
+          "varentropy_before": 0.022444662327567737
+        }
+      },
+      "patch_ok_to_verify": {
+        "action": {
+          "entropy_after": 7.2880169075991335e-06,
+          "entropy_before": 0.0032169489034761987,
+          "target_rank_after": 1,
+          "target_rank_before": 1,
+          "varentropy_after": 0.00011203229466142754,
+          "varentropy_before": 0.03377422379950682
+        },
+        "plan": {
+          "entropy_after": 0.00017101489114187038,
+          "entropy_before": 0.07592441141605377,
+          "target_rank_after": 1,
+          "target_rank_before": 1163,
+          "varentropy_after": 0.0021813807543367147,
+          "varentropy_before": 0.3367180824279785
+        }
+      },
+      "rejected_patch_to_changed_patch": {
+        "action": {
+          "entropy_after": 1.0084700988954864e-05,
+          "entropy_before": 0.02376040630042553,
+          "target_rank_after": 1,
+          "target_rank_before": 1,
+          "varentropy_after": 0.00015767633158247918,
+          "varentropy_before": 0.17781910300254822
+        },
+        "plan": {
+          "entropy_after": 0.00010495951573830098,
+          "entropy_before": 0.018401430919766426,
+          "target_rank_after": 1,
+          "target_rank_before": 1,
+          "varentropy_after": 0.0017186749028041959,
+          "varentropy_before": 0.11321738362312317
+        }
+      },
+      "start_to_inspect": {
+        "action": {
+          "entropy_after": 1.6425561625510454e-05,
+          "entropy_before": 0.050344955176115036,
+          "target_rank_after": 1,
+          "target_rank_before": 1,
+          "varentropy_after": 0.000245341332629323,
+          "varentropy_before": 0.231653094291687
+        },
+        "plan": {
+          "entropy_after": 0.004749014507979155,
+          "entropy_before": 0.8186135292053223,
+          "target_rank_after": 1,
+          "target_rank_before": 135,
+          "varentropy_after": 0.03789074346423149,
+          "varentropy_before": 0.2880033254623413
+        }
+      }
+    }
+  },
+  "verdict": "stopped_at_registered_locality_gate"
+}

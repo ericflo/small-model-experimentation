@@ -1,0 +1,44 @@
+{
+  "checks": {
+    "conditional_mechanism_signal": true,
+    "success_not_worse_than_base": true
+  },
+  "gate": {
+    "passed": true
+  },
+  "inputs": {
+    "base": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/eval/calibration_recovery_base_deep.json",
+    "happy_action": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/eval/calibration_recovery_happy_action_deep.json",
+    "recovery_action": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/eval/calibration_recovery_recovery_action_deep.json",
+    "recovery_reason": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/eval/calibration_recovery_recovery_reason_deep.json"
+  },
+  "rule": "lexicographic(overall_success,min_scenario_success,transition_score); ties prefer recovery_action",
+  "schema_version": 1,
+  "scores": {
+    "base": [
+      0.48333333333333334,
+      0.43333333333333335,
+      0.3888888888888889
+    ],
+    "happy_action": [
+      0.8166666666666667,
+      0.8,
+      0.7555555555555555
+    ],
+    "recovery_action": [
+      0.85,
+      0.7333333333333333,
+      0.6111111111111112
+    ],
+    "recovery_reason": [
+      0.9166666666666666,
+      0.8333333333333334,
+      0.9444444444444445
+    ]
+  },
+  "selected_arm": "recovery_reason",
+  "selection_block": "calibration",
+  "success_delta_vs_base": 0.4333333333333333,
+  "success_delta_vs_happy": 0.09999999999999998,
+  "transition_delta_vs_happy": 0.188888888888889
+}

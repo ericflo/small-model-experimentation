@@ -26,3 +26,8 @@ reproducibility:
   required_external_artifacts:
     - "large_artifacts/qwen35_4b_repo_search_compress_bank/merged/apex_replay"
 notes: "The benchmark firewall remains closed unless both registered transfer blocks pass."
+result:
+  verdict: "stopped_at_registered_locality_gate"
+  compact_receipt: "experiments/qwen35_4b_verifier_conditioned_recovery_bank/reports/result_receipt.json"
+  transfer_blocks_exposed: false
+  menagerie_exposed: false

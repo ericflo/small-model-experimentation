@@ -169,3 +169,33 @@ verifier-conditioned recovery policy. Marginal operator counts do not preserve
 conditional transition structure. Because the necessary gate cancelled the
 action-only arm, plan-gradient attribution remains open; the supported negative
 is the complete compact plan-plus-action recipe.
+
+## qwen35_4b_verifier_conditioned_recovery_bank (2026-07-12 — Locality-gated negative)
+
+The direct C54 successor repaired the missing intervention unit. Fifty-seven
+model-found repository repairs produced 399 rows/arm balanced at seven public
+state→action transitions, including rejected-patch→changed-patch,
+failed-test→diagnose/revise, and passed-test→commit. Every bank/replay/firewall
+gate passed. On 60 fresh trained-family recovery cases, frozen apex scored
+0.483, matched happy-action training 0.817, recovery action-only 0.850, and
+recovery-plus-plan 0.917. The plan arm used 480 mean sampled tokens versus
+2,340 for base and was selected by the frozen rule.
+
+The headline recipe nevertheless stopped at exact-logit locality: selected
+drift was 0.303 versus a 0.15 ceiling and unrelated entropy fell 0.106 nats, so
+no transfer family or Menagerie seed was exposed. Exploratory controls localize
+the damage. Happy action and recovery action-only passed locality at 0.083 and
+0.098; action-only unrelated entropy was flat (+0.006). Nominal 5% plan-token
+mass produced a 29.5% larger merge-delta norm than action-only and a step-10
+pre-clip gradient of 42.1 versus 1.8. Seam entropy/varentropy explains why:
+every JSON action-start token was already rank 1, while imposed ordinary-state
+plan starts were ranks ~8,404 (inspect→patch), ~1,163 (patch→verify), ~135
+(start→inspect), and 3 (pass→commit). Plan SFT drove all to rank 1 and near-zero
+entropy.
+
+Read: conditional action banking contains a strong, parameter-local recovery
+signal; broad lexical plan imitation adds trained-family efficiency but violates
+locality because token-mass weighting ignores realized surprisal/gradient. The
+next experiment should interpolate the already-trained reason delta under a
+locality-first gate, with full-dose action-only as the safe anchor. Do not expose
+the untouched four-family transfer blocks until a scaled checkpoint passes.

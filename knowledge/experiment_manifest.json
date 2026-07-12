@@ -5246,9 +5246,9 @@
   },
   {
     "file_counts": {
-      ".json": 2,
+      ".json": 4,
       ".md": 7,
-      ".py": 19,
+      ".py": 20,
       ".yaml": 3
     },
     "id": "qwen35_4b_verifier_conditioned_recovery_bank",
@@ -5276,6 +5276,7 @@
     ],
     "title": "Verifier-conditioned recovery banking curriculum",
     "top_level_dirs": [
+      "analysis",
       "configs",
       "data",
       "reports",
@@ -5283,8 +5284,8 @@
       "src",
       "tests"
     ],
-    "total_files": 31,
-    "total_size_bytes": 306033
+    "total_files": 34,
+    "total_size_bytes": 348262
   },
   {
     "file_counts": {
