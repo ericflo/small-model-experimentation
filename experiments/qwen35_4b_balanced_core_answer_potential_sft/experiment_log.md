@@ -21,3 +21,6 @@ or evaluation generation has run under this experiment.
   passing CPU tests were committed at `c847615f` before any experiment GPU call.
 - The configured guard now points to that commit and its three exact file digests. It fails before model
   load if ancestry or content identity changes.
+- After the anchor, the README's first relative link was moved below the generated summary paragraph so the
+  repository catalog resolves it from the correct directory. This is a navigation-only repair; the guard
+  still verifies the byte-exact prospective design at `c847615f`.

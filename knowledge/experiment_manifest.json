@@ -818,7 +818,7 @@
       "test_time_reasoning_budget"
     ],
     "source_track": "new",
-    "summary": "Prospective resource-constrained follow-up to [`qwen35_4b_long_horizon_answer_potential_sft`](../qwen35_4b_long_horizon_answer_potential_sft/README.md). The design is frozen before the remaining 29 harvest tasks, any training-pool scoring, any SFT, or any held-out evaluation. No capability result exists yet.",
+    "summary": "Prospective resource-constrained follow-up to `qwen35_4b_long_horizon_answer_potential_sft`. The design is frozen before the remaining 29 harvest tasks, any training-pool scoring, any SFT, or any held-out evaluation. No capability result exists yet.",
     "tags": [
       "abi",
       "small-model"
@@ -834,7 +834,7 @@
       "tests"
     ],
     "total_files": 55,
-    "total_size_bytes": 3537191
+    "total_size_bytes": 3537448
   },
   {
     "file_counts": {

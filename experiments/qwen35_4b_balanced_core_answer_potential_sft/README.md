@@ -3,9 +3,11 @@
 ## Status
 
 Prospective resource-constrained follow-up to
-[`qwen35_4b_long_horizon_answer_potential_sft`](../qwen35_4b_long_horizon_answer_potential_sft/README.md).
+`qwen35_4b_long_horizon_answer_potential_sft`.
 The design is frozen before the remaining 29 harvest tasks, any training-pool scoring, any SFT, or any
 held-out evaluation. No capability result exists yet.
+
+The preserved parent is [linked here](../qwen35_4b_long_horizon_answer_potential_sft/README.md).
 
 This fork preserves the sunk cost of 331 complete, atomic task shards while imposing a hard compute
 funnel: finish exactly 360 balanced tasks, score only the independent N=64 pool, skip pivot branching,
