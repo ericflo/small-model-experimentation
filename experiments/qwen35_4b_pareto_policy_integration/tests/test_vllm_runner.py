@@ -93,6 +93,24 @@ class EngineConfigCaptureGeometryTests(unittest.TestCase):
                     cudagraph_capture_sizes=sizes,
                 ).validate()
 
+
+class ExactPromptIdTests(unittest.TestCase):
+    def test_prepare_preserves_explicit_prefix_ids_without_retokenizing(self) -> None:
+        instance = object.__new__(runner.VLLMRunner)
+        instance.thinking_prompt_suffix_ids = [90, 91]
+        instance.no_thinking_prompt_suffix_ids = [80, 81]
+        instance.tokenizer = SimpleNamespace(
+            decode=lambda ids, skip_special_tokens=False: "decoded-prefix",
+            encode=lambda text, add_special_tokens=False: [999],
+        )
+        prepared = instance.prepare(
+            [{"id": "prefix", "prompt_token_ids": [7, 8, 9]}],
+            thinking="natural",
+            allow_custom_prompts=True,
+        )
+        self.assertEqual(prepared[0].prompt_token_ids, [7, 8, 9])
+        self.assertEqual(prepared[0].prompt_channel, "custom")
+
         with self.assertRaisesRegex(ValueError, "incompatible with enforce_eager"):
             runner.EngineConfig(
                 max_num_seqs=19,

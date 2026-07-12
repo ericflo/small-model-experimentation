@@ -10,10 +10,33 @@ import torch
 EXP = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(EXP / "src"))
 
-from mopd_loss import bias_corrected_topk_reverse_kl, full_reverse_kl  # noqa: E402
+from mopd_loss import (  # noqa: E402
+    bias_corrected_topk_reverse_kl,
+    full_reverse_kl,
+    sparse_teacher_topk_reverse_kl,
+)
 
 
 class MopdLossTests(unittest.TestCase):
+    def test_cached_teacher_topk_matches_uncached_objective_and_gradient(self):
+        torch.manual_seed(29)
+        student = torch.randn(2, 3, 19, dtype=torch.float64, requires_grad=True)
+        teacher = torch.randn(2, 3, 19, dtype=torch.float64)
+        expected = bias_corrected_topk_reverse_kl(
+            student, teacher, top_k=7, reduction="sum"
+        )
+        expected_gradient = torch.autograd.grad(expected, student, retain_graph=True)[0]
+        teacher_log = torch.log_softmax(teacher.float(), dim=-1)
+        values, indices = torch.topk(teacher_log, k=7, dim=-1)
+        actual = sparse_teacher_topk_reverse_kl(
+            student, indices, values, reduction="sum"
+        )
+        actual_gradient = torch.autograd.grad(actual, student)[0]
+        self.assertTrue(torch.allclose(expected, actual, atol=2e-7, rtol=2e-7))
+        self.assertTrue(
+            torch.allclose(expected_gradient, actual_gradient, atol=2e-7, rtol=2e-7)
+        )
+
     def test_full_vocabulary_value_and_gradient_match_reverse_kl(self):
         generator = torch.Generator().manual_seed(61001)
         student = torch.randn(2, 3, 11, generator=generator, dtype=torch.float64)

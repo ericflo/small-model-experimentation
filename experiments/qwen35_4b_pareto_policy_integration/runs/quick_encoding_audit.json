@@ -1,0 +1,52 @@
+{
+  "encoded_family_counts": {
+    "burrowmaze": 236,
+    "caravan": 39,
+    "ferrier": 531,
+    "foundry_ledger": 39,
+    "gatepost": 126,
+    "glyphgate": 298,
+    "kilnrite": 527,
+    "loomfix": 181,
+    "packhouse": 60,
+    "patchwheel": 85,
+    "runeward": 26,
+    "stallwright": 85
+  },
+  "encoded_kind_counts": {
+    "atom": 127,
+    "atom_fc": 213,
+    "episode": 1473,
+    "oracle_trace": 420
+  },
+  "encoded_length_tokens": {
+    "max": 3042,
+    "min": 299,
+    "p50": 833,
+    "p90": 1617,
+    "p95": 2078,
+    "p99": 2822,
+    "sum": 2114889
+  },
+  "encoded_rows": 2233,
+  "input_rows": 2240,
+  "max_length": 3072,
+  "model": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "skip_rate": 0.003125,
+  "skipped_family_counts": {
+    "stallwright": 7
+  },
+  "skipped_kind_counts": {
+    "atom_fc": 7
+  },
+  "skipped_rows": 7,
+  "stage": "sft_encoding_audit",
+  "think_loss_weight": 0.2,
+  "train_files": [
+    {
+      "path": "/workspace/small-model-experimentation/experiments/qwen35_4b_gauntlet_frontier/data/sft_blend.jsonl",
+      "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+    }
+  ]
+}

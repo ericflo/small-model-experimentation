@@ -62,7 +62,7 @@ def _sampling(
 
 
 def _slim(output: dict) -> dict:
-    """Keep the fields downstream stages need; drop token-id arrays."""
+    """Keep downstream scoring and exact-prefix audit fields."""
     return {
         "sample_index": output["sample_index"],
         "text": output["text"],
@@ -73,6 +73,12 @@ def _slim(output: dict) -> dict:
         "forced_close": output["forced_close"],
         "finish_reason": output["finish_reason"],
         "truncated": output["truncated"],
+        # Exact student prefixes are required by the preregistered teacher
+        # audit and on-policy distillation. Preserve completion IDs, but never
+        # simulator state or hidden labels.
+        "token_ids": output["token_ids"],
+        "retained_thinking_token_ids": output.get("retained_thinking_token_ids", []),
+        "injected_token_ids": output.get("injected_token_ids", []),
     }
 
 

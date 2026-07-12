@@ -960,17 +960,30 @@ class VLLMRunner:
             seen.add(record_id)
             has_prompt = "prompt" in record
             has_messages = "messages" in record
-            if has_prompt == has_messages:
+            has_token_ids = "prompt_token_ids" in record
+            if sum((has_prompt, has_messages, has_token_ids)) != 1:
                 raise ValueError(
-                    f"input {record_id!r} must contain exactly one of prompt or messages"
+                    f"input {record_id!r} must contain exactly one of prompt, messages, or prompt_token_ids"
                 )
-            if has_prompt:
+            if has_token_ids:
+                raw_ids = record["prompt_token_ids"]
+                if not isinstance(raw_ids, list) or not raw_ids or any(
+                    not isinstance(value, int) or isinstance(value, bool) or value < 0
+                    for value in raw_ids
+                ):
+                    raise ValueError(
+                        f"input {record_id!r} prompt_token_ids must be a non-empty integer list"
+                    )
+                token_ids = list(raw_ids)
+                prompt = self.tokenizer.decode(token_ids, skip_special_tokens=False)
+            elif has_prompt:
                 prompt = record["prompt"]
                 if not isinstance(prompt, str):
                     raise ValueError(f"input {record_id!r} prompt must be a string")
+                token_ids = self.tokenizer.encode(prompt, add_special_tokens=False)
             else:
                 prompt = self._render_messages(record["messages"], thinking != "off")
-            token_ids = self.tokenizer.encode(prompt, add_special_tokens=False)
+                token_ids = self.tokenizer.encode(prompt, add_special_tokens=False)
             if not token_ids:
                 raise ValueError(f"input {record_id!r} produced an empty prompt")
             prompt_channel = self._prompt_channel(token_ids)

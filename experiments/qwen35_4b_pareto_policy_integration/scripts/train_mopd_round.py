@@ -1,0 +1,208 @@
+#!/usr/bin/env python3
+"""Train one consume-once MOPD round from cached exact-prefix teacher targets."""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import math
+import random
+import sys
+import time
+from pathlib import Path
+
+import torch
+from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
+from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
+
+
+EXP = Path(__file__).resolve().parents[1]
+REPO = EXP.parents[1]
+sys.path.insert(0, str(EXP / "src"))
+
+from io_utils import load_config, sha256_file  # noqa: E402
+from mopd_loss import sparse_teacher_topk_reverse_kl  # noqa: E402
+
+
+TARGET_MODULES = [
+    "q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"
+]
+
+
+def _training_units(samples: list[dict], quick_fraction: float, micro_steps: int, seed: int) -> list[dict]:
+    rng = random.Random(seed)
+    pools: dict[str, list[dict]] = {"quick": [], "deep": []}
+    for sample in samples:
+        stratum = str(sample["meta"]["stratum"])
+        active = torch.nonzero(sample["policy_mask"], as_tuple=False).flatten().tolist()
+        if not active:
+            continue
+        if stratum == "quick":
+            chunks = [active[-256:]]
+        else:
+            midpoint = max(1, len(active) // 2)
+            chunks = [active[:midpoint][-256:], active[midpoint:][-256:]]
+        for chunk_index, positions in enumerate(chunks):
+            if positions:
+                pools[stratum].append({
+                    "sample": sample, "positions": positions, "chunk": chunk_index,
+                })
+    for values in pools.values():
+        rng.shuffle(values)
+    quick_n = round(micro_steps * quick_fraction)
+    deep_n = micro_steps - quick_n
+    if len(pools["quick"]) < quick_n or len(pools["deep"]) < deep_n:
+        raise ValueError(
+            f"insufficient consume-once units: quick {len(pools['quick'])}/{quick_n}, "
+            f"deep {len(pools['deep'])}/{deep_n}"
+        )
+    units = pools["quick"][:quick_n] + pools["deep"][:deep_n]
+    rng.shuffle(units)
+    return units
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--config", type=Path)
+    parser.add_argument("--base-model", type=Path, required=True)
+    parser.add_argument("--teacher-cache", type=Path, required=True)
+    parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument("--round", type=int, required=True)
+    parser.add_argument("--seed", type=int, required=True)
+    parser.add_argument("--smoke", action="store_true")
+    args = parser.parse_args()
+    config, config_path = load_config(args.config)
+    if not (args.base_model / "config.json").is_file():
+        raise SystemExit("base merged composite is incomplete")
+    receipt_path = args.teacher_cache.with_suffix(args.teacher_cache.suffix + ".receipt.json")
+    cache_receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    if cache_receipt["cache_sha256"] != sha256_file(args.teacher_cache):
+        raise SystemExit("teacher cache checksum mismatch")
+    payload = torch.load(args.teacher_cache, map_location="cpu", weights_only=False)
+    samples = payload["samples"]
+    cfg = config["mopd"]
+    updates = 1 if args.smoke else int(cfg["updates_per_round"])
+    grad_accum = 1 if args.smoke else int(cfg["grad_accum"])
+    units = _training_units(
+        samples, float(cfg["retention_fraction"]), updates * grad_accum, args.seed
+    )
+
+    tokenizer = AutoTokenizer.from_pretrained(
+        args.base_model, local_files_only=True, trust_remote_code=True, use_fast=True
+    )
+    bnb = BitsAndBytesConfig(
+        load_in_4bit=True, bnb_4bit_quant_type="nf4", bnb_4bit_use_double_quant=True,
+        bnb_4bit_compute_dtype=torch.bfloat16,
+    )
+    model = AutoModelForCausalLM.from_pretrained(
+        args.base_model, local_files_only=True, trust_remote_code=True,
+        device_map="cuda", dtype=torch.bfloat16, quantization_config=bnb,
+        attn_implementation="sdpa",
+    )
+    model = prepare_model_for_kbit_training(model, use_gradient_checkpointing=True)
+    model = get_peft_model(
+        model,
+        LoraConfig(
+            r=int(cfg["rank"]), lora_alpha=int(cfg["alpha"]), lora_dropout=0.05,
+            bias="none", task_type="CAUSAL_LM", target_modules=TARGET_MODULES,
+        ),
+    )
+    model.config.use_cache = False
+    trainable = [parameter for parameter in model.parameters() if parameter.requires_grad]
+    optimizer = torch.optim.AdamW(trainable, lr=float(cfg["learning_rate"]))
+    optimizer.zero_grad(set_to_none=True)
+    logs = []
+    started = time.perf_counter()
+    token_ledger = {"forward_input_tokens": 0, "distilled_positions": 0}
+    model.train()
+    for micro_step, unit in enumerate(units, 1):
+        sample = unit["sample"]
+        positions = unit["positions"]
+        end = max(positions) + 1
+        prompt = sample["prompt_ids"].to(dtype=torch.long).tolist()
+        completion = sample["completion_ids"].to(dtype=torch.long).tolist()[:end]
+        ids = torch.tensor([prompt + completion], dtype=torch.long, device=model.device)
+        outputs = model(
+            input_ids=ids, attention_mask=torch.ones_like(ids),
+            logits_to_keep=end + 1, use_cache=False,
+        )
+        prediction = outputs.logits[0, -(end + 1):-1]
+        pos = torch.tensor(positions, dtype=torch.long, device=model.device)
+        selected_logits = prediction.index_select(0, pos)
+        teacher_indices = sample["teacher_indices"].index_select(
+            0, torch.tensor(positions, dtype=torch.long)
+        )
+        teacher_log_probs = sample["teacher_log_probs"].index_select(
+            0, torch.tensor(positions, dtype=torch.long)
+        )
+        loss = sparse_teacher_topk_reverse_kl(
+            selected_logits, teacher_indices, teacher_log_probs, reduction="mean"
+        )
+        if not torch.isfinite(loss):
+            raise RuntimeError(f"non-finite MOPD loss at micro-step {micro_step}")
+        (loss / grad_accum).backward()
+        token_ledger["forward_input_tokens"] += ids.shape[1]
+        token_ledger["distilled_positions"] += len(positions)
+        row = {
+            "micro_step": micro_step, "sample_id": sample["id"],
+            "stratum": sample["meta"]["stratum"], "chunk": unit["chunk"],
+            "positions": len(positions), "loss": float(loss.detach().cpu()),
+        }
+        if micro_step % grad_accum == 0:
+            grad_norm = float(
+                torch.nn.utils.clip_grad_norm_(trainable, float(cfg["max_grad_norm"])).detach().cpu()
+            )
+            optimizer.step()
+            optimizer.zero_grad(set_to_none=True)
+            row["optimizer_step"] = micro_step // grad_accum
+            row["grad_norm"] = grad_norm
+            print(json.dumps(row, sort_keys=True), flush=True)
+        logs.append(row)
+
+    mean_loss = sum(row["loss"] for row in logs) / len(logs)
+    if mean_loss > float(cfg["maximum_round_mean_kl"]):
+        raise SystemExit(
+            f"round mean corrected top-k loss {mean_loss:.6f} exceeds "
+            f"{cfg['maximum_round_mean_kl']}"
+        )
+    args.out.mkdir(parents=True, exist_ok=True)
+    model.save_pretrained(args.out)
+    tokenizer.save_pretrained(args.out)
+    receipt = {
+        "method": "on_policy_mopd_round",
+        "round": args.round,
+        "base_model": str(args.base_model.resolve()),
+        "base_config_sha256": sha256_file(args.base_model / "config.json"),
+        "teacher_cache": str(args.teacher_cache.resolve()),
+        "teacher_cache_sha256": sha256_file(args.teacher_cache),
+        "routing": payload["routing"],
+        "config": str(config_path), "config_sha256": sha256_file(config_path),
+        "seed": args.seed, "smoke": bool(args.smoke),
+        "optimizer_steps": updates, "micro_steps": len(units),
+        "quick_units": sum(unit["sample"]["meta"]["stratum"] == "quick" for unit in units),
+        "deep_units": sum(unit["sample"]["meta"]["stratum"] == "deep" for unit in units),
+        "unique_rollouts": len({unit["sample"]["id"] for unit in units}),
+        "mean_corrected_topk_loss": mean_loss,
+        "token_ledger": token_ledger,
+        "wall_seconds": time.perf_counter() - started,
+        "gpu": torch.cuda.get_device_name(0),
+        "peak_cuda_bytes": torch.cuda.max_memory_allocated(),
+        "hyperparameters": {
+            key: cfg[key] for key in (
+                "top_k", "learning_rate", "rank", "alpha", "grad_accum",
+                "max_length", "max_grad_norm", "retention_fraction",
+                "maximum_round_mean_kl",
+            )
+        },
+        "logs": logs,
+    }
+    (args.out / "training_receipt.json").write_text(
+        json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
+    print(json.dumps({key: value for key, value in receipt.items() if key != "logs"}, indent=2))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

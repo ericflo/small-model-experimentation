@@ -75,3 +75,41 @@ def full_reverse_kl(
     if reduction == "mean":
         return per_position.mean()
     raise ValueError("reduction must be one of: none, mean, sum")
+
+
+def sparse_teacher_topk_reverse_kl(
+    student_logits: torch.Tensor,
+    teacher_indices: torch.Tensor,
+    teacher_log_probs: torch.Tensor,
+    *,
+    reduction: str = "mean",
+) -> torch.Tensor:
+    """Corrected MOPD objective using cached, full-softmax teacher top-k data."""
+    if student_logits.ndim < 2:
+        raise ValueError("student logits must include position and vocabulary axes")
+    if teacher_indices.shape != teacher_log_probs.shape:
+        raise ValueError("teacher index/log-prob shape mismatch")
+    if student_logits.shape[:-1] != teacher_indices.shape[:-1]:
+        raise ValueError("student/teacher position shape mismatch")
+    if teacher_indices.dtype not in (torch.int32, torch.int64):
+        raise ValueError("teacher indices must be integer tensors")
+    if reduction not in {"none", "mean", "sum"}:
+        raise ValueError("reduction must be one of: none, mean, sum")
+    student_log_probs = torch.log_softmax(student_logits.float(), dim=-1)
+    indices = teacher_indices.to(device=student_logits.device, dtype=torch.long)
+    teacher_selected_log = teacher_log_probs.to(
+        device=student_logits.device, dtype=torch.float32
+    ).detach()
+    student_selected_log = student_log_probs.gather(-1, indices)
+    student_selected = student_selected_log.exp()
+    teacher_selected = teacher_selected_log.exp()
+    per_position = (
+        student_selected * (student_selected_log - teacher_selected_log)
+        - student_selected
+        + teacher_selected
+    ).sum(dim=-1)
+    if reduction == "none":
+        return per_position
+    if reduction == "sum":
+        return per_position.sum()
+    return per_position.mean()

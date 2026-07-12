@@ -332,6 +332,64 @@ def _qualify(config: dict, config_path: Path) -> None:
     _require_gate(EXP / "analysis" / "specialist_qualification.json")
 
 
+def _teacher_audit(config: dict, config_path: Path) -> None:
+    _require_gate(EXP / "analysis" / "specialist_qualification.json")
+    paths = _paths(config)
+    root = EXP / "runs" / "teacher_audit"
+    input_path = root / "prefixes.jsonl"
+    items_path = root / "items.jsonl"
+    quick_output = root / "quick.jsonl"
+    deep_output = root / "deep.jsonl"
+    if not input_path.exists() or not items_path.exists():
+        root.mkdir(parents=True, exist_ok=True)
+        _run(
+            [
+                str(PY), str(EXP / "scripts" / "build_teacher_audit.py"),
+                "--config", str(config_path),
+                "--atom-rows", str(
+                    EXP / "runs" / "policy_eval" / "quick_qualification_b0" / "atom_rows.jsonl.gz"
+                ),
+                "--input-out", str(input_path), "--items-out", str(items_path),
+            ]
+        )
+    remaining_budget = int(config["evaluation"]["thinking_budget"]) - 128
+    common = [
+        "--input", str(input_path), "--thinking", "budget",
+        "--thinking-budget", str(remaining_budget),
+        "--answer-max-tokens", str(config["evaluation"]["answer_max_tokens"]),
+        "--greedy", "--allow-custom-prompts", "--include-prompt-token-ids",
+        "--max-model-len", str(config["engine"]["max_model_len"]),
+        "--gpu-memory-utilization", str(config["engine"]["gpu_memory_utilization"]),
+        "--max-num-seqs", str(config["engine"]["max_num_seqs"]),
+        "--max-num-batched-tokens", str(config["engine"]["max_num_batched_tokens"]),
+    ]
+    for size in config["engine"]["cudagraph_capture_sizes"]:
+        common.extend(("--cudagraph-capture-size", str(size)))
+    for model, output in ((paths["quick"], quick_output), (paths["deep"], deep_output)):
+        metadata = output.with_name(output.name + ".meta.json")
+        if output.exists() and metadata.exists():
+            payload = json.loads(metadata.read_text())
+            if payload.get("model") == str(model.resolve()):
+                print(f"[resume] teacher audit output {output.name} already complete", flush=True)
+                continue
+            raise SystemExit(f"stale teacher audit output: {output}")
+        _run(
+            [
+                str(VLLM_PY), str(EXP / "src" / "vllm_runner.py"),
+                "--output", str(output), "--model-override", str(model), *common,
+            ]
+        )
+    _run(
+        [
+            str(PY), str(EXP / "scripts" / "analyze_teacher_audit.py"),
+            "--config", str(config_path), "--items", str(items_path),
+            "--quick-output", str(quick_output), "--deep-output", str(deep_output),
+        ],
+        allowed=(0, 4),
+    )
+    _require_gate(EXP / "analysis" / "teacher_audit.json")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, default=EXP / "configs" / "default.yaml")
@@ -358,6 +416,9 @@ def main() -> int:
         return 0
     if stage == "qualify":
         _qualify(config, config_path)
+        return 0
+    if stage == "teacher-audit":
+        _teacher_audit(config, config_path)
         return 0
     raise SystemExit(f"stage {stage!r} is registered but not implemented yet")
 
