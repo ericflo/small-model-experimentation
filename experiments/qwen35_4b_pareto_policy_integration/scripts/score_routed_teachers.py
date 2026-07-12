@@ -67,7 +67,10 @@ def _score_subset(model_path: Path, rows: list[dict], top_k: int, max_length: in
                 "completion_ids": torch.tensor(completion, dtype=torch.int32),
                 "policy_mask": mask,
                 "teacher_indices": indices.to(device="cpu", dtype=torch.int32),
-                "teacher_log_probs": values.to(device="cpu", dtype=torch.float16),
+                # Preserve the full-softmax values used by the corrected loss;
+                # fp16 log-prob rounding is avoidable noise when the effect of
+                # interest may itself be small.
+                "teacher_log_probs": values.to(device="cpu", dtype=torch.float32),
                 "teacher": str(model_path.resolve()),
                 "forced_close": bool(output.get("forced_close")),
             })
@@ -173,6 +176,7 @@ def main() -> int:
         "rollouts": str(args.rollouts.resolve()),
         "rollouts_sha256": sha256_file(args.rollouts),
         "top_k": int(config["mopd"]["top_k"]),
+        "teacher_log_prob_dtype": "float32",
         "teachers": {
             stratum: {
                 "path": str(path),

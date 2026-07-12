@@ -37,6 +37,9 @@ policy choices that data union and parameter interpolation lose.
   regression is not. They never veto another teacher or integration.
 - The final one-checkpoint system—not each teacher—must beat matched-compute
   sampling.
+- Integration seed 42 (the first frozen seed) is the deployable primary;
+  seeds 43 and 44 are directional replications, never a checkpoint-selection
+  pool.
 
 Exact frozen rules are in [reports/preregistration.md](reports/preregistration.md),
 with adversarial review in [reports/design_review.md](reports/design_review.md).

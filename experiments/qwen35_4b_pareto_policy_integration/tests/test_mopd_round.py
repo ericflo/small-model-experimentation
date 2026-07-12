@@ -10,7 +10,7 @@ import torch
 EXP = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(EXP / "scripts"))
 
-from train_mopd_round import _training_units  # noqa: E402
+from train_mopd_round import _matched_loss_scale, _training_units  # noqa: E402
 from score_routed_teachers import _flatten_candidates  # noqa: E402
 
 
@@ -23,6 +23,15 @@ def sample(index: int, stratum: str) -> dict:
 
 
 class MopdRoundTests(unittest.TestCase):
+    def test_control_loss_scale_matches_primary_initial_pressure(self):
+        self.assertAlmostEqual(_matched_loss_scale(0.2, 0.05), 0.25)
+        self.assertEqual(_matched_loss_scale(0.2, None), 1.0)
+        for invalid in (0.0, -0.1, float("inf")):
+            with self.assertRaises(ValueError):
+                _matched_loss_scale(invalid, 0.1)
+            with self.assertRaises(ValueError):
+                _matched_loss_scale(0.1, invalid)
+
     def test_multiple_samples_become_distinct_rollouts(self):
         rows = [{
             "id": "prompt-1", "meta": {"stratum": "deep"},

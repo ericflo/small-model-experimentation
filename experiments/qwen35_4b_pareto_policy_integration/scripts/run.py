@@ -547,6 +547,7 @@ def _mopd_round(
             or receipt.get("routing") != routing
             or int(receipt.get("selection_seed", -1)) != selection_seed
             or int(receipt.get("optimizer_updates", -1)) != optimizer_updates
+            or receipt.get("teacher_log_prob_dtype") != "float32"
         ):
             raise SystemExit(f"stale teacher cache: {cache}")
         print(f"[resume] MOPD {arm} round {round_index} teacher cache", flush=True)

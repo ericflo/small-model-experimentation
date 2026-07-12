@@ -85,6 +85,19 @@ def _unit_loss(model, unit: dict) -> tuple[torch.Tensor, int, int]:
     return loss, int(ids.shape[1]), len(positions)
 
 
+def _matched_loss_scale(initial_loss: float, target_loss: float | None) -> float:
+    if not math.isfinite(initial_loss) or initial_loss <= 0.0:
+        raise ValueError(f"initial loss must be finite and positive, got {initial_loss}")
+    if target_loss is None:
+        return 1.0
+    if not math.isfinite(target_loss) or target_loss <= 0.0:
+        raise ValueError(f"target loss must be finite and positive, got {target_loss}")
+    scale = target_loss / initial_loss
+    if not math.isfinite(scale) or scale <= 0.0:
+        raise ValueError(f"invalid matched loss scale: {scale}")
+    return scale
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path)
@@ -166,16 +179,7 @@ def main() -> int:
             float(_unit_loss(model, unit)[0].detach().cpu()) for unit in probe_units
         ]
     initial_probe_loss = sum(initial_probe_losses) / len(initial_probe_losses)
-    if not math.isfinite(initial_probe_loss) or initial_probe_loss <= 0.0:
-        raise RuntimeError(f"invalid initial MOPD probe loss: {initial_probe_loss}")
-    if args.target_initial_loss is not None:
-        if not math.isfinite(args.target_initial_loss) or args.target_initial_loss <= 0.0:
-            raise SystemExit("target initial loss must be finite and positive")
-        loss_scale = args.target_initial_loss / initial_probe_loss
-    else:
-        loss_scale = 1.0
-    if not math.isfinite(loss_scale) or loss_scale <= 0.0:
-        raise RuntimeError(f"invalid MOPD loss scale: {loss_scale}")
+    loss_scale = _matched_loss_scale(initial_probe_loss, args.target_initial_loss)
     print(json.dumps({
         "initial_probe_loss": initial_probe_loss,
         "target_initial_loss": args.target_initial_loss,

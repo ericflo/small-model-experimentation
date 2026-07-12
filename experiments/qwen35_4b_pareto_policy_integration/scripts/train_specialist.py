@@ -247,6 +247,16 @@ def main():
         "seed": args.seed,
         "max_steps": args.max_steps,
         "warm_start": str(args.warm_start.resolve()) if args.warm_start else None,
+        "warm_start_receipt": (
+            {
+                "path": str(args.warm_start.resolve()),
+                "adapter_config_sha256": digest(args.warm_start / "adapter_config.json"),
+                "adapter_weights_sha256": digest(
+                    args.warm_start / "adapter_model.safetensors"
+                ),
+            }
+            if args.warm_start else None
+        ),
         "smoke": bool(args.smoke),
         "train_loss": float(result.training_loss),
         "global_step": int(result.global_step),
