@@ -1,0 +1,42 @@
+{
+  "block": "transfer_confirm",
+  "checks": {
+    "answer_cap": true,
+    "failed_absolute": true,
+    "failed_delta": true,
+    "family_count": true,
+    "family_regression": true,
+    "invalid_action": true,
+    "normal_commit_absolute": true,
+    "normal_commit_delta": true,
+    "normal_success": true,
+    "normal_verified_absolute": true,
+    "normal_verified_delta": true,
+    "recovery_vs_action": true,
+    "recovery_vs_base": true,
+    "recovery_vs_happy": true,
+    "recovery_vs_sample_more": true,
+    "recovery_vs_scaffold": true,
+    "rejected_absolute": true,
+    "rejected_delta": true
+  },
+  "control_answer_cap_hit_rate": {
+    "action": 0.07228915662650602,
+    "base": 0.29023746701846964,
+    "happy": 0.16666666666666666,
+    "sample_more": 0.1419491525423729,
+    "scaffold": 0.2903225806451613
+  },
+  "control_success": {
+    "action": 0.6875,
+    "base": 0.6,
+    "happy": 0.5625,
+    "sample_more": 0.4625,
+    "scaffold": 0.6375
+  },
+  "gate": {
+    "passed": true
+  },
+  "schema_version": 1,
+  "task_manifest_sha256": "ad6f5dd2dc1fc2865a1a6622eb383842e0de360e9d66f13987a3668613a1048d"
+}

@@ -1,0 +1,138 @@
+{
+  "candidate_arm": "candidate",
+  "candidate_normal_metrics": {
+    "commit_given_verified": 1.0,
+    "invalid_action_rate_per_turn": 0.0,
+    "submit_rate": 1.0,
+    "success": 0.25,
+    "verified_given_success": 1.0
+  },
+  "candidate_recovery_metrics": {
+    "answer_cap_hit_rate_per_turn": 0.07868852459016394,
+    "commit_given_verified": 0.9615384615384616,
+    "invalid_action_rate_per_turn": 0.013114754098360656,
+    "invalid_answer_cap_hit_fraction": 1.0,
+    "submit_rate": 0.8625,
+    "success": 0.6875,
+    "verified_given_success": 0.9454545454545454
+  },
+  "checks": {
+    "answer_cap_retention": true,
+    "bootstrap_vs_base": true,
+    "bootstrap_vs_sample_more": true,
+    "failed_test_transition_absolute": true,
+    "failed_test_transition_delta": true,
+    "family_max_regression": true,
+    "family_nonnegative_count": true,
+    "invalid_action_retention": true,
+    "locality": true,
+    "normal_commit_absolute": true,
+    "normal_commit_retention": true,
+    "normal_success_retention": true,
+    "normal_verification_absolute": true,
+    "normal_verification_retention": true,
+    "recovery_vs_action": false,
+    "recovery_vs_base": true,
+    "recovery_vs_happy": true,
+    "recovery_vs_sample_more": true,
+    "recovery_vs_scaffold": true,
+    "rejected_patch_transition_absolute": true,
+    "rejected_patch_transition_delta": true
+  },
+  "contrasts": {
+    "action": {
+      "ci95": [
+        -0.1,
+        0.1
+      ],
+      "delta": 0.0,
+      "left_only": 8,
+      "n": 80,
+      "right_only": 8,
+      "ties": 64
+    },
+    "base": {
+      "ci95": [
+        0.0,
+        0.175
+      ],
+      "delta": 0.0875,
+      "left_only": 11,
+      "n": 80,
+      "right_only": 4,
+      "ties": 65
+    },
+    "happy": {
+      "ci95": [
+        0.025,
+        0.2375
+      ],
+      "delta": 0.125,
+      "left_only": 15,
+      "n": 80,
+      "right_only": 5,
+      "ties": 60
+    },
+    "sample_more": {
+      "ci95": [
+        0.0875,
+        0.3625
+      ],
+      "delta": 0.225,
+      "left_only": 26,
+      "n": 80,
+      "right_only": 8,
+      "ties": 46
+    },
+    "scaffold": {
+      "ci95": [
+        -0.075,
+        0.1625
+      ],
+      "delta": 0.05,
+      "left_only": 14,
+      "n": 80,
+      "right_only": 10,
+      "ties": 56
+    }
+  },
+  "downstream_authorization": "stop_before_next_stage_and_menagerie",
+  "family_deltas_vs_base": {
+    "lease_cache": 0.05,
+    "pattern_router": 0.2,
+    "quorum_value": 0.05,
+    "rate_buckets": 0.05
+  },
+  "gate": {
+    "passed": false
+  },
+  "locality": {
+    "ceiling": 0.15,
+    "mean_entropy_delta": -0.005875012992570788,
+    "mean_varentropy_delta": -0.01045091263949871,
+    "median_non_target_centered_logit_drift": 0.11405938863754272,
+    "passed": true
+  },
+  "normal_contrast": {
+    "ci95": [
+      0.0,
+      0.0
+    ],
+    "delta": 0.0,
+    "left_only": 0,
+    "n": 40,
+    "right_only": 0,
+    "ties": 40
+  },
+  "schema_version": 1,
+  "stage": "transfer_confirm",
+  "transition_metrics": {
+    "answer_cap_hit_delta_vs_base": -0.2115489424283057,
+    "failed_test_changed_patch_within_two_base": 0.55,
+    "failed_test_changed_patch_within_two_candidate": 1.0,
+    "invalid_action_improvement_vs_action": -0.013114754098360656,
+    "rejected_patch_action": 1.0,
+    "rejected_patch_base": 0.525,
+    "rejected_patch_candidate": 1.0
+  }
+}

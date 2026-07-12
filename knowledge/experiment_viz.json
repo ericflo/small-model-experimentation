@@ -45341,56 +45341,109 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "The predecessor stop isolates payload truncation and a timing-proxy mismatch",
+     "title": "Recovery transfers, but confirmation ties the action-only incumbent",
      "categories": [
-      "rejected changed immediately",
-      "rejected changed within 2",
-      "invalid steps at answer cap"
+      "base",
+      "happy actions",
+      "action only",
+      "matched sampling",
+      "runtime scaffold",
+      "reason mix .18"
      ],
      "series": [
       {
-       "label": "share at lambda .18",
+       "label": "transfer development",
        "values": [
-        0.3333333333333333,
-        1.0,
-        1.0
-       ]
-      }
-     ],
-     "x_label": "predecessor diagnostic",
-     "y_label": "share of relevant cases or steps",
-     "y_format": "percent01",
-     "note": "Pre-run design evidence: all rejected cases changed code within two turns and solved, while every invalid response ended exactly at the 256-token answer cap. These frozen facts determine the new harness and transition metric.",
-     "source": "experiments/qwen35_4b_recovery_reason_locality_interpolation/reports/result_receipt.json"
-    },
-    {
-     "kind": "bar",
-     "title": "Every arm receives the same larger tool-answer allocation",
-     "categories": [
-      "predecessor per call",
-      "payload harness per call"
-     ],
-     "series": [
-      {
-       "label": "thinking tokens",
-       "values": [
-        512,
-        512
+        0.5875,
+        0.6125,
+        0.6625,
+        0.5,
+        0.6625,
+        0.7125
        ]
       },
       {
-       "label": "answer tokens",
+       "label": "transfer confirmation",
        "values": [
-        256,
-        512
+        0.6,
+        0.5625,
+        0.6875,
+        0.4625,
+        0.6375,
+        0.6875
        ]
       }
      ],
-     "x_label": "harness",
-     "y_label": "maximum tokens per model call",
-     "y_format": "integer",
-     "note": "Pre-run design chart. Thinking is held fixed so the test isolates tool-payload capacity; candidate, base, trained controls, scaffold, and sample-more all receive the new 512/512 split.",
-     "source": "experiments/qwen35_4b_recovery_payload_budget_harness/configs/default.yaml"
+     "x_label": "frozen model or matched control",
+     "y_label": "hidden-test recovery success",
+     "y_format": "percent01",
+     "note": "The reason mixture passes every development gate at 71.25%, but independently confirms at 68.75%, exactly tied with action-only instead of clearing the frozen +3-point margin. Menagerie remained sealed.",
+     "source": "experiments/qwen35_4b_recovery_payload_budget_harness/reports/result_receipt.json"
+    },
+    {
+     "kind": "bar",
+     "title": "The two local policies have the same replicated oracle union",
+     "categories": [
+      "transfer development",
+      "transfer confirmation"
+     ],
+     "series": [
+      {
+       "label": "reason mix .18",
+       "values": [
+        0.7125,
+        0.6875
+       ]
+      },
+      {
+       "label": "action only",
+       "values": [
+        0.6625,
+        0.6875
+       ]
+      },
+      {
+       "label": "hidden-success union",
+       "values": [
+        0.7875,
+        0.7875
+       ]
+      }
+     ],
+     "x_label": "independent held-out block",
+     "y_label": "hidden-test recovery success",
+     "y_format": "percent01",
+     "note": "The union uses hidden outcomes only and is therefore an oracle diagnostic, not a deployable ensemble. Its exact replication at 78.75% motivates a new public-verifier branch-selection test.",
+     "source": "experiments/qwen35_4b_recovery_payload_budget_harness/reports/result_receipt.json"
+    },
+    {
+     "kind": "bar",
+     "title": "The larger payload removes most candidate truncation",
+     "categories": [
+      "transfer development",
+      "transfer confirmation"
+     ],
+     "series": [
+      {
+       "label": "base answer-cap hits per turn",
+       "values": [
+        0.31266149870801035,
+        0.29023746701846964
+       ]
+      },
+      {
+       "label": "reason mix answer-cap hits per turn",
+       "values": [
+        0.078125,
+        0.07868852459016394
+       ]
+      }
+     ],
+     "x_label": "independent held-out block",
+     "y_label": "answer-cap hit rate per generated turn",
+     "y_format": "percent01",
+     "note": "All arms receive 512 answer tokens. The candidate cuts cap hits by roughly 21–23 points versus base, confirming that the old 256-token JSON slot was a real interface bottleneck.",
+     "source": "experiments/qwen35_4b_recovery_payload_budget_harness/reports/result_receipt.json"
     }
    ]
   },

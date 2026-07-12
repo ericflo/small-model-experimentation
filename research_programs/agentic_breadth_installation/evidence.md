@@ -252,3 +252,32 @@ this labeler. A new deep-only routed-MOPD experiment is the shortest test of
 the update kernel. Reintroducing quick requires cross-fitted direct advantage
 prediction and a third untouched block; otherwise retire it rather than tune a
 margin. This result is not evidence against MOPD.
+
+## qwen35_4b_recovery_payload_budget_harness (2026-07-12 — Confirm-gated negative)
+
+The matched interface repair validated the predecessor's post-stop diagnosis.
+The fixed locality-safe λ=.18 checkpoint passed a third disjoint locality block
+(0.114 centered-logit drift; entropy Δ −0.0059), while a 512-token answer slot
+reduced candidate cap hits to 0.5%/7.8%/7.9% of turns across
+calibration/dev/confirm. Valid rejected-patch and failed-test change-within-two
+reached 100% on both transfer blocks. The old invalid-action and
+immediate-transition stops were therefore harness/proxy failures.
+
+The candidate passed every development gate at 0.7125 recovery, +0.125 versus
+base and +0.2125 versus equal-reservation sample-more, with exact normal-task
+retention. Independent confirmation stopped the claim: candidate and
+action-only both scored 0.6875, missing the frozen candidate ≥ action +0.03
+bar. All other confirm checks passed, including +0.0875 versus base, +0.225
+versus sample-more, nonnegative deltas on all four held-out families, perfect
+two-turn recovery, locality, and exact normal retention. Menagerie remained
+sealed.
+
+Paired forensics locate a new deployable opportunity. Candidate and action-only
+had a 0.7875 hidden-success union on both dev and confirm, with 10/6 and 8/8
+exclusive wins. Confirmation action-only wins clustered in `pattern_router`
+rejected-patch states while candidate wins clustered in `rate_buckets`; neither
+global policy dominates. Hidden union is oracle-only. The warranted successor
+is bounded public-verifier branching between the two local policies, compared
+to equal-compute sampling, followed only conditionally by transition-balanced
+winner banking. Do not tune another scalar reason dose or route on family
+identity.

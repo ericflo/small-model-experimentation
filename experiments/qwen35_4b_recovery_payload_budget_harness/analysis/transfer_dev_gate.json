@@ -1,0 +1,138 @@
+{
+  "candidate_arm": "candidate",
+  "candidate_normal_metrics": {
+    "commit_given_verified": 1.0,
+    "invalid_action_rate_per_turn": 0.0,
+    "submit_rate": 1.0,
+    "success": 0.25,
+    "verified_given_success": 1.0
+  },
+  "candidate_recovery_metrics": {
+    "answer_cap_hit_rate_per_turn": 0.078125,
+    "commit_given_verified": 1.0,
+    "invalid_action_rate_per_turn": 0.009375,
+    "invalid_answer_cap_hit_fraction": 1.0,
+    "submit_rate": 0.8625,
+    "success": 0.7125,
+    "verified_given_success": 0.9298245614035088
+  },
+  "checks": {
+    "answer_cap_retention": true,
+    "bootstrap_vs_base": true,
+    "bootstrap_vs_sample_more": true,
+    "failed_test_transition_absolute": true,
+    "failed_test_transition_delta": true,
+    "family_max_regression": true,
+    "family_nonnegative_count": true,
+    "invalid_action_retention": true,
+    "locality": true,
+    "normal_commit_absolute": true,
+    "normal_commit_retention": true,
+    "normal_success_retention": true,
+    "normal_verification_absolute": true,
+    "normal_verification_retention": true,
+    "recovery_vs_action": true,
+    "recovery_vs_base": true,
+    "recovery_vs_happy": true,
+    "recovery_vs_sample_more": true,
+    "recovery_vs_scaffold": true,
+    "rejected_patch_transition_absolute": true,
+    "rejected_patch_transition_delta": true
+  },
+  "contrasts": {
+    "action": {
+      "ci95": [
+        -0.05,
+        0.15
+      ],
+      "delta": 0.05,
+      "left_only": 10,
+      "n": 80,
+      "right_only": 6,
+      "ties": 64
+    },
+    "base": {
+      "ci95": [
+        0.0375,
+        0.225
+      ],
+      "delta": 0.125,
+      "left_only": 13,
+      "n": 80,
+      "right_only": 3,
+      "ties": 64
+    },
+    "happy": {
+      "ci95": [
+        -0.0125,
+        0.2125
+      ],
+      "delta": 0.1,
+      "left_only": 15,
+      "n": 80,
+      "right_only": 7,
+      "ties": 58
+    },
+    "sample_more": {
+      "ci95": [
+        0.0875,
+        0.3375
+      ],
+      "delta": 0.2125,
+      "left_only": 24,
+      "n": 80,
+      "right_only": 7,
+      "ties": 49
+    },
+    "scaffold": {
+      "ci95": [
+        -0.0375,
+        0.1375
+      ],
+      "delta": 0.05,
+      "left_only": 9,
+      "n": 80,
+      "right_only": 5,
+      "ties": 66
+    }
+  },
+  "downstream_authorization": "run_next_stage",
+  "family_deltas_vs_base": {
+    "lease_cache": 0.0,
+    "pattern_router": 0.15,
+    "quorum_value": 0.05,
+    "rate_buckets": 0.3
+  },
+  "gate": {
+    "passed": true
+  },
+  "locality": {
+    "ceiling": 0.15,
+    "mean_entropy_delta": -0.005875012992570788,
+    "mean_varentropy_delta": -0.01045091263949871,
+    "median_non_target_centered_logit_drift": 0.11405938863754272,
+    "passed": true
+  },
+  "normal_contrast": {
+    "ci95": [
+      0.0,
+      0.0
+    ],
+    "delta": 0.0,
+    "left_only": 0,
+    "n": 40,
+    "right_only": 0,
+    "ties": 40
+  },
+  "schema_version": 1,
+  "stage": "transfer_dev",
+  "transition_metrics": {
+    "answer_cap_hit_delta_vs_base": -0.23453649870801035,
+    "failed_test_changed_patch_within_two_base": 0.475,
+    "failed_test_changed_patch_within_two_candidate": 1.0,
+    "invalid_action_improvement_vs_action": -0.006107026143790849,
+    "rejected_patch_action": 1.0,
+    "rejected_patch_base": 0.625,
+    "rejected_patch_candidate": 1.0
+  }
+}

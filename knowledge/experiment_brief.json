@@ -5242,35 +5242,54 @@
    ]
   },
   "qwen35_4b_recovery_payload_budget_harness": {
-   "verdict_tag": "Was a cramped answer box hiding the fix",
-   "concept_primer": "Picture a skilled mechanic forced to write every repair on a tiny form. When the fix runs long, the sentence gets cut off mid-word and rejected. This test doubles the form's size to see whether the skill was there all along.",
-   "plain_question": "When a small coding model kept failing to fix rejected edits, was the real cause just that its reply space was too short to finish writing the fix?",
-   "plain_answer": "Not run yet — this sets up the deciding test. The model that reruns is untouched; only its reply space is doubled, and the same larger space is given to every comparison version so no one gets a compute advantage. If the model then fixes rejected code on brand-new, unfamiliar problem types while others cannot, the cramped output space was the real bottleneck. If it still fails, the skill was never there.",
-   "why_it_matters": "Before concluding a small model can't do a task, check whether your output length limit is truncating its structured tool responses. A cut-off patch looks like incompetence but may just be a clipped answer.",
-   "verdict_tone": "neutral",
+   "verdict_tag": "Recovery gain did not beat its incumbent",
+   "concept_primer": "Two coding policies can resemble two mechanics who fix different failures. A fair test must show that one consistently outperforms the other, not merely that their strengths differ.",
+   "plain_question": "Does giving tool commands enough room turn the reason-enhanced recovery model into a consistently stronger coding agent?",
+   "plain_answer": "No. It led on the first unseen task block at 71%, but confirmed at 69%, exactly tied with the action-only model and short of the required lead. The external benchmark stayed sealed.",
+   "why_it_matters": "The larger command slot fixed a real interface problem, but changing one global model cannot combine both policies' strengths. The next test should fork both and let visible test evidence choose.",
+   "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Familiar recovery cases the model already solved",
-     "value": "58 of 60",
-     "sub": "success on the training-family checkpoint before this test"
+     "label": "Development recovery",
+     "value": "71%",
+     "sub": "reason-enhanced model passed every early gate"
     },
     {
-     "label": "Failed attempts that ran out of writing room",
-     "value": "all 24",
-     "sub": "every invalid action hit the old 256-token answer ceiling"
+     "label": "Confirmation recovery",
+     "value": "69% = 69%",
+     "sub": "reason-enhanced and action-only models tied"
     },
     {
-     "label": "Rejected edits corrected within two tries",
-     "value": "30 of 30",
-     "sub": "evidence the fix-it behavior is present, just clipped"
+     "label": "Combined ceiling",
+     "value": "79%",
+     "sub": "either local policy succeeded on both fresh blocks"
     },
     {
-     "label": "Reply space per answer",
-     "value": "doubled",
-     "sub": "raised from 256 to 512 tokens, matched across all versions"
+     "label": "Benchmark exposure",
+     "value": "0",
+     "sub": "stopped before external tasks"
     }
    ],
-   "charts": []
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "The early lead disappears on confirmation",
+     "chart_read": "Each model or control is grouped along the horizontal axis, with recovery success vertically; taller is better. The two colors compare development with independent confirmation.",
+     "chart_takeaway": "The reason-enhanced bar leads during development but exactly matches action-only on confirmation, so it fails the required incumbent win."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "The two policies solve different cases",
+     "chart_read": "The horizontal groups are the two unseen blocks, and bar height is recovery success. The third bar counts cases solved by either policy and is only a diagnostic ceiling.",
+     "chart_takeaway": "The combined bar repeats at 79% on both blocks, showing stable complementary strengths that a visible test selector might exploit."
+    },
+    {
+     "index": 2,
+     "chart_plain_title": "More answer room sharply reduces cut-off commands",
+     "chart_read": "Each group is an unseen task block; bar height is the share of generated turns that hit the answer limit, where lower is better. Colors compare base with the reason-enhanced policy.",
+     "chart_takeaway": "The reason-enhanced bars stay near 8% while base stays near 30%, confirming that command truncation was a real interface bottleneck."
+    }
+   ]
   },
   "qwen35_4b_recovery_reason_locality_interpolation": {
    "verdict_tag": "Safe blend beat both parents, gates stopped it",

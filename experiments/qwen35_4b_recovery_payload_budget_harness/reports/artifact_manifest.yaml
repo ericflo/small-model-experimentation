@@ -10,7 +10,7 @@ external_artifacts:
   - name: detailed payload-harness evaluations
     storage: large_artifacts/qwen35_4b_recovery_payload_budget_harness
     required_for: calibration, transfer, and reproduction
-    checksum: pending result receipt
+    checksum: per-file SHA-256 values in reports/result_receipt.json
     regenerate: .venv/bin/python experiments/qwen35_4b_recovery_payload_budget_harness/scripts/run.py --full
 
 omitted_artifacts:
@@ -29,4 +29,5 @@ reproducibility:
 
 notes: >-
   No weights are trained or merged in this experiment. Menagerie artifacts are
-  absent unless every white-box gate passes.
+  absent because transfer confirmation failed the action-only contrast. The
+  compact receipt commits hashes for every detailed evaluation and analysis.

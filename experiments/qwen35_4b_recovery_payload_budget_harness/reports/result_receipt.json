@@ -1,0 +1,1239 @@
+{
+  "candidate_action_complementarity": {
+    "transfer_confirm": {
+      "action_only": 8,
+      "both_fail": 17,
+      "both_success": 47,
+      "candidate_only": 8,
+      "n": 80,
+      "union_success": 0.7875,
+      "winner_cells": {
+        "action|pattern_router|rejected_patch": 7,
+        "action|rate_buckets|failed_test": 1,
+        "candidate|pattern_router|failed_test": 1,
+        "candidate|pattern_router|rejected_patch": 2,
+        "candidate|rate_buckets|failed_test": 1,
+        "candidate|rate_buckets|rejected_patch": 4
+      }
+    },
+    "transfer_dev": {
+      "action_only": 6,
+      "both_fail": 17,
+      "both_success": 47,
+      "candidate_only": 10,
+      "n": 80,
+      "union_success": 0.7875,
+      "winner_cells": {
+        "action|pattern_router|rejected_patch": 3,
+        "action|rate_buckets|failed_test": 3,
+        "candidate|pattern_router|failed_test": 3,
+        "candidate|pattern_router|rejected_patch": 1,
+        "candidate|rate_buckets|failed_test": 3,
+        "candidate|rate_buckets|rejected_patch": 3
+      }
+    }
+  },
+  "evaluations": {
+    "calibration/recovery/action_deep": {
+      "answer_cap_hit_rate_per_turn": 0.058823529411764705,
+      "commit_given_verified": 1.0,
+      "failed_test_changed_patch_within_two": 1.0,
+      "failed_test_success": 0.9666666666666667,
+      "invalid_action_rate_per_turn": 0.004201680672268907,
+      "mean_sampled_tokens": 1365.4,
+      "mean_turns": 3.966666666666667,
+      "rejected_patch_success": 0.9666666666666667,
+      "rejected_patch_valid_changed_within_two": 1.0,
+      "submit_rate": 0.9166666666666666,
+      "success": 0.9666666666666667,
+      "verified_given_success": 0.9482758620689655
+    },
+    "calibration/recovery/base_deep": {
+      "answer_cap_hit_rate_per_turn": 0.3102409638554217,
+      "commit_given_verified": 0.7368421052631579,
+      "failed_test_changed_patch_within_two": 0.43333333333333335,
+      "failed_test_success": 0.5,
+      "invalid_action_rate_per_turn": 0.03614457831325301,
+      "mean_sampled_tokens": 2649.266666666667,
+      "mean_turns": 5.533333333333333,
+      "rejected_patch_success": 0.23333333333333334,
+      "rejected_patch_valid_changed_within_two": 0.8333333333333334,
+      "submit_rate": 0.2833333333333333,
+      "success": 0.36666666666666664,
+      "verified_given_success": 0.8636363636363636
+    },
+    "calibration/recovery/candidate_deep": {
+      "answer_cap_hit_rate_per_turn": 0.0045662100456621,
+      "commit_given_verified": 1.0,
+      "failed_test_changed_patch_within_two": 1.0,
+      "failed_test_success": 1.0,
+      "invalid_action_rate_per_turn": 0.0,
+      "mean_sampled_tokens": 844.8333333333334,
+      "mean_turns": 3.65,
+      "rejected_patch_success": 1.0,
+      "rejected_patch_valid_changed_within_two": 1.0,
+      "submit_rate": 1.0,
+      "success": 1.0,
+      "verified_given_success": 1.0
+    },
+    "calibration/recovery/happy_deep": {
+      "answer_cap_hit_rate_per_turn": 0.09836065573770492,
+      "commit_given_verified": 1.0,
+      "failed_test_changed_patch_within_two": 0.8333333333333334,
+      "failed_test_success": 0.7,
+      "invalid_action_rate_per_turn": 0.02622950819672131,
+      "mean_sampled_tokens": 1639.25,
+      "mean_turns": 5.083333333333333,
+      "rejected_patch_success": 0.8,
+      "rejected_patch_valid_changed_within_two": 1.0,
+      "submit_rate": 0.7166666666666667,
+      "success": 0.75,
+      "verified_given_success": 0.9555555555555556
+    },
+    "transfer_confirm/normal/base_deep": {
+      "answer_cap_hit_rate_per_turn": 0.21739130434782608,
+      "commit_given_verified": 1.0,
+      "failed_test_changed_patch_within_two": null,
+      "failed_test_success": null,
+      "invalid_action_rate_per_turn": 0.008695652173913044,
+      "mean_sampled_tokens": 2509.7,
+      "mean_turns": 5.75,
+      "rejected_patch_success": null,
+      "rejected_patch_valid_changed_within_two": null,
+      "submit_rate": 0.7,
+      "success": 0.25,
+      "verified_given_success": 1.0
+    },
+    "transfer_confirm/normal/candidate_deep": {
+      "answer_cap_hit_rate_per_turn": 0.010416666666666666,
+      "commit_given_verified": 1.0,
+      "failed_test_changed_patch_within_two": null,
+      "failed_test_success": null,
+      "invalid_action_rate_per_turn": 0.0,
+      "mean_sampled_tokens": 1288.2,
+      "mean_turns": 4.8,
+      "rejected_patch_success": null,
+      "rejected_patch_valid_changed_within_two": null,
+      "submit_rate": 1.0,
+      "success": 0.25,
+      "verified_given_success": 1.0
+    },
+    "transfer_confirm/recovery/action_deep": {
+      "answer_cap_hit_rate_per_turn": 0.07228915662650602,
+      "commit_given_verified": 1.0,
+      "failed_test_changed_patch_within_two": 1.0,
+      "failed_test_success": 0.525,
+      "invalid_action_rate_per_turn": 0.0,
+      "mean_sampled_tokens": 1487.1625,
+      "mean_turns": 4.15,
+      "rejected_patch_success": 0.85,
+      "rejected_patch_valid_changed_within_two": 1.0,
+      "submit_rate": 0.825,
+      "success": 0.6875,
+      "verified_given_success": 0.8545454545454545
+    },
+    "transfer_confirm/recovery/base_deep": {
+      "answer_cap_hit_rate_per_turn": 0.29023746701846964,
+      "commit_given_verified": 0.8913043478260869,
+      "failed_test_changed_patch_within_two": 0.55,
+      "failed_test_success": 0.6,
+      "invalid_action_rate_per_turn": 0.0316622691292876,
+      "mean_sampled_tokens": 2347.4,
+      "mean_turns": 4.7375,
+      "rejected_patch_success": 0.6,
+      "rejected_patch_valid_changed_within_two": 0.525,
+      "submit_rate": 0.65,
+      "success": 0.6,
+      "verified_given_success": 0.9583333333333334
+    },
+    "transfer_confirm/recovery/base_deep_scaffold": {
+      "answer_cap_hit_rate_per_turn": 0.2903225806451613,
+      "commit_given_verified": 0.8695652173913043,
+      "failed_test_changed_patch_within_two": 0.675,
+      "failed_test_success": 0.65,
+      "invalid_action_rate_per_turn": 0.016129032258064516,
+      "mean_sampled_tokens": 2246.9125,
+      "mean_turns": 4.65,
+      "rejected_patch_success": 0.625,
+      "rejected_patch_valid_changed_within_two": 1.0,
+      "submit_rate": 0.675,
+      "success": 0.6375,
+      "verified_given_success": 0.9019607843137255
+    },
+    "transfer_confirm/recovery/base_sample_more": {
+      "answer_cap_hit_rate_per_turn": 0.1419491525423729,
+      "commit_given_verified": 0.5,
+      "failed_test_changed_patch_within_two": 0.825,
+      "failed_test_success": 0.625,
+      "invalid_action_rate_per_turn": 0.046610169491525424,
+      "mean_sampled_tokens": 2551.3625,
+      "mean_turns": 5.9,
+      "rejected_patch_success": 0.3,
+      "rejected_patch_valid_changed_within_two": 0.75,
+      "submit_rate": 0.3625,
+      "success": 0.4625,
+      "verified_given_success": 0.8108108108108109
+    },
+    "transfer_confirm/recovery/candidate_deep": {
+      "answer_cap_hit_rate_per_turn": 0.07868852459016394,
+      "commit_given_verified": 0.9615384615384616,
+      "failed_test_changed_patch_within_two": 1.0,
+      "failed_test_success": 0.55,
+      "invalid_action_rate_per_turn": 0.013114754098360656,
+      "mean_sampled_tokens": 1313.8,
+      "mean_turns": 3.8125,
+      "rejected_patch_success": 0.825,
+      "rejected_patch_valid_changed_within_two": 1.0,
+      "submit_rate": 0.8625,
+      "success": 0.6875,
+      "verified_given_success": 0.9454545454545454
+    },
+    "transfer_confirm/recovery/happy_deep": {
+      "answer_cap_hit_rate_per_turn": 0.16666666666666666,
+      "commit_given_verified": 0.75,
+      "failed_test_changed_patch_within_two": 0.625,
+      "failed_test_success": 0.5,
+      "invalid_action_rate_per_turn": 0.020202020202020204,
+      "mean_sampled_tokens": 1982.3625,
+      "mean_turns": 4.95,
+      "rejected_patch_success": 0.625,
+      "rejected_patch_valid_changed_within_two": 1.0,
+      "submit_rate": 0.5375,
+      "success": 0.5625,
+      "verified_given_success": 0.6222222222222222
+    },
+    "transfer_dev/normal/base_deep": {
+      "answer_cap_hit_rate_per_turn": 0.16740088105726872,
+      "commit_given_verified": 1.0,
+      "failed_test_changed_patch_within_two": null,
+      "failed_test_success": null,
+      "invalid_action_rate_per_turn": 0.004405286343612335,
+      "mean_sampled_tokens": 2327.45,
+      "mean_turns": 5.675,
+      "rejected_patch_success": null,
+      "rejected_patch_valid_changed_within_two": null,
+      "submit_rate": 0.8,
+      "success": 0.25,
+      "verified_given_success": 1.0
+    },
+    "transfer_dev/normal/candidate_deep": {
+      "answer_cap_hit_rate_per_turn": 0.010416666666666666,
+      "commit_given_verified": 1.0,
+      "failed_test_changed_patch_within_two": null,
+      "failed_test_success": null,
+      "invalid_action_rate_per_turn": 0.0,
+      "mean_sampled_tokens": 1288.2,
+      "mean_turns": 4.8,
+      "rejected_patch_success": null,
+      "rejected_patch_valid_changed_within_two": null,
+      "submit_rate": 1.0,
+      "success": 0.25,
+      "verified_given_success": 1.0
+    },
+    "transfer_dev/recovery/action_deep": {
+      "answer_cap_hit_rate_per_turn": 0.0392156862745098,
+      "commit_given_verified": 1.0,
+      "failed_test_changed_patch_within_two": 1.0,
+      "failed_test_success": 0.575,
+      "invalid_action_rate_per_turn": 0.0032679738562091504,
+      "mean_sampled_tokens": 1138.8875,
+      "mean_turns": 3.825,
+      "rejected_patch_success": 0.75,
+      "rejected_patch_valid_changed_within_two": 1.0,
+      "submit_rate": 0.925,
+      "success": 0.6625,
+      "verified_given_success": 1.0
+    },
+    "transfer_dev/recovery/base_deep": {
+      "answer_cap_hit_rate_per_turn": 0.31266149870801035,
+      "commit_given_verified": 0.9318181818181818,
+      "failed_test_changed_patch_within_two": 0.475,
+      "failed_test_success": 0.625,
+      "invalid_action_rate_per_turn": 0.025839793281653745,
+      "mean_sampled_tokens": 2470.6875,
+      "mean_turns": 4.8375,
+      "rejected_patch_success": 0.55,
+      "rejected_patch_valid_changed_within_two": 0.625,
+      "submit_rate": 0.5875,
+      "success": 0.5875,
+      "verified_given_success": 0.9361702127659575
+    },
+    "transfer_dev/recovery/base_deep_scaffold": {
+      "answer_cap_hit_rate_per_turn": 0.266304347826087,
+      "commit_given_verified": 0.9361702127659575,
+      "failed_test_changed_patch_within_two": 0.7,
+      "failed_test_success": 0.675,
+      "invalid_action_rate_per_turn": 0.016304347826086956,
+      "mean_sampled_tokens": 2168.2125,
+      "mean_turns": 4.6,
+      "rejected_patch_success": 0.65,
+      "rejected_patch_valid_changed_within_two": 1.0,
+      "submit_rate": 0.7125,
+      "success": 0.6625,
+      "verified_given_success": 0.8867924528301887
+    },
+    "transfer_dev/recovery/base_sample_more": {
+      "answer_cap_hit_rate_per_turn": 0.14435146443514643,
+      "commit_given_verified": 0.5714285714285714,
+      "failed_test_changed_patch_within_two": 0.875,
+      "failed_test_success": 0.725,
+      "invalid_action_rate_per_turn": 0.03556485355648536,
+      "mean_sampled_tokens": 2586.8375,
+      "mean_turns": 5.975,
+      "rejected_patch_success": 0.275,
+      "rejected_patch_valid_changed_within_two": 0.725,
+      "submit_rate": 0.325,
+      "success": 0.5,
+      "verified_given_success": 0.7
+    },
+    "transfer_dev/recovery/candidate_deep": {
+      "answer_cap_hit_rate_per_turn": 0.078125,
+      "commit_given_verified": 1.0,
+      "failed_test_changed_patch_within_two": 1.0,
+      "failed_test_success": 0.65,
+      "invalid_action_rate_per_turn": 0.009375,
+      "mean_sampled_tokens": 1445.7,
+      "mean_turns": 4,
+      "rejected_patch_success": 0.775,
+      "rejected_patch_valid_changed_within_two": 1.0,
+      "submit_rate": 0.8625,
+      "success": 0.7125,
+      "verified_given_success": 0.9298245614035088
+    },
+    "transfer_dev/recovery/happy_deep": {
+      "answer_cap_hit_rate_per_turn": 0.12755102040816327,
+      "commit_given_verified": 0.7857142857142857,
+      "failed_test_changed_patch_within_two": 0.775,
+      "failed_test_success": 0.625,
+      "invalid_action_rate_per_turn": 0.00510204081632653,
+      "mean_sampled_tokens": 1806.4875,
+      "mean_turns": 4.9,
+      "rejected_patch_success": 0.6,
+      "rejected_patch_valid_changed_within_two": 1.0,
+      "submit_rate": 0.55,
+      "success": 0.6125,
+      "verified_given_success": 0.5714285714285714
+    }
+  },
+  "experiment": "qwen35_4b_recovery_payload_budget_harness",
+  "gates": {
+    "calibration_feasibility": {
+      "checks": {
+        "answer_cap": true,
+        "commit": true,
+        "failed_absolute": true,
+        "failed_delta": true,
+        "invalid_action": true,
+        "recovery_vs_action": true,
+        "recovery_vs_base": true,
+        "recovery_vs_happy": true,
+        "rejected_absolute": true,
+        "rejected_delta": true,
+        "verification": true
+      },
+      "control_success": {
+        "action": 0.9666666666666667,
+        "base": 0.36666666666666664,
+        "happy": 0.75
+      },
+      "gate": {
+        "passed": true
+      },
+      "schema_version": 1,
+      "stage": "calibration",
+      "task_manifest_sha256": "796b6621a0770c5b0becc4d0f0a785656165bcf3eeef9ed8b30a5847e09b9631"
+    },
+    "calibration_gate": {
+      "answer_cap_hit_delta_vs_base": -0.3056747538097596,
+      "candidate_arm": "candidate",
+      "candidate_deltas": {
+        "action": 0.033333333333333326,
+        "base": 0.6333333333333333,
+        "happy": 0.25
+      },
+      "candidate_metrics": {
+        "answer_cap_hit_rate_per_turn": 0.0045662100456621,
+        "commit_given_verified": 1.0,
+        "invalid_action_rate_per_turn": 0.0,
+        "invalid_answer_cap_hit_fraction": 0.0,
+        "mean_sampled_tokens": 844.8333333333334,
+        "success": 1.0,
+        "verified_given_success": 1.0
+      },
+      "checks": {
+        "answer_cap_retention": true,
+        "commit": true,
+        "failed_transition_absolute": true,
+        "failed_transition_delta": true,
+        "invalid_action_retention": true,
+        "locality": true,
+        "recovery_vs_action": true,
+        "recovery_vs_base": true,
+        "recovery_vs_happy": true,
+        "rejected_transition_absolute": true,
+        "rejected_transition_delta": true,
+        "verification": true
+      },
+      "downstream_authorization": "run_transfer_dev",
+      "gate": {
+        "passed": true
+      },
+      "invalid_action_delta_vs_base": -0.03614457831325301,
+      "locality": {
+        "gate": {
+          "passed": true
+        },
+        "mean_entropy_delta": -0.005875012992570788,
+        "mean_varentropy_delta": -0.01045091263949871,
+        "median_non_target_centered_logit_drift": 0.11405938863754272
+      },
+      "schema_version": 1,
+      "stage": "calibration",
+      "success": {
+        "action": 0.9666666666666667,
+        "base": 0.36666666666666664,
+        "candidate": 1.0,
+        "happy": 0.75
+      },
+      "task_manifest_sha256": "796b6621a0770c5b0becc4d0f0a785656165bcf3eeef9ed8b30a5847e09b9631",
+      "transition_metrics": {
+        "failed_base": 0.43333333333333335,
+        "failed_candidate": 1.0,
+        "rejected_base": 0.8333333333333334,
+        "rejected_candidate": 1.0
+      }
+    },
+    "transfer_confirm_feasibility": {
+      "block": "transfer_confirm",
+      "checks": {
+        "answer_cap": true,
+        "failed_absolute": true,
+        "failed_delta": true,
+        "family_count": true,
+        "family_regression": true,
+        "invalid_action": true,
+        "normal_commit_absolute": true,
+        "normal_commit_delta": true,
+        "normal_success": true,
+        "normal_verified_absolute": true,
+        "normal_verified_delta": true,
+        "recovery_vs_action": true,
+        "recovery_vs_base": true,
+        "recovery_vs_happy": true,
+        "recovery_vs_sample_more": true,
+        "recovery_vs_scaffold": true,
+        "rejected_absolute": true,
+        "rejected_delta": true
+      },
+      "control_answer_cap_hit_rate": {
+        "action": 0.07228915662650602,
+        "base": 0.29023746701846964,
+        "happy": 0.16666666666666666,
+        "sample_more": 0.1419491525423729,
+        "scaffold": 0.2903225806451613
+      },
+      "control_success": {
+        "action": 0.6875,
+        "base": 0.6,
+        "happy": 0.5625,
+        "sample_more": 0.4625,
+        "scaffold": 0.6375
+      },
+      "gate": {
+        "passed": true
+      },
+      "schema_version": 1,
+      "task_manifest_sha256": "ad6f5dd2dc1fc2865a1a6622eb383842e0de360e9d66f13987a3668613a1048d"
+    },
+    "transfer_confirm_gate": {
+      "candidate_arm": "candidate",
+      "candidate_normal_metrics": {
+        "commit_given_verified": 1.0,
+        "invalid_action_rate_per_turn": 0.0,
+        "submit_rate": 1.0,
+        "success": 0.25,
+        "verified_given_success": 1.0
+      },
+      "candidate_recovery_metrics": {
+        "answer_cap_hit_rate_per_turn": 0.07868852459016394,
+        "commit_given_verified": 0.9615384615384616,
+        "invalid_action_rate_per_turn": 0.013114754098360656,
+        "invalid_answer_cap_hit_fraction": 1.0,
+        "submit_rate": 0.8625,
+        "success": 0.6875,
+        "verified_given_success": 0.9454545454545454
+      },
+      "checks": {
+        "answer_cap_retention": true,
+        "bootstrap_vs_base": true,
+        "bootstrap_vs_sample_more": true,
+        "failed_test_transition_absolute": true,
+        "failed_test_transition_delta": true,
+        "family_max_regression": true,
+        "family_nonnegative_count": true,
+        "invalid_action_retention": true,
+        "locality": true,
+        "normal_commit_absolute": true,
+        "normal_commit_retention": true,
+        "normal_success_retention": true,
+        "normal_verification_absolute": true,
+        "normal_verification_retention": true,
+        "recovery_vs_action": false,
+        "recovery_vs_base": true,
+        "recovery_vs_happy": true,
+        "recovery_vs_sample_more": true,
+        "recovery_vs_scaffold": true,
+        "rejected_patch_transition_absolute": true,
+        "rejected_patch_transition_delta": true
+      },
+      "contrasts": {
+        "action": {
+          "ci95": [
+            -0.1,
+            0.1
+          ],
+          "delta": 0.0,
+          "left_only": 8,
+          "n": 80,
+          "right_only": 8,
+          "ties": 64
+        },
+        "base": {
+          "ci95": [
+            0.0,
+            0.175
+          ],
+          "delta": 0.0875,
+          "left_only": 11,
+          "n": 80,
+          "right_only": 4,
+          "ties": 65
+        },
+        "happy": {
+          "ci95": [
+            0.025,
+            0.2375
+          ],
+          "delta": 0.125,
+          "left_only": 15,
+          "n": 80,
+          "right_only": 5,
+          "ties": 60
+        },
+        "sample_more": {
+          "ci95": [
+            0.0875,
+            0.3625
+          ],
+          "delta": 0.225,
+          "left_only": 26,
+          "n": 80,
+          "right_only": 8,
+          "ties": 46
+        },
+        "scaffold": {
+          "ci95": [
+            -0.075,
+            0.1625
+          ],
+          "delta": 0.05,
+          "left_only": 14,
+          "n": 80,
+          "right_only": 10,
+          "ties": 56
+        }
+      },
+      "downstream_authorization": "stop_before_next_stage_and_menagerie",
+      "family_deltas_vs_base": {
+        "lease_cache": 0.05,
+        "pattern_router": 0.2,
+        "quorum_value": 0.05,
+        "rate_buckets": 0.05
+      },
+      "gate": {
+        "passed": false
+      },
+      "locality": {
+        "ceiling": 0.15,
+        "mean_entropy_delta": -0.005875012992570788,
+        "mean_varentropy_delta": -0.01045091263949871,
+        "median_non_target_centered_logit_drift": 0.11405938863754272,
+        "passed": true
+      },
+      "normal_contrast": {
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "delta": 0.0,
+        "left_only": 0,
+        "n": 40,
+        "right_only": 0,
+        "ties": 40
+      },
+      "schema_version": 1,
+      "stage": "transfer_confirm",
+      "transition_metrics": {
+        "answer_cap_hit_delta_vs_base": -0.2115489424283057,
+        "failed_test_changed_patch_within_two_base": 0.55,
+        "failed_test_changed_patch_within_two_candidate": 1.0,
+        "invalid_action_improvement_vs_action": -0.013114754098360656,
+        "rejected_patch_action": 1.0,
+        "rejected_patch_base": 0.525,
+        "rejected_patch_candidate": 1.0
+      }
+    },
+    "transfer_dev_feasibility": {
+      "block": "transfer_dev",
+      "checks": {
+        "answer_cap": true,
+        "failed_absolute": true,
+        "failed_delta": true,
+        "family_count": true,
+        "family_regression": true,
+        "invalid_action": true,
+        "normal_commit_absolute": true,
+        "normal_commit_delta": true,
+        "normal_success": true,
+        "normal_verified_absolute": true,
+        "normal_verified_delta": true,
+        "recovery_vs_action": true,
+        "recovery_vs_base": true,
+        "recovery_vs_happy": true,
+        "recovery_vs_sample_more": true,
+        "recovery_vs_scaffold": true,
+        "rejected_absolute": true,
+        "rejected_delta": true
+      },
+      "control_answer_cap_hit_rate": {
+        "action": 0.0392156862745098,
+        "base": 0.31266149870801035,
+        "happy": 0.12755102040816327,
+        "sample_more": 0.14435146443514643,
+        "scaffold": 0.266304347826087
+      },
+      "control_success": {
+        "action": 0.6625,
+        "base": 0.5875,
+        "happy": 0.6125,
+        "sample_more": 0.5,
+        "scaffold": 0.6625
+      },
+      "gate": {
+        "passed": true
+      },
+      "schema_version": 1,
+      "task_manifest_sha256": "aad7b1236d0ee2423dcd891f3f61e07ae4ea99e4f5b939782e24feda3b0fe956"
+    },
+    "transfer_dev_gate": {
+      "candidate_arm": "candidate",
+      "candidate_normal_metrics": {
+        "commit_given_verified": 1.0,
+        "invalid_action_rate_per_turn": 0.0,
+        "submit_rate": 1.0,
+        "success": 0.25,
+        "verified_given_success": 1.0
+      },
+      "candidate_recovery_metrics": {
+        "answer_cap_hit_rate_per_turn": 0.078125,
+        "commit_given_verified": 1.0,
+        "invalid_action_rate_per_turn": 0.009375,
+        "invalid_answer_cap_hit_fraction": 1.0,
+        "submit_rate": 0.8625,
+        "success": 0.7125,
+        "verified_given_success": 0.9298245614035088
+      },
+      "checks": {
+        "answer_cap_retention": true,
+        "bootstrap_vs_base": true,
+        "bootstrap_vs_sample_more": true,
+        "failed_test_transition_absolute": true,
+        "failed_test_transition_delta": true,
+        "family_max_regression": true,
+        "family_nonnegative_count": true,
+        "invalid_action_retention": true,
+        "locality": true,
+        "normal_commit_absolute": true,
+        "normal_commit_retention": true,
+        "normal_success_retention": true,
+        "normal_verification_absolute": true,
+        "normal_verification_retention": true,
+        "recovery_vs_action": true,
+        "recovery_vs_base": true,
+        "recovery_vs_happy": true,
+        "recovery_vs_sample_more": true,
+        "recovery_vs_scaffold": true,
+        "rejected_patch_transition_absolute": true,
+        "rejected_patch_transition_delta": true
+      },
+      "contrasts": {
+        "action": {
+          "ci95": [
+            -0.05,
+            0.15
+          ],
+          "delta": 0.05,
+          "left_only": 10,
+          "n": 80,
+          "right_only": 6,
+          "ties": 64
+        },
+        "base": {
+          "ci95": [
+            0.0375,
+            0.225
+          ],
+          "delta": 0.125,
+          "left_only": 13,
+          "n": 80,
+          "right_only": 3,
+          "ties": 64
+        },
+        "happy": {
+          "ci95": [
+            -0.0125,
+            0.2125
+          ],
+          "delta": 0.1,
+          "left_only": 15,
+          "n": 80,
+          "right_only": 7,
+          "ties": 58
+        },
+        "sample_more": {
+          "ci95": [
+            0.0875,
+            0.3375
+          ],
+          "delta": 0.2125,
+          "left_only": 24,
+          "n": 80,
+          "right_only": 7,
+          "ties": 49
+        },
+        "scaffold": {
+          "ci95": [
+            -0.0375,
+            0.1375
+          ],
+          "delta": 0.05,
+          "left_only": 9,
+          "n": 80,
+          "right_only": 5,
+          "ties": 66
+        }
+      },
+      "downstream_authorization": "run_next_stage",
+      "family_deltas_vs_base": {
+        "lease_cache": 0.0,
+        "pattern_router": 0.15,
+        "quorum_value": 0.05,
+        "rate_buckets": 0.3
+      },
+      "gate": {
+        "passed": true
+      },
+      "locality": {
+        "ceiling": 0.15,
+        "mean_entropy_delta": -0.005875012992570788,
+        "mean_varentropy_delta": -0.01045091263949871,
+        "median_non_target_centered_logit_drift": 0.11405938863754272,
+        "passed": true
+      },
+      "normal_contrast": {
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "delta": 0.0,
+        "left_only": 0,
+        "n": 40,
+        "right_only": 0,
+        "ties": 40
+      },
+      "schema_version": 1,
+      "stage": "transfer_dev",
+      "transition_metrics": {
+        "answer_cap_hit_delta_vs_base": -0.23453649870801035,
+        "failed_test_changed_patch_within_two_base": 0.475,
+        "failed_test_changed_patch_within_two_candidate": 1.0,
+        "invalid_action_improvement_vs_action": -0.006107026143790849,
+        "rejected_patch_action": 1.0,
+        "rejected_patch_base": 0.625,
+        "rejected_patch_candidate": 1.0
+      }
+    }
+  },
+  "headline": {
+    "action_success": 0.6875,
+    "candidate_action_union_success": 0.7875,
+    "candidate_delta_vs_base": 0.0875,
+    "candidate_delta_vs_sample_more": 0.225,
+    "candidate_success": 0.6875,
+    "failed_check": "recovery_vs_action"
+  },
+  "locality": {
+    "before_model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_repo_search_compress_bank/merged/apex_replay",
+    "candidates": {
+      "candidate": {
+        "checks": {
+          "context_count": true,
+          "entropy_retention": true,
+          "finite": true,
+          "within_drift_ceiling": true
+        },
+        "gate": {
+          "passed": true
+        },
+        "mean_entropy_after": 0.19853657996281981,
+        "mean_entropy_before": 0.2044115929553906,
+        "mean_entropy_delta": -0.005875012992570788,
+        "mean_varentropy_after": 0.4290491559853156,
+        "mean_varentropy_before": 0.43950006862481433,
+        "mean_varentropy_delta": -0.01045091263949871,
+        "median_non_target_centered_logit_drift": 0.11405938863754272,
+        "model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_recovery_reason_locality_interpolation/merged/reason_mix_018",
+        "n_contexts": 48,
+        "rows": [
+          {
+            "entropy_after": 0.34788835048675537,
+            "entropy_before": 0.32152092456817627,
+            "id": "payload-locality-s85300-00-00",
+            "median_non_target_centered_logit_drift": 0.1222304105758667,
+            "varentropy_after": 0.51234370470047,
+            "varentropy_before": 0.5034211277961731
+          },
+          {
+            "entropy_after": 0.32669657468795776,
+            "entropy_before": 0.32472872734069824,
+            "id": "payload-locality-s85300-00-01",
+            "median_non_target_centered_logit_drift": 0.11285030841827393,
+            "varentropy_after": 0.5481544137001038,
+            "varentropy_before": 0.5325490236282349
+          },
+          {
+            "entropy_after": 0.32468685507774353,
+            "entropy_before": 0.2768441438674927,
+            "id": "payload-locality-s85300-00-02",
+            "median_non_target_centered_logit_drift": 0.11670804023742676,
+            "varentropy_after": 0.5285800099372864,
+            "varentropy_before": 0.5149738192558289
+          },
+          {
+            "entropy_after": 0.2753734588623047,
+            "entropy_before": 0.2758893072605133,
+            "id": "payload-locality-s85300-00-03",
+            "median_non_target_centered_logit_drift": 0.12044858932495117,
+            "varentropy_after": 0.5082102417945862,
+            "varentropy_before": 0.5108863711357117
+          },
+          {
+            "entropy_after": 0.34825077652931213,
+            "entropy_before": 0.3477908670902252,
+            "id": "payload-locality-s85300-00-04",
+            "median_non_target_centered_logit_drift": 0.12049807608127594,
+            "varentropy_after": 0.5161039233207703,
+            "varentropy_before": 0.5116356015205383
+          },
+          {
+            "entropy_after": 0.34913885593414307,
+            "entropy_before": 0.32432040572166443,
+            "id": "payload-locality-s85300-00-05",
+            "median_non_target_centered_logit_drift": 0.10989665985107422,
+            "varentropy_after": 0.5230767726898193,
+            "varentropy_before": 0.5274552702903748
+          },
+          {
+            "entropy_after": 0.2329593449831009,
+            "entropy_before": 0.23354943096637726,
+            "id": "payload-locality-s85300-00-06",
+            "median_non_target_centered_logit_drift": 0.11797666549682617,
+            "varentropy_after": 0.48621314764022827,
+            "varentropy_before": 0.489487886428833
+          },
+          {
+            "entropy_after": 0.347185879945755,
+            "entropy_before": 0.3459766209125519,
+            "id": "payload-locality-s85300-00-07",
+            "median_non_target_centered_logit_drift": 0.11420440673828125,
+            "varentropy_after": 0.5074970722198486,
+            "varentropy_before": 0.4963657557964325
+          },
+          {
+            "entropy_after": 0.3501044809818268,
+            "entropy_before": 0.35003888607025146,
+            "id": "payload-locality-s85300-00-08",
+            "median_non_target_centered_logit_drift": 0.12054502964019775,
+            "varentropy_after": 0.527502179145813,
+            "varentropy_before": 0.5257826447486877
+          },
+          {
+            "entropy_after": 0.3452579081058502,
+            "entropy_before": 0.2963283061981201,
+            "id": "payload-locality-s85300-00-09",
+            "median_non_target_centered_logit_drift": 0.11010956764221191,
+            "varentropy_after": 0.4908200204372406,
+            "varentropy_before": 0.4946768283843994
+          },
+          {
+            "entropy_after": 0.25655603408813477,
+            "entropy_before": 0.25737059116363525,
+            "id": "payload-locality-s85300-00-10",
+            "median_non_target_centered_logit_drift": 0.1125628799200058,
+            "varentropy_after": 0.5211271643638611,
+            "varentropy_before": 0.5248797535896301
+          },
+          {
+            "entropy_after": 0.196437269449234,
+            "entropy_before": 0.21339644491672516,
+            "id": "payload-locality-s85300-00-11",
+            "median_non_target_centered_logit_drift": 0.11205410957336426,
+            "varentropy_after": 0.4635656774044037,
+            "varentropy_before": 0.4687906801700592
+          },
+          {
+            "entropy_after": 0.1953992247581482,
+            "entropy_before": 0.2130420058965683,
+            "id": "payload-locality-s85300-01-00",
+            "median_non_target_centered_logit_drift": 0.1031728982925415,
+            "varentropy_after": 0.4518396556377411,
+            "varentropy_before": 0.46370550990104675
+          },
+          {
+            "entropy_after": 0.16399410367012024,
+            "entropy_before": 0.16417557001113892,
+            "id": "payload-locality-s85300-01-01",
+            "median_non_target_centered_logit_drift": 0.10292863845825195,
+            "varentropy_after": 0.4267332851886749,
+            "varentropy_before": 0.4277326166629791
+          },
+          {
+            "entropy_after": 0.21553345024585724,
+            "entropy_before": 0.23478259146213531,
+            "id": "payload-locality-s85300-01-02",
+            "median_non_target_centered_logit_drift": 0.10181677341461182,
+            "varentropy_after": 0.48165279626846313,
+            "varentropy_before": 0.4932844936847687
+          },
+          {
+            "entropy_after": 0.16313566267490387,
+            "entropy_before": 0.1782398670911789,
+            "id": "payload-locality-s85300-01-03",
+            "median_non_target_centered_logit_drift": 0.10338687896728516,
+            "varentropy_after": 0.41982054710388184,
+            "varentropy_before": 0.43273916840553284
+          },
+          {
+            "entropy_after": 0.19649101793766022,
+            "entropy_before": 0.21503660082817078,
+            "id": "payload-locality-s85300-01-04",
+            "median_non_target_centered_logit_drift": 0.10732543468475342,
+            "varentropy_after": 0.4594818651676178,
+            "varentropy_before": 0.4777686893939972
+          },
+          {
+            "entropy_after": 0.16310028731822968,
+            "entropy_before": 0.17901481688022614,
+            "id": "payload-locality-s85300-01-05",
+            "median_non_target_centered_logit_drift": 0.10445526242256165,
+            "varentropy_after": 0.4172530174255371,
+            "varentropy_before": 0.4381090998649597
+          },
+          {
+            "entropy_after": 0.11154541373252869,
+            "entropy_before": 0.11183043569326401,
+            "id": "payload-locality-s85300-01-06",
+            "median_non_target_centered_logit_drift": 0.11063015460968018,
+            "varentropy_after": 0.3392064869403839,
+            "varentropy_before": 0.34189504384994507
+          },
+          {
+            "entropy_after": 0.19496667385101318,
+            "entropy_before": 0.21321618556976318,
+            "id": "payload-locality-s85300-01-07",
+            "median_non_target_centered_logit_drift": 0.10635043680667877,
+            "varentropy_after": 0.44745680689811707,
+            "varentropy_before": 0.4643271267414093
+          },
+          {
+            "entropy_after": 0.16482612490653992,
+            "entropy_before": 0.19672401249408722,
+            "id": "payload-locality-s85300-01-08",
+            "median_non_target_centered_logit_drift": 0.10564932227134705,
+            "varentropy_after": 0.431873619556427,
+            "varentropy_before": 0.4622744023799896
+          },
+          {
+            "entropy_after": 0.213163360953331,
+            "entropy_before": 0.23247882723808289,
+            "id": "payload-locality-s85300-01-09",
+            "median_non_target_centered_logit_drift": 0.1061813235282898,
+            "varentropy_after": 0.4634225368499756,
+            "varentropy_before": 0.4768899381160736
+          },
+          {
+            "entropy_after": 0.149726003408432,
+            "entropy_before": 0.15058070421218872,
+            "id": "payload-locality-s85300-01-10",
+            "median_non_target_centered_logit_drift": 0.1031728982925415,
+            "varentropy_after": 0.40779176354408264,
+            "varentropy_before": 0.4147237539291382
+          },
+          {
+            "entropy_after": 0.1021776795387268,
+            "entropy_before": 0.12399807572364807,
+            "id": "payload-locality-s85300-01-11",
+            "median_non_target_centered_logit_drift": 0.1055457592010498,
+            "varentropy_after": 0.32860812544822693,
+            "varentropy_before": 0.36854368448257446
+          },
+          {
+            "entropy_after": 0.17863427102565765,
+            "entropy_before": 0.17883719503879547,
+            "id": "payload-locality-s85300-02-00",
+            "median_non_target_centered_logit_drift": 0.11636805534362793,
+            "varentropy_after": 0.4338221251964569,
+            "varentropy_before": 0.43459829688072205
+          },
+          {
+            "entropy_after": 0.10496364533901215,
+            "entropy_before": 0.13950635492801666,
+            "id": "payload-locality-s85300-02-01",
+            "median_non_target_centered_logit_drift": 0.1156001091003418,
+            "varentropy_after": 0.34844112396240234,
+            "varentropy_before": 0.408910870552063
+          },
+          {
+            "entropy_after": 0.12554682791233063,
+            "entropy_before": 0.15146979689598083,
+            "id": "payload-locality-s85300-02-02",
+            "median_non_target_centered_logit_drift": 0.11239838600158691,
+            "varentropy_after": 0.37800735235214233,
+            "varentropy_before": 0.41695958375930786
+          },
+          {
+            "entropy_after": 0.0927945077419281,
+            "entropy_before": 0.09317447245121002,
+            "id": "payload-locality-s85300-02-03",
+            "median_non_target_centered_logit_drift": 0.11562108993530273,
+            "varentropy_after": 0.3105482757091522,
+            "varentropy_before": 0.3136015832424164
+          },
+          {
+            "entropy_after": 0.12583033740520477,
+            "entropy_before": 0.15154306590557098,
+            "id": "payload-locality-s85300-02-04",
+            "median_non_target_centered_logit_drift": 0.11351299285888672,
+            "varentropy_after": 0.38136354088783264,
+            "varentropy_before": 0.41938164830207825
+          },
+          {
+            "entropy_after": 0.10248485207557678,
+            "entropy_before": 0.12445568293333054,
+            "id": "payload-locality-s85300-02-05",
+            "median_non_target_centered_logit_drift": 0.10960492491722107,
+            "varentropy_after": 0.3297141492366791,
+            "varentropy_before": 0.37023401260375977
+          },
+          {
+            "entropy_after": 0.07605833560228348,
+            "entropy_before": 0.09293988347053528,
+            "id": "payload-locality-s85300-02-06",
+            "median_non_target_centered_logit_drift": 0.12355512380599976,
+            "varentropy_after": 0.27286791801452637,
+            "varentropy_before": 0.31107643246650696
+          },
+          {
+            "entropy_after": 0.12497108429670334,
+            "entropy_before": 0.12472009658813477,
+            "id": "payload-locality-s85300-02-07",
+            "median_non_target_centered_logit_drift": 0.1112666130065918,
+            "varentropy_after": 0.37419649958610535,
+            "varentropy_before": 0.3722129166126251
+          },
+          {
+            "entropy_after": 0.10404546558856964,
+            "entropy_before": 0.12635742127895355,
+            "id": "payload-locality-s85300-02-08",
+            "median_non_target_centered_logit_drift": 0.11172616481781006,
+            "varentropy_after": 0.34158122539520264,
+            "varentropy_before": 0.38337504863739014
+          },
+          {
+            "entropy_after": 0.1357327550649643,
+            "entropy_before": 0.13572339713573456,
+            "id": "payload-locality-s85300-02-09",
+            "median_non_target_centered_logit_drift": 0.10934090614318848,
+            "varentropy_after": 0.3821239173412323,
+            "varentropy_before": 0.38203197717666626
+          },
+          {
+            "entropy_after": 0.08625384420156479,
+            "entropy_before": 0.1054719090461731,
+            "id": "payload-locality-s85300-02-10",
+            "median_non_target_centered_logit_drift": 0.1139143705368042,
+            "varentropy_after": 0.305705189704895,
+            "varentropy_before": 0.3490503430366516
+          },
+          {
+            "entropy_after": 0.06994602829217911,
+            "entropy_before": 0.0850268229842186,
+            "id": "payload-locality-s85300-02-11",
+            "median_non_target_centered_logit_drift": 0.1190040111541748,
+            "varentropy_after": 0.26533517241477966,
+            "varentropy_before": 0.2993001639842987
+          },
+          {
+            "entropy_after": 0.3199933171272278,
+            "entropy_before": 0.34483155608177185,
+            "id": "payload-locality-s85300-03-00",
+            "median_non_target_centered_logit_drift": 0.12407183647155762,
+            "varentropy_after": 0.4919124245643616,
+            "varentropy_before": 0.4854988157749176
+          },
+          {
+            "entropy_after": 0.17843204736709595,
+            "entropy_before": 0.19430400431156158,
+            "id": "payload-locality-s85300-03-01",
+            "median_non_target_centered_logit_drift": 0.12151683866977692,
+            "varentropy_after": 0.4361955523490906,
+            "varentropy_before": 0.4443338215351105
+          },
+          {
+            "entropy_after": 0.2737167477607727,
+            "entropy_before": 0.2734021544456482,
+            "id": "payload-locality-s85300-03-02",
+            "median_non_target_centered_logit_drift": 0.12126386165618896,
+            "varentropy_after": 0.4904923439025879,
+            "varentropy_before": 0.48765483498573303
+          },
+          {
+            "entropy_after": 0.17714013159275055,
+            "entropy_before": 0.17710188031196594,
+            "id": "payload-locality-s85300-03-03",
+            "median_non_target_centered_logit_drift": 0.12600791454315186,
+            "varentropy_after": 0.42416152358055115,
+            "varentropy_before": 0.4237169623374939
+          },
+          {
+            "entropy_after": 0.252206951379776,
+            "entropy_before": 0.25204113125801086,
+            "id": "payload-locality-s85300-03-04",
+            "median_non_target_centered_logit_drift": 0.13102591037750244,
+            "varentropy_after": 0.485506534576416,
+            "varentropy_before": 0.4837435185909271
+          },
+          {
+            "entropy_after": 0.17764268815517426,
+            "entropy_before": 0.19416408240795135,
+            "id": "payload-locality-s85300-03-05",
+            "median_non_target_centered_logit_drift": 0.11980128288269043,
+            "varentropy_after": 0.4279346168041229,
+            "varentropy_before": 0.4424302577972412
+          },
+          {
+            "entropy_after": 0.12269797921180725,
+            "entropy_before": 0.12263336777687073,
+            "id": "payload-locality-s85300-03-06",
+            "median_non_target_centered_logit_drift": 0.12177443504333496,
+            "varentropy_after": 0.35887861251831055,
+            "varentropy_before": 0.35802769660949707
+          },
+          {
+            "entropy_after": 0.2509362995624542,
+            "entropy_before": 0.2508420944213867,
+            "id": "payload-locality-s85300-03-07",
+            "median_non_target_centered_logit_drift": 0.12357448041439056,
+            "varentropy_after": 0.4737411141395569,
+            "varentropy_before": 0.47260698676109314
+          },
+          {
+            "entropy_after": 0.21363689005374908,
+            "entropy_before": 0.21362176537513733,
+            "id": "payload-locality-s85300-03-08",
+            "median_non_target_centered_logit_drift": 0.1255643367767334,
+            "varentropy_after": 0.4708738923072815,
+            "varentropy_before": 0.47041240334510803
+          },
+          {
+            "entropy_after": 0.2513147294521332,
+            "entropy_before": 0.2512912154197693,
+            "id": "payload-locality-s85300-03-09",
+            "median_non_target_centered_logit_drift": 0.12957888841629028,
+            "varentropy_after": 0.4778769612312317,
+            "varentropy_before": 0.47760921716690063
+          },
+          {
+            "entropy_after": 0.14877453446388245,
+            "entropy_before": 0.13578882813453674,
+            "id": "payload-locality-s85300-03-10",
+            "median_non_target_centered_logit_drift": 0.12490931153297424,
+            "varentropy_after": 0.40188461542129517,
+            "varentropy_before": 0.38542625308036804
+          },
+          {
+            "entropy_after": 0.1014067754149437,
+            "entropy_before": 0.11163393408060074,
+            "id": "payload-locality-s85300-03-11",
+            "median_non_target_centered_logit_drift": 0.12217777967453003,
+            "varentropy_after": 0.3228599727153778,
+            "varentropy_before": 0.3409113585948944
+          }
+        ]
+      }
+    },
+    "contexts": "/workspace/small-model-experimentation/experiments/qwen35_4b_recovery_payload_budget_harness/data/locality_contexts.json",
+    "contexts_sha256": "2322656a1652fd428f3f1c5a56f1c6056141dee4fb52a22b9d7217acf78882ce",
+    "drift_ceiling": 0.15,
+    "eligible_candidates": [
+      "candidate"
+    ],
+    "entropy_delta_min": -0.05,
+    "gate": {
+      "passed": true
+    },
+    "passing_eligible_candidates": [
+      "candidate"
+    ],
+    "schema_version": 1
+  },
+  "menagerie_exposed": false,
+  "schema_version": 1,
+  "source_sha256": {
+    "analysis": {
+      "calibration_feasibility": "fdd92e944a33eb220c072089c98cee241ae4f3dfac8bf065459969c2cc5b4f9a",
+      "calibration_gate": "85248a36794df5f64ba826b9e0c0c656d44a9ab74722dc439945b992acb4fb91",
+      "transfer_confirm_feasibility": "c700abfbcb02c537f62787878a3a1e8f8bd2b90cf9eef5cd06b0ec233c3ba928",
+      "transfer_confirm_gate": "daf0c5396d1ce601a1f5a5ad203f6052c05eb13a61e4b6c1f8540e25a8e41168",
+      "transfer_dev_feasibility": "2a7961a25fb027ea5742f52cdeca48fd2b25b97ab0b656f6a7cee8cd6a430f3c",
+      "transfer_dev_gate": "9b59fa53d66737bf3f0d0eb0b3c02907e4a9d1a86aa0712c2671224daa1226e1"
+    },
+    "evaluations": {
+      "calibration/recovery/action_deep": "3fda5725303a8ec67ff33a134419428107488211c99c54cf88a74ba4387c91ad",
+      "calibration/recovery/base_deep": "4caf807f1fb166a812793fa8f5a2b0906feedbf32ab3b703947e7b4452611290",
+      "calibration/recovery/candidate_deep": "198c66890fb8e8af1400be0af91411366cc23bd470251d9aa3dff2bd6c091e28",
+      "calibration/recovery/happy_deep": "1253f0a2f6f8af7d8aae6ee31912ab30f4083e738340530df1e9bcd56c41fe49",
+      "transfer_confirm/normal/base_deep": "45a96e0a476c6519b40453b49ec83364604300cdec6686182bd93d265f0812d6",
+      "transfer_confirm/normal/candidate_deep": "7f9fcbb2a9ddd6e06be9a862f3e6463f6294413cfa9bdaa1df13176322d2b60c",
+      "transfer_confirm/recovery/action_deep": "895e508e06c47ceaf0e41f5dd90fd1de4e3f3f3ec28fc44fd6f4c0a83e6b4c09",
+      "transfer_confirm/recovery/base_deep": "3d90bfdea3d809e2e2f9d5bf9029f83f5145a7cae7658bafb87c981fbc7e9f0d",
+      "transfer_confirm/recovery/base_deep_scaffold": "f933ec4035ac86f1587257d6299558e99b516fbdba9f0d95a500b6b6bfd55001",
+      "transfer_confirm/recovery/base_sample_more": "e24ce831791d86d638f0a1cd96ceee29e4b2ffc5410cb25ba1d96c6c371b0dc6",
+      "transfer_confirm/recovery/candidate_deep": "d64895e724c01e9b2e5235836ea878da0611cd136617607d4bd95998d2dd7472",
+      "transfer_confirm/recovery/happy_deep": "e9dd86629a13082f4eaabf9f1dd9eb48b908e0f8eed66bc897d55bf31a88bda0",
+      "transfer_dev/normal/base_deep": "c2b70074591ac0fe3d316c4d98e3a39997072811660815c0e6cf89a9b9ef7ea2",
+      "transfer_dev/normal/candidate_deep": "20162d6eb205236a78979fc58d1dc334b75e576390d93716b2a35fb42ba6b965",
+      "transfer_dev/recovery/action_deep": "bad208cbb42d282f6643d9165c644215dccaa2c99f11778a94ee360e908a5513",
+      "transfer_dev/recovery/base_deep": "e9bdd4edff9e81f3b507187414e0859b54bd2ce2e70097b5969510572b511f71",
+      "transfer_dev/recovery/base_deep_scaffold": "94cb808ba65e9a0f3657a5679e6bc7c3a4c640fabdb40275f7959249d7a302fb",
+      "transfer_dev/recovery/base_sample_more": "c055e84e66cc54588cd2724312a3091def61bd48745a234399e36c4df173df2d",
+      "transfer_dev/recovery/candidate_deep": "834ab2ac12561ca0c42a75e81351b08ff62bf50e05be2d9fb6d3636ae4804714",
+      "transfer_dev/recovery/happy_deep": "c4124e2a7f144fb10a3f53bfb2269bcf090feeb552f382043919011a3999f220"
+    },
+    "locality": "0a43a9205706412b553abfb0cbda334892aece1175290f7b483d38cbb37b2d26"
+  },
+  "stopped_at": "transfer_confirm",
+  "transfer_confirm_passed": false,
+  "transfer_dev_passed": true,
+  "verdict": "TRANSFER_CONFIRM_FAIL"
+}

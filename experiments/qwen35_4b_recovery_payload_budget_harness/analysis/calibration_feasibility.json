@@ -1,0 +1,26 @@
+{
+  "checks": {
+    "answer_cap": true,
+    "commit": true,
+    "failed_absolute": true,
+    "failed_delta": true,
+    "invalid_action": true,
+    "recovery_vs_action": true,
+    "recovery_vs_base": true,
+    "recovery_vs_happy": true,
+    "rejected_absolute": true,
+    "rejected_delta": true,
+    "verification": true
+  },
+  "control_success": {
+    "action": 0.9666666666666667,
+    "base": 0.36666666666666664,
+    "happy": 0.75
+  },
+  "gate": {
+    "passed": true
+  },
+  "schema_version": 1,
+  "stage": "calibration",
+  "task_manifest_sha256": "796b6621a0770c5b0becc4d0f0a785656165bcf3eeef9ed8b30a5847e09b9631"
+}

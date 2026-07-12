@@ -286,6 +286,23 @@ the live prefix length after bf16. Even a positive oracle value/causal stage
 would still precede the deployable bar: a label-free controller must beat frozen
 inference and matched-compute sampling on new contamination-free tasks.
 
+**A repaired recovery interface reveals complementary local policies, not a
+global winner (2026-07-12, Negative,
+[qwen35_4b_recovery_payload_budget_harness](../experiments/qwen35_4b_recovery_payload_budget_harness/reports/report.md)).**
+Giving every arm a 512-token JSON payload and measuring valid two-turn recovery
+removed the predecessor's truncation/proxy artifacts: the locality-safe λ=.18
+policy passed development transfer at 71.25%, +12.5pp over base and +21.25pp
+over equal-reservation sampling, with perfect controlled transitions and exact
+ordinary-task retention. Independent confirmation was still decisive: λ=.18
+and action-only tied at 68.75%, failing the frozen +3pp incumbent margin while
+all other gates passed; Menagerie stayed sealed. Their hidden-success union was
+78.75% on both fresh blocks, with disjoint wins concentrated in different
+algorithm/state cells. This is oracle evidence for complementarity, not a
+deployable ensemble claim. The next safe capability producer is bounded
+branching selected by public verifier evidence, followed only conditionally by
+state→action-balanced winner banking; do not tune another scalar reason dose or
+route on family identity.
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.

@@ -48,12 +48,21 @@
   and immediate-rejected-transition gates, so confirmation, transfer, and
   Menagerie remained sealed. Do not extend the ladder or lower gates in that
   result directory.
-- Active successor: `qwen35_4b_recovery_payload_budget_harness`. Freeze λ=.18;
-  give every arm 512 thinking + 512 answer tokens; and count only immediate
-  PATCH or INSPECT→PATCH as valid rejected recovery within two turns. A third
-  disjoint locality block precedes behavior. Re-run calibration without model
-  selection, then the untouched four-family blocks against base, happy, action,
-  external scaffold, and equal-reservation sample-more before Menagerie.
+- Completed confirm-gated negative:
+  `qwen35_4b_recovery_payload_budget_harness`. The fixed λ=.18 candidate passed
+  locality, calibration, and transfer dev, then tied action-only at 0.6875 on
+  independent confirmation; every other gate passed and Menagerie stayed
+  sealed. The larger payload and two-turn transition metric were validated,
+  but reason mixing is complementary rather than uniformly superior.
+- Highest-priority recovery successor: run a bounded, public-verifier branch
+  tournament between action-only and λ=.18 from the same recovery state. Freeze
+  branch compute and visible selection before evaluation; compare against
+  equal-reservation independent sampling, scaffold, both source policies, and
+  an uninformative/random branch selector. If it transfers, bank only
+  verifier-selected winners while preserving conditional state→action cells,
+  then test whether one local checkpoint can compress the tournament. Never
+  route on family identity or hidden outcomes. The oracle ceiling is 0.7875 on
+  each completed transfer block, but it is not a result claim.
 - Future retraining should calibrate plan dose by realized gradient/surprisal
   and avoid supervising plan starts already rank 1 or wildly off-policy lexical
   templates.

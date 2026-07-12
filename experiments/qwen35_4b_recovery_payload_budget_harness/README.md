@@ -86,20 +86,56 @@ in `reports/preregistration.md`.
 
 ## Results
 
-Pending the frozen run. A larger answer budget is not itself a capability gain;
-the fixed checkpoint must beat every matched control on untouched families.
+**Verdict: `TRANSFER_CONFIRM_FAIL`; Menagerie remained sealed.** The matched
+payload repair worked as an interface intervention. Fresh locality passed at
+0.114 drift (entropy Δ −0.0059; varentropy Δ −0.0105), candidate answer-cap
+hits fell to 0.5%/7.8%/7.9% of turns on calibration/dev/confirm, and all
+candidate rejected- and failed-state cases changed the patch within two turns.
+
+| Block / arm | base | happy | action | sample-more | scaffold | candidate |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| calibration | 36.7% | 75.0% | 96.7% | — | — | **100%** |
+| transfer dev | 58.8% | 61.3% | 66.3% | 50.0% | 66.3% | **71.3%** |
+| transfer confirm | 60.0% | 56.3% | **68.8%** | 46.3% | 63.8% | **68.8%** |
+
+The dev block passed every registered gate: candidate was +12.5pp versus base
+and +21.25pp versus matched sampling, with paired 95% lower bounds +3.75pp and
++8.75pp. On confirmation it retained +8.75pp versus base and +22.5pp versus
+matched sampling, improved all four families, preserved normal success exactly
+(25.0% versus 25.0%), but tied action-only instead of beating it by 3pp. That
+single failed check stopped the run.
+
+Exploratory paired forensics expose a stable opportunity rather than a missing
+global dose. Candidate and action-only each had eight exclusive confirmation
+wins, and their success union was 78.75% on both independent transfer blocks.
+The losses were structured: action-only won seven confirmation
+`pattern_router` rejected-patch disagreements, while the reason mixture won
+four `rate_buckets` rejected-patch disagreements. Full metrics, hashes, and the
+disagreement cells are committed in `reports/result_receipt.json`.
 
 ## Interpretation
 
-Pending. A null after cap hits disappear would refute the harness-bottleneck
-explanation. A calibration-only gain would remain familiar-family process
-control, not breadth.
+The predecessor's two apparent policy failures were indeed measurement and
+interface failures: a 512-token action slot removes almost all candidate
+truncation, and valid `INSPECT→PATCH` recovery transfers perfectly. But the
+reason mixture is not a uniformly better policy than action-only. It trades
+wins across held-out algorithms and cannot claim a breakthrough from aggregate
+dev selection.
+
+The next intervention should exploit the replicated 78.75% union with a public
+verifier, not another family-specific weight mixture or posthoc router. Fork
+the two locality-safe policies at recovery states, execute bounded branches,
+select only from visible test/rejection evidence, and bank the winning
+trajectories with the same conditional-transition balance. It must beat a
+compute-matched two-trajectory baseline before any distillation or Menagerie.
 
 ## Knowledgebase Update
 
-- Program evidence: pending.
-- Program backlog: pending.
-- Claim ledger/synthesis: pending claim-grade transfer and Menagerie.
+- Program evidence: records the interface repair, independent confirm stop, and
+  replicated candidate/action complementarity.
+- Program backlog: replaces global dose tuning with verifier-selected branching
+  and conditional winner banking.
+- Claim ledger: unchanged; no Menagerie event was exposed.
 
 ## Artifacts
 

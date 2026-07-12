@@ -1,0 +1,60 @@
+{
+  "answer_cap_hit_delta_vs_base": -0.3056747538097596,
+  "candidate_arm": "candidate",
+  "candidate_deltas": {
+    "action": 0.033333333333333326,
+    "base": 0.6333333333333333,
+    "happy": 0.25
+  },
+  "candidate_metrics": {
+    "answer_cap_hit_rate_per_turn": 0.0045662100456621,
+    "commit_given_verified": 1.0,
+    "invalid_action_rate_per_turn": 0.0,
+    "invalid_answer_cap_hit_fraction": 0.0,
+    "mean_sampled_tokens": 844.8333333333334,
+    "success": 1.0,
+    "verified_given_success": 1.0
+  },
+  "checks": {
+    "answer_cap_retention": true,
+    "commit": true,
+    "failed_transition_absolute": true,
+    "failed_transition_delta": true,
+    "invalid_action_retention": true,
+    "locality": true,
+    "recovery_vs_action": true,
+    "recovery_vs_base": true,
+    "recovery_vs_happy": true,
+    "rejected_transition_absolute": true,
+    "rejected_transition_delta": true,
+    "verification": true
+  },
+  "downstream_authorization": "run_transfer_dev",
+  "gate": {
+    "passed": true
+  },
+  "invalid_action_delta_vs_base": -0.03614457831325301,
+  "locality": {
+    "gate": {
+      "passed": true
+    },
+    "mean_entropy_delta": -0.005875012992570788,
+    "mean_varentropy_delta": -0.01045091263949871,
+    "median_non_target_centered_logit_drift": 0.11405938863754272
+  },
+  "schema_version": 1,
+  "stage": "calibration",
+  "success": {
+    "action": 0.9666666666666667,
+    "base": 0.36666666666666664,
+    "candidate": 1.0,
+    "happy": 0.75
+  },
+  "task_manifest_sha256": "796b6621a0770c5b0becc4d0f0a785656165bcf3eeef9ed8b30a5847e09b9631",
+  "transition_metrics": {
+    "failed_base": 0.43333333333333335,
+    "failed_candidate": 1.0,
+    "rejected_base": 0.8333333333333334,
+    "rejected_candidate": 1.0
+  }
+}
