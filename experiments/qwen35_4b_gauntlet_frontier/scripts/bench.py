@@ -101,6 +101,10 @@ def main() -> int:
     parser.add_argument("--adapter", type=str, default=None)
     parser.add_argument("--merged", type=str, default=None,
                         help="merged full checkpoint dir (deployed via menagerie --model-id)")
+    parser.add_argument("--router-quick", type=str, default=None,
+                        help="tier-router: merged checkpoint to deploy for quick-tier workloads")
+    parser.add_argument("--router-medium", type=str, default=None,
+                        help="tier-router: merged checkpoint to deploy for medium/slow/deep workloads")
     parser.add_argument("--backend", type=str, default=None,
                         help="menagerie backend override (e.g. qwen for the HF parity oracle; "
                              "never compare across backends)")
@@ -127,6 +131,8 @@ def main() -> int:
     for occurrence, arm in enumerate(args.arms):
         adapter = args.adapter if arm == "adapter" else None
         merged = args.merged if arm == "merged" else None
+        if arm == "merged" and args.router_quick and args.router_medium:
+            merged = args.router_quick if args.tier == "quick" else args.router_medium
         arm_label = f"{arm}{occurrence}" if args.arms.count(arm) > 1 else arm
         out_path = out_dir / f"{args.tier}_seed{args.seed}_{arm_label}.json"
         print(f"[bench] {args.tier} seed={args.seed} arm={arm_label} ...", flush=True)
