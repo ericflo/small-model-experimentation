@@ -165,3 +165,23 @@ one falls ~0.01-0.03 short on the other. The goal's conjunctive +0.32-both-tiers
 bar sits just beyond a single 4B adapter's tier-Pareto frontier — but the
 medium half, long the harder wall, was genuinely broken here for the first time
 by mechanisms designed from the serial-compute diagnosis.
+
+## 2026-07-11 (capacity test — the last single-adapter lever) — 4x rank REFUTES capacity competition
+
+- apex at LoRA rank 128 / alpha 256 (4x the params of every prior arm, same
+  apex recipe + data): quick +0.249 (n=4), medium +0.229 (n=3) — WORSE than
+  r32 apex (+0.308/+0.345) on BOTH tiers. More capacity at fixed data
+  overfits and hurts.
+- This decisively refutes the C54 capacity-competition reading as an
+  ADAPTER-SIZE artifact: the tiers do not fail to co-fit because r32 ran out
+  of room. The tier-Pareto frontier is FUNDAMENTAL to the fixed 4B at this
+  data scale — the +0.32-both-tiers conjunction is unreachable by a single
+  adapter regardless of rank.
+- FINAL: 14 arms, ~65 paired events. Both tiers individually broken past
+  +0.32 (quick 0.409 blend, medium 0.345 apex — medium broken for the FIRST
+  time via the novel compression-advantage + skin-shuffle mechanisms). No
+  single adapter clears both; interpolation is strictly dominated (non-convex
+  frontier) and 4x capacity is worse (fundamental, not capacity). The
+  remaining single-4B path to the conjunction is a tier-router (blend for
+  short-horizon, apex for episode/deep); clearing both in one weight-set
+  requires a larger base or a router, both beyond a single 4B adapter.
