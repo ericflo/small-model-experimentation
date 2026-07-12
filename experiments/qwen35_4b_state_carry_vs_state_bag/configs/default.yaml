@@ -1,0 +1,115 @@
+schema_version: 1
+experiment_id: qwen35_4b_state_carry_vs_state_bag
+
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+  backend: transformers
+  transformers_version: 5.13.0
+  dtype: bfloat16
+  attention_implementation: sdpa
+  trust_remote_code: true
+  use_cache: false
+
+architecture:
+  # Two complete [linear, linear, linear, full-attention] Qwen3.5 motifs.
+  loop_start: 12
+  loop_end: 20
+  expected_num_layers: 32
+  expected_layer_pattern:
+    - linear_attention
+    - linear_attention
+    - linear_attention
+    - full_attention
+  state_token: <|fim_pad|>
+  state_slots: 8
+  max_recurrence: 12
+  step_encoding_dim: 64
+  state_adapter_rank: 64
+  damping_initial: 0.125
+  aggregate_last_initial: 0.90
+  semantic_echo:
+    mode: continuous
+    top_k: 32
+    continuous_initial: 0.90
+  lora:
+    rank: 32
+    alpha: 64
+    dropout: 0.05
+    target_loop_only: true
+
+substrate:
+  node_count: 16
+  checksum_modulus: 8
+  num_choices: 4
+  max_generation_attempts: 500
+  train_families:
+    - phase_branch
+    - checksum_branch
+  heldout_family: braided_branch
+  train_templates:
+    - ledger
+    - prose
+  heldout_template: compact
+  train_depths: [1, 2, 3, 4]
+  extrapolation_depths: [5, 6, 7, 8, 9, 10, 11, 12]
+  train_examples: 12000
+  validation_examples: 1024
+  evaluation_examples_per_split: 3200
+  counterfactual_pairs: 512
+  seeds:
+    train: 73101
+    validation: 73102
+    depth: 73103
+    family: 73104
+    template: 73105
+    counterfactual: 73106
+
+training:
+  train_k: 4
+  train_steps: 1500
+  pilot_steps: 300
+  batch_size: 1
+  gradient_accumulation: 16
+  learning_rate: 0.0002
+  weight_decay: 0.01
+  warmup_fraction: 0.05
+  gradient_clip: 1.0
+  answer_loss_weight: 1.0
+  state_loss_weight: 0.50
+  fixed_point_loss_weight: 0.05
+  eval_every_steps: 100
+  save_every_steps: 100
+  train_seeds: [7411, 7412, 7413]
+
+evaluation:
+  k_values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+  primary_depths: [5, 6, 7, 8, 9, 10, 11, 12]
+  pilot_items_per_cell: 256
+  curve_items_per_depth: 64
+  holdout_items_per_depth: 128
+  bootstrap_resamples: 10000
+  bootstrap_seed: 75101
+  min_items_per_cell: 1000
+  primary_min_absolute_gain: 0.05
+  sample_more_compute_unit: decoder_layer_token_applications
+  require_same_backend: true
+
+gates:
+  # Mechanics and scientific gates are deliberately independent.
+  k1_max_logit_abs_error: 0.00001
+  exact_parameter_count_match: true
+  min_state_node_accuracy: 0.60
+  min_state_joint_accuracy: 0.40
+  min_carry_minus_bag: 0.05
+  min_positive_primary_depths: 6
+  require_paired_lower_bound_above_zero: true
+  require_unseen_k_gain: true
+  min_donor_follow_gain: 0.10
+  max_k1_retention_drop: 0.01
+  require_sample_more_win_for_deployable_claim: true
+
+paths:
+  data_dir: data/generated
+  runs_dir: runs
+  large_artifacts_dir: ../../large_artifacts/qwen35_4b_state_carry_vs_state_bag

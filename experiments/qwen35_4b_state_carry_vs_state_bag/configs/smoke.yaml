@@ -1,0 +1,17 @@
+schema_version: 1
+experiment_id: qwen35_4b_state_carry_vs_state_bag
+inherits: default.yaml
+substrate:
+  train_examples: 24
+  validation_examples: 12
+  evaluation_examples_per_split: 12
+  counterfactual_pairs: 4
+training:
+  train_steps: 2
+  pilot_steps: 2
+  gradient_accumulation: 1
+  eval_every_steps: 1
+  save_every_steps: 1
+evaluation:
+  k_values: [1, 2, 4]
+  min_items_per_cell: 4

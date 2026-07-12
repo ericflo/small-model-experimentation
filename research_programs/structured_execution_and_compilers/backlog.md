@@ -2,6 +2,13 @@
 
 ## Next Experiments
 
+- Architecture-counterfactual setup ready: `qwen35_4b_state_carry_vs_state_bag`
+  repeats two full-width Qwen3.5 hybrid motifs and compares one inherited latent
+  state against an equal-parameter/equal-FLOP bag of reset shallow states. It
+  has a fresh query-after-state substrate, K=1 parity gate, unseen-K/depth
+  extrapolation, donor-consistent state swaps, and matched-compute explicit-CoT
+  sampling. No model result exists yet; the next action is the live 48 GiB Ada
+  model smoke followed by the single paired pilot, not an expensive full sweep.
 - Cross-program interface probe completed:
   `qwen35_4b_commit_slot_jacobian_value_transport` showed that a fixed latent
   answer slot repairs formatting but its semantic hint remains task/alias

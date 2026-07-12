@@ -46697,6 +46697,46 @@
      "source": "experiments/qwen35_4b_same_prefix_advantage_routing/configs/default.yaml and runs/smoke/summary.json"
     }
    ]
+  },
+  "qwen35_4b_state_carry_vs_state_bag": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Design audit: serial Carry and reset-state Bag receive identical compute",
+     "categories": [
+      "K=1",
+      "K=4",
+      "K=8",
+      "K=12"
+     ],
+     "series": [
+      {
+       "label": "State-Carry",
+       "values": [
+        16384,
+        28672,
+        45056,
+        61440
+       ]
+      },
+      {
+       "label": "State-Bag",
+       "values": [
+        16384,
+        28672,
+        45056,
+        61440
+       ]
+      }
+     ],
+     "x_label": "middle-block applications K",
+     "y_label": "decoder-layer token applications at 512 tokens",
+     "y_format": "integer",
+     "note": "Setup geometry only, not a model result. Both arms run the same base 32 layers and the same eight-layer middle block K-1 extra times; their only intended difference is whether each extra call inherits the preceding state.",
+     "source": "experiments/qwen35_4b_state_carry_vs_state_bag/analysis/setup_compute_geometry.csv"
+    }
+   ]
   }
  }
 }

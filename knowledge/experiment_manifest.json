@@ -4399,6 +4399,43 @@
   },
   {
     "file_counts": {
+      ".csv": 2,
+      ".json": 2,
+      ".md": 13,
+      ".py": 15,
+      ".yaml": 5,
+      "[none]": 1
+    },
+    "id": "qwen35_4b_state_carry_vs_state_bag",
+    "path": "experiments/qwen35_4b_state_carry_vs_state_bag",
+    "primary_readme": "experiments/qwen35_4b_state_carry_vs_state_bag/README.md",
+    "primary_report": "experiments/qwen35_4b_state_carry_vs_state_bag/reports/report.md",
+    "research_programs": [
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "**Status: implementation-ready, CPU-validated, no Qwen model call yet. This is not a result.**",
+    "tags": [
+      "latent-state",
+      "small-model"
+    ],
+    "title": "State-Carry Versus State-Bag Counterfactual",
+    "top_level_dirs": [
+      "analysis",
+      "configs",
+      "data",
+      "docs",
+      "reports",
+      "runs",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 38,
+    "total_size_bytes": 255030
+  },
+  {
+    "file_counts": {
       ".json": 13,
       ".jsonl": 10,
       ".log": 16,

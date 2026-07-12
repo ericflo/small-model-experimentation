@@ -19,39 +19,40 @@ This is a repository-level inventory. Each experiment remains the source of trut
 
 | Directory | Experiments |
 | --- | ---: |
-| `reports/` | 227 |
-| `src/` | 215 |
-| `runs/` | 157 |
-| `analysis/` | 147 |
-| `scripts/` | 136 |
-| `configs/` | 133 |
-| `data/` | 121 |
+| `reports/` | 228 |
+| `src/` | 216 |
+| `runs/` | 158 |
+| `analysis/` | 148 |
+| `scripts/` | 137 |
+| `configs/` | 134 |
+| `data/` | 122 |
 | `logs/` | 64 |
 | `run_logs/` | 55 |
-| `tests/` | 28 |
+| `tests/` | 29 |
 | `figures/` | 10 |
 | `assets/` | 5 |
 | `archive/` | 1 |
+| `docs/` | 1 |
 | `suite_logs/` | 1 |
 
 ## File Extensions
 
 | Extension | Files |
 | --- | ---: |
-| `.json` | 2673 |
-| `.csv` | 2138 |
-| `.py` | 1729 |
-| `.md` | 1026 |
+| `.json` | 2675 |
+| `.csv` | 2140 |
+| `.py` | 1744 |
+| `.md` | 1039 |
 | `.png` | 848 |
 | `.jsonl` | 782 |
 | `.log` | 527 |
-| `.yaml` | 379 |
+| `.yaml` | 384 |
 | `.gz` | 143 |
 | `.html` | 90 |
 | `.sh` | 19 |
 | `.pt` | 9 |
 | `.txt` | 5 |
-| `[none]` | 4 |
+| `[none]` | 5 |
 | `.npy` | 1 |
 
 ## Largest Files

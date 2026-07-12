@@ -1,0 +1,38 @@
+{
+  "carry_vs_bag": {
+    "available": false,
+    "reason": "no separately trained carry/bag matched-depth rows",
+    "seed_receipts": []
+  },
+  "counterfactual_swaps": {
+    "available": false,
+    "seeds": []
+  },
+  "deployment_comparison": {
+    "available": false,
+    "required_training_seed_pairs": 3,
+    "seed_receipts": [],
+    "training_seed_pairs": 0
+  },
+  "evaluation_bundles": 0,
+  "experiment_id": "qwen35_4b_state_carry_vs_state_bag",
+  "sample_more": {
+    "available": false
+  },
+  "schema_version": 1,
+  "state_sufficiency": {
+    "available": false
+  },
+  "trained_checkpoint_edge_cut": {
+    "available": false,
+    "diagnostic_only": true,
+    "seeds": [],
+    "training_seed_pairs": 0
+  },
+  "unseen_k_scaling": {
+    "available": false,
+    "reason": "no paired K=train_k versus K=depth carry rows"
+  },
+  "verdict": "SETUP_ONLY",
+  "warning": "Only DEPLOYABLE_DEPTH_BREAKTHROUGH licenses a deployment claim; mechanistic labels remain valuable but narrower."
+}

@@ -5632,6 +5632,44 @@
     }
    ]
   },
+  "qwen35_4b_state_carry_vs_state_bag": {
+   "verdict_tag": "Built and checked, not run yet",
+   "concept_primer": "Imagine comparing an assembly line, where each worker improves the same object, with a group where every worker starts over from the original and their drafts are combined at the end. Both groups get the same workers and time; only the handoff differs.",
+   "plain_question": "Does passing one private working memory through repeated model steps solve deeper problems better than combining the same number of independent one-step attempts?",
+   "plain_answer": "We do not know yet. The complete test has been built and its data, accounting, decision rules, and non-GPU mechanics pass locally, but the actual model has not been run. A larger graphics card must first prove that the untouched one-step path is identical and that both comparison arms really receive equal resources.",
+   "why_it_matters": "If the handoff wins, it would show that arranging fixed computation into a genuine sequence can create capabilities that a collection of shallow attempts misses. If it does not, the careful controls will tell us whether the problem was memory formation, memory use, extra-step generalization, or simply that shallow attempts were enough.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Repeated middle section",
+     "value": "8 layers",
+     "sub": "two complete native processing patterns"
+    },
+    {
+     "label": "Training steps versus deeper test",
+     "value": "4 versus 12",
+     "sub": "tests whether the same update keeps working beyond practice"
+    },
+    {
+     "label": "Private memory slots",
+     "value": "8",
+     "sub": "placed before the question so they cannot copy its answer"
+    },
+    {
+     "label": "Local checks passing",
+     "value": "25",
+     "sub": "actual model evidence remains zero until the GPU run"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Both comparison arms are assigned exactly the same processing work",
+     "chart_read": "Four pairs of bars show the work assigned when the private middle section runs once, four, eight, or twelve times. Within every pair, the assembly-line version and the start-over version have equal-height bars.",
+     "chart_takeaway": "Any future difference cannot be credited to one side receiving more processing steps; this chart is a pre-run accounting check, not evidence that either side performs better."
+    }
+   ]
+  },
   "qwen35_4b_static_bridge_ceiling_breaker": {
    "verdict_tag": "Worked examples transfer only partway",
    "concept_primer": "Think of a repair technician handed a broken recipe plus a few taste-tests showing how the dish should come out; the job is to rewrite the recipe so it matches. Here the model repairs a broken mini-program the same way.",
