@@ -64,6 +64,6 @@ gates:
     mixed_usable_tasks_min: 8
 
 design_boundary:
-  commit: PENDING_DESIGN_COMMIT
-  readme_sha256: PENDING_DESIGN_COMMIT
-  preregistration_sha256: PENDING_DESIGN_COMMIT
+  commit: 1140df65832fdd9e861bcd38cb33dc2ed0fb7ebf
+  readme_sha256: 6d5da6e5908bbc42cc8c2661de77bc8d31b12aec6b7bc95192ce13b0bc095271
+  preregistration_sha256: 15e5af36ba89194aff5f65cc0dd941434795ef261eb3ece17b558faf386cc22c
