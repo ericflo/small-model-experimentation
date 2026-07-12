@@ -44,6 +44,7 @@ Top-level README files are required for all experiments. Generated entries shoul
 | `qwen35_4b_adaptive_evidence_budget_policy` | [README](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md) | [report](../experiments/qwen35_4b_adaptive_evidence_budget_policy/reports/qwen35_4b_adaptive_evidence_budget_policy_report.md) |
 | `qwen35_4b_adaptive_tool_controller` | [README](../experiments/qwen35_4b_adaptive_tool_controller/README.md) | [report](../experiments/qwen35_4b_adaptive_tool_controller/reports/report.md) |
 | `qwen35_4b_answer_potential_trace_sft` | [README](../experiments/qwen35_4b_answer_potential_trace_sft/README.md) | [report](../experiments/qwen35_4b_answer_potential_trace_sft/reports/report.md) |
+| `qwen35_4b_balanced_core_answer_potential_sft` | [README](../experiments/qwen35_4b_balanced_core_answer_potential_sft/README.md) | [report](../experiments/qwen35_4b_balanced_core_answer_potential_sft/reports/report.md) |
 | `qwen35_4b_balanced_discriminative_bridge` | [README](../experiments/qwen35_4b_balanced_discriminative_bridge/README.md) | [report](../experiments/qwen35_4b_balanced_discriminative_bridge/reports/qwen35_4b_balanced_discriminative_bridge_report.md) |
 | `qwen35_4b_bank_the_thoughts` | [README](../experiments/qwen35_4b_bank_the_thoughts/README.md) | [report](../experiments/qwen35_4b_bank_the_thoughts/reports/report.md) |
 | `qwen35_4b_banking_installs_structure` | [README](../experiments/qwen35_4b_banking_installs_structure/README.md) | [report](../experiments/qwen35_4b_banking_installs_structure/reports/report.md) |

@@ -213,6 +213,14 @@
     "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
    ]
   },
+  "qwen35_4b_balanced_core_answer_potential_sft": {
+   "start": "2026-07-12",
+   "end": "2026-07-12",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_balanced_discriminative_bridge": {
    "start": "2026-06-27",
    "end": "2026-06-27",
@@ -1204,6 +1212,14 @@
    "confidence": "high",
    "sources": [
     "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
+  "qwen35_4b_verifier_conditioned_recovery_bank": {
+   "start": "2026-07-12",
+   "end": "2026-07-12",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
    ]
   },
   "qwen35_4b_verifier_free_banking": {

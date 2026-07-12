@@ -14,3 +14,10 @@ conditional.
 
 At this boundary the GPU is idle. No remaining harvest task, training score, R1 train rollout, SFT update,
 or evaluation generation has run under this experiment.
+
+## 2026-07-12 — Immutable Design Anchor
+
+- Prospective README, preregistration, adversarial review, full restartable harness, frozen data, and 40
+  passing CPU tests were committed at `c847615f` before any experiment GPU call.
+- The configured guard now points to that commit and its three exact file digests. It fails before model
+  load if ancestry or content identity changes.

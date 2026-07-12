@@ -1,5 +1,5 @@
 schema_version: 1
-experiment_id: qwen35_4b_balanced_core_answer_potential_sft
+experiment_id: "qwen35_4b_balanced_core_answer_potential_sft"
 external_root: /workspace/large_artifacts/qwen35_4b_balanced_core_answer_potential_sft
 external_artifacts:
   - name: inherited parent train pool
