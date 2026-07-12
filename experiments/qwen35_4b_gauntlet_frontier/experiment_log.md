@@ -210,3 +210,28 @@ by mechanisms designed from the serial-compute diagnosis.
   frontier is fundamental; its max-min straddles the bar within measurement
   noise. The only remaining single-4B path is an inference-time tier-router;
   clearing both in one weight-set requires a larger base.
+
+## 2026-07-12 (expert iteration — the final arc) — EI ratchets harvest+quick, NOT medium; medium ceiling is a capability boundary
+
+- Ran a full expert-iteration round (user proposal: harvest from the best
+  joint soup, retrain, re-soup). Harvest from soup40 RATCHETED: 27%
+  unreachable-at-K vs blend's 36%, 632 vs 491 solved (+29%), 22% vs 19%
+  compression — C11's per-model coverage bound moves outward with a stronger
+  start.
+- But the gain lifts ONLY quick: apex2 (both-tier EI harvest) quick +0.375 /
+  medium +0.258; apexm2 (hard-only EI harvest, medium-designed) quick +0.381 /
+  medium +0.309. EVERY model trained on the soup harvest leans quick
+  regardless of data weighting — the harvest is quick-biased because the
+  medium tier's ~27% unreachable-at-K core never enters it.
+- soup_aa55 (same-recipe apex+apex2 soup): quick +0.336 / medium +0.304 —
+  apex2's weak medium dilutes it; no super-additive rescue.
+- DEFINITIVE: expert iteration cannot ratchet medium. apex +0.345 (trained on
+  the ORIGINAL non-EI harvest) remains the sole medium-clearing config. The
+  medium ceiling ~+0.345 is a CAPABILITY BOUNDARY of the 4B base (self-
+  generated data can only compress what the model already solves, never teach
+  the unreachable-at-K residual). Across ~110 paired events and EVERY single-
+  model method — 16 training arms, 4x capacity, data-interpolation, 6-point
+  weight-space soup sweep, and a full expert-iteration round — no single
+  Qwen3.5-4B model clears both +0.32 tiers. The tier-Pareto frontier is
+  fundamental; the conjunction requires an inference-time tier-router or a
+  larger base.

@@ -1,0 +1,700 @@
+{
+  "config": "configs/ei.yaml",
+  "smoke": false,
+  "adapter": null,
+  "merged": "../../large_artifacts/qwen35_4b_gauntlet_frontier/merged/soup40",
+  "atoms": {
+    "k": 6,
+    "families": {
+      "caravan": {
+        "items": 72,
+        "seconds": 214.6,
+        "yield": {
+          "caravan-L1": {
+            "items": 10,
+            "samples": 60,
+            "correct": 49,
+            "natural_close": 47,
+            "correct_and_closed": 47,
+            "items_with_keeper": 8
+          },
+          "caravan-L2": {
+            "items": 14,
+            "samples": 84,
+            "correct": 67,
+            "natural_close": 84,
+            "correct_and_closed": 67,
+            "items_with_keeper": 12
+          },
+          "caravan-L3": {
+            "items": 18,
+            "samples": 108,
+            "correct": 100,
+            "natural_close": 97,
+            "correct_and_closed": 89,
+            "items_with_keeper": 17
+          },
+          "caravan-L4": {
+            "items": 18,
+            "samples": 108,
+            "correct": 82,
+            "natural_close": 87,
+            "correct_and_closed": 65,
+            "items_with_keeper": 16
+          },
+          "caravan-L5": {
+            "items": 12,
+            "samples": 72,
+            "correct": 48,
+            "natural_close": 52,
+            "correct_and_closed": 30,
+            "items_with_keeper": 11
+          }
+        }
+      },
+      "foundry_ledger": {
+        "items": 72,
+        "seconds": 343.6,
+        "yield": {
+          "foundry_ledger-L1": {
+            "items": 10,
+            "samples": 60,
+            "correct": 60,
+            "natural_close": 60,
+            "correct_and_closed": 60,
+            "items_with_keeper": 10
+          },
+          "foundry_ledger-L2": {
+            "items": 14,
+            "samples": 84,
+            "correct": 70,
+            "natural_close": 52,
+            "correct_and_closed": 45,
+            "items_with_keeper": 11
+          },
+          "foundry_ledger-L3": {
+            "items": 18,
+            "samples": 108,
+            "correct": 87,
+            "natural_close": 70,
+            "correct_and_closed": 60,
+            "items_with_keeper": 13
+          },
+          "foundry_ledger-L4": {
+            "items": 18,
+            "samples": 108,
+            "correct": 65,
+            "natural_close": 51,
+            "correct_and_closed": 41,
+            "items_with_keeper": 10
+          },
+          "foundry_ledger-L5": {
+            "items": 12,
+            "samples": 72,
+            "correct": 18,
+            "natural_close": 24,
+            "correct_and_closed": 11,
+            "items_with_keeper": 2
+          }
+        }
+      },
+      "stallwright": {
+        "items": 72,
+        "seconds": 175.5,
+        "yield": {
+          "stallwright-L1": {
+            "items": 10,
+            "samples": 60,
+            "correct": 26,
+            "natural_close": 60,
+            "correct_and_closed": 26,
+            "items_with_keeper": 6
+          },
+          "stallwright-L2": {
+            "items": 14,
+            "samples": 84,
+            "correct": 37,
+            "natural_close": 83,
+            "correct_and_closed": 37,
+            "items_with_keeper": 11
+          },
+          "stallwright-L3": {
+            "items": 18,
+            "samples": 108,
+            "correct": 11,
+            "natural_close": 107,
+            "correct_and_closed": 11,
+            "items_with_keeper": 6
+          },
+          "stallwright-L4": {
+            "items": 18,
+            "samples": 108,
+            "correct": 11,
+            "natural_close": 107,
+            "correct_and_closed": 11,
+            "items_with_keeper": 4
+          },
+          "stallwright-L5": {
+            "items": 12,
+            "samples": 72,
+            "correct": 1,
+            "natural_close": 71,
+            "correct_and_closed": 1,
+            "items_with_keeper": 1
+          }
+        }
+      },
+      "runeward": {
+        "items": 72,
+        "seconds": 149.4,
+        "yield": {
+          "runeward-L1": {
+            "items": 10,
+            "samples": 60,
+            "correct": 60,
+            "natural_close": 60,
+            "correct_and_closed": 60,
+            "items_with_keeper": 10
+          },
+          "runeward-L2": {
+            "items": 14,
+            "samples": 84,
+            "correct": 76,
+            "natural_close": 84,
+            "correct_and_closed": 76,
+            "items_with_keeper": 14
+          },
+          "runeward-L3": {
+            "items": 18,
+            "samples": 108,
+            "correct": 101,
+            "natural_close": 106,
+            "correct_and_closed": 99,
+            "items_with_keeper": 18
+          },
+          "runeward-L4": {
+            "items": 18,
+            "samples": 108,
+            "correct": 99,
+            "natural_close": 107,
+            "correct_and_closed": 98,
+            "items_with_keeper": 18
+          },
+          "runeward-L5": {
+            "items": 12,
+            "samples": 72,
+            "correct": 61,
+            "natural_close": 70,
+            "correct_and_closed": 59,
+            "items_with_keeper": 12
+          }
+        }
+      },
+      "kilnrite": {
+        "items": 72,
+        "seconds": 120.9,
+        "yield": {
+          "kilnrite-L1": {
+            "items": 10,
+            "samples": 60,
+            "correct": 60,
+            "natural_close": 60,
+            "correct_and_closed": 60,
+            "items_with_keeper": 10
+          },
+          "kilnrite-L2": {
+            "items": 14,
+            "samples": 84,
+            "correct": 84,
+            "natural_close": 84,
+            "correct_and_closed": 84,
+            "items_with_keeper": 14
+          },
+          "kilnrite-L3": {
+            "items": 18,
+            "samples": 108,
+            "correct": 108,
+            "natural_close": 108,
+            "correct_and_closed": 108,
+            "items_with_keeper": 18
+          },
+          "kilnrite-L4": {
+            "items": 18,
+            "samples": 108,
+            "correct": 104,
+            "natural_close": 108,
+            "correct_and_closed": 104,
+            "items_with_keeper": 18
+          },
+          "kilnrite-L5": {
+            "items": 12,
+            "samples": 72,
+            "correct": 72,
+            "natural_close": 72,
+            "correct_and_closed": 72,
+            "items_with_keeper": 12
+          }
+        }
+      },
+      "glyphgate": {
+        "items": 72,
+        "seconds": 191.0,
+        "yield": {
+          "glyphgate-L1": {
+            "items": 10,
+            "samples": 60,
+            "correct": 58,
+            "natural_close": 60,
+            "correct_and_closed": 58,
+            "items_with_keeper": 10
+          },
+          "glyphgate-L2": {
+            "items": 14,
+            "samples": 84,
+            "correct": 61,
+            "natural_close": 83,
+            "correct_and_closed": 61,
+            "items_with_keeper": 12
+          },
+          "glyphgate-L3": {
+            "items": 18,
+            "samples": 108,
+            "correct": 39,
+            "natural_close": 106,
+            "correct_and_closed": 38,
+            "items_with_keeper": 8
+          },
+          "glyphgate-L4": {
+            "items": 18,
+            "samples": 108,
+            "correct": 4,
+            "natural_close": 59,
+            "correct_and_closed": 4,
+            "items_with_keeper": 4
+          },
+          "glyphgate-L5": {
+            "items": 12,
+            "samples": 72,
+            "correct": 3,
+            "natural_close": 49,
+            "correct_and_closed": 3,
+            "items_with_keeper": 3
+          }
+        }
+      },
+      "loomfix": {
+        "items": 72,
+        "seconds": 132.5,
+        "yield": {
+          "loomfix-L1": {
+            "items": 10,
+            "samples": 60,
+            "correct": 41,
+            "natural_close": 58,
+            "correct_and_closed": 40,
+            "items_with_keeper": 10
+          },
+          "loomfix-L2": {
+            "items": 14,
+            "samples": 84,
+            "correct": 60,
+            "natural_close": 82,
+            "correct_and_closed": 59,
+            "items_with_keeper": 14
+          },
+          "loomfix-L3": {
+            "items": 18,
+            "samples": 108,
+            "correct": 70,
+            "natural_close": 107,
+            "correct_and_closed": 70,
+            "items_with_keeper": 16
+          },
+          "loomfix-L4": {
+            "items": 18,
+            "samples": 108,
+            "correct": 75,
+            "natural_close": 106,
+            "correct_and_closed": 73,
+            "items_with_keeper": 16
+          },
+          "loomfix-L5": {
+            "items": 12,
+            "samples": 72,
+            "correct": 51,
+            "natural_close": 72,
+            "correct_and_closed": 51,
+            "items_with_keeper": 11
+          }
+        }
+      },
+      "ferrier": {
+        "items": 72,
+        "seconds": 230.1,
+        "yield": {
+          "ferrier-L1": {
+            "items": 10,
+            "samples": 60,
+            "correct": 57,
+            "natural_close": 60,
+            "correct_and_closed": 57,
+            "items_with_keeper": 10
+          },
+          "ferrier-L2": {
+            "items": 14,
+            "samples": 84,
+            "correct": 82,
+            "natural_close": 83,
+            "correct_and_closed": 81,
+            "items_with_keeper": 14
+          },
+          "ferrier-L3": {
+            "items": 18,
+            "samples": 108,
+            "correct": 104,
+            "natural_close": 107,
+            "correct_and_closed": 103,
+            "items_with_keeper": 18
+          },
+          "ferrier-L4": {
+            "items": 18,
+            "samples": 108,
+            "correct": 106,
+            "natural_close": 92,
+            "correct_and_closed": 90,
+            "items_with_keeper": 18
+          },
+          "ferrier-L5": {
+            "items": 12,
+            "samples": 72,
+            "correct": 72,
+            "natural_close": 64,
+            "correct_and_closed": 64,
+            "items_with_keeper": 12
+          }
+        }
+      },
+      "burrowmaze": {
+        "items": 72,
+        "seconds": 168.7,
+        "yield": {
+          "burrowmaze-L1": {
+            "items": 10,
+            "samples": 60,
+            "correct": 59,
+            "natural_close": 58,
+            "correct_and_closed": 57,
+            "items_with_keeper": 10
+          },
+          "burrowmaze-L2": {
+            "items": 14,
+            "samples": 84,
+            "correct": 81,
+            "natural_close": 82,
+            "correct_and_closed": 79,
+            "items_with_keeper": 14
+          },
+          "burrowmaze-L3": {
+            "items": 18,
+            "samples": 108,
+            "correct": 107,
+            "natural_close": 101,
+            "correct_and_closed": 100,
+            "items_with_keeper": 18
+          },
+          "burrowmaze-L4": {
+            "items": 18,
+            "samples": 108,
+            "correct": 103,
+            "natural_close": 101,
+            "correct_and_closed": 99,
+            "items_with_keeper": 18
+          },
+          "burrowmaze-L5": {
+            "items": 12,
+            "samples": 72,
+            "correct": 52,
+            "natural_close": 62,
+            "correct_and_closed": 50,
+            "items_with_keeper": 10
+          }
+        }
+      },
+      "gatepost": {
+        "items": 72,
+        "seconds": 193.3,
+        "yield": {
+          "gatepost-L1": {
+            "items": 10,
+            "samples": 60,
+            "correct": 60,
+            "natural_close": 59,
+            "correct_and_closed": 59,
+            "items_with_keeper": 10
+          },
+          "gatepost-L2": {
+            "items": 14,
+            "samples": 84,
+            "correct": 84,
+            "natural_close": 79,
+            "correct_and_closed": 79,
+            "items_with_keeper": 14
+          },
+          "gatepost-L3": {
+            "items": 18,
+            "samples": 108,
+            "correct": 108,
+            "natural_close": 108,
+            "correct_and_closed": 108,
+            "items_with_keeper": 18
+          },
+          "gatepost-L4": {
+            "items": 18,
+            "samples": 108,
+            "correct": 105,
+            "natural_close": 97,
+            "correct_and_closed": 97,
+            "items_with_keeper": 18
+          },
+          "gatepost-L5": {
+            "items": 12,
+            "samples": 72,
+            "correct": 72,
+            "natural_close": 70,
+            "correct_and_closed": 70,
+            "items_with_keeper": 12
+          }
+        }
+      },
+      "patchwheel": {
+        "items": 72,
+        "seconds": 247.3,
+        "yield": {
+          "patchwheel-L1": {
+            "items": 10,
+            "samples": 60,
+            "correct": 20,
+            "natural_close": 50,
+            "correct_and_closed": 19,
+            "items_with_keeper": 7
+          },
+          "patchwheel-L2": {
+            "items": 14,
+            "samples": 84,
+            "correct": 32,
+            "natural_close": 74,
+            "correct_and_closed": 31,
+            "items_with_keeper": 10
+          },
+          "patchwheel-L3": {
+            "items": 18,
+            "samples": 108,
+            "correct": 21,
+            "natural_close": 90,
+            "correct_and_closed": 19,
+            "items_with_keeper": 10
+          },
+          "patchwheel-L4": {
+            "items": 18,
+            "samples": 108,
+            "correct": 11,
+            "natural_close": 81,
+            "correct_and_closed": 9,
+            "items_with_keeper": 7
+          },
+          "patchwheel-L5": {
+            "items": 12,
+            "samples": 72,
+            "correct": 7,
+            "natural_close": 52,
+            "correct_and_closed": 5,
+            "items_with_keeper": 4
+          }
+        }
+      },
+      "packhouse": {
+        "items": 72,
+        "seconds": 260.7,
+        "yield": {
+          "packhouse-L1": {
+            "items": 10,
+            "samples": 60,
+            "correct": 4,
+            "natural_close": 56,
+            "correct_and_closed": 4,
+            "items_with_keeper": 3
+          },
+          "packhouse-L2": {
+            "items": 14,
+            "samples": 84,
+            "correct": 3,
+            "natural_close": 78,
+            "correct_and_closed": 2,
+            "items_with_keeper": 2
+          },
+          "packhouse-L3": {
+            "items": 18,
+            "samples": 108,
+            "correct": 0,
+            "natural_close": 99,
+            "correct_and_closed": 0,
+            "items_with_keeper": 0
+          },
+          "packhouse-L4": {
+            "items": 18,
+            "samples": 108,
+            "correct": 1,
+            "natural_close": 100,
+            "correct_and_closed": 1,
+            "items_with_keeper": 1
+          },
+          "packhouse-L5": {
+            "items": 12,
+            "samples": 72,
+            "correct": 0,
+            "natural_close": 67,
+            "correct_and_closed": 0,
+            "items_with_keeper": 0
+          }
+        }
+      }
+    }
+  },
+  "episodes": {
+    "k": 4,
+    "families": {
+      "kilnrite": {
+        "specs": 22,
+        "seconds": 416.2,
+        "yield": {
+          "kilnrite-L2": {
+            "rollouts": 40,
+            "success": 39,
+            "turns_sum": 201,
+            "forced_close_turns": 10,
+            "total_turns": 201,
+            "mean_score": 0.995
+          },
+          "kilnrite-L3": {
+            "rollouts": 48,
+            "success": 17,
+            "turns_sum": 432,
+            "forced_close_turns": 42,
+            "total_turns": 432,
+            "mean_score": 0.7798
+          }
+        }
+      },
+      "glyphgate": {
+        "specs": 22,
+        "seconds": 240.3,
+        "yield": {
+          "glyphgate-L2": {
+            "rollouts": 40,
+            "success": 38,
+            "turns_sum": 129,
+            "forced_close_turns": 2,
+            "total_turns": 129,
+            "mean_score": 0.95
+          },
+          "glyphgate-L3": {
+            "rollouts": 48,
+            "success": 38,
+            "turns_sum": 181,
+            "forced_close_turns": 6,
+            "total_turns": 181,
+            "mean_score": 0.7917
+          }
+        }
+      },
+      "loomfix": {
+        "specs": 22,
+        "seconds": 454.3,
+        "yield": {
+          "loomfix-L2": {
+            "rollouts": 40,
+            "success": 23,
+            "turns_sum": 171,
+            "forced_close_turns": 41,
+            "total_turns": 171,
+            "mean_score": 0.6125
+          },
+          "loomfix-L3": {
+            "rollouts": 48,
+            "success": 34,
+            "turns_sum": 258,
+            "forced_close_turns": 75,
+            "total_turns": 258,
+            "mean_score": 0.7778
+          }
+        }
+      },
+      "ferrier": {
+        "specs": 22,
+        "seconds": 83.4,
+        "yield": {
+          "ferrier-L2": {
+            "rollouts": 40,
+            "success": 40,
+            "turns_sum": 124,
+            "forced_close_turns": 0,
+            "total_turns": 124,
+            "mean_score": 1.0
+          },
+          "ferrier-L3": {
+            "rollouts": 48,
+            "success": 48,
+            "turns_sum": 222,
+            "forced_close_turns": 0,
+            "total_turns": 222,
+            "mean_score": 1.0
+          }
+        }
+      },
+      "burrowmaze": {
+        "specs": 22,
+        "seconds": 332.1,
+        "yield": {
+          "burrowmaze-L2": {
+            "rollouts": 40,
+            "success": 4,
+            "turns_sum": 233,
+            "forced_close_turns": 3,
+            "total_turns": 233,
+            "mean_score": 0.1
+          },
+          "burrowmaze-L3": {
+            "rollouts": 48,
+            "success": 7,
+            "turns_sum": 456,
+            "forced_close_turns": 13,
+            "total_turns": 456,
+            "mean_score": 0.1458
+          }
+        }
+      },
+      "gatepost": {
+        "specs": 22,
+        "seconds": 101.5,
+        "yield": {
+          "gatepost-L2": {
+            "rollouts": 40,
+            "success": 40,
+            "turns_sum": 84,
+            "forced_close_turns": 3,
+            "total_turns": 84,
+            "mean_score": 1.0
+          },
+          "gatepost-L3": {
+            "rollouts": 48,
+            "success": 47,
+            "turns_sum": 113,
+            "forced_close_turns": 2,
+            "total_turns": 113,
+            "mean_score": 0.9792
+          }
+        }
+      }
+    }
+  }
+}

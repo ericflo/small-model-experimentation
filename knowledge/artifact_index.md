@@ -38,15 +38,15 @@ This is a repository-level inventory. Each experiment remains the source of trut
 
 | Extension | Files |
 | --- | ---: |
-| `.json` | 2570 |
+| `.json` | 2607 |
 | `.csv` | 2138 |
 | `.py` | 1528 |
 | `.md` | 980 |
 | `.png` | 848 |
-| `.jsonl` | 748 |
+| `.jsonl` | 751 |
 | `.log` | 527 |
-| `.yaml` | 360 |
-| `.gz` | 115 |
+| `.yaml` | 361 |
+| `.gz` | 133 |
 | `.html` | 90 |
 | `.sh` | 19 |
 | `.pt` | 9 |
@@ -59,8 +59,10 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | Size MB | File |
 | ---: | --- |
 | 15.7 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_sharp1024.jsonl` |
+| 14.9 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_apex2.jsonl` |
 | 14.3 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_apex.jsonl` |
 | 14.1 | `experiments/qwen35_4b_active_counterexample_trace_selection/reports/policy_rows.json` |
+| 12.3 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_apexm2.jsonl` |
 | 11.9 | `experiments/qwen35_4b_partial_structure_search/data/calibration_candidates.jsonl` |
 | 11.4 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_frontier.jsonl` |
 | 11.4 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_apex60.jsonl` |
@@ -86,5 +88,3 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | 6.4 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_blend2.jsonl` |
 | 6.3 | `experiments/qwen35_4b_interactive_policy_curriculum/data/dagger_train.jsonl` |
 | 6.0 | `experiments/feature_factorized_rule_diversity/data/repair_all.jsonl` |
-| 5.8 | `experiments/qwen35_4b_active_counterexample_trace_selection/data/eval/dsl_eval_support.jsonl` |
-| 5.8 | `experiments/qwen35_4b_learned_active_trace_policy/data/eval/dsl_eval_support.jsonl` |
