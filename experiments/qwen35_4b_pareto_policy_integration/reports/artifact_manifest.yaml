@@ -22,4 +22,6 @@ reproducibility:
 notes: >-
   Small calibration/evaluation rows, gate receipts, token ledgers, and analyses
   remain in git. Benchmark items and transcripts are never retained. Every
-  evaluated LoRA is explicitly merged into the composite checkpoint.
+  evaluated LoRA is explicitly merged into the composite checkpoint. The run
+  stopped at specialist qualification, so no integrated/control adapter or
+  teacher-cache artifact was produced.

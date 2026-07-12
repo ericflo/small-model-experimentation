@@ -1,10 +1,11 @@
 # Qwen3.5-4B Pareto Policy Integration
 
-Status: **preregistered and implementation in progress**. This clean successor
-tests whether corrected on-policy policy-space distillation can combine C54's
-quick-optimal `blend` and deep-optimal `apex` policies into one checkpoint. It
-removes the prior experiment's arbitrary `+0.10` teacher hurdle: any replicated,
-statistically credible positive paired gain qualifies.
+Status: **stopped negative on 2026-07-12 before teacher audit**. This clean
+successor removed the prior experiment's arbitrary `+0.10` teacher hurdle and
+gave any replicated, statistically credible positive paired gain a path
+forward. The regenerated C54 policies did not form the required complementary
+pair on the clean procedural proxy: `blend` lost its intended quick comparison
+in both blocks, while `apex` won deep capability but missed retention.
 
 ## Research Programs
 
@@ -95,14 +96,30 @@ python3 experiments/qwen35_4b_pareto_policy_integration/scripts/run.py --stage c
 The benchmark stage is intentionally unavailable until every procedural gate
 passes.
 
+The reached `qualify` command now exits nonzero by design after writing the
+terminal receipt. All later commands fail closed on that receipt and must not
+be run in this experiment.
+
 ## Current Evidence
 
 - Prior result preserved: the old `+0.10` rule was impossible at a 0.994 tools
-  baseline and did not test MOPD.
-- C54 supplies the motivating Pareto policies and committed training data, but
-  this experiment independently regenerates and installation-gates its own
-  artifacts.
-- No new task-model output exists yet.
+  baseline and did not test MOPD. This successor actually tested the corrected
+  `delta > 0` prerequisite.
+- Both specialists were independently regenerated, explicitly merged, and
+  behavior-gated. Calibration and all four qualification arms passed exact
+  model, engine, seed, scope, and pairing checks.
+- On 768 pooled quick capability pairs, `blend - apex = -0.02241`; both block
+  means were negative (`-0.00693`, `-0.03789`) and the one-sided 95% lower
+  bound was `-0.04897`. The failure is the sign of the effect, not an
+  arbitrary minimum magnitude.
+- On 4,032 pooled deep capability pairs, `apex - blend = +0.04563`; both block
+  means were positive (`+0.04254`, `+0.04871`) and the lower bound was
+  `+0.03401`. However, six deep retention cells regressed by more than the
+  frozen 0.02 allowance.
+- Therefore the C54 quick/medium Pareto labeling did not transport into a
+  clean quick/deep teacher crossover. This result says nothing about MOPD's
+  efficacy: no teacher audit, locality pilot, MOPD update, control,
+  confirmation, or benchmark invocation ran.
 
 ## Artifacts
 
@@ -112,6 +129,9 @@ passes.
 - `reports/design_review.md`: adversarial pre-run review.
 - `reports/literature_review.md`: primary-paper map behind the social-post
   acronyms and the experiment's collapse safeguards.
+- `analysis/specialist_qualification.json`: terminal paired gate receipt.
+- `runs/policy_eval/*qualification*`: all four raw qualification arms and
+  provenance metadata.
 - `src/gym/`: contamination-safe procedural substrate.
 - `src/mopd_loss.py`: corrected teacher-top-k reverse-KL objective.
 - `reports/artifact_manifest.yaml`: external checkpoint policy.

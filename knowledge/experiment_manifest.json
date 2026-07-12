@@ -3479,15 +3479,18 @@
     "primary_report": "experiments/qwen35_4b_pareto_policy_integration/reports/report.md",
     "research_programs": [
       "agentic_breadth_installation",
+      "evidence_conditioned_selection",
       "posttraining_and_adaptation",
       "process_control_and_tool_use",
+      "reliability_and_safety",
       "structured_execution_and_compilers"
     ],
     "source_track": "new",
-    "summary": "Status: **preregistered and implementation in progress**. This clean successor tests whether corrected on-policy policy-space distillation can combine C54's quick-optimal `blend` and deep-optimal `apex` policies into one checkpoint. It removes the prior experiment's arbitrary `+0.10` teacher hurdle: any replicated, statistically credible positive paired gain qualifies.",
+    "summary": "Status: **stopped negative on 2026-07-12 before teacher audit**. This clean successor removed the prior experiment's arbitrary `+0.10` teacher hurdle and gave any replicated, statistically credible positive paired gain a path forward. The regenerated C54 policies did not form the required complementary pair on the clean procedural proxy: `blend` lost its intended quick comparison in both blocks, while `apex` won deep capability but missed retention.",
     "tags": [
+      "abi",
+      "counterexamples",
       "distillation",
-      "latent-state",
       "policy",
       "small-model"
     ],
@@ -3502,7 +3505,7 @@
       "tests"
     ],
     "total_files": 97,
-    "total_size_bytes": 37094073
+    "total_size_bytes": 37101248
   },
   {
     "file_counts": {

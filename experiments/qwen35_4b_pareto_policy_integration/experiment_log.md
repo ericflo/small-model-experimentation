@@ -186,9 +186,9 @@ Created as a new experiment scaffold.
 - Deep policy block 1 completed all 4,416 items in 3,013.91 seconds using
   4,319,026 sampled tokens. Broad raw means were `0.8268` quick and `0.5819`
   deep, and every exact-model, runner, engine, seed, and scope check passed.
-- Across all four frozen qualification arms, 17,664 paired item evaluations
-  used 18,049,063 sampled tokens and 12,713.08 seconds. No item, family, seed,
-  or arm was filtered after observation.
+- Across all four frozen qualification arms, 17,664 arm-item evaluations
+  (8,832 paired item identities) used 18,049,063 sampled tokens and 12,713.08
+  seconds. No item, family, seed, or arm was filtered after observation.
 - The quick policy's intended-stratum capability delta was negative in both
   independent blocks (`-0.00693`, `-0.03789`) and pooled to `-0.02241` with a
   one-sided 95% stratified-bootstrap lower bound of `-0.04897`. It therefore
