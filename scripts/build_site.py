@@ -2431,14 +2431,40 @@ class SiteBuilder:
                 f"<h1>{esc(title)}</h1>"
                 f'<p class="doc-src muted">Rendered from <a href="{GITHUB}/blob/main/knowledge/{esc(filename)}">knowledge/{esc(filename)}</a></p>'
             )
+            plain_panel = ""
+            if filename == "synthesis.md":
+                lb = self.learned_block(prefix)
+                if lb:
+                    plain_panel = (
+                        '<section class="learned-panel"><p class="kicker">In plain language</p>'
+                        f'{lb}<p class="learned-panel-note muted">The precise, technical synthesis follows below.</p></section>'
+                    )
             self.write_page(
                 f"notebook/{slug}/index.html",
                 title=f"{title} · {SITE_NAME}",
                 description=blurb,
                 prefix=prefix,
                 active="notebook",
-                content=f'<div class="detail-layout"><div class="detail-main doc-page">{header}{mobile_toc}{doc_html}</div>{toc}</div>',
+                content=f'<div class="detail-layout"><div class="detail-main doc-page">{header}{mobile_toc}{plain_panel}{doc_html}</div>{toc}</div>',
             )
+
+    def learned_block(self, prefix: str) -> str:
+        """Plain-language 'what we've learned' (knowledge/synthesis_plain.json): a
+        lead arc + tone-coded takeaways. Shared by the home and the notebook."""
+        path = KNOWLEDGE / "synthesis_plain.json"
+        data = read_json(path) if path.exists() else {}
+        data = data if isinstance(data, dict) else {}
+        tone_dot = {"positive": "var(--good)", "negative": "var(--critical)", "mixed": "var(--slot-3)", "open": "var(--baseline)"}
+        items = "".join(
+            f'<li class="learned-item"><span class="learned-dot" style="background:{tone_dot.get(str(t.get("tone")), "var(--baseline)")}" aria-hidden="true"></span>'
+            f'<div><h3>{esc(t.get("headline", ""))}</h3><p>{self.rich_text(str(t.get("body", "")), prefix)}</p></div></li>'
+            for t in data.get("takeaways", []) if isinstance(t, dict) and t.get("headline")
+        )
+        arc = str(data.get("arc", "")).strip()
+        return (
+            (f'<p class="learned-arc">{esc(arc)}</p>' if arc else "")
+            + (f'<ol class="learned-list">{items}</ol>' if items else "")
+        )
 
     # ------------------------------------------------------------------ home
 
@@ -2481,20 +2507,7 @@ class SiteBuilder:
 
         # A plain-language, fact-checked "what we've learned" (knowledge/synthesis_plain.json)
         # replaces the jargon-dense technical Executive Read as the home's answer.
-        plain_path = KNOWLEDGE / "synthesis_plain.json"
-        learned = read_json(plain_path) if plain_path.exists() else {}
-        learned = learned if isinstance(learned, dict) else {}
-        _tone_dot = {"positive": "var(--good)", "negative": "var(--critical)", "mixed": "var(--slot-3)", "open": "var(--baseline)"}
-        learned_items = "".join(
-            f'<li class="learned-item"><span class="learned-dot" style="background:{_tone_dot.get(str(t.get("tone")), "var(--baseline)")}" aria-hidden="true"></span>'
-            f'<div><h3>{esc(t.get("headline", ""))}</h3><p>{self.rich_text(str(t.get("body", "")), prefix)}</p></div></li>'
-            for t in learned.get("takeaways", []) if isinstance(t, dict) and t.get("headline")
-        )
-        learned_arc = str(learned.get("arc", "")).strip()
-        learned_html = (
-            (f'<p class="learned-arc">{esc(learned_arc)}</p>' if learned_arc else "")
-            + (f'<ol class="learned-list">{learned_items}</ol>' if learned_items else "")
-        )
+        learned_html = self.learned_block(prefix)
 
         claim_counts = Counter(str(claim.get("status")) for claim in self.claims)
         confirmed = claim_counts.get("Confirmed", 0)
