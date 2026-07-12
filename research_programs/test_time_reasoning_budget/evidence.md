@@ -190,3 +190,16 @@ split. A future policy-space test should estimate verified continuation
 advantage at the actual state, then freeze and replicate the route before
 training; the visible two-checkpoint tier router remains only an inference
 upper reference.
+
+## Replicated fixed-cap semantic commit (2026-07-12)
+
+`qwen35_4b_commit_slot_semantic_power_replication` resolves the earlier 16-task
+near miss without raising the budget. At fixed cap 1,024, 113-task qualification
+and 113-task untouched confirmation independently passed every frozen semantic,
+task-bootstrap, breadth, and unrestricted-interface gate. Ordered versus exact-
+token-shuffle accuracy was 27.14% versus 13.57%, then 28.91% versus 13.86%;
+no-thought was 9.73% then 7.08%. One-sided task lower bounds were +8.85pp and
++9.44pp. Every path still required an external cap commit, so this is evidence
+for coherent thought content at a fixed counterfactual state, not autonomous
+termination. Hold the budget fixed and test whether task-held-out prefix value
+can route or causally improve this deployed state.

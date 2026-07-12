@@ -105,3 +105,26 @@ real-minus-no-thought and real-minus-shuffled uncertainty gates. It must keep
 alias support balanced and open a disjoint confirmation before J features. Do
 not relax this experiment, promote post-hoc residual decoders, or raise the cap
 until that fixed-budget semantic hint replicates.
+
+## Fifth successor outcome
+
+`qwen35_4b_commit_slot_semantic_power_replication` now supplies the required
+independent replication. At fixed cap 1,024, qualification on 113 fresh tasks
+scored 92/339 ordered versus 46/339 shuffled and 11/113 no-thought; the untouched
+113-task confirmation scored 98/339 versus 47/339 and 8/113. One-sided task-
+bootstrap lower bounds over shuffle were +8.85pp and +9.44pp, mixed tasks were
+32 and 31, correct support spanned 11 and 10 target aliases, and every
+unrestricted-interface gate passed. No pooling was needed or permitted.
+
+The answer seam prerequisite is therefore satisfied. Resume native-thought
+prefix-value/J work at this exact fixed interface and budget, not by raising the
+cap or changing the decoder. The new adversarial boundary is identity: one
+confirmation target had zero ordered successes and shuffle favored two target
+aliases. A value feature must be task-held-out and add signal beyond correct-
+alias activity, ordinary slot margin, and alias identity. Causal work must retain
+live-prefix post-bf16 control construction and the sealed confirmation split.
+
+This does not yet satisfy the original deployment objective. Gold-labeled value
+and donor interventions remain oracle diagnostics. A later label-free
+controller must beat frozen Qwen3.5-4B and matched-compute sampling on new
+contamination-free tasks before the line becomes a capability result.

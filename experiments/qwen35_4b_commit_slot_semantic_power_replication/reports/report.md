@@ -2,8 +2,9 @@
 
 ## Status
 
-Qualification `POWERED_COMMIT_SLOT_SEAM_QUALIFIED`; untouched confirmation is
-authorized but unopened. J stages remain sealed.
+Terminal seam result `POWERED_COMMIT_SLOT_SEAM_REPLICATED`. Qualification and
+untouched confirmation independently passed every frozen gate. J stages remain
+sealed pending a new outcome-blind implementation and adversarial audit.
 
 ## Purpose
 
@@ -66,17 +67,74 @@ Qualification sampled 347,136 native thought tokens in 11,669.621 seconds and
 processed 492,435 real plus 492,435 shuffled slot-prefill tokens. Peak allocated
 GPU memory was 8,706,993,152 bytes.
 
-The automatic decision is `POWERED_COMMIT_SLOT_SEAM_QUALIFIED` at the only
-registered cap 1,024. This is a genuine fresh qualification of ordered-content
-semantic contribution under a constrained answer interface. It does not count
-as replication until the untouched 113-task split independently passes every
-identical gate, and it opens no J stage by itself.
+The automatic qualification decision was `POWERED_COMMIT_SLOT_SEAM_QUALIFIED`
+at the only registered cap 1,024. It opened exactly one hash-locked confirmation
+and no J stage by itself.
+
+## Independent confirmation result
+
+The untouched confirmation then completed exactly the same 339 native traces,
+339 real slots, 339 exact-token-multiset shuffled slots, 339 close-only controls,
+and 113 no-thought slots. Every path again contacted cap 1,024. No selection row
+was pooled into a confirmation decision.
+
+| metric | confirmation | frozen requirement | pass |
+| --- | ---: | ---: | --- |
+| real slot accuracy | 98/339 (0.289086) | 0.20--0.70 | yes |
+| no-thought accuracy | 8/113 (0.070796) | real minus >=0.03 | yes (+0.218289) |
+| shuffled accuracy | 47/339 (0.138643) | real minus >=0.05 | yes (+0.150442) |
+| one-sided 95% task lower, real−shuffle | 0.094395 | >0 | yes |
+| mixed real tasks | 31/113 | >=28 | yes |
+| correct-alias support | 10 | >=8 | yes |
+| chosen-alias support | 12 | >=8 | yes |
+| unmasked top-is-alias | 0.876106 | >=0.75 | yes |
+| mean total alias mass | 0.663490 | >=0.50 | yes |
+| finite real rows | 1.0 | 1.0 | yes |
+
+The no-thought task lower diagnostic was 0.165192. Correct-alias probability
+averaged 0.239230 under ordered thought versus 0.153041 shuffled. Only 19.8% of
+ordered prefixes contained the correct alias token, and the post-decision
+mention strata were not favorable to copying: success was 26.9% with a mention
+versus 29.4% without one. The unrestricted next token was already an alias on
+297/339 rows, and aliases carried 66.35% mean full-vocabulary mass. Close-only
+free-form again remained unusable: 55/339 parsed, 20/339 succeeded, and 316/339
+exhausted its answer cap.
+
+Confirmation sampled 347,136 native thought tokens in 11,690.539 seconds and
+processed 491,457 real plus 491,457 shuffled slot-prefill tokens. Peak allocated
+GPU memory was 8,704,452,608 bytes. The automatic terminal seam decision is
+`POWERED_COMMIT_SLOT_SEAM_REPLICATED`.
+
+## Post-decision replication audit
+
+The deterministic audit preserves the two stage decisions and adds two-sided
+task-bootstrap diagnostics. Ordered-minus-shuffled was 0.135693 [0.079646,
+0.191740] in qualification and 0.150442 [0.082596, 0.218289] in confirmation.
+The difference between those two independent effects was 0.014749 with interval
+[-0.073746, 0.103245], providing no evidence of stage drift. At the paired-path
+level, ordered-only wins versus shuffled-only wins were 60:14 and 64:13. Task
+effects were positive/zero/negative on 35/72/6 and 34/71/8 tasks.
+
+The pooled 226-task effect, explicitly diagnostic and unnecessary for either
+pass, was 0.143068 [0.098820, 0.187316]. It cannot rescue a failed stage.
+
+Alias identity remains an important nuisance. Confirmation successes spanned
+10 of 11 target aliases, but `horse` had 0/30 ordered successes. Shuffle beat
+ordered thought for `tiger` (28/30 versus 21/30) and `river` (13/30 versus
+11/30), while most other targets favored ordered thought. This heterogeneity
+does not defeat the registered breadth/task gates, but it forbids treating raw
+alias logits or identity as a certainty coordinate. Any value model must use
+task-held-out evaluation and demonstrate incremental signal over correct-alias
+activity, slot margin, and alias identity.
 
 ## Boundary
 
-Even a later replicated pass is constrained semantic elicitation, not J
-certainty or installed capability. J/value/control/causal commands still fail
-closed.
+This is replicated constrained semantic elicitation: ordered native thought
+changes the fixed semantic commit choice beyond syntax and identical token-bag
+controls. It is not autonomous termination, free-form capability, J certainty,
+or installed capability. Gold labels evaluate the seam. J/value/control/causal
+commands still fail closed until a separately committed outcome-blind audit and
+implementation boundary.
 
 ## Artifact Manifest
 

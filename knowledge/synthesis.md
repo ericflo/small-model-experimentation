@@ -262,6 +262,30 @@ keeps confirmation and J value unopened. **Formatting is now separated from
 semantic resolution:** power a fresh fixed-1,024 task-level replication before
 raising the cap, changing the decoder, or fitting any certainty coordinate.
 
+That powered repair now succeeds independently twice. In
+[qwen35_4b_commit_slot_semantic_power_replication](../experiments/qwen35_4b_commit_slot_semantic_power_replication/reports/report.md),
+qualification on 113 fresh tasks scored 92/339 ordered versus 46/339 exact
+token-multiset shuffle and 11/113 no-thought; confirmation on another 113 tasks
+scored 98/339 versus 47/339 and 8/113. One-sided task-bootstrap lower bounds for
+ordered-minus-shuffle were +8.85pp and +9.44pp; mixed tasks were 32 and 31;
+unrestricted top-is-alias was 88.2% and 87.6%. Each stage independently passed
+every frozen gate. A post-decision audit found ordered-only versus shuffled-only
+paired wins of 60:14 and 64:13, and correct-answer mentions did not explain the
+gain. **The fixed cap-1,024 semantic commit seam is therefore replicated:**
+coherent ordered thought carries task-general answer information beyond syntax
+and an identical token bag.
+
+This finally licenses native prefix-value/J measurement, but does not itself
+establish J-space certainty or capability. Alias identity remains sharply
+heterogeneous—one confirmation target had zero ordered successes, and shuffle
+favored two targets—so a raw gold-logit/J coordinate can be a label or prior
+readout rather than value. The next stage must use task-held-out folds and prove
+incremental signal beyond correct-alias activity, ordinary slot margin, and
+alias identity before sealed causal work. Every control must be constructed at
+the live prefix length after bf16. Even a positive oracle value/causal stage
+would still precede the deployable bar: a label-free controller must beat frozen
+inference and matched-compute sampling on new contamination-free tasks.
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.

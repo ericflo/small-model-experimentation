@@ -189,3 +189,15 @@
 Structured execution is one of the strongest imported signals. The next useful work is not another isolated
 positive run; it is controlled comparison of representations and supervision sources — and, per C11, on a
 CONTAMINATION-FREE substrate so that gains (and non-gains) are honestly measurable.
+
+## Replicated semantic commit interface (2026-07-12)
+
+[qwen35_4b_commit_slot_semantic_power_replication](../../experiments/qwen35_4b_commit_slot_semantic_power_replication/reports/report.md)
+establishes a stable constrained compiler output seam on a fresh procedural
+depth-two substrate. At fixed cap 1,024, ordered thought independently beat an
+identical token-multiset shuffle by +13.57pp and +15.04pp across two disjoint
+113-task stages, while the unrestricted next token was already an alias on
+88.2% and 87.6% of rows. Syntax therefore exposes rather than manufactures most
+of the answer-mode state. The effect remains target heterogeneous and free-form
+close-only output remains poor, so the warranted next step is task-held-out
+state/value measurement at this interface—not a compiler capability claim.

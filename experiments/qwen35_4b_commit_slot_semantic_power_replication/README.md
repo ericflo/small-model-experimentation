@@ -102,31 +102,41 @@ After anchoring the design boundary:
 
 ## Status
 
-Qualification returns `POWERED_COMMIT_SLOT_SEAM_QUALIFIED`; untouched
-confirmation is authorized but unopened. All 339 paths remained open to the
-fixed 1,024 cap and all row/control contracts passed.
+Terminal seam decision: `POWERED_COMMIT_SLOT_SEAM_REPLICATED`. Qualification
+and its equally powered untouched confirmation independently passed every
+frozen gate. All 678 paths remained open to the fixed 1,024 cap and all
+row/control contracts passed.
 
-| frozen metric | observed | gate |
-| --- | ---: | ---: |
-| real slot accuracy | 92/339 (27.14%) | 20%--70% |
-| no-thought accuracy | 11/113 (9.73%) | real minus >=3pp |
-| shuffled-thought accuracy | 46/339 (13.57%) | real minus >=5pp |
-| task lower bound, real minus shuffled | +8.85pp | >0 |
-| mixed tasks | 32/113 | >=28 |
-| correct / chosen alias support | 11 / 12 | >=8 / >=8 |
-| unmasked top-is-alias / alias mass | 88.20% / 66.79% | >=75% / >=50% |
+| frozen metric | qualification | confirmation | gate |
+| --- | ---: | ---: | ---: |
+| real slot accuracy | 92/339 (27.14%) | 98/339 (28.91%) | 20%--70% |
+| no-thought accuracy | 11/113 (9.73%) | 8/113 (7.08%) | real minus >=3pp |
+| shuffled-thought accuracy | 46/339 (13.57%) | 47/339 (13.86%) | real minus >=5pp |
+| one-sided task lower, real minus shuffled | +8.85pp | +9.44pp | >0 |
+| mixed tasks | 32/113 | 31/113 | >=28 |
+| correct / chosen alias support | 11 / 12 | 10 / 12 | >=8 / >=8 |
+| unmasked top-is-alias / alias mass | 88.20% / 66.79% | 87.61% / 66.35% | >=75% / >=50% |
 
-The parent hint therefore generalizes across this fresh qualification block and
-is not merely alias-mask coercion. It is not yet replicated: the equally powered
-113-task confirmation must independently pass identical gates. J/value/control/
-causal stages remain unavailable.
+The parent hint therefore independently generalizes twice across 226 fresh task
+units. Ordered thought contributes answer-relevant information beyond an
+identical shuffled token multiset and the syntax-only no-thought slot. A
+deterministic post-decision audit gives separate two-sided task-bootstrap
+intervals of [7.96pp, 19.17pp] and [8.26pp, 21.83pp]; pooling is descriptive
+only. Correct-answer mention strata do not explain the effect.
+
+The remaining identity nuisance is load-bearing: confirmation had no successful
+`horse` target rows, while `tiger` and `river` were favored by shuffle. The seam
+is replicated, but any J/value model must be task-held-out and prove incremental
+value beyond correct-alias activity, ordinary slot margin, and alias identity.
+J/value/control/causal implementation remains unavailable until a new
+outcome-blind adversarial audit and code boundary are committed.
 
 ## Scope
 
-A seam pass would replicate constrained semantic elicitation, not J value and
-not installed capability. Gold labels score gates. A later J stage would remain
-oracle until a label-free controller beats frozen inference and matched-compute
-sampling on untouched procedural tasks.
+This pass replicates constrained semantic elicitation, not J value and not
+installed capability. Gold labels score gates. A later J stage remains a
+measurement/oracle stage until a label-free controller beats frozen inference
+and matched-compute sampling on untouched procedural tasks.
 
 ## Knowledgebase Update
 
@@ -140,6 +150,10 @@ sampling on untouched procedural tasks.
 - `runs/smoke/`: CPU, reachability, and power receipts.
 - `reports/preregistration.md` and `reports/design_review.md`: immutable rules.
 - `reports/pre_selection_implementation_audit.md`: outcome-blind code audit.
+- `reports/post_confirmation_adversarial_audit.md`: post-decision scope and
+  nuisance audit.
 - `scripts/run.py`: fixed-cap seam harness; later stages fail closed.
-- `runs/seam_selection*.json*`: complete qualification rows and hash-locked
-  passing summary.
+- `runs/seam_selection*.json*` and `runs/seam_confirmation*.json*`: complete,
+  hash-locked passing stages.
+- `analysis/analyze_replication.py` and `analysis/replication_audit.json`:
+  deterministic stagewise and descriptive cross-stage audit.

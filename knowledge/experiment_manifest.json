@@ -1192,11 +1192,11 @@
   },
   {
     "file_counts": {
-      ".json": 7,
-      ".jsonl": 9,
-      ".md": 8,
+      ".json": 9,
+      ".jsonl": 14,
+      ".md": 9,
       ".pt": 1,
-      ".py": 6,
+      ".py": 7,
       ".yaml": 3
     },
     "id": "qwen35_4b_commit_slot_semantic_power_replication",
@@ -1216,6 +1216,7 @@
     ],
     "title": "Qwen3.5-4B Commit-Slot Semantic Power Replication",
     "top_level_dirs": [
+      "analysis",
       "assets",
       "configs",
       "data",
@@ -1225,8 +1226,8 @@
       "src",
       "tests"
     ],
-    "total_files": 34,
-    "total_size_bytes": 8990337
+    "total_files": 43,
+    "total_size_bytes": 14360048
   },
   {
     "file_counts": {

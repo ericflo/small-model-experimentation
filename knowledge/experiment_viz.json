@@ -5,7 +5,7 @@
   "qwen35_4b_commit_slot_semantic_power_replication": {
    "charts": [
     {
-     "title": "Powered commit-slot qualification accuracy",
+     "title": "Replicated commit-slot confirmation accuracy",
      "kind": "bar",
      "categories": [
       "ordered thought",
@@ -17,18 +17,18 @@
       {
        "label": "exact semantic success",
        "values": [
-        0.2713864306784661,
-        0.13569321533923304,
-        0.09734513274336283,
+        0.2890855457227139,
+        0.13864306784660768,
+        0.07079646017699115,
         0.058997050147492625
        ]
       }
      ],
-     "x_label": "qualification interface",
+     "x_label": "independent confirmation interface",
      "y_label": "exact success rate",
      "y_format": "percent01",
-     "note": "Ordered, shuffled, and no-thought use the identical fixed slot; close-only free-form is diagnostic. Ordered thought passed every frozen qualification gate on 113 tasks/339 traces, but untouched confirmation remains unopened.",
-     "source": "experiments/qwen35_4b_commit_slot_semantic_power_replication/runs/seam_selection.json",
+     "note": "Ordered, shuffled, and no-thought use the identical fixed slot; close-only free-form is diagnostic. Ordered thought independently passed every frozen confirmation gate on 113 tasks/339 traces after qualification had passed the same gates.",
+     "source": "experiments/qwen35_4b_commit_slot_semantic_power_replication/runs/seam_confirmation.json",
      "headline": true
     }
    ]

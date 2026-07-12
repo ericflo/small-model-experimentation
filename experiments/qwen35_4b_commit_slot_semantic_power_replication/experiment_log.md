@@ -32,3 +32,29 @@
   unmasked interface gates passed.
 - Automatic `POWERED_COMMIT_SLOT_SEAM_QUALIFIED`; only the hash-locked untouched
   confirmation is authorized. J stages remain unopened.
+
+## 2026-07-12 — Independent powered confirmation
+
+- Completed the one authorized untouched stage: 339/339 fixed-cap paths and all
+  1,130 slot/control rows in 11,690.539 seconds. Every path contacted cap 1,024.
+- Ordered thought scored 98/339 versus 47/339 exact-token shuffle and 8/113
+  no-thought: +15.04pp and +21.83pp independently of qualification.
+- The registered one-sided task-bootstrap lower bound over shuffle was +9.44pp;
+  31 tasks mixed outcomes; correct/chosen support reached 10/12 aliases; all
+  interface and finite-row gates passed.
+- Automatic terminal seam decision `POWERED_COMMIT_SLOT_SEAM_REPLICATED`. No
+  selection row was pooled to make the decision.
+
+## 2026-07-12 — Post-confirmation adversarial audit
+
+- Added a deterministic 20,000-resample stagewise audit. Two-sided task
+  intervals were [7.96pp, 19.17pp] and [8.26pp, 21.83pp]; the independent stage
+  effects did not differ detectably.
+- Paired ordered-only versus shuffled-only wins were 60:14 and 64:13. Correct
+  alias mention did not explain success in either stage.
+- Preserved the key nuisance: target identity remains heterogeneous. One
+  confirmation target had zero real successes and shuffle beat real for two
+  targets. Any J/value successor must beat alias identity, correct-alias
+  activity, and ordinary slot margin on task-held-out units.
+- Confirmation licenses a new code/audit boundary only. J/value/control/causal
+  commands remain fatal-unavailable until that boundary is committed.

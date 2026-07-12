@@ -99,3 +99,17 @@ Diagnostics should become standard infrastructure. They are how future agents av
   were not explanatory, and three post-decision label-free logit residuals all
   underperformed 15/48. Confirmation and every J stage stayed sealed. Power a
   fresh fixed-1,024 task-level replication before changing cap or fitting value.
+
+- [qwen35_4b_commit_slot_semantic_power_replication](../../experiments/qwen35_4b_commit_slot_semantic_power_replication/reports/report.md)
+  (unclaimed; terminal seam `POWERED_COMMIT_SLOT_SEAM_REPLICATED`): the powered
+  repair independently passed twice on 113 fresh tasks per stage. Qualification
+  scored 92/339 ordered versus 46/339 shuffled with task lower +8.85pp;
+  confirmation scored 98/339 versus 47/339 with task lower +9.44pp. No-thought
+  was 11/113 then 8/113; mixed tasks were 32 then 31; unrestricted top-is-alias
+  remained 88.2%/87.6%. Correct-answer mention strata did not explain success.
+  A deterministic audit found ordered-only versus shuffle-only paired wins of
+  60:14 and 64:13. The seam is now usable for native prefix-value work, but
+  target identity remains heterogeneous (one confirmation target 0/30; shuffle
+  favored two targets). Any J result must add task-held-out signal beyond
+  correct-alias activity, slot margin, and alias identity, with live-length
+  post-bf16 controls. This is not yet a J or installed-capability claim.

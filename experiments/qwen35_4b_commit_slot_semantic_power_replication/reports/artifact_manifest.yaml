@@ -10,10 +10,11 @@ reproducibility:
   full_command: >-
     .venv/bin/python
     experiments/qwen35_4b_commit_slot_semantic_power_replication/scripts/run.py
-    --stage seam-selection
+    --stage seam-confirmation
   required_external_artifacts: []
 notes: >-
   The exact lens, 322 fresh task rows, CPU/gate and parent-hash-locked power
-  receipts, immutable design/model-smoke receipts, pre-selection audit, and
-  complete passing qualification rows/summary are committed. Confirmation and
-  all J stages remain unopened. No artifact is external or omitted.
+  receipts, immutable design/model-smoke receipts, adversarial audits, complete
+  independently passing qualification/confirmation rows and summaries, and the
+  deterministic replication audit are committed. J/value implementation and
+  all downstream stages remain unopened. No artifact is external or omitted.

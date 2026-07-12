@@ -1,0 +1,317 @@
+{
+  "bootstrap_seed": 20260712,
+  "cross_stage": {
+    "both_independent_registered_gates_passed": true,
+    "confirmation_minus_selection_real_minus_shuffled": {
+      "mean": 0.014749262536873142,
+      "resamples": 20000,
+      "two_sided_95_lower": -0.07374631268436577,
+      "two_sided_95_upper": 0.10324483775811208,
+      "unit": "independently resampled task"
+    }
+  },
+  "pooled_diagnostic_not_a_rescue": {
+    "real_minus_no_thought_task_bootstrap": {
+      "mean": 0.19616519174041297,
+      "resamples": 20000,
+      "two_sided_95_lower": 0.15191740412979352,
+      "two_sided_95_upper": 0.24188790560471976,
+      "unit": "task"
+    },
+    "real_minus_shuffled_task_bootstrap": {
+      "mean": 0.1430678466076696,
+      "resamples": 20000,
+      "two_sided_95_lower": 0.09882005899705014,
+      "two_sided_95_upper": 0.1873156342182891,
+      "unit": "task"
+    },
+    "tasks": 226
+  },
+  "purpose": "deterministic post-decision audit; stage decisions remain independent",
+  "schema_version": 1,
+  "scientific_result": false,
+  "stages": {
+    "seam_confirmation": {
+      "alias_results": {
+        "apple": {
+          "real_accuracy": 0.06666666666666667,
+          "real_successes": 2,
+          "rows": 30,
+          "shuffled_accuracy": 0,
+          "shuffled_successes": 0
+        },
+        "cat": {
+          "real_accuracy": 0.2,
+          "real_successes": 6,
+          "rows": 30,
+          "shuffled_accuracy": 0,
+          "shuffled_successes": 0
+        },
+        "circle": {
+          "real_accuracy": 0.48484848484848486,
+          "real_successes": 16,
+          "rows": 33,
+          "shuffled_accuracy": 0.15151515151515152,
+          "shuffled_successes": 5
+        },
+        "dog": {
+          "real_accuracy": 0.3,
+          "real_successes": 9,
+          "rows": 30,
+          "shuffled_accuracy": 0,
+          "shuffled_successes": 0
+        },
+        "gold": {
+          "real_accuracy": 0.030303030303030304,
+          "real_successes": 1,
+          "rows": 33,
+          "shuffled_accuracy": 0,
+          "shuffled_successes": 0
+        },
+        "horse": {
+          "real_accuracy": 0,
+          "real_successes": 0,
+          "rows": 30,
+          "shuffled_accuracy": 0,
+          "shuffled_successes": 0
+        },
+        "ocean": {
+          "real_accuracy": 0.7666666666666667,
+          "real_successes": 23,
+          "rows": 30,
+          "shuffled_accuracy": 0.03333333333333333,
+          "shuffled_successes": 1
+        },
+        "river": {
+          "real_accuracy": 0.36666666666666664,
+          "real_successes": 11,
+          "rows": 30,
+          "shuffled_accuracy": 0.43333333333333335,
+          "shuffled_successes": 13
+        },
+        "silver": {
+          "real_accuracy": 0.18181818181818182,
+          "real_successes": 6,
+          "rows": 33,
+          "shuffled_accuracy": 0,
+          "shuffled_successes": 0
+        },
+        "square": {
+          "real_accuracy": 0.1,
+          "real_successes": 3,
+          "rows": 30,
+          "shuffled_accuracy": 0,
+          "shuffled_successes": 0
+        },
+        "tiger": {
+          "real_accuracy": 0.7,
+          "real_successes": 21,
+          "rows": 30,
+          "shuffled_accuracy": 0.9333333333333333,
+          "shuffled_successes": 28
+        }
+      },
+      "correct_alias_mention_strata": {
+        "false": {
+          "accuracy": 0.29411764705882354,
+          "rows": 272,
+          "successes": 80
+        },
+        "true": {
+          "accuracy": 0.26865671641791045,
+          "rows": 67,
+          "successes": 18
+        }
+      },
+      "decision": "POWERED_COMMIT_SLOT_SEAM_REPLICATED",
+      "interface": {
+        "close_only_parse_rate": 0.16224188790560473,
+        "close_only_success_rate": 0.058997050147492625,
+        "full_vocab_top_is_alias_rate": 0.8761061946902655,
+        "mean_alias_probability_mass": 0.6634897820014166
+      },
+      "no_thought": {
+        "accuracy": 0.07079646017699115,
+        "successes": 8
+      },
+      "paired_path_outcomes": {
+        "both_correct": 34,
+        "neither": 228,
+        "real_only": 64,
+        "shuffled_only": 13
+      },
+      "passed": true,
+      "paths": 339,
+      "real": {
+        "accuracy": 0.2890855457227139,
+        "successes": 98
+      },
+      "real_minus_no_thought_task_bootstrap": {
+        "mean": 0.2182890855457227,
+        "resamples": 20000,
+        "two_sided_95_lower": 0.15634218289085544,
+        "two_sided_95_upper": 0.2831858407079646,
+        "unit": "task"
+      },
+      "real_minus_shuffled_task_bootstrap": {
+        "mean": 0.15044247787610618,
+        "resamples": 20000,
+        "two_sided_95_lower": 0.08259587020648967,
+        "two_sided_95_upper": 0.2182890855457227,
+        "unit": "task"
+      },
+      "registered_one_sided_95_lower_real_minus_shuffled": 0.0943952802359882,
+      "shuffled": {
+        "accuracy": 0.13864306784660768,
+        "successes": 47
+      },
+      "task_effect_signs_real_minus_shuffled": {
+        "negative": 8,
+        "positive": 34,
+        "zero": 71
+      },
+      "tasks": 113
+    },
+    "seam_selection": {
+      "alias_results": {
+        "apple": {
+          "real_accuracy": 0.3333333333333333,
+          "real_successes": 10,
+          "rows": 30,
+          "shuffled_accuracy": 0.06666666666666667,
+          "shuffled_successes": 2
+        },
+        "cat": {
+          "real_accuracy": 0.43333333333333335,
+          "real_successes": 13,
+          "rows": 30,
+          "shuffled_accuracy": 0.1,
+          "shuffled_successes": 3
+        },
+        "circle": {
+          "real_accuracy": 0.3333333333333333,
+          "real_successes": 10,
+          "rows": 30,
+          "shuffled_accuracy": 0.03333333333333333,
+          "shuffled_successes": 1
+        },
+        "dog": {
+          "real_accuracy": 0.16666666666666666,
+          "real_successes": 5,
+          "rows": 30,
+          "shuffled_accuracy": 0,
+          "shuffled_successes": 0
+        },
+        "gold": {
+          "real_accuracy": 0.3333333333333333,
+          "real_successes": 11,
+          "rows": 33,
+          "shuffled_accuracy": 0.06060606060606061,
+          "shuffled_successes": 2
+        },
+        "horse": {
+          "real_accuracy": 0.03333333333333333,
+          "real_successes": 1,
+          "rows": 30,
+          "shuffled_accuracy": 0,
+          "shuffled_successes": 0
+        },
+        "ocean": {
+          "real_accuracy": 0.24242424242424243,
+          "real_successes": 8,
+          "rows": 33,
+          "shuffled_accuracy": 0.030303030303030304,
+          "shuffled_successes": 1
+        },
+        "river": {
+          "real_accuracy": 0.26666666666666666,
+          "real_successes": 8,
+          "rows": 30,
+          "shuffled_accuracy": 0.3,
+          "shuffled_successes": 9
+        },
+        "silver": {
+          "real_accuracy": 0.030303030303030304,
+          "real_successes": 1,
+          "rows": 33,
+          "shuffled_accuracy": 0,
+          "shuffled_successes": 0
+        },
+        "square": {
+          "real_accuracy": 0.03333333333333333,
+          "real_successes": 1,
+          "rows": 30,
+          "shuffled_accuracy": 0,
+          "shuffled_successes": 0
+        },
+        "tiger": {
+          "real_accuracy": 0.8,
+          "real_successes": 24,
+          "rows": 30,
+          "shuffled_accuracy": 0.9333333333333333,
+          "shuffled_successes": 28
+        }
+      },
+      "correct_alias_mention_strata": {
+        "false": {
+          "accuracy": 0.2676056338028169,
+          "rows": 284,
+          "successes": 76
+        },
+        "true": {
+          "accuracy": 0.2909090909090909,
+          "rows": 55,
+          "successes": 16
+        }
+      },
+      "decision": "POWERED_COMMIT_SLOT_SEAM_QUALIFIED",
+      "interface": {
+        "close_only_parse_rate": 0.168141592920354,
+        "close_only_success_rate": 0.058997050147492625,
+        "full_vocab_top_is_alias_rate": 0.8820058997050148,
+        "mean_alias_probability_mass": 0.6679381165532587
+      },
+      "no_thought": {
+        "accuracy": 0.09734513274336283,
+        "successes": 11
+      },
+      "paired_path_outcomes": {
+        "both_correct": 32,
+        "neither": 233,
+        "real_only": 60,
+        "shuffled_only": 14
+      },
+      "passed": true,
+      "paths": 339,
+      "real": {
+        "accuracy": 0.2713864306784661,
+        "successes": 92
+      },
+      "real_minus_no_thought_task_bootstrap": {
+        "mean": 0.17404129793510323,
+        "resamples": 20000,
+        "two_sided_95_lower": 0.11209439528023599,
+        "two_sided_95_upper": 0.2359882005899705,
+        "unit": "task"
+      },
+      "real_minus_shuffled_task_bootstrap": {
+        "mean": 0.13569321533923304,
+        "resamples": 20000,
+        "two_sided_95_lower": 0.07964601769911504,
+        "two_sided_95_upper": 0.19174041297935104,
+        "unit": "task"
+      },
+      "registered_one_sided_95_lower_real_minus_shuffled": 0.08849557522123894,
+      "shuffled": {
+        "accuracy": 0.13569321533923304,
+        "successes": 46
+      },
+      "task_effect_signs_real_minus_shuffled": {
+        "negative": 6,
+        "positive": 35,
+        "zero": 72
+      },
+      "tasks": 113
+    }
+  }
+}
