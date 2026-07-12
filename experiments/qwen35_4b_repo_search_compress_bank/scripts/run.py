@@ -125,11 +125,7 @@ def main() -> int:
     run_if_missing(bank_dir / "receipt.json", [py, str(EXP / "scripts" / "build_bank.py")])
 
     c54 = ROOT / cfg["model"]["c54_apex_data"]
-    for arm, repo_file in (
-        ("apex_replay", None),
-        ("action_only", bank_dir / "action_only.jsonl"),
-        ("compact", bank_dir / "compact.jsonl"),
-    ):
+    def train_and_merge(arm: str, repo_file: Path | None) -> None:
         adapter = artifact_root / "adapters" / arm
         train_files = [str(c54)] + ([str(repo_file)] if repo_file else [])
         run_if_missing(adapter / "training_receipt.json", [
@@ -150,6 +146,9 @@ def main() -> int:
             "--adapter", str(adapter), "--out", str(merged),
         ])
 
+    train_and_merge("apex_replay", None)
+    train_and_merge("compact", bank_dir / "compact.jsonl")
+
     def evaluate(arm: str, block: str, mode: str = "deep") -> Path:
         output = artifact_root / "eval" / f"{block}_{arm}_{mode}.json"
         run_if_missing(output, [
@@ -162,7 +161,6 @@ def main() -> int:
     apex_trained = evaluate("apex_replay", "trained_dev")
     compact_trained = evaluate("compact", "trained_dev")
     apex_transfer = evaluate("apex_replay", "transfer_dev")
-    action_transfer = evaluate("action_only", "transfer_dev")
     compact_transfer = evaluate("compact", "transfer_dev")
     apex_sample = evaluate("apex_replay", "transfer_dev", "sample_more")
     locality = artifact_root / "eval" / "locality.json"
@@ -175,6 +173,19 @@ def main() -> int:
         "--ceiling", str(cfg["locality"]["median_non_target_logit_drift_max"]),
         "--max-context-tokens", str(cfg["locality"]["max_context_tokens"]),
     ])
+    primary_gate = EXP / "analysis" / "repo_primary_gate.json"
+    run_command([
+        py, str(EXP / "scripts" / "analyze_primary.py"),
+        "--candidate-trained", str(compact_trained), "--apex-trained", str(apex_trained),
+        "--candidate-transfer", str(compact_transfer), "--apex-transfer", str(apex_transfer),
+        "--sample-more-transfer", str(apex_sample),
+        "--locality", str(locality), "--out", str(primary_gate),
+    ])
+
+    # The mechanism control is scientifically necessary only for a compact
+    # candidate that survives every gate it can fail without that control.
+    train_and_merge("action_only", bank_dir / "action_only.jsonl")
+    action_transfer = evaluate("action_only", "transfer_dev")
     dev_gate = EXP / "analysis" / "repo_dev_gate.json"
     run_command([
         py, str(EXP / "scripts" / "analyze_repo.py"),
