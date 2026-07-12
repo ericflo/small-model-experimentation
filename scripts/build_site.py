@@ -1638,10 +1638,22 @@ def feed_card(
         meta_bits.append(f'<span class="muted">{len(exp["figures"])} figure{"s" if len(exp["figures"]) != 1 else ""}</span>')
     summary = exp.get("card_summary") or exp["finding"]
     finding = rich(summary, prefix) if rich else esc(summary)
+    # verdict headline: a tone-colored dot + the crisp standalone verdict tag,
+    # the one-line "what we learned" a reader scans before the fuller answer.
+    verdict = ""
+    tag = exp.get("verdict_tag")
+    if tag:
+        tone = exp.get("outcome") or "neutral"
+        verdict = (
+            f'<p class="card-verdict tone-{tone}">'
+            f'<span class="verdict-dot" aria-hidden="true"></span>'
+            f'<span class="card-verdict-tag">{esc(tag)}</span></p>'
+        )
     return (
         f'<article class="feed-card{" big" if big else ""}">{thumb}<div class="card-body">'
         f'<div class="card-meta">{"".join(meta_bits)}</div>'
         f'<h3><a href="{url}">{esc(exp["title"])}</a></h3>'
+        f'{verdict}'
         f'<p class="card-finding">{finding}</p>'
         f'<div class="card-chips">{chips}</div>'
         f"</div></article>"
@@ -1695,6 +1707,7 @@ class SiteBuilder:
             # cards/feed lead with the plain-language, standalone brief answer — not the
             # jargon-dense finding excerpted from the report; the finding stays on the page.
             exp["card_summary"] = str(brief.get("plain_answer", "")).strip() or exp["finding"]
+            exp["verdict_tag"] = str(brief.get("verdict_tag", "")).strip()
         self.dropped_notes: list[str] = []
 
     # ------------------------------------------------------------- utilities

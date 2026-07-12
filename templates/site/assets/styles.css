@@ -306,6 +306,16 @@ a.chip:hover { text-decoration: none; border-color: color-mix(in srgb, var(--acc
 .verdict-banner.tone-neutral .verdict-dot { background: var(--slot-0); }
 .verdict-tag { font-family: var(--display); font-size: 27px; font-weight: 550; line-height: 1.18; letter-spacing: -0.015em; color: var(--ink); }
 
+/* card-scaled verdict: same tone-coded dot as the detail banner, sized for a card */
+.card-verdict { display: flex; align-items: baseline; gap: 8px; margin: 2px 0 9px; }
+.card-verdict .verdict-dot { width: 8px; height: 8px; position: relative; top: 1px; }
+.card-verdict.tone-positive .verdict-dot { background: var(--good); }
+.card-verdict.tone-negative .verdict-dot { background: var(--critical); }
+.card-verdict.tone-mixed .verdict-dot { background: var(--slot-3); }
+.card-verdict.tone-neutral .verdict-dot { background: var(--slot-0); }
+.card-verdict-tag { font-family: var(--display); font-weight: 560; font-size: 17px; line-height: 1.24; letter-spacing: -0.011em; color: var(--ink); text-wrap: balance; }
+.feed-card.big .card-verdict-tag { font-size: 20px; }
+
 .practitioner-brief {
   background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--accent);
   border-radius: var(--radius); padding: 6px 26px 22px; margin: 0 0 32px; box-shadow: var(--shadow);
