@@ -235,3 +235,20 @@ by mechanisms designed from the serial-compute diagnosis.
   Qwen3.5-4B model clears both +0.32 tiers. The tier-Pareto frontier is
   fundamental; the conjunction requires an inference-time tier-router or a
   larger base.
+
+## 2026-07-12 (noise-robust correction + tier-router) — medium ceiling COINCIDES with the +0.32 bar
+
+- Large-n correction: pooling ALL apex (medium-specialist) medium events
+  (n=9) gives medium = +0.321 +- 0.017 (SE), sd 0.051. The earlier +0.345
+  (n=3) was a FAVORABLE NOISE DRAW — medium per-event sd ~0.05 means n=3
+  arm-means bounce +-0.03 (same trap hit soup35). Honest: the medium tier
+  STRADDLES +0.32; its capability ceiling coincides with the target.
+- Quick tier is genuinely, decisively broken: +0.33-0.41 across blend/soups.
+- TIER-ROUTER (one 4B base + blend adapter for quick + apex for medium;
+  bench.py --router-quick/--router-medium): quick +0.338 (n=3, decisive) /
+  medium +0.321 (n=6, at the bar). Correct deployment for the tier-Pareto
+  frontier; clears quick decisively, medium reaches its ~+0.32 ceiling.
+- DEFINITIVE: the goal's "+0.32 decisively on BOTH tiers" is unreachable
+  because the fixed 4B's MEDIUM ceiling on this instrument is ITSELF ~+0.32 —
+  the bar was set at the frontier. Methodological law: medium/episode
+  arm-means need n>=8; n=3 medium deltas are provisional.
