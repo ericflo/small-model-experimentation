@@ -1112,8 +1112,16 @@ def _fmt_val(value: float, y_format: str) -> str:
         pct = value * 100 if y_format == "percent01" else value
         text = f"{pct:.1f}".rstrip("0").rstrip(".")
         return f"{text}%"
-    if value == int(value) and abs(value) < 10000:
+    av = abs(value)
+    # compact magnitude suffixes instead of scientific notation (2.34e+04 -> 23.4k)
+    if av >= 1e6:
+        return f"{value / 1e6:.4g}".rstrip("0").rstrip(".") + "M"
+    if av >= 1e4:
+        return f"{value / 1e3:.4g}".rstrip("0").rstrip(".") + "k"
+    if value == int(value):
         return str(int(value))
+    if 0 < av < 0.001:  # keep the tiniest values compact but not raw-exponent-ugly
+        return f"{value:.1e}"
     return f"{value:.3g}"
 
 
@@ -1133,10 +1141,21 @@ def _nice_ticks(lo: float, hi: float) -> list[float]:
     return ticks
 
 
-def _nice_axis(dmin: float, dmax: float) -> tuple[float, float, list[float]]:
-    """A value axis with a round top and bottom so the last gridline lands AT or
-    beyond the data — bars/lines never run past the final tick. Always spans zero."""
-    lo, hi = min(0.0, dmin), max(0.0, dmax)
+def _nice_axis(dmin: float, dmax: float, zero: bool = True) -> tuple[float, float, list[float]]:
+    """A value axis rounded to nice steps so the last gridline lands AT or beyond
+    the data. zero=True anchors at 0 (correct for bars, whose length encodes
+    magnitude); zero=False pads a tight range around the data (for lines/scatter,
+    so a shape sitting at 0.7–0.8 is not flattened against a forced 0 baseline)."""
+    if zero:
+        lo, hi = min(0.0, dmin), max(0.0, dmax)
+    else:
+        lo, hi = dmin, dmax
+        if lo == hi:
+            lo, hi = lo - abs(lo or 1) * 0.5, hi + abs(hi or 1) * 0.5
+        pad = (hi - lo) * 0.1
+        lo, hi = lo - pad, hi + pad
+        if dmin >= 0 and lo < 0:  # never dip below zero for non-negative data
+            lo = 0.0
     if lo == hi:
         return lo, lo + 1, [lo, lo + 1]
     raw = (hi - lo) / 4
@@ -1281,7 +1300,7 @@ def _line_svg(spec: dict, W: int, mini: bool) -> tuple[list[str], float]:
     n = len(series)
     many = n > 4
     vals = [p[1] for e in series for p in e["points"]]
-    lo, hi, y_ticks = _nice_axis(min(vals), max(vals))
+    lo, hi, y_ticks = _nice_axis(min(vals), max(vals), zero=False)
     xs = [p[0] for e in series for p in e["points"]]
     xlo, xhi = min(xs), max(xs)
     if xlo == xhi:
@@ -1306,7 +1325,8 @@ def _line_svg(spec: dict, W: int, mini: bool) -> tuple[list[str], float]:
         parts.append(f'<line x1="{left}" x2="{W - right}" y1="{y:.1f}" y2="{y:.1f}" stroke="var(--grid)"/>')
         if not mini:
             parts.append(f'<text x="{left - 7}" y="{y + 3.5:.1f}" text-anchor="end" font-size="11" fill="var(--muted)">{esc(_fmt_val(t, yf))}</text>')
-    parts.append(f'<line x1="{left}" x2="{W - right}" y1="{sy(0):.1f}" y2="{sy(0):.1f}" stroke="var(--baseline)" stroke-width="1.3"/>')
+    if lo <= 0 <= hi:  # only draw a zero baseline when zero is on the (tight) axis
+        parts.append(f'<line x1="{left}" x2="{W - right}" y1="{sy(0):.1f}" y2="{sy(0):.1f}" stroke="var(--baseline)" stroke-width="1.3"/>')
     if not mini:
         xt = _nice_ticks(xlo, xhi)[:7]
         for t in xt:
@@ -1405,11 +1425,9 @@ def _scatter_svg(spec: dict, W: int, mini: bool) -> tuple[list[str], float]:
     xs = [p[0] for p in pts_all]
     ys = [p[1] for p in pts_all]
     xlo, xhi = min(xs), max(xs)
-    ylo, yhi = min(ys), max(ys)
     xpad = (xhi - xlo) * 0.06 or 1
-    ypad = (yhi - ylo) * 0.08 or 1
     xlo, xhi = xlo - xpad, xhi + xpad
-    ylo, yhi = min(0.0, ylo) - 0, yhi + ypad
+    ylo, yhi, y_ticks = _nice_axis(min(ys), max(ys), zero=False)
     top, left, right, bottom = 14, 48, 16, 30
     plot_h = 128 if mini else 240
     plot_w = W - left - right
@@ -1421,7 +1439,7 @@ def _scatter_svg(spec: dict, W: int, mini: bool) -> tuple[list[str], float]:
     def sx(v: float) -> float:
         return left + (v - xlo) / (xhi - xlo) * plot_w
     parts: list[str] = []
-    for t in _nice_ticks(ylo, yhi):
+    for t in y_ticks:
         y = sy(t)
         parts.append(f'<line x1="{left}" x2="{W - right}" y1="{y:.1f}" y2="{y:.1f}" stroke="var(--grid)"/>')
         if not mini:

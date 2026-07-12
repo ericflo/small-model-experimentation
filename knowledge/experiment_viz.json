@@ -45685,7 +45685,8 @@
      ],
      "y_label": "gym greedy@1 mean (deployed think budget 1024, held-out item seeds)",
      "note": "Held-out families improved as much as trained ones — the substrate-locality pattern from earlier claims (C43/C45/C48) does not extend to this breadth + emission-seam recipe.",
-     "source": "runs/eval_gym_base/scores.json vs runs/eval_gym_round2_merged/scores.json"
+     "source": "runs/eval_gym_base/scores.json vs runs/eval_gym_round2_merged/scores.json",
+     "y_format": "percent01"
     },
     {
      "kind": "bar",
@@ -46109,7 +46110,8 @@
      ],
      "y_label": "fraction of items",
      "note": "36% of hard items the model cannot solve even in 6 tries (the genuine capability core); the other 64% it solves but 19% too slowly to fit budget — the compression mechanism's target.",
-     "source": "scripts/build_efficiency_data.py output"
+     "source": "scripts/build_efficiency_data.py output",
+     "y_format": "percent01"
     }
    ]
   },
