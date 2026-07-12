@@ -44716,7 +44716,7 @@
      ],
      "x_label": "samples per problem (budget)",
      "y_label": "accuracy",
-     "y_format": "number",
+     "y_format": "percent01",
      "note": "Mission = beat sample-more. C40 unearthed a calibrated implicit confidence signal (answer-token probability P(answer)). Here: sample k=12 per problem on a mix of the C40 successor task, and compare ways to pick the answer at matched budget. Self-consistency (majority vote -- the standard verifier-free method) is FLAT at ~0.48 across ALL budgets: sample-more is WASTED, because on hard problems the model's MODE is confidently wrong (it repeats a wrong rule). Confidence-select (pick the sample with the highest P(answer), verification-FREE -- no execution, no verifier) RISES from 0.47 to 0.62 and beats majority at every budget, closing most of the gap to the oracle/pass@12 upper bound (0.83). It works because P(answer) is calibrated (C40): when the model derives the right rule it is confident, so the most-CONFIDENT sample beats the most-COMMON one. Turning naive sample-more into a rising accuracy-vs-compute curve."
     },
     {
@@ -44830,7 +44830,7 @@
       }
      ],
      "y_label": "localization accuracy",
-     "y_format": "number",
+     "y_format": "percent01",
      "note": "On single-slip chains (exactly one error = one well-posed origin, n=137), does the lowest-confidence step pinpoint the slip? The position-controlled DE-TRENDED confidence localizes it at 0.56 (raw confidence 0.64), ~3x the uniform 1/depth baseline (0.19) and clearly beating a position-prior baseline (guess the highest-error position, 0.36) and always-guess-last-step (0.01). So confidence carries genuine WHERE-information beyond position. Deployable: redo the chain from the located step (oracle-downstream) fixes 56% of single-slip chains at avg 3.8 steps vs 5.6 for redo-all -- cheaper targeted repair. Caveat: on MULTI-slip chains (n=224) the argmin finds AN error 76% of the time but the FIRST only 27% (several low-confidence steps compete), so the clean single-origin/repair story holds when the model slips once."
     }
    ]
@@ -44889,7 +44889,7 @@
       }
      ],
      "y_label": "induction accuracy (via reasoning)",
-     "y_format": "number",
+     "y_format": "percent01",
      "note": "The most constructive result of the arc. C44 showed induction is a SERIAL-COMPUTE limit but the shift-CoT was shift-SPECIFIC (out-of-family only 0.13). Here: rule families = affine over positions keyed by multiplier a in {1,3,7,9}; a UNIFORM enumerate-and-verify chain-of-thought (try each candidate a, derive b from one example, verify on another, keep the one that fits, apply). Train on {a=1,3,9}, HOLD OUT a=7. RESULT: held-out a=7 induction = 0.905 -- AS HIGH as the trained families (0.88-0.96). The model GENERALIZES to a rule family it never saw as the answer: it learned the general hypothesize-verify-apply PROCEDURE, not just the specific trained rules. So GENERAL induction-via-reasoning IS installable via SFT. Combined with C44 (reasoning 1.00 vs single-forward-pass 0.01), the picture is: the fixed 4B CAN be taught general induction -- infer a novel rule and apply it -- but ONLY as a serial reasoning procedure living in the chain-of-thought tokens, never compressed into the weights. The induction wall (the arc's central limitation) is a serial-compute limit that a general reasoning procedure overcomes generally. Caveat: all families are affine and a=7's arithmetic was seen as a rejected candidate -- what generalizes is the induction LOGIC (accepting a=7 via verify), within the affine hypothesis class."
     },
     {
@@ -44918,7 +44918,7 @@
       }
      ],
      "y_label": "held-out shift induction accuracy",
-     "y_format": "number",
+     "y_format": "percent01",
      "note": "The deepest question of the arc, resolved. C43 showed answer-only SFT only PARTIALLY installs scrambled-order shift induction (0.40) and catastrophically forgets execution. Here the SAME base is trained on plain-words chain-of-thought demonstrating the induction procedure (find positions -> derive shift -> apply). THE DISSOCIATION: the reasoning-SFT model induces held-out shifts PERFECTLY when it can reason step-by-step (generation 1.00) but is at CHANCE when forced to answer in a single forward pass (0.01). The chain-of-thought is ~100% LOAD-BEARING -- induction lives entirely in the serial tokens, not the weights. The model literally cannot do the induction computation in one forward pass, even after training; it can only unroll it. So the forward-pass induction wall is a SERIAL-COMPUTE limit, not a knowledge-storage limit. And unlike answer-only SFT (which crashed execution to 0.09), reasoning-SFT largely preserved it (0.57). Caveat: the CoT hand-codes the shift algorithm, so this is executing a taught serial procedure perfectly -- out-of-family affine stays near chance (0.13), so it did not learn GENERAL induction. Connects C38 (thinking rescues induction to 0.50), C13 (broken mental simulation): the model's core limit is running multi-step computation in a forward pass -- give it serial tokens and it works."
     },
     {
@@ -44989,7 +44989,7 @@
      ],
      "x_label": "0=base, 1=SFT 4k episodes, 2=SFT 8k episodes",
      "y_label": "induction accuracy (held-out rules)",
-     "y_format": "number",
+     "y_format": "percent01",
      "note": "The mission-core 'lift the wall' test. Each episode = a random SCRAMBLED digit order (stated) + a hidden rule + examples + a query; the model must INFER the rule and apply. Base fails at chance (shift-induce 0.087) though it CAN EXECUTE a stated rule (0.72 -- so the wall is induction, not execution, the review's mandatory gate). Answer-only QLoRA on random shift episodes, tested on HELD-OUT shifts (in-family) and AFFINE rules (out-of-family). SFT PARTIALLY lifts the wall and it is DATA-LIMITED: shift induction climbs 0.087 -> 0.35 (4k) -> 0.40 (8k), ~4.6x chance and still rising -- but PLATEAUS well below the execute ceiling (0.72), so only partly installed. Out-of-family affine barely moves (0.21 -> 0.30) -- the model learned a SHIFT-SPECIFIC procedure, not general induction. So the induction wall is neither a hard architectural bound nor cleanly liftable: trained to induce, the fixed 4B learns a specific procedure, not the general skill -- it remains an executor at heart."
     },
     {
@@ -45014,7 +45014,7 @@
       }
      ],
      "y_label": "accuracy",
-     "y_format": "number",
+     "y_format": "percent01",
      "note": "Answer-only SFT (training the model to output the answer directly) lifts shift induction from chance (0.087) to 0.40, but at a steep cost: it CATASTROPHICALLY FORGETS execution -- the model's ability to APPLY a stated rule crashes from 0.72 to 0.093. So answer-only SFT trades the model's executor competence for a partial, biased induction heuristic. This is consistent with the whole arc's law (the fixed 4B is an executor, not an inducer): even trained to induce, it does not cleanly acquire the general skill, and the training damages what it was good at. Owed: a reasoning-SFT arm (teach the procedure as plain-words chain-of-thought), mixing execute examples to prevent forgetting, and a multi-family leave-one-out design to test GENERAL (not shift-specific) induction."
     }
    ]
