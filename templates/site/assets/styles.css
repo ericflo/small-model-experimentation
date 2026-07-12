@@ -611,9 +611,9 @@ pre code { border: 0; background: none; padding: 0; }
 
 .queue-board { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
 .queue-col > h2 { font-size: 16px; margin: 0 0 10px; padding: 8px 12px; border-radius: 8px; background: var(--surface); border: 1px solid var(--grid); }
-.queue-p0 > h2 { border-left: 3px solid #256abf; }
-.queue-p1 > h2 { border-left: 3px solid #5598e7; }
-.queue-p2 > h2 { border-left: 3px solid #9ec5f4; }
+.queue-p0 > h2 { border-left: 3px solid var(--accent); }
+.queue-p1 > h2 { border-left: 3px solid color-mix(in srgb, var(--accent) 62%, var(--surface)); }
+.queue-p2 > h2 { border-left: 3px solid color-mix(in srgb, var(--accent) 34%, var(--surface)); }
 .queue-card {
   background: var(--surface); border: 1px solid var(--grid); border-radius: var(--radius);
   padding: 13px 15px; margin-bottom: 10px;
