@@ -196,6 +196,72 @@ def _train_specialist(tag: str, data: Path, adapter: Path, merged: Path, config:
     _record_checkpoint(tag, adapter, merged)
 
 
+def _model_smoke(config: dict) -> None:
+    root = resolve_repo_path(config["model"]["artifacts_root"]) / "smoke"
+    adapter, merged = root / "adapter", root / "merged"
+    base_output = EXP / "runs" / "model_smoke" / "base.jsonl"
+    hf_output = EXP / "runs" / "model_smoke" / "hf.json"
+    local_output = EXP / "runs" / "model_smoke" / "merged.jsonl"
+    local_meta = local_output.with_name(local_output.name + ".meta.json")
+    checkpoint_ready = _checkpoint_complete(adapter, merged)
+    if checkpoint_ready and hf_output.exists() and local_meta.exists():
+        print("[resume] model smoke already complete", flush=True)
+        return
+    if not checkpoint_ready and (adapter.exists() or merged.exists()):
+        raise SystemExit(f"partial model-smoke checkpoint exists: {adapter} / {merged}")
+    common = [
+        "--smoke", "4", "--thinking", "off", "--greedy", "--max-tokens", "32",
+        "--max-model-len", "4096", "--gpu-memory-utilization", "0.85",
+        "--max-num-seqs", "16", "--max-num-batched-tokens", "4096",
+        "--cudagraph-capture-size", "1", "--cudagraph-capture-size", "2",
+        "--cudagraph-capture-size", "4", "--cudagraph-capture-size", "8",
+        "--cudagraph-capture-size", "16",
+    ]
+    if not hf_output.exists():
+        _run(
+            [str(VLLM_PY), str(EXP / "src" / "vllm_runner.py"), "--output", str(base_output), *common]
+        )
+        _run(
+            [
+                str(PY), str(EXP / "scripts" / "model_smoke.py"),
+                "--vllm-output", str(base_output), "--out", str(hf_output),
+            ]
+        )
+    if not checkpoint_ready:
+        cfg = config["specialist_train"]
+        _run(
+            [
+                str(PY), str(EXP / "scripts" / "train_specialist.py"),
+                "--train", str(resolve_repo_path(config["model"]["quick_data"])),
+                "--out", str(adapter), "--epochs", "1", "--lr", str(cfg["learning_rate"]),
+                "--rank", str(cfg["rank"]), "--alpha", str(cfg["alpha"]),
+                "--batch-size", "1", "--grad-accum", "1", "--max-length", str(cfg["max_length"]),
+                "--w-think", str(cfg["think_loss_weight"]), "--seed", str(cfg["seed"]), "--smoke",
+            ],
+            training=True,
+        )
+        _run(
+            [
+                str(PY), str(EXP / "scripts" / "merge_adapter.py"),
+                "--base-model", config["model"]["id"], "--adapter", str(adapter), "--out", str(merged),
+            ],
+            training=True,
+        )
+    _run(
+        [
+            str(VLLM_PY), str(EXP / "src" / "vllm_runner.py"),
+            "--output", str(local_output), "--model-override", str(merged), *common,
+        ]
+    )
+    metadata = json.loads(local_meta.read_text())
+    merge = json.loads((merged / "merge_receipt.json").read_text())
+    if metadata.get("model") != str(merged.resolve()):
+        raise SystemExit("model smoke did not load local merged composite")
+    if int(merge.get("nonzero_lora_modules", 0)) != int(merge.get("applied_lora_modules", -1)):
+        raise SystemExit("model smoke merge was partially or wholly zero")
+    _record_checkpoint("model_smoke", adapter, merged)
+
+
 def _specialists(config: dict) -> None:
     paths = _paths(config)
     _train_specialist(
@@ -286,6 +352,9 @@ def main() -> int:
     _verify_preregistration()
     if stage == "specialists":
         _specialists(config)
+        return 0
+    if stage == "model-smoke":
+        _model_smoke(config)
         return 0
     if stage == "qualify":
         _qualify(config, config_path)

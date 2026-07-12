@@ -26,3 +26,19 @@ Created as a new experiment scaffold.
 - `runs/preregistration_receipt.json` freezes SHA-256 digests for the config,
   intake, preregistration, and design review. Every non-smoke stage verifies
   both those digests and commit ancestry before loading a model.
+
+## 2026-07-12 — live model preflight
+
+- Pinned base vLLM semantic/runtime smoke passed 4/4 tasks; Transformers prompt
+  parity, finite logits, causal-conv and flash-linear-attention fast paths all
+  passed under the frozen training lock.
+- The scaffold runner had accidentally omitted its local-composite CLI path.
+  The first reload therefore stopped at argument parsing after training/merge,
+  before producing a local-model score. Reintroduced the proven explicit
+  `model_override` path with mutual-exclusion and model-type validation plus a
+  regression test.
+- Weighted-training smoke completed 8/8 steps on the quick data shape with no
+  skips. Explicit merge applied 128/128 nonzero deltas (summed Frobenius norm
+  23.00) on CUDA FP32 with TF32 disabled.
+- The merged composite then loaded through vLLM, produced the 4/4 semantic
+  smoke outputs, and preserved the requested full CUDA-graph decode geometry.
