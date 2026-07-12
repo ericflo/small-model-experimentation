@@ -3355,7 +3355,8 @@
   },
   {
     "file_counts": {
-      ".json": 12,
+      ".gz": 4,
+      ".json": 15,
       ".jsonl": 8,
       ".md": 8,
       ".py": 46,
@@ -3389,8 +3390,8 @@
       "src",
       "tests"
     ],
-    "total_files": 77,
-    "total_size_bytes": 945396
+    "total_files": 84,
+    "total_size_bytes": 6545873
   },
   {
     "file_counts": {

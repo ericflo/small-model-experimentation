@@ -135,3 +135,18 @@ Created as a new experiment scaffold.
   The fix reads `turn["n_sampled_tokens"]` through a schema-specific helper;
   a regression test exercises both atom and episode token layouts. The suite is
   now 32/32. The identical frozen calibration seed and protocol will be rerun.
+
+## 2026-07-12 — independent descriptive calibration passes
+
+- The corrected rerun completed 1,488 paired items per specialist. Quick used
+  1,642,252 sampled tokens in 1,296.25 seconds; deep used 1,433,797 in 1,163.68
+  seconds. Every exact-model, engine, runner, and resolved-graph check passed.
+- Calibration assigned 56 cells to capability inference (8 quick, 48 deep)
+  and 52 to retention. Every `ferrier`, `brinework`, and `spindle` cell is
+  retention-only as frozen; both strata retain capability cells.
+- Descriptively, the quick policy scored `0.7939` on the broad quick stratum
+  and `0.5256` on deep, while deep scored `0.8224` and `0.5662`. On the
+  cell-balanced capability subset, intended-teacher deltas were `-0.0605`
+  (quick) and `+0.0332` (deep). These calibration outcomes do not qualify or
+  disqualify a teacher and were not used to alter cells, seeds, or thresholds;
+  the two frozen qualification blocks remain the decision instrument.

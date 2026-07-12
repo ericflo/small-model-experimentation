@@ -1,0 +1,1686 @@
+{
+  "capability_cells": [
+    "deep/burrowmaze/atom/L3",
+    "deep/burrowmaze/atom/L4",
+    "deep/burrowmaze/atom/L5",
+    "deep/burrowmaze/atom/L6",
+    "deep/burrowmaze/episode/L2",
+    "deep/burrowmaze/episode/L3",
+    "deep/burrowmaze/episode/L5",
+    "deep/caravan/atom/L3",
+    "deep/caravan/atom/L4",
+    "deep/caravan/atom/L5",
+    "deep/caravan/atom/L6",
+    "deep/foundry_ledger/atom/L3",
+    "deep/foundry_ledger/atom/L4",
+    "deep/foundry_ledger/atom/L5",
+    "deep/foundry_ledger/atom/L6",
+    "deep/glyphgate/atom/L3",
+    "deep/glyphgate/atom/L4",
+    "deep/glyphgate/atom/L5",
+    "deep/glyphgate/atom/L6",
+    "deep/kilnrite/atom/L3",
+    "deep/kilnrite/atom/L5",
+    "deep/kilnrite/atom/L6",
+    "deep/loomfix/atom/L3",
+    "deep/loomfix/atom/L4",
+    "deep/loomfix/atom/L5",
+    "deep/loomfix/atom/L6",
+    "deep/loomfix/episode/L2",
+    "deep/loomfix/episode/L3",
+    "deep/loomfix/episode/L5",
+    "deep/packhouse/atom/L3",
+    "deep/packhouse/atom/L4",
+    "deep/packhouse/atom/L5",
+    "deep/packhouse/atom/L6",
+    "deep/patchwheel/atom/L3",
+    "deep/patchwheel/atom/L4",
+    "deep/patchwheel/atom/L5",
+    "deep/patchwheel/atom/L6",
+    "deep/patchwheel/episode/L2",
+    "deep/patchwheel/episode/L3",
+    "deep/patchwheel/episode/L5",
+    "deep/runeward/atom/L3",
+    "deep/runeward/atom/L4",
+    "deep/runeward/atom/L5",
+    "deep/runeward/atom/L6",
+    "deep/stallwright/atom/L3",
+    "deep/stallwright/atom/L4",
+    "deep/stallwright/atom/L5",
+    "deep/stallwright/atom/L6",
+    "quick/loomfix/atom/L1",
+    "quick/loomfix/atom/L2",
+    "quick/packhouse/atom/L1",
+    "quick/packhouse/atom/L2",
+    "quick/patchwheel/atom/L1",
+    "quick/patchwheel/atom/L2",
+    "quick/stallwright/atom/L1",
+    "quick/stallwright/atom/L2"
+  ],
+  "cells": {
+    "deep/brinework/atom/L3": {
+      "deep_mean": 0.625,
+      "deep_minus_quick": 0.1875,
+      "effective_deficit_items": {
+        "deep": 33,
+        "quick": 35
+      },
+      "effective_deficit_pool": "deep/brinework/atom",
+      "n": 16,
+      "quick_mean": 0.4375,
+      "retention_reasons": [
+        "never_trained_transfer_family"
+      ],
+      "role": "retention"
+    },
+    "deep/brinework/atom/L4": {
+      "deep_mean": 0.5625,
+      "deep_minus_quick": -0.125,
+      "effective_deficit_items": {
+        "deep": 33,
+        "quick": 35
+      },
+      "effective_deficit_pool": "deep/brinework/atom",
+      "n": 16,
+      "quick_mean": 0.6875,
+      "retention_reasons": [
+        "never_trained_transfer_family"
+      ],
+      "role": "retention"
+    },
+    "deep/brinework/atom/L5": {
+      "deep_mean": 0.3125,
+      "deep_minus_quick": 0.0625,
+      "effective_deficit_items": {
+        "deep": 33,
+        "quick": 35
+      },
+      "effective_deficit_pool": "deep/brinework/atom",
+      "n": 16,
+      "quick_mean": 0.25,
+      "retention_reasons": [
+        "never_trained_transfer_family"
+      ],
+      "role": "retention"
+    },
+    "deep/brinework/atom/L6": {
+      "deep_mean": 0.4375,
+      "deep_minus_quick": 0.0,
+      "effective_deficit_items": {
+        "deep": 33,
+        "quick": 35
+      },
+      "effective_deficit_pool": "deep/brinework/atom",
+      "n": 16,
+      "quick_mean": 0.4375,
+      "retention_reasons": [
+        "never_trained_transfer_family"
+      ],
+      "role": "retention"
+    },
+    "deep/burrowmaze/atom/L3": {
+      "deep_mean": 0.8125,
+      "deep_minus_quick": 0.125,
+      "effective_deficit_items": {
+        "deep": 12,
+        "quick": 29
+      },
+      "effective_deficit_pool": "deep/burrowmaze/atom",
+      "n": 16,
+      "quick_mean": 0.6875,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/burrowmaze/atom/L4": {
+      "deep_mean": 0.75,
+      "deep_minus_quick": 0.125,
+      "effective_deficit_items": {
+        "deep": 12,
+        "quick": 29
+      },
+      "effective_deficit_pool": "deep/burrowmaze/atom",
+      "n": 16,
+      "quick_mean": 0.625,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/burrowmaze/atom/L5": {
+      "deep_mean": 0.9375,
+      "deep_minus_quick": 0.4375,
+      "effective_deficit_items": {
+        "deep": 12,
+        "quick": 29
+      },
+      "effective_deficit_pool": "deep/burrowmaze/atom",
+      "n": 16,
+      "quick_mean": 0.5,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/burrowmaze/atom/L6": {
+      "deep_mean": 0.75,
+      "deep_minus_quick": 0.375,
+      "effective_deficit_items": {
+        "deep": 12,
+        "quick": 29
+      },
+      "effective_deficit_pool": "deep/burrowmaze/atom",
+      "n": 16,
+      "quick_mean": 0.375,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/burrowmaze/episode/L2": {
+      "deep_mean": 0.0,
+      "deep_minus_quick": -0.16666666666666666,
+      "effective_deficit_items": {
+        "deep": 16,
+        "quick": 16
+      },
+      "effective_deficit_pool": "deep/burrowmaze/episode",
+      "n": 6,
+      "quick_mean": 0.16666666666666666,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/burrowmaze/episode/L3": {
+      "deep_mean": 0.16666666666666666,
+      "deep_minus_quick": 0.0,
+      "effective_deficit_items": {
+        "deep": 16,
+        "quick": 16
+      },
+      "effective_deficit_pool": "deep/burrowmaze/episode",
+      "n": 6,
+      "quick_mean": 0.16666666666666666,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/burrowmaze/episode/L5": {
+      "deep_mean": 0.16666666666666666,
+      "deep_minus_quick": 0.16666666666666666,
+      "effective_deficit_items": {
+        "deep": 16,
+        "quick": 16
+      },
+      "effective_deficit_pool": "deep/burrowmaze/episode",
+      "n": 6,
+      "quick_mean": 0.0,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/caravan/atom/L3": {
+      "deep_mean": 0.9375,
+      "deep_minus_quick": 0.0,
+      "effective_deficit_items": {
+        "deep": 20,
+        "quick": 22
+      },
+      "effective_deficit_pool": "deep/caravan/atom",
+      "n": 16,
+      "quick_mean": 0.9375,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/caravan/atom/L4": {
+      "deep_mean": 0.8125,
+      "deep_minus_quick": 0.0625,
+      "effective_deficit_items": {
+        "deep": 20,
+        "quick": 22
+      },
+      "effective_deficit_pool": "deep/caravan/atom",
+      "n": 16,
+      "quick_mean": 0.75,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/caravan/atom/L5": {
+      "deep_mean": 0.4375,
+      "deep_minus_quick": -0.0625,
+      "effective_deficit_items": {
+        "deep": 20,
+        "quick": 22
+      },
+      "effective_deficit_pool": "deep/caravan/atom",
+      "n": 16,
+      "quick_mean": 0.5,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/caravan/atom/L6": {
+      "deep_mean": 0.5625,
+      "deep_minus_quick": 0.125,
+      "effective_deficit_items": {
+        "deep": 20,
+        "quick": 22
+      },
+      "effective_deficit_pool": "deep/caravan/atom",
+      "n": 16,
+      "quick_mean": 0.4375,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/ferrier/atom/L3": {
+      "deep_mean": 1.0,
+      "deep_minus_quick": 0.0625,
+      "effective_deficit_items": {
+        "deep": 1,
+        "quick": 1
+      },
+      "effective_deficit_pool": "deep/ferrier/atom",
+      "n": 16,
+      "quick_mean": 0.9375,
+      "retention_reasons": [
+        "calibration_score_saturated",
+        "fewer_than_minimum_effective_deficit_items",
+        "registered_retention_anchor_family"
+      ],
+      "role": "retention"
+    },
+    "deep/ferrier/atom/L4": {
+      "deep_mean": 1.0,
+      "deep_minus_quick": 0.0,
+      "effective_deficit_items": {
+        "deep": 1,
+        "quick": 1
+      },
+      "effective_deficit_pool": "deep/ferrier/atom",
+      "n": 16,
+      "quick_mean": 1.0,
+      "retention_reasons": [
+        "calibration_score_saturated",
+        "fewer_than_minimum_effective_deficit_items",
+        "registered_retention_anchor_family"
+      ],
+      "role": "retention"
+    },
+    "deep/ferrier/atom/L5": {
+      "deep_mean": 1.0,
+      "deep_minus_quick": 0.0,
+      "effective_deficit_items": {
+        "deep": 1,
+        "quick": 1
+      },
+      "effective_deficit_pool": "deep/ferrier/atom",
+      "n": 16,
+      "quick_mean": 1.0,
+      "retention_reasons": [
+        "calibration_score_saturated",
+        "fewer_than_minimum_effective_deficit_items",
+        "registered_retention_anchor_family"
+      ],
+      "role": "retention"
+    },
+    "deep/ferrier/atom/L6": {
+      "deep_mean": 0.9375,
+      "deep_minus_quick": -0.0625,
+      "effective_deficit_items": {
+        "deep": 1,
+        "quick": 1
+      },
+      "effective_deficit_pool": "deep/ferrier/atom",
+      "n": 16,
+      "quick_mean": 1.0,
+      "retention_reasons": [
+        "calibration_score_saturated",
+        "fewer_than_minimum_effective_deficit_items",
+        "registered_retention_anchor_family"
+      ],
+      "role": "retention"
+    },
+    "deep/ferrier/episode/L2": {
+      "deep_mean": 1.0,
+      "deep_minus_quick": 0.0,
+      "effective_deficit_items": {
+        "deep": 0,
+        "quick": 0
+      },
+      "effective_deficit_pool": "deep/ferrier/episode",
+      "n": 6,
+      "quick_mean": 1.0,
+      "retention_reasons": [
+        "calibration_score_saturated",
+        "fewer_than_minimum_effective_deficit_items",
+        "registered_retention_anchor_family"
+      ],
+      "role": "retention"
+    },
+    "deep/ferrier/episode/L3": {
+      "deep_mean": 1.0,
+      "deep_minus_quick": 0.0,
+      "effective_deficit_items": {
+        "deep": 0,
+        "quick": 0
+      },
+      "effective_deficit_pool": "deep/ferrier/episode",
+      "n": 6,
+      "quick_mean": 1.0,
+      "retention_reasons": [
+        "calibration_score_saturated",
+        "fewer_than_minimum_effective_deficit_items",
+        "registered_retention_anchor_family"
+      ],
+      "role": "retention"
+    },
+    "deep/ferrier/episode/L5": {
+      "deep_mean": 1.0,
+      "deep_minus_quick": 0.0,
+      "effective_deficit_items": {
+        "deep": 0,
+        "quick": 0
+      },
+      "effective_deficit_pool": "deep/ferrier/episode",
+      "n": 6,
+      "quick_mean": 1.0,
+      "retention_reasons": [
+        "calibration_score_saturated",
+        "fewer_than_minimum_effective_deficit_items",
+        "registered_retention_anchor_family"
+      ],
+      "role": "retention"
+    },
+    "deep/foundry_ledger/atom/L3": {
+      "deep_mean": 0.75,
+      "deep_minus_quick": 0.0,
+      "effective_deficit_items": {
+        "deep": 37,
+        "quick": 37
+      },
+      "effective_deficit_pool": "deep/foundry_ledger/atom",
+      "n": 16,
+      "quick_mean": 0.75,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/foundry_ledger/atom/L4": {
+      "deep_mean": 0.5,
+      "deep_minus_quick": 0.0625,
+      "effective_deficit_items": {
+        "deep": 37,
+        "quick": 37
+      },
+      "effective_deficit_pool": "deep/foundry_ledger/atom",
+      "n": 16,
+      "quick_mean": 0.4375,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/foundry_ledger/atom/L5": {
+      "deep_mean": 0.375,
+      "deep_minus_quick": 0.0625,
+      "effective_deficit_items": {
+        "deep": 37,
+        "quick": 37
+      },
+      "effective_deficit_pool": "deep/foundry_ledger/atom",
+      "n": 16,
+      "quick_mean": 0.3125,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/foundry_ledger/atom/L6": {
+      "deep_mean": 0.0625,
+      "deep_minus_quick": -0.125,
+      "effective_deficit_items": {
+        "deep": 37,
+        "quick": 37
+      },
+      "effective_deficit_pool": "deep/foundry_ledger/atom",
+      "n": 16,
+      "quick_mean": 0.1875,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/gatepost/atom/L3": {
+      "deep_mean": 1.0,
+      "deep_minus_quick": 0.125,
+      "effective_deficit_items": {
+        "deep": 0,
+        "quick": 5
+      },
+      "effective_deficit_pool": "deep/gatepost/atom",
+      "n": 16,
+      "quick_mean": 0.875,
+      "retention_reasons": [
+        "calibration_score_saturated",
+        "fewer_than_minimum_effective_deficit_items"
+      ],
+      "role": "retention"
+    },
+    "deep/gatepost/atom/L4": {
+      "deep_mean": 1.0,
+      "deep_minus_quick": 0.1875,
+      "effective_deficit_items": {
+        "deep": 0,
+        "quick": 5
+      },
+      "effective_deficit_pool": "deep/gatepost/atom",
+      "n": 16,
+      "quick_mean": 0.8125,
+      "retention_reasons": [
+        "calibration_score_saturated",
+        "fewer_than_minimum_effective_deficit_items"
+      ],
+      "role": "retention"
+    },
+    "deep/gatepost/atom/L5": {
+      "deep_mean": 1.0,
+      "deep_minus_quick": 0.0,
+      "effective_deficit_items": {
+        "deep": 0,
+        "quick": 5
+      },
+      "effective_deficit_pool": "deep/gatepost/atom",
+      "n": 16,
+      "quick_mean": 1.0,
+      "retention_reasons": [
+        "calibration_score_saturated",
+        "fewer_than_minimum_effective_deficit_items"
+      ],
+      "role": "retention"
+    },
+    "deep/gatepost/atom/L6": {
+      "deep_mean": 1.0,
+      "deep_minus_quick": 0.0,
+      "effective_deficit_items": {
+        "deep": 0,
+        "quick": 5
+      },
+      "effective_deficit_pool": "deep/gatepost/atom",
+      "n": 16,
+      "quick_mean": 1.0,
+      "retention_reasons": [
+        "calibration_score_saturated",
+        "fewer_than_minimum_effective_deficit_items"
+      ],
+      "role": "retention"
+    },
+    "deep/gatepost/episode/L2": {
+      "deep_mean": 1.0,
+      "deep_minus_quick": 0.5,
+      "effective_deficit_items": {
+        "deep": 0,
+        "quick": 5
+      },
+      "effective_deficit_pool": "deep/gatepost/episode",
+      "n": 6,
+      "quick_mean": 0.5,
+      "retention_reasons": [
+        "calibration_score_saturated",
+        "fewer_than_minimum_effective_deficit_items"
+      ],
+      "role": "retention"
+    },
+    "deep/gatepost/episode/L3": {
+      "deep_mean": 1.0,
+      "deep_minus_quick": 0.16666666666666663,
+      "effective_deficit_items": {
+        "deep": 0,
+        "quick": 5
+      },
+      "effective_deficit_pool": "deep/gatepost/episode",
+      "n": 6,
+      "quick_mean": 0.8333333333333334,
+      "retention_reasons": [
+        "calibration_score_saturated",
+        "fewer_than_minimum_effective_deficit_items"
+      ],
+      "role": "retention"
+    },
+    "deep/gatepost/episode/L5": {
+      "deep_mean": 1.0,
+      "deep_minus_quick": 0.16666666666666663,
+      "effective_deficit_items": {
+        "deep": 0,
+        "quick": 5
+      },
+      "effective_deficit_pool": "deep/gatepost/episode",
+      "n": 6,
+      "quick_mean": 0.8333333333333334,
+      "retention_reasons": [
+        "calibration_score_saturated",
+        "fewer_than_minimum_effective_deficit_items"
+      ],
+      "role": "retention"
+    },
+    "deep/glyphgate/atom/L3": {
+      "deep_mean": 0.4375,
+      "deep_minus_quick": 0.1875,
+      "effective_deficit_items": {
+        "deep": 57,
+        "quick": 59
+      },
+      "effective_deficit_pool": "deep/glyphgate/atom",
+      "n": 16,
+      "quick_mean": 0.25,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/glyphgate/atom/L4": {
+      "deep_mean": 0.0,
+      "deep_minus_quick": -0.0625,
+      "effective_deficit_items": {
+        "deep": 57,
+        "quick": 59
+      },
+      "effective_deficit_pool": "deep/glyphgate/atom",
+      "n": 16,
+      "quick_mean": 0.0625,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/glyphgate/atom/L5": {
+      "deep_mean": 0.0,
+      "deep_minus_quick": 0.0,
+      "effective_deficit_items": {
+        "deep": 57,
+        "quick": 59
+      },
+      "effective_deficit_pool": "deep/glyphgate/atom",
+      "n": 16,
+      "quick_mean": 0.0,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/glyphgate/atom/L6": {
+      "deep_mean": 0.0,
+      "deep_minus_quick": 0.0,
+      "effective_deficit_items": {
+        "deep": 57,
+        "quick": 59
+      },
+      "effective_deficit_pool": "deep/glyphgate/atom",
+      "n": 16,
+      "quick_mean": 0.0,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/glyphgate/episode/L2": {
+      "deep_mean": 1.0,
+      "deep_minus_quick": 0.0,
+      "effective_deficit_items": {
+        "deep": 6,
+        "quick": 4
+      },
+      "effective_deficit_pool": "deep/glyphgate/episode",
+      "n": 6,
+      "quick_mean": 1.0,
+      "retention_reasons": [
+        "calibration_score_saturated",
+        "fewer_than_minimum_effective_deficit_items"
+      ],
+      "role": "retention"
+    },
+    "deep/glyphgate/episode/L3": {
+      "deep_mean": 0.8333333333333334,
+      "deep_minus_quick": -0.16666666666666663,
+      "effective_deficit_items": {
+        "deep": 6,
+        "quick": 4
+      },
+      "effective_deficit_pool": "deep/glyphgate/episode",
+      "n": 6,
+      "quick_mean": 1.0,
+      "retention_reasons": [
+        "calibration_score_saturated",
+        "fewer_than_minimum_effective_deficit_items"
+      ],
+      "role": "retention"
+    },
+    "deep/glyphgate/episode/L5": {
+      "deep_mean": 0.16666666666666666,
+      "deep_minus_quick": -0.16666666666666666,
+      "effective_deficit_items": {
+        "deep": 6,
+        "quick": 4
+      },
+      "effective_deficit_pool": "deep/glyphgate/episode",
+      "n": 6,
+      "quick_mean": 0.3333333333333333,
+      "retention_reasons": [
+        "fewer_than_minimum_effective_deficit_items"
+      ],
+      "role": "retention"
+    },
+    "deep/kilnrite/atom/L3": {
+      "deep_mean": 0.9375,
+      "deep_minus_quick": 0.125,
+      "effective_deficit_items": {
+        "deep": 10,
+        "quick": 11
+      },
+      "effective_deficit_pool": "deep/kilnrite/atom",
+      "n": 16,
+      "quick_mean": 0.8125,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/kilnrite/atom/L4": {
+      "deep_mean": 1.0,
+      "deep_minus_quick": 0.125,
+      "effective_deficit_items": {
+        "deep": 10,
+        "quick": 11
+      },
+      "effective_deficit_pool": "deep/kilnrite/atom",
+      "n": 16,
+      "quick_mean": 0.875,
+      "retention_reasons": [
+        "calibration_score_saturated"
+      ],
+      "role": "retention"
+    },
+    "deep/kilnrite/atom/L5": {
+      "deep_mean": 0.875,
+      "deep_minus_quick": 0.0,
+      "effective_deficit_items": {
+        "deep": 10,
+        "quick": 11
+      },
+      "effective_deficit_pool": "deep/kilnrite/atom",
+      "n": 16,
+      "quick_mean": 0.875,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/kilnrite/atom/L6": {
+      "deep_mean": 0.5625,
+      "deep_minus_quick": -0.1875,
+      "effective_deficit_items": {
+        "deep": 10,
+        "quick": 11
+      },
+      "effective_deficit_pool": "deep/kilnrite/atom",
+      "n": 16,
+      "quick_mean": 0.75,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/kilnrite/episode/L2": {
+      "deep_mean": 1.0,
+      "deep_minus_quick": 0.033333333333333326,
+      "effective_deficit_items": {
+        "deep": 6,
+        "quick": 6
+      },
+      "effective_deficit_pool": "deep/kilnrite/episode",
+      "n": 6,
+      "quick_mean": 0.9666666666666667,
+      "retention_reasons": [
+        "calibration_score_saturated",
+        "fewer_than_minimum_effective_deficit_items"
+      ],
+      "role": "retention"
+    },
+    "deep/kilnrite/episode/L3": {
+      "deep_mean": 0.8333333333333334,
+      "deep_minus_quick": -0.1428571428571428,
+      "effective_deficit_items": {
+        "deep": 6,
+        "quick": 6
+      },
+      "effective_deficit_pool": "deep/kilnrite/episode",
+      "n": 6,
+      "quick_mean": 0.9761904761904762,
+      "retention_reasons": [
+        "fewer_than_minimum_effective_deficit_items"
+      ],
+      "role": "retention"
+    },
+    "deep/kilnrite/episode/L5": {
+      "deep_mean": 0.7999999999999999,
+      "deep_minus_quick": -0.06666666666666676,
+      "effective_deficit_items": {
+        "deep": 6,
+        "quick": 6
+      },
+      "effective_deficit_pool": "deep/kilnrite/episode",
+      "n": 6,
+      "quick_mean": 0.8666666666666667,
+      "retention_reasons": [
+        "fewer_than_minimum_effective_deficit_items"
+      ],
+      "role": "retention"
+    },
+    "deep/loomfix/atom/L3": {
+      "deep_mean": 0.6875,
+      "deep_minus_quick": -0.0625,
+      "effective_deficit_items": {
+        "deep": 25,
+        "quick": 20
+      },
+      "effective_deficit_pool": "deep/loomfix/atom",
+      "n": 16,
+      "quick_mean": 0.75,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/loomfix/atom/L4": {
+      "deep_mean": 0.5625,
+      "deep_minus_quick": -0.125,
+      "effective_deficit_items": {
+        "deep": 25,
+        "quick": 20
+      },
+      "effective_deficit_pool": "deep/loomfix/atom",
+      "n": 16,
+      "quick_mean": 0.6875,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/loomfix/atom/L5": {
+      "deep_mean": 0.625,
+      "deep_minus_quick": -0.125,
+      "effective_deficit_items": {
+        "deep": 25,
+        "quick": 20
+      },
+      "effective_deficit_pool": "deep/loomfix/atom",
+      "n": 16,
+      "quick_mean": 0.75,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/loomfix/atom/L6": {
+      "deep_mean": 0.5625,
+      "deep_minus_quick": 0.0,
+      "effective_deficit_items": {
+        "deep": 25,
+        "quick": 20
+      },
+      "effective_deficit_pool": "deep/loomfix/atom",
+      "n": 16,
+      "quick_mean": 0.5625,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/loomfix/episode/L2": {
+      "deep_mean": 0.6666666666666666,
+      "deep_minus_quick": 0.3333333333333333,
+      "effective_deficit_items": {
+        "deep": 8,
+        "quick": 11
+      },
+      "effective_deficit_pool": "deep/loomfix/episode",
+      "n": 6,
+      "quick_mean": 0.3333333333333333,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/loomfix/episode/L3": {
+      "deep_mean": 0.5,
+      "deep_minus_quick": 0.1111111111111111,
+      "effective_deficit_items": {
+        "deep": 8,
+        "quick": 11
+      },
+      "effective_deficit_pool": "deep/loomfix/episode",
+      "n": 6,
+      "quick_mean": 0.3888888888888889,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/loomfix/episode/L5": {
+      "deep_mean": 0.5,
+      "deep_minus_quick": 0.0,
+      "effective_deficit_items": {
+        "deep": 8,
+        "quick": 11
+      },
+      "effective_deficit_pool": "deep/loomfix/episode",
+      "n": 6,
+      "quick_mean": 0.5,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/packhouse/atom/L3": {
+      "deep_mean": 0.1775152954834308,
+      "deep_minus_quick": -0.1090311056533248,
+      "effective_deficit_items": {
+        "deep": 63,
+        "quick": 64
+      },
+      "effective_deficit_pool": "deep/packhouse/atom",
+      "n": 16,
+      "quick_mean": 0.2865464011367556,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/packhouse/atom/L4": {
+      "deep_mean": 0.2299043289870466,
+      "deep_minus_quick": 0.13670905372199457,
+      "effective_deficit_items": {
+        "deep": 63,
+        "quick": 64
+      },
+      "effective_deficit_pool": "deep/packhouse/atom",
+      "n": 16,
+      "quick_mean": 0.09319527526505203,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/packhouse/atom/L5": {
+      "deep_mean": 0.11278368424191818,
+      "deep_minus_quick": -0.04499955601093816,
+      "effective_deficit_items": {
+        "deep": 63,
+        "quick": 64
+      },
+      "effective_deficit_pool": "deep/packhouse/atom",
+      "n": 16,
+      "quick_mean": 0.15778324025285634,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/packhouse/atom/L6": {
+      "deep_mean": 0.09774122807017543,
+      "deep_minus_quick": -0.26353338523701636,
+      "effective_deficit_items": {
+        "deep": 63,
+        "quick": 64
+      },
+      "effective_deficit_pool": "deep/packhouse/atom",
+      "n": 16,
+      "quick_mean": 0.3612746133071918,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/patchwheel/atom/L3": {
+      "deep_mean": 0.0,
+      "deep_minus_quick": -0.0625,
+      "effective_deficit_items": {
+        "deep": 60,
+        "quick": 57
+      },
+      "effective_deficit_pool": "deep/patchwheel/atom",
+      "n": 16,
+      "quick_mean": 0.0625,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/patchwheel/atom/L4": {
+      "deep_mean": 0.125,
+      "deep_minus_quick": 0.0,
+      "effective_deficit_items": {
+        "deep": 60,
+        "quick": 57
+      },
+      "effective_deficit_pool": "deep/patchwheel/atom",
+      "n": 16,
+      "quick_mean": 0.125,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/patchwheel/atom/L5": {
+      "deep_mean": 0.125,
+      "deep_minus_quick": 0.0625,
+      "effective_deficit_items": {
+        "deep": 60,
+        "quick": 57
+      },
+      "effective_deficit_pool": "deep/patchwheel/atom",
+      "n": 16,
+      "quick_mean": 0.0625,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/patchwheel/atom/L6": {
+      "deep_mean": 0.0,
+      "deep_minus_quick": -0.1875,
+      "effective_deficit_items": {
+        "deep": 60,
+        "quick": 57
+      },
+      "effective_deficit_pool": "deep/patchwheel/atom",
+      "n": 16,
+      "quick_mean": 0.1875,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/patchwheel/episode/L2": {
+      "deep_mean": 0.5833333333333334,
+      "deep_minus_quick": 0.33333333333333337,
+      "effective_deficit_items": {
+        "deep": 13,
+        "quick": 16
+      },
+      "effective_deficit_pool": "deep/patchwheel/episode",
+      "n": 6,
+      "quick_mean": 0.25,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/patchwheel/episode/L3": {
+      "deep_mean": 0.27777777777777773,
+      "deep_minus_quick": 0.055555555555555525,
+      "effective_deficit_items": {
+        "deep": 13,
+        "quick": 16
+      },
+      "effective_deficit_pool": "deep/patchwheel/episode",
+      "n": 6,
+      "quick_mean": 0.2222222222222222,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/patchwheel/episode/L5": {
+      "deep_mean": 0.25,
+      "deep_minus_quick": -0.041666666666666685,
+      "effective_deficit_items": {
+        "deep": 13,
+        "quick": 16
+      },
+      "effective_deficit_pool": "deep/patchwheel/episode",
+      "n": 6,
+      "quick_mean": 0.2916666666666667,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/runeward/atom/L3": {
+      "deep_mean": 0.875,
+      "deep_minus_quick": 0.0625,
+      "effective_deficit_items": {
+        "deep": 9,
+        "quick": 12
+      },
+      "effective_deficit_pool": "deep/runeward/atom",
+      "n": 16,
+      "quick_mean": 0.8125,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/runeward/atom/L4": {
+      "deep_mean": 0.875,
+      "deep_minus_quick": 0.0625,
+      "effective_deficit_items": {
+        "deep": 9,
+        "quick": 12
+      },
+      "effective_deficit_pool": "deep/runeward/atom",
+      "n": 16,
+      "quick_mean": 0.8125,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/runeward/atom/L5": {
+      "deep_mean": 0.875,
+      "deep_minus_quick": 0.125,
+      "effective_deficit_items": {
+        "deep": 9,
+        "quick": 12
+      },
+      "effective_deficit_pool": "deep/runeward/atom",
+      "n": 16,
+      "quick_mean": 0.75,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/runeward/atom/L6": {
+      "deep_mean": 0.8125,
+      "deep_minus_quick": -0.0625,
+      "effective_deficit_items": {
+        "deep": 9,
+        "quick": 12
+      },
+      "effective_deficit_pool": "deep/runeward/atom",
+      "n": 16,
+      "quick_mean": 0.875,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/spindle/atom/L3": {
+      "deep_mean": 0.5625,
+      "deep_minus_quick": 0.25,
+      "effective_deficit_items": {
+        "deep": 39,
+        "quick": 53
+      },
+      "effective_deficit_pool": "deep/spindle/atom",
+      "n": 16,
+      "quick_mean": 0.3125,
+      "retention_reasons": [
+        "never_trained_transfer_family"
+      ],
+      "role": "retention"
+    },
+    "deep/spindle/atom/L4": {
+      "deep_mean": 0.5,
+      "deep_minus_quick": 0.3125,
+      "effective_deficit_items": {
+        "deep": 39,
+        "quick": 53
+      },
+      "effective_deficit_pool": "deep/spindle/atom",
+      "n": 16,
+      "quick_mean": 0.1875,
+      "retention_reasons": [
+        "never_trained_transfer_family"
+      ],
+      "role": "retention"
+    },
+    "deep/spindle/atom/L5": {
+      "deep_mean": 0.3125,
+      "deep_minus_quick": 0.1875,
+      "effective_deficit_items": {
+        "deep": 39,
+        "quick": 53
+      },
+      "effective_deficit_pool": "deep/spindle/atom",
+      "n": 16,
+      "quick_mean": 0.125,
+      "retention_reasons": [
+        "never_trained_transfer_family"
+      ],
+      "role": "retention"
+    },
+    "deep/spindle/atom/L6": {
+      "deep_mean": 0.1875,
+      "deep_minus_quick": 0.125,
+      "effective_deficit_items": {
+        "deep": 39,
+        "quick": 53
+      },
+      "effective_deficit_pool": "deep/spindle/atom",
+      "n": 16,
+      "quick_mean": 0.0625,
+      "retention_reasons": [
+        "never_trained_transfer_family"
+      ],
+      "role": "retention"
+    },
+    "deep/spindle/episode/L2": {
+      "deep_mean": 1.0,
+      "deep_minus_quick": 0.0,
+      "effective_deficit_items": {
+        "deep": 2,
+        "quick": 2
+      },
+      "effective_deficit_pool": "deep/spindle/episode",
+      "n": 6,
+      "quick_mean": 1.0,
+      "retention_reasons": [
+        "calibration_score_saturated",
+        "fewer_than_minimum_effective_deficit_items",
+        "never_trained_transfer_family"
+      ],
+      "role": "retention"
+    },
+    "deep/spindle/episode/L3": {
+      "deep_mean": 0.9333333333333332,
+      "deep_minus_quick": -0.06666666666666676,
+      "effective_deficit_items": {
+        "deep": 2,
+        "quick": 2
+      },
+      "effective_deficit_pool": "deep/spindle/episode",
+      "n": 6,
+      "quick_mean": 1.0,
+      "retention_reasons": [
+        "calibration_score_saturated",
+        "fewer_than_minimum_effective_deficit_items",
+        "never_trained_transfer_family"
+      ],
+      "role": "retention"
+    },
+    "deep/spindle/episode/L5": {
+      "deep_mean": 0.8809523809523809,
+      "deep_minus_quick": 0.023809523809523836,
+      "effective_deficit_items": {
+        "deep": 2,
+        "quick": 2
+      },
+      "effective_deficit_pool": "deep/spindle/episode",
+      "n": 6,
+      "quick_mean": 0.8571428571428571,
+      "retention_reasons": [
+        "fewer_than_minimum_effective_deficit_items",
+        "never_trained_transfer_family"
+      ],
+      "role": "retention"
+    },
+    "deep/stallwright/atom/L3": {
+      "deep_mean": 0.5498217814668545,
+      "deep_minus_quick": 0.1323528962235162,
+      "effective_deficit_items": {
+        "deep": 57,
+        "quick": 60
+      },
+      "effective_deficit_pool": "deep/stallwright/atom",
+      "n": 16,
+      "quick_mean": 0.41746888524333825,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/stallwright/atom/L4": {
+      "deep_mean": 0.3037178567487032,
+      "deep_minus_quick": 0.13127380039066391,
+      "effective_deficit_items": {
+        "deep": 57,
+        "quick": 60
+      },
+      "effective_deficit_pool": "deep/stallwright/atom",
+      "n": 16,
+      "quick_mean": 0.1724440563580393,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/stallwright/atom/L5": {
+      "deep_mean": 0.06188574938574939,
+      "deep_minus_quick": 0.003531941031941037,
+      "effective_deficit_items": {
+        "deep": 57,
+        "quick": 60
+      },
+      "effective_deficit_pool": "deep/stallwright/atom",
+      "n": 16,
+      "quick_mean": 0.05835380835380835,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "deep/stallwright/atom/L6": {
+      "deep_mean": 0.0,
+      "deep_minus_quick": -0.1237012987012987,
+      "effective_deficit_items": {
+        "deep": 57,
+        "quick": 60
+      },
+      "effective_deficit_pool": "deep/stallwright/atom",
+      "n": 16,
+      "quick_mean": 0.1237012987012987,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "quick/brinework/atom/L1": {
+      "deep_mean": 0.8125,
+      "deep_minus_quick": -0.1875,
+      "effective_deficit_items": {
+        "deep": 4,
+        "quick": 1
+      },
+      "effective_deficit_pool": "quick/brinework/atom",
+      "n": 16,
+      "quick_mean": 1.0,
+      "retention_reasons": [
+        "calibration_score_saturated",
+        "fewer_than_minimum_effective_deficit_items",
+        "never_trained_transfer_family"
+      ],
+      "role": "retention"
+    },
+    "quick/brinework/atom/L2": {
+      "deep_mean": 0.9375,
+      "deep_minus_quick": 0.0,
+      "effective_deficit_items": {
+        "deep": 4,
+        "quick": 1
+      },
+      "effective_deficit_pool": "quick/brinework/atom",
+      "n": 16,
+      "quick_mean": 0.9375,
+      "retention_reasons": [
+        "fewer_than_minimum_effective_deficit_items",
+        "never_trained_transfer_family"
+      ],
+      "role": "retention"
+    },
+    "quick/burrowmaze/atom/L1": {
+      "deep_mean": 1.0,
+      "deep_minus_quick": 0.0,
+      "effective_deficit_items": {
+        "deep": 2,
+        "quick": 0
+      },
+      "effective_deficit_pool": "quick/burrowmaze/atom",
+      "n": 16,
+      "quick_mean": 1.0,
+      "retention_reasons": [
+        "calibration_score_saturated",
+        "fewer_than_minimum_effective_deficit_items"
+      ],
+      "role": "retention"
+    },
+    "quick/burrowmaze/atom/L2": {
+      "deep_mean": 0.875,
+      "deep_minus_quick": -0.125,
+      "effective_deficit_items": {
+        "deep": 2,
+        "quick": 0
+      },
+      "effective_deficit_pool": "quick/burrowmaze/atom",
+      "n": 16,
+      "quick_mean": 1.0,
+      "retention_reasons": [
+        "calibration_score_saturated",
+        "fewer_than_minimum_effective_deficit_items"
+      ],
+      "role": "retention"
+    },
+    "quick/caravan/atom/L1": {
+      "deep_mean": 0.9375,
+      "deep_minus_quick": 0.0,
+      "effective_deficit_items": {
+        "deep": 3,
+        "quick": 4
+      },
+      "effective_deficit_pool": "quick/caravan/atom",
+      "n": 16,
+      "quick_mean": 0.9375,
+      "retention_reasons": [
+        "fewer_than_minimum_effective_deficit_items"
+      ],
+      "role": "retention"
+    },
+    "quick/caravan/atom/L2": {
+      "deep_mean": 0.875,
+      "deep_minus_quick": 0.0625,
+      "effective_deficit_items": {
+        "deep": 3,
+        "quick": 4
+      },
+      "effective_deficit_pool": "quick/caravan/atom",
+      "n": 16,
+      "quick_mean": 0.8125,
+      "retention_reasons": [
+        "fewer_than_minimum_effective_deficit_items"
+      ],
+      "role": "retention"
+    },
+    "quick/ferrier/atom/L1": {
+      "deep_mean": 0.9375,
+      "deep_minus_quick": 0.0,
+      "effective_deficit_items": {
+        "deep": 1,
+        "quick": 1
+      },
+      "effective_deficit_pool": "quick/ferrier/atom",
+      "n": 16,
+      "quick_mean": 0.9375,
+      "retention_reasons": [
+        "fewer_than_minimum_effective_deficit_items",
+        "registered_retention_anchor_family"
+      ],
+      "role": "retention"
+    },
+    "quick/ferrier/atom/L2": {
+      "deep_mean": 1.0,
+      "deep_minus_quick": 0.0,
+      "effective_deficit_items": {
+        "deep": 1,
+        "quick": 1
+      },
+      "effective_deficit_pool": "quick/ferrier/atom",
+      "n": 16,
+      "quick_mean": 1.0,
+      "retention_reasons": [
+        "calibration_score_saturated",
+        "fewer_than_minimum_effective_deficit_items",
+        "registered_retention_anchor_family"
+      ],
+      "role": "retention"
+    },
+    "quick/foundry_ledger/atom/L1": {
+      "deep_mean": 1.0,
+      "deep_minus_quick": 0.0,
+      "effective_deficit_items": {
+        "deep": 2,
+        "quick": 5
+      },
+      "effective_deficit_pool": "quick/foundry_ledger/atom",
+      "n": 16,
+      "quick_mean": 1.0,
+      "retention_reasons": [
+        "calibration_score_saturated",
+        "fewer_than_minimum_effective_deficit_items"
+      ],
+      "role": "retention"
+    },
+    "quick/foundry_ledger/atom/L2": {
+      "deep_mean": 0.875,
+      "deep_minus_quick": 0.1875,
+      "effective_deficit_items": {
+        "deep": 2,
+        "quick": 5
+      },
+      "effective_deficit_pool": "quick/foundry_ledger/atom",
+      "n": 16,
+      "quick_mean": 0.6875,
+      "retention_reasons": [
+        "fewer_than_minimum_effective_deficit_items"
+      ],
+      "role": "retention"
+    },
+    "quick/gatepost/atom/L1": {
+      "deep_mean": 1.0,
+      "deep_minus_quick": 0.25,
+      "effective_deficit_items": {
+        "deep": 0,
+        "quick": 5
+      },
+      "effective_deficit_pool": "quick/gatepost/atom",
+      "n": 16,
+      "quick_mean": 0.75,
+      "retention_reasons": [
+        "calibration_score_saturated",
+        "fewer_than_minimum_effective_deficit_items"
+      ],
+      "role": "retention"
+    },
+    "quick/gatepost/atom/L2": {
+      "deep_mean": 1.0,
+      "deep_minus_quick": 0.0625,
+      "effective_deficit_items": {
+        "deep": 0,
+        "quick": 5
+      },
+      "effective_deficit_pool": "quick/gatepost/atom",
+      "n": 16,
+      "quick_mean": 0.9375,
+      "retention_reasons": [
+        "calibration_score_saturated",
+        "fewer_than_minimum_effective_deficit_items"
+      ],
+      "role": "retention"
+    },
+    "quick/glyphgate/atom/L1": {
+      "deep_mean": 1.0,
+      "deep_minus_quick": 0.0625,
+      "effective_deficit_items": {
+        "deep": 5,
+        "quick": 5
+      },
+      "effective_deficit_pool": "quick/glyphgate/atom",
+      "n": 16,
+      "quick_mean": 0.9375,
+      "retention_reasons": [
+        "calibration_score_saturated",
+        "fewer_than_minimum_effective_deficit_items"
+      ],
+      "role": "retention"
+    },
+    "quick/glyphgate/atom/L2": {
+      "deep_mean": 0.6875,
+      "deep_minus_quick": -0.0625,
+      "effective_deficit_items": {
+        "deep": 5,
+        "quick": 5
+      },
+      "effective_deficit_pool": "quick/glyphgate/atom",
+      "n": 16,
+      "quick_mean": 0.75,
+      "retention_reasons": [
+        "fewer_than_minimum_effective_deficit_items"
+      ],
+      "role": "retention"
+    },
+    "quick/kilnrite/atom/L1": {
+      "deep_mean": 1.0,
+      "deep_minus_quick": 0.0,
+      "effective_deficit_items": {
+        "deep": 0,
+        "quick": 0
+      },
+      "effective_deficit_pool": "quick/kilnrite/atom",
+      "n": 16,
+      "quick_mean": 1.0,
+      "retention_reasons": [
+        "calibration_score_saturated",
+        "fewer_than_minimum_effective_deficit_items"
+      ],
+      "role": "retention"
+    },
+    "quick/kilnrite/atom/L2": {
+      "deep_mean": 1.0,
+      "deep_minus_quick": 0.0,
+      "effective_deficit_items": {
+        "deep": 0,
+        "quick": 0
+      },
+      "effective_deficit_pool": "quick/kilnrite/atom",
+      "n": 16,
+      "quick_mean": 1.0,
+      "retention_reasons": [
+        "calibration_score_saturated",
+        "fewer_than_minimum_effective_deficit_items"
+      ],
+      "role": "retention"
+    },
+    "quick/loomfix/atom/L1": {
+      "deep_mean": 0.75,
+      "deep_minus_quick": 0.125,
+      "effective_deficit_items": {
+        "deep": 8,
+        "quick": 13
+      },
+      "effective_deficit_pool": "quick/loomfix/atom",
+      "n": 16,
+      "quick_mean": 0.625,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "quick/loomfix/atom/L2": {
+      "deep_mean": 0.75,
+      "deep_minus_quick": 0.1875,
+      "effective_deficit_items": {
+        "deep": 8,
+        "quick": 13
+      },
+      "effective_deficit_pool": "quick/loomfix/atom",
+      "n": 16,
+      "quick_mean": 0.5625,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "quick/packhouse/atom/L1": {
+      "deep_mean": 0.5490646526849954,
+      "deep_minus_quick": -0.08591717369064245,
+      "effective_deficit_items": {
+        "deep": 31,
+        "quick": 32
+      },
+      "effective_deficit_pool": "quick/packhouse/atom",
+      "n": 16,
+      "quick_mean": 0.6349818263756378,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "quick/packhouse/atom/L2": {
+      "deep_mean": 0.39189518131695017,
+      "deep_minus_quick": -0.10055412974092742,
+      "effective_deficit_items": {
+        "deep": 31,
+        "quick": 32
+      },
+      "effective_deficit_pool": "quick/packhouse/atom",
+      "n": 16,
+      "quick_mean": 0.4924493110578776,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "quick/patchwheel/atom/L1": {
+      "deep_mean": 0.4375,
+      "deep_minus_quick": 0.125,
+      "effective_deficit_items": {
+        "deep": 20,
+        "quick": 21
+      },
+      "effective_deficit_pool": "quick/patchwheel/atom",
+      "n": 16,
+      "quick_mean": 0.3125,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "quick/patchwheel/atom/L2": {
+      "deep_mean": 0.3125,
+      "deep_minus_quick": -0.0625,
+      "effective_deficit_items": {
+        "deep": 20,
+        "quick": 21
+      },
+      "effective_deficit_pool": "quick/patchwheel/atom",
+      "n": 16,
+      "quick_mean": 0.375,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "quick/runeward/atom/L1": {
+      "deep_mean": 1.0,
+      "deep_minus_quick": 0.0,
+      "effective_deficit_items": {
+        "deep": 1,
+        "quick": 1
+      },
+      "effective_deficit_pool": "quick/runeward/atom",
+      "n": 16,
+      "quick_mean": 1.0,
+      "retention_reasons": [
+        "calibration_score_saturated",
+        "fewer_than_minimum_effective_deficit_items"
+      ],
+      "role": "retention"
+    },
+    "quick/runeward/atom/L2": {
+      "deep_mean": 0.9375,
+      "deep_minus_quick": 0.0,
+      "effective_deficit_items": {
+        "deep": 1,
+        "quick": 1
+      },
+      "effective_deficit_pool": "quick/runeward/atom",
+      "n": 16,
+      "quick_mean": 0.9375,
+      "retention_reasons": [
+        "fewer_than_minimum_effective_deficit_items"
+      ],
+      "role": "retention"
+    },
+    "quick/spindle/atom/L1": {
+      "deep_mean": 0.4375,
+      "deep_minus_quick": -0.0625,
+      "effective_deficit_items": {
+        "deep": 15,
+        "quick": 16
+      },
+      "effective_deficit_pool": "quick/spindle/atom",
+      "n": 16,
+      "quick_mean": 0.5,
+      "retention_reasons": [
+        "never_trained_transfer_family"
+      ],
+      "role": "retention"
+    },
+    "quick/spindle/atom/L2": {
+      "deep_mean": 0.625,
+      "deep_minus_quick": 0.125,
+      "effective_deficit_items": {
+        "deep": 15,
+        "quick": 16
+      },
+      "effective_deficit_pool": "quick/spindle/atom",
+      "n": 16,
+      "quick_mean": 0.5,
+      "retention_reasons": [
+        "never_trained_transfer_family"
+      ],
+      "role": "retention"
+    },
+    "quick/stallwright/atom/L1": {
+      "deep_mean": 0.9762874576555921,
+      "deep_minus_quick": 0.02611101452735254,
+      "effective_deficit_items": {
+        "deep": 12,
+        "quick": 19
+      },
+      "effective_deficit_pool": "quick/stallwright/atom",
+      "n": 16,
+      "quick_mean": 0.9501764431282396,
+      "retention_reasons": [],
+      "role": "capability"
+    },
+    "quick/stallwright/atom/L2": {
+      "deep_mean": 0.9217494307746004,
+      "deep_minus_quick": 0.26974037468908696,
+      "effective_deficit_items": {
+        "deep": 12,
+        "quick": 19
+      },
+      "effective_deficit_pool": "quick/stallwright/atom",
+      "n": 16,
+      "quick_mean": 0.6520090560855134,
+      "retention_reasons": [],
+      "role": "capability"
+    }
+  },
+  "config": "/workspace/small-model-experimentation/experiments/qwen35_4b_pareto_policy_integration/configs/default.yaml",
+  "downstream_authorization": "qualification",
+  "gate": {
+    "passed": true
+  },
+  "note": "descriptive only; no threshold or family was selected from these outcomes",
+  "protocol_checks": {
+    "all_registered_anchors_retention_only": true,
+    "all_transfer_cells_retention_only": true,
+    "deep_capability_cells_exist": true,
+    "deep_scope": true,
+    "greedy": true,
+    "paired_items": true,
+    "quick_capability_cells_exist": true,
+    "quick_scope": true,
+    "same_seed": true
+  },
+  "retention_cells": [
+    "deep/brinework/atom/L3",
+    "deep/brinework/atom/L4",
+    "deep/brinework/atom/L5",
+    "deep/brinework/atom/L6",
+    "deep/ferrier/atom/L3",
+    "deep/ferrier/atom/L4",
+    "deep/ferrier/atom/L5",
+    "deep/ferrier/atom/L6",
+    "deep/ferrier/episode/L2",
+    "deep/ferrier/episode/L3",
+    "deep/ferrier/episode/L5",
+    "deep/gatepost/atom/L3",
+    "deep/gatepost/atom/L4",
+    "deep/gatepost/atom/L5",
+    "deep/gatepost/atom/L6",
+    "deep/gatepost/episode/L2",
+    "deep/gatepost/episode/L3",
+    "deep/gatepost/episode/L5",
+    "deep/glyphgate/episode/L2",
+    "deep/glyphgate/episode/L3",
+    "deep/glyphgate/episode/L5",
+    "deep/kilnrite/atom/L4",
+    "deep/kilnrite/episode/L2",
+    "deep/kilnrite/episode/L3",
+    "deep/kilnrite/episode/L5",
+    "deep/spindle/atom/L3",
+    "deep/spindle/atom/L4",
+    "deep/spindle/atom/L5",
+    "deep/spindle/atom/L6",
+    "deep/spindle/episode/L2",
+    "deep/spindle/episode/L3",
+    "deep/spindle/episode/L5",
+    "quick/brinework/atom/L1",
+    "quick/brinework/atom/L2",
+    "quick/burrowmaze/atom/L1",
+    "quick/burrowmaze/atom/L2",
+    "quick/caravan/atom/L1",
+    "quick/caravan/atom/L2",
+    "quick/ferrier/atom/L1",
+    "quick/ferrier/atom/L2",
+    "quick/foundry_ledger/atom/L1",
+    "quick/foundry_ledger/atom/L2",
+    "quick/gatepost/atom/L1",
+    "quick/gatepost/atom/L2",
+    "quick/glyphgate/atom/L1",
+    "quick/glyphgate/atom/L2",
+    "quick/kilnrite/atom/L1",
+    "quick/kilnrite/atom/L2",
+    "quick/runeward/atom/L1",
+    "quick/runeward/atom/L2",
+    "quick/spindle/atom/L1",
+    "quick/spindle/atom/L2"
+  ],
+  "stage": "descriptive_calibration"
+}
