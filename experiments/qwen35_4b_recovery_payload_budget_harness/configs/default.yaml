@@ -1,0 +1,117 @@
+schema_version: 1
+
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+  base: large_artifacts/qwen35_4b_repo_search_compress_bank/merged/apex_replay
+  happy: large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/merged/happy_action
+  action: large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/merged/recovery_action
+  candidate: large_artifacts/qwen35_4b_recovery_reason_locality_interpolation/merged/reason_mix_018
+  expected_weight_sha256:
+    base: c933168075a0fc011f31ee54f83d722cc91423ce1a0ac19bfe40dfab92f608d5
+    happy: c67bc52f3b7d2ce063715325cd678ddac9ecfa95741872e740c7b88d0b0e059d
+    action: 991d2da239ac2878dccac72ece419b00f37ac15d6a970538f384c36162b89aea
+    candidate: 72a93f9030cffea741265849ea9ce404d6f4a0d74d887f7ce13eea3dfe9391ea
+
+artifacts:
+  root: large_artifacts/qwen35_4b_recovery_payload_budget_harness
+
+engine:
+  max_model_len: 8192
+  gpu_memory_utilization: 0.85
+  max_num_seqs: 32
+  max_num_batched_tokens: 16384
+
+families:
+  train:
+    - layered_settings
+    - retry_backoff
+    - alias_registry
+    - window_unique
+    - priority_intervals
+    - stable_topology
+  transfer:
+    - lease_cache
+    - quorum_value
+    - pattern_router
+    - rate_buckets
+
+evaluation:
+  # Larger tool payload; thinking is not reduced. Every arm gets the same budget.
+  think_budget: 512
+  answer_max_tokens: 512
+  sample_temperature: 0.8
+  sample_top_p: 0.95
+  sample_top_k: 20
+  deep_run_seed: 85401
+  sample_run_seed: 85402
+  recovery:
+    deep_turns: 6
+    sample_more_trajectories: 2
+    sample_more_turns_each: 3
+  normal:
+    deep_turns: 8
+    sample_more_trajectories: 2
+    sample_more_turns_each: 4
+  blocks:
+    calibration:
+      families: train
+      seed: 84700
+      tasks_per_family: 5
+    transfer_dev:
+      families: transfer
+      seed: 84800
+      tasks_per_family: 10
+    transfer_confirm:
+      families: transfer
+      seed: 84900
+      tasks_per_family: 10
+
+locality:
+  contexts: experiments/qwen35_4b_recovery_payload_budget_harness/data/locality_contexts.json
+  contexts_sha256: 2322656a1652fd428f3f1c5a56f1c6056141dee4fb52a22b9d7217acf78882ce
+  count: 48
+  max_context_tokens: 1024
+  median_non_target_logit_drift_max: 0.15
+  mean_entropy_delta_min: -0.05
+
+calibration_gates:
+  recovery_delta_vs_base_min: 0.05
+  recovery_delta_vs_happy_min: 0.03
+  recovery_delta_vs_action_min: 0.03
+  invalid_action_delta_vs_base_max: 0.02
+  answer_cap_hit_delta_vs_base_max: 0.02
+  rejected_patch_valid_changed_within_two_absolute_min: 0.80
+  rejected_patch_valid_changed_within_two_delta_min: 0.10
+  failed_test_changed_patch_within_two_absolute_min: 0.60
+  failed_test_changed_patch_within_two_delta_min: 0.05
+  verified_given_success_absolute_min: 0.85
+  commit_given_verified_absolute_min: 0.80
+
+transfer_gates:
+  recovery_delta_vs_base_min: 0.05
+  recovery_delta_vs_happy_min: 0.03
+  recovery_delta_vs_action_min: 0.03
+  recovery_delta_vs_sample_more_min: 0.03
+  recovery_delta_vs_scaffold_min: 0.03
+  paired_bootstrap_lower_bound_min: 0.0
+  rejected_patch_transition_absolute_min: 0.80
+  rejected_patch_transition_delta_min: 0.10
+  failed_test_transition_absolute_min: 0.60
+  failed_test_transition_delta_min: 0.05
+  normal_success_delta_min: -0.03
+  normal_verified_absolute_min: 0.70
+  normal_verified_delta_min: -0.05
+  normal_commit_absolute_min: 0.65
+  normal_commit_delta_min: -0.05
+  invalid_action_rate_delta_max: 0.02
+  answer_cap_hit_rate_delta_max: 0.02
+  minimum_nonnegative_transfer_families: 3
+  maximum_single_family_regression: -0.10
+
+menagerie:
+  sealed_until_repo_gates_pass: true
+  tiers: [quick, medium]
+  paired_seeds: []
+  maximum_tier_regression: 0.03
+  minimum_positive_tier_delta: 0.02

@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 197
-- Manifest files: 499
+- Experiments with manifests: 198
+- Manifest files: 500
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 63 |
 | `run-data` | 101 |
-| `standard-artifact` | 70 |
+| `standard-artifact` | 71 |
 
 ## Manifests
 
@@ -176,6 +176,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_probe_the_parameter` | `standard-artifact` | [manifest](../experiments/qwen35_4b_probe_the_parameter/reports/artifact_manifest.yaml) |
 | `qwen35_4b_probe_to_prompt` | `standard-artifact` | [manifest](../experiments/qwen35_4b_probe_to_prompt/reports/artifact_manifest.yaml) |
 | `qwen35_4b_real_sample_verify_commit` | `dataset` | [manifest](../experiments/qwen35_4b_real_sample_verify_commit/data/dataset_manifest.json) |
+| `qwen35_4b_recovery_payload_budget_harness` | `standard-artifact` | [manifest](../experiments/qwen35_4b_recovery_payload_budget_harness/reports/artifact_manifest.yaml) |
 | `qwen35_4b_recovery_reason_locality_interpolation` | `standard-artifact` | [manifest](../experiments/qwen35_4b_recovery_reason_locality_interpolation/reports/artifact_manifest.yaml) |
 | `qwen35_4b_reliability_exec_opsd_audit` | `run-data` | [manifest](../experiments/qwen35_4b_reliability_exec_opsd_audit/data/retrieval_adapt_semantic_t0p0_top3_records.manifest.json) |
 | `qwen35_4b_reliability_exec_opsd_audit` | `run-data` | [manifest](../experiments/qwen35_4b_reliability_exec_opsd_audit/data/retrieval_adapt_semantic_t0p1_top3_records.manifest.json) |

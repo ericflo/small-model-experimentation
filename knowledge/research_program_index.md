@@ -3,14 +3,14 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 13
-- Experiments: 225
+- Experiments: 226
 
 ## Structured Execution And Compilers
 
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 160
+- Assigned experiments: 161
 
 ### Seed Evidence
 
@@ -89,6 +89,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_prefix_value_guided_search` (track-z): [README](../experiments/qwen35_4b_prefix_value_guided_search/README.md)
 - `qwen35_4b_probe_the_parameter` (new): [README](../experiments/qwen35_4b_probe_the_parameter/README.md)
 - `qwen35_4b_probe_to_prompt` (new): [README](../experiments/qwen35_4b_probe_to_prompt/README.md)
+- `qwen35_4b_recovery_payload_budget_harness` (new): [README](../experiments/qwen35_4b_recovery_payload_budget_harness/README.md)
 - `qwen35_4b_reliability_exec_opsd_audit` (track-z): [README](../experiments/qwen35_4b_reliability_exec_opsd_audit/README.md)
 - `qwen35_4b_repo_search_compress_bank` (new): [README](../experiments/qwen35_4b_repo_search_compress_bank/README.md)
 - `qwen35_4b_same_prefix_advantage_routing` (new): [README](../experiments/qwen35_4b_same_prefix_advantage_routing/README.md)
@@ -476,7 +477,7 @@ Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and o
 Train or evaluate small models as controllers over tools, verifiers, budgets, and intermediate actions.
 
 - Charter: [process_control_and_tool_use](../research_programs/process_control_and_tool_use/charter.md)
-- Assigned experiments: 36
+- Assigned experiments: 37
 
 ### Seed Evidence
 
@@ -503,6 +504,7 @@ Train or evaluate small models as controllers over tools, verifiers, budgets, an
 - `qwen35_4b_oracle_process_grpo` (track-z): [README](../experiments/qwen35_4b_oracle_process_grpo/README.md)
 - `qwen35_4b_pareto_policy_integration` (new): [README](../experiments/qwen35_4b_pareto_policy_integration/README.md)
 - `qwen35_4b_passk_coverage_rl` (track-z): [README](../experiments/qwen35_4b_passk_coverage_rl/README.md)
+- `qwen35_4b_recovery_payload_budget_harness` (new): [README](../experiments/qwen35_4b_recovery_payload_budget_harness/README.md)
 - `qwen35_4b_recovery_reason_locality_interpolation` (new): [README](../experiments/qwen35_4b_recovery_reason_locality_interpolation/README.md)
 - `qwen35_4b_repo_search_compress_bank` (new): [README](../experiments/qwen35_4b_repo_search_compress_bank/README.md)
 - `qwen35_4b_same_prefix_advantage_routing` (new): [README](../experiments/qwen35_4b_same_prefix_advantage_routing/README.md)
@@ -827,7 +829,7 @@ Make the repository itself better at spawning, comparing, validating, and rememb
 Study the native thinking-token budget as a first-class controllable test-time-compute axis for Qwen3.5-4B, which the corpus has universally disabled.
 
 - Charter: [test_time_reasoning_budget](../research_programs/test_time_reasoning_budget/charter.md)
-- Assigned experiments: 18
+- Assigned experiments: 19
 
 ### Assigned Experiments
 
@@ -840,6 +842,7 @@ Study the native thinking-token budget as a first-class controllable test-time-c
 - `qwen35_4b_long_horizon_answer_potential_sft` (new): [README](../experiments/qwen35_4b_long_horizon_answer_potential_sft/README.md)
 - `qwen35_4b_native_thought_seam_budget_ladder` (new): [README](../experiments/qwen35_4b_native_thought_seam_budget_ladder/README.md)
 - `qwen35_4b_overthinking_content_ladder` (new): [README](../experiments/qwen35_4b_overthinking_content_ladder/README.md)
+- `qwen35_4b_recovery_payload_budget_harness` (new): [README](../experiments/qwen35_4b_recovery_payload_budget_harness/README.md)
 - `qwen35_4b_think_ftpo_round1` (new): [README](../experiments/qwen35_4b_think_ftpo_round1/README.md)
 - `qwen35_4b_think_ftpo_round2` (new): [README](../experiments/qwen35_4b_think_ftpo_round2/README.md)
 - `qwen35_4b_thinking_budget_controller` (new): [README](../experiments/qwen35_4b_thinking_budget_controller/README.md)
@@ -855,7 +858,7 @@ Study the native thinking-token budget as a first-class controllable test-time-c
 Install general agentic capability in Qwen3.5-4B via breadth-first expert iteration on a firewall-clean multi-family gym, arbitrated by the blackbox menagerie instrument.
 
 - Charter: [agentic_breadth_installation](../research_programs/agentic_breadth_installation/charter.md)
-- Assigned experiments: 11
+- Assigned experiments: 12
 
 ### Assigned Experiments
 
@@ -863,6 +866,7 @@ Install general agentic capability in Qwen3.5-4B via breadth-first expert iterat
 - `qwen35_4b_gauntlet_frontier` (new): [README](../experiments/qwen35_4b_gauntlet_frontier/README.md)
 - `qwen35_4b_interactive_policy_curriculum` (new): [README](../experiments/qwen35_4b_interactive_policy_curriculum/README.md)
 - `qwen35_4b_pareto_policy_integration` (new): [README](../experiments/qwen35_4b_pareto_policy_integration/README.md)
+- `qwen35_4b_recovery_payload_budget_harness` (new): [README](../experiments/qwen35_4b_recovery_payload_budget_harness/README.md)
 - `qwen35_4b_recovery_reason_locality_interpolation` (new): [README](../experiments/qwen35_4b_recovery_reason_locality_interpolation/README.md)
 - `qwen35_4b_repo_search_compress_bank` (new): [README](../experiments/qwen35_4b_repo_search_compress_bank/README.md)
 - `qwen35_4b_same_prefix_advantage_routing` (new): [README](../experiments/qwen35_4b_same_prefix_advantage_routing/README.md)

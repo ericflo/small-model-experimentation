@@ -1,0 +1,32 @@
+schema_version: 1
+experiment_id: "qwen35_4b_recovery_payload_budget_harness"
+
+external_artifacts:
+  - name: frozen model checkpoints
+    storage: large_artifacts/qwen35_4b_repo_search_compress_bank/merged and large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/merged and large_artifacts/qwen35_4b_recovery_reason_locality_interpolation/merged
+    required_for: all locality and behavior arms
+    checksum: exact per-model SHA-256 values in configs/default.yaml
+    regenerate: follow each source experiment's result receipt; never retrain here
+  - name: detailed payload-harness evaluations
+    storage: large_artifacts/qwen35_4b_recovery_payload_budget_harness
+    required_for: calibration, transfer, and reproduction
+    checksum: pending result receipt
+    regenerate: .venv/bin/python experiments/qwen35_4b_recovery_payload_budget_harness/scripts/run.py --full
+
+omitted_artifacts:
+  - path: large_artifacts/qwen35_4b_recovery_payload_budget_harness/eval
+    reason: detailed model trajectories are large and include generated fixture content
+
+reproducibility:
+  smoke_command: .venv/bin/python experiments/qwen35_4b_recovery_payload_budget_harness/scripts/run.py --smoke
+  gpu_smoke_command: .venv/bin/python experiments/qwen35_4b_recovery_payload_budget_harness/scripts/run.py --gpu-smoke
+  full_command: .venv/bin/python experiments/qwen35_4b_recovery_payload_budget_harness/scripts/run.py --full
+  required_external_artifacts:
+    - large_artifacts/qwen35_4b_repo_search_compress_bank/merged/apex_replay
+    - large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/merged/happy_action
+    - large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/merged/recovery_action
+    - large_artifacts/qwen35_4b_recovery_reason_locality_interpolation/merged/reason_mix_018
+
+notes: >-
+  No weights are trained or merged in this experiment. Menagerie artifacts are
+  absent unless every white-box gate passes.

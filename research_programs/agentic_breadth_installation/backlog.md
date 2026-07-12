@@ -47,15 +47,12 @@
   and immediate-rejected-transition gates, so confirmation, transfer, and
   Menagerie remained sealed. Do not extend the ladder or lower gates in that
   result directory.
-- Immediate successor, new experiment only: freeze λ=.18 and repair the actual
-  deployment interface. All 24 invalid actions were closed-thinking JSON patch
-  payloads truncated exactly at the 256-answer-token cap; give every model arm
-  realistic answer payload capacity under matched total compute. Replace the
-  over-literal immediate rejected-patch proxy with changed patch within two
-  turns while retaining the intervening-operator census (all 30 λ=.18 cases
-  already changed within two and solved). Re-run selection-only calibration,
-  then independent locality and the untouched four-family blocks against base,
-  happy, action, external scaffold, and sample-more before Menagerie.
+- Active successor: `qwen35_4b_recovery_payload_budget_harness`. Freeze λ=.18;
+  give every arm 512 thinking + 512 answer tokens; and count only immediate
+  PATCH or INSPECT→PATCH as valid rejected recovery within two turns. A third
+  disjoint locality block precedes behavior. Re-run calibration without model
+  selection, then the untouched four-family blocks against base, happy, action,
+  external scaffold, and equal-reservation sample-more before Menagerie.
 - Future retraining should calibrate plan dose by realized gradient/surprisal
   and avoid supervising plan starts already rank 1 or wildly off-policy lexical
   templates.

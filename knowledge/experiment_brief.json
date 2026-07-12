@@ -5187,6 +5187,45 @@
     }
    ]
   },
+  "qwen35_4b_recovery_payload_budget_harness": {
+   "verdict_tag": "Fixed recovery model awaits fair tool test",
+   "concept_primer": "A strong recovery model was often producing the right long code edit, but the agent cut its command off before the closing JSON arrived. The earlier timing score also disliked a sensible re-read before patching.",
+   "plain_question": "Will the same model become a reliable coding agent when tool commands have enough output room and recovery can include one useful inspection?",
+   "plain_answer": "Not known yet. The model is frozen, every control gets the same larger answer allowance, and new task families remain sealed until fresh safety and familiar-task gates pass.",
+   "why_it_matters": "This separates missing model capability from an artificial agent-interface bottleneck. A win must still beat spending the same compute on more attempts, an explicit recovery hint, and the strongest action-only model.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Think / answer",
+     "value": "512 / 512",
+     "sub": "identical per-call allowance for every arm"
+    },
+    {
+     "label": "Fresh safety prompts",
+     "value": "48",
+     "sub": "disjoint from both previous safety blocks"
+    },
+    {
+     "label": "Benchmark exposure",
+     "value": "0",
+     "sub": "paired benchmark seeds remain sealed"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "The previous failures identify two agent-interface problems",
+     "chart_read": "The bars show immediate code changes after rejection, code changes within two turns, and invalid commands that hit the old output cap. The middle bar measures successful short recovery; the others diagnose the old stop.",
+     "chart_takeaway": "Every case changed code within two turns and every invalid command hit the cap, supporting a larger payload and a short transition window."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "The new harness doubles answer room without cutting thinking",
+     "chart_read": "For the old and new harnesses, one bar is private thinking capacity and the other is tool-answer capacity. The new allocation applies equally to all models and controls.",
+     "chart_takeaway": "Thinking stays at 512 tokens while answer room rises from 256 to 512, isolating command capacity instead of trading reasoning away."
+    }
+   ]
+  },
   "qwen35_4b_recovery_reason_locality_interpolation": {
    "verdict_tag": "Safe sweet spot blocked by tool payload",
    "concept_primer": "The previous coding assistant recovered well after failed tests, but its planning lesson changed unrelated language behavior. This study mixed the safer action lesson with only part of that planning update.",

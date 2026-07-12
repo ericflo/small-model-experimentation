@@ -1,0 +1,23 @@
+{
+  "answer_max_tokens": 512,
+  "benchmark_content_accessed": false,
+  "fresh_locality_contexts": 48,
+  "input_hashes": {
+    "action": "991d2da239ac2878dccac72ece419b00f37ac15d6a970538f384c36162b89aea",
+    "base": "c933168075a0fc011f31ee54f83d722cc91423ce1a0ac19bfe40dfab92f608d5",
+    "candidate": "72a93f9030cffea741265849ea9ce404d6f4a0d74d887f7ce13eea3dfe9391ea",
+    "happy": "c67bc52f3b7d2ce063715325cd678ddac9ecfa95741872e740c7b88d0b0e059d",
+    "locality_contexts": "2322656a1652fd428f3f1c5a56f1c6056141dee4fb52a22b9d7217acf78882ce"
+  },
+  "inspect_then_patch_retained_within_two": true,
+  "locality_disjoint_from_prior_blocks": true,
+  "matched_compute_reservations": {
+    "normal": 8192,
+    "recovery": 6144
+  },
+  "model": "Qwen/Qwen3.5-4B",
+  "schema_version": 1,
+  "status": "PASS",
+  "think_budget": 512,
+  "transfer_families_uninstantiated": true
+}

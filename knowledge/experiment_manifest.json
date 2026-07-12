@@ -3960,6 +3960,41 @@
   },
   {
     "file_counts": {
+      ".json": 2,
+      ".md": 7,
+      ".py": 16,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_recovery_payload_budget_harness",
+    "path": "experiments/qwen35_4b_recovery_payload_budget_harness",
+    "primary_readme": "experiments/qwen35_4b_recovery_payload_budget_harness/README.md",
+    "primary_report": "experiments/qwen35_4b_recovery_payload_budget_harness/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation",
+      "process_control_and_tool_use",
+      "structured_execution_and_compilers",
+      "test_time_reasoning_budget"
+    ],
+    "source_track": "new",
+    "summary": "capability), and the two conditional-recovery experiments immediately above.",
+    "tags": [
+      "abi",
+      "small-model"
+    ],
+    "title": "Payload-capable recovery agent harness",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 28,
+    "total_size_bytes": 276329
+  },
+  {
+    "file_counts": {
       ".json": 5,
       ".md": 7,
       ".py": 17,

@@ -45336,6 +45336,64 @@
     }
    ]
   },
+  "qwen35_4b_recovery_payload_budget_harness": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "The predecessor stop isolates payload truncation and a timing-proxy mismatch",
+     "categories": [
+      "rejected changed immediately",
+      "rejected changed within 2",
+      "invalid steps at answer cap"
+     ],
+     "series": [
+      {
+       "label": "share at lambda .18",
+       "values": [
+        0.3333333333333333,
+        1.0,
+        1.0
+       ]
+      }
+     ],
+     "x_label": "predecessor diagnostic",
+     "y_label": "share of relevant cases or steps",
+     "y_format": "percent01",
+     "note": "Pre-run design evidence: all rejected cases changed code within two turns and solved, while every invalid response ended exactly at the 256-token answer cap. These frozen facts determine the new harness and transition metric.",
+     "source": "experiments/qwen35_4b_recovery_reason_locality_interpolation/reports/result_receipt.json"
+    },
+    {
+     "kind": "bar",
+     "title": "Every arm receives the same larger tool-answer allocation",
+     "categories": [
+      "predecessor per call",
+      "payload harness per call"
+     ],
+     "series": [
+      {
+       "label": "thinking tokens",
+       "values": [
+        512,
+        512
+       ]
+      },
+      {
+       "label": "answer tokens",
+       "values": [
+        256,
+        512
+       ]
+      }
+     ],
+     "x_label": "harness",
+     "y_label": "maximum tokens per model call",
+     "y_format": "integer",
+     "note": "Pre-run design chart. Thinking is held fixed so the test isolates tool-payload capacity; candidate, base, trained controls, scaffold, and sample-more all receive the new 512/512 split.",
+     "source": "experiments/qwen35_4b_recovery_payload_budget_harness/configs/default.yaml"
+    }
+   ]
+  },
   "qwen35_4b_recovery_reason_locality_interpolation": {
    "charts": [
     {
