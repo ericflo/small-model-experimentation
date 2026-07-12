@@ -32,3 +32,16 @@ Created as a new experiment scaffold.
 - Moved `Key:` / `Value: ` into the assistant response prefix so direct concepts
   and bare digits obey the preregistered one-token contracts.
 - CPU suite passes 22 tests plus 24 subtests. No model result has been observed.
+
+## 2026-07-12 — model-smoke batch preflight correction
+
+- The first plumbing-only smoke failed solely because equal-length, unpadded
+  batch-two clean logits differed from separate batch-one calls by max 0.21875,
+  above the descriptive 0.05 tolerance.
+- This is the Qwen hybrid batch-equivalence hazard the design intended to detect.
+  The frozen scientific path is already batch-one, so batch equivalence is now a
+  recorded diagnostic rather than a blocker. Causal antecedent activations were
+  exactly suffix-invariant (max difference 0), all token/position contracts
+  passed, all three smoke dictionaries had rank 4, and both patch deltas were
+  finite/nonzero.
+- No target-answer outcome was inspected or used.

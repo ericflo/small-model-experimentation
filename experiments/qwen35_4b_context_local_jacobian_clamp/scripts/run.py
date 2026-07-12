@@ -214,6 +214,14 @@ def run_model_smoke(config: dict[str, Any]) -> dict[str, Any]:
         float((batch_logits[0] - direct_capture["logits"]).abs().max()),
         float((batch_logits[1] - target_capture["logits"]).abs().max()),
     )
+    single_top_ids = [
+        int(torch.argmax(direct_capture["logits"]).item()),
+        int(torch.argmax(target_capture["logits"]).item()),
+    ]
+    batch_top_ids = [int(value) for value in torch.argmax(batch_logits, dim=-1).tolist()]
+    batch_equivalent = bool(
+        batch_max_abs <= float(config["intervention"]["clean_batch_logit_atol"])
+    )
 
     smoke_concepts = CONCEPTS[:4]
     prepared_fit = [
@@ -270,7 +278,6 @@ def run_model_smoke(config: dict[str, Any]) -> dict[str, Any]:
         and model.d_model == 2560
         and all(stat.effective_rank == 4 for stat in stats.values())
         and causal_max_abs <= float(config["intervention"]["causal_activation_atol"])
-        and batch_max_abs <= float(config["intervention"]["clean_batch_logit_atol"])
         and source_direct["position"] == source_consequence["position"]
         and source_direct["position"] == target_direct["position"]
         and float(coordinate_patcher.deltas[16].norm()) > 0
@@ -299,6 +306,11 @@ def run_model_smoke(config: dict[str, Any]) -> dict[str, Any]:
         "position_contract": position_contract,
         "causal_activation_max_abs": causal_max_abs,
         "clean_batch_logit_max_abs": batch_max_abs,
+        "clean_batch_equivalent_at_registered_tolerance": batch_equivalent,
+        "clean_batch_top_ids_equal": single_top_ids == batch_top_ids,
+        "clean_single_top_ids": single_top_ids,
+        "clean_batched_top_ids": batch_top_ids,
+        "scientific_patch_batch_size": 1,
         "smoke_lens": {
             "layers": list(layers),
             "n_prompts": lens.n_prompts,

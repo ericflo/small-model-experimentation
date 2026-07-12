@@ -1,6 +1,12 @@
 {
   "design_commit": "c1f06c035404bde62303439daa66dba3c1f026f9",
-  "frozen_sha256": {
+  "design_is_ancestor": true,
+  "expected_sha256": {
+    "preregistration": "dd32c3e463b6263dc81a7dcc0d0ca6b3bf884c4ebb9e5061adcff07d97b24363",
+    "readme": "6f0e23f127a50a0fe3bbf8d3989b3632774d4a778d821576bc6866f026cc360c"
+  },
+  "head": "020bc3915f5c53822e872ddc8de6627d1d9dfaec",
+  "observed_sha256": {
     "preregistration": "dd32c3e463b6263dc81a7dcc0d0ca6b3bf884c4ebb9e5061adcff07d97b24363",
     "readme": "6f0e23f127a50a0fe3bbf8d3989b3632774d4a778d821576bc6866f026cc360c"
   },
