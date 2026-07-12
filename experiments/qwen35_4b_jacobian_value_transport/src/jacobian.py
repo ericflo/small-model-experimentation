@@ -60,6 +60,32 @@ def swap_coordinates(
     return residual + delta.to(residual.dtype), delta
 
 
+def swap_coordinates_batched(
+    residual: torch.Tensor,
+    source_directions: torch.Tensor,
+    target_directions: torch.Tensor,
+    *,
+    alpha: float = 1.0,
+) -> tuple[torch.Tensor, torch.Tensor]:
+    """Per-example coordinate swaps for ``residual[B,T,d]`` and directions ``[B,d]``."""
+    if residual.ndim != 3 or source_directions.ndim != 2 or target_directions.ndim != 2:
+        raise ValueError("expected residual[B,T,d] and direction batches[B,d]")
+    if source_directions.shape != target_directions.shape:
+        raise ValueError("source and target direction batches disagree")
+    if residual.shape[0] != source_directions.shape[0] or residual.shape[2] != source_directions.shape[1]:
+        raise ValueError("residual and direction batch dimensions do not match")
+    vectors = torch.stack([source_directions, target_directions], dim=-1).float().to(residual.device)
+    norms = vectors.norm(dim=1, keepdim=True)
+    if bool((norms <= 1e-8).any()):
+        raise ValueError("zero or near-zero batched direction")
+    vectors = vectors / norms
+    pseudoinverse = torch.linalg.pinv(vectors)
+    coordinates = torch.einsum("btd,bkd->btk", residual.float(), pseudoinverse)
+    swapped = coordinates.flip(-1)
+    delta = alpha * torch.einsum("btk,bdk->btd", swapped - coordinates, vectors)
+    return residual + delta.to(residual.dtype), delta
+
+
 def replace_coordinates(
     residual: torch.Tensor,
     directions: torch.Tensor,

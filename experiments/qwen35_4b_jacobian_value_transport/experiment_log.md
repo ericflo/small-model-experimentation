@@ -42,3 +42,13 @@
 - The rerun passed: 26 CPU tests, 9.25 GiB peak allocated model memory, and a
   nonzero mean patch delta norm of 0.4045 in cache-free full-prefix generation.
   These are plumbing checks and carry no scientific evidence.
+
+## 2026-07-12 — pre-result G0 implementation freeze
+
+- Added the preregistered calibration-only coordinate scale sweep
+  `{0.5, 1.0, 2.0, 4.0}` before any positive-control outcome was observed.
+- Implemented batched fp32 pseudoinverse coordinate reads, next-token direct and
+  downstream-consequence controls, deterministic random/logit/wrong controls,
+  and selection-half versus confirmation-half isolation.
+- G0 implementation changes will be committed and pushed before fitting the
+  64-prompt scientific targeted lens.

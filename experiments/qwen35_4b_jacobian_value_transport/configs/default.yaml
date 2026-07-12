@@ -36,6 +36,7 @@ lens:
   full_fit_prompts_after_targeted_gate: 20
   dimension_batch: 16
   sparse_k: 25
+  coordinate_alphas: [0.5, 1.0, 2.0, 4.0]
 
 generation:
   temperature: 0.6

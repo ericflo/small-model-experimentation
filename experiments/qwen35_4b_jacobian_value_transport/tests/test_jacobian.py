@@ -15,6 +15,7 @@ from jacobian import (  # noqa: E402
     pullback_direction,
     read_coordinates,
     swap_coordinates,
+    swap_coordinates_batched,
 )
 
 
@@ -46,6 +47,15 @@ def test_coordinate_swap_supports_bfloat16_residual() -> None:
     assert patched.dtype == torch.bfloat16
     assert delta.dtype == torch.float32
     torch.testing.assert_close(patched.float(), torch.tensor([-1.0, 2.0, 4.0]))
+
+
+def test_batched_coordinate_swap_uses_per_example_directions() -> None:
+    residual = torch.tensor([[[2.0, -1.0, 4.0]], [[5.0, 3.0, -2.0]]])
+    source = torch.tensor([[1.0, 0.0, 0.0], [0.0, 1.0, 0.0]])
+    target = torch.tensor([[0.0, 1.0, 0.0], [0.0, 0.0, 1.0]])
+    patched, _delta = swap_coordinates_batched(residual, source, target)
+    torch.testing.assert_close(patched[0, 0], torch.tensor([-1.0, 2.0, 4.0]))
+    torch.testing.assert_close(patched[1, 0], torch.tensor([5.0, -2.0, 3.0]))
 
 
 def test_random_control_is_orthogonal_and_norm_matched() -> None:

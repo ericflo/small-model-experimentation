@@ -10,7 +10,7 @@ from typing import Any
 
 import torch
 
-from jacobian import swap_coordinates
+from jacobian import swap_coordinates, swap_coordinates_batched
 
 
 @dataclass(frozen=True)
@@ -34,6 +34,19 @@ class TargetedLens:
             "n_prompts": self.n_prompts,
             "pair_weighting": self.pair_weighting,
         }
+
+    @classmethod
+    def load(cls, path: str) -> "TargetedLens":
+        state = torch.load(path, map_location="cpu", weights_only=True)
+        return cls(
+            concepts=tuple(state["concepts"]),
+            token_ids=tuple(int(value) for value in state["token_ids"]),
+            source_layers=tuple(int(value) for value in state["source_layers"]),
+            target_layer=int(state["target_layer"]),
+            directions={int(layer): value.float() for layer, value in state["directions"].items()},
+            n_prompts=int(state["n_prompts"]),
+            pair_weighting=str(state["pair_weighting"]),
+        )
 
 
 class ActivationRecorder:
@@ -100,6 +113,53 @@ class CoordinatePatcher:
             )
             patched[:, mask, :] = changed
             self.delta_norms.append(float(delta.float().norm(dim=-1).mean().detach().cpu()))
+            if torch.is_tensor(output):
+                return patched
+            return (patched,) + tuple(output[1:])
+
+        return hook
+
+    def __enter__(self):
+        for layer in sorted(self.layer_directions):
+            self.handles.append(self.layers[layer].register_forward_hook(self._hook(layer)))
+        return self
+
+    def __exit__(self, *_exc):
+        for handle in self.handles:
+            handle.remove()
+        self.handles = []
+
+
+class BatchLastCoordinatePatcher:
+    """Apply per-example coordinate swaps at the final sequence position."""
+
+    def __init__(
+        self,
+        layers: Sequence[torch.nn.Module],
+        layer_directions: dict[int, tuple[torch.Tensor, torch.Tensor]],
+        *,
+        alpha: float,
+    ):
+        self.layers = layers
+        self.layer_directions = layer_directions
+        self.alpha = alpha
+        self.handles: list[Any] = []
+        self.delta_norms: list[float] = []
+
+    def _hook(self, layer: int):
+        source, target = self.layer_directions[layer]
+
+        def hook(_module, _inputs, output):
+            tensor = output if torch.is_tensor(output) else output[0]
+            patched = tensor.clone()
+            changed, delta = swap_coordinates_batched(
+                patched[:, -1:, :],
+                source.to(tensor.device),
+                target.to(tensor.device),
+                alpha=self.alpha,
+            )
+            patched[:, -1:, :] = changed
+            self.delta_norms.extend(delta.float().norm(dim=-1)[:, 0].detach().cpu().tolist())
             if torch.is_tensor(output):
                 return patched
             return (patched,) + tuple(output[1:])
@@ -257,6 +317,40 @@ class QwenTransportModel:
             n_prompts=len(prompts),
         )
         return lens, prompt_receipts
+
+    @torch.no_grad()
+    def score_next_token_batch(
+        self,
+        rendered_prefixes: Sequence[str],
+        *,
+        layer_directions: dict[int, tuple[torch.Tensor, torch.Tensor]] | None = None,
+        alpha: float = 1.0,
+    ) -> dict[str, Any]:
+        sequences = [self.encode(prefix, max_length=1024)[0] for prefix in rendered_prefixes]
+        lengths = {int(sequence.numel()) for sequence in sequences}
+        if len(lengths) != 1:
+            raise ValueError(f"positive-control batch has unequal token lengths: {sorted(lengths)}")
+        input_ids = torch.stack(sequences)
+        if layer_directions:
+            patcher: contextlib.AbstractContextManager = BatchLastCoordinatePatcher(
+                self.layers, layer_directions, alpha=alpha
+            )
+        else:
+            patcher = contextlib.nullcontext()
+        with patcher:
+            output = self.model(input_ids=input_ids, use_cache=False, logits_to_keep=1)
+            logits = output.logits[:, -1, :].float()
+        top_ids = torch.argmax(logits, dim=-1)
+        result = {
+            "logits": logits.cpu(),
+            "top_ids": top_ids.cpu(),
+            "sequence_tokens": next(iter(lengths)),
+            "forward_tokens": int(input_ids.numel()),
+            "delta_norms": (
+                list(patcher.delta_norms) if isinstance(patcher, BatchLastCoordinatePatcher) else [0.0] * len(sequences)
+            ),
+        }
+        return result
 
     def think_position_mask(self, token_ids: torch.Tensor) -> torch.Tensor:
         """Mask positions from the last think-open through, stopping before close."""
