@@ -277,7 +277,8 @@ def _specialists(config: dict) -> None:
 
 
 def _eval_if_needed(
-    *, model: Path, tag: str, scope: str, block_seed: int, config_path: Path
+    *, model: Path, tag: str, scope: str, block_seed: int, config_path: Path,
+    decode: str = "greedy",
 ) -> Path:
     out = EXP / "runs" / "policy_eval" / tag
     scores = out / "scores.json"
@@ -287,7 +288,7 @@ def _eval_if_needed(
             payload.get("scope") == scope
             and int(payload.get("block_seed", -1)) == block_seed
             and payload.get("model") == str(model.resolve())
-            and payload.get("decode") == "greedy"
+            and payload.get("decode") == decode
         ):
             print(f"[resume] evaluation {tag} already complete", flush=True)
             return scores
@@ -297,6 +298,7 @@ def _eval_if_needed(
             str(VLLM_PY), str(EXP / "scripts" / "eval_policy.py"),
             "--config", str(config_path), "--model", str(model), "--tag", tag,
             "--scope", scope, "--block-seed", str(block_seed), "--out-dir", str(out),
+            "--decode", decode,
         ]
     )
     return scores
@@ -720,6 +722,77 @@ def _controls(config: dict, config_path: Path) -> None:
         _record_checkpoint("matched_union_sft", union_adapter, union_merged)
 
 
+def _confirm(config: dict, config_path: Path) -> None:
+    _require_gate(EXP / "analysis" / "locality_pilot.json")
+    paths = _paths(config)
+    last_round = int(config["mopd"]["rounds"]) - 1
+    integration_seeds = [int(value) for value in config["seeds"]["integration_training"]]
+    primary_name = f"correct_seed{integration_seeds[0]}"
+    models: dict[str, tuple[Path, str]] = {
+        "quick": (paths["quick"], "greedy"),
+        "deep": (paths["deep"], "greedy"),
+    }
+    for seed in integration_seeds:
+        models[f"correct_seed{seed}"] = (
+            paths["root"] / "merged" / "correct" / f"seed_{seed}" / f"round_{last_round}",
+            "greedy",
+        )
+    wrong_seed = int(config["seeds"]["wrong_routing"])
+    models["wrong_route"] = (
+        paths["root"] / "merged" / "wrong_route" / f"seed_{wrong_seed}" / f"round_{last_round}",
+        "greedy",
+    )
+    models["offpolicy"] = (
+        paths["root"] / "merged" / "offpolicy" / f"seed_{wrong_seed}" / f"round_{last_round}",
+        "greedy",
+    )
+    parameter_names = []
+    for weight in config["controls"]["parameter_merge_weights"]:
+        name = f"parameter_merge_deep_{int(round(float(weight) * 100)):02d}"
+        parameter_names.append(name)
+        models[name] = (paths["root"] / "merged" / name, "greedy")
+    models["matched_union_sft"] = (
+        paths["root"] / "merged" / "matched_union_sft", "greedy"
+    )
+    models["quick_sample8"] = (paths["quick"], "sample8")
+    for name, (model, _) in models.items():
+        if not (model / "config.json").is_file() or not (model / "merge_receipt.json").is_file():
+            raise SystemExit(f"confirmatory arm {name} is incomplete: {model}")
+
+    block_seeds = [int(value) for value in config["seeds"]["confirmatory_blocks"]]
+    arm_scores: dict[str, list[str]] = {}
+    for name, (model, decode) in models.items():
+        arm_scores[name] = []
+        for block_index, block_seed in enumerate(block_seeds):
+            scores = _eval_if_needed(
+                model=model, tag=f"{name}_confirm_b{block_index}", scope="confirmatory",
+                block_seed=block_seed, config_path=config_path, decode=decode,
+            )
+            arm_scores[name].append(str(scores.resolve()))
+    manifest = {
+        "stage": "confirmatory_manifest", "config": str(config_path),
+        "config_sha256": sha256_file(config_path), "block_seeds": block_seeds,
+        "primary_arm": primary_name,
+        "replicate_arms": [f"correct_seed{seed}" for seed in integration_seeds[1:]],
+        "source_arms": ["quick", "deep"], "quick_arm": "quick", "deep_arm": "deep",
+        "control_arms": [
+            "wrong_route", "offpolicy", *parameter_names, "matched_union_sft",
+        ],
+        "sample_more_arm": "quick_sample8", "arms": arm_scores,
+    }
+    manifest_path = EXP / "runs" / "confirmatory_manifest.json"
+    write_json(manifest_path, manifest)
+    _run(
+        [
+            str(PY), str(EXP / "scripts" / "analyze_confirmation.py"),
+            "--config", str(config_path), "--manifest", str(manifest_path),
+            "--calibration", str(EXP / "analysis" / "calibration.json"),
+        ],
+        allowed=(0, 4),
+    )
+    _require_gate(EXP / "analysis" / "confirmation.json")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, default=EXP / "configs" / "default.yaml")
@@ -761,6 +834,9 @@ def main() -> int:
         return 0
     if stage == "controls":
         _controls(config, config_path)
+        return 0
+    if stage == "confirm":
+        _confirm(config, config_path)
         return 0
     raise SystemExit(f"stage {stage!r} is registered but not implemented yet")
 
