@@ -252,3 +252,24 @@
   state/branch hashes, and token ledgers were unchanged and all registered
   engine checks passed. The commit-marker churn is provenance metadata, not a
   generation-protocol change.
+
+## 2026-07-13 — seed-43 four-round integration passes
+
+- Round 3 reached the exact 60-deep quota after two candidate batches, with 43
+  quick diagnostics and 281 abstentions. It froze 60 deep, 20 soup anchors,
+  and 60 controls (55 exact-cell and five family/kind), with zero prompt
+  truncation across every role.
+- Training completed 20/20 consume-once updates with mean corrected loss
+  `0.05130`. Held-probe loss improved `0.07297→0.04417` and top-50 overlap
+  improved `0.83025→0.83288`; the frozen round gate passed. Probe entropy
+  contracted `13.11%`, retained as the same non-gating collapse-risk warning.
+- Seed 43 is terminal at four completed rounds with gate pass. Deep-route
+  supply was 90/60/82/60 and mean losses were
+  `0.05638`/`0.05172`/`0.05588`/`0.05130`. The terminal merge receipt is
+  `4af497550de22d9bbafdd9de97dd95eabeb6b16b6fa9a7516bf78c4c719d6ecf`.
+- The independent manifest→cache→trainer→adapter→merge audit passes across all
+  four rounds; the tracked integration receipt hash is
+  `885419b1fd8bafb4d16aa56369d91168e0dc0aca92416cc7a4361eeaad2eba11`.
+  This supports replication of route supply and optimizer stability only. It
+  is not evidence of deployed capability gain; seed 44 and sealed comparison
+  remain mandatory.

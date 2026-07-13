@@ -1743,7 +1743,7 @@
       "structured_execution_and_compilers"
     ],
     "source_track": "new",
-    "summary": "**Fresh deep qualification passes on both untouched blocks, the frozen five-update MOPD pilot passes exact-logit locality, and seed 42 completes all four integration rounds. No procedural performance result exists yet.** This is a new result-bearing successor to `qwen35_4b_same_prefix_advantage_routing`, not an extension of its terminal result.",
+    "summary": "**Fresh deep qualification passes on both untouched blocks, the frozen five-update MOPD pilot passes exact-logit locality, and seeds 42 and 43 each complete all four integration rounds. No procedural performance result exists yet.** This is a new result-bearing successor to `qwen35_4b_same_prefix_advantage_routing`, not an extension of its terminal result.",
     "tags": [
       "small-model"
     ],
@@ -1758,7 +1758,7 @@
       "tests"
     ],
     "total_files": 131,
-    "total_size_bytes": 26069615
+    "total_size_bytes": 26073109
   },
   {
     "file_counts": {

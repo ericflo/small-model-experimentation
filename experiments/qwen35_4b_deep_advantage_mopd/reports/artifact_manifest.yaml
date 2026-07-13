@@ -24,6 +24,8 @@ external_artifacts:
       target cache 20c21a5bb8e8b8058d0b7377929b37fd5e2eca8e55598d61b6ac827503761e76;
       locality training receipt 0ae1c495ad10973421bc8f2affd0491a2ea31c156730d3b47a24ab2d6121f667;
       locality merge receipt 4ded904faca298dc91abf8e6f43e6aa2040e0cb7786116644504826d17775200;
+      seed-42 terminal merge receipt 88512a57ebb190f0392118a30258eee5fb3bc58d5d34ae04e384afc8842f9122;
+      seed-43 terminal merge receipt 4af497550de22d9bbafdd9de97dd95eabeb6b16b6fa9a7516bf78c4c719d6ecf;
       later artifacts remain bound by their per-artifact receipts.
     regenerate: >-
       Run verify-student, route-qualify, locality, three integrate seeds,

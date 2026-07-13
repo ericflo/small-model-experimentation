@@ -4,7 +4,7 @@
 
 The preregistered CPU/scientific smoke, pinned-model preflight, installation
 canary, fresh route qualification, five-update exact-logit locality pilot, and
-seed-42 four-round integration all pass. Seeds 43/44, matched controls, and the
+seed-42/43 four-round integrations all pass. Seed 44, matched controls, and the
 sealed capability comparison have not run yet.
 
 ## Research Program Fit
@@ -70,6 +70,18 @@ The terminal merge receipt is
 `88512a57ebb190f0392118a30258eee5fb3bc58d5d34ae04e384afc8842f9122`.
 Entropy nevertheless contracted `10.28%`/`12.33%`/`8.90%`/`11.42%`. This is
 not a registered full-round stop, but it is a material collapse-risk warning.
+
+Seed 43 independently completed all four rounds. Deep-route supply was
+90/60/82/60; rounds 1 and 3 reached quota after two candidate batches, while
+round 2 used three. Mean corrected losses were
+`0.05638`/`0.05172`/`0.05588`/`0.05130`; every round reduced held-probe mean
+loss and non-decreased overlap. Round-3 probe loss improved
+`0.07297→0.04417` and overlap `0.83025→0.83288`. Its terminal merge receipt is
+`4af497550de22d9bbafdd9de97dd95eabeb6b16b6fa9a7516bf78c4c719d6ecf`.
+Probe entropy contracted `12.49%`/`9.54%`/`10.66%`/`13.11%`, repeating the
+same collapse-risk warning. The independent four-round provenance audit passes.
+This establishes optimizer-seed/route-supply robustness only; it is not a
+deployed capability result.
 
 The valid interpretation-only NF4/bf16 diagnostic further weakens any inference
 from trainer-side improvement. Across 32 fixed consumed units and 7,970 target
