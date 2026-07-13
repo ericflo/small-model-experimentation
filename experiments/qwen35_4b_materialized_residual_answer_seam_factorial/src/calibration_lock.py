@@ -40,26 +40,77 @@ CRITICAL_FILES = (
     "requirements-vllm.lock.txt",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/configs/default.yaml",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/reports/design_review.md",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/reports/calibration_implementation_review.md",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/reports/preregistration.md",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/prepared/calibration_requests.jsonl",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/prepared/preoutcome_receipt.json",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/tokenizer/receipt_v3.json",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/scripts/run_calibration.py",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/scripts/run_mechanics.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/calibration_lock.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/calibration_stage.py",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/identity.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/interface_analysis.py",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/mechanics_lock.py",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/mechanics_stage.py",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/plans.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/protocol.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/task_data.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/transactions.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/vllm_runner.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/tests/test_calibration_lock.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/tests/test_calibration_stage.py",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/tests/test_calibration_bootstrap.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/tests/test_interface_analysis.py",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/tests/test_identity.py",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/tests/test_mechanics_lock.py",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/tests/test_mechanics_stage.py",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/tests/test_plans.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/tests/test_protocol.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/tests/test_tokenizer_receipt.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/tests/test_transactions.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/tests/test_vllm_runner.py",
 )
+CALIBRATION_RUNTIME_FILES = (
+    "requirements-vllm.lock.txt",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/configs/default.yaml",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/prepared/calibration_requests.jsonl",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/prepared/preoutcome_receipt.json",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/tokenizer/receipt_v3.json",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/scripts/run_calibration.py",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/calibration_lock.py",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/calibration_stage.py",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/identity.py",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/interface_analysis.py",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/protocol.py",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/task_data.py",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/transactions.py",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/vllm_runner.py",
+)
+FROZEN_MECHANICS_FILES = (
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/data/procedural/mechanics_public.jsonl",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/data/procedural/mechanics_audit.jsonl",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/data/procedural/mechanics_gold.jsonl",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/prepared/transport_requests.jsonl",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/prepared/direct_requests.jsonl",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/prepared/suffix_materialized_requests.jsonl",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/prepared/suffix_name_only_requests.jsonl",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/prepared/suffix_shuffled_requests.jsonl",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/scripts/run_mechanics.py",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/mechanics_lock.py",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/mechanics_stage.py",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/plans.py",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/identity.py",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/protocol.py",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/task_data.py",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/transactions.py",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/vllm_runner.py",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/tests/test_mechanics_lock.py",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/tests/test_mechanics_stage.py",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/tests/test_plans.py",
+)
+if not set(CALIBRATION_RUNTIME_FILES) <= set(CRITICAL_FILES):
+    raise RuntimeError("calibration runtime inventory escapes critical files")
 
 
 def _git(*args: str) -> str:
@@ -197,18 +248,33 @@ def _critical_hashes(commit: str) -> dict[str, str]:
     return hashes
 
 
+def _git_blob_inventory(commit: str, files: Sequence[str]) -> dict[str, str]:
+    result: dict[str, str] = {}
+    for relative in files:
+        blob = _git("rev-parse", f"{commit}:{relative}")
+        if len(blob) not in {40, 64} or any(
+            character not in "0123456789abcdef" for character in blob
+        ):
+            raise RuntimeError(f"invalid frozen Git blob: {relative}")
+        result[relative] = blob
+    return result
+
+
 def build_lock_value(
     *,
     implementation_commit: str,
     critical_files: Mapping[str, str],
     inputs: CalibrationInputs,
     ci_evidence: Mapping[str, Mapping[str, Any]],
+    frozen_mechanics_blobs: Mapping[str, str],
 ) -> dict[str, Any]:
     implementation_commit = _commit_id(implementation_commit)
     if tuple(critical_files) != CRITICAL_FILES:
         raise RuntimeError("critical implementation allowlist changed")
     if tuple(ci_evidence) != REQUIRED_WORKFLOWS:
         raise RuntimeError("implementation CI evidence changed")
+    if set(frozen_mechanics_blobs) != set(FROZEN_MECHANICS_FILES):
+        raise RuntimeError("frozen mechanics inventory changed")
     return {
         "schema_version": 1,
         "stage": "calibration_implementation_lock",
@@ -217,6 +283,8 @@ def build_lock_value(
         "revision": MODEL_REVISION,
         "implementation_commit": implementation_commit,
         "critical_files": dict(critical_files),
+        "calibration_runtime_files": list(CALIBRATION_RUNTIME_FILES),
+        "frozen_mechanics_blobs": dict(frozen_mechanics_blobs),
         "calibration_inputs": inputs.read_receipt,
         "invocation_order": list(INVOCATION_ORDER),
         "expected_rows_each": EXPECTED_ROWS,
@@ -246,6 +314,8 @@ def validate_lock_value(lock: Any, *, inputs: CalibrationInputs) -> dict[str, An
         "revision",
         "implementation_commit",
         "critical_files",
+        "calibration_runtime_files",
+        "frozen_mechanics_blobs",
         "calibration_inputs",
         "invocation_order",
         "expected_rows_each",
@@ -271,6 +341,7 @@ def validate_lock_value(lock: Any, *, inputs: CalibrationInputs) -> dict[str, An
         or lock["model"] != MODEL_ID
         or lock["revision"] != MODEL_REVISION
         or lock["calibration_inputs"] != inputs.read_receipt
+        or lock["calibration_runtime_files"] != list(CALIBRATION_RUNTIME_FILES)
         or lock["invocation_order"] != list(INVOCATION_ORDER)
         or lock["expected_rows_each"] != EXPECTED_ROWS
         or lock["engine"] != _normalized(dataclasses.asdict(engine_config(inputs)))
@@ -299,6 +370,18 @@ def validate_lock_value(lock: Any, *, inputs: CalibrationInputs) -> dict[str, An
         for value in critical.values()
     ):
         raise RuntimeError("calibration critical file hash changed")
+    frozen = lock["frozen_mechanics_blobs"]
+    if (
+        not isinstance(frozen, dict)
+        or set(frozen) != set(FROZEN_MECHANICS_FILES)
+        or any(
+            not isinstance(value, str)
+            or len(value) not in {40, 64}
+            or any(character not in "0123456789abcdef" for character in value)
+            for value in frozen.values()
+        )
+    ):
+        raise RuntimeError("calibration frozen mechanics blob inventory changed")
     ci = lock["implementation_ci"]
     if not isinstance(ci, dict) or set(ci) != set(REQUIRED_WORKFLOWS):
         raise RuntimeError("calibration implementation CI inventory changed")
@@ -344,6 +427,7 @@ def publish_calibration_lock(path: Path = IMPLEMENTATION_LOCK) -> dict[str, Any]
         critical_files=_critical_hashes(commit),
         inputs=inputs,
         ci_evidence=ci,
+        frozen_mechanics_blobs=_git_blob_inventory(commit, FROZEN_MECHANICS_FILES),
     )
     validate_lock_value(value, inputs=inputs)
     write_exclusive_durable(path, value)
@@ -358,17 +442,25 @@ def _relative_lock_path(path: Path) -> str:
         raise RuntimeError("calibration lock escapes the repository") from error
 
 
-def _validate_live_worktree() -> None:
-    allowed_prefix = "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/calibration/"
+def _validate_live_worktree(
+    allowed_prefixes: Sequence[str] = ("runs/calibration/",),
+) -> None:
+    prefixes = tuple(
+        "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/" + value
+        for value in allowed_prefixes
+    )
     dirty = _git("status", "--porcelain=v1", "--untracked-files=all")
     for line in dirty.splitlines():
         paths = line[3:].split(" -> ")
-        if not all(path.startswith(allowed_prefix) for path in paths):
+        if not all(path.startswith(prefixes) for path in paths):
             raise RuntimeError(f"live calibration has unrelated worktree change: {line}")
 
 
 def verify_calibration_lock(
-    path: Path = IMPLEMENTATION_LOCK, *, verify_network: bool = True
+    path: Path = IMPLEMENTATION_LOCK,
+    *,
+    verify_network: bool = True,
+    allowed_live_prefixes: Sequence[str] = ("runs/calibration/",),
 ) -> dict[str, Any]:
     relative = _relative_lock_path(path)
     if path.is_symlink() or not path.is_file():
@@ -388,21 +480,27 @@ def verify_calibration_lock(
     if not _ancestor(implementation_commit, head) or not _ancestor(head, "origin/main"):
         raise RuntimeError("calibration implementation/lock is not published on main")
     for relative_file, expected in lock["critical_files"].items():
+        if sha256_bytes(_git_bytes("show", f"{implementation_commit}:{relative_file}")) != expected:
+            raise RuntimeError(f"calibration critical file changed: {relative_file}")
+        if _git("rev-parse", f"HEAD:{relative_file}") != _git(
+            "rev-parse", f"{implementation_commit}:{relative_file}"
+        ):
+            raise RuntimeError(f"critical file changed after calibration freeze: {relative_file}")
+    for relative_file in CALIBRATION_RUNTIME_FILES:
         path_file = ROOT / relative_file
         if (
             path_file.is_symlink()
             or not path_file.is_file()
-            or sha256_file(path_file) != expected
-            or sha256_bytes(
-                _git_bytes("show", f"{implementation_commit}:{relative_file}")
-            )
-            != expected
+            or sha256_file(path_file) != lock["critical_files"][relative_file]
         ):
-            raise RuntimeError(f"calibration critical file changed: {relative_file}")
+            raise RuntimeError(f"calibration runtime file changed: {relative_file}")
+    for relative_file, expected_blob in lock["frozen_mechanics_blobs"].items():
+        if _git("rev-parse", f"HEAD:{relative_file}") != expected_blob:
+            raise RuntimeError(f"mechanics changed after calibration freeze: {relative_file}")
     if verify_network:
         verify_recorded_ci(implementation_commit, lock["implementation_ci"])
         query_green_ci(head)
-    _validate_live_worktree()
+    _validate_live_worktree(allowed_live_prefixes)
     return lock
 
 
@@ -532,7 +630,7 @@ def live_preflight_value(
         "runtime": loaded["runtime"],
         "invocation_order": list(INVOCATION_ORDER),
         "expected_rows_each": EXPECTED_ROWS,
-        "model_calls_before_preflight": 0,
+        "experimental_generation_requests_before_preflight": 0,
         "sampled_model_outputs_before_preflight": 0,
         "hidden_files_read": [],
         "qualification_files_read": [],
@@ -567,7 +665,7 @@ def verify_recorded_live_preflight(
         "runtime",
         "invocation_order",
         "expected_rows_each",
-        "model_calls_before_preflight",
+        "experimental_generation_requests_before_preflight",
         "sampled_model_outputs_before_preflight",
         "hidden_files_read",
         "qualification_files_read",
@@ -589,7 +687,7 @@ def verify_recorded_live_preflight(
         or value["resolved_logprobs_mode"] != "raw_logprobs"
         or value["invocation_order"] != list(INVOCATION_ORDER)
         or value["expected_rows_each"] != EXPECTED_ROWS
-        or value["model_calls_before_preflight"] != 0
+        or value["experimental_generation_requests_before_preflight"] != 0
         or value["sampled_model_outputs_before_preflight"] != 0
         or any(
             value[field] != []

@@ -96,6 +96,22 @@ class ProtocolTests(unittest.TestCase):
             select_visible(mutated, candidates)
         second = select_visible(task, candidates)
         self.assertEqual(first, second)
+        echoed_close = select_visible(
+            task,
+            [
+                {
+                    "candidate_id": "close",
+                    "candidate": None,
+                    "text": "junk</think>\n\nPROGRAM: A | A | A",
+                }
+            ],
+            thinking_expected=False,
+        )
+        self.assertFalse(echoed_close["scored"][0]["parsed"])
+        self.assertEqual(
+            echoed_close["scored"][0]["error"],
+            "unexpected thinking answer boundary",
+        )
 
 
 if __name__ == "__main__":

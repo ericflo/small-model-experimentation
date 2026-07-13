@@ -1,8 +1,8 @@
 # Preregistration v2: answer-seam factorial and fresh mechanics pilot
 
-Status: model-free construction complete; live calibration remains sealed
-pending implementation review, real-tokenizer receipts, transaction tests, an
-implementation lock committed and pushed to `main`, and green CI.
+Status: model-free construction and implementation complete; live calibration
+remains sealed pending a fresh adversarial PASS over final committed hashes,
+then a separately committed/pushed implementation lock and green CI.
 
 The immutable scaffold-v1 receipt proposed three policies. Adversarial review
 correctly found that design causally incomplete. This append-only v2 replaces

@@ -43,6 +43,15 @@ class _FakeCalibrationRunner:
             if mode == "shared_thought_continuation"
             else sampled
         )
+        logical_prompt = sum(
+            output["n_stage1_prompt_tokens"] + output["n_stage2_prompt_tokens"]
+            for output in outputs
+        )
+        physical_prompt = (
+            sum(output["n_stage2_prompt_tokens"] for output in outputs)
+            if mode == "shared_thought_continuation"
+            else logical_prompt
+        )
         return {
             "schema_version": 5,
             "generation_mode": mode,
@@ -56,6 +65,15 @@ class _FakeCalibrationRunner:
                 "sampled_tokens": sampled,
                 "physical_sampled_tokens": physical,
                 "reused_sampled_tokens": sampled - physical,
+                "logical_prompt_tokens": logical_prompt,
+                "physical_prompt_tokens": physical_prompt,
+                "reused_prompt_tokens": logical_prompt - physical_prompt,
+                "logical_model_tokens": logical_prompt + sampled,
+                "physical_model_tokens": physical_prompt + physical,
+                "reused_model_tokens": logical_prompt
+                + sampled
+                - physical_prompt
+                - physical,
             },
         }
 
@@ -79,6 +97,8 @@ class _FakeCalibrationRunner:
                             "retained_thinking_token_ids": [token],
                             "seed_stage1": 2000 + index,
                             "stage2_token_ids": [],
+                            "n_stage1_prompt_tokens": 10,
+                            "n_stage2_prompt_tokens": 0,
                             "n_sampled_tokens": 1,
                         }
                     ],
@@ -113,6 +133,8 @@ class _FakeCalibrationRunner:
                             "n_answer_tokens": 5,
                             "n_thinking_tokens": 1,
                             "stage2_token_ids": [5000 + index],
+                            "n_stage1_prompt_tokens": 10,
+                            "n_stage2_prompt_tokens": 14 + len(prefix),
                             "n_sampled_tokens": 2,
                             "finish_reason": "stop",
                             "stage1_finish_reason": "stop",
@@ -145,6 +167,8 @@ class _FakeCalibrationRunner:
                         "n_answer_tokens": 5,
                         "n_thinking_tokens": 0,
                         "stage2_token_ids": [],
+                        "n_stage1_prompt_tokens": 10 + len(prefix),
+                        "n_stage2_prompt_tokens": 0,
                         "n_sampled_tokens": 1,
                         "finish_reason": "stop",
                         "stage1_finish_reason": "stop",

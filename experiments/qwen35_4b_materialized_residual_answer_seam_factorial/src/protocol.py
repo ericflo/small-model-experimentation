@@ -263,10 +263,18 @@ def score_echo(
 
 
 def score_visible(
-    task: dict[str, Any], *, text: str, candidate: BoundOperation | None
+    task: dict[str, Any],
+    *,
+    text: str,
+    candidate: BoundOperation | None,
+    thinking_expected: bool | None = None,
 ) -> dict[str, Any]:
     _validate_public(task)
-    parsed = parse_program(text, arity=2 if candidate is not None else 3)
+    parsed = parse_program(
+        text,
+        arity=2 if candidate is not None else 3,
+        thinking_expected=thinking_expected,
+    )
     if not parsed["parsed"]:
         return {
             **parsed,
@@ -305,7 +313,10 @@ def score_visible(
 
 
 def select_visible(
-    task: dict[str, Any], candidates: Sequence[Mapping[str, Any]]
+    task: dict[str, Any],
+    candidates: Sequence[Mapping[str, Any]],
+    *,
+    thinking_expected: bool | None = None,
 ) -> dict[str, Any]:
     _validate_public(task)
     ids = [row.get("candidate_id") for row in candidates]
@@ -331,7 +342,12 @@ def select_visible(
         else:
             candidate = row.get("candidate")
             candidate = None if candidate is None else tuple(candidate)
-            result = score_visible(task, text=row.get("text"), candidate=candidate)
+            result = score_visible(
+                task,
+                text=row.get("text"),
+                candidate=candidate,
+                thinking_expected=thinking_expected,
+            )
         scored.append({**dict(row), **result})
     eligible = [
         row

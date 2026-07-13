@@ -53,7 +53,7 @@ did not yet define a falsifiable or transaction-safe experiment.
   `b39e0ad1ccf49503eb48353eac118500432953f32ad27ae2acc1448ed99f622d`.
 - Preoutcome receipt SHA-256:
   `a73b5a0a8fa65700a5ddc8e4a4aa7a50355d7e1826ee63d27a0f790a2c8b350e`.
-- The experiment suite currently has 70 passing model-free tests.
+- The experiment suite currently has 76 passing model-free tests.
 
 ## Remaining blockers before a calibration lock
 
@@ -86,14 +86,18 @@ did not yet define a falsifiable or transaction-safe experiment.
    48-row batch each in this order: thought, think/freeform, think/slot,
    no-think/freeform, no-think/slot. Full restart performs zero generation
    calls and analysis authenticates exact thought/answer pairing.
-5. **Calibration code completed model-free; receipt pending:** the lock builder
+5. **Calibration and mechanics code completed model-free; receipts pending:**
+   the calibration lock builder
    requires a clean published implementation commit and both exact green GitHub
    workflows, then binds the critical blobs, four allowed inputs, five sampling
-   configs, engine, model/revision, and zero-call boundary. Live verification
+   configs, engine, model/revision, and zero-call boundary. It also seals Git
+   blob identities for every mechanics pool/data file and freezes the mechanics
+   runner, plans, second lock, hidden gate, and tests before calibration. Live verification
    rechecks ancestry/current CI and loaded vLLM/tokenizer/CUDA-graph/runtime/
    prompt geometry before writing an immutable preflight. The calibration lock
-   must not be minted until item 6 passes. Mechanics still requires its later
-   separate lock and hidden-read authorization receipts.
+   must not be minted until item 6 passes. The implemented mechanics path still
+   requires its later winner-bound lock and committed visible-selection
+   authorization receipts.
 6. Re-run independent implementation review over exact committed hashes.
 
 Verdict: no live model or GPU request is authorized. Proceed only with the

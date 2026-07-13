@@ -32,6 +32,5 @@ local_receipts:
     sha256: "dc9a4d225d36c5b000fe2d036dffe5e7998b5bdbedff9cbc8dd8b2e5df341cbf"
 notes: >-
   Model-free v2 construction plus append-only tokenizer/shared-thought/physical-
-  compute preparation only. Six
-  tracked prepared request files total about 5.9 MB and are bound by the
-  preoutcome receipt. No model/GPU stage is authorized.
+  compute preparation only. Six tracked prepared request files total about 5.9
+  MB and are bound by the preoutcome receipt. No model/GPU stage is authorized.

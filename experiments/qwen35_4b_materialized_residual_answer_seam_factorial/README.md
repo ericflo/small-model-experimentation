@@ -88,13 +88,17 @@ authenticated parent instances, exact live-sibling strata, 4,104 prepared rows,
 2,952 unique canonical request IDs, balanced A-X calibration positions, zero
 model calls, and empty forbidden-read receipts. Append-only real-tokenizer
 receipts also authenticate all answer compositions, context fit, zero rendered
-parent overlap, and the current shared-thought/physical-compute runner. Seventy model-free
+parent overlap, and the current shared-thought/physical-compute runner.
+Seventy-six model-free
 tests pass, including adversarial durable transaction/recovery mutations and
 exact persisted-token thought forking. A calibration-only loader is byte-
 identical with every mechanics artifact absent, and a fake-runner integration
 passes all five durable invocations plus analysis/restart. This remains
-registration and implementation evidence only. The lock/live-preflight code is
-present but no authorization receipt has been minted.
+registration and implementation evidence only. The complete mechanics path is
+now pre-outcome frozen behind a second lock, transport gate, visible-only
+selection/resource plans, and a committed-green pre-hidden gate. The
+lock/live-preflight code is present but no authorization receipt has been
+minted.
 
 ## Interpretation
 

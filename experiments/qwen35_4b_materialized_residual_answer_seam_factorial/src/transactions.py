@@ -623,20 +623,26 @@ def authenticate_complete_chain(
     }
 
 
-def authenticate_registered_complete_chain(
+def authenticate_registered_complete_prefix(
     *,
     raw_dir: Path,
     invocation_order: Sequence[str],
     registrations: Mapping[str, Mapping[str, Any]],
+    through: str,
 ) -> dict[str, Any]:
-    """Authenticate a complete chain against the experiment's frozen plan."""
+    """Authenticate a completed prefix against the experiment's frozen plan."""
     if set(registrations) != set(invocation_order):
         raise ValueError("registered invocation inventory changed")
-    receipt = authenticate_complete_chain(
-        raw_dir=raw_dir, invocation_order=invocation_order
+    if through not in invocation_order:
+        raise ValueError("registered prefix endpoint is not in invocation order")
+    completed_count = list(invocation_order).index(through) + 1
+    receipt = _authenticate_complete_prefix(
+        raw_dir=raw_dir,
+        invocation_order=invocation_order,
+        completed_count=completed_count,
     )
     predecessor_sha: str | None = None
-    for invocation in invocation_order:
+    for invocation in invocation_order[:completed_count]:
         registration = registrations[invocation]
         if set(registration) != {
             "prepared_path",
@@ -664,6 +670,24 @@ def authenticate_registered_complete_chain(
         predecessor_sha = sha256_file(paths["complete"])
     return {
         **receipt,
+        "decision": "REGISTERED_TRANSACTION_PREFIX_AUTHENTICATED",
+        "registered_invocations": list(invocation_order[:completed_count]),
+    }
+
+
+def authenticate_registered_complete_chain(
+    *,
+    raw_dir: Path,
+    invocation_order: Sequence[str],
+    registrations: Mapping[str, Mapping[str, Any]],
+) -> dict[str, Any]:
+    receipt = authenticate_registered_complete_prefix(
+        raw_dir=raw_dir,
+        invocation_order=invocation_order,
+        registrations=registrations,
+        through=invocation_order[-1],
+    )
+    return {
+        **receipt,
         "decision": "REGISTERED_TRANSACTION_CHAIN_AUTHENTICATED",
-        "registered_invocations": list(invocation_order),
     }

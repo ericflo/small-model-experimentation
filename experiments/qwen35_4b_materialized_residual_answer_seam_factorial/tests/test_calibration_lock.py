@@ -41,6 +41,9 @@ class CalibrationLockTests(unittest.TestCase):
             critical_files={name: "b" * 64 for name in lock.CRITICAL_FILES},
             inputs=self.inputs,
             ci_evidence=self.ci(commit),
+            frozen_mechanics_blobs={
+                name: "c" * 40 for name in lock.FROZEN_MECHANICS_FILES
+            },
         )
 
     def test_lock_schema_survives_canonical_json_round_trip(self) -> None:
@@ -68,6 +71,9 @@ class CalibrationLockTests(unittest.TestCase):
         critical = copy.deepcopy(self.value())
         critical["critical_files"].pop(lock.CRITICAL_FILES[-1])
         mutations.append((critical, "inventory"))
+        frozen = copy.deepcopy(self.value())
+        frozen["frozen_mechanics_blobs"].pop(lock.FROZEN_MECHANICS_FILES[-1])
+        mutations.append((frozen, "frozen mechanics"))
         ci = copy.deepcopy(self.value())
         ci["implementation_ci"][lock.REQUIRED_WORKFLOWS[0]]["conclusion"] = "failure"
         mutations.append((ci, "CI evidence"))

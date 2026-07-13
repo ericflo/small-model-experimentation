@@ -65,3 +65,19 @@ Created as a new experiment scaffold.
   vLLM, tokenizer, CUDA-graph, scheduler, cache, runtime, and rendered prompts.
   All 65 tests pass; independent review is still required before lock
   publication and no model was loaded or called.
+- 2026-07-13: Independent implementation review held live calibration at
+  commit `5b33f01e`. It reproduced parser-boundary false positives, found that
+  completed chains were not rebound to the registered plan, and showed that
+  mechanics and local imports remained mutable after the outcome. No lock was
+  minted.
+- 2026-07-13: Closed the parser and transaction findings, added full
+  logical/physical/reused model-token totals, tested deterministic first-over
+  compute plans, and issued append-only tokenizer receipt `dc9a4d22...` twice
+  byte-identically. All 70 tests passed at published checkpoint `a019ff66`.
+- 2026-07-13: Implemented the entire pre-outcome mechanics path: separate
+  winner-bound lock, selected-interface transport gate, exact durable
+  transport/direct/materialized/name/shuffled order, visible-only taskwise
+  selectors, mandatory sampled/logical direct prefixes, and a committed-green
+  authorization before the gold path can open. Standard-library bootstrap
+  checks and process audit hooks now precede every local live import. All 76
+  tests pass; the adversarial HOLD remains until fresh review of final hashes.

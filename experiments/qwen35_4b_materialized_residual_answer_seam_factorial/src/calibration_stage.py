@@ -16,7 +16,7 @@ from transactions import (
     MODEL_ID,
     MODEL_REVISION,
     artifact_paths,
-    authenticate_complete_prefix,
+    authenticate_registered_complete_prefix,
     authenticate_registered_complete_chain,
     inventory_state,
     read_canonical,
@@ -361,9 +361,16 @@ def run_calibration_transactions(
         invocation = INVOCATION_ORDER[position]
         current_state = inventory_state(raw_dir, invocation)
         if position and current_state == "absent":
-            authenticate_complete_prefix(
+            authenticate_registered_complete_prefix(
                 raw_dir=raw_dir,
                 invocation_order=INVOCATION_ORDER,
+                registrations=calibration_registrations(
+                    inputs=inputs,
+                    prepared_path=prepared_path,
+                    implementation_lock_path=implementation_lock_path,
+                    live_preflight_path=live_preflight_path,
+                    runner_path=runner_path,
+                ),
                 through=INVOCATION_ORDER[position - 1],
             )
 
@@ -503,10 +510,22 @@ def _authenticate_factorial_pairing(
     thought_counts = bundles["calibration_thoughts"]["runner_metadata"].get(
         "counts", {}
     )
+    thought_prompt = sum(
+        output["n_stage1_prompt_tokens"] + output["n_stage2_prompt_tokens"]
+        for output in thought_outputs
+    )
     if (
         thought_counts.get("sampled_tokens") != thought_sampled
         or thought_counts.get("physical_sampled_tokens") != thought_sampled
         or thought_counts.get("reused_sampled_tokens") != 0
+        or thought_counts.get("logical_prompt_tokens") != thought_prompt
+        or thought_counts.get("physical_prompt_tokens") != thought_prompt
+        or thought_counts.get("reused_prompt_tokens") != 0
+        or thought_counts.get("logical_model_tokens")
+        != thought_prompt + thought_sampled
+        or thought_counts.get("physical_model_tokens")
+        != thought_prompt + thought_sampled
+        or thought_counts.get("reused_model_tokens") != 0
     ):
         raise RuntimeError("shared-thought physical accounting changed")
     for name in INTERFACE_ARMS:
@@ -519,11 +538,29 @@ def _authenticate_factorial_pairing(
         else:
             physical = sampled
             reused = 0
+        logical_prompt = sum(
+            output["n_stage1_prompt_tokens"] + output["n_stage2_prompt_tokens"]
+            for output in outputs
+        )
+        physical_prompt = (
+            sum(output["n_stage2_prompt_tokens"] for output in outputs)
+            if name.startswith("think512_")
+            else logical_prompt
+        )
         if (
             counts.get("sampled_tokens") != sampled
             or counts.get("physical_sampled_tokens") != physical
             or counts.get("reused_sampled_tokens") != reused
             or sampled != physical + reused
+            or counts.get("logical_prompt_tokens") != logical_prompt
+            or counts.get("physical_prompt_tokens") != physical_prompt
+            or counts.get("reused_prompt_tokens")
+            != logical_prompt - physical_prompt
+            or counts.get("logical_model_tokens") != logical_prompt + sampled
+            or counts.get("physical_model_tokens")
+            != physical_prompt + physical
+            or counts.get("reused_model_tokens")
+            != logical_prompt + sampled - physical_prompt - physical
         ):
             raise RuntimeError(f"factorial physical accounting changed: {name}")
     return {
