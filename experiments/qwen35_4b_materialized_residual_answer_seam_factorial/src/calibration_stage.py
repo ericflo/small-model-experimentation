@@ -16,8 +16,8 @@ from transactions import (
     MODEL_ID,
     MODEL_REVISION,
     artifact_paths,
-    authenticate_complete_chain,
     authenticate_complete_prefix,
+    authenticate_registered_complete_chain,
     inventory_state,
     read_canonical,
     run_transaction,
@@ -32,7 +32,7 @@ CALIBRATION_RELATIVE_READS = (
     "configs/default.yaml",
     "runs/prepared/preoutcome_receipt.json",
     "runs/prepared/calibration_requests.jsonl",
-    "runs/tokenizer/receipt_v2.json",
+    "runs/tokenizer/receipt_v3.json",
 )
 INVOCATION_ORDER = (
     "calibration_thoughts",
@@ -43,6 +43,10 @@ INVOCATION_ORDER = (
 )
 INTERFACE_ARMS = INVOCATION_ORDER[1:]
 EXPECTED_ROWS = 48
+DEFAULT_PREPARED_PATH = EXP / "runs/prepared/calibration_requests.jsonl"
+DEFAULT_IMPLEMENTATION_LOCK_PATH = EXP / "runs/calibration/implementation_lock.json"
+DEFAULT_LIVE_PREFLIGHT_PATH = EXP / "runs/calibration/live_preflight.json"
+DEFAULT_RUNNER_PATH = EXP / "src/vllm_runner.py"
 
 
 def canonical_sha256(value: Any) -> str:
@@ -116,7 +120,7 @@ def load_calibration_inputs(exp: Path = EXP) -> CalibrationInputs:
         raw["runs/prepared/preoutcome_receipt.json"], source="preoutcome_receipt"
     )
     tokenizer_receipt = _strict_json(
-        raw["runs/tokenizer/receipt_v2.json"], source="tokenizer_receipt_v2"
+        raw["runs/tokenizer/receipt_v3.json"], source="tokenizer_receipt_v3"
     )
     records = _strict_jsonl(
         raw["runs/prepared/calibration_requests.jsonl"],
@@ -158,7 +162,7 @@ def load_calibration_inputs(exp: Path = EXP) -> CalibrationInputs:
     if any(preoutcome.get(field) != [] for field in forbidden_fields):
         raise RuntimeError("preoutcome receipt records forbidden reads")
     if (
-        tokenizer_receipt.get("schema_version") != 2
+        tokenizer_receipt.get("schema_version") != 3
         or tokenizer_receipt.get("decision")
         != "TOKENIZER_AND_RENDERED_FRESHNESS_PASS"
         or tokenizer_receipt.get("model") != MODEL_ID
@@ -277,6 +281,50 @@ def _thought_bundle(raw_dir: Path) -> tuple[list[dict[str, Any]], dict[str, Any]
     return bundle["rows"], bundle["runner_metadata"]
 
 
+def calibration_registrations(
+    *,
+    inputs: CalibrationInputs,
+    prepared_path: Path = DEFAULT_PREPARED_PATH,
+    implementation_lock_path: Path = DEFAULT_IMPLEMENTATION_LOCK_PATH,
+    live_preflight_path: Path = DEFAULT_LIVE_PREFLIGHT_PATH,
+    runner_path: Path = DEFAULT_RUNNER_PATH,
+) -> dict[str, dict[str, Any]]:
+    plan = sampling_configs(inputs)
+    return {
+        invocation: {
+            "prepared_path": prepared_path,
+            "expected_rows": EXPECTED_ROWS,
+            "implementation_lock_path": implementation_lock_path,
+            "live_preflight_path": live_preflight_path,
+            "runner_path": runner_path,
+            "sampling": dataclasses.asdict(plan[invocation]),
+        }
+        for invocation in INVOCATION_ORDER
+    }
+
+
+def authenticate_calibration_chain(
+    *,
+    inputs: CalibrationInputs,
+    raw_dir: Path,
+    prepared_path: Path = DEFAULT_PREPARED_PATH,
+    implementation_lock_path: Path = DEFAULT_IMPLEMENTATION_LOCK_PATH,
+    live_preflight_path: Path = DEFAULT_LIVE_PREFLIGHT_PATH,
+    runner_path: Path = DEFAULT_RUNNER_PATH,
+) -> dict[str, Any]:
+    return authenticate_registered_complete_chain(
+        raw_dir=raw_dir,
+        invocation_order=INVOCATION_ORDER,
+        registrations=calibration_registrations(
+            inputs=inputs,
+            prepared_path=prepared_path,
+            implementation_lock_path=implementation_lock_path,
+            live_preflight_path=live_preflight_path,
+            runner_path=runner_path,
+        ),
+    )
+
+
 def run_calibration_transactions(
     *,
     inputs: CalibrationInputs,
@@ -288,9 +336,7 @@ def run_calibration_transactions(
     prepared_path: Path | None = None,
 ) -> dict[str, Any]:
     plan = sampling_configs(inputs)
-    prepared_path = prepared_path or (
-        EXP / "runs" / "prepared" / "calibration_requests.jsonl"
-    )
+    prepared_path = prepared_path or DEFAULT_PREPARED_PATH
     if inputs.records != tuple(
         _strict_jsonl(_safe_bytes(prepared_path), source="live_calibration_requests")
     ):
@@ -298,8 +344,13 @@ def run_calibration_transactions(
     states = [inventory_state(raw_dir, name) for name in INVOCATION_ORDER]
     incomplete = [index for index, state in enumerate(states) if state != "complete"]
     if not incomplete:
-        return authenticate_complete_chain(
-            raw_dir=raw_dir, invocation_order=INVOCATION_ORDER
+        return authenticate_calibration_chain(
+            inputs=inputs,
+            raw_dir=raw_dir,
+            prepared_path=prepared_path,
+            implementation_lock_path=implementation_lock_path,
+            live_preflight_path=live_preflight_path,
+            runner_path=runner_path,
         )
     first = incomplete[0]
     if any(state != "complete" for state in states[:first]) or any(
@@ -347,13 +398,33 @@ def run_calibration_transactions(
             sampling=dataclasses.asdict(plan[invocation]),
             generate=generate,
         )
-    return authenticate_complete_chain(
-        raw_dir=raw_dir, invocation_order=INVOCATION_ORDER
+    return authenticate_calibration_chain(
+        inputs=inputs,
+        raw_dir=raw_dir,
+        prepared_path=prepared_path,
+        implementation_lock_path=implementation_lock_path,
+        live_preflight_path=live_preflight_path,
+        runner_path=runner_path,
     )
 
 
-def load_calibration_bundles(raw_dir: Path) -> dict[str, dict[str, Any]]:
-    authenticate_complete_chain(raw_dir=raw_dir, invocation_order=INVOCATION_ORDER)
+def load_calibration_bundles(
+    *,
+    inputs: CalibrationInputs,
+    raw_dir: Path,
+    prepared_path: Path = DEFAULT_PREPARED_PATH,
+    implementation_lock_path: Path = DEFAULT_IMPLEMENTATION_LOCK_PATH,
+    live_preflight_path: Path = DEFAULT_LIVE_PREFLIGHT_PATH,
+    runner_path: Path = DEFAULT_RUNNER_PATH,
+) -> dict[str, dict[str, Any]]:
+    authenticate_calibration_chain(
+        inputs=inputs,
+        raw_dir=raw_dir,
+        prepared_path=prepared_path,
+        implementation_lock_path=implementation_lock_path,
+        live_preflight_path=live_preflight_path,
+        runner_path=runner_path,
+    )
     return {
         invocation: read_canonical(artifact_paths(raw_dir, invocation)["bundle"])
         for invocation in INVOCATION_ORDER
@@ -365,11 +436,25 @@ def _authenticate_factorial_pairing(
 ) -> dict[str, Any]:
     ids = [row["id"] for row in inputs.records]
     thought_rows = bundles["calibration_thoughts"]["rows"]
+    if [row.get("id") for row in thought_rows] != ids:
+        raise RuntimeError("shared-thought row identity/order changed")
     thought_outputs = [row["outputs"][0] for row in thought_rows]
     prefix_ids = inputs.tokenizer_receipt["answer_prefix"]["token_ids"]
     arms = {name: bundles[name]["rows"] for name in INTERFACE_ARMS}
     if any([row["id"] for row in rows] != ids for rows in arms.values()):
         raise RuntimeError("factorial arm row identity/order changed")
+    expected_modes = {
+        "calibration_thoughts": "shared_thought_prefixes",
+        "think512_freeform": "shared_thought_continuation",
+        "think512_program_slot": "shared_thought_continuation",
+        "no_think_freeform": "full_generation",
+        "no_think_program_slot": "full_generation",
+    }
+    if any(
+        bundles[name]["runner_metadata"].get("generation_mode") != mode
+        for name, mode in expected_modes.items()
+    ):
+        raise RuntimeError("factorial generation mode changed")
     for index, thought in enumerate(thought_outputs):
         outputs = {name: arms[name][index]["outputs"][0] for name in INTERFACE_ARMS}
         for name in ("think512_freeform", "think512_program_slot"):
@@ -412,19 +497,62 @@ def _authenticate_factorial_pairing(
         for name in ("think512_freeform", "think512_program_slot")
     ):
         raise RuntimeError("thinking continuation source hash changed")
+    thought_sampled = sum(
+        len(output["stage1_token_ids"]) for output in thought_outputs
+    )
+    thought_counts = bundles["calibration_thoughts"]["runner_metadata"].get(
+        "counts", {}
+    )
+    if (
+        thought_counts.get("sampled_tokens") != thought_sampled
+        or thought_counts.get("physical_sampled_tokens") != thought_sampled
+        or thought_counts.get("reused_sampled_tokens") != 0
+    ):
+        raise RuntimeError("shared-thought physical accounting changed")
+    for name in INTERFACE_ARMS:
+        outputs = [row["outputs"][0] for row in arms[name]]
+        counts = bundles[name]["runner_metadata"].get("counts", {})
+        sampled = sum(output["n_sampled_tokens"] for output in outputs)
+        if name.startswith("think512_"):
+            physical = sum(len(output["stage2_token_ids"]) for output in outputs)
+            reused = thought_sampled
+        else:
+            physical = sampled
+            reused = 0
+        if (
+            counts.get("sampled_tokens") != sampled
+            or counts.get("physical_sampled_tokens") != physical
+            or counts.get("reused_sampled_tokens") != reused
+            or sampled != physical + reused
+        ):
+            raise RuntimeError(f"factorial physical accounting changed: {name}")
     return {
         "rows": len(ids),
         "shared_thought_source_sha256": thought_source_sha,
         "exact_stage1_token_pairing": True,
         "exact_answer_seed_pairing": True,
         "registered_prefix_assignment": True,
+        "physical_and_reused_sampled_token_accounting": True,
     }
 
 
 def analyze_calibration(
-    *, inputs: CalibrationInputs, raw_dir: Path
+    *,
+    inputs: CalibrationInputs,
+    raw_dir: Path,
+    prepared_path: Path = DEFAULT_PREPARED_PATH,
+    implementation_lock_path: Path = DEFAULT_IMPLEMENTATION_LOCK_PATH,
+    live_preflight_path: Path = DEFAULT_LIVE_PREFLIGHT_PATH,
+    runner_path: Path = DEFAULT_RUNNER_PATH,
 ) -> dict[str, Any]:
-    bundles = load_calibration_bundles(raw_dir)
+    bundles = load_calibration_bundles(
+        inputs=inputs,
+        raw_dir=raw_dir,
+        prepared_path=prepared_path,
+        implementation_lock_path=implementation_lock_path,
+        live_preflight_path=live_preflight_path,
+        runner_path=runner_path,
+    )
     pairing = _authenticate_factorial_pairing(bundles, inputs)
     interface = inputs.config["interface"]
     metrics_full = {
@@ -447,8 +575,13 @@ def analyze_calibration(
     scored_sha = {
         arm: canonical_sha256(row["scored"]) for arm, row in metrics_full.items()
     }
-    chain = authenticate_complete_chain(
-        raw_dir=raw_dir, invocation_order=INVOCATION_ORDER
+    chain = authenticate_calibration_chain(
+        inputs=inputs,
+        raw_dir=raw_dir,
+        prepared_path=prepared_path,
+        implementation_lock_path=implementation_lock_path,
+        live_preflight_path=live_preflight_path,
+        runner_path=runner_path,
     )
     return {
         "schema_version": 1,

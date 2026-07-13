@@ -27,7 +27,11 @@ local_receipts:
   shared_thought_tokenizer_receipt:
     path: "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/tokenizer/receipt_v2.json"
     sha256: "c1a7c6b462a03d5e60f8ac37842d39fb603788b76aa73cbc21c080c14ed34ce5"
+  physical_compute_tokenizer_receipt:
+    path: "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/tokenizer/receipt_v3.json"
+    sha256: "dc9a4d225d36c5b000fe2d036dffe5e7998b5bdbedff9cbc8dd8b2e5df341cbf"
 notes: >-
-  Model-free v2 construction/tokenizer/shared-thought preparation only. Six
+  Model-free v2 construction plus append-only tokenizer/shared-thought/physical-
+  compute preparation only. Six
   tracked prepared request files total about 5.9 MB and are bound by the
   preoutcome receipt. No model/GPU stage is authorized.

@@ -28,7 +28,7 @@ from identity import (  # noqa: E402
 
 
 CONFIG = EXP / "configs" / "default.yaml"
-OUTPUT = EXP / "runs" / "tokenizer" / "receipt_v2.json"
+OUTPUT = EXP / "runs" / "tokenizer" / "receipt_v3.json"
 PREPARED = EXP / "runs" / "prepared"
 MODEL_ID = "Qwen/Qwen3.5-4B"
 REVISION = "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
@@ -278,8 +278,8 @@ def main() -> int:
         raise RuntimeError("A-X aliases are not single tokens in both registered forms")
 
     receipt = {
-        "schema_version": 2,
-        "stage": "real_tokenizer_shared_thought_model_free_receipt",
+        "schema_version": 3,
+        "stage": "real_tokenizer_shared_thought_physical_compute_receipt",
         "decision": "TOKENIZER_AND_RENDERED_FRESHNESS_PASS",
         "model": MODEL_ID,
         "revision": REVISION,

@@ -57,7 +57,15 @@ def score_interface_rows(
         arity = int(meta["arity"])
         expected = str(meta["expected"])
         output = outputs[0]
-        echo = score_echo(output["text"], expected=expected, arity=arity)
+        seed_domain = output.get("seed_domain_stage1")
+        if seed_domain not in {"thought", "answer"}:
+            raise ValueError("interface result has an invalid stage-one seed domain")
+        echo = score_echo(
+            output["text"],
+            expected=expected,
+            arity=arity,
+            thinking_expected=seed_domain == "thought",
+        )
         scored.append(
             {
                 "id": row_id,

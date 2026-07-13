@@ -210,6 +210,14 @@ def _started_value(
     sampling: Mapping[str, Any],
     predecessor_complete_sha256: str | None,
 ) -> dict[str, Any]:
+    canonical_sampling = json.loads(
+        json.dumps(
+            dict(sampling),
+            sort_keys=True,
+            ensure_ascii=True,
+            allow_nan=False,
+        )
+    )
     return {
         "schema_version": 1,
         "state": "STARTED",
@@ -225,7 +233,7 @@ def _started_value(
         "revision": MODEL_REVISION,
         "runner_path": str(runner_path),
         "runner_sha256": sha256_file(runner_path),
-        "sampling": dict(sampling),
+        "sampling": canonical_sampling,
         "predecessor_complete_sha256": predecessor_complete_sha256,
     }
 
@@ -243,6 +251,7 @@ def _validate_bundle(
     invocation: str,
     prepared_rows: Sequence[dict[str, Any]],
     runner_sha256: str,
+    sampling: Mapping[str, Any],
 ) -> dict[str, Any]:
     if not isinstance(bundle, dict) or set(bundle) != {
         "schema_version",
@@ -260,6 +269,8 @@ def _validate_bundle(
         or not isinstance(metadata, dict)
         or [row.get("id") for row in rows]
         != [row["id"] for row in prepared_rows]
+        or [row.get("meta") for row in rows]
+        != [row["meta"] for row in prepared_rows]
         or any(not isinstance(row.get("outputs"), list) or not row["outputs"] for row in rows)
     ):
         raise RuntimeError("generated bundle identity/order changed")
@@ -268,6 +279,10 @@ def _validate_bundle(
         or metadata.get("model_revision") != MODEL_REVISION
         or metadata.get("runner_sha256") != runner_sha256
         or metadata.get("counts", {}).get("requests") != len(rows)
+        or metadata.get("counts", {}).get("completions")
+        != sum(len(row["outputs"]) for row in rows)
+        or canonical_sha256(metadata.get("sampling"))
+        != canonical_sha256(dict(sampling))
     ):
         raise RuntimeError("generated bundle runner metadata changed")
     return bundle
@@ -323,6 +338,7 @@ def _promote_bundle(
     paths: dict[str, Path],
     prepared_rows: Sequence[dict[str, Any]],
     runner_sha256: str,
+    sampling: Mapping[str, Any],
     predecessor_complete_sha256: str | None,
     crash_after: str | None,
 ) -> dict[str, Any]:
@@ -332,6 +348,7 @@ def _promote_bundle(
         invocation=invocation,
         prepared_rows=prepared_rows,
         runner_sha256=runner_sha256,
+        sampling=sampling,
     )
     generated = _generated_receipt_value(
         invocation=invocation,
@@ -422,6 +439,7 @@ def run_transaction(
             paths=paths,
             prepared_rows=prepared_rows,
             runner_sha256=started["runner_sha256"],
+            sampling=started["sampling"],
             predecessor_complete_sha256=predecessor_sha,
             crash_after=crash_after,
         )
@@ -443,6 +461,7 @@ def run_transaction(
         invocation=invocation,
         prepared_rows=prepared_rows,
         runner_sha256=started["runner_sha256"],
+        sampling=started["sampling"],
     )
     write_exclusive_durable(paths["bundle"], bundle)
     if crash_after == "bundle":
@@ -452,6 +471,7 @@ def run_transaction(
         paths=paths,
         prepared_rows=prepared_rows,
         runner_sha256=started["runner_sha256"],
+        sampling=started["sampling"],
         predecessor_complete_sha256=predecessor_sha,
         crash_after=crash_after,
     )
@@ -539,6 +559,7 @@ def _authenticate_complete_prefix(
             invocation=invocation,
             prepared_rows=prepared_rows,
             runner_sha256=started["runner_sha256"],
+            sampling=started["sampling"],
         )
         expected_generated = _generated_receipt_value(
             invocation=invocation,
@@ -599,4 +620,50 @@ def authenticate_complete_chain(
     return {
         **receipt,
         "decision": "TRANSACTION_CHAIN_AUTHENTICATED",
+    }
+
+
+def authenticate_registered_complete_chain(
+    *,
+    raw_dir: Path,
+    invocation_order: Sequence[str],
+    registrations: Mapping[str, Mapping[str, Any]],
+) -> dict[str, Any]:
+    """Authenticate a complete chain against the experiment's frozen plan."""
+    if set(registrations) != set(invocation_order):
+        raise ValueError("registered invocation inventory changed")
+    receipt = authenticate_complete_chain(
+        raw_dir=raw_dir, invocation_order=invocation_order
+    )
+    predecessor_sha: str | None = None
+    for invocation in invocation_order:
+        registration = registrations[invocation]
+        if set(registration) != {
+            "prepared_path",
+            "expected_rows",
+            "implementation_lock_path",
+            "live_preflight_path",
+            "runner_path",
+            "sampling",
+        }:
+            raise ValueError("registered invocation schema changed")
+        expected = _started_value(
+            invocation=invocation,
+            prepared_path=Path(registration["prepared_path"]),
+            expected_rows=int(registration["expected_rows"]),
+            implementation_lock_path=Path(
+                registration["implementation_lock_path"]
+            ),
+            live_preflight_path=Path(registration["live_preflight_path"]),
+            runner_path=Path(registration["runner_path"]),
+            sampling=registration["sampling"],
+            predecessor_complete_sha256=predecessor_sha,
+        )
+        paths = artifact_paths(raw_dir, invocation)
+        _authenticate_started(paths["started"], expected)
+        predecessor_sha = sha256_file(paths["complete"])
+    return {
+        **receipt,
+        "decision": "REGISTERED_TRANSACTION_CHAIN_AUTHENTICATED",
+        "registered_invocations": list(invocation_order),
     }

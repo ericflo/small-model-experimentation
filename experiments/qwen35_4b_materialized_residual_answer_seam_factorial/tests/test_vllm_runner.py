@@ -746,8 +746,20 @@ class AnswerSeamTests(unittest.TestCase):
         self.assertEqual(thought_metadata["generation_mode"], "shared_thought_prefixes")
         self.assertEqual(free_metadata["counts"]["physical_sampled_tokens"], 4)
         self.assertEqual(free_metadata["counts"]["reused_sampled_tokens"], 4)
+        self.assertEqual(free_metadata["counts"]["logical_prompt_tokens"], 5)
+        self.assertEqual(free_metadata["counts"]["physical_prompt_tokens"], 4)
+        self.assertEqual(free_metadata["counts"]["reused_prompt_tokens"], 1)
+        self.assertEqual(free_metadata["counts"]["logical_model_tokens"], 13)
+        self.assertEqual(free_metadata["counts"]["physical_model_tokens"], 8)
+        self.assertEqual(free_metadata["counts"]["reused_model_tokens"], 5)
         self.assertEqual(slot_metadata["counts"]["physical_sampled_tokens"], 4)
         self.assertEqual(slot_metadata["counts"]["reused_sampled_tokens"], 4)
+        self.assertEqual(slot_metadata["counts"]["logical_prompt_tokens"], 7)
+        self.assertEqual(slot_metadata["counts"]["physical_prompt_tokens"], 6)
+        self.assertEqual(slot_metadata["counts"]["reused_prompt_tokens"], 1)
+        self.assertEqual(slot_metadata["counts"]["logical_model_tokens"], 15)
+        self.assertEqual(slot_metadata["counts"]["physical_model_tokens"], 10)
+        self.assertEqual(slot_metadata["counts"]["reused_model_tokens"], 5)
 
     def test_shared_thought_authentication_rejects_identity_token_and_runner_drift(self) -> None:
         value = self.instance(

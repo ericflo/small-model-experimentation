@@ -20,9 +20,11 @@ mechanics tasks.
 ## Why this is distinct
 
 This is an interface-selection firewall, not a rerun of residual mechanics and
-not a new J-space coordinate. It compares three concrete emission policies on
-separate known-answer calibration tasks, freezes a winner without mechanics
-outcomes, and makes every mechanism arm ineligible if the ABI fails.
+not a new J-space coordinate. The initial three-policy sketch was superseded by
+the adversarially required full 2x2 crossing think/no-think with
+freeform/literal-`PROGRAM:` emission on separate known-answer calibration
+tasks. It freezes a winner without mechanics outcomes and makes every mechanism
+arm ineligible if the ABI fails.
 
 ## Expected decision
 

@@ -191,11 +191,18 @@ def transport_spec(
     }
 
 
-def answer_body(text: str) -> str:
+def answer_body(text: str, *, thinking_expected: bool | None = None) -> str:
     if not isinstance(text, str):
         raise ValueError("model output is not text")
-    if "</think>" in text:
-        body = text.rsplit("</think>", 1)[1]
+    close_count = text.count("</think>")
+    if close_count > 1:
+        raise ValueError("multiple thinking answer boundaries")
+    if thinking_expected is True and close_count != 1:
+        raise ValueError("missing thinking answer boundary")
+    if thinking_expected is False and close_count != 0:
+        raise ValueError("unexpected thinking answer boundary")
+    if close_count == 1:
+        body = text.split("</think>", 1)[1]
         if not body.startswith("\n\n"):
             raise ValueError("thinking answer boundary changed")
         body = body[2:]
@@ -208,11 +215,13 @@ def answer_body(text: str) -> str:
     return body
 
 
-def parse_program(text: str, *, arity: int) -> dict[str, Any]:
+def parse_program(
+    text: str, *, arity: int, thinking_expected: bool | None = None
+) -> dict[str, Any]:
     if arity not in {2, 3}:
         raise ValueError("program arity must be two or three")
     try:
-        body = answer_body(text)
+        body = answer_body(text, thinking_expected=thinking_expected)
     except ValueError as error:
         return {
             "parsed": False,
@@ -240,8 +249,16 @@ def parse_program(text: str, *, arity: int) -> dict[str, Any]:
     }
 
 
-def score_echo(text: str, *, expected: str, arity: int) -> dict[str, Any]:
-    parsed = parse_program(text, arity=arity)
+def score_echo(
+    text: str,
+    *,
+    expected: str,
+    arity: int,
+    thinking_expected: bool | None = None,
+) -> dict[str, Any]:
+    parsed = parse_program(
+        text, arity=arity, thinking_expected=thinking_expected
+    )
     return {**parsed, "exact_echo": parsed["answer_body"] == expected}
 
 

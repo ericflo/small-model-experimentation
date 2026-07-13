@@ -1192,6 +1192,12 @@ class VLLMRunner:
             physical_sampled_tokens = total_sampled
         if not 0 <= physical_sampled_tokens <= total_sampled:
             raise RuntimeError("physical sampled-token accounting is inconsistent")
+        logical_prompt_tokens = stage1_logical_prompt + stage2_logical_prompt
+        physical_prompt_tokens = (
+            stage2_logical_prompt
+            if generation_mode == "shared_thought_continuation"
+            else logical_prompt_tokens
+        )
         summary = {
             "schema_version": RUNNER_SCHEMA_VERSION,
             "generation_mode": generation_mode,
@@ -1232,12 +1238,23 @@ class VLLMRunner:
                 "unique_input_prompt_tokens": unique_input_prompt,
                 "stage1_logical_prompt_tokens": stage1_logical_prompt,
                 "stage2_logical_prompt_tokens": stage2_logical_prompt,
-                "logical_model_input_tokens": (
-                    stage1_logical_prompt + stage2_logical_prompt
-                ),
+                "logical_model_input_tokens": logical_prompt_tokens,
+                "logical_prompt_tokens": logical_prompt_tokens,
+                "physical_prompt_tokens": physical_prompt_tokens,
+                "reused_prompt_tokens": logical_prompt_tokens
+                - physical_prompt_tokens,
                 "sampled_tokens": total_sampled,
                 "physical_sampled_tokens": physical_sampled_tokens,
                 "reused_sampled_tokens": total_sampled - physical_sampled_tokens,
+                "logical_model_tokens": logical_prompt_tokens + total_sampled,
+                "physical_model_tokens": physical_prompt_tokens
+                + physical_sampled_tokens,
+                "reused_model_tokens": (
+                    logical_prompt_tokens
+                    + total_sampled
+                    - physical_prompt_tokens
+                    - physical_sampled_tokens
+                ),
                 "injected_tokens": total_injected,
             },
             "timing": {

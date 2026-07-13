@@ -35,8 +35,32 @@ class ProtocolTests(unittest.TestCase):
     def test_thinking_boundary_and_terminal_are_exact(self) -> None:
         value = "thought</think>\n\nPROGRAM: A | B<|im_end|>"
         self.assertTrue(parse_program(value, arity=2)["parsed"])
+        self.assertTrue(
+            parse_program(value, arity=2, thinking_expected=True)["parsed"]
+        )
         self.assertFalse(
             parse_program("thought</think>\nPROGRAM: A | B", arity=2)["parsed"]
+        )
+        adversarial = (
+            "junk</think>\n\nPROGRAM: A | B",
+            "thought</think>\n\njunk</think>\n\nPROGRAM: A | B",
+        )
+        for text in adversarial:
+            with self.subTest(text=text):
+                self.assertFalse(
+                    parse_program(
+                        text, arity=2, thinking_expected=False
+                    )["parsed"]
+                )
+        self.assertFalse(
+            parse_program(
+                adversarial[1], arity=2, thinking_expected=True
+            )["parsed"]
+        )
+        self.assertFalse(
+            parse_program(
+                "PROGRAM: A | B", arity=2, thinking_expected=True
+            )["parsed"]
         )
 
     def test_exact_echo_is_stricly_separate_from_parse(self) -> None:

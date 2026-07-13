@@ -45,10 +45,11 @@ expose residual completion that the invalid free-form interface hid.
   backend and selected interface budget.
 - Controls: name-only siblings, task-hash shuffled materialized states/targets,
   exact echo, candidate-blind direct sampling, and exhaustive CPU ceiling.
-- Primary metric: hidden-correct all-sibling proposal coverage and a
-  visible-only selector, gated behind the interface calibration.
-- Oracle-only metrics: exact candidate viability and hidden program success;
-  neither may affect interface choice, prompts, budgets, or selected IDs.
+- Primary metric: hidden exact accuracy of the pre-hidden visible-only selector,
+  gated behind the interface calibration.
+- Oracle-only diagnostics: all-sibling hidden-correct proposal coverage, exact
+  candidate viability, and hidden program success; none may affect interface
+  choice, prompts, budgets, or selected IDs.
 - Calibration gates: >=44/48 exact echoes, >=44/48 parses, <=2/48 answer-cap
   contacts, plus >=22/24 exact/parse and <=1/24 cap contacts in each arity.
 - Winner: first qualifier in the fixed least-departure priority, never the
@@ -87,7 +88,7 @@ authenticated parent instances, exact live-sibling strata, 4,104 prepared rows,
 2,952 unique canonical request IDs, balanced A-X calibration positions, zero
 model calls, and empty forbidden-read receipts. Append-only real-tokenizer
 receipts also authenticate all answer compositions, context fit, zero rendered
-parent overlap, and the current shared-thought runner. Sixty-five model-free
+parent overlap, and the current shared-thought/physical-compute runner. Seventy model-free
 tests pass, including adversarial durable transaction/recovery mutations and
 exact persisted-token thought forking. A calibration-only loader is byte-
 identical with every mechanics artifact absent, and a fake-runner integration

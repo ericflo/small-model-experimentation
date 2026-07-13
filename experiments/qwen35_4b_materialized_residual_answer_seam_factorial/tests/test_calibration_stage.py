@@ -36,6 +36,13 @@ class _FakeCalibrationRunner:
     def _metadata(
         self, rows: list[dict[str, Any]], sampling: Any, mode: str
     ) -> dict[str, Any]:
+        outputs = [row["outputs"][0] for row in rows]
+        sampled = sum(output["n_sampled_tokens"] for output in outputs)
+        physical = (
+            sum(len(output["stage2_token_ids"]) for output in outputs)
+            if mode == "shared_thought_continuation"
+            else sampled
+        )
         return {
             "schema_version": 5,
             "generation_mode": mode,
@@ -43,7 +50,13 @@ class _FakeCalibrationRunner:
             "model_revision": MODEL_REVISION,
             "runner_sha256": sha256_file(self.runner_path),
             "sampling": dataclasses.asdict(sampling),
-            "counts": {"requests": len(rows), "completions": len(rows)},
+            "counts": {
+                "requests": len(rows),
+                "completions": len(rows),
+                "sampled_tokens": sampled,
+                "physical_sampled_tokens": physical,
+                "reused_sampled_tokens": sampled - physical,
+            },
         }
 
     def _called(self, name: str) -> None:
@@ -65,6 +78,8 @@ class _FakeCalibrationRunner:
                             "stage1_token_ids": [token],
                             "retained_thinking_token_ids": [token],
                             "seed_stage1": 2000 + index,
+                            "stage2_token_ids": [],
+                            "n_sampled_tokens": 1,
                         }
                     ],
                 }
@@ -97,6 +112,8 @@ class _FakeCalibrationRunner:
                             "answer_prefix_token_ids": prefix,
                             "n_answer_tokens": 5,
                             "n_thinking_tokens": 1,
+                            "stage2_token_ids": [5000 + index],
+                            "n_sampled_tokens": 2,
                             "finish_reason": "stop",
                             "stage1_finish_reason": "stop",
                         }
@@ -127,6 +144,8 @@ class _FakeCalibrationRunner:
                         "answer_prefix_token_ids": prefix,
                         "n_answer_tokens": 5,
                         "n_thinking_tokens": 0,
+                        "stage2_token_ids": [],
+                        "n_sampled_tokens": 1,
                         "finish_reason": "stop",
                         "stage1_finish_reason": "stop",
                     }
@@ -204,7 +223,15 @@ class CalibrationStageTests(unittest.TestCase):
         )
         self.assertEqual(tuple(fake.calls), INVOCATION_ORDER)
         self.assertEqual(chain["sampled_outputs"], 48 * 5)
-        decision = analyze_calibration(inputs=inputs, raw_dir=raw)
+        decision = analyze_calibration(
+            inputs=inputs,
+            raw_dir=raw,
+            prepared_path=self.root
+            / "runs/prepared/calibration_requests.jsonl",
+            implementation_lock_path=lock,
+            live_preflight_path=preflight,
+            runner_path=runner_path,
+        )
         self.assertEqual(decision["decision"], "CALIBRATION_INTERFACE_SELECTED")
         self.assertEqual(decision["winner"], "think512_freeform")
         self.assertTrue(decision["pairing"]["exact_stage1_token_pairing"])

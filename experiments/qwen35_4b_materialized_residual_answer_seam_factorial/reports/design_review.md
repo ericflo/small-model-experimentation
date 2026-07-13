@@ -53,12 +53,13 @@ did not yet define a falsifiable or transaction-safe experiment.
   `b39e0ad1ccf49503eb48353eac118500432953f32ad27ae2acc1448ed99f622d`.
 - Preoutcome receipt SHA-256:
   `a73b5a0a8fa65700a5ddc8e4a4aa7a50355d7e1826ee63d27a0f790a2c8b350e`.
-- The experiment suite currently has 65 passing model-free tests.
+- The experiment suite currently has 70 passing model-free tests.
 
 ## Remaining blockers before a calibration lock
 
-1. **Completed model-free:** append-only real-tokenizer receipts `61ff7292...`
-   and current-runner receipt `c1a7c6b...` authenticate thinking/no-thinking
+1. **Completed model-free:** append-only real-tokenizer receipts `61ff7292...`,
+   shared-thought receipt `c1a7c6b...`, and physical-compute receipt
+   `dc9a4d22...` authenticate thinking/no-thinking
    suffixes, close `[248069,271]`,
    `PROGRAM:` `[78041,25]`, model/tokenizer EOS, A-X tokenizations, all 14,400
    canonical lines/tails, context fit, and zero rendered parent overlap.

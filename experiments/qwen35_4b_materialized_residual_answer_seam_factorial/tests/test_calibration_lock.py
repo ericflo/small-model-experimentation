@@ -96,6 +96,18 @@ class CalibrationLockTests(unittest.TestCase):
             evidence = lock.query_green_ci(commit)
         self.assertEqual(tuple(evidence), lock.REQUIRED_WORKFLOWS)
 
+        rerun = {
+            **rows[0],
+            "databaseId": 999,
+            "url": "https://github.com/example/actions/999",
+        }
+        with mock.patch.object(
+            lock.subprocess,
+            "check_output",
+            return_value=json.dumps([rerun, *rows]),
+        ):
+            lock.verify_recorded_ci(commit, evidence)
+
         rows[0]["conclusion"] = "failure"
         with mock.patch.object(
             lock.subprocess, "check_output", return_value=json.dumps(rows)

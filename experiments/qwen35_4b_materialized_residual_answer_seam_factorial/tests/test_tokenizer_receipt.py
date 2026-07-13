@@ -12,7 +12,7 @@ class TokenizerReceiptTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.receipt = json.loads(
-            (EXP / "runs/tokenizer/receipt_v2.json").read_text()
+            (EXP / "runs/tokenizer/receipt_v3.json").read_text()
         )
 
     def test_exact_qwen_termination_and_slot_ids(self) -> None:
@@ -57,6 +57,11 @@ class TokenizerReceiptTests(unittest.TestCase):
         )
 
     def test_receipt_is_model_free_and_has_empty_forbidden_reads(self) -> None:
+        self.assertEqual(self.receipt["schema_version"], 3)
+        self.assertEqual(
+            self.receipt["stage"],
+            "real_tokenizer_shared_thought_physical_compute_receipt",
+        )
         self.assertEqual(
             self.receipt["decision"], "TOKENIZER_AND_RENDERED_FRESHNESS_PASS"
         )

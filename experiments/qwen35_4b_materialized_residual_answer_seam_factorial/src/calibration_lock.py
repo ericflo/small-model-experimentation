@@ -43,7 +43,7 @@ CRITICAL_FILES = (
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/reports/preregistration.md",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/prepared/calibration_requests.jsonl",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/prepared/preoutcome_receipt.json",
-    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/tokenizer/receipt_v2.json",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/tokenizer/receipt_v3.json",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/scripts/run_calibration.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/calibration_lock.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/calibration_stage.py",
@@ -99,7 +99,7 @@ def _normalized(value: Any) -> Any:
     )
 
 
-def query_green_ci(commit: str) -> dict[str, dict[str, Any]]:
+def _query_ci_rows(commit: str) -> list[dict[str, Any]]:
     commit = _commit_id(commit)
     command = [
         "gh",
@@ -118,8 +118,14 @@ def query_green_ci(commit: str) -> dict[str, dict[str, Any]]:
         )
     except (subprocess.CalledProcessError, json.JSONDecodeError) as error:
         raise RuntimeError("could not authenticate GitHub workflow state") from error
-    if not isinstance(rows, list):
+    if not isinstance(rows, list) or any(not isinstance(row, dict) for row in rows):
         raise RuntimeError("GitHub workflow response changed")
+    return rows
+
+
+def query_green_ci(commit: str) -> dict[str, dict[str, Any]]:
+    commit = _commit_id(commit)
+    rows = _query_ci_rows(commit)
     evidence: dict[str, dict[str, Any]] = {}
     for workflow in REQUIRED_WORKFLOWS:
         candidates = [
@@ -140,6 +146,40 @@ def query_green_ci(commit: str) -> dict[str, dict[str, Any]]:
             "url": str(row["url"]),
         }
     return evidence
+
+
+def verify_recorded_ci(
+    commit: str, evidence: Mapping[str, Mapping[str, Any]]
+) -> None:
+    commit = _commit_id(commit)
+    if set(evidence) != set(REQUIRED_WORKFLOWS):
+        raise RuntimeError("recorded workflow inventory changed")
+    rows = _query_ci_rows(commit)
+    for workflow in REQUIRED_WORKFLOWS:
+        recorded = evidence[workflow]
+        matches = [
+            row
+            for row in rows
+            if row.get("workflowName") == workflow
+            and row.get("headSha") == commit
+            and int(row.get("databaseId", -1)) == recorded.get("database_id")
+        ]
+        if len(matches) != 1:
+            raise RuntimeError(f"recorded workflow run disappeared: {workflow}")
+        row = matches[0]
+        expected = {
+            "database_id": int(row["databaseId"]),
+            "head_sha": commit,
+            "status": str(row["status"]),
+            "conclusion": str(row["conclusion"]),
+            "url": str(row["url"]),
+        }
+        if (
+            dict(recorded) != expected
+            or expected["status"] != "completed"
+            or expected["conclusion"] != "success"
+        ):
+            raise RuntimeError(f"recorded workflow is not authenticated: {workflow}")
 
 
 def _critical_hashes(commit: str) -> dict[str, str]:
@@ -360,8 +400,7 @@ def verify_calibration_lock(
         ):
             raise RuntimeError(f"calibration critical file changed: {relative_file}")
     if verify_network:
-        if query_green_ci(implementation_commit) != lock["implementation_ci"]:
-            raise RuntimeError("recorded implementation CI evidence changed")
+        verify_recorded_ci(implementation_commit, lock["implementation_ci"])
         query_green_ci(head)
     _validate_live_worktree()
     return lock
@@ -563,8 +602,7 @@ def verify_recorded_live_preflight(
         )
     ):
         raise RuntimeError("recorded calibration live preflight boundary changed")
-    if query_green_ci(live_head) != value["live_head_ci"]:
-        raise RuntimeError("recorded calibration live-head CI evidence changed")
+    verify_recorded_ci(live_head, value["live_head_ci"])
     if runner is not None:
         loaded = _validate_loaded_runner(runner, inputs)
         if (

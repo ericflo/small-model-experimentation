@@ -17,6 +17,7 @@ from transactions import (  # noqa: E402
     artifact_paths,
     authenticate_complete_chain,
     authenticate_complete_prefix,
+    authenticate_registered_complete_chain,
     inventory_state,
     json_bytes,
     run_transaction,
@@ -67,7 +68,7 @@ class TransactionTests(unittest.TestCase):
             "model": MODEL_ID,
             "model_revision": MODEL_REVISION,
             "runner_sha256": sha256_file(self.runner),
-            "counts": {"requests": len(rows)},
+            "counts": {"requests": len(rows), "completions": len(rows)},
             "sampling": dict(sampling),
         }
 
@@ -254,6 +255,53 @@ class TransactionTests(unittest.TestCase):
         prepared.write_text(prepared.read_text() + "\n")
         with self.assertRaisesRegex(RuntimeError, "prepared changed after STARTED"):
             authenticate_complete_chain(raw_dir=self.raw, invocation_order=("a",))
+
+    def test_registered_chain_rejects_self_consistent_sampling_rewrite(self) -> None:
+        self.run_tx()
+        paths = artifact_paths(self.raw, "a")
+        started = json.loads(paths["started"].read_text())
+        started["sampling"]["max_tokens"] = 99
+        paths["started"].write_bytes(json_bytes(started))
+        bundle = json.loads(paths["bundle"].read_text())
+        bundle["runner_metadata"]["sampling"]["max_tokens"] = 99
+        paths["bundle"].write_bytes(json_bytes(bundle))
+        generated = tx._generated_receipt_value(
+            invocation="a",
+            started_path=paths["started"],
+            bundle_path=paths["bundle"],
+            bundle=bundle,
+        )
+        paths["generated"].write_bytes(json_bytes(generated))
+        complete = tx._complete_value(
+            invocation="a",
+            started_path=paths["started"],
+            bundle_path=paths["bundle"],
+            generated_path=paths["generated"],
+            predecessor_complete_sha256=None,
+        )
+        paths["complete"].write_bytes(json_bytes(complete))
+        self.assertEqual(
+            authenticate_complete_chain(
+                raw_dir=self.raw, invocation_order=("a",)
+            )["decision"],
+            "TRANSACTION_CHAIN_AUTHENTICATED",
+        )
+        registration = {
+            "a": {
+                "prepared_path": self.prepared("a"),
+                "expected_rows": 2,
+                "implementation_lock_path": self.lock,
+                "live_preflight_path": self.preflight,
+                "runner_path": self.runner,
+                "sampling": {"thinking": "off", "max_tokens": 24},
+            }
+        }
+        with self.assertRaisesRegex(RuntimeError, "current locked invocation"):
+            authenticate_registered_complete_chain(
+                raw_dir=self.raw,
+                invocation_order=("a",),
+                registrations=registration,
+            )
 
 
 if __name__ == "__main__":
