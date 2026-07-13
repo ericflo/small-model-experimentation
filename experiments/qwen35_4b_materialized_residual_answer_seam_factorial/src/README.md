@@ -5,6 +5,7 @@
 - `protocol.py`: prompts, strict program event, execution, and visible selector.
 - `interface_analysis.py`: integer calibration gates and fixed winner rule.
 - `plans.py`: sampled/logical token first-over matching.
-- `transactions.py`: append-only durable generation and fail-closed recovery.
+- `transactions.py`: append-only durable generation, fail-closed recovery, and
+  semantic completed-prefix authentication for dependent invocations.
 - `vllm_runner.py`: pinned one-model runner, token-native answer prefill, and
   authenticated shared-thought sampling/forking without decode-retokenize.

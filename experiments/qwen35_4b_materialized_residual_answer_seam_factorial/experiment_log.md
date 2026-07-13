@@ -47,3 +47,8 @@ Created as a new experiment scaffold.
   natural-close/EOS and cap paths are covered. Append-only tokenizer receipt
   `c1a7c6b...` binds the new runner and tests. All 54 tests pass; no model call
   was made and live execution remains held.
+- 2026-07-13: Hardened transaction-chain reads before stage integration.
+  Completed-prefix authentication now rechecks the prepared bytes and ID/order,
+  lock, preflight, runner, model/revision, semantic bundle metadata, and every
+  predecessor link. A self-consistently rehashed forged bundle still fails.
+  All 57 tests pass; no model call was made.

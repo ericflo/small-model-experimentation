@@ -10,11 +10,13 @@ from pathlib import Path
 EXP = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(EXP / "src"))
 
+import transactions as tx  # noqa: E402
 from transactions import (  # noqa: E402
     MODEL_ID,
     MODEL_REVISION,
     artifact_paths,
     authenticate_complete_chain,
+    authenticate_complete_prefix,
     inventory_state,
     json_bytes,
     run_transaction,
@@ -203,6 +205,55 @@ class TransactionTests(unittest.TestCase):
             authenticate_complete_chain(
                 raw_dir=self.raw, invocation_order=("a", "b")
             )
+
+    def test_complete_prefix_authenticates_only_before_next_started(self) -> None:
+        self.run_tx("a", order=("a", "b"))
+        receipt = authenticate_complete_prefix(
+            raw_dir=self.raw,
+            invocation_order=("a", "b"),
+            through="a",
+        )
+        self.assertEqual(receipt["decision"], "TRANSACTION_PREFIX_AUTHENTICATED")
+        self.assertEqual(receipt["authenticated_invocations"], ["a"])
+        with self.assertRaisesRegex(RuntimeError, "after STARTED"):
+            self.run_tx("b", order=("a", "b"), crash_after="started")
+        with self.assertRaisesRegex(RuntimeError, "later invocation to be absent"):
+            authenticate_complete_prefix(
+                raw_dir=self.raw,
+                invocation_order=("a", "b"),
+                through="a",
+            )
+
+    def test_semantically_forged_bundle_and_receipts_still_fail(self) -> None:
+        self.run_tx()
+        paths = artifact_paths(self.raw, "a")
+        bundle = json.loads(paths["bundle"].read_text())
+        bundle["runner_metadata"]["model"] = "forged"
+        paths["bundle"].write_bytes(json_bytes(bundle))
+        generated = tx._generated_receipt_value(
+            invocation="a",
+            started_path=paths["started"],
+            bundle_path=paths["bundle"],
+            bundle=bundle,
+        )
+        paths["generated"].write_bytes(json_bytes(generated))
+        complete = tx._complete_value(
+            invocation="a",
+            started_path=paths["started"],
+            bundle_path=paths["bundle"],
+            generated_path=paths["generated"],
+            predecessor_complete_sha256=None,
+        )
+        paths["complete"].write_bytes(json_bytes(complete))
+        with self.assertRaisesRegex(RuntimeError, "runner metadata changed"):
+            authenticate_complete_chain(raw_dir=self.raw, invocation_order=("a",))
+
+    def test_authentication_rechecks_every_started_input_hash(self) -> None:
+        self.run_tx()
+        prepared = self.prepared("a")
+        prepared.write_text(prepared.read_text() + "\n")
+        with self.assertRaisesRegex(RuntimeError, "prepared changed after STARTED"):
+            authenticate_complete_chain(raw_dir=self.raw, invocation_order=("a",))
 
 
 if __name__ == "__main__":

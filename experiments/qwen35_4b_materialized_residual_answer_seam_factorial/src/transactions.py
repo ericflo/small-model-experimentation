@@ -457,15 +457,29 @@ def run_transaction(
     )
 
 
-def authenticate_complete_chain(
-    *, raw_dir: Path, invocation_order: Sequence[str]
+def _authenticate_complete_prefix(
+    *,
+    raw_dir: Path,
+    invocation_order: Sequence[str],
+    completed_count: int,
 ) -> dict[str, Any]:
+    if (
+        not invocation_order
+        or len(set(invocation_order)) != len(invocation_order)
+        or not 1 <= completed_count <= len(invocation_order)
+    ):
+        raise ValueError("authenticated prefix geometry is invalid")
     audit_directory_inventory(raw_dir, invocation_order)
+    for invocation in invocation_order[completed_count:]:
+        if inventory_state(raw_dir, invocation) != "absent":
+            raise RuntimeError(
+                f"authentication requires later invocation to be absent: {invocation}"
+            )
     predecessor_sha: str | None = None
     rows = 0
     outputs = 0
     complete_files: dict[str, dict[str, Any]] = {}
-    for invocation in invocation_order:
+    for invocation in invocation_order[:completed_count]:
         if inventory_state(raw_dir, invocation) != "complete":
             raise RuntimeError(f"authentication requires COMPLETE: {invocation}")
         paths = artifact_paths(raw_dir, invocation)
@@ -473,8 +487,59 @@ def authenticate_complete_chain(
         bundle = read_canonical(paths["bundle"])
         generated = read_canonical(paths["generated"])
         complete = read_canonical(paths["complete"])
-        if started.get("predecessor_complete_sha256") != predecessor_sha:
-            raise RuntimeError("STARTED predecessor chain changed")
+        if not isinstance(started, dict) or set(started) != {
+            "schema_version",
+            "state",
+            "invocation",
+            "prepared_path",
+            "prepared_sha256",
+            "expected_rows",
+            "implementation_lock_path",
+            "implementation_lock_sha256",
+            "live_preflight_path",
+            "live_preflight_sha256",
+            "model",
+            "revision",
+            "runner_path",
+            "runner_sha256",
+            "sampling",
+            "predecessor_complete_sha256",
+        }:
+            raise RuntimeError("STARTED receipt schema changed")
+        if (
+            started["schema_version"] != 1
+            or started["state"] != "STARTED"
+            or started["invocation"] != invocation
+            or started["model"] != MODEL_ID
+            or started["revision"] != MODEL_REVISION
+            or started["predecessor_complete_sha256"] != predecessor_sha
+            or not isinstance(started["sampling"], dict)
+        ):
+            raise RuntimeError("STARTED identity/predecessor changed")
+        prepared_path = Path(started["prepared_path"])
+        lock_path = Path(started["implementation_lock_path"])
+        preflight_path = Path(started["live_preflight_path"])
+        runner_path = Path(started["runner_path"])
+        current_files = (
+            (prepared_path, started["prepared_sha256"], "prepared"),
+            (lock_path, started["implementation_lock_sha256"], "implementation lock"),
+            (preflight_path, started["live_preflight_sha256"], "live preflight"),
+            (runner_path, started["runner_sha256"], "runner"),
+        )
+        for path, expected_sha, label in current_files:
+            if not isinstance(expected_sha, str) or sha256_file(path) != expected_sha:
+                raise RuntimeError(f"{label} changed after STARTED")
+        prepared_rows = read_jsonl(prepared_path)
+        expected_rows = started["expected_rows"]
+        if not isinstance(expected_rows, int) or isinstance(expected_rows, bool):
+            raise RuntimeError("STARTED expected row count changed")
+        _validate_prepared(prepared_rows, expected_rows)
+        _validate_bundle(
+            bundle,
+            invocation=invocation,
+            prepared_rows=prepared_rows,
+            runner_sha256=started["runner_sha256"],
+        )
         expected_generated = _generated_receipt_value(
             invocation=invocation,
             started_path=paths["started"],
@@ -501,10 +566,37 @@ def authenticate_complete_chain(
         predecessor_sha = sha256_file(paths["complete"])
     return {
         "schema_version": 1,
-        "decision": "TRANSACTION_CHAIN_AUTHENTICATED",
+        "decision": "TRANSACTION_PREFIX_AUTHENTICATED",
         "invocation_order": list(invocation_order),
+        "authenticated_invocations": list(invocation_order[:completed_count]),
         "complete_files": complete_files,
         "rows": rows,
         "sampled_outputs": outputs,
         "terminal_complete_sha256": predecessor_sha,
+    }
+
+
+def authenticate_complete_prefix(
+    *, raw_dir: Path, invocation_order: Sequence[str], through: str
+) -> dict[str, Any]:
+    if through not in invocation_order:
+        raise ValueError("prefix endpoint is not in invocation order")
+    return _authenticate_complete_prefix(
+        raw_dir=raw_dir,
+        invocation_order=invocation_order,
+        completed_count=list(invocation_order).index(through) + 1,
+    )
+
+
+def authenticate_complete_chain(
+    *, raw_dir: Path, invocation_order: Sequence[str]
+) -> dict[str, Any]:
+    receipt = _authenticate_complete_prefix(
+        raw_dir=raw_dir,
+        invocation_order=invocation_order,
+        completed_count=len(invocation_order),
+    )
+    return {
+        **receipt,
+        "decision": "TRANSACTION_CHAIN_AUTHENTICATED",
     }

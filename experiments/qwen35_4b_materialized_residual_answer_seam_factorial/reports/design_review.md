@@ -53,7 +53,7 @@ did not yet define a falsifiable or transaction-safe experiment.
   `b39e0ad1ccf49503eb48353eac118500432953f32ad27ae2acc1448ed99f622d`.
 - Preoutcome receipt SHA-256:
   `a73b5a0a8fa65700a5ddc8e4a4aa7a50355d7e1826ee63d27a0f790a2c8b350e`.
-- The experiment suite currently has 54 passing model-free tests.
+- The experiment suite currently has 57 passing model-free tests.
 
 ## Remaining blockers before a calibration lock
 
@@ -66,8 +66,11 @@ did not yet define a falsifiable or transaction-safe experiment.
    `STARTED -> bundle -> GENERATED -> COMPLETE` state machine has mutation tests
    for every crash boundary, zero-call recovery, terminal STARTED-only refusal,
    symlinks, unknown/partial inventory, tampering, predecessor chains, and
-   incomplete authentication. The calibration stage runner must still bind the
-   exact lock/preflight and pass end-to-end review.
+   incomplete authentication. Completed-prefix reads now revalidate every
+   STARTED input hash, prepared ID/order, model/revision, runner metadata, and
+   transaction link even against self-consistently rehashed forged receipts.
+   The calibration stage runner must still bind the exact lock/preflight and
+   pass end-to-end review.
 3. Implement a calibration-only reader allowlist proving mechanics public,
    audit, gold, prepared requests, and every forbidden directory can be absent
    without changing calibration preparation or scoring.
