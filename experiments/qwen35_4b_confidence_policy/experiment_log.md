@@ -70,3 +70,12 @@ adaptive_compute.py --src humaneval: the confidence-gated adaptive frontier beat
 uniform at 7/9 operating points on HumanEval too (reaches the 0.941 ceiling at ~5
 avg samples vs 9 uniform; one dip at avg 1.82). So the ~2x-compute-saving
 allocation win holds on both a moderate (MBPP) and an easy (HumanEval) benchmark.
+
+## 2026-07-13 — capstone generalizes to REASONING (cross-domain, cross-signal)
+
+adaptive_toy.py on the original C41 pool (qwen35_4b_confidence_guided_compute, 240
+records, confidence = P(answer)/C40 not a P(True) judge): confidence-gated
+adaptive allocation beats uniform at 6/8 operating points (mid-compute +0.02..0.03;
+small dips only at the k=1 and k=12 extremes). So the compute-optimal-allocation
+result is domain-general — code (MBPP, HumanEval, P(True) judge) AND reasoning
+(toy, P(answer)) — a robust, verifier-free, provenance-clean deployable policy.
