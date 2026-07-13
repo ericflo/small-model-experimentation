@@ -5,10 +5,11 @@ environment or model changes.
 
 ## Current box
 
-- RunPod Linux container currently exposing one **NVIDIA RTX 6000 Ada Generation (49,140 MiB)**,
-  driver **550.127.08**, compute capability **8.9** (CUDA 12.4 interface), CUDA 12.8 toolkit,
-  Python 3.12.3, and `uv 0.9.0`. This was re-queried on 2026-07-12; receipts from older L40
-  allocations remain historical measurements and must not be treated as current-host timings.
+- RunPod Linux container currently exposing one **NVIDIA L40 (46,068 MiB)**, driver
+  **550.127.08**, compute capability **8.9** (CUDA 12.4 interface), CUDA 12.8 toolkit,
+  Python 3.12.3, and `uv 0.9.0`. This was re-queried on 2026-07-13 after the allocation changed;
+  receipts from the preceding RTX 6000 Ada allocation remain historical measurements and must not
+  be treated as current-host timings.
 - The high-throughput environment is **`.venv-vllm`** (gitignored), created with `uv`. Its validated
   core stack is vLLM **0.24.0+cu129**, torch **2.11.0+cu129**, and transformers **5.13.0**. CUDA 12
   minor-version compatibility works on this driver: a CUDA allocation and full Qwen3.5 load/generate
@@ -69,7 +70,7 @@ at `templates/experiment/src/vllm_runner.py`; new experiment scaffolds copy it a
 CLI examples, thinking-budget semantics, parity gates, and backend-mixing rules live in
 [`docs/vllm_inference.md`](vllm_inference.md).
 
-Last recorded L40 behavior (hardware-reference evidence; revalidate on the current RTX 6000 Ada):
+Current L40 behavior (revalidate whenever the allocation changes):
 
 - pinned Qwen3.5 revision loaded in text-only bf16 using about **8.0 GiB VRAM** on that L40;
 - the first 4k/16-sequence engine startup took **210.7 seconds**, including one-time downloads,
@@ -237,7 +238,7 @@ The full-vocab logits tensor is the recurring OOM source (~150K vocab):
   to requests admitted after a mixed-termination first `max_num_seqs=32` scheduling wave. This
   happened with vLLM 0.24 asynchronous scheduling both enabled *and disabled*. vLLM's true
   batch-invariant mode (`VLLM_BATCH_INVARIANT=1`) requires compute capability >=9.0 and is therefore
-  unavailable on Ada GPUs including the current RTX 6000 Ada (8.9). Keep explicit seeds and freeze every tier, but treat
+  unavailable on Ada GPUs including the current L40 (8.9). Keep explicit seeds and freeze every tier, but treat
   different budgets/batch compositions as independent reproducible protocols rather than common-
   random-number continuations. The shared runner disables async scheduling and records that choice,
   but this simplifies scheduling; it does not make pre-Hopper inference batch-invariant.
