@@ -4,21 +4,21 @@ Generated from tracked experiment contents. Use this as a triage surface for tur
 
 Anchor-ready means the experiment has a human-authored README, a detected primary report, recognized local artifacts, and an assigned research program. It does not mean the result is correct or final.
 
-- Experiments: 232
-- Anchor-ready: 217
-- Human-authored READMEs: 219
+- Experiments: 233
+- Anchor-ready: 218
+- Human-authored READMEs: 220
 - Generated README stubs: 13
-- Primary reports: 232
-- Experiment logs: 136
-- Smoke commands: 101
-- Artifact manifests: 204
+- Primary reports: 233
+- Experiment logs: 137
+- Smoke commands: 102
+- Artifact manifests: 205
 
 ## Run Surface Counts
 
 | Run surface | Experiments |
 | --- | ---: |
 | `documented-command` | 38 |
-| `documented-scripts` | 120 |
+| `documented-scripts` | 121 |
 | `scripts-undocumented` | 21 |
 | `source-or-analysis` | 53 |
 
@@ -152,6 +152,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | yes | [`qwen35_4b_retrieval_adapt_verify_scale`](../experiments/qwen35_4b_retrieval_adapt_verify_scale/README.md) | algorithmic_memory_and_retrieval, evidence_conditioned_selection, interpretability_and_diagnostics, reliability_and_safety | `human-authored` | [report](../experiments/qwen35_4b_retrieval_adapt_verify_scale/reports/final_report.md) | no | `scripts-undocumented` | no | large-artifact, run-data | add-experiment-log, document-run-path, add-smoke-command |
 | yes | [`qwen35_4b_same_prefix_advantage_routing`](../experiments/qwen35_4b_same_prefix_advantage_routing/README.md) | agentic_breadth_installation, benchmark_generalization, evidence_conditioned_selection, posttraining_and_adaptation, process_control_and_tool_use, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_same_prefix_advantage_routing/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_sampler_portfolio_scheduler`](../experiments/qwen35_4b_sampler_portfolio_scheduler/README.md) | collective_experimentation_infrastructure, posttraining_and_adaptation, process_control_and_tool_use | `human-authored` | [report](../experiments/qwen35_4b_sampler_portfolio_scheduler/reports/final_report.md) | no | `scripts-undocumented` | no | large-artifact, run-data | add-experiment-log, document-run-path, add-smoke-command |
+| yes | [`qwen35_4b_semantic_anchor_coordinate_branching`](../experiments/qwen35_4b_semantic_anchor_coordinate_branching/README.md) | benchmark_generalization, interpretability_and_diagnostics, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_semantic_anchor_coordinate_branching/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_simulation_keystone_repair`](../experiments/qwen35_4b_simulation_keystone_repair/README.md) | structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_simulation_keystone_repair/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_sketch_coverage_shift_probe`](../experiments/qwen35_4b_sketch_coverage_shift_probe/README.md) | algorithmic_memory_and_retrieval, benchmark_generalization, evidence_conditioned_selection, interpretability_and_diagnostics, reliability_and_safety | `human-authored` | [report](../experiments/qwen35_4b_sketch_coverage_shift_probe/reports/qwen35_4b_sketch_coverage_shift_probe_report.md) | no | `documented-scripts` | no | dataset, large-artifact | add-experiment-log, add-smoke-command |
 | yes | [`qwen35_4b_specialist_policy_integration`](../experiments/qwen35_4b_specialist_policy_integration/README.md) | agentic_breadth_installation, benchmark_generalization, evidence_conditioned_selection, posttraining_and_adaptation, process_control_and_tool_use, reliability_and_safety | `human-authored` | [report](../experiments/qwen35_4b_specialist_policy_integration/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |

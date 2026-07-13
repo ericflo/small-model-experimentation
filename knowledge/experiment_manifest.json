@@ -4386,6 +4386,46 @@
   },
   {
     "file_counts": {
+      ".json": 2,
+      ".jsonl": 4,
+      ".md": 7,
+      ".pt": 1,
+      ".py": 3,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_semantic_anchor_coordinate_branching",
+    "path": "experiments/qwen35_4b_semantic_anchor_coordinate_branching",
+    "primary_readme": "experiments/qwen35_4b_semantic_anchor_coordinate_branching/README.md",
+    "primary_report": "experiments/qwen35_4b_semantic_anchor_coordinate_branching/reports/report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "interpretability_and_diagnostics",
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "This experiment tests the last mechanism-specific bridge left by the native Jacobian line: put a named hypothesis token inside real reasoning and replace its context-local J coordinates with each candidate donor state.",
+    "tags": [
+      "bridge",
+      "latent-state",
+      "small-model"
+    ],
+    "title": "Qwen3.5-4B Semantic-Anchor Coordinate Branching",
+    "top_level_dirs": [
+      "analysis",
+      "assets",
+      "configs",
+      "data",
+      "reports",
+      "runs",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 20,
+    "total_size_bytes": 3295943
+  },
+  {
+    "file_counts": {
       ".json": 6,
       ".jsonl": 4,
       ".log": 2,

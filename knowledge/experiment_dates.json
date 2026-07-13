@@ -2,33 +2,6 @@
  "note": "Run windows recovered from in-repo records on 2026-07-01. Git history collapses most experiment dirs onto the 2026-06-28 corpus import commit; these windows restore the real chronology from dated experiment-log headings, config date keys, epoch timestamps in run artifacts, git history for post-import dirs, and file mtimes for in-place work. Entries with confidence 'none' were searched and have no recoverable record. Audit or extend with scripts/extract_experiment_dates.py.",
  "recovered_on": "2026-07-01",
  "experiments": {
-  "qwen35_4b_jacobian_counterfactual_branching": {
-   "start": "2026-07-13",
-   "end": "2026-07-13",
-   "confidence": "high",
-   "sources": [
-    "experiments/qwen35_4b_jacobian_counterfactual_branching/experiment_log.md: dated heading '## 2026-07-13 — Design and data preflight'"
-   ],
-   "caveat": "Experiment remains in progress; this date covers design, fresh-data generation, and CPU geometry smoke only."
-  },
-  "qwen35_4b_transaction_invariant_recovery_curriculum": {
-   "start": "2026-07-12",
-   "end": "2026-07-12",
-   "confidence": "high",
-   "sources": [
-    "experiments/qwen35_4b_transaction_invariant_recovery_curriculum/experiment_log.md: dated heading '## 2026-07-12 — design and CPU validation'"
-   ],
-   "caveat": "Candidate training and result-bearing generation had not started at this design boundary."
-  },
-  "qwen35_4b_counterfactual_order_support_selector": {
-   "start": "2026-07-13",
-   "end": "2026-07-13",
-   "confidence": "high",
-   "sources": [
-    "experiments/qwen35_4b_counterfactual_order_support_selector/experiment_log.md: dated heading '## 2026-07-13 — Intake and adversarial design'"
-   ],
-   "caveat": "Qualification was still sealed at this design-boundary date."
-  },
   "adaptive_cognitive_kernel": {
    "start": "",
    "end": "",
@@ -376,6 +349,15 @@
     "logs/experiment_log.md: single dated heading '## 2026-06-22' (run_logs/*.log contain no timestamps)"
    ]
   },
+  "qwen35_4b_counterfactual_order_support_selector": {
+   "start": "2026-07-13",
+   "end": "2026-07-13",
+   "confidence": "high",
+   "sources": [
+    "experiments/qwen35_4b_counterfactual_order_support_selector/experiment_log.md: dated heading '## 2026-07-13 — Intake and adversarial design'"
+   ],
+   "caveat": "Qualification was still sealed at this design-boundary date."
+  },
   "qwen35_4b_coverage_banking": {
    "start": "2026-07-03",
    "end": "2026-07-03",
@@ -687,6 +669,15 @@
     "logs/experiment_log.md:3: heading '## 2026-06-24'"
    ],
    "caveat": "run_logs/*_console.log contain only relative tqdm timers, no dates"
+  },
+  "qwen35_4b_jacobian_counterfactual_branching": {
+   "start": "2026-07-13",
+   "end": "2026-07-13",
+   "confidence": "high",
+   "sources": [
+    "experiments/qwen35_4b_jacobian_counterfactual_branching/experiment_log.md: dated heading '## 2026-07-13 — Design and data preflight'"
+   ],
+   "caveat": "Experiment remains in progress; this date covers design, fresh-data generation, and CPU geometry smoke only."
   },
   "qwen35_4b_jacobian_transport_control_replication": {
    "start": "2026-07-12",
@@ -1037,6 +1028,14 @@
    ],
    "caveat": "start of 2026-06-25 rests on the seed-equals-date convention; 2026-06-26 alone is high-confidence"
   },
+  "qwen35_4b_semantic_anchor_coordinate_branching": {
+   "start": "2026-07-13",
+   "end": "2026-07-13",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_simulation_keystone_repair": {
    "start": "2026-07-02",
    "end": "2026-07-02",
@@ -1202,6 +1201,15 @@
     "logs/experiment_log.md: 'Date: 2026-06-25'",
     "reports/qwen35_4b_trained_vs_frozen_repair_mdp_report.md: 2026-06-25"
    ]
+  },
+  "qwen35_4b_transaction_invariant_recovery_curriculum": {
+   "start": "2026-07-12",
+   "end": "2026-07-12",
+   "confidence": "high",
+   "sources": [
+    "experiments/qwen35_4b_transaction_invariant_recovery_curriculum/experiment_log.md: dated heading '## 2026-07-12 — design and CPU validation'"
+   ],
+   "caveat": "Candidate training and result-bearing generation had not started at this design boundary."
   },
   "qwen35_4b_transform_abi_compiler_pilot": {
    "start": "2026-06-27",
