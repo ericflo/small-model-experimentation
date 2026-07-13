@@ -183,4 +183,13 @@ implementation_boundary:
     post_smoke_audit_sha256: e0f1c61ee64020fccc8ada21bf88f4e237d272fa4466fe1e717744e85e29a019
     scientific_config_sha256: 30f6656b1327d0fd69eb7c00c6bbb4eac192151737ccb1074ae450e782db2162
 mechanics_boundary:
-  status: pending
+  status: anchored
+  commit: 6e49856e75280c709294410da89d5fafc26d095d
+  hashes:
+    model_smoke_summary_sha256: cbf024456cebf1d4f226bb76b237b17b9723bb8521c8764c05ecf54cc03f06bd
+    model_smoke_prefixes_sha256: ddee155a7d5e9432d25e0120239f6204bf42b4ce1137c2c3f8f92ce49f187698
+    control_summary_sha256: 1f8aaf217910bfe46624fa2ca3d1eb6328c28a2a24ffa178308290fc10ef6b88
+    control_numeric_rows_sha256: 1200f73b97274e854e3fab4359e6194c2b95e9f9807aed5a5fd181f915cfb9b6
+    control_positions_sha256: 56715144246a81e85e0b4e04600d5ae58639f51ce81e3036fac3d8187487b27c
+    control_prefixes_sha256: 63d5e0dd07c4d03314644e9ecb1e33762f7273002ba7216a6d7802b67f3bb697
+    control_interventions_sha256: bc7ec03c42eeb0b44a95f2dfb43fa593c4ed3f238eeaaa46dde0efff33288b13

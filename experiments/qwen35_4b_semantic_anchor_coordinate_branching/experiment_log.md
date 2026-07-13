@@ -90,3 +90,12 @@
 - Outcomes/correctness/logits/probabilities remain absent.
 - Mechanics remains locked until this receipt and its adversarial audit are
   committed, pushed, and hashed in a separate boundary.
+
+## 2026-07-13 — Mechanics boundary anchored
+
+- The passing model-smoke and full calibration artifacts are anchored to pushed
+  commit `6e49856e75280c709294410da89d5fafc26d095d` by seven exact SHA-256 hashes.
+- Local and committed bytes must both match, and the calibration commit must be
+  an ancestor, before mechanics can load the model.
+- This authorizes exactly one label-free mechanics run. It does not authorize
+  qualification, confirmation, or any capability claim.
