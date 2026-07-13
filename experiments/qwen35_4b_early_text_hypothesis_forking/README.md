@@ -1,6 +1,6 @@
 # Qwen3.5-4B Early Text Hypothesis Forking
 
-**Status:** in-progress · since 2026-07-13 · design amendment, adversarial implementation review, and CPU smoke passed; model mechanics remains sealed pending the pushed lock receipt.
+**Status:** in-progress · since 2026-07-13 · design amendment, adversarial implementation review, CPU smoke, and implementation lock passed; live model mechanics has not run.
 
 This experiment tests whether supplying each fully bound first operation at the
 start of Qwen3.5-4B reasoning changes complete two-step program proposals enough
@@ -135,6 +135,11 @@ Strict parser, selector, gold-mutation, resource-matching, transaction,
 authentication, and exact-token runner tests pass (39 tests plus 33
 parameterized subtests). No model has been loaded and no scientific capability
 outcome exists. The rejected 12-type draft is not evidence.
+
+The implementation lock binds the published design amendment and implementation
+commits plus every critical file with SHA-256
+`12c298aef3ba9cc83bd4d1cdadc304aa0daa7d71bde4be3fce81514fdf4b3148`.
+It certifies `model_calls_before_lock=0`.
 
 ## Claim boundary
 

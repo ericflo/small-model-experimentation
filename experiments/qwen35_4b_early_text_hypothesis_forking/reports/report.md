@@ -55,6 +55,11 @@ generation, qualification, confirmation, training, or benchmark call has
 occurred. `model_loaded=false` and `outcomes_loaded=false`; these checks validate
 the instrument, not the hypothesis.
 
+The implementation-lock receipt binds the pushed amendment and implementation
+commits and every critical-file blob. Its SHA-256 is
+`12c298aef3ba9cc83bd4d1cdadc304aa0daa7d71bde4be3fce81514fdf4b3148`, with
+`model_calls_before_lock=0`. Live mechanics has not yet run.
+
 ## Controls and claim boundary
 
 A future pass must beat both late timings and sampled/logical-token-overmatched

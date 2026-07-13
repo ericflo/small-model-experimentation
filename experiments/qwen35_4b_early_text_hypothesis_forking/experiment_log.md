@@ -56,3 +56,13 @@ resample a started-only invocation. The deterministic preparation froze four
 `2d6b668a6d43e1bd657124c3645d85ea9996d9aaaea8f81225b97472a2f5b292`.
 All 39 tests plus 33 parameterized subtests pass, refreshed smoke remains
 `CPU_SMOKE_PASS`, and `model_loaded=false`, `outcomes_loaded=false`.
+
+## 2026-07-13 — Implementation lock frozen
+
+The separately published implementation commit is
+`a7bd9fbe093b3f02b3ebdecd5ab533b816e133b3`. The receipt-last lock binds that
+commit, the original design, amendment `af9c8431`, and the exact 20-file
+critical allowlist. Lock SHA-256 is
+`12c298aef3ba9cc83bd4d1cdadc304aa0daa7d71bde4be3fce81514fdf4b3148` and
+records `model_calls_before_lock=0`. Live mechanics remains unrun at this
+boundary.

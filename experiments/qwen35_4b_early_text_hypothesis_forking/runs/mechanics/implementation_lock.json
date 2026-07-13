@@ -1,0 +1,29 @@
+{
+  "critical_files": {
+    "experiments/qwen35_4b_early_text_hypothesis_forking/configs/default.yaml": "83fe80ab04b01fcc59331864fc33b2df12a8c2488362f20073fe5742abc4b1c6",
+    "experiments/qwen35_4b_early_text_hypothesis_forking/reports/design_review.md": "62bc687ae2d34e50f4a8c7adfbbf3be893eb3de6b300c096406133122909f91e",
+    "experiments/qwen35_4b_early_text_hypothesis_forking/reports/implementation_review.md": "72f640096018e898f7660220431644729eec3a54b627c7d9451a163bdaa86015",
+    "experiments/qwen35_4b_early_text_hypothesis_forking/reports/preregistration.md": "eac8e35285f4ad4df0777a532eeaed2a5b30739a079cfc812abfced06ebefd82",
+    "experiments/qwen35_4b_early_text_hypothesis_forking/reports/preregistration_amendment_1.md": "9d1e0ed9c5b2fb09972d1ff58944bb9537239ac5de32d2f030bee2941c7f8d09",
+    "experiments/qwen35_4b_early_text_hypothesis_forking/runs/mechanics/prepared/deranged_requests.jsonl": "c49327b549ebc791b28075c981130eda67b86cff17b11e8c3828ace472247e1d",
+    "experiments/qwen35_4b_early_text_hypothesis_forking/runs/mechanics/prepared/duplicate_requests.jsonl": "6e212a20d210532719d197335adfdc80cd3ab70868796980e3926ccae6f08374",
+    "experiments/qwen35_4b_early_text_hypothesis_forking/runs/mechanics/prepared/placebo_requests.jsonl": "49ac003d1dfdf32be0f581cfd121fb843523dec4f0fa624a53e268a6975c2914",
+    "experiments/qwen35_4b_early_text_hypothesis_forking/runs/mechanics/prepared/preoutcome_receipt.json": "2d6b668a6d43e1bd657124c3645d85ea9996d9aaaea8f81225b97472a2f5b292",
+    "experiments/qwen35_4b_early_text_hypothesis_forking/runs/mechanics/prepared/program_ceiling_public.jsonl": "c4c49f64a03fa2a02650eb79bb65e93f9ef18b1adff5766d9e63b5d0c7a09806",
+    "experiments/qwen35_4b_early_text_hypothesis_forking/runs/mechanics/prepared/program_ceiling_requests.jsonl": "16a3aad8ba0840a6b15095cb0eef0e5b78787a2424530aca8ae978ef8171b6e6",
+    "experiments/qwen35_4b_early_text_hypothesis_forking/runs/mechanics/prepared/systematic_requests.jsonl": "40df4007f09493cf757bd913ed8d04eb859d2e28a7a7128897e1fe086f223e36",
+    "experiments/qwen35_4b_early_text_hypothesis_forking/scripts/run_mechanics.py": "7ff9ce31840fe1a9f44e31b2293b1fb17b0522ff4dd9406a06906d6363714d2e",
+    "experiments/qwen35_4b_early_text_hypothesis_forking/src/protocol.py": "dce595b2da47e6fd1f486cb7a4c0b30d66ac7c39a7de41b234a1f59ebbf14444",
+    "experiments/qwen35_4b_early_text_hypothesis_forking/src/task_data.py": "d3c314b58d518bd93c353a109e362409b803d59e2a9acc79a4eb618fd384559d",
+    "experiments/qwen35_4b_early_text_hypothesis_forking/src/vllm_runner.py": "50248e42323a832a931781840eac4bc3817c00ed6955dd74d914ac96e2062e41",
+    "experiments/qwen35_4b_early_text_hypothesis_forking/tests/test_mechanics_runner.py": "ddd45f5368d59f305c99100b622f82fb84e350c3813c0e1d26b643f156b137ff",
+    "experiments/qwen35_4b_early_text_hypothesis_forking/tests/test_protocol.py": "9a659a101a14ea7a4651119b417a4a03b5f93efd1cad0b748851ca596e8aca29",
+    "experiments/qwen35_4b_early_text_hypothesis_forking/tests/test_vllm_runner.py": "ffb4c6889e2c044b978eb2e4a44b3fa4ece3fe99d5d0b50e7d89efdce6b73caf",
+    "requirements-vllm.lock.txt": "64c3dde1e24f2b18a83cda3a3d84daf8701aad728e864c508854b10e3e3734c6"
+  },
+  "design_amendment_commit": "af9c84319bc4aaedc77962f473a53f46dd2d29a6",
+  "design_commit": "c064d7a4470a0638ddf4e483e82ccaa9f3720eed",
+  "implementation_commit": "a7bd9fbe093b3f02b3ebdecd5ab533b816e133b3",
+  "model_calls_before_lock": 0,
+  "schema_version": 1
+}

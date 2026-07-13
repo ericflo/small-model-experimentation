@@ -10,6 +10,6 @@ notes: >-
   No model output, adapter, or training artifact exists after CPU smoke and the
   tokenizer-only mechanics preparation. The tracked procedural split,
   branch-plan, firewall, prepared requests, and receipts are small and
-  self-contained. The live command remains fail closed until its lock path is
-  committed and pushed; any later omitted raw output must be added here with
+  self-contained. The implementation lock is tracked separately from its bound
+  implementation commit; any later omitted raw output must be added here with
   checksums and regeneration commands.
