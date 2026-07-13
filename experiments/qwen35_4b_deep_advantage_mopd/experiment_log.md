@@ -226,3 +226,29 @@
   independent-audit call paths. All 199 experiment tests pass in the pinned
   training environment. No parameter-control output existed when this was
   fixed, so no result or frozen scientific choice changed.
+
+## 2026-07-13 — seed-43 round-2 pass
+
+- Round 2 required all three frozen candidate batches. The first two were only
+  four examples short of quota; the final supply was 82 deep, 76 quick, and
+  418 abstentions over 576 failed states. The assembler consumed exactly 60
+  deep units and 20 soup anchors once each, with 60 matched controls (57
+  exact-cell, two family/kind, and one kind/level).
+- The all-policy cache bound 140 samples and 35,266 active target positions to
+  the exact quick, deep, and soup models. Capability, anchor, and route-control
+  prompt truncation were all zero.
+- Training completed 20/20 updates with mean corrected top-k loss `0.05588`.
+  The held probe improved from `0.04249→0.02281` loss and
+  `0.83777→0.84112` top-k overlap, so the frozen round gate passed. Probe
+  entropy contracted about `10.66%`; as in prior full rounds, this is retained
+  as a collapse-risk warning, not promoted into a post-hoc stop.
+- The round-2 bf16 merge receipt is
+  `08136cf7e1a8b4b46b8ac6ffae3422c9f38737263fe1d86ab20adf698b0156b6`.
+  The tracked seed-43 receipt now records three completed rounds and remains
+  deliberately in progress while round 3 runs; no capability conclusion exists.
+- Several long generation subprocesses span Git commits because unrelated
+  confirmation/control hardening was checkpointed while the GPU remained live.
+  The exact vLLM runner hash, package lock, model configuration, engine geometry,
+  state/branch hashes, and token ledgers were unchanged and all registered
+  engine checks passed. The commit-marker churn is provenance metadata, not a
+  generation-protocol change.
