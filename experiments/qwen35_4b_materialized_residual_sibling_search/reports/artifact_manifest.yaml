@@ -31,4 +31,7 @@ local_receipts:
   mechanics_preoutcome_v2:
     path: "experiments/qwen35_4b_materialized_residual_sibling_search/runs/mechanics/preoutcome_receipt_v2.json"
     sha256: "118546faaa5c18ada5ca57aeee047e90c0633ffd50bddfc4b6daf3b899270372"
-notes: "Attempt 1 initialized the engine but aborted in preflight before any experimental request or sampled output. Its old lock and preflight are immutable incident evidence. The append-only v2 repair passed independent adversarial review; mechanics remains sealed pending its committed/pushed implementation and separate v2 lock."
+  mechanics_implementation_lock_v2:
+    path: "experiments/qwen35_4b_materialized_residual_sibling_search/runs/mechanics/implementation_lock_v2.json"
+    sha256: "953da4e9ba5b4d19f5d1b785d907b7d78379705af50ab124a0027b7ce79a1264"
+notes: "Attempt 1 initialized the engine but aborted in preflight before any experimental request or sampled output. Its old lock and preflight are immutable incident evidence. The append-only v2 repair is pushed and green; mechanics remains sealed pending commit/push and CI for its separate v2 lock."

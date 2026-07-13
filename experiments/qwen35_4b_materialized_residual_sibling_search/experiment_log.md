@@ -78,8 +78,12 @@
   final-byte adversaries returned `FREEZE`; 45 mechanics and 71 full experiment
   tests passed, and source-bound preparation reproduced twice with zero new
   model loads or calls.
+- 2026-07-13: Pushed the frozen v2 repair at `fa942eef` after rebasing three
+  concurrent `main` commits; both CI workflows passed. Generated the separate
+  v2 lock binding 33 critical files and explicitly recording one prior engine
+  initialization, zero experimental requests, and zero sampled outputs. Retry
+  remains sealed until that lock is itself committed, pushed, and green in CI.
 
 ## Pending
 
-- Commit and push the frozen source-bound v2 repair, then publish and push its
-  separate v2 lock before retry.
+- Commit and push the generated v2 lock, observe CI, then retry mechanics.

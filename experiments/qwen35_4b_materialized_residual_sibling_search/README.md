@@ -1,8 +1,8 @@
 # Qwen3.5-4B Materialized Residual Sibling Search
 
 **Status:** in-progress · since 2026-07-13 · attempt 1 aborted in live preflight
-before the first experimental request; append-only v2 repair passed independent
-adversarial review and awaits its pushed implementation and separate lock.
+before the first experimental request; append-only v2 repair is pushed and its
+separate retry lock awaits commit, push, and CI.
 
 ## Research Program
 

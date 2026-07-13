@@ -3340,7 +3340,7 @@
   },
   {
     "file_counts": {
-      ".json": 9,
+      ".json": 10,
       ".jsonl": 20,
       ".md": 9,
       ".py": 13,
@@ -3357,7 +3357,7 @@
       "test_time_reasoning_budget"
     ],
     "source_track": "new",
-    "summary": "before the first experimental request; append-only v2 repair passed independent adversarial review and awaits its pushed implementation and separate lock.",
+    "summary": "before the first experimental request; append-only v2 repair is pushed and its separate retry lock awaits commit, push, and CI.",
     "tags": [
       "repair",
       "small-model"
@@ -3372,8 +3372,8 @@
       "src",
       "tests"
     ],
-    "total_files": 54,
-    "total_size_bytes": 4369168
+    "total_files": 55,
+    "total_size_bytes": 4377930
   },
   {
     "file_counts": {
