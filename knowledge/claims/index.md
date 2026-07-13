@@ -2,7 +2,7 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 55
+- Claims: 56
 
 ## Status Counts
 
@@ -11,25 +11,25 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | Confirmed | 7 |
 | Negative | 3 |
 | Open | 2 |
-| Promising | 43 |
+| Promising | 44 |
 
 ## Program Counts
 
 | Program | Claims |
 | --- | ---: |
 | `active_evidence_acquisition` | 1 |
-| `agentic_breadth_installation` | 6 |
+| `agentic_breadth_installation` | 7 |
 | `algorithmic_memory_and_retrieval` | 1 |
 | `benchmark_generalization` | 13 |
 | `collective_experimentation_infrastructure` | 2 |
 | `evidence_conditioned_selection` | 9 |
 | `interpretability_and_diagnostics` | 8 |
 | `operator_and_skill_inventories` | 1 |
-| `posttraining_and_adaptation` | 29 |
+| `posttraining_and_adaptation` | 30 |
 | `process_control_and_tool_use` | 3 |
 | `reliability_and_safety` | 5 |
 | `structured_execution_and_compilers` | 29 |
-| `test_time_reasoning_budget` | 9 |
+| `test_time_reasoning_budget` | 10 |
 
 ## C1: Structured intermediates improve small-model reliability
 
@@ -1343,3 +1343,28 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - Do not read the gym install's old-budget +0.32 as its true value — only ~+0.15–+0.21 survives a fairly-resourced base; the rest was budget-starvation compensation.
 - Do not chase quick-AND-medium >+0.32 at maxed budget: base now scores ~0.36–0.46, so a +0.32 medium delta needs merged ~0.68–0.78 — beyond the 4B execution frontier (C44).
 - Do not read a shrinking delta as a failed install: the merged ABSOLUTE score is the best measured (0.666/0.506); the delta shrinks because BASE improved, not because merged regressed.
+
+## C56: AXIS-STRUCTURED INSTALL COMPRESSION: at the maxed 8192 menagerie budget the two weakest axes DISSOCIATE — EXPLORATION is installable and transfers (gym burrowmaze mean +0.167 at 8192, L6 0.33->0.67; menagerie medium retain-delta +0.190 > the efficiency install's +0.146) while composed-rule INDUCTION is NOT (gym glyphgate L4-L6 stay ~0.0 before and after; trace-SFT even DEGRADES the easy induction the base could already do, L2 0.93->0.53). No single-4B install flavor clears the +0.32 conjunction at fair budget; decomposed by axis, the residual IS the executor-vs-inducer wall (C39/C44/C48), a serial-compute property of the fixed model, not a data or method gap. Answers C55's open next-test.
+
+- Status: `Promising`
+- Programs: `agentic_breadth_installation`, `posttraining_and_adaptation`, `test_time_reasoning_budget`
+- Summary: Experiment qwen35_4b_gauntlet_frontier, induction/exploration phase (the goal's untried weak-axis prescription, greenlit after C55). MAXED-BUDGET DIAGNOSTIC (gym glyphgate, active induction, greedy@1, tb=8192): base does single-rule induction (L1-L3 1.00/0.93/0.80) but is at a hard 0.0 floor on composed-rule induction (L4-L6), and the broad apex install HURTS induction (L2 0.93->0.47). FOCUSED INSTALL (data/sft_induction.jsonl: 860 glyphgate+burrowmaze oracle hypothesize-verify traces weighted to L4-L6 + 900 broad replay; co-trained from base, emission-seam recipe, adapter induction1). GYM GATE at 8192: glyphgate MEAN -0.056 (L2 0.93->0.53, L4-L6 ~0.0->~0.0) — composed induction NOT installable, trace-SFT trains at 1.0 but does not deploy and degrades easy induction; burrowmaze MEAN +0.167 (L3 0.87->1.00, L4 0.73->1.00, L5 0.67->0.93, L6 0.33->0.67) — exploration IS installable with durable lifts at every hard level, base unsaturated. MENAGERIE TRANSFER (paired base-vs-induction1, n=2/tier, tb=8192): quick +0.183, medium +0.190 — the exploration gain transfers to the held-out benchmark and beats the efficiency apex install on medium (+0.190 vs +0.146; medium carries the multi-turn episodes), despite the combined install also carrying the net-negative glyphgate traces.
+- Implication: Install-value compression at fair budget (C55) is AXIS-STRUCTURED, not uniform: executable procedures (exploration = search + spatial memory) are installable and transfer to the held-out benchmark, retaining a real delta at maxed budget; the non-serial inductive leap (composed-rule induction) is walled and cannot be installed by trace-SFT (trains 1.0, deploys ~0.0, and even hurts the easy induction the model had). To improve the fixed 4B at fair budget, target executable procedures, not induction. The clean exploration-only install (drop the net-negative glyphgate traces) is the obvious optimization to maximize the medium retain-delta.
+
+### Evidence
+
+- [`qwen35_4b_gauntlet_frontier`](../../experiments/qwen35_4b_gauntlet_frontier/reports/report.md)
+
+### Next Tests
+
+- Clean EXPLORATION-ONLY install (burrowmaze + replay, no glyphgate): does dropping the net-negative induction traces push the menagerie medium retain-delta above the combined +0.190?
+- Tighten the transfer deltas to n>=6 (currently n=2, tight but thin).
+- Test the other executable-procedure weak axes (program repair loomfix/patchwheel, constrained optimization packhouse/stallwright) for installability + retain at 8192 — do all PROCEDURE axes install while only INDUCTION is walled?
+- Skin-transfer probe: exploration installs on burrowmaze (SKINNABLE) — does the lift survive fresh pseudo-vocab, i.e. is it the procedure not the surface?
+
+### Avoid
+
+- Do not try to install composed-rule induction via oracle-trace SFT: it trains at 1.0 but deploys ~0.0 (C44 serial-compute) and DEGRADES the single-rule induction the base already does.
+- Do not include glyphgate (induction) traces in an exploration install — they are net-negative on their own axis and drag the combined install.
+- Do not expect ANY single-4B install flavor to clear +0.32 at the fair 8192 budget: base is ~0.36-0.46, so it would need merged ~0.68-0.78 (beyond the C44 frontier).
+- Do not read the exploration lift as budget-compensation: base was NOT saturated at 8192 on burrowmaze (L6 0.33), so the install adds capability rather than compensating starvation.

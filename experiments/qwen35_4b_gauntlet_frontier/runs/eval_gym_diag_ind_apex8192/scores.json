@@ -1,0 +1,46 @@
+{
+  "tag": "diag_ind_apex8192",
+  "adapter": null,
+  "merged": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_gauntlet_frontier/merged/apex_cr",
+  "gen_seed": 90001,
+  "think_budget": 8192,
+  "seconds": 172.2,
+  "cells": {
+    "glyphgate/atom/L1": {
+      "n": 15,
+      "mean": 1.0,
+      "parse_fail": 0,
+      "forced_close": 0
+    },
+    "glyphgate/atom/L2": {
+      "n": 15,
+      "mean": 0.4667,
+      "parse_fail": 0,
+      "forced_close": 0
+    },
+    "glyphgate/atom/L3": {
+      "n": 15,
+      "mean": 0.7333,
+      "parse_fail": 0,
+      "forced_close": 0
+    },
+    "glyphgate/atom/L4": {
+      "n": 15,
+      "mean": 0.0667,
+      "parse_fail": 0,
+      "forced_close": 7
+    },
+    "glyphgate/atom/L5": {
+      "n": 15,
+      "mean": 0.0,
+      "parse_fail": 0,
+      "forced_close": 10
+    },
+    "glyphgate/atom/L6": {
+      "n": 15,
+      "mean": 0.0,
+      "parse_fail": 0,
+      "forced_close": 3
+    }
+  }
+}

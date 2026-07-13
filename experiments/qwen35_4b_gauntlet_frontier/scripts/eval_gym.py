@@ -40,6 +40,13 @@ def main() -> int:
     parser.add_argument("--families", nargs="*", default=list(ALL_FAMILIES))
     parser.add_argument("--smoke", action="store_true")
     parser.add_argument("--out-dir", type=Path, default=None)
+    parser.add_argument("--think-budget", type=int, default=None,
+                        help="override eval_gym.think_budget (e.g. 8192 for the "
+                             "maxed-budget diagnostic)")
+    parser.add_argument("--atoms-per-level", type=int, default=None,
+                        help="override eval_gym.atoms_per_level")
+    parser.add_argument("--episode-levels", nargs="*", type=int, default=None,
+                        help="override eval_gym.episode_levels ([] to skip episodes)")
     args = parser.parse_args()
 
     config = yaml.safe_load(args.config.read_text())
@@ -47,13 +54,16 @@ def main() -> int:
     out_dir = args.out_dir or (EXP / "runs" / f"eval_gym_{args.tag}")
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    n_atoms = 2 if args.smoke else int(eval_cfg["atoms_per_level"])
+    n_atoms = 2 if args.smoke else int(args.atoms_per_level or eval_cfg["atoms_per_level"])
     n_episodes = 1 if args.smoke else int(eval_cfg["episodes_per_level"])
-    episode_levels = [int(l) for l in eval_cfg.get("episode_levels", [1, 2, 3])]
+    if args.episode_levels is not None:
+        episode_levels = [int(l) for l in args.episode_levels]
+    else:
+        episode_levels = [int(l) for l in eval_cfg.get("episode_levels", [1, 2, 3])]
     gen_seed = int(eval_cfg["gen_seed"])
 
     sampling = dict(
-        think_budget=int(eval_cfg["think_budget"]),
+        think_budget=int(args.think_budget or eval_cfg["think_budget"]),
         answer_max_tokens=int(eval_cfg["answer_max_tokens"]),
         run_seed=gen_seed,
         greedy=True,

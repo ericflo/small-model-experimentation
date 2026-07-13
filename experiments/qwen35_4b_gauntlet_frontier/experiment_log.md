@@ -331,3 +331,55 @@ at DEPLOYMENT and it changed the whole frame.
   what base CANNOT do even at 8192 tokens — the induction / hypothesize-verify
   walls (C43/C44/C48) — not efficiency/procedure knowledge base rediscovers once
   it can think. Re-baseline everything at 8192.
+
+## 2026-07-13 (induction/exploration install at maxed budget) — the two weak axes DISSOCIATE: exploration installs, induction does not
+
+Following C55 (the +0.32 target was budget-starvation-inflated), the owner
+greenlit the goal's untried prescription: install what base CANNOT do even at
+8192 — the induction/exploration weak axes. Fast-loop result.
+
+- **Maxed-budget diagnostic (glyphgate, active induction, greedy@1 tb=8192).**
+  Base does single-rule induction (L1-L3: 1.00/0.93/0.80) but is at a hard 0.0
+  floor on COMPOSED-rule induction (L4-L6). The broad apex install HURTS
+  induction (L2 0.93->0.47). So the induction wall at fair budget is sharply at
+  depth-2+ composition, and the existing install makes it worse.
+
+- **Focused install (data/sft_induction.jsonl: 860 glyphgate+burrowmaze oracle
+  hypothesize-verify traces weighted to L4-L6 + 900 broad replay; co-trained
+  from base, emission-seam recipe, adapter induction1).** Gym gate at 8192:
+
+  glyphgate (induction):  L2 0.933->0.533 (-0.40), L4-L6 ~0.0->~0.0 (the 0.067s
+    are 1/15 noise); MEAN -0.056. NOT installable — trace-SFT trains at 1.0 but
+    does not deploy on composed induction, and DEGRADES the easy induction the
+    model could already do. C48/C44 serial-compute wall, hardened.
+
+  burrowmaze (exploration): L3 0.87->1.00, L4 0.73->1.00, L5 0.67->0.93,
+    L6 0.33->0.67; MEAN +0.167. IS installable — big durable lifts at every hard
+    level, and base was not saturated at 8192, so this is added capability, not
+    budget-compensation.
+
+- **LAW: the two weak axes dissociate along the executor-vs-inducer boundary
+  (C39).** Exploration is an executable search/memory PROCEDURE the install
+  teaches durably and that retains at maxed budget; composed-rule induction is a
+  non-serial inductive LEAP the forward pass cannot make even with an 8192
+  budget, so it stays walled and trace-SFT cannot install it (and even hurts).
+  This is the clean, honest answer to "install what base can't do at 8192":
+  yes for procedures, no for induction.
+
+- **Menagerie transfer / retain-delta at 8192 (induction1, paired base-vs-merged,
+  n=2/tier).** quick +0.183, medium +0.190. The exploration gain TRANSFERS to the
+  held-out benchmark and retains at maxed budget — and beats the efficiency apex
+  install on MEDIUM (+0.190 vs +0.146; medium carries the multi-turn episodes
+  where exploration lives), DESPITE the combined install also carrying the
+  net-negative glyphgate traces (a conservative lower bound). quick ~ ties apex
+  (+0.183 vs +0.211; atoms-only). Neither flavor clears +0.32 at fair budget.
+
+- **UNIFYING CONCLUSION.** At the maxed 8192 budget, install-value compression is
+  AXIS-STRUCTURED, not uniform. Executable procedures (exploration) retain a real
+  delta and transfer to the held-out benchmark; the non-serial inductive leap
+  (induction) is walled and cannot be installed (and trace-SFT even hurts it). No
+  single-4B install flavor (efficiency/breadth OR induction/exploration) clears
+  the old +0.32 conjunction at fair budget — that target was budget-starvation-
+  inflated (C55) and, decomposed by axis, its residual is the induction wall
+  (C39/C44/C48), which is a serial-compute property of the fixed model, not a
+  data or method gap. Exploration is the one weak axis that installs and retains.
