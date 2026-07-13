@@ -1,0 +1,100 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[gb] 120 MBPP records; budgets [256, 2048]
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|██████████| 2/2 [00:00<00:00, 5087.09it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<01:32,  4.59it/s]Loading weights:  10%|▉         | 42/426 [00:00<00:02, 164.38it/s]Loading weights:  19%|█▉        | 80/426 [00:00<00:01, 240.93it/s]Loading weights:  27%|██▋       | 117/426 [00:00<00:01, 279.40it/s]Loading weights:  36%|███▌      | 152/426 [00:00<00:00, 290.13it/s]Loading weights:  46%|████▌     | 196/426 [00:00<00:00, 335.07it/s]Loading weights:  56%|█████▋    | 240/426 [00:00<00:00, 365.12it/s]Loading weights:  68%|██████▊   | 288/426 [00:00<00:00, 394.11it/s]Loading weights:  80%|███████▉  | 340/426 [00:01<00:00, 425.63it/s]Loading weights:  90%|█████████ | 385/426 [00:01<00:00, 430.60it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 343.79it/s]
+[gb] === budget 256 ===
+[gb] wrote /home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_confidence_policy/runs/pool_think_b256.json | pass-rate 0.574 | mean n_think 100
+[gb] === budget 2048 ===
+Traceback (most recent call last):
+  File "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_code_confidence/scripts/gen_budget.py", line 116, in <module>
+    main()
+  File "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_code_confidence/scripts/gen_budget.py", line 106, in main
+    rows = build_pool(p, records, prompts, b, a.k, a.answer_max)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_code_confidence/scripts/gen_budget.py", line 57, in build_pool
+    greedy = p.gen_sequences(prompts, think=True, budget=budget, greedy=True,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_code_confidence/src/gen_lib.py", line 96, in gen_sequences
+    process(order, batch_size)
+  File "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_code_confidence/src/gen_lib.py", line 87, in process
+    outs = self._seq_batch([prompts[i] for i in sub], think, budget, shuffle,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_code_confidence/src/gen_lib.py", line 130, in _seq_batch
+    gen2 = self._gen(cont, answer_max, sampling)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_code_confidence/src/gen_lib.py", line 72, in _gen
+    out = self.model.generate(input_ids=inp, attention_mask=attn, max_new_tokens=max_new,
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/transformers/generation/utils.py", line 2584, in generate
+    result = decoding_method(
+             ^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/transformers/generation/utils.py", line 2784, in _sample
+    outputs = self._prefill(
+              ^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/transformers/generation/utils.py", line 3830, in _prefill
+    return self(**model_inputs, return_dict=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/transformers/utils/generic.py", line 907, in wrapper
+    output = func(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 1665, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+                                       ^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/transformers/utils/generic.py", line 1036, in wrapper
+    output = func(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/transformers/utils/output_capturing.py", line 252, in wrapper
+    outputs = func(self, *args, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 1203, in forward
+    hidden_states = decoder_layer(
+                    ^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/transformers/modeling_layers.py", line 93, in __call__
+    return super().__call__(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 784, in forward
+    hidden_states = self.linear_attn(
+                    ^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 466, in forward
+    b = self.in_proj_b(hidden_states)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/torch/nn/modules/linear.py", line 134, in forward
+    return F.linear(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: CUDA error: CUBLAS_STATUS_INTERNAL_ERROR when calling `cublasGemmEx( handle, opa, opb, m, n, k, &falpha, a, CUDA_R_16BF, lda, b, CUDA_R_16BF, ldb, &fbeta, c, std::is_same_v<C_Dtype, float> ? CUDA_R_32F : CUDA_R_16BF, ldc, compute_type, CUBLAS_GEMM_DEFAULT_TENSOR_OP)`

@@ -4,14 +4,14 @@ Generated from tracked experiment contents. Use this as a triage surface for tur
 
 Anchor-ready means the experiment has a human-authored README, a detected primary report, recognized local artifacts, and an assigned research program. It does not mean the result is correct or final.
 
-- Experiments: 241
+- Experiments: 242
 - Anchor-ready: 226
-- Human-authored READMEs: 228
+- Human-authored READMEs: 229
 - Generated README stubs: 13
 - Primary reports: 241
 - Experiment logs: 145
 - Smoke commands: 110
-- Artifact manifests: 213
+- Artifact manifests: 214
 
 ## Run Surface Counts
 
@@ -19,19 +19,20 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | --- | ---: |
 | `documented-command` | 38 |
 | `documented-scripts` | 129 |
-| `scripts-undocumented` | 21 |
+| `scripts-undocumented` | 22 |
 | `source-or-analysis` | 53 |
 
 ## Curation Needs
 
 | Need | Experiments |
 | --- | ---: |
-| `add-smoke-command` | 131 |
-| `add-experiment-log` | 96 |
-| `document-run-path` | 74 |
+| `add-smoke-command` | 132 |
+| `add-experiment-log` | 97 |
+| `document-run-path` | 75 |
 | `add-artifact-manifest` | 28 |
 | `replace-generated-readme` | 13 |
 | `review-program-assignment` | 2 |
+| `add-primary-report` | 1 |
 
 ## Matrix
 
@@ -71,6 +72,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | yes | [`qwen35_4b_commit_slot_jacobian_value_transport`](../experiments/qwen35_4b_commit_slot_jacobian_value_transport/README.md) | interpretability_and_diagnostics, structured_execution_and_compilers, test_time_reasoning_budget | `human-authored` | [report](../experiments/qwen35_4b_commit_slot_jacobian_value_transport/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_commit_slot_semantic_power_replication`](../experiments/qwen35_4b_commit_slot_semantic_power_replication/README.md) | interpretability_and_diagnostics, structured_execution_and_compilers, test_time_reasoning_budget | `human-authored` | [report](../experiments/qwen35_4b_commit_slot_semantic_power_replication/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_confidence_guided_compute`](../experiments/qwen35_4b_confidence_guided_compute/README.md) | benchmark_generalization | `human-authored` | [report](../experiments/qwen35_4b_confidence_guided_compute/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
+| no | [`qwen35_4b_confidence_policy`](../experiments/qwen35_4b_confidence_policy/README.md) | evidence_conditioned_selection, interpretability_and_diagnostics, posttraining_and_adaptation, process_control_and_tool_use, reliability_and_safety, structured_execution_and_compilers, test_time_reasoning_budget | `human-authored` |  | no | `scripts-undocumented` | no | standard-artifact | add-primary-report, add-experiment-log, document-run-path, add-smoke-command |
 | yes | [`qwen35_4b_constrained_coverage_dpo`](../experiments/qwen35_4b_constrained_coverage_dpo/README.md) | algorithmic_memory_and_retrieval, evidence_conditioned_selection, posttraining_and_adaptation | `human-authored` | [report](../experiments/qwen35_4b_constrained_coverage_dpo/reports/final_report.md) | no | `scripts-undocumented` | no | large-artifact, run-data | add-experiment-log, document-run-path, add-smoke-command |
 | yes | [`qwen35_4b_context_composition`](../experiments/qwen35_4b_context_composition/README.md) | process_control_and_tool_use, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_context_composition/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_context_local_jacobian_clamp`](../experiments/qwen35_4b_context_local_jacobian_clamp/README.md) | interpretability_and_diagnostics, posttraining_and_adaptation, process_control_and_tool_use | `human-authored` | [report](../experiments/qwen35_4b_context_local_jacobian_clamp/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |

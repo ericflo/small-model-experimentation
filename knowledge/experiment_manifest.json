@@ -1118,7 +1118,7 @@
       ".log": 3,
       ".md": 5,
       ".png": 1,
-      ".py": 9,
+      ".py": 10,
       ".yaml": 3
     },
     "id": "qwen35_4b_code_confidence",
@@ -1150,8 +1150,8 @@
       "scripts",
       "src"
     ],
-    "total_files": 24,
-    "total_size_bytes": 2458094
+    "total_files": 25,
+    "total_size_bytes": 2463569
   },
   {
     "file_counts": {
@@ -1263,6 +1263,44 @@
     ],
     "total_files": 17,
     "total_size_bytes": 334535
+  },
+  {
+    "file_counts": {
+      ".json": 4,
+      ".log": 2,
+      ".md": 1,
+      ".py": 4,
+      ".yaml": 2
+    },
+    "id": "qwen35_4b_confidence_policy",
+    "path": "experiments/qwen35_4b_confidence_policy",
+    "primary_readme": "experiments/qwen35_4b_confidence_policy/README.md",
+    "primary_report": "",
+    "research_programs": [
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "posttraining_and_adaptation",
+      "process_control_and_tool_use",
+      "reliability_and_safety",
+      "structured_execution_and_compilers",
+      "test_time_reasoning_budget"
+    ],
+    "source_track": "new",
+    "summary": "The confidence arc established three levers in isolation: confidence-select beats majority vote (C41), the single-token P(True) judge beats sequence mean-logprob (C46), and answer-token probability predicts correctness for abstention (C40). None were ever fused into one deployable decision policy, and none were plotted against sample-more at **equal compute** \u2014 the capstone C41/C46 explicitly owed.",
+    "tags": [
+      "abi",
+      "policy",
+      "small-model",
+      "verification"
+    ],
+    "title": "Qwen3.5-4B: The Compute-Optimal Confidence Policy (select + abstain + escalate)",
+    "top_level_dirs": [
+      "reports",
+      "runs",
+      "scripts"
+    ],
+    "total_files": 13,
+    "total_size_bytes": 1023917
   },
   {
     "file_counts": {

@@ -1,0 +1,10 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_confidence_policy"
+external_artifacts: []
+omitted_artifacts: []
+reproducibility:
+  smoke_command: "python experiments/qwen35_4b_confidence_policy/scripts/frontier.py"
+  full_command: "python ../qwen35_4b_code_confidence/scripts/gen_budget.py --n 120 --k 6 --budgets 256 2048 && python experiments/qwen35_4b_confidence_policy/scripts/escalation.py"
+  required_external_artifacts: []
+notes: "No external artifacts: no training, no adapters. Part 1 (frontier.py) is pure post-hoc CPU analysis over the cached experiments/qwen35_4b_code_confidence/runs/code_conf.json (checked in). Part 2 regenerates two think-mode MBPP candidate pools (runs/pool_think_b256.json, runs/pool_think_b2048.json, both checked in, aggregate per-candidate fields only) on an RTX 4090 in ~1.5h via the sibling gen_budget.py; escalation.py then analyzes them on CPU. Requires the offline HF cache of google-research-datasets/mbpp and the local Qwen3.5-4B weights."

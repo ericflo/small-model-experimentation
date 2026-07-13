@@ -1,0 +1,6 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[gb] 120 MBPP records; budgets [2048]
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|██████████| 2/2 [00:00<00:00, 19284.16it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<01:24,  5.02it/s]Loading weights:  10%|▉         | 41/426 [00:00<00:02, 168.17it/s]Loading weights:  19%|█▉        | 80/426 [00:00<00:01, 248.86it/s]Loading weights:  29%|██▉       | 124/426 [00:00<00:00, 313.92it/s]Loading weights:  40%|████      | 171/426 [00:00<00:00, 361.15it/s]Loading weights:  50%|████▉     | 212/426 [00:00<00:00, 372.56it/s]Loading weights:  61%|██████    | 258/426 [00:00<00:00, 393.86it/s]Loading weights:  70%|███████   | 299/426 [00:00<00:00, 398.58it/s]Loading weights:  80%|███████▉  | 340/426 [00:01<00:00, 386.01it/s]Loading weights:  89%|████████▉ | 380/426 [00:01<00:00, 375.33it/s]Loading weights:  98%|█████████▊| 419/426 [00:01<00:00, 353.17it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 332.54it/s]
+[gb] === budget 2048 ===
+[gb] wrote /home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_confidence_policy/runs/pool_think_b2048.json | pass-rate 0.589 | mean n_think 138

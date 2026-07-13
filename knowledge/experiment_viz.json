@@ -47525,6 +47525,85 @@
      "source": "experiments/qwen35_4b_semantic_policy_headroom_tournament/reports/result_receipt.json"
     }
    ]
+  },
+  "qwen35_4b_confidence_policy": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Escalating hard tasks to more think budget beats more samples (matched compute)",
+     "categories": [
+      "hardest 20%",
+      "hardest 30%",
+      "hardest 40%",
+      "hardest 50%"
+     ],
+     "series": [
+      {
+       "label": "base (2 samples @ budget 256)",
+       "values": [
+        0.25,
+        0.361,
+        0.354,
+        0.4
+       ]
+      },
+      {
+       "label": "escalate to budget 2048",
+       "values": [
+        0.458,
+        0.5,
+        0.479,
+        0.467
+       ]
+      },
+      {
+       "label": "more samples @ 256 (matched compute)",
+       "values": [
+        0.304,
+        0.417,
+        0.416,
+        0.423
+       ]
+      }
+     ],
+     "x_label": "abstained (low-confidence) task subset",
+     "y_label": "MBPP accuracy on the subset",
+     "y_format": "decimal",
+     "note": "Verifier-free confidence-select within each arm; token-matched compute. n=24-60 per subset.",
+     "source": "experiments/qwen35_4b_confidence_policy/runs/escalation.json"
+    },
+    {
+     "kind": "bar",
+     "title": "P(True) confidence-select is the best verifier-free selector (MBPP, k=9)",
+     "categories": [
+      "greedy",
+      "majority-vote",
+      "mean-logprob",
+      "P(True)-select",
+      "execution-line",
+      "oracle"
+     ],
+     "series": [
+      {
+       "label": "MBPP accuracy at 9 candidates",
+       "values": [
+        0.7008,
+        0.7418,
+        0.7254,
+        0.7623,
+        0.8402,
+        0.8484
+       ]
+      }
+     ],
+     "x_label": "selection rule",
+     "y_label": "accuracy",
+     "y_format": "decimal",
+     "note": "greedy/majority/mean-logprob/P(True) are verifier-free; execution-line and oracle require a grader.",
+     "source": "experiments/qwen35_4b_confidence_policy/runs/frontier.json"
+    }
+   ]
   }
  }
 }
