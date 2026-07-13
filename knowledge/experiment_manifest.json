@@ -1420,9 +1420,9 @@
   },
   {
     "file_counts": {
-      ".json": 1,
-      ".jsonl": 2,
-      ".md": 8,
+      ".json": 2,
+      ".jsonl": 3,
+      ".md": 9,
       ".py": 3,
       ".yaml": 3
     },
@@ -1437,13 +1437,14 @@
       "test_time_reasoning_budget"
     ],
     "source_track": "new",
-    "summary": "`interpretability_and_diagnostics`. `qwen35_4b_thinking_content_vs_compute`, and `qwen35_4b_confidence_guided_compute`.",
+    "summary": "Terminal `NO_ORDER_SUPPORT_SELECTOR`: ordered-minus-exact-shuffle probability beats hard voting but not confidence/entropy robustly or the task-mismatch control, so confirmation and a fresh matched-compute run remain sealed.",
     "tags": [
       "abi",
       "small-model"
     ],
     "title": "Qwen3.5-4B Counterfactual Order-Support Selector",
     "top_level_dirs": [
+      "analysis",
       "configs",
       "data",
       "reports",
@@ -1452,8 +1453,8 @@
       "src",
       "tests"
     ],
-    "total_files": 17,
-    "total_size_bytes": 1314506
+    "total_files": 20,
+    "total_size_bytes": 1425566
   },
   {
     "file_counts": {

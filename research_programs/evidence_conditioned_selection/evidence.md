@@ -58,6 +58,16 @@
   measured after conditioning, on disjoint outcomes, rather than inferred
   from component-score reliability.
 
+- [qwen35_4b_counterfactual_order_support_selector](../../experiments/qwen35_4b_counterfactual_order_support_selector/reports/report.md)
+  adds a forward-counterfactual boundary. The label-free mean per-alias ordered-
+  minus-exact-shuffle probability reached 43/113 (0.381), beating first trace
+  31/113 and majority 33/113 with positive paired lower bounds. But it was only
+  +2 tasks over minimum entropy and +3 over max confidence, with lower bounds
+  -0.035/-0.027, and an oracle-balanced task-mismatched shuffle reached 44/113.
+  Thus the replicated coherent-content group effect contains weak selection
+  information but raw subtraction is not a robust, task-specific selector.
+  Confirmation and the K=3-versus-K=6 matched-compute successor stayed sealed.
+
 ## Current Read
 
 The biggest strategic gap is selection under deployable evidence — and C10/C46 say that gap is *fixable* with
@@ -85,3 +95,9 @@ small and the selected tail is reused as the curriculum. For policy routing,
 estimate direct advantages with cross-fitting, expose abstention and per-route
 support, and retain independent block signs; a positive pooled router average
 cannot certify every named teacher.
+
+The order-support negative adds a group-to-instance warning. A perturbation can
+causally improve correctness on average and its signed probability vector can
+beat hard voting, yet still fail against cheap confidence/entropy or a relevance
+control. Before spending matched compute, require the counterfactual readout to
+add task-specific information beyond ordinary probability geometry.

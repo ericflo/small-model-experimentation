@@ -3,35 +3,35 @@
  "generated_on": "2026-07-05",
  "experiments": {
   "qwen35_4b_counterfactual_order_support_selector": {
-   "verdict_tag": "A clean test is locked; no selector result yet",
+   "verdict_tag": "Meaningful order helps, but not enough to trust this selector",
    "concept_primer": "The model answered each puzzle after writing a long scratchpad. We also kept a version with exactly the same scratchpad words scrambled. The new idea is to ask which answer gained the most support from meaningful word order rather than from the words merely being present.",
    "plain_question": "Can the change caused by meaningful scratchpad order tell us which of twelve possible answers to trust, without revealing the correct answer?",
-   "plain_answer": "Not known yet. The rule and all comparisons are locked, 113 development puzzles passed data checks, and the separate confirmation set remains unopened. The rule must beat five ordinary ways of combining three attempts before it earns a new, fairly cost-matched run.",
-   "why_it_matters": "A group-level benefit from good reasoning is not automatically useful on the next puzzle. This test asks whether that benefit can actually choose answers, while preventing a promising average from being mistaken for a deployable capability.",
-   "verdict_tone": "neutral",
+   "plain_answer": "Not reliably. The meaningful-order rule got 43 of 113 puzzles right, clearly better than first attempt or majority vote. But it was only two puzzles ahead of simply choosing the most decisive attempt, and a deliberately mismatched scrambled scratchpad did one puzzle better. Those small differences could be noise, so the separate confirmation set stayed closed.",
+   "why_it_matters": "Averaging the model's full answer probabilities can recover useful weak clues that voting throws away. But the exact scrambled counterpart was not doing enough task-specific work to justify its extra cost. Future work should change the reasoning path itself, not keep polishing this final score.",
+   "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Development puzzles checked",
-     "value": "113",
-     "sub": "three ordered scratchpads and three exact-word-scrambled controls per puzzle"
+     "label": "Meaningful-order rule",
+     "value": "43 / 113",
+     "sub": "38.1% correct, versus 29.2% for majority vote"
     },
     {
-     "label": "Separate confirmation puzzles opened",
-     "value": "0",
-     "sub": "they stay sealed unless every development gate passes"
+     "label": "Lead over simplest strong confidence rule",
+     "value": "2 puzzles",
+     "sub": "too small for a reliable advantage"
     },
     {
-     "label": "Ordinary answer-combining methods to beat",
-     "value": "5",
-     "sub": "including majority vote, average probabilities, and strongest single attempt"
+     "label": "Correct answers found outside all three votes",
+     "value": "8",
+     "sub": "weak probability clues sometimes recover a new answer"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Only the development set is available",
-     "chart_read": "The first bar counts development puzzles whose paired files passed every structural check. The second counts confirmation puzzles made available to this analysis.",
-     "chart_takeaway": "The test has a real firewall: all 113 development puzzles are ready, while confirmation remains at zero until the locked rule succeeds."
+     "chart_plain_title": "A clear win over voting, but no clear win over confidence",
+     "chart_read": "Each bar is the share of 113 puzzles answered correctly by one way of combining three attempts; taller is better. The mismatched-scratchpad bar is a diagnostic with hidden balancing information, not a usable method.",
+     "chart_takeaway": "Meaningful-order subtraction rises above first attempt and majority, yet barely edges the strongest ordinary confidence bars and loses to the diagnostic mismatch, so it does not qualify."
     }
    ]
   },

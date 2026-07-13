@@ -17,4 +17,7 @@ notes: >-
   Qualification rows are hash-identical copies of committed parent artifacts.
   Confirmation rows are intentionally absent and confirmation fails closed
   unless qualification passes and a separate pushed boundary authorizes copying
-  the two expected-hash parent artifacts. No model or large artifact is needed.
+  the two expected-hash parent artifacts. Qualification is terminal
+  NO_ORDER_SUPPORT_SELECTOR, so confirmation stays absent. The deterministic
+  qualification summary and task predictions are committed. No model or large
+  artifact is needed.

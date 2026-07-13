@@ -16,6 +16,10 @@
   coverage versus 56/60 selected gap without model confidence.
 - Train visible-only selectors on candidate pools with explicit false-pass labels held out by family.
 - Compare public-test augmentation, generated counterexamples, consensus, and code/verifier reranking on the same pool.
+- Retire raw ordered-minus-exact-shuffle probability as a commit-logit selector:
+  it beat majority but not confidence/entropy with uncertainty, and task-matched
+  shuffle was no better than an oracle-balanced mismatched shuffle. Any
+  successor must change the continuation/proposal state, not retune this score.
 - Build an abstaining selector benchmark that reports precision, recall, and coverage separately.
 - Stress selectors under intentionally adversarial visible examples.
 - Convert oracle ceiling reports into deployable-gap scorecards.

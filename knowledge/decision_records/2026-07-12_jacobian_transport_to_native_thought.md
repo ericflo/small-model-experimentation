@@ -168,3 +168,26 @@ Do not spend a fresh split on midpoint-specific J or reopen causal patching.
 The durable positive is semantic: coherent ordered thought changes the commit
 choice. The next deployment attempt must exploit that content without assuming
 a scalar native J certainty coordinate and must beat matched-compute sampling.
+
+## Seventh successor outcome
+
+`qwen35_4b_counterfactual_order_support_selector` tested a vector-valued forward
+counterfactual rather than another learned scalar. On the 113-task qualification,
+argmax mean per-alias ordered-minus-exact-shuffle probability reached 43/113,
+beating first trace 31/113 and majority 33/113 with positive paired lower
+bounds. It also recovered eight correct answers outside all three ordered
+argmax choices.
+
+The frozen decision is nevertheless `NO_ORDER_SUPPORT_SELECTOR`. Candidate
+minus minimum entropy was only +2/113 and candidate minus max confidence +3/113;
+both uncertainty bounds crossed zero and both missed the 3pp gate. An explicitly
+oracle-balanced task-mismatched shuffle reached 44/113. Confirmation artifacts
+remain absent, and the extra-shuffle compute was never compared with K=6 sample
+more.
+
+This sharpens the deployment boundary: the coherent semantic effect is visible
+in the full probability vector, but terminal readout manipulation is not a
+robust task-specific value mechanism. Do not tune log ratios, residualizers, or
+J/value scores on these outcomes. The next native-thought attempt must act
+before commit to change continuation/proposal coverage and must be a distinct
+fresh matched-compute experiment.

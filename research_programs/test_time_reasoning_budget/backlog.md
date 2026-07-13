@@ -58,6 +58,11 @@
   and tied margin 0.540, so do not open the proposed phase-specific successor.
   Test label-free ways of using coherent-thought diversity against matched-
   compute sampling instead.
+- The first such selector is terminal `NO_ORDER_SUPPORT_SELECTOR`: exact-shuffle
+  probability deltas beat hard voting but not confidence/entropy robustly and
+  failed relevance control. Do not retune terminal logits. A new successor must
+  use fixed cap 1,024 to change the continuation/proposal distribution and beat
+  matched-forward-token sample-more.
 - Completed cross-program qualification negative:
   `qwen35_4b_pareto_policy_integration` found that C54's short/deep tier labels
   did not become a clean procedural teacher crossover. `blend` lost both quick

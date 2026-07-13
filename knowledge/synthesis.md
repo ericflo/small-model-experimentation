@@ -349,6 +349,18 @@ spend a fresh split on the scalar midpoint J hypothesis. Preserve the replicated
 coherent-content seam and seek label-free semantic interventions with matched-
 compute controls.
 
+The first non-scalar attempt is also gated negative. On 113 tasks, choosing the
+alias with largest mean `P(ordered)-P(exact shuffle)` reached 0.3805 accuracy,
+well above hard majority at 0.2920. It even recovered eight correct aliases not
+chosen by any of the three paths. But it was only +0.0177 over minimum entropy
+and +0.0265 over max confidence, with one-sided paired bounds below zero, while
+an explicitly oracle-balanced task-mismatched shuffle reached 0.3894. Terminal
+`NO_ORDER_SUPPORT_SELECTOR` left confirmation absent. The combined lesson is
+now sharper: coherent thought transports answer-relevant semantics, but neither
+a shared J scalar nor raw terminal counterfactual attribution reliably values
+individual tasks. Stop re-ranking this commit state; move interventions earlier
+to create different continuations/proposals, then demand a matched-compute win.
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.

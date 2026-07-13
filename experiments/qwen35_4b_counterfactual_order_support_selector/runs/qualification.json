@@ -1,0 +1,139 @@
+{
+  "accuracies": {
+    "first_trace": 0.2743362831858407,
+    "majority_real": 0.2920353982300885,
+    "max_confidence_trace": 0.35398230088495575,
+    "mean_order_probability_delta": 0.3805309734513274,
+    "mean_real_probability": 0.3274336283185841,
+    "minimum_entropy_trace": 0.36283185840707965,
+    "oracle_alias_balanced_task_mismatch": 0.3893805309734513,
+    "reverse_order_probability_delta": 0.07079646017699115
+  },
+  "candidate_in_real_choice_pool_rate": 0.7610619469026548,
+  "candidate_predicted_aliases": [
+    "apple",
+    "cat",
+    "circle",
+    "dog",
+    "gold",
+    "lemon",
+    "ocean",
+    "river",
+    "silver",
+    "square",
+    "tiger"
+  ],
+  "candidate_successful_aliases": [
+    "apple",
+    "cat",
+    "circle",
+    "dog",
+    "gold",
+    "ocean",
+    "river",
+    "silver",
+    "square",
+    "tiger"
+  ],
+  "comparisons": {
+    "first_trace": {
+      "candidate_minus_comparator": 0.10619469026548672,
+      "losses": 5,
+      "paired_one_sided_95_lower": 0.04424778761061947,
+      "ties": 91,
+      "wins": 17
+    },
+    "majority_real": {
+      "candidate_minus_comparator": 0.08849557522123894,
+      "losses": 6,
+      "paired_one_sided_95_lower": 0.02654867256637168,
+      "ties": 91,
+      "wins": 16
+    },
+    "max_confidence_trace": {
+      "candidate_minus_comparator": 0.02654867256637168,
+      "losses": 6,
+      "paired_one_sided_95_lower": -0.02654867256637168,
+      "ties": 98,
+      "wins": 9
+    },
+    "mean_real_probability": {
+      "candidate_minus_comparator": 0.05309734513274336,
+      "losses": 7,
+      "paired_one_sided_95_lower": -0.008849557522123894,
+      "ties": 93,
+      "wins": 13
+    },
+    "minimum_entropy_trace": {
+      "candidate_minus_comparator": 0.017699115044247787,
+      "losses": 7,
+      "paired_one_sided_95_lower": -0.035398230088495575,
+      "ties": 97,
+      "wins": 9
+    },
+    "oracle_alias_balanced_task_mismatch": {
+      "candidate_minus_comparator": -0.008849557522123894,
+      "losses": 9,
+      "paired_one_sided_95_lower": -0.07079646017699115,
+      "ties": 96,
+      "wins": 8
+    }
+  },
+  "confirmation_boundary": null,
+  "confirmation_opened": false,
+  "decision": "NO_ORDER_SUPPORT_SELECTOR",
+  "gate_checks": {
+    "all_comparisons_reachable": true,
+    "all_paired_lowers": false,
+    "all_point_gains": false,
+    "candidate_accuracy_range": true,
+    "chosen_alias_support": true,
+    "correct_alias_support": true,
+    "reverse_delta_gap": true
+  },
+  "implementation_hashes": {
+    "config_sha256": "a4a0e3ff05bfc5daf3c9ddc1b18418ecfee07361002240999b076e87c649da39",
+    "runner_sha256": "ce53ccc31c69b13c2bc2dbff5560120760367cf3989651d0d5debe1088d4670f",
+    "selector_sha256": "f1493c883e1d262073f6dd385d2b240bd88c70b1f0f8d7fd259fef291ce0c5bb"
+  },
+  "matched_compute_capability_claim": false,
+  "model_loaded": false,
+  "passed": false,
+  "primary": "mean_order_probability_delta",
+  "reachability": {
+    "first_trace": true,
+    "majority_real": true,
+    "max_confidence_trace": true,
+    "mean_real_probability": true,
+    "minimum_entropy_trace": true,
+    "oracle_alias_balanced_task_mismatch": true
+  },
+  "schema_version": 1,
+  "scientific_scope": "retrospective_selector_signal_not_matched_compute_capability",
+  "source_receipt": {
+    "alias_count": 12,
+    "alias_token_ids": [
+      7993,
+      5388,
+      14780,
+      49993,
+      22544,
+      28503,
+      14367,
+      17415,
+      14527,
+      6414,
+      12307,
+      9057
+    ],
+    "paired_probability_rows": 339,
+    "real_sha256": "00e81f4cf7cf281fc5bfe0bf94544b5906b9d3d0303e2fde69e87c985bd8d82d",
+    "rows_per_arm": 339,
+    "shuffled_sha256": "7e3728ef4c9f5dcf02b9fb1ede29e4cc3c7057fc9ba7763fbd36e3970ebb311b",
+    "tasks": 113,
+    "token_multiset_controls_passed": 339,
+    "traces_per_task": 3
+  },
+  "split": "qualification",
+  "tasks": 113
+}

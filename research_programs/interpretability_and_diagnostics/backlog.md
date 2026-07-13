@@ -32,6 +32,11 @@
   J to 0.538 (lower 0.442), below matched non-J 0.600 and tied margin 0.540;
   retire this J-axis successor and redirect to mechanisms that exploit coherent
   thought without assuming scalar J certainty.
+- Raw ordered-minus-exact-shuffle probability also failed as a vector-valued
+  commit selector: 0.381 beat majority but not confidence/entropy robustly, and
+  exact task matching did not beat an oracle-balanced mismatch. Do not tune the
+  score; move Jacobian/counterfactual work before the commit to alter proposals
+  or continuations under matched compute.
 - If native thought-state transport passes, train a non-oracle prefix controller
   and require a replicated held-out capability gain over frozen Qwen3.5-4B and
   matched-compute sampling. Oracle donor selection is a mechanism control, not

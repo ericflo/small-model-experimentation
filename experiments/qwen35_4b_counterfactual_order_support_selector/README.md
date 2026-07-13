@@ -1,5 +1,9 @@
 # Qwen3.5-4B Counterfactual Order-Support Selector
 
+Terminal `NO_ORDER_SUPPORT_SELECTOR`: ordered-minus-exact-shuffle probability
+beats hard voting but not confidence/entropy robustly or the task-mismatch
+control, so confirmation and a fresh matched-compute run remain sealed.
+
 ## Research Program
 
 - Program: `evidence_conditioned_selection`
@@ -76,16 +80,49 @@ PYTHONDONTWRITEBYTECODE=1 .venv/bin/python \
 
 ## Results
 
-Pending. Confirmation and fresh GPU work are sealed.
+Terminal qualification decision: `NO_ORDER_SUPPORT_SELECTOR`. The registered
+raw probability-delta rule reached 43/113 (38.05%), substantially above first
+trace (31/113), majority (33/113), and mean ordered probability (37/113). It
+nevertheless missed the conjunctive direct-control standard: minimum-entropy
+selection reached 41/113 and max-confidence 40/113, so candidate gains were
+only +1.77pp and +2.65pp with one-sided paired lower bounds -3.54pp and
+-2.65pp. The oracle-balanced task-mismatched shuffle reached 44/113, one task
+better than the candidate.
+
+| selector/control | accuracy | candidate gap | paired lower |
+| --- | ---: | ---: | ---: |
+| order-support delta | 38.05% | — | — |
+| first trace | 27.43% | +10.62pp | +4.42pp |
+| majority | 29.20% | +8.85pp | +2.65pp |
+| mean ordered probability | 32.74% | +5.31pp | -0.88pp |
+| max-confidence trace | 35.40% | +2.65pp | -2.65pp |
+| minimum-entropy trace | 36.28% | +1.77pp | -3.54pp |
+| oracle-balanced mismatch | 38.94% | -0.88pp | -7.08pp |
+| reverse delta | 7.08% | +30.97pp | diagnostic |
+
+Accuracy, reachability, breadth, and reverse-delta gates passed; mandatory
+point-gain and uncertainty gates failed. Predictions spanned 11 aliases and
+successes 10 target aliases. Twenty-seven predictions were absent from the
+three ordered argmax choices, and eight of those were correct, showing that the
+delta sometimes extracts weak probability support beyond voting. That clue is
+insufficient for qualification.
+
+Confirmation artifacts remain absent. No fresh matched-compute run, causal
+stage, or capability claim is licensed.
 
 ## Interpretation
 
-Pending.
+The replicated ordered-thought group effect contains some per-task selection
+signal, but raw exact-shuffle subtraction is not reliably better than cheap
+confidence/entropy selection and is not specifically dependent on the matched
+task's shuffled distribution. Retire this exact selector rather than tune its
+transform on observed outcomes. The next capability mechanism must change the
+proposal/continuation, not merely re-rank the same commit logits.
 
 ## Knowledgebase Update
 
-- Program evidence updated: pending terminal result.
-- Program backlog updated: pending terminal result.
+- Program evidence updated: all three programs.
+- Program backlog updated: exact-shuffle support selection retired.
 - Claim ledger updated: no new claim from retrospective rows.
 
 ## Artifacts
@@ -100,4 +137,6 @@ Pending.
   adversarial review.
 - `reports/pre_qualification_implementation_audit.md`: 36 outcome-blind data,
   firewall, selector, statistics, and anchoring assertions.
+- `reports/post_qualification_adversarial_audit.md`: 12 post-result objections,
+  non-rescues, and the sealed-confirmation routing decision.
 - `reports/artifact_manifest.yaml`

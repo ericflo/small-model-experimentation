@@ -124,3 +124,13 @@ Diagnostics should become standard infrastructure. They are how future agents av
   non-J state 0.6000 and tied margin 0.5396; endpoint-only J was 0.4292.
   Phase-fit coefficient cosine was -0.0681. Do not spend fresh tasks or causal
   data on a midpoint J-axis replication.
+
+- [qwen35_4b_counterfactual_order_support_selector](../../experiments/qwen35_4b_counterfactual_order_support_selector/reports/report.md)
+  tested the non-scalar forward counterfactual next. Mean per-alias ordered-
+  minus-exact-shuffle probability reached 0.381 accuracy, beating majority
+  0.292 with paired lower +0.027, and recovered eight correct answers outside
+  the three argmax choices. But it was only +0.018 over minimum entropy and
+  +0.027 over max confidence with negative uncertainty bounds; a gold-balanced
+  task-mismatched shuffle reached 0.389. Terminal
+  `NO_ORDER_SUPPORT_SELECTOR` keeps confirmation absent. The causal group
+  contrast is informative but not a task-specific value readout.

@@ -210,3 +210,12 @@ phase-specific audit found midpoint-only J AUC 0.5375 (lower 0.4417), below
 equal-width non-J 0.6000 and tied slot margin 0.5396. The apparent midpoint lead
 is retired; keep the replicated semantic-content seam, not its failed scalar
 readout, and do not infer a larger token budget.
+
+The label-free counterfactual selector follow-up is also negative. Across the
+same 113 qualification tasks, choosing the largest mean alias probability gain
+from ordered over exact-shuffled thought reached 43/113, above majority 33/113
+but only two tasks above minimum entropy and three above max confidence; both
+uncertainty bounds crossed zero. A task-mismatched oracle-balanced shuffle
+control reached 44/113. The confirmation and K=3-versus-K=6 compute comparison
+stayed sealed. Coherent content is a real lever, but scoring its terminal logit
+effect is not yet a cost-justified controller.

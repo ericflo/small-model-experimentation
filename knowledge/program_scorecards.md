@@ -8,7 +8,7 @@ For evidence-linked durable claims, use [claims/index.md](claims/index.md).
 
 - Program: [charter](../research_programs/structured_execution_and_compilers/charter.md)
 - Current read: structured intermediates remain strong, but type-only partial viability is oracle-useful and model-unreadable; exact depth-5 list-DSL search is also cheaper than projected. The fixed `First:` compiler-output seam independently replicates at cap 1,024, but its shared task-held-out J-value readout is chance (0.502), below slot margin/non-J state. Midpoint and endpoint J rankings reverse (0.608/0.396), so a stable output seam is not one phase-invariant scalar compiler state.
-- Best next experiment: the phase audit retired midpoint J (0.538 versus non-J 0.600); keep the stable semantic output seam but test non-scalar, label-free thought interventions against matched compute. Separately measure the exact depth-6 resource crossover before learned pruning.
+- Best next experiment: midpoint J and terminal order-support selection both failed; if revisiting the semantic seam, intervene before commit to alter proposals/continuations under matched compute. Separately measure the exact depth-6 resource crossover before learned pruning.
 - Strong anchors: `qwen35_4b_partial_structure_search`, `qwen35_4b_crosssubstrate_structure`, `qwen35_4b_structure_search_scaling`, `qwen35_4b_commit_slot_semantic_power_replication`.
 - Avoid repeating: another type-only P(viable) judge, pooled-AUROC launch, or model-guided search without measured brute wall time.
 - Evidence that advances the program: causal ablation showing which intermediate structure transfers across family, length, or paraphrase shifts.
@@ -16,10 +16,10 @@ For evidence-linked durable claims, use [claims/index.md](claims/index.md).
 ## Evidence-Conditioned Selection
 
 - Program: [charter](../research_programs/evidence_conditioned_selection/charter.md)
-- Current read: confidence can rank completed candidates, but existential partial reachability is not automatically readable; C51 shows a score can condition on an unreachable state, and same-prefix routing shows reliable component values can still yield unstable winner-conditioned labels (quick audit-winner precision 6/26 in block 1).
+- Current read: confidence can rank completed candidates, but existential partial reachability is not automatically readable; C51 shows a score can condition on an unreachable state, and same-prefix routing shows reliable component values can still yield unstable winner-conditioned labels. The coherent-order delta likewise beat majority (0.381 vs 0.292) but not confidence/entropy robustly and failed task-relevance control.
 - Best next experiment: close the exact-pool visible-selector gap; for training-time policy routing, fit direct cross-fitted advantages and confirm a frozen rule on a third block rather than retrying statewise argmax.
 - Strong anchors: `qwen35_4b_partial_structure_search`, `qwen35_4b_generator_verifier_gap`, `qwen35_4b_code_confidence`, `qwen35_4b_answer_potential_trace_sft`, `qwen35_4b_same_prefix_advantage_routing`.
-- Avoid repeating: pooled-AUROC confidence claims, type-only partial judges, answer-only potential over cap-bound traces, posthoc winner margins, or accuracy gains that hide abstention/commit-rate changes.
+- Avoid repeating: pooled-AUROC confidence claims, type-only partial judges, answer-only potential over cap-bound traces, posthoc winner margins, raw ordered-minus-shuffle commit-logit tuning, or gains that hide abstention/commit-rate changes.
 - Evidence that advances the program: deployable selection gains under family-held-out candidate pools and adversarial visible examples.
 
 ## Active Evidence Acquisition
@@ -79,8 +79,8 @@ For evidence-linked durable claims, use [claims/index.md](claims/index.md).
 ## Interpretability And Diagnostics
 
 - Program: [charter](../research_programs/interpretability_and_diagnostics/charter.md)
-- Current read: diagnostics are useful when they explain why a mechanism transfers or fails, not when they are post-hoc decoration. Early context-local oracle J transport still replicates perfectly, and the cap-1,024 semantic answer seam now replicates twice. But the first native shared J-value test is terminal `NO_PREFIX_J_VALUE`: AUC 0.502 (lower 0.442), below slot margin 0.545 and equal-width non-J 0.529. The allowed phase audit then reduced midpoint-only J to 0.538 (lower 0.442), below non-J 0.600 and tied margin 0.540; no causal data opened.
-- Best next experiment: retire scalar native J certainty and test whether label-free transformations or consensus over coherent thought content can beat matched-compute sampling; do not patch causal states from this failed axis.
+- Current read: early context-local oracle J transport and the cap-1,024 semantic seam replicate, but shared J value is chance, midpoint-only J loses to non-J, and terminal ordered-minus-shuffle selection (0.381) is not robustly better than confidence/entropy or task-mismatch control. No causal/confirmation data opened.
+- Best next experiment: stop valuing the terminal commit state; test a fresh, label-free Jacobian/counterfactual intervention that changes continuations or proposal coverage and faces matched-compute sampling.
 - Strong anchors: `qwen_structural_compiler_attribution_ablation`, `qwen35_4b_probe_to_prompt`, `qwen35_4b_jacobian_value_transport`, `qwen35_4b_context_local_jacobian_clamp`, `qwen35_4b_jacobian_transport_control_replication`, `qwen35_4b_native_thought_jacobian_value_transport`, `qwen35_4b_native_thought_seam_budget_ladder`, `qwen35_4b_forced_commit_jacobian_value_transport`, `qwen35_4b_commit_slot_jacobian_value_transport`, `qwen35_4b_commit_slot_semantic_power_replication`.
 - Avoid repeating: probes that do not change the next experiment, next-token writing tests presented as reasoning transport, promoting a perfect point estimate past a failed control gate, or presenting an oracle donor as a deployable gain.
 - Evidence that advances the program: a diagnostic predicts which variants will fail before the final metric is observed.
@@ -106,8 +106,8 @@ For evidence-linked durable claims, use [claims/index.md](claims/index.md).
 ## Test-Time Reasoning Budget
 
 - Program: [charter](../research_programs/test_time_reasoning_budget/charter.md)
-- Current read: native thinking is a real coherent-content lever, but its budget, termination, emission, and internal-value geometry are workload/phase-specific. Fixed `First:` exposes a replicated cap-1,024 semantic state, yet shared J is chance and midpoint-only J loses to non-J state. Every path still required external cap commit.
-- Best next experiment: keep cap 1,024 fixed and test label-free coherent-thought transformation/consensus against matched-compute sampling; retire the midpoint J selector while separately retaining the 16k+ loop-control line.
+- Current read: native thinking is a real coherent-content lever, but its budget, termination, emission, and internal-value geometry are workload/phase-specific. Fixed `First:` exposes a replicated semantic state, yet shared/midpoint J and terminal exact-shuffle selection all fail strong value controls. Every path still required external cap commit.
+- Best next experiment: keep cap 1,024 fixed but move the intervention before commit to create different continuations/proposals, then compare with matched-compute sampling; separately retain the 16k+ loop-control line.
 - Strong anchors: `qwen35_4b_thinking_content_vs_compute`, `qwen35_4b_overthinking_content_ladder`, `qwen35_4b_answer_potential_trace_sft`, `qwen35_4b_native_thought_seam_budget_ladder`, `qwen35_4b_forced_commit_jacobian_value_transport`, `qwen35_4b_commit_slot_jacobian_value_transport`, `qwen35_4b_commit_slot_semantic_power_replication`, `qwen35_4b_think_ftpo_round2`.
 - Avoid repeating: thinking-budget wins without content controls, calibration on a different workload class, cap-bound score interpretation, larger-N harvesting before termination/locality works, or treating high varentropy as a monotone “push harder” signal.
 - Evidence that advances the program: a controller or distillation that Pareto-beats fixed budgets, and a content control that isolates genuine reasoning from compute + scaffold + token-presence.

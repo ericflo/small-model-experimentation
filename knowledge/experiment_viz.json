@@ -5,26 +5,38 @@
   "qwen35_4b_counterfactual_order_support_selector": {
    "charts": [
     {
-     "title": "Data firewall before selector qualification",
+     "title": "Order support beats voting but not strong confidence controls",
      "kind": "bar",
      "categories": [
-      "qualification tasks validated",
-      "confirmation tasks opened"
+      "order-support delta",
+      "first trace",
+      "majority",
+      "mean probability",
+      "max confidence",
+      "minimum entropy",
+      "task-mismatched shuffle",
+      "reverse delta"
      ],
      "series": [
       {
-       "label": "task count",
+       "label": "exact task accuracy",
        "values": [
-        113,
-        0
+        0.3805309734513274,
+        0.2743362831858407,
+        0.2920353982300885,
+        0.3274336283185841,
+        0.35398230088495575,
+        0.36283185840707965,
+        0.3893805309734513,
+        0.07079646017699115
        ]
       }
      ],
-     "x_label": "design-boundary split state",
-     "y_label": "tasks",
-     "y_format": "integer",
-     "note": "The outcome-blind smoke validated all 113 qualification tasks and 339 paired rows per arm. Confirmation artifacts are absent and cannot open unless the frozen qualification gates pass after this boundary is committed and pushed.",
-     "source": "experiments/qwen35_4b_counterfactual_order_support_selector/runs/smoke.json",
+     "x_label": "label-free selector or control",
+     "y_label": "accuracy",
+     "y_format": "percent01",
+     "note": "The order-support vector beats first trace, majority, and mean probability, but its gains over max confidence and minimum entropy are too small and uncertain. The task-mismatched bar is an oracle-balanced mechanism control, not deployable. Qualification failed and confirmation stayed absent.",
+     "source": "experiments/qwen35_4b_counterfactual_order_support_selector/runs/qualification.json",
      "headline": true
     }
    ]
