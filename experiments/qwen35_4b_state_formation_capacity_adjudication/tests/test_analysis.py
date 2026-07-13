@@ -3,6 +3,7 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import os
 import sys
 import tempfile
 import unittest
@@ -13,7 +14,7 @@ from unittest import mock
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from src import analysis  # noqa: E402
+from src import analysis, safe_io  # noqa: E402
 from src.config import load_config  # noqa: E402
 
 
@@ -131,6 +132,226 @@ def effect(passes: bool = True) -> dict:
         "every_split_crossed_lcb_positive": passes,
         "splits": {},
     }
+
+
+class CanonicalAnalysisPathTests(unittest.TestCase):
+    def test_lineage_paths_reject_symlink_and_noncanonical_aliases(self) -> None:
+        with tempfile.TemporaryDirectory(dir=ROOT / "tests") as directory:
+            root = Path(directory)
+            real = root / "real"
+            real.mkdir()
+            payload = real / "receipt.json"
+            payload.write_text("{}\n", encoding="utf-8")
+            alias = root / "alias"
+            alias.symlink_to(real, target_is_directory=True)
+            canonical = payload.relative_to(analysis.REPO_ROOT).as_posix()
+            self.assertEqual(analysis._resolve_repo_path(canonical), payload)
+            with self.assertRaisesRegex(RuntimeError, "not canonical"):
+                analysis._resolve_repo_path(
+                    (alias / "receipt.json").relative_to(analysis.REPO_ROOT).as_posix()
+                )
+            for value in (
+                f"{real.relative_to(analysis.REPO_ROOT).as_posix()}/./receipt.json",
+                f"{real.relative_to(analysis.REPO_ROOT).as_posix()}/../real/receipt.json",
+                f"{real.relative_to(analysis.REPO_ROOT).as_posix()}//receipt.json",
+            ):
+                with self.subTest(value=value), self.assertRaisesRegex(
+                    RuntimeError, "not canonical"
+                ):
+                    analysis._resolve_repo_path(value)
+
+
+class AnalysisPublicationTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.config = load_config(ROOT / "configs" / "default.yaml")
+
+    def _analyze(
+        self,
+        output: Path,
+        *,
+        identity_extra: dict | None = None,
+    ) -> dict:
+        identity = {
+            "experiment_id": self.config["experiment_id"],
+            "model_id": "Qwen/Qwen3.5-4B",
+            "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+            "backend": "transformers",
+        }
+        identity.update(identity_extra or {})
+
+        def phase_identity(_config, phase):
+            return {**identity, "phase": phase}
+
+        with mock.patch.object(
+            analysis, "validate_design_receipt"
+        ), mock.patch.object(
+            analysis,
+            "_load_cell",
+            return_value=(synthetic_bundles(), [{"synthetic": True}]),
+        ), mock.patch.object(
+            analysis, "_adaptation_effects", return_value=effect(True)
+        ), mock.patch.object(
+            analysis, "_identity", side_effect=phase_identity
+        ):
+            return analysis.analyze_phase(
+                self.config,
+                ROOT / "runs",
+                "lora_joint",
+                output,
+            )
+
+    @staticmethod
+    def _staging_entries(directory: Path) -> list[Path]:
+        return list(directory.glob(".publish-*.tmp"))
+
+    def test_success_is_exact_single_link_and_immutable(self) -> None:
+        with tempfile.TemporaryDirectory(dir=ROOT / "tests") as directory:
+            parent = Path(directory)
+            output = parent / "analysis.json"
+            summary = self._analyze(output)
+            original = output.read_bytes()
+            original_inode = output.stat().st_ino
+
+            self.assertTrue(original.endswith(b"\n"))
+            self.assertEqual(json.loads(original.decode("utf-8")), summary)
+            self.assertEqual(output.stat().st_nlink, 1)
+            self.assertEqual(self._staging_entries(parent), [])
+
+            with self.assertRaisesRegex(
+                safe_io.StableArtifactError, "refusing to overwrite"
+            ):
+                self._analyze(output)
+            self.assertEqual(output.read_bytes(), original)
+            self.assertEqual(output.stat().st_ino, original_inode)
+            self.assertEqual(output.stat().st_nlink, 1)
+            self.assertEqual(self._staging_entries(parent), [])
+
+    def test_racing_collision_preserves_existing_leaf_and_cleans_stage(self) -> None:
+        sentinel = b"concurrent-winner\n"
+        original_rename = safe_io._rename_noreplace_at
+
+        def collide_then_rename(
+            source_directory_fd,
+            source_name,
+            destination_directory_fd,
+            destination_name,
+        ):
+            descriptor = os.open(
+                destination_name,
+                os.O_WRONLY | os.O_CREAT | os.O_EXCL,
+                0o600,
+                dir_fd=destination_directory_fd,
+            )
+            try:
+                os.write(descriptor, sentinel)
+                os.fsync(descriptor)
+            finally:
+                os.close(descriptor)
+            os.fsync(destination_directory_fd)
+            return original_rename(
+                source_directory_fd,
+                source_name,
+                destination_directory_fd,
+                destination_name,
+            )
+
+        with tempfile.TemporaryDirectory(dir=ROOT / "tests") as directory:
+            parent = Path(directory)
+            output = parent / "analysis.json"
+            with mock.patch.object(
+                safe_io, "_rename_noreplace_at", side_effect=collide_then_rename
+            ):
+                with self.assertRaisesRegex(
+                    safe_io.StableArtifactError, "refusing to overwrite"
+                ):
+                    self._analyze(output)
+            self.assertEqual(output.read_bytes(), sentinel)
+            self.assertEqual(output.stat().st_nlink, 1)
+            self.assertEqual(self._staging_entries(parent), [])
+
+    def test_symlink_leaf_ancestor_escape_and_noncanonical_alias_fail_closed(self) -> None:
+        with tempfile.TemporaryDirectory(dir=ROOT / "tests") as directory:
+            parent = Path(directory)
+            real = parent / "real"
+            real.mkdir()
+            ancestor_alias = parent / "ancestor-alias"
+            ancestor_alias.symlink_to(real, target_is_directory=True)
+            with self.assertRaises(safe_io.StableArtifactError):
+                self._analyze(ancestor_alias / "analysis.json")
+            self.assertFalse((real / "analysis.json").exists())
+
+            outside = parent / "outside.json"
+            outside.write_bytes(b"outside\n")
+            leaf_alias = parent / "leaf-alias.json"
+            leaf_alias.symlink_to(outside)
+            with self.assertRaisesRegex(
+                safe_io.StableArtifactError, "refusing to overwrite"
+            ):
+                self._analyze(leaf_alias)
+            self.assertTrue(leaf_alias.is_symlink())
+            self.assertEqual(outside.read_bytes(), b"outside\n")
+
+            subdirectory = parent / "subdirectory"
+            subdirectory.mkdir()
+            noncanonical = subdirectory / ".." / "aliased.json"
+            with self.assertRaisesRegex(
+                safe_io.StableArtifactError, "not canonical"
+            ):
+                self._analyze(noncanonical)
+            self.assertFalse((parent / "aliased.json").exists())
+            self.assertEqual(self._staging_entries(parent), [])
+
+        with tempfile.TemporaryDirectory() as outside_directory:
+            outside = Path(outside_directory) / "analysis.json"
+            with self.assertRaisesRegex(
+                safe_io.StableArtifactError, "escapes its trusted root"
+            ):
+                self._analyze(outside)
+            self.assertFalse(outside.exists())
+
+    def test_injected_writer_and_precommit_failures_leave_no_partial_output(self) -> None:
+        original_publish_file = safe_io.publish_new_file
+
+        def fail_during_write(root, path, _writer, *, mode=0o600):
+            def partial_writer(handle):
+                handle.write(b'{"partial":')
+                raise RuntimeError("injected analysis write failure")
+
+            return original_publish_file(root, path, partial_writer, mode=mode)
+
+        with tempfile.TemporaryDirectory(dir=ROOT / "tests") as directory:
+            parent = Path(directory)
+            write_output = parent / "write-failure.json"
+            with mock.patch.object(
+                safe_io, "publish_new_file", side_effect=fail_during_write
+            ):
+                with self.assertRaisesRegex(
+                    RuntimeError, "injected analysis write failure"
+                ):
+                    self._analyze(write_output)
+            self.assertFalse(os.path.lexists(write_output))
+            self.assertEqual(self._staging_entries(parent), [])
+
+            precommit_output = parent / "precommit-failure.json"
+            with mock.patch.object(
+                safe_io.os,
+                "fsync",
+                side_effect=OSError("injected analysis pre-commit failure"),
+            ):
+                with self.assertRaises(safe_io.StableArtifactError):
+                    self._analyze(precommit_output)
+            self.assertFalse(os.path.lexists(precommit_output))
+            self.assertEqual(self._staging_entries(parent), [])
+
+    def test_nonfinite_summary_is_rejected_before_any_publication(self) -> None:
+        with tempfile.TemporaryDirectory(dir=ROOT / "tests") as directory:
+            parent = Path(directory)
+            output = parent / "analysis.json"
+            with self.assertRaisesRegex(ValueError, "JSON compliant"):
+                self._analyze(output, identity_extra={"nonfinite": float("nan")})
+            self.assertFalse(os.path.lexists(output))
+            self.assertEqual(self._staging_entries(parent), [])
 
 
 class FormationSummaryTests(unittest.TestCase):
@@ -360,6 +581,227 @@ class AdaptationDependenceTests(unittest.TestCase):
             self.config, reversed_cell, lora
         )
         self.assertFalse(result["passes"])
+
+    def test_every_crossed_receipt_uses_the_single_registered_bootstrap_seed(self) -> None:
+        observed: list[int] = []
+
+        def bootstrap(records, *, resamples, seed):
+            observed.append(seed)
+            return {
+                "point": 1.0,
+                "ci95": [0.5, 1.0],
+                "model_seeds": sorted(records),
+                "tasks": len(next(iter(records.values()))),
+                "bootstrap_unit": "crossed_model_seed_by_task",
+                "bootstrap_seed": seed,
+                "resamples": resamples,
+            }
+
+        with mock.patch.object(analysis, "_crossed_bootstrap", side_effect=bootstrap):
+            adaptation = analysis._adaptation_effects(
+                self.config, synthetic_bundles()
+            )
+            fullrank = analysis._fullrank_minus_lora_contrast(
+                self.config,
+                synthetic_bundles(),
+                synthetic_bundles(
+                    trained_pass=False, depth_pass=False, joint_pass=False
+                ),
+            )
+        self.assertTrue(observed)
+        self.assertEqual(set(observed), {75301})
+        crossed = [*adaptation["splits"].values(), *fullrank["splits"].values()]
+        self.assertTrue(crossed)
+        self.assertEqual(
+            {receipt["bootstrap_seed"] for receipt in crossed}, {75301}
+        )
+
+
+class BranchEvidenceClosureIntegrationTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.config = load_config(ROOT / "configs" / "default.yaml")
+        cls.identity = {
+            "experiment_id": cls.config["experiment_id"],
+            "model_id": "Qwen/Qwen3.5-4B",
+            "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+            "backend": "transformers",
+            "config_sha256": "1" * 64,
+            "source_contract_sha256": "2" * 64,
+            "requirements_training_lock_sha256": "3" * 64,
+            "design_receipt_sha256": "4" * 64,
+            "design_receipt_identity_sha256": "5" * 64,
+        }
+
+    def test_root_producer_receipt_is_consumed_and_rehashed_evidence_edits_fail(self) -> None:
+        bundles = synthetic_bundles(
+            trained_pass=False, depth_pass=False, joint_pass=False
+        )
+        manifests = [{"seed": seed, "kind": "trigger"} for seed in SEEDS]
+        adaptation = {
+            "status": "ADAPTATION_CONTRAST_UNCERTAIN",
+            "passes": False,
+            "splits": {
+                "validation": {
+                    "bootstrap_seed": 75301,
+                    "bootstrap_unit": "crossed_model_seed_by_task",
+                }
+            },
+        }
+        with tempfile.TemporaryDirectory(dir=analysis.REPO_ROOT) as directory:
+            repo = Path(directory).resolve()
+            experiment = repo / "experiments" / self.config["experiment_id"]
+            runs_dir = experiment / "runs"
+            output = experiment / "analysis" / "lora_joint_trigger.json"
+            output.parent.mkdir(parents=True)
+
+            def identity(_config, phase):
+                return {**self.identity, "phase": phase}
+
+            patches = (
+                mock.patch.object(analysis, "_identity", side_effect=identity),
+                mock.patch.object(analysis, "validate_design_receipt"),
+                mock.patch.object(
+                    analysis,
+                    "_load_cell",
+                    return_value=(bundles, manifests),
+                ),
+                mock.patch.object(
+                    analysis,
+                    "_adaptation_effects",
+                    return_value=adaptation,
+                ),
+                mock.patch.object(
+                    analysis,
+                    "_branch_evidence_inputs",
+                    return_value=(self.config, runs_dir),
+                ),
+            )
+            for patcher in patches:
+                patcher.start()
+            try:
+                produced = analysis.analyze_phase(
+                    self.config, runs_dir, "lora_joint", output
+                )
+                canonical = output.relative_to(repo).as_posix()
+
+                def consume() -> dict:
+                    return analysis.validate_branch_authorization(
+                        repo,
+                        output,
+                        canonical_relative_path=canonical,
+                        branch=analysis.LORA_MISS_BRANCH,
+                        expected_identity=self.identity,
+                    )
+
+                self.assertEqual(
+                    consume()["receipt"]["receipt_identity_sha256"],
+                    produced["receipt_identity_sha256"],
+                )
+                alias = output.with_name("lora_joint_trigger_alias.json")
+                os.link(output, alias)
+                try:
+                    with self.assertRaisesRegex(RuntimeError, "hardlink"):
+                        consume()
+                finally:
+                    alias.unlink()
+                with mock.patch.object(
+                    analysis,
+                    "_load_cell",
+                    side_effect=RuntimeError("evaluation summary is missing"),
+                ):
+                    with self.assertRaisesRegex(RuntimeError, "summary is missing"):
+                        consume()
+                mutations = {
+                    "fabricated_minimal_evidence": lambda item: (
+                        item.__setitem__(
+                            "formation",
+                            {"status": "TRAINED_DEPTH_MISS", "passes": False},
+                        ),
+                        item.pop("adaptation_effect"),
+                        item.__setitem__("input_manifest", []),
+                    ),
+                    "deleted_manifest": lambda item: item.pop("input_manifest"),
+                    "substituted_manifest": lambda item: item.__setitem__(
+                        "input_manifest", [{"seed": 9999, "kind": "trigger"}]
+                    ),
+                    "substituted_formation": lambda item: item["formation"].__setitem__(
+                        "status", "TRAINED_PASS_DEPTH_EXTRAPOLATION_MISS"
+                    ),
+                }
+                for name, mutate in mutations.items():
+                    forged = copy.deepcopy(produced)
+                    forged.pop("receipt_identity_sha256")
+                    mutate(forged)
+                    forged["receipt_identity_sha256"] = analysis._canonical_sha256(
+                        forged
+                    )
+                    output.write_text(
+                        json.dumps(forged, indent=2, sort_keys=True) + "\n",
+                        encoding="utf-8",
+                    )
+                    with self.subTest(name=name), self.assertRaises(RuntimeError):
+                        consume()
+            finally:
+                for patcher in reversed(patches):
+                    patcher.stop()
+
+    def test_firewall_validates_the_exact_preopened_ledger_snapshot(self) -> None:
+        config = copy.deepcopy(self.config)
+        config["paths"]["data_dir"] = "data"
+        root_authorization = {
+            "path": "analysis/lora_joint_trigger.json",
+            "sha256": "1" * 64,
+            "receipt_identity_sha256": "2" * 64,
+            "status": "LORA_JOINT_MISS_CONTROLS_REQUIRED",
+            "phase": "lora_joint_analysis",
+        }
+        ledger = {
+            "schema_version": 1,
+            "status": "CONTRAST_ACCESS_LEDGER",
+            "events": [],
+            "receipt_identity_sha256": "3" * 64,
+        }
+        empty_sha256 = analysis._canonical_empty_ledger_sha256(ledger)
+        with tempfile.TemporaryDirectory() as directory:
+            repo = Path(directory).resolve()
+            experiment = repo / "experiments" / config["experiment_id"]
+            data_dir = experiment / "data"
+            data_dir.mkdir(parents=True)
+            (data_dir / "manifest.json").write_text("{}\n", encoding="utf-8")
+            firewall = {
+                "status": "CONTRAST_FIREWALL_UNOPENED",
+                "data_manifest_sha256": "d" * 64,
+                "ledger_path": (
+                    data_dir / "contrast_access_ledger.json"
+                ).relative_to(repo).as_posix(),
+                "ledger_sha256": empty_sha256,
+                "events": 0,
+                "authorization": root_authorization,
+            }
+            with mock.patch.object(analysis, "ROOT", experiment), mock.patch.object(
+                analysis, "REPO_ROOT", repo
+            ), mock.patch.object(
+                analysis, "read_verified_json_object", return_value={"files": {}}
+            ), mock.patch.object(
+                analysis, "validate_data_manifest"
+            ), mock.patch.object(
+                analysis,
+                "_read_stable_json_object",
+                return_value=(ledger, empty_sha256),
+            ), mock.patch.object(
+                analysis, "load_contrast_access_ledger", return_value=ledger
+            ) as loader:
+                analysis._validate_stage_b_firewall_evidence(
+                    config,
+                    experiment / "runs",
+                    firewall,
+                    root_authorization=root_authorization,
+                    stage_b_lineage={"unused": True},
+                    branch=analysis.STAGE_B_FULLRANK_MISS_BRANCH,
+                )
+        self.assertIs(loader.call_args.kwargs["payload"], ledger)
+        self.assertEqual(loader.call_args.kwargs["manifest_sha256"], "d" * 64)
 
 
 class ExactEvaluationMatrixTests(unittest.TestCase):
@@ -829,6 +1271,8 @@ class EvaluationCorpusBindingTests(unittest.TestCase):
         *,
         g0_setup: dict | None = None,
         positive_control_setup: dict | None = None,
+        preflight_error: RuntimeError | None = None,
+        events: list[str] | None = None,
     ) -> tuple[dict, dict[str, list[dict]], dict]:
         config = copy.deepcopy(self.config)
         config["paths"]["data_dir"] = "data"
@@ -939,6 +1383,13 @@ class EvaluationCorpusBindingTests(unittest.TestCase):
                 json.dumps(summary), encoding="utf-8"
             )
 
+            stable_summary_reader = analysis._read_stable_json_object
+
+            def read_summary(path: Path) -> tuple[dict, str]:
+                if events is not None:
+                    events.append("evaluation_summary")
+                return stable_summary_reader(path)
+
             def reopen_gate(entry: dict) -> dict:
                 setups = {
                     "g0": g0_setup,
@@ -946,9 +1397,46 @@ class EvaluationCorpusBindingTests(unittest.TestCase):
                 }
                 return {"setup": copy.deepcopy(setups[entry["kind"]])}
 
-            def read_rows(path: Path) -> list[dict]:
+            def contract_preflight(*_args, **_kwargs) -> dict:
+                if events is not None:
+                    events.append("contract_preflight")
+                if preflight_error is not None:
+                    raise preflight_error
+                return {
+                    "branch": {},
+                    "setup_barrier": {"status": "SETUP_BARRIER_COMPLETE"},
+                    "training_barrier": {
+                        "status": "REACHED_TRAINING_BARRIER_COMPLETE"
+                    },
+                    "training_cell": {},
+                    "checkpoint_path": checkpoint_path,
+                    "checkpoint": copy.deepcopy(checkpoint),
+                    "run": copy.deepcopy(run),
+                    "setup_gate_receipts": {
+                        "g0_lineage": reopen_gate(checkpoint["g0_lineage"]),
+                        "positive_control_lineage": reopen_gate(
+                            checkpoint["positive_control_lineage"]
+                        ),
+                    },
+                }
+
+            def bind_summary(*_args, **kwargs) -> dict:
+                return dict(kwargs["graph_preflight"])
+
+            def read_rows(path: Path, _expected_sha256: str) -> list[dict]:
+                if events is not None:
+                    events.append("evaluation_rows")
                 mode = "intact" if path.name == "rows_intact.jsonl" else "disabled"
                 return copy.deepcopy(rows[mode])
+
+            def validate_manifest(*_args, **_kwargs) -> None:
+                if events is not None:
+                    events.append("manifest_content")
+
+            def read_corpus(*_args) -> list[dict]:
+                if events is not None:
+                    events.append("task_rows")
+                return [copy.deepcopy(corpus_row)]
 
             patches = (
                 mock.patch.object(analysis, "ROOT", experiment_root),
@@ -959,12 +1447,32 @@ class EvaluationCorpusBindingTests(unittest.TestCase):
                 ),
                 mock.patch.object(analysis, "_sha256", return_value=digest),
                 mock.patch.object(
+                    analysis, "_read_stable_json_object", side_effect=read_summary
+                ),
+                mock.patch.object(
+                    analysis,
+                    "read_verified_json_object",
+                    return_value=copy.deepcopy(data_manifest),
+                ),
+                mock.patch.object(
                     analysis, "_checkpoint_identity", return_value=checkpoint_identity
+                ),
+                mock.patch.object(
+                    analysis,
+                    "_evaluation_graph_preflight",
+                    side_effect=contract_preflight,
+                ),
+                mock.patch.object(
+                    analysis,
+                    "_evaluation_contract_preflight",
+                    side_effect=bind_summary,
                 ),
                 mock.patch.object(
                     analysis, "_resolve_repo_path", side_effect=lambda value: Path(value).resolve()
                 ),
-                mock.patch.object(analysis, "validate_data_manifest"),
+                mock.patch.object(
+                    analysis, "validate_data_manifest", side_effect=validate_manifest
+                ),
                 mock.patch.object(
                     analysis,
                     "load_initialization_bundle",
@@ -979,8 +1487,12 @@ class EvaluationCorpusBindingTests(unittest.TestCase):
                 mock.patch.object(
                     analysis, "_validate_evaluation_rows", return_value={}
                 ),
-                mock.patch.object(analysis, "_read_jsonl", side_effect=read_rows),
-                mock.patch.object(analysis, "read_jsonl", return_value=[corpus_row]),
+                mock.patch.object(
+                    analysis, "_read_verified_jsonl", side_effect=read_rows
+                ),
+                mock.patch.object(
+                    analysis, "read_verified_jsonl_gzip", side_effect=read_corpus
+                ),
                 mock.patch.object(analysis, "verify_example"),
                 mock.patch.object(
                     analysis, "trajectory_targets", return_value=target_receipt
@@ -1042,6 +1554,535 @@ class EvaluationCorpusBindingTests(unittest.TestCase):
             "STATE_EVALUATION_COMPLETE",
         )
 
+    def test_contract_preflight_fails_before_any_manifest_or_result_content(self) -> None:
+        events: list[str] = []
+        with self.assertRaisesRegex(RuntimeError, "tracked terminal receipt missing"):
+            self.load(
+                self.rows(),
+                preflight_error=RuntimeError("tracked terminal receipt missing"),
+                events=events,
+            )
+        self.assertEqual(events, ["contract_preflight"])
+
+
+class AnalysisContractPreflightTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.config = load_config(ROOT / "configs" / "default.yaml")
+
+    @staticmethod
+    def lineage(path: str, status: str, phase: str, marker: str) -> dict:
+        return {
+            "path": path,
+            "sha256": marker * 64,
+            "receipt_identity_sha256": marker * 64,
+            "status": status,
+            "phase": phase,
+        }
+
+    def test_named_branch_uses_status_specific_canonical_path(self) -> None:
+        returned = {
+            "lineage": self.lineage(
+                "experiments/qwen35_4b_state_formation_capacity_adjudication/"
+                "analysis/lora_joint_trigger.json",
+                "LORA_JOINT_MISS_CONTROLS_REQUIRED",
+                "lora_joint_analysis",
+                "1",
+            )
+        }
+        with mock.patch.object(
+            analysis, "validate_branch_authorization", return_value=returned
+        ) as validator, mock.patch.object(
+            analysis, "_identity", return_value={"phase": "lora_joint_analysis"}
+        ):
+            self.assertEqual(
+                analysis._validate_named_branch(
+                    self.config, analysis.LORA_MISS_BRANCH
+                ),
+                returned,
+            )
+        args, kwargs = validator.call_args
+        self.assertEqual(args[0], analysis.REPO_ROOT)
+        self.assertEqual(
+            args[1], ROOT / "analysis" / "lora_joint_trigger.json"
+        )
+        self.assertEqual(kwargs["branch"], analysis.LORA_MISS_BRANCH)
+        self.assertEqual(
+            kwargs["canonical_relative_path"],
+            "experiments/qwen35_4b_state_formation_capacity_adjudication/"
+            "analysis/lora_joint_trigger.json",
+        )
+
+    def test_stage_c_rejects_nested_or_status_only_decoy_authorization(self) -> None:
+        decoy = self.lineage(
+            "analysis/nested/decoy.json",
+            "FULLRANK_STATE_ONLY_REQUIRED",
+            "fullrank_joint_analysis",
+            "2",
+        )
+        summary = {
+            "training_branch_authorization": decoy,
+            "contrast_authorization": None,
+        }
+        with mock.patch.object(analysis, "_validate_named_branch") as validator:
+            with self.assertRaisesRegex(RuntimeError, "canonical registered branch"):
+                analysis._evaluation_branch_context(
+                    self.config,
+                    summary,
+                    capacity="fullrank",
+                    objective="state_only",
+                    eval_set="trigger",
+                )
+        validator.assert_not_called()
+
+    def test_reached_barrier_is_ordered_and_binds_each_stage_authorization(self) -> None:
+        root = self.lineage(
+            "experiments/qwen35_4b_state_formation_capacity_adjudication/"
+            "analysis/lora_joint_trigger.json",
+            "LORA_JOINT_MISS_CONTROLS_REQUIRED",
+            "lora_joint_analysis",
+            "3",
+        )
+        context = {
+            "reached_stage": "B",
+            "root_lora_miss_lineage": root,
+            "training_authorization": root,
+        }
+        calls = []
+
+        def barrier(_root, stage, contracts, *, required_authorization):
+            calls.append((stage, contracts, required_authorization))
+            return {
+                "schema_version": 1,
+                "status": "TRAINING_BARRIER_COMPLETE",
+                "stage": stage,
+                "cells": [{"cell": f"stage-{stage}"}],
+                "branch_authorization_lineage": required_authorization,
+                "barrier_identity_sha256": stage.lower() * 64,
+            }
+
+        contracts = {"sentinel": object()}
+        setup_barrier = {"cells": []}
+        with mock.patch.object(
+            analysis, "_training_contracts", return_value=contracts
+        ), mock.patch.object(
+            analysis, "evaluation_barrier", side_effect=barrier
+        ), mock.patch.object(
+            analysis, "_bind_training_cells_to_setup"
+        ):
+            proof = analysis._reached_training_barrier(
+                self.config, context, setup_barrier
+            )
+        self.assertEqual([item[0] for item in calls], ["A", "B"])
+        self.assertIsNone(calls[0][2])
+        self.assertEqual(calls[1][2], root)
+        self.assertTrue(all(item[1] is contracts for item in calls))
+        self.assertEqual(proof["reached_stage"], "B")
+        claimed = proof["barrier_identity_sha256"]
+        self.assertEqual(
+            claimed,
+            analysis._canonical_sha256(
+                {
+                    key: value
+                    for key, value in proof.items()
+                    if key != "barrier_identity_sha256"
+                }
+            ),
+        )
+
+    def test_stage_b_setup_barrier_reopens_all_six_pairs_in_frozen_order(self) -> None:
+        root = self.lineage(
+            "experiments/qwen35_4b_state_formation_capacity_adjudication/"
+            "analysis/lora_joint_trigger.json",
+            "LORA_JOINT_MISS_CONTROLS_REQUIRED",
+            "lora_joint_analysis",
+            "8",
+        )
+        calls = []
+
+        def reopen(_config, *, capacity, model_seed, **kwargs):
+            calls.append((capacity, model_seed, kwargs["root_lora_miss_lineage"]))
+            marker = "a" if capacity == "lora" else "b"
+            targets = ["model.layers.12.self_attn.q_proj"]
+            target_digest = hashlib.sha256("\n".join(targets).encode()).hexdigest()
+            return {
+                "g0": {},
+                "control": {},
+                "g0_lineage": self.lineage(
+                    f"runs/setup/g0_{capacity}_seed{model_seed}.json",
+                    "MODEL_SMOKE_PASS",
+                    f"{capacity}_g0",
+                    marker,
+                ),
+                "control_lineage": self.lineage(
+                    f"runs/setup/positive_control_{capacity}_seed{model_seed}.json",
+                    "POSITIVE_CONTROL_PASS",
+                    f"{capacity}_positive_control",
+                    marker,
+                ),
+                "setup": {
+                    "capacity": capacity,
+                    "model_seed": model_seed,
+                    "tokenizer": {"vocabulary_sha256": "c" * 64},
+                    "adaptation_targets": targets,
+                    "adaptation_targets_sha256": target_digest,
+                    "adaptation_target_manifest": [
+                        {"name": targets[0], "shape": [2, 2]}
+                    ],
+                    "adaptation_target_manifest_sha256": marker * 64,
+                    "adaptation_parameters": 1 if capacity == "lora" else 4,
+                    "adaptation_zero_function": {"enabled_error": 0.0},
+                    "trainable_parameters": {
+                        "total": 10 if capacity == "lora" else 13,
+                        "tensor_count": 2,
+                        "values_sha256": str(model_seed) * 16,
+                    },
+                    "dropout_control": {"matched_adaptation_dropout": 0.05},
+                    "environment": {"device": {"name": "registered GPU"}},
+                    "installed_environment_lock": {"sha256": "d" * 64},
+                    "preflight_device": {"name": "registered GPU"},
+                    "shared_initialization": {"model_seed": model_seed},
+                },
+            }
+
+        with mock.patch.object(
+            analysis, "_reopen_setup_pair", side_effect=reopen
+        ), mock.patch.object(
+            analysis,
+            "strict_stable_setup_receipt",
+            side_effect=lambda value: dict(value),
+        ):
+            proof, cells = analysis._recompute_setup_barrier(
+                self.config,
+                stage="B",
+                data_manifest_sha256="d" * 64,
+                root_lora_miss_lineage=root,
+            )
+        expected_calls = [
+            (capacity, seed, root)
+            for capacity in ("lora", "fullrank")
+            for seed in SEEDS
+        ]
+        self.assertEqual(calls, expected_calls)
+        self.assertEqual(
+            list(cells),
+            [
+                f"{capacity}_seed{seed}"
+                for capacity in ("lora", "fullrank")
+                for seed in SEEDS
+            ],
+        )
+        self.assertEqual(proof["root_lora_miss_lineage"], root)
+        self.assertEqual(
+            proof["barrier_identity_sha256"],
+            analysis._canonical_sha256(
+                {
+                    key: value
+                    for key, value in proof.items()
+                    if key != "barrier_identity_sha256"
+                }
+            ),
+        )
+
+    def test_evaluation_access_claims_are_exact_and_type_strict(self) -> None:
+        summary = {
+            "authorizes_training": False,
+            "authorizes_result_training": False,
+            "authorizes_result_evaluation": False,
+            "benchmark_files_read": 0,
+            "result_payloads_opened": list(
+                self.config["evaluation"]["trigger_splits"]
+            ),
+            "sealed_contrast_payloads_opened": [],
+            "training_or_evaluation_started": True,
+            "scientific_evidence": True,
+            "contrast_access_event": None,
+        }
+        analysis._validate_evaluation_access_claims(
+            self.config, summary, eval_set="trigger"
+        )
+        mutations = {
+            "authorizes_result_evaluation": True,
+            "benchmark_files_read": False,
+            "result_payloads_opened": [],
+            "sealed_contrast_payloads_opened": ["contrast_depth"],
+            "training_or_evaluation_started": False,
+            "scientific_evidence": False,
+        }
+        for field, value in mutations.items():
+            altered = copy.deepcopy(summary)
+            altered[field] = value
+            with self.subTest(field=field), self.assertRaisesRegex(
+                RuntimeError, "access claim changed"
+            ):
+                analysis._validate_evaluation_access_claims(
+                    self.config, altered, eval_set="trigger"
+                )
+
+    def test_terminal_barrier_failure_and_rehashed_summary_tamper_fail_closed(self) -> None:
+        context = {
+            "reached_stage": "A",
+            "root_lora_miss_lineage": None,
+            "training_authorization": None,
+        }
+        setup_barrier = {"cells": []}
+        with mock.patch.object(
+            analysis, "_training_contracts", return_value={}
+        ), mock.patch.object(
+            analysis,
+            "evaluation_barrier",
+            side_effect=RuntimeError("tracked TRAINING_COMPLETE mirror missing"),
+        ):
+            with self.assertRaisesRegex(RuntimeError, "tracked TRAINING_COMPLETE"):
+                analysis._reached_training_barrier(
+                    self.config, context, setup_barrier
+                )
+
+        canonical = {
+            "schema_version": 1,
+            "status": "REACHED_TRAINING_BARRIER_COMPLETE",
+            "stages": [{"stage": "A", "cells": []}],
+            "reached_stage": "A",
+        }
+        canonical["barrier_identity_sha256"] = analysis._canonical_sha256(canonical)
+        tampered = copy.deepcopy(canonical)
+        tampered["stages"][0]["cells"] = [{"cell": "orphan"}]
+        tampered["barrier_identity_sha256"] = analysis._canonical_sha256(
+            {
+                key: value
+                for key, value in tampered.items()
+                if key != "barrier_identity_sha256"
+            }
+        )
+        setup_proof = {"status": "SETUP_BARRIER_COMPLETE"}
+        summary = {
+            "data_manifest_sha256": "d" * 64,
+            "setup_barrier": setup_proof,
+            "training_barrier": tampered,
+        }
+        with mock.patch.object(
+            analysis, "_evaluation_branch_context", return_value=context
+        ), mock.patch.object(
+            analysis, "_validate_evaluation_access_claims"
+        ), mock.patch.object(
+            analysis,
+            "_recompute_setup_barrier",
+            return_value=(setup_proof, {}),
+        ), mock.patch.object(
+            analysis, "_reached_training_barrier", return_value=canonical
+        ), mock.patch.object(
+            analysis, "_current_training_cell_proof"
+        ) as cell_proof:
+            with self.assertRaisesRegex(RuntimeError, "training barrier changed"):
+                analysis._evaluation_contract_preflight(
+                    self.config,
+                    summary,
+                    capacity="lora",
+                    objective="joint",
+                    seed=7411,
+                    eval_set="trigger",
+                )
+        cell_proof.assert_not_called()
+
+    def test_rehashed_target_cell_proof_cannot_replace_barrier_selected_cell(self) -> None:
+        context = {
+            "reached_stage": "A",
+            "root_lora_miss_lineage": None,
+            "training_authorization": None,
+        }
+        setup_proof = {"status": "SETUP_BARRIER_COMPLETE"}
+        target = {
+            "cell": "lora_joint_seed7411",
+            "checkpoint_path": "canonical/checkpoint_001500",
+            "checkpoint_metadata_sha256": "1" * 64,
+            "checkpoint_identity_sha256": "2" * 64,
+        }
+        barrier = {
+            "status": "REACHED_TRAINING_BARRIER_COMPLETE",
+            "stages": [],
+        }
+        decoy = copy.deepcopy(target)
+        decoy["checkpoint_path"] = "decoy/checkpoint_001500"
+        decoy["proof_identity_sha256"] = analysis._canonical_sha256(decoy)
+        summary = {
+            "data_manifest_sha256": "d" * 64,
+            "setup_barrier": setup_proof,
+            "training_barrier": barrier,
+            "target_training_cell_proof": decoy,
+        }
+        with mock.patch.object(
+            analysis, "_evaluation_branch_context", return_value=context
+        ), mock.patch.object(
+            analysis, "_validate_evaluation_access_claims"
+        ), mock.patch.object(
+            analysis,
+            "_recompute_setup_barrier",
+            return_value=(setup_proof, {}),
+        ), mock.patch.object(
+            analysis, "_reached_training_barrier", return_value=barrier
+        ), mock.patch.object(
+            analysis, "_current_training_cell_proof", return_value=target
+        ):
+            with self.assertRaisesRegex(RuntimeError, "target training-cell proof"):
+                analysis._evaluation_contract_preflight(
+                    self.config,
+                    summary,
+                    capacity="lora",
+                    objective="joint",
+                    seed=7411,
+                    eval_set="trigger",
+                )
+
+    def test_semantic_setup_validators_bind_exact_checkpoint_lineages(self) -> None:
+        setup = {"capacity": "fullrank", "model_seed": 7411}
+        root = self.lineage(
+            "experiments/qwen35_4b_state_formation_capacity_adjudication/"
+            "analysis/lora_joint_trigger.json",
+            "LORA_JOINT_MISS_CONTROLS_REQUIRED",
+            "lora_joint_analysis",
+            "4",
+        )
+        g0_lineage = self.lineage(
+            "experiments/qwen35_4b_state_formation_capacity_adjudication/"
+            "runs/setup/g0_fullrank_seed7411.json",
+            "MODEL_SMOKE_PASS",
+            "fullrank_g0",
+            "5",
+        )
+        control_lineage = self.lineage(
+            "experiments/qwen35_4b_state_formation_capacity_adjudication/"
+            "runs/setup/positive_control_fullrank_seed7411.json",
+            "POSITIVE_CONTROL_PASS",
+            "fullrank_positive_control",
+            "6",
+        )
+        checkpoint = {
+            "setup": setup,
+            "data_manifest_sha256": "d" * 64,
+            "g0_lineage": g0_lineage,
+            "positive_control_lineage": control_lineage,
+        }
+        g0_receipt = {"status": "MODEL_SMOKE_PASS"}
+        control_receipt = {"status": "POSITIVE_CONTROL_PASS"}
+
+        def lineage_for(_root, path, _receipt):
+            return (
+                g0_lineage
+                if Path(path).name.startswith("g0_")
+                else control_lineage
+            )
+
+        with tempfile.TemporaryDirectory() as directory:
+            candidate = Path(directory) / "g0.json"
+            candidate.write_text(json.dumps({"setup": setup}), encoding="utf-8")
+            patches = (
+                mock.patch.object(
+                    analysis, "canonical_repo_path", return_value=candidate
+                ),
+                mock.patch.object(
+                    analysis,
+                    "_read_stable_json_object",
+                    return_value=({"setup": setup}, "0" * 64),
+                ),
+                mock.patch.object(
+                    analysis, "_expected_positive_control_rows", return_value=[]
+                ),
+                mock.patch.object(analysis, "_validate_registered_setup_fields"),
+                mock.patch.object(
+                    analysis, "validate_g0_pass", return_value=g0_receipt
+                ),
+                mock.patch.object(
+                    analysis,
+                    "validate_positive_control_pass",
+                    return_value=control_receipt,
+                ),
+                mock.patch.object(
+                    analysis, "lineage_entry", side_effect=lineage_for
+                ),
+                mock.patch.object(
+                    analysis, "_identity", return_value={"identity": "bound"}
+                ),
+                mock.patch.object(
+                    analysis,
+                    "strict_stable_setup_receipt",
+                    side_effect=lambda value: dict(value),
+                ),
+            )
+            started = [patcher.start() for patcher in patches]
+            try:
+                receipts = analysis._validate_semantic_setup_gates(
+                    self.config,
+                    capacity="fullrank",
+                    seed=7411,
+                    checkpoint=checkpoint,
+                    branch_context={"root_lora_miss_lineage": root},
+                )
+            finally:
+                for patcher in reversed(patches):
+                    patcher.stop()
+        g0_validator = started[4]
+        control_validator = started[5]
+        self.assertEqual(receipts["g0_lineage"], g0_receipt)
+        self.assertEqual(receipts["positive_control_lineage"], control_receipt)
+        self.assertEqual(
+            g0_validator.call_args.kwargs["expected_branch_authorization"], root
+        )
+        self.assertEqual(g0_validator.call_args.kwargs["expected_setup"], setup)
+        self.assertEqual(
+            g0_validator.call_args.kwargs["expected_adaptation_parameters"],
+            int(
+                self.config["architecture"]["adaptation"]["fullrank"][
+                    "expected_parameters"
+                ]
+            ),
+        )
+        self.assertEqual(
+            g0_validator.call_args.kwargs["expected_lora_rank"],
+            int(self.config["architecture"]["adaptation"]["lora"]["rank"]),
+        )
+        self.assertEqual(
+            g0_validator.call_args.kwargs["expected_peft_version"], "0.19.1"
+        )
+        self.assertEqual(
+            control_validator.call_args.kwargs["expected_g0_lineage"], g0_lineage
+        )
+        self.assertEqual(
+            control_validator.call_args.kwargs["expected_branch_authorization"],
+            root,
+        )
+        self.assertEqual(
+            control_validator.call_args.kwargs["control_query_kinds"],
+            ("node", "checksum"),
+        )
+        self.assertEqual(
+            control_validator.call_args.kwargs["control_examples_per_cell"], 2
+        )
+
+        wrong_control = copy.deepcopy(control_lineage)
+        wrong_control["receipt_identity_sha256"] = "7" * 64
+        validated = {
+            "g0": g0_receipt,
+            "control": control_receipt,
+            "g0_lineage": g0_lineage,
+            "control_lineage": wrong_control,
+            "setup": setup,
+        }
+        with mock.patch.object(
+            analysis, "_reopen_setup_pair", return_value=validated
+        ), mock.patch.object(
+            analysis,
+            "strict_stable_setup_receipt",
+            side_effect=lambda value: dict(value),
+        ):
+            with self.assertRaisesRegex(RuntimeError, "positive-control lineage"):
+                analysis._validate_semantic_setup_gates(
+                    self.config,
+                    capacity="fullrank",
+                    seed=7411,
+                    checkpoint=checkpoint,
+                    branch_context={"root_lora_miss_lineage": root},
+                )
+
 
 class TrainingProvenanceTests(unittest.TestCase):
     @classmethod
@@ -1088,6 +2129,7 @@ class TrainingProvenanceTests(unittest.TestCase):
                 / "lora_joint_seed7411"
                 / "checkpoint_000002"
             )
+            checkpoint_path.mkdir(parents=True)
             shared = self._shared_fields(wrong_order)
             checkpoint = {
                 "data_manifest_sha256": "d" * 64,
@@ -1118,16 +2160,23 @@ class TrainingProvenanceTests(unittest.TestCase):
             ):
                 expected = analysis._expected_training_order_sha256(config, 7411)
                 self.assertNotEqual(wrong_order, expected)
-                with self.assertRaisesRegex(RuntimeError, "registered seeded schedule"):
-                    analysis._validate_training_payloads(
-                        config,
-                        run=run,
-                        checkpoint=checkpoint,
-                        checkpoint_path=checkpoint_path,
-                        capacity="lora",
-                        objective="joint",
-                        seed=7411,
-                    )
+                with mock.patch.object(
+                    analysis,
+                    "_expected_training_order_sha256",
+                    return_value=expected,
+                ):
+                    with self.assertRaisesRegex(
+                        RuntimeError, "registered seeded schedule"
+                    ):
+                        analysis._validate_training_payloads(
+                            config,
+                            run=run,
+                            checkpoint=checkpoint,
+                            checkpoint_path=checkpoint_path,
+                            capacity="lora",
+                            objective="joint",
+                            seed=7411,
+                        )
 
     def _assert_self_consistent_wrong_lr_rejected(self, source: str) -> None:
         config = copy.deepcopy(self.config)
@@ -1251,9 +2300,9 @@ class TrainingProvenanceTests(unittest.TestCase):
                 shared.update(
                     {
                         "train_metrics_sha256": analysis._sha256(metrics_path),
-                        "train_metrics_path": str(metrics_path),
+                        "train_metrics_path": metrics_path.relative_to(root).as_posix(),
                         "optimizer_steps_sha256": analysis._sha256(optimizer_path),
-                        "optimizer_steps_path": str(optimizer_path),
+                        "optimizer_steps_path": optimizer_path.relative_to(root).as_posix(),
                         "optimizer_step_receipt": {
                             "schema_version": 1,
                             "steps": 2,
@@ -1309,18 +2358,23 @@ class TrainingProvenanceTests(unittest.TestCase):
                     run["optimizer_step_receipt"],
                     checkpoint["optimizer_step_receipt"],
                 )
-                with self.assertRaisesRegex(
-                    RuntimeError, "learning-rate schedule changed"
+                with mock.patch.object(
+                    analysis,
+                    "_expected_training_order_sha256",
+                    return_value=order_sha256,
                 ):
-                    analysis._validate_training_payloads(
-                        config,
-                        run=run,
-                        checkpoint=checkpoint,
-                        checkpoint_path=checkpoint_path,
-                        capacity="lora",
-                        objective="joint",
-                        seed=7411,
-                    )
+                    with self.assertRaisesRegex(
+                        RuntimeError, "learning-rate schedule changed"
+                    ):
+                        analysis._validate_training_payloads(
+                            config,
+                            run=run,
+                            checkpoint=checkpoint,
+                            checkpoint_path=checkpoint_path,
+                            capacity="lora",
+                            objective="joint",
+                            seed=7411,
+                        )
 
     def test_wrong_common_lr_rejects_even_when_adaptation_lr_and_receipts_are_consistent(self) -> None:
         for source in ("metric", "optimizer"):
@@ -1723,8 +2777,31 @@ class BranchTaxonomyTests(unittest.TestCase):
                 "phase": phase,
             }
 
-        def authorization_for(_config, _path, statuses, phases):
-            return lineage(sorted(statuses)[0], sorted(phases)[0])
+        def authorization_for(_config, _path, branch):
+            branches = {
+                analysis.LORA_MISS_BRANCH: (
+                    "LORA_JOINT_MISS_CONTROLS_REQUIRED",
+                    "lora_joint_analysis",
+                ),
+                analysis.STAGE_B_CONTRAST_BRANCH: (
+                    "STAGE_B_CONTRAST_AUTHORIZED",
+                    "stage_b_seal_analysis",
+                ),
+                analysis.STAGE_B_FULLRANK_MISS_BRANCH: (
+                    "FULLRANK_STATE_ONLY_REQUIRED",
+                    "stage_b_seal_analysis",
+                ),
+                analysis.POSTCONTRAST_FULLRANK_MISS_BRANCH: (
+                    "FULLRANK_STATE_ONLY_REQUIRED",
+                    "fullrank_joint_analysis",
+                ),
+            }
+            return lineage(*branches[branch])
+
+        def lora_control_authorization(_config, _path):
+            return lineage(
+                "LORA_STATE_ONLY_CONTROL_COMPLETE", "lora_control_analysis"
+            )
 
         def reopen_lineage(entry):
             threshold = float(
@@ -1791,13 +2868,17 @@ class BranchTaxonomyTests(unittest.TestCase):
         contrast_ledger = contrast_ledger or (
             lambda *_: {"status": "CONTRAST_ACCESS_LEDGER_COMPLETE", "events": []}
         )
-        with tempfile.TemporaryDirectory() as directory, mock.patch.object(
+        with tempfile.TemporaryDirectory(dir=ROOT / "tests") as directory, mock.patch.object(
             analysis, "_load_cell", side_effect=loader
         ), mock.patch.object(
             analysis, "_adaptation_effects", side_effect=adaptation_effects
         ), mock.patch.object(
             analysis, "_load_analysis_authorization", side_effect=authorization_for
         ) as authorization_mock, mock.patch.object(
+            analysis,
+            "_load_lora_control_analysis",
+            side_effect=lora_control_authorization,
+        ), mock.patch.object(
             analysis, "_validate_lineage_entry", side_effect=reopen_lineage
         ) as lineage_mock, mock.patch.object(
             analysis,
@@ -1838,7 +2919,13 @@ class BranchTaxonomyTests(unittest.TestCase):
                 phase,
                 Path(directory) / f"{phase}.json",
                 authorization_receipt=(
-                    None if phase == "lora_joint" else Path("synthetic/authorization.json")
+                    None
+                    if phase == "lora_joint"
+                    else (
+                        ROOT / "analysis" / "fullrank_joint.json"
+                        if phase == "fullrank_control"
+                        else Path("synthetic/authorization.json")
+                    )
                 ),
             )
             self.last_analysis_mocks = {
@@ -2020,7 +3107,7 @@ class BranchTaxonomyTests(unittest.TestCase):
         self.last_analysis_mocks["matching"].assert_called_once()
         self.last_analysis_mocks["firewall"].assert_called_once()
         self.last_analysis_mocks["ledger"].assert_not_called()
-        self.assertEqual(self.last_analysis_mocks["authorization"].call_count, 2)
+        self.assertEqual(self.last_analysis_mocks["authorization"].call_count, 1)
 
     def test_stage_b_trigger_miss_skips_contrast_and_mandates_state_only(self) -> None:
         passed = synthetic_bundles()

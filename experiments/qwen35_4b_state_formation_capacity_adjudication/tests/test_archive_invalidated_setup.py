@@ -5,6 +5,7 @@ import errno
 import importlib.util
 import json
 import os
+import stat
 import sys
 import tempfile
 import unittest
@@ -211,9 +212,6 @@ class InvalidatedSetupArchiveTests(unittest.TestCase):
 
     def _add_positive_control_failure(self, capacity: str, seed: int) -> tuple[Path, Path]:
         setup_dir = self.experiment / "runs" / "setup"
-        g0_path = setup_dir / f"g0_{capacity}_seed{seed}.json"
-        g0 = json.loads(g0_path.read_text(encoding="utf-8"))
-        manifest_path = self.experiment / "data" / "generated" / "manifest.json"
         canonical = setup_dir / f"positive_control_{capacity}_seed{seed}.json"
         payload = self._signed(
             {
@@ -224,17 +222,31 @@ class InvalidatedSetupArchiveTests(unittest.TestCase):
                 **self._common(),
                 "capacity": capacity,
                 "model_seed": seed,
-                "data_manifest_sha256": self.module._sha256(manifest_path),
-                "g0_lineage": {
-                    "path": g0_path.relative_to(self.repo).as_posix(),
-                    "sha256": self.module._sha256(g0_path),
-                    "receipt_identity_sha256": g0["receipt_identity_sha256"],
-                    "status": "MODEL_SMOKE_PASS",
-                    "phase": f"{capacity}_g0",
+                "data_manifest_sha256": None,
+                "g0_lineage": None,
+                "branch_authorization": None,
+                "shared_initialization": None,
+                "setup": None,
+                "control_rows": None,
+                "oracle_analysis": None,
+                "oracle_readout_accuracy": None,
+                "failure_stage": "receipt_preflight",
+                "error_type": "RuntimeError",
+                "error": "synthetic G0 receipt preflight failure",
+                "completed_updates": 0,
+                "completed_microbatches": 0,
+                "training_diagnostics": {
+                    "fixed_probe_steps": [],
+                    "evaluations": [],
+                    "parameter_probes": [],
+                    "optimizer_step_probes": [],
+                    "dropout_probes": [],
+                    "completed_updates": 0,
+                    "completed_microbatches": 0,
                 },
-                "setup": g0["setup"],
                 "authorizes_training": False,
                 "authorizes_result_training": False,
+                "authorizes_result_evaluation": False,
                 "benchmark_files_read": 0,
                 "result_payloads_opened": [],
                 "sealed_contrast_payloads_opened": [],
@@ -326,6 +338,57 @@ class InvalidatedSetupArchiveTests(unittest.TestCase):
             / f"invalidated_setup_source_{self.OLD_SOURCE[:8]}.json"
         )
 
+    def _quarantine_root(self) -> Path:
+        return self.module._cleanup_quarantine_root(
+            self.config, self.OLD_SOURCE
+        )
+
+    def assert_complete_zero_quarantine(self) -> None:
+        items = self.module._items_from_file_records(
+            self.config,
+            json.loads(
+                (self._archive_root() / "archive_receipt.json").read_text(
+                    encoding="utf-8"
+                )
+            )["files"],
+        )[0]
+        records = json.loads(
+            (self._archive_root() / "archive_receipt.json").read_text(
+                encoding="utf-8"
+            )
+        )["files"]
+        complete, destinations = self.module._quarantine_snapshot(
+            self._quarantine_root(), items, records
+        )
+        self.assertTrue(complete)
+        self.assertEqual(set(destinations), {item.archive_path for item in items})
+
+    def _fail_move_patch(
+        self,
+        *,
+        call_number: int = 2,
+        message: str = "synthetic move failure",
+    ):
+        real_move = self.module.move_new_entry
+        calls = 0
+
+        def fail_at_selected_move(
+            root: Path,
+            source: Path,
+            destination: Path,
+        ) -> None:
+            nonlocal calls
+            calls += 1
+            if calls == call_number:
+                raise OSError(errno.EIO, message)
+            real_move(root, source, destination)
+
+        return mock.patch.object(
+            self.module,
+            "move_new_entry",
+            side_effect=fail_at_selected_move,
+        )
+
     def test_exact_inventory_is_archived_with_stable_names(self) -> None:
         items = self.module._inventory(self.config)
         self.assertEqual(len(items), 21)
@@ -364,8 +427,11 @@ class InvalidatedSetupArchiveTests(unittest.TestCase):
                 / ".gitignore"
             ).is_file()
         )
-        self.assertFalse((self.experiment / "runs" / "cpu_smoke").exists())
-        self.assertFalse((self.experiment / "runs" / "setup").exists())
+        self.assertEqual(
+            list((self.experiment / "runs" / "cpu_smoke").iterdir()), []
+        )
+        self.assertEqual(list((self.experiment / "runs" / "setup").iterdir()), [])
+        self.assert_complete_zero_quarantine()
         self.assertTrue(
             (
                 self.experiment
@@ -436,8 +502,10 @@ class InvalidatedSetupArchiveTests(unittest.TestCase):
             self.trigger,
         )
 
-        self.assertFalse((self.experiment / "runs" / "cpu_smoke").exists())
-        self.assertFalse((self.experiment / "runs" / "setup").exists())
+        self.assertEqual(
+            list((self.experiment / "runs" / "cpu_smoke").iterdir()), []
+        )
+        self.assertEqual(list((self.experiment / "runs" / "setup").iterdir()), [])
         self.assertTrue(data_dir.is_dir())
         self.assertEqual(
             {path.name for path in data_dir.iterdir()},
@@ -464,6 +532,32 @@ class InvalidatedSetupArchiveTests(unittest.TestCase):
             f"tracked_receipts/{canonical.name}",
             {record["path"] for record in receipt["files"]},
         )
+
+    def test_positive_control_failure_auth_error_access_and_progress_are_exact(self) -> None:
+        canonical, mirror = self._add_positive_control_failure("lora", 7411)
+        original = json.loads(canonical.read_text(encoding="utf-8"))
+        mutations = (
+            ("unsafe-auth", {"authorizes_result_evaluation": True}),
+            ("missing-error", {"error": ""}),
+            ("result-access", {"result_payloads_opened": ["train"]}),
+            ("future-setup", {"setup": {"shared_initialization": {}}}),
+            ("impossible-progress", {"completed_updates": 1}),
+        )
+        for label, changes in mutations:
+            with self.subTest(label=label):
+                payload = copy.deepcopy(original)
+                payload.pop("receipt_identity_sha256")
+                payload.update(changes)
+                payload = self._signed(payload)
+                self._write_json(canonical, payload)
+                self._write_json(mirror, payload)
+                with self.assertRaises(RuntimeError):
+                    self.module.archive_invalidated_setup(
+                        self.config,
+                        self.OLD_SOURCE,
+                        self.trigger,
+                    )
+                self.assertFalse(self._archive_root().exists())
 
     def test_canonical_g0_failure_and_identical_mirror_are_preserved(self) -> None:
         canonical, mirror = self._replace_g0_with_failure("lora", 7411)
@@ -827,6 +921,85 @@ class InvalidatedSetupArchiveTests(unittest.TestCase):
         )
         self.assertEqual(partials, [])
 
+    def test_stale_private_archive_and_receipt_stages_are_recovered(self) -> None:
+        archive_parent = self._archive_root().parent
+        archive_parent.mkdir(parents=True)
+        stale_archive = archive_parent / f".source_{self.OLD_SOURCE}.tmp-dead"
+        stale_archive.mkdir()
+        (stale_archive / "partial.bin").write_bytes(b"partial")
+        tracked = self._tracked_archive_receipt()
+        stale_receipt = tracked.parent / f".{tracked.name}.tmp-dead"
+        stale_receipt.write_bytes(b"partial receipt")
+
+        receipt = self.module.archive_invalidated_setup(
+            self.config,
+            self.OLD_SOURCE,
+            self.trigger,
+        )
+
+        self.assertEqual(receipt["status"], "INVALIDATED_SETUP_ARCHIVED")
+        self.assertFalse(stale_archive.exists())
+        self.assertFalse(stale_receipt.exists())
+        self.assertTrue(self._archive_root().is_dir())
+
+    @unittest.skipUnless(hasattr(os, "symlink"), "symlink creation is unavailable")
+    def test_unsafe_stale_archive_stage_is_not_cleaned_through(self) -> None:
+        source_paths = self._source_paths()
+        archive_parent = self._archive_root().parent
+        archive_parent.mkdir(parents=True)
+        target = self.repo / "stale-stage-target"
+        target.mkdir()
+        sentinel = target / "sentinel.bin"
+        sentinel.write_bytes(b"preserve")
+        stale = archive_parent / f".source_{self.OLD_SOURCE}.tmp-hostile"
+        stale.symlink_to(target, target_is_directory=True)
+
+        with self.assertRaisesRegex(RuntimeError, "stale.*unsafe"):
+            self.module.archive_invalidated_setup(
+                self.config,
+                self.OLD_SOURCE,
+                self.trigger,
+            )
+
+        self.assertEqual(sentinel.read_bytes(), b"preserve")
+        self.assertTrue(stale.is_symlink())
+        self.assertTrue(all(path.exists() for path in source_paths))
+
+    def test_directory_commit_collision_preserves_competing_destination(self) -> None:
+        source_paths = self._source_paths()
+        original_rename = self.module.rename_new_entry
+
+        def install_competitor(root: Path, source: Path, destination: Path) -> None:
+            destination.mkdir()
+            (destination / "competitor.bin").write_bytes(b"competing archive")
+            original_rename(root, source, destination)
+
+        with mock.patch.object(
+            self.module,
+            "rename_new_entry",
+            side_effect=install_competitor,
+        ):
+            with self.assertRaisesRegex(RuntimeError, "overwrite or alias"):
+                self.module.archive_invalidated_setup(
+                    self.config,
+                    self.OLD_SOURCE,
+                    self.trigger,
+                )
+
+        self.assertEqual(
+            (self._archive_root() / "competitor.bin").read_bytes(),
+            b"competing archive",
+        )
+        self.assertTrue(all(path.exists() for path in source_paths))
+        self.assertEqual(
+            list(
+                self._archive_root().parent.glob(
+                    f".source_{self.OLD_SOURCE}.tmp-*"
+                )
+            ),
+            [],
+        )
+
     def test_tracked_receipt_failure_keeps_all_sources_after_archive_commit(self) -> None:
         source_paths = self._source_paths()
         with mock.patch.object(
@@ -858,29 +1031,31 @@ class InvalidatedSetupArchiveTests(unittest.TestCase):
         )
         self.assertEqual(receipt["status"], "INVALIDATED_SETUP_ARCHIVED")
 
-    def test_mid_cleanup_failure_resumes_from_exact_or_absent_sources(self) -> None:
+    def test_mid_zeroization_failure_resumes_from_complete_quarantine(self) -> None:
         source_paths = self._source_paths()
-        original_unlink = self.module._unlink_source
+        original_zeroize = self.module._zeroize_quarantined_descriptor
         calls = 0
 
-        def fail_second(path: Path) -> None:
+        def fail_second(descriptor: int, record: dict) -> None:
             nonlocal calls
             calls += 1
             if calls == 2:
-                raise OSError(errno.EIO, "synthetic second-unlink failure")
-            original_unlink(path)
+                raise OSError(errno.EIO, "synthetic second-zeroize failure")
+            original_zeroize(descriptor, record)
 
-        with mock.patch.object(self.module, "_unlink_source", side_effect=fail_second):
-            with self.assertRaisesRegex(OSError, "second-unlink failure"):
+        with mock.patch.object(
+            self.module,
+            "_zeroize_quarantined_descriptor",
+            side_effect=fail_second,
+        ):
+            with self.assertRaisesRegex(RuntimeError, "second-zeroize failure"):
                 self.module.archive_invalidated_setup(
                     self.config,
                     self.OLD_SOURCE,
                     self.trigger,
                 )
 
-        existing_after_failure = {path for path in source_paths if path.exists()}
-        self.assertGreater(len(existing_after_failure), 0)
-        self.assertLess(len(existing_after_failure), len(source_paths))
+        self.assertTrue(all(not path.exists() for path in source_paths))
         self.assertTrue(self._archive_root().is_dir())
         self.assertTrue(self._tracked_archive_receipt().is_file())
 
@@ -891,24 +1066,132 @@ class InvalidatedSetupArchiveTests(unittest.TestCase):
         )
 
         self.assertTrue(all(not path.exists() for path in source_paths))
-        self.assertFalse((self.experiment / "runs" / "cpu_smoke").exists())
-        self.assertFalse((self.experiment / "runs" / "setup").exists())
+        self.assertEqual(
+            list((self.experiment / "runs" / "cpu_smoke").iterdir()), []
+        )
+        self.assertEqual(list((self.experiment / "runs" / "setup").iterdir()), [])
+        self.assert_complete_zero_quarantine()
+
+    def test_canonical_replacement_race_never_deletes_unvalidated_bytes(self) -> None:
+        items = self.module._inventory(self.config)
+        target = next(
+            item
+            for item in items
+            if item.source.name == "initialization_seed7411.pt"
+        )
+        original_bytes = target.source.read_bytes()
+        preserved = target.source.with_name("preserved-original-after-race.bin")
+        replacement_bytes = b"concurrent replacement that was never validated"
+        real_move = self.module.move_new_entry
+        raced = False
+
+        def replace_before_move(root: Path, source: Path, destination: Path) -> None:
+            nonlocal raced
+            if source == target.source:
+                source.rename(preserved)
+                source.write_bytes(replacement_bytes)
+                raced = True
+            real_move(root, source, destination)
+
+        with mock.patch.object(
+            self.module,
+            "move_new_entry",
+            side_effect=replace_before_move,
+        ):
+            with self.assertRaisesRegex(RuntimeError, "differs from its archived record"):
+                self.module.archive_invalidated_setup(
+                    self.config,
+                    self.OLD_SOURCE,
+                    self.trigger,
+                )
+
+        self.assertTrue(raced)
+        self.assertEqual(preserved.read_bytes(), original_bytes)
+        quarantined = self.module._quarantine_path(
+            self._quarantine_root(), target
+        )
+        self.assertEqual(quarantined.read_bytes(), replacement_bytes)
+        self.assertFalse(target.source.exists())
+
+    def test_quarantine_path_replacement_preserves_both_bindings(self) -> None:
+        items = self.module._inventory(self.config)
+        target = items[0]
+        target_quarantine = self.module._quarantine_path(
+            self._quarantine_root(), target
+        )
+        real_zeroize = self.module._zeroize_quarantined_descriptor
+        preserved = target_quarantine.with_name(
+            "preserved-original-after-cleanup-race.bin"
+        )
+        replacement_bytes = b"do not delete this replacement"
+        raced = False
+
+        def replace_quarantine(descriptor: int, record: dict) -> None:
+            nonlocal raced
+            if not raced:
+                target_quarantine.rename(preserved)
+                target_quarantine.write_bytes(replacement_bytes)
+                raced = True
+            real_zeroize(descriptor, record)
+
+        with mock.patch.object(
+            self.module,
+            "_zeroize_quarantined_descriptor",
+            side_effect=replace_quarantine,
+        ):
+            with self.assertRaisesRegex(RuntimeError, "held artifact changed"):
+                self.module.archive_invalidated_setup(
+                    self.config,
+                    self.OLD_SOURCE,
+                    self.trigger,
+                )
+
+        self.assertTrue(raced)
+        archived_record = json.loads(
+            (self._archive_root() / "archive_receipt.json").read_text(
+                encoding="utf-8"
+            )
+        )["files"][0]
+        self.assertEqual(preserved.read_bytes(), b"")
+        self.assertGreater(archived_record["bytes"], 0)
+        self.assertEqual(target_quarantine.read_bytes(), replacement_bytes)
+
+    def test_quarantine_destination_collision_preserves_source_and_competitor(self) -> None:
+        items = self.module._inventory(self.config)
+        target = items[0]
+        original_bytes = target.source.read_bytes()
+        destination = self.module._quarantine_path(
+            self._quarantine_root(), target
+        )
+        competitor = b"competing quarantine"
+        real_move = self.module.move_new_entry
+
+        def collide(root: Path, source: Path, new: Path) -> None:
+            if source == target.source:
+                new.parent.mkdir(parents=True, exist_ok=True)
+                new.write_bytes(competitor)
+            real_move(root, source, new)
+
+        with mock.patch.object(
+            self.module,
+            "move_new_entry",
+            side_effect=collide,
+        ):
+            with self.assertRaisesRegex(RuntimeError, "atomic no-clobber"):
+                self.module.archive_invalidated_setup(
+                    self.config,
+                    self.OLD_SOURCE,
+                    self.trigger,
+                )
+
+        self.assertEqual(target.source.read_bytes(), original_bytes)
+        self.assertEqual(destination.read_bytes(), competitor)
 
     def test_resume_revalidates_nontrigger_failed_g0_mirror_before_deletion(self) -> None:
         _, mirror = self._replace_g0_with_failure("lora", 7411)
         source_paths = self._source_paths()
-        original_unlink = self.module._unlink_source
-        calls = 0
-
-        def fail_second(path: Path) -> None:
-            nonlocal calls
-            calls += 1
-            if calls == 2:
-                raise OSError(errno.EIO, "synthetic second-unlink failure")
-            original_unlink(path)
-
-        with mock.patch.object(self.module, "_unlink_source", side_effect=fail_second):
-            with self.assertRaisesRegex(OSError, "second-unlink failure"):
+        with self._fail_move_patch(message="synthetic second-move failure"):
+            with self.assertRaisesRegex(RuntimeError, "second-move failure"):
                 self.module.archive_invalidated_setup(
                     self.config,
                     self.OLD_SOURCE,
@@ -931,49 +1214,25 @@ class InvalidatedSetupArchiveTests(unittest.TestCase):
             {path for path in source_paths if os.path.lexists(path)},
         )
 
-    def test_rmdir_failure_resumes_after_all_sources_are_absent(self) -> None:
+    def test_empty_source_parents_are_retained_as_regeneration_surface(self) -> None:
         source_paths = self._source_paths()
-        original_remove = self.module._remove_empty_source_parent
-        failed = False
-
-        def fail_cpu_once(path: Path) -> None:
-            nonlocal failed
-            if path.name == "cpu_smoke" and not failed:
-                failed = True
-                raise OSError(errno.EIO, "synthetic rmdir failure")
-            original_remove(path)
-
-        with mock.patch.object(
-            self.module,
-            "_remove_empty_source_parent",
-            side_effect=fail_cpu_once,
-        ):
-            with self.assertRaisesRegex(OSError, "synthetic rmdir failure"):
-                self.module.archive_invalidated_setup(
-                    self.config,
-                    self.OLD_SOURCE,
-                    self.trigger,
-                )
-
-        self.assertTrue(all(not path.exists() for path in source_paths))
-        self.assertTrue((self.experiment / "runs" / "cpu_smoke").is_dir())
-
         self.module.archive_invalidated_setup(
             self.config,
             self.OLD_SOURCE,
             self.trigger,
         )
-        self.assertFalse((self.experiment / "runs" / "cpu_smoke").exists())
-        self.assertFalse((self.experiment / "runs" / "setup").exists())
+        self.assertTrue(all(not path.exists() for path in source_paths))
+        for path in (
+            self.experiment / "runs" / "cpu_smoke",
+            self.experiment / "runs" / "setup",
+        ):
+            self.assertTrue(path.is_dir())
+            self.assertEqual(list(path.iterdir()), [])
 
     def test_unknown_residue_blocks_resume_before_further_deletion(self) -> None:
         source_paths = self._source_paths()
-        with mock.patch.object(
-            self.module,
-            "_unlink_source",
-            side_effect=OSError(errno.EIO, "synthetic first-unlink failure"),
-        ):
-            with self.assertRaisesRegex(OSError, "first-unlink failure"):
+        with self._fail_move_patch(message="synthetic second-move failure"):
+            with self.assertRaisesRegex(RuntimeError, "second-move failure"):
                 self.module.archive_invalidated_setup(
                     self.config,
                     self.OLD_SOURCE,
@@ -989,7 +1248,10 @@ class InvalidatedSetupArchiveTests(unittest.TestCase):
                 self.trigger,
             )
 
-        self.assertTrue(all(path.exists() for path in source_paths))
+        remaining_before_resume = {
+            path for path in source_paths if os.path.lexists(path)
+        }
+        self.assertGreater(len(remaining_before_resume), 0)
         late.unlink()
         self.module.archive_invalidated_setup(
             self.config,
@@ -1000,19 +1262,21 @@ class InvalidatedSetupArchiveTests(unittest.TestCase):
 
     def test_tampered_remaining_source_blocks_resume_before_deletion(self) -> None:
         source_paths = self._source_paths()
-        with mock.patch.object(
-            self.module,
-            "_unlink_source",
-            side_effect=OSError(errno.EIO, "synthetic first-unlink failure"),
-        ):
-            with self.assertRaisesRegex(OSError, "first-unlink failure"):
+        with self._fail_move_patch(message="synthetic second-move failure"):
+            with self.assertRaisesRegex(RuntimeError, "second-move failure"):
                 self.module.archive_invalidated_setup(
                     self.config,
                     self.OLD_SOURCE,
                     self.trigger,
                 )
-        tampered = sorted(source_paths, key=lambda path: path.as_posix())[0]
+        tampered = sorted(
+            (path for path in source_paths if path.exists()),
+            key=lambda path: path.as_posix(),
+        )[0]
         tampered.write_bytes(b"tampered")
+        remaining_before_resume = {
+            path for path in source_paths if os.path.lexists(path)
+        }
 
         with self.assertRaisesRegex(RuntimeError, "differs from archive"):
             self.module.archive_invalidated_setup(
@@ -1021,39 +1285,38 @@ class InvalidatedSetupArchiveTests(unittest.TestCase):
                 self.trigger,
             )
 
-        self.assertTrue(
-            all(path.exists() for path in source_paths if path != tampered)
+        self.assertEqual(
+            remaining_before_resume,
+            {path for path in source_paths if os.path.lexists(path)},
         )
 
     def test_fsync_failure_after_partial_cleanup_is_resumable(self) -> None:
         source_paths = self._source_paths()
-        with mock.patch.object(
-            self.module,
-            "_unlink_source",
-            side_effect=OSError(errno.EIO, "synthetic first-unlink failure"),
-        ):
-            with self.assertRaisesRegex(OSError, "first-unlink failure"):
+        with self._fail_move_patch(message="synthetic second-move failure"):
+            with self.assertRaisesRegex(RuntimeError, "second-move failure"):
                 self.module.archive_invalidated_setup(
                     self.config,
                     self.OLD_SOURCE,
                     self.trigger,
                 )
-        original_fsync = self.module._fsync_directory
+        original_fsync = self.module.fsync_canonical_directory
         failed = False
 
-        def fail_once(path: Path) -> None:
+        def fail_once(root: Path, path: Path) -> None:
             nonlocal failed
             if not failed:
                 failed = True
-                raise OSError(errno.EIO, "synthetic cleanup fsync failure")
-            original_fsync(path)
+                raise self.module.StableArtifactError(
+                    "synthetic cleanup fsync failure"
+                )
+            original_fsync(root, path)
 
         with mock.patch.object(
             self.module,
-            "_fsync_directory",
+            "fsync_canonical_directory",
             side_effect=fail_once,
         ):
-            with self.assertRaisesRegex(OSError, "cleanup fsync failure"):
+            with self.assertRaisesRegex(RuntimeError, "could not be fsynced"):
                 self.module.archive_invalidated_setup(
                     self.config,
                     self.OLD_SOURCE,
@@ -1067,6 +1330,313 @@ class InvalidatedSetupArchiveTests(unittest.TestCase):
             self.trigger,
         )
         self.assertTrue(all(not path.exists() for path in source_paths))
+
+    def test_zeroized_file_fsync_failure_is_resumable_and_refsynced(self) -> None:
+        real_zeroize = self.module._zeroize_quarantined_descriptor
+        interrupted = False
+
+        def truncate_then_fail(descriptor: int, record: dict) -> None:
+            nonlocal interrupted
+            if not interrupted:
+                real_fsync = self.module.os.fsync
+                failed = False
+
+                def fail_after_flush(descriptor: int) -> None:
+                    nonlocal failed
+                    real_fsync(descriptor)
+                    if not failed and stat.S_ISREG(
+                        os.fstat(descriptor).st_mode
+                    ):
+                        failed = True
+                        raise OSError(
+                            errno.EIO,
+                            "synthetic post-zeroization fsync failure",
+                        )
+
+                interrupted = True
+                with mock.patch.object(
+                    self.module.os,
+                    "fsync",
+                    side_effect=fail_after_flush,
+                ):
+                    real_zeroize(descriptor, record)
+                return
+            real_zeroize(descriptor, record)
+
+        with mock.patch.object(
+            self.module,
+            "_zeroize_quarantined_descriptor",
+            side_effect=truncate_then_fail,
+        ):
+            with self.assertRaisesRegex(
+                RuntimeError, "post-zeroization fsync failure"
+            ):
+                self.module.archive_invalidated_setup(
+                    self.config,
+                    self.OLD_SOURCE,
+                    self.trigger,
+                )
+
+        self.assertTrue(interrupted)
+        self.module.archive_invalidated_setup(
+            self.config,
+            self.OLD_SOURCE,
+            self.trigger,
+        )
+        self.assert_complete_zero_quarantine()
+
+    def test_last_zeroized_file_fsync_failure_reconfirms_completed_quarantine(self) -> None:
+        total_files = len(self._source_paths())
+        real_zeroize = self.module._zeroize_quarantined_descriptor
+        calls = 0
+
+        def fail_after_last_file_flush(descriptor: int, record: dict) -> None:
+            nonlocal calls
+            calls += 1
+            if calls != total_files:
+                real_zeroize(descriptor, record)
+                return
+            real_fsync = self.module.os.fsync
+            failed = False
+
+            def flush_then_fail(candidate: int) -> None:
+                nonlocal failed
+                real_fsync(candidate)
+                if candidate == descriptor and not failed:
+                    failed = True
+                    raise OSError(
+                        errno.EIO,
+                        "synthetic last-leaf fsync failure",
+                    )
+
+            with mock.patch.object(
+                self.module.os,
+                "fsync",
+                side_effect=flush_then_fail,
+            ):
+                real_zeroize(descriptor, record)
+
+        with mock.patch.object(
+            self.module,
+            "_zeroize_quarantined_descriptor",
+            side_effect=fail_after_last_file_flush,
+        ):
+            with self.assertRaisesRegex(RuntimeError, "last-leaf fsync failure"):
+                self.module.archive_invalidated_setup(
+                    self.config,
+                    self.OLD_SOURCE,
+                    self.trigger,
+                )
+
+        receipt = json.loads(
+            (self._archive_root() / "archive_receipt.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        items = self.module._items_from_file_records(
+            self.config,
+            receipt["files"],
+        )[0]
+        complete, _ = self.module._quarantine_snapshot(
+            self._quarantine_root(),
+            items,
+            receipt["files"],
+        )
+        self.assertTrue(complete)
+        regenerated = items[0].source
+        regenerated.write_bytes(b"regenerated replacement-source bytes")
+
+        reconfirmed = 0
+
+        def count_reconfirmation(descriptor: int, record: dict) -> None:
+            nonlocal reconfirmed
+            reconfirmed += 1
+            real_zeroize(descriptor, record)
+
+        with mock.patch.object(
+            self.module,
+            "_zeroize_quarantined_descriptor",
+            side_effect=count_reconfirmation,
+        ):
+            self.module.archive_invalidated_setup(
+                self.config,
+                self.OLD_SOURCE,
+                self.trigger,
+            )
+        self.assertEqual(reconfirmed, total_files)
+        self.assertEqual(
+            regenerated.read_bytes(),
+            b"regenerated replacement-source bytes",
+        )
+
+    def test_corrupt_last_quarantine_leaf_blocks_every_truncate(self) -> None:
+        items = self.module._inventory(self.config)
+        records = self.module._file_records(items)
+        target = self.module._quarantine_path(
+            self._quarantine_root(),
+            items[-1],
+        )
+        real_state = self.module._quarantined_descriptor_state
+        injected = False
+
+        def corrupt_before_global_validation(descriptor: int, record: dict) -> bool:
+            nonlocal injected
+            if not injected:
+                target.write_bytes(b"corrupt final quarantine leaf")
+                injected = True
+            return real_state(descriptor, record)
+
+        with (
+            mock.patch.object(
+                self.module,
+                "_quarantined_descriptor_state",
+                side_effect=corrupt_before_global_validation,
+            ),
+            mock.patch.object(
+                self.module.os,
+                "ftruncate",
+                side_effect=AssertionError("no quarantine leaf may truncate"),
+            ),
+        ):
+            with self.assertRaisesRegex(RuntimeError, "differs from its archived record"):
+                self.module.archive_invalidated_setup(
+                    self.config,
+                    self.OLD_SOURCE,
+                    self.trigger,
+                )
+
+        self.assertTrue(injected)
+        for item, record in zip(items[:-1], records[:-1], strict=True):
+            quarantined = self.module._quarantine_path(
+                self._quarantine_root(),
+                item,
+            )
+            self.assertEqual(quarantined.stat().st_size, record["bytes"])
+            self.assertEqual(self.module._sha256(quarantined), record["sha256"])
+
+    def test_archive_payload_mutation_blocks_every_quarantine_truncate(self) -> None:
+        items = self.module._inventory(self.config)
+        records = self.module._file_records(items)
+        archive_payload = self._archive_root() / records[-1]["path"]
+        real_state = self.module._quarantined_descriptor_state
+        injected = False
+
+        def mutate_archive_during_q_validation(
+            descriptor: int,
+            record: dict,
+        ) -> bool:
+            nonlocal injected
+            if not injected:
+                archive_payload.write_bytes(b"mutated durable archive payload")
+                injected = True
+            return real_state(descriptor, record)
+
+        with (
+            mock.patch.object(
+                self.module,
+                "_quarantined_descriptor_state",
+                side_effect=mutate_archive_during_q_validation,
+            ),
+            mock.patch.object(
+                self.module.os,
+                "ftruncate",
+                side_effect=AssertionError("no quarantine leaf may truncate"),
+            ),
+        ):
+            with self.assertRaisesRegex(RuntimeError, "held artifact changed"):
+                self.module.archive_invalidated_setup(
+                    self.config,
+                    self.OLD_SOURCE,
+                    self.trigger,
+                )
+        self.assertTrue(injected)
+
+    def test_archive_receipt_mutation_blocks_every_quarantine_truncate(self) -> None:
+        archive_receipt = self._archive_root() / "archive_receipt.json"
+        real_state = self.module._quarantined_descriptor_state
+        injected = False
+
+        def mutate_receipt_during_q_validation(
+            descriptor: int,
+            record: dict,
+        ) -> bool:
+            nonlocal injected
+            if not injected:
+                archive_receipt.write_bytes(
+                    archive_receipt.read_bytes() + b"\n"
+                )
+                injected = True
+            return real_state(descriptor, record)
+
+        with (
+            mock.patch.object(
+                self.module,
+                "_quarantined_descriptor_state",
+                side_effect=mutate_receipt_during_q_validation,
+            ),
+            mock.patch.object(
+                self.module.os,
+                "ftruncate",
+                side_effect=AssertionError("no quarantine leaf may truncate"),
+            ),
+        ):
+            with self.assertRaisesRegex(RuntimeError, "held artifact changed"):
+                self.module.archive_invalidated_setup(
+                    self.config,
+                    self.OLD_SOURCE,
+                    self.trigger,
+                )
+        self.assertTrue(injected)
+
+    def test_quarantine_directory_fsync_failure_precedes_every_source_move(self) -> None:
+        source_paths = self._source_paths()
+        quarantine_root = self._quarantine_root()
+        real_fsync = self.module.fsync_canonical_directory
+        failed = False
+
+        def fail_quarantine_root_once(root: Path, path: Path) -> None:
+            nonlocal failed
+            if path == quarantine_root and not failed:
+                failed = True
+                raise self.module.StableArtifactError(
+                    "synthetic quarantine-root fsync failure"
+                )
+            real_fsync(root, path)
+
+        with mock.patch.object(
+            self.module,
+            "fsync_canonical_directory",
+            side_effect=fail_quarantine_root_once,
+        ):
+            with self.assertRaisesRegex(RuntimeError, "could not be fsynced"):
+                self.module.archive_invalidated_setup(
+                    self.config,
+                    self.OLD_SOURCE,
+                    self.trigger,
+                )
+        self.assertTrue(failed)
+        self.assertTrue(all(path.exists() for path in source_paths))
+
+    def test_hardlinked_setup_source_is_rejected_before_archive_commit(self) -> None:
+        target = next(
+            item.source
+            for item in self.module._inventory(self.config)
+            if item.source.name == "initialization_seed7411.pt"
+        )
+        alias = target.with_name("unregistered-hardlink-alias.bin")
+        os.link(target, alias)
+        try:
+            with self.assertRaisesRegex(RuntimeError, "changed before archival"):
+                self.module.archive_invalidated_setup(
+                    self.config,
+                    self.OLD_SOURCE,
+                    self.trigger,
+                )
+            self.assertFalse(self._archive_root().exists())
+            self.assertTrue(target.exists())
+            self.assertTrue(alias.exists())
+        finally:
+            alias.unlink()
 
     def test_tracked_only_state_is_rejected_without_deletion(self) -> None:
         source_paths = self._source_paths()
@@ -1104,12 +1674,8 @@ class InvalidatedSetupArchiveTests(unittest.TestCase):
 
     def test_nonidentical_tracked_receipt_blocks_resume(self) -> None:
         source_paths = self._source_paths()
-        with mock.patch.object(
-            self.module,
-            "_unlink_source",
-            side_effect=OSError(errno.EIO, "synthetic first-unlink failure"),
-        ):
-            with self.assertRaisesRegex(OSError, "first-unlink failure"):
+        with self._fail_move_patch(message="synthetic second-move failure"):
+            with self.assertRaisesRegex(RuntimeError, "second-move failure"):
                 self.module.archive_invalidated_setup(
                     self.config,
                     self.OLD_SOURCE,
@@ -1117,6 +1683,9 @@ class InvalidatedSetupArchiveTests(unittest.TestCase):
                 )
         tracked = self._tracked_archive_receipt()
         tracked.write_bytes(tracked.read_bytes() + b"\n")
+        remaining_before_resume = {
+            path for path in source_paths if os.path.lexists(path)
+        }
 
         with self.assertRaisesRegex(RuntimeError, "byte-identical"):
             self.module.archive_invalidated_setup(
@@ -1125,17 +1694,16 @@ class InvalidatedSetupArchiveTests(unittest.TestCase):
                 self.trigger,
             )
 
-        self.assertTrue(all(path.exists() for path in source_paths))
+        self.assertEqual(
+            remaining_before_resume,
+            {path for path in source_paths if os.path.lexists(path)},
+        )
 
     @unittest.skipUnless(hasattr(os, "symlink"), "symlink creation is unavailable")
     def test_symlinked_tracked_receipt_blocks_resume(self) -> None:
         source_paths = self._source_paths()
-        with mock.patch.object(
-            self.module,
-            "_unlink_source",
-            side_effect=OSError(errno.EIO, "synthetic first-unlink failure"),
-        ):
-            with self.assertRaisesRegex(OSError, "first-unlink failure"):
+        with self._fail_move_patch(message="synthetic second-move failure"):
+            with self.assertRaisesRegex(RuntimeError, "second-move failure"):
                 self.module.archive_invalidated_setup(
                     self.config,
                     self.OLD_SOURCE,
@@ -1145,6 +1713,9 @@ class InvalidatedSetupArchiveTests(unittest.TestCase):
         target = tracked.with_name("invalidation-receipt-target.json")
         tracked.rename(target)
         tracked.symlink_to(target)
+        remaining_before_resume = {
+            path for path in source_paths if os.path.lexists(path)
+        }
 
         with self.assertRaisesRegex(RuntimeError, "symlinked path component"):
             self.module.archive_invalidated_setup(
@@ -1153,7 +1724,10 @@ class InvalidatedSetupArchiveTests(unittest.TestCase):
                 self.trigger,
             )
 
-        self.assertTrue(all(path.exists() for path in source_paths))
+        self.assertEqual(
+            remaining_before_resume,
+            {path for path in source_paths if os.path.lexists(path)},
+        )
 
     @unittest.skipUnless(hasattr(os, "symlink"), "symlink creation is unavailable")
     def test_symlinked_trigger_receipt_is_rejected_before_archival(self) -> None:
@@ -1174,12 +1748,8 @@ class InvalidatedSetupArchiveTests(unittest.TestCase):
 
     @unittest.skipUnless(hasattr(os, "symlink"), "symlink creation is unavailable")
     def test_symlinked_generated_data_root_blocks_resume_before_deletion(self) -> None:
-        with mock.patch.object(
-            self.module,
-            "_unlink_source",
-            side_effect=OSError(errno.EIO, "synthetic first-unlink failure"),
-        ):
-            with self.assertRaisesRegex(OSError, "first-unlink failure"):
+        with self._fail_move_patch(message="synthetic second-move failure"):
+            with self.assertRaisesRegex(RuntimeError, "second-move failure"):
                 self.module.archive_invalidated_setup(
                     self.config,
                     self.OLD_SOURCE,
@@ -1205,12 +1775,8 @@ class InvalidatedSetupArchiveTests(unittest.TestCase):
 
     @unittest.skipUnless(hasattr(os, "symlink"), "symlink creation is unavailable")
     def test_symlinked_runs_root_blocks_resume_before_deletion(self) -> None:
-        with mock.patch.object(
-            self.module,
-            "_unlink_source",
-            side_effect=OSError(errno.EIO, "synthetic first-unlink failure"),
-        ):
-            with self.assertRaisesRegex(OSError, "first-unlink failure"):
+        with self._fail_move_patch(message="synthetic second-move failure"):
+            with self.assertRaisesRegex(RuntimeError, "second-move failure"):
                 self.module.archive_invalidated_setup(
                     self.config,
                     self.OLD_SOURCE,
@@ -1256,6 +1822,12 @@ class InvalidatedSetupArchiveTests(unittest.TestCase):
             "tracked_bytes": tracked_receipt.read_bytes(),
             "tracked_mtime": tracked_receipt.stat().st_mtime_ns,
         }
+        archived_items = self.module._items_from_file_records(
+            self.config, first["files"]
+        )[0]
+        regenerated = archived_items[0].source
+        regenerated.parent.mkdir(parents=True, exist_ok=True)
+        regenerated.write_bytes(b"replacement-source regenerated setup")
 
         with (
             mock.patch.object(
@@ -1270,9 +1842,21 @@ class InvalidatedSetupArchiveTests(unittest.TestCase):
             ),
             mock.patch.object(
                 self.module,
-                "_unlink_source",
-                side_effect=AssertionError("no source remains"),
+                "move_new_entry",
+                side_effect=AssertionError("completed cleanup must not move sources"),
             ),
+            mock.patch.object(
+                self.module.os,
+                "ftruncate",
+                side_effect=AssertionError(
+                    "completed cleanup must not truncate zero quarantine"
+                ),
+            ),
+            mock.patch.object(
+                self.module,
+                "fsync_canonical_directory",
+                wraps=self.module.fsync_canonical_directory,
+            ) as fsync_calls,
         ):
             second = self.module.archive_invalidated_setup(
                 self.config,
@@ -1285,6 +1869,15 @@ class InvalidatedSetupArchiveTests(unittest.TestCase):
         self.assertEqual(archive_receipt.stat().st_mtime_ns, before["archive_mtime"])
         self.assertEqual(tracked_receipt.read_bytes(), before["tracked_bytes"])
         self.assertEqual(tracked_receipt.stat().st_mtime_ns, before["tracked_mtime"])
+        self.assertEqual(
+            regenerated.read_bytes(), b"replacement-source regenerated setup"
+        )
+        fsynced_paths = {call.args[1] for call in fsync_calls.call_args_list}
+        self.assertTrue(
+            {item.source.parent for item in archived_items}.issubset(
+                fsynced_paths
+            )
+        )
 
     def test_tampered_archive_blocks_completed_rerun(self) -> None:
         self.module.archive_invalidated_setup(

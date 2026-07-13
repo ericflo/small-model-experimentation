@@ -3,12 +3,17 @@
 - `config.py`: exact model/config validation and the versioned source/test contract.
 - `design_boundary.py`: clean-at-HEAD scientific-design freeze and implementation-GO gate.
 - `substrate.py`: fresh deterministic finite-state tasks and exact trajectory verification.
-- `data_pipeline.py`: six disjoint splits, tiered sealed validation, and contrast access ledger.
+- `data_pipeline.py`: seven disjoint splits, tiered sealed validation, and contrast access ledger.
+- `attempt_receipts.py`: durable launch journals, marker identities, and failed-attempt replay graph.
+- `gate_receipts.py`: strict setup and branch-receipt semantic consumers.
 - `initialization.py`: per-seed common-state bundles plus external and tracked receipts.
 - `adaptation.py`: common LoRA/direct-full-shape extra-call hooks and deterministic dropout.
 - `state_loop_model.py`: the single carried-state recurrence, dense heads, and answer-graph control.
 - `optimizer_receipts.py`: complete finite FP32 Adam-state auditing.
 - `mechanics.py`: compute accounting and deterministic crossed bootstrap helpers.
+- `oracle_control.py`: frozen 48-row control corpus and shared production-shaped analyzer oracle.
+- `safe_io.py`: descriptor-relative, no-follow, same-inode artifact snapshots and durable installs.
+- `training_receipts.py`: exact stage matrices and closed terminal training-graph proofs.
 - `gpu_runner.py`: setup gates, fixed-final training, durable checkpoints, and intact/disabled
   evaluation.
 - `analysis.py`: exact evaluation validation, sequential branch authorization, sealed contrasts,

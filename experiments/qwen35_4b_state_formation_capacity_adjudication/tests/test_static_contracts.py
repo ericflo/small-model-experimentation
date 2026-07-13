@@ -3,11 +3,13 @@ from __future__ import annotations
 import ast
 import contextlib
 import io
+import importlib
 import importlib.util
 import json
 import re
 import sys
 import tempfile
+import types
 import unittest
 from pathlib import Path
 from types import SimpleNamespace
@@ -20,6 +22,54 @@ sys.path.insert(0, str(ROOT))
 
 class StaticContractTests(unittest.TestCase):
     @staticmethod
+    def load_gpu_runner():
+        """Import source-only runner tests without requiring the GPU venv."""
+
+        try:
+            return importlib.import_module("src.gpu_runner")
+        except ModuleNotFoundError as exc:
+            if exc.name != "transformers":
+                raise
+
+        transformers = types.ModuleType("transformers")
+        transformers.__version__ = "5.13.0"
+
+        class ModelLoader:
+            @staticmethod
+            def from_pretrained(*_args, **_kwargs):
+                raise AssertionError("test loader must be patched")
+
+        class TokenizerLoader:
+            @staticmethod
+            def from_pretrained(*_args, **_kwargs):
+                raise AssertionError("test loader must be patched")
+
+        transformers.AutoModelForCausalLM = ModelLoader
+        transformers.AutoTokenizer = TokenizerLoader
+        utils = types.ModuleType("transformers.utils")
+        hub = types.ModuleType("transformers.utils.hub")
+        hub.cached_file = lambda *_args, **_kwargs: None
+
+        def extract_commit_hash(path, _commit_hash):
+            candidate = Path(path)
+            if candidate.parent.parent.name == "snapshots":
+                return candidate.parent.name
+            return None
+
+        hub.extract_commit_hash = extract_commit_hash
+        import_utils = types.ModuleType("transformers.utils.import_utils")
+        import_utils.is_causal_conv1d_available = lambda: False
+        import_utils.is_flash_linear_attention_available = lambda: False
+        stubs = {
+            "transformers": transformers,
+            "transformers.utils": utils,
+            "transformers.utils.hub": hub,
+            "transformers.utils.import_utils": import_utils,
+        }
+        with mock.patch.dict(sys.modules, stubs):
+            return importlib.import_module("src.gpu_runner")
+
+    @staticmethod
     def load_cli():
         spec = importlib.util.spec_from_file_location(
             "capacity_adjudication_cli", ROOT / "scripts" / "run.py"
@@ -28,6 +78,12 @@ class StaticContractTests(unittest.TestCase):
             raise RuntimeError("capacity-adjudication CLI cannot be imported")
         module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(module)
+
+        @contextlib.contextmanager
+        def authorized_source_snapshot():
+            yield module.LOADED_SOURCE_CONTRACT_SHA256
+
+        module.authorized_source_execution_snapshot = authorized_source_snapshot
         return module
 
     @staticmethod
@@ -230,6 +286,24 @@ class StaticContractTests(unittest.TestCase):
         ):
             self.assertIn(option, source)
         self.assertIn("--seed is required", source)
+
+    def test_cli_rejects_loaded_modules_outside_authorized_source_snapshot(self) -> None:
+        module = self.load_cli()
+        config_path = ROOT / "configs" / "smoke.yaml"
+
+        @contextlib.contextmanager
+        def mismatched_snapshot():
+            yield "f" * 64
+
+        with tempfile.TemporaryDirectory() as directory:
+            experiment = Path(directory) / "repo" / "experiments" / ROOT.name
+            experiment.mkdir(parents=True)
+            with mock.patch.object(module, "ROOT", experiment), mock.patch.object(
+                module, "authorized_source_execution_snapshot", mismatched_snapshot
+            ), mock.patch.object(module, "cpu_smoke") as target:
+                with self.assertRaisesRegex(RuntimeError, "loaded CLI modules"):
+                    module.main(["--config", str(config_path), "--stage", "cpu-smoke"])
+            target.assert_not_called()
 
     def test_no_authorization_preauthorization_cli_paths_reach_their_stage(self) -> None:
         module = self.load_cli()
@@ -740,16 +814,25 @@ class StaticContractTests(unittest.TestCase):
         )
         body = ast.get_source_segment(source, function) or ""
         checkpoint_index = body.find("_load_checkpoint(")
+        setup_barrier_index = body.find("_setup_barrier(")
+        training_barrier_index = body.find("_reached_training_barrier(")
+        output_index = body.find("_require_new_output(")
         lineage_index = body.find("checkpoint_lineage = {", checkpoint_index)
         record_index = body.find("record_contrast_access(")
-        validation_index = body.find("validate_data_manifest(", record_index)
-        read_index = body.find("rows = read_jsonl(")
+        marker_index = body.find("ensure_attempt_output(", record_index)
+        started_index = body.find("start_contrast_access(", marker_index)
+        validation_index = body.find("validated_data_rows(", started_index)
         self.assertGreaterEqual(checkpoint_index, 0)
+        self.assertGreater(setup_barrier_index, 0)
+        self.assertGreater(training_barrier_index, setup_barrier_index)
+        self.assertGreater(checkpoint_index, training_barrier_index)
+        self.assertGreater(output_index, checkpoint_index)
         self.assertGreater(lineage_index, checkpoint_index)
         self.assertGreater(record_index, lineage_index)
         self.assertGreaterEqual(record_index, 0)
-        self.assertGreater(validation_index, record_index)
-        self.assertGreater(read_index, validation_index)
+        self.assertGreater(marker_index, record_index)
+        self.assertGreater(started_index, marker_index)
+        self.assertGreater(validation_index, started_index)
         lineage_source = body[lineage_index:record_index]
         for field in (
             '"path"',
@@ -757,11 +840,53 @@ class StaticContractTests(unittest.TestCase):
             '"checkpoint_identity_sha256"',
         ):
             self.assertIn(field, lineage_source)
-        record_call = body[record_index:validation_index]
+        record_call = body[record_index:marker_index]
         self.assertIn("checkpoint_lineage=checkpoint_lineage", record_call)
-        self.assertRegex(body, r"statuses\s*=\s*\{\s*\"STAGE_B_CONTRAST_AUTHORIZED\"\s*\}")
-        self.assertRegex(body, r"phases\s*=\s*\{\s*\"stage_b_seal_analysis\"\s*\}")
+        self.assertIn("_contrast_authorization_details(", body)
+        helper = source[
+            source.index("def _contrast_authorization_details("):
+            source.index("\ndef _setup_receipt_path(")
+        ]
+        self.assertIn("STAGE_B_CONTRAST_BRANCH", helper)
+        self.assertIn('"stage_b_seal.json"', helper)
         self.assertIn('objective != "joint"', body)
+
+    def test_result_training_preflight_precedes_content_model_and_output(self) -> None:
+        path = ROOT / "src" / "gpu_runner.py"
+        source = path.read_text(encoding="utf-8")
+        tree = ast.parse(source, filename=str(path))
+        function = next(
+            node
+            for node in tree.body
+            if isinstance(node, ast.FunctionDef) and node.name == "train"
+        )
+        body = ast.get_source_segment(source, function) or ""
+        ordered = (
+            "_authorization_details_for(",
+            "content_splits=set()",
+            "_setup_barrier(",
+            "_prior_training_barriers(",
+            "canonical_training_cell_paths(",
+            "recover_published_training_completion(",
+            "training_launch_preflight(",
+            "prepare_training_attempt(",
+            "ensure_attempt_output(",
+            "start_training_attempt(",
+            "validate_training_attempt_history(",
+            "validated_data_rows(",
+            "_build_new(",
+        )
+        positions = [body.find(fragment) for fragment in ordered]
+        self.assertTrue(all(position >= 0 for position in positions), positions)
+        self.assertEqual(positions, sorted(positions))
+        self.assertNotIn("_authorization_chain_contains", source)
+        self.assertIn("validate_branch_authorization(", source)
+        publication = body.find('_write_new_json_pair(output_dir / "run.json"')
+        injected_crash = body.find('"terminal_receipts_published"', publication)
+        completion = body.find("complete_training_attempt(", injected_crash)
+        self.assertGreater(publication, positions[-1])
+        self.assertGreater(injected_crash, publication)
+        self.assertGreater(completion, injected_crash)
 
     def test_g0_binds_two_step_gradients_calls_clips_and_destructive_reload(self) -> None:
         path = ROOT / "src" / "gpu_runner.py"
@@ -862,7 +987,7 @@ class StaticContractTests(unittest.TestCase):
         self.assertEqual(shadowing_stores, [])
 
     def test_pinned_snapshot_receipt_binds_every_weight_and_tokenizer_file(self) -> None:
-        from src import gpu_runner
+        gpu_runner = self.load_gpu_runner()
 
         revision = gpu_runner.MODEL_REVISION
         with tempfile.TemporaryDirectory() as directory:
@@ -912,7 +1037,7 @@ class StaticContractTests(unittest.TestCase):
                     gpu_runner._pinned_snapshot_receipt()
 
     def test_pinned_snapshot_receipt_rejects_malformed_index_and_mixed_paths(self) -> None:
-        from src import gpu_runner
+        gpu_runner = self.load_gpu_runner()
 
         revision = gpu_runner.MODEL_REVISION
         with tempfile.TemporaryDirectory() as directory:
@@ -969,7 +1094,7 @@ class StaticContractTests(unittest.TestCase):
                     gpu_runner._pinned_snapshot_receipt()
 
     def test_load_base_accepts_missing_runtime_hash_only_after_snapshot_proof(self) -> None:
-        from src import gpu_runner
+        gpu_runner = self.load_gpu_runner()
         from src.config import load_config
 
         config = load_config(ROOT / "configs" / "default.yaml")
@@ -1054,6 +1179,27 @@ class StaticContractTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "loaded model revision differs"):
                 gpu_runner._load_base(config)
 
+    def test_checkpoint_initialization_lineage_rejects_symlinked_ancestor(self) -> None:
+        gpu_runner = self.load_gpu_runner()
+
+        with tempfile.TemporaryDirectory() as directory:
+            repo = Path(directory)
+            real = repo / "real-bundles"
+            real.mkdir()
+            bundle = real / "initialization.pt"
+            bundle.write_bytes(b"synthetic")
+            alias = repo / "bundles"
+            alias.symlink_to(real, target_is_directory=True)
+            with mock.patch.object(gpu_runner, "REPO_ROOT", repo):
+                with self.assertRaisesRegex(RuntimeError, "not canonical"):
+                    gpu_runner._resolve_repo_path("bundles/initialization.pt")
+                with self.assertRaisesRegex(RuntimeError, "not canonical"):
+                    gpu_runner._repo_relative(alias / "initialization.pt")
+                self.assertEqual(
+                    gpu_runner._resolve_repo_path("real-bundles/initialization.pt"),
+                    bundle,
+                )
+
     def test_positive_control_uses_fresh_grid_without_opening_result_rows(self) -> None:
         path = ROOT / "src" / "gpu_runner.py"
         source = path.read_text(encoding="utf-8")
@@ -1066,9 +1212,11 @@ class StaticContractTests(unittest.TestCase):
                 if isinstance(node, ast.FunctionDef) and node.name == "positive_control"
             ),
         ) or ""
-        self.assertIn("_positive_control_rows(config, manifest)", control)
+        self.assertIn("generate_control_rows(config, manifest)", control)
+        self.assertIn("produce_oracle_analysis_receipt(rows)", control)
         self.assertIn("content_splits=set()", control)
         self.assertNotIn("read_jsonl(", control)
+        self.assertNotIn("validated_data_rows(", control)
 
     def test_pre_authorization_model_paths_open_only_registered_noncontrast_rows(self) -> None:
         path = ROOT / "src" / "gpu_runner.py"
@@ -1079,10 +1227,9 @@ class StaticContractTests(unittest.TestCase):
             for node in tree.body
             if isinstance(node, ast.FunctionDef)
         }
-        self.assertIn(
-            'content_splits={"train"}',
-            functions["_model_smoke_attempt"],
-        )
+        self.assertIn('content_splits=set()', functions["_model_smoke_attempt"])
+        self.assertIn('validated_data_rows(', functions["_model_smoke_attempt"])
+        self.assertIn('("train",)', functions["_model_smoke_attempt"])
         self.assertIn(
             'seed=int(config["training"]["g0_control"]["worst_depth_seed"])',
             functions["_model_smoke_attempt"],
@@ -1101,7 +1248,9 @@ class StaticContractTests(unittest.TestCase):
                 functions["_model_smoke_attempt"],
             )
         self.assertIn("content_splits=set()", functions["positive_control"])
-        self.assertIn('content_splits={"train"}', functions["train"])
+        self.assertNotIn("validated_data_rows(", functions["positive_control"])
+        self.assertIn("validated_data_rows(", functions["train"])
+        self.assertIn('("train",)', functions["train"])
         for name in ("model_smoke", "positive_control", "train"):
             self.assertNotIn("contrast_depth", functions[name])
             self.assertNotIn("contrast_joint", functions[name])
@@ -1144,20 +1293,38 @@ class StaticContractTests(unittest.TestCase):
         atomic = functions["_atomic_write_json"]
         build = functions["build_datasets"]
         self.assertIn('lock_path = path.with_name(f"{path.name}.lock")', record)
-        self.assertIn('lock_path.open("a+"', record)
-        self.assertIn("fcntl.flock(lock_handle.fileno(), fcntl.LOCK_EX)", record)
-        self.assertGreaterEqual(record.count("_atomic_write_json(path, payload)"), 2)
+        self.assertIn("with locked_regular(lock_path):", record)
+        self.assertGreaterEqual(
+            record.count("durable_atomic_write_json(path, payload, replace=True)"), 2
+        )
         self.assertNotIn(".seek(", record)
         self.assertNotIn(".truncate(", record)
         self.assertNotIn('path.open("r+"', record)
 
-        self.assertIn("handle.flush()", atomic)
-        self.assertIn("os.fsync(handle.fileno())", atomic)
-        self.assertIn("os.replace(temporary, path)", atomic)
-        self.assertIn("os.open(path.parent, os.O_RDONLY)", atomic)
-        self.assertIn("os.fsync(directory_fd)", atomic)
+        self.assertIn("publish_new_bytes(path.parent, path, encoded, mode=0o644)", atomic)
         self.assertIn("_atomic_write_json(manifest_path, manifest)", build)
         self.assertIn("_atomic_write_json(ledger_path, ledger)", build)
+        writer = functions["_write_jsonl_gz"]
+        self.assertIn("publish_new_file(", writer)
+        self.assertIn("write_compressed", writer)
+        self.assertIn("read_stable_bytes(path.parent, path)", writer)
+        self.assertNotIn("os.O_EXCL", writer)
+
+    def test_producers_and_archivers_share_one_execution_generation_lock(self) -> None:
+        run = (ROOT / "scripts" / "run.py").read_text(encoding="utf-8")
+        failed = (ROOT / "scripts" / "archive_failed_attempt.py").read_text(
+            encoding="utf-8"
+        )
+        invalidated = (
+            ROOT / "scripts" / "archive_invalidated_setup.py"
+        ).read_text(encoding="utf-8")
+        lock_name = 'ROOT / "runs" / "run.lock"'
+        self.assertIn(lock_name, run)
+        self.assertIn(lock_name, failed)
+        self.assertIn(lock_name, invalidated)
+        self.assertIn("locked_regular(EXECUTION_GENERATION_LOCK)", run)
+        self.assertIn("with locked_regular(execution_lock):", failed)
+        self.assertIn("with locked_regular(execution_generation_lock):", invalidated)
 
 
 if __name__ == "__main__":

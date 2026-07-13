@@ -21,11 +21,11 @@ external_artifacts:
     required_for: "audit of the seed-7411 G0/control passes, seed-7412 precision failure, and exact preservation of their source-bound setup"
     checksum: "tracked receipt runs/failures/invalidated_setup_source_1d1368cf.json; receipt SHA256 e899bc465eb627d5919ef84c7f0bfda07cd96e73035a5ef73569debe34869484; receipt identity 13cdcaec2828e394c625e56955b8d36d4dc4dd6eabbd314dd686bbe143b2050b; files identity d05f410cb36cfc33e9eefcc69c3bb2a50723edb9776f278bce8fb43ac7af9d88; 21 files; 18,288,790 bytes"
     regenerate: "not regenerable as historical evidence; preserve this exact content-hashed archive"
-  - name: "replacement-source per-seed common loop-state initialization bundles"
+  - name: "invalidated source-d426 per-seed initialization bundles pending archival"
     storage: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed{7411,7412,7413}.pt"
-    required_for: "bit-identical reconstruction of every reached capacity/objective arm"
+    required_for: "one-time exact source-d426 invalidation archive only; these bundles cannot initialize a source-v7 arm"
     checksum: "bundle SHA256 by seed: 7411 539e8e6cffaefd17ec96c64b5b9c40d0834c831da3fcce85787aa15b36b5dc26; 7412 bf916363d03260b31f126cc416332ace6c2476e804faca5c110a2e3816315e9d; 7413 596990254e8c80b0140725b0c0e4ab0bfa2bf5d4a9f618d64784648c5b72593c; tracked receipt identities a79d0f9b3d63df42637011409bad5d9d7f3fa1d66a1af0a3de33758561507f8a, 28e7d6db5093d2bcb49e7ef359b48de2eeb0518f0f1d602547bfc24abd536d86, c4e8657b8351e2386b03db4b085ba8b3208a8f209a75ef79f305db9bb2a40ffa"
-    regenerate: "preserve these exact replacement-source bundles; recreate only after an explicitly archived source-contract invalidation"
+    regenerate: "do not reuse or recreate in place; after source-v7 is pushed and CI is green, archive them with the registered source-d426 invalidation command, then generate new source-v7 bundles"
   - name: "fixed-final LoRA joint checkpoints"
     storage: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/lora_joint_seed{7411,7412,7413}/"
     required_for: "primary LoRA state-formation adjudication and intact/disabled reevaluation"
@@ -57,7 +57,7 @@ omitted_artifacts:
   - path: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/"
     reason: "initialization tensor bundles and model/checkpoint payloads are external under repository artifact policy"
 reproducibility:
-  smoke_command: "python3 experiments/qwen35_4b_state_formation_capacity_adjudication/scripts/run.py --stage cpu-smoke"
+  smoke_command: ".venv/bin/python -B experiments/qwen35_4b_state_formation_capacity_adjudication/scripts/run.py --stage cpu-smoke"
   full_command: "phase-gated and intentionally non-monolithic: follow docs/gpu_runbook.md; every result stage verifies its exact upstream receipts and branch authorization"
   required_external_artifacts:
     - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/invalidated_setup/source_903f19141ef982f0e90ea856edd72d75fb48d2dbd96e81dc166a6c32d4c14116/"

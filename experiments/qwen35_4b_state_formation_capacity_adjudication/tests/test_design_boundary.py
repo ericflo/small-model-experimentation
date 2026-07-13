@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import ast
+import contextlib
 import json
+import os
 import sys
 import tempfile
 import unittest
@@ -41,7 +43,7 @@ class DesignBoundaryTests(unittest.TestCase):
             {"path": "experiment/config.yaml", "bytes": 10, "sha256": "a" * 64},
             {"path": "experiment/test.py", "bytes": 20, "sha256": "b" * 64},
         ]
-        with tempfile.TemporaryDirectory() as directory:
+        with tempfile.TemporaryDirectory(dir=ROOT / "tests") as directory:
             path = Path(directory) / "design_receipt.json"
             patches = (
                 mock.patch.object(
@@ -55,13 +57,19 @@ class DesignBoundaryTests(unittest.TestCase):
                 mock.patch.object(design_boundary, "_git_head", return_value="1" * 40),
                 mock.patch.object(design_boundary, "_require_tracked_clean_inputs"),
                 mock.patch.object(design_boundary, "require_implementation_go"),
+                mock.patch.object(
+                    design_boundary,
+                    "_implementation_go_snapshot",
+                    side_effect=lambda: contextlib.nullcontext(),
+                ),
             )
             with (
                 patches[0], patches[1], patches[2],
                 patches[3] as clean_inputs, patches[4] as implementation_go,
+                patches[5],
             ):
                 receipt = design_boundary.freeze_design(self.config, path)
-                clean_inputs.assert_called_once_with()
+                self.assertEqual(clean_inputs.call_count, 2)
                 implementation_go.assert_called_once_with()
                 self.assertEqual(receipt["status"], "DESIGN_FROZEN")
                 self.assertEqual(receipt["phase"], "design_boundary")
@@ -86,18 +94,30 @@ class DesignBoundaryTests(unittest.TestCase):
                     design_boundary.validate_design_receipt(self.config, path)
 
     def test_implementation_review_requires_one_exact_go_status(self) -> None:
+        digest = "d" * 64
+        exact = (
+            "# Review\n\n"
+            "**Source-contract version:** `7`\n"
+            f"**Reviewed implementation SHA-256:** `{digest}`\n"
+        )
         cases = (
-            ("# Review\n\n**Status:** `GO`\n", True),
-            ("# Review\n\n**Status:** `NO_GO`\n", False),
-            ("# Review\n\n**Status:** GO\n", False),
-            ("# Review\n\n**Status:** `go`\n", False),
-            ("# Review\n\nStatus: `GO`\n", False),
-            ("**Status:** `GO`\n**Status:** `GO`\n", False),
+            (exact + "**Status:** `GO`\n", True),
+            (exact + "**Status:** `NO_GO`\n", False),
+            (exact.replace("version:** `7`", "version:** `6`") + "**Status:** `GO`\n", False),
+            (exact.replace(digest, "e" * 64) + "**Status:** `GO`\n", False),
+            ("# Review\n\n**Status:** `GO`\n", False),
+            (exact + "**Status:** `GO`\n**Status:** `GO`\n", False),
             ("The implementation is GO.\n", False),
         )
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "implementation_review.md"
-            with mock.patch.object(design_boundary, "IMPLEMENTATION_REVIEW", path):
+            with mock.patch.object(
+                design_boundary, "IMPLEMENTATION_REVIEW", path
+            ), mock.patch.object(
+                design_boundary,
+                "reviewed_implementation_snapshot",
+                side_effect=lambda: contextlib.nullcontext(digest),
+            ):
                 with self.assertRaisesRegex(RuntimeError, "review is missing"):
                     design_boundary.require_implementation_go()
                 for contents, accepted in cases:
@@ -109,18 +129,116 @@ class DesignBoundaryTests(unittest.TestCase):
                             with self.assertRaisesRegex(RuntimeError, "exact GO"):
                                 design_boundary.require_implementation_go()
 
+    def test_implementation_review_aliases_fail_closed(self) -> None:
+        digest = "d" * 64
+        encoded = (
+            "# Review\n\n"
+            "**Source-contract version:** `7`\n"
+            f"**Reviewed implementation SHA-256:** `{digest}`\n"
+            "**Status:** `GO`\n"
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            real = root / "real.md"
+            real.write_text(encoded, encoding="utf-8")
+            alias = root / "alias.md"
+            alias.symlink_to(real)
+            with mock.patch.object(
+                design_boundary, "IMPLEMENTATION_REVIEW", alias
+            ), mock.patch.object(
+                design_boundary,
+                "reviewed_implementation_snapshot",
+                side_effect=lambda: contextlib.nullcontext(digest),
+            ), self.assertRaisesRegex(RuntimeError, "aliased"):
+                design_boundary.require_implementation_go()
+
+            alias.unlink()
+            os.link(real, alias)
+            try:
+                with mock.patch.object(
+                    design_boundary, "IMPLEMENTATION_REVIEW", alias
+                ), mock.patch.object(
+                    design_boundary,
+                    "reviewed_implementation_snapshot",
+                    side_effect=lambda: contextlib.nullcontext(digest),
+                ), self.assertRaisesRegex(RuntimeError, "aliased"):
+                    design_boundary.require_implementation_go()
+            finally:
+                alias.unlink()
+
+    def test_design_lineage_never_splits_parsed_identity_and_byte_hash(self) -> None:
+        synthetic_manifest = [
+            {"path": "experiment/config.yaml", "bytes": 10, "sha256": "a" * 64},
+        ]
+        with tempfile.TemporaryDirectory(dir=ROOT / "tests") as directory:
+            path = Path(directory) / "design_receipt.json"
+            with mock.patch.object(
+                design_boundary, "canonical_design_receipt_path", return_value=path
+            ), mock.patch.object(
+                design_boundary, "_manifest", return_value=synthetic_manifest
+            ), mock.patch.object(
+                design_boundary, "_git_head", return_value="1" * 40
+            ), mock.patch.object(
+                design_boundary, "_require_tracked_clean_inputs"
+            ), mock.patch.object(
+                design_boundary, "require_implementation_go"
+            ), mock.patch.object(
+                design_boundary,
+                "_implementation_go_snapshot",
+                side_effect=lambda: contextlib.nullcontext(),
+            ):
+                receipt = design_boundary.freeze_design(self.config, path)
+                expected_sha256 = design_boundary._sha256(path)
+                lineage = design_boundary.design_lineage(self.config)
+                self.assertEqual(lineage["sha256"], expected_sha256)
+                self.assertEqual(
+                    lineage["receipt_identity_sha256"],
+                    receipt["receipt_identity_sha256"],
+                )
+
+                replacement = path.with_name("replacement.json")
+                replacement.write_bytes(path.read_bytes())
+                original_validate = design_boundary._validate_design_payload
+                injected = False
+
+                def replace_during_validation(*args: object, **kwargs: object):
+                    nonlocal injected
+                    os.replace(replacement, path)
+                    injected = True
+                    return original_validate(*args, **kwargs)
+
+                with mock.patch.object(
+                    design_boundary,
+                    "_validate_design_payload",
+                    side_effect=replace_during_validation,
+                ), self.assertRaisesRegex(RuntimeError, "aliased"):
+                    design_boundary.design_lineage(self.config)
+                self.assertTrue(injected)
+
     def test_freeze_and_reopen_both_fail_closed_without_implementation_go(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "design_receipt.json"
             denied = RuntimeError("implementation review has not authorized exact GO")
+
+            @contextlib.contextmanager
+            def denied_snapshot():
+                raise denied
+                yield
+
             with mock.patch.object(
                 design_boundary, "require_implementation_go", side_effect=denied
-            ) as gate:
+            ) as gate, mock.patch.object(
+                design_boundary,
+                "_implementation_go_snapshot",
+                side_effect=denied_snapshot,
+            ), mock.patch.object(
+                design_boundary, "canonical_design_receipt_path", return_value=path
+            ):
                 with self.assertRaisesRegex(RuntimeError, "exact GO"):
                     design_boundary.freeze_design(self.config, path)
                 with self.assertRaisesRegex(RuntimeError, "exact GO"):
                     design_boundary.validate_design_receipt(self.config, path)
-            self.assertEqual(gate.call_count, 2)
+            self.assertEqual(gate.call_count, 1)
 
     def test_prefreeze_requires_every_registered_input_tracked_and_clean_at_head(self) -> None:
         expected = {

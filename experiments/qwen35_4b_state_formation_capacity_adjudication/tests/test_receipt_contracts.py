@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 import json
+import importlib
 import sys
 import tempfile
+import types
 import unittest
 from pathlib import Path
 from unittest import mock
@@ -11,7 +13,43 @@ from unittest import mock
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from src import gpu_runner  # noqa: E402
+try:  # noqa: E402
+    gpu_runner = importlib.import_module("src.gpu_runner")
+except ModuleNotFoundError as exc:  # source-only check environment
+    if exc.name != "transformers":
+        raise
+    transformers = types.ModuleType("transformers")
+    transformers.__version__ = "5.13.0"
+
+    class ModelLoader:
+        @staticmethod
+        def from_pretrained(*_args, **_kwargs):
+            raise AssertionError("GPU loader is unavailable in source-only tests")
+
+    class TokenizerLoader:
+        @staticmethod
+        def from_pretrained(*_args, **_kwargs):
+            raise AssertionError("GPU loader is unavailable in source-only tests")
+
+    transformers.AutoModelForCausalLM = ModelLoader
+    transformers.AutoTokenizer = TokenizerLoader
+    utils = types.ModuleType("transformers.utils")
+    hub = types.ModuleType("transformers.utils.hub")
+    hub.cached_file = lambda *_args, **_kwargs: None
+    hub.extract_commit_hash = lambda *_args, **_kwargs: None
+    import_utils = types.ModuleType("transformers.utils.import_utils")
+    import_utils.is_causal_conv1d_available = lambda: False
+    import_utils.is_flash_linear_attention_available = lambda: False
+    with mock.patch.dict(
+        sys.modules,
+        {
+            "transformers": transformers,
+            "transformers.utils": utils,
+            "transformers.utils.hub": hub,
+            "transformers.utils.import_utils": import_utils,
+        },
+    ):
+        gpu_runner = importlib.import_module("src.gpu_runner")
 from src.config import load_config  # noqa: E402
 
 
@@ -155,10 +193,8 @@ class DurableLineageTests(unittest.TestCase):
         start = source.index("def _load_evaluation(")
         end = source.index("\ndef _cells(", start)
         loader = source[start:end]
-        self.assertIn(
-            '_resolve_repo_path(str(summary["checkpoint_path"]))',
-            loader,
-        )
+        self.assertIn("_evaluation_contract_preflight(", loader)
+        self.assertIn('checkpoint_path = preflight["checkpoint_path"]', loader)
         self.assertIn('f"rows_{mode}.jsonl"', loader)
 
         authorization_start = source.index("def _load_analysis_authorization(")
@@ -166,7 +202,8 @@ class DurableLineageTests(unittest.TestCase):
             "\ndef _fullrank_minus_lora_contrast(", authorization_start
         )
         authorization_loader = source[authorization_start:authorization_end]
-        self.assertIn("_resolve_repo_path(", authorization_loader)
+        self.assertIn("validate_branch_authorization(", authorization_loader)
+        self.assertIn("canonical_relative_path=canonical_relative", authorization_loader)
 
         runner_source = (ROOT / "src" / "gpu_runner.py").read_text(encoding="utf-8")
         receipt_start = runner_source.index("def _read_receipt(")

@@ -1,6 +1,54 @@
 # Implementation Review
 
+**Source-contract version:** `7`
+
+**Reviewed implementation SHA-256:** `af6d65dfe28dc385e8819e8443cd6b63985101f1bee5be2c248563a4576abcef`
+
 **Status:** `GO`
+
+Source-contract v7 passed integrated authorization, science/protocol, and terminal/recovery review.
+This authorization binds exactly the implementation digest above plus the pinned training lock; any
+change to a reviewed source or test revokes it automatically. It authorizes only the registered
+source-v7 archive/regeneration/runbook sequence and does not make any historical setup artifact valid
+under v7.
+
+## Source-v7 integrated authorization
+
+The complete source-bound CPU suite passes **355/355**. The focused terminal boundary passes
+**142/142** across stable I/O (31), invalidated-setup archive/recovery (52), failed-attempt
+archive/recovery (28), and static execution contracts (31). The independent frozen-science audit
+passes **238/238** with no scientific defect: fixed seeds, split matrices, estimand, thresholds,
+10,000-draw crossed bootstrap, Stage A/B/C ordering, sealed-contrast logic, and the mandatory
+LoRA-negative full-shape/state-only branches remain exactly preregistered. No model or GPU was used
+during this review, and no benchmark content was accessed.
+
+The terminal review initially returned `NO_GO` and reproduced defects that ordinary happy-path tests
+missed: exceptional context exits skipped canonical rebinding; recursive directory creation could
+finish through a renamed-away ancestor; a completed-looking zero quarantine could bypass a failed
+leaf fsync; archive payloads and both receipt copies were revalidated only after destructive cleanup;
+and markerless evaluation recovery could confuse multiple historical attempts. All are now closed by
+source-bound regressions. Stable contexts revalidate roots, ancestors, leaf bindings, and held inodes
+on both normal and exceptional exit. Directory creation re-walks every held component from the
+trusted root. Both archivers hold and repeatedly hash the exact durable archive while retiring
+sources, validate every quarantine leaf before the first truncate, retain exact zero-length
+quarantine skeletons instead of unlinking canonical evidence, and re-fsync completed skeletons and
+all source parents on recovery. Archive receipts, tracked mirrors, tree membership, hardlink counts,
+and full 64-character attempt identities are checked before mutation. All setup/result producers,
+analyzers, and archive helpers share the ignored `runs/run.lock`, excluding concurrent cooperating
+writers across the validation-to-retirement interval.
+
+Adversarial regressions cover root and ancestor replacement, body-exception races, cross-parent
+fsync failure, hardlinks and symlinks, destination collisions, corrupt final quarantine content,
+last-leaf truncate-plus-fsync failure, archive-payload and archive-receipt mutation before cleanup,
+regenerated canonical names coexisting with completed quarantine markers, partial move/zeroization
+resume, multiple historical evaluation archives, malformed/wrong explicit attempt identities, and
+exact training-journal recovery. Completion markers dominate without modifying a regenerated
+canonical source, but they are never accepted without descriptor revalidation and fresh fsync.
+
+This section supersedes historical prose below that describes cleanup as pathname deletion or
+directory removal. Those passages record earlier implementation states; v7 uses no destructive
+unlink/rmtree operation on canonical or quarantine evidence. Private transaction-owned staging may
+still be discarded only after its exact ownership and destination state are validated.
 
 This source-bound review records the executable go/no-go decision separately from the immutable
 scientific design receipt. The runner, initialization and checkpoint lineage, sealed-data firewall,

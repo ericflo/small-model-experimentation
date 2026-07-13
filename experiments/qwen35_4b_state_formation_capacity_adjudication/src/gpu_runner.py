@@ -11,6 +11,7 @@ import os
 import platform
 import random
 import re
+import stat
 import subprocess
 import tempfile
 import time
@@ -29,26 +30,77 @@ from transformers.utils.import_utils import (
 )
 
 from .adaptation import microbatch_dropout_seed
+from .attempt_receipts import (
+    ATTEMPT_MARKER_NAME,
+    AttemptReceiptError,
+    canonical_path as canonical_attempt_path,
+    complete_training_attempt,
+    ensure_attempt_output,
+    prepare_training_attempt,
+    required_training_replay_archive,
+    repo_relative as attempt_repo_relative,
+    start_training_attempt,
+    validate_training_attempt_history,
+)
 from .config import (
     G0_COMPLETED_CHECKS,
+    G0_FAILURE_STAGE_PREFIX_LENGTHS,
     MODEL_ID,
     MODEL_REVISION,
     config_sha256,
+    requirements_training_lock_bytes,
     require_confirmatory_config,
     source_contract_sha256,
 )
 from .data_pipeline import (
     load_contrast_access_ledger,
-    read_jsonl,
     record_contrast_access,
+    start_contrast_access,
     validate_data_manifest,
+    validated_data_rows,
 )
 from .design_boundary import design_lineage, validate_design_receipt
+from .gate_receipts import (
+    LORA_MISS_BRANCH,
+    POSTCONTRAST_FULLRANK_MISS_BRANCH,
+    STAGE_B_CONTRAST_BRANCH,
+    STAGE_B_FULLRANK_MISS_BRANCH,
+    canonical_repo_path,
+    stable_setup_receipt as strict_stable_setup_receipt,
+    validate_branch_authorization,
+    validate_g0_pass,
+    validate_positive_control_pass,
+)
 from .initialization import build_shared_state, load_initialization_bundle, tensor_manifest
 from .mechanics import recurrent_compute_receipt
 from .optimizer_receipts import optimizer_state_receipt
+from .oracle_control import (
+    analyze_positive_control_records,
+    generate_control_rows,
+    produce_oracle_analysis_receipt,
+)
+from .safe_io import (
+    open_stable_regular,
+    publish_new_bytes,
+    publish_new_file,
+    read_stable_bytes,
+    read_stable_json_object,
+    read_verified_json_object,
+)
 from .state_loop_model import StateLoopModel
 from .substrate import LETTERS, generate_example, trajectory_targets, verify_example
+from .training_receipts import (
+    STAGE_A_MATRIX,
+    STAGE_B_MATRIX,
+    STAGE_C_MATRIX,
+    TrainingCell,
+    TrainingReceiptContract,
+    canonical_training_cell_paths,
+    evaluation_barrier,
+    recover_published_training_completion,
+    training_barrier,
+    training_launch_preflight,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -69,25 +121,49 @@ PINNED_SNAPSHOT_FILES = (
 
 
 def _write_json(path: Path, payload: object) -> None:
+    if not isinstance(payload, Mapping):
+        raise RuntimeError("JSON receipt payload must be an object")
     path.parent.mkdir(parents=True, exist_ok=True)
-    encoded = (json.dumps(payload, indent=2, sort_keys=True) + "\n").encode("utf-8")
-    temporary = path.with_name(f".{path.name}.tmp-{os.getpid()}")
-    with temporary.open("wb") as handle:
-        handle.write(encoded)
-        handle.flush()
-        os.fsync(handle.fileno())
-    os.replace(temporary, path)
+    encoded = (
+        json.dumps(payload, indent=2, sort_keys=True, allow_nan=False) + "\n"
+    ).encode("utf-8")
+    publish_new_bytes(_publication_root(path), path, encoded, mode=0o644)
+
+
+def _publication_root(path: Path) -> Path:
+    """Choose the canonical trusted root for a production or isolated test path."""
+
+    lexical = Path(os.path.abspath(os.fspath(path)))
+    return REPO_ROOT if lexical.is_relative_to(REPO_ROOT) else lexical.parent
 
 
 def _atomic_copy(source: Path, destination: Path) -> None:
+    _copy_new_fsynced(source, destination)
+
+
+def _copy_new_fsynced(source: Path, destination: Path) -> None:
+    """Copy to a new inode without replacement and durably bind its directory."""
+
+    _require_no_symlink_ancestors(destination)
     destination.parent.mkdir(parents=True, exist_ok=True)
-    temporary = destination.with_name(f".{destination.name}.tmp-{os.getpid()}")
-    with source.open("rb") as reader, temporary.open("wb") as writer:
-        for block in iter(lambda: reader.read(1024 * 1024), b""):
-            writer.write(block)
-        writer.flush()
-        os.fsync(writer.fileno())
-    os.replace(temporary, destination)
+    _require_no_symlink_ancestors(destination)
+    lexical = Path(os.path.abspath(os.fspath(source)))
+    trusted_root = REPO_ROOT if lexical.is_relative_to(REPO_ROOT) else lexical.parent
+    def copy(writer: Any) -> None:
+        with open_stable_regular(trusted_root, lexical) as reader:
+            for block in iter(lambda: reader.read(1024 * 1024), b""):
+                writer.write(block)
+
+    publish_new_file(
+        _publication_root(destination), destination, copy, mode=0o644
+    )
+
+
+def _fsync_file(path: Path) -> None:
+    lexical = Path(os.path.abspath(os.fspath(path)))
+    trusted_root = REPO_ROOT if lexical.is_relative_to(REPO_ROOT) else lexical.parent
+    with open_stable_regular(trusted_root, lexical) as handle:
+        os.fsync(handle.fileno())
 
 
 def _fsync_directory(path: Path) -> None:
@@ -114,14 +190,7 @@ def _write_new_json_pair(
     mirror: Path,
     payload: Mapping[str, Any],
 ) -> None:
-    """Install one serialized receipt at two new paths without replacement.
-
-    The source-qualified mirror is linked first so a process interruption can
-    never leave only an untracked canonical failure.  One serialization is
-    written to two independently fsynced staging inodes, preventing later
-    in-place mutation of either final path from changing the other.  Existing
-    regular files, symlinks, and broken symlinks are all immutable.
-    """
+    """Publish a mirror-first, independently inoded immutable receipt pair."""
 
     _require_no_symlink_ancestors(canonical)
     _require_no_symlink_ancestors(mirror)
@@ -129,35 +198,18 @@ def _write_new_json_pair(
     mirror.parent.mkdir(parents=True, exist_ok=True)
     _require_no_symlink_ancestors(canonical)
     _require_no_symlink_ancestors(mirror)
-    for path in (canonical, mirror):
-        if os.path.lexists(path):
-            raise RuntimeError(f"refusing to overwrite failure receipt: {path}")
-    encoded = (json.dumps(payload, indent=2, sort_keys=True) + "\n").encode("utf-8")
-    temporaries: list[Path] = []
-    try:
-        for destination in (mirror, canonical):
-            descriptor, temporary_name = tempfile.mkstemp(
-                prefix=f".{destination.name}.tmp-", dir=destination.parent
-            )
-            temporary = Path(temporary_name)
-            temporaries.append(temporary)
-            with os.fdopen(descriptor, "wb") as handle:
-                handle.write(encoded)
-                handle.flush()
-                os.fsync(handle.fileno())
-        mirror_temporary, canonical_temporary = temporaries
-        os.link(mirror_temporary, mirror, follow_symlinks=False)
-        _fsync_directory(mirror.parent)
-        os.link(canonical_temporary, canonical, follow_symlinks=False)
-        _fsync_directory(canonical.parent)
-    finally:
-        cleaned_parents: set[Path] = set()
-        for temporary in temporaries:
-            if temporary.exists():
-                temporary.unlink()
-                cleaned_parents.add(temporary.parent)
-        for parent in cleaned_parents:
-            _fsync_directory(parent)
+    encoded = (
+        json.dumps(payload, indent=2, sort_keys=True, allow_nan=False) + "\n"
+    ).encode("utf-8")
+    publish_new_bytes(_publication_root(mirror), mirror, encoded, mode=0o644)
+    _receipt_pair_checkpoint("mirror_published")
+    publish_new_bytes(_publication_root(canonical), canonical, encoded, mode=0o644)
+
+
+def _receipt_pair_checkpoint(stage: str) -> None:
+    """Fault-injection seam after the durable mirror-first pair prefix."""
+
+    del stage
 
 
 def _write_new_json(path: Path, payload: Mapping[str, Any]) -> None:
@@ -166,33 +218,39 @@ def _write_new_json(path: Path, payload: Mapping[str, Any]) -> None:
     _require_no_symlink_ancestors(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     _require_no_symlink_ancestors(path)
-    if os.path.lexists(path):
-        raise RuntimeError(f"refusing to overwrite receipt: {path}")
-    encoded = (json.dumps(payload, indent=2, sort_keys=True) + "\n").encode("utf-8")
-    descriptor, temporary_name = tempfile.mkstemp(
-        prefix=f".{path.name}.tmp-", dir=path.parent
-    )
-    temporary = Path(temporary_name)
-    try:
-        with os.fdopen(descriptor, "wb") as handle:
-            handle.write(encoded)
-            handle.flush()
-            os.fsync(handle.fileno())
-        try:
-            os.link(temporary, path, follow_symlinks=False)
-        except FileExistsError as exc:
-            raise RuntimeError(f"refusing to overwrite receipt: {path}") from exc
-        _fsync_directory(path.parent)
-    finally:
-        if temporary.exists():
-            temporary.unlink()
-            _fsync_directory(temporary.parent)
+    encoded = (
+        json.dumps(payload, indent=2, sort_keys=True, allow_nan=False) + "\n"
+    ).encode("utf-8")
+    publish_new_bytes(_publication_root(path), path, encoded, mode=0o644)
 
 
 def _append_jsonl(path: Path, payload: Mapping[str, Any]) -> None:
+    _require_no_symlink_ancestors(path)
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("a", encoding="utf-8") as handle:
-        handle.write(json.dumps(dict(payload), sort_keys=True) + "\n")
+    _require_no_symlink_ancestors(path)
+    existed = os.path.lexists(path)
+    flags = os.O_WRONLY | os.O_APPEND | os.O_CREAT | getattr(os, "O_CLOEXEC", 0)
+    if hasattr(os, "O_NOFOLLOW"):
+        flags |= os.O_NOFOLLOW
+    descriptor = os.open(path, flags, 0o644)
+    try:
+        info = os.fstat(descriptor)
+        if not stat.S_ISREG(info.st_mode) or info.st_nlink != 1:
+            raise RuntimeError("JSONL destination is not one unaliased regular file")
+        with os.fdopen(descriptor, "a", encoding="utf-8", closefd=False) as handle:
+            handle.write(json.dumps(dict(payload), sort_keys=True, allow_nan=False) + "\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+        rebound = path.lstat()
+        if (
+            not stat.S_ISREG(rebound.st_mode)
+            or (rebound.st_dev, rebound.st_ino) != (info.st_dev, info.st_ino)
+        ):
+            raise RuntimeError("JSONL destination changed while appending")
+    finally:
+        os.close(descriptor)
+    if not existed:
+        _fsync_directory(path.parent)
 
 
 def _clip_scale(preclip_norm: float, maximum_norm: float) -> float:
@@ -203,7 +261,9 @@ def _clip_scale(preclip_norm: float, maximum_norm: float) -> float:
 
 def _sha256(path: Path) -> str:
     digest = hashlib.sha256()
-    with path.open("rb") as handle:
+    lexical = Path(os.path.abspath(os.fspath(path)))
+    trusted_root = REPO_ROOT if lexical.is_relative_to(REPO_ROOT) else lexical.parent
+    with open_stable_regular(trusted_root, lexical) as handle:
         for block in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(block)
     return digest.hexdigest()
@@ -215,15 +275,53 @@ def _canonical_sha256(payload: Mapping[str, Any]) -> str:
     ).hexdigest()
 
 
+def _reject_json_constant(value: str) -> None:
+    raise ValueError(f"non-standard JSON constant: {value}")
+
+
+def _reject_duplicate_json_keys(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError(f"duplicate JSON key: {key}")
+        result[key] = value
+    return result
+
+
 def _requirements_sha256() -> str:
-    if not REQUIREMENTS_LOCK.is_file():
-        raise RuntimeError(f"requirements lock is missing: {REQUIREMENTS_LOCK}")
-    return _sha256(REQUIREMENTS_LOCK)
+    return _requirements_snapshot()[1]
+
+
+def _requirements_snapshot() -> tuple[list[str], str]:
+    raw = requirements_training_lock_bytes()
+    try:
+        lines = raw.decode("utf-8").splitlines()
+    except UnicodeDecodeError as exc:
+        raise RuntimeError("requirements lock is not UTF-8") from exc
+    return lines, hashlib.sha256(raw).hexdigest()
+
+
+def _locked_requirement_version(package: str) -> str:
+    """Return the one exact version pinned for ``package`` in the run lock."""
+
+    prefix = f"{package}=="
+    lines, _ = _requirements_snapshot()
+    matches = [
+        line[len(prefix) :].strip()
+        for line in lines
+        if line.startswith(prefix)
+    ]
+    if len(matches) != 1 or not matches[0]:
+        raise RuntimeError(
+            f"training lock does not pin exactly one {package} version"
+        )
+    return matches[0]
 
 
 def _installed_environment_lock_receipt() -> dict[str, Any]:
+    lines, requirements_sha256 = _requirements_snapshot()
     expected = {}
-    for line in REQUIREMENTS_LOCK.read_text(encoding="utf-8").splitlines():
+    for line in lines:
         match = re.match(r"^([A-Za-z0-9_.-]+)==([^ ;]+)$", line)
         if match:
             expected[match.group(1)] = match.group(2)
@@ -240,7 +338,7 @@ def _installed_environment_lock_receipt() -> dict[str, Any]:
             )
         installed[package] = actual
     return {
-        "requirements_training_lock_sha256": _requirements_sha256(),
+        "requirements_training_lock_sha256": requirements_sha256,
         "causal_conv1d_out_of_band_pin": "1.6.2.post1",
         "packages": installed,
         "packages_sha256": _canonical_sha256({"packages": installed}),
@@ -248,18 +346,25 @@ def _installed_environment_lock_receipt() -> dict[str, Any]:
 
 
 def _repo_relative(path: Path) -> str:
-    resolved = path.resolve()
     try:
-        return resolved.relative_to(REPO_ROOT).as_posix()
-    except ValueError as exc:
-        raise RuntimeError(f"lineage path is outside the repository workspace: {resolved}") from exc
+        return attempt_repo_relative(REPO_ROOT, path)
+    except AttemptReceiptError as exc:
+        raise RuntimeError(f"lineage path is not canonical: {path}") from exc
 
 
 def _resolve_repo_path(value: str) -> Path:
-    path = (REPO_ROOT / value).resolve()
-    if not path.is_relative_to(REPO_ROOT):
-        raise RuntimeError(f"lineage path escapes repository: {value}")
-    return path
+    try:
+        candidate = Path(value)
+        if candidate.is_absolute():
+            lexical = Path(os.path.abspath(value))
+            if value != lexical.as_posix():
+                raise RuntimeError(f"lineage path is not lexical-canonical: {value}")
+            relative = lexical.relative_to(REPO_ROOT).as_posix()
+        else:
+            relative = value
+        return canonical_attempt_path(REPO_ROOT, relative)
+    except (AttemptReceiptError, ValueError) as exc:
+        raise RuntimeError(f"lineage path is not canonical: {value}") from exc
 
 
 def _require_new_output(path: Path, *, directory: bool, kind: str) -> None:
@@ -267,8 +372,10 @@ def _require_new_output(path: Path, *, directory: bool, kind: str) -> None:
         raise RuntimeError(f"refusing to resume or overwrite {kind}: {path}")
     if directory:
         path.mkdir(parents=True, exist_ok=False)
+        _fsync_directory(path.parent)
     else:
         path.parent.mkdir(parents=True, exist_ok=True)
+        _fsync_directory(path.parent)
 
 
 def _require_cuda(minimum_gib: float = 44.0) -> dict[str, Any]:
@@ -344,6 +451,22 @@ def _identity(config: Mapping[str, Any], *, phase: str) -> dict[str, Any]:
     }
 
 
+def _failed_archive_header(config: Mapping[str, Any]) -> dict[str, Any]:
+    return {
+        "schema_version": 1,
+        "status": "FAILED_ATTEMPT_ARCHIVED",
+        "experiment_id": config["experiment_id"],
+        "model_id": MODEL_ID,
+        "model_revision": MODEL_REVISION,
+        "backend": "transformers",
+        "config_sha256": config_sha256(config),
+        "source_contract_sha256": source_contract_sha256(ROOT),
+        "requirements_training_lock_sha256": _requirements_sha256(),
+        "design_lineage": design_lineage(config),
+        "scientific_evidence": False,
+    }
+
+
 def _with_identity(payload: Mapping[str, Any]) -> dict[str, Any]:
     receipt = dict(payload)
     receipt["receipt_identity_sha256"] = _canonical_sha256(receipt)
@@ -361,8 +484,12 @@ def _read_receipt(
     path = _resolve_repo_path(str(path))
     if not path.is_file():
         raise RuntimeError(f"{label} receipt is missing: {path}")
-    receipt = json.loads(path.read_text(encoding="utf-8"))
-    status = str(receipt.get("status", receipt.get("verdict", "")))
+    receipt = read_stable_json_object(REPO_ROOT, path)
+    if type(receipt.get("schema_version")) is not int or receipt.get("schema_version") != 1:
+        raise RuntimeError(f"{label} receipt schema is invalid")
+    status = receipt.get("status")
+    if type(status) is not str:
+        raise RuntimeError(f"{label} receipt requires explicit status")
     if status == "SETUP_CONTROL_FAILED":
         raise RuntimeError(f"{label} did not authorize this stage: {status!r}")
     if status not in statuses or receipt.get("phase") not in phases:
@@ -372,12 +499,8 @@ def _read_receipt(
     if claimed != _canonical_sha256(payload):
         raise RuntimeError(f"{label} receipt identity mismatch")
     expected = _identity(config, phase=str(receipt["phase"]))
-    for key in (
-        "experiment_id", "config_sha256", "source_contract_sha256",
-        "requirements_training_lock_sha256", "design_receipt_sha256",
-        "design_receipt_identity_sha256",
-    ):
-        if receipt.get(key) != expected[key]:
+    for key, value in expected.items():
+        if type(receipt.get(key)) is not type(value) or receipt.get(key) != value:
             raise RuntimeError(f"{label} identity mismatch for {key}")
     return receipt
 
@@ -416,11 +539,14 @@ def _read_g0_pass(
 
 
 def _lineage(path: Path, receipt: Mapping[str, Any]) -> dict[str, Any]:
+    status = receipt.get("status")
+    if type(status) is not str or not status:
+        raise RuntimeError("lineage source requires an explicit nonempty status")
     return {
         "path": _repo_relative(path),
         "sha256": _sha256(path),
         "receipt_identity_sha256": receipt["receipt_identity_sha256"],
-        "status": str(receipt.get("status", receipt.get("verdict", ""))),
+        "status": status,
         "phase": receipt["phase"],
     }
 
@@ -432,7 +558,7 @@ def validate_lineage_entry(entry: Mapping[str, Any]) -> dict[str, Any]:
     path = _resolve_repo_path(str(entry["path"]))
     if not path.is_file() or _sha256(path) != entry["sha256"]:
         raise RuntimeError(f"gate lineage file changed: {path}")
-    receipt = json.loads(path.read_text(encoding="utf-8"))
+    receipt = read_verified_json_object(REPO_ROOT, path, str(entry["sha256"]))
     claimed = receipt.get("receipt_identity_sha256")
     payload = {
         key: value for key, value in receipt.items()
@@ -442,38 +568,11 @@ def validate_lineage_entry(entry: Mapping[str, Any]) -> dict[str, Any]:
         raise RuntimeError("gate lineage receipt self-identity changed")
     if claimed != entry["receipt_identity_sha256"]:
         raise RuntimeError("gate lineage receipt identity changed")
-    if str(receipt.get("status", receipt.get("verdict", ""))) != entry["status"]:
+    if type(receipt.get("status")) is not str or receipt.get("status") != entry["status"]:
         raise RuntimeError("gate lineage status changed")
     if receipt.get("phase") != entry["phase"]:
         raise RuntimeError("gate lineage phase changed")
     return receipt
-
-
-def _authorization_chain_contains(
-    payload: Any, needle: Mapping[str, Any], *, seen: set[str] | None = None
-) -> bool:
-    seen = set() if seen is None else seen
-    if isinstance(payload, Mapping):
-        if dict(payload) == dict(needle):
-            return True
-        lineage_fields = {"path", "sha256", "receipt_identity_sha256", "status", "phase"}
-        if set(payload) == lineage_fields:
-            path = str(payload["path"])
-            if path in seen:
-                return False
-            seen.add(path)
-            return _authorization_chain_contains(
-                validate_lineage_entry(payload), needle, seen=seen
-            )
-        return any(
-            _authorization_chain_contains(value, needle, seen=seen)
-            for value in payload.values()
-        )
-    if isinstance(payload, list):
-        return any(
-            _authorization_chain_contains(value, needle, seen=seen) for value in payload
-        )
-    return False
 
 
 def _render(tokenizer: Any, row: Mapping[str, Any]) -> str:
@@ -549,8 +648,12 @@ def _pinned_snapshot_receipt() -> dict[str, Any]:
     resolved_paths = {filename: resolve(filename) for filename in PINNED_SNAPSHOT_FILES}
     index_path = resolved_paths["model.safetensors.index.json"]
     try:
-        index = json.loads(index_path.read_text(encoding="utf-8"))
-    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+        index = read_verified_json_object(
+            index_path.parent,
+            index_path,
+            receipts["model.safetensors.index.json"]["sha256"],
+        )
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError, RuntimeError) as exc:
         raise RuntimeError("pinned safetensors index is unreadable") from exc
     weight_map = index.get("weight_map") if isinstance(index, Mapping) else None
     if not isinstance(weight_map, Mapping) or not weight_map:
@@ -1072,18 +1175,47 @@ def _gradient_receipt(wrapper: StateLoopModel) -> dict[str, Any]:
 def _load_data_manifest(
     config: Mapping[str, Any], *, content_splits: set[str] | frozenset[str]
 ) -> tuple[Path, dict[str, Any], str]:
-    data_dir = (ROOT / config["paths"]["data_dir"]).resolve()
+    expected_data_dir = Path(os.path.abspath(
+        ROOT / str(config["paths"]["data_dir"])
+    ))
+    try:
+        data_dir = canonical_attempt_path(
+            REPO_ROOT,
+            expected_data_dir.relative_to(REPO_ROOT).as_posix(),
+        )
+    except (AttemptReceiptError, ValueError) as exc:
+        raise RuntimeError("prepared data directory is missing or aliased") from exc
     path = data_dir / "manifest.json"
-    if not path.is_file():
-        raise RuntimeError(f"prepared data manifest is missing: {path}")
-    manifest = json.loads(path.read_text(encoding="utf-8"))
+    try:
+        with open_stable_regular(REPO_ROOT, path) as handle:
+            raw = handle.read()
+    except Exception as exc:
+        raise RuntimeError(f"prepared data manifest is missing or aliased: {path}") from exc
+    manifest_sha256 = hashlib.sha256(raw).hexdigest()
+    try:
+        manifest = json.loads(
+            raw.decode("utf-8"),
+            object_pairs_hook=_reject_duplicate_json_keys,
+            parse_constant=_reject_json_constant,
+        )
+    except (UnicodeError, ValueError, json.JSONDecodeError) as exc:
+        raise RuntimeError("prepared data manifest is not strict UTF-8 JSON") from exc
+    if not isinstance(manifest, dict):
+        raise RuntimeError("prepared data manifest is not an object")
     validate_data_manifest(config, data_dir, manifest, content_splits=content_splits)
-    return data_dir, manifest, _sha256(path)
+    return data_dir, manifest, manifest_sha256
 
 
-def _authorization_for(
+def _authorization_details_for(
     config: Mapping[str, Any], capacity: str, objective: str, path: Path | None
 ) -> dict[str, Any] | None:
+    """Validate the one status-specific canonical authorization for a cell.
+
+    Branch ancestry is deliberately interpreted only by ``gate_receipts``.
+    In particular, no arbitrary nested lineage can stand in for a direct named
+    authorization edge.
+    """
+
     if capacity == "lora" and objective == "joint":
         if path is not None:
             raise RuntimeError("LoRA joint is the first scientific stage and accepts no authorization")
@@ -1091,15 +1223,551 @@ def _authorization_for(
     if path is None:
         raise RuntimeError(f"{capacity}/{objective} requires an upstream analysis authorization")
     if capacity == "lora" and objective == "state_only":
-        statuses = {"LORA_JOINT_MISS_CONTROLS_REQUIRED"}
-        phases = {"lora_joint_analysis"}
+        branch = LORA_MISS_BRANCH
+        filename = "lora_joint_trigger.json"
     elif capacity == "fullrank" and objective == "joint":
-        statuses = {"LORA_JOINT_MISS_CONTROLS_REQUIRED"}
-        phases = {"lora_joint_analysis"}
+        branch = LORA_MISS_BRANCH
+        filename = "lora_joint_trigger.json"
     else:
-        statuses = {"FULLRANK_STATE_ONLY_REQUIRED"}
-        phases = {"stage_b_seal_analysis", "fullrank_joint_analysis"}
-    return _read_receipt(path, config, statuses=statuses, phases=phases, label="branch authorization")
+        if path.name == "stage_b_seal.json":
+            branch = STAGE_B_FULLRANK_MISS_BRANCH
+            filename = "stage_b_seal.json"
+        elif path.name == "fullrank_joint.json":
+            branch = POSTCONTRAST_FULLRANK_MISS_BRANCH
+            filename = "fullrank_joint.json"
+        else:
+            raise RuntimeError(
+                "fullrank/state_only requires the canonical Stage-B or postcontrast miss"
+            )
+    canonical = _repo_relative(ROOT / "analysis" / filename)
+    expected_identity = _identity(config, phase=str(branch))
+    expected_identity.pop("phase")
+    return validate_branch_authorization(
+        REPO_ROOT,
+        path,
+        canonical_relative_path=canonical,
+        branch=branch,
+        expected_identity=expected_identity,
+    )
+
+
+def _authorization_for(
+    config: Mapping[str, Any], capacity: str, objective: str, path: Path | None
+) -> dict[str, Any] | None:
+    details = _authorization_details_for(config, capacity, objective, path)
+    return None if details is None else dict(details["receipt"])
+
+
+def _contrast_authorization_details(
+    config: Mapping[str, Any], path: Path | None
+) -> dict[str, Any]:
+    if path is None:
+        raise RuntimeError("sealed contrast evaluation requires the Stage-B seal")
+    expected_identity = _identity(config, phase="stage_b_seal_analysis")
+    expected_identity.pop("phase")
+    return validate_branch_authorization(
+        REPO_ROOT,
+        path,
+        canonical_relative_path=_repo_relative(ROOT / "analysis" / "stage_b_seal.json"),
+        branch=STAGE_B_CONTRAST_BRANCH,
+        expected_identity=_identity(config, phase="stage_b_seal_analysis"),
+    )
+
+
+def _setup_receipt_path(kind: str, capacity: str, model_seed: int) -> Path:
+    if kind not in {"g0", "positive_control"}:
+        raise ValueError(f"unknown setup receipt kind: {kind!r}")
+    return ROOT / "runs" / "setup" / f"{kind}_{capacity}_seed{model_seed}.json"
+
+
+def _validate_registered_setup_fields(
+    config: Mapping[str, Any], setup: Mapping[str, Any], *, capacity: str, model_seed: int
+) -> None:
+    adaptation = config["architecture"]["adaptation"][capacity]
+    targets = setup.get("adaptation_targets")
+    manifest = setup.get("adaptation_target_manifest")
+    expected_targets = int(adaptation["expected_targets"])
+    if type(targets) is not list or len(targets) != expected_targets:
+        raise RuntimeError("setup adaptation-target count changed")
+    if any(type(target) is not str or not target for target in targets):
+        raise RuntimeError("setup adaptation-target names are invalid")
+    if len(set(targets)) != len(targets):
+        raise RuntimeError("setup adaptation targets are not unique")
+    if setup.get("adaptation_targets_sha256") != hashlib.sha256(
+        "\n".join(targets).encode("utf-8")
+    ).hexdigest():
+        raise RuntimeError("setup adaptation-target digest changed")
+    if type(manifest) is not list or len(manifest) != expected_targets:
+        raise RuntimeError("setup adaptation-target manifest geometry changed")
+    if setup.get("adaptation_target_manifest_sha256") != _canonical_sha256(
+        {"targets": manifest}
+    ):
+        raise RuntimeError("setup adaptation-target manifest digest changed")
+    expected_parameters = int(adaptation["expected_parameters"])
+    if setup.get("adaptation_parameters") != expected_parameters:
+        raise RuntimeError("setup adaptation parameter count changed")
+    if setup.get("capacity") != capacity or setup.get("model_seed") != model_seed:
+        raise RuntimeError("setup cell identity changed")
+    shared = setup.get("shared_initialization")
+    if not isinstance(shared, Mapping):
+        raise RuntimeError("setup shared initialization is missing")
+    if set(shared) != {
+        "schema_version",
+        "status",
+        "phase",
+        "bundle_path",
+        "bundle_sha256",
+        "metadata",
+        "receipt_identity_sha256",
+    }:
+        raise RuntimeError("setup shared-initialization receipt fields changed")
+    if (
+        shared.get("schema_version") != 1
+        or shared.get("status") != "SHARED_INITIALIZATION_PREPARED"
+        or shared.get("phase") != "shared_initialization"
+    ):
+        raise RuntimeError("setup shared-initialization receipt status changed")
+    if shared.get("receipt_identity_sha256") != _canonical_sha256(
+        {
+            key: value
+            for key, value in shared.items()
+            if key != "receipt_identity_sha256"
+        }
+    ):
+        raise RuntimeError("setup shared-initialization identity changed")
+    expected_bundle_relative = (
+        Path("large_artifacts")
+        / config["experiment_id"]
+        / f"initialization_seed{model_seed}.pt"
+    ).as_posix()
+    if shared.get("bundle_path") != expected_bundle_relative:
+        raise RuntimeError("setup initialization bundle path changed")
+    bundle_path = canonical_repo_path(REPO_ROOT, expected_bundle_relative)
+    if shared.get("bundle_sha256") != _sha256(bundle_path):
+        raise RuntimeError("setup initialization bundle bytes changed")
+    metadata = shared.get("metadata")
+    if not isinstance(metadata, Mapping):
+        raise RuntimeError("setup shared-initialization metadata is missing")
+    metadata_identity = metadata.get("receipt_identity_sha256")
+    if metadata_identity != _canonical_sha256(
+        {
+            key: value
+            for key, value in metadata.items()
+            if key != "receipt_identity_sha256"
+        }
+    ):
+        raise RuntimeError("setup shared-initialization metadata identity changed")
+    expected_shared = {
+        "experiment_id": config["experiment_id"],
+        "model_id": MODEL_ID,
+        "model_revision": MODEL_REVISION,
+        "config_sha256": config_sha256(config),
+        "source_contract_sha256": source_contract_sha256(ROOT),
+        "requirements_training_lock_sha256": _requirements_sha256(),
+        "model_seed": model_seed,
+    }
+    for field, expected in expected_shared.items():
+        if type(metadata.get(field)) is not type(expected) or metadata.get(field) != expected:
+            raise RuntimeError(f"setup shared-initialization {field} changed")
+
+
+def _require_supplied_initialization_bundle(
+    setup: Mapping[str, Any], supplied: Path
+) -> Path:
+    shared = setup.get("shared_initialization")
+    if not isinstance(shared, Mapping) or type(shared.get("bundle_path")) is not str:
+        raise RuntimeError("setup omits its initialization bundle path")
+    expected = canonical_repo_path(REPO_ROOT, str(shared["bundle_path"]))
+    if supplied.absolute() != expected:
+        raise RuntimeError("supplied initialization bundle is not the setup-bound path")
+    if shared.get("bundle_sha256") != _sha256(expected):
+        raise RuntimeError("supplied initialization bundle bytes changed")
+    return expected
+
+
+def _validate_setup_cell(
+    config: Mapping[str, Any],
+    *,
+    capacity: str,
+    model_seed: int,
+    data_manifest_sha256: str,
+    root_lora_miss_lineage: Mapping[str, Any] | None,
+    g0_path: Path | None = None,
+    control_path: Path | None = None,
+) -> dict[str, Any]:
+    """Reopen one canonical setup pair and prove its scientific pass semantics."""
+
+    adaptation = config["architecture"]["adaptation"][capacity]
+    lora_rank = int(config["architecture"]["adaptation"]["lora"]["rank"])
+    g0_path = g0_path or _setup_receipt_path("g0", capacity, model_seed)
+    control_path = control_path or _setup_receipt_path(
+        "positive_control", capacity, model_seed
+    )
+    expected_branch = root_lora_miss_lineage if capacity == "fullrank" else None
+    g0 = _read_g0_pass(g0_path, config, capacity=capacity)
+    setup = g0.get("setup")
+    if not isinstance(setup, Mapping):
+        raise RuntimeError("G0 receipt omits its deterministic setup")
+    _validate_registered_setup_fields(
+        config, setup, capacity=capacity, model_seed=model_seed
+    )
+    g0 = validate_g0_pass(
+        REPO_ROOT,
+        g0_path,
+        canonical_relative_path=_repo_relative(
+            _setup_receipt_path("g0", capacity, model_seed)
+        ),
+        expected_identity=_identity(config, phase=f"{capacity}_g0"),
+        capacity=capacity,
+        model_seed=model_seed,
+        data_manifest_sha256=data_manifest_sha256,
+        expected_setup=setup,
+        expected_branch_authorization=expected_branch,
+        k1_max_logit_abs_error=float(config["gates"]["k1_max_logit_abs_error"]),
+        train_k=int(config["training"]["train_k"]),
+        max_recurrence=int(config["architecture"]["max_recurrence"]),
+        expected_adaptation_targets=int(
+            adaptation["expected_targets"]
+        ),
+        expected_adaptation_parameters=int(adaptation["expected_parameters"]),
+        expected_adaptation_dropout=float(adaptation["dropout"]),
+        expected_adaptation_scale=float(adaptation["scale"]),
+        expected_lora_rank=lora_rank,
+        expected_peft_version=_locked_requirement_version("peft"),
+        adaptation_gradient_clip=float(
+            config["training"]["adaptation_gradient_clip"]
+        ),
+        common_gradient_clip=float(config["training"]["common_gradient_clip"]),
+        worst_depth_seed=int(config["training"]["g0_control"]["worst_depth_seed"]),
+        min_free_memory_gib=4.0,
+    )
+    g0_lineage = _lineage(g0_path, g0)
+    control_config = config["training"]["positive_control"]
+    _, control_manifest, observed_manifest_sha256 = _load_data_manifest(
+        config, content_splits=set()
+    )
+    if observed_manifest_sha256 != data_manifest_sha256:
+        raise RuntimeError("positive-control validator data manifest changed")
+    expected_control_rows, _ = generate_control_rows(config, control_manifest)
+    control = validate_positive_control_pass(
+        REPO_ROOT,
+        control_path,
+        canonical_relative_path=_repo_relative(
+            _setup_receipt_path("positive_control", capacity, model_seed)
+        ),
+        expected_identity=_identity(config, phase=f"{capacity}_positive_control"),
+        capacity=capacity,
+        model_seed=model_seed,
+        data_manifest_sha256=data_manifest_sha256,
+        expected_setup=setup,
+        expected_branch_authorization=expected_branch,
+        expected_g0_lineage=g0_lineage,
+        expected_control_rows=expected_control_rows,
+        control_seed=int(control_config["seed"]),
+        control_rows=int(control_config["rows"]),
+        control_updates=int(control_config["updates"]),
+        gradient_accumulation=int(config["training"]["gradient_accumulation"]),
+        min_oracle_readout_accuracy=float(
+            control_config["min_oracle_readout_accuracy"]
+        ),
+        min_overfit_final_joint_accuracy=float(
+            control_config["min_overfit_final_joint_accuracy"]
+        ),
+        expected_adaptation_targets=int(adaptation["expected_targets"]),
+        expected_adaptation_parameters=int(adaptation["expected_parameters"]),
+        expected_adaptation_dropout=float(adaptation["dropout"]),
+        expected_lora_rank=lora_rank,
+        control_families=tuple(map(str, config["substrate"]["train_families"])),
+        control_templates=tuple(
+            map(str, config["substrate"]["train_templates"])
+        ),
+        control_depths=tuple(map(int, control_config["depths"])),
+        control_query_kinds=("node", "checksum"),
+        control_examples_per_cell=int(control_config["examples_per_cell"]),
+        learning_rate=float(config["training"]["learning_rate"]),
+        adaptation_gradient_clip=float(
+            config["training"]["adaptation_gradient_clip"]
+        ),
+        common_gradient_clip=float(config["training"]["common_gradient_clip"]),
+    )
+    return {
+        "g0": g0,
+        "control": control,
+        "g0_lineage": g0_lineage,
+        "control_lineage": _lineage(control_path, control),
+        "setup": dict(setup),
+    }
+
+
+def _setup_barrier(
+    config: Mapping[str, Any],
+    *,
+    stage: str,
+    data_manifest_sha256: str,
+    root_lora_miss_lineage: Mapping[str, Any] | None,
+    target: TrainingCell | None = None,
+    target_g0_path: Path | None = None,
+    target_control_path: Path | None = None,
+) -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
+    """Require every preregistered setup pair before a stage can start."""
+
+    if stage not in {"A", "B", "C"}:
+        raise ValueError(f"unknown setup-barrier stage: {stage!r}")
+    capacities = ("lora",) if stage == "A" else ("lora", "fullrank")
+    if stage == "A" and root_lora_miss_lineage is not None:
+        raise RuntimeError("Stage A setup cannot have a LoRA-miss authorization")
+    if stage in {"B", "C"} and root_lora_miss_lineage is None:
+        raise RuntimeError(f"Stage {stage} setup requires the root LoRA-miss authorization")
+    cells: dict[str, dict[str, Any]] = {}
+    per_seed_shared: dict[int, Mapping[str, Any]] = {}
+    common_invariant: Mapping[str, Any] | None = None
+    capacity_invariants: dict[str, Mapping[str, Any]] = {}
+    for capacity_name in capacities:
+        for seed in map(int, config["training"]["train_seeds"]):
+            is_target = (
+                target is not None
+                and target.capacity == capacity_name
+                and target.seed == seed
+            )
+            validated = _validate_setup_cell(
+                config,
+                capacity=capacity_name,
+                model_seed=seed,
+                data_manifest_sha256=data_manifest_sha256,
+                root_lora_miss_lineage=root_lora_miss_lineage,
+                g0_path=target_g0_path if is_target else None,
+                control_path=target_control_path if is_target else None,
+            )
+            slug = f"{capacity_name}_seed{seed}"
+            cells[slug] = validated
+            setup = validated["setup"]
+            stable = strict_stable_setup_receipt(setup)
+            common = {
+                "tokenizer": stable["tokenizer"],
+                "adaptation_targets": stable["adaptation_targets"],
+                "adaptation_targets_sha256": stable["adaptation_targets_sha256"],
+                "dropout_control": stable["dropout_control"],
+                "environment": stable["environment"],
+                "installed_environment_lock": stable["installed_environment_lock"],
+                "preflight_device": stable["preflight_device"],
+            }
+            if common_invariant is None:
+                common_invariant = common
+            elif common != common_invariant:
+                raise RuntimeError("setup cells do not share one model/environment invariant")
+            trainable = stable["trainable_parameters"]
+            if not isinstance(trainable, Mapping):
+                raise RuntimeError("setup trainable-parameter receipt is malformed")
+            capacity_invariant = {
+                "adaptation_target_manifest": stable[
+                    "adaptation_target_manifest"
+                ],
+                "adaptation_target_manifest_sha256": stable[
+                    "adaptation_target_manifest_sha256"
+                ],
+                "adaptation_parameters": stable["adaptation_parameters"],
+                "adaptation_zero_function": stable["adaptation_zero_function"],
+                "trainable_parameters_without_values": {
+                    key: value
+                    for key, value in trainable.items()
+                    if key != "values_sha256"
+                },
+            }
+            prior_capacity_invariant = capacity_invariants.get(capacity_name)
+            if prior_capacity_invariant is None:
+                capacity_invariants[capacity_name] = capacity_invariant
+            elif capacity_invariant != prior_capacity_invariant:
+                raise RuntimeError(
+                    f"{capacity_name} setup geometry changes across seeds"
+                )
+            shared = setup["shared_initialization"]
+            if seed in per_seed_shared and per_seed_shared[seed] != shared:
+                raise RuntimeError(
+                    f"LoRA/full-rank setup does not share exact initialization for seed {seed}"
+                )
+            per_seed_shared[seed] = shared
+    proof: dict[str, Any] = {
+        "schema_version": 1,
+        "status": "SETUP_BARRIER_COMPLETE",
+        "stage": stage,
+        "cells": [
+            {
+                "cell": slug,
+                "g0_lineage": validated["g0_lineage"],
+                "positive_control_lineage": validated["control_lineage"],
+                "stable_setup_sha256": _canonical_sha256(
+                    strict_stable_setup_receipt(validated["setup"])
+                ),
+            }
+            for slug, validated in cells.items()
+        ],
+        "root_lora_miss_lineage": (
+            dict(root_lora_miss_lineage) if root_lora_miss_lineage else None
+        ),
+        "common_setup_invariant_sha256": _canonical_sha256(common_invariant or {}),
+        "capacity_setup_invariant_sha256s": {
+            capacity_name: _canonical_sha256(invariant)
+            for capacity_name, invariant in capacity_invariants.items()
+        },
+    }
+    proof["barrier_identity_sha256"] = _canonical_sha256(proof)
+    return proof, cells
+
+
+def _training_stage(capacity: str, objective: str) -> str:
+    mapping = {
+        ("lora", "joint"): "A",
+        ("lora", "state_only"): "B",
+        ("fullrank", "joint"): "B",
+        ("fullrank", "state_only"): "C",
+    }
+    try:
+        return mapping[(capacity, objective)]
+    except KeyError as exc:
+        raise ValueError(f"unregistered training cell: {capacity}/{objective}") from exc
+
+
+def _training_contracts(
+    config: Mapping[str, Any], stage: str
+) -> dict[TrainingCell, TrainingReceiptContract]:
+    matrices = {"A": STAGE_A_MATRIX, "B": STAGE_B_MATRIX, "C": STAGE_C_MATRIX}
+    try:
+        cells = matrices[stage]
+    except KeyError as exc:
+        raise ValueError(f"unknown training stage: {stage!r}") from exc
+    steps = int(config["training"]["train_steps"])
+    return {
+        cell: TrainingReceiptContract(
+            schema_version=1,
+            status="TRAINING_COMPLETE",
+            identity=_identity(config, phase=cell.phase),
+            steps=steps,
+        )
+        for cell in cells
+    }
+
+
+def _stage_required_authorization(
+    stage: str, authorization_details: Mapping[str, Any] | None
+) -> Mapping[str, Any] | None:
+    if stage == "A":
+        return None
+    if authorization_details is None:
+        raise RuntimeError(f"Stage {stage} requires branch authorization")
+    field = "root_lora_miss_lineage" if stage == "B" else "lineage"
+    lineage = authorization_details.get(field)
+    if not isinstance(lineage, Mapping):
+        raise RuntimeError(f"Stage {stage} authorization omits {field}")
+    return lineage
+
+
+def _bind_training_cells_to_setup(
+    cell_proofs: Sequence[Mapping[str, Any]], setup_barrier: Mapping[str, Any]
+) -> None:
+    setup_rows = setup_barrier.get("cells")
+    if not isinstance(setup_rows, list):
+        raise RuntimeError("setup barrier omits its cells")
+    setup_by_cell: dict[str, Mapping[str, Any]] = {}
+    for row in setup_rows:
+        if not isinstance(row, Mapping) or type(row.get("cell")) is not str:
+            raise RuntimeError("setup barrier cell is malformed")
+        if row["cell"] in setup_by_cell:
+            raise RuntimeError("setup barrier has a duplicate cell")
+        setup_by_cell[str(row["cell"])] = row
+    for proof in cell_proofs:
+        if not isinstance(proof, Mapping):
+            raise RuntimeError("training cell proof is malformed")
+        capacity = proof.get("capacity")
+        seed = proof.get("seed")
+        if type(capacity) is not str or type(seed) is not int:
+            raise RuntimeError("training cell proof identity is malformed")
+        setup_key = f"{capacity}_seed{seed}"
+        expected = setup_by_cell.get(setup_key)
+        if expected is None:
+            raise RuntimeError(f"training cell has no setup-barrier cell: {setup_key}")
+        gates = proof.get("gate_lineages")
+        if not isinstance(gates, Mapping):
+            raise RuntimeError("training cell proof omits gate lineages")
+        if gates.get("g0_lineage") != expected.get("g0_lineage"):
+            raise RuntimeError("training cell changed its canonical G0 lineage")
+        if gates.get("positive_control_lineage") != expected.get(
+            "positive_control_lineage"
+        ):
+            raise RuntimeError("training cell changed its canonical positive-control lineage")
+        if proof.get("stable_setup_sha256") != expected.get(
+            "stable_setup_sha256"
+        ):
+            raise RuntimeError("training cell changed its deterministic setup")
+
+
+def _prior_training_barriers(
+    config: Mapping[str, Any],
+    *,
+    target_stage: str,
+    authorization_details: Mapping[str, Any] | None,
+    setup_barrier: Mapping[str, Any],
+) -> list[dict[str, Any]]:
+    reached = ("A", "B", "C")
+    target_index = reached.index(target_stage)
+    proofs = []
+    for stage in reached[:target_index]:
+        proof = training_barrier(
+            REPO_ROOT,
+            stage,
+            _training_contracts(config, stage),
+            required_authorization=_stage_required_authorization(
+                stage, authorization_details
+            ),
+        )
+        _bind_training_cells_to_setup(proof["cells"], setup_barrier)
+        proofs.append(proof)
+    return proofs
+
+
+def _reached_training_barrier(
+    config: Mapping[str, Any],
+    *,
+    reached_stage: str,
+    authorization_details: Mapping[str, Any] | None,
+    setup_barrier: Mapping[str, Any],
+) -> dict[str, Any]:
+    stages = ("A", "B", "C")
+    final_index = stages.index(reached_stage)
+    proofs = []
+    for stage in stages[: final_index + 1]:
+        proof = evaluation_barrier(
+            REPO_ROOT,
+            stage,
+            _training_contracts(config, stage),
+            required_authorization=_stage_required_authorization(
+                stage, authorization_details
+            ),
+        )
+        _bind_training_cells_to_setup(proof["cells"], setup_barrier)
+        proofs.append(proof)
+    reached: dict[str, Any] = {
+        "schema_version": 1,
+        "status": "REACHED_TRAINING_BARRIER_COMPLETE",
+        "stages": proofs,
+        "reached_stage": reached_stage,
+    }
+    reached["barrier_identity_sha256"] = _canonical_sha256(reached)
+    return reached
+
+
+def _target_training_cell_proof(
+    reached_barrier: Mapping[str, Any], target: TrainingCell
+) -> dict[str, Any]:
+    matches = []
+    for stage in reached_barrier.get("stages", []):
+        if not isinstance(stage, Mapping):
+            raise RuntimeError("reached training barrier has a malformed stage")
+        for proof in stage.get("cells", []):
+            if isinstance(proof, Mapping) and proof.get("cell") == target.slug:
+                matches.append(dict(proof))
+    if len(matches) != 1:
+        raise RuntimeError("reached training barrier does not uniquely bind target cell")
+    return matches[0]
 
 
 def _g0_failure_mirror_path(
@@ -1112,6 +1780,249 @@ def _g0_failure_mirror_path(
         / "runs"
         / "failures"
         / f"g0_{capacity}_seed{model_seed}_source_{source_contract[:12]}.json"
+    )
+
+
+def _positive_control_failure_mirror_path(
+    capacity: str,
+    model_seed: int,
+    source_contract: str,
+) -> Path:
+    return (
+        ROOT
+        / "runs"
+        / "failures"
+        / (
+            f"positive_control_{capacity}_seed{model_seed}_source_"
+            f"{source_contract[:12]}.json"
+        )
+    )
+
+
+def _strict_json_object_snapshot(path: Path, *, label: str) -> tuple[dict[str, Any], bytes]:
+    """Read one immutable strict-JSON object and retain its exact bytes."""
+
+    try:
+        raw = read_stable_bytes(_publication_root(path), path)
+        value = _strict_json_object_bytes(raw, label=label)
+    except Exception as exc:
+        raise RuntimeError(f"{label} is not one stable strict-JSON receipt") from exc
+    return value, raw
+
+
+def _strict_json_object_bytes(raw: bytes, *, label: str) -> dict[str, Any]:
+    try:
+        value = json.loads(
+            raw.decode("utf-8"),
+            object_pairs_hook=_reject_duplicate_json_keys,
+            parse_constant=_reject_json_constant,
+        )
+    except Exception as exc:
+        raise RuntimeError(f"{label} is not strict UTF-8 JSON") from exc
+    if not isinstance(value, dict):
+        raise RuntimeError(f"{label} is not a JSON object")
+    return value
+
+
+def _validate_recoverable_setup_failure(
+    receipt: Mapping[str, Any],
+    *,
+    kind: str,
+    capacity: str,
+    model_seed: int,
+    common_identity: Mapping[str, Any],
+) -> None:
+    """Validate a stranded failure before copying it to the missing pair leaf.
+
+    Recovery never turns the receipt into an authorization.  It only restores
+    the byte-identical independently-inoded mirror/canonical pair required by
+    the invalidated-setup archiver.
+    """
+
+    common_keys = set(common_identity)
+    if kind == "g0":
+        exact_keys = common_keys | {
+            "schema_version", "status", "capacity", "model_seed",
+            "data_manifest_sha256", "branch_authorization",
+            "shared_initialization", "setup", "failure_stage", "error_type",
+            "error", "completed_checks", "live_joint_gradient_summary",
+            "live_joint_dropout_probe", "authorizes_positive_control",
+            "authorizes_training", "authorizes_result_training",
+            "authorizes_result_evaluation", "benchmark_files_read",
+            "result_payloads_opened", "sealed_contrast_payloads_opened",
+            "training_or_evaluation_started", "scientific_evidence",
+            "receipt_identity_sha256",
+        }
+    elif kind == "positive_control":
+        exact_keys = common_keys | {
+            "schema_version", "status", "capacity", "model_seed",
+            "data_manifest_sha256", "g0_lineage", "branch_authorization",
+            "shared_initialization", "setup", "control_rows",
+            "oracle_analysis", "oracle_readout_accuracy", "failure_stage",
+            "error_type", "error", "completed_updates",
+            "completed_microbatches", "training_diagnostics",
+            "authorizes_training", "authorizes_result_training",
+            "authorizes_result_evaluation", "benchmark_files_read",
+            "result_payloads_opened", "sealed_contrast_payloads_opened",
+            "scientific_evidence", "receipt_identity_sha256",
+        }
+    else:
+        raise RuntimeError(f"unknown setup-failure kind: {kind!r}")
+    if set(receipt) != exact_keys:
+        raise RuntimeError(f"stranded {kind} failure receipt fields are incomplete")
+    expected_scalars = {
+        "schema_version": 1,
+        "status": "SETUP_CONTROL_FAILED",
+        "capacity": capacity,
+        "model_seed": int(model_seed),
+        **common_identity,
+    }
+    for field, expected in expected_scalars.items():
+        actual = receipt.get(field)
+        if type(actual) is not type(expected) or actual != expected:
+            raise RuntimeError(f"stranded {kind} failure has invalid {field}")
+    claimed = receipt.get("receipt_identity_sha256")
+    unsigned = {
+        key: value for key, value in receipt.items()
+        if key != "receipt_identity_sha256"
+    }
+    if type(claimed) is not str or claimed != _canonical_sha256(unsigned):
+        raise RuntimeError(f"stranded {kind} failure identity mismatch")
+    for field in ("failure_stage", "error_type", "error"):
+        if type(receipt.get(field)) is not str or not receipt[field]:
+            raise RuntimeError(f"stranded {kind} failure lacks {field}")
+    false_fields = [
+        "authorizes_training", "authorizes_result_training",
+        "authorizes_result_evaluation", "scientific_evidence",
+    ]
+    if kind == "g0":
+        false_fields.extend(("authorizes_positive_control", "training_or_evaluation_started"))
+    for field in false_fields:
+        if type(receipt.get(field)) is not bool or receipt[field] is not False:
+            raise RuntimeError(f"stranded {kind} failure has unsafe {field}")
+    if type(receipt.get("benchmark_files_read")) is not int or receipt[
+        "benchmark_files_read"
+    ] != 0:
+        raise RuntimeError(f"stranded {kind} failure reports benchmark access")
+    if receipt.get("sealed_contrast_payloads_opened") != []:
+        raise RuntimeError(f"stranded {kind} failure reports sealed contrast access")
+    if kind == "positive_control":
+        if receipt.get("result_payloads_opened") != []:
+            raise RuntimeError("stranded positive-control failure reports result access")
+        stages = {
+            "receipt_preflight", "branch_authorization", "data_manifest",
+            "oracle_analysis", "model_setup", "initial_diagnostics",
+            "state_path_overfit",
+            "final_optimizer_audit", "fixed_final_overfit_gate",
+        }
+        if receipt["failure_stage"] not in stages:
+            raise RuntimeError("stranded positive-control failure stage is unknown")
+        for field in ("completed_updates", "completed_microbatches"):
+            if type(receipt.get(field)) is not int or receipt[field] < 0:
+                raise RuntimeError(f"stranded positive-control failure has invalid {field}")
+        if not isinstance(receipt.get("training_diagnostics"), dict):
+            raise RuntimeError("stranded positive-control failure lacks diagnostics")
+    else:
+        completed = receipt.get("completed_checks")
+        stage = receipt["failure_stage"]
+        if (
+            type(completed) is not list
+            or stage not in G0_FAILURE_STAGE_PREFIX_LENGTHS
+            or completed != list(G0_COMPLETED_CHECKS[: len(completed)])
+            or len(completed) not in G0_FAILURE_STAGE_PREFIX_LENGTHS[stage]
+        ):
+            raise RuntimeError("stranded G0 failure has impossible progress")
+        expected_access = [] if stage == "branch_authorization" else ["train"]
+        if receipt.get("result_payloads_opened") != expected_access:
+            raise RuntimeError("stranded G0 failure reports unsafe result access")
+        manifest = receipt.get("data_manifest_sha256")
+        if len(completed) < 2:
+            if manifest is not None:
+                raise RuntimeError("stranded G0 failure claims an early data manifest")
+        elif (
+            type(manifest) is not str
+            or len(manifest) != 64
+            or any(character not in "0123456789abcdef" for character in manifest)
+        ):
+            raise RuntimeError("stranded G0 failure lacks its data manifest digest")
+
+
+def _stable_setup_failure_pair(
+    canonical: Path,
+    mirror: Path,
+    *,
+    kind: str,
+    capacity: str,
+    model_seed: int,
+    common_identity: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Hold and verify the final pair as identical independent inodes."""
+
+    with open_stable_regular(_publication_root(canonical), canonical) as canonical_file:
+        with open_stable_regular(_publication_root(mirror), mirror) as mirror_file:
+            canonical_raw = canonical_file.read()
+            mirror_raw = mirror_file.read()
+            if canonical_raw != mirror_raw:
+                raise RuntimeError("setup-failure canonical and mirror bytes differ")
+            canonical_info = os.fstat(canonical_file.fileno())
+            mirror_info = os.fstat(mirror_file.fileno())
+            if (canonical_info.st_dev, canonical_info.st_ino) == (
+                mirror_info.st_dev, mirror_info.st_ino
+            ):
+                raise RuntimeError("setup-failure pair shares one inode")
+    receipt = _strict_json_object_bytes(canonical_raw, label=f"{kind} failure")
+    _validate_recoverable_setup_failure(
+        receipt,
+        kind=kind,
+        capacity=capacity,
+        model_seed=model_seed,
+        common_identity=common_identity,
+    )
+    return receipt
+
+
+def _recover_setup_failure_pair(
+    canonical: Path,
+    mirror: Path,
+    *,
+    kind: str,
+    capacity: str,
+    model_seed: int,
+    common_identity: Mapping[str, Any],
+) -> None:
+    """Complete a valid one-leaf crash prefix, then require archival."""
+
+    canonical_present = os.path.lexists(canonical)
+    mirror_present = os.path.lexists(mirror)
+    if not canonical_present and not mirror_present:
+        return
+    if canonical_present and mirror_present:
+        receipt = _stable_setup_failure_pair(
+            canonical, mirror, kind=kind, capacity=capacity,
+            model_seed=model_seed, common_identity=common_identity,
+        )
+    else:
+        present = canonical if canonical_present else mirror
+        missing = mirror if canonical_present else canonical
+        receipt, raw = _strict_json_object_snapshot(
+            present, label=f"stranded {kind} failure"
+        )
+        _validate_recoverable_setup_failure(
+            receipt,
+            kind=kind,
+            capacity=capacity,
+            model_seed=model_seed,
+            common_identity=common_identity,
+        )
+        missing.parent.mkdir(parents=True, exist_ok=True)
+        publish_new_bytes(_publication_root(missing), missing, raw, mode=0o644)
+        receipt = _stable_setup_failure_pair(
+            canonical, mirror, kind=kind, capacity=capacity,
+            model_seed=model_seed, common_identity=common_identity,
+        )
+    raise RuntimeError(
+        f"preserved prior {kind} setup failure requires invalidated-setup archival: "
+        f"{receipt['error_type']}: {receipt['error']}"
     )
 
 
@@ -1154,16 +2065,20 @@ def model_smoke(
     if output.resolve() != expected_output.resolve():
         raise RuntimeError(f"model-smoke output is not canonical: {output}")
     _require_no_symlink_ancestors(output)
-    _require_new_output(output, directory=False, kind="model-smoke receipt")
     common_identity = _identity(config, phase=f"{capacity}_g0")
     failure_mirror = _g0_failure_mirror_path(
         capacity, model_seed, common_identity["source_contract_sha256"]
     )
     _require_no_symlink_ancestors(failure_mirror)
-    if os.path.lexists(failure_mirror):
-        raise RuntimeError(
-            f"refusing to replay model smoke with an existing failure mirror: {failure_mirror}"
-        )
+    _recover_setup_failure_pair(
+        output,
+        failure_mirror,
+        kind="g0",
+        capacity=capacity,
+        model_seed=model_seed,
+        common_identity=common_identity,
+    )
+    _require_new_output(output, directory=False, kind="model-smoke receipt")
     failure_state: dict[str, Any] = {
         "failure_stage": "branch_authorization",
         "completed_checks": [],
@@ -1213,6 +2128,10 @@ def model_smoke(
             "training_or_evaluation_started": False,
             "scientific_evidence": False,
         })
+        if os.path.lexists(output) or os.path.lexists(failure_mirror):
+            raise RuntimeError(
+                "model-smoke failure cannot overwrite a competing receipt"
+            ) from exc
         _write_new_json_pair(output, failure_mirror, failure)
         raise
     _write_new_json(output, receipt)
@@ -1243,8 +2162,11 @@ def _model_smoke_attempt(
     failure_state["failure_stage"] = "data_manifest"
     failure_state["result_payloads_opened"] = ["train"]
     data_dir, data_manifest, data_manifest_sha256 = _load_data_manifest(
-        config, content_splits={"train"}
+        config, content_splits=set()
     )
+    training_rows = validated_data_rows(
+        config, data_dir, data_manifest, ("train",)
+    )["train"]
     failure_state["data_manifest_sha256"] = data_manifest_sha256
     _mark_g0_complete(failure_state, "train_only_data_manifest")
     failure_state["failure_stage"] = "model_setup"
@@ -1259,7 +2181,6 @@ def _model_smoke_attempt(
     failure_state["shared_initialization"] = setup["shared_initialization"]
     _mark_g0_complete(failure_state, "pinned_model_and_wrapper_setup")
     failure_state["failure_stage"] = "setup_rows_and_encoding"
-    training_rows = read_jsonl(data_dir / "train.jsonl.gz")
     row = next(item for item in training_rows if int(item["depth"]) == 4)
     substrate = config["substrate"]
     architecture = config["architecture"]
@@ -1575,8 +2496,22 @@ def _model_smoke_attempt(
             or corrupted_common_digest == before_common_digest
         ):
             raise RuntimeError("checkpoint roundtrip probe did not destructively change tensors")
-        wrapper.load_delta_state_dict(torch.load(adaptation_path, map_location="cpu", weights_only=True))
-        wrapper.load_extra_state_dict(torch.load(common_path, map_location="cpu", weights_only=True))
+        adaptation_sha256 = _sha256(adaptation_path)
+        common_sha256 = _sha256(common_path)
+        with open_stable_regular(
+            adaptation_path.parent,
+            adaptation_path,
+            expected_sha256=adaptation_sha256,
+        ) as handle:
+            restored_adaptation = torch.load(handle, map_location="cpu", weights_only=True)
+        with open_stable_regular(
+            common_path.parent,
+            common_path,
+            expected_sha256=common_sha256,
+        ) as handle:
+            restored_common = torch.load(handle, map_location="cpu", weights_only=True)
+        wrapper.load_delta_state_dict(restored_adaptation)
+        wrapper.load_extra_state_dict(restored_common)
         restored_adaptation_digest = tensor_manifest(wrapper.delta_state_dict())[1]
         restored_common_digest = tensor_manifest(wrapper.extra_state_dict())[1]
         if (
@@ -1590,8 +2525,8 @@ def _model_smoke_attempt(
         roundtrip = {
             "adaptation_bytes": adaptation_path.stat().st_size,
             "common_bytes": common_path.stat().st_size,
-            "adaptation_sha256": _sha256(adaptation_path),
-            "common_sha256": _sha256(common_path),
+            "adaptation_sha256": adaptation_sha256,
+            "common_sha256": common_sha256,
             "destructive_adaptation_digest_changed": True,
             "destructive_common_digest_changed": True,
             "restored_adaptation_digest_equal": True,
@@ -1958,66 +2893,6 @@ def _parameter_delta_norm_receipt(
     }
 
 
-def _summarize_positive_control_records(
-    records: Sequence[Mapping[str, Any]], *, field: str | None = None
-) -> dict[str, Any]:
-    if not records:
-        raise RuntimeError("positive-control evaluation produced no records")
-    grouped: dict[str, list[Mapping[str, Any]]] = {"overall": list(records)}
-    if field is not None:
-        grouped = {}
-        for record in records:
-            key = str(record[field])
-            grouped.setdefault(key, []).append(record)
-    summaries = {}
-    for key, selected in sorted(grouped.items()):
-        terminal_rows = len(selected)
-        trajectory_steps = sum(int(record["state"]["trajectory"]["steps"]) for record in selected)
-        terminal_counts = {
-            name: sum(int(record["state"]["terminal"][name]) for record in selected)
-            for name in ("node", "phase", "checksum", "joint")
-        }
-        trajectory_counts = {
-            name: sum(int(record["state"]["trajectory"][name]) for record in selected)
-            for name in ("node", "phase", "checksum", "joint")
-        }
-        histograms: dict[str, dict[str, list[int]]] = {}
-        for head in ("node", "phase", "checksum"):
-            width = len(selected[0]["state"]["histograms"][head]["target"])
-            histograms[head] = {}
-            for kind in ("prediction", "target"):
-                histograms[head][kind] = [
-                    sum(
-                        int(record["state"]["histograms"][head][kind][index])
-                        for record in selected
-                    )
-                    for index in range(width)
-                ]
-        summaries[key] = {
-            "rows": terminal_rows,
-            "trajectory_steps": trajectory_steps,
-            "terminal_correct_counts": terminal_counts,
-            "trajectory_correct_counts": trajectory_counts,
-            **{
-                f"{name}_final_accuracy": terminal_counts[name] / terminal_rows
-                for name in terminal_counts
-            },
-            **{
-                f"{name}_trajectory_accuracy": trajectory_counts[name] / trajectory_steps
-                for name in trajectory_counts
-            },
-            "mean_objective_loss": sum(float(record["objective_loss"]) for record in selected)
-            / terminal_rows,
-            "mean_state_loss": sum(float(record["state_loss"]) for record in selected)
-            / terminal_rows,
-            "mean_fixed_point_loss": sum(
-                float(record["fixed_point_loss"]) for record in selected
-            ) / terminal_rows,
-            "histograms": histograms,
-        }
-    return summaries["overall"] if field is None else summaries
-
-
 def _evaluate_positive_control(
     wrapper: StateLoopModel,
     tokenizer: Any,
@@ -2095,15 +2970,12 @@ def _evaluate_positive_control(
                     **losses,
                 }
             )
+    analysis = analyze_positive_control_records(records, expected_rows=rows)
     return {
         "step": int(probe_step),
         "adaptation_mode": mode,
         "rng_state_restored": True,
-        "overall": _summarize_positive_control_records(records),
-        "by_depth": _summarize_positive_control_records(records, field="depth"),
-        "by_family": _summarize_positive_control_records(records, field="family"),
-        "by_template": _summarize_positive_control_records(records, field="template"),
-        "by_query_kind": _summarize_positive_control_records(records, field="query_kind"),
+        **analysis,
     }
 
 
@@ -2112,74 +2984,7 @@ def _positive_control_rows(
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """Generate the exact fresh 48-row factorial setup-only control grid."""
 
-    control = config["training"]["positive_control"]
-    substrate = config["substrate"]
-    architecture = config["architecture"]
-    rows = []
-    index = 0
-    for repeat in range(int(control["examples_per_cell"])):
-        for depth in map(int, control["depths"]):
-            for family in substrate["train_families"]:
-                for template in substrate["train_templates"]:
-                    for query_kind in ("node", "checksum"):
-                        row = generate_example(
-                            seed=int(control["seed"]) * 10_000_000 + index,
-                            split="setup_positive_control",
-                            family=str(family),
-                            template=str(template),
-                            depth=depth,
-                            node_count=int(substrate["node_count"]),
-                            checksum_modulus=int(substrate["checksum_modulus"]),
-                            num_choices=int(substrate["num_choices"]),
-                            state_token=str(architecture["state_token"]),
-                            state_slots=int(architecture["state_slots"]),
-                            max_attempts=int(substrate["max_generation_attempts"]),
-                            query_kind=query_kind,
-                        )
-                        verify_example(
-                            row, str(architecture["state_token"]),
-                            int(architecture["state_slots"]),
-                        )
-                        rows.append(row)
-                        index += 1
-    if len(rows) != int(control["rows"]):
-        raise RuntimeError("positive-control factorial grid has the wrong row count")
-    result_fingerprints = {
-        fingerprint
-        for metadata in manifest["files"].values()
-        for fingerprint in metadata["structural_fingerprints"]
-    }
-    control_fingerprints = [str(row["structural_fingerprint"]) for row in rows]
-    if len(set(control_fingerprints)) != len(control_fingerprints):
-        raise RuntimeError("positive-control structural duplicate")
-    overlap = sorted(set(control_fingerprints) & result_fingerprints)
-    if overlap:
-        raise RuntimeError("positive-control rows overlap result data")
-    grid: dict[str, int] = {}
-    for row in rows:
-        key = (
-            f"{row['family']}|{row['template']}|depth={row['depth']}|"
-            f"query={row['query_kind']}"
-        )
-        grid[key] = grid.get(key, 0) + 1
-    expected_cells = (
-        len(substrate["train_families"]) * len(substrate["train_templates"])
-        * len(control["depths"]) * 2
-    )
-    if len(grid) != expected_cells or set(grid.values()) != {int(control["examples_per_cell"])}:
-        raise RuntimeError("positive-control grid is not exactly balanced")
-    canonical = hashlib.sha256()
-    for row in rows:
-        canonical.update(
-            json.dumps(row, sort_keys=True, separators=(",", ":")).encode() + b"\n"
-        )
-    return rows, {
-        "seed": int(control["seed"]),
-        "rows": len(rows),
-        "grid": dict(sorted(grid.items())),
-        "canonical_rows_sha256": canonical.hexdigest(),
-        "cross_result_structural_overlap": 0,
-    }
+    return generate_control_rows(config, manifest)
 
 
 def _require_setup_binding(
@@ -2247,15 +3052,37 @@ def positive_control(
     authorization_receipt: Path | None,
 ) -> None:
     require_confirmatory_config(config)
+    adaptation = config["architecture"]["adaptation"][capacity]
+    lora_rank = int(config["architecture"]["adaptation"]["lora"]["rank"])
     if model_seed not in set(map(int, config["training"]["train_seeds"])):
         raise RuntimeError("positive-control seed is not preregistered")
+    expected_output = _setup_receipt_path("positive_control", capacity, model_seed)
+    if output.resolve() != expected_output.resolve():
+        raise RuntimeError(f"positive-control output is not canonical: {output}")
+    _require_no_symlink_ancestors(output)
+    common_identity = _identity(config, phase=f"{capacity}_positive_control")
+    failure_mirror = _positive_control_failure_mirror_path(
+        capacity, model_seed, common_identity["source_contract_sha256"]
+    )
+    _require_no_symlink_ancestors(failure_mirror)
+    _recover_setup_failure_pair(
+        output,
+        failure_mirror,
+        kind="positive_control",
+        capacity=capacity,
+        model_seed=model_seed,
+        common_identity=common_identity,
+    )
     _require_new_output(output, directory=False, kind="positive-control receipt")
     g0: dict[str, Any] | None = None
     authorization: dict[str, Any] | None = None
+    authorization_details: dict[str, Any] | None = None
     data_manifest_sha256: str | None = None
     setup: dict[str, Any] | None = None
     control_rows_receipt: dict[str, Any] | None = None
+    oracle_analysis: dict[str, Any] | None = None
     oracle_accuracy: float | None = None
+    rows: list[dict[str, Any]] = []
     completed_updates = 0
     completed_microbatches = 0
     failure_stage = "receipt_preflight"
@@ -2277,23 +3104,82 @@ def positive_control(
         )
         failure_stage = "branch_authorization"
         if capacity == "fullrank":
-            authorization = _authorization_for(
+            authorization_details = _authorization_details_for(
                 config, capacity, "joint", authorization_receipt
             )
+            assert authorization_details is not None
+            authorization = dict(authorization_details["receipt"])
         elif authorization_receipt is not None:
             raise RuntimeError("LoRA positive control accepts no branch authorization")
         failure_stage = "data_manifest"
         _, manifest, data_manifest_sha256 = _load_data_manifest(
             config, content_splits=set()
         )
+        failure_stage = "oracle_analysis"
+        rows, control_rows_receipt = generate_control_rows(config, manifest)
+        oracle_analysis = produce_oracle_analysis_receipt(rows)
+        oracle_accuracy = float(oracle_analysis["terminal_joint_accuracy"])
+        min_oracle = float(
+            config["training"]["positive_control"]["min_oracle_readout_accuracy"]
+        )
+        if oracle_accuracy < min_oracle:
+            raise RuntimeError(
+                f"exact 48-row oracle analysis failed: {oracle_accuracy} < {min_oracle}"
+            )
+        expected_setup = g0.get("setup")
+        if not isinstance(expected_setup, Mapping):
+            raise RuntimeError("G0 receipt omits its deterministic setup")
+        _validate_registered_setup_fields(
+            config, expected_setup, capacity=capacity, model_seed=model_seed
+        )
+        g0 = validate_g0_pass(
+            REPO_ROOT,
+            model_smoke_receipt,
+            canonical_relative_path=_repo_relative(
+                _setup_receipt_path("g0", capacity, model_seed)
+            ),
+            expected_identity=_identity(config, phase=f"{capacity}_g0"),
+            capacity=capacity,
+            model_seed=model_seed,
+            data_manifest_sha256=data_manifest_sha256,
+            expected_setup=expected_setup,
+            expected_branch_authorization=(
+                authorization_details["root_lora_miss_lineage"]
+                if authorization_details is not None else None
+            ),
+            k1_max_logit_abs_error=float(
+                config["gates"]["k1_max_logit_abs_error"]
+            ),
+            train_k=int(config["training"]["train_k"]),
+            max_recurrence=int(config["architecture"]["max_recurrence"]),
+            expected_adaptation_targets=int(
+                adaptation["expected_targets"]
+            ),
+            expected_adaptation_parameters=int(adaptation["expected_parameters"]),
+            expected_adaptation_dropout=float(adaptation["dropout"]),
+            expected_adaptation_scale=float(adaptation["scale"]),
+            expected_lora_rank=lora_rank,
+            expected_peft_version=_locked_requirement_version("peft"),
+            adaptation_gradient_clip=float(
+                config["training"]["adaptation_gradient_clip"]
+            ),
+            common_gradient_clip=float(
+                config["training"]["common_gradient_clip"]
+            ),
+            worst_depth_seed=int(
+                config["training"]["g0_control"]["worst_depth_seed"]
+            ),
+            min_free_memory_gib=4.0,
+        )
+        _require_supplied_initialization_bundle(expected_setup, initialization_bundle)
         failure_stage = "model_setup"
         tokenizer, wrapper, setup = _build_new(
             config, capacity=capacity, model_seed=model_seed,
             initialization_bundle=initialization_bundle,
         )
         setup_authorization = (
-            _lineage(authorization_receipt, authorization)
-            if authorization_receipt and authorization else None
+            authorization_details["root_lora_miss_lineage"]
+            if authorization_details is not None else None
         )
         _require_setup_binding(
             g0, capacity=capacity, model_seed=model_seed,
@@ -2301,24 +3187,14 @@ def positive_control(
             live_setup=setup, label=f"{capacity} G0",
             expected_setup_authorization=setup_authorization,
         )
-        failure_stage = "oracle_readout"
-        oracle_accuracy = _oracle_readout_control(wrapper, config)
-        min_oracle = float(
-            config["training"]["positive_control"]["min_oracle_readout_accuracy"]
-        )
-        if oracle_accuracy < min_oracle:
-            raise RuntimeError(
-                f"oracle-coded readout control failed: {oracle_accuracy} < {min_oracle}"
-            )
-
-        # The oracle is a readout-only diagnostic. Reopen the seed-matched
-        # shared tensors so the actual control starts at the registered init.
+        # Reopen the seed-matched shared tensors even though the stdlib oracle
+        # is model-free.  This explicit restore is part of the frozen control
+        # boundary: the learned overfit run always starts from registered init.
         shared_state, _ = load_initialization_bundle(
             config, model_seed, initialization_bundle
         )
         wrapper.load_extra_state_dict(shared_state)
         wrapper.zero_grad(set_to_none=True)
-        rows, control_rows_receipt = _positive_control_rows(config, manifest)
         initial_trainable = _trainable_receipt(wrapper)
         if initial_trainable != setup["trainable_parameters"]:
             raise RuntimeError("positive-control oracle reset did not restore shared initialization")
@@ -2627,7 +3503,7 @@ def positive_control(
         receipt = _with_identity({
             "schema_version": 1,
             "status": "POSITIVE_CONTROL_PASS",
-            **_identity(config, phase=f"{capacity}_positive_control"),
+            **common_identity,
             "capacity": capacity,
             "model_seed": int(model_seed),
             "data_manifest_sha256": data_manifest_sha256,
@@ -2637,6 +3513,7 @@ def positive_control(
             "shared_initialization": setup["shared_initialization"],
             "setup": setup,
             "control_rows": control_rows_receipt,
+            "oracle_analysis": oracle_analysis,
             "oracle_readout_accuracy": oracle_accuracy,
             "overfit_rows": len(rows),
             "overfit_updates": updates,
@@ -2649,6 +3526,7 @@ def positive_control(
             "training_diagnostics": diagnostics,
             "authorizes_training": True,
             "authorizes_result_training": True,
+            "authorizes_result_evaluation": False,
             "benchmark_files_read": 0,
             "result_payloads_opened": [],
             "sealed_contrast_payloads_opened": [],
@@ -2659,7 +3537,7 @@ def positive_control(
         failure = {
             "schema_version": 1,
             "status": "SETUP_CONTROL_FAILED",
-            **_identity(config, phase=f"{capacity}_positive_control"),
+            **common_identity,
             "capacity": capacity,
             "model_seed": int(model_seed),
             "data_manifest_sha256": data_manifest_sha256,
@@ -2669,6 +3547,7 @@ def positive_control(
             "shared_initialization": setup["shared_initialization"] if setup else None,
             "setup": setup,
             "control_rows": control_rows_receipt,
+            "oracle_analysis": oracle_analysis,
             "oracle_readout_accuracy": oracle_accuracy,
             "failure_stage": failure_stage,
             "error_type": type(exc).__name__,
@@ -2678,29 +3557,23 @@ def positive_control(
             "training_diagnostics": diagnostics,
             "authorizes_training": False,
             "authorizes_result_training": False,
+            "authorizes_result_evaluation": False,
             "benchmark_files_read": 0,
             "result_payloads_opened": [],
             "sealed_contrast_payloads_opened": [],
             "scientific_evidence": False,
         }
-        if output.exists():
+        if os.path.lexists(output):
             raise RuntimeError(
                 "positive-control failure cannot overwrite an existing canonical receipt"
             ) from exc
         failure_receipt = _with_identity(failure)
-        mirror = (
-            ROOT / "runs" / "failures"
-            / (
-                f"positive_control_{capacity}_seed{model_seed}_source_"
-                f"{failure_receipt['source_contract_sha256'][:12]}.json"
-            )
-        )
-        if mirror.exists():
+        if os.path.lexists(failure_mirror):
             raise RuntimeError(
-                f"refusing to overwrite positive-control failure mirror: {mirror}"
+                "refusing to overwrite positive-control failure mirror: "
+                f"{failure_mirror}"
             ) from exc
-        _write_json(output, failure_receipt)
-        _atomic_copy(output, mirror)
+        _write_new_json_pair(output, failure_mirror, failure_receipt)
         raise
 
 
@@ -2713,8 +3586,12 @@ def _schedule(step: int, total_steps: int, warmup_fraction: float) -> float:
 
 
 def _metrics_line_count(path: Path) -> int:
-    with path.open("r", encoding="utf-8") as handle:
-        return sum(1 for line in handle if line.strip())
+    raw = read_stable_bytes(REPO_ROOT, path)
+    try:
+        text = raw.decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise RuntimeError(f"metrics log is not UTF-8: {path}") from exc
+    return sum(1 for line in text.splitlines() if line.strip())
 
 
 def _checkpoint_identity(metadata: Mapping[str, Any]) -> str:
@@ -2746,6 +3623,12 @@ def _save_checkpoint(
     optimizer_steps_path: Path,
     optimizer_state: Mapping[str, Any],
     optimizer_step_receipt: Mapping[str, Any],
+    setup_barrier: Mapping[str, Any],
+    prior_training_barriers: Sequence[Mapping[str, Any]],
+    training_launch_preflight_receipt: Mapping[str, Any],
+    training_attempt_authorization: Mapping[str, Any],
+    training_attempt_history: Mapping[str, Any],
+    training_attempt_journal_path: str,
 ) -> dict[str, Any]:
     _require_new_output(output, directory=True, kind="checkpoint")
     adaptation_path = output / "adaptation_state.pt"
@@ -2764,6 +3647,7 @@ def _save_checkpoint(
         "adaptation_target_manifest_sha256": setup["adaptation_target_manifest_sha256"],
         "shared_initialization": setup["shared_initialization"],
         "environment": setup["environment"],
+        "setup": dict(setup),
         "setup_sha256": _canonical_sha256(setup),
         "stable_setup": _stable_setup_receipt(setup),
         "data_manifest_sha256": data_manifest_sha256,
@@ -2783,6 +3667,14 @@ def _save_checkpoint(
         "optimizer_steps_path": _repo_relative(optimizer_steps_path),
         "optimizer_state": dict(optimizer_state),
         "optimizer_step_receipt": dict(optimizer_step_receipt),
+        "setup_barrier": dict(setup_barrier),
+        "prior_training_barriers": [
+            dict(proof) for proof in prior_training_barriers
+        ],
+        "training_launch_preflight": dict(training_launch_preflight_receipt),
+        "training_attempt_authorization": dict(training_attempt_authorization),
+        "training_attempt_history": dict(training_attempt_history),
+        "training_attempt_journal_path": training_attempt_journal_path,
         "adaptation_state_sha256": _sha256(adaptation_path),
         "loop_state_sha256": _sha256(common_path),
     }
@@ -2808,22 +3700,159 @@ def train(
         raise ValueError(f"invalid training cell: {capacity}/{objective}")
     if model_seed not in set(map(int, config["training"]["train_seeds"])):
         raise RuntimeError("model seed is not preregistered")
-    g0 = _read_g0_pass(
-        model_smoke_receipt,
+    stage = _training_stage(capacity, objective)
+    target = TrainingCell(stage, capacity, objective, model_seed)
+    authorization_details = _authorization_details_for(
+        config, capacity, objective, authorization_receipt
+    )
+    authorization = (
+        None
+        if authorization_details is None
+        else dict(authorization_details["receipt"])
+    )
+    target_authorization = _stage_required_authorization(
+        stage, authorization_details
+    )
+
+    # Receipt-only preflight comes before any result payload, model load, or
+    # output creation.  Every setup pair required by this stage must pass its
+    # full scientific contract, and every prior reached stage must have a
+    # closed terminal training graph.
+    data_dir, data_manifest, data_manifest_sha256 = _load_data_manifest(
+        config, content_splits=set()
+    )
+    root_lora_miss = (
+        authorization_details["root_lora_miss_lineage"]
+        if authorization_details is not None else None
+    )
+    setup_barrier_proof, setup_cells = _setup_barrier(
         config,
-        capacity=capacity,
+        stage=stage,
+        data_manifest_sha256=data_manifest_sha256,
+        root_lora_miss_lineage=root_lora_miss,
+        target=target,
+        target_g0_path=model_smoke_receipt,
+        target_control_path=positive_control_receipt,
     )
-    control = _read_receipt(
-        positive_control_receipt, config, statuses={"POSITIVE_CONTROL_PASS"},
-        phases={f"{capacity}_positive_control"}, label=f"{capacity} positive control",
+    prior_training_barrier_proofs = _prior_training_barriers(
+        config,
+        target_stage=stage,
+        authorization_details=authorization_details,
+        setup_barrier=setup_barrier_proof,
     )
-    authorization = _authorization_for(config, capacity, objective, authorization_receipt)
-    tracked_run_dir = ROOT / "runs" / "training" / f"{capacity}_{objective}_seed{model_seed}"
-    if tracked_run_dir.exists():
-        raise RuntimeError(f"refusing to overwrite tracked training receipt: {tracked_run_dir}")
-    _require_new_output(output_dir, directory=True, kind=f"{capacity}/{objective} training run")
-    data_dir, _, data_manifest_sha256 = _load_data_manifest(
-        config, content_splits={"train"}
+    canonical_paths = canonical_training_cell_paths(
+        REPO_ROOT, target, steps=int(config["training"]["train_steps"])
+    )
+    if output_dir.absolute() != canonical_paths.external_dir:
+        raise RuntimeError(
+            f"training output is not the canonical result cell: {output_dir}"
+        )
+    contracts = _training_contracts(config, stage)
+    # The only in-place recovery is the exact post-publication crash window:
+    # both immutable terminal receipts already validate, while their durable
+    # attempt journal is still STARTED.  Finalize that journal without opening
+    # training rows or loading a model, and never create a second result.
+    if recover_published_training_completion(
+        REPO_ROOT,
+        target,
+        contracts[target],
+        required_authorization=target_authorization,
+        expected_setup_barrier_identity_sha256=setup_barrier_proof[
+            "barrier_identity_sha256"
+        ],
+        expected_prior_training_barrier_identity_sha256s=[
+            proof["barrier_identity_sha256"]
+            for proof in prior_training_barrier_proofs
+        ],
+    ):
+        return
+    launch_preflight_proof = training_launch_preflight(
+        REPO_ROOT,
+        target,
+        contracts,
+        target_authorization=target_authorization,
+    )
+    _bind_training_cells_to_setup(
+        launch_preflight_proof["completed_peer_proofs"], setup_barrier_proof
+    )
+    attempt_header = {
+        key: value
+        for key, value in _identity(config, phase=target.phase).items()
+        if key != "phase"
+    }
+    attempt_cell = {
+        "stage": target.stage,
+        "capacity": target.capacity,
+        "objective": target.objective,
+        "seed": target.seed,
+        "slug": target.slug,
+    }
+    attempt_paths = [
+        _repo_relative(canonical_paths.external_dir),
+        _repo_relative(canonical_paths.tracked_dir),
+    ]
+    attempt_context = {
+        "setup_barrier_identity_sha256": setup_barrier_proof[
+            "barrier_identity_sha256"
+        ],
+        "prior_training_barrier_identity_sha256s": [
+            proof["barrier_identity_sha256"]
+            for proof in prior_training_barrier_proofs
+        ],
+        "training_launch_preflight_identity_sha256": launch_preflight_proof[
+            "preflight_identity_sha256"
+        ],
+        "training_launch_peer_vector": list(launch_preflight_proof["peers"]),
+        "branch_authorization_lineage": target_authorization,
+    }
+    try:
+        replay_archive = required_training_replay_archive(
+            REPO_ROOT,
+            slug=target.slug,
+            header=attempt_header,
+            cell=attempt_cell,
+            canonical_paths=attempt_paths,
+            expected_archive_header=_failed_archive_header(config),
+        )
+        training_attempt_authorization = prepare_training_attempt(
+            REPO_ROOT,
+            slug=target.slug,
+            header=attempt_header,
+            cell=attempt_cell,
+            canonical_paths=attempt_paths,
+            context=attempt_context,
+            replay_archive=replay_archive,
+        )
+        ensure_attempt_output(output_dir, training_attempt_authorization)
+        start_training_attempt(
+            REPO_ROOT,
+            slug=target.slug,
+            header=attempt_header,
+            cell=attempt_cell,
+            canonical_paths=attempt_paths,
+            authorization=training_attempt_authorization,
+        )
+        training_attempt_history = validate_training_attempt_history(
+            REPO_ROOT,
+            slug=target.slug,
+            header=attempt_header,
+            cell=attempt_cell,
+            canonical_paths=attempt_paths,
+            current_authorization=training_attempt_authorization,
+            expected_archive_header=_failed_archive_header(config),
+        )
+    except AttemptReceiptError as exc:
+        raise RuntimeError(f"training attempt authorization failed: {exc}") from exc
+
+    # Only after all receipt/barrier proofs may the train payload be opened.
+    train_rows = validated_data_rows(
+        config, data_dir, data_manifest, ("train",)
+    )["train"]
+    target_setup = setup_cells[f"{capacity}_seed{model_seed}"]
+    g0 = target_setup["g0"]
+    control = target_setup["control"]
+    _require_supplied_initialization_bundle(
+        target_setup["setup"], initialization_bundle
     )
     random.seed(model_seed)
     tokenizer, wrapper, setup = _build_new(
@@ -2831,26 +3860,9 @@ def train(
         initialization_bundle=initialization_bundle,
     )
     if capacity == "fullrank":
-        setup_authorization = g0.get("branch_authorization")
+        setup_authorization = root_lora_miss
         if not isinstance(setup_authorization, Mapping):
-            raise RuntimeError("full-rank setup lacks the original LoRA-miss authorization")
-        setup_authorization_receipt = validate_lineage_entry(setup_authorization)
-        if (
-            setup_authorization.get("status") != "LORA_JOINT_MISS_CONTROLS_REQUIRED"
-            or setup_authorization.get("phase") != "lora_joint_analysis"
-            or setup_authorization_receipt.get("status")
-            != "LORA_JOINT_MISS_CONTROLS_REQUIRED"
-        ):
-            raise RuntimeError("full-rank setup has the wrong LoRA-miss authorization")
-        current_authorization_lineage = _lineage(authorization_receipt, authorization)
-        if objective == "joint" and setup_authorization != current_authorization_lineage:
-            raise RuntimeError("full-rank joint training changed its LoRA-miss authorization")
-        if objective == "state_only" and not _authorization_chain_contains(
-            authorization, setup_authorization
-        ):
-            raise RuntimeError(
-                "full-rank state-only authorization does not descend from its LoRA-miss setup"
-            )
+            raise RuntimeError("full-rank setup lacks the canonical root LoRA-miss lineage")
     else:
         setup_authorization = None
     _require_setup_binding(
@@ -2868,9 +3880,9 @@ def train(
     )
     if control.get("g0_lineage") != _lineage(model_smoke_receipt, g0):
         raise RuntimeError("positive control does not bind the exact supplied G0 receipt")
-    train_rows = read_jsonl(data_dir / "train.jsonl.gz")
     rng = random.Random(model_seed)
     rng.shuffle(train_rows)
+    tracked_run_dir = canonical_paths.tracked_dir
     training = config["training"]
     total_steps = int(training["train_steps"])
     accumulation = int(training["gradient_accumulation"])
@@ -3060,6 +4072,12 @@ def train(
         ),
     )
     checkpoint = output_dir / f"checkpoint_{total_steps:06d}"
+    g0_lineage = _lineage(model_smoke_receipt, g0)
+    control_lineage = _lineage(positive_control_receipt, control)
+    authorization_lineage = (
+        _lineage(authorization_receipt, authorization)
+        if authorization_receipt and authorization else None
+    )
     checkpoint_metadata = _save_checkpoint(
         wrapper,
         config,
@@ -3070,10 +4088,9 @@ def train(
         step=total_steps,
         setup=setup,
         data_manifest_sha256=data_manifest_sha256,
-        g0_lineage=_lineage(model_smoke_receipt, g0),
-        control_lineage=_lineage(positive_control_receipt, control),
-        authorization_lineage=_lineage(authorization_receipt, authorization)
-        if authorization_receipt and authorization else None,
+        g0_lineage=g0_lineage,
+        control_lineage=control_lineage,
+        authorization_lineage=authorization_lineage,
         training_prompt_tokens=prompt_tokens,
         training_layer_token_applications=layer_token_applications,
         training_order_sha256=order_digest.hexdigest(),
@@ -3083,10 +4100,17 @@ def train(
         optimizer_steps_path=optimizer_steps_path,
         optimizer_state=optimizer_state,
         optimizer_step_receipt=optimizer_step_receipt,
+        setup_barrier=setup_barrier_proof,
+        prior_training_barriers=prior_training_barrier_proofs,
+        training_launch_preflight_receipt=launch_preflight_proof,
+        training_attempt_authorization=training_attempt_authorization,
+        training_attempt_history=training_attempt_history,
+        training_attempt_journal_path=_repo_relative(canonical_paths.attempt_journal),
     )
     tracked_run_path = tracked_run_dir / "run.json"
     tracked_metrics_path = tracked_run_dir / "train_metrics.jsonl"
     tracked_optimizer_steps_path = tracked_run_dir / "optimizer_steps.jsonl"
+    tracked_attempt_marker = tracked_run_dir / ATTEMPT_MARKER_NAME
     run = _with_identity({
         "schema_version": 1,
         "status": "TRAINING_COMPLETE",
@@ -3109,6 +4133,14 @@ def train(
         "optimizer_steps_path": _repo_relative(optimizer_steps_path),
         "optimizer_state": optimizer_state,
         "optimizer_step_receipt": optimizer_step_receipt,
+        "setup_barrier": setup_barrier_proof,
+        "prior_training_barriers": prior_training_barrier_proofs,
+        "training_launch_preflight": launch_preflight_proof,
+        "training_attempt_authorization": training_attempt_authorization,
+        "training_attempt_history": training_attempt_history,
+        "training_attempt_journal_path": _repo_relative(
+            canonical_paths.attempt_journal
+        ),
         "checkpoint_path": _repo_relative(checkpoint),
         "checkpoint_metadata_sha256": _sha256(checkpoint / "checkpoint.json"),
         "checkpoint_identity_sha256": checkpoint_metadata["checkpoint_identity_sha256"],
@@ -3116,15 +4148,67 @@ def train(
         "setup": setup,
         "setup_sha256": _canonical_sha256(setup),
         "stable_setup": _stable_setup_receipt(setup),
+        "g0_lineage": g0_lineage,
+        "positive_control_lineage": control_lineage,
+        "branch_authorization_lineage": authorization_lineage,
         "tracked_run_path": _repo_relative(tracked_run_path),
         "tracked_metrics_path": _repo_relative(tracked_metrics_path),
         "tracked_optimizer_steps_path": _repo_relative(tracked_optimizer_steps_path),
+        "authorizes_training": False,
+        "authorizes_result_training": False,
+        "authorizes_result_evaluation": False,
+        "benchmark_files_read": 0,
+        "result_payloads_opened": ["train"],
+        "sealed_contrast_payloads_opened": [],
+        "training_or_evaluation_started": True,
+        "scientific_evidence": False,
     })
-    _write_json(output_dir / "run.json", run)
+    # The external terminal receipt is installed last.  Therefore its
+    # existence implies a complete, independently persisted tracked mirror;
+    # mirror-only state after a crash remains visibly incomplete and must be
+    # archived before a step-zero replay.
+    for durable_path in (
+        metrics_path,
+        optimizer_steps_path,
+        checkpoint / "adaptation_state.pt",
+        checkpoint / "loop_state.pt",
+        checkpoint / "checkpoint.json",
+    ):
+        _fsync_file(durable_path)
+    _fsync_directory(checkpoint)
+    _fsync_directory(output_dir)
     tracked_run_dir.mkdir(parents=True, exist_ok=False)
-    _atomic_copy(metrics_path, tracked_metrics_path)
-    _atomic_copy(optimizer_steps_path, tracked_optimizer_steps_path)
-    _write_json(tracked_run_path, run)
+    _fsync_directory(tracked_run_dir.parent)
+    _copy_new_fsynced(output_dir / ATTEMPT_MARKER_NAME, tracked_attempt_marker)
+    _copy_new_fsynced(metrics_path, tracked_metrics_path)
+    _copy_new_fsynced(optimizer_steps_path, tracked_optimizer_steps_path)
+    if (
+        read_stable_bytes(REPO_ROOT, tracked_metrics_path)
+        != read_stable_bytes(REPO_ROOT, metrics_path)
+        or read_stable_bytes(REPO_ROOT, tracked_optimizer_steps_path)
+        != read_stable_bytes(REPO_ROOT, optimizer_steps_path)
+        or read_stable_bytes(REPO_ROOT, tracked_attempt_marker)
+        != read_stable_bytes(REPO_ROOT, output_dir / ATTEMPT_MARKER_NAME)
+    ):
+        raise RuntimeError("tracked training payload mirror differs before finalization")
+    _write_new_json_pair(output_dir / "run.json", tracked_run_path, run)
+    if os.environ.get("QWEN35_TRAINING_CRASH_AT") == "terminal_receipts_published":
+        raise RuntimeError(
+            "injected training crash after terminal receipt publication"
+        )
+    complete_training_attempt(
+        REPO_ROOT,
+        slug=target.slug,
+        header=attempt_header,
+        cell=attempt_cell,
+        canonical_paths=attempt_paths,
+        authorization=training_attempt_authorization,
+        terminal_run_lineage={
+            "path": _repo_relative(output_dir / "run.json"),
+            "sha256": _sha256(output_dir / "run.json"),
+            "receipt_identity_sha256": run["receipt_identity_sha256"],
+        },
+    )
 
 
 def _load_checkpoint(
@@ -3134,11 +4218,14 @@ def _load_checkpoint(
     capacity: str,
     objective: str,
     model_seed: int,
-) -> tuple[Any, StateLoopModel, dict[str, Any]]:
+    expected_metadata_sha256: str,
+) -> tuple[Any, StateLoopModel, dict[str, Any], str]:
     metadata_path = checkpoint / "checkpoint.json"
     if not metadata_path.is_file():
         raise RuntimeError(f"checkpoint metadata is missing: {metadata_path}")
-    metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+    metadata = read_verified_json_object(
+        REPO_ROOT, metadata_path, expected_metadata_sha256
+    )
     expected = {
         **_identity(config, phase=f"{capacity}_{objective}_training"),
         "capacity": capacity,
@@ -3157,10 +4244,6 @@ def _load_checkpoint(
         validate_lineage_entry(metadata["branch_authorization_lineage"])
     adaptation_path = checkpoint / "adaptation_state.pt"
     common_path = checkpoint / "loop_state.pt"
-    if _sha256(adaptation_path) != metadata["adaptation_state_sha256"]:
-        raise RuntimeError("adaptation checkpoint payload changed")
-    if _sha256(common_path) != metadata["loop_state_sha256"]:
-        raise RuntimeError("common checkpoint payload changed")
     init_path = _resolve_repo_path(str(metadata["shared_initialization"]["bundle_path"]))
     tokenizer, wrapper, setup = _build_new(
         config, capacity=capacity, model_seed=model_seed,
@@ -3176,9 +4259,82 @@ def _load_checkpoint(
         raise RuntimeError("checkpoint/live adaptation target manifest mismatch")
     if _stable_setup_receipt(setup) != metadata.get("stable_setup"):
         raise RuntimeError("checkpoint/live deterministic setup or device identity mismatch")
-    wrapper.load_delta_state_dict(torch.load(adaptation_path, map_location="cpu", weights_only=True))
-    wrapper.load_extra_state_dict(torch.load(common_path, map_location="cpu", weights_only=True))
-    return tokenizer, wrapper, metadata
+    with open_stable_regular(
+        REPO_ROOT,
+        adaptation_path,
+        expected_sha256=str(metadata["adaptation_state_sha256"]),
+    ) as handle:
+        adaptation_state = torch.load(handle, map_location="cpu", weights_only=True)
+    with open_stable_regular(
+        REPO_ROOT,
+        common_path,
+        expected_sha256=str(metadata["loop_state_sha256"]),
+    ) as handle:
+        common_state = torch.load(handle, map_location="cpu", weights_only=True)
+    wrapper.load_delta_state_dict(adaptation_state)
+    wrapper.load_extra_state_dict(common_state)
+    return tokenizer, wrapper, metadata, expected_metadata_sha256
+
+
+def _trigger_launch_preflight(
+    config: Mapping[str, Any], target: TrainingCell
+) -> dict[str, Any]:
+    """Require the exact frozen trigger-evaluation prefix for one stage."""
+
+    matrices = {"A": STAGE_A_MATRIX, "B": STAGE_B_MATRIX, "C": STAGE_C_MATRIX}
+    matrix = matrices[target.stage]
+    target_index = matrix.index(target)
+    vector: list[dict[str, Any]] = []
+    completed: list[dict[str, Any]] = []
+    for index, cell in enumerate(matrix):
+        output = canonical_training_cell_paths(
+            REPO_ROOT, cell, steps=int(config["training"]["train_steps"])
+        ).trigger_output
+        if index >= target_index:
+            if os.path.lexists(output):
+                raise RuntimeError(
+                    f"out-of-order trigger evaluation output exists: {cell.slug}"
+                )
+            vector.append({"cell": cell.slug, "state": "ABSENT"})
+            continue
+        summary_path = output / "summary.json"
+        if not output.is_dir() or not summary_path.is_file():
+            raise RuntimeError(
+                f"earlier trigger evaluation is not terminal: {cell.slug}"
+            )
+        summary = read_stable_json_object(REPO_ROOT, summary_path)
+        claimed = summary.get("receipt_identity_sha256")
+        if claimed != _canonical_sha256(
+            {key: value for key, value in summary.items() if key != "receipt_identity_sha256"}
+        ):
+            raise RuntimeError(f"earlier trigger receipt identity changed: {cell.slug}")
+        expected = {
+            "status": "STATE_EVALUATION_COMPLETE",
+            "eval_set": "trigger",
+            "capacity": cell.capacity,
+            "objective": cell.objective,
+            "model_seed": cell.seed,
+        }
+        if any(summary.get(key) != value for key, value in expected.items()):
+            raise RuntimeError(f"earlier trigger receipt targets another cell: {cell.slug}")
+        proof = {
+            "cell": cell.slug,
+            "summary_path": _repo_relative(summary_path),
+            "summary_sha256": _sha256(summary_path),
+            "receipt_identity_sha256": claimed,
+        }
+        vector.append({"cell": cell.slug, "state": "COMPLETE"})
+        completed.append(proof)
+    proof = {
+        "schema_version": 1,
+        "status": "TRIGGER_LAUNCH_PREFLIGHT_PASS",
+        "stage": target.stage,
+        "target": target.slug,
+        "cells": vector,
+        "completed": completed,
+    }
+    proof["preflight_identity_sha256"] = _canonical_sha256(proof)
+    return proof
 
 
 def evaluate_state(
@@ -3195,44 +4351,103 @@ def evaluate_state(
     require_confirmatory_config(config)
     if eval_set not in {"trigger", "contrast"}:
         raise ValueError(eval_set)
+    if capacity not in {"lora", "fullrank"} or objective not in {"joint", "state_only"}:
+        raise ValueError(f"invalid evaluation cell: {capacity}/{objective}")
+    if model_seed not in set(map(int, config["training"]["train_seeds"])):
+        raise RuntimeError("evaluation seed is not preregistered")
+    cell_stage = _training_stage(capacity, objective)
+    cell = TrainingCell(cell_stage, capacity, objective, model_seed)
     if eval_set == "contrast":
         if capacity not in {"lora", "fullrank"} or objective != "joint":
             raise RuntimeError("sealed contrast evaluation is registered only for joint capacity arms")
-        if authorization_receipt is None:
-            raise RuntimeError("sealed contrast evaluation requires the Stage-B seal")
-        authorization = _read_receipt(
-            authorization_receipt,
-            config,
-            statuses={"STAGE_B_CONTRAST_AUTHORIZED"},
-            phases={"stage_b_seal_analysis"},
-            label="contrast-split authorization",
+        authorization_details = _contrast_authorization_details(
+            config, authorization_receipt
         )
+        reached_stage = "B"
     else:
-        authorization = _authorization_for(
+        authorization_details = _authorization_details_for(
             config, capacity, objective, authorization_receipt
         )
-    _require_new_output(output_dir, directory=True, kind="state evaluation")
+        reached_stage = cell_stage
+    authorization = (
+        None
+        if authorization_details is None
+        else dict(authorization_details["receipt"])
+    )
     split_names = (
         list(config["evaluation"]["trigger_splits"])
         if eval_set == "trigger" else list(config["evaluation"]["sealed_contrast_splits"])
     )
-    if eval_set == "contrast":
-        data_dir, manifest, data_manifest_sha256 = _load_data_manifest(
-            config, content_splits=set()
-        )
-        authorization_lineage = _lineage(authorization_receipt, authorization)
-    else:
-        data_dir, manifest, data_manifest_sha256 = _load_data_manifest(
-            config, content_splits=set(split_names)
-        )
-        authorization_lineage = None
-        access_event = None
-    tokenizer, wrapper, checkpoint_metadata = _load_checkpoint(
-        config, checkpoint, capacity=capacity, objective=objective, model_seed=model_seed
+
+    # No result row, model payload, or output path is opened before the
+    # complete setup and terminal-training graphs are proven.
+    data_dir, manifest, data_manifest_sha256 = _load_data_manifest(
+        config, content_splits=set()
+    )
+    root_lora_miss = (
+        authorization_details["root_lora_miss_lineage"]
+        if authorization_details is not None else None
+    )
+    setup_barrier_proof, _ = _setup_barrier(
+        config,
+        stage=reached_stage,
+        data_manifest_sha256=data_manifest_sha256,
+        root_lora_miss_lineage=root_lora_miss,
+    )
+    training_barrier_proof = _reached_training_barrier(
+        config,
+        reached_stage=reached_stage,
+        authorization_details=authorization_details,
+        setup_barrier=setup_barrier_proof,
+    )
+    target_training_proof = _target_training_cell_proof(
+        training_barrier_proof, cell
+    )
+    canonical_paths = canonical_training_cell_paths(
+        REPO_ROOT, cell, steps=int(config["training"]["train_steps"])
+    )
+    if checkpoint.absolute() != canonical_paths.checkpoint_dir:
+        raise RuntimeError("evaluation checkpoint is not the canonical fixed-final cell")
+    expected_output = (
+        canonical_paths.trigger_output
+        if eval_set == "trigger"
+        else ROOT / "runs" / f"{capacity}_joint_seed{model_seed}_contrast"
+    )
+    if output_dir.absolute() != expected_output:
+        raise RuntimeError("evaluation output is not the canonical result cell")
+    trigger_launch_preflight = (
+        _trigger_launch_preflight(config, cell) if eval_set == "trigger" else None
+    )
+    authorization_lineage = (
+        dict(authorization_details["lineage"])
+        if eval_set == "contrast" and authorization_details is not None else None
+    )
+    tokenizer, wrapper, checkpoint_metadata, checkpoint_sha256 = _load_checkpoint(
+        config,
+        checkpoint,
+        capacity=capacity,
+        objective=objective,
+        model_seed=model_seed,
+        expected_metadata_sha256=str(
+            target_training_proof["checkpoint_metadata_sha256"]
+        ),
     )
     if checkpoint_metadata.get("data_manifest_sha256") != data_manifest_sha256:
         raise RuntimeError("checkpoint/evaluation data manifest mismatch")
-    checkpoint_sha256 = _sha256(checkpoint / "checkpoint.json")
+    expected_training_authorization = (
+        dict(authorization_details["lineage"])
+        if eval_set == "trigger" and authorization_details is not None else None
+    )
+    if eval_set == "trigger" and (
+        checkpoint_metadata.get("branch_authorization_lineage")
+        != expected_training_authorization
+    ):
+        raise RuntimeError("trigger evaluation/checkpoint branch authorization mismatch")
+
+    # Contrast PREPARES its durable access identity before output creation,
+    # then installs the bound marker and records STARTED before the first
+    # operation permitted to decompress sealed payload.  A crash at every
+    # boundary is therefore either marker-only recoverable or archive-bound.
     if eval_set == "contrast":
         checkpoint_lineage = {
             "path": _repo_relative(checkpoint),
@@ -3263,23 +4478,29 @@ def evaluate_state(
             evaluation_output=output_dir,
             checkpoint_lineage=checkpoint_lineage,
         )
-        # The checkpoint-bound event is durable before the first operation
-        # allowed to decompress any sealed payload.
-        validate_data_manifest(
-            config, data_dir, manifest,
-            content_splits=set(split_names) | {"validation"},
+        try:
+            attempt_authorization = access_event["attempts"][-1]["authorization"]
+            ensure_attempt_output(output_dir, attempt_authorization)
+        except (KeyError, IndexError, TypeError, AttemptReceiptError) as exc:
+            raise RuntimeError(f"contrast PREPARED output marker failed: {exc}") from exc
+        access_event = start_contrast_access(
+            config,
+            data_dir,
+            manifest,
+            capacity=capacity,
+            objective=objective,
+            model_seed=model_seed,
+            evaluation_output=output_dir,
+        )
+        evaluation_rows = validated_data_rows(
+            config, data_dir, manifest, tuple(split_names)
         )
     else:
         access_event = None
-    expected_training_authorization = (
-        _lineage(authorization_receipt, authorization)
-        if eval_set == "trigger" and authorization_receipt and authorization else None
-    )
-    if eval_set == "trigger" and (
-        checkpoint_metadata.get("branch_authorization_lineage")
-        != expected_training_authorization
-    ):
-        raise RuntimeError("trigger evaluation/checkpoint branch authorization mismatch")
+        _require_new_output(output_dir, directory=True, kind="state evaluation")
+        evaluation_rows = validated_data_rows(
+            config, data_dir, manifest, tuple(split_names)
+        )
     summaries: dict[str, Any] = {}
     torch.cuda.reset_peak_memory_stats()
     evaluation_started = time.time()
@@ -3290,7 +4511,7 @@ def evaluate_state(
         context = contextlib.nullcontext() if mode == "intact" else wrapper.adaptation.suspended()
         with context, torch.no_grad():
             for split in split_names:
-                rows = read_jsonl(data_dir / f"{split}.jsonl.gz")
+                rows = evaluation_rows[split]
                 by_depth: dict[int, dict[str, float]] = {}
                 answer_interface = 0
                 answer_correct_total = 0
@@ -3520,7 +4741,10 @@ def evaluate_state(
             "rows": _metrics_line_count(rows_path),
             "splits": split_summaries,
         }
-    parity_row = read_jsonl(data_dir / "validation.jsonl.gz")[0]
+    for mode in ("intact", "disabled"):
+        _fsync_file(output_dir / f"rows_{mode}.jsonl")
+    _fsync_directory(output_dir)
+    parity_row = evaluation_rows[split_names[0]][0]
     parity_batch = _encode_row(tokenizer, parity_row, config, k=1, device=torch.device("cuda"))
     wrapper.adaptation.reset_call_count()
     parity_error = _k1_parity(wrapper, parity_batch)
@@ -3543,6 +4767,10 @@ def evaluate_state(
         "checkpoint_metadata_sha256": checkpoint_sha256,
         "checkpoint_identity_sha256": checkpoint_metadata["checkpoint_identity_sha256"],
         "data_manifest_sha256": data_manifest_sha256,
+        "setup_barrier": setup_barrier_proof,
+        "training_barrier": training_barrier_proof,
+        "target_training_cell_proof": target_training_proof,
+        "trigger_launch_preflight": trigger_launch_preflight,
         "split_payloads": {
             split: {
                 "sha256": manifest["files"][split]["sha256"],
@@ -3556,6 +4784,18 @@ def evaluate_state(
             else checkpoint_metadata.get("branch_authorization_lineage")
         ),
         "contrast_access_event": access_event,
+        "authorizes_training": False,
+        "authorizes_result_training": False,
+        "authorizes_result_evaluation": False,
+        "benchmark_files_read": 0,
+        "result_payloads_opened": (
+            list(split_names) if eval_set == "trigger" else []
+        ),
+        "sealed_contrast_payloads_opened": (
+            list(split_names) if eval_set == "contrast" else []
+        ),
+        "training_or_evaluation_started": True,
+        "scientific_evidence": True,
         "k1_max_logit_abs_error": parity_error,
         "k1_adaptation_calls": parity_calls,
         "evaluation_elapsed_seconds": time.time() - evaluation_started,

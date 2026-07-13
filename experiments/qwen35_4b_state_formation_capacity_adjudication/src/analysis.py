@@ -2,29 +2,74 @@
 
 from __future__ import annotations
 
+import copy
 import hashlib
 import json
 import math
+import os
 import random
 from pathlib import Path
 from typing import Any, Callable, Mapping, Sequence
 
-from .config import MODEL_ID, MODEL_REVISION, config_sha256, require_confirmatory_config, source_contract_sha256
+from .config import (
+    MODEL_ID,
+    MODEL_REVISION,
+    config_sha256,
+    load_config,
+    requirements_training_lock_bytes,
+    require_confirmatory_config,
+    source_contract_sha256,
+)
 from .data_pipeline import load_contrast_access_ledger, read_jsonl, validate_data_manifest
 from .design_boundary import design_lineage, validate_design_receipt
+from .gate_receipts import (
+    LORA_MISS_BRANCH,
+    POSTCONTRAST_FULLRANK_MISS_BRANCH,
+    STAGE_B_CONTRAST_BRANCH,
+    STAGE_B_FULLRANK_MISS_BRANCH,
+    canonical_repo_path,
+    lineage_entry,
+    reopen_lineage,
+    stable_setup_receipt as strict_stable_setup_receipt,
+    validate_branch_authorization,
+    validate_g0_pass,
+    validate_positive_control_pass,
+    validate_receipt_identity,
+)
 from .initialization import load_initialization_bundle
+from .oracle_control import generate_control_rows
+from .safe_io import (
+    open_stable_regular,
+    publish_new_bytes,
+    read_verified_bytes,
+    read_verified_jsonl_gzip,
+    read_verified_json_object,
+)
 from .substrate import trajectory_targets, verify_example
+from .training_receipts import (
+    STAGE_A_MATRIX,
+    STAGE_B_MATRIX,
+    STAGE_C_MATRIX,
+    TrainingCell,
+    TrainingReceiptContract,
+    evaluation_barrier,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
 REPO_ROOT = ROOT.parents[1]
 REQUIREMENTS_LOCK = REPO_ROOT / "requirements-training.lock.txt"
 SEEDS = (7411, 7412, 7413)
+REGISTERED_BOOTSTRAP_SEED = 75301
+ANALYSIS_WARNING = (
+    "State readability only; no answer-use, capability, deployment, "
+    "serial-advantage, rank-identification, or sample-more claim is licensed."
+)
 
 
 def _sha256(path: Path) -> str:
     digest = hashlib.sha256()
-    with path.open("rb") as handle:
+    with open_stable_regular(REPO_ROOT, path) as handle:
         for block in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(block)
     return digest.hexdigest()
@@ -36,6 +81,26 @@ def _canonical_sha256(payload: Mapping[str, Any]) -> str:
     ).hexdigest()
 
 
+def _locked_requirement_version(package: str) -> str:
+    prefix = f"{package}=="
+    try:
+        lines = requirements_training_lock_bytes().decode("utf-8").splitlines()
+    except UnicodeDecodeError as exc:
+        raise RuntimeError("training requirements lock is not UTF-8") from exc
+    matches = [
+        line[len(prefix) :].strip()
+        for line in lines
+        if line.startswith(prefix)
+    ]
+    if len(matches) != 1 or not matches[0]:
+        raise RuntimeError(f"training lock does not pin exactly one {package} version")
+    return matches[0]
+
+
+def _requirements_sha256() -> str:
+    return hashlib.sha256(requirements_training_lock_bytes()).hexdigest()
+
+
 def _identity(config: Mapping[str, Any], phase: str) -> dict[str, Any]:
     design = design_lineage(config)
     return {
@@ -45,7 +110,7 @@ def _identity(config: Mapping[str, Any], phase: str) -> dict[str, Any]:
         "backend": "transformers",
         "config_sha256": config_sha256(config),
         "source_contract_sha256": source_contract_sha256(ROOT),
-        "requirements_training_lock_sha256": _sha256(REQUIREMENTS_LOCK),
+        "requirements_training_lock_sha256": _requirements_sha256(),
         "design_receipt_sha256": design["sha256"],
         "design_receipt_identity_sha256": design["receipt_identity_sha256"],
         "phase": phase,
@@ -65,42 +130,87 @@ def _checkpoint_identity(metadata: Mapping[str, Any]) -> str:
 
 
 def _resolve_repo_path(value: str) -> Path:
-    path = (REPO_ROOT / value).resolve()
-    if not path.is_relative_to(REPO_ROOT):
-        raise RuntimeError(f"lineage path escapes repository: {value}")
-    return path
+    try:
+        return canonical_repo_path(REPO_ROOT, value, require_file=False)
+    except RuntimeError as exc:
+        raise RuntimeError(f"lineage path is not canonical: {value}") from exc
+
+
+def _canonical_expected_path(path: Path, *, require_file: bool = False) -> Path:
+    raw = os.fspath(path)
+    lexical = Path(os.path.abspath(raw))
+    if (path.is_absolute() and raw != lexical.as_posix()) or raw.startswith("//"):
+        raise RuntimeError(f"expected path is not lexical-canonical: {path}")
+    try:
+        relative = lexical.relative_to(REPO_ROOT).as_posix()
+    except ValueError as exc:
+        raise RuntimeError(f"expected path escapes repository: {path}") from exc
+    return canonical_repo_path(
+        REPO_ROOT, relative, require_file=require_file
+    )
 
 
 def _validate_lineage_entry(entry: Mapping[str, Any]) -> dict[str, Any]:
-    required = {"path", "sha256", "receipt_identity_sha256", "status", "phase"}
-    if set(entry) != required:
-        raise RuntimeError("analysis lineage entry has the wrong fields")
-    path = _resolve_repo_path(str(entry["path"]))
-    if not path.is_file() or _sha256(path) != entry["sha256"]:
-        raise RuntimeError("analysis lineage file changed")
-    receipt = json.loads(path.read_text(encoding="utf-8"))
-    claimed = receipt.get("receipt_identity_sha256")
-    identity_payload = {
-        key: value for key, value in receipt.items() if key != "receipt_identity_sha256"
-    }
-    if claimed != _canonical_sha256(identity_payload) or claimed != entry["receipt_identity_sha256"]:
-        raise RuntimeError("analysis lineage receipt identity changed")
-    if (
-        str(receipt.get("status", receipt.get("verdict", ""))) != entry["status"]
-        or receipt.get("phase") != entry["phase"]
-    ):
-        raise RuntimeError("analysis lineage status/phase changed")
-    return receipt
+    return reopen_lineage(REPO_ROOT, entry)
 
 
-def _read_jsonl(path: Path) -> list[dict[str, Any]]:
-    with path.open("r", encoding="utf-8") as handle:
-        return [json.loads(line) for line in handle if line.strip()]
+def _reject_duplicate_keys(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError(f"duplicate JSON key: {key}")
+        result[key] = value
+    return result
 
 
-def _line_count(path: Path) -> int:
-    with path.open("r", encoding="utf-8") as handle:
-        return sum(1 for line in handle if line.strip())
+def _reject_json_constant(value: str) -> None:
+    raise ValueError(f"nonfinite JSON constant: {value}")
+
+
+def _read_stable_json_object(path: Path) -> tuple[dict[str, Any], str]:
+    """Parse one stable no-follow snapshot and return its exact byte digest."""
+
+    with open_stable_regular(REPO_ROOT, path) as handle:
+        raw = handle.read()
+    try:
+        value = json.loads(
+            raw.decode("utf-8"),
+            object_pairs_hook=_reject_duplicate_keys,
+            parse_constant=_reject_json_constant,
+        )
+    except (UnicodeDecodeError, ValueError, json.JSONDecodeError) as exc:
+        raise RuntimeError(f"stable JSON artifact is malformed: {path}") from exc
+    if not isinstance(value, dict):
+        raise RuntimeError(f"stable JSON artifact is not an object: {path}")
+    return value, hashlib.sha256(raw).hexdigest()
+
+
+def _read_verified_jsonl(path: Path, expected_sha256: str) -> list[dict[str, Any]]:
+    """Parse rows only from the inode whose bytes match the bound digest."""
+
+    raw = read_verified_bytes(REPO_ROOT, path, expected_sha256)
+    return _parse_jsonl_snapshot(raw, path)
+
+
+def _parse_jsonl_snapshot(raw: bytes, path: Path) -> list[dict[str, Any]]:
+    """Parse an already snapshotted JSONL payload without reopening its path."""
+
+    try:
+        text = raw.decode("utf-8")
+        rows = [
+            json.loads(
+                line,
+                object_pairs_hook=_reject_duplicate_keys,
+                parse_constant=_reject_json_constant,
+            )
+            for line in text.splitlines()
+            if line.strip()
+        ]
+    except (UnicodeDecodeError, ValueError, json.JSONDecodeError) as exc:
+        raise RuntimeError(f"verified JSONL artifact is malformed: {path}") from exc
+    if any(not isinstance(row, dict) for row in rows):
+        raise RuntimeError(f"verified JSONL artifact has a non-object row: {path}")
+    return rows
 
 
 def _stable_setup_receipt(setup: Mapping[str, Any]) -> dict[str, Any]:
@@ -137,6 +247,919 @@ def _pairing_setup_receipt(setup: Mapping[str, Any]) -> dict[str, Any]:
     return {key: stable[key] for key in fields}
 
 
+_STAGE_MATRICES = {
+    "A": STAGE_A_MATRIX,
+    "B": STAGE_B_MATRIX,
+    "C": STAGE_C_MATRIX,
+}
+_STAGE_ORDER = ("A", "B", "C")
+_BRANCH_PHASE = {
+    LORA_MISS_BRANCH: "lora_joint_analysis",
+    STAGE_B_CONTRAST_BRANCH: "stage_b_seal_analysis",
+    STAGE_B_FULLRANK_MISS_BRANCH: "stage_b_seal_analysis",
+    POSTCONTRAST_FULLRANK_MISS_BRANCH: "fullrank_joint_analysis",
+}
+_BRANCH_FILENAME = {
+    LORA_MISS_BRANCH: "lora_joint_trigger.json",
+    STAGE_B_CONTRAST_BRANCH: "stage_b_seal.json",
+    STAGE_B_FULLRANK_MISS_BRANCH: "stage_b_seal.json",
+    POSTCONTRAST_FULLRANK_MISS_BRANCH: "fullrank_joint.json",
+}
+
+
+def _experiment_relative(path: Path) -> str:
+    try:
+        return path.relative_to(REPO_ROOT).as_posix()
+    except ValueError as exc:
+        raise RuntimeError(f"registered experiment path escapes repository: {path}") from exc
+
+
+def _registered_analysis_path(filename: str) -> tuple[Path, str]:
+    path = ROOT / "analysis" / filename
+    return path, _experiment_relative(path)
+
+
+def _load_analysis_authorization(
+    config: Mapping[str, Any], path: Path, branch: str
+) -> dict[str, Any]:
+    """Load exactly one named, status-specific canonical branch receipt."""
+
+    if branch not in _BRANCH_PHASE:
+        raise RuntimeError(f"unregistered analysis authorization branch: {branch}")
+    _, canonical_relative = _registered_analysis_path(_BRANCH_FILENAME[branch])
+    validated = validate_branch_authorization(
+        REPO_ROOT,
+        path,
+        canonical_relative_path=canonical_relative,
+        branch=branch,
+        expected_identity=_identity(config, _BRANCH_PHASE[branch]),
+    )
+    return dict(validated["lineage"])
+
+
+def _load_lora_control_analysis(
+    config: Mapping[str, Any], path: Path
+) -> dict[str, Any]:
+    """Load the one canonical supporting analysis allowed in the Stage-B seal."""
+
+    canonical_path, canonical_relative = _registered_analysis_path("lora_control.json")
+    actual = canonical_repo_path(REPO_ROOT, canonical_relative)
+    raw = Path(path)
+    if raw.is_absolute():
+        matches = raw.as_posix() == actual.as_posix()
+    else:
+        matches = raw.as_posix() == canonical_relative
+    if not matches or actual != canonical_path:
+        raise RuntimeError("LoRA-control analysis is not at its canonical path")
+    receipt, receipt_sha256 = _read_stable_json_object(actual)
+    validate_receipt_identity(
+        receipt,
+        _identity(config, "lora_control_analysis"),
+        expected_status="LORA_STATE_ONLY_CONTROL_COMPLETE",
+        expected_phase="lora_control_analysis",
+    )
+    if (
+        receipt.get("analysis_phase") != "lora_control"
+        or receipt.get("next_stage") != "continue_mandatory_stage_b_seal"
+    ):
+        raise RuntimeError("LoRA-control analysis purpose changed")
+    return {
+        "path": canonical_relative,
+        "sha256": receipt_sha256,
+        "receipt_identity_sha256": receipt["receipt_identity_sha256"],
+        "status": receipt["status"],
+        "phase": receipt["phase"],
+    }
+
+
+def _training_stage(capacity: str, objective: str) -> str:
+    key = (capacity, objective)
+    stages = {
+        ("lora", "joint"): "A",
+        ("lora", "state_only"): "B",
+        ("fullrank", "joint"): "B",
+        ("fullrank", "state_only"): "C",
+    }
+    try:
+        return stages[key]
+    except KeyError as exc:
+        raise RuntimeError(f"unregistered training cell: {capacity}/{objective}") from exc
+
+
+def _same_registered_path(value: Any, canonical: Path, canonical_relative: str) -> bool:
+    if type(value) is not str:
+        return False
+    candidate = Path(value)
+    if candidate.is_absolute():
+        return candidate.as_posix() == canonical.as_posix()
+    return candidate.as_posix() == canonical_relative
+
+
+def _validate_named_branch(
+    config: Mapping[str, Any], branch: str
+) -> dict[str, Any]:
+    path, canonical_relative = _registered_analysis_path(_BRANCH_FILENAME[branch])
+    return validate_branch_authorization(
+        REPO_ROOT,
+        path,
+        canonical_relative_path=canonical_relative,
+        branch=branch,
+        expected_identity=_identity(config, _BRANCH_PHASE[branch]),
+    )
+
+
+def _evaluation_branch_context(
+    config: Mapping[str, Any],
+    summary: Mapping[str, Any] | None,
+    *,
+    capacity: str,
+    objective: str,
+    eval_set: str,
+) -> dict[str, Any]:
+    """Resolve only the registered direct authorization for this evaluation."""
+
+    training_stage = _training_stage(capacity, objective)
+    if eval_set == "contrast":
+        if objective != "joint" or capacity not in {"lora", "fullrank"}:
+            raise RuntimeError("sealed contrast evaluation cell is unregistered")
+        branch = _validate_named_branch(config, STAGE_B_CONTRAST_BRANCH)
+        root = dict(branch["root_lora_miss_lineage"])
+        stage_b = dict(branch["lineage"])
+        expected_training = None if capacity == "lora" else root
+        if summary is not None and summary.get("contrast_authorization") != stage_b:
+            raise RuntimeError("contrast evaluation changed its Stage-B authorization")
+        if (
+            summary is not None
+            and summary.get("training_branch_authorization") != expected_training
+        ):
+            raise RuntimeError("contrast checkpoint changed its training authorization")
+        return {
+            "reached_stage": "B",
+            "training_stage": training_stage,
+            "training_authorization": expected_training,
+            "root_lora_miss_lineage": root,
+            "stage_b_lineage": stage_b,
+            "evaluation_authorization": stage_b,
+        }
+
+    if eval_set != "trigger":
+        raise RuntimeError(f"unregistered evaluation set: {eval_set}")
+    if summary is not None and summary.get("contrast_authorization") is not None:
+        raise RuntimeError("trigger evaluation unexpectedly has contrast authorization")
+    if training_stage == "A":
+        if (
+            summary is not None
+            and summary.get("training_branch_authorization") is not None
+        ):
+            raise RuntimeError("Stage-A evaluation unexpectedly has branch authorization")
+        return {
+            "reached_stage": "A",
+            "training_stage": "A",
+            "training_authorization": None,
+            "root_lora_miss_lineage": None,
+            "stage_b_lineage": None,
+            "evaluation_authorization": None,
+        }
+    if training_stage == "B":
+        branch = _validate_named_branch(config, LORA_MISS_BRANCH)
+        root = dict(branch["lineage"])
+        if (
+            summary is not None
+            and summary.get("training_branch_authorization") != root
+        ):
+            raise RuntimeError("Stage-B evaluation changed its LoRA-miss authorization")
+        return {
+            "reached_stage": "B",
+            "training_stage": "B",
+            "training_authorization": root,
+            "root_lora_miss_lineage": root,
+            "stage_b_lineage": None,
+            "evaluation_authorization": root,
+        }
+
+    stage_b_path, stage_b_relative = _registered_analysis_path("stage_b_seal.json")
+    post_path, post_relative = _registered_analysis_path("fullrank_joint.json")
+    if summary is None:
+        stage_b_candidate, _ = _read_stable_json_object(stage_b_path)
+        if stage_b_candidate.get("status") == "FULLRANK_STATE_ONLY_REQUIRED":
+            branch_name = STAGE_B_FULLRANK_MISS_BRANCH
+        elif stage_b_candidate.get("status") == "STAGE_B_CONTRAST_AUTHORIZED":
+            branch_name = POSTCONTRAST_FULLRANK_MISS_BRANCH
+        else:
+            raise RuntimeError("Stage-C canonical Stage-B decision is malformed")
+    else:
+        observed = summary.get("training_branch_authorization")
+        if not isinstance(observed, Mapping):
+            raise RuntimeError("Stage-C evaluation omits its direct authorization")
+        if _same_registered_path(observed.get("path"), stage_b_path, stage_b_relative):
+            branch_name = STAGE_B_FULLRANK_MISS_BRANCH
+        elif _same_registered_path(observed.get("path"), post_path, post_relative):
+            branch_name = POSTCONTRAST_FULLRANK_MISS_BRANCH
+        else:
+            raise RuntimeError("Stage-C authorization is not a canonical registered branch")
+    branch = _validate_named_branch(config, branch_name)
+    current = dict(branch["lineage"])
+    if summary is not None and dict(observed) != current:
+        raise RuntimeError("Stage-C evaluation changed its direct authorization")
+    return {
+        "reached_stage": "C",
+        "training_stage": "C",
+        "training_authorization": current,
+        "root_lora_miss_lineage": dict(branch["root_lora_miss_lineage"]),
+        "stage_b_lineage": dict(branch["stage_b_lineage"]),
+        "evaluation_authorization": current,
+    }
+
+
+def _training_contracts(
+    config: Mapping[str, Any], reached_stage: str
+) -> dict[TrainingCell, TrainingReceiptContract]:
+    if reached_stage not in _STAGE_ORDER:
+        raise RuntimeError(f"unregistered reached training stage: {reached_stage}")
+    reached_index = _STAGE_ORDER.index(reached_stage)
+    contracts = {}
+    for stage in _STAGE_ORDER[: reached_index + 1]:
+        for cell in _STAGE_MATRICES[stage]:
+            contracts[cell] = TrainingReceiptContract(
+                schema_version=1,
+                status="TRAINING_COMPLETE",
+                identity=_identity(config, cell.phase),
+                steps=int(config["training"]["train_steps"]),
+            )
+    return contracts
+
+
+def _reached_training_barrier(
+    config: Mapping[str, Any],
+    branch_context: Mapping[str, Any],
+    setup_barrier: Mapping[str, Any],
+) -> dict[str, Any]:
+    reached = str(branch_context["reached_stage"])
+    contracts = _training_contracts(config, reached)
+    reached_index = _STAGE_ORDER.index(reached)
+    stages = []
+    for stage in _STAGE_ORDER[: reached_index + 1]:
+        if stage == "A":
+            authorization = None
+        elif stage == "B":
+            authorization = branch_context.get("root_lora_miss_lineage")
+        else:
+            authorization = branch_context.get("training_authorization")
+        stage_proof = evaluation_barrier(
+            REPO_ROOT,
+            stage,
+            contracts,
+            required_authorization=authorization,
+        )
+        _bind_training_cells_to_setup(stage_proof["cells"], setup_barrier)
+        stages.append(stage_proof)
+    proof = {
+        "schema_version": 1,
+        "status": "REACHED_TRAINING_BARRIER_COMPLETE",
+        "stages": stages,
+        "reached_stage": reached,
+    }
+    proof["barrier_identity_sha256"] = _canonical_sha256(proof)
+    return proof
+
+
+def _bind_training_cells_to_setup(
+    cell_proofs: Sequence[Mapping[str, Any]], setup_barrier: Mapping[str, Any]
+) -> None:
+    setup_rows = setup_barrier.get("cells")
+    if not isinstance(setup_rows, list):
+        raise RuntimeError("setup barrier omits its cells")
+    setup_by_cell: dict[str, Mapping[str, Any]] = {}
+    for row in setup_rows:
+        if not isinstance(row, Mapping) or type(row.get("cell")) is not str:
+            raise RuntimeError("setup barrier cell is malformed")
+        if row["cell"] in setup_by_cell:
+            raise RuntimeError("setup barrier has a duplicate cell")
+        setup_by_cell[str(row["cell"])] = row
+    for proof in cell_proofs:
+        if not isinstance(proof, Mapping):
+            raise RuntimeError("training cell proof is malformed")
+        capacity = proof.get("capacity")
+        seed = proof.get("seed")
+        if type(capacity) is not str or type(seed) is not int:
+            raise RuntimeError("training cell proof identity is malformed")
+        setup_key = f"{capacity}_seed{seed}"
+        expected = setup_by_cell.get(setup_key)
+        if expected is None:
+            raise RuntimeError(f"training cell has no setup-barrier cell: {setup_key}")
+        gates = proof.get("gate_lineages")
+        if not isinstance(gates, Mapping):
+            raise RuntimeError("training cell proof omits gate lineages")
+        if gates.get("g0_lineage") != expected.get("g0_lineage"):
+            raise RuntimeError("training cell changed its canonical G0 lineage")
+        if gates.get("positive_control_lineage") != expected.get(
+            "positive_control_lineage"
+        ):
+            raise RuntimeError("training cell changed its canonical positive-control lineage")
+        if proof.get("stable_setup_sha256") != expected.get("stable_setup_sha256"):
+            raise RuntimeError("training cell changed its deterministic setup")
+
+
+def _current_training_cell_proof(
+    barrier: Mapping[str, Any], *, capacity: str, objective: str, seed: int
+) -> dict[str, Any]:
+    slug = f"{capacity}_{objective}_seed{seed}"
+    stages = barrier.get("stages")
+    if not isinstance(stages, list):
+        raise RuntimeError("reached training barrier has no ordered stage proofs")
+    matching_cells = []
+    for stage in stages:
+        if not isinstance(stage, Mapping):
+            raise RuntimeError("reached training barrier has a malformed stage")
+        cells = stage.get("cells")
+        if not isinstance(cells, list):
+            raise RuntimeError("training stage barrier has no cell proofs")
+        matching_cells.extend(
+            dict(item)
+            for item in cells
+            if isinstance(item, Mapping) and item.get("cell") == slug
+        )
+    if len(matching_cells) != 1:
+        raise RuntimeError("training barrier does not uniquely bind the evaluation cell")
+    expected_stage = _training_stage(capacity, objective)
+    if matching_cells[0].get("stage") != expected_stage:
+        raise RuntimeError("training-cell proof changed its registered stage")
+    return matching_cells[0]
+
+
+def _validate_registered_setup_fields(
+    config: Mapping[str, Any],
+    setup: Mapping[str, Any],
+    *,
+    capacity: str,
+    model_seed: int,
+) -> None:
+    adaptation = config["architecture"]["adaptation"][capacity]
+    targets = setup.get("adaptation_targets")
+    manifest = setup.get("adaptation_target_manifest")
+    expected_targets = int(adaptation["expected_targets"])
+    if type(targets) is not list or len(targets) != expected_targets:
+        raise RuntimeError("setup adaptation-target count changed")
+    if any(type(target) is not str or not target for target in targets):
+        raise RuntimeError("setup adaptation-target names are invalid")
+    if len(set(targets)) != len(targets):
+        raise RuntimeError("setup adaptation targets are not unique")
+    if setup.get("adaptation_targets_sha256") != hashlib.sha256(
+        "\n".join(targets).encode("utf-8")
+    ).hexdigest():
+        raise RuntimeError("setup adaptation-target digest changed")
+    if type(manifest) is not list or len(manifest) != expected_targets:
+        raise RuntimeError("setup adaptation-target manifest geometry changed")
+    if setup.get("adaptation_target_manifest_sha256") != _canonical_sha256(
+        {"targets": manifest}
+    ):
+        raise RuntimeError("setup adaptation-target manifest digest changed")
+    if setup.get("adaptation_parameters") != int(adaptation["expected_parameters"]):
+        raise RuntimeError("setup adaptation parameter count changed")
+    if setup.get("capacity") != capacity or setup.get("model_seed") != model_seed:
+        raise RuntimeError("setup cell identity changed")
+    shared = setup.get("shared_initialization")
+    if not isinstance(shared, Mapping):
+        raise RuntimeError("setup shared initialization is missing")
+    if set(shared) != {
+        "schema_version",
+        "status",
+        "phase",
+        "bundle_path",
+        "bundle_sha256",
+        "metadata",
+        "receipt_identity_sha256",
+    }:
+        raise RuntimeError("setup shared-initialization receipt fields changed")
+    if (
+        shared.get("schema_version") != 1
+        or shared.get("status") != "SHARED_INITIALIZATION_PREPARED"
+        or shared.get("phase") != "shared_initialization"
+    ):
+        raise RuntimeError("setup shared-initialization receipt status changed")
+    if shared.get("receipt_identity_sha256") != _canonical_sha256(
+        {
+            key: value
+            for key, value in shared.items()
+            if key != "receipt_identity_sha256"
+        }
+    ):
+        raise RuntimeError("setup shared-initialization identity changed")
+    expected_bundle_relative = (
+        Path("large_artifacts")
+        / config["experiment_id"]
+        / f"initialization_seed{model_seed}.pt"
+    ).as_posix()
+    if shared.get("bundle_path") != expected_bundle_relative:
+        raise RuntimeError("setup initialization bundle path changed")
+    bundle_path = canonical_repo_path(REPO_ROOT, expected_bundle_relative)
+    if shared.get("bundle_sha256") != _sha256(bundle_path):
+        raise RuntimeError("setup initialization bundle bytes changed")
+    metadata = shared.get("metadata")
+    if not isinstance(metadata, Mapping):
+        raise RuntimeError("setup shared-initialization metadata is missing")
+    if metadata.get("receipt_identity_sha256") != _canonical_sha256(
+        {
+            key: value
+            for key, value in metadata.items()
+            if key != "receipt_identity_sha256"
+        }
+    ):
+        raise RuntimeError("setup shared-initialization metadata identity changed")
+    expected_shared = {
+        "experiment_id": config["experiment_id"],
+        "model_id": MODEL_ID,
+        "model_revision": MODEL_REVISION,
+        "config_sha256": config_sha256(config),
+        "source_contract_sha256": source_contract_sha256(ROOT),
+        "requirements_training_lock_sha256": _requirements_sha256(),
+        "model_seed": model_seed,
+    }
+    for field, expected in expected_shared.items():
+        if type(metadata.get(field)) is not type(expected) or metadata.get(field) != expected:
+            raise RuntimeError(f"setup shared-initialization {field} changed")
+
+
+def _expected_positive_control_rows(
+    config: Mapping[str, Any], data_manifest_sha256: str,
+) -> list[dict[str, Any]]:
+    """Regenerate exact setup rows against the digest-bound result manifest."""
+
+    data_dir = _canonical_expected_path(
+        ROOT / str(config["paths"]["data_dir"])
+    )
+    manifest_path = data_dir / "manifest.json"
+    manifest = read_verified_json_object(
+        REPO_ROOT, manifest_path, data_manifest_sha256
+    )
+    rows, _ = generate_control_rows(config, manifest)
+    return rows
+
+
+def _reopen_setup_pair(
+    config: Mapping[str, Any],
+    *,
+    capacity: str,
+    model_seed: int,
+    data_manifest_sha256: str,
+    root_lora_miss_lineage: Mapping[str, Any] | None,
+) -> dict[str, Any]:
+    setup_dir = ROOT / "runs" / "setup"
+    g0_path = setup_dir / f"g0_{capacity}_seed{model_seed}.json"
+    g0_relative = _experiment_relative(g0_path)
+    canonical_g0 = canonical_repo_path(REPO_ROOT, g0_relative)
+    candidate, _ = _read_stable_json_object(canonical_g0)
+    setup = candidate.get("setup")
+    if not isinstance(setup, Mapping):
+        raise RuntimeError("G0 receipt omits its deterministic setup")
+    _validate_registered_setup_fields(
+        config, setup, capacity=capacity, model_seed=model_seed
+    )
+    expected_branch = root_lora_miss_lineage if capacity == "fullrank" else None
+    adaptation = config["architecture"]["adaptation"][capacity]
+    lora_rank = int(config["architecture"]["adaptation"]["lora"]["rank"])
+    g0 = validate_g0_pass(
+        REPO_ROOT,
+        g0_path,
+        canonical_relative_path=g0_relative,
+        expected_identity=_identity(config, f"{capacity}_g0"),
+        capacity=capacity,
+        model_seed=model_seed,
+        data_manifest_sha256=data_manifest_sha256,
+        expected_setup=setup,
+        expected_branch_authorization=expected_branch,
+        k1_max_logit_abs_error=float(config["gates"]["k1_max_logit_abs_error"]),
+        train_k=int(config["training"]["train_k"]),
+        max_recurrence=int(config["architecture"]["max_recurrence"]),
+        expected_adaptation_targets=int(
+            adaptation["expected_targets"]
+        ),
+        expected_adaptation_parameters=int(adaptation["expected_parameters"]),
+        expected_adaptation_dropout=float(adaptation["dropout"]),
+        expected_adaptation_scale=float(adaptation["scale"]),
+        expected_lora_rank=lora_rank,
+        expected_peft_version=_locked_requirement_version("peft"),
+        adaptation_gradient_clip=float(
+            config["training"]["adaptation_gradient_clip"]
+        ),
+        common_gradient_clip=float(config["training"]["common_gradient_clip"]),
+        worst_depth_seed=int(config["training"]["g0_control"]["worst_depth_seed"]),
+        min_free_memory_gib=4.0,
+    )
+    g0_lineage = lineage_entry(REPO_ROOT, g0_path, g0)
+    control_config = config["training"]["positive_control"]
+    control_path = setup_dir / f"positive_control_{capacity}_seed{model_seed}.json"
+    control_relative = _experiment_relative(control_path)
+    control = validate_positive_control_pass(
+        REPO_ROOT,
+        control_path,
+        canonical_relative_path=control_relative,
+        expected_identity=_identity(config, f"{capacity}_positive_control"),
+        capacity=capacity,
+        model_seed=model_seed,
+        data_manifest_sha256=data_manifest_sha256,
+        expected_setup=setup,
+        expected_branch_authorization=expected_branch,
+        expected_g0_lineage=g0_lineage,
+        expected_control_rows=_expected_positive_control_rows(
+            config, data_manifest_sha256
+        ),
+        control_seed=int(control_config["seed"]),
+        control_rows=int(control_config["rows"]),
+        control_updates=int(control_config["updates"]),
+        gradient_accumulation=int(config["training"]["gradient_accumulation"]),
+        min_oracle_readout_accuracy=float(
+            control_config["min_oracle_readout_accuracy"]
+        ),
+        min_overfit_final_joint_accuracy=float(
+            control_config["min_overfit_final_joint_accuracy"]
+        ),
+        expected_adaptation_targets=int(adaptation["expected_targets"]),
+        expected_adaptation_parameters=int(adaptation["expected_parameters"]),
+        expected_adaptation_dropout=float(adaptation["dropout"]),
+        expected_lora_rank=lora_rank,
+        control_families=tuple(map(str, config["substrate"]["train_families"])),
+        control_templates=tuple(
+            map(str, config["substrate"]["train_templates"])
+        ),
+        control_depths=tuple(map(int, control_config["depths"])),
+        control_query_kinds=("node", "checksum"),
+        control_examples_per_cell=int(control_config["examples_per_cell"]),
+        learning_rate=float(config["training"]["learning_rate"]),
+        adaptation_gradient_clip=float(
+            config["training"]["adaptation_gradient_clip"]
+        ),
+        common_gradient_clip=float(config["training"]["common_gradient_clip"]),
+    )
+    return {
+        "g0": g0,
+        "control": control,
+        "g0_lineage": g0_lineage,
+        "control_lineage": lineage_entry(REPO_ROOT, control_path, control),
+        "setup": dict(setup),
+    }
+
+
+def _recompute_setup_barrier(
+    config: Mapping[str, Any],
+    *,
+    stage: str,
+    data_manifest_sha256: str,
+    root_lora_miss_lineage: Mapping[str, Any] | None,
+) -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
+    if stage not in _STAGE_ORDER:
+        raise RuntimeError(f"unregistered setup-barrier stage: {stage}")
+    capacities = ("lora",) if stage == "A" else ("lora", "fullrank")
+    if stage == "A" and root_lora_miss_lineage is not None:
+        raise RuntimeError("Stage-A setup cannot have LoRA-miss authorization")
+    if stage in {"B", "C"} and root_lora_miss_lineage is None:
+        raise RuntimeError(f"Stage-{stage} setup omits root LoRA-miss authorization")
+    cells: dict[str, dict[str, Any]] = {}
+    per_seed_shared: dict[int, Mapping[str, Any]] = {}
+    common_invariant: Mapping[str, Any] | None = None
+    capacity_invariants: dict[str, Mapping[str, Any]] = {}
+    for capacity in capacities:
+        for seed in map(int, config["training"]["train_seeds"]):
+            validated = _reopen_setup_pair(
+                config,
+                capacity=capacity,
+                model_seed=seed,
+                data_manifest_sha256=data_manifest_sha256,
+                root_lora_miss_lineage=root_lora_miss_lineage,
+            )
+            slug = f"{capacity}_seed{seed}"
+            cells[slug] = validated
+            setup = validated["setup"]
+            stable = strict_stable_setup_receipt(setup)
+            common = {
+                "tokenizer": stable["tokenizer"],
+                "adaptation_targets": stable["adaptation_targets"],
+                "adaptation_targets_sha256": stable["adaptation_targets_sha256"],
+                "dropout_control": stable["dropout_control"],
+                "environment": stable["environment"],
+                "installed_environment_lock": stable[
+                    "installed_environment_lock"
+                ],
+                "preflight_device": stable["preflight_device"],
+            }
+            if common_invariant is None:
+                common_invariant = common
+            elif common != common_invariant:
+                raise RuntimeError(
+                    "setup cells do not share one model/environment invariant"
+                )
+            trainable = stable["trainable_parameters"]
+            if not isinstance(trainable, Mapping):
+                raise RuntimeError("setup trainable-parameter receipt is malformed")
+            capacity_invariant = {
+                "adaptation_target_manifest": stable[
+                    "adaptation_target_manifest"
+                ],
+                "adaptation_target_manifest_sha256": stable[
+                    "adaptation_target_manifest_sha256"
+                ],
+                "adaptation_parameters": stable["adaptation_parameters"],
+                "adaptation_zero_function": stable["adaptation_zero_function"],
+                "trainable_parameters_without_values": {
+                    key: value
+                    for key, value in trainable.items()
+                    if key != "values_sha256"
+                },
+            }
+            prior_capacity_invariant = capacity_invariants.get(capacity)
+            if prior_capacity_invariant is None:
+                capacity_invariants[capacity] = capacity_invariant
+            elif capacity_invariant != prior_capacity_invariant:
+                raise RuntimeError(f"{capacity} setup geometry changes across seeds")
+            shared = setup["shared_initialization"]
+            if seed in per_seed_shared and per_seed_shared[seed] != shared:
+                raise RuntimeError(
+                    f"LoRA/full-rank setup initialization differs for seed {seed}"
+                )
+            per_seed_shared[seed] = shared
+    proof = {
+        "schema_version": 1,
+        "status": "SETUP_BARRIER_COMPLETE",
+        "stage": stage,
+        "cells": [
+            {
+                "cell": slug,
+                "g0_lineage": validated["g0_lineage"],
+                "positive_control_lineage": validated["control_lineage"],
+                "stable_setup_sha256": _canonical_sha256(
+                    strict_stable_setup_receipt(validated["setup"])
+                ),
+            }
+            for slug, validated in cells.items()
+        ],
+        "root_lora_miss_lineage": (
+            dict(root_lora_miss_lineage) if root_lora_miss_lineage else None
+        ),
+        "common_setup_invariant_sha256": _canonical_sha256(
+            common_invariant or {}
+        ),
+        "capacity_setup_invariant_sha256s": {
+            capacity: _canonical_sha256(invariant)
+            for capacity, invariant in capacity_invariants.items()
+        },
+    }
+    proof["barrier_identity_sha256"] = _canonical_sha256(proof)
+    return proof, cells
+
+
+def _validate_semantic_setup_gates(
+    config: Mapping[str, Any],
+    *,
+    capacity: str,
+    seed: int,
+    checkpoint: Mapping[str, Any],
+    branch_context: Mapping[str, Any],
+) -> dict[str, dict[str, Any]]:
+    setup = checkpoint.get("setup")
+    if not isinstance(setup, Mapping):
+        raise RuntimeError("fixed-final checkpoint omits its exact setup receipt")
+    data_manifest_sha256 = checkpoint.get("data_manifest_sha256")
+    if type(data_manifest_sha256) is not str:
+        raise RuntimeError("fixed-final checkpoint data manifest is malformed")
+    validated = _reopen_setup_pair(
+        config,
+        capacity=capacity,
+        model_seed=seed,
+        data_manifest_sha256=data_manifest_sha256,
+        root_lora_miss_lineage=branch_context.get("root_lora_miss_lineage"),
+    )
+    if (
+        strict_stable_setup_receipt(setup)
+        != strict_stable_setup_receipt(validated["setup"])
+    ):
+        raise RuntimeError("checkpoint setup differs from its semantic setup gates")
+    if checkpoint.get("g0_lineage") != validated["g0_lineage"]:
+        raise RuntimeError("checkpoint changed its semantic G0 lineage")
+    if checkpoint.get("positive_control_lineage") != validated["control_lineage"]:
+        raise RuntimeError("checkpoint changed its semantic positive-control lineage")
+    return {
+        "g0_lineage": validated["g0"],
+        "positive_control_lineage": validated["control"],
+    }
+
+
+def _validate_evaluation_access_claims(
+    config: Mapping[str, Any], summary: Mapping[str, Any], *, eval_set: str
+) -> None:
+    trigger_splits = list(config["evaluation"]["trigger_splits"])
+    contrast_splits = list(config["evaluation"]["sealed_contrast_splits"])
+    expected = {
+        "authorizes_training": False,
+        "authorizes_result_training": False,
+        "authorizes_result_evaluation": False,
+        "benchmark_files_read": 0,
+        "result_payloads_opened": trigger_splits if eval_set == "trigger" else [],
+        "sealed_contrast_payloads_opened": (
+            contrast_splits if eval_set == "contrast" else []
+        ),
+        "training_or_evaluation_started": True,
+        "scientific_evidence": True,
+    }
+    for field, value in expected.items():
+        if type(summary.get(field)) is not type(value) or summary.get(field) != value:
+            raise RuntimeError(f"evaluation access claim changed: {field}")
+    if eval_set == "trigger" and summary.get("contrast_access_event") is not None:
+        raise RuntimeError("trigger evaluation unexpectedly has a contrast access event")
+
+
+def _open_training_cell_checkpoint_and_run(
+    cell: Mapping[str, Any], branch: Mapping[str, Any]
+) -> tuple[Path, dict[str, Any], dict[str, Any]]:
+    """Open terminal metadata only from their barrier-bound stable snapshots."""
+
+    checkpoint_path = _resolve_repo_path(str(cell["checkpoint_path"]))
+    checkpoint = read_verified_json_object(
+        REPO_ROOT,
+        checkpoint_path / "checkpoint.json",
+        str(cell["checkpoint_metadata_sha256"]),
+    )
+    if checkpoint.get("checkpoint_identity_sha256") != cell["checkpoint_identity_sha256"]:
+        raise RuntimeError("evaluation terminal checkpoint identity changed")
+    if checkpoint.get("branch_authorization_lineage") != branch["training_authorization"]:
+        raise RuntimeError(
+            "checkpoint branch authorization differs from its reached barrier"
+        )
+    run_path = _resolve_repo_path(str(cell["run_path"]))
+    run = read_verified_json_object(
+        REPO_ROOT, run_path, str(cell["run_sha256"])
+    )
+    if run.get("receipt_identity_sha256") != cell["receipt_identity_sha256"]:
+        raise RuntimeError("evaluation terminal training-run identity changed")
+    return checkpoint_path, checkpoint, run
+
+
+def _close_evaluation_graph(
+    config: Mapping[str, Any],
+    *,
+    capacity: str,
+    objective: str,
+    seed: int,
+    branch: Mapping[str, Any],
+    data_manifest_sha256: str,
+) -> dict[str, Any]:
+    """Close the canonical setup/training/checkpoint graph without result bytes."""
+
+    setup_barrier, _ = _recompute_setup_barrier(
+        config,
+        stage=str(branch["reached_stage"]),
+        data_manifest_sha256=data_manifest_sha256,
+        root_lora_miss_lineage=branch.get("root_lora_miss_lineage"),
+    )
+    barrier = _reached_training_barrier(config, branch, setup_barrier)
+    cell = _current_training_cell_proof(
+        barrier, capacity=capacity, objective=objective, seed=seed
+    )
+    checkpoint_path, checkpoint, run = _open_training_cell_checkpoint_and_run(
+        cell, branch
+    )
+    gates = _validate_semantic_setup_gates(
+        config,
+        capacity=capacity,
+        seed=seed,
+        checkpoint=checkpoint,
+        branch_context=branch,
+    )
+    return {
+        "branch": branch,
+        "setup_barrier": setup_barrier,
+        "training_barrier": barrier,
+        "training_cell": cell,
+        "checkpoint_path": checkpoint_path,
+        "checkpoint": checkpoint,
+        "run": run,
+        "setup_gate_receipts": gates,
+        "data_manifest_sha256": data_manifest_sha256,
+    }
+
+
+def _evaluation_graph_preflight(
+    config: Mapping[str, Any],
+    *,
+    capacity: str,
+    objective: str,
+    seed: int,
+    eval_set: str,
+    data_manifest_sha256: str,
+) -> dict[str, Any]:
+    """Close authorization and training before opening a result summary."""
+
+    branch = _evaluation_branch_context(
+        config,
+        None,
+        capacity=capacity,
+        objective=objective,
+        eval_set=eval_set,
+    )
+    return _close_evaluation_graph(
+        config,
+        capacity=capacity,
+        objective=objective,
+        seed=seed,
+        branch=branch,
+        data_manifest_sha256=data_manifest_sha256,
+    )
+
+
+def _evaluation_contract_preflight(
+    config: Mapping[str, Any],
+    summary: Mapping[str, Any],
+    *,
+    capacity: str,
+    objective: str,
+    seed: int,
+    eval_set: str,
+    graph_preflight: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Bind a stable summary to a graph closed before result interpretation."""
+
+    branch = _evaluation_branch_context(
+        config,
+        summary,
+        capacity=capacity,
+        objective=objective,
+        eval_set=eval_set,
+    )
+    _validate_evaluation_access_claims(config, summary, eval_set=eval_set)
+    data_manifest_sha256 = summary.get("data_manifest_sha256")
+    if type(data_manifest_sha256) is not str:
+        raise RuntimeError("evaluation data-manifest identity is malformed")
+    if graph_preflight is None:
+        setup_barrier, _ = _recompute_setup_barrier(
+            config,
+            stage=str(branch["reached_stage"]),
+            data_manifest_sha256=data_manifest_sha256,
+            root_lora_miss_lineage=branch.get("root_lora_miss_lineage"),
+        )
+        if summary.get("setup_barrier") != setup_barrier:
+            raise RuntimeError("evaluation setup barrier changed")
+        barrier = _reached_training_barrier(config, branch, setup_barrier)
+        if summary.get("training_barrier") != barrier:
+            raise RuntimeError("evaluation reached-stage training barrier changed")
+        cell = _current_training_cell_proof(
+            barrier, capacity=capacity, objective=objective, seed=seed
+        )
+        if summary.get("target_training_cell_proof") != cell:
+            raise RuntimeError("evaluation target training-cell proof changed")
+        for field in (
+            "checkpoint_path",
+            "checkpoint_metadata_sha256",
+            "checkpoint_identity_sha256",
+        ):
+            if summary.get(field) != cell.get(field):
+                raise RuntimeError(
+                    f"evaluation terminal training-cell {field} changed"
+                )
+        checkpoint_path, checkpoint, run = _open_training_cell_checkpoint_and_run(
+            cell, branch
+        )
+        gates = _validate_semantic_setup_gates(
+            config,
+            capacity=capacity,
+            seed=seed,
+            checkpoint=checkpoint,
+            branch_context=branch,
+        )
+        closed = {
+            "branch": branch,
+            "setup_barrier": setup_barrier,
+            "training_barrier": barrier,
+            "training_cell": cell,
+            "checkpoint_path": checkpoint_path,
+            "checkpoint": checkpoint,
+            "run": run,
+            "setup_gate_receipts": gates,
+            "data_manifest_sha256": data_manifest_sha256,
+        }
+    else:
+        closed = dict(graph_preflight)
+        if closed.get("branch") != branch:
+            raise RuntimeError("evaluation summary changed its preflight branch graph")
+        if closed.get("data_manifest_sha256") != data_manifest_sha256:
+            raise RuntimeError("evaluation summary changed its preflight data manifest")
+    if summary.get("setup_barrier") != closed.get("setup_barrier"):
+        raise RuntimeError("evaluation setup barrier changed")
+    if summary.get("training_barrier") != closed.get("training_barrier"):
+        raise RuntimeError("evaluation reached-stage training barrier changed")
+    cell = closed.get("training_cell")
+    if not isinstance(cell, Mapping):
+        raise RuntimeError("evaluation preflight training-cell proof is malformed")
+    if summary.get("target_training_cell_proof") != cell:
+        raise RuntimeError("evaluation target training-cell proof changed")
+    for field in (
+        "checkpoint_path",
+        "checkpoint_metadata_sha256",
+        "checkpoint_identity_sha256",
+    ):
+        if summary.get(field) != cell.get(field):
+            raise RuntimeError(f"evaluation terminal training-cell {field} changed")
+    return closed
+
+
 def _training_lr(config: Mapping[str, Any], step: int) -> float:
     training = config["training"]
     total_steps = int(training["train_steps"])
@@ -152,9 +1175,27 @@ def _training_lr(config: Mapping[str, Any], step: int) -> float:
     return float(training["learning_rate"]) * multiplier
 
 
-def _expected_training_order_sha256(config: Mapping[str, Any], seed: int) -> str:
-    data_dir = (ROOT / str(config["paths"]["data_dir"])).resolve()
-    rows = read_jsonl(data_dir / "train.jsonl.gz")
+def _expected_training_order_sha256(
+    config: Mapping[str, Any],
+    seed: int,
+    data_manifest_sha256: str | None = None,
+) -> str:
+    expected_data_dir = ROOT / str(config["paths"]["data_dir"])
+    if data_manifest_sha256 is None:
+        # Narrow unit-test seam; production callers always supply the barrier-
+        # bound manifest digest below.
+        rows = read_jsonl(expected_data_dir / "train.jsonl.gz")
+    else:
+        data_dir = _canonical_expected_path(expected_data_dir)
+        manifest = read_verified_json_object(
+            REPO_ROOT, data_dir / "manifest.json", data_manifest_sha256
+        )
+        train = manifest.get("files", {}).get("train")
+        if not isinstance(train, Mapping) or type(train.get("sha256")) is not str:
+            raise RuntimeError("training manifest omits its exact train payload")
+        rows = read_verified_jsonl_gzip(
+            REPO_ROOT, data_dir / "train.jsonl.gz", str(train["sha256"])
+        )
     rng = random.Random(seed)
     rng.shuffle(rows)
     total_microbatches = int(config["training"]["train_steps"]) * int(
@@ -199,11 +1240,11 @@ def _validate_training_payloads(
     for key, value in expected_run.items():
         if run.get(key) != value:
             raise RuntimeError(f"training run {key} mismatch")
-    canonical_run_dir = (
+    canonical_run_dir = _canonical_expected_path(
         ROOT
         / str(config["paths"]["large_artifacts_dir"])
         / f"{capacity}_{objective}_seed{seed}"
-    ).resolve()
+    )
     expected_checkpoint_path = (
         canonical_run_dir / f"checkpoint_{int(config['training']['train_steps']):06d}"
     )
@@ -230,7 +1271,7 @@ def _validate_training_payloads(
         if run.get(field) != checkpoint.get(field):
             raise RuntimeError(f"training run/checkpoint {field} mismatch")
     if run.get("training_order_sha256") != _expected_training_order_sha256(
-        config, seed
+        config, seed, str(checkpoint["data_manifest_sha256"])
     ):
         raise RuntimeError("training row order differs from the registered seeded schedule")
     setup = run.get("setup")
@@ -259,6 +1300,7 @@ def _validate_training_payloads(
         raise RuntimeError("training metrics use a noncanonical path")
     if optimizer_steps_path != canonical_run_dir / "optimizer_steps.jsonl":
         raise RuntimeError("optimizer steps use a noncanonical path")
+    payload_rows: dict[str, list[dict[str, Any]]] = {}
     for path, digest, rows, label in (
         (metrics_path, run["train_metrics_sha256"], run["train_metrics_rows"], "metrics"),
         (
@@ -268,14 +1310,14 @@ def _validate_training_payloads(
             "optimizer steps",
         ),
     ):
-        if (
-            not path.is_file()
-            or _sha256(path) != digest
-            or _line_count(path) != rows
-        ):
+        parsed = _parse_jsonl_snapshot(
+            read_verified_bytes(REPO_ROOT, path, str(digest)), path
+        )
+        if len(parsed) != rows:
             raise RuntimeError(f"training {label} payload changed")
+        payload_rows[label] = parsed
 
-    metric_rows = _read_jsonl(metrics_path)
+    metric_rows = payload_rows["metrics"]
     total_steps = int(config["training"]["train_steps"])
     expected_metric_steps = [
         step for step in range(1, total_steps + 1)
@@ -308,7 +1350,7 @@ def _validate_training_payloads(
                     f"training metric {group} learning-rate schedule changed"
                 )
 
-    optimizer_rows = _read_jsonl(optimizer_steps_path)
+    optimizer_rows = payload_rows["optimizer steps"]
     if [row.get("step") for row in optimizer_rows] != list(range(1, total_steps + 1)):
         raise RuntimeError("optimizer receipt does not cover every exact step")
     event_digest = hashlib.sha256()
@@ -405,20 +1447,35 @@ def _validate_training_payloads(
     tracked_metrics = _resolve_repo_path(str(run["tracked_metrics_path"]))
     tracked_optimizer_steps = _resolve_repo_path(str(run["tracked_optimizer_steps_path"]))
     external_run = canonical_run_dir / "run.json"
+    reopened_run, external_run_sha256 = _read_stable_json_object(external_run)
+    if reopened_run != dict(run):
+        raise RuntimeError("external training run changed after graph preflight")
     expected_tracked = (
-        (tracked_run, tracked_dir / "run.json", external_run),
-        (tracked_metrics, tracked_dir / "train_metrics.jsonl", metrics_path),
+        (
+            tracked_run,
+            tracked_dir / "run.json",
+            external_run,
+            external_run_sha256,
+        ),
+        (
+            tracked_metrics,
+            tracked_dir / "train_metrics.jsonl",
+            metrics_path,
+            str(run["train_metrics_sha256"]),
+        ),
         (
             tracked_optimizer_steps,
             tracked_dir / "optimizer_steps.jsonl",
             optimizer_steps_path,
+            str(run["optimizer_steps_sha256"]),
         ),
     )
-    for tracked, expected_path, external in expected_tracked:
+    for tracked, expected_path, external, expected_sha256 in expected_tracked:
         if (
-            tracked != expected_path.resolve()
+            tracked != _canonical_expected_path(expected_path, require_file=True)
             or not tracked.is_file()
-            or tracked.read_bytes() != external.read_bytes()
+            or read_verified_bytes(REPO_ROOT, tracked, expected_sha256)
+            != read_verified_bytes(REPO_ROOT, external, expected_sha256)
         ):
             raise RuntimeError("tracked training receipt mirror is missing or changed")
     return {
@@ -771,7 +1828,22 @@ def _load_evaluation(
     summary_path = directory / "summary.json"
     if not summary_path.is_file():
         raise RuntimeError(f"evaluation summary is missing: {summary_path}")
-    summary = json.loads(summary_path.read_text(encoding="utf-8"))
+    data_dir = _canonical_expected_path(
+        ROOT / str(config["paths"]["data_dir"])
+    )
+    data_manifest_path = data_dir / "manifest.json"
+    if not data_manifest_path.is_file():
+        raise RuntimeError("analysis data manifest is missing")
+    data_manifest_sha256 = _sha256(data_manifest_path)
+    graph_preflight = _evaluation_graph_preflight(
+        config,
+        capacity=capacity,
+        objective=objective,
+        seed=seed,
+        eval_set=eval_set,
+        data_manifest_sha256=data_manifest_sha256,
+    )
+    summary, summary_sha256 = _read_stable_json_object(summary_path)
     expected = {
         **_identity(config, f"{capacity}_{objective}_{eval_set}_evaluation"),
         "status": "STATE_EVALUATION_COMPLETE",
@@ -787,6 +1859,25 @@ def _load_evaluation(
     payload = {key: value for key, value in summary.items() if key != "receipt_identity_sha256"}
     if claimed != _canonical_sha256(payload):
         raise RuntimeError(f"evaluation receipt identity mismatch: {summary_path}")
+
+    # The summary is metadata, not trusted authorization.  Before opening an
+    # evaluation row, task row, initialization tensor, or interpreting a
+    # result diagnostic, recompute the complete reached-stage training graph
+    # and the capacity-specific G0/control semantics from canonical receipts.
+    preflight = _evaluation_contract_preflight(
+        config,
+        summary,
+        capacity=capacity,
+        objective=objective,
+        seed=seed,
+        eval_set=eval_set,
+        graph_preflight=graph_preflight,
+    )
+    checkpoint_path = preflight["checkpoint_path"]
+    checkpoint = preflight["checkpoint"]
+    run = preflight["run"]
+    setup_gate_receipts = preflight["setup_gate_receipts"]
+
     parity = _strict_float(
         summary.get("k1_max_logit_abs_error"), "evaluation K=1 parity", low=0.0
     )
@@ -794,19 +1885,19 @@ def _load_evaluation(
         raise RuntimeError("evaluation K=1 parity exceeds the frozen bound")
     if summary.get("k1_adaptation_calls") != 0:
         raise RuntimeError("evaluation K=1 unexpectedly called adaptation")
-    data_dir = (ROOT / str(config["paths"]["data_dir"])).resolve()
-    data_manifest_path = data_dir / "manifest.json"
-    if not data_manifest_path.is_file():
-        raise RuntimeError("analysis data manifest is missing")
-    data_manifest = json.loads(data_manifest_path.read_text(encoding="utf-8"))
+
+    data_manifest = read_verified_json_object(
+        REPO_ROOT, data_manifest_path, data_manifest_sha256
+    )
     expected_splits = (
         list(config["evaluation"]["trigger_splits"])
         if eval_set == "trigger" else list(config["evaluation"]["sealed_contrast_splits"])
     )
-    validate_data_manifest(
-        config, data_dir, data_manifest, content_splits=set(expected_splits)
-    )
-    if summary.get("data_manifest_sha256") != _sha256(data_manifest_path):
+    # Identity-only manifest validation belongs in receipt preflight.  No
+    # trigger or sealed row is decompressed until the checkpoint, setup gates,
+    # terminal training receipts, and branch lineage have all reopened.
+    validate_data_manifest(config, data_dir, data_manifest, content_splits=set())
+    if summary.get("data_manifest_sha256") != data_manifest_sha256:
         raise RuntimeError("evaluation/live data manifest mismatch")
     expected_payloads = {
         split: {
@@ -817,11 +1908,6 @@ def _load_evaluation(
     }
     if summary.get("split_payloads") != expected_payloads:
         raise RuntimeError("evaluation split payload lineage mismatch")
-    checkpoint_path = _resolve_repo_path(str(summary["checkpoint_path"]))
-    checkpoint_metadata = checkpoint_path / "checkpoint.json"
-    if not checkpoint_metadata.is_file() or _sha256(checkpoint_metadata) != summary["checkpoint_metadata_sha256"]:
-        raise RuntimeError("evaluation checkpoint metadata changed")
-    checkpoint = json.loads(checkpoint_metadata.read_text(encoding="utf-8"))
     expected_checkpoint = {
         **_identity(config, f"{capacity}_{objective}_training"),
         "capacity": capacity,
@@ -839,13 +1925,6 @@ def _load_evaluation(
         != summary.get("checkpoint_identity_sha256")
     ):
         raise RuntimeError("evaluation checkpoint identity mismatch")
-    setup_gate_receipts = {
-        lineage_key: _validate_lineage_entry(checkpoint[lineage_key])
-        for lineage_key in ("g0_lineage", "positive_control_lineage")
-    }
-    branch_lineage = checkpoint.get("branch_authorization_lineage")
-    if branch_lineage is not None:
-        _validate_lineage_entry(branch_lineage)
     shared_initialization = checkpoint.get("shared_initialization")
     if not isinstance(shared_initialization, Mapping):
         raise RuntimeError("checkpoint shared initialization is malformed")
@@ -862,10 +1941,6 @@ def _load_evaluation(
         payload_path = checkpoint_path / filename
         if not payload_path.is_file() or _sha256(payload_path) != checkpoint[digest_key]:
             raise RuntimeError("checkpoint tensor payload changed")
-    run_path = checkpoint_path.parent / "run.json"
-    if not run_path.is_file():
-        raise RuntimeError("training run index is missing")
-    run = json.loads(run_path.read_text(encoding="utf-8"))
     run_claimed = run.get("receipt_identity_sha256")
     if run_claimed != _canonical_sha256(
         {key: value for key, value in run.items() if key != "receipt_identity_sha256"}
@@ -896,15 +1971,16 @@ def _load_evaluation(
         objective=objective,
         seed=seed,
     )
+    validate_data_manifest(
+        config, data_dir, data_manifest, content_splits=set(expected_splits)
+    )
     rows_by_mode: dict[str, list[dict[str, Any]]] = {}
     for mode in ("intact", "disabled"):
         mode_receipt = summary["modes"][mode]
         if mode_receipt.get("rows_path") != f"rows_{mode}.jsonl":
             raise RuntimeError("evaluation row payload name changed")
         rows_path = directory / str(mode_receipt["rows_path"])
-        if not rows_path.is_file() or _sha256(rows_path) != mode_receipt["rows_sha256"]:
-            raise RuntimeError(f"evaluation row payload changed: {rows_path}")
-        rows = _read_jsonl(rows_path)
+        rows = _read_verified_jsonl(rows_path, str(mode_receipt["rows_sha256"]))
         if len(rows) != int(mode_receipt["rows"]):
             raise RuntimeError("evaluation row count changed")
         rows_by_mode[mode] = rows
@@ -919,7 +1995,11 @@ def _load_evaluation(
     corpus_rows = [
         (split, row)
         for split in expected_splits
-        for row in read_jsonl(data_dir / f"{split}.jsonl.gz")
+        for row in read_verified_jsonl_gzip(
+            REPO_ROOT,
+            data_dir / f"{split}.jsonl.gz",
+            str(data_manifest["files"][split]["sha256"]),
+        )
     ]
     expected_task_sequence = [
         (
@@ -962,7 +2042,7 @@ def _load_evaluation(
                 raise RuntimeError("evaluation targets differ from exact corpus truth")
     manifest = {
         "summary_path": summary_path.relative_to(REPO_ROOT).as_posix(),
-        "summary_sha256": _sha256(summary_path),
+        "summary_sha256": summary_sha256,
         "receipt_identity_sha256": claimed,
         "checkpoint_identity_sha256": summary["checkpoint_identity_sha256"],
         "checkpoint_path": summary["checkpoint_path"],
@@ -970,6 +2050,8 @@ def _load_evaluation(
         "checkpoint": checkpoint,
         "run": run,
         "training_provenance": training_provenance,
+        "setup_barrier": preflight["setup_barrier"],
+        "training_barrier": preflight["training_barrier"],
         "rows": {
             mode: {
                 "sha256": summary["modes"][mode]["rows_sha256"],
@@ -1156,6 +2238,7 @@ def _crossed_bootstrap(
         "model_seeds": model_seeds,
         "tasks": len(task_ids),
         "bootstrap_unit": "crossed_model_seed_by_task",
+        "bootstrap_seed": seed,
         "resamples": resamples,
     }
 
@@ -1166,6 +2249,8 @@ def _adaptation_effects(
 ) -> dict[str, Any]:
     resamples = int(config["evaluation"]["bootstrap_resamples"])
     base_seed = int(config["evaluation"]["bootstrap_seed"])
+    if base_seed != REGISTERED_BOOTSTRAP_SEED:
+        raise RuntimeError("analysis bootstrap seed changed")
     splits = sorted({str(row["split"]) for row in bundles[SEEDS[0]]["intact"]})
     effects = {}
     every_seed_positive = True
@@ -1173,7 +2258,7 @@ def _adaptation_effects(
     minimum_seed_effect = float(
         config["gates"]["min_adaptation_intact_minus_disabled_each_seed"]
     )
-    for index, split in enumerate(splits):
+    for split in splits:
         records = _paired_records(bundles, split)
         seed_points = {
             str(seed): sum(values.values()) / len(values)
@@ -1208,7 +2293,7 @@ def _adaptation_effects(
         crossed = _crossed_bootstrap(
             records,
             resamples=resamples,
-            seed=base_seed + index,
+            seed=base_seed,
         )
         effects[split] = {
             **crossed,
@@ -1309,45 +2394,20 @@ def _load_cell(
     return bundles, manifests
 
 
-def _load_analysis_authorization(
-    config: Mapping[str, Any], path: Path, statuses: set[str], phases: set[str]
-) -> dict[str, Any]:
-    path = _resolve_repo_path(str(path))
-    if not path.is_file():
-        raise RuntimeError(f"analysis authorization is missing: {path}")
-    receipt = json.loads(path.read_text(encoding="utf-8"))
-    status = str(receipt.get("status", receipt.get("verdict", "")))
-    phase = str(receipt.get("phase", ""))
-    if status not in statuses or phase not in phases:
-        raise RuntimeError("analysis authorization status/phase mismatch")
-    for key, value in _identity(config, phase).items():
-        if receipt.get(key) != value:
-            raise RuntimeError(f"analysis authorization {key} mismatch")
-    claimed = receipt.get("receipt_identity_sha256")
-    payload = {key: value for key, value in receipt.items() if key != "receipt_identity_sha256"}
-    if claimed != _canonical_sha256(payload):
-        raise RuntimeError("analysis authorization identity mismatch")
-    return {
-        "path": path.relative_to(REPO_ROOT).as_posix(),
-        "sha256": _sha256(path),
-        "receipt_identity_sha256": claimed,
-        "status": status,
-        "phase": phase,
-    }
-
-
 def _fullrank_minus_lora_contrast(
     config: Mapping[str, Any],
     fullrank: Mapping[int, Mapping[str, Sequence[Mapping[str, Any]]]],
     lora: Mapping[int, Mapping[str, Sequence[Mapping[str, Any]]]],
 ) -> dict[str, Any]:
     resamples = int(config["evaluation"]["bootstrap_resamples"])
-    base_seed = int(config["evaluation"]["bootstrap_seed"]) + 100
+    base_seed = int(config["evaluation"]["bootstrap_seed"])
+    if base_seed != REGISTERED_BOOTSTRAP_SEED:
+        raise RuntimeError("analysis bootstrap seed changed")
     splits = sorted({str(row["split"]) for row in fullrank[SEEDS[0]]["intact"]})
     result = {}
     every_seed_positive = True
     no_depth_negative = True
-    for index, split in enumerate(splits):
+    for split in splits:
         records = {}
         for seed in SEEDS:
             left = {
@@ -1391,7 +2451,7 @@ def _fullrank_minus_lora_contrast(
         if any(point < 0.0 for point in depth_points.values()):
             no_depth_negative = False
         crossed = _crossed_bootstrap(
-            records, resamples=resamples, seed=base_seed + index
+            records, resamples=resamples, seed=base_seed
         )
         result[split] = {
             **crossed, "per_seed_points": seed_points, "per_depth_points": depth_points,
@@ -1643,27 +2703,43 @@ def _stage_c_matching_receipt(
 def _contrast_firewall_preopen(
     config: Mapping[str, Any], runs_dir: Path, authorization: Mapping[str, Any]
 ) -> dict[str, Any]:
-    data_dir = (ROOT / str(config["paths"]["data_dir"])).resolve()
+    data_dir = _canonical_expected_path(
+        ROOT / str(config["paths"]["data_dir"])
+    )
     manifest_path = data_dir / "manifest.json"
     if not manifest_path.is_file():
         raise RuntimeError("Stage-B data manifest is missing")
-    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest, manifest_sha256 = _read_stable_json_object(manifest_path)
     validate_data_manifest(config, data_dir, manifest, content_splits=set())
-    ledger = load_contrast_access_ledger(config, data_dir, manifest)
+    ledger_path = data_dir / "contrast_access_ledger.json"
+    ledger_snapshot, ledger_sha256 = _read_stable_json_object(ledger_path)
+    ledger = load_contrast_access_ledger(
+        config,
+        data_dir,
+        manifest,
+        payload=ledger_snapshot,
+        manifest_sha256=manifest_sha256,
+    )
+    if ledger != ledger_snapshot:
+        raise RuntimeError("sealed contrast ledger changed while being validated")
     if ledger["events"]:
         raise RuntimeError("sealed contrast ledger is not empty before authorization")
     prohibited = [
         runs_dir / f"{capacity}_joint_seed{seed}_contrast"
         for capacity in ("lora", "fullrank") for seed in SEEDS
     ]
-    existing = [path.relative_to(REPO_ROOT).as_posix() for path in prohibited if path.exists()]
+    existing = [
+        path.relative_to(REPO_ROOT).as_posix()
+        for path in prohibited
+        if os.path.lexists(path)
+    ]
     if existing:
         raise RuntimeError(f"contrast outputs exist before Stage-B seal: {existing}")
     return {
         "status": "CONTRAST_FIREWALL_UNOPENED",
-        "data_manifest_sha256": _sha256(manifest_path),
-        "ledger_path": (data_dir / "contrast_access_ledger.json").relative_to(REPO_ROOT).as_posix(),
-        "ledger_sha256": _sha256(data_dir / "contrast_access_ledger.json"),
+        "data_manifest_sha256": manifest_sha256,
+        "ledger_path": ledger_path.relative_to(REPO_ROOT).as_posix(),
+        "ledger_sha256": ledger_sha256,
         "events": 0,
         "authorization": dict(authorization),
     }
@@ -1676,11 +2752,28 @@ def _contrast_ledger_guard(
     matching = stage_b.get("matching")
     if not isinstance(matching, Mapping) or matching.get("status") != "STAGE_B_MATCHING_VALID":
         raise RuntimeError("Stage-B authorization has no matching receipt")
-    data_dir = (ROOT / str(config["paths"]["data_dir"])).resolve()
+    data_dir = _canonical_expected_path(
+        ROOT / str(config["paths"]["data_dir"])
+    )
     manifest_path = data_dir / "manifest.json"
-    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    firewall = stage_b.get("contrast_firewall")
+    if not isinstance(firewall, Mapping):
+        raise RuntimeError("Stage-B authorization omits its historical firewall")
+    manifest = read_verified_json_object(
+        REPO_ROOT, manifest_path, str(firewall.get("data_manifest_sha256"))
+    )
     validate_data_manifest(config, data_dir, manifest, content_splits=set())
-    ledger = load_contrast_access_ledger(config, data_dir, manifest)
+    ledger_path = data_dir / "contrast_access_ledger.json"
+    ledger_snapshot, ledger_sha256 = _read_stable_json_object(ledger_path)
+    ledger = load_contrast_access_ledger(
+        config,
+        data_dir,
+        manifest,
+        payload=ledger_snapshot,
+        manifest_sha256=str(firewall["data_manifest_sha256"]),
+    )
+    if ledger != ledger_snapshot:
+        raise RuntimeError("contrast ledger changed while being validated")
     events = ledger["events"]
     expected_cells = {
         (capacity, "joint", seed)
@@ -1701,16 +2794,16 @@ def _contrast_ledger_guard(
         ):
             raise RuntimeError("contrast access event identity mismatch")
         output = _resolve_repo_path(str(event["evaluation_output"]))
-        expected_output = (
+        expected_output = _canonical_expected_path(
             ROOT / "runs"
             / f"{event['capacity']}_joint_seed{event['model_seed']}_contrast"
-        ).resolve()
+        )
         if output != expected_output:
             raise RuntimeError("contrast event uses a noncanonical evaluation output")
         summary_path = output / "summary.json"
         if not summary_path.is_file():
             raise RuntimeError("contrast access event has no complete evaluation summary")
-        summary = json.loads(summary_path.read_text(encoding="utf-8"))
+        summary, _ = _read_stable_json_object(summary_path)
         if (
             summary.get("capacity") != event["capacity"]
             or summary.get("objective") != "joint"
@@ -1742,8 +2835,576 @@ def _contrast_ledger_guard(
     return {
         "status": "CONTRAST_ACCESS_LEDGER_COMPLETE",
         "events": events,
-        "ledger_sha256": _sha256(data_dir / "contrast_access_ledger.json"),
+        "ledger_sha256": ledger_sha256,
     }
+
+
+_ANALYSIS_IDENTITY_FIELDS = {
+    "experiment_id",
+    "model_id",
+    "model_revision",
+    "backend",
+    "config_sha256",
+    "source_contract_sha256",
+    "requirements_training_lock_sha256",
+    "design_receipt_sha256",
+    "design_receipt_identity_sha256",
+    "phase",
+}
+_ANALYSIS_COMMON_FIELDS = {
+    "schema_version",
+    "status",
+    "verdict",
+    *_ANALYSIS_IDENTITY_FIELDS,
+    "analysis_phase",
+    "next_stage",
+    "authorization",
+    "input_manifest",
+    "warning",
+    "receipt_identity_sha256",
+}
+def _exact(value: Any, expected: Any, label: str) -> None:
+    if type(value) is not type(expected) or value != expected:
+        raise RuntimeError(f"{label} mismatch")
+
+
+def _require_exact_analysis_receipt(
+    receipt: Mapping[str, Any],
+    *,
+    config: Mapping[str, Any],
+    phase: str,
+    status: str,
+    verdict: str,
+    analysis_phase: str,
+    next_stage: str,
+    authorization: Mapping[str, Any] | None,
+    input_manifest: Sequence[Mapping[str, Any]],
+    result: Mapping[str, Any],
+    label: str,
+) -> None:
+    expected_fields = _ANALYSIS_COMMON_FIELDS | set(result)
+    if set(receipt) != expected_fields:
+        missing = sorted(expected_fields - set(receipt))
+        extra = sorted(set(receipt) - expected_fields)
+        raise RuntimeError(
+            f"{label} fields changed: missing={missing}, extra={extra}"
+        )
+    expected = {
+        "schema_version": 1,
+        "status": status,
+        "verdict": verdict,
+        **_identity(config, phase),
+        "analysis_phase": analysis_phase,
+        "next_stage": next_stage,
+        "authorization": dict(authorization) if authorization is not None else None,
+        "input_manifest": list(input_manifest),
+        **dict(result),
+        "warning": ANALYSIS_WARNING,
+    }
+    for field, value in expected.items():
+        _exact(receipt.get(field), value, f"{label} {field}")
+    claimed = receipt.get("receipt_identity_sha256")
+    payload = {
+        key: value
+        for key, value in receipt.items()
+        if key != "receipt_identity_sha256"
+    }
+    _exact(claimed, _canonical_sha256(payload), f"{label} self-identity")
+
+
+def _branch_evidence_inputs(
+    repo_root: str | Path, expected_identity: Mapping[str, Any], branch: str
+) -> tuple[dict[str, Any], Path]:
+    """Load the one frozen live config for read-only branch recomputation.
+
+    Tests may patch this small seam while exercising producer-shaped temporary
+    receipts.  Production validation is deliberately confined to this exact
+    checked-out experiment and cannot accept a caller-supplied config.
+    """
+
+    raw_repository = os.fspath(repo_root)
+    repository = Path(os.path.abspath(raw_repository))
+    if (
+        (Path(raw_repository).is_absolute() and raw_repository != repository.as_posix())
+        or raw_repository.startswith("//")
+        or repository != REPO_ROOT
+    ):
+        raise RuntimeError("branch evidence recomputation requires the canonical repository")
+    experiment = repository / "experiments" / str(expected_identity["experiment_id"])
+    if experiment != ROOT or _canonical_expected_path(experiment) != ROOT:
+        raise RuntimeError("branch evidence recomputation requires the canonical experiment")
+    config = load_config(experiment / "configs" / "default.yaml")
+    require_confirmatory_config(config)
+    expected_phase = _BRANCH_PHASE[branch]
+    live_identity = _identity(config, expected_phase)
+    supplied = dict(expected_identity)
+    if "phase" not in supplied:
+        supplied["phase"] = expected_phase
+    if supplied != live_identity:
+        raise RuntimeError("branch evidence identity differs from the frozen live config")
+    return config, experiment / "runs"
+
+
+def _validate_lora_control_evidence(
+    config: Mapping[str, Any],
+    runs_dir: Path,
+    receipt: Mapping[str, Any],
+    *,
+    root_authorization: Mapping[str, Any],
+) -> None:
+    lora_control, lora_manifests = _load_cell(
+        config, runs_dir, "lora", "state_only", "trigger"
+    )
+    _, fullrank_barrier_manifests = _load_cell(
+        config, runs_dir, "fullrank", "joint", "trigger"
+    )
+    formation = _formation_summary(
+        lora_control,
+        float(config["gates"]["min_final_joint_accuracy_each_seed_depth"]),
+    )
+    if formation.get("status") == "EVIDENCE_INCOMPLETE":
+        raise RuntimeError("LoRA-control evidence is incomplete")
+    adaptation = _adaptation_effects(config, lora_control)
+    annotation = (
+        "LORA_CAN_FORM_STATE_STATE_ONLY" if formation["passes"] else None
+    )
+    verdict = annotation or str(formation["status"])
+    _require_exact_analysis_receipt(
+        receipt,
+        config=config,
+        phase="lora_control_analysis",
+        status="LORA_STATE_ONLY_CONTROL_COMPLETE",
+        verdict=verdict,
+        analysis_phase="lora_control",
+        next_stage="continue_mandatory_stage_b_seal",
+        authorization=root_authorization,
+        input_manifest=lora_manifests + fullrank_barrier_manifests,
+        result={
+            "formation": formation,
+            "adaptation_effect": adaptation,
+            "lora_state_only_annotation": annotation,
+        },
+        label="LoRA-control analysis",
+    )
+
+
+def _canonical_empty_ledger_sha256(ledger: Mapping[str, Any]) -> str:
+    empty = copy.deepcopy(dict(ledger))
+    empty["events"] = []
+    empty["receipt_identity_sha256"] = _canonical_sha256(
+        {
+            key: value
+            for key, value in empty.items()
+            if key != "receipt_identity_sha256"
+        }
+    )
+    encoded = (json.dumps(empty, indent=2, sort_keys=True) + "\n").encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def _validate_stage_b_firewall_evidence(
+    config: Mapping[str, Any],
+    runs_dir: Path,
+    firewall: Mapping[str, Any],
+    *,
+    root_authorization: Mapping[str, Any],
+    stage_b_lineage: Mapping[str, Any],
+    branch: str,
+) -> None:
+    data_dir = _canonical_expected_path(
+        ROOT / str(config["paths"]["data_dir"])
+    )
+    manifest_path = data_dir / "manifest.json"
+    if not manifest_path.is_file():
+        raise RuntimeError("Stage-B data manifest is missing")
+    expected_manifest_sha256 = firewall.get("data_manifest_sha256")
+    if type(expected_manifest_sha256) is not str:
+        raise RuntimeError("Stage-B firewall data-manifest digest is malformed")
+    manifest = read_verified_json_object(
+        REPO_ROOT, manifest_path, expected_manifest_sha256
+    )
+    validate_data_manifest(config, data_dir, manifest, content_splits=set())
+    ledger_path = data_dir / "contrast_access_ledger.json"
+    ledger_snapshot, current_ledger_sha256 = _read_stable_json_object(ledger_path)
+    ledger = load_contrast_access_ledger(
+        config,
+        data_dir,
+        manifest,
+        payload=ledger_snapshot,
+        manifest_sha256=expected_manifest_sha256,
+    )
+    if ledger != ledger_snapshot:
+        raise RuntimeError("Stage-B contrast ledger changed while being validated")
+    events = ledger.get("events")
+    if not isinstance(events, list):
+        raise RuntimeError("Stage-B contrast ledger events are malformed")
+    empty_ledger_sha256 = _canonical_empty_ledger_sha256(ledger)
+    expected_firewall = {
+        "status": "CONTRAST_FIREWALL_UNOPENED",
+        "data_manifest_sha256": expected_manifest_sha256,
+        "ledger_path": ledger_path.relative_to(REPO_ROOT).as_posix(),
+        "ledger_sha256": empty_ledger_sha256,
+        "events": 0,
+        "authorization": dict(root_authorization),
+    }
+    _exact(dict(firewall), expected_firewall, "Stage-B historical contrast firewall")
+
+    contrast_outputs = [
+        runs_dir / f"{capacity}_joint_seed{seed}_contrast"
+        for capacity in ("lora", "fullrank")
+        for seed in SEEDS
+    ]
+    if branch == STAGE_B_FULLRANK_MISS_BRANCH:
+        if events:
+            raise RuntimeError("direct Stage-B miss has an opened contrast ledger")
+        if current_ledger_sha256 != empty_ledger_sha256:
+            raise RuntimeError("direct Stage-B miss changed its empty contrast ledger")
+        if any(path.exists() for path in contrast_outputs):
+            raise RuntimeError("direct Stage-B miss has a contrast output")
+        return
+
+    if branch != STAGE_B_CONTRAST_BRANCH:
+        raise RuntimeError("Stage-B firewall received an unregistered branch")
+    if not events:
+        if current_ledger_sha256 != empty_ledger_sha256:
+            raise RuntimeError("Stage-B empty contrast ledger changed")
+        if any(path.exists() for path in contrast_outputs):
+            raise RuntimeError("contrast output predates its first access event")
+    for event in events:
+        if not isinstance(event, Mapping) or event.get("authorization") != dict(
+            stage_b_lineage
+        ):
+            raise RuntimeError("contrast ledger event changed its Stage-B authorization")
+
+
+def _validate_root_lora_miss_evidence(
+    config: Mapping[str, Any],
+    runs_dir: Path,
+    receipt: Mapping[str, Any],
+) -> None:
+    bundles, manifests = _load_cell(
+        config, runs_dir, "lora", "joint", "trigger"
+    )
+    threshold = float(config["gates"]["min_final_joint_accuracy_each_seed_depth"])
+    formation = _formation_summary(bundles, threshold)
+    if formation.get("status") == "EVIDENCE_INCOMPLETE" or formation.get("passes") is not False:
+        raise RuntimeError("root LoRA-miss evidence does not contain a complete miss")
+    _require_exact_analysis_receipt(
+        receipt,
+        config=config,
+        phase="lora_joint_analysis",
+        status="LORA_JOINT_MISS_CONTROLS_REQUIRED",
+        verdict="LORA_JOINT_MISS_CONTROLS_REQUIRED",
+        analysis_phase="lora_joint",
+        next_stage="run_lora_state_only_and_fullrank_joint",
+        authorization=None,
+        input_manifest=manifests,
+        result={
+            "formation": formation,
+            "adaptation_effect": _adaptation_effects(config, bundles),
+        },
+        label="root LoRA-miss analysis",
+    )
+
+
+def _validate_stage_b_evidence(
+    config: Mapping[str, Any],
+    runs_dir: Path,
+    receipt: Mapping[str, Any],
+    *,
+    branch: str,
+    stage_b_lineage: Mapping[str, Any],
+) -> None:
+    root_authorization = receipt.get("authorization")
+    if not isinstance(root_authorization, Mapping):
+        raise RuntimeError("Stage-B evidence omits its root LoRA-miss lineage")
+    # The named gate recursively ran the root evidence validator immediately
+    # before dispatching here; reopen its exact lineage bytes for equality use.
+    root_receipt = _validate_lineage_entry(root_authorization)
+    lora_control_lineage = receipt.get("lora_control_analysis")
+    if not isinstance(lora_control_lineage, Mapping):
+        raise RuntimeError("Stage-B evidence omits its LoRA-control lineage")
+    control_receipt = reopen_lineage(
+        REPO_ROOT,
+        lora_control_lineage,
+        expected_identity={
+            key: value
+            for key, value in _identity(config, "lora_control_analysis").items()
+            if key != "phase"
+        },
+        expected_status="LORA_STATE_ONLY_CONTROL_COMPLETE",
+        expected_phase="lora_control_analysis",
+        canonical_relative_path=(ROOT / "analysis" / "lora_control.json")
+        .relative_to(REPO_ROOT)
+        .as_posix(),
+    )
+    _validate_lora_control_evidence(
+        config,
+        runs_dir,
+        control_receipt,
+        root_authorization=root_authorization,
+    )
+
+    lora_joint, lora_joint_manifests = _load_cell(
+        config, runs_dir, "lora", "joint", "trigger"
+    )
+    lora_control, lora_control_manifests = _load_cell(
+        config, runs_dir, "lora", "state_only", "trigger"
+    )
+    fullrank_joint, fullrank_joint_manifests = _load_cell(
+        config, runs_dir, "fullrank", "joint", "trigger"
+    )
+    threshold = float(config["gates"]["min_final_joint_accuracy_each_seed_depth"])
+    lora_joint_formation = _formation_summary(lora_joint, threshold)
+    lora_control_formation = _formation_summary(lora_control, threshold)
+    fullrank_formation = _formation_summary(fullrank_joint, threshold)
+    if any(
+        item.get("status") == "EVIDENCE_INCOMPLETE"
+        for item in (lora_joint_formation, lora_control_formation, fullrank_formation)
+    ):
+        raise RuntimeError("Stage-B evidence is incomplete")
+    if lora_joint_formation.get("passes") is not False:
+        raise RuntimeError("Stage-B evidence no longer contains a LoRA joint miss")
+    _exact(
+        root_receipt.get("formation"),
+        lora_joint_formation,
+        "Stage-B/root LoRA formation",
+    )
+    _exact(
+        control_receipt.get("formation"),
+        lora_control_formation,
+        "Stage-B/control LoRA formation",
+    )
+    matching = _stage_b_matching_receipt(
+        lora_joint_manifests,
+        lora_control_manifests,
+        fullrank_joint_manifests,
+        root_authorization,
+    )
+    firewall = receipt.get("contrast_firewall")
+    if not isinstance(firewall, Mapping):
+        raise RuntimeError("Stage-B evidence omits its contrast firewall")
+    _validate_stage_b_firewall_evidence(
+        config,
+        runs_dir,
+        firewall,
+        root_authorization=root_authorization,
+        stage_b_lineage=stage_b_lineage,
+        branch=branch,
+    )
+    fullrank_passes = fullrank_formation.get("passes") is True
+    expected_branch = (
+        STAGE_B_CONTRAST_BRANCH if fullrank_passes else STAGE_B_FULLRANK_MISS_BRANCH
+    )
+    if branch != expected_branch:
+        raise RuntimeError("Stage-B branch contradicts its full-rank trigger formation")
+    status = (
+        "STAGE_B_CONTRAST_AUTHORIZED"
+        if fullrank_passes
+        else "FULLRANK_STATE_ONLY_REQUIRED"
+    )
+    next_stage = (
+        "evaluate_exact_six_joint_contrast_cells"
+        if fullrank_passes
+        else "run_fullrank_state_only_control"
+    )
+    annotation = (
+        "LORA_CAN_FORM_STATE_STATE_ONLY"
+        if lora_control_formation.get("passes") is True
+        else None
+    )
+    _require_exact_analysis_receipt(
+        receipt,
+        config=config,
+        phase="stage_b_seal_analysis",
+        status=status,
+        verdict=status,
+        analysis_phase="stage_b_seal",
+        next_stage=next_stage,
+        authorization=root_authorization,
+        input_manifest=(
+            lora_joint_manifests
+            + lora_control_manifests
+            + fullrank_joint_manifests
+        ),
+        result={
+            "lora_joint_formation": lora_joint_formation,
+            "fullrank_trigger_formation": fullrank_formation,
+            "lora_state_only_formation": lora_control_formation,
+            "lora_state_only_annotation": annotation,
+            "lora_control_analysis": dict(lora_control_lineage),
+            "matching": matching,
+            "contrast_firewall": dict(firewall),
+        },
+        label="Stage-B seal analysis",
+    )
+
+
+def _validate_postcontrast_miss_evidence(
+    config: Mapping[str, Any],
+    runs_dir: Path,
+    receipt: Mapping[str, Any],
+) -> None:
+    stage_b_lineage = receipt.get("authorization")
+    if not isinstance(stage_b_lineage, Mapping):
+        raise RuntimeError("postcontrast evidence omits its Stage-B lineage")
+    # The named gate recursively validated the complete Stage-B seal before
+    # dispatching this postcontrast evidence check.
+    stage_b_receipt = _validate_lineage_entry(stage_b_lineage)
+    cached_lora_state_only = stage_b_receipt.get("lora_state_only_formation")
+    cached_lora_trigger = stage_b_receipt.get("lora_joint_formation")
+    annotation = stage_b_receipt.get("lora_state_only_annotation")
+    if not isinstance(cached_lora_state_only, Mapping) or not isinstance(
+        cached_lora_trigger, Mapping
+    ):
+        raise RuntimeError("postcontrast Stage-B formation cache is incomplete")
+
+    ledger_guard = _contrast_ledger_guard(config, stage_b_lineage)
+    fullrank_trigger, fullrank_trigger_manifests = _load_cell(
+        config, runs_dir, "fullrank", "joint", "trigger"
+    )
+    stage_b_trigger_reopen = _require_stage_b_trigger_match(
+        fullrank_trigger_manifests,
+        arm="fullrank_joint",
+        authorization=stage_b_lineage,
+    )
+    lora_trigger, lora_trigger_manifests = _load_cell(
+        config, runs_dir, "lora", "joint", "trigger"
+    )
+    lora_trigger_reopen = _require_stage_b_trigger_match(
+        lora_trigger_manifests,
+        arm="lora_joint",
+        authorization=stage_b_lineage,
+    )
+    lora_state_only, lora_state_only_manifests = _load_cell(
+        config, runs_dir, "lora", "state_only", "trigger"
+    )
+    lora_state_only_reopen = _require_stage_b_trigger_match(
+        lora_state_only_manifests,
+        arm="lora_state_only",
+        authorization=stage_b_lineage,
+    )
+    fullrank_contrast, fullrank_contrast_manifests = _load_cell(
+        config, runs_dir, "fullrank", "joint", "contrast"
+    )
+    lora_contrast, lora_contrast_manifests = _load_cell(
+        config, runs_dir, "lora", "joint", "contrast"
+    )
+    threshold = float(config["gates"]["min_final_joint_accuracy_each_seed_depth"])
+    trigger_formation = _formation_summary(fullrank_trigger, threshold)
+    lora_trigger_formation = _formation_summary(lora_trigger, threshold)
+    lora_state_only_formation = _formation_summary(lora_state_only, threshold)
+    sealed_formation = _formation_summary(fullrank_contrast, threshold)
+    lora_sealed_formation = _formation_summary(lora_contrast, threshold)
+    if any(
+        item.get("status") == "EVIDENCE_INCOMPLETE"
+        for item in (trigger_formation, sealed_formation, lora_sealed_formation)
+    ):
+        raise RuntimeError("postcontrast evidence is incomplete")
+    _exact(
+        lora_trigger_formation,
+        dict(cached_lora_trigger),
+        "postcontrast cached LoRA trigger formation",
+    )
+    _exact(
+        lora_state_only_formation,
+        dict(cached_lora_state_only),
+        "postcontrast cached LoRA state-only formation",
+    )
+    expected_annotation = (
+        "LORA_CAN_FORM_STATE_STATE_ONLY"
+        if lora_state_only_formation.get("passes") is True
+        else None
+    )
+    _exact(annotation, expected_annotation, "postcontrast LoRA annotation")
+    if (
+        lora_sealed_formation.get("passes") is not False
+        or trigger_formation.get("passes") is not True
+        or sealed_formation.get("passes") is not False
+    ):
+        raise RuntimeError("postcontrast evidence does not authorize full-rank state-only")
+    lora_failure_replication = _failure_category_replication(
+        lora_trigger_formation, lora_sealed_formation
+    )
+    sealed_adaptation = _adaptation_effects(config, fullrank_contrast)
+    lora_sealed_adaptation = _adaptation_effects(config, lora_contrast)
+    contrast = _fullrank_minus_lora_contrast(
+        config, fullrank_contrast, lora_contrast
+    )
+    result = {
+        "trigger_formation": trigger_formation,
+        "sealed_contrast_formation": sealed_formation,
+        "lora_sealed_contrast_formation": lora_sealed_formation,
+        "lora_trigger_failure_replication": lora_failure_replication,
+        "sealed_contrast_adaptation": sealed_adaptation,
+        "lora_sealed_contrast_adaptation": lora_sealed_adaptation,
+        "fullrank_minus_lora_sealed_contrast": contrast,
+        "contrast_access_ledger": ledger_guard,
+        "stage_b_trigger_reopen": stage_b_trigger_reopen,
+        "lora_trigger_reopen": lora_trigger_reopen,
+        "lora_state_only_reopen": lora_state_only_reopen,
+        "lora_state_only_formation": lora_state_only_formation,
+        "lora_state_only_annotation": annotation,
+        "objective_interaction_interpretation": (
+            "consistent_with_objective_interaction" if annotation else None
+        ),
+    }
+    _require_exact_analysis_receipt(
+        receipt,
+        config=config,
+        phase="fullrank_joint_analysis",
+        status="FULLRANK_STATE_ONLY_REQUIRED",
+        verdict="FULLRANK_STATE_ONLY_REQUIRED",
+        analysis_phase="fullrank_joint",
+        next_stage="run_fullrank_state_only_control",
+        authorization=stage_b_lineage,
+        input_manifest=(
+            fullrank_trigger_manifests
+            + lora_trigger_manifests
+            + lora_state_only_manifests
+            + fullrank_contrast_manifests
+            + lora_contrast_manifests
+        ),
+        result=result,
+        label="postcontrast full-rank miss analysis",
+    )
+
+
+def validate_branch_evidence_receipt(
+    repo_root: str | Path,
+    receipt: Mapping[str, Any],
+    *,
+    branch: str,
+    expected_identity: Mapping[str, Any],
+    lineage: Mapping[str, Any],
+) -> None:
+    """Recompute one branch's exact canonical evidence without writing output."""
+
+    if branch not in _BRANCH_PHASE:
+        raise RuntimeError(f"unregistered branch evidence contract: {branch!r}")
+    if not isinstance(receipt, Mapping) or not isinstance(lineage, Mapping):
+        raise RuntimeError("branch evidence receipt/lineage is malformed")
+    if type(receipt.get("receipt_identity_sha256")) is not str or type(
+        lineage.get("sha256")
+    ) is not str:
+        raise RuntimeError("branch evidence identity is malformed")
+    config, runs_dir = _branch_evidence_inputs(
+        repo_root, expected_identity, branch
+    )
+    if branch == LORA_MISS_BRANCH:
+        _validate_root_lora_miss_evidence(config, runs_dir, receipt)
+    elif branch in (STAGE_B_CONTRAST_BRANCH, STAGE_B_FULLRANK_MISS_BRANCH):
+        _validate_stage_b_evidence(
+            config,
+            runs_dir,
+            receipt,
+            branch=branch,
+            stage_b_lineage=lineage,
+        )
+    elif branch == POSTCONTRAST_FULLRANK_MISS_BRANCH:
+        _validate_postcontrast_miss_evidence(config, runs_dir, receipt)
+    else:  # pragma: no cover - exhaustive guard
+        raise RuntimeError(f"unhandled branch evidence contract: {branch!r}")
 
 
 def analyze_phase(
@@ -1755,8 +3416,6 @@ def analyze_phase(
 ) -> dict[str, Any]:
     require_confirmatory_config(config)
     validate_design_receipt(config)
-    if output.exists():
-        raise RuntimeError(f"refusing to overwrite analysis: {output}")
     threshold = float(config["gates"]["min_final_joint_accuracy_each_seed_depth"])
     inputs: list[dict[str, Any]] = []
     authorization = None
@@ -1786,11 +3445,17 @@ def analyze_phase(
     elif phase == "lora_control":
         auth_path = authorization_receipt or ROOT / "analysis" / "lora_joint_trigger.json"
         authorization = _load_analysis_authorization(
-            config, auth_path, {"LORA_JOINT_MISS_CONTROLS_REQUIRED"},
-            {"lora_joint_analysis"},
+            config, auth_path, LORA_MISS_BRANCH
         )
         bundles, manifests = _load_cell(config, runs_dir, "lora", "state_only", "trigger")
-        inputs.extend(manifests)
+        # Stage B is a matched six-cell block.  Reopen all three full-rank
+        # joint trigger evaluations before exposing the LoRA-control result,
+        # preventing within-stage peeking while its matched capacity arm is
+        # incomplete.
+        _, fullrank_barrier_manifests = _load_cell(
+            config, runs_dir, "fullrank", "joint", "trigger"
+        )
+        inputs.extend(manifests + fullrank_barrier_manifests)
         formation = _formation_summary(bundles, threshold)
         adaptation = _adaptation_effects(config, bundles)
         if formation["status"] == "EVIDENCE_INCOMPLETE":
@@ -1816,13 +3481,11 @@ def analyze_phase(
     elif phase == "stage_b_seal":
         auth_path = authorization_receipt or ROOT / "analysis" / "lora_joint_trigger.json"
         authorization = _load_analysis_authorization(
-            config, auth_path, {"LORA_JOINT_MISS_CONTROLS_REQUIRED"},
-            {"lora_joint_analysis"},
+            config, auth_path, LORA_MISS_BRANCH
         )
         lora_miss_receipt = _validate_lineage_entry(authorization)
-        lora_control_authorization = _load_analysis_authorization(
-            config, ROOT / "analysis" / "lora_control.json",
-            {"LORA_STATE_ONLY_CONTROL_COMPLETE"}, {"lora_control_analysis"},
+        lora_control_authorization = _load_lora_control_analysis(
+            config, ROOT / "analysis" / "lora_control.json"
         )
         lora_control_receipt = _validate_lineage_entry(lora_control_authorization)
         if lora_control_receipt.get("authorization") != dict(authorization):
@@ -1899,8 +3562,7 @@ def analyze_phase(
     elif phase == "fullrank_joint":
         auth_path = authorization_receipt or ROOT / "analysis" / "stage_b_seal.json"
         authorization = _load_analysis_authorization(
-            config, auth_path, {"STAGE_B_CONTRAST_AUTHORIZED"},
-            {"stage_b_seal_analysis"},
+            config, auth_path, STAGE_B_CONTRAST_BRANCH
         )
         stage_b_receipt = _validate_lineage_entry(authorization)
         cached_lora_state_only_formation = stage_b_receipt.get(
@@ -2032,9 +3694,20 @@ def analyze_phase(
 
     elif phase == "fullrank_control":
         auth_path = authorization_receipt or ROOT / "analysis" / "fullrank_joint.json"
+        stage_b_path, stage_b_relative = _registered_analysis_path(
+            "stage_b_seal.json"
+        )
+        post_path, post_relative = _registered_analysis_path("fullrank_joint.json")
+        if _same_registered_path(str(auth_path), stage_b_path, stage_b_relative):
+            stage_c_branch = STAGE_B_FULLRANK_MISS_BRANCH
+        elif _same_registered_path(str(auth_path), post_path, post_relative):
+            stage_c_branch = POSTCONTRAST_FULLRANK_MISS_BRANCH
+        else:
+            raise RuntimeError(
+                "full-rank state-only analysis requires one canonical Stage-C branch"
+            )
         authorization = _load_analysis_authorization(
-            config, auth_path, {"FULLRANK_STATE_ONLY_REQUIRED"},
-            {"stage_b_seal_analysis", "fullrank_joint_analysis"},
+            config, auth_path, stage_c_branch
         )
         fullrank, manifests = _load_cell(
             config, runs_dir, "fullrank", "state_only", "trigger"
@@ -2102,11 +3775,10 @@ def analyze_phase(
         "authorization": authorization,
         "input_manifest": inputs,
         **result,
-        "warning": (
-            "State readability only; no answer-use, capability, deployment, "
-            "serial-advantage, rank-identification, or sample-more claim is licensed."
-        ),
+        "warning": ANALYSIS_WARNING,
     })
-    output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    encoded = (
+        json.dumps(summary, indent=2, sort_keys=True, allow_nan=False) + "\n"
+    ).encode("utf-8")
+    publish_new_bytes(REPO_ROOT, output, encoded)
     return summary

@@ -2,20 +2,26 @@
 
 from __future__ import annotations
 
+import contextlib
+import contextvars
 import copy
 import hashlib
 import json
-from pathlib import Path
+import os
+from pathlib import Path, PurePosixPath
 from typing import Any, Mapping
 
 import yaml
+from yaml.resolver import BaseResolver
+
+from .safe_io import open_stable_regular, read_stable_bytes
 
 
 MODEL_ID = "Qwen/Qwen3.5-4B"
 MODEL_REVISION = "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
 BACKEND = "transformers"
 EXPERIMENT_ID = "qwen35_4b_state_formation_capacity_adjudication"
-SOURCE_CONTRACT_VERSION = 6
+SOURCE_CONTRACT_VERSION = 7
 CONFIRMATORY_CONFIG_SHA256 = "eeb4e828526f750dce1258bcc91d03114c80688d300112e03d18c9d911489393"
 SOURCE_CONTRACT_FILES = (
     "scripts/archive_failed_attempt.py",
@@ -25,15 +31,20 @@ SOURCE_CONTRACT_FILES = (
     "src/__init__.py",
     "src/adaptation.py",
     "src/analysis.py",
+    "src/attempt_receipts.py",
     "src/config.py",
     "src/data_pipeline.py",
     "src/design_boundary.py",
+    "src/gate_receipts.py",
     "src/gpu_runner.py",
     "src/initialization.py",
     "src/mechanics.py",
+    "src/oracle_control.py",
     "src/optimizer_receipts.py",
+    "src/safe_io.py",
     "src/state_loop_model.py",
     "src/substrate.py",
+    "src/training_receipts.py",
     "tests/__init__.py",
     "tests/test_archive_failed_attempt.py",
     "tests/test_archive_invalidated_setup.py",
@@ -42,16 +53,61 @@ SOURCE_CONTRACT_FILES = (
     "tests/test_data_parity.py",
     "tests/test_design_boundary.py",
     "tests/test_fullrank_delta.py",
+    "tests/test_gate_receipts.py",
     "tests/test_initialization.py",
     "tests/test_mechanics.py",
     "tests/test_model_smoke_failure.py",
     "tests/test_objectives.py",
+    "tests/test_oracle_control.py",
     "tests/test_optimizer_receipts.py",
     "tests/test_positive_control.py",
     "tests/test_receipt_contracts.py",
+    "tests/test_safe_io.py",
     "tests/test_state_loop_aggregation.py",
     "tests/test_static_contracts.py",
     "tests/test_substrate.py",
+    "tests/test_training_receipts.py",
+)
+IMPLEMENTATION_REVIEW_PATH = "reports/implementation_review.md"
+REVIEWED_IMPLEMENTATION_FILES = tuple(
+    path for path in SOURCE_CONTRACT_FILES if path != IMPLEMENTATION_REVIEW_PATH
+)
+EXPERIMENT_ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = EXPERIMENT_ROOT.parents[1]
+REQUIREMENTS_LOCK = REPO_ROOT / "requirements-training.lock.txt"
+CONFIG_ROOT = EXPERIMENT_ROOT / "configs"
+_PINNED_SOURCE_CONTRACT_SHA256: contextvars.ContextVar[str | None] = (
+    contextvars.ContextVar("qwen35_pinned_source_contract_sha256", default=None)
+)
+_PINNED_REQUIREMENTS_LOCK_BYTES: contextvars.ContextVar[bytes | None] = (
+    contextvars.ContextVar("qwen35_pinned_requirements_lock_bytes", default=None)
+)
+
+
+class _UniqueKeySafeLoader(yaml.SafeLoader):
+    """Safe YAML loader that rejects duplicate mapping keys."""
+
+
+def _construct_unique_mapping(
+    loader: _UniqueKeySafeLoader, node: yaml.nodes.MappingNode, deep: bool = False
+) -> dict[Any, Any]:
+    loader.flatten_mapping(node)
+    result: dict[Any, Any] = {}
+    for key_node, value_node in node.value:
+        key = loader.construct_object(key_node, deep=deep)
+        try:
+            duplicate = key in result
+        except TypeError as exc:
+            raise ValueError("configuration mapping key is not hashable") from exc
+        if duplicate:
+            raise ValueError(f"duplicate configuration key: {key!r}")
+        result[key] = loader.construct_object(value_node, deep=deep)
+    return result
+
+
+_UniqueKeySafeLoader.add_constructor(
+    BaseResolver.DEFAULT_MAPPING_TAG,
+    _construct_unique_mapping,
 )
 
 # Durable failed-G0 receipts are resumable setup state, not free-form
@@ -129,14 +185,64 @@ def require_confirmatory_config(config: Mapping[str, Any]) -> None:
         )
 
 
-def load_config(path: str | Path) -> dict[str, Any]:
-    path = Path(path).resolve()
-    with path.open("r", encoding="utf-8") as handle:
-        raw = yaml.safe_load(handle) or {}
+def _canonical_config_path(path: str | Path) -> Path:
+    raw_path = os.fspath(path)
+    candidate = Path(raw_path)
+    if not raw_path or "\x00" in raw_path or "\\" in raw_path:
+        raise ValueError("configuration path is not canonical")
+    if candidate.is_absolute():
+        lexical = Path(os.path.abspath(raw_path))
+        if raw_path != lexical.as_posix():
+            raise ValueError("configuration path is not canonical")
+    else:
+        if (
+            raw_path != candidate.as_posix()
+            or any(part in {"", ".", ".."} for part in candidate.parts)
+        ):
+            raise ValueError("configuration path is not canonical")
+        lexical = Path(os.path.abspath(raw_path))
+    try:
+        lexical.relative_to(CONFIG_ROOT)
+    except ValueError as exc:
+        raise ValueError(f"configuration escapes the registered config tree: {lexical}") from exc
+    return lexical
+
+
+def load_config(
+    path: str | Path,
+    *,
+    _visited: frozenset[Path] = frozenset(),
+) -> dict[str, Any]:
+    path = _canonical_config_path(path)
+    if path in _visited:
+        raise ValueError(f"configuration inheritance cycle detected at: {path}")
+    encoded = read_stable_bytes(EXPERIMENT_ROOT, path)
+    try:
+        raw = yaml.load(encoded.decode("utf-8"), Loader=_UniqueKeySafeLoader) or {}
+    except UnicodeDecodeError as exc:
+        raise ValueError(f"configuration is not UTF-8: {path}") from exc
+    except yaml.YAMLError as exc:
+        raise ValueError(f"configuration YAML is invalid: {path}") from exc
     if not isinstance(raw, dict):
         raise ValueError(f"configuration must be a mapping: {path}")
     parent = raw.get("inherits")
-    config = _merge(load_config(path.parent / str(parent)), raw) if parent else raw
+    if parent is not None:
+        if type(parent) is not str or not parent or "\\" in parent or "\x00" in parent:
+            raise ValueError("configuration inheritance path is not canonical")
+        pure = PurePosixPath(parent)
+        if (
+            pure.is_absolute()
+            or pure.as_posix() != parent
+            or any(part in {"", ".", ".."} for part in pure.parts)
+        ):
+            raise ValueError("configuration inheritance path is not canonical")
+        inherited = load_config(
+            path.parent / Path(*pure.parts),
+            _visited=_visited | {path},
+        )
+        config = _merge(inherited, raw)
+    else:
+        config = raw
     validate_config(config)
     return config
 
@@ -304,16 +410,185 @@ def config_sha256(config: Mapping[str, Any]) -> str:
     return _config_digest(config)
 
 
+def _stable_source_manifest(
+    experiment_root: Path,
+    relative_paths: tuple[str, ...],
+    *,
+    requirements_lock: Path | None = None,
+) -> tuple[list[dict[str, str]], str | None]:
+    """Hash one simultaneous no-follow snapshot of a source-file set."""
+
+    root = Path(os.fspath(experiment_root))
+    if not root.is_absolute():
+        raise ValueError("source-contract root must be an absolute canonical path")
+    files: list[dict[str, str]] = []
+    lock_sha256: str | None = None
+    with contextlib.ExitStack() as stack:
+        handles = {
+            relative_path: stack.enter_context(
+                open_stable_regular(root, root / relative_path)
+            )
+            for relative_path in relative_paths
+        }
+        lock_handle = None
+        if requirements_lock is not None:
+            lock = Path(os.fspath(requirements_lock))
+            if not lock.is_absolute():
+                raise ValueError("requirements lock path must be absolute")
+            lock_handle = stack.enter_context(
+                open_stable_regular(lock.parent, lock)
+            )
+        for relative_path in relative_paths:
+            raw = handles[relative_path].read()
+            files.append(
+                {
+                    "path": relative_path,
+                    "sha256": hashlib.sha256(raw).hexdigest(),
+                }
+            )
+        if lock_handle is not None:
+            lock_sha256 = hashlib.sha256(lock_handle.read()).hexdigest()
+    return files, lock_sha256
+
+
 def source_contract_sha256(root: str | Path | None = None) -> str:
-    experiment_root = Path(root).resolve() if root else Path(__file__).resolve().parents[1]
-    files = []
-    for relative_path in SOURCE_CONTRACT_FILES:
-        path = experiment_root / relative_path
-        if not path.is_file():
-            raise FileNotFoundError(f"source-contract file is missing: {path}")
-        files.append({"path": relative_path, "sha256": hashlib.sha256(path.read_bytes()).hexdigest()})
+    experiment_root = (
+        Path(os.fspath(root)) if root is not None else EXPERIMENT_ROOT
+    )
+    pinned = _PINNED_SOURCE_CONTRACT_SHA256.get()
+    if pinned is not None and experiment_root == EXPERIMENT_ROOT:
+        return pinned
+    files, _ = _stable_source_manifest(experiment_root, SOURCE_CONTRACT_FILES)
     payload = {"version": SOURCE_CONTRACT_VERSION, "files": files}
     return hashlib.sha256(canonical_json(payload).encode("utf-8")).hexdigest()
+
+
+def requirements_training_lock_bytes() -> bytes:
+    """Return the reviewed lock generation pinned for the active command."""
+
+    pinned = _PINNED_REQUIREMENTS_LOCK_BYTES.get()
+    if pinned is not None:
+        return pinned
+    return read_stable_bytes(REPO_ROOT, REQUIREMENTS_LOCK)
+
+
+@contextlib.contextmanager
+def source_contract_execution_snapshot() -> Any:
+    """Pin one full source-contract generation through a command boundary.
+
+    Every registered source/test/review descriptor remains open until the
+    command exits.  Calls to :func:`source_contract_sha256` in the same context
+    therefore use the one authorized digest rather than independently reopening
+    pathnames at different phases of a long GPU run.
+    """
+
+    existing = _PINNED_SOURCE_CONTRACT_SHA256.get()
+    if existing is not None:
+        yield existing
+        return
+    with contextlib.ExitStack() as stack:
+        handles = {
+            relative_path: stack.enter_context(
+                open_stable_regular(EXPERIMENT_ROOT, EXPERIMENT_ROOT / relative_path)
+            )
+            for relative_path in SOURCE_CONTRACT_FILES
+        }
+        files = []
+        for relative_path in SOURCE_CONTRACT_FILES:
+            files.append(
+                {
+                    "path": relative_path,
+                    "sha256": hashlib.sha256(handles[relative_path].read()).hexdigest(),
+                }
+            )
+        payload = {"version": SOURCE_CONTRACT_VERSION, "files": files}
+        digest = hashlib.sha256(canonical_json(payload).encode("utf-8")).hexdigest()
+        token = _PINNED_SOURCE_CONTRACT_SHA256.set(digest)
+        try:
+            yield digest
+        finally:
+            _PINNED_SOURCE_CONTRACT_SHA256.reset(token)
+
+
+def reviewed_implementation_sha256(
+    root: str | Path | None = None,
+    *,
+    requirements_lock: str | Path | None = None,
+) -> str:
+    """Digest the exact implementation authorized by the mutable review.
+
+    The review file is deliberately excluded from this digest so it can record
+    the value without a self-reference.  The full source-contract digest still
+    includes that review file, while this gate additionally binds the pinned
+    training lock used by the reviewed runtime.
+    """
+
+    experiment_root = (
+        Path(os.fspath(root)) if root is not None else EXPERIMENT_ROOT
+    )
+    lock = (
+        Path(os.fspath(requirements_lock))
+        if requirements_lock is not None
+        else REQUIREMENTS_LOCK
+    )
+    files, lock_sha256 = _stable_source_manifest(
+        experiment_root,
+        REVIEWED_IMPLEMENTATION_FILES,
+        requirements_lock=lock,
+    )
+    payload = {
+        "source_contract_version": SOURCE_CONTRACT_VERSION,
+        "files": files,
+        "requirements_training_lock_sha256": lock_sha256,
+    }
+    return hashlib.sha256(canonical_json(payload).encode("utf-8")).hexdigest()
+
+
+@contextlib.contextmanager
+def reviewed_implementation_snapshot() -> Any:
+    """Yield the current reviewed digest while every source fd stays open."""
+
+    root = EXPERIMENT_ROOT
+    with contextlib.ExitStack() as stack:
+        handles = {
+            relative_path: stack.enter_context(
+                open_stable_regular(root, root / relative_path)
+            )
+            for relative_path in REVIEWED_IMPLEMENTATION_FILES
+        }
+        lock_handle = stack.enter_context(
+            open_stable_regular(REPO_ROOT, REQUIREMENTS_LOCK)
+        )
+        files = []
+        for relative_path in REVIEWED_IMPLEMENTATION_FILES:
+            raw = handles[relative_path].read()
+            files.append(
+                {
+                    "path": relative_path,
+                    "sha256": hashlib.sha256(raw).hexdigest(),
+                }
+            )
+        lock_raw = lock_handle.read()
+        existing_lock = _PINNED_REQUIREMENTS_LOCK_BYTES.get()
+        if existing_lock is not None and existing_lock != lock_raw:
+            raise RuntimeError(
+                "requirements lock changed inside the reviewed execution snapshot"
+            )
+        payload = {
+            "source_contract_version": SOURCE_CONTRACT_VERSION,
+            "files": files,
+            "requirements_training_lock_sha256": hashlib.sha256(lock_raw).hexdigest(),
+        }
+        token = (
+            _PINNED_REQUIREMENTS_LOCK_BYTES.set(lock_raw)
+            if existing_lock is None
+            else None
+        )
+        try:
+            yield hashlib.sha256(canonical_json(payload).encode("utf-8")).hexdigest()
+        finally:
+            if token is not None:
+                _PINNED_REQUIREMENTS_LOCK_BYTES.reset(token)
 
 
 def resolved_config_receipt(config: Mapping[str, Any]) -> dict[str, Any]:

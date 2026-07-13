@@ -1,13 +1,17 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · frozen design unchanged; FP32 aggregation repair validated; repaired-source seed-7411 and seed-7412 G0/controls passed; pre-result receipt-authorization hardening required; no result run is authorized
+**Status:** in-progress · since 2026-07-13 · frozen design unchanged; source-v7 implementation review `GO`; source-v7 publication/CI and source-d426 archival still required; no result run is authorized
 
 ## Current status
 
 This is the canonical fresh adjudication of the unresolved LoRA-capacity question from
 `qwen35_4b_state_carry_vs_state_bag`. It is not a continuation of either prior checkpoint.
-Preregistration, adversarial design review, implementation review, and the frozen scientific design
-are complete. Under source `3baa7b53…d5c42`, seed 7411 passed LoRA G0, then its 256-update setup
+Preregistration, adversarial design review, and the frozen scientific design are complete. The
+integrated source-v7 review is `GO` for reviewed implementation
+`af6d65df…6abcef` and full source contract `5ecff668…2ae74`; the 355/355 suite and exact machine gate
+pass. Execution remains ordered: publish this source to `main`, require both workflows green, archive
+the source-d426 setup, publish that archive checkpoint, and only then regenerate source-v7 setup.
+Under source `3baa7b53…d5c42`, seed 7411 passed LoRA G0, then its 256-update setup
 control scored 0/48 exact terminal triples. Review found that the control had presented one singleton
 row per optimizer update and omitted the globally frozen accumulation of 16, so each high-entropy row
 appeared only five or six times. The scorer, targets, recurrence, gradients, and fixed-final gate were
@@ -63,7 +67,8 @@ receipts. Result training remains blocked while that execution boundary is repai
 source-bound setup is archived and regenerated. The control is valid setup evidence for source
 `d4269bf3…8b36`, but it cannot authorize a scientific run under a later source contract.
 
-Seed-7412 LoRA G0 then stopped at the frozen live-joint reachability gate. Every one of the 124 LoRA
+**Historical source-`1d1368cf…434b0a` attempt.** Seed-7412 LoRA G0 stopped at the frozen live-joint
+reachability gate. Every one of the 124 LoRA
 tensors and every other required recurrent group had a finite nonzero gradient, the base model had
 none, and `aggregate_logit.grad` existed and was finite but had norm exactly zero. The pre-repair code
 cast that FP32 scalar gate to BF16 before the last-state/mean-state convex mix. Two otherwise matched
@@ -82,6 +87,62 @@ give `GO`. The frozen nonzero gate is unchanged. All source-`1d1368cf…434b0a` 
 replacement-source seed-7411 and seed-7412 G0/controls passed. A pre-result authorization audit then
 found fail-open generic receipt checks; source repair and setup archival/regeneration are required
 before seed 7413 or any result-bearing stage.
+
+### Source-v7 operator boundary
+
+The frozen GPU runbook is the complete from-zero phase order, not the current resume point. Preserve
+`reports/design_receipt.json` and every file it freezes; do not rerun `design-boundary` or rewrite the
+preregistration, design review, architecture, runbook, handoff, or default config. After
+source-contract v7 is committed, pushed to `main`, and both repository workflows are green, archive
+every source-`d4269bf3…8b36` downstream setup artifact through the registered invalidation helper.
+Then regenerate CPU smoke, procedural data and the empty contrast ledger, all three initialization
+bundles, and all three LoRA G0/positive-control pairs under the one final v7 source before Stage A.
+
+The exact one-time transition command is:
+
+```bash
+EXP=experiments/qwen35_4b_state_formation_capacity_adjudication
+.venv/bin/python -B "$EXP/scripts/archive_invalidated_setup.py" \
+  --invalidated-source d4269bf34f7c80affcc8c1e8a33fee9afddcd912d1bd9dead223e520ee108b36 \
+  --trigger-failure "$EXP/runs/failures/pre_result_authorization_audit_failure.json"
+```
+
+Inspect the emitted tracked receipt and external archive, run `make check`, commit and push that
+archive checkpoint, and wait for both repository workflows before regenerating any v7 setup.
+
+A result checkpoint directory is not a completed training cell. Completion requires the exact
+external and tracked `TRAINING_COMPLETE` receipts, byte-identical but inode-distinct attempt-marker,
+training-metric, and optimizer-step mirrors, the fixed-final checkpoint graph, and the durable
+`runs/attempts/training/<slug>.json` journal head in `COMPLETE` state with the exact terminal-run
+lineage. The external `run.json` is the last terminal artifact, but the subsequent journal transition
+is the completion commit; a crash between them is recoverable but remains incomplete until the exact
+published graph finalizes that journal. Evaluation is unavailable until the whole reached training matrix is terminal:
+three Stage-A cells, six new Stage-B cells (nine total reached), or three new Stage-C cells (twelve
+total reached). A receipt/setup/branch failure before canonical output creation needs no
+failed-attempt archive; an existing incomplete canonical output must be archived before a step-zero
+retry.
+
+Branch authorization is path- and purpose-specific, not a status string. Stage B accepts only
+`analysis/lora_joint_trigger.json` with `LORA_JOINT_MISS_CONTROLS_REQUIRED`; sealed contrast accepts
+only `analysis/stage_b_seal.json` with `STAGE_B_CONTRAST_AUTHORIZED`; Stage C accepts
+`analysis/stage_b_seal.json` or `analysis/fullrank_joint.json` only when that exact file emits
+`FULLRANK_STATE_ONLY_REQUIRED`. `analysis/lora_control.json` is supporting Stage-B evidence, never a
+branch authorization. Copies, renamed paths, symlink aliases, mismatched purpose fields, and nested
+decoy lineage do not authorize execution.
+
+For an interrupted training cell, pass one existing canonical external or tracked directory to
+`scripts/archive_failed_attempt.py`; it automatically captures every existing same-cell companion,
+records why the terminal graph is incomplete, and refuses a valid completed pair. Do not move or
+delete either side manually. A markerless evaluation retry with multiple historical archives must
+also pass the exact 64-character attempt-authority identity via `--attempt-identity`; prefixes and
+guessing are rejected. All setup/result producers, analyzers, and both archive helpers share the
+ignored `runs/run.lock`, so archive verification and source retirement cannot overlap a cooperating
+writer. Cleanup keeps a durable zero-length quarantine skeleton, re-fsyncs it on recovery, and never
+uses pathname deletion to dispose of canonical evidence. Commit and push the tracked archive receipt
+before retry. At every
+verified source, archive, setup, training, evaluation, and analysis checkpoint, run `make check`,
+commit the scoped tracked evidence, push `main`, and wait for both `Validate Repository` and
+`Publish Research Site` to succeed before the next model-bearing command.
 
 ## Research program and prior anchors
 
@@ -242,10 +303,12 @@ fresh successor.
 
 ## Run
 
-The run is deliberately non-monolithic. Start with the non-model smoke:
+The run is deliberately non-monolithic. At the current source-v7 resume point, perform the
+source-d426 archive transition in **Source-v7 operator boundary** above first. Only after that archive
+checkpoint is committed, pushed, and green should setup regeneration start with the non-model smoke:
 
 ```bash
-python3 experiments/qwen35_4b_state_formation_capacity_adjudication/scripts/run.py --stage cpu-smoke
+.venv/bin/python -B experiments/qwen35_4b_state_formation_capacity_adjudication/scripts/run.py --stage cpu-smoke
 ```
 
 Then follow [`docs/gpu_runbook.md`](docs/gpu_runbook.md). Every model-bearing or branch stage must
@@ -257,9 +320,11 @@ authorization.
 - `idea_intake.md`: duplicate search, novelty, and decision.
 - `reports/preregistration.md`: frozen scientific contract and terminal taxonomy.
 - `reports/design_review.md`: adversarial pre-run review; required before the design receipt.
+- `reports/implementation_review.md`: machine-enforced source-version execution authorization.
 - `reports/design_receipt.json`: canonical pre-model identity boundary once frozen.
 - `docs/architecture.md`: common loop and adaptation-backend contract.
 - `docs/gpu_runbook.md`: phase order, inspections, and recovery rules.
 - `docs/research_handoff.md`: rationale and continuity.
 - `reports/artifact_manifest.yaml`: tracked/external artifact policy.
+- `runs/attempts/training/<slug>.json`: durable per-cell launch and replay history.
 - `runs/` and `analysis/`: runtime receipts and results after execution; no result exists yet.

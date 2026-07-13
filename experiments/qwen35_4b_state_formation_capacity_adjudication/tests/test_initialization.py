@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import sys
 import tempfile
 import unittest
@@ -147,6 +148,192 @@ class SharedInitializationTests(unittest.TestCase):
                 prepare_initialization_bundle(self.config, 7411, path)
             with self.assertRaisesRegex(RuntimeError, "model_seed mismatch"):
                 load_initialization_bundle(self.config, 7412, path)
+
+    def test_canonical_publication_recovers_only_bundle_and_sidecar_prefixes(self) -> None:
+        with tempfile.TemporaryDirectory(dir=ROOT / "tests") as directory:
+            root = Path(directory)
+            bundle = root / "initialization_seed7411.pt"
+            sidecar = bundle.with_suffix(".pt.json")
+            tracked = root / "tracked_initialization_seed7411.json"
+
+            def fail_after_bundle(stage: str) -> None:
+                if stage == "bundle_installed":
+                    raise RuntimeError("injected crash after bundle")
+
+            canonical_patches = (
+                mock.patch.object(initialization, "_canonical_bundle_path", return_value=bundle),
+                mock.patch.object(initialization, "_tracked_receipt_path", return_value=tracked),
+            )
+            with canonical_patches[0], canonical_patches[1], mock.patch.object(
+                initialization, "_publication_checkpoint", side_effect=fail_after_bundle
+            ):
+                with self.assertRaisesRegex(RuntimeError, "injected crash after bundle"):
+                    prepare_initialization_bundle(self.config, 7411, bundle)
+            self.assertTrue(bundle.is_file())
+            self.assertFalse(sidecar.exists())
+            self.assertFalse(tracked.exists())
+
+            def fail_after_sidecar(stage: str) -> None:
+                if stage == "sidecar_installed":
+                    raise RuntimeError("injected crash after sidecar")
+
+            with mock.patch.object(
+                initialization, "_canonical_bundle_path", return_value=bundle
+            ), mock.patch.object(
+                initialization, "_tracked_receipt_path", return_value=tracked
+            ), mock.patch.object(
+                initialization, "_publication_checkpoint", side_effect=fail_after_sidecar
+            ):
+                with self.assertRaisesRegex(RuntimeError, "injected crash after sidecar"):
+                    prepare_initialization_bundle(self.config, 7411, bundle)
+            self.assertTrue(sidecar.is_file())
+            self.assertFalse(tracked.exists())
+
+            with mock.patch.object(
+                initialization, "_canonical_bundle_path", return_value=bundle
+            ), mock.patch.object(
+                initialization, "_tracked_receipt_path", return_value=tracked
+            ):
+                receipt = prepare_initialization_bundle(self.config, 7411, bundle)
+                with self.assertRaisesRegex(RuntimeError, "refusing to overwrite"):
+                    prepare_initialization_bundle(self.config, 7411, bundle)
+            self.assertEqual(sidecar.read_bytes(), tracked.read_bytes())
+            self.assertEqual(
+                json.loads(sidecar.read_text(encoding="utf-8")), receipt
+            )
+            self.assertNotEqual(sidecar.stat().st_ino, tracked.stat().st_ino)
+            for path in (bundle, sidecar, tracked):
+                self.assertEqual(path.stat().st_nlink, 1)
+
+    def test_tracked_mirror_is_the_final_commit_marker_after_injected_crash(self) -> None:
+        with tempfile.TemporaryDirectory(dir=ROOT / "tests") as directory:
+            root = Path(directory)
+            bundle = root / "initialization_seed7411.pt"
+            tracked = root / "tracked_initialization_seed7411.json"
+
+            def fail_after_commit(stage: str) -> None:
+                if stage == "tracked_mirror_installed":
+                    raise RuntimeError("injected crash after commit")
+
+            with mock.patch.object(
+                initialization, "_canonical_bundle_path", return_value=bundle
+            ), mock.patch.object(
+                initialization, "_tracked_receipt_path", return_value=tracked
+            ), mock.patch.object(
+                initialization, "_publication_checkpoint", side_effect=fail_after_commit
+            ):
+                with self.assertRaisesRegex(RuntimeError, "injected crash after commit"):
+                    prepare_initialization_bundle(self.config, 7411, bundle)
+            self.assertTrue(tracked.is_file())
+            with mock.patch.object(
+                initialization, "_canonical_bundle_path", return_value=bundle
+            ), mock.patch.object(
+                initialization, "_tracked_receipt_path", return_value=tracked
+            ):
+                with self.assertRaisesRegex(RuntimeError, "refusing to overwrite"):
+                    prepare_initialization_bundle(self.config, 7411, bundle)
+
+    def test_prefix_collision_hardlink_and_symlink_aliases_fail_closed(self) -> None:
+        with tempfile.TemporaryDirectory(dir=ROOT / "tests") as directory:
+            root = Path(directory)
+
+            collision = root / "collision.pt"
+
+            def fail_after_bundle(stage: str) -> None:
+                if stage == "bundle_installed":
+                    raise RuntimeError("injected bundle prefix")
+
+            with mock.patch.object(
+                initialization, "_publication_checkpoint", side_effect=fail_after_bundle
+            ):
+                with self.assertRaisesRegex(RuntimeError, "injected bundle prefix"):
+                    prepare_initialization_bundle(self.config, 7411, collision)
+            collision.with_suffix(".pt.json").write_bytes(b"collision\n")
+            with self.assertRaisesRegex(RuntimeError, "sidecar mismatch"):
+                prepare_initialization_bundle(self.config, 7411, collision)
+
+            hardlinked = root / "hardlinked.pt"
+            with mock.patch.object(
+                initialization, "_publication_checkpoint", side_effect=fail_after_bundle
+            ):
+                with self.assertRaisesRegex(RuntimeError, "injected bundle prefix"):
+                    prepare_initialization_bundle(self.config, 7411, hardlinked)
+            os.link(hardlinked, root / "hardlinked-alias.pt")
+            with self.assertRaisesRegex(RuntimeError, "stable canonical file"):
+                prepare_initialization_bundle(self.config, 7411, hardlinked)
+
+            dangling = root / "dangling.pt"
+            dangling.symlink_to(root / "missing-target.pt")
+            with self.assertRaisesRegex(RuntimeError, "stable canonical file"):
+                prepare_initialization_bundle(self.config, 7411, dangling)
+
+            real_parent = root / "real-parent"
+            real_parent.mkdir()
+            alias_parent = root / "alias-parent"
+            alias_parent.symlink_to(real_parent, target_is_directory=True)
+            with self.assertRaisesRegex(RuntimeError, "without aliases"):
+                prepare_initialization_bundle(
+                    self.config, 7411, alias_parent / "through-alias.pt"
+                )
+            self.assertFalse((real_parent / "through-alias.pt").exists())
+
+    def test_writer_failure_cleans_private_stage_and_stale_debris_is_harmless(self) -> None:
+        with tempfile.TemporaryDirectory(dir=ROOT / "tests") as directory:
+            root = Path(directory)
+            failed = root / "writer-failure.bin"
+
+            def fail_after_prefix(handle) -> None:
+                handle.write(b"partial bytes that must never become canonical")
+                raise RuntimeError("injected initialization writer failure")
+
+            with self.assertRaisesRegex(
+                RuntimeError, "injected initialization writer failure"
+            ):
+                initialization._publish_new(failed, fail_after_prefix)
+            self.assertFalse(os.path.lexists(failed))
+            self.assertEqual(list(root.glob(".publish-*.tmp")), [])
+
+            stale = root / ".publish-stale-process.tmp"
+            stale.write_bytes(b"abandoned private stage")
+            bundle = root / "debris-does-not-block.pt"
+            prepare_initialization_bundle(self.config, 7411, bundle)
+            sidecar = bundle.with_suffix(".pt.json")
+            self.assertEqual(stale.read_bytes(), b"abandoned private stage")
+            self.assertEqual(bundle.stat().st_nlink, 1)
+            self.assertEqual(sidecar.stat().st_nlink, 1)
+
+    def test_noncanonical_or_outside_output_is_rejected_before_write(self) -> None:
+        with tempfile.TemporaryDirectory(dir=ROOT / "tests") as directory:
+            root = Path(directory)
+            for alias in (
+                f"{root}/nested/../alias.pt",
+                f"//{root.as_posix().lstrip('/')}/alias.pt",
+            ):
+                with self.subTest(alias=alias), self.assertRaisesRegex(
+                    RuntimeError, "canonical lexical path"
+                ):
+                    prepare_initialization_bundle(self.config, 7411, alias)
+            self.assertFalse((root / "alias.pt").exists())
+
+        with tempfile.TemporaryDirectory() as directory:
+            outside = Path(directory) / "outside.pt"
+            with self.assertRaisesRegex(RuntimeError, "outside repository workspace"):
+                prepare_initialization_bundle(self.config, 7411, outside)
+            self.assertFalse(outside.exists())
+
+    def test_loader_rejects_duplicate_or_nonfinite_sidecar_json(self) -> None:
+        with tempfile.TemporaryDirectory(dir=ROOT / "tests") as directory:
+            root = Path(directory)
+            for name, malformed in (
+                ("duplicate.pt", b'{"x":1,"x":2}\n'),
+                ("nonfinite.pt", b'{"x":NaN}\n'),
+            ):
+                with self.subTest(name=name):
+                    path = root / name
+                    prepare_initialization_bundle(self.config, 7411, path)
+                    path.with_suffix(".pt.json").write_bytes(malformed)
+                    with self.assertRaisesRegex(RuntimeError, "strict UTF-8 JSON"):
+                        load_initialization_bundle(self.config, 7411, path)
 
 
 if __name__ == "__main__":

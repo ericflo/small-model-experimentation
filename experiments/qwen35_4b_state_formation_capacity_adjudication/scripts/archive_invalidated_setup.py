@@ -4,15 +4,17 @@
 from __future__ import annotations
 
 import argparse
-import errno
 import hashlib
 import json
+import math
 import os
 import re
 import shutil
+import stat
 import sys
 import tempfile
 from dataclasses import dataclass
+from contextlib import ExitStack
 from pathlib import Path
 from typing import Any
 
@@ -29,6 +31,18 @@ from src.config import (  # noqa: E402
     config_sha256,
     load_config,
     source_contract_sha256,
+)
+from src.attempt_receipts import locked_regular, tree_manifest  # noqa: E402
+from src.safe_io import (  # noqa: E402
+    StableArtifactError,
+    ensure_canonical_directory,
+    fsync_canonical_directory,
+    move_new_entry,
+    open_stable_directory_for_update,
+    open_stable_regular,
+    open_stable_regular_for_update,
+    publish_new_bytes,
+    rename_new_entry,
 )
 
 
@@ -611,6 +625,153 @@ def _validate_g0_receipts(
                 )
 
 
+def _validate_positive_control_failure_progress(
+    config: dict[str, Any],
+    payload: dict[str, Any],
+    *,
+    capacity: str,
+    initialization: dict[str, Any],
+    manifest_sha256: str,
+    expected_g0_lineage: dict[str, Any],
+    expected_branch_authorization: Any,
+    label: str,
+) -> None:
+    """Validate exactly the state reachable at each durable failure stage."""
+
+    stages = (
+        "receipt_preflight",
+        "branch_authorization",
+        "data_manifest",
+        "oracle_analysis",
+        "model_setup",
+        "initial_diagnostics",
+        "state_path_overfit",
+        "final_optimizer_audit",
+        "fixed_final_overfit_gate",
+    )
+    stage = payload.get("failure_stage")
+    if type(stage) is not str or stage not in stages:
+        raise RuntimeError(f"{label} has an unknown failure stage")
+    for field in ("error_type", "error"):
+        if type(payload.get(field)) is not str or not payload[field]:
+            raise RuntimeError(f"{label} lacks {field}")
+    for field in (
+        "authorizes_training",
+        "authorizes_result_training",
+        "authorizes_result_evaluation",
+        "scientific_evidence",
+    ):
+        if type(payload.get(field)) is not bool or payload[field] is not False:
+            raise RuntimeError(f"{label} has unsafe {field}")
+    if type(payload.get("benchmark_files_read")) is not int or payload[
+        "benchmark_files_read"
+    ] != 0:
+        raise RuntimeError(f"{label} reports benchmark access")
+    for field in ("result_payloads_opened", "sealed_contrast_payloads_opened"):
+        if payload.get(field) != []:
+            raise RuntimeError(f"{label} reports unsafe {field}")
+
+    completed_updates = payload.get("completed_updates")
+    completed_microbatches = payload.get("completed_microbatches")
+    diagnostics = payload.get("training_diagnostics")
+    if (
+        type(completed_updates) is not int
+        or type(completed_microbatches) is not int
+        or completed_updates < 0
+        or completed_microbatches < 0
+        or not isinstance(diagnostics, dict)
+    ):
+        raise RuntimeError(f"{label} has malformed training progress")
+    if (
+        diagnostics.get("completed_updates") != completed_updates
+        or diagnostics.get("completed_microbatches") != completed_microbatches
+        or any(
+            not isinstance(diagnostics.get(field), list)
+            for field in (
+                "fixed_probe_steps",
+                "evaluations",
+                "parameter_probes",
+                "optimizer_step_probes",
+                "dropout_probes",
+            )
+        )
+    ):
+        raise RuntimeError(f"{label} diagnostics/progress binding changed")
+    updates = int(config["training"]["positive_control"]["updates"])
+    accumulation = int(config["training"]["gradient_accumulation"])
+    total_microbatches = updates * accumulation
+    if completed_updates > updates or completed_microbatches > total_microbatches:
+        raise RuntimeError(f"{label} progress exceeds the registered control geometry")
+    if stage in stages[:6] and (completed_updates or completed_microbatches):
+        raise RuntimeError(f"{label} claims progress before state-path overfit")
+    if stage == "state_path_overfit" and not (
+        completed_updates * accumulation
+        <= completed_microbatches
+        <= min(total_microbatches, (completed_updates + 1) * accumulation)
+    ):
+        raise RuntimeError(f"{label} has impossible partial optimizer progress")
+    if stage in {"final_optimizer_audit", "fixed_final_overfit_gate"} and (
+        completed_updates != updates or completed_microbatches != total_microbatches
+    ):
+        raise RuntimeError(f"{label} claims a final stage before all updates")
+
+    stage_index = stages.index(stage)
+    expected_g0 = None if stage == "receipt_preflight" else expected_g0_lineage
+    _expect(payload, "g0_lineage", expected_g0, label)
+    branch_expected = (
+        expected_branch_authorization
+        if capacity == "fullrank" and stage_index >= stages.index("data_manifest")
+        else None
+    )
+    _expect(payload, "branch_authorization", branch_expected, label)
+    expected_manifest = (
+        manifest_sha256 if stage_index >= stages.index("oracle_analysis") else None
+    )
+    _expect(payload, "data_manifest_sha256", expected_manifest, label)
+
+    control_rows = payload.get("control_rows")
+    oracle_analysis = payload.get("oracle_analysis")
+    oracle_accuracy = payload.get("oracle_readout_accuracy")
+    if stage_index < stages.index("oracle_analysis"):
+        if any(value is not None for value in (control_rows, oracle_analysis, oracle_accuracy)):
+            raise RuntimeError(f"{label} claims oracle evidence before oracle analysis")
+    elif stage == "oracle_analysis":
+        if control_rows is None and (oracle_analysis is not None or oracle_accuracy is not None):
+            raise RuntimeError(f"{label} has impossible partial oracle progress")
+        if oracle_analysis is None and oracle_accuracy is not None:
+            raise RuntimeError(f"{label} has an accuracy without oracle analysis")
+        if control_rows is not None and not isinstance(control_rows, dict):
+            raise RuntimeError(f"{label} control-row receipt is malformed")
+        if oracle_analysis is not None and not isinstance(oracle_analysis, dict):
+            raise RuntimeError(f"{label} oracle analysis is malformed")
+        if oracle_accuracy is not None and (
+            type(oracle_accuracy) is not float or not math.isfinite(oracle_accuracy)
+        ):
+            raise RuntimeError(f"{label} oracle accuracy is malformed")
+    elif (
+        not isinstance(control_rows, dict)
+        or not isinstance(oracle_analysis, dict)
+        or type(oracle_accuracy) is not float
+        or not math.isfinite(oracle_accuracy)
+    ):
+        raise RuntimeError(f"{label} omits completed oracle evidence")
+
+    setup = payload.get("setup")
+    shared_initialization = payload.get("shared_initialization")
+    if stage_index < stages.index("model_setup"):
+        if setup is not None or shared_initialization is not None:
+            raise RuntimeError(f"{label} claims setup before model setup")
+    elif stage == "model_setup" and setup is None:
+        if shared_initialization is not None:
+            raise RuntimeError(f"{label} has initialization without setup")
+    elif (
+        not isinstance(setup, dict)
+        or setup.get("shared_initialization") != initialization
+        or shared_initialization != initialization
+    ):
+        raise RuntimeError(f"{label} has wrong initialization lineage")
+
+
 def _validate_positive_control_receipts(
     config: dict[str, Any],
     initialization: dict[int, dict[str, Any]],
@@ -652,34 +813,7 @@ def _validate_positive_control_receipts(
         )
         _expect(payload, "capacity", capacity, f"positive-control receipt {path.name}")
         _expect(payload, "model_seed", seed, f"positive-control receipt {path.name}")
-        _expect(
-            payload,
-            "data_manifest_sha256",
-            manifest_sha256,
-            f"positive-control receipt {path.name}",
-        )
-        _expect(payload, "benchmark_files_read", 0, f"positive-control receipt {path.name}")
-        _expect(
-            payload,
-            "result_payloads_opened",
-            [],
-            f"positive-control receipt {path.name}",
-        )
-        _expect(
-            payload,
-            "sealed_contrast_payloads_opened",
-            [],
-            f"positive-control receipt {path.name}",
-        )
-        _expect(payload, "scientific_evidence", False, f"positive-control receipt {path.name}")
-        setup = payload.get("setup")
-        if (
-            not isinstance(setup, dict)
-            or setup.get("shared_initialization") != initialization[seed]
-        ):
-            raise RuntimeError(
-                f"positive-control receipt {path.name} has wrong initialization lineage"
-            )
+        _expect(payload, "backend", "transformers", f"positive-control receipt {path.name}")
         g0_path = setup_dir / f"g0_{capacity}_seed{seed}.json"
         g0 = _load_json(g0_path, f"positive-control G0 {g0_path.name}")
         expected_g0_lineage = {
@@ -689,27 +823,43 @@ def _validate_positive_control_receipts(
             "status": "MODEL_SMOKE_PASS",
             "phase": f"{capacity}_g0",
         }
-        _expect(
-            payload,
-            "g0_lineage",
-            expected_g0_lineage,
-            f"positive-control receipt {path.name}",
-        )
+        label = f"positive-control receipt {path.name}"
         if status == "POSITIVE_CONTROL_PASS":
-            _expect(payload, "authorizes_training", True, f"positive-control receipt {path.name}")
-            _expect(
-                payload,
-                "authorizes_result_training",
-                True,
-                f"positive-control receipt {path.name}",
-            )
+            _expect(payload, "data_manifest_sha256", manifest_sha256, label)
+            _expect(payload, "g0_lineage", expected_g0_lineage, label)
+            _expect(payload, "branch_authorization", g0.get("branch_authorization"), label)
+            setup = payload.get("setup")
+            if (
+                not isinstance(setup, dict)
+                or setup.get("shared_initialization") != initialization[seed]
+                or payload.get("shared_initialization") != initialization[seed]
+            ):
+                raise RuntimeError(f"{label} has wrong initialization lineage")
+            for field, expected in {
+                "authorizes_training": True,
+                "authorizes_result_training": True,
+                "authorizes_result_evaluation": False,
+                "scientific_evidence": False,
+            }.items():
+                if type(payload.get(field)) is not bool or payload[field] is not expected:
+                    raise RuntimeError(f"{label} has unsafe {field}")
+            if type(payload.get("benchmark_files_read")) is not int or payload[
+                "benchmark_files_read"
+            ] != 0:
+                raise RuntimeError(f"{label} reports benchmark access")
+            for field in ("result_payloads_opened", "sealed_contrast_payloads_opened"):
+                if payload.get(field) != []:
+                    raise RuntimeError(f"{label} reports unsafe {field}")
         else:
-            _expect(payload, "authorizes_training", False, f"positive-control receipt {path.name}")
-            _expect(
+            _validate_positive_control_failure_progress(
+                config,
                 payload,
-                "authorizes_result_training",
-                False,
-                f"positive-control receipt {path.name}",
+                capacity=capacity,
+                initialization=initialization[seed],
+                manifest_sha256=manifest_sha256,
+                expected_g0_lineage=expected_g0_lineage,
+                expected_branch_authorization=g0.get("branch_authorization"),
+                label=label,
             )
             mirror = failures_dir / (
                 f"positive_control_{capacity}_seed{seed}_source_{source[:12]}.json"
@@ -1103,7 +1253,12 @@ def _stage_archive(
 
 def _verify_sources(items: list[ArchiveItem], records: list[dict[str, Any]]) -> None:
     for item, record in zip(items, records, strict=True):
-        if item.source.is_symlink() or not item.source.is_file():
+        info = item.source.lstat()
+        if (
+            stat.S_ISLNK(info.st_mode)
+            or not stat.S_ISREG(info.st_mode)
+            or info.st_nlink != 1
+        ):
             raise RuntimeError(f"setup source changed before archival: {item.source}")
         if (
             item.source.stat().st_size != record["bytes"]
@@ -1113,25 +1268,59 @@ def _verify_sources(items: list[ArchiveItem], records: list[dict[str, Any]]) -> 
 
 
 def _commit_staged_archive(temporary: Path, archive_root: Path) -> None:
-    if os.path.lexists(archive_root):
-        raise RuntimeError("refusing to overwrite an existing invalidated setup archive")
-    os.rename(temporary, archive_root)
-    _fsync_directory(archive_root.parent)
+    try:
+        rename_new_entry(REPO_ROOT, temporary, archive_root)
+    except StableArtifactError as exc:
+        raise RuntimeError(
+            "refusing to overwrite or alias an existing invalidated setup archive"
+        ) from exc
 
 
 def _atomic_tracked_receipt(path: Path, encoded: bytes) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_name(f".{path.name}.tmp-{os.getpid()}")
-    if os.path.lexists(temporary):
-        raise RuntimeError(f"refusing a partial tracked receipt: {temporary}")
     try:
-        _write_fsynced(temporary, encoded, exclusive=True)
-        if os.path.lexists(path):
-            raise RuntimeError("refusing to overwrite an invalidation receipt")
-        os.replace(temporary, path)
-        _fsync_directory(path.parent)
-    finally:
-        temporary.unlink(missing_ok=True)
+        publish_new_bytes(REPO_ROOT, path, encoded)
+    except StableArtifactError as exc:
+        raise RuntimeError(
+            "refusing to overwrite or alias an invalidation receipt"
+        ) from exc
+
+
+def _cleanup_stale_staging(
+    archive_parent: Path,
+    invalidated_source: str,
+    tracked_receipt: Path,
+) -> None:
+    """Remove only private stages left by this exact locked transaction."""
+
+    partial_archives = (
+        sorted(archive_parent.glob(f".source_{invalidated_source}.tmp-*"))
+        if archive_parent.is_dir()
+        else []
+    )
+    partial_receipts = sorted(
+        tracked_receipt.parent.glob(f".{tracked_receipt.name}.tmp-*")
+    )
+    for partial in partial_archives:
+        info = partial.lstat()
+        if stat.S_ISLNK(info.st_mode) or not stat.S_ISDIR(info.st_mode):
+            raise RuntimeError("stale invalidation archive stage is unsafe")
+        try:
+            tree_manifest(partial, source_path="stale_invalidation_stage")
+        except Exception as exc:
+            raise RuntimeError("stale invalidation archive stage is unsafe") from exc
+        shutil.rmtree(partial)
+        _fsync_directory(archive_parent)
+    for partial in partial_receipts:
+        info = partial.lstat()
+        if (
+            stat.S_ISLNK(info.st_mode)
+            or not stat.S_ISREG(info.st_mode)
+            or info.st_nlink != 1
+        ):
+            raise RuntimeError("stale invalidation receipt stage is unsafe")
+        partial.unlink()
+        _fsync_directory(tracked_receipt.parent)
 
 
 def _verify_archive(
@@ -1248,7 +1437,12 @@ def _validate_source_exact_or_absent(
 ) -> None:
     if not os.path.lexists(item.source):
         return
-    if item.source.is_symlink() or not item.source.is_file():
+    info = item.source.lstat()
+    if (
+        stat.S_ISLNK(info.st_mode)
+        or not stat.S_ISREG(info.st_mode)
+        or info.st_nlink != 1
+    ):
         raise RuntimeError(f"setup cleanup source is unsafe: {item.source}")
     if (
         item.source.stat().st_size != record["bytes"]
@@ -1257,18 +1451,443 @@ def _validate_source_exact_or_absent(
         raise RuntimeError(f"setup cleanup source differs from archive: {item.source}")
 
 
+_EMPTY_SHA256 = hashlib.sha256(b"").hexdigest()
+
+
+def _descriptor_digest(descriptor: int) -> str:
+    offset = os.lseek(descriptor, 0, os.SEEK_CUR)
+    try:
+        os.lseek(descriptor, 0, os.SEEK_SET)
+        digest = hashlib.sha256()
+        while block := os.read(descriptor, 1024 * 1024):
+            digest.update(block)
+        return digest.hexdigest()
+    finally:
+        os.lseek(descriptor, offset, os.SEEK_SET)
+
+
+def _inode_identity(info: os.stat_result) -> tuple[int, int]:
+    return info.st_dev, info.st_ino
+
+
+def _directory_flags() -> int:
+    return (
+        os.O_RDONLY
+        | getattr(os, "O_CLOEXEC", 0)
+        | getattr(os, "O_DIRECTORY", 0)
+        | getattr(os, "O_NOFOLLOW", 0)
+    )
+
+
+def _require_descriptor_bytes(
+    descriptor: int,
+    *,
+    expected_bytes: int,
+    expected_sha256: str,
+    label: str,
+) -> None:
+    info = os.fstat(descriptor)
+    if (
+        not stat.S_ISREG(info.st_mode)
+        or info.st_nlink != 1
+        or info.st_size != expected_bytes
+        or _descriptor_digest(descriptor) != expected_sha256
+    ):
+        raise RuntimeError(f"{label} changed before setup cleanup zeroization")
+
+
+def _expected_tree_entries(
+    file_paths: set[str],
+) -> dict[str, dict[str, str]]:
+    entries: dict[str, dict[str, str]] = {".": {}}
+    for raw in sorted(file_paths):
+        relative = Path(raw)
+        if (
+            relative.is_absolute()
+            or relative.as_posix() != raw
+            or not relative.parts
+            or any(part in {"", ".", ".."} for part in relative.parts)
+        ):
+            raise RuntimeError("setup cleanup tree path is noncanonical")
+        parent = "."
+        for component in relative.parts[:-1]:
+            child = component if parent == "." else f"{parent}/{component}"
+            prior = entries[parent].get(component)
+            if prior not in {None, "directory"}:
+                raise RuntimeError("setup cleanup tree path changes type")
+            entries[parent][component] = "directory"
+            entries.setdefault(child, {})
+            parent = child
+        leaf = relative.parts[-1]
+        if leaf in entries[parent]:
+            raise RuntimeError("setup cleanup tree paths collide")
+        entries[parent][leaf] = "regular_file"
+    return entries
+
+
+def _hold_exact_tree_bindings(
+    root_descriptor: int,
+    file_descriptors: dict[str, int],
+    stack: ExitStack,
+    *,
+    label: str,
+) -> list[tuple[int, dict[str, tuple[tuple[int, int], str]]]]:
+    """Hold every directory and bind exact leaf inodes below one held root."""
+
+    expected = _expected_tree_entries(set(file_descriptors))
+    held: list[tuple[int, dict[str, tuple[tuple[int, int], str]]]] = []
+    seen = {_inode_identity(os.fstat(root_descriptor))}
+
+    def walk(descriptor: int, relative: str) -> None:
+        expected_entries = expected.get(relative)
+        if expected_entries is None:
+            raise RuntimeError(f"{label} contains an unregistered directory")
+        if sorted(os.listdir(descriptor)) != sorted(expected_entries):
+            raise RuntimeError(f"{label} inventory changed before zeroization")
+        bindings: dict[str, tuple[tuple[int, int], str]] = {}
+        held.append((descriptor, bindings))
+        for name, expected_type in sorted(expected_entries.items()):
+            child_relative = name if relative == "." else f"{relative}/{name}"
+            observed = os.stat(name, dir_fd=descriptor, follow_symlinks=False)
+            inode = _inode_identity(observed)
+            if inode in seen:
+                raise RuntimeError(f"{label} contains an inode alias")
+            seen.add(inode)
+            if expected_type == "directory":
+                if not stat.S_ISDIR(observed.st_mode):
+                    raise RuntimeError(f"{label} entry changed type")
+                child_descriptor = os.open(
+                    name,
+                    _directory_flags(),
+                    dir_fd=descriptor,
+                )
+                stack.callback(os.close, child_descriptor)
+                opened = os.fstat(child_descriptor)
+                if (
+                    not stat.S_ISDIR(opened.st_mode)
+                    or _inode_identity(opened) != inode
+                ):
+                    raise RuntimeError(f"{label} directory changed while opening")
+                bindings[name] = (inode, "directory")
+                walk(child_descriptor, child_relative)
+                continue
+            held_descriptor = file_descriptors.get(child_relative)
+            if held_descriptor is None:
+                raise RuntimeError(f"{label} has an unregistered regular file")
+            held_info = os.fstat(held_descriptor)
+            if (
+                not stat.S_ISREG(observed.st_mode)
+                or not stat.S_ISREG(held_info.st_mode)
+                or held_info.st_nlink != 1
+                or _inode_identity(held_info) != inode
+            ):
+                raise RuntimeError(f"{label} regular-file binding changed")
+            bindings[name] = (inode, "regular_file")
+
+    walk(root_descriptor, ".")
+    return held
+
+
+def _revalidate_held_tree_bindings(
+    held: list[tuple[int, dict[str, tuple[tuple[int, int], str]]]],
+    *,
+    label: str,
+) -> None:
+    for descriptor, bindings in held:
+        if sorted(os.listdir(descriptor)) != sorted(bindings):
+            raise RuntimeError(f"{label} directory membership changed")
+        for name, (inode, expected_type) in bindings.items():
+            observed = os.stat(name, dir_fd=descriptor, follow_symlinks=False)
+            if (
+                _inode_identity(observed) != inode
+                or (expected_type == "directory" and not stat.S_ISDIR(observed.st_mode))
+                or (
+                    expected_type == "regular_file"
+                    and (not stat.S_ISREG(observed.st_mode) or observed.st_nlink != 1)
+                )
+            ):
+                raise RuntimeError(f"{label} child binding changed")
+
+
+def _cleanup_quarantine_root(
+    config: dict[str, Any], invalidated_source: str
+) -> Path:
+    return _safe_repo_path(
+        _large_root(config)
+        / "invalidated_setup_cleanup"
+        / f"source_{invalidated_source}",
+        "setup cleanup quarantine root",
+    )
+
+
+def _quarantine_path(root: Path, item: ArchiveItem) -> Path:
+    relative = Path(item.archive_path)
+    if relative.is_absolute() or ".." in relative.parts:
+        raise RuntimeError("setup cleanup archive path is noncanonical")
+    return _safe_repo_path(root / relative, "setup cleanup quarantine path")
+
+
+def _quarantined_descriptor_state(
+    descriptor: int,
+    record: dict[str, Any],
+) -> bool:
+    """Return whether a held leaf is zero, accepting only exact-or-zero state."""
+
+    info = os.fstat(descriptor)
+    digest = _descriptor_digest(descriptor)
+    is_zeroized = info.st_size == 0 and digest == _EMPTY_SHA256
+    is_exact = info.st_size == record["bytes"] and digest == record["sha256"]
+    if not stat.S_ISREG(info.st_mode) or info.st_nlink != 1 or not (
+        is_zeroized or is_exact
+    ):
+        raise RuntimeError(
+            "setup cleanup quarantine differs from its archived record"
+        )
+    return is_zeroized
+
+
+def _zeroize_quarantined_descriptor(
+    descriptor: int,
+    record: dict[str, Any],
+) -> None:
+    """Zero one already-held exact archived duplicate inode."""
+
+    inode = _inode_identity(os.fstat(descriptor))
+    is_zeroized = _quarantined_descriptor_state(descriptor, record)
+    before = os.fstat(descriptor)
+    if before.st_nlink != 1 or _inode_identity(before) != inode:
+        raise RuntimeError("setup cleanup quarantine changed before zeroization")
+    if not is_zeroized:
+        os.ftruncate(descriptor, 0)
+    os.fsync(descriptor)
+    after = os.fstat(descriptor)
+    if (
+        after.st_size != 0
+        or after.st_nlink != 1
+        or _inode_identity(after) != inode
+        or _descriptor_digest(descriptor) != _EMPTY_SHA256
+    ):
+        raise RuntimeError("setup cleanup quarantine did not zeroize exactly")
+
+
+def _zeroize_quarantined_file(
+    path: Path,
+    record: dict[str, Any],
+) -> None:
+    """Safely hold and zero one quarantined file (focused helper/tests)."""
+
+    with open_stable_regular_for_update(REPO_ROOT, path) as descriptor:
+        _zeroize_quarantined_descriptor(descriptor, record)
+
+
+def _validate_quarantined_file_state(
+    path: Path,
+    record: dict[str, Any],
+) -> None:
+    try:
+        with open_stable_regular(REPO_ROOT, path) as handle:
+            _quarantined_descriptor_state(handle.fileno(), record)
+    except StableArtifactError as exc:
+        raise RuntimeError("setup cleanup quarantine is unsafe") from exc
+
+
+def _quarantine_snapshot(
+    root: Path,
+    items: list[ArchiveItem],
+    records: list[dict[str, Any]],
+) -> tuple[bool, dict[str, Path]]:
+    """Validate the exact transaction-owned quarantine inventory."""
+
+    destinations = {
+        item.archive_path: _quarantine_path(root, item)
+        for item in items
+    }
+    if not os.path.lexists(root):
+        return False, destinations
+    if root.is_symlink() or not root.is_dir():
+        raise RuntimeError("setup cleanup quarantine root is unsafe")
+    try:
+        observed = tree_manifest(
+            root,
+            source_path="invalidated_setup_cleanup_quarantine",
+        )
+    except Exception as exc:
+        raise RuntimeError("setup cleanup quarantine is unsafe") from exc
+    observed_files = observed.get("files")
+    observed_directories = observed.get("directory_entries")
+    if not isinstance(observed_files, list) or not isinstance(
+        observed_directories, list
+    ):
+        raise RuntimeError("setup cleanup quarantine snapshot is malformed")
+    expected_paths = set(destinations)
+    observed_paths = {str(row.get("path")) for row in observed_files}
+    if not observed_paths.issubset(expected_paths):
+        raise RuntimeError("setup cleanup quarantine contains unknown residue")
+    expected_directories = {"."}
+    for relative in expected_paths:
+        for parent in Path(relative).parents:
+            if parent.as_posix() != ".":
+                expected_directories.add(parent.as_posix())
+    observed_directory_paths = {
+        str(row.get("path")) for row in observed_directories
+    }
+    if not observed_directory_paths.issubset(expected_directories):
+        raise RuntimeError("setup cleanup quarantine contains unknown directories")
+    if observed_paths != expected_paths:
+        return False, destinations
+    records_by_path = {str(record["path"]): record for record in records}
+    if set(records_by_path) != expected_paths:
+        raise RuntimeError("setup cleanup records and quarantine paths differ")
+    complete = all(
+        row.get("bytes") == 0 and row.get("sha256") == _EMPTY_SHA256
+        for row in observed_files
+    )
+    return complete, destinations
+
+
+def _prepare_quarantine_directories(
+    root: Path,
+    destinations: dict[str, Path],
+) -> None:
+    directories = {root}
+    for destination in destinations.values():
+        current = destination.parent
+        while current != root:
+            if not current.is_relative_to(root):
+                raise RuntimeError("setup cleanup quarantine path escapes its root")
+            directories.add(current)
+            current = current.parent
+    for directory in sorted(directories, key=lambda path: len(path.parts)):
+        try:
+            ensure_canonical_directory(REPO_ROOT, directory)
+        except StableArtifactError as exc:
+            raise RuntimeError(
+                "setup cleanup quarantine directory could not be created durably"
+            ) from exc
+    for directory in sorted(
+        directories,
+        key=lambda path: len(path.parts),
+        reverse=True,
+    ):
+        try:
+            fsync_canonical_directory(REPO_ROOT, directory)
+        except StableArtifactError as exc:
+            raise RuntimeError(
+                "setup cleanup quarantine directory could not be fsynced"
+            ) from exc
+
+
+def _source_parent_paths(items: list[ArchiveItem]) -> list[Path]:
+    return sorted(
+        {item.source.parent for item in items},
+        key=lambda path: path.as_posix(),
+    )
+
+
+def _fsync_source_parents(items: list[ArchiveItem]) -> None:
+    for parent in _source_parent_paths(items):
+        try:
+            fsync_canonical_directory(REPO_ROOT, parent)
+        except StableArtifactError as exc:
+            raise RuntimeError(
+                f"setup cleanup source parent could not be fsynced: {parent}"
+            ) from exc
+
+
+def _confirm_durable_zero_quarantine(
+    quarantine_root: Path,
+    items: list[ArchiveItem],
+    records: list[dict[str, Any]],
+) -> dict[str, Path]:
+    """Re-fsync and rebind a pathname-complete zero quarantine on recovery."""
+
+    complete, destinations = _quarantine_snapshot(
+        quarantine_root, items, records
+    )
+    if not complete:
+        raise RuntimeError("setup cleanup quarantine is not complete")
+    _prepare_quarantine_directories(quarantine_root, destinations)
+    try:
+        with ExitStack() as stack:
+            root_descriptor = stack.enter_context(
+                open_stable_directory_for_update(REPO_ROOT, quarantine_root)
+            )
+            held_files: list[tuple[int, dict[str, Any]]] = []
+            file_descriptors: dict[str, int] = {}
+            for item, record in zip(items, records, strict=True):
+                descriptor = stack.enter_context(
+                    open_stable_regular_for_update(
+                        REPO_ROOT,
+                        destinations[item.archive_path],
+                    )
+                )
+                if not _quarantined_descriptor_state(descriptor, record):
+                    raise RuntimeError(
+                        "setup cleanup completed quarantine contains nonzero bytes"
+                    )
+                held_files.append((descriptor, record))
+                file_descriptors[item.archive_path] = descriptor
+            held_tree = _hold_exact_tree_bindings(
+                root_descriptor,
+                file_descriptors,
+                stack,
+                label="setup cleanup quarantine",
+            )
+            _revalidate_held_tree_bindings(
+                held_tree,
+                label="setup cleanup quarantine",
+            )
+            for descriptor, record in held_files:
+                _zeroize_quarantined_descriptor(descriptor, record)
+            for descriptor, _ in reversed(held_tree):
+                os.fsync(descriptor)
+            _revalidate_held_tree_bindings(
+                held_tree,
+                label="setup cleanup quarantine",
+            )
+    except StableArtifactError as exc:
+        raise RuntimeError(
+            "setup cleanup completed quarantine changed during durable confirmation"
+        ) from exc
+    except OSError as exc:
+        raise RuntimeError(
+            f"setup cleanup completed quarantine could not be fsynced: {exc}"
+        ) from exc
+    _prepare_quarantine_directories(quarantine_root, destinations)
+    complete, _ = _quarantine_snapshot(quarantine_root, items, records)
+    if not complete:
+        raise RuntimeError(
+            "setup cleanup quarantine changed after durable confirmation"
+        )
+    return destinations
+
+
 def _validate_cleanup_inventory(
     config: dict[str, Any],
     items: list[ArchiveItem],
     records: list[dict[str, Any]],
     archive_root: Path,
     invalidated_source: str,
+    quarantine_root: Path,
 ) -> None:
     _validate_archived_setup_failure_mirrors(
         config, archive_root, records, invalidated_source
     )
+    _, destinations = _quarantine_snapshot(quarantine_root, items, records)
     for item, record in zip(items, records, strict=True):
-        _validate_source_exact_or_absent(item, record)
+        destination = destinations[item.archive_path]
+        if os.path.lexists(item.source) and os.path.lexists(destination):
+            raise RuntimeError(
+                "setup cleanup has both canonical and quarantined sources"
+            )
+        if os.path.lexists(item.source):
+            _validate_source_exact_or_absent(item, record)
+        elif not os.path.lexists(destination):
+            raise RuntimeError(
+                f"setup cleanup lost canonical and quarantined source: {item.source}"
+            )
+        else:
+            _validate_quarantined_file_state(destination, record)
 
     data_dir = _safe_repo_path(
         ROOT / config["paths"]["data_dir"],
@@ -1331,7 +1950,9 @@ def _validate_cleanup_inventory(
 def _verify_cleanup_postconditions(
     config: dict[str, Any],
     items: list[ArchiveItem],
+    records: list[dict[str, Any]],
     archive_root: Path,
+    quarantine_root: Path,
 ) -> None:
     remaining = [str(item.source) for item in items if os.path.lexists(item.source)]
     if remaining:
@@ -1353,7 +1974,8 @@ def _verify_cleanup_postconditions(
         "tracked runs root",
     )
     for name in ("cpu_smoke", "setup"):
-        if os.path.lexists(runs_dir / name):
+        path = runs_dir / name
+        if path.is_symlink() or not path.is_dir() or list(path.iterdir()):
             raise RuntimeError(f"tracked setup cleanup postcondition failed: {name}")
     large_root = _large_root(config)
     if large_root.is_symlink() or not large_root.is_dir():
@@ -1369,14 +1991,9 @@ def _verify_cleanup_postconditions(
         )
     if archive_root.is_symlink() or not archive_root.is_dir():
         raise RuntimeError("durable archive disappeared during cleanup")
-
-
-def _unlink_source(path: Path) -> None:
-    path.unlink()
-
-
-def _remove_empty_source_parent(path: Path) -> None:
-    path.rmdir()
+    complete, _ = _quarantine_snapshot(quarantine_root, items, records)
+    if not complete:
+        raise RuntimeError("setup cleanup quarantine is not complete")
 
 
 def _delete_sources(
@@ -1385,53 +2002,215 @@ def _delete_sources(
     records: list[dict[str, Any]],
     archive_root: Path,
     invalidated_source: str,
+    receipt_bytes: bytes,
 ) -> None:
+    quarantine_root = _cleanup_quarantine_root(config, invalidated_source)
+    receipt_sha256 = hashlib.sha256(receipt_bytes).hexdigest()
+    tracked_receipt = _safe_repo_path(
+        ROOT
+        / config["paths"]["runs_dir"]
+        / "failures"
+        / f"invalidated_setup_source_{invalidated_source[:8]}.json",
+        "tracked invalidation receipt",
+    )
+    complete, destinations = _quarantine_snapshot(
+        quarantine_root, items, records
+    )
+    if complete:
+        # Completion dominates: canonical names may now belong to a regenerated
+        # setup under the replacement source and must remain untouched.
+        _validate_archived_setup_failure_mirrors(
+            config, archive_root, records, invalidated_source
+        )
+        _confirm_durable_zero_quarantine(
+            quarantine_root,
+            items,
+            records,
+        )
+        _fsync_source_parents(items)
+        return
     _validate_cleanup_inventory(
-        config, items, records, archive_root, invalidated_source
+        config,
+        items,
+        records,
+        archive_root,
+        invalidated_source,
+        quarantine_root,
     )
-    grouped: dict[Path, list[tuple[ArchiveItem, dict[str, Any]]]] = {}
-    for item, record in zip(items, records, strict=True):
-        grouped.setdefault(item.source.parent, []).append((item, record))
-    for parent in sorted(grouped, key=lambda path: path.as_posix()):
-        for item, record in grouped[parent]:
-            _validate_archived_setup_failure_mirrors(
-                config, archive_root, records, invalidated_source
+    _prepare_quarantine_directories(quarantine_root, destinations)
+    try:
+        with ExitStack() as stack:
+            archive_root_descriptor = stack.enter_context(
+                open_stable_directory_for_update(REPO_ROOT, archive_root)
             )
-            _validate_source_exact_or_absent(item, record)
-            if os.path.lexists(item.source):
-                _unlink_source(item.source)
-        if os.path.lexists(parent):
-            _fsync_directory(parent)
-
-    runs_dir = _safe_repo_path(
-        ROOT / config["paths"]["runs_dir"],
-        "tracked runs root",
-    )
-    for name in ("cpu_smoke", "setup"):
-        parent = runs_dir / name
-        if os.path.lexists(parent):
-            if parent.is_symlink() or not parent.is_dir():
-                raise RuntimeError(f"tracked setup cleanup root is unsafe: {parent}")
-            try:
-                _remove_empty_source_parent(parent)
-            except OSError as error:
-                if error.errno in {errno.ENOTEMPTY, errno.EEXIST}:
+            quarantine_root_descriptor = stack.enter_context(
+                open_stable_directory_for_update(REPO_ROOT, quarantine_root)
+            )
+            archive_handles: dict[str, tuple[Any, int, str]] = {}
+            for item, record in zip(items, records, strict=True):
+                handle = stack.enter_context(
+                    open_stable_regular(
+                        REPO_ROOT,
+                        archive_root / item.archive_path,
+                        expected_sha256=record["sha256"],
+                    )
+                )
+                if os.fstat(handle.fileno()).st_size != record["bytes"]:
                     raise RuntimeError(
-                        f"tracked setup cleanup root is not empty: {parent}"
-                    ) from error
-                raise
-        _fsync_directory(parent.parent)
+                        "setup cleanup archived copy has the wrong byte count"
+                    )
+                archive_handles[item.archive_path] = (
+                    handle,
+                    int(record["bytes"]),
+                    str(record["sha256"]),
+                )
+            archive_receipt_handle = stack.enter_context(
+                open_stable_regular(
+                    REPO_ROOT,
+                    archive_root / "archive_receipt.json",
+                    expected_sha256=receipt_sha256,
+                )
+            )
+            tracked_receipt_handle = stack.enter_context(
+                open_stable_regular(
+                    REPO_ROOT,
+                    tracked_receipt,
+                    expected_sha256=receipt_sha256,
+                )
+            )
+            if (
+                archive_receipt_handle.read() != receipt_bytes
+                or tracked_receipt_handle.read() != receipt_bytes
+            ):
+                raise RuntimeError(
+                    "setup cleanup archive receipts are not byte-identical"
+                )
 
-    data_dir = _safe_repo_path(
-        ROOT / config["paths"]["data_dir"],
-        "generated-data cleanup root",
-    )
-    _fsync_directory(data_dir)
-    _fsync_directory(_large_root(config))
+            # Move every still-canonical exact source before truncating any
+            # duplicate.  A crash leaves each item in exactly one recoverable
+            # source/quarantine location.
+            for item, record in zip(items, records, strict=True):
+                destination = destinations[item.archive_path]
+                _validate_archived_setup_failure_mirrors(
+                    config, archive_root, records, invalidated_source
+                )
+                if os.path.lexists(item.source):
+                    _validate_source_exact_or_absent(item, record)
+                    try:
+                        move_new_entry(REPO_ROOT, item.source, destination)
+                    except StableArtifactError as exc:
+                        raise RuntimeError(
+                            "setup cleanup quarantine commit was not atomic no-clobber"
+                        ) from exc
+
+            _, destinations = _quarantine_snapshot(
+                quarantine_root, items, records
+            )
+            held_quarantine: list[tuple[int, dict[str, Any]]] = []
+            quarantine_descriptors: dict[str, int] = {}
+            for item, record in zip(items, records, strict=True):
+                destination = destinations[item.archive_path]
+                descriptor = stack.enter_context(
+                    open_stable_regular_for_update(REPO_ROOT, destination)
+                )
+                held_quarantine.append((descriptor, record))
+                quarantine_descriptors[item.archive_path] = descriptor
+
+            # Validate the complete held inventory before the first truncate.
+            for descriptor, record in held_quarantine:
+                _quarantined_descriptor_state(descriptor, record)
+            quarantine_tree = _hold_exact_tree_bindings(
+                quarantine_root_descriptor,
+                quarantine_descriptors,
+                stack,
+                label="setup cleanup quarantine",
+            )
+            archive_descriptors = {
+                path: handle.fileno()
+                for path, (handle, _, _) in archive_handles.items()
+            }
+            archive_descriptors["archive_receipt.json"] = (
+                archive_receipt_handle.fileno()
+            )
+            archive_tree = _hold_exact_tree_bindings(
+                archive_root_descriptor,
+                archive_descriptors,
+                stack,
+                label="setup cleanup archive",
+            )
+
+            def revalidate_archive() -> None:
+                _revalidate_held_tree_bindings(
+                    archive_tree,
+                    label="setup cleanup archive",
+                )
+                for path, (handle, size, digest) in archive_handles.items():
+                    _require_descriptor_bytes(
+                        handle.fileno(),
+                        expected_bytes=size,
+                        expected_sha256=digest,
+                        label=f"setup cleanup archive payload {path}",
+                    )
+                for label, handle in (
+                    ("archive receipt", archive_receipt_handle),
+                    ("tracked archive receipt", tracked_receipt_handle),
+                ):
+                    _require_descriptor_bytes(
+                        handle.fileno(),
+                        expected_bytes=len(receipt_bytes),
+                        expected_sha256=receipt_sha256,
+                        label=f"setup cleanup {label}",
+                    )
+                _validate_archived_setup_failure_mirrors(
+                    config, archive_root, records, invalidated_source
+                )
+
+            _revalidate_held_tree_bindings(
+                quarantine_tree,
+                label="setup cleanup quarantine",
+            )
+            revalidate_archive()
+            for descriptor, record in held_quarantine:
+                _quarantined_descriptor_state(descriptor, record)
+            for descriptor, record in held_quarantine:
+                revalidate_archive()
+                _revalidate_held_tree_bindings(
+                    quarantine_tree,
+                    label="setup cleanup quarantine",
+                )
+                _quarantined_descriptor_state(descriptor, record)
+                _zeroize_quarantined_descriptor(descriptor, record)
+            for descriptor, record in held_quarantine:
+                if not _quarantined_descriptor_state(descriptor, record):
+                    raise RuntimeError(
+                        "setup cleanup quarantine was not fully zeroized"
+                    )
+            _revalidate_held_tree_bindings(
+                quarantine_tree,
+                label="setup cleanup quarantine",
+            )
+            revalidate_archive()
+            if len(archive_handles) != len(items):
+                raise RuntimeError("setup cleanup did not hold every archive copy")
+    except StableArtifactError as exc:
+        raise RuntimeError(
+            "setup cleanup held artifact changed while sources were retired"
+        ) from exc
+    except OSError as exc:
+        raise RuntimeError(f"setup cleanup mutation failed: {exc}") from exc
+
+    _prepare_quarantine_directories(quarantine_root, destinations)
+    _fsync_source_parents(items)
     _validate_archived_setup_failure_mirrors(
         config, archive_root, records, invalidated_source
     )
-    _verify_cleanup_postconditions(config, items, archive_root)
+    _verify_cleanup_postconditions(
+        config,
+        items,
+        records,
+        archive_root,
+        quarantine_root,
+    )
 
 
 def _resume_existing_archive(
@@ -1457,13 +2236,18 @@ def _resume_existing_archive(
         _atomic_tracked_receipt(tracked_receipt, receipt_bytes)
         _verify_archive(archive_root, records, receipt, tracked_receipt)
     _delete_sources(
-        config, items, records, archive_root, invalidated_source
+        config,
+        items,
+        records,
+        archive_root,
+        invalidated_source,
+        receipt_bytes,
     )
     _verify_archive(archive_root, records, receipt, tracked_receipt)
     return receipt
 
 
-def archive_invalidated_setup(
+def _archive_invalidated_setup_transaction(
     config: dict[str, Any],
     invalidated_source: str,
     trigger_failure: Path,
@@ -1487,10 +2271,11 @@ def archive_invalidated_setup(
         failures_dir / f"invalidated_setup_source_{invalidated_source[:8]}.json",
         "tracked invalidation receipt",
     )
-    partial_archives = list(archive_parent.glob(f".source_{invalidated_source}.tmp-*"))
-    partial_receipts = list(tracked_receipt.parent.glob(f".{tracked_receipt.name}.tmp-*"))
-    if partial_archives or partial_receipts:
-        raise RuntimeError("refusing to continue beside a partial invalidation archive")
+    _cleanup_stale_staging(
+        archive_parent,
+        invalidated_source,
+        tracked_receipt,
+    )
     archive_exists = os.path.lexists(archive_root)
     tracked_exists = os.path.lexists(tracked_receipt)
     if tracked_exists and not archive_exists:
@@ -1559,13 +2344,51 @@ def archive_invalidated_setup(
         _atomic_tracked_receipt(tracked_receipt, encoded)
         _verify_archive(archive_root, records, receipt, tracked_receipt)
         _delete_sources(
-            config, items, records, archive_root, invalidated_source
+            config,
+            items,
+            records,
+            archive_root,
+            invalidated_source,
+            encoded,
         )
         _verify_archive(archive_root, records, receipt, tracked_receipt)
     finally:
         if temporary is not None and temporary.exists():
             shutil.rmtree(temporary, ignore_errors=True)
     return receipt
+
+
+def archive_invalidated_setup(
+    config: dict[str, Any],
+    invalidated_source: str,
+    trigger_failure: Path,
+) -> dict[str, Any]:
+    """Run one source-invalidation transaction under its stable parent lock."""
+
+    if not SHA256_RE.fullmatch(invalidated_source):
+        raise RuntimeError("--invalidated-source must be an exact lowercase SHA-256")
+    failures_dir = _safe_repo_path(
+        ROOT / config["paths"]["runs_dir"] / "failures",
+        "tracked failures root",
+    )
+    failures_dir.mkdir(parents=True, exist_ok=True)
+    lock_path = failures_dir / (
+        f".invalidated_setup_source_{invalidated_source[:8]}.lock"
+    )
+    execution_generation_lock = _safe_repo_path(
+        ROOT / "runs" / "run.lock",
+        "execution generation lock",
+    )
+    try:
+        with locked_regular(execution_generation_lock):
+            with locked_regular(lock_path):
+                return _archive_invalidated_setup_transaction(
+                    config,
+                    invalidated_source,
+                    trigger_failure,
+                )
+    except StableArtifactError as exc:
+        raise RuntimeError("invalidated setup transaction path is unsafe") from exc
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:

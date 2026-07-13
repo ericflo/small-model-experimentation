@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import ast
+import copy
 import contextlib
 import hashlib
 import json
@@ -29,7 +30,10 @@ from src.gpu_runner import (  # noqa: E402
     _positive_control_rows,
     _positive_control_schedule,
     _state_accuracy_counts,
-    _summarize_positive_control_records,
+)
+from src.oracle_control import (  # noqa: E402
+    analyze_positive_control_records,
+    build_oracle_positive_control_records,
 )
 
 
@@ -40,12 +44,25 @@ class FreshPositiveControlTests(unittest.TestCase):
 
     @staticmethod
     def manifest(fingerprints=()) -> dict:
-        return {
-            "files": {
-                "train": {"structural_fingerprints": list(fingerprints)},
-                "validation": {"structural_fingerprints": []},
-            }
+        splits = (
+            "train",
+            "validation",
+            "depth_extrapolation",
+            "joint_holdout",
+            "contrast_validation",
+            "contrast_depth",
+            "contrast_joint",
+        )
+        files = {
+            split: {"rows": 0, "structural_fingerprints": []}
+            for split in splits
         }
+        values = sorted(fingerprints)
+        files["train"] = {
+            "rows": len(values),
+            "structural_fingerprints": values,
+        }
+        return {"files": files}
 
     def test_fresh_seed_73991_builds_exact_balanced_48_row_factorial(self) -> None:
         rows, receipt = _positive_control_rows(self.config, self.manifest())
@@ -330,55 +347,86 @@ class FreshPositiveControlTests(unittest.TestCase):
         self.assertTrue(torch.equal(torch.get_rng_state(), rng_before))
 
     def test_mixed_depth_summary_uses_exact_trajectory_denominator(self) -> None:
+        rows, _ = _positive_control_rows(self.config, self.manifest())
+        records = build_oracle_positive_control_records(rows)
         widths = {"node": 16, "phase": 2, "checksum": 8}
 
-        def record(depth: int, joint_steps: int, joint_final: int) -> dict:
-            terminal = {
-                "node": joint_final,
-                "phase": joint_final,
-                "checksum": joint_final,
-                "joint": joint_final,
+        def make_node_wrong(record: dict, steps: tuple[int, ...]) -> None:
+            state = record["state"]
+            targets = {
+                head: list(state["targets"][head][0]) for head in widths
+            }
+            predictions = copy.deepcopy(targets)
+            for step in steps:
+                predictions["node"][step] = (targets["node"][step] + 1) % widths["node"]
+            correct = {
+                head: [
+                    prediction == target
+                    for prediction, target in zip(predictions[head], targets[head])
+                ]
+                for head in widths
+            }
+            joint = [
+                all(correct[head][step] for head in widths)
+                for step in range(record["depth"])
+            ]
+            state["predictions"] = {
+                head: [values] for head, values in predictions.items()
+            }
+            state["terminal"] = {
+                **{head: int(values[-1]) for head, values in correct.items()},
+                "joint": int(joint[-1]),
                 "rows": 1,
             }
-            trajectory = {
-                "node": joint_steps,
-                "phase": joint_steps,
-                "checksum": joint_steps,
-                "joint": joint_steps,
-                "steps": depth,
+            state["trajectory"] = {
+                **{head: sum(values) for head, values in correct.items()},
+                "joint": sum(joint),
+                "steps": record["depth"],
             }
-            histograms = {
-                head: {"prediction": [0] * width, "target": [0] * width}
-                for head, width in widths.items()
-            }
-            return {
-                "depth": depth,
-                "state": {
-                    "terminal": terminal,
-                    "trajectory": trajectory,
-                    "histograms": histograms,
-                },
-                "objective_loss": float(depth),
-                "state_loss": float(depth + 1),
-                "fixed_point_loss": 0.0,
+            state["histograms"] = {
+                head: {
+                    kind: [values.count(index) for index in range(widths[head])]
+                    for kind, values in (
+                        ("prediction", predictions[head]),
+                        ("target", targets[head]),
+                    )
+                }
+                for head in widths
             }
 
-        records = [record(2, 2, 1), record(4, 1, 0)]
-        overall = _summarize_positive_control_records(records)
-        self.assertEqual(overall["rows"], 2)
-        self.assertEqual(overall["trajectory_steps"], 6)
-        self.assertEqual(overall["joint_final_accuracy"], 0.5)
-        self.assertEqual(overall["joint_trajectory_accuracy"], 3 / 6)
-        by_depth = _summarize_positive_control_records(records, field="depth")
-        self.assertEqual(by_depth["2"]["joint_trajectory_accuracy"], 1.0)
-        self.assertEqual(by_depth["4"]["joint_trajectory_accuracy"], 0.25)
+        depth2 = next(record for record in records if record["depth"] == 2)
+        depth4 = next(record for record in records if record["depth"] == 4)
+        make_node_wrong(depth2, (0, 1))
+        make_node_wrong(depth4, (0, 1, 2))
+
+        analysis = analyze_positive_control_records(records, expected_rows=rows)
+        overall = analysis["overall"]
+        self.assertEqual(overall["rows"], 48)
+        self.assertEqual(overall["trajectory_steps"], 144)
+        self.assertEqual(overall["joint_final_accuracy"], 47 / 48)
+        self.assertEqual(overall["joint_trajectory_accuracy"], 139 / 144)
+        by_depth = analysis["by_depth"]
+        self.assertEqual(by_depth["2"]["joint_trajectory_accuracy"], 30 / 32)
+        self.assertEqual(by_depth["4"]["joint_trajectory_accuracy"], 61 / 64)
 
     def test_any_early_failure_writes_identity_valid_fail_closed_receipt(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             output = Path(directory) / "failure.json"
+            mirror = Path(directory) / "failure-mirror.json"
             with mock.patch.object(
                 gpu_runner, "_read_receipt", side_effect=RuntimeError("synthetic G0 failure")
-            ), mock.patch.object(gpu_runner, "_atomic_copy") as copy:
+            ), mock.patch.object(
+                gpu_runner, "_setup_receipt_path", return_value=output
+            ), mock.patch.object(
+                gpu_runner, "_positive_control_failure_mirror_path", return_value=mirror
+            ), mock.patch.object(
+                gpu_runner,
+                "design_lineage",
+                return_value={
+                    "sha256": "3" * 64,
+                    "receipt_identity_sha256": "4" * 64,
+                },
+            ):
                 with self.assertRaisesRegex(RuntimeError, "synthetic G0 failure"):
                     gpu_runner.positive_control(
                         self.config,
@@ -397,26 +445,133 @@ class FreshPositiveControlTests(unittest.TestCase):
             self.assertFalse(payload["authorizes_training"])
             self.assertFalse(payload["authorizes_result_training"])
             self.assertFalse(payload["scientific_evidence"])
-            copy.assert_called_once()
+            self.assertEqual(output.read_bytes(), mirror.read_bytes())
+            self.assertNotEqual(output.stat().st_ino, mirror.stat().st_ino)
+
+    def test_stranded_positive_control_failure_pair_recovers_without_g0_or_model(self) -> None:
+        cases = (
+            ("canonical", "receipt_preflight"),
+            ("mirror", "receipt_preflight"),
+            ("canonical", "initial_diagnostics"),
+        )
+        for missing_side, recovered_stage in cases:
+            with self.subTest(
+                missing_side=missing_side, recovered_stage=recovered_stage
+            ), tempfile.TemporaryDirectory() as directory:
+                output = Path(directory) / "failure.json"
+                mirror = Path(directory) / "failure-mirror.json"
+                patches = (
+                    mock.patch.object(gpu_runner, "_setup_receipt_path", return_value=output),
+                    mock.patch.object(
+                        gpu_runner,
+                        "_positive_control_failure_mirror_path",
+                        return_value=mirror,
+                    ),
+                    mock.patch.object(
+                        gpu_runner,
+                        "design_lineage",
+                        return_value={
+                            "sha256": "3" * 64,
+                            "receipt_identity_sha256": "4" * 64,
+                        },
+                    ),
+                )
+                for patcher in patches:
+                    patcher.start()
+                try:
+                    with mock.patch.object(
+                        gpu_runner,
+                        "_read_g0_pass",
+                        side_effect=RuntimeError("synthetic G0 failure"),
+                    ):
+                        with self.assertRaisesRegex(RuntimeError, "synthetic G0 failure"):
+                            gpu_runner.positive_control(
+                                self.config,
+                                output,
+                                capacity="lora",
+                                model_seed=7411,
+                                initialization_bundle=Path(directory) / "init.pt",
+                                model_smoke_receipt=Path(directory) / "g0.json",
+                                authorization_receipt=None,
+                            )
+                    if recovered_stage == "initial_diagnostics":
+                        payload = json.loads(output.read_text(encoding="utf-8"))
+                        payload.update(
+                            {
+                                "failure_stage": recovered_stage,
+                                "data_manifest_sha256": "a" * 64,
+                                "g0_lineage": {"status": "MODEL_SMOKE_PASS"},
+                                "shared_initialization": {"status": "SHARED_INITIALIZATION_PREPARED"},
+                                "setup": {
+                                    "shared_initialization": {
+                                        "status": "SHARED_INITIALIZATION_PREPARED"
+                                    }
+                                },
+                                "control_rows": {"rows": 48},
+                                "oracle_analysis": {"terminal_joint_accuracy": 1.0},
+                                "oracle_readout_accuracy": 1.0,
+                            }
+                        )
+                        payload.pop("receipt_identity_sha256")
+                        payload["receipt_identity_sha256"] = gpu_runner._canonical_sha256(
+                            payload
+                        )
+                        encoded = (
+                            json.dumps(payload, indent=2, sort_keys=True) + "\n"
+                        ).encode("utf-8")
+                        output.unlink()
+                        mirror.unlink()
+                        (mirror if missing_side == "canonical" else output).write_bytes(
+                            encoded
+                        )
+                    else:
+                        (output if missing_side == "canonical" else mirror).unlink()
+                    with mock.patch.object(gpu_runner, "_read_g0_pass") as read_g0:
+                        with self.assertRaisesRegex(
+                            RuntimeError, "requires invalidated-setup archival"
+                        ):
+                            gpu_runner.positive_control(
+                                self.config,
+                                output,
+                                capacity="lora",
+                                model_seed=7411,
+                                initialization_bundle=Path(directory) / "init.pt",
+                                model_smoke_receipt=Path(directory) / "g0.json",
+                                authorization_receipt=None,
+                            )
+                    read_g0.assert_not_called()
+                    self.assertEqual(output.read_bytes(), mirror.read_bytes())
+                    self.assertNotEqual(output.stat().st_ino, mirror.stat().st_ino)
+                finally:
+                    for patcher in reversed(patches):
+                        patcher.stop()
 
     def test_training_receipt_loader_rejects_setup_control_failure(self) -> None:
         with tempfile.TemporaryDirectory(dir=ROOT / "tests") as directory:
             path = Path(directory) / "receipt.json"
-            payload = gpu_runner._with_identity({
-                "schema_version": 1,
-                "status": "SETUP_CONTROL_FAILED",
-                **gpu_runner._identity(self.config, phase="lora_positive_control"),
-                "scientific_evidence": False,
-            })
-            path.write_text(json.dumps(payload), encoding="utf-8")
-            with self.assertRaisesRegex(RuntimeError, "did not authorize"):
-                gpu_runner._read_receipt(
-                    path,
-                    self.config,
-                    statuses={"POSITIVE_CONTROL_PASS"},
-                    phases={"lora_positive_control"},
-                    label="synthetic positive control",
-                )
+            with mock.patch.object(
+                gpu_runner,
+                "design_lineage",
+                return_value={
+                    "sha256": "3" * 64,
+                    "receipt_identity_sha256": "4" * 64,
+                },
+            ):
+                payload = gpu_runner._with_identity({
+                    "schema_version": 1,
+                    "status": "SETUP_CONTROL_FAILED",
+                    **gpu_runner._identity(self.config, phase="lora_positive_control"),
+                    "scientific_evidence": False,
+                })
+                path.write_text(json.dumps(payload), encoding="utf-8")
+                with self.assertRaisesRegex(RuntimeError, "did not authorize"):
+                    gpu_runner._read_receipt(
+                        path,
+                        self.config,
+                        statuses={"POSITIVE_CONTROL_PASS"},
+                        phases={"lora_positive_control"},
+                        label="synthetic positive control",
+                    )
 
 
 if __name__ == "__main__":

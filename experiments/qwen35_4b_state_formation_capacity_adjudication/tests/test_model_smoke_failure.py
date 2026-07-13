@@ -84,6 +84,15 @@ class ModelSmokeFailurePersistenceTests(unittest.TestCase):
             / f"g0_lora_seed7411_source_{self.SOURCE[:12]}.json"
         )
 
+    def persist_early_failure(self) -> None:
+        with mock.patch.object(
+            gpu_runner,
+            "_model_smoke_attempt",
+            side_effect=RuntimeError("synthetic preserved setup failure"),
+        ):
+            with self.assertRaisesRegex(RuntimeError, "synthetic preserved setup failure"):
+                self.run_smoke()
+
     def assert_valid_pair(self) -> dict:
         self.assertTrue(self.output.is_file())
         self.assertTrue(self.mirror().is_file())
@@ -183,51 +192,63 @@ class ModelSmokeFailurePersistenceTests(unittest.TestCase):
             "_model_smoke_attempt",
             side_effect=race_leaf,
         ):
-            with self.assertRaisesRegex(RuntimeError, "refusing to overwrite receipt"):
+            with self.assertRaisesRegex(RuntimeError, "refusing to overwrite"):
                 self.run_smoke()
         self.assertEqual(self.output.read_bytes(), b"racing intruder")
         self.assertFalse(self.mirror().exists())
 
-    def test_existing_mirror_blocks_attempt_without_overwrite(self) -> None:
+    def test_malformed_existing_mirror_blocks_attempt_without_overwrite(self) -> None:
         self.mirror().parent.mkdir(parents=True)
         self.mirror().write_bytes(b"preserved")
         with mock.patch.object(gpu_runner, "_model_smoke_attempt") as attempt:
-            with self.assertRaisesRegex(RuntimeError, "existing failure mirror"):
+            with self.assertRaisesRegex(RuntimeError, "strict-JSON receipt"):
                 self.run_smoke()
         attempt.assert_not_called()
         self.assertEqual(self.mirror().read_bytes(), b"preserved")
         self.assertFalse(self.output.exists())
 
-    def test_existing_canonical_blocks_attempt_without_overwrite(self) -> None:
+    def test_malformed_existing_canonical_blocks_attempt_without_overwrite(self) -> None:
         self.output.parent.mkdir(parents=True)
         self.output.write_bytes(b"preserved canonical")
         with mock.patch.object(gpu_runner, "_model_smoke_attempt") as attempt:
-            with self.assertRaisesRegex(RuntimeError, "refusing to resume or overwrite"):
+            with self.assertRaisesRegex(RuntimeError, "strict-JSON receipt"):
                 self.run_smoke()
         attempt.assert_not_called()
         self.assertEqual(self.output.read_bytes(), b"preserved canonical")
         self.assertFalse(self.mirror().exists())
 
-    def test_second_link_failure_can_leave_mirror_but_never_canonical_only(self) -> None:
+    def test_pair_checkpoint_failure_can_leave_mirror_but_never_canonical_only(self) -> None:
         canonical = self.experiment / "pair" / "canonical.json"
         mirror = self.experiment / "pair" / "mirror.json"
-        real_link = os.link
-        calls = 0
-
-        def fail_second(source, destination, **kwargs):
-            nonlocal calls
-            calls += 1
-            if calls == 2:
-                raise OSError("synthetic canonical-link failure")
-            return real_link(source, destination, **kwargs)
-
-        with mock.patch.object(gpu_runner.os, "link", side_effect=fail_second):
-            with self.assertRaisesRegex(OSError, "canonical-link failure"):
+        with mock.patch.object(
+            gpu_runner,
+            "_receipt_pair_checkpoint",
+            side_effect=OSError("synthetic canonical-publication failure"),
+        ):
+            with self.assertRaisesRegex(OSError, "canonical-publication failure"):
                 gpu_runner._write_new_json_pair(canonical, mirror, {"value": 1})
         self.assertTrue(mirror.is_file())
         self.assertFalse(canonical.exists())
         self.assertEqual(json.loads(mirror.read_text(encoding="utf-8")), {"value": 1})
-        self.assertEqual(list(canonical.parent.glob(".*.tmp-*")), [])
+        self.assertEqual(list(canonical.parent.glob(".publish-*.tmp")), [])
+
+    def test_mirror_only_failure_is_recovered_without_rerunning_model(self) -> None:
+        self.persist_early_failure()
+        self.output.unlink()
+        with mock.patch.object(gpu_runner, "_model_smoke_attempt") as attempt:
+            with self.assertRaisesRegex(RuntimeError, "requires invalidated-setup archival"):
+                self.run_smoke()
+        attempt.assert_not_called()
+        self.assert_valid_pair()
+
+    def test_canonical_only_failure_is_recovered_without_rerunning_model(self) -> None:
+        self.persist_early_failure()
+        self.mirror().unlink()
+        with mock.patch.object(gpu_runner, "_model_smoke_attempt") as attempt:
+            with self.assertRaisesRegex(RuntimeError, "requires invalidated-setup archival"):
+                self.run_smoke()
+        attempt.assert_not_called()
+        self.assert_valid_pair()
 
     def test_successful_pair_has_independent_inodes_and_tamper_isolated(self) -> None:
         canonical = self.experiment / "pair" / "canonical.json"
@@ -256,7 +277,7 @@ class ModelSmokeFailurePersistenceTests(unittest.TestCase):
         missing = self.output.parent / "missing-target.json"
         self.output.symlink_to(missing)
         with mock.patch.object(gpu_runner, "_model_smoke_attempt") as attempt:
-            with self.assertRaisesRegex(RuntimeError, "refusing to resume or overwrite"):
+            with self.assertRaisesRegex(RuntimeError, "stable strict-JSON receipt"):
                 self.run_smoke()
         attempt.assert_not_called()
         self.assertTrue(self.output.is_symlink())
@@ -268,22 +289,30 @@ class FailedReceiptAuthorizationTests(unittest.TestCase):
         config = load_config(ROOT / "configs" / "default.yaml")
         with tempfile.TemporaryDirectory(dir=ROOT / "tests") as directory:
             path = Path(directory) / "failure.json"
-            payload = gpu_runner._with_identity(
-                {
-                    "schema_version": 1,
-                    "status": "SETUP_CONTROL_FAILED",
-                    **gpu_runner._identity(config, phase="lora_g0"),
-                }
-            )
-            path.write_text(json.dumps(payload), encoding="utf-8")
-            with self.assertRaisesRegex(RuntimeError, "did not authorize"):
-                gpu_runner._read_receipt(
-                    path,
-                    config,
-                    statuses={"SETUP_CONTROL_FAILED"},
-                    phases={"lora_g0"},
-                    label="synthetic failed G0",
+            with mock.patch.object(
+                gpu_runner,
+                "design_lineage",
+                return_value={
+                    "sha256": "3" * 64,
+                    "receipt_identity_sha256": "4" * 64,
+                },
+            ):
+                payload = gpu_runner._with_identity(
+                    {
+                        "schema_version": 1,
+                        "status": "SETUP_CONTROL_FAILED",
+                        **gpu_runner._identity(config, phase="lora_g0"),
+                    }
                 )
+                path.write_text(json.dumps(payload), encoding="utf-8")
+                with self.assertRaisesRegex(RuntimeError, "did not authorize"):
+                    gpu_runner._read_receipt(
+                        path,
+                        config,
+                        statuses={"SETUP_CONTROL_FAILED"},
+                        phases={"lora_g0"},
+                        label="synthetic failed G0",
+                    )
 
     def test_g0_pass_requires_exact_access_and_authorization_contract(self) -> None:
         config = load_config(ROOT / "configs" / "default.yaml")
