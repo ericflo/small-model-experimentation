@@ -30,7 +30,8 @@ positive control then passed at identity `02a329d9…669a`: oracle 1.0, intact 4
 generic receipt consumers do not re-enforce every model/backend, access, scientific-evidence, and
 downstream-authorization field written by their producers, and that some runbook ordering barriers
 are not execution-enforced. No result stage ran. Source repair, archival, regeneration, and ordered
-setup replay are required before seed 7413 or scientific training. No training checkpoint,
+setup replay are required before seed 7413 or scientific training. The audit failure is durably
+preserved at receipt identity `18892121…3a13` and authorizes nothing. No training checkpoint,
 evaluation row, or terminal analysis from this directory should be cited as scientific evidence.
 
 Under the invalidated source, seed 7411 passed LoRA G0 and then scored 0/48 on the setup-only control.

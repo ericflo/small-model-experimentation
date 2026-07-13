@@ -126,7 +126,9 @@ notes: >-
   disabled 0/48, 256 updates, and 4,096 presentations. A pre-result authorization re-audit then found
   incomplete consumer-side enforcement of producer-written identity/access/authorization fields and
   runbook-only stage-order barriers. No result stage ran; source repair, archival, regeneration, and
-  ordered setup replay are required before any scientific training.
+  ordered setup replay are required before any scientific training. The source-d426 audit failure is
+  preserved at tracked receipt identity 1889212115ba1740039ff66b89eda4a02ea079573dc87f0d366a472ba39a3a13
+  and will be the invalidated-setup archive trigger after the replacement source is published.
   The first Qwen load stopped before wrapper construction or mechanics and is preserved by a tracked
   failure receipt; it opened
   only the permitted training validator, no sealed contrast, and produced no canonical G0 output.

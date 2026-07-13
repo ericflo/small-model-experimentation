@@ -626,6 +626,9 @@ until the seed-7412 control passes and is committed.
   re-enforce every producer-written model/backend, access, scientific-evidence, and downstream
   authorization field. It also found stage-ordering firewalls that exist in the runbook but are not
   all enforced at the execution boundary. No result was run.
+- The seven fail-open classes are preserved under the still-current source contract as a
+  nonauthorizing audit-failure receipt at identity `18892121…3a13`. It is the canonical trigger for
+  archiving source-d426 setup after the repaired source is published.
 
 ## Current authorization
 
