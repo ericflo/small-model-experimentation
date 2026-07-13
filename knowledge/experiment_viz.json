@@ -47127,6 +47127,35 @@
      "source": "experiments/qwen35_4b_state_carry_vs_state_bag/analysis/setup_compute_geometry.csv"
     }
    ]
+  },
+  "qwen35_4b_state_carry_vs_state_bag_fullrank_delta": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Full-rank feasibility gate must carry 13.30 GiB of delta training state",
+     "categories": [
+      "delta parameters",
+      "delta gradients",
+      "Adam moments"
+     ],
+     "series": [
+      {
+       "label": "FP32 memory",
+       "values": [
+        3.323974609375,
+        3.323974609375,
+        6.64794921875
+       ]
+      }
+     ],
+     "x_label": "full-rank delta training component",
+     "y_label": "memory (GiB)",
+     "y_format": "number",
+     "note": "Preregistered setup geometry, not a model result. The 892,272,640 direct full-rank delta parameters require 13.296 GiB for FP32 parameters, gradients, and Adam moments before the frozen model, activations, kernels, allocator slack, or optimizer temporaries; live G0 determines feasibility on the 48GB Ada GPU.",
+     "source": "experiments/qwen35_4b_state_carry_vs_state_bag_fullrank_delta/analysis/planned_delta_memory.csv"
+    }
+   ]
   }
  }
 }

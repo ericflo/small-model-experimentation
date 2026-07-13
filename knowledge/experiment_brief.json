@@ -6008,35 +6008,80 @@
    ]
   },
   "qwen35_4b_state_carry_vs_state_bag": {
-   "verdict_tag": "Does carrying memory forward beat repeating in parallel",
+   "verdict_tag": "LoRA did not form the running state this test needed",
    "concept_primer": "Imagine tracking a piece moving across a board. One method keeps a single running note, updating and feeding it into each next turn. The other re-reads the opening position many times independently and pools its guesses. Same total effort — does chaining the note win?",
    "plain_question": "When a small model repeats the same computation to solve a step-by-step puzzle, does chaining its memory forward beat pooling many fresh, independent passes?",
-   "plain_answer": "Not run yet — no live model call has happened; only the test rig is built and checked on a laptop. It will decide whether wiring repeated computation as one evolving memory beats pooling equal-compute independent passes. The bar is strict: the chained version must win by at least five accuracy points on longer, unseen puzzles, hold across three separate training runs, and survive causal memory-swap checks.",
-   "why_it_matters": "If chaining wins, small models can get deeper by looping one shared memory instead of sampling in parallel — cheaper reliability on multi-step tasks. If it does not, extra loops are mere repetition, and that compute is better spent on wider sampling.",
+   "plain_answer": "The first matched test did not answer that architecture question because the low-rank update failed to learn the required running state. Carrying memory improved overall accuracy by only 4.3 points, with uncertainty spanning a slight loss to a 9.4-point gain. More decisively, the model recovered the complete hidden path on just 0.46% of examples, far below the preregistered 40% floor, and swapping memory between examples did not make answers follow the donor. The three-run confirmation therefore stopped exactly as planned.",
+   "why_it_matters": "This is a useful negative checkpoint, not evidence that serial memory itself is ineffective. The low-rank training method may have been too restrictive to create a deep internal representation. A fresh successor now replaces it with unrestricted full-size updates only on the extra repeated passes while keeping the task, compute comparison, seeds, and causal checks fixed.",
+   "verdict_tone": "negative",
+   "key_numbers": [
+    {
+     "label": "Carry minus parallel-pool accuracy",
+     "value": "+4.3 points",
+     "sub": "paired 95% interval: -0.8 to +9.4 points"
+    },
+    {
+     "label": "Complete hidden paths recovered",
+     "value": "0.46%",
+     "sub": "the preregistered state-formation floor was 40%"
+    },
+    {
+     "label": "Unseen task-family gain",
+     "value": "+5.1 points",
+     "sub": "paired 95% interval: +0.8 to +9.8 points, but without a readable full state"
+    },
+    {
+     "label": "Answer gain from following donor memory",
+     "value": "+0.8 points",
+     "sub": "paired 95% interval: -2.3 to +3.9 points"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Carry and parallel pooling received exactly the same repeated-compute budget",
+     "chart_read": "Each pair of bars shows the total decoder-layer work at one, four, eight, or twelve middle-block passes. The Carry and pooled comparison bars overlap at every depth.",
+     "chart_takeaway": "The negative pilot cannot be explained by giving one arm less computation; the unresolved issue is whether low-rank training prevented the deeper running state from forming."
+    }
+   ]
+  },
+  "qwen35_4b_state_carry_vs_state_bag_fullrank_delta": {
+   "verdict_tag": "Can unrestricted updates form the missing running state",
+   "concept_primer": "The first test changed each large weight matrix through a narrow bottleneck, which is memory-efficient but limits the directions training can move. This successor gives every repeated-pass matrix a full-size change of its own while leaving the ordinary one-pass model untouched.",
+   "plain_question": "Was the failed running memory caused by the serial architecture, or did the low-rank training update prevent the model from building a sufficiently rich internal state?",
+   "plain_answer": "Not run yet. The reviewed successor changes only the update capacity on extra repeated passes: 62 zero-starting full-size matrices replace the low-rank adapters. It will first prove exact one-pass behavior, equal Carry-versus-pool compute, real gradients and optimizer state, worst-depth stability, and checkpoint restoration on the live 48GB GPU. Only then may the matched pilot run.",
+   "why_it_matters": "A second failure after the full-size updates successfully train would make the capacity explanation much less plausible under this held-fixed design. If a readable running state appears, the experiment continues through the same answer, edge-cut, and memory-swap tests instead of treating representation alone as success.",
    "verdict_tone": "neutral",
    "key_numbers": [
     {
-     "label": "Practice length versus test length",
-     "value": "4 to 12 steps",
-     "sub": "trained on 4-step puzzles, tested on unseen puzzles up to 12 steps"
+     "label": "Full-size update parameters",
+     "value": "892,272,640",
+     "sub": "62 zero-initialized matrices on extra repeated passes only"
     },
     {
-     "label": "Winning margin needed to count",
-     "value": "at least 5 points",
-     "sub": "chained-memory accuracy minus pooled-passes accuracy on unseen puzzles"
+     "label": "Update training state before activations",
+     "value": "13.296 GiB",
+     "sub": "parameters, gradients, and two Adam moment tensors in FP32"
     },
     {
-     "label": "Independent training runs that must agree",
-     "value": "3",
-     "sub": "the advantage must appear across all three, not cherry-picked"
+     "label": "Ordinary one-pass change allowed",
+     "value": "exactly zero",
+     "sub": "the base path must match bit-for-bit before and after an optimizer step"
     },
     {
-     "label": "Memory-swap causal test bar",
-     "value": "at least 10 points",
-     "sub": "how much more the answer must follow a swapped-in memory than resist it"
+     "label": "Live GPU capacity",
+     "value": "48 GB",
+     "sub": "the feasibility gate measures actual peak allocation, reservation, and headroom"
     }
    ],
-   "charts": []
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "The full-size update needs 13.30 GiB before model activations",
+     "chart_read": "The three bars split memory among the update weights, their gradients, and Adam's two running statistics. The statistics bar is twice either single-tensor bar because Adam keeps two values per weight.",
+     "chart_takeaway": "The planned training state is already substantial, so a real optimizer step and worst-depth pass—not arithmetic alone—decide whether this design fits the 48GB GPU."
+    }
+   ]
   },
   "qwen35_4b_static_bridge_ceiling_breaker": {
    "verdict_tag": "A few harder examples double transfer, then stall",

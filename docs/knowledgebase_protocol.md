@@ -37,10 +37,13 @@ Use these labels in synthesis notes:
 
 ## Updating Generated Files
 
-Generated tracked files are a pure function of repo content: generators must never
+Generated tracked files are a pure function of Git-visible repo content: catalog inventory
+uses tracked plus untracked nonignored files and excludes anything matched by repository or
+experiment-local `.gitignore` rules. Large/external payloads belong in artifact manifests and
+small tracked receipts, not catalog file counts. Generators must never
 write wall-clock values (`datetime.now()`, `date.today()`) into them, so regenerating
 on any day is byte-identical unless content actually changed. `make validate` enforces
-this on `scripts/` and `benchmarks/`.
+the time invariant, while `make catalog-test` enforces ignored-artifact invariance.
 
 Do not hand-edit generated files:
 

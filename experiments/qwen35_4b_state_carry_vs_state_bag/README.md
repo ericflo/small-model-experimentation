@@ -1,6 +1,9 @@
 # State-Carry Versus State-Bag Counterfactual
 
-**Status:** in-progress · since 2026-07-12 · seed-7401 LoRA pilot retry is next; the first paired pilot was invalidated and no LoRA verdict exists yet.
+**Terminal LoRA status: `PILOT_MECHANISM_MISS`.** The fixed-source, independently seeded
+rank-32 LoRA pilot was valid and complete, but it failed the preregistered deep-state-formation
+gate. Confirmation and sample-more were therefore not run. This result mandates a fresh
+full-rank extra-R-delta successor; it does not close the serial-state question.
 
 ## Research Program
 
@@ -14,6 +17,26 @@
 When parameters, data, optimization, readout, and decoder-layer token applications are matched, does organizing repeated Qwen computation as one serially carried state produce a representation that is more capable than aggregating the same number of independent shallow states?
 
 This experiment is deliberately not satisfied by “looping helps.” A positive requires State-Carry to beat a separately trained State-Bag twin, improve when test-time recurrence exceeds the trained `K=4` horizon, accurately track the registered joint state, transfer to the joint family+surface holdout, lose its benefit when the carry edge is cut, and behave causally under state swaps.
+
+## Pilot Result
+
+The source-bound seed-7401 Carry/Bag pilot completed all registered cells and diagnostics with
+matched initialization, data order, prompt tokens, decoder-layer-token applications, and exact
+post-checkpoint K=1 parity. The analyzer emitted `PILOT_MECHANISM_MISS` because Carry's mean joint
+node+phase+checksum step accuracy was `0.0045948`, far below the `0.40` promotion threshold; node
+step accuracy was `0.0641912`. This is a valid failure to form the registered deep joint state, not
+a mechanics, data-integrity, or infeasible-gate stop.
+
+The answer-level signs were insufficient to override that failure. Matched-depth Carry minus Bag
+was `+0.04296875` on 256 tasks (pilot 95% interval `[-0.0078125, 0.09375]`), and unseen-K Carry
+minus K=4 was `+0.01171875` (`[-0.03515625, 0.05859375]`). Both query strata were positive and the
+joint holdout diagnostic was `+0.05078125` (`[0.0078125, 0.09765625]`), but donor following changed
+by only `+0.0078125` under swaps (`[-0.0234375, 0.0390625]`) and remained below recipient
+preservation by `0.0546875`.
+
+No seeds 7411–7413 were trained or evaluated. The same-checkpoint edge cut and the explicit-CoT
+sample-more comparator were not licensed. These missing stages are consequences of the registered
+pilot stop, not missing evidence for a full-run claim.
 
 ## Architecture
 
@@ -65,21 +88,13 @@ invalid gates require repair rather than a capacity test. A readable-but-unused 
 sample-more-only loss does not trigger full rank because LoRA has then already formed the deeper
 representation; the former instead licenses the separately controlled interface successor.
 
-## Run Order
+## Terminal Disposition
 
-From the repository root, rebuild the pinned `.venv` first. Then:
-
-```bash
-# Fresh CPU smoke plus unit contracts; the committed older smoke is superseded.
-python3 experiments/qwen35_4b_state_carry_vs_state_bag/scripts/run.py --smoke
-python3 -m unittest discover -s experiments/qwen35_4b_state_carry_vs_state_bag/tests -v
-
-# Deterministic full data and live Qwen mechanics gate.
-.venv/bin/python experiments/qwen35_4b_state_carry_vs_state_bag/scripts/run.py --stage prepare-data
-.venv/bin/python experiments/qwen35_4b_state_carry_vs_state_bag/scripts/run.py --stage model-smoke
-```
-
-The CLI now refuses pilot training without a source/config-matched `MODEL_SMOKE_PASS`, refuses full training without `PILOT_PROMOTION_READY`, rejects intermediate or wrong-phase checkpoints, and refuses the text comparator before a causal mechanistic pass. The precise pilot, promotion, multiseed, and sample-more commands are in [`docs/gpu_runbook.md`](docs/gpu_runbook.md).
+Do not advance this LoRA experiment to G2, edge-cut confirmation, or G4. Preserve its valid negative
+and the earlier invalidated analysis-dispatch attempt. The next authorized capacity test is a new
+experiment directory using zero-initialized full-rank weight deltas on layers 12–19 only during extra
+R applications, with the ordinary first pass, coda, exact K=1 path, Carry/Bag counterfactual, pilot
+firewall, and causal gates held fixed.
 
 ## Primary Metrics
 
@@ -99,5 +114,5 @@ The fail-closed verdict ladder is defined in [`reports/preregistration.md`](repo
 
 - Source and tests are committed here.
 - Generated full JSONL is deterministic across Python hash seeds and gitignored under `data/generated/`; its manifest binds the generator/source contract and hashes are produced at runtime.
-- Adapters, loop state, and checkpoint receipts live under `large_artifacts/qwen35_4b_state_carry_vs_state_bag/` and are declared in [`reports/artifact_manifest.yaml`](reports/artifact_manifest.yaml).
+- Realized pilot adapters, loop state, checkpoint/run identities, and hashes live under `large_artifacts/qwen35_4b_state_carry_vs_state_bag/pilot_{carry,bag}_seed7401/` and are declared in [`reports/artifact_manifest.yaml`](reports/artifact_manifest.yaml).
 - Small evaluation rows, summaries, and paired analysis remain under `runs/` and `analysis/` unless size requires manifesting them.

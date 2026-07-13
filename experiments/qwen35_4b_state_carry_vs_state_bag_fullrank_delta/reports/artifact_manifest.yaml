@@ -1,0 +1,16 @@
+schema_version: 1
+experiment_id: "qwen35_4b_state_carry_vs_state_bag_fullrank_delta"
+external_artifacts: []
+omitted_artifacts:
+  - path: "experiments/qwen35_4b_state_carry_vs_state_bag_fullrank_delta/data/generated/*.jsonl.gz"
+    reason: "deterministic procedural corpus; regeneration must pass the frozen canonical parent-row contract"
+  - path: "large_artifacts/qwen35_4b_state_carry_vs_state_bag_fullrank_delta/"
+    reason: "future ~3.3 GiB direct-delta checkpoints and loop-state files are external by policy"
+reproducibility:
+  smoke_command: "python3 experiments/qwen35_4b_state_carry_vs_state_bag_fullrank_delta/scripts/run.py --smoke"
+  full_command: "phase-gated and authorized; follow docs/gpu_runbook.md from parent-trigger validation through the licensed stop"
+  required_external_artifacts: []
+notes: >-
+  Setup only. No full data, model-smoke, checkpoint, evaluation, or scientific
+  artifact exists. At run time the parent LoRA analysis summary is a required
+  trigger input but is not copied or modified by this experiment.

@@ -1,0 +1,150 @@
+schema_version: 1
+experiment_id: qwen35_4b_state_carry_vs_state_bag_fullrank_delta
+evidence_profile: confirmatory
+parent_experiment:
+  id: qwen35_4b_state_carry_vs_state_bag
+  trigger: valid_deep_state_formation_failure
+  trigger_receipt_required: true
+  config_sha256: 70e4a2d6df7acb0c5a21c7c945c66499a0ede8e98321c7b56da1c080c819744b
+  source_contract_sha256: ef2dd25107cb306490e30dba8ac3035c8c69c76173cec62390557cf1add7a28d
+  data_manifest_sha256: 2cf9a4d008d0990873928424170ab5daf0a53473a9f97e542d8739ac6de92879
+  receipt_identity_sha256: c9fec5b584bef5aa3de40844a8552395f3c3f0f95f79285700a9e4e375aed0ef
+parent_data_contract:
+  # Frozen from canonical decompressed rows in the parent LoRA experiment.
+  # This is intentionally content-addressed: regeneration remains self-contained,
+  # while a changed row, ID, order, split, or count fails before training.
+  parent_experiment_id: qwen35_4b_state_carry_vs_state_bag
+  canonicalization: sorted_compact_json_plus_lf
+  splits:
+    counterfactual: {rows: 1024, canonical_rows_sha256: 811af8faba6fc742a0cc13d154e1ed630f7d2be817b7e7ab8e89cd6acea239d0}
+    depth_extrapolation: {rows: 3200, canonical_rows_sha256: 62aab1d4eeb321434afdc5589e7672c2a6728500999669eb7b4deda248248a7f}
+    family_holdout: {rows: 3200, canonical_rows_sha256: b6bdda7ef613c63f8bb8bb8b3e5371aaad5afc0bbc0f2f91eef55bcb001e58b3}
+    joint_holdout: {rows: 3200, canonical_rows_sha256: 1604cc7d501186e6a48751059b6190d6be83fce6663a5cb927613084992eb250}
+    pilot_counterfactual: {rows: 128, canonical_rows_sha256: 88d7c3686dd61ee4ef8161b92ed4715a77d47a2d4ac4825355b36974c10f9e0f}
+    pilot_depth: {rows: 256, canonical_rows_sha256: dc637d7a12aaf739203b3a939c878c7295843b8f50f0c3a96ead0e938ff6a4bf}
+    pilot_joint: {rows: 256, canonical_rows_sha256: 9444c19b669d9327c2b9e5747c44ec136d20c088e0cda1064160ef6e010d907e}
+    pilot_validation: {rows: 256, canonical_rows_sha256: 56a585f4183eccb14abe05029c5c9f7114b506ad2c51012f1e56bc09f531cff3}
+    template_holdout: {rows: 3200, canonical_rows_sha256: eaf38f4eea1667e952ef227bad118830e9341eae32dec2eac7feee2c6707d7c7}
+    train: {rows: 12000, canonical_rows_sha256: f0c58eb7e235d2b7a85913ad5d808bb21efebb072d1c548466559e988bfce792}
+    validation: {rows: 1024, canonical_rows_sha256: fa2f4e407a8170eedbaf2bab593ae1d658aae01dc7683afecdc5d3e0faaebfe7}
+
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+  backend: transformers
+  transformers_version: 5.13.0
+  dtype: bfloat16
+  attention_implementation: sdpa
+  trust_remote_code: true
+  use_cache: false
+
+architecture:
+  # Two complete [linear, linear, linear, full-attention] Qwen3.5 motifs.
+  loop_start: 12
+  loop_end: 20
+  expected_num_layers: 32
+  expected_layer_pattern:
+    - linear_attention
+    - linear_attention
+    - linear_attention
+    - full_attention
+  state_token: <|fim_pad|>
+  state_slots: 8
+  max_recurrence: 12
+  step_encoding_dim: 64
+  state_adapter_rank: 64
+  damping_initial: 0.125
+  aggregate_last_initial: 0.90
+  semantic_echo:
+    mode: continuous
+  full_rank_delta:
+    mode: direct_weight_delta
+    expected_targets: 62
+    expected_parameters: 892272640
+    parameter_dtype: float32
+    initialization: zeros
+    dropout: 0.05
+    scale: 2.0
+    target_loop_only: true
+    active_on_extra_calls_only: true
+
+substrate:
+  node_count: 16
+  checksum_modulus: 8
+  num_choices: 4
+  max_generation_attempts: 500
+  train_families:
+    - phase_branch
+    - checksum_branch
+  heldout_family: braided_branch
+  train_templates:
+    - ledger
+    - prose
+  heldout_template: compact
+  train_depths: [1, 2, 3, 4]
+  extrapolation_depths: [5, 6, 7, 8, 9, 10, 11, 12]
+  train_examples: 12000
+  validation_examples: 1024
+  pilot_validation_examples: 256
+  evaluation_examples_per_split: 3200
+  pilot_examples_per_split: 256
+  counterfactual_pairs: 512
+  pilot_counterfactual_pairs: 64
+  seeds:
+    train: 73101
+    validation: 73102
+    depth: 73103
+    family: 73104
+    template: 73105
+    counterfactual: 73106
+    joint: 73107
+    pilot_depth: 73108
+    pilot_joint: 73109
+    pilot_counterfactual: 73110
+    pilot_validation: 73111
+
+training:
+  train_k: 4
+  train_steps: 1500
+  pilot_steps: 300
+  batch_size: 1
+  gradient_accumulation: 16
+  learning_rate: 0.0002
+  weight_decay: 0.01
+  warmup_fraction: 0.05
+  gradient_clip: 1.0
+  answer_loss_weight: 1.0
+  state_loss_weight: 0.50
+  fixed_point_loss_weight: 0.05
+  eval_every_steps: 100
+  save_every_steps: 1500
+  pilot_seed: 7401
+  train_seeds: [7411, 7412, 7413]
+
+evaluation:
+  k_values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+  primary_depths: [5, 6, 7, 8, 9, 10, 11, 12]
+  curve_items_per_depth: 64
+  holdout_items_per_depth: 128
+  bootstrap_resamples: 10000
+  bootstrap_seed: 75101
+  require_same_backend: true
+
+gates:
+  # Mechanics and scientific gates are deliberately independent.
+  k1_max_logit_abs_error: 0.00001
+  exact_parameter_count_match: true
+  min_state_joint_accuracy: 0.40
+  min_carry_minus_bag: 0.05
+  min_edge_cut_gain: 0.0
+  min_joint_holdout_carry_minus_bag: 0.0
+  min_carry_answer_mode_rate: 0.95
+  min_positive_primary_depths: 6
+  require_paired_lower_bound_above_zero: true
+  require_unseen_k_gain: true
+  min_donor_follow_gain: 0.10
+
+paths:
+  data_dir: data/generated
+  runs_dir: runs
+  large_artifacts_dir: ../../large_artifacts/qwen35_4b_state_carry_vs_state_bag_fullrank_delta

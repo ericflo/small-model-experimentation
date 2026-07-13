@@ -2,25 +2,19 @@
 
 ## Next Experiments
 
-- Architecture-counterfactual setup ready: `qwen35_4b_state_carry_vs_state_bag`
-  repeats two full-width Qwen3.5 hybrid motifs and compares one inherited latent
-  state against an equal-parameter/equal-decoder-layer-token bag of reset shallow states. It
-  has a fresh query-after-state substrate, an independent pilot seed/firewall,
-  K=1 parity, crossed task×seed inference, unseen-K/depth extrapolation,
-  same-checkpoint edge cuts, bidirectional geometry-matched state swaps, a joint
-  holdout gate, and interface-qualified matched-layer-token-budget explicit-CoT sampling.
-  The first G0/pilot attempt is preserved but invalidated by a fail-closed pilot/full analysis-dispatch
-  bug. That bug is fixed and regression-tested, and the fresh source-bound CPU/data/G0 gate passed;
-  the next action is the seed-7401 paired pilot retry—not an expensive full sweep. Mixed semantic echo was removed and requires a fresh
-  successor if continuous state proves readable but unused.
-- Conditional capacity successor: if a valid rank-32 LoRA outcome fails to establish
-  deep state formation, create and execute a fresh experiment that
-  replaces extra-call LoRA with zero-initialized full-rank deltas on layers 12–19.
-  Keep the base first pass/coda frozen and K=1 exact. This is mandatory to resolve
-  whether low rank, rather than serial state, caused the negative. Mechanics/data
-  failures and infeasible gates are not capacity evidence; a sample-more-only loss
-  or strongly readable-but-unused state means LoRA already formed the representation,
-  with the latter routed to the controlled interface successor.
+- LoRA architecture counterfactual completed at its registered pilot stop:
+  `qwen35_4b_state_carry_vs_state_bag` emitted valid `PILOT_MECHANISM_MISS`. The fixed-source pilot
+  was complete and matched, but Carry joint state accuracy was 0.00459 versus the 0.40 gate; the
+  +0.043 answer effect was uncertain and swaps were noncausal. Do not run its confirmation or
+  sample-more stages, and do not reinterpret the earlier invalidated analysis-dispatch attempt.
+- **Next mandatory experiment:** execute the now-created and adversarially reviewed
+  `qwen35_4b_state_carry_vs_state_bag_fullrank_delta` successor specified by the LoRA
+  preregistration. It replaces rank-32 LoRA with zero-initialized full-rank weight deltas on
+  Qwen layers 12–19, enabled only during extra R applications. Keep `Qwen/Qwen3.5-4B`, the frozen
+  base first pass and coda, exact K=1 logits, Carry/Bag parameter and compute equality, procedural
+  substrate, independent pilot firewall, crossed confirmation, same-checkpoint edge cut, and
+  bidirectional swap gates fixed. This successor must determine whether low-rank plasticity caused
+  the valid state-formation miss; do not leave the serial-state question closed by the LoRA pilot.
 - Cross-program interface probe completed:
   `qwen35_4b_commit_slot_jacobian_value_transport` showed that a fixed latent
   answer slot repairs formatting but its semantic hint remains task/alias

@@ -11,9 +11,12 @@ from __future__ import annotations
 
 import csv
 import json
+import os
 import re
+import subprocess
 from collections import Counter, defaultdict
 from pathlib import Path
+from typing import Iterable
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -79,6 +82,56 @@ COMMAND_PATTERNS = [
 ]
 
 SCRIPT_EXTENSIONS = {".py", ".sh", ".bash", ".ipynb", ".R", ".jl"}
+
+
+def git_visible_experiment_files() -> list[Path]:
+    """Return tracked and untracked-nonignored experiment files.
+
+    Generated catalogs must describe the repository view that a fresh checkout
+    can reproduce.  Raw ``Path.rglob`` scans also see gitignored corpora,
+    adapters, caches, and other external artifacts, which makes local catalog
+    output diverge from CI.  ``--cached --others --exclude-standard`` preserves
+    normal pre-commit scaffolding while excluding every applicable Git ignore
+    rule, including experiment-local ``.gitignore`` files.
+    """
+    completed = subprocess.run(
+        [
+            "git",
+            "ls-files",
+            "--cached",
+            "--others",
+            "--exclude-standard",
+            "-z",
+            "--",
+            "experiments",
+        ],
+        cwd=ROOT,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    if completed.returncode != 0:
+        message = os.fsdecode(completed.stderr).strip()
+        raise SystemExit(f"catalog generation requires a Git worktree: {message}")
+    paths = {
+        ROOT / os.fsdecode(raw_path)
+        for raw_path in completed.stdout.split(b"\0")
+        if raw_path
+    }
+    return sorted(path for path in paths if path.is_file())
+
+
+def files_by_experiment(files: Iterable[Path]) -> dict[Path, list[Path]]:
+    grouped: dict[Path, list[Path]] = defaultdict(list)
+    for path in files:
+        try:
+            relative = path.relative_to(EXPERIMENTS)
+        except ValueError:
+            continue
+        if len(relative.parts) < 2:
+            continue
+        grouped[EXPERIMENTS / relative.parts[0]].append(path)
+    return {exp: sorted(paths) for exp, paths in grouped.items()}
 
 
 def parse_inline_list(value: str) -> list[str]:
@@ -204,9 +257,9 @@ def title_from_slug(slug: str) -> str:
     return " ".join(w.upper() if w in {"abi", "rag", "vm", "dpo", "rl"} else w.capitalize() for w in words)
 
 
-def source_track_for(exp: Path) -> str:
+def source_track_for(exp: Path, files: set[Path]) -> str:
     metadata = exp / "metadata.yaml"
-    existing = metadata_value(metadata, "source_track")
+    existing = metadata_value(metadata, "source_track") if metadata in files else ""
     if existing:
         return existing
     return "new"
@@ -258,21 +311,31 @@ def generated_stub_summary(text: str) -> str:
     return first_paragraph(match.group(1))
 
 
-def find_primary_report(exp: Path) -> Path | None:
+def find_primary_report(exp: Path, files: set[Path]) -> Path | None:
     candidates: list[Path] = []
     reports = exp / "reports"
-    if reports.exists():
-        for pattern in [
-            "final_report.md",
-            "*_report.md",
-            "report.md",
-            "*_paper.md",
-            "*summary.md",
-            "*.md",
-        ]:
-            candidates.extend(sorted(reports.rglob(pattern)))
+    report_files = [
+        path
+        for path in files
+        if path.suffix.lower() == ".md" and reports in path.parents
+    ]
+    for pattern in [
+        "final_report.md",
+        "*_report.md",
+        "report.md",
+        "*_paper.md",
+        "*summary.md",
+        "*.md",
+    ]:
+        candidates.extend(
+            sorted(
+                path
+                for path in report_files
+                if path.relative_to(reports).match(pattern)
+            )
+        )
     analysis_summary = exp / "analysis" / "summary.md"
-    if analysis_summary.exists():
+    if analysis_summary in files:
         candidates.append(analysis_summary)
     seen = set()
     unique: list[Path] = []
@@ -283,9 +346,11 @@ def find_primary_report(exp: Path) -> Path | None:
     return unique[0] if unique else None
 
 
-def summarize(exp: Path, primary_report: Path | None) -> tuple[str, str]:
+def summarize(
+    exp: Path, primary_report: Path | None, files: set[Path]
+) -> tuple[str, str]:
     readme = exp / "README.md"
-    text = read_text(readme, 6000)
+    text = read_text(readme, 6000) if readme in files else ""
     if not text and primary_report:
         text = read_text(primary_report, 6000)
     title = first_heading(text) or title_from_slug(exp.name)
@@ -302,13 +367,11 @@ def extension(path: Path) -> str:
     return suffix if suffix else "[none]"
 
 
-def file_stats(exp: Path) -> tuple[Counter[str], int, int]:
+def file_stats(files: Iterable[Path]) -> tuple[Counter[str], int, int]:
     counts: Counter[str] = Counter()
     total_size = 0
     total_files = 0
-    for path in exp.rglob("*"):
-        if not path.is_file():
-            continue
+    for path in files:
         if excluded(path.relative_to(ROOT)):
             continue
         counts[extension(path)] += 1
@@ -317,12 +380,13 @@ def file_stats(exp: Path) -> tuple[Counter[str], int, int]:
     return counts, total_files, total_size
 
 
-def top_level_dirs(exp: Path) -> list[str]:
-    return sorted(
-        path.name
-        for path in exp.iterdir()
-        if path.is_dir() and path.name not in EXCLUDED_DIR_NAMES
-    )
+def top_level_dirs(exp: Path, files: Iterable[Path]) -> list[str]:
+    directories = set()
+    for path in files:
+        relative = path.relative_to(exp)
+        if len(relative.parts) > 1 and relative.parts[0] not in EXCLUDED_DIR_NAMES:
+            directories.add(relative.parts[0])
+    return sorted(directories)
 
 
 def tags_for(slug: str, title: str, summary: str) -> list[str]:
@@ -345,9 +409,14 @@ def programs_for(exp_id: str, tags: list[str]) -> list[str]:
     return sorted(set(assigned)) or ["program_review_needed"]
 
 
-def research_programs_for(exp: Path, tags: list[str]) -> list[str]:
+def research_programs_for(
+    exp: Path, tags: list[str], files: set[Path]
+) -> list[str]:
     generated = set(programs_for(exp.name, tags))
-    existing = set(metadata_list(exp / "metadata.yaml", "research_programs"))
+    metadata = exp / "metadata.yaml"
+    existing = set(
+        metadata_list(metadata, "research_programs") if metadata in files else []
+    )
     assigned = (generated | existing) - {"program_review_needed"}
     if assigned:
         return sorted(assigned)
@@ -423,23 +492,25 @@ def write_missing_readme(record: dict[str, object]) -> bool:
 def collect_records() -> list[dict[str, object]]:
     if not EXPERIMENTS.exists():
         raise SystemExit("experiments/ does not exist")
+    grouped_files = files_by_experiment(git_visible_experiment_files())
     records: list[dict[str, object]] = []
-    for exp in sorted(path for path in EXPERIMENTS.iterdir() if path.is_dir()):
-        primary_report = find_primary_report(exp)
-        title, summary = summarize(exp, primary_report)
-        counts, total_files, total_size = file_stats(exp)
+    for exp, experiment_files in sorted(grouped_files.items()):
+        file_set = set(experiment_files)
+        primary_report = find_primary_report(exp, file_set)
+        title, summary = summarize(exp, primary_report, file_set)
+        counts, total_files, total_size = file_stats(experiment_files)
         tags = tags_for(exp.name, title, summary)
         record = {
             "id": exp.name,
             "title": title,
-            "source_track": source_track_for(exp),
+            "source_track": source_track_for(exp, file_set),
             "path": rel(exp),
-            "primary_readme": rel(exp / "README.md") if (exp / "README.md").exists() else "",
+            "primary_readme": rel(exp / "README.md") if (exp / "README.md") in file_set else "",
             "primary_report": rel(primary_report),
             "summary": summary,
             "tags": tags,
-            "research_programs": research_programs_for(exp, tags),
-            "top_level_dirs": top_level_dirs(exp),
+            "research_programs": research_programs_for(exp, tags, file_set),
+            "top_level_dirs": top_level_dirs(exp, experiment_files),
             "file_counts": dict(counts),
             "total_files": total_files,
             "total_size_bytes": total_size,
@@ -615,8 +686,8 @@ def write_artifact_index(records: list[dict[str, object]]) -> None:
         ext_counts.update(record["file_counts"])
         for dirname in record["top_level_dirs"]:
             dir_counts[str(dirname)] += 1
-    for path in EXPERIMENTS.rglob("*"):
-        if path.is_file() and not excluded(path.relative_to(ROOT)):
+    for path in git_visible_experiment_files():
+        if not excluded(path.relative_to(ROOT)):
             largest.append((path.stat().st_size, rel(path)))
     largest.sort(reverse=True)
 
@@ -671,9 +742,12 @@ def is_artifact_manifest_file(path: Path) -> bool:
 def artifact_manifest_rows(records: list[dict[str, object]]) -> list[dict[str, str]]:
     rows: list[dict[str, str]] = []
     record_ids = {str(record["id"]) for record in records}
-    for exp in sorted(path for path in EXPERIMENTS.iterdir() if path.is_dir() and path.name in record_ids):
-        for path in sorted(exp.rglob("*")):
-            if not path.is_file() or excluded(path.relative_to(ROOT)):
+    grouped_files = files_by_experiment(git_visible_experiment_files())
+    for exp, experiment_files in sorted(grouped_files.items()):
+        if exp.name not in record_ids:
+            continue
+        for path in experiment_files:
+            if excluded(path.relative_to(ROOT)):
                 continue
             if not is_artifact_manifest_file(path):
                 continue
@@ -704,14 +778,17 @@ def experiment_docs(record: dict[str, object]) -> str:
     return "\n".join(read_text(path, 20000) for path in paths)
 
 
-def experiment_script_paths(exp: Path) -> list[Path]:
+def experiment_script_paths(exp: Path, files: Iterable[Path]) -> list[Path]:
     paths: list[Path] = []
     scripts = exp / "scripts"
-    if scripts.exists():
-        paths.extend(path for path in scripts.rglob("*") if path.is_file() and path.suffix in SCRIPT_EXTENSIONS)
+    paths.extend(
+        path
+        for path in files
+        if scripts in path.parents and path.suffix in SCRIPT_EXTENSIONS
+    )
     for name in ["Makefile", "run.sh", "train.py", "eval.py", "evaluate.py"]:
         path = exp / name
-        if path.exists() and path.is_file():
+        if path in files:
             paths.append(path)
     return sorted(set(paths))
 
@@ -732,8 +809,9 @@ def has_smoke_signal(record: dict[str, object], scripts: list[Path]) -> bool:
     return False
 
 
-def run_surface(record: dict[str, object], scripts: list[Path]) -> str:
-    exp = ROOT / str(record["path"])
+def run_surface(
+    record: dict[str, object], scripts: list[Path], artifact_names: list[str]
+) -> str:
     docs = experiment_docs(record)
     documented = has_command_signal(docs)
     if documented and scripts:
@@ -742,21 +820,36 @@ def run_surface(record: dict[str, object], scripts: list[Path]) -> str:
         return "documented-command"
     if scripts:
         return "scripts-undocumented"
-    if any((exp / dirname).exists() for dirname in ["src", "analysis"]):
+    if any(dirname in artifact_names for dirname in ["src", "analysis"]):
         return "source-or-analysis"
-    if any((exp / dirname).exists() for dirname in ["data", "runs", "reports"]):
+    if any(dirname in artifact_names for dirname in ["data", "runs", "reports"]):
         return "artifact-only"
     return "unknown"
 
 
-def recognized_artifacts(exp: Path) -> list[str]:
-    names = [name for name in ["src", "scripts", "configs", "data", "runs", "analysis", "reports"] if (exp / name).exists()]
-    names.extend(name for name in ["experiment_log.md", "checkpoint_manifest.csv"] if (exp / name).exists())
+def recognized_artifacts(exp: Path, files: Iterable[Path]) -> list[str]:
+    file_set = set(files)
+    directory_names = {
+        path.relative_to(exp).parts[0]
+        for path in file_set
+        if len(path.relative_to(exp).parts) > 1
+    }
+    names = [
+        name
+        for name in ["src", "scripts", "configs", "data", "runs", "analysis", "reports"]
+        if name in directory_names
+    ]
+    names.extend(
+        name
+        for name in ["experiment_log.md", "checkpoint_manifest.csv"]
+        if exp / name in file_set
+    )
     return names
 
 
 def readiness_rows(records: list[dict[str, object]]) -> list[dict[str, str]]:
     manifest_rows = artifact_manifest_rows(records)
+    grouped_files = files_by_experiment(git_visible_experiment_files())
     manifest_by_experiment: dict[str, list[dict[str, str]]] = defaultdict(list)
     for row in manifest_rows:
         manifest_by_experiment[row["experiment_id"]].append(row)
@@ -765,14 +858,16 @@ def readiness_rows(records: list[dict[str, object]]) -> list[dict[str, str]]:
     for record in records:
         exp = ROOT / str(record["path"])
         exp_id = str(record["id"])
-        scripts = experiment_script_paths(exp)
+        experiment_files = grouped_files.get(exp, [])
+        file_set = set(experiment_files)
+        scripts = experiment_script_paths(exp, file_set)
         status = readme_status(record)
         report = bool(record["primary_report"])
-        log = (exp / "experiment_log.md").exists()
-        artifact_names = recognized_artifacts(exp)
+        log = exp / "experiment_log.md" in file_set
+        artifact_names = recognized_artifacts(exp, experiment_files)
         manifests = manifest_by_experiment.get(exp_id, [])
         manifest_kinds = sorted(set(row["kind"] for row in manifests))
-        surface = run_surface(record, scripts)
+        surface = run_surface(record, scripts, artifact_names)
         smoke = has_smoke_signal(record, scripts)
         programs = [str(program) for program in record["research_programs"]]
 

@@ -6,30 +6,52 @@ external_artifacts:
     required_for: "audit of the fail-closed pilot/full analysis-dispatch failure; never valid for scientific pooling"
     checksum: "preserved run/checkpoint/evaluation receipts contain their original source, tensor, and row hashes"
     regenerate: "do not regenerate or overwrite; the fixed source requires a fresh canonical retry"
-  - name: "pilot Carry/Bag checkpoints"
-    storage: "large_artifacts/qwen35_4b_state_carry_vs_state_bag/pilot_{carry,bag}_seed7401/"
-    required_for: "audit of the independent promotion decision"
-    checksum: "pending run; each checkpoint.json hashes every adapter file and loop_state.pt"
-    regenerate: "follow experiments/qwen35_4b_state_carry_vs_state_bag/docs/gpu_runbook.md section 4"
-  - name: "continuous Carry/Bag checkpoints"
-    storage: "large_artifacts/qwen35_4b_state_carry_vs_state_bag/{carry,bag}_seed{7411,7412,7413}/"
-    required_for: "full mechanism replication and exact evaluation reruns after execution"
-    checksum: "pending run; each checkpoint.json hashes every adapter file and loop_state.pt, and reload enforces them"
-    regenerate: "follow experiments/qwen35_4b_state_carry_vs_state_bag/docs/gpu_runbook.md sections 5-6"
-  - name: "explicit textual state-trace adapters"
-    storage: "large_artifacts/qwen35_4b_state_carry_vs_state_bag/text_seed*/"
-    required_for: "matched decoder-layer-token-budget sample-more comparison after a mechanism pass"
-    checksum: "pending conditional run; each checkpoint.json hashes every adapter file"
-    regenerate: "follow experiments/qwen35_4b_state_carry_vs_state_bag/docs/gpu_runbook.md section 7"
+  - name: "canonical fixed-source pilot Carry checkpoint"
+    storage: "large_artifacts/qwen35_4b_state_carry_vs_state_bag/pilot_carry_seed7401/"
+    required_for: "audit and exact reevaluation of the valid independent pilot verdict"
+    checksum: >-
+      run.json sha256 6f5cc5bfdf1554707f3179dbbef1c0c037ddb755d57b7ec0a012437a6066905a,
+      run receipt 744ddd38f64021795f0b5533eeda8225923b0ae3ba56a830d35dd9be1c5e4a06;
+      checkpoint_000300/checkpoint.json sha256 8f4319977e9acfda59587435dfce272b54263a7bee363da184134e45f3202671,
+      checkpoint identity 74efaabb50cfa7fefac3233ffa166ed2f3fdb3b442b16cc78bf29cd82e189b7b;
+      adapter_model.safetensors e22d8ee1fbdee402028fbec1992acbb19829d1ebc87f3dab36b87b373c2cb0e2;
+      loop_state.pt 59aef8ed71876e6954850bc7fcd74679a3eecf3056c2f5e3af09b17e821950c6
+    regenerate: "follow experiments/qwen35_4b_state_carry_vs_state_bag/docs/gpu_runbook.md section 4 from the exact bound source; never overwrite this realized path"
+  - name: "canonical fixed-source pilot Bag checkpoint"
+    storage: "large_artifacts/qwen35_4b_state_carry_vs_state_bag/pilot_bag_seed7401/"
+    required_for: "audit and exact reevaluation of the valid independent pilot verdict"
+    checksum: >-
+      run.json sha256 c218da89896ca6b2d75bbc235f63d227ebe3d3d1323b363504a6c96d66458f30,
+      run receipt df27e2e4fcffd3733c70114117b5fa4a9125fc192c677fe12cc257422c946810;
+      checkpoint_000300/checkpoint.json sha256 2df1c1e3b45b5ec127e6e4b43d464a5edd23904651264cb00a54e9eb73aa46b7,
+      checkpoint identity 8dcbc8a0e67797a1bde4a2beb69a3312a6e0dd48343eb609e7a0fbad57ed1b2d;
+      adapter_model.safetensors 4e309aa4090e486d4b793efef6b6c42cbfc0c46381da16bdeb0945737ec311de;
+      loop_state.pt 43ee149859fa1eb769699c5b8a2a45d0343c51f1601ba22b43199af5bd437f15
+    regenerate: "follow experiments/qwen35_4b_state_carry_vs_state_bag/docs/gpu_runbook.md section 4 from the exact bound source; never overwrite this realized path"
 omitted_artifacts:
   - path: "experiments/qwen35_4b_state_carry_vs_state_bag/data/generated/*.jsonl.gz"
     reason: "deterministic full procedural corpus; potentially large and regenerated from pinned seeds"
   - path: "large_artifacts/qwen35_4b_state_carry_vs_state_bag/"
     reason: "PEFT safetensors and loop-state checkpoints are external by repository policy"
-  - path: "experiments/qwen35_4b_state_carry_vs_state_bag/runs/**/rows.jsonl"
-    reason: "full evaluation, swap, and raw sample-more rows may exceed practical git size; every realized file must be retained externally with its enforced summary hash"
 reproducibility:
   smoke_command: "python3 experiments/qwen35_4b_state_carry_vs_state_bag/scripts/run.py --smoke"
   full_command: "phase-gated and intentionally non-monolithic: follow experiments/qwen35_4b_state_carry_vs_state_bag/docs/gpu_runbook.md sections 1-9; the CLI enforces G0, pilot promotion, fixed-final phases, causal gates, and G4 eligibility"
-  required_external_artifacts: []
-notes: "The fixed-source canonical G0 mechanics receipt is tracked under runs/model_smoke and is not scientific evidence. The removed mixed-echo variant is not part of this experiment. Add realized durable storage paths and enforced hashes after each result-bearing stage; preserve partial non-resumable attempts and never replace pending entries with unverified claims."
+  required_external_artifacts:
+    - "large_artifacts/qwen35_4b_state_carry_vs_state_bag/pilot_carry_seed7401/"
+    - "large_artifacts/qwen35_4b_state_carry_vs_state_bag/pilot_bag_seed7401/"
+notes: >-
+  Terminal LoRA status is PILOT_MECHANISM_MISS. The analysis receipt identity is
+  c9fec5b584bef5aa3de40844a8552395f3c3f0f95f79285700a9e4e375aed0ef and analysis/summary.json
+  sha256 is b05d0dfae6b3f4e4e65a25809e3eb31ba433a8ab07c5ca93e7c7b2548b1e4174. The fixed-source
+  canonical G0 mechanics receipt is tracked under runs/model_smoke and is not scientific evidence.
+  Canonical pilot evaluation rows and summaries are tracked in git under runs/pilot_{carry,bag}_seed7401.
+  Carry summary receipt is 8d1abcaf0ce7da6e6c3ceae7811b1132ae6ff78513134c493615bb6c056f3162;
+  its summary, rows, and swap hashes are 60e05d28fdf89110b03b1e3a7dbb9db665d8cdab9b42911ff70e70ce7f600278,
+  96c9389bccfb99e91a9cf6b5694b2f346c48519d64659d93702e3cccb61053ee, and
+  fac6d40bc410b7e103efaa84e7f1c71d38713969b1a7ae1dedb86435426eb32d. Bag summary receipt is
+  b519e34eb0b7f0b65dc773215e4e57f5cc65609ed0dc528b9a6b879145369a67; its summary and rows hashes are
+  72f2b8ffa5553931b45ea3f077da37a85558a91868a6fd4c4df969fa51454a21 and
+  bf0ee6f82866d3d8b1ee43265ed2299d1693ba2e4a6c07ace6fa40202d9ebec8.
+  No confirmation or explicit-text artifacts were created because the valid pilot stopped promotion.
+  Preserve the invalidated first attempt separately and do not pool it. The mandatory full-rank
+  extra-R-delta follow-up belongs in a fresh successor experiment, not this directory.

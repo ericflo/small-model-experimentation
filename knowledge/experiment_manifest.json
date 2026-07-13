@@ -4553,7 +4553,8 @@
   {
     "file_counts": {
       ".csv": 2,
-      ".json": 4,
+      ".json": 6,
+      ".jsonl": 3,
       ".md": 13,
       ".py": 15,
       ".yaml": 4,
@@ -4568,9 +4569,10 @@
       "structured_execution_and_compilers"
     ],
     "source_track": "new",
-    "summary": "When parameters, data, optimization, readout, and decoder-layer token applications are matched, does organizing repeated Qwen computation as one serially carried state produce a representation that is more capable than aggregating the same number of independent shallow states?",
+    "summary": "**Terminal LoRA status: `PILOT_MECHANISM_MISS`.** The fixed-source, independently seeded rank-32 LoRA pilot was valid and complete, but it failed the preregistered deep-state-formation gate. Confirmation and sample-more were therefore not run. This result mandates a fresh full-rank extra-R-delta successor; it does not close the serial-state question.",
     "tags": [
       "latent-state",
+      "lora",
       "small-model"
     ],
     "title": "State-Carry Versus State-Bag Counterfactual",
@@ -4585,8 +4587,45 @@
       "src",
       "tests"
     ],
+    "total_files": 44,
+    "total_size_bytes": 2045500
+  },
+  {
+    "file_counts": {
+      ".csv": 2,
+      ".md": 11,
+      ".py": 21,
+      ".yaml": 4,
+      "[none]": 1
+    },
+    "id": "qwen35_4b_state_carry_vs_state_bag_fullrank_delta",
+    "path": "experiments/qwen35_4b_state_carry_vs_state_bag_fullrank_delta",
+    "primary_readme": "experiments/qwen35_4b_state_carry_vs_state_bag_fullrank_delta/README.md",
+    "primary_report": "experiments/qwen35_4b_state_carry_vs_state_bag_fullrank_delta/reports/report.md",
+    "research_programs": [
+      "posttraining_and_adaptation",
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "successor to `qwen35_4b_state_carry_vs_state_bag`. Its valid rank-32 LoRA pilot formed almost no joint state (`0.00459` joint trajectory accuracy), so it could not answer whether the serial-state mechanism failed or the adaptation subspace was too restrictive. No model, data-preparation, training, or evaluation stage has been started in this successor.",
+    "tags": [
+      "latent-state",
+      "lora",
+      "small-model"
+    ],
+    "title": "Full-Rank Extra-R Delta: State-Carry Versus State-Bag",
+    "top_level_dirs": [
+      "analysis",
+      "configs",
+      "data",
+      "docs",
+      "reports",
+      "scripts",
+      "src",
+      "tests"
+    ],
     "total_files": 39,
-    "total_size_bytes": 406612
+    "total_size_bytes": 316885
   },
   {
     "file_counts": {

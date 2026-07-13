@@ -10,6 +10,22 @@
 
 ## Key Result
 
+- [qwen35_4b_state_carry_vs_state_bag](../../experiments/qwen35_4b_state_carry_vs_state_bag/reports/report.md)
+  (unclaimed; terminal LoRA `PILOT_MECHANISM_MISS`): a valid, source-bound seed-7401 pilot tested
+  whether rank-32 extra-call LoRA over two complete Qwen3.5 hybrid motifs could learn a serially
+  inherited query-before-state representation against an equal-parameter/equal-compute Bag. All
+  registered pilot cells and identities were complete, K=1 parity was exact, and the configured
+  +0.05 gate was reachable. Carry nevertheless failed deep state formation: joint
+  node+phase+checksum step accuracy was **0.00459 versus the frozen 0.40 gate** and node accuracy was
+  0.0642. The small matched-depth answer effect (+0.043, pilot CI -0.008 to +0.094), unseen-K gain
+  (+0.012, CI -0.035 to +0.059), and positive joint holdout (+0.051, CI +0.008 to +0.098) do not
+  rescue a chance-like registered state. Swaps were also noncausal (donor-follow gain +0.008, CI
+  -0.023 to +0.039; donor follow minus recipient preserve -0.055). Confirmation, edge cuts, and
+  sample-more were correctly not run. This narrows the result to **the registered low-rank adaptation
+  recipe did not form the required deep joint state**; it does not close serial recurrence because
+  low-rank plasticity remains confounded. The preregistered next test is a fresh zero-initialized
+  full-rank extra-R-delta Carry/Bag successor with the base K=1 path held exact.
+
 - [qwen35_4b_commit_slot_jacobian_value_transport](../../experiments/qwen35_4b_commit_slot_jacobian_value_transport/reports/report.md)
   (unclaimed; terminal `COMMIT_SLOT_SEAM_FAIL`): a fixed latent answer interface
   repaired formatting—an alias was already the unmasked next token on 41/48 at

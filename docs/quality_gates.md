@@ -5,6 +5,7 @@
 ## What It Checks
 
 - Regenerates catalogs and verifies generated files are committed.
+- Proves catalog output is invariant to gitignored/external experiment artifacts.
 - Regenerates the experiment readiness matrix so curation gaps stay visible.
 - Regenerates and validates the future experiment queue so every program keeps a launchpad for new work.
 - Regenerates the structured claim index and verifies claim references.
@@ -56,6 +57,13 @@ gate failures:
 - **`generated-clean` red in CI but green locally.** The gate regenerates catalogs in CI's
   fresh checkout and diffs against the commit; anything that differs between your filesystem
   and a fresh clone breaks it. Known causes:
+  - **Gitignored run data leaked into catalog inventory** — catalogs enumerate Git-visible
+    files (`git ls-files --cached --others --exclude-standard`), so deterministic corpora,
+    adapters, caches, and external rows cannot change file counts or artifact indexes merely
+    by existing locally. `make catalog-test` creates an ignored sentinel and verifies every
+    generated catalog byte is unchanged. If a file should be discoverable, do not ignore it;
+    track its small manifest or receipt and describe omitted payloads in
+    `reports/artifact_manifest.yaml`.
   - **Empty directories** — git can't track them, so they exist locally but not in CI, and
     the catalog's `top_level_dirs`/file counts diverge. `make validate` now fails on empty
     dirs under `experiments/` before this reaches CI; delete the dir.

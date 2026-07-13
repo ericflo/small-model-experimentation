@@ -112,3 +112,30 @@ No fresh CPU smoke/data generation, model load, GPU call, training, evaluation, 
   `MODEL_SMOKE_PASS` records exact direct and Carry/Bag K=1 parity, identical 16,800,796-parameter
   receipts, nonzero finite gradients in every registered trainable component, finite K=12 forwards,
   and 11.02 GiB peak allocation. This is a mechanics gate only; the fresh seed-7401 pilot pair is next.
+
+## 2026-07-13 — Fixed-Source LoRA Pilot Verdict
+
+- Completed fresh canonical Carry and Bag pilot trainings at the sole registered pilot seed 7401,
+  each for the fixed 300 steps. Initialization and training receipts matched exactly: ordered-row
+  digest `97813bf9a2c7b81cf55db1a405e8e999e7e4bf953b2d50434a007140019b0e4f`,
+  2,594,937 prompt tokens, and 145,316,472 decoder-layer-token applications per arm.
+- Evaluated the fixed final checkpoints on all 256 pilot depth tasks at K=4 and matched depth, all
+  256 pilot joint-holdout tasks, and all 64 counterfactual pairs in both directions. Both checkpoints
+  retained exact direct-model K=1 parity (`0.0`). All source, config, lock, data, phase, step, seed,
+  checkpoint, raw-row, and swap hashes passed reanalysis.
+- The analyzer emitted terminal LoRA verdict `PILOT_MECHANISM_MISS`. Seven of eight promotion checks
+  passed; the only failure was joint-state sufficiency. Carry joint node+phase+checksum step accuracy
+  was `0.0045947759645059705` against the frozen `0.40` threshold, while node step accuracy was
+  `0.06419115958851762`.
+- Answer-level Carry minus Bag was `+0.04296875` with pilot 95% interval
+  `[-0.0078125, 0.09375]`; unseen-K gain over K=4 was `+0.01171875`
+  `[-0.03515625, 0.05859375]`. The joint holdout was positive (`+0.05078125`,
+  `[0.0078125, 0.09765625]`), but swaps were noncausal: donor-follow gain `+0.0078125`
+  `[-0.0234375, 0.0390625]` and donor-follow minus recipient-preserve `-0.0546875`.
+- Stopped this experiment at G1 as preregistered. No confirmation seeds, edge-cut confirmation, text
+  baseline, or sample-more calls were run. The earlier analysis-dispatch attempt remains preserved and
+  invalidated; it is not pooled with the canonical result.
+- This is a valid deep-state-formation failure rather than a mechanics/data/infeasible-gate stop.
+  Preregistration section 10 therefore mandates creating and executing a fresh successor with
+  zero-initialized full-rank deltas active only on extra R applications in layers 12–19, preserving
+  the frozen base first pass/coda and exact K=1 path.

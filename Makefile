@@ -24,10 +24,13 @@ GENERATED_PATHS := \
 	knowledge/source_tracks.md \
 	knowledge/tag_index.md
 
-.PHONY: catalog validate py-compile check-links check-text generated-clean lint site site-check check related new-program new-experiment from-queue site-dates site-content briefs-gate bench bench-validate
+.PHONY: catalog catalog-test validate py-compile check-links check-text generated-clean lint site site-check check related new-program new-experiment from-queue site-dates site-content briefs-gate bench bench-validate
 
 catalog:
 	$(PYTHON) scripts/build_knowledgebase.py
+
+catalog-test:
+	$(PYTHON) -B -m unittest scripts.tests.test_build_knowledgebase
 
 validate:
 	$(PYTHON) scripts/validate_repository.py
@@ -60,7 +63,7 @@ site-dates:
 site-content: site-dates
 	$(PYTHON) scripts/site_content_status.py
 
-check: catalog generated-clean validate lint site-check briefs-gate
+check: catalog catalog-test generated-clean validate lint site-check briefs-gate
 
 # Enforce that every experiment has a plain-language practitioner brief for the
 # site. Fails the check until briefs are authored — see docs/site_maintenance.md.
