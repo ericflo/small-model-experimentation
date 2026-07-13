@@ -1,0 +1,144 @@
+{
+  "bank_receipt": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_counterfactual_evidence_acquisition_curriculum/bank/receipt.json",
+  "bank_receipt_sha256": "ff32290561fbdf014f425107e4c10fa21d85bcb20bba84de0f799370c8066858",
+  "bank_sha256": {
+    "evidence_binding": "f91275dd469fc7e043ad95b506db9104aed0f2ebd3cc494b9036c8fe9fe20ed2",
+    "explicit_redundant": "6265039b6933e1ee51739e985f15f001649619c9a9a7b9f2a5e4cabb48a8e59f",
+    "shuffled_binding": "f20f62893569f0661f370ac4cb7f0f8765020329a3c2252b2c5d0d10f0bb8a60"
+  },
+  "design_commit": "7311bbeeef2bffe72024eae5b4136c07bbaa7704",
+  "experiment_id": "qwen35_4b_counterfactual_evidence_acquisition_curriculum",
+  "frozen_file_order": [
+    "configs/default.yaml",
+    "idea_intake.md",
+    "reports/preregistration.md",
+    "reports/design_review.md",
+    "data/locality_contexts.json",
+    "src/bank.py",
+    "src/harness.py",
+    "src/repo_agent.py",
+    "src/repo_tasks.py",
+    "src/retention_tasks_legacy.py",
+    "src/vllm_runner.py",
+    "scripts/build_bank.py",
+    "scripts/build_locality_contexts.py",
+    "scripts/train.py",
+    "scripts/merge_adapter.py",
+    "scripts/eval_repo_agent.py",
+    "scripts/eval_retention.py",
+    "scripts/analyze_interface_preflight.py",
+    "scripts/select_interface_band.py",
+    "scripts/analyze_qualification.py",
+    "scripts/analyze_calibration.py",
+    "scripts/analyze_transfer_feasibility.py",
+    "scripts/analyze_transfer.py",
+    "scripts/analyze_sample_pool.py",
+    "scripts/downstream_common.py",
+    "scripts/analyze_retention.py",
+    "scripts/audit_context_geometry.py",
+    "scripts/audit_locality.py",
+    "scripts/audit_transition_uncertainty.py",
+    "scripts/bench.py",
+    "scripts/analyze_menagerie.py",
+    "scripts/run.py",
+    "tests/test_spec_acquisition.py",
+    "tests/test_vllm_runner.py",
+    "tests/test_downstream_analyzers.py"
+  ],
+  "frozen_files": {
+    "configs/default.yaml": "40ee9df2246e95fae69a03ceb9ccfd0f2adbd0f2bd552a507630a1ab544bdac8",
+    "data/locality_contexts.json": "551d3cb46f8d8a572e7bfbd8e2d881947d34109a8daaccc87d1f4844504b6c67",
+    "idea_intake.md": "f7994d89c5de45ff91d865132db47225521294e7cad9248e71d88cd201ca283c",
+    "reports/design_review.md": "cfcdf02e43f5ac1502e08bce9749353c99b7002a4bb5774acff71ef9f95fc732",
+    "reports/preregistration.md": "b9470ddebf1a070021fb141873155217c835d283084b27cb6250dd92fcc5a016",
+    "scripts/analyze_calibration.py": "6b31f447b0429d9c39a2d9aeb2f1352e003fe7978eb97380c0ff8b21ebcc456e",
+    "scripts/analyze_interface_preflight.py": "5467d10deb061190db3a43c2e302adb24ff54ef79de25fe23f8f7abe9fc83ee0",
+    "scripts/analyze_menagerie.py": "8b1ef75ddd79529852683e39a9503fb634168e4398c9ad87834ba26407877b2b",
+    "scripts/analyze_qualification.py": "b4c1b3adc927b41d3622154d2004d750db9fe632147c008d52e71484c2a96911",
+    "scripts/analyze_retention.py": "a69a68536511283d0cc1712a8101f8e52ad0a61a7aca0edd667e0aeede894c5d",
+    "scripts/analyze_sample_pool.py": "fa406349b4adf4a1f4a7fbdf30ed36a613e45f8c43752e9204e3d48968c24b95",
+    "scripts/analyze_transfer.py": "3f2f4a5b7279aa643a09d2eac773fa425e649ca9709117dc188c62104c0665ad",
+    "scripts/analyze_transfer_feasibility.py": "9788e97698e82689df54b021c92d39d698770f0306d2a2305c57b1e3a0517b8c",
+    "scripts/audit_context_geometry.py": "4a7a5a1767db86a7eecb5fae8c927f08080fc5a1e00a42f1c279a1287a54f403",
+    "scripts/audit_locality.py": "260ad355e20c8ce00e6bcaa5954182c6e7798e1b06c459b93f1db5f282e6db2e",
+    "scripts/audit_transition_uncertainty.py": "26d801db64632ce03bef3e446343086059c4f2793e07ab6e6bc2c6d934bb1919",
+    "scripts/bench.py": "9a7ef34d89125028a66a5cbbec28cd59457dea917c5f8e991fb5b6b642aa051c",
+    "scripts/build_bank.py": "f00bb87fca696344f51344e0e59642a35bc922695189154492cc6b09c16480c4",
+    "scripts/build_locality_contexts.py": "697b1f4bf15dbe08e523d36bf753e38140b4ac7081de75cdfc3147ccdaecb7f0",
+    "scripts/downstream_common.py": "c0b0070fbcf89ce98eeff743388b878dfe3e87bf9032b2fb9dd07bc17064d013",
+    "scripts/eval_repo_agent.py": "337eaf518700013998df5a90954a663936f5910e500fbc46e73242441b831d41",
+    "scripts/eval_retention.py": "bef8a2c684478752f4ef763a2b3f2f15635eb6d0d52f84a80b93c645d715336e",
+    "scripts/merge_adapter.py": "a0b73f05f0c02982d4b87ae4bad1572d9dd62db2c4a055e41fd8d64c9db3c901",
+    "scripts/run.py": "88b68dc39a0d705012a5e38f61121992e48fe5de02f639e6f5f64eb6fdb9f1bd",
+    "scripts/select_interface_band.py": "b32a85c61bf221cdeffb1116cfeef9eb430a1d91f122143427d0e0b485eb6451",
+    "scripts/train.py": "bee594c4f2b5a1a48b30b8136cd1827437979fbd36f5e89218e12edfc61e8f6e",
+    "src/bank.py": "abb6effe0a2cfb9ba0e454ef3e0ec70619ba3631d3c38fa6fabd74bc44ce0a9a",
+    "src/harness.py": "fc4b16a95047ccdedf258498a351a5f48acecff334fc594c0eccfa685ec47e84",
+    "src/repo_agent.py": "066c700cd6d53419c7aba2fc0110a5b73596362b0597797653da164fefadd63b",
+    "src/repo_tasks.py": "77afcecacb73c89efef3a343add3f77fcbb6b3b08fab0a1266b5af23d2d61ad5",
+    "src/retention_tasks_legacy.py": "432c4c03c2d1e4b724c0816ebc8a333889da1da5b43d6328ecdd010c60d497c9",
+    "src/vllm_runner.py": "3908eb25ebf059a867c1d7581f1a98186470f5a6c597132a12095b6922d33dcf",
+    "tests/test_downstream_analyzers.py": "3b33f56ab02b298d2cbe9d92100831c0633dde9fd35ceb770266baeb7b6869f3",
+    "tests/test_spec_acquisition.py": "0ac19af90a29baa6e245a3466592ffcfa8714a04b30cd9461e444ee7205383e2",
+    "tests/test_vllm_runner.py": "be1dd53f87f709ded49f83b2d17641a3de21ff42afdc2df878aacf4a23355347"
+  },
+  "model_checkpoints": {
+    "anchor": {
+      "generation_config_sha256": "8e29eeb222454c2a417b17547a84aee206c110a033418b7c0342cd75e75d92a0",
+      "merge_receipt_sha256": "ece3c696e1abfb071d33ba523d8007bb1506d22047a1c11aa57a48a280cd1b0c",
+      "model_config_sha256": "f64803e92c6b93971a8e4fa89a811c8607b9b4efd6d0df0e6ca6016404f42630",
+      "model_weight_sha256": "c933168075a0fc011f31ee54f83d722cc91423ce1a0ac19bfe40dfab92f608d5",
+      "path": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_repo_search_compress_bank/merged/apex_replay",
+      "role": "anchor",
+      "tokenizer_compatibility_sha256": "8b1cfe687ea0e65383cddc72a798f4f3f7a27cc90bda070989e0818f0f153274",
+      "tokenizer_files": {
+        "chat_template.jinja": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+        "tokenizer.json": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+        "tokenizer_config.json": "9cf04fffe3d8c3b85e439fb35c7acad0761ab51c422a8c4256d9f887c3a0be7d"
+      },
+      "tokenizer_manifest_sha256": "71f553a55518a7f58520d9cca5ac3f26fff3c4c63aa7aa4e52324b512d3ae887"
+    },
+    "start": {
+      "generation_config_sha256": "8e29eeb222454c2a417b17547a84aee206c110a033418b7c0342cd75e75d92a0",
+      "merge_receipt_sha256": "9ed37162726874fd6750de477330949da343b1aeae3c837d9a2377282f3a90b3",
+      "model_config_sha256": "f64803e92c6b93971a8e4fa89a811c8607b9b4efd6d0df0e6ca6016404f42630",
+      "model_weight_sha256": "1cf5fbca317808d6d00225f5cd533c82c7e1602b2b2e5e2da8f4307b01941ba3",
+      "path": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_transaction_invariant_recovery_curriculum/merged/transaction_replay",
+      "role": "start",
+      "tokenizer_compatibility_sha256": "8b1cfe687ea0e65383cddc72a798f4f3f7a27cc90bda070989e0818f0f153274",
+      "tokenizer_files": {
+        "chat_template.jinja": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+        "tokenizer.json": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+        "tokenizer_config.json": "bee8eba30f0eb4af73c0fe2cd06d0f89b657d7819941c438157ec42f7c80ea87"
+      },
+      "tokenizer_manifest_sha256": "0657bf69973ea13d68baf22583410459952ef43116e75031d0ff1d83fa247617"
+    }
+  },
+  "model_output_precedes_lock": false,
+  "model_tokenizers": {
+    "anchor": {
+      "model_path": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_repo_search_compress_bank/merged/apex_replay",
+      "tokenizer_compatibility_sha256": "8b1cfe687ea0e65383cddc72a798f4f3f7a27cc90bda070989e0818f0f153274",
+      "tokenizer_files": {
+        "chat_template.jinja": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+        "tokenizer.json": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+        "tokenizer_config.json": "9cf04fffe3d8c3b85e439fb35c7acad0761ab51c422a8c4256d9f887c3a0be7d"
+      },
+      "tokenizer_manifest_sha256": "71f553a55518a7f58520d9cca5ac3f26fff3c4c63aa7aa4e52324b512d3ae887"
+    },
+    "start": {
+      "model_path": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_transaction_invariant_recovery_curriculum/merged/transaction_replay",
+      "tokenizer_compatibility_sha256": "8b1cfe687ea0e65383cddc72a798f4f3f7a27cc90bda070989e0818f0f153274",
+      "tokenizer_files": {
+        "chat_template.jinja": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+        "tokenizer.json": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+        "tokenizer_config.json": "bee8eba30f0eb4af73c0fe2cd06d0f89b657d7819941c438157ec42f7c80ea87"
+      },
+      "tokenizer_manifest_sha256": "0657bf69973ea13d68baf22583410459952ef43116e75031d0ff1d83fa247617"
+    }
+  },
+  "note": "Only deterministic task execution, tokenizer geometry, bank construction, and encode-only audits preceded this lock.",
+  "schema_version": 1,
+  "smoke_receipt_sha256": "51ee3069b3e87992f42c69c6ef6922e53413776cfd9cc74d90bd67e2ef43c0ae",
+  "status": "locked"
+}
