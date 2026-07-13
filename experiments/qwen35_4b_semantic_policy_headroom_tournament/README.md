@@ -1,7 +1,7 @@
 # Semantic-policy headroom tournament
 
-**Status:** in-progress · since 2026-07-13 · deterministic design preflight
-passed; design lock and two parent-only model blocks remain.
+**Status:** in-progress · since 2026-07-13 · design locked at `391dadc1`;
+GPU smoke and two parent-only model blocks remain.
 
 Qualify non-saturated verifier-conditioned semantic conflicts before spending
 another update on Qwen3.5-4B.

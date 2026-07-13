@@ -5,7 +5,7 @@ source_track: "new"
 path: "experiments/qwen35_4b_semantic_policy_headroom_tournament"
 primary_readme: "experiments/qwen35_4b_semantic_policy_headroom_tournament/README.md"
 primary_report: "experiments/qwen35_4b_semantic_policy_headroom_tournament/reports/report.md"
-summary: "passed; design lock and two parent-only model blocks remain."
+summary: "GPU smoke and two parent-only model blocks remain."
 tags:
   - "policy"
   - "small-model"
@@ -20,13 +20,14 @@ research_programs:
 top_level_dirs:
   - "configs"
   - "reports"
+  - "runs"
   - "scripts"
   - "src"
   - "tests"
 file_counts:
-  json: 1
+  json: 2
   md: 7
   py: 10
   yaml: 3
-total_files: 21
-total_size_bytes: 256411
+total_files: 22
+total_size_bytes: 258124

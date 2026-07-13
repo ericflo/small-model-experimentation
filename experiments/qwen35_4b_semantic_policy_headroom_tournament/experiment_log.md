@@ -27,3 +27,10 @@
 - Initial and partial fail visible+hidden; oracle passes visible+hidden for all
   12 family cells.
 - No Qwen output or training exists before the design boundary.
+
+## 2026-07-13 — immutable design boundary
+
+- Rebased and pushed the complete design directly to `main` at `391dadc1`.
+- Wrote `runs/preregistration_receipt.json` over nine design-critical files;
+  it records `model_output_precedes_lock: false` and fails closed on digest or
+  ancestry drift.

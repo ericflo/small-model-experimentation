@@ -1,0 +1,30 @@
+{
+  "design_commit": "391dadc1",
+  "experiment_id": "qwen35_4b_semantic_policy_headroom_tournament",
+  "frozen_file_order": [
+    "configs/default.yaml",
+    "idea_intake.md",
+    "reports/preregistration.md",
+    "reports/design_review.md",
+    "src/repo_tasks.py",
+    "src/repo_agent.py",
+    "scripts/eval_repo_agent.py",
+    "scripts/analyze.py",
+    "scripts/run.py"
+  ],
+  "frozen_files": {
+    "configs/default.yaml": "7654ce44b9d16dab3d804b6b733dc4c2622bce31114339d263d5013c51b2c9b8",
+    "idea_intake.md": "c99a1bf7b1f97c023f9673536f4510781d40f9f547ac6cf2579acd075aa44663",
+    "reports/design_review.md": "1605cb45769eeeaeee231e97caa6569c626f18ddf98c3f9e5e1a2e5193deb89c",
+    "reports/preregistration.md": "acc777068e98711e893a4778edd4bb212d7c301e25e9c20be036394ced828779",
+    "scripts/analyze.py": "dbbb04a38a56dab732ffef5b16df73ad6ebc4189f284ba8d3669f0030ba06df3",
+    "scripts/eval_repo_agent.py": "5fa145fab04d7e976ab564fc9634d196fc409852ebb9adc647c0630c8b28ea18",
+    "scripts/run.py": "cce435d4457f7d75b7a4b784d907f9c8ba52f0034e03d7dd6dcff0a7a71184ed",
+    "src/repo_agent.py": "557df0dd9d1c92cfcdc462c8d4e8a17bcfd646651f836231d60aa8d11d6bdfbd",
+    "src/repo_tasks.py": "3f950ce1a0387bf6e330c36663efe5feb99c3f8834a293810f882f19fab4343b"
+  },
+  "model_output_precedes_lock": false,
+  "note": "No Qwen output or training exists for this qualification before lock.",
+  "schema_version": 1,
+  "status": "locked"
+}
