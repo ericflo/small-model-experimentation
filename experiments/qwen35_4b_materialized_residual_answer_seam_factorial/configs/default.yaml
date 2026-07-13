@@ -1,28 +1,124 @@
+schema_version: 2
+
 model:
-  id: "Qwen/Qwen3.5-4B"
-  revision: "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
-  dtype: "bfloat16"
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+  dtype: bfloat16
+  backend: vllm
+  vllm_version: 0.24.0+cu129
+
+identity:
+  experiment_id: qwen35_4b_materialized_residual_answer_seam_factorial
+  task_namespace: materialized-residual-answer-seam-factorial-v1
+  request_namespace: materialized-residual-answer-seam-factorial-v1
 
 seeds:
   construction: 2026072800
   calibration: 2026072801
   mechanics: 2026072802
+  direct_pool: 2026072803
+  bootstrap: 2026072804
 
-interface_arms:
-  - current_forced_close_freeform
-  - no_think_short_structured
-  - forced_close_program_slot
-
-interface_gates:
-  exact_echo_rate_min: 0.90
-  parse_rate_min: 0.90
-  cap_contact_rate_max: 0.05
-
-boundaries:
+data:
   calibration_tasks: 48
   mechanics_tasks: 24
+  tasks_per_balance_block: 24
+  visible_examples: 8
+  hidden_examples: 8
+  unlabeled_probe_inputs: 16
+  input_min_length: 4
+  input_max_length: 8
+  input_value_min: -9
+  input_value_max: 9
+  common_panel_per_length: 8
+  max_input_draws: 10000
+  max_visible_attempts: 12
+  candidates_per_task: 24
+  direct_master_pool_per_task: 96
+
+interface:
+  arms:
+    - think512_freeform
+    - think512_program_slot
+    - no_think_freeform
+    - no_think_program_slot
+  fixed_winner_priority:
+    - think512_freeform
+    - think512_program_slot
+    - no_think_freeform
+    - no_think_program_slot
+  dimensions:
+    thinking_policy: [think512, no_think]
+    answer_prefix: [freeform, program_slot]
+  answer_prefix_text: "PROGRAM:"
+  sampled_answer_cap: 24
+  thinking_budget: 512
+  temperature: 0.6
+  top_p: 0.95
+  top_k: 20
+  n: 1
+  unconstrained_sampling: true
+  grammar_mask: false
+  logit_bias: false
+  teacher_forced_answer_tokens: false
+  paired_answer_seed: true
+  calibration:
+    rows: 48
+    suffix_rows: 24
+    direct_rows: 24
+    exact_echo_successes_min: 44
+    parse_successes_min: 44
+    answer_cap_contacts_max: 2
+    each_arity_exact_successes_min: 22
+    each_arity_parse_successes_min: 22
+    each_arity_answer_cap_contacts_max: 1
+  transport:
+    rows: 24
+    suffix_rows: 12
+    direct_rows: 12
+    exact_echo_successes_min: 22
+    parse_successes_min: 22
+    answer_cap_contacts_max: 1
+    each_arity_exact_successes_min: 11
+    each_arity_parse_successes_min: 11
+
+generation:
+  max_model_len: 4096
+  max_num_seqs: 64
+  max_num_batched_tokens: 16384
+  enable_prefix_caching: false
+  cudagraph_capture_sizes: [1, 2, 4, 8, 16, 32, 64]
+  logprobs_mode: raw_logprobs
+
+mechanics:
+  arms: [materialized, name_only, shuffled, direct]
+  suffix_rows_per_task: 24
+  direct_master_pool_per_task: 96
+  all_generation_parse_rate_min: 0.90
+  all_generation_answer_cap_contact_rate_max: 0.05
+  materialized_selected_accuracy_min: 0.25
+  selected_accuracy_gain_vs_name_min: 0.125
+  selected_accuracy_gain_vs_shuffled_min: 0.125
+  selected_accuracy_gain_vs_direct_sampled_min: 0.125
+  selected_accuracy_gain_vs_direct_logical_min: 0.125
+  materialized_oracle_coverage_min: 0.35
+  oracle_coverage_gain_vs_name_min: 0.125
+  oracle_coverage_gain_vs_shuffled_min: 0.125
+  oracle_coverage_gain_vs_direct_sampled_min: 0.125
+  oracle_coverage_gain_vs_direct_logical_min: 0.125
+  materialized_selected_successful_tasks_min: 6
+  materialized_oracle_first_operation_support_min: 8
+  inferential_scope: large_effect_pilot
+  exact_tests: report_only
+  bootstrap_resamples: 10000
+  direct_pool_exhaustion_allowed: false
+
+boundaries:
   calibration_disjoint_from_mechanics: true
+  calibration_reads_mechanics: false
+  mechanics_reads_hidden_before_visible_selection_receipt: false
   hidden_files_read: []
   qualification_files_read: []
   confirmation_files_read: []
   benchmark_files_read: []
+  cheap_ranking_reopened: false

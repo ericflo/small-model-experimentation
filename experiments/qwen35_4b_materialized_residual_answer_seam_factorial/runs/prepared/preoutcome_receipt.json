@@ -1,0 +1,48 @@
+{
+  "benchmark_files_read": [],
+  "config_sha256": "0f4d4e7fce5ae132879f49633b111a477c51dbb3860f7360fa7d5de1e21301e2",
+  "confirmation_files_read": [],
+  "construction_summary_sha256": "b39e0ad1ccf49503eb48353eac118500432953f32ad27ae2acc1448ed99f622d",
+  "decision": "PREOUTCOME_PASS",
+  "expected_invocation_rows": {
+    "calibration_each_interface": 48,
+    "direct_master_pool": 2304,
+    "suffix_materialized": 576,
+    "suffix_name_only": 576,
+    "suffix_shuffled": 576,
+    "transport_selected_interface": 24
+  },
+  "hidden_files_read": [],
+  "model_calls": 0,
+  "model_loaded": false,
+  "qualification_files_read": [],
+  "request_files": {
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/prepared/calibration_requests.jsonl": {
+      "rows": 48,
+      "sha256": "f984962e5585ddafd4d229e68b751d1584a6b406dc82aa5954fa7bda4a8c54df"
+    },
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/prepared/direct_requests.jsonl": {
+      "rows": 2304,
+      "sha256": "b338f5c37f931bbdaf7c078ac9db588891c33e1d4678c7cb4c7ac95963d6616c"
+    },
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/prepared/suffix_materialized_requests.jsonl": {
+      "rows": 576,
+      "sha256": "1e567f737884aa0d6354bd06f2dc9a951ddbc77e232e9af4b9ae2c2c82655990"
+    },
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/prepared/suffix_name_only_requests.jsonl": {
+      "rows": 576,
+      "sha256": "c888bb10f7f9b8cd4dffd125954ae77bc8a5d462cc13e713b6a8a94d042498f4"
+    },
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/prepared/suffix_shuffled_requests.jsonl": {
+      "rows": 576,
+      "sha256": "1f0d45fca2fc4e34180889bba8cc9f6ecfc57edbfae24d83579b96e067c3f9d2"
+    },
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/prepared/transport_requests.jsonl": {
+      "rows": 24,
+      "sha256": "09ebaa635ce9eac1f40e523df308b408920e4b4de4b3f2e1b3dc48c9fec8946c"
+    }
+  },
+  "sampled_model_outputs": 0,
+  "schema_version": 1,
+  "stage": "preoutcome_prepare"
+}

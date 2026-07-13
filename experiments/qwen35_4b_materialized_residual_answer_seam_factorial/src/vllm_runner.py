@@ -95,6 +95,7 @@ NO_THINK_TOP_K = 20
 MIN_NONZERO_TEMPERATURE = 0.01
 MAX_TEMPERATURE = 2.0
 MAX_N = 16_384
+MAX_LOGPROBS = 24
 HF_MODEL_EOS_TOKEN_ID = 248044
 TOKENIZER_EOS_TOKEN_ID = 248046
 HF_MODEL_EOS_TOKEN = "<|endoftext|>"
@@ -437,6 +438,9 @@ class SamplingConfig:
     prompt_logprobs: int | None = None
     logprob_token_ids: tuple[int, ...] = ()
     allow_custom_prompts: bool = False
+    answer_prefix: str = ""
+    force_answer_seam: bool = False
+    paired_answer_seed: bool = False
 
     def validate(self) -> None:
         if self.thinking not in {"off", "natural", "budget"}:
@@ -458,8 +462,11 @@ class SamplingConfig:
             raise ValueError("shuffle_thinking is only valid for budget thinking")
         if self.logprobs is not None and self.logprobs < 0:
             raise ValueError("logprobs must be non-negative")
-        if self.logprobs is not None and self.logprobs > 20:
-            raise ValueError("logprobs cannot exceed this runner's vLLM max_logprobs=20")
+        if self.logprobs is not None and self.logprobs > MAX_LOGPROBS:
+            raise ValueError(
+                "logprobs cannot exceed this runner's vLLM "
+                f"max_logprobs={MAX_LOGPROBS}"
+            )
         if self.prompt_logprobs is not None and self.prompt_logprobs < 0:
             raise ValueError("prompt_logprobs must be non-negative")
         if self.prompt_logprobs is not None and self.prompt_logprobs > 20:
@@ -470,6 +477,22 @@ class SamplingConfig:
             raise ValueError(
                 "prompt_logprobs with two-stage budget thinking are not yet supported; "
                 "score the completed sequences in a separate pass"
+            )
+        if not isinstance(self.answer_prefix, str):
+            raise ValueError("answer_prefix must be text")
+        if self.answer_prefix and self.thinking == "natural":
+            raise ValueError("answer_prefix is unsupported for natural thinking")
+        if self.answer_prefix and self.thinking == "budget" and not self.force_answer_seam:
+            raise ValueError(
+                "budgeted answer_prefix requires force_answer_seam so natural closes "
+                "cannot silently bypass the registered slot"
+            )
+        if self.force_answer_seam and self.thinking != "budget":
+            raise ValueError("force_answer_seam is only valid for budget thinking")
+        if self.paired_answer_seed and self.n != 1:
+            raise ValueError(
+                "paired_answer_seed requires n=1; represent master-pool samples "
+                "as distinct canonical request IDs"
             )
         if self.logprob_token_ids and self.logprobs != len(self.logprob_token_ids):
             raise ValueError(
@@ -720,7 +743,8 @@ class VLLMRunner:
             "mamba_cache_mode": "align" if config.enable_prefix_caching else "none",
             "enforce_eager": config.enforce_eager,
             "generation_config": "vllm",
-            "max_logprobs": 20,
+            "max_logprobs": MAX_LOGPROBS,
+            "logprobs_mode": "raw_logprobs",
             "seed": 0,
             # vLLM 0.24 auto-enables async scheduling.  Keep the simpler
             # synchronous mode explicit for offline research.  On pre-Hopper
@@ -866,6 +890,19 @@ class VLLMRunner:
         except (AttributeError, RuntimeError):
             self.close()
             raise
+        try:
+            self.resolved_logprobs_mode = str(
+                self.llm.llm_engine.vllm_config.model_config.logprobs_mode
+            )
+        except AttributeError:
+            self.close()
+            raise RuntimeError("vLLM did not expose resolved logprobs_mode") from None
+        if self.resolved_logprobs_mode != "raw_logprobs":
+            self.close()
+            raise RuntimeError(
+                "vLLM did not honor raw_logprobs: "
+                f"{self.resolved_logprobs_mode!r}"
+            )
 
         self.lora_request = None
         if self.adapter_info is not None:
@@ -993,15 +1030,21 @@ class VLLMRunner:
             )
         return prepared
 
-    def _check_context(self, records: Sequence[_PreparedRecord], sampling: SamplingConfig) -> None:
+    def _check_context(
+        self,
+        records: Sequence[_PreparedRecord],
+        sampling: SamplingConfig,
+        answer_prefix_ids: Sequence[int],
+    ) -> None:
         if sampling.thinking == "budget":
             reserve = (
                 int(sampling.thinking_budget)
                 + len(self.close_ids)
+                + len(answer_prefix_ids)
                 + sampling.answer_max_tokens
             )
         else:
-            reserve = sampling.max_tokens
+            reserve = len(answer_prefix_ids) + sampling.max_tokens
         too_long = [
             (record.record_id, len(record.prompt_token_ids) + reserve)
             for record in records
@@ -1056,9 +1099,13 @@ class VLLMRunner:
         sample_index: int,
         seed: int,
         thinking: str,
+        answer_prefix_ids: Sequence[int] = (),
+        seed_domain: str = "stage1",
     ) -> dict[str, Any]:
         sampled_ids = list(completion.token_ids)
-        token_ids = self._trim_hf_eos(sampled_ids)
+        sampled_without_eos = self._trim_hf_eos(sampled_ids)
+        prefix_ids = list(answer_prefix_ids)
+        token_ids = prefix_ids + sampled_without_eos
         close_index = (
             token_ids.index(self.think_close_id)
             if self.think_close_id in token_ids
@@ -1066,7 +1113,7 @@ class VLLMRunner:
         )
         if thinking == "off":
             n_thinking = 0
-            n_answer = len(token_ids)
+            n_answer = len(sampled_without_eos)
         elif close_index is None:
             n_thinking = len(token_ids)
             n_answer = 0
@@ -1078,18 +1125,21 @@ class VLLMRunner:
             "stage1_parent_seed": seed,
             "seed_stage1": seed + sample_index,
             "seed_stage2": None,
+            "seed_domain_stage1": seed_domain,
+            "seed_domain_stage2": None,
             "text": self._decode(token_ids),
             "token_ids": token_ids,
             "stage1_token_ids": sampled_ids,
-            "injected_token_ids": [],
+            "answer_prefix_token_ids": prefix_ids,
+            "injected_token_ids": prefix_ids,
             "stage2_token_ids": [],
             "n_thinking_tokens": n_thinking,
             "n_answer_tokens": n_answer,
             "n_sampled_tokens": len(sampled_ids),
-            "n_injected_tokens": 0,
+            "n_injected_tokens": len(prefix_ids),
             "n_completion_tokens": len(token_ids),
-            "n_terminal_tokens_trimmed": len(sampled_ids) - len(token_ids),
-            "n_stage1_prompt_tokens": len(record.prompt_token_ids),
+            "n_terminal_tokens_trimmed": len(sampled_ids) - len(sampled_without_eos),
+            "n_stage1_prompt_tokens": len(record.prompt_token_ids) + len(prefix_ids),
             "n_stage2_prompt_tokens": 0,
             "thinking_closed": close_index is not None,
             "forced_close": False,
@@ -1116,10 +1166,35 @@ class VLLMRunner:
         )
         if not prepared:
             raise ValueError("input is empty")
-        self._check_context(prepared, sampling)
-        prompts = [{"prompt_token_ids": record.prompt_token_ids} for record in prepared]
+        answer_prefix_ids = self.tokenizer.encode(
+            sampling.answer_prefix, add_special_tokens=False
+        )
+        if sampling.answer_prefix and not answer_prefix_ids:
+            raise RuntimeError("nonempty answer_prefix tokenized to no tokens")
+        self._check_context(prepared, sampling, answer_prefix_ids)
+        prompt_prefix_ids = answer_prefix_ids if sampling.thinking == "off" else []
+        effective_prompt_ids = [
+            record.prompt_token_ids + list(prompt_prefix_ids) for record in prepared
+        ]
+        prompts = [{"prompt_token_ids": ids} for ids in effective_prompt_ids]
+        stage1_seed_domain = (
+            "thought"
+            if sampling.paired_answer_seed and sampling.thinking == "budget"
+            else "answer"
+            if sampling.paired_answer_seed
+            else "stage1"
+        )
         seeds = [
-            _stable_seed(sampling.run_seed, record.record_id, -1, "stage1")
+            _stable_seed(
+                sampling.run_seed,
+                record.record_id,
+                (
+                    0
+                    if sampling.paired_answer_seed and sampling.thinking == "off"
+                    else -1
+                ),
+                stage1_seed_domain,
+            )
             for record in prepared
         ]
         first_cap = (
@@ -1143,9 +1218,11 @@ class VLLMRunner:
         rows: list[dict[str, Any]] = []
         continuation_prompts: list[dict[str, list[int]]] = []
         continuation_params: list[Any] = []
-        continuation_meta: list[tuple[int, int, list[int], list[int], bool, int, Any]] = []
+        continuation_meta: list[
+            tuple[int, int, list[int], list[int], bool, int, str, Any]
+        ] = []
         # (row index, output index, original stage1, retained thinking,
-        #  forced_close, stage2 seed, stage1 completion)
+        #  forced_close, stage2 seed, stage2 seed domain, stage1 completion)
 
         for row_index, (record, request_output, seed) in enumerate(
             zip(prepared, first_outputs, seeds)
@@ -1154,8 +1231,16 @@ class VLLMRunner:
                 "id": record.record_id,
                 "meta": record.meta,
                 "prompt_sha256": _sha256_bytes(record.prompt_text.encode("utf-8")),
-                "n_prompt_tokens": len(record.prompt_token_ids),
+                "effective_prompt_sha256": _sha256_bytes(
+                    bytes().join(
+                        int(token_id).to_bytes(4, "big")
+                        for token_id in effective_prompt_ids[row_index]
+                    )
+                ),
+                "n_prompt_tokens": len(effective_prompt_ids[row_index]),
+                "n_original_prompt_tokens": len(record.prompt_token_ids),
                 "prompt_channel": record.prompt_channel,
+                "answer_prefix_token_ids": list(answer_prefix_ids),
                 "prompt_logprobs": _jsonable_logprobs(request_output.prompt_logprobs),
                 "outputs": [None] * len(request_output.outputs),
             }
@@ -1164,7 +1249,13 @@ class VLLMRunner:
                 sample_index = int(completion.index)
                 if sampling.thinking != "budget":
                     row["outputs"][sample_index] = self._ordinary_output(
-                        record, completion, sample_index, seed, sampling.thinking
+                        record,
+                        completion,
+                        sample_index,
+                        seed,
+                        sampling.thinking,
+                        answer_prefix_ids,
+                        stage1_seed_domain,
                     )
                     continue
 
@@ -1175,17 +1266,33 @@ class VLLMRunner:
                     if self.think_close_id in stage1
                     else None
                 )
-                naturally_finished = close_index is not None and completion.finish_reason == "stop"
+                naturally_finished = (
+                    close_index is not None
+                    and completion.finish_reason == "stop"
+                    and not sampling.force_answer_seam
+                )
                 if naturally_finished:
                     row["outputs"][sample_index] = self._ordinary_output(
-                        record, completion, sample_index, seed, "budget"
+                        record,
+                        completion,
+                        sample_index,
+                        seed,
+                        "budget",
+                        (),
+                        stage1_seed_domain,
                     )
                     continue
 
                 retained = stage1[:close_index] if close_index is not None else list(stage1)
-                forced_close = close_index is None
+                forced_close = sampling.force_answer_seam or close_index is None
+                stage2_seed_domain = (
+                    "answer" if sampling.paired_answer_seed else "stage2"
+                )
                 stage2_seed = _stable_seed(
-                    sampling.run_seed, record.record_id, sample_index, "stage2"
+                    sampling.run_seed,
+                    record.record_id,
+                    sample_index,
+                    stage2_seed_domain,
                 )
                 if sampling.shuffle_thinking and retained:
                     random.Random(
@@ -1194,7 +1301,14 @@ class VLLMRunner:
                         )
                     ).shuffle(retained)
                 continuation_prompts.append(
-                    {"prompt_token_ids": record.prompt_token_ids + retained + self.close_ids}
+                    {
+                        "prompt_token_ids": (
+                            record.prompt_token_ids
+                            + retained
+                            + self.close_ids
+                            + list(answer_prefix_ids)
+                        )
+                    }
                 )
                 continuation_params.append(
                     self._params(
@@ -1212,6 +1326,7 @@ class VLLMRunner:
                         retained,
                         forced_close,
                         stage2_seed,
+                        stage2_seed_domain,
                         completion,
                     )
                 )
@@ -1231,16 +1346,18 @@ class VLLMRunner:
                     retained,
                     forced_close,
                     stage2_seed,
+                    stage2_seed_domain,
                     first_completion,
                 ) = meta
                 completion = request_output.outputs[0]
                 stage2_sampled = list(completion.token_ids)
                 stage2 = self._trim_hf_eos(stage2_sampled)
-                final_ids = retained + self.close_ids + stage2
+                final_ids = retained + self.close_ids + list(answer_prefix_ids) + stage2
                 stage2_prompt_tokens = (
                     len(prepared[row_index].prompt_token_ids)
                     + len(retained)
                     + len(self.close_ids)
+                    + len(answer_prefix_ids)
                 )
                 stage1_cumulative = first_completion.cumulative_logprob
                 stage2_cumulative = completion.cumulative_logprob
@@ -1254,16 +1371,19 @@ class VLLMRunner:
                     "stage1_parent_seed": seeds[row_index],
                     "seed_stage1": seeds[row_index] + sample_index,
                     "seed_stage2": stage2_seed,
+                    "seed_domain_stage1": stage1_seed_domain,
+                    "seed_domain_stage2": stage2_seed_domain,
                     "text": self._decode(final_ids),
                     "token_ids": final_ids,
                     "stage1_token_ids": stage1_sampled,
                     "retained_thinking_token_ids": retained,
-                    "injected_token_ids": list(self.close_ids),
+                    "answer_prefix_token_ids": list(answer_prefix_ids),
+                    "injected_token_ids": list(self.close_ids) + list(answer_prefix_ids),
                     "stage2_token_ids": stage2_sampled,
                     "n_thinking_tokens": len(retained),
                     "n_answer_tokens": len(stage2),
                     "n_sampled_tokens": len(stage1_sampled) + len(stage2_sampled),
-                    "n_injected_tokens": len(self.close_ids),
+                    "n_injected_tokens": len(self.close_ids) + len(answer_prefix_ids),
                     "n_completion_tokens": len(final_ids),
                     "n_terminal_tokens_trimmed": (
                         len(stage1_sampled) - len(self._trim_hf_eos(stage1_sampled))
@@ -1323,6 +1443,7 @@ class VLLMRunner:
                 for key, value in self.engine_args.items()
             },
             "resolved_cudagraph": self.resolved_cudagraph,
+            "resolved_logprobs_mode": self.resolved_logprobs_mode,
             "sampling": dataclasses.asdict(sampling),
             "resolved_sampling": sampling.resolved_sampling(),
             "adapter": self.adapter_info,

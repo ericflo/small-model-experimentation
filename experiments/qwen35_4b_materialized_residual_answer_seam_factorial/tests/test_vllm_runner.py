@@ -350,7 +350,7 @@ class ResolvedCudagraphTests(unittest.TestCase):
                     "<|im_end|>": [248046],
                     "<think>": [248068],
                     "</think>": [248069],
-                    "</think>\n\n": [248069, 198],
+                    "</think>\n\n": [248069, 271],
                     "<|im_start|>assistant\n<think>\n": [1, 2, 3],
                     "<|im_start|>assistant\n<think>\n\n</think>\n\n": [1, 2, 4],
                 }
@@ -371,7 +371,8 @@ class ResolvedCudagraphTests(unittest.TestCase):
                 captured_engine_args.update(kwargs)
                 self.llm_engine = SimpleNamespace(
                     vllm_config=SimpleNamespace(
-                        compilation_config=_compilation_config()
+                        compilation_config=_compilation_config(),
+                        model_config=SimpleNamespace(logprobs_mode="raw_logprobs"),
                     ),
                     engine_core=SimpleNamespace(shutdown=lambda: None),
                 )
@@ -398,6 +399,8 @@ class ResolvedCudagraphTests(unittest.TestCase):
             )
 
         self.assertEqual(captured_engine_args["max_num_seqs"], 15)
+        self.assertEqual(captured_engine_args["max_logprobs"], 24)
+        self.assertEqual(captured_engine_args["logprobs_mode"], "raw_logprobs")
         self.assertEqual(captured_engine_args["cudagraph_capture_sizes"], list(effective))
         self.assertEqual(captured_engine_args["max_cudagraph_capture_size"], 15)
         self.assertEqual(instance.engine_args["requested_max_num_seqs"], 19)
@@ -411,7 +414,242 @@ class ResolvedCudagraphTests(unittest.TestCase):
         self.assertEqual(
             instance.resolved_cudagraph["cudagraph_capture_sizes"], list(effective)
         )
+        self.assertEqual(instance.resolved_logprobs_mode, "raw_logprobs")
         instance.close()
+
+
+class AnswerSeamTests(unittest.TestCase):
+    class FakeTokenizer:
+        def encode(self, text: str, *, add_special_tokens: bool) -> list[int]:
+            if add_special_tokens:
+                raise AssertionError("tests require exact no-special-token encoding")
+            return {
+                "prompt": [7],
+                "PROGRAM:": [90, 91],
+            }[text]
+
+        def decode(self, token_ids: list[int], *, skip_special_tokens: bool) -> str:
+            if skip_special_tokens:
+                raise AssertionError("special-token-preserving decode is required")
+            pieces = {
+                50: "reason",
+                248069: "</think>",
+                271: "\n\n",
+                90: "PRO",
+                91: "GRAM:",
+                101: " A",
+                102: " |",
+                103: " B",
+                248044: "<|endoftext|>",
+            }
+            return "".join(pieces[value] for value in token_ids)
+
+    class FakeLLM:
+        def __init__(self, calls: list[list[SimpleNamespace]]):
+            self.calls = list(calls)
+            self.prompts: list[list[dict[str, list[int]]]] = []
+
+        def generate(self, prompts, params, **kwargs):
+            self.prompts.append(prompts)
+            completions = self.calls.pop(0)
+            if len(completions) != len(prompts):
+                raise AssertionError("fake completion geometry differs from prompts")
+            return [
+                SimpleNamespace(prompt_logprobs=None, outputs=[completion])
+                for completion in completions
+            ]
+
+    @staticmethod
+    def completion(
+        token_ids: list[int], *, finish_reason: str = "stop"
+    ) -> SimpleNamespace:
+        return SimpleNamespace(
+            index=0,
+            token_ids=token_ids,
+            finish_reason=finish_reason,
+            stop_reason=248044 if finish_reason == "stop" else None,
+            cumulative_logprob=-1.0,
+            logprobs=None,
+        )
+
+    def instance(self, calls: list[list[SimpleNamespace]]) -> runner.VLLMRunner:
+        value = object.__new__(runner.VLLMRunner)
+        value.config = runner.EngineConfig(max_model_len=1024)
+        value.tokenizer = self.FakeTokenizer()
+        value.hf_eos_id = 248044
+        value.tokenizer_eos_id = 248046
+        value.think_open_id = 248068
+        value.think_close_id = 248069
+        value.close_ids = [248069, 271]
+        value.thinking_prompt_suffix_ids = [1, 2, 3]
+        value.no_thinking_prompt_suffix_ids = [1, 2, 4]
+        value.llm = self.FakeLLM(calls)
+        value.lora_request = None
+        value.adapter_info = None
+        value.load_seconds = 0.0
+        value.engine_args = {"seed": 0}
+        value.resolved_cudagraph = {}
+        value.resolved_logprobs_mode = "raw_logprobs"
+        return value
+
+    def run_generate(
+        self,
+        value: runner.VLLMRunner,
+        sampling: runner.SamplingConfig,
+    ):
+        fake_vllm = types.ModuleType("vllm")
+        fake_vllm.SamplingParams = lambda **kwargs: SimpleNamespace(**kwargs)
+        with mock.patch.dict(sys.modules, {"vllm": fake_vllm}), mock.patch.object(
+            runner.VLLMRunner,
+            "runtime_metadata",
+            return_value={"test": True},
+        ):
+            return value.generate(
+                [{"id": "paired-record", "prompt": "prompt"}], sampling
+            )
+
+    def test_sampling_contract_rejects_unpaired_or_ambiguous_slot_modes(self) -> None:
+        with self.assertRaisesRegex(ValueError, "natural thinking"):
+            runner.SamplingConfig(
+                thinking="natural", answer_prefix="PROGRAM:"
+            ).validate()
+        with self.assertRaisesRegex(ValueError, "requires force_answer_seam"):
+            runner.SamplingConfig(
+                thinking="budget",
+                thinking_budget=8,
+                answer_prefix="PROGRAM:",
+            ).validate()
+        with self.assertRaisesRegex(ValueError, "requires n=1"):
+            runner.SamplingConfig(
+                thinking="off", n=2, paired_answer_seed=True
+            ).validate()
+
+    def test_no_think_slot_is_injected_prefill_and_not_sampled_answer(self) -> None:
+        value = self.instance(
+            [[self.completion([101, 102, 103, 248044])]]
+        )
+        rows, metadata = self.run_generate(
+            value,
+            runner.SamplingConfig(
+                thinking="off",
+                max_tokens=24,
+                answer_max_tokens=24,
+                greedy=True,
+                allow_custom_prompts=True,
+                answer_prefix="PROGRAM:",
+                paired_answer_seed=True,
+                run_seed=19,
+            ),
+        )
+
+        self.assertEqual(value.llm.prompts, [[{"prompt_token_ids": [7, 90, 91]}]])
+        output = rows[0]["outputs"][0]
+        self.assertEqual(output["text"], "PROGRAM: A | B")
+        self.assertEqual(output["token_ids"], [90, 91, 101, 102, 103])
+        self.assertEqual(output["stage1_token_ids"], [101, 102, 103, 248044])
+        self.assertEqual(output["answer_prefix_token_ids"], [90, 91])
+        self.assertEqual(output["n_answer_tokens"], 3)
+        self.assertEqual(output["n_injected_tokens"], 2)
+        self.assertEqual(output["n_stage1_prompt_tokens"], 3)
+        self.assertEqual(output["seed_domain_stage1"], "answer")
+        self.assertEqual(metadata["counts"]["sampled_tokens"], 4)
+        self.assertEqual(metadata["counts"]["injected_tokens"], 2)
+
+    def test_think_slot_forces_registered_prefix_after_any_natural_close(self) -> None:
+        value = self.instance(
+            [
+                [self.completion([50, 248069, 77, 248044])],
+                [self.completion([101, 102, 103, 248044])],
+            ]
+        )
+        rows, _metadata = self.run_generate(
+            value,
+            runner.SamplingConfig(
+                thinking="budget",
+                thinking_budget=8,
+                max_tokens=8,
+                answer_max_tokens=24,
+                greedy=True,
+                allow_custom_prompts=True,
+                answer_prefix="PROGRAM:",
+                force_answer_seam=True,
+                paired_answer_seed=True,
+                run_seed=19,
+            ),
+        )
+
+        self.assertEqual(
+            value.llm.prompts,
+            [
+                [{"prompt_token_ids": [7]}],
+                [
+                    {
+                        "prompt_token_ids": [
+                            7,
+                            50,
+                            248069,
+                            271,
+                            90,
+                            91,
+                        ]
+                    }
+                ],
+            ],
+        )
+        output = rows[0]["outputs"][0]
+        self.assertEqual(output["text"], "reason</think>\n\nPROGRAM: A | B")
+        self.assertEqual(output["retained_thinking_token_ids"], [50])
+        self.assertEqual(
+            output["injected_token_ids"], [248069, 271, 90, 91]
+        )
+        self.assertEqual(output["n_thinking_tokens"], 1)
+        self.assertEqual(output["n_answer_tokens"], 3)
+        self.assertEqual(output["n_injected_tokens"], 4)
+        self.assertEqual(output["seed_domain_stage1"], "thought")
+        self.assertEqual(output["seed_domain_stage2"], "answer")
+        self.assertTrue(output["forced_close"])
+
+    def test_answer_seed_is_paired_across_no_think_and_think_slot(self) -> None:
+        no_think = self.instance(
+            [[self.completion([101, 102, 103, 248044])]]
+        )
+        no_rows, _ = self.run_generate(
+            no_think,
+            runner.SamplingConfig(
+                thinking="off",
+                max_tokens=24,
+                greedy=True,
+                allow_custom_prompts=True,
+                answer_prefix="PROGRAM:",
+                paired_answer_seed=True,
+                run_seed=23,
+            ),
+        )
+        thinking = self.instance(
+            [
+                [self.completion([50], finish_reason="length")],
+                [self.completion([101, 102, 103, 248044])],
+            ]
+        )
+        think_rows, _ = self.run_generate(
+            thinking,
+            runner.SamplingConfig(
+                thinking="budget",
+                thinking_budget=1,
+                max_tokens=1,
+                answer_max_tokens=24,
+                greedy=True,
+                allow_custom_prompts=True,
+                answer_prefix="PROGRAM:",
+                force_answer_seam=True,
+                paired_answer_seed=True,
+                run_seed=23,
+            ),
+        )
+        self.assertEqual(
+            no_rows[0]["outputs"][0]["seed_stage1"],
+            think_rows[0]["outputs"][0]["seed_stage2"],
+        )
 
 
 if __name__ == "__main__":

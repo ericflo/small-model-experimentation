@@ -15,15 +15,17 @@ research_programs:
   - "structured_execution_and_compilers"
 top_level_dirs:
   - "configs"
+  - "data"
   - "reports"
   - "runs"
   - "scripts"
   - "src"
   - "tests"
 file_counts:
-  json: 1
+  json: 4
+  jsonl: 10
   md: 7
-  py: 3
+  py: 12
   yaml: 3
-total_files: 14
-total_size_bytes: 97919
+total_files: 36
+total_size_bytes: 6470945

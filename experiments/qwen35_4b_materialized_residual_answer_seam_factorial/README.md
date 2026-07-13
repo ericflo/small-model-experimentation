@@ -1,6 +1,6 @@
 # Qwen3.5-4B Materialized Residual Answer-Seam Factorial
 
-**Status:** in-progress · since 2026-07-13 · scaffold reserved; construction, adversarial design review, and every model stage remain sealed
+**Status:** in-progress · since 2026-07-13 · fresh construction complete; adversarial review holds every model stage sealed pending transaction/firewall implementation and a published lock
 
 This fresh successor isolates the failure that made the durable materialized-
 residual generation result uninterpretable: the model never entered a reliable
@@ -25,11 +25,10 @@ token-preserving shuffled, and matched-compute direct sampling controls?
 ## Hypothesis
 
 The prior model could copy a structured echo on 20/24 non-cap rows but every
-thought hit its cap. A no-think structured seam or a forced close plus literal
-`PROGRAM:` slot should remove answer-mode ambiguity without supplying answer
-identity. If one achieves >=90% exact echo/parse and <=5% cap contact on
-calibration tasks, it may expose residual completion that the invalid free-form
-interface hid.
+thought hit its cap. A complete 2x2 crossing think@512/no-think with
+freeform/literal-`PROGRAM:` prefill can isolate answer syntax from reasoning
+policy without supplying answer identity. A separately calibrated policy may
+expose residual completion that the invalid free-form interface hid.
 
 ## Setup
 
@@ -39,9 +38,9 @@ interface hid.
   never `benchmarks/`.
 - Split: 48 known-answer interface-calibration tasks and 24 disjoint mechanics
   tasks, with new task/request/seed domains.
-- Interface arms: current forced-close free-form control, no-think short
-  structured emission, and forced-close `PROGRAM:` slot with autonomously
-  generated program tokens.
+- Interface arms: `think512_freeform`, `think512_program_slot`,
+  `no_think_freeform`, and `no_think_program_slot`; all answer aliases are
+  sampled autonomously with the same 24-token tail cap.
 - Baseline: taskwise matched-compute direct full-program sampling on the same
   backend and selected interface budget.
 - Controls: name-only siblings, task-hash shuffled materialized states/targets,
@@ -50,9 +49,14 @@ interface hid.
   visible-only selector, gated behind the interface calibration.
 - Oracle-only metrics: exact candidate viability and hidden program success;
   neither may affect interface choice, prompts, budgets, or selected IDs.
-- Hidden-label boundary: mechanics remains inaccessible until one interface
-  passes all three frozen calibration gates; qualification/confirmation and
-  all benchmark content remain unread.
+- Calibration gates: >=44/48 exact echoes, >=44/48 parses, <=2/48 answer-cap
+  contacts, plus >=22/24 exact/parse and <=1/24 cap contacts in each arity.
+- Winner: first qualifier in the fixed least-departure priority, never the
+  best observed metric.
+- Hidden-label boundary: mechanics remains inaccessible until a committed
+  winner receipt and second lock; hidden scoring remains inaccessible until a
+  committed visible-selection receipt. Qualification/confirmation and all
+  benchmark content remain unread.
 
 ## Run
 
@@ -62,22 +66,34 @@ Smoke:
 python experiments/qwen35_4b_materialized_residual_answer_seam_factorial/scripts/run.py --smoke
 ```
 
+Fresh construction and append-only v2 smoke:
+
+```bash
+python experiments/qwen35_4b_materialized_residual_answer_seam_factorial/scripts/construct.py
+python experiments/qwen35_4b_materialized_residual_answer_seam_factorial/scripts/run.py --design-smoke
+```
+
 Full:
 
 ```bash
-sealed pending adversarial design review
+sealed pending implementation review and published calibration lock
 ```
 
 ## Results
 
-The model-free scaffold passes with three frozen interface arms, 48/24 disjoint
-calibration/mechanics task counts, zero model loads/calls, and empty forbidden-
-read receipts. This is registration evidence only.
+The immutable scaffold-v1 receipt still passes. V2 construction also passes
+twice byte-identically: 72 unique public instances, zero overlap with 264
+authenticated parent instances, exact live-sibling strata, 4,104 prepared rows,
+2,952 unique canonical request IDs, balanced A-X calibration positions, zero
+model calls, and empty forbidden-read receipts. Thirty-six model-free tests
+pass. This remains registration and implementation evidence only.
 
 ## Interpretation
 
-No scientific belief changes. The experiment ID and answer-seam decision
-boundary are reserved before harness copying or model use.
+No capability belief changes. Adversarial review materially strengthened the
+design and still holds live execution: real-tokenizer parity, durable
+transactions/recovery, reader firewalls, separate locks, and committed outcome
+boundaries remain mandatory.
 
 ## Knowledgebase Update
 

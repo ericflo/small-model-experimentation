@@ -3378,9 +3378,10 @@
   },
   {
     "file_counts": {
-      ".json": 1,
+      ".json": 4,
+      ".jsonl": 10,
       ".md": 7,
-      ".py": 3,
+      ".py": 12,
       ".yaml": 3
     },
     "id": "qwen35_4b_materialized_residual_answer_seam_factorial",
@@ -3401,14 +3402,15 @@
     "title": "Qwen3.5-4B Materialized Residual Answer-Seam Factorial",
     "top_level_dirs": [
       "configs",
+      "data",
       "reports",
       "runs",
       "scripts",
       "src",
       "tests"
     ],
-    "total_files": 14,
-    "total_size_bytes": 97919
+    "total_files": 36,
+    "total_size_bytes": 6470945
   },
   {
     "file_counts": {
