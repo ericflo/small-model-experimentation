@@ -106,12 +106,13 @@ class FixedBranchPatcher:
                 raise RuntimeError("branch patch repeated at one layer")
             patched = tensor.clone()
             current = patched[:, self.position, :]
+            current_float = current.float().clone()
             requested = branches.T.to(device=tensor.device, dtype=torch.float32)
-            changed = (current.float() + requested).to(tensor.dtype)
+            changed = (current_float + requested).to(tensor.dtype)
             patched[:, self.position, :] = changed
-            self.input_activations[layer] = current.float().detach().cpu()
+            self.input_activations[layer] = current_float.detach().cpu()
             self.requested[layer] = requested.detach().cpu()
-            self.realized[layer] = (changed.float() - current.float()).detach().cpu()
+            self.realized[layer] = (changed.float() - current_float).detach().cpu()
             self.applications[layer] += 1
             return _with_tensor(output, patched)
 

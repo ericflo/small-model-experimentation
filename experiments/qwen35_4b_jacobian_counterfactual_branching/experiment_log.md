@@ -26,3 +26,19 @@
   froze exact runner/model/geometry/test hashes in config.
 - This boundary authorizes outcome-blind model smoke only. It does not authorize
   alpha mechanics or continuation generation.
+
+## 2026-07-13 — Invalid first live-bf16 receipt
+
+- The first outcome-blind model smoke loaded the exact model/lens and applied
+  every hook once, but its numeric receipt was invalid.
+- Root cause: `current` was a view into the cloned activation; assigning the
+  changed activation mutated the supposed before-state, so all realized deltas
+  were falsely recorded as zero.
+- A second guard omission reported J requested-norm error 1.0 but did not include
+  it in the conjunctive numeric pass, producing an impossible false pass.
+- No branch probabilities, choices, correct alias, outcome, qualification, or
+  confirmation data were recorded. The receipt is preserved as
+  `model_001_invalid_receipt.json` and cannot authorize mechanics.
+- Fixed by cloning the float before-state before assignment, computing realized
+  deltas against it, and making J requested-norm error a mandatory gate. A new
+  pushed implementation hash is required before rerun.

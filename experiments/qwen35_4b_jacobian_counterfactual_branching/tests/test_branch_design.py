@@ -98,6 +98,8 @@ def test_fixed_branch_patcher_applies_once_at_exact_position():
     assert torch.equal(output[:, :2], hidden[:, :2])
     assert torch.equal(output[:, 3], hidden[:, 3])
     assert torch.equal(output[:, 2].float(), branches.T)
+    assert torch.equal(patcher.input_activations[0], torch.zeros(2, 3))
+    assert torch.equal(patcher.realized[0], branches.T)
 
 
 def test_fixed_branch_patcher_rejects_wrong_batch_width():

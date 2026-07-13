@@ -92,6 +92,8 @@ Design and adversarial review in progress. No model or outcome has run.
 - `reports/design_review.md`: adversarial review before implementation/GPU use.
 - `reports/pre_model_implementation_audit.md`: 30 assertions authorizing only
   outcome-blind live-bf16 model smoke after a pushed hash boundary.
+- `reports/post_model_smoke_001_audit.md`: invalid zero-delta receipt, root
+  cause, repaired guards, and explicit non-authorization.
 - `assets/context_lens.pt`: byte-identical causal lens anchor.
 - `src/`: frozen tasks, branch geometry, cache-fork model operations, and pure
   statistics.

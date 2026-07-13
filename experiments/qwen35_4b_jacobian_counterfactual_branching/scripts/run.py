@@ -202,7 +202,9 @@ def _live_numeric_receipt(
             maxima[key] = max(maxima[key], value)
     controls = config["controls"]
     passed = bool(
-        maxima["non_j_paired_norm_relative_error"]
+        maxima["j_requested_norm_relative_error"]
+        <= float(controls["post_bf16_norm_relative_tolerance"])
+        and maxima["non_j_paired_norm_relative_error"]
         <= float(controls["post_bf16_norm_relative_tolerance"])
         and maxima["non_j_span_projection_fraction"]
         <= float(controls["post_bf16_non_j_span_projection_max"])
@@ -296,7 +298,7 @@ def model_smoke() -> None:
         "lens_sha256": sha256(lens_path),
         "design_boundary": boundary,
     }
-    write_json(EXP / "runs" / "smoke" / "model.json", result)
+    write_json(EXP / "runs" / "smoke" / "model_002.json", result)
     print(json.dumps(result, indent=2, sort_keys=True))
 
 
