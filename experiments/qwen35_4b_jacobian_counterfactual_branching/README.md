@@ -90,6 +90,8 @@ Design and adversarial review in progress. No model or outcome has run.
 - `idea_intake.md`: novelty and routing.
 - `reports/preregistration.md`: immutable scientific rules.
 - `reports/design_review.md`: adversarial review before implementation/GPU use.
+- `reports/pre_model_implementation_audit.md`: 30 assertions authorizing only
+  outcome-blind live-bf16 model smoke after a pushed hash boundary.
 - `assets/context_lens.pt`: byte-identical causal lens anchor.
 - `src/`: frozen tasks, branch geometry, cache-fork model operations, and pure
   statistics.

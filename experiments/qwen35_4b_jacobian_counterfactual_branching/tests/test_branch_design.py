@@ -17,6 +17,7 @@ from branch_geometry import (  # noqa: E402
     geometry_receipt,
     gram_matched_non_j,
 )
+from model_ops import FixedBranchPatcher  # noqa: E402
 from task_data import task_prompt  # noqa: E402
 
 
@@ -85,3 +86,28 @@ def test_data_manifest_is_fresh_and_complete():
     assert manifest["splits"]["mechanics"]["rows"] == config["data"]["mechanics_tasks"]
     assert manifest["splits"]["qualification"]["rows"] == config["data"]["qualification_tasks"]
     assert manifest["splits"]["confirmation"]["rows"] == config["data"]["confirmation_tasks"]
+
+
+def test_fixed_branch_patcher_applies_once_at_exact_position():
+    layer = torch.nn.Identity()
+    branches = torch.tensor([[1.0, -1.0], [0.5, -0.5], [0.0, 0.0]])
+    hidden = torch.zeros(2, 4, 3, dtype=torch.bfloat16)
+    with FixedBranchPatcher([layer], position=2, branches_by_layer={0: branches}) as patcher:
+        output = layer(hidden)
+    assert patcher.applications == {0: 1}
+    assert torch.equal(output[:, :2], hidden[:, :2])
+    assert torch.equal(output[:, 3], hidden[:, 3])
+    assert torch.equal(output[:, 2].float(), branches.T)
+
+
+def test_fixed_branch_patcher_rejects_wrong_batch_width():
+    layer = torch.nn.Identity()
+    branches = torch.zeros(3, 2)
+    hidden = torch.zeros(1, 4, 3)
+    try:
+        with FixedBranchPatcher([layer], position=2, branches_by_layer={0: branches}):
+            layer(hidden)
+    except RuntimeError as error:
+        assert "batch width" in str(error)
+    else:
+        raise AssertionError("wrong branch batch width did not fail")
