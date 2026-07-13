@@ -21,8 +21,9 @@ and a task-randomized computed operation consequence precede continuation.
 
 Model-free smoke passes: lens SHA/rank and all 12 distinct diagnostic results
 are valid; the 4/24/48 splits contain 76 unique new behaviors with zero overlap
-against 1,046 ancestor fingerprints; six tests pass; model/outcomes remain
-unloaded. Only model-free work is authorized.
+against 1,046 ancestor fingerprints. The original smoke had six tests; 15 now
+pass after the pre-model implementation audit. Model/outcomes remain unloaded;
+only model-free work is authorized.
 
 ## Controls
 

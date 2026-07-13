@@ -35,3 +35,16 @@
   data manifest, and frozen lens by SHA-256.
 - A clean model-free rerun verifies the commit is an ancestor and both local and
   committed bytes match every expected digest. Implementation remains pending.
+
+## 2026-07-13 — Pre-model implementation audit repair
+
+- An independent code audit caught that the preregistered `label_map` seed was
+  present but not used. Corrected the generator before any model call, preserving
+  every task behavior while changing only the diagnostic-label stream; added a
+  mutation test and will supersede the public-data design hashes.
+- Removed an inherited close-suppression flag. Native 512-token prefix sampling
+  uses ordinary cached decoding and fails on natural close/EOS; all anchor
+  capture/intervention/readout forwards remain cache-free as preregistered.
+- Implementation now freezes scientific config semantics, exact prefix IDs,
+  tokenizer/whole-scaffold contracts, clean donors, exact-once hooks, two live
+  controls, and every patcher type before outcome retention.

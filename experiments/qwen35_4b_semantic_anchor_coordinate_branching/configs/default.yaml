@@ -90,7 +90,6 @@ generation:
   prompt_max_tokens: 768
   total_max_tokens: 2048
   slot_text: "\n\nFirst:"
-  suppress_think_close_before_cap: true
 
 lens:
   path: assets/context_lens.pt
@@ -114,6 +113,7 @@ controls:
   live_control_candidate_draws: 32
   live_control_correction_iterations: 512
   live_control_correction_damping: 0.5
+  live_control_binary_search_steps: 64
   live_control_lattice_pair_steps: 32
   live_control_repair_safety_margin: 0.95
   bootstrap_resamples: 10000
@@ -165,4 +165,6 @@ design_boundary:
     mechanics_public_sha256: 6774d8727409b8398018e5a65710ac226765fa793a4f7a028a666ec3bb952edb
     lens_sha256: e373b6e93956fdfc5cb446e9bee8249655707c8258a7868f0653d11f1ffd0213
 implementation_boundary:
+  status: pending
+mechanics_boundary:
   status: pending

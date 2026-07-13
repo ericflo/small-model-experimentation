@@ -76,9 +76,10 @@ committed and its hashes are anchored in the configuration.
 ## Results
 
 Model-free smoke passes. The frozen lens is byte-identical and rank 24 at every
-layer 4--8; all 12 diagnostic operation results are distinct; 76 fresh task
-behaviors have zero overlap with 1,046 readable ancestor fingerprints; and six
-design/data tests pass. No model result exists. Mechanics must prove a
+layer 4--8; all 12 diagnostic operation results are distinct; and 76 fresh task
+behaviors have zero overlap with 1,046 readable ancestor fingerprints. The
+original smoke boundary had six tests; 15 now pass after implementation. No
+model result exists. Mechanics must prove a
 randomized computed consequence—not merely alias writing—with live numeric
 controls before any correctness-scored continuation.
 

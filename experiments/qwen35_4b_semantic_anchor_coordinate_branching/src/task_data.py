@@ -226,22 +226,26 @@ def make_task(
 def build_splits(config: dict[str, Any]) -> dict[str, list[dict[str, Any]]]:
     data = config["data"]
     seed = int(config["seeds"]["split"])
+    label_seed = int(config["seeds"]["label_map"])
     operations = tuple(data["operation_names"])
     aliases = tuple(data["alias_tokens"])
     labels = tuple(config["anchor"]["result_labels"])
     if operations != tuple(OPERATIONS):
         raise ValueError("configured operation order changed")
     specs = (
-        ("mechanics", int(data["mechanics_tasks"]), seed + 11),
-        ("qualification", int(data["qualification_tasks"]), seed + 23),
-        ("confirmation", int(data["confirmation_tasks"]), seed + 37),
+        ("mechanics", int(data["mechanics_tasks"]), seed + 11, 11),
+        ("qualification", int(data["qualification_tasks"]), seed + 23, 23),
+        ("confirmation", int(data["confirmation_tasks"]), seed + 37, 37),
     )
     result: dict[str, list[dict[str, Any]]] = {}
-    for split, count, split_seed in specs:
+    for split, count, split_seed, label_salt in specs:
         rng = random.Random(split_seed)
         first_offset = rng.randrange(len(IDENTIFIABLE_FIRST_OPERATIONS))
         alias_offset = rng.randrange(len(aliases))
-        label_offset = rng.randrange(len(labels))
+        # Retain the split RNG draw so task behaviors stay invariant to this
+        # independent diagnostic-label stream, then use the preregistered seed.
+        rng.randrange(len(labels))
+        label_offset = random.Random(label_seed + label_salt).randrange(len(labels))
         source_offset = rng.randrange(len(aliases))
         rows = []
         for index in range(count):

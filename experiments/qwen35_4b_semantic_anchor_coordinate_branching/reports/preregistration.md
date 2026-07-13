@@ -41,6 +41,11 @@ no close/EOS. Fail the row rather than substitute a prefix. Prompt, decoder,
 seed, and cap are fixed. Candidate identity, diagnostic labels, and task gold
 cannot affect prefix generation.
 
+Prefix sampling uses the model's native cached generation path and does not
+suppress `</think>`; an early natural close fails. Every subsequent anchor
+capture, patch, control, and mechanics readout is batch-one, padding-free,
+cache-free full recomputation over those exact locked prefix token IDs.
+
 This is scaffolded native thought: the prefix is generated naturally, while the
 hypothesis interface is explicitly inserted. It is not evidence for a
 spontaneous global workspace or consciousness interpretation.
