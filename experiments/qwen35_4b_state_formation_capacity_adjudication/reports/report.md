@@ -3,10 +3,10 @@
 ## Status
 
 **In progress; no scientific result exists.** Preregistration, adversarial design review, and the
-frozen design are complete. Source-v7 implementation authorization is `GO` at reviewed digest
-`af6d65df…6abcef` and full source contract `5ecff668…2ae74`, with 355/355 source-bound tests passing.
+frozen design are complete. Source-v8 implementation authorization is `GO` at reviewed digest
+`f9364c36…b9d873` and full source contract `7991d46a…b1cc88`, with 357/357 source-bound tests passing.
 This authorizes only the ordered publish/CI, source-d426 archival, archive-checkpoint publish/CI, and
-fresh source-v7 regeneration sequence; no result-bearing command is yet authorized. The corrected setup-control source passed
+fresh source-v8 regeneration sequence; no result-bearing command is yet authorized. The corrected setup-control source passed
 171/171 local tests and independent code and GPU/runtime review. Every setup artifact from source
 `3baa7b53…d5c42` is durably archived. The later CPU smoke, data manifest, empty sealed-access ledger,
 and three shared initialization bundles were regenerated and strictly reopened under source

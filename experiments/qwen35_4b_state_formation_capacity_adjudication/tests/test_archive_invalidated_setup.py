@@ -263,6 +263,53 @@ class InvalidatedSetupArchiveTests(unittest.TestCase):
         self._write_json(mirror, payload)
         return canonical, mirror
 
+    def _add_positive_control_pass(
+        self,
+        capacity: str,
+        seed: int,
+        *,
+        evaluation_authority: object = False,
+        omit_evaluation_authority: bool = False,
+    ) -> Path:
+        setup_dir = self.experiment / "runs" / "setup"
+        g0_path = setup_dir / f"g0_{capacity}_seed{seed}.json"
+        g0 = json.loads(g0_path.read_text(encoding="utf-8"))
+        shared_initialization = g0["setup"]["shared_initialization"]
+        manifest_path = (
+            self.experiment / self.config["paths"]["data_dir"] / "manifest.json"
+        )
+        payload = {
+            "schema_version": 1,
+            "status": "POSITIVE_CONTROL_PASS",
+            "phase": f"{capacity}_positive_control",
+            "backend": "transformers",
+            **self._common(),
+            "capacity": capacity,
+            "model_seed": seed,
+            "data_manifest_sha256": self.module._sha256(manifest_path),
+            "g0_lineage": {
+                "path": g0_path.relative_to(self.repo).as_posix(),
+                "sha256": self.module._sha256(g0_path),
+                "receipt_identity_sha256": g0["receipt_identity_sha256"],
+                "status": "MODEL_SMOKE_PASS",
+                "phase": f"{capacity}_g0",
+            },
+            "branch_authorization": g0["branch_authorization"],
+            "shared_initialization": shared_initialization,
+            "setup": {"shared_initialization": shared_initialization},
+            "authorizes_training": True,
+            "authorizes_result_training": True,
+            "benchmark_files_read": 0,
+            "result_payloads_opened": [],
+            "sealed_contrast_payloads_opened": [],
+            "scientific_evidence": False,
+        }
+        if not omit_evaluation_authority:
+            payload["authorizes_result_evaluation"] = evaluation_authority
+        canonical = setup_dir / f"positive_control_{capacity}_seed{seed}.json"
+        self._write_json(canonical, self._signed(payload))
+        return canonical
+
     def _replace_g0_with_failure(self, capacity: str, seed: int) -> tuple[Path, Path]:
         setup_dir = self.experiment / "runs" / "setup"
         canonical = setup_dir / f"g0_{capacity}_seed{seed}.json"
@@ -532,6 +579,42 @@ class InvalidatedSetupArchiveTests(unittest.TestCase):
             f"tracked_receipts/{canonical.name}",
             {record["path"] for record in receipt["files"]},
         )
+
+    def test_legacy_positive_control_pass_without_evaluation_bit_is_archived(self) -> None:
+        canonical = self._add_positive_control_pass(
+            "lora",
+            7411,
+            omit_evaluation_authority=True,
+        )
+        receipt = self.module.archive_invalidated_setup(
+            self.config,
+            self.OLD_SOURCE,
+            self.trigger,
+        )
+        self.assertFalse(canonical.exists())
+        archived = self._archive_root() / "tracked_receipts" / canonical.name
+        self.assertTrue(archived.is_file())
+        self.assertIn(
+            f"tracked_receipts/{canonical.name}",
+            {record["path"] for record in receipt["files"]},
+        )
+
+    def test_positive_control_pass_rejects_unsafe_evaluation_bit(self) -> None:
+        canonical = self._add_positive_control_pass("lora", 7411)
+        original = json.loads(canonical.read_text(encoding="utf-8"))
+        for label, unsafe in (("true", True), ("null", None), ("integer", 0)):
+            with self.subTest(label=label):
+                payload = copy.deepcopy(original)
+                payload.pop("receipt_identity_sha256")
+                payload["authorizes_result_evaluation"] = unsafe
+                self._write_json(canonical, self._signed(payload))
+                with self.assertRaises(RuntimeError):
+                    self.module.archive_invalidated_setup(
+                        self.config,
+                        self.OLD_SOURCE,
+                        self.trigger,
+                    )
+                self.assertFalse(self._archive_root().exists())
 
     def test_positive_control_failure_auth_error_access_and_progress_are_exact(self) -> None:
         canonical, mirror = self._add_positive_control_failure("lora", 7411)

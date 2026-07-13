@@ -838,11 +838,24 @@ def _validate_positive_control_receipts(
             for field, expected in {
                 "authorizes_training": True,
                 "authorizes_result_training": True,
-                "authorizes_result_evaluation": False,
                 "scientific_evidence": False,
             }.items():
                 if type(payload.get(field)) is not bool or payload[field] is not expected:
                     raise RuntimeError(f"{label} has unsafe {field}")
+            # Successful positive-control receipts produced before the explicit
+            # result-evaluation deny bit was added omit this field. Absence did
+            # not grant authority, so preserve that legacy-safe form while
+            # continuing to reject every explicit value except ``False``.
+            evaluation_authority = payload.get(
+                "authorizes_result_evaluation", False
+            )
+            if (
+                type(evaluation_authority) is not bool
+                or evaluation_authority is not False
+            ):
+                raise RuntimeError(
+                    f"{label} has unsafe authorizes_result_evaluation"
+                )
             if type(payload.get("benchmark_files_read")) is not int or payload[
                 "benchmark_files_read"
             ] != 0:
@@ -2367,26 +2380,17 @@ def archive_invalidated_setup(
 
     if not SHA256_RE.fullmatch(invalidated_source):
         raise RuntimeError("--invalidated-source must be an exact lowercase SHA-256")
-    failures_dir = _safe_repo_path(
-        ROOT / config["paths"]["runs_dir"] / "failures",
-        "tracked failures root",
-    )
-    failures_dir.mkdir(parents=True, exist_ok=True)
-    lock_path = failures_dir / (
-        f".invalidated_setup_source_{invalidated_source[:8]}.lock"
-    )
     execution_generation_lock = _safe_repo_path(
         ROOT / "runs" / "run.lock",
         "execution generation lock",
     )
     try:
         with locked_regular(execution_generation_lock):
-            with locked_regular(lock_path):
-                return _archive_invalidated_setup_transaction(
-                    config,
-                    invalidated_source,
-                    trigger_failure,
-                )
+            return _archive_invalidated_setup_transaction(
+                config,
+                invalidated_source,
+                trigger_failure,
+            )
     except StableArtifactError as exc:
         raise RuntimeError("invalidated setup transaction path is unsafe") from exc
 

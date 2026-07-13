@@ -1,16 +1,16 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · frozen design unchanged; source-v7 implementation review `GO`; source-v7 publication/CI and source-d426 archival still required; no result run is authorized
+**Status:** in-progress · since 2026-07-13 · frozen design unchanged; source-v8 implementation review `GO`; source-v8 publication/CI and source-d426 archival still required; no result run is authorized
 
 ## Current status
 
 This is the canonical fresh adjudication of the unresolved LoRA-capacity question from
 `qwen35_4b_state_carry_vs_state_bag`. It is not a continuation of either prior checkpoint.
 Preregistration, adversarial design review, and the frozen scientific design are complete. The
-integrated source-v7 review is `GO` for reviewed implementation
-`af6d65df…6abcef` and full source contract `5ecff668…2ae74`; the 355/355 suite and exact machine gate
+integrated source-v8 review is `GO` for reviewed implementation
+`f9364c36…b9d873` and full source contract `7991d46a…b1cc88`; the 357/357 suite and exact machine gate
 pass. Execution remains ordered: publish this source to `main`, require both workflows green, archive
-the source-d426 setup, publish that archive checkpoint, and only then regenerate source-v7 setup.
+the source-d426 setup, publish that archive checkpoint, and only then regenerate source-v8 setup.
 Under source `3baa7b53…d5c42`, seed 7411 passed LoRA G0, then its 256-update setup
 control scored 0/48 exact terminal triples. Review found that the control had presented one singleton
 row per optimizer update and omitted the globally frozen accumulation of 16, so each high-entropy row
@@ -88,15 +88,15 @@ replacement-source seed-7411 and seed-7412 G0/controls passed. A pre-result auth
 found fail-open generic receipt checks; source repair and setup archival/regeneration are required
 before seed 7413 or any result-bearing stage.
 
-### Source-v7 operator boundary
+### Source-v8 operator boundary
 
 The frozen GPU runbook is the complete from-zero phase order, not the current resume point. Preserve
 `reports/design_receipt.json` and every file it freezes; do not rerun `design-boundary` or rewrite the
 preregistration, design review, architecture, runbook, handoff, or default config. After
-source-contract v7 is committed, pushed to `main`, and both repository workflows are green, archive
+source-contract v8 is committed, pushed to `main`, and both repository workflows are green, archive
 every source-`d4269bf3…8b36` downstream setup artifact through the registered invalidation helper.
 Then regenerate CPU smoke, procedural data and the empty contrast ledger, all three initialization
-bundles, and all three LoRA G0/positive-control pairs under the one final v7 source before Stage A.
+bundles, and all three LoRA G0/positive-control pairs under the one final v8 source before Stage A.
 
 The exact one-time transition command is:
 
@@ -303,8 +303,8 @@ fresh successor.
 
 ## Run
 
-The run is deliberately non-monolithic. At the current source-v7 resume point, perform the
-source-d426 archive transition in **Source-v7 operator boundary** above first. Only after that archive
+The run is deliberately non-monolithic. At the current source-v8 resume point, perform the
+source-d426 archive transition in **Source-v8 operator boundary** above first. Only after that archive
 checkpoint is committed, pushed, and green should setup regeneration start with the non-model smoke:
 
 ```bash

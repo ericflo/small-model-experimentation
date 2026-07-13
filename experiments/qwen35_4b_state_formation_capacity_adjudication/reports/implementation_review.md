@@ -1,26 +1,36 @@
 # Implementation Review
 
-**Source-contract version:** `7`
+**Source-contract version:** `8`
 
-**Reviewed implementation SHA-256:** `af6d65dfe28dc385e8819e8443cd6b63985101f1bee5be2c248563a4576abcef`
+**Reviewed implementation SHA-256:** `f9364c36cf7691f43acf1642d0867d63099a4f4926c3ed0318e3b76b79b9d873`
 
 **Status:** `GO`
 
-Source-contract v7 passed integrated authorization, science/protocol, and terminal/recovery review.
+Source-contract v8 passed integrated authorization, science/protocol, and terminal/recovery review.
 This authorization binds exactly the implementation digest above plus the pinned training lock; any
 change to a reviewed source or test revokes it automatically. It authorizes only the registered
-source-v7 archive/regeneration/runbook sequence and does not make any historical setup artifact valid
-under v7.
+source-v8 archive/regeneration/runbook sequence and does not make any historical setup artifact valid
+under v8.
 
-## Source-v7 integrated authorization
+## Source-v8 integrated authorization
 
-The complete source-bound CPU suite passes **355/355**. The focused terminal boundary passes
-**142/142** across stable I/O (31), invalidated-setup archive/recovery (52), failed-attempt
+The complete source-bound CPU suite passes **357/357**. The focused terminal boundary passes
+**144/144** across stable I/O (31), invalidated-setup archive/recovery (54), failed-attempt
 archive/recovery (28), and static execution contracts (31). The independent frozen-science audit
 passes **238/238** with no scientific defect: fixed seeds, split matrices, estimand, thresholds,
 10,000-draw crossed bootstrap, Stage A/B/C ordering, sealed-contrast logic, and the mandatory
 LoRA-negative full-shape/state-only branches remain exactly preregistered. No model or GPU was used
 during this review, and no benchmark content was accessed.
+
+The first live source-v7 invalidation preflight stopped before mutation because the two successful
+source-d426 positive-control receipts predate the explicit
+`authorizes_result_evaluation: false` deny bit. Their signed payloads omit that field and therefore
+grant no evaluation authority. Source v8 accepts only that legacy-safe omission or exact boolean
+`false`; explicit `true`, `null`, integer zero, and every other substitute remain fatal. Regression
+coverage now archives a synthetic legacy successful control end to end and rejects each unsafe
+substitute before an archive exists. The same preflight also exposed a redundant per-source lockfile
+under tracked failures. It is removed: the already-required ignored `runs/run.lock` remains the sole
+cooperating-writer serialization boundary, so failed preflight leaves no untracked lock residue.
 
 The terminal review initially returned `NO_GO` and reproduced defects that ordinary happy-path tests
 missed: exceptional context exits skipped canonical rebinding; recursive directory creation could
@@ -46,7 +56,7 @@ exact training-journal recovery. Completion markers dominate without modifying a
 canonical source, but they are never accepted without descriptor revalidation and fresh fsync.
 
 This section supersedes historical prose below that describes cleanup as pathname deletion or
-directory removal. Those passages record earlier implementation states; v7 uses no destructive
+directory removal. Those passages record earlier implementation states; v8 uses no destructive
 unlink/rmtree operation on canonical or quarantine evidence. Private transaction-owned staging may
 still be discarded only after its exact ownership and destination state are validated.
 

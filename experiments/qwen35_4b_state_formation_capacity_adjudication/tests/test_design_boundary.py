@@ -15,7 +15,11 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from src import design_boundary  # noqa: E402
-from src.config import SOURCE_CONTRACT_FILES, load_config  # noqa: E402
+from src.config import (  # noqa: E402
+    SOURCE_CONTRACT_FILES,
+    SOURCE_CONTRACT_VERSION,
+    load_config,
+)
 
 
 class DesignBoundaryTests(unittest.TestCase):
@@ -97,13 +101,20 @@ class DesignBoundaryTests(unittest.TestCase):
         digest = "d" * 64
         exact = (
             "# Review\n\n"
-            "**Source-contract version:** `7`\n"
+            f"**Source-contract version:** `{SOURCE_CONTRACT_VERSION}`\n"
             f"**Reviewed implementation SHA-256:** `{digest}`\n"
         )
         cases = (
             (exact + "**Status:** `GO`\n", True),
             (exact + "**Status:** `NO_GO`\n", False),
-            (exact.replace("version:** `7`", "version:** `6`") + "**Status:** `GO`\n", False),
+            (
+                exact.replace(
+                    f"version:** `{SOURCE_CONTRACT_VERSION}`",
+                    f"version:** `{SOURCE_CONTRACT_VERSION - 1}`",
+                )
+                + "**Status:** `GO`\n",
+                False,
+            ),
             (exact.replace(digest, "e" * 64) + "**Status:** `GO`\n", False),
             ("# Review\n\n**Status:** `GO`\n", False),
             (exact + "**Status:** `GO`\n**Status:** `GO`\n", False),
@@ -133,7 +144,7 @@ class DesignBoundaryTests(unittest.TestCase):
         digest = "d" * 64
         encoded = (
             "# Review\n\n"
-            "**Source-contract version:** `7`\n"
+            f"**Source-contract version:** `{SOURCE_CONTRACT_VERSION}`\n"
             f"**Reviewed implementation SHA-256:** `{digest}`\n"
             "**Status:** `GO`\n"
         )
