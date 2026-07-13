@@ -17,7 +17,10 @@ parent/leaf publication boundary, recovers only the exact empty-directory mkdir-
 state, canonicalizes validated training and contrast paths before use, and rejects any nonempty
 markerless output. Reviewed implementation `7d6cd93f…d278`, full source contract
 `5a8ed26d…6666`, and the 363/363 suite pass. Every source-v10 setup artifact is invalid for v11 and
-must be archived, then regenerated and replayed before Stage A restarts.
+is now preserved in a verified 25-file, 19,566,021-byte archive at receipt identity
+`252be000…5d6a3` and files identity `f767eb80…d4b91`. Canonical setup cleanup and an immediate
+idempotent replay passed. Publish and validate that archive checkpoint, then retire the separately
+preserved stale PREPARED paths and regenerate/replay setup before Stage A restarts.
 
 Historically, the integrated source-v10 review was `GO` for reviewed implementation
 `a5a494b7…6f1c4a` and full source contract `979a9012…f394b7`; the 360/360 suite and exact machine gate

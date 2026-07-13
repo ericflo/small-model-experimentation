@@ -861,3 +861,23 @@ Only source-v11/failure-evidence validation, commit, push, and workflow verifica
 After both workflows are green, archive all source-v10 setup with the preserved launch failure as
 trigger, publish that checkpoint, retire the stale PREPARED paths, and replay setup from zero under
 v11. No result-bearing stage is authorized.
+
+## 2026-07-13 — source-v10 setup durably archived under source v11
+
+- Source-v11 repair/catalog commit `94ec3780` passed both required workflows before archival began.
+- The registered transaction preserved 25 source-v10 files totaling 19,566,021 bytes: all generated
+  data and the empty sealed-access ledger, CPU receipt, all three initialization bundle/sidecar pairs,
+  all three tracked initialization mirrors, and all three LoRA G0/control pairs.
+- Files identity is `f767eb80…d4b91`; tracked receipt file SHA-256 is `ab583fc1…e217`; receipt identity
+  is `252be000…5d6a3`. It binds replacement source `5a8ed26d…6666` and launch-failure trigger identity
+  `6b23f95d…b8c2`.
+- Independent postconditions leave only `.gitignore` under generated data and the two structural
+  `.gitkeep` sentinels under CPU/setup. An immediate idempotent rerun reproduced the same 25-file
+  receipt without mutation. No model, GPU, benchmark, result payload, or sealed split was opened.
+
+## Current authorization
+
+Only archive-checkpoint validation, commit, push, and workflow verification are authorized. After
+both workflows are green, retire the canonical empty Stage-A output and stale PREPARED journal only
+after revalidating their published failure/journal copies, then regenerate source-v11 setup. No model
+or result-bearing stage is authorized meanwhile.
