@@ -101,3 +101,9 @@ causally improve correctness on average and its signed probability vector can
 beat hard voting, yet still fail against cheap confidence/entropy or a relevance
 control. Before spending matched compute, require the counterfactual readout to
 add task-specific information beyond ordinary probability geometry.
+
+The subsequent J-branch mechanics negative reinforces the proposal/value split:
+moving before commit is not enough when the intervention cannot write its own
+supplied hypothesis. All numeric controls passed, but additive J target selection
+was exactly chance. Proposal-shifting systems need a label-free write/coverage
+gate before selector or matched-compute evaluation.

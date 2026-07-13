@@ -5,6 +5,39 @@
   "qwen35_4b_jacobian_counterfactual_branching": {
    "charts": [
     {
+     "title": "Native J branches do not write their supplied alias",
+     "kind": "bar",
+     "categories": [
+      "alpha 0.5",
+      "alpha 1.0",
+      "alpha 2.0"
+     ],
+     "series": [
+      {
+       "label": "J target selection",
+       "values": [
+        0.08333333333333333,
+        0.08333333333333333,
+        0.08333333333333333
+       ]
+      },
+      {
+       "label": "J-orthogonal control",
+       "values": [
+        0.08333333333333333,
+        0.08333333333333333,
+        0.08333333333333333
+       ]
+      }
+     ],
+     "x_label": "norm-anchored branch amplitude",
+     "y_label": "supplied alias selected",
+     "y_format": "percent01",
+     "note": "Each alpha contains 48 label-free supplied-target interventions: 12 aliases on each of four 512-token native thoughts. J and generic branches both remain at the 1-in-12 chance rate while all numeric controls pass. No alpha qualifies, so continuations and correctness remain unopened.",
+     "source": "experiments/qwen35_4b_jacobian_counterfactual_branching/runs/mechanics.json",
+     "headline": true
+    },
+    {
      "title": "Balanced semantic and generic branch norms match by layer",
      "kind": "bar",
      "categories": [
@@ -39,9 +72,9 @@
      "x_label": "frozen intervention layer",
      "y_label": "RMS residual delta norm",
      "y_format": "decimal3",
-     "note": "CPU smoke only at alpha 1.0. The generic control is an orthogonal rotation preserving the complete semantic branch Gram matrix, not merely average norm. All five semantic branch sets have rank 11 and sum to zero; no model outcome has run.",
+     "note": "CPU geometry at alpha 1.0. The generic control is an orthogonal rotation preserving the complete semantic branch Gram matrix, not merely average norm. These valid controls later accompanied the terminal chance-level mechanics result.",
      "source": "experiments/qwen35_4b_jacobian_counterfactual_branching/runs/smoke/cpu.json",
-     "headline": true
+     "headline": false
     }
    ]
   },

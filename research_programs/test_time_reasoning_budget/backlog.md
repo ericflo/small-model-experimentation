@@ -63,6 +63,10 @@
   failed relevance control. Do not retune terminal logits. A new successor must
   use fixed cap 1,024 to change the continuation/proposal distribution and beat
   matched-forward-token sample-more.
+- The upstream additive-J attempt also stops at mechanics (4/48 supplied targets
+  at every alpha). Do not spend continuation tokens until donor-coordinate
+  replacement at an explicit semantic anchor beats text/full-activation/non-J
+  controls without labels.
 - Completed cross-program qualification negative:
   `qwen35_4b_pareto_policy_integration` found that C54's short/deep tier labels
   did not become a clean procedural teacher crossover. `blend` lost both quick

@@ -191,3 +191,25 @@ robust task-specific value mechanism. Do not tune log ratios, residualizers, or
 J/value scores on these outcomes. The next native-thought attempt must act
 before commit to change continuation/proposal coverage and must be a distinct
 fresh matched-compute experiment.
+
+## Eighth successor outcome
+
+`qwen35_4b_jacobian_counterfactual_branching` moved the edit to the final token
+of a 512-token native thought and tested all 12 public alias directions as a
+balanced, zero-sum branch bank. Five outcome-blind live-bf16 receipts ultimately
+made every paired non-J norm/span control valid before the mechanics boundary
+opened. On four public mechanics task units, each preregistered amplitude then
+selected its supplied target on 4/48 J branches—exactly 1/12 chance and exactly
+equal to non-J. Mean target-probability lift rose only from +0.00047 at alpha
+0.5 to +0.00566 at alpha 2.0, versus +0.15 required. The automatic decision is
+`NO_NATIVE_J_BRANCH_CONTROL`; no continuation, gold, qualification, or
+confirmation artifact opened.
+
+This result distinguishes the independent positive from a generic ability to
+push native reasoning. The replicated mechanism replaced donor coordinates at
+an explicit selected semantic token; this successor added centered directions
+at an arbitrary generated-thought token. Do not sweep amplitudes or layers.
+Only one final bridge is warranted: a fresh explicit semantic anchor with
+donor-coordinate replacement, compared before continuation against plain text,
+full-activation donor, additive J, and exact non-J controls. If that
+context-local write fails, retire native J branching.

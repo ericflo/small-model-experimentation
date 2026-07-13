@@ -37,6 +37,12 @@
   exact task matching did not beat an oracle-balanced mismatch. Do not tune the
   score; move Jacobian/counterfactual work before the commit to alter proposals
   or continuations under matched compute.
+- Balanced additive J branching is stopped before continuation: supplied-target
+  control is chance at every norm-anchored alpha despite exact live controls.
+  Any final native branch successor must restore the positive mechanism's
+  explicit semantic anchor token and donor-coordinate replacement, with full-
+  activation, text-hypothesis, additive-J, and non-J controls. Do not sweep
+  larger alphas or layers on this last-token interface.
 - If native thought-state transport passes, train a non-oracle prefix controller
   and require a replicated held-out capability gain over frozen Qwen3.5-4B and
   matched-compute sampling. Oracle donor selection is a mechanism control, not

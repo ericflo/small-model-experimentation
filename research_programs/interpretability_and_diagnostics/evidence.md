@@ -134,3 +134,14 @@ Diagnostics should become standard infrastructure. They are how future agents av
   task-mismatched shuffle reached 0.389. Terminal
   `NO_ORDER_SUPPORT_SELECTOR` keeps confirmation absent. The causal group
   contrast is informative but not a task-specific value readout.
+
+- [qwen35_4b_jacobian_counterfactual_branching](../../experiments/qwen35_4b_jacobian_counterfactual_branching/reports/report.md)
+  moves intervention before commit but stops at `NO_NATIVE_J_BRANCH_CONTROL`.
+  After five outcome-blind smoke/repair receipts, every live non-J control
+  passes (max norm error 9.60e-6; J-span projection 0.00950). Yet centered
+  additive J writes at the last token of four 512-token thoughts select their
+  supplied alias only 4/48 at alpha 0.5, 1, and 2—exactly chance and identical
+  to non-J. Mean target-probability lift peaks at 0.00566 versus 0.15 required.
+  No correctness or continuation opens. Donor-coordinate context-local
+  transport remains positive; additive direction transport at an arbitrary
+  native token is now cleanly negative.

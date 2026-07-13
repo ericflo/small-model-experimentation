@@ -378,6 +378,18 @@ a shared J scalar nor raw terminal counterfactual attribution reliably values
 individual tasks. Stop re-ranking this commit state; move interventions earlier
 to create different continuations/proposals, then demand a matched-compute win.
 
+Moving the edit earlier is not sufficient. The balanced native branching
+successor first spent four outcome-blind receipts making all post-bf16 controls
+valid, then evaluated 144 supplied-target writes without loading gold. At every
+norm-anchored alpha, J selected its supplied alias on 4/48 branches—exactly
+1/12 chance and identical to non-J. Mean target-probability lift peaked at only
+0.00566. Terminal `NO_NATIVE_J_BRANCH_CONTROL` therefore stops before any
+continuation. This does not contradict the replicated donor-coordinate clamp:
+it distinguishes **coordinate replacement at an explicit semantic token** from
+**additive directions at an arbitrary last-thought token**. The only warranted
+native J branch left is a final context-local anchor test with donor coordinates
+and plain-text/full-activation controls; larger alpha/layer sweeps are retired.
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.

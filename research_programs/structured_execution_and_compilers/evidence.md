@@ -207,3 +207,11 @@ not evidence for one phase-invariant scalar compiler state. A permitted
 phase-specific refit also failed: midpoint J 0.5375 versus non-J 0.6000 and
 margin 0.5396. Causal work stayed sealed and the midpoint-J successor is
 retired.
+
+The next generative attempt also stops before compiler evaluation.
+[qwen35_4b_jacobian_counterfactual_branching](../../experiments/qwen35_4b_jacobian_counterfactual_branching/reports/report.md)
+finds chance supplied-alias control (4/48 at every alpha) for balanced additive
+J edits at a 512-token native prefix, despite valid non-J geometry. The fixed
+answer slot is a semantic output seam, not evidence that an arbitrary preceding
+token is a writable compiler register. Explicit anchor tokens and donor-
+coordinate replacement are the remaining context-local hypothesis.

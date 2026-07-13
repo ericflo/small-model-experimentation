@@ -3,35 +3,41 @@
  "generated_on": "2026-07-05",
  "experiments": {
   "qwen35_4b_jacobian_counterfactual_branching": {
-   "verdict_tag": "A new reasoning-branch test is built, but not run yet",
+   "verdict_tag": "Balanced internal nudges fail to steer real reasoning",
    "concept_primer": "Imagine pausing one scratchpad halfway through, then making twelve balanced copies. Each copy gets a tiny internal nudge toward a different possible answer and is allowed to finish reasoning. Because every answer gets one nudge, no answer is secretly favored.",
    "plain_question": "Can balanced internal nudges make one half-finished reasoning path explore better futures than spending the same effort on ordinary independent attempts?",
-   "plain_answer": "Not known yet. The fresh puzzles, internal directions, and a carefully matched generic control all pass structural checks. The next gate must first show—without using correct answers—that the nudges can write their intended candidate into a real halfway scratchpad. No model result has run.",
-   "why_it_matters": "Earlier work found that meaningful reasoning changes answers, but could not reliably score which scratchpad was good. This tries a different route: change what the model explores next, while comparing against ordinary sampling at the same cost.",
-   "verdict_tone": "neutral",
+   "plain_answer": "No. Across all three allowed strengths, the meaningful nudge made its assigned answer win only 4 of 48 times—exactly the one-in-twelve chance rate and identical to a generic nudge. The probabilities barely moved even at the strongest setting. Because the write itself failed, no expensive continuation or correctness run was opened.",
+   "why_it_matters": "A direction that works when copied from a clean semantic example is not automatically a push-button control inside arbitrary free-form reasoning. The next test must restore an explicit semantic anchor and copy full coordinates, rather than merely pushing the last scratchpad token harder.",
+   "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Balanced reasoning branches",
-     "value": "12",
-     "sub": "one for every public answer word, summing to zero overall"
+     "label": "Assigned answer selected",
+     "value": "4 / 48",
+     "sub": "8.3%, exactly chance, at every tested strength"
     },
     {
-     "label": "Fresh puzzles reserved",
-     "value": "4 + 24 + 48",
-     "sub": "mechanics, development, and untouched confirmation"
+     "label": "Largest average probability lift",
+     "value": "+0.006",
+     "sub": "versus +0.15 required for a usable write"
     },
     {
-     "label": "Prior-task collisions after seed repair",
-     "value": "0",
-     "sub": "76 new task fingerprints checked against 634 ancestors"
+     "label": "Numeric control rows valid",
+     "value": "all",
+     "sub": "the null is behavioral, not a broken control"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "The meaningful and generic nudges are equally strong",
-     "chart_read": "For each of five internal layers, the two neighboring bars show the size of the meaningful nudge and its generic control. Matching heights mean any later difference cannot be blamed on one arm simply pushing harder.",
-     "chart_takeaway": "The bars match at every layer, so the structural control is ready; this chart is not yet a behavioral result."
+     "chart_plain_title": "Every nudge strength stays at chance",
+     "chart_read": "For each of three nudge strengths, compare the meaningful and generic bars with the tall required bar. Height is how often the branch's assigned answer became the model's answer.",
+     "chart_takeaway": "Meaningful and generic nudges overlap at one-in-twelve while the required bar is 60%, so this internal write method is unusable."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "Meaningful and generic nudges were physically matched",
+     "chart_read": "At each of five internal layers, neighboring bars show the physical size of the two nudges. Matching bars rule out a weaker generic control.",
+     "chart_takeaway": "The control matched the intervention's strength, confirming that the chance result is not a simple size mismatch."
     }
    ]
   },

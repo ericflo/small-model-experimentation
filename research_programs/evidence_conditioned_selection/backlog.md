@@ -20,6 +20,9 @@
   it beat majority but not confidence/entropy with uncertainty, and task-matched
   shuffle was no better than an oracle-balanced mismatched shuffle. Any
   successor must change the continuation/proposal state, not retune this score.
+- Require supplied-hypothesis write control before any latent proposal branch.
+  Centered additive J at a last-thought token fails this prerequisite; test an
+  explicit semantic anchor plus donor-coordinate clamp only as a new experiment.
 - Build an abstaining selector benchmark that reports precision, recall, and coverage separately.
 - Stress selectors under intentionally adversarial visible examples.
 - Convert oracle ceiling reports into deployable-gap scorecards.

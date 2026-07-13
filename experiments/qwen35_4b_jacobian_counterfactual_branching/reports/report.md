@@ -30,17 +30,39 @@ controls. Maximum paired norm error is `9.3881e-6`, maximum complete-J-span
 projection `0.00912094`, and lattice repair uses at most five pairs. It records
 no behavioral or target-selection metric.
 
+Label-free mechanics is terminal `NO_NATIVE_J_BRANCH_CONTROL`:
+
+| alpha | J target selected | non-J | mean J target-probability lift | numeric |
+| ---: | ---: | ---: | ---: | --- |
+| 0.5 | 4/48 | 4/48 | +0.000471 | pass |
+| 1.0 | 4/48 | 4/48 | +0.001498 | pass |
+| 2.0 | 4/48 | 4/48 | +0.005664 | pass |
+
+Every write is finite and every live control passes, but target selection is
+exactly the 1/12 chance rate with zero J specificity. No alpha meets the 60%,
++0.15 lift, or +35pp J-minus-non-J gates.
+
 ## Controls
 
 ## Oracle Versus Deployable Evidence
 
 ## Interpretation
 
+The causal lens does not transfer through centered additive directions at an
+arbitrary last-thought token. This does not contradict donor-coordinate
+transport at an explicit semantic token. It isolates the next mechanism test to
+semantic anchoring and coordinate replacement; continuation branching here is
+cancelled.
+
 ## Next Experiments
 
 Implement and adversarially audit cache forking, one-shot layer hooks, live-bf16
 control repair, fixed-cap sampler, and resource matcher. Only then may a pushed
 boundary authorize label-free model mechanics.
+
+Superseded by the terminal mechanics gate. Create a distinct successor for an
+explicit hypothesis anchor and donor-coordinate replacement; do not implement
+cache-fork continuations in this experiment.
 
 ## Artifact Manifest
 

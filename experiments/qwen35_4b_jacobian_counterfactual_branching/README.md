@@ -1,6 +1,6 @@
 # Qwen3.5-4B Jacobian Counterfactual Branching
 
-**Status:** in-progress · since 2026-07-13 · Live controls and mechanics implementation are hash-anchored; the single label-free mechanics run remains before continuations.
+**Status:** finished
 
 This experiment tests whether a balanced bank of early J-space edits can shift
 the proposal distribution of native reasoning, rather than trying to value a
@@ -81,16 +81,18 @@ Only then may identical untouched confirmation open. Stages never pool.
 
 ## Run
 
-Pending implementation boundary. All model stages fail closed meanwhile.
+The label-free mechanics stage completed all four public task units at all three
+preregistered amplitudes. It selected no amplitude and automatically stopped
+before continuation or correctness scoring. See `runs/mechanics.json` and the
+post-mechanics adversarial audit for the full receipt and non-rescues.
 
 ## Status
 
-Outcome-blind live-bf16 model smoke now passes all 60 non-J controls after four
-preserved repair receipts: maximum paired norm error `9.39e-6`, maximum J-span
-projection `0.00912`, and at most five lattice pairs. No branch probability,
-choice, supplied-target metric, correct alias, continuation, or outcome has
-opened. Label-free 512-token mechanics is next behind a new implementation
-boundary.
+Terminal `NO_NATIVE_J_BRANCH_CONTROL`. All live controls pass, but supplied-
+target selection is exactly 4/48 (8.33%) for J and non-J at alpha 0.5, 1.0,
+and 2.0. Mean J target-probability lift reaches only 0.00566 at alpha 2 versus
+0.15 required. No alpha is selected; continuation, qualification, confirmation,
+and correctness remain unopened.
 
 ## Artifacts
 
@@ -112,6 +114,8 @@ boundary.
   mechanics authorization boundary.
 - `reports/pre_mechanics_implementation_audit.md`: 35 firewall, intervention,
   metric, gate, artifact, and fail-closed assertions.
+- `reports/post_mechanics_adversarial_audit.md`: nine non-rescues and routing to
+  explicit semantic anchors plus donor-coordinate replacement.
 - `assets/context_lens.pt`: byte-identical causal lens anchor.
 - `src/`: frozen tasks, branch geometry, cache-fork model operations, and pure
   statistics.

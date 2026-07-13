@@ -1,0 +1,63 @@
+{
+  "branches_per_task": 12,
+  "confirmation_opened": false,
+  "correct_alias_loaded": false,
+  "decision": "NO_NATIVE_J_BRANCH_CONTROL",
+  "mechanics_boundary": {
+    "implementation_commit": "84c12e9b56d567681cb8b2e7831bb0ac1a69df9f",
+    "implementation_hashes": {
+      "branch_geometry_sha256": "68df4c9b45626eab4e6b0e98aa686f6e58aaa6abc450c55da7e2cfd4c258a150",
+      "model_ops_sha256": "a00fda9962ca2eac54e53840fc9786f69fcf0eb5c964c7ac5663ae3feed1c862",
+      "runner_sha256": "164a71329051bd9f240d0127429516b91bf2640fe8a45c7b90fa0b582385b629",
+      "tests_sha256": "6f9a4b841d17045c45982118a9ad3a17e29c2fec7c0a18134015cd1376c376ad"
+    },
+    "model_smoke_sha256": "8542e52a004f677bf6b46f4553f01a5c0708ca023f7a4862fec3975d64e41dd7"
+  },
+  "mechanics_public_sha256": "497112d7d082ab7a59e9e56e08c26b80cfb2c43e7c099cdecc5a34ab7e0b0e5a",
+  "model_smoke_sha256": "8542e52a004f677bf6b46f4553f01a5c0708ca023f7a4862fec3975d64e41dd7",
+  "outcomes_loaded": false,
+  "passed": false,
+  "peak_allocated_bytes": 10047005696,
+  "schema_version": 1,
+  "selected_alpha": null,
+  "stage": "mechanics",
+  "summaries": {
+    "0.5": {
+      "alpha": 0.5,
+      "j_mean_target_probability_lift": 0.00047085541033690487,
+      "j_minus_non_j_target_selection": 0.0,
+      "j_target_selection_rate": 0.08333333333333333,
+      "max_non_j_paired_norm_relative_error": 9.597594726074021e-06,
+      "max_non_j_span_projection_fraction": 0.009408771991729736,
+      "non_j_target_selection_rate": 0.08333333333333333,
+      "numeric_pass": true,
+      "passed": false,
+      "rows": 48
+    },
+    "1.0": {
+      "alpha": 1.0,
+      "j_mean_target_probability_lift": 0.0014981791622024805,
+      "j_minus_non_j_target_selection": 0.0,
+      "j_target_selection_rate": 0.08333333333333333,
+      "max_non_j_paired_norm_relative_error": 9.439430868951604e-06,
+      "max_non_j_span_projection_fraction": 0.009497158229351044,
+      "non_j_target_selection_rate": 0.08333333333333333,
+      "numeric_pass": true,
+      "passed": false,
+      "rows": 48
+    },
+    "2.0": {
+      "alpha": 2.0,
+      "j_mean_target_probability_lift": 0.005664450884069083,
+      "j_minus_non_j_target_selection": 0.0,
+      "j_target_selection_rate": 0.08333333333333333,
+      "max_non_j_paired_norm_relative_error": 9.462873094889801e-06,
+      "max_non_j_span_projection_fraction": 0.009341472759842873,
+      "non_j_target_selection_rate": 0.08333333333333333,
+      "numeric_pass": true,
+      "passed": false,
+      "rows": 48
+    }
+  },
+  "tasks": 4
+}

@@ -110,3 +110,19 @@
 - Mechanics implementation pushed at `84c12e9b`; exact runner/model/geometry/
   test and smoke-005 hashes are now anchored. Mechanics may run only after this
   anchor commit is pushed.
+
+## 2026-07-13 — Terminal native branch-control negative
+
+- All four 512-token prefixes completed; no mechanics gold/outcome field was
+  loaded.
+- Automatic `NO_NATIVE_J_BRANCH_CONTROL`: J target selection was 4/48 at every
+  alpha, exactly equal to non-J and the 1/12 chance rate.
+- Mean J target-probability lift was +0.000471, +0.001498, and +0.005664 for
+  alpha 0.5/1/2, versus +0.15 required.
+- All numeric controls passed at every task/alpha. Global maximum paired non-J
+  norm error was 9.60e-6 and J-span projection 0.00950.
+- No alpha selected. Continuations, qualification, confirmation, and all
+  correctness data remain unopened.
+- Completed a nine-point post-mechanics adversarial audit. The next warranted
+  experiment must restore the positive control's explicit semantic token and
+  donor-coordinate replacement rather than increase alpha post hoc.

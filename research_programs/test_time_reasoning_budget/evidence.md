@@ -219,3 +219,11 @@ uncertainty bounds crossed zero. A task-mismatched oracle-balanced shuffle
 control reached 44/113. The confirmation and K=3-versus-K=6 compute comparison
 stayed sealed. Coherent content is a real lever, but scoring its terminal logit
 effect is not yet a cost-justified controller.
+
+Moving the edit earlier did not rescue it. In
+`qwen35_4b_jacobian_counterfactual_branching`, all 144 supplied-target J writes
+across three amplitudes were label-free and numerically valid, but hard target
+selection stayed 1/12 and mean probability lift stayed <=0.00566. Thus no
+512-token continuation branches ran. The next budget experiment cannot assume
+an arbitrary final-prefix token is a semantic control site; it needs an explicit
+anchor or should leave J branching behind.

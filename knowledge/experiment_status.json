@@ -130,11 +130,6 @@
       "status": "finished",
       "confidence": 0.9
     },
-    "qwen35_4b_jacobian_counterfactual_branching": {
-      "status": "in-progress",
-      "since": "2026-07-13",
-      "reason": "Label-free 512-token mechanics implementation and passing smoke are hash-anchored; the single mechanics run remains before continuations."
-    },
     "qwen35_4b_confidence_guided_compute": {
       "status": "finished",
       "confidence": 0.96
