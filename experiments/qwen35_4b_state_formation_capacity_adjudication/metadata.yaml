@@ -5,7 +5,7 @@ source_track: "new"
 path: "experiments/qwen35_4b_state_formation_capacity_adjudication"
 primary_readme: "experiments/qwen35_4b_state_formation_capacity_adjudication/README.md"
 primary_report: "experiments/qwen35_4b_state_formation_capacity_adjudication/reports/report.md"
-summary: "This is the canonical fresh adjudication of the unresolved LoRA-capacity question from `qwen35_4b_state_carry_vs_state_bag`. It is not a continuation of either prior checkpoint. Preregistration, adversarial design review, implementation review, and the frozen scientific design are complete. The first seed-7411 LoRA G0 loaded only the pinned Qwen snapshot, then stopped before wrapper construction or any mechanics probe because the pinned runtime drops the outer commit hash when it derives the Qwen text config. No sealed contrast was opened, no canonical G0 receipt was written, and no positive control, result training, evaluation, or scientific analysis ran. The source-bound correction records and commit-verifies every config/tokenizer/index/shard path through one pinned snapshot, forces local-only safetensors loading, passes 133/133 tests, and has independent implementation-review `GO`. All setup artifacts made under the prior source digest are invalid; the next step is to regenerate CPU smoke, fresh data, and common initialization from the committed correction, then retry the three LoRA G0 gates and their seed-matched setup-only positive controls."
+summary: "This is the canonical fresh adjudication of the unresolved LoRA-capacity question from `qwen35_4b_state_carry_vs_state_bag`. It is not a continuation of either prior checkpoint. Preregistration, adversarial design review, implementation review, and the frozen scientific design are complete. The first seed-7411 LoRA G0 loaded only the pinned Qwen snapshot, then stopped before wrapper construction or any mechanics probe because the pinned runtime drops the outer commit hash when it derives the Qwen text config. No sealed contrast was opened, no canonical G0 receipt was written, and no positive control, result training, evaluation, or scientific analysis ran. The source-bound correction records and commit-verifies every config/tokenizer/index/shard path through one pinned snapshot, forces local-only safetensors loading, passes 133/133 tests, and has independent implementation-review `GO`. The prior-source setup is preserved as invalidated history. CPU smoke, all seven procedural splits, the empty contrast-access ledger, and all three common initialization bundles have now been regenerated under source digest `9fd420f5…614fb` and independently reopened. The next step is to retry the three LoRA G0 gates and their seed-matched setup-only positive controls."
 tags:
   - "latent-state"
   - "lora"
@@ -25,10 +25,10 @@ top_level_dirs:
   - "tests"
 file_counts:
   csv: 1
-  json: 3
+  json: 9
   md: 11
   py: 29
   yaml: 4
   "[none]": 1
-total_files: 49
-total_size_bytes: 774960
+total_files: 55
+total_size_bytes: 2172576

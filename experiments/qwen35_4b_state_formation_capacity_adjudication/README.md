@@ -1,6 +1,6 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · frozen design unchanged; first Qwen load stopped before mechanics; revision-provenance repair is `GO`; setup regeneration is required before retry
+**Status:** in-progress · since 2026-07-13 · frozen design unchanged; revision-provenance correction is `GO`; corrected-source setup is complete; LoRA G0 retry is next
 
 ## Current status
 
@@ -13,9 +13,10 @@ when it derives the Qwen text config. No sealed contrast was opened, no canonica
 written, and no positive control, result training, evaluation, or scientific analysis ran. The
 source-bound correction records and commit-verifies every config/tokenizer/index/shard path through one
 pinned snapshot, forces local-only safetensors loading, passes 133/133 tests, and has independent
-implementation-review `GO`. All setup artifacts made under the prior source digest are invalid; the
-next step is to regenerate CPU smoke, fresh data, and common initialization from the committed correction,
-then retry the three LoRA G0 gates and their seed-matched setup-only positive controls.
+implementation-review `GO`. The prior-source setup is preserved as invalidated history. CPU smoke,
+all seven procedural splits, the empty contrast-access ledger, and all three common initialization
+bundles have now been regenerated under source digest `9fd420f5…614fb` and independently reopened.
+The next step is to retry the three LoRA G0 gates and their seed-matched setup-only positive controls.
 
 ## Research program and prior anchors
 

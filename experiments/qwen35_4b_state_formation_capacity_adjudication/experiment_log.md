@@ -165,8 +165,8 @@
 - Preserved the exact setup failure at
   `runs/failures/g0_lora_seed7411_revision_provenance_failure.json`. This is mechanics evidence only,
   never scientific evidence and never branch authorization.
-- The fail-closed repair verifies the resolved commit and records the byte count and SHA-256 for config, tokenizer
-  assets, safetensors index, and every indexed shard before model construction. A missing runtime
+- The fail-closed repair verifies the resolved commit and records the byte count and SHA-256 for
+  config, tokenizer assets, safetensors index, and every indexed shard before model construction. A missing runtime
   config hash is accepted only after that complete proof; any non-null mismatch remains fatal. The
   real local snapshot currently resolves all nine files through the pinned commit.
 - Because the repair changes the registered source contract, every data, initialization, and setup
@@ -177,11 +177,24 @@
   archive. The tracked archive receipt reopens every byte count and SHA-256 and has identity
   `67980d0a937ba3b9c53d1ac862e697bb8e65ddfda4a6513f5ab4040b4a34770d`.
 
+## 2026-07-13 — corrected-source setup regenerated
+
+- Recreated CPU smoke, all seven data splits, the contrast-access ledger, and all three initialization
+  bundles from committed source contract
+  `9fd420f5f29fea2d9144bf50d3b187fc8e50d9acc9cb076656372281029614fb`. CPU smoke again records zero
+  benchmark reads, no model load, and `scientific_evidence: false`.
+- Every procedural payload reproduced the exact prior content hash; the new source-bound manifest has
+  SHA-256 `fa871390b28a9a0119ad77957bc1b403cc7008aa7052a539e6788aa8d871be4c` and data contract
+  `a57c05100ff51897dbfdc2e140b1eff6634513eaa873a222e2fd2d7f9b37ad2e`. The new sealed-access ledger
+  has no events and identity `14748750079830ea25e7935baf35a4689957b3bfb9db0b7630f643133bbfde8d`.
+- Seeds 7411, 7412, and 7413 preserve the exact common tensor-value digests while their new source-bound
+  bundle hashes are `fbb40b74d97fd07dd0e6590382f99834d5091e1467df1f3edda814092f386c77`,
+  `b05cbafcf9a100dd80309a5b50309649372fe6841e32cdd38d37b15bdcaba6ed`, and
+  `cd9923902e25f04ba5aca0ba001f036aa5ac6e8ae6792ac059d78773f22b1bf3`, respectively. Every bundle
+  reopened and each tracked receipt is byte-identical to its external sidecar.
+
 ## Current authorization
 
-The revision-provenance repair has independent implementation-review `GO` and passes all 133 tests.
-Its final registered source-contract digest is
-`9fd420f5f29fea2d9144bf50d3b187fc8e50d9acc9cb076656372281029614fb`.
-CPU smoke, data, and common initialization must now be regenerated under the committed repaired
-source. No model-bearing retry, positive control, or result training is authorized until that clean
-regeneration is complete; each result seed still requires passing G0 and its positive control.
+Corrected-source setup is complete and the sealed contrast ledger is fresh. The three LoRA G0
+mechanics gates and corresponding setup-only positive controls are authorized in seed order. Result
+training remains prohibited for each seed until both of its gates pass.
