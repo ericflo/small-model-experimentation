@@ -107,3 +107,6 @@
   model load; qualification/confirmation remain unavailable.
 - Completed a 35-point implementation audit. Commit/push and smoke-hash anchor
   are required before the single mechanics run.
+- Mechanics implementation pushed at `84c12e9b`; exact runner/model/geometry/
+  test and smoke-005 hashes are now anchored. Mechanics may run only after this
+  anchor commit is pushed.

@@ -1,6 +1,6 @@
 # Qwen3.5-4B Jacobian Counterfactual Branching
 
-**Status:** in-progress · since 2026-07-13 · Live controls pass; audited label-free 512-token mechanics awaits a pushed hash boundary and run.
+**Status:** in-progress · since 2026-07-13 · Live controls and mechanics implementation are hash-anchored; the single label-free mechanics run remains before continuations.
 
 This experiment tests whether a balanced bank of early J-space edits can shift
 the proposal distribution of native reasoning, rather than trying to value a

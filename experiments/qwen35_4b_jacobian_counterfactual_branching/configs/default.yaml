@@ -116,4 +116,11 @@ design_boundary:
     tests_sha256: 90e02288e6942c5c9fe704ece2c520253171b142717d1855933b49231738c48e
 
 mechanics_boundary:
-  status: pending
+  status: anchored
+  implementation_commit: 84c12e9b56d567681cb8b2e7831bb0ac1a69df9f
+  model_smoke_sha256: 8542e52a004f677bf6b46f4553f01a5c0708ca023f7a4862fec3975d64e41dd7
+  implementation_hashes:
+    runner_sha256: 164a71329051bd9f240d0127429516b91bf2640fe8a45c7b90fa0b582385b629
+    model_ops_sha256: a00fda9962ca2eac54e53840fc9786f69fcf0eb5c964c7ac5663ae3feed1c862
+    branch_geometry_sha256: 68df4c9b45626eab4e6b0e98aa686f6e58aaa6abc450c55da7e2cfd4c258a150
+    tests_sha256: 6f9a4b841d17045c45982118a9ad3a17e29c2fec7c0a18134015cd1376c376ad
