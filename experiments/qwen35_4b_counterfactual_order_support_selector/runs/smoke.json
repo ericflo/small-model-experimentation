@@ -1,0 +1,38 @@
+{
+  "confirmation_opened": false,
+  "confirmation_present": false,
+  "implementation_hashes": {
+    "config_sha256": "a4a0e3ff05bfc5daf3c9ddc1b18418ecfee07361002240999b076e87c649da39",
+    "runner_sha256": "ce53ccc31c69b13c2bc2dbff5560120760367cf3989651d0d5debe1088d4670f",
+    "selector_sha256": "f1493c883e1d262073f6dd385d2b240bd88c70b1f0f8d7fd259fef291ce0c5bb"
+  },
+  "model_loaded": false,
+  "outcome_metrics_computed": false,
+  "passed": true,
+  "qualification": {
+    "alias_count": 12,
+    "alias_token_ids": [
+      7993,
+      5388,
+      14780,
+      49993,
+      22544,
+      28503,
+      14367,
+      17415,
+      14527,
+      6414,
+      12307,
+      9057
+    ],
+    "paired_probability_rows": 339,
+    "real_sha256": "00e81f4cf7cf281fc5bfe0bf94544b5906b9d3d0303e2fde69e87c985bd8d82d",
+    "rows_per_arm": 339,
+    "shuffled_sha256": "7e3728ef4c9f5dcf02b9fb1ede29e4cc3c7057fc9ba7763fbd36e3970ebb311b",
+    "tasks": 113,
+    "token_multiset_controls_passed": 339,
+    "traces_per_task": 3
+  },
+  "schema_version": 1,
+  "stage": "smoke"
+}

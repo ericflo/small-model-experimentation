@@ -2,6 +2,39 @@
  "note": "Plain-language practitioner briefs shown above the fold on each experiment page (verdict + the-one-idea/question/finding/why-it-matters + KPI numbers + per-chart how-to-read/takeaway). Authored per experiment from its own README/report and verified chart specs under a strict no-jargon ban-list; all jargon-precise detail stays below the fold. Regenerate with scripts/enrichment/generate_briefs.workflow.js (see docs/site_maintenance.md).",
  "generated_on": "2026-07-05",
  "experiments": {
+  "qwen35_4b_counterfactual_order_support_selector": {
+   "verdict_tag": "A clean test is locked; no selector result yet",
+   "concept_primer": "The model answered each puzzle after writing a long scratchpad. We also kept a version with exactly the same scratchpad words scrambled. The new idea is to ask which answer gained the most support from meaningful word order rather than from the words merely being present.",
+   "plain_question": "Can the change caused by meaningful scratchpad order tell us which of twelve possible answers to trust, without revealing the correct answer?",
+   "plain_answer": "Not known yet. The rule and all comparisons are locked, 113 development puzzles passed data checks, and the separate confirmation set remains unopened. The rule must beat five ordinary ways of combining three attempts before it earns a new, fairly cost-matched run.",
+   "why_it_matters": "A group-level benefit from good reasoning is not automatically useful on the next puzzle. This test asks whether that benefit can actually choose answers, while preventing a promising average from being mistaken for a deployable capability.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Development puzzles checked",
+     "value": "113",
+     "sub": "three ordered scratchpads and three exact-word-scrambled controls per puzzle"
+    },
+    {
+     "label": "Separate confirmation puzzles opened",
+     "value": "0",
+     "sub": "they stay sealed unless every development gate passes"
+    },
+    {
+     "label": "Ordinary answer-combining methods to beat",
+     "value": "5",
+     "sub": "including majority vote, average probabilities, and strongest single attempt"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Only the development set is available",
+     "chart_read": "The first bar counts development puzzles whose paired files passed every structural check. The second counts confirmation puzzles made available to this analysis.",
+     "chart_takeaway": "The test has a real firewall: all 113 development puzzles are ready, while confirmation remains at zero until the locked rule succeeds."
+    }
+   ]
+  },
   "adaptive_cognitive_kernel": {
    "verdict_tag": "Self-rewiring does real work but wins nothing extra",
    "concept_primer": "Picture a calculator that, for each instruction in a program, physically swaps in a fresh set of gears — temporarily rewiring itself — instead of a fixed machine that reads each instruction as an input code. Does the rewiring execute programs any better?",

@@ -1,0 +1,38 @@
+schema_version: 1
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+source:
+  parent: qwen35_4b_commit_slot_semantic_power_replication
+  expected_tasks: 113
+  traces_per_task: 3
+  aliases:
+    - cat
+    - dog
+    - horse
+    - tiger
+    - apple
+    - lemon
+    - river
+    - ocean
+    - silver
+    - gold
+    - circle
+    - square
+  qualification:
+    real_sha256: 00e81f4cf7cf281fc5bfe0bf94544b5906b9d3d0303e2fde69e87c985bd8d82d
+    shuffled_sha256: 7e3728ef4c9f5dcf02b9fb1ede29e4cc3c7057fc9ba7763fbd36e3970ebb311b
+  confirmation:
+    real_sha256: 6d64eb2d3662367579b5440c3e26d3c99e500bf3f570b9d38a96848153ded1d0
+    shuffled_sha256: bd3de3660ee0524e69e606c97f4ff2cfb6a2ba431cff84ce73542da094a6d2ad
+statistics:
+  bootstrap_resamples: 10000
+  seed: 20260713
+gates:
+  candidate_accuracy_min: 0.15
+  candidate_accuracy_max: 0.70
+  minimum_point_gain: 0.03
+  paired_one_sided_95_lower_min: 0.0
+  chosen_alias_support_min: 8
+  correct_alias_support_min: 8
+  reverse_delta_gap_min: 0.10

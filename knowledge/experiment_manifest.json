@@ -1420,6 +1420,43 @@
   },
   {
     "file_counts": {
+      ".json": 1,
+      ".jsonl": 2,
+      ".md": 8,
+      ".py": 3,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_counterfactual_order_support_selector",
+    "path": "experiments/qwen35_4b_counterfactual_order_support_selector",
+    "primary_readme": "experiments/qwen35_4b_counterfactual_order_support_selector/README.md",
+    "primary_report": "experiments/qwen35_4b_counterfactual_order_support_selector/reports/report.md",
+    "research_programs": [
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "structured_execution_and_compilers",
+      "test_time_reasoning_budget"
+    ],
+    "source_track": "new",
+    "summary": "`interpretability_and_diagnostics`. `qwen35_4b_thinking_content_vs_compute`, and `qwen35_4b_confidence_guided_compute`.",
+    "tags": [
+      "abi",
+      "small-model"
+    ],
+    "title": "Qwen3.5-4B Counterfactual Order-Support Selector",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "runs",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 17,
+    "total_size_bytes": 1314506
+  },
+  {
+    "file_counts": {
       ".json": 5,
       ".jsonl": 3,
       ".md": 5,

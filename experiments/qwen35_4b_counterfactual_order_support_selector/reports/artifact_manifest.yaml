@@ -1,0 +1,20 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_counterfactual_order_support_selector"
+external_artifacts: []
+omitted_artifacts: []
+reproducibility:
+  smoke_command: >-
+    PYTHONDONTWRITEBYTECODE=1 .venv/bin/python
+    experiments/qwen35_4b_counterfactual_order_support_selector/scripts/run.py
+    --stage smoke
+  full_command: >-
+    PYTHONDONTWRITEBYTECODE=1 .venv/bin/python
+    experiments/qwen35_4b_counterfactual_order_support_selector/scripts/run.py
+    --stage qualification
+  required_external_artifacts: []
+notes: >-
+  Qualification rows are hash-identical copies of committed parent artifacts.
+  Confirmation rows are intentionally absent and confirmation fails closed
+  unless qualification passes and a separate pushed boundary authorizes copying
+  the two expected-hash parent artifacts. No model or large artifact is needed.
