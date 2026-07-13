@@ -408,3 +408,23 @@ Negative core: the +0.32-on-both target was a budget-starvation artifact (C55);
 decomposed by axis its residual is the serial-compute induction wall
 (C39/C44/C48). The one path left to strong deltas on BOTH tiers is a tier-router
 (exploration-merged for medium, efficiency-merged for quick), not a single model.
+
+## 2026-07-13 — GOAL CLOSED (user directive "close it")
+
+The gauntlet plateau goal is closed as CHARACTERIZED, not broken. Final
+disposition of the four success criteria:
+  (1) Difficulty escalation + new families (patchwheel, packhouse) — DONE (C51).
+  (2) Paired menagerie deltas decisively beyond +0.32 on quick AND medium —
+      NOT achievable for a single Qwen3.5-4B, PROVEN across ~33 paired events /
+      11 arms / every lever class / both budget regimes. Binding constraint is
+      the QUICK tier: at fair (8192) budget a budget-rich base already solves the
+      easy L1-L2 atoms (~0.50), so no install yields a +0.32 delta there
+      (arithmetic ceiling). Medium tops ~+0.26 (exploration), quick ~+0.20; the
+      tier-optima are disjoint (tier-Pareto, C54). Escapes require a bigger base
+      (forbidden) or a two-model tier-router (a deployment, not a single-model
+      conjunction).
+  (3) recovery-arm-only + breadth-vs-matched-dose ablations — DONE (C51).
+  (4) Findings codified through make check — DONE (C49-C56, CI green).
+POSITIVE CORE RESULT: exploration is a genuinely installable, budget-robust
+capability (C56, menagerie medium +0.261 n=6, transfers to the held-out
+benchmark). Three of four criteria met; the fourth is a proven capacity boundary.
