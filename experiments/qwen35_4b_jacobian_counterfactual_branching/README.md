@@ -1,5 +1,7 @@
 # Qwen3.5-4B Jacobian Counterfactual Branching
 
+**Status:** finished
+
 This experiment tests whether a balanced bank of early J-space edits can shift
 the proposal distribution of native reasoning, rather than trying to value a
 finished thought.

@@ -1,5 +1,7 @@
 # Qwen3.5-4B Counterfactual Order-Support Selector
 
+**Status:** finished
+
 Terminal `NO_ORDER_SUPPORT_SELECTOR`: ordered-minus-exact-shuffle probability
 beats hard voting but not confidence/entropy robustly or the task-mismatch
 control, so confirmation and a fresh matched-compute run remain sealed.
