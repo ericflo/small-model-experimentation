@@ -1,6 +1,6 @@
 # Qwen3.5-4B Jacobian Counterfactual Branching
 
-**Status:** in-progress · since 2026-07-13 · Stricter live-control repair is pushed and re-anchored; outcome-blind smoke 005 remains before mechanics.
+**Status:** in-progress · since 2026-07-13 · Outcome-blind live controls pass; label-free 512-token mechanics remains before continuations.
 
 This experiment tests whether a balanced bank of early J-space edits can shift
 the proposal distribution of native reasoning, rather than trying to value a
@@ -85,7 +85,12 @@ Pending implementation boundary. All model stages fail closed meanwhile.
 
 ## Status
 
-Design and adversarial review in progress. No model or outcome has run.
+Outcome-blind live-bf16 model smoke now passes all 60 non-J controls after four
+preserved repair receipts: maximum paired norm error `9.39e-6`, maximum J-span
+projection `0.00912`, and at most five lattice pairs. No branch probability,
+choice, supplied-target metric, correct alias, continuation, or outcome has
+opened. Label-free 512-token mechanics is next behind a new implementation
+boundary.
 
 ## Artifacts
 
@@ -103,6 +108,8 @@ Design and adversarial review in progress. No model or outcome has run.
 - `reports/post_model_smoke_004_audit.md`: layer-8 repair success and one
   independently detected layer-4 boundary miss requiring a stricter safety
   objective.
+- `reports/post_model_smoke_005_audit.md`: 60/60 live-control pass and the
+  mechanics authorization boundary.
 - `assets/context_lens.pt`: byte-identical causal lens anchor.
 - `src/`: frozen tasks, branch geometry, cache-fork model operations, and pure
   statistics.

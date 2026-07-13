@@ -84,3 +84,14 @@
 - Code must be pushed/re-anchored before smoke 005.
 - Safety-margin implementation pushed at `6660bd94`; exact hashes are anchored
   for smoke 005.
+
+## 2026-07-13 — Smoke 005 passes all live controls
+
+- All 60 non-J rows pass: maximum paired norm error 9.3881e-6 and maximum full-J
+  projection 0.00912094, within frozen 1e-5/0.01 gates.
+- Every hook applied once; all branches/logits finite; peak allocation
+  9,115,230,720 bytes.
+- At most five lattice pairs were required. Branch probabilities, choices,
+  supplied-target metrics, correct aliases, and outcomes remained unrecorded.
+- Mechanics implementation may begin, but no model mechanics or continuation is
+  yet authorized.

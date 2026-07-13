@@ -133,7 +133,7 @@
     "qwen35_4b_jacobian_counterfactual_branching": {
       "status": "in-progress",
       "since": "2026-07-13",
-      "reason": "The stricter live-control safety repair is pushed/re-anchored; outcome-blind smoke 005 remains before mechanics."
+      "reason": "Outcome-blind smoke 005 passes all 60 live controls; label-free 512-token mechanics implementation and run remain before continuations."
     },
     "qwen35_4b_confidence_guided_compute": {
       "status": "finished",

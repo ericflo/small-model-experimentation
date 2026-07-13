@@ -25,6 +25,11 @@ CPU/data smoke only:
 - float non-J projection into the complete J span is at most `3.05e-7`; and
 - no model, outcome, correct alias, or confirmation stage was opened.
 
+The fifth outcome-blind live smoke subsequently passes all 60 post-bf16 non-J
+controls. Maximum paired norm error is `9.3881e-6`, maximum complete-J-span
+projection `0.00912094`, and lattice repair uses at most five pairs. It records
+no behavioral or target-selection metric.
+
 ## Controls
 
 ## Oracle Versus Deployable Evidence
