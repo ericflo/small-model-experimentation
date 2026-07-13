@@ -1,0 +1,12 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_semantic_anchor_coordinate_branching"
+external_artifacts: []
+omitted_artifacts: []
+reproducibility:
+  smoke_command: ".venv/bin/python experiments/qwen35_4b_semantic_anchor_coordinate_branching/scripts/run.py --stage smoke"
+  full_command: "unavailable before an audited and pushed implementation boundary"
+  required_external_artifacts: []
+notes: >-
+  The frozen context lens is committed under assets/. There is no adapter or
+  training artifact. Model mechanics and continuation outputs do not yet exist.

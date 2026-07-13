@@ -431,6 +431,11 @@
       "status": "finished",
       "confidence": 0.99
     },
+    "qwen35_4b_semantic_anchor_coordinate_branching": {
+      "status": "in-progress",
+      "since": "2026-07-13",
+      "reason": "Adversarial design, fresh-data collision audit, and model-free smoke pass; implementation and outcome-blind live-bf16 mechanics remain."
+    },
     "qwen35_4b_sampler_portfolio_scheduler": {
       "status": "finished",
       "confidence": 0.95

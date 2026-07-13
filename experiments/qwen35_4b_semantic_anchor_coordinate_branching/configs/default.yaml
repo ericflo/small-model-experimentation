@@ -1,0 +1,160 @@
+schema_version: 1
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+  dtype: bfloat16
+  attention: sdpa
+  device: cuda:0
+  think_open_id: 248068
+  think_close_id: 248069
+
+seeds:
+  split: 2026072401
+  mechanics_prefix: 2026072402
+  qualification_prefix: 2026072403
+  confirmation_prefix: 2026072404
+  branch_sampling: 2026072405
+  full_sample_more: 2026072406
+  non_j_a: 2026072407
+  non_j_b: 2026072408
+  label_map: 2026072409
+  bootstrap: 2026072410
+
+data:
+  mechanics_tasks: 4
+  qualification_tasks: 24
+  confirmation_tasks: 48
+  visible_examples: 8
+  hidden_examples: 8
+  depth: 2
+  operation_names:
+    - reverse
+    - sort_asc
+    - sort_desc
+    - abs_all
+    - square
+    - negate
+    - running_sum
+    - adjacent_diff
+    - add_k
+    - mul_k
+    - take_k
+    - rotate_k
+  alias_tokens:
+    - cat
+    - dog
+    - horse
+    - tiger
+    - apple
+    - lemon
+    - river
+    - ocean
+    - silver
+    - gold
+    - circle
+    - square
+
+anchor:
+  prefix_text: "\n\nCandidate first-operation alias:"
+  continuation_text: "\nInvestigate this candidate against every visible example, revise it if needed, and continue reasoning:\n"
+  direct_query_text: "\nEnd reasoning and output exactly that candidate alias.</think>\n\nCandidate:"
+  diagnostic_input: [3, -1, 2, 0]
+  diagnostic_parameter: 2
+  result_labels:
+    - winter
+    - summer
+    - music
+    - dance
+    - bread
+    - glass
+    - stone
+    - cloud
+    - green
+    - purple
+    - north
+    - south
+  consequence_query_text: >-
+    Apply the candidate operation once to [3, -1, 2, 0], using k=2 where
+    needed. Choose the label whose list equals the result.</think>
+
+    Result label:
+
+generation:
+  temperature: 0.6
+  top_p: 0.95
+  top_k: 20
+  prefix_tokens: 512
+  final_thought_tokens: 1024
+  branches: 12
+  full_sample_more_pool: 12
+  prompt_max_tokens: 768
+  total_max_tokens: 2048
+  slot_text: "\n\nFirst:"
+  suppress_think_close_before_cap: true
+
+lens:
+  path: assets/context_lens.pt
+  sha256: e373b6e93956fdfc5cb446e9bee8249655707c8258a7868f0653d11f1ffd0213
+  concepts: 24
+  public_alias_concepts: 12
+  band: [4, 5, 6, 7, 8]
+  pseudoinverse_rtol: 1.0e-5
+  replicated_median_delta_norms:
+    4: 2.0960267782211304
+    5: 0.09453743696212769
+    6: 0.13078299164772034
+    7: 0.14685937762260437
+    8: 0.06200104393064976
+
+controls:
+  post_bf16_norm_relative_tolerance: 1.0e-5
+  post_bf16_non_j_span_projection_max: 0.01
+  causal_activation_atol: 1.0e-3
+  cache_vs_full_prefill_logit_abs_max: 0.05
+  live_control_candidate_draws: 32
+  live_control_correction_iterations: 512
+  live_control_correction_damping: 0.5
+  live_control_lattice_pair_steps: 32
+  live_control_repair_safety_margin: 0.95
+  bootstrap_resamples: 10000
+
+gates:
+  mechanics:
+    text_direct_rate_min: 0.90
+    text_consequence_rate_min: 0.80
+    full_donor_direct_rate_min: 0.75
+    full_donor_consequence_rate_min: 0.65
+    coordinate_direct_rate_min: 0.60
+    coordinate_consequence_rate_min: 0.50
+    coordinate_consequence_probability_lift_min: 0.15
+    coordinate_minus_worse_non_j_rate_min: 0.35
+    wrong_donor_own_consequence_rate_min: 0.50
+    wrong_donor_registered_target_rate_max: 0.15
+    coordinate_candidate_alias_support_min: 10
+    coordinate_result_label_support_min: 10
+    coordinate_successful_tasks_min: 4
+    parse_rate_min: 0.95
+    numeric_rows_pass_rate_min: 1.0
+  qualification:
+    candidate_accuracy_min: 0.15
+    candidate_accuracy_max: 0.75
+    candidate_minus_each_deployable_min: 0.10
+    candidate_minus_text_min: 0.05
+    paired_one_sided_95_lower_min: 0.0
+    oracle_coverage_gain_min: 0.05
+    predicted_alias_support_min: 8
+    successful_alias_support_min: 6
+  confirmation:
+    candidate_accuracy_min: 0.15
+    candidate_accuracy_max: 0.75
+    candidate_minus_each_deployable_min: 0.10
+    candidate_minus_text_min: 0.05
+    paired_one_sided_95_lower_min: 0.0
+    oracle_coverage_gain_min: 0.05
+    predicted_alias_support_min: 8
+    successful_alias_support_min: 6
+
+design_boundary:
+  status: pending
+implementation_boundary:
+  status: pending

@@ -1,0 +1,47 @@
+{
+  "all_disjoint": true,
+  "ancestor_behavior_fingerprints": 1046,
+  "ancestor_overlap_count": 0,
+  "benchmarks_read": false,
+  "mechanics_public": {
+    "fields": [
+      "alias_to_operation",
+      "result_label_by_operation",
+      "source_alias",
+      "task_id",
+      "visible"
+    ],
+    "path": "experiments/qwen35_4b_semantic_anchor_coordinate_branching/data/procedural/mechanics_public.jsonl",
+    "rows": 4,
+    "sealed_fields_present": false,
+    "sha256": "6774d8727409b8398018e5a65710ac226765fa793a4f7a028a666ec3bb952edb"
+  },
+  "schema_version": 1,
+  "scientific_result": false,
+  "seed": 2026072401,
+  "splits": {
+    "confirmation": {
+      "path": "experiments/qwen35_4b_semantic_anchor_coordinate_branching/data/procedural/confirmation.jsonl",
+      "rows": 48,
+      "sha256": "46de2d9e6a33e83a747f9d3447d16e168da45d4961500c9321e5745f6b2a3a3c",
+      "unique_behaviors": 48,
+      "unique_fingerprints": 48
+    },
+    "mechanics": {
+      "path": "experiments/qwen35_4b_semantic_anchor_coordinate_branching/data/procedural/mechanics.jsonl",
+      "rows": 4,
+      "sha256": "64579ae58fbe2bdc805111f6a9422fbbe2020181b4596ec3da0874700c93a0a4",
+      "unique_behaviors": 4,
+      "unique_fingerprints": 4
+    },
+    "qualification": {
+      "path": "experiments/qwen35_4b_semantic_anchor_coordinate_branching/data/procedural/qualification.jsonl",
+      "rows": 24,
+      "sha256": "d794664bb5428eae79f1f1d1cdef54a07dc4a3cac308571784e8c9e19e81b16e",
+      "unique_behaviors": 24,
+      "unique_fingerprints": 24
+    }
+  },
+  "total_new_unique_behaviors": 76,
+  "total_new_unique_fingerprints": 76
+}

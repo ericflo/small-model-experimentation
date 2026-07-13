@@ -1,0 +1,22 @@
+# Generated starter metadata. Run make check after adding artifacts.
+id: "qwen35_4b_semantic_anchor_coordinate_branching"
+title: "Qwen3.5-4B Semantic-Anchor Coordinate Branching"
+source_track: "new"
+path: "experiments/qwen35_4b_semantic_anchor_coordinate_branching"
+primary_readme: "experiments/qwen35_4b_semantic_anchor_coordinate_branching/README.md"
+primary_report: "experiments/qwen35_4b_semantic_anchor_coordinate_branching/reports/report.md"
+summary: "Test whether an explicit native-thought hypothesis anchor makes donor-coordinate J transport usable for balanced continuation branching."
+tags:
+  - "latent-state"
+  - "policy"
+  - "small-model"
+research_programs:
+  - "interpretability_and_diagnostics"
+top_level_dirs:
+  - "configs"
+  - "reports"
+  - "scripts"
+  - "src"
+file_counts: {}
+total_files: 0
+total_size_bytes: 0
