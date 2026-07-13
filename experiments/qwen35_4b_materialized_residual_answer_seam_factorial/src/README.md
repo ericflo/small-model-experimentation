@@ -7,6 +7,8 @@
 - `calibration_stage.py`: four-file calibration reader firewall, frozen
   thought-first invocation order, durable orchestration, pairing checks, and
   fixed-priority analysis.
+- `calibration_lock.py`: green-CI implementation lock, critical-blob verifier,
+  live worktree/ancestry checks, and exact loaded-engine preflight.
 - `plans.py`: sampled/logical token first-over matching.
 - `transactions.py`: append-only durable generation, fail-closed recovery, and
   semantic completed-prefix authentication for dependent invocations.

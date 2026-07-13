@@ -1,6 +1,6 @@
 # Qwen3.5-4B Materialized Residual Answer-Seam Factorial
 
-**Status:** in-progress · since 2026-07-13 · fresh construction complete; adversarial review holds every model stage sealed pending calibration firewall/lock implementation
+**Status:** in-progress · since 2026-07-13 · fresh construction complete; adversarial review holds every model stage sealed pending independent implementation review and a published calibration lock
 
 This fresh successor isolates the failure that made the durable materialized-
 residual generation result uninterpretable: the model never entered a reliable
@@ -87,19 +87,20 @@ authenticated parent instances, exact live-sibling strata, 4,104 prepared rows,
 2,952 unique canonical request IDs, balanced A-X calibration positions, zero
 model calls, and empty forbidden-read receipts. Append-only real-tokenizer
 receipts also authenticate all answer compositions, context fit, zero rendered
-parent overlap, and the current shared-thought runner. Sixty-one model-free
+parent overlap, and the current shared-thought runner. Sixty-five model-free
 tests pass, including adversarial durable transaction/recovery mutations and
 exact persisted-token thought forking. A calibration-only loader is byte-
 identical with every mechanics artifact absent, and a fake-runner integration
 passes all five durable invocations plus analysis/restart. This remains
-registration and implementation evidence only.
+registration and implementation evidence only. The lock/live-preflight code is
+present but no authorization receipt has been minted.
 
 ## Interpretation
 
 No capability belief changes. Adversarial review materially strengthened the
-design and still holds live execution: the calibration implementation lock,
-live-engine preflight, independent implementation review, and committed
-outcome boundaries remain mandatory.
+design and still holds live execution: independent implementation review,
+publication of the exact green implementation lock, its separately green lock
+commit, and committed outcome boundaries remain mandatory.
 
 ## Knowledgebase Update
 

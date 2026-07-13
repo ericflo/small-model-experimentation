@@ -58,3 +58,10 @@ Created as a new experiment scaffold.
   remain byte-identical. A fake runner completes thought-first 48-row batches,
   exact factorial pairing, fixed-priority analysis, and a zero-call restart.
   All 61 tests pass; no model call was made.
+- 2026-07-13: Added the calibration authorization implementation without
+  minting it. Lock publication now requires a clean commit already on `main`
+  with both workflows green and binds every critical blob/input/engine/sample
+  config. Live preflight rechecks current ancestry/CI plus exact loaded Qwen,
+  vLLM, tokenizer, CUDA-graph, scheduler, cache, runtime, and rendered prompts.
+  All 65 tests pass; independent review is still required before lock
+  publication and no model was loaded or called.
