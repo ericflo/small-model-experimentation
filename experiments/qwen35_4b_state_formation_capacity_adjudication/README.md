@@ -1,6 +1,6 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · frozen design unchanged; corrected setup-control source is GO; final-source setup regenerated and reopened; seed-7411 G0 pending; no result run is authorized
+**Status:** in-progress · since 2026-07-13 · frozen design unchanged; final-source setup and seed-7411 LoRA G0 pass; corrected positive control pending; no result run is authorized
 
 ## Current status
 
@@ -28,9 +28,13 @@ created and strictly reopened: CPU smoke SHA-256 `56032f75…7ad43`, data-manife
 All three source-bound initialization bundles pass the canonical loader, their tracked receipts are
 byte-identical to their external sidecars, and their tensor-value digests exactly reproduce the
 archived shared initialization. No sealed contrast row was decompressed, no model was loaded during
-regeneration, and the ledger still has zero events. Seed-7411 G0 and the corrected control are next.
-The earlier G0 pass and 0/48 control miss remain historical mechanics records only. No result
-training has started and no sealed contrast has been scored.
+regeneration, and the ledger still has zero events. Seed-7411 LoRA G0 now passes canonically under
+the final source at receipt identity `928e756f…820c`: both PEFT parity regimes have zero observed
+error, K=1 is exact, every required recurrent group and all 124 LoRA tensors receive finite nonzero
+gradients while the base receives none, the K=12 path is finite, and checkpoint restoration is exact.
+The corrected positive control is next. The earlier source-3baa G0 pass and 0/48 control miss remain
+historical mechanics records only. No result training has started and no sealed contrast has been
+scored.
 
 ## Research program and prior anchors
 

@@ -7,16 +7,18 @@ implementation review, and the frozen design are complete. The corrected setup-c
 171/171 local tests and independent code and GPU/runtime review. Every setup artifact from source
 `3baa7b53…d5c42` is durably archived. CPU smoke, the data manifest, the empty sealed-access ledger,
 and all three shared initialization bundles have now been regenerated and strictly reopened under
-final source `1d1368cf…434b0a`; no current G0 or positive-control pass exists. No training checkpoint,
-evaluation row, or terminal analysis from this directory should be cited as scientific evidence.
+final source `1d1368cf…434b0a`. Seed-7411 LoRA G0 passes canonically at identity
+`928e756f…820c`; no positive-control pass exists. No training checkpoint, evaluation row, or terminal
+analysis from this directory should be cited as scientific evidence.
 
 Under the invalidated source, seed 7411 passed LoRA G0 and then scored 0/48 on the setup-only control.
 The control had omitted the globally frozen accumulation of 16, presenting only one singleton row per
 optimizer update. The corrected path retains 256 optimizer updates and every explicit control value,
 but uses 16 loss-scaled singleton microbatches per update and records fixed diagnostics. The prior miss
 is preserved as mechanics history only. The final-source setup has an empty contrast ledger and the
-same shared tensor values as the archived setup. Seed-7411 G0 and the corrected control must now pass
-before any result-bearing arm is authorized.
+same shared tensor values as the archived setup. Final-source seed-7411 G0 has now passed every
+registered mechanics gate; the corrected control must pass before any result-bearing arm is
+authorized.
 
 ## Why this experiment exists
 

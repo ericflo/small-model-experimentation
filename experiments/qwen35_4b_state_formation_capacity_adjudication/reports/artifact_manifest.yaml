@@ -78,8 +78,10 @@ notes: >-
   manifest, empty seal ledger, and all three initialization bundles have been recreated under that
   final source and strictly reopened. The manifest SHA256 is
   85286a9549b0e74111eaa0c1254f04f68cad4d75159abc8ba59c169637280cd9 and the ledger identity is
-  b122d49054cd37474784a8b4ec3bcc0026e745321718dee799615e3051983c14. No current G0 receipt,
-  positive-control pass, or result artifact exists, and later stages remain prohibited.
+  b122d49054cd37474784a8b4ec3bcc0026e745321718dee799615e3051983c14. The current seed-7411 LoRA G0
+  receipt has SHA256 8c381fc7e883e384debef6ce64e55dd57aacab6f30e4a17dd6ef82d4db56aa01 and identity
+  928e756fa6aea30104f0ed8a71c03620ed8663198a4811f6fcf9b6fda53f820c. No positive-control pass or
+  result artifact exists, and later stages remain prohibited.
   The first Qwen load stopped before wrapper construction or mechanics and is preserved by a tracked
   failure receipt; it opened
   only the permitted training validator, no sealed contrast, and produced no canonical G0 output.

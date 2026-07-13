@@ -383,8 +383,34 @@
 - No model-bearing stage ran during regeneration. No result training is licensed, and the sealed
   ledger remained unchanged throughout initialization validation.
 
+## 2026-07-13 — final-source seed-7411 LoRA G0 passes
+
+- The canonical receipt `runs/setup/g0_lora_seed7411.json` has file SHA-256
+  `8c381fc7e883e384debef6ce64e55dd57aacab6f30e4a17dd6ef82d4db56aa01`, identity
+  `928e756fa6aea30104f0ed8a71c03620ed8663198a4811f6fcf9b6fda53f820c`, and exact status
+  `MODEL_SMOKE_PASS`. It reopens against final source `1d1368cf…434b0a`, data manifest
+  `85286a95…0cd9`, design identity `d943b909…ac52`, seed-7411 initialization identity
+  `bbb21fef…0ae`, the pinned training lock, and only `Qwen/Qwen3.5-4B` revision `851bf6e8…cd0a` on
+  the Transformers backend. No branch authorization was supplied or required.
+- The pinned snapshot proof covers the same nine exact model/tokenizer files at the registered
+  revision. The target manifest contains 62 ordered modules and the LoRA bank contains 16,232,448
+  trainable adaptation parameters, with every output factor still exactly zero at construction.
+- Pinned-PEFT output, A-gradient, and B-gradient comparisons pass with zero observed error in both
+  FP32/dropout-off and bf16-autocast/dropout-0.05 regimes. Enabled-versus-disabled output and both
+  pre/post-optimizer K=1 errors are zero, with zero K=1 adaptation calls.
+- Both state-only optimizer probes and the live joint probe give finite nonzero gradients to every
+  required recurrent group and all 124 LoRA tensors while producing zero base-model gradient
+  tensors. Every required Adam state is complete and finite with no registered exemption.
+- The ten-step path is finite at 0.311 seconds per step. The structurally disjoint setup-only K=12
+  row is finite with exactly 682 ordered calls across 11 identical target cycles. Destructive
+  checkpoint restoration returns both adaptation and common-state digests exactly and changes logits
+  by zero. Peak allocated/reserved memory is 11.20/11.36 GiB, leaving 35.63 GiB free.
+- The empty contrast ledger remains byte-identical at file SHA-256 `0c03a0d8…ac261`, identity
+  `b122d490…3c14`, with `events: []`. G0 opened only the permitted training payload and created setup
+  evidence, not scientific evidence. Independent receipt audit recomputed every lineage, all nine
+  pinned snapshot files, parameter geometry, mechanics gate, and ledger invariant and gives `GO`.
+
 ## Current authorization
 
-Seed-7411 LoRA G0 and, only after its canonical pass, the corrected LoRA positive control are
-authorized against the final setup. No later-seed G0 or result training is authorized until that
-control passes canonically.
+The corrected seed-7411 LoRA positive control is authorized against this exact G0 receipt. No
+later-seed G0 or result training is authorized until that control passes canonically.
