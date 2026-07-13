@@ -111,7 +111,11 @@ notes: >-
   5127c305b7aa047866b9dfde34bf6e679b1749c3ea4a8d0ccffc44bfde4ecedd and identity
   185835ee1fa6d51851f8e0c557d1144c40e4f0c297181673157a6ba402f93216. Its aggregation scalar has
   finite nonzero live-joint gradient 5.328678525984287e-5, every other required group passed, and the
-  receipt authorizes only the seed-matched setup control. No result stage is authorized.
+  receipt authorizes only the seed-matched setup control. That control subsequently passed at receipt
+  SHA256 9dcd28eec2659ea299462006fe7c8e392aefe9a325c422b913409f60b8f14850 and identity
+  6a1394d9a877bd39bfada3bfa4f1def719fbce01bad618283213747fda14cefa: oracle 1.0, intact 48/48,
+  disabled 0/48, 256 updates, accumulation 16, and 4,096 presentations. Later-seed setup still blocks
+  every result stage.
   The first Qwen load stopped before wrapper construction or mechanics and is preserved by a tracked
   failure receipt; it opened
   only the permitted training validator, no sealed contrast, and produced no canonical G0 output.

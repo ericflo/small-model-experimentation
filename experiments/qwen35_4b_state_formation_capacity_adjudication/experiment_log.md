@@ -578,3 +578,20 @@ setup gates pass and are committed.
 
 The seed-7411 LoRA positive control is authorized. Seeds 7412/7413 G0 and all result training remain
 blocked until this setup-control replay passes and is committed.
+
+## 2026-07-13 — replacement-source seed-7411 positive control passes
+
+- Canonical receipt SHA-256 `9dcd28ee…14850`, identity `6a1394d9…cefa`, with exact lineage to G0
+  identity `185835ee…3216` and manifest `e935c31a…1e57`.
+- Oracle readout accuracy is 1.0. The fixed-final intact score is 48/48 exact terminal triples and all
+  144 trajectory steps; adaptation-disabled is 0/48 exact terminal triples. The path therefore still
+  exercises the LoRA update after the FP32 aggregation repair.
+- The control completed exactly 256 optimizer updates, accumulation 16, and 4,096 singleton
+  presentations. It opened no result payload, benchmark, or sealed contrast and remains setup-only
+  evidence.
+
+## Current authorization
+
+Seed-7412 LoRA G0 is authorized under source `d4269bf3…8b36`. Seed 7413, later positive controls,
+and all result training remain blocked until their exact predecessor setup gates pass and are
+committed. The unchanged nonzero aggregation-gradient gate is mandatory.
