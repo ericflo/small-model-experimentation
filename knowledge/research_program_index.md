@@ -3,7 +3,7 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 13
-- Experiments: 231
+- Experiments: 232
 
 ## Structured Execution And Compilers
 
@@ -400,7 +400,7 @@ Grow, search, shortlist, compose, and stress-test reusable operator and skill ba
 Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and other update mechanisms.
 
 - Charter: [posttraining_and_adaptation](../research_programs/posttraining_and_adaptation/charter.md)
-- Assigned experiments: 70
+- Assigned experiments: 71
 
 ### Seed Evidence
 
@@ -430,6 +430,7 @@ Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and o
 - `qwen35_4b_hypothesize_verify_wall` (new): [README](../experiments/qwen35_4b_hypothesize_verify_wall/README.md)
 - `qwen35_4b_interactive_policy_curriculum` (new): [README](../experiments/qwen35_4b_interactive_policy_curriculum/README.md)
 - `qwen35_4b_inventory_shortlister_training` (track-z): [README](../experiments/qwen35_4b_inventory_shortlister_training/README.md)
+- `qwen35_4b_jacobian_counterfactual_branching` (new): [README](../experiments/qwen35_4b_jacobian_counterfactual_branching/README.md)
 - `qwen35_4b_learn_from_failures` (new): [README](../experiments/qwen35_4b_learn_from_failures/README.md)
 - `qwen35_4b_learned_active_trace_policy` (track-z): [README](../experiments/qwen35_4b_learned_active_trace_policy/README.md)
 - `qwen35_4b_live_tool_dagger` (track-z): [README](../experiments/qwen35_4b_live_tool_dagger/README.md)
@@ -487,7 +488,7 @@ Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and o
 Train or evaluate small models as controllers over tools, verifiers, budgets, and intermediate actions.
 
 - Charter: [process_control_and_tool_use](../research_programs/process_control_and_tool_use/charter.md)
-- Assigned experiments: 38
+- Assigned experiments: 39
 
 ### Seed Evidence
 
@@ -506,6 +507,7 @@ Train or evaluate small models as controllers over tools, verifiers, budgets, an
 - `qwen35_4b_context_local_jacobian_clamp` (new): [README](../experiments/qwen35_4b_context_local_jacobian_clamp/README.md)
 - `qwen35_4b_deployable_information_ceiling_sweep` (track-z): [README](../experiments/qwen35_4b_deployable_information_ceiling_sweep/README.md)
 - `qwen35_4b_interactive_policy_curriculum` (new): [README](../experiments/qwen35_4b_interactive_policy_curriculum/README.md)
+- `qwen35_4b_jacobian_counterfactual_branching` (new): [README](../experiments/qwen35_4b_jacobian_counterfactual_branching/README.md)
 - `qwen35_4b_latent_decomposition` (new): [README](../experiments/qwen35_4b_latent_decomposition/README.md)
 - `qwen35_4b_learned_active_trace_policy` (track-z): [README](../experiments/qwen35_4b_learned_active_trace_policy/README.md)
 - `qwen35_4b_live_tool_dagger` (track-z): [README](../experiments/qwen35_4b_live_tool_dagger/README.md)
@@ -662,7 +664,7 @@ Stress whether mechanisms transfer across substrates, families, lengths, distrib
 Measure why methods work or fail through attribution, probes, pressure audits, and controlled ablations.
 
 - Charter: [interpretability_and_diagnostics](../research_programs/interpretability_and_diagnostics/charter.md)
-- Assigned experiments: 67
+- Assigned experiments: 68
 
 ### Seed Evidence
 
@@ -690,6 +692,7 @@ Measure why methods work or fail through attribution, probes, pressure audits, a
 - `qwen35_4b_humaneval_code_confidence` (new): [README](../experiments/qwen35_4b_humaneval_code_confidence/README.md)
 - `qwen35_4b_hypothesize_verify_wall` (new): [README](../experiments/qwen35_4b_hypothesize_verify_wall/README.md)
 - `qwen35_4b_interactive_policy_curriculum` (new): [README](../experiments/qwen35_4b_interactive_policy_curriculum/README.md)
+- `qwen35_4b_jacobian_counterfactual_branching` (new): [README](../experiments/qwen35_4b_jacobian_counterfactual_branching/README.md)
 - `qwen35_4b_jacobian_transport_control_replication` (new): [README](../experiments/qwen35_4b_jacobian_transport_control_replication/README.md)
 - `qwen35_4b_jacobian_value_transport` (new): [README](../experiments/qwen35_4b_jacobian_value_transport/README.md)
 - `qwen35_4b_native_thought_jacobian_value_transport` (new): [README](../experiments/qwen35_4b_native_thought_jacobian_value_transport/README.md)

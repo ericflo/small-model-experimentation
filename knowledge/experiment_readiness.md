@@ -4,14 +4,14 @@ Generated from tracked experiment contents. Use this as a triage surface for tur
 
 Anchor-ready means the experiment has a human-authored README, a detected primary report, recognized local artifacts, and an assigned research program. It does not mean the result is correct or final.
 
-- Experiments: 231
-- Anchor-ready: 216
-- Human-authored READMEs: 218
+- Experiments: 232
+- Anchor-ready: 217
+- Human-authored READMEs: 219
 - Generated README stubs: 13
-- Primary reports: 231
-- Experiment logs: 135
-- Smoke commands: 100
-- Artifact manifests: 203
+- Primary reports: 232
+- Experiment logs: 136
+- Smoke commands: 101
+- Artifact manifests: 204
 
 ## Run Surface Counts
 
@@ -19,7 +19,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | --- | ---: |
 | `documented-command` | 38 |
 | `documented-scripts` | 120 |
-| `scripts-undocumented` | 20 |
+| `scripts-undocumented` | 21 |
 | `source-or-analysis` | 53 |
 
 ## Curation Needs
@@ -28,7 +28,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | --- | ---: |
 | `add-smoke-command` | 131 |
 | `add-experiment-log` | 96 |
-| `document-run-path` | 73 |
+| `document-run-path` | 74 |
 | `add-artifact-manifest` | 28 |
 | `replace-generated-readme` | 13 |
 | `review-program-assignment` | 2 |
@@ -111,6 +111,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | yes | [`qwen35_4b_independent_retrieval_consensus`](../experiments/qwen35_4b_independent_retrieval_consensus/README.md) | algorithmic_memory_and_retrieval, evidence_conditioned_selection | `human-authored` | [report](../experiments/qwen35_4b_independent_retrieval_consensus/reports/final_report.md) | no | `scripts-undocumented` | no | large-artifact, run-data | add-experiment-log, document-run-path, add-smoke-command |
 | yes | [`qwen35_4b_interactive_policy_curriculum`](../experiments/qwen35_4b_interactive_policy_curriculum/README.md) | active_evidence_acquisition, agentic_breadth_installation, benchmark_generalization, evidence_conditioned_selection, interpretability_and_diagnostics, posttraining_and_adaptation, process_control_and_tool_use, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_interactive_policy_curriculum/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_inventory_shortlister_training`](../experiments/qwen35_4b_inventory_shortlister_training/README.md) | operator_and_skill_inventories, posttraining_and_adaptation | `human-authored` | [report](../experiments/qwen35_4b_inventory_shortlister_training/reports/qwen35_4b_inventory_shortlister_training_report.md) | no | `documented-scripts` | no | dataset, large-artifact | add-experiment-log, add-smoke-command |
+| yes | [`qwen35_4b_jacobian_counterfactual_branching`](../experiments/qwen35_4b_jacobian_counterfactual_branching/README.md) | interpretability_and_diagnostics, posttraining_and_adaptation, process_control_and_tool_use | `human-authored` | [report](../experiments/qwen35_4b_jacobian_counterfactual_branching/reports/report.md) | yes | `scripts-undocumented` | yes | standard-artifact | document-run-path |
 | yes | [`qwen35_4b_jacobian_transport_control_replication`](../experiments/qwen35_4b_jacobian_transport_control_replication/README.md) | interpretability_and_diagnostics | `human-authored` | [report](../experiments/qwen35_4b_jacobian_transport_control_replication/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_jacobian_value_transport`](../experiments/qwen35_4b_jacobian_value_transport/README.md) | interpretability_and_diagnostics, structured_execution_and_compilers, test_time_reasoning_budget | `human-authored` | [report](../experiments/qwen35_4b_jacobian_value_transport/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_joint_shortlister_ladder`](../experiments/qwen35_4b_joint_shortlister_ladder/README.md) | benchmark_generalization, operator_and_skill_inventories, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_joint_shortlister_ladder/reports/qwen35_4b_joint_shortlister_ladder_report.md) | no | `documented-scripts` | no | dataset, large-artifact | add-experiment-log, add-smoke-command |

@@ -1,0 +1,106 @@
+schema_version: 1
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+  dtype: bfloat16
+  attention: sdpa
+  device: cuda:0
+  think_open_id: 248068
+  think_close_id: 248069
+
+seeds:
+  split: 2026072301
+  mechanics_prefix: 2026071302
+  qualification_prefix: 2026071303
+  confirmation_prefix: 2026071304
+  branch_sampling: 2026071305
+  full_sample_more: 2026071306
+  non_j_geometry: 2026071307
+  bootstrap: 2026071308
+
+data:
+  mechanics_tasks: 4
+  qualification_tasks: 24
+  confirmation_tasks: 48
+  visible_examples: 8
+  hidden_examples: 8
+  depth: 2
+  operation_aliases:
+    reverse: cat
+    sort_asc: dog
+    sort_desc: horse
+    abs_all: tiger
+    square: apple
+    negate: lemon
+    running_sum: river
+    adjacent_diff: ocean
+    add_k: silver
+    mul_k: gold
+    take_k: circle
+    rotate_k: square
+
+generation:
+  temperature: 0.6
+  top_p: 0.95
+  top_k: 20
+  prefix_tokens: 512
+  continuation_tokens: 512
+  final_thought_tokens: 1024
+  branches: 12
+  full_sample_more_pool: 12
+  prompt_max_tokens: 768
+  total_max_tokens: 2048
+  suppress_think_close_before_cap: true
+  slot_text: "\n\nFirst:"
+  constrain_to_alias_tokens: true
+
+lens:
+  path: assets/context_lens.pt
+  sha256: e373b6e93956fdfc5cb446e9bee8249655707c8258a7868f0653d11f1ffd0213
+  concepts: 24
+  public_alias_concepts: 12
+  band: [4, 5, 6, 7, 8]
+  pseudoinverse_rtol: 1.0e-5
+  alpha_multipliers: [0.5, 1.0, 2.0]
+  replicated_median_delta_norms:
+    4: 2.0960267782211304
+    5: 0.09453743696212769
+    6: 0.13078299164772034
+    7: 0.14685937762260437
+    8: 0.06200104393064976
+  norm_anchor_source: qwen35_4b_jacobian_transport_control_replication
+  norm_anchor_rows_sha256: 6c6d9cc42e01124a92f8071d8b13a5bbfca900faaddc1655b4f009646289ecd9
+
+controls:
+  post_bf16_norm_relative_tolerance: 1.0e-5
+  post_bf16_non_j_span_projection_max: 0.01
+  branch_sum_norm_max: 1.0e-6
+  gram_relative_error_max: 1.0e-5
+  cache_vs_full_prefill_alias_logit_abs_max: 0.05
+  bootstrap_resamples: 10000
+
+gates:
+  mechanics:
+    j_target_selection_rate_min: 0.60
+    j_mean_target_probability_lift_min: 0.15
+    j_minus_non_j_target_selection_min: 0.35
+    numeric_rows_pass_rate_min: 1.0
+  qualification:
+    candidate_accuracy_min: 0.15
+    candidate_accuracy_max: 0.75
+    candidate_minus_each_deployable_min: 0.10
+    paired_one_sided_95_lower_min: 0.0
+    oracle_coverage_gain_min: 0.05
+    predicted_alias_support_min: 8
+    successful_alias_support_min: 6
+  confirmation:
+    candidate_accuracy_min: 0.15
+    candidate_accuracy_max: 0.75
+    candidate_minus_each_deployable_min: 0.10
+    paired_one_sided_95_lower_min: 0.0
+    oracle_coverage_gain_min: 0.05
+    predicted_alias_support_min: 8
+    successful_alias_support_min: 6
+
+design_boundary:
+  status: pending

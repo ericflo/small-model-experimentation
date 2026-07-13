@@ -1,0 +1,17 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_jacobian_counterfactual_branching"
+external_artifacts: []
+omitted_artifacts: []
+reproducibility:
+  smoke_command: >-
+    PYTHONDONTWRITEBYTECODE=1 .venv/bin/python
+    experiments/qwen35_4b_jacobian_counterfactual_branching/scripts/run.py
+    --stage smoke
+  full_command: "unavailable before implementation and mechanics boundaries"
+  required_external_artifacts: []
+notes: >-
+  Frozen lens, fresh procedural splits, direct-ancestor collision manifest,
+  configuration, CPU geometry receipt, tests, preregistration, and adversarial
+  review are committed. No model output, mechanics result, correctness score,
+  confirmation access, or external artifact exists yet.

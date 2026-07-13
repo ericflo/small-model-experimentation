@@ -2,6 +2,49 @@
  "note": "Native chart specs for the research site, extracted from each experiment's own result files (runs/reports/analysis JSON+CSV and README/report tables) by per-experiment agent passes and kept only when every plotted value was located verbatim in the cited source by machine verification. Rendered by scripts/build_site.py (chart_svg/chart_figure); raw matplotlib figures remain available further down each experiment page.",
  "extracted_on": "2026-07-10",
  "experiments": {
+  "qwen35_4b_jacobian_counterfactual_branching": {
+   "charts": [
+    {
+     "title": "Balanced semantic and generic branch norms match by layer",
+     "kind": "bar",
+     "categories": [
+      "layer 4",
+      "layer 5",
+      "layer 6",
+      "layer 7",
+      "layer 8"
+     ],
+     "series": [
+      {
+       "label": "J-space branch RMS norm",
+       "values": [
+        2.096027374267578,
+        0.09453742206096649,
+        0.13078297674655914,
+        0.1468593329191208,
+        0.06200103834271431
+       ]
+      },
+      {
+       "label": "J-orthogonal control RMS norm",
+       "values": [
+        2.0960280895233154,
+        0.09453747421503067,
+        0.13078294694423676,
+        0.14685937762260437,
+        0.06200101226568222
+       ]
+      }
+     ],
+     "x_label": "frozen intervention layer",
+     "y_label": "RMS residual delta norm",
+     "y_format": "decimal3",
+     "note": "CPU smoke only at alpha 1.0. The generic control is an orthogonal rotation preserving the complete semantic branch Gram matrix, not merely average norm. All five semantic branch sets have rank 11 and sum to zero; no model outcome has run.",
+     "source": "experiments/qwen35_4b_jacobian_counterfactual_branching/runs/smoke/cpu.json",
+     "headline": true
+    }
+   ]
+  },
   "qwen35_4b_counterfactual_order_support_selector": {
    "charts": [
     {

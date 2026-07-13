@@ -1,0 +1,170 @@
+{
+  "all_disjoint": true,
+  "ancestor_files": [
+    {
+      "path": "experiments/qwen35_4b_native_thought_jacobian_value_transport/data/procedural/causal_confirmation.jsonl",
+      "rows": 32,
+      "sha256": "912486b7a8b8dea4568d19c1b70a350f6244126b1c3705317024fb5b8e1d623d",
+      "unique_fingerprints": 32
+    },
+    {
+      "path": "experiments/qwen35_4b_native_thought_jacobian_value_transport/data/procedural/seam_calibration.jsonl",
+      "rows": 16,
+      "sha256": "95226ab93e4b71ced48a6c5c8dc797ff12ae399a3887e24fec07d7fc1d0c62af",
+      "unique_fingerprints": 16
+    },
+    {
+      "path": "experiments/qwen35_4b_native_thought_jacobian_value_transport/data/procedural/value_fit.jsonl",
+      "rows": 32,
+      "sha256": "fdf2b967cde208d08fc716800b0ef106048e2bf4d5a03143718311da71a8fa75",
+      "unique_fingerprints": 32
+    },
+    {
+      "path": "experiments/qwen35_4b_native_thought_seam_budget_ladder/data/procedural/budget_selection.jsonl",
+      "rows": 16,
+      "sha256": "11d70de5cfdb31d6fa618ac69f7a4c4ac9dfe4a6722f7dc8cb2c79a2592202cf",
+      "unique_fingerprints": 16
+    },
+    {
+      "path": "experiments/qwen35_4b_native_thought_seam_budget_ladder/data/procedural/seam_confirmation.jsonl",
+      "rows": 24,
+      "sha256": "58f77530b34b85af2f3ba882136cc1519d2fe2e8f7ddf6e3ab5ee8d8998352af",
+      "unique_fingerprints": 24
+    },
+    {
+      "path": "experiments/qwen35_4b_forced_commit_jacobian_value_transport/data/procedural/causal_confirmation.jsonl",
+      "rows": 32,
+      "sha256": "6d53c8e08f68ede002a16ae6b96a511ee7ecde446a1b29025aa200d436447656",
+      "unique_fingerprints": 32
+    },
+    {
+      "path": "experiments/qwen35_4b_forced_commit_jacobian_value_transport/data/procedural/seam_confirmation.jsonl",
+      "rows": 16,
+      "sha256": "fce96d5209865e536aa22a036d5dbbe15ba73d5f52a42fcfea274117397fce99",
+      "unique_fingerprints": 16
+    },
+    {
+      "path": "experiments/qwen35_4b_forced_commit_jacobian_value_transport/data/procedural/seam_selection.jsonl",
+      "rows": 16,
+      "sha256": "f235c4d13705b5b181ae3a161e6a65094072af5708aa33a8fe34829e091c24ec",
+      "unique_fingerprints": 16
+    },
+    {
+      "path": "experiments/qwen35_4b_forced_commit_jacobian_value_transport/data/procedural/value_fit.jsonl",
+      "rows": 32,
+      "sha256": "7cc6c89b480e6d846b01f1c8c6be82095042ccaf8fdfbf794e9c9239f1d7b3c2",
+      "unique_fingerprints": 32
+    },
+    {
+      "path": "experiments/qwen35_4b_commit_slot_jacobian_value_transport/data/procedural/causal_confirmation.jsonl",
+      "rows": 32,
+      "sha256": "7f4df036207f1f9314ed4a8293c68fc8cefe92573b5c753e4af6b72e5194070f",
+      "unique_fingerprints": 32
+    },
+    {
+      "path": "experiments/qwen35_4b_commit_slot_jacobian_value_transport/data/procedural/seam_confirmation.jsonl",
+      "rows": 16,
+      "sha256": "70e72f00e9d2bde5a88e10c2794487609831e7a6bb8baec4fa5636449de9190a",
+      "unique_fingerprints": 16
+    },
+    {
+      "path": "experiments/qwen35_4b_commit_slot_jacobian_value_transport/data/procedural/seam_selection.jsonl",
+      "rows": 16,
+      "sha256": "ac037aec985aa84456323c50fb5ae05e086460bd11dce7ae321291071d78bd2d",
+      "unique_fingerprints": 16
+    },
+    {
+      "path": "experiments/qwen35_4b_commit_slot_jacobian_value_transport/data/procedural/value_fit.jsonl",
+      "rows": 32,
+      "sha256": "64d42304de1efe1394380604c17c5066df735f14cd65445a12fd0e95e78fc93d",
+      "unique_fingerprints": 32
+    },
+    {
+      "path": "experiments/qwen35_4b_commit_slot_semantic_power_replication/data/procedural/causal_confirmation.jsonl",
+      "rows": 48,
+      "sha256": "84d8356cc5325986cc3cfab2b36005640dae8a8bc06ee0206dc20ca489f2e0d5",
+      "unique_fingerprints": 48
+    },
+    {
+      "path": "experiments/qwen35_4b_commit_slot_semantic_power_replication/data/procedural/seam_confirmation.jsonl",
+      "rows": 113,
+      "sha256": "710b2c411403dfaee3f01712cf527250b80b437a8d16159a853ed04f8c87a84b",
+      "unique_fingerprints": 113
+    },
+    {
+      "path": "experiments/qwen35_4b_commit_slot_semantic_power_replication/data/procedural/seam_selection.jsonl",
+      "rows": 113,
+      "sha256": "c570d766e122df6b03689334c5d86ae6b443e15914952fe7e6c25dfa4f8741ac",
+      "unique_fingerprints": 113
+    },
+    {
+      "path": "experiments/qwen35_4b_commit_slot_semantic_power_replication/data/procedural/value_fit.jsonl",
+      "rows": 48,
+      "sha256": "fa4a1592d293db69d4aaa34f4bad737c2f3b104a144a2912013bcbb5e0db5afa",
+      "unique_fingerprints": 48
+    }
+  ],
+  "ancestor_unique_fingerprints": 634,
+  "generator": "src/task_data.py",
+  "schema_version": 1,
+  "split_seed": 2026072301,
+  "splits": {
+    "confirmation": {
+      "ancestor_collisions": 0,
+      "cross_split_collisions": 0,
+      "first_operation_counts": {
+        "abs_all": 4,
+        "add_k": 5,
+        "adjacent_diff": 4,
+        "mul_k": 5,
+        "reverse": 4,
+        "rotate_k": 5,
+        "running_sum": 4,
+        "sort_asc": 4,
+        "sort_desc": 4,
+        "square": 4,
+        "take_k": 5
+      },
+      "path": "experiments/qwen35_4b_jacobian_counterfactual_branching/data/procedural/confirmation.jsonl",
+      "rows": 48,
+      "sha256": "d8cd27c3b4858c44dc564c577f290746d404bb7de57cbfa0be71ed1b3f84ec0e",
+      "unique_fingerprints": 48
+    },
+    "mechanics": {
+      "ancestor_collisions": 0,
+      "cross_split_collisions": 0,
+      "first_operation_counts": {
+        "add_k": 1,
+        "adjacent_diff": 1,
+        "mul_k": 1,
+        "take_k": 1
+      },
+      "path": "experiments/qwen35_4b_jacobian_counterfactual_branching/data/procedural/mechanics.jsonl",
+      "rows": 4,
+      "sha256": "44e614ceb0f94fb2d416240965a826dccf6dafea5c6b38a0f92268501e20e746",
+      "unique_fingerprints": 4
+    },
+    "qualification": {
+      "ancestor_collisions": 0,
+      "cross_split_collisions": 0,
+      "first_operation_counts": {
+        "abs_all": 2,
+        "add_k": 2,
+        "adjacent_diff": 2,
+        "mul_k": 2,
+        "reverse": 3,
+        "rotate_k": 2,
+        "running_sum": 2,
+        "sort_asc": 3,
+        "sort_desc": 2,
+        "square": 2,
+        "take_k": 2
+      },
+      "path": "experiments/qwen35_4b_jacobian_counterfactual_branching/data/procedural/qualification.jsonl",
+      "rows": 24,
+      "sha256": "5b1da0d6b36b0715b8690c3ce85b6b2b1ed77ebd369c9660305da5b4072acc3e",
+      "unique_fingerprints": 24
+    }
+  },
+  "total_new_unique_fingerprints": 76
+}

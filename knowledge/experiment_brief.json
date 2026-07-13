@@ -2,6 +2,39 @@
  "note": "Plain-language practitioner briefs shown above the fold on each experiment page (verdict + the-one-idea/question/finding/why-it-matters + KPI numbers + per-chart how-to-read/takeaway). Authored per experiment from its own README/report and verified chart specs under a strict no-jargon ban-list; all jargon-precise detail stays below the fold. Regenerate with scripts/enrichment/generate_briefs.workflow.js (see docs/site_maintenance.md).",
  "generated_on": "2026-07-05",
  "experiments": {
+  "qwen35_4b_jacobian_counterfactual_branching": {
+   "verdict_tag": "A new reasoning-branch test is built, but not run yet",
+   "concept_primer": "Imagine pausing one scratchpad halfway through, then making twelve balanced copies. Each copy gets a tiny internal nudge toward a different possible answer and is allowed to finish reasoning. Because every answer gets one nudge, no answer is secretly favored.",
+   "plain_question": "Can balanced internal nudges make one half-finished reasoning path explore better futures than spending the same effort on ordinary independent attempts?",
+   "plain_answer": "Not known yet. The fresh puzzles, internal directions, and a carefully matched generic control all pass structural checks. The next gate must first show—without using correct answers—that the nudges can write their intended candidate into a real halfway scratchpad. No model result has run.",
+   "why_it_matters": "Earlier work found that meaningful reasoning changes answers, but could not reliably score which scratchpad was good. This tries a different route: change what the model explores next, while comparing against ordinary sampling at the same cost.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Balanced reasoning branches",
+     "value": "12",
+     "sub": "one for every public answer word, summing to zero overall"
+    },
+    {
+     "label": "Fresh puzzles reserved",
+     "value": "4 + 24 + 48",
+     "sub": "mechanics, development, and untouched confirmation"
+    },
+    {
+     "label": "Prior-task collisions after seed repair",
+     "value": "0",
+     "sub": "76 new task fingerprints checked against 634 ancestors"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "The meaningful and generic nudges are equally strong",
+     "chart_read": "For each of five internal layers, the two neighboring bars show the size of the meaningful nudge and its generic control. Matching heights mean any later difference cannot be blamed on one arm simply pushing harder.",
+     "chart_takeaway": "The bars match at every layer, so the structural control is ready; this chart is not yet a behavioral result."
+    }
+   ]
+  },
   "qwen35_4b_counterfactual_order_support_selector": {
    "verdict_tag": "Meaningful order helps, but not enough to trust this selector",
    "concept_primer": "The model answered each puzzle after writing a long scratchpad. We also kept a version with exactly the same scratchpad words scrambled. The new idea is to ask which answer gained the most support from meaningful word order rather than from the words merely being present.",
