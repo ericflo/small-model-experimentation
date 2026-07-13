@@ -174,6 +174,30 @@ def canonical_hash(value: Any) -> str:
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
+def confirmation_evaluator_source_inventory() -> dict[str, int | str]:
+    """Hash the local code that generates and scores confirmation items."""
+
+    paths = {
+        EXP / "scripts" / "eval_policy.py",
+        EXP / "src" / "harness.py",
+        EXP / "src" / "io_utils.py",
+        EXP / "src" / "state_replay.py",
+        EXP / "src" / "vllm_runner.py",
+        *(EXP / "src" / "gym").rglob("*.py"),
+    }
+    rows = [
+        {
+            "path": path.relative_to(EXP).as_posix(),
+            "sha256": sha256_file(path),
+        }
+        for path in sorted(paths)
+        if path.is_file()
+    ]
+    if len(rows) != len(paths):
+        raise ValueError("confirmation evaluator source inventory is incomplete")
+    return {"sha256": canonical_hash(rows), "file_count": len(rows)}
+
+
 def make_specs(
     families: Iterable[str],
     per_level: dict[int | str, int],

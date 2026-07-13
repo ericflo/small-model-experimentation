@@ -127,3 +127,26 @@
   collapse-risk warning for confirmation and final interpretation.
 - All 58 experiment tests pass after the safeguards. Seed 42 remains in
   progress; no capability or control comparison exists yet.
+
+## 2026-07-13 — deterministic control-only full-prefix overlay
+
+- Implemented the required route-control recovery without changing the frozen
+  primary manifest or target cache. The control path replays the original
+  matcher from all 15 hashed candidate artifacts, applies only the registered
+  `3,072`-token full-prefix eligibility condition, and fails if the filter
+  changes any nonoffending match.
+- On the actual round-1 evidence, 490/495 non-deep candidates are eligible and
+  the replay changes exactly one of 60 pairs. The cut
+  `episode-256a1dbfee96673bcc5a8066` is replaced at the same cache index by the
+  first legal exact-cell candidate,
+  `episode-2e451ff7c44b165288e7c8f4` (`2,907` tokens, no cut). The other 59
+  controls and the 56-exact-cell/4-family-kind geometry are unchanged.
+- Only the future `non_advantage_route` arm can consume the derived cache.
+  Wrong-teacher, primary, and off-policy paths retain their original inputs.
+  The overlay copies 139 samples byte-semantically and scores only the one new
+  sample under the same quick/deep/soup target policies; transitive receipts
+  bind the source cache, manifest, candidate files, tokenizer, and replacement.
+- A no-GPU end-to-end dry run against the real round-1 inputs produced the
+  expected sample at cache index 138 and passed both provenance validators.
+  Nine focused rematch tests and all 79 current experiment tests pass. Actual
+  policy scoring and control training have not run, so no control result exists.

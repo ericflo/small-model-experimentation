@@ -17,7 +17,14 @@ sys.path.insert(0, str(EXP / "src"))
 
 import harness  # noqa: E402
 from gym.families import load as load_family  # noqa: E402
-from io_utils import all_families, load_config, sha256_file, write_json  # noqa: E402
+from io_utils import (  # noqa: E402
+    all_families,
+    canonical_hash,
+    confirmation_evaluator_source_inventory,
+    load_config,
+    sha256_file,
+    write_json,
+)
 
 
 def _counts(config: dict, scope: str) -> tuple[int, int]:
@@ -93,6 +100,20 @@ def _sampled_token_count(atom_rows: list[dict], episode_rows: list[dict]) -> int
     return atom_tokens + episode_tokens
 
 
+def _model_inference_inventory_sha256(model: Path) -> str:
+    rows = [
+        {
+            "path": path.relative_to(model).as_posix(),
+            "sha256": sha256_file(path),
+        }
+        for path in sorted(model.rglob("*"))
+        if path.is_file()
+    ]
+    if not rows:
+        raise ValueError("local evaluation model has no inference files")
+    return canonical_hash(rows)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path)
@@ -105,6 +126,8 @@ def main() -> int:
     parser.add_argument("--smoke", action="store_true")
     parser.add_argument("--out-dir", type=Path)
     args = parser.parse_args()
+    evaluator_sha256 = sha256_file(Path(__file__))
+    evaluator_source_before = confirmation_evaluator_source_inventory()
     config, config_path = load_config(args.config)
     families = args.families or all_families(config)
     atom_n, episode_n = _counts(config, args.scope)
@@ -157,6 +180,8 @@ def main() -> int:
     merge_receipt = model_path / "merge_receipt.json"
     if model_path.exists() and not merge_receipt.is_file():
         raise SystemExit(f"local evaluation model has no merge receipt: {model_path}")
+    model_config_sha256 = sha256_file(model_path / "config.json")
+    model_inference_inventory_sha256 = _model_inference_inventory_sha256(model_path)
     runner = harness.make_runner(
         config["engine"], model_override=str(model_path.resolve()) if model_path.exists() else args.model
     )
@@ -166,11 +191,20 @@ def main() -> int:
     elapsed = time.perf_counter() - started
     metadata = getattr(runner, "eval_summaries", [])
     runner.close()
+    evaluator_source_after = confirmation_evaluator_source_inventory()
+    if (
+        sha256_file(Path(__file__)) != evaluator_sha256
+        or evaluator_source_after != evaluator_source_before
+        or sha256_file(model_path / "config.json") != model_config_sha256
+        or _model_inference_inventory_sha256(model_path)
+        != model_inference_inventory_sha256
+    ):
+        raise SystemExit("evaluation model changed during the confirmation run")
     engine_protocol = _engine_protocol(
         metadata,
         engine_cfg=config["engine"],
         model=model_path,
-        model_config_sha256=sha256_file(model_path / "config.json"),
+        model_config_sha256=model_config_sha256,
     )
     if not all(engine_protocol.values()):
         raise SystemExit(f"evaluation engine protocol failed: {engine_protocol}")
@@ -205,10 +239,15 @@ def main() -> int:
         }
     result = {
         "stage": "policy_eval", "tag": args.tag, "scope": args.scope,
+        "evaluator_sha256": evaluator_sha256,
+        "evaluator_source_inventory_sha256": evaluator_source_before["sha256"],
+        "evaluator_source_file_count": evaluator_source_before["file_count"],
         "model": str(model_path.resolve()) if model_path.exists() else args.model,
         "model_merge_receipt_sha256": (
             sha256_file(merge_receipt) if merge_receipt.is_file() else None
         ),
+        "model_config_sha256": model_config_sha256,
+        "model_inference_inventory_sha256": model_inference_inventory_sha256,
         "config": str(config_path), "config_sha256": sha256_file(config_path),
         "block_seed": args.block_seed,
         "decode": args.decode, "k": k, "families": families,

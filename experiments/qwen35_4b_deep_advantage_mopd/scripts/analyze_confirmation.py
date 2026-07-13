@@ -14,9 +14,15 @@ from typing import Iterable
 
 
 EXP = Path(__file__).resolve().parents[1]
+EVALUATOR = EXP / "scripts" / "eval_policy.py"
 sys.path.insert(0, str(EXP / "src"))
 
-from io_utils import load_config, sha256_file, write_json  # noqa: E402
+from io_utils import (  # noqa: E402
+    confirmation_evaluator_source_inventory,
+    load_config,
+    sha256_file,
+    write_json,
+)
 
 
 def _load(path: Path) -> dict:
@@ -224,7 +230,14 @@ def main() -> int:
         *strict_names, *replicate_names,
     }
     model_receipts = manifest.get("model_merge_receipts", {})
+    model_inventories = manifest.get("model_inference_inventories", {})
+    evaluator_source = manifest.get("evaluator_source_inventory", {})
+    current_evaluator_source = confirmation_evaluator_source_inventory()
     protocol = {
+        "manifest_evaluator_current": manifest.get("evaluator_sha256")
+        == sha256_file(EVALUATOR),
+        "manifest_evaluator_source_current": evaluator_source
+        == current_evaluator_source,
         "manifest_config_matches": manifest.get("config_sha256") == sha256_file(config_path),
         "manifest_blocks_match": manifest.get("block_seeds") == expected_seeds,
         "exact_arm_inventory": set(arms) == expected_arm_names,
@@ -237,9 +250,35 @@ def main() -> int:
             payload.get("scope") == "confirmatory"
             for payloads in arms.values() for payload in payloads
         ),
+        "all_evaluators_match_manifest": all(
+            payload.get("evaluator_sha256") == manifest.get("evaluator_sha256")
+            for payloads in arms.values()
+            for payload in payloads
+        ),
+        "all_evaluator_sources_match_manifest": (
+            isinstance(evaluator_source, dict)
+            and set(evaluator_source) == {"sha256", "file_count"}
+            and all(
+                payload.get("evaluator_source_inventory_sha256")
+                == evaluator_source.get("sha256")
+                and int(payload.get("evaluator_source_file_count", -1))
+                == evaluator_source.get("file_count")
+                for payloads in arms.values()
+                for payload in payloads
+            )
+        ),
         "all_model_receipts_match_manifest": all(
             payload.get("model_merge_receipt_sha256") == model_receipts.get(name)
             for name, payloads in arms.items() for payload in payloads
+        ),
+        "all_model_inference_inventories_match_manifest": (
+            set(model_inventories) == set(arms)
+            and all(
+                payload.get("model_inference_inventory_sha256")
+                == model_inventories.get(name)
+                for name, payloads in arms.items()
+                for payload in payloads
+            )
         ),
         "greedy_except_sample_more": all(
             payload.get("decode") == ("sample8" if name == sample_more_name else "greedy")
