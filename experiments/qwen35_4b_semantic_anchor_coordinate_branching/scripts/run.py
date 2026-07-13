@@ -132,6 +132,7 @@ def validate_implementation_boundary(config: dict) -> dict:
         "model_ops_sha256": EXP / "src" / "model_ops.py",
         "coordinates_sha256": EXP / "src" / "coordinates.py",
         "branch_geometry_sha256": EXP / "src" / "branch_geometry.py",
+        "mechanics_sha256": EXP / "src" / "mechanics.py",
         "task_data_sha256": EXP / "src" / "task_data.py",
         "tests_sha256": EXP / "tests" / "test_design.py",
         "implementation_audit_sha256": (

@@ -17,17 +17,18 @@
   "ancestor_overlap_count": 0,
   "benchmarks_read": false,
   "design_boundary": {
-    "commit": "9437bdc2664772f4ad2c50e8403740f11c28688c",
+    "commit": "3fd91dcab964eb460b15e9aed6afe9714c4a127e",
     "design_is_ancestor": true,
     "hashes": {
-      "data_manifest_sha256": "c2b80c9ec1b57d1f310c595739f918444075f1932b1e4c876474bfddec648300",
+      "data_manifest_sha256": "2e356290102613c19a7143c3036fa0c7c987d10e567ff066490dcdd1c15a360f",
       "design_review_sha256": "4046ea1ee93718d82c62446c334aee03b6706f764ec01564a733ffa9d665bd46",
       "lens_sha256": "e373b6e93956fdfc5cb446e9bee8249655707c8258a7868f0653d11f1ffd0213",
       "mechanics_public_sha256": "6774d8727409b8398018e5a65710ac226765fa793a4f7a028a666ec3bb952edb",
-      "preregistration_sha256": "296698dac83f14015a81d10b9047772f5ee605fed34ef09a38d48827b95ca170",
-      "readme_sha256": "35ee62cee163bf7718e87676a710a72e243f4d87a6fe330679ce3dcc6e73a27e"
+      "preregistration_sha256": "f3957535f161f29a5077806e0544a289208dd02c653c2b40d3b5c82a82163e63",
+      "readme_sha256": "fcf70c70dd488dea0c5f74d1a35f5a1f59ad61a7e0d0fe8362467bfec36394ae"
     },
-    "passed": true
+    "passed": true,
+    "scientific_config_sha256": "776f69349494932876fc12b6a15761425f86fac170e40d00d182ab7466416ac6"
   },
   "diagnostic_results": {
     "abs_all": [
