@@ -1,11 +1,13 @@
 # Qwen3.5-4B Materialized Residual Sibling Search Fresh Replication
 
-**Status:** in-progress · since 2026-07-13 · append-only V2 recovery and model-free preoutcome passed; V2 publication, separate lock, and model run remain sealed
+**Status:** finished
 
 This separately registered recovery replication preserves the parent's frozen
 materialized-residual science while regenerating tasks, request IDs, and
-sampling seeds and hardening durable generation receipts. The fresh task
-construction is frozen; no model call is authorized.
+sampling seeds and hardening durable generation receipts. The authenticated
+mechanics run is terminal: generation failed its ABI and the parse-immune cheap
+materialized ranker failed its gate. Qualification and confirmation were never
+opened.
 
 ## Research Program
 
@@ -93,9 +95,14 @@ attempt failed closed on an incorrect historical source commit before creating
 a lock, raw directory, runner, model load, GPU initialization, or model request.
 After three independent adversarial reviews, the same command passed again as
 an append-only V2 recovery without changing any original prepared payload.
-Live mechanics remains unauthorized until the reviewed V2 code and receipts
-are published on `main`, CI is green, and a separate clean implementation lock
-is generated, committed, and pushed.
+The reviewed V2 code and receipts were published on `main`, both CI workflows
+passed, and the separate schema-V4 implementation lock was independently
+audited, committed, pushed, and cleared by both workflows. The one authorized
+live command was then:
+
+```bash
+VLLM_ENABLE_V1_MULTIPROCESSING=0 .venv-vllm/bin/python experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/scripts/run_mechanics.py --stage run
+```
 
 ## Results
 
@@ -134,22 +141,47 @@ The append-only V2 repair assigns the three generated construction outputs to
 SHA-256 is
 `04d8ba59d212adac3193d88c19a38f58298fa18cbdd41321bf9e312bea72fe72`.
 It proves exact equality with the original 12-file payload table and is
-byte-idempotent across reruns. There is still no implementation lock, raw
-directory, model load, GPU initialization, model call, or sampled output.
+byte-idempotent across reruns. The reviewed implementation lock has SHA-256
+`c1d1c25c3989ad9a748720ee733fc59245c08b7a4e9a88663d52fb5dd460f6e9`
+and binds implementation commit `a8343ef9`, all 31 critical files, both
+preoutcomes, the incident, and the exact 12/3 frozen-source split.
+
+The live run durably completed all nine invocation chains and authenticated all
+1,984 request rows. The terminal summary SHA-256 is
+`14cd0ba20521c4f57eb267becd612794fe4ed6105cd26d8a22a5577cb577209c`.
+Three independent result audits reproduced every score file and gate and
+returned `PASS_FOR_RESULT_PUBLICATION`.
+
+Mechanics A is `MECHANICS_INTERFACE_INVALID`. Materialized, name-only,
+shuffled, echo, and direct parsed 12/52, 7/52, 12/52, 20/52, and 7/24 rows,
+while contacting their answer caps 37/52, 42/52, 40/52, 28/52, and 17/24
+times. Every thought hit its registered cap. Materialized, name-only,
+shuffled, and direct produced zero visible successes; echo produced 20/52.
+
+Mechanics B is the clean `CHEAP_SIBLING_RANKING_FAIL`. Materialized recall@4
+was 0.25694, below name-only 0.28125, shuffled 0.32292, listwise 0.27083, and
+surface 0.37500. It beat random by 0.14931, just below the +0.15 gate, while
+also missing the absolute recall, hit, task-support, and operation-support
+floors. Qualification and the top-four branch are unauthorized. Hidden,
+qualification, confirmation, and benchmark read receipts are all empty.
 
 ## Interpretation
 
-The parent incident and this model-free construction change no belief about
-residualization. The successor now has a fresh, auditable substrate on which to
-obtain the first durable model test without replaying a terminal draw.
-Scientific arms and outcome gates remain frozen.
+The generation result is an interface-invalid null, not a broad refutation of
+materialized residualization. Its descriptive zero successes among 12 parsed
+materialized rows are weak negative evidence only. The parse-immune ranking arm
+is a clean negative for this specific cheap behavioral viability ranker and
+retires the top-four branch. A successor must first select and freeze an
+echo-qualified answer seam on calibration tasks, then test residualization on
+disjoint tasks; this experiment cannot be rescued by more cap, parser changes,
+or threshold tuning.
 
 ## Knowledgebase Update
 
-- Program evidence updated: no model evidence yet.
-- Program backlog updated: append-only V2 recovery passed; V2 publication and
-  the separate mechanics lock are next.
-- Claim ledger updated: no; no model result exists.
+- Program evidence, scorecards, backlog, and synthesis updated with the terminal
+  interface/ranking split.
+- Claim ledger updated: no. The repository's required claim re-grade remains
+  outstanding, and this result does not license a broad mechanism claim.
 
 ## Artifacts
 
@@ -161,8 +193,13 @@ Scientific arms and outcome gates remain frozen.
 - `runs/mechanics/prepared/preoutcome_receipt.json`
 - `runs/mechanics/lock_attempt_1_incident.json`
 - `runs/mechanics/prepared/preoutcome_receipt_v2.json`
+- `runs/mechanics/implementation_lock.json`
+- `runs/mechanics/raw/`
+- `runs/mechanics/scored/`
+- `runs/mechanics/summary.json`
 - `idea_intake.md`
 - `reports/artifact_manifest.yaml`
+- `reports/mechanics_result_review.md`
 - `reports/report.md`
 - `src/`
 - `scripts/`

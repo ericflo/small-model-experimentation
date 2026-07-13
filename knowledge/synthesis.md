@@ -511,6 +511,21 @@ task/record identities and seed domain, while durably quarantining returned
 bytes before authentication. See
 [qwen35_4b_materialized_residual_sibling_search](../experiments/qwen35_4b_materialized_residual_sibling_search/reports/report.md).
 
+The fresh successor supplies the missing durable test, but splits cleanly by
+interface. All nine transactions and 1,984 rows authenticated in
+[qwen35_4b_materialized_residual_sibling_search_fresh_replication](../experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/reports/report.md).
+Free generation is terminal `MECHANICS_INTERFACE_INVALID`: every thought hit
+cap, the materialized/name/shuffled/echo suffix arms parsed only 12/7/12/20 of
+52, and materialized/name/shuffled/direct solved zero. That is not a broad
+residualization refutation because the registered ABI failed. The parse-immune
+cheap ranker is a clean negative: materialized recall@4 0.257 lost to every
+structured comparator (name 0.281, shuffled 0.323, listwise 0.271, surface
+0.375) and cleared random by only 0.149 versus a +0.15 gate while missing all
+absolute floors. Retire the cheap viability/top-four path. A future residual
+generator must first pass a disjoint, known-answer echo calibration at >=90%
+parse/exact echo and <=5% cap contact; more cap, parser relaxation, and post-hoc
+threshold changes are not evidence.
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.

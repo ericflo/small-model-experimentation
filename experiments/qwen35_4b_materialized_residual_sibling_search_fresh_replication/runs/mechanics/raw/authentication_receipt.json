@@ -1,0 +1,22 @@
+{
+  "authenticated_model_ranking_score_rows": 2304,
+  "authenticated_requested_raw_logprob_values": 4032,
+  "complete_receipts": {
+    "direct": "da218fb04dcf85255e8f63083b767f489a36c32693cc808f8ec3aae4f2e7d4b9",
+    "listwise": "d00ee0ee9954e9b4d74c9129bba8051ef87ddf7de6177d692d0e916de9c81f85",
+    "suffix_echo": "adf53ef376e892f523b4d595c183161f5d4f80735023a2ce655886b506a48e71",
+    "suffix_materialized": "ad66e432f3fdf9a2df3d55ebcfaa441176d1301e7bd7b740c5b856ed46c27981",
+    "suffix_name_only": "c67e9a643c33e7b9685104a5951c17316b230e5a262a9576cc615265a677a3bd",
+    "suffix_shuffled": "d009a7904407c9ef1fef1a7bdcd4933139edb0e13a69a346bf4a331b9ecb4918",
+    "viability_materialized": "909470bf9fc5f7cbc267a4ec43c5d530a15d9d69d6c72fac9e1e8b4e4a2d9a88",
+    "viability_name_only": "3ad5994c0bee33fc4aebe5344440186f49aa2b332b934982fa1e5c0296016584",
+    "viability_shuffled": "6e517cf2222730c83140a5ddcaf047b65228e9822a742450dbc76573d52df82e"
+  },
+  "decision": "MECHANICS_AUTHENTICATION_PASS",
+  "implementation_lock_sha256": "c1d1c25c3989ad9a748720ee733fc59245c08b7a4e9a88663d52fb5dd460f6e9",
+  "live_preflight_sha256": "1877da9976e38f347f96248ab0fe16830710b799be65dc405a47910f51401cb4",
+  "paired_binary_ids_order_stage1_seeds": true,
+  "paired_suffix_ids_order_stage1_seeds": true,
+  "prepare_receipt_sha256": "04d8ba59d212adac3193d88c19a38f58298fa18cbdd41321bf9e312bea72fe72",
+  "schema_version": 1
+}

@@ -263,6 +263,25 @@ answer slot is a semantic output seam, not evidence that an arbitrary preceding
 token is a writable compiler register. Explicit anchor tokens and donor-
 coordinate replacement are the remaining context-local hypothesis.
 
+## Fresh materialized-residual mechanics result (2026-07-13)
+
+[qwen35_4b_materialized_residual_sibling_search_fresh_replication](../../experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/reports/report.md)
+finally produced the durable model evidence the parent incident lacked. All
+nine invocation transactions and 1,984 rows authenticated under a separately
+published lock, and three hostile result audits reproduced every score and
+gate. The result splits at the interface boundary. Generation is terminal
+`MECHANICS_INTERFACE_INVALID`: materialized/name/shuffled/echo suffixes parsed
+12/7/12/20 of 52, every thought reached 512, and cap contact was 37/42/40/28;
+direct parsed 7/24 with 17 cap contacts. Materialized/name/shuffled/direct had
+zero visible successes, but this is only weak negative mechanism evidence
+because the registered ABI failed. The parse-immune cheap viability ranker is
+a clean negative: materialized recall@4 0.257 was below name-only 0.281,
+shuffled 0.323, listwise 0.271, and surface 0.375; its +0.149 gain over realized
+random narrowly missed +0.15 and it failed all absolute support/floor gates.
+Qualification and confirmation stayed sealed. Retire this cheap ranker and
+top-four branch; any remaining residual-generation test must first freeze an
+echo-qualified answer seam on separate calibration tasks.
+
 ## Materialized residual mechanics incident (2026-07-13)
 
 [qwen35_4b_materialized_residual_sibling_search](../../experiments/qwen35_4b_materialized_residual_sibling_search/reports/report.md)

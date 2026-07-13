@@ -54,9 +54,17 @@
   parent/terminal intersections, and zero model calls. Its first lock attempt
   failed closed on an incorrect historical source commit before any lock/raw/
   model activity. A three-reviewer append-only V2 repair preserves every V1
-  payload byte and again records zero model calls. The next gate is to publish
-  the V2 implementation and receipts, clear CI, and separately publish the
-  mechanics lock.
+  payload byte and again records zero model calls. The audited live successor
+  then completed all nine transactions. Generation was terminal
+  `MECHANICS_INTERFACE_INVALID`: all thoughts hit cap and every arm missed the
+  parse/cap ABI by a wide margin, so it cannot adjudicate residualization. The
+  parse-immune cheap materialized ranker was a clean negative: recall@4 0.257,
+  below name-only 0.281, shuffled 0.323, listwise 0.271, and surface 0.375.
+  Retire that ranker and top-four branch. If residual generation continues,
+  first run a new fresh echo-gated answer-seam factorial (current control,
+  short no-think structured output, autonomous commit slot), freeze an
+  interface with >=90% echo/parse and <=5% cap contact on calibration tasks,
+  then open disjoint mechanics. Do not increase cap or relax parsing in place.
 - Measure the exact behavioral quotient at fresh depth 6 before assuming model-guided pruning is economically
   needed; record wall time, memory, physical transitions, coverage, and selector success.
 - If a real search wall appears, test a residualized partial state (feasible parameter domains, materialized

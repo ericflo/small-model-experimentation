@@ -74,9 +74,27 @@
   idempotent V2 preoutcome SHA-256
   `04d8ba59d212adac3193d88c19a38f58298fa18cbdd41321bf9e312bea72fe72`,
   and again recorded zero model loads/calls and zero sampled outputs.
+- 2026-07-13: Generated schema-V4 implementation lock
+  `c1d1c25c3989ad9a748720ee733fc59245c08b7a4e9a88663d52fb5dd460f6e9`.
+  Three independent audits verified all 31 critical files, the exact 12/3
+  e43/9fc frozen-source mapping, and zero pre-lock model calls. The exact lock
+  was committed and pushed as `55170c9c`; repository and site CI passed.
+- 2026-07-13: Ran the one authorized live mechanics stage. All nine invocation
+  transactions reached canonical `COMPLETE`; authentication bound 1,984 rows,
+  2,304 ranking rows, and 4,032 requested finite raw-logprob values.
+- 2026-07-13: Automatic decisions were `MECHANICS_INTERFACE_INVALID` and
+  `CHEAP_SIBLING_RANKING_FAIL`. Generation arms missed parse and cap gates by
+  large margins. The parse-immune materialized ranker reached recall@4 0.25694,
+  below every structured comparator and above random only by 0.14931 versus a
+  +0.15 gate. Qualification and top-four confirmation stayed sealed.
+- 2026-07-13: Three independent result audits reproduced all scored files and
+  summary SHA-256
+  `14cd0ba20521c4f57eb267becd612794fe4ed6105cd26d8a22a5577cb577209c`
+  byte-for-byte, verified restart idempotence without runner construction, and
+  returned `PASS_FOR_RESULT_PUBLICATION`.
 
-## Pending
+## Terminal next step
 
-- Publish reviewed V2 code and append-only receipts; wait for green CI.
-- Generate, commit, and push the separate clean mechanics lock before any model
-  load, GPU use, or request.
+- Publish the complete negative transaction and scoring record.
+- Open only a separately registered fresh echo-gated answer-seam successor;
+  never relax this experiment's parser, caps, or ranking thresholds.

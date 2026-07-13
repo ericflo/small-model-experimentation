@@ -2,11 +2,12 @@
 
 ## Summary
 
-The experiment identity, fresh seed block, 264-task construction, reviewed
-mechanics implementation, and append-only V2 model-free preoutcome are frozen.
-No model has been loaded or called. This is the separately
-registered recovery path required by the parent experiment's terminal
-sampled-but-unpersisted transaction.
+The separately registered recovery completed a fresh, durable mechanics run.
+Generation terminated at `MECHANICS_INTERFACE_INVALID`; the parse-immune cheap
+ranker terminated at `CHEAP_SIBLING_RANKING_FAIL`. Qualification and
+confirmation remained unopened. This is a clean negative for the cheap ranking
+mechanism and an interface-invalid generation null, not a capability gain or a
+broad refutation of materialized residualization.
 
 ## Research Program Fit
 
@@ -74,7 +75,59 @@ exact, and its preparation-only review gate precedes every write. Two real
 model-free V2 preparations produced the same receipt SHA-256,
 `04d8ba59d212adac3193d88c19a38f58298fa18cbdd41321bf9e312bea72fe72`,
 while preserving every V1 payload byte and again recording zero model loads,
-calls, and sampled outputs. No implementation lock or live artifact exists.
+calls, and sampled outputs. The independently audited implementation lock has
+SHA-256
+`c1d1c25c3989ad9a748720ee733fc59245c08b7a4e9a88663d52fb5dd460f6e9`.
+It was committed, pushed, and cleared by repository and site CI before the live
+run.
+
+All nine live invocations reached canonical `COMPLETE`. The authentication
+receipt binds 1,984 request rows, 2,304 model-scored ranking rows, 4,032
+requested finite raw-logprob values, exact paired identities/seeds, runtime,
+preflight, preoutcome, and lock. The terminal summary has SHA-256
+`14cd0ba20521c4f57eb267becd612794fe4ed6105cd26d8a22a5577cb577209c`.
+
+### Mechanics A: invalid generation interface
+
+| arm | rows | parsed | cap contacts | visible successes | successful tasks |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| materialized suffix | 52 | 12 | 37 | 0 | 0 |
+| name-only suffix | 52 | 7 | 42 | 0 | 0 |
+| shuffled suffix | 52 | 12 | 40 | 0 | 0 |
+| echo control | 52 | 20 | 28 | 20 | 13 |
+| direct | 24 | 7 | 17 | 0 | 0 |
+
+Registered suffix gates required at least 47 parses and at most two cap
+contacts; direct required at least 22 parses and at most one cap contact. All
+208 suffix thoughts contacted 512 and all 24 direct thoughts contacted 1,024.
+Every cap-contact answer was unparsable. Echo succeeded on 20/24 non-cap rows,
+so parsing and some structured copying work, but the ABI is far below the
+required ceiling. The registered decision precedence therefore forces
+`MECHANICS_INTERFACE_INVALID` rather than a mechanism verdict.
+
+### Mechanics B: cheap ranking fails cleanly
+
+| ranker | hit@4 | recall@4 | recall@8 | live-operation support |
+| --- | ---: | ---: | ---: | ---: |
+| materialized | 0.29167 | 0.25694 | 0.41319 | 6 |
+| name-only | 0.50000 | 0.28125 | 0.44097 | 7 |
+| shuffled | 0.41667 | 0.32292 | 0.50347 | 9 |
+| listwise | 0.41667 | 0.27083 | 0.43750 | 9 |
+| surface | 0.54167 | 0.37500 | 0.63542 | 4 |
+| random | 0.25000 | 0.10764 | 0.23611 | 5 |
+
+The materialized recall@4 gain over random was 0.14931, narrowly below the
+registered +0.15 margin, while gains over name-only, shuffled, listwise, and
+surface were all negative. It also missed the 0.40 recall floor, 0.65 hit floor,
+16-task support, and 10-operation support. Every score and raw log probability
+authenticated, so `CHEAP_SIBLING_RANKING_FAIL` is a clean negative for this
+specific cheap viability ranker. Top-four confirmation is forbidden.
+
+Three independent result audits recomputed every scored row and summary byte,
+verified all nine transactions and identity domains, and reproduced the same
+summary through an offline restart with runner construction and new writes
+made fatal. All returned `PASS_FOR_RESULT_PUBLICATION`. Read receipts for
+hidden, qualification, confirmation, and benchmark content are empty.
 
 ## Controls
 
@@ -93,19 +146,27 @@ choices.
 
 ## Interpretation
 
-No scientific belief changes. The durable construction and preparation prove
-feasibility, fresh task/request/draw identity, and crash-safe readiness—not
-independence of a finite grammar and not evidence that materialized residuals
-work.
+The generation stage establishes no positive materialized-residual evidence,
+but its invalid interface prevents a broad refutation. The descriptive 0/12
+successes among parsed materialized rows are weak negative evidence only:
+conditioning on parse/non-cap status is outcome-selected. The ranking stage is
+the stronger result. Materialized consequences did not improve the model's
+one-token viability judgment and were worse than every structured comparator.
+This retires the cheap ranker and top-four branch.
 
 ## Next Experiments
 
-Publish the reviewed V2 implementation and append-only receipts, wait for green
-CI, then create and separately publish the clean mechanics lock. Training or
-banking remains a separate experiment even if this search interface passes.
+Use a new experiment with fresh identities and an echo-gated answer-seam
+factorial. Compare the current protocol, short no-think structured emission,
+and an autonomous commit-slot emission on known-answer calibration rows;
+require at least 90% exact echo/parse and at most 5% cap contact; freeze the
+winner; then test materialized versus name-only and shuffled residual prompts
+on disjoint mechanics tasks. Do not rescue this run by raising caps, relaxing
+parsing, changing ranking thresholds, or opening downstream splits.
 
 ## Artifact Manifest
 
 `artifact_manifest.yaml` binds the historical scaffold, construction receipts,
-both mechanics preoutcomes, and the failed-lock incident. No external, omitted,
-model, or capability-result artifact exists.
+both preoutcomes, incident, implementation lock, live preflight,
+authentication, and terminal summary. All raw/scored JSON artifacts are in git;
+no external or omitted artifact exists.

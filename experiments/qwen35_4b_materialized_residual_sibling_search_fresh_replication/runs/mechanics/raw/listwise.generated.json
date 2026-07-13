@@ -1,0 +1,4732 @@
+{
+  "invocation": "listwise",
+  "metadata": {
+    "adapter": null,
+    "counts": {
+      "completions": 24,
+      "injected_tokens": 0,
+      "logical_model_input_tokens": 12535,
+      "requests": 24,
+      "sampled_tokens": 24,
+      "stage1_logical_prompt_tokens": 12535,
+      "stage2_logical_prompt_tokens": 0,
+      "unique_input_prompt_tokens": 12535
+    },
+    "engine": {
+      "adapter": null,
+      "cudagraph_capture_sizes": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "enable_prefix_caching": false,
+      "enforce_eager": false,
+      "gpu_memory_utilization": 0.9,
+      "max_model_len": 4096,
+      "max_num_batched_tokens": 16384,
+      "max_num_seqs": 64
+    },
+    "engine_args": {
+      "async_scheduling": false,
+      "cudagraph_capture_sizes": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "dtype": "bfloat16",
+      "enable_prefix_caching": false,
+      "enforce_eager": false,
+      "generation_config": "vllm",
+      "gpu_memory_utilization": 0.9,
+      "language_model_only": true,
+      "logprobs_mode": "raw_logprobs",
+      "mamba_cache_mode": "none",
+      "max_cudagraph_capture_size": 64,
+      "max_logprobs": 24,
+      "max_model_len": 4096,
+      "max_num_batched_tokens": 16384,
+      "max_num_seqs": 64,
+      "model": "Qwen/Qwen3.5-4B",
+      "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+      "seed": 0,
+      "tensor_parallel_size": 1,
+      "tokenizer_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+      "trust_remote_code": true
+    },
+    "model": "Qwen/Qwen3.5-4B",
+    "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "resolved_cudagraph": {
+      "cudagraph_capture_sizes": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "decode_mode": "FULL",
+      "has_full_cudagraphs": true,
+      "max_cudagraph_capture_size": 64,
+      "mixed_mode": "PIECEWISE",
+      "mode": "FULL_AND_PIECEWISE",
+      "source": "llm_engine.vllm_config.compilation_config"
+    },
+    "resolved_logprobs_mode": "raw_logprobs",
+    "resolved_sampling": {
+      "frequency_penalty": 0.0,
+      "min_p": 0.0,
+      "presence_penalty": 0.0,
+      "repetition_penalty": 1.0,
+      "temperature": 0.6,
+      "top_k": 20,
+      "top_p": 0.95
+    },
+    "rng_isolation": {
+      "caller_global_rng_state_restored": true,
+      "engine_seed": 0
+    },
+    "runner_sha256": "3df0981df9a446ac314d26e5a0ec9c3eb523162fa42c02f2efef2ca75e4ab85f",
+    "runtime": {
+      "cuda_toolkit": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Fri_Feb_21_20:23:50_PST_2025\nCuda compilation tools, release 12.8, V12.8.93\nBuild cuda_12.8.r12.8/compiler.35583870_0",
+      "environment_lock": {
+        "path": "/workspace/small-model-experimentation/requirements-vllm.lock.txt",
+        "sha256": "64c3dde1e24f2b18a83cda3a3d84daf8701aad728e864c508854b10e3e3734c6"
+      },
+      "git_commit": "55170c9c52cca8acfca5f17a79152c10c5f50252",
+      "git_dirty": true,
+      "gpu": "NVIDIA RTX 6000 Ada Generation, 550.127.05, 49140",
+      "packages": {
+        "aiohappyeyeballs": "2.7.1",
+        "aiohttp": "3.14.1",
+        "aiosignal": "1.4.0",
+        "annotated-doc": "0.0.4",
+        "annotated-types": "0.7.0",
+        "anthropic": "0.116.0",
+        "anyio": "4.14.1",
+        "apache-tvm-ffi": "0.1.9",
+        "astor": "0.8.1",
+        "attrs": "26.1.0",
+        "blake3": "1.0.9",
+        "cachetools": "7.1.4",
+        "cbor2": "6.1.3",
+        "certifi": "2026.6.17",
+        "cffi": "2.1.0",
+        "charset-normalizer": "3.4.9",
+        "click": "8.4.2",
+        "cloudpickle": "3.1.2",
+        "compressed-tensors": "0.17.0",
+        "cryptography": "49.0.0",
+        "cuda-bindings": "12.9.7",
+        "cuda-pathfinder": "1.5.6",
+        "cuda-python": "12.9.7",
+        "cuda-tile": "1.3.0",
+        "cuda-toolkit": "12.9.1",
+        "depyf": "0.20.0",
+        "detect-installer": "0.1.0",
+        "dill": "0.4.1",
+        "diskcache": "5.6.3",
+        "distro": "1.9.0",
+        "dnspython": "2.8.0",
+        "docstring-parser": "0.18.0",
+        "einops": "0.8.2",
+        "email-validator": "2.3.0",
+        "fastapi": "0.136.3",
+        "fastapi-cli": "0.0.29",
+        "fastapi-cloud-cli": "0.22.1",
+        "fastar": "0.11.0",
+        "fastsafetensors": "0.3.3",
+        "filelock": "3.29.7",
+        "flashinfer-cubin": "0.6.12",
+        "flashinfer-python": "0.6.12",
+        "frozenlist": "1.8.0",
+        "fsspec": "2026.6.0",
+        "googleapis-common-protos": "1.75.0",
+        "grpcio": "1.82.1",
+        "h11": "0.16.0",
+        "hf-xet": "1.5.1",
+        "httpcore": "1.0.9",
+        "httptools": "0.8.0",
+        "httpx": "0.28.1",
+        "httpx-sse": "0.4.3",
+        "huggingface-hub": "1.23.0",
+        "humming-kernels": "0.1.6",
+        "idna": "3.18",
+        "ijson": "3.5.1",
+        "interegular": "0.3.3",
+        "jinja2": "3.1.6",
+        "jiter": "0.16.0",
+        "jmespath": "1.1.0",
+        "jsonschema": "4.26.0",
+        "jsonschema-specifications": "2025.9.1",
+        "lark": "1.2.2",
+        "llguidance": "1.7.6",
+        "llvmlite": "0.47.0",
+        "lm-format-enforcer": "0.11.3",
+        "loguru": "0.7.3",
+        "markdown-it-py": "4.2.0",
+        "markupsafe": "3.0.3",
+        "mcp": "1.28.1",
+        "mdurl": "0.1.2",
+        "mistral-common": "1.11.5",
+        "ml-dtypes": "0.5.4",
+        "model-hosting-container-standards": "0.1.16",
+        "mpmath": "1.3.0",
+        "msgspec": "0.21.1",
+        "multidict": "6.7.1",
+        "networkx": "3.6.1",
+        "ninja": "1.13.0",
+        "numba": "0.65.0",
+        "numpy": "2.3.5",
+        "nvidia-cublas-cu12": "12.9.1.4",
+        "nvidia-cuda-cccl-cu12": "12.9.27",
+        "nvidia-cuda-crt": "13.3.73",
+        "nvidia-cuda-cupti-cu12": "12.9.79",
+        "nvidia-cuda-nvcc": "13.2.78",
+        "nvidia-cuda-nvcc-cu12": "12.9.86",
+        "nvidia-cuda-nvrtc-cu12": "12.9.86",
+        "nvidia-cuda-runtime": "13.3.29",
+        "nvidia-cuda-runtime-cu12": "12.9.79",
+        "nvidia-cuda-tileiras": "13.2.78",
+        "nvidia-cudnn-cu12": "9.17.1.4",
+        "nvidia-cudnn-frontend": "1.26.0",
+        "nvidia-cufft-cu12": "11.4.1.4",
+        "nvidia-cufile-cu12": "1.14.1.1",
+        "nvidia-curand-cu12": "10.3.10.19",
+        "nvidia-cusolver-cu12": "11.7.5.82",
+        "nvidia-cusparse-cu12": "12.5.10.65",
+        "nvidia-cusparselt-cu12": "0.7.1",
+        "nvidia-cutlass-dsl": "4.5.2",
+        "nvidia-cutlass-dsl-libs-base": "4.5.2",
+        "nvidia-ml-py": "13.610.43",
+        "nvidia-nccl-cu12": "2.28.9",
+        "nvidia-nvjitlink-cu12": "12.9.86",
+        "nvidia-nvshmem-cu12": "3.4.5",
+        "nvidia-nvtx-cu12": "12.9.79",
+        "nvidia-nvvm": "13.2.78",
+        "openai": "2.45.0",
+        "openai-harmony": "0.0.8",
+        "opencv-python-headless": "5.0.0.93",
+        "opentelemetry-api": "1.43.0",
+        "opentelemetry-exporter-otlp": "1.43.0",
+        "opentelemetry-exporter-otlp-proto-common": "1.43.0",
+        "opentelemetry-exporter-otlp-proto-grpc": "1.43.0",
+        "opentelemetry-exporter-otlp-proto-http": "1.43.0",
+        "opentelemetry-proto": "1.43.0",
+        "opentelemetry-sdk": "1.43.0",
+        "opentelemetry-semantic-conventions": "0.64b0",
+        "opentelemetry-semantic-conventions-ai": "0.5.1",
+        "outlines-core": "0.2.14",
+        "packaging": "26.2",
+        "partial-json-parser": "0.2.1.1.post7",
+        "pillow": "12.3.0",
+        "prometheus-client": "0.25.0",
+        "prometheus-fastapi-instrumentator": "8.0.2",
+        "propcache": "0.5.2",
+        "protobuf": "7.35.1",
+        "psutil": "7.2.2",
+        "py-cpuinfo": "9.0.0",
+        "pybase64": "1.4.3",
+        "pycountry": "26.2.16",
+        "pycparser": "3.0",
+        "pydantic": "2.13.4",
+        "pydantic-core": "2.46.4",
+        "pydantic-extra-types": "2.11.1",
+        "pydantic-settings": "2.14.2",
+        "pyelftools": "0.33",
+        "pygments": "2.20.0",
+        "pyjwt": "2.13.0",
+        "python-dotenv": "1.2.2",
+        "python-json-logger": "4.1.0",
+        "python-multipart": "0.0.32",
+        "pyyaml": "6.0.3",
+        "pyzmq": "27.1.0",
+        "quack-kernels": "0.5.0",
+        "referencing": "0.37.0",
+        "regex": "2026.6.28",
+        "requests": "2.34.2",
+        "rich": "15.0.0",
+        "rich-toolkit": "0.20.1",
+        "rignore": "0.7.6",
+        "rpds-py": "2026.6.3",
+        "safetensors": "0.8.0",
+        "sentencepiece": "0.2.1",
+        "sentry-sdk": "2.64.0",
+        "setproctitle": "1.3.7",
+        "setuptools": "80.10.2",
+        "shellingham": "1.5.4",
+        "six": "1.17.0",
+        "sniffio": "1.3.1",
+        "sse-starlette": "3.4.5",
+        "starlette": "1.3.1",
+        "supervisor": "4.3.0",
+        "sympy": "1.14.0",
+        "tabulate": "0.10.0",
+        "tiktoken": "0.13.0",
+        "tilelang": "0.1.9",
+        "tokenizers": "0.22.2",
+        "tokenspeed-mla": "0.1.2",
+        "tokenspeed-triton": "3.7.10.post20260531",
+        "torch": "2.11.0+cu129",
+        "torch-c-dlpack-ext": "0.1.5",
+        "torchaudio": "2.11.0+cu129",
+        "torchvision": "0.26.0+cu129",
+        "tqdm": "4.68.4",
+        "transformers": "5.13.0",
+        "triton": "3.6.0",
+        "typer": "0.26.8",
+        "typing-extensions": "4.16.0",
+        "typing-inspection": "0.4.2",
+        "urllib3": "2.7.0",
+        "uvicorn": "0.51.0",
+        "uvloop": "0.22.1",
+        "vllm": "0.24.0+cu129",
+        "watchfiles": "1.2.0",
+        "websockets": "16.0",
+        "xgrammar": "0.2.3",
+        "yarl": "1.24.2",
+        "z3-solver": "4.15.4.0"
+      },
+      "platform": "Linux-6.8.0-52-generic-x86_64-with-glibc2.39",
+      "python": "3.12.3",
+      "python_executable": "/workspace/small-model-experimentation/.venv-vllm/bin/python",
+      "uv": "uv 0.9.0",
+      "vllm_enable_v1_multiprocessing": "0"
+    },
+    "sampling": {
+      "allow_custom_prompts": false,
+      "answer_max_tokens": 1,
+      "frequency_penalty": 0.0,
+      "greedy": false,
+      "logprob_token_ids": [
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55
+      ],
+      "logprobs": 24,
+      "max_tokens": 1,
+      "min_p": 0.0,
+      "n": 1,
+      "presence_penalty": 0.0,
+      "prompt_logprobs": null,
+      "repetition_penalty": 1.0,
+      "run_seed": 2026072702,
+      "shuffle_thinking": false,
+      "temperature": 0.6,
+      "thinking": "off",
+      "thinking_budget": null,
+      "top_k": 20,
+      "top_p": 0.95
+    },
+    "schema_version": 4,
+    "termination": {
+      "hf_model_eos_token_id": 248044,
+      "vllm_tokenizer_eos_ignored": 248046
+    },
+    "think_token_ids": {
+      "close": 248069,
+      "forced_close_sequence": [
+        248069,
+        271
+      ],
+      "no_thinking_prompt_suffix": [
+        248045,
+        74455,
+        198,
+        248068,
+        271,
+        248069,
+        271
+      ],
+      "open": 248068,
+      "thinking_prompt_suffix": [
+        248045,
+        74455,
+        198,
+        248068,
+        198
+      ]
+    },
+    "timing": {
+      "generation_seconds": 0.9395087361335754,
+      "model_load_seconds": 20.64757512509823,
+      "sampled_tokens_per_second": 25.545265389195677
+    }
+  },
+  "raw_rows": [
+    {
+      "id": "8376489d8af9e574b6b02fcfefbcd28b85da9206555300a49e9b49f076b1ba08",
+      "meta": {
+        "condition": "listwise",
+        "seed_key": [
+          "materialized-residual-fresh-replication-v1",
+          "listwise",
+          "materialized-residual-fresh-replication-v1/mechanics/00000"
+        ],
+        "task_id": "materialized-residual-fresh-replication-v1/mechanics/00000"
+      },
+      "n_prompt_tokens": 504,
+      "outputs": [
+        {
+          "finish_reason": "length",
+          "forced_close": false,
+          "injected_token_ids": [],
+          "n_answer_tokens": 1,
+          "n_completion_tokens": 1,
+          "n_injected_tokens": 0,
+          "n_sampled_tokens": 1,
+          "n_stage1_prompt_tokens": 504,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": -0.1026567816734314,
+          "seed_stage1": 1638788251,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": -0.1026567816734314,
+          "stage1_finish_reason": "length",
+          "stage1_logprobs": [
+            {
+              "1206": {
+                "decoded_token": "To",
+                "logprob": -0.1026567816734314,
+                "rank": 1
+              },
+              "32": {
+                "decoded_token": "A",
+                "logprob": -6.665156841278076,
+                "rank": 1
+              },
+              "33": {
+                "decoded_token": "B",
+                "logprob": -5.852656841278076,
+                "rank": 2
+              },
+              "34": {
+                "decoded_token": "C",
+                "logprob": -8.102656364440918,
+                "rank": 3
+              },
+              "35": {
+                "decoded_token": "D",
+                "logprob": -7.040156841278076,
+                "rank": 4
+              },
+              "36": {
+                "decoded_token": "E",
+                "logprob": -8.852656364440918,
+                "rank": 5
+              },
+              "37": {
+                "decoded_token": "F",
+                "logprob": -7.165156841278076,
+                "rank": 6
+              },
+              "38": {
+                "decoded_token": "G",
+                "logprob": -6.102656841278076,
+                "rank": 7
+              },
+              "39": {
+                "decoded_token": "H",
+                "logprob": -7.727656841278076,
+                "rank": 8
+              },
+              "40": {
+                "decoded_token": "I",
+                "logprob": -9.227656364440918,
+                "rank": 9
+              },
+              "41": {
+                "decoded_token": "J",
+                "logprob": -7.540156841278076,
+                "rank": 10
+              },
+              "42": {
+                "decoded_token": "K",
+                "logprob": -8.665156364440918,
+                "rank": 11
+              },
+              "43": {
+                "decoded_token": "L",
+                "logprob": -7.352656841278076,
+                "rank": 12
+              },
+              "44": {
+                "decoded_token": "M",
+                "logprob": -7.727656841278076,
+                "rank": 13
+              },
+              "45": {
+                "decoded_token": "N",
+                "logprob": -9.477656364440918,
+                "rank": 14
+              },
+              "46": {
+                "decoded_token": "O",
+                "logprob": -9.477656364440918,
+                "rank": 15
+              },
+              "47": {
+                "decoded_token": "P",
+                "logprob": -7.727656841278076,
+                "rank": 16
+              },
+              "48": {
+                "decoded_token": "Q",
+                "logprob": -8.165156364440918,
+                "rank": 17
+              },
+              "49": {
+                "decoded_token": "R",
+                "logprob": -7.290156841278076,
+                "rank": 18
+              },
+              "50": {
+                "decoded_token": "S",
+                "logprob": -4.852656841278076,
+                "rank": 19
+              },
+              "51": {
+                "decoded_token": "T",
+                "logprob": -6.540156841278076,
+                "rank": 20
+              },
+              "52": {
+                "decoded_token": "U",
+                "logprob": -8.602656364440918,
+                "rank": 21
+              },
+              "53": {
+                "decoded_token": "V",
+                "logprob": -8.227656364440918,
+                "rank": 22
+              },
+              "54": {
+                "decoded_token": "W",
+                "logprob": -7.915156841278076,
+                "rank": 23
+              },
+              "55": {
+                "decoded_token": "X",
+                "logprob": -8.540156364440918,
+                "rank": 24
+              }
+            }
+          ],
+          "stage1_parent_seed": 1638788251,
+          "stage1_stop_reason": null,
+          "stage1_token_ids": [
+            1206
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": null,
+          "text": "To",
+          "thinking_closed": false,
+          "token_ids": [
+            1206
+          ],
+          "truncated": true
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "e7a272854fc0455057676223b069a7a194134c4e706c7c1d0c47be8fc8377e9b"
+    },
+    {
+      "id": "462769d5be68cf1954425fd477af733612b094227f6de414dbb29713fef2e8ec",
+      "meta": {
+        "condition": "listwise",
+        "seed_key": [
+          "materialized-residual-fresh-replication-v1",
+          "listwise",
+          "materialized-residual-fresh-replication-v1/mechanics/00001"
+        ],
+        "task_id": "materialized-residual-fresh-replication-v1/mechanics/00001"
+      },
+      "n_prompt_tokens": 421,
+      "outputs": [
+        {
+          "finish_reason": "length",
+          "forced_close": false,
+          "injected_token_ids": [],
+          "n_answer_tokens": 1,
+          "n_completion_tokens": 1,
+          "n_injected_tokens": 0,
+          "n_sampled_tokens": 1,
+          "n_stage1_prompt_tokens": 421,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": -0.33459222316741943,
+          "seed_stage1": 1472501050,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": -0.33459222316741943,
+          "stage1_finish_reason": "length",
+          "stage1_logprobs": [
+            {
+              "1206": {
+                "decoded_token": "To",
+                "logprob": -0.33459222316741943,
+                "rank": 1
+              },
+              "32": {
+                "decoded_token": "A",
+                "logprob": -5.397092342376709,
+                "rank": 1
+              },
+              "33": {
+                "decoded_token": "B",
+                "logprob": -3.709592342376709,
+                "rank": 2
+              },
+              "34": {
+                "decoded_token": "C",
+                "logprob": -5.772092342376709,
+                "rank": 3
+              },
+              "35": {
+                "decoded_token": "D",
+                "logprob": -5.209592342376709,
+                "rank": 4
+              },
+              "36": {
+                "decoded_token": "E",
+                "logprob": -6.584592342376709,
+                "rank": 5
+              },
+              "37": {
+                "decoded_token": "F",
+                "logprob": -5.334592342376709,
+                "rank": 6
+              },
+              "38": {
+                "decoded_token": "G",
+                "logprob": -3.834592342376709,
+                "rank": 7
+              },
+              "39": {
+                "decoded_token": "H",
+                "logprob": -4.209592342376709,
+                "rank": 8
+              },
+              "40": {
+                "decoded_token": "I",
+                "logprob": -7.459592342376709,
+                "rank": 9
+              },
+              "41": {
+                "decoded_token": "J",
+                "logprob": -5.397092342376709,
+                "rank": 10
+              },
+              "42": {
+                "decoded_token": "K",
+                "logprob": -6.272092342376709,
+                "rank": 11
+              },
+              "43": {
+                "decoded_token": "L",
+                "logprob": -4.959592342376709,
+                "rank": 12
+              },
+              "44": {
+                "decoded_token": "M",
+                "logprob": -2.959592342376709,
+                "rank": 13
+              },
+              "45": {
+                "decoded_token": "N",
+                "logprob": -6.959592342376709,
+                "rank": 14
+              },
+              "46": {
+                "decoded_token": "O",
+                "logprob": -7.334592342376709,
+                "rank": 15
+              },
+              "47": {
+                "decoded_token": "P",
+                "logprob": -5.959592342376709,
+                "rank": 16
+              },
+              "48": {
+                "decoded_token": "Q",
+                "logprob": -5.897092342376709,
+                "rank": 17
+              },
+              "49": {
+                "decoded_token": "R",
+                "logprob": -5.709592342376709,
+                "rank": 18
+              },
+              "50": {
+                "decoded_token": "S",
+                "logprob": -5.084592342376709,
+                "rank": 19
+              },
+              "51": {
+                "decoded_token": "T",
+                "logprob": -5.209592342376709,
+                "rank": 20
+              },
+              "52": {
+                "decoded_token": "U",
+                "logprob": -5.459592342376709,
+                "rank": 21
+              },
+              "53": {
+                "decoded_token": "V",
+                "logprob": -5.584592342376709,
+                "rank": 22
+              },
+              "54": {
+                "decoded_token": "W",
+                "logprob": -4.959592342376709,
+                "rank": 23
+              },
+              "55": {
+                "decoded_token": "X",
+                "logprob": -5.709592342376709,
+                "rank": 24
+              }
+            }
+          ],
+          "stage1_parent_seed": 1472501050,
+          "stage1_stop_reason": null,
+          "stage1_token_ids": [
+            1206
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": null,
+          "text": "To",
+          "thinking_closed": false,
+          "token_ids": [
+            1206
+          ],
+          "truncated": true
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "c1d36d0a43f19edc5887e303c2583441c99a93f76464c5c09f9710be5149e44a"
+    },
+    {
+      "id": "b4df29441aa0ca1052eb8d5e422e0ae2fd7caf21d5aa0c4b1dd0644851e4be83",
+      "meta": {
+        "condition": "listwise",
+        "seed_key": [
+          "materialized-residual-fresh-replication-v1",
+          "listwise",
+          "materialized-residual-fresh-replication-v1/mechanics/00002"
+        ],
+        "task_id": "materialized-residual-fresh-replication-v1/mechanics/00002"
+      },
+      "n_prompt_tokens": 560,
+      "outputs": [
+        {
+          "finish_reason": "length",
+          "forced_close": false,
+          "injected_token_ids": [],
+          "n_answer_tokens": 1,
+          "n_completion_tokens": 1,
+          "n_injected_tokens": 0,
+          "n_sampled_tokens": 1,
+          "n_stage1_prompt_tokens": 560,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": -0.20207011699676514,
+          "seed_stage1": 272109395,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": -0.20207011699676514,
+          "stage1_finish_reason": "length",
+          "stage1_logprobs": [
+            {
+              "1206": {
+                "decoded_token": "To",
+                "logprob": -0.20207011699676514,
+                "rank": 1
+              },
+              "32": {
+                "decoded_token": "A",
+                "logprob": -6.202070236206055,
+                "rank": 1
+              },
+              "33": {
+                "decoded_token": "B",
+                "logprob": -5.202070236206055,
+                "rank": 2
+              },
+              "34": {
+                "decoded_token": "C",
+                "logprob": -7.264570236206055,
+                "rank": 3
+              },
+              "35": {
+                "decoded_token": "D",
+                "logprob": -6.827070236206055,
+                "rank": 4
+              },
+              "36": {
+                "decoded_token": "E",
+                "logprob": -7.952070236206055,
+                "rank": 5
+              },
+              "37": {
+                "decoded_token": "F",
+                "logprob": -6.577070236206055,
+                "rank": 6
+              },
+              "38": {
+                "decoded_token": "G",
+                "logprob": -5.577070236206055,
+                "rank": 7
+              },
+              "39": {
+                "decoded_token": "H",
+                "logprob": -6.952070236206055,
+                "rank": 8
+              },
+              "40": {
+                "decoded_token": "I",
+                "logprob": -8.577070236206055,
+                "rank": 9
+              },
+              "41": {
+                "decoded_token": "J",
+                "logprob": -7.264570236206055,
+                "rank": 10
+              },
+              "42": {
+                "decoded_token": "K",
+                "logprob": -7.389570236206055,
+                "rank": 11
+              },
+              "43": {
+                "decoded_token": "L",
+                "logprob": -5.202070236206055,
+                "rank": 12
+              },
+              "44": {
+                "decoded_token": "M",
+                "logprob": -7.264570236206055,
+                "rank": 13
+              },
+              "45": {
+                "decoded_token": "N",
+                "logprob": -8.764570236206055,
+                "rank": 14
+              },
+              "46": {
+                "decoded_token": "O",
+                "logprob": -7.389570236206055,
+                "rank": 15
+              },
+              "47": {
+                "decoded_token": "P",
+                "logprob": -7.639570236206055,
+                "rank": 16
+              },
+              "48": {
+                "decoded_token": "Q",
+                "logprob": -6.577070236206055,
+                "rank": 17
+              },
+              "49": {
+                "decoded_token": "R",
+                "logprob": -6.827070236206055,
+                "rank": 18
+              },
+              "50": {
+                "decoded_token": "S",
+                "logprob": -2.7020702362060547,
+                "rank": 19
+              },
+              "51": {
+                "decoded_token": "T",
+                "logprob": -5.514570236206055,
+                "rank": 20
+              },
+              "52": {
+                "decoded_token": "U",
+                "logprob": -7.139570236206055,
+                "rank": 21
+              },
+              "53": {
+                "decoded_token": "V",
+                "logprob": -7.889570236206055,
+                "rank": 22
+              },
+              "54": {
+                "decoded_token": "W",
+                "logprob": -7.327070236206055,
+                "rank": 23
+              },
+              "55": {
+                "decoded_token": "X",
+                "logprob": -7.889570236206055,
+                "rank": 24
+              }
+            }
+          ],
+          "stage1_parent_seed": 272109395,
+          "stage1_stop_reason": null,
+          "stage1_token_ids": [
+            1206
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": null,
+          "text": "To",
+          "thinking_closed": false,
+          "token_ids": [
+            1206
+          ],
+          "truncated": true
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "d1ee978cbe66f256491b11eb92972f2ce8bf0f507f2c79f14862806c4569e6b7"
+    },
+    {
+      "id": "634cf44e3e54a3e5898f301a84afad67c6064fcac80b694a298460ac9be68b84",
+      "meta": {
+        "condition": "listwise",
+        "seed_key": [
+          "materialized-residual-fresh-replication-v1",
+          "listwise",
+          "materialized-residual-fresh-replication-v1/mechanics/00003"
+        ],
+        "task_id": "materialized-residual-fresh-replication-v1/mechanics/00003"
+      },
+      "n_prompt_tokens": 500,
+      "outputs": [
+        {
+          "finish_reason": "length",
+          "forced_close": false,
+          "injected_token_ids": [],
+          "n_answer_tokens": 1,
+          "n_completion_tokens": 1,
+          "n_injected_tokens": 0,
+          "n_sampled_tokens": 1,
+          "n_stage1_prompt_tokens": 500,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": -0.18583516776561737,
+          "seed_stage1": 1432125733,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": -0.18583516776561737,
+          "stage1_finish_reason": "length",
+          "stage1_logprobs": [
+            {
+              "1206": {
+                "decoded_token": "To",
+                "logprob": -0.18583516776561737,
+                "rank": 1
+              },
+              "32": {
+                "decoded_token": "A",
+                "logprob": -5.623335361480713,
+                "rank": 1
+              },
+              "33": {
+                "decoded_token": "B",
+                "logprob": -5.685835361480713,
+                "rank": 2
+              },
+              "34": {
+                "decoded_token": "C",
+                "logprob": -6.248335361480713,
+                "rank": 3
+              },
+              "35": {
+                "decoded_token": "D",
+                "logprob": -5.873335361480713,
+                "rank": 4
+              },
+              "36": {
+                "decoded_token": "E",
+                "logprob": -6.560835361480713,
+                "rank": 5
+              },
+              "37": {
+                "decoded_token": "F",
+                "logprob": -3.810835123062134,
+                "rank": 6
+              },
+              "38": {
+                "decoded_token": "G",
+                "logprob": -5.310835361480713,
+                "rank": 7
+              },
+              "39": {
+                "decoded_token": "H",
+                "logprob": -5.748335361480713,
+                "rank": 8
+              },
+              "40": {
+                "decoded_token": "I",
+                "logprob": -7.185835361480713,
+                "rank": 9
+              },
+              "41": {
+                "decoded_token": "J",
+                "logprob": -7.623335361480713,
+                "rank": 10
+              },
+              "42": {
+                "decoded_token": "K",
+                "logprob": -6.435835361480713,
+                "rank": 11
+              },
+              "43": {
+                "decoded_token": "L",
+                "logprob": -5.998335361480713,
+                "rank": 12
+              },
+              "44": {
+                "decoded_token": "M",
+                "logprob": -6.810835361480713,
+                "rank": 13
+              },
+              "45": {
+                "decoded_token": "N",
+                "logprob": -8.373334884643555,
+                "rank": 14
+              },
+              "46": {
+                "decoded_token": "O",
+                "logprob": -8.248334884643555,
+                "rank": 15
+              },
+              "47": {
+                "decoded_token": "P",
+                "logprob": -7.373335361480713,
+                "rank": 16
+              },
+              "48": {
+                "decoded_token": "Q",
+                "logprob": -6.998335361480713,
+                "rank": 17
+              },
+              "49": {
+                "decoded_token": "R",
+                "logprob": -5.748335361480713,
+                "rank": 18
+              },
+              "50": {
+                "decoded_token": "S",
+                "logprob": -4.810835361480713,
+                "rank": 19
+              },
+              "51": {
+                "decoded_token": "T",
+                "logprob": -5.810835361480713,
+                "rank": 20
+              },
+              "52": {
+                "decoded_token": "U",
+                "logprob": -7.748335361480713,
+                "rank": 21
+              },
+              "53": {
+                "decoded_token": "V",
+                "logprob": -7.248335361480713,
+                "rank": 22
+              },
+              "54": {
+                "decoded_token": "W",
+                "logprob": -5.623335361480713,
+                "rank": 23
+              },
+              "55": {
+                "decoded_token": "X",
+                "logprob": -7.748335361480713,
+                "rank": 24
+              }
+            }
+          ],
+          "stage1_parent_seed": 1432125733,
+          "stage1_stop_reason": null,
+          "stage1_token_ids": [
+            1206
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": null,
+          "text": "To",
+          "thinking_closed": false,
+          "token_ids": [
+            1206
+          ],
+          "truncated": true
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "ac98c3eb70c1f887328e17726dde553630e3f2b0dd05f7d81ed3722429dea206"
+    },
+    {
+      "id": "a60098043cc1540d94389a315999b8a0c12f167712c07910fb1b195a9ec69380",
+      "meta": {
+        "condition": "listwise",
+        "seed_key": [
+          "materialized-residual-fresh-replication-v1",
+          "listwise",
+          "materialized-residual-fresh-replication-v1/mechanics/00004"
+        ],
+        "task_id": "materialized-residual-fresh-replication-v1/mechanics/00004"
+      },
+      "n_prompt_tokens": 562,
+      "outputs": [
+        {
+          "finish_reason": "length",
+          "forced_close": false,
+          "injected_token_ids": [],
+          "n_answer_tokens": 1,
+          "n_completion_tokens": 1,
+          "n_injected_tokens": 0,
+          "n_sampled_tokens": 1,
+          "n_stage1_prompt_tokens": 562,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": -0.15635080635547638,
+          "seed_stage1": 1966586647,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": -0.15635080635547638,
+          "stage1_finish_reason": "length",
+          "stage1_logprobs": [
+            {
+              "1206": {
+                "decoded_token": "To",
+                "logprob": -0.15635080635547638,
+                "rank": 1
+              },
+              "32": {
+                "decoded_token": "A",
+                "logprob": -5.843850612640381,
+                "rank": 1
+              },
+              "33": {
+                "decoded_token": "B",
+                "logprob": -4.906350612640381,
+                "rank": 2
+              },
+              "34": {
+                "decoded_token": "C",
+                "logprob": -7.656350612640381,
+                "rank": 3
+              },
+              "35": {
+                "decoded_token": "D",
+                "logprob": -6.531350612640381,
+                "rank": 4
+              },
+              "36": {
+                "decoded_token": "E",
+                "logprob": -6.781350612640381,
+                "rank": 5
+              },
+              "37": {
+                "decoded_token": "F",
+                "logprob": -6.281350612640381,
+                "rank": 6
+              },
+              "38": {
+                "decoded_token": "G",
+                "logprob": -5.718850612640381,
+                "rank": 7
+              },
+              "39": {
+                "decoded_token": "H",
+                "logprob": -7.343850612640381,
+                "rank": 8
+              },
+              "40": {
+                "decoded_token": "I",
+                "logprob": -7.218850612640381,
+                "rank": 9
+              },
+              "41": {
+                "decoded_token": "J",
+                "logprob": -6.656350612640381,
+                "rank": 10
+              },
+              "42": {
+                "decoded_token": "K",
+                "logprob": -7.781350612640381,
+                "rank": 11
+              },
+              "43": {
+                "decoded_token": "L",
+                "logprob": -6.281350612640381,
+                "rank": 12
+              },
+              "44": {
+                "decoded_token": "M",
+                "logprob": -4.406350612640381,
+                "rank": 13
+              },
+              "45": {
+                "decoded_token": "N",
+                "logprob": -8.843851089477539,
+                "rank": 14
+              },
+              "46": {
+                "decoded_token": "O",
+                "logprob": -8.468851089477539,
+                "rank": 15
+              },
+              "47": {
+                "decoded_token": "P",
+                "logprob": -8.031351089477539,
+                "rank": 16
+              },
+              "48": {
+                "decoded_token": "Q",
+                "logprob": -7.093850612640381,
+                "rank": 17
+              },
+              "49": {
+                "decoded_token": "R",
+                "logprob": -7.031350612640381,
+                "rank": 18
+              },
+              "50": {
+                "decoded_token": "S",
+                "logprob": -6.031350612640381,
+                "rank": 19
+              },
+              "51": {
+                "decoded_token": "T",
+                "logprob": -5.093850612640381,
+                "rank": 20
+              },
+              "52": {
+                "decoded_token": "U",
+                "logprob": -8.906351089477539,
+                "rank": 21
+              },
+              "53": {
+                "decoded_token": "V",
+                "logprob": -8.593851089477539,
+                "rank": 22
+              },
+              "54": {
+                "decoded_token": "W",
+                "logprob": -6.718850612640381,
+                "rank": 23
+              },
+              "55": {
+                "decoded_token": "X",
+                "logprob": -7.906350612640381,
+                "rank": 24
+              }
+            }
+          ],
+          "stage1_parent_seed": 1966586647,
+          "stage1_stop_reason": null,
+          "stage1_token_ids": [
+            1206
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": null,
+          "text": "To",
+          "thinking_closed": false,
+          "token_ids": [
+            1206
+          ],
+          "truncated": true
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "a9b0f4c96e98b8f01e96ea705013257f8c4b179f580d227fab0fb03aea16355f"
+    },
+    {
+      "id": "8597a50aed1b7c985580c1def563edd373d256ac2d9dacf76a310865c420b6ac",
+      "meta": {
+        "condition": "listwise",
+        "seed_key": [
+          "materialized-residual-fresh-replication-v1",
+          "listwise",
+          "materialized-residual-fresh-replication-v1/mechanics/00005"
+        ],
+        "task_id": "materialized-residual-fresh-replication-v1/mechanics/00005"
+      },
+      "n_prompt_tokens": 539,
+      "outputs": [
+        {
+          "finish_reason": "length",
+          "forced_close": false,
+          "injected_token_ids": [],
+          "n_answer_tokens": 1,
+          "n_completion_tokens": 1,
+          "n_injected_tokens": 0,
+          "n_sampled_tokens": 1,
+          "n_stage1_prompt_tokens": 539,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": -0.24809925258159637,
+          "seed_stage1": 2032060946,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": -0.24809925258159637,
+          "stage1_finish_reason": "length",
+          "stage1_logprobs": [
+            {
+              "1206": {
+                "decoded_token": "To",
+                "logprob": -0.24809925258159637,
+                "rank": 1
+              },
+              "32": {
+                "decoded_token": "A",
+                "logprob": -4.873099327087402,
+                "rank": 1
+              },
+              "33": {
+                "decoded_token": "B",
+                "logprob": -3.1230993270874023,
+                "rank": 2
+              },
+              "34": {
+                "decoded_token": "C",
+                "logprob": -6.435599327087402,
+                "rank": 3
+              },
+              "35": {
+                "decoded_token": "D",
+                "logprob": -5.623099327087402,
+                "rank": 4
+              },
+              "36": {
+                "decoded_token": "E",
+                "logprob": -6.185599327087402,
+                "rank": 5
+              },
+              "37": {
+                "decoded_token": "F",
+                "logprob": -6.123099327087402,
+                "rank": 6
+              },
+              "38": {
+                "decoded_token": "G",
+                "logprob": -5.373099327087402,
+                "rank": 7
+              },
+              "39": {
+                "decoded_token": "H",
+                "logprob": -5.248099327087402,
+                "rank": 8
+              },
+              "40": {
+                "decoded_token": "I",
+                "logprob": -8.498099327087402,
+                "rank": 9
+              },
+              "41": {
+                "decoded_token": "J",
+                "logprob": -7.123099327087402,
+                "rank": 10
+              },
+              "42": {
+                "decoded_token": "K",
+                "logprob": -6.623099327087402,
+                "rank": 11
+              },
+              "43": {
+                "decoded_token": "L",
+                "logprob": -5.560599327087402,
+                "rank": 12
+              },
+              "44": {
+                "decoded_token": "M",
+                "logprob": -6.935599327087402,
+                "rank": 13
+              },
+              "45": {
+                "decoded_token": "N",
+                "logprob": -7.060599327087402,
+                "rank": 14
+              },
+              "46": {
+                "decoded_token": "O",
+                "logprob": -8.685599327087402,
+                "rank": 15
+              },
+              "47": {
+                "decoded_token": "P",
+                "logprob": -6.623099327087402,
+                "rank": 16
+              },
+              "48": {
+                "decoded_token": "Q",
+                "logprob": -7.498099327087402,
+                "rank": 17
+              },
+              "49": {
+                "decoded_token": "R",
+                "logprob": -6.185599327087402,
+                "rank": 18
+              },
+              "50": {
+                "decoded_token": "S",
+                "logprob": -5.498099327087402,
+                "rank": 19
+              },
+              "51": {
+                "decoded_token": "T",
+                "logprob": -5.935599327087402,
+                "rank": 20
+              },
+              "52": {
+                "decoded_token": "U",
+                "logprob": -7.685599327087402,
+                "rank": 21
+              },
+              "53": {
+                "decoded_token": "V",
+                "logprob": -5.810599327087402,
+                "rank": 22
+              },
+              "54": {
+                "decoded_token": "W",
+                "logprob": -3.6230993270874023,
+                "rank": 23
+              },
+              "55": {
+                "decoded_token": "X",
+                "logprob": -6.998099327087402,
+                "rank": 24
+              }
+            }
+          ],
+          "stage1_parent_seed": 2032060946,
+          "stage1_stop_reason": null,
+          "stage1_token_ids": [
+            1206
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": null,
+          "text": "To",
+          "thinking_closed": false,
+          "token_ids": [
+            1206
+          ],
+          "truncated": true
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "35aa337132ce6d4f1e0e9eecf33a7a7c00a5ad1019b8b63c218b14627df7c1fb"
+    },
+    {
+      "id": "9ce27bace2ea059b440a5f574bce6279f1c434402674f7875c62c96167fbdade",
+      "meta": {
+        "condition": "listwise",
+        "seed_key": [
+          "materialized-residual-fresh-replication-v1",
+          "listwise",
+          "materialized-residual-fresh-replication-v1/mechanics/00006"
+        ],
+        "task_id": "materialized-residual-fresh-replication-v1/mechanics/00006"
+      },
+      "n_prompt_tokens": 500,
+      "outputs": [
+        {
+          "finish_reason": "length",
+          "forced_close": false,
+          "injected_token_ids": [],
+          "n_answer_tokens": 1,
+          "n_completion_tokens": 1,
+          "n_injected_tokens": 0,
+          "n_sampled_tokens": 1,
+          "n_stage1_prompt_tokens": 500,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": -0.2758682668209076,
+          "seed_stage1": 1970815606,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": -0.2758682668209076,
+          "stage1_finish_reason": "length",
+          "stage1_logprobs": [
+            {
+              "1206": {
+                "decoded_token": "To",
+                "logprob": -0.2758682668209076,
+                "rank": 1
+              },
+              "32": {
+                "decoded_token": "A",
+                "logprob": -4.7758684158325195,
+                "rank": 1
+              },
+              "33": {
+                "decoded_token": "B",
+                "logprob": -4.7758684158325195,
+                "rank": 2
+              },
+              "34": {
+                "decoded_token": "C",
+                "logprob": -5.2758684158325195,
+                "rank": 3
+              },
+              "35": {
+                "decoded_token": "D",
+                "logprob": -5.7758684158325195,
+                "rank": 4
+              },
+              "36": {
+                "decoded_token": "E",
+                "logprob": -6.3383684158325195,
+                "rank": 5
+              },
+              "37": {
+                "decoded_token": "F",
+                "logprob": -6.0258684158325195,
+                "rank": 6
+              },
+              "38": {
+                "decoded_token": "G",
+                "logprob": -5.5258684158325195,
+                "rank": 7
+              },
+              "39": {
+                "decoded_token": "H",
+                "logprob": -5.7133684158325195,
+                "rank": 8
+              },
+              "40": {
+                "decoded_token": "I",
+                "logprob": -7.5258684158325195,
+                "rank": 9
+              },
+              "41": {
+                "decoded_token": "J",
+                "logprob": -6.7133684158325195,
+                "rank": 10
+              },
+              "42": {
+                "decoded_token": "K",
+                "logprob": -6.9008684158325195,
+                "rank": 11
+              },
+              "43": {
+                "decoded_token": "L",
+                "logprob": -4.4008684158325195,
+                "rank": 12
+              },
+              "44": {
+                "decoded_token": "M",
+                "logprob": -5.9633684158325195,
+                "rank": 13
+              },
+              "45": {
+                "decoded_token": "N",
+                "logprob": -7.3383684158325195,
+                "rank": 14
+              },
+              "46": {
+                "decoded_token": "O",
+                "logprob": -7.5258684158325195,
+                "rank": 15
+              },
+              "47": {
+                "decoded_token": "P",
+                "logprob": -5.8383684158325195,
+                "rank": 16
+              },
+              "48": {
+                "decoded_token": "Q",
+                "logprob": -6.2133684158325195,
+                "rank": 17
+              },
+              "49": {
+                "decoded_token": "R",
+                "logprob": -4.2758684158325195,
+                "rank": 18
+              },
+              "50": {
+                "decoded_token": "S",
+                "logprob": -4.5258684158325195,
+                "rank": 19
+              },
+              "51": {
+                "decoded_token": "T",
+                "logprob": -5.4633684158325195,
+                "rank": 20
+              },
+              "52": {
+                "decoded_token": "U",
+                "logprob": -5.9633684158325195,
+                "rank": 21
+              },
+              "53": {
+                "decoded_token": "V",
+                "logprob": -5.1508684158325195,
+                "rank": 22
+              },
+              "54": {
+                "decoded_token": "W",
+                "logprob": -5.4008684158325195,
+                "rank": 23
+              },
+              "55": {
+                "decoded_token": "X",
+                "logprob": -6.7133684158325195,
+                "rank": 24
+              }
+            }
+          ],
+          "stage1_parent_seed": 1970815606,
+          "stage1_stop_reason": null,
+          "stage1_token_ids": [
+            1206
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": null,
+          "text": "To",
+          "thinking_closed": false,
+          "token_ids": [
+            1206
+          ],
+          "truncated": true
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "17c95e9cf38bba28f46370cfb36807d5bef4d965165e3b2509b5813f198c054b"
+    },
+    {
+      "id": "043214c5dedcec80cf9c55784f38bc8b49f06cf3d02b7e5b547092bbe641dc5b",
+      "meta": {
+        "condition": "listwise",
+        "seed_key": [
+          "materialized-residual-fresh-replication-v1",
+          "listwise",
+          "materialized-residual-fresh-replication-v1/mechanics/00007"
+        ],
+        "task_id": "materialized-residual-fresh-replication-v1/mechanics/00007"
+      },
+      "n_prompt_tokens": 444,
+      "outputs": [
+        {
+          "finish_reason": "length",
+          "forced_close": false,
+          "injected_token_ids": [],
+          "n_answer_tokens": 1,
+          "n_completion_tokens": 1,
+          "n_injected_tokens": 0,
+          "n_sampled_tokens": 1,
+          "n_stage1_prompt_tokens": 444,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": -0.18371914327144623,
+          "seed_stage1": 281603907,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": -0.18371914327144623,
+          "stage1_finish_reason": "length",
+          "stage1_logprobs": [
+            {
+              "1206": {
+                "decoded_token": "To",
+                "logprob": -0.18371914327144623,
+                "rank": 1
+              },
+              "32": {
+                "decoded_token": "A",
+                "logprob": -5.621219158172607,
+                "rank": 1
+              },
+              "33": {
+                "decoded_token": "B",
+                "logprob": -5.496219158172607,
+                "rank": 2
+              },
+              "34": {
+                "decoded_token": "C",
+                "logprob": -6.246219158172607,
+                "rank": 3
+              },
+              "35": {
+                "decoded_token": "D",
+                "logprob": -5.621219158172607,
+                "rank": 4
+              },
+              "36": {
+                "decoded_token": "E",
+                "logprob": -6.996219158172607,
+                "rank": 5
+              },
+              "37": {
+                "decoded_token": "F",
+                "logprob": -6.621219158172607,
+                "rank": 6
+              },
+              "38": {
+                "decoded_token": "G",
+                "logprob": -4.933719158172607,
+                "rank": 7
+              },
+              "39": {
+                "decoded_token": "H",
+                "logprob": -4.933719158172607,
+                "rank": 8
+              },
+              "40": {
+                "decoded_token": "I",
+                "logprob": -8.12121868133545,
+                "rank": 9
+              },
+              "41": {
+                "decoded_token": "J",
+                "logprob": -6.496219158172607,
+                "rank": 10
+              },
+              "42": {
+                "decoded_token": "K",
+                "logprob": -7.308719158172607,
+                "rank": 11
+              },
+              "43": {
+                "decoded_token": "L",
+                "logprob": -5.746219158172607,
+                "rank": 12
+              },
+              "44": {
+                "decoded_token": "M",
+                "logprob": -6.558719158172607,
+                "rank": 13
+              },
+              "45": {
+                "decoded_token": "N",
+                "logprob": -8.80871868133545,
+                "rank": 14
+              },
+              "46": {
+                "decoded_token": "O",
+                "logprob": -7.871219158172607,
+                "rank": 15
+              },
+              "47": {
+                "decoded_token": "P",
+                "logprob": -6.371219158172607,
+                "rank": 16
+              },
+              "48": {
+                "decoded_token": "Q",
+                "logprob": -5.621219158172607,
+                "rank": 17
+              },
+              "49": {
+                "decoded_token": "R",
+                "logprob": -6.371219158172607,
+                "rank": 18
+              },
+              "50": {
+                "decoded_token": "S",
+                "logprob": -5.058719158172607,
+                "rank": 19
+              },
+              "51": {
+                "decoded_token": "T",
+                "logprob": -3.5587191581726074,
+                "rank": 20
+              },
+              "52": {
+                "decoded_token": "U",
+                "logprob": -8.05871868133545,
+                "rank": 21
+              },
+              "53": {
+                "decoded_token": "V",
+                "logprob": -5.683719158172607,
+                "rank": 22
+              },
+              "54": {
+                "decoded_token": "W",
+                "logprob": -6.621219158172607,
+                "rank": 23
+              },
+              "55": {
+                "decoded_token": "X",
+                "logprob": -7.246219158172607,
+                "rank": 24
+              }
+            }
+          ],
+          "stage1_parent_seed": 281603907,
+          "stage1_stop_reason": null,
+          "stage1_token_ids": [
+            1206
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": null,
+          "text": "To",
+          "thinking_closed": false,
+          "token_ids": [
+            1206
+          ],
+          "truncated": true
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "34f62e989a3f78772a03e069abcf48c312926c2e273c39c81e1875633db7b72d"
+    },
+    {
+      "id": "79f210291a82eff48a6815e22a41b214019417c5cb70aefd2c76d37e08f91181",
+      "meta": {
+        "condition": "listwise",
+        "seed_key": [
+          "materialized-residual-fresh-replication-v1",
+          "listwise",
+          "materialized-residual-fresh-replication-v1/mechanics/00008"
+        ],
+        "task_id": "materialized-residual-fresh-replication-v1/mechanics/00008"
+      },
+      "n_prompt_tokens": 529,
+      "outputs": [
+        {
+          "finish_reason": "length",
+          "forced_close": false,
+          "injected_token_ids": [],
+          "n_answer_tokens": 1,
+          "n_completion_tokens": 1,
+          "n_injected_tokens": 0,
+          "n_sampled_tokens": 1,
+          "n_stage1_prompt_tokens": 529,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": -0.14674162864685059,
+          "seed_stage1": 159926268,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": -0.14674162864685059,
+          "stage1_finish_reason": "length",
+          "stage1_logprobs": [
+            {
+              "1206": {
+                "decoded_token": "To",
+                "logprob": -0.14674162864685059,
+                "rank": 1
+              },
+              "32": {
+                "decoded_token": "A",
+                "logprob": -6.02174186706543,
+                "rank": 1
+              },
+              "33": {
+                "decoded_token": "B",
+                "logprob": -4.89674186706543,
+                "rank": 2
+              },
+              "34": {
+                "decoded_token": "C",
+                "logprob": -7.45924186706543,
+                "rank": 3
+              },
+              "35": {
+                "decoded_token": "D",
+                "logprob": -5.45924186706543,
+                "rank": 4
+              },
+              "36": {
+                "decoded_token": "E",
+                "logprob": -6.89674186706543,
+                "rank": 5
+              },
+              "37": {
+                "decoded_token": "F",
+                "logprob": -6.45924186706543,
+                "rank": 6
+              },
+              "38": {
+                "decoded_token": "G",
+                "logprob": -5.64674186706543,
+                "rank": 7
+              },
+              "39": {
+                "decoded_token": "H",
+                "logprob": -4.14674186706543,
+                "rank": 8
+              },
+              "40": {
+                "decoded_token": "I",
+                "logprob": -7.27174186706543,
+                "rank": 9
+              },
+              "41": {
+                "decoded_token": "J",
+                "logprob": -6.89674186706543,
+                "rank": 10
+              },
+              "42": {
+                "decoded_token": "K",
+                "logprob": -7.83424186706543,
+                "rank": 11
+              },
+              "43": {
+                "decoded_token": "L",
+                "logprob": -6.64674186706543,
+                "rank": 12
+              },
+              "44": {
+                "decoded_token": "M",
+                "logprob": -6.83424186706543,
+                "rank": 13
+              },
+              "45": {
+                "decoded_token": "N",
+                "logprob": -8.70924186706543,
+                "rank": 14
+              },
+              "46": {
+                "decoded_token": "O",
+                "logprob": -7.20924186706543,
+                "rank": 15
+              },
+              "47": {
+                "decoded_token": "P",
+                "logprob": -7.77174186706543,
+                "rank": 16
+              },
+              "48": {
+                "decoded_token": "Q",
+                "logprob": -7.70924186706543,
+                "rank": 17
+              },
+              "49": {
+                "decoded_token": "R",
+                "logprob": -6.58424186706543,
+                "rank": 18
+              },
+              "50": {
+                "decoded_token": "S",
+                "logprob": -5.77174186706543,
+                "rank": 19
+              },
+              "51": {
+                "decoded_token": "T",
+                "logprob": -6.08424186706543,
+                "rank": 20
+              },
+              "52": {
+                "decoded_token": "U",
+                "logprob": -7.95924186706543,
+                "rank": 21
+              },
+              "53": {
+                "decoded_token": "V",
+                "logprob": -8.02174186706543,
+                "rank": 22
+              },
+              "54": {
+                "decoded_token": "W",
+                "logprob": -7.77174186706543,
+                "rank": 23
+              },
+              "55": {
+                "decoded_token": "X",
+                "logprob": -7.64674186706543,
+                "rank": 24
+              }
+            }
+          ],
+          "stage1_parent_seed": 159926268,
+          "stage1_stop_reason": null,
+          "stage1_token_ids": [
+            1206
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": null,
+          "text": "To",
+          "thinking_closed": false,
+          "token_ids": [
+            1206
+          ],
+          "truncated": true
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "e828ebee8cf9ce160c9802fe4e89d34e4c13f017b78d1055039a991aaf7fd21b"
+    },
+    {
+      "id": "aa08871615ec2e603726934e228d9ee0baa8cc11b92a426d9cc668e6d94c39f9",
+      "meta": {
+        "condition": "listwise",
+        "seed_key": [
+          "materialized-residual-fresh-replication-v1",
+          "listwise",
+          "materialized-residual-fresh-replication-v1/mechanics/00009"
+        ],
+        "task_id": "materialized-residual-fresh-replication-v1/mechanics/00009"
+      },
+      "n_prompt_tokens": 559,
+      "outputs": [
+        {
+          "finish_reason": "length",
+          "forced_close": false,
+          "injected_token_ids": [],
+          "n_answer_tokens": 1,
+          "n_completion_tokens": 1,
+          "n_injected_tokens": 0,
+          "n_sampled_tokens": 1,
+          "n_stage1_prompt_tokens": 559,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": -0.18214088678359985,
+          "seed_stage1": 514216779,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": -0.18214088678359985,
+          "stage1_finish_reason": "length",
+          "stage1_logprobs": [
+            {
+              "1206": {
+                "decoded_token": "To",
+                "logprob": -0.18214088678359985,
+                "rank": 1
+              },
+              "32": {
+                "decoded_token": "A",
+                "logprob": -5.557140827178955,
+                "rank": 1
+              },
+              "33": {
+                "decoded_token": "B",
+                "logprob": -4.932140827178955,
+                "rank": 2
+              },
+              "34": {
+                "decoded_token": "C",
+                "logprob": -5.432140827178955,
+                "rank": 3
+              },
+              "35": {
+                "decoded_token": "D",
+                "logprob": -5.807140827178955,
+                "rank": 4
+              },
+              "36": {
+                "decoded_token": "E",
+                "logprob": -5.869640827178955,
+                "rank": 5
+              },
+              "37": {
+                "decoded_token": "F",
+                "logprob": -6.119640827178955,
+                "rank": 6
+              },
+              "38": {
+                "decoded_token": "G",
+                "logprob": -4.682140827178955,
+                "rank": 7
+              },
+              "39": {
+                "decoded_token": "H",
+                "logprob": -5.994640827178955,
+                "rank": 8
+              },
+              "40": {
+                "decoded_token": "I",
+                "logprob": -8.244641304016113,
+                "rank": 9
+              },
+              "41": {
+                "decoded_token": "J",
+                "logprob": -6.494640827178955,
+                "rank": 10
+              },
+              "42": {
+                "decoded_token": "K",
+                "logprob": -6.744640827178955,
+                "rank": 11
+              },
+              "43": {
+                "decoded_token": "L",
+                "logprob": -5.182140827178955,
+                "rank": 12
+              },
+              "44": {
+                "decoded_token": "M",
+                "logprob": -4.182140827178955,
+                "rank": 13
+              },
+              "45": {
+                "decoded_token": "N",
+                "logprob": -7.807140827178955,
+                "rank": 14
+              },
+              "46": {
+                "decoded_token": "O",
+                "logprob": -7.682140827178955,
+                "rank": 15
+              },
+              "47": {
+                "decoded_token": "P",
+                "logprob": -5.994640827178955,
+                "rank": 16
+              },
+              "48": {
+                "decoded_token": "Q",
+                "logprob": -6.557140827178955,
+                "rank": 17
+              },
+              "49": {
+                "decoded_token": "R",
+                "logprob": -6.557140827178955,
+                "rank": 18
+              },
+              "50": {
+                "decoded_token": "S",
+                "logprob": -4.682140827178955,
+                "rank": 19
+              },
+              "51": {
+                "decoded_token": "T",
+                "logprob": -5.869640827178955,
+                "rank": 20
+              },
+              "52": {
+                "decoded_token": "U",
+                "logprob": -7.182140827178955,
+                "rank": 21
+              },
+              "53": {
+                "decoded_token": "V",
+                "logprob": -6.619640827178955,
+                "rank": 22
+              },
+              "54": {
+                "decoded_token": "W",
+                "logprob": -5.994640827178955,
+                "rank": 23
+              },
+              "55": {
+                "decoded_token": "X",
+                "logprob": -6.494640827178955,
+                "rank": 24
+              }
+            }
+          ],
+          "stage1_parent_seed": 514216779,
+          "stage1_stop_reason": null,
+          "stage1_token_ids": [
+            1206
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": null,
+          "text": "To",
+          "thinking_closed": false,
+          "token_ids": [
+            1206
+          ],
+          "truncated": true
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "1412809a959303cdbe8ed10f0e920120bc3d5bde6188c3f89d4f35547e1f83d2"
+    },
+    {
+      "id": "3338d0d1ab3733ddba13cd4350960ebdce3202c2307a3d7cfb3c959f2adfaacb",
+      "meta": {
+        "condition": "listwise",
+        "seed_key": [
+          "materialized-residual-fresh-replication-v1",
+          "listwise",
+          "materialized-residual-fresh-replication-v1/mechanics/00010"
+        ],
+        "task_id": "materialized-residual-fresh-replication-v1/mechanics/00010"
+      },
+      "n_prompt_tokens": 444,
+      "outputs": [
+        {
+          "finish_reason": "length",
+          "forced_close": false,
+          "injected_token_ids": [],
+          "n_answer_tokens": 1,
+          "n_completion_tokens": 1,
+          "n_injected_tokens": 0,
+          "n_sampled_tokens": 1,
+          "n_stage1_prompt_tokens": 444,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": -0.07485658675432205,
+          "seed_stage1": 472035546,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": -0.07485658675432205,
+          "stage1_finish_reason": "length",
+          "stage1_logprobs": [
+            {
+              "1206": {
+                "decoded_token": "To",
+                "logprob": -0.07485658675432205,
+                "rank": 1
+              },
+              "32": {
+                "decoded_token": "A",
+                "logprob": -6.762356758117676,
+                "rank": 1
+              },
+              "33": {
+                "decoded_token": "B",
+                "logprob": -7.137356758117676,
+                "rank": 2
+              },
+              "34": {
+                "decoded_token": "C",
+                "logprob": -8.199856758117676,
+                "rank": 3
+              },
+              "35": {
+                "decoded_token": "D",
+                "logprob": -7.762356758117676,
+                "rank": 4
+              },
+              "36": {
+                "decoded_token": "E",
+                "logprob": -8.449856758117676,
+                "rank": 5
+              },
+              "37": {
+                "decoded_token": "F",
+                "logprob": -7.512356758117676,
+                "rank": 6
+              },
+              "38": {
+                "decoded_token": "G",
+                "logprob": -4.824856758117676,
+                "rank": 7
+              },
+              "39": {
+                "decoded_token": "H",
+                "logprob": -7.824856758117676,
+                "rank": 8
+              },
+              "40": {
+                "decoded_token": "I",
+                "logprob": -9.699856758117676,
+                "rank": 9
+              },
+              "41": {
+                "decoded_token": "J",
+                "logprob": -9.387356758117676,
+                "rank": 10
+              },
+              "42": {
+                "decoded_token": "K",
+                "logprob": -9.512356758117676,
+                "rank": 11
+              },
+              "43": {
+                "decoded_token": "L",
+                "logprob": -7.762356758117676,
+                "rank": 12
+              },
+              "44": {
+                "decoded_token": "M",
+                "logprob": -8.512356758117676,
+                "rank": 13
+              },
+              "45": {
+                "decoded_token": "N",
+                "logprob": -10.324856758117676,
+                "rank": 14
+              },
+              "46": {
+                "decoded_token": "O",
+                "logprob": -9.324856758117676,
+                "rank": 15
+              },
+              "47": {
+                "decoded_token": "P",
+                "logprob": -8.574856758117676,
+                "rank": 16
+              },
+              "48": {
+                "decoded_token": "Q",
+                "logprob": -8.074856758117676,
+                "rank": 17
+              },
+              "49": {
+                "decoded_token": "R",
+                "logprob": -8.074856758117676,
+                "rank": 18
+              },
+              "50": {
+                "decoded_token": "S",
+                "logprob": -7.074856758117676,
+                "rank": 19
+              },
+              "51": {
+                "decoded_token": "T",
+                "logprob": -7.262356758117676,
+                "rank": 20
+              },
+              "52": {
+                "decoded_token": "U",
+                "logprob": -8.074856758117676,
+                "rank": 21
+              },
+              "53": {
+                "decoded_token": "V",
+                "logprob": -9.012356758117676,
+                "rank": 22
+              },
+              "54": {
+                "decoded_token": "W",
+                "logprob": -7.887356758117676,
+                "rank": 23
+              },
+              "55": {
+                "decoded_token": "X",
+                "logprob": -8.199856758117676,
+                "rank": 24
+              }
+            }
+          ],
+          "stage1_parent_seed": 472035546,
+          "stage1_stop_reason": null,
+          "stage1_token_ids": [
+            1206
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": null,
+          "text": "To",
+          "thinking_closed": false,
+          "token_ids": [
+            1206
+          ],
+          "truncated": true
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "57dd1d18dc27bfc7726dab3946324c48daea8d1babec7fd39b13768f727345a8"
+    },
+    {
+      "id": "63f7db8248c8c581fd1849b89f6b0cf587d3bee21f9af87b2a57a09d42eae1b1",
+      "meta": {
+        "condition": "listwise",
+        "seed_key": [
+          "materialized-residual-fresh-replication-v1",
+          "listwise",
+          "materialized-residual-fresh-replication-v1/mechanics/00011"
+        ],
+        "task_id": "materialized-residual-fresh-replication-v1/mechanics/00011"
+      },
+      "n_prompt_tokens": 559,
+      "outputs": [
+        {
+          "finish_reason": "length",
+          "forced_close": false,
+          "injected_token_ids": [],
+          "n_answer_tokens": 1,
+          "n_completion_tokens": 1,
+          "n_injected_tokens": 0,
+          "n_sampled_tokens": 1,
+          "n_stage1_prompt_tokens": 559,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": -0.07742688059806824,
+          "seed_stage1": 1195980706,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": -0.07742688059806824,
+          "stage1_finish_reason": "length",
+          "stage1_logprobs": [
+            {
+              "1206": {
+                "decoded_token": "To",
+                "logprob": -0.07742688059806824,
+                "rank": 1
+              },
+              "32": {
+                "decoded_token": "A",
+                "logprob": -7.639926910400391,
+                "rank": 1
+              },
+              "33": {
+                "decoded_token": "B",
+                "logprob": -7.889926910400391,
+                "rank": 2
+              },
+              "34": {
+                "decoded_token": "C",
+                "logprob": -8.95242691040039,
+                "rank": 3
+              },
+              "35": {
+                "decoded_token": "D",
+                "logprob": -7.889926910400391,
+                "rank": 4
+              },
+              "36": {
+                "decoded_token": "E",
+                "logprob": -9.07742691040039,
+                "rank": 5
+              },
+              "37": {
+                "decoded_token": "F",
+                "logprob": -7.764926910400391,
+                "rank": 6
+              },
+              "38": {
+                "decoded_token": "G",
+                "logprob": -6.139926910400391,
+                "rank": 7
+              },
+              "39": {
+                "decoded_token": "H",
+                "logprob": -8.26492691040039,
+                "rank": 8
+              },
+              "40": {
+                "decoded_token": "I",
+                "logprob": -7.327426910400391,
+                "rank": 9
+              },
+              "41": {
+                "decoded_token": "J",
+                "logprob": -8.63992691040039,
+                "rank": 10
+              },
+              "42": {
+                "decoded_token": "K",
+                "logprob": -7.639926910400391,
+                "rank": 11
+              },
+              "43": {
+                "decoded_token": "L",
+                "logprob": -7.577426910400391,
+                "rank": 12
+              },
+              "44": {
+                "decoded_token": "M",
+                "logprob": -8.38992691040039,
+                "rank": 13
+              },
+              "45": {
+                "decoded_token": "N",
+                "logprob": -9.51492691040039,
+                "rank": 14
+              },
+              "46": {
+                "decoded_token": "O",
+                "logprob": -9.70242691040039,
+                "rank": 15
+              },
+              "47": {
+                "decoded_token": "P",
+                "logprob": -8.57742691040039,
+                "rank": 16
+              },
+              "48": {
+                "decoded_token": "Q",
+                "logprob": -7.452426910400391,
+                "rank": 17
+              },
+              "49": {
+                "decoded_token": "R",
+                "logprob": -8.76492691040039,
+                "rank": 18
+              },
+              "50": {
+                "decoded_token": "S",
+                "logprob": -7.952426910400391,
+                "rank": 19
+              },
+              "51": {
+                "decoded_token": "T",
+                "logprob": -6.202426910400391,
+                "rank": 20
+              },
+              "52": {
+                "decoded_token": "U",
+                "logprob": -10.38992691040039,
+                "rank": 21
+              },
+              "53": {
+                "decoded_token": "V",
+                "logprob": -8.82742691040039,
+                "rank": 22
+              },
+              "54": {
+                "decoded_token": "W",
+                "logprob": -8.57742691040039,
+                "rank": 23
+              },
+              "55": {
+                "decoded_token": "X",
+                "logprob": -9.07742691040039,
+                "rank": 24
+              }
+            }
+          ],
+          "stage1_parent_seed": 1195980706,
+          "stage1_stop_reason": null,
+          "stage1_token_ids": [
+            1206
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": null,
+          "text": "To",
+          "thinking_closed": false,
+          "token_ids": [
+            1206
+          ],
+          "truncated": true
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "a62275c29866df676c55fd6cc5cca2fab369a3714583c45c613e650b90c1e2b7"
+    },
+    {
+      "id": "a53d6ff67eaa6a775e82d849790299ac3f7cffe6defb7a8763812346d60ad2d9",
+      "meta": {
+        "condition": "listwise",
+        "seed_key": [
+          "materialized-residual-fresh-replication-v1",
+          "listwise",
+          "materialized-residual-fresh-replication-v1/mechanics/00012"
+        ],
+        "task_id": "materialized-residual-fresh-replication-v1/mechanics/00012"
+      },
+      "n_prompt_tokens": 594,
+      "outputs": [
+        {
+          "finish_reason": "length",
+          "forced_close": false,
+          "injected_token_ids": [],
+          "n_answer_tokens": 1,
+          "n_completion_tokens": 1,
+          "n_injected_tokens": 0,
+          "n_sampled_tokens": 1,
+          "n_stage1_prompt_tokens": 594,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": -0.12126476317644119,
+          "seed_stage1": 1031105322,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": -0.12126476317644119,
+          "stage1_finish_reason": "length",
+          "stage1_logprobs": [
+            {
+              "1206": {
+                "decoded_token": "To",
+                "logprob": -0.12126476317644119,
+                "rank": 1
+              },
+              "32": {
+                "decoded_token": "A",
+                "logprob": -6.183764934539795,
+                "rank": 1
+              },
+              "33": {
+                "decoded_token": "B",
+                "logprob": -6.496264934539795,
+                "rank": 2
+              },
+              "34": {
+                "decoded_token": "C",
+                "logprob": -7.433764934539795,
+                "rank": 3
+              },
+              "35": {
+                "decoded_token": "D",
+                "logprob": -6.183764934539795,
+                "rank": 4
+              },
+              "36": {
+                "decoded_token": "E",
+                "logprob": -7.933764934539795,
+                "rank": 5
+              },
+              "37": {
+                "decoded_token": "F",
+                "logprob": -6.683764934539795,
+                "rank": 6
+              },
+              "38": {
+                "decoded_token": "G",
+                "logprob": -6.496264934539795,
+                "rank": 7
+              },
+              "39": {
+                "decoded_token": "H",
+                "logprob": -4.371264934539795,
+                "rank": 8
+              },
+              "40": {
+                "decoded_token": "I",
+                "logprob": -9.058764457702637,
+                "rank": 9
+              },
+              "41": {
+                "decoded_token": "J",
+                "logprob": -5.558764934539795,
+                "rank": 10
+              },
+              "42": {
+                "decoded_token": "K",
+                "logprob": -8.183764457702637,
+                "rank": 11
+              },
+              "43": {
+                "decoded_token": "L",
+                "logprob": -7.433764934539795,
+                "rank": 12
+              },
+              "44": {
+                "decoded_token": "M",
+                "logprob": -7.933764934539795,
+                "rank": 13
+              },
+              "45": {
+                "decoded_token": "N",
+                "logprob": -9.808764457702637,
+                "rank": 14
+              },
+              "46": {
+                "decoded_token": "O",
+                "logprob": -9.058764457702637,
+                "rank": 15
+              },
+              "47": {
+                "decoded_token": "P",
+                "logprob": -8.496264457702637,
+                "rank": 16
+              },
+              "48": {
+                "decoded_token": "Q",
+                "logprob": -8.371264457702637,
+                "rank": 17
+              },
+              "49": {
+                "decoded_token": "R",
+                "logprob": -7.246264934539795,
+                "rank": 18
+              },
+              "50": {
+                "decoded_token": "S",
+                "logprob": -6.371264934539795,
+                "rank": 19
+              },
+              "51": {
+                "decoded_token": "T",
+                "logprob": -6.308764934539795,
+                "rank": 20
+              },
+              "52": {
+                "decoded_token": "U",
+                "logprob": -9.183764457702637,
+                "rank": 21
+              },
+              "53": {
+                "decoded_token": "V",
+                "logprob": -8.371264457702637,
+                "rank": 22
+              },
+              "54": {
+                "decoded_token": "W",
+                "logprob": -6.621264934539795,
+                "rank": 23
+              },
+              "55": {
+                "decoded_token": "X",
+                "logprob": -8.246264457702637,
+                "rank": 24
+              }
+            }
+          ],
+          "stage1_parent_seed": 1031105322,
+          "stage1_stop_reason": null,
+          "stage1_token_ids": [
+            1206
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": null,
+          "text": "To",
+          "thinking_closed": false,
+          "token_ids": [
+            1206
+          ],
+          "truncated": true
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "66c7812f3d560e80b242e8d2d8833e571a17d84e51879e086e5b8281f8e2a115"
+    },
+    {
+      "id": "3a4a322b577860ca8408e77e1660a6c38d0aeaeb28192a10655ed8b3276325c4",
+      "meta": {
+        "condition": "listwise",
+        "seed_key": [
+          "materialized-residual-fresh-replication-v1",
+          "listwise",
+          "materialized-residual-fresh-replication-v1/mechanics/00013"
+        ],
+        "task_id": "materialized-residual-fresh-replication-v1/mechanics/00013"
+      },
+      "n_prompt_tokens": 609,
+      "outputs": [
+        {
+          "finish_reason": "length",
+          "forced_close": false,
+          "injected_token_ids": [],
+          "n_answer_tokens": 1,
+          "n_completion_tokens": 1,
+          "n_injected_tokens": 0,
+          "n_sampled_tokens": 1,
+          "n_stage1_prompt_tokens": 609,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": -0.21858300268650055,
+          "seed_stage1": 1876968602,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": -0.21858300268650055,
+          "stage1_finish_reason": "length",
+          "stage1_logprobs": [
+            {
+              "1206": {
+                "decoded_token": "To",
+                "logprob": -0.21858300268650055,
+                "rank": 1
+              },
+              "32": {
+                "decoded_token": "A",
+                "logprob": -5.593583106994629,
+                "rank": 1
+              },
+              "33": {
+                "decoded_token": "B",
+                "logprob": -5.656083106994629,
+                "rank": 2
+              },
+              "34": {
+                "decoded_token": "C",
+                "logprob": -6.593583106994629,
+                "rank": 3
+              },
+              "35": {
+                "decoded_token": "D",
+                "logprob": -5.593583106994629,
+                "rank": 4
+              },
+              "36": {
+                "decoded_token": "E",
+                "logprob": -6.843583106994629,
+                "rank": 5
+              },
+              "37": {
+                "decoded_token": "F",
+                "logprob": -6.031083106994629,
+                "rank": 6
+              },
+              "38": {
+                "decoded_token": "G",
+                "logprob": -4.218583106994629,
+                "rank": 7
+              },
+              "39": {
+                "decoded_token": "H",
+                "logprob": -6.218583106994629,
+                "rank": 8
+              },
+              "40": {
+                "decoded_token": "I",
+                "logprob": -8.468583106994629,
+                "rank": 9
+              },
+              "41": {
+                "decoded_token": "J",
+                "logprob": -6.281083106994629,
+                "rank": 10
+              },
+              "42": {
+                "decoded_token": "K",
+                "logprob": -7.093583106994629,
+                "rank": 11
+              },
+              "43": {
+                "decoded_token": "L",
+                "logprob": -5.843583106994629,
+                "rank": 12
+              },
+              "44": {
+                "decoded_token": "M",
+                "logprob": -6.843583106994629,
+                "rank": 13
+              },
+              "45": {
+                "decoded_token": "N",
+                "logprob": -8.531083106994629,
+                "rank": 14
+              },
+              "46": {
+                "decoded_token": "O",
+                "logprob": -7.906083106994629,
+                "rank": 15
+              },
+              "47": {
+                "decoded_token": "P",
+                "logprob": -5.656083106994629,
+                "rank": 16
+              },
+              "48": {
+                "decoded_token": "Q",
+                "logprob": -6.156083106994629,
+                "rank": 17
+              },
+              "49": {
+                "decoded_token": "R",
+                "logprob": -6.343583106994629,
+                "rank": 18
+              },
+              "50": {
+                "decoded_token": "S",
+                "logprob": -3.218583106994629,
+                "rank": 19
+              },
+              "51": {
+                "decoded_token": "T",
+                "logprob": -4.718583106994629,
+                "rank": 20
+              },
+              "52": {
+                "decoded_token": "U",
+                "logprob": -7.218583106994629,
+                "rank": 21
+              },
+              "53": {
+                "decoded_token": "V",
+                "logprob": -7.593583106994629,
+                "rank": 22
+              },
+              "54": {
+                "decoded_token": "W",
+                "logprob": -6.406083106994629,
+                "rank": 23
+              },
+              "55": {
+                "decoded_token": "X",
+                "logprob": -6.593583106994629,
+                "rank": 24
+              }
+            }
+          ],
+          "stage1_parent_seed": 1876968602,
+          "stage1_stop_reason": null,
+          "stage1_token_ids": [
+            1206
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": null,
+          "text": "To",
+          "thinking_closed": false,
+          "token_ids": [
+            1206
+          ],
+          "truncated": true
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "8204ab5745aa13f573983911f17ea196320e5b3875361d491629774337f416a0"
+    },
+    {
+      "id": "cb5861bf6bd89e790e80b6b3690485d8b7e5a9fcb11884579a7dddcd63987056",
+      "meta": {
+        "condition": "listwise",
+        "seed_key": [
+          "materialized-residual-fresh-replication-v1",
+          "listwise",
+          "materialized-residual-fresh-replication-v1/mechanics/00014"
+        ],
+        "task_id": "materialized-residual-fresh-replication-v1/mechanics/00014"
+      },
+      "n_prompt_tokens": 567,
+      "outputs": [
+        {
+          "finish_reason": "length",
+          "forced_close": false,
+          "injected_token_ids": [],
+          "n_answer_tokens": 1,
+          "n_completion_tokens": 1,
+          "n_injected_tokens": 0,
+          "n_sampled_tokens": 1,
+          "n_stage1_prompt_tokens": 567,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": -0.1669573038816452,
+          "seed_stage1": 1107004026,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": -0.1669573038816452,
+          "stage1_finish_reason": "length",
+          "stage1_logprobs": [
+            {
+              "1206": {
+                "decoded_token": "To",
+                "logprob": -0.1669573038816452,
+                "rank": 1
+              },
+              "32": {
+                "decoded_token": "A",
+                "logprob": -5.666957378387451,
+                "rank": 1
+              },
+              "33": {
+                "decoded_token": "B",
+                "logprob": -5.416957378387451,
+                "rank": 2
+              },
+              "34": {
+                "decoded_token": "C",
+                "logprob": -7.354457378387451,
+                "rank": 3
+              },
+              "35": {
+                "decoded_token": "D",
+                "logprob": -5.666957378387451,
+                "rank": 4
+              },
+              "36": {
+                "decoded_token": "E",
+                "logprob": -6.479457378387451,
+                "rank": 5
+              },
+              "37": {
+                "decoded_token": "F",
+                "logprob": -3.166957378387451,
+                "rank": 6
+              },
+              "38": {
+                "decoded_token": "G",
+                "logprob": -5.166957378387451,
+                "rank": 7
+              },
+              "39": {
+                "decoded_token": "H",
+                "logprob": -5.979457378387451,
+                "rank": 8
+              },
+              "40": {
+                "decoded_token": "I",
+                "logprob": -8.291956901550293,
+                "rank": 9
+              },
+              "41": {
+                "decoded_token": "J",
+                "logprob": -7.541957378387451,
+                "rank": 10
+              },
+              "42": {
+                "decoded_token": "K",
+                "logprob": -7.354457378387451,
+                "rank": 11
+              },
+              "43": {
+                "decoded_token": "L",
+                "logprob": -6.041957378387451,
+                "rank": 12
+              },
+              "44": {
+                "decoded_token": "M",
+                "logprob": -6.541957378387451,
+                "rank": 13
+              },
+              "45": {
+                "decoded_token": "N",
+                "logprob": -7.666957378387451,
+                "rank": 14
+              },
+              "46": {
+                "decoded_token": "O",
+                "logprob": -8.104456901550293,
+                "rank": 15
+              },
+              "47": {
+                "decoded_token": "P",
+                "logprob": -7.229457378387451,
+                "rank": 16
+              },
+              "48": {
+                "decoded_token": "Q",
+                "logprob": -6.666957378387451,
+                "rank": 17
+              },
+              "49": {
+                "decoded_token": "R",
+                "logprob": -5.229457378387451,
+                "rank": 18
+              },
+              "50": {
+                "decoded_token": "S",
+                "logprob": -5.166957378387451,
+                "rank": 19
+              },
+              "51": {
+                "decoded_token": "T",
+                "logprob": -5.354457378387451,
+                "rank": 20
+              },
+              "52": {
+                "decoded_token": "U",
+                "logprob": -6.729457378387451,
+                "rank": 21
+              },
+              "53": {
+                "decoded_token": "V",
+                "logprob": -7.541957378387451,
+                "rank": 22
+              },
+              "54": {
+                "decoded_token": "W",
+                "logprob": -7.104457378387451,
+                "rank": 23
+              },
+              "55": {
+                "decoded_token": "X",
+                "logprob": -7.729457378387451,
+                "rank": 24
+              }
+            }
+          ],
+          "stage1_parent_seed": 1107004026,
+          "stage1_stop_reason": null,
+          "stage1_token_ids": [
+            1206
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": null,
+          "text": "To",
+          "thinking_closed": false,
+          "token_ids": [
+            1206
+          ],
+          "truncated": true
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "fee14e1e721a9c7cce4ef21875853fe8721b38e032570898849e6d325f750b8e"
+    },
+    {
+      "id": "5229e128dbe60c5edb71f316a1d0872e52e28167c276b4d07ec963d3a4bbb7aa",
+      "meta": {
+        "condition": "listwise",
+        "seed_key": [
+          "materialized-residual-fresh-replication-v1",
+          "listwise",
+          "materialized-residual-fresh-replication-v1/mechanics/00015"
+        ],
+        "task_id": "materialized-residual-fresh-replication-v1/mechanics/00015"
+      },
+      "n_prompt_tokens": 565,
+      "outputs": [
+        {
+          "finish_reason": "length",
+          "forced_close": false,
+          "injected_token_ids": [],
+          "n_answer_tokens": 1,
+          "n_completion_tokens": 1,
+          "n_injected_tokens": 0,
+          "n_sampled_tokens": 1,
+          "n_stage1_prompt_tokens": 565,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": -0.1718195378780365,
+          "seed_stage1": 1775686858,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": -0.1718195378780365,
+          "stage1_finish_reason": "length",
+          "stage1_logprobs": [
+            {
+              "1206": {
+                "decoded_token": "To",
+                "logprob": -0.1718195378780365,
+                "rank": 1
+              },
+              "32": {
+                "decoded_token": "A",
+                "logprob": -6.421819686889648,
+                "rank": 1
+              },
+              "33": {
+                "decoded_token": "B",
+                "logprob": -5.046819686889648,
+                "rank": 2
+              },
+              "34": {
+                "decoded_token": "C",
+                "logprob": -7.296819686889648,
+                "rank": 3
+              },
+              "35": {
+                "decoded_token": "D",
+                "logprob": -6.234319686889648,
+                "rank": 4
+              },
+              "36": {
+                "decoded_token": "E",
+                "logprob": -7.796819686889648,
+                "rank": 5
+              },
+              "37": {
+                "decoded_token": "F",
+                "logprob": -6.546819686889648,
+                "rank": 6
+              },
+              "38": {
+                "decoded_token": "G",
+                "logprob": -3.6718194484710693,
+                "rank": 7
+              },
+              "39": {
+                "decoded_token": "H",
+                "logprob": -5.859319686889648,
+                "rank": 8
+              },
+              "40": {
+                "decoded_token": "I",
+                "logprob": -7.921819686889648,
+                "rank": 9
+              },
+              "41": {
+                "decoded_token": "J",
+                "logprob": -4.421819686889648,
+                "rank": 10
+              },
+              "42": {
+                "decoded_token": "K",
+                "logprob": -7.046819686889648,
+                "rank": 11
+              },
+              "43": {
+                "decoded_token": "L",
+                "logprob": -5.921819686889648,
+                "rank": 12
+              },
+              "44": {
+                "decoded_token": "M",
+                "logprob": -6.921819686889648,
+                "rank": 13
+              },
+              "45": {
+                "decoded_token": "N",
+                "logprob": -8.796819686889648,
+                "rank": 14
+              },
+              "46": {
+                "decoded_token": "O",
+                "logprob": -8.421819686889648,
+                "rank": 15
+              },
+              "47": {
+                "decoded_token": "P",
+                "logprob": -7.421819686889648,
+                "rank": 16
+              },
+              "48": {
+                "decoded_token": "Q",
+                "logprob": -6.109319686889648,
+                "rank": 17
+              },
+              "49": {
+                "decoded_token": "R",
+                "logprob": -6.296819686889648,
+                "rank": 18
+              },
+              "50": {
+                "decoded_token": "S",
+                "logprob": -5.546819686889648,
+                "rank": 19
+              },
+              "51": {
+                "decoded_token": "T",
+                "logprob": -6.234319686889648,
+                "rank": 20
+              },
+              "52": {
+                "decoded_token": "U",
+                "logprob": -8.671819686889648,
+                "rank": 21
+              },
+              "53": {
+                "decoded_token": "V",
+                "logprob": -7.859319686889648,
+                "rank": 22
+              },
+              "54": {
+                "decoded_token": "W",
+                "logprob": -7.046819686889648,
+                "rank": 23
+              },
+              "55": {
+                "decoded_token": "X",
+                "logprob": -7.484319686889648,
+                "rank": 24
+              }
+            }
+          ],
+          "stage1_parent_seed": 1775686858,
+          "stage1_stop_reason": null,
+          "stage1_token_ids": [
+            1206
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": null,
+          "text": "To",
+          "thinking_closed": false,
+          "token_ids": [
+            1206
+          ],
+          "truncated": true
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "5b51cfa7e10b7e3f03dd09524db094fc8b68850f89f31832966b1582f900d35b"
+    },
+    {
+      "id": "5e80a18e6672ac1b0ae4bbedb920d492b20d94f31e66c4baef138a5443e215a3",
+      "meta": {
+        "condition": "listwise",
+        "seed_key": [
+          "materialized-residual-fresh-replication-v1",
+          "listwise",
+          "materialized-residual-fresh-replication-v1/mechanics/00016"
+        ],
+        "task_id": "materialized-residual-fresh-replication-v1/mechanics/00016"
+      },
+      "n_prompt_tokens": 423,
+      "outputs": [
+        {
+          "finish_reason": "length",
+          "forced_close": false,
+          "injected_token_ids": [],
+          "n_answer_tokens": 1,
+          "n_completion_tokens": 1,
+          "n_injected_tokens": 0,
+          "n_sampled_tokens": 1,
+          "n_stage1_prompt_tokens": 423,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": -0.1353626549243927,
+          "seed_stage1": 188418607,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": -0.1353626549243927,
+          "stage1_finish_reason": "length",
+          "stage1_logprobs": [
+            {
+              "1206": {
+                "decoded_token": "To",
+                "logprob": -0.1353626549243927,
+                "rank": 1
+              },
+              "32": {
+                "decoded_token": "A",
+                "logprob": -6.01036262512207,
+                "rank": 1
+              },
+              "33": {
+                "decoded_token": "B",
+                "logprob": -5.63536262512207,
+                "rank": 2
+              },
+              "34": {
+                "decoded_token": "C",
+                "logprob": -5.69786262512207,
+                "rank": 3
+              },
+              "35": {
+                "decoded_token": "D",
+                "logprob": -6.19786262512207,
+                "rank": 4
+              },
+              "36": {
+                "decoded_token": "E",
+                "logprob": -7.26036262512207,
+                "rank": 5
+              },
+              "37": {
+                "decoded_token": "F",
+                "logprob": -6.88536262512207,
+                "rank": 6
+              },
+              "38": {
+                "decoded_token": "G",
+                "logprob": -5.13536262512207,
+                "rank": 7
+              },
+              "39": {
+                "decoded_token": "H",
+                "logprob": -4.13536262512207,
+                "rank": 8
+              },
+              "40": {
+                "decoded_token": "I",
+                "logprob": -8.44786262512207,
+                "rank": 9
+              },
+              "41": {
+                "decoded_token": "J",
+                "logprob": -7.38536262512207,
+                "rank": 10
+              },
+              "42": {
+                "decoded_token": "K",
+                "logprob": -7.26036262512207,
+                "rank": 11
+              },
+              "43": {
+                "decoded_token": "L",
+                "logprob": -5.32286262512207,
+                "rank": 12
+              },
+              "44": {
+                "decoded_token": "M",
+                "logprob": -6.63536262512207,
+                "rank": 13
+              },
+              "45": {
+                "decoded_token": "N",
+                "logprob": -8.26036262512207,
+                "rank": 14
+              },
+              "46": {
+                "decoded_token": "O",
+                "logprob": -9.07286262512207,
+                "rank": 15
+              },
+              "47": {
+                "decoded_token": "P",
+                "logprob": -7.88536262512207,
+                "rank": 16
+              },
+              "48": {
+                "decoded_token": "Q",
+                "logprob": -7.26036262512207,
+                "rank": 17
+              },
+              "49": {
+                "decoded_token": "R",
+                "logprob": -6.94786262512207,
+                "rank": 18
+              },
+              "50": {
+                "decoded_token": "S",
+                "logprob": -6.19786262512207,
+                "rank": 19
+              },
+              "51": {
+                "decoded_token": "T",
+                "logprob": -6.32286262512207,
+                "rank": 20
+              },
+              "52": {
+                "decoded_token": "U",
+                "logprob": -7.51036262512207,
+                "rank": 21
+              },
+              "53": {
+                "decoded_token": "V",
+                "logprob": -7.38536262512207,
+                "rank": 22
+              },
+              "54": {
+                "decoded_token": "W",
+                "logprob": -5.38536262512207,
+                "rank": 23
+              },
+              "55": {
+                "decoded_token": "X",
+                "logprob": -8.32286262512207,
+                "rank": 24
+              }
+            }
+          ],
+          "stage1_parent_seed": 188418607,
+          "stage1_stop_reason": null,
+          "stage1_token_ids": [
+            1206
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": null,
+          "text": "To",
+          "thinking_closed": false,
+          "token_ids": [
+            1206
+          ],
+          "truncated": true
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "fdbfce85955c35c8a6fed9e4f7ac21d8513160e410a754b35310d8702c7b8b26"
+    },
+    {
+      "id": "1e4698cbf6b76485d9adf4059b3998ada65f24d3dc0de4f85ad40dd7e4ea66c2",
+      "meta": {
+        "condition": "listwise",
+        "seed_key": [
+          "materialized-residual-fresh-replication-v1",
+          "listwise",
+          "materialized-residual-fresh-replication-v1/mechanics/00017"
+        ],
+        "task_id": "materialized-residual-fresh-replication-v1/mechanics/00017"
+      },
+      "n_prompt_tokens": 565,
+      "outputs": [
+        {
+          "finish_reason": "length",
+          "forced_close": false,
+          "injected_token_ids": [],
+          "n_answer_tokens": 1,
+          "n_completion_tokens": 1,
+          "n_injected_tokens": 0,
+          "n_sampled_tokens": 1,
+          "n_stage1_prompt_tokens": 565,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": -0.1981019377708435,
+          "seed_stage1": 302384570,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": -0.1981019377708435,
+          "stage1_finish_reason": "length",
+          "stage1_logprobs": [
+            {
+              "1206": {
+                "decoded_token": "To",
+                "logprob": -0.1981019377708435,
+                "rank": 1
+              },
+              "32": {
+                "decoded_token": "A",
+                "logprob": -5.198101997375488,
+                "rank": 1
+              },
+              "33": {
+                "decoded_token": "B",
+                "logprob": -5.448101997375488,
+                "rank": 2
+              },
+              "34": {
+                "decoded_token": "C",
+                "logprob": -6.073101997375488,
+                "rank": 3
+              },
+              "35": {
+                "decoded_token": "D",
+                "logprob": -5.510601997375488,
+                "rank": 4
+              },
+              "36": {
+                "decoded_token": "E",
+                "logprob": -5.073101997375488,
+                "rank": 5
+              },
+              "37": {
+                "decoded_token": "F",
+                "logprob": -5.573101997375488,
+                "rank": 6
+              },
+              "38": {
+                "decoded_token": "G",
+                "logprob": -4.760601997375488,
+                "rank": 7
+              },
+              "39": {
+                "decoded_token": "H",
+                "logprob": -4.948101997375488,
+                "rank": 8
+              },
+              "40": {
+                "decoded_token": "I",
+                "logprob": -8.073101997375488,
+                "rank": 9
+              },
+              "41": {
+                "decoded_token": "J",
+                "logprob": -6.823101997375488,
+                "rank": 10
+              },
+              "42": {
+                "decoded_token": "K",
+                "logprob": -5.260601997375488,
+                "rank": 11
+              },
+              "43": {
+                "decoded_token": "L",
+                "logprob": -5.635601997375488,
+                "rank": 12
+              },
+              "44": {
+                "decoded_token": "M",
+                "logprob": -6.510601997375488,
+                "rank": 13
+              },
+              "45": {
+                "decoded_token": "N",
+                "logprob": -8.323101997375488,
+                "rank": 14
+              },
+              "46": {
+                "decoded_token": "O",
+                "logprob": -6.823101997375488,
+                "rank": 15
+              },
+              "47": {
+                "decoded_token": "P",
+                "logprob": -7.385601997375488,
+                "rank": 16
+              },
+              "48": {
+                "decoded_token": "Q",
+                "logprob": -6.260601997375488,
+                "rank": 17
+              },
+              "49": {
+                "decoded_token": "R",
+                "logprob": -6.448101997375488,
+                "rank": 18
+              },
+              "50": {
+                "decoded_token": "S",
+                "logprob": -4.448101997375488,
+                "rank": 19
+              },
+              "51": {
+                "decoded_token": "T",
+                "logprob": -6.010601997375488,
+                "rank": 20
+              },
+              "52": {
+                "decoded_token": "U",
+                "logprob": -7.760601997375488,
+                "rank": 21
+              },
+              "53": {
+                "decoded_token": "V",
+                "logprob": -7.198101997375488,
+                "rank": 22
+              },
+              "54": {
+                "decoded_token": "W",
+                "logprob": -6.948101997375488,
+                "rank": 23
+              },
+              "55": {
+                "decoded_token": "X",
+                "logprob": -6.260601997375488,
+                "rank": 24
+              }
+            }
+          ],
+          "stage1_parent_seed": 302384570,
+          "stage1_stop_reason": null,
+          "stage1_token_ids": [
+            1206
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": null,
+          "text": "To",
+          "thinking_closed": false,
+          "token_ids": [
+            1206
+          ],
+          "truncated": true
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "6f10a1d7df6a68e5d9fa06fbf6dceb994343fa1fb868fbeeba146ce4a94c4471"
+    },
+    {
+      "id": "744a885e77af60e0b6a4831d28dff0ac5a2d093d156cc67266642b068e1bf7df",
+      "meta": {
+        "condition": "listwise",
+        "seed_key": [
+          "materialized-residual-fresh-replication-v1",
+          "listwise",
+          "materialized-residual-fresh-replication-v1/mechanics/00018"
+        ],
+        "task_id": "materialized-residual-fresh-replication-v1/mechanics/00018"
+      },
+      "n_prompt_tokens": 425,
+      "outputs": [
+        {
+          "finish_reason": "length",
+          "forced_close": false,
+          "injected_token_ids": [],
+          "n_answer_tokens": 1,
+          "n_completion_tokens": 1,
+          "n_injected_tokens": 0,
+          "n_sampled_tokens": 1,
+          "n_stage1_prompt_tokens": 425,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": -0.11547651141881943,
+          "seed_stage1": 917591890,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": -0.11547651141881943,
+          "stage1_finish_reason": "length",
+          "stage1_logprobs": [
+            {
+              "1206": {
+                "decoded_token": "To",
+                "logprob": -0.11547651141881943,
+                "rank": 1
+              },
+              "32": {
+                "decoded_token": "A",
+                "logprob": -6.302976608276367,
+                "rank": 1
+              },
+              "33": {
+                "decoded_token": "B",
+                "logprob": -6.177976608276367,
+                "rank": 2
+              },
+              "34": {
+                "decoded_token": "C",
+                "logprob": -7.927976608276367,
+                "rank": 3
+              },
+              "35": {
+                "decoded_token": "D",
+                "logprob": -6.740476608276367,
+                "rank": 4
+              },
+              "36": {
+                "decoded_token": "E",
+                "logprob": -8.240476608276367,
+                "rank": 5
+              },
+              "37": {
+                "decoded_token": "F",
+                "logprob": -6.427976608276367,
+                "rank": 6
+              },
+              "38": {
+                "decoded_token": "G",
+                "logprob": -6.115476608276367,
+                "rank": 7
+              },
+              "39": {
+                "decoded_token": "H",
+                "logprob": -5.802976608276367,
+                "rank": 8
+              },
+              "40": {
+                "decoded_token": "I",
+                "logprob": -7.927976608276367,
+                "rank": 9
+              },
+              "41": {
+                "decoded_token": "J",
+                "logprob": -7.865476608276367,
+                "rank": 10
+              },
+              "42": {
+                "decoded_token": "K",
+                "logprob": -8.177976608276367,
+                "rank": 11
+              },
+              "43": {
+                "decoded_token": "L",
+                "logprob": -4.740476608276367,
+                "rank": 12
+              },
+              "44": {
+                "decoded_token": "M",
+                "logprob": -7.740476608276367,
+                "rank": 13
+              },
+              "45": {
+                "decoded_token": "N",
+                "logprob": -9.115476608276367,
+                "rank": 14
+              },
+              "46": {
+                "decoded_token": "O",
+                "logprob": -8.802976608276367,
+                "rank": 15
+              },
+              "47": {
+                "decoded_token": "P",
+                "logprob": -8.865476608276367,
+                "rank": 16
+              },
+              "48": {
+                "decoded_token": "Q",
+                "logprob": -8.365476608276367,
+                "rank": 17
+              },
+              "49": {
+                "decoded_token": "R",
+                "logprob": -7.490476608276367,
+                "rank": 18
+              },
+              "50": {
+                "decoded_token": "S",
+                "logprob": -6.115476608276367,
+                "rank": 19
+              },
+              "51": {
+                "decoded_token": "T",
+                "logprob": -6.052976608276367,
+                "rank": 20
+              },
+              "52": {
+                "decoded_token": "U",
+                "logprob": -8.927976608276367,
+                "rank": 21
+              },
+              "53": {
+                "decoded_token": "V",
+                "logprob": -6.365476608276367,
+                "rank": 22
+              },
+              "54": {
+                "decoded_token": "W",
+                "logprob": -7.552976608276367,
+                "rank": 23
+              },
+              "55": {
+                "decoded_token": "X",
+                "logprob": -8.490476608276367,
+                "rank": 24
+              }
+            }
+          ],
+          "stage1_parent_seed": 917591890,
+          "stage1_stop_reason": null,
+          "stage1_token_ids": [
+            1206
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": null,
+          "text": "To",
+          "thinking_closed": false,
+          "token_ids": [
+            1206
+          ],
+          "truncated": true
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "c287b5fe18b0f3039437900a49210502aff8aeb9bd7db93c5b7a32d0b00a086e"
+    },
+    {
+      "id": "02f7782e57e5645d6b3490bda600373d0621bc72c0c9fa022df3f2c77a3bc968",
+      "meta": {
+        "condition": "listwise",
+        "seed_key": [
+          "materialized-residual-fresh-replication-v1",
+          "listwise",
+          "materialized-residual-fresh-replication-v1/mechanics/00019"
+        ],
+        "task_id": "materialized-residual-fresh-replication-v1/mechanics/00019"
+      },
+      "n_prompt_tokens": 547,
+      "outputs": [
+        {
+          "finish_reason": "length",
+          "forced_close": false,
+          "injected_token_ids": [],
+          "n_answer_tokens": 1,
+          "n_completion_tokens": 1,
+          "n_injected_tokens": 0,
+          "n_sampled_tokens": 1,
+          "n_stage1_prompt_tokens": 547,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": -0.21328909695148468,
+          "seed_stage1": 1370146835,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": -0.21328909695148468,
+          "stage1_finish_reason": "length",
+          "stage1_logprobs": [
+            {
+              "1206": {
+                "decoded_token": "To",
+                "logprob": -0.21328909695148468,
+                "rank": 1
+              },
+              "32": {
+                "decoded_token": "A",
+                "logprob": -5.150789260864258,
+                "rank": 1
+              },
+              "33": {
+                "decoded_token": "B",
+                "logprob": -5.025789260864258,
+                "rank": 2
+              },
+              "34": {
+                "decoded_token": "C",
+                "logprob": -6.713289260864258,
+                "rank": 3
+              },
+              "35": {
+                "decoded_token": "D",
+                "logprob": -3.4632890224456787,
+                "rank": 4
+              },
+              "36": {
+                "decoded_token": "E",
+                "logprob": -5.900789260864258,
+                "rank": 5
+              },
+              "37": {
+                "decoded_token": "F",
+                "logprob": -5.900789260864258,
+                "rank": 6
+              },
+              "38": {
+                "decoded_token": "G",
+                "logprob": -5.338289260864258,
+                "rank": 7
+              },
+              "39": {
+                "decoded_token": "H",
+                "logprob": -5.400789260864258,
+                "rank": 8
+              },
+              "40": {
+                "decoded_token": "I",
+                "logprob": -8.713289260864258,
+                "rank": 9
+              },
+              "41": {
+                "decoded_token": "J",
+                "logprob": -7.088289260864258,
+                "rank": 10
+              },
+              "42": {
+                "decoded_token": "K",
+                "logprob": -6.900789260864258,
+                "rank": 11
+              },
+              "43": {
+                "decoded_token": "L",
+                "logprob": -6.025789260864258,
+                "rank": 12
+              },
+              "44": {
+                "decoded_token": "M",
+                "logprob": -6.963289260864258,
+                "rank": 13
+              },
+              "45": {
+                "decoded_token": "N",
+                "logprob": -8.838289260864258,
+                "rank": 14
+              },
+              "46": {
+                "decoded_token": "O",
+                "logprob": -7.713289260864258,
+                "rank": 15
+              },
+              "47": {
+                "decoded_token": "P",
+                "logprob": -6.525789260864258,
+                "rank": 16
+              },
+              "48": {
+                "decoded_token": "Q",
+                "logprob": -6.400789260864258,
+                "rank": 17
+              },
+              "49": {
+                "decoded_token": "R",
+                "logprob": -6.588289260864258,
+                "rank": 18
+              },
+              "50": {
+                "decoded_token": "S",
+                "logprob": -4.588289260864258,
+                "rank": 19
+              },
+              "51": {
+                "decoded_token": "T",
+                "logprob": -5.213289260864258,
+                "rank": 20
+              },
+              "52": {
+                "decoded_token": "U",
+                "logprob": -7.650789260864258,
+                "rank": 21
+              },
+              "53": {
+                "decoded_token": "V",
+                "logprob": -7.463289260864258,
+                "rank": 22
+              },
+              "54": {
+                "decoded_token": "W",
+                "logprob": -6.213289260864258,
+                "rank": 23
+              },
+              "55": {
+                "decoded_token": "X",
+                "logprob": -5.588289260864258,
+                "rank": 24
+              }
+            }
+          ],
+          "stage1_parent_seed": 1370146835,
+          "stage1_stop_reason": null,
+          "stage1_token_ids": [
+            1206
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": null,
+          "text": "To",
+          "thinking_closed": false,
+          "token_ids": [
+            1206
+          ],
+          "truncated": true
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "3d93451b7f8d5dd6716987aea7990235352a9be60d70e934def485f70a7ab93d"
+    },
+    {
+      "id": "5b54307b71989aa7f5dfefdf5e1199ecd54e26bfa91b65a024e78febd7bb7ad2",
+      "meta": {
+        "condition": "listwise",
+        "seed_key": [
+          "materialized-residual-fresh-replication-v1",
+          "listwise",
+          "materialized-residual-fresh-replication-v1/mechanics/00020"
+        ],
+        "task_id": "materialized-residual-fresh-replication-v1/mechanics/00020"
+      },
+      "n_prompt_tokens": 519,
+      "outputs": [
+        {
+          "finish_reason": "length",
+          "forced_close": false,
+          "injected_token_ids": [],
+          "n_answer_tokens": 1,
+          "n_completion_tokens": 1,
+          "n_injected_tokens": 0,
+          "n_sampled_tokens": 1,
+          "n_stage1_prompt_tokens": 519,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": -0.07023020088672638,
+          "seed_stage1": 1887782259,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": -0.07023020088672638,
+          "stage1_finish_reason": "length",
+          "stage1_logprobs": [
+            {
+              "1206": {
+                "decoded_token": "To",
+                "logprob": -0.07023020088672638,
+                "rank": 1
+              },
+              "32": {
+                "decoded_token": "A",
+                "logprob": -6.945230007171631,
+                "rank": 1
+              },
+              "33": {
+                "decoded_token": "B",
+                "logprob": -8.132730484008789,
+                "rank": 2
+              },
+              "34": {
+                "decoded_token": "C",
+                "logprob": -8.507730484008789,
+                "rank": 3
+              },
+              "35": {
+                "decoded_token": "D",
+                "logprob": -6.695230007171631,
+                "rank": 4
+              },
+              "36": {
+                "decoded_token": "E",
+                "logprob": -8.382730484008789,
+                "rank": 5
+              },
+              "37": {
+                "decoded_token": "F",
+                "logprob": -7.007730007171631,
+                "rank": 6
+              },
+              "38": {
+                "decoded_token": "G",
+                "logprob": -7.570230007171631,
+                "rank": 7
+              },
+              "39": {
+                "decoded_token": "H",
+                "logprob": -7.945230007171631,
+                "rank": 8
+              },
+              "40": {
+                "decoded_token": "I",
+                "logprob": -9.820230484008789,
+                "rank": 9
+              },
+              "41": {
+                "decoded_token": "J",
+                "logprob": -9.257730484008789,
+                "rank": 10
+              },
+              "42": {
+                "decoded_token": "K",
+                "logprob": -8.570230484008789,
+                "rank": 11
+              },
+              "43": {
+                "decoded_token": "L",
+                "logprob": -8.507730484008789,
+                "rank": 12
+              },
+              "44": {
+                "decoded_token": "M",
+                "logprob": -8.695230484008789,
+                "rank": 13
+              },
+              "45": {
+                "decoded_token": "N",
+                "logprob": -10.820230484008789,
+                "rank": 14
+              },
+              "46": {
+                "decoded_token": "O",
+                "logprob": -10.632730484008789,
+                "rank": 15
+              },
+              "47": {
+                "decoded_token": "P",
+                "logprob": -9.445230484008789,
+                "rank": 16
+              },
+              "48": {
+                "decoded_token": "Q",
+                "logprob": -8.257730484008789,
+                "rank": 17
+              },
+              "49": {
+                "decoded_token": "R",
+                "logprob": -8.382730484008789,
+                "rank": 18
+              },
+              "50": {
+                "decoded_token": "S",
+                "logprob": -6.820230007171631,
+                "rank": 19
+              },
+              "51": {
+                "decoded_token": "T",
+                "logprob": -4.320230007171631,
+                "rank": 20
+              },
+              "52": {
+                "decoded_token": "U",
+                "logprob": -10.695230484008789,
+                "rank": 21
+              },
+              "53": {
+                "decoded_token": "V",
+                "logprob": -9.757730484008789,
+                "rank": 22
+              },
+              "54": {
+                "decoded_token": "W",
+                "logprob": -8.507730484008789,
+                "rank": 23
+              },
+              "55": {
+                "decoded_token": "X",
+                "logprob": -9.007730484008789,
+                "rank": 24
+              }
+            }
+          ],
+          "stage1_parent_seed": 1887782259,
+          "stage1_stop_reason": null,
+          "stage1_token_ids": [
+            1206
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": null,
+          "text": "To",
+          "thinking_closed": false,
+          "token_ids": [
+            1206
+          ],
+          "truncated": true
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "75f5df0d20df1e52f6c34e97988d16ac7b737e9f91921448f0c507a3ddb0fe50"
+    },
+    {
+      "id": "17c29316635f56dbb4246ece1a7558072157a00af74cbc3bf488e3ae4135fc54",
+      "meta": {
+        "condition": "listwise",
+        "seed_key": [
+          "materialized-residual-fresh-replication-v1",
+          "listwise",
+          "materialized-residual-fresh-replication-v1/mechanics/00021"
+        ],
+        "task_id": "materialized-residual-fresh-replication-v1/mechanics/00021"
+      },
+      "n_prompt_tokens": 485,
+      "outputs": [
+        {
+          "finish_reason": "length",
+          "forced_close": false,
+          "injected_token_ids": [],
+          "n_answer_tokens": 1,
+          "n_completion_tokens": 1,
+          "n_injected_tokens": 0,
+          "n_sampled_tokens": 1,
+          "n_stage1_prompt_tokens": 485,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": -0.09779706597328186,
+          "seed_stage1": 978511729,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": -0.09779706597328186,
+          "stage1_finish_reason": "length",
+          "stage1_logprobs": [
+            {
+              "1206": {
+                "decoded_token": "To",
+                "logprob": -0.09779706597328186,
+                "rank": 1
+              },
+              "32": {
+                "decoded_token": "A",
+                "logprob": -6.72279691696167,
+                "rank": 1
+              },
+              "33": {
+                "decoded_token": "B",
+                "logprob": -7.16029691696167,
+                "rank": 2
+              },
+              "34": {
+                "decoded_token": "C",
+                "logprob": -7.72279691696167,
+                "rank": 3
+              },
+              "35": {
+                "decoded_token": "D",
+                "logprob": -6.41029691696167,
+                "rank": 4
+              },
+              "36": {
+                "decoded_token": "E",
+                "logprob": -7.78529691696167,
+                "rank": 5
+              },
+              "37": {
+                "decoded_token": "F",
+                "logprob": -7.03529691696167,
+                "rank": 6
+              },
+              "38": {
+                "decoded_token": "G",
+                "logprob": -6.66029691696167,
+                "rank": 7
+              },
+              "39": {
+                "decoded_token": "H",
+                "logprob": -7.47279691696167,
+                "rank": 8
+              },
+              "40": {
+                "decoded_token": "I",
+                "logprob": -8.785297393798828,
+                "rank": 9
+              },
+              "41": {
+                "decoded_token": "J",
+                "logprob": -8.097797393798828,
+                "rank": 10
+              },
+              "42": {
+                "decoded_token": "K",
+                "logprob": -8.347797393798828,
+                "rank": 11
+              },
+              "43": {
+                "decoded_token": "L",
+                "logprob": -6.47279691696167,
+                "rank": 12
+              },
+              "44": {
+                "decoded_token": "M",
+                "logprob": -7.16029691696167,
+                "rank": 13
+              },
+              "45": {
+                "decoded_token": "N",
+                "logprob": -6.09779691696167,
+                "rank": 14
+              },
+              "46": {
+                "decoded_token": "O",
+                "logprob": -9.347797393798828,
+                "rank": 15
+              },
+              "47": {
+                "decoded_token": "P",
+                "logprob": -8.535297393798828,
+                "rank": 16
+              },
+              "48": {
+                "decoded_token": "Q",
+                "logprob": -7.09779691696167,
+                "rank": 17
+              },
+              "49": {
+                "decoded_token": "R",
+                "logprob": -7.66029691696167,
+                "rank": 18
+              },
+              "50": {
+                "decoded_token": "S",
+                "logprob": -5.59779691696167,
+                "rank": 19
+              },
+              "51": {
+                "decoded_token": "T",
+                "logprob": -6.03529691696167,
+                "rank": 20
+              },
+              "52": {
+                "decoded_token": "U",
+                "logprob": -9.222797393798828,
+                "rank": 21
+              },
+              "53": {
+                "decoded_token": "V",
+                "logprob": -8.347797393798828,
+                "rank": 22
+              },
+              "54": {
+                "decoded_token": "W",
+                "logprob": -7.47279691696167,
+                "rank": 23
+              },
+              "55": {
+                "decoded_token": "X",
+                "logprob": -6.97279691696167,
+                "rank": 24
+              }
+            }
+          ],
+          "stage1_parent_seed": 978511729,
+          "stage1_stop_reason": null,
+          "stage1_token_ids": [
+            1206
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": null,
+          "text": "To",
+          "thinking_closed": false,
+          "token_ids": [
+            1206
+          ],
+          "truncated": true
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "69707549d490fde367d7e527e892a24cf1f98102c1a1da0ca9533f52c4ed3804"
+    },
+    {
+      "id": "bd59af699427330d2087a1a95ae30e92ce6881517a0e3f14335533d763cb4438",
+      "meta": {
+        "condition": "listwise",
+        "seed_key": [
+          "materialized-residual-fresh-replication-v1",
+          "listwise",
+          "materialized-residual-fresh-replication-v1/mechanics/00022"
+        ],
+        "task_id": "materialized-residual-fresh-replication-v1/mechanics/00022"
+      },
+      "n_prompt_tokens": 589,
+      "outputs": [
+        {
+          "finish_reason": "length",
+          "forced_close": false,
+          "injected_token_ids": [],
+          "n_answer_tokens": 1,
+          "n_completion_tokens": 1,
+          "n_injected_tokens": 0,
+          "n_sampled_tokens": 1,
+          "n_stage1_prompt_tokens": 589,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": -0.21646763384342194,
+          "seed_stage1": 1641764531,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": -0.21646763384342194,
+          "stage1_finish_reason": "length",
+          "stage1_logprobs": [
+            {
+              "1206": {
+                "decoded_token": "To",
+                "logprob": -0.21646763384342194,
+                "rank": 1
+              },
+              "32": {
+                "decoded_token": "A",
+                "logprob": -5.15396785736084,
+                "rank": 1
+              },
+              "33": {
+                "decoded_token": "B",
+                "logprob": -4.96646785736084,
+                "rank": 2
+              },
+              "34": {
+                "decoded_token": "C",
+                "logprob": -6.77896785736084,
+                "rank": 3
+              },
+              "35": {
+                "decoded_token": "D",
+                "logprob": -4.96646785736084,
+                "rank": 4
+              },
+              "36": {
+                "decoded_token": "E",
+                "logprob": -7.59146785736084,
+                "rank": 5
+              },
+              "37": {
+                "decoded_token": "F",
+                "logprob": -5.09146785736084,
+                "rank": 6
+              },
+              "38": {
+                "decoded_token": "G",
+                "logprob": -5.65396785736084,
+                "rank": 7
+              },
+              "39": {
+                "decoded_token": "H",
+                "logprob": -6.27896785736084,
+                "rank": 8
+              },
+              "40": {
+                "decoded_token": "I",
+                "logprob": -7.34146785736084,
+                "rank": 9
+              },
+              "41": {
+                "decoded_token": "J",
+                "logprob": -3.7164676189422607,
+                "rank": 10
+              },
+              "42": {
+                "decoded_token": "K",
+                "logprob": -6.59146785736084,
+                "rank": 11
+              },
+              "43": {
+                "decoded_token": "L",
+                "logprob": -5.77896785736084,
+                "rank": 12
+              },
+              "44": {
+                "decoded_token": "M",
+                "logprob": -6.09146785736084,
+                "rank": 13
+              },
+              "45": {
+                "decoded_token": "N",
+                "logprob": -8.52896785736084,
+                "rank": 14
+              },
+              "46": {
+                "decoded_token": "O",
+                "logprob": -6.90396785736084,
+                "rank": 15
+              },
+              "47": {
+                "decoded_token": "P",
+                "logprob": -7.34146785736084,
+                "rank": 16
+              },
+              "48": {
+                "decoded_token": "Q",
+                "logprob": -7.40396785736084,
+                "rank": 17
+              },
+              "49": {
+                "decoded_token": "R",
+                "logprob": -6.71646785736084,
+                "rank": 18
+              },
+              "50": {
+                "decoded_token": "S",
+                "logprob": -4.84146785736084,
+                "rank": 19
+              },
+              "51": {
+                "decoded_token": "T",
+                "logprob": -5.40396785736084,
+                "rank": 20
+              },
+              "52": {
+                "decoded_token": "U",
+                "logprob": -7.52896785736084,
+                "rank": 21
+              },
+              "53": {
+                "decoded_token": "V",
+                "logprob": -5.59146785736084,
+                "rank": 22
+              },
+              "54": {
+                "decoded_token": "W",
+                "logprob": -6.02896785736084,
+                "rank": 23
+              },
+              "55": {
+                "decoded_token": "X",
+                "logprob": -6.65396785736084,
+                "rank": 24
+              }
+            }
+          ],
+          "stage1_parent_seed": 1641764531,
+          "stage1_stop_reason": null,
+          "stage1_token_ids": [
+            1206
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": null,
+          "text": "To",
+          "thinking_closed": false,
+          "token_ids": [
+            1206
+          ],
+          "truncated": true
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "fd80ac7baf7ff4bf709b9195ac3f2c9cb2565f52f7a3c84b8a5d3491a9615776"
+    },
+    {
+      "id": "d9b4f2f45d0d87c3ac6433231dcb99bd983fa811069d1214edc067a2638dc132",
+      "meta": {
+        "condition": "listwise",
+        "seed_key": [
+          "materialized-residual-fresh-replication-v1",
+          "listwise",
+          "materialized-residual-fresh-replication-v1/mechanics/00023"
+        ],
+        "task_id": "materialized-residual-fresh-replication-v1/mechanics/00023"
+      },
+      "n_prompt_tokens": 526,
+      "outputs": [
+        {
+          "finish_reason": "length",
+          "forced_close": false,
+          "injected_token_ids": [],
+          "n_answer_tokens": 1,
+          "n_completion_tokens": 1,
+          "n_injected_tokens": 0,
+          "n_sampled_tokens": 1,
+          "n_stage1_prompt_tokens": 526,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": -0.08710865676403046,
+          "seed_stage1": 151379316,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": -0.08710865676403046,
+          "stage1_finish_reason": "length",
+          "stage1_logprobs": [
+            {
+              "1206": {
+                "decoded_token": "To",
+                "logprob": -0.08710865676403046,
+                "rank": 1
+              },
+              "32": {
+                "decoded_token": "A",
+                "logprob": -6.149608612060547,
+                "rank": 1
+              },
+              "33": {
+                "decoded_token": "B",
+                "logprob": -6.149608612060547,
+                "rank": 2
+              },
+              "34": {
+                "decoded_token": "C",
+                "logprob": -4.837108612060547,
+                "rank": 3
+              },
+              "35": {
+                "decoded_token": "D",
+                "logprob": -6.899608612060547,
+                "rank": 4
+              },
+              "36": {
+                "decoded_token": "E",
+                "logprob": -8.274608612060547,
+                "rank": 5
+              },
+              "37": {
+                "decoded_token": "F",
+                "logprob": -6.837108612060547,
+                "rank": 6
+              },
+              "38": {
+                "decoded_token": "G",
+                "logprob": -5.337108612060547,
+                "rank": 7
+              },
+              "39": {
+                "decoded_token": "H",
+                "logprob": -7.899608612060547,
+                "rank": 8
+              },
+              "40": {
+                "decoded_token": "I",
+                "logprob": -8.712108612060547,
+                "rank": 9
+              },
+              "41": {
+                "decoded_token": "J",
+                "logprob": -8.337108612060547,
+                "rank": 10
+              },
+              "42": {
+                "decoded_token": "K",
+                "logprob": -7.899608612060547,
+                "rank": 11
+              },
+              "43": {
+                "decoded_token": "L",
+                "logprob": -6.212108612060547,
+                "rank": 12
+              },
+              "44": {
+                "decoded_token": "M",
+                "logprob": -7.462108612060547,
+                "rank": 13
+              },
+              "45": {
+                "decoded_token": "N",
+                "logprob": -8.899608612060547,
+                "rank": 14
+              },
+              "46": {
+                "decoded_token": "O",
+                "logprob": -8.649608612060547,
+                "rank": 15
+              },
+              "47": {
+                "decoded_token": "P",
+                "logprob": -7.837108612060547,
+                "rank": 16
+              },
+              "48": {
+                "decoded_token": "Q",
+                "logprob": -7.712108612060547,
+                "rank": 17
+              },
+              "49": {
+                "decoded_token": "R",
+                "logprob": -7.274608612060547,
+                "rank": 18
+              },
+              "50": {
+                "decoded_token": "S",
+                "logprob": -6.274608612060547,
+                "rank": 19
+              },
+              "51": {
+                "decoded_token": "T",
+                "logprob": -6.649608612060547,
+                "rank": 20
+              },
+              "52": {
+                "decoded_token": "U",
+                "logprob": -7.087108612060547,
+                "rank": 21
+              },
+              "53": {
+                "decoded_token": "V",
+                "logprob": -7.087108612060547,
+                "rank": 22
+              },
+              "54": {
+                "decoded_token": "W",
+                "logprob": -6.774608612060547,
+                "rank": 23
+              },
+              "55": {
+                "decoded_token": "X",
+                "logprob": -7.337108612060547,
+                "rank": 24
+              }
+            }
+          ],
+          "stage1_parent_seed": 151379316,
+          "stage1_stop_reason": null,
+          "stage1_token_ids": [
+            1206
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": null,
+          "text": "To",
+          "thinking_closed": false,
+          "token_ids": [
+            1206
+          ],
+          "truncated": true
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "e4e287566025a78cce15b92b052e774abb9aef7000641508fc2f444c5e767255"
+    }
+  ],
+  "schema_version": 1
+}

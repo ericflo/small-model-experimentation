@@ -5,7 +5,7 @@ external_artifacts: []
 omitted_artifacts: []
 reproducibility:
   smoke_command: ".venv/bin/python experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/scripts/run.py --stage smoke"
-  full_command: "sealed pending pushed reviewed code/preoutcome, green CI, and a separately pushed implementation lock"
+  full_command: "VLLM_ENABLE_V1_MULTIPROCESSING=0 .venv-vllm/bin/python experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/scripts/run_mechanics.py --stage run"
   required_external_artifacts: []
 local_receipts:
   scaffold_identity:
@@ -29,4 +29,16 @@ local_receipts:
   mechanics_preoutcome_v2:
     path: "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/runs/mechanics/prepared/preoutcome_receipt_v2.json"
     sha256: "04d8ba59d212adac3193d88c19a38f58298fa18cbdd41321bf9e312bea72fe72"
-notes: "Append-only V2 recovery preserved the original 12 prepared payloads and passed with zero benchmark reads, model loads, model calls, and sampled outputs. Live mechanics remains unauthorized pending V2 publication, green CI, and a separate committed/pushed lock."
+  mechanics_implementation_lock:
+    path: "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/runs/mechanics/implementation_lock.json"
+    sha256: "c1d1c25c3989ad9a748720ee733fc59245c08b7a4e9a88663d52fb5dd460f6e9"
+  mechanics_live_preflight:
+    path: "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/runs/mechanics/raw/live_preflight.json"
+    sha256: "1877da9976e38f347f96248ab0fe16830710b799be65dc405a47910f51401cb4"
+  mechanics_authentication:
+    path: "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/runs/mechanics/raw/authentication_receipt.json"
+    sha256: "45d72fe5aa8c997e472525aafb46cf5479fcc2621e83dff1f7de3f26d459133a"
+  mechanics_summary:
+    path: "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/runs/mechanics/summary.json"
+    sha256: "14cd0ba20521c4f57eb267becd612794fe4ed6105cd26d8a22a5577cb577209c"
+notes: "All nine live transactions and 1,984 rows authenticated. Mechanics terminated at an invalid generation ABI and a clean negative cheap-ranking gate; downstream splits remain sealed. All raw/scored JSON artifacts are in git and no external artifact is required."
