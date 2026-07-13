@@ -43,7 +43,15 @@
   explicit semantic anchor token and donor-coordinate replacement, with full-
   activation, text-hypothesis, additive-J, and non-J controls. Do not sweep
   larger alphas or layers on this last-token interface.
-- If native thought-state transport passes, train a non-oracle prefix controller
+- The final late semantic-anchor bridge is terminal invalid/unreachable, not a
+  transport pass: unrestricted parse is 56/880, consequence parse is 0/440,
+  text/full/donor-J constrained consequence is 6/44, 6/44, and 5/44, and the
+  intended rotating alias-to-label composition was accidentally fixed. Do not
+  repair it in place or run another native J token/layer/scale variant. A fresh
+  deployable successor may move concrete text hypotheses before reasoning and
+  test full continuations against matched-compute sampling; J is diagnostic
+  context, not an intervention arm required for that successor.
+- If a future native thought-state transport experiment passes, train a non-oracle prefix controller
   and require a replicated held-out capability gain over frozen Qwen3.5-4B and
   matched-compute sampling. Oracle donor selection is a mechanism control, not
   the endpoint.

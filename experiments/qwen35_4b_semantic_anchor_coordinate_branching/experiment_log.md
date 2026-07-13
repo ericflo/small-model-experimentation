@@ -99,3 +99,30 @@
   an ancestor, before mechanics can load the model.
 - This authorizes exactly one label-free mechanics run. It does not authorize
   qualification, confirmation, or any capability claim.
+
+## 2026-07-13 — Mechanics terminates invalid at parse
+
+- The one authorized run reproduces 880/880 numeric rows and 2,240/2,240
+  intervention rows after canonical identity sorting; all prefixes and donor
+  immutability pass.
+- Automatic decision: `INVALID_MECHANICS_CONTROL`. Full-vocabulary parse is
+  56/880 and consequence parse is 0/440, below the frozen 95% gate.
+- Direct constrained selection is 43/44 text, 43/44 full donor, and 42/44 donor
+  J. Consequence selection is only 6/44, 6/44, and 5/44; donor-J probability
+  lift is `+0.00170`.
+- No continuation, qualification, confirmation, task correctness, or capability
+  claim opens.
+
+## 2026-07-13 — Post-mechanics adversarial audit
+
+- The parse failure is a real failure of the one-token interface: every
+  consequence full top is a formatting opener. Optional-prefix parsing would be
+  an unregistered rescue and was not run.
+- Independent review exposed a generator confound: both cyclic mappings advance
+  by the same task index, leaving alias -> result label constant across tasks.
+  The claimed randomized computation endpoint is invalid.
+- Calibration and mechanics row objects are exactly equal after frozen identity
+  sorting, but raw JSONL bytes differ because their order differs. Correct the
+  earlier byte-match wording; numerical validity is unaffected.
+- Freeze the experiment as terminal invalid/unreachable. A fresh successor must
+  test composed-map independence and use a naturally parseable continuation.

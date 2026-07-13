@@ -20,9 +20,12 @@
   it beat majority but not confidence/entropy with uncertainty, and task-matched
   shuffle was no better than an oracle-balanced mismatched shuffle. Any
   successor must change the continuation/proposal state, not retune this score.
-- Require supplied-hypothesis write control before any latent proposal branch.
-  Centered additive J at a last-thought token fails this prerequisite; test an
-  explicit semantic anchor plus donor-coordinate clamp only as a new experiment.
+- The explicit late semantic-anchor donor clamp is also terminal invalid: it
+  writes direct aliases conditionally but its one-token consequence interface
+  is unparsable/unreachable, and its composed label rotation was fixed. Do not
+  open a latent proposal branch from it. Test a deployable early concrete-text
+  hypothesis bank as a fresh experiment and require visible-only selection plus
+  proposal coverage to beat matched-compute sampling.
 - Build an abstaining selector benchmark that reports precision, recall, and coverage separately.
 - Stress selectors under intentionally adversarial visible examples.
 - Convert oracle ceiling reports into deployable-gap scorecards.

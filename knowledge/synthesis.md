@@ -407,6 +407,26 @@ it distinguishes **coordinate replacement at an explicit semantic token** from
 native J branch left is a final context-local anchor test with donor coordinates
 and plain-text/full-activation controls; larger alpha/layer sweeps are retired.
 
+That final late-anchor test is now terminal `INVALID_MECHANICS_CONTROL`, and its
+adversarial audit prevents an overbroad negative. All 880 live numeric and 2,240
+intervention rows reproduce calibration after canonical identity sorting.
+Within the constrained alias set, text/full donor wrote 43/44 supplied aliases,
+donor J wrote 42/44, and wrong-donor J wrote its own alias 42/44. But global
+next-token parse was only 56/880, no consequence row parsed, and constrained
+consequence stayed at 6/44 text/full versus 5/44 donor J and 4/44 non-J/source;
+donor-J probability lift was only `+0.00170`. Worse, both component mappings
+advanced by the same cyclic task index, so the purportedly randomized alias ->
+operation -> label composition was constant across tasks. **Direct semantic
+writing is not consumed computation, and independently changing component maps
+does not prove their composition changes.** This exact late opaque interface is
+retired, but the parse failure and composition confound mean it cannot establish
+a general negative about native J-state transport. The warranted pivot is a
+fresh deployable experiment that supplies concrete text hypotheses before
+reasoning, generates full continuations, tests composed relations directly,
+and beats matched-compute sampling with a visible-only selector before any
+installation claim. See
+[qwen35_4b_semantic_anchor_coordinate_branching](../experiments/qwen35_4b_semantic_anchor_coordinate_branching/reports/report.md).
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.

@@ -145,3 +145,16 @@ Diagnostics should become standard infrastructure. They are how future agents av
   No correctness or continuation opens. Donor-coordinate context-local
   transport remains positive; additive direction transport at an arbitrary
   native token is now cleanly negative.
+
+- [qwen35_4b_semantic_anchor_coordinate_branching](../../experiments/qwen35_4b_semantic_anchor_coordinate_branching/reports/report.md)
+  is terminal `INVALID_MECHANICS_CONTROL` (parse), not a clean J-transport
+  negative. All 880 numeric and 2,240 intervention rows match calibration after
+  canonical identity sorting, and the constrained direct distribution is
+  strongly writable: text/full donor reach 43/44, donor J 42/44, and wrong-
+  donor J writes its own alias 42/44. But unrestricted parse is 56/880 and zero
+  consequence rows parse; constrained consequence is only 6/44 text/full and
+  5/44 donor J, with `+0.00170` probability lift. Post-run audit also found the
+  two cyclic maps cancel, making alias -> result label fixed across tasks. No
+  continuation opened. Retire the late opaque one-token interface and treat
+  direct writes only as a diagnostic; this result cannot establish a general
+  negative about native state/J transport.

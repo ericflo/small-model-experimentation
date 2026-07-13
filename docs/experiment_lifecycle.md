@@ -65,6 +65,14 @@ those are new experiments. This check would have prevented the
 `qwen35_4b_specialist_policy_integration` tools core from demanding 1.094 on a
 score capped at 1.0 after `ferrier` baseline measured 0.994.
 
+When a target is defined by a composition of randomized mappings, test the
+composition itself. Two component permutations can each rotate and respond to
+independent seeds while their shared task-index shift cancels, leaving a fixed
+end-to-end shortcut. A smoke receipt should report the number of unique
+component and composed maps and fail if the final semantic relation does not
+rotate as intended. This would have caught the fixed alias-to-label composition
+in `qwen35_4b_semantic_anchor_coordinate_branching` before GPU mechanics.
+
 ## 3. Run With Controls
 
 Prefer controls that test the mechanism:

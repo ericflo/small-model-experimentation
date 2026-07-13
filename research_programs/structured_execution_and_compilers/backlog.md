@@ -34,9 +34,11 @@
   work is not licensed. A post-decision midpoint-only refit reached only 0.538
   versus matched non-J 0.600, so do not replicate this J-axis interpretation.
 - Additive J directions do not turn the last native-thought token into a
-  hypothesis register. Any new latent compiler branch must first pass supplied-
-  target control at an explicit semantic anchor and beat a plain text-anchor
-  baseline.
+  hypothesis register. The subsequent explicit semantic anchor writes direct
+  aliases but is terminal invalid at an unreachable one-token consequence
+  interface, with a fixed composed label map. Retire native J compiler branches;
+  a fresh early concrete-text fork must beat late text, duplicate hypotheses,
+  and matched-compute sample-more before it can motivate installation.
 - Measure the exact behavioral quotient at fresh depth 6 before assuming model-guided pruning is economically
   needed; record wall time, memory, physical transitions, coverage, and selector success.
 - If a real search wall appears, test a residualized partial state (feasible parameter domains, materialized

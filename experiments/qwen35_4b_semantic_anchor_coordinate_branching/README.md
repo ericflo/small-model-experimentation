@@ -1,6 +1,6 @@
 # Qwen3.5-4B Semantic-Anchor Coordinate Branching
 
-**Status:** in-progress · since 2026-07-13 · adversarial design and model-free smoke precede model mechanics
+**Status:** finished
 
 This experiment tests the last mechanism-specific bridge left by the native
 Jacobian line: put a named hypothesis token inside real reasoning and replace
@@ -70,29 +70,45 @@ Model-free smoke:
 .venv/bin/python experiments/qwen35_4b_semantic_anchor_coordinate_branching/scripts/run.py --stage smoke
 ```
 
-Model mechanics remains fail-closed until the reviewed implementation is
-committed and its hashes are anchored in the configuration.
+The terminal mechanics run was:
+
+```bash
+PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1 \
+PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True \
+.venv/bin/python experiments/qwen35_4b_semantic_anchor_coordinate_branching/scripts/run.py --stage mechanics
+```
 
 ## Results
 
-Model-free smoke passes. The frozen lens is byte-identical and rank 24 at every
-layer 4--8; all 12 diagnostic operation results are distinct; and 76 fresh task
-behaviors have zero overlap with 1,046 readable ancestor fingerprints. The
-original smoke boundary had six tests; 15 now pass after implementation. No
-model result exists. Mechanics must prove a
-randomized computed consequence—not merely alias writing—with live numeric
-controls before any correctness-scored continuation.
+Terminal `INVALID_MECHANICS_CONTROL` at the frozen parse gate. All 880 numeric
+and 2,240 intervention rows reproduce the calibration after canonical identity
+sorting, but unrestricted parse is only 56/880 (6.36%); no consequence row
+parses. Text, full-donor, and donor-J direct constrained choices reach 43/44,
+43/44, and 42/44, while their consequence choices reach only 6/44, 6/44, and
+5/44. Donor-J consequence probability lift over source is `+0.00170` versus
+the preregistered `+0.15` gate. No continuation or correctness stage opened.
+
+The mandatory post-mechanics adversarial audit also found that the alias-to-
+operation and operation-to-label Latin rotations cancel: the composed alias-to-
+label mapping is identical in all four mechanics tasks. The advertised task-
+randomized computation endpoint was therefore not realized.
 
 ## Interpretation
 
-Pending. The terminal decision will distinguish literal text control, full-state
-transport, direct-only J writing, computed J consequence transport, and additive
-anchor transport rather than collapsing them into one pass/fail label.
+This exact one-token consequence interface is invalid and unreachable. The
+conditional direct-choice pattern is hypothesis-generating evidence that an
+explicit anchor can write a name, not passed evidence of reasoning transport.
+Because literal text and full-state donors also fail the consequence interface,
+and because the composed mapping was fixed, this run cannot isolate a general
+J-space limitation. The experiment is frozen; any repair or continuation must
+use a fresh directory and fresh data.
 
 ## Knowledgebase Update
 
-- Program evidence: update after a model-stage decision.
-- Program backlog: this is the one final context-local bridge already recorded.
+- Program evidence and shared synthesis record the terminal invalid result and
+  retire this late opaque-anchor interface.
+- Program backlog redirects to a fresh deployable early-text hypothesis fork,
+  not another J amplitude/layer sweep.
 - Claim ledger: no new claim while the repository claim re-grade is open.
 
 ## Artifacts
@@ -101,5 +117,9 @@ anchor transport rather than collapsing them into one pass/fail label.
 - `reports/preregistration.md`: immutable stage logic and gates.
 - `reports/design_review.md`: adversarial review before any GPU run.
 - `assets/context_lens.pt`: byte-identical frozen lens.
-- `scripts/run.py`: model-free smoke; model stages are unavailable.
+- `scripts/run.py`: frozen staged runner and automatic decision logic.
+- `reports/pre_mechanics_adversarial_audit.md`: authorization audit.
+- `reports/post_mechanics_adversarial_audit.md`: terminal audit and discovered
+  composition confound.
+- `runs/mechanics/`: complete terminal mechanics receipts.
 - `reports/artifact_manifest.yaml`: artifact policy.

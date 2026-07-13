@@ -7,8 +7,8 @@ For evidence-linked durable claims, use [claims/index.md](claims/index.md).
 ## Structured Execution And Compilers
 
 - Program: [charter](../research_programs/structured_execution_and_compilers/charter.md)
-- Current read: structured intermediates remain strong, but the replicated `First:` output seam is neither a stable J value coordinate nor an arbitrary writable last-thought register. Balanced additive J supplied-target control is chance (4/48) despite valid controls.
-- Best next experiment: only an explicit semantic anchor plus donor-coordinate clamp can justify one final latent branch attempt; it must beat plain-text/full-activation controls. Separately measure the exact depth-6 resource crossover before learned pruning.
+- Current read: structured intermediates remain strong, but the replicated `First:` seam is neither a stable J value coordinate nor an arbitrary writable last-thought register. A late explicit anchor makes direct aliases conditionally writable, yet its consequence readout is invalid/unreachable and the intended composed label rotation was fixed.
+- Best next experiment: test concrete operation hypotheses before reasoning as a deployable text-only fork, with visible-only selection and exact matched-compute sampling; separately measure the exact depth-6 resource crossover before learned pruning.
 - Strong anchors: `qwen35_4b_partial_structure_search`, `qwen35_4b_crosssubstrate_structure`, `qwen35_4b_structure_search_scaling`, `qwen35_4b_commit_slot_semantic_power_replication`.
 - Avoid repeating: another type-only P(viable) judge, pooled-AUROC launch, or model-guided search without measured brute wall time.
 - Evidence that advances the program: causal ablation showing which intermediate structure transfers across family, length, or paraphrase shifts.
@@ -16,7 +16,7 @@ For evidence-linked durable claims, use [claims/index.md](claims/index.md).
 ## Evidence-Conditioned Selection
 
 - Program: [charter](../research_programs/evidence_conditioned_selection/charter.md)
-- Current read: confidence can rank completed candidates, but value signals do not automatically become controllers. The coherent-order delta beat majority but not confidence/entropy; an upstream additive-J proposal branch then failed its own supplied-target write gate at chance before continuation.
+- Current read: confidence can rank completed candidates, but value signals do not automatically become controllers. The coherent-order delta beat majority but not confidence/entropy; additive-J branching failed at chance, and a late semantic anchor wrote names without a valid/reachable consequence interface.
 - Best next experiment: close the exact-pool visible-selector gap; for training-time policy routing, fit direct cross-fitted advantages and confirm a frozen rule on a third block rather than retrying statewise argmax.
 - Strong anchors: `qwen35_4b_partial_structure_search`, `qwen35_4b_generator_verifier_gap`, `qwen35_4b_code_confidence`, `qwen35_4b_answer_potential_trace_sft`, `qwen35_4b_same_prefix_advantage_routing`.
 - Avoid repeating: pooled-AUROC confidence claims, type-only partial judges, answer-only potential over cap-bound traces, posthoc winner margins, raw ordered-minus-shuffle commit-logit tuning, or gains that hide abstention/commit-rate changes.
@@ -79,10 +79,10 @@ For evidence-linked durable claims, use [claims/index.md](claims/index.md).
 ## Interpretability And Diagnostics
 
 - Program: [charter](../research_programs/interpretability_and_diagnostics/charter.md)
-- Current read: early donor-coordinate J transport and the cap-1,024 semantic seam replicate, but shared/midpoint J value, terminal counterfactual selection, and balanced additive native branching all fail. The additive branch write is exactly chance despite valid live controls, so no continuation data opened.
-- Best next experiment: test one final context-local bridge—explicit semantic anchor plus donor-coordinate replacement—against full activation, plain text, additive J, and non-J before any continuation; retire native J branching if it fails.
+- Current read: early synthetic donor-coordinate J transport and the cap-1,024 semantic seam replicate, but shared/midpoint J value, terminal counterfactual selection, additive native branching, and the late semantic-anchor bridge do not yield a usable controller. The anchor run is formally invalid from 6.36% unrestricted parse and a fixed composed label map; its direct write cannot be promoted to reasoning transport.
+- Best next experiment: retire native J token/layer/scale variants and test whether an early concrete text hypothesis changes full proposal coverage enough to beat late text and matched-compute sampling; use J evidence only to motivate the semantic-address hypothesis.
 - Strong anchors: `qwen_structural_compiler_attribution_ablation`, `qwen35_4b_probe_to_prompt`, `qwen35_4b_jacobian_value_transport`, `qwen35_4b_context_local_jacobian_clamp`, `qwen35_4b_jacobian_transport_control_replication`, `qwen35_4b_native_thought_jacobian_value_transport`, `qwen35_4b_native_thought_seam_budget_ladder`, `qwen35_4b_forced_commit_jacobian_value_transport`, `qwen35_4b_commit_slot_jacobian_value_transport`, `qwen35_4b_commit_slot_semantic_power_replication`.
-- Avoid repeating: probes that do not change the next experiment, next-token writing tests presented as reasoning transport, promoting a perfect point estimate past a failed control gate, or presenting an oracle donor as a deployable gain.
+- Avoid repeating: probes that do not change the next experiment, next-token writing tests presented as reasoning transport, component permutations without a composed-map test, post-hoc parser repair, promoting a perfect point estimate past a failed control gate, or presenting an oracle donor as a deployable gain.
 - Evidence that advances the program: a diagnostic predicts which variants will fail before the final metric is observed.
 
 ## Reliability And Safety

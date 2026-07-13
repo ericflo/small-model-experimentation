@@ -5,10 +5,11 @@ external_artifacts: []
 omitted_artifacts: []
 reproducibility:
   smoke_command: ".venv/bin/python experiments/qwen35_4b_semantic_anchor_coordinate_branching/scripts/run.py --stage smoke"
-  full_command: "unavailable before an audited and pushed implementation boundary"
+  full_command: "PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1 PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True .venv/bin/python experiments/qwen35_4b_semantic_anchor_coordinate_branching/scripts/run.py --stage mechanics"
   required_external_artifacts: []
 notes: >-
   The frozen context lens is committed under assets/. There is no adapter or
   training artifact. One failed and one passing outcome-blind model-smoke
-  receipt and the full 880-row calibration are committed; mechanics and
-  continuation outputs do not yet exist.
+  receipt, full 880-row calibration, and terminal mechanics outputs are
+  committed. No continuation, qualification, confirmation, adapter, or training
+  artifact exists.

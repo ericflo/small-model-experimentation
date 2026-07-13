@@ -63,10 +63,13 @@
   failed relevance control. Do not retune terminal logits. A new successor must
   use fixed cap 1,024 to change the continuation/proposal distribution and beat
   matched-forward-token sample-more.
-- The upstream additive-J attempt also stops at mechanics (4/48 supplied targets
-  at every alpha). Do not spend continuation tokens until donor-coordinate
-  replacement at an explicit semantic anchor beats text/full-activation/non-J
-  controls without labels.
+- The upstream additive-J attempt stopped at 4/48 supplied targets, and the
+  follow-on late semantic anchor is terminal invalid: direct aliases are
+  conditionally writable but consequence parse is 0/440, consequence choices
+  stay near chance, and the composed label map was fixed. Do not spend another
+  native-J budget sweep. A fresh early textual-hypothesis fork must count every
+  branch token and beat matched-compute sampling before receiving capability
+  credit.
 - Completed cross-program qualification negative:
   `qwen35_4b_pareto_policy_integration` found that C54's short/deep tier labels
   did not become a clean procedural teacher crossover. `blend` lost both quick
