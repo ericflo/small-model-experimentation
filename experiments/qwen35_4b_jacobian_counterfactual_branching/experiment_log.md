@@ -95,3 +95,15 @@
   supplied-target metrics, correct aliases, and outcomes remained unrecorded.
 - Mechanics implementation may begin, but no model mechanics or continuation is
   yet authorized.
+
+## 2026-07-13 — Mechanics implementation complete, pending anchor
+
+- Added an experiment-local public mechanics file containing only task ID and
+  visible examples; its hash is frozen in the regenerated disjointness manifest.
+- Implemented one 512-token prefix per four tasks, all three frozen alphas, full
+  baseline/J/non-J probabilities, live controls, automatic smallest-alpha gates,
+  and trace/result artifacts without any correct alias field.
+- Eight tests and Python syntax pass. Pending mechanics boundary fails before
+  model load; qualification/confirmation remain unavailable.
+- Completed a 35-point implementation audit. Commit/push and smoke-hash anchor
+  are required before the single mechanics run.

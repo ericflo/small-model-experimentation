@@ -1,6 +1,6 @@
 # Qwen3.5-4B Jacobian Counterfactual Branching
 
-**Status:** in-progress · since 2026-07-13 · Outcome-blind live controls pass; label-free 512-token mechanics remains before continuations.
+**Status:** in-progress · since 2026-07-13 · Live controls pass; audited label-free 512-token mechanics awaits a pushed hash boundary and run.
 
 This experiment tests whether a balanced bank of early J-space edits can shift
 the proposal distribution of native reasoning, rather than trying to value a
@@ -110,6 +110,8 @@ boundary.
   objective.
 - `reports/post_model_smoke_005_audit.md`: 60/60 live-control pass and the
   mechanics authorization boundary.
+- `reports/pre_mechanics_implementation_audit.md`: 35 firewall, intervention,
+  metric, gate, artifact, and fail-closed assertions.
 - `assets/context_lens.pt`: byte-identical causal lens anchor.
 - `src/`: frozen tasks, branch geometry, cache-fork model operations, and pure
   statistics.

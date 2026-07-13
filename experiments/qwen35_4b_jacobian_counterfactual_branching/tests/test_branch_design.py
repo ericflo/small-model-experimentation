@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import copy
 import json
+import subprocess
 import sys
 from pathlib import Path
 
@@ -86,6 +87,11 @@ def test_data_manifest_is_fresh_and_complete():
     assert manifest["splits"]["mechanics"]["rows"] == config["data"]["mechanics_tasks"]
     assert manifest["splits"]["qualification"]["rows"] == config["data"]["qualification_tasks"]
     assert manifest["splits"]["confirmation"]["rows"] == config["data"]["confirmation_tasks"]
+    public_path = EXP / "data" / "procedural" / "mechanics_public.jsonl"
+    public_rows = [json.loads(line) for line in public_path.read_text().splitlines()]
+    assert len(public_rows) == config["data"]["mechanics_tasks"]
+    assert all(set(row) == {"task_id", "visible"} for row in public_rows)
+    assert manifest["splits"]["mechanics"]["public_fields"] == ["task_id", "visible"]
 
 
 def test_fixed_branch_patcher_applies_once_at_exact_position():
@@ -139,3 +145,20 @@ def test_quantization_aware_control_passes_exact_orthogonal_case():
     assert patcher.passed_rows[0].tolist() == [True, True]
     assert patcher.iterations_used[0] == 0
     assert torch.equal(output[:, 1].float(), branches.T)
+
+
+def test_mechanics_fails_closed_before_boundary_and_model_load():
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(EXP / "scripts" / "run.py"),
+            "--stage",
+            "mechanics",
+        ],
+        cwd=EXP.parents[1],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert result.returncode != 0
+    assert "anchored mechanics_boundary" in result.stderr

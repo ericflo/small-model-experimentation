@@ -140,6 +140,12 @@
         "take_k": 1
       },
       "path": "experiments/qwen35_4b_jacobian_counterfactual_branching/data/procedural/mechanics.jsonl",
+      "public_fields": [
+        "task_id",
+        "visible"
+      ],
+      "public_path": "experiments/qwen35_4b_jacobian_counterfactual_branching/data/procedural/mechanics_public.jsonl",
+      "public_sha256": "497112d7d082ab7a59e9e56e08c26b80cfb2c43e7c099cdecc5a34ab7e0b0e5a",
       "rows": 4,
       "sha256": "44e614ceb0f94fb2d416240965a826dccf6dafea5c6b38a0f92268501e20e746",
       "unique_fingerprints": 4

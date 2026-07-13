@@ -78,6 +78,18 @@ def main() -> None:
             "ancestor_collisions": 0,
             "cross_split_collisions": 0,
         }
+        if split == "mechanics":
+            public_path = output_dir / "mechanics_public.jsonl"
+            public_rows = [
+                {"task_id": row["task_id"], "visible": row["visible"]}
+                for row in rows
+            ]
+            public_path.write_text(
+                "".join(json.dumps(row, sort_keys=True) + "\n" for row in public_rows)
+            )
+            split_receipts[split]["public_path"] = public_path.relative_to(REPO).as_posix()
+            split_receipts[split]["public_sha256"] = sha256(public_path)
+            split_receipts[split]["public_fields"] = ["task_id", "visible"]
     manifest = {
         "schema_version": 1,
         "generator": "src/task_data.py",
