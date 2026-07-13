@@ -1,0 +1,151 @@
+schema_version: 1
+
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+  start_checkpoint: large_artifacts/qwen35_4b_transaction_invariant_recovery_curriculum/merged/transaction_replay
+  locality_anchor: large_artifacts/qwen35_4b_repo_search_compress_bank/merged/apex_replay
+  menagerie_incumbent: large_artifacts/qwen35_4b_repo_search_compress_bank/merged/apex_replay
+  start_weight_sha256: 1cf5fbca317808d6d00225f5cd533c82c7e1602b2b2e5e2da8f4307b01941ba3
+  anchor_weight_sha256: c933168075a0fc011f31ee54f83d722cc91423ce1a0ac19bfe40dfab92f608d5
+
+artifacts:
+  root: large_artifacts/qwen35_4b_validation_policy_counterexample_curriculum
+
+engine:
+  max_model_len: 8192
+  gpu_memory_utilization: 0.85
+  max_num_seqs: 32
+  max_num_batched_tokens: 16384
+
+families:
+  policy_train:
+    - policy_warehouse_orders
+    - policy_compute_claims
+    - policy_credit_holds
+    - policy_job_allocations
+    - policy_cargo_manifests
+    - policy_part_bundles
+  policy_transfer:
+    - atomic_reservations
+    - policy_power_draws
+    - policy_token_spends
+    - policy_lane_bookings
+  broad_recovery:
+    - lease_cache
+    - quorum_value
+    - pattern_router
+    - rate_buckets
+
+bank:
+  seed: 87110
+  split: policy_bank
+  tasks_per_policy_family: 4
+  prior_primary_source: large_artifacts/qwen35_4b_transaction_invariant_recovery_curriculum/bank/transaction_replay.jsonl
+  prior_primary_sha256: 9c196d1e7e49881bbf151e1575c98811bcdca66e6ef38858c34f60f1256b9315
+  prior_receipt: large_artifacts/qwen35_4b_transaction_invariant_recovery_curriculum/bank/receipt.json
+  prior_receipt_sha256: 8c2c339bd78399fbfac1d29053bee6f92935ed97df52ce4d2d36c902bce6e63e
+  injected_policy_tasks: 24
+  injected_transition: diagnosis_to_changed_patch
+  prior_tasks_in_control: 48
+  tasks_per_arm: 48
+  target_operator_action_mass: 38248.0
+  require_replay_pass_rate: 1.0
+
+training:
+  seed: 47
+  epochs: 3
+  learning_rate: 0.00002
+  rank: 32
+  alpha: 64
+  dropout: 0.05
+  batch_size: 4
+  gradient_accumulation_steps: 7
+  loss_chunk_positions: 128
+  max_length: 4096
+  arms: [policy_counterexample, extra_transaction]
+
+evaluation:
+  think_budget: 512
+  answer_max_tokens: 512
+  sample_temperature: 0.8
+  sample_top_p: 0.95
+  sample_top_k: 20
+  deep_run_seed: 87701
+  sample_run_seed: 87702
+  recovery:
+    deep_turns: 6
+    sample_more_trajectories: 2
+    sample_more_turns_each: 3
+  normal:
+    deep_turns: 8
+    sample_more_trajectories: 2
+    sample_more_turns_each: 4
+  blocks:
+    policy_calibration:
+      families: policy_train
+      seed: 87200
+      tasks_per_family: 4
+    policy_dev:
+      families: policy_transfer
+      seed: 87300
+      tasks_per_family: 8
+    policy_confirm:
+      families: policy_transfer
+      seed: 87400
+      tasks_per_family: 8
+    broad_recovery:
+      families: broad_recovery
+      seed: 87500
+      tasks_per_family: 10
+
+locality:
+  seed: 87600
+  contexts: experiments/qwen35_4b_validation_policy_counterexample_curriculum/data/locality_contexts.json
+  count: 48
+  max_context_tokens: 1024
+  median_non_target_logit_drift_max: 0.15
+  mean_entropy_delta_min: -0.05
+
+calibration_gates:
+  success_absolute_min: 0.80
+  success_delta_vs_start_min: 0.15
+  success_delta_vs_control_min: 0.10
+  invalid_action_delta_vs_start_max: 0.02
+  answer_cap_hit_delta_vs_start_max: 0.02
+  rejected_transition_absolute_min: 0.80
+  failed_transition_absolute_min: 0.70
+
+policy_gates:
+  success_delta_vs_start_min: 0.10
+  success_delta_vs_control_min: 0.05
+  success_delta_vs_sample_more_min: 0.05
+  paired_bootstrap_lower_bound_min: 0.0
+  atomic_reservations_success_absolute_min: 0.50
+  invalid_action_delta_vs_start_max: 0.02
+  answer_cap_hit_delta_vs_start_max: 0.02
+  rejected_transition_absolute_min: 0.80
+  failed_transition_absolute_min: 0.70
+  verified_absolute_min: 0.75
+  commit_absolute_min: 0.70
+  minimum_nonnegative_families: 3
+  maximum_single_family_regression: -0.10
+
+retention_gates:
+  recovery_success_delta_vs_start_min: -0.03
+  normal_success_delta_vs_start_min: -0.03
+  verified_absolute_min: 0.75
+  commit_absolute_min: 0.70
+  rejected_transition_absolute_min: 0.80
+  failed_transition_absolute_min: 0.70
+  invalid_action_delta_vs_start_max: 0.02
+  answer_cap_hit_delta_vs_start_max: 0.02
+
+menagerie:
+  sealed_until_all_whitebox_gates_pass: true
+  tiers: [quick, medium]
+  paired_seeds:
+    quick: 71301
+    medium: 71302
+  maximum_tier_regression: 0.03
+  minimum_positive_tier_delta: 0.02

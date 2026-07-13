@@ -68,16 +68,15 @@
   replay-only 0.383), but unseen dev was only 0.719 versus parent/sample-more
   0.703. It failed the +10/+5 and bootstrap bars; confirmation, broad retention,
   and Menagerie stayed sealed. Do not repeat generic transaction dose.
-- Highest-priority successor: a near-correct counterexample-policy curriculum
-  from the local transaction candidate. On all 16 atomic-reservation cases its
-  first patch now contained copy + whole-request validation + atomic commit,
-  but omitted negative-amount handling; after the public failure all 16
-  overcorrected by raising on every insufficient request. Create diverse
-  failed-test states differing in validation policy (raise vs False vs None vs
-  reject), teach the smallest changed patch that preserves all other
-  invariants, replay the complete seven-transition recovery loop, and compare
-  against matched extra transaction/recovery dose before repeating fresh
-  atomic transfer.
+- Active experiment: `qwen35_4b_validation_policy_counterexample_curriculum`
+  isolates the predecessor's residual at the post-failure revision seam. It
+  replaces only 24 `diagnosis→changed_patch` rows inside an otherwise identical
+  336-row prior bank, spans three public data representations, and compares
+  with matched extra transaction/recovery dose from the exact learned parent.
+  Dev/confirmation are content-disjoint; the known atomic-reservation failure
+  is a separate sentinel; locality, conditional transitions, verify/commit,
+  sample-more, and broad recovery all gate Menagerie. Do not add generic
+  transaction dose or weaken the sentinel/fresh-family bars inside this run.
 - Future retraining should calibrate plan dose by realized gradient/surprisal
   and avoid supervising plan starts already rank 1 or wildly off-policy lexical
   templates.

@@ -1,0 +1,487 @@
+{
+  "contexts": [
+    {
+      "content_sha256": "db0fe3b10817dc1354cb203ad3c9263e6978648c21935eddf9bbe714c1973efd",
+      "id": "policy-locality-s87600-00-00",
+      "messages": [
+        {
+          "content": "Complete the ordinary thought with a few words:\nA ceramic mug cools more slowly when",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "0972a473f196360718c6df561e4bf26b20a0fbf107602f96456abe19fdc98091",
+      "id": "policy-locality-s87600-00-01",
+      "messages": [
+        {
+          "content": "Complete the ordinary thought with a few words:\nBefore lending a favorite novel, its owner may",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "2f233e6f5edecd40ac19bc1b6b46dc6a5b098756339b49ad1ab7bb8b59aa5043",
+      "id": "policy-locality-s87600-00-02",
+      "messages": [
+        {
+          "content": "Complete the ordinary thought with a few words:\nOn a foggy morning, harbor lights help sailors",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "9003a74d80c3cec491b8abf17383f520b76053e796fb952ad73b78430f452936",
+      "id": "policy-locality-s87600-00-03",
+      "messages": [
+        {
+          "content": "Complete the ordinary thought with a few words:\nA wooden drawer slides quietly after someone",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "db82a575bde16a4d3ac89e59ea85b52bc42f935aca327c2040f705ec610eb21f",
+      "id": "policy-locality-s87600-00-04",
+      "messages": [
+        {
+          "content": "Complete the ordinary thought with a few words:\nWhen houseplants lean toward one window, a gardener",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "8932bc3e2237fcd01b3aa7f3e8d847edd05e699e95b26bac609dd4976c04cd86",
+      "id": "policy-locality-s87600-00-05",
+      "messages": [
+        {
+          "content": "Complete the ordinary thought with a few words:\nA picnic blanket stays drier if the group",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "868f83c7a52e0f8f0ae06f2eee5cace16bafdada629550d8bbd691633db24045",
+      "id": "policy-locality-s87600-00-06",
+      "messages": [
+        {
+          "content": "Complete the ordinary thought with a few words:\nBefore tuning an old piano, the technician usually",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "b48e773b404c85fde5d2c38e6e0736176ecdaa1dc443f8696b2175a1de7b1534",
+      "id": "policy-locality-s87600-00-07",
+      "messages": [
+        {
+          "content": "Complete the ordinary thought with a few words:\nFresh bread keeps its crust best when it",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "dffce23eb581f630abd37b87138dccf2a82cb7c2c70d67ce052bac3cc3834b61",
+      "id": "policy-locality-s87600-00-08",
+      "messages": [
+        {
+          "content": "Complete the ordinary thought with a few words:\nDuring a power outage, a battery lantern can",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "93393b113362a186db65b512a9649795c2e7f5227b54908d18eec17ac0573d1c",
+      "id": "policy-locality-s87600-00-09",
+      "messages": [
+        {
+          "content": "Complete the ordinary thought with a few words:\nA wool scarf dries without stretching when",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "51e04197b1f57eae212b579d4c3500687e9b7f23baff90289e6c7a610aa892b5",
+      "id": "policy-locality-s87600-00-10",
+      "messages": [
+        {
+          "content": "Complete the ordinary thought with a few words:\nWhen a chalkboard becomes dusty, the teacher",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "1a3a1567f26181e1af6cf8377d0b808ffc0538818da4fc7f1dd1cdf4cb20537d",
+      "id": "policy-locality-s87600-00-11",
+      "messages": [
+        {
+          "content": "Complete the ordinary thought with a few words:\nBefore storing winter boots for summer, people often",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "e2271a11e9721c2adbe024cd3ed51ac1b041b4f942374f2bd1134d812a91a953",
+      "id": "policy-locality-s87600-01-00",
+      "messages": [
+        {
+          "content": "Add one concise, natural ending to this sentence:\nA ceramic mug cools more slowly when",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "52807c1fc9ae7ae8a510154b26f75e465056a0ead2ec7f3af58e7152c93295d2",
+      "id": "policy-locality-s87600-01-01",
+      "messages": [
+        {
+          "content": "Add one concise, natural ending to this sentence:\nBefore lending a favorite novel, its owner may",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "4a61643171180462c5a0341148bb9affc41a8621e0dbec2e354ed986262355c8",
+      "id": "policy-locality-s87600-01-02",
+      "messages": [
+        {
+          "content": "Add one concise, natural ending to this sentence:\nOn a foggy morning, harbor lights help sailors",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "90ed93b45a8b0db95b03c0c1119200aac2fd136732a1efd5bd6ef175aed670a6",
+      "id": "policy-locality-s87600-01-03",
+      "messages": [
+        {
+          "content": "Add one concise, natural ending to this sentence:\nA wooden drawer slides quietly after someone",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "49cf01d494af3c29b12b8f3e1e5744b4e535f096c3ebd91f3194ba68c9df4572",
+      "id": "policy-locality-s87600-01-04",
+      "messages": [
+        {
+          "content": "Add one concise, natural ending to this sentence:\nWhen houseplants lean toward one window, a gardener",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "ddc4d880f20492a9e1dd020f64b0a37ced4167f75cd19e0718ee83b49b2daca3",
+      "id": "policy-locality-s87600-01-05",
+      "messages": [
+        {
+          "content": "Add one concise, natural ending to this sentence:\nA picnic blanket stays drier if the group",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "be52eefb08c884b1f5f9710b36a0fae91f24cdc44843010eb0b98f7a466d629a",
+      "id": "policy-locality-s87600-01-06",
+      "messages": [
+        {
+          "content": "Add one concise, natural ending to this sentence:\nBefore tuning an old piano, the technician usually",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "405f58d37d5060b0390c109b58c796b0e6af0fb3993bcb9764d68869df8368f2",
+      "id": "policy-locality-s87600-01-07",
+      "messages": [
+        {
+          "content": "Add one concise, natural ending to this sentence:\nFresh bread keeps its crust best when it",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "873c28817bf221639c154b20800b6e5eee31be2f8169c0b943caea339df6a14c",
+      "id": "policy-locality-s87600-01-08",
+      "messages": [
+        {
+          "content": "Add one concise, natural ending to this sentence:\nDuring a power outage, a battery lantern can",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "f02a9a04603ea5daebb919d05dfa6806a8cfa0559a199120f8a0d51e53b8da60",
+      "id": "policy-locality-s87600-01-09",
+      "messages": [
+        {
+          "content": "Add one concise, natural ending to this sentence:\nA wool scarf dries without stretching when",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "cae804505c084191516c927d03fdb2ecbeebc8d4086cfdf7d73c0d0c13b16039",
+      "id": "policy-locality-s87600-01-10",
+      "messages": [
+        {
+          "content": "Add one concise, natural ending to this sentence:\nWhen a chalkboard becomes dusty, the teacher",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "aa0c89043349811dc43ecf955a6a4f673450ffbc1f7286542abc9358b328226d",
+      "id": "policy-locality-s87600-01-11",
+      "messages": [
+        {
+          "content": "Add one concise, natural ending to this sentence:\nBefore storing winter boots for summer, people often",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "aa1b2a9a0f46652403563c58c6333a91763fc5610c4991b7e3a0c114f2d18250",
+      "id": "policy-locality-s87600-02-00",
+      "messages": [
+        {
+          "content": "Respond solely with a plain short continuation:\nA ceramic mug cools more slowly when",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "094b650c3fdc137d332bb22c310f0019973265e5d8dbdbb1161f71edff6881d2",
+      "id": "policy-locality-s87600-02-01",
+      "messages": [
+        {
+          "content": "Respond solely with a plain short continuation:\nBefore lending a favorite novel, its owner may",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "95918f87a90a712ba460d953105c4a7e75fc65368f5050e6db06c5c8019a56be",
+      "id": "policy-locality-s87600-02-02",
+      "messages": [
+        {
+          "content": "Respond solely with a plain short continuation:\nOn a foggy morning, harbor lights help sailors",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "eb4b6dca8eda8511e4e4991352642d28e5928c29914615d45175da6ca3fdd53a",
+      "id": "policy-locality-s87600-02-03",
+      "messages": [
+        {
+          "content": "Respond solely with a plain short continuation:\nA wooden drawer slides quietly after someone",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "64a64ab5f464bc8b361215e894a6a92f8566b3af64a34a1aa1217c7bb071978c",
+      "id": "policy-locality-s87600-02-04",
+      "messages": [
+        {
+          "content": "Respond solely with a plain short continuation:\nWhen houseplants lean toward one window, a gardener",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "34b92e3c69a65f8bfade35ae5e8f69c02e374cf241766eddb3e05085a4c620fd",
+      "id": "policy-locality-s87600-02-05",
+      "messages": [
+        {
+          "content": "Respond solely with a plain short continuation:\nA picnic blanket stays drier if the group",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "9f69cc12b54f1ee9bb9ec0f9460e4b6d996df1971ac06ebba949f003145d50eb",
+      "id": "policy-locality-s87600-02-06",
+      "messages": [
+        {
+          "content": "Respond solely with a plain short continuation:\nBefore tuning an old piano, the technician usually",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "9b41a030baaf1f1b3ea6772d1401dadaa5034a2f5133fbd0847083840d87990a",
+      "id": "policy-locality-s87600-02-07",
+      "messages": [
+        {
+          "content": "Respond solely with a plain short continuation:\nFresh bread keeps its crust best when it",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "1a27ea064073e34216f04ade99ba9ca70b2b1c4c8937bd9c850f38fce9ef6fe5",
+      "id": "policy-locality-s87600-02-08",
+      "messages": [
+        {
+          "content": "Respond solely with a plain short continuation:\nDuring a power outage, a battery lantern can",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "106fec199a26368054770af590cba99e9db57023053e3b1923161993836e3626",
+      "id": "policy-locality-s87600-02-09",
+      "messages": [
+        {
+          "content": "Respond solely with a plain short continuation:\nA wool scarf dries without stretching when",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "466aeff97e0b48168460e1b047039d10d5b6b0fd2841e415e9f211532f0479da",
+      "id": "policy-locality-s87600-02-10",
+      "messages": [
+        {
+          "content": "Respond solely with a plain short continuation:\nWhen a chalkboard becomes dusty, the teacher",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "1e79427623d90bdb20d3c9a183b21e1cb74cebf44a8b176f50f4e92ba21f7dcb",
+      "id": "policy-locality-s87600-02-11",
+      "messages": [
+        {
+          "content": "Respond solely with a plain short continuation:\nBefore storing winter boots for summer, people often",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "8029982a27ba09b4dac686f63366e5043f011437571a004629802f6dcb8fb230",
+      "id": "policy-locality-s87600-03-00",
+      "messages": [
+        {
+          "content": "Give the next sensible phrase and nothing more:\nA ceramic mug cools more slowly when",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "66670ca194da8a0cdac36289505ab43e84afc93fb3fe024e7b1f30dcd3eeebbc",
+      "id": "policy-locality-s87600-03-01",
+      "messages": [
+        {
+          "content": "Give the next sensible phrase and nothing more:\nBefore lending a favorite novel, its owner may",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "ed3e3d7ba3e67d008014cbeeae56f7ad1d6612de3fcccd6fe4af563799d2da9c",
+      "id": "policy-locality-s87600-03-02",
+      "messages": [
+        {
+          "content": "Give the next sensible phrase and nothing more:\nOn a foggy morning, harbor lights help sailors",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "bc6721d56a96668c601718fd8c1a66d0314b912e4aaa4889010c6832810094fb",
+      "id": "policy-locality-s87600-03-03",
+      "messages": [
+        {
+          "content": "Give the next sensible phrase and nothing more:\nA wooden drawer slides quietly after someone",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "f58abcd8aad5ad7fe64ae79765563ab82602cbc6031cb7aa874b75aa337ed4da",
+      "id": "policy-locality-s87600-03-04",
+      "messages": [
+        {
+          "content": "Give the next sensible phrase and nothing more:\nWhen houseplants lean toward one window, a gardener",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "037de90aa2beb14cc0f91ceeb075e5e5ac1249e11a91f9b74cbaa27341fa82e4",
+      "id": "policy-locality-s87600-03-05",
+      "messages": [
+        {
+          "content": "Give the next sensible phrase and nothing more:\nA picnic blanket stays drier if the group",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "92ea17c6222846fc75893e0dfd0cdb04a8e377541c021b5789a03488ca7274af",
+      "id": "policy-locality-s87600-03-06",
+      "messages": [
+        {
+          "content": "Give the next sensible phrase and nothing more:\nBefore tuning an old piano, the technician usually",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "5d25899d39fe594f60018437110e065dfc7ea0d8dd0b8454b2582fcc8921bc77",
+      "id": "policy-locality-s87600-03-07",
+      "messages": [
+        {
+          "content": "Give the next sensible phrase and nothing more:\nFresh bread keeps its crust best when it",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "27edba8dabc0c70c95e44a2180c8b6e38fd95099e01c254ebf3bbd63b8b77952",
+      "id": "policy-locality-s87600-03-08",
+      "messages": [
+        {
+          "content": "Give the next sensible phrase and nothing more:\nDuring a power outage, a battery lantern can",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "9026e3b32559410331a88fba22442c3ea99cb9c6211bd448f57dd29a4d7ccdd3",
+      "id": "policy-locality-s87600-03-09",
+      "messages": [
+        {
+          "content": "Give the next sensible phrase and nothing more:\nA wool scarf dries without stretching when",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "93a61732ef9df6b16f28db6295c86ffb0065ed638aba49b767c16714339885fe",
+      "id": "policy-locality-s87600-03-10",
+      "messages": [
+        {
+          "content": "Give the next sensible phrase and nothing more:\nWhen a chalkboard becomes dusty, the teacher",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "a9fb59805d82f04f581cdd4ef0743491b32c7a75121433f92b181eeab47ecc66",
+      "id": "policy-locality-s87600-03-11",
+      "messages": [
+        {
+          "content": "Give the next sensible phrase and nothing more:\nBefore storing winter boots for summer, people often",
+          "role": "user"
+        }
+      ]
+    }
+  ],
+  "count": 48,
+  "schema_version": 1,
+  "seed": 87600
+}

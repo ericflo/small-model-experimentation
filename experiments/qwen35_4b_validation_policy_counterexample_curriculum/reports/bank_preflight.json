@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "model_output_generated": false,
+  "prior_source_sha256": "9c196d1e7e49881bbf151e1575c98811bcdca66e6ef38858c34f60f1256b9315",
+  "candidate_bank_sha256": "940da93e3849e7a2ebfb1555add666e8a4039f13548dea556c93191541cc305a",
+  "control_bank_sha256": "52424053bfae8192cb44772d661121b8c1b5f83418ca18bf799eb9812392c10e",
+  "external_receipt_sha256": "45ce6e2488d4bc844ff2094926273320eb01a89b902f918170344af24f0cd6e8",
+  "candidate": {
+    "tasks": 48,
+    "rows": 336,
+    "injected_policy_rows": 24,
+    "unchanged_prior_rows": 312,
+    "injected_transition": "diagnosis_to_changed_patch",
+    "max_total_tokens": 1179
+  },
+  "control": {
+    "tasks": 48,
+    "rows": 336,
+    "injected_policy_rows": 0,
+    "unchanged_prior_rows": 336
+  },
+  "transition_rows_per_arm": {
+    "start_to_inspect": 48,
+    "inspect_to_patch": 48,
+    "rejected_patch_to_changed_patch": 48,
+    "failed_test_to_diagnose": 48,
+    "diagnosis_to_changed_patch": 48,
+    "patch_ok_to_verify": 48,
+    "passed_test_to_commit": 48
+  },
+  "weighted_action_mass_per_operator_per_epoch": 38248.0,
+  "think_loss_zero": true,
+  "operator_and_transition_mass_matched": true,
+  "firewall_clean": true,
+  "content": {
+    "bank_unique": 24,
+    "calibration_unique": 24,
+    "bank_calibration_overlap": 0,
+    "dev_unique": 32,
+    "confirm_unique": 32,
+    "dev_confirm_overlap": 0
+  }
+}

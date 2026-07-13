@@ -1245,6 +1245,14 @@
     "logs/experiment_log.md:3: heading '## 2026-06-22'"
    ]
   },
+  "qwen35_4b_validation_policy_counterexample_curriculum": {
+   "start": "2026-07-13",
+   "end": "2026-07-13",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_verified_algorithm_retrieval_adaptation": {
    "start": "2026-06-26",
    "end": "2026-06-26",

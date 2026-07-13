@@ -47156,6 +47156,59 @@
      "source": "experiments/qwen35_4b_state_carry_vs_state_bag_fullrank_delta/analysis/planned_delta_memory.csv"
     }
    ]
+  },
+  "qwen35_4b_validation_policy_counterexample_curriculum": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "The residual intervention changes only 24 of 336 action rows",
+     "categories": [
+      "new post-failure revisions",
+      "unchanged prior rows"
+     ],
+     "series": [
+      {
+       "label": "candidate bank rows",
+       "values": [
+        24,
+        312
+       ]
+      }
+     ],
+     "x_label": "row source",
+     "y_label": "training rows",
+     "y_format": "integer",
+     "note": "Design evidence only, not a model result. Candidate and control each contain 336 rows; the candidate replaces only diagnosis-to-changed-patch in 24 recovery blocks and retains the other 312 rows from the exact prior bank.",
+     "source": "experiments/qwen35_4b_validation_policy_counterexample_curriculum/reports/bank_preflight.json"
+    },
+    {
+     "kind": "bar",
+     "title": "All four procedural blocks are content-unique",
+     "categories": [
+      "bank",
+      "calibration",
+      "development",
+      "confirmation"
+     ],
+     "series": [
+      {
+       "label": "unique public repositories",
+       "values": [
+        24,
+        24,
+        32,
+        32
+       ]
+      }
+     ],
+     "x_label": "frozen block",
+     "y_label": "unique repository contents",
+     "y_format": "integer",
+     "note": "Bank and calibration have zero content overlap; development and confirmation also have zero overlap. Content hashes exclude task IDs and split labels, preventing metadata-only freshness.",
+     "source": "experiments/qwen35_4b_validation_policy_counterexample_curriculum/reports/bank_preflight.json"
+    }
+   ]
   }
  }
 }

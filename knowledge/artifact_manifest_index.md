@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 206
-- Manifest files: 508
+- Experiments with manifests: 207
+- Manifest files: 509
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 63 |
 | `run-data` | 101 |
-| `standard-artifact` | 79 |
+| `standard-artifact` | 80 |
 
 ## Manifests
 
@@ -266,6 +266,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_unsaturated_frontier_active_bridge` | `dataset` | [manifest](../experiments/qwen35_4b_unsaturated_frontier_active_bridge/data/dataset_manifest.json) |
 | `qwen35_4b_unsaturated_frontier_active_bridge` | `dataset` | [manifest](../experiments/qwen35_4b_unsaturated_frontier_active_bridge/data/seed_mined/dataset_manifest.json) |
 | `qwen35_4b_unsaturated_frontier_active_bridge` | `large-artifact` | [manifest](../experiments/qwen35_4b_unsaturated_frontier_active_bridge/large_artifacts_manifest.md) |
+| `qwen35_4b_validation_policy_counterexample_curriculum` | `standard-artifact` | [manifest](../experiments/qwen35_4b_validation_policy_counterexample_curriculum/reports/artifact_manifest.yaml) |
 | `qwen35_4b_verified_algorithm_retrieval_adaptation` | `run-data` | [manifest](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/data/base_sample_more_k8_records.manifest.json) |
 | `qwen35_4b_verified_algorithm_retrieval_adaptation` | `run-data` | [manifest](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/data/retrieval_adapt_random_top3_records.manifest.json) |
 | `qwen35_4b_verified_algorithm_retrieval_adaptation` | `run-data` | [manifest](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/data/retrieval_adapt_semantic_top3_records.manifest.json) |

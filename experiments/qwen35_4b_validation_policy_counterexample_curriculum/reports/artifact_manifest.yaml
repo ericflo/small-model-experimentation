@@ -1,0 +1,30 @@
+schema_version: 1
+experiment_id: "qwen35_4b_validation_policy_counterexample_curriculum"
+external_artifacts:
+  - name: matched residual-seam and extra-transaction banks
+    storage: large_artifacts/qwen35_4b_validation_policy_counterexample_curriculum/{bank,bank_smoke}
+    required_for: exact training replay and preflight
+    checksum: candidate/control/receipt SHA-256 recorded in reports/bank_preflight.json
+    regenerate: .venv/bin/python experiments/qwen35_4b_validation_policy_counterexample_curriculum/scripts/build_bank.py
+  - name: adapters and merged checkpoints
+    storage: large_artifacts/qwen35_4b_validation_policy_counterexample_curriculum/{adapters,merged,smoke}
+    required_for: candidate/control deployment and replication
+    checksum: recorded in training and merge receipts after the run
+    regenerate: .venv/bin/python experiments/qwen35_4b_validation_policy_counterexample_curriculum/scripts/run.py --full
+  - name: detailed coding trajectories and locality logits
+    storage: large_artifacts/qwen35_4b_validation_policy_counterexample_curriculum/eval
+    required_for: paired gates, transition retention, and forensics
+    checksum: compact stage/result receipts after the run
+    regenerate: .venv/bin/python experiments/qwen35_4b_validation_policy_counterexample_curriculum/scripts/run.py --full
+omitted_artifacts:
+  - path: large_artifacts/qwen35_4b_validation_policy_counterexample_curriculum
+    reason: multi-gigabyte checkpoints, banks, logits, and detailed generated trajectories
+reproducibility:
+  smoke_command: python experiments/qwen35_4b_validation_policy_counterexample_curriculum/scripts/run.py --smoke
+  full_command: .venv/bin/python experiments/qwen35_4b_validation_policy_counterexample_curriculum/scripts/run.py --full
+  required_external_artifacts:
+    - large_artifacts/qwen35_4b_transaction_invariant_recovery_curriculum/merged/transaction_replay
+    - large_artifacts/qwen35_4b_transaction_invariant_recovery_curriculum/bank/transaction_replay.jsonl
+    - large_artifacts/qwen35_4b_transaction_invariant_recovery_curriculum/bank/receipt.json
+    - large_artifacts/qwen35_4b_repo_search_compress_bank/merged/apex_replay
+notes: Menagerie is sealed until all white-box gates pass and is accessed only through its public CLI.

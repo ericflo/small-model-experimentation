@@ -12832,6 +12832,50 @@
      "chart_takeaway": "Because all three arms get the same 80 lessons, a primary win can be attributed to choosing both the right state and the right specialist rather than to extra training."
     }
    ]
+  },
+  "qwen35_4b_validation_policy_counterexample_curriculum": {
+   "verdict_tag": "A one-line residual is ready for trial",
+   "concept_primer": "The model already learned to copy stock, check a whole order, and update it safely. It still treats two different failures as the same: malformed negative quantities should raise an error, while an ordinary shortage should simply be declined.",
+   "plain_question": "Can a tiny set of almost-correct failed-test revisions teach that exact distinction without erasing the coding loop already learned?",
+   "plain_answer": "The experiment is designed and its deterministic checks pass, but no model has been trained yet. Only 24 of 336 lessons change; the other 312 preserve the prior behavior, and a same-size control receives only more of the old lessons.",
+   "why_it_matters": "This is a sharp test of whether capability can be added at the exact moment a test reveals a semantic mistake. A win would show that small, verifier-specific corrections can improve coding behavior without broad retraining; a loss will identify whether the signal, transfer, or weight change is the limiting step.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "New corrective lessons",
+     "value": "24 of 336",
+     "sub": "only the post-failure patch row changes"
+    },
+    {
+     "label": "Old loop lessons retained",
+     "value": "312 of 336",
+     "sub": "inspection, rejection recovery, testing, and commit remain rehearsed"
+    },
+    {
+     "label": "Public data shapes",
+     "value": "3",
+     "sub": "bundles, records, and tuples each have train and fresh transfer skins"
+    },
+    {
+     "label": "Model runs before the lock",
+     "value": "zero",
+     "sub": "all evidence so far is deterministic fixture and bank validation"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Only one small slice of the old lesson bank changes",
+     "chart_read": "The two bars divide the 336 candidate lessons into new post-failure revisions and unchanged lessons copied from the prior bank. The much taller retained bar shows how narrowly the intervention is scoped.",
+     "chart_takeaway": "Twenty-four rows carry the new semantic distinction while 312 rows rehearse the existing tool loop, making the comparison much sharper than another full transaction curriculum."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "Every evaluation block contains unique repository content",
+     "chart_read": "Each bar counts public repositories whose contents are unique inside that block. The two 24-item blocks cover training and practice checks; the two 32-item blocks are separate transfer and confirmation sets.",
+     "chart_takeaway": "The earlier duplicate-fixture problem is gone: all four blocks are internally unique, and the paired training/practice and transfer/confirmation blocks do not overlap."
+    }
+   ]
   }
  }
 }

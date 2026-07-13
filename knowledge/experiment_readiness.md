@@ -4,21 +4,21 @@ Generated from tracked experiment contents. Use this as a triage surface for tur
 
 Anchor-ready means the experiment has a human-authored README, a detected primary report, recognized local artifacts, and an assigned research program. It does not mean the result is correct or final.
 
-- Experiments: 234
-- Anchor-ready: 219
-- Human-authored READMEs: 221
+- Experiments: 235
+- Anchor-ready: 220
+- Human-authored READMEs: 222
 - Generated README stubs: 13
-- Primary reports: 234
-- Experiment logs: 138
-- Smoke commands: 103
-- Artifact manifests: 206
+- Primary reports: 235
+- Experiment logs: 139
+- Smoke commands: 104
+- Artifact manifests: 207
 
 ## Run Surface Counts
 
 | Run surface | Experiments |
 | --- | ---: |
 | `documented-command` | 38 |
-| `documented-scripts` | 122 |
+| `documented-scripts` | 123 |
 | `scripts-undocumented` | 21 |
 | `source-or-analysis` | 53 |
 
@@ -177,6 +177,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | yes | [`qwen35_4b_transform_abi_compiler_pilot`](../experiments/qwen35_4b_transform_abi_compiler_pilot/README.md) | benchmark_generalization, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_transform_abi_compiler_pilot/reports/report.md) | no | `documented-scripts` | no | large-artifact | add-experiment-log, add-smoke-command |
 | yes | [`qwen35_4b_typed_sketch_synthesis`](../experiments/qwen35_4b_typed_sketch_synthesis/README.md) | benchmark_generalization, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_typed_sketch_synthesis/reports/qwen35_4b_typed_sketch_synthesis_report.md) | no | `documented-scripts` | yes | dataset, large-artifact | add-experiment-log |
 | yes | [`qwen35_4b_unsaturated_frontier_active_bridge`](../experiments/qwen35_4b_unsaturated_frontier_active_bridge/README.md) | active_evidence_acquisition, benchmark_generalization, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_unsaturated_frontier_active_bridge/reports/qwen35_4b_unsaturated_frontier_active_bridge_report.md) | no | `scripts-undocumented` | no | dataset, large-artifact | add-experiment-log, document-run-path, add-smoke-command |
+| yes | [`qwen35_4b_validation_policy_counterexample_curriculum`](../experiments/qwen35_4b_validation_policy_counterexample_curriculum/README.md) | agentic_breadth_installation, benchmark_generalization, evidence_conditioned_selection, interpretability_and_diagnostics, posttraining_and_adaptation, process_control_and_tool_use, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_validation_policy_counterexample_curriculum/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_verified_algorithm_retrieval_adaptation`](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/README.md) | algorithmic_memory_and_retrieval, evidence_conditioned_selection, interpretability_and_diagnostics, reliability_and_safety | `human-authored` | [report](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/reports/final_report.md) | no | `documented-scripts` | no | large-artifact, run-data | add-experiment-log, add-smoke-command |
 | yes | [`qwen35_4b_verified_edit_closure`](../experiments/qwen35_4b_verified_edit_closure/README.md) | benchmark_generalization, evidence_conditioned_selection, interpretability_and_diagnostics, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_verified_edit_closure/reports/qwen35_4b_verified_edit_closure_report.md) | no | `scripts-undocumented` | no | dataset, large-artifact | add-experiment-log, document-run-path, add-smoke-command |
 | yes | [`qwen35_4b_verified_macro_capacity_fit_rerun`](../experiments/qwen35_4b_verified_macro_capacity_fit_rerun/README.md) | evidence_conditioned_selection, interpretability_and_diagnostics, operator_and_skill_inventories, reliability_and_safety, structured_execution_and_compilers, test_time_reasoning_budget | `human-authored` | [report](../experiments/qwen35_4b_verified_macro_capacity_fit_rerun/reports/report.md) | yes | `documented-scripts` | yes | other, standard-artifact | none |
