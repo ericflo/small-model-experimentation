@@ -185,7 +185,14 @@ notes: >-
   18d02610d94ac172ed46dea695cf967bdb85f980b312e717db6d4dcc763ebe89: oracle 1.0, intact 48/48,
   disabled 0/48, 256 updates, accumulation 16, and 4,096 presentations. Both are setup-only evidence
   with zero benchmark/sealed access. Publish this pair checkpoint and require both workflows before
-  seed 7412; result stages remain blocked on the exact three-seed setup barrier.
+  seed 7412; result stages remain blocked on the exact three-seed setup barrier. Seed-7411 setup
+  commit d0642d4a passed both workflows before seed 7412. Seed-7412 LoRA G0 passed at file SHA256
+  e2ef49516b7fa6a0e04722d058c3716005017b9771bb847f69360adfa27fc18f and receipt identity
+  4af55cc3d759559196abd995b6b4cf6ecb6d15c7c151512257841451163e30de. Its positive control passed
+  at file SHA256 1097d31b9119a04a60a03478e2e5628dff1a58acef8871a5a592e753575c41e5 and identity
+  ae4fdb5f73d6e24301ad6fe16074544e9194a4486874cd6c614f869dae1e461b: oracle 1.0, intact 48/48,
+  disabled 0/48, 256 updates, accumulation 16, and 4,096 presentations. Publish this second pair and
+  require both workflows before seed 7413; result stages remain blocked.
   The first Qwen load stopped before wrapper construction or mechanics and is preserved by a tracked
   failure receipt; it opened
   only the permitted training validator, no sealed contrast, and produced no canonical G0 output.
