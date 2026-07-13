@@ -133,7 +133,7 @@
     "qwen35_4b_jacobian_counterfactual_branching": {
       "status": "in-progress",
       "since": "2026-07-13",
-      "reason": "CPU geometry and fresh-data smoke pass; cache-fork model implementation and label-free mechanics remain pending."
+      "reason": "Model-smoke implementation is hash-anchored; live bf16 smoke, cache-fork continuation implementation, and mechanics remain pending."
     },
     "qwen35_4b_confidence_guided_compute": {
       "status": "finished",

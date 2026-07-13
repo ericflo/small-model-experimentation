@@ -17,3 +17,12 @@
   3.05e-7. Live bf16 controls remain for model smoke.
 - Model stages remain fatal-unavailable pending cache-fork implementation,
   implementation audit, commit, and push.
+
+## 2026-07-13 — Model-smoke implementation boundary
+
+- Six implementation tests pass; pending-boundary invocation fails before model
+  load.
+- Pushed cache-free one-shot branch readout implementation at `9100395f` and
+  froze exact runner/model/geometry/test hashes in config.
+- This boundary authorizes outcome-blind model smoke only. It does not authorize
+  alpha mechanics or continuation generation.

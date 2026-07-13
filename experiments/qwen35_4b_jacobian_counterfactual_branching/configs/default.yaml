@@ -103,4 +103,10 @@ gates:
     successful_alias_support_min: 6
 
 design_boundary:
-  status: pending
+  status: anchored
+  implementation_commit: 9100395f70ae40b8a6ef4f5bb8a3e0cddd4695f4
+  implementation_hashes:
+    runner_sha256: ccb8c70192ca2cfd90647d2498c24d1d92f0c3b4ad873fade70c60577d23c747
+    model_ops_sha256: acfbdad24e462ffcd480f50ddca711597d9bc64cc2d30e676074530ccb8de2d1
+    branch_geometry_sha256: 68df4c9b45626eab4e6b0e98aa686f6e58aaa6abc450c55da7e2cfd4c258a150
+    tests_sha256: 44e509eb17510814a2790840f77741d04401c34b5ca239214898e64d9aaefc87
