@@ -79,3 +79,17 @@ adaptive allocation beats uniform at 6/8 operating points (mid-compute +0.02..0.
 small dips only at the k=1 and k=12 extremes). So the compute-optimal-allocation
 result is domain-general — code (MBPP, HumanEval, P(True) judge) AND reasoning
 (toy, P(answer)) — a robust, verifier-free, provenance-clean deployable policy.
+
+## 2026-07-13 — agentic-domain arbitration: STARTED, deferred on infra
+
+Began testing whether the confidence policy generalizes from static code/reasoning
+to the multi-step GYM (gym_confidence.py in ../qwen35_4b_gauntlet_frontier/scripts).
+Friction found: the gym's induction/exploration atoms make the BASE model think
+heavily (~3200 think tokens at budget 4096, rarely closing </think>), so it only
+emits parseable ANSWER lines at the 8192 budget — slow in eager, and a standalone
+two-phase sampler does not reproduce the proven gym harness's emission handling
+(0 parseable answers at 4096). CLEAN PATH (owed): reuse the proven harness.run_atoms
+(fast, correct answers at 8192) and add a confidence signal — either answer-span
+logprobs (P(answer)/C40) exposed from the VLLMRunner, or a P(True) judge pass over
+gym answers. That is a ~half-day build vs the post-hoc code/reasoning analyses;
+deferred pending direction. gym_confidence.py kept as a WIP starting point.
