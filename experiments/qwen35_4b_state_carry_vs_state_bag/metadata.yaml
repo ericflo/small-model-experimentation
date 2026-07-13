@@ -5,7 +5,7 @@ source_track: "new"
 path: "experiments/qwen35_4b_state_carry_vs_state_bag"
 primary_readme: "experiments/qwen35_4b_state_carry_vs_state_bag/README.md"
 primary_report: "experiments/qwen35_4b_state_carry_vs_state_bag/reports/report.md"
-summary: "**Status: first paired pilot preserved but invalidated by a fail-closed analysis dispatch bug; the fixed source-bound G0 and pilot retry are next. No scientific LoRA verdict exists yet.**"
+summary: "**Status: the analysis-dispatch fix has passed a fresh source-bound G0; the paired seed-7401 LoRA pilot retry is next. The first paired pilot remains preserved but invalidated, and no scientific LoRA verdict exists yet.**"
 tags:
   - "latent-state"
   - "lora"
@@ -26,10 +26,10 @@ top_level_dirs:
 file_counts:
   csv: 2
   gz: 11
-  json: 4
+  json: 5
   md: 13
   py: 15
   yaml: 4
   [none]: 1
-total_files: 50
-total_size_bytes: 14874538
+total_files: 51
+total_size_bytes: 14882639

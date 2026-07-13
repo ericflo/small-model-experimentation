@@ -82,7 +82,7 @@ because LoRA has then already formed the representation.
 - Made pilot promotion require complete K=4, joint-holdout, and bidirectional-swap diagnostics without requiring favorable diagnostic signs.
 - Implemented every documented verdict label, full receipt identities, current lock/source checks, exact immutable row pairing, and correct pair-clustered swap inference.
 - Reanalyze raw sample-more allocations, parses, labels, totals, and by-depth natural-close/parse/cap rates.
-- Final validation: 41 tests pass, Python compilation passes, and `git diff --check` is clean.
+- Final validation: 42 tests pass, Python compilation passes, and `git diff --check` is clean.
 
 No fresh CPU smoke/data generation, model load, GPU call, training, evaluation, or benchmark access occurred.
 
@@ -108,3 +108,7 @@ No fresh CPU smoke/data generation, model load, GPU call, training, evaluation, 
 - Fixed pilot analysis to prohibit and skip both deployment/sample-more comparators, and added a
   synthetic end-to-end pilot regression that would fail if full deployment logic is entered. The
   source-bound contract requires fresh data, G0, training, and evaluation rather than receipt edits.
+- Reissued the source-bound CPU/data receipts and passed the fixed-source G0 retry. The canonical
+  `MODEL_SMOKE_PASS` records exact direct and Carry/Bag K=1 parity, identical 16,800,796-parameter
+  receipts, nonzero finite gradients in every registered trainable component, finite K=12 forwards,
+  and 11.02 GiB peak allocation. This is a mechanics gate only; the fresh seed-7401 pilot pair is next.

@@ -10,8 +10,8 @@
   same-checkpoint edge cuts, bidirectional geometry-matched state swaps, a joint
   holdout gate, and interface-qualified matched-layer-token-budget explicit-CoT sampling.
   The first G0/pilot attempt is preserved but invalidated by a fail-closed pilot/full analysis-dispatch
-  bug. That bug is fixed and regression-tested; the next action is a fresh source-bound CPU/data/G0
-  plus seed-7401 retry—not an expensive full sweep. Mixed semantic echo was removed and requires a fresh
+  bug. That bug is fixed and regression-tested, and the fresh source-bound CPU/data/G0 gate passed;
+  the next action is the seed-7401 paired pilot retry—not an expensive full sweep. Mixed semantic echo was removed and requires a fresh
   successor if continuous state proves readable but unused.
 - Conditional capacity successor: if a valid rank-32 LoRA outcome fails to establish
   deep state formation, create and execute a fresh experiment that

@@ -32,4 +32,4 @@ reproducibility:
   smoke_command: "python3 experiments/qwen35_4b_state_carry_vs_state_bag/scripts/run.py --smoke"
   full_command: "phase-gated and intentionally non-monolithic: follow experiments/qwen35_4b_state_carry_vs_state_bag/docs/gpu_runbook.md sections 1-9; the CLI enforces G0, pilot promotion, fixed-final phases, causal gates, and G4 eligibility"
   required_external_artifacts: []
-notes: "Setup-only manifest. The removed mixed-echo variant is not part of this experiment. Add realized durable storage paths and enforced hashes after each result-bearing stage; preserve partial non-resumable attempts and never replace pending entries with unverified claims."
+notes: "The fixed-source canonical G0 mechanics receipt is tracked under runs/model_smoke and is not scientific evidence. The removed mixed-echo variant is not part of this experiment. Add realized durable storage paths and enforced hashes after each result-bearing stage; preserve partial non-resumable attempts and never replace pending entries with unverified claims."

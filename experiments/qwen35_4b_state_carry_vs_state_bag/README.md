@@ -1,7 +1,8 @@
 # State-Carry Versus State-Bag Counterfactual
 
-**Status: first paired pilot preserved but invalidated by a fail-closed analysis dispatch bug; the
-fixed source-bound G0 and pilot retry are next. No scientific LoRA verdict exists yet.**
+**Status: the analysis-dispatch fix has passed a fresh source-bound G0; the paired seed-7401
+LoRA pilot retry is next. The first paired pilot remains preserved but invalidated, and no
+scientific LoRA verdict exists yet.**
 
 ## Research Program
 
