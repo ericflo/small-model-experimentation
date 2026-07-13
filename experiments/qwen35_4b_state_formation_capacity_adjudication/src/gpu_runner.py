@@ -1403,6 +1403,409 @@ def _oracle_readout_control(wrapper: StateLoopModel, config: Mapping[str, Any]) 
     return float(correct.float().mean().cpu())
 
 
+def _state_accuracy_counts(
+    node_logits: torch.Tensor,
+    phase_logits: torch.Tensor,
+    checksum_logits: torch.Tensor,
+    state_targets: Mapping[str, torch.Tensor],
+) -> dict[str, Any]:
+    """Return strict, serializable trajectory and terminal state counts."""
+
+    logits = {
+        "node": node_logits,
+        "phase": phase_logits,
+        "checksum": checksum_logits,
+    }
+    expected_classes = {"node": 16, "phase": 2, "checksum": 8}
+    if set(state_targets) != set(logits):
+        raise RuntimeError("state-accuracy targets have the wrong fields")
+    reference_shape: tuple[int, int] | None = None
+    predictions: dict[str, torch.Tensor] = {}
+    correct: dict[str, torch.Tensor] = {}
+    histograms: dict[str, dict[str, list[int]]] = {}
+    for name, values in logits.items():
+        target = state_targets[name]
+        if values.ndim != 3 or target.ndim != 2:
+            raise RuntimeError(f"{name} state logits/targets have the wrong rank")
+        if (
+            tuple(values.shape[:2]) != tuple(target.shape)
+            or values.shape[-1] != expected_classes[name]
+        ):
+            raise RuntimeError(f"{name} state logits/targets have incompatible shapes")
+        if not values.is_floating_point() or target.dtype not in {
+            torch.int8, torch.int16, torch.int32, torch.int64, torch.uint8
+        }:
+            raise RuntimeError(f"{name} state logits/targets have invalid dtypes")
+        if not bool(torch.isfinite(values).all()):
+            raise RuntimeError(f"{name} state logits are nonfinite")
+        if target.numel() == 0:
+            raise RuntimeError("state-accuracy input is empty")
+        if bool((target < 0).any()) or bool((target >= values.shape[-1]).any()):
+            raise RuntimeError(f"{name} state target is outside the registered classes")
+        shape = (int(target.shape[0]), int(target.shape[1]))
+        if reference_shape is None:
+            reference_shape = shape
+        elif shape != reference_shape:
+            raise RuntimeError("state heads do not share exact batch/step geometry")
+        prediction = values.argmax(dim=-1)
+        predictions[name] = prediction
+        correct[name] = prediction.eq(target)
+        histograms[name] = {
+            "prediction": torch.bincount(
+                prediction.flatten(), minlength=values.shape[-1]
+            ).cpu().tolist(),
+            "target": torch.bincount(
+                target.flatten(), minlength=values.shape[-1]
+            ).cpu().tolist(),
+        }
+    assert reference_shape is not None
+    joint = correct["node"] & correct["phase"] & correct["checksum"]
+    terminal = {
+        name: int(values[:, -1].sum().item()) for name, values in correct.items()
+    }
+    terminal["joint"] = int(joint[:, -1].sum().item())
+    terminal["rows"] = reference_shape[0]
+    trajectory = {name: int(values.sum().item()) for name, values in correct.items()}
+    trajectory["joint"] = int(joint.sum().item())
+    trajectory["steps"] = reference_shape[0] * reference_shape[1]
+    return {
+        "batch_size": reference_shape[0],
+        "steps": reference_shape[1],
+        "terminal": terminal,
+        "trajectory": trajectory,
+        "histograms": histograms,
+        "predictions": {
+            name: values.detach().cpu().tolist() for name, values in predictions.items()
+        },
+        "targets": {
+            name: state_targets[name].detach().cpu().tolist() for name in logits
+        },
+    }
+
+
+def _positive_control_probe_steps(updates: int) -> tuple[int, ...]:
+    if updates <= 0:
+        raise RuntimeError("positive-control updates must be positive")
+    return tuple(
+        sorted(step for step in {0, 1, 16, 64, 128, updates} if step <= updates)
+    )
+
+
+def _positive_control_schedule(
+    rows: Sequence[Mapping[str, Any]], updates: int, accumulation: int, model_seed: int
+) -> list[dict[str, Any]]:
+    """Materialize the frozen singleton-microbatch order for CPU regression tests."""
+
+    if not rows or updates <= 0 or accumulation <= 0:
+        raise RuntimeError("positive-control schedule geometry must be positive")
+    events = []
+    for microbatch_index in range(1, updates * accumulation + 1):
+        row = rows[(microbatch_index - 1) % len(rows)]
+        event = {
+            "optimizer_step": (microbatch_index - 1) // accumulation + 1,
+            "microbatch_in_step": (microbatch_index - 1) % accumulation + 1,
+            "microbatch_index": microbatch_index,
+            "row_index": (microbatch_index - 1) % len(rows),
+            "id": str(row["id"]),
+            "k": int(row["depth"]),
+        }
+        event["dropout_seed"] = microbatch_dropout_seed(
+            model_seed, microbatch_index, event["id"], event["k"]
+        )
+        events.append(event)
+    return events
+
+
+def _parameter_norm_receipt(wrapper: StateLoopModel) -> dict[str, Any]:
+    groups: dict[str, list[torch.Tensor]] = {
+        "adaptation_input": [],
+        "adaptation_output": [],
+        "common_state": [],
+    }
+    for name, parameter in wrapper.named_parameters():
+        if not parameter.requires_grad:
+            continue
+        if name.startswith("adaptation.down."):
+            group = "adaptation_input"
+        elif name.startswith(("adaptation.up.", "adaptation.deltas.")):
+            group = "adaptation_output"
+        elif name.startswith("adaptation."):
+            raise RuntimeError(f"unclassified adaptation parameter: {name}")
+        else:
+            group = "common_state"
+        groups[group].append(parameter)
+    receipt: dict[str, Any] = {}
+    for name, parameters in groups.items():
+        squared = 0.0
+        nonzero_tensors = 0
+        parameter_count = 0
+        for parameter in parameters:
+            norm = float(parameter.detach().float().norm().cpu())
+            if not math.isfinite(norm):
+                raise RuntimeError(f"nonfinite {name} parameter norm")
+            squared += norm * norm
+            nonzero_tensors += int(norm > 0.0)
+            parameter_count += parameter.numel()
+        receipt[name] = {
+            "tensors": len(parameters),
+            "parameters": parameter_count,
+            "nonzero_tensors": nonzero_tensors,
+            "l2_norm": math.sqrt(squared),
+        }
+    if not groups["adaptation_output"] or not groups["common_state"]:
+        raise RuntimeError("positive-control parameter roles are incomplete")
+    return receipt
+
+
+def _rng_state_sha256(cuda_devices: Sequence[int] = ()) -> str:
+    digest = hashlib.sha256()
+    digest.update(torch.get_rng_state().contiguous().numpy().tobytes())
+    for device in cuda_devices:
+        state = torch.cuda.get_rng_state(int(device))
+        digest.update(state.contiguous().cpu().numpy().tobytes())
+    return digest.hexdigest()
+
+
+@contextlib.contextmanager
+def _positive_control_diagnostic_context(
+    wrapper: StateLoopModel, *, adaptation_enabled: bool
+):
+    cuda_devices = sorted(
+        {
+            int(parameter.device.index)
+            for parameter in wrapper.parameters()
+            if parameter.device.type == "cuda" and parameter.device.index is not None
+        }
+    )
+    rng_before = _rng_state_sha256(cuda_devices)
+    was_training = wrapper.training
+    wrapper.eval()
+    adaptation_context = (
+        contextlib.nullcontext()
+        if adaptation_enabled else wrapper.adaptation.suspended()
+    )
+    try:
+        with (
+            torch.random.fork_rng(devices=cuda_devices),
+            adaptation_context,
+            torch.no_grad(),
+        ):
+            yield
+    finally:
+        wrapper.train(was_training)
+        if _rng_state_sha256(cuda_devices) != rng_before:
+            raise RuntimeError("positive-control diagnostic changed global RNG state")
+
+
+def _parameter_delta_baseline(wrapper: StateLoopModel) -> dict[str, torch.Tensor]:
+    baseline = {}
+    for name, parameter in wrapper.named_parameters():
+        if not parameter.requires_grad:
+            continue
+        if name.startswith(("adaptation.up.", "adaptation.deltas.")):
+            if bool(torch.count_nonzero(parameter.detach()).cpu()):
+                raise RuntimeError("positive-control output adaptation did not start at zero")
+            continue
+        baseline[name] = parameter.detach().cpu().clone()
+    return baseline
+
+
+def _parameter_delta_norm_receipt(
+    wrapper: StateLoopModel, baseline: Mapping[str, torch.Tensor]
+) -> dict[str, Any]:
+    groups = {
+        "adaptation_input": {"tensors": 0, "parameters": 0, "squared": 0.0},
+        "adaptation_output": {"tensors": 0, "parameters": 0, "squared": 0.0},
+        "common_state": {"tensors": 0, "parameters": 0, "squared": 0.0},
+    }
+    seen = set()
+    for name, parameter in wrapper.named_parameters():
+        if not parameter.requires_grad:
+            continue
+        if name.startswith("adaptation.down."):
+            group = "adaptation_input"
+        elif name.startswith(("adaptation.up.", "adaptation.deltas.")):
+            group = "adaptation_output"
+        elif name.startswith("adaptation."):
+            raise RuntimeError(f"unclassified adaptation parameter: {name}")
+        else:
+            group = "common_state"
+        if name in baseline:
+            reference = baseline[name]
+            if reference.shape != parameter.shape or reference.dtype != parameter.dtype:
+                raise RuntimeError("positive-control delta baseline changed")
+            norm = float((parameter.detach().cpu() - reference).float().norm())
+            seen.add(name)
+        elif group == "adaptation_output":
+            norm = float(parameter.detach().float().norm().cpu())
+        else:
+            raise RuntimeError(f"positive-control delta baseline is missing {name}")
+        if not math.isfinite(norm):
+            raise RuntimeError("positive-control parameter delta norm is nonfinite")
+        groups[group]["tensors"] += 1
+        groups[group]["parameters"] += parameter.numel()
+        groups[group]["squared"] += norm * norm
+    if seen != set(baseline):
+        raise RuntimeError("positive-control delta baseline has stale tensors")
+    return {
+        name: {
+            "tensors": int(values["tensors"]),
+            "parameters": int(values["parameters"]),
+            "l2_delta_norm": math.sqrt(float(values["squared"])),
+        }
+        for name, values in groups.items()
+    }
+
+
+def _summarize_positive_control_records(
+    records: Sequence[Mapping[str, Any]], *, field: str | None = None
+) -> dict[str, Any]:
+    if not records:
+        raise RuntimeError("positive-control evaluation produced no records")
+    grouped: dict[str, list[Mapping[str, Any]]] = {"overall": list(records)}
+    if field is not None:
+        grouped = {}
+        for record in records:
+            key = str(record[field])
+            grouped.setdefault(key, []).append(record)
+    summaries = {}
+    for key, selected in sorted(grouped.items()):
+        terminal_rows = len(selected)
+        trajectory_steps = sum(int(record["state"]["trajectory"]["steps"]) for record in selected)
+        terminal_counts = {
+            name: sum(int(record["state"]["terminal"][name]) for record in selected)
+            for name in ("node", "phase", "checksum", "joint")
+        }
+        trajectory_counts = {
+            name: sum(int(record["state"]["trajectory"][name]) for record in selected)
+            for name in ("node", "phase", "checksum", "joint")
+        }
+        histograms: dict[str, dict[str, list[int]]] = {}
+        for head in ("node", "phase", "checksum"):
+            width = len(selected[0]["state"]["histograms"][head]["target"])
+            histograms[head] = {}
+            for kind in ("prediction", "target"):
+                histograms[head][kind] = [
+                    sum(
+                        int(record["state"]["histograms"][head][kind][index])
+                        for record in selected
+                    )
+                    for index in range(width)
+                ]
+        summaries[key] = {
+            "rows": terminal_rows,
+            "trajectory_steps": trajectory_steps,
+            "terminal_correct_counts": terminal_counts,
+            "trajectory_correct_counts": trajectory_counts,
+            **{
+                f"{name}_final_accuracy": terminal_counts[name] / terminal_rows
+                for name in terminal_counts
+            },
+            **{
+                f"{name}_trajectory_accuracy": trajectory_counts[name] / trajectory_steps
+                for name in trajectory_counts
+            },
+            "mean_objective_loss": sum(float(record["objective_loss"]) for record in selected)
+            / terminal_rows,
+            "mean_state_loss": sum(float(record["state_loss"]) for record in selected)
+            / terminal_rows,
+            "mean_fixed_point_loss": sum(
+                float(record["fixed_point_loss"]) for record in selected
+            ) / terminal_rows,
+            "histograms": histograms,
+        }
+    return summaries["overall"] if field is None else summaries
+
+
+def _evaluate_positive_control(
+    wrapper: StateLoopModel,
+    tokenizer: Any,
+    rows: Sequence[Mapping[str, Any]],
+    config: Mapping[str, Any],
+    *,
+    capacity: str,
+    model_seed: int,
+    probe_step: int,
+    adaptation_enabled: bool,
+) -> dict[str, Any]:
+    records = []
+    mode = "intact" if adaptation_enabled else "disabled"
+    with _positive_control_diagnostic_context(
+        wrapper, adaptation_enabled=adaptation_enabled
+    ):
+        for row_index, row in enumerate(rows, start=1):
+            k = int(row["depth"])
+            batch = _encode_row(
+                tokenizer, row, config, k=k, device=torch.device("cuda")
+            )
+            diagnostic_index = probe_step * len(rows) + row_index
+            wrapper.adaptation.begin_microbatch(
+                microbatch_dropout_seed(
+                    model_seed,
+                    diagnostic_index,
+                    f"positive-probe|{mode}|{row['id']}",
+                    k,
+                )
+            )
+            with torch.autocast("cuda", dtype=torch.bfloat16):
+                model_output = _forward(
+                    wrapper, batch, k=k, compute_answer=False
+                )
+                objective_loss = _objective_loss(model_output, config, "state_only")
+            call_receipt = wrapper.adaptation.end_microbatch()
+            expected_calls = (
+                (k - 1)
+                * int(config["architecture"]["adaptation"][capacity]["expected_targets"])
+                if adaptation_enabled else 0
+            )
+            if call_receipt["calls"] != expected_calls:
+                raise RuntimeError("positive-control diagnostic adaptation calls changed")
+            if expected_calls and (
+                call_receipt["cycles"] != k - 1
+                or not call_receipt["cycle_order_identical"]
+                or not call_receipt["each_cycle_exact_target_set"]
+            ):
+                raise RuntimeError("positive-control diagnostic adaptation order changed")
+            losses = {
+                "objective_loss": float(objective_loss.detach().float().cpu()),
+                "state_loss": float(model_output.state_loss.detach().float().cpu()),
+                "fixed_point_loss": float(
+                    model_output.fixed_point_loss.detach().float().cpu()
+                ),
+            }
+            if not all(math.isfinite(value) for value in losses.values()):
+                raise RuntimeError("positive-control diagnostic loss is nonfinite")
+            state = _state_accuracy_counts(
+                model_output.node_logits,
+                model_output.phase_logits,
+                model_output.checksum_logits,
+                batch["state_targets"],
+            )
+            if state["batch_size"] != 1 or state["steps"] != k:
+                raise RuntimeError("positive-control diagnostic state geometry changed")
+            records.append(
+                {
+                    "id": str(row["id"]),
+                    "depth": k,
+                    "family": str(row["family"]),
+                    "template": str(row["template"]),
+                    "query_kind": str(row["query_kind"]),
+                    "state": state,
+                    **losses,
+                }
+            )
+    return {
+        "step": int(probe_step),
+        "adaptation_mode": mode,
+        "rng_state_restored": True,
+        "overall": _summarize_positive_control_records(records),
+        "by_depth": _summarize_positive_control_records(records, field="depth"),
+        "by_family": _summarize_positive_control_records(records, field="family"),
+        "by_template": _summarize_positive_control_records(records, field="template"),
+        "by_query_kind": _summarize_positive_control_records(records, field="query_kind"),
+    }
+
+
 def _positive_control_rows(
     config: Mapping[str, Any], manifest: Mapping[str, Any]
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
@@ -1546,127 +1949,457 @@ def positive_control(
     if model_seed not in set(map(int, config["training"]["train_seeds"])):
         raise RuntimeError("positive-control seed is not preregistered")
     _require_new_output(output, directory=False, kind="positive-control receipt")
-    g0 = _read_receipt(
-        model_smoke_receipt, config, statuses={"MODEL_SMOKE_PASS"},
-        phases={f"{capacity}_g0"}, label=f"{capacity} G0",
-    )
-    if capacity == "fullrank":
-        authorization = _authorization_for(config, capacity, "joint", authorization_receipt)
-    elif authorization_receipt is not None:
-        raise RuntimeError("LoRA positive control accepts no branch authorization")
-    else:
-        authorization = None
-    _, manifest, data_manifest_sha256 = _load_data_manifest(
-        config, content_splits=set()
-    )
-    tokenizer, wrapper, setup = _build_new(
-        config, capacity=capacity, model_seed=model_seed,
-        initialization_bundle=initialization_bundle,
-    )
-    setup_authorization = (
-        _lineage(authorization_receipt, authorization)
-        if authorization_receipt and authorization else None
-    )
-    _require_setup_binding(
-        g0, capacity=capacity, model_seed=model_seed,
-        data_manifest_sha256=data_manifest_sha256,
-        live_setup=setup, label=f"{capacity} G0",
-        expected_setup_authorization=setup_authorization,
-    )
-    oracle_accuracy = _oracle_readout_control(wrapper, config)
-    min_oracle = float(config["training"]["positive_control"]["min_oracle_readout_accuracy"])
-    if oracle_accuracy < min_oracle:
-        raise RuntimeError(f"oracle-coded readout control failed: {oracle_accuracy} < {min_oracle}")
-    shared_state, _ = load_initialization_bundle(config, model_seed, initialization_bundle)
-    wrapper.load_extra_state_dict(shared_state)
-    rows, control_rows_receipt = _positive_control_rows(config, manifest)
-    wrapper.train()
-    adaptation_parameters, common_parameters = _parameter_groups(wrapper)
-    optimizer = _build_optimizer(
-        adaptation_parameters,
-        common_parameters,
-        learning_rate=float(config["training"]["learning_rate"]),
-        weight_decay=0.0,
-    )
-    updates = int(config["training"]["positive_control"]["updates"])
-    for update in range(1, updates + 1):
-        row = rows[(update - 1) % len(rows)]
-        k = int(row["depth"])
-        batch = _encode_row(tokenizer, row, config, k=k, device=torch.device("cuda"))
-        optimizer.zero_grad(set_to_none=True)
-        wrapper.adaptation.begin_microbatch(
-            microbatch_dropout_seed(model_seed, update, str(row["id"]), k)
+    g0: dict[str, Any] | None = None
+    authorization: dict[str, Any] | None = None
+    data_manifest_sha256: str | None = None
+    setup: dict[str, Any] | None = None
+    control_rows_receipt: dict[str, Any] | None = None
+    oracle_accuracy: float | None = None
+    completed_updates = 0
+    completed_microbatches = 0
+    failure_stage = "receipt_preflight"
+    diagnostics: dict[str, Any] = {
+        "fixed_probe_steps": [],
+        "evaluations": [],
+        "parameter_probes": [],
+        "optimizer_step_probes": [],
+        "dropout_probes": [],
+        "completed_updates": 0,
+        "completed_microbatches": 0,
+    }
+    wrapper: StateLoopModel | None = None
+    try:
+        g0 = _read_receipt(
+            model_smoke_receipt, config, statuses={"MODEL_SMOKE_PASS"},
+            phases={f"{capacity}_g0"}, label=f"{capacity} G0",
         )
-        with torch.autocast("cuda", dtype=torch.bfloat16):
-            model_output = _forward(wrapper, batch, k=k, compute_answer=False)
-            loss = _objective_loss(model_output, config, "state_only")
-        loss.backward()
-        control_dropout = wrapper.adaptation.end_microbatch()
-        expected_control_calls = (k - 1) * int(
-            config["architecture"]["adaptation"][capacity]["expected_targets"]
+        failure_stage = "branch_authorization"
+        if capacity == "fullrank":
+            authorization = _authorization_for(
+                config, capacity, "joint", authorization_receipt
+            )
+        elif authorization_receipt is not None:
+            raise RuntimeError("LoRA positive control accepts no branch authorization")
+        failure_stage = "data_manifest"
+        _, manifest, data_manifest_sha256 = _load_data_manifest(
+            config, content_splits=set()
+        )
+        failure_stage = "model_setup"
+        tokenizer, wrapper, setup = _build_new(
+            config, capacity=capacity, model_seed=model_seed,
+            initialization_bundle=initialization_bundle,
+        )
+        setup_authorization = (
+            _lineage(authorization_receipt, authorization)
+            if authorization_receipt and authorization else None
+        )
+        _require_setup_binding(
+            g0, capacity=capacity, model_seed=model_seed,
+            data_manifest_sha256=data_manifest_sha256,
+            live_setup=setup, label=f"{capacity} G0",
+            expected_setup_authorization=setup_authorization,
+        )
+        failure_stage = "oracle_readout"
+        oracle_accuracy = _oracle_readout_control(wrapper, config)
+        min_oracle = float(
+            config["training"]["positive_control"]["min_oracle_readout_accuracy"]
+        )
+        if oracle_accuracy < min_oracle:
+            raise RuntimeError(
+                f"oracle-coded readout control failed: {oracle_accuracy} < {min_oracle}"
+            )
+
+        # The oracle is a readout-only diagnostic. Reopen the seed-matched
+        # shared tensors so the actual control starts at the registered init.
+        shared_state, _ = load_initialization_bundle(
+            config, model_seed, initialization_bundle
+        )
+        wrapper.load_extra_state_dict(shared_state)
+        wrapper.zero_grad(set_to_none=True)
+        rows, control_rows_receipt = _positive_control_rows(config, manifest)
+        initial_trainable = _trainable_receipt(wrapper)
+        if initial_trainable != setup["trainable_parameters"]:
+            raise RuntimeError("positive-control oracle reset did not restore shared initialization")
+        delta_baseline = _parameter_delta_baseline(wrapper)
+
+        training = config["training"]
+        updates = int(training["positive_control"]["updates"])
+        accumulation = int(training["gradient_accumulation"])
+        schedule = _positive_control_schedule(rows, updates, accumulation, model_seed)
+        total_microbatches = updates * accumulation
+        if len(schedule) != total_microbatches:
+            raise RuntimeError("positive-control schedule length changed")
+        probe_steps = _positive_control_probe_steps(updates)
+        dropout_probe_indices = {1, max(1, total_microbatches // 2), total_microbatches}
+        diagnostics.update(
+            {
+                "fixed_probe_steps": list(probe_steps),
+                "geometry": {
+                    "rows": len(rows),
+                    "optimizer_updates": updates,
+                    "gradient_accumulation": accumulation,
+                    "singleton_microbatches": total_microbatches,
+                    "loss_divisor": accumulation,
+                    "optimizer_zero_grad_calls": updates + 1,
+                    "adaptation_clip_calls": updates,
+                    "common_state_clip_calls": updates,
+                    "optimizer_step_calls": updates,
+                    "early_stopping": False,
+                    "checkpoint_selection": False,
+                },
+                "row_order_sha256": hashlib.sha256().hexdigest(),
+                "dropout_schedule_sha256": hashlib.sha256().hexdigest(),
+                "optimizer_steps_sha256": hashlib.sha256().hexdigest(),
+            }
+        )
+        adaptation_parameters, common_parameters = _parameter_groups(wrapper)
+        base_trainable_parameters = sum(
+            parameter.numel()
+            for name, parameter in wrapper.named_parameters()
+            if name.startswith("base_model.") and parameter.requires_grad
+        )
+        if base_trainable_parameters != 0:
+            raise RuntimeError("positive-control base model has trainable parameters")
+        optimizer = _build_optimizer(
+            adaptation_parameters,
+            common_parameters,
+            learning_rate=float(training["learning_rate"]),
+            weight_decay=0.0,
+        )
+        if [group.get("group_name") for group in optimizer.param_groups] != [
+            "adaptation", "common_state"
+        ]:
+            raise RuntimeError("positive-control optimizer group order changed")
+        wrapper.train()
+        optimizer.zero_grad(set_to_none=True)
+        order_digest = hashlib.sha256()
+        dropout_digest = hashlib.sha256()
+        optimizer_digest = hashlib.sha256()
+        exposures = {str(row["id"]): 0 for row in rows}
+        depth_exposures = {str(depth): 0 for depth in map(int, training["positive_control"]["depths"])}
+        optimizer_probe_steps = set(probe_steps) - {0}
+        minimum_clip_scales = {"adaptation": 1.0, "common_state": 1.0}
+
+        def record_probe(step: int) -> None:
+            before_norms = _parameter_norm_receipt(wrapper)
+            before_deltas = _parameter_delta_norm_receipt(wrapper, delta_baseline)
+            intact = _evaluate_positive_control(
+                wrapper, tokenizer, rows, config, capacity=capacity,
+                model_seed=model_seed, probe_step=step, adaptation_enabled=True,
+            )
+            disabled = _evaluate_positive_control(
+                wrapper, tokenizer, rows, config, capacity=capacity,
+                model_seed=model_seed, probe_step=step, adaptation_enabled=False,
+            )
+            after_norms = _parameter_norm_receipt(wrapper)
+            after_deltas = _parameter_delta_norm_receipt(wrapper, delta_baseline)
+            if before_norms != after_norms or before_deltas != after_deltas:
+                raise RuntimeError("positive-control diagnostic changed trainable parameters")
+            diagnostics["evaluations"].extend((intact, disabled))
+            diagnostics["parameter_probes"].append(
+                {
+                    "step": step,
+                    "parameter_norms": before_norms,
+                    "parameter_delta_norms": before_deltas,
+                    "diagnostic_parameter_state_unchanged": True,
+                }
+            )
+
+        failure_stage = "initial_diagnostics"
+        record_probe(0)
+        failure_stage = "state_path_overfit"
+        for update in range(1, updates + 1):
+            totals = {"objective_loss": 0.0, "state_loss": 0.0, "fixed_point_loss": 0.0}
+            for _ in range(accumulation):
+                event = schedule[completed_microbatches]
+                row = rows[int(event["row_index"])]
+                k = int(row["depth"])
+                batch = _encode_row(
+                    tokenizer, row, config, k=k, device=torch.device("cuda")
+                )
+                dropout_seed = int(event["dropout_seed"])
+                capture = int(event["microbatch_index"]) in dropout_probe_indices
+                wrapper.adaptation.begin_microbatch(
+                    dropout_seed, capture_masks=capture
+                )
+                with torch.autocast("cuda", dtype=torch.bfloat16):
+                    model_output = _forward(
+                        wrapper, batch, k=k, compute_answer=False
+                    )
+                    objective_loss = _objective_loss(
+                        model_output, config, "state_only"
+                    )
+                    scaled_loss = objective_loss / accumulation
+                losses = {
+                    "objective_loss": float(objective_loss.detach().float().cpu()),
+                    "state_loss": float(model_output.state_loss.detach().float().cpu()),
+                    "fixed_point_loss": float(
+                        model_output.fixed_point_loss.detach().float().cpu()
+                    ),
+                }
+                if not all(math.isfinite(value) for value in losses.values()):
+                    raise RuntimeError(
+                        f"nonfinite positive-control loss at microbatch "
+                        f"{event['microbatch_index']}"
+                    )
+                scaled_loss.backward()
+                dropout_receipt = wrapper.adaptation.end_microbatch()
+                expected_calls = (k - 1) * int(
+                    config["architecture"]["adaptation"][capacity]["expected_targets"]
+                )
+                if (
+                    dropout_receipt["calls"] != expected_calls
+                    or dropout_receipt["cycles"] != k - 1
+                    or not dropout_receipt["cycle_order_identical"]
+                    or not dropout_receipt["each_cycle_exact_target_set"]
+                ):
+                    raise RuntimeError("positive-control adaptation schedule changed")
+                order_event = {
+                    key: event[key]
+                    for key in (
+                        "optimizer_step", "microbatch_in_step", "microbatch_index",
+                        "row_index", "id", "k",
+                    )
+                }
+                order_digest.update(
+                    json.dumps(
+                        order_event, sort_keys=True, separators=(",", ":")
+                    ).encode("utf-8") + b"\n"
+                )
+                dropout_event = {
+                    **order_event,
+                    "dropout_seed": dropout_seed,
+                    "calls": dropout_receipt["calls"],
+                    "call_manifest_sha256": dropout_receipt["call_manifest_sha256"],
+                }
+                dropout_digest.update(
+                    json.dumps(
+                        dropout_event, sort_keys=True, separators=(",", ":")
+                    ).encode("utf-8") + b"\n"
+                )
+                if capture:
+                    diagnostics["dropout_probes"].append(
+                        {**dropout_event, "mask_sha256": dropout_receipt["mask_sha256"]}
+                    )
+                exposures[str(row["id"])] += 1
+                depth_exposures[str(k)] += 1
+                completed_microbatches += 1
+                diagnostics["completed_microbatches"] = completed_microbatches
+                diagnostics["row_order_sha256"] = order_digest.hexdigest()
+                diagnostics["dropout_schedule_sha256"] = dropout_digest.hexdigest()
+                diagnostics["row_exposures"] = dict(sorted(exposures.items()))
+                diagnostics["depth_exposures"] = dict(sorted(depth_exposures.items()))
+                for name, value in losses.items():
+                    totals[name] += value / accumulation
+
+            gradient_probe = _gradient_receipt(wrapper) if update in optimizer_probe_steps else None
+            if gradient_probe is not None:
+                required_groups = ("adaptation", "initializer", "step", "sufficiency", "damping")
+                if gradient_probe["base_gradient_tensors"] != 0 or any(
+                    gradient_probe[name]["tensors"] == 0
+                    or gradient_probe[name]["with_gradient"] != gradient_probe[name]["tensors"]
+                    or gradient_probe[name]["finite"] != gradient_probe[name]["tensors"]
+                    for name in required_groups
+                ):
+                    raise RuntimeError("positive-control gradient probe is incomplete or nonfinite")
+            adaptation_norm = torch.nn.utils.clip_grad_norm_(
+                adaptation_parameters, float(training["adaptation_gradient_clip"])
+            )
+            common_norm = torch.nn.utils.clip_grad_norm_(
+                common_parameters, float(training["common_gradient_clip"])
+            )
+            adaptation_norm_value = float(adaptation_norm.detach().float().cpu())
+            common_norm_value = float(common_norm.detach().float().cpu())
+            if (
+                not math.isfinite(adaptation_norm_value)
+                or not math.isfinite(common_norm_value)
+                or adaptation_norm_value <= 0.0
+                or common_norm_value <= 0.0
+            ):
+                raise RuntimeError(f"invalid positive-control gradient norm at update {update}")
+            optimizer_event = {
+                "step": update,
+                "microbatch_start": (update - 1) * accumulation + 1,
+                "microbatch_end": update * accumulation,
+                **totals,
+                "adaptation_preclip_gradient_norm": adaptation_norm_value,
+                "adaptation_applied_clip_scale": _clip_scale(
+                    adaptation_norm_value, float(training["adaptation_gradient_clip"])
+                ),
+                "common_state_preclip_gradient_norm": common_norm_value,
+                "common_state_applied_clip_scale": _clip_scale(
+                    common_norm_value, float(training["common_gradient_clip"])
+                ),
+                "adaptation_learning_rate": float(optimizer.param_groups[0]["lr"]),
+                "common_state_learning_rate": float(optimizer.param_groups[1]["lr"]),
+                "microbatches": accumulation,
+                "adaptation_gradient_finite": True,
+                "common_state_gradient_finite": True,
+                "base_trainable_parameters": base_trainable_parameters,
+                "gradient_probe": gradient_probe,
+            }
+            if (
+                optimizer_event["adaptation_learning_rate"]
+                != float(training["learning_rate"])
+                or optimizer_event["common_state_learning_rate"]
+                != float(training["learning_rate"])
+            ):
+                raise RuntimeError("positive-control constant learning rate changed")
+            optimizer_digest.update(
+                json.dumps(
+                    optimizer_event, sort_keys=True, separators=(",", ":")
+                ).encode("utf-8") + b"\n"
+            )
+            minimum_clip_scales["adaptation"] = min(
+                minimum_clip_scales["adaptation"],
+                optimizer_event["adaptation_applied_clip_scale"],
+            )
+            minimum_clip_scales["common_state"] = min(
+                minimum_clip_scales["common_state"],
+                optimizer_event["common_state_applied_clip_scale"],
+            )
+            optimizer.step()
+            optimizer.zero_grad(set_to_none=True)
+            completed_updates = update
+            diagnostics["completed_updates"] = completed_updates
+            diagnostics["optimizer_steps_sha256"] = optimizer_digest.hexdigest()
+            diagnostics["minimum_applied_clip_scales"] = minimum_clip_scales
+            if update in optimizer_probe_steps:
+                diagnostics["optimizer_step_probes"].append(optimizer_event)
+                record_probe(update)
+
+        failure_stage = "final_optimizer_audit"
+        if completed_updates != updates or completed_microbatches != total_microbatches:
+            raise RuntimeError("positive-control training geometry was incomplete")
+        exposure_values = sorted(exposures.values())
+        if exposure_values[-1] - exposure_values[0] > 1:
+            raise RuntimeError("positive-control row-cycle exposure imbalance changed")
+        if updates == 256 and accumulation == 16 and len(rows) == 48:
+            if exposure_values.count(85) != 32 or exposure_values.count(86) != 16:
+                raise RuntimeError("confirmatory positive-control row exposures changed")
+            if depth_exposures != {"2": 1368, "3": 1368, "4": 1360}:
+                raise RuntimeError("confirmatory positive-control depth exposures changed")
+        if len(diagnostics["dropout_probes"]) != len(dropout_probe_indices):
+            raise RuntimeError("positive-control dropout probes are incomplete")
+        optimizer_state = optimizer_state_receipt(
+            optimizer,
+            delta_parameters=adaptation_parameters,
+            allowed_missing_parameters=[wrapper.aggregate_logit],
         )
         if (
-            control_dropout["calls"] != expected_control_calls
-            or control_dropout["cycles"] != k - 1
-            or not control_dropout["cycle_order_identical"]
-            or not control_dropout["each_cycle_exact_target_set"]
+            not optimizer_state["delta_states_complete"]
+            or not optimizer_state["all_required_group_states_complete_and_finite"]
         ):
-            raise RuntimeError("positive-control adaptation schedule changed")
-        torch.nn.utils.clip_grad_norm_(
-            adaptation_parameters, float(config["training"]["adaptation_gradient_clip"])
+            raise RuntimeError("positive-control optimizer state is incomplete")
+        final_trainable = _trainable_receipt(wrapper)
+        if final_trainable["values_sha256"] == initial_trainable["values_sha256"]:
+            raise RuntimeError("positive-control trainable tensors did not change")
+        final_parameter_deltas = _parameter_delta_norm_receipt(wrapper, delta_baseline)
+        if (
+            final_parameter_deltas["adaptation_output"]["l2_delta_norm"] <= 0.0
+            or final_parameter_deltas["common_state"]["l2_delta_norm"] <= 0.0
+        ):
+            raise RuntimeError("positive-control required parameter groups did not move")
+        diagnostics.update(
+            {
+                "optimizer_state": optimizer_state,
+                "initial_trainable_parameters": initial_trainable,
+                "final_trainable_parameters": final_trainable,
+                "final_parameter_delta_norms": final_parameter_deltas,
+                "parameter_values_changed": True,
+            }
         )
-        torch.nn.utils.clip_grad_norm_(
-            common_parameters, float(config["training"]["common_gradient_clip"])
+        final_intact = next(
+            item for item in diagnostics["evaluations"]
+            if item["step"] == updates and item["adaptation_mode"] == "intact"
         )
-        optimizer.step()
-    wrapper.eval()
-    correct = 0
-    with torch.no_grad():
-        for row in rows:
-            k = int(row["depth"])
-            batch = _encode_row(tokenizer, row, config, k=k, device=torch.device("cuda"))
-            with torch.autocast("cuda", dtype=torch.bfloat16):
-                model_output = _forward(wrapper, batch, k=k, compute_answer=False)
-            correct += int(
-                (
-                    model_output.node_logits[:, -1].argmax(-1)
-                    == batch["state_targets"]["node"][:, -1]
-                ).item()
-                and (
-                    model_output.phase_logits[:, -1].argmax(-1)
-                    == batch["state_targets"]["phase"][:, -1]
-                ).item()
-                and (
-                    model_output.checksum_logits[:, -1].argmax(-1)
-                    == batch["state_targets"]["checksum"][:, -1]
-                ).item()
+        overfit_accuracy = float(final_intact["overall"]["joint_final_accuracy"])
+        threshold = float(
+            training["positive_control"]["min_overfit_final_joint_accuracy"]
+        )
+        failure_stage = "fixed_final_overfit_gate"
+        if overfit_accuracy < threshold:
+            raise RuntimeError(
+                f"tiny state-path overfit failed: {overfit_accuracy} < {threshold}"
             )
-    overfit_accuracy = correct / len(rows)
-    threshold = float(
-        config["training"]["positive_control"]["min_overfit_final_joint_accuracy"]
-    )
-    if overfit_accuracy < threshold:
-        raise RuntimeError(f"tiny state-path overfit failed: {overfit_accuracy} < {threshold}")
-    receipt = _with_identity({
-        "schema_version": 1,
-        "status": "POSITIVE_CONTROL_PASS",
-        **_identity(config, phase=f"{capacity}_positive_control"),
-        "capacity": capacity,
-        "model_seed": int(model_seed),
-        "data_manifest_sha256": data_manifest_sha256,
-        "g0_lineage": _lineage(model_smoke_receipt, g0),
-        "branch_authorization": _lineage(authorization_receipt, authorization)
-        if authorization_receipt and authorization else None,
-        "shared_initialization": setup["shared_initialization"],
-        "setup": setup,
-        "control_rows": control_rows_receipt,
-        "oracle_readout_accuracy": oracle_accuracy,
-        "overfit_rows": len(rows),
-        "overfit_updates": updates,
-        "overfit_final_joint_accuracy": overfit_accuracy,
-        "scientific_evidence": False,
-    })
-    _write_json(output, receipt)
+        receipt = _with_identity({
+            "schema_version": 1,
+            "status": "POSITIVE_CONTROL_PASS",
+            **_identity(config, phase=f"{capacity}_positive_control"),
+            "capacity": capacity,
+            "model_seed": int(model_seed),
+            "data_manifest_sha256": data_manifest_sha256,
+            "g0_lineage": _lineage(model_smoke_receipt, g0),
+            "branch_authorization": _lineage(authorization_receipt, authorization)
+            if authorization_receipt and authorization else None,
+            "shared_initialization": setup["shared_initialization"],
+            "setup": setup,
+            "control_rows": control_rows_receipt,
+            "oracle_readout_accuracy": oracle_accuracy,
+            "overfit_rows": len(rows),
+            "overfit_updates": updates,
+            "overfit_gradient_accumulation": accumulation,
+            "overfit_microbatches": total_microbatches,
+            "overfit_final_joint_accuracy": overfit_accuracy,
+            "overfit_final_joint_correct": int(
+                final_intact["overall"]["terminal_correct_counts"]["joint"]
+            ),
+            "training_diagnostics": diagnostics,
+            "authorizes_training": True,
+            "authorizes_result_training": True,
+            "benchmark_files_read": 0,
+            "result_payloads_opened": [],
+            "sealed_contrast_payloads_opened": [],
+            "scientific_evidence": False,
+        })
+        _write_json(output, receipt)
+    except Exception as exc:
+        failure = {
+            "schema_version": 1,
+            "status": "SETUP_CONTROL_FAILED",
+            **_identity(config, phase=f"{capacity}_positive_control"),
+            "capacity": capacity,
+            "model_seed": int(model_seed),
+            "data_manifest_sha256": data_manifest_sha256,
+            "g0_lineage": _lineage(model_smoke_receipt, g0) if g0 else None,
+            "branch_authorization": _lineage(authorization_receipt, authorization)
+            if authorization_receipt and authorization else None,
+            "shared_initialization": setup["shared_initialization"] if setup else None,
+            "setup": setup,
+            "control_rows": control_rows_receipt,
+            "oracle_readout_accuracy": oracle_accuracy,
+            "failure_stage": failure_stage,
+            "error_type": type(exc).__name__,
+            "error": str(exc),
+            "completed_updates": completed_updates,
+            "completed_microbatches": completed_microbatches,
+            "training_diagnostics": diagnostics,
+            "authorizes_training": False,
+            "authorizes_result_training": False,
+            "benchmark_files_read": 0,
+            "result_payloads_opened": [],
+            "sealed_contrast_payloads_opened": [],
+            "scientific_evidence": False,
+        }
+        if output.exists():
+            raise RuntimeError(
+                "positive-control failure cannot overwrite an existing canonical receipt"
+            ) from exc
+        failure_receipt = _with_identity(failure)
+        mirror = (
+            ROOT / "runs" / "failures"
+            / (
+                f"positive_control_{capacity}_seed{model_seed}_source_"
+                f"{failure_receipt['source_contract_sha256'][:12]}.json"
+            )
+        )
+        if mirror.exists():
+            raise RuntimeError(
+                f"refusing to overwrite positive-control failure mirror: {mirror}"
+            ) from exc
+        _write_json(output, failure_receipt)
+        _atomic_copy(output, mirror)
+        raise
 
 
 def _schedule(step: int, total_steps: int, warmup_fraction: float) -> float:

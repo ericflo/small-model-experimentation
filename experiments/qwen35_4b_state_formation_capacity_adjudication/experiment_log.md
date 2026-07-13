@@ -295,7 +295,69 @@
   Across 48 rows, the failed recipe exposed each row only five or six times. It also persisted no
   losses, per-head metrics, gradient norms, optimizer state, or failure receipt before raising.
 
+## 2026-07-13 — positive-control accumulation correction approved
+
+- Three independent failure reviews found no target, tensor-shape, terminal-index, recurrence,
+  gradient, or scorer defect. The failed setup control made one singleton presentation per optimizer
+  update and omitted the globally frozen accumulation of 16. It therefore made 256 presentations,
+  only five or six per high-entropy row, while preserving 256 optimizer updates.
+- The frozen-boundary ruling permits exactly one narrow correction: the same 48 rows, canonical row
+  hash, seed 73991, 256 optimizer updates, state-only objective, learning rate `2e-4`, weight decay
+  zero, dropout 0.05, clip thresholds, oracle threshold 0.99, final threshold 0.95, initialization,
+  row order, and fixed-final decision now use 16 sequential singleton microbatches per optimizer
+  update. Loss is divided by 16; each group is clipped once; the optimizer steps once; no early stop,
+  selection, or second retune is allowed.
+- The exact 4,096-event schedule gives the first 16 rows 86 exposures, the remaining 32 rows 85, and
+  depth totals 1,368/1,368/1,360. Global indices feed the unchanged dropout-seed preimage. Fixed
+  diagnostics at updates 0, 1, 16, 64, 128, and 256 score intact and adaptation-disabled modes while
+  proving no parameter, train/eval-mode, or CPU/CUDA RNG mutation.
+- Any reached exception now writes canonical and byte-identical tracked `SETUP_CONTROL_FAILED`
+  receipts before re-raising. The receipts deny training and record zero benchmark, result-payload,
+  and sealed-contrast access. Downstream training continues to accept only
+  `POSITIVE_CONTROL_PASS`.
+- The source-bound suite at the archive boundary passed 154/154 tests: 13 focused positive-control tests, eight durable
+  invalidation tests, and 27 static/CLI/provenance tests. Independent code and GPU/runtime audits both
+  give `GO`. This changes setup mechanics only; the frozen scientific design is unchanged.
+
+## 2026-07-13 — source-3baa setup archived after control correction
+
+- Before deletion, the complete source-`3baa7b53…d5c42` setup reopened as exactly 20 files totaling
+  17,775,495 bytes with file-manifest identity
+  `115b9dd5e810cb1bcf88e58a4da366370cbb48c4a1fc1adfcdcb37a5283e1a25` and an empty seal ledger.
+- The durable archive is
+  `large_artifacts/qwen35_4b_state_formation_capacity_adjudication/invalidated_setup/source_3baa7b532d62bae4d9751dfe4be9c6ce314c11ca4524266f4cebea63289d5c42/`.
+  Its tracked mirror is `runs/failures/invalidated_setup_source_3baa7b53.json`, with receipt identity
+  `1daa86e02f7d3f3c612c2f1ec01db89e4967b5b9ce7eb19ba75c752fe1e283aa`. Both receipts and every
+  archived byte were independently rehashed before current setup files were removed.
+- The receipt binds invalidated source `3baa7b53…d5c42` to replacement source
+  `fe82f8cfe13d656a588c8f2766fc5519820edd884c9b855dcf7a16a14af547d5` and to the preserved 0/48
+  failure identity `44397a2e…e8ec7c`. That failure remains outside the archive and unchanged.
+- Current CPU smoke, data manifest, access ledger, initialization bundles, and G0 receipt are absent
+  by design. No sealed payload was decompressed during archival; the archived ledger has `events: []`.
+  No positive-control pass or result artifact exists.
+
+## 2026-07-13 — post-archive directory cleanup hardened
+
+- The first repository gate after archival stopped because successful deletion left empty
+  `runs/cpu_smoke/` and `runs/setup/` directories on the local filesystem. Git cannot transport empty
+  directories, so CI would have observed a different tree. The archive itself and both receipts
+  remained exact.
+- Adversarial follow-up reproduced partial deletion that could not resume and symlinked canonical
+  roots that could redirect cleanup. The final helper uses the immutable archive receipt as its
+  journal, verifies archive-only recovery before recreating the byte-identical tracked receipt,
+  accepts every live source only as exact or absent, resumes unlink/`rmdir`/fsync interruption, and
+  rejects unknown or tampered state, receipt/archive mismatch, special entries, and symlinks in every
+  canonical root, ancestor, or evidence leaf.
+- Twenty-five invalidation/recovery tests exercise those states. The full source-bound suite passes
+  171/171, both independent recovery re-audits give `GO`, and a real completed replay leaves the
+  20-file archive plus both receipt bytes and mtimes unchanged.
+- No setup artifact was created under either intermediate post-archive source. The final source
+  contract for regeneration is
+  `1d1368cf064689322d9df7f345e67b026cecccc32d3a7b7514b82f253d434b0a`.
+
 ## Current authorization
 
-Execution is retracted pending adversarial review of a fail-closed positive-control correction and
-source-bound invalidation. No positive control retry, later-seed G0, or result training is authorized.
+Setup regeneration is authorized only under source contract
+`1d1368cf064689322d9df7f345e67b026cecccc32d3a7b7514b82f253d434b0a`, followed by seed-7411 G0 and
+the corrected LoRA positive control. No later-seed G0 or result training is authorized until that
+control passes canonically.

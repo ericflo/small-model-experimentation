@@ -19,6 +19,7 @@ SOURCE_CONTRACT_VERSION = 5
 CONFIRMATORY_CONFIG_SHA256 = "eeb4e828526f750dce1258bcc91d03114c80688d300112e03d18c9d911489393"
 SOURCE_CONTRACT_FILES = (
     "scripts/archive_failed_attempt.py",
+    "scripts/archive_invalidated_setup.py",
     "scripts/run.py",
     "reports/implementation_review.md",
     "src/__init__.py",
@@ -35,6 +36,7 @@ SOURCE_CONTRACT_FILES = (
     "src/substrate.py",
     "tests/__init__.py",
     "tests/test_archive_failed_attempt.py",
+    "tests/test_archive_invalidated_setup.py",
     "tests/test_analysis.py",
     "tests/test_config.py",
     "tests/test_data_parity.py",

@@ -3,9 +3,18 @@
 ## Status
 
 **In progress; no scientific result exists.** Preregistration, adversarial design review,
-implementation review, 130/130 local tests, and setup-only CPU smoke are complete. The immutable
-design receipt and all live setup gates remain pending. No model-bearing setup receipt, training
-checkpoint, evaluation row, or terminal analysis from this directory should be cited as evidence.
+implementation review, and the frozen design are complete. The corrected setup-control source passes
+171/171 local tests and independent code and GPU/runtime review. Every setup artifact from source
+`3baa7b53…d5c42` is durably archived; no current CPU smoke, data manifest, initialization bundle, G0,
+or positive-control pass exists. No training checkpoint, evaluation row, or terminal analysis from
+this directory should be cited as scientific evidence.
+
+Under the invalidated source, seed 7411 passed LoRA G0 and then scored 0/48 on the setup-only control.
+The control had omitted the globally frozen accumulation of 16, presenting only one singleton row per
+optimizer update. The corrected path retains 256 optimizer updates and every explicit control value,
+but uses 16 loss-scaled singleton microbatches per update and records fixed diagnostics. The prior miss
+is preserved as mechanics history only. Setup must now be recreated under source `1d1368cf…434b0a`,
+then seed-7411 G0 and the corrected control must pass before any result-bearing arm is authorized.
 
 ## Why this experiment exists
 

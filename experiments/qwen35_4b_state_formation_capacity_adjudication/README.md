@@ -1,42 +1,34 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · frozen design unchanged; seed-7411 LoRA G0 passes durably; its fixed positive control stopped at 0/48; no result run is authorized
+**Status:** in-progress · since 2026-07-13 · frozen design unchanged; corrected setup-control source is GO; source-`3baa7b53` setup archived; regeneration pending; no result run is authorized
 
 ## Current status
 
 This is the canonical fresh adjudication of the unresolved LoRA-capacity question from
 `qwen35_4b_state_carry_vs_state_bag`. It is not a continuation of either prior checkpoint.
 Preregistration, adversarial design review, implementation review, and the frozen scientific design
-are complete. The first seed-7411 LoRA G0 loaded only the pinned Qwen snapshot, then stopped before
-wrapper construction or any mechanics probe because the pinned runtime drops the outer commit hash
-when it derives the Qwen text config. No sealed contrast was opened, no canonical G0 receipt was
-written, and no positive control, result training, evaluation, or scientific analysis ran. The
-source-bound correction records and commit-verifies every config/tokenizer/index/shard path through one
-pinned snapshot, forces local-only safetensors loading, and passed its independent implementation
-review. The prior-source setup is preserved as invalidated history. CPU smoke,
-all seven procedural splits, the empty contrast-access ledger, and all three common initialization
-bundles were regenerated under source digest `9fd420f5…614fb` and independently reopened. The retry
-then passed every transient G0 check, including snapshot proof and PEFT parity, but failed before
-durable receipt creation because a local state-output tensor had shadowed the canonical output path.
-That is mechanics evidence only and authorizes nothing. The minimal rename has a regression test, and
-an independent scan found no analogous destination shadow in any other stage. The complete
-source-`9fd420f5` setup is preserved in a second invalidated archive. The audit also caught a newline
-error in all four hand-authored historical receipt identities; the identities are corrected and now
-covered by an automatic corpus-wide check. The corrected source passes 135/135 tests. CPU smoke, all
-seven deterministic splits, a new empty seal ledger, and all three common-state bundles are now
-regenerated under source contract `3baa7b53…d5c42` and reopen exactly. Validation reopened 15,072
-non-contrast rows and zero sealed rows. Seed 7411 now has a canonical `MODEL_SMOKE_PASS` receipt with
-runtime identity `e7394bcf…3735`.
-It proves exact pinned-snapshot loading, 62 targets and 16,232,448 LoRA parameters, both PEFT parity
-regimes, K=1 and zero-function exactness, finite nonzero gradients to every required recurrent and
-joint group, finite optimizer state, a finite K=12 forward, exact checkpoint restoration, and 35.63
-GiB free afterward.
-The seal ledger remains byte-unchanged with zero events. The subsequent fixed 256-update positive
-control completed but scored 0/48 exact terminal triples against the 0.95 gate. No canonical pass
-receipt was created. The scorer is shape- and target-aligned; review instead found that the control
-used one row per optimizer update and ignored the configured accumulation of 16, so each row appeared
-only five or six times. This is a preserved setup failure, not evidence about LoRA capacity. No result
-training has started.
+are complete. Under source `3baa7b53…d5c42`, seed 7411 passed LoRA G0, then its 256-update setup
+control scored 0/48 exact terminal triples. Review found that the control had presented one singleton
+row per optimizer update and omitted the globally frozen accumulation of 16, so each high-entropy row
+appeared only five or six times. The scorer, targets, recurrence, gradients, and fixed-final gate were
+aligned. The miss is therefore preserved as a setup failure, not evidence about LoRA capacity.
+
+The source correction keeps the same 48 rows, 256 optimizer updates, seed, state-only objective,
+learning rate, dropout, thresholds, initialization, and row order. It now applies the frozen 16-way
+accumulation: 4,096 indexed singleton presentations, loss divided by 16, one groupwise clip and one
+optimizer step per update. Fixed probes record intact and adaptation-disabled metrics without changing
+parameters, mode, or random streams. Any reached failure writes a canonical receipt plus an identical
+tracked mirror and still denies result training. The complete source-bound suite passes 171/171, and
+independent code and GPU/runtime audits both give `GO`.
+
+Every setup artifact tied to `3baa7b53…d5c42` is now preserved in a verified 20-file archive whose
+receipt identity is `1daa86e…e283aa`. Its seal ledger has zero events. The current setup paths are
+intentionally empty. A post-archive repository gate caught and closed one transport-only cleanup gap:
+the helper now durably removes source directories only when they are empty. No setup artifact was
+created under either intermediate post-archive source. Current setup must be recreated under final
+source `1d1368cf…434b0a` before seed-7411 G0 and the corrected control can run again. The earlier
+G0 pass and 0/48 control miss remain historical mechanics records only. No result payload has been
+opened, no result training has started, and no sealed contrast has been scored.
 
 ## Research program and prior anchors
 

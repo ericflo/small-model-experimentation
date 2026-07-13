@@ -4834,9 +4834,9 @@
   {
     "file_counts": {
       ".csv": 1,
-      ".json": 13,
+      ".json": 7,
       ".md": 11,
-      ".py": 29,
+      ".py": 31,
       ".yaml": 4,
       "[none]": 1
     },
@@ -4849,7 +4849,7 @@
       "structured_execution_and_compilers"
     ],
     "source_track": "new",
-    "summary": "This is the canonical fresh adjudication of the unresolved LoRA-capacity question from `qwen35_4b_state_carry_vs_state_bag`. It is not a continuation of either prior checkpoint. Preregistration, adversarial design review, implementation review, and the frozen scientific design are complete. The first seed-7411 LoRA G0 loaded only the pinned Qwen snapshot, then stopped before wrapper construction or any mechanics probe because the pinned runtime drops the outer commit hash when it derives the Qwen text config. No sealed contrast was opened, no canonical G0 receipt was written, and no positive control, result training, evaluation, or scientific analysis ran. The source-bound correction records and commit-verifies every config/tokenizer/index/shard path through one pinned snapshot, forces local-only safetensors loading, and passed its independent implementation review. The prior-source setup is preserved as invalidated history. CPU smoke, all seven procedural splits, the empty contrast-access ledger, and all three common initialization bundles were regenerated under source digest `9fd420f5\u2026614fb` and independently reopened. The retry then passed every transient G0 check, including snapshot proof and PEFT parity, but failed before durable receipt creation because a local state-output tensor had shadowed the canonical output path. That is mechanics evidence only and authorizes nothing. The minimal rename has a regression test, and an independent scan found no analogous destination shadow in any other stage. The complete source-`9fd420f5` setup is preserved in a second invalidated archive. The audit also caught a newline error in all four hand-authored historical receipt identities; the identities are corrected and now covered by an automatic corpus-wide check. The corrected source passes 135/135 tests. CPU smoke, all seven deterministic splits, a new empty seal ledger, and all three common-state bundles are now regenerated under source contract `3baa7b53\u2026d5c42` and reopen exactly. Validation reopened 15,072 non-contrast rows and zero sealed rows. Seed 7411 now has a canonical `MODEL_SMOKE_PASS` receipt with runtime identity `e7394bcf\u20263735`. It proves exact pinned-snapshot loading, 62 targets and 16,232,448 LoRA parameters, both PEFT parity regimes, K=1 and zero-function exactness, finite nonzero gradients to every required recurrent and joint group, finite optimizer state, a finite K=12 forward, exact checkpoint restoration, and 35.63 GiB free afterward. The seal ledger remains byte-unchanged with zero events. The subsequent fixed 256-update positive control completed but scored 0/48 exact terminal triples against the 0.95 gate. No canonical pass receipt was created. The scorer is shape- and target-aligned; review instead found that the control used one row per optimizer update and ignored the configured accumulation of 16, so each row appeared only five or six times. This is a preserved setup failure, not evidence about LoRA capacity. No result training has started.",
+    "summary": "This is the canonical fresh adjudication of the unresolved LoRA-capacity question from `qwen35_4b_state_carry_vs_state_bag`. It is not a continuation of either prior checkpoint. Preregistration, adversarial design review, implementation review, and the frozen scientific design are complete. Under source `3baa7b53\u2026d5c42`, seed 7411 passed LoRA G0, then its 256-update setup control scored 0/48 exact terminal triples. Review found that the control had presented one singleton row per optimizer update and omitted the globally frozen accumulation of 16, so each high-entropy row appeared only five or six times. The scorer, targets, recurrence, gradients, and fixed-final gate were aligned. The miss is therefore preserved as a setup failure, not evidence about LoRA capacity.",
     "tags": [
       "latent-state",
       "lora",
@@ -4867,8 +4867,8 @@
       "src",
       "tests"
     ],
-    "total_files": 59,
-    "total_size_bytes": 2320112
+    "total_files": 55,
+    "total_size_bytes": 955242
   },
   {
     "file_counts": {
