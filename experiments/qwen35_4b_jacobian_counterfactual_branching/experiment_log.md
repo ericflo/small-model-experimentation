@@ -42,3 +42,6 @@
 - Fixed by cloning the float before-state before assignment, computing realized
   deltas against it, and making J requested-norm error a mandatory gate. A new
   pushed implementation hash is required before rerun.
+- Corrected implementation was pushed at `802cf1a5`; config now anchors its
+  updated runner/model/test hashes. Smoke 002 is authorized only after this
+  re-anchor commit is pushed.
