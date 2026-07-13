@@ -41,11 +41,13 @@
   its interface. The first materialized-residual successor then ended without
   a durable, authenticated model result: one preflight abort and one terminal
   52-row write-order/EOS-receipt incident. Retire opaque-name timing variants.
-  Resume materialized
-  residuals only in a new experiment with fresh tasks/record IDs/seeds,
+  Resume materialized residuals only in a new experiment with fresh tasks/
+  record IDs/seeds,
   write-before-authentication quarantine, the exact model/tokenizer EOS pair,
   and the already frozen candidate-blind, shuffled, exhaustive, and sampled/
-  logical-token-matched controls.
+  logical-token-matched controls. That identity is now reserved as
+  `qwen35_4b_materialized_residual_sibling_search_fresh_replication`; fresh
+  construction and adversarial review remain the next gates.
 - Measure the exact behavioral quotient at fresh depth 6 before assuming model-guided pruning is economically
   needed; record wall time, memory, physical transitions, coverage, and selector success.
 - If a real search wall appears, test a residualized partial state (feasible parameter domains, materialized

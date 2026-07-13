@@ -1,0 +1,26 @@
+{
+  "benchmark_files_read": [],
+  "decision": "SCAFFOLD_IDENTITY_RESERVED_NO_MODEL_AUTHORIZATION",
+  "experiment_id": "qwen35_4b_materialized_residual_sibling_search_fresh_replication",
+  "fresh_sampling_seed_domains": 1,
+  "fresh_seed_block": [
+    2026072700,
+    2026072701,
+    2026072702,
+    2026072703,
+    2026072704,
+    2026072705,
+    2026072706,
+    2026072707,
+    2026072708,
+    2026072709
+  ],
+  "fresh_task_seed_domains": 1,
+  "model_calls": 0,
+  "model_loads": 0,
+  "parent_experiment": "qwen35_4b_materialized_residual_sibling_search",
+  "parent_incident_sha256": "48ae3f49addc43b435fd5c2b121d57b9498223488a5251999910f56c50e9d4d2",
+  "parent_terminal_started_sha256": "f6aa447b1936fac397a353fc13183f008e31884b5006ed7fc50ac78deed3387a",
+  "request_identity_namespace": "materialized-residual-fresh-replication-v1",
+  "schema_version": 1
+}

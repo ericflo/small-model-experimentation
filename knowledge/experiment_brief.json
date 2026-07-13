@@ -78,6 +78,44 @@
     }
    ]
   },
+  "qwen35_4b_materialized_residual_sibling_search_fresh_replication": {
+   "verdict_tag": "A clean retry identity is reserved; no model run is open",
+   "concept_primer": "The previous test returned one batch of answers but lost them before saving. Its rules forbid drawing that same batch again, so this successor starts with entirely new puzzles and random draws while keeping the scientific comparison unchanged.",
+   "plain_question": "Can concrete intermediate states help the small model finish multi-step rules better than names alone or equally costly ordinary attempts?",
+   "plain_answer": "Still unknown. This page currently records only a new experiment identity, ten fresh seed values, and a transaction rule that saves returned bytes before checking them. No model has been loaded or called for the successor.",
+   "why_it_matters": "Fresh identities prevent a lost batch from being quietly redrawn, while save-before-check prevents another bookkeeping bug from destroying sampled evidence. The scientific treatment and fairness controls are not being relaxed.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Fresh seed values reserved",
+     "value": "10",
+     "sub": "tasks, controls, sampling, and analysis use a new block"
+    },
+    {
+     "label": "Fresh identity domains",
+     "value": "2",
+     "sub": "one for procedural tasks and one for model sampling"
+    },
+    {
+     "label": "Successor model calls",
+     "value": "zero",
+     "sub": "construction and reviews remain pending"
+    },
+    {
+     "label": "Scientific gates changed",
+     "value": "zero",
+     "sub": "only identities and transaction safety change"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "New task and sampling domains exist before any model request",
+     "chart_read": "The first two bars show one newly reserved identity domain each. The final bar stays at zero because this scaffold authorizes no model request.",
+     "chart_takeaway": "The retry has been separated from the terminal parent draw without opening a scientific run."
+    }
+   ]
+  },
   "qwen35_4b_semantic_anchor_coordinate_branching": {
    "verdict_tag": "The late anchor writes names, but the consequence test is invalid",
    "concept_primer": "Imagine pausing a scratchpad, placing a candidate name in a dedicated slot, and copying the model's internal state for a different candidate into that slot. The important test is whether later computation follows the copied candidate—not merely whether the next word changes.",

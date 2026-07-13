@@ -3,14 +3,14 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 13
-- Experiments: 240
+- Experiments: 241
 
 ## Structured Execution And Compilers
 
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 173
+- Assigned experiments: 174
 
 ### Seed Evidence
 
@@ -84,6 +84,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_learned_active_trace_policy` (track-z): [README](../experiments/qwen35_4b_learned_active_trace_policy/README.md)
 - `qwen35_4b_live_tool_dagger` (track-z): [README](../experiments/qwen35_4b_live_tool_dagger/README.md)
 - `qwen35_4b_materialized_residual_sibling_search` (new): [README](../experiments/qwen35_4b_materialized_residual_sibling_search/README.md)
+- `qwen35_4b_materialized_residual_sibling_search_fresh_replication` (new): [README](../experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/README.md)
 - `qwen35_4b_model_in_loop_counterexamples` (track-z): [README](../experiments/qwen35_4b_model_in_loop_counterexamples/README.md)
 - `qwen35_4b_neurosymbolic_repl_substrate` (new): [README](../experiments/qwen35_4b_neurosymbolic_repl_substrate/README.md)
 - `qwen35_4b_oracle_distilled_semantic_verifier` (track-z): [README](../experiments/qwen35_4b_oracle_distilled_semantic_verifier/README.md)
@@ -201,7 +202,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 Turn candidate-pool coverage into deployable decisions under visible evidence.
 
 - Charter: [evidence_conditioned_selection](../research_programs/evidence_conditioned_selection/charter.md)
-- Assigned experiments: 88
+- Assigned experiments: 89
 
 ### Seed Evidence
 
@@ -243,6 +244,7 @@ Turn candidate-pool coverage into deployable decisions under visible evidence.
 - `qwen35_4b_interactive_policy_curriculum` (new): [README](../experiments/qwen35_4b_interactive_policy_curriculum/README.md)
 - `qwen35_4b_long_horizon_answer_potential_sft` (new): [README](../experiments/qwen35_4b_long_horizon_answer_potential_sft/README.md)
 - `qwen35_4b_materialized_residual_sibling_search` (new): [README](../experiments/qwen35_4b_materialized_residual_sibling_search/README.md)
+- `qwen35_4b_materialized_residual_sibling_search_fresh_replication` (new): [README](../experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/README.md)
 - `qwen35_4b_model_in_loop_counterexamples` (track-z): [README](../experiments/qwen35_4b_model_in_loop_counterexamples/README.md)
 - `qwen35_4b_offline_hard_negative_coverage_dpo` (track-z): [README](../experiments/qwen35_4b_offline_hard_negative_coverage_dpo/README.md)
 - `qwen35_4b_oracle_distilled_semantic_verifier` (track-z): [README](../experiments/qwen35_4b_oracle_distilled_semantic_verifier/README.md)
@@ -691,7 +693,7 @@ Stress whether mechanisms transfer across substrates, families, lengths, distrib
 Measure why methods work or fail through attribution, probes, pressure audits, and controlled ablations.
 
 - Charter: [interpretability_and_diagnostics](../research_programs/interpretability_and_diagnostics/charter.md)
-- Assigned experiments: 73
+- Assigned experiments: 74
 
 ### Seed Evidence
 
@@ -724,6 +726,7 @@ Measure why methods work or fail through attribution, probes, pressure audits, a
 - `qwen35_4b_jacobian_transport_control_replication` (new): [README](../experiments/qwen35_4b_jacobian_transport_control_replication/README.md)
 - `qwen35_4b_jacobian_value_transport` (new): [README](../experiments/qwen35_4b_jacobian_value_transport/README.md)
 - `qwen35_4b_materialized_residual_sibling_search` (new): [README](../experiments/qwen35_4b_materialized_residual_sibling_search/README.md)
+- `qwen35_4b_materialized_residual_sibling_search_fresh_replication` (new): [README](../experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/README.md)
 - `qwen35_4b_native_thought_jacobian_value_transport` (new): [README](../experiments/qwen35_4b_native_thought_jacobian_value_transport/README.md)
 - `qwen35_4b_native_thought_seam_budget_ladder` (new): [README](../experiments/qwen35_4b_native_thought_seam_budget_ladder/README.md)
 - `qwen35_4b_opsd_pressure_locality_audit` (track-z): [README](../experiments/qwen35_4b_opsd_pressure_locality_audit/README.md)
@@ -884,7 +887,7 @@ Make the repository itself better at spawning, comparing, validating, and rememb
 Study the native thinking-token budget as a first-class controllable test-time-compute axis for Qwen3.5-4B, which the corpus has universally disabled.
 
 - Charter: [test_time_reasoning_budget](../research_programs/test_time_reasoning_budget/charter.md)
-- Assigned experiments: 22
+- Assigned experiments: 23
 
 ### Assigned Experiments
 
@@ -898,6 +901,7 @@ Study the native thinking-token budget as a first-class controllable test-time-c
 - `qwen35_4b_jacobian_value_transport` (new): [README](../experiments/qwen35_4b_jacobian_value_transport/README.md)
 - `qwen35_4b_long_horizon_answer_potential_sft` (new): [README](../experiments/qwen35_4b_long_horizon_answer_potential_sft/README.md)
 - `qwen35_4b_materialized_residual_sibling_search` (new): [README](../experiments/qwen35_4b_materialized_residual_sibling_search/README.md)
+- `qwen35_4b_materialized_residual_sibling_search_fresh_replication` (new): [README](../experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/README.md)
 - `qwen35_4b_native_thought_seam_budget_ladder` (new): [README](../experiments/qwen35_4b_native_thought_seam_budget_ladder/README.md)
 - `qwen35_4b_overthinking_content_ladder` (new): [README](../experiments/qwen35_4b_overthinking_content_ladder/README.md)
 - `qwen35_4b_recovery_payload_budget_harness` (new): [README](../experiments/qwen35_4b_recovery_payload_budget_harness/README.md)

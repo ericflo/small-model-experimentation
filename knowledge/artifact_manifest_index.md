@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 212
-- Manifest files: 515
+- Experiments with manifests: 213
+- Manifest files: 516
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 64 |
 | `run-data` | 101 |
-| `standard-artifact` | 85 |
+| `standard-artifact` | 86 |
 
 ## Manifests
 
@@ -148,6 +148,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_live_tool_dagger` | `other` | [manifest](../experiments/qwen35_4b_live_tool_dagger/reports/split_manifest.json) |
 | `qwen35_4b_long_horizon_answer_potential_sft` | `standard-artifact` | [manifest](../experiments/qwen35_4b_long_horizon_answer_potential_sft/reports/artifact_manifest.yaml) |
 | `qwen35_4b_materialized_residual_sibling_search` | `standard-artifact` | [manifest](../experiments/qwen35_4b_materialized_residual_sibling_search/reports/artifact_manifest.yaml) |
+| `qwen35_4b_materialized_residual_sibling_search_fresh_replication` | `standard-artifact` | [manifest](../experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/reports/artifact_manifest.yaml) |
 | `qwen35_4b_meta_induction` | `standard-artifact` | [manifest](../experiments/qwen35_4b_meta_induction/reports/artifact_manifest.yaml) |
 | `qwen35_4b_metacognitive_boundary` | `standard-artifact` | [manifest](../experiments/qwen35_4b_metacognitive_boundary/reports/artifact_manifest.yaml) |
 | `qwen35_4b_model_in_loop_counterexamples` | `dataset` | [manifest](../experiments/qwen35_4b_model_in_loop_counterexamples/data/dataset_manifest.json) |

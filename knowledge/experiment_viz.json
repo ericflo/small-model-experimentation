@@ -64,6 +64,35 @@
     }
    ]
   },
+  "qwen35_4b_materialized_residual_sibling_search_fresh_replication": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Fresh identity domains are reserved before model use",
+     "categories": [
+      "task seed domain",
+      "sampling seed domain",
+      "model requests"
+     ],
+     "series": [
+      {
+       "label": "identity-only scaffold receipt",
+       "values": [
+        1,
+        1,
+        0
+       ]
+      }
+     ],
+     "x_label": "pre-run reservation",
+     "y_label": "count",
+     "y_format": "integer",
+     "note": "Administrative/model-free scaffold only. The successor reserves new task and sampling namespaces while authorizing zero model requests; fresh construction and all scientific stages remain pending.",
+     "source": "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/runs/scaffold/summary.json"
+    }
+   ]
+  },
   "qwen35_4b_semantic_anchor_coordinate_branching": {
    "charts": [
     {

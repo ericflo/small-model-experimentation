@@ -1,0 +1,208 @@
+schema_version: 2
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+  dtype: bfloat16
+  backend: vllm
+  vllm_version: 0.24.0+cu129
+
+seeds:
+  common_panel: 2026072700
+  data: 2026072701
+  mechanics: 2026072702
+  qualification: 2026072703
+  confirmation: 2026072704
+  branch_permutation: 2026072705
+  control_derangement: 2026072706
+  surface_folds: 2026072707
+  sample_master: 2026072708
+  bootstrap: 2026072709
+
+data:
+  mechanics_tasks: 24
+  qualification_tasks: 48
+  qualification_shards: 2
+  confirmation_tasks: 192
+  confirmation_shards: 8
+  tasks_per_balance_block: 24
+  visible_examples: 8
+  hidden_examples: 8
+  unlabeled_probe_inputs: 16
+  input_min_length: 4
+  input_max_length: 8
+  common_panel_per_length: 16
+  common_fingerprint_panel_inputs: 80
+  input_value_min: -9
+  input_value_max: 9
+  input_value_distribution: discrete_uniform_iid
+  within_list_duplicates_allowed: true
+  cross_partition_input_disjoint: true
+  max_visible_panels_per_program: 32
+  max_input_draws_per_partition: 10000
+  behavioral_min_depth: 3
+  candidates_per_task: 24
+  selected_siblings: 4
+  live_count_strata:
+    single: [1, 1]
+    double: [2, 2]
+    triple: [3, 3]
+    quad: [4, 4]
+  tasks_per_stratum_per_block:
+    single: 8
+    double: 8
+    triple: 4
+    quad: 4
+  stratum_construction_order: [quad, triple, double, single]
+  invalid_sentinel: INVALID
+  reject_empty_target_states: true
+  operations:
+    parameter_free:
+      - reverse
+      - sort_asc
+      - sort_desc
+      - abs_all
+      - square
+      - negate
+      - running_sum
+      - adjacent_diff
+    add_k: [-3, -2, -1, 1, 2, 3]
+    mul_k: [-2, 2, 3]
+    take_k: [1, 2, 3, 4]
+    rotate_k: [1, 2, 3]
+
+aliases:
+  operations:
+    - A
+    - B
+    - C
+    - D
+    - E
+    - F
+    - G
+    - H
+    - I
+    - J
+    - K
+    - L
+    - M
+    - N
+    - O
+    - P
+    - Q
+    - R
+    - S
+    - T
+    - U
+    - V
+    - W
+    - X
+  viability: [A, B]
+
+generation:
+  temperature: 0.6
+  top_p: 0.95
+  top_k: 20
+  ranking_thinking: "off"
+  ranking_answer_tokens: 1
+  suffix_thinking_budget: 512
+  direct_thinking_budget: 1024
+  suffix_answer_max_tokens: 64
+  direct_answer_max_tokens: 96
+  direct_sample_master_pool_ceiling: 128
+  max_model_len: 4096
+  max_num_seqs: 64
+  max_num_batched_tokens: 16384
+  enable_prefix_caching: false
+  cudagraph_capture_sizes: [1, 2, 4, 8, 16, 32, 64]
+  logprobs_mode: raw_logprobs
+
+mechanics:
+  ranking_finite_score_rate_min: 1.0
+  materialized_live_recall_at_4_min: 0.40
+  materialized_live_hit_at_4_min: 0.65
+  recall_at_4_gain_vs_name_min: 0.10
+  recall_at_4_gain_vs_shuffled_min: 0.10
+  recall_at_4_gain_vs_listwise_min: 0.10
+  recall_at_4_gain_vs_surface_min: 0.05
+  recall_at_4_gain_vs_random_min: 0.15
+  successful_task_support_min: 16
+  live_operation_support_min: 10
+  suffix_parse_rate_min: 0.90
+  suffix_answer_limit_contact_max: 0.05
+  supplied_suffix_visible_execution_min: 0.90
+  materialized_live_suffix_visible_pass_min: 0.35
+  live_suffix_gain_vs_name_min: 0.15
+  live_suffix_gain_vs_shuffled_min: 0.15
+  direct_parse_rate_min: 0.90
+  direct_answer_limit_contact_max: 0.05
+  top4_sampled_tokens_must_be_below_all24: true
+  top4_logical_tokens_must_be_below_all24: true
+
+qualification:
+  suffix_parse_rate_min: 0.90
+  suffix_answer_limit_contact_max: 0.05
+  direct_parse_rate_min: 0.90
+  direct_answer_limit_contact_max: 0.05
+  materialized_selected_accuracy_min: 0.20
+  materialized_proposal_coverage_min: 0.25
+  selected_accuracy_gain_min: 0.05
+  proposal_coverage_gain_min: 0.05
+  selector_capture_min: 0.80
+  shard_gain_min: -0.05
+  direct_pool_exhaustion_allowed: false
+  bootstrap_resamples: 10000
+
+confirmation:
+  suffix_parse_rate_min: 0.90
+  suffix_answer_limit_contact_max: 0.05
+  direct_parse_rate_min: 0.90
+  direct_answer_limit_contact_max: 0.05
+  materialized_selected_accuracy_min: 0.20
+  materialized_proposal_coverage_min: 0.25
+  selected_accuracy_gain_min: 0.10
+  proposal_coverage_gain_min: 0.10
+  selector_capture_min: 0.80
+  block_heterogeneity: report_only
+  primary_comparators:
+    - name_only_all24
+    - shuffled_alignment_all24
+    - direct_sampled_first_over
+    - direct_logical_first_over
+  exact_test: one_sided_mcnemar
+  familywise_alpha: 0.05
+  multiple_comparison_method: holm
+  paired_bootstrap_95_lower_must_exceed: 0.0
+  bootstrap_resamples: 10000
+  power_simulation:
+    trials: 500
+    bootstrap_resamples_per_trial: 1000
+    treatment_accuracy: 0.40
+    comparator_accuracy: 0.20
+    comparator_count: 4
+
+top4_secondary:
+  primary_gate_dependency: none
+  inferential_status: descriptive_operational_only
+  failure_seals: top4_secondary_only
+  qualification:
+    coverage_noninferiority_margin: 0.10
+    coverage_gain_vs_surface_min: 0.05
+    sampled_tokens_must_be_below_all24_each_task: true
+    logical_tokens_must_be_below_all24_each_task: true
+  confirmation:
+    coverage_noninferiority_margin: 0.10
+    coverage_gain_vs_surface_min: 0.05
+    sampled_tokens_must_be_below_all24_each_task: true
+    logical_tokens_must_be_below_all24_each_task: true
+
+boundaries:
+  design:
+    status: scaffold_reserved_pending_adversarial_review
+  cpu_smoke:
+    status: scaffold_identity_only
+  mechanics_implementation:
+    status: absent
+  qualification_implementation:
+    status: absent
+  confirmation_implementation:
+    status: absent
