@@ -1540,15 +1540,27 @@ def analyze_runs(
         (bundle["requirements_training_lock_sha256"] for bundle in bundles),
         _current_requirements_lock_sha256(),
     )
-    sample_more = _sample_more(
-        runs_dir,
-        expected_config,
-        config,
-        expected_data_manifest_sha256=manifest_hash,
-        expected_source_contract_sha256=source_hash,
-        expected_requirements_lock_sha256=requirements_hash,
-    )
-    deployment = _deployment_comparison(bundles, runs_dir, expected_config, config)
+    if pilot:
+        sample_more = {
+            "available": False,
+            "reason": "deployment comparator is prohibited in the pilot phase",
+        }
+        deployment = {
+            "available": False,
+            "reason": "deployment comparator is prohibited in the pilot phase",
+        }
+    else:
+        sample_more = _sample_more(
+            runs_dir,
+            expected_config,
+            config,
+            expected_data_manifest_sha256=manifest_hash,
+            expected_source_contract_sha256=source_hash,
+            expected_requirements_lock_sha256=requirements_hash,
+        )
+        deployment = _deployment_comparison(
+            bundles, runs_dir, expected_config, config
+        )
     gate = config["gates"]
 
     pilot_gate: dict[str, Any] | None = None

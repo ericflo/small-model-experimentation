@@ -100,3 +100,11 @@ No fresh CPU smoke/data generation, model load, GPU call, training, evaluation, 
   Carry/Bag K=1 difference `0.0`, identical 16,800,796-parameter/value receipts, nonzero finite LoRA,
   state, step, and sufficiency gradients in both arms, finite worst-format K=12, and 11.21 GiB peak
   allocation. No scientific claim is licensed; seed-7401 pilot is next.
+- Completed both fixed 300-step seed-7401 pilot trainings and their dedicated evaluations. Training
+  receipts matched exactly. Before a promotion verdict was written, analysis failed closed because
+  `_deployment_comparison` applied the full seed set (7411–7413) to pilot seed 7401. This is an
+  analysis phase-dispatch bug, so the otherwise complete attempt is preserved but invalidated; its
+  chance-like state metrics do not license either a LoRA conclusion or the capacity successor.
+- Fixed pilot analysis to prohibit and skip both deployment/sample-more comparators, and added a
+  synthetic end-to-end pilot regression that would fail if full deployment logic is entered. The
+  source-bound contract requires fresh data, G0, training, and evaluation rather than receipt edits.

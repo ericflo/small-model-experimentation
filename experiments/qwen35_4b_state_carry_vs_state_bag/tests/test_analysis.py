@@ -210,6 +210,58 @@ def evaluation_rows(*, carry: bool) -> list[dict]:
 
 
 class AnalysisTests(unittest.TestCase):
+    def test_pilot_analysis_never_enters_full_deployment_comparator(self) -> None:
+        config = scientific_config()
+        pilot_rows_carry = []
+        pilot_rows_bag = []
+        for row in evaluation_rows(carry=True):
+            converted = dict(row)
+            converted["split"] = (
+                "pilot_joint" if row["split"] == "joint_holdout" else "pilot_depth"
+            )
+            pilot_rows_carry.append(converted)
+        for row in evaluation_rows(carry=False):
+            converted = dict(row)
+            converted["split"] = (
+                "pilot_joint" if row["split"] == "joint_holdout" else "pilot_depth"
+            )
+            pilot_rows_bag.append(converted)
+        with tempfile.TemporaryDirectory() as directory:
+            runs = Path(directory)
+            carry_metadata = checkpoint_metadata(
+                config, arm="carry", seed=7401, pilot=True
+            )
+            bag_metadata = checkpoint_metadata(
+                config, arm="bag", seed=7401, pilot=True
+            )
+            write_evaluation(
+                runs / "pilot_carry",
+                config,
+                metadata=carry_metadata,
+                eval_mode="carry",
+                rows=pilot_rows_carry,
+                pilot=True,
+                swaps=swap_rows(config["substrate"]["pilot_counterfactual_pairs"]),
+            )
+            write_evaluation(
+                runs / "pilot_bag",
+                config,
+                metadata=bag_metadata,
+                eval_mode="bag",
+                rows=pilot_rows_bag,
+                pilot=True,
+            )
+            with (
+                patch("src.analysis.is_confirmatory_config", return_value=True),
+                patch(
+                    "src.analysis._deployment_comparison",
+                    side_effect=AssertionError("pilot entered deployment comparator"),
+                ),
+            ):
+                result = analyze_runs(config, runs, runs / "analysis.json")
+        self.assertEqual(result["verdict"], "PILOT_PROMOTION_READY")
+        self.assertFalse(result["deployment_comparison"]["available"])
+
     def test_reduced_config_cannot_emit_scientific_verdict(self) -> None:
         config = load_config(ROOT / "configs" / "smoke.yaml")
         with tempfile.TemporaryDirectory() as directory:

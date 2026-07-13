@@ -2,10 +2,11 @@
 
 ## Status
 
-`G0_MECHANICS_PASS` / `SETUP_ONLY`: fresh CPU contracts and the complete source-bound corpus pass.
-The pinned `Qwen/Qwen3.5-4B` live smoke also passes exact K=1 parity, both-arm gradient,
-worst-format K=12, parameter-identity, and memory gates. G0 is explicitly non-scientific; no training
-or outcome evaluation has occurred yet.
+`INVALIDATED_PILOT_RETRY_REQUIRED` / `SETUP_ONLY`: the first G0 and both fixed seed-7401 trainings
+completed, but pilot analysis entered the full deployment comparator and rejected seed 7401 before
+writing a verdict. The complete attempt is preserved as operational evidence only. The bug is fixed
+and regression-tested; source binding requires fresh CPU/data/G0/pilot artifacts. No scientific LoRA
+verdict exists yet.
 
 ## Question
 
@@ -13,9 +14,9 @@ Does a serially inherited internal state produce deeper, causally useful represe
 
 ## Result
 
-Not run. The live G0 receipt records mechanics only (`scientific_evidence: false`): K=1 maximum-logit
-error `0.0`, exact Carry/Bag K=1 equality, finite K=12, 11.21 GiB peak allocation, and identical
-16,800,796-parameter trainable receipts. Do not infer a State-Carry advantage from these checks.
+No valid result. The invalidated attempt recorded exact G0 parity and matched training receipts, while
+both arms remained weak and Carry joint-state accuracy was chance-like. Because the registered
+analyzer did not complete, those observations cannot promote, stop, or license the capacity successor.
 
 ## Required Terminal Evidence
 

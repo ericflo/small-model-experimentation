@@ -1,6 +1,7 @@
 # State-Carry Versus State-Bag Counterfactual
 
-**Status: live G0 mechanics passed; seed-7401 LoRA pilot is next. No training result exists yet.**
+**Status: first paired pilot preserved but invalidated by a fail-closed analysis dispatch bug; the
+fixed source-bound G0 and pilot retry are next. No scientific LoRA verdict exists yet.**
 
 ## Research Program
 

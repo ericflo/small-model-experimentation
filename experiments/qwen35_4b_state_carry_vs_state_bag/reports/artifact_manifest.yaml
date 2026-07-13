@@ -1,6 +1,11 @@
 schema_version: 1
 experiment_id: "qwen35_4b_state_carry_vs_state_bag"
 external_artifacts:
+  - name: "invalidated first pilot attempt"
+    storage: "large_artifacts/qwen35_4b_state_carry_vs_state_bag/attempt1_invalid_analysis_dispatch_*"
+    required_for: "audit of the fail-closed pilot/full analysis-dispatch failure; never valid for scientific pooling"
+    checksum: "preserved run/checkpoint/evaluation receipts contain their original source, tensor, and row hashes"
+    regenerate: "do not regenerate or overwrite; the fixed source requires a fresh canonical retry"
   - name: "pilot Carry/Bag checkpoints"
     storage: "large_artifacts/qwen35_4b_state_carry_vs_state_bag/pilot_{carry,bag}_seed7401/"
     required_for: "audit of the independent promotion decision"
