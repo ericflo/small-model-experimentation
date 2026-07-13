@@ -39,15 +39,15 @@ This is a repository-level inventory. Each experiment remains the source of trut
 
 | Extension | Files |
 | --- | ---: |
-| `.json` | 2700 |
+| `.json` | 2720 |
 | `.csv` | 2140 |
-| `.py` | 1780 |
+| `.py` | 1781 |
 | `.md` | 1058 |
 | `.png` | 848 |
-| `.jsonl` | 784 |
+| `.jsonl` | 786 |
 | `.log` | 527 |
-| `.yaml` | 390 |
-| `.gz` | 143 |
+| `.yaml` | 391 |
+| `.gz` | 149 |
 | `.html` | 90 |
 | `.sh` | 19 |
 | `.pt` | 9 |
@@ -59,6 +59,7 @@ This is a repository-level inventory. Each experiment remains the source of trut
 
 | Size MB | File |
 | ---: | --- |
+| 29.5 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_apex_ep.jsonl` |
 | 15.7 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_sharp1024.jsonl` |
 | 14.9 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_apex2.jsonl` |
 | 14.3 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_apex.jsonl` |
@@ -77,6 +78,7 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | 8.1 | `experiments/qwen35_4b_answer_potential_trace_sft/runs/calibration/rollouts.jsonl` |
 | 8.0 | `experiments/qwen35_4b_learned_active_trace_policy/data/policy/policy_train.jsonl` |
 | 8.0 | `experiments/qwen35_4b_inventory_shortlister_training/data/train_slots.jsonl` |
+| 7.6 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_epmastery.jsonl` |
 | 7.5 | `experiments/qwen35_4b_learned_active_trace_policy/data/seed/dsl_train.jsonl` |
 | 7.4 | `experiments/qwen35_4b_active_counterexample_trace_selection/reports/eval/active_ceiling.json` |
 | 7.3 | `experiments/qwen35_4b_learned_active_trace_policy/reports/policy_rows.json` |
@@ -87,5 +89,3 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | 6.6 | `experiments/qwen35_4b_specialist_policy_integration/runs/proxy_eval/incumbent_calibration/episode_rows.jsonl.gz` |
 | 6.4 | `experiments/qwen35_4b_active_counterexample_trace_selection/reports/eval/active_support.json` |
 | 6.4 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_blend2.jsonl` |
-| 6.3 | `experiments/qwen35_4b_interactive_policy_curriculum/data/dagger_train.jsonl` |
-| 6.0 | `experiments/feature_factorized_rule_diversity/data/repair_all.jsonl` |

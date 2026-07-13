@@ -2334,12 +2334,12 @@
   },
   {
     "file_counts": {
-      ".gz": 57,
-      ".json": 235,
-      ".jsonl": 19,
+      ".gz": 63,
+      ".json": 255,
+      ".jsonl": 21,
       ".md": 4,
-      ".py": 35,
-      ".yaml": 6
+      ".py": 36,
+      ".yaml": 7
     },
     "id": "qwen35_4b_gauntlet_frontier",
     "path": "experiments/qwen35_4b_gauntlet_frontier",
@@ -2363,8 +2363,8 @@
       "src",
       "tests"
     ],
-    "total_files": 356,
-    "total_size_bytes": 162939915
+    "total_files": 386,
+    "total_size_bytes": 206720469
   },
   {
     "file_counts": {

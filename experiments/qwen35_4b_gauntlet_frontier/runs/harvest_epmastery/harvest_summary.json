@@ -1,0 +1,191 @@
+{
+  "config": "configs/epmastery.yaml",
+  "smoke": false,
+  "adapter": null,
+  "merged": "../../large_artifacts/qwen35_4b_gauntlet_frontier/merged/apex",
+  "episodes": {
+    "k": 6,
+    "families": {
+      "kilnrite": {
+        "specs": 64,
+        "seconds": 1381.5,
+        "yield": {
+          "kilnrite-L2": {
+            "rollouts": 144,
+            "success": 129,
+            "turns_sum": 743,
+            "forced_close_turns": 20,
+            "total_turns": 743,
+            "mean_score": 0.9542
+          },
+          "kilnrite-L3": {
+            "rollouts": 144,
+            "success": 71,
+            "turns_sum": 1250,
+            "forced_close_turns": 103,
+            "total_turns": 1250,
+            "mean_score": 0.7857
+          },
+          "kilnrite-L4": {
+            "rollouts": 96,
+            "success": 52,
+            "turns_sum": 1064,
+            "forced_close_turns": 79,
+            "total_turns": 1064,
+            "mean_score": 0.8607
+          }
+        }
+      },
+      "glyphgate": {
+        "specs": 64,
+        "seconds": 848.9,
+        "yield": {
+          "glyphgate-L2": {
+            "rollouts": 144,
+            "success": 137,
+            "turns_sum": 443,
+            "forced_close_turns": 11,
+            "total_turns": 443,
+            "mean_score": 0.9514
+          },
+          "glyphgate-L3": {
+            "rollouts": 144,
+            "success": 129,
+            "turns_sum": 539,
+            "forced_close_turns": 18,
+            "total_turns": 539,
+            "mean_score": 0.8958
+          },
+          "glyphgate-L4": {
+            "rollouts": 96,
+            "success": 24,
+            "turns_sum": 745,
+            "forced_close_turns": 65,
+            "total_turns": 745,
+            "mean_score": 0.25
+          }
+        }
+      },
+      "loomfix": {
+        "specs": 64,
+        "seconds": 1981.7,
+        "yield": {
+          "loomfix-L2": {
+            "rollouts": 144,
+            "success": 85,
+            "turns_sum": 604,
+            "forced_close_turns": 125,
+            "total_turns": 604,
+            "mean_score": 0.6076
+          },
+          "loomfix-L3": {
+            "rollouts": 144,
+            "success": 58,
+            "turns_sum": 1116,
+            "forced_close_turns": 246,
+            "total_turns": 1116,
+            "mean_score": 0.4931
+          },
+          "loomfix-L4": {
+            "rollouts": 96,
+            "success": 38,
+            "turns_sum": 968,
+            "forced_close_turns": 252,
+            "total_turns": 968,
+            "mean_score": 0.5799
+          }
+        }
+      },
+      "ferrier": {
+        "specs": 64,
+        "seconds": 351.5,
+        "yield": {
+          "ferrier-L2": {
+            "rollouts": 144,
+            "success": 144,
+            "turns_sum": 435,
+            "forced_close_turns": 0,
+            "total_turns": 435,
+            "mean_score": 1.0
+          },
+          "ferrier-L3": {
+            "rollouts": 144,
+            "success": 144,
+            "turns_sum": 622,
+            "forced_close_turns": 1,
+            "total_turns": 622,
+            "mean_score": 1.0
+          },
+          "ferrier-L4": {
+            "rollouts": 96,
+            "success": 95,
+            "turns_sum": 660,
+            "forced_close_turns": 0,
+            "total_turns": 660,
+            "mean_score": 0.9983
+          }
+        }
+      },
+      "burrowmaze": {
+        "specs": 64,
+        "seconds": 1067.5,
+        "yield": {
+          "burrowmaze-L2": {
+            "rollouts": 144,
+            "success": 28,
+            "turns_sum": 832,
+            "forced_close_turns": 23,
+            "total_turns": 832,
+            "mean_score": 0.1944
+          },
+          "burrowmaze-L3": {
+            "rollouts": 144,
+            "success": 21,
+            "turns_sum": 1377,
+            "forced_close_turns": 25,
+            "total_turns": 1377,
+            "mean_score": 0.1458
+          },
+          "burrowmaze-L4": {
+            "rollouts": 96,
+            "success": 17,
+            "turns_sum": 1258,
+            "forced_close_turns": 33,
+            "total_turns": 1258,
+            "mean_score": 0.1771
+          }
+        }
+      },
+      "gatepost": {
+        "specs": 64,
+        "seconds": 262.2,
+        "yield": {
+          "gatepost-L2": {
+            "rollouts": 144,
+            "success": 144,
+            "turns_sum": 317,
+            "forced_close_turns": 11,
+            "total_turns": 317,
+            "mean_score": 1.0
+          },
+          "gatepost-L3": {
+            "rollouts": 144,
+            "success": 144,
+            "turns_sum": 325,
+            "forced_close_turns": 4,
+            "total_turns": 325,
+            "mean_score": 1.0
+          },
+          "gatepost-L4": {
+            "rollouts": 96,
+            "success": 96,
+            "turns_sum": 217,
+            "forced_close_turns": 3,
+            "total_turns": 217,
+            "mean_score": 1.0
+          }
+        }
+      }
+    }
+  }
+}

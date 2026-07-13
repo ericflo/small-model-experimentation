@@ -252,3 +252,18 @@ by mechanisms designed from the serial-compute diagnosis.
   because the fixed 4B's MEDIUM ceiling on this instrument is ITSELF ~+0.32 —
   the bar was set at the frontier. Methodological law: medium/episode
   arm-means need n>=8; n=3 medium deltas are provisional.
+
+## 2026-07-12 (episode-mastery — the last lever) — multi-turn training also caps medium; the exhaustive end
+
+- Episode-mastery arm: harvested 2,636 full successful multi-turn trajectories
+  from apex, trained horizon-persistence (2x episode mass, 9.9k rows) to
+  counter the base's 33-37% early termination — the one lever targeting the
+  medium tier's differentiated multi-turn substance.
+- Result: apex_ep medium +0.296 (n=8) — NO lift. GRAND medium pool (apex +
+  apex_ep, n=17): +0.309 +- 0.011, DEFINITIVELY below +0.32.
+- EXHAUSTIVE FINAL: ~130 paired events, EVERY lever (16+ arms, 4x capacity,
+  interpolation, 6-point soup sweep, expert iteration, tier-router, episode
+  horizon-persistence) — none reaches +0.32 decisively on medium. The 4B
+  medium ceiling on this instrument is ~+0.31; the +0.32 target sits just
+  above the model's medium frontier. Quick decisively broken (+0.33-0.41).
+  The conjunction requires a larger base.
