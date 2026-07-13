@@ -47529,8 +47529,55 @@
   "qwen35_4b_confidence_policy": {
    "charts": [
     {
-     "kind": "bar",
      "headline": true,
+     "kind": "line",
+     "title": "Confidence-gated adaptive sampling hits full accuracy at ~half the compute",
+     "categories": [
+      "1",
+      "1.79",
+      "2.51",
+      "3.39",
+      "4.25",
+      "5.16",
+      "6.51",
+      "9"
+     ],
+     "series": [
+      {
+       "label": "adaptive (conf-gated)",
+       "values": [
+        0.7008,
+        0.7418,
+        0.75,
+        0.7582,
+        0.7623,
+        0.7623,
+        0.7623,
+        0.7623
+       ]
+      },
+      {
+       "label": "uniform-k sampling",
+       "values": [
+        0.6973,
+        0.7195,
+        0.732,
+        0.7411,
+        0.7465,
+        0.7492,
+        0.7522,
+        0.7623
+       ]
+      }
+     ],
+     "x_label": "average samples per task (compute)",
+     "y_label": "MBPP accuracy (conf-select)",
+     "y_format": "decimal",
+     "note": "Adaptive commits high-confidence greedy answers for free and samples only low-confidence tasks; reaches the k=9 ceiling 0.762 at ~4.25 avg samples.",
+     "source": "experiments/qwen35_4b_confidence_policy/runs/adaptive_compute.json"
+    },
+    {
+     "kind": "bar",
      "title": "P(True) confidence-select is the best verifier-free selector (MBPP, k=9)",
      "categories": [
       "greedy",

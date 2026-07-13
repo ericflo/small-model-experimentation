@@ -49,3 +49,17 @@ easy (pass 0.97, n=217) -0.007. The P(True)-select advantage concentrates exactl
 on the hard tasks and vanishes on easy ones — self-consistent with abstention
 (which flags the same hard tasks). Deployable rule: use conf-select where the
 model is uncertain; majority-vote is fine when it's already ~0.97 accurate.
+
+## 2026-07-13 — CAPSTONE: compute-optimal = confidence-gated adaptive ALLOCATION (not escalation)
+
+The escalation (spend on depth) was null, but ALLOCATION (spend breadth only where
+needed) is the real win. Confidence-gated adaptive sampling — commit the greedy
+answer if its P(True) >= threshold, else sample K=8 + conf-select — dominates
+uniform-k conf-select on the accuracy-vs-avg-compute frontier: reaches the k=9
+ceiling 0.762 at ~4.25 avg samples (uniform needs 9), strictly beating uniform at
+7/9 operating points (avg 1.79: 0.742 vs 0.720; avg 4.25: 0.762 vs 0.747). ~2x
+compute saving. Mechanism: spend samples only on low-confidence (hard) tasks —
+exactly where the difficulty curve shows conf-select helps. C57 -> Supported.
+Deployable policy: sample greedily once, read P(True); high -> commit; low ->
+sample K + argmax-P(True); abstain below a floor. One logit drives selection,
+abstention, AND allocation.
