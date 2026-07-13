@@ -361,6 +361,9 @@ def main() -> int:
             "role": unit["sample"]["meta"]["role"],
             "kind": unit["sample"]["meta"]["kind"],
             "level": int(unit["sample"]["meta"]["level"]),
+            "prompt_tokens_truncated": int(
+                unit["sample"]["meta"].get("prompt_tokens_truncated", 0)
+            ),
             "target_positions": int(unit["sample"]["positions"].numel()),
         }
         for index, unit in enumerate(units)

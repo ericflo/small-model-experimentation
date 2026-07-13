@@ -9,6 +9,8 @@ EXP = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(EXP / "src"))
 
 from training_units import (  # noqa: E402
+    fit_prompt_around_completion,
+    make_sparse_sample,
     offpolicy_prompt_and_completion,
     prompt_and_student_completion,
 )
@@ -23,6 +25,50 @@ class DummyTokenizer:
 
 
 class TrainingUnitTests(unittest.TestCase):
+    def test_overlength_episode_preserves_completion_and_left_truncates_prompt(self):
+        class LongPromptTokenizer(DummyTokenizer):
+            def __call__(self, text, add_special_tokens=False):
+                return {"input_ids": list(range(3000))}
+
+        unit = {
+            "state_id": "episode-overlength",
+            "family": "loomfix",
+            "kind": "episode",
+            "level": 5,
+            "role": "route_control",
+            "primary_teacher": "deep",
+            "state": {
+                "kind": "episode",
+                "messages": [{"role": "user", "content": "x"}],
+                "selected_student_turn": {
+                    "token_ids": list(range(10_000, 10_203)),
+                    "n_thinking_tokens": 203,
+                    "injected_token_ids": [],
+                },
+            },
+        }
+        sample = make_sparse_sample(
+            unit,
+            LongPromptTokenizer(),
+            max_positions=256,
+            max_length=3072,
+        )
+        self.assertEqual(sample["completion_ids"].tolist(), list(range(10_000, 10_203)))
+        self.assertEqual(sample["prompt_ids"].tolist(), list(range(131, 3000)))
+        self.assertEqual(sample["positions"].tolist(), list(range(203)))
+        self.assertEqual(sample["meta"]["original_prompt_tokens"], 3000)
+        self.assertEqual(sample["meta"]["prompt_tokens_truncated"], 131)
+        self.assertEqual(sample["meta"]["input_tokens"], 3072)
+
+    def test_completion_must_leave_one_causal_prompt_token(self):
+        with self.assertRaisesRegex(ValueError, "leaves no prompt budget"):
+            fit_prompt_around_completion(
+                [1],
+                list(range(3072)),
+                max_length=3072,
+                state_id="too-long-completion",
+            )
+
     def test_atom_masks_only_injected_close(self):
         unit = {
             "state_id": "a",

@@ -89,6 +89,14 @@ changes a rule here, update the rule in the same commit.
   flywheel must run verifier-free: filter by RANK within depth strata each round (quotas by
   judge-score mass, never candidate counts — wrong candidates explode at hard depths), never
   by a fixed P(True) threshold.
+- **For completion-target training, preserve the target and left-truncate only the
+  oldest prompt tokens.** A deep-MOPD online episode first exposed this footgun:
+  the exact completion fit, but prompt plus completion was 3,203 tokens against a
+  frozen 3,072-token training budget. Right truncation would silently delete the
+  registered loss positions. Centralize sequence fitting, retain at least one
+  causal prompt token, and record per-sample truncation in cache and training
+  receipts; never silently drop the unit or change the frozen length after route
+  outcomes exist.
 
 ## Evaluation-method rules (not fooling ourselves)
 

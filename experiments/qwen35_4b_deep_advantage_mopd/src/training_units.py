@@ -7,6 +7,34 @@ from typing import Any, Mapping
 import torch
 
 
+def fit_prompt_around_completion(
+    prompt: list[int],
+    completion: list[int],
+    *,
+    max_length: int,
+    state_id: str,
+) -> tuple[list[int], int]:
+    """Preserve the exact completion and trim only the oldest prompt tokens.
+
+    Sparse MOPD and the off-policy control supervise positions in the generated
+    completion.  Right truncation would silently delete those registered target
+    positions, so the fixed sequence budget is realized by left-truncating the
+    prompt.  At least one prompt token is retained for the first causal target.
+    """
+
+    limit = int(max_length)
+    if limit < 2:
+        raise ValueError(f"max_length must be at least 2, got {limit}")
+    prompt_budget = limit - len(completion)
+    if prompt_budget < 1:
+        raise ValueError(
+            f"completion leaves no prompt budget for {state_id}: "
+            f"{len(completion)} completion tokens at max_length {limit}"
+        )
+    truncated = max(0, len(prompt) - prompt_budget)
+    return prompt[truncated:], truncated
+
+
 def prompt_and_student_completion(unit: Mapping[str, Any], tokenizer) -> tuple[list[int], list[int], list[int]]:
     state = unit["state"]
     if state["kind"] == "atom":
@@ -58,11 +86,13 @@ def make_sparse_sample(
 ) -> dict[str, Any]:
     prompt, completion, active = prompt_and_student_completion(unit, tokenizer)
     positions = active[-int(max_positions):]
-    if len(prompt) + len(completion) > int(max_length):
-        raise ValueError(
-            f"training input exceeds max_length for {unit['state_id']}: "
-            f"{len(prompt) + len(completion)} > {max_length}"
-        )
+    original_prompt_tokens = len(prompt)
+    prompt, prompt_tokens_truncated = fit_prompt_around_completion(
+        prompt,
+        completion,
+        max_length=max_length,
+        state_id=str(unit["state_id"]),
+    )
     return {
         "id": str(unit["state_id"]),
         "meta": {
@@ -74,6 +104,9 @@ def make_sparse_sample(
             "observed_route": unit.get("observed_route"),
             "matched_primary_state_id": unit.get("matched_primary_state_id"),
             "match_tier": unit.get("match_tier"),
+            "original_prompt_tokens": original_prompt_tokens,
+            "prompt_tokens_truncated": prompt_tokens_truncated,
+            "input_tokens": len(prompt) + len(completion),
         },
         "prompt_ids": torch.tensor(prompt, dtype=torch.int32),
         "completion_ids": torch.tensor(completion, dtype=torch.int32),

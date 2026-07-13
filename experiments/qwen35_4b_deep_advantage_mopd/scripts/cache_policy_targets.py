@@ -152,6 +152,29 @@ def main() -> int:
         },
         "sample_count": len(samples),
         "active_positions": sum(int(sample["positions"].numel()) for sample in samples),
+        "prompt_truncation": {
+            "sample_count": sum(
+                int(sample["meta"]["prompt_tokens_truncated"]) > 0
+                for sample in samples
+            ),
+            "total_tokens": sum(
+                int(sample["meta"]["prompt_tokens_truncated"])
+                for sample in samples
+            ),
+            "maximum_tokens": max(
+                int(sample["meta"]["prompt_tokens_truncated"])
+                for sample in samples
+            ),
+            "state_ids_sha256": hashlib.sha256(
+                "\n".join(
+                    sorted(
+                        sample["id"]
+                        for sample in samples
+                        if int(sample["meta"]["prompt_tokens_truncated"]) > 0
+                    )
+                ).encode("utf-8")
+            ).hexdigest(),
+        },
         "ledgers": ledgers,
         "samples": samples,
     }

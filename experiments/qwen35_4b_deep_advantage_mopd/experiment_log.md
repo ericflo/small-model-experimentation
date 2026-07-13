@@ -75,3 +75,23 @@
   token-position invariance.
 - Downstream authorization is exactly `four_round_mopd`. No capability result,
   control comparison, or benchmark event exists yet.
+
+## 2026-07-13 — seed-42 integration round-1 cache recovery
+
+- Full-dose round 0 passed: 20/20 updates, exact 60-deep/20-soup geometry,
+  mean corrected loss `0.05669`, probe loss `0.08318→0.05112`, and
+  non-decreasing overlap. Its merged receipt is
+  `8432e6391ce1f4ce328938163984f490bc424325832c891a58a5dbf35cb06920`.
+- Round 1 used three fresh candidate batches. It found 81 deep routes among
+  576 failed states and froze the exact 60-deep/20-anchor/60-control quotas
+  (56 controls exact-cell, four family/kind).
+- Target-cache construction stopped before loading any policy because one
+  matched route-control episode tokenized to `3,203 > 3,072`. This was an
+  implementation omission, not a registered scientific stop: the fixed
+  training length existed, but completion-preserving prompt fitting did not.
+- Recovery keeps the frozen `3,072` budget and every completion/target
+  position, deterministically left-truncates only oldest prompt tokens, records
+  the exact cut in cache/training receipts, and still fails if a completion
+  leaves no causal prompt token. Regression coverage reproduces the exact
+  `3,203→3,072` case. Existing states, branch ledgers, routes, quotas, and
+  model outputs are reused unchanged.

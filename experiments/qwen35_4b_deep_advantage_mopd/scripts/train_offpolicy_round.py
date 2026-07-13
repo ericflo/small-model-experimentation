@@ -20,6 +20,7 @@ sys.path.insert(0, str(EXP / "src"))
 
 from io_utils import load_config, sha256_file  # noqa: E402
 from training_units import (  # noqa: E402
+    fit_prompt_around_completion,
     offpolicy_prompt_and_completion,
     prompt_and_student_completion,
 )
@@ -57,11 +58,12 @@ def _make_units(manifest: dict, tokenizer, *, max_positions: int, max_length: in
         else:
             raise ValueError(f"unknown training role: {row['role']}")
         positions = active[-int(max_positions):]
-        if len(prompt) + len(completion) > int(max_length):
-            raise ValueError(
-                f"off-policy input exceeds max_length for {row['state_id']}: "
-                f"{len(prompt) + len(completion)} > {max_length}"
-            )
+        prompt, prompt_tokens_truncated = fit_prompt_around_completion(
+            prompt,
+            completion,
+            max_length=max_length,
+            state_id=str(row["state_id"]),
+        )
         units.append(
             {
                 "id": str(row["state_id"]),
@@ -70,6 +72,7 @@ def _make_units(manifest: dict, tokenizer, *, max_positions: int, max_length: in
                 "level": int(row["level"]),
                 "target_policy": target_policy,
                 "target_terminal_score": terminal_score,
+                "prompt_tokens_truncated": prompt_tokens_truncated,
                 "prompt_ids": prompt,
                 "completion_ids": completion,
                 "positions": positions,
@@ -260,6 +263,7 @@ def main() -> int:
             "role": unit["role"],
             "kind": unit["kind"],
             "target_policy": unit["target_policy"],
+            "prompt_tokens_truncated": int(unit["prompt_tokens_truncated"]),
             "target_positions": len(unit["positions"]),
             "target_terminal_score": unit["target_terminal_score"],
         }
