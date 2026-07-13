@@ -1647,7 +1647,7 @@
   {
     "file_counts": {
       ".gz": 10,
-      ".json": 21,
+      ".json": 22,
       ".jsonl": 8,
       ".md": 8,
       ".py": 56,
@@ -1663,7 +1663,7 @@
       "structured_execution_and_compilers"
     ],
     "source_track": "new",
-    "summary": "**Fresh deep qualification passes on both untouched blocks; exact-logit locality is authorized and no MOPD update exists yet.** This is a new result-bearing successor to `qwen35_4b_same_prefix_advantage_routing`, not an extension of its terminal result.",
+    "summary": "**Fresh deep qualification passes on both untouched blocks, and the frozen five-update MOPD pilot passes exact-logit locality; full integration is now authorized but no performance result exists yet.** This is a new result-bearing successor to `qwen35_4b_same_prefix_advantage_routing`, not an extension of its terminal result.",
     "tags": [
       "small-model"
     ],
@@ -1677,8 +1677,8 @@
       "src",
       "tests"
     ],
-    "total_files": 106,
-    "total_size_bytes": 24585625
+    "total_files": 107,
+    "total_size_bytes": 24600142
   },
   {
     "file_counts": {

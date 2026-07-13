@@ -52,3 +52,26 @@
   the result is evidence for, not permission to improvise, the later
   cross-fitted two-teacher design.
 - Downstream authorization is exactly `locality_pilot`. No update has run.
+
+## 2026-07-13 — five-update exact-logit locality passes
+
+- The first two online candidate batches supplied 55/60 required deep routes,
+  so the frozen runner opened a third batch rather than weakening the quota.
+  Three batches yielded 90 deep routes among 576 failed states.
+- The final round manifest contains exactly 60 deep capability units, 20 soup
+  anchors, and 60 disjoint non-advantage controls. Control matching used 57
+  exact cells and three family/kind fallbacks. Its SHA-256 is
+  `f4a1eb0848804ddef874ece0afef89a1ea39d84f2717b971575f2ff5f021e0e8`.
+- Cached all three policies for 140 samples and 35,147 active positions. The
+  cache SHA-256 is
+  `20c21a5bb8e8b8058d0b7377929b37fd5e2eca8e55598d61b6ac827503761e76`.
+- The pilot completed all five updates with the exact 15-deep/5-soup mixture.
+  Training mean corrected top-50 loss was `0.05242`; held-probe loss improved
+  `0.04773→0.02947` and overlap improved `0.84840→0.85163`.
+- Exact batch-of-one probes measured centered non-target drift `0.02760`,
+  relative entropy drop `0.03112`, and target loss `0.01293→0.01170`. Every
+  frozen check passed. The probe is one midpoint token per consumed unit, so
+  the authorization is literal and deliberately not described as global
+  token-position invariance.
+- Downstream authorization is exactly `four_round_mopd`. No capability result,
+  control comparison, or benchmark event exists yet.

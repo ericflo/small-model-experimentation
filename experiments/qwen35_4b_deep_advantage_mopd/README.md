@@ -1,11 +1,12 @@
 # Qwen3.5-4B Deep-Advantage MOPD
 
-**Status:** in-progress · since 2026-07-12 · Instrument checks pass; the deciding coaching/eval run has not executed.
+**Status:** in-progress · since 2026-07-12 · Fresh deep qualification and the five-update exact-logit locality gate pass; four-round integration is authorized.
 
 ## Status
 
-**Fresh deep qualification passes on both untouched blocks; exact-logit
-locality is authorized and no MOPD update exists yet.** This is a new result-bearing successor to
+**Fresh deep qualification passes on both untouched blocks, and the frozen
+five-update MOPD pilot passes exact-logit locality; full integration is now
+authorized but no performance result exists yet.** This is a new result-bearing successor to
 `qwen35_4b_same_prefix_advantage_routing`, not an extension of its terminal
 result.
 
@@ -110,6 +111,24 @@ quick by `+0.2000` and `+0.1420` (pooled `+0.1691`, lower bound `+0.1534`).
 Every frozen support/sign/uncertainty gate passed. Quick also independently
 passed on 47 routed states in this fresh replication; that is retained as
 future two-teacher evidence, but the locked treatment remains deep-only.
+
+## Locality Result
+
+Three fixed candidate batches supplied 90 deep-qualified failed states. The
+assembler selected exactly 60 deep capability units, 20 soup anchors, and 60
+disjoint matched non-advantage controls; 57/60 controls matched the exact
+family/kind/level cell and three matched family/kind. The cache bound 140
+samples and 35,147 active positions to quick, deep, and soup top-50 targets.
+
+The consume-once pilot completed all five updates with the frozen 15-deep/5-soup
+mixture. Training mean corrected top-50 loss was `0.05242`; its held probe loss
+fell from `0.04773` to `0.02947` and overlap rose from `0.84840` to `0.85163`.
+On the preregistered batch-of-one exact probes, centered non-target logit drift
+was `0.02760` (ceiling `0.10`), entropy fell `3.11%` (ceiling `10%`), and exact
+target loss improved from `0.01293` to `0.01170`. Every locality check passed,
+authorizing four-round MOPD. Exact drift was measured at one midpoint token for
+each of the 20 consumed units, so this is a literal local-safety result, not a
+claim of invariance over every trained token or of improved capability.
 
 ## Artifacts
 

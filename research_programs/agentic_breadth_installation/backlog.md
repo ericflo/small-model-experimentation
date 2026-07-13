@@ -22,7 +22,9 @@
   sources, visible routing, matched controls, and sample-more before Menagerie
   escalation. Fresh qualification has now passed: deep routed on 28/26 states
   and its audit advantage over soup was +0.1650/+0.1220 (pooled lower bound
-  +0.1230); locality is authorized and no MOPD update exists yet.
+  +0.1230). The five-update pilot also passed literal exact-logit locality
+  (drift 0.02760; entropy drop 3.11%; target loss improved), so four-round
+  integration is active. No capability result exists yet.
 - A new two-teacher attempt needs cross-fitted direct advantage prediction and
   a third untouched route block. If quick again lacks independent support,
   retire it as a complementary teacher; do not tune an observed-margin cutoff.

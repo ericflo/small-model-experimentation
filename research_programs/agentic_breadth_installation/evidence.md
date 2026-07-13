@@ -53,15 +53,22 @@ tool-found solutions, on-policy RL at residual failures, and
 failure-forensics curricula are the queued beyond-recipe mechanisms
 (see C53 next tests). Same-recipe scaling is closed.
 
-## Deep-Advantage MOPD Qualification (2026-07-13 — Passed prerequisite)
+## Deep-Advantage MOPD Qualification and Locality (2026-07-13 — Passed prerequisites)
 
 `qwen35_4b_deep_advantage_mopd` repeated same-prefix qualification on two new
 192-state blocks from the immutable 40/60 joint soup. Deep was selected on
 28/26 states and beat soup on disjoint audit branches by +0.1650/+0.1220
 (pooled +0.1421, one-sided 95% lower bound +0.1230); it beat quick by
 +0.2000/+0.1420 (lower bound +0.1534). Every support, block-sign, and
-uncertainty gate passed, authorizing exact-logit locality. No MOPD update or
-capability result exists yet.
+uncertainty gate passed, authorizing exact-logit locality.
+
+The locality round needed three fixed candidate batches and found 90 deep
+routes, from which it froze 60 deep units, 20 soup anchors, and 60 disjoint
+matched non-advantage controls. The five-update 15-deep/5-soup pilot passed:
+centered non-target drift was 0.02760, entropy drop was 3.11%, and exact target
+loss improved 0.01293→0.01170. This authorizes four-round MOPD. The exact
+measurement is one midpoint token per consumed unit, and no capability result
+exists yet.
 
 Quick also passed diagnostically on 29/18 routes in this fresh replication,
 after failing one soup-relative block in the predecessor. This is not license

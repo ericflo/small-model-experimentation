@@ -2521,37 +2521,6 @@
     }
    ]
   },
-  "qwen35_4b_deep_advantage_mopd": {
-   "verdict_tag": "Can one trained model beat switching per problem",
-   "concept_primer": "Picture one cooking student who already blends a fast style and a slow, careful style. You coach them extra only on the exact dishes where slow clearly wins, while re-drilling old dishes so nothing slips. Can that beat hiring a different cook per dish?",
-   "plain_question": "When a slow, careful answering style beats a fast one on certain problems, can you bake that edge into a single model instead of switching styles at runtime?",
-   "plain_answer": "Not run yet. The test is built and its instrument checks pass, but the deciding stage has not executed. It will first confirm, on fresh problems, that a strict rule reliably flags cases where the careful style beats both the fast style and the current combined model. Only then does it coach the model on those cases and check whether the result beats picking a style per problem and beats sampling eight answers and keeping the best.",
-   "why_it_matters": "If targeted coaching works, you ship one model instead of running two models plus a runtime picker, cutting latency and cost. If it fails, switching styles or sampling many answers at deployment stays necessary.",
-   "verdict_tone": "neutral",
-   "key_numbers": [
-    {
-     "label": "The starting combined model's recipe",
-     "value": "60% careful / 40% fast",
-     "sub": "weight blend of the two styles it starts from"
-    },
-    {
-     "label": "How often the careful style must clearly win",
-     "value": "about 1 in 12",
-     "sub": "minimum flagged problems required before coaching is allowed (16 of every 192)"
-    },
-    {
-     "label": "Old-skill drilling mixed into training",
-     "value": "1 in 4",
-     "sub": "share of examples frozen to preserve existing behavior"
-    },
-    {
-     "label": "Bar it must clear at deployment",
-     "value": "beat best of 8",
-     "sub": "must beat sampling eight answers and keeping the best-scored one"
-    }
-   ],
-   "charts": []
-  },
   "qwen35_4b_deployable_information_ceiling_sweep": {
    "verdict_tag": "Missing clues, not a bad strategy",
    "concept_primer": "Picture a deduction game where you identify a hidden rule by choosing which inputs to test and reading the outputs. A plain strategy always runs the test that most evenly splits the still-possible rules, racing against a rival who secretly already knows the answer.",
@@ -12790,43 +12759,49 @@
    ]
   },
   "qwen35_4b_deep_advantage_mopd": {
-   "verdict_tag": "Deep proved it twice",
+   "verdict_tag": "Five updates stayed local",
    "concept_primer": "Imagine a strong all-round apprentice and two specialists standing at the same half-finished job. The deep specialist is copied only when separate trial runs show that it finishes that exact job better than both the apprentice and the other specialist.",
    "plain_question": "Can carefully chosen lessons from the deep specialist improve one already blended small model without sacrificing its faster skills?",
-   "plain_answer": "Yes at the teacher-choice stage. On two entirely fresh groups of half-finished problems, the deep specialist beat both the starting blend and the quick specialist on separate check runs. That authorizes a small safety test of the weight update; no improved checkpoint exists yet.",
-   "why_it_matters": "A successful result would turn two specialized behaviors into one checkpoint without needing a router or extra attempts at deployment. A failure will still distinguish a bad teacher choice, a bad state choice, harmful weight changes, and a gain that ordinary sampling already buys.",
+   "plain_answer": "The teacher choice and the small safety update both passed. Deep won on two fresh groups, and five training steps changed unrelated logits only slightly while improving the lesson-matching loss. That authorizes the full four-round trial; no improved-capability result exists yet.",
+   "why_it_matters": "The study has cleared the two common false starts: choosing a teacher that does not really help and making a weight edit that immediately spills everywhere. The remaining test is the important one: whether the full update creates one checkpoint that beats the specialists, runtime switching, controls, and eight tries.",
    "verdict_tone": "neutral",
    "key_numbers": [
     {
-     "label": "Deep advantage over the starting blend",
-     "value": "+16.5 / +12.2 points",
-     "sub": "positive on both untouched blocks; the pooled lower confidence edge is +12.3 points"
+     "label": "Unrelated-logit drift after five steps",
+     "value": "0.0276",
+     "sub": "well below the frozen 0.10 safety ceiling on 20 exact probes"
     },
     {
-     "label": "Deep lessons per round",
-     "value": "60",
-     "sub": "each is selected from a failed state where deep won on separate trial continuations"
+     "label": "Output uncertainty lost",
+     "value": "3.1%",
+     "sub": "below the frozen 10% collapse ceiling"
     },
     {
-     "label": "Starting-model reminders per round",
-     "value": "20",
-     "sub": "one quarter of the dose rehearses the original blend to resist forgetting"
+     "label": "Exact lesson-matching loss",
+     "value": "0.0129 → 0.0117",
+     "sub": "improved rather than merely staying under the safety ceiling"
     },
     {
-     "label": "Fresh states that selected deep",
-     "value": "28 / 26",
-     "sub": "enough support in each block to clear the frozen minimum of 16"
+     "label": "Deep wins available online",
+     "value": "90",
+     "sub": "enough to freeze 60 lessons plus 20 reminders and 60 matched controls"
     }
    ],
    "charts": [
     {
      "index": 0,
+     "chart_plain_title": "Five update steps barely moved unrelated logits",
+     "chart_read": "Two short bars show the average unrelated-logit movement and the relative loss of output uncertainty on 20 exact before-and-after probes. Smaller is safer; both are far below one tenth.",
+     "chart_takeaway": "The small pilot cleared its safety gate, and its exact lesson-matching loss also improved, so the full four-round test may proceed."
+    },
+    {
+     "index": 1,
      "chart_plain_title": "Deep wins on separate check runs in both fresh blocks",
      "chart_read": "Each block has two positive bars: deep's score edge over the starting blend and over the quick specialist. Taller is better, but merely staying above zero in both untouched blocks is the key replication test.",
      "chart_takeaway": "Deep's local teaching advantage repeated against both alternatives, so the experiment may now test whether that signal can be installed safely into one checkpoint."
     },
     {
-     "index": 1,
+     "index": 2,
      "chart_plain_title": "The proposed training and its two sharp controls receive identical lesson counts",
      "chart_read": "Each group has a tall 60-unit capability bar and a shorter 20-unit reminder bar. Only the source of the 60 capability lessons changes: verified deep wins, matched places where deep did not win, or the wrong specialist on the verified-win states.",
      "chart_takeaway": "Because all three arms get the same 80 lessons, a primary win can be attributed to choosing both the right state and the right specialist rather than to extra training."

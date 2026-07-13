@@ -2,11 +2,10 @@
 
 ## Status
 
-The preregistered CPU/scientific smoke passes: all 50 experiment tests and all
-14 procedural-family oracle/random/degenerate selftests are green. Pinned-model
-preflight then passed four of four semantic probes, a finite Transformers
-training forward pass, and the exact vLLM graph-geometry checks. Exact source
-and soup hashes agree with their external receipts.
+The preregistered CPU/scientific smoke, pinned-model preflight, installation
+canary, fresh route qualification, and five-update exact-logit locality pilot
+all pass. Four-round integration is authorized; no capability comparison has
+run yet.
 
 ## Research Program Fit
 
@@ -47,7 +46,26 @@ that a later two-teacher attempt should use the preregistered cross-fitted
 direct-advantage predictor and a third untouched block rather than reusing
 these outcomes.
 
-Exact-logit locality is authorized. No MOPD update exists yet.
+The online locality round required three candidate batches. Across 576 failed
+states, the selector found 90 deep routes; the assembler froze exactly 60 deep
+capability units, 20 soup anchors, and 60 disjoint matched non-advantage
+controls. Control matching was exact-cell for 57 units and family/kind for
+three. The all-policy cache contains 140 samples, 35,147 active positions, and
+hash-bound quick/deep/soup top-50 targets.
+
+The locality pilot then consumed exactly 15 deep and five soup units over five
+updates. Mean corrected top-50 loss was `0.05242`, below the `0.10` training
+ceiling; held-probe loss improved `0.04773→0.02947` and top-50 overlap improved
+`0.84840→0.85163`. On batch-of-one exact probes, centered non-target logit
+drift was `0.02760`, relative entropy drop was `0.03112`, and target loss
+improved `0.01293→0.01170`. All frozen checks passed and the machine-readable
+authorization is `four_round_mopd`.
+
+The exact locality measurement covers one midpoint active token for each of
+the 20 consumed units, rather than every one of the 4,898 trained positions.
+It therefore establishes the literal preregistered local-safety gate, not
+global invariance. No procedural capability, control, sampling, routing, or
+benchmark result exists yet.
 
 ## Oracle Versus Deployable Boundary
 

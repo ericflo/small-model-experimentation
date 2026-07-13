@@ -46907,6 +46907,29 @@
     {
      "headline": true,
      "kind": "bar",
+     "title": "Five MOPD updates stayed local on exact probes",
+     "categories": [
+      "centered non-target logit drift",
+      "relative entropy drop"
+     ],
+     "series": [
+      {
+       "label": "observed",
+       "values": [
+        0.027595275640487672,
+        0.031120421315893078
+       ]
+      }
+     ],
+     "x_label": "literal locality diagnostic",
+     "y_label": "mean change after five updates",
+     "y_format": "number",
+     "note": "The frozen 15-deep/5-soup pilot passed every registered check. Exact target loss also improved from 0.012929 to 0.011704. Each diagnostic uses one midpoint token for each of the 20 consumed units, so this authorizes four-round MOPD but is not a capability result or a claim of global token-level invariance.",
+     "source": "experiments/qwen35_4b_deep_advantage_mopd/analysis/locality_pilot.json"
+    },
+    {
+     "headline": false,
+     "kind": "bar",
      "title": "Deep advantage replicated on both fresh blocks",
      "categories": [
       "fresh block 1",
@@ -46931,7 +46954,7 @@
      "x_label": "untouched qualification block",
      "y_label": "independent audit score advantage",
      "y_format": "number",
-     "note": "Deep was selected from separate continuation samples on 28 and 26 states. Both audit contrasts are positive in both blocks; pooled one-sided 95% lower bounds are +0.1230 versus soup and +0.1534 versus quick. Locality, not capability training, is now authorized.",
+     "note": "Deep was selected from separate continuation samples on 28 and 26 states. Both audit contrasts are positive in both blocks; pooled one-sided 95% lower bounds are +0.1230 versus soup and +0.1534 versus quick. The subsequent five-update locality gate passed; full capability training is now authorized.",
      "source": "experiments/qwen35_4b_deep_advantage_mopd/analysis/route_qualification.json"
     },
     {
