@@ -80,8 +80,11 @@ notes: >-
   85286a9549b0e74111eaa0c1254f04f68cad4d75159abc8ba59c169637280cd9 and the ledger identity is
   b122d49054cd37474784a8b4ec3bcc0026e745321718dee799615e3051983c14. The current seed-7411 LoRA G0
   receipt has SHA256 8c381fc7e883e384debef6ce64e55dd57aacab6f30e4a17dd6ef82d4db56aa01 and identity
-  928e756fa6aea30104f0ed8a71c03620ed8663198a4811f6fcf9b6fda53f820c. No positive-control pass or
-  result artifact exists, and later stages remain prohibited.
+  928e756fa6aea30104f0ed8a71c03620ed8663198a4811f6fcf9b6fda53f820c. The corrected seed-7411
+  positive-control receipt has SHA256 f71ee195b3e326abe59daca019b266932990f17adff20ceba8b414f5ac8c88ec,
+  identity 8db4595e1473d2f26d1d99d2ac1bb9be45947720d676bf43cc697cb90b402df7, and fixed-final score
+  48/48 after 256 updates and 4,096 presentations. No result artifact exists; later-seed setup must
+  pass before result training.
   The first Qwen load stopped before wrapper construction or mechanics and is preserved by a tracked
   failure receipt; it opened
   only the permitted training validator, no sealed contrast, and produced no canonical G0 output.

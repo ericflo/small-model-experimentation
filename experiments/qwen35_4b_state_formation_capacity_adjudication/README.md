@@ -1,6 +1,6 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · frozen design unchanged; final-source setup and seed-7411 LoRA G0 pass; corrected positive control pending; no result run is authorized
+**Status:** in-progress · since 2026-07-13 · frozen design unchanged; final-source seed-7411 LoRA G0 and corrected positive control pass; remaining seed setup pending; no result run is authorized
 
 ## Current status
 
@@ -32,9 +32,12 @@ regeneration, and the ledger still has zero events. Seed-7411 LoRA G0 now passes
 the final source at receipt identity `928e756f…820c`: both PEFT parity regimes have zero observed
 error, K=1 is exact, every required recurrent group and all 124 LoRA tensors receive finite nonzero
 gradients while the base receives none, the K=12 path is finite, and checkpoint restoration is exact.
-The corrected positive control is next. The earlier source-3baa G0 pass and 0/48 control miss remain
-historical mechanics records only. No result training has started and no sealed contrast has been
-scored.
+The earlier source-3baa G0 pass and 0/48 control miss remain historical mechanics records only. The
+corrected final-source control now passes 48/48 after exactly
+256 optimizer updates and 4,096 singleton presentations; disabling adaptation at the same fixed final
+scores 0/48, confirming that the setup path actually exercised the LoRA update. Seeds 7412 and 7413
+must now pass their own G0 and identical control before result training. No result training has
+started and no sealed contrast has been scored.
 
 ## Research program and prior anchors
 

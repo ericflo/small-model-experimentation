@@ -410,7 +410,38 @@
   evidence, not scientific evidence. Independent receipt audit recomputed every lineage, all nine
   pinned snapshot files, parameter geometry, mechanics gate, and ledger invariant and gives `GO`.
 
+## 2026-07-13 — corrected seed-7411 LoRA positive control passes 48/48
+
+- The canonical receipt `runs/setup/positive_control_lora_seed7411.json` has file SHA-256
+  `f71ee195b3e326abe59daca019b266932990f17adff20ceba8b414f5ac8c88ec`, identity
+  `8db4595e1473d2f26d1d99d2ac1bb9be45947720d676bf43cc697cb90b402df7`, exact status
+  `POSITIVE_CONTROL_PASS`, and exact G0 lineage identity `928e756f…820c`. It binds final source,
+  data, design, initialization, model, revision, backend, and training lock with no branch receipt.
+- The oracle-coded readout scores 1.0. The setup corpus is the frozen 48-row factorial grid with two
+  rows in each depth 2/3/4 × query kind × family × template cell, canonical row digest
+  `581dadcb…ef41`, and zero structural overlap with every result split.
+- The corrected path completes exactly 256 optimizer updates, 16 sequential singleton microbatches
+  per update, and 4,096 total presentations. There are 256 clips and optimizer steps per parameter
+  group, 257 zero-gradient calls, no early stop, and no checkpoint selection. The first 16 rows have
+  86 exposures, the remaining 32 have 85, and depth exposures are exactly 1,368/1,368/1,360.
+- Row order, dropout schedule, and optimizer-event digests are respectively `b3ece16c…e6fa`,
+  `8dc49101…98c`, and `ae8322bc…b6b`. Dropout probes at presentations 1, 2,048, and 4,096 have the
+  registered call geometry. Optimizer probes at updates 1, 16, 64, 128, and 256 show finite positive
+  group norms, constant learning rate `2e-4`, zero base trainables, finite nonzero gradients for
+  every required recurrent and LoRA tensor, and the registered answer-only aggregate exemption.
+- Fixed intact/disabled diagnostics at updates 0, 1, 16, 64, 128, and 256 leave parameters, model
+  mode, and CPU/CUDA random streams unchanged. Intact terminal joint accuracy progresses from 0.00
+  to 0.00, 0.0625, 0.75, 1.00, and 1.00. The fixed final is 48/48, exceeding the 0.95 gate; the
+  adaptation-disabled fixed final remains 0/48.
+- Adam state is complete and finite for every required parameter. Adaptation input/output and common
+  state move by L2 norms 9.046, 8.905, and 3.425, and the final trainable-value digest differs from
+  initialization. The receipt authorizes training but is setup evidence only: benchmark reads are
+  zero, result/sealed payload lists are empty, and the ledger remains byte-identical at
+  `0c03a0d8…ac261`, identity `b122d490…3c14`, with `events: []`. Independent audit regenerated all
+  48 rows and all 4,096 schedule events, recomputed the full row/dropout digests, reopened every
+  lineage and diagnostic invariant, and gives `GO`.
+
 ## Current authorization
 
-The corrected seed-7411 LoRA positive control is authorized against this exact G0 receipt. No
-later-seed G0 or result training is authorized until that control passes canonically.
+Seeds 7412 and 7413 LoRA G0 and their identical positive controls are now authorized. No result
+training is authorized until all three per-seed setup gates pass canonically.
