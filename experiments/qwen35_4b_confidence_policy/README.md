@@ -33,40 +33,51 @@ budget 2048 beats spending the same compute on more breadth at budget 256.
 
 ## Result
 
-**Survives (robust):**
-- **Confidence-select is the best verifier-free selector at every k** (k=9:
-  conf 0.762 > majority 0.742 > logprob 0.725 > greedy 0.701; per-candidate AUROC
-  0.77 on the vLLM pools; execution-line 0.840 when a visible test exists; oracle
-  0.848).
-- **Abstention gives a clean risk-coverage curve** (100% coverage 0.757 → 68%
-  0.866 → 43% 0.902; solvability AUROC 0.72).
-- **Depth modestly beats breadth on the overall frontier** — pure-2048 0.593 >
-  pure-256 0.581 at matched high-k.
+**The capstone — compute-optimal = confidence-gated adaptive ALLOCATION.** The
+deployable answer to "compute-optimal confidence policy" is to spend samples only
+where they help: sample greedily once, read its single-token P(True); if high,
+**commit** (1 sample); if low, **sample K and conf-select**; abstain below a
+floor. This reaches full-pool MBPP accuracy (0.762) at **~4.25 average samples vs
+9 for uniform** sampling — a **~2× compute saving**, strictly beating uniform at
+7/9 operating points (and 7/9 on HumanEval too). One logit drives selection,
+abstention, *and* allocation. (`scripts/adaptive_compute.py`)
 
-**Reversed on power-up (the honest correction):**
-- The first-pass n=24–60 result — that *selectively escalating* the abstained
-  tail to a higher think budget beats matched-compute breadth (hardest-20%: 0.458
-  vs 0.304) — **did NOT replicate at n=400**: esc−breadth is +0.004…+0.022 with
-  every 95% bootstrap CI spanning 0. It was a small-sample artifact, caught by
-  this claim's own pre-registered power-up. Likely mechanism: MBPP nearly
-  saturates the budget (the 4B self-limits to ~108–172 think tokens even at
-  budget 2048), so the serial-compute lever is too weak to differentiate here.
+**Why it works — the difficulty curve.** Pooling MBPP+HumanEval (312 tasks) and
+binning by per-task pass rate, the confidence-select edge over majority-vote
+concentrates on hard tasks: **hard** (pass 0.08) +0.045, **medium** (0.54) +0.038,
+**easy** (0.97) −0.007. Selection pays exactly where the model is uncertain — the
+same tasks abstention flags — so a confidence-gated allocator is self-consistent.
+(`scripts/difficulty_curve.py`)
 
-The robust deployable core is **SELECT + ABSTAIN**, both verifier-free from one
-logit: sample k, pick argmax single-token P(True), abstain below a max-P(True)
-threshold. Extra compute is modestly better spent on depth than breadth overall,
-but there is no measured benefit to selectively escalating the hard tail on
-budget-saturated MBPP — see C57's next-tests for the budget-bound-task follow-up.
+**The verifier-free pieces that hold:**
+- **Confidence-select** — argmax single-token P(True) is the best verifier-free
+  selector on moderate-difficulty MBPP (k=9: 0.762 > majority 0.742 > logprob
+  0.725; per-cand AUROC 0.77), but only *difficulty-dependently*: it **ties**
+  majority on easy HumanEval (base pass 0.91, both 0.941).
+- **Abstention** — max-P(True) gives a clean risk-coverage curve (68% coverage →
+  0.866; solvability AUROC 0.72).
 
-Codified as **C57** (corrected). Part 2 was regenerated on vLLM (~10× faster than
-the initial HF pass) at n=400 with bootstrap CIs.
+**The null (honest correction).** The tempting *escalate* step — spend the extra
+compute on more think budget (depth) for the flagged-hard tasks — was a small-sample
+win (n=24: 0.458 vs 0.304) that **did NOT replicate at n=400** (esc−breadth
++0.004…+0.022, every 95% bootstrap CI spanning 0). MBPP nearly saturates the think
+budget (median ~86 think tokens at both budget 256 and 2048); the budget-bound tail
+is capability-hard, not merely compute-starved. So the compute lever is **breadth
+allocation, not depth escalation**.
 
-## Layout
+Codified as **C57**. Part 2 was regenerated on vLLM (~10× faster than the initial
+HF pass) at n=400 with bootstrap CIs.
 
-- `scripts/frontier.py` — Part 1 post-hoc frontier + risk-coverage (CPU).
-- `scripts/escalation.py` — Part 2 escalation-vs-breadth analysis (CPU).
-- `../qwen35_4b_code_confidence/scripts/gen_budget.py` — think-mode multi-budget
-  generation (HF backend, GPU).
-- `runs/frontier.json`, `runs/escalation.json` — aggregate results.
-- `runs/pool_think_b256.json`, `runs/pool_think_b2048.json` — the two candidate
-  pools (aggregate per-candidate fields; no menagerie contents).
+## Layout (all analyses CPU-only, post-hoc)
+
+- `scripts/adaptive_compute.py` — **the capstone**: confidence-gated adaptive
+  allocation vs uniform sampling (`--src mbpp|humaneval`).
+- `scripts/difficulty_curve.py` — conf-select vs majority by task difficulty.
+- `scripts/frontier.py` — selection frontier + abstention risk-coverage
+  (`--src mbpp|humaneval`).
+- `scripts/escalation.py` — escalation(depth)-vs-breadth with bootstrap CIs.
+- `../qwen35_4b_code_confidence/scripts/vllm_gen_budget.py` — **fast** vLLM
+  think-mode multi-budget generation (GPU); `gen_budget.py` is the older HF one.
+- `runs/*.json` — aggregate results (adaptive_compute, difficulty_curve, frontier,
+  escalation) and the two vLLM candidate pools (per-candidate fields only, no
+  menagerie contents).
