@@ -225,7 +225,9 @@ instrument failed its strict cross-backend gate before bulk scoring; the referen
 was frozen before any training score or outcome. Exact single-context reference scoring then completed for
 all 22,681 eligible traces in 17,296 seconds, and R1 completed one answer rollout for every scored trace in
 10,915 seconds. All 360 raw/score/R1 shards, hashes, task scopes, source links, trace joins, and eligibility
-sets pass the read-only pre-seal audit. No official selection dataset or adapter exists yet.
+sets passed the read-only pre-seal audit. The retrospective evidence seal is now committed-bound: its
+pre-attestation hashes, post-seal index hashes, operation contracts, and post-score deviation disclosure are
+recorded in machine-readable receipts. No official selection dataset or adapter exists yet.
 
 ## Artifacts
 
@@ -234,4 +236,6 @@ sets pass the read-only pre-seal audit. No official selection dataset or adapter
 - `reports/design_review.md`: adversarial review and applied fixes
 - `configs/default.yaml`: exact counts, seeds, and gates
 - `reports/artifact_manifest.yaml`: inherited pool, external scores, adapters, and checkpoints
+- `runs/preselection_amendment_receipt.json`: commit-bound code, evidence, and deviation boundary
+- `runs/preselection_evidence_seal.json`: exact pre/post index identity and absence checks at seal time
 - external root: `/workspace/large_artifacts/qwen35_4b_balanced_core_answer_potential_sft`

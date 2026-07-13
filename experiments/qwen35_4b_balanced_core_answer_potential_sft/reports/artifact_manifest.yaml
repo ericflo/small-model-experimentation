@@ -10,17 +10,17 @@ external_artifacts:
   - name: balanced independent pool
     storage: /workspace/large_artifacts/qwen35_4b_balanced_core_answer_potential_sft/pools/train_independent
     required_for: exact selection reconstruction
-    checksum: final index SHA-256 is bound by runs/preselection_amendment_receipt.json plus atomic per-task receipts
+    checksum: index SHA-256 f635d0600e472dc9625e81284cb455fbe005b42bd05ffe999cd10a9a2fd318fd, bound by runs/preselection_amendment_receipt.json plus atomic per-task receipts
     regenerate: .venv-vllm/bin/python experiments/qwen35_4b_balanced_core_answer_potential_sft/scripts/run.py --stage harvest
   - name: exact single-context candidate scores
     storage: /workspace/large_artifacts/qwen35_4b_balanced_core_answer_potential_sft/pools/train_independent_scores
     required_for: exact selection reconstruction
-    checksum: final index SHA-256 is bound by runs/preselection_amendment_receipt.json plus atomic per-task receipts
+    checksum: index SHA-256 e2b0a40256127c483459449fa318dcbb6c95e1aecd88eeb9f5fcc75af8cb5740, bound by runs/preselection_amendment_receipt.json plus atomic per-task receipts
     regenerate: .venv-vllm/bin/python experiments/qwen35_4b_balanced_core_answer_potential_sft/scripts/run.py --stage score
   - name: R1 answer rollouts
     storage: /workspace/large_artifacts/qwen35_4b_balanced_core_answer_potential_sft/pools/train_rollouts_r1
     required_for: success-RFT selection and exact selection reconstruction
-    checksum: final index SHA-256 is bound by runs/preselection_amendment_receipt.json plus atomic per-task receipts
+    checksum: index SHA-256 b116eea5f76bb20bd67fb716af707dd011ee1fc45c1e848737b92508bfa7eea0, bound by runs/preselection_amendment_receipt.json plus atomic per-task receipts
     regenerate: .venv-vllm/bin/python experiments/qwen35_4b_balanced_core_answer_potential_sft/scripts/run.py --stage rollouts
   - name: six exact-token SFT datasets
     storage: /workspace/large_artifacts/qwen35_4b_balanced_core_answer_potential_sft/sft

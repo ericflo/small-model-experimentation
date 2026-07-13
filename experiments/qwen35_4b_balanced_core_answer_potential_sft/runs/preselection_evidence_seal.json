@@ -1,0 +1,40 @@
+{
+  "adapter_artifacts_absent": true,
+  "evidence_operation_contracts_sha256": "fe57a5b02f78908e916c21a20f6d1840f590fd598fbb373cc8bbd65cadf1b638",
+  "indexes": {
+    "independent": {
+      "index": "/workspace/large_artifacts/qwen35_4b_balanced_core_answer_potential_sft/pools/train_independent/index.json",
+      "index_sha256": "f635d0600e472dc9625e81284cb455fbe005b42bd05ffe999cd10a9a2fd318fd",
+      "operation_contract_sha256": "dbb353b627cf4039d5088b086b4ad8eecdc25d73732b2f2589ec3e358509f37e",
+      "rows": 23040,
+      "stage": "train_independent",
+      "tasks": 360
+    },
+    "independent_scores": {
+      "index": "/workspace/large_artifacts/qwen35_4b_balanced_core_answer_potential_sft/pools/train_independent_scores/index.json",
+      "index_sha256": "e2b0a40256127c483459449fa318dcbb6c95e1aecd88eeb9f5fcc75af8cb5740",
+      "operation_contract_sha256": "82275d6fc4a367db90bdd87d2fd5c62d9ddcfe938d8a75c482bbdd531241ae90",
+      "rows": 22681,
+      "stage": "train_independent_scores",
+      "tasks": 360
+    },
+    "rollouts": {
+      "index": "/workspace/large_artifacts/qwen35_4b_balanced_core_answer_potential_sft/pools/train_rollouts_r1/index.json",
+      "index_sha256": "b116eea5f76bb20bd67fb716af707dd011ee1fc45c1e848737b92508bfa7eea0",
+      "operation_contract_sha256": "83a49b80b697bdc9f30dba55e3b180b87b90c6d9a6ce50d95243b329bc00a00f",
+      "rows": 22681,
+      "stage": "train_rollouts_r1",
+      "tasks": 360
+    }
+  },
+  "legacy_index_receipt_sha256": "c0572f93aa5c0948facb7043a5241df6631571487c96c15bcabfdeb874131a31",
+  "legacy_index_sha256_before_operation_seal": {
+    "train_independent": "6aeae76faf869a6f6a5cf9cf883625ea1a27afdb1a01ae199515a8c1703a24d3",
+    "train_independent_scores": "c0fed08b44ce3df95c95757bed19ca2e7238fe3da26b5c9d25da84a44b649db8",
+    "train_rollouts_r1": "9a9ab75be155e203742edb17e28f2650d19e496e175a3885ac9bb3a839a2f71f"
+  },
+  "operation_contract_attestation": "retrospective post-run attestation over preserved artifacts; not metadata emitted by the original generation/scoring process",
+  "passed": true,
+  "schema_version": 1,
+  "selection_artifacts_absent": true
+}

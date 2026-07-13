@@ -1,0 +1,21 @@
+{
+  "classification": "retrospective_pre_operation_contract_attestation",
+  "indexes": {
+    "train_independent": {
+      "observed_operation_contract_sha256": null,
+      "path": "/workspace/large_artifacts/qwen35_4b_balanced_core_answer_potential_sft/pools/train_independent/index.json",
+      "sha256": "6aeae76faf869a6f6a5cf9cf883625ea1a27afdb1a01ae199515a8c1703a24d3"
+    },
+    "train_independent_scores": {
+      "observed_operation_contract_sha256": null,
+      "path": "/workspace/large_artifacts/qwen35_4b_balanced_core_answer_potential_sft/pools/train_independent_scores/index.json",
+      "sha256": "c0fed08b44ce3df95c95757bed19ca2e7238fe3da26b5c9d25da84a44b649db8"
+    },
+    "train_rollouts_r1": {
+      "observed_operation_contract_sha256": null,
+      "path": "/workspace/large_artifacts/qwen35_4b_balanced_core_answer_potential_sft/pools/train_rollouts_r1/index.json",
+      "sha256": "9a9ab75be155e203742edb17e28f2650d19e496e175a3885ac9bb3a839a2f71f"
+    }
+  },
+  "schema_version": 1
+}

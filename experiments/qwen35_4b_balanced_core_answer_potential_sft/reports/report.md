@@ -4,7 +4,7 @@
 
 Experiment in progress. The balanced raw pool is complete and the failed candidate scoring instrument has
 been replaced prospectively by its single-context reference. A later selector-balance repair is explicitly a
-post-score, pre-official-selection deviation and will be machine-sealed before selection; no trained
+post-score, pre-official-selection deviation and is machine-sealed before selection; no trained
 capability result has been observed.
 
 ## Plain-Language Question
@@ -25,8 +25,9 @@ four loops, and no top-ups. The task-diverse joint HF/vLLM gate failed at 0.6924
 score. The frozen threshold was preserved; vLLM likelihood scoring was retired in favor of the
 single-context Transformers reference. Exact scoring completed for all 22,681 eligible traces in 17,296
 seconds, followed by one R1 answer rollout per trace in 10,915 seconds. A read-only whole-bank validation
-passes exact scope, artifact, source-link, trace-join, and eligibility-set checks. Capability results remain
-pending; official selection has not run.
+passes exact scope, artifact, source-link, trace-join, and eligibility-set checks. The resulting retrospective
+seal binds the original and final index hashes, exact operation contracts, frozen code/data, and deviation
+disclosure. Capability results remain pending; official selection has not run.
 
 Exact reference scoring subsequently completed for all 360 tasks and 22,681 eligible traces. Applying the
 original helper in memory exposed an unintended 116-task filter; because those scores were already observed,

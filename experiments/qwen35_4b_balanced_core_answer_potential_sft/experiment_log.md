@@ -93,3 +93,18 @@ or evaluation generation has run under this experiment.
   raw-to-score/R1 source links, per-shard task identity, unique trace IDs, exact score/R1 joins, and the
   natural-close/non-loop eligibility set. The raw pool has 23,040 rows; score and R1 each have 22,681.
 - Selection remains absent and blocked pending the committed post-score/partial-rollout deviation seal.
+
+## 2026-07-13 — Pre-Selection Evidence Boundary Sealed
+
+- The seal first repeated the complete read-only raw/score/R1 validation, then added only retrospective
+  operation-contract attestations to the three legacy indexes. It records that these contracts were not
+  emitted by the original generation/scoring processes.
+- Pre-attestation index SHA-256 values are `6aeae76f...24d3`, `c0fed08b...db8`, and `9a9ab75b...71f` for
+  raw, exact scores, and R1. Final sealed index SHA-256 values are `f635d060...18fd`, `e2b0a402...5740`, and
+  `b116eea5...eea0` respectively; exact full values live in the tracked machine receipts and artifact manifest.
+- The amendment receipt binds rebased commit `0a6ccf6d68c79bf80705f48a3de58ad06a0a57ec`, every transitive
+  selection/training dependency, all procedural task data, the three final evidence indexes, and the explicit
+  post-score/partial-rollout deviation disclosure. It also proves that official selection and adapter
+  artifacts were absent at seal time.
+- A second seal invocation was byte-idempotent across all three external indexes and all four tracked seal
+  receipts. Official selection remains absent until this boundary is committed and pushed.
