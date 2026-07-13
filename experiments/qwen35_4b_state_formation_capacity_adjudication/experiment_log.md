@@ -743,6 +743,27 @@ Only seed-7412 setup-pair validation, commit, push, and workflow verification ar
 7413 G0/control may begin only after both workflows are green. Result training, evaluation, and
 analysis remain blocked.
 
+## 2026-07-13 — source-v10 seed-7413 LoRA setup pair passes; setup matrix complete
+
+- Seed-7412 setup commit `41d587ec` passed both required workflows before seed 7413 began.
+- Seed-7413 G0 passed at file SHA-256 `b1a42d2e…5b9256`, receipt identity `1909508f…b47e43`, with
+  exact lineage to initialization bundle `7dca25ea…a7c5c` and the unchanged source/manifest.
+- Both PEFT parity regimes, K=1 before/after, and destructive checkpoint roundtrip have zero observed
+  error. All 124 LoRA tensors and every required common-state group have finite nonzero live-joint
+  gradients, the base has none, aggregation-scalar norm is `1.5991002e-3`, and K=12 is finite.
+- The seed-matched positive control passed at file SHA-256 `5ea3a552…fa01c7`, receipt identity
+  `7ed7332a…4f85cc`: oracle accuracy 1.0; fixed-final intact 48/48; disabled 0/48; exactly 256 updates,
+  accumulation 16, and 4,096 presentations; parameter values changed.
+- All three source-v10 LoRA G0/control pairs now pass. Every setup receipt records zero benchmark and
+  sealed-contrast access and remains setup-only evidence; no scientific training has started.
+
+## Current authorization
+
+Only final setup-matrix validation, commit, push, and workflow verification are authorized. After
+both workflows pass, run the three Stage-A LoRA joint cells in frozen seed order. Evaluation,
+analysis, and all conditional branches remain blocked until their exact upstream barriers authorize
+them.
+
 ## 2026-07-13 — source-v9 seed-7411 G0 stops before model load; cache proof repaired
 
 - Non-model setup commit `ff4a8b9b` passed both repository workflows before the exact seed-7411 LoRA

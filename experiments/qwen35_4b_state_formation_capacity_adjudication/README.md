@@ -1,6 +1,6 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · frozen design unchanged; source-v10 non-model and seed-7411 setup checkpoints published/green; source-v10 seed-7412 LoRA G0 and positive control passed; pair-checkpoint publication/CI required before seed 7413; no result run is authorized
+**Status:** in-progress · since 2026-07-13 · frozen design unchanged; source-v10 seed-7411/7412 setup checkpoints published/green; all three source-v10 LoRA G0 and positive-control pairs pass; final setup-checkpoint publication/CI required before Stage A; no result run has started
 
 ## Current status
 
@@ -45,6 +45,14 @@ Its positive control passed at file SHA-256 `1097d31b…c41e5` and identity `ae4
 accuracy 1.0, fixed-final intact 48/48, disabled 0/48, exactly 256 updates, accumulation 16, and
 4,096 presentations. Both receipts remain setup-only with zero benchmark/sealed access. Publish and
 validate this pair before seed 7413; result stages remain blocked on the full setup barrier.
+Seed-7412 setup commit `41d587ec` passed both workflows before seed 7413 began. Source-v10 seed-7413
+LoRA G0 passed at file SHA-256 `b1a42d2e…5b9256` and identity `1909508f…b47e43`, including all 124
+LoRA gradients, no base gradient, exact parity/K=1/roundtrip, finite K=12, and aggregation-scalar
+gradient `1.5991002e-3`. Its positive control passed at file SHA-256 `5ea3a552…fa01c7` and identity
+`7ed7332a…4f85cc`: oracle accuracy 1.0, fixed-final intact 48/48, disabled 0/48, exactly 256
+updates, accumulation 16, and 4,096 presentations. All three source-v10 setup pairs now pass with
+zero benchmark/sealed access and no scientific evidence. Publish and validate this final setup
+checkpoint before the three Stage-A LoRA joint training cells; no result run has started.
 The source-v8 code was published at commit `ee729def` with both workflows green, and the source-d426
 archive is now complete: 23 files, 18,927,960 bytes, files identity `1538f2f2…ec3ed0`, receipt file
 SHA-256 `9aa04d35…efc1a1`, and receipt identity `e7a71362…818b77`. Independent verification matched every
@@ -360,9 +368,9 @@ fresh successor.
 The run is deliberately non-monolithic. At the current source-v10 resume point, the source-v9 archive
 transition and source-v10 non-model regeneration in **Source-v10 operator boundary** are complete.
 The non-model artifacts passed repository validation and both workflows at commit `33abfe33` before
-the first model-bearing command; seed-7411 setup passed both workflows at `d0642d4a`. Seed 7412
-G0/control now pass and must likewise be committed, pushed, and green before seed 7413. The completed
-smoke command was:
+the first model-bearing command; seed-7411 setup passed both workflows at `d0642d4a`, and seed-7412
+setup passed both at `41d587ec`. All three G0/control pairs now pass. The final setup pair must be
+committed, pushed, and green before Stage A. The completed smoke command was:
 
 ```bash
 .venv/bin/python -B experiments/qwen35_4b_state_formation_capacity_adjudication/scripts/run.py --stage cpu-smoke
