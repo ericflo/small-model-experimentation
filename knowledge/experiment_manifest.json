@@ -3340,10 +3340,10 @@
   },
   {
     "file_counts": {
-      ".json": 3,
-      ".jsonl": 9,
-      ".md": 7,
-      ".py": 10,
+      ".json": 5,
+      ".jsonl": 20,
+      ".md": 8,
+      ".py": 13,
       ".yaml": 3
     },
     "id": "qwen35_4b_materialized_residual_sibling_search",
@@ -3371,8 +3371,8 @@
       "src",
       "tests"
     ],
-    "total_files": 32,
-    "total_size_bytes": 882697
+    "total_files": 49,
+    "total_size_bytes": 4305137
   },
   {
     "file_counts": {

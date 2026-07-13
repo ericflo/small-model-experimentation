@@ -5,7 +5,9 @@ external_artifacts: []
 omitted_artifacts: []
 reproducibility:
   smoke_command: ".venv/bin/python experiments/qwen35_4b_materialized_residual_sibling_search/scripts/run.py --stage smoke"
-  full_command: "sealed pending staged implementation and published locks"
+  mechanics_prepare_command: ".venv-vllm/bin/python experiments/qwen35_4b_materialized_residual_sibling_search/scripts/run_mechanics.py --stage prepare"
+  mechanics_lock_command: ".venv-vllm/bin/python experiments/qwen35_4b_materialized_residual_sibling_search/scripts/run_mechanics.py --stage lock"
+  full_command: ".venv-vllm/bin/python experiments/qwen35_4b_materialized_residual_sibling_search/scripts/run_mechanics.py --stage run"
   required_external_artifacts: []
 local_receipts:
   construction_manifest:
@@ -14,4 +16,7 @@ local_receipts:
   smoke_summary:
     path: "experiments/qwen35_4b_materialized_residual_sibling_search/runs/smoke/summary.json"
     sha256: "2e8c7c54529abe76d89019c65d1ca95b89e66b48672ac941f6fd8d7244631f7b"
-notes: "Model-free design/data smoke passed. No model result or large artifact exists; update transactionally as stages are authorized."
+  mechanics_preoutcome:
+    path: "experiments/qwen35_4b_materialized_residual_sibling_search/runs/mechanics/prepared/preoutcome_receipt.json"
+    sha256: "3de86e8b08bf37174cf687e4e7220ff802386c61652bafb6554cf1e772c89b88"
+notes: "Model-free design/data smoke passed. Mechanics code remains model-sealed until its reviewed implementation commit and separate lock receipt are pushed. Raw mechanics artifacts are immutable, chained to the live preflight, and must be committed immediately after the run."

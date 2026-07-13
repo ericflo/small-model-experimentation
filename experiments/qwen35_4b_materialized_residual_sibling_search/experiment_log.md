@@ -42,8 +42,19 @@
 - 2026-07-13: Three independent reviewers accepted the construction layer after
   the final fixes. Published design/data lock still authorizes no model call;
   mechanics implementation requires a separate audit and lock.
+- 2026-07-13: Implemented the complete mechanics boundary and passed two
+  independent adversarial code audits. The frozen candidate reconstructs 1,984
+  requests, 24 surface-control folds, and 4,032 targeted raw-logprob values;
+  authenticates all 189 pinned environment distributions plus tokenizer,
+  runtime, transaction, and result-chain receipts; and made zero model calls.
+  Model authorization remains withheld until the prepared artifacts are pushed
+  and a separate implementation lock is then published and pushed.
+- 2026-07-13: Ran deterministic mechanics preparation twice under the pinned
+  vLLM environment. Both passes accepted the same 1,984-request inventory and
+  existing bytes; the committed preoutcome receipt records zero model loads and
+  calls and no hidden, qualification, confirmation, or benchmark reads.
 
 ## Pending
 
-- Audit and publish the mechanics implementation lock before constructing the
-  model.
+- Commit and push the prepared mechanics implementation, then publish and push
+  its separate implementation lock before constructing the model.
