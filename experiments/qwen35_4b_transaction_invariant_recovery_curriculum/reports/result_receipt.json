@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "experiment": "qwen35_4b_transaction_invariant_recovery_curriculum",
+  "verdict": "TRANSACTION_DEV_FAIL",
+  "stopped_at": "transaction_dev",
+  "menagerie_exposed": false,
+  "transaction_confirm_exposed": false,
+  "broad_retention_exposed": false,
+  "training": {
+    "transaction_replay": {
+      "optimizer_steps": 72,
+      "training_loss": 0.061183644743222326,
+      "delta_frobenius_norm_sum": 16.734973426908255,
+      "merged_weight_sha256": "1cf5fbca317808d6d00225f5cd533c82c7e1602b2b2e5e2da8f4307b01941ba3"
+    },
+    "replay_only": {
+      "optimizer_steps": 72,
+      "training_loss": 0.04186126175853941,
+      "delta_frobenius_norm_sum": 5.683192115277052,
+      "merged_weight_sha256": "5957bae208bb9f8ce08172f36437d7f9ff821f14f28b30d1ab6285d38cf36f64"
+    }
+  },
+  "locality": {
+    "passed": true,
+    "median_non_target_centered_logit_drift": 0.11944162845611572,
+    "drift_ceiling": 0.15,
+    "mean_entropy_delta": 0.011202833149582148,
+    "mean_varentropy_delta": -0.00021072787543136018
+  },
+  "calibration": {
+    "passed": true,
+    "success": {
+      "candidate": 0.8166666666666667,
+      "start": 0.5166666666666667,
+      "replay_only": 0.38333333333333336
+    },
+    "candidate_delta_vs_start": 0.29999999999999993,
+    "candidate_delta_vs_replay_only": 0.4333333333333333,
+    "rejected_patch_valid_changed_within_two": 1.0,
+    "failed_test_changed_patch_within_two": 1.0,
+    "candidate_invalid_action_rate_per_turn": 0.0076045627376425855,
+    "candidate_answer_cap_hit_rate_per_turn": 0.06463878326996197
+  },
+  "transaction_dev": {
+    "passed": false,
+    "success": {
+      "candidate": 0.71875,
+      "start": 0.703125,
+      "replay_only": 0.640625,
+      "start_sample_more": 0.703125
+    },
+    "candidate_contrasts": {
+      "start": {
+        "delta": 0.015625,
+        "paired_bootstrap_ci95": [-0.03125, 0.078125],
+        "candidate_only": 2,
+        "start_only": 1
+      },
+      "replay_only": {
+        "delta": 0.078125,
+        "paired_bootstrap_ci95": [0.015625, 0.15625],
+        "candidate_only": 5,
+        "replay_only_only": 0
+      },
+      "start_sample_more": {
+        "delta": 0.015625,
+        "paired_bootstrap_ci95": [-0.046875, 0.078125],
+        "candidate_only": 3,
+        "sample_more_only": 2
+      }
+    },
+    "family_success": {
+      "atomic_debits": {"candidate": 1.0, "start": 1.0},
+      "atomic_membership_moves": {"candidate": 1.0, "start": 1.0},
+      "atomic_patchset": {"candidate": 0.875, "start": 0.8125},
+      "atomic_reservations": {"candidate": 0.0, "start": 0.0}
+    },
+    "candidate_rejected_patch_valid_changed_within_two": 1.0,
+    "candidate_failed_test_changed_patch_within_two": 1.0,
+    "candidate_invalid_action_delta_vs_start": -0.006227080882861689,
+    "candidate_answer_cap_hit_delta_vs_start": -0.05798104199820106,
+    "failed_checks": [
+      "success_vs_start",
+      "success_vs_sample_more",
+      "bootstrap_vs_start"
+    ]
+  },
+  "atomic_reservations_forensics": {
+    "cases": 16,
+    "first_changed_patch_copies_input_state": 16,
+    "first_changed_patch_checks_all_requested_resources": 16,
+    "first_changed_patch_preserves_per_request_false_decisions": 16,
+    "first_changed_patch_checks_negative_amount_policy": 0,
+    "second_changed_patch_overcorrects_by_raising_on_any_invalid_request": 16,
+    "final_successes": 0,
+    "interpretation": "The curriculum installed validate-copy-commit proposal structure, but not verifier-faithful discrimination between negative amounts (raise) and unavailable resources (False)."
+  },
+  "invalid_control_correction": {
+    "candidate_was_unexposed_before_detection": true,
+    "cause": "Python set-literal order changed byte manifests across child processes",
+    "fix": "Freeze PYTHONHASHSEED=0 for every official child process",
+    "invalid_payloads_quarantined": true
+  },
+  "source_sha256": {
+    "training_receipt_transaction_replay": "0015311bac4289e5ed989ce334e7368cd3c4707f286ccd14b6cd57631a012533",
+    "training_receipt_replay_only": "e9b9fdf3a45454bc7042015430822608b57c899e86d6d069d48defef316af503",
+    "merge_receipt_transaction_replay": "9ed37162726874fd6750de477330949da343b1aeae3c837d9a2377282f3a90b3",
+    "merge_receipt_replay_only": "34b65c9aaa2736f3f3288df58035404cf5e5aa8088cb56255333ef50a031415e",
+    "locality": "912bd7ce2697182c0be5bdd6f96a01a03b98e66fb18b90007d9013e91f6f2851",
+    "calibration_gate": "6f7dd2160e4d6eab4649f1265d8a7422554ee0e87526fb5313f148d6ca078e3b",
+    "transaction_dev_gate": "7b0041a2d0863760be85148bf41dd2a7c8a74de35ddf1817a5f5dea92e8a6798"
+  }
+}

@@ -151,6 +151,7 @@ class TransactionCurriculumTests(unittest.TestCase):
         ) as mocked:
             runner.command(["synthetic-command"])
         self.assertEqual(mocked.call_args.kwargs["env"]["PYTHONHASHSEED"], "0")
+        self.assertEqual(mocked.call_args.kwargs["env"]["PYTHONDONTWRITEBYTECODE"], "1")
 
 
 if __name__ == "__main__":

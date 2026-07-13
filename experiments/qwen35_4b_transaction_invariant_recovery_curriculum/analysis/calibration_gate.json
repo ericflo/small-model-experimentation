@@ -1,0 +1,38 @@
+{
+  "answer_cap_hit_delta_vs_start": -0.06539217648236001,
+  "candidate_deltas": {
+    "replay": 0.4333333333333333,
+    "start": 0.29999999999999993
+  },
+  "checks": {
+    "answer_cap": true,
+    "failed_transition": true,
+    "invalid_action": true,
+    "locality": true,
+    "rejected_transition": true,
+    "success_absolute": true,
+    "success_vs_replay": true,
+    "success_vs_start": true
+  },
+  "gate": {
+    "passed": true
+  },
+  "invalid_action_delta_vs_start": -0.014067263887744413,
+  "locality": {
+    "mean_entropy_delta": 0.011202833149582148,
+    "mean_varentropy_delta": -0.00021072787543136018,
+    "median_non_target_centered_logit_drift": 0.11944162845611572
+  },
+  "schema_version": 1,
+  "stage": "transaction_calibration",
+  "success": {
+    "candidate": 0.8166666666666667,
+    "replay": 0.38333333333333336,
+    "start": 0.5166666666666667
+  },
+  "task_manifest_sha256": "0da5e2a8b18f67e331867d9a8dab37de98932e49736154eadba133bcf3b68e66",
+  "transition_metrics": {
+    "failed": 1.0,
+    "rejected": 1.0
+  }
+}

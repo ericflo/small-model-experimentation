@@ -46968,32 +46968,65 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "The focused and replay-only arms receive equal task-block dose",
+     "title": "The trained-family install barely transfers to new transaction APIs",
      "categories": [
-      "transaction + replay",
-      "replay only"
+      "trained families",
+      "unseen transaction dev"
      ],
      "series": [
       {
-       "label": "transaction task blocks",
+       "label": "recovery parent",
        "values": [
-        24,
-        0
+        0.5166666666666667,
+        0.703125
        ]
       },
       {
-       "label": "conditional-recovery task blocks",
+       "label": "replay-only control",
        "values": [
-        24,
-        48
+        0.38333333333333336,
+        0.640625
+       ]
+      },
+      {
+       "label": "transaction curriculum",
+       "values": [
+        0.8166666666666667,
+        0.71875
        ]
       }
      ],
-     "x_label": "training arm",
-     "y_label": "complete seven-transition task blocks",
-     "y_format": "integer",
-     "note": "Pre-run design chart. Both arms contain 48 complete task blocks, 336 rows, and equal weighted action mass. The primary changes only the semantic composition by replacing 24 recovery blocks with transaction-invariant repairs.",
-     "source": "experiments/qwen35_4b_transaction_invariant_recovery_curriculum/configs/default.yaml and reports/preregistration.md"
+     "x_label": "evaluation block",
+     "y_label": "repository recovery success",
+     "y_format": "percent01",
+     "note": "The curriculum clears every calibration gate (+30 points over parent), then adds only one success out of 64 on unseen transaction dev (+1.56 points). Parent sample-more also scores 0.7031, so transfer gates stop confirmation and Menagerie.",
+     "source": "experiments/qwen35_4b_transaction_invariant_recovery_curriculum/reports/result_receipt.json"
+    },
+    {
+     "kind": "bar",
+     "title": "All target first patches learn the transaction structure but miss negative handling",
+     "categories": [
+      "copy input state",
+      "check all resources",
+      "atomic false decision",
+      "negative amount error"
+     ],
+     "series": [
+      {
+       "label": "share of 16 first changed patches",
+       "values": [
+        1.0,
+        1.0,
+        1.0,
+        0.0
+       ]
+      }
+     ],
+     "x_label": "required transaction behavior",
+     "y_label": "first-patch coverage",
+     "y_format": "percent01",
+     "note": "After visible failure, all 16 trajectories overcorrect by raising on every unavailable or insufficient request. The next intervention must teach validation-policy distinctions while preserving the installed structure.",
+     "source": "experiments/qwen35_4b_transaction_invariant_recovery_curriculum/reports/result_receipt.json"
     }
    ]
   },

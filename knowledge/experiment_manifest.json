@@ -5141,7 +5141,7 @@
   },
   {
     "file_counts": {
-      ".json": 3,
+      ".json": 8,
       ".md": 7,
       ".py": 17,
       ".yaml": 3
@@ -5171,6 +5171,7 @@
     ],
     "title": "Transaction-invariant recovery curriculum",
     "top_level_dirs": [
+      "analysis",
       "configs",
       "data",
       "reports",
@@ -5178,8 +5179,8 @@
       "src",
       "tests"
     ],
-    "total_files": 30,
-    "total_size_bytes": 326437
+    "total_files": 35,
+    "total_size_bytes": 339615
   },
   {
     "file_counts": {

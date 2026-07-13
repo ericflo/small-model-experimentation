@@ -5925,40 +5925,46 @@
    ]
   },
   "qwen35_4b_transaction_invariant_recovery_curriculum": {
-   "verdict_tag": "Can one missing repair rule be installed safely",
-   "concept_primer": "A shop should check every item in an order before changing stock, make changes on a copy, and publish them only when the entire order is valid. The coding model currently learns pieces of that rule but often drops one while fixing another.",
+   "verdict_tag": "The structure transferred but one exception did not",
+   "concept_primer": "A shop should reject a negative order as malformed, but simply decline an ordinary order when stock is too low. Both outcomes leave stock unchanged, yet they are different rules. The model learned the safe update pattern but confused these two kinds of failure.",
    "plain_question": "Can focused worked repairs teach one small coding model to validate a whole request, copy state, and commit changes atomically without erasing its existing test-and-revise loop?",
-   "plain_answer": "Not run yet. The test rig now compares 24 focused transaction examples plus 24 existing recovery examples against 48 recovery examples alone, with the same training effort. The focused model must then win on different transaction APIs, preserve ordinary repair behavior, and finally improve an external benchmark.",
-   "why_it_matters": "If this works, coding-agent training can target a concrete shared failure rule instead of collecting more generic successful traces. If it fails, the staged checks will show whether the problem is memorizing familiar APIs, damaging the repair loop, or simply teaching a skill the external tasks do not need.",
-   "verdict_tone": "neutral",
+   "plain_answer": "Partly. Focused training lifted practice repairs from 52% to 82% and preserved the test-and-revise loop. But on different transaction APIs it reached 72% versus 70% before training, far below the required ten-point gain. Every target first patch copied state, checked the whole request, and updated atomically, yet all missed the separate negative-amount exception.",
+   "why_it_matters": "A worked repair can install the broad shape of a safe program without installing the exact policy for each failure case. The next training set should begin from almost-correct failed tests and teach the smallest distinction-preserving correction, rather than add more generic success examples.",
+   "verdict_tone": "mixed",
    "key_numbers": [
     {
-     "label": "Training blocks per arm",
-     "value": "48",
-     "sub": "the focused and comparison models get equal example counts"
+     "label": "Practice repairs before and after",
+     "value": "52% → 82%",
+     "sub": "strong local installation with the focused examples"
     },
     {
-     "label": "Conditional steps preserved per task",
-     "value": "7",
-     "sub": "from first inspection through commit after passing tests"
+     "label": "Different-API repairs before and after",
+     "value": "70% → 72%",
+     "sub": "only one additional success out of 64 cases"
     },
     {
-     "label": "Transaction families",
-     "value": "6 practice + 4 transfer",
-     "sub": "different APIs test whether the rule carries over"
+     "label": "First target patches with the safe structure",
+     "value": "16 of 16",
+     "sub": "all copied, checked every resource, and updated atomically"
     },
     {
-     "label": "External benchmark calls so far",
+     "label": "External benchmark calls",
      "value": "zero",
-     "sub": "sealed until every internal safety and transfer check passes"
+     "sub": "stopped after the different-API gain missed its bar"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Both training arms receive 48 complete task blocks",
-     "chart_read": "Each group is one training arm. The two colored bars split its focused transaction examples from replayed recovery examples; compare the totals as well as the composition.",
-     "chart_takeaway": "Both arms total 48 blocks, so the focused arm can win only by replacing half the old examples with the new transaction rule, not by receiving more training data."
+     "chart_plain_title": "A large practice gain shrinks to one new success",
+     "chart_read": "The two groups compare practice families with different transaction APIs. Within each, bars show the starting model, equal extra recovery training, and focused transaction training. Taller is better.",
+     "chart_takeaway": "Focused training dominates on practice tasks but barely moves the different APIs, so the learned rule shape did not become reliable task success."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "Every first patch learned three parts and missed one",
+     "chart_read": "Each bar is the share of 16 target first patches containing one required behavior. Full-height bars mean every patch had it; the missing bar is the exception policy.",
+     "chart_takeaway": "All patches copy state, check the whole request, and update atomically, but none reject negative amounts correctly—the precise residual for the next curriculum."
     }
    ]
   },

@@ -98,19 +98,32 @@ python experiments/qwen35_4b_transaction_invariant_recovery_curriculum/scripts/r
 
 ## Results
 
-Pre-run. The CPU substrate, firewall, split, full 48-task banks, exact parent
-hash, and tokenization preflight pass. Each arm has 336 rows, identical 152,992
-weighted action-token mass, no task padding, and no truncation at 4,096 tokens.
-No result-bearing model training or evaluation has run. The compact receipt is
-[`reports/bank_preflight.json`](reports/bank_preflight.json).
+**Verdict: `TRANSACTION_DEV_FAIL`.** The primary passed locality (0.119 drift),
+then installed the training families strongly: 81.7% versus parent 51.7% and
+replay-only 38.3%, with perfect two-turn recovery and improved interface
+validity. On unseen transaction dev it reached 71.9%, versus parent and
+equal-compute sample-more 70.3% and replay-only 64.1%. It therefore missed the
+registered +10/+5 bars and paired lower-bound gate. Confirmation, broad
+retention, and Menagerie remained sealed.
+
+The mechanistic result is more specific than “no transfer.” On all 16 atomic-
+reservation cases, the first candidate patch newly contained whole-request
+validation, copied state, and atomic commit—the intended proposal shift—but
+omitted the distinct negative-amount `ValueError` rule. After visible failure,
+all 16 overcorrected by raising on every insufficient request. The next
+iteration should teach verifier-faithful validation-policy distinctions from
+near-correct failed-test states, not add generic transaction dose. Full results
+are in [`reports/report.md`](reports/report.md) and
+[`reports/result_receipt.json`](reports/result_receipt.json).
 
 ## Knowledgebase Update
 
-- Program backlog already identifies this as the highest-priority successor.
-- Program evidence and shared synthesis update only after a result changes the
-  strategy.
-- A new claim is allowed only after transfer and, for general capability, the
-  paired Menagerie event.
+- Program evidence and backlog record proposal-structure installation without
+  task-success transfer and queue the counterexample-policy successor.
+- Shared synthesis and program scorecard now distinguish transaction structure
+  from validation-policy fidelity.
+- Claim ledger remains unchanged: the transfer gate failed and no Menagerie
+  event ran.
 
 ## Artifacts
 

@@ -62,16 +62,22 @@
   sample-more. Feasibility stopped the selector; confirm, banking, and
   Menagerie remained sealed. Do not tune the tie break or try another public
   source router—the two policies had only one exclusive win each.
-- Active curriculum successor:
-  `qwen35_4b_transaction_invariant_recovery_curriculum` creates diverse
-  transactional coding families whose solutions require whole-request
-  validation, state copying, and atomic commit. It uses executable programmatic
-  repairs because the incumbent proposed the full conjunction only once in 40
-  stochastic atomic trajectories, trains action-seam targets from the
-  recovery-action checkpoint, mixes the existing seven-transition recovery
-  bank as retention replay, and compares against matched replay-only training
-  and sample-more. Exact locality, transition retention, unseen transactional-
-  family transfer, and broad recovery non-regression gate Menagerie.
+- Completed transfer-gated negative:
+  `qwen35_4b_transaction_invariant_recovery_curriculum` passed locality and
+  installed trained transaction families (0.817 versus parent 0.517 and
+  replay-only 0.383), but unseen dev was only 0.719 versus parent/sample-more
+  0.703. It failed the +10/+5 and bootstrap bars; confirmation, broad retention,
+  and Menagerie stayed sealed. Do not repeat generic transaction dose.
+- Highest-priority successor: a near-correct counterexample-policy curriculum
+  from the local transaction candidate. On all 16 atomic-reservation cases its
+  first patch now contained copy + whole-request validation + atomic commit,
+  but omitted negative-amount handling; after the public failure all 16
+  overcorrected by raising on every insufficient request. Create diverse
+  failed-test states differing in validation policy (raise vs False vs None vs
+  reject), teach the smallest changed patch that preserves all other
+  invariants, replay the complete seven-transition recovery loop, and compare
+  against matched extra transaction/recovery dose before repeating fresh
+  atomic transfer.
 - Future retraining should calibrate plan dose by realized gradient/surprisal
   and avoid supervising plan starts already rank 1 or wildly off-policy lexical
   templates.

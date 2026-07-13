@@ -1,0 +1,72 @@
+{
+  "answer_cap_hit_delta_vs_start": -0.05798104199820106,
+  "checks": {
+    "answer_cap": true,
+    "bootstrap_vs_start": false,
+    "failed_transition": true,
+    "family_max_regression": true,
+    "family_nonnegative_count": true,
+    "invalid_action": true,
+    "rejected_transition": true,
+    "success_vs_replay": true,
+    "success_vs_sample_more": false,
+    "success_vs_start": false
+  },
+  "contrasts": {
+    "replay": {
+      "ci95": [
+        0.015625,
+        0.15625
+      ],
+      "delta": 0.078125,
+      "left_only": 5,
+      "n": 64,
+      "right_only": 0,
+      "ties": 59
+    },
+    "sample_more": {
+      "ci95": [
+        -0.046875,
+        0.078125
+      ],
+      "delta": 0.015625,
+      "left_only": 3,
+      "n": 64,
+      "right_only": 2,
+      "ties": 59
+    },
+    "start": {
+      "ci95": [
+        -0.03125,
+        0.078125
+      ],
+      "delta": 0.015625,
+      "left_only": 2,
+      "n": 64,
+      "right_only": 1,
+      "ties": 61
+    }
+  },
+  "family_deltas_vs_start": {
+    "atomic_debits": 0.0,
+    "atomic_membership_moves": 0.0,
+    "atomic_patchset": 0.0625,
+    "atomic_reservations": 0.0
+  },
+  "gate": {
+    "passed": false
+  },
+  "invalid_action_delta_vs_start": -0.006227080882861689,
+  "schema_version": 1,
+  "stage": "transaction_dev",
+  "success": {
+    "candidate": 0.71875,
+    "replay": 0.640625,
+    "sample_more": 0.703125,
+    "start": 0.703125
+  },
+  "transition_metrics": {
+    "failed": 1.0,
+    "rejected": 1.0
+  }
+}

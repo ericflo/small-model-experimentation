@@ -31,7 +31,11 @@ def resolve(value: str) -> Path:
 
 def command(argv: list[str], allowed: tuple[int, ...] = (0,)) -> int:
     print("[run] " + " ".join(argv), flush=True)
-    child_env = {**os.environ, "PYTHONHASHSEED": "0"}
+    child_env = {
+        **os.environ,
+        "PYTHONHASHSEED": "0",
+        "PYTHONDONTWRITEBYTECODE": "1",
+    }
     completed = subprocess.run(argv, cwd=ROOT, check=False, env=child_env)
     if completed.returncode not in allowed:
         raise subprocess.CalledProcessError(completed.returncode, argv)

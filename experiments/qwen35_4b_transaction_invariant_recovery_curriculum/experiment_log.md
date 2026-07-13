@@ -39,3 +39,14 @@
   feasibility analyzer stopped before candidate exposure. Quarantined both
   invalid payloads, froze `PYTHONHASHSEED=0` for every official child process,
   and reran controls before continuing. No threshold or model changed.
+- Corrected calibration: parent 31/60, replay-only 23/60, primary 49/60. Primary
+  passed every calibration and locality gate.
+- Transaction dev: parent 45/64, replay-only 41/64, equal-compute parent
+  sample-more 45/64, primary 46/64. Primary passed transition, interface, and
+  family-retention checks but failed the +10 parent, +5 sample-more, and paired
+  lower-bound gates. Stopped confirmation, broad retention, and Menagerie.
+- Atomic-reservation forensics: all 16 first candidate patches installed copy +
+  all-resource validation + atomic per-request commit, but all omitted the
+  negative-amount exception policy. After feedback, all 16 overcorrected by
+  raising on every invalid/insufficient request. This selects a near-correct
+  counterexample-policy curriculum as the next iteration.

@@ -323,3 +323,31 @@ validate-copy-commit invariant from executable tool-found solutions across
 diverse training families, mix the existing conditional recovery bank as
 replay, and require transfer to structurally different transactional families
 plus broad recovery retention before Menagerie.
+
+## qwen35_4b_transaction_invariant_recovery_curriculum (2026-07-13 — Transfer-dev negative)
+
+The fixed action-seam curriculum passed exact locality against C54 apex (0.119
+centered non-target drift; entropy +0.011, varentropy −0.0002) and strongly
+installed six trained transaction families: 0.817 versus recovery parent 0.517
+and matched replay-only 0.383. Both changed-patch-within-two transitions were
+1.00; invalid actions and answer-cap contacts improved. Thus executable
+programmatic supervision can locally move semantic coding proposals without
+deleting the loop or broad neighboring logits.
+
+It did not meet unseen transfer. On four transaction families, primary was
+0.719, parent 0.703, replay-only 0.641, and equal-reservation parent sample-more
+0.703. Candidate-parent paired CI was [−0.031,+0.078], below the registered
++0.10 bar. All family and interface guards passed, but atomic reservations—the
+only headroom family—remained 0/16 for every arm. Confirmation, broad
+retention, and Menagerie stayed sealed.
+
+The proposal audit advances the mechanism despite the score null. Every one of
+the candidate's 16 first atomic patches contained copied state, all-resource
+validation, and atomic per-request commit; none contained the separate negative
+amount exception. After the visible test reported the omission, every
+trajectory overcorrected by raising on all unavailable/insufficient requests,
+destroying required `False` decisions. The missing unit is now
+verifier-faithful validation-policy discrimination, not transaction structure
+or recovery syntax. Next: near-correct counterexample states that isolate one
+policy distinction at a time, with complete recovery replay and matched extra-
+transaction controls.

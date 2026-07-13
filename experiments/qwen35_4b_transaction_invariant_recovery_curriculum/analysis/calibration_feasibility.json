@@ -1,0 +1,21 @@
+{
+  "checks": {
+    "answer_cap": true,
+    "failed_transition": true,
+    "invalid_action": true,
+    "rejected_transition": true,
+    "success_absolute": true,
+    "success_vs_replay": true,
+    "success_vs_start": true
+  },
+  "control_success": {
+    "replay": 0.38333333333333336,
+    "start": 0.5166666666666667
+  },
+  "gate": {
+    "passed": true
+  },
+  "schema_version": 1,
+  "stage": "transaction_calibration_feasibility",
+  "task_manifest_sha256": "0da5e2a8b18f67e331867d9a8dab37de98932e49736154eadba133bcf3b68e66"
+}

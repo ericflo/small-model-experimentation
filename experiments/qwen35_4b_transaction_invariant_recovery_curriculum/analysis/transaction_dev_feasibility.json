@@ -1,0 +1,23 @@
+{
+  "checks": {
+    "answer_cap": true,
+    "failed_transition": true,
+    "family_count": true,
+    "family_regression": true,
+    "invalid_action": true,
+    "rejected_transition": true,
+    "success_vs_replay": true,
+    "success_vs_sample_more": true,
+    "success_vs_start": true
+  },
+  "control_success": {
+    "replay": 0.640625,
+    "sample_more": 0.703125,
+    "start": 0.703125
+  },
+  "gate": {
+    "passed": true
+  },
+  "schema_version": 1,
+  "stage": "transaction_dev_feasibility"
+}

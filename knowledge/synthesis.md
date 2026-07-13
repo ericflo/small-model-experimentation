@@ -321,6 +321,23 @@ transactional validate-copy-commit invariant across diverse families, mixed
 with the existing conditional recovery replay—not another selector, branch, or
 global reason dose.
 
+**Transaction structure installs locally, but verifier-specific validation
+policy is a separate unit (2026-07-13, Negative,
+[qwen35_4b_transaction_invariant_recovery_curriculum](../experiments/qwen35_4b_transaction_invariant_recovery_curriculum/reports/report.md)).**
+The action-seam curriculum passed apex-relative locality (0.119 drift), perfect
+two-turn recovery, and trained-family calibration at 81.7%, versus parent 51.7%
+and matched replay-only 38.3%. On unseen transaction dev it reached only 71.9%,
+versus parent and equal-compute sample-more 70.3%; frozen +10/+5 and bootstrap
+gates failed, so confirmation, broad retention, and Menagerie stayed sealed.
+Yet every one of 16 target first patches newly proposed copied state,
+whole-request resource validation, and atomic per-request commit. All omitted
+the distinct negative-amount exception, then overcorrected after visible
+failure by raising on every insufficient request. **Proposal structure and
+validation-policy fidelity are empirically separable.** The next useful
+curriculum should start from near-correct failed-test states and teach minimal
+policy-preserving revisions across raise/False/None/reject semantics, rather
+than add generic transactional examples or dose.
+
 The licensed J-value measurement is now a clean negative for the shared
 coordinate. All 144 value traces and 288 midpoint/endpoint states completed,
 but task-held-out shared J AUC was 0.5021 with one-sided task-bootstrap lower
