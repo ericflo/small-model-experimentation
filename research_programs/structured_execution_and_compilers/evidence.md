@@ -52,6 +52,19 @@
   tasks versus six required. A structured slot can expose a decision without
   making that decision reliable; task-level confirmation remains mandatory.
 
+- [qwen35_4b_early_text_hypothesis_forking](../../experiments/qwen35_4b_early_text_hypothesis_forking/reports/report.md)
+  (unclaimed; terminal `INVALID_INTERFACE_PARSE`): all 392 locked mechanics
+  rows authenticated. Exact early bound text controlled direct one-operation
+  execution broadly: systematic and length-matched deranged hints each achieved
+  84/96 execution of their own supplied operation, while deranged produced
+  0/96 of the registered target; all 24 operations and four contexts had
+  support. This did not become a valid proposal controller. Every diagnostic
+  arm exceeded the 0.05 answer-cap ceiling, duplicate/placebo also failed parse,
+  and the independent noncausal full-program ceiling reached only 3/8 visible
+  passes. Qualification stayed sealed. The next justified representation is a
+  materialized residual state—candidate intermediate outputs plus the remaining
+  target relation—not another opaque name, larger budget, or parser relaxation.
+
 - [qwen35_4b_partial_structure_search](../../experiments/qwen35_4b_partial_structure_search/reports/report.md)
   (unclaimed while ledger re-grade is open): **type-only partial viability is oracle-useful but model-unreadable.**
   A width-4 exact live-prefix beam retained a hidden solver on 12/12 dedicated depth-5 development tasks at

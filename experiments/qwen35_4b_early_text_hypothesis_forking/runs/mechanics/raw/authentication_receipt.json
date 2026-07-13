@@ -1,0 +1,16 @@
+{
+  "complete_receipts": {
+    "deranged": "35bd9d9ee5557924e613cbfacbe0c0a9963c85041ba0e36b948bf682d352604b",
+    "duplicate": "62a6c47f5da860a3d236f1c9d00562c21e1b7bc5b2116718f84eeb2a80fa0b58",
+    "placebo": "679153360a55b29e53e9a58dea77da00931ce4b7a83af8ee41e67d59a1bce1b9",
+    "program_ceiling": "91c02a12ed3e8e37a04384dfb8226e81d47f5faa282c24dbebb66317e20bb517",
+    "systematic": "0b31258cf641ff2ab345cbe3e46e1cbcd23aafa749a225ce4535ed008c534f25"
+  },
+  "decision": "MECHANICS_AUTHENTICATION_PASS",
+  "implementation_lock_sha256": "12c298aef3ba9cc83bd4d1cdadc304aa0daa7d71bde4be3fce81514fdf4b3148",
+  "live_preflight_sha256": "8510c7a449a179174c588562b2cf65136f88202d40eb10e45bc02ee2a06a9416",
+  "model": "Qwen/Qwen3.5-4B",
+  "prepare_receipt_sha256": "2d6b668a6d43e1bd657124c3645d85ea9996d9aaaea8f81225b97472a2f5b292",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "schema_version": 1
+}

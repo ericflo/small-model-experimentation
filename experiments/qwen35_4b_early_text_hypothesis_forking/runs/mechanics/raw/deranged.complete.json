@@ -1,0 +1,22 @@
+{
+  "engine_sha256": "03362178927804251390da53da8b97fe7dcd52d3b04d8c73f41af26ce972e8c8",
+  "implementation_lock_sha256": "12c298aef3ba9cc83bd4d1cdadc304aa0daa7d71bde4be3fce81514fdf4b3148",
+  "invocation": "deranged",
+  "live_preflight_sha256": "8510c7a449a179174c588562b2cf65136f88202d40eb10e45bc02ee2a06a9416",
+  "metadata_path": "experiments/qwen35_4b_early_text_hypothesis_forking/runs/mechanics/raw/deranged.metadata.json",
+  "metadata_sha256": "52b645125e91e4601ea531b983360d853859fab8d4a4ce3f3940731200bd6990",
+  "model": "Qwen/Qwen3.5-4B",
+  "raw_count": 96,
+  "raw_path": "experiments/qwen35_4b_early_text_hypothesis_forking/runs/mechanics/raw/deranged.jsonl",
+  "raw_sha256": "437ab33f954aa9efc78d70fe14899637ccaa04ae6ade0d7da71017e602a456f7",
+  "request_count": 96,
+  "request_order_sha256": "9692f76cf576daa7500c1ef706d7d24916413f3211a9495b7a4240b07942a717",
+  "request_path": "experiments/qwen35_4b_early_text_hypothesis_forking/runs/mechanics/prepared/deranged_requests.jsonl",
+  "request_sha256": "c49327b549ebc791b28075c981130eda67b86cff17b11e8c3828ace472247e1d",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "runner_sha256": "50248e42323a832a931781840eac4bc3817c00ed6955dd74d914ac96e2062e41",
+  "sampling_sha256": "74e85c6fec4a0c5fa784cfcf009b9a1c42e4b51c026037dddca4f97d2ffd88f1",
+  "schema_version": 1,
+  "started_sha256": "0262b31f706a836c4a8f6b8d9cdcb0a168bbe6915adb23567a4b3806470ec186",
+  "state": "COMPLETE"
+}

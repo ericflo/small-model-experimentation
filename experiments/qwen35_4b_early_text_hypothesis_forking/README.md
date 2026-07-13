@@ -1,6 +1,6 @@
 # Qwen3.5-4B Early Text Hypothesis Forking
 
-**Status:** in-progress · since 2026-07-13 · design amendment, adversarial implementation review, CPU smoke, and implementation lock passed; live model mechanics has not run.
+**Status:** finished · 2026-07-13 · terminal `INVALID_INTERFACE_PARSE`; mechanics authenticated, qualification and confirmation were not run.
 
 This experiment tests whether supplying each fully bound first operation at the
 start of Qwen3.5-4B reasoning changes complete two-step program proposals enough
@@ -124,29 +124,45 @@ an ambiguous started-only invocation is never resampled.
 
 ## Current result
 
-`CPU_SMOKE_PASS`. The refreshed smoke freezes 144 fresh tasks with zero readable-
-ancestor behavior collisions, exhausts all 576 two-step programs for every
-task, verifies 24 distinct bound-operation consequences on each of four public
-diagnostics, and records 144 distinct composed branch maps with balanced gold
-positions. The mechanics prepare receipt deterministically freezes 96 rows in
-each of four diagnostic arms plus eight full-program reachability cases; its
-SHA-256 is `2d6b668a6d43e1bd657124c3645d85ea9996d9aaaea8f81225b97472a2f5b292`.
-Strict parser, selector, gold-mutation, resource-matching, transaction,
-authentication, and exact-token runner tests pass (39 tests plus 33
-parameterized subtests). No model has been loaded and no scientific capability
-outcome exists. The rejected 12-type draft is not evidence.
+The locked mechanics run completed all 392 rows and passed raw authentication.
+Its terminal decision is `INVALID_INTERFACE_PARSE`, so qualification and
+confirmation remain sealed.
 
-The implementation lock binds the published design amendment and implementation
-commits plus every critical file with SHA-256
-`12c298aef3ba9cc83bd4d1cdadc304aa0daa7d71bde4be3fce81514fdf4b3148`.
-It certifies `model_calls_before_lock=0`.
+The preregistered adherence subgate was strongly positive: the systematic arm
+executed the injected registered operation on 84/96 rows (0.875), while the
+length-matched deranged arm executed that same registered operation on 0/96.
+The deranged arm instead executed its own supplied operation on 84/96. This
+pattern held above every contextwise threshold, covered all 24 operations and
+all four contexts, and was not reproduced by duplicate (4/96 registered) or
+placebo (0/96) hints. It is evidence that an exact early text hypothesis can
+control this one-operation diagnostic, not that it solves the task.
+
+The experiment stopped for two independent reasons. First, the answer-interface
+gate failed: systematic and deranged cap-contact rates were 0.0938 and 0.1042
+against a 0.05 ceiling, while duplicate/placebo parse rates were only 0.7292 and
+0.5312. Second, the noncausal full-program ceiling solved only 3/8 visible cases
+(0.375 versus 0.50), although the parameterized stratum reached 2/4. All eight
+programs parsed and none contacted the answer cap. The model therefore consumed
+bound early text reliably for a direct execution diagnostic but did not turn it
+into sufficiently reliable complete two-step proposals under this interface.
+
+The model-free smoke remains `CPU_SMOKE_PASS`. The preparation receipt is
+`2d6b668a6d43e1bd657124c3645d85ea9996d9aaaea8f81225b97472a2f5b292`, the
+published implementation lock is
+`12c298aef3ba9cc83bd4d1cdadc304aa0daa7d71bde4be3fce81514fdf4b3148`, and the
+post-run authentication receipt is
+`921699b45e585e4990defb3c81fd95334c52d71f953446c537d21a3f640bcac7`.
+See [the result report](reports/report.md) and
+[adversarial result review](reports/result_review.md).
 
 ## Claim boundary
 
-A replicated pass would show externally stratified, verifier-assisted proposal
-shaping on a small exhaustively searchable DSL. It would not show consciousness,
-internal certainty, J-space transfer, weight installation, autonomous solving,
-or superiority to exhaustive symbolic search. A higher-depth or installation
+This failed mechanics run supports no deployable capability or proposal-coverage
+claim. The positive adherence subgate is scoped to four public one-operation
+diagnostics and cannot be promoted past the failed interface and full-program
+ceiling. It does not show consciousness, internal certainty, J-space transfer,
+weight installation, autonomous solving, or superiority to exhaustive symbolic
+search. Any residualization, interface repair, higher-depth, or installation
 test must be a new experiment.
 
 ## Artifacts
@@ -156,10 +172,16 @@ test must be a new experiment.
 - `reports/preregistration.md`: frozen arms, gates, and stop logic.
 - `reports/preregistration_amendment_1.md`: pushed pre-model mechanics boundary.
 - `reports/implementation_review.md`: adversarial code findings and repairs.
+- `reports/result_review.md`: independent post-run authentication, gate, and
+  interpretation audit.
 - `configs/default.yaml`: exact model, data, compute, and thresholds.
 - `runs/smoke/summary.json`: model-free validation receipt.
 - `runs/mechanics/prepared/`: independently rebuildable exact-token requests
   and the pre-outcome receipt.
 - `runs/mechanics/implementation_lock.json`: added only after the implementation
   commit is published; it is the final prerequisite to model construction.
+- `runs/mechanics/raw/`: exact prompts/outputs, engine sidecars, immutable
+  transaction receipts, and the authentication receipt.
+- `runs/mechanics/scored/` and `runs/mechanics/summary.json`: strict-parser
+  outputs and the terminal preregistered decision.
 - `reports/artifact_manifest.yaml`: external/omitted artifact policy.

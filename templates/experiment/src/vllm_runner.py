@@ -238,11 +238,20 @@ def _mamba_reexec_decision(
 
 def _installed_packages() -> dict[str, str]:
     """Return the full distribution inventory needed to reproduce kernel/runtime state."""
-    packages: dict[str, str] = {}
+    # Enumerate names for a complete inventory, but resolve each version through
+    # importlib's normal distribution lookup.  A last-write-wins scan is unsafe:
+    # importing setuptools can expose its vendored dist-info directories after
+    # the real site-packages entry (for example packaging 26.0 after 26.2).
+    distribution_names: dict[str, str] = {}
     for distribution in importlib.metadata.distributions():
         name = distribution.metadata.get("Name")
         if name:
-            packages[name.lower().replace("_", "-")] = distribution.version
+            normalized = name.lower().replace("_", "-")
+            distribution_names.setdefault(normalized, name)
+    packages = {
+        normalized: importlib.metadata.version(name)
+        for normalized, name in distribution_names.items()
+    }
     return dict(sorted(packages.items()))
 
 

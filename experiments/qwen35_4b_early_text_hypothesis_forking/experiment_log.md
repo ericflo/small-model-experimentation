@@ -66,3 +66,31 @@ critical allowlist. Lock SHA-256 is
 `12c298aef3ba9cc83bd4d1cdadc304aa0daa7d71bde4be3fce81514fdf4b3148` and
 records `model_calls_before_lock=0`. Live mechanics remains unrun at this
 boundary.
+
+## 2026-07-13 — Authenticated mechanics stops before qualification
+
+The first locked live call passed engine preflight and wrote immutable complete
+receipts for systematic, deranged, duplicate, and placebo (96 rows each) and
+the eight-case program ceiling. Independent forensic review recomputed all
+request/raw/metadata/receipt hashes and found no partial or mutable transaction.
+The authentication receipt is `MECHANICS_AUTHENTICATION_PASS`.
+
+Early bound text exerted broad direct control: systematic executed the injected
+registered operation on 84/96 rows, deranged executed that registered operation
+on 0/96 but its own supplied operation on 84/96, and all 24 operations and four
+contexts had support. Duplicate registered execution was 4/96 and placebo 0/96.
+The preregistered adherence subgate passed.
+
+The formal outcome is nevertheless terminal `INVALID_INTERFACE_PARSE`.
+Systematic/deranged answer-cap contacts were 9/96 and 10/96 against a maximum of
+0.05; duplicate/placebo parse was 70/96 and 51/96 and cap contact was 22/96 and
+39/96. Independently, the noncausal full-program ceiling reached only 3/8
+visible passes versus the required 4/8, with its parameterized stratum at 2/4.
+Qualification and confirmation remain sealed.
+
+The automatic same-process analysis initially false-aborted after engine
+teardown because `setuptools/_vendor` introduced a duplicate `packaging 26.0`
+distribution after generation. Every generation sidecar had already recorded
+the real locked `26.2` package set. The documented fresh-process analysis-only
+stage authenticated and scored existing receipts without a model call or
+resample. This operational footgun is now documented in `docs/vllm_inference.md`.

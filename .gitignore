@@ -17,6 +17,9 @@ tmp/
 *.tmp
 /site/
 
+# Receipt-last generators use an OS lock for concurrency; it is not evidence.
+**/runs/**/run.lock
+
 # QLoRA adapters (large, regenerable — see artifact manifests)
 **/runs/lora_adapter/
 **/*.safetensors

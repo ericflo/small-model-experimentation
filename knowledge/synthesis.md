@@ -451,6 +451,24 @@ and beats matched-compute sampling with a visible-only selector before any
 installation claim. See
 [qwen35_4b_semantic_anchor_coordinate_branching](../experiments/qwen35_4b_semantic_anchor_coordinate_branching/reports/report.md).
 
+**Early concrete text is local control, not yet composition (2026-07-13,
+Promising diagnostic inside terminal instrument failure).** The fresh
+early-text pivot supplies a sharper split, but still stops before a capability
+test. All 392 mechanics rows authenticated in
+[qwen35_4b_early_text_hypothesis_forking](../experiments/qwen35_4b_early_text_hypothesis_forking/reports/report.md).
+Correct and deranged early bound hypotheses each drove their own supplied
+operation on 84/96 direct-execution rows, while deranged produced 0/96 of the
+registered target; the effect covered all 24 operations and all four contexts.
+So semantic text present before thought can be **consumed local control**, not
+merely a late writable name. But every diagnostic arm exceeded the frozen 5%
+answer-cap ceiling, duplicate/placebo also failed parse, and the independent
+full-program ceiling was only 3/8. Terminal `INVALID_INTERFACE_PARSE` kept all
+qualification and matched-sampling arms sealed. **The remaining bottleneck is
+composition, not local addressability:** materialize each candidate operation's
+public consequences and ask the model for the residual relation on a fresh
+depth-three substrate; do not spend another run on opaque names, timing, parser
+repair, or larger budgets.
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.

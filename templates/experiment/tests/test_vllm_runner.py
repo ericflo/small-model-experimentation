@@ -100,6 +100,31 @@ class EngineConfigCaptureGeometryTests(unittest.TestCase):
             runner._clamp_cudagraph_capture_sizes((), 15)
 
 
+class PackageInventoryTests(unittest.TestCase):
+    def test_vendored_duplicate_cannot_override_real_distribution(self) -> None:
+        real = SimpleNamespace(
+            metadata={"Name": "packaging"},
+            version="26.2",
+        )
+        vendored = SimpleNamespace(
+            metadata={"Name": "packaging"},
+            version="26.0",
+        )
+        with mock.patch.object(
+            runner.importlib.metadata,
+            "distributions",
+            return_value=[real, vendored],
+        ), mock.patch.object(
+            runner.importlib.metadata,
+            "version",
+            return_value="26.2",
+        ) as resolve:
+            inventory = runner._installed_packages()
+
+        self.assertEqual(inventory, {"packaging": "26.2"})
+        resolve.assert_called_once_with("packaging")
+
+
 class CliRewriteTests(unittest.TestCase):
     def test_rewrite_replaces_every_split_and_equals_spelling(self) -> None:
         argv = [

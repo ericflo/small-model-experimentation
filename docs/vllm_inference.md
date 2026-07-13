@@ -114,6 +114,25 @@ records the runner hash, pinned model revision, adapter hashes, requested engine
 resolved CUDA-graph geometry and mode, the full installed-package inventory, environment-lock
 digest, GPU/driver, Git state, and load/generation throughput.
 
+### Package-inventory mutation after engine import
+
+Snapshot the installed-package inventory **before** importing or constructing
+vLLM, as the template runner does. vLLM's CUDA-extension path can import
+`setuptools`; `setuptools/__init__.py` then appends `setuptools/_vendor` to
+`sys.path`. On the pinned environment that vendor directory contains a
+`packaging-26.0.dist-info` beside the real locked `packaging 26.2`. A naïve
+post-engine loop over `importlib.metadata.distributions()` that stores the last
+version for each normalized name can therefore falsely report `packaging 26.0`
+and reject an otherwise exact environment.
+
+Post-generation validators should resolve each expected package with
+`importlib.metadata.version(name)`, compare the pre-import snapshot recorded in
+the runner sidecar, or reject duplicate distribution names explicitly. They
+must not use last-write-wins enumeration after vLLM import. If this false abort
+occurs after immutable `COMPLETE` receipts exist, verify every receipt/hash and
+use a documented analysis-only entry point in a fresh process. Never delete or
+resample completed outputs to repair package-inventory bookkeeping.
+
 ## Thinking modes
 
 - `--thinking off` renders Qwen's explicit no-thinking chat channel.

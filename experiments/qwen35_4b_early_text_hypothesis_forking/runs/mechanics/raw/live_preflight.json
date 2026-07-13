@@ -1,0 +1,173 @@
+{
+  "backend": "vllm",
+  "capacity_source": "vllm_config.cache_config.kv_cache_size_tokens",
+  "decision": "LIVE_ENGINE_PREFLIGHT_PASS",
+  "engine": {
+    "adapter": null,
+    "cudagraph_capture_sizes": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64
+    ],
+    "enable_prefix_caching": false,
+    "enforce_eager": false,
+    "gpu_memory_utilization": 0.9,
+    "max_model_len": 4096,
+    "max_num_batched_tokens": 16384,
+    "max_num_seqs": 64
+  },
+  "engine_args": {
+    "async_scheduling": false,
+    "cudagraph_capture_sizes": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64
+    ],
+    "dtype": "bfloat16",
+    "enable_prefix_caching": false,
+    "enforce_eager": false,
+    "generation_config": "vllm",
+    "gpu_memory_utilization": 0.9,
+    "language_model_only": true,
+    "mamba_cache_mode": "none",
+    "max_cudagraph_capture_size": 64,
+    "max_logprobs": 20,
+    "max_model_len": 4096,
+    "max_num_batched_tokens": 16384,
+    "max_num_seqs": 64,
+    "model": "Qwen/Qwen3.5-4B",
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "seed": 0,
+    "tensor_parallel_size": 1,
+    "tokenizer_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "trust_remote_code": true
+  },
+  "forced_close_token_count": 2,
+  "implementation_lock_sha256": "12c298aef3ba9cc83bd4d1cdadc304aa0daa7d71bde4be3fce81514fdf4b3148",
+  "invocations": {
+    "deranged": {
+      "active_sequences": 64,
+      "generation_reserve_tokens": 386,
+      "logical_sequences": 96,
+      "max_prompt_plus_reserve_tokens": 714,
+      "max_prompt_tokens": 328,
+      "min_prompt_tokens": 324,
+      "pass": true,
+      "remaining_cache_tokens": 692782,
+      "request_count": 96,
+      "required_cache_tokens": 67584,
+      "rounded_tokens_per_sequence": 1056
+    },
+    "duplicate": {
+      "active_sequences": 64,
+      "generation_reserve_tokens": 386,
+      "logical_sequences": 96,
+      "max_prompt_plus_reserve_tokens": 714,
+      "max_prompt_tokens": 328,
+      "min_prompt_tokens": 324,
+      "pass": true,
+      "remaining_cache_tokens": 692782,
+      "request_count": 96,
+      "required_cache_tokens": 67584,
+      "rounded_tokens_per_sequence": 1056
+    },
+    "placebo": {
+      "active_sequences": 64,
+      "generation_reserve_tokens": 386,
+      "logical_sequences": 96,
+      "max_prompt_plus_reserve_tokens": 714,
+      "max_prompt_tokens": 328,
+      "min_prompt_tokens": 324,
+      "pass": true,
+      "remaining_cache_tokens": 692782,
+      "request_count": 96,
+      "required_cache_tokens": 67584,
+      "rounded_tokens_per_sequence": 1056
+    },
+    "program_ceiling": {
+      "active_sequences": 8,
+      "generation_reserve_tokens": 1154,
+      "logical_sequences": 8,
+      "max_prompt_plus_reserve_tokens": 1922,
+      "max_prompt_tokens": 768,
+      "min_prompt_tokens": 594,
+      "pass": true,
+      "remaining_cache_tokens": 743470,
+      "request_count": 8,
+      "required_cache_tokens": 16896,
+      "rounded_tokens_per_sequence": 2112
+    },
+    "systematic": {
+      "active_sequences": 64,
+      "generation_reserve_tokens": 386,
+      "logical_sequences": 96,
+      "max_prompt_plus_reserve_tokens": 714,
+      "max_prompt_tokens": 328,
+      "min_prompt_tokens": 324,
+      "pass": true,
+      "remaining_cache_tokens": 692782,
+      "request_count": 96,
+      "required_cache_tokens": 67584,
+      "rounded_tokens_per_sequence": 1056
+    }
+  },
+  "live_cache": {
+    "block_size": 528,
+    "cache_dtype": "auto",
+    "enable_prefix_caching": false,
+    "gpu_memory_utilization": 0.9,
+    "hash_block_size": null,
+    "kv_cache_max_concurrency": 185.63636363636363,
+    "kv_cache_size_tokens": 760366,
+    "mamba_block_size": 4096,
+    "mamba_cache_dtype": "auto",
+    "mamba_cache_mode": "none",
+    "mamba_page_size_padded": 2162688,
+    "mamba_ssm_cache_dtype": "float32",
+    "num_gpu_blocks": 2042
+  },
+  "live_model": {
+    "dtype": "torch.bfloat16",
+    "max_model_len": 4096
+  },
+  "live_parallel": {
+    "data_parallel_size": 1,
+    "tensor_parallel_size": 1,
+    "world_size": 1
+  },
+  "live_scheduler": {
+    "async_scheduling": false,
+    "max_num_batched_tokens": 16384,
+    "max_num_seqs": 64
+  },
+  "model": "Qwen/Qwen3.5-4B",
+  "prepare_receipt_sha256": "2d6b668a6d43e1bd657124c3645d85ea9996d9aaaea8f81225b97472a2f5b292",
+  "resolved_cudagraph": {
+    "cudagraph_capture_sizes": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64
+    ],
+    "decode_mode": "FULL",
+    "has_full_cudagraphs": true,
+    "max_cudagraph_capture_size": 64,
+    "mixed_mode": "PIECEWISE",
+    "mode": "FULL_AND_PIECEWISE",
+    "source": "llm_engine.vllm_config.compilation_config"
+  },
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "runner_sha256": "50248e42323a832a931781840eac4bc3817c00ed6955dd74d914ac96e2062e41",
+  "schema_version": 1
+}

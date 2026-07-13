@@ -1,0 +1,372 @@
+{
+  "authentication_receipt_sha256": "921699b45e585e4990defb3c81fd95334c52d71f953446c537d21a3f640bcac7",
+  "backend": "vllm",
+  "context_adherence": {
+    "mechanics-00000": {
+      "checks": {
+        "deranged_supplied_adherence": true,
+        "registered_delta": true,
+        "systematic_candidate_adherence": true,
+        "systematic_execution": true
+      },
+      "deranged_registered_count": 0,
+      "deranged_registered_rate": 0.0,
+      "deranged_supplied_count": 21,
+      "deranged_supplied_rate": 0.875,
+      "pass": true,
+      "rows": 24,
+      "systematic_registered_count": 21,
+      "systematic_registered_minus_deranged_registered": 0.875,
+      "systematic_registered_rate": 0.875,
+      "systematic_supplied_count": 21,
+      "systematic_supplied_rate": 0.875,
+      "thresholds": {
+        "candidate_adherence_min": 0.6,
+        "deranged_adherence_gain_min": 0.35,
+        "deranged_own_execution_min": 0.6,
+        "execution_rate_min": 0.75
+      }
+    },
+    "mechanics-00001": {
+      "checks": {
+        "deranged_supplied_adherence": true,
+        "registered_delta": true,
+        "systematic_candidate_adherence": true,
+        "systematic_execution": true
+      },
+      "deranged_registered_count": 0,
+      "deranged_registered_rate": 0.0,
+      "deranged_supplied_count": 22,
+      "deranged_supplied_rate": 0.9166666666666666,
+      "pass": true,
+      "rows": 24,
+      "systematic_registered_count": 22,
+      "systematic_registered_minus_deranged_registered": 0.9166666666666666,
+      "systematic_registered_rate": 0.9166666666666666,
+      "systematic_supplied_count": 22,
+      "systematic_supplied_rate": 0.9166666666666666,
+      "thresholds": {
+        "candidate_adherence_min": 0.6,
+        "deranged_adherence_gain_min": 0.35,
+        "deranged_own_execution_min": 0.6,
+        "execution_rate_min": 0.75
+      }
+    },
+    "mechanics-00002": {
+      "checks": {
+        "deranged_supplied_adherence": true,
+        "registered_delta": true,
+        "systematic_candidate_adherence": true,
+        "systematic_execution": true
+      },
+      "deranged_registered_count": 0,
+      "deranged_registered_rate": 0.0,
+      "deranged_supplied_count": 22,
+      "deranged_supplied_rate": 0.9166666666666666,
+      "pass": true,
+      "rows": 24,
+      "systematic_registered_count": 20,
+      "systematic_registered_minus_deranged_registered": 0.8333333333333334,
+      "systematic_registered_rate": 0.8333333333333334,
+      "systematic_supplied_count": 20,
+      "systematic_supplied_rate": 0.8333333333333334,
+      "thresholds": {
+        "candidate_adherence_min": 0.6,
+        "deranged_adherence_gain_min": 0.35,
+        "deranged_own_execution_min": 0.6,
+        "execution_rate_min": 0.75
+      }
+    },
+    "mechanics-00003": {
+      "checks": {
+        "deranged_supplied_adherence": true,
+        "registered_delta": true,
+        "systematic_candidate_adherence": true,
+        "systematic_execution": true
+      },
+      "deranged_registered_count": 0,
+      "deranged_registered_rate": 0.0,
+      "deranged_supplied_count": 19,
+      "deranged_supplied_rate": 0.7916666666666666,
+      "pass": true,
+      "rows": 24,
+      "systematic_registered_count": 21,
+      "systematic_registered_minus_deranged_registered": 0.875,
+      "systematic_registered_rate": 0.875,
+      "systematic_supplied_count": 21,
+      "systematic_supplied_rate": 0.875,
+      "thresholds": {
+        "candidate_adherence_min": 0.6,
+        "deranged_adherence_gain_min": 0.35,
+        "deranged_own_execution_min": 0.6,
+        "execution_rate_min": 0.75
+      }
+    }
+  },
+  "decision": "INVALID_INTERFACE_PARSE",
+  "gates": {
+    "context_adherence_valid": true,
+    "correct_hypothesis_ceiling_valid": false,
+    "hypothesis_adherence_valid": true,
+    "interface_valid": false,
+    "primary_interface_valid": false,
+    "program_interface_valid": true
+  },
+  "metrics": {
+    "deranged": {
+      "answer_limit_contact_rate": 0.10416666666666667,
+      "contexts": {
+        "mechanics-00000": {
+          "answer_limit_contact_count": 2,
+          "answer_limit_contact_rate": 0.08333333333333333,
+          "parse_count": 22,
+          "parse_rate": 0.9166666666666666,
+          "registered_execution_count": 0,
+          "registered_execution_rate": 0.0,
+          "rows": 24,
+          "supplied_execution_count": 21,
+          "supplied_execution_rate": 0.875
+        },
+        "mechanics-00001": {
+          "answer_limit_contact_count": 2,
+          "answer_limit_contact_rate": 0.08333333333333333,
+          "parse_count": 22,
+          "parse_rate": 0.9166666666666666,
+          "registered_execution_count": 0,
+          "registered_execution_rate": 0.0,
+          "rows": 24,
+          "supplied_execution_count": 22,
+          "supplied_execution_rate": 0.9166666666666666
+        },
+        "mechanics-00002": {
+          "answer_limit_contact_count": 2,
+          "answer_limit_contact_rate": 0.08333333333333333,
+          "parse_count": 23,
+          "parse_rate": 0.9583333333333334,
+          "registered_execution_count": 0,
+          "registered_execution_rate": 0.0,
+          "rows": 24,
+          "supplied_execution_count": 22,
+          "supplied_execution_rate": 0.9166666666666666
+        },
+        "mechanics-00003": {
+          "answer_limit_contact_count": 4,
+          "answer_limit_contact_rate": 0.16666666666666666,
+          "parse_count": 20,
+          "parse_rate": 0.8333333333333334,
+          "registered_execution_count": 0,
+          "registered_execution_rate": 0.0,
+          "rows": 24,
+          "supplied_execution_count": 19,
+          "supplied_execution_rate": 0.7916666666666666
+        }
+      },
+      "logical_model_tokens": 63776,
+      "parse_rate": 0.90625,
+      "registered_execution_rate": 0.0,
+      "rows": 96,
+      "sampled_tokens": 16017,
+      "supplied_execution_rate": 0.875
+    },
+    "duplicate": {
+      "answer_limit_contact_rate": 0.22916666666666666,
+      "contexts": {
+        "mechanics-00000": {
+          "answer_limit_contact_count": 6,
+          "answer_limit_contact_rate": 0.25,
+          "parse_count": 14,
+          "parse_rate": 0.5833333333333334,
+          "registered_execution_count": 1,
+          "registered_execution_rate": 0.041666666666666664,
+          "rows": 24,
+          "supplied_execution_count": 14,
+          "supplied_execution_rate": 0.5833333333333334
+        },
+        "mechanics-00001": {
+          "answer_limit_contact_count": 6,
+          "answer_limit_contact_rate": 0.25,
+          "parse_count": 18,
+          "parse_rate": 0.75,
+          "registered_execution_count": 1,
+          "registered_execution_rate": 0.041666666666666664,
+          "rows": 24,
+          "supplied_execution_count": 18,
+          "supplied_execution_rate": 0.75
+        },
+        "mechanics-00002": {
+          "answer_limit_contact_count": 3,
+          "answer_limit_contact_rate": 0.125,
+          "parse_count": 21,
+          "parse_rate": 0.875,
+          "registered_execution_count": 1,
+          "registered_execution_rate": 0.041666666666666664,
+          "rows": 24,
+          "supplied_execution_count": 21,
+          "supplied_execution_rate": 0.875
+        },
+        "mechanics-00003": {
+          "answer_limit_contact_count": 7,
+          "answer_limit_contact_rate": 0.2916666666666667,
+          "parse_count": 17,
+          "parse_rate": 0.7083333333333334,
+          "registered_execution_count": 1,
+          "registered_execution_rate": 0.041666666666666664,
+          "rows": 24,
+          "supplied_execution_count": 17,
+          "supplied_execution_rate": 0.7083333333333334
+        }
+      },
+      "logical_model_tokens": 74147,
+      "parse_rate": 0.7291666666666666,
+      "registered_execution_rate": 0.041666666666666664,
+      "rows": 96,
+      "sampled_tokens": 18182,
+      "supplied_execution_rate": 0.7291666666666666
+    },
+    "placebo": {
+      "answer_limit_contact_rate": 0.40625,
+      "contexts": {
+        "mechanics-00000": {
+          "answer_limit_contact_count": 12,
+          "answer_limit_contact_rate": 0.5,
+          "parse_count": 9,
+          "parse_rate": 0.375,
+          "registered_execution_count": 0,
+          "registered_execution_rate": 0.0,
+          "rows": 24,
+          "supplied_execution_count": 0,
+          "supplied_execution_rate": 0.0
+        },
+        "mechanics-00001": {
+          "answer_limit_contact_count": 9,
+          "answer_limit_contact_rate": 0.375,
+          "parse_count": 14,
+          "parse_rate": 0.5833333333333334,
+          "registered_execution_count": 0,
+          "registered_execution_rate": 0.0,
+          "rows": 24,
+          "supplied_execution_count": 0,
+          "supplied_execution_rate": 0.0
+        },
+        "mechanics-00002": {
+          "answer_limit_contact_count": 8,
+          "answer_limit_contact_rate": 0.3333333333333333,
+          "parse_count": 15,
+          "parse_rate": 0.625,
+          "registered_execution_count": 0,
+          "registered_execution_rate": 0.0,
+          "rows": 24,
+          "supplied_execution_count": 0,
+          "supplied_execution_rate": 0.0
+        },
+        "mechanics-00003": {
+          "answer_limit_contact_count": 10,
+          "answer_limit_contact_rate": 0.4166666666666667,
+          "parse_count": 13,
+          "parse_rate": 0.5416666666666666,
+          "registered_execution_count": 0,
+          "registered_execution_rate": 0.0,
+          "rows": 24,
+          "supplied_execution_count": 0,
+          "supplied_execution_rate": 0.0
+        }
+      },
+      "logical_model_tokens": 87943,
+      "parse_rate": 0.53125,
+      "registered_execution_rate": 0.0,
+      "rows": 96,
+      "sampled_tokens": 22852,
+      "supplied_execution_rate": 0.0
+    },
+    "systematic": {
+      "answer_limit_contact_rate": 0.09375,
+      "contexts": {
+        "mechanics-00000": {
+          "answer_limit_contact_count": 2,
+          "answer_limit_contact_rate": 0.08333333333333333,
+          "parse_count": 22,
+          "parse_rate": 0.9166666666666666,
+          "registered_execution_count": 21,
+          "registered_execution_rate": 0.875,
+          "rows": 24,
+          "supplied_execution_count": 21,
+          "supplied_execution_rate": 0.875
+        },
+        "mechanics-00001": {
+          "answer_limit_contact_count": 1,
+          "answer_limit_contact_rate": 0.041666666666666664,
+          "parse_count": 23,
+          "parse_rate": 0.9583333333333334,
+          "registered_execution_count": 22,
+          "registered_execution_rate": 0.9166666666666666,
+          "rows": 24,
+          "supplied_execution_count": 22,
+          "supplied_execution_rate": 0.9166666666666666
+        },
+        "mechanics-00002": {
+          "answer_limit_contact_count": 4,
+          "answer_limit_contact_rate": 0.16666666666666666,
+          "parse_count": 20,
+          "parse_rate": 0.8333333333333334,
+          "registered_execution_count": 20,
+          "registered_execution_rate": 0.8333333333333334,
+          "rows": 24,
+          "supplied_execution_count": 20,
+          "supplied_execution_rate": 0.8333333333333334
+        },
+        "mechanics-00003": {
+          "answer_limit_contact_count": 2,
+          "answer_limit_contact_rate": 0.08333333333333333,
+          "parse_count": 22,
+          "parse_rate": 0.9166666666666666,
+          "registered_execution_count": 21,
+          "registered_execution_rate": 0.875,
+          "rows": 24,
+          "supplied_execution_count": 21,
+          "supplied_execution_rate": 0.875
+        }
+      },
+      "logical_model_tokens": 62613,
+      "parse_rate": 0.90625,
+      "registered_execution_rate": 0.875,
+      "rows": 96,
+      "sampled_tokens": 15442,
+      "supplied_execution_rate": 0.875
+    }
+  },
+  "model_id": "Qwen/Qwen3.5-4B",
+  "passed": false,
+  "program_ceiling": {
+    "answer_limit_contact_rate": 0.0,
+    "first_operations": [
+      "reverse",
+      "running_sum",
+      "adjacent_diff",
+      "sort_desc",
+      "add_k(-2)",
+      "mul_k(3)",
+      "take_k(3)",
+      "rotate_k(2)"
+    ],
+    "parameterized_rows": 4,
+    "parameterized_visible_pass_rate": 0.5,
+    "parse_rate": 1.0,
+    "rows": 8,
+    "scope": "noncausal_reachability_only",
+    "visible_pass_rate": 0.375
+  },
+  "qualification_authorized": false,
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "schema_version": 1,
+  "scored_files": {
+    "deranged": "2bcacd5f3834c6b21a7f1ce7d6d49538e01f8232dc2019cd5aa5ce2b1d4ec0d0",
+    "duplicate": "be543e1ca2a65a7b707407e25744bdc230e7c0984b5160849eab3c160d906656",
+    "placebo": "886ca31ed7319ef2c07ed0646b7b51caef247d511026c4d6769839bced2927f3",
+    "program_ceiling": "93a2155712e880588f9943764a4c0f15b2998e285664aeea326030dafd1e373b",
+    "systematic": "2e9bfd1c158931ca91c07c3ca71dfa89ca5621e2c183f53e66270011f6d53679"
+  },
+  "stage": "mechanics",
+  "systematic_context_support": 4,
+  "systematic_operation_support": 24,
+  "systematic_registered_minus_deranged_registered": 0.875
+}

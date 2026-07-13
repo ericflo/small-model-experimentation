@@ -7,9 +7,11 @@ reproducibility:
   full_command: "PYTHONDONTWRITEBYTECODE=1 .venv-vllm/bin/python experiments/qwen35_4b_early_text_hypothesis_forking/scripts/run_mechanics.py --stage run --lock experiments/qwen35_4b_early_text_hypothesis_forking/runs/mechanics/implementation_lock.json"
   required_external_artifacts: []
 notes: >-
-  No model output, adapter, or training artifact exists after CPU smoke and the
-  tokenizer-only mechanics preparation. The tracked procedural split,
-  branch-plan, firewall, prepared requests, and receipts are small and
-  self-contained. The implementation lock is tracked separately from its bound
-  implementation commit; any later omitted raw output must be added here with
-  checksums and regeneration commands.
+  The terminal authenticated mechanics run is entirely tracked: prepared
+  requests, exact raw rows, engine metadata, STARTED/COMPLETE receipts,
+  authentication receipt, scored rows, and summary are small and self-contained.
+  Qualification and confirmation were not authorized. No adapter, checkpoint,
+  external artifact, omitted artifact, training output, or benchmark output
+  exists. The full command safely skips authenticated COMPLETE invocations;
+  analysis-only recovery uses the same script with --stage analyze and never
+  resamples an ambiguous invocation.
