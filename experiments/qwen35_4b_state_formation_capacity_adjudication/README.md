@@ -1,6 +1,6 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · frozen design unchanged; source-v10 implementation and source-v9 archive checkpoints published/green; source-v10 non-model setup regenerated; non-model checkpoint publication/CI required before G0; no result run is authorized
+**Status:** in-progress · since 2026-07-13 · frozen design unchanged; source-v10 non-model checkpoint published/green; source-v10 seed-7411 LoRA G0 and positive control passed; pair-checkpoint publication/CI required before seed 7412; no result run is authorized
 
 ## Current status
 
@@ -19,8 +19,8 @@ file-set identity `06486f26…d1fe12` without loading the model. Source v10 is p
 with both workflows green. All source-v9 setup is now preserved in a verified 20-file,
 17,655,138-byte archive: file-set identity `7360b00d…1f2650`, receipt file SHA-256
 `086d35af…be14e`, and receipt identity `8d5fe94d…33ad5c`. The exact 20-leaf zero quarantine,
-canonical cleanup, retained failure mirror, and idempotent replay all pass. Publish this archive
-checkpoint was published at `9c1fadde` with both workflows green before source-v10 setup
+canonical cleanup, retained failure mirror, and idempotent replay all pass. The archive checkpoint
+was published at `9c1fadde` with both workflows green before source-v10 setup
 regeneration began. Source-v10 CPU smoke has SHA-256 `ebfb68fe…17bc5`; the regenerated manifest is
 `0b1cca35…7422a`, data contract `5fba6c3c…c252`, and empty-ledger identity
 `d0b9eda7…17e04`. All three shared initialization bundles reopen canonically, have byte-identical but
@@ -28,7 +28,16 @@ inode-distinct tracked mirrors, and exactly reproduce the archived source-v9 ten
 SHA-256 / sidecar receipt identity by seed: 7411 `e202efb8…3e0d8` / `9f6923d4…147abd`; 7412
 `ab0b70c1…9169b` / `cf90d157…806e9`; 7413 `7dca25ea…a7c5c` / `791aa7ec…6201`. No model was loaded,
 no benchmark was read, and no sealed split was decompressed. This non-model checkpoint must now be
-validated, committed, pushed, and green in both workflows before seed-7411 G0.
+validated, committed, pushed, and green in both workflows before seed-7411 G0. That checkpoint was
+published at `33abfe33` and both workflows passed. Source-v10 seed-7411 LoRA G0 then passed at file
+SHA-256 `efde2db9…420f9` and identity `0fe46a0c…7a383`: exact PEFT parity and K=1 behavior, all 124
+LoRA tensors and every required common-state group finite/nonzero in the live joint probe, no base
+gradient, finite K=12, zero-error checkpoint restoration, and aggregation-scalar gradient
+`2.2352195e-5`. Its seed-matched positive control passed at file SHA-256 `04b7f995…a34f6` and identity
+`18d02610…ebe89`: oracle accuracy 1.0, fixed-final intact 48/48, disabled 0/48, exactly 256 updates,
+accumulation 16, and 4,096 presentations. Both receipts record zero benchmark and sealed-contrast
+access and no scientific evidence. Publish and validate this setup-pair checkpoint before seed 7412;
+all result stages remain blocked on the complete three-seed setup barrier.
 The source-v8 code was published at commit `ee729def` with both workflows green, and the source-d426
 archive is now complete: 23 files, 18,927,960 bytes, files identity `1538f2f2…ec3ed0`, receipt file
 SHA-256 `9aa04d35…efc1a1`, and receipt identity `e7a71362…818b77`. Independent verification matched every
@@ -343,8 +352,9 @@ fresh successor.
 
 The run is deliberately non-monolithic. At the current source-v10 resume point, the source-v9 archive
 transition and source-v10 non-model regeneration in **Source-v10 operator boundary** are complete.
-The non-model artifacts must pass repository validation, be committed and pushed, and have both
-workflows green before the first model-bearing command. The completed smoke command was:
+The non-model artifacts passed repository validation and both workflows at commit `33abfe33` before
+the first model-bearing command. Seed 7411 G0/control now pass and must likewise be committed, pushed,
+and green before seed 7412. The completed smoke command was:
 
 ```bash
 .venv/bin/python -B experiments/qwen35_4b_state_formation_capacity_adjudication/scripts/run.py --stage cpu-smoke

@@ -700,6 +700,29 @@ Only non-model setup validation, commit, push, and workflow verification are aut
 positive controls, result training, evaluation, and analysis remain blocked until both workflows are
 green.
 
+## 2026-07-13 — source-v10 seed-7411 LoRA setup pair passes
+
+- Non-model setup commit `33abfe33` passed both required workflows before the model-bearing command.
+- Seed-7411 G0 passed at file SHA-256 `efde2db9…420f9`, receipt identity `0fe46a0c…7a383`. It binds
+  the pinned Qwen revision, source v10, manifest `0b1cca35…7422a`, and seed-7411 initialization
+  `e202efb8…3e0d8`.
+- The exact 62-target, 16,232,448-parameter LoRA setup passed both PEFT parity regimes with zero
+  observed output/A-gradient/B-gradient error. K=1 and destructive checkpoint restoration have zero
+  logit error. The live joint probe gives finite nonzero gradients to all 124 LoRA tensors and every
+  required common-state tensor, no base tensor, and aggregation-scalar norm `2.2352195e-5`; K=12 is
+  finite. Peak allocated memory was 11.197 GiB.
+- The seed-matched positive control passed at file SHA-256 `04b7f995…a34f6`, identity
+  `18d02610…ebe89`: oracle accuracy 1.0; fixed-final intact 48/48; disabled 0/48; exactly 256 updates,
+  accumulation 16, and 4,096 presentations; adaptation and common-state parameters both changed.
+- Both receipts record zero benchmark and sealed-contrast access and are setup-only evidence. The
+  control's seed-specific training authorization does not satisfy the three-seed setup barrier.
+
+## Current authorization
+
+Only seed-7411 setup-pair validation, commit, push, and workflow verification are authorized. Seed
+7412 G0/control may begin only after both workflows are green. Result training, evaluation, and
+analysis remain blocked.
+
 ## 2026-07-13 — source-v9 seed-7411 G0 stops before model load; cache proof repaired
 
 - Non-model setup commit `ff4a8b9b` passed both repository workflows before the exact seed-7411 LoRA

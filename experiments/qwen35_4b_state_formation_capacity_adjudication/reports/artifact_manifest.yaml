@@ -177,7 +177,15 @@ notes: >-
   bundles reopen through the canonical loader, exactly match their archived source-v9 tensor-value
   digests, and have byte-identical but inode-distinct tracked mirrors. No model, benchmark, or sealed
   split was opened during this regeneration. Publish this non-model checkpoint and require both
-  workflows before seed-7411 G0.
+  workflows before seed-7411 G0. Non-model commit 33abfe33 passed both workflows. Source-v10
+  seed-7411 LoRA G0 then passed at file SHA256
+  efde2db9dfa5522958e6a665084229ff4c448d0d22701086a0ac84c9083420f9 and receipt identity
+  0fe46a0c7a2270c9fbab775d06af93a17674229d4cca4bb88df1a82a94c7a383. Its positive control passed
+  at file SHA256 04b7f9956a8493f9bbeb34597d3ae530b3e07518764689893796a9ac40fa34f6 and identity
+  18d02610d94ac172ed46dea695cf967bdb85f980b312e717db6d4dcc763ebe89: oracle 1.0, intact 48/48,
+  disabled 0/48, 256 updates, accumulation 16, and 4,096 presentations. Both are setup-only evidence
+  with zero benchmark/sealed access. Publish this pair checkpoint and require both workflows before
+  seed 7412; result stages remain blocked on the exact three-seed setup barrier.
   The first Qwen load stopped before wrapper construction or mechanics and is preserved by a tracked
   failure receipt; it opened
   only the permitted training validator, no sealed contrast, and produced no canonical G0 output.
