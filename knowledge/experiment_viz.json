@@ -47305,6 +47305,35 @@
     }
    ]
   },
+  "qwen35_4b_state_formation_capacity_adjudication": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Preregistered ladder spends dense runs only after a valid LoRA miss",
+     "categories": [
+      "Stage A: LoRA joint",
+      "Stage B: capacity controls",
+      "Stage C: state-only control"
+     ],
+     "series": [
+      {
+       "label": "maximum cumulative fixed-final runs",
+       "values": [
+        3,
+        9,
+        12
+       ]
+      }
+     ],
+     "x_label": "furthest authorized branch",
+     "y_label": "cumulative result-bearing training runs",
+     "y_format": "integer",
+     "note": "Design geometry only, not a model result. Stage A is three LoRA-joint seeds. A valid LoRA formation miss mandates six Stage-B controls (LoRA state-only and full-rank joint); only a valid full-rank joint miss permits the final three full-rank state-only runs. Unreached bars remain prohibited rather than being treated as failures.",
+     "source": "experiments/qwen35_4b_state_formation_capacity_adjudication/analysis/preregistered_branch_budget.csv"
+    }
+   ]
+  },
   "qwen35_4b_validation_policy_counterexample_curriculum": {
    "charts": [
     {

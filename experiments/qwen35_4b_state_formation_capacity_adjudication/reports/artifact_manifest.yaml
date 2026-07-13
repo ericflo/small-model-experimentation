@@ -1,0 +1,67 @@
+schema_version: 1
+experiment_id: "qwen35_4b_state_formation_capacity_adjudication"
+external_artifacts:
+  - name: "per-seed common loop-state initialization bundles"
+    storage: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed{7411,7412,7413}.pt"
+    required_for: "bit-identical reconstruction of every reached capacity/objective arm"
+    checksum: "not yet created; each tracked initialization receipt must record the runtime file SHA256 and canonical tensor-value digest"
+    regenerate: "follow docs/gpu_runbook.md initialization stage before any result-bearing training"
+  - name: "fixed-final LoRA joint checkpoints"
+    storage: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/lora_joint_seed{7411,7412,7413}/"
+    required_for: "primary LoRA state-formation adjudication and intact/disabled reevaluation"
+    checksum: "not yet created; step-1500 checkpoint metadata must bind every payload hash and upstream receipt identity"
+    regenerate: "run the three LoRA joint cells only after setup gates pass; never overwrite a realized attempt"
+  - name: "conditional LoRA state-only checkpoints"
+    storage: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/lora_state_only_seed{7411,7412,7413}/"
+    required_for: "objective-competition diagnosis after a valid LoRA joint miss"
+    checksum: "not yet created and prohibited unless the LoRA miss authorization exists; runtime metadata must bind payload hashes"
+    regenerate: "run only from the identity-bound LoRA joint miss branch described in docs/gpu_runbook.md"
+  - name: "conditional full-rank joint checkpoints"
+    storage: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/fullrank_joint_seed{7411,7412,7413}/"
+    required_for: "direct-recipe capacity adjudication after a valid LoRA joint miss"
+    checksum: "not yet created and prohibited unless the LoRA miss authorization exists; runtime metadata must bind all delta and loop-state payload hashes"
+    regenerate: "run only from the identity-bound LoRA joint miss branch described in docs/gpu_runbook.md"
+  - name: "conditional full-rank state-only checkpoints"
+    storage: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/fullrank_state_only_seed{7411,7412,7413}/"
+    required_for: "objective-competition diagnosis after a valid full-rank joint miss"
+    checksum: "not yet created and prohibited unless the full-rank joint miss authorization exists; runtime metadata must bind payload hashes"
+    regenerate: "run only from the identity-bound full-rank joint miss branch described in docs/gpu_runbook.md"
+  - name: "conditional content-addressed failed-attempt archives"
+    storage: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/failed_attempts/"
+    required_for: "preservation of incomplete training/evaluation attempts and authorization of an identical sealed-evaluation replay"
+    checksum: "not yet created; every archive tree is content-addressed and mirrored by a tracked runs/failures/FAILED_ATTEMPT_ARCHIVED receipt"
+    regenerate: "not regenerable by design; create only from an existing incomplete canonical attempt with scripts/archive_failed_attempt.py and preserve permanently"
+omitted_artifacts:
+  - path: "experiments/qwen35_4b_state_formation_capacity_adjudication/data/generated/*.jsonl.gz"
+    reason: "fresh deterministic procedural payloads can be regenerated from the frozen split seeds; their small manifest and canonical row hashes remain tracked"
+  - path: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/"
+    reason: "initialization tensor bundles and model/checkpoint payloads are external under repository artifact policy"
+reproducibility:
+  smoke_command: "python3 experiments/qwen35_4b_state_formation_capacity_adjudication/scripts/run.py --stage cpu-smoke"
+  full_command: "phase-gated and intentionally non-monolithic: follow docs/gpu_runbook.md; every result stage verifies its exact upstream receipts and branch authorization"
+  required_external_artifacts: []
+notes: >-
+  The only realized runtime artifact is the tracked setup-only runs/cpu_smoke/receipt.json; it records
+  CPU_SMOKE_PASS, zero benchmark reads, no GPU/model load, scientific_evidence false, and the final
+  reviewed source-contract digest. No model-bearing or result-bearing artifact exists, so no such
+  runtime hash is asserted. Populate exact SHA256 values only from generated receipts after each
+  artifact is created. Small data manifests,
+  the contrast access ledger, the canonical reports/design_receipt.json, initialization receipts,
+  mechanics and branch receipts, training metrics, evaluation rows and summaries, analysis outputs,
+  and run indices belong in git when generated. In particular, evaluation of contrast_validation,
+  contrast_depth, and contrast_joint requires the tracked analysis/stage_b_seal.json receipt with
+  exact status STAGE_B_CONTRAST_AUTHORIZED; the LoRA-miss receipt alone is not authorization. The six
+  capacity-by-seed evaluation jobs each contain all three sealed splits in intact and disabled modes.
+  A full-rank trigger miss keeps all three contrast payloads sealed and uses that same Stage-B receipt
+  to license state-only instead. After authorized evaluation, a LoRA intact pass across the complete
+  sealed matrix takes terminal priority regardless of the full-rank score. With full rank passing,
+  every LoRA trigger-failed category must fail again in its matching sealed domain before rescue.
+  An interrupted same-cell sealed evaluation requires one newly content-validated tracked
+  FAILED_ATTEMPT_ARCHIVED receipt per retry; each is appended to the existing ledger event under a
+  separate stable lock inode, then event and ledger identities are recomputed. The ledger is
+  atomically replaced after temporary-file fsync and followed by parent-directory fsync. Initial
+  access rejects an archive predating its event. Completed evaluations cannot be archived as
+  failures. Any realized failed-attempt archive is a
+  required audit artifact and must be added to required_external_artifacts before terminal reporting.
+  Conditional artifact paths are plans, not evidence that their branches were reached. Update
+  required_external_artifacts to the realized fixed-final paths before reporting a terminal result.

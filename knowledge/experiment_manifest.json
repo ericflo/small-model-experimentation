@@ -3367,7 +3367,7 @@
       "src"
     ],
     "total_files": 73,
-    "total_size_bytes": 10761023
+    "total_size_bytes": 10761025
   },
   {
     "file_counts": {
@@ -4669,7 +4669,7 @@
       "tests"
     ],
     "total_files": 91,
-    "total_size_bytes": 12486122
+    "total_size_bytes": 12486124
   },
   {
     "file_counts": {
@@ -4709,7 +4709,7 @@
       "tests"
     ],
     "total_files": 44,
-    "total_size_bytes": 2049852
+    "total_size_bytes": 2049854
   },
   {
     "file_counts": {
@@ -4749,7 +4749,46 @@
       "tests"
     ],
     "total_files": 49,
-    "total_size_bytes": 1996815
+    "total_size_bytes": 1996817
+  },
+  {
+    "file_counts": {
+      ".csv": 1,
+      ".json": 1,
+      ".md": 11,
+      ".py": 29,
+      ".yaml": 4,
+      "[none]": 1
+    },
+    "id": "qwen35_4b_state_formation_capacity_adjudication",
+    "path": "experiments/qwen35_4b_state_formation_capacity_adjudication",
+    "primary_readme": "experiments/qwen35_4b_state_formation_capacity_adjudication/README.md",
+    "primary_report": "experiments/qwen35_4b_state_formation_capacity_adjudication/reports/report.md",
+    "research_programs": [
+      "posttraining_and_adaptation",
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "This is the canonical fresh adjudication of the unresolved LoRA-capacity question from `qwen35_4b_state_carry_vs_state_bag`. It is not a continuation of either prior checkpoint. The procedural rows, shared loop-state initialization bundles, training runs, evaluations, and result receipts do not exist yet. Preregistration, adversarial design review, implementation review, the 130-test suite, and setup-only CPU smoke are complete. The next step is to commit this reviewed tree, freeze its design receipt at that clean `HEAD`, and only then attempt the live setup gates.",
+    "tags": [
+      "latent-state",
+      "lora",
+      "small-model"
+    ],
+    "title": "State-Formation Capacity Adjudication",
+    "top_level_dirs": [
+      "analysis",
+      "configs",
+      "data",
+      "docs",
+      "reports",
+      "runs",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 47,
+    "total_size_bytes": 747300
   },
   {
     "file_counts": {
@@ -5789,7 +5828,7 @@
       "tests"
     ],
     "total_files": 72,
-    "total_size_bytes": 16493054
+    "total_size_bytes": 16493056
   },
   {
     "file_counts": {

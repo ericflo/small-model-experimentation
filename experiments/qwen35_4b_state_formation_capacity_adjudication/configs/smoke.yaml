@@ -1,0 +1,18 @@
+inherits: default.yaml
+evidence_profile: smoke
+substrate:
+  train_examples: 32
+  validation_examples: 16
+  depth_examples: 16
+  joint_examples: 16
+  contrast_validation_examples: 24
+  contrast_depth_examples: 16
+  contrast_joint_examples: 16
+training:
+  train_steps: 2
+  gradient_accumulation: 2
+  eval_every_steps: 1
+  save_every_steps: 2
+  positive_control:
+    rows: 48
+    updates: 2

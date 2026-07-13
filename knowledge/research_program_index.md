@@ -3,14 +3,14 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 13
-- Experiments: 238
+- Experiments: 239
 
 ## Structured Execution And Compilers
 
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 172
+- Assigned experiments: 173
 
 ### Seed Evidence
 
@@ -103,6 +103,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_simulation_keystone_repair` (new): [README](../experiments/qwen35_4b_simulation_keystone_repair/README.md)
 - `qwen35_4b_state_carry_vs_state_bag` (new): [README](../experiments/qwen35_4b_state_carry_vs_state_bag/README.md)
 - `qwen35_4b_state_carry_vs_state_bag_fullrank_delta` (new): [README](../experiments/qwen35_4b_state_carry_vs_state_bag_fullrank_delta/README.md)
+- `qwen35_4b_state_formation_capacity_adjudication` (new): [README](../experiments/qwen35_4b_state_formation_capacity_adjudication/README.md)
 - `qwen35_4b_static_bridge_ceiling_breaker` (track-z): [README](../experiments/qwen35_4b_static_bridge_ceiling_breaker/README.md)
 - `qwen35_4b_structure_or_values` (new): [README](../experiments/qwen35_4b_structure_or_values/README.md)
 - `qwen35_4b_structure_search_scaling` (new): [README](../experiments/qwen35_4b_structure_search_scaling/README.md)
@@ -411,7 +412,7 @@ Grow, search, shortlist, compose, and stress-test reusable operator and skill ba
 Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and other update mechanisms.
 
 - Charter: [posttraining_and_adaptation](../research_programs/posttraining_and_adaptation/charter.md)
-- Assigned experiments: 75
+- Assigned experiments: 76
 
 ### Seed Evidence
 
@@ -463,6 +464,7 @@ Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and o
 - `qwen35_4b_specialist_policy_integration` (new): [README](../experiments/qwen35_4b_specialist_policy_integration/README.md)
 - `qwen35_4b_state_carry_vs_state_bag` (new): [README](../experiments/qwen35_4b_state_carry_vs_state_bag/README.md)
 - `qwen35_4b_state_carry_vs_state_bag_fullrank_delta` (new): [README](../experiments/qwen35_4b_state_carry_vs_state_bag_fullrank_delta/README.md)
+- `qwen35_4b_state_formation_capacity_adjudication` (new): [README](../experiments/qwen35_4b_state_formation_capacity_adjudication/README.md)
 - `qwen35_4b_strategy_token_diversity_lora` (track-z): [README](../experiments/qwen35_4b_strategy_token_diversity_lora/README.md)
 - `qwen35_4b_structure_search_scaling` (new): [README](../experiments/qwen35_4b_structure_search_scaling/README.md)
 - `qwen35_4b_think_ftpo_round1` (new): [README](../experiments/qwen35_4b_think_ftpo_round1/README.md)

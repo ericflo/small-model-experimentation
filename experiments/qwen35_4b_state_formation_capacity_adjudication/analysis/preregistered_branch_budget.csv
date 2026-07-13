@@ -1,0 +1,4 @@
+stage,cumulative_fixed_final_runs,new_fixed_final_runs,authorization
+Stage A: LoRA joint,3,3,setup gates pass
+Stage B: LoRA state-only plus full-rank joint,9,6,valid LoRA joint formation miss
+Stage C: full-rank state-only,12,3,valid full-rank joint formation miss

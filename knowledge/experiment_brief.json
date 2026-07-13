@@ -6134,6 +6134,39 @@
     }
    ]
   },
+  "qwen35_4b_state_formation_capacity_adjudication": {
+   "verdict_tag": "Capacity test is ready, not yet run",
+   "concept_primer": "Imagine testing whether a compact repair kit can build the same working memory as a full workshop. Start both from identical materials, then open the larger workshop only if the compact kit fails.",
+   "plain_question": "Can a compact model update learn the deep running state needed for multi-step puzzles, or does it need a full-size update?",
+   "plain_answer": "Not run yet. The reviewed test starts with three compact-update training runs. If any required state check misses, six matched controls become mandatory; the final three runs open only if the full-size version also misses.",
+   "why_it_matters": "This staged design can separate a compact-update limitation from a broader training-recipe failure while avoiding expensive full-size runs when the smaller method already works.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "First-stage training runs",
+     "value": "3 cumulative",
+     "sub": "one compact-update run for each registered seed"
+    },
+    {
+     "label": "After a first-stage miss",
+     "value": "9 cumulative",
+     "sub": "adds six matched control runs"
+    },
+    {
+     "label": "Maximum training ladder",
+     "value": "12 cumulative",
+     "sub": "the final three open only after a full-size miss"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Training ladder expands only after earlier misses",
+     "chart_read": "The horizontal groups are the compact-update stage, matched-control stage, and final diagnostic stage. The single bar series shows the maximum cumulative training-run count; shorter bars mean less model training.",
+     "chart_takeaway": "The bars rise from 3 to 9 to 12, so expensive full-size work stays locked unless earlier state checks miss."
+    }
+   ]
+  },
   "qwen35_4b_static_bridge_ceiling_breaker": {
    "verdict_tag": "A few harder examples double transfer, then stall",
    "concept_primer": "Picture the model as a code mechanic handed a broken tiny program plus a printout that, for each failing test, shows the answer it should have produced beside the wrong one it actually did. Its job: rewrite the program so every hidden test passes.",

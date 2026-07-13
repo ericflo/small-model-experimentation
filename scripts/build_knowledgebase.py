@@ -452,7 +452,11 @@ def write_metadata(record: dict[str, object]) -> None:
             "top_level_dirs:",
             *[f"  - {yaml_scalar(name)}" for name in record["top_level_dirs"]],
             "file_counts:",
-            *[f"  {key.lstrip('.') if key.startswith('.') else key}: {counts[key]}" for key in sorted(counts)],
+            *[
+                f"  {yaml_scalar(key) if key == '[none]' else key.lstrip('.')}: "
+                f"{counts[key]}"
+                for key in sorted(counts)
+            ],
             f"total_files: {record['total_files']}",
             f"total_size_bytes: {record['total_size_bytes']}",
             "",

@@ -9,6 +9,8 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
+import yaml
+
 from scripts import build_knowledgebase as builder
 
 
@@ -126,6 +128,36 @@ class CatalogIgnoreInvarianceTests(unittest.TestCase):
                 with contextlib.redirect_stdout(io.StringIO()):
                     builder.main()
                 self.assertEqual(baseline, self._snapshot(root))
+
+
+class MetadataYamlTests(unittest.TestCase):
+    def test_extensionless_file_count_is_a_scalar_yaml_key(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            experiment = root / "experiments" / "example"
+            experiment.mkdir(parents=True)
+            record = {
+                "id": "example",
+                "title": "Example",
+                "source_track": "test",
+                "path": "experiments/example",
+                "primary_readme": "experiments/example/README.md",
+                "primary_report": "",
+                "summary": "Parser-level metadata regression fixture.",
+                "tags": ["experiment"],
+                "research_programs": ["program_review_needed"],
+                "top_level_dirs": [],
+                "file_counts": {".py": 2, "[none]": 1},
+                "total_files": 3,
+                "total_size_bytes": 17,
+            }
+            with mock.patch.object(builder, "ROOT", root):
+                builder.write_metadata(record)
+
+            metadata = (experiment / "metadata.yaml").read_text(encoding="utf-8")
+            parsed = yaml.safe_load(metadata)
+            self.assertEqual(parsed["file_counts"], {"py": 2, "[none]": 1})
+            self.assertIn('  "[none]": 1', metadata)
 
 
 if __name__ == "__main__":
