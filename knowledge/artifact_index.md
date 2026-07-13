@@ -39,12 +39,12 @@ This is a repository-level inventory. Each experiment remains the source of trut
 
 | Extension | Files |
 | --- | ---: |
-| `.json` | 2761 |
+| `.json` | 2786 |
 | `.csv` | 2142 |
 | `.py` | 1837 |
 | `.md` | 1111 |
 | `.png` | 848 |
-| `.jsonl` | 816 |
+| `.jsonl` | 818 |
 | `.log` | 527 |
 | `.yaml` | 407 |
 | `.gz` | 159 |
@@ -60,6 +60,7 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | Size MB | File |
 | ---: | --- |
 | 29.5 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_apex_ep.jsonl` |
+| 20.6 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_apex_oi.jsonl` |
 | 15.7 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_sharp1024.jsonl` |
 | 14.9 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_apex2.jsonl` |
 | 14.3 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_apex.jsonl` |
@@ -88,4 +89,3 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | 6.9 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_blend.jsonl` |
 | 6.6 | `experiments/qwen35_4b_specialist_policy_integration/runs/proxy_eval/incumbent_calibration/episode_rows.jsonl.gz` |
 | 6.4 | `experiments/qwen35_4b_active_counterexample_trace_selection/reports/eval/active_support.json` |
-| 6.4 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_blend2.jsonl` |

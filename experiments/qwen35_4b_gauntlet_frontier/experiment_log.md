@@ -267,3 +267,24 @@ by mechanisms designed from the serial-compute diagnosis.
   medium ceiling on this instrument is ~+0.31; the +0.32 target sits just
   above the model's medium frontier. Quick decisively broken (+0.33-0.41).
   The conjunction requires a larger base.
+
+## 2026-07-12 (oracle-injection — the capability-core lever) — the wall is SERIAL-COMPUTE, not data; the mechanistic end
+
+- Oracle-injection arm (build ... sft_oracle_inject.jsonl): 945 L3-L5
+  residual-axis items x2, oracle-solved (the gym's hand-coded solvers solve
+  EVERY item including the unreachable-at-K core; provenance-clean, no larger
+  model), warm-started onto apex. This is the C22-24 tool-seeded wall-crosser
+  targeted at the medium capability core.
+- Result: apex_oi medium +0.291 (n=5) — NO lift. GRANDEST medium pool
+  (apex+apex_ep+apex_oi, n=22): +0.305 +- 0.010, definitively below +0.32.
+- MECHANISTIC CONCLUSION: the medium wall is NOT knowledge/coverage. Oracle
+  traces TRAIN at score 1.0 (the model is taught the exact procedure), yet
+  medium caps at ~+0.31 at deployment — so the limit is C44's SERIAL-COMPUTE
+  EXECUTION: the model cannot RUN the long procedure within the deployed think
+  budget on hard medium items, however perfectly taught. C44's forward-pass
+  limit, now measured on the blackbox instrument.
+- FINAL (~150 paired events, EVERY lever class): quick decisively broken
+  (+0.33-0.41); medium ceiling +0.305 +- 0.010, a serial-compute execution
+  boundary. The +0.32 medium target is beyond the 4B's medium execution
+  frontier; the conjunction requires a larger base or a larger deployed think
+  budget (both beyond this goal).
