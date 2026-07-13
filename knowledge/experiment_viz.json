@@ -47593,6 +47593,30 @@
      "y_format": "decimal",
      "note": "Powered up to n=80-200 per subset; every esc-minus-breadth 95% bootstrap CI spans 0.",
      "source": "experiments/qwen35_4b_confidence_policy/runs/escalation.json"
+    },
+    {
+     "kind": "bar",
+     "title": "Confidence-select's edge over majority concentrates on HARD tasks",
+     "categories": [
+      "hard (pass 0.08)",
+      "medium (pass 0.54)",
+      "easy (pass 0.97)"
+     ],
+     "series": [
+      {
+       "label": "P(True)-select minus majority-vote accuracy (k=6)",
+       "values": [
+        0.045,
+        0.038,
+        -0.007
+       ]
+      }
+     ],
+     "x_label": "task difficulty (per-task pass rate)",
+     "y_label": "conf-select minus majority",
+     "y_format": "decimal",
+     "note": "Pooled MBPP+HumanEval, 312 tasks. The advantage is where the model is not already accurate.",
+     "source": "experiments/qwen35_4b_confidence_policy/runs/difficulty_curve.json"
     }
    ]
   }

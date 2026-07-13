@@ -1,0 +1,28 @@
+{
+  "bins": [
+    {
+      "bin": "hard",
+      "n": 68,
+      "passrate": 0.082,
+      "conf": 0.156,
+      "majority": 0.111,
+      "conf_minus_maj": 0.045
+    },
+    {
+      "bin": "medium",
+      "n": 27,
+      "passrate": 0.543,
+      "conf": 0.762,
+      "majority": 0.724,
+      "conf_minus_maj": 0.038
+    },
+    {
+      "bin": "easy",
+      "n": 217,
+      "passrate": 0.974,
+      "conf": 0.992,
+      "majority": 0.999,
+      "conf_minus_maj": -0.007
+    }
+  ]
+}

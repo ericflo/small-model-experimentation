@@ -40,3 +40,12 @@ moderate-difficulty tasks. Also: MBPP n_think is saturated for the median task
 (~86 tokens at both 256 and 2048 budgets) but the top ~10% tail is budget-bound
 (p99 256->2048); escalation still fails that tail because those tasks are
 capability-hard, not merely compute-starved.
+
+## 2026-07-13 — difficulty curve resolves the dependence: conf-select's edge is on HARD tasks
+
+Pooled MBPP+HumanEval (312 tasks), binned by per-task pass rate, conf-select vs
+majority at k=6: hard (pass 0.08, n=68) +0.045; medium (pass 0.54, n=27) +0.038;
+easy (pass 0.97, n=217) -0.007. The P(True)-select advantage concentrates exactly
+on the hard tasks and vanishes on easy ones — self-consistent with abstention
+(which flags the same hard tasks). Deployable rule: use conf-select where the
+model is uncertain; majority-vote is fine when it's already ~0.97 accurate.
