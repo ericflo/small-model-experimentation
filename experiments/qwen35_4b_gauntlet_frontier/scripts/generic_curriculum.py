@@ -83,7 +83,7 @@ def header(surface, items, order):
 
 def comp_lesson(rng):
     sname = rng.choice(list(SURFACES)); items = SURFACES[sname]; N = len(items)
-    order = list(range(N)); rng.shuffle(order)  # a stated cycle order (perm)
+    order = list(range(N))  # stated cycle order = index order (matches how shift advances)
     L = rng.choice([5, 6, 7])
     # remap: op indices are positions in `order`? keep simple: alphabet is 0..N-1, order lists them
     for _ in range(30):
@@ -130,7 +130,7 @@ def comp_lesson(rng):
 
 def prim_lesson(rng):
     sname = rng.choice(list(SURFACES)); items = SURFACES[sname]; N = len(items); L = rng.choice([5, 6, 7])
-    order = list(range(N)); rng.shuffle(order)
+    order = list(range(N))
     op = gen_op(rng, L, N); inp = rnd_seq(rng, L, N); out = apply(op, inp, N)
     prompt = (f"Apply this single operation to the sequence {render(inp, items)}:\n  - {desc(op, items, order)}.\n"
               f"{header(sname, items, order)}\n{ANS}")
