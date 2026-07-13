@@ -93,19 +93,22 @@ taught the benchmark, not a capability. Worse, format‑matched data actively
 *discourages* a generic feature because the surface shortcut is always available.
 
 Instead: teach the **same abstract circuit on many surfaces that are deliberately
-disjoint from the eval** — digits, letters, roman numerals, invented word‑tokens,
-greek syllables; sequence lengths and alphabet sizes varied; cycle orders permuted.
-Then **evaluate by TRANSFER to the held‑out surface (glyph strings) the model never
-saw.** If composed‑rule induction lifts on glyphgate having trained only on
-digits/letters/words, the feature is **universal** — a decomposition circuit that
-binds to *structure*, not tokens. That transfer *is* the proof, and it is the whole
-point: a universal feature lifts *every* boat (every menagerie axis that shares the
-circuit), a memorized shape lifts one.
+disjoint from any benchmark** — digits, letters, roman numerals, invented word‑
+tokens, greek syllables; sequence lengths and alphabet sizes varied. Then
+**evaluate by TRANSFER to the held‑out benchmark itself — the menagerie, which we
+never train on or read** (the firewall already guarantees this). If the circuits
+lift the menagerie having trained only on abstract surfaces the menagerie does not
+use, the feature is **universal** — it binds to *structure*, not tokens. That
+transfer *is* the proof, and it is the whole point: a universal feature lifts
+*every* boat (every menagerie axis that shares the circuit), a memorized shape
+lifts one. (Note: an early version of this pointed the transfer test at a single
+narrow gym family, `glyphgate`. That was abandoned — a narrow, slow‑to‑eval target
+that fought the speed doctrine. The right held‑out target is the broad menagerie.)
 
 Design principles that fall out of this:
 - **Surface‑agnostic rendering.** The circuit operates on abstract indices; surfaces
-  are just re‑renderings. (See `generic_curriculum.py`: same op logic over 5
-  alphabets.)
+  are just re‑renderings. (See `qwen35_4b_universal_curriculum/scripts/gen_curriculum.py`:
+  the same op logic rendered over 5 alphabets.)
 - **Maximize variation the feature must be invariant to** (alphabet, length, order,
   vocabulary) and minimize any spurious cue the eval shares.
 - **Transfer is the metric.** Same‑surface performance is only an *upper‑bound
@@ -122,9 +125,10 @@ To search the curriculum‑design space we must make one cycle cheap. Current st
   into one deduplicated, tagged pool (15,706 rows; by kind × family × level). A
   harvest‑based "recipe" (`build_recipe.py`) is then a *weighted sample* — seconds.
   (This is the *fallback* lever; the doctrine above prefers synthesis.)
-- **Synthesize fast.** `synth_curriculum.py` (glyphgate‑shaped control) and
-  `generic_curriculum.py` (surface‑agnostic, the real thing) generate designed
-  curricula in seconds, CPU‑only, truth‑blind.
+- **Synthesize fast.** `qwen35_4b_universal_curriculum/scripts/gen_curriculum.py`
+  (the real generator: multi‑skill, surface‑agnostic, truth‑blind) writes a designed
+  curriculum in seconds, CPU‑only. It builds on the `generic_curriculum.py` prototype
+  in `gauntlet_frontier` (same abstract‑index op logic over 5 alphabets).
 - **Kill the 9 GB merge.** vLLM runtime‑LoRA is a silent no‑op on this model (C49),
   which forced a full merged checkpoint per recipe (~5 min + disk). **The HF `qwen`
   backend applies a PEFT adapter directly** — no merge. Verified: apex adapter at
@@ -162,36 +166,46 @@ which designs transfer, double down, ablate what carries the transfer.
 
 ## 7. How to run it (concrete, for the next agent)
 
-Environment: repo `.venv` (HF/torch) for train + HF eval; `.venv-vllm` for vLLM
-(needs `PATH` incl. `.venv-vllm/bin` for ninja + the `__main__` spawn guard). One
-RTX 4090; single‑tenant the GPU. Qwen3.5‑4B only (hard rule), pinned revision
+The program lives in its own experiment: **`experiments/qwen35_4b_universal_curriculum/`**.
+It reuses the proven train/eval infra prototyped in `qwen35_4b_gauntlet_frontier`
+(don't re-derive it).
+
+Environment: repo `.venv` (HF/torch) for train + the HF‑adapter eval; `.venv-vllm`
+only if you need vLLM (its `PATH` must include `.venv-vllm/bin` for ninja, and any
+vLLM script needs an `if __name__ == "__main__"` guard — spawn). One RTX 4090;
+single‑tenant the GPU. Qwen3.5‑4B only (hard rule), pinned revision
 `851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a`.
 
-Scripts (all under `experiments/qwen35_4b_gauntlet_frontier/scripts/`):
-- `generic_curriculum.py` — **the real experiment's data generator**: surface‑
-  agnostic compositional‑induction curriculum (digits/letters/romans/words/greek),
-  disjoint from glyph strings. Output `data/sft_generic_induction.jsonl`.
-- `synth_curriculum.py` — glyphgate‑shaped control (same‑surface upper bound).
-- `train_think.py` — QLoRA think‑channel SFT (custom per‑token loss; `--rank`,
-  `--epochs`, `--w-think`, no `--warm-start` = co‑train from base). Fast tier:
-  `--rank 16 --epochs 1 --batch-size 2 --grad-accum 4 --max-length 2048`.
-- `eval_glyphgate_hf.py` — HF (base or `--adapter`, no merge) think‑mode eval on
-  held‑out glyphgate L1–L6; **the transfer metric** (does L4–L6 lift off 0.0?).
-- `bench.py --backend qwen --adapter <dir> --think-budget 1024` — fast menagerie
-  proxy (adapter applies in HF).
-- `build_pool.py` / `build_recipe.py` / `fast_search.py` — the harvest‑remix
-  fallback loop.
+Scripts:
+- `qwen35_4b_universal_curriculum/scripts/gen_curriculum.py` — **the data generator**:
+  a generic, MULTI‑SKILL, surface‑agnostic curriculum (INDUCT = composed‑rule
+  induction via decomposition search; EXECUTE = apply a stated multi‑step
+  procedure; SELECT = pick the item satisfying a constraint conjunction), rendered
+  over digits/letters/romans/invented‑words/greek — disjoint from any menagerie
+  surface. Truth‑blind. Output `data/sft_universal.jsonl`. Add skills here (repair,
+  abstain, longer‑horizon exploration) as new lesson types.
+- `qwen35_4b_gauntlet_frontier/scripts/train_think.py` — QLoRA think‑channel SFT
+  (custom per‑token loss; `--rank`, `--epochs`, `--w-think`; **no `--warm-start` =
+  co‑train from base**). Fast tier for search: `--rank 16 --epochs 1 --batch-size 2
+  --grad-accum 4 --max-length 2048` (~5 min). Confirm winners at r32 / 2–3 epochs.
+- `qwen35_4b_gauntlet_frontier/scripts/bench.py --backend qwen --adapter <dir>
+  --think-budget 1024` — **the transfer metric AND the search fitness function**:
+  menagerie‑quick with the adapter applied in HF (no 9 GB merge; vLLM LoRA no‑ops,
+  C49). ~4 min/arm. base@1024 ≈ 0.128; apex reference ≈ 0.436. Lifting the menagerie
+  aggregate here = the universal feature transferred to the held‑out benchmark.
+- Harvest‑remix fallback (if you want to search *selections* of real data instead
+  of synthesizing): `qwen35_4b_gauntlet_frontier/scripts/{build_pool,build_recipe,
+  fast_search}.py`.
 
-The decisive experiment sequence:
-1. Train the **generic** curriculum (co‑train from base, r32, ~3 epochs).
-2. `eval_glyphgate_hf.py` base vs the generic adapter. **Success = held‑out
-   glyphgate L4–L6 lifts above ~0** having trained on *no* glyph strings.
-3. If it transfers: confirm on menagerie medium@8192 (does the universal induction
-   feature lift the blackbox induction axes?), then ablate — which surfaces / which
-   lesson types carry the transfer? Loop fast.
-4. If it does not: the *same‑surface control* (`synth_curriculum.py`) tells you
-   whether the circuit is installable at all; the gap between them is the
-   universality gap to close with better curriculum design.
+The experiment loop:
+1. `gen_curriculum.py` → `data/sft_universal.jsonl` (seconds).
+2. Fast‑train (co‑train from base) → an adapter in `large_artifacts/`.
+3. `bench.py --backend qwen --adapter … --think-budget 1024`, base vs adapter,
+   fresh seed. **Success = the menagerie aggregate lifts** having trained on zero
+   menagerie‑shaped data. Confirm real wins at 8192 + medium; codify as a claim.
+4. Iterate the *curriculum design* fast: which skills / surfaces / lesson framings
+   carry the transfer, and what "lifts all boats"? Ablate; add skills; loop.
+   `train_eval_chain.sh` runs steps 2–3 end‑to‑end.
 
 ## 8. The north star, and the open frontier
 
