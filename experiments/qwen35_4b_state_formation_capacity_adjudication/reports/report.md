@@ -24,10 +24,14 @@ initializations are regenerated and strictly reopened under `d4269bf3…8b36`; t
 7411's positive control also passes at identity `6a1394d9…cefa`: intact 48/48, disabled 0/48 after
 exactly 256 updates and 4,096 presentations. Seed-7412 G0 now also passes at identity
 `737a8b39…0a89f`; its formerly zero aggregation scalar has finite nonzero live-joint gradient
-`6.6731358e-5`, supporting the BF16 precision hypothesis under the unchanged gate. Seed 7413 and all
-result stages remain blocked pending seed-7412 control and seed-7413 replay. No training
-checkpoint, evaluation row, or terminal analysis from this directory should be cited as scientific
-evidence.
+`6.6731358e-5`, supporting the BF16 precision hypothesis under the unchanged gate. Seed 7412's
+positive control then passed at identity `02a329d9…669a`: oracle 1.0, intact 48/48, disabled 0/48,
+256 updates, and 4,096 presentations. A pre-result authorization re-audit nevertheless found that
+generic receipt consumers do not re-enforce every model/backend, access, scientific-evidence, and
+downstream-authorization field written by their producers, and that some runbook ordering barriers
+are not execution-enforced. No result stage ran. Source repair, archival, regeneration, and ordered
+setup replay are required before seed 7413 or scientific training. No training checkpoint,
+evaluation row, or terminal analysis from this directory should be cited as scientific evidence.
 
 Under the invalidated source, seed 7411 passed LoRA G0 and then scored 0/48 on the setup-only control.
 The control had omitted the globally frozen accumulation of 16, presenting only one singleton row per

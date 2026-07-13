@@ -612,3 +612,23 @@ committed. The unchanged nonzero aggregation-gradient gate is mandatory.
 
 The seed-7412 LoRA positive control is authorized. Seed 7413 and all result training remain blocked
 until the seed-7412 control passes and is committed.
+
+## 2026-07-13 — replacement-source seed-7412 positive control passes; result boundary stays closed
+
+- Canonical receipt SHA-256 `c76da222…a254`, identity `02a329d9…669a`, with exact lineage to G0
+  identity `737a8b39…0a89f` and manifest `e935c31a…1e57`.
+- Oracle readout accuracy is 1.0. The fixed-final intact score is 48/48 exact terminal triples;
+  adaptation-disabled is 0/48. The run completed exactly 256 optimizer updates, accumulation 16,
+  and 4,096 singleton presentations, with parameter changes in the LoRA and common-state groups.
+- The receipt records zero benchmark, result-payload, and sealed-contrast access and remains
+  setup-only evidence under source `d4269bf3…8b36`.
+- A read-only pre-result authorization re-audit then found that generic receipt loading does not
+  re-enforce every producer-written model/backend, access, scientific-evidence, and downstream
+  authorization field. It also found stage-ordering firewalls that exist in the runbook but are not
+  all enforced at the execution boundary. No result was run.
+
+## Current authorization
+
+No further model-bearing stage or result training is authorized. Preserve this source-d426 setup,
+repair and adversarially test the authorization consumers, archive every invalidated source-d426
+artifact, regenerate source-bound setup, and replay its gates in order before scientific execution.

@@ -120,7 +120,13 @@ notes: >-
   737a8b39e61cce79f31e834b4630c34c5b1694e7fbbfb509ca31045f3f10a89f. Its formerly exact-zero
   aggregation scalar now has finite nonzero gradient 6.673135794699192e-5; the unchanged G0 gate and
   every other registered mechanic pass. This validates the narrow precision repair as setup evidence
-  only; seed-7412 control and all seed-7413 setup still block every result stage.
+  only. Seed-7412's control subsequently passed at receipt SHA256
+  c76da222e14a65f5e7d07e891e0e1ac539bf277f9968aafbc73187a476cda254 and identity
+  02a329d9efcee997f9616151f9a3a2c663b418c6a1046be1685e1b0ada91669a: oracle 1.0, intact 48/48,
+  disabled 0/48, 256 updates, and 4,096 presentations. A pre-result authorization re-audit then found
+  incomplete consumer-side enforcement of producer-written identity/access/authorization fields and
+  runbook-only stage-order barriers. No result stage ran; source repair, archival, regeneration, and
+  ordered setup replay are required before any scientific training.
   The first Qwen load stopped before wrapper construction or mechanics and is preserved by a tracked
   failure receipt; it opened
   only the permitted training validator, no sealed contrast, and produced no canonical G0 output.
