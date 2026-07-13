@@ -108,3 +108,24 @@ or evaluation generation has run under this experiment.
   artifacts were absent at seal time.
 - A second seal invocation was byte-idempotent across all three external indexes and all four tracked seal
   receipts. Official selection remains absent until this boundary is committed and pushed.
+
+## 2026-07-13 — Official Selection Banked, Training Paused
+
+- After the evidence boundary was pushed and both GitHub workflows passed, official selection retained all
+  360 tasks at exactly 40 per family/level cell and wrote 720 rows for every registered arm. The five
+  task-conditioned arms each cover 360 tasks with 720 distinct source traces.
+- Answer potential used 355 near-best-diverse and five fallback-second selections in addition to 360 best
+  rows. Joint potential used 116 near-best-diverse and 244 fallback-second selections in addition to 360
+  best rows. The official order-statistic joint fallback p90 is 3.075; the earlier 2.954 planning figure used
+  an interpolated percentile. Median, mean, and maximum remain 0.893, 1.410, and 12.128.
+- The success-RFT control has only 97 unique successful source traces from 58 tasks, all in four cells:
+  Caravan L1/L2 and Foundry Ledger L1/L3. Deterministic oversampling repeats 56 sources seven times and 41
+  sources eight times. This is a narrow-support rejection-sampling control, not balanced task coverage.
+- Full-thought lengths remain uncapped by the retired 512-token pilot limit. Answer/joint selected thoughts
+  reach 14,240/14,325 tokens; their medians are 3,968/4,420 tokens.
+- Exact frozen two-epoch cost is 34,446,994 forward tokens: 7,129,440 answer, 7,620,122 joint, 7,129,440
+  shuffle, 6,999,860 random, 3,308,702 shortest, and 2,259,430 success. The existing stress envelope implies
+  about 9.6--18.1 GPU-hours before merge/evaluation, so no SFT was started.
+- A second official selection invocation left all six deterministic gzip SHA-256 values, the manifest, the
+  selection summary, and the design receipt byte-identical. Both tracked manifest copies have SHA-256
+  `27d4b0b4b1120381a48cb3cd14ddd06f7630a5b8bee9bb43225fb0f7300acfa2`.

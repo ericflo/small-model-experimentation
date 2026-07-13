@@ -1,6 +1,6 @@
 # Qwen3.5-4B Balanced-Core Answer-Potential SFT
 
-**Status:** in-progress · since 2026-07-12 · Reasoning bank built; the six-arm selection training has not been run.
+**Status:** in-progress · since 2026-07-12 · Reasoning bank and six official selections banked; no SFT has run.
 
 ## Status
 
@@ -10,8 +10,9 @@ The original balanced-funnel design was frozen before the remaining 29 harvest t
 scoring, any SFT, or any held-out evaluation. A selector balance defect was then discovered only after all
 candidate scores existed; its repair is transparently classified as a post-score/partial-rollout,
 pre-official-selection implementation deviation, not a prospective amendment. Partial R1 success labels were
-subsequently inspected for cost planning before the deviation was committed; they did not determine the repair. No official SFT
-dataset, adapter, or held-out outcome existed, and no capability result exists yet.
+subsequently inspected for cost planning before the deviation was committed; they did not determine the repair. At that
+boundary no official SFT dataset, adapter, or held-out outcome existed. Selection is now banked behind the
+committed seal, but no adapter or capability result exists yet.
 
 The preserved parent is [linked here](../qwen35_4b_long_horizon_answer_potential_sft/README.md).
 
@@ -227,7 +228,19 @@ all 22,681 eligible traces in 17,296 seconds, and R1 completed one answer rollou
 10,915 seconds. All 360 raw/score/R1 shards, hashes, task scopes, source links, trace joins, and eligibility
 sets passed the read-only pre-seal audit. The retrospective evidence seal is now committed-bound: its
 pre-attestation hashes, post-seal index hashes, operation contracts, and post-score deviation disclosure are
-recorded in machine-readable receipts. No official selection dataset or adapter exists yet.
+recorded in machine-readable receipts.
+
+Official selection then produced exactly 720 rows for each of six arms. Answer, joint, shuffle, random, and
+shortest each cover all 360 tasks; selected thoughts retain their natural lengths, reaching 14,325 tokens.
+The success control is much narrower: only 97 unique R1-successful traces from 58 tasks in four of nine cells
+exist, so deterministic row matching repeats each source seven or eight times. It remains a useful ordinary
+rejection-sampling control, but not a task-balanced alternative treatment.
+
+The six datasets total 34,446,994 forward tokens at the frozen two epochs. Rescaling the preserved training
+stress envelope gives roughly 9.6--18.1 GPU-hours for the full matrix before merge/evaluation, which exceeds
+the user's current time budget. No training was started. A second selection invocation reproduced every
+dataset and the tracked manifest byte-for-byte; the manifest SHA-256 is
+`27d4b0b4b1120381a48cb3cd14ddd06f7630a5b8bee9bb43225fb0f7300acfa2`.
 
 ## Artifacts
 
@@ -238,4 +251,6 @@ recorded in machine-readable receipts. No official selection dataset or adapter 
 - `reports/artifact_manifest.yaml`: inherited pool, external scores, adapters, and checkpoints
 - `runs/preselection_amendment_receipt.json`: commit-bound code, evidence, and deviation boundary
 - `runs/preselection_evidence_seal.json`: exact pre/post index identity and absence checks at seal time
+- `data/sft_manifest.json`: exact six-arm selected-dataset hashes, counts, costs, and provenance
+- `runs/selection_summary.json`: byte-identical tracked copy of the official selection manifest
 - external root: `/workspace/large_artifacts/qwen35_4b_balanced_core_answer_potential_sft`

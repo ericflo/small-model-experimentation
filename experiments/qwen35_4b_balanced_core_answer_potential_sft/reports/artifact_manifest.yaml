@@ -25,7 +25,7 @@ external_artifacts:
   - name: six exact-token SFT datasets
     storage: /workspace/large_artifacts/qwen35_4b_balanced_core_answer_potential_sft/sft
     required_for: matched seed-42 training matrix
-    checksum: tracked selection summary plus per-dataset SHA-256 receipt
+    checksum: manifest and selection-summary SHA-256 27d4b0b4b1120381a48cb3cd14ddd06f7630a5b8bee9bb43225fb0f7300acfa2 plus six embedded dataset SHA-256 receipts
     regenerate: .venv-vllm/bin/python experiments/qwen35_4b_balanced_core_answer_potential_sft/scripts/run.py --stage select
   - name: QLoRA adapters and merged composite checkpoints
     storage: /workspace/large_artifacts/qwen35_4b_balanced_core_answer_potential_sft/adapters and /workspace/large_artifacts/qwen35_4b_balanced_core_answer_potential_sft/merged
@@ -46,6 +46,7 @@ reproducibility:
   required_external_artifacts:
     - checksum-matching inherited parent train-pool index and shards
     - checksum-matching balanced independent, score, and R1 indexes and shards from the amendment receipt
+    - checksum-matching six-arm SFT datasets from data/sft_manifest.json
 notes: >-
   The parent pool is immutable input. New outputs are restartable per task. No adapter or merged model is
   placed inside the repository tree.

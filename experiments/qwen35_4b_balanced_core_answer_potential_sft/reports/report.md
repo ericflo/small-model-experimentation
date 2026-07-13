@@ -27,7 +27,7 @@ single-context Transformers reference. Exact scoring completed for all 22,681 el
 seconds, followed by one R1 answer rollout per trace in 10,915 seconds. A read-only whole-bank validation
 passes exact scope, artifact, source-link, trace-join, and eligibility-set checks. The resulting retrospective
 seal binds the original and final index hashes, exact operation contracts, frozen code/data, and deviation
-disclosure. Capability results remain pending; official selection has not run.
+disclosure. Official selection has now run; capability results remain pending because SFT has not.
 
 Exact reference scoring subsequently completed for all 360 tasks and 22,681 eligible traces. Applying the
 original helper in memory exposed an unintended 116-task filter; because those scores were already observed,
@@ -35,9 +35,17 @@ the balance fallback is an exploratory post-score deviation. Partial R1 labels w
 for cost planning before commit but did not determine the fallback; no official SFT row, adapter, or held-out
 outcome informed it.
 
+Official selection contains 720 rows per arm and is byte-deterministic on rerun. Five arms cover all 360
+tasks; the success-RFT control has 97 unique successful source traces from 58 tasks and repeats each source
+seven or eight times to reach matched optimizer exposure. Selected potential thoughts are not length-capped
+at 512: answer/joint maxima are 14,240/14,325 tokens. The frozen two-epoch matrix is 34,446,994 forward
+tokens, with an estimated 9.6--18.1 GPU-hour training envelope before merge/evaluation. No adapter, merge,
+deployment probe, or evaluation artifact exists.
+
 ## Controls
 
-Pending SFT matrix.
+Six exact selected datasets are banked. Random-natural, shortest-natural, success-RFT, and task-shuffled
+potential remain the controls; their training has not started.
 
 ## Oracle Versus Deployable Evidence
 
@@ -46,11 +54,13 @@ accuracy; answer likelihood is not itself a deployment metric.
 
 ## Interpretation
 
-Pending.
+Selection alone is not a capability result. The full frozen matrix is too slow for the current budget, and
+the success control's narrow task support must be considered when choosing a smaller prospective fork.
 
 ## Next Experiments
 
-None licensed before the Stage-A verdict.
+A lower-cost prospective fork may be created after an explicit compute/design choice. The frozen full-matrix
+claim is unchanged; no subset result may be relabeled as its confirmatory verdict.
 
 ## Artifact Manifest
 
