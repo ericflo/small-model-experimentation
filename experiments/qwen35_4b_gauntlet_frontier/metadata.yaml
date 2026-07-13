@@ -20,10 +20,12 @@ top_level_dirs:
   - "tests"
 file_counts:
   gz: 63
-  json: 280
+  json: 308
   jsonl: 23
+  log: 4
   md: 4
-  py: 36
+  py: 38
+  sh: 4
   yaml: 7
-total_files: 413
-total_size_bytes: 231619079
+total_files: 451
+total_size_bytes: 231666182

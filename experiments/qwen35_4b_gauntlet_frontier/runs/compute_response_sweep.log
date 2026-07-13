@@ -1,0 +1,109 @@
+=========== medium budget=1024 seed=54001 ===========
+[bench] medium seed=54001 arm=base ...
+[bench] base: aggregate=0.0791 (145.3s)
+[bench] medium seed=54001 arm=merged ...
+[bench] merged: aggregate=0.3561 (214.7s)
+[bench] DELTA aggregate (merged - base): +0.2771
+{
+ "chronicle": 0.5,
+ "lockpick": 0.2,
+ "menders": 0.0,
+ "mirage": 0.4,
+ "rites": 0.2,
+ "siftstack": 0.5,
+ "sirens": 0.3,
+ "stockade": 0.2931,
+ "toolsmith": 0.3608,
+ "warren": 0.0167
+}
+=========== medium budget=1024 seed=54002 ===========
+[bench] medium seed=54002 arm=base ...
+[bench] base: aggregate=0.0569 (136.4s)
+[bench] medium seed=54002 arm=merged ...
+[bench] merged: aggregate=0.3180 (120.9s)
+[bench] DELTA aggregate (merged - base): +0.2610
+{
+ "chronicle": 0.5,
+ "lockpick": 0.1,
+ "menders": -0.0167,
+ "mirage": 0.2,
+ "rites": 0.0,
+ "siftstack": 0.6,
+ "sirens": 0.4,
+ "stockade": 0.2712,
+ "toolsmith": 0.4558,
+ "warren": 0.1
+}
+=========== medium budget=2048 seed=54003 ===========
+[bench] medium seed=54003 arm=base ...
+[bench] base: aggregate=0.1259 (228.6s)
+[bench] medium seed=54003 arm=merged ...
+[bench] merged: aggregate=0.4487 (169.3s)
+[bench] DELTA aggregate (merged - base): +0.3228
+{
+ "chronicle": 0.7,
+ "lockpick": 0.2,
+ "menders": -0.0167,
+ "mirage": 0.5,
+ "rites": 0.3,
+ "siftstack": 0.8,
+ "sirens": 0.2,
+ "stockade": 0.1943,
+ "toolsmith": 0.4,
+ "warren": -0.05
+}
+=========== medium budget=2048 seed=54004 ===========
+[bench] medium seed=54004 arm=base ...
+[bench] base: aggregate=0.0904 (229.3s)
+[bench] medium seed=54004 arm=merged ...
+[bench] merged: aggregate=0.4630 (175.6s)
+[bench] DELTA aggregate (merged - base): +0.3726
+{
+ "chronicle": 0.7,
+ "lockpick": 0.2,
+ "menders": 0.2,
+ "mirage": 0.8,
+ "rites": 0.2,
+ "siftstack": 0.8,
+ "sirens": 0.2,
+ "stockade": 0.28,
+ "toolsmith": 0.4625,
+ "warren": -0.1167
+}
+=========== medium budget=4096 seed=54005 ===========
+[bench] medium seed=54005 arm=base ...
+[bench] base: aggregate=0.1990 (429.6s)
+[bench] medium seed=54005 arm=merged ...
+[bench] merged: aggregate=0.5471 (276.0s)
+[bench] DELTA aggregate (merged - base): +0.3481
+{
+ "chronicle": 0.4,
+ "lockpick": 0.5,
+ "menders": 0.1,
+ "mirage": 0.6,
+ "rites": 0.2,
+ "siftstack": 0.8,
+ "sirens": 0.2,
+ "stockade": 0.271,
+ "toolsmith": 0.41,
+ "warren": 0.0
+}
+=========== medium budget=4096 seed=54006 ===========
+[bench] medium seed=54006 arm=base ...
+[bench] base: aggregate=0.2349 (427.6s)
+[bench] medium seed=54006 arm=merged ...
+[bench] merged: aggregate=0.4891 (250.0s)
+[bench] DELTA aggregate (merged - base): +0.2542
+{
+ "chronicle": 0.5,
+ "lockpick": 0.1,
+ "menders": 0.0333,
+ "mirage": 0.6,
+ "rites": 0.1,
+ "siftstack": 0.8,
+ "sirens": 0.4,
+ "stockade": 0.0173,
+ "toolsmith": 0.2917,
+ "warren": -0.3
+}
+=========== sweep complete ===========

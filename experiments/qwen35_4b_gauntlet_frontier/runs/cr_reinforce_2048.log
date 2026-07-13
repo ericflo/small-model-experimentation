@@ -1,0 +1,73 @@
+=========== medium budget=2048 seed=54007 ===========
+[bench] medium seed=54007 arm=base ...
+[bench] base: aggregate=0.1525 (234.5s)
+[bench] medium seed=54007 arm=merged ...
+[bench] merged: aggregate=0.4480 (183.9s)
+[bench] DELTA aggregate (merged - base): +0.2955
+{
+ "chronicle": 0.7,
+ "lockpick": 0.3,
+ "menders": -0.1,
+ "mirage": 0.5,
+ "rites": 0.1,
+ "siftstack": 0.9,
+ "sirens": 0.3,
+ "stockade": 0.1849,
+ "toolsmith": 0.27,
+ "warren": -0.2
+}
+=========== medium budget=2048 seed=54008 ===========
+[bench] medium seed=54008 arm=base ...
+[bench] base: aggregate=0.1348 (232.5s)
+[bench] medium seed=54008 arm=merged ...
+[bench] merged: aggregate=0.4062 (173.9s)
+[bench] DELTA aggregate (merged - base): +0.2714
+{
+ "chronicle": 0.3,
+ "lockpick": 0.2,
+ "menders": 0.0,
+ "mirage": 0.5,
+ "rites": 0.1,
+ "siftstack": 0.6,
+ "sirens": 0.3,
+ "stockade": 0.1312,
+ "toolsmith": 0.5833,
+ "warren": 0.0
+}
+=========== medium budget=2048 seed=54009 ===========
+[bench] medium seed=54009 arm=base ...
+[bench] base: aggregate=0.1117 (234.6s)
+[bench] medium seed=54009 arm=merged ...
+[bench] merged: aggregate=0.4300 (175.7s)
+[bench] DELTA aggregate (merged - base): +0.3183
+{
+ "chronicle": 0.3,
+ "lockpick": 0.3,
+ "menders": 0.0,
+ "mirage": 0.7,
+ "rites": 0.2,
+ "siftstack": 0.9,
+ "sirens": 0.2,
+ "stockade": 0.2,
+ "toolsmith": 0.4325,
+ "warren": -0.05
+}
+=========== medium budget=2048 seed=54010 ===========
+[bench] medium seed=54010 arm=base ...
+[bench] base: aggregate=0.1498 (330.9s)
+[bench] medium seed=54010 arm=merged ...
+[bench] merged: aggregate=0.4200 (302.5s)
+[bench] DELTA aggregate (merged - base): +0.2702
+{
+ "chronicle": 0.5,
+ "lockpick": 0.4,
+ "menders": 0.0,
+ "mirage": 0.2,
+ "rites": 0.2,
+ "siftstack": 0.9,
+ "sirens": 0.1,
+ "stockade": 0.1318,
+ "toolsmith": 0.27,
+ "warren": 0.0
+}
+=========== reinforce complete ===========

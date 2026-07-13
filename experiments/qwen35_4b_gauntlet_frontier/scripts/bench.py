@@ -38,7 +38,7 @@ def used_seeds() -> set[int]:
 
 def run_arm(tier: str, seed: int, out_path: Path, adapter: str | None,
             merged: str | None = None, backend: str | None = None,
-            max_batch: int | None = None) -> dict:
+            max_batch: int | None = None, think_budget: int | None = None) -> dict:
     command = [
         str(VENV_PY), str(MENAGERIE),
         "--tier", tier,
@@ -49,6 +49,12 @@ def run_arm(tier: str, seed: int, out_path: Path, adapter: str | None,
         command += ["--backend", backend]
     if max_batch:
         command += ["--max-batch", str(max_batch)]
+    if think_budget is not None:
+        # Compute-response study: override the tier's canonical think budget for
+        # BOTH arms so the delta isolates serial-compute headroom, not the
+        # benchmark definition. Non-default budgets are logged so they never get
+        # confused with a canonical-tier result.
+        command += ["--think-budget", str(think_budget)]
     if adapter and merged:
         raise ValueError("pass either adapter or merged, not both")
     if adapter:
@@ -109,6 +115,9 @@ def main() -> int:
                         help="menagerie backend override (e.g. qwen for the HF parity oracle; "
                              "never compare across backends)")
     parser.add_argument("--max-batch", type=int, default=None)
+    parser.add_argument("--think-budget", type=int, default=None,
+                        help="override the tier's think budget for BOTH arms "
+                             "(compute-response study; logged as non-canonical)")
     parser.add_argument("--note", type=str, default="")
     parser.add_argument("--allow-seed-reuse", action="store_true",
                         help="only for re-running a failed arm of the SAME event")
@@ -137,7 +146,8 @@ def main() -> int:
         out_path = out_dir / f"{args.tier}_seed{args.seed}_{arm_label}.json"
         print(f"[bench] {args.tier} seed={args.seed} arm={arm_label} ...", flush=True)
         results[arm_label] = run_arm(args.tier, args.seed, out_path, adapter, merged,
-                                     backend=args.backend, max_batch=args.max_batch)
+                                     backend=args.backend, max_batch=args.max_batch,
+                                     think_budget=args.think_budget)
         print(f"[bench] {arm_label}: aggregate={results[arm_label]['aggregate']:.4f} "
               f"({results[arm_label]['wall_seconds']}s)", flush=True)
         record = {
@@ -145,6 +155,7 @@ def main() -> int:
             "seed": args.seed,
             "arm": arm_label,
             "adapter": adapter,
+            "think_budget": args.think_budget,
             "note": args.note,
             **results[arm_label],
         }

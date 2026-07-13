@@ -4,7 +4,7 @@
 - FlashInfer is enabled by default and works via the pinned stack's precompiled flashinfer-cubin (no nvcc needed); set MENAGERIE_VLLM_NO_FLASHINFER=1 to fall back to native torch sampling.
 - This runner is the benchmark's PERSISTENT-SERVER sibling of the repo's reusable one-shot experiment runner templates/experiment/src/vllm_runner.py, sharing the same pinned venv (../../.venv-vllm from requirements-vllm.lock.txt) and the same two-phase thinking semantics; see docs/vllm_inference.md.
 - vLLM V1 uses spawn on WSL, hence the __main__ guard.
-- Model is Qwen3.5-4B, a hybrid model. Defaults are gpu_memory_utilization=0.85 and max_model_len=16384; more Mamba cache blocks exist at 0.85, so max_num_seqs stays 64 and is safely under the available block count.
+- Model is Qwen3.5-4B, a hybrid model. Defaults are gpu_memory_utilization=0.85 and max_model_len=65536; more Mamba cache blocks exist at 0.85, so max_num_seqs stays 64 and is safely under the available block count.
 - THINKING BUDGET method: budgets may differ by mode, and a per-prompt context guard caps them against MAX_MODEL_LEN after reserving the mode's answer budget and a margin. The default is TWO-PHASE (env MENAGERIE_VLLM_BUDGET=two_phase), which mirrors the HF `qwen` backend token-for-token (generate up to B think tokens; if </think> was not emitted, force it via close_ids "</think>\\n\\n"; then regenerate the answer with the mode's answer budget using prefix caching). This was chosen as the default because it reproduces the HF backend's scores EXACTLY (identical aggregate on the quick tier), which is required for cross-backend comparability.
 - The vLLM-NATIVE budget (env MENAGERIE_VLLM_BUDGET=native, single pass) also works and was EMPIRICALLY VERIFIED on vllm 0.24.0 to cap think tokens at B (budget=32 -> exactly 31 sampled think tokens then a forced </think>; the uncapped baseline never closed within 512 tokens). Native requires reasoning_parser="qwen3" and is a faster single pass, but its post-forced-close answer conditioning differs slightly from the HF backend, so scores can diverge in low-budget/truncated regimes; use it for speed, two_phase for exact HF parity.
 - MENAGERIE_VLLM_ADAPTER points at a PEFT LoRA adapter directory to load.
@@ -37,7 +37,7 @@ except ImportError:
 
 
 THINK_CLOSE = 248069  # id of "</think>"
-MAX_MODEL_LEN = int(os.environ.get("MENAGERIE_VLLM_MAXLEN", "16384"))
+MAX_MODEL_LEN = int(os.environ.get("MENAGERIE_VLLM_MAXLEN", "65536"))
 
 
 def _engine_kwargs(method, adapter_info=None) -> dict:
@@ -47,9 +47,10 @@ def _engine_kwargs(method, adapter_info=None) -> dict:
         model=model_id,
         gpu_memory_utilization=gmu,
         language_model_only=True,
-        # The old 8192 cap was an artifact of the conservative
-        # gpu_memory_utilization=0.5, not a model limit; the model supports far
-        # more. 16384 covers deep-tier episodes with full escalated think budgets.
+        # The old 8192/16384 caps were artifacts of conservative memory settings,
+        # not a model limit; the model supports far more. 65536 lets the named
+        # tiers think at 8192 and lets the uncapped `huge` tier think up to the
+        # full context window (its per-prompt guard below caps think against this).
         max_model_len=MAX_MODEL_LEN,
         max_num_seqs=64,
     )

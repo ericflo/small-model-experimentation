@@ -288,3 +288,46 @@ by mechanisms designed from the serial-compute diagnosis.
   boundary. The +0.32 medium target is beyond the 4B's medium execution
   frontier; the conjunction requires a larger base or a larger deployed think
   budget (both beyond this goal).
+
+## 2026-07-13 (compute-response study + benchmark redefinition) — the medium wall is serial-compute AT DEPLOYMENT, and the install partly compensated a budget-starved base (C55)
+
+The prior "serial-compute" conclusion was inferred from TRAINING behaviour
+(oracle traces train at 1.0 yet medium caps). This session tested it directly
+at DEPLOYMENT and it changed the whole frame.
+
+- **Compute-response study** (bench.py grew a logged `--think-budget`
+  passthrough for BOTH arms; `compute_response_sweep.sh` +
+  `analyze_compute_response.py`). Merged apex vs base on MEDIUM items at
+  escalating think budgets, paired fresh seeds:
+  - tb 1024: base 0.068  merged 0.337  delta +0.269  (n=2)
+  - tb 2048: base 0.128  merged 0.436  delta +0.309  (n=6)
+  - tb 4096: base 0.217  merged 0.518  delta +0.301  (n=2)
+  The merged ABSOLUTE score rises monotonically with budget (0.34→0.44→0.52) —
+  serial-compute CONFIRMED at deployment: the procedure is in the weights and
+  more tokens execute more of it. But the DELTA only rises then plateaus ~+0.31
+  because base ALSO converts budget into gains.
+
+- **Benchmark redefinition** (owner-directed one-off; applied via a
+  context-shielded subagent to keep menagerie internals firewalled). Rationale:
+  the per-tier budget caps made each tier a poor capability proxy. Change: all
+  named tiers → think_budget 8192; new fully-uncapped `huge` tier (65536 ==
+  max_model_len); max_model_len 16384→65536 (verified to init on the 4090 at
+  ~22.5 GB, no OOM); tiers stay ordered by coverage/wall-clock. Old baselines
+  SUPERSEDED (BASELINES.md annotated). estimate_tier patched to mirror the
+  runtime context-clamp so `huge` isn't spuriously CTX-OVER.
+
+- **New canonical (8192) result** (paired base-vs-merged, n=2/tier, tight):
+  - quick @8192: base 0.455  merged 0.666  delta **+0.211**
+  - medium @8192: base 0.360  merged 0.506  delta **+0.146**
+  Base LEAPT from the old budget-starved ~0.11/~0.13 (it was heavily
+  budget-starved); merged reached its best ABSOLUTE scores yet (0.67/0.51); the
+  DELTA COMPRESSED from +0.33/+0.31 to +0.21/+0.15 — ~10× the n=2 spread.
+
+- **CONCLUSION (C55): the gym install was partly compensating for a
+  budget-starved base.** Its true marginal value over a fairly-resourced base is
+  ~+0.15–+0.21, not +0.32. The +0.32 conjunction was measured against a crippled
+  base and is the wrong target. The install still delivers the best ABSOLUTE
+  capability measured. To beat a fairly-resourced base by a large margin, install
+  what base CANNOT do even at 8192 tokens — the induction / hypothesize-verify
+  walls (C43/C44/C48) — not efficiency/procedure knowledge base rediscovers once
+  it can think. Re-baseline everything at 8192.

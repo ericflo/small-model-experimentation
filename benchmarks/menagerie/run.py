@@ -18,20 +18,25 @@ from harness import adapter_spec, backends, engine
 
 
 SCRIPT_DIR = Path(__file__).resolve().parent
-TIER_NAMES = ("quick", "medium", "slow", "deep")
+TIER_NAMES = ("quick", "medium", "slow", "deep", "huge")
 ALLOWED_MODEL_ID_PREFIX = "Qwen/Qwen3.5-4B"
 SCORE_ONLY_PER_ITEM_KEYS = ("id", "family", "level", "mode", "score", "turns", "wall_s")
 
-# measured on RTX 4090 (WSL2), vLLM 0.24.0 at gpu_memory_utilization 0.85,
-# model-resident Qwen3.5-4B, two-phase thinking, seed 31337: quick = 80 gens
-# think@1024 (79/80 budget-bound), ~85.2k gen tokens / 43.83 s = ~1944 tok/s;
-# medium = 286 gens over 4 lockstep rounds, ~302.7k gen tokens / 147.98 s =
-# ~2046 tok/s. Sustained aggregate ~1950 tok/s at >=60 concurrent sequences;
-# 1500 remains a conservative floor for late-round concurrency decay as
-# episodes terminate.
+# Throughput constants below were measured on RTX 4090 (WSL2), vLLM 0.24.0 at
+# gpu_memory_utilization 0.85, model-resident Qwen3.5-4B, two-phase thinking,
+# seed 31337. NOTE (pre-8192 baseline; re-measure): the specific gen-count and
+# wall-clock examples that follow were taken at the OLD per-tier think budgets
+# (1024/2048/4096) and old max_model_len 16384, before all named tiers were
+# lifted to think@8192 and a fully-uncapped `huge` tier was added; the tok/s
+# rates are budget-independent and expected to hold, but the absolute walls are
+# stale. Original examples: quick = 80 gens think@1024 (79/80 budget-bound),
+# ~85.2k gen tokens / 43.83 s = ~1944 tok/s; medium = 286 gens over 4 lockstep
+# rounds, ~302.7k gen tokens / 147.98 s = ~2046 tok/s. Sustained aggregate
+# ~1950 tok/s at >=60 concurrent sequences; 1500 remains a conservative floor
+# for late-round concurrency decay as episodes terminate.
 VLLM_SUSTAINED_TOKS_PER_S = 1950.0
 VLLM_WORST_TOKS_PER_S = 1500.0
-EXPECTED_THINK_FRACTION = 0.95  # Measured bind fraction is 0.97 at budget 1024; larger budgets close earlier, so this overestimates -> safe.
+EXPECTED_THINK_FRACTION = 0.95  # Measured bind fraction was 0.97 at the old budget 1024 (pre-8192 baseline; re-measure); larger budgets close earlier, so this overestimates -> safe.
 # Measured horizon use was 0.69 (medium, seed 31337: 166 of 240 turn-gens);
 # 0.85 stays as the conservative blend for harder tiers.
 EXPECTED_HORIZON_FRACTION = 0.85
@@ -39,7 +44,7 @@ EXPECTED_HORIZON_FRACTION = 0.85
 # quick atoms and 637 for medium 4-turn episodes (~61/turn): a 3-4x margin.
 EST_BASE_PROMPT_TOKENS = 800
 EST_TOKENS_PER_TURN = 250
-VLLM_MAX_MODEL_LEN = 16384  # Must match the harness/vllm_runner.py default.
+VLLM_MAX_MODEL_LEN = 65536  # Must match the harness/vllm_runner.py default.
 
 
 # Structural fingerprint of the pinned base. A local checkpoint (e.g. a
@@ -153,11 +158,13 @@ def run_tier(
 ) -> dict:
     """Run a tier over already-discovered families with a constructed backend."""
 
-    # Tier think budgets escalate 1024/1024/2048/4096, with a 1024 floor because
-    # 256/512 are in the measured truncation-harm zone (~100% forced-close).
-    # Above that floor only the tail of long-chain items binds. Deep episodes use
-    # a separate 2048 per-turn cap purely to bound the 14-round worst-case wall
-    # clock; --think-budget overrides both for compute-response studies.
+    # Every named tier (quick/medium/slow/deep) now thinks at a generous fixed
+    # 8192-token budget so the think budget no longer caps measured capability;
+    # the uncapped `huge` tier sets both budgets to 65536 (== max_model_len) so
+    # thinking is bounded only by the context window via vllm_runner's per-prompt
+    # guard. Tiers stay ordered by coverage/wall-clock cost, not by think budget.
+    # --think-budget overrides both atom and episode budgets for compute-response
+    # studies.
     if think_budget is None:
         atom_tb = int(tier_cfg["think_budget"])
         episode_tb = int(tier_cfg.get("episode_think_budget", tier_cfg["think_budget"]))
@@ -269,23 +276,42 @@ def estimate_tier(
     worst_turn_gens = n_episodes * max_turns
     expected_turn_gens = worst_turn_gens * EXPECTED_HORIZON_FRACTION
 
+    # Mirror the runtime per-prompt context guard in harness/vllm_runner.py:
+    # allowed_think = max(0, min(budget, MAX_MODEL_LEN - prompt - answer - 16)).
+    # The uncapped `huge` tier sets think_budget == VLLM_MAX_MODEL_LEN, so its
+    # projected think is bounded by the context window here exactly as it is at
+    # run time; this keeps ctx_worst <= max_model_len (never a spurious CTX-OVER)
+    # and stops worst_s/expected_s from charging for think tokens that could
+    # never fit. For the named 8192-budget tiers the budget is far under the
+    # window, so the clamp is a no-op and their estimates are unchanged.
+    ctx_guard_margin = 16
+    atom_prompt_tokens = EST_BASE_PROMPT_TOKENS
+    eff_atom_tb = max(
+        0,
+        min(atom_tb, VLLM_MAX_MODEL_LEN - atom_prompt_tokens - atom_answer_tokens - ctx_guard_margin),
+    )
+    if episode_cfg is not None:
+        episode_prompt_tokens = EST_BASE_PROMPT_TOKENS + max_turns * EST_TOKENS_PER_TURN
+        eff_ep_tb = max(
+            0,
+            min(ep_tb, VLLM_MAX_MODEL_LEN - episode_prompt_tokens - episode_answer_tokens - ctx_guard_margin),
+        )
+    else:
+        episode_prompt_tokens = EST_BASE_PROMPT_TOKENS
+        eff_ep_tb = 0
+
     worst_s = (
-        n_atom_gens * (atom_tb + atom_answer_tokens)
-        + worst_turn_gens * (ep_tb + episode_answer_tokens)
+        n_atom_gens * (eff_atom_tb + atom_answer_tokens)
+        + worst_turn_gens * (eff_ep_tb + episode_answer_tokens)
     ) / VLLM_WORST_TOKS_PER_S
     expected_s = (
-        n_atom_gens * (atom_tb * EXPECTED_THINK_FRACTION + atom_answer_tokens)
-        + expected_turn_gens * (ep_tb * EXPECTED_THINK_FRACTION + episode_answer_tokens)
+        n_atom_gens * (eff_atom_tb * EXPECTED_THINK_FRACTION + atom_answer_tokens)
+        + expected_turn_gens * (eff_ep_tb * EXPECTED_THINK_FRACTION + episode_answer_tokens)
     ) / VLLM_SUSTAINED_TOKS_PER_S
 
-    ctx_worst = EST_BASE_PROMPT_TOKENS + atom_tb + atom_answer_tokens
+    ctx_worst = atom_prompt_tokens + eff_atom_tb + atom_answer_tokens
     if episode_cfg is not None:
-        episode_ctx_worst = (
-            EST_BASE_PROMPT_TOKENS
-            + max_turns * EST_TOKENS_PER_TURN
-            + ep_tb
-            + episode_answer_tokens
-        )
+        episode_ctx_worst = episode_prompt_tokens + eff_ep_tb + episode_answer_tokens
         ctx_worst = max(ctx_worst, episode_ctx_worst)
     return worst_s, expected_s, ctx_worst
 
@@ -345,7 +371,7 @@ def build_arg_parser() -> argparse.ArgumentParser:
             "(torch cu130 + transformers live there). CPU backends run under any python3."
         ),
     )
-    parser.add_argument("--tier", help="quick|medium|slow|deep, a JSON path, or all with --estimate", default=None)
+    parser.add_argument("--tier", help="quick|medium|slow|deep|huge, a JSON path, or all with --estimate", default=None)
     parser.add_argument("--backend", default="qwen_vllm", help="qwen_vllm (default; fast vLLM path) | qwen (HF; deterministic parity oracle) | oracle | random | noisy:EPS | const:TEXT")
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--out", help="output JSON file")
@@ -411,11 +437,10 @@ def main(argv: list[str] | None = None) -> int:
     if adapter_info is not None and args.backend not in ("qwen", "qwen_vllm"):
         parser.error("--adapter requires --backend qwen or qwen_vllm")
     tier_cfg = load_tier(tier_requests[0])
-    # Tier think budgets escalate 1024/1024/2048/4096, with a 1024 floor because
-    # 256/512 are in the measured truncation-harm zone (~100% forced-close).
-    # Above that floor only the tail of long-chain items binds. Deep episodes use
-    # a separate 2048 per-turn cap purely to bound the 14-round worst-case wall
-    # clock; --think-budget overrides both for compute-response studies.
+    # Every named tier now thinks at a fixed 8192-token budget; the uncapped
+    # `huge` tier sets both budgets to 65536 (== max_model_len), bounded only by
+    # the context window via vllm_runner's per-prompt guard. Tiers stay ordered by
+    # coverage/wall-clock, not by think budget. --think-budget overrides both.
     atom_tb = int(args.think_budget) if args.think_budget is not None else int(tier_cfg["think_budget"])
     episode_tb = (
         int(args.think_budget)

@@ -1,0 +1,13 @@
+[merge] loading composite Qwen/Qwen3.5-4B bf16 ...
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]Loading weights:   5%|▍         | 36/723 [00:00<00:02, 340.38it/s]Loading weights:  12%|█▏        | 84/723 [00:00<00:01, 399.64it/s]Loading weights:  20%|██        | 147/723 [00:00<00:01, 474.85it/s]Loading weights:  27%|██▋       | 195/723 [00:00<00:01, 377.01it/s]Loading weights:  33%|███▎      | 235/723 [00:00<00:01, 371.25it/s]Loading weights:  38%|███▊      | 274/723 [00:00<00:01, 346.01it/s]Loading weights:  43%|████▎     | 310/723 [00:00<00:01, 293.84it/s]Loading weights:  47%|████▋     | 341/723 [00:01<00:01, 279.79it/s]Loading weights:  51%|█████     | 370/723 [00:01<00:01, 271.60it/s]Loading weights:  57%|█████▋    | 411/723 [00:01<00:01, 306.98it/s]Loading weights:  64%|██████▍   | 462/723 [00:01<00:00, 358.10it/s]Loading weights:  72%|███████▏  | 523/723 [00:01<00:00, 427.09it/s]Loading weights:  86%|████████▌ | 620/723 [00:01<00:00, 578.34it/s]Loading weights:  95%|█████████▌| 687/723 [00:01<00:00, 584.75it/s]Loading weights: 100%|██████████| 723/723 [00:01<00:00, 431.09it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[merge] example composite tail: '0.linear_attn.conv1d' -> ['model.language_model.layers.0.linear_attn.conv1d']
+[merge] applied 128 LoRA deltas (expected 7 modules x layers)
+[merge] saving composite merged model to large_artifacts/qwen35_4b_gauntlet_frontier/merged/apex_cr ...
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:08<00:00,  8.22s/it]Writing model shards: 100%|██████████| 1/1 [00:08<00:00,  8.22s/it]
+[merge] processor save skipped: 
+Qwen3VLVideoProcessor requires the Torchvision library but it was not found in your environment. Check out the instructions on the
+installation page: https://pytorch.org/get-started/locally/ and follow the ones that match your environment.
+Please note that you may need to restart your runtime after installation.
+
+[merge] done

@@ -1,0 +1,75 @@
+reinforce done; waiting for GPU to drain...
+GPU drained; launching new-budget eval
+=========== quick @8192 seed=55001 ===========
+[bench] quick seed=55001 arm=base ...
+[bench] base: aggregate=0.4345 (424.4s)
+[bench] quick seed=55001 arm=merged ...
+[bench] merged: aggregate=0.6341 (225.4s)
+[bench] DELTA aggregate (merged - base): +0.1996
+{
+ "chronicle": 0.125,
+ "lockpick": 0.625,
+ "menders": 0.0,
+ "mirage": 0.0,
+ "rites": -0.25,
+ "siftstack": 0.875,
+ "sirens": 0.125,
+ "stockade": 0.2457,
+ "toolsmith": 0.0,
+ "warren": 0.25
+}
+=========== quick @8192 seed=55002 ===========
+[bench] quick seed=55002 arm=base ...
+[bench] base: aggregate=0.4750 (411.7s)
+[bench] quick seed=55002 arm=merged ...
+[bench] merged: aggregate=0.6981 (201.7s)
+[bench] DELTA aggregate (merged - base): +0.2231
+{
+ "chronicle": 0.5,
+ "lockpick": 0.5,
+ "menders": 0.0,
+ "mirage": 0.25,
+ "rites": 0.125,
+ "siftstack": 0.625,
+ "sirens": 0.0,
+ "stockade": 0.2312,
+ "toolsmith": 0.25,
+ "warren": -0.25
+}
+=========== medium @8192 seed=55003 ===========
+[bench] medium seed=55003 arm=base ...
+[bench] base: aggregate=0.3460 (846.7s)
+[bench] medium seed=55003 arm=merged ...
+[bench] merged: aggregate=0.4867 (377.3s)
+[bench] DELTA aggregate (merged - base): +0.1407
+{
+ "chronicle": 0.4,
+ "lockpick": 0.2,
+ "menders": -0.1,
+ "mirage": 0.5,
+ "rites": -0.1,
+ "siftstack": 0.5,
+ "sirens": 0.1,
+ "stockade": -0.1601,
+ "toolsmith": 0.4,
+ "warren": -0.3333
+}
+=========== medium @8192 seed=55004 ===========
+[bench] medium seed=55004 arm=base ...
+[bench] base: aggregate=0.3740 (836.2s)
+[bench] medium seed=55004 arm=merged ...
+[bench] merged: aggregate=0.5259 (410.8s)
+[bench] DELTA aggregate (merged - base): +0.1519
+{
+ "chronicle": 0.5,
+ "lockpick": 0.3,
+ "menders": 0.0,
+ "mirage": 0.5,
+ "rites": -0.2,
+ "siftstack": 0.6,
+ "sirens": 0.0,
+ "stockade": 0.1026,
+ "toolsmith": 0.3,
+ "warren": -0.5833
+}
+=========== newbudget eval complete ===========

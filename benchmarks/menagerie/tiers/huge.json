@@ -1,0 +1,1 @@
+{"tier": "huge", "budget_s": 129600, "think_budget": 65536, "episode_think_budget": 65536, "atoms": {"levels": [1, 2, 3, 4], "n_per_level": 8}, "episodes": {"levels": [1, 2, 3, 4], "n_per_level": 4, "max_turns": 14}, "max_new_tokens": {"atom": 64, "episode": 96}}

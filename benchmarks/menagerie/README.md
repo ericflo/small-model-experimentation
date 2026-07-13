@@ -33,16 +33,28 @@ source, or scores-as-labels.
 
 Tier budgets are for a resident model with thinking enabled and greedy decoding
 (`do_sample=False`). Thinking is the default deployment mode; `--no-think` is
-an explicit opt-out. Think budgets floor at 1024 tokens and escalate by tier.
+an explicit opt-out. Every named tier now thinks at a fixed, generous **8192**
+tokens so the think budget no longer caps measured capability; the tiers stay
+ordered by coverage and wall-clock cost, not by think budget. The `huge` tier
+adds fully **uncapped** thinking — its budget (65536, == `max_model_len`) is
+bounded only by the context window via the runner's per-prompt guard.
 `--think-budget N` overrides both atom and episode budgets for explicit
 compute-response studies.
 
 | Tier | Budget | Think budget | Atoms | Episodes | Total items |
 | --- | ---: | ---: | --- | --- | ---: |
-| `quick` | 60 s | 1024 | L1-L2, 4/level (80 items) | none | 80 |
-| `medium` | 300 s | 2048 | L1-L4, 2/level (80 items) | L2, 2/level, max 6 turns (20 items) | 100 |
-| `slow` | 1200 s | 2048 | L1-L4, 5/level (200 items) | L1-L3, 2/level, max 10 turns (60 items) | 260 |
-| `deep` | 3600 s | 4096 (episodes capped at 2048/turn) | L1-L4, 6/level (240 items) | L1-L4, 3/level, max 14 turns (120 items) | 360 |
+| `quick` | 60 s | 8192 | L1-L2, 4/level (80 items) | none | 80 |
+| `medium` | 300 s | 8192 | L1-L4, 2/level (80 items) | L2, 2/level, max 6 turns (20 items) | 100 |
+| `slow` | 1200 s | 8192 | L1-L4, 5/level (200 items) | L1-L3, 2/level, max 10 turns (60 items) | 260 |
+| `deep` | 3600 s | 8192 | L1-L4, 6/level (240 items) | L1-L4, 3/level, max 14 turns (120 items) | 360 |
+| `huge` | 129600 s | 65536 (uncapped, context-bound) | L1-L4, 8/level (320 items) | L1-L4, 4/level, max 14 turns (160 items) | 480 |
+
+Serial compute now dominates the wall-clock: lifting the think budget means the
+named tiers' theoretical worst case (every generation binding its full 8192
+budget) no longer fits inside their unchanged `budget_s`. This is deliberate —
+`budget_s` and coverage are left as-is to keep the tiers ordered by cost, and the
+estimator therefore flags the named tiers `OVER` on worst-case wall (measured
+walls run well under worst case because base-model episodes terminate early).
 
 Speed comes from the harness and contract:
 
@@ -63,19 +75,29 @@ Current token-math projections from
 families: 10 (assumed)
 model load time excluded (~35 s once, vLLM)
 tier     atom_think ep_think    worst_s  expected_s no_think_worst_s no_think_expected_s ctx_worst  budget_s     flag
-quick          1024     1024       58.0        42.5              3.4                 2.6      1888        60   WITHIN
-medium         2048     2048      284.2       189.2             11.1                 7.6      4444       300   WITHIN
-slow           2048     2048     1139.2       740.1             46.9                31.7      5444      1200   WITHIN
-deep           4096     2048     3066.9      1981.9            117.8                78.2      6444      3600   WITHIN
+quick          8192     8192      440.3       321.9              3.4                 2.6      9056        60     OVER
+medium         8192     8192     1103.4       734.0             11.1                 7.6     10588       300     OVER
+slow           8192     8192     4416.0      2865.3             46.9                31.7     11588      1200     OVER
+deep           8192     8192    10603.5      6735.1            117.8                78.2     12588      3600     OVER
+huge          65536    65536   105228.8     66881.9            157.0               104.2     65520    129600   WITHIN
 ```
+
+The `OVER` flags on the named tiers are expected (see above): their `budget_s`
+is intentionally unchanged while think budgets were lifted to 8192, so
+worst-case wall exceeds `budget_s`. No tier is `CTX-OVER`: `ctx_worst` stays
+under `max_model_len` (65536) for every tier, including `huge`, because the
+estimator mirrors the runner's per-prompt guard that clamps think to the context
+window. `huge` shows `WITHIN` because its `budget_s` is sized to its
+context-bounded worst case.
 
 Measured seed-31337 baselines and walls live in
 [`results/BASELINES.md`](results/BASELINES.md).
 
 ## Tier Predictiveness
 
-All tiers use the same generators. The tiers scale difficulty, horizon, item
-count, and thinking budget; they do not swap in a different task distribution.
+All tiers use the same generators. The named tiers scale difficulty, horizon,
+and item count at a common fixed 8192 think budget (the `huge` tier additionally
+uncaps thinking); they do not swap in a different task distribution.
 
 The instrument was validated with a noisy-oracle ladder from
 `results/instrument_validation.json` at seed `0`. `eps=0.0` is the oracle;
@@ -87,15 +109,20 @@ The instrument was validated with a noisy-oracle ladder from
 | `medium` | 1.000 | 0.738 | 0.492 | 0.274 | 0.024 |
 | `slow` | 1.000 | 0.747 | 0.510 | 0.263 | 0.016 |
 | `deep` | 1.000 | 0.747 | 0.467 | 0.247 | 0.016 |
+| `huge` | 1.000 | 0.740 | 0.477 | 0.246 | 0.016 |
 
 Pairwise Spearman rank stability across the eps ladder, rounded to the printed
 validation precision:
 
 | Pair | Spearman |
 | --- | ---: |
+| `deep\|huge` | 1.000 |
 | `deep\|medium` | 1.000 |
 | `deep\|quick` | 1.000 |
 | `deep\|slow` | 1.000 |
+| `huge\|medium` | 1.000 |
+| `huge\|quick` | 1.000 |
+| `huge\|slow` | 1.000 |
 | `medium\|quick` | 1.000 |
 | `medium\|slow` | 1.000 |
 | `quick\|slow` | 1.000 |

@@ -1,5 +1,25 @@
 # Base Qwen3.5-4B thinking baselines
 
+> **SUPERSEDED — DO NOT COMPARE AGAINST THESE NUMBERS.** Every score, wall, and
+> think-budget table below was measured at the OLD per-tier think budgets
+> (quick 1024 / medium 2048 / slow 2048 / deep 4096, deep episodes 2048) and the
+> OLD `max_model_len=16384`. The suite has since been reconfigured: all named
+> tiers (quick/medium/slow/deep) now think at a fixed **8192**, a new
+> fully-uncapped **`huge`** tier thinks up to the context window (65536), and
+> `max_model_len` is now **65536**. Engine configuration and think budget are
+> part of the comparison key, so these baselines are invalid at the new config
+> and MUST be regenerated (base `Qwen/Qwen3.5-4B`, no adapter, thinking, greedy,
+> a fresh seed) before any install experiment is scored against them. The
+> numeric values are retained verbatim below only for provenance/history; treat
+> them as stale until re-run. See the repository owner's reconfiguration note.
+
+> **INTERIM base@8192 (fresh-seed, NOT the canonical seed-31337 re-baseline yet).**
+> Paired base runs at the new 8192 config, n=2 fresh seeds each (from
+> experiments/qwen35_4b_gauntlet_frontier, 2026-07-13): **quick 0.455**, **medium
+> 0.360**. Base was heavily budget-starved at the old budgets (quick ~0.11,
+> medium ~0.13), so these are far higher. Full canonical re-baseline (seed 31337,
+> all tiers incl. slow/deep and a first `huge` run) is still TODO.
+
 These are the honest starting lines install experiments must beat. All
 measurements use the base `Qwen/Qwen3.5-4B` model with no adapter, thinking
 mode, greedy decoding, and seed `31337`. Thinking is the deployment default.
@@ -7,8 +27,13 @@ The backend is the default `qwen_vllm` backend: vLLM 0.24.0 with
 `gpu_memory_utilization=0.85` and `max_model_len=16384`, running on an RTX 4090
 with the model resident; the approximately 35-second load is excluded. Scores
 are per-family means, and aggregate is the mean of family means.
+(Historical: `max_model_len=16384` here reflects the pre-reconfiguration engine;
+the current default is 65536 — see the SUPERSEDED banner above.)
 
 ## Four-tier scores
+
+_SUPERSEDED (pre-8192 budgets, `max_model_len=16384`); values retained for
+provenance only — re-run at think@8192 / `max_model_len=65536`, and add `huge`._
 
 | family | quick | medium | slow | deep | what it measures |
 | --- | ---: | ---: | ---: | ---: | --- |
@@ -38,6 +63,10 @@ tier across checkpoints.
 | deep | 1190.6 s | 3600 s | 67% | 360 | 14 |
 
 ## Think budgets: floor and escalate
+
+_SUPERSEDED. This floor-and-escalate scheme (1024→4096) has been replaced: all
+named tiers now think at a fixed 8192, plus a fully-uncapped `huge` tier (65536,
+context-bound). The table and discussion below describe the OLD configuration._
 
 | tier | atom think budget | episode think budget per turn |
 | --- | ---: | ---: |
