@@ -1,0 +1,17 @@
+[bench] quick seed=58001 arm=base ...
+[bench] base: aggregate=0.1276 (191.1s)
+[bench] quick seed=58001 arm=adapter ...
+[bench] adapter: aggregate=0.4356 (267.7s)
+[bench] DELTA aggregate (adapter - base): +0.3081
+{
+ "chronicle": 0.625,
+ "lockpick": 0.125,
+ "menders": 0.125,
+ "mirage": 0.5,
+ "rites": 0.0,
+ "siftstack": 1.0,
+ "sirens": 0.0,
+ "stockade": 0.2475,
+ "toolsmith": 0.4583,
+ "warren": 0.0
+}
