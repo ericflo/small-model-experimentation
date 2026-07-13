@@ -1,0 +1,416 @@
+{
+  "answer_budget": 4096,
+  "auditor_sha256": "4a7a5a1767db86a7eecb5fae8c927f08080fc5a1e00a42f1c279a1287a54f403",
+  "checks": {
+    "all_registered_histories_fit": true,
+    "minimum_512_token_safety_margin": true
+  },
+  "config_sha256": "40ee9df2246e95fae69a03ceb9ccfd0f2adbd0f2bd552a507630a1ab544bdac8",
+  "history_policy": "canonical_first_valid_tool_call",
+  "model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_transaction_invariant_recovery_curriculum/merged/transaction_replay",
+  "model_max_length": 16384,
+  "rows": [
+    {
+      "headroom_tokens": 10371,
+      "max_prompt_plus_generation_allowance": 6013,
+      "max_prompt_tokens": 1405,
+      "scenario": "normal",
+      "task_id": "spec-context_geometry-spec_lookup-inferred-s976627178-p000-b0",
+      "turns": 10
+    },
+    {
+      "headroom_tokens": 10515,
+      "max_prompt_plus_generation_allowance": 5869,
+      "max_prompt_tokens": 1261,
+      "scenario": "ambiguous_source",
+      "task_id": "spec-context_geometry-spec_lookup-inferred-s976627178-p000-b0",
+      "turns": 8
+    },
+    {
+      "headroom_tokens": 10689,
+      "max_prompt_plus_generation_allowance": 5695,
+      "max_prompt_tokens": 1087,
+      "scenario": "rejected_patch",
+      "task_id": "spec-context_geometry-spec_lookup-inferred-s976627178-p000-b0",
+      "turns": 6
+    },
+    {
+      "headroom_tokens": 10667,
+      "max_prompt_plus_generation_allowance": 5717,
+      "max_prompt_tokens": 1109,
+      "scenario": "failed_test",
+      "task_id": "spec-context_geometry-spec_lookup-inferred-s976627178-p000-b0",
+      "turns": 6
+    },
+    {
+      "headroom_tokens": 10395,
+      "max_prompt_plus_generation_allowance": 5989,
+      "max_prompt_tokens": 1381,
+      "scenario": "normal",
+      "task_id": "spec-context_geometry-spec_lookup-inferred-s976627178-p000-b1",
+      "turns": 10
+    },
+    {
+      "headroom_tokens": 10541,
+      "max_prompt_plus_generation_allowance": 5843,
+      "max_prompt_tokens": 1235,
+      "scenario": "ambiguous_source",
+      "task_id": "spec-context_geometry-spec_lookup-inferred-s976627178-p000-b1",
+      "turns": 8
+    },
+    {
+      "headroom_tokens": 10687,
+      "max_prompt_plus_generation_allowance": 5697,
+      "max_prompt_tokens": 1089,
+      "scenario": "rejected_patch",
+      "task_id": "spec-context_geometry-spec_lookup-inferred-s976627178-p000-b1",
+      "turns": 6
+    },
+    {
+      "headroom_tokens": 10461,
+      "max_prompt_plus_generation_allowance": 5923,
+      "max_prompt_tokens": 1315,
+      "scenario": "failed_test",
+      "task_id": "spec-context_geometry-spec_lookup-inferred-s976627178-p000-b1",
+      "turns": 6
+    },
+    {
+      "headroom_tokens": 10195,
+      "max_prompt_plus_generation_allowance": 6189,
+      "max_prompt_tokens": 1581,
+      "scenario": "normal",
+      "task_id": "spec-context_geometry-spec_tags-inferred-s258711335-p000-b0",
+      "turns": 10
+    },
+    {
+      "headroom_tokens": 10366,
+      "max_prompt_plus_generation_allowance": 6018,
+      "max_prompt_tokens": 1410,
+      "scenario": "ambiguous_source",
+      "task_id": "spec-context_geometry-spec_tags-inferred-s258711335-p000-b0",
+      "turns": 8
+    },
+    {
+      "headroom_tokens": 10561,
+      "max_prompt_plus_generation_allowance": 5823,
+      "max_prompt_tokens": 1215,
+      "scenario": "rejected_patch",
+      "task_id": "spec-context_geometry-spec_tags-inferred-s258711335-p000-b0",
+      "turns": 6
+    },
+    {
+      "headroom_tokens": 10442,
+      "max_prompt_plus_generation_allowance": 5942,
+      "max_prompt_tokens": 1334,
+      "scenario": "failed_test",
+      "task_id": "spec-context_geometry-spec_tags-inferred-s258711335-p000-b0",
+      "turns": 6
+    },
+    {
+      "headroom_tokens": 10179,
+      "max_prompt_plus_generation_allowance": 6205,
+      "max_prompt_tokens": 1597,
+      "scenario": "normal",
+      "task_id": "spec-context_geometry-spec_tags-inferred-s258711335-p000-b1",
+      "turns": 10
+    },
+    {
+      "headroom_tokens": 10360,
+      "max_prompt_plus_generation_allowance": 6024,
+      "max_prompt_tokens": 1416,
+      "scenario": "ambiguous_source",
+      "task_id": "spec-context_geometry-spec_tags-inferred-s258711335-p000-b1",
+      "turns": 8
+    },
+    {
+      "headroom_tokens": 10537,
+      "max_prompt_plus_generation_allowance": 5847,
+      "max_prompt_tokens": 1239,
+      "scenario": "rejected_patch",
+      "task_id": "spec-context_geometry-spec_tags-inferred-s258711335-p000-b1",
+      "turns": 6
+    },
+    {
+      "headroom_tokens": 10290,
+      "max_prompt_plus_generation_allowance": 6094,
+      "max_prompt_tokens": 1486,
+      "scenario": "failed_test",
+      "task_id": "spec-context_geometry-spec_tags-inferred-s258711335-p000-b1",
+      "turns": 6
+    },
+    {
+      "headroom_tokens": 10388,
+      "max_prompt_plus_generation_allowance": 5996,
+      "max_prompt_tokens": 1388,
+      "scenario": "normal",
+      "task_id": "spec-context_geometry-spec_duplicates-inferred-s716400115-p000-b0",
+      "turns": 10
+    },
+    {
+      "headroom_tokens": 10543,
+      "max_prompt_plus_generation_allowance": 5841,
+      "max_prompt_tokens": 1233,
+      "scenario": "ambiguous_source",
+      "task_id": "spec-context_geometry-spec_duplicates-inferred-s716400115-p000-b0",
+      "turns": 8
+    },
+    {
+      "headroom_tokens": 10677,
+      "max_prompt_plus_generation_allowance": 5707,
+      "max_prompt_tokens": 1099,
+      "scenario": "rejected_patch",
+      "task_id": "spec-context_geometry-spec_duplicates-inferred-s716400115-p000-b0",
+      "turns": 6
+    },
+    {
+      "headroom_tokens": 10635,
+      "max_prompt_plus_generation_allowance": 5749,
+      "max_prompt_tokens": 1141,
+      "scenario": "failed_test",
+      "task_id": "spec-context_geometry-spec_duplicates-inferred-s716400115-p000-b0",
+      "turns": 6
+    },
+    {
+      "headroom_tokens": 10384,
+      "max_prompt_plus_generation_allowance": 6000,
+      "max_prompt_tokens": 1392,
+      "scenario": "normal",
+      "task_id": "spec-context_geometry-spec_duplicates-inferred-s716400115-p000-b1",
+      "turns": 10
+    },
+    {
+      "headroom_tokens": 10545,
+      "max_prompt_plus_generation_allowance": 5839,
+      "max_prompt_tokens": 1231,
+      "scenario": "ambiguous_source",
+      "task_id": "spec-context_geometry-spec_duplicates-inferred-s716400115-p000-b1",
+      "turns": 8
+    },
+    {
+      "headroom_tokens": 10677,
+      "max_prompt_plus_generation_allowance": 5707,
+      "max_prompt_tokens": 1099,
+      "scenario": "rejected_patch",
+      "task_id": "spec-context_geometry-spec_duplicates-inferred-s716400115-p000-b1",
+      "turns": 6
+    },
+    {
+      "headroom_tokens": 10632,
+      "max_prompt_plus_generation_allowance": 5752,
+      "max_prompt_tokens": 1144,
+      "scenario": "failed_test",
+      "task_id": "spec-context_geometry-spec_duplicates-inferred-s716400115-p000-b1",
+      "turns": 6
+    },
+    {
+      "headroom_tokens": 10165,
+      "max_prompt_plus_generation_allowance": 6219,
+      "max_prompt_tokens": 1611,
+      "scenario": "normal",
+      "task_id": "spec-context_geometry-spec_score-inferred-s21624193-p000-b0",
+      "turns": 10
+    },
+    {
+      "headroom_tokens": 10384,
+      "max_prompt_plus_generation_allowance": 6000,
+      "max_prompt_tokens": 1392,
+      "scenario": "ambiguous_source",
+      "task_id": "spec-context_geometry-spec_score-inferred-s21624193-p000-b0",
+      "turns": 8
+    },
+    {
+      "headroom_tokens": 10525,
+      "max_prompt_plus_generation_allowance": 5859,
+      "max_prompt_tokens": 1251,
+      "scenario": "rejected_patch",
+      "task_id": "spec-context_geometry-spec_score-inferred-s21624193-p000-b0",
+      "turns": 6
+    },
+    {
+      "headroom_tokens": 10458,
+      "max_prompt_plus_generation_allowance": 5926,
+      "max_prompt_tokens": 1318,
+      "scenario": "failed_test",
+      "task_id": "spec-context_geometry-spec_score-inferred-s21624193-p000-b0",
+      "turns": 6
+    },
+    {
+      "headroom_tokens": 10197,
+      "max_prompt_plus_generation_allowance": 6187,
+      "max_prompt_tokens": 1579,
+      "scenario": "normal",
+      "task_id": "spec-context_geometry-spec_score-inferred-s21624193-p000-b1",
+      "turns": 10
+    },
+    {
+      "headroom_tokens": 10410,
+      "max_prompt_plus_generation_allowance": 5974,
+      "max_prompt_tokens": 1366,
+      "scenario": "ambiguous_source",
+      "task_id": "spec-context_geometry-spec_score-inferred-s21624193-p000-b1",
+      "turns": 8
+    },
+    {
+      "headroom_tokens": 10541,
+      "max_prompt_plus_generation_allowance": 5843,
+      "max_prompt_tokens": 1235,
+      "scenario": "rejected_patch",
+      "task_id": "spec-context_geometry-spec_score-inferred-s21624193-p000-b1",
+      "turns": 6
+    },
+    {
+      "headroom_tokens": 10479,
+      "max_prompt_plus_generation_allowance": 5905,
+      "max_prompt_tokens": 1297,
+      "scenario": "failed_test",
+      "task_id": "spec-context_geometry-spec_score-inferred-s21624193-p000-b1",
+      "turns": 6
+    },
+    {
+      "headroom_tokens": 10249,
+      "max_prompt_plus_generation_allowance": 6135,
+      "max_prompt_tokens": 1527,
+      "scenario": "normal",
+      "task_id": "spec-context_geometry-spec_switch-inferred-s583817369-p000-b0",
+      "turns": 10
+    },
+    {
+      "headroom_tokens": 10406,
+      "max_prompt_plus_generation_allowance": 5978,
+      "max_prompt_tokens": 1370,
+      "scenario": "ambiguous_source",
+      "task_id": "spec-context_geometry-spec_switch-inferred-s583817369-p000-b0",
+      "turns": 8
+    },
+    {
+      "headroom_tokens": 10576,
+      "max_prompt_plus_generation_allowance": 5808,
+      "max_prompt_tokens": 1200,
+      "scenario": "rejected_patch",
+      "task_id": "spec-context_geometry-spec_switch-inferred-s583817369-p000-b0",
+      "turns": 6
+    },
+    {
+      "headroom_tokens": 10418,
+      "max_prompt_plus_generation_allowance": 5966,
+      "max_prompt_tokens": 1358,
+      "scenario": "failed_test",
+      "task_id": "spec-context_geometry-spec_switch-inferred-s583817369-p000-b0",
+      "turns": 6
+    },
+    {
+      "headroom_tokens": 10272,
+      "max_prompt_plus_generation_allowance": 6112,
+      "max_prompt_tokens": 1504,
+      "scenario": "normal",
+      "task_id": "spec-context_geometry-spec_switch-inferred-s583817369-p000-b1",
+      "turns": 10
+    },
+    {
+      "headroom_tokens": 10428,
+      "max_prompt_plus_generation_allowance": 5956,
+      "max_prompt_tokens": 1348,
+      "scenario": "ambiguous_source",
+      "task_id": "spec-context_geometry-spec_switch-inferred-s583817369-p000-b1",
+      "turns": 8
+    },
+    {
+      "headroom_tokens": 10583,
+      "max_prompt_plus_generation_allowance": 5801,
+      "max_prompt_tokens": 1193,
+      "scenario": "rejected_patch",
+      "task_id": "spec-context_geometry-spec_switch-inferred-s583817369-p000-b1",
+      "turns": 6
+    },
+    {
+      "headroom_tokens": 10312,
+      "max_prompt_plus_generation_allowance": 6072,
+      "max_prompt_tokens": 1464,
+      "scenario": "failed_test",
+      "task_id": "spec-context_geometry-spec_switch-inferred-s583817369-p000-b1",
+      "turns": 6
+    },
+    {
+      "headroom_tokens": 10219,
+      "max_prompt_plus_generation_allowance": 6165,
+      "max_prompt_tokens": 1557,
+      "scenario": "normal",
+      "task_id": "spec-context_geometry-spec_update-inferred-s745918320-p000-b0",
+      "turns": 10
+    },
+    {
+      "headroom_tokens": 10425,
+      "max_prompt_plus_generation_allowance": 5959,
+      "max_prompt_tokens": 1351,
+      "scenario": "ambiguous_source",
+      "task_id": "spec-context_geometry-spec_update-inferred-s745918320-p000-b0",
+      "turns": 8
+    },
+    {
+      "headroom_tokens": 10557,
+      "max_prompt_plus_generation_allowance": 5827,
+      "max_prompt_tokens": 1219,
+      "scenario": "rejected_patch",
+      "task_id": "spec-context_geometry-spec_update-inferred-s745918320-p000-b0",
+      "turns": 6
+    },
+    {
+      "headroom_tokens": 10490,
+      "max_prompt_plus_generation_allowance": 5894,
+      "max_prompt_tokens": 1286,
+      "scenario": "failed_test",
+      "task_id": "spec-context_geometry-spec_update-inferred-s745918320-p000-b0",
+      "turns": 6
+    },
+    {
+      "headroom_tokens": 10203,
+      "max_prompt_plus_generation_allowance": 6181,
+      "max_prompt_tokens": 1573,
+      "scenario": "normal",
+      "task_id": "spec-context_geometry-spec_update-inferred-s745918320-p000-b1",
+      "turns": 10
+    },
+    {
+      "headroom_tokens": 10411,
+      "max_prompt_plus_generation_allowance": 5973,
+      "max_prompt_tokens": 1365,
+      "scenario": "ambiguous_source",
+      "task_id": "spec-context_geometry-spec_update-inferred-s745918320-p000-b1",
+      "turns": 8
+    },
+    {
+      "headroom_tokens": 10560,
+      "max_prompt_plus_generation_allowance": 5824,
+      "max_prompt_tokens": 1216,
+      "scenario": "rejected_patch",
+      "task_id": "spec-context_geometry-spec_update-inferred-s745918320-p000-b1",
+      "turns": 6
+    },
+    {
+      "headroom_tokens": 10533,
+      "max_prompt_plus_generation_allowance": 5851,
+      "max_prompt_tokens": 1243,
+      "scenario": "failed_test",
+      "task_id": "spec-context_geometry-spec_update-inferred-s745918320-p000-b1",
+      "turns": 6
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "think_budget": 512,
+  "tokenizer_compatibility_sha256": "8b1cfe687ea0e65383cddc72a798f4f3f7a27cc90bda070989e0818f0f153274",
+  "tokenizer_files": {
+    "chat_template.jinja": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+    "tokenizer.json": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+    "tokenizer_config.json": "bee8eba30f0eb4af73c0fe2cd06d0f89b657d7819941c438157ec42f7c80ea87"
+  },
+  "tokenizer_manifest_sha256": "0657bf69973ea13d68baf22583410459952ef43116e75031d0ff1d83fa247617",
+  "worst_case": {
+    "headroom_tokens": 10165,
+    "max_prompt_plus_generation_allowance": 6219,
+    "max_prompt_tokens": 1611,
+    "scenario": "normal",
+    "task_id": "spec-context_geometry-spec_score-inferred-s21624193-p000-b0",
+    "turns": 10
+  }
+}

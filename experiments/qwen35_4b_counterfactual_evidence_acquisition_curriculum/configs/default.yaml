@@ -1,0 +1,247 @@
+schema_version: 1
+
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+  start_checkpoint: large_artifacts/qwen35_4b_transaction_invariant_recovery_curriculum/merged/transaction_replay
+  locality_anchor: large_artifacts/qwen35_4b_repo_search_compress_bank/merged/apex_replay
+  menagerie_incumbent: large_artifacts/qwen35_4b_repo_search_compress_bank/merged/apex_replay
+  start_weight_sha256: 1cf5fbca317808d6d00225f5cd533c82c7e1602b2b2e5e2da8f4307b01941ba3
+  anchor_weight_sha256: c933168075a0fc011f31ee54f83d722cc91423ce1a0ac19bfe40dfab92f608d5
+  start_config_sha256: f64803e92c6b93971a8e4fa89a811c8607b9b4efd6d0df0e6ca6016404f42630
+  anchor_config_sha256: f64803e92c6b93971a8e4fa89a811c8607b9b4efd6d0df0e6ca6016404f42630
+  start_generation_config_sha256: 8e29eeb222454c2a417b17547a84aee206c110a033418b7c0342cd75e75d92a0
+  anchor_generation_config_sha256: 8e29eeb222454c2a417b17547a84aee206c110a033418b7c0342cd75e75d92a0
+  start_merge_receipt_sha256: 9ed37162726874fd6750de477330949da343b1aeae3c837d9a2377282f3a90b3
+  anchor_merge_receipt_sha256: ece3c696e1abfb071d33ba523d8007bb1506d22047a1c11aa57a48a280cd1b0c
+  start_tokenizer_manifest_sha256: 0657bf69973ea13d68baf22583410459952ef43116e75031d0ff1d83fa247617
+  anchor_tokenizer_manifest_sha256: 71f553a55518a7f58520d9cca5ac3f26fff3c4c63aa7aa4e52324b512d3ae887
+  tokenizer_compatibility_sha256: 8b1cfe687ea0e65383cddc72a798f4f3f7a27cc90bda070989e0818f0f153274
+
+artifacts:
+  root: large_artifacts/qwen35_4b_counterfactual_evidence_acquisition_curriculum
+
+engine:
+  max_model_len: 16384
+  gpu_memory_utilization: 0.85
+  max_num_seqs: 16
+  max_num_batched_tokens: 16384
+
+families:
+  acquisition_train:
+    - spec_lookup
+    - spec_tags
+    - spec_duplicates
+    - spec_score
+  acquisition_transfer:
+    - spec_switch
+    - spec_update
+  acquisition_all:
+    - spec_lookup
+    - spec_tags
+    - spec_duplicates
+    - spec_score
+    - spec_switch
+    - spec_update
+  legacy_broad_recovery:
+    - lease_cache
+    - quorum_value
+    - pattern_router
+    - rate_buckets
+  legacy_transaction_transfer:
+    - atomic_reservations
+    - atomic_debits
+    - atomic_membership_moves
+    - atomic_patchset
+
+bank:
+  seed: 93310
+  split: acquisition_bank
+  inferred_pairs_per_train_family: 3
+  new_tasks_per_arm: 24
+  prior_tasks_per_arm: 24
+  tasks_per_arm: 48
+  rows_per_new_task: 3
+  rows_per_prior_task: 7
+  rows_per_arm: 432
+  prior_source: large_artifacts/qwen35_4b_transaction_invariant_recovery_curriculum/bank/transaction_replay.jsonl
+  prior_source_sha256: 9c196d1e7e49881bbf151e1575c98811bcdca66e6ef38858c34f60f1256b9315
+  target_transition_action_mass: 16000.0
+  require_executable_candidate_and_explicit_replay: true
+
+training:
+  seed: 53
+  epochs: 3
+  learning_rate: 0.00002
+  rank: 32
+  alpha: 64
+  dropout: 0.05
+  batch_size: 4
+  gradient_accumulation_steps: 9
+  loss_chunk_positions: 128
+  max_length: 4096
+  serial_token_compute_ratio_max: 1.01
+  arms:
+    - evidence_binding
+    - explicit_redundant
+    - shuffled_binding
+
+evaluation:
+  think_budget: 512
+  answer_max_tokens: 1024
+  interface_answer_rungs: [1024, 2048, 4096]
+  sample_temperature: 0.8
+  sample_top_p: 0.95
+  sample_top_k: 20
+  deep_run_seed: 93801
+  sample_run_seed: 93802
+  sample_more_pool_trajectories: 6
+  controlled:
+    deep_turns: 8
+    sample_more_trajectories: 2
+    sample_more_turns_each: 4
+  normal:
+    deep_turns: 10
+    sample_more_trajectories: 2
+    sample_more_turns_each: 5
+  recovery:
+    deep_turns: 6
+    sample_more_trajectories: 2
+    sample_more_turns_each: 3
+  blocks:
+    interface_preflight:
+      families: acquisition_train
+      seed: 93000
+      tasks_per_family: 2
+    qualification_a:
+      families: acquisition_train
+      seed: 93100
+      tasks_per_family: 4
+      disjoint_from: [interface_preflight]
+    qualification_b:
+      families: acquisition_train
+      seed: 93200
+      tasks_per_family: 4
+      disjoint_from: [interface_preflight, qualification_a]
+    trained_calibration:
+      families: acquisition_train
+      seed: 93400
+      tasks_per_family: 4
+      disjoint_from: [interface_preflight, qualification_a, qualification_b]
+    transfer_dev:
+      families: acquisition_transfer
+      seed: 93500
+      tasks_per_family: 8
+    transfer_confirm:
+      families: acquisition_transfer
+      seed: 93600
+      tasks_per_family: 8
+      disjoint_from: [transfer_dev]
+    explicit_retention:
+      families: acquisition_all
+      seed: 93700
+      tasks_per_family: 4
+    old_broad_retention:
+      families: legacy_broad_recovery
+      seed: 94000
+      tasks_per_family: 8
+      legacy_retention: true
+    old_transaction_retention:
+      families: legacy_transaction_transfer
+      seed: 94100
+      tasks_per_family: 8
+      legacy_retention: true
+
+qualification_gates:
+  invalid_action_rate_per_turn_max: 0.05
+  answer_cap_hit_rate_per_turn_max: 0.05
+  unassisted_evidence_acquisition_max: 0.25
+  unassisted_paired_preverifier_success_max: 0.40
+  evidence_injected_paired_preverifier_success_min: 0.80
+  evidence_injected_delta_vs_unassisted_min: 0.30
+  evidence_injected_delta_vs_nondiscriminating_search_min: 0.30
+  explicit_first_patch_full_correct_min: 0.85
+  explicit_unnecessary_evidence_max: 0.25
+  minimum_supported_families: 3
+  supported_family_injected_success_min: 0.75
+  required_channels: [tests, docs, callsite]
+  supported_channel_injected_success_min: 0.67
+  required_qualification_query_skins: [reference, symbol]
+  supported_query_skin_injected_success_min: 0.75
+
+locality:
+  seed: 93900
+  contexts: experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/data/locality_contexts.json
+  count: 48
+  max_context_tokens: 1024
+  median_non_target_logit_drift_max: 0.10
+  mean_entropy_delta_min: -0.05
+  incremental_parent_drift_diagnostic: true
+
+calibration_gates:
+  paired_preverifier_success_absolute_min: 0.65
+  paired_preverifier_delta_vs_start_min: 0.15
+  paired_preverifier_delta_vs_explicit_control_min: 0.10
+  paired_preverifier_delta_vs_shuffled_min: 0.10
+  invalid_action_delta_vs_start_max: 0.02
+  unusable_cap_delta_vs_start_max: 0.02
+  explicit_first_patch_retention_min: 0.83
+
+transfer_gates:
+  paired_preverifier_delta_vs_start_min: 0.08
+  paired_preverifier_delta_vs_incumbent_min: 0.08
+  paired_preverifier_delta_vs_controls_min: 0.05
+  paired_preverifier_delta_vs_nondiscriminating_search_min: 0.05
+  paired_preverifier_delta_vs_sample_more_min: 0.05
+  injected_paired_preverifier_success_min: 0.75
+  paired_bootstrap_lower_bound_min: 0.0
+  normal_terminal_delta_vs_start_min: 0.05
+  minimum_nonnegative_families: 2
+  maximum_single_family_regression: -0.10
+  rejected_transition_absolute_min: 0.95
+  failed_transition_absolute_min: 0.95
+  verified_absolute_min: 0.90
+  commit_absolute_min: 0.90
+  invalid_action_delta_vs_start_max: 0.02
+  unusable_cap_delta_vs_start_max: 0.02
+  explicit_first_patch_retention_min: 0.83
+  explicit_unnecessary_evidence_max: 0.30
+  required_transfer_channels: [tests, docs, callsite]
+  per_channel_paired_preverifier_min: 0.50
+  required_transfer_query_skins: [signature]
+  per_query_skin_paired_preverifier_min: 0.50
+  mean_non_source_inspects_before_first_patch_max: 2.0
+
+retention_gates:
+  normal_terminal_delta_vs_start_min: -0.03
+  recovery_terminal_delta_vs_start_min: -0.03
+  rejected_transition_absolute_min: 0.95
+  failed_transition_absolute_min: 0.95
+  verified_absolute_min: 0.90
+  commit_absolute_min: 0.90
+  invalid_action_delta_vs_start_max: 0.02
+  unusable_cap_delta_vs_start_max: 0.02
+  maximum_single_family_terminal_regression: -0.10
+
+uncertainty:
+  enabled: true
+  use_for_selection_or_loss: false
+  rows_per_transition: 6
+  strata: 4
+  semantic_buckets:
+    - search_discriminator
+    - read_other
+    - patch
+    - other
+  metrics:
+    - entropy
+    - varentropy
+
+menagerie:
+  sealed_until_all_whitebox_gates_pass: true
+  tiers: [quick, medium]
+  paired_seeds:
+    quick: 71311
+    medium: 71312
+  maximum_tier_regression: 0.03
+  minimum_positive_tier_delta: 0.02

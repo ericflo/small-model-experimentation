@@ -43,7 +43,9 @@ gate failures:
 2. Add the practitioner brief to `knowledge/experiment_brief.json` (nested under
    `"experiments"`; required field `plain_answer`) and ≥1 native chart spec to
    `knowledge/experiment_viz.json` (see `docs/site_maintenance.md`).
-3. Add the claim to `knowledge/claims/claim_ledger.json`.
+3. If and only if the result changes a durable corpus belief, add or update the
+   supported claim in `knowledge/claims/claim_ledger.json`; design-only work and
+   non-strategic results do not manufacture a claim.
 4. **Commit** the experiment + knowledge edits (the date filler reads git history, so the
    commit must exist first).
 5. `make catalog` — the date filler only covers experiments already in the catalog.
@@ -95,3 +97,7 @@ gate failures:
   frozen design files are byte-identical. Re-anchor the configured design commit to the rebased commit,
   verify every frozen-file digest is unchanged, and record both old and new IDs in the experiment log.
   Never weaken the ancestry/digest guard or silently substitute the current `HEAD`.
+- **A lock receipt invalidates its own frozen metadata.** Do not include generated `metadata.yaml`
+  or repository catalog/index outputs in an experiment's frozen design-file set. Adding the tracked
+  lock receipt changes file counts and therefore legitimately regenerates those surfaces; freeze the
+  scientific config, code, tests, intake, preregistration, and design review instead.

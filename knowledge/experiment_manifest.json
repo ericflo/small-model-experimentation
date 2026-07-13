@@ -1420,6 +1420,44 @@
   },
   {
     "file_counts": {
+      ".json": 3,
+      ".md": 7,
+      ".py": 30,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_counterfactual_evidence_acquisition_curriculum",
+    "path": "experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum",
+    "primary_readme": "experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/README.md",
+    "primary_report": "experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/reports/report.md",
+    "research_programs": [
+      "active_evidence_acquisition",
+      "agentic_breadth_installation",
+      "benchmark_generalization",
+      "posttraining_and_adaptation",
+      "process_control_and_tool_use"
+    ],
+    "source_track": "new",
+    "summary": "This experiment tests whether transition-balanced action supervision can teach Qwen3.5-4B to search decisive public repository evidence *before* its first patch, bind that evidence to the correct policy, and retain the complete coding loop.",
+    "tags": [
+      "active-learning",
+      "curriculum",
+      "policy",
+      "small-model"
+    ],
+    "title": "Counterfactual evidence-acquisition curriculum",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 43,
+    "total_size_bytes": 937633
+  },
+  {
+    "file_counts": {
       ".json": 2,
       ".jsonl": 3,
       ".md": 9,

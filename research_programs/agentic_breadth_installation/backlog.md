@@ -83,15 +83,17 @@
   5% ceiling. No post-failure axis qualified independently—negative and
   non-integer were 9/9 in both blocks, while blank had only one in-band shape
   per block and the shape changed. Do not train on these failed-test states.
-- Highest-priority successor: active specification acquisition. On the opened
-  trajectories, all 72 failed-test cases reached a correct patch, but inferred
-  rejected-patch first-patch correctness was 0/54 and visible-test inspection
-  before first patch was 0/72. Build counterfactual pairs with issue/source held
-  constant and discriminating public evidence flipped; first qualify, then
-  train `ambiguous_state→inspect_evidence→evidence_faithful_patch` alongside
-  complete recovery/verify/commit replay. Repair answer allowance in a separate
-  frozen preflight, and keep entropy/varentropy to mining/stratification rather
-  than correctness labels.
+- Active designed and preregistered successor:
+  `qwen35_4b_counterfactual_evidence_acquisition_curriculum`. On the opened
+  predecessor trajectories, all 72 failed-test cases reached a correct patch,
+  but inferred rejected-patch first-patch correctness was 0/54 and visible-test
+  inspection before first patch was 0/72. Build counterfactual pairs with
+  issue/source held constant and discriminating public evidence flipped; first
+  qualify, then train
+  `ambiguous_state→inspect_evidence→evidence_faithful_patch` alongside complete
+  recovery/verify/commit replay. Repair answer allowance in a separate frozen
+  preflight, and keep entropy/varentropy to mining/stratification rather than
+  correctness labels. No model-bearing run or result exists yet.
 - Future retraining should calibrate plan dose by realized gradient/surprisal
   and avoid supervising plan starts already rank 1 or wildly off-policy lexical
   templates.

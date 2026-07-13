@@ -150,6 +150,44 @@
     }
    ]
   },
+  "qwen35_4b_counterfactual_evidence_acquisition_curriculum": {
+   "verdict_tag": "A first-patch evidence test is preregistered",
+   "concept_primer": "When a coding request leaves two edge behaviors plausible, a capable agent should find the repository's own rule before editing. This study pairs nearly identical repositories where one public clue flips the right first patch.",
+   "plain_question": "Can training teach this small coding agent to find the decisive public clue before its first patch, then preserve its existing test-and-commit habits?",
+   "plain_answer": "The experiment is designed and preregistered, but no model has run. It must first show that the starting agent usually patches too early yet can use the right clue when it is supplied. Only then may three equally sized training arms run, and any gain must repeat on unseen task families, file names, and search wording while beating two strong starting checkpoints and extra attempts at equal measured cost.",
+   "why_it_matters": "Earlier work found that the agent can often repair code after a failed test but does not inspect decisive evidence before guessing. This study targets a stronger capability: choosing a better first action and patch, rather than merely shortening answers or suppressing repetition.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Balanced training arms",
+     "value": "3",
+     "sub": "correct evidence, redundant instructions, and shuffled evidence"
+    },
+    {
+     "label": "Rows planned per arm",
+     "value": "432",
+     "sub": "the same amount of action training in every arm"
+    },
+    {
+     "label": "Conditional transitions per arm",
+     "value": "9",
+     "sub": "48 rows at each point in the coding loop"
+    },
+    {
+     "label": "Model calls so far",
+     "value": "zero",
+     "sub": "this is a design and preregistration, not a result"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "All three training arms receive the same 432-row dose",
+     "chart_read": "Each bar is the planned number of training rows for one arm. Their equal height means no arm receives more examples than another.",
+     "chart_takeaway": "Any future difference must survive matched-data controls; this chart describes the frozen design, not a model result."
+    }
+   ]
+  },
   "qwen35_4b_counterfactual_order_support_selector": {
    "verdict_tag": "Meaningful order helps, but not enough to trust this selector",
    "concept_primer": "The model answered each puzzle after writing a long scratchpad. We also kept a version with exactly the same scratchpad words scrambled. The new idea is to ask which answer gained the most support from meaningful word order rather than from the words merely being present.",

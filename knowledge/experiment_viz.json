@@ -180,6 +180,35 @@
     }
    ]
   },
+  "qwen35_4b_counterfactual_evidence_acquisition_curriculum": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "The three preregistered arms have equal row counts",
+     "categories": [
+      "evidence binding",
+      "redundant instructions",
+      "shuffled evidence"
+     ],
+     "series": [
+      {
+       "label": "planned training rows",
+       "values": [
+        432,
+        432,
+        432
+       ]
+      }
+     ],
+     "x_label": "training arm",
+     "y_label": "rows per arm",
+     "y_format": "integer",
+     "note": "Preregistered design only; no model-bearing run or scientific result exists yet. Every arm has 48 rows at each of nine conditional transitions, matched action-token mass at every transition, and zero loss on thinking text.",
+     "source": "experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/configs/default.yaml and experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/reports/preregistration.md"
+    }
+   ]
+  },
   "qwen35_4b_counterfactual_order_support_selector": {
    "charts": [
     {

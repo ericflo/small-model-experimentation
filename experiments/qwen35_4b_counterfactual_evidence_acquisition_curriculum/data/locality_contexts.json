@@ -1,0 +1,492 @@
+{
+  "contexts": [
+    {
+      "content_sha256": "cd0d3b23d4bfcfc6b3dcc9f64ebfbd9d7b58e051377aeb28eb111aa3f144614a",
+      "id": "policy-locality-s93900-00-00",
+      "messages": [
+        {
+          "content": "Finish this everyday sentence in one brief clause:\nA glass greenhouse stays cooler at noon when",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "a4ab5716262164e62a35828a43ae98bb5632f1b89095dbe0be84961992b54b02",
+      "id": "policy-locality-s93900-00-01",
+      "messages": [
+        {
+          "content": "Finish this everyday sentence in one brief clause:\nBefore mailing a handmade card, its sender often",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "c4babf924491f5830dba972b6a6f1ebe0869436a0e45c694640e99a92ee11b48",
+      "id": "policy-locality-s93900-00-02",
+      "messages": [
+        {
+          "content": "Finish this everyday sentence in one brief clause:\nOn a windy footbridge, cyclists feel steadier after",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "51db91ebd10f5cff912c576173ca28b8b85e72c15fca7a787d74e730c3e2c083",
+      "id": "policy-locality-s93900-00-03",
+      "messages": [
+        {
+          "content": "Finish this everyday sentence in one brief clause:\nA brass door hinge stops squeaking once someone",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "a6c3b67a4fd5bcfcfcf00912f91ceb09f173b5ec07f32804b847b736847d7252",
+      "id": "policy-locality-s93900-00-04",
+      "messages": [
+        {
+          "content": "Finish this everyday sentence in one brief clause:\nWhen seedlings crowd one tray, a careful gardener",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "3b7c1758281ca3618ab0a60ea0910668301734e5b52b010c82c9d606d2773093",
+      "id": "policy-locality-s93900-00-05",
+      "messages": [
+        {
+          "content": "Finish this everyday sentence in one brief clause:\nA canvas tent sheds overnight rain better if campers",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "114c7eadc860a77e02ddfcc501844c973772e23f685b6d0ae27c26a2aa59a785",
+      "id": "policy-locality-s93900-00-06",
+      "messages": [
+        {
+          "content": "Finish this everyday sentence in one brief clause:\nBefore recording an acoustic guitar, the engineer usually",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "5ce6b6a42674595ef2d0fe7b4805c188fb33d2c1703c09c7f8ebff681c237152",
+      "id": "policy-locality-s93900-00-07",
+      "messages": [
+        {
+          "content": "Finish this everyday sentence in one brief clause:\nRoasted coffee beans keep their aroma longest when they",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "81af2af4bdb9f7c027653ef122e953b4acb2f55988f8900c6833b94a51a78067",
+      "id": "policy-locality-s93900-00-08",
+      "messages": [
+        {
+          "content": "Finish this everyday sentence in one brief clause:\nDuring a campsite blackout, a headlamp lets hikers",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "2467d31872a59f08b8838586e70dc2701a89845b886a095ab243cf9c6724320d",
+      "id": "policy-locality-s93900-00-09",
+      "messages": [
+        {
+          "content": "Finish this everyday sentence in one brief clause:\nA linen shirt keeps its shape while drying when",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "6b670b7ec229200494867565e40f85a4a5336d2a6fdb880e70953dfa0ba0fd4e",
+      "id": "policy-locality-s93900-00-10",
+      "messages": [
+        {
+          "content": "Finish this everyday sentence in one brief clause:\nWhen a whiteboard marker fades, the presenter",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "61b5df0e76f359b2d8bfe4f52b294d0c9ab2467ffd94f255d43cf08a56b5dd50",
+      "id": "policy-locality-s93900-00-11",
+      "messages": [
+        {
+          "content": "Finish this everyday sentence in one brief clause:\nBefore packing ceramic bowls for a move, people often",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "703787ec9bf9ee834c97f619f551d9498f9c94621e5d0d96a2e6d55b0c46cdd4",
+      "id": "policy-locality-s93900-01-00",
+      "messages": [
+        {
+          "content": "Supply a natural short completion and no explanation:\nA glass greenhouse stays cooler at noon when",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "cbadeee3cd9f017af7ef9a6a4425541a8afd1bdea534ffd586c60cdff15151e1",
+      "id": "policy-locality-s93900-01-01",
+      "messages": [
+        {
+          "content": "Supply a natural short completion and no explanation:\nBefore mailing a handmade card, its sender often",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "22fdf4a755da7f41b074c9d3d6c588eecbc5c8662439e2102b87749524655366",
+      "id": "policy-locality-s93900-01-02",
+      "messages": [
+        {
+          "content": "Supply a natural short completion and no explanation:\nOn a windy footbridge, cyclists feel steadier after",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "60621bc5266bb728a406518dbc6ea3b2cfc75b935a30f25ae56f42db2f15cb2a",
+      "id": "policy-locality-s93900-01-03",
+      "messages": [
+        {
+          "content": "Supply a natural short completion and no explanation:\nA brass door hinge stops squeaking once someone",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "b6be05da037c0f8ac8d86374c834d71938827b3cd22adc1b470f9b0ff342093c",
+      "id": "policy-locality-s93900-01-04",
+      "messages": [
+        {
+          "content": "Supply a natural short completion and no explanation:\nWhen seedlings crowd one tray, a careful gardener",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "ff9c4be5ad621b5afd97ae125fb74283f62d4bd0571b9939108802e835967480",
+      "id": "policy-locality-s93900-01-05",
+      "messages": [
+        {
+          "content": "Supply a natural short completion and no explanation:\nA canvas tent sheds overnight rain better if campers",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "36f041fd359224439683da265d03940c586cc953a9b9335e8c101413d6b07374",
+      "id": "policy-locality-s93900-01-06",
+      "messages": [
+        {
+          "content": "Supply a natural short completion and no explanation:\nBefore recording an acoustic guitar, the engineer usually",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "ad0a2a89abd3c847966a56a5be8a8d54719092dfdfafd39bdaeea11f91105904",
+      "id": "policy-locality-s93900-01-07",
+      "messages": [
+        {
+          "content": "Supply a natural short completion and no explanation:\nRoasted coffee beans keep their aroma longest when they",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "adb9e7c1e3227b95b3bfcf0bd8c8f4139ee105ed5fde3de92c37358adc92cacd",
+      "id": "policy-locality-s93900-01-08",
+      "messages": [
+        {
+          "content": "Supply a natural short completion and no explanation:\nDuring a campsite blackout, a headlamp lets hikers",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "7ac63125dd2e4592e45608570cc6495d8e7f4f85ddb6217c9340289e49be4387",
+      "id": "policy-locality-s93900-01-09",
+      "messages": [
+        {
+          "content": "Supply a natural short completion and no explanation:\nA linen shirt keeps its shape while drying when",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "6d294bb1d45b425dc98bb667080decf4167538cc28f57cb484dc7478f5b9283c",
+      "id": "policy-locality-s93900-01-10",
+      "messages": [
+        {
+          "content": "Supply a natural short completion and no explanation:\nWhen a whiteboard marker fades, the presenter",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "91060b60efbeeff2a11e246944ce924025e23558bad7ced82f04442c29c0971e",
+      "id": "policy-locality-s93900-01-11",
+      "messages": [
+        {
+          "content": "Supply a natural short completion and no explanation:\nBefore packing ceramic bowls for a move, people often",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "8ed3e5e834b5e7add5ac89fc6248ee60baf6c45fd0f72fb359bf7b4eda23b5cf",
+      "id": "policy-locality-s93900-02-00",
+      "messages": [
+        {
+          "content": "Write only a sensible ending for this ordinary statement:\nA glass greenhouse stays cooler at noon when",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "95c1748f6e3ad19ef336ca3caef5a6894ef3007fec6cc4d9dcba00a61509928b",
+      "id": "policy-locality-s93900-02-01",
+      "messages": [
+        {
+          "content": "Write only a sensible ending for this ordinary statement:\nBefore mailing a handmade card, its sender often",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "e5b069cd1c175f1e6a185a04a8e804137d6d423e15b0e3750826336855449aa3",
+      "id": "policy-locality-s93900-02-02",
+      "messages": [
+        {
+          "content": "Write only a sensible ending for this ordinary statement:\nOn a windy footbridge, cyclists feel steadier after",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "d1bcc51819f5b578348f802608848d0b0da36496635839d54769fd244b894df2",
+      "id": "policy-locality-s93900-02-03",
+      "messages": [
+        {
+          "content": "Write only a sensible ending for this ordinary statement:\nA brass door hinge stops squeaking once someone",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "9c89cc78b90e4b1c5a74689e54a6e5c593dda5b5f6b9157720c41b342f93368a",
+      "id": "policy-locality-s93900-02-04",
+      "messages": [
+        {
+          "content": "Write only a sensible ending for this ordinary statement:\nWhen seedlings crowd one tray, a careful gardener",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "fea9294c0964cf70ef88a94b7b7111cae6c6b1eb944d552dc6df979b07f64fbd",
+      "id": "policy-locality-s93900-02-05",
+      "messages": [
+        {
+          "content": "Write only a sensible ending for this ordinary statement:\nA canvas tent sheds overnight rain better if campers",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "d40fa1369f8ca4bdcfc38bb38cd5ada53bd1981112a730a8b5c9570dbc3cedcc",
+      "id": "policy-locality-s93900-02-06",
+      "messages": [
+        {
+          "content": "Write only a sensible ending for this ordinary statement:\nBefore recording an acoustic guitar, the engineer usually",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "a0978eb99a172816743566c90cb6d54b6c7d5ad0d79f2f38000e327a4c7edfa4",
+      "id": "policy-locality-s93900-02-07",
+      "messages": [
+        {
+          "content": "Write only a sensible ending for this ordinary statement:\nRoasted coffee beans keep their aroma longest when they",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "accab04f0da0c361fe4b924ee7aee0334ff00dc2e89749ba2f33f30382e1dbf6",
+      "id": "policy-locality-s93900-02-08",
+      "messages": [
+        {
+          "content": "Write only a sensible ending for this ordinary statement:\nDuring a campsite blackout, a headlamp lets hikers",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "8e0f70825724349bdbddd8d979e8e945232be7b4325c90fe3784236e615f74c7",
+      "id": "policy-locality-s93900-02-09",
+      "messages": [
+        {
+          "content": "Write only a sensible ending for this ordinary statement:\nA linen shirt keeps its shape while drying when",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "5f7895ff86eb27eefa980b8c82b4e5539d5f757e281564d9c9799b8cf2053588",
+      "id": "policy-locality-s93900-02-10",
+      "messages": [
+        {
+          "content": "Write only a sensible ending for this ordinary statement:\nWhen a whiteboard marker fades, the presenter",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "a77849c993aaa814890445d908cd27cd4191d42800f7f16e1ee37f63ea4a806a",
+      "id": "policy-locality-s93900-02-11",
+      "messages": [
+        {
+          "content": "Write only a sensible ending for this ordinary statement:\nBefore packing ceramic bowls for a move, people often",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "d8b2c5aa944bdeee7d2dbe670918c6281af012ff906efa464aa0b5b2ab71e692",
+      "id": "policy-locality-s93900-03-00",
+      "messages": [
+        {
+          "content": "Continue the sentence with a compact commonplace phrase:\nA glass greenhouse stays cooler at noon when",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "46b128c5990c1411ce9b4e23a3341ed22a29a7ee1535cb875aac58493a8d2cc2",
+      "id": "policy-locality-s93900-03-01",
+      "messages": [
+        {
+          "content": "Continue the sentence with a compact commonplace phrase:\nBefore mailing a handmade card, its sender often",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "cba2fa4d944b770624b19274835a132e13bb10aaa45e6a087c8b155819134148",
+      "id": "policy-locality-s93900-03-02",
+      "messages": [
+        {
+          "content": "Continue the sentence with a compact commonplace phrase:\nOn a windy footbridge, cyclists feel steadier after",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "24f829c9fcef2d62a7ef152f7ea74765ad91e544a8eba563a88097bf5589503d",
+      "id": "policy-locality-s93900-03-03",
+      "messages": [
+        {
+          "content": "Continue the sentence with a compact commonplace phrase:\nA brass door hinge stops squeaking once someone",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "b49caf875e3ad4387594f7b39c170343614ee5dde9b3d5ef77965ed1f4f23df3",
+      "id": "policy-locality-s93900-03-04",
+      "messages": [
+        {
+          "content": "Continue the sentence with a compact commonplace phrase:\nWhen seedlings crowd one tray, a careful gardener",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "f7f4ea5a1f0386ad22c97b9bc4a0caead59791cc53ec5e81793581dff3e693c2",
+      "id": "policy-locality-s93900-03-05",
+      "messages": [
+        {
+          "content": "Continue the sentence with a compact commonplace phrase:\nA canvas tent sheds overnight rain better if campers",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "585456efc9884811a4f68bd50c5a84324b326c88e349ab270dee497e28eb3fc1",
+      "id": "policy-locality-s93900-03-06",
+      "messages": [
+        {
+          "content": "Continue the sentence with a compact commonplace phrase:\nBefore recording an acoustic guitar, the engineer usually",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "7eb5701659e908b0ac5d5673fdc7cfb28c09e7c8d71024309b066f1f64ba4240",
+      "id": "policy-locality-s93900-03-07",
+      "messages": [
+        {
+          "content": "Continue the sentence with a compact commonplace phrase:\nRoasted coffee beans keep their aroma longest when they",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "62e42e7a76acca98080b264ea53380ca833d215a38c5518a8a3266b72b6bae5c",
+      "id": "policy-locality-s93900-03-08",
+      "messages": [
+        {
+          "content": "Continue the sentence with a compact commonplace phrase:\nDuring a campsite blackout, a headlamp lets hikers",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "d7bdbcecc0ba163f0f1932b06fae476f50874517ccf9882c4e493e1d57bfbd93",
+      "id": "policy-locality-s93900-03-09",
+      "messages": [
+        {
+          "content": "Continue the sentence with a compact commonplace phrase:\nA linen shirt keeps its shape while drying when",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "f66179625cd34f21b806c39884df2023cc78f4db8345ba5854af35d282d8d075",
+      "id": "policy-locality-s93900-03-10",
+      "messages": [
+        {
+          "content": "Continue the sentence with a compact commonplace phrase:\nWhen a whiteboard marker fades, the presenter",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "content_sha256": "7264f43d7755ffdb6d4ab42564fbb38736dc2b38396ef6aea08f8f190f4641ee",
+      "id": "policy-locality-s93900-03-11",
+      "messages": [
+        {
+          "content": "Continue the sentence with a compact commonplace phrase:\nBefore packing ceramic bowls for a move, people often",
+          "role": "user"
+        }
+      ]
+    }
+  ],
+  "count": 48,
+  "forbidden_prior_context_files": [
+    "/workspace/small-model-experimentation/experiments/qwen35_4b_validation_policy_counterexample_curriculum/data/locality_contexts.json",
+    "/workspace/small-model-experimentation/experiments/qwen35_4b_transaction_invariant_recovery_curriculum/data/locality_contexts.json"
+  ],
+  "prior_content_overlap_count": 0,
+  "schema_version": 1,
+  "seed": 93900
+}

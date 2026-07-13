@@ -1,0 +1,50 @@
+schema_version: 1
+experiment_id: "qwen35_4b_counterfactual_evidence_acquisition_curriculum"
+external_artifacts:
+  - name: "transition-balanced training banks"
+    storage: "large_artifacts/qwen35_4b_counterfactual_evidence_acquisition_curriculum/bank"
+    required_for: "exact aligned, explicit-redundant, and within-dyad-shuffled training replay"
+    checksum: >-
+      bank/receipt.json sha256 ff32290561fbdf014f425107e4c10fa21d85bcb20bba84de0f799370c8066858;
+      evidence_binding f91275dd469fc7e043ad95b506db9104aed0f2ebd3cc494b9036c8fe9fe20ed2;
+      explicit_redundant 6265039b6933e1ee51739e985f15f001649619c9a9a7b9f2a5e4cabb48a8e59f;
+      shuffled_binding f20f62893569f0661f370ac4cb7f0f8765020329a3c2252b2c5d0d10f0bb8a60
+    regenerate: ".venv/bin/python experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/scripts/build_bank.py"
+  - name: "trained adapters and merged checkpoints"
+    storage: "large_artifacts/qwen35_4b_counterfactual_evidence_acquisition_curriculum/{adapters,merged}"
+    required_for: "locality, calibration, transfer, retention, and conditional benchmark evaluation"
+    checksum: "recorded in encoding, training, merge, and final result receipts when generated"
+    regenerate: ".venv/bin/python experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/scripts/run.py --full"
+  - name: "interface, qualification, calibration, transfer, retention, and sample-pool trajectories"
+    storage: "large_artifacts/qwen35_4b_counterfactual_evidence_acquisition_curriculum/eval"
+    required_for: "dyad-level gates, actual-compute matching, transition retention, and trajectory forensics"
+    checksum: "bound by compact stage and final receipts when generated"
+    regenerate: ".venv/bin/python experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/scripts/run.py --full"
+  - name: "locality logits and uncertainty diagnostics"
+    storage: "large_artifacts/qwen35_4b_counterfactual_evidence_acquisition_curriculum/{locality,uncertainty}"
+    required_for: "start/candidate apex-relative locality gates and entropy/varentropy stratification"
+    checksum: "recorded in locality and uncertainty receipts when generated"
+    regenerate: ".venv/bin/python experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/scripts/run.py --full"
+  - name: "conditional Menagerie aggregate events"
+    storage: "large_artifacts/qwen35_4b_counterfactual_evidence_acquisition_curriculum/menagerie"
+    required_for: "benchmark strategy gate only after white-box authorization"
+    checksum: "recorded in aggregate-only event receipts if the stage is authorized"
+    regenerate: "use the public Menagerie CLI through the authorized staged runner; never read suite contents"
+omitted_artifacts:
+  - path: "large_artifacts/qwen35_4b_counterfactual_evidence_acquisition_curriculum"
+    reason: "multi-gigabyte adapters/checkpoints plus detailed model trajectories, logits, and sample pools"
+reproducibility:
+  smoke_command: ".venv/bin/python experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/scripts/run.py --smoke"
+  lock_command: ".venv/bin/python experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/scripts/run.py --lock-design <full-design-commit-sha>"
+  full_command: ".venv/bin/python experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/scripts/run.py --full"
+  closeout_command: ".venv/bin/python experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/scripts/run.py --closeout"
+  verify_closeout_command: ".venv/bin/python experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/scripts/run.py --verify-closeout"
+  required_external_artifacts:
+    - "large_artifacts/qwen35_4b_transaction_invariant_recovery_curriculum/merged/transaction_replay"
+    - "large_artifacts/qwen35_4b_repo_search_compress_bank/merged/apex_replay"
+    - "large_artifacts/qwen35_4b_transaction_invariant_recovery_curriculum/bank/transaction_replay.jsonl"
+notes: >-
+  Model-free banks and receipts exist, but no experiment-produced model or
+  model-generation artifact exists yet.
+  Menagerie stays sealed until every preregistered white-box gate passes and may
+  be invoked only through its public CLI with aggregate receipts.
