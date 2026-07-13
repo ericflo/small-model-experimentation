@@ -16,12 +16,13 @@ Also the risk-coverage curve for conf+ABSTAIN at fixed k (sweep max-p_true
 threshold): selective accuracy vs coverage. CPU-only, deterministic.
 """
 from __future__ import annotations
-import json, random, statistics
+import argparse, json, random, statistics
 from collections import Counter
 from pathlib import Path
 
 EXP = Path(__file__).resolve().parents[1]
-SRC = EXP.parents[1] / "experiments" / "qwen35_4b_code_confidence" / "runs" / "code_conf.json"
+MBPP_SRC = EXP.parents[1] / "experiments" / "qwen35_4b_code_confidence" / "runs" / "code_conf.json"
+HUMANEVAL_SRC = EXP.parents[1] / "experiments" / "qwen35_4b_humaneval_code_confidence" / "runs" / "humaneval_code_conf.json"
 R_SUBSETS = 60   # random size-k subsets averaged per task
 SEED = 31337
 
@@ -55,7 +56,13 @@ def pick(cands, policy):
 
 
 def main():
-    tasks = json.loads(SRC.read_text())
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--src", choices=["mbpp", "humaneval"], default="mbpp")
+    args = ap.parse_args()
+    src = MBPP_SRC if args.src == "mbpp" else HUMANEVAL_SRC
+    out_name = "frontier.json" if args.src == "mbpp" else "frontier_humaneval.json"
+    print(f"=== benchmark: {args.src} ({src.name}) ===")
+    tasks = json.loads(src.read_text())
     rng = random.Random(SEED)
     policies = ["first", "majority", "logprob", "conf", "exec", "oracle"]
     KS = list(range(1, 10))
@@ -111,7 +118,7 @@ def main():
            "solvability_auroc": round(auroc, 4), "n_tasks": len(tasks),
            "base_pass_rate": round(statistics.mean(
                any(c["full_pass"] for c in t["cands"]) for t in tasks), 4)}
-    (EXP / "runs" / "frontier.json").write_text(json.dumps(out, indent=2) + "\n")
+    (EXP / "runs" / out_name).write_text(json.dumps(out, indent=2) + "\n")
     print(f"\nwrote {EXP/'runs'/'frontier.json'}")
 
 

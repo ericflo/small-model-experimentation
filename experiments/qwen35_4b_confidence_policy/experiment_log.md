@@ -23,3 +23,20 @@ Regenerated the full pools on vLLM at n=400 x k=6, budgets 256 vs 2048.
   under-powered win was correctly flagged and then reversed.
 Robust deployable core: SELECT (argmax P(True)) + ABSTAIN (max-P(True) threshold),
 both verifier-free from one logit. C57 corrected.
+
+## 2026-07-13 — GENERALIZATION: the conf-select advantage is difficulty-dependent (HumanEval ties majority)
+
+Ran the identical Part-1 frontier on the cached HumanEval pool (68 tasks x 9
+cands, same schema; frontier.py --src humaneval). HumanEval is EASY for the 4B
+(base pass 0.91, 67/68 solvable). There the confidence-SELECT advantage over
+majority-vote VANISHES: k=9 conf 0.941 == majority 0.941 (majority slightly ahead
+at k=7/8). On MBPP (base pass ~0.53) conf-select clearly beat majority (0.762 vs
+0.742). So single-token P(True) selection beats self-consistency only when the
+task is hard enough that selection matters; when the model is already ~0.9
+accurate, majority-vote catches up. Abstention still works (HumanEval
+risk-coverage clean, but only 1 unsolvable task limits the solvability AUROC).
+P(True) > mean-logprob holds on both. C57's SELECT claim is thus bounded to
+moderate-difficulty tasks. Also: MBPP n_think is saturated for the median task
+(~86 tokens at both 256 and 2048 budgets) but the top ~10% tail is budget-bound
+(p99 256->2048); escalation still fails that tail because those tasks are
+capability-hard, not merely compute-starved.
