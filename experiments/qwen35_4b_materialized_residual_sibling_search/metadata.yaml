@@ -5,8 +5,9 @@ source_track: "new"
 path: "experiments/qwen35_4b_materialized_residual_sibling_search"
 primary_readme: "experiments/qwen35_4b_materialized_residual_sibling_search/README.md"
 primary_report: "experiments/qwen35_4b_materialized_residual_sibling_search/reports/report.md"
-summary: "construction lock passed; mechanics implementation and every model stage remain sealed."
+summary: "before the first experimental request; append-only v2 repair passed independent adversarial review and awaits its pushed implementation and separate lock."
 tags:
+  - "repair"
   - "small-model"
 research_programs:
   - "evidence_conditioned_selection"
@@ -22,10 +23,10 @@ top_level_dirs:
   - "src"
   - "tests"
 file_counts:
-  json: 6
+  json: 9
   jsonl: 20
-  md: 8
+  md: 9
   py: 13
   yaml: 3
-total_files: 50
-total_size_bytes: 4312898
+total_files: 54
+total_size_bytes: 4369168

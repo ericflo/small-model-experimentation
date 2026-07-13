@@ -152,7 +152,7 @@ def _bootstrap_verify_before_local_imports() -> None:
     lock_path = (
         Path(lock_value).resolve()
         if lock_value is not None
-        else EXP / "runs" / "mechanics" / "implementation_lock.json"
+        else EXP / "runs" / "mechanics" / "implementation_lock_v2.json"
     )
     if lock_path.is_symlink() or not lock_path.is_file():
         raise RuntimeError("local imports require a real implementation lock")
@@ -240,12 +240,21 @@ CONSTRUCTION_MANIFEST = EXP / "data" / "procedural" / "manifest.json"
 PUBLIC_PATH = EXP / "data" / "procedural" / "mechanics_public.jsonl"
 AUDIT_PATH = EXP / "data" / "procedural" / "mechanics_audit.jsonl"
 PREPARED = EXP / "runs" / "mechanics" / "prepared"
-RAW = EXP / "runs" / "mechanics" / "raw"
-SCORED = EXP / "runs" / "mechanics" / "scored"
-SUMMARY = EXP / "runs" / "mechanics" / "summary.json"
-IMPLEMENTATION_LOCK = EXP / "runs" / "mechanics" / "implementation_lock.json"
+PRIOR_PREOUTCOME_RECEIPT = PREPARED / "preoutcome_receipt.json"
+PRIOR_IMPLEMENTATION_LOCK = EXP / "runs" / "mechanics" / "implementation_lock.json"
+PRIOR_PREFLIGHT = EXP / "runs" / "mechanics" / "raw" / "live_preflight.json"
+INCIDENT_RECEIPT = EXP / "runs" / "mechanics" / "preflight_attempt_1_incident.json"
+PREOUTCOME_RECEIPT = EXP / "runs" / "mechanics" / "preoutcome_receipt_v2.json"
+RAW = EXP / "runs" / "mechanics" / "raw_v2"
+SCORED = EXP / "runs" / "mechanics" / "scored_v2"
+SUMMARY = EXP / "runs" / "mechanics" / "summary_v2.json"
+IMPLEMENTATION_LOCK = EXP / "runs" / "mechanics" / "implementation_lock_v2.json"
 DESIGN_COMMIT = "ba08a7320e5fe2d5fb88f2e5b6f3a359ed727cd7"
 DESIGN_MANIFEST_SHA256 = "a566129343a4c09473005b355f2ea7aa35549efe101dc14dc8d73ab5a0323857"
+PRIOR_IMPLEMENTATION_COMMIT = "48ef078fa59e293ec87d430123da024887c74ecb"
+PRIOR_IMPLEMENTATION_LOCK_SHA256 = "896c4cc64e157627eaf35a8a4365af766971644905fbde5c72e4d35ea72792e0"
+PRIOR_PREOUTCOME_SHA256 = "3de86e8b08bf37174cf687e4e7220ff802386c61652bafb6554cf1e772c89b88"
+PRIOR_PREFLIGHT_SHA256 = "a438ecf190e4006e8f19368f907d37595a05d543ca8158c33d27333c816f14b5"
 DESIGN_FROZEN_FILES = (
     "requirements-vllm.lock.txt",
     str(EXP_REL / "configs/default.yaml"),
@@ -298,6 +307,7 @@ PREPARE_SOURCE_FILES = (
     str(EXP_REL / "reports/preregistration.md"),
     str(EXP_REL / "reports/design_review.md"),
     str(EXP_REL / "reports/mechanics_implementation_review.md"),
+    str(EXP_REL / "reports/mechanics_preflight_incident.md"),
     str(EXP_REL / "scripts/run_mechanics.py"),
     str(EXP_REL / "src/mechanics.py"),
     str(EXP_REL / "src/protocol.py"),
@@ -311,11 +321,18 @@ PREPARED_RELATIVE_FILES = tuple(
     for name in INVOCATIONS
 ) + tuple(str(EXP_REL / "runs/mechanics/prepared" / name) for name in CONTROL_FILES) + (
     str(EXP_REL / "runs/mechanics/prepared/preoutcome_receipt.json"),
+    str(EXP_REL / "runs/mechanics/implementation_lock.json"),
+    str(EXP_REL / "runs/mechanics/preflight_attempt_1_incident.json"),
+    str(EXP_REL / "runs/mechanics/preoutcome_receipt_v2.json"),
+    str(EXP_REL / "runs/mechanics/raw/live_preflight.json"),
 )
 IMPLEMENTATION_CRITICAL_FILES = frozenset(
     (*PREPARE_SOURCE_FILES, *PREPARED_RELATIVE_FILES)
 )
-ALLOWED_LIVE_PREFIX = str(EXP_REL / "runs/mechanics") + "/"
+ALLOWED_LIVE_PREFIXES = (
+    str(RAW.relative_to(ROOT)) + "/",
+    str(SCORED.relative_to(ROOT)) + "/",
+)
 
 
 def sha256_bytes(value: bytes) -> str:
@@ -720,6 +737,82 @@ def _source_hashes() -> dict[str, str]:
     return result
 
 
+def build_preflight_incident_receipt() -> dict[str, Any]:
+    """Authenticate the append-only evidence from the preflight-only abort."""
+    expected_files = (
+        (PRIOR_IMPLEMENTATION_LOCK, PRIOR_IMPLEMENTATION_LOCK_SHA256),
+        (PRIOR_PREOUTCOME_RECEIPT, PRIOR_PREOUTCOME_SHA256),
+        (PRIOR_PREFLIGHT, PRIOR_PREFLIGHT_SHA256),
+    )
+    for path, expected in expected_files:
+        if path.is_symlink() or not path.is_file() or sha256_file(path) != expected:
+            raise RuntimeError(f"prior preflight evidence changed: {path}")
+    prior_lock = read_json(PRIOR_IMPLEMENTATION_LOCK)
+    prior_preflight = read_json(PRIOR_PREFLIGHT)
+    if (
+        prior_lock.get("implementation_commit") != PRIOR_IMPLEMENTATION_COMMIT
+        or prior_lock.get("authorization") != "mechanics_only"
+        or prior_preflight.get("model") != MODEL_ID
+        or prior_preflight.get("revision") != MODEL_REVISION
+        or prior_preflight.get("implementation_lock_sha256")
+        != PRIOR_IMPLEMENTATION_LOCK_SHA256
+        or prior_preflight.get("prepare_receipt_sha256")
+        != PRIOR_PREOUTCOME_SHA256
+    ):
+        raise RuntimeError("prior preflight evidence identity changed")
+    prior_raw = PRIOR_PREFLIGHT.parent
+    if prior_raw.is_symlink() or not prior_raw.is_dir():
+        raise RuntimeError("prior preflight directory is unsafe")
+    non_lock_inventory = sorted(
+        path.name for path in prior_raw.iterdir() if path.name != "run.lock"
+    )
+    if non_lock_inventory != ["live_preflight.json"] or any(
+        path.is_dir() or path.is_symlink() for path in prior_raw.iterdir()
+    ):
+        raise RuntimeError("prior preflight inventory no longer proves zero requests")
+    ephemeral_lock = prior_raw / "run.lock"
+    if ephemeral_lock.exists() and (
+        ephemeral_lock.is_symlink()
+        or not ephemeral_lock.is_file()
+        or sha256_file(ephemeral_lock)
+        != "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    ):
+        raise RuntimeError("prior advisory run lock is not empty")
+    return {
+        "schema_version": 1,
+        "stage": "mechanics_preflight_attempt_1",
+        "decision": "ABORTED_BEFORE_FIRST_EXPERIMENTAL_REQUEST",
+        "model": MODEL_ID,
+        "revision": MODEL_REVISION,
+        "execution_head": "cd82e64981140f3c0e5dc7755d293311642b58e4",
+        "implementation_commit": PRIOR_IMPLEMENTATION_COMMIT,
+        "implementation_lock_sha256": PRIOR_IMPLEMENTATION_LOCK_SHA256,
+        "prepare_receipt_sha256": PRIOR_PREOUTCOME_SHA256,
+        "live_preflight_sha256": PRIOR_PREFLIGHT_SHA256,
+        "raw_non_lock_inventory": ["live_preflight.json"],
+        "ephemeral_run_lock_at_failure_sha256": (
+            "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        ),
+        "prior_engine_initializations": 1,
+        "experimental_model_requests": 0,
+        "sampled_model_outputs": 0,
+        "invocation_transactions_started": 0,
+        "internal_engine_profile_or_warmup_may_have_run": True,
+        "error_type": "RuntimeError",
+        "error_message": "live preflight cache geometry changed",
+        "root_cause": (
+            "validator inverted vLLM's intentionally floored hybrid-cache token "
+            "capacity instead of checking int(concurrency * max_model_len)"
+        ),
+        "embedded_pass_label_authenticated": False,
+        "recovery_protocol": "append_only_versioned_v2",
+        "hidden_files_read": [],
+        "qualification_files_read": [],
+        "confirmation_files_read": [],
+        "benchmark_files_read": [],
+    }
+
+
 def build_prepared() -> tuple[
     dict[str, list[dict[str, Any]]], list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]
 ]:
@@ -791,8 +884,8 @@ def build_prepared() -> tuple[
     if not static_fit:
         raise RuntimeError("published top-four context receipt does not fit")
     receipt = {
-        "schema_version": 1,
-        "stage": "mechanics_prepare",
+        "schema_version": 2,
+        "stage": "mechanics_prepare_repair_v2",
         "decision": "MECHANICS_PREPARE_PASS",
         "design_commit": DESIGN_COMMIT,
         "construction_manifest_sha256": DESIGN_MANIFEST_SHA256,
@@ -820,6 +913,10 @@ def build_prepared() -> tuple[
         "registered_top4_static_context_fit": static_fit,
         "published_tokenizer_identity_match": True,
         "published_echo_receipt_match": True,
+        "prior_preflight_incident_sha256": sha256_file(INCIDENT_RECEIPT),
+        "prior_engine_initializations": 1,
+        "prior_experimental_model_requests": 0,
+        "prior_sampled_model_outputs": 0,
         "tokenizer": tokenizer,
         "source_sha256": _source_hashes(),
         "environment_lock": {
@@ -847,6 +944,8 @@ def build_prepared() -> tuple[
 
 def prepare() -> dict[str, Any]:
     _validate_current_scientific_environment(yaml.safe_load(CONFIG_PATH.read_text()))
+    incident = build_preflight_incident_receipt()
+    write_frozen(INCIDENT_RECEIPT, incident)
     requests, surface_scores, surface_folds, random_scores, receipt = build_prepared()
     for name in INVOCATIONS:
         write_frozen(PREPARED / f"{name}_requests.jsonl", requests[name], jsonl=True)
@@ -854,7 +953,7 @@ def prepare() -> dict[str, Any]:
     write_frozen(PREPARED / "surface_folds.json", surface_folds)
     write_frozen(PREPARED / "random_scores.jsonl", random_scores, jsonl=True)
     receipt["files"] = _prepared_file_table()
-    write_frozen(PREPARED / "preoutcome_receipt.json", receipt)
+    write_frozen(PREOUTCOME_RECEIPT, receipt)
     print(json.dumps(receipt, indent=2, sort_keys=True))
     return receipt
 
@@ -889,15 +988,25 @@ def verify_implementation_lock(lock_path: Path) -> dict[str, Any]:
         "design_frozen_files",
         "implementation_commit",
         "critical_files",
-        "model_calls_before_lock",
+        "prior_attempt_incident_sha256",
+        "prior_engine_initializations",
+        "experimental_model_requests_before_lock",
+        "sampled_model_outputs_before_lock",
         "authorization",
     }
-    if set(lock) != required or lock["schema_version"] != 1:
+    if set(lock) != required or lock["schema_version"] != 2:
         raise RuntimeError("implementation lock schema changed")
     if lock["design_commit"] != DESIGN_COMMIT or lock["design_manifest_sha256"] != DESIGN_MANIFEST_SHA256:
         raise RuntimeError("implementation lock design boundary changed")
-    if lock["model_calls_before_lock"] != 0 or lock["authorization"] != "mechanics_only":
-        raise RuntimeError("implementation lock does not certify a pre-model mechanics boundary")
+    if (
+        lock["prior_attempt_incident_sha256"] != sha256_file(INCIDENT_RECEIPT)
+        or lock["prior_engine_initializations"] != 1
+        or lock["experimental_model_requests_before_lock"] != 0
+        or lock["sampled_model_outputs_before_lock"] != 0
+        or lock["authorization"]
+        != "mechanics_retry_after_preflight_only_abort"
+    ):
+        raise RuntimeError("implementation lock does not certify the retry boundary")
     critical = lock["critical_files"]
     if not isinstance(critical, dict) or set(critical) != IMPLEMENTATION_CRITICAL_FILES:
         raise RuntimeError("implementation critical-file allowlist changed")
@@ -928,8 +1037,7 @@ def verify_implementation_lock(lock_path: Path) -> dict[str, Any]:
         paths = line[3:].split(" -> ")
         if not all(
             path == str(SUMMARY.relative_to(ROOT))
-            or path.startswith(ALLOWED_LIVE_PREFIX + "raw/")
-            or path.startswith(ALLOWED_LIVE_PREFIX + "scored/")
+            or any(path.startswith(prefix) for prefix in ALLOWED_LIVE_PREFIXES)
             for path in paths
         ):
             raise RuntimeError(f"live mechanics has unrelated worktree change: {line}")
@@ -999,14 +1107,17 @@ def publish_implementation_lock() -> dict[str, Any]:
             raise RuntimeError(f"frozen design file changed: {relative}")
         frozen[relative] = sha256_bytes(design_blob)
     lock = {
-        "schema_version": 1,
+        "schema_version": 2,
         "design_commit": DESIGN_COMMIT,
         "design_manifest_sha256": DESIGN_MANIFEST_SHA256,
         "design_frozen_files": dict(sorted(frozen.items())),
         "implementation_commit": implementation_commit,
         "critical_files": critical,
-        "model_calls_before_lock": 0,
-        "authorization": "mechanics_only",
+        "prior_attempt_incident_sha256": sha256_file(INCIDENT_RECEIPT),
+        "prior_engine_initializations": 1,
+        "experimental_model_requests_before_lock": 0,
+        "sampled_model_outputs_before_lock": 0,
+        "authorization": "mechanics_retry_after_preflight_only_abort",
     }
     write_frozen(IMPLEMENTATION_LOCK, lock)
     print(json.dumps(lock, indent=2, sort_keys=True))
@@ -1029,7 +1140,10 @@ def _load_prepared() -> tuple[dict[str, Any], dict[str, list[dict[str, Any]]]]:
         raise RuntimeError("prepared surface folds changed")
     if read_jsonl(PREPARED / "random_scores.jsonl") != random_scores:
         raise RuntimeError("prepared random scores changed")
-    receipt = read_json(PREPARED / "preoutcome_receipt.json")
+    incident = read_json(INCIDENT_RECEIPT)
+    if incident != build_preflight_incident_receipt():
+        raise RuntimeError("preflight incident receipt changed")
+    receipt = read_json(PREOUTCOME_RECEIPT)
     expected = dict(base_receipt)
     expected["files"] = _prepared_file_table()
     if receipt != expected:
@@ -1280,6 +1394,81 @@ def _expected_engine_args(config: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _validate_group_aware_cache_geometry(
+    cache: Any, engine: EngineConfig
+) -> dict[str, int]:
+    """Validate vLLM 0.24 hybrid-cache counters without undoing its floor.
+
+    Pinned vLLM computes ``kv_cache_max_concurrency`` as GPU blocks divided by
+    an integer number of cache blocks per max-length request, then publishes
+    ``kv_cache_size_tokens = int(concurrency * max_model_len)``.  The integer
+    token capacity is therefore a floor, not an exactly invertible float.
+    """
+    required = {
+        "num_gpu_blocks",
+        "block_size",
+        "kv_cache_size_tokens",
+        "kv_cache_max_concurrency",
+        "enable_prefix_caching",
+        "mamba_cache_mode",
+        "mamba_block_size",
+    }
+    if not isinstance(cache, dict) or set(cache) != required:
+        raise RuntimeError("live preflight cache geometry changed")
+    num_blocks = cache["num_gpu_blocks"]
+    block_size = cache["block_size"]
+    capacity = cache["kv_cache_size_tokens"]
+    concurrency_value = cache["kv_cache_max_concurrency"]
+    mamba_block_size = cache["mamba_block_size"]
+    if (
+        not isinstance(num_blocks, int)
+        or isinstance(num_blocks, bool)
+        or num_blocks < engine.max_num_seqs
+        or not isinstance(block_size, int)
+        or isinstance(block_size, bool)
+        or block_size < 1
+        or not isinstance(capacity, int)
+        or isinstance(capacity, bool)
+        or capacity < 1
+        or isinstance(concurrency_value, bool)
+        or not isinstance(concurrency_value, (int, float))
+        or not math.isfinite(float(concurrency_value))
+        or float(concurrency_value) < engine.max_num_seqs
+        or not isinstance(mamba_block_size, int)
+        or isinstance(mamba_block_size, bool)
+        or mamba_block_size < 1
+        or cache["enable_prefix_caching"] is not False
+        or cache["mamba_cache_mode"] != "none"
+    ):
+        raise RuntimeError("live preflight cache geometry changed")
+    concurrency = float(concurrency_value)
+    mamba_group_count = 3
+    attention_blocks_at_max = math.ceil(engine.max_model_len / block_size)
+    mamba_blocks_at_max = mamba_group_count * math.ceil(
+        engine.max_model_len / mamba_block_size
+    )
+    expected_blocks_per_max_request = attention_blocks_at_max + mamba_blocks_at_max
+    if (
+        int(concurrency * engine.max_model_len) != capacity
+        or not math.isclose(
+            concurrency,
+            num_blocks / expected_blocks_per_max_request,
+            rel_tol=1e-12,
+            abs_tol=1e-12,
+        )
+        or block_size != 528
+        or mamba_block_size != engine.max_model_len
+        or expected_blocks_per_max_request != 11
+    ):
+        raise RuntimeError("live preflight cache geometry changed")
+    return {
+        "blocks_per_max_request": expected_blocks_per_max_request,
+        "attention_blocks_at_max": attention_blocks_at_max,
+        "mamba_blocks_at_max": mamba_blocks_at_max,
+        "mamba_group_count": mamba_group_count,
+    }
+
+
 def _validate_recorded_live_preflight(
     preflight: dict[str, Any],
     config: dict[str, Any],
@@ -1307,13 +1496,13 @@ def _validate_recorded_live_preflight(
     if set(preflight) != required:
         raise RuntimeError("live preflight schema changed")
     if (
-        preflight["schema_version"] != 1
+        preflight["schema_version"] != 2
         or preflight["decision"] != "LIVE_ENGINE_PREFLIGHT_PASS"
         or preflight["model"] != MODEL_ID
         or preflight["revision"] != MODEL_REVISION
         or preflight["implementation_lock_sha256"] != sha256_file(lock_path)
         or preflight["prepare_receipt_sha256"]
-        != sha256_file(PREPARED / "preoutcome_receipt.json")
+        != sha256_file(PREOUTCOME_RECEIPT)
         or preflight["engine"] != _normalized(dataclasses.asdict(_engine_config(config)))
         or preflight["engine_args"] != _normalized(_expected_engine_args(config))
         or preflight["resolved_logprobs_mode"] != "raw_logprobs"
@@ -1359,48 +1548,15 @@ def _validate_recorded_live_preflight(
     }:
         raise RuntimeError("live preflight scheduler/parallel geometry changed")
     cache = preflight["live_cache"]
-    if (
-        not isinstance(cache, dict)
-        or set(cache)
-        != {
-            "num_gpu_blocks",
-            "block_size",
-            "kv_cache_size_tokens",
-            "kv_cache_max_concurrency",
-            "enable_prefix_caching",
-            "mamba_cache_mode",
-            "mamba_block_size",
-        }
-        or not isinstance(cache["num_gpu_blocks"], int)
-        or cache["num_gpu_blocks"] < engine.max_num_seqs
-        or not isinstance(cache["block_size"], int)
-        or cache["block_size"] < 1
-        or not isinstance(cache["kv_cache_size_tokens"], int)
-        or cache["kv_cache_size_tokens"] < 1
-        or isinstance(cache["kv_cache_max_concurrency"], bool)
-        or not isinstance(cache["kv_cache_max_concurrency"], (int, float))
-        or not math.isfinite(float(cache["kv_cache_max_concurrency"]))
-        or not math.isclose(
-            float(cache["kv_cache_max_concurrency"]),
-            cache["kv_cache_size_tokens"] / engine.max_model_len,
-            rel_tol=1e-12,
-            abs_tol=1e-12,
-        )
-        or not isinstance(cache["mamba_block_size"], int)
-        or isinstance(cache["mamba_block_size"], bool)
-        or cache["mamba_block_size"] < 1
-        or cache["enable_prefix_caching"] is not False
-        or cache["mamba_cache_mode"] != "none"
-    ):
-        raise RuntimeError("live preflight cache geometry changed")
+    cache_geometry = _validate_group_aware_cache_geometry(cache, engine)
     _validate_runtime_receipt(
         preflight["runtime"], config, source="live preflight"
     )
     invocations = preflight["invocations"]
     if not isinstance(invocations, dict) or set(invocations) != set(INVOCATIONS):
         raise RuntimeError("live preflight invocation inventory changed")
-    block_size = cache["block_size"]
-    capacity = cache["kv_cache_size_tokens"]
+    blocks_per_max_request = cache_geometry["blocks_per_max_request"]
+    available_blocks = cache["num_gpu_blocks"]
     for name in INVOCATIONS:
         row = invocations[name]
         token_row = receipt["tokenizer"]["invocations"][name]
@@ -1415,8 +1571,8 @@ def _validate_recorded_live_preflight(
             else sampling.max_tokens
         )
         maximum_total = token_row["prompt_tokens_max"] + reserve
-        rounded = math.ceil(maximum_total / block_size) * block_size
         active = min(EXPECTED_COUNTS[name], engine.max_num_seqs)
+        required_blocks = active * blocks_per_max_request
         expected_row = {
             "requests": EXPECTED_COUNTS[name],
             "prompt_tokens_min": token_row["prompt_tokens_min"],
@@ -1424,11 +1580,15 @@ def _validate_recorded_live_preflight(
             "reserve_tokens": reserve,
             "max_prompt_plus_reserve": maximum_total,
             "active_sequences": active,
-            "rounded_tokens_per_sequence": rounded,
-            "required_cache_tokens": active * rounded,
-            "remaining_cache_tokens": capacity - active * rounded,
+            "reserved_blocks_per_sequence": blocks_per_max_request,
+            "required_cache_blocks": required_blocks,
+            "remaining_cache_blocks": available_blocks - required_blocks,
         }
-        if row != expected_row or expected_row["remaining_cache_tokens"] < 0:
+        if (
+            row != expected_row
+            or maximum_total > engine.max_model_len
+            or expected_row["remaining_cache_blocks"] < 0
+        ):
             raise RuntimeError(f"live preflight invocation geometry changed: {name}")
 
 
@@ -1489,6 +1649,22 @@ def _live_preflight(
         or str(cache.mamba_cache_mode) != "none"
     ):
         raise RuntimeError("live engine geometry differs from the frozen protocol")
+    cache_receipt = {
+        key: _normalized(getattr(cache, key, None))
+        for key in (
+            "num_gpu_blocks",
+            "block_size",
+            "kv_cache_size_tokens",
+            "kv_cache_max_concurrency",
+            "enable_prefix_caching",
+            "mamba_cache_mode",
+            "mamba_block_size",
+        )
+    }
+    cache_geometry = _validate_group_aware_cache_geometry(
+        cache_receipt, runner.config
+    )
+    blocks_per_max_request = cache_geometry["blocks_per_max_request"]
     token_ids = receipt["tokenizer"]["plain_alias_token_ids"]
     invocation_capacity: dict[str, Any] = {}
     for name in INVOCATIONS:
@@ -1506,10 +1682,12 @@ def _live_preflight(
         )
         lengths = [len(row.prompt_token_ids) for row in exact]
         maximum_total = max(lengths) + reserve
-        rounded = math.ceil(maximum_total / block_size) * block_size
         active = min(len(lengths), runner.config.max_num_seqs)
-        required = active * rounded
-        if maximum_total > runner.config.max_model_len or required > capacity:
+        required_blocks = active * blocks_per_max_request
+        if (
+            maximum_total > runner.config.max_model_len
+            or required_blocks > num_gpu_blocks
+        ):
             raise RuntimeError(f"live KV capacity cannot fit invocation {name}")
         invocation_capacity[name] = {
             "requests": len(lengths),
@@ -1518,17 +1696,17 @@ def _live_preflight(
             "reserve_tokens": reserve,
             "max_prompt_plus_reserve": maximum_total,
             "active_sequences": active,
-            "rounded_tokens_per_sequence": rounded,
-            "required_cache_tokens": required,
-            "remaining_cache_tokens": capacity - required,
+            "reserved_blocks_per_sequence": blocks_per_max_request,
+            "required_cache_blocks": required_blocks,
+            "remaining_cache_blocks": num_gpu_blocks - required_blocks,
         }
     preflight = {
-        "schema_version": 1,
+        "schema_version": 2,
         "decision": "LIVE_ENGINE_PREFLIGHT_PASS",
         "model": MODEL_ID,
         "revision": MODEL_REVISION,
         "implementation_lock_sha256": sha256_file(lock_path),
-        "prepare_receipt_sha256": sha256_file(PREPARED / "preoutcome_receipt.json"),
+        "prepare_receipt_sha256": sha256_file(PREOUTCOME_RECEIPT),
         "engine": _normalized(dataclasses.asdict(runner.config)),
         "engine_args": _normalized(runner.engine_args),
         "resolved_cudagraph": _normalized(runner.resolved_cudagraph),
@@ -1544,28 +1722,17 @@ def _live_preflight(
             "tensor_parallel_size": int(parallel.tensor_parallel_size),
             "data_parallel_size": int(parallel.data_parallel_size),
         },
-        "live_cache": {
-            key: _normalized(getattr(cache, key, None))
-            for key in (
-                "num_gpu_blocks",
-                "block_size",
-                "kv_cache_size_tokens",
-                "kv_cache_max_concurrency",
-                "enable_prefix_caching",
-                "mamba_cache_mode",
-                "mamba_block_size",
-            )
-        },
+        "live_cache": cache_receipt,
         "runtime": runner.runtime_metadata(),
         "invocations": invocation_capacity,
     }
+    _validate_recorded_live_preflight(preflight, config, receipt, lock_path)
     path = RAW / "live_preflight.json"
     if path.exists():
         if path.is_symlink() or read_json(path) != preflight:
             raise RuntimeError("live preflight differs from resume receipt")
     else:
         write_exclusive(path, preflight)
-    _validate_recorded_live_preflight(preflight, config, receipt, lock_path)
     return preflight
 
 
@@ -2078,7 +2245,7 @@ def _analyze_locked(lock_path: Path) -> dict[str, Any]:
         "schema_version": 1,
         "decision": "MECHANICS_AUTHENTICATION_PASS",
         "implementation_lock_sha256": sha256_file(lock_path),
-        "prepare_receipt_sha256": sha256_file(PREPARED / "preoutcome_receipt.json"),
+        "prepare_receipt_sha256": sha256_file(PREOUTCOME_RECEIPT),
         "live_preflight_sha256": sha256_file(RAW / "live_preflight.json"),
         "complete_receipts": completion_hashes,
         "paired_suffix_ids_order_stage1_seeds": True,
@@ -2157,7 +2324,7 @@ def _analyze_locked(lock_path: Path) -> dict[str, Any]:
         "ranking_gate_pass": mechanics_b["pass"],
         "authentication_receipt_sha256": sha256_file(authentication_path),
         "implementation_lock_sha256": sha256_file(lock_path),
-        "prepare_receipt_sha256": sha256_file(PREPARED / "preoutcome_receipt.json"),
+        "prepare_receipt_sha256": sha256_file(PREOUTCOME_RECEIPT),
         "hidden_files_read": [],
         "qualification_files_read": [],
         "confirmation_files_read": [],

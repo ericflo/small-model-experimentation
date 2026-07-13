@@ -1,8 +1,8 @@
 # Qwen3.5-4B Materialized Residual Sibling Search
 
-**Status:** in-progress · since 2026-07-13 · adversarial design and model-free
-construction lock passed; mechanics implementation and every model stage remain
-sealed.
+**Status:** in-progress · since 2026-07-13 · attempt 1 aborted in live preflight
+before the first experimental request; append-only v2 repair passed independent
+adversarial review and awaits its pushed implementation and separate lock.
 
 ## Research Program
 
@@ -114,8 +114,12 @@ Model-free smoke:
 .venv/bin/python experiments/qwen35_4b_materialized_residual_sibling_search/scripts/run.py --stage smoke
 ```
 
-Mechanics and later commands remain sealed until their implementations,
-prepared receipts, reviews, and published locks are complete.
+Mechanics retry command (sealed until the repaired implementation and separate
+v2 lock are committed, pushed, and green in CI):
+
+```bash
+.venv-vllm/bin/python experiments/qwen35_4b_materialized_residual_sibling_search/scripts/run_mechanics.py --stage run
+```
 
 ## Results
 
@@ -130,11 +134,17 @@ echo ceiling. The receipt records zero model
 loads, zero model calls, and no benchmark reads. This is a construction and
 design result only; no Qwen3.5-4B capability result exists.
 
+The first live attempt initialized the exact engine but failed its cache receipt
+before the first experimental generation request. No invocation transaction or
+sampled output exists. The failed preflight is preserved as incident evidence;
+it is not a capability result and its embedded PASS label is unauthenticated.
+
 ## Interpretation
 
-The design is now eligible for a separately audited mechanics implementation.
-Even a later model pass would be an external structured-search result. CPU 24³
-enumeration remains exact and cheap at this depth.
+The design remains eligible after an independently audited append-only preflight
+repair and fresh versioned lock. Even a later model pass would be an external
+structured-search result. CPU 24³ enumeration remains exact and cheap at this
+depth.
 
 ## Knowledgebase Update
 

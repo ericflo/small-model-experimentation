@@ -3340,9 +3340,9 @@
   },
   {
     "file_counts": {
-      ".json": 6,
+      ".json": 9,
       ".jsonl": 20,
-      ".md": 8,
+      ".md": 9,
       ".py": 13,
       ".yaml": 3
     },
@@ -3357,8 +3357,9 @@
       "test_time_reasoning_budget"
     ],
     "source_track": "new",
-    "summary": "construction lock passed; mechanics implementation and every model stage remain sealed.",
+    "summary": "before the first experimental request; append-only v2 repair passed independent adversarial review and awaits its pushed implementation and separate lock.",
     "tags": [
+      "repair",
       "small-model"
     ],
     "title": "Qwen3.5-4B Materialized Residual Sibling Search",
@@ -3371,8 +3372,8 @@
       "src",
       "tests"
     ],
-    "total_files": 50,
-    "total_size_bytes": 4312898
+    "total_files": 54,
+    "total_size_bytes": 4369168
   },
   {
     "file_counts": {

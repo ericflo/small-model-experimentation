@@ -1,8 +1,9 @@
 # Mechanics implementation review
 
-Status: independent adversarial implementation review passed; model
-authorization remains withheld pending committed and pushed preoutcome
-artifacts followed by a separate pushed implementation lock.
+Status: attempt-1 implementation review passed, but live preflight exposed a
+group-aware cache-validation bug before the first experimental request. The
+append-only v2 repair is under independent adversarial review; model execution
+remains withheld pending a committed/pushed v2 preoutcome and separate v2 lock.
 
 No model was loaded and no model call was made during this review. Only the
 published public mechanics and audit files were opened. No gold, qualification,
@@ -167,8 +168,8 @@ blockers and the implemented resolutions were:
 
 ## Model-free verification performed
 
-The pure mechanics suite currently has 39 tests, and the complete experiment
-suite has 65. It covers exact request
+The pure mechanics suite currently has 45 tests, and the complete experiment
+suite has 71. It covers exact request
 inventory, public-live and all-candidate coverage, cross-arm IDs/seeds, disjoint
 seed domains, sampling/engine settings, hidden-data exclusion, hand-computed
 surface features, all 24 LOOTO folds, training-only scaling, row-order
@@ -177,8 +178,12 @@ malformed cases, ranking coverage, every A and B gate at equality and just
 below, public echo execution, conservative cap contact, ambiguous `STARTED`
 transactions, receipt-only recovery, lock contention, committed-lock byte
 identity, strict bootstrap parsing, wrong-interpreter rejection, full package
-pinning, runtime drift, raw prompt/retained-token/branch/truncation/count
-corruption, and unsafe raw inventories. Separate model-free subprocess checks
+pinning, runtime drift, the expected clean-to-live-artifact Git-dirty
+transition, authoritative hybrid-cache flooring and 11-block geometry, the
+703-block false-pass boundary, persisted per-arm block corruption,
+validation-before-write behavior, raw prompt/retained-token/branch/truncation/
+count corruption, and unsafe raw inventories. Separate model-free subprocess
+checks
 validated all 189 installed pins and proved that mechanics-gold and benchmark
 opens are denied before any scientific stage. Deterministic preparation
 reconstructed all 1,984 requests, all 4,032 targeted raw values, 24 converged
@@ -189,4 +194,15 @@ Final authorization remains contingent on resolving every independent audit
 finding, rerunning deterministic preparation byte-identically, passing the full
 experiment and repository checks, pushing the implementation commit, then
 publishing and pushing a separate implementation-lock receipt. Until that
-sequence completes, model construction remains prohibited.
+sequence completes, further model execution remains prohibited.
+
+## Preflight-only attempt and v2 repair
+
+Attempt 1 initialized the engine but aborted before `_generate`, leaving no
+invocation `STARTED` receipt and no sampled output. The exact incident and its
+append-only recovery are recorded in `mechanics_preflight_incident.md`. The v2
+repair replaces the invalid inverse-float check with pinned vLLM's authoritative
+hybrid-cache identities, uses a conservative 11-block reservation per active
+sequence, and validates in memory before writing a PASS receipt. It preserves
+the old lock, preoutcome receipt, and failed preflight unchanged while moving
+all active retry artifacts to versioned paths.

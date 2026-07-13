@@ -1,0 +1,30 @@
+{
+  "benchmark_files_read": [],
+  "confirmation_files_read": [],
+  "decision": "ABORTED_BEFORE_FIRST_EXPERIMENTAL_REQUEST",
+  "embedded_pass_label_authenticated": false,
+  "ephemeral_run_lock_at_failure_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "error_message": "live preflight cache geometry changed",
+  "error_type": "RuntimeError",
+  "execution_head": "cd82e64981140f3c0e5dc7755d293311642b58e4",
+  "experimental_model_requests": 0,
+  "hidden_files_read": [],
+  "implementation_commit": "48ef078fa59e293ec87d430123da024887c74ecb",
+  "implementation_lock_sha256": "896c4cc64e157627eaf35a8a4365af766971644905fbde5c72e4d35ea72792e0",
+  "internal_engine_profile_or_warmup_may_have_run": true,
+  "invocation_transactions_started": 0,
+  "live_preflight_sha256": "a438ecf190e4006e8f19368f907d37595a05d543ca8158c33d27333c816f14b5",
+  "model": "Qwen/Qwen3.5-4B",
+  "prepare_receipt_sha256": "3de86e8b08bf37174cf687e4e7220ff802386c61652bafb6554cf1e772c89b88",
+  "prior_engine_initializations": 1,
+  "qualification_files_read": [],
+  "raw_non_lock_inventory": [
+    "live_preflight.json"
+  ],
+  "recovery_protocol": "append_only_versioned_v2",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "root_cause": "validator inverted vLLM's intentionally floored hybrid-cache token capacity instead of checking int(concurrency * max_model_len)",
+  "sampled_model_outputs": 0,
+  "schema_version": 1,
+  "stage": "mechanics_preflight_attempt_1"
+}

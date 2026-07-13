@@ -510,6 +510,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 - `qwen35_4b_foofah_program_repair_agent` (track-z): [README](../experiments/qwen35_4b_foofah_program_repair_agent/README.md)
 - `qwen35_4b_graphir_self_repair` (track-z): [README](../experiments/qwen35_4b_graphir_self_repair/README.md)
 - `qwen35_4b_jacobian_transport_control_replication` (new): [README](../experiments/qwen35_4b_jacobian_transport_control_replication/README.md)
+- `qwen35_4b_materialized_residual_sibling_search` (new): [README](../experiments/qwen35_4b_materialized_residual_sibling_search/README.md)
 - `qwen35_4b_repo_search_compress_bank` (new): [README](../experiments/qwen35_4b_repo_search_compress_bank/README.md)
 - `qwen35_4b_simulation_keystone_repair` (new): [README](../experiments/qwen35_4b_simulation_keystone_repair/README.md)
 - `qwen35_4b_static_bridge_ceiling_breaker` (track-z): [README](../experiments/qwen35_4b_static_bridge_ceiling_breaker/README.md)

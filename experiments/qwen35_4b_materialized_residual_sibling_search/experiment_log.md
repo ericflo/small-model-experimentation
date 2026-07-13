@@ -58,8 +58,28 @@
   mechanics-only implementation lock binding that pushed commit and every
   critical source/prepared hash. No model was loaded or called; execution
   remains sealed until this lock is independently committed and pushed.
+- 2026-07-13: Pushed the separate lock at `cd82e649` and observed both CI
+  workflows pass. The exact engine then initialized, but the live preflight
+  aborted before the first experimental generation request because the
+  validator tried to invert vLLM's intentionally floored group-aware token
+  capacity. No arm `STARTED` receipt, model output, score, or summary exists;
+  ordinary internal engine profiling/warmup did occur.
+- 2026-07-13: Preserved the failed preflight byte-for-byte and opened an
+  append-only v2 repair. Independent incident audits required versioned active
+  paths, an incident-bound lock that discloses the prior engine initialization,
+  the exact 11-block Qwen hybrid-cache identity, conservative block-based arm
+  fit, and validation before publishing a PASS receipt. Retry remains sealed
+  pending a reviewed, committed, pushed v2 implementation and separate lock.
+- 2026-07-13: Closed every v2 repair blocker. The stable candidate directly
+  binds all attempt-1 evidence, uses authoritative floored capacity and exact
+  11-block hybrid geometry, rejects the 703/704-block boundary, validates before
+  writing PASS, isolates versioned active state, and normalizes only expected
+  Git metadata while keeping the scientific runtime exact. Two independent
+  final-byte adversaries returned `FREEZE`; 45 mechanics and 71 full experiment
+  tests passed, and source-bound preparation reproduced twice with zero new
+  model loads or calls.
 
 ## Pending
 
-- Commit and push the prepared mechanics implementation, then publish and push
-  its separate implementation lock before constructing the model.
+- Commit and push the frozen source-bound v2 repair, then publish and push its
+  separate v2 lock before retry.

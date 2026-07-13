@@ -274,6 +274,20 @@ utilization can remain near 100% while aggregate sampled-token throughput and wa
 so “the card is busy” is not evidence that concurrency is efficient. Treat a concurrency change as
 a new inference protocol on Ada and use the same capacity-fit value for every compared arm at a rung.
 
+For Qwen3.5's hybrid attention/Mamba cache, do not try to authenticate that
+receipt by inverting the integer token count. Pinned vLLM 0.24 publishes
+`kv_cache_size_tokens = int(kv_cache_max_concurrency * max_model_len)`, so exact
+floating equality with `kv_cache_size_tokens / max_model_len` is false whenever
+the product has a fractional token. It also resets `cache.block_size` to the
+minimum group size; multiplying that minimum by a sequence count omits the
+other cache groups. On the pinned Qwen3.5-4B revision the resolved geometry is
+one 528-token attention group plus three 4,096-token Mamba groups, or 11 blocks
+per 4,096-token request. Authenticate both
+`max_concurrency == num_gpu_blocks / 11` and the floored token identity, then
+conservatively require `active_sequences * 11 <= num_gpu_blocks` in addition to
+the prompt-plus-reserve context bound. Validate the complete in-memory
+preflight before writing any artifact labeled PASS.
+
 Cache fit and CUDA-graph coverage are separate gates. In vLLM 0.24's balanced mode, specifying only
 an off-stride `max_cudagraph_capture_size` does **not** guarantee that endpoint is captured: the
 implicit list is `1, 2, 4` and then multiples of eight. For example, requested maxima 15 and 19

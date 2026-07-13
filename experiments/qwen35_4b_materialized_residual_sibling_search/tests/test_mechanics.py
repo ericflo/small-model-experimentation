@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import inspect
 import json
 import math
 import subprocess
@@ -9,6 +10,7 @@ import tempfile
 import unittest
 from copy import deepcopy
 from pathlib import Path
+from types import SimpleNamespace
 from unittest import mock
 
 import numpy as np
@@ -37,6 +39,49 @@ SPEC.loader.exec_module(runner)
 
 def load_config() -> dict:
     return yaml.safe_load((EXP / "configs" / "default.yaml").read_text())
+
+
+def valid_v2_preflight(lock_path: Path) -> tuple[dict, dict, dict]:
+    config = load_config()
+    receipt = runner.read_json(runner.PREOUTCOME_RECEIPT)
+    preflight = deepcopy(runner.read_json(runner.PRIOR_PREFLIGHT))
+    preflight["schema_version"] = 2
+    preflight["implementation_lock_sha256"] = runner.sha256_file(lock_path)
+    preflight["prepare_receipt_sha256"] = runner.sha256_file(
+        runner.PREOUTCOME_RECEIPT
+    )
+    cache = preflight["live_cache"]
+    blocks_per_sequence = runner._validate_group_aware_cache_geometry(
+        cache, runner._engine_config(config)
+    )["blocks_per_max_request"]
+    rows: dict[str, dict] = {}
+    for name in runner.INVOCATIONS:
+        token_row = receipt["tokenizer"]["invocations"][name]
+        sampling = runner._sampling(
+            name, config, receipt["tokenizer"]["plain_alias_token_ids"]
+        )
+        reserve = (
+            int(sampling.thinking_budget)
+            + len(receipt["tokenizer"]["forced_close_token_ids"])
+            + sampling.answer_max_tokens
+            if sampling.thinking == "budget"
+            else sampling.max_tokens
+        )
+        active = min(runner.EXPECTED_COUNTS[name], runner._engine_config(config).max_num_seqs)
+        required = active * blocks_per_sequence
+        rows[name] = {
+            "requests": runner.EXPECTED_COUNTS[name],
+            "prompt_tokens_min": token_row["prompt_tokens_min"],
+            "prompt_tokens_max": token_row["prompt_tokens_max"],
+            "reserve_tokens": reserve,
+            "max_prompt_plus_reserve": token_row["prompt_tokens_max"] + reserve,
+            "active_sequences": active,
+            "reserved_blocks_per_sequence": blocks_per_sequence,
+            "required_cache_blocks": required,
+            "remaining_cache_blocks": cache["num_gpu_blocks"] - required,
+        }
+    preflight["invocations"] = rows
+    return config, receipt, preflight
 
 
 class RequestConstructionTests(unittest.TestCase):
@@ -142,6 +187,170 @@ class RequestConstructionTests(unittest.TestCase):
 
 
 class EnvironmentAuthenticationTests(unittest.TestCase):
+    def test_group_aware_hybrid_cache_geometry_uses_vllm_floor(self) -> None:
+        engine = runner._engine_config(load_config())
+        cache = {
+            "num_gpu_blocks": 2042,
+            "block_size": 528,
+            "kv_cache_size_tokens": 760366,
+            "kv_cache_max_concurrency": 185.63636363636363,
+            "enable_prefix_caching": False,
+            "mamba_cache_mode": "none",
+            "mamba_block_size": 4096,
+        }
+        geometry = runner._validate_group_aware_cache_geometry(cache, engine)
+        self.assertEqual(
+            geometry,
+            {
+                "blocks_per_max_request": 11,
+                "attention_blocks_at_max": 8,
+                "mamba_blocks_at_max": 3,
+                "mamba_group_count": 3,
+            },
+        )
+        self.assertEqual(
+            int(cache["kv_cache_max_concurrency"] * engine.max_model_len),
+            cache["kv_cache_size_tokens"],
+        )
+        self.assertFalse(
+            math.isclose(
+                cache["kv_cache_max_concurrency"],
+                cache["kv_cache_size_tokens"] / engine.max_model_len,
+                rel_tol=1e-12,
+                abs_tol=1e-12,
+            )
+        )
+        for key, value in (
+            ("kv_cache_size_tokens", 760367),
+            ("kv_cache_max_concurrency", 185.5),
+            ("block_size", 512),
+            ("mamba_block_size", 2048),
+            ("num_gpu_blocks", 63),
+        ):
+            corrupted = dict(cache)
+            corrupted[key] = value
+            with self.subTest(key=key), self.assertRaisesRegex(
+                RuntimeError, "cache geometry"
+            ):
+                runner._validate_group_aware_cache_geometry(corrupted, engine)
+
+    def test_703_block_boundary_rejects_64_active_sequences(self) -> None:
+        engine = runner._engine_config(load_config())
+        concurrency = 703 / 11
+        cache = {
+            "num_gpu_blocks": 703,
+            "block_size": 528,
+            "kv_cache_size_tokens": int(concurrency * engine.max_model_len),
+            "kv_cache_max_concurrency": concurrency,
+            "enable_prefix_caching": False,
+            "mamba_cache_mode": "none",
+            "mamba_block_size": 4096,
+        }
+        old_token_proxy = (
+            engine.max_num_seqs * math.ceil(824 / cache["block_size"])
+            * cache["block_size"]
+        )
+        self.assertLessEqual(old_token_proxy, cache["kv_cache_size_tokens"])
+        self.assertGreater(engine.max_num_seqs * 11, cache["num_gpu_blocks"])
+        with self.assertRaisesRegex(RuntimeError, "cache geometry"):
+            runner._validate_group_aware_cache_geometry(cache, engine)
+
+    def test_recorded_preflight_rejects_each_persisted_block_field(self) -> None:
+        with tempfile.TemporaryDirectory(dir=ROOT) as value:
+            lock_path = Path(value) / "lock.json"
+            lock_path.write_text("{}\n")
+            config, receipt, preflight = valid_v2_preflight(lock_path)
+            runner._validate_recorded_live_preflight(
+                preflight, config, receipt, lock_path
+            )
+            for field in (
+                "reserved_blocks_per_sequence",
+                "required_cache_blocks",
+                "remaining_cache_blocks",
+            ):
+                corrupted = deepcopy(preflight)
+                corrupted["invocations"]["viability_materialized"][field] += 1
+                with self.subTest(field=field), self.assertRaisesRegex(
+                    RuntimeError, "invocation geometry"
+                ):
+                    runner._validate_recorded_live_preflight(
+                        corrupted, config, receipt, lock_path
+                    )
+
+    def test_preflight_is_validated_before_pass_receipt_is_written(self) -> None:
+        source = inspect.getsource(runner._live_preflight)
+        self.assertLess(
+            source.index("_validate_recorded_live_preflight"),
+            source.index('path = RAW / "live_preflight.json"'),
+        )
+
+    def test_failed_live_validation_writes_no_pass_receipt(self) -> None:
+        config = load_config()
+        receipt = runner.read_json(runner.PREOUTCOME_RECEIPT)
+        prior = runner.read_json(runner.PRIOR_PREFLIGHT)
+        engine = runner._engine_config(config)
+        cache = SimpleNamespace(**prior["live_cache"])
+        vllm_config = SimpleNamespace(
+            cache_config=cache,
+            scheduler_config=SimpleNamespace(**prior["live_scheduler"]),
+            model_config=SimpleNamespace(**prior["live_model"]),
+            parallel_config=SimpleNamespace(**prior["live_parallel"]),
+        )
+        fake = SimpleNamespace(
+            config=engine,
+            engine_args=runner._expected_engine_args(config),
+            resolved_logprobs_mode="raw_logprobs",
+            resolved_cudagraph=prior["resolved_cudagraph"],
+            close_ids=receipt["tokenizer"]["forced_close_token_ids"],
+            llm=SimpleNamespace(
+                llm_engine=SimpleNamespace(vllm_config=vllm_config)
+            ),
+            runtime_metadata=lambda: prior["runtime"],
+        )
+        fake.prepare = lambda rows, *_args: [
+            SimpleNamespace(prompt_token_ids=[1]) for _row in rows
+        ]
+        prepared = {
+            name: [{} for _index in range(runner.EXPECTED_COUNTS[name])]
+            for name in runner.INVOCATIONS
+        }
+        expected_token_hashes = [
+            receipt["tokenizer"]["invocations"][name][
+                "prompt_token_ids_sha256"
+            ]
+            for name in runner.INVOCATIONS
+        ]
+        with tempfile.TemporaryDirectory(dir=ROOT) as value:
+            lock_path = Path(value) / "lock.json"
+            lock_path.write_text("{}\n")
+            with mock.patch.object(
+                runner, "canonical_sha256", side_effect=expected_token_hashes
+            ), mock.patch.object(
+                runner,
+                "_validate_recorded_live_preflight",
+                side_effect=RuntimeError("synthetic validation failure"),
+            ), mock.patch.object(runner, "write_exclusive") as write:
+                with self.assertRaisesRegex(RuntimeError, "synthetic validation"):
+                    runner._live_preflight(
+                        fake, config, prepared, receipt, lock_path
+                    )
+                write.assert_not_called()
+
+    def test_versioned_retry_preserves_preflight_only_attempt(self) -> None:
+        self.assertEqual(runner.PRIOR_PREFLIGHT_SHA256, runner.sha256_file(runner.PRIOR_PREFLIGHT))
+        self.assertNotEqual(runner.RAW, runner.PRIOR_PREFLIGHT.parent)
+        self.assertEqual(runner.RAW.name, "raw_v2")
+        self.assertEqual(runner.SCORED.name, "scored_v2")
+        self.assertEqual(runner.SUMMARY.name, "summary_v2.json")
+        self.assertEqual(runner.IMPLEMENTATION_LOCK.name, "implementation_lock_v2.json")
+        incident = runner.build_preflight_incident_receipt()
+        self.assertEqual(
+            incident["decision"], "ABORTED_BEFORE_FIRST_EXPERIMENTAL_REQUEST"
+        )
+        self.assertEqual(incident["prior_engine_initializations"], 1)
+        self.assertEqual(incident["experimental_model_requests"], 0)
+        self.assertEqual(incident["sampled_model_outputs"], 0)
+
     def test_bootstrap_rejects_duplicate_stage_and_lock_spellings(self) -> None:
         invalid = (
             ["runner", "--stage", "prepare", "--stage=run"],
@@ -219,6 +428,19 @@ class EnvironmentAuthenticationTests(unittest.TestCase):
         preflight = {"runtime": deepcopy(runtime)}
         runner._validate_invocation_runtime(
             runtime, preflight, config, source="fixture"
+        )
+        expected_live_transition = deepcopy(runtime)
+        expected_live_transition["git_commit"] = "b" * 40
+        expected_live_transition["git_dirty"] = not runtime["git_dirty"]
+        runner._validate_invocation_runtime(
+            expected_live_transition,
+            preflight,
+            config,
+            source="expected live-artifact dirty transition",
+        )
+        self.assertEqual(
+            runner._runtime_projection(expected_live_transition),
+            runner._runtime_projection(runtime),
         )
         changed = deepcopy(runtime)
         changed["gpu"] = "different GPU or driver"

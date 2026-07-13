@@ -22,4 +22,13 @@ local_receipts:
   mechanics_implementation_lock:
     path: "experiments/qwen35_4b_materialized_residual_sibling_search/runs/mechanics/implementation_lock.json"
     sha256: "896c4cc64e157627eaf35a8a4365af766971644905fbde5c72e4d35ea72792e0"
-notes: "Model-free design/data smoke passed. The reviewed implementation is pushed; mechanics remains model-sealed until its separate lock receipt is also pushed. Raw mechanics artifacts are immutable, chained to the live preflight, and must be committed immediately after the run."
+  mechanics_attempt_1_preflight:
+    path: "experiments/qwen35_4b_materialized_residual_sibling_search/runs/mechanics/raw/live_preflight.json"
+    sha256: "a438ecf190e4006e8f19368f907d37595a05d543ca8158c33d27333c816f14b5"
+  mechanics_attempt_1_incident:
+    path: "experiments/qwen35_4b_materialized_residual_sibling_search/runs/mechanics/preflight_attempt_1_incident.json"
+    sha256: "424fadd111d81b253dfbd79c8cbbec0f9b541eb1dd2437e97f880d3c01a6e5ce"
+  mechanics_preoutcome_v2:
+    path: "experiments/qwen35_4b_materialized_residual_sibling_search/runs/mechanics/preoutcome_receipt_v2.json"
+    sha256: "118546faaa5c18ada5ca57aeee047e90c0633ffd50bddfc4b6daf3b899270372"
+notes: "Attempt 1 initialized the engine but aborted in preflight before any experimental request or sampled output. Its old lock and preflight are immutable incident evidence. The append-only v2 repair passed independent adversarial review; mechanics remains sealed pending its committed/pushed implementation and separate v2 lock."
