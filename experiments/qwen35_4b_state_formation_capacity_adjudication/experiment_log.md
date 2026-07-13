@@ -677,3 +677,25 @@ No result training is authorized.
 Only combined source-v9/archive-checkpoint validation, commit, push, and workflow verification are
 authorized. Regeneration and every model-bearing or result stage remain blocked until both workflows
 are green.
+
+## 2026-07-13 — source-v9 non-model setup regenerated
+
+- Combined source-v9/archive commit `9932a560` passed both Validate Repository and Publish Research
+  Site before regeneration began. The box exposed one idle RTX 6000 Ada with 49,140 MiB total; the
+  pinned environment and required training extensions passed preflight.
+- CPU smoke passed without loading a model at SHA-256 `1655354b…45a38`, source
+  `5629a3a4…99e236`, and zero benchmark reads.
+- All seven deterministic splits regenerated with zero structural duplicates. Manifest SHA-256 is
+  `957013ad…a4517`, data-contract identity is `3677a0a3…ae761`, and the sealed-access ledger remains
+  `events: []` at identity `eb8028bf…9c84dc`. Post-generation inspection read only manifest and
+  compressed-byte metadata, not sealed rows.
+- All three shared initialization bundles reopened through the canonical loader, have byte-identical
+  external sidecars and tracked mirrors, and exactly reproduce their archived tensor-value digests.
+  Bundle SHA-256 / receipt identity: seed 7411 `5ed9d5c6…0e1b8` / `74ddebb1…31413`; seed 7412
+  `15366ea6…dcb2c` / `01dd7e7c…1ee4b`; seed 7413 `bda608a2…bf8b4` / `a7ab7d5d…e912f`.
+
+## Current authorization
+
+Only non-model setup validation, commit, push, and workflow verification are authorized. LoRA G0,
+positive controls, result training, evaluation, and analysis remain blocked until both workflows are
+green.

@@ -1,6 +1,6 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · frozen design unchanged; source-v9 implementation review `GO`; source-d426 archive complete; combined source-v9/archive-checkpoint publication/CI required before regeneration; no result run is authorized
+**Status:** in-progress · since 2026-07-13 · frozen design unchanged; source-v9 implementation review and publication/CI complete; source-d426 archive complete; source-v9 CPU/data/initialization regenerated; LoRA G0 replay pending; no result run is authorized
 
 ## Current status
 
@@ -13,12 +13,19 @@ pass. The required source-v8 publication/CI and source-d426 archival steps compl
 post-archive repository gate then required tracked empty structural sentinels in the retained setup
 directories; v9 adds and strictly validates only those sentinels. Publish the combined source-v9 and
 archive checkpoint next, require both workflows green, and only then regenerate source-v9 setup.
-The source-v8 code is published at commit `ee729def` with both workflows green, and the source-d426
+The source-v8 code was published at commit `ee729def` with both workflows green, and the source-d426
 archive is now complete: 23 files, 18,927,960 bytes, files identity `1538f2f2…ec3ed0`, receipt file
 SHA-256 `9aa04d35…efc1a1`, and receipt identity `e7a71362…818b77`. Independent verification matched every
 archive payload and zero-length quarantine leaf, confirmed exact canonical cleanup, and an idempotent
-replay made no further change. Setup regeneration remains blocked until this archive checkpoint is
-committed, pushed, and green.
+replay made no further change. The combined source-v9/archive checkpoint is published at `9932a560`
+with both workflows green. Source-v9 CPU smoke now has SHA-256 `1655354b…45a38`; the regenerated
+manifest is `957013ad…a4517`, data contract `3677a0a3…ae761`, and empty-ledger identity
+`eb8028bf…9c84dc`. All three shared initialization bundles reopen canonically, have byte-identical
+tracked mirrors, and exactly reproduce the archived tensor values. Bundle SHA-256 / receipt identity
+by seed: 7411 `5ed9d5c6…0e1b8` / `74ddebb1…31413`; 7412 `15366ea6…dcb2c` /
+`01dd7e7c…1ee4b`; 7413 `bda608a2…bf8b4` / `a7ab7d5d…e912f`. No model was loaded, no benchmark was
+read, and no sealed split was decompressed during this regeneration. Publish this non-model setup
+checkpoint and require both workflows before LoRA G0 replay.
 Under source `3baa7b53…d5c42`, seed 7411 passed LoRA G0, then its 256-update setup
 control scored 0/48 exact terminal triples. Review found that the control had presented one singleton
 row per optimizer update and omitted the globally frozen accumulation of 16, so each high-entropy row

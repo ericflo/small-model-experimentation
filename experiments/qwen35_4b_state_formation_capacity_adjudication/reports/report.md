@@ -11,9 +11,15 @@ archive is complete and independently verified: 23 files, 18,927,960 bytes, file
 `e7a71362…818b77`. Canonical setup paths are retired and the exact 23-leaf quarantine is zero-length;
 an idempotent replay made no further change. Post-archive validation caught that its retained empty
 setup directories were not clone-stable; source v9 adds tracked empty structural sentinels and
-requires their exact safe form without treating them as evidence. Only combined source-v9/archive-
-checkpoint publish/CI is now authorized; fresh source-v9 regeneration remains blocked until both
-workflows pass, and no result-bearing command is authorized. The corrected setup-control source passed
+requires their exact safe form without treating them as evidence. The combined source-v9/archive
+checkpoint is published at `9932a560` with both workflows green. Source-v9 CPU smoke, data, empty
+ledger, and all three shared initialization bundles are now regenerated: CPU receipt SHA-256
+`1655354b…45a38`, manifest `957013ad…a4517`, data contract `3677a0a3…ae761`, and ledger identity
+`eb8028bf…9c84dc` with `events: []`. The three bundle SHA-256 values are `5ed9d5c6…0e1b8`,
+`15366ea6…dcb2c`, and `bda608a2…bf8b4`; their tensor-value digests exactly match the archived source-
+d426 bundles and every sidecar matches its tracked mirror byte for byte. No model, benchmark, or
+sealed payload was opened during regeneration. Only non-model setup checkpoint publication/CI is now
+authorized; G0 and every result-bearing command remain blocked until both workflows pass. The corrected setup-control source passed
 171/171 local tests and independent code and GPU/runtime review. Every setup artifact from source
 `3baa7b53…d5c42` is durably archived. The later CPU smoke, data manifest, empty sealed-access ledger,
 and three shared initialization bundles were regenerated and strictly reopened under source
