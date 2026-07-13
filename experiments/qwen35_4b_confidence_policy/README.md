@@ -33,27 +33,33 @@ budget 2048 beats spending the same compute on more breadth at budget 256.
 
 ## Result
 
+**Survives (robust):**
 - **Confidence-select is the best verifier-free selector at every k** (k=9:
-  conf 0.762 > majority 0.742 > logprob 0.725 > greedy 0.701; execution-line
-  0.840 when a visible test exists; oracle 0.848).
+  conf 0.762 > majority 0.742 > logprob 0.725 > greedy 0.701; per-candidate AUROC
+  0.77 on the vLLM pools; execution-line 0.840 when a visible test exists; oracle
+  0.848).
 - **Abstention gives a clean risk-coverage curve** (100% coverage 0.757 → 68%
-  0.866 → 43% 0.902).
-- **Escalation beats breadth on the abstained tail** at every abstain fraction
-  (hardest 20%: base 0.250 → escalate **0.458** vs matched-breadth 0.304; 50%:
-  0.400 → 0.467 vs 0.423), and depth (pure-2048) dominates breadth (pure-256) on
-  the whole accuracy-vs-tokens frontier. The 4B self-limits to ~100–140 think
-  tokens on MBPP, so the budget lever bites only on the hard/forced tasks —
-  exactly the abstained set the policy targets.
+  0.866 → 43% 0.902; solvability AUROC 0.72).
+- **Depth modestly beats breadth on the overall frontier** — pure-2048 0.593 >
+  pure-256 0.581 at matched high-k.
 
-The deployable policy: **sample k, pick argmax single-token P(True), abstain
-below a max-P(True) threshold, and escalate the abstained tasks to a higher
-think budget rather than to more samples.** The metacognition readout
-(C40/C41/C46) identifies *which* tasks are hard; the serial-compute lever
-(C44/C55) is the right way to spend extra compute on them.
+**Reversed on power-up (the honest correction):**
+- The first-pass n=24–60 result — that *selectively escalating* the abstained
+  tail to a higher think budget beats matched-compute breadth (hardest-20%: 0.458
+  vs 0.304) — **did NOT replicate at n=400**: esc−breadth is +0.004…+0.022 with
+  every 95% bootstrap CI spanning 0. It was a small-sample artifact, caught by
+  this claim's own pre-registered power-up. Likely mechanism: MBPP nearly
+  saturates the budget (the 4B self-limits to ~108–172 think tokens even at
+  budget 2048), so the serial-compute lever is too weak to differentiate here.
 
-Codified as **C57**. Effect sizes on the abstained subsets are n=24–60
-(directionally consistent across fractions; magnitudes not yet tightly powered —
-see the claim's next-tests).
+The robust deployable core is **SELECT + ABSTAIN**, both verifier-free from one
+logit: sample k, pick argmax single-token P(True), abstain below a max-P(True)
+threshold. Extra compute is modestly better spent on depth than breadth overall,
+but there is no measured benefit to selectively escalating the hard tail on
+budget-saturated MBPP — see C57's next-tests for the budget-bound-task follow-up.
+
+Codified as **C57** (corrected). Part 2 was regenerated on vLLM (~10× faster than
+the initial HF pass) at n=400 with bootstrap CIs.
 
 ## Layout
 

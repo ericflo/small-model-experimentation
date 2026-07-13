@@ -13094,12 +13094,12 @@
    ]
   },
   "qwen35_4b_confidence_policy": {
-   "verdict_tag": "A verifier-free select+abstain+escalate policy: for hard tasks, more think budget beats more samples",
-   "concept_primer": "Picture the model answering a coding problem several times. A cheap read of its own confidence (one logit: 'is this right?') picks the best try and flags the ones it is unsure about. For those flagged-hard problems you can either draw more tries, or let the model think longer on the same problem. This experiment measures which is the better use of the same compute.",
-   "plain_question": "Can the model's own confidence be turned into one deployable policy — pick the best answer, abstain when unsure, and spend extra compute wisely — without any test-execution or grader?",
-   "plain_answer": "Yes. Picking the answer with the highest single-token P(True) confidence is the best grader-free selector at every compute level, abstaining below a confidence threshold trades coverage for accuracy cleanly, and for the flagged-hard tasks giving the model a bigger thinking budget beats drawing more samples at matched compute — at every abstain fraction.",
-   "why_it_matters": "It fuses two separate research threads into one shippable recipe: the model's confidence readout says WHICH tasks are hard, and more serial thinking (not more sampling) is the right way to spend compute on them. No verifier, no bigger model — just the fixed 4B and its own logits.",
-   "verdict_tone": "positive",
+   "verdict_tag": "Verifier-free SELECT + ABSTAIN work; selectively escalating hard tasks to more think budget is a null result at n=400",
+   "concept_primer": "Picture the model answering a coding problem several times. A cheap read of its own confidence (one logit: 'is this right?') picks the best try and flags the ones it is unsure about. A tempting extra step is to let the model think LONGER on the flagged-hard problems instead of drawing more tries. This experiment tests all three moves at matched compute — and powers up the shakiest one until the answer is trustworthy.",
+   "plain_question": "Can the model's own confidence be turned into one deployable policy — pick the best answer, abstain when unsure, and spend extra compute wisely — with no test-execution or grader?",
+   "plain_answer": "Partly. Picking the answer with the highest single-token P(True) confidence is the best grader-free selector at every compute level, and abstaining below a confidence threshold trades coverage for accuracy cleanly — both robust. But the appealing third move — spending compute on more THINKING for the flagged-hard tasks rather than more samples — showed no benefit once powered up to 400 tasks: an early small-sample win did not replicate (every 95% interval now includes zero). Thinking longer helps a little across the board, just not selectively on the hard tail — because these coding tasks nearly saturate the model's thinking budget already.",
+   "why_it_matters": "It gives a shippable, verifier-free recipe (select + abstain from one logit) AND a methodological lesson: a pre-registered, under-powered subset win was flagged as shaky and then REVERSED on the larger sample — power up before you claim. No grader, no bigger model, just the fixed 4B's own logits.",
+   "verdict_tone": "neutral",
    "key_numbers": [
     {
      "label": "P(True)-select accuracy @k=9",
@@ -13109,29 +13109,29 @@
     {
      "label": "Abstention: accuracy at 68% coverage",
      "value": "0.866",
-     "sub": "up from 0.757 at full coverage — a clean risk-coverage trade"
+     "sub": "up from 0.757 at full coverage; solvability AUROC 0.72"
     },
     {
-     "label": "Hardest-20% tasks: escalate vs breadth",
-     "value": "0.458 vs 0.304",
-     "sub": "re-solving at a higher think budget beats matched-compute extra samples (base 0.250)"
+     "label": "Escalate vs breadth (n=400)",
+     "value": "CIs span 0",
+     "sub": "esc-minus-breadth +0.004..+0.022 across abstain fractions — a null; the n=24-60 win did not replicate"
     },
     {
-     "label": "MBPP tasks x candidates",
-     "value": "244 / 120",
-     "sub": "cached pool for selection; fresh two-budget pool for escalation"
+     "label": "MBPP tasks powered up to",
+     "value": "400",
+     "sub": "regenerated on vLLM (~10x faster than the initial HF pass) with bootstrap CIs"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "For hard tasks, more think budget beats more samples",
-     "chart_read": "Each group is the hardest X% of tasks by confidence. Escalating them to a bigger think budget (middle bar) beats spending the same compute on more samples (right bar) and the base policy (left bar), at every fraction."
+     "chart_plain_title": "P(True) confidence-select is the best verifier-free selector",
+     "chart_read": "Bars are MBPP accuracy at nine candidates for each selection rule. Single-token P(True)-select leads the verifier-free rules; the execution line and oracle need a grader."
     },
     {
      "index": 1,
-     "chart_plain_title": "P(True) confidence-select is the best verifier-free selector",
-     "chart_read": "Bars are MBPP accuracy at nine candidates for each selection rule. Single-token P(True)-select leads the verifier-free rules; the execution line and oracle need a grader."
+     "chart_plain_title": "Escalating hard tasks to more think budget: a null result at n=400",
+     "chart_read": "Each group is the hardest X% of tasks by confidence. Escalating them to a bigger think budget (left) barely differs from spending the same compute on more samples (right) — every 95% interval on the difference includes zero."
     }
    ]
   }

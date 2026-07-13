@@ -95,6 +95,7 @@ def main():
     ap.add_argument("--offset", type=int, default=0)
     ap.add_argument("--answer-max", type=int, default=420)
     ap.add_argument("--budgets", type=int, nargs="+", default=[1024, 4096])
+    ap.add_argument("--suffix", type=str, default="", help="output filename suffix, e.g. _b for an extension shard")
     a = ap.parse_args()
     OUT.mkdir(parents=True, exist_ok=True)
     records = load_records(a.n, a.offset)
@@ -104,7 +105,7 @@ def main():
     for b in a.budgets:
         print(f"[gb] === budget {b} ===", flush=True)
         rows = build_pool(p, records, prompts, b, a.k, a.answer_max)
-        outp = OUT / f"pool_think_b{b}.json"
+        outp = OUT / f"pool_think_b{b}{a.suffix}.json"
         json.dump(rows, open(outp, "w"))
         npass = sum(c["full_pass"] for r in rows for c in r["cands"])
         nall = sum(len(r["cands"]) for r in rows)

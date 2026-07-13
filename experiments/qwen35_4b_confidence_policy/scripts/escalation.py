@@ -35,11 +35,38 @@ def cost(c):  # generated tokens = thinking + answer (answer est from code chars
 
 
 def load(b):
-    return json.loads((EXP / "runs" / f"pool_think_b{b}.json").read_text())
+    """Merge the base pool with any extension shards (pool_think_b{b}*.json)."""
+    rows, seen = [], set()
+    for f in sorted((EXP / "runs").glob(f"pool_think_b{b}*.json")):
+        for t in json.loads(f.read_text()):
+            if t["task_id"] not in seen:
+                seen.add(t["task_id"]); rows.append(t)
+    return rows
+
+
+def bootstrap_ci(deltas, rng, B=2000, lo=2.5, hi=97.5):
+    """Paired bootstrap over per-task (esc-brd) deltas -> (mean, ci_lo, ci_hi)."""
+    n = len(deltas)
+    means = []
+    for _ in range(B):
+        s = [deltas[rng.randrange(n)] for _ in range(n)]
+        means.append(sum(s) / n)
+    means.sort()
+    return (statistics.mean(deltas), means[int(lo / 100 * B)], means[int(hi / 100 * B)])
 
 
 def conf_select(cands):
     return max(cands, key=pt)
+
+
+def auroc_solvable(pool):
+    """AUROC of max-p_true predicting whether the task is solvable within the pool."""
+    pairs = [(max(pt(c) for c in t["cands"]), any(c["full_pass"] for c in t["cands"])) for t in pool]
+    pos = [m for m, s in pairs if s]; neg = [m for m, s in pairs if not s]
+    if not pos or not neg:
+        return float("nan")
+    return (sum(1 for a in pos for b in neg if a > b)
+            + 0.5 * sum(1 for a in pos for b in neg if a == b)) / (len(pos) * len(neg))
 
 
 def curve(pool, rng, kmax=7):
@@ -89,44 +116,47 @@ def main():
         base[t["task_id"]] = {"maxpt": max(pt(c) for c in sub), "pass": sel["full_pass"],
                               "tok": sum(cost(c) for c in sub)}
     print("\n=== escalation vs breadth on the abstained subset (matched compute) ===")
-    print(f"{'abst_frac':>9} {'n_abst':>7} {'base_acc':>8} {'esc_acc':>8} {'brd_acc':>8} "
-          f"{'esc_tok':>8} {'brd_tok':>8}")
+    print(f"{'abst_frac':>9} {'n_abst':>7} {'base':>6} {'escal':>6} {'breadth':>7} "
+          f"{'esc-brd':>8} {'95% CI':>18}")
     abstained_rows = []
+    c256_mean = statistics.mean(cost(c) for t in p256 for c in t["cands"])
     for frac in (0.2, 0.3, 0.4, 0.5):
         ranked = sorted(tasks, key=lambda t: base[t["task_id"]]["maxpt"])
         n_abst = max(1, int(len(tasks) * frac))
         abst = ranked[:n_abst]
         base_acc = statistics.mean(base[t["task_id"]]["pass"] for t in abst)
-        # ESCALATE: re-solve each abstained task with the 2048 pool (conf-select, k1=2)
-        esc_acc, esc_extra = [], []
+        # per-task R-averaged conf-select accuracy for ESCALATE (2048, k1=2) and
+        # BREADTH (256, k_extra chosen so the two arms match token compute).
+        esc_means, esc_tok_l = [], []
         for t in abst:
             hi = by_id[t["task_id"]]["cands"]
-            sub = rng.sample(hi, 2) if len(hi) > 2 else hi
-            esc_acc.append(conf_select(sub)["full_pass"]); esc_extra.append(sum(cost(c) for c in sub))
-        esc_tok = statistics.mean(esc_extra)
-        # BREADTH control at matched compute: give abstained tasks MORE 256 samples,
-        # as many as the escalation tokens buy (cap at the pool size).
-        c256_mean = statistics.mean(cost(c) for t in p256 for c in t["cands"])
+            subs = [rng.sample(hi, 2) if len(hi) > 2 else hi for _ in range(R)]
+            esc_means.append(statistics.mean(conf_select(s)["full_pass"] for s in subs))
+            esc_tok_l.append(statistics.mean(sum(cost(c) for c in s) for s in subs))
+        esc_tok = statistics.mean(esc_tok_l)
         k_extra = max(1, round(esc_tok / c256_mean))
-        brd_acc, brd_tok = [], []
+        brd_means = []
         for t in abst:
-            lo = t["cands"]
-            kk = min(k_extra, len(lo))
+            lo = t["cands"]; kk = min(k_extra, len(lo))
             subs = [rng.sample(lo, kk) for _ in range(R)]
-            brd_acc.append(statistics.mean(conf_select(s)["full_pass"] for s in subs))
-            brd_tok.append(kk * c256_mean)
-        print(f"{frac:>9.2f} {n_abst:>7} {base_acc:>8.3f} "
-              f"{statistics.mean(esc_acc):>8.3f} {statistics.mean(brd_acc):>8.3f} "
-              f"{esc_tok:>8.0f} {statistics.mean(brd_tok):>8.0f}  (breadth k={k_extra})")
+            brd_means.append(statistics.mean(conf_select(s)["full_pass"] for s in subs))
+        deltas = [e - b for e, b in zip(esc_means, brd_means)]
+        dmean, ci_lo, ci_hi = bootstrap_ci(deltas, rng)
+        print(f"{frac:>9.2f} {n_abst:>7} {base_acc:>6.3f} "
+              f"{statistics.mean(esc_means):>6.3f} {statistics.mean(brd_means):>7.3f} "
+              f"{dmean:>+8.3f} [{ci_lo:+.3f},{ci_hi:+.3f}]  (brd k={k_extra})")
         abstained_rows.append({
             "abstain_frac": frac, "n_abstained": n_abst,
             "base_acc": round(base_acc, 3),
-            "escalate_acc": round(statistics.mean(esc_acc), 3),
-            "breadth_acc": round(statistics.mean(brd_acc), 3),
-            "breadth_k": k_extra})
+            "escalate_acc": round(statistics.mean(esc_means), 3),
+            "breadth_acc": round(statistics.mean(brd_means), 3),
+            "esc_minus_brd": round(dmean, 3),
+            "ci95": [round(ci_lo, 3), round(ci_hi, 3)], "breadth_k": k_extra})
 
     out = {"paired_tasks": len(tasks), "pure256_curve": c256, "pure2048_curve": c2048,
-           "abstained_escalation": abstained_rows}
+           "abstained_escalation": abstained_rows,
+           "solvability_auroc": {"b256": round(auroc_solvable(p256), 3),
+                                 "b2048": round(auroc_solvable(p2048), 3)}}
     (EXP / "runs" / "escalation.json").write_text(json.dumps(out, indent=2) + "\n")
     print(f"\nwrote {EXP/'runs'/'escalation.json'}")
 
