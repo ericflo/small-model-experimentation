@@ -179,6 +179,7 @@ def confirmation_evaluator_source_inventory() -> dict[str, int | str]:
 
     paths = {
         EXP / "scripts" / "eval_policy.py",
+        EXP / "src" / "confirmation_artifacts.py",
         EXP / "src" / "harness.py",
         EXP / "src" / "io_utils.py",
         EXP / "src" / "state_replay.py",

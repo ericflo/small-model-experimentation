@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import importlib.util
 import json
 import subprocess
 import sys
@@ -11,6 +12,9 @@ from pathlib import Path
 EXP = Path(__file__).resolve().parents[1]
 SCRIPT = EXP / "scripts" / "assemble_training_round.py"
 CONFIG = EXP / "configs" / "default.yaml"
+sys.path.insert(0, str(EXP / "src"))
+
+from route_control_matching import matched_non_advantage_route_units  # noqa: E402
 
 
 def _write_jsonl(path: Path, rows: list[dict]) -> None:
@@ -18,6 +22,17 @@ def _write_jsonl(path: Path, rows: list[dict]) -> None:
 
 
 class RoundAssemblyTests(unittest.TestCase):
+    def test_assembler_imports_canonical_route_control_matcher_by_identity(self):
+        spec = importlib.util.spec_from_file_location("assemble_training_round_test", SCRIPT)
+        self.assertIsNotNone(spec)
+        self.assertIsNotNone(spec.loader)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        self.assertIs(
+            module.matched_non_advantage_route_units,
+            matched_non_advantage_route_units,
+        )
+
     def test_exact_deep_anchor_and_matched_non_advantage_route_quotas(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

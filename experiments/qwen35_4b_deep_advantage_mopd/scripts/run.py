@@ -20,6 +20,12 @@ VLLM_PY = REPO / ".venv-vllm" / "bin" / "python"
 sys.path.insert(0, str(EXP / "src"))
 
 from gym.families import ALL_FAMILIES  # noqa: E402
+from confirmation_artifacts import (  # noqa: E402
+    configured_confirmation_raw_root,
+    prepare_confirmation_output,
+    validate_confirmation_geometry,
+    validate_confirmation_score_artifacts,
+)
 from control_rematch import (  # noqa: E402
     validate_control_overlay_cache,
     validate_control_rematch_manifest,
@@ -1352,13 +1358,29 @@ def _controls(config: dict, config_path: Path) -> None:
 def _validate_confirmation_score(
     path: Path,
     *,
+    config: dict,
     config_path: Path,
     model: Path,
     seed: int,
     decode: str,
+    tag: str,
+    raw_root: Path,
 ) -> dict:
-    payload = json.loads(path.read_text(encoding="utf-8"))
-    expected_k = 1 if decode == "greedy" else 8
+    try:
+        payload = validate_confirmation_score_artifacts(
+            path, expected_tag=tag, raw_root=raw_root
+        )
+    except ValueError as exc:
+        raise SystemExit(
+            f"stale or invalid confirmation artifact set: {path}: {exc}"
+        ) from exc
+    try:
+        validate_confirmation_geometry(payload, config)
+    except ValueError as exc:
+        raise SystemExit(f"invalid confirmation geometry: {path}: {exc}") from exc
+    expected_k = (
+        1 if decode == "greedy" else int(config["controls"]["sample_more_k"])
+    )
     evaluator_source = confirmation_evaluator_source_inventory()
     if (
         payload.get("stage") != "policy_eval"
@@ -1409,6 +1431,7 @@ def _confirm(config: dict, config_path: Path) -> None:
         if not _merged_complete(model):
             raise SystemExit(f"confirmation arm {name} is incomplete: {model}")
     evaluation_arms = {**model_arms, "soup_best8": paths["soup"]}
+    raw_root = configured_confirmation_raw_root(config)
     block_seeds = [int(value) for value in config["seeds"]["confirmatory_blocks"]]
     score_paths: dict[str, list[str]] = {name: [] for name in evaluation_arms}
     for block_index, block_seed in enumerate(block_seeds):
@@ -1416,24 +1439,32 @@ def _confirm(config: dict, config_path: Path) -> None:
             decode = "sample8" if name == "soup_best8" else "greedy"
             out_dir = EXP / "runs" / "confirmation" / f"block_{block_index}" / name
             score_path = out_dir / "scores.json"
+            tag = f"block_{block_index}_{name}"
             if not score_path.is_file():
-                if out_dir.exists() and any(out_dir.iterdir()):
-                    raise SystemExit(f"partial confirmation arm output: {out_dir}")
+                try:
+                    prepare_confirmation_output(score_path, raw_root=raw_root)
+                except ValueError as exc:
+                    raise SystemExit(
+                        f"unsafe partial confirmation arm output: {out_dir}: {exc}"
+                    ) from exc
                 _run(
                     [
                         str(VLLM_PY), str(EXP / "scripts" / "eval_policy.py"),
                         "--config", str(config_path), "--model", str(model),
-                        "--tag", f"block_{block_index}_{name}",
+                        "--tag", tag,
                         "--scope", "confirmatory", "--block-seed", str(block_seed),
                         "--decode", decode, "--out-dir", str(out_dir),
                     ]
                 )
             _validate_confirmation_score(
                 score_path,
+                config=config,
                 config_path=config_path,
                 model=model,
                 seed=block_seed,
                 decode=decode,
+                tag=tag,
+                raw_root=raw_root,
             )
             score_paths[name].append(str(score_path.resolve()))
     strict = [

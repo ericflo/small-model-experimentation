@@ -17,6 +17,11 @@ EXP = Path(__file__).resolve().parents[1]
 EVALUATOR = EXP / "scripts" / "eval_policy.py"
 sys.path.insert(0, str(EXP / "src"))
 
+from confirmation_artifacts import (  # noqa: E402
+    configured_confirmation_raw_root,
+    validate_confirmation_geometry,
+    validate_confirmation_score_artifacts,
+)
 from io_utils import (  # noqa: E402
     confirmation_evaluator_source_inventory,
     load_config,
@@ -212,12 +217,25 @@ def main() -> int:
     )
     args = parser.parse_args()
     config, config_path = load_config(args.config)
+    raw_root = configured_confirmation_raw_root(config)
     manifest = _load(args.manifest)
     expected_seeds = [int(value) for value in config["seeds"]["confirmatory_blocks"]]
-    arms = {
-        name: [_load(Path(path)) for path in paths]
-        for name, paths in manifest["arms"].items()
-    }
+    recorded_arms = manifest.get("arms")
+    if not isinstance(recorded_arms, dict):
+        raise ValueError("confirmation manifest arm inventory is malformed")
+    arms = {}
+    for name, paths in recorded_arms.items():
+        if not isinstance(name, str) or not isinstance(paths, list):
+            raise ValueError("confirmation manifest arm inventory is malformed")
+        arms[name] = []
+        for index, path in enumerate(paths):
+            payload = validate_confirmation_score_artifacts(
+                Path(path),
+                expected_tag=f"block_{index}_{name}",
+                raw_root=raw_root,
+            )
+            validate_confirmation_geometry(payload, config)
+            arms[name].append(payload)
     primary_name = str(manifest["primary_arm"])
     quick_name = str(manifest["quick_arm"])
     deep_name = str(manifest["deep_arm"])
@@ -234,6 +252,9 @@ def main() -> int:
     evaluator_source = manifest.get("evaluator_source_inventory", {})
     current_evaluator_source = confirmation_evaluator_source_inventory()
     protocol = {
+        "all_raw_artifacts_current": True,
+        "all_raw_semantics_match_scores": True,
+        "all_confirmation_geometry_exact": True,
         "manifest_evaluator_current": manifest.get("evaluator_sha256")
         == sha256_file(EVALUATOR),
         "manifest_evaluator_source_current": evaluator_source

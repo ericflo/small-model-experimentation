@@ -141,5 +141,15 @@ claim of invariance over every trained token or of improved capability.
 - `analysis/`: machine-readable gates and final receipt.
 - `reports/artifact_manifest.yaml`: external checkpoints and regeneration.
 
+Confirmation keeps only the atomic `scores.json` commit markers under
+`runs/confirmation/`. The corresponding atom and episode rows are gzip-compressed
+under the mirrored `large_artifacts/qwen35_4b_deep_advantage_mopd/confirmation/`
+tree. Every score records the exact raw path, SHA-256, byte count, and row count;
+resume, analysis, and benchmark authorization all revalidate those descriptors,
+recompute item identity/family/level/sample count/best score from the raw rows,
+require the complete frozen family/cell geometry, and reject committed outputs
+with missing, changed, escaped, or extra artifacts. Raw hashes remain in the
+benchmark authorization inventory, so later mutation also stops benchmark runs.
+
 Benchmark files remain unread and unreachable unless the procedural
 confirmation explicitly authorizes the run-only CLI.

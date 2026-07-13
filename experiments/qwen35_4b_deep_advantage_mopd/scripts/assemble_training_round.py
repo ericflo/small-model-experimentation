@@ -15,6 +15,7 @@ sys.path.insert(0, str(EXP / "src"))
 
 from advantage_routing import select_teacher  # noqa: E402
 from io_utils import load_config, read_jsonl, sha256_file, write_json  # noqa: E402
+from route_control_matching import matched_non_advantage_route_units  # noqa: E402
 
 
 def _balanced_take(rows: list[dict], count: int) -> list[dict]:
@@ -40,56 +41,6 @@ def _balanced_take(rows: list[dict], count: int) -> list[dict]:
         if not progressed:
             break
     return selected
-
-
-def _match_key(row: dict, tier: str) -> tuple:
-    values = {
-        "exact_cell": (str(row["family"]), str(row["kind"]), int(row["level"])),
-        "family_kind": (str(row["family"]), str(row["kind"])),
-        "kind_level": (str(row["kind"]), int(row["level"])),
-        "kind": (str(row["kind"]),),
-    }
-    if tier not in values:
-        raise ValueError(f"unknown non-advantage-route matching tier: {tier}")
-    return values[tier]
-
-
-def _matched_non_advantage_route_units(
-    selected: list[dict], candidates: list[dict], match_order: list[str]
-) -> list[dict]:
-    """Match non-deep-selected failed states to the exact primary geometry."""
-
-    remaining = sorted(candidates, key=lambda row: str(row["state_id"]))
-    matched = []
-    for source in sorted(selected, key=lambda row: str(row["state_id"])):
-        chosen_index = None
-        chosen_tier = None
-        for tier in match_order:
-            source_key = _match_key(source, tier)
-            chosen_index = next(
-                (
-                    index
-                    for index, candidate in enumerate(remaining)
-                    if _match_key(candidate, tier) == source_key
-                ),
-                None,
-            )
-            if chosen_index is not None:
-                chosen_tier = tier
-                break
-        if chosen_index is None or chosen_tier is None:
-            raise ValueError(
-                f"no kind-preserving non-advantage-route match for {source['state_id']}"
-            )
-        candidate = dict(remaining.pop(chosen_index))
-        candidate["observed_route"] = candidate.get("primary_teacher") or "abstain"
-        candidate["primary_teacher"] = "deep"
-        candidate["role"] = "route_control"
-        candidate["offpolicy_target"] = None
-        candidate["matched_primary_state_id"] = str(source["state_id"])
-        candidate["match_tier"] = chosen_tier
-        matched.append(candidate)
-    return matched
 
 
 def _best_offpolicy(branches: list[dict]) -> dict:
@@ -240,7 +191,7 @@ def main() -> int:
         row["role"] = "capability"
         capability_units.append(row)
     try:
-        control_units = _matched_non_advantage_route_units(
+        control_units = matched_non_advantage_route_units(
             capability_units,
             [*routed["quick"], *abstained],
             [str(value) for value in config["controls"]["non_advantage_route_match_order"]],

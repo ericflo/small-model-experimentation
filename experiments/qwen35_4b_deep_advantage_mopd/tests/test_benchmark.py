@@ -62,6 +62,7 @@ class BenchmarkAnalysisTests(unittest.TestCase):
         inject_score_failure: bool,
         inject_provenance_failure: bool = False,
         inject_budget_failure: bool = False,
+        inject_confirmation_artifact_failure: bool = False,
     ) -> subprocess.CompletedProcess:
         root = Path(self.temporary.name) / f"case_{self.case_index}"
         self.case_index += 1
@@ -69,6 +70,8 @@ class BenchmarkAnalysisTests(unittest.TestCase):
         provenance = self._model(root)
         manifest = root / "manifest.json"
         manifest.write_text("{}\n", encoding="utf-8")
+        raw_confirmation = root / "atom_rows.jsonl.gz"
+        raw_confirmation.write_bytes(b"synthetic-raw-confirmation")
         confirmation = root / "confirmation.json"
         confirmation.write_text(
             json.dumps(
@@ -110,7 +113,11 @@ class BenchmarkAnalysisTests(unittest.TestCase):
             "sha256": sha256_file(controls),
         }
         confirmation_artifacts = [
-            {"path": str(manifest.resolve()), "sha256": sha256_file(manifest)}
+            {"path": str(manifest.resolve()), "sha256": sha256_file(manifest)},
+            {
+                "path": str(raw_confirmation.resolve()),
+                "sha256": sha256_file(raw_confirmation),
+            },
         ]
         evidence_artifacts = sorted(
             [*integration_receipts, controls_receipt, *confirmation_artifacts],
@@ -159,6 +166,8 @@ class BenchmarkAnalysisTests(unittest.TestCase):
             encoding="utf-8",
         )
         authorization_sha256 = sha256_file(authorization)
+        if inject_confirmation_artifact_failure:
+            raw_confirmation.unlink()
         events = []
         for binding in bindings:
             score = {"primary": 0.6, "soup": 0.5, "visible": 0.4}[
@@ -317,6 +326,13 @@ class BenchmarkAnalysisTests(unittest.TestCase):
             inject_budget_failure=True,
         )
         self.assertEqual(failed.returncode, 4, failed.stderr + failed.stdout)
+
+    def test_confirmation_raw_mutation_stales_benchmark_authorization(self):
+        failed = self._run(
+            inject_score_failure=False,
+            inject_confirmation_artifact_failure=True,
+        )
+        self.assertNotEqual(failed.returncode, 0, failed.stderr + failed.stdout)
 
 
 if __name__ == "__main__":

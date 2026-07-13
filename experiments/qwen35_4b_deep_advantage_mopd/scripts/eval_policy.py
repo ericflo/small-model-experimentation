@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import argparse
-import gzip
 import json
 import sys
 import time
@@ -16,6 +15,12 @@ EXP = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(EXP / "src"))
 
 import harness  # noqa: E402
+from confirmation_artifacts import (  # noqa: E402
+    commit_confirmation_score,
+    configured_confirmation_raw_root,
+    prepare_confirmation_output,
+    validate_confirmation_geometry,
+)
 from gym.families import load as load_family  # noqa: E402
 from io_utils import (  # noqa: E402
     all_families,
@@ -23,7 +28,6 @@ from io_utils import (  # noqa: E402
     confirmation_evaluator_source_inventory,
     load_config,
     sha256_file,
-    write_json,
 )
 
 
@@ -122,24 +126,22 @@ def main() -> int:
     parser.add_argument("--scope", choices=("confirmatory",), required=True)
     parser.add_argument("--block-seed", type=int, required=True)
     parser.add_argument("--decode", choices=("greedy", "sample8"), default="greedy")
-    parser.add_argument("--families", nargs="*")
-    parser.add_argument("--smoke", action="store_true")
-    parser.add_argument("--out-dir", type=Path)
+    parser.add_argument("--out-dir", type=Path, required=True)
     args = parser.parse_args()
     evaluator_sha256 = sha256_file(Path(__file__))
     evaluator_source_before = confirmation_evaluator_source_inventory()
     config, config_path = load_config(args.config)
-    families = args.families or all_families(config)
+    raw_root = configured_confirmation_raw_root(config)
+    families = all_families(config)
     atom_n, episode_n = _counts(config, args.scope)
-    if args.smoke:
-        atom_n, episode_n = 1, 1
-        families = families[:2]
     k = 1 if args.decode == "greedy" else int(config["controls"]["sample_more_k"])
     greedy = args.decode == "greedy"
-    out_dir = args.out_dir or EXP / "runs" / "policy_eval" / args.tag
-    if out_dir.exists() and any(out_dir.iterdir()):
-        raise SystemExit(f"refusing non-empty evaluation directory: {out_dir}")
-    out_dir.mkdir(parents=True, exist_ok=True)
+    out_dir = args.out_dir
+    score_path = out_dir / "scores.json"
+    try:
+        prepare_confirmation_output(score_path, raw_root=raw_root)
+    except ValueError as exc:
+        raise SystemExit(f"unsafe confirmation output state: {exc}") from exc
 
     strata = config["strata"]
     atom_items: list[dict] = []
@@ -256,13 +258,17 @@ def main() -> int:
         "token_ledger": dict(token_ledger), "wall_seconds": elapsed,
         "engine_protocol": engine_protocol, "runner_summary": metadata,
     }
-    write_json(out_dir / "scores.json", result)
-    with gzip.open(out_dir / "atom_rows.jsonl.gz", "wt", encoding="utf-8") as handle:
-        for row in atom_rows:
-            handle.write(json.dumps(row, ensure_ascii=False) + "\n")
-    with gzip.open(out_dir / "episode_rows.jsonl.gz", "wt", encoding="utf-8") as handle:
-        for row in episode_rows:
-            handle.write(json.dumps(row, ensure_ascii=False) + "\n")
+    try:
+        validate_confirmation_geometry(result, config)
+        result = commit_confirmation_score(
+            score_path,
+            result,
+            atom_rows=atom_rows,
+            episode_rows=episode_rows,
+            raw_root=raw_root,
+        )
+    except ValueError as exc:
+        raise SystemExit(f"failed to commit confirmation artifacts: {exc}") from exc
     print(json.dumps({"tag": args.tag, "by_stratum": by_stratum, "tokens": dict(token_ledger)}, indent=2))
     return 0
 

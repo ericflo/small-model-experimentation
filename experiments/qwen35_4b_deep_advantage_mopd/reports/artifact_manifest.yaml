@@ -28,9 +28,16 @@ external_artifacts:
     regenerate: >-
       Run verify-student, route-qualify, locality, three integrate seeds,
       controls, and confirm only as authorized by each gate.
+  - name: sealed confirmation raw atom and episode rows
+    storage: large_artifacts/qwen35_4b_deep_advantage_mopd/confirmation
+    required_for: confirmation resume, analysis, independent authorization, benchmark execution, and audit
+    checksum: score markers bind exact paths, SHA-256, byte/row counts, and raw-derived item semantics; authorization rebinds raw hashes
+    regenerate: python3 experiments/qwen35_4b_deep_advantage_mopd/scripts/run.py --stage confirm
 omitted_artifacts:
   - path: large_artifacts/qwen35_4b_deep_advantage_mopd
     reason: checkpoints, adapters, online branches, and tensor caches are too large for git
+  - path: large_artifacts/qwen35_4b_deep_advantage_mopd/confirmation
+    reason: raw confirmation rollouts are external and hash-bound by committed score descriptors
 reproducibility:
   smoke_command: python3 experiments/qwen35_4b_deep_advantage_mopd/scripts/run.py --smoke
   full_command: >-

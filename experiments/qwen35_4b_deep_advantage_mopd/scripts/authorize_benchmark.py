@@ -44,6 +44,11 @@ from bench import (  # noqa: E402
     benchmark_source_inventory,
     model_provenance,
 )
+from confirmation_artifacts import (  # noqa: E402
+    configured_confirmation_raw_root,
+    validate_confirmation_geometry,
+    validate_confirmation_score_artifacts,
+)
 from control_rematch import (  # noqa: E402
     validate_control_overlay_cache,
     validate_control_rematch_manifest,
@@ -617,6 +622,7 @@ def _audit_confirmation(
         raise ValueError("confirmation manifest hash mismatch")
     manifest = _load(manifest_path)
     expected_seeds = [int(value) for value in config["seeds"]["confirmatory_blocks"]]
+    raw_root = configured_confirmation_raw_root(config)
     arms = manifest.get("arms")
     model_receipts = manifest.get("model_merge_receipts")
     model_inventories = manifest.get("model_inference_inventories")
@@ -663,14 +669,20 @@ def _audit_confirmation(
         if not isinstance(values, list) or len(values) != len(expected_seeds):
             raise ValueError("confirmation arm block inventory is stale")
         block_models = set()
-        for block_seed, value in zip(expected_seeds, values):
-            score_path = Path(value).resolve()
+        for block_index, (block_seed, value) in enumerate(zip(expected_seeds, values)):
+            recorded_score_path = Path(value)
+            score_path = recorded_score_path.resolve()
             if not score_path.is_relative_to(CONFIRMATION_ROOT):
                 raise ValueError("confirmation artifact escaped its sealed directory")
             if score_path in seen_score_paths:
                 raise ValueError("confirmation score artifact was reused across arms")
             seen_score_paths.add(score_path)
-            score = _load(score_path)
+            score = validate_confirmation_score_artifacts(
+                recorded_score_path,
+                expected_tag=f"block_{block_index}_{arm}",
+                raw_root=raw_root,
+            )
+            validate_confirmation_geometry(score, config)
             expected_decode = "sample8" if arm == "soup_best8" else "greedy"
             expected_k = (
                 int(config["controls"]["sample_more_k"])
@@ -720,6 +732,13 @@ def _audit_confirmation(
             block_models.add(model)
             score_artifacts.append(
                 {"path": str(score_path), "sha256": sha256_file(score_path)}
+            )
+            score_artifacts.extend(
+                {
+                    "path": descriptor["path"],
+                    "sha256": descriptor["sha256"],
+                }
+                for descriptor in score["raw_artifacts"].values()
             )
         if len(block_models) != 1:
             raise ValueError("confirmation arm used different models across blocks")
