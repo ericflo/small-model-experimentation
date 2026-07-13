@@ -47185,51 +47185,49 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "The residual intervention changes only 24 of 336 action rows",
+     "title": "Both calibration controls saturate the available score",
      "categories": [
-      "new post-failure revisions",
-      "unchanged prior rows"
+      "transaction parent",
+      "extra-training control",
+      "candidate ceiling"
      ],
      "series": [
       {
-       "label": "candidate bank rows",
+       "label": "trained-family recovery success",
        "values": [
-        24,
-        312
+        1.0,
+        1.0,
+        1.0
        ]
       }
      ],
-     "x_label": "row source",
-     "y_label": "training rows",
-     "y_format": "integer",
-     "note": "Design evidence only, not a model result. Candidate and control each contain 336 rows; the candidate replaces only diagnosis-to-changed-patch in 24 recovery blocks and retains the other 312 rows from the exact prior bank.",
-     "source": "experiments/qwen35_4b_validation_policy_counterexample_curriculum/reports/bank_preflight.json"
+     "x_label": "controls-first calibration arm",
+     "y_label": "repository recovery success",
+     "y_format": "percent01",
+     "note": "Parent and matched control each solve all 48 cases. No candidate can clear the frozen +15/+10 point mechanism bars, so candidate behavior and every downstream gate remain sealed.",
+     "source": "experiments/qwen35_4b_validation_policy_counterexample_curriculum/reports/result_receipt.json"
     },
     {
      "kind": "bar",
-     "title": "All four procedural blocks are content-unique",
+     "title": "The candidate passes direct locality before the infeasibility stop",
      "categories": [
-      "bank",
-      "calibration",
-      "development",
-      "confirmation"
+      "measured drift",
+      "drift ceiling"
      ],
      "series": [
       {
-       "label": "unique public repositories",
+       "label": "median centered non-target logit drift",
        "values": [
-        24,
-        24,
-        32,
-        32
+        0.10943770408630371,
+        0.15
        ]
       }
      ],
-     "x_label": "frozen block",
-     "y_label": "unique repository contents",
-     "y_format": "integer",
-     "note": "Bank and calibration have zero content overlap; development and confirmation also have zero overlap. Content hashes exclude task IDs and split labels, preventing metadata-only freshness.",
-     "source": "experiments/qwen35_4b_validation_policy_counterexample_curriculum/reports/bank_preflight.json"
+     "x_label": "locality quantity",
+     "y_label": "centered logit drift",
+     "y_format": "number",
+     "note": "Candidate drift is 0.1094 versus the preregistered 0.15 ceiling; unrelated entropy rises by 0.0214. This validates locality at the chosen dose, not capability benefit.",
+     "source": "experiments/qwen35_4b_validation_policy_counterexample_curriculum/reports/result_receipt.json"
     }
    ]
   }

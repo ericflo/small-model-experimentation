@@ -54,7 +54,28 @@
   receipt records `model_output_precedes_lock: false`; every GPU/model mode now
   fails closed on file-digest or ancestry drift.
 
-## Next recorded event
+## 2026-07-13 — receipt handoff
 
-Commit and push the immutable receipt, then run GPU smoke. Only a passing smoke
-authorizes the full staged pipeline.
+- Committed and pushed the immutable receipt at `39413cea`; only then started
+  GPU smoke and the full staged pipeline.
+
+## 2026-07-13 — staged run
+
+- GPU smoke passed 12/12 with perfect two-turn recovery and zero invalid/cap
+  contacts.
+- Candidate/control trained for 36 steps each; merged hashes are
+  `4ca7d5...4aa2` and `9aef44...cdec`.
+- Candidate passed direct C54 locality: drift 0.10944, entropy +0.02142,
+  varentropy −0.01082.
+- Parent controls ran before candidate behavior. Parent and matched control
+  each scored 48/48 on trained-family recovery, making the frozen +15/+10 bars
+  impossible. Analyzer stopped at `CALIBRATION_INFEASIBLE`.
+- Candidate behavior, transfer, retention, and Menagerie remained sealed; no
+  benchmark seed was consumed.
+
+## 2026-07-13 — learned lesson
+
+All 48 parent first changed patches already contained negative handling, copy,
+and ordinary false rejection. The explicit contract and one-line partial made
+the intended residual trivial. A successor must qualify non-saturated semantic
+axes on the exact prompt/verifier distribution before it trains any arm.

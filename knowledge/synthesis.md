@@ -340,6 +340,21 @@ curriculum should start from near-correct failed-test states and teach minimal
 policy-preserving revisions across raise/False/None/reject semantics, rather
 than add generic transactional examples or dose.
 
+**Failure forensics do not guarantee curriculum headroom (2026-07-13,
+Negative,
+[qwen35_4b_validation_policy_counterexample_curriculum](../experiments/qwen35_4b_validation_policy_counterexample_curriculum/reports/report.md)).**
+The residual-seam candidate passed direct C54 locality at 0.109 drift, but its
+controls-first trained-family instrument was saturated before candidate
+behavior: transaction parent 48/48 and matched extra-training control 48/48,
+with every first patch already expressing negative handling, copy, and ordinary
+false rejection. Explicitly stating the exception contract and supplying an
+otherwise-correct partial converted the predecessor's implicit-policy failure
+into a solved edit. Frozen +15/+10 bars were impossible, so transfer and
+Menagerie stayed sealed. **Curriculum substrate qualification must precede
+capability-production training:** demonstrate replicated parent headroom on
+the exact prompt/verifier state, not merely a related historical failure, then
+reserve disjoint skins for training and transfer.
+
 The licensed J-value measurement is now a clean negative for the shared
 coordinate. All 144 value traces and 288 midpoint/endpoint states completed,
 but task-held-out shared J AUC was 0.5021 with one-sided task-bootstrap lower

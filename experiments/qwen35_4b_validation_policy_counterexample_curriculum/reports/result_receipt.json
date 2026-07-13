@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qwen35_4b_validation_policy_counterexample_curriculum",
+  "verdict": "CALIBRATION_INFEASIBLE",
+  "design_commit": "e0b19f5d",
+  "design_lock_commit": "39413cea",
+  "model": {
+    "id": "Qwen/Qwen3.5-4B",
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "parent_weight_sha256": "1cf5fbca317808d6d00225f5cd533c82c7e1602b2b2e5e2da8f4307b01941ba3",
+    "locality_anchor_weight_sha256": "c933168075a0fc011f31ee54f83d722cc91423ce1a0ac19bfe40dfab92f608d5"
+  },
+  "bank": {
+    "candidate_sha256": "940da93e3849e7a2ebfb1555add666e8a4039f13548dea556c93191541cc305a",
+    "control_sha256": "52424053bfae8192cb44772d661121b8c1b5f83418ca18bf799eb9812392c10e",
+    "tasks_per_arm": 48,
+    "rows_per_arm": 336,
+    "candidate_injected_rows": 24,
+    "candidate_unchanged_prior_rows": 312,
+    "injected_transition": "diagnosis_to_changed_patch",
+    "weighted_action_mass_per_operator_per_epoch": 38248.0,
+    "think_loss_zero": true
+  },
+  "training": {
+    "candidate": {
+      "optimizer_steps": 36,
+      "training_loss": 0.01399643574323919,
+      "wall_seconds": 417.88279839605093,
+      "peak_cuda_bytes": 21797228544,
+      "merged_weight_sha256": "4ca7d543df5d866e50e8c2a6ab69f408778f64d626dca266c9ea859f5d254aa2",
+      "delta_frobenius_norm_sum": 2.908229270018637
+    },
+    "control": {
+      "optimizer_steps": 36,
+      "training_loss": 0.018505017790529463,
+      "wall_seconds": 416.4410039782524,
+      "peak_cuda_bytes": 21797228544,
+      "merged_weight_sha256": "9aef44a737adb5fb1f45725a007b06b51876cadc0805a4489ad52ae24bf2cdec",
+      "delta_frobenius_norm_sum": 2.956951371394098
+    }
+  },
+  "gpu_smoke": {
+    "passed": true,
+    "n_cases": 12,
+    "success": 1.0,
+    "failed_test_changed_patch_within_two": 1.0,
+    "rejected_patch_valid_changed_within_two": 1.0,
+    "invalid_action_rate_per_turn": 0.0
+  },
+  "locality": {
+    "passed": true,
+    "receipt_sha256": "2639be877c69af57425966fceb30a311b2f0c820fd4a6ac6f8571c0681d38e40",
+    "n_contexts": 48,
+    "median_non_target_centered_logit_drift": 0.10943770408630371,
+    "mean_entropy_delta": 0.021415044708798292,
+    "mean_varentropy_delta": -0.010823122536142704
+  },
+  "calibration_controls": {
+    "task_manifest_sha256": "7598dd2ce7571c463347f73904ce548f6b9221fd9eabee16e43ab7e7b8cfbd88",
+    "task_content_manifest_sha256": "9272432c26daad2bc364d17f5a04f91326bd588fbd385965df9123984073f951",
+    "n_cases_per_arm": 48,
+    "parent_success": 1.0,
+    "control_success": 1.0,
+    "parent_failed_test_changed_patch_within_two": 1.0,
+    "parent_rejected_patch_valid_changed_within_two": 1.0,
+    "parent_first_patches_with_negative_check": 48,
+    "parent_first_patches_with_copy_and_false_policy": 48,
+    "parent_receipt_sha256": "0939c5b633eeac4fc1c821c1314c4602c0fc234b586fd7a0ef13eac2a727812c",
+    "control_receipt_sha256": "62eaa88ccb38e00f16d10afaf6137373ea76d572109d0d950c5cacc300ca42c9",
+    "feasibility_receipt_sha256": "93e413d71f58c662de7f032737a16c36015fa07c9b285bcf01216a53fe9f5143",
+    "failed_checks": [
+      "success_vs_start",
+      "success_vs_control"
+    ]
+  },
+  "exposure": {
+    "candidate_scientific_behavior_generated": false,
+    "transfer_dev_generated": false,
+    "transfer_confirm_generated": false,
+    "broad_retention_generated": false,
+    "menagerie_generated": false,
+    "menagerie_seeds_consumed": []
+  },
+  "interpretation": "Making the exception-vs-rejection contract explicit and the partial implementation otherwise correct removed the predecessor's failure core: the learned transaction parent already solved every fresh train-skin recovery case. The experiment therefore cannot estimate a counterexample-curriculum effect. Qualify parent headroom on semantically conflicting but nontrivial public failure states before another training run."
+}

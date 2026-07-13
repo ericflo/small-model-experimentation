@@ -9,12 +9,12 @@ external_artifacts:
   - name: adapters and merged checkpoints
     storage: large_artifacts/qwen35_4b_validation_policy_counterexample_curriculum/{adapters,merged,smoke}
     required_for: candidate/control deployment and replication
-    checksum: recorded in training and merge receipts after the run
+    checksum: candidate 4ca7d543df5d866e50e8c2a6ab69f408778f64d626dca266c9ea859f5d254aa2; control 9aef44a737adb5fb1f45725a007b06b51876cadc0805a4489ad52ae24bf2cdec
     regenerate: .venv/bin/python experiments/qwen35_4b_validation_policy_counterexample_curriculum/scripts/run.py --full
   - name: detailed coding trajectories and locality logits
     storage: large_artifacts/qwen35_4b_validation_policy_counterexample_curriculum/eval
     required_for: paired gates, transition retention, and forensics
-    checksum: compact stage/result receipts after the run
+    checksum: locality and control receipt hashes recorded in reports/result_receipt.json
     regenerate: .venv/bin/python experiments/qwen35_4b_validation_policy_counterexample_curriculum/scripts/run.py --full
 omitted_artifacts:
   - path: large_artifacts/qwen35_4b_validation_policy_counterexample_curriculum

@@ -12809,46 +12809,46 @@
    ]
   },
   "qwen35_4b_validation_policy_counterexample_curriculum": {
-   "verdict_tag": "A one-line residual is ready for trial",
-   "concept_primer": "The model already learned to copy stock, check a whole order, and update it safely. It still treats two different failures as the same: malformed negative quantities should raise an error, while an ordinary shortage should simply be declined.",
+   "verdict_tag": "The lesson was already mastered",
+   "concept_primer": "A training experiment needs room to improve. If the starting model already fixes every practice case, even a perfect trained model cannot prove that the new lessons helped.",
    "plain_question": "Can a tiny set of almost-correct failed-test revisions teach that exact distinction without erasing the coding loop already learned?",
-   "plain_answer": "The experiment is designed and its deterministic checks pass, but no model has been trained yet. Only 24 of 336 lessons change; the other 312 preserve the prior behavior, and a same-size control receives only more of the old lessons.",
-   "why_it_matters": "This is a sharp test of whether capability can be added at the exact moment a test reveals a semantic mistake. A win would show that small, verifier-specific corrections can improve coding behavior without broad retraining; a loss will identify whether the signal, transfer, or weight change is the limiting step.",
-   "verdict_tone": "neutral",
+   "plain_answer": "The test could not answer the question. Before the newly trained model was allowed to run, the starting model and the equal-size old-lesson control each fixed all 48 practice cases. The required gains were therefore impossible, so the run stopped before transfer or the external benchmark.",
+   "why_it_matters": "Turning the old failure into a clear instruction plus an almost-correct program also made it easy. Future curricula must first prove that the starting model still fails the exact new practice distribution; failure forensics alone do not guarantee useful training headroom.",
+   "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "New corrective lessons",
-     "value": "24 of 336",
-     "sub": "only the post-failure patch row changes"
+     "label": "Starting model practice score",
+     "value": "48 of 48",
+     "sub": "no room for the required fifteen-point gain"
     },
     {
-     "label": "Old loop lessons retained",
-     "value": "312 of 336",
-     "sub": "inspection, rejection recovery, testing, and commit remain rehearsed"
+     "label": "Equal extra-training control",
+     "value": "48 of 48",
+     "sub": "no room for the required ten-point gain"
     },
     {
-     "label": "Public data shapes",
-     "value": "3",
-     "sub": "bundles, records, and tuples each have train and fresh transfer skins"
+     "label": "Unrelated-behavior drift",
+     "value": "0.109",
+     "sub": "the trained candidate stayed below the 0.15 safety ceiling"
     },
     {
-     "label": "Model runs before the lock",
+     "label": "External benchmark calls",
      "value": "zero",
-     "sub": "all evidence so far is deterministic fixture and bank validation"
+     "sub": "stopped before candidate behavior and transfer"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Only one small slice of the old lesson bank changes",
-     "chart_read": "The two bars divide the 336 candidate lessons into new post-failure revisions and unchanged lessons copied from the prior bank. The much taller retained bar shows how narrowly the intervention is scoped.",
-     "chart_takeaway": "Twenty-four rows carry the new semantic distinction while 312 rows rehearse the existing tool loop, making the comparison much sharper than another full transaction curriculum."
+     "chart_plain_title": "Both controls already sit at the maximum score",
+     "chart_read": "The first two bars show practice success for the starting model and the equal extra-training control; the third is the best score any candidate could possibly achieve. All bars reach the same ceiling.",
+     "chart_takeaway": "With both controls at 100 percent, the promised improvement cannot be measured and the candidate must remain unopened."
     },
     {
      "index": 1,
-     "chart_plain_title": "Every evaluation block contains unique repository content",
-     "chart_read": "Each bar counts public repositories whose contents are unique inside that block. The two 24-item blocks cover training and practice checks; the two 32-item blocks are separate transfer and confirmation sets.",
-     "chart_takeaway": "The earlier duplicate-fixture problem is gone: all four blocks are internally unique, and the paired training/practice and transfer/confirmation blocks do not overlap."
+     "chart_plain_title": "The small update stayed inside its unrelated-behavior limit",
+     "chart_read": "The first bar is measured drift from the older reference model; the second is the largest allowed drift. Shorter is better, and the measured bar remains below the limit.",
+     "chart_takeaway": "The narrow training update was local enough, but locality cannot rescue an evaluation set the parent already solves perfectly."
     }
    ]
   }

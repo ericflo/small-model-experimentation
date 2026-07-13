@@ -70,15 +70,19 @@
   replay-only 0.383), but unseen dev was only 0.719 versus parent/sample-more
   0.703. It failed the +10/+5 and bootstrap bars; confirmation, broad retention,
   and Menagerie stayed sealed. Do not repeat generic transaction dose.
-- Active experiment: `qwen35_4b_validation_policy_counterexample_curriculum`
-  isolates the predecessor's residual at the post-failure revision seam. It
-  replaces only 24 `diagnosis→changed_patch` rows inside an otherwise identical
-  336-row prior bank, spans three public data representations, and compares
-  with matched extra transaction/recovery dose from the exact learned parent.
-  Dev/confirmation are content-disjoint; the known atomic-reservation failure
-  is a separate sentinel; locality, conditional transitions, verify/commit,
-  sample-more, and broad recovery all gate Menagerie. Do not add generic
-  transaction dose or weaken the sentinel/fresh-family bars inside this run.
+- Completed calibration infeasibility:
+  `qwen35_4b_validation_policy_counterexample_curriculum` passed locality at
+  0.109 but parent and matched extra-training control both scored 48/48 on the
+  exact trained-family recovery block. Explicit contract + near-correct partial
+  removed the historical residual; +15/+10 bars were impossible and candidate
+  behavior, transfer, and Menagerie stayed sealed. Do not lower bars or expose
+  the trained candidate post-stop.
+- Highest-priority successor: a no-training semantic-policy headroom
+  qualification tournament. Cross explicit versus verifier-inferred contracts,
+  multiple conflict types (raise/False/None/reject), and bundle/record/tuple
+  representations on two disjoint blocks. Admit an axis to later curriculum
+  work only if parent success is replicated inside a predeclared non-saturated
+  band; reserve separate skins/seeds for training and transfer.
 - Future retraining should calibrate plan dose by realized gradient/surprisal
   and avoid supervising plan starts already rank 1 or wildly off-policy lexical
   templates.

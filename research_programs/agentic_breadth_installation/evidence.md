@@ -358,3 +358,28 @@ verifier-faithful validation-policy discrimination, not transaction structure
 or recovery syntax. Next: near-correct counterexample states that isolate one
 policy distinction at a time, with complete recovery replay and matched extra-
 transaction controls.
+
+## qwen35_4b_validation_policy_counterexample_curriculum (2026-07-13 — Calibration infeasible)
+
+The one-transition residual update itself was local: candidate-to-C54 drift was
+0.109, entropy changed +0.021, and varentropy −0.011. Candidate and matched
+extra-transaction control each received 36 steps, 336 rows, zero think loss,
+and identical transition/operator action mass from the same learned transaction
+parent. The candidate changed only 24 post-diagnosis revision rows.
+
+Controls-first calibration made the causal comparison impossible. The parent
+and matched control each solved all 48 fresh train-skin recovery cases, with
+perfect failed-test and rejected-patch changed-within-two and zero invalid
+actions. All 48 parent first changed patches already included negative
+handling, copied state, and ordinary `False` rejection. The theoretical
+candidate ceiling could not clear +15/+10, so candidate scientific behavior,
+transfer, retention, and Menagerie stayed sealed.
+
+Read: making the rule explicit and the partial state otherwise correct removed
+the predecessor's residual. The original atomic miss was conditional on its
+more implicit contract and proposal dynamics, not evidence of a generic
+inability to write the distinction. Add a substrate-headroom gate before
+capability production: qualify multiple semantic conflicts under the exact
+prompt/verifier distribution, require replicated non-saturation, and only then
+bank/train on disjoint skins. Do not lower the current bars or expose the
+trained candidate post-stop.

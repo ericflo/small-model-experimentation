@@ -21,6 +21,7 @@ research_programs:
   - "reliability_and_safety"
   - "structured_execution_and_compilers"
 top_level_dirs:
+  - "analysis"
   - "configs"
   - "data"
   - "reports"
@@ -29,9 +30,9 @@ top_level_dirs:
   - "src"
   - "tests"
 file_counts:
-  json: 4
+  json: 6
   md: 7
   py: 19
   yaml: 3
-total_files: 33
-total_size_bytes: 368830
+total_files: 35
+total_size_bytes: 378310

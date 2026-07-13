@@ -1,7 +1,6 @@
 # Validation-policy counterexample curriculum
 
-**Status:** in-progress · since 2026-07-13 · design locked at `e0b19f5d`;
-GPU smoke and staged model run remain.
+**Status:** finished
 
 Teach Qwen3.5-4B the semantic distinction left by the transaction curriculum:
 negative quantities are malformed and raise `ValueError`, while unknown or
@@ -101,14 +100,36 @@ python experiments/qwen35_4b_validation_policy_counterexample_curriculum/scripts
 .venv/bin/python experiments/qwen35_4b_validation_policy_counterexample_curriculum/scripts/run.py --full
 ```
 
-## Current evidence
+## Result
 
-Deterministic CPU preflight passed. The candidate and control each contain 48
-complete task blocks and 336 rows; exactly 24 candidate rows carry the new
-semantic revision, 312 candidate rows retain prior behavior, and weighted
-action mass is identical for every transition and operator. This is design
-evidence only. No result or capability claim exists until the staged run
-finishes.
+**Verdict: `CALIBRATION_INFEASIBLE`.** Both fixed arms trained and merged, and
+the candidate passed direct C54 locality at 0.109 centered-logit drift with
+unrelated entropy retained. The controls-first calibration then found that the
+learned transaction parent and matched extra-transaction control each solved
+48/48 fresh train-skin recovery cases. The required +15/+10 point bars were
+therefore mathematically impossible. Candidate scientific behavior, transfer,
+retention, and Menagerie remained sealed.
+
+The useful correction is mechanistic. On all 48 parent cases, the first changed
+patch already included the negative check, copied state, and the ordinary
+`False` rejection policy. Making the contract explicit and the partial state
+otherwise correct removed the predecessor's failure core. The predecessor did
+not demonstrate a general inability to express the semantic distinction; it
+demonstrated a miss under its more implicit atomic-reservation contract and
+initial proposal dynamics.
+
+Before another training run, a separate qualification stage must establish
+parent headroom on multiple semantic-conflict families and representations.
+Only axes with replicated nontrivial failure should enter a counterexample
+curriculum. Full evidence is in [`reports/report.md`](reports/report.md) and
+[`reports/result_receipt.json`](reports/result_receipt.json).
+
+## Knowledgebase update
+
+Program evidence, backlog, scorecard, and shared synthesis record the
+qualification failure and the new headroom-first rule. No claim ID is added:
+the treatment was never behaviorally exposed and no transfer or Menagerie event
+ran.
 
 ## Artifacts
 

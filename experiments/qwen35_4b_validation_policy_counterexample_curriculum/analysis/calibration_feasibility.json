@@ -1,0 +1,22 @@
+{
+  "checks": {
+    "answer_cap": true,
+    "failed_transition": true,
+    "invalid_action": true,
+    "rejected_transition": true,
+    "success_absolute": true,
+    "success_vs_control": false,
+    "success_vs_start": false
+  },
+  "control_success": {
+    "control": 1.0,
+    "start": 1.0
+  },
+  "gate": {
+    "passed": false
+  },
+  "schema_version": 1,
+  "stage": "policy_calibration_feasibility",
+  "task_content_manifest_sha256": "9272432c26daad2bc364d17f5a04f91326bd588fbd385965df9123984073f951",
+  "task_manifest_sha256": "7598dd2ce7571c463347f73904ce548f6b9221fd9eabee16e43ab7e7b8cfbd88"
+}
