@@ -3298,6 +3298,42 @@
   },
   {
     "file_counts": {
+      ".json": 3,
+      ".jsonl": 9,
+      ".md": 7,
+      ".py": 10,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_materialized_residual_sibling_search",
+    "path": "experiments/qwen35_4b_materialized_residual_sibling_search",
+    "primary_readme": "experiments/qwen35_4b_materialized_residual_sibling_search/README.md",
+    "primary_report": "experiments/qwen35_4b_materialized_residual_sibling_search/reports/report.md",
+    "research_programs": [
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "structured_execution_and_compilers",
+      "test_time_reasoning_budget"
+    ],
+    "source_track": "new",
+    "summary": "construction lock passed; mechanics implementation and every model stage remain sealed.",
+    "tags": [
+      "small-model"
+    ],
+    "title": "Qwen3.5-4B Materialized Residual Sibling Search",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "runs",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 32,
+    "total_size_bytes": 882697
+  },
+  {
+    "file_counts": {
       ".json": 26,
       ".jsonl": 9,
       ".log": 13,

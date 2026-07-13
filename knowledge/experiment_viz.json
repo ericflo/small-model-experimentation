@@ -33,6 +33,37 @@
     }
    ]
   },
+  "qwen35_4b_materialized_residual_sibling_search": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Frozen construction spans four levels of residual ambiguity",
+     "categories": [
+      "1 live sibling",
+      "2 live siblings",
+      "3 live siblings",
+      "4 live siblings"
+     ],
+     "series": [
+      {
+       "label": "fresh exact-depth-three tasks",
+       "values": [
+        88,
+        88,
+        44,
+        44
+       ]
+      }
+     ],
+     "x_label": "publicly enumerable first-operation residuals",
+     "y_label": "frozen tasks",
+     "y_format": "integer",
+     "note": "Model-free construction receipt only. Every 24-task block has an exact 8/8/4/4 live-sibling balance; all 264 common-panel function fingerprints are unique, and no model was loaded or called.",
+     "source": "experiments/qwen35_4b_materialized_residual_sibling_search/data/procedural/manifest.json"
+    }
+   ]
+  },
   "qwen35_4b_semantic_anchor_coordinate_branching": {
    "charts": [
     {

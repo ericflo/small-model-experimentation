@@ -1,0 +1,22 @@
+{
+  "benchmarks_read": false,
+  "common_panel_sha256": "9041da79d5edbbe0f2098495ce5d635865deab5a29ee4b604eae96a52594e330",
+  "compound_power_at_design_alternative": 0.966,
+  "decision": "CPU_SMOKE_PASS",
+  "elapsed_seconds": 105.30789236724377,
+  "eligible_function_fingerprints": 3525,
+  "excluded_prior_fingerprints": 0,
+  "independent_live_audit_tasks": 34,
+  "manifest_sha256": "a566129343a4c09473005b355f2ea7aa35549efe101dc14dc8d73ab5a0323857",
+  "model_calls": 0,
+  "model_loaded": false,
+  "passed": true,
+  "schema_version": 1,
+  "split_rows": {
+    "confirmation": 192,
+    "mechanics": 24,
+    "qualification": 48
+  },
+  "stage": "smoke",
+  "total_tasks": 264
+}

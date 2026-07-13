@@ -1,0 +1,17 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_materialized_residual_sibling_search"
+external_artifacts: []
+omitted_artifacts: []
+reproducibility:
+  smoke_command: ".venv/bin/python experiments/qwen35_4b_materialized_residual_sibling_search/scripts/run.py --stage smoke"
+  full_command: "sealed pending staged implementation and published locks"
+  required_external_artifacts: []
+local_receipts:
+  construction_manifest:
+    path: "experiments/qwen35_4b_materialized_residual_sibling_search/data/procedural/manifest.json"
+    sha256: "a566129343a4c09473005b355f2ea7aa35549efe101dc14dc8d73ab5a0323857"
+  smoke_summary:
+    path: "experiments/qwen35_4b_materialized_residual_sibling_search/runs/smoke/summary.json"
+    sha256: "2e8c7c54529abe76d89019c65d1ca95b89e66b48672ac941f6fd8d7244631f7b"
+notes: "Model-free design/data smoke passed. No model result or large artifact exists; update transactionally as stages are authorized."

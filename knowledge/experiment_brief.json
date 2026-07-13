@@ -40,6 +40,44 @@
     }
    ]
   },
+  "qwen35_4b_materialized_residual_sibling_search": {
+   "verdict_tag": "Model-free design is ready for mechanics",
+   "concept_primer": "Imagine trying every possible first move, writing down the concrete intermediate state each move creates, and asking the same solver to finish from each state. Public examples then choose among the finished candidates.",
+   "plain_question": "Can concrete intermediate states help a small model finish multi-step rules better than names alone or the same spending on ordinary attempts?",
+   "plain_answer": "Not yet. The scientific design and every model-free construction check pass, but the model has not run. The frozen test contains 264 fresh functions, and all 38,596 planned prompt renderings fit their assigned context limits.",
+   "why_it_matters": "The controls prevent extra attempts, a cheaper exhaustive solver, or a broken answer format from masquerading as an improvement. Treat this as a trustworthy launch pad, not capability evidence.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Fresh functions frozen",
+     "value": "264",
+     "sub": "each has a distinct full-input behavior"
+    },
+    {
+     "label": "Eligible functions found",
+     "value": "3,525",
+     "sub": "enough capacity for every frozen split"
+    },
+    {
+     "label": "Prompt renderings checked",
+     "value": "38,596",
+     "sub": "every task, candidate, and planned condition"
+    },
+    {
+     "label": "Model calls so far",
+     "value": "zero",
+     "sub": "construction and review only"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Fresh tasks cover four ambiguity levels",
+     "chart_read": "The horizontal groups count tasks with one, two, three, or four publicly valid first moves; bar height is the number of frozen tasks. No height is better—the planned 8:8:4:4 balance repeats in every block.",
+     "chart_takeaway": "The first two bars match at 88 and the next two match at 44, confirming the planned ambiguity balance across 264 tasks."
+    }
+   ]
+  },
   "qwen35_4b_semantic_anchor_coordinate_branching": {
    "verdict_tag": "The late anchor writes names, but the consequence test is invalid",
    "concept_primer": "Imagine pausing a scratchpad, placing a candidate name in a dedicated slot, and copying the model's internal state for a different candidate into that slot. The important test is whether later computation follows the copied candidate—not merely whether the next word changes.",

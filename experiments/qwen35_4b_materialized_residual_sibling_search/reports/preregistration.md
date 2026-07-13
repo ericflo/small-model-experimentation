@@ -1,0 +1,419 @@
+# Preregistration: Materialized Residual Sibling Search
+
+**State:** adversarial design and model-free construction lock; no model call is authorized
+
+**Date:** 2026-07-13
+
+The first draft was rejected before implementation. This replacement passed a
+second adversarial read and a model-free smoke. It still requires an
+implementation audit and a separately published mechanics lock before
+Qwen3.5-4B may be constructed. A material post-outcome change requires a new
+experiment.
+
+## Question and novelty boundary
+
+Can a fixed Qwen3.5-4B policy complete useful depth-two residuals when an
+external interpreter materializes the consequences of every possible first
+operation, and can the resulting all-sibling explorer beat all-sibling names
+and candidate-blind sampling at taskwise matched compute?
+
+Interpreter materialization and decomposition are not novel.
+`qwen35_4b_decompose_compose_frontier` already materialized current states in a
+recursive next-operation search. `qwen35_4b_partial_structure_search` already
+found type-only prefix viability unreadable. The narrow new cell is:
+
+1. all 24 bound first operations represented symmetrically;
+2. candidate-specific visible `h(x_i) -> y_i` residual relations;
+3. one strict two-operation completion per sibling;
+4. visible/probe-only assembly and selection with honest hidden grading; and
+5. taskwise sampled- and logical-token-matched monolithic sampling.
+
+A secondary asks whether a cheap no-think materialized viability ranker can
+retain most all-24 coverage with a top-four subset. This is not an internal
+certainty, J-space, training, autonomous-search, or CPU-superiority claim.
+
+## Frozen model and backend
+
+- Only `Qwen/Qwen3.5-4B`, revision
+  `851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a`.
+- One experiment-local pinned vLLM 0.24.0+cu129 runner, bf16, with explicit
+  synchronous scheduling, CUDA-graph geometry, sampling settings, and
+  `logprobs_mode=raw_logprobs` authenticated from resolved engine state.
+- Ranking, suffix generation, and direct generation use the same backend.
+- No adapter, teacher model, training, benchmark, or benchmark-derived data.
+
+## DSL and partial execution
+
+The frozen bank contains 24 bound operations in this exact order:
+
+`reverse`, `sort_asc`, `sort_desc`, `abs_all`, `square`, `negate`,
+`running_sum`, `adjacent_diff`, `add_k(-3,-2,-1,1,2,3)`,
+`mul_k(-2,2,3)`, `take_k(1,2,3,4)`, and `rotate_k(1,2,3)`.
+
+One byte-identical interpreter is used by task construction, exhaustive
+enumeration, candidate materialization, random controls, parsing, assembly,
+selection, and grading. An illegal operation, empty state, length above 64, or
+absolute value above 10^7 returns the typed internal sentinel `INVALID`.
+Targets with any invalid or empty trajectory are rejected. Invalid candidate
+programs are parsed but execution-ineligible. No model text is compiled or
+executed.
+
+Operation aliases are the ASCII single letters `A` through `X` in bank order.
+The tokenizer audit must prove each plain and leading-space form is one ordinary
+token and distinct. The suffix ABI is exactly:
+
+```text
+PROGRAM: <ALIAS> | <ALIAS>
+```
+
+The candidate-blind ABI is exactly:
+
+```text
+PROGRAM: <ALIAS> | <ALIAS> | <ALIAS>
+```
+
+Parsers accept only those full-line forms after the final `</think>`, plus
+known terminal tokens. They reject prose, multiple candidates, unknown aliases,
+wrong arity, and extra lines.
+
+## Fresh multi-label task construction
+
+A deterministic, length-stratified common panel contains 80 unique integer
+lists: exactly 16 at each length four through eight. Values are drawn IID from
+the discrete uniform distribution on integers -9 through 9; duplicates within
+a list are allowed, but duplicate whole lists are redrawn. Every depth-zero
+identity, 24 depth-one, 24² depth-two, and 24³ depth-three behavior is
+enumerated on that panel. A target function is eligible only when its
+common-panel signature:
+
+1. is all valid and nonempty;
+2. is realized by at least one depth-three program;
+3. is realized by no depth-zero, depth-one, or depth-two program; and
+4. has not appeared in another split or any readable compatible procedural DSL
+   gold artifact under `experiments/` (the benchmark tree is never opened).
+
+Concrete target triples and registered target suffixes are also disjoint across
+the experiment's splits. The representative triple is data provenance, not a
+unique or model-facing true-first label.
+
+Each task receives eight visible rows, eight hidden rows, and 16 independently
+generated selector-probe inputs. All inputs have lengths four through eight,
+IID discrete-uniform values from -9 through 9, and are unique across the three
+partitions within a task; within-list duplicates are allowed. Admission uses
+the target function and visible rows only. It requires:
+
+- no shallow program fits all visible rows;
+- all 24 candidate one-step state tables are pairwise distinct;
+- all eight visible target rows are value-distinct, so an index-and-value target
+  derangement exists without inspecting any model output;
+- between one and four public-live siblings; and
+- target outputs are valid and nonempty.
+
+For candidate `h`,
+
+```text
+live(h) := there exists a legal two-operation suffix that maps every visible
+           h(x_i) state to the visible target y_i.
+```
+
+This label is recovered by deployable public 24² enumeration. After visible
+admission, hidden and probe inputs are drawn from independent domain-separated
+streams. An input is redrawn only if duplicated or if the registered target
+would be invalid/empty; no competing candidate is executed during this step.
+Thus targets are domain-valid on every partition, while no hidden correctness
+or selector-probe agreement participates in admission. A candidate that is
+`INVALID` on any selector probe is execution-ineligible.
+
+Construction order is frozen. Eligible common-panel fingerprints are sorted by
+SHA-256, shuffled once by the data seed, and their compatible concrete triples
+are sorted by canonical fixed A-X alias strings. The constructor fills stratum
+queues in scarce-first order `quad, triple, double, single`. Within a queue it
+prioritizes fingerprints whose common-panel program group has the requested
+number of distinct first operations, preserves the shuffled fingerprint order
+within that priority, then tries programs in alias order and at most 32
+domain-separated visible panels. It accepts the first candidate satisfying the
+requested stratum and all visible rules, then marks its fingerprint, triple,
+and suffix used. It permits 10,000 input draws for each hidden/probe partition
+and otherwise fails closed. No retry order depends on model output.
+
+Split/task IDs are assigned after all queues fill. Every 24-task block contains
+exactly eight one-live, eight two-live, four three-live, and four four-live
+tasks. Within each stratum, half use A=LIVE and half B=LIVE. The resulting
+stratum/orientation schedule is task-hash-permuted inside the block. Alias
+meaning remains fixed A-X in bank order; only menu display order is
+task-hash-permuted. Split sizes are mechanics 24, qualification 48 in two
+blocks, and confirmation 192 in eight blocks.
+
+## Prompts and controls
+
+For visible row `x_i -> y_i` and sibling `h`, the materialized prompt renders
+the candidate alias/name and `x_i -> h(x_i) -> y_i`. The all-24 treatment asks
+for one two-operation suffix independently from every sibling.
+
+Controls are frozen before model outcomes:
+
+- `name_only_all24`: candidate alias/name plus original `x_i -> y_i`, without
+  intermediate states;
+- `shuffled_alignment_all24`: identical candidate-state and target token
+  multisets, with a task-hash row derangement that has no value-level fixed
+  pair; if no valid derangement exists, construction fails;
+- `direct`: candidate-blind three-operation generations from original I/O;
+- `exact_public_viability`: public exhaustive suffix enumeration, reported as
+  the deployable CPU/model-free ceiling and dominance reference; and
+- `cpu_24cubed`: full exact public enumeration and the same selector.
+
+Wrong-task evidence was removed because it is an unsatisfiable OOD canary.
+Late materialization is absent because timing is outside scope. Name-only and
+token-preserving alignment derangement isolate semantic state content without
+claiming a complete formatting decomposition.
+
+## Mechanics A: live-sibling suffix and ABI ceiling
+
+For each mechanics task, exact public enumeration supplies all one-to-four live
+siblings. Four suffix conditions receive the same paired `(task,candidate)`
+sampling seed across arms:
+
+1. materialized live relation;
+2. name-only live hypothesis;
+3. token-preserving state/target derangement; and
+4. a supplied publicly fitting suffix, requested as an exact echo.
+
+A candidate-blind direct request separately tests the three-operation ABI.
+Every condition uses the exact later parser and budgets. Parse/cap rates are
+computed over every live-sibling row; capability is task-level any-live visible
+success, matching the primary all-24 policy. Mechanics A passes only if:
+
+- every suffix condition separately has parse rate at least 0.90 and answer-cap
+  contact at most 0.05; the direct condition separately meets the same limits;
+- supplied-suffix visible execution is at least 0.90;
+- materialized any-live task success is at least 0.35;
+- materialized any-live task success exceeds name-only and shuffled by at least
+  0.15 each; and
+- successes include parameterized and parameter-free suffixes.
+
+Failure of an ABI invalidates mechanics. Scientific suffix failure returns
+`NO_ACTIONABLE_MATERIALIZED_RESIDUAL` and seals qualification. The echo arm is
+an interface ceiling, not capability evidence.
+
+## Mechanics B: cheap public-live ranking
+
+Ranking uses the exact no-think rendered prompt and exactly one generated
+answer position. Binary
+prompts ask whether a candidate relation is `LIVE` or `DEAD`; the A/B meaning is
+balanced by task hash across complete blocks. Requested token IDs are the exact
+single-token aliases at position zero. The score is the oriented difference of
+their raw, pre-temperature model log probabilities. Both requested IDs must be
+present exactly once and finite. Binary requests use plain `A` and `B` token
+IDs; listwise requests use the plain `A` through `X` token IDs. Engine arguments
+set `max_logprobs=24` and `logprobs_mode=raw_logprobs`. No grammar, allowed-token
+mask, logit bias, or forced token is permitted. Only stage-one position-zero
+float32 raw log probabilities are extracted; an extra sampled-token entry is
+ignored. This is a behavioral viability score, not a calibrated probability or
+internal state.
+
+The four rankers are:
+
+1. candidate-specific materialized relation;
+2. candidate-specific name-only original I/O;
+3. candidate-specific deranged materialized relation; and
+4. one C25-style listwise original-I/O first-operation prompt that requests raw
+   log probabilities for all 24 fixed A-X aliases. Alias meaning is always bank
+   order; only menu row order is task-hash-permuted.
+
+Random ranks are realized frozen task-hash permutations; analytic expected
+recall@4 = 1/6 is descriptive only. A deterministic float64 surface ranker uses
+candidate-identity one-hot features plus, over the eight candidate-state/target
+rows: mean and maximum absolute length difference, equal-length fraction, mean
+and maximum absolute differences in sum/min/max, mean aligned L1 distance on
+equal-length rows (zero otherwise), and exact-state-equality fraction. It uses
+fixed lambda 1.0 balanced ridge logistic regression, training-fold-only
+z-scoring, tolerance 1e-10, and 10,000 maximum iterations. Mechanics uses
+leave-one-task-out grouped cross-fitting; later splits use one fit on all
+mechanics labels. Scores sort descending with exact ties broken by a hash of
+task ID, candidate, and `rank-tie-v1`.
+
+Metrics are within-task public-live recall@4, hit@4, recall@8, and reciprocal
+rank of the first live sibling. Pooled AUROC is prohibited. Mechanics B passes
+only if:
+
+- every required score is finite and authenticated;
+- materialized mean live recall@4 is at least 0.40 and live hit@4 at least
+  0.65;
+- materialized recall@4 exceeds name-only, deranged, listwise, and the realized
+  frozen random ranker by 0.10, 0.10, 0.10, and 0.15 respectively;
+- materialized recall@4 exceeds the cross-fitted surface ranker by at least
+  0.05;
+- at least 16 tasks and ten concrete operations contribute retrieved live
+  siblings; and
+- static tokenizer/cap receipts show the registered top-four policy can fit in
+  context. Actual sampled/logical cost dominance is decided only from its
+  independent qualification and confirmation runs.
+
+Ranking failure seals only the top-four efficiency secondary. The primary
+all-24 explorer may proceed after Mechanics A passes.
+
+## Qualification
+
+For each of 48 new tasks, generate one suffix per candidate for materialized,
+name-only, and deranged all-24 arms. The same stage seeds keyed only by canonical
+`(task,candidate)` are used across those three arms, never by arm or rank slot;
+prompt content is the sole causal change. Before any hidden output is opened,
+the analyzer freezes:
+
+- every raw pool and exact resource receipt;
+- binary-materialized, name-only, listwise, surface, random, and exact-public
+  top-four candidate IDs;
+- canonical deduplication and visible execution results;
+- probe-output clusters and selected candidate IDs; and
+- taskwise direct-pool match points.
+
+The selector rejects parse/visible failures, deduplicates canonical programs,
+clusters eligible programs by outputs on unlabeled probes, selects the largest
+cluster, and uses frozen task/program hashes for all ties. Probe inputs are
+never model prompts and their outputs are never labels.
+
+The candidate-blind direct master pool grows in its independent frozen order
+only until both taskwise conservative first-over match points exist, with 128 a
+fail-closed ceiling. For task `t`, let `S_t` and `L_t` be all-24 materialized
+sampled-token and logical-token cost. Logical cost includes every independently
+processed prompt/prefill plus sampled decode token and forced continuation.
+
+```text
+K_S(t) = min k such that cumulative direct sampled tokens through k >= S_t
+K_L(t) = min k such that cumulative direct logical tokens through k >= L_t
+```
+
+The prefixes through `K_S` and `K_L` are mandatory first-over baselines;
+`K-1` prefixes are descriptive. Completions are never fractional. Pool
+exhaustion on any task invalidates the stage. The same construction is also
+recorded for the top-four materialized secondary.
+
+After ranks freeze, binary-materialized top four and surface top four each run
+as real independent four-request suffix batches. Scientific top-four outcomes
+never reuse candidates sampled in an all-24 batch because fixed seeds are not
+assumed batch-invariant on this GPU. Seeds remain keyed by canonical task and
+candidate, never rank slot.
+
+For every actual completion `o`, resource accounting is:
+
+```text
+s(o) = n_sampled_tokens
+l(o) = n_stage1_prompt_tokens + n_stage2_prompt_tokens + n_sampled_tokens
+```
+
+Sampled terminal tokens count. Injected close tokens are not added separately
+because the stage-two prefill already counts them. `S_all24(t)` and `L_all24(t)`
+sum the 24 actual materialized suffix completions. `S_top4(t)` and `L_top4(t)`
+sum all 24 one-token binary rank calls plus the four actual top-four suffix
+completions. Top-four cost dominance requires strict `S_top4 < S_all24` and
+`L_top4 < L_all24` independently on every task. Direct first-over uses the same
+`s/l` formulas. Direct requests are generated in fixed chunks of eight; each
+chunk and within-chunk order is frozen before generation, and growing the pool
+never reruns an earlier chunk.
+
+Qualification is a point/futility gate, not claim-grade inference. It passes
+only if:
+
+- every suffix/direct arm passes its own 0.90 parse and 0.05 cap-contact gate;
+- all-24 materialized selected accuracy is at least 0.20 and hidden-correct
+  proposal coverage at least 0.25;
+- selected accuracy and proposal coverage each exceed name-only, deranged,
+  sampled-first-over direct, and logical-first-over direct by at least 0.05;
+- selector capture, selected accuracy divided by coverage when coverage is
+  nonzero, is at least 0.80;
+- gains versus name-only, deranged, and both direct first-over baselines are at
+  least -0.05 in each 24-task shard.
+
+These bullets alone decide `MATERIALIZED_ALL24_QUAL_PASS` and license primary
+confirmation. Their failure seals primary confirmation. `GATE_UNREACHABLE` is
+a valid terminal result if a frozen control makes a registered point margin
+arithmetically impossible; no threshold is relaxed.
+
+If ranking mechanics passed, the independently generated top-four secondary is
+evaluated separately. It receives `TOP4_QUAL_EFFICIENT` only if materialized
+top-four coverage is no more than 0.10 below all-24 coverage, exceeds
+independently generated equal-size surface-top-four coverage by at least 0.05,
+and has strict per-task sampled- and logical-token cost dominance over all-24.
+Otherwise it receives `TOP4_NOT_EFFICIENT` and only the top-four secondary is
+sealed. Its outcome cannot change `MATERIALIZED_ALL24_QUAL_PASS` or primary
+confirmation authorization.
+
+## Confirmation and inference
+
+Confirmation repeats every frozen prompt, parser, selector, seed domain,
+control, resource formula, and gate on 192 untouched tasks in eight 24-task
+blocks. Qualification and confirmation are never pooled.
+
+The sole claim-grade endpoint is taskwise selected hidden accuracy. The four
+primary paired contrasts are all-24 materialized versus:
+
+1. `name_only_all24`;
+2. `shuffled_alignment_all24`;
+3. `direct_sampled_first_over`; and
+4. `direct_logical_first_over`.
+
+For each contrast, let `b` count tasks with treatment correct/control incorrect
+and `c` count the reverse. Its exact one-sided McNemar p-value is
+`P[Binomial(b+c, 0.5) >= b]`, or 1 when `b+c=0`. Holm sorts by `(p,
+comparator_id)`, compares in order to `0.05/(m-i+1)`, and stops at the first
+failure. A contrast passes only with Holm rejection, a point gain of at least
+0.10, and a separately reported marginal paired bootstrap 95% lower bound
+strictly above zero.
+
+Bootstrap replicates resample paired tasks with replacement independently
+inside each frozen 24-task block, concatenate all eight blocks, use the fixed
+bootstrap seed and 10,000 replicates, sort the effect differences, and take the
+order statistic at zero-based index `floor(0.025 * 10000)`. These are marginal,
+not simultaneous, intervals. Coverage is one iff at least one frozen parsed,
+valid, visible-passing proposal passes every hidden row. Selected accuracy is
+one iff the visible/probe-frozen selected proposal passes every hidden row;
+abstention is incorrect. Selector capture is aggregate selected-correct tasks
+divided by coverage-positive tasks.
+
+Coverage contrasts, including derangement coverage, must retain the 0.10 point
+margin. The eight block effects are reported as heterogeneity diagnostics and
+are not vetoes. These primary rules alone decide
+`MATERIALIZED_ALL24_CONFIRMED`; no ranking or top-four outcome participates.
+
+Only if qualification returned `TOP4_QUAL_EFFICIENT`, confirmation also runs
+the same independent top-four operational secondary. It receives
+`TOP4_OPERATIONALLY_REPLICATED` when its coverage remains no more than 0.10
+below all-24 coverage, exceeds surface top-four coverage by at least 0.05, and
+costs strictly less than all-24 in both resource metrics on every task.
+Otherwise it receives `TOP4_NOT_REPLICATED`. This is a frozen-task descriptive
+operational decision with no significance test and no capability or Pareto
+claim. It cannot alter the primary confirmation decision.
+
+Before implementation lock, CPU smoke simulates the entire four-comparator
+compound confirmation rule, including Holm, point margins, and block-stratified
+bootstrap, for 500 trials with 1,000 bootstrap replicates per trial at the
+registered design alternative treatment accuracy 0.40 versus comparator
+accuracy 0.20. This alternative, not the minimum 0.10 boundary, is the powered
+target; the receipt reports compound pass rate without changing any gate.
+
+## Decision table
+
+| Stage | Pass | Failure |
+| --- | --- | --- |
+| CPU smoke | `CPU_SMOKE_PASS` | implementation remains sealed |
+| mechanics A | `MATERIALIZED_SUFFIX_INTERFACE_PASS` | interface invalid or `NO_ACTIONABLE_MATERIALIZED_RESIDUAL` |
+| mechanics B | `CHEAP_SIBLING_RANKING_PASS` | top-four secondary sealed |
+| primary qualification | `MATERIALIZED_ALL24_QUAL_PASS` | `NO_MATCHED_RESIDUAL_SEARCH_GAIN` or interface invalid |
+| top-four qualification | `TOP4_QUAL_EFFICIENT` | `TOP4_NOT_EFFICIENT`; primary unaffected |
+| primary confirmation | `MATERIALIZED_ALL24_CONFIRMED` | `RESIDUAL_SEARCH_NOT_REPLICATED` |
+| top-four confirmation | `TOP4_OPERATIONALLY_REPLICATED` | `TOP4_NOT_REPLICATED`; primary unaffected |
+
+## Claim boundary
+
+A replicated pass would show that external candidate-state materialization
+shifts the fixed model's residual proposal distribution enough to beat names
+and more monolithic samples on this exact DSL. A top-four operational pass
+would only report that its preregistered frozen-task point margins and strict
+resource inequalities held; it would not establish an inferential Pareto or
+capability claim.
+
+Neither result would show internal certainty, J-space transport, autonomous
+hypothesis discovery, weight installation, cross-substrate generality, or
+superiority to exact CPU enumeration. Any residual-policy training test must
+use new tasks and a new experiment directory, and remains logically possible
+even if this untrained interface fails.

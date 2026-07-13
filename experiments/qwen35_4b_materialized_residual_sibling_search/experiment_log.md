@@ -1,0 +1,49 @@
+# Qwen3.5-4B Materialized Residual Sibling Search Experiment Log
+
+## Scaffold
+
+- 2026-07-13: Created as a new experiment scaffold under
+  `structured_execution_and_compilers`.
+- 2026-07-13: Read the immediate parent and closest related lines through the
+  repository discovery workflow. Narrowed novelty to symmetric materialized
+  sibling ranking and residual completion; interpreter materialization itself
+  is prior art.
+- 2026-07-13: Drafted the preregistration and launched three independent
+  read-only adversarial reviews covering statistics, task construction, and
+  scientific/resource confounds. No model call was made.
+- 2026-07-13: All three reviews rejected the first draft. The required
+  unique-first balance was impossible for `negate` and `take_k(1)`; hidden
+  selection was tautological; a 512-token-per-sibling ranker was dominated by
+  simply completing all siblings; suffix reachability was untested; and the
+  registered qualification inference was underpowered.
+- 2026-07-13: Rewrote the design around multi-label public-live siblings,
+  common-panel function fingerprints, non-filtered hidden/probe outcomes,
+  all-24 materialized completion as the primary explorer, cheap no-think raw
+  log-probability ranking as a secondary, a public suffix ABI ceiling,
+  taskwise first-over resource matching, qualification-only futility gates,
+  and a 192-task paired confirmation family. Launched a second adversarial
+  read before implementation. No model call was made.
+- 2026-07-13: Implemented and ran the model-free construction/protocol smoke.
+  It deterministically filled 264 globally disjoint exact-depth-three tasks,
+  independently re-audited 34 public-live sets, verified strict protocol and
+  taskwise resource machinery, and simulated 0.966 compound confirmation pass
+  probability at the registered design alternative. No model was loaded or
+  called and no benchmark content was read.
+- 2026-07-13: The second adversarial read found and closed runner, resource,
+  interface, statistical, and documentation blockers. In particular, raw
+  24-way log probabilities are authenticated; mechanics covers every live
+  sibling; top-four runs are independent; shuffled alignment is in the
+  four-comparator confirmation family; and optional top-four failures cannot
+  veto the primary all-24 decisions.
+- 2026-07-13: Expanded tokenizer smoke from a mechanics subset to every frozen
+  task, all 24 candidates, and every prompt family with condition-specific
+  reserves and prompt/token-ID hashes. Bound the design documents,
+  configuration, source, and tests into the final model-free receipt.
+- 2026-07-13: Three independent reviewers accepted the construction layer after
+  the final fixes. Published design/data lock still authorizes no model call;
+  mechanics implementation requires a separate audit and lock.
+
+## Pending
+
+- Audit and publish the mechanics implementation lock before constructing the
+  model.
