@@ -48,3 +48,14 @@
 - Implementation now freezes scientific config semantics, exact prefix IDs,
   tokenizer/whole-scaffold contracts, clean donors, exact-once hooks, two live
   controls, and every patcher type before outcome retention.
+
+## 2026-07-13 — Implementation boundary anchored
+
+- Pushed the audited implementation and stable catalogs through commit
+  `fa5696c5916024bee7936893c6b59eb738d3f769`.
+- Anchored runner, model operations, coordinate math, additive geometry, pure
+  mechanics evaluator, task data, all tests, and the implementation audit.
+- The canonical scientific-config hash excludes only boundary receipt blocks;
+  changing any seed, gate, prompt, arm, model, lens, or control breaks unlock.
+- This boundary authorizes one outcome-blind representative model smoke. Full
+  calibration and mechanics remain separately gated.

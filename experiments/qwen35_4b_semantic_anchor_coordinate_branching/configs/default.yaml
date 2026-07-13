@@ -166,6 +166,17 @@ design_boundary:
     lens_sha256: e373b6e93956fdfc5cb446e9bee8249655707c8258a7868f0653d11f1ffd0213
     scientific_config_sha256: 776f69349494932876fc12b6a15761425f86fac170e40d00d182ab7466416ac6
 implementation_boundary:
-  status: pending
+  status: anchored
+  commit: fa5696c5916024bee7936893c6b59eb738d3f769
+  hashes:
+    runner_sha256: 0fc67f4518f4181ce0fe83c748574a5ee51f404902082fecb8e6614b89e2f83f
+    model_ops_sha256: 8bffb238ddc968cce47b6263e82d2fcb0a762856e6ac6ed4a9c25b7e95667a2c
+    coordinates_sha256: 58dbc47363d648d108138c1e1bdffd664331969a8a6bbcd197da292273ec7a0d
+    branch_geometry_sha256: 68df4c9b45626eab4e6b0e98aa686f6e58aaa6abc450c55da7e2cfd4c258a150
+    mechanics_sha256: fb8c18476785ec0ff880f14c78e8528bfd7d2b8f34e7517bd115ca767cb1cecf
+    task_data_sha256: e57475c0cd44a98eea904149dd69d44662a98608312f7146d9407a35420aaea8
+    tests_sha256: d63a6e2530d07efaa43344a3fe7ad7eac54f97b67aa93267f6308c25a4f9c668
+    implementation_audit_sha256: 0bd7ca44f3af0ebfc1f0ab26c73af08bd03f4e26bdc5c792cbdc076c6635dc03
+    scientific_config_sha256: 776f69349494932876fc12b6a15761425f86fac170e40d00d182ab7466416ac6
 mechanics_boundary:
   status: pending
