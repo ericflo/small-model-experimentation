@@ -1,5 +1,7 @@
 # Qwen Latent Beam Program Compiler
 
+**Status:** finished
+
 This experiment tests whether a Qwen 4B backbone can write a compact latent
 program into fixed register slots, execute that program with a differentiable
 modular-arithmetic runtime, and improve by selecting among multiple latent

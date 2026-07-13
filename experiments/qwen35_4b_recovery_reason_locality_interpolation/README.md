@@ -1,5 +1,7 @@
 # Locality-first recovery-reason interpolation
 
+**Status:** finished
+
 ## Research Program
 
 - Program: `agentic_breadth_installation`

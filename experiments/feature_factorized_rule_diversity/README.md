@@ -1,5 +1,7 @@
 # Feature-Factorized Rule Diversity
 
+**Status:** finished
+
 Standalone experiment package for testing whether trace-conditioned repair transfer is driven more by isolated primitive factor coverage, analogous multi-factor composition coverage, or a fixed-budget mixture of both.
 
 ## Layout

@@ -1,5 +1,7 @@
 # Qwen LoRA Parser Compiler
 
+**Status:** finished
+
 Standalone QLoRA-attached parser/compiler experiment.
 
 The experiment tests whether live LoRA updates on a small causal language model can make its hidden states readable as a symbolic modular-arithmetic program. The pilot gate is a token-role and symbol tagger trained through the model; the full condition adds a differentiable executor that compiles predicted program symbols into the final answer.

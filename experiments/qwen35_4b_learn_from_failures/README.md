@@ -1,5 +1,7 @@
 # Qwen3.5-4B: Learn from Your Own Failures (DPO)
 
+**Status:** finished
+
 ## Research Program
 - Program: `posttraining_and_adaptation` / `evidence_conditioned_selection`
 - Question: does preference/contrastive training on the model's OWN (correct, incorrect) samples raise deployable greedy@1 beyond SFT-on-positives (closing the coverage->deployable gap)?

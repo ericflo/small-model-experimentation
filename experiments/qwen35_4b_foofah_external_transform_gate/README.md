@@ -1,5 +1,7 @@
 # qwen35_4b_foofah_external_transform_gate
 
+**Status:** finished
+
 Standalone external transformation gate using the Foofah benchmark format.
 
 The experiment freezes a compact table-transformation ABI, loads benchmark cases from an external source, and measures:

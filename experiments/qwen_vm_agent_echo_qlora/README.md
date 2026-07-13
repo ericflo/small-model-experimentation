@@ -1,5 +1,7 @@
 # Qwen VM-Agent ECHO QLoRA
 
+**Status:** finished
+
 This standalone experiment trains a Qwen-attached VM agent. The agent receives a
 natural-language task, an initial typed bytecode program, and VM observations.
 At each private turn it emits one textual edit action or `STOP`; the VM executes

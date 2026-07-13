@@ -1,5 +1,7 @@
 # Qwen Support-Contrastive Meta-ICL
 
+**Status:** finished
+
 Standalone experiment testing whether a support-contrastive LoRA objective makes Qwen3-4B bind text-transformation answers to the provided support examples, rather than only adapting to the prompt format or task family.
 
 Large artifacts, checkpoints, and the public benchmark mirror live under:

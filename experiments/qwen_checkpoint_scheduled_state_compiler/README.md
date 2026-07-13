@@ -1,5 +1,7 @@
 # Qwen Checkpoint-Selected Scheduled-State Compiler
 
+**Status:** finished
+
 Standalone experiment testing whether stage-specific intermediate-state supervision and validation checkpoint selection improve a Qwen numeric-copy compiler on long modular-arithmetic programs.
 
 The compiler reads hidden states from `Qwen/Qwen3-4B`, copies the initial value, operations, and arguments from token-level maps, executes the copied program modulo 97 with an invisible runtime, and reports exact execution metrics. The intervention is not a new parser or task; it is the training policy around state supervision:

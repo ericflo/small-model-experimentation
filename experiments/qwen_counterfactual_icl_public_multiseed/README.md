@@ -1,5 +1,7 @@
 # Counterfactual ICL Public Multiseed Gate
 
+**Status:** finished
+
 Standalone experiment testing whether counterfactual episodic LoRA posttraining improves example-conditioned public text transformation accuracy across seeds.
 
 Large artifacts, checkpoints, and the benchmark mirror live under `/workspace/large_artifacts/qwen_counterfactual_icl_public_multiseed`.

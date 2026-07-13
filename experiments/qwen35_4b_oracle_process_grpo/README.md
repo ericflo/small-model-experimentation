@@ -1,5 +1,7 @@
 # Qwen3.5-4B Oracle Process GRPO
 
+**Status:** finished
+
 This standalone experiment trains Qwen3.5-4B as a process controller inside an executable verifier MDP. The model does not emit operators directly. It chooses among displayed probe actions, and exhaustive search updates the candidate set deterministically.
 
 Large model artifacts are intentionally outside this directory:

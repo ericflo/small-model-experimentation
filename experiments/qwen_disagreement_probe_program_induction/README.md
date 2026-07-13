@@ -1,5 +1,7 @@
 # Qwen Disagreement-Probe Program Induction
 
+**Status:** finished
+
 Standalone experiment for selecting task-local executable transformation
 programs with model-labeled disagreement probes.
 

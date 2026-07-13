@@ -1,5 +1,7 @@
 # Entropy-routed think-pivot optimization round 2
 
+**Status:** finished
+
 This completed follow-up tested whether entropy-routed, outcome-labeled
 thought pivots make Qwen3.5-4B better at held-out reasoning and multi-turn
 coding, comparing bounded successful-token uplift against conventional FTPO

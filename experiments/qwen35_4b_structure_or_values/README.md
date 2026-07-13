@@ -1,5 +1,7 @@
 # Qwen3.5-4B: Is the Wall Structure or Values? (skeleton-then-fill)
 
+**Status:** finished
+
 ## Research Program
 - Program: `structured_execution_and_compilers` / `interpretability_and_diagnostics`
 - Question (C31 follow-up): when the model fails depth-3, is it a STRUCTURE error (wrong op-type sequence) or a VALUE error (right skeleton, wrong params)?

@@ -1,5 +1,7 @@
 # Cyclic Transition Ladder Experiment
 
+**Status:** finished
+
 This experiment tests which transition inductive bias is sufficient for a
 recurrent slot model to learn modular belief-state execution.
 

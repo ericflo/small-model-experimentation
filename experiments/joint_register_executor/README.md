@@ -1,5 +1,7 @@
 # Joint Register Executor Experiment
 
+**Status:** finished
+
 This experiment tests latent recurrent execution for two-register modular programs with cross-register operations such as `A=A+B` and `B=B-A`.
 
 ## Contents

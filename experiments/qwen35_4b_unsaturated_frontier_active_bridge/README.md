@@ -1,5 +1,7 @@
 # Qwen 3.5 4B Unsaturated Frontier Active Bridge
 
+**Status:** finished
+
 This standalone experiment tests active bridge allocation on a broad executable-DSL frontier suite.
 
 The model receives:

@@ -1,5 +1,7 @@
 # Qwen Verified Skill Memory RAG
 
+**Status:** finished
+
 Standalone experiment testing whether train-only verified transformation examples help Qwen solve public text-transformation tasks more consistently.
 
 ## Main Run

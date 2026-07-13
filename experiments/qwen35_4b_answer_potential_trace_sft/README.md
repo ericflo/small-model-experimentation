@@ -1,5 +1,7 @@
 # Qwen3.5-4B Answer-Potential Trace SFT
 
+**Status:** finished
+
 ## Status
 
 **Terminal verdict: `SCORER_NEGATIVE`.** The preregistered G0 calibration failed, so the gated

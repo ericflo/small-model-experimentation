@@ -1,5 +1,7 @@
 # Qwen3.5-4B Bucket-Belief Probe Ranker
 
+**Status:** finished
+
 This standalone experiment tests whether Qwen3.5-4B can convert target-aware probe headroom into a deployable probe-ranking policy.
 
 The model does not emit operators. For each verifier state, the system mines the top 8 candidate probes by target-independent split quality. For each probe, the prompt shows the output buckets that surviving candidate programs would produce. Qwen is trained to predict which bucket contains the hidden target program. At rollout time, the model scores each candidate probe by predicted expected survivors and the verifier executes the probe with the smallest score.

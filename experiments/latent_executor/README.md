@@ -1,5 +1,7 @@
 # Latent Recurrent Executor Experiment
 
+**Status:** finished
+
 This controlled experiment tests whether a neural runtime can execute two-register modular programs one hidden recurrent step at a time.
 
 ## Contents

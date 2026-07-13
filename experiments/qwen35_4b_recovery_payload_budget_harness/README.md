@@ -1,5 +1,7 @@
 # Payload-capable recovery agent harness
 
+**Status:** finished
+
 ## Research Program
 
 - Program: `agentic_breadth_installation`

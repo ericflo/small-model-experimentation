@@ -1,5 +1,7 @@
 # Qwen Structured Bridge Experiment
 
+**Status:** finished
+
 This experiment tests a frozen Qwen encoder attached to a structured latent
 executor. The trainable bridge compiles text into modular program symbols, then
 an invisible executor runs the compiled program to produce the answer.

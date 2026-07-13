@@ -1,5 +1,7 @@
 # Qwen3.5-4B: Does the Confidence Toolkit Survive on Real Code?
 
+**Status:** finished
+
 ## Research Program
 
 - Program: `benchmark_generalization`

@@ -1,5 +1,7 @@
 # qwen35_4b_reliability_exec_opsd_audit
 
+**Status:** finished
+
 Standalone experiment testing two reliability probes and one execution-grounded OPSD locality audit.
 
 The experiment asks whether hidden-correct retrieval adaptations are already preferred by Qwen's own likelihood and whether behavioral counterexample evidence gives a hinted teacher task-specific branch signal that weak retrieval hints did not provide.

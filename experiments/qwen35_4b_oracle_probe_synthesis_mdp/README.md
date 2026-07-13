@@ -1,5 +1,7 @@
 # Qwen3.5-4B Oracle Probe Synthesis MDP
 
+**Status:** finished
+
 This standalone line-2 experiment tests whether Qwen3.5-4B can exploit richer verifier probes. The model does not emit operators. It chooses among eight displayed probe inputs, but those probes are mined from a 96-case bank using target-independent candidate-bucket statistics.
 
 Large model artifacts are intentionally outside this directory:

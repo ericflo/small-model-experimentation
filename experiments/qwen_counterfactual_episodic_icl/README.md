@@ -1,5 +1,7 @@
 # Counterfactual Episodic ICL Posttraining
 
+**Status:** finished
+
 This standalone experiment tests whether answer-only LoRA posttraining on
 counterfactual few-shot episodes improves Qwen's ability to infer a text
 transformation from support examples.

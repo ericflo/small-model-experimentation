@@ -1,5 +1,7 @@
 # Qwen3.5-4B: Do the Structure Findings Generalize? (string/register)
 
+**Status:** finished
+
 ## Research Program
 - Program: `structured_execution_and_compilers` / `interpretability_and_diagnostics`
 - Question: C16 tested the EARLY ladder (C13-15) cross-family. Do the RECENT findings -- C32 (wall-is-structure), C34 (brute-search dominates) -- hold on STRING and REGISTER, or are they list-DSL artifacts?

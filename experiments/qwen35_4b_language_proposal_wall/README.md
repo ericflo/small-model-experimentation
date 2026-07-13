@@ -1,5 +1,7 @@
 # Qwen3.5-4B: Does the Structure-Proposal Wall Exist in Language?
 
+**Status:** finished
+
 ## Research Program
 - Program: `benchmark_generalization` / `structured_execution_and_compilers`
 - Question (complement to C37): C37 showed the model SIMULATES multi-step reasoning in language. Does the C32/C36 structure-PROPOSAL (rule-INDUCTION) wall also persist in language?

@@ -1,5 +1,7 @@
 # Qwen3.5-4B Joint Shortlister Ladder
 
+**Status:** finished
+
 This standalone experiment tests whether Qwen3.5-4B can use an in-context typed operator inventory to emit a joint two-operator shortlist for programs of the form `LEFT(xs), RIGHT(xs)`.
 
 The package keeps source, configs, small datasets, logs, result JSON, CSV summaries, figures, and the written report in this directory. Large model artifacts are stored under `/workspace/large_artifacts/qwen35_4b_joint_shortlister_ladder` so this directory can be downloaded without adapter checkpoints.

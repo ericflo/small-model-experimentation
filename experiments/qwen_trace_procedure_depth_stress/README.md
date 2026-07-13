@@ -1,5 +1,7 @@
 # Qwen Trace Procedure Depth Stress
 
+**Status:** finished
+
 This standalone experiment tests whether a local 4B model can compile natural
 language tasks into explicit executable procedures over a fixed stack ABI.
 

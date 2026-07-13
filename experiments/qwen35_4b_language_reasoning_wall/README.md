@@ -1,5 +1,7 @@
 # Qwen3.5-4B: Does the Compositional Wall Exist in Language?
 
+**Status:** finished
+
 ## Research Program
 - Program: `benchmark_generalization` / `structured_execution_and_compilers`
 - Question: all 36 prior claims are formal/procedural. The model is a LANGUAGE model -- does the compositional (mental-SIMULATION, C13) wall exist in its native linguistic domain?

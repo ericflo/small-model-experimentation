@@ -1,5 +1,7 @@
 # Qwen3.5-4B verified-macro capacity-fit vLLM rerun
 
+**Status:** finished
+
 Status: **the capacity-fit 49,152-token K=4 probe is termination-inadequate. The fresh 61,440-token
 K=4 probe passed its live-capacity preflight, then was manually stopped before any result after a
 CUDA-graph capture-geometry problem was identified. Its preflight-only artifact is preserved; no

@@ -1,5 +1,7 @@
 # Qwen3.5-4B Coverage vs Selection: anatomy of the generation wall
 
+**Status:** finished
+
 ## Research Program
 
 - Program: `structured_execution_and_compilers`

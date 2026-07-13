@@ -1,5 +1,7 @@
 # Qwen Recursive Ephemeral Program Induction
 
+**Status:** finished
+
 Standalone experiment for inducing task-local executable transformation programs
 from sparse examples.
 

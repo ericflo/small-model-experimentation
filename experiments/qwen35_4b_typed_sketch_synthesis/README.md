@@ -1,5 +1,7 @@
 # Qwen 3.5 4B Typed Sketch Synthesis
 
+**Status:** finished
+
 This standalone experiment tests whether `Qwen/Qwen3.5-4B` can improve executable DSL repair by emitting a typed partial program that a bounded symbolic synthesizer completes and verifies on visible execution cases.
 
 The experiment trains two fresh adapters under the same data budget:

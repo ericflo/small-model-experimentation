@@ -1,5 +1,7 @@
 # Qwen Typed Bytecode Expert Iteration
 
+**Status:** finished
+
 Standalone experiment for a Qwen-oriented typed-bytecode training loop. The
 experiment tests whether exact execution and answer-verified program search can
 turn a weak text-to-bytecode compiler into a stronger deployable compiler.

@@ -1,5 +1,7 @@
 # Qwen 3.5 4B GraphIR Self Repair
 
+**Status:** finished
+
 This standalone experiment tests whether Qwen 3.5 4B can improve held-out executable repair by configuring a typed register graph and then applying a verifier-guided graph repair step.
 
 The model receives:

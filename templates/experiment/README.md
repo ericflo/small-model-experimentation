@@ -1,5 +1,7 @@
 # Experiment Title
 
+**Status:** in-progress · since YYYY-MM-DD · what still has to happen before a result exists
+
 ## Research Program
 
 - Program:

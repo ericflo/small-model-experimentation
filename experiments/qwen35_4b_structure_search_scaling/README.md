@@ -1,5 +1,7 @@
 # Qwen3.5-4B: When Does the Model's Structure Beat Brute Search? (depth-4)
 
+**Status:** finished
+
 ## Research Program
 - Program: `structured_execution_and_compilers` / `evidence_conditioned_selection`
 - Question (C34 follow-up): C34 found brute-force structure-search dominates the model at deploy at depth-3 (enumerable space). Does the model's structure-pruning win at depth-4 (16^4=65536, too large to enumerate cheaply)?

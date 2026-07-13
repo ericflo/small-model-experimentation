@@ -1,5 +1,7 @@
 # Qwen Tail Repair Stability Critic
 
+**Status:** finished
+
 Standalone experiment for testing whether a learned tail-repair critic can turn
 mostly-correct length-24 modular programs into stable exact executable programs.
 

@@ -1,5 +1,7 @@
 # Qwen 3.5 4B Static Bridge Ceiling Breaker
 
+**Status:** finished
+
 This standalone experiment tests whether static bridge posttraining learns a trace-conditioned executable repair interface that transfers from support bridge families to deeper held-out composition families.
 
 The model receives:

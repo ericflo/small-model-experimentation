@@ -1,5 +1,7 @@
 # Qwen3.5-4B Wall Climbing: does banking shallow composition unlock deeper coverage?
 
+**Status:** finished
+
 ## Research Program
 
 - Program: `structured_execution_and_compilers`

@@ -1,5 +1,7 @@
 # Qwen3.5-4B Learned Active Trace Policy
 
+**Status:** finished
+
 Standalone experiment package for training and evaluating a learned active execution-query policy after typed sketch synthesis.
 
 The experiment trains two local Qwen3.5-4B LoRA adapters:

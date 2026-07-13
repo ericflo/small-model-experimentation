@@ -1,5 +1,7 @@
 # Qwen 3.5 4B Counterexample-Directed DSL
 
+**Status:** finished
+
 This standalone experiment tests whether visible execution traces become more useful when their examples are chosen to distinguish the target executable program from plausible wrong programs.
 
 The model receives:

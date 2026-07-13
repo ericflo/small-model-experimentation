@@ -1,5 +1,7 @@
 # Transaction-invariant recovery curriculum
 
+**Status:** finished
+
 Teach a single Qwen3.5-4B coding policy to validate whole requests, copy state,
 and commit atomically while preserving its verifier-conditioned recovery loop.
 

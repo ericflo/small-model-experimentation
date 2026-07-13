@@ -1,5 +1,7 @@
 # Qwen3.5-4B: Can SFT Install the Skill of Induction?
 
+**Status:** finished
+
 ## Research Program
 - Program: `posttraining_and_adaptation` / `benchmark_generalization`
 - Question (mission-core, lift the wall): can QLoRA SFT install the general skill of inducing a hidden rule from examples (C38/C39: base can't)?

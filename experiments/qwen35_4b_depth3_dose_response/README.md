@@ -1,5 +1,7 @@
 # Qwen3.5-4B Depth-3 Dose-Response: data-limited or representational cap?
 
+**Status:** finished
+
 ## Research Program
 - Program: `structured_execution_and_compilers`
 - Question: C22 crossed the depth-3 wall but weakly — is the install data-limited or a representational cap?

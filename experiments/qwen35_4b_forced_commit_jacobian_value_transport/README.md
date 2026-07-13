@@ -1,5 +1,7 @@
 # Qwen3.5-4B Forced-Commit Jacobian Value Transport
 
+**Status:** finished
+
 This study first validates an explicit fixed-budget commit action, then asks
 whether a scalar Jacobian continuation-value coordinate changes fresh answers
 under that same action.

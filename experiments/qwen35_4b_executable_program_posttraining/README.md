@@ -1,5 +1,7 @@
 # Qwen 3.5 4B Executable Program Posttraining
 
+**Status:** finished
+
 This standalone experiment tests whether a small posttraining change can move Qwen 3.5 4B from direct text repair into executable program repair.
 
 The model receives a wrong DSL program plus visible failing cases and emits a corrected DSL expression. The evaluator executes generated programs on visible cases, optionally reranks sampled candidates by visible pass count, and then scores hidden cases.

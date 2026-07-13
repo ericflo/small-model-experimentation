@@ -1,5 +1,7 @@
 # Qwen Compositional Curriculum ABI
 
+**Status:** finished
+
 Standalone Track 1 experiment testing whether shallow composed-procedure supervision improves a Qwen stack-ABI compiler.
 
 ## Question

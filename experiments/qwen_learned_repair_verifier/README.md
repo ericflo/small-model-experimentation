@@ -1,5 +1,7 @@
 # Qwen Learned Repair Verifier
 
+**Status:** finished
+
 This experiment trains a small non-oracle verifier to rerank local repairs of
 programs compiled by a fixed Qwen-attached numeric compiler.
 

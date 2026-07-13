@@ -1,5 +1,7 @@
 # real_transform_abi_gate_with_counterexamples
 
+**Status:** finished
+
 Standalone no-training experiment for deterministic transformation ABI coverage with counterexample filtering.
 
 The package defines two independently curated transformation domains:

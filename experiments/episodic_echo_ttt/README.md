@@ -1,5 +1,7 @@
 # Episodic ECHO-TTT
 
+**Status:** finished
+
 This standalone experiment tests whether temporary per-episode gradient updates on environment-observation prediction improve later decisions in a small local language model.
 
 Small experiment files live here. Large checkpoints and caches live under `/workspace/large_artifacts/episodic_echo_ttt`.

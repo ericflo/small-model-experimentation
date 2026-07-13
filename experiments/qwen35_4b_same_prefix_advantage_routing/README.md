@@ -1,5 +1,7 @@
 # Qwen3.5-4B Same-Prefix Advantage Routing
 
+**Status:** finished
+
 ## Status
 
 **Terminal negative at the preregistered split-branch route gate.** Deep had

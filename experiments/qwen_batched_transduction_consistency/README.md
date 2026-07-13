@@ -1,5 +1,7 @@
 # Qwen Batched Transduction Consistency
 
+**Status:** finished
+
 Standalone experiment testing whether batched transduction improves task-level consistency on public text-transformation tasks.
 
 ## Question

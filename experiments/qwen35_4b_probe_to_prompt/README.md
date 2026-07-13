@@ -1,5 +1,7 @@
 # Qwen3.5-4B: Externalize the Latent Readout (probe-to-prompt)
 
+**Status:** finished
+
 ## Research Program
 - Program: `interpretability_and_diagnostics` / `structured_execution_and_compilers`
 - Question: C19 showed the first-op is linearly DECODABLE from the base residual but C20 showed it is NOT steerable. Can we EXTERNALIZE the readout instead -- decode it with the probe and inject it as a PROMPT hint (shift the proposal, the lever C17 allows)?

@@ -1,5 +1,7 @@
 # Qwen3.5-4B: Can the Model Localize Its Own Errors in Multi-Step Reasoning?
 
+**Status:** finished
+
 ## Research Program
 - Program: `benchmark_generalization`
 - Question: extends C40 (single-step metacognition) to multi-step. Does per-step confidence pinpoint WHERE the model first slips?

@@ -1,5 +1,7 @@
 # Qwen3.5-4B Foofah Selective Program Fallback
 
+**Status:** finished
+
 This standalone experiment tests whether a generated Python table-transform program should be used as a fallback to direct JSON generation on Foofah table-transformation tasks.
 
 The experiment starts from a self-contained candidate set with one direct JSON answer and one repaired executable `transform(table)` candidate per task. It then evaluates selector policies that decide whether to keep the direct answer or commit the visible-verified program. Some policies use extra counterexample-style probe inputs and independent direct model answers on those probes.

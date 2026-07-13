@@ -1,5 +1,7 @@
 # Qwen3.5-4B Context-Local Jacobian Clamp
 
+**Status:** finished
+
 This is the mechanism-correcting follow-up to
 `qwen35_4b_jacobian_value_transport`. It asks whether a concept edit at the
 earlier token that represents the selected key can change a separately computed

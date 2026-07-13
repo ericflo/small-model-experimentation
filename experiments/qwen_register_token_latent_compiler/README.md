@@ -1,5 +1,7 @@
 # Qwen Register-Token Latent Compiler
 
+**Status:** finished
+
 This standalone experiment tests whether a Qwen-attached model can write an
 executable modular-arithmetic program into a fixed bank of appended register
 tokens. A trainable bridge reads only those register hidden states, predicts an

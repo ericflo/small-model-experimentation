@@ -1,5 +1,7 @@
 # Qwen3.5-4B Trained vs Frozen Repair MDP Report
 
+**Status:** finished
+
 This top-level README was generated during repository normalization because the imported experiment did not include one.
 
 - Source track: `track-z`

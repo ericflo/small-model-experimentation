@@ -1,5 +1,7 @@
 # Counterexample-Guided Ephemeral Program
 
+**Status:** finished
+
 This standalone experiment tests whether a local language model can be made more task-consistent by inducing a task-local executable program and selecting it with synthetic disagreement probes.
 
 ## Hypothesis

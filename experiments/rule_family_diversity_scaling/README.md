@@ -1,5 +1,7 @@
 # Rule-Family Diversity Scaling Experiment
 
+**Status:** finished
+
 This directory contains the small, download-friendly artifacts for a standalone rule-family diversity scaling experiment.
 
 Large generated artifacts such as model adapters and checkpoints are stored separately in:

@@ -1,5 +1,7 @@
 # Qwen3.5-4B Balanced-Core Answer-Potential SFT
 
+**Status:** in-progress · since 2026-07-12 · Reasoning bank built; the six-arm selection training has not been run.
+
 ## Status
 
 Prospective resource-constrained follow-up to

@@ -1,5 +1,7 @@
 # Sampled Query Filter Executor Experiment
 
+**Status:** finished
+
 This experiment tests latent recurrent execution over correlated belief states when training supervision is limited to one sampled final query value per example.
 
 ## Contents

@@ -1,5 +1,7 @@
 # Qwen3.5-4B: Does the Model Know When It Will Fail?
 
+**Status:** finished
+
 ## Research Program
 - Program: `benchmark_generalization` (first metacognition/calibration claim)
 - Question: the arc pinned a VERIFIED competence boundary (C39). Does the model's own confidence/uncertainty track it -- does it know when it is guessing?

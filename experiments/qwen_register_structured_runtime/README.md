@@ -1,5 +1,7 @@
 # Qwen Register-Token Structured Runtime
 
+**Status:** finished
+
 This standalone experiment tests whether a Qwen-attached model can write a
 program into fixed register tokens and have that program executed by a fixed
 cyclic runtime. The bridge reads only register-token hidden states. It predicts

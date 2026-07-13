@@ -1,5 +1,7 @@
 # Repository search-compress-bank coding curriculum
 
+**Status:** finished
+
 This experiment asks whether `Qwen/Qwen3.5-4B` can acquire broader coding-agent competence by searching real procedural repositories, verifying candidate repairs with executable tests, compressing successful tool trajectories to their replay-necessary core, and banking compact plans and actions with explicit operator balance.
 
 ## Research program

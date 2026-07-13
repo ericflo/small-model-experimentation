@@ -1,5 +1,7 @@
 # Sparse Support Memory Executor Experiment
 
+**Status:** finished
+
 This experiment tests whether exact modular belief-state execution is recovered
 when the recurrent state is an explicit sparse set of support slots rather than
 a fixed-width dense vector.

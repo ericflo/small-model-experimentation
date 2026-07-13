@@ -1,5 +1,7 @@
 # Qwen LoRA Typed-Bytecode Trace Compiler
 
+**Status:** finished
+
 Standalone experiment for training a Qwen 4B model, with QLoRA adapters, to compile natural-language tasks into executable typed bytecode.
 
 The experiment keeps lightweight outputs in this directory and stores large checkpoints separately:

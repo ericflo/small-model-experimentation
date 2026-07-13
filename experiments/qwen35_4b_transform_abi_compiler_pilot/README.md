@@ -1,5 +1,7 @@
 # qwen35_4b_transform_abi_compiler_pilot
 
+**Status:** finished
+
 Standalone compiler pilot for deterministic transformation tasks.
 
 The experiment tests whether Qwen3.5-4B can choose executable ABI programs for a frozen transformation library. It uses constrained candidate scoring rather than free-form JSON decoding: candidate ABI programs are enumerated, the model scores each candidate under the task prompt, and the selected program is executed by a deterministic interpreter.

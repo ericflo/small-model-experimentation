@@ -1,5 +1,7 @@
 # Qwen3.5-4B Overthinking Content Ladder
 
+**Status:** finished
+
 ## Research Program
 
 - Program: `test_time_reasoning_budget`

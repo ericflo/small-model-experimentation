@@ -1,5 +1,7 @@
 # Qwen3.5-4B Generator-Verifier Gap
 
+**Status:** finished
+
 ## Research Program
 
 - Program: `evidence_conditioned_selection` (bridges to `test_time_reasoning_budget` via the thinking axis).

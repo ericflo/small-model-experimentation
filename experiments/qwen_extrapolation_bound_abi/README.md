@@ -1,5 +1,7 @@
 # Qwen Extrapolation-Bound ABI
 
+**Status:** finished
+
 Standalone Track 1 experiment measuring how far a constrained stack-ABI compiler extrapolates past its maximum supervised composition depth.
 
 ## Question

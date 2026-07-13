@@ -1,5 +1,7 @@
 # qwen35_4b_foofah_ephemeral_program_induction
 
+**Status:** finished
+
 Standalone experiment on Foofah table transformations:
 
 - Direct Qwen3.5-4B table generation.

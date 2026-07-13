@@ -1,6 +1,7 @@
 # Qwen3.5-4B Verified Macro Invention Long-Context Rerun
 
-**Status:** ongoing anti-censoring rerun; no fresh task output has been scored. The corrected
+**Status:** finished
+
 plan-given interface passed 16/16 records at think@16,384, overturning the parent's apparent
 low-budget interface limit. The fresh base-smoke arm then proved that 16,384 was still binding for
 induction (131/144 unresolved contacts and 60/144 answer truncations), so those rows were excluded

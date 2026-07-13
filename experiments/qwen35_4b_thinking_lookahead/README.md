@@ -1,5 +1,7 @@
 # Qwen3.5-4B: Thinking vs the Lookahead Wall
 
+**Status:** finished
+
 ## Research Program
 - Program: `structured_execution_and_compilers` / `test_time_reasoning_budget`
 - Question: does test-time THINKING breach the lookahead wall (C25) with no training? (reactivates the C9 lever)

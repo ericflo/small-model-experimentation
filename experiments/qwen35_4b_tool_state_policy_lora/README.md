@@ -1,5 +1,7 @@
 # qwen35_4b_tool_state_policy_lora
 
+**Status:** finished
+
 Standalone experiment for tool-state action-policy learning.
 
 The package uses precomputed Qwen3.5-4B table-transformation traces. Each trace contains:

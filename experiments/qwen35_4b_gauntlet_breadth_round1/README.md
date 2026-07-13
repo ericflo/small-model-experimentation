@@ -1,5 +1,7 @@
 # Gauntlet round 1: breadth-first agentic expert iteration
 
+**Status:** finished
+
 Build a 12-family firewall-clean agentic gym (atoms + multi-turn episodes,
 machine-checkable verifiers), harvest Qwen3.5-4B's own verified thinking
 episodes, think-channel QLoRA SFT, and test whether substrate breadth installs

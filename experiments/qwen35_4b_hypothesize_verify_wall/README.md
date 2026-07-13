@@ -1,5 +1,7 @@
 # Does the installable hypothesize-and-verify skill move the structure wall?
 
+**Status:** finished
+
 ## Research Program
 
 - Program: `structured_execution_and_compilers` (× `posttraining_and_adaptation`)

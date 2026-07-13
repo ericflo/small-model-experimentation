@@ -664,6 +664,12 @@ def build_experiments(programs: list[dict]) -> list[dict]:
         report_path = ROOT / row["primary_report"] if row["primary_report"] else None
         log_path = find_log(exp_dir)
         readme_text = read_text(readme_path) if readme_path and readme_path.exists() else ""
+        status, status_since, status_reason, status_match = parse_readme_status(readme_text)
+        if status_match:
+            # drop the canonical status line from the body we render/excerpt — it
+            # surfaces as the status chip, not as duplicated prose.
+            readme_text = _STATUS_LINE_RE.sub("", readme_text, count=1)
+            readme_text = re.sub(r"\n{3,}", "\n\n", readme_text).lstrip("\n")
         report_text = read_text(report_path) if report_path and report_path.exists() else ""
         finding, finding_source = extract_finding(readme_text, report_text, row["summary"])
         figures, data_files, data_dropped = discover_files(exp_dir)
@@ -689,6 +695,9 @@ def build_experiments(programs: list[dict]) -> list[dict]:
             "report_text": report_text,
             "finding": finding,
             "finding_source": finding_source,
+            "status": status,
+            "status_since": status_since,
+            "status_reason": status_reason,
             "figures": figures,
             "data_files": data_files,
             "data_dropped": data_dropped,
@@ -727,34 +736,40 @@ EXPERIMENT_STATUS = {
     "finished": ("done", "Finished", "Concluded — a result is recorded (a win, a null, or a ruled-out negative)."),
     "in-progress": ("live", "In progress", "Running — set up and under way, no conclusion recorded yet."),
 }
-def load_experiment_status() -> dict[str, dict]:
-    """Curated experiment lifecycle from knowledge/experiment_status.json.
+# The single source of truth for an experiment's lifecycle is a canonical line at
+# the top of its OWN README — co-located with the work, so the agent that concludes
+# an experiment updates it in place, and new experiments inherit it from
+# templates/experiment/README.md (so agents mimic the pattern). Format:
+#   **Status:** finished
+#   **Status:** in-progress · since YYYY-MM-DD · <what remains before it concludes>
+# It is parsed here (and stripped from the rendered body — it surfaces as the status
+# chip) and enforced by scripts/validate_repository.py. Status is NEVER inferred from
+# report prose: preregistrations describe their planned "verdict / negative / not run"
+# and finished experiments say "we did not run <ablation>", so any guess mislabels in
+# both directions. Finished is the default when the line is absent (validate catches
+# a missing/malformed line; the build must not crash on it).
+_STATUS_LINE_RE = re.compile(r"(?im)^[ \t]*\*\*status:\*\*[ \t]*(finished|in-progress)\b[^\n]*$")
+_STATUS_SINCE_RE = re.compile(r"(?i)\bsince[ \t]+(\d{4}-\d{2}-\d{2})\b")
 
-    Finished is the DEFAULT — an experiment is in-progress ONLY if it has an
-    explicit in-progress entry here. Status is deliberately NEVER inferred from
-    report prose: preregistrations describe their planned "verdict / negative /
-    pass-fail" and finished experiments say "we did not run <ablation>", so any
-    regex guess silently mislabels in both directions (that was the old footgun).
-    Explicit-only means a concluded experiment cannot stay stuck in-progress, and
-    an in-progress entry must be dated + reasoned (enforced in CI by
-    validate_repository.py) so it can be reviewed and expired.
 
-    Returns {id: {"status", "since", "reason"}}.
-    """
-    path = KNOWLEDGE / "experiment_status.json"
-    if not path.exists():
-        return {}
-    payload = read_json(path)
-    entries = payload.get("experiments", {}) if isinstance(payload, dict) else {}
-    out: dict[str, dict] = {}
-    for key, value in entries.items():
-        if isinstance(value, dict):
-            status, since, reason = value.get("status"), value.get("since", ""), value.get("reason", "")
+def parse_readme_status(readme_text: str) -> tuple[str, str, str, "re.Match | None"]:
+    """Parse the canonical '**Status:** …' line. Returns (status, since, reason,
+    match). `match` is None when absent (→ defaults to finished)."""
+    m = _STATUS_LINE_RE.search(readme_text)
+    if not m:
+        return "finished", "", "", None
+    status = m.group(1).lower()
+    since = reason = ""
+    if status == "in-progress":
+        rest = m.group(0)[m.end(1) - m.start():]
+        since_match = _STATUS_SINCE_RE.search(rest)
+        if since_match:
+            since = since_match.group(1)
+            reason = rest[since_match.end():]
         else:
-            status, since, reason = value, "", ""
-        if status in EXPERIMENT_STATUS:
-            out[str(key)] = {"status": status, "since": str(since or ""), "reason": str(reason or "")}
-    return out
+            reason = rest
+        reason = reason.strip().lstrip("·—–-:*").strip()
+    return status, since, reason, m
 
 
 def full_command_from_manifest(exp_dir: Path) -> tuple[str, str, bool]:
@@ -1698,19 +1713,11 @@ class SiteBuilder:
         self.claim_anchor_ids = {slugify(str(claim.get("id"))) for claim in self.claims}
         self.viz = load_viz()
         self.briefs = load_briefs()
-        self.status_map = load_experiment_status()
         for exp in self.experiments:
-            # Finished is the DEFAULT. In-progress must be an explicit, dated,
-            # reasoned declaration in knowledge/experiment_status.json — never
-            # inferred from the report, because preregistrations and finished
-            # ablations share the same "verdict / negative / not run" vocabulary,
-            # so any prose guess silently mislabels in both directions. Explicit-
-            # only means nothing rots stuck in-progress; CI (validate_repository.py)
-            # keeps the in-progress list honest (dated, reasoned, non-stale).
-            meta = self.status_map.get(exp["id"]) or {}
-            exp["status"] = meta["status"] if meta.get("status") in EXPERIMENT_STATUS else "finished"
-            exp["status_since"] = meta.get("since", "")
-            exp["status_reason"] = meta.get("reason", "")
+            # exp["status"]/["status_since"]/["status_reason"] are already parsed
+            # from the experiment's own README (build_experiments → the canonical
+            # "**Status:** …" line). Finished is the default; validate_repository.py
+            # enforces the line's presence and freshness.
             brief = self.briefs.get(exp["id"], {})
             tone = str(brief.get("verdict_tone", "")).strip()
             exp["outcome"] = tone if tone in {"positive", "negative", "mixed", "neutral"} else ""

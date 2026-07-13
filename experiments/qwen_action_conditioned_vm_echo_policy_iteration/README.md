@@ -1,5 +1,7 @@
 # Qwen Action-Conditioned VM-ECHO Policy Iteration
 
+**Status:** finished
+
 This standalone experiment tests whether a frozen-Qwen bytecode compiler can
 improve by learning the consequences of its own generated candidate programs.
 

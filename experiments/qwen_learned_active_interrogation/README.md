@@ -1,5 +1,7 @@
 # Qwen Learned Active Interrogation
 
+**Status:** finished
+
 Standalone experiment for testing whether a frozen model can improve text-transformation accuracy by choosing which unlabeled examples should be revealed before answering held-out rows.
 
 Large reusable artifacts are stored under:

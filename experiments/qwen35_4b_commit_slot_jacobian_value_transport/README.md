@@ -1,5 +1,7 @@
 # Qwen3.5-4B Commit-Slot Jacobian Value Transport
 
+**Status:** finished
+
 This study tests whether a syntax-only forced answer slot reveals a usable
 alias decision and, if so, whether a scalar Jacobian certainty coordinate can
 improve that decision.

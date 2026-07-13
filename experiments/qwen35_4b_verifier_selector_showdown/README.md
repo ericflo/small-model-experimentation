@@ -1,5 +1,7 @@
 # Qwen3.5-4B Verifier vs Visible Selector Showdown
 
+**Status:** finished
+
 ## Research Program
 
 - Program: `evidence_conditioned_selection`

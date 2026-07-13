@@ -1,5 +1,7 @@
 # Qwen3.5-4B Pareto Policy Integration
 
+**Status:** finished
+
 Status: **stopped negative on 2026-07-12 before teacher audit**. This clean
 successor removed the prior experiment's arbitrary `+0.10` teacher hurdle and
 gave any replicated, statistically credible positive paired gain a path

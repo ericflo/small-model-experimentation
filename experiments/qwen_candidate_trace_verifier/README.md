@@ -1,5 +1,7 @@
 # Qwen Candidate-Trace Verifier
 
+**Status:** finished
+
 This experiment trains a transformer verifier over candidate execution traces for
 local repairs of Qwen-compiled modular-arithmetic programs.
 

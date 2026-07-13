@@ -1,5 +1,7 @@
 # Qwen VM-ECHO Trace Distillation
 
+**Status:** finished
+
 This experiment tests whether a frozen-Qwen bytecode compiler improves when it
 is trained not only to emit a target program, but also to predict the VM
 observations produced by that program.

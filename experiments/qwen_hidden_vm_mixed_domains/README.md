@@ -1,5 +1,7 @@
 # Qwen Hidden VM Mixed Domains
 
+**Status:** finished
+
 This experiment trains a Qwen-attached hidden virtual machine compiler on multiple deterministic task families. The model reads natural-language prompts, writes an invisible typed program into fixed slots, executes that program in a deterministic runtime, and returns the runtime answer.
 
 Small files stay in this experiment directory. Large model adapters and head checkpoints are stored separately under:

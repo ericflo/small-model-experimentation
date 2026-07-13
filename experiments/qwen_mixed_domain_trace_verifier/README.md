@@ -1,5 +1,7 @@
 # Qwen Mixed-Domain Trace Verifier
 
+**Status:** finished
+
 This standalone experiment tests whether a learned candidate-trace verifier can
 select better hidden-VM programs from a frozen Qwen-attached mixed-domain
 compiler. The compiler proposes an executable VM trace; the verifier reranks

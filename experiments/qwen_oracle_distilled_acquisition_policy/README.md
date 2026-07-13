@@ -1,5 +1,7 @@
 # Qwen Oracle-Distilled Acquisition Policy
 
+**Status:** finished
+
 Standalone experiment for testing whether a supervised acquisition-row scorer can choose useful clarifying examples for text-transformation tasks.
 
 Large reusable artifacts are stored under:

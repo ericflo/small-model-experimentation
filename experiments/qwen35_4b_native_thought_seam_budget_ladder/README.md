@@ -1,5 +1,7 @@
 # Qwen3.5-4B Native-Thought Seam Budget Ladder
 
+**Status:** finished
+
 This study selects the smallest naturally closing Qwen3.5-4B thought cap from
 256/512/1024 on fresh list tasks, then repeats that exact cap on untouched tasks
 before any Jacobian value test.

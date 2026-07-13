@@ -1,5 +1,7 @@
 # Qwen Counterfactual Trace Preference Distillation
 
+**Status:** finished
+
 Standalone experiment for testing whether a Qwen-attached typed-bytecode
 compiler improves when repair candidates are trained with hard counterfactual
 trace preferences instead of final-answer labels alone.

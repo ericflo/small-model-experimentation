@@ -1,5 +1,7 @@
 # Qwen Teacher-Distilled Slot Compiler
 
+**Status:** finished
+
 Standalone experiment testing whether an oracle slot teacher improves a QLoRA-adapted `Qwen/Qwen3-4B` numeric-copy compiler on long modular-arithmetic programs.
 
 The student compiler reads the full prompt hidden sequence, predicts ordered executable slots, copies numeric and operation symbols from token-level maps, and executes the copied program modulo 97. The teacher condition adds two auxiliary signals during training:

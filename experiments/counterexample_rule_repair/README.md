@@ -1,5 +1,7 @@
 # Counterexample Rule Repair Experiment
 
+**Status:** finished
+
 This directory contains the small, download-friendly artifacts for a standalone counterexample-to-rule repair experiment.
 
 Large generated artifacts such as model adapters and checkpoints are stored separately in:

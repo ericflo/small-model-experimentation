@@ -1,5 +1,7 @@
 # Qwen3.5-4B Jacobian Transport Control Replication
 
+**Status:** finished
+
 This experiment independently replicates the perfect-but-invalid result from
 `qwen35_4b_context_local_jacobian_clamp`. It freezes that experiment's lens and
 band, generates fresh mappings, and repairs the only failed measurement: random

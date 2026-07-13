@@ -1,5 +1,7 @@
 # qwen35_4b_code_abi_oracle_coverage_ladder
 
+**Status:** finished
+
 Standalone no-training experiment for a code-primitive ABI oracle coverage gate.
 
 The experiment measures whether a small verified ABI of deterministic code primitives can express decomposable MBPP-style tasks. It does not train or save model checkpoints. It builds task slices, enumerates ABI candidate programs, verifies them by execution, and reports coverage, false-visible-pass rates, candidate counts, and task-slice diagnostics.

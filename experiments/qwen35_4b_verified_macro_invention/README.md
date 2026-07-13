@@ -1,6 +1,7 @@
 # Qwen3.5-4B Verified Macro Invention
 
-**Status:** stopped after the final task-independent interface gate failed. No fresh induction
+**Status:** finished
+
 smoke or full evaluation was run; the verified-macro hypothesis remains unresolved.
 
 **2026-07-10 follow-up:** the separate

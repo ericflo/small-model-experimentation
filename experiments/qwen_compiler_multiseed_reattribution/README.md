@@ -1,5 +1,7 @@
 # Qwen Compiler Multi-Seed Reattribution
 
+**Status:** finished
+
 This standalone experiment tests whether a one-shot executable latent compiler reliably learns length-24 modular programs across random seeds.
 
 The result-bearing arms are:

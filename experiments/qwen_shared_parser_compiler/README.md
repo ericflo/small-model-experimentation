@@ -1,5 +1,7 @@
 # Qwen Shared Parser Compiler
 
+**Status:** finished
+
 This experiment tests whether a shared token parser can read a frozen Qwen
 hidden sequence, recover ordered program symbols, and configure an executable
 latent modular program without token-span inputs at inference time.

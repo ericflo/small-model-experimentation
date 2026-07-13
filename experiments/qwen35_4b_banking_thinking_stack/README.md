@@ -1,5 +1,7 @@
 # Qwen3.5-4B: Do Banking and Thinking Stack?
 
+**Status:** finished
+
 ## Research Program
 - Program: `structured_execution_and_compilers` / `test_time_reasoning_budget`
 - Question: do banking (C25, installs lookahead-distance ranking) and TEST-TIME thinking (C26, amplifies recognition) compose?

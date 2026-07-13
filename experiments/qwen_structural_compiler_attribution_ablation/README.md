@@ -1,5 +1,7 @@
 # Qwen Structural Compiler Attribution Ablation
 
+**Status:** finished
+
 This standalone experiment tests why a tuned executable latent compiler learns length-24 modular programs.
 
 The arms isolate:

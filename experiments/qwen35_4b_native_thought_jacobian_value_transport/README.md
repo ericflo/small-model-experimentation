@@ -1,5 +1,7 @@
 # Qwen3.5-4B Native-Thought Jacobian Value Transport
 
+**Status:** finished
+
 This experiment asks whether a task-general scalar continuation-value coordinate
 inside the replicated 24-token J space is causally consumed from a natural token
 inside Qwen3.5-4B's own `<think>` span.

@@ -1,5 +1,7 @@
 # Qwen Register Trace Refiner
 
+**Status:** finished
+
 This experiment tests whether a learned verifier can improve a Qwen3-4B register-program compiler by searching local edits around the compiled latent program and selecting a better execution trace.
 
 The experiment is standalone: it packages the fixed input compiler and the trained refiner under `large_artifacts/qwen_register_trace_refiner/`, while the experiment directory contains only source, logs, metrics, figures, and write-ups.

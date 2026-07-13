@@ -1,5 +1,7 @@
 # Qwen3.5-4B Operator Inventory Scaling Stress
 
+**Status:** finished
+
 Standalone scaling stress test for typed operator inventory search.
 
 The experiment expands a same-signature operator library from single digits to hundreds of `list[int] -> int` operators, then compares exhaustive operator-hole search across one-hole and two-hole program templates. The goal is to find where full inventory enumeration remains cheap and identifiable, and where a Qwen3.5-4B inventory-conditioned top-k shortlister would become necessary.

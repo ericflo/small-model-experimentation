@@ -1,5 +1,7 @@
 # Factor Recombination Ladder
 
+**Status:** finished
+
 Standalone experiment package for testing whether trace-conditioned repair learns reusable factor recombination, rather than only learning seen rule templates.
 
 ## Result

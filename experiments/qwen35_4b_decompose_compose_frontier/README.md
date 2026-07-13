@@ -1,5 +1,7 @@
 # Qwen3.5-4B Decompose-and-Compose Frontier
 
+**Status:** finished
+
 ## Research Program
 
 - Program: `structured_execution_and_compilers`. Mission: **extend the fixed Qwen3.5-4B frontier** — no

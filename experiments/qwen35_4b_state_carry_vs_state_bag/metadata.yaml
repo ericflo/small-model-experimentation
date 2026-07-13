@@ -5,10 +5,9 @@ source_track: "new"
 path: "experiments/qwen35_4b_state_carry_vs_state_bag"
 primary_readme: "experiments/qwen35_4b_state_carry_vs_state_bag/README.md"
 primary_report: "experiments/qwen35_4b_state_carry_vs_state_bag/reports/report.md"
-summary: "**Status: the analysis-dispatch fix has passed a fresh source-bound G0; the paired seed-7401 LoRA pilot retry is next. The first paired pilot remains preserved but invalidated, and no scientific LoRA verdict exists yet.**"
+summary: "When parameters, data, optimization, readout, and decoder-layer token applications are matched, does organizing repeated Qwen computation as one serially carried state produce a representation that is more capable than aggregating the same number of independent shallow states?"
 tags:
   - "latent-state"
-  - "lora"
   - "small-model"
 research_programs:
   - "posttraining_and_adaptation"
@@ -31,4 +30,4 @@ file_counts:
   yaml: 4
   [none]: 1
 total_files: 39
-total_size_bytes: 406635
+total_size_bytes: 406612

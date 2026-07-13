@@ -1,5 +1,7 @@
 # qwen35_4b_foofah_program_repair_agent
 
+**Status:** finished
+
 Standalone experiment on Foofah table transformations.
 
 The experiment asks whether Qwen3.5-4B becomes more useful when it writes an

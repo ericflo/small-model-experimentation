@@ -1,5 +1,7 @@
 # Qwen3.5-4B Cross-Family Laws
 
+**Status:** finished
+
 ## Research Program
 
 - Program: `structured_execution_and_compilers`

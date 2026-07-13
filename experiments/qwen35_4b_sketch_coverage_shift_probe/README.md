@@ -1,5 +1,7 @@
 # Qwen3.5-4B Sketch Coverage Shift Probe
 
+**Status:** finished
+
 Standalone falsification experiment for typed-sketch verified completion under task shift.
 
 The experiment does not train a new adapter. It tests the load-bearing coverage assumption behind typed-sketch synthesis: when the task substrate changes, does the correct executable completion still appear in the bounded candidate set?

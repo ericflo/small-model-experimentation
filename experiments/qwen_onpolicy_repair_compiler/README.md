@@ -1,5 +1,7 @@
 # Qwen On-Policy Repair-to-Compiler
 
+**Status:** finished
+
 This experiment tests whether verified local program repairs can be distilled into the Qwen-attached compiler policy itself.
 
 The compiler emits an executable modular-arithmetic program from a prompt. For each on-policy compiler output, the training loop enumerates nearby edits, keeps locally verified repaired programs, and fine-tunes the same QLoRA/compiler head toward those targets. The central measurement is whether the deployable compiler improves on fresh prompts, not whether target-aware repair search has headroom.

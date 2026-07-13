@@ -1,5 +1,7 @@
 # End-to-End Structured Slot Executor Experiment
 
+**Status:** finished
+
 This experiment tests whether a structured slot executor can learn both initial
 support formation and recurrent modular belief-state transitions in one model.
 

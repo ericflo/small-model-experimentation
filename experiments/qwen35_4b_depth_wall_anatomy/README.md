@@ -1,5 +1,7 @@
 # Qwen3.5-4B Depth-Wall Anatomy
 
+**Status:** finished
+
 ## Research Program
 
 - Program: `structured_execution_and_compilers`. Mission: **understand** the fixed Qwen3.5-4B's

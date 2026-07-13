@@ -1,5 +1,7 @@
 # Qwen3.5-4B Inventory Shortlister Training
 
+**Status:** finished
+
 Standalone Qwen3.5-4B QLoRA experiment for inventory-conditioned operator shortlisting.
 
 The experiment trains the model to select operator aliases for LEFT and RIGHT slots in two-operator programs over a 512-operator `list[int] -> int` inventory. Evaluation forms candidate budgets by crossing top aliases for each slot:

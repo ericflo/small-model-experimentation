@@ -1,5 +1,7 @@
 # qwen35_4b_foofah_direct_vs_abi
 
+**Status:** finished
+
 Standalone external benchmark comparison:
 
 - Frozen ABI oracle coverage on Foofah table transformations.

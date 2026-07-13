@@ -5,7 +5,7 @@ source_track: "new"
 path: "experiments/qwen35_4b_verified_macro_invention"
 primary_readme: "experiments/qwen35_4b_verified_macro_invention/README.md"
 primary_report: "experiments/qwen35_4b_verified_macro_invention/reports/report.md"
-summary: "**Status:** stopped after the final task-independent interface gate failed. No fresh induction smoke or full evaluation was run; the verified-macro hypothesis remains unresolved."
+summary: "smoke or full evaluation was run; the verified-macro hypothesis remains unresolved."
 tags:
   - "small-model"
   - "verification"
@@ -34,4 +34,4 @@ file_counts:
   py: 26
   yaml: 6
 total_files: 101
-total_size_bytes: 14080795
+total_size_bytes: 14080627

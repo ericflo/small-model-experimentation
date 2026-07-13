@@ -1,5 +1,7 @@
 # Qwen3.5-4B: Beating Sample-More with the Model's Own Uncertainty
 
+**Status:** finished
+
 ## Research Program
 - Program: `benchmark_generalization`
 - Question: turn C40's calibrated implicit confidence (answer-token probability) into a compute tool -- can it beat uniform sample-more?

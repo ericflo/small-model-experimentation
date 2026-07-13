@@ -1,5 +1,7 @@
 # Adaptive Cognitive Kernel
 
+**Status:** finished
+
 This experiment tests whether a task-conditioned recurrent runtime with temporary adapter-style weight edits can learn compositional execution better than ordinary fixed-weight controllers.
 
 The experiment is standalone. Small artifacts live in this directory. Large checkpoints live under:

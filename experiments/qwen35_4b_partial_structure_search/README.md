@@ -1,5 +1,7 @@
 # Qwen3.5-4B Partial-Structure Recognition-Guided Search
 
+**Status:** finished
+
 Can Qwen3.5-4B recognize completable partial program skeletons well enough to prune depth-5 search and beat matched-compute sampling and unguided expansion?
 
 ## Research Program

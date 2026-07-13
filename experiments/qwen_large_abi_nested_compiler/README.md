@@ -1,5 +1,7 @@
 # Qwen Large ABI Nested Compiler
 
+**Status:** finished
+
 Standalone experiment testing whether a constrained stack-ABI compiler still works when the primitive library becomes large and when tasks require nested sub-procedures rather than only linear chains.
 
 ## Question

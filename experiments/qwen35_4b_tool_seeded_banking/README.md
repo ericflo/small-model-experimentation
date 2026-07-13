@@ -1,5 +1,7 @@
 # Qwen3.5-4B Tool-Seeded Banking: does tool-search + banking cross the depth-3 wall?
 
+**Status:** finished
+
 ## Research Program
 - Program: `structured_execution_and_compilers`
 - Program question: the C21 positive control — does seeding banking with tool-found depth-3 solutions cross the depth-3 wall self-banking couldn't?

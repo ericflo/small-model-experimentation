@@ -1,5 +1,7 @@
 # Qwen3.5-4B Oracle-Distilled Semantic Verifier
 
+**Status:** finished
+
 This top-level README was generated during repository normalization because the imported experiment did not include one.
 
 - Source track: `track-z`

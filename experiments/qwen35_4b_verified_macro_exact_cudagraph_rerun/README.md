@@ -1,5 +1,7 @@
 # Qwen3.5-4B verified-macro exact CUDA-graph vLLM rerun
 
+**Status:** finished
+
 Status: **terminal setup negative. Both fresh exact-capture K=4 probes are complete and
 termination-inadequate. No K=12 matrix, semantic analysis, or macro result is eligible, and no
 decoded or scored content has been inspected.**

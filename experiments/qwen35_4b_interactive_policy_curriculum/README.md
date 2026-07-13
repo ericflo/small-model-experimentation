@@ -1,5 +1,7 @@
 # Interactive policy curriculum: oracle DAgger to execution-reward RL
 
+**Status:** finished
+
 This completed preregistered study tested whether correction at the model's
 own live multi-turn states could improve Qwen3.5-4B beyond the incumbent C53
 blend and unlock guarded whole-episode reward training. It did not: the

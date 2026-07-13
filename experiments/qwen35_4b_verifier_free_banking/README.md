@@ -1,5 +1,7 @@
 # Qwen3.5-4B: Can Confidence Replace the Verifier in the Banking Flywheel?
 
+**Status:** finished
+
 ## Research Program
 
 - Program: `posttraining_and_adaptation` (× `evidence_conditioned_selection`)

@@ -1,5 +1,7 @@
 # Execution-Conditioned Repair LoRA Experiment
 
+**Status:** finished
+
 This workspace implements the experiment brief in `/root/.codex/attachments/67be2ef6-a2f4-424d-a411-f0479b10c076/pasted-text-1.txt`.
 
 Core question:

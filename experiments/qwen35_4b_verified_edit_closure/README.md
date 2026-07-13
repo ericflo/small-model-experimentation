@@ -1,5 +1,7 @@
 # Qwen 3.5 4B Verified Edit Closure
 
+**Status:** finished
+
 This standalone experiment tests whether Qwen 3.5 4B executable-DSL repair improves when model candidates are expanded by a bounded symbolic edit neighborhood and selected by visible execution.
 
 The model receives:

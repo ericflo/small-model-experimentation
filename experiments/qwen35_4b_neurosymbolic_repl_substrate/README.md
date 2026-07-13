@@ -1,5 +1,7 @@
 # Qwen3.5-4B Neurosymbolic REPL Substrate + Failure Profile
 
+**Status:** finished
+
 ## Research Program
 
 - Program: `structured_execution_and_compilers` (extends claim C1: executable intermediates help).

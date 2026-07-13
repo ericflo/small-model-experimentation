@@ -1,5 +1,7 @@
 # Qwen3.5-4B Specialist Policy Integration
 
+**Status:** finished
+
 Status: **stopped negative** on 2026-07-12 before best-of-8 or specialist
 training. The tools core's incumbent score is 0.994, making its frozen
 `S0 + 0.10` qualification target 1.094 on a score bounded by 1.0. Because all

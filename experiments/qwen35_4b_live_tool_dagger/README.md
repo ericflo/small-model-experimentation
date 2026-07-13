@@ -1,5 +1,7 @@
 # qwen35_4b_live_tool_dagger
 
+**Status:** finished
+
 Standalone live tool-state DAgger-style pilot.
 
 The experiment generates fresh Qwen3.5-4B traces for a table transformation environment:

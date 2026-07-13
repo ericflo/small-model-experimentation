@@ -1,5 +1,7 @@
 # Qwen Dense-State DAgger VM Agent
 
+**Status:** finished
+
 This standalone experiment trains `Qwen/Qwen3-4B` as one recurrent transition
 inside a typed bytecode VM loop.
 

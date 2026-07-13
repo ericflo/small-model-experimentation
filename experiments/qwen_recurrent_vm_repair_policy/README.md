@@ -1,5 +1,7 @@
 # Qwen Recurrent VM Repair Policy
 
+**Status:** finished
+
 Standalone experiment for testing whether a Qwen-attached typed-bytecode
 compiler improves when the model is trained as a repeated repair transition
 operator instead of a one-shot program generator.

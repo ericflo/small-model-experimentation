@@ -1,5 +1,7 @@
 # Qwen Progressive Repair Compiler
 
+**Status:** finished
+
 This experiment trains a non-oracle repair selector for a frozen Qwen-attached
 numeric program compiler. Each prompt is compiled into an executable
 modular-arithmetic program, local candidate repairs are enumerated, and a small

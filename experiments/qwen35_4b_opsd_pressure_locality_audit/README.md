@@ -1,5 +1,7 @@
 # qwen35_4b_opsd_pressure_locality_audit
 
+**Status:** finished
+
 Standalone no-training audit for positive-only on-policy self-distillation.
 
 The audit asks whether a privileged hinted teacher provides dense token-level signal at the exact places where hidden-correct code diverges from visible-pass hidden-wrong near-misses. It is a gate before any OPSD/OPD training.

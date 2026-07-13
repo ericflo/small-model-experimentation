@@ -1,5 +1,7 @@
 # Qwen Active Crystallizer Public Gate
 
+**Status:** finished
+
 Standalone experiment testing whether frozen Qwen probe labels can turn sparse example-level transformation behavior into a deterministic program selected from a broad candidate DSL.
 
 ## Question

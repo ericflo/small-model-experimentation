@@ -1,5 +1,7 @@
 # Qwen Numeric-Copy Compiler
 
+**Status:** finished
+
 Standalone numeric-copy compiler experiment for a Qwen causal language model.
 
 The experiment tests whether a model can learn token roles and ordered program slots while numeric and operator symbols are copied from a deterministic token map. The frozen pilot trains only the compiler heads over frozen hidden states. The full condition trains QLoRA adapters plus the same numeric-copy compiler.

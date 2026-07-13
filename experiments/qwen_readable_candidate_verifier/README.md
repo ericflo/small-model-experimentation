@@ -1,5 +1,7 @@
 # Qwen Readable Candidate Verifier
 
+**Status:** finished
+
 Standalone experiment for testing whether Qwen can select executable repair
 candidates when the task and candidate are rendered as readable pseudocode and
 execution text.

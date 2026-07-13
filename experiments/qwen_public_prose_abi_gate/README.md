@@ -1,5 +1,7 @@
 # Qwen Public PROSE ABI Gate
 
+**Status:** finished
+
 Standalone experiment testing whether a frozen deterministic transformation ABI covers public Microsoft PROSE `Transformation.Text` tasks under within-task held-out validation.
 
 ## Question

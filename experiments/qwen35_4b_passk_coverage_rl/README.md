@@ -1,5 +1,7 @@
 # qwen35_4b_passk_coverage_rl
 
+**Status:** finished
+
 This top-level README was generated during repository normalization because the imported experiment did not include one.
 
 - Source track: `track-z`

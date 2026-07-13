@@ -1,5 +1,7 @@
 # Qwen Budgeted Action-Value Compiler
 
+**Status:** finished
+
 Standalone experiment for action-value learning over executable bytecode prefixes.
 
 The experiment trains a frozen-Qwen bytecode compiler head, then collects partial-program actions from typed beam search. Each action receives three offline targets:

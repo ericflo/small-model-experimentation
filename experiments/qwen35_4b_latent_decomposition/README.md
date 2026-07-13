@@ -1,5 +1,7 @@
 # Qwen3.5-4B Latent Decomposition: be your own tool-search
 
+**Status:** finished
+
 ## Research Program
 - Program: `structured_execution_and_compilers`
 - Question: can the FIXED model climb the depth wall by proposing+verifying one DSL op at a time (be its own

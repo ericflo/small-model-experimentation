@@ -1,5 +1,7 @@
 # qwen35_4b_foofah_adaptive_program_budget_router
 
+**Status:** finished
+
 This standalone package evaluates adaptive budget policies over a fixed Foofah-style table-transformation candidate pool. Each task has one direct JSON completion and five executable-program strategy completions. The experiment asks whether a cheap deployable router can decide when the expensive program portfolio is worth running.
 
 Primary comparison:

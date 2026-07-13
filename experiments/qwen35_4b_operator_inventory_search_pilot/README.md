@@ -1,5 +1,7 @@
 # Qwen3.5-4B Operator Inventory Search Pilot
 
+**Status:** finished
+
 Standalone no-training pilot for open-vocabulary operator identification.
 
 The experiment tests whether type-colliding held-out aggregate operators can be recovered by operator-level inventory search before training an inventory-conditioned Qwen3.5-4B sketcher. Every aggregate candidate has signature `list[int] -> int`, so type alone cannot identify the operator.

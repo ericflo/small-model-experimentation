@@ -1,5 +1,7 @@
 # Qwen3.5-4B Activation Steering: is the latent first-op causally usable?
 
+**Status:** finished
+
 ## Research Program
 
 - Program: `structured_execution_and_compilers`

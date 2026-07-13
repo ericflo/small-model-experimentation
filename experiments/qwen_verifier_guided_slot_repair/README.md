@@ -1,5 +1,7 @@
 # Qwen Verifier-Guided Slot Repair
 
+**Status:** finished
+
 Standalone experiment testing whether exact-answer verifier search can repair near-miss compiled programs from a QLoRA-adapted `Qwen/Qwen3-4B` numeric-copy compiler.
 
 The compiler reads prompt hidden states, copies an initial value, operation sequence, and operation arguments from token-level maps, and executes the copied program modulo 97. The repair evaluator searches small local edits around the copied program and keeps the highest-prior candidate whose intermediate state trajectory satisfies the verifier.

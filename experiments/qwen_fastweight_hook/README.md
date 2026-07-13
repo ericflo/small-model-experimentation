@@ -1,5 +1,7 @@
 # Qwen Fast-Weight Hook Experiment
 
+**Status:** finished
+
 This experiment tests whether a frozen Qwen3.5-4B model gains accuracy from an inserted invisible recurrent fast-weight runtime.
 
 ## Contents

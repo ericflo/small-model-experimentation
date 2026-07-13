@@ -1,5 +1,7 @@
 # Qwen Episodic Soft-Prompt Task Vectors
 
+**Status:** finished
+
 Standalone experiment testing whether a short continuous prefix optimized per task can improve Qwen's held-out text-transformation consistency.
 
 ## Main Run

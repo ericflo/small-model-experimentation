@@ -1,5 +1,7 @@
 # Dense Teacher Distillation Experiment
 
+**Status:** finished
+
 This experiment tests whether a fixed-width dense recurrent state can learn exact modular belief-state execution when the training signal is the full teacher belief distribution at every prefix step.
 
 ## Contents

@@ -1,5 +1,7 @@
 # Learned Sparse Slot Executor Experiment
 
+**Status:** finished
+
 This experiment tests whether a neural recurrent runtime can learn to use an
 explicit slot memory for modular belief-state execution.
 

@@ -1,5 +1,7 @@
 # Think-block FTPO round 1: outcome-conditioned pivot steering as an agentic install recipe
 
+**Status:** finished
+
 ## Research Program
 
 - Program: `agentic_breadth_installation` (primary; menagerie-arbitrated install recipes),

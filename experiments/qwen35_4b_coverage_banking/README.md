@@ -1,5 +1,7 @@
 # Qwen3.5-4B Coverage Banking: does banking shift the proposal distribution?
 
+**Status:** finished
+
 ## Research Program
 
 - Program: `structured_execution_and_compilers`

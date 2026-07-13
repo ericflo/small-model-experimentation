@@ -1,5 +1,7 @@
 # Qwen Recursive Task Decomposition
 
+**Status:** finished
+
 Standalone experiment testing whether recursive task decomposition improves task-level consistency on public text-transformation tasks.
 
 ## Question

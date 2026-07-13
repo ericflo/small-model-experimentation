@@ -1,5 +1,7 @@
 # qwen35_4b_retrieval_adapt_verify_scale
 
+**Status:** finished
+
 Standalone experiment: scale retrieval-and-adaptation on direct-sampling misses, then test whether deployable verification can turn new candidate-pool coverage into selected pass@1.
 
 The experiment uses Qwen3.5-4B as the adapter/reranker and a verified MBPP train library as external algorithmic memory. Hidden tests are used only for evaluation summaries and oracle ceilings.

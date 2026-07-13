@@ -1,5 +1,7 @@
 # Qwen Candidate-Conditioned Trace Verifier
 
+**Status:** finished
+
 Standalone experiment for testing whether Qwen can select executable repair
 candidates by reading the prompt, candidate program, and candidate execution
 trace.

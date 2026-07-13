@@ -1,5 +1,7 @@
 # Qwen3.5-4B Long-Horizon Answer-Potential SFT
 
+**Status:** finished
+
 ## Status
 
 Design frozen before scientific GPU work. This follow-up is intentionally not a larger replay of C51:

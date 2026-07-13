@@ -1,5 +1,7 @@
 # Qwen Real Task ABI Coverage Gate
 
+**Status:** finished
+
 Standalone experiment testing whether a fixed office-data ABI covers real-style deterministic tasks that were not generated from the ABI.
 
 ## Question

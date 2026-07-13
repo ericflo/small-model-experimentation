@@ -1,5 +1,7 @@
 # Qwen Complete-Program Trace Reranker
 
+**Status:** finished
+
 This standalone experiment tests whether a learned verifier can better select
 hidden-VM candidate traces when it receives prompt-conditioned Qwen hidden-state
 context in addition to candidate execution features.

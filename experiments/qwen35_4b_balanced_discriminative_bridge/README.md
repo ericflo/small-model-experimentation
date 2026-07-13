@@ -1,5 +1,7 @@
 # Qwen 3.5 4B Balanced Discriminative Bridge
 
+**Status:** finished
+
 This standalone experiment tests whether equal frontier-family bridge coverage improves when visible traces are selected to discriminate against hard alias programs and seed-adapter mistakes.
 
 The model receives:

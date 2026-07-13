@@ -1,5 +1,7 @@
 # Qwen3.5-4B: Bank the Thoughts
 
+**Status:** finished
+
 ## Research Program
 - Program: `posttraining_and_adaptation`
 - Question: does banking the REASONING (plans) install more usable depth-3 than banking the ANSWER? (the clean version of C26/C27)

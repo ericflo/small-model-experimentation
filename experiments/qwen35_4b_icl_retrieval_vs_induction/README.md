@@ -1,5 +1,7 @@
 # Qwen3.5-4B: Is In-Context Learning Retrieval or Induction?
 
+**Status:** finished
+
 ## Research Program
 - Program: `benchmark_generalization`
 - Capstone question: if the model can't induce a novel rule (C38), what is in-context learning doing? Retrieval of familiar structure, or induction of novel structure?

@@ -1,5 +1,7 @@
 # Qwen3.5-4B Deployable Information Ceiling Sweep
 
+**Status:** finished
+
 This standalone diagnostic asks whether the hard low-information regime is limited by deployable information or by a trainable probe-selection policy.
 
 There is no model training in this package. The deployable policy is greedy max expected information gain under a uniform posterior over all verifier-surviving candidates. The comparison policy is a target-aware oracle and is only a headroom measurement.

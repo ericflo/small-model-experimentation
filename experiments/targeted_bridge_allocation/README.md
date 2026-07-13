@@ -1,5 +1,7 @@
 # Targeted Bridge Allocation
 
+**Status:** finished
+
 Standalone experiment package for testing whether fixed-budget targeted bridge allocation improves trace-conditioned recombination repair compared with uniform bridge allocation.
 
 ## Design

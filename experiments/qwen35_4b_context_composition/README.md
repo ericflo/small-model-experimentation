@@ -1,5 +1,7 @@
 # Qwen3.5-4B Context Composition
 
+**Status:** finished
+
 ## Research Program
 
 - Program: `structured_execution_and_compilers` (+ `posttraining_and_adaptation`). Pre-registered

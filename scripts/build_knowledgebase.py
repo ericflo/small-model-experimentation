@@ -229,7 +229,10 @@ def first_paragraph(text: str) -> str:
         if stripped.startswith("```"):
             in_fence = not in_fence
             continue
-        if in_fence or stripped.startswith("#") or stripped.startswith("|") or stripped.startswith("!") or stripped.startswith("- "):
+        # Skip the canonical "**Status:** finished|in-progress …" lifecycle line
+        # (every experiment README carries one, right after the title) so it never
+        # becomes the extracted summary. See scripts/build_site.py parse_readme_status.
+        if in_fence or stripped.startswith("#") or stripped.startswith("|") or stripped.startswith("!") or stripped.startswith("- ") or stripped.lower().startswith("**status:"):
             continue
         if not stripped:
             if current:

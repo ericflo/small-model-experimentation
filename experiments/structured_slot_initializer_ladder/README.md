@@ -1,5 +1,7 @@
 # Structured Slot Initializer Ladder Experiment
 
+**Status:** finished
+
 This experiment tests which initializer structure is sufficient to populate a
 sparse modular belief support before an exact recurrent transition executes the
 program.

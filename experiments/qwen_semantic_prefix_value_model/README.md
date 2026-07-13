@@ -1,5 +1,7 @@
 # Qwen Semantic Prefix Value Model
 
+**Status:** finished
+
 Standalone experiment for semantic reachability supervision over executable bytecode prefixes.
 
 The experiment trains a frozen-Qwen bytecode compiler head, then collects partial-program actions from typed beam search. Each action receives two offline labels:

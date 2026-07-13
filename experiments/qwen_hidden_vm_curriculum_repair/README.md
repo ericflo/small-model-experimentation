@@ -1,5 +1,7 @@
 # Qwen Hidden VM Curriculum Repair
 
+**Status:** finished
+
 Standalone experiment for training `Qwen/Qwen3-4B` to compile natural-language tasks into a fixed hidden VM with a length curriculum and verifier-guided program repair.
 
 Small files live here:

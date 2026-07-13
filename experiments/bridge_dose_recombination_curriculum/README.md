@@ -1,5 +1,7 @@
 # Bridge-Dose Recombination Curriculum
 
+**Status:** finished
+
 Standalone experiment package for testing whether a small number of exact factor-pair bridge examples is enough to unlock trace-conditioned recombination generalization.
 
 ## Final Result Snapshot

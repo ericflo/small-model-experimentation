@@ -1,5 +1,7 @@
 # Qwen Trace Bootstrap Retention Experiment
 
+**Status:** finished
+
 This experiment tests whether a frozen Qwen encoder attached to a structured
 latent executor can keep using a learned program interface after symbol-trace
 supervision is removed.

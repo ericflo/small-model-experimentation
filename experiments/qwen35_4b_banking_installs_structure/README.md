@@ -1,5 +1,7 @@
 # Qwen3.5-4B: Does Banking Install STRUCTURE?
 
+**Status:** finished
+
 ## Research Program
 - Program: `structured_execution_and_compilers` / `posttraining_and_adaptation`
 - Question (C32 follow-up): C32 showed the wall is structure-proposal. C22-24 showed banking crosses depth-3. Does banking install the STRUCTURE the base can't propose?

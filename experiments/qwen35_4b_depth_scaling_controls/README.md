@@ -1,5 +1,7 @@
 # Qwen3.5-4B Depth Scaling & Controls: saturation, data-vs-compute, depth-4
 
+**Status:** finished
+
 ## Research Program
 - Program: `structured_execution_and_compilers`
 - Three follow-ups to C23 (depth-3 install is data-limited): (1) does the dose curve saturate past 640?

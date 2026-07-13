@@ -1,5 +1,7 @@
 # Qwen State-Ladder Compiler
 
+**Status:** finished
+
 Standalone intermediate-state ladder experiment for a Qwen numeric-copy compiler.
 
 The experiment trains a numeric-copy compiler on modular-arithmetic programs and adds dense supervision for the latent modular state after each operation. The main comparison tests whether that per-step state ladder improves long-chain exact execution over a matched trace-supervised compiler without the state loss.

@@ -1,5 +1,7 @@
 # Qwen3.5-4B Jacobian Value Transport
 
+**Status:** finished
+
 This experiment tests whether token-aligned Jacobian coordinates can carry
 causal value from native thinking into fresh, exactly scored answers more
 specifically than ordinary activation steering.

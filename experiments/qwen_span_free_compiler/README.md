@@ -1,5 +1,7 @@
 # Qwen Span-Free Compiler
 
+**Status:** finished
+
 This experiment tests whether a small trainable latent compiler can read a
 frozen Qwen hidden sequence and configure an executable modular program without
 being given token-span features for the numeric values or operation words.

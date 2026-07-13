@@ -1,5 +1,7 @@
 # Qwen Fuyu VM GRPO-ECHO
 
+**Status:** finished
+
 This standalone experiment trains `Qwen/Qwen3-4B` as a Fuyu-style recurrent
 controller for a typed bytecode VM.
 

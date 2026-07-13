@@ -1,5 +1,7 @@
 # Dense Latent Query Executor Experiment
 
+**Status:** finished
+
 This experiment tests whether a recurrent model with a fixed-width dense hidden state can learn modular belief-state execution from one sampled final query value per example.
 
 ## Contents

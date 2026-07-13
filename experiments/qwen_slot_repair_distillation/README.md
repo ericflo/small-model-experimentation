@@ -1,5 +1,7 @@
 # Qwen Slot Repair Distillation
 
+**Status:** finished
+
 This standalone experiment tests whether local repair headroom can be distilled
 into a deployable gated slot editor for a frozen Qwen-attached numeric compiler.
 The compiler emits an executable modular-arithmetic program. Offline local

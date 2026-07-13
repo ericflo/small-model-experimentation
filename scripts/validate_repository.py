@@ -29,7 +29,6 @@ CLAIM_STATUSES = {"Confirmed", "Promising", "Negative", "Open", "Retired"}
 QUEUE_STATUSES = {"ready-for-intake", "program-seed", "needs-design", "infrastructure"}
 QUEUE_PRIORITIES = {"P0", "P1", "P2"}
 QUEUE_EFFORTS = {"small", "medium", "large"}
-EXPERIMENT_STATUSES = {"finished", "in-progress"}
 # How long an experiment may stay flagged in-progress before CI forces a review.
 # Runs here conclude within days; a genuinely long one just re-affirms `since`.
 # This is the anti-footgun: nothing can silently rot stuck in "in progress".
@@ -717,7 +716,7 @@ def validate() -> int:
 
     validate_claim_ledger(errors, set(program_ids), exp_ids)
     validate_future_queue(errors, set(program_ids))
-    validate_experiment_status(errors, exp_ids)
+    validate_experiment_status(errors)
     validate_root_readme(errors)
     validate_benchmark_firewall(errors)
     validate_no_wall_clock_stamps(errors)
@@ -734,59 +733,70 @@ def validate() -> int:
     return report(errors)
 
 
-def validate_experiment_status(errors: list[str], exp_ids: set[str]) -> None:
-    """Guard the finished/in-progress lifecycle (knowledge/experiment_status.json).
+# Keep in sync with _STATUS_LINE_RE / _STATUS_SINCE_RE in scripts/build_site.py.
+STATUS_LINE_RE = re.compile(r"(?im)^[ \t]*\*\*status:\*\*[ \t]*(finished|in-progress)\b([^\n]*)$")
+STATUS_SINCE_RE = re.compile(r"(?i)\bsince[ \t]+(\d{4}-\d{2}-\d{2})\b")
 
-    Finished is the default, so the only thing to police is the explicit
-    in-progress list. Each entry must name a real experiment and carry a valid
-    status; each in-progress entry must additionally carry a parseable `since`
-    date and a non-empty `reason`, and must not be stale. This is the anti-
-    footgun: an experiment cannot silently stay stuck in-progress after it
-    concludes — CI forces the maintainer to either re-affirm it (bump `since`)
-    or remove the entry so it reverts to finished.
+
+def validate_experiment_status(errors: list[str]) -> None:
+    """Guard the finished/in-progress lifecycle, which lives as a canonical line
+    at the top of each experiment's OWN README (the single source of truth):
+
+        **Status:** finished
+        **Status:** in-progress · since YYYY-MM-DD · <what remains>
+
+    Co-locating it with the work means the agent that concludes an experiment
+    updates it in place, and new experiments inherit it from the template — so it
+    is far harder to leave stale than a central file. Every experiment must carry
+    exactly one such line. An in-progress line must carry a parseable ISO `since`
+    date and a reason, must not be future-dated, and must not be stale
+    (> STALE_INPROGRESS_DAYS) — the anti-footgun that forces a concluded experiment
+    out of "in progress". Status is never inferred from prose (preregistrations and
+    finished ablations share the same "verdict / negative / not run" vocabulary, so
+    any guess mislabels); the author declares it, CI keeps it honest.
     """
-    path = KNOWLEDGE / "experiment_status.json"
-    if not path.exists():
-        return
-    try:
-        payload = json.loads(path.read_text(encoding="utf-8"))
-    except json.JSONDecodeError as exc:
-        fail(errors, f"experiment_status.json is not valid JSON: {exc}")
-        return
-    entries = payload.get("experiments", {}) if isinstance(payload, dict) else {}
     today = dt.date.today()
-    for eid, value in entries.items():
-        status = value.get("status") if isinstance(value, dict) else value
-        if status not in EXPERIMENT_STATUSES:
-            fail(errors, f"experiment_status.json[{eid}]: invalid status {status!r} (want finished|in-progress)")
+    for exp in sorted(EXPERIMENTS.iterdir()):
+        if not exp.is_dir():
             continue
-        if eid not in exp_ids:
-            fail(errors, f"experiment_status.json[{eid}]: no such experiment directory")
+        readme = exp / "README.md"
+        if not readme.exists():
+            fail(errors, f"{rel(readme)}: experiment has no README.md")
             continue
+        text = readme.read_text(encoding="utf-8", errors="replace")
+        found = list(STATUS_LINE_RE.finditer(text))
+        if not found:
+            fail(errors, (f"{rel(readme)}: missing the canonical status line. Add, right after the title, "
+                          f"'**Status:** finished' or '**Status:** in-progress · since YYYY-MM-DD · <what remains>'."))
+            continue
+        if len(found) > 1:
+            fail(errors, f"{rel(readme)}: {len(found)} '**Status:**' lines found; keep exactly one")
+            continue
+        status, tail = found[0].group(1).lower(), found[0].group(2)
         if status != "in-progress":
             continue
-        if not isinstance(value, dict):
-            fail(errors, f"experiment_status.json[{eid}]: in-progress must be an object with since+reason")
+        since_match = STATUS_SINCE_RE.search(tail)
+        reason = (tail[since_match.end():] if since_match else tail).strip().lstrip("·—–-:*").strip()
+        if not reason:
+            fail(errors, (f"{rel(readme)}: in-progress status needs a reason "
+                          f"('**Status:** in-progress · since YYYY-MM-DD · <what remains>')"))
+        if not since_match:
+            fail(errors, f"{rel(readme)}: in-progress status needs 'since YYYY-MM-DD'")
             continue
-        if not str(value.get("reason", "")).strip():
-            fail(errors, f'experiment_status.json[{eid}]: in-progress requires a non-empty "reason"')
-        raw_since = str(value.get("since", "")).strip()
-        if not raw_since:
-            fail(errors, f'experiment_status.json[{eid}]: in-progress requires a "since" date (YYYY-MM-DD)')
-            continue
+        raw_since = since_match.group(1)
         try:
             since = dt.date.fromisoformat(raw_since)
         except ValueError:
-            fail(errors, f'experiment_status.json[{eid}]: "since" {raw_since!r} is not an ISO date (YYYY-MM-DD)')
+            fail(errors, f"{rel(readme)}: status 'since {raw_since}' is not a valid ISO date")
             continue
         if since > today:
-            fail(errors, f'experiment_status.json[{eid}]: "since" {raw_since} is in the future')
+            fail(errors, f"{rel(readme)}: status 'since {raw_since}' is in the future")
             continue
         age = (today - since).days
         if age > STALE_INPROGRESS_DAYS:
-            fail(errors, (f"experiment_status.json[{eid}]: flagged in-progress for {age} days "
-                          f"(limit {STALE_INPROGRESS_DAYS}). Re-affirm it is still running by updating "
-                          f'"since", or remove the entry so it reverts to finished.'))
+            fail(errors, (f"{rel(readme)}: flagged in-progress for {age} days (limit {STALE_INPROGRESS_DAYS}). "
+                          f"Set '**Status:** finished' if it concluded, or bump the 'since' date to re-affirm it is "
+                          f"still running."))
 
 
 def report(errors: list[str]) -> int:

@@ -1,5 +1,7 @@
 # Qwen Slot-Stability Compiler
 
+**Status:** finished
+
 Standalone paired paraphrase slot-stability experiment for a Qwen numeric-copy compiler.
 
 The experiment trains a numeric-copy compiler on paired renderings of the same modular-arithmetic program. The stability condition penalizes drift in copied slot distributions across paired wording variants while preserving trace and executor supervision.

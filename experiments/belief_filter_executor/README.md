@@ -1,5 +1,7 @@
 # Belief Filter Executor Experiment
 
+**Status:** finished
+
 This experiment tests latent recurrent execution over correlated belief states with both arithmetic transitions and observation/filter operations.
 
 ## Contents

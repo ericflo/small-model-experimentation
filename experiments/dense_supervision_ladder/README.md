@@ -1,5 +1,7 @@
 # Dense Supervision Ladder Experiment
 
+**Status:** finished
+
 This experiment tests which training signal is sufficient for a recurrent model with a fixed-width dense hidden state to learn modular belief-state execution.
 
 ## Contents

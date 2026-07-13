@@ -1,5 +1,7 @@
 # Gauntlet frontier: difficulty escalation past the breadth-install plateau
 
+**Status:** in-progress · since 2026-07-12 · Expert-iteration arc still escalating difficulty; further phases running.
+
 Follow-up to `qwen35_4b_gauntlet_breadth_round1` (claims C49/C50). Executes
 every escalation lever against the +0.22..+0.33 plateau: attribution
 ablations, L5/L6 difficulty + two new weak-axis families, a frontier harvest

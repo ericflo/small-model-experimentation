@@ -1,5 +1,7 @@
 # Qwen3.5-4B Adaptive Evidence Budget Policy
 
+**Status:** finished
+
 This standalone experiment tests whether Qwen3.5-4B can be posttrained as a STOP/MORE controller for an executable verifier.
 
 The verifier chooses the next probe by target-independent expected split. The model does not choose probes and does not name operators. Its only deployable decision is whether to stop and commit the current verifier-selected program or request one more executable observation, up to a maximum budget of ten probes.

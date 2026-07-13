@@ -1,5 +1,7 @@
 # Qwen3.5-4B Thinking Content vs Compute
 
+**Status:** finished
+
 ## Research Program
 
 - Program: `test_time_reasoning_budget`

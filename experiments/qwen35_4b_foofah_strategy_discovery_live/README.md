@@ -1,5 +1,7 @@
 # qwen35_4b_foofah_strategy_discovery_live
 
+**Status:** finished
+
 This standalone package tests strategy discovery for Foofah-style table transformations.
 
 The experiment uses Qwen3.5-4B locally in two roles:

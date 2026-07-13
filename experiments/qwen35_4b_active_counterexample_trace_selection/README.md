@@ -1,5 +1,7 @@
 # Qwen3.5-4B Active Counterexample Trace Selection
 
+**Status:** finished
+
 Standalone experiment package for testing active execution-case acquisition after typed sketch synthesis.
 
 The experiment trains a Qwen3.5-4B LoRA to emit typed DSL sketches, synthesizes executable candidate programs from those sketches, and compares selection policies that either commit from the original visible trace or request additional counterexample traces from a per-record query pool.

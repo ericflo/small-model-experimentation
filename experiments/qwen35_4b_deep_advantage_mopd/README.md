@@ -1,5 +1,7 @@
 # Qwen3.5-4B Deep-Advantage MOPD
 
+**Status:** in-progress · since 2026-07-12 · Instrument checks pass; the deciding coaching/eval run has not executed.
+
 ## Status
 
 **Fresh deep qualification passes on both untouched blocks; exact-logit

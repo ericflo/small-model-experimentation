@@ -1,5 +1,7 @@
 # Qwen In-Policy VM-ECHO Distillation
 
+**Status:** finished
+
 Standalone experiment for testing whether a frozen-Qwen typed-bytecode compiler
 improves when it learns the VM consequences of its own proposed programs during
 repair distillation.

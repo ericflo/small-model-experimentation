@@ -1,5 +1,7 @@
 # Qwen Hidden VM On-Policy Canonical Repair
 
+**Status:** finished
+
 Standalone experiment for training `Qwen/Qwen3-4B` to compile mixed natural-language tasks into a hidden typed VM, then improve the compiler with canonical on-policy repair targets.
 
 Small files live here:

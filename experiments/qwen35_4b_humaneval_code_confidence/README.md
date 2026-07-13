@@ -1,5 +1,7 @@
 # Qwen3.5-4B: Does Code Confidence Replicate on HumanEval?
 
+**Status:** finished
+
 Standalone HumanEval replication of the C46 code-confidence result: test whether
 the P(True) judgment-token readout beats verifier-free sample-more baselines on
 HumanEval.

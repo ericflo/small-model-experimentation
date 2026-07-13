@@ -1,5 +1,7 @@
 # Qwen3.5-4B: Is the Parameter Latent? (probe the full first op)
 
+**Status:** finished
+
 ## Research Program
 - Program: `interpretability_and_diagnostics` / `structured_execution_and_compilers`
 - Question (C30 follow-up): C30 found the deployable bottleneck is the concrete first op's PARAMETER, not the op-TYPE C19 decodes. Is the parameter model-LATENT (elicitable) or just surface-readable off the I/O?

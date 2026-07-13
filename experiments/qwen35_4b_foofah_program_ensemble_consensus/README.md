@@ -1,5 +1,7 @@
 # Qwen3.5-4B Foofah Program Ensemble Consensus
 
+**Status:** finished
+
 This standalone experiment tests whether multiple independently prompted executable table-transform programs can produce safer fallback answers than a single visible-verified program.
 
 Each Foofah task is evaluated with:
