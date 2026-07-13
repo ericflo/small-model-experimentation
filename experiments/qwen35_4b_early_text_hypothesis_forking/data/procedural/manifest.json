@@ -4,7 +4,7 @@
   "benchmarks_read": false,
   "bound_operation_candidates": 24,
   "branch_seed": 2026072507,
-  "cpu_exhaustive_selector_tasks": 4,
+  "cpu_exhaustive_selector_tasks": 8,
   "depth_two_programs_exhausted_per_task": 576,
   "diagnostic_result_support_per_context": [
     24,

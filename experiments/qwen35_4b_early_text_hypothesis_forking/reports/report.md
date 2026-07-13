@@ -2,8 +2,9 @@
 
 ## Summary
 
-The experiment is adversarially reviewed and has passed its refreshed model-free
-boundary. No model has been loaded and no capability result exists. The first
+The experiment is adversarially reviewed, has a pushed pre-model mechanics
+amendment, and has passed its refreshed model-free and implementation-audit
+boundaries. No model has been loaded and no capability result exists. The first
 12-type draft was rejected before GPU use because it did not supply parameter
 bindings and lacked the strongest exhaustive visible-data control.
 
@@ -42,10 +43,17 @@ The terminal model-free decision is `CPU_SMOKE_PASS`:
 - all 144 taskwise slot-to-operation-to-behavior compositions are distinct and
   gold positions are balanced; and
 - strict parser, visible selector, exact-token runner, gold-mutation firewall,
-  and outcome-free resource matcher tests pass.
+  and outcome-free resource matcher tests pass;
+- four exact-token diagnostic arms each contain 96 independently rebuilt rows;
+- the eight full-program cases cover four parameter-free and four parameterized
+  first-operation families; and
+- the deterministic prepare receipt has SHA-256
+  `2d6b668a6d43e1bd657124c3645d85ea9996d9aaaea8f81225b97472a2f5b292`.
 
-No mechanics, qualification, confirmation, training, or benchmark call has
-occurred. These checks validate the instrument, not the hypothesis.
+All 39 experiment tests plus 33 parameterized runner subtests pass. No mechanics
+generation, qualification, confirmation, training, or benchmark call has
+occurred. `model_loaded=false` and `outcomes_loaded=false`; these checks validate
+the instrument, not the hypothesis.
 
 ## Controls and claim boundary
 

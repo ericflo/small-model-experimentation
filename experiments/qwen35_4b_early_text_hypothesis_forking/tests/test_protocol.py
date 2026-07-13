@@ -127,8 +127,10 @@ def test_candidate_injection_is_bound_and_exactly_provisional():
 
 def test_result_parser_is_unrestricted_line_contract():
     assert parse_result("Some reasoning</think>\nRESULT: [3, -1, 2]")["parsed"]
+    assert parse_result("Some reasoning</think>\nRESULT: [3]<|im_end|>")["parsed"]
     assert not parse_result("RESULT: label")["parsed"]
     assert not parse_result("RESULT: [1]\nRESULT: [2]")["parsed"]
+    assert not parse_result("prose after thinking\nRESULT: [1]")["parsed"]
 
 
 def test_selector_is_order_invariant_hidden_blind_and_canonical_deduplicated():
@@ -184,5 +186,5 @@ def test_mechanics_composition_has_24_distinct_bound_results_per_context():
 
 
 def test_model_stages_remain_fail_closed():
-    assert config()["boundaries"]["implementation"]["status"] == "pending"
+    assert config()["boundaries"]["implementation"]["status"] == "locked"
     assert config()["boundaries"]["mechanics"]["status"] == "pending"

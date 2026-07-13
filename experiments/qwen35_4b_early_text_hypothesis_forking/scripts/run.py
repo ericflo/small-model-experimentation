@@ -123,8 +123,12 @@ def validate_config(config: dict[str, Any]) -> None:
         generation["main_thinking_budget"]
     ):
         raise RuntimeError("equal-post late arm does not preserve early suffix budget")
-    if config["boundaries"]["implementation"]["status"] != "pending":
-        raise RuntimeError("model implementation boundary moved before audited lock")
+    if config["boundaries"]["implementation"]["status"] not in {
+        "pending",
+        "reviewed_pending_lock",
+        "locked",
+    }:
+        raise RuntimeError("unknown model implementation boundary state")
     if config["boundaries"]["mechanics"]["status"] != "pending":
         raise RuntimeError("mechanics boundary moved before audited lock")
 
@@ -356,7 +360,11 @@ def smoke() -> dict[str, Any]:
         "stage": "smoke",
         "passed": True,
         "decision": "CPU_SMOKE_PASS",
-        "design_status": "adversarially_reviewed",
+        "design_status": config["boundaries"]["design"]["status"],
+        "design_amendment_status": config["boundaries"]["design_amendment"][
+            "status"
+        ],
+        "implementation_status": config["boundaries"]["implementation"]["status"],
         "model_loaded": False,
         "outcomes_loaded": False,
         "benchmarks_read": False,

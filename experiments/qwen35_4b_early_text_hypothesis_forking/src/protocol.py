@@ -24,7 +24,7 @@ BoundOperationInput = BoundOperation | Sequence[Any] | Mapping[str, Any]
 
 PUBLIC_TASK_KEYS = {"task_id", "depth", "visible", "unlabeled_probe_inputs"}
 SELECTOR_POLICY_VERSION = "canonical-visible-probe-cluster-v1"
-RESULT_RE = re.compile(r"(?im)^\s*RESULT\s*:\s*(\[[^\r\n]*\])\s*$")
+RESULT_RE = re.compile(r"(?i)\A\s*RESULT\s*:\s*(\[[^\r\n]*\])\s*\Z")
 FENCED_PROGRAM_RE = re.compile(
     r"\A```(?:python)?[ \t]*\r?\n(?P<source>.*?)\r?\n```[ \t]*\Z",
     flags=re.DOTALL | re.IGNORECASE,
@@ -354,11 +354,18 @@ def parse_program(text: str) -> dict[str, Any]:
 
 
 def parse_result(text: str) -> dict[str, Any]:
-    matches = list(RESULT_RE.finditer(text))
-    if len(matches) != 1:
-        return {"parsed": False, "error": "result_line_count", "result": None}
+    if not isinstance(text, str):
+        return {"parsed": False, "error": "result_not_string", "result": None}
+    answer = text.rsplit("</think>", 1)[1] if "</think>" in text else text
+    answer = answer.strip()
+    for marker in ("<|endoftext|>", "<|im_end|>"):
+        if answer.endswith(marker):
+            answer = answer[: -len(marker)].rstrip()
+    match = RESULT_RE.fullmatch(answer)
+    if match is None:
+        return {"parsed": False, "error": "result_answer_shape", "result": None}
     try:
-        value = ast.literal_eval(matches[0].group(1))
+        value = ast.literal_eval(match.group(1))
     except (SyntaxError, ValueError):
         return {"parsed": False, "error": "invalid_result_literal", "result": None}
     if not isinstance(value, list) or any(

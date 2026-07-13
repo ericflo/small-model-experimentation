@@ -1,6 +1,6 @@
 # Qwen3.5-4B Early Text Hypothesis Forking
 
-**Status:** in-progress · since 2026-07-13 · adversarial review and CPU smoke passed; model mechanics remains sealed.
+**Status:** in-progress · since 2026-07-13 · design amendment, adversarial implementation review, and CPU smoke passed; model mechanics remains sealed pending the pushed lock receipt.
 
 This experiment tests whether supplying each fully bound first operation at the
 start of Qwen3.5-4B reasoning changes complete two-step program proposals enough
@@ -105,8 +105,22 @@ Model-free smoke:
 .venv/bin/python experiments/qwen35_4b_early_text_hypothesis_forking/scripts/run.py --stage smoke
 ```
 
-Model stages remain fail closed until their audited implementation receipt is
-committed and pushed.
+Deterministic tokenizer-only mechanics preparation:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 .venv-vllm/bin/python experiments/qwen35_4b_early_text_hypothesis_forking/scripts/run_mechanics.py --stage prepare
+```
+
+After the implementation-lock file itself is committed and pushed, the exact
+live command is:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 .venv-vllm/bin/python experiments/qwen35_4b_early_text_hypothesis_forking/scripts/run_mechanics.py --stage run --lock experiments/qwen35_4b_early_text_hypothesis_forking/runs/mechanics/implementation_lock.json
+```
+
+The runner refuses construction before that lock is tracked on published
+`main`. Each completed invocation is immutable and safely skipped on resume;
+an ambiguous started-only invocation is never resampled.
 
 ## Current result
 
@@ -114,10 +128,13 @@ committed and pushed.
 ancestor behavior collisions, exhausts all 576 two-step programs for every
 task, verifies 24 distinct bound-operation consequences on each of four public
 diagnostics, and records 144 distinct composed branch maps with balanced gold
-positions. Strict parser, selector, gold-mutation, resource-matching, and exact-
-token runner tests pass (31 tests plus 33 parameterized subtests). No model has
-been loaded and no scientific capability outcome exists. The rejected 12-type
-draft is not evidence.
+positions. The mechanics prepare receipt deterministically freezes 96 rows in
+each of four diagnostic arms plus eight full-program reachability cases; its
+SHA-256 is `2d6b668a6d43e1bd657124c3645d85ea9996d9aaaea8f81225b97472a2f5b292`.
+Strict parser, selector, gold-mutation, resource-matching, transaction,
+authentication, and exact-token runner tests pass (39 tests plus 33
+parameterized subtests). No model has been loaded and no scientific capability
+outcome exists. The rejected 12-type draft is not evidence.
 
 ## Claim boundary
 
@@ -132,6 +149,12 @@ test must be a new experiment.
 - `idea_intake.md`: novelty and nearest-neighbor decision.
 - `reports/design_review.md`: adversarial attacks and mandatory resolutions.
 - `reports/preregistration.md`: frozen arms, gates, and stop logic.
+- `reports/preregistration_amendment_1.md`: pushed pre-model mechanics boundary.
+- `reports/implementation_review.md`: adversarial code findings and repairs.
 - `configs/default.yaml`: exact model, data, compute, and thresholds.
 - `runs/smoke/summary.json`: model-free validation receipt.
+- `runs/mechanics/prepared/`: independently rebuildable exact-token requests
+  and the pre-outcome receipt.
+- `runs/mechanics/implementation_lock.json`: added only after the implementation
+  commit is published; it is the final prerequisite to model construction.
 - `reports/artifact_manifest.yaml`: external/omitted artifact policy.

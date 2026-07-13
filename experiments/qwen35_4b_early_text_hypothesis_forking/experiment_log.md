@@ -40,3 +40,19 @@ It is explicitly non-causal reachability evidence. The amendment also freezes
 per-context adherence gates, exact terminal-token matching for padded controls,
 authenticated receipt-last generation, and a conservative live KV
 no-preemption gate. No threshold was relaxed.
+
+## 2026-07-13 — Adversarial implementation audit passes
+
+Three independent code reviews found and closed raw-authentication, lock,
+terminal-padding, context-aggregation, parameter-coverage, live-capacity, and
+crash-resume defects before model construction. Prepared prompts are now
+independently rebuilt; raw text must equal decoded token IDs; natural and
+forced continuation accounting, seeds, exact engine/sampling settings, and the
+complete pinned package set are authenticated. Full package parity is checked
+before tokenizer or engine construction and again against generation metadata.
+Receipt-last transactions permit verification-only finalization but never
+resample a started-only invocation. The deterministic preparation froze four
+96-row diagnostic arms and eight program cases with receipt SHA-256
+`2d6b668a6d43e1bd657124c3645d85ea9996d9aaaea8f81225b97472a2f5b292`.
+All 39 tests plus 33 parameterized subtests pass, refreshed smoke remains
+`CPU_SMOKE_PASS`, and `model_loaded=false`, `outcomes_loaded=false`.

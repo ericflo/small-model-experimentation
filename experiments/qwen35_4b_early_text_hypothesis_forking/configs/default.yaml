@@ -125,8 +125,9 @@ boundaries:
     status: locked
     commit: c064d7a4470a0638ddf4e483e82ccaa9f3720eed
   design_amendment:
-    status: pending_commit
+    status: locked
+    commit: af9c84319bc4aaedc77962f473a53f46dd2d29a6
   implementation:
-    status: pending
+    status: locked
   mechanics:
     status: pending

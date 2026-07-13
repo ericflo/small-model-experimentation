@@ -4,11 +4,12 @@ external_artifacts: []
 omitted_artifacts: []
 reproducibility:
   smoke_command: ".venv/bin/python experiments/qwen35_4b_early_text_hypothesis_forking/scripts/run.py --stage smoke"
-  full_command: "unavailable before audited implementation and mechanics boundaries"
+  full_command: "PYTHONDONTWRITEBYTECODE=1 .venv-vllm/bin/python experiments/qwen35_4b_early_text_hypothesis_forking/scripts/run_mechanics.py --stage run --lock experiments/qwen35_4b_early_text_hypothesis_forking/runs/mechanics/implementation_lock.json"
   required_external_artifacts: []
 notes: >-
-  No model output, adapter, or training artifact exists after CPU smoke. The
-  tracked procedural split, branch-plan, firewall, and smoke receipts are small
-  and self-contained. The experiment-local pinned vLLM runner is committed; any
-  later omitted raw output must be added here with checksums and regeneration
-  commands.
+  No model output, adapter, or training artifact exists after CPU smoke and the
+  tokenizer-only mechanics preparation. The tracked procedural split,
+  branch-plan, firewall, prepared requests, and receipts are small and
+  self-contained. The live command remains fail closed until its lock path is
+  committed and pushed; any later omitted raw output must be added here with
+  checksums and regeneration commands.
