@@ -26,3 +26,12 @@
 - Public mechanics rows expose only prompt fields, source alias, and diagnostic
   labels; sealed-field mutation leaves the prompt invariant.
 - Six tests pass and direct mechanics invocation fails before any model load.
+
+## 2026-07-13 — Immutable design anchored
+
+- Pushed the reviewed design and generated registration through commit
+  `9437bdc2664772f4ad2c50e8403740f11c28688c`.
+- Anchored README, preregistration, adversarial review, public mechanics data,
+  data manifest, and frozen lens by SHA-256.
+- A clean model-free rerun verifies the commit is an ancestor and both local and
+  committed bytes match every expected digest. Implementation remains pending.

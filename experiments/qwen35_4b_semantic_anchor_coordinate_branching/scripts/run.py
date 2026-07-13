@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import subprocess
 import sys
 from pathlib import Path
 
@@ -57,6 +58,41 @@ def ancestor_behavior_fingerprints() -> set[str]:
             if {"depth", "visible", "hidden", "first_op"}.issubset(row):
                 values.add(behavior_fingerprint(row))
     return values
+
+
+def validate_design_boundary(config: dict) -> dict:
+    boundary = config["design_boundary"]
+    if boundary.get("status") != "anchored":
+        raise RuntimeError("scientific design boundary is not anchored")
+    commit = str(boundary["commit"])
+    ancestor = subprocess.run(
+        ["git", "merge-base", "--is-ancestor", commit, "HEAD"],
+        cwd=ROOT,
+        check=False,
+    ).returncode == 0
+    paths = {
+        "readme_sha256": EXP / "README.md",
+        "preregistration_sha256": EXP / "reports" / "preregistration.md",
+        "design_review_sha256": EXP / "reports" / "design_review.md",
+        "data_manifest_sha256": EXP / "data" / "procedural" / "manifest.json",
+        "mechanics_public_sha256": EXP / "data" / "procedural" / "mechanics_public.jsonl",
+        "lens_sha256": EXP / "assets" / "context_lens.pt",
+    }
+    expected = {key: str(value) for key, value in boundary["hashes"].items()}
+    local = {key: sha256(path) for key, path in paths.items()}
+    committed = {}
+    for key, path in paths.items():
+        relative = path.relative_to(ROOT).as_posix()
+        content = subprocess.check_output(["git", "show", f"{commit}:{relative}"], cwd=ROOT)
+        committed[key] = hashlib.sha256(content).hexdigest()
+    if not ancestor or local != expected or committed != expected:
+        raise RuntimeError("immutable scientific design boundary changed")
+    return {
+        "passed": True,
+        "commit": commit,
+        "design_is_ancestor": ancestor,
+        "hashes": expected,
+    }
 
 
 def diagnostic_results(values: list[int], k: int) -> dict[str, list[int]]:
@@ -112,6 +148,7 @@ def validate_config(config: dict) -> dict:
 def smoke() -> dict:
     config = yaml.safe_load(CONFIG.read_text())
     validated = validate_config(config)
+    design = validate_design_boundary(config)
     lens_path = EXP / config["lens"]["path"]
     observed = sha256(lens_path)
     if observed != config["lens"]["sha256"]:
@@ -208,7 +245,7 @@ def smoke() -> dict:
         "ancestor_behavior_fingerprints": len(ancestors),
         "ancestor_overlap_count": 0,
         "fresh_split_rows": {split: len(rows) for split, rows in splits.items()},
-        "design_boundary_status": config["design_boundary"]["status"],
+        "design_boundary": design,
         "implementation_boundary_status": config["implementation_boundary"]["status"],
         "downstream_available": False,
     }

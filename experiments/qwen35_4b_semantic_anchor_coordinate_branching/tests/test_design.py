@@ -46,7 +46,8 @@ def test_all_diagnostic_results_are_distinct():
 
 def test_scientific_stages_remain_fail_closed():
     value = config()
-    assert value["design_boundary"] == {"status": "pending"}
+    assert value["design_boundary"]["status"] == "anchored"
+    assert value["design_boundary"]["commit"] == "9437bdc2664772f4ad2c50e8403740f11c28688c"
     assert value["implementation_boundary"] == {"status": "pending"}
 
 
