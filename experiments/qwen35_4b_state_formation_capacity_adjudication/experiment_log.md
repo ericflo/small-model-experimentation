@@ -151,10 +151,37 @@
   process, a compatible 76-package environment, and both required causal-convolution and
   flash-linear-attention kernels. All 130 experiment tests passed again. No model was loaded.
 
+## 2026-07-13 — first live G0 stopped on revision-provenance defect
+
+- The first seed-7411 LoRA G0 loaded only the requested `Qwen/Qwen3.5-4B` snapshot at pinned revision
+  `851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a`, then stopped inside `_load_base` before wrapper
+  construction or any mechanics probe. The training split had passed its permitted pre-G0 validator;
+  no sealed contrast payload was opened, no positive control or training/evaluation step ran, and no
+  canonical G0 output was created.
+- Root cause: Transformers 5.13.0 resolves `config.json` through the exact pinned snapshot and its
+  cache utility extracts the correct 40-character commit, but the Qwen3.5 causal-LM wrapper retains a
+  derived text config whose runtime `_commit_hash` is `None`. The runner incorrectly treated that
+  lossy field as the sole revision proof.
+- Preserved the exact setup failure at
+  `runs/failures/g0_lora_seed7411_revision_provenance_failure.json`. This is mechanics evidence only,
+  never scientific evidence and never branch authorization.
+- The fail-closed repair verifies the resolved commit and records the byte count and SHA-256 for config, tokenizer
+  assets, safetensors index, and every indexed shard before model construction. A missing runtime
+  config hash is accepted only after that complete proof; any non-null mismatch remains fatal. The
+  real local snapshot currently resolves all nine files through the pinned commit.
+- Because the repair changes the registered source contract, every data, initialization, and setup
+  artifact produced under digest `903f19141ef982f0e90ea856edd72d75fb48d2dbd96e81dc166a6c32d4c14116`
+  is invalidated and must be regenerated before retry. The frozen scientific design receipt remains
+  unchanged.
+- Preserved all 19 invalidated files (17,651,037 bytes) under the external `invalidated_setup/`
+  archive. The tracked archive receipt reopens every byte count and SHA-256 and has identity
+  `67980d0a937ba3b9c53d1ac862e697bb8e65ddfda4a6513f5ab4040b4a34770d`.
+
 ## Current authorization
 
-Documentation, adversarial review, CPU tests, implementation review, the immutable design boundary,
-fresh-data generation, and common-state initialization are complete. The live package/kernel/GPU
-preflight passes. LoRA G0 mechanics and the seed-matched setup-only positive controls are now
-authorized; result-bearing training remains prohibited until both gates pass for the corresponding
-seed.
+The revision-provenance repair has independent implementation-review `GO` and passes all 133 tests.
+Its final registered source-contract digest is
+`9fd420f5f29fea2d9144bf50d3b187fc8e50d9acc9cb076656372281029614fb`.
+CPU smoke, data, and common initialization must now be regenerated under the committed repaired
+source. No model-bearing retry, positive control, or result training is authorized until that clean
+regeneration is complete; each result seed still requires passing G0 and its positive control.

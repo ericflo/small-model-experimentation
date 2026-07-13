@@ -22,6 +22,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import transformers
 from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers.utils.hub import cached_file, extract_commit_hash
 from transformers.utils.import_utils import (
     is_causal_conv1d_available,
     is_flash_linear_attention_available,
@@ -55,6 +56,15 @@ REQUIREMENTS_LOCK = REPO_ROOT / "requirements-training.lock.txt"
 ANSWER_STRINGS = tuple(f" {letter}" for letter in LETTERS)
 EXPECTED_GPU_NAME = "NVIDIA RTX 6000 Ada Generation"
 EXPECTED_COMPUTE_CAPABILITY = "8.9"
+PINNED_SNAPSHOT_FILES = (
+    "chat_template.jinja",
+    "config.json",
+    "merges.txt",
+    "model.safetensors.index.json",
+    "tokenizer.json",
+    "tokenizer_config.json",
+    "vocab.json",
+)
 
 
 def _write_json(path: Path, payload: object) -> None:
@@ -355,11 +365,97 @@ def _validate_tokenizer(tokenizer: Any, config: Mapping[str, Any]) -> dict[str, 
     return {"state_token_id": state_ids[0], "answer_token_ids": answer_ids}
 
 
+def _pinned_snapshot_receipt() -> dict[str, Any]:
+    """Prove every model/tokenizer payload resolves through the pinned snapshot.
+
+    Transformers 5.13.0's Qwen3.5 causal-LM wrapper retains a derived text
+    configuration whose ``_commit_hash`` is ``None`` even when
+    ``from_pretrained`` was given an exact commit.  Revision provenance must
+    therefore come from the resolved cache paths, not that lossy runtime field.
+    """
+
+    receipts: dict[str, dict[str, Any]] = {}
+    snapshot_roots: set[Path] = set()
+
+    def resolve(filename: str) -> Path:
+        if Path(filename).name != filename:
+            raise RuntimeError(f"pinned snapshot filename is not basename-only: {filename}")
+        resolved = cached_file(MODEL_ID, filename, revision=MODEL_REVISION)
+        if not resolved:
+            raise RuntimeError(f"pinned snapshot file is missing: {filename}")
+        path = Path(resolved)
+        if path.name != filename:
+            raise RuntimeError(
+                f"resolved pinned snapshot basename changed: {path.name!r} != {filename!r}"
+            )
+        resolved_revision = extract_commit_hash(str(path), None)
+        if resolved_revision != MODEL_REVISION:
+            raise RuntimeError(
+                f"{filename} resolved outside the pinned model revision: "
+                f"{resolved_revision!r} != {MODEL_REVISION!r}"
+            )
+        if not path.is_file():
+            raise RuntimeError(f"resolved pinned snapshot file is not readable: {path}")
+        snapshot_root = path.parent
+        if (
+            snapshot_root.name != resolved_revision
+            or snapshot_root.parent.name != "snapshots"
+        ):
+            raise RuntimeError("resolved pinned file is outside the canonical snapshot root")
+        snapshot_roots.add(snapshot_root)
+        receipts[filename] = {
+            "filename": filename,
+            "resolved_revision": resolved_revision,
+            "bytes": path.stat().st_size,
+            "sha256": _sha256(path),
+        }
+        return path
+
+    resolved_paths = {filename: resolve(filename) for filename in PINNED_SNAPSHOT_FILES}
+    index_path = resolved_paths["model.safetensors.index.json"]
+    try:
+        index = json.loads(index_path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise RuntimeError("pinned safetensors index is unreadable") from exc
+    weight_map = index.get("weight_map") if isinstance(index, Mapping) else None
+    if not isinstance(weight_map, Mapping) or not weight_map:
+        raise RuntimeError("pinned safetensors index has no weight map")
+    shard_names = sorted(set(weight_map.values()))
+    if not all(
+        isinstance(name, str)
+        and Path(name).name == name
+        and name.endswith(".safetensors")
+        for name in shard_names
+    ):
+        raise RuntimeError("pinned safetensors index contains an invalid shard path")
+    for shard_name in shard_names:
+        resolve(shard_name)
+    if len(snapshot_roots) != 1:
+        raise RuntimeError("pinned model files resolved through mixed snapshot roots")
+    files = [receipts[name] for name in sorted(receipts)]
+    resolved_revisions = {entry["resolved_revision"] for entry in files}
+    if resolved_revisions != {MODEL_REVISION}:
+        raise RuntimeError("pinned model files resolved through mixed revisions")
+    receipt = {
+        "model_id": MODEL_ID,
+        "requested_revision": MODEL_REVISION,
+        "resolved_revision": next(iter(resolved_revisions)),
+        "snapshot_layout": f"snapshots/{MODEL_REVISION}",
+        "files": files,
+    }
+    receipt["files_sha256"] = _canonical_sha256({"files": files})
+    return receipt
+
+
 def _load_base(config: Mapping[str, Any]) -> tuple[Any, nn.Module, dict[str, Any]]:
     if transformers.__version__ != str(config["model"]["transformers_version"]):
         raise RuntimeError("Transformers version drift")
+    snapshot_receipt = _pinned_snapshot_receipt()
     tokenizer = AutoTokenizer.from_pretrained(
-        MODEL_ID, revision=MODEL_REVISION, trust_remote_code=True
+        MODEL_ID,
+        revision=MODEL_REVISION,
+        trust_remote_code=True,
+        local_files_only=True,
     )
     token_receipt = _validate_tokenizer(tokenizer, config)
     model = AutoModelForCausalLM.from_pretrained(
@@ -369,10 +465,15 @@ def _load_base(config: Mapping[str, Any]) -> tuple[Any, nn.Module, dict[str, Any
         dtype=torch.bfloat16,
         attn_implementation="sdpa",
         low_cpu_mem_usage=True,
+        local_files_only=True,
+        use_safetensors=True,
     ).cuda()
     model.config.use_cache = False
-    if getattr(model.config, "_commit_hash", MODEL_REVISION) != MODEL_REVISION:
+    runtime_commit_hash = getattr(model.config, "_commit_hash", None)
+    if runtime_commit_hash not in {None, MODEL_REVISION}:
         raise RuntimeError("loaded model revision differs from the pinned revision")
+    token_receipt["pinned_snapshot"] = snapshot_receipt
+    token_receipt["runtime_model_config_commit_hash"] = runtime_commit_hash
     model.requires_grad_(False)
     return tokenizer, model, token_receipt
 

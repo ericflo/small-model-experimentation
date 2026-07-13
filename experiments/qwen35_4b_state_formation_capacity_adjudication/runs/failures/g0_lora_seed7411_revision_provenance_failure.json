@@ -1,0 +1,26 @@
+{
+  "benchmark_files_read": 0,
+  "capacity": "lora",
+  "command_stage": "model-smoke",
+  "design_receipt_identity_sha256": "d943b909250c2ebd377b8094bb55324a5d5ccf555c7559736526f013d248ac52",
+  "error": "loaded model revision differs from the pinned revision",
+  "error_type": "RuntimeError",
+  "experiment_id": "qwen35_4b_state_formation_capacity_adjudication",
+  "failure_location": "src/gpu_runner.py:_load_base",
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision_requested": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "model_seed": 7411,
+  "observed_runtime_model_config_commit_hash": null,
+  "output_created": false,
+  "phase": "lora_g0_premechanics",
+  "receipt_identity_sha256": "c7c874b536f4c30915943b6e46b0c4c00b64d85102fe0d12683e02cdc19201d7",
+  "result_payloads_opened": [
+    "train"
+  ],
+  "schema_version": 1,
+  "scientific_evidence": false,
+  "sealed_contrast_payloads_opened": [],
+  "source_contract_sha256": "903f19141ef982f0e90ea856edd72d75fb48d2dbd96e81dc166a6c32d4c14116",
+  "status": "SETUP_MECHANICS_FAILURE_PRESERVED",
+  "training_or_evaluation_started": false
+}

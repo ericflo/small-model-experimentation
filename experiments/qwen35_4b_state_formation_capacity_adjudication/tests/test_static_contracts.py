@@ -4,11 +4,13 @@ import ast
 import contextlib
 import io
 import importlib.util
+import json
 import re
 import sys
 import tempfile
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 from unittest import mock
 
 
@@ -840,6 +842,199 @@ class StaticContractTests(unittest.TestCase):
         self.assertIn('"peak_allocated_gib": torch.cuda.max_memory_allocated()', joint)
         self.assertIn('"answer_loss": float(joint_output.answer_loss.detach().cpu())', joint)
         self.assertIn('"all_joint_trainable_groups_finite_nonzero"', joint)
+
+    def test_pinned_snapshot_receipt_binds_every_weight_and_tokenizer_file(self) -> None:
+        from src import gpu_runner
+
+        revision = gpu_runner.MODEL_REVISION
+        with tempfile.TemporaryDirectory() as directory:
+            snapshot = Path(directory) / "snapshots" / revision
+            snapshot.mkdir(parents=True)
+            shards = (
+                "model.safetensors-00001-of-00002.safetensors",
+                "model.safetensors-00002-of-00002.safetensors",
+            )
+            for filename in gpu_runner.PINNED_SNAPSHOT_FILES:
+                payload = b"{}"
+                if filename == "model.safetensors.index.json":
+                    payload = json.dumps(
+                        {"weight_map": {"a": shards[0], "b": shards[1]}}
+                    ).encode("utf-8")
+                (snapshot / filename).write_bytes(payload)
+            for index, shard in enumerate(shards):
+                (snapshot / shard).write_bytes(f"shard-{index}".encode("ascii"))
+
+            with mock.patch.object(
+                gpu_runner,
+                "cached_file",
+                side_effect=lambda _model, filename, revision: str(snapshot / filename),
+            ):
+                receipt = gpu_runner._pinned_snapshot_receipt()
+
+            self.assertEqual(receipt["requested_revision"], revision)
+            self.assertEqual(receipt["resolved_revision"], revision)
+            self.assertEqual(receipt["snapshot_layout"], f"snapshots/{revision}")
+            self.assertEqual(
+                [entry["filename"] for entry in receipt["files"]],
+                sorted((*gpu_runner.PINNED_SNAPSHOT_FILES, *shards)),
+            )
+            self.assertTrue(all(entry["resolved_revision"] == revision for entry in receipt["files"]))
+            self.assertRegex(receipt["files_sha256"], r"^[0-9a-f]{64}$")
+
+            wrong = Path(directory) / "snapshots" / ("f" * 40)
+            wrong.mkdir(parents=True)
+            for filename in gpu_runner.PINNED_SNAPSHOT_FILES:
+                (wrong / filename).write_bytes((snapshot / filename).read_bytes())
+            with mock.patch.object(
+                gpu_runner,
+                "cached_file",
+                side_effect=lambda _model, filename, revision: str(wrong / filename),
+            ):
+                with self.assertRaisesRegex(RuntimeError, "outside the pinned model revision"):
+                    gpu_runner._pinned_snapshot_receipt()
+
+    def test_pinned_snapshot_receipt_rejects_malformed_index_and_mixed_paths(self) -> None:
+        from src import gpu_runner
+
+        revision = gpu_runner.MODEL_REVISION
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            snapshot = root / "snapshots" / revision
+            snapshot.mkdir(parents=True)
+            for filename in gpu_runner.PINNED_SNAPSHOT_FILES:
+                (snapshot / filename).write_bytes(b"{}")
+
+            def cached_from(base: Path):
+                return lambda _model, filename, revision: str(base / filename)
+
+            with mock.patch.object(gpu_runner, "cached_file", side_effect=cached_from(snapshot)):
+                with self.assertRaisesRegex(RuntimeError, "has no weight map"):
+                    gpu_runner._pinned_snapshot_receipt()
+
+            (snapshot / "model.safetensors.index.json").write_text(
+                json.dumps({"weight_map": {"a": "../escape.safetensors"}}),
+                encoding="utf-8",
+            )
+            with mock.patch.object(gpu_runner, "cached_file", side_effect=cached_from(snapshot)):
+                with self.assertRaisesRegex(RuntimeError, "invalid shard path"):
+                    gpu_runner._pinned_snapshot_receipt()
+
+            shard = "model.safetensors-00001-of-00001.safetensors"
+            (snapshot / "model.safetensors.index.json").write_text(
+                json.dumps({"weight_map": {"a": shard}}), encoding="utf-8"
+            )
+            with mock.patch.object(gpu_runner, "cached_file", side_effect=cached_from(snapshot)):
+                with self.assertRaisesRegex(RuntimeError, "not readable"):
+                    gpu_runner._pinned_snapshot_receipt()
+
+            (snapshot / shard).write_bytes(b"weights")
+            second_snapshot = root / "other" / "snapshots" / revision
+            second_snapshot.mkdir(parents=True)
+            (second_snapshot / shard).write_bytes(b"weights")
+
+            def mixed(_model, filename, revision):
+                base = second_snapshot if filename == shard else snapshot
+                return str(base / filename)
+
+            with mock.patch.object(gpu_runner, "cached_file", side_effect=mixed):
+                with self.assertRaisesRegex(RuntimeError, "mixed snapshot roots"):
+                    gpu_runner._pinned_snapshot_receipt()
+
+            wrong_basename = snapshot / "wrong-name.json"
+            wrong_basename.write_bytes(b"{}")
+            with mock.patch.object(
+                gpu_runner,
+                "cached_file",
+                side_effect=lambda _model, filename, revision: str(wrong_basename),
+            ):
+                with self.assertRaisesRegex(RuntimeError, "basename changed"):
+                    gpu_runner._pinned_snapshot_receipt()
+
+    def test_load_base_accepts_missing_runtime_hash_only_after_snapshot_proof(self) -> None:
+        from src import gpu_runner
+        from src.config import load_config
+
+        config = load_config(ROOT / "configs" / "default.yaml")
+        tokenizer = mock.Mock()
+        model = mock.Mock()
+        model.config = SimpleNamespace(_commit_hash=None, use_cache=True)
+        model.cuda.return_value = model
+        proof = {
+            "model_id": gpu_runner.MODEL_ID,
+            "requested_revision": gpu_runner.MODEL_REVISION,
+            "resolved_revision": gpu_runner.MODEL_REVISION,
+            "snapshot_layout": f"snapshots/{gpu_runner.MODEL_REVISION}",
+            "files": [],
+            "files_sha256": "a" * 64,
+        }
+        with (
+            mock.patch.object(gpu_runner, "_pinned_snapshot_receipt", return_value=proof),
+            mock.patch.object(
+                gpu_runner.AutoTokenizer, "from_pretrained", return_value=tokenizer
+            ) as tokenizer_loader,
+            mock.patch.object(
+                gpu_runner.AutoModelForCausalLM, "from_pretrained", return_value=model
+            ) as model_loader,
+            mock.patch.object(
+                gpu_runner,
+                "_validate_tokenizer",
+                return_value={"state_token_id": 1, "answer_token_ids": [2, 3, 4, 5]},
+            ),
+        ):
+            _, loaded, receipt = gpu_runner._load_base(config)
+        self.assertIs(loaded, model)
+        self.assertIsNone(receipt["runtime_model_config_commit_hash"])
+        self.assertEqual(receipt["pinned_snapshot"], proof)
+        model.requires_grad_.assert_called_once_with(False)
+        self.assertIs(tokenizer_loader.call_args.kwargs["local_files_only"], True)
+        self.assertIs(model_loader.call_args.kwargs["local_files_only"], True)
+        self.assertEqual(tokenizer_loader.call_args.kwargs["revision"], gpu_runner.MODEL_REVISION)
+        self.assertEqual(model_loader.call_args.kwargs["revision"], gpu_runner.MODEL_REVISION)
+        self.assertIs(model_loader.call_args.kwargs["use_safetensors"], True)
+
+        with (
+            mock.patch.object(
+                gpu_runner, "_pinned_snapshot_receipt", side_effect=RuntimeError("proof failed")
+            ),
+            mock.patch.object(gpu_runner.AutoTokenizer, "from_pretrained") as tokenizer_loader,
+            mock.patch.object(gpu_runner.AutoModelForCausalLM, "from_pretrained") as model_loader,
+        ):
+            with self.assertRaisesRegex(RuntimeError, "proof failed"):
+                gpu_runner._load_base(config)
+        tokenizer_loader.assert_not_called()
+        model_loader.assert_not_called()
+
+        model.config._commit_hash = gpu_runner.MODEL_REVISION
+        model.reset_mock()
+        with (
+            mock.patch.object(gpu_runner, "_pinned_snapshot_receipt", return_value=proof),
+            mock.patch.object(gpu_runner.AutoTokenizer, "from_pretrained", return_value=tokenizer),
+            mock.patch.object(gpu_runner.AutoModelForCausalLM, "from_pretrained", return_value=model),
+            mock.patch.object(
+                gpu_runner,
+                "_validate_tokenizer",
+                return_value={"state_token_id": 1, "answer_token_ids": [2, 3, 4, 5]},
+            ),
+        ):
+            _, loaded, receipt = gpu_runner._load_base(config)
+        self.assertIs(loaded, model)
+        self.assertEqual(
+            receipt["runtime_model_config_commit_hash"], gpu_runner.MODEL_REVISION
+        )
+
+        model.config._commit_hash = "f" * 40
+        with (
+            mock.patch.object(gpu_runner, "_pinned_snapshot_receipt", return_value=proof),
+            mock.patch.object(gpu_runner.AutoTokenizer, "from_pretrained", return_value=tokenizer),
+            mock.patch.object(gpu_runner.AutoModelForCausalLM, "from_pretrained", return_value=model),
+            mock.patch.object(
+                gpu_runner,
+                "_validate_tokenizer",
+                return_value={"state_token_id": 1, "answer_token_ids": [2, 3, 4, 5]},
+            ),
+        ):
+            with self.assertRaisesRegex(RuntimeError, "loaded model revision differs"):
+                gpu_runner._load_base(config)
 
     def test_positive_control_uses_fresh_grid_without_opening_result_rows(self) -> None:
         path = ROOT / "src" / "gpu_runner.py"
