@@ -744,3 +744,25 @@ or result stage is authorized before those gates.
 Only archive-checkpoint validation, commit, push, and workflow verification are authorized. Do not
 regenerate source-v10 CPU/data/initialization or run a model until both workflows are green. No result
 stage is authorized.
+
+## 2026-07-13 — source-v10 non-model setup regenerated
+
+- Archive commit `9c1fadde` passed both Validate Repository and Publish Research Site before
+  regeneration began.
+- CPU smoke passed without loading a model at file SHA-256 `ebfb68fe…17bc5`, source
+  `979a9012…f394b7`, and zero benchmark reads.
+- All seven deterministic splits regenerated with zero cross-split structural duplicates. Manifest
+  SHA-256 is `0b1cca35…7422a`, data-contract identity is `5fba6c3c…c252`, and the sealed-access ledger
+  remains `events: []` at identity `d0b9eda7…17e04`. Inspection read only receipt, manifest, and
+  compressed-byte metadata; no sealed row was decompressed.
+- All three shared initialization bundles reopened through the canonical loader, have byte-identical
+  but inode-distinct external sidecars and tracked mirrors, and exactly reproduce their archived
+  source-v9 tensor-value digests. Bundle SHA-256 / sidecar receipt identity: seed 7411
+  `e202efb8…3e0d8` / `9f6923d4…147abd`; seed 7412 `ab0b70c1…9169b` / `cf90d157…806e9`; seed 7413
+  `7dca25ea…a7c5c` / `791aa7ec…6201`.
+
+## Current authorization
+
+Only non-model setup validation, commit, push, and workflow verification are authorized. LoRA G0,
+positive controls, result training, evaluation, and analysis remain blocked until both workflows are
+green.

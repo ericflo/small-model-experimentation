@@ -1,6 +1,6 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · frozen design unchanged; source-v10 implementation review and publication/CI complete; source-v9 setup archive complete; archive-checkpoint publication/CI required before source-v10 regeneration; no result run is authorized
+**Status:** in-progress · since 2026-07-13 · frozen design unchanged; source-v10 implementation and source-v9 archive checkpoints published/green; source-v10 non-model setup regenerated; non-model checkpoint publication/CI required before G0; no result run is authorized
 
 ## Current status
 
@@ -20,7 +20,15 @@ with both workflows green. All source-v9 setup is now preserved in a verified 20
 17,655,138-byte archive: file-set identity `7360b00d…1f2650`, receipt file SHA-256
 `086d35af…be14e`, and receipt identity `8d5fe94d…33ad5c`. The exact 20-leaf zero quarantine,
 canonical cleanup, retained failure mirror, and idempotent replay all pass. Publish this archive
-checkpoint and require both workflows before regenerating source-v10 setup.
+checkpoint was published at `9c1fadde` with both workflows green before source-v10 setup
+regeneration began. Source-v10 CPU smoke has SHA-256 `ebfb68fe…17bc5`; the regenerated manifest is
+`0b1cca35…7422a`, data contract `5fba6c3c…c252`, and empty-ledger identity
+`d0b9eda7…17e04`. All three shared initialization bundles reopen canonically, have byte-identical but
+inode-distinct tracked mirrors, and exactly reproduce the archived source-v9 tensor values. Bundle
+SHA-256 / sidecar receipt identity by seed: 7411 `e202efb8…3e0d8` / `9f6923d4…147abd`; 7412
+`ab0b70c1…9169b` / `cf90d157…806e9`; 7413 `7dca25ea…a7c5c` / `791aa7ec…6201`. No model was loaded,
+no benchmark was read, and no sealed split was decompressed. This non-model checkpoint must now be
+validated, committed, pushed, and green in both workflows before seed-7411 G0.
 The source-v8 code was published at commit `ee729def` with both workflows green, and the source-d426
 archive is now complete: 23 files, 18,927,960 bytes, files identity `1538f2f2…ec3ed0`, receipt file
 SHA-256 `9aa04d35…efc1a1`, and receipt identity `e7a71362…818b77`. Independent verification matched every
@@ -34,7 +42,7 @@ by seed: 7411 `5ed9d5c6…0e1b8` / `74ddebb1…31413`; 7412 `15366ea6…dcb2c` /
 `01dd7e7c…1ee4b`; 7413 `bda608a2…bf8b4` / `a7ab7d5d…e912f`. No model was loaded, no benchmark was
 read, and no sealed split was decompressed during this regeneration. That non-model checkpoint was
 published at `ff4a8b9b` with both workflows green before the failed G0. All of it is now invalidated
-by source v10 and awaits exact archival.
+by source v10 and preserved in the exact source-v9 archive described above.
 Under source `3baa7b53…d5c42`, seed 7411 passed LoRA G0, then its 256-update setup
 control scored 0/48 exact terminal triples. Review found that the control had presented one singleton
 row per optimizer update and omitted the globally frozen accumulation of 16, so each high-entropy row
@@ -116,14 +124,16 @@ before seed 7413 or any result-bearing stage.
 
 The frozen GPU runbook is the complete from-zero phase order, not the current resume point. Preserve
 `reports/design_receipt.json` and every file it freezes; do not rerun `design-boundary` or rewrite the
-preregistration, design review, architecture, runbook, handoff, or default config. After
+preregistration, design review, architecture, runbook, handoff, or default config.
 The source-d426 transition is complete at receipt identity `e7a71362…818b77`. Source-v9 non-model
 setup was published before its seed-7411 G0 stopped fail-closed at model setup. After source contract
 v10 is committed, pushed to `main`, and both repository workflows are green, archive every source-
 `5629a3a4…99e236` setup artifact through the registered invalidation helper. That transition is
 complete at receipt identity `8d5fe94d…33ad5c`. Publish and validate the archive checkpoint before
-regenerating CPU smoke, procedural data/empty ledger, all three
-initialization bundles, and all three LoRA G0/positive-control pairs under one final v10 source.
+regenerating CPU smoke, procedural data/empty ledger, all three initialization bundles, and all three
+LoRA G0/positive-control pairs under one final v10 source. Archive commit `9c1fadde` passed both
+workflows, and the non-model regeneration is now complete. Publish and validate this non-model
+checkpoint before replaying all three LoRA G0/positive-control pairs in seed order.
 
 The exact one-time transition command is:
 
@@ -134,9 +144,9 @@ EXP=experiments/qwen35_4b_state_formation_capacity_adjudication
   --trigger-failure "$EXP/runs/failures/g0_lora_seed7411_source_5629a3a4f12f.json"
 ```
 
-The emitted tracked receipt and external archive are independently verified. Run `make check`, commit
-and push this archive checkpoint, and wait for both repository workflows before regenerating any v10
-setup.
+The emitted tracked receipt and external archive are independently verified, published, and green.
+The command is retained as the exact historical transition record; do not rerun it against live
+source-v10 setup.
 
 A result checkpoint directory is not a completed training cell. Completion requires the exact
 external and tracked `TRAINING_COMPLETE` receipts, byte-identical but inode-distinct attempt-marker,
@@ -332,8 +342,9 @@ fresh successor.
 ## Run
 
 The run is deliberately non-monolithic. At the current source-v10 resume point, the source-v9 archive
-transition in **Source-v10 operator boundary** is complete. Only after that archive checkpoint is
-committed, pushed, and green should setup regeneration restart with the non-model smoke:
+transition and source-v10 non-model regeneration in **Source-v10 operator boundary** are complete.
+The non-model artifacts must pass repository validation, be committed and pushed, and have both
+workflows green before the first model-bearing command. The completed smoke command was:
 
 ```bash
 .venv/bin/python -B experiments/qwen35_4b_state_formation_capacity_adjudication/scripts/run.py --stage cpu-smoke

@@ -31,6 +31,11 @@ external_artifacts:
     required_for: "audit of the source-v9 non-model setup and seed-7411 cache-alias G0 failure with exact preservation of every source-bound setup payload"
     checksum: "tracked receipt runs/failures/invalidated_setup_source_5629a3a4.json; receipt SHA256 086d35aff7b0d79cbee600d52057e216fbf22e073f2b82c7ef20935844bbe14e; receipt identity 8d5fe94d91a7b6af7b12629b0a135cfa907a5862ec07f363b8c51d577533ad5c; files identity 7360b00d6ea5ca1c74bbd475e67ab5238e3343376247834e31ed698f7b1f2650; 20 files; 17,655,138 bytes"
     regenerate: "not regenerable as historical evidence; preserve this exact content-hashed archive"
+  - name: "source-v10 shared initialization bundles"
+    storage: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed{7411,7412,7413}.pt{,.json}"
+    required_for: "all source-v10 seed-matched G0, positive-control, and reached training cells"
+    checksum: "seed 7411 bundle e202efb8ea930c9f29af541aaa9ab5d55c607ea77638f7f735b0dd9a90f3e0d8, sidecar SHA256 70115aaec7b0acd701ea7fa98097b7b47f28bf339eea8d72558f12ff968e7c72, receipt identity 9f6923d4bfca52e991dd72f62cc7f9aba1f7da7eae9fad31532ac3f6f3147abd; seed 7412 bundle ab0b70c162199c87563ed367a4e6230230fa0e80ebe7b911b26b8d3041c9169b, sidecar SHA256 aab22906be19fe35724e8cbf3f931ed27e85714eebf9a891e82e529cd1d1eb1e, receipt identity cf90d1579941359a7ffbeb594a2263ef6eb28205d87f3c9e53a9093b0ca806e9; seed 7413 bundle 7dca25ea1c8dcab453cc2c84258b27ce3c396fbc4aead1acd37dcf6d3f2a7c5c, sidecar SHA256 c7a0257e095c7cb21ae6b28f07079beff70e794fee6e0ca7394d44875a1f7780, receipt identity 791aa7eca71656f9a7d5e83d74fd0778622d584a449c7b4bdd0293bfb7416201"
+    regenerate: "run prepare-init once per seed only after a source transition and its invalidated setup archive checkpoint are published and green; never overwrite a realized bundle"
   - name: "fixed-final LoRA joint checkpoints"
     storage: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/lora_joint_seed{7411,7412,7413}/"
     required_for: "primary LoRA state-formation adjudication and intact/disabled reevaluation"
@@ -71,6 +76,12 @@ reproducibility:
     - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/invalidated_setup/source_1d1368cf064689322d9df7f345e67b026cecccc32d3a7b7514b82f253d434b0a/"
     - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/invalidated_setup/source_d4269bf34f7c80affcc8c1e8a33fee9afddcd912d1bd9dead223e520ee108b36/"
     - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/invalidated_setup/source_5629a3a4f12f5720cbd4aea53520d905ed5f03e7e41f3b21df9b4bc92399e236/"
+    - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed7411.pt"
+    - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed7411.pt.json"
+    - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed7412.pt"
+    - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed7412.pt.json"
+    - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed7413.pt"
+    - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed7413.pt.json"
 notes: >-
   The frozen design receipt remains authoritative. Setup artifacts produced under source digests
   903f1914, 9fd420f5, and 3baa7b53 are invalid and preserved in separate content-hashed external
@@ -157,8 +168,16 @@ notes: >-
   17,655,138 bytes at receipt identity 8d5fe94d91a7b6af7b12629b0a135cfa907a5862ec07f363b8c51d577533ad5c
   and files identity 7360b00d6ea5ca1c74bbd475e67ab5238e3343376247834e31ed698f7b1f2650.
   Independent verification matched every payload and zero-quarantine leaf, exact canonical cleanup,
-  the retained G0 failure mirror, and an idempotent replay. Publish the archive checkpoint and require
-  both workflows before regenerating source-v10 setup.
+  the retained G0 failure mirror, and an idempotent replay. Archive commit 9c1fadde passed both
+  workflows before source-v10 regeneration. Source-v10 CPU smoke SHA256 is
+  ebfb68feac8eab8ed9e5304defa9497b3911ef01d6578be90c000d2010317bc5; manifest SHA256 is
+  0b1cca35ed8c13a5d29a6632c9e7d86effa5dce7c61bdba2172217d19e27422a; data-contract identity is
+  5fba6c3c94590e70314139558b6a54980bc571b21b556194d3fb6970c6a4c252; and the empty-ledger identity
+  is d0b9eda7b48ec63149ac13588c23dbd2c9c15e0f5c9711582c2a4b2ae0617e04. All three initialization
+  bundles reopen through the canonical loader, exactly match their archived source-v9 tensor-value
+  digests, and have byte-identical but inode-distinct tracked mirrors. No model, benchmark, or sealed
+  split was opened during this regeneration. Publish this non-model checkpoint and require both
+  workflows before seed-7411 G0.
   The first Qwen load stopped before wrapper construction or mechanics and is preserved by a tracked
   failure receipt; it opened
   only the permitted training validator, no sealed contrast, and produced no canonical G0 output.
