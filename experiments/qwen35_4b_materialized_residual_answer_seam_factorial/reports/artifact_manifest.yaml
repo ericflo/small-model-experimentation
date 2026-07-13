@@ -21,7 +21,10 @@ local_receipts:
   preoutcome_receipt:
     path: "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/prepared/preoutcome_receipt.json"
     sha256: "a73b5a0a8fa65700a5ddc8e4a4aa7a50355d7e1826ee63d27a0f790a2c8b350e"
+  tokenizer_receipt:
+    path: "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/tokenizer/receipt.json"
+    sha256: "61ff72925d318a9d32f3863a34f00e58ca2ae3ab66df41ece3117f205c4c0a05"
 notes: >-
-  Model-free v2 construction only. Six tracked prepared request files total
+  Model-free v2 construction/tokenizer preparation only. Six tracked prepared request files total
   about 5.9 MB and are bound by the preoutcome receipt. No model/GPU stage is
   authorized.

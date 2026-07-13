@@ -3378,10 +3378,10 @@
   },
   {
     "file_counts": {
-      ".json": 4,
+      ".json": 5,
       ".jsonl": 10,
       ".md": 7,
-      ".py": 12,
+      ".py": 14,
       ".yaml": 3
     },
     "id": "qwen35_4b_materialized_residual_answer_seam_factorial",
@@ -3409,8 +3409,8 @@
       "src",
       "tests"
     ],
-    "total_files": 36,
-    "total_size_bytes": 6470945
+    "total_files": 39,
+    "total_size_bytes": 6497536
   },
   {
     "file_counts": {

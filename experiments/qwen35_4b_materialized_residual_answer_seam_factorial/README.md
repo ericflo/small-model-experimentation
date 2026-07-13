@@ -85,8 +85,10 @@ The immutable scaffold-v1 receipt still passes. V2 construction also passes
 twice byte-identically: 72 unique public instances, zero overlap with 264
 authenticated parent instances, exact live-sibling strata, 4,104 prepared rows,
 2,952 unique canonical request IDs, balanced A-X calibration positions, zero
-model calls, and empty forbidden-read receipts. Thirty-six model-free tests
-pass. This remains registration and implementation evidence only.
+model calls, and empty forbidden-read receipts. A real-tokenizer receipt also
+authenticates all answer compositions, context fit, and zero rendered parent
+overlap. Forty model-free tests pass. This remains registration and
+implementation evidence only.
 
 ## Interpretation
 

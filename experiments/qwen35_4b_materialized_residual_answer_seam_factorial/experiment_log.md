@@ -31,3 +31,8 @@ Created as a new experiment scaffold.
 - 2026-07-13: Added token-native answer-prefix/forced-seam behavior, raw-logprob
   authentication, paired answer seeds, exact parsing/gates, and model-free test
   coverage. All 36 tests pass. Live execution remains held.
+- 2026-07-13: Real-tokenizer preparation passed twice byte-identically. It
+  authenticated `PROGRAM:` as `[78041,25]`, close as `[248069,271]`, all 14,400
+  canonical answer compositions, 1,396-token worst-case context, and zero
+  rendered-token overlap with 1,984 parent prompts. Receipt `61ff7292...`; no
+  model weights, GPU, or sampled output was used.

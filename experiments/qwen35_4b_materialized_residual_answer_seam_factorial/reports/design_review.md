@@ -57,10 +57,10 @@ did not yet define a falsifiable or transaction-safe experiment.
 
 ## Remaining blockers before a calibration lock
 
-1. Produce a real-tokenizer receipt for exact thinking/no-thinking suffixes,
-   close sequence `[248069,271]`, model/tokenizer EOS, literal `PROGRAM:` IDs,
-   A-X tokenizations, canonical answer lines/tails, context fit, and rendered
-   parent overlap.
+1. **Completed model-free:** real-tokenizer receipt SHA-256 `61ff7292...`
+   authenticates thinking/no-thinking suffixes, close `[248069,271]`,
+   `PROGRAM:` `[78041,25]`, model/tokenizer EOS, A-X tokenizations, all 14,400
+   canonical lines/tails, context fit, and zero rendered parent overlap.
 2. Implement and mutation-test the append-only
    `STARTED -> bundle -> GENERATED -> COMPLETE` transaction state machine,
    crash recovery, symlink/unknown-inventory refusal, and end-to-end

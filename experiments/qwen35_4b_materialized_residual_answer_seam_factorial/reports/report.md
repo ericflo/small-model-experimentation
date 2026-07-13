@@ -51,8 +51,11 @@ Construction summary SHA-256:
 - three suffix controls share exact IDs/order;
 - zero parent request-ID, seed-key, or user-prompt overlap;
 - every A-X alias appears once in each calibration answer position;
+- real-tokenizer receipt `61ff7292...` authenticates `PROGRAM:` `[78041,25]`,
+  close `[248069,271]`, all 14,400 canonical answer compositions, 1,396-token
+  worst-case context, and zero overlap with 1,984 parent rendered prompts;
 - zero model loads, calls, or sampled outputs; and
-- 36/36 current model-free tests pass.
+- 40/40 current model-free tests pass.
 
 The first random-order constructor attempt was interrupted after 3m35s before
 writing artifacts. An exact common-function index reduced construction to about
@@ -83,8 +86,8 @@ materialized residuals help.
 
 ## Remaining Work
 
-Before calibration: real-tokenizer receipts and rendered-overlap audit;
-append-only transactions with crash recovery; reader allowlists; exact batch
+Before calibration: append-only transactions with crash recovery; reader
+allowlists; exact batch
 and shared-thought parity; implementation locks/live preflight; independent
 review of committed hashes; push to `main`; and green validation/site CI.
 
