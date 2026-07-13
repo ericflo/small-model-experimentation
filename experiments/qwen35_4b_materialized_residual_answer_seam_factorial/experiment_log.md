@@ -52,3 +52,9 @@ Created as a new experiment scaffold.
   lock, preflight, runner, model/revision, semantic bundle metadata, and every
   predecessor link. A self-consistently rehashed forged bundle still fails.
   All 57 tests pass; no model call was made.
+- 2026-07-13: Sealed the calibration plan behind a four-artifact reader
+  allowlist and fixed five-invocation transaction orchestrator. A relocated
+  filesystem test deletes every mechanics artifact; loading and sampling plans
+  remain byte-identical. A fake runner completes thought-first 48-row batches,
+  exact factorial pairing, fixed-priority analysis, and a zero-call restart.
+  All 61 tests pass; no model call was made.

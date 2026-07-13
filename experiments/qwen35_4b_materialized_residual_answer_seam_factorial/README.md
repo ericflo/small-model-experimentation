@@ -87,17 +87,19 @@ authenticated parent instances, exact live-sibling strata, 4,104 prepared rows,
 2,952 unique canonical request IDs, balanced A-X calibration positions, zero
 model calls, and empty forbidden-read receipts. Append-only real-tokenizer
 receipts also authenticate all answer compositions, context fit, zero rendered
-parent overlap, and the current shared-thought runner. Fifty-seven model-free
+parent overlap, and the current shared-thought runner. Sixty-one model-free
 tests pass, including adversarial durable transaction/recovery mutations and
-exact persisted-token thought forking. This remains registration and
-implementation evidence only.
+exact persisted-token thought forking. A calibration-only loader is byte-
+identical with every mechanics artifact absent, and a fake-runner integration
+passes all five durable invocations plus analysis/restart. This remains
+registration and implementation evidence only.
 
 ## Interpretation
 
 No capability belief changes. Adversarial review materially strengthened the
-design and still holds live execution: calibration transaction integration,
-reader firewalls, separate locks, and committed outcome boundaries remain
-mandatory.
+design and still holds live execution: the calibration implementation lock,
+live-engine preflight, independent implementation review, and committed
+outcome boundaries remain mandatory.
 
 ## Knowledgebase Update
 

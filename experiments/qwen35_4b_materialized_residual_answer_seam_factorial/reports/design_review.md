@@ -53,7 +53,7 @@ did not yet define a falsifiable or transaction-safe experiment.
   `b39e0ad1ccf49503eb48353eac118500432953f32ad27ae2acc1448ed99f622d`.
 - Preoutcome receipt SHA-256:
   `a73b5a0a8fa65700a5ddc8e4a4aa7a50355d7e1826ee63d27a0f790a2c8b350e`.
-- The experiment suite currently has 57 passing model-free tests.
+- The experiment suite currently has 61 passing model-free tests.
 
 ## Remaining blockers before a calibration lock
 
@@ -71,16 +71,20 @@ did not yet define a falsifiable or transaction-safe experiment.
    transaction link even against self-consistently rehashed forged receipts.
    The calibration stage runner must still bind the exact lock/preflight and
    pass end-to-end review.
-3. Implement a calibration-only reader allowlist proving mechanics public,
-   audit, gold, prepared requests, and every forbidden directory can be absent
-   without changing calibration preparation or scoring.
-4. **Primitive completed model-free; stage integration remains:** the runner
+3. **Completed model-free:** the calibration loader has an exact four-artifact
+   read allowlist (config, preoutcome, calibration requests, tokenizer receipt).
+   A relocated test proves byte-identical plans with mechanics public, audit,
+   gold, transport/direct/suffix requests, and every forbidden directory
+   absent.
+4. **Completed model-free:** the runner
    samples one thought transaction and forks both think512 continuations from
    its exact authenticated retained token IDs. Tests cover natural close/EOS,
    cap termination, JSON persistence, runner/prompt/order/seed drift,
    prefix-only continuation differences, and separate physical versus reused
-   token accounting. Freeze the calibration invocation order and batch
-   geometry around this primitive.
+   token accounting. The calibration stage now freezes and fake-executes one
+   48-row batch each in this order: thought, think/freeform, think/slot,
+   no-think/freeform, no-think/slot. Full restart performs zero generation
+   calls and analysis authenticates exact thought/answer pairing.
 5. Add calibration and mechanics implementation locks, live preflight, separate
    authorization receipts, and a hidden-read firewall.
 6. Re-run independent implementation review over exact committed hashes.

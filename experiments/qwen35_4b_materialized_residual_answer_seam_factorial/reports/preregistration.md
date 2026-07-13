@@ -52,6 +52,9 @@ All four cells use a stable `answer` seed domain with canonical request IDs.
 Because Ada/vLLM samples are not batch-invariant, paired numeric seeds are an
 identity aid rather than a claim of common random numbers. Invocation order,
 row order, `n=1`, scheduler mode, and batch geometry are implementation-locked.
+Calibration invokes exactly one 48-row batch in this order:
+`calibration_thoughts`, `think512_freeform`, `think512_program_slot`,
+`no_think_freeform`, `no_think_program_slot`.
 
 The program-slot cells use the same sampled-tail cap as freeform. The injected
 syntax therefore supplies extra logical context but no answer identity; those
