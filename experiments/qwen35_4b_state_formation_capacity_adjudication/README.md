@@ -1,6 +1,6 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · frozen design unchanged; receipt-path fix and historical receipt identities pass review; fresh source-bound setup regeneration is next; no result run has started
+**Status:** in-progress · since 2026-07-13 · frozen design unchanged; receipt-path fix and historical receipt identities pass review; fresh source-bound setup is complete; seed-7411 LoRA G0 retry is next
 
 ## Current status
 
@@ -22,8 +22,10 @@ That is mechanics evidence only and authorizes nothing. The minimal rename has a
 an independent scan found no analogous destination shadow in any other stage. The complete
 source-`9fd420f5` setup is preserved in a second invalidated archive. The audit also caught a newline
 error in all four hand-authored historical receipt identities; the identities are corrected and now
-covered by an automatic corpus-wide check. The corrected source passes 135/135 tests. Fresh setup must
-now be regenerated under the resulting source contract before another G0 retry.
+covered by an automatic corpus-wide check. The corrected source passes 135/135 tests. CPU smoke, all
+seven deterministic splits, a new empty seal ledger, and all three common-state bundles are now
+regenerated under source contract `3baa7b53…d5c42` and reopen exactly. Validation reopened 15,072
+non-contrast rows and zero sealed rows. The next authorized step is a fresh seed-7411 LoRA G0 retry.
 
 ## Research program and prior anchors
 

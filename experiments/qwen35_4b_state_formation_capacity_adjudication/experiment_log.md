@@ -225,9 +225,35 @@
   27/27, both 19-file archives reopen byte-for-byte, and the post-review source contract is
   `3baa7b532d62bae4d9751dfe4be9c6ce314c11ca4524266f4cebea63289d5c42`.
 
+## 2026-07-13 — post-path-fix setup regenerated
+
+- Recreated CPU smoke, all seven procedural splits, the seal ledger, and all three common-state
+  bundles from committed source contract
+  `3baa7b532d62bae4d9751dfe4be9c6ce314c11ca4524266f4cebea63289d5c42`. CPU smoke SHA-256 is
+  `8858671b077dd609141eb218b6932e9b8d7772877c2308df57c59d3d066ae467`; it records zero benchmark
+  reads, no model load, and no scientific evidence.
+- The new source-bound data manifest has SHA-256
+  `c2338a7aa2dad245683b6d3aebeef704199e9f143490830179263ea1fed57247` and data contract
+  `5ff3255bebe18a4a73a3bd9d1db4c153e4727aa23e0e064cfd5ed3d685307968`. Its exact seven-file
+  projection reproduces the prior payload metadata at digest
+  `3d52d6b31ffbd916cdd86495e0c14f0d11c293f868914e667d10a05acfecfba2`. Independent local reopen
+  validated all 15,072 non-contrast rows and decompressed zero sealed rows.
+- The new seal ledger has file SHA-256
+  `e2922cb1e51f58d378a5bc4fd6d49de391ea10f04fe06ac2c576424d91e2a85a`, canonical identity
+  `45f58325fbf7f362265bb6812cfeb23fc974bca5b7c25eea61d229d211446523`, and `events: []`.
+- Seeds 7411, 7412, and 7413 have bundle SHA-256 values
+  `9ffbb459238ed42cfeef541c0b331b744318a1940a55c5a6a8bca133866774f4`,
+  `9d666538e98de6c2660d42221286c89de36fdd786d5223df4b932bf8a6425670`, and
+  `6ce43dffdc7c47dc8e8d7370e42a394bcb25d35de063bfa04ab9cea3983d4d1b`. Their receipt identities are
+  `136565d109b7b936452d9d91a4a64de565157320aa5b965e49030da05e253256`,
+  `361274c81e734c651897f5c8b69380f6dd1f2ef4906aa7c6d8191bb8a148572b`, and
+  `85699c6008c83704453acfaff8aee1de68e977eaf0fcb552151c04f206b0273d`; every external sidecar is
+  byte-identical to its tracked mirror and all tensor-value digests reproduce exactly.
+- Independent audit is `GO`: it independently validated the source contract, manifest geometry,
+  compressed-byte hashes, empty-ledger identity, all three bundle files and receipt mirrors, 15,072
+  non-contrast rows, and zero sealed row decompressions.
+
 ## Current authorization
 
-The receipt-persistence repair and corrected historical identities pass independent review. Fresh
-CPU smoke, procedural data, empty seal ledger, and common initialization bundles are authorized under
-the resulting source contract. A new seed-7411 G0 remains prohibited until that setup is regenerated
-and reopened. No positive control or result training is authorized until its seed-matched G0 passes.
+Fresh seed-7411 LoRA G0 is authorized. No positive control or result training is authorized until its
+seed-matched G0 passes and its canonical receipt reopens successfully.

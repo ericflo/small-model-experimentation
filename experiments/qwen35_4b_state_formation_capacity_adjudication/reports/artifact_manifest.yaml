@@ -14,8 +14,8 @@ external_artifacts:
   - name: "per-seed common loop-state initialization bundles"
     storage: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed{7411,7412,7413}.pt"
     required_for: "bit-identical reconstruction of every reached capacity/objective arm"
-    checksum: "not currently realized; the source-9fd420f5 bundles are invalidated and preserved only in their historical archive"
-    regenerate: "create fresh bundles under the post-repair source contract after implementation-review GO; preserve the resulting external tensors and tracked mirrors"
+    checksum: "seed7411=9ffbb459238ed42cfeef541c0b331b744318a1940a55c5a6a8bca133866774f4 (receipt 136565d109b7b936452d9d91a4a64de565157320aa5b965e49030da05e253256); seed7412=9d666538e98de6c2660d42221286c89de36fdd786d5223df4b932bf8a6425670 (receipt 361274c81e734c651897f5c8b69380f6dd1f2ef4906aa7c6d8191bb8a148572b); seed7413=6ce43dffdc7c47dc8e8d7370e42a394bcb25d35de063bfa04ab9cea3983d4d1b (receipt 85699c6008c83704453acfaff8aee1de68e977eaf0fcb552151c04f206b0273d)"
+    regenerate: "realized under source contract 3baa7b532d62bae4d9751dfe4be9c6ce314c11ca4524266f4cebea63289d5c42; preserve these exact external tensors, sidecars, and tracked mirrors"
   - name: "fixed-final LoRA joint checkpoints"
     storage: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/lora_joint_seed{7411,7412,7413}/"
     required_for: "primary LoRA state-formation adjudication and intact/disabled reevaluation"
@@ -52,12 +52,16 @@ reproducibility:
   required_external_artifacts:
     - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/invalidated_setup/source_903f19141ef982f0e90ea856edd72d75fb48d2dbd96e81dc166a6c32d4c14116/"
     - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/invalidated_setup/source_9fd420f5f29fea2d9144bf50d3b187fc8e50d9acc9cb076656372281029614fb/"
+    - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed7411.pt"
+    - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed7412.pt"
+    - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed7413.pt"
 notes: >-
   The immutable design receipt remains authoritative. Setup artifacts produced under source digests
   903f1914 and 9fd420f5 are invalid and preserved in separate content-hashed external archives. No
-  current CPU smoke, data manifest, contrast ledger, or initialization bundle exists. The
-  receipt-path repair has implementation-review GO; each setup artifact must now be regenerated under
-  the resulting source contract before G0 can run.
+  current CPU smoke, data manifest, empty contrast ledger, and three initialization bundles are
+  realized under source contract 3baa7b532d62bae4d9751dfe4be9c6ce314c11ca4524266f4cebea63289d5c42.
+  Non-contrast contents and all bundle tensors reopen exactly; no sealed payload has been reopened
+  after generation. Seed-7411 G0 is the next setup gate.
   The first Qwen load stopped before wrapper construction or mechanics and is preserved by a tracked
   failure receipt; it opened
   only the permitted training validator, no sealed contrast, and produced no canonical G0 output.
