@@ -595,3 +595,20 @@ blocked until this setup-control replay passes and is committed.
 Seed-7412 LoRA G0 is authorized under source `d4269bf3…8b36`. Seed 7413, later positive controls,
 and all result training remain blocked until their exact predecessor setup gates pass and are
 committed. The unchanged nonzero aggregation-gradient gate is mandatory.
+
+## 2026-07-13 — replacement-source seed-7412 LoRA G0 validates the precision repair
+
+- Canonical receipt SHA-256 `3ef95869…aa2ca`, identity `737a8b39…0a89f`, under source
+  `d4269bf3…8b36` and manifest `e935c31a…1e57`.
+- The historically exact-zero `aggregate_logit` gradient is now present, finite, and nonzero at
+  `6.673135794699192e-5`. All other live-joint trainable groups remain finite/nonzero, the frozen base
+  has no gradients, K=1 is exact, K=12 is finite with 682 calls, and checkpoint roundtrip error is
+  zero.
+- The unchanged gate passed without a tolerance or exemption. This supports the preregistered BF16
+  projection/reduction explanation and resolves the mechanics question; it is not scientific evidence
+  about LoRA capacity.
+
+## Current authorization
+
+The seed-7412 LoRA positive control is authorized. Seed 7413 and all result training remain blocked
+until the seed-7412 control passes and is committed.

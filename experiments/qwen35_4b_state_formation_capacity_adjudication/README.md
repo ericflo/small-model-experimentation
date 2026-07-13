@@ -1,6 +1,6 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · frozen design unchanged; seed-7412 LoRA G0 precision failure preserved; narrow FP32 aggregation and durable G0-failure repair reviewed `GO`; source-1d setup archived; replacement-source seed-7411 G0/control passed; seed-7412 precision retry next; no result run is authorized
+**Status:** in-progress · since 2026-07-13 · frozen design unchanged; historical seed-7412 precision failure preserved; FP32 aggregation repair validated by nonzero repaired-source seed-7412 G0; seed-7411 G0/control and seed-7412 G0 passed; seed-7412 control next; no result run is authorized
 
 ## Current status
 
@@ -51,6 +51,10 @@ is finite, and checkpoint roundtrip error is zero. The receipt authorizes only i
 That seed-7411 control passed at identity `6a1394d9…cefa`: oracle accuracy 1.0, fixed-final intact
 48/48, disabled 0/48, exactly 256 updates, accumulation 16, and 4,096 presentations. It confirms
 the repaired setup path still depends causally on the LoRA update.
+Seed-7412 G0 then passed at identity `737a8b39…0a89f`. The formerly exact-zero aggregation scalar now
+has a present, finite, nonzero live-joint gradient `6.6731358e-5`; every unchanged mechanics gate also
+passes. This supports the preregistered BF16 projection/reduction explanation and closes the
+precision-repair question without weakening the gate. It is still setup evidence, not a LoRA result.
 
 Seed-7412 LoRA G0 then stopped at the frozen live-joint reachability gate. Every one of the 124 LoRA
 tensors and every other required recurrent group had a finite nonzero gradient, the base model had
@@ -68,7 +72,7 @@ an independent byte-identical source-qualified mirror without overwriting existi
 paths. The complete suite passes 201/201, a CUDA BF16 adversarial probe reproduces legacy gradient
 zero versus repaired analytic gradient 0.045, and independent numerical/runtime/archive re-audits
 give `GO`. The frozen nonzero gate is unchanged. All source-`1d1368cf…434b0a` setup is archived and
-replacement-source setup is regenerated; seed-7411 G0/control passed and seed 7412 is next.
+replacement-source seed-7411 G0/control and seed-7412 G0 passed; seed-7412 control is next.
 
 ## Research program and prior anchors
 
