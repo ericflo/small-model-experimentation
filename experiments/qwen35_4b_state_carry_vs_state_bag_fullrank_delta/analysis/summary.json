@@ -1,0 +1,327 @@
+{
+  "carry_vs_bag": {
+    "available": true,
+    "bag_primary_accuracy": 0.32421875,
+    "carry_answer_interface_valid": true,
+    "carry_full_top_is_answer_rate": 0.97265625,
+    "carry_full_top_is_answer_rate_per_seed": {
+      "7401": 0.97265625
+    },
+    "carry_minus_bag": -0.015625,
+    "ci95": [
+      -0.06640625,
+      0.0390625
+    ],
+    "complete_primary_depths": 8,
+    "expected_model_seeds": [
+      7401
+    ],
+    "expected_unique_tasks_per_primary_depth": 32,
+    "model_seed_count": 1,
+    "model_seeds": [
+      7401
+    ],
+    "per_depth": {
+      "10": {
+        "ci95": [
+          -0.0625,
+          0.25
+        ],
+        "difference": 0.09375,
+        "model_seed_count": 1,
+        "model_seeds": [
+          7401
+        ],
+        "per_seed": {
+          "7401": 0.09375
+        },
+        "unique_tasks": 32
+      },
+      "11": {
+        "ci95": [
+          0.0,
+          0.15625
+        ],
+        "difference": 0.0625,
+        "model_seed_count": 1,
+        "model_seeds": [
+          7401
+        ],
+        "per_seed": {
+          "7401": 0.0625
+        },
+        "unique_tasks": 32
+      },
+      "12": {
+        "ci95": [
+          -0.28125,
+          0.03125
+        ],
+        "difference": -0.125,
+        "model_seed_count": 1,
+        "model_seeds": [
+          7401
+        ],
+        "per_seed": {
+          "7401": -0.125
+        },
+        "unique_tasks": 32
+      },
+      "5": {
+        "ci95": [
+          -0.09375,
+          0.0
+        ],
+        "difference": -0.03125,
+        "model_seed_count": 1,
+        "model_seeds": [
+          7401
+        ],
+        "per_seed": {
+          "7401": -0.03125
+        },
+        "unique_tasks": 32
+      },
+      "6": {
+        "ci95": [
+          -0.21875,
+          0.15625
+        ],
+        "difference": -0.03125,
+        "model_seed_count": 1,
+        "model_seeds": [
+          7401
+        ],
+        "per_seed": {
+          "7401": -0.03125
+        },
+        "unique_tasks": 32
+      },
+      "7": {
+        "ci95": [
+          -0.21875,
+          0.09375
+        ],
+        "difference": -0.0625,
+        "model_seed_count": 1,
+        "model_seeds": [
+          7401
+        ],
+        "per_seed": {
+          "7401": -0.0625
+        },
+        "unique_tasks": 32
+      },
+      "8": {
+        "ci95": [
+          -0.03125,
+          0.21875
+        ],
+        "difference": 0.09375,
+        "model_seed_count": 1,
+        "model_seeds": [
+          7401
+        ],
+        "per_seed": {
+          "7401": 0.09375
+        },
+        "unique_tasks": 32
+      },
+      "9": {
+        "ci95": [
+          -0.3125,
+          0.0625
+        ],
+        "difference": -0.125,
+        "model_seed_count": 1,
+        "model_seeds": [
+          7401
+        ],
+        "per_seed": {
+          "7401": -0.125
+        },
+        "unique_tasks": 32
+      }
+    },
+    "per_query_kind": {
+      "checksum": {
+        "ci95": [
+          -0.1171875,
+          0.0546875
+        ],
+        "difference": -0.03125,
+        "model_seed_count": 1,
+        "model_seeds": [
+          7401
+        ],
+        "per_seed": {
+          "7401": -0.03125
+        },
+        "unique_tasks": 128
+      },
+      "node": {
+        "ci95": [
+          -0.0625,
+          0.0625
+        ],
+        "difference": 0.0,
+        "model_seed_count": 1,
+        "model_seeds": [
+          7401
+        ],
+        "per_seed": {
+          "7401": 0.0
+        },
+        "unique_tasks": 128
+      }
+    },
+    "per_seed": {
+      "7401": -0.015625
+    },
+    "positive_depths": 3,
+    "query_kinds_complete": true,
+    "query_kinds_positive": false,
+    "required_primary_depths": 8,
+    "seed_receipts": [
+      {
+        "checkpoint_phase": "pilot",
+        "initialization_equal": true,
+        "post_checkpoint_k1_parity": true,
+        "seed": 7401,
+        "training_compute_equal": true,
+        "training_order_equal": true,
+        "unique_primary_tasks": 256
+      }
+    ],
+    "seed_set_complete": true,
+    "unique_tasks": 256
+  },
+  "config_sha256": "bb0abb85766c0e5eb848492a503b1db0e5c005b5d6521e554a3c30d25d514ccd",
+  "counterfactual_swaps": {
+    "available": true,
+    "complete": true,
+    "expected_model_seeds": [
+      7401
+    ],
+    "model_seeds": [
+      7401
+    ],
+    "passes": false,
+    "seeds": [
+      {
+        "baseline_donor_follow_rate": 0.1796875,
+        "bootstrap_unit": "counterfactual_pair_mean_over_two_directions",
+        "ci95": [
+          -0.0390625,
+          0.015625
+        ],
+        "directions": 128,
+        "donor_follow_gain": -0.0078125,
+        "donor_follow_minus_recipient_preserve": -0.078125,
+        "post_swap_donor_follow_rate": 0.171875,
+        "post_swap_recipient_preserve_rate": 0.25,
+        "train_seed": 7401,
+        "unique_pairs": 64
+      }
+    ]
+  },
+  "data_manifest_sha256": "1ad19fd3e74e43c52d7e9dc1fbdfc3d9ea0ac4f2b697f6e7e4f7454a40281da5",
+  "deployment_comparison": {
+    "available": false,
+    "reason": "no deployment claim is licensed by this capacity-only successor"
+  },
+  "evaluation_bundles": 2,
+  "experiment_id": "qwen35_4b_state_carry_vs_state_bag_fullrank_delta",
+  "joint_holdout_carry_vs_bag": {
+    "available": true,
+    "carry_minus_bag": 0.01953125,
+    "ci95": [
+      -0.0234375,
+      0.0625
+    ],
+    "complete_depths": 8,
+    "expected_unique_tasks_per_depth": 32,
+    "model_seed_count": 1,
+    "model_seeds": [
+      7401
+    ],
+    "non_reversal_all_seeds": true,
+    "passes": false,
+    "per_seed": {
+      "7401": 0.01953125
+    },
+    "required_depths": 8,
+    "seed_set_complete": true,
+    "unique_tasks": 256
+  },
+  "phase": "pilot",
+  "pilot_gate": {
+    "capacity_branch_closed": true,
+    "capacity_conclusion": "full_rank_joint_state_formation_failed",
+    "checks": {
+      "answer_interface_valid": true,
+      "complete_registered_cells": true,
+      "gate_reachable": true,
+      "joint_holdout_diagnostic_complete": true,
+      "joint_state_sufficient": false,
+      "k4_diagnostic_complete": true,
+      "positive_carry_minus_bag": false,
+      "query_kinds_positive": false,
+      "swap_diagnostic_complete": true
+    },
+    "complete": true,
+    "expected_model_seed": 7401,
+    "failure_reason": null,
+    "promote": false,
+    "reachability": {
+      "baseline": 0.32421875,
+      "reachable": true,
+      "required_gain": 0.05,
+      "required_score": 0.37421875,
+      "upper_bound": 1.0
+    },
+    "status": "PILOT_STATE_FORMATION_MISS"
+  },
+  "receipt_identity_sha256": "7697cf03066ff00e41ef02bb0bd3a33b24b42e465106c2db7e474d5f860a0dc0",
+  "requirements_training_lock_sha256": "05546fe977583116d6169ea0dfa7b27e1184dd4a2b61d556dfb3f889d5b2b7b1",
+  "sample_more": {
+    "available": false,
+    "reason": "G4 is explicitly deferred; this successor resolves adaptation capacity through G3"
+  },
+  "schema_version": 2,
+  "source_contract_sha256": "c18c44fe8ed6c65fe18be6592ded644a788954a5002256a1dd1730c1fdc8bcba",
+  "state_sufficiency": {
+    "available": true,
+    "joint_step_accuracy": 0.0027686181711032987,
+    "model_seeds": [
+      7401
+    ],
+    "node_step_accuracy": 0.061671261937590316,
+    "passes": false,
+    "unique_tasks": 256
+  },
+  "trained_checkpoint_edge_cut": {
+    "available": false,
+    "model_seeds": []
+  },
+  "unseen_k_scaling": {
+    "available": true,
+    "ci95": [
+      -0.0625,
+      0.046875
+    ],
+    "complete": true,
+    "expected_unique_tasks": 256,
+    "gain": -0.0078125,
+    "model_seed_count": 1,
+    "model_seeds": [
+      7401
+    ],
+    "per_seed": {
+      "7401": -0.0078125
+    },
+    "unique_tasks": 256
+  },
+  "verdict": "PILOT_STATE_FORMATION_MISS",
+  "warning": "This successor resolves the LoRA-capacity counterfactual through causal G3 only; it cannot license a deployment or sample-more claim."
+}

@@ -5,7 +5,7 @@ source_track: "new"
 path: "experiments/qwen35_4b_state_carry_vs_state_bag"
 primary_readme: "experiments/qwen35_4b_state_carry_vs_state_bag/README.md"
 primary_report: "experiments/qwen35_4b_state_carry_vs_state_bag/reports/report.md"
-summary: "**Terminal LoRA status: `PILOT_MECHANISM_MISS`.** The fixed-source, independently seeded rank-32 LoRA pilot was valid and complete, but it failed the preregistered deep-state-formation gate. Confirmation and sample-more were therefore not run. This result mandates a fresh full-rank extra-R-delta successor; it does not close the serial-state question."
+summary: "**Terminal LoRA status: `PILOT_MECHANISM_MISS`.** The fixed-source, independently seeded rank-32 LoRA pilot was valid and complete, but it failed the preregistered deep-state-formation gate. Confirmation and sample-more were therefore not run. This result mandates a fresh full-rank extra-R-delta successor. That successor produced a complete raw pilot, but a post-result science audit found that it did not isolate capacity; the LoRA-rank question remains open."
 tags:
   - "latent-state"
   - "lora"
@@ -32,4 +32,4 @@ file_counts:
   yaml: 4
   [none]: 1
 total_files: 44
-total_size_bytes: 2045522
+total_size_bytes: 2049852

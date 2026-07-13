@@ -54,4 +54,8 @@ notes: >-
   bf0ee6f82866d3d8b1ee43265ed2299d1693ba2e4a6c07ace6fa40202d9ebec8.
   No confirmation or explicit-text artifacts were created because the valid pilot stopped promotion.
   Preserve the invalidated first attempt separately and do not pool it. The mandatory full-rank
-  extra-R-delta follow-up belongs in a fresh successor experiment, not this directory.
+  extra-R-delta follow-up was completed in qwen35_4b_state_carry_vs_state_bag_fullrank_delta and its
+  raw artifacts remain in that fresh experiment. Post-result science audit assigns that follow-up
+  PILOT_PROMOTION_BLOCKED because Carry-minus-Bag and query-kind positivity failed alongside joint-state
+  sufficiency; it therefore does not close the held-fixed rank alternative. A fresh RNG-matched three-seed
+  LoRA-versus-full-rank state-formation adjudication is mandatory before drawing a capacity conclusion.

@@ -54,11 +54,25 @@ was run, because the pilot stop prohibited them. This result says the registered
 LoRA recipe did not form the required deep joint state in its valid pilot. It does not distinguish a
 serial-state limitation from insufficient low-rank plasticity.
 
-Under preregistration section 10, the next step is mandatory: create and execute a fresh successor
-that replaces extra-call LoRA with zero-initialized full-rank deltas on Qwen layers 12–19. The base
-weights remain frozen, deltas are active only on extra R calls, and the first pass, coda, K=1 logits,
-Carry/Bag equality, procedural substrate, pilot firewall, crossed analysis, and causal gates remain
-fixed.
+The mandatory successor was executed in
+[`qwen35_4b_state_carry_vs_state_bag_fullrank_delta`](../../qwen35_4b_state_carry_vs_state_bag_fullrank_delta/reports/report.md).
+It replaced extra-call LoRA with 892,272,640 zero-initialized full-rank deltas while holding the first
+pass, coda, exact K=1 logits, rows, schedule, Carry/Bag comparison, and gates fixed. Its raw pilot was
+complete and recorded joint-state accuracy `0.0027686`, Carry minus Bag `-0.015625`, unseen-K gain
+`-0.0078125`, and noncausal swaps.
+
+That run does **not** close LoRA capacity. It simultaneously failed the non-capacity promotion
+requirements that Carry be positive and that both query strata be positive (node `0.0`; checksum
+`-0.03125`). The successor preregistration assigns `PILOT_PROMOTION_BLOCKED` whenever a complete
+pilot fails a non-capacity promotion requirement; `PILOT_STATE_FORMATION_MISS` can isolate capacity
+only when joint-state sufficiency is the specific failure. The post-result science-audit disposition
+is therefore `PILOT_PROMOTION_BLOCKED`, notwithstanding the raw analyzer label preserved in that
+experiment's summary.
+
+The required next step is a fresh RNG-matched three-seed state-formation adjudication comparing
+rank-32 LoRA with full-rank extra-R deltas. Until paired multi-seed evidence separates adaptation
+capacity from seed variation and simultaneous answer/query failures, the low-rank concern remains
+unresolved. Neither existing experiment should proceed to confirmation, edge-cut, or sample-more.
 
 ## Artifact Manifest
 

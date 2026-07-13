@@ -4612,7 +4612,7 @@
       "structured_execution_and_compilers"
     ],
     "source_track": "new",
-    "summary": "**Terminal LoRA status: `PILOT_MECHANISM_MISS`.** The fixed-source, independently seeded rank-32 LoRA pilot was valid and complete, but it failed the preregistered deep-state-formation gate. Confirmation and sample-more were therefore not run. This result mandates a fresh full-rank extra-R-delta successor; it does not close the serial-state question.",
+    "summary": "**Terminal LoRA status: `PILOT_MECHANISM_MISS`.** The fixed-source, independently seeded rank-32 LoRA pilot was valid and complete, but it failed the preregistered deep-state-formation gate. Confirmation and sample-more were therefore not run. This result mandates a fresh full-rank extra-R-delta successor. That successor produced a complete raw pilot, but a post-result science audit found that it did not isolate capacity; the LoRA-rank question remains open.",
     "tags": [
       "latent-state",
       "lora",
@@ -4631,13 +4631,14 @@
       "tests"
     ],
     "total_files": 44,
-    "total_size_bytes": 2045522
+    "total_size_bytes": 2049852
   },
   {
     "file_counts": {
-      ".csv": 2,
-      ".json": 2,
-      ".md": 11,
+      ".csv": 3,
+      ".json": 5,
+      ".jsonl": 3,
+      ".md": 12,
       ".py": 21,
       ".yaml": 4,
       "[none]": 1
@@ -4651,7 +4652,7 @@
       "structured_execution_and_compilers"
     ],
     "source_track": "new",
-    "summary": "**G0 status: `MODEL_SMOKE_PASS`; scientific pilot not yet run.** This is the preregistered capacity successor to `qwen35_4b_state_carry_vs_state_bag`. Its valid rank-32 LoRA pilot formed almost no joint state (`0.00459` joint trajectory accuracy), so it could not answer whether the serial-state mechanism failed or the adaptation subspace was too restrictive.",
+    "summary": "**Authoritative terminal disposition: `PILOT_PROMOTION_BLOCKED`.** The preserved analyzer receipt historically emitted `PILOT_STATE_FORMATION_MISS`, but that classifier gave state failure priority over simultaneous non-capacity failures. The frozen preregistration says those outcomes are mutually distinct. Because Carry-minus-Bag and both registered answer strata also failed, the held-fixed LoRA-rank capacity branch is **not closed**. Confirmation, edge cut, G3, and G4 remain unlicensed for these checkpoints.",
     "tags": [
       "latent-state",
       "lora",
@@ -4669,8 +4670,8 @@
       "src",
       "tests"
     ],
-    "total_files": 41,
-    "total_size_bytes": 345586
+    "total_files": 49,
+    "total_size_bytes": 1996815
   },
   {
     "file_counts": {

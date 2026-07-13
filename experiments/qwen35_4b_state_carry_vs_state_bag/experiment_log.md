@@ -139,3 +139,30 @@ No fresh CPU smoke/data generation, model load, GPU call, training, evaluation, 
   Preregistration section 10 therefore mandates creating and executing a fresh successor with
   zero-initialized full-rank deltas active only on extra R applications in layers 12–19, preserving
   the frozen base first pass/coda and exact K=1 path.
+
+## 2026-07-13 — mandatory capacity successor raw result
+
+- The fresh `qwen35_4b_state_carry_vs_state_bag_fullrank_delta` experiment completed its exact-row,
+  held-fixed seed-7401 pilot with 892,272,640 direct full-rank delta parameters.
+- Its analyzer emitted `PILOT_STATE_FORMATION_MISS`: joint state accuracy 0.00277 versus the 0.40 gate,
+  Carry minus Bag -0.0156, negative unseen-K scaling, and noncausal swaps.
+- The raw artifacts and label are preserved. The post-result science audit below retracts the initial
+  interpretation that this single pilot closed LoRA rank.
+
+## 2026-07-13 — post-result capacity audit correction
+
+- The full-rank pilot failed three promotion checks simultaneously: joint-state sufficiency, positive
+  Carry minus Bag, and positive effects in both query strata. Carry minus Bag was `-0.015625`; node
+  was `0.0` and checksum was `-0.03125`.
+- Under the successor's frozen verdict ladder, any complete pilot that fails a non-capacity promotion
+  requirement has disposition `PILOT_PROMOTION_BLOCKED`. `PILOT_STATE_FORMATION_MISS` isolates the
+  capacity branch only when joint-state sufficiency is the specific failure. The raw analyzer label
+  therefore overstates what this mixed failure can conclude.
+- Retracted the claim that the full-rank run closed LoRA capacity. Its corrected scientific
+  disposition is `PILOT_PROMOTION_BLOCKED`; the metrics, summaries, and checkpoint references remain
+  valid raw evidence.
+- A fresh RNG-matched three-seed state-formation adjudication is mandatory, pairing rank-32 LoRA and
+  full-rank extra-R deltas while holding the state-formation contract fixed. This is required to
+  separate adaptation capacity from seed variation and simultaneous answer/query-gate failures.
+- Neither completed pilot is licensed to advance to confirmation, edge-cut, or sample-more, and the
+  capacity question must not be marked closed before the paired multi-seed adjudication.

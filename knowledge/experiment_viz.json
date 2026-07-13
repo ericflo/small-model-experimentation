@@ -47171,7 +47171,55 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "Full-rank feasibility gate must carry 13.30 GiB of delta training state",
+     "title": "Blocked full-rank pilot: State-Carry does not beat equal-compute State-Bag",
+     "categories": [
+      "depth 5",
+      "depth 6",
+      "depth 7",
+      "depth 8",
+      "depth 9",
+      "depth 10",
+      "depth 11",
+      "depth 12"
+     ],
+     "series": [
+      {
+       "label": "State-Carry",
+       "values": [
+        0.375,
+        0.34375,
+        0.375,
+        0.21875,
+        0.25,
+        0.28125,
+        0.4375,
+        0.1875
+       ]
+      },
+      {
+       "label": "State-Bag",
+       "values": [
+        0.40625,
+        0.375,
+        0.4375,
+        0.125,
+        0.375,
+        0.1875,
+        0.375,
+        0.3125
+       ]
+      }
+     ],
+     "x_label": "held-out semantic depth",
+     "y_label": "answer accuracy at matched recurrence",
+     "y_format": "percent01",
+     "note": "Seed-7401 diagnostic pilot, 32 paired tasks per depth. Carry is positive at only three of eight depths and averages 1.56 points below Bag; paired 95% CI -6.64 to +3.91 points. Macro task-mean joint-step accuracy is 0.277% versus 40% required. Because state sufficiency, Carry positivity, and both query-kind checks failed simultaneously, the frozen ladder gives PILOT_PROMOTION_BLOCKED; this chart is diagnostic, not a clean capacity verdict.",
+     "source": "experiments/qwen35_4b_state_carry_vs_state_bag_fullrank_delta/analysis/k_depth_curves.csv"
+    },
+    {
+     "headline": false,
+     "kind": "bar",
+     "title": "Full-rank control carried 13.30 GiB of delta training state",
      "categories": [
       "delta parameters",
       "delta gradients",
@@ -47190,7 +47238,7 @@
      "x_label": "full-rank delta training component",
      "y_label": "memory (GiB)",
      "y_format": "number",
-     "note": "Preregistered setup geometry, not a model result. The 892,272,640 direct full-rank delta parameters require 13.296 GiB for FP32 parameters, gradients, and Adam moments before the frozen model, activations, kernels, allocator slack, or optimizer temporaries; live G0 determines feasibility on the 48GB Ada GPU.",
+     "note": "Exact setup geometry, not the behavioral result. The 892,272,640 direct full-rank delta parameters require 13.296 GiB for FP32 parameters, gradients, and Adam moments before the frozen model, activations, kernels, allocator slack, or optimizer temporaries. Live G0 passed on the 48GB Ada GPU, establishing feasibility but not a clean capacity conclusion.",
      "source": "experiments/qwen35_4b_state_carry_vs_state_bag_fullrank_delta/analysis/planned_delta_memory.csv"
     }
    ]

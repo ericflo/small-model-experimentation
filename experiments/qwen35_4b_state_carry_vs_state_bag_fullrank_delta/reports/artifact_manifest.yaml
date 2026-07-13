@@ -1,21 +1,68 @@
 schema_version: 1
 experiment_id: "qwen35_4b_state_carry_vs_state_bag_fullrank_delta"
-external_artifacts: []
+external_artifacts:
+  - name: "canonical full-rank pilot Carry checkpoint"
+    storage: "large_artifacts/qwen35_4b_state_carry_vs_state_bag_fullrank_delta/pilot_carry_seed7401/"
+    required_for: "audit of the historical analyzer output and corrected blocked disposition"
+    checksum: >-
+      run.json sha256 1db942e123d1c99baa82f44073778d9939d2e4d06d338d08d2d2b9f058a6147d,
+      run receipt 640fe49e475294c88a6831aee4ad193bded025d9c7252f96ca1dc122c9d0ef43;
+      checkpoint_000300/checkpoint.json sha256 6f8b407077956463a43d1ba4596b1b7a8bb2dda1e94f4e58bf1f52024fd574ee,
+      checkpoint identity 52647e3b8ffa10222dfda894096e29210bd97974c64cd1a7729ca71c8ebb9451;
+      delta_state.pt 12acaafeaf0e7680809c4a6c97512abc497c71a7e7a82a8f6330904fe287c21c;
+      loop_state.pt 8ce6fd0f7329c5b68b2c3d79510cfa633ccd859404a823b7207a1a0041dd3673;
+      train_metrics.jsonl 438fa2bfa468a634f584af4ecece04e973a9a9e622670c89b1d145f42ae6e327
+    regenerate: "historical source-bound artifact; preserve exactly and never overwrite this realized path"
+  - name: "canonical full-rank pilot Bag checkpoint"
+    storage: "large_artifacts/qwen35_4b_state_carry_vs_state_bag_fullrank_delta/pilot_bag_seed7401/"
+    required_for: "audit of the historical analyzer output and corrected blocked disposition"
+    checksum: >-
+      run.json sha256 9c02be90dbd0325a404980e096981a662bce4382a2e06b5dc1f6ef9420da32cd,
+      run receipt 7d5a970659e13e7a1de6eb866ea82ffde6bfa5b0335a79e810c78a644868a8af;
+      checkpoint_000300/checkpoint.json sha256 bd0a6154026629b6ed5decffbebcb037008cb37d4ddebac07c495fca812e3d6c,
+      checkpoint identity 1012d497a6e203fb0f64d19e238bca2c0f88fdb03d553e7638c958b8816e84f6;
+      delta_state.pt 5871856ebfd464e1ec3407a993120f8044dc6279a67354bf39b75f3349704eb0;
+      loop_state.pt f9efbb19c840f2a869f06a5ff434dd982c6a96a19c4506911b250713b9fc218d;
+      train_metrics.jsonl 87dd8410993ef07ae698cb48ad1847854cf951f60bd3d24946083b8ab6fcdeec
+    regenerate: "historical source-bound artifact; preserve exactly and never overwrite this realized path"
 omitted_artifacts:
+  - path: "experiments/qwen35_4b_state_carry_vs_state_bag_fullrank_delta/data/generated/manifest.json"
+    reason: >-
+      deterministic local data receipt, ignored with the generated payload; SHA256
+      1ad19fd3e74e43c52d7e9dc1fbdfc3d9ea0ac4f2b697f6e7e4f7454a40281da5
   - path: "experiments/qwen35_4b_state_carry_vs_state_bag_fullrank_delta/data/generated/*.jsonl.gz"
     reason: "deterministic procedural corpus; regeneration must pass the frozen canonical parent-row contract"
   - path: "large_artifacts/qwen35_4b_state_carry_vs_state_bag_fullrank_delta/"
-    reason: "future ~3.3 GiB direct-delta checkpoints and loop-state files are external by policy"
+    reason: "realized ~3.3 GiB direct-delta checkpoints and loop-state files are external by policy"
 reproducibility:
   smoke_command: "python3 experiments/qwen35_4b_state_carry_vs_state_bag_fullrank_delta/scripts/run.py --smoke"
-  full_command: "phase-gated and authorized; follow docs/gpu_runbook.md from parent-trigger validation through the licensed stop"
-  required_external_artifacts: []
+  full_command: "historical only; preserve receipts and follow reports/terminal_science_audit.md for the corrected disposition"
+  required_external_artifacts:
+    - "large_artifacts/qwen35_4b_state_carry_vs_state_bag_fullrank_delta/pilot_carry_seed7401/"
+    - "large_artifacts/qwen35_4b_state_carry_vs_state_bag_fullrank_delta/pilot_bag_seed7401/"
 notes: >-
-  Canonical CPU smoke, full-data preparation, and live model-smoke have run.
-  The deterministic data manifest SHA256 is
+  The immutable analyzer historically emitted PILOT_STATE_FORMATION_MISS, but the
+  authoritative post-result disposition is PILOT_PROMOTION_BLOCKED with
+  capacity_branch_closed=false because positive_carry_minus_bag and
+  query_kinds_positive failed simultaneously with state sufficiency. The deterministic
+  data manifest SHA256 is
   1ad19fd3e74e43c52d7e9dc1fbdfc3d9ea0ac4f2b697f6e7e4f7454a40281da5;
   it covers 11 splits and 27,744 parent-identical rows. The tracked G0 receipt
   has identity 0832423e632a5c056e701eacb5b7e70387595956cccbadbe9453cb583c8346fc.
-  Its temporary 3.571 GB round-trip checkpoint was deliberately removed. No
-  training checkpoint, evaluation, or scientific result exists yet. The parent
-  LoRA trigger summary is read in place and is not copied or modified.
+  Its temporary 3.571 GB round-trip checkpoint was deliberately removed. The
+  analysis receipt is 7697cf03066ff00e41ef02bb0bd3a33b24b42e465106c2db7e474d5f860a0dc0
+  and summary hash is 2f3508202b08928aa6cd2867656e82b6f54859c3c1b075fdb373daa4a2cffa83.
+  Carry evaluation receipt is 8c2b09b069d9bb0901ef7ef2372ed7062fac84fc8af8283185d68fd0b4640f3e;
+  its summary/rows/swaps hashes are
+  0b36546428a4565e70e7a0ed2a4badfc854c2c7388e040081872d93e94abf787,
+  7ff8cee4a67a2e0ac57f972848b5952078f927d0c2d0b5c7dde626b11c6a7879,
+  and fe80454ad73c30307cc04ef9573a2af986286fe7d0963b1b220a608d3741cc5c.
+  Bag evaluation receipt is 76427c16437126f6190406af2af6a477f26090657ad39d76d728f64ac77ff6fc;
+  its summary/rows hashes are
+  b937cc77cfbabcf32b01a17135c5fb5d34d34f7ad101c2476389e90f23262791
+  and d0c9cebc790831925eac76c9708f706615dac25c2ab7b4975eb28506c93a2bc5.
+  Confirmation, edge-cut, G3, and G4 artifacts do not exist because the pilot
+  stopped promotion. The 128 swap directions are pilot diagnostics, not G3.
+  Preserve analysis/summary.json unchanged as historical flawed-classifier output;
+  reports/terminal_science_audit.md is the disposition erratum. The parent trigger
+  is read in place and not copied.

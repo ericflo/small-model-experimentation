@@ -2,19 +2,21 @@
 
 ## Next Experiments
 
-- LoRA architecture counterfactual completed at its registered pilot stop:
-  `qwen35_4b_state_carry_vs_state_bag` emitted valid `PILOT_MECHANISM_MISS`. The fixed-source pilot
-  was complete and matched, but Carry joint state accuracy was 0.00459 versus the 0.40 gate; the
-  +0.043 answer effect was uncertain and swaps were noncausal. Do not run its confirmation or
-  sample-more stages, and do not reinterpret the earlier invalidated analysis-dispatch attempt.
-- **Next mandatory experiment:** execute the now-created and adversarially reviewed
-  `qwen35_4b_state_carry_vs_state_bag_fullrank_delta` successor specified by the LoRA
-  preregistration. It replaces rank-32 LoRA with zero-initialized full-rank weight deltas on
-  Qwen layers 12–19, enabled only during extra R applications. Keep `Qwen/Qwen3.5-4B`, the frozen
-  base first pass and coda, exact K=1 logits, Carry/Bag parameter and compute equality, procedural
-  substrate, independent pilot firewall, crossed confirmation, same-checkpoint edge cut, and
-  bidirectional swap gates fixed. This successor must determine whether low-rank plasticity caused
-  the valid state-formation miss; do not leave the serial-state question closed by the LoRA pilot.
+- The LoRA architecture counterfactual completed with valid `PILOT_MECHANISM_MISS`; the held-fixed,
+  zero-initialized 892M-parameter full-rank successor also completed, with raw joint-state accuracy
+  0.00277 versus the 0.40 gate, Carry minus Bag -0.0156, negative unseen-K scaling, and noncausal
+  swaps. Its analyzer emitted `PILOT_STATE_FORMATION_MISS`, but post-result preregistration audit
+  assigns `PILOT_PROMOTION_BLOCKED`: the run simultaneously failed the non-capacity requirements of
+  positive Carry-minus-Bag and positive query-kind effects. It therefore does not isolate or close
+  the rank/capacity question. Do not run either existing experiment's confirmation, edge-cut, or
+  sample-more stages, and do not open the interface successor.
+- Run the mandatory fresh RNG-matched three-seed state-formation adjudication, pairing rank-32 LoRA
+  and full-rank deltas under matched generated rows, initialization/training randomness, inference
+  randomness, and identical state readouts. Use it to decide whether adapter capacity prevented the
+  deeper representation from forming. Defer any conclusion that future serial-latent recurrence
+  work must use a materially new representation or supervision design until that adjudication.
+  Retain an equal-compute noncarrying control, the exact untouched K=1 path, and an early registered
+  state-decoding positive control before expensive extrapolation or causal work.
 - Cross-program interface probe completed:
   `qwen35_4b_commit_slot_jacobian_value_transport` showed that a fixed latent
   answer slot repairs formatting but its semantic hint remains task/alias

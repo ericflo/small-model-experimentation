@@ -5980,8 +5980,8 @@
    "verdict_tag": "LoRA did not form the running state this test needed",
    "concept_primer": "Imagine tracking a piece moving across a board. One method keeps a single running note, updating and feeding it into each next turn. The other re-reads the opening position many times independently and pools its guesses. Same total effort — does chaining the note win?",
    "plain_question": "When a small model repeats the same computation to solve a step-by-step puzzle, does chaining its memory forward beat pooling many fresh, independent passes?",
-   "plain_answer": "The first matched test did not answer that architecture question because the low-rank update failed to learn the required running state. Carrying memory improved overall accuracy by only 4.3 points, with uncertainty spanning a slight loss to a 9.4-point gain. More decisively, the model recovered the complete hidden path on just 0.46% of examples, far below the preregistered 40% floor, and swapping memory between examples did not make answers follow the donor. The three-run confirmation therefore stopped exactly as planned.",
-   "why_it_matters": "This is a useful negative checkpoint, not evidence that serial memory itself is ineffective. The low-rank training method may have been too restrictive to create a deep internal representation. A fresh successor now replaces it with unrestricted full-size updates only on the extra repeated passes while keeping the task, compute comparison, seeds, and causal checks fixed.",
+   "plain_answer": "The first matched test did not answer that architecture question because the low-rank update failed to learn the required running state. Carrying memory improved overall accuracy by only 4.3 points, with uncertainty spanning a slight loss to a 9.4-point gain. More decisively, the model decoded the complete joint hidden state on just 0.46% of registered steps, far below the preregistered 40% floor, and swapping memory between examples did not make answers follow the donor. The three-run confirmation therefore stopped exactly as planned.",
+   "why_it_matters": "This was a useful negative checkpoint rather than evidence that serial memory itself was ineffective. A later full-size pilot also showed almost no readable state, but it failed other promotion checks at the same time and did not share bit-identical state-module initialization with this run. A cleaner multi-run comparison is therefore required before blaming or clearing LoRA.",
    "verdict_tone": "negative",
    "key_numbers": [
     {
@@ -5990,7 +5990,7 @@
      "sub": "paired 95% interval: -0.8 to +9.4 points"
     },
     {
-     "label": "Complete hidden paths recovered",
+     "label": "Joint hidden states decoded",
      "value": "0.46%",
      "sub": "the preregistered state-formation floor was 40%"
     },
@@ -6010,16 +6010,16 @@
      "index": 0,
      "chart_plain_title": "Carry and parallel pooling received exactly the same repeated-compute budget",
      "chart_read": "Each pair of bars shows the total decoder-layer work at one, four, eight, or twelve middle-block passes. The Carry and pooled comparison bars overlap at every depth.",
-     "chart_takeaway": "The negative pilot cannot be explained by giving one arm less computation; the unresolved issue is whether low-rank training prevented the deeper running state from forming."
+     "chart_takeaway": "The negative pilot cannot be explained by giving one arm less computation. Whether low-rank training caused the missing state remains the question for an initialization- and randomness-matched successor."
     }
    ]
   },
   "qwen35_4b_state_carry_vs_state_bag_fullrank_delta": {
-   "verdict_tag": "Can unrestricted updates form the missing running state",
+   "verdict_tag": "Full-size pilot was blocked, not decisive",
    "concept_primer": "The first test changed each large weight matrix through a narrow bottleneck, which is memory-efficient but limits the directions training can move. This successor gives every repeated-pass matrix a full-size change of its own while leaving the ordinary one-pass model untouched.",
    "plain_question": "Was the failed running memory caused by the serial architecture, or did the low-rank training update prevent the model from building a sufficiently rich internal state?",
-   "plain_answer": "The live feasibility gate passed. All 62 zero-starting full-size matrices received gradients, a real Adam step fit comfortably, ordinary one-pass outputs stayed exactly unchanged, the longest registered repeat depth remained finite, and a 3.571 GB checkpoint restored repeated-pass outputs exactly. This proves the capacity control can run on the 48GB GPU; the matched Carry-versus-pool pilot is now the next step and no behavioral verdict exists yet.",
-   "why_it_matters": "A second failure after the full-size updates successfully train would make the capacity explanation much less plausible under this held-fixed design. If a readable running state appears, the experiment continues through the same answer, edge-cut, and memory-swap tests instead of treating representation alone as success.",
+   "plain_answer": "The run worked mechanically, but it did not settle the question. All 892 million full-size update weights trained and fit comfortably, yet macro task-mean joint-state accuracy was only 0.28% against a 40% requirement. At the same time, Carry scored 1.6 points below equal-compute pooling and failed both required query-kind checks. The frozen rules classify that combination as promotion blocked, not as an isolated capacity failure. The full-size construction also shifted the random initialization of the shared state modules relative to the LoRA run.",
+   "why_it_matters": "This valid diagnostic says the direct full-size recipe also failed; it does not prove that LoRA was innocent. The decisive follow-up must give LoRA and full rank exactly the same state-module start and stochastic training stream, prove the state readout can learn, and repeat the fixed final comparison across three seeds. Downstream answer and causal tests should wait until a readable state exists.",
    "verdict_tone": "neutral",
    "key_numbers": [
     {
@@ -6028,27 +6028,33 @@
      "sub": "62 zero-initialized matrices on extra repeated passes only"
     },
     {
-     "label": "Update training state before activations",
-     "value": "13.296 GiB",
-     "sub": "parameters, gradients, and two Adam moment tensors in FP32"
+     "label": "Macro joint-state accuracy",
+     "value": "0.28%",
+     "sub": "the preregistered state-formation floor was 40%"
     },
     {
-     "label": "Ordinary one-pass change allowed",
-     "value": "exactly zero",
-     "sub": "the base path must match bit-for-bit before and after an optimizer step"
+     "label": "Carry minus equal-compute pooling",
+     "value": "-1.6 points",
+     "sub": "paired 95% interval: -6.6 to +3.9 points"
     },
     {
-     "label": "Measured peak reserved memory",
-     "value": "24.93 GiB",
-     "sub": "22.57 GiB of reserved headroom remained on the live 48GB Ada GPU"
+     "label": "Answer gain from following donor memory",
+     "value": "-0.8 points",
+     "sub": "paired 95% interval: -3.9 to +1.6 points"
     }
    ],
    "charts": [
     {
      "index": 0,
+     "chart_plain_title": "Diagnostic Carry accuracy wins only three of eight depths",
+     "chart_read": "Each depth has a Carry bar and an equal-compute pooled Bag bar. Compare the paired heights across depths five through twelve; higher means more answers were correct.",
+     "chart_takeaway": "Carry is uneven and averages 1.6 points below Bag, while the separate hidden-state score is almost zero. Because several gates failed together, this diagnoses a failed recipe but cannot isolate full-size capacity as the cause."
+    },
+    {
+     "index": 1,
      "chart_plain_title": "The full-size update needs 13.30 GiB before model activations",
      "chart_read": "The three bars split memory among the update weights, their gradients, and Adam's two running statistics. The statistics bar is twice either single-tensor bar because Adam keeps two values per weight.",
-     "chart_takeaway": "The planned training state is already substantial, so a real optimizer step and worst-depth pass—not arithmetic alone—decide whether this design fits the 48GB GPU."
+     "chart_takeaway": "The real optimizer and worst-depth gate fit comfortably, so the negative state result cannot be dismissed as an unexecuted or memory-infeasible full-rank proposal."
     }
    ]
   },

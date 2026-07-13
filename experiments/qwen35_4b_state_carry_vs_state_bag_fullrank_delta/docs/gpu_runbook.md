@@ -1,8 +1,15 @@
 # GPU Runbook
 
-No GPU stage has been run in the implementation handoff; proceed through the
-gates below. Use the repository compute-environment recovery rules,
-one exclusive GPU process, and the pinned root environment.
+**Historical execution status:** steps 1–7 completed. G0 and the paired pilot
+completed, but the analyzer's emitted `PILOT_STATE_FORMATION_MISS` is preserved
+only as historical flawed-classifier output. The authoritative post-result
+disposition is `PILOT_PROMOTION_BLOCKED`, with
+`capacity_branch_closed=false`. Steps 8–10 are not licensed for these
+checkpoints. The commands remain below for exact provenance, not as
+authorization to continue or regenerate a capacity claim.
+
+Execution used one exclusive GPU process and the pinned root environment under
+the repository compute-recovery rules.
 
 1. Run CPU tests and `--stage cpu-smoke`.
 2. Run `--stage prepare-data`; inspect `manifest.json` for
@@ -23,9 +30,11 @@ one exclusive GPU process, and the pinned root environment.
    checkpoint loading and analysis validate that lineage. Analyze the complete
    paired pilot.
 7. Only `PILOT_PROMOTION_READY` licenses fixed-final seeds 7411–7413. A valid
-   `PILOT_STATE_FORMATION_MISS` is terminal and directly answers the held-fixed
-   LoRA-rank concern. `PILOT_INCOMPLETE` and `PILOT_PROMOTION_BLOCKED` also stop
-   the run but do not support that capacity conclusion.
+   `PILOT_STATE_FORMATION_MISS` was preregistered to license the held-fixed
+   LoRA-rank conclusion. `PILOT_INCOMPLETE` and `PILOT_PROMOTION_BLOCKED` also
+   stop the run but do not support that capacity conclusion. The post-result
+   audit additionally found that the realized cross-experiment RNG and optimizer
+   controls were not sufficient to identify rank.
 8. Full training likewise requires the exact G1 `PILOT_PROMOTION_READY` receipt
    and embeds both G0 and G1 lineage in every checkpoint.
 9. After complete full Carry/Bag evaluation, run the same-checkpoint edge cut and
@@ -37,3 +46,12 @@ one exclusive GPU process, and the pinned root environment.
 
 All commands are intentionally non-monolithic. The CLI and receipts enforce the
 phase boundaries; consult `scripts/run.py --help` for paths and arguments.
+
+For the realized pilot, both `positive_carry_minus_bag` and
+`query_kinds_positive` failed alongside state sufficiency. Frozen rule 7 thus
+maps it to `PILOT_PROMOTION_BLOCKED`. No edge-cut bundle or G3 confirmation
+exists; the 64-pair bidirectional swap result is a pilot diagnostic only. Do not
+rerun later stages from these checkpoints. The mandatory next work is a fresh
+capacity-adjudication experiment with exact shared initialization/RNG controls,
+a trained-depth state positive control, and separate state-formation and
+downstream-promotion verdicts.

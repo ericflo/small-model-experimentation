@@ -21,10 +21,28 @@
   (+0.012, CI -0.035 to +0.059), and positive joint holdout (+0.051, CI +0.008 to +0.098) do not
   rescue a chance-like registered state. Swaps were also noncausal (donor-follow gain +0.008, CI
   -0.023 to +0.039; donor follow minus recipient preserve -0.055). Confirmation, edge cuts, and
-  sample-more were correctly not run. This narrows the result to **the registered low-rank adaptation
-  recipe did not form the required deep joint state**; it does not close serial recurrence because
-  low-rank plasticity remains confounded. The preregistered next test is a fresh zero-initialized
-  full-rank extra-R-delta Carry/Bag successor with the base K=1 path held exact.
+  sample-more were correctly not run. This narrowed the result to **the registered low-rank adaptation
+  recipe did not form the required deep joint state** and licensed the held-fixed full-rank successor
+  below.
+
+- [qwen35_4b_state_carry_vs_state_bag_fullrank_delta](../../experiments/qwen35_4b_state_carry_vs_state_bag_fullrank_delta/reports/report.md)
+  (unclaimed; raw analyzer label `PILOT_STATE_FORMATION_MISS`, post-result preregistration audit
+  disposition `PILOT_PROMOTION_BLOCKED`): the preregistered capacity control replaced
+  rank-32 LoRA with 892,272,640 direct FP32 full-rank deltas on the same 62 extra-R linears while
+  holding the parent rows, recurrence, loss, optimizer schedule, seeds, base K=1 path, and Carry/Bag
+  comparison fixed. Live G0 passed with complete Adam state, exact K=1 before/after the optimizer,
+  finite K=12, a bit-exact 3.571 GB checkpoint round trip, and 22.57 GiB reserved headroom. The
+  complete matched pilot nevertheless formed essentially no registered state: joint step accuracy
+  **0.00277 versus 0.40**, node accuracy 0.0617. Carry lost to Bag by 0.0156 (CI -0.0664 to +0.0391),
+  unseen-K gain was -0.00781 (CI -0.0625 to +0.0469), and swaps reduced donor following by 0.00781
+  (CI -0.0391 to +0.0156). The same pilot also failed non-capacity promotion requirements: its
+  Carry-minus-Bag effect was not positive, and neither registered query-kind effect was positive
+  (node 0.000, checksum -0.03125). Although all cells were complete, the answer gate was reachable,
+  and the answer interface was valid, those simultaneous failures mean the state-formation miss was
+  not isolated under the preregistered disposition table. The defensible terminal disposition is
+  therefore `PILOT_PROMOTION_BLOCKED`, not a closure of LoRA capacity. A fresh RNG-matched three-seed
+  LoRA-versus-full-rank state-formation adjudication is mandatory before drawing a rank conclusion;
+  neither existing pilot is eligible for confirmation, edge cuts, or sample-more.
 
 - [qwen35_4b_commit_slot_jacobian_value_transport](../../experiments/qwen35_4b_commit_slot_jacobian_value_transport/reports/report.md)
   (unclaimed; terminal `COMMIT_SLOT_SEAM_FAIL`): a fixed latent answer interface

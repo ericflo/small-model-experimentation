@@ -5,7 +5,8 @@
 **Terminal LoRA status: `PILOT_MECHANISM_MISS`.** The fixed-source, independently seeded
 rank-32 LoRA pilot was valid and complete, but it failed the preregistered deep-state-formation
 gate. Confirmation and sample-more were therefore not run. This result mandates a fresh
-full-rank extra-R-delta successor; it does not close the serial-state question.
+full-rank extra-R-delta successor. That successor produced a complete raw pilot, but a post-result
+science audit found that it did not isolate capacity; the LoRA-rank question remains open.
 
 ## Research Program
 
@@ -93,10 +94,17 @@ representation; the former instead licenses the separately controlled interface 
 ## Terminal Disposition
 
 Do not advance this LoRA experiment to G2, edge-cut confirmation, or G4. Preserve its valid negative
-and the earlier invalidated analysis-dispatch attempt. The next authorized capacity test is a new
-experiment directory using zero-initialized full-rank weight deltas on layers 12–19 only during extra
-R applications, with the ordinary first pass, coda, exact K=1 path, Carry/Bag counterfactual, pilot
-firewall, and causal gates held fixed.
+and the earlier invalidated analysis-dispatch attempt. The authorized capacity test was completed in
+[`qwen35_4b_state_carry_vs_state_bag_fullrank_delta`](../qwen35_4b_state_carry_vs_state_bag_fullrank_delta/README.md).
+Its exact-row, zero-initialized 892M-parameter pilot recorded `0.00277` joint-state accuracy versus
+`0.40`, but it simultaneously failed non-capacity promotion requirements: Carry minus Bag was
+`-0.015625`, and neither query stratum was positive. Under that successor's preregistered ladder, the
+correct disposition is therefore `PILOT_PROMOTION_BLOCKED`, not an isolated state-formation miss.
+The raw result is retained, but it does not close LoRA capacity.
+
+A fresh RNG-matched three-seed state-formation adjudication is mandatory. It must compare rank-32
+LoRA and full-rank extra-R deltas under paired randomness and the held-fixed state-formation contract,
+so adaptation capacity is not entangled with seed noise or simultaneous answer/query-gate failures.
 
 ## Primary Metrics
 

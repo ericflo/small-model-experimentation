@@ -5,7 +5,7 @@ source_track: "new"
 path: "experiments/qwen35_4b_state_carry_vs_state_bag_fullrank_delta"
 primary_readme: "experiments/qwen35_4b_state_carry_vs_state_bag_fullrank_delta/README.md"
 primary_report: "experiments/qwen35_4b_state_carry_vs_state_bag_fullrank_delta/reports/report.md"
-summary: "**G0 status: `MODEL_SMOKE_PASS`; scientific pilot not yet run.** This is the preregistered capacity successor to `qwen35_4b_state_carry_vs_state_bag`. Its valid rank-32 LoRA pilot formed almost no joint state (`0.00459` joint trajectory accuracy), so it could not answer whether the serial-state mechanism failed or the adaptation subspace was too restrictive."
+summary: "**Authoritative terminal disposition: `PILOT_PROMOTION_BLOCKED`.** The preserved analyzer receipt historically emitted `PILOT_STATE_FORMATION_MISS`, but that classifier gave state failure priority over simultaneous non-capacity failures. The frozen preregistration says those outcomes are mutually distinct. Because Carry-minus-Bag and both registered answer strata also failed, the held-fixed LoRA-rank capacity branch is **not closed**. Confirmation, edge cut, G3, and G4 remain unlicensed for these checkpoints."
 tags:
   - "latent-state"
   - "lora"
@@ -24,11 +24,12 @@ top_level_dirs:
   - "src"
   - "tests"
 file_counts:
-  csv: 2
-  json: 2
-  md: 11
+  csv: 3
+  json: 5
+  jsonl: 3
+  md: 12
   py: 21
   yaml: 4
   [none]: 1
-total_files: 41
-total_size_bytes: 345586
+total_files: 49
+total_size_bytes: 1996815

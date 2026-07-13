@@ -7,10 +7,10 @@ For evidence-linked durable claims, use [claims/index.md](claims/index.md).
 ## Structured Execution And Compilers
 
 - Program: [charter](../research_programs/structured_execution_and_compilers/charter.md)
-- Current read: structured intermediates remain strong, but the replicated `First:` seam is neither a stable J value coordinate nor an arbitrary writable last-thought register. A late explicit anchor makes direct aliases conditionally writable, yet its consequence readout is invalid/unreachable and the intended composed label rotation was fixed.
-- Best next experiment: test concrete operation hypotheses before reasoning as a deployable text-only fork, with visible-only selection and exact matched-compute sampling; separately measure the exact depth-6 resource crossover before learned pruning.
-- Strong anchors: `qwen35_4b_partial_structure_search`, `qwen35_4b_crosssubstrate_structure`, `qwen35_4b_structure_search_scaling`, `qwen35_4b_commit_slot_semantic_power_replication`.
-- Avoid repeating: another type-only P(viable) judge, pooled-AUROC launch, or model-guided search without measured brute wall time.
+- Current read: structured intermediates remain strong, but tested latent interfaces keep failing before causal use. The replicated `First:` seam is neither a stable J value coordinate nor an arbitrary writable last-thought register: a late explicit anchor makes direct aliases conditionally writable, yet its consequence readout is invalid or unreachable. The rank-32 State-Carry pilot also failed to form its registered state. A direct full-rank successor showed almost no readability, but simultaneous non-capacity failures and unmatched construction RNG make its disposition `PILOT_PROMOTION_BLOCKED`, not a clean capacity negative.
+- Best next experiments: test concrete operation hypotheses before reasoning as a deployable text-only fork, with visible-only selection and exact matched-compute sampling; and adjudicate the LoRA concern with bit-identical shared state initialization, matched stochastic streams, a readout-path positive control, state-only training, and three fixed-final seeds, running full rank only if LoRA fails. Separately measure the exact depth-6 resource crossover before learned pruning.
+- Strong anchors: `qwen35_4b_partial_structure_search`, `qwen35_4b_crosssubstrate_structure`, `qwen35_4b_structure_search_scaling`, `qwen35_4b_commit_slot_semantic_power_replication`, `qwen35_4b_state_carry_vs_state_bag_fullrank_delta`.
+- Avoid repeating: another type-only P(viable) judge, pooled-AUROC launch, model-guided search without measured brute wall time, or a rank comparison whose shared modules and dropout streams are shifted by parameter-construction RNG.
 - Evidence that advances the program: causal ablation showing which intermediate structure transfers across family, length, or paraphrase shifts.
 
 ## Evidence-Conditioned Selection

@@ -35,3 +35,54 @@
   logits exactly and removed its temporary payload.
 - These are setup and feasibility receipts only. The seed-7401 Carry/Bag pilot
   is the next authorized scientific stage.
+
+## 2026-07-13 — matched full-rank pilot and historical analyzer output
+
+- Trained independent Carry and Bag seed-7401 arms for the fixed 300 steps.
+  Both consumed 2,594,937 prompt tokens and 145,316,472 decoder-layer-token
+  applications in identical order (`97813bf9a2c7b81cf55db1a405e8e999e7e4bf953b2d50434a007140019b0e4f`),
+  under the same source/config/data/G0 lineage and identical initialization
+  receipt. Peak allocation was 26.93 GiB in each arm.
+- Carry final validation was 0.28125 and Bag was 0.328125. Both fixed-final
+  checkpoints passed exact K=1 reload parity and yielded complete 768-row pilot
+  evaluations; Carry also yielded all 128 bidirectional swap directions.
+- Deterministic analysis was rerun byte-identically (summary SHA256
+  `2f3508202b08928aa6cd2867656e82b6f54859c3c1b075fdb373daa4a2cffa83`)
+  and historically emitted `PILOT_STATE_FORMATION_MISS` with receipt identity
+  `7697cf03066ff00e41ef02bb0bd3a33b24b42e465106c2db7e474d5f860a0dc0`.
+- Macro task-mean joint-state step accuracy was 0.0027686 versus the 0.40 gate;
+  the micro count was 7/2,176 = 0.0032169. Carry minus Bag was
+  -0.015625 (CI -0.06640625 to +0.0390625), unseen-K gain -0.0078125 (CI
+  -0.0625 to +0.046875), and swaps reduced donor following by 0.0078125.
+- All required cells were complete, the answer gate was reachable, and the
+  answer interface was valid. The emitted check vector nevertheless also had
+  `positive_carry_minus_bag=false` and `query_kinds_positive=false` in addition
+  to `joint_state_sufficient=false`.
+- Confirmation seeds, edge cut, G3, and G4 were not run. No interface successor
+  is licensed because the state was not readable.
+
+## 2026-07-13 — post-result terminal science audit
+
+- An adversarial read-only audit found that the analyzer's precedence did not
+  implement the frozen mutually exclusive pilot taxonomy. The preregistration
+  assigns a complete pilot with any non-capacity promotion failure to
+  `PILOT_PROMOTION_BLOCKED`; the implementation instead let the simultaneous
+  state failure dominate.
+- The authoritative disposition is therefore `PILOT_PROMOTION_BLOCKED`, with
+  `capacity_branch_closed=false`. The raw summary, receipt identity, and hash
+  above are preserved unchanged as historical flawed-classifier output rather
+  than rewritten after seeing the result.
+- The audit also found that the parent LoRA and successor direct-delta builds did
+  not share bit-identical state-module initialization or dropout RNG streams.
+  Their parameterizations consume different random streams before training,
+  and the 892M-parameter direct optimizer has different global-clipping geometry.
+  The same integer seed, learning rate, and schedule do not remove those
+  cross-experiment confounds.
+- The result remains strong descriptive evidence that this mechanically valid
+  direct-full-shape recipe did not learn the registered state. It does not close
+  LoRA rank as the cause or non-cause, and it did not run edge cuts or G3.
+- A fresh experiment is mandatory: use fresh procedural evaluation rows,
+  bit-identical shared loop-state initialization, isolated and reset RNG streams,
+  an early trained-depth state-readability positive control, full fixed-final
+  multi-seed LoRA/direct-delta arms, and separate representation versus
+  answer/mechanism verdict axes.
