@@ -12,6 +12,7 @@ from training_units import (  # noqa: E402
     fit_prompt_around_completion,
     make_sparse_sample,
     offpolicy_prompt_and_completion,
+    prompt_truncation_violations,
     prompt_and_student_completion,
 )
 
@@ -68,6 +69,41 @@ class TrainingUnitTests(unittest.TestCase):
                 max_length=3072,
                 state_id="too-long-completion",
             )
+
+    def test_full_prefix_guard_distinguishes_primary_from_cache_only_control(self):
+        samples = [
+            {
+                "id": "capability-cut",
+                "meta": {"role": "capability", "prompt_tokens_truncated": 3},
+            },
+            {
+                "id": "anchor-full",
+                "meta": {"role": "anchor", "prompt_tokens_truncated": 0},
+            },
+            {
+                "id": "control-cut",
+                "meta": {"role": "route_control", "prompt_tokens_truncated": 9},
+            },
+        ]
+        self.assertEqual(
+            prompt_truncation_violations(
+                samples, required_roles={"capability", "anchor"}
+            ),
+            [
+                {
+                    "id": "capability-cut",
+                    "role": "capability",
+                    "prompt_tokens_truncated": 3,
+                }
+            ],
+        )
+        self.assertEqual(
+            {row["id"] for row in prompt_truncation_violations(
+                samples,
+                required_roles={"capability", "anchor", "route_control"},
+            )},
+            {"capability-cut", "control-cut"},
+        )
 
     def test_atom_masks_only_injected_close(self):
         unit = {

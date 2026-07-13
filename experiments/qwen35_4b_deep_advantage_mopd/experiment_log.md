@@ -95,3 +95,35 @@
   leaves no causal prompt token. Regression coverage reproduces the exact
   `3,203→3,072` case. Existing states, branch ledgers, routes, quotas, and
   model outputs are reused unchanged.
+
+## 2026-07-13 — live integration integrity audit
+
+- Round 1 subsequently passed its frozen gate: 20/20 updates, mean corrected
+  loss `0.04901`, probe loss `0.03915→0.02020`, and overlap
+  `0.84121→0.84604`. Exactly 60 deep and 20 anchors were consumed with zero
+  prompt truncation. The sole 131-token cut remains a cache-only matched
+  route-control sample.
+- An independent math audit confirmed the teacher-top-50 corrected reverse-KL
+  value, gradient, causal indexing, masks, quotas, and no-hint construction.
+  It also exposed prospective fail-open edges before they affected a primary
+  update.
+- Cache creation now fails before model load if a capability or anchor prefix
+  would be shortened, and every trainer independently rejects any shortened
+  sample selected by its arm. Per-role truncation counts are receipted. The
+  known round-1 route control therefore requires a deterministic full-prefix
+  replacement from the already-frozen candidate pool before that control may
+  run; the primary manifest/cache remain immutable.
+- Cache creation, resume, and training now bind stage, frozen config hash,
+  top-k, and exact quick/deep/soup paths plus model-config and merge-receipt
+  hashes. Existing round-0/1 caches pass the strengthened validator.
+- Fixed a pre-control implementation error: off-policy pressure probes had
+  taken the first eight lexicographic units (5/3 and 1/7 capability/anchor in
+  actual rounds 0/1). They now use and receipt the registered deterministic
+  6-capability/2-anchor geometry. The frozen initial-objective-loss scaling
+  definition is unchanged.
+- Full-round probe entropy contracted `10.28%` in round 0 and `12.33%` in
+  round 1. This is not a registered full-round stop—the 10% entropy ceiling is
+  specific to locality—so no post-hoc gate was added. It is preserved as a
+  collapse-risk warning for confirmation and final interpretation.
+- All 58 experiment tests pass after the safeguards. Seed 42 remains in
+  progress; no capability or control comparison exists yet.

@@ -64,6 +64,11 @@ def _make_units(manifest: dict, tokenizer, *, max_positions: int, max_length: in
             max_length=max_length,
             state_id=str(row["state_id"]),
         )
+        if prompt_tokens_truncated:
+            raise ValueError(
+                "off-policy control requires the full observed prefix for "
+                f"{row['state_id']}: would truncate {prompt_tokens_truncated} tokens"
+            )
         units.append(
             {
                 "id": str(row["state_id"]),
@@ -129,6 +134,19 @@ def _probe(model, units: list[dict]) -> dict:
         "mean_entropy": sum(entropies) / len(entropies),
         "unit_count": len(units),
     }
+
+
+def _probe_units(units: list[dict]) -> list[dict]:
+    """Match the primary arm's frozen 6-capability/2-anchor probe geometry."""
+
+    ordered = sorted(units, key=lambda value: value["id"])
+    capability = [unit for unit in ordered if unit["role"] == "capability"][:6]
+    anchors = [unit for unit in ordered if unit["role"] == "anchor"][:2]
+    if len(capability) != 6 or len(anchors) != 2:
+        raise ValueError(
+            "off-policy pressure probe requires exactly 6 capability and 2 anchor units"
+        )
+    return capability + anchors
 
 
 def main() -> int:
@@ -201,7 +219,7 @@ def main() -> int:
         ),
     )
     model.config.use_cache = False
-    probe_units = sorted(units, key=lambda value: value["id"])[:8]
+    probe_units = _probe_units(units)
     initial_probe = _probe(model, probe_units)
     scale = _loss_scale(initial_probe["mean_loss"], args.target_initial_loss)
     trainable = [parameter for parameter in model.parameters() if parameter.requires_grad]
@@ -289,6 +307,15 @@ def main() -> int:
         ).hexdigest(),
         "initial_probe": initial_probe,
         "final_probe": final_probe,
+        "pressure_probe": {
+            "unit_ids": [unit["id"] for unit in probe_units],
+            "role_counts": {
+                role: sum(unit["role"] == role for unit in probe_units)
+                for role in ("capability", "anchor")
+            },
+            "geometry": "6_capability_2_anchor",
+            "matching_statistic": "initial_mean_objective_loss",
+        },
         "target_initial_loss": args.target_initial_loss,
         "backward_loss_scale": scale,
         "mean_cross_entropy": sum(losses) / len(losses) if losses else None,

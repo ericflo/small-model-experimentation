@@ -18,8 +18,13 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 EXP = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(EXP / "src"))
 
-from io_utils import load_config, sha256_file  # noqa: E402
-from training_units import make_sparse_sample  # noqa: E402
+from io_utils import (  # noqa: E402
+    expected_policy_paths,
+    load_config,
+    sha256_file,
+    validate_policy_cache_provenance,
+)
+from training_units import make_sparse_sample, prompt_truncation_violations  # noqa: E402
 
 
 def _score_policy(model_path: Path, samples: list[dict], policy: str, top_k: int) -> dict:
@@ -116,7 +121,24 @@ def main() -> int:
         )
         for unit in units
     ]
+    # Capability and anchor updates are defined on the exact observed state.
+    # A completion-preserving cut is permissible for cache-only matched
+    # controls, but never for a sample consumed by the primary update.
+    primary_prefix_violations = prompt_truncation_violations(
+        samples, required_roles={"capability", "anchor"}
+    )
+    if primary_prefix_violations:
+        raise SystemExit(
+            "full-prefix invariant failed for primary training samples: "
+            + json.dumps(primary_prefix_violations, sort_keys=True)
+        )
     models = {"quick": args.quick.resolve(), "deep": args.deep.resolve(), "soup": args.soup.resolve()}
+    expected_models = expected_policy_paths(config)
+    if models != expected_models:
+        raise SystemExit(
+            "target-policy CLI paths do not match frozen config: "
+            f"actual={models} expected={expected_models}"
+        )
     for path in models.values():
         if not (path / "merge_receipt.json").is_file():
             raise SystemExit(f"target policy is not an explicit composite: {path}")
@@ -174,10 +196,44 @@ def main() -> int:
                     )
                 ).encode("utf-8")
             ).hexdigest(),
+            "by_role": {
+                role: {
+                    "sample_count": sum(
+                        sample["meta"]["role"] == role
+                        and int(sample["meta"]["prompt_tokens_truncated"]) > 0
+                        for sample in samples
+                    ),
+                    "total_tokens": sum(
+                        int(sample["meta"]["prompt_tokens_truncated"])
+                        for sample in samples
+                        if sample["meta"]["role"] == role
+                    ),
+                    "maximum_tokens": max(
+                        (
+                            int(sample["meta"]["prompt_tokens_truncated"])
+                            for sample in samples
+                            if sample["meta"]["role"] == role
+                        ),
+                        default=0,
+                    ),
+                    "state_ids_sha256": hashlib.sha256(
+                        "\n".join(
+                            sorted(
+                                sample["id"]
+                                for sample in samples
+                                if sample["meta"]["role"] == role
+                                and int(sample["meta"]["prompt_tokens_truncated"]) > 0
+                            )
+                        ).encode("utf-8")
+                    ).hexdigest(),
+                }
+                for role in ("capability", "anchor", "route_control")
+            },
         },
         "ledgers": ledgers,
         "samples": samples,
     }
+    validate_policy_cache_provenance(payload, config, config_path)
     args.out.parent.mkdir(parents=True, exist_ok=True)
     torch.save(payload, args.out)
     digest = hashlib.sha256(args.out.read_bytes()).hexdigest()

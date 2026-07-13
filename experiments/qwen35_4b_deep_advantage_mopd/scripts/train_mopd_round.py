@@ -18,8 +18,13 @@ import torch
 EXP = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(EXP / "src"))
 
-from io_utils import load_config, sha256_file  # noqa: E402
+from io_utils import (  # noqa: E402
+    load_config,
+    sha256_file,
+    validate_policy_cache_provenance,
+)
 from mopd_loss import sparse_teacher_topk_reverse_kl  # noqa: E402
+from training_units import prompt_truncation_violations  # noqa: E402
 
 
 TARGET_MODULES = [
@@ -218,7 +223,17 @@ def main() -> int:
     cache_receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
     if cache_receipt["cache_sha256"] != sha256_file(args.target_cache):
         raise SystemExit("target cache checksum mismatch")
+    try:
+        validate_policy_cache_provenance(cache_receipt, config, config_path)
+    except ValueError as error:
+        raise SystemExit(str(error)) from error
     payload = torch.load(args.target_cache, map_location="cpu", weights_only=False)
+    try:
+        validate_policy_cache_provenance(payload, config, config_path)
+    except ValueError as error:
+        raise SystemExit(str(error)) from error
+    if payload.get("models") != cache_receipt.get("models"):
+        raise SystemExit("target cache/receipt model provenance mismatch")
     if int(payload["round"]) != args.round:
         raise SystemExit("target cache round mismatch")
     samples = payload["samples"]
@@ -237,6 +252,15 @@ def main() -> int:
     if len(samples) != expected_samples:
         raise SystemExit(
             f"arm {args.arm} selected {len(samples)} samples, expected {expected_samples}"
+        )
+    prefix_violations = prompt_truncation_violations(
+        samples,
+        required_roles={str(sample["meta"]["role"]) for sample in samples},
+    )
+    if prefix_violations:
+        raise SystemExit(
+            f"arm {args.arm} requires full-prefix training samples: "
+            + json.dumps(prefix_violations, sort_keys=True)
         )
     assignments = _target_assignments(
         samples, args.arm, args.seed + args.round * 1000

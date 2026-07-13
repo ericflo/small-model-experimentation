@@ -6,7 +6,7 @@ import gzip
 import hashlib
 import json
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any, Iterable, Mapping
 
 import yaml
 
@@ -95,6 +95,54 @@ def load_config(path: Path | None = None) -> tuple[dict[str, Any], Path]:
 def resolve_repo_path(value: str | Path) -> Path:
     path = Path(value)
     return path if path.is_absolute() else REPO / path
+
+
+def expected_policy_paths(config: Mapping[str, Any]) -> dict[str, Path]:
+    """Resolve the three immutable policies permitted in an MOPD target cache."""
+
+    model = config["model"]
+    return {
+        "quick": resolve_repo_path(model["quick_teacher"]).resolve(),
+        "deep": resolve_repo_path(model["deep_teacher"]).resolve(),
+        "soup": resolve_repo_path(model["student_checkpoint"]).resolve(),
+    }
+
+
+def validate_policy_cache_provenance(
+    metadata: Mapping[str, Any],
+    config: Mapping[str, Any],
+    config_path: Path,
+) -> None:
+    """Fail closed unless cache metadata binds every frozen source policy."""
+
+    errors = []
+    if metadata.get("stage") != "matched_all_policy_topk_cache":
+        errors.append("stage")
+    if metadata.get("config_sha256") != sha256_file(config_path):
+        errors.append("config_sha256")
+    if int(metadata.get("top_k", -1)) != int(config["mopd"]["top_k"]):
+        errors.append("top_k")
+    recorded_models = metadata.get("models") or {}
+    for policy, expected in expected_policy_paths(config).items():
+        recorded = recorded_models.get(policy) or {}
+        try:
+            recorded_path = Path(recorded.get("path", "")).resolve()
+        except (TypeError, ValueError):
+            recorded_path = Path("/")
+        if recorded_path != expected:
+            errors.append(f"models.{policy}.path")
+            continue
+        for filename, field in (
+            ("config.json", "config_sha256"),
+            ("merge_receipt.json", "merge_receipt_sha256"),
+        ):
+            artifact = expected / filename
+            if not artifact.is_file() or recorded.get(field) != sha256_file(artifact):
+                errors.append(f"models.{policy}.{field}")
+    if set(recorded_models) != {"quick", "deep", "soup"}:
+        errors.append("models.inventory")
+    if errors:
+        raise ValueError("policy-cache provenance mismatch: " + ", ".join(sorted(set(errors))))
 
 
 def training_seed(config: dict[str, Any], index: int = 0) -> int:

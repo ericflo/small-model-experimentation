@@ -25,6 +25,7 @@ from io_utils import (  # noqa: E402
     load_config,
     resolve_repo_path,
     sha256_file,
+    validate_policy_cache_provenance,
     write_json,
 )
 
@@ -716,6 +717,10 @@ def _prepare_online_round(
     if not target_cache.is_file() or not cache_receipt_path.is_file():
         raise SystemExit(f"partial all-policy target cache: {target_cache}")
     cache_receipt = json.loads(cache_receipt_path.read_text(encoding="utf-8"))
+    try:
+        validate_policy_cache_provenance(cache_receipt, config, config_path)
+    except ValueError as error:
+        raise SystemExit(f"stale all-policy target cache: {target_cache}: {error}") from error
     if (
         cache_receipt.get("cache_sha256") != sha256_file(target_cache)
         or cache_receipt.get("round_manifest_sha256") != sha256_file(manifest)

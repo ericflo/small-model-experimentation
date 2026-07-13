@@ -1,8 +1,8 @@
 {
-  "completed_rounds": 1,
+  "completed_rounds": 2,
   "config": "/workspace/small-model-experimentation/experiments/qwen35_4b_deep_advantage_mopd/configs/default.yaml",
   "config_sha256": "2fe8ce9acb1fbdcb83ce2f19ed4de111906ae943fcaccf1425a826fae4cca2a7",
-  "final_model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/merged/primary/seed_42/round_0",
+  "final_model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/merged/primary/seed_42/round_1",
   "gate": {
     "passed": false
   },
@@ -24,6 +24,24 @@
       "target_cache_sha256": "20c21a5bb8e8b8058d0b7377929b37fd5e2eca8e55598d61b6ac827503761e76",
       "training_receipt": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/adapters/primary/seed_42/round_0/training_receipt.json",
       "training_receipt_sha256": "783ff2671acfe1945f7c2b34fbf46920f9cf06c3fb0ef0bc3582329e91b750dd"
+    },
+    {
+      "merge_receipt_sha256": "0e211763866b429cf6d7ca2eabd30fc8cf073b239c2c991c8c54759fbb7e99fd",
+      "merged": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/merged/primary/seed_42/round_1",
+      "round": 1,
+      "round_gate": {
+        "completed_all_updates": true,
+        "maximum_mean_loss": 0.1,
+        "overlap_non_decreasing": true,
+        "passed": true,
+        "unsafe_reason": null
+      },
+      "round_manifest": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/online/primary/seed_42/round_1/training_round.json",
+      "round_manifest_sha256": "12ef14d051842189ebebf9161b6647a7edb972a0a95eba370800e01d5e22c330",
+      "target_cache": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/online/primary/seed_42/round_1/all_policy_targets.pt",
+      "target_cache_sha256": "7ec7b7527ba9207540cf0c785ac4b3389e6b50c69a77b9f665984564a7237ba4",
+      "training_receipt": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/adapters/primary/seed_42/round_1/training_receipt.json",
+      "training_receipt_sha256": "5c686a0c01d2b5f843afbbe31bfccbdb5aa232986a6258c1c4ad58956632376a"
     }
   ],
   "schema_version": 1,

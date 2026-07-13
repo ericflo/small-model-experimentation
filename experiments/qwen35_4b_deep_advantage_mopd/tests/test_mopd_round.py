@@ -29,6 +29,7 @@ def sample(index: int, role: str, teacher: str = "deep", *, kind="atom", level=1
             "primary_teacher": teacher if role == "capability" else "soup",
             "kind": kind,
             "level": level,
+            "prompt_tokens_truncated": 0,
         },
         "targets": targets,
         "positions": torch.arange(3),
@@ -75,6 +76,19 @@ class MopdRoundTests(unittest.TestCase):
         assignments = _target_assignments(selected, "wrong_teacher", seed=65)
         self.assertEqual(sum(value == "quick" for value in assignments.values()), 3)
         self.assertEqual(sum(value == "soup" for value in assignments.values()), 2)
+
+    def test_selected_control_can_be_identified_as_prefix_truncated(self):
+        from training_units import prompt_truncation_violations
+
+        samples = [sample(0, "route_control"), sample(1, "anchor")]
+        samples[0]["meta"]["prompt_tokens_truncated"] = 7
+        selected = _arm_samples(samples, "non_advantage_route")
+        self.assertEqual(
+            prompt_truncation_violations(
+                selected, required_roles={"route_control", "anchor"}
+            )[0]["id"],
+            "route_control-0",
+        )
 
     def test_locality_subset_preserves_registered_mixture(self):
         samples = [sample(i, "capability") for i in range(60)]

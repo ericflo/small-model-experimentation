@@ -7,6 +7,29 @@ from typing import Any, Mapping
 import torch
 
 
+def prompt_truncation_violations(
+    samples: list[Mapping[str, Any]],
+    *,
+    required_roles: set[str],
+) -> list[dict[str, Any]]:
+    """Return deterministic evidence for trainable prefixes that were shortened."""
+
+    violations = []
+    for sample in samples:
+        meta = sample["meta"]
+        role = str(meta["role"])
+        truncated = int(meta.get("prompt_tokens_truncated", 0))
+        if role in required_roles and truncated > 0:
+            violations.append(
+                {
+                    "id": str(sample["id"]),
+                    "role": role,
+                    "prompt_tokens_truncated": truncated,
+                }
+            )
+    return sorted(violations, key=lambda row: (row["role"], row["id"]))
+
+
 def fit_prompt_around_completion(
     prompt: list[int],
     completion: list[int],
