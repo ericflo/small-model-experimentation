@@ -1,6 +1,6 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · frozen design unchanged; source-v11 PREPARED-output repair reviewed at 363/363; source-v10 setup invalidated before any result training; source-v11 publication, source-v10 archival, and complete setup replay required before Stage A
+**Status:** in-progress · since 2026-07-13 · frozen design unchanged; source-v11 PREPARED-output repair reviewed at 363/363; source-v10 setup invalidated before any result training; source-v11 non-model setup regenerated and awaiting publication before model-bearing setup replay
 
 ## Current status
 
@@ -19,11 +19,14 @@ markerless output. Reviewed implementation `7d6cd93f…d278`, full source contra
 `5a8ed26d…6666`, and the 363/363 suite pass. Every source-v10 setup artifact is invalid for v11 and
 is now preserved in a verified 25-file, 19,566,021-byte archive at receipt identity
 `252be000…5d6a3` and files identity `f767eb80…d4b91`. Canonical setup cleanup and an immediate
-idempotent replay passed. Publish and validate that archive checkpoint, then retire the separately
-preserved stale PREPARED paths and regenerate/replay setup before Stage A restarts. The archive
-checkpoint is green at `24733d34`; the canonical empty output and stale journal have now been retired
-only after byte-exact revalidation of their published copies. The retirement receipt authorizes no
-training and must be published/green before source-v11 setup regeneration.
+idempotent replay passed. The archive checkpoint is green at `24733d34`; the canonical empty output
+and stale journal were retired only after byte-exact revalidation of their published copies, and the
+retirement checkpoint is green at `aa85086f`. Source-v11 non-model setup is now regenerated: CPU
+receipt SHA-256 `d46b32bd…0192`, data-manifest SHA-256 `d104a9c0…a22c`, data-contract identity
+`43363814…6669`, and empty-ledger identity `01b2724b…41f3f`. All three initialization bundles reopen
+canonically, their tracked mirrors are byte-identical and inode-distinct, and their tensor values
+exactly reproduce source v10. No model or benchmark was opened and no sealed payload was
+decompressed. Publish and validate this non-model checkpoint before replaying model-bearing setup.
 
 Historically, the integrated source-v10 review was `GO` for reviewed implementation
 `a5a494b7…6f1c4a` and full source contract `979a9012…f394b7`; the 360/360 suite and exact machine gate

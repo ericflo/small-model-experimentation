@@ -4910,7 +4910,7 @@
   {
     "file_counts": {
       ".csv": 1,
-      ".json": 17,
+      ".json": 23,
       ".md": 11,
       ".py": 42,
       ".yaml": 4,
@@ -4929,7 +4929,7 @@
       "structured_execution_and_compilers"
     ],
     "source_track": "new",
-    "summary": "This is the canonical fresh adjudication of the unresolved LoRA-capacity question from `qwen35_4b_state_carry_vs_state_bag`. It is not a continuation of either prior checkpoint. Preregistration, adversarial design review, and the frozen scientific design are complete. The first Stage-A source-v10 command stopped before model load, train-payload access, optimizer construction, or training. Its journal reached only `PREPARED`, and its canonical external output was exactly empty: the attempt JSON helper duplicated a repository-relative destination beneath its own relative parent. This is a mechanical launch failure, not a LoRA result. The exact journal is preserved at SHA-256 `209d4c1f\u202612df`, and failure receipt identity `6b23f95d\u2026b8c2` explicitly records zero result/sealed/benchmark access and no scientific authority. Source v11 normalizes the parent/leaf publication boundary, recovers only the exact empty-directory mkdir-before-marker crash state, canonicalizes validated training and contrast paths before use, and rejects any nonempty markerless output. Reviewed implementation `7d6cd93f\u2026d278`, full source contract `5a8ed26d\u20266666`, and the 363/363 suite pass. Every source-v10 setup artifact is invalid for v11 and is now preserved in a verified 25-file, 19,566,021-byte archive at receipt identity `252be000\u20265d6a3` and files identity `f767eb80\u2026d4b91`. Canonical setup cleanup and an immediate idempotent replay passed. Publish and validate that archive checkpoint, then retire the separately preserved stale PREPARED paths and regenerate/replay setup before Stage A restarts. The archive checkpoint is green at `24733d34`; the canonical empty output and stale journal have now been retired only after byte-exact revalidation of their published copies. The retirement receipt authorizes no training and must be published/green before source-v11 setup regeneration.",
+    "summary": "This is the canonical fresh adjudication of the unresolved LoRA-capacity question from `qwen35_4b_state_carry_vs_state_bag`. It is not a continuation of either prior checkpoint. Preregistration, adversarial design review, and the frozen scientific design are complete. The first Stage-A source-v10 command stopped before model load, train-payload access, optimizer construction, or training. Its journal reached only `PREPARED`, and its canonical external output was exactly empty: the attempt JSON helper duplicated a repository-relative destination beneath its own relative parent. This is a mechanical launch failure, not a LoRA result. The exact journal is preserved at SHA-256 `209d4c1f\u202612df`, and failure receipt identity `6b23f95d\u2026b8c2` explicitly records zero result/sealed/benchmark access and no scientific authority. Source v11 normalizes the parent/leaf publication boundary, recovers only the exact empty-directory mkdir-before-marker crash state, canonicalizes validated training and contrast paths before use, and rejects any nonempty markerless output. Reviewed implementation `7d6cd93f\u2026d278`, full source contract `5a8ed26d\u20266666`, and the 363/363 suite pass. Every source-v10 setup artifact is invalid for v11 and is now preserved in a verified 25-file, 19,566,021-byte archive at receipt identity `252be000\u20265d6a3` and files identity `f767eb80\u2026d4b91`. Canonical setup cleanup and an immediate idempotent replay passed. The archive checkpoint is green at `24733d34`; the canonical empty output and stale journal were retired only after byte-exact revalidation of their published copies, and the retirement checkpoint is green at `aa85086f`. Source-v11 non-model setup is now regenerated: CPU receipt SHA-256 `d46b32bd\u20260192`, data-manifest SHA-256 `d104a9c0\u2026a22c`, data-contract identity `43363814\u20266669`, and empty-ledger identity `01b2724b\u202641f3f`. All three initialization bundles reopen canonically, their tracked mirrors are byte-identical and inode-distinct, and their tensor values exactly reproduce source v10. No model or benchmark was opened and no sealed payload was decompressed. Publish and validate this non-model checkpoint before replaying model-bearing setup.",
     "tags": [
       "latent-state",
       "lora",
@@ -4949,8 +4949,8 @@
       "src",
       "tests"
     ],
-    "total_files": 78,
-    "total_size_bytes": 2025931
+    "total_files": 84,
+    "total_size_bytes": 3424564
   },
   {
     "file_counts": {

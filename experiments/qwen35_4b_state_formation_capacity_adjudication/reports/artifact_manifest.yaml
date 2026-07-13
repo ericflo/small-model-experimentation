@@ -39,7 +39,7 @@ external_artifacts:
   - name: "source-v11 shared initialization bundles"
     storage: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed{7411,7412,7413}.pt{,.json}"
     required_for: "all source-v11 seed-matched G0, positive-control, and reached training cells"
-    checksum: "not yet created; the invalidated source-v10 bundle bytes are preserved in invalidated_setup/source_979a9012... at files identity f767eb800940f336f0983df13d56bf5870b1c4a0bba8d472dfba0967825d4b91"
+    checksum: "seed 7411 bundle a03486a116f833a4c7b02768b0909977af233029380658e589709931153bcc77 / sidecar identity fc997954bf33268ded82d316abaff6abfdbc8f8e356aad8e95d433321da7bc6b; seed 7412 bundle 3ae974638c59741125c20a52dffee2a00e71c6d1718dc596ee4dec783c4021f5 / sidecar identity 688825b11d9db3193012f580370dc64d6294a0f58e59143b65517ac3e0dbb26b; seed 7413 bundle 1167ebebf1365fe23fa6326c8c9f2859540ae2df9a7ef565c534768d2128b2f2 / sidecar identity f7b95a1c72c96cd375e7ba9b7c35c1d5afe1aec29766d840a89b7dc30b345ddc"
     regenerate: "run prepare-init once per seed only after a source transition and its invalidated setup archive checkpoint are published and green; never overwrite a realized bundle"
   - name: "fixed-final LoRA joint checkpoints"
     storage: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/lora_joint_seed{7411,7412,7413}/"

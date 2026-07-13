@@ -899,3 +899,28 @@ or result-bearing stage is authorized meanwhile.
 Only retirement-checkpoint validation, commit, push, and workflow verification are authorized. After
 both workflows are green, regenerate source-v11 CPU/data/empty-ledger/initialization setup and publish
 that checkpoint before any model-bearing gate. No result-bearing stage is authorized.
+
+## 2026-07-13 — source-v11 non-model setup regenerated and strictly reopened
+
+- Retirement commit `aa85086f` passed both required workflows before regeneration began.
+- CPU smoke passed without loading a model at file SHA-256 `d46b32bd…0192`. The deterministic data
+  manifest has file SHA-256 `d104a9c0…a22c`, data-contract identity `43363814…6669`, zero structural
+  duplicates, and zero benchmark reads. The contrast ledger remains empty at receipt identity
+  `01b2724b…41f3f`.
+- The seven compressed payload hashes and row counts reproduce the frozen procedural substrate,
+  including 12,000 train rows, 1,024 validation rows, and the three still-sealed contrast payloads.
+  Validation inspected only manifest/compressed-byte metadata; no sealed row was decompressed.
+- All three initialization bundles reopened through the canonical loader. Each external sidecar is
+  byte-identical to but inode-distinct from its tracked mirror, and each 15-tensor value digest exactly
+  reproduces source v10: seed 7411 `5338572e…af31`, seed 7412 `30aac3e3…e14`, seed 7413
+  `04054449…efeb`. Bundle SHA-256 / sidecar identity: seed 7411 `a03486a1…c77` /
+  `fc997954…c6b`; seed 7412 `3ae97463…021f5` / `688825b1…b26b`; seed 7413
+  `1167ebeb…8b2f2` / `f7b95a1c…45ddc`.
+- Regeneration used source contract `5a8ed26d…6666`, loaded no model, read no benchmark, and created
+  no result evidence.
+
+## Current authorization
+
+Only source-v11 non-model setup validation, commit, push, and workflow verification are authorized.
+After both workflows are green, replay seed-7411 LoRA G0 and its positive control. Later setup and
+all result-bearing stages remain blocked by their frozen ordered barriers.

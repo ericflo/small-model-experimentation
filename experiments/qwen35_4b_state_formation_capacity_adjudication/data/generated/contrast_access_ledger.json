@@ -1,0 +1,31 @@
+{
+  "data_manifest_sha256": "d104a9c01a9173faf9764cdda673cdfbe93d799ce96cd9a315d9782839e3a22c",
+  "design_lineage": {
+    "path": "experiments/qwen35_4b_state_formation_capacity_adjudication/reports/design_receipt.json",
+    "phase": "design_boundary",
+    "receipt_identity_sha256": "d943b909250c2ebd377b8094bb55324a5d5ccf555c7559736526f013d248ac52",
+    "sha256": "490035fe77519739e18eb3494ad693544c423a62d4222cf4ea0b4e3d5684d45e",
+    "status": "DESIGN_FROZEN"
+  },
+  "events": [],
+  "experiment_id": "qwen35_4b_state_formation_capacity_adjudication",
+  "receipt_identity_sha256": "01b2724bfb63a060f8f2d6e40a6570bb629f35c719e667b6070aa0be1df41f3f",
+  "schema_version": 1,
+  "sealed_splits": {
+    "contrast_depth": {
+      "bytes": 558455,
+      "path": "contrast_depth.jsonl.gz",
+      "sha256": "324718e2621970d561fb37028fe816e48de68853e4121478dbaaf6eed4706fe0"
+    },
+    "contrast_joint": {
+      "bytes": 536396,
+      "path": "contrast_joint.jsonl.gz",
+      "sha256": "35689f2173986074cb4c3dffaf14fe7d555c6143068621ba0ffdae698e1c2907"
+    },
+    "contrast_validation": {
+      "bytes": 403733,
+      "path": "contrast_validation.jsonl.gz",
+      "sha256": "10e21bb3a29a3118204bb914d99689b362bcdb5d9448b7ea290da3cfb87c6f4b"
+    }
+  }
+}
