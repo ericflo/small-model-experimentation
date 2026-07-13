@@ -6,6 +6,8 @@ import sys
 import unittest
 from collections import Counter
 from pathlib import Path
+from types import SimpleNamespace
+from unittest.mock import patch
 
 import yaml
 
@@ -141,6 +143,14 @@ class TransactionCurriculumTests(unittest.TestCase):
         locality_source = (EXP / "scripts" / "audit_locality.py").read_text()
         self.assertIn("varentropy", locality_source)
         self.assertIn("entropy_retained", locality_source)
+
+    def test_official_child_processes_freeze_python_hash_seed(self):
+        runner = load_script("run")
+        with patch.object(
+            runner.subprocess, "run", return_value=SimpleNamespace(returncode=0)
+        ) as mocked:
+            runner.command(["synthetic-command"])
+        self.assertEqual(mocked.call_args.kwargs["env"]["PYTHONHASHSEED"], "0")
 
 
 if __name__ == "__main__":

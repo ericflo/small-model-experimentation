@@ -21,3 +21,21 @@
   exactly 152,992 weighted action-token mass per epoch, zero whole-task
   padding, a 1,179-token maximum row, and 72 registered optimizer steps. The
   actual 8.5 GB parent weight hash matched before tokenization.
+
+## 2026-07-13 — GPU smoke, training, and control-manifest correction
+
+- GPU smoke passed two optimizer steps, an explicit 128-module merge, and a
+  real six-turn vLLM recovery block.
+- Restored the two documented Qwen training fast paths in `.venv`; both import
+  checks and an actual forward pass succeeded.
+- Trained both 72-step result arms. Primary aggregate loss 0.0612, merge delta
+  norm sum 16.735; replay-only loss 0.0419, delta norm sum 5.683. No padding,
+  truncation, fallback, OOM, or retry occurred.
+- Primary passed apex-relative locality: drift 0.1194, entropy delta +0.0112,
+  varentropy delta −0.0002.
+- Parent and replay-only calibration controls each scored 25/60, but their
+  procedural manifest hashes differed. Forensics localized the byte difference
+  to randomized Python set-literal rendering in seat-group visible tests. The
+  feasibility analyzer stopped before candidate exposure. Quarantined both
+  invalid payloads, froze `PYTHONHASHSEED=0` for every official child process,
+  and reran controls before continuing. No threshold or model changed.

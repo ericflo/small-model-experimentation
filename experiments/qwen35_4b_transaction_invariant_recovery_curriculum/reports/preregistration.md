@@ -57,6 +57,8 @@ thinking tokens plus 512 answer tokens.
 Every arm shares backend, engine geometry, prompts, budgets, and task manifests.
 Report sampled tokens, turns, invalid actions, answer-cap contacts,
 verification, commit, and conditional-transition retention.
+Every official child process runs with `PYTHONHASHSEED=0`, so Python set/dict
+rendering cannot change byte-level procedural manifests between arms.
 
 ## Order and gates
 

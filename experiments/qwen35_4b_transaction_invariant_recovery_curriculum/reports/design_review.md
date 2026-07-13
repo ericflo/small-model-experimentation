@@ -57,6 +57,11 @@ can distinguish the new examples from extra conditional-recovery dose.
     through locality, calibration, dev, confirm, and broad retention. The suite
     is invoked only via its public CLI with aggregate receipts; no item,
     transcript, result detail, or family source is read.
+12. **Python set rendering can randomize otherwise identical prompts.** The
+    control-first calibration initially caught this through unequal manifest
+    hashes before candidate exposure. Official subprocesses now freeze
+    `PYTHONHASHSEED=0`; tests and analyzers require identical manifests. The two
+    invalid control payloads are quarantined and regenerated.
 
 ## Residual limitations
 

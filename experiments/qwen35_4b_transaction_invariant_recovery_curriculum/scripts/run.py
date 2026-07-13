@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -30,7 +31,8 @@ def resolve(value: str) -> Path:
 
 def command(argv: list[str], allowed: tuple[int, ...] = (0,)) -> int:
     print("[run] " + " ".join(argv), flush=True)
-    completed = subprocess.run(argv, cwd=ROOT, check=False)
+    child_env = {**os.environ, "PYTHONHASHSEED": "0"}
+    completed = subprocess.run(argv, cwd=ROOT, check=False, env=child_env)
     if completed.returncode not in allowed:
         raise subprocess.CalledProcessError(completed.returncode, argv)
     return completed.returncode
