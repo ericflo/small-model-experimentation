@@ -205,5 +205,8 @@ termination. Hold the budget fixed and test whether task-held-out prefix value
 can route or causally improve this deployed state. That test is now negative for
 the frozen shared J readout: overall AUC was 0.5021, below slot margin 0.5448 and
 non-J residual features 0.5292. Midpoint prospective AUC was 0.6083 but endpoint
-reversed to 0.3958, so no causal/controller stage opened. This localizes the
-next uncertainty to phase-specific state geometry, not a larger token budget.
+reversed to 0.3958, so no causal/controller stage opened. The allowed
+phase-specific audit found midpoint-only J AUC 0.5375 (lower 0.4417), below
+equal-width non-J 0.6000 and tied slot margin 0.5396. The apparent midpoint lead
+is retired; keep the replicated semantic-content seam, not its failed scalar
+readout, and do not infer a larger token budget.

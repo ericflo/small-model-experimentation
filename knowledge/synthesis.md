@@ -339,6 +339,16 @@ rows. It cannot rescue the experiment. Any midpoint-specific axis must be frozen
 and replicated on fresh tasks, beat equal-width non-J and margin controls with
 task uncertainty, and pass cross-phase tests before causal data can open.
 
+That allowed audit has now falsified the midpoint-specific lead on the opened
+rows. A direct midpoint-only task-held-out fit reached 0.5375 AUC with lower
+0.4417, below matched non-J state at 0.6000 and effectively tied with slot
+margin at 0.5396; endpoint-only J was 0.4292. Midpoint/end coordinate
+correlations averaged -0.0386 and coefficient cosine was -0.0681. This is
+post-decision evidence, not a claim-grade result, but it changes routing: do not
+spend a fresh split on the scalar midpoint J hypothesis. Preserve the replicated
+coherent-content seam and seek label-free semantic interventions with matched-
+compute controls.
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.

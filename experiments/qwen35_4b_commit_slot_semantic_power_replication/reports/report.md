@@ -206,6 +206,22 @@ tokens in 4,835.588 seconds, with 8,670,490,112 peak allocated bytes.
 `causal_confirmation` remained unopened. Control calibration and causal
 confirmation remain fatal-unavailable.
 
+## Post-decision phase diagnostic
+
+The preregistered audit permitted separate phase refits only as hypothesis
+diagnosis. Under the same folds and analysis, midpoint-only J reached 0.5375
+(one-sided task lower 0.4417), below its matched non-J readout at 0.6000 and
+effectively equal to slot margin at 0.5396. Endpoint-only J reached 0.4292.
+Cross-phase J transfer was 0.5292 from midpoint to endpoint and 0.4458 in the
+reverse direction; neither lower bound exceeded chance.
+
+This is not evidence of a simple sign flip. Across the 144 paired paths,
+midpoint/end centered J rows had mean cosine -0.0544, the 120 coordinate
+correlations averaged -0.0386, and separately fitted coefficient vectors had
+standardized cosine -0.0681. The stronger explanation is an unstable readout
+plus sampling/model flexibility. The apparent midpoint lead is retired, the
+registered negative is unchanged, and no causal data were opened.
+
 ## Artifact Manifest
 
 See `artifact_manifest.yaml`.

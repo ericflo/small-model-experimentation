@@ -107,3 +107,19 @@
 - `causal_confirmation` remains unopened. No control-calibration or causal stage
   is licensed. Preserve the phase-reversal hint only as a post-decision lead for
   a distinct fresh experiment.
+
+## 2026-07-12 — Post-decision phase audit retires the midpoint lead
+
+- Used only the already-open value rows, frozen folds, features, labels, ridge,
+  task macro, and task bootstrap; rerunning produced byte-identical output hash
+  `eaa75a4e605572a2c127969b072448f8270bbaa45387ad876fb6f7295b73603e`.
+- Phase-specific OOF refitting reduced midpoint J AUC from the shared model's
+  post-hoc slice of 0.6083 to 0.5375 (lower 0.4417). Matched non-J state reached
+  0.6000 and slot margin 0.5396. Endpoint J reached 0.4292 (lower 0.3417).
+- Half-trained J transferred to endpoint at 0.5292, while full-trained J
+  transferred to midpoint at 0.4458; neither lower bound exceeded chance.
+- Midpoint/end centered J states had mean coordinate correlation -0.0386 and
+  mean paired-row cosine -0.0544; phase-fit coefficient cosine was -0.0681.
+- This is explicitly `scientific_result: false`, cannot rescue the registered
+  decision, and did not open causal data. The fresh midpoint-J successor is
+  retired because its apparent advantage did not survive the direct controls.

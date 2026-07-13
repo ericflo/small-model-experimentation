@@ -28,8 +28,10 @@
   controls. The one value run then returned `NO_PREFIX_J_VALUE`: shared J AUC
   0.502 (lower 0.442), below slot margin 0.545 and equal-width non-J 0.529.
   Midpoint prospective AUC was 0.608 but endpoint reversed to 0.396, so causal
-  work stayed sealed. Diagnose phase-specific geometry only post-decision; any
-  confirmation requires a new fresh experiment.
+  work stayed sealed. The permitted phase-specific audit reduced midpoint-only
+  J to 0.538 (lower 0.442), below matched non-J 0.600 and tied margin 0.540;
+  retire this J-axis successor and redirect to mechanisms that exploit coherent
+  thought without assuming scalar J certainty.
 - If native thought-state transport passes, train a non-oracle prefix controller
   and require a replicated held-out capability gain over frozen Qwen3.5-4B and
   matched-compute sampling. Oracle donor selection is a mechanism control, not

@@ -119,4 +119,8 @@ Diagnostics should become standard infrastructure. They are how future agents av
   crossed zero. The shuffled null passed at 0.5061, so this is a scientific
   negative, not invalid control. Causal data stayed sealed. A phase-specific
   midpoint hypothesis requires a distinct fresh replication and cannot rescue
-  this shared-coordinate failure.
+  this shared-coordinate failure. The allowed post-decision audit then retired
+  that hypothesis: midpoint-only J was 0.5375 (lower 0.4417), below matched
+  non-J state 0.6000 and tied margin 0.5396; endpoint-only J was 0.4292.
+  Phase-fit coefficient cosine was -0.0681. Do not spend fresh tasks or causal
+  data on a midpoint J-axis replication.

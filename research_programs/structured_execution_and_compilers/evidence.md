@@ -203,5 +203,7 @@ close-only output remains poor. The subsequent task-held-out shared J-value
 measurement failed at chance (0.5021), below slot margin (0.5448) and equal-
 width non-J residual state (0.5292); midpoint and endpoint J rankings had
 opposite signs (0.6083 versus 0.3958). The interface is a stable output seam,
-not evidence for one phase-invariant scalar compiler state. Causal work stayed
-sealed.
+not evidence for one phase-invariant scalar compiler state. A permitted
+phase-specific refit also failed: midpoint J 0.5375 versus non-J 0.6000 and
+margin 0.5396. Causal work stayed sealed and the midpoint-J successor is
+retired.

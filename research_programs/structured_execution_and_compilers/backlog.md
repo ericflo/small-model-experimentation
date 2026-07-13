@@ -36,7 +36,8 @@
   The licensed shared J-value measurement was then chance (0.502) and weaker
   than slot margin/non-J state, with midpoint/end phase reversal. Treat the slot
   as a stable output seam, not a stable scalar compiler-state coordinate; causal
-  work is not licensed.
+  work is not licensed. A post-decision midpoint-only refit reached only 0.538
+  versus matched non-J 0.600, so do not replicate this J-axis interpretation.
 - Measure the exact behavioral quotient at fresh depth 6 before assuming model-guided pruning is economically
   needed; record wall time, memory, physical transitions, coverage, and selector success.
 - If a real search wall appears, test a residualized partial state (feasible parameter domains, materialized

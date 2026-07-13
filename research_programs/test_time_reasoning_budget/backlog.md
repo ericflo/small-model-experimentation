@@ -54,8 +54,10 @@
   Holding the cap fixed, the task-held-out shared J-value readout then failed at
   chance (0.502) despite midpoint 0.608 because endpoint reversed to 0.396; slot
   margin and generic non-J state were stronger. Do not increase the cap or open
-  causal work. A fresh successor may test a phase-specific prospective readout
-  only if post-decision diagnostics support it.
+  causal work. Post-decision midpoint-only J fell to 0.538, below non-J 0.600
+  and tied margin 0.540, so do not open the proposed phase-specific successor.
+  Test label-free ways of using coherent-thought diversity against matched-
+  compute sampling instead.
 - Completed cross-program qualification negative:
   `qwen35_4b_pareto_policy_integration` found that C54's short/deep tier labels
   did not become a clean procedural teacher crossover. `blend` lost both quick

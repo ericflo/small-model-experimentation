@@ -153,3 +153,18 @@ the terminal decision. If it survives stronger outcome-labeled controls, the
 next experiment must freeze a midpoint-specific model on fresh tasks and
 independently replicate it against margin and non-J baselines before any new
 causal split or controller work.
+
+## Post-decision phase audit
+
+The permitted deterministic audit removes that retained lead. With the same
+task folds and ridge pipeline, midpoint-only J reached 0.5375 AUC (one-sided
+task lower 0.4417), below the matched non-J readout at 0.6000 and effectively
+tied with slot margin at 0.5396. Endpoint-only J reached 0.4292. Midpoint/end
+coordinate correlations averaged -0.0386 and the phase-fit standardized
+coefficient cosine was -0.0681. Neither cross-phase J direction had a lower
+bound above chance.
+
+Do not spend a fresh split on midpoint-specific J or reopen causal patching.
+The durable positive is semantic: coherent ordered thought changes the commit
+choice. The next deployment attempt must exploit that content without assuming
+a scalar native J certainty coordinate and must beat matched-compute sampling.

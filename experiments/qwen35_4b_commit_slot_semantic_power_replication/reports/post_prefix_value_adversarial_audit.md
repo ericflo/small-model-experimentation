@@ -85,3 +85,32 @@ These diagnostics must be labeled post hoc, deterministic, and unable to alter
 `NO_PREFIX_J_VALUE`. If a midpoint-specific signal survives all direct/non-J
 controls, the only licensed next step is a new fresh task split with frozen
 phase-specific rules and independent confirmation.
+
+## Diagnostic outcome
+
+The allowed audit was run once through
+`analysis/analyze_prefix_phase.py` and rerun for determinism. Its JSON was
+byte-identical with SHA-256
+`eaa75a4e605572a2c127969b072448f8270bbaa45387ad876fb6f7295b73603e`.
+
+The midpoint-specific hypothesis did not survive:
+
+| post-hoc metric | midpoint | endpoint |
+| --- | ---: | ---: |
+| separately fitted J AUC | 0.5375 | 0.4292 |
+| one-sided task lower | 0.4417 | 0.3417 |
+| equal-width non-J AUC | 0.6000 | 0.4458 |
+| slot-margin AUC | 0.5396 | 0.5500 |
+
+Half-trained J applied to endpoint reached 0.5292 (lower 0.4375), and
+endpoint-trained J applied to midpoint reached 0.4458 (lower 0.3500).
+Midpoint/end centered J features had mean coordinate correlation -0.0386,
+mean paired-row cosine -0.0544, and 80/120 negative coordinate correlations.
+The phase-fit standardized coefficient cosine was -0.0681.
+
+The shared model's 0.6083 midpoint slice was therefore not a robust
+phase-specific J effect: a direct midpoint fit lost to matched non-J state and
+tied ordinary margin, with uncertainty below chance. Retire the proposed fresh
+midpoint-J replication. Preserve the semantic seam and redirect capability work
+to interventions that do not assume a scalar J certainty coordinate. Causal
+data remain sealed.

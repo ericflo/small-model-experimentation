@@ -155,6 +155,16 @@ gates. It lost to slot margin (0.5448) and equal-width non-J residual features
 hint cannot rescue the decision. `causal_confirmation` remains unopened and all
 causal stages stay unavailable.
 
+The allowed deterministic post-decision phase audit also rejects the apparent
+midpoint successor. Refitting the frozen ridge separately by phase reduced the
+midpoint J AUC to 0.5375 (one-sided task lower 0.4417), below equal-width non-J
+state at 0.6000 and effectively tied with slot margin at 0.5396. Endpoint J was
+0.4292. Centered midpoint/end J coordinates were not stable (mean coordinate
+correlation -0.0386; mean paired-row cosine -0.0544), and the two fitted J
+coefficient vectors were nearly orthogonal with a slight negative cosine
+(-0.0681). This is post hoc and cannot alter `NO_PREFIX_J_VALUE`; it removes,
+rather than supports, the rationale for a fresh midpoint-J replication.
+
 | value metric | observed | gate | pass |
 | --- | ---: | ---: | --- |
 | shared task-macro pairwise AUC | 0.5021 | >=0.65 | no |
@@ -193,6 +203,9 @@ successor must be a new experiment with fresh data and independent replication.
   hash-locked passing stages.
 - `analysis/analyze_replication.py` and `analysis/replication_audit.json`:
   deterministic stagewise and descriptive cross-stage audit.
+- `analysis/analyze_prefix_phase.py` and `analysis/prefix_phase_diagnostics.json`:
+  deterministic, post-decision phase audit that cannot alter the registered
+  negative or open causal data.
 - `configs/prefix_value.yaml`, `reports/prefix_value_preregistration.md`, and
   `reports/pre_value_design_review.md`: frozen prospective-value rules.
 - `reports/pre_value_implementation_audit.md`: outcome-blind code/firewall

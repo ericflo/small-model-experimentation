@@ -19,6 +19,7 @@ notes: >-
   deterministic replication audit are committed. The prospective prefix-value
   code and adversarial audits are outcome-blind and anchored to pushed commit
   ddbc1969. The smoke and complete terminal NO_PREFIX_J_VALUE rows/model/summary
-  are committed. The value split was opened exactly once; causal confirmation
-  and all downstream causal stages remain unopened. No artifact is external or
-  omitted.
+  are committed. A deterministic post-decision phase audit reads only those
+  rows and explicitly cannot rescue the decision; its output is committed. The
+  value split was opened exactly once; causal confirmation and all downstream
+  causal stages remain unopened. No artifact is external or omitted.
