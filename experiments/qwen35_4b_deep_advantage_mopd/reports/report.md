@@ -3,9 +3,9 @@
 ## Status
 
 The preregistered CPU/scientific smoke, pinned-model preflight, installation
-canary, fresh route qualification, and five-update exact-logit locality pilot
-all pass. Four-round integration is authorized; no capability comparison has
-run yet.
+canary, fresh route qualification, five-update exact-logit locality pilot, and
+seed-42 four-round integration all pass. Seeds 43/44, matched controls, and the
+sealed capability comparison have not run yet.
 
 ## Research Program Fit
 
@@ -60,6 +60,25 @@ ceiling; held-probe loss improved `0.04773→0.02947` and top-50 overlap improve
 drift was `0.02760`, relative entropy drop was `0.03112`, and target loss
 improved `0.01293→0.01170`. All frozen checks passed and the machine-readable
 authorization is `four_round_mopd`.
+
+Seed 42 then completed all four full-dose rounds. Deep-route supply was
+90/81/78/83, and every round selected 60 deep units plus 20 soup anchors,
+completed 20 consume-once updates, stayed below the `0.10` mean-loss ceiling,
+and non-decreased held-probe overlap. Mean corrected losses were
+`0.05669`/`0.04901`/`0.04855`/`0.05404`; probe losses improved in every round.
+The terminal merge receipt is
+`88512a57ebb190f0392118a30258eee5fb3bc58d5d34ae04e384afc8842f9122`.
+Entropy nevertheless contracted `10.28%`/`12.33%`/`8.90%`/`11.42%`. This is
+not a registered full-round stop, but it is a material collapse-risk warning.
+
+The valid interpretation-only NF4/bf16 diagnostic further weakens any inference
+from trainer-side improvement. Across 32 fixed consumed units and 7,970 target
+positions, mean NF4 objective gain was `+0.02191`, while the explicit bf16
+merges averaged `-0.000224`; gain-sign agreement was 15/32, gain correlation
+was `-0.152`, and midpoint update cosine averaged `0.407`. Endpoint top-1
+agreement was still 31/32. Thus endpoint similarity does not establish update
+parity, and the diagnostic gives no authorization. Only sealed same-vLLM
+procedural confirmation can determine whether the deployed checkpoint gained.
 
 The exact locality measurement covers one midpoint active token for each of
 the 20 consumed units, rather than every one of the 4,898 trained positions.

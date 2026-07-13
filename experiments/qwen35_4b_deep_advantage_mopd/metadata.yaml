@@ -5,7 +5,7 @@ source_track: "new"
 path: "experiments/qwen35_4b_deep_advantage_mopd"
 primary_readme: "experiments/qwen35_4b_deep_advantage_mopd/README.md"
 primary_report: "experiments/qwen35_4b_deep_advantage_mopd/reports/report.md"
-summary: "**Fresh deep qualification passes on both untouched blocks, and the frozen five-update MOPD pilot passes exact-logit locality; full integration is now authorized but no performance result exists yet.** This is a new result-bearing successor to `qwen35_4b_same_prefix_advantage_routing`, not an extension of its terminal result."
+summary: "**Fresh deep qualification passes on both untouched blocks, the frozen five-update MOPD pilot passes exact-logit locality, and seed 42 completes all four integration rounds. No procedural performance result exists yet.** This is a new result-bearing successor to `qwen35_4b_same_prefix_advantage_routing`, not an extension of its terminal result."
 tags:
   - "small-model"
 research_programs:
@@ -22,10 +22,10 @@ top_level_dirs:
   - "tests"
 file_counts:
   gz: 10
-  json: 23
+  json: 24
   jsonl: 8
   md: 9
   py: 69
   yaml: 3
-total_files: 122
-total_size_bytes: 24947108
+total_files: 123
+total_size_bytes: 25657229

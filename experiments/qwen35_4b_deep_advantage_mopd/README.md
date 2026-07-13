@@ -1,12 +1,12 @@
 # Qwen3.5-4B Deep-Advantage MOPD
 
-**Status:** in-progress · since 2026-07-12 · Fresh deep qualification and the five-update exact-logit locality gate pass; four-round integration is authorized.
+**Status:** in-progress · since 2026-07-12 · Fresh deep qualification, exact-logit locality, and seed-42 four-round integration pass; seeds 43/44 and controls remain.
 
 ## Status
 
-**Fresh deep qualification passes on both untouched blocks, and the frozen
-five-update MOPD pilot passes exact-logit locality; full integration is now
-authorized but no performance result exists yet.** This is a new result-bearing successor to
+**Fresh deep qualification passes on both untouched blocks, the frozen
+five-update MOPD pilot passes exact-logit locality, and seed 42 completes all
+four integration rounds. No procedural performance result exists yet.** This is a new result-bearing successor to
 `qwen35_4b_same_prefix_advantage_routing`, not an extension of its terminal
 result.
 
@@ -129,6 +129,38 @@ target loss improved from `0.01293` to `0.01170`. Every locality check passed,
 authorizing four-round MOPD. Exact drift was measured at one midpoint token for
 each of the 20 consumed units, so this is a literal local-safety result, not a
 claim of invariance over every trained token or of improved capability.
+
+## Seed-42 Integration Result
+
+All four full-dose rounds passed their frozen training gates. Each used three
+fresh 192-state candidate batches, selected exactly 60 deep capability units
+plus 20 soup anchors, completed 20 updates, and non-decreased held-probe top-50
+overlap. Deep-route supply was 90, 81, 78, and 83 states; mean corrected loss
+was `0.05669`, `0.04901`, `0.04855`, and `0.05404`. Held-probe loss changed
+`0.08318→0.05112`, `0.03915→0.02020`, `0.03476→0.01893`, and
+`0.04873→0.02793`. The final round-3 merge receipt is
+`88512a57ebb190f0392118a30258eee5fb3bc58d5d34ae04e384afc8842f9122`.
+
+No capability claim follows from these training gates. Full-round probe entropy
+contracted `10.28%`, `12.33%`, `8.90%`, and `11.42%`; the first, second, and
+fourth exceed the locality pilot's 10% caution line. That ceiling was not a
+registered full-round stop, so the result is preserved as a collapse-risk
+warning rather than post-hoc reclassified. Round 1's sole 131-token cut was a
+cache-only route control and no consumed capability/anchor was truncated;
+rounds 2/3 had zero cuts in every role.
+
+## NF4/BF16 Interpretation Diagnostic
+
+The committed interpretation-only seed-42 diagnostic is valid over four fixed
+6-deep/2-soup probes (32 units, 7,970 target positions), but it finds weak
+training/deployment update parity. Mean NF4 objective gain was `+0.02191`, while
+the explicit bf16 merges averaged `-0.000224`; unit gain-sign agreement was
+`46.88%`, gain correlation was `-0.152`, and midpoint update cosine averaged
+`0.407`. Endpoint predictions were often superficially close (31/32 top-1
+agreement), which does not rescue the divergent update signal. The diagnostic
+cannot stop, rescue, or reclassify the frozen experiment. It establishes that
+NF4 probe improvement is weak evidence about deployed bf16 behavior and makes
+the sealed same-vLLM confirmation—not trainer-side loss—the decisive test.
 
 ## Artifacts
 

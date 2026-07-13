@@ -150,3 +150,38 @@
   expected sample at cache index 138 and passed both provenance validators.
   Nine focused rematch tests and all 79 current experiment tests pass. Actual
   policy scoring and control training have not run, so no control result exists.
+
+## 2026-07-13 — seed-42 four-round integration passes
+
+- Rounds 2 and 3 completed the frozen seed-42 trajectory. Each of all four
+  rounds used three fresh candidate batches, selected exactly 60 deep units and
+  20 soup anchors, consumed them once over 20 updates, and passed finite-loss
+  plus non-decreasing-overlap gates.
+- Deep-route supply by round was 90/81/78/83. Mean corrected losses were
+  `0.05669`/`0.04901`/`0.04855`/`0.05404`; probe losses were
+  `0.08318→0.05112`, `0.03915→0.02020`, `0.03476→0.01893`, and
+  `0.04873→0.02793`. The terminal integration receipt records four completed
+  rounds and gate pass; the round-3 merge receipt is
+  `88512a57ebb190f0392118a30258eee5fb3bc58d5d34ae04e384afc8842f9122`.
+- Probe entropy drops were `10.28%`/`12.33%`/`8.90%`/`11.42%`. The locality
+  ceiling is not a registered full-round gate, so no post-hoc stop was added;
+  the contractions remain an explicit collapse-risk warning.
+- Hardened the later control/confirmation chain without altering frozen
+  science: one canonical route-control matcher, atomic score-last external raw
+  artifacts, raw-to-score semantic replay, exact full confirmation geometry,
+  and raw hashes retained through benchmark execution. An independent audit
+  found no remaining blocker; 116 experiment tests and repository CI pass.
+
+## 2026-07-13 — NF4 versus bf16 diagnostic warns against trainer inference
+
+- Ran the preregistered interpretation-only diagnostic after seed 42 and code
+  stabilization. It validated all four fixed 6-deep/2-soup probes, exact LoRA
+  attachment/replay, 7,970 natural target positions, and unchanged artifacts.
+- NF4 objective gain averaged `+0.02191`, but the explicit bf16 merges averaged
+  `-0.000224`. Only 15/32 unit gains agreed in sign (`46.88%`), Pearson gain
+  correlation was `-0.152`, and mean midpoint update cosine was `0.407`.
+- Endpoint top-1 agreement was 31/32, illustrating the trap: endpoint outputs
+  can look close while the measured update direction is not. The diagnostic
+  has no scientific gate and no downstream authorization. It does not change
+  seed 42's registered pass; it makes sealed vLLM procedural confirmation the
+  only acceptable capability verdict.
