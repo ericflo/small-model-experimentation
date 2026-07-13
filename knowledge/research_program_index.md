@@ -3,14 +3,14 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 13
-- Experiments: 242
+- Experiments: 243
 
 ## Structured Execution And Compilers
 
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 175
+- Assigned experiments: 176
 
 ### Seed Evidence
 
@@ -84,6 +84,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_latent_decomposition` (new): [README](../experiments/qwen35_4b_latent_decomposition/README.md)
 - `qwen35_4b_learned_active_trace_policy` (track-z): [README](../experiments/qwen35_4b_learned_active_trace_policy/README.md)
 - `qwen35_4b_live_tool_dagger` (track-z): [README](../experiments/qwen35_4b_live_tool_dagger/README.md)
+- `qwen35_4b_materialized_residual_answer_seam_factorial` (new): [README](../experiments/qwen35_4b_materialized_residual_answer_seam_factorial/README.md)
 - `qwen35_4b_materialized_residual_sibling_search` (new): [README](../experiments/qwen35_4b_materialized_residual_sibling_search/README.md)
 - `qwen35_4b_materialized_residual_sibling_search_fresh_replication` (new): [README](../experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/README.md)
 - `qwen35_4b_model_in_loop_counterexamples` (track-z): [README](../experiments/qwen35_4b_model_in_loop_counterexamples/README.md)
@@ -574,7 +575,7 @@ Train or evaluate small models as controllers over tools, verifiers, budgets, an
 Stress whether mechanisms transfer across substrates, families, lengths, distributions, and real tasks.
 
 - Charter: [benchmark_generalization](../research_programs/benchmark_generalization/charter.md)
-- Assigned experiments: 107
+- Assigned experiments: 108
 
 ### Seed Evidence
 
@@ -621,6 +622,7 @@ Stress whether mechanisms transfer across substrates, families, lengths, distrib
 - `qwen35_4b_language_proposal_wall` (new): [README](../experiments/qwen35_4b_language_proposal_wall/README.md)
 - `qwen35_4b_language_reasoning_wall` (new): [README](../experiments/qwen35_4b_language_reasoning_wall/README.md)
 - `qwen35_4b_learn_from_failures` (new): [README](../experiments/qwen35_4b_learn_from_failures/README.md)
+- `qwen35_4b_materialized_residual_answer_seam_factorial` (new): [README](../experiments/qwen35_4b_materialized_residual_answer_seam_factorial/README.md)
 - `qwen35_4b_metacognitive_boundary` (new): [README](../experiments/qwen35_4b_metacognitive_boundary/README.md)
 - `qwen35_4b_model_in_loop_counterexamples` (track-z): [README](../experiments/qwen35_4b_model_in_loop_counterexamples/README.md)
 - `qwen35_4b_native_thought_seam_budget_ladder` (new): [README](../experiments/qwen35_4b_native_thought_seam_budget_ladder/README.md)

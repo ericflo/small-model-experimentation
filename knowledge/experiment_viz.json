@@ -33,6 +33,35 @@
     }
    ]
   },
+  "qwen35_4b_materialized_residual_answer_seam_factorial": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Every candidate answer seam faces the same frozen interface bar",
+     "categories": [
+      "exact echo",
+      "parse",
+      "one minus cap contact"
+     ],
+     "series": [
+      {
+       "label": "minimum acceptable rate",
+       "values": [
+        0.9,
+        0.9,
+        0.95
+       ]
+      }
+     ],
+     "x_label": "known-answer calibration criterion",
+     "y_label": "required success rate",
+     "y_format": "percent",
+     "note": "Model-free registration only. Mechanics stays sealed unless one of three predeclared interfaces clears all criteria on 48 disjoint calibration tasks.",
+     "source": "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/smoke/summary.json"
+    }
+   ]
+  },
   "qwen35_4b_materialized_residual_sibling_search": {
    "charts": [
     {
@@ -69,29 +98,33 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "Fresh construction fills every registered ambiguity stratum",
+     "title": "Materialized viability ranking loses to every structured comparator",
      "categories": [
-      "one live sibling",
-      "two live siblings",
-      "three live siblings",
-      "four live siblings"
+      "materialized",
+      "name only",
+      "shuffled",
+      "listwise",
+      "surface",
+      "random"
      ],
      "series": [
       {
-       "label": "fresh frozen tasks",
+       "label": "mean recall at 4",
        "values": [
-        88,
-        88,
-        44,
-        44
+        0.2569444444444445,
+        0.28125,
+        0.3229166666666667,
+        0.2708333333333333,
+        0.375,
+        0.1076388888888889
        ]
       }
      ],
-     "x_label": "publicly enumerable first-operation residuals",
-     "y_label": "frozen tasks",
-     "y_format": "integer",
-     "note": "Model-free construction only. Every 24-task block has exact 8/8/4/4 balance, all 264 task functions are unique within the successor, required parent task/public-payload/prompt intersections are zero, and no model was loaded or called.",
-     "source": "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/data/procedural/manifest.json"
+     "x_label": "one-token viability ranker",
+     "y_label": "mean recall among publicly viable first moves",
+     "y_format": "decimal",
+     "note": "All 2,304 model score rows authenticated. Materialized beats realized random by 0.1493, narrowly below the +0.15 gate, but loses to every structured comparator and misses every absolute support floor.",
+     "source": "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/runs/mechanics/summary.json"
     }
    ]
   },

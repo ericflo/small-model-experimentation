@@ -4,21 +4,21 @@ Generated from tracked experiment contents. Use this as a triage surface for tur
 
 Anchor-ready means the experiment has a human-authored README, a detected primary report, recognized local artifacts, and an assigned research program. It does not mean the result is correct or final.
 
-- Experiments: 242
-- Anchor-ready: 226
-- Human-authored READMEs: 229
+- Experiments: 243
+- Anchor-ready: 227
+- Human-authored READMEs: 230
 - Generated README stubs: 13
-- Primary reports: 241
-- Experiment logs: 146
-- Smoke commands: 110
-- Artifact manifests: 214
+- Primary reports: 242
+- Experiment logs: 147
+- Smoke commands: 111
+- Artifact manifests: 215
 
 ## Run Surface Counts
 
 | Run surface | Experiments |
 | --- | ---: |
 | `documented-command` | 38 |
-| `documented-scripts` | 129 |
+| `documented-scripts` | 130 |
 | `scripts-undocumented` | 22 |
 | `source-or-analysis` | 53 |
 
@@ -127,6 +127,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | yes | [`qwen35_4b_learned_active_trace_policy`](../experiments/qwen35_4b_learned_active_trace_policy/README.md) | active_evidence_acquisition, posttraining_and_adaptation, process_control_and_tool_use, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_learned_active_trace_policy/reports/qwen35_4b_learned_active_trace_policy_report.md) | no | `documented-scripts` | no | dataset, large-artifact, other | add-experiment-log, add-smoke-command |
 | yes | [`qwen35_4b_live_tool_dagger`](../experiments/qwen35_4b_live_tool_dagger/README.md) | posttraining_and_adaptation, process_control_and_tool_use, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_live_tool_dagger/reports/report.md) | no | `documented-scripts` | yes | large-artifact, other | add-experiment-log |
 | yes | [`qwen35_4b_long_horizon_answer_potential_sft`](../experiments/qwen35_4b_long_horizon_answer_potential_sft/README.md) | evidence_conditioned_selection, posttraining_and_adaptation, test_time_reasoning_budget | `human-authored` | [report](../experiments/qwen35_4b_long_horizon_answer_potential_sft/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
+| yes | [`qwen35_4b_materialized_residual_answer_seam_factorial`](../experiments/qwen35_4b_materialized_residual_answer_seam_factorial/README.md) | benchmark_generalization, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_materialized_residual_answer_seam_factorial/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_materialized_residual_sibling_search`](../experiments/qwen35_4b_materialized_residual_sibling_search/README.md) | evidence_conditioned_selection, interpretability_and_diagnostics, structured_execution_and_compilers, test_time_reasoning_budget | `human-authored` | [report](../experiments/qwen35_4b_materialized_residual_sibling_search/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_materialized_residual_sibling_search_fresh_replication`](../experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/README.md) | evidence_conditioned_selection, interpretability_and_diagnostics, structured_execution_and_compilers, test_time_reasoning_budget | `human-authored` | [report](../experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_meta_induction`](../experiments/qwen35_4b_meta_induction/README.md) | posttraining_and_adaptation | `human-authored` | [report](../experiments/qwen35_4b_meta_induction/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |

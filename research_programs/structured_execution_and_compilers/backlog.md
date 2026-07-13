@@ -65,6 +65,9 @@
   short no-think structured output, autonomous commit slot), freeze an
   interface with >=90% echo/parse and <=5% cap contact on calibration tasks,
   then open disjoint mechanics. Do not increase cap or relax parsing in place.
+  That successor identity is now reserved as
+  `qwen35_4b_materialized_residual_answer_seam_factorial`; its model-free
+  scaffold passes and adversarial design review remains pending.
 - Measure the exact behavioral quotient at fresh depth 6 before assuming model-guided pruning is economically
   needed; record wall time, memory, physical transitions, coverage, and selector success.
 - If a real search wall appears, test a residualized partial state (feasible parameter domains, materialized

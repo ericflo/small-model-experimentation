@@ -40,6 +40,44 @@
     }
    ]
   },
+  "qwen35_4b_materialized_residual_answer_seam_factorial": {
+   "verdict_tag": "Answer-interface firewall registered; no model run is open",
+   "concept_primer": "Before asking whether concrete intermediate states help solve a puzzle, this test first checks whether the model can reliably enter a short, machine-readable answer mode. A bad output format must not be mistaken for a reasoning failure.",
+   "plain_question": "Which of three answer styles can reliably emit a two-step program before a fresh materialized-state test begins?",
+   "plain_answer": "No model result exists yet. The scaffold freezes three answer styles and keeps the 24 mechanics tasks sealed behind 48 separate known-answer checks. An answer style must reach at least 90% exact copying and parsing while hitting its length limit on at most 5% of rows.",
+   "why_it_matters": "The durable parent capped every reasoning trace, so its generation failure could not cleanly judge the materialized-state idea. This firewall either establishes a usable answer mode before spending on mechanics or stops the branch without another ambiguous null.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Candidate answer styles",
+     "value": "3",
+     "sub": "current control, short no-think output, and a program slot"
+    },
+    {
+     "label": "Known-answer checks",
+     "value": "48",
+     "sub": "kept separate from the mechanics tasks"
+    },
+    {
+     "label": "Exact-copy and parse floors",
+     "value": "90%",
+     "sub": "both must pass before mechanics can open"
+    },
+    {
+     "label": "Model calls so far",
+     "value": "zero",
+     "sub": "model and GPU stages remain sealed"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "All three answer styles face one strict launch bar",
+     "chart_read": "The bars show the minimum acceptable rate for exact copying, parsing, and avoiding the length cap. Every candidate answer style is judged by these same thresholds on separate known-answer tasks.",
+     "chart_takeaway": "Mechanics cannot begin unless one answer style clears 90% exact copying, 90% parsing, and 95% cap avoidance."
+    }
+   ]
+  },
   "qwen35_4b_materialized_residual_sibling_search": {
    "verdict_tag": "Model-free design is ready for mechanics",
    "concept_primer": "Imagine trying every possible first move, writing down the concrete intermediate state each move creates, and asking the same solver to finish from each state. Public examples then choose among the finished candidates.",
@@ -79,40 +117,40 @@
    ]
   },
   "qwen35_4b_materialized_residual_sibling_search_fresh_replication": {
-   "verdict_tag": "Fresh puzzles and safety checks are frozen; no model run is open",
+   "verdict_tag": "Cheap materialized ranking fails; free generation has no valid answer interface",
    "concept_primer": "The previous test returned one batch of answers but lost them before saving. Its rules forbid drawing that same batch again, so this successor starts with entirely new puzzles and random draws while keeping the scientific comparison unchanged.",
    "plain_question": "Can concrete intermediate states help the small model finish multi-step rules better than names alone or equally costly ordinary attempts?",
-   "plain_answer": "Still unknown. The corrected model-free build froze 264 new puzzle instances, proved that none reuse a parent task identity or model-facing prompt, and authenticated the save-before-check safeguards. All 44 local tests pass, but the model has not been loaded or called.",
-   "why_it_matters": "Fresh identities prevent a lost batch from being quietly redrawn, while save-before-check prevents another bookkeeping bug from destroying sampled evidence. The scientific treatment and fairness controls are not being relaxed.",
-   "verdict_tone": "neutral",
+   "plain_answer": "The generation test cannot answer the question because every reasoning trace reached its length cap and the materialized arm parsed only 12 of 52 outputs, with zero successes. The separate one-token ranking test is a clean negative: materialized recall among viable first moves was 0.257, below names alone, shuffled states, listwise choice, and a surface-only rule.",
+   "why_it_matters": "The full transaction record is finally durable, so the cheap ranking path can be retired confidently. But the free-generation null must stay narrow: it diagnoses a broken answer mode, not proof that concrete intermediate states are useless. A successor now qualifies the answer interface before mechanics.",
+   "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Fresh procedural tasks",
-     "value": "264",
-     "sub": "24 mechanics, 48 qualification, and 192 confirmation"
+     "label": "Materialized generation parses",
+     "value": "12 / 52",
+     "sub": "all 52 thoughts reached the registered cap"
     },
     {
-     "label": "Eligible three-step behaviors",
-     "value": "3,526",
-     "sub": "enumerated before choosing the frozen task set"
+     "label": "Materialized visible successes",
+     "value": "0 / 52",
+     "sub": "not a clean mechanism verdict because the interface failed"
     },
     {
-     "label": "Successor model calls",
-     "value": "zero",
-     "sub": "construction passed without loading the model"
+     "label": "Materialized recall at four",
+     "value": "0.257",
+     "sub": "below every structured ranking comparison"
     },
     {
-     "label": "Required parent overlaps",
-     "value": "zero",
-     "sub": "task IDs, public instances, and model-facing prompts"
+     "label": "Authenticated requests",
+     "value": "1,984",
+     "sub": "all nine transaction chains completed and were rechecked"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Fresh tasks cover four ambiguity levels",
-     "chart_read": "The bars count tasks with one, two, three, or four publicly valid first moves. The planned 8:8:4:4 pattern repeats in every 24-task block.",
-     "chart_takeaway": "The first two bars contain 88 tasks each and the next two contain 44 each, so the clean retry preserves the parent's difficulty balance without opening a model run."
+     "chart_plain_title": "Concrete-state ranking trails every structured comparison",
+     "chart_read": "Each bar is the average share of publicly viable first moves recovered among the top four choices. Compare materialized states with names alone, shuffled states, listwise choice, a surface-only rule, and random ranking.",
+     "chart_takeaway": "Materialized ranking beats random but remains below all five structured comparisons, so this cheap ranking route does not justify a larger search."
     }
    ]
   },

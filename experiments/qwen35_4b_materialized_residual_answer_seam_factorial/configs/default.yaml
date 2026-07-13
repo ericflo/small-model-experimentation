@@ -1,0 +1,28 @@
+model:
+  id: "Qwen/Qwen3.5-4B"
+  revision: "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
+  dtype: "bfloat16"
+
+seeds:
+  construction: 2026072800
+  calibration: 2026072801
+  mechanics: 2026072802
+
+interface_arms:
+  - current_forced_close_freeform
+  - no_think_short_structured
+  - forced_close_program_slot
+
+interface_gates:
+  exact_echo_rate_min: 0.90
+  parse_rate_min: 0.90
+  cap_contact_rate_max: 0.05
+
+boundaries:
+  calibration_tasks: 48
+  mechanics_tasks: 24
+  calibration_disjoint_from_mechanics: true
+  hidden_files_read: []
+  qualification_files_read: []
+  confirmation_files_read: []
+  benchmark_files_read: []
