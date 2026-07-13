@@ -1,16 +1,50 @@
 # Implementation Review
 
-**Source-contract version:** `10`
+**Source-contract version:** `11`
 
-**Reviewed implementation SHA-256:** `a5a494b7a725e50bb1ba76b2672149ffa6537ccd9e3d287827fcad07156f1c4a`
+**Reviewed implementation SHA-256:** `7d6cd93fead0e524e10e7afe4b60a531ea2d6aa7f3f70778ef962889aaeed278`
 
 **Status:** `GO`
 
-Source-contract v10 passed integrated authorization, science/protocol, and terminal/recovery review.
+Source-contract v11 passed integrated authorization, science/protocol, and terminal/recovery review.
 This authorization binds exactly the implementation digest above plus the pinned training lock; any
 change to a reviewed source or test revokes it automatically. It authorizes only the registered
-source-v10 publication, source-v9 archival, and source-v10 regeneration/runbook sequence; it does not
-make any historical setup artifact valid under v10.
+source-v11 publication, source-v10 archival, and source-v11 regeneration/runbook sequence; it does not
+make any historical setup artifact valid under v11.
+
+## Source-v11 PREPARED-output recovery authorization
+
+The first source-v10 Stage-A launch stopped before model load, train-payload access, optimizer
+construction, or training. Its durable journal reached only `PREPARED`; the canonical external
+directory was created but remained exactly empty. The no-clobber JSON helper had received both its
+trusted root and destination as relative paths, so descriptor traversal duplicated the destination's
+parent components and raised `FileNotFoundError`. Its broad stable-artifact wrapper then mislabeled
+that path-resolution failure as an immutable-overwrite refusal. This is a mechanical launch failure,
+not scientific evidence and not a LoRA outcome.
+
+Source v11 normalizes attempt JSON destinations to an absolute lexical path, publishes the leaf name
+relative to its held parent, and preserves the underlying stable-I/O reason in publication errors.
+The data-manifest no-clobber writer uses the same unambiguous parent/leaf calling convention. After a
+caller proves a training or evaluation output equals its registered canonical location, the runner
+rebinds the local path to that absolute canonical object before any attempt marker, checkpoint, or
+result operation. The same rule covers future sealed-contrast output, not only the observed training
+path.
+
+The attempt marker transition now recognizes exactly one additional recoverable crash state: an
+existing canonical output directory with no entries. It durably fsyncs the parent, installs the
+authorization-bound marker without replacement, fsyncs the directory, reopens the marker, and
+validates its identity. Marker-only recovery remains idempotent. A markerless directory containing
+even one regular file, directory, symlink, or special entry remains fatal, as does any wrong marker.
+This closes the exact mkdir-before-marker window without weakening STARTED-attempt archive rules.
+
+Three new regressions reproduce the original repository-relative failure, the exact empty-directory
+crash boundary, and a nonempty markerless collision. Static ordering checks require absolute canonical
+rebinding before training recovery/attempt preparation and before evaluation checkpoint load or
+contrast access. The complete source-bound CPU suite passes **363/363**; no model, GPU, benchmark
+content, result payload, or sealed contrast was used for this repair. Because the executable source
+changed, all source-v10 CPU/data/initialization/G0/control setup artifacts must be archived and
+regenerated under v11 before Stage A can restart. The preserved source-v10 `PREPARED` journal must be
+retired as non-scientific launch evidence rather than promoted to `STARTED` or silently deleted.
 
 ## Source-v10 integrated authorization
 

@@ -49,7 +49,7 @@ class ConfigContractTests(unittest.TestCase):
         self.assertEqual(MODEL_ID, "Qwen/Qwen3.5-4B")
         self.assertEqual(MODEL_REVISION, "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a")
         self.assertEqual(BACKEND, "transformers")
-        self.assertEqual(SOURCE_CONTRACT_VERSION, 10)
+        self.assertEqual(SOURCE_CONTRACT_VERSION, 11)
         self.assertEqual(
             CONFIRMATORY_CONFIG_SHA256,
             "eeb4e828526f750dce1258bcc91d03114c80688d300112e03d18c9d911489393",

@@ -830,3 +830,34 @@ stage is authorized.
 Only non-model setup validation, commit, push, and workflow verification are authorized. LoRA G0,
 positive controls, result training, evaluation, and analysis remain blocked until both workflows are
 green.
+
+## 2026-07-13 — first Stage-A launch stops PREPARED; source-v11 repairs publication
+
+- Final source-v10 setup commit `555cf0b5` passed both required workflows before the exact seed-7411
+  Stage-A command began.
+- The launch stopped before model load, train-payload access, optimizer construction, or training.
+  Its durable journal reached only `PREPARED`; the canonical external directory existed but had no
+  entries, and the tracked result directory was absent. This is not scientific or LoRA evidence.
+- Root cause: `atomic_write_json` passed both a repository-relative full destination and its relative
+  parent to the no-clobber publisher. Descriptor traversal therefore looked for the parent path a
+  second time beneath itself and raised `FileNotFoundError`; the wrapper mislabeled it as an
+  overwrite refusal.
+- The source-v10 journal is preserved byte-exact at SHA-256
+  `209d4c1f9183359535a07fe5bef3f535ebc13e2f00d4ddcf10c289501b1912df`, journal identity
+  `ef72ba4e…f51c9`, and attempt authorization `d5c14f38…254ff`. Failure receipt identity is
+  `6b23f95d…b8c2`; it records zero benchmark/sealed/result-payload access and no model or training.
+- Source v11 normalizes no-clobber JSON destinations, publishes a leaf relative to its held parent,
+  preserves the stable-I/O cause, and rebinds validated training/checkpoint/evaluation outputs to
+  canonical absolute paths. It recovers only an exactly empty PREPARED output directory and rejects
+  any nonempty markerless collision.
+- Three new regressions reproduce the relative-path bug, exact mkdir-only crash, and unsafe nonempty
+  state. The full suite passes 363/363. Reviewed implementation is `7d6cd93f…d278`; full source
+  contract is `5a8ed26d…6666`. No model, GPU, benchmark, result payload, or sealed split was used in
+  the repair.
+
+## Current authorization
+
+Only source-v11/failure-evidence validation, commit, push, and workflow verification are authorized.
+After both workflows are green, archive all source-v10 setup with the preserved launch failure as
+trigger, publish that checkpoint, retire the stale PREPARED paths, and replay setup from zero under
+v11. No result-bearing stage is authorized.

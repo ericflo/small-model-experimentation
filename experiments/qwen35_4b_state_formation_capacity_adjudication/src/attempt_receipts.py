@@ -220,6 +220,11 @@ def _ensure_directory(path: Path) -> None:
 def atomic_write_json(path: Path, payload: Mapping[str, Any], *, replace: bool) -> None:
     """Write finite JSON through a private regular staging inode and fsync it."""
 
+    # Callers are allowed to supply a canonical path relative to the current
+    # working directory.  Normalize it once before choosing the trusted parent
+    # root: passing that full relative path to a relative parent root would
+    # otherwise duplicate every parent component during descriptor traversal.
+    path = Path(os.path.abspath(os.fspath(path)))
     _ensure_directory(path.parent)
     if os.path.lexists(path):
         mode = path.lstat().st_mode
@@ -232,10 +237,10 @@ def atomic_write_json(path: Path, payload: Mapping[str, Any], *, replace: bool) 
     )
     if not replace:
         try:
-            publish_new_bytes(path.parent, path, encoded)
+            publish_new_bytes(path.parent, path.name, encoded)
         except StableArtifactError as exc:
             raise AttemptReceiptError(
-                f"refusing to overwrite immutable JSON: {path}"
+                f"immutable JSON publication failed for {path}: {exc}"
             ) from exc
         return
     descriptor, temporary_name = tempfile.mkstemp(prefix=f".{path.name}.tmp-", dir=path.parent)
@@ -556,6 +561,7 @@ def validate_attempt_marker(
 def ensure_attempt_output(output: Path, authorization: Mapping[str, Any]) -> dict[str, Any]:
     """Create or recover the marker-only PREPARED output, durably."""
 
+    output = Path(os.path.abspath(os.fspath(output)))
     auth = validate_attempt_authorization(authorization)
     marker = build_attempt_marker(auth)
     if os.path.lexists(output):
@@ -563,6 +569,17 @@ def ensure_attempt_output(output: Path, authorization: Mapping[str, Any]) -> dic
         if stat.S_ISLNK(info.st_mode) or not stat.S_ISDIR(info.st_mode):
             raise AttemptReceiptError("attempt output is not a canonical directory")
         members = {entry.name for entry in output.iterdir()}
+        if not members:
+            # A crash can occur after the canonical directory entry is made
+            # durable but before its authorization marker is installed.  The
+            # journal/ledger already binds the authorization, and an exactly
+            # empty directory carries no competing result state, so complete
+            # that one interrupted PREPARED transition in place.
+            fsync_directory(output.parent)
+            atomic_write_json(output / ATTEMPT_MARKER_NAME, marker, replace=False)
+            fsync_directory(output)
+            observed = read_json(output / ATTEMPT_MARKER_NAME)
+            return validate_attempt_marker(observed, auth)
         if members != {ATTEMPT_MARKER_NAME}:
             raise AttemptReceiptError("PREPARED attempt output is not marker-only")
         observed = read_json(output / ATTEMPT_MARKER_NAME)

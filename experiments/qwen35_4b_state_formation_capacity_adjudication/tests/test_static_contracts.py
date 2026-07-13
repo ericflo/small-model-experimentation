@@ -835,6 +835,12 @@ class StaticContractTests(unittest.TestCase):
         self.assertGreater(marker_index, record_index)
         self.assertGreater(started_index, marker_index)
         self.assertGreater(validation_index, started_index)
+        canonical_checkpoint = body.find("checkpoint = canonical_paths.checkpoint_dir")
+        canonical_output = body.find("output_dir = expected_output")
+        self.assertGreater(canonical_checkpoint, body.find("if checkpoint.absolute()"))
+        self.assertGreater(canonical_output, body.find("if output_dir.absolute()"))
+        self.assertLess(canonical_checkpoint, checkpoint_index)
+        self.assertLess(canonical_output, checkpoint_index)
         lineage_source = body[lineage_index:record_index]
         for field in (
             '"path"',
@@ -883,6 +889,9 @@ class StaticContractTests(unittest.TestCase):
         self.assertEqual(positions, sorted(positions))
         self.assertNotIn("_authorization_chain_contains", source)
         self.assertIn("validate_branch_authorization(", source)
+        canonical_output = body.find("output_dir = canonical_paths.external_dir")
+        self.assertGreater(canonical_output, body.find("if output_dir.absolute()"))
+        self.assertLess(canonical_output, positions[5])
         publication = body.find('_write_new_json_pair(output_dir / "run.json"')
         injected_crash = body.find('"terminal_receipts_published"', publication)
         completion = body.find("complete_training_attempt(", injected_crash)
@@ -1367,7 +1376,7 @@ class StaticContractTests(unittest.TestCase):
         self.assertNotIn(".truncate(", record)
         self.assertNotIn('path.open("r+"', record)
 
-        self.assertIn("publish_new_bytes(path.parent, path, encoded, mode=0o644)", atomic)
+        self.assertIn("publish_new_bytes(path.parent, path.name, encoded, mode=0o644)", atomic)
         self.assertIn("_atomic_write_json(manifest_path, manifest)", build)
         self.assertIn("_atomic_write_json(ledger_path, ledger)", build)
         writer = functions["_write_jsonl_gz"]

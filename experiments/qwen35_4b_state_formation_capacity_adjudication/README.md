@@ -1,13 +1,25 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · frozen design unchanged; source-v10 seed-7411/7412 setup checkpoints published/green; all three source-v10 LoRA G0 and positive-control pairs pass; final setup-checkpoint publication/CI required before Stage A; no result run has started
+**Status:** in-progress · since 2026-07-13 · frozen design unchanged; source-v11 PREPARED-output repair reviewed at 363/363; source-v10 setup invalidated before any result training; source-v11 publication, source-v10 archival, and complete setup replay required before Stage A
 
 ## Current status
 
 This is the canonical fresh adjudication of the unresolved LoRA-capacity question from
 `qwen35_4b_state_carry_vs_state_bag`. It is not a continuation of either prior checkpoint.
 Preregistration, adversarial design review, and the frozen scientific design are complete. The
-integrated source-v10 review is `GO` for reviewed implementation
+first Stage-A source-v10 command stopped before model load, train-payload access, optimizer
+construction, or training. Its journal reached only `PREPARED`, and its canonical external output
+was exactly empty: the attempt JSON helper duplicated a repository-relative destination beneath its
+own relative parent. This is a mechanical launch failure, not a LoRA result. The exact journal is
+preserved at SHA-256 `209d4c1f…12df`, and failure receipt identity `6b23f95d…b8c2` explicitly records
+zero result/sealed/benchmark access and no scientific authority. Source v11 normalizes the
+parent/leaf publication boundary, recovers only the exact empty-directory mkdir-before-marker crash
+state, canonicalizes validated training and contrast paths before use, and rejects any nonempty
+markerless output. Reviewed implementation `7d6cd93f…d278`, full source contract
+`5a8ed26d…6666`, and the 363/363 suite pass. Every source-v10 setup artifact is invalid for v11 and
+must be archived, then regenerated and replayed before Stage A restarts.
+
+Historically, the integrated source-v10 review was `GO` for reviewed implementation
 `a5a494b7…6f1c4a` and full source contract `979a9012…f394b7`; the 360/360 suite and exact machine gate
 pass. Source-v9 seed-7411 G0 stopped before model load or wrapper construction because the general
 no-alias reader rejected Hugging Face's standard snapshot-to-content-blob symlinks. The byte-identical
@@ -144,7 +156,18 @@ replacement-source seed-7411 and seed-7412 G0/controls passed. A pre-result auth
 found fail-open generic receipt checks; source repair and setup archival/regeneration are required
 before seed 7413 or any result-bearing stage.
 
-### Source-v10 operator boundary
+### Source-v11 operator boundary
+
+Do not promote the preserved source-v10 journal from `PREPARED` to `STARTED`: no model or training
+began. Publish source v11 and its tracked failure/journal evidence first. After both workflows pass,
+archive every source-v10 setup artifact with
+`runs/failures/training_launch_lora_joint_seed7411_source_979a90120e99.json` as the trigger, publish
+that archive checkpoint, retire the now-durable canonical empty output and stale PREPARED journal,
+then regenerate CPU smoke, all procedural data plus the empty ledger, all three initialization
+bundles, and all three LoRA G0/control pairs under source v11. Stage A remains blocked until that
+replayed setup matrix is published and green.
+
+The source-v10 instructions below are retained as historical transition evidence.
 
 The frozen GPU runbook is the complete from-zero phase order, not the current resume point. Preserve
 `reports/design_receipt.json` and every file it freezes; do not rerun `design-boundary` or rewrite the

@@ -160,7 +160,7 @@ def _atomic_write_json(path: Path, payload: Mapping[str, Any]) -> None:
     encoded = (
         json.dumps(payload, indent=2, sort_keys=True, allow_nan=False) + "\n"
     ).encode("utf-8")
-    publish_new_bytes(path.parent, path, encoded, mode=0o644)
+    publish_new_bytes(path.parent, path.name, encoded, mode=0o644)
 
 
 def _data_crash_point(name: str) -> None:

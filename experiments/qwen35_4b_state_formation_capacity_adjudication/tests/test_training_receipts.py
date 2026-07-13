@@ -36,6 +36,7 @@ from src.training_receipts import (  # noqa: E402
 )
 from src.gate_receipts import stable_setup_receipt  # noqa: E402
 from src.attempt_receipts import (  # noqa: E402
+    AttemptReceiptError,
     complete_training_attempt,
     ensure_attempt_output,
     load_training_journal,
@@ -475,6 +476,59 @@ class TrainingReceiptTests(unittest.TestCase):
         self.assertEqual(
             paths.trigger_output.name, f"{cell.slug}_trigger"
         )
+
+    def _prepared_training_authorization(self) -> tuple[Path, dict]:
+        cell = STAGE_A_MATRIX[0]
+        paths = canonical_training_cell_paths(self.repo, cell, steps=2)
+        canonical_paths = [
+            paths.external_dir.relative_to(self.repo).as_posix(),
+            paths.tracked_dir.relative_to(self.repo).as_posix(),
+        ]
+        authorization = prepare_training_attempt(
+            self.repo,
+            slug=cell.slug,
+            header={"experiment_id": EXPERIMENT_ID, "test": "prepared-output"},
+            cell={
+                "stage": cell.stage,
+                "capacity": cell.capacity,
+                "objective": cell.objective,
+                "seed": cell.seed,
+                "slug": cell.slug,
+            },
+            canonical_paths=canonical_paths,
+            context={"test": "prepared-output"},
+            replay_archive=None,
+        )
+        return paths.external_dir, authorization
+
+    def test_relative_prepared_output_publishes_only_the_canonical_leaf(self) -> None:
+        output, authorization = self._prepared_training_authorization()
+        relative = output.relative_to(self.repo)
+        with contextlib.chdir(self.repo):
+            marker = ensure_attempt_output(relative, authorization)
+        self.assertEqual(
+            marker["attempt_identity_sha256"],
+            authorization["attempt_identity_sha256"],
+        )
+        self.assertTrue((output / "attempt.json").is_file())
+        duplicated = output.parent / relative / "attempt.json"
+        self.assertFalse(duplicated.exists())
+
+    def test_empty_prepared_output_is_exact_mkdir_crash_recovery(self) -> None:
+        output, authorization = self._prepared_training_authorization()
+        output.mkdir(parents=True)
+        marker = ensure_attempt_output(output, authorization)
+        self.assertEqual(set(item.name for item in output.iterdir()), {"attempt.json"})
+        self.assertEqual(ensure_attempt_output(output, authorization), marker)
+
+    def test_nonempty_markerless_prepared_output_remains_fatal(self) -> None:
+        output, authorization = self._prepared_training_authorization()
+        output.mkdir(parents=True)
+        (output / "unknown.bin").write_bytes(b"not a marker")
+        with self.assertRaisesRegex(
+            AttemptReceiptError, "PREPARED attempt output is not marker-only"
+        ):
+            ensure_attempt_output(output, authorization)
 
     def test_absent_and_complete_classification_with_lineage_passthrough(self) -> None:
         cell = STAGE_A_MATRIX[0]

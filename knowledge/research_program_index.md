@@ -514,7 +514,7 @@ Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and o
 Train or evaluate small models as controllers over tools, verifiers, budgets, and intermediate actions.
 
 - Charter: [process_control_and_tool_use](../research_programs/process_control_and_tool_use/charter.md)
-- Assigned experiments: 44
+- Assigned experiments: 45
 
 ### Seed Evidence
 
@@ -552,6 +552,7 @@ Train or evaluate small models as controllers over tools, verifiers, budgets, an
 - `qwen35_4b_sampler_portfolio_scheduler` (track-z): [README](../experiments/qwen35_4b_sampler_portfolio_scheduler/README.md)
 - `qwen35_4b_semantic_policy_headroom_tournament` (new): [README](../experiments/qwen35_4b_semantic_policy_headroom_tournament/README.md)
 - `qwen35_4b_specialist_policy_integration` (new): [README](../experiments/qwen35_4b_specialist_policy_integration/README.md)
+- `qwen35_4b_state_formation_capacity_adjudication` (new): [README](../experiments/qwen35_4b_state_formation_capacity_adjudication/README.md)
 - `qwen35_4b_strategy_token_diversity_lora` (track-z): [README](../experiments/qwen35_4b_strategy_token_diversity_lora/README.md)
 - `qwen35_4b_thinking_budget_controller` (new): [README](../experiments/qwen35_4b_thinking_budget_controller/README.md)
 - `qwen35_4b_thinking_budget_scaling` (new): [README](../experiments/qwen35_4b_thinking_budget_scaling/README.md)

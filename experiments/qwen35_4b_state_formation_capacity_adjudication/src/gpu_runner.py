@@ -3823,6 +3823,7 @@ def train(
         raise RuntimeError(
             f"training output is not the canonical result cell: {output_dir}"
         )
+    output_dir = canonical_paths.external_dir
     contracts = _training_contracts(config, stage)
     # The only in-place recovery is the exact post-publication crash window:
     # both immutable terminal receipts already validate, while their durable
@@ -4484,6 +4485,7 @@ def evaluate_state(
     )
     if checkpoint.absolute() != canonical_paths.checkpoint_dir:
         raise RuntimeError("evaluation checkpoint is not the canonical fixed-final cell")
+    checkpoint = canonical_paths.checkpoint_dir
     expected_output = (
         canonical_paths.trigger_output
         if eval_set == "trigger"
@@ -4491,6 +4493,7 @@ def evaluate_state(
     )
     if output_dir.absolute() != expected_output:
         raise RuntimeError("evaluation output is not the canonical result cell")
+    output_dir = expected_output
     trigger_launch_preflight = (
         _trigger_launch_preflight(config, cell) if eval_set == "trigger" else None
     )
