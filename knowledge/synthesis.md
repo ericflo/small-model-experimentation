@@ -134,6 +134,14 @@ missed its frozen actionability margins while nearly every thought was force-clo
 needs three gates before banking: within-task discrimination, practical top-choice lift, and autonomous
 termination/parseability at the exact scored seam.
 
+[qwen35_4b_balanced_core_answer_potential_sft](../experiments/qwen35_4b_balanced_core_answer_potential_sft/reports/report.md)
+shows what happens after repairing that interface, but has no capability verdict yet. Its uncapped bank has
+22,681 naturally closed candidates and 360-task potential selections with thoughts up to 14,325 tokens. Two
+new design gates appear before SFT: exact token dose (the six-arm matrix is 34,446,994 two-epoch forward
+tokens) and control support (success-RFT has only 97 unique traces from 58 tasks in four of nine cells, then
+repeats them seven or eight times). Equal row counts are not enough; trace-banking comparisons must disclose
+forward-token dose, unique source exposure, and task/cell coverage before training.
+
 ### Memory Must Be Mechanistic
 
 [qwen_verified_skill_memory_rag](../experiments/qwen_verified_skill_memory_rag/reports/qwen_verified_skill_memory_rag_report.md) is a negative seed result for naive skill-card prompting, while retrieval-adaptation experiments show candidate coverage can improve. The useful memory program should test memory as candidates, constraints, tests, invariants, and evidence, not just prompt examples.
@@ -172,6 +180,11 @@ C51 adds a termination corollary. A thinking budget is not just how many tokens 
 every trace contacts the cap, injecting `</think>` and teacher-forcing an answer evaluates a state the model
 did not autonomously reach. For trace-valuing or trace-SFT work, calibrate on the actual workload, gate
 natural closure and parseability before scaling, and score the close/commit event rather than assuming it.
+
+The uncapped continuation adds a resource/support corollary. Once long reasoning is allowed to finish, a few
+hundred examples can contain tens of millions of training forward tokens, and correctness-filtered baselines
+can have sharply narrower task support than dense selectors. Pre-register token budgets and support-matched
+estimands; do not use global oversampling to describe a sparse success control as balanced.
 
 C52 adds an intervention-locality corollary. Entropy/varentropy can identify focused, conflicted thought
 forks, and outcome labels at those forks can beat shuffled labels, without producing a capability gain.

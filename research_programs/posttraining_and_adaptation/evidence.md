@@ -40,6 +40,12 @@
   answers parsed. The preregistered guard stopped before N=128, selection, or training, so this is a scorer
   negative—not an SFT negative.
 
+- [qwen35_4b_balanced_core_answer_potential_sft](../../experiments/qwen35_4b_balanced_core_answer_potential_sft/reports/report.md)
+  removes the 512-token cap and banks six deterministic selections, but remains pre-training. Equal 720-row
+  arms hide a 34,446,994-forward-token two-epoch matrix because selected thoughts reach 14,325 tokens. They
+  also hide unequal support: success-RFT has only 97 unique traces from 58 tasks and repeats them seven or
+  eight times. This is a resource/support feasibility result, not evidence that potential-selected SFT works.
+
 - [qwen35_4b_think_ftpo_round2](../../experiments/qwen35_4b_think_ftpo_round2/reports/report.md)
   (claim C52): selecting only low-entropy, non-degenerate-varentropy confident wrong turns did not rescue
   single-token preference training. Positive-only chosen-token uplift was safer than conventional demotion
@@ -90,6 +96,11 @@ C51 sharpens the curation prerequisite: before comparing posttraining arms, prov
 label selects deployably better traces at useful effect size. A teacher-forced answer state after an injected
 close is not automatically a valid SFT target source, even when corruption controls say the score notices
 relevant content.
+
+The uncapped continuation adds dose and support prerequisites. Count-matched long-trace datasets can be
+grossly compute-mismatched in practice, while an outcome-filtered control can collapse to a small, easy-task
+support and become repetition training. Forecast exact forward tokens and audit task/cell support before
+freezing a multi-arm adaptation matrix; preserve a smaller run as a separately scoped experiment.
 
 C52 adds a separate intervention prerequisite: a label can contain real
 directional information while its shared-parameter update is too non-local to

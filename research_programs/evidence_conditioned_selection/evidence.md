@@ -48,6 +48,14 @@
   beat token-shuffled and foreign controls and format ranks were stable, yet 99.37% of thoughts hit the
   cap and autonomous answers parsed only 13.2%. G0 failed and correctly stopped before SFT.
 
+- [qwen35_4b_balanced_core_answer_potential_sft](../../experiments/qwen35_4b_balanced_core_answer_potential_sft/reports/report.md)
+  is an operational continuation, not yet a capability result. Removing the 512-token cap yielded 22,681
+  naturally closed candidates across 360 balanced tasks, and official answer-potential selections cover all
+  360 tasks with thoughts as long as 14,240 tokens. But the nominal success-RFT control has only 97 unique
+  successful traces from 58 tasks in four of nine cells; matching 720 rows repeats each source seven or eight
+  times. The six-arm two-epoch dose is 34,446,994 forward tokens, so training is paused. Selector studies must
+  audit control support and token dose before treating equal row counts as a matched comparison.
+
 - [qwen35_4b_same_prefix_advantage_routing](../../experiments/qwen35_4b_same_prefix_advantage_routing/reports/route_diagnostics.md)
   adds a training-time selection boundary. Three policies' absolute
   continuation estimates replicated well across disjoint four-branch halves
@@ -88,6 +96,11 @@ C51 adds a second boundary: a score may contain trace-specific information and s
 unreachable deployment state. Oracle-side trace selectors must predict fresh autonomous outcomes within
 task, clear a practical top-choice effect-size gate, and include termination/parseability in validation.
 Do not scale a dense score because its corruption controls pass; first prove the scored seam is deployable.
+
+The uncapped balanced continuation clears C51's termination pathology but exposes two pre-training gates.
+Outcome-rejection controls need per-cell task support, not global oversampling, and full-thought SFT must be
+budgeted in forward tokens rather than examples. Its selected datasets are banked, but no selector is promoted
+until a prospective, affordable training comparison produces fresh held-out behavior.
 
 The same-prefix result adds winner conditioning to that checklist. Reliable
 component scores do not imply a reliable argmax label when differences are

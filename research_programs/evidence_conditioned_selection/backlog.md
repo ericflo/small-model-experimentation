@@ -36,6 +36,9 @@
 - Hidden oracle ceiling clearly labeled as non-deployable.
 - Random or shuffled candidate ordering.
 - Family-held-out evaluation.
+- Per-family/level unique-task and unique-source support for every outcome-filtered control; global row
+  oversampling is not a substitute for matched support.
+- Exact training forward-token dose and source multiplicity, not only row counts.
 
 ## Stop Conditions
 
