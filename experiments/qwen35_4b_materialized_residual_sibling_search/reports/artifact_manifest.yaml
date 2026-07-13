@@ -19,4 +19,7 @@ local_receipts:
   mechanics_preoutcome:
     path: "experiments/qwen35_4b_materialized_residual_sibling_search/runs/mechanics/prepared/preoutcome_receipt.json"
     sha256: "3de86e8b08bf37174cf687e4e7220ff802386c61652bafb6554cf1e772c89b88"
-notes: "Model-free design/data smoke passed. Mechanics code remains model-sealed until its reviewed implementation commit and separate lock receipt are pushed. Raw mechanics artifacts are immutable, chained to the live preflight, and must be committed immediately after the run."
+  mechanics_implementation_lock:
+    path: "experiments/qwen35_4b_materialized_residual_sibling_search/runs/mechanics/implementation_lock.json"
+    sha256: "896c4cc64e157627eaf35a8a4365af766971644905fbde5c72e4d35ea72792e0"
+notes: "Model-free design/data smoke passed. The reviewed implementation is pushed; mechanics remains model-sealed until its separate lock receipt is also pushed. Raw mechanics artifacts are immutable, chained to the live preflight, and must be committed immediately after the run."

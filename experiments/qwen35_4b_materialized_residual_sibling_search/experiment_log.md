@@ -53,6 +53,11 @@
   vLLM environment. Both passes accepted the same 1,984-request inventory and
   existing bytes; the committed preoutcome receipt records zero model loads and
   calls and no hidden, qualification, confirmation, or benchmark reads.
+- 2026-07-13: Pushed the reviewed implementation at `48ef078f`, observed both
+  repository-validation and research-site CI succeed, and generated a separate
+  mechanics-only implementation lock binding that pushed commit and every
+  critical source/prepared hash. No model was loaded or called; execution
+  remains sealed until this lock is independently committed and pushed.
 
 ## Pending
 
