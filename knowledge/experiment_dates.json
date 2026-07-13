@@ -779,6 +779,14 @@
     "dated design record and post-import git history"
    ]
   },
+  "qwen35_4b_materialized_residual_sibling_search": {
+   "start": "2026-07-13",
+   "end": "2026-07-13",
+   "confidence": "high",
+   "sources": [
+    "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_meta_induction": {
    "start": "2026-07-07",
    "end": "2026-07-07",
