@@ -70,3 +70,12 @@
   exactly length-balancing direct-control instruction. Both suffixes are now
   216 pinned-tokenizer tokens; scientific endpoints and gates are unchanged.
 - A new implementation hash boundary is mandatory before retry.
+
+## 2026-07-13 — Model smoke 002 passes equal-length repair
+
+- Both probe suffixes are exactly 216 pinned-tokenizer tokens; causal anchor
+  difference falls from `0.078125` to exact zero on identical prefix IDs.
+- All 20 live numeric rows and all 60 intervention rows pass. Maximum norm error
+  is `9.3031e-6`; maximum span fraction is `0.0099543`; no lattice repair.
+- No logits, probabilities, outcomes, or correctness fields were retained.
+- Passing receipt must be pushed before the one authorized 880-row calibration.

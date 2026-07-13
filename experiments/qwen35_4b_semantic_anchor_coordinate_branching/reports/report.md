@@ -22,8 +22,13 @@ and a task-randomized computed operation consequence precede continuation.
 Model-free smoke passes: lens SHA/rank and all 12 distinct diagnostic results
 are valid; the 4/24/48 splits contain 76 unique new behaviors with zero overlap
 against 1,046 ancestor fingerprints. The original smoke had six tests; 15 now
-pass after the pre-model implementation audit. Model/outcomes remain unloaded;
-only model-free work is authorized.
+passed after the pre-model implementation audit (16 after the suffix-shape
+repair). At that original boundary, model/outcomes remained unloaded.
+
+Outcome-blind model smoke now also passes after preserving one failed receipt.
+The equal-length retry has exact zero cross-suffix anchor difference, 20/20 live
+non-J controls, maximum norm error `9.3031e-6`, maximum J-span fraction
+`0.0099543`, and 60/60 intervention rows. No outcome has been measured.
 
 ## Controls
 

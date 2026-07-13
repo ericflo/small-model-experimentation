@@ -9,4 +9,5 @@ reproducibility:
   required_external_artifacts: []
 notes: >-
   The frozen context lens is committed under assets/. There is no adapter or
-  training artifact. Model mechanics and continuation outputs do not yet exist.
+  training artifact. One failed and one passing outcome-blind model-smoke
+  receipt are committed; mechanics and continuation outputs do not yet exist.
