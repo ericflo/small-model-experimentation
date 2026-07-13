@@ -2,6 +2,15 @@
  "note": "Run windows recovered from in-repo records on 2026-07-01. Git history collapses most experiment dirs onto the 2026-06-28 corpus import commit; these windows restore the real chronology from dated experiment-log headings, config date keys, epoch timestamps in run artifacts, git history for post-import dirs, and file mtimes for in-place work. Entries with confidence 'none' were searched and have no recoverable record. Audit or extend with scripts/extract_experiment_dates.py.",
  "recovered_on": "2026-07-01",
  "experiments": {
+  "qwen35_4b_transaction_invariant_recovery_curriculum": {
+   "start": "2026-07-12",
+   "end": "2026-07-12",
+   "confidence": "high",
+   "sources": [
+    "experiments/qwen35_4b_transaction_invariant_recovery_curriculum/experiment_log.md: dated heading '## 2026-07-12 — design and CPU validation'"
+   ],
+   "caveat": "Candidate training and result-bearing generation had not started at this design boundary."
+  },
   "qwen35_4b_counterfactual_order_support_selector": {
    "start": "2026-07-13",
    "end": "2026-07-13",
