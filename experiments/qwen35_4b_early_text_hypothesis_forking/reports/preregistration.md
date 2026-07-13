@@ -4,6 +4,13 @@ Frozen after adversarial review and before any model-bearing call. Later prompt,
 parser, arm, candidate, threshold, temperature, layer, or budget changes require
 a fresh experiment directory.
 
+The pre-model implementation review exposed underspecified mechanics details.
+Before any model construction or output, these were frozen in
+[`preregistration_amendment_1.md`](preregistration_amendment_1.md). That
+amendment withdraws the underspecified Stage 1 contract at `c064d7a4`, becomes
+the new design boundary when committed and pushed, and controls Stage 1 where
+it is more specific than this document. No original threshold is relaxed.
+
 ## Hypothesis and falsifier
 
 Primary hypothesis: placing a bound first-operation hypothesis at the start of
@@ -151,7 +158,8 @@ All must pass before a live model call:
 ## Stage 1: label-free mechanics
 
 Four public five-element diagnostic lists are crossed with all 24 supplied
-bound operations (96 systematic rows). The model must compute the resulting
+bound operations: 96 rows in each of systematic, length-matched independently
+deranged, duplicate, and placebo arms. The model must compute the resulting
 list and emit exactly one unrestricted `RESULT: [...]` line. No qualification
 gold, task pipeline, or hidden example is loaded.
 
@@ -160,18 +168,30 @@ All mechanics gates must pass:
 - complete runner/resource receipts and pinned model/revision/backend;
 - unrestricted parse at least .90 in every primary arm;
 - answer-limit contact at most .05;
-- exact supplied-operation execution at least .75;
-- candidate adherence at least .60 and at least +.35 taskwise over a deranged
-  supplied-operation control;
+- systematic supplied-operation execution at least .75, deranged supplied-
+  operation execution at least .60, and systematic-registered minus deranged-
+  registered execution at least +.35, both globally and separately in all
+  four contexts;
+- systematic candidate adherence at least .60 globally and in every context;
 - successful results spanning at least 20 of 24 bound operations and all four
   contexts;
 - duplicate and placebo registered-target rates at most .20; and
-- on separate full-program mechanics cases, the correct-hypothesis branch
-  produces a visible-pass program at least .50 of the time.
+- on eight stratified full-program mechanics cases, strict parse is at least
+  .90, cap contact is at most .05, visible pass is at least .50 overall, and
+  visible pass is at least .50 within four parameterized-first-operation cases.
+
+The full-program arm is a non-causal reachability ceiling only. The live KV
+preflight deliberately requires block-rounded capacity for the frozen maximum
+active width, preventing scheduler preemption/recomputation from contaminating
+resource comparisons.
 
 Fail-specific decisions are `INVALID_INTERFACE_PARSE`,
 `NO_HYPOTHESIS_ADHERENCE`, and `NO_CORRECT_HYPOTHESIS_CEILING`. Any failure is
 terminal for this interface and keeps qualification sealed.
+
+Any prepared-artifact authentication, implementation-lock, transaction,
+package-environment, CUDA-graph, or live-KV preflight failure yields no
+scientific verdict and also keeps qualification sealed.
 
 ## Stage 2: qualification
 

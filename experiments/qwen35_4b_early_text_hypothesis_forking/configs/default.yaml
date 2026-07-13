@@ -4,7 +4,7 @@ model:
   revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
   dtype: bfloat16
   backend: vllm
-  vllm_version: 0.24.0
+  vllm_version: 0.24.0+cu129
 
 seeds:
   data: 2026072501
@@ -18,7 +18,7 @@ seeds:
   plain_pool: 2026072509
 
 data:
-  mechanics_tasks: 4
+  mechanics_tasks: 8
   qualification_tasks: 48
   confirmation_tasks: 96
   qualification_shards: 2
@@ -75,6 +75,7 @@ mechanics:
   parse_rate_min: 0.90
   execution_rate_min: 0.75
   candidate_adherence_min: 0.60
+  deranged_own_execution_min: 0.60
   deranged_adherence_gain_min: 0.35
   operation_support_min: 20
   task_support_min: 4
@@ -82,6 +83,7 @@ mechanics:
   placebo_target_rate_max: 0.20
   answer_limit_contact_max: 0.05
   correct_hypothesis_visible_pass_min: 0.50
+  parameterized_hypothesis_visible_pass_min: 0.50
 
 qualification:
   parse_rate_min: 0.90
@@ -120,7 +122,10 @@ confirmation:
 
 boundaries:
   design:
-    status: adversarially_reviewed
+    status: locked
+    commit: c064d7a4470a0638ddf4e483e82ccaa9f3720eed
+  design_amendment:
+    status: pending_commit
   implementation:
     status: pending
   mechanics:

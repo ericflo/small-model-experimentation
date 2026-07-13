@@ -6,6 +6,12 @@ This experiment tests whether supplying each fully bound first operation at the
 start of Qwen3.5-4B reasoning changes complete two-step program proposals enough
 to beat late hints and compute-matched sampling under visible-only selection.
 
+The original design is supplemented by a pre-model
+[authenticated-mechanics amendment](reports/preregistration_amendment_1.md).
+It freezes an eight-case parameter-stratified reachability ceiling,
+contextwise adherence gates, receipt-last generation, and a conservative live
+KV no-preemption check. No model was constructed before this amendment.
+
 ## Research program
 
 - Primary: `structured_execution_and_compilers`.

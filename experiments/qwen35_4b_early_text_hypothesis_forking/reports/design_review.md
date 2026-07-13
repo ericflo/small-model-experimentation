@@ -7,6 +7,11 @@ withdrawn; the resolutions below define the only authorized experiment.
 ## Verdict
 
 Proceed through model-free smoke, then a separately locked live mechanics run.
+
+The later implementation audit exposed underspecified mechanics details before
+any model call. The resulting design clarification is frozen in
+[`preregistration_amendment_1.md`](preregistration_amendment_1.md); its
+parameterized-stratum and artifact-authentication requirements are mandatory.
 The experiment can test whether an early, concrete textual hypothesis reshapes
 Qwen3.5-4B's proposal distribution. It cannot by itself establish J-space
 transport, internal certainty, weight installation, or autonomous capability.
@@ -103,18 +108,22 @@ over the strongest available symbolic tool.
 15. **Mechanics may only measure blind copying.** Four public diagnostic lists
     are crossed with all 24 bound operations. Correct list computation, not a
     copied name, is the endpoint. Mechanics requires broad operation support,
-    an unrestricted parse gate, low cap contact, candidate adherence, and a
-    large taskwise advantage over deranged/duplicate/placebo controls.
+    an unrestricted parse gate, low cap contact, and contextwise systematic-vs-
+    deranged execution/adherence/delta gates. Duplicate and placebo use
+    aggregate registered-target caps.
 
 16. **A mechanics pass can coexist with an unusable full-program ceiling.** The
-    correct-hypothesis branch must also produce a visible-pass full program on
-    at least half of mechanics program cases before qualification is authorized.
+    eight cases freeze four parameter-free and four parameterized first
+    operations. The correct-hypothesis branch must produce a visible-pass full
+    program on at least half overall and at least half of the parameterized
+    stratum before qualification is authorized. This is non-causal reachability
+    only.
 
 17. **Natural close and forced-close behavior can differ by arm.** Every arm
     uses the same fixed-cap/force-close policy. Exact `<think>` placement,
-    premature close/EOS, cap contacts, unresolved thinking, and loop indicators
-    are recorded. Any primary arm below 90% unrestricted AST parse or above 5%
-    cap contact invalidates mechanics.
+    exact output tokens/text, natural/forced close, finish reasons, cap contacts,
+    and close-token counts are recorded. Any diagnostic arm or the program
+    ceiling below 90% parse or above 5% cap contact invalidates mechanics.
 
 18. **Fresh task IDs do not prove fresh behavior.** Complete visible/hidden
     behavior fingerprints are checked against readable procedural experiment

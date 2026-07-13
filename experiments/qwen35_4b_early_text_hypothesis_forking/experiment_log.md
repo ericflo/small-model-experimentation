@@ -27,3 +27,16 @@ serialized 144 unique composed branch maps with balanced gold slots, and froze
 the pre-grade mutation/resource firewall. The experiment-local test suite passed
 31 tests and 33 parameterized subtests. `model_loaded=false`,
 `outcomes_loaded=false`, and all model stages remain fail closed.
+
+## 2026-07-13 — Pre-model mechanics amendment
+
+Implementation-level adversarial review found that the unspecified four-case
+program ceiling happened to cover only parameter-free first operations. Before
+any model construction, generation, or outcome, the design was amended to
+eight cases: four parameter-free plus `add_k(-2)`, `mul_k(3)`, `take_k(3)`, and
+`rotate_k(2)`. The ceiling now requires `.50` visible pass overall and within
+the parameterized stratum, strict `.90` parse, and at most `.05` cap contact.
+It is explicitly non-causal reachability evidence. The amendment also freezes
+per-context adherence gates, exact terminal-token matching for padded controls,
+authenticated receipt-last generation, and a conservative live KV
+no-preemption gate. No threshold was relaxed.
