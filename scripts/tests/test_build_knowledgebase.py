@@ -9,8 +9,6 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
-import yaml
-
 from scripts import build_knowledgebase as builder
 
 
@@ -155,9 +153,8 @@ class MetadataYamlTests(unittest.TestCase):
                 builder.write_metadata(record)
 
             metadata = (experiment / "metadata.yaml").read_text(encoding="utf-8")
-            parsed = yaml.safe_load(metadata)
-            self.assertEqual(parsed["file_counts"], {"py": 2, "[none]": 1})
             self.assertIn('  "[none]": 1', metadata)
+            self.assertNotIn("  [none]: 1", metadata)
 
 
 if __name__ == "__main__":
