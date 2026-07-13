@@ -253,7 +253,31 @@
   compressed-byte hashes, empty-ledger identity, all three bundle files and receipt mirrors, 15,072
   non-contrast rows, and zero sealed row decompressions.
 
+## 2026-07-13 — seed-7411 LoRA G0 passes durably
+
+- The fresh retry wrote canonical receipt `runs/setup/g0_lora_seed7411.json`, file SHA-256
+  `8495799beb226644f8c88b18f26510c7c4cfaed4117fb81d54b1cc94d4efac66`, runtime identity
+  `e7394bcf48175c8232ac825a4f74f16734452602b9d8657be09ca47e293f3735`, and exact status
+  `MODEL_SMOKE_PASS`. The runtime's canonical loader reopens it against source contract
+  `3baa7b53…d5c42`, data manifest `c2338a7a…247`, design receipt `d943b909…ac52`, and initialization
+  receipt `136565d1…3256`.
+- The pinned snapshot proof covers nine exact files at revision `851bf6e8…cd0a`, 9,342,815,919 bytes,
+  aggregate file-manifest digest `06486f260c8e9135835c768802e0e947bab0470e4454a36e138da6d10ed1fe12`.
+  The target manifest has 62 ordered modules and the LoRA bank has exactly 16,232,448 parameters.
+- FP32/dropout-off and bf16/dropout-0.05 PEFT output/A-gradient/B-gradient parity each pass at zero
+  observed error. Initial enabled-versus-disabled and both pre/post-update K=1 errors are zero. The
+  second state-only step and the live joint probe give finite nonzero gradients to every required
+  recurrent group and all 124 LoRA tensors, with zero base-model gradient tensors. All required Adam
+  states are complete and finite.
+- The ten-step probe is finite at 0.309 seconds/update. K=12 is finite with exactly 682 ordered calls;
+  the setup row has zero structural overlap with result data. Destructive checkpoint restoration is
+  exact, peak allocated/reserved memory is 11.20/11.36 GiB, and 35.63 GiB remains free after G0.
+- This is setup evidence only. The model stage opened only the permitted training payload; the seal
+  ledger remains byte-identical at `e2922cb1…a85a`, identity `45f58325…6523`, with `events: []`.
+- Independent receipt audit is `GO`: the runtime identity, all lineages, mechanics, environment,
+  optimizer, restore, and firewall claims independently reopen with no blocker.
+
 ## Current authorization
 
-Fresh seed-7411 LoRA G0 is authorized. No positive control or result training is authorized until its
-seed-matched G0 passes and its canonical receipt reopens successfully.
+The seed-7411 LoRA setup-only positive control is authorized. No seed-7411 result training is
+authorized until that canonical receipt passes and reopens. Seeds 7412 and 7413 remain at G0.

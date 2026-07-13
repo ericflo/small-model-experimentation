@@ -1,6 +1,6 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · frozen design unchanged; receipt-path fix and historical receipt identities pass review; fresh source-bound setup is complete; seed-7411 LoRA G0 retry is next
+**Status:** in-progress · since 2026-07-13 · frozen design unchanged; fresh source-bound setup is complete; seed-7411 LoRA G0 passes durably; its setup-only positive control is next
 
 ## Current status
 
@@ -25,7 +25,14 @@ error in all four hand-authored historical receipt identities; the identities ar
 covered by an automatic corpus-wide check. The corrected source passes 135/135 tests. CPU smoke, all
 seven deterministic splits, a new empty seal ledger, and all three common-state bundles are now
 regenerated under source contract `3baa7b53…d5c42` and reopen exactly. Validation reopened 15,072
-non-contrast rows and zero sealed rows. The next authorized step is a fresh seed-7411 LoRA G0 retry.
+non-contrast rows and zero sealed rows. Seed 7411 now has a canonical `MODEL_SMOKE_PASS` receipt with
+runtime identity `e7394bcf…3735`.
+It proves exact pinned-snapshot loading, 62 targets and 16,232,448 LoRA parameters, both PEFT parity
+regimes, K=1 and zero-function exactness, finite nonzero gradients to every required recurrent and
+joint group, finite optimizer state, a finite K=12 forward, exact checkpoint restoration, and 35.63
+GiB free afterward.
+The seal ledger remains byte-unchanged with zero events. Its setup-only positive control is next; no
+result training has started.
 
 ## Research program and prior anchors
 

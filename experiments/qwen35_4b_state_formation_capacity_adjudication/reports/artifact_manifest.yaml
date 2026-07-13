@@ -61,7 +61,9 @@ notes: >-
   current CPU smoke, data manifest, empty contrast ledger, and three initialization bundles are
   realized under source contract 3baa7b532d62bae4d9751dfe4be9c6ce314c11ca4524266f4cebea63289d5c42.
   Non-contrast contents and all bundle tensors reopen exactly; no sealed payload has been reopened
-  after generation. Seed-7411 G0 is the next setup gate.
+  after generation. Seed-7411 G0 now passes durably at receipt identity
+  e7394bcf48175c8232ac825a4f74f16734452602b9d8657be09ca47e293f3735; its setup-only positive
+  control is the next gate, and no result training is authorized.
   The first Qwen load stopped before wrapper construction or mechanics and is preserved by a tracked
   failure receipt; it opened
   only the permitted training validator, no sealed contrast, and produced no canonical G0 output.
