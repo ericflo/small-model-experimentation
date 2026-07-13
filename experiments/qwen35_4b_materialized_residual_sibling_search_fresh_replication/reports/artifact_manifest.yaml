@@ -5,7 +5,7 @@ external_artifacts: []
 omitted_artifacts: []
 reproducibility:
   smoke_command: ".venv/bin/python experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/scripts/run.py --stage smoke"
-  full_command: "sealed pending mechanics implementation, independent audit, pushed clean code/CI, and a separate lock"
+  full_command: "sealed pending pushed reviewed code/preoutcome, green CI, and a separately pushed implementation lock"
   required_external_artifacts: []
 local_receipts:
   scaffold_identity:
@@ -20,4 +20,7 @@ local_receipts:
   construction_publication:
     path: "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/runs/smoke/publication_receipt.json"
     sha256: "634e8801d30386febbd8aea4af041a62c1bb97a6757ecd30ec1a579b3ae8ff55"
-notes: "Corrected model-free construction passed after two independent reviews. It records zero benchmark reads, model loads, and model calls. Mechanics remains unauthorized pending implementation audit, publication, and a separate lock."
+  mechanics_preoutcome:
+    path: "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/runs/mechanics/prepared/preoutcome_receipt.json"
+    sha256: "80647e830ccb90026b30b00ea674d22aa247eba925b4ebe38d6ddad8b49e0d0e"
+notes: "Corrected construction and reviewed model-free mechanics preparation passed with zero benchmark reads, model loads, and model calls. Live mechanics remains unauthorized pending publication, green CI, and a separate committed/pushed lock."

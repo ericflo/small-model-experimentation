@@ -1,6 +1,6 @@
 # Qwen3.5-4B Materialized Residual Sibling Search Fresh Replication
 
-**Status:** in-progress · since 2026-07-13 · corrected model-free construction passed; mechanics implementation, audit, publication, separate lock, and model run remain sealed
+**Status:** in-progress · since 2026-07-13 · mechanics implementation audit and model-free preoutcome passed; code publication, separate lock, and model run remain sealed
 
 This separately registered recovery replication preserves the parent's frozen
 materialized-residual science while regenerating tasks, request IDs, and
@@ -81,9 +81,17 @@ model-free construction command:
 .venv/bin/python experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/scripts/run.py --stage smoke
 ```
 
-Full mechanics is intentionally absent and unauthorized until its crash-safe
-implementation, request/seed-overlap proof, adversarial audit, pushed code, and
-separately pushed clean lock all exist.
+The crash-safe mechanics implementation now exists and passed three independent
+reviews. Its model-free preparation command is:
+
+```bash
+VLLM_ENABLE_V1_MULTIPROCESSING=0 .venv-vllm/bin/python experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/scripts/run_mechanics.py --stage prepare
+```
+
+That command has passed and frozen the preoutcome. Live mechanics remains
+unauthorized until these reviewed code and prepared bytes are published on
+`main`, CI is green, and a separate clean implementation lock is generated,
+committed, and pushed.
 
 ## Results
 
@@ -102,6 +110,16 @@ The manifest's locked runner hash exactly matches pushed construction commit
 `e43c701e`; a post-construction guard now verifies the frozen manifest/summary
 instead of rewriting them on rerun.
 
+The mechanics preparation then froze 1,984 requests across nine arms, 676
+unique canonical request identities/seed keys, 576 surface-control scores, 576
+random-control scores, and 24 leave-one-task-out folds. All nine required
+parent/fresh intersections are zero, including the union of derived stage-one
+and stage-two seeds and the parent terminal rendered-token sequences. The
+preoutcome SHA-256 is
+`80647e830ccb90026b30b00ea674d22aa247eba925b4ebe38d6ddad8b49e0d0e`.
+The full fresh suite now passes 108 tests and 96 subtests. Preparation records
+zero model loads and zero model calls; no live mechanics artifact exists.
+
 ## Interpretation
 
 The parent incident and this model-free construction change no belief about
@@ -112,7 +130,8 @@ Scientific arms and outcome gates remain frozen.
 ## Knowledgebase Update
 
 - Program evidence updated: no model evidence yet.
-- Program backlog updated: fresh construction passed; mechanics safety is next.
+- Program backlog updated: reviewed preparation passed; publication and the
+  separate mechanics lock are next.
 - Claim ledger updated: no; no model result exists.
 
 ## Artifacts
@@ -122,6 +141,7 @@ Scientific arms and outcome gates remain frozen.
 - `runs/scaffold/summary.json`
 - `runs/smoke/summary.json`
 - `runs/smoke/publication_receipt.json`
+- `runs/mechanics/prepared/preoutcome_receipt.json`
 - `idea_intake.md`
 - `reports/artifact_manifest.yaml`
 - `reports/report.md`

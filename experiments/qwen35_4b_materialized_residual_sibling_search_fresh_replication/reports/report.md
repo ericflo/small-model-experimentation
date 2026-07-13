@@ -2,8 +2,9 @@
 
 ## Summary
 
-The experiment identity, fresh seed block, and 264-task procedural construction
-are frozen. No model has been loaded or called. This is the separately
+The experiment identity, fresh seed block, 264-task construction, reviewed
+mechanics implementation, and model-free preoutcome are frozen. No model has
+been loaded or called. This is the separately
 registered recovery path required by the parent experiment's terminal
 sampled-but-unpersisted transaction.
 
@@ -44,8 +45,22 @@ tests pass. Manifest SHA-256 is
 The locked runner hash matches pushed construction commit `e43c701e`; the
 subsequent no-rewrite guard verifies rather than regenerates these frozen
 bytes. Independent scientific and identity audits both passed the written
-construction for publication and mechanics implementation only. No model
-mechanics have run.
+construction for publication and mechanics implementation only.
+
+Three later implementation audits initially blocked preparation. Their
+demonstrated identity, cross-stage seed, lock-symlink, canonicality, crash-
+durability, stale-authentication, and recovery-coverage findings were fixed.
+The final stable transaction accepts only four prefix states, re-durabilizes
+validated restart bytes before promotion, writes a canonical bundle before
+authentication, and proves all-nine-invocation recovery without constructing
+the runner. The full fresh suite passes 108 tests and 96 subtests.
+
+The authorized model-free preparation froze 1,984 requests across nine arms,
+676 unique request IDs/seed keys, 576 surface rows, 576 random-control rows,
+and 24 folds. All nine required parent/fresh intersections are zero, including
+any-stage derived seeds and terminal rendered token IDs. Preoutcome SHA-256 is
+`80647e830ccb90026b30b00ea674d22aa247eba925b4ebe38d6ddad8b49e0d0e`.
+It records zero model loads/calls. No live mechanics have run.
 
 ## Controls
 
@@ -64,18 +79,19 @@ choices.
 
 ## Interpretation
 
-No scientific belief changes. The durable construction proves feasibility,
-fresh task/prompt identity, and reproducibility—not independence of a finite
-grammar and not evidence that materialized residuals work.
+No scientific belief changes. The durable construction and preparation prove
+feasibility, fresh task/request/draw identity, and crash-safe readiness—not
+independence of a finite grammar and not evidence that materialized residuals
+work.
 
 ## Next Experiments
 
-Implement and adversarially review the transaction protocol before mechanics.
-Training or banking remains a separate experiment even if this search
-interface passes.
+Publish the reviewed implementation and preoutcome, wait for green CI, then
+create and separately publish the clean mechanics lock. Training or banking
+remains a separate experiment even if this search interface passes.
 
 ## Artifact Manifest
 
-`artifact_manifest.yaml` binds the historical scaffold, construction manifest,
-and smoke summary. No external, omitted, model, or capability-result artifact
-exists.
+`artifact_manifest.yaml` binds the historical scaffold, construction receipts,
+and mechanics preoutcome. No external, omitted, model, or capability-result
+artifact exists.

@@ -39,8 +39,29 @@
 - 2026-07-13: Independent scientific and identity audits passed every written
   construction hash, row count, overlap, EOS, and no-model boundary. They
   authorize mechanics implementation only, not model execution.
+- 2026-07-13: Implemented the parent's byte-identical mechanics scoring and
+  prompt science with fresh canonical request identities, exact parent request/
+  seed/prompt overlap gates, construction-frozen identity code, lexical lock-
+  path safety, and the corrected 248044/248046 termination contract.
+- 2026-07-13: Three independent implementation reviews initially blocked the
+  harness. Demonstrated defects included arbitrary/cross-family request IDs,
+  cross-stage seed collisions, lock symlink resolution, noncanonical bundle
+  promotion, incomplete crash durability, a stale-authentication resampling
+  path, and insufficient restart coverage. Every finding was fixed and
+  mutation-tested before the reviewers returned preparation-only `PASS`.
+- 2026-07-13: The stable transaction now classifies all 16 artifact states,
+  re-durabilizes validated predecessors, recovers all nine generated
+  invocations with runner construction forbidden, and rejects malformed,
+  duplicate-key, hash-drifted, non-prefix, and corrupt-completion states. The
+  full fresh suite passed 108 tests and 96 subtests.
+- 2026-07-13: Ran the authorized model-free mechanics preparation. It froze
+  1,984 requests, 676 unique IDs/keys, zero in all nine registered parent/
+  terminal intersections, 576+576 control rows, 24 folds, and the exact EOS
+  pair with zero model loads/calls. Preoutcome SHA-256 is
+  `80647e830ccb90026b30b00ea674d22aa247eba925b4ebe38d6ddad8b49e0d0e`.
 
 ## Pending
 
-- Implement and independently audit durable generation transactions.
-- Publish code and a separate lock before any model call.
+- Publish reviewed code and prepared bytes; wait for green CI.
+- Generate, commit, and push the separate clean mechanics lock before any model
+  load, GPU use, or request.
