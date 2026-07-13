@@ -1,6 +1,6 @@
 # Qwen3.5-4B Materialized Residual Sibling Search Fresh Replication
 
-**Status:** in-progress · since 2026-07-13 · initial design review blocked impossible freshness promises and colliding copied IDs; corrections are under review and no model call is authorized
+**Status:** in-progress · since 2026-07-13 · corrected design passed two independent reviews for model-free construction only; construction is authorized but unrun, and no model call is authorized
 
 This separately registered recovery replication preserves the parent's frozen
 materialized-residual science while regenerating tasks, request IDs, and
@@ -74,8 +74,8 @@ no-think top-four ranking remains secondary and cannot veto the all-24 test.
 ## Run
 
 The historical identity-only scaffold receipt is preserved at
-`runs/scaffold/summary.json`. Fresh construction will use this command only
-after the corrected design receives an independent `PASS`:
+`runs/scaffold/summary.json`. Two independent reviews now authorize this
+model-free construction command:
 
 ```bash
 .venv/bin/python experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/scripts/run.py --stage smoke

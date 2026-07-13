@@ -11,4 +11,4 @@ local_receipts:
   scaffold_identity:
     path: "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/runs/scaffold/summary.json"
     sha256: "e9e8f41cf7c0d5d625e7fee38305bf592c19fbf90f3a90a8b4657651600627e1"
-notes: "Identity-only scaffold preserved. Initial independent design review BLOCKED copied task-ID collisions and an infeasible parent-function exclusion. Corrections remain under review; no construction or model call is authorized."
+notes: "Identity-only scaffold preserved. Initial review BLOCKED copied task-ID collisions and an infeasible parent-function exclusion; corrected design passed two independent reviews for model-free construction only. Construction is authorized but unrun; no model call is authorized."

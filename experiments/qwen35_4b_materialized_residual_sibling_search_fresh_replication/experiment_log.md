@@ -22,10 +22,12 @@
   prompt overlap. It disclosed 56 shared functions, 41 shared triples, and 181
   shared suffixes. Twenty-nine focused tests passed. Follow-up independent
   review remains pending.
+- 2026-07-13: Both follow-up reviewers returned `PASS` for model-free
+  construction only after a cross-arm prompt-union defect and permissive prior
+  scanner were fixed. Mechanics/model access remains sealed.
 
 ## Pending
 
-- Resolve the follow-up adversarial design review.
 - Publish and run the model-free construction under the corrected identities.
 - Implement and independently audit durable generation transactions.
 - Publish code and a separate lock before any model call.

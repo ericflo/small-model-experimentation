@@ -52,6 +52,30 @@ authorized. The initial design did not pass.
 
 ## Resolution state
 
-Corrections are in progress. This document does not authorize construction or
-model use. A follow-up independent verdict must be appended after the tests and
-freshness receipt implementation are complete.
+The requested corrections were implemented. The prompt gate now computes
+`union(all parent prompts) ∩ union(all fresh prompts)`, an actual cross-arm
+mutation is rejected, and unrelated-prior scanning rejects symlinks, resolved
+escapes, blank/malformed JSONL, and inventory drift. Twelve identity/freshness
+tests pass.
+
+Two independent read-only follow-up reviews returned `PASS` for model-free
+construction only:
+
+- The scientific reviewer confirmed outcome-independent replication,
+  feasibility of the finite-DSL exemption, unchanged taskwise sampled/logical
+  first-over baselines, hidden-blind selection, four-comparator McNemar/Holm/
+  bootstrap confirmation gate, and the non-vetoing top-four secondary.
+- The identity reviewer authenticated all 13 lineage hashes, operational task
+  namespaces, global prompt union, cross-arm mutation, strict prior scanning,
+  zero current required intersections, and descriptive 56/41/181 finite-DSL
+  reuse.
+
+**Final verdict:** `PASS_FOR_MODEL_FREE_CONSTRUCTION_ONLY`.
+
+This verdict authorizes the CPU/tokenizer construction smoke. It does not
+authorize mechanics, model loading, GPU use, or a model request. Those remain
+sealed until the `GENERATED`-before-auth transaction, real EOS-pair receipt,
+actual request-ID/seed-key/derived-seed overlap gate, independent implementation
+audit, pushed clean code/CI, and separately pushed lock all pass. Qualification
+must additionally assign unique direct-pool sample indices and distinct
+transaction domains rather than reusing mechanics-only request identities.

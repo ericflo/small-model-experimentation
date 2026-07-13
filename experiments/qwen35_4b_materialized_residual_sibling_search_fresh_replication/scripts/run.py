@@ -237,8 +237,11 @@ def _validate_config(config: dict[str, Any]) -> None:
         raise RuntimeError("top-four secondary changed or became a primary veto")
     if config["boundaries"]["design"]["status"] != "adversarial_review_passed":
         raise RuntimeError("design review boundary is not passed")
-    if config["boundaries"]["cpu_smoke"]["status"] != "passed_model_free":
-        raise RuntimeError("CPU smoke boundary is not passed")
+    if (
+        config["boundaries"]["cpu_smoke"]["status"]
+        != "authorized_model_free_smoke"
+    ):
+        raise RuntimeError("model-free construction smoke is not authorized")
     if config["boundaries"]["mechanics_implementation"]["status"] != "absent":
         raise RuntimeError("mechanics moved before a published implementation lock")
 

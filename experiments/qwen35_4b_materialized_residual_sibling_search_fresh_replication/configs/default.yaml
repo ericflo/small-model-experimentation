@@ -206,9 +206,9 @@ top4_secondary:
 
 boundaries:
   design:
-    status: scaffold_reserved_pending_adversarial_review
+    status: adversarial_review_passed
   cpu_smoke:
-    status: scaffold_identity_only
+    status: authorized_model_free_smoke
   mechanics_implementation:
     status: absent
   qualification_implementation:
