@@ -30,6 +30,11 @@ The equal-length retry has exact zero cross-suffix anchor difference, 20/20 live
 non-J controls, maximum norm error `9.3031e-6`, maximum J-span fraction
 `0.0099543`, and 60/60 intervention rows. No outcome has been measured.
 
+The full outcome-blind calibration also passes all 880 live controls and 2,240
+intervention rows. Maximum norm error is `9.9968e-6`, maximum span fraction is
+`0.0099951`, and at most three lattice pairs are required. All four exact native
+prefixes are locked. Mechanics probabilities remain unopened.
+
 ## Controls
 
 The preregistration freezes task-local alias meaning, result-label rotation,

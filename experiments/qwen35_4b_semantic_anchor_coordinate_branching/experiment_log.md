@@ -79,3 +79,14 @@
   is `9.3031e-6`; maximum span fraction is `0.0099543`; no lattice repair.
 - No logits, probabilities, outcomes, or correctness fields were retained.
 - Passing receipt must be pushed before the one authorized 880-row calibration.
+
+## 2026-07-13 — Full live-bf16 calibration passes
+
+- Exactly 880/880 numeric rows and 2,240/2,240 intervention rows pass.
+- Maximum norm error is `9.9968e-6`; maximum J-span fraction is `0.0099951`;
+  maximum lattice repair is three pairs at layer 8.
+- Cross-probe causal difference remains exact zero. All four prefix ID lists,
+  donor immutability, positions, tokenizer, model, lens, and boundary pass.
+- Outcomes/correctness/logits/probabilities remain absent.
+- Mechanics remains locked until this receipt and its adversarial audit are
+  committed, pushed, and hashed in a separate boundary.

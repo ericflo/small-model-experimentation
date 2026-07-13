@@ -10,4 +10,5 @@ reproducibility:
 notes: >-
   The frozen context lens is committed under assets/. There is no adapter or
   training artifact. One failed and one passing outcome-blind model-smoke
-  receipt are committed; mechanics and continuation outputs do not yet exist.
+  receipt and the full 880-row calibration are committed; mechanics and
+  continuation outputs do not yet exist.
