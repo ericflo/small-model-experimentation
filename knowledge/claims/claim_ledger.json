@@ -1692,6 +1692,34 @@
     "Do not generalize the escalation null beyond budget-saturated tasks: MBPP self-limits at ~100-170 think tokens, so it under-stresses the serial-compute lever.",
     "Do not claim conf-select beats majority-vote in general: it is difficulty-dependent — an MBPP-scale win (base ~0.53) that VANISHES to a tie on easy HumanEval (base 0.91), where self-consistency catches up."
    ]
+  },
+  {
+   "id": "C58",
+   "title": "C42 TARGETED REPAIR resolved: a located single-step slip is a NEAR-MISS (the correct digit is the model's RANK-2 choice 85% of the time, median rank 2) and temperature-resampling makes the fix REACHABLE (surfaces d* 80% at n=8), but NO verifier-free CONFIDENCE selector recovers it (greedy re-try and confidence-select both 0.000 -- the erroneous digit IS the argmax). ISOLATED re-computation of just the flagged step, out of the flawed chain context, partially repairs (0.318). So localization enables repair only WITH a verifier or by CONTEXT-REMOVAL, not by confidence selection.",
+   "status": "Promising",
+   "programs": [
+    "evidence_conditioned_selection",
+    "interpretability_and_diagnostics",
+    "reliability_and_safety"
+   ],
+   "summary": "Experiment qwen35_4b_error_localization (repair.py), closing C42's owed next-test 'does deployable targeted repair actually fix chains?'. Familiar +k successor chains, scaffolded per-step digit decode; 129 single-slip chains (one located first_local_error) of 560. At the slip step L (d* = the correct successor of the model's own previous digit): (1) RANK of d* in the model's step-L distribution is median 2, rank<=2 0.85, rank<=3 0.90 -- the slip is a near-miss, the model 'almost' knew it; (2) greedy re-try recovers 0.000 (no-op control, confirming C42's warning) and confidence-select recovers 0.000 (the argmax IS the slip); (3) temperature-resample availability is 0.800 (P>=1 of 8 samples == d*) -- the fix is REACHABLE; (4) ISOLATED re-computation -- re-running just that step as a fresh depth-1 chain with the SAME scaffold -- recovers 0.318 (an abstract re-phrasing gave a spurious 0.000 because the model mis-parses 'k forward' as backward; the scaffold-matched prompt is the valid test). Oracle ceiling 1.000.",
+   "evidence": [
+    {
+     "kind": "experiment",
+     "id": "qwen35_4b_error_localization"
+    }
+   ],
+   "implication": "Verifier-free IN-CONTEXT confidence repair of a located error is impossible: the erroneous token is exactly the argmax, so any confidence-max selector reproduces the error (greedy/conf-select 0.000). But the fix is a near-miss (rank-2) and reachable by resampling (0.800), so ANY external verifier recovers it cheaply. The one verifier-free move that partially works is CONTEXT-REMOVAL: re-doing the flagged step in isolation repairs ~1/3 (0.318), decomposing slips into ~1/3 context-induced (flawed-chain momentum) vs ~2/3 systematic per-item confusion. Deployable pairing with C57: abstain/localize the low-confidence step, then isolated-recompute it (verifier-free) or resample+verify it (with any checker).",
+   "next_tests": [
+    "Does isolated re-computation + self-consistency (n>1 isolated samples, majority) push past 0.318, and does combining it with resample-availability (0.80) close more of the gap to the oracle?",
+    "Does the near-miss + context-removal repair hold on non-toy multi-step reasoning (GSM8K-style), or is it specific to successor chains?",
+    "C57 x C58: gate isolated re-computation on the per-step confidence dip (only repair the flagged step) and measure end-to-end chain accuracy vs compute."
+   ],
+   "avoid": [
+    "Do not use confidence to SELECT the repair at a located slip -- the argmax is the error, so greedy/confidence-select are exact no-ops (0.000).",
+    "Do not phrase the isolated re-computation abstractly ('what is k forward from prev'): the model mis-parses it as backward and scores a spurious 0.000; use the EXACT chain scaffold (a depth-1 chain) so the readout is valid.",
+    "Do not claim in-context targeted repair works verifier-free: the fix is reachable but not selectable without an external check or context-removal."
+   ]
   }
  ]
 }
