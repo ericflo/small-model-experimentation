@@ -1,6 +1,6 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · frozen design unchanged; fresh source-bound setup is complete; seed-7411 LoRA G0 passes durably; its setup-only positive control is next
+**Status:** in-progress · since 2026-07-13 · frozen design unchanged; seed-7411 LoRA G0 passes durably; its fixed positive control stopped at 0/48; no result run is authorized
 
 ## Current status
 
@@ -31,8 +31,12 @@ It proves exact pinned-snapshot loading, 62 targets and 16,232,448 LoRA paramete
 regimes, K=1 and zero-function exactness, finite nonzero gradients to every required recurrent and
 joint group, finite optimizer state, a finite K=12 forward, exact checkpoint restoration, and 35.63
 GiB free afterward.
-The seal ledger remains byte-unchanged with zero events. Its setup-only positive control is next; no
-result training has started.
+The seal ledger remains byte-unchanged with zero events. The subsequent fixed 256-update positive
+control completed but scored 0/48 exact terminal triples against the 0.95 gate. No canonical pass
+receipt was created. The scorer is shape- and target-aligned; review instead found that the control
+used one row per optimizer update and ignored the configured accumulation of 16, so each row appeared
+only five or six times. This is a preserved setup failure, not evidence about LoRA capacity. No result
+training has started.
 
 ## Research program and prior anchors
 

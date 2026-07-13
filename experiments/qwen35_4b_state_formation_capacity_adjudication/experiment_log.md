@@ -277,7 +277,25 @@
 - Independent receipt audit is `GO`: the runtime identity, all lineages, mechanics, environment,
   optimizer, restore, and firewall claims independently reopen with no blocker.
 
+## 2026-07-13 — seed-7411 positive control stops at 0/48
+
+- The fixed 256-update LoRA positive control reached its final gate, then raised
+  `tiny state-path overfit failed: 0.0 < 0.95`. The oracle component necessarily passed its 0.99 gate
+  because the run continued to the overfit check. No canonical positive-control receipt was created.
+- Preserved the exact setup failure at
+  `runs/failures/positive_control_lora_seed7411_overfit_failure.json`, identity
+  `44397a2e278293bf54fe5d172ac4294c565a2a98ab7c8f4faaeb5ee044e8ec7c`. It binds the G0, source,
+  design, data, model, seed, 48 rows, 256 completed updates, and exact exception. It records no result
+  payload read, no result training, and no sealed access.
+- Independent shape/target tracing found no scorer-index defect. State targets and logits both have
+  aligned `[batch, step]` geometry, and terminal joint scoring compares all three heads at the same
+  final semantic step. Near chance, exact joint accuracy is 1/256, so zero of 48 is not surprising.
+- The leading mechanics defect is an underpowered update path: the positive control performs one
+  single-row microbatch per optimizer update instead of honoring the configured accumulation of 16.
+  Across 48 rows, the failed recipe exposed each row only five or six times. It also persisted no
+  losses, per-head metrics, gradient norms, optimizer state, or failure receipt before raising.
+
 ## Current authorization
 
-The seed-7411 LoRA setup-only positive control is authorized. No seed-7411 result training is
-authorized until that canonical receipt passes and reopens. Seeds 7412 and 7413 remain at G0.
+Execution is retracted pending adversarial review of a fail-closed positive-control correction and
+source-bound invalidation. No positive control retry, later-seed G0, or result training is authorized.

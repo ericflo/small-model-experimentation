@@ -62,8 +62,10 @@ notes: >-
   realized under source contract 3baa7b532d62bae4d9751dfe4be9c6ce314c11ca4524266f4cebea63289d5c42.
   Non-contrast contents and all bundle tensors reopen exactly; no sealed payload has been reopened
   after generation. Seed-7411 G0 now passes durably at receipt identity
-  e7394bcf48175c8232ac825a4f74f16734452602b9d8657be09ca47e293f3735; its setup-only positive
-  control is the next gate, and no result training is authorized.
+  e7394bcf48175c8232ac825a4f74f16734452602b9d8657be09ca47e293f3735. Its fixed positive control
+  stopped at 0/48 and is preserved by failure receipt identity
+  44397a2e278293bf54fe5d172ac4294c565a2a98ab7c8f4faaeb5ee044e8ec7c. No positive-control pass or
+  result artifact exists, and later stages remain prohibited.
   The first Qwen load stopped before wrapper construction or mechanics and is preserved by a tracked
   failure receipt; it opened
   only the permitted training validator, no sealed contrast, and produced no canonical G0 output.
