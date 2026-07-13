@@ -5,7 +5,7 @@ source_track: "new"
 path: "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication"
 primary_readme: "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/README.md"
 primary_report: "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/reports/report.md"
-summary: "This separately registered recovery replication preserves the parent's frozen materialized-residual science while regenerating tasks, request IDs, and sampling seeds and hardening durable generation receipts. Identity is reserved; no model call is authorized."
+summary: "This separately registered recovery replication preserves the parent's frozen materialized-residual science while regenerating tasks, request IDs, and sampling seeds and hardening durable generation receipts. The fresh task construction is frozen; no model call is authorized."
 tags:
   - "latent-state"
   - "small-model"
@@ -24,9 +24,10 @@ top_level_dirs:
   - "src"
   - "tests"
 file_counts:
-  json: 1
+  json: 5
+  jsonl: 9
   md: 9
   py: 14
   yaml: 3
-total_files: 27
-total_size_bytes: 261298
+total_files: 40
+total_size_bytes: 970678

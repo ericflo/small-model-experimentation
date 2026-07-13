@@ -120,6 +120,12 @@ PARENT_PREPARED_KEYS = {
 PARENT_REQUEST_KEYS = {
     name for name in PARENT_PREPARED_KEYS if name.endswith("_requests.jsonl")
 }
+FROZEN_CONSTRUCTION_MANIFEST_SHA256 = (
+    "5d4fb6a000ac4830d2f34e9f5235856ccea42fb400e6b7ee091ff1abad0f45c0"
+)
+FROZEN_CONSTRUCTION_SUMMARY_SHA256 = (
+    "ddd6612485d91c16528760e0b2f75a5dd9f4baa3bff927006662b346c3e6e26a"
+)
 
 
 def _sha256(path: Path) -> str:
@@ -947,10 +953,56 @@ def _gate_attainability(config: dict[str, Any], mechanics_live_rows: int) -> dic
     }
 
 
+def _verify_frozen_smoke_if_present() -> dict[str, Any] | None:
+    manifest_path = EXP / "data" / "procedural" / "manifest.json"
+    summary_path = EXP / "runs" / "smoke" / "summary.json"
+    present = (manifest_path.exists(), summary_path.exists())
+    if present == (False, False):
+        return None
+    if present != (True, True):
+        raise RuntimeError("frozen construction is incomplete and may not be rebuilt")
+    if _sha256(manifest_path) != FROZEN_CONSTRUCTION_MANIFEST_SHA256:
+        raise RuntimeError("frozen construction manifest hash drift")
+    if _sha256(summary_path) != FROZEN_CONSTRUCTION_SUMMARY_SHA256:
+        raise RuntimeError("frozen construction summary hash drift")
+
+    manifest = json.loads(manifest_path.read_text())
+    summary = json.loads(summary_path.read_text())
+    if summary.get("manifest_sha256") != FROZEN_CONSTRUCTION_MANIFEST_SHA256:
+        raise RuntimeError("frozen summary no longer binds the construction manifest")
+    if (
+        manifest.get("model_loaded") is not False
+        or manifest.get("model_calls") != 0
+        or manifest.get("benchmarks_read") is not False
+        or summary.get("model_loaded") is not False
+        or summary.get("model_calls") != 0
+        or summary.get("benchmarks_read") is not False
+    ):
+        raise RuntimeError("frozen construction crossed a prohibited boundary")
+    if manifest.get("parent_lineage") != verify_parent_lineage(ROOT):
+        raise RuntimeError("frozen construction parent lineage drift")
+    paths = manifest.get("paths")
+    if not isinstance(paths, dict) or set(paths) != PARENT_CONSTRUCTION_KEYS:
+        raise RuntimeError("frozen construction file inventory changed")
+    for row in paths.values():
+        verified_manifest_file(ROOT, row)
+    required_zero = manifest.get("scientific_parent_freshness", {}).get(
+        "required_zero_intersections"
+    )
+    if not isinstance(required_zero, dict):
+        raise RuntimeError("frozen construction freshness receipt is absent")
+    _require_zero_freshness_intersections(required_zero)
+    return summary
+
+
 def smoke() -> dict[str, Any]:
     started = time.perf_counter()
     config = yaml.safe_load(CONFIG.read_text())
     _validate_config(config)
+    frozen = _verify_frozen_smoke_if_present()
+    if frozen is not None:
+        print(json.dumps(frozen, indent=2, sort_keys=True))
+        return frozen
     parent_lineage = verify_parent_lineage(ROOT)
     common = build_common_panel(config)
     prior_fingerprints, prior_receipt = prior_function_fingerprints(common)

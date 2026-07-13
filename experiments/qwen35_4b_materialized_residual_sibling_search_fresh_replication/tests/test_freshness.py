@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import copy
+import contextlib
 import importlib.util
+import io
 import sys
 import tempfile
 import unittest
@@ -139,6 +141,22 @@ class FreshnessTests(unittest.TestCase):
             malformed.write_text("{}\n\n")
             with self.assertRaisesRegex(RuntimeError, "blank line"):
                 run._strict_jsonl(malformed)
+
+    def test_frozen_smoke_is_verified_without_rewrite(self) -> None:
+        manifest = run.EXP / "data" / "procedural" / "manifest.json"
+        summary = run.EXP / "runs" / "smoke" / "summary.json"
+        before = (manifest.read_bytes(), summary.read_bytes())
+        with contextlib.redirect_stdout(io.StringIO()):
+            verified = run.smoke()
+        after = (manifest.read_bytes(), summary.read_bytes())
+        self.assertEqual(before, after)
+        self.assertEqual(
+            verified["manifest_sha256"],
+            run.FROZEN_CONSTRUCTION_MANIFEST_SHA256,
+        )
+        self.assertEqual(
+            run._sha256(summary), run.FROZEN_CONSTRUCTION_SUMMARY_SHA256
+        )
 
 
 if __name__ == "__main__":

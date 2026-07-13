@@ -1,0 +1,918 @@
+{
+  "benchmarks_read": false,
+  "construction": {
+    "common_panel_sha256": "a588e583bd38e636a006aa9c9bfd84ba666a68991219bbc089396a8f1ac61b82",
+    "eligible_function_fingerprints": 3526,
+    "excluded_prior_fingerprints": 0,
+    "fingerprint_program_pairs_scanned": 269,
+    "fingerprints_scanned": 265,
+    "required_strata": {
+      "double": 88,
+      "quad": 44,
+      "single": 88,
+      "triple": 44
+    },
+    "selected_unique_suffixes": 264,
+    "selected_unique_triples": 264,
+    "shallow_function_fingerprints": 354,
+    "split_rows": {
+      "confirmation": 192,
+      "mechanics": 24,
+      "qualification": 48
+    }
+  },
+  "design_lock_file_sha256": {
+    "README.md": "6283186e372ed5157e18a3b2cd365a9a756d6e683edaa533269bdcf10200c67e",
+    "configs/default.yaml": "c7fe8f8a093a892252b960497d0061fc87e30617c88fca29b6e66449ce46d4f5",
+    "reports/design_review.md": "850b948cce2d1ee8571a040093e7ae2438c53db2de0e0df31b229e0ac4953a52",
+    "reports/preregistration.md": "c21de3dbe91b90dd7e21f56a3ac52784c2742154177e500c9098e65558289778",
+    "scripts/run.py": "33a398670cf6e4a8e3e2f65bcd635f180e4b5d1cfb9b4c6550f91067a82026bd",
+    "src/identity.py": "941e7320fd240a719dec2cddce55c5c5d490d1a48a023ee2bb9dd250b9f265d0",
+    "src/plans.py": "c92ea7c083c3694f2313a60d212d6f69c9c2d5229f585162970153b8d55d4af2",
+    "src/protocol.py": "cec3e9401065bf126ee45fdf28afb97d3894adfd3ef9a5bbd3080bc5e6904325",
+    "src/stats.py": "625ad72728c9d483fcb33550dcfaf173544485c10bef0bff1d186453e48bdf10",
+    "src/task_data.py": "e8b534acb1e91bb6cb7a684e32de1b6dace0558039d63ea88a4f4756f87c4013",
+    "src/vllm_runner.py": "3df0981df9a446ac314d26e5a0ec9c3eb523162fa42c02f2efef2ca75e4ab85f",
+    "tests/test_freshness.py": "6d802d23cbe583e14bd3d10f6de696ec71edad0922032e5096fefcf1e6a949f0",
+    "tests/test_identity.py": "14007894d32930f911579ce29ba10335f72c200aafaeab7e0d60a435abc5dcc7",
+    "tests/test_plans_stats.py": "eb91955b64de2720a13db0f2f38bb0176e28babfcb346b33945af29a2d1d386e",
+    "tests/test_protocol.py": "4085a87610cc86234b843a69e1a8ba260f846f03f3617ce526684a1898b223f7",
+    "tests/test_scaffold.py": "00a4db189e48c14fa458b167251d3f99a98a526e6a4f0478259ef7427915f28e",
+    "tests/test_task_data.py": "73af68a6e17b62a50aa81b66529e0110a246e15cf4580a373803be6c96b43709",
+    "tests/test_vllm_runner.py": "5ad9c8e4571c965407a04c1b890d631ca389da5826cec80605c4dbe22dc43c98"
+  },
+  "deterministic_rebuild_sha256": "ac9833a5280491ea50e20f507ab95458a426583563f802c889fde2da2ba4c85e",
+  "gate_attainability": {
+    "confirmation_gain_tasks_min": 20,
+    "materialized_any_live_tasks_min": 9,
+    "mechanics_live_rows": 52,
+    "qualification_coverage_min": 12,
+    "qualification_gain_tasks_min": 3,
+    "qualification_selected_min": 10,
+    "random_recall_at_4_expectation": 0.16666666666666666,
+    "suffix_cap_contacts_max": 2,
+    "suffix_parse_successes_min": 47
+  },
+  "independent_live_audit_tasks": 34,
+  "live_operation_support": {
+    "abs_all": 21,
+    "add_k(-1)": 23,
+    "add_k(-2)": 20,
+    "add_k(-3)": 29,
+    "add_k(1)": 30,
+    "add_k(2)": 29,
+    "add_k(3)": 33,
+    "adjacent_diff": 26,
+    "mul_k(-2)": 28,
+    "mul_k(2)": 36,
+    "mul_k(3)": 24,
+    "negate": 25,
+    "reverse": 19,
+    "rotate_k(1)": 31,
+    "rotate_k(2)": 32,
+    "rotate_k(3)": 29,
+    "running_sum": 20,
+    "sort_asc": 21,
+    "sort_desc": 23,
+    "square": 17,
+    "take_k(1)": 6,
+    "take_k(2)": 13,
+    "take_k(3)": 16,
+    "take_k(4)": 21
+  },
+  "model_calls": 0,
+  "model_loaded": false,
+  "parent_lineage": {
+    "attempt_1_incident": {
+      "path": "experiments/qwen35_4b_materialized_residual_sibling_search/runs/mechanics/preflight_attempt_1_incident.json",
+      "sha256": "424fadd111d81b253dfbd79c8cbbec0f9b541eb1dd2437e97f880d3c01a6e5ce"
+    },
+    "attempt_1_live_preflight": {
+      "path": "experiments/qwen35_4b_materialized_residual_sibling_search/runs/mechanics/raw/live_preflight.json",
+      "sha256": "a438ecf190e4006e8f19368f907d37595a05d543ca8158c33d27333c816f14b5"
+    },
+    "attempt_2_adversarial_review": {
+      "path": "experiments/qwen35_4b_materialized_residual_sibling_search/reports/mechanics_attempt_2_adversarial_review.md",
+      "sha256": "1227e67749b7e2314d7ce2f93fe85feb3ee2c79208b124776466d89d7fc1d9eb"
+    },
+    "attempt_2_incident": {
+      "path": "experiments/qwen35_4b_materialized_residual_sibling_search/runs/mechanics/mechanics_attempt_2_incident.json",
+      "sha256": "48ae3f49addc43b435fd5c2b121d57b9498223488a5251999910f56c50e9d4d2"
+    },
+    "attempt_2_incident_report": {
+      "path": "experiments/qwen35_4b_materialized_residual_sibling_search/reports/mechanics_termination_incident.md",
+      "sha256": "df3b42a4aae4e0f437acf4fca8164c716770fa312a6f59a831af79796085f478"
+    },
+    "attempt_2_live_preflight": {
+      "path": "experiments/qwen35_4b_materialized_residual_sibling_search/runs/mechanics/raw_v2/live_preflight.json",
+      "sha256": "16961d80437835fdfdcad0fa78d482a847c00a243d25fa0a5d86062dc5fcea25"
+    },
+    "attempt_2_terminal_prepared_input": {
+      "path": "experiments/qwen35_4b_materialized_residual_sibling_search/runs/mechanics/prepared/suffix_materialized_requests.jsonl",
+      "sha256": "b33d66bc25124f0d7eebc6ded30fcbfa759f0ba76ada30968c3ac4cb43f32d76"
+    },
+    "attempt_2_terminal_started": {
+      "path": "experiments/qwen35_4b_materialized_residual_sibling_search/runs/mechanics/raw_v2/suffix_materialized.started.json",
+      "sha256": "f6aa447b1936fac397a353fc13183f008e31884b5006ed7fc50ac78deed3387a"
+    },
+    "construction_manifest": {
+      "path": "experiments/qwen35_4b_materialized_residual_sibling_search/data/procedural/manifest.json",
+      "sha256": "a566129343a4c09473005b355f2ea7aa35549efe101dc14dc8d73ab5a0323857"
+    },
+    "original_implementation_lock": {
+      "path": "experiments/qwen35_4b_materialized_residual_sibling_search/runs/mechanics/implementation_lock.json",
+      "sha256": "896c4cc64e157627eaf35a8a4365af766971644905fbde5c72e4d35ea72792e0"
+    },
+    "original_preoutcome": {
+      "path": "experiments/qwen35_4b_materialized_residual_sibling_search/runs/mechanics/prepared/preoutcome_receipt.json",
+      "sha256": "3de86e8b08bf37174cf687e4e7220ff802386c61652bafb6554cf1e772c89b88"
+    },
+    "v2_implementation_lock": {
+      "path": "experiments/qwen35_4b_materialized_residual_sibling_search/runs/mechanics/implementation_lock_v2.json",
+      "sha256": "953da4e9ba5b4d19f5d1b785d907b7d78379705af50ab124a0027b7ce79a1264"
+    },
+    "v2_preoutcome": {
+      "path": "experiments/qwen35_4b_materialized_residual_sibling_search/runs/mechanics/preoutcome_receipt_v2.json",
+      "sha256": "118546faaa5c18ada5ca57aeee047e90c0633ffd50bddfc4b6daf3b899270372"
+    }
+  },
+  "paths": {
+    "common_panel": {
+      "path": "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/data/procedural/common_panel.json",
+      "sha256": "df0b8389c1d0cd9bbae78d42615bd92fdc18b2ac25025cf01502202c10b6d3eb"
+    },
+    "confirmation_audit": {
+      "path": "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/data/procedural/confirmation_audit.jsonl",
+      "sha256": "fd1b62f8dbe322d1dc37b3b5efec01c610c10241581a2dab1665f9d1fec56f42"
+    },
+    "confirmation_gold": {
+      "path": "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/data/procedural/confirmation_gold.jsonl",
+      "sha256": "71d0613b6a3bb774bf82df6529b7f715d25ab3178b1627c96094035e82fc6b33"
+    },
+    "confirmation_public": {
+      "path": "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/data/procedural/confirmation_public.jsonl",
+      "sha256": "af54c99dcc3a0039fff26b767204c98283f7c2671a7327adff2ca72a168eaed5"
+    },
+    "mechanics_audit": {
+      "path": "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/data/procedural/mechanics_audit.jsonl",
+      "sha256": "d2bb61b54fba233ff236cf75734177d7dc0fc36de410c5151e2dcaa6b5525732"
+    },
+    "mechanics_gold": {
+      "path": "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/data/procedural/mechanics_gold.jsonl",
+      "sha256": "a627db70d1d190acd382b6abf3e7a595fab503d99e6c3cd39a495e6c7ca92740"
+    },
+    "mechanics_public": {
+      "path": "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/data/procedural/mechanics_public.jsonl",
+      "sha256": "8f4ed72908579195918b0dc4ecf0b22f5fa96dfdf771e17d46b5fd795e2e00cb"
+    },
+    "qualification_audit": {
+      "path": "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/data/procedural/qualification_audit.jsonl",
+      "sha256": "616957c78f53b1a72932a43f39e413f2248da68f10fd9f69a2078219e50419fe"
+    },
+    "qualification_gold": {
+      "path": "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/data/procedural/qualification_gold.jsonl",
+      "sha256": "93010b10cd9474a587e7d7c6782f172e404c58806c91f91afc42fc732521759a"
+    },
+    "qualification_public": {
+      "path": "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/data/procedural/qualification_public.jsonl",
+      "sha256": "68252c389fae3a547142046374472b29e7b8b512485e8d20fea89cbecbbacf88"
+    }
+  },
+  "power": {
+    "assumption": "shared treatment Bernoulli; independent comparator Bernoulli outcomes",
+    "bootstrap_resamples_per_trial": 1000,
+    "comparator_accuracy": 0.2,
+    "comparators": 4,
+    "compound_pass_rate": 0.952,
+    "compound_passes": 476,
+    "monte_carlo_standard_error": 0.009559916317625384,
+    "treatment_accuracy": 0.4,
+    "trials": 500
+  },
+  "prior_art": {
+    "benchmarks_read": false,
+    "compatible_depth_three_rows": 0,
+    "path_count": 72,
+    "paths_read": [
+      "experiments/qwen35_4b_answer_potential_trace_sft/data/procedural/calibration.jsonl",
+      "experiments/qwen35_4b_answer_potential_trace_sft/data/procedural/hard_eval.jsonl",
+      "experiments/qwen35_4b_answer_potential_trace_sft/data/procedural/held_family_eval.jsonl",
+      "experiments/qwen35_4b_answer_potential_trace_sft/data/procedural/iid_eval.jsonl",
+      "experiments/qwen35_4b_answer_potential_trace_sft/data/procedural/train.jsonl",
+      "experiments/qwen35_4b_balanced_core_answer_potential_sft/data/procedural/calibration.jsonl",
+      "experiments/qwen35_4b_balanced_core_answer_potential_sft/data/procedural/hard_eval.jsonl",
+      "experiments/qwen35_4b_balanced_core_answer_potential_sft/data/procedural/held_family_eval.jsonl",
+      "experiments/qwen35_4b_balanced_core_answer_potential_sft/data/procedural/iid_eval.jsonl",
+      "experiments/qwen35_4b_balanced_core_answer_potential_sft/data/procedural/rendering_eval.jsonl",
+      "experiments/qwen35_4b_balanced_core_answer_potential_sft/data/procedural/termination_pilot.jsonl",
+      "experiments/qwen35_4b_balanced_core_answer_potential_sft/data/procedural/train.jsonl",
+      "experiments/qwen35_4b_commit_slot_jacobian_value_transport/data/procedural/causal_confirmation.jsonl",
+      "experiments/qwen35_4b_commit_slot_jacobian_value_transport/data/procedural/seam_confirmation.jsonl",
+      "experiments/qwen35_4b_commit_slot_jacobian_value_transport/data/procedural/seam_selection.jsonl",
+      "experiments/qwen35_4b_commit_slot_jacobian_value_transport/data/procedural/value_fit.jsonl",
+      "experiments/qwen35_4b_commit_slot_semantic_power_replication/data/procedural/causal_confirmation.jsonl",
+      "experiments/qwen35_4b_commit_slot_semantic_power_replication/data/procedural/seam_confirmation.jsonl",
+      "experiments/qwen35_4b_commit_slot_semantic_power_replication/data/procedural/seam_selection.jsonl",
+      "experiments/qwen35_4b_commit_slot_semantic_power_replication/data/procedural/value_fit.jsonl",
+      "experiments/qwen35_4b_context_local_jacobian_clamp/data/procedural/band_selection.jsonl",
+      "experiments/qwen35_4b_context_local_jacobian_clamp/data/procedural/confirmation.jsonl",
+      "experiments/qwen35_4b_context_local_jacobian_clamp/data/procedural/lens_fit.jsonl",
+      "experiments/qwen35_4b_early_text_hypothesis_forking/data/procedural/branch_plans.jsonl",
+      "experiments/qwen35_4b_early_text_hypothesis_forking/data/procedural/confirmation_gold.jsonl",
+      "experiments/qwen35_4b_early_text_hypothesis_forking/data/procedural/confirmation_public.jsonl",
+      "experiments/qwen35_4b_early_text_hypothesis_forking/data/procedural/mechanics_public.jsonl",
+      "experiments/qwen35_4b_early_text_hypothesis_forking/data/procedural/qualification_gold.jsonl",
+      "experiments/qwen35_4b_early_text_hypothesis_forking/data/procedural/qualification_public.jsonl",
+      "experiments/qwen35_4b_forced_commit_jacobian_value_transport/data/procedural/causal_confirmation.jsonl",
+      "experiments/qwen35_4b_forced_commit_jacobian_value_transport/data/procedural/seam_confirmation.jsonl",
+      "experiments/qwen35_4b_forced_commit_jacobian_value_transport/data/procedural/seam_selection.jsonl",
+      "experiments/qwen35_4b_forced_commit_jacobian_value_transport/data/procedural/value_fit.jsonl",
+      "experiments/qwen35_4b_gauntlet_frontier/data/sft_oracle_inject.jsonl",
+      "experiments/qwen35_4b_gauntlet_frontier/data/sft_oracle_traces.jsonl",
+      "experiments/qwen35_4b_jacobian_counterfactual_branching/data/procedural/confirmation.jsonl",
+      "experiments/qwen35_4b_jacobian_counterfactual_branching/data/procedural/mechanics.jsonl",
+      "experiments/qwen35_4b_jacobian_counterfactual_branching/data/procedural/mechanics_public.jsonl",
+      "experiments/qwen35_4b_jacobian_counterfactual_branching/data/procedural/qualification.jsonl",
+      "experiments/qwen35_4b_jacobian_transport_control_replication/data/procedural/confirmation.jsonl",
+      "experiments/qwen35_4b_jacobian_transport_control_replication/data/procedural/control_calibration.jsonl",
+      "experiments/qwen35_4b_jacobian_value_transport/data/procedural/hard_eval.jsonl",
+      "experiments/qwen35_4b_jacobian_value_transport/data/procedural/held_register_eval.jsonl",
+      "experiments/qwen35_4b_jacobian_value_transport/data/procedural/held_string_eval.jsonl",
+      "experiments/qwen35_4b_jacobian_value_transport/data/procedural/iid_eval.jsonl",
+      "experiments/qwen35_4b_jacobian_value_transport/data/procedural/lens_fit.jsonl",
+      "experiments/qwen35_4b_jacobian_value_transport/data/procedural/positive_control.jsonl",
+      "experiments/qwen35_4b_jacobian_value_transport/data/procedural/value_calibration.jsonl",
+      "experiments/qwen35_4b_long_horizon_answer_potential_sft/data/procedural/calibration.jsonl",
+      "experiments/qwen35_4b_long_horizon_answer_potential_sft/data/procedural/hard_eval.jsonl",
+      "experiments/qwen35_4b_long_horizon_answer_potential_sft/data/procedural/held_family_eval.jsonl",
+      "experiments/qwen35_4b_long_horizon_answer_potential_sft/data/procedural/iid_eval.jsonl",
+      "experiments/qwen35_4b_long_horizon_answer_potential_sft/data/procedural/rendering_eval.jsonl",
+      "experiments/qwen35_4b_long_horizon_answer_potential_sft/data/procedural/termination_pilot.jsonl",
+      "experiments/qwen35_4b_long_horizon_answer_potential_sft/data/procedural/train.jsonl",
+      "experiments/qwen35_4b_native_thought_jacobian_value_transport/data/procedural/causal_confirmation.jsonl",
+      "experiments/qwen35_4b_native_thought_jacobian_value_transport/data/procedural/seam_calibration.jsonl",
+      "experiments/qwen35_4b_native_thought_jacobian_value_transport/data/procedural/value_fit.jsonl",
+      "experiments/qwen35_4b_native_thought_seam_budget_ladder/data/procedural/budget_selection.jsonl",
+      "experiments/qwen35_4b_native_thought_seam_budget_ladder/data/procedural/seam_confirmation.jsonl",
+      "experiments/qwen35_4b_partial_structure_search/data/calibration_oracle.jsonl",
+      "experiments/qwen35_4b_partial_structure_search/data/calibration_oracle_smoke.jsonl",
+      "experiments/qwen35_4b_partial_structure_search/data/development_oracle.jsonl",
+      "experiments/qwen35_4b_partial_structure_search/data/development_oracle_smoke.jsonl",
+      "experiments/qwen35_4b_partial_structure_search/data/primary_oracle.jsonl",
+      "experiments/qwen35_4b_partial_structure_search/data/primary_oracle_smoke.jsonl",
+      "experiments/qwen35_4b_semantic_anchor_coordinate_branching/data/procedural/confirmation.jsonl",
+      "experiments/qwen35_4b_semantic_anchor_coordinate_branching/data/procedural/mechanics.jsonl",
+      "experiments/qwen35_4b_semantic_anchor_coordinate_branching/data/procedural/mechanics_public.jsonl",
+      "experiments/qwen35_4b_semantic_anchor_coordinate_branching/data/procedural/qualification.jsonl",
+      "experiments/qwen35_4b_verifier_guided_self_improvement/data/oracle_sft.jsonl",
+      "experiments/qwen35_4b_verifier_guided_self_improvement/data/oracle_sft_heldout_records.jsonl"
+    ],
+    "scientific_parent": "qwen35_4b_materialized_residual_sibling_search",
+    "scientific_parent_exempted_from_function_rejection": true,
+    "unique_compatible_function_fingerprints": 0
+  },
+  "protocol": {
+    "strata": [
+      "double",
+      "quad",
+      "single",
+      "triple"
+    ],
+    "tasks": [
+      {
+        "derangement": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          0,
+          1
+        ],
+        "live_count": 3,
+        "selected_candidate_id": "cpu-0",
+        "stratum": "triple",
+        "task_id": "materialized-residual-fresh-replication-v1/mechanics/00000"
+      },
+      {
+        "derangement": [
+          4,
+          5,
+          6,
+          7,
+          0,
+          1,
+          2,
+          3
+        ],
+        "live_count": 2,
+        "selected_candidate_id": "cpu-1",
+        "stratum": "double",
+        "task_id": "materialized-residual-fresh-replication-v1/mechanics/00002"
+      },
+      {
+        "derangement": [
+          4,
+          5,
+          6,
+          7,
+          0,
+          1,
+          2,
+          3
+        ],
+        "live_count": 1,
+        "selected_candidate_id": "cpu-0",
+        "stratum": "single",
+        "task_id": "materialized-residual-fresh-replication-v1/mechanics/00003"
+      },
+      {
+        "derangement": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          0
+        ],
+        "live_count": 4,
+        "selected_candidate_id": "cpu-0",
+        "stratum": "quad",
+        "task_id": "materialized-residual-fresh-replication-v1/mechanics/00010"
+      }
+    ]
+  },
+  "resource": {
+    "all24": {
+      "logical_model_tokens": 16543,
+      "sampled_tokens": 1006
+    },
+    "direct_match": {
+      "direct_pool_rows": 128,
+      "logical": {
+        "first_over_cost": 17910,
+        "first_over_k": 13,
+        "metric": "logical_model_tokens",
+        "pool_exhausted": false,
+        "target": 16543,
+        "under_cost": 16534,
+        "under_k": 12
+      },
+      "resource_plan_sha256": "a433b05648ff8581de7551c6a7c7eab7fa83949ab1a971c476197594d718fe2e",
+      "sampled": {
+        "first_over_cost": 1086,
+        "first_over_k": 13,
+        "metric": "sampled_tokens",
+        "pool_exhausted": false,
+        "target": 1006,
+        "under_cost": 1002,
+        "under_k": 12
+      },
+      "task_id": "synthetic",
+      "treatment": {
+        "logical_model_tokens": 16543,
+        "sampled_tokens": 1006
+      }
+    },
+    "top4": {
+      "logical_model_tokens": 11162,
+      "sampled_tokens": 190
+    }
+  },
+  "schema_version": 1,
+  "scientific_parent_freshness": {
+    "authenticated_parent_inputs": {
+      "construction_files": {
+        "common_panel": {
+          "path": "experiments/qwen35_4b_materialized_residual_sibling_search/data/procedural/common_panel.json",
+          "sha256": "1110783a04f792e6f4f6a530094a2f324744b1c9e14752972f3a38010c70cf96"
+        },
+        "confirmation_audit": {
+          "path": "experiments/qwen35_4b_materialized_residual_sibling_search/data/procedural/confirmation_audit.jsonl",
+          "sha256": "add7ec609e4231ff870d041ceda486af3596db4ae4d82fedfb6c98ecdd946083"
+        },
+        "confirmation_gold": {
+          "path": "experiments/qwen35_4b_materialized_residual_sibling_search/data/procedural/confirmation_gold.jsonl",
+          "sha256": "48392e214353375cafd8893f67add1bf954c7ec18eaa1ef59cefc2baf8fc0ba7"
+        },
+        "confirmation_public": {
+          "path": "experiments/qwen35_4b_materialized_residual_sibling_search/data/procedural/confirmation_public.jsonl",
+          "sha256": "d19b38b02276b6f5df4278e604bf481278791e7406ef0fc71ffc6386022969c4"
+        },
+        "mechanics_audit": {
+          "path": "experiments/qwen35_4b_materialized_residual_sibling_search/data/procedural/mechanics_audit.jsonl",
+          "sha256": "123238206292b48249d84b96574aca2a0b46d3f906ecc11b4d0ef7c6b3b59f74"
+        },
+        "mechanics_gold": {
+          "path": "experiments/qwen35_4b_materialized_residual_sibling_search/data/procedural/mechanics_gold.jsonl",
+          "sha256": "0e3d45741872dc034a0ae20f3caccc3e0937e7cdbe3947de1cecec7648b981e7"
+        },
+        "mechanics_public": {
+          "path": "experiments/qwen35_4b_materialized_residual_sibling_search/data/procedural/mechanics_public.jsonl",
+          "sha256": "6ead11baaa95572ca08874e552b26c7ceb14ac176e20782be9996160d5506521"
+        },
+        "qualification_audit": {
+          "path": "experiments/qwen35_4b_materialized_residual_sibling_search/data/procedural/qualification_audit.jsonl",
+          "sha256": "bbfe820200c18d9580fa55a9fe885c9e32fe879b4713b8bd36b6ace4d67c7788"
+        },
+        "qualification_gold": {
+          "path": "experiments/qwen35_4b_materialized_residual_sibling_search/data/procedural/qualification_gold.jsonl",
+          "sha256": "65fe049c387e3c42a13d8992234537a7fc8ce437d2676a2952f19c4035417ee9"
+        },
+        "qualification_public": {
+          "path": "experiments/qwen35_4b_materialized_residual_sibling_search/data/procedural/qualification_public.jsonl",
+          "sha256": "a337bb9e6a892a3d422d80cd8d69dfdbd2abd9ed602ce5c3a5b66bebda55382d"
+        }
+      },
+      "prepared_files": {
+        "direct_requests.jsonl": {
+          "path": "experiments/qwen35_4b_materialized_residual_sibling_search/runs/mechanics/prepared/direct_requests.jsonl",
+          "rows": 24,
+          "sha256": "a794fd32fe9ace9aa99d105a542c06cece4b1215dd1b4442ad83d5ea2c05dd98"
+        },
+        "listwise_requests.jsonl": {
+          "path": "experiments/qwen35_4b_materialized_residual_sibling_search/runs/mechanics/prepared/listwise_requests.jsonl",
+          "rows": 24,
+          "sha256": "12d4955fee9e6a15dcf5500c13b563ecd97bef9e1ba5e4d33b9b9f14ddf54797"
+        },
+        "random_scores.jsonl": {
+          "path": "experiments/qwen35_4b_materialized_residual_sibling_search/runs/mechanics/prepared/random_scores.jsonl",
+          "rows": 576,
+          "sha256": "a3182b84921ba8f1be14aa40db9b5d7311ace1a7385bb77601e468e935430152"
+        },
+        "suffix_echo_requests.jsonl": {
+          "path": "experiments/qwen35_4b_materialized_residual_sibling_search/runs/mechanics/prepared/suffix_echo_requests.jsonl",
+          "rows": 52,
+          "sha256": "08a10b72eb4d2a4e2a9dafb6e3918da3c71c0111d93168f608adc3818bbd3d9a"
+        },
+        "suffix_materialized_requests.jsonl": {
+          "path": "experiments/qwen35_4b_materialized_residual_sibling_search/runs/mechanics/prepared/suffix_materialized_requests.jsonl",
+          "rows": 52,
+          "sha256": "b33d66bc25124f0d7eebc6ded30fcbfa759f0ba76ada30968c3ac4cb43f32d76"
+        },
+        "suffix_name_only_requests.jsonl": {
+          "path": "experiments/qwen35_4b_materialized_residual_sibling_search/runs/mechanics/prepared/suffix_name_only_requests.jsonl",
+          "rows": 52,
+          "sha256": "08d9a6bbb1da98426ae9e532c22985183bd190a71e7962e00192d5e5940ecd44"
+        },
+        "suffix_shuffled_requests.jsonl": {
+          "path": "experiments/qwen35_4b_materialized_residual_sibling_search/runs/mechanics/prepared/suffix_shuffled_requests.jsonl",
+          "rows": 52,
+          "sha256": "085182b0cc9e3472abd28fa87d24d021771efb2356bc2e96d3c95edee54664a1"
+        },
+        "surface_folds.json": {
+          "path": "experiments/qwen35_4b_materialized_residual_sibling_search/runs/mechanics/prepared/surface_folds.json",
+          "rows": 24,
+          "sha256": "6b485308b1652df86e5b3fde998c361fa63806a64e0da1c26c038a05447d7d60"
+        },
+        "surface_scores.jsonl": {
+          "path": "experiments/qwen35_4b_materialized_residual_sibling_search/runs/mechanics/prepared/surface_scores.jsonl",
+          "rows": 576,
+          "sha256": "d339119480ad64c6ff143c3fbeb7a8cbb70e4d5d1093bd43674454059a24441a"
+        },
+        "viability_materialized_requests.jsonl": {
+          "path": "experiments/qwen35_4b_materialized_residual_sibling_search/runs/mechanics/prepared/viability_materialized_requests.jsonl",
+          "rows": 576,
+          "sha256": "f1f8948cf9cccf514a22b8106e85c0e8b453ddaa35bbd003160a8ccaf3ba2b8c"
+        },
+        "viability_name_only_requests.jsonl": {
+          "path": "experiments/qwen35_4b_materialized_residual_sibling_search/runs/mechanics/prepared/viability_name_only_requests.jsonl",
+          "rows": 576,
+          "sha256": "c0a426afd5e76a024ce0e9c55ad252d9d3b412dd2edf641c434064e14d37780f"
+        },
+        "viability_shuffled_requests.jsonl": {
+          "path": "experiments/qwen35_4b_materialized_residual_sibling_search/runs/mechanics/prepared/viability_shuffled_requests.jsonl",
+          "rows": 576,
+          "sha256": "49a95232fad4b3c36d3b203b405b92112eb6700d02184562382ca13e7bf73e33"
+        }
+      }
+    },
+    "benchmarks_read": false,
+    "descriptive_finite_dsl_reuse": {
+      "parent_functions_invalid_on_fresh_panel": 0,
+      "parent_functions_re_evaluated_on_fresh_panel": 264,
+      "rejection_policy": "reported_not_rejected",
+      "shared_behavior_functions": 56,
+      "shared_concrete_triples": 41,
+      "shared_two_operation_suffixes": 181
+    },
+    "fresh_counts": {
+      "mechanics_prompt_payloads_by_request_file": {
+        "direct_requests.jsonl": 24,
+        "listwise_requests.jsonl": 24,
+        "suffix_echo_requests.jsonl": 52,
+        "suffix_materialized_requests.jsonl": 576,
+        "suffix_name_only_requests.jsonl": 576,
+        "suffix_shuffled_requests.jsonl": 576,
+        "viability_materialized_requests.jsonl": 576,
+        "viability_name_only_requests.jsonl": 576,
+        "viability_shuffled_requests.jsonl": 576
+      },
+      "public_instance_payloads": 264,
+      "tasks": 264
+    },
+    "fresh_seed_block": [
+      2026072700,
+      2026072701,
+      2026072702,
+      2026072703,
+      2026072704,
+      2026072705,
+      2026072706,
+      2026072707,
+      2026072708,
+      2026072709
+    ],
+    "parent_seed_block": [
+      2026072600,
+      2026072601,
+      2026072602,
+      2026072603,
+      2026072604,
+      2026072605,
+      2026072606,
+      2026072607,
+      2026072608,
+      2026072609
+    ],
+    "prompt_overlap": {
+      "all_parent_vs_all_fresh": 0,
+      "by_same_request_file": {
+        "direct_requests.jsonl": 0,
+        "listwise_requests.jsonl": 0,
+        "suffix_echo_requests.jsonl": 0,
+        "suffix_materialized_requests.jsonl": 0,
+        "suffix_name_only_requests.jsonl": 0,
+        "suffix_shuffled_requests.jsonl": 0,
+        "viability_materialized_requests.jsonl": 0,
+        "viability_name_only_requests.jsonl": 0,
+        "viability_shuffled_requests.jsonl": 0
+      },
+      "terminal_suffix_materialized": 0
+    },
+    "request_namespace_reserved": "materialized-residual-fresh-replication-v1",
+    "required_zero_intersections": {
+      "model_facing_mechanics_prompts": 0,
+      "public_instance_payloads": 0,
+      "task_ids": 0,
+      "terminal_suffix_materialized_prompts": 0
+    },
+    "schema_version": 1,
+    "scientific_parent": "qwen35_4b_materialized_residual_sibling_search",
+    "task_namespace": "materialized-residual-fresh-replication-v1"
+  },
+  "split_sha256": "ac9833a5280491ea50e20f507ab95458a426583563f802c889fde2da2ba4c85e",
+  "tokenizer": {
+    "alias_token_ids": {
+      "A": {
+        "leading_space": [
+          357
+        ],
+        "plain": [
+          32
+        ]
+      },
+      "B": {
+        "leading_space": [
+          417
+        ],
+        "plain": [
+          33
+        ]
+      },
+      "C": {
+        "leading_space": [
+          351
+        ],
+        "plain": [
+          34
+        ]
+      },
+      "D": {
+        "leading_space": [
+          414
+        ],
+        "plain": [
+          35
+        ]
+      },
+      "E": {
+        "leading_space": [
+          458
+        ],
+        "plain": [
+          36
+        ]
+      },
+      "F": {
+        "leading_space": [
+          426
+        ],
+        "plain": [
+          37
+        ]
+      },
+      "G": {
+        "leading_space": [
+          469
+        ],
+        "plain": [
+          38
+        ]
+      },
+      "H": {
+        "leading_space": [
+          462
+        ],
+        "plain": [
+          39
+        ]
+      },
+      "I": {
+        "leading_space": [
+          353
+        ],
+        "plain": [
+          40
+        ]
+      },
+      "J": {
+        "leading_space": [
+          604
+        ],
+        "plain": [
+          41
+        ]
+      },
+      "K": {
+        "leading_space": [
+          710
+        ],
+        "plain": [
+          42
+        ]
+      },
+      "L": {
+        "leading_space": [
+          436
+        ],
+        "plain": [
+          43
+        ]
+      },
+      "M": {
+        "leading_space": [
+          380
+        ],
+        "plain": [
+          44
+        ]
+      },
+      "N": {
+        "leading_space": [
+          443
+        ],
+        "plain": [
+          45
+        ]
+      },
+      "O": {
+        "leading_space": [
+          496
+        ],
+        "plain": [
+          46
+        ]
+      },
+      "P": {
+        "leading_space": [
+          387
+        ],
+        "plain": [
+          47
+        ]
+      },
+      "Q": {
+        "leading_space": [
+          1167
+        ],
+        "plain": [
+          48
+        ]
+      },
+      "R": {
+        "leading_space": [
+          423
+        ],
+        "plain": [
+          49
+        ]
+      },
+      "S": {
+        "leading_space": [
+          326
+        ],
+        "plain": [
+          50
+        ]
+      },
+      "T": {
+        "leading_space": [
+          345
+        ],
+        "plain": [
+          51
+        ]
+      },
+      "U": {
+        "leading_space": [
+          533
+        ],
+        "plain": [
+          52
+        ]
+      },
+      "V": {
+        "leading_space": [
+          629
+        ],
+        "plain": [
+          53
+        ]
+      },
+      "W": {
+        "leading_space": [
+          457
+        ],
+        "plain": [
+          54
+        ]
+      },
+      "X": {
+        "leading_space": [
+          1543
+        ],
+        "plain": [
+          55
+        ]
+      }
+    },
+    "conditions": {
+      "direct": {
+        "context_slack_min": 2331,
+        "enable_thinking": true,
+        "max_prompt_plus_reserve": 1765,
+        "prompt_count": 264,
+        "prompt_token_ids_sha256": "14bab6cb2f514d6a350819870b62296a930c00200be098c5a0618a55744b595c",
+        "prompt_tokens_max": 643,
+        "prompt_tokens_min": 395,
+        "rendered_prompt_text_sha256": "114fa384b3d49065654070e349c7b4a256d0d3c950a36b610437580fe1d5aa47",
+        "reserve_tokens": 1122,
+        "user_prompt_text_sha256": "aca6913edf075bf60f8db1b61d20acb0885874a3aac3e8c5bc231489129e85a3"
+      },
+      "listwise": {
+        "context_slack_min": 3470,
+        "enable_thinking": false,
+        "max_prompt_plus_reserve": 626,
+        "prompt_count": 264,
+        "prompt_token_ids_sha256": "a704cfab5a2042115a85f93e073c5cedfd274f4961145273b75e36bbd86bbb45",
+        "prompt_tokens_max": 625,
+        "prompt_tokens_min": 377,
+        "rendered_prompt_text_sha256": "4c21590d674a0e3ec41fb11cdae3873d5955715acecb85dfab4f912023984916",
+        "reserve_tokens": 1,
+        "user_prompt_text_sha256": "7231588c1607f16d5be701f541954415c0407117a8d80ac4e7f9c6f5d0732b29"
+      },
+      "suffix_echo_mechanics_live": {
+        "context_slack_min": 3255,
+        "enable_thinking": true,
+        "max_prompt_plus_reserve": 841,
+        "prompt_count": 52,
+        "prompt_token_ids_sha256": "7b21461b43bad01c41bf3b3200fbd2ea998370daf30f44bb8fa46438206ca599",
+        "prompt_tokens_max": 263,
+        "prompt_tokens_min": 259,
+        "rendered_prompt_text_sha256": "685dfff445f0ab579e6626bf8e8ed7be442878f50744550f547ae4b96f7535d2",
+        "reserve_tokens": 578,
+        "user_prompt_text_sha256": "429ecfaaa836dab4a4ee807be0d143ac7dfe3b2fd72961c08c5556e225c977c8"
+      },
+      "suffix_materialized": {
+        "context_slack_min": 2631,
+        "enable_thinking": true,
+        "max_prompt_plus_reserve": 1465,
+        "prompt_count": 6336,
+        "prompt_token_ids_sha256": "f3f9f0f71cb46db95581afed90af1241a3c63ebcf5877b5924e6326be7212714",
+        "prompt_tokens_max": 887,
+        "prompt_tokens_min": 443,
+        "rendered_prompt_text_sha256": "fe9e415d67f7ea5c6056a0e2a43de582b5d2197764fafef142072385c48ba4e6",
+        "reserve_tokens": 578,
+        "user_prompt_text_sha256": "1b12342e795a8eae874cc598fe1d0f8f09e1a9a8a299ce0c21df9b5b833f079b"
+      },
+      "suffix_name_only": {
+        "context_slack_min": 2861,
+        "enable_thinking": true,
+        "max_prompt_plus_reserve": 1235,
+        "prompt_count": 6336,
+        "prompt_token_ids_sha256": "ac3ca8009611a822266d052402710fb3edd4cf11f1203c3a973adceaadab7a96",
+        "prompt_tokens_max": 657,
+        "prompt_tokens_min": 405,
+        "rendered_prompt_text_sha256": "38d1ad3963e470e6f9fa0253cc0b38e63f70d9c74ae33b4bdc39e789364594b4",
+        "reserve_tokens": 578,
+        "user_prompt_text_sha256": "75caa5e8ac9e91dd5349d50591e5dde86d6e865ba7dcb5d5a7372279e71d3f49"
+      },
+      "suffix_shuffled": {
+        "context_slack_min": 2631,
+        "enable_thinking": true,
+        "max_prompt_plus_reserve": 1465,
+        "prompt_count": 6336,
+        "prompt_token_ids_sha256": "905dbd9ceac3f118fd4a02c24d12c12ab7767c2544a0aa59ed9273f32303719f",
+        "prompt_tokens_max": 887,
+        "prompt_tokens_min": 443,
+        "rendered_prompt_text_sha256": "cfb2bcaf399e0297a19294f055de9ca3ba211662ad927a087c5ee685b9916bca",
+        "reserve_tokens": 578,
+        "user_prompt_text_sha256": "338c1c27868365beba9be698badb98b538582c3de8d1d5dfe76e462d995ef0e9"
+      },
+      "viability_materialized": {
+        "context_slack_min": 3227,
+        "enable_thinking": false,
+        "max_prompt_plus_reserve": 869,
+        "prompt_count": 6336,
+        "prompt_token_ids_sha256": "a7fda9e94b0b2c7a816b5cf77de3322708ff298108b0931dbd05d9c0e066fe1a",
+        "prompt_tokens_max": 868,
+        "prompt_tokens_min": 424,
+        "rendered_prompt_text_sha256": "2bae4e1fb1353e8585dfc2e779ed1bd163ae022ae4fa64742b043ad80486d64f",
+        "reserve_tokens": 1,
+        "user_prompt_text_sha256": "36c7d81ce8b5848034c7455dc607c5c5210134104d952b46674f24cdc4d84a21"
+      },
+      "viability_name_only": {
+        "context_slack_min": 3455,
+        "enable_thinking": false,
+        "max_prompt_plus_reserve": 641,
+        "prompt_count": 6336,
+        "prompt_token_ids_sha256": "a93c6031a03b8aeafab6c832b46c500b0f415321bbc989adc625b3f4dae299ea",
+        "prompt_tokens_max": 640,
+        "prompt_tokens_min": 388,
+        "rendered_prompt_text_sha256": "cf8666a9e118541e781e48adc7e4634310d1ea62292ebfbb9d41f7ba5a9b1220",
+        "reserve_tokens": 1,
+        "user_prompt_text_sha256": "ec28f6802c042f73ae4473d2241d70b063f740560f09cd39a6d214bd2a489c3e"
+      },
+      "viability_shuffled": {
+        "context_slack_min": 3227,
+        "enable_thinking": false,
+        "max_prompt_plus_reserve": 869,
+        "prompt_count": 6336,
+        "prompt_token_ids_sha256": "7afb97155d3aad4c8823734a59d879ad22f6c6df9c13a5da68bee5492f40d1ed",
+        "prompt_tokens_max": 868,
+        "prompt_tokens_min": 424,
+        "rendered_prompt_text_sha256": "7ece60521b0e0d9f7500a70dbc1f35f0bc15d1bed2c8f74723faf6f14053a0ad",
+        "reserve_tokens": 1,
+        "user_prompt_text_sha256": "1f5cec4acdf07bcace3fd4090bbb114ba5052d441f255743d14319f7f966a63f"
+      }
+    },
+    "forced_close_token_ids": [
+      248069,
+      271
+    ],
+    "model_loaded": false,
+    "no_thinking_prompt_suffix_ids": [
+      248045,
+      74455,
+      198,
+      248068,
+      271,
+      248069,
+      271
+    ],
+    "prompt_count": 38596,
+    "prompt_tokens_max": 887,
+    "prompt_tokens_min": 259,
+    "termination": {
+      "explicit_stop_token_ids": [
+        248044
+      ],
+      "hf_model_eos_token": "<|endoftext|>",
+      "hf_model_eos_token_id": 248044,
+      "ignore_eos": true,
+      "preserve_tokenizer_eos_during_trim": true,
+      "tokenizer_eos_token": "<|im_end|>",
+      "tokenizer_eos_token_id": 248046,
+      "trim_only_token_id": 248044
+    },
+    "think_close_token_ids": [
+      248069
+    ],
+    "think_open_token_ids": [
+      248068
+    ],
+    "thinking_prompt_suffix_ids": [
+      248045,
+      74455,
+      198,
+      248068,
+      198
+    ]
+  },
+  "total_tasks": 264,
+  "unique_common_function_fingerprints": 264
+}

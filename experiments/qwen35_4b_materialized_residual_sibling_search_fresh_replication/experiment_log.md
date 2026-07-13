@@ -25,9 +25,22 @@
 - 2026-07-13: Both follow-up reviewers returned `PASS` for model-free
   construction only after a cross-arm prompt-union defect and permissive prior
   scanner were fixed. Mechanics/model access remains sealed.
+- 2026-07-13: Published the review authorization, waited for green repository
+  and site CI, then ran the model-free construction. It passed with 264 tasks,
+  3,526 eligible behaviors, 0.952 registered-alternative compound power, zero
+  required parent intersections, 56/41/181 descriptive finite-DSL reuse, zero
+  benchmark reads, zero model loads, and zero model calls. Manifest SHA-256 is
+  `5d4fb6a000ac4830d2f34e9f5235856ccea42fb400e6b7ee091ff1abad0f45c0`.
+- 2026-07-13: All 44 experiment tests passed against the written construction,
+  including a no-rewrite verification of the frozen manifest and summary.
+- 2026-07-13: Added a publication receipt proving the construction manifest's
+  locked runner hash equals pushed commit `e43c701e`; later documentation and
+  no-rewrite guards are explicitly post-construction and did not rewrite data.
+- 2026-07-13: Independent scientific and identity audits passed every written
+  construction hash, row count, overlap, EOS, and no-model boundary. They
+  authorize mechanics implementation only, not model execution.
 
 ## Pending
 
-- Publish and run the model-free construction under the corrected identities.
 - Implement and independently audit durable generation transactions.
 - Publish code and a separate lock before any model call.

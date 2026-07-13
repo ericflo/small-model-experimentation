@@ -1,0 +1,36 @@
+{
+  "benchmarks_read": false,
+  "common_panel_sha256": "a588e583bd38e636a006aa9c9bfd84ba666a68991219bbc089396a8f1ac61b82",
+  "compound_power_at_design_alternative": 0.952,
+  "decision": "CPU_SMOKE_PASS",
+  "elapsed_seconds": 93.55360827594995,
+  "eligible_function_fingerprints": 3526,
+  "excluded_prior_fingerprints": 0,
+  "independent_live_audit_tasks": 34,
+  "manifest_sha256": "5d4fb6a000ac4830d2f34e9f5235856ccea42fb400e6b7ee091ff1abad0f45c0",
+  "model_calls": 0,
+  "model_loaded": false,
+  "parent_finite_dsl_reuse": {
+    "parent_functions_invalid_on_fresh_panel": 0,
+    "parent_functions_re_evaluated_on_fresh_panel": 264,
+    "rejection_policy": "reported_not_rejected",
+    "shared_behavior_functions": 56,
+    "shared_concrete_triples": 41,
+    "shared_two_operation_suffixes": 181
+  },
+  "parent_required_zero_intersections": {
+    "model_facing_mechanics_prompts": 0,
+    "public_instance_payloads": 0,
+    "task_ids": 0,
+    "terminal_suffix_materialized_prompts": 0
+  },
+  "passed": true,
+  "schema_version": 1,
+  "split_rows": {
+    "confirmation": 192,
+    "mechanics": 24,
+    "qualification": 48
+  },
+  "stage": "smoke",
+  "total_tasks": 264
+}

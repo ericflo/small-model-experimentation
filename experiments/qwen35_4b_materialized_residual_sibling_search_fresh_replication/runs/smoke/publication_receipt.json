@@ -1,0 +1,27 @@
+{
+  "benchmark_files_read": [],
+  "construction_commit": "e43c701e4573e053d72b2bb9c45ca3fc0175b479",
+  "construction_manifest_sha256": "5d4fb6a000ac4830d2f34e9f5235856ccea42fb400e6b7ee091ff1abad0f45c0",
+  "construction_summary_sha256": "ddd6612485d91c16528760e0b2f75a5dd9f4baa3bff927006662b346c3e6e26a",
+  "decision": "PUBLISH_FROZEN_MODEL_FREE_CONSTRUCTION",
+  "design_locked_runner_sha256": "33a398670cf6e4a8e3e2f65bcd635f180e4b5d1cfb9b4c6550f91067a82026bd",
+  "design_locked_readme_sha256": "6283186e372ed5157e18a3b2cd365a9a756d6e683edaa533269bdcf10200c67e",
+  "model_calls": 0,
+  "model_loaded": false,
+  "post_construction_changes": {
+    "allowed_scope": [
+      "result documentation",
+      "frozen-artifact no-rewrite verification",
+      "no-rewrite verification test"
+    ],
+    "construction_bytes_rewritten": false,
+    "readme_design_hash_is_execution_head_pre_result_status_prose": true,
+    "current_runner_sha256": "b0e92af022b7e686d95c70d20bd0c0a4d70e72602ae9e587da5b2ee55ffd7c90",
+    "current_test_freshness_sha256": "b2aaf4941bad983467e34383cc99348466b427ea017c79ac4bcec9cf53bba8da"
+  },
+  "schema_version": 1,
+  "source_commit_runner_sha256": "33a398670cf6e4a8e3e2f65bcd635f180e4b5d1cfb9b4c6550f91067a82026bd",
+  "source_commit_runner_sha256_matches_design_lock": true,
+  "source_commit_readme_sha256": "6283186e372ed5157e18a3b2cd365a9a756d6e683edaa533269bdcf10200c67e",
+  "source_commit_readme_sha256_matches_design_lock": true
+}

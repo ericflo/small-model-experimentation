@@ -47,7 +47,10 @@
   and the already frozen candidate-blind, shuffled, exhaustive, and sampled/
   logical-token-matched controls. That identity is now reserved as
   `qwen35_4b_materialized_residual_sibling_search_fresh_replication`; fresh
-  construction and adversarial review remain the next gates.
+  construction and two adversarial reviews passed with zero required parent
+  identity/prompt intersections and zero model calls. The next gate is the
+  crash-safe mechanics implementation, its independent audit, publication,
+  and separate lock.
 - Measure the exact behavioral quotient at fresh depth 6 before assuming model-guided pruning is economically
   needed; record wall time, memory, physical transitions, coverage, and selector success.
 - If a real search wall appears, test a residualized partial state (feasible parameter domains, materialized

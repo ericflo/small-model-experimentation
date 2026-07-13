@@ -69,27 +69,29 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "Fresh identity domains are reserved before model use",
+     "title": "Fresh construction fills every registered ambiguity stratum",
      "categories": [
-      "task seed domain",
-      "sampling seed domain",
-      "model requests"
+      "one live sibling",
+      "two live siblings",
+      "three live siblings",
+      "four live siblings"
      ],
      "series": [
       {
-       "label": "identity-only scaffold receipt",
+       "label": "fresh frozen tasks",
        "values": [
-        1,
-        1,
-        0
+        88,
+        88,
+        44,
+        44
        ]
       }
      ],
-     "x_label": "pre-run reservation",
-     "y_label": "count",
+     "x_label": "publicly enumerable first-operation residuals",
+     "y_label": "frozen tasks",
      "y_format": "integer",
-     "note": "Administrative/model-free scaffold only. The successor reserves new task and sampling namespaces while authorizing zero model requests; fresh construction and all scientific stages remain pending.",
-     "source": "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/runs/scaffold/summary.json"
+     "note": "Model-free construction only. Every 24-task block has exact 8/8/4/4 balance, all 264 task functions are unique within the successor, required parent task/public-payload/prompt intersections are zero, and no model was loaded or called.",
+     "source": "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/data/procedural/manifest.json"
     }
    ]
   },
