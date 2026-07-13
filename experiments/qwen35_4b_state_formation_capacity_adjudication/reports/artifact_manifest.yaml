@@ -19,8 +19,8 @@ external_artifacts:
   - name: "per-seed common loop-state initialization bundles"
     storage: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed{7411,7412,7413}.pt"
     required_for: "bit-identical reconstruction of every reached capacity/objective arm"
-    checksum: "not currently realized; the source-3baa bundles and receipts are preserved inside invalidated_setup/source_3baa7b532d62bae4d9751dfe4be9c6ce314c11ca4524266f4cebea63289d5c42/"
-    regenerate: "recreate all three bundles under source contract 1d1368cf064689322d9df7f345e67b026cecccc32d3a7b7514b82f253d434b0a before any model-bearing retry"
+    checksum: "bundle SHA256 by seed: 7411 64f6ac313ee46335c4e8869ac3333136b4fe1739c8c59954b81f971fb96a2971; 7412 ef662c4a3f184b5d18a88142362a9803b51627e2bb59b4d0180afb331f5820ae; 7413 29f35ec72113039aed8c278a9166c5a70e0c9c575b88d3c077d62dacc3ce8f9a; tracked receipt identities bbb21fef784beb1bf9dc50de27ff41624a85904c39191f2288e94cb7a8ad10ae, a5d1a3fdc574ac4968709c65c49b59e859b03ab4226d847dde40fdbdc98ce3f7, 42f9f66b848bcadd6e320db5421d2dfe39572793511b2b38151f6163a92e19e7"
+    regenerate: "preserve these exact final-source bundles; recreate only as part of an explicitly archived source-contract invalidation"
   - name: "fixed-final LoRA joint checkpoints"
     storage: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/lora_joint_seed{7411,7412,7413}/"
     required_for: "primary LoRA state-formation adjudication and intact/disabled reevaluation"
@@ -58,6 +58,9 @@ reproducibility:
     - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/invalidated_setup/source_903f19141ef982f0e90ea856edd72d75fb48d2dbd96e81dc166a6c32d4c14116/"
     - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/invalidated_setup/source_9fd420f5f29fea2d9144bf50d3b187fc8e50d9acc9cb076656372281029614fb/"
     - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/invalidated_setup/source_3baa7b532d62bae4d9751dfe4be9c6ce314c11ca4524266f4cebea63289d5c42/"
+    - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed7411.pt"
+    - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed7412.pt"
+    - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed7413.pt"
 notes: >-
   The frozen design receipt remains authoritative. Setup artifacts produced under source digests
   903f1914, 9fd420f5, and 3baa7b53 are invalid and preserved in separate content-hashed external
@@ -71,10 +74,12 @@ notes: >-
   created between those source changes. Adversarial recovery review then added resumable cleanup and
   no-follow canonical path checks; no setup was created during that source change either. The final
   regeneration source is
-  1d1368cf064689322d9df7f345e67b026cecccc32d3a7b7514b82f253d434b0a. No current CPU smoke, data
-  manifest, seal ledger, initialization bundle, or G0 receipt exists. Those setup artifacts must be
-  recreated under the final source before the seed-7411 control retry. No positive-control pass
-  or result artifact exists, and later stages remain prohibited.
+  1d1368cf064689322d9df7f345e67b026cecccc32d3a7b7514b82f253d434b0a. Current CPU smoke, data
+  manifest, empty seal ledger, and all three initialization bundles have been recreated under that
+  final source and strictly reopened. The manifest SHA256 is
+  85286a9549b0e74111eaa0c1254f04f68cad4d75159abc8ba59c169637280cd9 and the ledger identity is
+  b122d49054cd37474784a8b4ec3bcc0026e745321718dee799615e3051983c14. No current G0 receipt,
+  positive-control pass, or result artifact exists, and later stages remain prohibited.
   The first Qwen load stopped before wrapper construction or mechanics and is preserved by a tracked
   failure receipt; it opened
   only the permitted training validator, no sealed contrast, and produced no canonical G0 output.

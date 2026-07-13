@@ -1,0 +1,40 @@
+{
+  "benchmark_files_read": 0,
+  "config": {
+    "backend": "transformers",
+    "capacities": [
+      "lora",
+      "fullrank"
+    ],
+    "config_sha256": "eeb4e828526f750dce1258bcc91d03114c80688d300112e03d18c9d911489393",
+    "evidence_profile": "confirmatory",
+    "experiment_id": "qwen35_4b_state_formation_capacity_adjudication",
+    "model_id": "Qwen/Qwen3.5-4B",
+    "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "objectives": [
+      "joint",
+      "state_only"
+    ],
+    "schema_version": 1,
+    "source_contract_sha256": "1d1368cf064689322d9df7f345e67b026cecccc32d3a7b7514b82f253d434b0a",
+    "source_contract_version": 5,
+    "train_seeds": [
+      7411,
+      7412,
+      7413
+    ]
+  },
+  "generated_depths": [
+    2,
+    4,
+    8
+  ],
+  "generated_families": [
+    "phase_branch",
+    "checksum_branch",
+    "braided_branch"
+  ],
+  "gpu_model_loaded": false,
+  "scientific_evidence": false,
+  "status": "CPU_SMOKE_PASS"
+}

@@ -355,9 +355,36 @@
   contract for regeneration is
   `1d1368cf064689322d9df7f345e67b026cecccc32d3a7b7514b82f253d434b0a`.
 
+## 2026-07-13 — final-source setup regenerated
+
+- Recreated CPU smoke, all seven deterministic procedural splits, the contrast-access ledger, and
+  all three common-state bundles under final source contract
+  `1d1368cf064689322d9df7f345e67b026cecccc32d3a7b7514b82f253d434b0a`. The CPU receipt has SHA-256
+  `56032f75f8c3be863b43d1d6fc46a27199c8162961bfbe49b146d41e0ac7ad43`, records
+  `CPU_SMOKE_PASS`, zero benchmark reads, no model load, and no scientific evidence.
+- The manifest has SHA-256 `85286a9549b0e74111eaa0c1254f04f68cad4d75159abc8ba59c169637280cd9`
+  and data contract `891ad7848ba23429ed5c7d66f2d6f4f85e8cc6560044b56f51f218bff957e9c8`.
+  All seven compressed payload hashes reproduce the archived source-3baa data exactly. Validation
+  reopened all 15,072 non-contrast rows, found zero cross-split structural duplicates, and
+  decompressed zero sealed rows.
+- The contrast ledger has file SHA-256
+  `0c03a0d8e0b665415bf956856296a2750ce1fe7facd2335d6a711f96f5aac261`, identity
+  `b122d49054cd37474784a8b4ec3bcc0026e745321718dee799615e3051983c14`, and `events: []`.
+- Seeds 7411, 7412, and 7413 have bundle SHA-256 values
+  `64f6ac313ee46335c4e8869ac3333136b4fe1739c8c59954b81f971fb96a2971`,
+  `ef662c4a3f184b5d18a88142362a9803b51627e2bb59b4d0180afb331f5820ae`, and
+  `29f35ec72113039aed8c278a9166c5a70e0c9c575b88d3c077d62dacc3ce8f9a`; receipt identities are
+  `bbb21fef784beb1bf9dc50de27ff41624a85904c39191f2288e94cb7a8ad10ae`,
+  `a5d1a3fdc574ac4968709c65c49b59e859b03ab4226d847dde40fdbdc98ce3f7`, and
+  `42f9f66b848bcadd6e320db5421d2dfe39572793511b2b38151f6163a92e19e7`.
+  The canonical loader independently reopened each bundle, every tracked receipt is byte-identical
+  to its external sidecar, and the three tensor-value digests exactly match the archived source-3baa
+  bundles.
+- No model-bearing stage ran during regeneration. No result training is licensed, and the sealed
+  ledger remained unchanged throughout initialization validation.
+
 ## Current authorization
 
-Setup regeneration is authorized only under source contract
-`1d1368cf064689322d9df7f345e67b026cecccc32d3a7b7514b82f253d434b0a`, followed by seed-7411 G0 and
-the corrected LoRA positive control. No later-seed G0 or result training is authorized until that
+Seed-7411 LoRA G0 and, only after its canonical pass, the corrected LoRA positive control are
+authorized against the final setup. No later-seed G0 or result training is authorized until that
 control passes canonically.

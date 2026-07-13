@@ -1,6 +1,6 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · frozen design unchanged; corrected setup-control source is GO; source-`3baa7b53` setup archived; regeneration pending; no result run is authorized
+**Status:** in-progress · since 2026-07-13 · frozen design unchanged; corrected setup-control source is GO; final-source setup regenerated and reopened; seed-7411 G0 pending; no result run is authorized
 
 ## Current status
 
@@ -21,14 +21,16 @@ parameters, mode, or random streams. Any reached failure writes a canonical rece
 tracked mirror and still denies result training. The complete source-bound suite passes 171/171, and
 independent code and GPU/runtime audits both give `GO`.
 
-Every setup artifact tied to `3baa7b53…d5c42` is now preserved in a verified 20-file archive whose
-receipt identity is `1daa86e…e283aa`. Its seal ledger has zero events. The current setup paths are
-intentionally empty. A post-archive repository gate caught and closed one transport-only cleanup gap:
-the helper now durably removes source directories only when they are empty. No setup artifact was
-created under either intermediate post-archive source. Current setup must be recreated under final
-source `1d1368cf…434b0a` before seed-7411 G0 and the corrected control can run again. The earlier
-G0 pass and 0/48 control miss remain historical mechanics records only. No result payload has been
-opened, no result training has started, and no sealed contrast has been scored.
+Every setup artifact tied to `3baa7b53…d5c42` remains preserved in a verified 20-file archive whose
+receipt identity is `1daa86e…e283aa`. Fresh setup under final source `1d1368cf…434b0a` has now been
+created and strictly reopened: CPU smoke SHA-256 `56032f75…7ad43`, data-manifest SHA-256
+`85286a95…0cd9`, data contract `891ad784…e9c8`, and empty-ledger identity `b122d490…3c14`.
+All three source-bound initialization bundles pass the canonical loader, their tracked receipts are
+byte-identical to their external sidecars, and their tensor-value digests exactly reproduce the
+archived shared initialization. No sealed contrast row was decompressed, no model was loaded during
+regeneration, and the ledger still has zero events. Seed-7411 G0 and the corrected control are next.
+The earlier G0 pass and 0/48 control miss remain historical mechanics records only. No result
+training has started and no sealed contrast has been scored.
 
 ## Research program and prior anchors
 
