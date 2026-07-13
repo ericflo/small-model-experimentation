@@ -908,11 +908,6 @@
       "status": "in-progress",
       "since": "2026-07-12",
       "reason": "G0 mechanics pass; seed-7401 LoRA pilot not yet run — no training result exists."
-    },
-    "qwen35_4b_recovery_verifier_branch_tournament": {
-      "status": "in-progress",
-      "since": "2026-07-12",
-      "reason": "Visible-test tournament built and locked; live model run pending."
     }
   }
 }

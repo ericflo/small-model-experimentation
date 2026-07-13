@@ -1,6 +1,6 @@
 # Public-verifier recovery branch tournament
 
-**Status:** in-progress · since 2026-07-12 · Visible-test tournament built and locked; live model run pending.
+**Status:** finished
 
 ## Research Program
 
