@@ -445,3 +445,39 @@
 
 Seeds 7412 and 7413 LoRA G0 and their identical positive controls are now authorized. No result
 training is authorized until all three per-seed setup gates pass canonically.
+
+## 2026-07-13 — seed-7412 LoRA G0 stops on aggregation-scalar precision
+
+- Seed 7412 passed the pinned-snapshot load, zero-function and K=1 checks, K=4 call geometry, both
+  state-only optimizer probes, a finite live-joint forward/backward, and the registered joint dropout
+  schedule. It then stopped before joint clipping or stepping at the frozen all-groups reachability
+  gate. No canonical `runs/setup/g0_lora_seed7412.json` was created.
+- All 124 LoRA tensors, four initializer tensors, the step encoder, all eight sufficiency tensors,
+  and the damping scalar had finite nonzero gradients. The frozen base remained gradient-free.
+  `aggregate_logit.grad` existed and was finite but its norm was exactly zero, so the joint all-groups
+  gate correctly failed even though the state-only-oriented helper excludes that scalar from its
+  `all_required_tensors_finite_nonzero` summary.
+- Preserved the failure at
+  `runs/failures/g0_lora_seed7412_live_joint_gradient_reachability_failure.json`, identity
+  `ce3406f8fa788c08421687d5d6a0843a2eb7035fd254d5086123d895b2bb634c`. It binds the final-source
+  contract, design, data, model/revision/backend, seed-7412 initialization, reached and unreached
+  checks, train-only access, zero benchmark/sealed access, and denies every downstream authorization.
+  This is setup-mechanics evidence, not a LoRA or state-formation result.
+- Root-cause review found that the FP32 `aggregate_logit` is sigmoid-transformed and cast to BF16
+  before broadcasting through the registered last-state/mean-state convex mix. Two otherwise matched
+  seed-7411 G0 runs produced scalar gradients whose de-sigmoided magnitudes are exactly `2^-12` and
+  `2^-11`, while seed 7412 produced zero with an allocated gradient tensor. This is consistent with a
+  one-example BF16 projection/reduction quantization defect, not graph disconnection or underflow.
+- An unchanged retry is prohibited. The only reviewed repair keeps the existing BF16 mean arithmetic,
+  forms the scalar convex mix in FP32, and casts its completed result once back to model dtype. It
+  preserves K=1, parameters, initialization, row, masks, objective, schedule, thresholds, and both
+  capacity arms; the nonzero joint-scalar gate remains strict. Automatic G0 failure persistence must
+  also be added before retry.
+- Any repair changes the source digest. After repair tests and independent review pass, every current
+  source-`1d1368cf…434b0a` setup artifact must be archived, setup regenerated, and G0/control replayed
+  from seed 7411. Seed 7413 and all result-bearing stages remain prohibited.
+
+## Current authorization
+
+No model-bearing stage is authorized until the aggregation-precision and G0-failure-persistence
+repair is reviewed and the source-bound setup is regenerated. No result training is authorized.

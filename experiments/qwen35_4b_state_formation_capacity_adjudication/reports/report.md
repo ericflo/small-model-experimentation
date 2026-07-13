@@ -3,14 +3,20 @@
 ## Status
 
 **In progress; no scientific result exists.** Preregistration, adversarial design review,
-implementation review, and the frozen design are complete. The corrected setup-control source passes
+implementation review, and the frozen design are complete. The corrected setup-control source passed
 171/171 local tests and independent code and GPU/runtime review. Every setup artifact from source
 `3baa7b53…d5c42` is durably archived. CPU smoke, the data manifest, the empty sealed-access ledger,
 and all three shared initialization bundles have now been regenerated and strictly reopened under
 final source `1d1368cf…434b0a`. Seed-7411 LoRA G0 passes canonically at identity
-`928e756f…820c`, and its corrected positive control passes 48/48 at identity `8db4595e…2df7`. Seeds
-7412 and 7413 still require setup qualification. No training checkpoint, evaluation row, or terminal
-analysis from this directory should be cited as scientific evidence.
+`928e756f…820c`, and its corrected positive control passes 48/48 at identity `8db4595e…2df7`. Seed
+7412 then stopped fail-closed during its live-joint G0 probe: every adaptation and recurrent group
+except the registered aggregation scalar had finite nonzero gradients, while
+`aggregate_logit.grad` was present and finite with norm exactly zero. No canonical seed-7412 G0
+receipt was created. The exact failure is preserved at identity `ce3406f8…b634c` as mechanics
+evidence only. Seed 7413 and all result stages are blocked pending a narrow aggregation-precision
+repair, source-bound setup archival, complete regeneration, and replay from seed 7411. No training
+checkpoint, evaluation row, or terminal analysis from this directory should be cited as scientific
+evidence.
 
 Under the invalidated source, seed 7411 passed LoRA G0 and then scored 0/48 on the setup-only control.
 The control had omitted the globally frozen accumulation of 16, presenting only one singleton row per
@@ -19,8 +25,13 @@ but uses 16 loss-scaled singleton microbatches per update and records fixed diag
 is preserved as mechanics history only. The final-source setup has an empty contrast ledger and the
 same shared tensor values as the archived setup. Final-source seed-7411 G0 has now passed every
 registered mechanics gate. Its corrected control completes exactly 256 updates and 4,096
-presentations, scores 48/48 intact and 0/48 with adaptation disabled, and authorizes later-seed setup
-only. Every seed's setup gate must pass before any result-bearing arm is authorized.
+presentations, scores 48/48 intact and 0/48 with adaptation disabled, and authorized later-seed setup
+under that source. The current BF16 path casts the FP32 aggregation weight before its convex mix;
+matched seed-7411 observations put the scalar gradient on exact BF16 reduction-grid increments.
+Review therefore rejects an unchanged retry and permits only forming the same last-state/mean-state
+convex mix in FP32 before one cast back to model dtype. The frozen nonzero-gradient gate may not be
+weakened. Any source repair invalidates every current setup receipt, so replay must begin from seed
+7411. Every seed's setup gate must pass before any result-bearing arm is authorized.
 
 ## Why this experiment exists
 

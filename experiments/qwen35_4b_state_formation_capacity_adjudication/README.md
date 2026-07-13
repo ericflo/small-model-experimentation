@@ -1,6 +1,6 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · frozen design unchanged; final-source seed-7411 LoRA G0 and corrected positive control pass; remaining seed setup pending; no result run is authorized
+**Status:** in-progress · since 2026-07-13 · frozen design unchanged; seed-7412 LoRA G0 stopped fail-closed on an exact-zero BF16 aggregation-scalar gradient; numerical repair and complete setup regeneration required; no result run is authorized
 
 ## Current status
 
@@ -13,13 +13,14 @@ row per optimizer update and omitted the globally frozen accumulation of 16, so 
 appeared only five or six times. The scorer, targets, recurrence, gradients, and fixed-final gate were
 aligned. The miss is therefore preserved as a setup failure, not evidence about LoRA capacity.
 
-The source correction keeps the same 48 rows, 256 optimizer updates, seed, state-only objective,
+The positive-control source correction keeps the same 48 rows, 256 optimizer updates, seed, state-only objective,
 learning rate, dropout, thresholds, initialization, and row order. It now applies the frozen 16-way
 accumulation: 4,096 indexed singleton presentations, loss divided by 16, one groupwise clip and one
 optimizer step per update. Fixed probes record intact and adaptation-disabled metrics without changing
 parameters, mode, or random streams. Any reached failure writes a canonical receipt plus an identical
-tracked mirror and still denies result training. The complete source-bound suite passes 171/171, and
-independent code and GPU/runtime audits both give `GO`.
+tracked mirror and still denies result training. The complete source-bound suite passed 171/171, and
+independent code and GPU/runtime audits both gave `GO` before live seed-7412 G0 exposed the separate
+aggregation-precision defect described below.
 
 Every setup artifact tied to `3baa7b53…d5c42` remains preserved in a verified 20-file archive whose
 receipt identity is `1daa86e…e283aa`. Fresh setup under final source `1d1368cf…434b0a` has now been
@@ -35,9 +36,19 @@ gradients while the base receives none, the K=12 path is finite, and checkpoint 
 The earlier source-3baa G0 pass and 0/48 control miss remain historical mechanics records only. The
 corrected final-source control now passes 48/48 after exactly
 256 optimizer updates and 4,096 singleton presentations; disabling adaptation at the same fixed final
-scores 0/48, confirming that the setup path actually exercised the LoRA update. Seeds 7412 and 7413
-must now pass their own G0 and identical control before result training. No result training has
-started and no sealed contrast has been scored.
+scores 0/48, confirming that the setup path actually exercised the LoRA update.
+
+Seed-7412 LoRA G0 then stopped at the frozen live-joint reachability gate. Every one of the 124 LoRA
+tensors and every other required recurrent group had a finite nonzero gradient, the base model had
+none, and `aggregate_logit.grad` existed and was finite but had norm exactly zero. The current code
+casts that FP32 scalar gate to BF16 before the last-state/mean-state convex mix. Two otherwise matched
+seed-7411 G0 executions had aggregate gradients on exact BF16 reduction-grid increments, so an
+unchanged retry would risk retry-to-pass rather than adjudicate connectivity. The failure is preserved
+at receipt identity `ce3406f8…b634c`; it is setup-mechanics evidence only. No canonical seed-7412 G0
+receipt exists, seed 7413 is blocked, and no result training or sealed scoring is authorized. Review
+permits only a narrow FP32 convex-mix repair with the same row, masks, objective, schedule, threshold,
+and registered nonzero gate. Because that repair changes the source contract, all setup must be
+archived and regenerated and execution must restart from seed 7411.
 
 ## Research program and prior anchors
 

@@ -84,7 +84,13 @@ notes: >-
   positive-control receipt has SHA256 f71ee195b3e326abe59daca019b266932990f17adff20ceba8b414f5ac8c88ec,
   identity 8db4595e1473d2f26d1d99d2ac1bb9be45947720d676bf43cc697cb90b402df7, and fixed-final score
   48/48 after 256 updates and 4,096 presentations. No result artifact exists; later-seed setup must
-  pass before result training.
+  pass before result training. Seed-7412 G0 subsequently stopped at the live-joint reachability gate:
+  its aggregation scalar had a present finite gradient of exact norm zero while all other required
+  trainable groups were finite and nonzero. The tracked-only failure receipt identity is
+  ce3406f8fa788c08421687d5d6a0843a2eb7035fd254d5086123d895b2bb634c; no canonical seed-7412 G0
+  output exists and the receipt authorizes nothing. A reviewed FP32 convex-mix repair will change the
+  source contract, so the current source-1d1368 setup must be archived intact before regeneration and
+  replay from seed 7411.
   The first Qwen load stopped before wrapper construction or mechanics and is preserved by a tracked
   failure receipt; it opened
   only the permitted training validator, no sealed contrast, and produced no canonical G0 output.
