@@ -1,0 +1,10 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|██████████| 2/2 [00:00<00:00, 2848.42it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<02:27,  2.88it/s]Loading weights:   7%|▋         | 28/426 [00:00<00:04, 79.75it/s]Loading weights:  15%|█▍        | 62/426 [00:00<00:02, 153.80it/s]Loading weights:  21%|██        | 89/426 [00:00<00:01, 182.00it/s]Loading weights:  27%|██▋       | 113/426 [00:00<00:01, 189.83it/s]Loading weights:  35%|███▍      | 147/426 [00:00<00:01, 229.55it/s]Loading weights:  42%|████▏     | 181/426 [00:00<00:00, 260.99it/s]Loading weights:  49%|████▉     | 210/426 [00:01<00:00, 264.21it/s]Loading weights:  58%|█████▊    | 248/426 [00:01<00:00, 297.18it/s]Loading weights:  66%|██████▌   | 280/426 [00:01<00:00, 278.45it/s]Loading weights:  73%|███████▎  | 311/426 [00:01<00:00, 274.36it/s]Loading weights:  81%|████████  | 344/426 [00:01<00:00, 287.48it/s]Loading weights:  89%|████████▉ | 381/426 [00:01<00:00, 307.85it/s]Loading weights:  97%|█████████▋| 413/426 [00:01<00:00, 282.23it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 233.60it/s]
+[decomp] 200 held-out affine induction episodes
+     forced_N0: 0.0900
+     latent_N8: 0.0600
+     filler_N8: 0.0700
+    filler_N32: 0.0950
+      real_cot: 0.2350
+wrote runs/compute_decomp.json
