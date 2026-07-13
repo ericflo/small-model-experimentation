@@ -2,8 +2,8 @@
 
 ## Status
 
-**Immutable design locked at `1ef1f5ad`; pinned-model preflight and the repeated
-source/soup installation canary pass. Fresh route qualification is next.** This is a new result-bearing successor to
+**Fresh deep qualification passes on both untouched blocks; exact-logit
+locality is authorized and no MOPD update exists yet.** This is a new result-bearing successor to
 `qwen35_4b_same_prefix_advantage_routing`, not an extension of its terminal
 result.
 
@@ -98,6 +98,16 @@ block; seeds 43/44 must point positively versus both sources and soup; retention
 and transfer regressions may not exceed 0.02; and greedy joint performance must
 beat verifier-best soup best-of-8. Tiny replicated gains count. Large unstable
 gains do not.
+
+## Qualification Result
+
+The strict selector routed 54/384 fresh states to deep (28 and 26 by block).
+On disjoint audit branches, deep beat soup by `+0.1650` and `+0.1220` in the
+two blocks (pooled `+0.1421`, one-sided 95% lower bound `+0.1230`) and beat
+quick by `+0.2000` and `+0.1420` (pooled `+0.1691`, lower bound `+0.1534`).
+Every frozen support/sign/uncertainty gate passed. Quick also independently
+passed on 47 routed states in this fresh replication; that is retained as
+future two-teacher evidence, but the locked treatment remains deep-only.
 
 ## Artifacts
 

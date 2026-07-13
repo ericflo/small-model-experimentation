@@ -37,3 +37,18 @@
   base; quick/deep differed on 8/8, soup/quick on 8/8, and soup/deep on 7/8.
 - The installation gate authorizes the fresh two-block route qualification.
   No route evidence or training output exists yet.
+
+## 2026-07-13 — fresh route qualification passes
+
+- Generated two disjoint 192-state soup blocks and 9,216 continuations: three
+  policies × four selection + four audit branches. All state, replay, model,
+  engine, and branch-hash checks passed.
+- Deep routed on 28/26 states. Independent audit deep-minus-soup was
+  +0.16499/+0.12205 by block (pooled +0.14209, one-sided lower bound
+  +0.12297); deep-minus-quick was +0.20003/+0.14203 (pooled +0.16910, lower
+  bound +0.15337). The frozen deep gate passed.
+- Quick also passed diagnostically on 29/18 routes in this new replication,
+  unlike its predecessor reversal. The locked treatment remains deep-only;
+  the result is evidence for, not permission to improvise, the later
+  cross-fitted two-teacher design.
+- Downstream authorization is exactly `locality_pilot`. No update has run.

@@ -12698,6 +12698,50 @@
      "chart_takeaway": "With too little output room the model cannot finish a usable edit at all, but doubling the room flips it to fully fixing the pilot cases."
     }
    ]
+  },
+  "qwen35_4b_deep_advantage_mopd": {
+   "verdict_tag": "Deep proved it twice",
+   "concept_primer": "Imagine a strong all-round apprentice and two specialists standing at the same half-finished job. The deep specialist is copied only when separate trial runs show that it finishes that exact job better than both the apprentice and the other specialist.",
+   "plain_question": "Can carefully chosen lessons from the deep specialist improve one already blended small model without sacrificing its faster skills?",
+   "plain_answer": "Yes at the teacher-choice stage. On two entirely fresh groups of half-finished problems, the deep specialist beat both the starting blend and the quick specialist on separate check runs. That authorizes a small safety test of the weight update; no improved checkpoint exists yet.",
+   "why_it_matters": "A successful result would turn two specialized behaviors into one checkpoint without needing a router or extra attempts at deployment. A failure will still distinguish a bad teacher choice, a bad state choice, harmful weight changes, and a gain that ordinary sampling already buys.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Deep advantage over the starting blend",
+     "value": "+16.5 / +12.2 points",
+     "sub": "positive on both untouched blocks; the pooled lower confidence edge is +12.3 points"
+    },
+    {
+     "label": "Deep lessons per round",
+     "value": "60",
+     "sub": "each is selected from a failed state where deep won on separate trial continuations"
+    },
+    {
+     "label": "Starting-model reminders per round",
+     "value": "20",
+     "sub": "one quarter of the dose rehearses the original blend to resist forgetting"
+    },
+    {
+     "label": "Fresh states that selected deep",
+     "value": "28 / 26",
+     "sub": "enough support in each block to clear the frozen minimum of 16"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Deep wins on separate check runs in both fresh blocks",
+     "chart_read": "Each block has two positive bars: deep's score edge over the starting blend and over the quick specialist. Taller is better, but merely staying above zero in both untouched blocks is the key replication test.",
+     "chart_takeaway": "Deep's local teaching advantage repeated against both alternatives, so the experiment may now test whether that signal can be installed safely into one checkpoint."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "The proposed training and its two sharp controls receive identical lesson counts",
+     "chart_read": "Each group has a tall 60-unit capability bar and a shorter 20-unit reminder bar. Only the source of the 60 capability lessons changes: verified deep wins, matched places where deep did not win, or the wrong specialist on the verified-win states.",
+     "chart_takeaway": "Because all three arms get the same 80 lessons, a primary win can be attributed to choosing both the right state and the right specialist rather than to extra training."
+    }
+   ]
   }
  }
 }

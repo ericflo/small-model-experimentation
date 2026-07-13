@@ -20,7 +20,9 @@
   update kernel from the immutable joint soup. It preserves quick behavior
   through the frozen-soup anchor and requires one checkpoint to beat both
   sources, visible routing, matched controls, and sample-more before Menagerie
-  escalation.
+  escalation. Fresh qualification has now passed: deep routed on 28/26 states
+  and its audit advantage over soup was +0.1650/+0.1220 (pooled lower bound
+  +0.1230); locality is authorized and no MOPD update exists yet.
 - A new two-teacher attempt needs cross-fitted direct advantage prediction and
   a third untouched route block. If quick again lacks independent support,
   retire it as a complementary teacher; do not tune an observed-margin cutoff.

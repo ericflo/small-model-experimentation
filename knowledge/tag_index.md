@@ -732,7 +732,6 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 - `qwen35_4b_adaptive_evidence_budget_policy` (track-z): [README](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md)
 - `qwen35_4b_adaptive_tool_controller` (track-z): [README](../experiments/qwen35_4b_adaptive_tool_controller/README.md)
 - `qwen35_4b_counterexample_directed_dsl` (track-z): [README](../experiments/qwen35_4b_counterexample_directed_dsl/README.md)
-- `qwen35_4b_deep_advantage_mopd` (new): [README](../experiments/qwen35_4b_deep_advantage_mopd/README.md)
 - `qwen35_4b_executable_program_posttraining` (track-z): [README](../experiments/qwen35_4b_executable_program_posttraining/README.md)
 - `qwen35_4b_foofah_adaptive_program_budget_router` (track-z): [README](../experiments/qwen35_4b_foofah_adaptive_program_budget_router/README.md)
 - `qwen35_4b_foofah_direct_vs_abi` (track-z): [README](../experiments/qwen35_4b_foofah_direct_vs_abi/README.md)

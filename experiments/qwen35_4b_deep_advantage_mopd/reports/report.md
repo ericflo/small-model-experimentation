@@ -30,8 +30,24 @@ best deep continuation off-policy.
 Preflight and installation checks pass. On the eight fixed canary prompts,
 quick, deep, and soup each changed all 8 outputs relative to base; quick and
 deep differed on 8/8, while soup differed from quick on 8/8 and deep on 7/8.
-The source/soup gate therefore authorizes fresh route qualification, which
-remains unrun. These are instrumentation results, not capability evidence.
+The source/soup gate therefore authorized fresh route qualification.
+
+Qualification then passed. Across 384 new states and 9,216 same-prefix
+continuations, the selector routed 54 states to deep (28/26 by block). Deep's
+independent audit advantage over soup was `+0.16499`/`+0.12205`, pooled
+`+0.14209` with one-sided 95% lower bound `+0.12297`. Against quick it was
+`+0.20003`/`+0.14203`, pooled `+0.16910` with lower bound `+0.15337`. The
+minimum support, both block signs, and both uncertainty gates passed.
+
+The diagnostic quick route also passed on these fresh blocks: 29/18 routed
+states, quick-over-soup `+0.08198`/`+0.17054` and pooled lower bound
+`+0.10008`; quick-over-deep `+0.05378`/`+0.27883` and lower bound `+0.12129`.
+This does not change the locked deep-only treatment. It strengthens the case
+that a later two-teacher attempt should use the preregistered cross-fitted
+direct-advantage predictor and a third untouched block rather than reusing
+these outcomes.
+
+Exact-logit locality is authorized. No MOPD update exists yet.
 
 ## Oracle Versus Deployable Boundary
 

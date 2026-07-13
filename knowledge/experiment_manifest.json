@@ -1646,8 +1646,9 @@
   },
   {
     "file_counts": {
-      ".json": 10,
-      ".jsonl": 6,
+      ".gz": 10,
+      ".json": 21,
+      ".jsonl": 8,
       ".md": 8,
       ".py": 56,
       ".yaml": 3
@@ -1662,10 +1663,9 @@
       "structured_execution_and_compilers"
     ],
     "source_track": "new",
-    "summary": "**Immutable design locked at `1ef1f5ad`; pinned-model preflight and the repeated source/soup installation canary pass. Fresh route qualification is next.** This is a new result-bearing successor to `qwen35_4b_same_prefix_advantage_routing`, not an extension of its terminal result.",
+    "summary": "**Fresh deep qualification passes on both untouched blocks; exact-logit locality is authorized and no MOPD update exists yet.** This is a new result-bearing successor to `qwen35_4b_same_prefix_advantage_routing`, not an extension of its terminal result.",
     "tags": [
-      "small-model",
-      "table-transform"
+      "small-model"
     ],
     "title": "Qwen3.5-4B Deep-Advantage MOPD",
     "top_level_dirs": [
@@ -1677,8 +1677,8 @@
       "src",
       "tests"
     ],
-    "total_files": 83,
-    "total_size_bytes": 1071815
+    "total_files": 106,
+    "total_size_bytes": 24585504
   },
   {
     "file_counts": {
@@ -4514,8 +4514,7 @@
   {
     "file_counts": {
       ".csv": 2,
-      ".gz": 11,
-      ".json": 5,
+      ".json": 4,
       ".md": 13,
       ".py": 15,
       ".yaml": 4,
@@ -4548,8 +4547,8 @@
       "src",
       "tests"
     ],
-    "total_files": 51,
-    "total_size_bytes": 14882639
+    "total_files": 39,
+    "total_size_bytes": 406635
   },
   {
     "file_counts": {

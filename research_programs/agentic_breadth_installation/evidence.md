@@ -53,6 +53,22 @@ tool-found solutions, on-policy RL at residual failures, and
 failure-forensics curricula are the queued beyond-recipe mechanisms
 (see C53 next tests). Same-recipe scaling is closed.
 
+## Deep-Advantage MOPD Qualification (2026-07-13 — Passed prerequisite)
+
+`qwen35_4b_deep_advantage_mopd` repeated same-prefix qualification on two new
+192-state blocks from the immutable 40/60 joint soup. Deep was selected on
+28/26 states and beat soup on disjoint audit branches by +0.1650/+0.1220
+(pooled +0.1421, one-sided 95% lower bound +0.1230); it beat quick by
++0.2000/+0.1420 (lower bound +0.1534). Every support, block-sign, and
+uncertainty gate passed, authorizing exact-logit locality. No MOPD update or
+capability result exists yet.
+
+Quick also passed diagnostically on 29/18 routes in this fresh replication,
+after failing one soup-relative block in the predecessor. This is not license
+to add it to the locked deep-only treatment. It makes the later two-teacher
+design more worthwhile, but that return still requires cross-fitted direct
+advantage prediction, adaptive branch allocation, and a third untouched block.
+
 ## Specialist Integration Attempt (2026-07-12; stopped before training)
 
 `qwen35_4b_specialist_policy_integration` attempted the accepted next mechanism:
