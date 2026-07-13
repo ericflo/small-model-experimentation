@@ -1,6 +1,6 @@
 # Qwen3.5-4B Materialized Residual Answer-Seam Factorial
 
-**Status:** in-progress · since 2026-07-13 · fresh construction complete; adversarial review holds every model stage sealed pending transaction/firewall implementation and a published lock
+**Status:** in-progress · since 2026-07-13 · fresh construction complete; adversarial review holds every model stage sealed pending calibration firewall/lock implementation
 
 This fresh successor isolates the failure that made the durable materialized-
 residual generation result uninterpretable: the model never entered a reliable
@@ -85,18 +85,19 @@ The immutable scaffold-v1 receipt still passes. V2 construction also passes
 twice byte-identically: 72 unique public instances, zero overlap with 264
 authenticated parent instances, exact live-sibling strata, 4,104 prepared rows,
 2,952 unique canonical request IDs, balanced A-X calibration positions, zero
-model calls, and empty forbidden-read receipts. A real-tokenizer receipt also
-authenticates all answer compositions, context fit, and zero rendered parent
-overlap. Fifty-two model-free tests pass, including adversarial durable
-transaction/recovery mutations. This remains registration and
+model calls, and empty forbidden-read receipts. Append-only real-tokenizer
+receipts also authenticate all answer compositions, context fit, zero rendered
+parent overlap, and the current shared-thought runner. Fifty-four model-free
+tests pass, including adversarial durable transaction/recovery mutations and
+exact persisted-token thought forking. This remains registration and
 implementation evidence only.
 
 ## Interpretation
 
 No capability belief changes. Adversarial review materially strengthened the
-design and still holds live execution: real-tokenizer parity, durable
-transactions/recovery, reader firewalls, separate locks, and committed outcome
-boundaries remain mandatory.
+design and still holds live execution: calibration transaction integration,
+reader firewalls, separate locks, and committed outcome boundaries remain
+mandatory.
 
 ## Knowledgebase Update
 

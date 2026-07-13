@@ -1,0 +1,381 @@
+{
+  "aliases": {
+    "A": {
+      "leading_space": [
+        357
+      ],
+      "plain": [
+        32
+      ]
+    },
+    "B": {
+      "leading_space": [
+        417
+      ],
+      "plain": [
+        33
+      ]
+    },
+    "C": {
+      "leading_space": [
+        351
+      ],
+      "plain": [
+        34
+      ]
+    },
+    "D": {
+      "leading_space": [
+        414
+      ],
+      "plain": [
+        35
+      ]
+    },
+    "E": {
+      "leading_space": [
+        458
+      ],
+      "plain": [
+        36
+      ]
+    },
+    "F": {
+      "leading_space": [
+        426
+      ],
+      "plain": [
+        37
+      ]
+    },
+    "G": {
+      "leading_space": [
+        469
+      ],
+      "plain": [
+        38
+      ]
+    },
+    "H": {
+      "leading_space": [
+        462
+      ],
+      "plain": [
+        39
+      ]
+    },
+    "I": {
+      "leading_space": [
+        353
+      ],
+      "plain": [
+        40
+      ]
+    },
+    "J": {
+      "leading_space": [
+        604
+      ],
+      "plain": [
+        41
+      ]
+    },
+    "K": {
+      "leading_space": [
+        710
+      ],
+      "plain": [
+        42
+      ]
+    },
+    "L": {
+      "leading_space": [
+        436
+      ],
+      "plain": [
+        43
+      ]
+    },
+    "M": {
+      "leading_space": [
+        380
+      ],
+      "plain": [
+        44
+      ]
+    },
+    "N": {
+      "leading_space": [
+        443
+      ],
+      "plain": [
+        45
+      ]
+    },
+    "O": {
+      "leading_space": [
+        496
+      ],
+      "plain": [
+        46
+      ]
+    },
+    "P": {
+      "leading_space": [
+        387
+      ],
+      "plain": [
+        47
+      ]
+    },
+    "Q": {
+      "leading_space": [
+        1167
+      ],
+      "plain": [
+        48
+      ]
+    },
+    "R": {
+      "leading_space": [
+        423
+      ],
+      "plain": [
+        49
+      ]
+    },
+    "S": {
+      "leading_space": [
+        326
+      ],
+      "plain": [
+        50
+      ]
+    },
+    "T": {
+      "leading_space": [
+        345
+      ],
+      "plain": [
+        51
+      ]
+    },
+    "U": {
+      "leading_space": [
+        533
+      ],
+      "plain": [
+        52
+      ]
+    },
+    "V": {
+      "leading_space": [
+        629
+      ],
+      "plain": [
+        53
+      ]
+    },
+    "W": {
+      "leading_space": [
+        457
+      ],
+      "plain": [
+        54
+      ]
+    },
+    "X": {
+      "leading_space": [
+        1543
+      ],
+      "plain": [
+        55
+      ]
+    }
+  },
+  "answer_prefix": {
+    "close_plus_prefix_decode_exact": true,
+    "text": "PROGRAM:",
+    "token_ids": [
+      78041,
+      25
+    ]
+  },
+  "benchmark_files_read": [],
+  "canonical_answers": {
+    "all_fit_sampled_answer_cap_24_with_terminal_slack": true,
+    "arity_rows": {
+      "2": 576,
+      "3": 13824
+    },
+    "canonical_rows_sha256": "33688e4bd125e657d873e776340af91107747e6b2a9c3ca2d685bdf6ef3392b8",
+    "line_token_length_histogram": {
+      "5": 576,
+      "7": 13824
+    },
+    "minimum_terminal_slack_tokens": 2,
+    "prefix_tail_token_compositional_failures": 0,
+    "rows": 14400,
+    "tail_token_length_histogram": {
+      "3": 576,
+      "5": 13824
+    }
+  },
+  "config_sha256": "0f4d4e7fce5ae132879f49633b111a477c51dbb3860f7360fa7d5de1e21301e2",
+  "confirmation_files_read": [],
+  "decision": "TOKENIZER_AND_RENDERED_FRESHNESS_PASS",
+  "hidden_files_read": [],
+  "max_model_len": 4096,
+  "model": "Qwen/Qwen3.5-4B",
+  "model_calls": 0,
+  "model_loaded": false,
+  "qualification_files_read": [],
+  "read_receipt": {
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/prepared/calibration_requests.jsonl": {
+      "purpose": "rendered_prompt_freshness_and_context_fit",
+      "rows": 48,
+      "sha256": "f984962e5585ddafd4d229e68b751d1584a6b406dc82aa5954fa7bda4a8c54df"
+    },
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/prepared/direct_requests.jsonl": {
+      "purpose": "rendered_prompt_freshness_and_context_fit",
+      "rows": 2304,
+      "sha256": "b338f5c37f931bbdaf7c078ac9db588891c33e1d4678c7cb4c7ac95963d6616c"
+    },
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/prepared/suffix_materialized_requests.jsonl": {
+      "purpose": "rendered_prompt_freshness_and_context_fit",
+      "rows": 576,
+      "sha256": "1e567f737884aa0d6354bd06f2dc9a951ddbc77e232e9af4b9ae2c2c82655990"
+    },
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/prepared/suffix_name_only_requests.jsonl": {
+      "purpose": "rendered_prompt_freshness_and_context_fit",
+      "rows": 576,
+      "sha256": "c888bb10f7f9b8cd4dffd125954ae77bc8a5d462cc13e713b6a8a94d042498f4"
+    },
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/prepared/suffix_shuffled_requests.jsonl": {
+      "purpose": "rendered_prompt_freshness_and_context_fit",
+      "rows": 576,
+      "sha256": "1f0d45fca2fc4e34180889bba8cc9f6ecfc57edbfae24d83579b96e067c3f9d2"
+    },
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/prepared/transport_requests.jsonl": {
+      "purpose": "rendered_prompt_freshness_and_context_fit",
+      "rows": 24,
+      "sha256": "09ebaa635ce9eac1f40e523df308b408920e4b4de4b3f2e1b3dc48c9fec8946c"
+    },
+    "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/runs/mechanics/prepared/direct_requests.jsonl": {
+      "purpose": "authenticated_rendered_prompt_freshness",
+      "rows": 24,
+      "sha256": "be2b301fc712f4b1c409755b6507ed09ff4af01d77b5d8cb48ee6bbd63b71088",
+      "thinking": true
+    },
+    "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/runs/mechanics/prepared/listwise_requests.jsonl": {
+      "purpose": "authenticated_rendered_prompt_freshness",
+      "rows": 24,
+      "sha256": "2a9f06a75dae64faf47ddec37228c9e0aeca07e24be84ac04d76d8186c978f96",
+      "thinking": false
+    },
+    "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/runs/mechanics/prepared/preoutcome_receipt_v2.json": {
+      "purpose": "authenticated_rendered_prompt_freshness",
+      "sha256": "04d8ba59d212adac3193d88c19a38f58298fa18cbdd41321bf9e312bea72fe72"
+    },
+    "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/runs/mechanics/prepared/suffix_echo_requests.jsonl": {
+      "purpose": "authenticated_rendered_prompt_freshness",
+      "rows": 52,
+      "sha256": "d18bb98b10814d03666a197a0a6b6540429c605f8a000cc2e8a4e6d701f382ce",
+      "thinking": true
+    },
+    "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/runs/mechanics/prepared/suffix_materialized_requests.jsonl": {
+      "purpose": "authenticated_rendered_prompt_freshness",
+      "rows": 52,
+      "sha256": "6246111bcd8b6e6346dafd8018c0d713737ca3fbca55f47530d6b4a7f900c635",
+      "thinking": true
+    },
+    "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/runs/mechanics/prepared/suffix_name_only_requests.jsonl": {
+      "purpose": "authenticated_rendered_prompt_freshness",
+      "rows": 52,
+      "sha256": "f5e4fe82a86a3e11e8361bc5d1424ddd22923959d1b7c0e84675c032d4e25bef",
+      "thinking": true
+    },
+    "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/runs/mechanics/prepared/suffix_shuffled_requests.jsonl": {
+      "purpose": "authenticated_rendered_prompt_freshness",
+      "rows": 52,
+      "sha256": "2dcf69879dbce8a3242cf025a40d19c42b75ce90cab03dd57b993ceeac8141dd",
+      "thinking": true
+    },
+    "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/runs/mechanics/prepared/viability_materialized_requests.jsonl": {
+      "purpose": "authenticated_rendered_prompt_freshness",
+      "rows": 576,
+      "sha256": "c2e352e324238b79df896a485a4337ad9ab15c9851167099310e8628b1e94c98",
+      "thinking": false
+    },
+    "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/runs/mechanics/prepared/viability_name_only_requests.jsonl": {
+      "purpose": "authenticated_rendered_prompt_freshness",
+      "rows": 576,
+      "sha256": "4a201a5624b0fb7ed89eedf72f3e73a70333dfbb24e8267f4857198cf1beb25b",
+      "thinking": false
+    },
+    "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/runs/mechanics/prepared/viability_shuffled_requests.jsonl": {
+      "purpose": "authenticated_rendered_prompt_freshness",
+      "rows": 576,
+      "sha256": "9c4fc1ef9f7d4080202d38c307f20c2b4ccf8af85b6204d40fcdd86391baf79c",
+      "thinking": false
+    }
+  },
+  "registered_max_context_tokens": {
+    "no_think_freeform": 882,
+    "no_think_program_slot": 884,
+    "think512_freeform": 1394,
+    "think512_program_slot": 1396
+  },
+  "rendered_prompt_inventory": {
+    "new_no_think_slot_unique": 1824,
+    "new_no_thinking_unique": 1824,
+    "new_thinking_unique": 1824,
+    "parent_overlap": {
+      "no_think_base": 0,
+      "no_think_program_slot": 0,
+      "think_base": 0
+    },
+    "parent_unique": 1984
+  },
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "runner_sha256": "1ad152e9945b6cfaa901a375395fae08ec765a1e949cbc0bc973cf56c6166899",
+  "sampled_model_outputs": 0,
+  "schema_version": 2,
+  "stage": "real_tokenizer_shared_thought_model_free_receipt",
+  "termination": {
+    "hf_model_eos_token_id": 248044,
+    "tokenizer_eos_token": "<|im_end|>",
+    "tokenizer_eos_token_id": 248046
+  },
+  "tests_sha256": "79c40847b9c486f592a96d0c8dd5513384e2b7e38f7dc9228a42e3694c8098ac",
+  "think_token_ids": {
+    "close": [
+      248069
+    ],
+    "forced_close_sequence": [
+      248069,
+      271
+    ],
+    "no_thinking_prompt_suffix": [
+      248045,
+      74455,
+      198,
+      248068,
+      271,
+      248069,
+      271
+    ],
+    "open": [
+      248068
+    ],
+    "thinking_prompt_suffix": [
+      248045,
+      74455,
+      198,
+      248068,
+      198
+    ]
+  },
+  "tokenizer_class": "Qwen2Tokenizer",
+  "tokenizer_length": 248077
+}

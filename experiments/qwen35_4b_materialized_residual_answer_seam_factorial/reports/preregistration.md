@@ -36,11 +36,17 @@ teacher-forced answer token.
 | `no_think_freeform` | Qwen no-thinking chat channel; zero sampled thought tokens | none |
 | `no_think_program_slot` | identical no-thinking policy and answer seed | literal `PROGRAM:` token IDs appended to the prompt before generation |
 
-The two think512 cells share identical stage-one requests and paired thought
-seeds. Even if stage one naturally emits a close and reaches EOS, the harness
+The two think512 cells consume one append-only shared-thought transaction: the
+exact stage-one sampled and retained token IDs, prompt identity, row order,
+seeds, finish state, runner hash, and Qwen revision are authenticated before
+either continuation. They do not independently resample stage one. Even if
+stage one naturally emits a close and reaches EOS, the harness
 discards the sampled answer, retains only pre-close thought tokens, injects
 `</think>\n\n`, optionally injects `PROGRAM:`, and samples the registered answer
-tail. It never decodes and retokenizes a sampled thought.
+tail. It never decodes and retokenizes a sampled thought. Logical matched-cost
+accounting charges each arm for the shared thought it requires; separate
+physical/reused counters disclose that the causal pair reused one physical
+sample.
 
 All four cells use a stable `answer` seed domain with canonical request IDs.
 Because Ada/vLLM samples are not batch-invariant, paired numeric seeds are an

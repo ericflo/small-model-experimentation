@@ -40,3 +40,10 @@ Created as a new experiment scaffold.
   cover every crash/recovery state, terminal STARTED-only incidents, zero-call
   promotion, byte-idempotent restarts, inventory/symlink refusal, and
   bundle/chain tampering. All 52 tests pass; live integration remains held.
+- 2026-07-13: Added a first-class shared-thought runner path. One stage-one
+  sample becomes a persistable token-ID artifact; both thinking cells fork
+  from exactly those retained IDs, with no decode-retokenize. Authentication
+  rejects prompt/order/token/seed/runner drift and survives a JSON round trip;
+  natural-close/EOS and cap paths are covered. Append-only tokenizer receipt
+  `c1a7c6b...` binds the new runner and tests. All 54 tests pass; no model call
+  was made and live execution remains held.

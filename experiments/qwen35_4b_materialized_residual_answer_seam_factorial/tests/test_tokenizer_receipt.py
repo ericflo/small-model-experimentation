@@ -12,7 +12,7 @@ class TokenizerReceiptTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.receipt = json.loads(
-            (EXP / "runs/tokenizer/receipt.json").read_text()
+            (EXP / "runs/tokenizer/receipt_v2.json").read_text()
         )
 
     def test_exact_qwen_termination_and_slot_ids(self) -> None:
