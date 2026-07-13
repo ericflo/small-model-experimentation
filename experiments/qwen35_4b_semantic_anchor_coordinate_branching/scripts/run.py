@@ -138,6 +138,9 @@ def validate_implementation_boundary(config: dict) -> dict:
         "implementation_audit_sha256": (
             EXP / "reports" / "pre_model_implementation_audit.md"
         ),
+        "post_smoke_audit_sha256": (
+            EXP / "reports" / "post_model_smoke_001_audit.md"
+        ),
     }
     expected = {
         key: str(value) for key, value in boundary["hashes"].items()
@@ -394,7 +397,7 @@ def read_jsonl(path: Path) -> list[dict]:
     return [json.loads(line) for line in path.read_text().splitlines() if line]
 
 
-def consequence_suffix(task: dict, config: dict) -> str:
+def result_table_text(task: dict, config: dict) -> str:
     results = diagnostic_results(
         [int(value) for value in config["anchor"]["diagnostic_input"]],
         int(config["anchor"]["diagnostic_parameter"]),
@@ -403,12 +406,20 @@ def consequence_suffix(task: dict, config: dict) -> str:
         f"{result!r} = {task['result_label_by_operation'][operation]}"
         for operation, result in results.items()
     )
-    return "\n\nResult label table:\n" + rows + "\n\n" + config["anchor"]["consequence_query_text"]
+    return "\n\nResult label table:\n" + rows + "\n\n"
+
+
+def consequence_suffix(task: dict, config: dict) -> str:
+    return result_table_text(task, config) + config["anchor"]["consequence_query_text"]
 
 
 def probe_suffix(task: dict, config: dict, probe: str) -> str:
     if probe == "direct":
-        return str(config["anchor"]["direct_query_text"])
+        return (
+            result_table_text(task, config)
+            + str(config["anchor"]["direct_balancing_text"])
+            + str(config["anchor"]["direct_query_text"])
+        )
     if probe == "consequence":
         return consequence_suffix(task, config)
     raise ValueError(f"unknown probe {probe!r}")
@@ -596,6 +607,7 @@ def run_numeric_stage(config: dict, *, full: bool) -> dict:
     full_nonzero = []
     intervention_rows: list[dict] = []
     donor_immutable = True
+    cross_probe_lengths = []
     prefixes = []
     locked_smoke_prefix = None
     model_smoke_sha = None
@@ -654,6 +666,10 @@ def run_numeric_stage(config: dict, *, full: bool) -> dict:
             for layer in band
         }
         for alias in aliases:
+            cross_probe_lengths.append(
+                prepared[("direct", alias)]["sequence_tokens"]
+                == prepared[("consequence", alias)]["sequence_tokens"]
+            )
             for layer in band:
                 causal_differences.append(float((
                     captures[("direct", alias)]["activations"][layer]
@@ -836,6 +852,7 @@ def run_numeric_stage(config: dict, *, full: bool) -> dict:
             for row in position_contracts
         )
         and causal_max <= float(controls["causal_activation_atol"])
+        and all(cross_probe_lengths)
         and min(j_nonzero, default=0.0) > 0.0
         and max(full_nonzero, default=0.0) > 0.0
         and all(row["passed"] for row in intervention_rows)
@@ -889,6 +906,7 @@ def run_numeric_stage(config: dict, *, full: bool) -> dict:
             and row["whole_scaffold_tokenization_pass"]
             for row in position_contracts
         ),
+        "cross_probe_length_pass": all(cross_probe_lengths),
         "minimum_j_delta_norm": min(j_nonzero),
         "maximum_full_donor_delta_norm": max(full_nonzero),
         "intervention_rows": len(intervention_rows),

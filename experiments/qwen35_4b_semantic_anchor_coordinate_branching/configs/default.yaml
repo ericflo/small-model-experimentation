@@ -58,6 +58,9 @@ anchor:
   prefix_text: "\n\nCandidate first-operation alias:"
   continuation_text: "\nInvestigate this candidate against every visible example, revise it if needed, and continue reasoning:\n"
   direct_query_text: "\nEnd reasoning and output exactly that candidate alias.</think>\n\nCandidate:"
+  direct_balancing_text: >-
+    For this direct identity control only, ignore the result-label table and
+    copy the candidate alias exactly; do not apply it now.
   diagnostic_input: [3, -1, 2, 0]
   diagnostic_parameter: 2
   result_labels:

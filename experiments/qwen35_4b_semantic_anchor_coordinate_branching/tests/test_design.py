@@ -132,6 +132,18 @@ def test_label_map_seed_changes_only_diagnostic_labels():
     )
 
 
+def test_both_probe_suffixes_share_the_same_public_result_table():
+    value = config()
+    task = public_mechanics(build_splits(value)["mechanics"][0])
+    direct = run.probe_suffix(task, value, "direct")
+    consequence = run.probe_suffix(task, value, "consequence")
+    table = run.result_table_text(task, value)
+    assert direct.startswith(table)
+    assert consequence.startswith(table)
+    assert value["anchor"]["direct_balancing_text"] in direct
+    assert "</think>" in direct and "</think>" in consequence
+
+
 def test_full_and_coordinate_patchers_use_clean_requested_state():
     layer = torch.nn.Identity()
     hidden = torch.zeros(1, 3, 4, dtype=torch.bfloat16)

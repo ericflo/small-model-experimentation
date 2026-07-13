@@ -70,7 +70,11 @@ Mechanics never loads `first_op`, target pipeline, hidden examples, or a correct
 alias.
 
 The direct probe ends reasoning and scores the supplied target among the 12
-alias tokens. It diagnoses identity writing but cannot authorize continuation.
+alias tokens. It contains the same public result-label table as the consequence
+probe plus an explicit identity-control instruction, making both suffixes exactly
+216 tokens under the pinned tokenizer. This preserves the frozen `1e-3` causal-
+invariance test across the hybrid sequence-shape implementation. Direct identity
+diagnoses writing but cannot authorize continuation.
 
 The primary consequence probe uses diagnostic input `[3,-1,2,0]`, with `k=2`
 for parameterized operations. The 12 distinct one-step results are:

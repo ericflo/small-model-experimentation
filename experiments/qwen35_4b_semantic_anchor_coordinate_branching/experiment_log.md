@@ -59,3 +59,14 @@
   changing any seed, gate, prompt, arm, model, lens, or control breaks unlock.
 - This boundary authorizes one outcome-blind representative model smoke. Full
   calibration and mechanics remain separately gated.
+
+## 2026-07-13 — Model smoke 001 fails suffix-shape causality
+
+- All 20 non-J numeric rows and 60 intervention rows pass; no outcome was kept.
+- The frozen causal activation gate fails: direct/consequence max difference is
+  `0.078125` versus `0.001`, with suffix lengths 14 versus 216 tokens.
+- Preserved the full failed receipt and rejected threshold relaxation.
+- Geometry-only repair gives both probes the same public result table and an
+  exactly length-balancing direct-control instruction. Both suffixes are now
+  216 pinned-tokenizer tokens; scientific endpoints and gates are unchanged.
+- A new implementation hash boundary is mandatory before retry.
