@@ -133,7 +133,7 @@
     "qwen35_4b_jacobian_counterfactual_branching": {
       "status": "in-progress",
       "since": "2026-07-13",
-      "reason": "Smoke 004 fixes layer 8 but independent receipt catches one layer-4 boundary miss; 5% geometry safety repair needs push/re-anchor before smoke 005."
+      "reason": "The stricter live-control safety repair is pushed/re-anchored; outcome-blind smoke 005 remains before mechanics."
     },
     "qwen35_4b_confidence_guided_compute": {
       "status": "finished",

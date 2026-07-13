@@ -82,3 +82,5 @@
 - Added a stricter 0.95 geometry repair objective so near-boundary rows cannot
   stop until they have 5% guard band. Scientific tolerances remain unchanged.
 - Code must be pushed/re-anchored before smoke 005.
+- Safety-margin implementation pushed at `6660bd94`; exact hashes are anchored
+  for smoke 005.

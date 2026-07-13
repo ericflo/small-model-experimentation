@@ -1,6 +1,6 @@
 # Qwen3.5-4B Commit-Slot Semantic Power Replication
 
-**Status:** in-progress · since 2026-07-12 · Replication run in flight; prefix-value traces still being collected.
+**Status:** finished
 
 This study tests whether the parent experiment's fixed-1,024 ordered-thought
 advantage over shuffled thought is a task-general semantic effect rather than a

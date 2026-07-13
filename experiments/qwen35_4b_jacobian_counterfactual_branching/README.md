@@ -1,6 +1,6 @@
 # Qwen3.5-4B Jacobian Counterfactual Branching
 
-**Status:** finished
+**Status:** in-progress · since 2026-07-13 · Stricter live-control repair is pushed and re-anchored; outcome-blind smoke 005 remains before mechanics.
 
 This experiment tests whether a balanced bank of early J-space edits can shift
 the proposal distribution of native reasoning, rather than trying to value a
