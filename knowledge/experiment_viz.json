@@ -47701,6 +47701,35 @@
      "source": "experiments/qwen35_4b_confidence_policy/runs/difficulty_curve.json"
     }
    ]
+  },
+  "qwen35_4b_universal_curriculum": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "v1 universal curriculum — rows per generic circuit (design; transfer result pending)",
+     "categories": [
+      "induct (compose/search)",
+      "execute (procedure)",
+      "select (constraints)"
+     ],
+     "series": [
+      {
+       "label": "synthetic training rows",
+       "values": [
+        600,
+        400,
+        400
+       ]
+      }
+     ],
+     "x_label": "generic circuit taught",
+     "y_label": "synthetic training rows",
+     "y_format": "integer",
+     "note": "v1 installs three surface-agnostic circuits over five disjoint surfaces (digits/letters/romans/invented-words/greek). The generator also ships trace/verify/count, selectable via --mix. TRANSFER to the held-out menagerie is the real metric (measured by search.py); when a run exists, a base-vs-adapter transfer chart replaces this design view.",
+     "source": "experiments/qwen35_4b_universal_curriculum/data/sft_universal.jsonl"
+    }
+   ]
   }
  }
 }

@@ -1,0 +1,24 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_universal_curriculum"
+external_artifacts:
+  - name: "universal1 LoRA adapter (r32/alpha64, 2 epochs, co-trained from base)"
+    storage: "large_artifacts/qwen35_4b_universal_curriculum/adapters/universal1"
+    required_for: "rerun the HF-adapter menagerie-transfer eval"
+    checksum: ""
+    regenerate: "bash experiments/qwen35_4b_universal_curriculum/scripts/train_eval_chain.sh"
+omitted_artifacts:
+  - path: "large_artifacts/qwen35_4b_universal_curriculum/**"
+    reason: "trained LoRA adapters; do not check into git (see docs/artifact_policy.md)"
+reproducibility:
+  smoke_command: "python experiments/qwen35_4b_universal_curriculum/scripts/gen_curriculum.py --n-induct 20 --n-execute 10 --n-select 10 --out /tmp/sft_universal_smoke.jsonl"
+  full_command: "bash experiments/qwen35_4b_universal_curriculum/scripts/train_eval_chain.sh"
+  required_external_artifacts: []
+notes: >-
+  Data (data/sft_universal.jsonl) is CPU-synthesized in seconds by
+  scripts/gen_curriculum.py and checked in. The only large artifact is the trained
+  LoRA adapter under large_artifacts/ (not tracked). The transfer eval reads only
+  aggregate + per-family menagerie scores (firewall-safe); the per-arm result JSONs
+  land in ../qwen35_4b_gauntlet_frontier/runs/ (that experiment owns bench.py) and
+  a row is appended to its runs/menagerie_log.jsonl. Requires the local Qwen3.5-4B
+  weights (pinned revision 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a).

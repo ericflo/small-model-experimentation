@@ -4,21 +4,21 @@ Generated from tracked experiment contents. Use this as a triage surface for tur
 
 Anchor-ready means the experiment has a human-authored README, a detected primary report, recognized local artifacts, and an assigned research program. It does not mean the result is correct or final.
 
-- Experiments: 243
+- Experiments: 244
 - Anchor-ready: 227
-- Human-authored READMEs: 230
+- Human-authored READMEs: 231
 - Generated README stubs: 13
 - Primary reports: 242
 - Experiment logs: 147
-- Smoke commands: 111
-- Artifact manifests: 215
+- Smoke commands: 112
+- Artifact manifests: 216
 
 ## Run Surface Counts
 
 | Run surface | Experiments |
 | --- | ---: |
 | `documented-command` | 38 |
-| `documented-scripts` | 130 |
+| `documented-scripts` | 131 |
 | `scripts-undocumented` | 22 |
 | `source-or-analysis` | 53 |
 
@@ -27,12 +27,12 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | Need | Experiments |
 | --- | ---: |
 | `add-smoke-command` | 132 |
-| `add-experiment-log` | 96 |
+| `add-experiment-log` | 97 |
 | `document-run-path` | 75 |
 | `add-artifact-manifest` | 28 |
 | `replace-generated-readme` | 13 |
+| `add-primary-report` | 2 |
 | `review-program-assignment` | 2 |
-| `add-primary-report` | 1 |
 
 ## Matrix
 
@@ -185,6 +185,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | yes | [`qwen35_4b_transaction_invariant_recovery_curriculum`](../experiments/qwen35_4b_transaction_invariant_recovery_curriculum/README.md) | agentic_breadth_installation, benchmark_generalization, evidence_conditioned_selection, interpretability_and_diagnostics, posttraining_and_adaptation, process_control_and_tool_use, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_transaction_invariant_recovery_curriculum/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_transform_abi_compiler_pilot`](../experiments/qwen35_4b_transform_abi_compiler_pilot/README.md) | benchmark_generalization, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_transform_abi_compiler_pilot/reports/report.md) | no | `documented-scripts` | no | large-artifact | add-experiment-log, add-smoke-command |
 | yes | [`qwen35_4b_typed_sketch_synthesis`](../experiments/qwen35_4b_typed_sketch_synthesis/README.md) | benchmark_generalization, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_typed_sketch_synthesis/reports/qwen35_4b_typed_sketch_synthesis_report.md) | no | `documented-scripts` | yes | dataset, large-artifact | add-experiment-log |
+| no | [`qwen35_4b_universal_curriculum`](../experiments/qwen35_4b_universal_curriculum/README.md) | benchmark_generalization, evidence_conditioned_selection, interpretability_and_diagnostics, reliability_and_safety, structured_execution_and_compilers | `human-authored` |  | no | `documented-scripts` | yes | standard-artifact | add-primary-report, add-experiment-log |
 | yes | [`qwen35_4b_unsaturated_frontier_active_bridge`](../experiments/qwen35_4b_unsaturated_frontier_active_bridge/README.md) | active_evidence_acquisition, benchmark_generalization, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_unsaturated_frontier_active_bridge/reports/qwen35_4b_unsaturated_frontier_active_bridge_report.md) | no | `scripts-undocumented` | no | dataset, large-artifact | add-experiment-log, document-run-path, add-smoke-command |
 | yes | [`qwen35_4b_validation_policy_counterexample_curriculum`](../experiments/qwen35_4b_validation_policy_counterexample_curriculum/README.md) | agentic_breadth_installation, benchmark_generalization, evidence_conditioned_selection, interpretability_and_diagnostics, posttraining_and_adaptation, process_control_and_tool_use, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_validation_policy_counterexample_curriculum/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_verified_algorithm_retrieval_adaptation`](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/README.md) | algorithmic_memory_and_retrieval, evidence_conditioned_selection, interpretability_and_diagnostics, reliability_and_safety | `human-authored` | [report](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/reports/final_report.md) | no | `documented-scripts` | no | large-artifact, run-data | add-experiment-log, add-smoke-command |

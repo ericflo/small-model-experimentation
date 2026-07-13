@@ -1,0 +1,38 @@
+[
+  {
+    "name": "v1_base3",
+    "mix": "induct=600,execute=400,select=400",
+    "rank": 32, "epochs": 2.0, "w_think": 0.2,
+    "why": "the v1 mix (induct/execute/select) at r32/2ep — the reference point."
+  },
+  {
+    "name": "all6_even",
+    "mix": "induct=250,execute=250,select=250,trace=250,verify=250,count=150",
+    "rank": 32, "epochs": 2.0, "w_think": 0.2,
+    "why": "does breadth across all six generic circuits lift more boats than three?"
+  },
+  {
+    "name": "executable_heavy",
+    "mix": "execute=450,trace=450,verify=300,select=200",
+    "rank": 32, "epochs": 2.0, "w_think": 0.2,
+    "why": "C56 said an executable PROCEDURE installed and transferred; lean into execute/trace/verify, drop the hard induction wall."
+  },
+  {
+    "name": "induct_heavy",
+    "mix": "induct=1000,execute=300,verify=100",
+    "rank": 32, "epochs": 2.0, "w_think": 0.2,
+    "why": "push the hardest circuit (composed-rule induction, the C39 wall) with high dose + a little scaffolding."
+  },
+  {
+    "name": "new3_only",
+    "mix": "trace=500,verify=500,count=400",
+    "rank": 32, "epochs": 2.0, "w_think": 0.2,
+    "why": "the three new circuits alone — do trace/verify/count transfer independent of the v1 three?"
+  },
+  {
+    "name": "all6_r16_lean",
+    "mix": "induct=250,execute=250,select=250,trace=250,verify=250,count=150",
+    "rank": 16, "epochs": 1.0, "w_think": 0.2,
+    "why": "cheapest all-6 run (r16/1ep) — does dose/rank matter, or is the mix what moves transfer?"
+  }
+]

@@ -2172,6 +2172,16 @@
     "trace_keyed_symbol_repair/configs/experiment.json: \"date_utc\": \"2026-06-20\"",
     "trace_keyed_symbol_repair/reports/trace_keyed_symbol_repair_paper.md: 2026-06-20"
    ]
+  },
+  "qwen35_4b_universal_curriculum": {
+   "start": "2026-07-13",
+   "end": "2026-07-13",
+   "confidence": "low",
+   "sources": [
+    "experiments/qwen35_4b_universal_curriculum/README.md: 'Status: in-progress · since 2026-07-13' (literal date)",
+    "git commit date of the scaffolding commit (post-import, trustworthy)"
+   ],
+   "caveat": "Experiment scaffolded 2026-07-13; deliberately NOT yet run (no run records). Date reflects setup, not a completed run window."
   }
  }
 }
