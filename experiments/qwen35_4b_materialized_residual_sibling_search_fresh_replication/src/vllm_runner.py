@@ -95,6 +95,7 @@ NO_THINK_TOP_K = 20
 MIN_NONZERO_TEMPERATURE = 0.01
 MAX_TEMPERATURE = 2.0
 MAX_N = 16_384
+MAX_LOGPROBS = 24
 HF_MODEL_EOS_TOKEN_ID = 248044
 TOKENIZER_EOS_TOKEN_ID = 248046
 HF_MODEL_EOS_TOKEN = "<|endoftext|>"
@@ -458,8 +459,11 @@ class SamplingConfig:
             raise ValueError("shuffle_thinking is only valid for budget thinking")
         if self.logprobs is not None and self.logprobs < 0:
             raise ValueError("logprobs must be non-negative")
-        if self.logprobs is not None and self.logprobs > 20:
-            raise ValueError("logprobs cannot exceed this runner's vLLM max_logprobs=20")
+        if self.logprobs is not None and self.logprobs > MAX_LOGPROBS:
+            raise ValueError(
+                "logprobs cannot exceed this runner's vLLM "
+                f"max_logprobs={MAX_LOGPROBS}"
+            )
         if self.prompt_logprobs is not None and self.prompt_logprobs < 0:
             raise ValueError("prompt_logprobs must be non-negative")
         if self.prompt_logprobs is not None and self.prompt_logprobs > 20:
@@ -720,7 +724,8 @@ class VLLMRunner:
             "mamba_cache_mode": "align" if config.enable_prefix_caching else "none",
             "enforce_eager": config.enforce_eager,
             "generation_config": "vllm",
-            "max_logprobs": 20,
+            "max_logprobs": MAX_LOGPROBS,
+            "logprobs_mode": "raw_logprobs",
             "seed": 0,
             # vLLM 0.24 auto-enables async scheduling.  Keep the simpler
             # synchronous mode explicit for offline research.  On pre-Hopper
@@ -866,6 +871,19 @@ class VLLMRunner:
         except (AttributeError, RuntimeError):
             self.close()
             raise
+        try:
+            self.resolved_logprobs_mode = str(
+                self.llm.llm_engine.vllm_config.model_config.logprobs_mode
+            )
+        except AttributeError:
+            self.close()
+            raise RuntimeError("vLLM did not expose resolved logprobs_mode") from None
+        if self.resolved_logprobs_mode != "raw_logprobs":
+            self.close()
+            raise RuntimeError(
+                "vLLM did not honor raw_logprobs: "
+                f"{self.resolved_logprobs_mode!r}"
+            )
 
         self.lora_request = None
         if self.adapter_info is not None:
@@ -1323,6 +1341,7 @@ class VLLMRunner:
                 for key, value in self.engine_args.items()
             },
             "resolved_cudagraph": self.resolved_cudagraph,
+            "resolved_logprobs_mode": self.resolved_logprobs_mode,
             "sampling": dataclasses.asdict(sampling),
             "resolved_sampling": sampling.resolved_sampling(),
             "adapter": self.adapter_info,

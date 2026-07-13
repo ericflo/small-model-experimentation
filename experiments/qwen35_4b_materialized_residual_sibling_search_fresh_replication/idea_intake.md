@@ -39,6 +39,9 @@ invalid because its `suffix_materialized` request identity and sampling domain
 are terminal. The repository lifecycle also requires a new directory for a
 replication. This successor changes every task/record identity and all sampling
 seeds while preserving the scientific arms, controls, estimands, and gates.
+Because the DSL is finite, parent function/triple/suffix reuse is measured and
+reported rather than prohibited; freshness is enforced at the task-instance,
+prompt, request, and derived-seed levels.
 
 ## Mechanism
 
@@ -64,8 +67,10 @@ conservative matched-sampling baselines after visible/probe-only selection.
 
 - Fresh seed block `2026072700`--`2026072709` and a new request namespace are
   frozen before task generation.
-- The parent lock, both parent incident receipts, terminal `STARTED` receipt,
-  and independent `BLOCK` review must enter the successor's critical lineage.
+- The parent construction, both preoutcomes, both locks, both preflights,
+  attempt-1 incident, terminal prepared input and `STARTED` receipt, attempt-2
+  incident/report, and independent `BLOCK` review must enter the successor's
+  critical lineage.
 - The real pinned tokenizer receipt must prove model EOS `248044`, tokenizer
   EOS `248046`, `ignore_eos=true`, explicit stop `[248044]`, and trim-only-
   `248044` semantics.

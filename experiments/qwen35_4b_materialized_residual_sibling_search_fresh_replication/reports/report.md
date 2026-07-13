@@ -22,9 +22,15 @@ model/tokenizer EOS distinction into model-free and live receipts.
 
 ## Results
 
-The identity-only scaffold smoke passes. It records one fresh procedural seed
-domain, one fresh sampling seed domain, zero model requests, and zero benchmark
-reads. Fresh construction and model mechanics have not run.
+The identity-only scaffold smoke passes. Initial independent design review then
+returned `BLOCK`: copied code reused every parent task ID, while the draft's
+zero parent function/triple/suffix rule made the four-live quota impossible.
+The corrected no-write audit constructs all 264 fresh task instances and
+reports zero parent task-ID, public-instance, mechanics-prompt, and terminal-
+prompt overlap. It discloses unavoidable finite-DSL reuse: 56 behavior
+functions, 41 triples, and 181 suffixes. All 29 identity, mutation,
+termination, and scaffold tests pass. Follow-up review is pending; durable
+construction and model mechanics have not run.
 
 ## Controls
 
@@ -41,16 +47,19 @@ score only immutable choices.
 
 ## Interpretation
 
-No scientific belief changes. The successor is a clean launch boundary, not
-evidence that materialized residuals work.
+No scientific belief changes. The in-memory audit proves feasibility and
+fresh administrative/model-facing identity, not independence of a finite
+grammar and not evidence that materialized residuals work.
 
 ## Next Experiments
 
-First complete fresh procedural construction, then adversarially review the
-scientific and transaction designs before implementing mechanics. Training or
-banking remains a separate experiment even if this search interface passes.
+Obtain a follow-up independent `PASS`, publish it, and only then write the
+fresh procedural construction. Next, implement and adversarially review the
+transaction protocol before mechanics. Training or banking remains a separate
+experiment even if this search interface passes.
 
 ## Artifact Manifest
 
-`artifact_manifest.yaml` records the identity-only smoke. No external, omitted,
-model, or capability-result artifact exists.
+`artifact_manifest.yaml` records the historical identity-only smoke. No
+external, omitted, model, construction-result, or capability-result artifact
+exists.

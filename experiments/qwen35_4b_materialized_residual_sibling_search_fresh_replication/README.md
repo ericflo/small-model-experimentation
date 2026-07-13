@@ -1,6 +1,6 @@
 # Qwen3.5-4B Materialized Residual Sibling Search Fresh Replication
 
-**Status:** in-progress · since 2026-07-13 · identity reserved; fresh construction, adversarial review, hardened implementation, separate lock, mechanics, and downstream gates remain
+**Status:** in-progress · since 2026-07-13 · initial design review blocked impossible freshness promises and colliding copied IDs; corrections are under review and no model call is authorized
 
 This separately registered recovery replication preserves the parent's frozen
 materialized-residual science while regenerating tasks, request IDs, and
@@ -73,10 +73,12 @@ no-think top-four ranking remains secondary and cannot veto the all-24 test.
 
 ## Run
 
-Identity-only scaffold smoke (no model load or call):
+The historical identity-only scaffold receipt is preserved at
+`runs/scaffold/summary.json`. Fresh construction will use this command only
+after the corrected design receives an independent `PASS`:
 
 ```bash
-.venv/bin/python experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/scripts/run.py --smoke
+.venv/bin/python experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/scripts/run.py --stage smoke
 ```
 
 Full mechanics is intentionally absent and unauthorized until fresh data,
@@ -85,10 +87,12 @@ lock all exist.
 
 ## Results
 
-Only the successor identity and fresh seed block are reserved. The scaffold
-smoke records one fresh task-seed domain, one fresh sampling-seed domain, zero
-model requests, and no benchmark reads. This is administrative/model-free
-evidence, not a capability result.
+Only the successor identity and fresh seed block are reserved. Initial review
+found that zero parent function/triple/suffix reuse is infeasible in this finite
+DSL and that the copied code reused all 264 parent task IDs. The corrected
+contract uses namespaced identities and zero public-instance/prompt overlap,
+while measuring finite-grammar reuse. Construction remains unrun. This is
+administrative/model-free evidence, not a capability result.
 
 ## Interpretation
 

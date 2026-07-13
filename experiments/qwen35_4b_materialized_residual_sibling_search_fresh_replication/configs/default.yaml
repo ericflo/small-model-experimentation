@@ -6,6 +6,15 @@ model:
   backend: vllm
   vllm_version: 0.24.0+cu129
 
+identity:
+  experiment_id: qwen35_4b_materialized_residual_sibling_search_fresh_replication
+  scientific_parent_id: qwen35_4b_materialized_residual_sibling_search
+  task_namespace: materialized-residual-fresh-replication-v1
+  request_namespace: materialized-residual-fresh-replication-v1
+  scientific_parent_function_exemption: descriptive_overlap_only
+  public_instance_overlap_allowed: false
+  model_prompt_overlap_allowed: false
+
 seeds:
   common_panel: 2026072700
   data: 2026072701

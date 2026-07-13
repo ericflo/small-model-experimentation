@@ -4,11 +4,11 @@ experiment_id: "qwen35_4b_materialized_residual_sibling_search_fresh_replication
 external_artifacts: []
 omitted_artifacts: []
 reproducibility:
-  smoke_command: ".venv/bin/python experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/scripts/run.py --smoke"
+  smoke_command: ".venv/bin/python experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/scripts/run.py --stage smoke"
   full_command: "sealed until fresh construction, review, implementation, and lock"
   required_external_artifacts: []
 local_receipts:
   scaffold_identity:
     path: "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/runs/scaffold/summary.json"
     sha256: "e9e8f41cf7c0d5d625e7fee38305bf592c19fbf90f3a90a8b4657651600627e1"
-notes: "Identity-only scaffold. No model load/call and no benchmark read. Fresh construction and every scientific stage remain unauthorized."
+notes: "Identity-only scaffold preserved. Initial independent design review BLOCKED copied task-ID collisions and an infeasible parent-function exclusion. Corrections remain under review; no construction or model call is authorized."

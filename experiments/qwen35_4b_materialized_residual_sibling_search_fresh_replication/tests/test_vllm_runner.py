@@ -128,7 +128,11 @@ class PackageInventoryTests(unittest.TestCase):
 class TerminationSemanticsTests(unittest.TestCase):
     def test_model_and_tokenizer_eos_ids_remain_distinct(self) -> None:
         runner._validate_termination_ids(248044, 248046)
-        for model_eos, tokenizer_eos in ((248046, 248046), (248044, 248044)):
+        for model_eos, tokenizer_eos in (
+            (248046, 248046),
+            (248044, 248044),
+            (248046, 248044),
+        ):
             with self.subTest(
                 model_eos=model_eos, tokenizer_eos=tokenizer_eos
             ), self.assertRaisesRegex(RuntimeError, "termination IDs changed"):
@@ -371,7 +375,8 @@ class ResolvedCudagraphTests(unittest.TestCase):
                 captured_engine_args.update(kwargs)
                 self.llm_engine = SimpleNamespace(
                     vllm_config=SimpleNamespace(
-                        compilation_config=_compilation_config()
+                        compilation_config=_compilation_config(),
+                        model_config=SimpleNamespace(logprobs_mode="raw_logprobs"),
                     ),
                     engine_core=SimpleNamespace(shutdown=lambda: None),
                 )
@@ -398,6 +403,8 @@ class ResolvedCudagraphTests(unittest.TestCase):
             )
 
         self.assertEqual(captured_engine_args["max_num_seqs"], 15)
+        self.assertEqual(captured_engine_args["max_logprobs"], 24)
+        self.assertEqual(captured_engine_args["logprobs_mode"], "raw_logprobs")
         self.assertEqual(captured_engine_args["cudagraph_capture_sizes"], list(effective))
         self.assertEqual(captured_engine_args["max_cudagraph_capture_size"], 15)
         self.assertEqual(instance.engine_args["requested_max_num_seqs"], 19)
@@ -411,6 +418,7 @@ class ResolvedCudagraphTests(unittest.TestCase):
         self.assertEqual(
             instance.resolved_cudagraph["cudagraph_capture_sizes"], list(effective)
         )
+        self.assertEqual(instance.resolved_logprobs_mode, "raw_logprobs")
         instance.close()
 
 

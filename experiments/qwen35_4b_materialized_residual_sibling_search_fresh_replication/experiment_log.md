@@ -10,10 +10,22 @@
   estimands, and gates. No model was loaded or called.
 - 2026-07-13: Added an identity-only scaffold smoke and site metadata so the
   experiment ID can be pushed before harness copying or model authorization.
+- 2026-07-13: Independent pre-construction review returned `BLOCK`. All 264
+  copied task IDs collided with the parent, and rejecting every parent
+  behavior function exhausted the four-live stratum at 5/44 tasks.
+- 2026-07-13: Replaced the impossible finite-grammar exclusion with measured
+  descriptive reuse; made the versioned namespace operational; authenticated
+  the complete 13-file parent incident lineage; and added fail-closed public-
+  instance, prompt, EOS, symlink, inventory, and hash gates.
+- 2026-07-13: A no-write, no-model audit filled 264/264 tasks and measured zero
+  parent task-ID, identity-free public-instance, mechanics-prompt, and terminal
+  prompt overlap. It disclosed 56 shared functions, 41 shared triples, and 181
+  shared suffixes. Twenty-nine focused tests passed. Follow-up independent
+  review remains pending.
 
 ## Pending
 
-- Copy and adapt the parent construction under fresh identities.
-- Run model-free construction and adversarial design review.
+- Resolve the follow-up adversarial design review.
+- Publish and run the model-free construction under the corrected identities.
 - Implement and independently audit durable generation transactions.
 - Publish code and a separate lock before any model call.

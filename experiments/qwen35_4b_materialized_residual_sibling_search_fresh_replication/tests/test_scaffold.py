@@ -1,22 +1,22 @@
 from __future__ import annotations
 
-import importlib.util
-import sys
+import json
 import unittest
 from pathlib import Path
 
 
-RUN_PATH = Path(__file__).resolve().parents[1] / "scripts" / "run.py"
-SPEC = importlib.util.spec_from_file_location("fresh_replication_scaffold", RUN_PATH)
-assert SPEC and SPEC.loader
-run = importlib.util.module_from_spec(SPEC)
-sys.modules[SPEC.name] = run
-SPEC.loader.exec_module(run)
+RECEIPT = (
+    Path(__file__).resolve().parents[1] / "runs" / "scaffold" / "summary.json"
+)
+
+
+def receipt() -> dict[str, object]:
+    return json.loads(RECEIPT.read_text())
 
 
 class ScaffoldReceiptTests(unittest.TestCase):
     def test_receipt_freezes_new_identity_without_model_authorization(self) -> None:
-        value = run.receipt()
+        value = receipt()
         self.assertEqual(
             value["decision"], "SCAFFOLD_IDENTITY_RESERVED_NO_MODEL_AUTHORIZATION"
         )
@@ -29,7 +29,7 @@ class ScaffoldReceiptTests(unittest.TestCase):
         self.assertNotIn("2026072602", str(value))
 
     def test_parent_terminal_transaction_is_directly_bound(self) -> None:
-        value = run.receipt()
+        value = receipt()
         self.assertEqual(
             value["parent_terminal_started_sha256"],
             "f6aa447b1936fac397a353fc13183f008e31884b5006ed7fc50ac78deed3387a",
