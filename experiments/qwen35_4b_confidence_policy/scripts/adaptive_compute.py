@@ -9,11 +9,12 @@ accuracy-vs-average-compute frontier. Compare it to the UNIFORM-k frontier
 (always sample k, conf-select). Does confidence-gated allocation dominate uniform
 sampling at matched average compute? Post-hoc on the cached MBPP pool. CPU-only.
 """
-import json, random, statistics
+import argparse, json, random, statistics
 from pathlib import Path
 
 EXP = Path(__file__).resolve().parents[1]
-SRC = EXP.parents[1] / "experiments/qwen35_4b_code_confidence/runs/code_conf.json"
+SRCS = {"mbpp": EXP.parents[1]/"experiments/qwen35_4b_code_confidence/runs/code_conf.json",
+        "humaneval": EXP.parents[1]/"experiments/qwen35_4b_humaneval_code_confidence/runs/humaneval_code_conf.json"}
 R, SEED = 300, 31337
 
 
@@ -22,8 +23,10 @@ def pt(c):
 
 
 def main():
+    ap=argparse.ArgumentParser(); ap.add_argument("--src",choices=["mbpp","humaneval"],default="mbpp"); args=ap.parse_args()
+    print(f"=== benchmark: {args.src} ===")
     rng = random.Random(SEED)
-    tasks = json.loads(SRC.read_text())
+    tasks = json.loads(SRCS[args.src].read_text())
     # each task: a 'greedy' candidate + sampled ones
     def greedy(t): return next((c for c in t["cands"] if c["tag"] == "greedy"), t["cands"][0])
     def sampled(t): return [c for c in t["cands"] if c["tag"] != "greedy"]
@@ -74,7 +77,7 @@ def main():
         wins += d > 0.002
         print(f"  compute {c:>5.2f}: adaptive {a:.4f} vs uniform {u:.4f}  delta {d:+.4f}")
     print(f"\nadaptive strictly beats uniform at {wins}/{len(ada)} operating points")
-    (EXP / "runs" / "adaptive_compute.json").write_text(json.dumps(
+    (EXP / "runs" / ("adaptive_compute.json" if args.src=="mbpp" else "adaptive_compute_humaneval.json")).write_text(json.dumps(
         {"uniform": [{"k": k, "acc": round(a, 4)} for k, a in uni],
          "adaptive": [{"avg_samples": round(c, 3), "acc": round(a, 4)} for c, a in ada]},
         indent=2) + "\n")

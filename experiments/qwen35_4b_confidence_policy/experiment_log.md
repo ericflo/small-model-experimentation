@@ -63,3 +63,10 @@ exactly where the difficulty curve shows conf-select helps. C57 -> Supported.
 Deployable policy: sample greedily once, read P(True); high -> commit; low ->
 sample K + argmax-P(True); abstain below a floor. One logit drives selection,
 abstention, AND allocation.
+
+## 2026-07-13 — adaptive allocation generalizes to HumanEval
+
+adaptive_compute.py --src humaneval: the confidence-gated adaptive frontier beats
+uniform at 7/9 operating points on HumanEval too (reaches the 0.941 ceiling at ~5
+avg samples vs 9 uniform; one dip at avg 1.82). So the ~2x-compute-saving
+allocation win holds on both a moderate (MBPP) and an easy (HumanEval) benchmark.
