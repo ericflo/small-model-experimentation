@@ -125,6 +125,46 @@ class PackageInventoryTests(unittest.TestCase):
         resolve.assert_called_once_with("packaging")
 
 
+class TerminationSemanticsTests(unittest.TestCase):
+    def test_model_and_tokenizer_eos_ids_remain_distinct(self) -> None:
+        runner._validate_termination_ids(248044, 248046)
+        for model_eos, tokenizer_eos in ((248046, 248046), (248044, 248044)):
+            with self.subTest(
+                model_eos=model_eos, tokenizer_eos=tokenizer_eos
+            ), self.assertRaisesRegex(RuntimeError, "termination IDs changed"):
+                runner._validate_termination_ids(model_eos, tokenizer_eos)
+
+    def test_sampling_ignores_tokenizer_eos_and_stops_on_model_eos(self) -> None:
+        captured: dict[str, object] = {}
+
+        class FakeSamplingParams:
+            def __init__(self, **kwargs: object):
+                captured.update(kwargs)
+
+        fake_vllm = types.ModuleType("vllm")
+        fake_vllm.SamplingParams = FakeSamplingParams
+        instance = object.__new__(runner.VLLMRunner)
+        instance.hf_eos_id = 248044
+        with mock.patch.dict(sys.modules, {"vllm": fake_vllm}):
+            instance._params(
+                runner.SamplingConfig(thinking="off", greedy=True),
+                max_tokens=8,
+                seed=17,
+                n=1,
+            )
+
+        self.assertIs(captured["ignore_eos"], True)
+        self.assertEqual(captured["stop_token_ids"], [248044])
+
+    def test_trimming_preserves_tokenizer_eos_and_removes_model_eos(self) -> None:
+        instance = object.__new__(runner.VLLMRunner)
+        instance.hf_eos_id = 248044
+        self.assertEqual(
+            instance._trim_hf_eos([1, 248046, 2, 248044, 3]),
+            [1, 248046, 2],
+        )
+
+
 class CliRewriteTests(unittest.TestCase):
     def test_rewrite_replaces_every_split_and_equals_spelling(self) -> None:
         argv = [
@@ -301,10 +341,13 @@ class ResolvedCudagraphTests(unittest.TestCase):
         captured_engine_args: dict[str, object] = {}
 
         class FakeTokenizer:
-            eos_token_id = 248044
+            eos_token_id = 248046
+            eos_token = "<|im_end|>"
 
             def encode(self, text: str, *, add_special_tokens: bool) -> list[int]:
                 values = {
+                    "<|endoftext|>": [248044],
+                    "<|im_end|>": [248046],
                     "<think>": [248068],
                     "</think>": [248069],
                     "</think>\n\n": [248069, 198],

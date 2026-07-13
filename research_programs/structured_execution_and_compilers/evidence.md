@@ -262,3 +262,15 @@ J edits at a 512-token native prefix, despite valid non-J geometry. The fixed
 answer slot is a semantic output seam, not evidence that an arbitrary preceding
 token is a writable compiler register. Explicit anchor tokens and donor-
 coordinate replacement are the remaining context-local hypothesis.
+
+## Materialized residual mechanics incident (2026-07-13)
+
+[qwen35_4b_materialized_residual_sibling_search](../../experiments/qwen35_4b_materialized_residual_sibling_search/reports/report.md)
+does not update scientific belief. Its fresh exact-depth-three construction and
+controls passed model-free review, but attempt 1 stopped in cache preflight and
+attempt 2 lost 52 returned mechanics rows before durable persistence because a
+post-generation receipt collapsed model EOS `248044` and tokenizer EOS
+`248046`. Independent review blocks replay of the terminal `STARTED`
+transaction. The materialized-residual hypothesis remains untested; only a new
+experiment with fresh identities/seeds and write-before-authentication
+quarantine may resume it. No claim is allocated.

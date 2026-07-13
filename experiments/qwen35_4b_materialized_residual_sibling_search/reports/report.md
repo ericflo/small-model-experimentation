@@ -2,10 +2,12 @@
 
 ## Summary
 
-No model result exists. The first design was rejected and rewritten before
-implementation. The replacement passed adversarial review and its model-free
-construction/protocol smoke; model mechanics remain sealed until a separately
-published implementation lock exists.
+No durable, authenticated model result exists. The first design was rejected
+and rewritten before implementation. The replacement passed adversarial review
+and its model-free construction/protocol smoke. Two live mechanics attempts
+then ended in preserved infrastructure incidents: one before any experimental
+request and one after 52 returned rows but before durable output persistence.
+The terminal second transaction permanently seals this experiment.
 
 ## Research Program Fit
 
@@ -36,6 +38,16 @@ registered compound confirmation rule passed 483/500 simulations at the
 design alternative. Receipts record zero model loads, zero model calls, and no
 benchmark reads.
 
+The first authorized model attempt initialized the engine but failed an
+incorrect hybrid-cache receipt before any experimental request. Its append-only
+repair passed review and CI. The second attempt passed live preflight and the
+first `suffix_materialized` invocation returned 52 rows in memory. A
+post-generation authenticator then falsely required tokenizer EOS `248044`;
+the pinned tokenizer correctly declares `<|im_end|>` EOS `248046`, distinct
+from the model-config EOS `248044`. Because raw writes followed semantic
+authentication, zero sampled-output bytes survived. No output was inspected
+and no later invocation began. Independent review returned `BLOCK` on replay.
+
 ## Controls
 
 The locked design includes all-24 candidate-name and token-preserving
@@ -53,18 +65,23 @@ probe inputs, and frozen hashes.
 
 ## Interpretation
 
-This result validates only construction, protocol, and planned inference. It is
-not evidence that materialization improves Qwen3.5-4B. The next authorized work
-is implementation and adversarial audit of mechanics; model construction stays
-sealed until that lock is committed and pushed.
+This result validates only construction and protocol. It is not evidence that
+materialization improves or harms Qwen3.5-4B. The second attempt is an
+interface-invalid, terminal `STARTED` transaction, not a negative capability
+result. Recovery requires a new registered experiment with fresh task/record
+identities and sampling seeds plus durable quarantine before semantic
+authentication.
 
 ## Next Experiments
 
-A replicated search pass would license a separate, disjoint residual-policy
-supervision experiment. A mechanics failure would retire this inference-time
-interface without ruling out supervised installation.
+First run a fresh-identity mechanics successor that changes no scientific arm
+or outcome gate. A replicated search pass there would license a separate,
+disjoint residual-policy supervision experiment. A genuine mechanics failure
+would retire this inference-time interface without ruling out supervised
+installation; the bookkeeping incident here does not.
 
 ## Artifact Manifest
 
-`artifact_manifest.yaml` records the local smoke receipt and command. No
-external, omitted, or model result artifact exists.
+`artifact_manifest.yaml` records the local smoke, both locks and preflights,
+the terminal attempt-2 `STARTED` receipt, incident receipt, and adversarial
+review. No external, omitted, or model result artifact exists.

@@ -189,7 +189,16 @@ def main() -> int:
             print("candidate program lines: " + ", ".join(candidate_programs))
         return 0
 
-    for dirname in ["src", "scripts", "configs", "data", "runs", "analysis", "reports"]:
+    for dirname in [
+        "src",
+        "scripts",
+        "configs",
+        "data",
+        "runs",
+        "analysis",
+        "reports",
+        "tests",
+    ]:
         (exp_dir / dirname).mkdir(parents=True, exist_ok=True)
 
     title = str(proposal.get("title") or scaffold_experiment.title_from_slug(experiment_id))
@@ -209,6 +218,10 @@ def main() -> int:
     shutil.copyfile(
         scaffold_experiment.TEMPLATE / "src" / "vllm_runner.py",
         exp_dir / "src" / "vllm_runner.py",
+    )
+    shutil.copyfile(
+        scaffold_experiment.TEMPLATE / "tests" / "test_vllm_runner.py",
+        exp_dir / "tests" / "test_vllm_runner.py",
     )
     write_idea_intake(exp_dir, proposal, programs, candidate_programs)
     write_queue_context(exp_dir, proposal)

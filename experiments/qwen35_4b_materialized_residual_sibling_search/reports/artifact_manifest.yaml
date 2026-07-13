@@ -34,4 +34,19 @@ local_receipts:
   mechanics_implementation_lock_v2:
     path: "experiments/qwen35_4b_materialized_residual_sibling_search/runs/mechanics/implementation_lock_v2.json"
     sha256: "953da4e9ba5b4d19f5d1b785d907b7d78379705af50ab124a0027b7ce79a1264"
-notes: "Attempt 1 initialized the engine but aborted in preflight before any experimental request or sampled output. Its old lock and preflight are immutable incident evidence. The append-only v2 repair is pushed and green; mechanics remains sealed pending commit/push and CI for its separate v2 lock."
+  mechanics_attempt_2_live_preflight:
+    path: "experiments/qwen35_4b_materialized_residual_sibling_search/runs/mechanics/raw_v2/live_preflight.json"
+    sha256: "16961d80437835fdfdcad0fa78d482a847c00a243d25fa0a5d86062dc5fcea25"
+  mechanics_attempt_2_started:
+    path: "experiments/qwen35_4b_materialized_residual_sibling_search/runs/mechanics/raw_v2/suffix_materialized.started.json"
+    sha256: "f6aa447b1936fac397a353fc13183f008e31884b5006ed7fc50ac78deed3387a"
+  mechanics_attempt_2_incident:
+    path: "experiments/qwen35_4b_materialized_residual_sibling_search/runs/mechanics/mechanics_attempt_2_incident.json"
+    sha256: "48ae3f49addc43b435fd5c2b121d57b9498223488a5251999910f56c50e9d4d2"
+  mechanics_attempt_2_incident_report:
+    path: "experiments/qwen35_4b_materialized_residual_sibling_search/reports/mechanics_termination_incident.md"
+    sha256: "df3b42a4aae4e0f437acf4fca8164c716770fa312a6f59a831af79796085f478"
+  mechanics_attempt_2_adversarial_review:
+    path: "experiments/qwen35_4b_materialized_residual_sibling_search/reports/mechanics_attempt_2_adversarial_review.md"
+    sha256: "1227e67749b7e2314d7ce2f93fe85feb3ee2c79208b124776466d89d7fc1d9eb"
+notes: "Attempt 1 initialized the engine but aborted in preflight before any experimental request or sampled output. Attempt 2 passed preflight and returned 52 suffix_materialized rows in memory, but incorrect tokenizer-EOS authentication failed before durable output writes. Its STARTED transaction is terminal and must not be replayed. The experiment is sealed without a durable, authenticated model result; recovery requires a new experiment with fresh tasks, IDs, and seeds."

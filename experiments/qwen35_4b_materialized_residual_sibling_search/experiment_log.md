@@ -83,7 +83,21 @@
   v2 lock binding 33 critical files and explicitly recording one prior engine
   initialization, zero experimental requests, and zero sampled outputs. Retry
   remains sealed until that lock is itself committed, pushed, and green in CI.
+- 2026-07-13: Pushed the separate v2 lock at `6629de7f`; repository-validation
+  and research-site CI both passed. From a clean synchronized tree and idle
+  GPU, attempt 2 initialized the exact pinned engine and passed the corrected
+  live hybrid-cache preflight.
+- 2026-07-13: The first `suffix_materialized` invocation returned 52 rows and
+  metadata in memory, then failed termination authentication before durable
+  raw/metadata writes. The runner correctly distinguished model EOS `248044`
+  from tokenizer `<|im_end|>` EOS `248046`; the experiment authenticator and
+  its fake-tokenizer test incorrectly required `248044` for both. No output was
+  printed or inspected, no later invocation began, and no returned bytes are
+  recoverable. The `STARTED` transaction is terminal and will not be replayed.
+  This experiment is sealed without a durable, authenticated model result.
 
 ## Pending
 
-- Commit and push the generated v2 lock, observe CI, then retry mechanics.
+- Publish the attempt-2 incident and open a separately reviewed successor with
+  fresh task/record identities, fresh sampling seeds, and durable quarantine
+  before semantic authentication.

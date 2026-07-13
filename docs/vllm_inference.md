@@ -133,6 +133,38 @@ occurs after immutable `COMPLETE` receipts exist, verify every receipt/hash and
 use a documented analysis-only entry point in a fresh process. Never delete or
 resample completed outputs to repair package-inventory bookkeeping.
 
+### Model EOS and tokenizer EOS are different
+
+At the pinned Qwen3.5-4B revision, the text model configuration uses EOS token
+ID `248044`, while the tokenizer declares `<|im_end|>` (ID `248046`) as its EOS.
+This is intentional. The runner passes `ignore_eos=True` and
+`stop_token_ids=[248044]` so vLLM preserves the repository's established HF
+answer boundary, and its metadata consequently records:
+
+```json
+{
+  "hf_model_eos_token_id": 248044,
+  "vllm_tokenizer_eos_ignored": 248046
+}
+```
+
+Do not collapse those fields or change stopping to `248046`. An experiment did
+so in a post-generation authenticator on 2026-07-13; all 52 returned rows were
+lost because authentication ran before durable persistence. Tests that fake a
+tokenizer must use `eos_token_id = 248046`, and implementation gates should
+also inspect the real pinned tokenizer metadata without loading the model.
+Semantic trimming preserves `248046` and removes only terminal `248044`.
+
+For transaction-safe imported use, write returned rows and runner metadata to
+a single exclusive generated bundle immediately after `generate` returns,
+fsync it, re-read the exact bytes, and only then perform semantic
+authentication. If raw rows and metadata remain separate, follow both with one
+`GENERATED` receipt that commits their hashes; two renames are not jointly
+atomic. Publish `COMPLETE` only after authentication and retain failed
+quarantine bytes as incident evidence. A `STARTED` invocation with no durable
+returned bytes remains terminal: never delete or resample it merely because a
+validator—not generation—was wrong.
+
 ## Thinking modes
 
 - `--thinking off` renders Qwen's explicit no-thinking chat channel.

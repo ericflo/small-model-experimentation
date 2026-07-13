@@ -500,6 +500,17 @@ public consequences and ask the model for the residual relation on a fresh
 depth-three substrate; do not spend another run on opaque names, timing, parser
 repair, or larger budgets.
 
+The first materialized-residual implementation has no capability result. Its
+model-free 264-task construction passed, but one live attempt stopped before an
+experimental request and the repaired attempt returned 52 rows only in memory:
+a receipt expected tokenizer EOS `248044` although the pinned tokenizer uses
+`<|im_end|>` ID `248046`, and semantic authentication preceded durable writes.
+The terminal `STARTED` transaction cannot be replayed. This is an infrastructure
+incident, not evidence for or against residualization. Resume only with fresh
+task/record identities and seed domain, while durably quarantining returned
+bytes before authentication. See
+[qwen35_4b_materialized_residual_sibling_search](../experiments/qwen35_4b_materialized_residual_sibling_search/reports/report.md).
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.

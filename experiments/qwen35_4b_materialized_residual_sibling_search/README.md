@@ -1,8 +1,11 @@
 # Qwen3.5-4B Materialized Residual Sibling Search
 
-**Status:** in-progress · since 2026-07-13 · attempt 1 aborted in live preflight
-before the first experimental request; append-only v2 repair is pushed and its
-separate retry lock awaits commit, push, and CI.
+**Status:** finished
+
+Outcome: sealed without a durable, authenticated capability result. Attempt 1
+aborted in live preflight; attempt 2 reached one 52-request invocation but lost
+all returned rows before durable persistence when termination metadata
+authentication failed.
 
 ## Research Program
 
@@ -114,8 +117,8 @@ Model-free smoke:
 .venv/bin/python experiments/qwen35_4b_materialized_residual_sibling_search/scripts/run.py --stage smoke
 ```
 
-Mechanics retry command (sealed until the repaired implementation and separate
-v2 lock are committed, pushed, and green in CI):
+Historical mechanics command (sealed permanently because attempt 2 has a
+terminal `STARTED` transaction; do not rerun):
 
 ```bash
 .venv-vllm/bin/python experiments/qwen35_4b_materialized_residual_sibling_search/scripts/run_mechanics.py --stage run
@@ -139,17 +142,30 @@ before the first experimental generation request. No invocation transaction or
 sampled output exists. The failed preflight is preserved as incident evidence;
 it is not a capability result and its embedded PASS label is unauthenticated.
 
+After the append-only repair and lock were independently reviewed, pushed, and
+green in CI, attempt 2 passed the corrected cache preflight. The first
+`suffix_materialized` invocation returned all 52 rows in memory, but its
+post-generation authenticator falsely required the model EOS ID `248044` in
+the tokenizer-EOS receipt field. The pinned tokenizer correctly reports
+`<|im_end|>` as EOS ID `248046`. Authentication therefore failed before raw
+rows or metadata were written. No output text was printed or inspected, no
+later invocation began, and no sampled bytes are recoverable. The immutable
+`STARTED` receipt forbids replay, so this experiment ends without a durable,
+authenticated model result.
+
 ## Interpretation
 
-The design remains eligible after an independently audited append-only preflight
-repair and fresh versioned lock. Even a later model pass would be an external
-structured-search result. CPU 24³ enumeration remains exact and cheap at this
-depth.
+The scientific design remains untested, but this experiment instance is not
+eligible for another run. A valid successor must use a new experiment,
+fresh task/record identities and sampling seeds, and durable write-before-
+semantic-authentication quarantine. Even a later successor pass would be an
+external structured-search result. CPU 24³ enumeration remains exact and cheap
+at this depth.
 
 ## Knowledgebase Update
 
-- Program evidence updated: pending a result.
-- Program backlog updated: pending a result.
+- Program evidence updated: incident recorded; scientific belief unchanged.
+- Program backlog updated: fresh-identity successor required.
 - Claim ledger updated: no; no result exists.
 
 ## Artifacts

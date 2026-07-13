@@ -95,6 +95,21 @@ NO_THINK_TOP_K = 20
 MIN_NONZERO_TEMPERATURE = 0.01
 MAX_TEMPERATURE = 2.0
 MAX_N = 16_384
+HF_MODEL_EOS_TOKEN_ID = 248044
+TOKENIZER_EOS_TOKEN_ID = 248046
+HF_MODEL_EOS_TOKEN = "<|endoftext|>"
+TOKENIZER_EOS_TOKEN = "<|im_end|>"
+
+
+def _validate_termination_ids(hf_eos_id: int, tokenizer_eos_id: int) -> None:
+    """Keep Qwen's model stop token distinct from its tokenizer-declared EOS."""
+    expected = (HF_MODEL_EOS_TOKEN_ID, TOKENIZER_EOS_TOKEN_ID)
+    observed = (hf_eos_id, tokenizer_eos_id)
+    if observed != expected:
+        raise RuntimeError(
+            "Qwen3.5 termination IDs changed; audit stopping and receipts: "
+            f"expected model/tokenizer {expected}, observed {observed}"
+        )
 
 
 def _stable_seed(run_seed: int, record_id: str, sample_index: int, stage: str) -> int:
@@ -656,9 +671,17 @@ class VLLMRunner:
             MODEL_ID, revision=MODEL_REVISION, trust_remote_code=True
         )
         self.hf_eos_id = int(model_config.text_config.eos_token_id)
-        if self.hf_eos_id != 248044:
+        self.tokenizer_eos_id = int(self.tokenizer.eos_token_id)
+        _validate_termination_ids(self.hf_eos_id, self.tokenizer_eos_id)
+        if (
+            self.tokenizer.eos_token != TOKENIZER_EOS_TOKEN
+            or self.tokenizer.encode(HF_MODEL_EOS_TOKEN, add_special_tokens=False)
+            != [HF_MODEL_EOS_TOKEN_ID]
+            or self.tokenizer.encode(TOKENIZER_EOS_TOKEN, add_special_tokens=False)
+            != [TOKENIZER_EOS_TOKEN_ID]
+        ):
             raise RuntimeError(
-                f"Qwen3.5 model EOS changed from 248044 to {self.hf_eos_id}; audit termination"
+                "Qwen3.5 termination token strings changed; audit stopping and receipts"
             )
         self.think_open_id = self._single_token_id("<think>")
         self.think_close_id = self._single_token_id("</think>")
@@ -1312,7 +1335,7 @@ class VLLMRunner:
             },
             "termination": {
                 "hf_model_eos_token_id": self.hf_eos_id,
-                "vllm_tokenizer_eos_ignored": self.tokenizer.eos_token_id,
+                "vllm_tokenizer_eos_ignored": self.tokenizer_eos_id,
             },
             "rng_isolation": {
                 "engine_seed": self.engine_args["seed"],

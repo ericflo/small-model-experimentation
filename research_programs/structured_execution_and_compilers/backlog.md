@@ -36,15 +36,16 @@
   work is not licensed. A post-decision midpoint-only refit reached only 0.538
   versus matched non-J 0.600, so do not replicate this J-axis interpretation.
 - Additive J directions do not turn the last native-thought token into a
-  hypothesis register. The late explicit anchor was invalid, and the completed
-  early concrete-text successor is also terminal before qualification: bound
-  text redirected direct execution across 24 operations, but every diagnostic
-  arm exceeded the cap gate and full-program reachability was only 3/8. Retire
-  opaque-name timing variants. The warranted fresh successor should materialize
-  each candidate first operation's public intermediate outputs, ask for the
-  residual program through a short fixed ABI on exact-depth-three tasks, and
-  retain candidate-blind, late, duplicate, placebo, and sampled/logical-token-
-  matched ordinary-sampling controls.
+  hypothesis register. The late explicit anchor was invalid, and early
+  concrete text redirected direct execution across 24 operations but failed
+  its interface. The first materialized-residual successor then ended without
+  a durable, authenticated model result: one preflight abort and one terminal
+  52-row write-order/EOS-receipt incident. Retire opaque-name timing variants.
+  Resume materialized
+  residuals only in a new experiment with fresh tasks/record IDs/seeds,
+  write-before-authentication quarantine, the exact model/tokenizer EOS pair,
+  and the already frozen candidate-blind, shuffled, exhaustive, and sampled/
+  logical-token-matched controls.
 - Measure the exact behavioral quotient at fresh depth 6 before assuming model-guided pruning is economically
   needed; record wall time, memory, physical transitions, coverage, and selector success.
 - If a real search wall appears, test a residualized partial state (feasible parameter domains, materialized

@@ -5,9 +5,9 @@ source_track: "new"
 path: "experiments/qwen35_4b_materialized_residual_sibling_search"
 primary_readme: "experiments/qwen35_4b_materialized_residual_sibling_search/README.md"
 primary_report: "experiments/qwen35_4b_materialized_residual_sibling_search/reports/report.md"
-summary: "before the first experimental request; append-only v2 repair is pushed and its separate retry lock awaits commit, push, and CI."
+summary: "Outcome: sealed without a durable, authenticated capability result. Attempt 1 aborted in live preflight; attempt 2 reached one 52-request invocation but lost all returned rows before durable persistence when termination metadata authentication failed."
 tags:
-  - "repair"
+  - "abi"
   - "small-model"
 research_programs:
   - "evidence_conditioned_selection"
@@ -23,10 +23,10 @@ top_level_dirs:
   - "src"
   - "tests"
 file_counts:
-  json: 10
+  json: 13
   jsonl: 20
-  md: 9
+  md: 11
   py: 13
   yaml: 3
-total_files: 55
-total_size_bytes: 4377930
+total_files: 60
+total_size_bytes: 4403324

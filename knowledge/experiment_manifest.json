@@ -3340,9 +3340,9 @@
   },
   {
     "file_counts": {
-      ".json": 10,
+      ".json": 13,
       ".jsonl": 20,
-      ".md": 9,
+      ".md": 11,
       ".py": 13,
       ".yaml": 3
     },
@@ -3357,9 +3357,9 @@
       "test_time_reasoning_budget"
     ],
     "source_track": "new",
-    "summary": "before the first experimental request; append-only v2 repair is pushed and its separate retry lock awaits commit, push, and CI.",
+    "summary": "Outcome: sealed without a durable, authenticated capability result. Attempt 1 aborted in live preflight; attempt 2 reached one 52-request invocation but lost all returned rows before durable persistence when termination metadata authentication failed.",
     "tags": [
-      "repair",
+      "abi",
       "small-model"
     ],
     "title": "Qwen3.5-4B Materialized Residual Sibling Search",
@@ -3372,8 +3372,8 @@
       "src",
       "tests"
     ],
-    "total_files": 55,
-    "total_size_bytes": 4377930
+    "total_files": 60,
+    "total_size_bytes": 4403324
   },
   {
     "file_counts": {
