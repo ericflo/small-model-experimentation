@@ -1,0 +1,116 @@
+{
+  "blocks": {
+    "headroom_a": {
+      "answer_cap_hit_rate_per_turn": 0.12078651685393259,
+      "axes": {
+        "blank": {
+          "eligible_in_block": false,
+          "failed_test_success": 0.8888888888888888,
+          "per_family_failed_test_success": {
+            "headroom_inferred_blank_bundle": 1.0,
+            "headroom_inferred_blank_record": 0.6666666666666666,
+            "headroom_inferred_blank_tuple": 1.0
+          },
+          "rejected_patch_success": 0.6666666666666666,
+          "shapes_in_band": 1
+        },
+        "negative": {
+          "eligible_in_block": false,
+          "failed_test_success": 1.0,
+          "per_family_failed_test_success": {
+            "headroom_inferred_negative_bundle": 1.0,
+            "headroom_inferred_negative_record": 1.0,
+            "headroom_inferred_negative_tuple": 1.0
+          },
+          "rejected_patch_success": 1.0,
+          "shapes_in_band": 0
+        },
+        "noninteger": {
+          "eligible_in_block": false,
+          "failed_test_success": 1.0,
+          "per_family_failed_test_success": {
+            "headroom_inferred_noninteger_bundle": 1.0,
+            "headroom_inferred_noninteger_record": 1.0,
+            "headroom_inferred_noninteger_tuple": 1.0
+          },
+          "rejected_patch_success": 0.6666666666666666,
+          "shapes_in_band": 0
+        }
+      },
+      "explicit_failed_test_success": 1.0,
+      "invalid_action_rate_per_turn": 0.016853932584269662,
+      "n_cases": 72,
+      "task_content_manifest_sha256": "b8d1ada34790739828744043c00d6f1d4e6933933a35059a2fb44d47940df00a",
+      "task_manifest_sha256": "30ac9631338ede829b74c0bdcbc4fdf9dccefe30d1cd9b0f14274f45348e78ce"
+    },
+    "headroom_b": {
+      "answer_cap_hit_rate_per_turn": 0.12672176308539945,
+      "axes": {
+        "blank": {
+          "eligible_in_block": false,
+          "failed_test_success": 0.7777777777777778,
+          "per_family_failed_test_success": {
+            "headroom_inferred_blank_bundle": 1.0,
+            "headroom_inferred_blank_record": 1.0,
+            "headroom_inferred_blank_tuple": 0.3333333333333333
+          },
+          "rejected_patch_success": 0.7777777777777778,
+          "shapes_in_band": 1
+        },
+        "negative": {
+          "eligible_in_block": false,
+          "failed_test_success": 1.0,
+          "per_family_failed_test_success": {
+            "headroom_inferred_negative_bundle": 1.0,
+            "headroom_inferred_negative_record": 1.0,
+            "headroom_inferred_negative_tuple": 1.0
+          },
+          "rejected_patch_success": 1.0,
+          "shapes_in_band": 0
+        },
+        "noninteger": {
+          "eligible_in_block": false,
+          "failed_test_success": 1.0,
+          "per_family_failed_test_success": {
+            "headroom_inferred_noninteger_bundle": 1.0,
+            "headroom_inferred_noninteger_record": 1.0,
+            "headroom_inferred_noninteger_tuple": 1.0
+          },
+          "rejected_patch_success": 1.0,
+          "shapes_in_band": 0
+        }
+      },
+      "explicit_failed_test_success": 0.8888888888888888,
+      "invalid_action_rate_per_turn": 0.013774104683195593,
+      "n_cases": 72,
+      "task_content_manifest_sha256": "0b3480ce56ce92c65c8141d671415242f17c5e706e75dbe29f44aa6100f7b346",
+      "task_manifest_sha256": "7c2b10964192d1b377fd6db30b421d141424825c7aa1d5c598d1b8243299148f"
+    }
+  },
+  "checks": {
+    "answer_cap": false,
+    "content_disjoint": true,
+    "eligible_axis_count": false,
+    "explicit_controls": true,
+    "invalid_actions": true
+  },
+  "eligibility_band": [
+    0.15,
+    0.8
+  ],
+  "eligible_axes": [],
+  "eligible_families": {},
+  "gate": {
+    "passed": false
+  },
+  "menagerie_authorized": false,
+  "minimum_shapes_in_band_per_axis_per_block": 2,
+  "model": {
+    "checkpoint": "large_artifacts/qwen35_4b_transaction_invariant_recovery_curriculum/merged/transaction_replay",
+    "id": "Qwen/Qwen3.5-4B",
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "weight_sha256": "1cf5fbca317808d6d00225f5cd533c82c7e1602b2b2e5e2da8f4307b01941ba3"
+  },
+  "schema_version": 1,
+  "stage": "semantic_policy_headroom_qualification"
+}

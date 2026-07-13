@@ -383,3 +383,31 @@ capability production: qualify multiple semantic conflicts under the exact
 prompt/verifier distribution, require replicated non-saturation, and only then
 bank/train on disjoint skins. Do not lower the current bars or expose the
 trained candidate post-stop.
+
+## qwen35_4b_semantic_policy_headroom_tournament (2026-07-13 — Instrument failure)
+
+The no-training qualification ran the exact learned transaction parent on two
+content-disjoint 72-case blocks. Its formal verdict is `INSTRUMENT_FAIL`:
+answer-cap contacts were 43/356 turns (0.1208) and 46/363 (0.1267), above the
+frozen 0.05 ceiling. Explicit controls passed at 9/9 and 8/9; invalid actions
+were only 0.0169/0.0138. Most cap contacts contained a valid tool call followed
+by run-on, but all 12 endpoint failures contacted the cap, so the registered
+stop cannot be waived. No training or Menagerie event ran.
+
+No semantic axis qualified even descriptively under the frozen rule. Negative
+and non-integer failed-test recovery were 9/9 across all three representations
+in both blocks. Blank-resource recovery was 8/9 and 7/9, but only record was
+inside the 0.15–0.80 band in A and only tuple in B; replicated two-shape support
+was absent.
+
+The trajectory-state contrast changes strategy. Every one of 72 failed-test
+cases reached a fully correct patch, and the four terminal misses were later
+regressions. Without test output, inferred-contract rejected cases produced
+0/54 fully correct first patches; none of all 72 rejected trajectories read the
+visible tests before first patching, although 64/72 eventually reached correct
+workspaces after later evidence. Read: the missing unit is active specification
+acquisition before proposal, not post-failure semantic revision. The warranted
+successor should counterfactually pair nearly identical issue/source states
+with flipped public evidence, teach evidence inspection then evidence-faithful
+first patches, replay the full conditional loop, and beat matched replay and
+sample-more on held-out evidence channels before Menagerie.

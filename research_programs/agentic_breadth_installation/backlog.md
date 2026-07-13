@@ -77,12 +77,21 @@
   removed the historical residual; +15/+10 bars were impossible and candidate
   behavior, transfer, and Menagerie stayed sealed. Do not lower bars or expose
   the trained candidate post-stop.
-- Active qualification: `qwen35_4b_semantic_policy_headroom_tournament`
-  crosses explicit versus verifier-inferred contracts for negative, non-integer,
-  and blank-resource conflicts over bundle/record/tuple representations on two
-  disjoint blocks. It trains nothing and hard-disables Menagerie. Admit an axis
-  to later curriculum work only if parent failed-test success replicates inside
-  the frozen 0.15–0.80 band with two-of-three shape support.
+- Completed instrument-gated qualification:
+  `qwen35_4b_semantic_policy_headroom_tournament`. The formal verdict is
+  `INSTRUMENT_FAIL`: answer-cap contacts were 12.08%/12.67% versus the frozen
+  5% ceiling. No post-failure axis qualified independently—negative and
+  non-integer were 9/9 in both blocks, while blank had only one in-band shape
+  per block and the shape changed. Do not train on these failed-test states.
+- Highest-priority successor: active specification acquisition. On the opened
+  trajectories, all 72 failed-test cases reached a correct patch, but inferred
+  rejected-patch first-patch correctness was 0/54 and visible-test inspection
+  before first patch was 0/72. Build counterfactual pairs with issue/source held
+  constant and discriminating public evidence flipped; first qualify, then
+  train `ambiguous_state→inspect_evidence→evidence_faithful_patch` alongside
+  complete recovery/verify/commit replay. Repair answer allowance in a separate
+  frozen preflight, and keep entropy/varentropy to mining/stratification rather
+  than correctness labels.
 - Future retraining should calibrate plan dose by realized gradient/surprisal
   and avoid supervising plan starts already rank 1 or wildly off-policy lexical
   templates.

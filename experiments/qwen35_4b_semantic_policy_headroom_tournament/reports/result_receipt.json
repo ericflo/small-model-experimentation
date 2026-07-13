@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qwen35_4b_semantic_policy_headroom_tournament",
+  "verdict": "INSTRUMENT_FAIL",
+  "secondary_outcome": "NO_REPLICATED_ELIGIBLE_AXIS",
+  "design_commit": "391dadc163dbee25e844bfde7c7ab9d70f23ca11",
+  "design_lock_commit": "9cc90db4f3ccb014ddd5b4c6cc6250265db5bfbc",
+  "model": {
+    "id": "Qwen/Qwen3.5-4B",
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "checkpoint": "large_artifacts/qwen35_4b_transaction_invariant_recovery_curriculum/merged/transaction_replay",
+    "weight_sha256": "1cf5fbca317808d6d00225f5cd533c82c7e1602b2b2e5e2da8f4307b01941ba3"
+  },
+  "qualification": {
+    "eligibility_band": [
+      0.15,
+      0.8
+    ],
+    "minimum_shapes_in_band_per_axis_per_block": 2,
+    "eligible_axes": [],
+    "checks": {
+      "content_disjoint": true,
+      "explicit_controls": true,
+      "invalid_actions": true,
+      "answer_cap": false,
+      "eligible_axis_count": false
+    },
+    "receipt_sha256": "f6bfc206b20c2a3c5c2383c7fed60ae9c321dadf5c248361bf89b8ea1e8cd0bc"
+  },
+  "blocks": {
+    "headroom_a": {
+      "n_cases": 72,
+      "success": 0.9027777777777778,
+      "failed_test_success": 0.9722222222222222,
+      "rejected_patch_success": 0.8333333333333334,
+      "explicit_failed_test_success": 1.0,
+      "invalid_action_rate_per_turn": 0.016853932584269662,
+      "answer_cap_hit_rate_per_turn": 0.12078651685393259,
+      "answer_cap_hits": 43,
+      "total_turns": 356,
+      "cap_contact_cases": 33,
+      "successful_cap_contact_cases": 26,
+      "axis_failed_test_success": {
+        "negative": 1.0,
+        "noninteger": 1.0,
+        "blank": 0.8888888888888888
+      },
+      "axis_shapes_in_band": {
+        "negative": 0,
+        "noninteger": 0,
+        "blank": 1
+      },
+      "task_manifest_sha256": "30ac9631338ede829b74c0bdcbc4fdf9dccefe30d1cd9b0f14274f45348e78ce",
+      "task_content_manifest_sha256": "b8d1ada34790739828744043c00d6f1d4e6933933a35059a2fb44d47940df00a",
+      "raw_receipt_sha256": "81160fabceb87135203f02dfdf4c119e7df35df171d6f5dd9512bbcebbc24d64"
+    },
+    "headroom_b": {
+      "n_cases": 72,
+      "success": 0.9305555555555556,
+      "failed_test_success": 0.9166666666666666,
+      "rejected_patch_success": 0.9444444444444444,
+      "explicit_failed_test_success": 0.8888888888888888,
+      "invalid_action_rate_per_turn": 0.013774104683195593,
+      "answer_cap_hit_rate_per_turn": 0.12672176308539945,
+      "answer_cap_hits": 46,
+      "total_turns": 363,
+      "cap_contact_cases": 33,
+      "successful_cap_contact_cases": 28,
+      "axis_failed_test_success": {
+        "negative": 1.0,
+        "noninteger": 1.0,
+        "blank": 0.7777777777777778
+      },
+      "axis_shapes_in_band": {
+        "negative": 0,
+        "noninteger": 0,
+        "blank": 1
+      },
+      "task_manifest_sha256": "7c2b10964192d1b377fd6db30b421d141424825c7aa1d5c598d1b8243299148f",
+      "task_content_manifest_sha256": "0b3480ce56ce92c65c8141d671415242f17c5e706e75dbe29f44aa6100f7b346",
+      "raw_receipt_sha256": "2f11b607b7a98afd3a4fae47e5137948390b4ae784ea8fa9f4a6b5820364e982"
+    }
+  },
+  "shape_failed_test_success": {
+    "headroom_a": {
+      "negative_bundle": 1.0,
+      "negative_record": 1.0,
+      "negative_tuple": 1.0,
+      "noninteger_bundle": 1.0,
+      "noninteger_record": 1.0,
+      "noninteger_tuple": 1.0,
+      "blank_bundle": 1.0,
+      "blank_record": 0.6666666666666666,
+      "blank_tuple": 1.0
+    },
+    "headroom_b": {
+      "negative_bundle": 1.0,
+      "negative_record": 1.0,
+      "negative_tuple": 1.0,
+      "noninteger_bundle": 1.0,
+      "noninteger_record": 1.0,
+      "noninteger_tuple": 1.0,
+      "blank_bundle": 1.0,
+      "blank_record": 1.0,
+      "blank_tuple": 0.3333333333333333
+    }
+  },
+  "answer_cap_forensics": {
+    "cap_hits": 89,
+    "total_turns": 719,
+    "cap_hit_rate_per_turn": 0.12378303198887344,
+    "valid_tool_calls_at_cap": 78,
+    "invalid_tool_calls_at_cap": 11,
+    "valid_caps_with_post_call_run_on": 77,
+    "cap_contact_cases": 66,
+    "cap_contact_case_success": 54,
+    "no_cap_cases": 78,
+    "no_cap_case_success": 78,
+    "failed_test_cap_cases_changed_patch_within_two": 38,
+    "failed_test_cap_cases_total": 38,
+    "rejected_patch_cap_cases_valid_changed_within_two": 28,
+    "rejected_patch_cap_cases_total": 28,
+    "read": "The preregistered cap gate genuinely fails, but 87.6% of cap contacts contain a parseable tool call and mostly reflect post-call run-on. Every capped case still retained its targeted recovery transition. Cap contact is associated with all 12 end-to-end failures, so the association should be controlled in a successor rather than dismissed or treated as the semantic mechanism."
+  },
+  "proposal_forensics": {
+    "failed_test_cases": 72,
+    "failed_test_cases_ever_full_correct": 72,
+    "failed_test_terminal_success": 68,
+    "failed_test_regressed_after_full_correct": 4,
+    "rejected_inferred_cases": 54,
+    "rejected_inferred_first_patch_full_correct": 0,
+    "rejected_all_cases": 72,
+    "rejected_all_first_patch_full_correct": 12,
+    "rejected_cases_read_visible_tests_before_first_patch": 0,
+    "rejected_cases_ever_full_correct": 64,
+    "read": "The clean headroom is earlier than failed-test revision. With direct verifier output, every case reached a full-correct patch and the four endpoint misses were later regressions. Without test output, none of 54 inferred-contract rejected cases made a full-correct first patch, and no rejected trajectory inspected visible tests before first patching."
+  },
+  "exposure": {
+    "training_run": false,
+    "checkpoint_created": false,
+    "menagerie_generated": false,
+    "benchmark_seeds_consumed": []
+  },
+  "interpretation": "The exact transaction-trained parent already converts direct failed-test evidence into the negative and non-integer policy in every inferred family. Blank-resource misses are representation- and seed-specific rather than a replicated axis: only one of three shapes is inside the frozen band in each block, and the supported shape changes. Because the answer-cap gate also fails in both blocks, the formal verdict is INSTRUMENT_FAIL and no training substrate is licensed. The next qualification should move earlier to counterfactual evidence acquisition and initial proposal formation, while separating payload truncation from semantic success."
+}

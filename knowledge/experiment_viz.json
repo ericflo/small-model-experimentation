@@ -47251,25 +47251,83 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "The headroom grid reserves nine cells for inferred policy conflicts",
+     "title": "Direct failed-test evidence leaves no replicated policy axis",
      "categories": [
-      "explicit-contract controls",
-      "inferred-contract cells"
+      "negative quantity",
+      "non-integer quantity",
+      "blank resource"
      ],
      "series": [
       {
-       "label": "procedural family cells",
+       "label": "headroom A",
        "values": [
-        3,
-        9
+        1.0,
+        1.0,
+        0.8888888888888888
+       ]
+      },
+      {
+       "label": "headroom B",
+       "values": [
+        1.0,
+        1.0,
+        0.7777777777777778
        ]
       }
      ],
-     "x_label": "contract condition",
-     "y_label": "family cells",
-     "y_format": "integer",
-     "note": "Preregistered design geometry, not a model result. Three semantic conflicts are each crossed with bundle, record, and tuple representations; one explicit control per conflict validates the instrument.",
-     "source": "experiments/qwen35_4b_semantic_policy_headroom_tournament/reports/report.md"
+     "x_label": "inferred semantic policy",
+     "y_label": "failed-test recovery success",
+     "y_format": "percent01",
+     "note": "Negative and non-integer recovery are 9/9 in both blocks. Blank recovery is 8/9 and 7/9, but only one of three representations enters the frozen headroom band in either block, and the supported representation changes.",
+     "source": "experiments/qwen35_4b_semantic_policy_headroom_tournament/reports/result_receipt.json"
+    },
+    {
+     "kind": "bar",
+     "title": "The capability gap moves earlier than failed-test revision",
+     "categories": [
+      "after failure: ever correct",
+      "ambiguous first patch correct",
+      "tests read before first patch"
+     ],
+     "series": [
+      {
+       "label": "share of cases",
+       "values": [
+        1.0,
+        0.0,
+        0.0
+       ]
+      }
+     ],
+     "x_label": "trajectory event",
+     "y_label": "case rate",
+     "y_format": "percent01",
+     "note": "All 72 failed-test trajectories reached a full-correct patch. Without test output, 0/54 inferred-contract cases made a full-correct first patch and 0/72 rejected trajectories read visible tests before first patching.",
+     "source": "experiments/qwen35_4b_semantic_policy_headroom_tournament/reports/result_receipt.json"
+    },
+    {
+     "kind": "bar",
+     "title": "Both qualification blocks fail the answer-cap gate",
+     "categories": [
+      "headroom A",
+      "headroom B",
+      "frozen ceiling"
+     ],
+     "series": [
+      {
+       "label": "cap contacts per turn",
+       "values": [
+        0.12078651685393259,
+        0.12672176308539945,
+        0.05
+       ]
+      }
+     ],
+     "x_label": "qualification block or gate",
+     "y_label": "answer-cap contact rate",
+     "y_format": "percent01",
+     "note": "The registered 5% ceiling is exceeded in both blocks. Most capped turns still begin with a parseable tool call, but every terminal failure contacts the cap, so the formal verdict remains INSTRUMENT_FAIL.",
+     "source": "experiments/qwen35_4b_semantic_policy_headroom_tournament/reports/result_receipt.json"
     }
    ]
   }

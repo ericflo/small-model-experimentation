@@ -355,6 +355,28 @@ capability-production training:** demonstrate replicated parent headroom on
 the exact prompt/verifier state, not merely a related historical failure, then
 reserve disjoint skins for training and transfer.
 
+**The semantic-recovery frontier moves from revision to evidence acquisition
+(2026-07-13, Instrument failure with diagnostic routing value,
+[qwen35_4b_semantic_policy_headroom_tournament](../experiments/qwen35_4b_semantic_policy_headroom_tournament/reports/report.md)).**
+The exact learned transaction parent ran on two disjoint 72-case blocks, but
+answer-cap contacts reached 12.08%/12.67% versus a frozen 5% ceiling, so the
+formal verdict is `INSTRUMENT_FAIL` and no curriculum is licensed. No axis
+qualified independently: negative and non-integer failed-test recovery were
+perfect across both blocks; blank was 8/9 and 7/9 with only one in-band shape
+per block and a different shape each time.
+
+The opened trajectories still expose a useful state distinction without
+rescuing the formal result. Every failed-test case reached a correct patch, and
+four endpoint misses were later regressions. In rejected states with no test
+output, inferred-contract first-patch correctness was 0/54, visible-test reads
+before first patch were 0/72, and 64/72 eventually became correct after later
+evidence. **The next capability strategy is active specification acquisition:**
+counterfactually pair nearly identical issue/source states with discriminating
+public evidence, teach `inspect evidence → evidence-faithful first patch`, and
+replay the full recovery/verify/commit loop. Repair payload measurement in a
+fresh frozen preflight; do not turn answer closure, entropy, or varentropy into
+the capability label.
+
 The licensed J-value measurement is now a clean negative for the shared
 coordinate. All 144 value traces and 288 midpoint/endpoint states completed,
 but task-held-out shared J AUC was 0.5021 with one-sided task-bootstrap lower

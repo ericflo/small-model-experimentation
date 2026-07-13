@@ -1,10 +1,20 @@
 schema_version: 1
 experiment_id: "qwen35_4b_semantic_policy_headroom_tournament"
 external_artifacts:
-  - name: detailed parent qualification trajectories
-    storage: large_artifacts/qwen35_4b_semantic_policy_headroom_tournament/{smoke,eval}
+  - name: GPU smoke trajectories
+    storage: large_artifacts/qwen35_4b_semantic_policy_headroom_tournament/smoke/eval.json
+    required_for: all-family/state model-path preflight
+    checksum: sha256:43d144c296e3228594f7b3c9c53fd130fbe829bae845ddd07574d2a3b0a6362d
+    regenerate: .venv/bin/python experiments/qwen35_4b_semantic_policy_headroom_tournament/scripts/run.py --gpu-smoke
+  - name: headroom A parent trajectories
+    storage: large_artifacts/qwen35_4b_semantic_policy_headroom_tournament/eval/headroom_a_parent_deep.json
     required_for: axis/shape forensics and replication
-    checksum: recorded in the final result receipt
+    checksum: sha256:81160fabceb87135203f02dfdf4c119e7df35df171d6f5dd9512bbcebbc24d64
+    regenerate: .venv/bin/python experiments/qwen35_4b_semantic_policy_headroom_tournament/scripts/run.py --full
+  - name: headroom B parent trajectories
+    storage: large_artifacts/qwen35_4b_semantic_policy_headroom_tournament/eval/headroom_b_parent_deep.json
+    required_for: axis/shape forensics and replication
+    checksum: sha256:2f11b607b7a98afd3a4fae47e5137948390b4ae784ea8fa9f4a6b5820364e982
     regenerate: .venv/bin/python experiments/qwen35_4b_semantic_policy_headroom_tournament/scripts/run.py --full
 omitted_artifacts:
   - path: large_artifacts/qwen35_4b_semantic_policy_headroom_tournament
@@ -14,4 +24,6 @@ reproducibility:
   full_command: .venv/bin/python experiments/qwen35_4b_semantic_policy_headroom_tournament/scripts/run.py --full
   required_external_artifacts:
     - large_artifacts/qwen35_4b_transaction_invariant_recovery_curriculum/merged/transaction_replay
-notes: No training and no Menagerie event are authorized by this experiment.
+notes: >-
+  Terminal verdict INSTRUMENT_FAIL. No axis was licensed, no training or
+  checkpoint exists, and no Menagerie event or benchmark seed was consumed.

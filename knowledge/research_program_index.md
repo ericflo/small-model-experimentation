@@ -10,7 +10,7 @@ Generated from `research_programs/registry.yaml` and experiment metadata. The im
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 169
+- Assigned experiments: 170
 
 ### Seed Evidence
 
@@ -97,6 +97,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_repo_search_compress_bank` (new): [README](../experiments/qwen35_4b_repo_search_compress_bank/README.md)
 - `qwen35_4b_same_prefix_advantage_routing` (new): [README](../experiments/qwen35_4b_same_prefix_advantage_routing/README.md)
 - `qwen35_4b_semantic_anchor_coordinate_branching` (new): [README](../experiments/qwen35_4b_semantic_anchor_coordinate_branching/README.md)
+- `qwen35_4b_semantic_policy_headroom_tournament` (new): [README](../experiments/qwen35_4b_semantic_policy_headroom_tournament/README.md)
 - `qwen35_4b_simulation_keystone_repair` (new): [README](../experiments/qwen35_4b_simulation_keystone_repair/README.md)
 - `qwen35_4b_state_carry_vs_state_bag` (new): [README](../experiments/qwen35_4b_state_carry_vs_state_bag/README.md)
 - `qwen35_4b_state_carry_vs_state_bag_fullrank_delta` (new): [README](../experiments/qwen35_4b_state_carry_vs_state_bag_fullrank_delta/README.md)
@@ -300,7 +301,7 @@ Turn candidate-pool coverage into deployable decisions under visible evidence.
 Choose or synthesize the next visible example, probe, test, or trace that collapses uncertainty.
 
 - Charter: [active_evidence_acquisition](../research_programs/active_evidence_acquisition/charter.md)
-- Assigned experiments: 14
+- Assigned experiments: 15
 
 ### Seed Evidence
 
@@ -317,6 +318,7 @@ Choose or synthesize the next visible example, probe, test, or trace that collap
 - `qwen35_4b_adaptive_evidence_budget_policy` (track-z): [README](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md)
 - `qwen35_4b_interactive_policy_curriculum` (new): [README](../experiments/qwen35_4b_interactive_policy_curriculum/README.md)
 - `qwen35_4b_learned_active_trace_policy` (track-z): [README](../experiments/qwen35_4b_learned_active_trace_policy/README.md)
+- `qwen35_4b_semantic_policy_headroom_tournament` (new): [README](../experiments/qwen35_4b_semantic_policy_headroom_tournament/README.md)
 - `qwen35_4b_unsaturated_frontier_active_bridge` (track-z): [README](../experiments/qwen35_4b_unsaturated_frontier_active_bridge/README.md)
 - `qwen35_4b_verified_macro_long_context_rerun` (new): [README](../experiments/qwen35_4b_verified_macro_long_context_rerun/README.md)
 - `qwen_active_crystallizer_public_gate` (track-y): [README](../experiments/qwen_active_crystallizer_public_gate/README.md)

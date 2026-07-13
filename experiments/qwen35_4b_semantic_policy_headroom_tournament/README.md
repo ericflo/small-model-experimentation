@@ -1,10 +1,10 @@
 # Semantic-policy headroom tournament
 
-**Status:** in-progress · since 2026-07-13 · design locked at `391dadc1`;
-GPU smoke and two parent-only model blocks remain.
+**Status:** finished
 
-Qualify non-saturated verifier-conditioned semantic conflicts before spending
-another update on Qwen3.5-4B.
+This no-training tournament found no replicated post-failure semantic axis and
+stopped on its answer-cap instrument gate. Its trajectory contrast moves the
+capability target earlier, to evidence acquisition before the first patch.
 
 ## Research program
 
@@ -71,11 +71,64 @@ python experiments/qwen35_4b_semantic_policy_headroom_tournament/scripts/run.py 
 .venv/bin/python experiments/qwen35_4b_semantic_policy_headroom_tournament/scripts/run.py --full
 ```
 
-## Current evidence
+## Result
 
-CPU smoke and 19 unit tests pass. Both 36-repository blocks are internally
-unique and mutually content-disjoint; all 12 initial/partial fixtures fail both
-executable suites and every oracle passes. No model output exists yet.
+**Verdict: `INSTRUMENT_FAIL`.** The preregistered answer-cap gate failed in
+both parent blocks, so no semantic axis is licensed for training. The runner
+stopped with its registered gate code; no checkpoint was trained and Menagerie
+remained sealed.
+
+| Inferred axis | Headroom A failed-test success | Shapes in band | Headroom B failed-test success | Shapes in band |
+| --- | ---: | ---: | ---: | ---: |
+| negative quantity | 9/9 | 0/3 | 9/9 | 0/3 |
+| non-integer quantity | 9/9 | 0/3 | 9/9 | 0/3 |
+| blank resource | 8/9 | 1/3 | 7/9 | 1/3 |
+
+Negative and non-integer handling were saturated after direct failed-test
+evidence in both blocks. Blank-resource repair was uneven: record was the only
+shape inside the 15–80% band in A, while tuple was the only one in B. Thus no
+axis met the frozen requirement for two supported shapes in both blocks even
+apart from the interface failure. Explicit controls passed at 9/9 and 8/9, and
+invalid actions stayed at 1.69% and 1.38% of turns.
+
+The cap gate failed at 43/356 turns (12.08%) in A and 46/363 (12.67%) in B,
+against a 5% ceiling. Forensics localize the problem: 78/89 capped answers
+contained a valid first tool call, and 77 of those continued with post-call
+run-on. All capped cases still retained the targeted recovery transition, but
+all 12 end-to-end failures contacted the cap. The formal stop therefore stands;
+the association cannot be dismissed or interpreted as the semantic mechanism.
+
+## Interpretation
+
+This qualification does not support another post-failure policy curriculum.
+The parent usually converts explicit verifier evidence into the correct
+semantic revision already, and the remaining blank-resource misses do not
+replicate across representations. The more promising frontier is earlier in
+the loop: acquiring ambiguous public evidence and binding it to the *initial*
+proposal before a failed test supplies the answer.
+
+The trajectory contrast makes that pivot concrete. Every one of 72 failed-test
+cases reached a fully correct patch; the four terminal misses were destructive
+regressions after correctness. In the rejected-patch condition, by contrast,
+none of 54 inferred-contract cases produced a fully correct first patch, and
+zero of 72 rejected trajectories inspected visible tests before first patching.
+The model can use decisive evidence once handed to it, but does not acquire
+that evidence before committing to an ambiguous proposal.
+
+A successor should use counterfactual pairs whose issue and source are held
+constant while visible evidence flips the required policy, then balance the
+`inspect→patch`, `rejected_patch→changed_patch`, and
+`failed_test→diagnose/revise` transitions. It should repair the measurement
+with a payload-safe, parse-aware answer allowance, while keeping response
+closure diagnostic rather than turning slop suppression into the capability
+objective. Exact metrics and hashes are in
+[`reports/result_receipt.json`](reports/result_receipt.json).
+
+## Knowledgebase update
+
+Program evidence, backlog, scorecard, and shared synthesis record the formal
+instrument failure and the earlier-loop pivot. The claim ledger is unchanged:
+this no-training qualification produced no checkpoint or benchmark result.
 
 ## Artifacts
 

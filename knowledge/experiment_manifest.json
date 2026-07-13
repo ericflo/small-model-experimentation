@@ -4425,7 +4425,7 @@
   },
   {
     "file_counts": {
-      ".json": 2,
+      ".json": 4,
       ".md": 7,
       ".py": 10,
       ".yaml": 3
@@ -4435,22 +4435,27 @@
     "primary_readme": "experiments/qwen35_4b_semantic_policy_headroom_tournament/README.md",
     "primary_report": "experiments/qwen35_4b_semantic_policy_headroom_tournament/reports/report.md",
     "research_programs": [
+      "active_evidence_acquisition",
       "agentic_breadth_installation",
       "benchmark_generalization",
       "evidence_conditioned_selection",
       "interpretability_and_diagnostics",
       "posttraining_and_adaptation",
       "process_control_and_tool_use",
-      "reliability_and_safety"
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
     ],
     "source_track": "new",
-    "summary": "GPU smoke and two parent-only model blocks remain.",
+    "summary": "This no-training tournament found no replicated post-failure semantic axis and stopped on its answer-cap instrument gate. Its trajectory contrast moves the capability target earlier, to evidence acquisition before the first patch.",
     "tags": [
+      "abi",
+      "active-learning",
       "policy",
       "small-model"
     ],
     "title": "Semantic-policy headroom tournament",
     "top_level_dirs": [
+      "analysis",
       "configs",
       "reports",
       "runs",
@@ -4458,8 +4463,8 @@
       "src",
       "tests"
     ],
-    "total_files": 22,
-    "total_size_bytes": 258125
+    "total_files": 24,
+    "total_size_bytes": 280309
   },
   {
     "file_counts": {

@@ -12853,40 +12853,52 @@
    ]
   },
   "qwen35_4b_semantic_policy_headroom_tournament": {
-   "verdict_tag": "Find a learnable gap before teaching it",
-   "concept_primer": "Training can only prove improvement when the starting model sometimes fails but is not completely lost. This qualification measures that middle ground before any new lessons are created.",
-   "plain_question": "Which malformed-input rules still challenge the transaction-trained model after a visible test failure, across several ways of representing requests?",
-   "plain_answer": "The measurement is designed but has not run yet. It will test three rule conflicts in bundles, records, and tuples on two separate groups, while clear instructions serve as a control. No model will be trained in this experiment.",
-   "why_it_matters": "The previous curriculum spent training compute on practice cases the starting model already solved perfectly. A headroom gate prevents that mistake and ensures the next training experiment targets a real, repeated capability gap.",
-   "verdict_tone": "neutral",
+   "verdict_tag": "The gap is before the failed test",
+   "concept_primer": "A coding agent can know how to fix a clearly reported failure yet still patch too early when the requirement is ambiguous. The missing skill can be gathering the decisive evidence before writing code.",
+   "plain_question": "Which malformed-input rules still challenge the transaction-trained model after a visible failure, and where in the coding loop does the remaining difficulty actually appear?",
+   "plain_answer": "No rule produced a stable training target after a failed test: every one of 72 cases reached a correct patch. But before seeing test output, the model got zero of 54 ambiguous first patches fully right and never opened the visible tests first. The run formally stopped because answers also exceeded their length allowance too often.",
+   "why_it_matters": "More post-failure practice would teach behavior the model already has. The promising strategy is to teach it to inspect the evidence that distinguishes two plausible requirements, then make its first patch follow what it found.",
+   "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Inferred-rule family cells",
-     "value": "9",
-     "sub": "three conflicts crossed with three data shapes"
+     "label": "Correct after failure",
+     "value": "72 of 72",
+     "sub": "every case reached a fully correct patch"
     },
     {
-     "label": "Clear-instruction controls",
-     "value": "3",
-     "sub": "one per conflict to validate the task and harness"
+     "label": "Ambiguous first patches",
+     "value": "0 of 54",
+     "sub": "fully correct without test output"
     },
     {
-     "label": "Fresh repositories per block",
-     "value": "36",
-     "sub": "two blocks are content-disjoint"
+     "label": "Tests read before patching",
+     "value": "0 of 72",
+     "sub": "in rejected-patch trajectories"
     },
     {
-     "label": "Training and benchmark calls",
-     "value": "zero",
-     "sub": "qualification only"
+     "label": "Answer-limit contacts",
+     "value": "12% / 13%",
+     "sub": "both blocks exceeded the 5% stop"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Most family cells test inference rather than copied instructions",
-     "chart_read": "The two bars divide the twelve family cells into clear-instruction controls and inferred-rule tests. Taller means more family cells, not better performance.",
-     "chart_takeaway": "Nine cells probe real headroom across rule and representation, while three controls check that explicit instructions remain solvable."
+     "chart_plain_title": "Most rules were already repaired after a visible failure",
+     "chart_read": "Each group is one hidden rule, with one bar for each fresh block. Taller means the model ended with the correct behavior more often after seeing the failed test.",
+     "chart_takeaway": "Negative and non-integer handling were perfect in both blocks; blank-resource misses moved between data shapes and did not form a stable lesson."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "The sharp gap appears before the first patch",
+     "chart_read": "The first bar asks whether a correct patch ever appeared after test output. The other bars ask whether the model got an ambiguous first patch right or read the tests before making it.",
+     "chart_takeaway": "The model can act on decisive failure evidence, but it does not seek that evidence before committing to a guess."
+    },
+    {
+     "index": 2,
+     "chart_plain_title": "Both blocks exceeded the answer-length stop",
+     "chart_read": "The first two bars are the share of tool turns that filled the answer allowance; the last bar is the maximum allowed rate. Shorter is better.",
+     "chart_takeaway": "The formal result remains an instrument failure even though most long answers contained a usable tool call."
     }
    ]
   }
