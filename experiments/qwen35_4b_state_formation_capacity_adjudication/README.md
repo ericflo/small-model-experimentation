@@ -1,15 +1,18 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · design and implementation reviews are `GO`; CPU smoke passes; no model-bearing or result-bearing run has started
+**Status:** in-progress · since 2026-07-13 · design is frozen at `86230605`; fresh data and common initialization are prepared; no Qwen load or result-bearing run has started
 
 ## Current status
 
 This is the canonical fresh adjudication of the unresolved LoRA-capacity question from
-`qwen35_4b_state_carry_vs_state_bag`. It is not a continuation of either prior checkpoint. The
-procedural rows, shared loop-state initialization bundles, training runs, evaluations, and result
-receipts do not exist yet. Preregistration, adversarial design review, implementation review, the
-130-test suite, and setup-only CPU smoke are complete. The next step is to commit this reviewed tree,
-freeze its design receipt at that clean `HEAD`, and only then attempt the live setup gates.
+`qwen35_4b_state_carry_vs_state_bag`. It is not a continuation of either prior checkpoint.
+Preregistration, adversarial design review, implementation review, the 130-test suite, setup-only CPU
+smoke, the frozen design boundary, all seven fresh procedural splits, and the three seed-matched
+common loop-state initialization bundles are complete. The sealed contrast payloads have not been
+opened after generation. Live environment preflight found one idle RTX 6000 Ada with the required
+kernels and package lock. No Qwen model load, mechanics gate, positive control, result training,
+evaluation, or scientific analysis has run. The next step is the three LoRA G0 mechanics gates and
+their seed-matched setup-only positive controls.
 
 ## Research program and prior anchors
 

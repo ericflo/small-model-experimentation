@@ -5,7 +5,7 @@ source_track: "new"
 path: "experiments/qwen35_4b_state_formation_capacity_adjudication"
 primary_readme: "experiments/qwen35_4b_state_formation_capacity_adjudication/README.md"
 primary_report: "experiments/qwen35_4b_state_formation_capacity_adjudication/reports/report.md"
-summary: "This is the canonical fresh adjudication of the unresolved LoRA-capacity question from `qwen35_4b_state_carry_vs_state_bag`. It is not a continuation of either prior checkpoint. The procedural rows, shared loop-state initialization bundles, training runs, evaluations, and result receipts do not exist yet. Preregistration, adversarial design review, implementation review, the 130-test suite, and setup-only CPU smoke are complete. The next step is to commit this reviewed tree, freeze its design receipt at that clean `HEAD`, and only then attempt the live setup gates."
+summary: "This is the canonical fresh adjudication of the unresolved LoRA-capacity question from `qwen35_4b_state_carry_vs_state_bag`. It is not a continuation of either prior checkpoint. Preregistration, adversarial design review, implementation review, the 130-test suite, setup-only CPU smoke, the frozen design boundary, all seven fresh procedural splits, and the three seed-matched common loop-state initialization bundles are complete. The sealed contrast payloads have not been opened after generation. Live environment preflight found one idle RTX 6000 Ada with the required kernels and package lock. No Qwen model load, mechanics gate, positive control, result training, evaluation, or scientific analysis has run. The next step is the three LoRA G0 mechanics gates and their seed-matched setup-only positive controls."
 tags:
   - "latent-state"
   - "lora"
@@ -25,10 +25,10 @@ top_level_dirs:
   - "tests"
 file_counts:
   csv: 1
-  json: 1
+  json: 7
   md: 11
   py: 29
   yaml: 4
   "[none]": 1
-total_files: 47
-total_size_bytes: 747300
+total_files: 53
+total_size_bytes: 2147474

@@ -4,8 +4,8 @@ external_artifacts:
   - name: "per-seed common loop-state initialization bundles"
     storage: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed{7411,7412,7413}.pt"
     required_for: "bit-identical reconstruction of every reached capacity/objective arm"
-    checksum: "not yet created; each tracked initialization receipt must record the runtime file SHA256 and canonical tensor-value digest"
-    regenerate: "follow docs/gpu_runbook.md initialization stage before any result-bearing training"
+    checksum: "seed7411=2d3d1f11c78d561a4e623e0512326ad20560e10aaa192276611250b1d3b73497; seed7412=c236d1f936b570447746a561286da643fe958a705aa26e17bd5fe0bbb7299c9e; seed7413=c4a20778d5ff803faff944bd3735a92869f132982bef2b51a5e5c0ecbbee5448"
+    regenerate: "already realized and required; preserve these exact external bundles and tracked runs/setup/initialization_seed{7411,7412,7413}.json mirrors"
   - name: "fixed-final LoRA joint checkpoints"
     storage: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/lora_joint_seed{7411,7412,7413}/"
     required_for: "primary LoRA state-formation adjudication and intact/disabled reevaluation"
@@ -39,13 +39,16 @@ omitted_artifacts:
 reproducibility:
   smoke_command: "python3 experiments/qwen35_4b_state_formation_capacity_adjudication/scripts/run.py --stage cpu-smoke"
   full_command: "phase-gated and intentionally non-monolithic: follow docs/gpu_runbook.md; every result stage verifies its exact upstream receipts and branch authorization"
-  required_external_artifacts: []
+  required_external_artifacts:
+    - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed7411.pt"
+    - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed7412.pt"
+    - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed7413.pt"
 notes: >-
-  The only realized runtime artifact is the tracked setup-only runs/cpu_smoke/receipt.json; it records
-  CPU_SMOKE_PASS, zero benchmark reads, no GPU/model load, scientific_evidence false, and the final
-  reviewed source-contract digest. No model-bearing or result-bearing artifact exists, so no such
-  runtime hash is asserted. Populate exact SHA256 values only from generated receipts after each
-  artifact is created. Small data manifests,
+  Realized setup artifacts are the tracked CPU-smoke receipt, immutable design receipt, fresh-data
+  manifest and empty contrast-access ledger, three tracked initialization receipts, and their three
+  required external tensor bundles. They record zero benchmark reads and no Qwen/model load. No
+  mechanics, positive-control, or result-bearing artifact exists yet. Populate exact SHA256 values
+  only from generated receipts after each later artifact is created. Small data manifests,
   the contrast access ledger, the canonical reports/design_receipt.json, initialization receipts,
   mechanics and branch receipts, training metrics, evaluation rows and summaries, analysis outputs,
   and run indices belong in git when generated. In particular, evaluation of contrast_validation,

@@ -1,0 +1,53 @@
+{
+  "benchmark_files_read": 0,
+  "config_sha256": "eeb4e828526f750dce1258bcc91d03114c80688d300112e03d18c9d911489393",
+  "experiment_id": "qwen35_4b_state_formation_capacity_adjudication",
+  "frozen_files": [
+    {
+      "bytes": 3478,
+      "path": "experiments/qwen35_4b_state_formation_capacity_adjudication/configs/default.yaml",
+      "sha256": "b165537c8c86531ac17aecfa5c65045a708cd4b196b7614c6f98331a9fae1ca8"
+    },
+    {
+      "bytes": 15490,
+      "path": "experiments/qwen35_4b_state_formation_capacity_adjudication/docs/architecture.md",
+      "sha256": "2e278cf7111ccb54dcf47dfc2b6905c734f527974e72f725879ba1cc99729cec"
+    },
+    {
+      "bytes": 25818,
+      "path": "experiments/qwen35_4b_state_formation_capacity_adjudication/docs/gpu_runbook.md",
+      "sha256": "ab5d9777ae0dfdd9d01a396e069f5ee0e68d717b306b1cba523f754ea2b3063e"
+    },
+    {
+      "bytes": 11387,
+      "path": "experiments/qwen35_4b_state_formation_capacity_adjudication/docs/research_handoff.md",
+      "sha256": "e46de4e95f982d33b4df575513a94d4d8531d40b2c8121b10f2861384a5b8d0d"
+    },
+    {
+      "bytes": 9076,
+      "path": "experiments/qwen35_4b_state_formation_capacity_adjudication/idea_intake.md",
+      "sha256": "f1b774b574a8ff49d91fe2e14493eb3ac2e33704d43c0704a1f5f82f4c65ce07"
+    },
+    {
+      "bytes": 12856,
+      "path": "experiments/qwen35_4b_state_formation_capacity_adjudication/reports/design_review.md",
+      "sha256": "496a58b87dc9cb4e4e396aa1a5f875b75590a0578c2a7d9af315ad3a552bbd0c"
+    },
+    {
+      "bytes": 28253,
+      "path": "experiments/qwen35_4b_state_formation_capacity_adjudication/reports/preregistration.md",
+      "sha256": "4c58cfa387af1f5ad5d8a87490580f4c0d578864368af139b74d0e2e8f0b376e"
+    }
+  ],
+  "frozen_files_sha256": "fbe1c835491a18eb7f19421e831ec0fd9b1f0c33f46e5999ed18e69de77904ee",
+  "implementation_provenance_at_freeze": {
+    "git_head": "8623060505b67d373557d89db7366d4bea56db44",
+    "requirements_training_lock_sha256": "05546fe977583116d6169ea0dfa7b27e1184dd4a2b61d556dfb3f889d5b2b7b1",
+    "source_contract_sha256": "903f19141ef982f0e90ea856edd72d75fb48d2dbd96e81dc166a6c32d4c14116"
+  },
+  "phase": "design_boundary",
+  "receipt_identity_sha256": "d943b909250c2ebd377b8094bb55324a5d5ccf555c7559736526f013d248ac52",
+  "schema_version": 1,
+  "scientific_evidence": false,
+  "status": "DESIGN_FROZEN"
+}

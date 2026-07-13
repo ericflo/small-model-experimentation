@@ -129,9 +129,32 @@
 - These changes harden execution mechanics only; they do not change the preregistered scientific
   design. Downstream source-bound artifacts must use the final post-repair source-contract digest.
 
+## 2026-07-13 — clean-head freeze and setup artifacts
+
+- Froze `reports/design_receipt.json` at clean committed head `86230605` with exact status
+  `DESIGN_FROZEN`, zero benchmark reads, design identity
+  `d943b909250c2ebd377b8094bb55324a5d5ccf555c7559736526f013d248ac52`, source-contract digest
+  `903f19141ef982f0e90ea856edd72d75fb48d2dbd96e81dc166a6c32d4c14116`, and training-lock digest
+  `05546fe977583116d6169ea0dfa7b27e1184dd4a2b61d556dfb3f889d5b2b7b1`.
+- Generated the seven fresh deterministic splits. The tracked manifest records 12,000 training rows,
+  1,024 trigger rows in each domain, 768 sealed trained-depth rows, 1,024 sealed depth rows, 1,024
+  sealed joint-shift rows, zero cross-split structural duplicates, zero benchmark reads, and data
+  contract `2eb5c134fb0818aeadb1cd9ac0074554cc26b5c010c248316c6e1eeb56f02291`.
+- Left all three sealed contrast payloads unopened after generation. Their empty access ledger has
+  identity `238c0ace4e4cc929657de28130e0c2775f31faa2f096027e25ab8bd635ae922d`.
+- Created and independently reopened the three canonical common-state bundles. Seeds 7411, 7412, and
+  7413 have bundle SHA-256 values `2d3d1f11c78d561a4e623e0512326ad20560e10aaa192276611250b1d3b73497`,
+  `c236d1f936b570447746a561286da643fe958a705aa26e17bd5fe0bbb7299c9e`, and
+  `c4a20778d5ff803faff944bd3735a92869f132982bef2b51a5e5c0ecbbee5448`, respectively; each tracked
+  mirror is byte-identical to its external sidecar.
+- Live preflight found exactly one idle RTX 6000 Ada, 49,138 MiB total minus 2 MiB in use, no GPU
+  process, a compatible 76-package environment, and both required causal-convolution and
+  flash-linear-attention kernels. All 130 experiment tests passed again. No model was loaded.
+
 ## Current authorization
 
-Documentation, adversarial review, CPU tests, and implementation review are authorized. Model-bearing
-execution remains unauthorized until the design receipt is frozen and all setup prerequisites in
-`docs/gpu_runbook.md` pass. Runtime-bound hashes are intentionally absent because their artifacts have
-not been created.
+Documentation, adversarial review, CPU tests, implementation review, the immutable design boundary,
+fresh-data generation, and common-state initialization are complete. The live package/kernel/GPU
+preflight passes. LoRA G0 mechanics and the seed-matched setup-only positive controls are now
+authorized; result-bearing training remains prohibited until both gates pass for the corresponding
+seed.
