@@ -1,5 +1,7 @@
 # Full-Rank Extra-R Delta: State-Carry Versus State-Bag
 
+**Status:** in-progress · since 2026-07-13 · live G0 feasibility and the preregistered matched pilot remain.
+
 **Status: implementation reviewed; proceed through the gated run; not yet run.** This is the preregistered capacity
 successor to `qwen35_4b_state_carry_vs_state_bag`. Its valid rank-32 LoRA pilot
 formed almost no joint state (`0.00459` joint trajectory accuracy), so it could

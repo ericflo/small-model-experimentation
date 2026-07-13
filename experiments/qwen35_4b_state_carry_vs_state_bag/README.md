@@ -1,5 +1,7 @@
 # State-Carry Versus State-Bag Counterfactual
 
+**Status:** finished
+
 **Terminal LoRA status: `PILOT_MECHANISM_MISS`.** The fixed-source, independently seeded
 rank-32 LoRA pilot was valid and complete, but it failed the preregistered deep-state-formation
 gate. Confirmation and sample-more were therefore not run. This result mandates a fresh
