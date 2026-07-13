@@ -4593,6 +4593,7 @@
   {
     "file_counts": {
       ".csv": 2,
+      ".json": 2,
       ".md": 11,
       ".py": 21,
       ".yaml": 4,
@@ -4607,7 +4608,7 @@
       "structured_execution_and_compilers"
     ],
     "source_track": "new",
-    "summary": "successor to `qwen35_4b_state_carry_vs_state_bag`. Its valid rank-32 LoRA pilot formed almost no joint state (`0.00459` joint trajectory accuracy), so it could not answer whether the serial-state mechanism failed or the adaptation subspace was too restrictive. No model, data-preparation, training, or evaluation stage has been started in this successor.",
+    "summary": "**G0 status: `MODEL_SMOKE_PASS`; scientific pilot not yet run.** This is the preregistered capacity successor to `qwen35_4b_state_carry_vs_state_bag`. Its valid rank-32 LoRA pilot formed almost no joint state (`0.00459` joint trajectory accuracy), so it could not answer whether the serial-state mechanism failed or the adaptation subspace was too restrictive.",
     "tags": [
       "latent-state",
       "lora",
@@ -4620,12 +4621,13 @@
       "data",
       "docs",
       "reports",
+      "runs",
       "scripts",
       "src",
       "tests"
     ],
-    "total_files": 39,
-    "total_size_bytes": 316997
+    "total_files": 41,
+    "total_size_bytes": 345586
   },
   {
     "file_counts": {

@@ -11,6 +11,11 @@ reproducibility:
   full_command: "phase-gated and authorized; follow docs/gpu_runbook.md from parent-trigger validation through the licensed stop"
   required_external_artifacts: []
 notes: >-
-  Setup only. No full data, model-smoke, checkpoint, evaluation, or scientific
-  artifact exists. At run time the parent LoRA analysis summary is a required
-  trigger input but is not copied or modified by this experiment.
+  Canonical CPU smoke, full-data preparation, and live model-smoke have run.
+  The deterministic data manifest SHA256 is
+  1ad19fd3e74e43c52d7e9dc1fbdfc3d9ea0ac4f2b697f6e7e4f7454a40281da5;
+  it covers 11 splits and 27,744 parent-identical rows. The tracked G0 receipt
+  has identity 0832423e632a5c056e701eacb5b7e70387595956cccbadbe9453cb583c8346fc.
+  Its temporary 3.571 GB round-trip checkpoint was deliberately removed. No
+  training checkpoint, evaluation, or scientific result exists yet. The parent
+  LoRA trigger summary is read in place and is not copied or modified.

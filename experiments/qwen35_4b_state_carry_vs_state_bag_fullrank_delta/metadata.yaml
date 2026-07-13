@@ -5,7 +5,7 @@ source_track: "new"
 path: "experiments/qwen35_4b_state_carry_vs_state_bag_fullrank_delta"
 primary_readme: "experiments/qwen35_4b_state_carry_vs_state_bag_fullrank_delta/README.md"
 primary_report: "experiments/qwen35_4b_state_carry_vs_state_bag_fullrank_delta/reports/report.md"
-summary: "successor to `qwen35_4b_state_carry_vs_state_bag`. Its valid rank-32 LoRA pilot formed almost no joint state (`0.00459` joint trajectory accuracy), so it could not answer whether the serial-state mechanism failed or the adaptation subspace was too restrictive. No model, data-preparation, training, or evaluation stage has been started in this successor."
+summary: "**G0 status: `MODEL_SMOKE_PASS`; scientific pilot not yet run.** This is the preregistered capacity successor to `qwen35_4b_state_carry_vs_state_bag`. Its valid rank-32 LoRA pilot formed almost no joint state (`0.00459` joint trajectory accuracy), so it could not answer whether the serial-state mechanism failed or the adaptation subspace was too restrictive."
 tags:
   - "latent-state"
   - "lora"
@@ -19,14 +19,16 @@ top_level_dirs:
   - "data"
   - "docs"
   - "reports"
+  - "runs"
   - "scripts"
   - "src"
   - "tests"
 file_counts:
   csv: 2
+  json: 2
   md: 11
   py: 21
   yaml: 4
   [none]: 1
-total_files: 39
-total_size_bytes: 316997
+total_files: 41
+total_size_bytes: 345586

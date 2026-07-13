@@ -6049,7 +6049,7 @@
    "verdict_tag": "Can unrestricted updates form the missing running state",
    "concept_primer": "The first test changed each large weight matrix through a narrow bottleneck, which is memory-efficient but limits the directions training can move. This successor gives every repeated-pass matrix a full-size change of its own while leaving the ordinary one-pass model untouched.",
    "plain_question": "Was the failed running memory caused by the serial architecture, or did the low-rank training update prevent the model from building a sufficiently rich internal state?",
-   "plain_answer": "Not run yet. The reviewed successor changes only the update capacity on extra repeated passes: 62 zero-starting full-size matrices replace the low-rank adapters. It will first prove exact one-pass behavior, equal Carry-versus-pool compute, real gradients and optimizer state, worst-depth stability, and checkpoint restoration on the live 48GB GPU. Only then may the matched pilot run.",
+   "plain_answer": "The live feasibility gate passed. All 62 zero-starting full-size matrices received gradients, a real Adam step fit comfortably, ordinary one-pass outputs stayed exactly unchanged, the longest registered repeat depth remained finite, and a 3.571 GB checkpoint restored repeated-pass outputs exactly. This proves the capacity control can run on the 48GB GPU; the matched Carry-versus-pool pilot is now the next step and no behavioral verdict exists yet.",
    "why_it_matters": "A second failure after the full-size updates successfully train would make the capacity explanation much less plausible under this held-fixed design. If a readable running state appears, the experiment continues through the same answer, edge-cut, and memory-swap tests instead of treating representation alone as success.",
    "verdict_tone": "neutral",
    "key_numbers": [
@@ -6069,9 +6069,9 @@
      "sub": "the base path must match bit-for-bit before and after an optimizer step"
     },
     {
-     "label": "Live GPU capacity",
-     "value": "48 GB",
-     "sub": "the feasibility gate measures actual peak allocation, reservation, and headroom"
+     "label": "Measured peak reserved memory",
+     "value": "24.93 GiB",
+     "sub": "22.57 GiB of reserved headroom remained on the live 48GB Ada GPU"
     }
    ],
    "charts": [

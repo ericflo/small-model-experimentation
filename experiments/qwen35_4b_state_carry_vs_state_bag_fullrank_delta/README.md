@@ -1,13 +1,12 @@
 # Full-Rank Extra-R Delta: State-Carry Versus State-Bag
 
-**Status:** in-progress · since 2026-07-13 · live G0 feasibility and the preregistered matched pilot remain.
+**Status:** in-progress · since 2026-07-13 · the preregistered matched seed-7401 pilot remains.
 
-**Status: implementation reviewed; proceed through the gated run; not yet run.** This is the preregistered capacity
-successor to `qwen35_4b_state_carry_vs_state_bag`. Its valid rank-32 LoRA pilot
-formed almost no joint state (`0.00459` joint trajectory accuracy), so it could
-not answer whether the serial-state mechanism failed or the adaptation subspace
-was too restrictive. No model, data-preparation, training, or evaluation stage
-has been started in this successor.
+**G0 status: `MODEL_SMOKE_PASS`; scientific pilot not yet run.** This is the
+preregistered capacity successor to `qwen35_4b_state_carry_vs_state_bag`. Its
+valid rank-32 LoRA pilot formed almost no joint state (`0.00459` joint trajectory
+accuracy), so it could not answer whether the serial-state mechanism failed or
+the adaptation subspace was too restrictive.
 
 ## Program and question
 
@@ -57,6 +56,15 @@ Do not lower precision, switch models,
 reduce targets, use a high-rank LoRA surrogate, or reinterpret the result as
 scientific evidence.
 
+The live gate passed on the 48GB RTX 6000 Ada. It discovered exactly 62 targets
+and 892,272,640 FP32 delta parameters, produced nonzero delta gradients in both
+arms, allocated both finite FP32 Adam moments for every delta, preserved exact
+K=1 parity before and after the optimizer step, and produced finite K=12 logits.
+Peak allocation was 24.49 GiB and peak reservation was 24.93 GiB, leaving 22.57
+GiB of reserved headroom. A 3,571,392,174-byte delta-plus-loop checkpoint was
+destroyed and reloaded with recurrent-logit error `0.0`. This establishes live
+feasibility only; it is not a behavioral result.
+
 ## Data and evidence firewall
 
 The generator is self-contained and never imports parent or benchmark code.
@@ -66,6 +74,11 @@ field for all 11 splits; when parent artifacts are present it also compares them
 directly. Every model-bearing stage recomputes those canonical receipts from the
 current artifacts and checks the full parity metadata rather than trusting a
 copied pass flag.
+
+The canonical preparation pass produced all 11 splits and 27,744 rows. It
+matched both the frozen canonical-row contract and the locally available parent
+artifacts exactly, with zero cross-split structural duplicates and zero
+benchmark reads.
 
 The seed-7401 pilot remains a non-evidentiary promotion gate. Only a complete,
 reachable pilot whose joint state specifically remains insufficient receives
