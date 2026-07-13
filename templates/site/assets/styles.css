@@ -313,6 +313,7 @@ a.chip:hover { text-decoration: none; border-color: color-mix(in srgb, var(--acc
 .card-verdict.tone-negative .verdict-dot { background: var(--critical); }
 .card-verdict.tone-mixed .verdict-dot { background: var(--slot-3); }
 .card-verdict.tone-neutral .verdict-dot { background: var(--slot-0); }
+.status-note { margin: 10px 0 0; font-size: 14px; color: var(--muted); font-style: italic; }
 .card-verdict-tag { font-family: var(--display); font-weight: 560; font-size: 17px; line-height: 1.24; letter-spacing: -0.011em; color: var(--ink); text-wrap: balance; }
 .feed-card.big .card-verdict-tag { font-size: 20px; }
 

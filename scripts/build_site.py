@@ -727,33 +727,33 @@ EXPERIMENT_STATUS = {
     "finished": ("done", "Finished", "Concluded — a result is recorded (a win, a null, or a ruled-out negative)."),
     "in-progress": ("live", "In progress", "Running — set up and under way, no conclusion recorded yet."),
 }
-_INPROGRESS_RE = re.compile(
-    r"(?i)\b(?:pre-?run|preregist\w*|no (?:scientific )?result|design[- ]only|not (?:yet )?(?:run|started|concluded)"
-    r"|frozen design|to be run|sealed splits|(?:run|result-bearing run) pending|pending (?:the |a )?(?:frozen |result)"
-    r"|awaiting (?:the )?run|run is pending)\b"
-)
+def load_experiment_status() -> dict[str, dict]:
+    """Curated experiment lifecycle from knowledge/experiment_status.json.
 
+    Finished is the DEFAULT — an experiment is in-progress ONLY if it has an
+    explicit in-progress entry here. Status is deliberately NEVER inferred from
+    report prose: preregistrations describe their planned "verdict / negative /
+    pass-fail" and finished experiments say "we did not run <ablation>", so any
+    regex guess silently mislabels in both directions (that was the old footgun).
+    Explicit-only means a concluded experiment cannot stay stuck in-progress, and
+    an in-progress entry must be dated + reasoned (enforced in CI by
+    validate_repository.py) so it can be reviewed and expired.
 
-def _fallback_status(exp: dict) -> str:
-    """Deterministic finished/in-progress guess for experiments absent from the
-    curated status file (e.g. added since the last diagnostic). Defaults to
-    finished — the overwhelming majority conclude — and flips to in-progress only
-    on explicit not-yet-concluded language."""
-    text = f'{exp.get("finding", "")} {exp.get("summary", "")}'
-    return "in-progress" if _INPROGRESS_RE.search(text) else "finished"
-
-
-def load_experiment_status() -> dict[str, str]:
+    Returns {id: {"status", "since", "reason"}}.
+    """
     path = KNOWLEDGE / "experiment_status.json"
     if not path.exists():
         return {}
     payload = read_json(path)
     entries = payload.get("experiments", {}) if isinstance(payload, dict) else {}
-    out: dict[str, str] = {}
+    out: dict[str, dict] = {}
     for key, value in entries.items():
-        status = value.get("status") if isinstance(value, dict) else value
+        if isinstance(value, dict):
+            status, since, reason = value.get("status"), value.get("since", ""), value.get("reason", "")
+        else:
+            status, since, reason = value, "", ""
         if status in EXPERIMENT_STATUS:
-            out[str(key)] = status
+            out[str(key)] = {"status": status, "since": str(since or ""), "reason": str(reason or "")}
     return out
 
 
@@ -1700,7 +1700,17 @@ class SiteBuilder:
         self.briefs = load_briefs()
         self.status_map = load_experiment_status()
         for exp in self.experiments:
-            exp["status"] = self.status_map.get(exp["id"]) or _fallback_status(exp)
+            # Finished is the DEFAULT. In-progress must be an explicit, dated,
+            # reasoned declaration in knowledge/experiment_status.json — never
+            # inferred from the report, because preregistrations and finished
+            # ablations share the same "verdict / negative / not run" vocabulary,
+            # so any prose guess silently mislabels in both directions. Explicit-
+            # only means nothing rots stuck in-progress; CI (validate_repository.py)
+            # keeps the in-progress list honest (dated, reasoned, non-stale).
+            meta = self.status_map.get(exp["id"]) or {}
+            exp["status"] = meta["status"] if meta.get("status") in EXPERIMENT_STATUS else "finished"
+            exp["status_since"] = meta.get("since", "")
+            exp["status_reason"] = meta.get("reason", "")
             brief = self.briefs.get(exp["id"], {})
             tone = str(brief.get("verdict_tone", "")).strip()
             exp["outcome"] = tone if tone in {"positive", "negative", "mixed", "neutral"} else ""
@@ -1998,6 +2008,13 @@ class SiteBuilder:
                 f'<p>{self.rich_text(exp["finding"], prefix)}{more}</p></div>'
             )
 
+        status_note = ""
+        if exp["status"] == "in-progress" and exp.get("status_since"):
+            reason = f' — {esc(exp["status_reason"])}' if exp.get("status_reason") else ""
+            status_note = (
+                f'<p class="status-note">In progress since '
+                f'<time datetime="{esc(exp["status_since"])}">{esc(exp["status_since"])}</time>{reason}</p>'
+            )
         header = (
             f'<nav class="crumbs"><a href="{prefix}">Home</a> / <a href="{prefix}experiments/">Experiments</a> / '
             f"<span>{esc(exp['title'])}</span></nav>"
@@ -2005,6 +2022,7 @@ class SiteBuilder:
             f'<div class="page-meta">{exp_status_chip(exp["status"])}{date_span(exp)}{track_chip(exp["track"])}'
             f"{self.chip_row(exp, prefix, limit=4)}"
             f'<a class="chip gh" href="{GITHUB}/tree/main/{esc(exp["path"])}">GitHub ↗</a></div>'
+            f"{status_note}"
         )
 
         toc_list = f'<ol>{"".join(side_toc)}</ol>'

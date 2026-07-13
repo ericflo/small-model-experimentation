@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import csv
+import datetime as dt
 import json
 import re
 import subprocess
@@ -28,6 +29,11 @@ CLAIM_STATUSES = {"Confirmed", "Promising", "Negative", "Open", "Retired"}
 QUEUE_STATUSES = {"ready-for-intake", "program-seed", "needs-design", "infrastructure"}
 QUEUE_PRIORITIES = {"P0", "P1", "P2"}
 QUEUE_EFFORTS = {"small", "medium", "large"}
+EXPERIMENT_STATUSES = {"finished", "in-progress"}
+# How long an experiment may stay flagged in-progress before CI forces a review.
+# Runs here conclude within days; a genuinely long one just re-affirms `since`.
+# This is the anti-footgun: nothing can silently rot stuck in "in progress".
+STALE_INPROGRESS_DAYS = 45
 ARTIFACT_MANIFEST_FIELDS = ["schema_version:", "external_artifacts:", "omitted_artifacts:", "reproducibility:"]
 
 
@@ -409,7 +415,9 @@ def validate_benchmark_firewall(errors: list[str]) -> None:
 # are fine; only "now" calls are forbidden. Exemptions: build_site.py writes only the
 # gitignored site/ tree, and menagerie run.py records genuine per-run GPU provenance.
 WALL_CLOCK_RE = re.compile(r"datetime\.now\(|date\.today\(|utcnow\(")
-WALL_CLOCK_EXEMPT = {"scripts/build_site.py", "benchmarks/menagerie/run.py"}
+# build_site stamps the generation date; the validator reads today's date only to
+# age-check in-progress entries (it writes no tracked output). Both are exempt.
+WALL_CLOCK_EXEMPT = {"scripts/build_site.py", "scripts/validate_repository.py", "benchmarks/menagerie/run.py"}
 
 
 def validate_no_wall_clock_stamps(errors: list[str]) -> None:
@@ -709,6 +717,7 @@ def validate() -> int:
 
     validate_claim_ledger(errors, set(program_ids), exp_ids)
     validate_future_queue(errors, set(program_ids))
+    validate_experiment_status(errors, exp_ids)
     validate_root_readme(errors)
     validate_benchmark_firewall(errors)
     validate_no_wall_clock_stamps(errors)
@@ -723,6 +732,61 @@ def validate() -> int:
             fail(errors, ".gitattributes does not LFS-track safetensors")
 
     return report(errors)
+
+
+def validate_experiment_status(errors: list[str], exp_ids: set[str]) -> None:
+    """Guard the finished/in-progress lifecycle (knowledge/experiment_status.json).
+
+    Finished is the default, so the only thing to police is the explicit
+    in-progress list. Each entry must name a real experiment and carry a valid
+    status; each in-progress entry must additionally carry a parseable `since`
+    date and a non-empty `reason`, and must not be stale. This is the anti-
+    footgun: an experiment cannot silently stay stuck in-progress after it
+    concludes — CI forces the maintainer to either re-affirm it (bump `since`)
+    or remove the entry so it reverts to finished.
+    """
+    path = KNOWLEDGE / "experiment_status.json"
+    if not path.exists():
+        return
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        fail(errors, f"experiment_status.json is not valid JSON: {exc}")
+        return
+    entries = payload.get("experiments", {}) if isinstance(payload, dict) else {}
+    today = dt.date.today()
+    for eid, value in entries.items():
+        status = value.get("status") if isinstance(value, dict) else value
+        if status not in EXPERIMENT_STATUSES:
+            fail(errors, f"experiment_status.json[{eid}]: invalid status {status!r} (want finished|in-progress)")
+            continue
+        if eid not in exp_ids:
+            fail(errors, f"experiment_status.json[{eid}]: no such experiment directory")
+            continue
+        if status != "in-progress":
+            continue
+        if not isinstance(value, dict):
+            fail(errors, f"experiment_status.json[{eid}]: in-progress must be an object with since+reason")
+            continue
+        if not str(value.get("reason", "")).strip():
+            fail(errors, f'experiment_status.json[{eid}]: in-progress requires a non-empty "reason"')
+        raw_since = str(value.get("since", "")).strip()
+        if not raw_since:
+            fail(errors, f'experiment_status.json[{eid}]: in-progress requires a "since" date (YYYY-MM-DD)')
+            continue
+        try:
+            since = dt.date.fromisoformat(raw_since)
+        except ValueError:
+            fail(errors, f'experiment_status.json[{eid}]: "since" {raw_since!r} is not an ISO date (YYYY-MM-DD)')
+            continue
+        if since > today:
+            fail(errors, f'experiment_status.json[{eid}]: "since" {raw_since} is in the future')
+            continue
+        age = (today - since).days
+        if age > STALE_INPROGRESS_DAYS:
+            fail(errors, (f"experiment_status.json[{eid}]: flagged in-progress for {age} days "
+                          f"(limit {STALE_INPROGRESS_DAYS}). Re-affirm it is still running by updating "
+                          f'"since", or remove the entry so it reverts to finished.'))
 
 
 def report(errors: list[str]) -> int:
