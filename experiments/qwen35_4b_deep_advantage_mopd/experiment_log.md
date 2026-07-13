@@ -185,3 +185,26 @@
   has no scientific gate and no downstream authorization. It does not change
   seed 42's registered pass; it makes sealed vLLM procedural confirmation the
   only acceptable capability verdict.
+
+## 2026-07-13 — seed-43 round-1 pass and byte-preserving recovery
+
+- Seed 43 passed round 0 with 20/20 updates, mean corrected loss `0.05638`,
+  probe loss `0.08318→0.04706`, and non-decreasing overlap. Round 1 reached
+  the exact 60-deep quota after two fresh batches (52 quick diagnostics, 272
+  abstentions) and froze 60 deep, 20 soup anchors, and 60 matched controls
+  (56 exact-cell, four family/kind).
+- After the second batch's student-state receipt was durably complete, the
+  first quick-branch subprocess stopped before model construction because a
+  concurrent confirmation hardening temporarily removed the legacy
+  `_engine_protocol` symbol imported by `branch_states.py`. No branch draw
+  began and no state was regenerated. The exact compatibility function was
+  restored, direct acquisition-import regressions were added, and the same
+  integration command reused every authenticated batch-0/batch-1 byte before
+  starting the untouched quick branch.
+- Round 1 then passed: 20/20 updates, zero prefix truncation, mean corrected
+  loss `0.05172`, probe loss `0.05210→0.02899`, and overlap
+  `0.83395→0.83775`. Its merge receipt is
+  `2160ecd97c4ee2eda7a29f09048802b953e99d7f026420a653d22c8c009db449`.
+  The seed-43 integration receipt remains deliberately in progress at two of
+  four rounds; this infrastructure interruption is not a scientific stop and
+  no capability conclusion exists yet.

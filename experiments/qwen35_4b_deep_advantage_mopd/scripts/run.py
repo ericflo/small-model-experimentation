@@ -21,15 +21,25 @@ sys.path.insert(0, str(EXP / "src"))
 
 from gym.families import ALL_FAMILIES  # noqa: E402
 from confirmation_artifacts import (  # noqa: E402
+    confirmation_admission_binding,
+    confirmation_transaction_state,
     configured_confirmation_raw_root,
+    controls_authorization_binding,
     prepare_confirmation_output,
+    validate_confirmation_campaign_tree,
     validate_confirmation_geometry,
     validate_confirmation_score_artifacts,
 )
+from confirmation_protocol import (  # noqa: E402
+    canonical_backend_protocol,
+    expected_confirmation_sampling_protocol,
+)
+from control_code_inventory import control_code_inventory  # noqa: E402
 from control_rematch import (  # noqa: E402
     validate_control_overlay_cache,
     validate_control_rematch_manifest,
 )
+from control_receipts import validate_control_training_receipt  # noqa: E402
 from io_utils import (  # noqa: E402
     canonical_hash,
     confirmation_evaluator_source_inventory,
@@ -64,6 +74,37 @@ def _run(
     if completed.returncode not in allowed:
         raise subprocess.CalledProcessError(completed.returncode, command)
     return completed.returncode
+
+
+def _publish_global_json_no_clobber(path: Path, payload: dict) -> None:
+    """Publish a global seal once; exact reruns verify rather than overwrite."""
+
+    encoded = json.dumps(payload, indent=2, sort_keys=True, ensure_ascii=False) + "\n"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if path.parent.is_symlink() or path.parent.resolve() != path.parent:
+        raise SystemExit(f"unsafe global manifest parent: {path.parent}")
+    if path.is_file() and not path.is_symlink():
+        try:
+            existing = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            raise SystemExit(f"invalid sealed global manifest: {path}") from exc
+        if existing != payload:
+            raise SystemExit(f"refusing to overwrite stale global manifest: {path}")
+        return
+    if path.exists() or path.is_symlink():
+        raise SystemExit(f"unsafe sealed global manifest path: {path}")
+    try:
+        with path.open("x", encoding="utf-8") as handle:
+            handle.write(encoded)
+            handle.flush()
+            os.fsync(handle.fileno())
+    except FileExistsError as exc:
+        raise SystemExit(f"global manifest publication lost a race: {path}") from exc
+    descriptor = os.open(path.parent, os.O_RDONLY)
+    try:
+        os.fsync(descriptor)
+    finally:
+        os.close(descriptor)
 
 
 def _paths(config: dict) -> dict[str, Path]:
@@ -795,6 +836,7 @@ def _train_mopd_checkpoint(
     round_index: int,
     seed: int,
     arm: str,
+    source_manifest: Path | None = None,
     updates: int | None = None,
     target_initial_loss: float | None = None,
     merge_even_if_failed: bool = False,
@@ -829,6 +871,29 @@ def _train_mopd_checkpoint(
         or receipt.get("target_cache_sha256") != sha256_file(target_cache)
     ):
         raise SystemExit(f"stale MOPD training receipt: {receipt_path}")
+    if arm != "primary":
+        if target_initial_loss is None:
+            raise SystemExit(f"matched control lacks primary pressure: {receipt_path}")
+        if source_manifest is None:
+            raise SystemExit(f"matched control lacks its source manifest: {receipt_path}")
+        try:
+            validate_control_training_receipt(
+                receipt,
+                config=config,
+                arm=arm,
+                expected_target_initial_loss=target_initial_loss,
+                source_manifest=source_manifest,
+                target_cache=target_cache,
+                round_index=round_index,
+                seed=seed,
+                require_completed_updates=bool(
+                    receipt.get("round_gate", {}).get("passed")
+                ),
+            )
+        except ValueError as error:
+            raise SystemExit(
+                f"stale matched-control training receipt: {receipt_path}: {error}"
+            ) from error
     passed = bool(receipt.get("round_gate", {}).get("passed"))
     may_merge = passed or (
         merge_even_if_failed
@@ -1030,6 +1095,24 @@ def _train_offpolicy_checkpoint(
         or receipt.get("round_manifest_sha256") != sha256_file(manifest)
     ):
         raise SystemExit(f"stale off-policy training receipt: {adapter}")
+    try:
+        validate_control_training_receipt(
+            receipt,
+            config=config,
+            arm="offpolicy_sft",
+            expected_target_initial_loss=target_initial_loss,
+            source_manifest=manifest,
+            base_model=base_model,
+            round_index=round_index,
+            seed=seed,
+            require_completed_updates=bool(
+                receipt.get("round_gate", {}).get("passed")
+            ),
+        )
+    except ValueError as error:
+        raise SystemExit(
+            f"stale off-policy training receipt: {adapter}: {error}"
+        ) from error
     if not receipt.get("round_gate", {}).get("passed"):
         return receipt, None
     _merge_round_adapter(adapter, base_model, merged)
@@ -1055,26 +1138,80 @@ def _prepare_non_advantage_route_cache(
 
     paths = _paths(config)
     overlay_root = data_root / "control_overlays" / "non_advantage_route"
+    lexical_overlay_root = Path(os.path.abspath(os.fspath(overlay_root)))
+    for component in (lexical_overlay_root, *lexical_overlay_root.parents):
+        if component.is_symlink():
+            raise SystemExit(
+                f"unsafe symlinked non-advantage control overlay path: {component}"
+            )
+    if overlay_root.exists() and not overlay_root.is_dir():
+        raise SystemExit(f"unsafe non-advantage control overlay path: {overlay_root}")
     rematch_manifest = overlay_root / "rematch_manifest.json"
     derived_cache = overlay_root / "all_policy_targets.pt"
     derived_receipt = derived_cache.with_suffix(derived_cache.suffix + ".receipt.json")
-    if not rematch_manifest.is_file():
-        if overlay_root.exists() and any(overlay_root.iterdir()):
-            raise SystemExit(f"partial non-advantage control overlay: {overlay_root}")
-        _run(
-            [
-                str(PY), str(EXP / "scripts" / "build_control_overlay.py"),
-                "--config", str(config_path),
-                "--round-manifest", str(manifest),
-                "--source-cache", str(source_cache),
-                "--quick", str(paths["quick"]),
-                "--deep", str(paths["deep"]),
-                "--soup", str(paths["soup"]),
-                "--out-dir", str(overlay_root),
-            ],
-            training=True,
-            allowed=(0, 3),
+    entries = list(overlay_root.iterdir()) if overlay_root.exists() else []
+    unsafe_entries = [
+        path
+        for path in entries
+        if path.is_symlink() or not path.is_file()
+    ]
+    if unsafe_entries:
+        raise SystemExit(
+            f"partial non-advantage control overlay: {overlay_root}: "
+            + ", ".join(sorted(path.name for path in unsafe_entries))
         )
+
+    names = {path.name for path in entries}
+    manifest_only = {rematch_manifest.name}
+    manifest_cache = {rematch_manifest.name, derived_cache.name}
+    complete = {rematch_manifest.name, derived_cache.name, derived_receipt.name}
+    if names not in (set(), manifest_only, manifest_cache, complete):
+        raise SystemExit(
+            f"unreachable non-advantage control overlay prefix: {overlay_root}: "
+            + ", ".join(sorted(names))
+        )
+
+    resume = names in (manifest_only, manifest_cache)
+    rematch = None
+    if names:
+        try:
+            rematch = validate_control_rematch_manifest(
+                rematch_manifest,
+                config=config,
+                config_path=config_path,
+                source_manifest=manifest,
+                source_cache=source_cache,
+            )
+        except ValueError as error:
+            raise SystemExit(f"stale non-advantage control rematch: {error}") from error
+        replacements = int(rematch.get("replacement_count", -1))
+        if replacements == 0:
+            if names != manifest_only:
+                raise SystemExit(
+                    f"no-op control rematch has unexpected derived cache: {overlay_root}"
+                )
+            return source_cache, rematch_manifest
+        if replacements < 1:
+            raise SystemExit(
+                f"invalid control rematch replacement count: {rematch_manifest}"
+            )
+        if names == complete:
+            resume = False
+
+    if not names or resume:
+        command = [
+            str(PY), str(EXP / "scripts" / "build_control_overlay.py"),
+            "--config", str(config_path),
+            "--round-manifest", str(manifest),
+            "--source-cache", str(source_cache),
+            "--quick", str(paths["quick"]),
+            "--deep", str(paths["deep"]),
+            "--soup", str(paths["soup"]),
+            "--out-dir", str(overlay_root),
+        ]
+        if resume:
+            command.append("--resume")
+        _run(command, training=True, allowed=(0, 3))
     try:
         rematch = validate_control_rematch_manifest(
             rematch_manifest,
@@ -1094,6 +1231,8 @@ def _prepare_non_advantage_route_cache(
         return source_cache, rematch_manifest
     if replacements < 1:
         raise SystemExit(f"invalid control rematch replacement count: {rematch_manifest}")
+    if not derived_cache.is_file() or not derived_receipt.is_file():
+        raise SystemExit(f"partial non-advantage control overlay: {overlay_root}")
     try:
         validate_control_overlay_cache(
             derived_cache,
@@ -1216,6 +1355,7 @@ def _controls(config: dict, config_path: Path) -> None:
                 round_index=round_index,
                 seed=seed,
                 arm=arm,
+                source_manifest=manifest,
                 target_initial_loss=target_pressure,
             )
             round_rows.append(
@@ -1223,6 +1363,12 @@ def _controls(config: dict, config_path: Path) -> None:
                     "round": round_index,
                     "primary_manifest_sha256": sha256_file(manifest),
                     "primary_target_cache_sha256": sha256_file(target_cache),
+                    "primary_training_receipt": str(
+                        (primary_adapter / "training_receipt.json").resolve()
+                    ),
+                    "primary_training_receipt_sha256": sha256_file(
+                        primary_adapter / "training_receipt.json"
+                    ),
                     "effective_target_cache": str(effective_target_cache.resolve()),
                     "effective_target_cache_sha256": sha256_file(
                         effective_target_cache
@@ -1301,6 +1447,18 @@ def _controls(config: dict, config_path: Path) -> None:
             {
                 "round": round_index,
                 "primary_manifest_sha256": sha256_file(manifest),
+                "primary_training_receipt": str(
+                    (
+                        paths["root"] / "adapters" / "primary"
+                        / f"seed_{primary_seed}" / f"round_{round_index}"
+                        / "training_receipt.json"
+                    ).resolve()
+                ),
+                "primary_training_receipt_sha256": sha256_file(
+                    paths["root"] / "adapters" / "primary"
+                    / f"seed_{primary_seed}" / f"round_{round_index}"
+                    / "training_receipt.json"
+                ),
                 "training_receipt": str((adapter / "training_receipt.json").resolve()),
                 "training_receipt_sha256": sha256_file(adapter / "training_receipt.json"),
                 "round_gate": receipt.get("round_gate"),
@@ -1365,6 +1523,8 @@ def _validate_confirmation_score(
     decode: str,
     tag: str,
     raw_root: Path,
+    authorization_binding: dict,
+    admission_binding: dict,
 ) -> dict:
     try:
         payload = validate_confirmation_score_artifacts(
@@ -1382,6 +1542,17 @@ def _validate_confirmation_score(
         1 if decode == "greedy" else int(config["controls"]["sample_more_k"])
     )
     evaluator_source = confirmation_evaluator_source_inventory()
+    expected_sampling = expected_confirmation_sampling_protocol(
+        config, decode=decode, block_seed=seed
+    )
+    try:
+        backend_protocol, backend_fingerprint = canonical_backend_protocol(
+            payload.get("runner_summary"),
+            expected_engine=config["engine"],
+            expected_model=str(model.resolve()),
+        )
+    except ValueError as exc:
+        raise SystemExit(f"invalid confirmation backend evidence: {path}: {exc}") from exc
     if (
         payload.get("stage") != "policy_eval"
         or payload.get("scope") != "confirmatory"
@@ -1401,10 +1572,84 @@ def _validate_confirmation_score(
         or int(payload.get("block_seed", -1)) != seed
         or payload.get("decode") != decode
         or int(payload.get("k", -1)) != expected_k
-        or not all(payload.get("engine_protocol", {}).values())
+        or not isinstance(payload.get("engine_protocol"), dict)
+        or not payload.get("engine_protocol")
+        or not all(payload["engine_protocol"].values())
+        or payload.get("backend_protocol") != backend_protocol
+        or payload.get("backend_fingerprint") != backend_fingerprint
+        or payload.get("sampling_protocol") != expected_sampling
+        or not isinstance(payload.get("task_manifest_sha256"), str)
+        or not isinstance(payload.get("ordered_plan_sha256"), str)
+        or set(payload.get("token_ledger") or {}) != {"sampled_tokens"}
+        or payload.get("controls_authorization") != authorization_binding
+        or payload.get("confirmation_admission") != admission_binding
         or len(payload.get("items") or []) == 0
     ):
         raise SystemExit(f"stale or invalid confirmation score artifact: {path}")
+    return payload
+
+
+def _authorize_confirmation_inputs(config: dict, config_path: Path) -> dict:
+    authorization = EXP / "analysis" / "controls_authorization.json"
+    authorizer = EXP / "scripts" / "authorize_controls.py"
+    benchmark_authorizer = EXP / "scripts" / "authorize_benchmark.py"
+    receipt_validator = EXP / "src" / "control_receipts.py"
+    audit_code = _run(
+        [
+            str(PY),
+            str(authorizer),
+            "--out",
+            str(authorization),
+        ],
+        allowed=(0,),
+    )
+    if audit_code != 0:
+        raise SystemExit(
+            "fresh semantic controls authorization audit did not pass"
+        )
+    payload = _require_gate(authorization)
+    integrations = payload.get("integration_receipts")
+    controls = payload.get("controls_receipt")
+    inventory = control_code_inventory()
+    seeds = [int(value) for value in config["seeds"]["integration_training"]]
+    if (
+        not isinstance(payload.get("schema_version"), int)
+        or isinstance(payload.get("schema_version"), bool)
+        or int(payload.get("schema_version", -1)) < 1
+        or payload.get("stage") != "semantic_controls_confirmation_authorization"
+        or payload.get("config") != str(config_path)
+        or payload.get("config_sha256") != sha256_file(config_path)
+        or payload.get("authorizer_sha256") != sha256_file(authorizer)
+        or payload.get("benchmark_control_audit_sha256")
+        != sha256_file(benchmark_authorizer)
+        or payload.get("control_receipts_sha256") != sha256_file(receipt_validator)
+        or payload.get("control_code_inventory") != inventory
+        or payload.get("control_code_inventory_sha256")
+        != canonical_hash(inventory)
+        or payload.get("control_code_inventory_before_sha256")
+        != inventory["sha256"]
+        or payload.get("control_code_inventory_after_sha256")
+        != inventory["sha256"]
+        or payload.get("downstream_authorization")
+        != "sealed_confirmation_evaluation"
+        or not isinstance(integrations, list)
+        or len(integrations) != len(seeds)
+        or not isinstance(controls, dict)
+    ):
+        raise SystemExit("semantic controls authorization receipt is stale")
+    expected_integrations = [
+        {
+            "path": str(_integration_receipt_path(seed).resolve()),
+            "sha256": sha256_file(_integration_receipt_path(seed)),
+        }
+        for seed in seeds
+    ]
+    controls_path = EXP / "runs" / "controls.json"
+    if integrations != expected_integrations or controls != {
+        "path": str(controls_path.resolve()),
+        "sha256": sha256_file(controls_path),
+    }:
+        raise SystemExit("semantic controls authorization evidence changed")
     return payload
 
 
@@ -1412,7 +1657,15 @@ def _confirm(config: dict, config_path: Path) -> None:
     seeds = [int(value) for value in config["seeds"]["integration_training"]]
     for seed in seeds:
         _require_gate(_integration_receipt_path(seed))
-    _require_gate(EXP / "runs" / "controls.json")
+    _authorize_confirmation_inputs(config, config_path)
+    authorization_path = EXP / "analysis" / "controls_authorization.json"
+    try:
+        authorization_binding = controls_authorization_binding(
+            authorization_path,
+            expected_config_sha256=sha256_file(config_path),
+        )
+    except ValueError as exc:
+        raise SystemExit(f"invalid confirmation control admission: {exc}") from exc
     paths = _paths(config)
     parameter_models = _build_parameter_controls(config)
     model_arms: dict[str, Path] = {
@@ -1433,6 +1686,38 @@ def _confirm(config: dict, config_path: Path) -> None:
     evaluation_arms = {**model_arms, "soup_best8": paths["soup"]}
     raw_root = configured_confirmation_raw_root(config)
     block_seeds = [int(value) for value in config["seeds"]["confirmatory_blocks"]]
+    admission_payload = {
+        "schema_version": 1,
+        "stage": "sealed_confirmation_admission",
+        "config": str(config_path),
+        "config_sha256": sha256_file(config_path),
+        "controls_authorization": authorization_binding,
+        "blocks": block_seeds,
+        "arms": {
+            name: {
+                "model": str(model.resolve()),
+                "model_merge_receipt_sha256": sha256_file(
+                    model / "merge_receipt.json"
+                ),
+                "model_config_sha256": sha256_file(model / "config.json"),
+                "model_inference_inventory_sha256": (
+                    _model_inference_inventory_sha256(model)
+                ),
+                "decode": "sample8" if name == "soup_best8" else "greedy",
+            }
+            for name, model in sorted(evaluation_arms.items())
+        },
+        "evaluator_sha256": sha256_file(EXP / "scripts" / "eval_policy.py"),
+        "evaluator_source_inventory": confirmation_evaluator_source_inventory(),
+    }
+    admission_path = EXP / "runs" / "confirmation" / "ADMISSION.json"
+    _publish_global_json_no_clobber(admission_path, admission_payload)
+    try:
+        validate_confirmation_campaign_tree(
+            admission_path, raw_root=raw_root, terminal=False
+        )
+    except ValueError as exc:
+        raise SystemExit(f"invalid confirmation campaign tree: {exc}") from exc
     score_paths: dict[str, list[str]] = {name: [] for name in evaluation_arms}
     for block_index, block_seed in enumerate(block_seeds):
         for name, model in evaluation_arms.items():
@@ -1440,13 +1725,35 @@ def _confirm(config: dict, config_path: Path) -> None:
             out_dir = EXP / "runs" / "confirmation" / f"block_{block_index}" / name
             score_path = out_dir / "scores.json"
             tag = f"block_{block_index}_{name}"
+            expected_model_admission = admission_payload["arms"][name]
+            try:
+                admission_binding = confirmation_admission_binding(
+                    admission_path,
+                    expected_config_sha256=sha256_file(config_path),
+                    expected_controls_authorization=authorization_binding,
+                    expected_tag=tag,
+                    expected_block_seed=block_seed,
+                    expected_model=expected_model_admission,
+                )
+            except ValueError as exc:
+                raise SystemExit(f"invalid global confirmation admission: {exc}") from exc
             if not score_path.is_file():
                 try:
+                    state = confirmation_transaction_state(
+                        score_path, raw_root=raw_root
+                    )
                     prepare_confirmation_output(score_path, raw_root=raw_root)
+                    validate_confirmation_campaign_tree(
+                        admission_path, raw_root=raw_root, terminal=False
+                    )
                 except ValueError as exc:
                     raise SystemExit(
                         f"unsafe partial confirmation arm output: {out_dir}: {exc}"
                     ) from exc
+                if state not in {"EMPTY", "GENERATED", "COMPLETE"}:
+                    raise SystemExit(
+                        f"confirmation arm cannot resume from {state}: {out_dir}"
+                    )
                 _run(
                     [
                         str(VLLM_PY), str(EXP / "scripts" / "eval_policy.py"),
@@ -1454,6 +1761,8 @@ def _confirm(config: dict, config_path: Path) -> None:
                         "--tag", tag,
                         "--scope", "confirmatory", "--block-seed", str(block_seed),
                         "--decode", decode, "--out-dir", str(out_dir),
+                        "--controls-authorization", str(authorization_path),
+                        "--confirmation-admission", str(admission_path),
                     ]
                 )
             _validate_confirmation_score(
@@ -1465,8 +1774,16 @@ def _confirm(config: dict, config_path: Path) -> None:
                 decode=decode,
                 tag=tag,
                 raw_root=raw_root,
+                authorization_binding=authorization_binding,
+                admission_binding=admission_binding,
             )
             score_paths[name].append(str(score_path.resolve()))
+    try:
+        validate_confirmation_campaign_tree(
+            admission_path, raw_root=raw_root, terminal=True
+        )
+    except ValueError as exc:
+        raise SystemExit(f"incomplete confirmation campaign tree: {exc}") from exc
     strict = [
         "quick", "deep", "soup", "non_advantage_route", "wrong_teacher",
         "offpolicy_sft", "soup25", "soup50", "soup75",
@@ -1495,9 +1812,24 @@ def _confirm(config: dict, config_path: Path) -> None:
         },
         "evaluator_sha256": sha256_file(EXP / "scripts" / "eval_policy.py"),
         "evaluator_source_inventory": confirmation_evaluator_source_inventory(),
+        "controls_authorization": authorization_binding,
+        "confirmation_admission": confirmation_admission_binding(
+            admission_path,
+            expected_config_sha256=sha256_file(config_path),
+            expected_controls_authorization=authorization_binding,
+        ),
     }
     manifest_path = EXP / "runs" / "confirmation" / "manifest.json"
-    write_json(manifest_path, manifest)
+    _publish_global_json_no_clobber(manifest_path, manifest)
+    try:
+        validate_confirmation_campaign_tree(
+            admission_path,
+            raw_root=raw_root,
+            terminal=True,
+            require_manifest=True,
+        )
+    except ValueError as exc:
+        raise SystemExit(f"invalid sealed confirmation campaign tree: {exc}") from exc
     code = _run(
         [
             str(PY), str(EXP / "scripts" / "analyze_confirmation.py"),

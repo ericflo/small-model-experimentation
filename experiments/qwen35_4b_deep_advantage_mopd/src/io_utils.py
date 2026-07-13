@@ -5,6 +5,8 @@ from __future__ import annotations
 import gzip
 import hashlib
 import json
+import os
+import stat
 from pathlib import Path
 from typing import Any, Iterable, Mapping
 
@@ -177,25 +179,78 @@ def canonical_hash(value: Any) -> str:
 def confirmation_evaluator_source_inventory() -> dict[str, int | str]:
     """Hash the local code that generates and scores confirmation items."""
 
+    experiment_root = Path(os.path.abspath(os.fspath(EXP)))
+    gym_root = experiment_root / "src" / "gym"
+
+    def validated_path(path: Path, *, directory: bool) -> Path:
+        lexical = Path(os.path.abspath(os.fspath(path)))
+        if not lexical.is_relative_to(experiment_root):
+            raise ValueError("confirmation evaluator source escaped the experiment")
+        current = Path(lexical.anchor)
+        for part in lexical.parts[1:]:
+            current /= part
+            try:
+                metadata = current.lstat()
+            except FileNotFoundError as exc:
+                raise ValueError(
+                    "confirmation evaluator source inventory is incomplete"
+                ) from exc
+            if stat.S_ISLNK(metadata.st_mode):
+                raise ValueError(
+                    f"confirmation evaluator source contains a symlink: {current}"
+                )
+        metadata = lexical.lstat()
+        expected_kind = stat.S_ISDIR if directory else stat.S_ISREG
+        if not expected_kind(metadata.st_mode):
+            raise ValueError("confirmation evaluator source has an unsafe file type")
+        resolved_root = experiment_root.resolve(strict=True)
+        resolved = lexical.resolve(strict=True)
+        if (
+            resolved_root != experiment_root
+            or resolved != lexical
+            or not resolved.is_relative_to(resolved_root)
+        ):
+            raise ValueError(
+                "confirmation evaluator source resolved outside its lexical root"
+            )
+        return lexical
+
+    validated_path(gym_root, directory=True)
+    gym_paths: set[Path] = set()
+    for directory_name, child_directories, filenames in os.walk(
+        gym_root, followlinks=False
+    ):
+        directory = validated_path(Path(directory_name), directory=True)
+        child_directories.sort()
+        filenames.sort()
+        for child in child_directories:
+            validated_path(directory / child, directory=True)
+        for filename in filenames:
+            if filename.endswith(".py"):
+                gym_paths.add(validated_path(directory / filename, directory=False))
+
     paths = {
         EXP / "scripts" / "eval_policy.py",
         EXP / "src" / "confirmation_artifacts.py",
+        EXP / "src" / "confirmation_protocol.py",
+        EXP / "src" / "control_code_inventory.py",
         EXP / "src" / "harness.py",
         EXP / "src" / "io_utils.py",
         EXP / "src" / "state_replay.py",
         EXP / "src" / "vllm_runner.py",
-        *(EXP / "src" / "gym").rglob("*.py"),
+        *gym_paths,
     }
-    rows = [
-        {
-            "path": path.relative_to(EXP).as_posix(),
-            "sha256": sha256_file(path),
-        }
-        for path in sorted(paths)
-        if path.is_file()
-    ]
-    if len(rows) != len(paths):
-        raise ValueError("confirmation evaluator source inventory is incomplete")
+    rows = []
+    for path in sorted(paths):
+        lexical = validated_path(path, directory=False)
+        digest = sha256_file(lexical)
+        validated_path(lexical, directory=False)
+        rows.append(
+            {
+                "path": lexical.relative_to(experiment_root).as_posix(),
+                "sha256": digest,
+            }
+        )
     return {"sha256": canonical_hash(rows), "file_count": len(rows)}
 
 

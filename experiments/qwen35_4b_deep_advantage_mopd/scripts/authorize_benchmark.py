@@ -5,6 +5,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
+import stat
 import subprocess
 import sys
 import tempfile
@@ -26,6 +28,7 @@ ANALYZER = EXP / "scripts" / "analyze_benchmark.py"
 CONFIRMATION_ANALYZER = EXP / "scripts" / "analyze_confirmation.py"
 CONFIRMATION_EVALUATOR = EXP / "scripts" / "eval_policy.py"
 CONTROL_REMATCH = EXP / "src" / "control_rematch.py"
+CONTROL_RECEIPTS = EXP / "src" / "control_receipts.py"
 PY = REPO / ".venv" / "bin" / "python"
 FROZEN_FILES = (
     "configs/default.yaml",
@@ -40,25 +43,35 @@ sys.path.insert(0, str(EXP / "scripts"))
 from bench import (  # noqa: E402
     BENCHMARK_EVENT_COUNT,
     _expected_models,
+    _publication_start_state,
     _tier_seeds,
     benchmark_source_inventory,
     model_provenance,
 )
 from confirmation_artifacts import (  # noqa: E402
+    confirmation_admission_binding,
+    confirmation_raw_dir,
     configured_confirmation_raw_root,
+    controls_authorization_binding,
+    validate_confirmation_campaign_tree,
     validate_confirmation_geometry,
     validate_confirmation_score_artifacts,
+)
+from confirmation_protocol import (  # noqa: E402
+    _strict_json_equal,
+    canonical_backend_protocol,
+    expected_confirmation_sampling_protocol,
 )
 from control_rematch import (  # noqa: E402
     validate_control_overlay_cache,
     validate_control_rematch_manifest,
 )
+from control_receipts import validate_control_training_receipt  # noqa: E402
 from io_utils import (  # noqa: E402
     confirmation_evaluator_source_inventory,
     load_config,
     resolve_repo_path,
     sha256_file,
-    write_json,
 )
 
 
@@ -70,6 +83,145 @@ def _load(path: Path) -> dict:
     if not isinstance(payload, dict):
         raise ValueError(f"provenance receipt is not an object: {path}")
     return payload
+
+
+def _validated_confirmation_analysis_file(path: Path) -> Path:
+    """Require the canonical, regular, symlink-free confirmation analysis."""
+
+    canonical, existed = _publication_start_state(
+        path,
+        expected=EXP / "analysis" / "confirmation.json",
+        label="confirmation analysis receipt",
+    )
+    if not existed:
+        raise ValueError("canonical confirmation analysis receipt is missing")
+    return canonical
+
+
+def _confirmation_analysis_binding(path: Path, expected_payload: dict) -> dict[str, str]:
+    """Bind canonical analysis bytes, rechecking path and content around hashing."""
+
+    canonical = _validated_confirmation_analysis_file(path)
+    expected_bytes = (
+        json.dumps(expected_payload, indent=2, sort_keys=True, ensure_ascii=False)
+        + "\n"
+    ).encode("utf-8")
+    observed_bytes = canonical.read_bytes()
+    if (
+        observed_bytes != expected_bytes
+        or not _strict_json_equal(_load(canonical), expected_payload)
+    ):
+        raise ValueError("confirmation analysis changed during authorization")
+    digest = sha256_file(canonical)
+    if (
+        _validated_confirmation_analysis_file(canonical) != canonical
+        or canonical.read_bytes() != observed_bytes
+        or not _strict_json_equal(_load(canonical), expected_payload)
+        or sha256_file(canonical) != digest
+    ):
+        raise ValueError("confirmation analysis changed during authorization")
+    return {"path": str(canonical), "sha256": digest}
+
+
+def _validated_authorization_publication_path(path: Path) -> Path:
+    """Return a lexical absolute output confined to the real analysis root."""
+
+    output = Path(os.path.abspath(os.fspath(path)))
+    analysis_root = Path(os.path.abspath(os.fspath(EXP / "analysis")))
+    for label, candidate_path in (
+        ("canonical analysis root", analysis_root),
+        ("benchmark authorization output", output),
+    ):
+        for candidate in reversed((candidate_path, *candidate_path.parents)):
+            try:
+                metadata = candidate.lstat()
+            except FileNotFoundError:
+                break
+            if stat.S_ISLNK(metadata.st_mode):
+                raise ValueError(
+                    f"unsafe {label}: symlinked existing ancestor or output: "
+                    f"{candidate}"
+                )
+
+    resolved_root = analysis_root.resolve(strict=False)
+    resolved_parent = output.parent.resolve(strict=False)
+    if not resolved_parent.is_relative_to(resolved_root):
+        raise ValueError(
+            "benchmark authorization output parent is outside the experiment "
+            f"analysis root: {resolved_parent}"
+        )
+    return output
+
+
+def _publish_authorization_no_clobber(path: Path, payload: dict) -> None:
+    """Atomically seal one authorization; exact reruns only verify bytes."""
+
+    try:
+        encoded = json.dumps(
+            payload,
+            indent=2,
+            sort_keys=True,
+            ensure_ascii=False,
+            allow_nan=False,
+        ) + "\n"
+    except (TypeError, ValueError) as exc:
+        raise ValueError("benchmark authorization is not canonical JSON") from exc
+    path = _validated_authorization_publication_path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path = _validated_authorization_publication_path(path)
+    if path.is_file() and not path.is_symlink():
+        existing = _load(path)
+        try:
+            existing_encoded = json.dumps(
+                existing,
+                indent=2,
+                sort_keys=True,
+                ensure_ascii=False,
+                allow_nan=False,
+            ) + "\n"
+        except (TypeError, ValueError) as exc:
+            raise ValueError(
+                f"existing benchmark authorization is not canonical JSON: {path}"
+            ) from exc
+        if existing_encoded != encoded:
+            raise ValueError(
+                f"refusing to overwrite stale benchmark authorization: {path}"
+            )
+        return
+    if path.exists() or path.is_symlink():
+        raise ValueError(f"unsafe benchmark authorization output: {path}")
+
+    temporary_name = None
+    try:
+        path = _validated_authorization_publication_path(path)
+        with tempfile.NamedTemporaryFile(
+            mode="w",
+            encoding="utf-8",
+            dir=path.parent,
+            prefix=f".{path.name}.",
+            suffix=".tmp",
+            delete=False,
+        ) as handle:
+            temporary_name = handle.name
+            handle.write(encoded)
+            handle.flush()
+            os.fsync(handle.fileno())
+        try:
+            path = _validated_authorization_publication_path(path)
+            os.link(temporary_name, path)
+        except FileExistsError as exc:
+            raise ValueError(
+                f"benchmark authorization publication lost a race: {path}"
+            ) from exc
+        path = _validated_authorization_publication_path(path)
+        descriptor = os.open(path.parent, os.O_RDONLY)
+        try:
+            os.fsync(descriptor)
+        finally:
+            os.close(descriptor)
+    finally:
+        if temporary_name is not None:
+            Path(temporary_name).unlink(missing_ok=True)
 
 
 def _code_provenance() -> dict:
@@ -87,6 +239,7 @@ def _code_provenance() -> dict:
         "confirmation_evaluator_source_inventory_sha256": evaluator_source["sha256"],
         "confirmation_evaluator_source_file_count": evaluator_source["file_count"],
         "control_rematch_sha256": sha256_file(CONTROL_REMATCH),
+        "control_receipts_sha256": sha256_file(CONTROL_RECEIPTS),
         "authorizer_sha256": sha256_file(Path(__file__)),
     }
 
@@ -202,11 +355,13 @@ def _audit_mopd_training_receipt(
     config: dict,
     config_path: Path,
     base_model: Path,
+    round_manifest: Path,
     target_cache: Path,
     round_index: int,
     seed: int,
     arm: str,
     recorded_gate: object,
+    expected_target_initial_loss: float | None = None,
 ) -> dict:
     """Validate the actual MOPD method and all round-defining inputs."""
 
@@ -237,6 +392,19 @@ def _audit_mopd_training_receipt(
         or not receipt.get("round_gate", {}).get("completed_all_updates")
     ):
         raise ValueError("MOPD training receipt is semantically stale")
+    if arm != "primary":
+        if expected_target_initial_loss is None:
+            raise ValueError("matched MOPD control lacks primary pressure")
+        validate_control_training_receipt(
+            receipt,
+            config=config,
+            arm=arm,
+            expected_target_initial_loss=expected_target_initial_loss,
+            source_manifest=round_manifest,
+            target_cache=target_cache,
+            round_index=round_index,
+            seed=seed,
+        )
     return receipt
 
 
@@ -250,6 +418,7 @@ def _audit_offpolicy_training_receipt(
     round_index: int,
     seed: int,
     recorded_gate: object,
+    expected_target_initial_loss: float,
 ) -> dict:
     """Validate the matched off-policy method and all round-defining inputs."""
 
@@ -278,6 +447,16 @@ def _audit_offpolicy_training_receipt(
         or not receipt.get("round_gate", {}).get("completed_all_updates")
     ):
         raise ValueError("off-policy training receipt is semantically stale")
+    validate_control_training_receipt(
+        receipt,
+        config=config,
+        arm="offpolicy_sft",
+        expected_target_initial_loss=expected_target_initial_loss,
+        source_manifest=round_manifest,
+        base_model=base_model,
+        round_index=round_index,
+        seed=seed,
+    )
     return receipt
 
 
@@ -384,6 +563,7 @@ def _audit_integration(
             config=config,
             config_path=config_path,
             base_model=base_model,
+            round_manifest=round_manifest,
             target_cache=target_cache,
             round_index=round_index,
             seed=seed,
@@ -475,6 +655,14 @@ def _audit_controls(config: dict, config_path: Path) -> tuple[dict, dict[str, Pa
             ).resolve()
             round_manifest = data_root / "training_round.json"
             source_cache = data_root / "all_policy_targets.pt"
+            primary_training_receipt = (
+                artifacts_root
+                / "adapters"
+                / "primary"
+                / f"seed_{primary_seed}"
+                / f"round_{round_index}"
+                / "training_receipt.json"
+            ).resolve()
             if (
                 int(round_row.get("round", -1)) != round_index
                 or not round_manifest.is_file()
@@ -484,6 +672,11 @@ def _audit_controls(config: dict, config_path: Path) -> tuple[dict, dict[str, Pa
                 or not training_receipt.is_file()
                 or round_row.get("training_receipt_sha256")
                 != sha256_file(training_receipt)
+                or round_row.get("primary_training_receipt")
+                != str(primary_training_receipt)
+                or not primary_training_receipt.is_file()
+                or round_row.get("primary_training_receipt_sha256")
+                != sha256_file(primary_training_receipt)
                 or round_row.get("merged") != str(merged)
                 or not (merged / "merge_receipt.json").is_file()
                 or round_row.get("merge_receipt_sha256")
@@ -491,6 +684,22 @@ def _audit_controls(config: dict, config_path: Path) -> tuple[dict, dict[str, Pa
                 or not round_row.get("round_gate", {}).get("passed")
             ):
                 raise ValueError("matched-control round provenance is stale")
+            primary_pressure_receipt = _load(primary_training_receipt)
+            if (
+                primary_pressure_receipt.get("arm") != "primary"
+                or int(primary_pressure_receipt.get("round", -1)) != round_index
+                or int(primary_pressure_receipt.get("seed", -1)) != primary_seed
+                or primary_pressure_receipt.get("config_sha256")
+                != sha256_file(config_path)
+                or not primary_pressure_receipt.get("round_gate", {}).get("passed")
+            ):
+                raise ValueError("primary pressure receipt is stale")
+            try:
+                primary_pressure = float(
+                    primary_pressure_receipt["initial_probe"]["mean_loss"]
+                )
+            except (KeyError, TypeError, ValueError) as exc:
+                raise ValueError("primary pressure receipt lacks initial loss") from exc
             if name == "offpolicy_sft":
                 _audit_offpolicy_training_receipt(
                     training_receipt,
@@ -501,6 +710,7 @@ def _audit_controls(config: dict, config_path: Path) -> tuple[dict, dict[str, Pa
                     round_index=round_index,
                     seed=seed,
                     recorded_gate=round_row.get("round_gate"),
+                    expected_target_initial_loss=primary_pressure,
                 )
             else:
                 if not source_cache.is_file() or round_row.get(
@@ -561,11 +771,13 @@ def _audit_controls(config: dict, config_path: Path) -> tuple[dict, dict[str, Pa
                     config=config,
                     config_path=config_path,
                     base_model=base_model,
+                    round_manifest=round_manifest,
                     target_cache=expected_cache,
                     round_index=round_index,
                     seed=seed,
                     arm=name,
                     recorded_gate=round_row.get("round_gate"),
+                    expected_target_initial_loss=primary_pressure,
                 )
             if round_row.get("merge_receipt_sha256") != _audit_merge_receipt(
                 merged, base_model, adapter
@@ -606,7 +818,8 @@ def _audit_confirmation(
     config_path: Path,
     expected_arm_models: dict[str, Path],
 ) -> tuple[dict, list[dict], dict[str, dict[str, str]]]:
-    confirmation = _load(CONFIRMATION)
+    confirmation_path = _validated_confirmation_analysis_file(CONFIRMATION)
+    confirmation = _load(confirmation_path)
     if (
         confirmation.get("stage")
         != "two_block_same_prefix_advantage_confirmation"
@@ -626,8 +839,29 @@ def _audit_confirmation(
     if confirmation.get("manifest_sha256") != manifest_sha:
         raise ValueError("confirmation manifest hash mismatch")
     manifest = _load(manifest_path)
+    recorded_authorization = manifest.get("controls_authorization")
+    recorded_admission = manifest.get("confirmation_admission")
+    if not isinstance(recorded_authorization, dict) or not isinstance(
+        recorded_admission, dict
+    ):
+        raise ValueError("confirmation manifest lacks pre-admission provenance")
+    authorization_binding = controls_authorization_binding(
+        Path(str(recorded_authorization.get("path", ""))),
+        expected_config_sha256=sha256_file(config_path),
+    )
+    admission_binding = confirmation_admission_binding(
+        Path(str(recorded_admission.get("path", ""))),
+        expected_config_sha256=sha256_file(config_path),
+        expected_controls_authorization=authorization_binding,
+    )
     expected_seeds = [int(value) for value in config["seeds"]["confirmatory_blocks"]]
     raw_root = configured_confirmation_raw_root(config)
+    validate_confirmation_campaign_tree(
+        Path(str(admission_binding["path"])),
+        raw_root=raw_root,
+        terminal=True,
+        require_manifest=True,
+    )
     arms = manifest.get("arms")
     model_receipts = manifest.get("model_merge_receipts")
     model_inventories = manifest.get("model_inference_inventories")
@@ -656,6 +890,10 @@ def _audit_confirmation(
         or manifest.get("sample_more_arm") != "soup_best8"
         or manifest.get("evaluator_sha256") != sha256_file(CONFIRMATION_EVALUATOR)
         or manifest.get("evaluator_source_inventory") != evaluator_source
+        or recorded_authorization != authorization_binding
+        or recorded_admission != admission_binding
+        or confirmation.get("controls_authorization") != authorization_binding
+        or confirmation.get("confirmation_admission") != admission_binding
         or manifest.get("strict_comparator_arms") != strict_arms
         or not isinstance(arms, dict)
         or not isinstance(model_receipts, dict)
@@ -695,6 +933,14 @@ def _audit_confirmation(
                 else 1
             )
             engine_protocol = score.get("engine_protocol")
+            backend_protocol, backend_fingerprint = canonical_backend_protocol(
+                score.get("runner_summary"),
+                expected_engine=config["engine"],
+                expected_model=str(score.get("model", "")),
+            )
+            expected_sampling = expected_confirmation_sampling_protocol(
+                config, decode=expected_decode, block_seed=block_seed
+            )
             if (
                 score.get("stage") != "policy_eval"
                 or score.get("scope") != "confirmatory"
@@ -715,6 +961,14 @@ def _audit_confirmation(
                 or not isinstance(engine_protocol, dict)
                 or not engine_protocol
                 or not all(engine_protocol.values())
+                or score.get("backend_protocol") != backend_protocol
+                or score.get("backend_fingerprint") != backend_fingerprint
+                or score.get("sampling_protocol") != expected_sampling
+                or not isinstance(score.get("task_manifest_sha256"), str)
+                or not isinstance(score.get("ordered_plan_sha256"), str)
+                or set(score.get("token_ledger") or {}) != {"sampled_tokens"}
+                or score.get("controls_authorization") != authorization_binding
+                or score.get("confirmation_admission") != admission_binding
                 or not isinstance(score.get("items"), list)
                 or not score["items"]
             ):
@@ -738,12 +992,11 @@ def _audit_confirmation(
             score_artifacts.append(
                 {"path": str(score_path), "sha256": sha256_file(score_path)}
             )
+            raw_dir = confirmation_raw_dir(recorded_score_path, raw_root=raw_root)
             score_artifacts.extend(
-                {
-                    "path": descriptor["path"],
-                    "sha256": descriptor["sha256"],
-                }
-                for descriptor in score["raw_artifacts"].values()
+                {"path": str(path.resolve()), "sha256": sha256_file(path)}
+                for path in sorted(raw_dir.iterdir())
+                if path.is_file() and not path.is_symlink()
             )
         if len(block_models) != 1:
             raise ValueError("confirmation arm used different models across blocks")
@@ -753,29 +1006,40 @@ def _audit_confirmation(
         if arm not in arm_models or Path(arm_models[arm]["model"]) != expected_model:
             raise ValueError("confirmation arm/model mapping is invalid")
 
-    with tempfile.TemporaryDirectory(prefix="deep_mopd_confirmation_reaudit_") as tmp:
-        regenerated_path = Path(tmp) / "confirmation.json"
-        completed = subprocess.run(
-            [
-                str(PY),
-                str(CONFIRMATION_ANALYZER),
-                "--config",
-                str(config_path),
-                "--manifest",
-                str(manifest_path),
-                "--out",
-                str(regenerated_path),
-            ],
-            cwd=REPO,
-            stdin=subprocess.DEVNULL,
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-            check=False,
-        )
-        if completed.returncode != 0:
-            raise ValueError("independent confirmation reanalysis did not pass")
-        regenerated = _load(regenerated_path)
-    if regenerated != confirmation:
+    score_artifacts.extend(
+        [
+            {
+                "path": authorization_binding["path"],
+                "sha256": authorization_binding["sha256"],
+            },
+            {
+                "path": admission_binding["path"],
+                "sha256": admission_binding["sha256"],
+            },
+        ]
+    )
+
+    completed = subprocess.run(
+        [
+            str(PY),
+            str(CONFIRMATION_ANALYZER),
+            "--config",
+            str(config_path),
+            "--manifest",
+            str(manifest_path),
+            "--out",
+            str(confirmation_path),
+        ],
+        cwd=REPO,
+        stdin=subprocess.DEVNULL,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        check=False,
+    )
+    if completed.returncode != 0:
+        raise ValueError("independent confirmation reanalysis did not pass")
+    regenerated = _load(_validated_confirmation_analysis_file(confirmation_path))
+    if not _strict_json_equal(regenerated, confirmation):
         raise ValueError("confirmation receipt differs from independent reanalysis")
     return confirmation, sorted(score_artifacts, key=lambda row: row["path"]), arm_models
 
@@ -806,6 +1070,9 @@ def _build_authorization(config: dict, config_path: Path) -> dict:
     }
     confirmation, score_artifacts, confirmation_models = _audit_confirmation(
         config, config_path, expected_arm_models
+    )
+    confirmation_binding_before = _confirmation_analysis_binding(
+        CONFIRMATION, confirmation
     )
 
     tier_seeds = _tier_seeds(config)
@@ -841,6 +1108,11 @@ def _build_authorization(config: dict, config_path: Path) -> dict:
     for arm, model in expected_arm_models.items():
         if model_provenance(model) != confirmation_models[arm]:
             raise ValueError("confirmation model changed during authorization")
+    confirmation_binding_after = _confirmation_analysis_binding(
+        CONFIRMATION, confirmation
+    )
+    if confirmation_binding_after != confirmation_binding_before:
+        raise ValueError("confirmation analysis changed during authorization")
     return {
         "schema_version": 2,
         "stage": "benchmark_aggregate_authorization",
@@ -851,8 +1123,8 @@ def _build_authorization(config: dict, config_path: Path) -> dict:
         "design_commit": preregistration["design_commit"],
         "integration_receipts": integration_artifacts,
         "controls_receipt": controls_artifact,
-        "confirmation": str(CONFIRMATION.resolve()),
-        "confirmation_sha256": sha256_file(CONFIRMATION),
+        "confirmation": confirmation_binding_after["path"],
+        "confirmation_sha256": confirmation_binding_after["sha256"],
         "confirmation_manifest_sha256": confirmation["manifest_sha256"],
         "confirmation_artifacts": score_artifacts,
         "evidence_artifacts": evidence_artifacts,
@@ -873,17 +1145,19 @@ def main() -> int:
     args = parser.parse_args()
     config, config_path = load_config(CONFIG)
     result = _build_authorization(config, config_path)
-    if args.out.is_file():
-        existing = _load(args.out)
-        if existing != result:
-            raise SystemExit("existing benchmark authorization receipt is stale")
-        print(json.dumps(existing, indent=2, sort_keys=True))
-        return 0
-    if args.out.exists():
+    existing_regular_file = args.out.is_file() and not args.out.is_symlink()
+    if not existing_regular_file and (args.out.exists() or args.out.is_symlink()):
         raise SystemExit("benchmark authorization output path is not a file")
-    if BENCHMARK_ROOT.exists() and any(BENCHMARK_ROOT.rglob("*")):
+    if (
+        not existing_regular_file
+        and BENCHMARK_ROOT.exists()
+        and any(BENCHMARK_ROOT.rglob("*"))
+    ):
         raise SystemExit("benchmark artifacts exist before initial authorization")
-    write_json(args.out, result)
+    try:
+        _publish_authorization_no_clobber(args.out, result)
+    except ValueError as exc:
+        raise SystemExit(str(exc)) from exc
     print(json.dumps(result, indent=2, sort_keys=True))
     return 0
 

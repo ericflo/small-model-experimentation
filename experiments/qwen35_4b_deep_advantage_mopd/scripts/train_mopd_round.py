@@ -450,6 +450,24 @@ def main() -> int:
         "unit_ledger": unit_ledger,
         "logs": logs,
     }
+    if args.arm != "primary":
+        # Receipt-only control metadata: this branch executes after every
+        # forward/backward/update and cannot affect primary training behavior.
+        receipt["pressure_probe"] = {
+            "unit_ids": [str(unit["sample"]["id"]) for unit in probe_units],
+            "role_counts": {
+                role: sum(
+                    unit["sample"]["meta"]["role"] == role for unit in probe_units
+                )
+                for role in ("capability", "route_control", "anchor")
+            },
+            "target_counts": {
+                policy: sum(unit["target"] == policy for unit in probe_units)
+                for policy in ("quick", "deep", "soup")
+            },
+            "geometry": "6_teacher_2_anchor",
+            "matching_statistic": "initial_mean_objective_loss",
+        }
     (args.out / "training_receipt.json").write_text(
         json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )

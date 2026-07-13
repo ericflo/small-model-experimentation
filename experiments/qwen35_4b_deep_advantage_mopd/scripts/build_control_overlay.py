@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -32,13 +33,81 @@ from io_utils import (  # noqa: E402
     read_jsonl,
     sha256_file,
     validate_policy_cache_provenance,
-    write_json,
 )
 from training_units import make_sparse_sample  # noqa: E402
 
 # Reuse the exact dense scorer that created the primary target cache.  Importing
 # this CLI module is side-effect free; its main entry point remains guarded.
 from cache_policy_targets import _score_policy  # noqa: E402
+
+
+OUTPUT_FILENAMES = frozenset(
+    {
+        "rematch_manifest.json",
+        "all_policy_targets.pt",
+        "all_policy_targets.pt.receipt.json",
+    }
+)
+
+
+def _temporary_path(out_dir: Path, name: str) -> Path:
+    return out_dir.parent / f".{out_dir.name}.{name}.tmp"
+
+
+def _atomic_write_json(path: Path, value: object, *, out_dir: Path) -> None:
+    temporary = _temporary_path(out_dir, path.name)
+    if temporary.exists():
+        if temporary.is_symlink() or not temporary.is_file():
+            raise ValueError(f"unsafe control-overlay temporary output: {temporary}")
+        temporary.unlink()
+    temporary.write_text(
+        json.dumps(value, indent=2, sort_keys=True, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+    os.replace(temporary, path)
+
+
+def _prepare_output_directory(out_dir: Path, *, resume: bool) -> None:
+    lexical = Path(os.path.abspath(os.fspath(out_dir)))
+    for component in (lexical, *lexical.parents):
+        if component.is_symlink():
+            raise ValueError(
+                f"unsafe symlinked control-overlay output path: {component}"
+            )
+    if out_dir.exists() and not out_dir.is_dir():
+        raise ValueError(f"control overlay output is not a directory: {out_dir}")
+    out_dir.mkdir(parents=True, exist_ok=True)
+    entries = list(out_dir.iterdir())
+    unexpected = [
+        path
+        for path in entries
+        if path.name not in OUTPUT_FILENAMES or path.is_symlink() or not path.is_file()
+    ]
+    if unexpected:
+        raise ValueError(
+            "control overlay contains unrecognized partial outputs: "
+            + ", ".join(sorted(path.name for path in unexpected))
+        )
+    if entries and not resume:
+        raise ValueError(f"control overlay output is not empty: {out_dir}")
+    if resume:
+        names = {path.name for path in entries}
+        allowed_prefixes = (
+            {"rematch_manifest.json"},
+            {"rematch_manifest.json", "all_policy_targets.pt"},
+        )
+        if names not in allowed_prefixes:
+            raise ValueError(
+                "control overlay is not a resumable publication prefix: "
+                + ", ".join(sorted(names))
+            )
+    for name in OUTPUT_FILENAMES:
+        temporary = _temporary_path(out_dir, name)
+        if not temporary.exists():
+            continue
+        if temporary.is_symlink() or not temporary.is_file():
+            raise ValueError(f"unsafe control-overlay temporary output: {temporary}")
+        temporary.unlink()
 
 
 def _flatten_artifacts(manifest: dict) -> list[dict]:
@@ -251,16 +320,31 @@ def main() -> int:
     parser.add_argument("--deep", type=Path, required=True)
     parser.add_argument("--soup", type=Path, required=True)
     parser.add_argument("--out-dir", type=Path, required=True)
+    parser.add_argument("--resume", action="store_true")
     args = parser.parse_args()
     config, config_path = load_config(args.config)
     round_manifest = args.round_manifest.resolve()
     source_cache = args.source_cache.resolve()
+    try:
+        _prepare_output_directory(args.out_dir, resume=bool(args.resume))
+    except ValueError as error:
+        raise SystemExit(str(error)) from error
     out_dir = args.out_dir.resolve()
-    if out_dir.exists() and any(out_dir.iterdir()):
-        raise SystemExit(f"control overlay output is not empty: {out_dir}")
-    out_dir.mkdir(parents=True, exist_ok=True)
     rematch_path = out_dir / "rematch_manifest.json"
     derived_cache = out_dir / "all_policy_targets.pt"
+    if args.resume:
+        try:
+            existing_rematch = validate_control_rematch_manifest(
+                rematch_path,
+                config=config,
+                config_path=config_path,
+                source_manifest=round_manifest,
+                source_cache=source_cache,
+            )
+        except ValueError as error:
+            raise SystemExit(f"invalid resumable control rematch: {error}") from error
+        if int(existing_rematch.get("replacement_count", -1)) < 1:
+            raise SystemExit("completed no-op control rematch is not resumable")
     models = {
         "quick": args.quick.resolve(),
         "deep": args.deep.resolve(),
@@ -351,7 +435,7 @@ def main() -> int:
             "error": str(error),
             "gate": {"passed": False},
         }
-        write_json(rematch_path, failure)
+        _atomic_write_json(rematch_path, failure, out_dir=out_dir)
         print(json.dumps(failure, indent=2, sort_keys=True))
         return 3
 
@@ -464,7 +548,7 @@ def main() -> int:
         "replacements": replacement_rows,
         "gate": {"passed": True},
     }
-    write_json(rematch_path, selection_manifest)
+    _atomic_write_json(rematch_path, selection_manifest, out_dir=out_dir)
     if not replacement_rows:
         print(json.dumps(selection_manifest, indent=2, sort_keys=True))
         return 0
@@ -570,12 +654,20 @@ def main() -> int:
         }
     )
     validate_policy_cache_provenance(derived_payload, config, config_path)
-    torch.save(derived_payload, derived_cache)
+    temporary_cache = _temporary_path(out_dir, derived_cache.name)
+    if temporary_cache.exists():
+        if temporary_cache.is_symlink() or not temporary_cache.is_file():
+            raise SystemExit(f"unsafe control-overlay temporary cache: {temporary_cache}")
+        temporary_cache.unlink()
+    torch.save(derived_payload, temporary_cache)
+    os.replace(temporary_cache, derived_cache)
     receipt = {key: value for key, value in derived_payload.items() if key != "samples"}
     receipt["cache_sha256"] = sha256_file(derived_cache)
     receipt["cache_bytes"] = derived_cache.stat().st_size
-    write_json(
-        derived_cache.with_suffix(derived_cache.suffix + ".receipt.json"), receipt
+    _atomic_write_json(
+        derived_cache.with_suffix(derived_cache.suffix + ".receipt.json"),
+        receipt,
+        out_dir=out_dir,
     )
     if (
         sha256_file(round_manifest) != manifest_sha_before

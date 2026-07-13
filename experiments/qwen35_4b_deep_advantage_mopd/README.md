@@ -173,15 +173,37 @@ the sealed same-vLLM confirmation—not trainer-side loss—the decisive test.
 - `analysis/`: machine-readable gates and final receipt.
 - `reports/artifact_manifest.yaml`: external checkpoints and regeneration.
 
-Confirmation keeps only the atomic `scores.json` commit markers under
-`runs/confirmation/`. The corresponding atom and episode rows are gzip-compressed
-under the mirrored `large_artifacts/qwen35_4b_deep_advantage_mopd/confirmation/`
-tree. Every score records the exact raw path, SHA-256, byte count, and row count;
-resume, analysis, and benchmark authorization all revalidate those descriptors,
-recompute item identity/family/level/sample count/best score from the raw rows,
-require the complete frozen family/cell geometry, and reject committed outputs
-with missing, changed, escaped, or extra artifacts. Raw hashes remain in the
-benchmark authorization inventory, so later mutation also stops benchmark runs.
+Confirmation keeps only the atomic `scores.json` commit marker under each
+`runs/confirmation/` arm. The mirrored
+`large_artifacts/qwen35_4b_deep_advantage_mopd/confirmation/` directory retains
+`STARTED`, `GENERATED`, and `COMPLETE` receipts, gzip atom/episode rows, and one
+durable gzip journal bundle per returned generation call. No partial is deleted
+or resampled: a started-only/interrupted attempt is terminal, an authenticated
+`GENERATED` or `COMPLETE` attempt may be finalized without generation, and a
+caught failure is quarantined with hashes of every retained byte.
+Before any arm may reserve `STARTED`, a no-clobber global `ADMISSION.json`
+binds the exact semantic-controls authorization receipt, its complete stable
+control-code inventory, every admitted model, both blocks, and the evaluator
+source inventory. The same binding is required in every transaction and score,
+so a score created before (or under different code than) that authorization
+cannot be reused.
+
+Every score authenticates sampled-token totals from stage-1/stage-2 sampled ID
+arrays (including trimmed terminal IDs and excluding injected close tokens),
+cross-checks runner request/completion/token totals, hashes each complete
+returned request and output before scoring, and replays atom scoring plus every
+episode action, transition, and terminal score from the journaled text. It binds
+exact task-manifest and ordered-plan hashes, the registered raw and resolved
+greedy/sample-8 settings (including seed, budgets, penalties, and multiplicity),
+and one canonical fingerprint of the pinned vLLM/Python/package-lock/GPU/CUDA
+engine protocol. A confirmation-only wrapper also proves each call fits the
+live-derived hybrid cache with
+`ceil(tokens/528) + 3*ceil(tokens/16384)` (35 blocks at full context) and
+zero-preemption capacity. Resume,
+analysis, and benchmark authorization recompute all of this, require one backend
+across all 26 score sets and one exact task plan per block, and inventory every
+score, marker, raw file, and call bundle. Benchmark authorization itself is an
+exclusive no-clobber seal. Any later mutation stops benchmarking.
 
 Benchmark files remain unread and unreachable unless the procedural
 confirmation explicitly authorizes the run-only CLI.

@@ -17,6 +17,7 @@ sys.path.insert(0, str(EXP / "src"))
 sys.path.insert(0, str(EXP / "scripts"))
 
 import run as run_script  # noqa: E402
+from build_control_overlay import _prepare_output_directory  # noqa: E402
 
 from control_rematch import (  # noqa: E402
     CACHE_VARIANT,
@@ -263,6 +264,70 @@ def serialized_overlay_fixture(root: Path) -> dict:
 
 
 class ControlRematchTests(unittest.TestCase):
+    def test_overlay_builder_resume_preserves_only_reachable_prefixes(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary) / "overlay"
+            root.mkdir()
+            manifest = root / "rematch_manifest.json"
+            manifest.write_text("manifest", encoding="utf-8")
+            _prepare_output_directory(root, resume=True)
+            self.assertEqual(manifest.read_text(encoding="utf-8"), "manifest")
+
+            cache = root / "all_policy_targets.pt"
+            cache.write_text("cache", encoding="utf-8")
+            _prepare_output_directory(root, resume=True)
+            self.assertEqual(manifest.read_text(encoding="utf-8"), "manifest")
+            self.assertEqual(cache.read_text(encoding="utf-8"), "cache")
+
+            (root / "unknown.partial").write_text("unknown", encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "unrecognized partial"):
+                _prepare_output_directory(root, resume=True)
+            self.assertTrue((root / "unknown.partial").is_file())
+
+    def test_overlay_builder_rejects_unreachable_prefixes_without_deletion(self):
+        prefixes = {
+            "cache_only": {"all_policy_targets.pt": "cache"},
+            "receipt_only": {"all_policy_targets.pt.receipt.json": "receipt"},
+            "manifest_receipt": {
+                "rematch_manifest.json": "manifest",
+                "all_policy_targets.pt.receipt.json": "receipt",
+            },
+        }
+        for name, files in prefixes.items():
+            with self.subTest(name=name), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary) / "overlay"
+                root.mkdir()
+                for filename, contents in files.items():
+                    (root / filename).write_text(contents, encoding="utf-8")
+                with self.assertRaisesRegex(ValueError, "not a resumable"):
+                    _prepare_output_directory(root, resume=True)
+                self.assertEqual(
+                    {
+                        path.name: path.read_text(encoding="utf-8")
+                        for path in root.iterdir()
+                    },
+                    files,
+                )
+
+    def test_overlay_builder_rejects_symlinked_output_components(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            external = root / "external"
+            external.mkdir()
+            sentinel = external / "sentinel"
+            sentinel.write_text("untouched", encoding="utf-8")
+            out = root / "out"
+            out.symlink_to(external, target_is_directory=True)
+            with self.assertRaisesRegex(ValueError, "symlinked"):
+                _prepare_output_directory(out, resume=True)
+            self.assertEqual(sentinel.read_text(encoding="utf-8"), "untouched")
+
+            linked_parent = root / "linked-parent"
+            linked_parent.symlink_to(external, target_is_directory=True)
+            with self.assertRaisesRegex(ValueError, "symlinked"):
+                _prepare_output_directory(linked_parent / "child", resume=False)
+            self.assertFalse((external / "child").exists())
+
     def test_only_non_advantage_arm_uses_overlay(self):
         source_cache = Path("/tmp/source-cache.pt")
         derived_cache = Path("/tmp/derived-cache.pt")
@@ -351,7 +416,7 @@ class ControlRematchTests(unittest.TestCase):
                 "_paths",
                 return_value={"quick": root, "deep": root, "soup": root},
             ):
-                with self.assertRaisesRegex(SystemExit, "partial non-advantage"):
+                with self.assertRaisesRegex(SystemExit, "unreachable"):
                     run_script._prepare_non_advantage_route_cache(
                         {},
                         root / "config.yaml",
@@ -360,6 +425,190 @@ class ControlRematchTests(unittest.TestCase):
                         source_cache=root / "source.pt",
                     )
             runner.assert_not_called()
+
+    def test_manifest_only_registered_overlay_resumes_deterministically(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            data_root = root / "data"
+            overlay_root = data_root / "control_overlays" / "non_advantage_route"
+            overlay_root.mkdir(parents=True)
+            rematch = overlay_root / "rematch_manifest.json"
+            rematch.write_text("{}\n", encoding="utf-8")
+            cache = overlay_root / "all_policy_targets.pt"
+            receipt = cache.with_suffix(".pt.receipt.json")
+            source_cache = root / "source.pt"
+            source_cache.write_text("source", encoding="utf-8")
+
+            def complete(_command, **_kwargs):
+                cache.write_text("rebuilt", encoding="utf-8")
+                receipt.write_text("{}\n", encoding="utf-8")
+                return 0
+
+            with patch.object(
+                run_script,
+                "validate_control_rematch_manifest",
+                return_value={"replacement_count": 1},
+            ), patch.object(
+                run_script, "validate_control_overlay_cache"
+            ), patch.object(
+                run_script,
+                "_paths",
+                return_value={"quick": root, "deep": root, "soup": root},
+            ), patch.object(run_script, "_run", side_effect=complete) as runner:
+                self.assertEqual(
+                    run_script._prepare_non_advantage_route_cache(
+                        {},
+                        root / "config.yaml",
+                        data_root=data_root,
+                        manifest=root / "round.json",
+                        source_cache=source_cache,
+                    ),
+                    (cache, rematch),
+                )
+            command = runner.call_args.args[0]
+            self.assertIn("--resume", command)
+
+    def test_cache_only_registered_overlay_fails_closed_without_deletion(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            data_root = root / "data"
+            overlay_root = data_root / "control_overlays" / "non_advantage_route"
+            overlay_root.mkdir(parents=True)
+            cache = overlay_root / "all_policy_targets.pt"
+            cache.write_text("partial", encoding="utf-8")
+            source_cache = root / "source.pt"
+            source_cache.write_text("source", encoding="utf-8")
+            before = cache.read_bytes()
+            with patch.object(
+                run_script,
+                "_paths",
+                return_value={"quick": root, "deep": root, "soup": root},
+            ), patch.object(run_script, "_run") as runner:
+                with self.assertRaisesRegex(SystemExit, "unreachable"):
+                    run_script._prepare_non_advantage_route_cache(
+                        {},
+                        root / "config.yaml",
+                        data_root=data_root,
+                        manifest=root / "round.json",
+                        source_cache=source_cache,
+                    )
+            runner.assert_not_called()
+            self.assertEqual(cache.read_bytes(), before)
+
+    def test_receipt_only_and_manifest_receipt_prefixes_fail_without_deletion(self):
+        prefixes = {
+            "receipt_only": {
+                "all_policy_targets.pt.receipt.json": b"receipt",
+            },
+            "manifest_receipt": {
+                "rematch_manifest.json": b"manifest",
+                "all_policy_targets.pt.receipt.json": b"receipt",
+            },
+        }
+        for name, files in prefixes.items():
+            with self.subTest(name=name), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                data_root = root / "data"
+                overlay = data_root / "control_overlays" / "non_advantage_route"
+                overlay.mkdir(parents=True)
+                for filename, contents in files.items():
+                    (overlay / filename).write_bytes(contents)
+                with patch.object(
+                    run_script,
+                    "_paths",
+                    return_value={"quick": root, "deep": root, "soup": root},
+                ), patch.object(run_script, "_run") as runner:
+                    with self.assertRaisesRegex(SystemExit, "unreachable"):
+                        run_script._prepare_non_advantage_route_cache(
+                            {},
+                            root / "config.yaml",
+                            data_root=data_root,
+                            manifest=root / "round.json",
+                            source_cache=root / "source.pt",
+                        )
+                runner.assert_not_called()
+                self.assertEqual(
+                    {path.name: path.read_bytes() for path in overlay.iterdir()},
+                    files,
+                )
+
+    def test_manifest_cache_prefix_resumes_without_preemptive_deletion(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            data_root = root / "data"
+            overlay = data_root / "control_overlays" / "non_advantage_route"
+            overlay.mkdir(parents=True)
+            rematch = overlay / "rematch_manifest.json"
+            rematch.write_text("{}\n", encoding="utf-8")
+            cache = overlay / "all_policy_targets.pt"
+            cache.write_bytes(b"published-cache-prefix")
+            receipt = overlay / "all_policy_targets.pt.receipt.json"
+
+            def complete(command, **_kwargs):
+                self.assertEqual(cache.read_bytes(), b"published-cache-prefix")
+                self.assertIn("--resume", command)
+                cache.write_bytes(b"reconstructed-cache")
+                receipt.write_text("{}\n", encoding="utf-8")
+                return 0
+
+            with patch.object(
+                run_script,
+                "validate_control_rematch_manifest",
+                return_value={"replacement_count": 1},
+            ), patch.object(
+                run_script, "validate_control_overlay_cache"
+            ), patch.object(
+                run_script,
+                "_paths",
+                return_value={"quick": root, "deep": root, "soup": root},
+            ), patch.object(run_script, "_run", side_effect=complete) as runner:
+                self.assertEqual(
+                    run_script._prepare_non_advantage_route_cache(
+                        {},
+                        root / "config.yaml",
+                        data_root=data_root,
+                        manifest=root / "round.json",
+                        source_cache=root / "source.pt",
+                    ),
+                    (cache, rematch),
+                )
+            runner.assert_called_once()
+
+    def test_symlinked_overlay_directory_and_ancestor_fail_without_following(self):
+        for variant in ("directory", "ancestor"):
+            with self.subTest(variant=variant), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                external = root / "external"
+                external.mkdir()
+                sentinel = external / "sentinel"
+                sentinel.write_bytes(b"untouched")
+                if variant == "directory":
+                    data_root = root / "data"
+                    parent = data_root / "control_overlays"
+                    parent.mkdir(parents=True)
+                    (parent / "non_advantage_route").symlink_to(
+                        external, target_is_directory=True
+                    )
+                else:
+                    real_data = external / "data"
+                    real_data.mkdir()
+                    data_root = root / "linked-data"
+                    data_root.symlink_to(real_data, target_is_directory=True)
+                with patch.object(
+                    run_script,
+                    "_paths",
+                    return_value={"quick": root, "deep": root, "soup": root},
+                ), patch.object(run_script, "_run") as runner:
+                    with self.assertRaisesRegex(SystemExit, "symlinked"):
+                        run_script._prepare_non_advantage_route_cache(
+                            {},
+                            root / "config.yaml",
+                            data_root=data_root,
+                            manifest=root / "round.json",
+                            source_cache=root / "source.pt",
+                        )
+                runner.assert_not_called()
+                self.assertEqual(sentinel.read_bytes(), b"untouched")
 
     def test_length_filter_replaces_only_offender_in_registered_order(self):
         primaries = [source("primary-a"), source("primary-b", family="patchwheel")]

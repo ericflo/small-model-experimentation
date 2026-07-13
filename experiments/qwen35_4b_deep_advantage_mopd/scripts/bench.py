@@ -6,6 +6,8 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import os
+import stat
 import subprocess
 import sys
 import tempfile
@@ -26,6 +28,7 @@ ANALYZER = EXP / "scripts" / "analyze_benchmark.py"
 CONFIRMATION_ANALYZER = EXP / "scripts" / "analyze_confirmation.py"
 CONFIRMATION_EVALUATOR = EXP / "scripts" / "eval_policy.py"
 CONTROL_REMATCH = EXP / "src" / "control_rematch.py"
+CONTROL_RECEIPTS = EXP / "src" / "control_receipts.py"
 AUTHORIZER = EXP / "scripts" / "authorize_benchmark.py"
 BACKEND = "qwen_vllm"
 BENCHMARK_EVENT_COUNT = 33
@@ -36,13 +39,16 @@ from run_benchmark_aggregate import (  # noqa: E402
     PUBLIC_FAMILY_KEYS,
     benchmark_source_inventory,
 )
+from confirmation_artifacts import (  # noqa: E402
+    configured_confirmation_raw_root,
+    validate_confirmation_campaign_tree,
+)
 from io_utils import (  # noqa: E402
     canonical_hash,
     confirmation_evaluator_source_inventory,
     load_config,
     resolve_repo_path,
     sha256_file,
-    write_json,
 )
 
 
@@ -104,6 +110,199 @@ EVENT_BINDING_KEYS = frozenset(
         "model_inference_inventory_sha256",
     }
 )
+
+
+def _lexical_absolute(path: Path) -> Path:
+    """Return an absolute normalized path without following any symlink."""
+
+    return Path(os.path.abspath(os.fspath(path)))
+
+
+def _reject_symlink_components(path: Path, *, label: str) -> None:
+    """Reject every existing lexical component, including the leaf, if symlinked."""
+
+    lexical = _lexical_absolute(path)
+    for candidate in reversed((lexical, *lexical.parents)):
+        try:
+            metadata = candidate.lstat()
+        except FileNotFoundError:
+            break
+        if stat.S_ISLNK(metadata.st_mode):
+            raise ValueError(
+                f"unsafe {label}: symlinked existing ancestor or output: {candidate}"
+            )
+        if candidate != lexical and not stat.S_ISDIR(metadata.st_mode):
+            raise ValueError(
+                f"unsafe {label}: non-directory existing ancestor: {candidate}"
+            )
+
+
+def _canonical_benchmark_event_path(tier: str, seed: int, label: str) -> Path:
+    """Return the one frozen lexical location for a benchmark event."""
+
+    if tier not in {"quick", "medium"}:
+        raise ValueError(f"invalid benchmark tier: {tier}")
+    if label not in {"primary", "soup", "visible"}:
+        raise ValueError(f"invalid benchmark label: {label}")
+    if not isinstance(seed, int) or isinstance(seed, bool):
+        raise ValueError(f"invalid benchmark seed: {seed!r}")
+    return _lexical_absolute(
+        EXP / "runs" / "benchmark" / tier / f"seed_{seed}" / f"{label}.json"
+    )
+
+
+def _validated_exact_path(path: Path, *, expected: Path, label: str) -> Path:
+    """Require one exact lexical path and reject symlinks before any resolution."""
+
+    lexical = _lexical_absolute(path)
+    canonical = _lexical_absolute(expected)
+    _reject_symlink_components(canonical, label=f"canonical {label}")
+    if lexical != canonical:
+        _reject_symlink_components(lexical, label=label)
+        raise ValueError(f"{label} is not the exact canonical path: {lexical}")
+    _reject_symlink_components(lexical, label=label)
+    return lexical
+
+
+def _validated_benchmark_event_path(
+    path: Path, *, tier: str, seed: int, label: str
+) -> Path:
+    return _validated_exact_path(
+        path,
+        expected=_canonical_benchmark_event_path(tier, seed, label),
+        label="benchmark event output",
+    )
+
+
+def _publication_start_state(
+    path: Path, *, expected: Path, label: str
+) -> tuple[Path, bool]:
+    """Freeze the lexical destination and whether a regular seal existed initially."""
+
+    path = _validated_exact_path(path, expected=expected, label=label)
+    try:
+        metadata = path.lstat()
+    except FileNotFoundError:
+        return path, False
+    if not stat.S_ISREG(metadata.st_mode):
+        raise ValueError(f"unsafe {label}: destination is not a regular file: {path}")
+    return path, True
+
+
+def _load_json_object(path: Path, *, label: str) -> dict:
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ValueError(f"invalid {label}: {path}") from exc
+    if not isinstance(payload, dict):
+        raise ValueError(f"{label} is not a JSON object: {path}")
+    return payload
+
+
+def _publish_json_no_clobber(
+    path: Path,
+    payload: dict,
+    *,
+    expected: Path,
+    label: str,
+    existed_at_start: bool,
+) -> bool:
+    """Atomically publish once; only an initial exact seal is a read-only rerun."""
+
+    path = _validated_exact_path(path, expected=expected, label=label)
+    encoded = json.dumps(
+        payload,
+        indent=2,
+        sort_keys=True,
+        ensure_ascii=False,
+        allow_nan=False,
+    ) + "\n"
+    if existed_at_start:
+        existing = _load_json_object(path, label=f"existing {label}")
+        existing_encoded = json.dumps(
+            existing,
+            indent=2,
+            sort_keys=True,
+            ensure_ascii=False,
+            allow_nan=False,
+        ) + "\n"
+        if existing_encoded != encoded:
+            raise ValueError(f"refusing to overwrite stale {label}: {path}")
+        return False
+
+    try:
+        path.lstat()
+    except FileNotFoundError:
+        pass
+    else:
+        raise ValueError(f"{label} publication lost a race: {path}")
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path = _validated_exact_path(path, expected=expected, label=label)
+    try:
+        path.lstat()
+    except FileNotFoundError:
+        pass
+    else:
+        raise ValueError(f"{label} publication lost a race: {path}")
+
+    temporary_name = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="w",
+            encoding="utf-8",
+            dir=path.parent,
+            prefix=f".{path.name}.",
+            suffix=".tmp",
+            delete=False,
+        ) as handle:
+            temporary_name = handle.name
+            handle.write(encoded)
+            handle.flush()
+            os.fsync(handle.fileno())
+        try:
+            path = _validated_exact_path(path, expected=expected, label=label)
+            os.link(temporary_name, path)
+        except FileExistsError as exc:
+            raise ValueError(f"{label} publication lost a race: {path}") from exc
+        path = _validated_exact_path(path, expected=expected, label=label)
+        descriptor = os.open(path.parent, os.O_RDONLY)
+        try:
+            os.fsync(descriptor)
+        finally:
+            os.close(descriptor)
+    finally:
+        if temporary_name is not None:
+            Path(temporary_name).unlink(missing_ok=True)
+    return True
+
+
+def _benchmark_event_publication_start(
+    path: Path, *, tier: str, seed: int, label: str
+) -> tuple[Path, bool]:
+    return _publication_start_state(
+        path,
+        expected=_canonical_benchmark_event_path(tier, seed, label),
+        label="benchmark event output",
+    )
+
+
+def _publish_benchmark_event_no_clobber(
+    path: Path,
+    payload: dict,
+    *,
+    tier: str,
+    seed: int,
+    label: str,
+    existed_at_start: bool,
+) -> bool:
+    return _publish_json_no_clobber(
+        path,
+        payload,
+        expected=_canonical_benchmark_event_path(tier, seed, label),
+        label="benchmark event output",
+        existed_at_start=existed_at_start,
+    )
 
 
 def _finite_number(value: Any) -> bool:
@@ -269,6 +468,7 @@ def _authorization(config: dict, config_path: Path) -> tuple[dict, dict]:
         "confirmation_evaluator_source_inventory_sha256": evaluator_source["sha256"],
         "confirmation_evaluator_source_file_count": evaluator_source["file_count"],
         "control_rematch_sha256": sha256_file(CONTROL_REMATCH),
+        "control_receipts_sha256": sha256_file(CONTROL_RECEIPTS),
         "authorizer_sha256": sha256_file(AUTHORIZER),
         "backend": BACKEND,
         "downstream_authorization": "aggregate_only_benchmark_cli",
@@ -300,6 +500,18 @@ def _authorization(config: dict, config_path: Path) -> tuple[dict, dict]:
         != confirmation.get("manifest_sha256")
     ):
         raise SystemExit("procedural confirmation manifest provenance is stale")
+    admission = confirmation.get("confirmation_admission")
+    if not isinstance(admission, dict):
+        raise SystemExit("procedural confirmation admission is missing")
+    try:
+        validate_confirmation_campaign_tree(
+            Path(str(admission.get("path", ""))),
+            raw_root=configured_confirmation_raw_root(config),
+            terminal=True,
+            require_manifest=True,
+        )
+    except ValueError as exc:
+        raise SystemExit("procedural confirmation campaign tree is stale") from exc
 
     rows = payload.get("events")
     if not isinstance(rows, list):
@@ -448,6 +660,15 @@ def main() -> int:
     parser.add_argument("--model", type=Path, required=True)
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
+    try:
+        out, output_existed_at_start = _benchmark_event_publication_start(
+            args.out,
+            tier=args.tier,
+            seed=args.seed,
+            label=args.label,
+        )
+    except ValueError as exc:
+        raise SystemExit(str(exc)) from exc
     config, config_path = load_config()
     authorization, keyed = _authorization(config, config_path)
     key = (args.tier, args.seed, args.label)
@@ -466,9 +687,12 @@ def main() -> int:
     authorization_sha256 = sha256_file(AUTHORIZATION)
     confirmation_sha256 = sha256_file(CONFIRMATION)
 
-    if args.out.is_file():
+    if output_existed_at_start:
         try:
-            existing = json.loads(args.out.read_text(encoding="utf-8"))
+            out = _validated_benchmark_event_path(
+                out, tier=args.tier, seed=args.seed, label=args.label
+            )
+            existing = _load_json_object(out, label="benchmark event receipt")
             _validate_event(
                 existing,
                 config_path=config_path,
@@ -476,13 +700,21 @@ def main() -> int:
                 confirmation_sha256=confirmation_sha256,
                 binding=binding,
             )
-        except (OSError, json.JSONDecodeError, ValueError) as exc:
-            raise SystemExit(f"stale benchmark receipt: {args.out}") from exc
+        except ValueError as exc:
+            raise SystemExit(f"stale benchmark receipt: {out}") from exc
         print(json.dumps(existing, indent=2, sort_keys=True))
         return 0
-    if args.out.exists():
-        raise SystemExit(f"benchmark output path is not a file: {args.out}")
-    args.out.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        out = _validated_benchmark_event_path(
+            out, tier=args.tier, seed=args.seed, label=args.label
+        )
+        out.lstat()
+    except FileNotFoundError:
+        pass
+    except ValueError as exc:
+        raise SystemExit(str(exc)) from exc
+    else:
+        raise SystemExit(f"benchmark event output publication lost a race: {out}")
 
     started = time.perf_counter()
     with tempfile.TemporaryDirectory(prefix="deep_mopd_aggregate_summary_") as tmp:
@@ -570,7 +802,17 @@ def main() -> int:
         confirmation_sha256=confirmation_sha256,
         binding=binding,
     )
-    write_json(args.out, receipt)
+    try:
+        _publish_benchmark_event_no_clobber(
+            out,
+            receipt,
+            tier=args.tier,
+            seed=args.seed,
+            label=args.label,
+            existed_at_start=False,
+        )
+    except ValueError as exc:
+        raise SystemExit(str(exc)) from exc
     print(json.dumps(receipt, indent=2, sort_keys=True))
     return 0
 

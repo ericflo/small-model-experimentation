@@ -16,18 +16,55 @@ from typing import Iterable
 EXP = Path(__file__).resolve().parents[1]
 EVALUATOR = EXP / "scripts" / "eval_policy.py"
 sys.path.insert(0, str(EXP / "src"))
+sys.path.insert(0, str(EXP / "scripts"))
+
+from bench import (  # noqa: E402
+    _publication_start_state,
+    _publish_json_no_clobber,
+)
 
 from confirmation_artifacts import (  # noqa: E402
+    confirmation_admission_binding,
     configured_confirmation_raw_root,
+    controls_authorization_binding,
+    validate_confirmation_campaign_tree,
     validate_confirmation_geometry,
     validate_confirmation_score_artifacts,
+)
+from confirmation_protocol import (  # noqa: E402
+    canonical_backend_protocol,
+    expected_confirmation_sampling_protocol,
+    validate_confirmation_sampling_protocol,
 )
 from io_utils import (  # noqa: E402
     confirmation_evaluator_source_inventory,
     load_config,
     sha256_file,
-    write_json,
 )
+
+
+def _analysis_publication_start(path: Path) -> tuple[Path, bool]:
+    """Freeze the sole canonical analysis destination and its initial state."""
+
+    return _publication_start_state(
+        path,
+        expected=EXP / "analysis" / "confirmation.json",
+        label="confirmation analysis output",
+    )
+
+
+def _publish_analysis_no_clobber(
+    path: Path, result: dict, *, existed_at_start: bool
+) -> bool:
+    """Atomically seal analysis; an exact pre-existing result is read-only."""
+
+    return _publish_json_no_clobber(
+        path,
+        result,
+        expected=EXP / "analysis" / "confirmation.json",
+        label="confirmation analysis output",
+        existed_at_start=existed_at_start,
+    )
 
 
 def _load(path: Path) -> dict:
@@ -175,6 +212,74 @@ def _visible_router(quick: dict, deep: dict, tag: str) -> dict:
     }
 
 
+def _cross_score_protocol_checks(
+    arms: dict[str, list[dict]], *, block_count: int, engine: dict
+) -> dict[str, bool]:
+    """Recompute campaign-wide backend and exact-task pairing invariants."""
+
+    recomputed = []
+    for payloads in arms.values():
+        for payload in payloads:
+            backend, fingerprint = canonical_backend_protocol(
+                payload.get("runner_summary"),
+                expected_engine=engine,
+                expected_model=str(payload.get("model", "")),
+            )
+            recomputed.append((payload, backend, fingerprint))
+    checks = {
+        "all_backend_fingerprints_recomputed": all(
+            payload.get("backend_protocol") == backend
+            and payload.get("backend_fingerprint") == fingerprint
+            for payload, backend, fingerprint in recomputed
+        ),
+        "one_exact_backend_across_all_scores": len(
+            {fingerprint for _, _, fingerprint in recomputed}
+        )
+        == 1,
+    }
+    for block_index in range(block_count):
+        task_hashes = {
+            payloads[block_index].get("task_manifest_sha256")
+            for payloads in arms.values()
+        }
+        plan_hashes = {
+            payloads[block_index].get("ordered_plan_sha256")
+            for payloads in arms.values()
+        }
+        checks[f"block_{block_index}_exact_task_manifest_paired"] = (
+            len(task_hashes) == 1 and None not in task_hashes
+        )
+        checks[f"block_{block_index}_ordered_plan_paired"] = (
+            len(plan_hashes) == 1 and None not in plan_hashes
+        )
+    return checks
+
+
+def _require_policy_score_protocol(
+    payload: dict, *, config: dict, block_seed: int
+) -> None:
+    """Reject non-policy or decode-labelled artifacts before analysis."""
+
+    engine_protocol = payload.get("engine_protocol")
+    if (
+        payload.get("stage") != "policy_eval"
+        or not isinstance(engine_protocol, dict)
+        or not engine_protocol
+        or any(value is not True for value in engine_protocol.values())
+    ):
+        raise ValueError("confirmation analysis requires authenticated policy_eval scores")
+    expected_sampling = expected_confirmation_sampling_protocol(
+        config,
+        decode=str(payload.get("decode", "")),
+        block_seed=block_seed,
+    )
+    validate_confirmation_sampling_protocol(
+        payload.get("runner_summary"), expected_sampling
+    )
+    if payload.get("sampling_protocol") != expected_sampling:
+        raise ValueError("confirmation analysis sampling protocol is stale")
+
+
 def _retention_cells(primary_blocks: list[dict], soup_blocks: list[dict], families: set[str]) -> dict:
     values: dict[str, list[float]] = defaultdict(list)
     for primary, soup in zip(primary_blocks, soup_blocks):
@@ -216,9 +321,31 @@ def main() -> int:
         "--out", type=Path, default=EXP / "analysis" / "confirmation.json"
     )
     args = parser.parse_args()
+    out, output_existed_at_start = _analysis_publication_start(args.out)
     config, config_path = load_config(args.config)
     raw_root = configured_confirmation_raw_root(config)
     manifest = _load(args.manifest)
+    recorded_authorization = manifest.get("controls_authorization")
+    if not isinstance(recorded_authorization, dict):
+        raise ValueError("confirmation manifest lacks controls authorization")
+    authorization_binding = controls_authorization_binding(
+        Path(str(recorded_authorization.get("path", ""))),
+        expected_config_sha256=sha256_file(config_path),
+    )
+    recorded_admission = manifest.get("confirmation_admission")
+    if not isinstance(recorded_admission, dict):
+        raise ValueError("confirmation manifest lacks global admission")
+    admission_binding = confirmation_admission_binding(
+        Path(str(recorded_admission.get("path", ""))),
+        expected_config_sha256=sha256_file(config_path),
+        expected_controls_authorization=authorization_binding,
+    )
+    validate_confirmation_campaign_tree(
+        Path(str(admission_binding["path"])),
+        raw_root=raw_root,
+        terminal=True,
+        require_manifest=True,
+    )
     expected_seeds = [int(value) for value in config["seeds"]["confirmatory_blocks"]]
     recorded_arms = manifest.get("arms")
     if not isinstance(recorded_arms, dict):
@@ -229,12 +356,17 @@ def main() -> int:
             raise ValueError("confirmation manifest arm inventory is malformed")
         arms[name] = []
         for index, path in enumerate(paths):
+            if index >= len(expected_seeds):
+                raise ValueError("confirmation arm has too many block artifacts")
             payload = validate_confirmation_score_artifacts(
                 Path(path),
                 expected_tag=f"block_{index}_{name}",
                 raw_root=raw_root,
             )
             validate_confirmation_geometry(payload, config)
+            _require_policy_score_protocol(
+                payload, config=config, block_seed=expected_seeds[index]
+            )
             arms[name].append(payload)
     primary_name = str(manifest["primary_arm"])
     quick_name = str(manifest["quick_arm"])
@@ -261,6 +393,10 @@ def main() -> int:
         == current_evaluator_source,
         "manifest_config_matches": manifest.get("config_sha256") == sha256_file(config_path),
         "manifest_blocks_match": manifest.get("block_seeds") == expected_seeds,
+        "manifest_controls_authorization_current": recorded_authorization
+        == authorization_binding,
+        "manifest_global_admission_current": recorded_admission
+        == admission_binding,
         "exact_arm_inventory": set(arms) == expected_arm_names,
         "all_arms_have_two_blocks": all(len(payloads) == len(expected_seeds) for payloads in arms.values()),
         "all_block_seeds_match": all(
@@ -270,6 +406,27 @@ def main() -> int:
         "all_confirmatory_scope": all(
             payload.get("scope") == "confirmatory"
             for payloads in arms.values() for payload in payloads
+        ),
+        "all_scores_are_authenticated_policy_evals": all(
+            payload.get("stage") == "policy_eval"
+            for payloads in arms.values()
+            for payload in payloads
+        ),
+        "all_sampling_protocols_match_registration": all(
+            payload.get("sampling_protocol")
+            == expected_confirmation_sampling_protocol(
+                config,
+                decode=str(payload.get("decode", "")),
+                block_seed=int(payload.get("block_seed", -1)),
+            )
+            for payloads in arms.values()
+            for payload in payloads
+        ),
+        "all_scores_postdate_exact_control_admission": all(
+            payload.get("controls_authorization") == authorization_binding
+            and payload.get("confirmation_admission") == admission_binding
+            for payloads in arms.values()
+            for payload in payloads
         ),
         "all_evaluators_match_manifest": all(
             payload.get("evaluator_sha256") == manifest.get("evaluator_sha256")
@@ -309,10 +466,26 @@ def main() -> int:
             for name, payloads in arms.items() for payload in payloads
         ),
         "all_engine_protocols_pass": all(
-            all(payload.get("engine_protocol", {}).values())
+            isinstance(payload.get("engine_protocol"), dict)
+            and bool(payload["engine_protocol"])
+            and all(value is True for value in payload["engine_protocol"].values())
             for payloads in arms.values() for payload in payloads
         ),
+        "all_token_ledgers_authenticated": all(
+            isinstance(payload.get("token_ledger"), dict)
+            and set(payload["token_ledger"]) == {"sampled_tokens"}
+            and isinstance(payload["token_ledger"]["sampled_tokens"], int)
+            and not isinstance(payload["token_ledger"]["sampled_tokens"], bool)
+            and payload["token_ledger"]["sampled_tokens"] >= 0
+            for payloads in arms.values()
+            for payload in payloads
+        ),
     }
+    protocol.update(
+        _cross_score_protocol_checks(
+            arms, block_count=len(expected_seeds), engine=config["engine"]
+        )
+    )
     for block_index in range(len(expected_seeds)):
         key_sets = {
             tuple(sorted(_item_map(payloads[block_index]))) for payloads in arms.values()
@@ -431,6 +604,8 @@ def main() -> int:
         "config_sha256": sha256_file(config_path),
         "manifest": str(args.manifest.resolve()),
         "manifest_sha256": sha256_file(args.manifest),
+        "controls_authorization": authorization_binding,
+        "confirmation_admission": admission_binding,
         "primary_arm": primary_name,
         "protocol_checks": protocol,
         "strict_comparisons": comparisons,
@@ -456,7 +631,11 @@ def main() -> int:
         "gate": {"passed": passed},
         "downstream_authorization": "benchmark_cli" if passed else "stop_before_benchmark_cli",
     }
-    write_json(args.out, result)
+    _publish_analysis_no_clobber(
+        out,
+        result,
+        existed_at_start=output_existed_at_start,
+    )
     print(json.dumps(result, indent=2, sort_keys=True))
     return 0 if passed else 4
 

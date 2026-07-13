@@ -290,6 +290,7 @@ def main() -> int:
     receipt = {
         "schema_version": 1,
         "method": "offpolicy_best_selection_continuation_sft",
+        "arm": "offpolicy_sft",
         "config": str(config_path),
         "config_sha256": sha256_file(config_path),
         "base_model": str(args.base_model.resolve()),
@@ -307,11 +308,19 @@ def main() -> int:
         ).hexdigest(),
         "initial_probe": initial_probe,
         "final_probe": final_probe,
+        "target_counts": {
+            policy: sum(row["target_policy"] == policy for row in unit_ledger)
+            for policy in ("deep", "student_anchor")
+        },
         "pressure_probe": {
             "unit_ids": [unit["id"] for unit in probe_units],
             "role_counts": {
                 role: sum(unit["role"] == role for unit in probe_units)
                 for role in ("capability", "anchor")
+            },
+            "target_counts": {
+                policy: sum(unit["target_policy"] == policy for unit in probe_units)
+                for policy in ("deep", "student_anchor")
             },
             "geometry": "6_capability_2_anchor",
             "matching_statistic": "initial_mean_objective_loss",

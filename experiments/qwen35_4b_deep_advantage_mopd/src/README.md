@@ -27,3 +27,33 @@ the same index, and rescales no target: only replacement states are scored
 again under the same quick/deep/soup policies. Selection and cache receipts
 bind all candidate artifacts, tokenizer files, source hashes, replacement
 identities, copied-sample semantic hashes, and the zero-truncation inventory.
+The overlay writer commits JSON/cache files atomically and resumes only from a
+validated manifest-only or manifest-plus-cache publication prefix. It never
+deletes published prefix evidence; cache-only, receipt-only,
+manifest-plus-receipt, unknown, and symlinked states all fail closed.
+
+`control_receipts.py` is the single semantic validator for trained controls.
+Both orchestration resume and the independent authorizers require the exact
+primary initial-loss pressure, its implied loss scale, the registered 60/20
+unit and 6/2 probe geometry, full prefixes, consume-once IDs, and arm-specific
+targets. The validator reconstructs the exact assignment and shuffled ledger
+from the bound round manifest and target cache (or the manifest and local base
+tokenizer for off-policy SFT), so a forged self-rehashed ledger cannot pass. A
+separate no-clobber controls authorization reuses the benchmark audit, proves a
+stable recursive inventory of runner/trainer/builder/auditor code before and
+after the audit, and runs before any sealed confirmation model is loaded.
+
+Sealed confirmation adds two isolated modules without changing the shared
+acquisition runner or harness. `confirmation_protocol.py` fingerprints the
+exact pinned vLLM/Python/package/lock/GPU/CUDA and engine protocol, proves live
+live-derived hybrid-cache capacity with
+`ceil(tokens/528) + 3*ceil(tokens/16384)` (35 blocks at full context), and
+journals every returned generation
+call before harness scoring. `confirmation_artifacts.py` owns the no-clobber
+`STARTED -> GENERATED -> COMPLETE` transaction, score-last publication,
+verification-only resume, and terminal quarantine. It authenticates sampled
+token totals from retained stage-1/stage-2 token IDs, binds exact task bytes and
+ordered plans, authenticates the full returned request/output hashes and exact
+raw/resolved sampling settings, and deterministically replays atom scores and
+episode transitions from journaled model text. It rejects resampling or cleanup
+after any started attempt.
