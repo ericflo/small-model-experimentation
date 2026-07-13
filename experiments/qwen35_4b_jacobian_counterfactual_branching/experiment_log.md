@@ -70,3 +70,5 @@
 - Added the independent transport replication's exact one-ULP pair search for
   only failing rows, bounded at 32 pairs. Code must be pushed/re-anchored before
   smoke 004.
+- Lattice implementation pushed at `dc298278`; exact runner/model/test hashes
+  are anchored for smoke 004.
