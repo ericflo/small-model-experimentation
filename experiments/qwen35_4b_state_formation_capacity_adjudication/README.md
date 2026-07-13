@@ -1,6 +1,6 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · frozen design unchanged; source-v10 implementation review `GO`; source-v9 G0 stopped before model load on cache-alias handling; source-v10 publication/CI and source-v9 archival required; no result run is authorized
+**Status:** in-progress · since 2026-07-13 · frozen design unchanged; source-v10 implementation review and publication/CI complete; source-v9 setup archive complete; archive-checkpoint publication/CI required before source-v10 regeneration; no result run is authorized
 
 ## Current status
 
@@ -15,9 +15,12 @@ canonical/mirror failure has file SHA-256 `39ec9625…46ec7` and identity `30af3
 only train validation, no benchmark or sealed split, started no training/evaluation, and authorizes
 nothing. Source v10 keeps general artifact reads no-symlink while adding a dedicated exact-revision,
 exact-basename, content-addressed cache proof. The real nine-file, 9,342,815,919-byte cache passes at
-file-set identity `06486f26…d1fe12` without loading the model. Publish source v10, require both
-workflows green, archive all source-v9 setup, publish that archive checkpoint, and only then
-regenerate source-v10 setup.
+file-set identity `06486f26…d1fe12` without loading the model. Source v10 is published at `3756ce29`
+with both workflows green. All source-v9 setup is now preserved in a verified 20-file,
+17,655,138-byte archive: file-set identity `7360b00d…1f2650`, receipt file SHA-256
+`086d35af…be14e`, and receipt identity `8d5fe94d…33ad5c`. The exact 20-leaf zero quarantine,
+canonical cleanup, retained failure mirror, and idempotent replay all pass. Publish this archive
+checkpoint and require both workflows before regenerating source-v10 setup.
 The source-v8 code was published at commit `ee729def` with both workflows green, and the source-d426
 archive is now complete: 23 files, 18,927,960 bytes, files identity `1538f2f2…ec3ed0`, receipt file
 SHA-256 `9aa04d35…efc1a1`, and receipt identity `e7a71362…818b77`. Independent verification matched every
@@ -117,8 +120,9 @@ preregistration, design review, architecture, runbook, handoff, or default confi
 The source-d426 transition is complete at receipt identity `e7a71362…818b77`. Source-v9 non-model
 setup was published before its seed-7411 G0 stopped fail-closed at model setup. After source contract
 v10 is committed, pushed to `main`, and both repository workflows are green, archive every source-
-`5629a3a4…99e236` setup artifact through the registered invalidation helper. Publish and validate that
-archive checkpoint before regenerating CPU smoke, procedural data/empty ledger, all three
+`5629a3a4…99e236` setup artifact through the registered invalidation helper. That transition is
+complete at receipt identity `8d5fe94d…33ad5c`. Publish and validate the archive checkpoint before
+regenerating CPU smoke, procedural data/empty ledger, all three
 initialization bundles, and all three LoRA G0/positive-control pairs under one final v10 source.
 
 The exact one-time transition command is:
@@ -130,8 +134,9 @@ EXP=experiments/qwen35_4b_state_formation_capacity_adjudication
   --trigger-failure "$EXP/runs/failures/g0_lora_seed7411_source_5629a3a4f12f.json"
 ```
 
-Inspect the emitted tracked receipt and external archive, run `make check`, commit and push that
-archive checkpoint, and wait for both repository workflows before regenerating any v10 setup.
+The emitted tracked receipt and external archive are independently verified. Run `make check`, commit
+and push this archive checkpoint, and wait for both repository workflows before regenerating any v10
+setup.
 
 A result checkpoint directory is not a completed training cell. Completion requires the exact
 external and tracked `TRAINING_COMPLETE` receipts, byte-identical but inode-distinct attempt-marker,
@@ -326,10 +331,9 @@ fresh successor.
 
 ## Run
 
-The run is deliberately non-monolithic. At the current source-v10 resume point, perform the source-v9
-archive transition in **Source-v10 operator boundary** above after v10 publication/CI. Only after that
-archive checkpoint is committed, pushed, and green should setup regeneration restart with the
-non-model smoke:
+The run is deliberately non-monolithic. At the current source-v10 resume point, the source-v9 archive
+transition in **Source-v10 operator boundary** is complete. Only after that archive checkpoint is
+committed, pushed, and green should setup regeneration restart with the non-model smoke:
 
 ```bash
 .venv/bin/python -B experiments/qwen35_4b_state_formation_capacity_adjudication/scripts/run.py --stage cpu-smoke

@@ -25,9 +25,13 @@ content-addressed blobs. The byte-identical failure receipts have file SHA-256 `
 identity `30af333c…9cfe9`, report zero benchmark/sealed access and no training/evaluation, and
 authorize nothing. Source v10 retains the general no-alias rule and adds a dedicated exact-revision,
 exact-basename, content-addressed cache proof. The real nine-file, 9,342,815,919-byte cache passes at
-file-set identity `06486f26…d1fe12` without loading the model. Source-v10 publication/CI, source-v9
-setup archival, archive-checkpoint publication/CI, and full source-v10 setup regeneration are required
-before another G0; every result-bearing command remains blocked. The corrected setup-control source passed
+file-set identity `06486f26…d1fe12` without loading the model. Source v10 is published at `3756ce29`
+with both workflows green. Source-v9 setup is now independently preserved in a 20-file,
+17,655,138-byte archive with file-set identity `7360b00d…1f2650`, receipt file SHA-256
+`086d35af…be14e`, and receipt identity `8d5fe94d…33ad5c`; the exact zero quarantine, canonical cleanup,
+retained failure mirror, and idempotent replay pass. Archive-checkpoint publication/CI and full
+source-v10 setup regeneration are required before another G0; every result-bearing command remains
+blocked. The corrected setup-control source passed
 171/171 local tests and independent code and GPU/runtime review. Every setup artifact from source
 `3baa7b53…d5c42` is durably archived. The later CPU smoke, data manifest, empty sealed-access ledger,
 and three shared initialization bundles were regenerated and strictly reopened under source

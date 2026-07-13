@@ -726,3 +726,21 @@ Only source-v10 validation, commit, push, and workflow verification are authoriz
 workflows pass, archive every source-v9 setup artifact with the source-qualified G0 failure as trigger,
 publish and validate that archive checkpoint, then regenerate from CPU smoke. No model-bearing retry
 or result stage is authorized before those gates.
+
+## 2026-07-13 — source-v9 setup durably archived under source v10
+
+- Source-v10 commit `3756ce29` passed both repository workflows before archival began.
+- The registered transaction preserved 20 source-v9 files totaling 17,655,138 bytes. Files identity
+  is `7360b00d…1f2650`, tracked receipt file SHA-256 is `086d35af…be14e`, and receipt identity is
+  `8d5fe94d…33ad5c`; it binds replacement source `979a9012…f394b7` and G0 trigger identity
+  `30af333c…9cfe9`.
+- Independent verification recomputed every payload/receipt hash, matched exact archive and 20-leaf
+  zero-quarantine membership, confirmed only structural sentinels in canonical CPU/setup directories,
+  only `.gitignore` under generated data, no live initialization bundle, and the retained byte-exact
+  source-qualified G0 failure mirror. Immediate idempotent replay changed nothing.
+
+## Current authorization
+
+Only archive-checkpoint validation, commit, push, and workflow verification are authorized. Do not
+regenerate source-v10 CPU/data/initialization or run a model until both workflows are green. No result
+stage is authorized.

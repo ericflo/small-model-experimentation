@@ -26,11 +26,11 @@ external_artifacts:
     required_for: "audit of the source-d426 seed-7411/7412 G0 and positive-control passes, pre-result authorization failure, and exact preservation of every source-bound setup payload"
     checksum: "tracked receipt runs/failures/invalidated_setup_source_d4269bf3.json; receipt SHA256 9aa04d35c15f1338efcb9a650dea3d49248c3c3860fce36d28bded7b68efc1a1; receipt identity e7a713624d0738016f3d3f823b7487ed8de40e8bad4f32c12ae5540f72818b77; files identity 1538f2f2a3952dbfb000a8fe41b34b67cd82aa1c011e08143570503550ec3ed0; 23 files; 18,927,960 bytes"
     regenerate: "not regenerable as historical evidence; preserve this exact content-hashed archive"
-  - name: "invalidated source-v9 shared initialization bundles pending archival"
-    storage: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed{7411,7412,7413}.pt"
-    required_for: "one-time exact source-v9 setup invalidation archive; these bundles cannot initialize a source-v10 arm"
-    checksum: "bundle SHA256 by seed: 7411 5ed9d5c6aa25c74001b262f274ee5fc9c65afa009be73569ecf3082ade30e1b8; 7412 15366ea642a7ac2adc090b8d30b81df71d42ae363d17eb4f946d78365ccdcb2c; 7413 bda608a28b254fc4b179d226dff35a7ee6afc747e6f83cdeffbaf3ce3b1bf8b4. Receipt identities: 74ddebb1c8b765f6b8ba32de2bd87134eace9339cb64521e69af6013d5231413, 01dd7e7c7f6d1af087727f3332d35834940d6d576457e4b06e3335b02101ee4b, a7ab7d5d0b5680b0f7dc007befdf5139907d3f5570ddda491a260703e20e912f. Tensor-value SHA256: 5338572e1c2a37ff161cd726922ab8f30503b01db22b710605993a7a38a7af31, 30aac3e3a4ee35e512c230dec0e3ac56ca49f4c5f3c9d7ddcc26dad13bad2e14, 04054449d7c403a4a384b08554f0e471e06e2627356c10b1af44c9f9bdebefeb"
-    regenerate: "do not reuse or recreate in place; after source-v10 is published and green, archive them with every source-v9 setup artifact, then generate new source-v10 bundles"
+  - name: "invalidated cache-proof setup archive"
+    storage: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/invalidated_setup/source_5629a3a4f12f5720cbd4aea53520d905ed5f03e7e41f3b21df9b4bc92399e236/"
+    required_for: "audit of the source-v9 non-model setup and seed-7411 cache-alias G0 failure with exact preservation of every source-bound setup payload"
+    checksum: "tracked receipt runs/failures/invalidated_setup_source_5629a3a4.json; receipt SHA256 086d35aff7b0d79cbee600d52057e216fbf22e073f2b82c7ef20935844bbe14e; receipt identity 8d5fe94d91a7b6af7b12629b0a135cfa907a5862ec07f363b8c51d577533ad5c; files identity 7360b00d6ea5ca1c74bbd475e67ab5238e3343376247834e31ed698f7b1f2650; 20 files; 17,655,138 bytes"
+    regenerate: "not regenerable as historical evidence; preserve this exact content-hashed archive"
   - name: "fixed-final LoRA joint checkpoints"
     storage: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/lora_joint_seed{7411,7412,7413}/"
     required_for: "primary LoRA state-formation adjudication and intact/disabled reevaluation"
@@ -70,9 +70,7 @@ reproducibility:
     - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/invalidated_setup/source_3baa7b532d62bae4d9751dfe4be9c6ce314c11ca4524266f4cebea63289d5c42/"
     - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/invalidated_setup/source_1d1368cf064689322d9df7f345e67b026cecccc32d3a7b7514b82f253d434b0a/"
     - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/invalidated_setup/source_d4269bf34f7c80affcc8c1e8a33fee9afddcd912d1bd9dead223e520ee108b36/"
-    - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed7411.pt"
-    - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed7412.pt"
-    - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed7413.pt"
+    - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/invalidated_setup/source_5629a3a4f12f5720cbd4aea53520d905ed5f03e7e41f3b21df9b4bc92399e236/"
 notes: >-
   The frozen design receipt remains authoritative. Setup artifacts produced under source digests
   903f1914, 9fd420f5, and 3baa7b53 are invalid and preserved in separate content-hashed external
@@ -155,8 +153,12 @@ notes: >-
   opened only train validation, and authorize nothing. Source v10's dedicated cache proof validates
   all nine files (9,342,815,919 bytes) at exact revision with file-set identity
   06486f260c8e9135835c768802e0e947bab0470e4454a36e138da6d10ed1fe12 without loading the model.
-  Publish source v10, archive all source-v9 setup using that G0 failure mirror as trigger, publish the
-  archive checkpoint, and only then regenerate source-v10 setup.
+  Source v10 is published and green. The completed source-v9 archive contains 20 files totaling
+  17,655,138 bytes at receipt identity 8d5fe94d91a7b6af7b12629b0a135cfa907a5862ec07f363b8c51d577533ad5c
+  and files identity 7360b00d6ea5ca1c74bbd475e67ab5238e3343376247834e31ed698f7b1f2650.
+  Independent verification matched every payload and zero-quarantine leaf, exact canonical cleanup,
+  the retained G0 failure mirror, and an idempotent replay. Publish the archive checkpoint and require
+  both workflows before regenerating source-v10 setup.
   The first Qwen load stopped before wrapper construction or mechanics and is preserved by a tracked
   failure receipt; it opened
   only the permitted training validator, no sealed contrast, and produced no canonical G0 output.
