@@ -78,6 +78,8 @@ controls:
   gram_relative_error_max: 1.0e-5
   cache_vs_full_prefill_alias_logit_abs_max: 0.05
   bootstrap_resamples: 10000
+  live_control_correction_iterations: 512
+  live_control_correction_damping: 0.5
 
 gates:
   mechanics:

@@ -94,6 +94,8 @@ Design and adversarial review in progress. No model or outcome has run.
   outcome-blind live-bf16 model smoke after a pushed hash boundary.
 - `reports/post_model_smoke_001_audit.md`: invalid zero-delta receipt, root
   cause, repaired guards, and explicit non-authorization.
+- `reports/post_model_smoke_002_audit.md`: valid naïve-bf16 control failure and
+  geometry-only live repair boundary.
 - `assets/context_lens.pt`: byte-identical causal lens anchor.
 - `src/`: frozen tasks, branch geometry, cache-fork model operations, and pure
   statistics.

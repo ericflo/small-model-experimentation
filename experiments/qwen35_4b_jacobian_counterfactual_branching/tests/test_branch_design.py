@@ -17,7 +17,7 @@ from branch_geometry import (  # noqa: E402
     geometry_receipt,
     gram_matched_non_j,
 )
-from model_ops import FixedBranchPatcher  # noqa: E402
+from model_ops import FixedBranchPatcher, QuantizationAwareFixedNonJPatcher  # noqa: E402
 from task_data import task_prompt  # noqa: E402
 
 
@@ -113,3 +113,27 @@ def test_fixed_branch_patcher_rejects_wrong_batch_width():
         assert "batch width" in str(error)
     else:
         raise AssertionError("wrong branch batch width did not fail")
+
+
+def test_quantization_aware_control_passes_exact_orthogonal_case():
+    layer = torch.nn.Identity()
+    branches = torch.tensor([[0.0, 0.0], [1.0, -1.0], [0.0, 0.0], [0.0, 0.0]])
+    directions = torch.tensor([[1.0], [0.0], [0.0], [0.0]])
+    hidden = torch.zeros(2, 3, 4, dtype=torch.bfloat16)
+    patcher = QuantizationAwareFixedNonJPatcher(
+        [layer],
+        position=1,
+        branches_by_layer={0: branches},
+        directions_by_layer={0: directions},
+        target_norms_by_layer={0: torch.ones(2)},
+        rtol=1e-5,
+        norm_tolerance=1e-5,
+        projection_tolerance=0.01,
+        correction_iterations=8,
+        correction_damping=0.5,
+    )
+    with patcher:
+        output = layer(hidden)
+    assert patcher.passed_rows[0].tolist() == [True, True]
+    assert patcher.iterations_used[0] == 0
+    assert torch.equal(output[:, 1].float(), branches.T)

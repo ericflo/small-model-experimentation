@@ -131,6 +131,147 @@ class FixedBranchPatcher:
         self.handles = []
 
 
+class QuantizationAwareFixedNonJPatcher:
+    """Repair fixed non-J branches against paired realized J norms after bf16."""
+
+    def __init__(
+        self,
+        layers: Sequence[torch.nn.Module],
+        *,
+        position: int,
+        branches_by_layer: dict[int, torch.Tensor],
+        directions_by_layer: dict[int, torch.Tensor],
+        target_norms_by_layer: dict[int, torch.Tensor],
+        rtol: float,
+        norm_tolerance: float,
+        projection_tolerance: float,
+        correction_iterations: int,
+        correction_damping: float,
+    ) -> None:
+        keys = set(branches_by_layer)
+        if keys != set(directions_by_layer) or keys != set(target_norms_by_layer):
+            raise ValueError("quantized control layers differ")
+        self.layers = layers
+        self.position = int(position)
+        self.branches_by_layer = branches_by_layer
+        self.target_norms_by_layer = target_norms_by_layer
+        self.norm_tolerance = float(norm_tolerance)
+        self.projection_tolerance = float(projection_tolerance)
+        self.correction_iterations = int(correction_iterations)
+        self.correction_damping = float(correction_damping)
+        self.geometry = {}
+        for layer in keys:
+            directions = directions_by_layer[layer].float()
+            norms = directions.norm(dim=0, keepdim=True)
+            dictionary = directions / norms
+            self.geometry[layer] = (
+                dictionary,
+                torch.linalg.pinv(dictionary, rtol=float(rtol)),
+            )
+        widths = {int(value.shape[1]) for value in branches_by_layer.values()}
+        if len(widths) != 1:
+            raise ValueError("all control layers must have one width")
+        self.width = next(iter(widths))
+        self.handles: list[Any] = []
+        self.requested: dict[int, torch.Tensor] = {}
+        self.realized: dict[int, torch.Tensor] = {}
+        self.input_activations: dict[int, torch.Tensor] = {}
+        self.applications: dict[int, int] = {layer: 0 for layer in keys}
+        self.norm_errors: dict[int, torch.Tensor] = {}
+        self.projection_fractions: dict[int, torch.Tensor] = {}
+        self.passed_rows: dict[int, torch.Tensor] = {}
+        self.iterations_used: dict[int, int] = {}
+
+    @staticmethod
+    def _actual(current: torch.Tensor, requested: torch.Tensor) -> torch.Tensor:
+        return (current + requested).to(torch.bfloat16).float() - current
+
+    def _hook(self, layer: int):
+        branches = self.branches_by_layer[layer]
+        targets_cpu = self.target_norms_by_layer[layer]
+        dictionary_cpu, inverse_cpu = self.geometry[layer]
+
+        def hook(_module: Any, _inputs: tuple[Any, ...], output: Any) -> Any:
+            tensor = _tensor_from_output(output)
+            if tensor.shape[0] != self.width or not 0 <= self.position < tensor.shape[1]:
+                raise RuntimeError("quantized control batch/position changed")
+            if self.applications[layer] != 0:
+                raise RuntimeError("quantized control repeated at one layer")
+            patched = tensor.clone()
+            current = patched[:, self.position, :].float().clone()
+            requests = branches.T.to(device=tensor.device, dtype=torch.float32).clone()
+            targets = targets_cpu.to(device=tensor.device, dtype=torch.float32)
+            dictionary = dictionary_cpu.to(tensor.device)
+            inverse = inverse_cpu.to(tensor.device)
+            best_objective = torch.full((self.width,), float("inf"), device=tensor.device)
+            best_actual = torch.zeros_like(requests)
+            best_request = requests.clone()
+            best_error = torch.full_like(best_objective, float("inf"))
+            best_projection = torch.full_like(best_objective, float("inf"))
+            used = 0
+            for step in range(self.correction_iterations + 1):
+                actual = self._actual(current, requests)
+                norms = actual.norm(dim=-1)
+                errors = (norms - targets).abs() / targets.clamp_min(1e-12)
+                projection = (actual @ inverse.T) @ dictionary.T
+                fractions = projection.norm(dim=-1) / norms.clamp_min(1e-12)
+                objective = torch.maximum(
+                    errors / self.norm_tolerance,
+                    fractions / self.projection_tolerance,
+                )
+                better = objective < best_objective
+                best_objective = torch.where(better, objective, best_objective)
+                best_actual = torch.where(better[:, None], actual, best_actual)
+                best_request = torch.where(better[:, None], requests, best_request)
+                best_error = torch.where(better, errors, best_error)
+                best_projection = torch.where(better, fractions, best_projection)
+                passed = (best_error <= self.norm_tolerance) & (
+                    best_projection <= self.projection_tolerance
+                )
+                used = step
+                if bool(passed.all()) or step == self.correction_iterations:
+                    break
+                orthogonal = actual - projection
+                desired = orthogonal * (
+                    targets[:, None] / orthogonal.norm(dim=-1, keepdim=True).clamp_min(1e-12)
+                )
+                updated = requests + self.correction_damping * (desired - actual)
+                requests = torch.where(passed[:, None], best_request, updated)
+            changed = (current + best_actual).to(tensor.dtype)
+            patched[:, self.position, :] = changed
+            realized = changed.float() - current
+            norms = realized.norm(dim=-1)
+            projection = (realized @ inverse.T) @ dictionary.T
+            norm_errors = (norms - targets).abs() / targets.clamp_min(1e-12)
+            fractions = projection.norm(dim=-1) / norms.clamp_min(1e-12)
+            self.input_activations[layer] = current.detach().cpu()
+            self.requested[layer] = best_request.detach().cpu()
+            self.realized[layer] = realized.detach().cpu()
+            self.norm_errors[layer] = norm_errors.detach().cpu()
+            self.projection_fractions[layer] = fractions.detach().cpu()
+            self.passed_rows[layer] = (
+                (norm_errors <= self.norm_tolerance)
+                & (fractions <= self.projection_tolerance)
+            ).detach().cpu()
+            self.iterations_used[layer] = used
+            self.applications[layer] += 1
+            return _with_tensor(output, patched)
+
+        return hook
+
+    def __enter__(self):
+        for layer in sorted(self.branches_by_layer):
+            self.handles.append(
+                self.layers[layer].register_forward_hook(self._hook(layer))
+            )
+        return self
+
+    def __exit__(self, *_exc: Any) -> None:
+        for handle in self.handles:
+            handle.remove()
+        self.handles = []
+
+
 class _TraceStopper:
     def __init__(
         self,
@@ -517,6 +658,7 @@ class QwenCommitModel:
         aliases: list[str],
         branches_by_layer: dict[int, torch.Tensor],
         total_max_tokens: int,
+        quantization_control: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
         """Patch the final live-thought token and read every branch at the slot."""
 
@@ -536,11 +678,25 @@ class QwenCommitModel:
         full_ids = one.repeat(len(aliases), 1)
         position = int(prompt_ids.shape[1]) + len(thought_token_ids) - 1
         alias_ids = [self.leading_space_token_id(alias) for alias in aliases]
-        with FixedBranchPatcher(
-            self.layers,
-            position=position,
-            branches_by_layer=branches_by_layer,
-        ) as patcher:
+        patcher: Any
+        if quantization_control is None:
+            patcher = FixedBranchPatcher(
+                self.layers, position=position, branches_by_layer=branches_by_layer
+            )
+        else:
+            patcher = QuantizationAwareFixedNonJPatcher(
+                self.layers,
+                position=position,
+                branches_by_layer=branches_by_layer,
+                directions_by_layer=quantization_control["directions_by_layer"],
+                target_norms_by_layer=quantization_control["target_norms_by_layer"],
+                rtol=float(quantization_control["rtol"]),
+                norm_tolerance=float(quantization_control["norm_tolerance"]),
+                projection_tolerance=float(quantization_control["projection_tolerance"]),
+                correction_iterations=int(quantization_control["correction_iterations"]),
+                correction_damping=float(quantization_control["correction_damping"]),
+            )
+        with patcher:
             output = self.model(input_ids=full_ids, use_cache=False, logits_to_keep=1)
         logits = output.logits[:, -1].float()
         constrained = logits[:, alias_ids]
@@ -562,4 +718,8 @@ class QwenCommitModel:
             "realized_deltas": patcher.realized,
             "input_activations": patcher.input_activations,
             "applications": patcher.applications,
+            "control_norm_errors": getattr(patcher, "norm_errors", {}),
+            "control_projection_fractions": getattr(patcher, "projection_fractions", {}),
+            "control_passed_rows": getattr(patcher, "passed_rows", {}),
+            "control_iterations_used": getattr(patcher, "iterations_used", {}),
         }

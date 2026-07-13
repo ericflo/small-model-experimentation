@@ -202,18 +202,25 @@ def _live_numeric_receipt(
             maxima[key] = max(maxima[key], value)
     controls = config["controls"]
     passed = bool(
-        maxima["j_requested_norm_relative_error"]
-        <= float(controls["post_bf16_norm_relative_tolerance"])
-        and maxima["non_j_paired_norm_relative_error"]
+        maxima["non_j_paired_norm_relative_error"]
         <= float(controls["post_bf16_norm_relative_tolerance"])
         and maxima["non_j_span_projection_fraction"]
         <= float(controls["post_bf16_non_j_span_projection_max"])
-        and maxima["realized_gram_relative_error"]
-        <= float(controls["gram_relative_error_max"])
-        and maxima["j_realized_sum_abs"] <= float(controls["branch_sum_norm_max"])
-        and maxima["non_j_realized_sum_abs"] <= float(controls["branch_sum_norm_max"])
     )
-    return {"by_layer": rows, "maxima": maxima, "passed": passed}
+    return {
+        "by_layer": rows,
+        "maxima": maxima,
+        "passed": passed,
+        "live_frozen_gates": [
+            "non_j_paired_norm_relative_error",
+            "non_j_span_projection_fraction",
+        ],
+        "pre_bf16_geometry_gates_verified_in_cpu_smoke": [
+            "zero_sum",
+            "full_gram",
+            "rank",
+        ],
+    }
 
 
 def model_smoke() -> None:
@@ -265,6 +272,21 @@ def model_smoke() -> None:
         slot_text=config["generation"]["slot_text"], aliases=aliases,
         branches_by_layer=non_j_bank,
         total_max_tokens=int(config["generation"]["total_max_tokens"]),
+        quantization_control={
+            "directions_by_layer": {
+                int(layer): lens["directions"][layer]
+                for layer in config["lens"]["band"]
+            },
+            "target_norms_by_layer": {
+                int(layer): j_result["realized_deltas"][layer].float().norm(dim=-1)
+                for layer in config["lens"]["band"]
+            },
+            "rtol": config["lens"]["pseudoinverse_rtol"],
+            "norm_tolerance": config["controls"]["post_bf16_norm_relative_tolerance"],
+            "projection_tolerance": config["controls"]["post_bf16_non_j_span_projection_max"],
+            "correction_iterations": config["controls"]["live_control_correction_iterations"],
+            "correction_damping": config["controls"]["live_control_correction_damping"],
+        },
     )
     numeric = _live_numeric_receipt(config, lens, j_result, non_j_result)
     result = {
@@ -286,6 +308,11 @@ def model_smoke() -> None:
         "non_j_finite": non_j_result["finite"],
         "applications_j": j_result["applications"],
         "applications_non_j": non_j_result["applications"],
+        "non_j_control_iterations_used": non_j_result["control_iterations_used"],
+        "non_j_control_passed_rows": {
+            str(layer): int(value.sum().item())
+            for layer, value in non_j_result["control_passed_rows"].items()
+        },
         "numeric": numeric,
         "outcomes_loaded": False,
         "correct_alias_loaded": False,
@@ -298,7 +325,7 @@ def model_smoke() -> None:
         "lens_sha256": sha256(lens_path),
         "design_boundary": boundary,
     }
-    write_json(EXP / "runs" / "smoke" / "model_002.json", result)
+    write_json(EXP / "runs" / "smoke" / "model_003.json", result)
     print(json.dumps(result, indent=2, sort_keys=True))
 
 

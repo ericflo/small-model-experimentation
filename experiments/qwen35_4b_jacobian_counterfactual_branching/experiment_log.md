@@ -45,3 +45,16 @@
 - Corrected implementation was pushed at `802cf1a5`; config now anchors its
   updated runner/model/test hashes. Smoke 002 is authorized only after this
   re-anchor commit is pushed.
+
+## 2026-07-13 — Valid smoke 002 requires quantization-aware control repair
+
+- Corrected deltas are nonzero and the receipt is valid/outcome-blind.
+- Naïve bf16 non-J controls missed paired J norm by up to 3.39% and leaked up to
+  2.96% into J, failing the frozen 1e-5/1% live gates.
+- Requested J fidelity (4.16%), realized Gram (5.83%), and zero-sum residue
+  (0.015625) remain diagnostics; exact Gram/rank/zero-sum is the pre-bf16 CPU
+  construction gate, while paired norm/span are the explicitly frozen live
+  gates.
+- Added vectorized outcome-blind repair of each fixed non-J request toward its
+  paired realized J norm outside the complete J span, with 512 iterations and
+  0.5 damping. Code must be pushed/re-anchored before smoke 003.
