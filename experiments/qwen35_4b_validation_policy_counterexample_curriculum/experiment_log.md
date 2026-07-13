@@ -46,5 +46,15 @@
 
 ## Next recorded event
 
-Commit and push the complete design, write and commit its immutable receipt,
-then run GPU smoke. Only a passing smoke authorizes the full staged pipeline.
+## 2026-07-13 — immutable design boundary
+
+- Rebased the design onto current upstream `main`, resolved generated catalog
+  conflicts by regeneration, and pushed directly to `main` at `e0b19f5d`.
+- Wrote `runs/preregistration_receipt.json` over 17 design-critical files. The
+  receipt records `model_output_precedes_lock: false`; every GPU/model mode now
+  fails closed on file-digest or ancestry drift.
+
+## Next recorded event
+
+Commit and push the immutable receipt, then run GPU smoke. Only a passing smoke
+authorizes the full staged pipeline.

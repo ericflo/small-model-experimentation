@@ -1,7 +1,7 @@
 # Validation-policy counterexample curriculum
 
-**Status:** in-progress · since 2026-07-13 · deterministic preflight passed;
-design lock, GPU smoke, and staged model run remain.
+**Status:** in-progress · since 2026-07-13 · design locked at `e0b19f5d`;
+GPU smoke and staged model run remain.
 
 Teach Qwen3.5-4B the semantic distinction left by the transaction curriculum:
 negative quantities are malformed and raise `ValueError`, while unknown or
