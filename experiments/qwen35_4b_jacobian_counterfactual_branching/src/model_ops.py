@@ -148,6 +148,7 @@ class QuantizationAwareFixedNonJPatcher:
         correction_iterations: int,
         correction_damping: float,
         lattice_pair_steps: int,
+        repair_safety_margin: float,
     ) -> None:
         keys = set(branches_by_layer)
         if keys != set(directions_by_layer) or keys != set(target_norms_by_layer):
@@ -161,6 +162,9 @@ class QuantizationAwareFixedNonJPatcher:
         self.correction_iterations = int(correction_iterations)
         self.correction_damping = float(correction_damping)
         self.lattice_pair_steps_max = int(lattice_pair_steps)
+        self.repair_safety_margin = float(repair_safety_margin)
+        if not 0.0 < self.repair_safety_margin < 1.0:
+            raise ValueError("repair safety margin must be between zero and one")
         self.geometry = {}
         for layer in keys:
             directions = directions_by_layer[layer].float()
@@ -244,8 +248,11 @@ class QuantizationAwareFixedNonJPatcher:
                 self.width, dtype=torch.long, device=tensor.device
             )
             failing = (
-                (best_error > self.norm_tolerance)
-                | (best_projection > self.projection_tolerance)
+                (best_error > self.norm_tolerance * self.repair_safety_margin)
+                | (
+                    best_projection
+                    > self.projection_tolerance * self.repair_safety_margin
+                )
             ).nonzero(as_tuple=False).flatten()
             for row_tensor in failing:
                 row = int(row_tensor.item())
@@ -310,7 +317,10 @@ class QuantizationAwareFixedNonJPatcher:
                 fraction / self.projection_tolerance,
             )
             last = (delta, float(error), float(fraction), step)
-            if float(objective) <= 1.0 or step == self.lattice_pair_steps_max:
+            if (
+                float(objective) <= self.repair_safety_margin
+                or step == self.lattice_pair_steps_max
+            ):
                 return last
             upper = torch.nextafter(changed, torch.full_like(changed, float("inf")))
             lower = torch.nextafter(changed, torch.full_like(changed, float("-inf")))
@@ -821,6 +831,7 @@ class QwenCommitModel:
                 correction_iterations=int(quantization_control["correction_iterations"]),
                 correction_damping=float(quantization_control["correction_damping"]),
                 lattice_pair_steps=int(quantization_control["lattice_pair_steps"]),
+                repair_safety_margin=float(quantization_control["repair_safety_margin"]),
             )
         with patcher:
             output = self.model(input_ids=full_ids, use_cache=False, logits_to_keep=1)

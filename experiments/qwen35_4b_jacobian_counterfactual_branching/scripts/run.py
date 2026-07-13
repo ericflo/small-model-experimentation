@@ -287,6 +287,7 @@ def model_smoke() -> None:
             "correction_iterations": config["controls"]["live_control_correction_iterations"],
             "correction_damping": config["controls"]["live_control_correction_damping"],
             "lattice_pair_steps": config["controls"]["live_control_lattice_pair_steps"],
+            "repair_safety_margin": config["controls"]["live_control_repair_safety_margin"],
         },
     )
     numeric = _live_numeric_receipt(config, lens, j_result, non_j_result)
@@ -330,7 +331,7 @@ def model_smoke() -> None:
         "lens_sha256": sha256(lens_path),
         "design_boundary": boundary,
     }
-    write_json(EXP / "runs" / "smoke" / "model_004.json", result)
+    write_json(EXP / "runs" / "smoke" / "model_005.json", result)
     print(json.dumps(result, indent=2, sort_keys=True))
 
 

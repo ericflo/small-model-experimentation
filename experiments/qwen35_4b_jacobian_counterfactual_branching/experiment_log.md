@@ -72,3 +72,13 @@
   smoke 004.
 - Lattice implementation pushed at `dc298278`; exact runner/model/test hashes
   are anchored for smoke 004.
+
+## 2026-07-13 — Smoke 004 fixes layer 8, misses one layer-4 receipt boundary
+
+- Exact lattice search validates all layer-8 rows with at most five pairs; all
+  independent span projections pass.
+- Independent layer-4 paired norm is 1.033804e-5 versus 1e-5, although the
+  device-local repair check stopped inside the boundary.
+- Added a stricter 0.95 geometry repair objective so near-boundary rows cannot
+  stop until they have 5% guard band. Scientific tolerances remain unchanged.
+- Code must be pushed/re-anchored before smoke 005.

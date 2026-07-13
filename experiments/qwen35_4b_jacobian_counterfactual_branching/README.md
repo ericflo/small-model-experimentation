@@ -100,6 +100,9 @@ Design and adversarial review in progress. No model or outcome has run.
   geometry-only live repair boundary.
 - `reports/post_model_smoke_003_audit.md`: 51/60 iterative-repair near miss and
   exact neighboring-bf16 lattice boundary.
+- `reports/post_model_smoke_004_audit.md`: layer-8 repair success and one
+  independently detected layer-4 boundary miss requiring a stricter safety
+  objective.
 - `assets/context_lens.pt`: byte-identical causal lens anchor.
 - `src/`: frozen tasks, branch geometry, cache-fork model operations, and pure
   statistics.
