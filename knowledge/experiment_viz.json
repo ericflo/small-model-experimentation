@@ -47230,6 +47230,33 @@
      "source": "experiments/qwen35_4b_validation_policy_counterexample_curriculum/reports/result_receipt.json"
     }
    ]
+  },
+  "qwen35_4b_semantic_policy_headroom_tournament": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "The headroom grid reserves nine cells for inferred policy conflicts",
+     "categories": [
+      "explicit-contract controls",
+      "inferred-contract cells"
+     ],
+     "series": [
+      {
+       "label": "procedural family cells",
+       "values": [
+        3,
+        9
+       ]
+      }
+     ],
+     "x_label": "contract condition",
+     "y_label": "family cells",
+     "y_format": "integer",
+     "note": "Preregistered design geometry, not a model result. Three semantic conflicts are each crossed with bundle, record, and tuple representations; one explicit control per conflict validates the instrument.",
+     "source": "experiments/qwen35_4b_semantic_policy_headroom_tournament/reports/report.md"
+    }
+   ]
   }
  }
 }

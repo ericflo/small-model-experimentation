@@ -1,0 +1,25 @@
+{
+  "axes": [
+    "blank",
+    "negative",
+    "noninteger"
+  ],
+  "block_content_counts": {
+    "headroom_a": 36,
+    "headroom_b": 36
+  },
+  "blocks_content_disjoint": true,
+  "families": 12,
+  "firewall_clean": true,
+  "initial_partial_fail_oracle_pass": true,
+  "menagerie_authorized": false,
+  "model_output_generated": false,
+  "representations": [
+    "bundle",
+    "record",
+    "tuple"
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "tasks_selftested": 12
+}

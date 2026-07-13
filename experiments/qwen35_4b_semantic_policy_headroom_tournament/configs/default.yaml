@@ -1,0 +1,81 @@
+schema_version: 1
+
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+  checkpoint: large_artifacts/qwen35_4b_transaction_invariant_recovery_curriculum/merged/transaction_replay
+  weight_sha256: 1cf5fbca317808d6d00225f5cd533c82c7e1602b2b2e5e2da8f4307b01941ba3
+
+artifacts:
+  root: large_artifacts/qwen35_4b_semantic_policy_headroom_tournament
+
+engine:
+  max_model_len: 8192
+  gpu_memory_utilization: 0.85
+  max_num_seqs: 32
+  max_num_batched_tokens: 16384
+
+families:
+  all_headroom:
+    - headroom_explicit_negative_bundle
+    - headroom_explicit_noninteger_record
+    - headroom_explicit_blank_tuple
+    - headroom_inferred_negative_bundle
+    - headroom_inferred_negative_record
+    - headroom_inferred_negative_tuple
+    - headroom_inferred_noninteger_bundle
+    - headroom_inferred_noninteger_record
+    - headroom_inferred_noninteger_tuple
+    - headroom_inferred_blank_bundle
+    - headroom_inferred_blank_record
+    - headroom_inferred_blank_tuple
+  explicit_controls:
+    - headroom_explicit_negative_bundle
+    - headroom_explicit_noninteger_record
+    - headroom_explicit_blank_tuple
+  inferred_negative:
+    - headroom_inferred_negative_bundle
+    - headroom_inferred_negative_record
+    - headroom_inferred_negative_tuple
+  inferred_noninteger:
+    - headroom_inferred_noninteger_bundle
+    - headroom_inferred_noninteger_record
+    - headroom_inferred_noninteger_tuple
+  inferred_blank:
+    - headroom_inferred_blank_bundle
+    - headroom_inferred_blank_record
+    - headroom_inferred_blank_tuple
+
+evaluation:
+  think_budget: 512
+  answer_max_tokens: 512
+  deep_run_seed: 88401
+  recovery:
+    deep_turns: 6
+    sample_more_trajectories: 2
+    sample_more_turns_each: 3
+  normal:
+    deep_turns: 8
+    sample_more_trajectories: 2
+    sample_more_turns_each: 4
+  blocks:
+    headroom_a:
+      families: all_headroom
+      seed: 88200
+      tasks_per_family: 3
+    headroom_b:
+      families: all_headroom
+      seed: 88300
+      tasks_per_family: 3
+
+qualification:
+  explicit_failed_test_success_min: 0.85
+  inferred_axis_failed_test_success_min: 0.15
+  inferred_axis_failed_test_success_max: 0.80
+  minimum_shapes_in_band_per_axis_per_block: 2
+  invalid_action_rate_per_turn_max: 0.05
+  answer_cap_hit_rate_per_turn_max: 0.05
+  minimum_eligible_axes: 1
+
+benchmark:
+  menagerie_authorized: false

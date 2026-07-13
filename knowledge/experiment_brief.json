@@ -12851,6 +12851,44 @@
      "chart_takeaway": "The narrow training update was local enough, but locality cannot rescue an evaluation set the parent already solves perfectly."
     }
    ]
+  },
+  "qwen35_4b_semantic_policy_headroom_tournament": {
+   "verdict_tag": "Find a learnable gap before teaching it",
+   "concept_primer": "Training can only prove improvement when the starting model sometimes fails but is not completely lost. This qualification measures that middle ground before any new lessons are created.",
+   "plain_question": "Which malformed-input rules still challenge the transaction-trained model after a visible test failure, across several ways of representing requests?",
+   "plain_answer": "The measurement is designed but has not run yet. It will test three rule conflicts in bundles, records, and tuples on two separate groups, while clear instructions serve as a control. No model will be trained in this experiment.",
+   "why_it_matters": "The previous curriculum spent training compute on practice cases the starting model already solved perfectly. A headroom gate prevents that mistake and ensures the next training experiment targets a real, repeated capability gap.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Inferred-rule family cells",
+     "value": "9",
+     "sub": "three conflicts crossed with three data shapes"
+    },
+    {
+     "label": "Clear-instruction controls",
+     "value": "3",
+     "sub": "one per conflict to validate the task and harness"
+    },
+    {
+     "label": "Fresh repositories per block",
+     "value": "36",
+     "sub": "two blocks are content-disjoint"
+    },
+    {
+     "label": "Training and benchmark calls",
+     "value": "zero",
+     "sub": "qualification only"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Most family cells test inference rather than copied instructions",
+     "chart_read": "The two bars divide the twelve family cells into clear-instruction controls and inferred-rule tests. Taller means more family cells, not better performance.",
+     "chart_takeaway": "Nine cells probe real headroom across rule and representation, while three controls check that explicit instructions remain solvable."
+    }
+   ]
   }
  }
 }

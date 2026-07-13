@@ -1,0 +1,17 @@
+schema_version: 1
+experiment_id: "qwen35_4b_semantic_policy_headroom_tournament"
+external_artifacts:
+  - name: detailed parent qualification trajectories
+    storage: large_artifacts/qwen35_4b_semantic_policy_headroom_tournament/{smoke,eval}
+    required_for: axis/shape forensics and replication
+    checksum: recorded in the final result receipt
+    regenerate: .venv/bin/python experiments/qwen35_4b_semantic_policy_headroom_tournament/scripts/run.py --full
+omitted_artifacts:
+  - path: large_artifacts/qwen35_4b_semantic_policy_headroom_tournament
+    reason: detailed model-generated trajectories are kept outside git
+reproducibility:
+  smoke_command: python experiments/qwen35_4b_semantic_policy_headroom_tournament/scripts/run.py --smoke
+  full_command: .venv/bin/python experiments/qwen35_4b_semantic_policy_headroom_tournament/scripts/run.py --full
+  required_external_artifacts:
+    - large_artifacts/qwen35_4b_transaction_invariant_recovery_curriculum/merged/transaction_replay
+notes: No training and no Menagerie event are authorized by this experiment.

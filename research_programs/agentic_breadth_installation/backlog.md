@@ -77,12 +77,12 @@
   removed the historical residual; +15/+10 bars were impossible and candidate
   behavior, transfer, and Menagerie stayed sealed. Do not lower bars or expose
   the trained candidate post-stop.
-- Highest-priority successor: a no-training semantic-policy headroom
-  qualification tournament. Cross explicit versus verifier-inferred contracts,
-  multiple conflict types (raise/False/None/reject), and bundle/record/tuple
-  representations on two disjoint blocks. Admit an axis to later curriculum
-  work only if parent success is replicated inside a predeclared non-saturated
-  band; reserve separate skins/seeds for training and transfer.
+- Active qualification: `qwen35_4b_semantic_policy_headroom_tournament`
+  crosses explicit versus verifier-inferred contracts for negative, non-integer,
+  and blank-resource conflicts over bundle/record/tuple representations on two
+  disjoint blocks. It trains nothing and hard-disables Menagerie. Admit an axis
+  to later curriculum work only if parent failed-test success replicates inside
+  the frozen 0.15–0.80 band with two-of-three shape support.
 - Future retraining should calibrate plan dose by realized gradient/surprisal
   and avoid supervising plan starts already rank 1 or wildly off-policy lexical
   templates.
