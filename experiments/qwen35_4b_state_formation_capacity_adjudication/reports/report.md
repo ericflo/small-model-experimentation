@@ -16,8 +16,10 @@ receipt was created. The exact failure is preserved at identity `ce3406f8…b634
 evidence only. The narrow aggregation-precision and durable G0-failure repair now passes 201/201
 tests and independent numerical/runtime/archive review under source `d4269bf3…8b36`. The complete
 source-`1d1368cf…434b0a` setup is now durably archived at receipt identity `13cdcaec…2050b` (21
-files, 18,288,790 bytes). Seed 7413 and all result stages remain blocked pending complete regeneration
-and replay from seed 7411. No training
+files, 18,288,790 bytes). Replacement-source CPU smoke, data/empty ledger, and all three shared
+initializations are regenerated and strictly reopened under `d4269bf3…8b36`; their manifest is
+`e935c31a…1e57`, ledger identity is `eaf7ba23…b3cb`, and tensor values match source-1d exactly. Seed
+7413 and all result stages remain blocked pending G0/control replay from seed 7411. No training
 checkpoint, evaluation row, or terminal analysis from this directory should be cited as scientific
 evidence.
 

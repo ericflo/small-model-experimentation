@@ -541,3 +541,23 @@ Replacement-source CPU smoke, deterministic data/empty-ledger generation, and al
 initialization bundles are authorized. No G0 or model-bearing stage is authorized until that entire
 setup is regenerated and strictly reopened under source `d4269bf3…8b36`. No result training is
 authorized.
+
+## 2026-07-13 — replacement-source setup regenerated
+
+- CPU smoke passed under source `d4269bf3…8b36` without loading a model; receipt SHA-256 is
+  `1d5a57c9…6fdb`.
+- Regenerated all seven deterministic splits with zero cross-split structural duplicates and zero
+  benchmark reads. Manifest SHA-256 is `e935c31a…1e57`, data contract is `8e95991b…d5b`, and the
+  access-ledger identity is `eaf7ba23…b3cb` with `events: []`. The strict reopen checked every
+  compressed payload but decompressed no sealed contrast split.
+- Regenerated and canonically reopened all three shared initialization bundles. Bundle SHA-256 /
+  receipt identity: seed 7411 `539e8e6c…5dc26` / `a79d0f9b…07f8a`; seed 7412
+  `bf916363…15e9d` / `28e7d6db…36d86`; seed 7413 `59699025…2593c` / `c4e8657b…40ffa`.
+  Every sidecar is byte-identical to its tracked mirror, and every tensor-value digest exactly equals
+  the corresponding source-1d bundle.
+
+## Current authorization
+
+Seed-7411 LoRA G0 is authorized as the first model-bearing replay under source `d4269bf3…8b36`.
+Later seeds, positive controls, and all result training remain blocked until their exact predecessor
+setup gates pass and are committed.

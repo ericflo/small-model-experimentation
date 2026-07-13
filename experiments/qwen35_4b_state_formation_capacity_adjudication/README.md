@@ -1,6 +1,6 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · frozen design unchanged; seed-7412 LoRA G0 precision failure preserved; narrow FP32 aggregation and durable G0-failure repair reviewed `GO`; source-1d setup archived; replacement-source regeneration pending; no result run is authorized
+**Status:** in-progress · since 2026-07-13 · frozen design unchanged; seed-7412 LoRA G0 precision failure preserved; narrow FP32 aggregation and durable G0-failure repair reviewed `GO`; source-1d setup archived; replacement-source setup regenerated; G0 replay pending; no result run is authorized
 
 ## Current status
 
@@ -39,6 +39,12 @@ corrected source-1d control passed 48/48 after exactly
 256 optimizer updates and 4,096 singleton presentations; disabling adaptation at the same fixed final
 scores 0/48, confirming that the setup path actually exercised the LoRA update.
 
+Replacement setup under source `d4269bf3…8b36` is now strictly reopened: CPU smoke SHA-256
+`1d5a57c9…6fdb`, manifest SHA-256 `e935c31a…1e57`, data contract `8e95991b…d5b`, and empty-ledger
+identity `eaf7ba23…b3cb`. All three initialization sidecars are byte-identical to their tracked
+mirrors, and every tensor-value digest exactly equals its source-1d predecessor. Regeneration loaded
+no model, decompressed no sealed payload during reopening, and left the ledger at zero events.
+
 Seed-7412 LoRA G0 then stopped at the frozen live-joint reachability gate. Every one of the 124 LoRA
 tensors and every other required recurrent group had a finite nonzero gradient, the base model had
 none, and `aggregate_logit.grad` existed and was finite but had norm exactly zero. The pre-repair code
@@ -54,8 +60,8 @@ completed aggregate is cast back once. G0 failures now persist a nonauthorizing 
 an independent byte-identical source-qualified mirror without overwriting existing or symlinked
 paths. The complete suite passes 201/201, a CUDA BF16 adversarial probe reproduces legacy gradient
 zero versus repaired analytic gradient 0.045, and independent numerical/runtime/archive re-audits
-give `GO`. The frozen nonzero gate is unchanged. All source-`1d1368cf…434b0a` setup is now archived;
-replacement-source setup must be regenerated and execution must restart from seed 7411.
+give `GO`. The frozen nonzero gate is unchanged. All source-`1d1368cf…434b0a` setup is archived and
+replacement-source setup is regenerated; G0/control replay must now restart from seed 7411.
 
 ## Research program and prior anchors
 
