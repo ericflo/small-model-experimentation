@@ -2,6 +2,44 @@
  "note": "Plain-language practitioner briefs shown above the fold on each experiment page (verdict + the-one-idea/question/finding/why-it-matters + KPI numbers + per-chart how-to-read/takeaway). Authored per experiment from its own README/report and verified chart specs under a strict no-jargon ban-list; all jargon-precise detail stays below the fold. Regenerate with scripts/enrichment/generate_briefs.workflow.js (see docs/site_maintenance.md).",
  "generated_on": "2026-07-05",
  "experiments": {
+  "qwen35_4b_early_text_hypothesis_forking": {
+   "verdict_tag": "A 24-way early-hint test has cleared its model-free checks",
+   "concept_primer": "Imagine giving the same puzzle to twenty-four independent scratchpads. Each starts with a different concrete guess about the first transformation, may reject that guess, and must still write the complete two-step rule. Public examples—not the hidden answer—choose one result.",
+   "plain_question": "Does giving each possible first transformation before reasoning produce better complete rules than giving it late or simply buying more ordinary attempts?",
+   "plain_answer": "The experiment design and model-free checks now pass, but the model has not run. Review expanded the first draft from twelve operation names to twenty-four fully specified operations, added two fair late-hint comparisons, and proved that all 576 possible two-step rules are covered by the public-data control. The next gate tests whether the model can actually use these hints rather than merely repeat them.",
+   "why_it_matters": "The previous internal-state experiment could change a candidate name without showing that later reasoning used it. This test moves a plain-text candidate to the start of reasoning and demands a full computed rule, while matched ordinary attempts and exhaustive search prevent extra branching from receiving free credit.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Fully specified first-step candidates",
+     "value": "24",
+     "sub": "parameters are included, not left for the model to guess"
+    },
+    {
+     "label": "Two-step rules checked per task",
+     "value": "576",
+     "sub": "the complete public search space"
+    },
+    {
+     "label": "Fresh procedural tasks frozen",
+     "value": "144",
+     "sub": "48 qualification and 96 untouched confirmation"
+    },
+    {
+     "label": "Model calls so far",
+     "value": "zero",
+     "sub": "this is design and model-free validation only"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Every diagnostic input distinguishes all twenty-four candidates",
+     "chart_read": "Each bar is one public diagnostic list. Its height is the number of fully specified operations that produce a distinct expected result; all four reach the required twenty-four.",
+     "chart_takeaway": "The upcoming model check cannot pass by exploiting two candidates that happen to mean the same thing on a diagnostic input."
+    }
+   ]
+  },
   "qwen35_4b_semantic_anchor_coordinate_branching": {
    "verdict_tag": "The late anchor writes names, but the consequence test is invalid",
    "concept_primer": "Imagine pausing a scratchpad, placing a candidate name in a dedicated slot, and copying the model's internal state for a different candidate into that slot. The important test is whether later computation follows the copied candidate—not merely whether the next word changes.",

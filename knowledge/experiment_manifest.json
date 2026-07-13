@@ -1871,6 +1871,46 @@
   },
   {
     "file_counts": {
+      ".json": 3,
+      ".jsonl": 6,
+      ".md": 7,
+      ".py": 8,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_early_text_hypothesis_forking",
+    "path": "experiments/qwen35_4b_early_text_hypothesis_forking",
+    "primary_readme": "experiments/qwen35_4b_early_text_hypothesis_forking/README.md",
+    "primary_report": "experiments/qwen35_4b_early_text_hypothesis_forking/reports/report.md",
+    "research_programs": [
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "posttraining_and_adaptation",
+      "process_control_and_tool_use",
+      "structured_execution_and_compilers",
+      "test_time_reasoning_budget"
+    ],
+    "source_track": "new",
+    "summary": "This experiment tests whether supplying each fully bound first operation at the start of Qwen3.5-4B reasoning changes complete two-step program proposals enough to beat late hints and compute-matched sampling under visible-only selection.",
+    "tags": [
+      "execution",
+      "policy",
+      "small-model"
+    ],
+    "title": "Qwen3.5-4B Early Text Hypothesis Forking",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "runs",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 27,
+    "total_size_bytes": 1096502
+  },
+  {
+    "file_counts": {
       ".json": 2,
       ".log": 2,
       ".md": 5,

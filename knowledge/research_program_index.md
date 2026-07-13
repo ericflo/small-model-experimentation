@@ -3,14 +3,14 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 13
-- Experiments: 236
+- Experiments: 237
 
 ## Structured Execution And Compilers
 
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 170
+- Assigned experiments: 171
 
 ### Seed Evidence
 
@@ -61,6 +61,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_depth_scaling_controls` (new): [README](../experiments/qwen35_4b_depth_scaling_controls/README.md)
 - `qwen35_4b_depth_wall_anatomy` (new): [README](../experiments/qwen35_4b_depth_wall_anatomy/README.md)
 - `qwen35_4b_diversity_keyed_coverage_gate` (track-z): [README](../experiments/qwen35_4b_diversity_keyed_coverage_gate/README.md)
+- `qwen35_4b_early_text_hypothesis_forking` (new): [README](../experiments/qwen35_4b_early_text_hypothesis_forking/README.md)
 - `qwen35_4b_executable_program_posttraining` (track-z): [README](../experiments/qwen35_4b_executable_program_posttraining/README.md)
 - `qwen35_4b_foofah_adaptive_program_budget_router` (track-z): [README](../experiments/qwen35_4b_foofah_adaptive_program_budget_router/README.md)
 - `qwen35_4b_foofah_direct_vs_abi` (track-z): [README](../experiments/qwen35_4b_foofah_direct_vs_abi/README.md)
@@ -198,7 +199,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 Turn candidate-pool coverage into deployable decisions under visible evidence.
 
 - Charter: [evidence_conditioned_selection](../research_programs/evidence_conditioned_selection/charter.md)
-- Assigned experiments: 86
+- Assigned experiments: 87
 
 ### Seed Evidence
 
@@ -226,6 +227,7 @@ Turn candidate-pool coverage into deployable decisions under visible evidence.
 - `qwen35_4b_deployable_information_ceiling_sweep` (track-z): [README](../experiments/qwen35_4b_deployable_information_ceiling_sweep/README.md)
 - `qwen35_4b_depth3_dose_response` (new): [README](../experiments/qwen35_4b_depth3_dose_response/README.md)
 - `qwen35_4b_diversity_keyed_coverage_gate` (track-z): [README](../experiments/qwen35_4b_diversity_keyed_coverage_gate/README.md)
+- `qwen35_4b_early_text_hypothesis_forking` (new): [README](../experiments/qwen35_4b_early_text_hypothesis_forking/README.md)
 - `qwen35_4b_foofah_program_ensemble_consensus` (track-z): [README](../experiments/qwen35_4b_foofah_program_ensemble_consensus/README.md)
 - `qwen35_4b_foofah_selective_program_fallback` (track-z): [README](../experiments/qwen35_4b_foofah_selective_program_fallback/README.md)
 - `qwen35_4b_gauntlet_breadth_round1` (new): [README](../experiments/qwen35_4b_gauntlet_breadth_round1/README.md)
@@ -407,7 +409,7 @@ Grow, search, shortlist, compose, and stress-test reusable operator and skill ba
 Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and other update mechanisms.
 
 - Charter: [posttraining_and_adaptation](../research_programs/posttraining_and_adaptation/charter.md)
-- Assigned experiments: 74
+- Assigned experiments: 75
 
 ### Seed Evidence
 
@@ -433,6 +435,7 @@ Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and o
 - `qwen35_4b_context_local_jacobian_clamp` (new): [README](../experiments/qwen35_4b_context_local_jacobian_clamp/README.md)
 - `qwen35_4b_decompose_compose_frontier` (new): [README](../experiments/qwen35_4b_decompose_compose_frontier/README.md)
 - `qwen35_4b_deployable_information_ceiling_sweep` (track-z): [README](../experiments/qwen35_4b_deployable_information_ceiling_sweep/README.md)
+- `qwen35_4b_early_text_hypothesis_forking` (new): [README](../experiments/qwen35_4b_early_text_hypothesis_forking/README.md)
 - `qwen35_4b_gauntlet_breadth_round1` (new): [README](../experiments/qwen35_4b_gauntlet_breadth_round1/README.md)
 - `qwen35_4b_hypothesize_verify_wall` (new): [README](../experiments/qwen35_4b_hypothesize_verify_wall/README.md)
 - `qwen35_4b_interactive_policy_curriculum` (new): [README](../experiments/qwen35_4b_interactive_policy_curriculum/README.md)
@@ -498,7 +501,7 @@ Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and o
 Train or evaluate small models as controllers over tools, verifiers, budgets, and intermediate actions.
 
 - Charter: [process_control_and_tool_use](../research_programs/process_control_and_tool_use/charter.md)
-- Assigned experiments: 41
+- Assigned experiments: 42
 
 ### Seed Evidence
 
@@ -516,6 +519,7 @@ Train or evaluate small models as controllers over tools, verifiers, budgets, an
 - `qwen35_4b_context_composition` (new): [README](../experiments/qwen35_4b_context_composition/README.md)
 - `qwen35_4b_context_local_jacobian_clamp` (new): [README](../experiments/qwen35_4b_context_local_jacobian_clamp/README.md)
 - `qwen35_4b_deployable_information_ceiling_sweep` (track-z): [README](../experiments/qwen35_4b_deployable_information_ceiling_sweep/README.md)
+- `qwen35_4b_early_text_hypothesis_forking` (new): [README](../experiments/qwen35_4b_early_text_hypothesis_forking/README.md)
 - `qwen35_4b_interactive_policy_curriculum` (new): [README](../experiments/qwen35_4b_interactive_policy_curriculum/README.md)
 - `qwen35_4b_jacobian_counterfactual_branching` (new): [README](../experiments/qwen35_4b_jacobian_counterfactual_branching/README.md)
 - `qwen35_4b_latent_decomposition` (new): [README](../experiments/qwen35_4b_latent_decomposition/README.md)
@@ -679,7 +683,7 @@ Stress whether mechanisms transfer across substrates, families, lengths, distrib
 Measure why methods work or fail through attribution, probes, pressure audits, and controlled ablations.
 
 - Charter: [interpretability_and_diagnostics](../research_programs/interpretability_and_diagnostics/charter.md)
-- Assigned experiments: 71
+- Assigned experiments: 72
 
 ### Seed Evidence
 
@@ -698,6 +702,7 @@ Measure why methods work or fail through attribution, probes, pressure audits, a
 - `qwen35_4b_context_local_jacobian_clamp` (new): [README](../experiments/qwen35_4b_context_local_jacobian_clamp/README.md)
 - `qwen35_4b_counterfactual_order_support_selector` (new): [README](../experiments/qwen35_4b_counterfactual_order_support_selector/README.md)
 - `qwen35_4b_coverage_banking` (new): [README](../experiments/qwen35_4b_coverage_banking/README.md)
+- `qwen35_4b_early_text_hypothesis_forking` (new): [README](../experiments/qwen35_4b_early_text_hypothesis_forking/README.md)
 - `qwen35_4b_foofah_program_ensemble_consensus` (track-z): [README](../experiments/qwen35_4b_foofah_program_ensemble_consensus/README.md)
 - `qwen35_4b_forced_commit_jacobian_value_transport` (new): [README](../experiments/qwen35_4b_forced_commit_jacobian_value_transport/README.md)
 - `qwen35_4b_gauntlet_breadth_round1` (new): [README](../experiments/qwen35_4b_gauntlet_breadth_round1/README.md)
@@ -870,7 +875,7 @@ Make the repository itself better at spawning, comparing, validating, and rememb
 Study the native thinking-token budget as a first-class controllable test-time-compute axis for Qwen3.5-4B, which the corpus has universally disabled.
 
 - Charter: [test_time_reasoning_budget](../research_programs/test_time_reasoning_budget/charter.md)
-- Assigned experiments: 20
+- Assigned experiments: 21
 
 ### Assigned Experiments
 
@@ -879,6 +884,7 @@ Study the native thinking-token budget as a first-class controllable test-time-c
 - `qwen35_4b_commit_slot_jacobian_value_transport` (new): [README](../experiments/qwen35_4b_commit_slot_jacobian_value_transport/README.md)
 - `qwen35_4b_commit_slot_semantic_power_replication` (new): [README](../experiments/qwen35_4b_commit_slot_semantic_power_replication/README.md)
 - `qwen35_4b_counterfactual_order_support_selector` (new): [README](../experiments/qwen35_4b_counterfactual_order_support_selector/README.md)
+- `qwen35_4b_early_text_hypothesis_forking` (new): [README](../experiments/qwen35_4b_early_text_hypothesis_forking/README.md)
 - `qwen35_4b_forced_commit_jacobian_value_transport` (new): [README](../experiments/qwen35_4b_forced_commit_jacobian_value_transport/README.md)
 - `qwen35_4b_jacobian_value_transport` (new): [README](../experiments/qwen35_4b_jacobian_value_transport/README.md)
 - `qwen35_4b_long_horizon_answer_potential_sft` (new): [README](../experiments/qwen35_4b_long_horizon_answer_potential_sft/README.md)

@@ -1,0 +1,115 @@
+{
+  "ancestor_behavior_fingerprints": 1122,
+  "ancestor_overlap_count": 0,
+  "benchmarks_read": false,
+  "bound_operation_candidates": 24,
+  "branch_seed": 2026072507,
+  "cpu_exhaustive_selector_tasks": 4,
+  "depth_two_programs_exhausted_per_task": 576,
+  "diagnostic_result_support_per_context": [
+    24,
+    24,
+    24,
+    24
+  ],
+  "eligible_gold_first_operations": 23,
+  "gold_slot_counts": {
+    "confirmation": {
+      "0": 4,
+      "1": 4,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 4,
+      "17": 4,
+      "18": 4,
+      "19": 4,
+      "2": 4,
+      "20": 4,
+      "21": 4,
+      "22": 4,
+      "23": 4,
+      "3": 4,
+      "4": 4,
+      "5": 4,
+      "6": 4,
+      "7": 4,
+      "8": 4,
+      "9": 4
+    },
+    "qualification": {
+      "0": 2,
+      "1": 2,
+      "10": 2,
+      "11": 2,
+      "12": 2,
+      "13": 2,
+      "14": 2,
+      "15": 2,
+      "16": 2,
+      "17": 2,
+      "18": 2,
+      "19": 2,
+      "2": 2,
+      "20": 2,
+      "21": 2,
+      "22": 2,
+      "23": 2,
+      "3": 2,
+      "4": 2,
+      "5": 2,
+      "6": 2,
+      "7": 2,
+      "8": 2,
+      "9": 2
+    }
+  },
+  "mechanics_contexts": 4,
+  "mechanics_rows_planned": 96,
+  "model_loaded": false,
+  "outcomes_loaded": false,
+  "paths": {
+    "branch_plans": {
+      "path": "experiments/qwen35_4b_early_text_hypothesis_forking/data/procedural/branch_plans.jsonl",
+      "sha256": "c3b2ec9e1aadbc8266cbd7c898497ce5502c9fa64484ccf725171bae1512fc96"
+    },
+    "confirmation_gold": {
+      "path": "experiments/qwen35_4b_early_text_hypothesis_forking/data/procedural/confirmation_gold.jsonl",
+      "sha256": "2084bc6d4613ee6555612fdfa81f68d7482cb5575c5b374707f65738078e2c3e"
+    },
+    "confirmation_public": {
+      "path": "experiments/qwen35_4b_early_text_hypothesis_forking/data/procedural/confirmation_public.jsonl",
+      "sha256": "5eff1f8a2c4adf6b34a55a850447ab2180e73353a661e94a03d0b53dbb2cf25e"
+    },
+    "mechanics_public": {
+      "path": "experiments/qwen35_4b_early_text_hypothesis_forking/data/procedural/mechanics_public.jsonl",
+      "sha256": "5e590deb2a21d2fec5e30a3228e532d3d857b33c2e8fb08e7fe74fc99ddf94d4"
+    },
+    "pregade_firewall": {
+      "path": "experiments/qwen35_4b_early_text_hypothesis_forking/runs/smoke/pregade_firewall.json",
+      "sha256": "b61e0a69b2069ae984c7505bb717192c7af739311556fec7282d0d35ca40d5dc"
+    },
+    "qualification_gold": {
+      "path": "experiments/qwen35_4b_early_text_hypothesis_forking/data/procedural/qualification_gold.jsonl",
+      "sha256": "181b739dff60f6623fe81231f83d4a53c289a36b0a818a01dd046c93548f9124"
+    },
+    "qualification_public": {
+      "path": "experiments/qwen35_4b_early_text_hypothesis_forking/data/procedural/qualification_public.jsonl",
+      "sha256": "1c27689a4605683b40ced048852bf6e5a901222632f60bda20bf6be91eb216aa"
+    }
+  },
+  "schema_version": 2,
+  "seed": 2026072501,
+  "split_rows": {
+    "confirmation": 96,
+    "qualification": 48
+  },
+  "total_new_behaviors": 144,
+  "unique_behavior_fingerprints": 144,
+  "unique_composed_branch_maps": 144,
+  "unique_operation_result_maps": 4,
+  "unique_task_fingerprints": 144
+}

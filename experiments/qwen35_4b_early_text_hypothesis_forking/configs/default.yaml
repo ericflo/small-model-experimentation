@@ -1,0 +1,127 @@
+schema_version: 1
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+  dtype: bfloat16
+  backend: vllm
+  vllm_version: 0.24.0
+
+seeds:
+  data: 2026072501
+  mechanics: 2026072502
+  qualification: 2026072503
+  confirmation: 2026072504
+  late_prefix: 2026072505
+  bootstrap: 2026072506
+  branch_permutation: 2026072507
+  neutral_pool: 2026072508
+  plain_pool: 2026072509
+
+data:
+  mechanics_tasks: 4
+  qualification_tasks: 48
+  confirmation_tasks: 96
+  qualification_shards: 2
+  visible_examples: 8
+  hidden_examples: 8
+  unlabeled_probe_inputs: 16
+  depth: 2
+  operations:
+    - reverse
+    - sort_asc
+    - sort_desc
+    - abs_all
+    - square
+    - negate
+    - running_sum
+    - adjacent_diff
+    - add_k
+    - mul_k
+    - take_k
+    - rotate_k
+  parameter_values:
+    add_k: [-3, -2, -1, 1, 2, 3]
+    mul_k: [-2, 2, 3]
+    take_k: [1, 2, 3, 4]
+    rotate_k: [1, 2, 3]
+
+generation:
+  temperature: 0.6
+  top_p: 0.95
+  top_k: 20
+  mechanics_thinking_budget: 256
+  main_thinking_budget: 1024
+  late_prefix_tokens: 512
+  late_equal_total_remaining_tokens: 512
+  late_equal_post_remaining_tokens: 1024
+  answer_max_tokens: 128
+  hypotheses_per_task: 24
+  duplicate_branches: 24
+  placebo_branches: 24
+  neutral_sample_more_master_pool: 48
+  plain_sample_more_master_pool: 48
+  max_model_len: 4096
+  max_num_seqs: 64
+  max_num_batched_tokens: 16384
+  enable_prefix_caching: false
+  cudagraph_capture_sizes: [1, 2, 4, 8, 16, 32, 64]
+
+mechanics:
+  diagnostic_inputs:
+    - [3, -1, 2, 0, 5]
+    - [-2, 4, 1, -3, 6]
+    - [5, 0, -1, 2, -4]
+    - [1, -4, 3, 2, 7]
+  parse_rate_min: 0.90
+  execution_rate_min: 0.75
+  candidate_adherence_min: 0.60
+  deranged_adherence_gain_min: 0.35
+  operation_support_min: 20
+  task_support_min: 4
+  duplicate_target_rate_max: 0.20
+  placebo_target_rate_max: 0.20
+  answer_limit_contact_max: 0.05
+  correct_hypothesis_visible_pass_min: 0.50
+
+qualification:
+  parse_rate_min: 0.90
+  parse_gap_max: 0.02
+  early_accuracy_min: 0.15
+  early_accuracy_max: 0.85
+  selected_accuracy_gain_min: 0.10
+  late_equal_total_gain_min: 0.05
+  late_equal_post_gain_min: 0.0
+  oracle_coverage_gain_min: 0.10
+  selector_capture_min: 0.90
+  paired_one_sided_95_lower_min: 0.0
+  correct_first_operation_support_min: 8
+  max_single_operation_gain_share: 0.25
+  shard_gain_min: 0.0
+  pool_exhaustion_allowed: false
+  bootstrap_resamples: 10000
+  multiple_comparison_method: holm
+
+confirmation:
+  parse_rate_min: 0.90
+  parse_gap_max: 0.02
+  early_accuracy_min: 0.15
+  early_accuracy_max: 0.85
+  selected_accuracy_gain_min: 0.10
+  late_equal_total_gain_min: 0.05
+  late_equal_post_gain_min: 0.0
+  oracle_coverage_gain_min: 0.10
+  selector_capture_min: 0.90
+  paired_one_sided_95_lower_min: 0.0
+  correct_first_operation_support_min: 8
+  max_single_operation_gain_share: 0.25
+  pool_exhaustion_allowed: false
+  bootstrap_resamples: 10000
+  multiple_comparison_method: holm
+
+boundaries:
+  design:
+    status: adversarially_reviewed
+  implementation:
+    status: pending
+  mechanics:
+    status: pending
