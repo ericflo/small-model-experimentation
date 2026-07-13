@@ -36,3 +36,7 @@ Created as a new experiment scaffold.
   canonical answer compositions, 1,396-token worst-case context, and zero
   rendered-token overlap with 1,984 parent prompts. Receipt `61ff7292...`; no
   model weights, GPU, or sampled output was used.
+- 2026-07-13: Added the append-only durable transaction core. Twelve new tests
+  cover every crash/recovery state, terminal STARTED-only incidents, zero-call
+  promotion, byte-idempotent restarts, inventory/symlink refusal, and
+  bundle/chain tampering. All 52 tests pass; live integration remains held.

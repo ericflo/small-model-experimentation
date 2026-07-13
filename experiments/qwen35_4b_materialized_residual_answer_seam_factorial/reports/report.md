@@ -55,7 +55,8 @@ Construction summary SHA-256:
   close `[248069,271]`, all 14,400 canonical answer compositions, 1,396-token
   worst-case context, and zero overlap with 1,984 parent rendered prompts;
 - zero model loads, calls, or sampled outputs; and
-- 40/40 current model-free tests pass.
+- 52/52 current model-free tests pass, including append-only transaction and
+  crash-recovery mutations.
 
 The first random-order constructor attempt was interrupted after 3m35s before
 writing artifacts. An exact common-function index reduced construction to about
@@ -86,8 +87,8 @@ materialized residuals help.
 
 ## Remaining Work
 
-Before calibration: append-only transactions with crash recovery; reader
-allowlists; exact batch
+Before calibration: transaction integration with the exact lock/preflight;
+reader allowlists; exact batch
 and shared-thought parity; implementation locks/live preflight; independent
 review of committed hashes; push to `main`; and green validation/site CI.
 

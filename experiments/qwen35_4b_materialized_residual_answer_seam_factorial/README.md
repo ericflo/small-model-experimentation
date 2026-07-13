@@ -87,7 +87,8 @@ authenticated parent instances, exact live-sibling strata, 4,104 prepared rows,
 2,952 unique canonical request IDs, balanced A-X calibration positions, zero
 model calls, and empty forbidden-read receipts. A real-tokenizer receipt also
 authenticates all answer compositions, context fit, and zero rendered parent
-overlap. Forty model-free tests pass. This remains registration and
+overlap. Fifty-two model-free tests pass, including adversarial durable
+transaction/recovery mutations. This remains registration and
 implementation evidence only.
 
 ## Interpretation

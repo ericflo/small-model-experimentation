@@ -61,10 +61,12 @@ did not yet define a falsifiable or transaction-safe experiment.
    authenticates thinking/no-thinking suffixes, close `[248069,271]`,
    `PROGRAM:` `[78041,25]`, model/tokenizer EOS, A-X tokenizations, all 14,400
    canonical lines/tails, context fit, and zero rendered parent overlap.
-2. Implement and mutation-test the append-only
-   `STARTED -> bundle -> GENERATED -> COMPLETE` transaction state machine,
-   crash recovery, symlink/unknown-inventory refusal, and end-to-end
-   authentication.
+2. **Core completed model-free; live integration remains:** the append-only
+   `STARTED -> bundle -> GENERATED -> COMPLETE` state machine has mutation tests
+   for every crash boundary, zero-call recovery, terminal STARTED-only refusal,
+   symlinks, unknown/partial inventory, tampering, predecessor chains, and
+   incomplete authentication. The calibration stage runner must still bind the
+   exact lock/preflight and pass end-to-end review.
 3. Implement a calibration-only reader allowlist proving mechanics public,
    audit, gold, prepared requests, and every forbidden directory can be absent
    without changing calibration preparation or scoring.
