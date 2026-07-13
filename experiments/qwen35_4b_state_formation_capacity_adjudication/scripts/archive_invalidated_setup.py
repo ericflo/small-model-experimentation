@@ -22,6 +22,8 @@ REPO_ROOT = ROOT.parents[1]
 sys.path.insert(0, str(ROOT))
 
 from src.config import (  # noqa: E402
+    G0_COMPLETED_CHECKS,
+    G0_FAILURE_STAGE_PREFIX_LENGTHS,
     MODEL_ID,
     MODEL_REVISION,
     config_sha256,
@@ -58,6 +60,17 @@ DATA_SETUP_FILES = (
     *DATA_PAYLOADS,
     "manifest.json",
 )
+G0_PASS_ACCESS_CONTRACT = {
+    "authorizes_positive_control": True,
+    "authorizes_training": False,
+    "authorizes_result_training": False,
+    "authorizes_result_evaluation": False,
+    "benchmark_files_read": 0,
+    "result_payloads_opened": ["train"],
+    "sealed_contrast_payloads_opened": [],
+    "training_or_evaluation_started": False,
+    "scientific_evidence": False,
+}
 
 
 @dataclass(frozen=True)
@@ -444,10 +457,12 @@ def _validate_g0_receipts(
     experiment_id: str,
     manifest_sha256: str,
 ) -> None:
-    setup_dir = _safe_repo_path(
-        ROOT / config["paths"]["runs_dir"] / "setup",
-        "tracked setup receipt root",
+    runs_dir = _safe_repo_path(
+        ROOT / config["paths"]["runs_dir"],
+        "tracked runs root",
     )
+    setup_dir = _safe_repo_path(runs_dir / "setup", "tracked setup receipt root")
+    failures_dir = _safe_repo_path(runs_dir / "failures", "tracked failures root")
     for path in sorted(setup_dir.glob("g0_*.json")):
         match = G0_RE.fullmatch(path.name)
         if match is None:
@@ -463,27 +478,137 @@ def _validate_g0_receipts(
             experiment_id=experiment_id,
             label=f"G0 receipt {path.name}",
         )
-        _expect(payload, "status", "MODEL_SMOKE_PASS", f"G0 receipt {path.name}")
+        status = payload.get("status")
+        if status not in {"MODEL_SMOKE_PASS", "SETUP_CONTROL_FAILED"}:
+            raise RuntimeError(f"G0 receipt {path.name} has invalid status")
+        _expect(payload, "phase", f"{capacity}_g0", f"G0 receipt {path.name}")
         _expect(payload, "backend", "transformers", f"G0 receipt {path.name}")
         _expect(payload, "capacity", capacity, f"G0 receipt {path.name}")
         _expect(payload, "model_seed", seed, f"G0 receipt {path.name}")
-        _expect(
-            payload,
-            "data_manifest_sha256",
-            manifest_sha256,
-            f"G0 receipt {path.name}",
-        )
+        if status == "SETUP_CONTROL_FAILED":
+            failure_stage = payload.get("failure_stage")
+            completed_checks = payload.get("completed_checks")
+            if not isinstance(failure_stage, str) or (
+                failure_stage not in G0_FAILURE_STAGE_PREFIX_LENGTHS
+            ):
+                raise RuntimeError(f"G0 failure {path.name} has unknown failure stage")
+            if not isinstance(completed_checks, list):
+                raise RuntimeError(f"G0 failure {path.name} lacks completed checks")
+            prefix_length = len(completed_checks)
+            if (
+                completed_checks != list(G0_COMPLETED_CHECKS[:prefix_length])
+                or prefix_length not in G0_FAILURE_STAGE_PREFIX_LENGTHS[failure_stage]
+            ):
+                raise RuntimeError(
+                    f"G0 failure {path.name} has impossible completed-check progress"
+                )
+            expected_access = [] if failure_stage == "branch_authorization" else ["train"]
+            if payload.get("result_payloads_opened") != expected_access:
+                raise RuntimeError(f"G0 failure {path.name} reports unsafe result access")
+            expected_manifest = manifest_sha256 if prefix_length >= 2 else None
+            _expect(
+                payload,
+                "data_manifest_sha256",
+                expected_manifest,
+                f"G0 receipt {path.name}",
+            )
+        else:
+            _expect(
+                payload,
+                "data_manifest_sha256",
+                manifest_sha256,
+                f"G0 receipt {path.name}",
+            )
+            present_access_fields = set(G0_PASS_ACCESS_CONTRACT).intersection(payload)
+            if present_access_fields:
+                if present_access_fields != set(G0_PASS_ACCESS_CONTRACT):
+                    raise RuntimeError(
+                        f"G0 pass {path.name} has a partial access contract"
+                    )
+                for field, expected in G0_PASS_ACCESS_CONTRACT.items():
+                    actual = payload.get(field)
+                    if type(actual) is not type(expected) or actual != expected:
+                        raise RuntimeError(
+                            f"G0 pass {path.name} has invalid {field}"
+                        )
         branch_authorization = payload.get("branch_authorization")
         if capacity == "lora" and branch_authorization is not None:
             raise RuntimeError(f"G0 receipt {path.name} has unexpected authorization")
-        if capacity == "fullrank" and not isinstance(branch_authorization, dict):
+        if (
+            capacity == "fullrank"
+            and not isinstance(branch_authorization, dict)
+            and not (
+                status == "SETUP_CONTROL_FAILED"
+                and len(completed_checks) == 0
+            )
+        ):
             raise RuntimeError(f"G0 receipt {path.name} lacks full-rank authorization")
         setup = payload.get("setup")
-        if (
-            not isinstance(setup, dict)
-            or setup.get("shared_initialization") != initialization[seed]
-        ):
-            raise RuntimeError(f"G0 receipt {path.name} has wrong initialization lineage")
+        if status == "MODEL_SMOKE_PASS":
+            if (
+                not isinstance(setup, dict)
+                or setup.get("shared_initialization") != initialization[seed]
+            ):
+                raise RuntimeError(
+                    f"G0 receipt {path.name} has wrong initialization lineage"
+                )
+        else:
+            prefix_length = len(completed_checks)
+            expected_top_level = initialization[seed] if prefix_length >= 3 else None
+            if payload.get("shared_initialization") != expected_top_level:
+                raise RuntimeError(
+                    f"G0 failure {path.name} has wrong initialization lineage "
+                    "in its top-level binding"
+                )
+            if prefix_length < 4 and setup is not None:
+                raise RuntimeError(
+                    f"G0 failure {path.name} claims setup before completing model setup"
+                )
+            if prefix_length >= 4 and (
+                not isinstance(setup, dict)
+                or setup.get("shared_initialization") != initialization[seed]
+            ):
+                raise RuntimeError(
+                    f"G0 failure {path.name} has wrong setup initialization lineage"
+                )
+        if status == "SETUP_CONTROL_FAILED":
+            for field in (
+                "authorizes_positive_control",
+                "authorizes_training",
+                "authorizes_result_training",
+                "authorizes_result_evaluation",
+                "training_or_evaluation_started",
+                "scientific_evidence",
+            ):
+                _expect(payload, field, False, f"G0 receipt {path.name}")
+            _expect(payload, "benchmark_files_read", 0, f"G0 receipt {path.name}")
+            _expect(
+                payload,
+                "sealed_contrast_payloads_opened",
+                [],
+                f"G0 receipt {path.name}",
+            )
+            for field in ("failure_stage", "error_type", "error"):
+                if not isinstance(payload.get(field), str) or not payload[field]:
+                    raise RuntimeError(f"G0 failure {path.name} lacks {field}")
+            mirror = failures_dir / (
+                f"g0_{capacity}_seed{seed}_source_{source[:12]}.json"
+            )
+            if (
+                mirror.is_symlink()
+                or not mirror.is_file()
+                or mirror.read_bytes() != path.read_bytes()
+            ):
+                raise RuntimeError(
+                    f"G0 failure {path.name} lacks its identical tracked mirror"
+                )
+            positive_control = (
+                setup_dir / f"positive_control_{capacity}_seed{seed}.json"
+            )
+            if os.path.lexists(positive_control):
+                raise RuntimeError(
+                    f"failed G0 {path.name} cannot coexist with a positive control"
+                )
 
 
 def _validate_positive_control_receipts(
@@ -1073,6 +1198,50 @@ def _verify_archive_content(
             raise RuntimeError(f"durable archive verification failed: {record['path']}")
 
 
+def _validate_archived_setup_failure_mirrors(
+    config: dict[str, Any],
+    archive_root: Path,
+    records: list[dict[str, Any]],
+    invalidated_source: str,
+) -> None:
+    """Require every archived setup failure's live source-qualified mirror."""
+
+    failures_dir = _safe_repo_path(
+        ROOT / config["paths"]["runs_dir"] / "failures",
+        "tracked failures root",
+    )
+    for record in records:
+        archive_path = str(record["path"])
+        relative = Path(archive_path)
+        if relative.parent.as_posix() != "tracked_receipts":
+            continue
+        g0_match = G0_RE.fullmatch(relative.name)
+        control_match = POSITIVE_CONTROL_RE.fullmatch(relative.name)
+        if g0_match is None and control_match is None:
+            continue
+        canonical = archive_root / relative
+        payload = _load_json(canonical, f"archived setup receipt {relative.name}")
+        if payload.get("status") != "SETUP_CONTROL_FAILED":
+            continue
+        match = g0_match if g0_match is not None else control_match
+        assert match is not None
+        capacity, seed = match.groups()
+        prefix = "g0" if g0_match is not None else "positive_control"
+        mirror = _safe_repo_path(
+            failures_dir
+            / f"{prefix}_{capacity}_seed{seed}_source_{invalidated_source[:12]}.json",
+            "setup-failure mirror",
+        )
+        if (
+            mirror.is_symlink()
+            or not mirror.is_file()
+            or mirror.read_bytes() != canonical.read_bytes()
+        ):
+            raise RuntimeError(
+                f"archived setup failure {relative.name} lacks its identical tracked mirror"
+            )
+
+
 def _validate_source_exact_or_absent(
     item: ArchiveItem,
     record: dict[str, Any],
@@ -1092,7 +1261,12 @@ def _validate_cleanup_inventory(
     config: dict[str, Any],
     items: list[ArchiveItem],
     records: list[dict[str, Any]],
+    archive_root: Path,
+    invalidated_source: str,
 ) -> None:
+    _validate_archived_setup_failure_mirrors(
+        config, archive_root, records, invalidated_source
+    )
     for item, record in zip(items, records, strict=True):
         _validate_source_exact_or_absent(item, record)
 
@@ -1210,13 +1384,19 @@ def _delete_sources(
     items: list[ArchiveItem],
     records: list[dict[str, Any]],
     archive_root: Path,
+    invalidated_source: str,
 ) -> None:
-    _validate_cleanup_inventory(config, items, records)
+    _validate_cleanup_inventory(
+        config, items, records, archive_root, invalidated_source
+    )
     grouped: dict[Path, list[tuple[ArchiveItem, dict[str, Any]]]] = {}
     for item, record in zip(items, records, strict=True):
         grouped.setdefault(item.source.parent, []).append((item, record))
     for parent in sorted(grouped, key=lambda path: path.as_posix()):
         for item, record in grouped[parent]:
+            _validate_archived_setup_failure_mirrors(
+                config, archive_root, records, invalidated_source
+            )
             _validate_source_exact_or_absent(item, record)
             if os.path.lexists(item.source):
                 _unlink_source(item.source)
@@ -1248,6 +1428,9 @@ def _delete_sources(
     )
     _fsync_directory(data_dir)
     _fsync_directory(_large_root(config))
+    _validate_archived_setup_failure_mirrors(
+        config, archive_root, records, invalidated_source
+    )
     _verify_cleanup_postconditions(config, items, archive_root)
 
 
@@ -1265,12 +1448,17 @@ def _resume_existing_archive(
         archive_root,
     )
     _verify_archive_content(archive_root, records, receipt)
+    _validate_archived_setup_failure_mirrors(
+        config, archive_root, records, invalidated_source
+    )
     if os.path.lexists(tracked_receipt):
         _verify_archive(archive_root, records, receipt, tracked_receipt)
     else:
         _atomic_tracked_receipt(tracked_receipt, receipt_bytes)
         _verify_archive(archive_root, records, receipt, tracked_receipt)
-    _delete_sources(config, items, records, archive_root)
+    _delete_sources(
+        config, items, records, archive_root, invalidated_source
+    )
     _verify_archive(archive_root, records, receipt, tracked_receipt)
     return receipt
 
@@ -1370,7 +1558,9 @@ def archive_invalidated_setup(
         temporary = None
         _atomic_tracked_receipt(tracked_receipt, encoded)
         _verify_archive(archive_root, records, receipt, tracked_receipt)
-        _delete_sources(config, items, records, archive_root)
+        _delete_sources(
+            config, items, records, archive_root, invalidated_source
+        )
         _verify_archive(archive_root, records, receipt, tracked_receipt)
     finally:
         if temporary is not None and temporary.exists():

@@ -467,7 +467,8 @@ training is authorized until all three per-seed setup gates pass canonically.
   before broadcasting through the registered last-state/mean-state convex mix. Two otherwise matched
   seed-7411 G0 runs produced scalar gradients whose de-sigmoided magnitudes are exactly `2^-12` and
   `2^-11`, while seed 7412 produced zero with an allocated gradient tensor. This is consistent with a
-  one-example BF16 projection/reduction quantization defect, not graph disconnection or underflow.
+  one-example BF16 projection/reduction quantization defect and argues against simple graph
+  disconnection or magnitude underflow; the regenerated live gate remains the falsification test.
 - An unchanged retry is prohibited. The only reviewed repair keeps the existing BF16 mean arithmetic,
   forms the scalar convex mix in FP32, and casts its completed result once back to model dtype. It
   preserves K=1, parameters, initialization, row, masks, objective, schedule, thresholds, and both
@@ -481,3 +482,41 @@ training is authorized until all three per-seed setup gates pass canonically.
 
 No model-bearing stage is authorized until the aggregation-precision and G0-failure-persistence
 repair is reviewed and the source-bound setup is regenerated. No result training is authorized.
+
+## 2026-07-13 — aggregation precision and G0 persistence repair passes review
+
+- Implemented the reviewed narrow numerical repair under source contract
+  `d4269bf34f7c80affcc8c1e8a33fee9afddcd912d1bd9dead223e520ee108b36`. The registered recurrence
+  states and their mean retain the live BF16 dtype. Only the FP32 sigmoid scalar's convex mix of the
+  already-computed last and mean states runs in FP32 with autocast disabled, followed by one cast back
+  to model dtype. K=1, state-only optimizer exemption, parameters, RNG, calls, rows, objectives,
+  schedules, thresholds, and capacity symmetry are unchanged.
+- A deterministic width-256 BF16 cancellation case gives the legacy scalar gradient exactly zero and
+  the production helper's gradient `0.0450000092`, matching the analytic FP32 derivative. The same
+  check passes directly on the registered RTX 6000 Ada. Random width-2,560 CUDA probing confirms the
+  intended forward effect is at BF16 rounding scale and common to both capacities. The frozen live G0
+  gate remains strictly nonzero; a repeated zero after regeneration is a hard stop, not permission to
+  add rows or weaken the gate.
+- Refactored G0 into a thin persistence guard and instrumented attempt. Every reached failure binds
+  only the lineage actually validated, retains structured gradient/dropout progress, denies all
+  downstream authorization, and re-raises. One serialization is written into two independently
+  fsynced staging files; the source-qualified mirror is installed first and the canonical failure
+  second without replacement. Their final inodes are independent, and existing files, broken
+  symlinks, symlinked ancestors, and partial-link states fail closed.
+- The setup invalidation helper accepts canonical G0 pass or failure receipts. Reached lineage must
+  be exact; null lineage is allowed only at its corresponding early stage and may not contradict the
+  completed-check list. A failed G0 requires its identical nonsymlink mirror and cannot coexist with
+  a positive control. The historical seed-7412 manual receipt remains tracked-only and unchanged.
+- Source-contract version 6 includes the new tests. The full suite passes 201/201: 38 invalidation/
+  recovery, 14 G0 persistence/authorization, three aggregation precision, and 27 static/CLI/
+  provenance tests. Independent numerical, failure-persistence, and real-artifact archive audits give
+  `GO`.
+- A read-only rehearsal validates the real 21-file source-`1d1368cf…434b0a` setup totaling
+  18,288,790 bytes and trigger identity `ce3406f8…b634c` against replacement source `d4269bf3…8b36`.
+  Nothing has yet been moved. The next action is to publish this repair, archive that exact setup,
+  regenerate all source-bound artifacts, and replay from seed 7411.
+
+## Current authorization
+
+Archival of source-`1d1368cf…434b0a` setup is authorized after this repair is published and green in
+CI. No model-bearing stage or result training is authorized until replacement setup is regenerated.

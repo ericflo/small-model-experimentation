@@ -4,10 +4,10 @@
 
 This source-bound review records the executable go/no-go decision separately from the immutable
 scientific design receipt. The runner, initialization and checkpoint lineage, sealed-data firewall,
-optimizer receipts, analyzer, and terminal branch taxonomy pass the complete 135-test local
-experiment suite plus independent adversarial science, CLI-matrix, and prose audits. Focused
-sealed-data and replay-lineage coverage passes 14/14 tests, and the static/CLI/provenance contract
-passes 27/27.
+optimizer receipts, analyzer, and terminal branch taxonomy pass the complete 201-test local
+experiment suite plus independent adversarial science, CLI-matrix, and prose audits. The latest
+aggregation, G0-failure-persistence, and setup-invalidation coverage passes 55/55 tests, and the
+static/CLI/provenance contract passes 27/27.
 
 The first real CPU-smoke attempt exposed an empty-authorization sentinel defect before any model or
 result data ran. Execution authorization was retracted while it was repaired. The final runner now
@@ -143,3 +143,90 @@ intermediate post-archive source. All regenerated setup must bind the source ide
 this addendum; the historical archive receipt must not be rewritten.
 
 No result-bearing arm is authorized until its required live setup gates pass.
+
+## Seed-7412 aggregation-precision and G0-persistence repair
+
+The final-source seed-7411 G0 and corrected 48/48 setup control passed, but seed-7412 G0 stopped at
+the frozen live-joint all-groups reachability gate. Its gradient tensor for the registered
+`aggregate_logit` existed and was finite with exact norm zero. Every one of 124 LoRA tensors, all
+four initializer tensors, the step projection, all eight sufficiency tensors, and the damping scalar
+had finite nonzero gradients; the frozen base had none. The failure occurred before the joint clip or
+optimizer step and is preserved as setup-mechanics evidence at identity
+`ce3406f8fa788c08421687d5d6a0843a2eb7035fd254d5086123d895b2bb634c`. It is not evidence that LoRA
+failed to form the registered representation.
+
+The scalar is initialized identically at a sigmoid weight of 0.9 and is untouched by the preceding
+state-only probes. Under the old implementation it was cast from FP32 to BF16 before broadcasting
+through the last-state/mean-state convex mix. Two otherwise matched seed-7411 G0 executions produced
+scalar gradients `2.197266076e-5` and `4.394532152e-5`; division by the unchanged sigmoid derivative
+maps them exactly to projection increments `2^-12` and `2^-11`. Together with seed 7412's
+allocated-but-zero tensor, this makes one-example BF16 projection/reduction quantization a concrete,
+falsifiable explanation and argues against simple graph disconnection or magnitude underflow; it is
+not a legitimate capacity miss. The factor-two variation under matched code, row, masks,
+initialization, environment, and answer loss also makes an unchanged retry a retry-to-pass risk.
+
+The handoff explicitly permits a pre-result dtype/autocast incompatibility repair. The approved
+change preserves the existing BF16 recurrence states and computes their mean in BF16 exactly as
+before. It keeps the registered sigmoid gate in FP32, converts only the already-computed last and mean
+states for the scalar convex mix, executes that mix with autocast disabled, and casts the completed
+aggregate back once. K=1 still bypasses initialization, recurrence, and aggregation exactly.
+Aggregation remains used only by the optional answer graph, so state-only still gives
+`aggregate_logit` no gradient or Adam moments. Parameters, initialization, row, target, objective,
+dropout stream, call geometry, steps, thresholds, fixed-final rule, and branch order are unchanged;
+the common helper applies identically to LoRA and full rank. No frozen design file or design receipt
+changed.
+
+A deterministic adversarial BF16 test constructs a width-256 projection for which the legacy mix
+gives scalar gradient exactly zero while the repaired production helper gives the analytic FP32
+gradient `0.045`. Separate tests lock mean-before-cast arithmetic, BF16 output, explicit autocast
+disablement, one cast back, K=1 bypass, and answer-only aggregate use. The frozen live G0 gate still
+requires the scalar gradient to be present, finite, and strictly nonzero; no exemption or tolerance
+was added. If the regenerated seed-7412 G0 still produces exact zero, this precision hypothesis is
+falsified: the gate must remain failed and any multi-row reachability redesign belongs in a new
+preregistered successor.
+
+The same failure revealed that `model_smoke` did not durably emit the preregistered
+`SETUP_CONTROL_FAILED` receipt. The public guard now captures initialization immediately after its
+canonical loader, then incrementally binds data, authorization, setup, reached checks, dropout, and
+gradient diagnostics. Any in-scope exception emits a nonauthorizing canonical failure and a
+byte-identical source-qualified tracked mirror before re-raising. One serialization is written to two
+independently fsynced staging inodes, then installed without replacement at the mirror first and the
+canonical path second. The final files have distinct inodes, so an in-place mutation of one cannot
+silently mutate the other. Existing files, broken symlinks, or symlinked ancestors are never
+replaced. This establishes `canonical => mirror`, while a crash between installs leaves mirror-only
+evidence that blocks replay rather than losing the failure. Pass and failure receipts explicitly
+record train-only/zero-sealed/zero-benchmark access and deny result authorization at G0. Receipt
+loading hard-rejects `SETUP_CONTROL_FAILED` even if accidentally added to a caller's status allowlist;
+positive-control and training entry points also require every pass authorization and access field to
+be present with its exact type and value. Successful G0 persistence uses the same fsynced,
+no-replacement leaf installation rule, so a file or broken symlink raced into place during the live
+attempt is preserved and the pass fails closed.
+
+The invalidation helper now accepts either a G0 pass or canonical G0 failure. A failure must have the
+exact phase, source/config/seed binding, exact data and initialization lineage for every reached
+check, truthful nulls limited to the corresponding early failure stages, false authorization and
+scientific flags, a safe access list, nonempty error fields, and a byte-identical nonsymlink mirror;
+its completed checks must be the exact registered prefix allowed at its failure stage, both copies of
+initialization lineage must independently match once reached, and it cannot coexist with a positive
+control. The archive transaction revalidates every archived failed-G0 and failed-control mirror on
+resume and immediately before each cleanup unlink, so a removed or changed non-trigger mirror stops
+further deletion even after a partial cleanup.
+The canonical failure enters the source archive while its tracked mirror remains in place and should
+be used as the archival trigger. The historical seed-7412 receipt remains tracked-only because the
+old runner never created a canonical output; it must not be retroactively fabricated or added to the
+archive inventory.
+
+Source-contract version 6 adds the focused aggregation and G0-persistence tests. The complete suite
+passes 201/201, including 38 setup-invalidation/recovery tests, 14 G0 failure/authorization tests,
+three aggregation-precision tests, and 27 static/CLI/provenance tests. Tests inject early and
+mid-probe failures, the observed zero-scalar structure, existing and broken-symlink destinations,
+symlinked ancestors, a second-link interruption, explicit downstream allowlisting, missing/changed/
+symlinked mirrors, unsafe access and authorization, wrong phase/initialization, and failed-G0/control
+coexistence. Independent numerical, runtime-persistence, and archive audits give `GO` for this narrow
+mechanical repair.
+
+Because source-contract files changed, every setup artifact under source
+`1d1368cf064689322d9df7f345e67b026cecccc32d3a7b7514b82f253d434b0a` is invalid for downstream
+authorization. Archive it with the preserved seed-7412 failure as trigger, regenerate CPU/data/empty
+ledger/all three initialization bundles under the replacement source, and replay G0 and controls
+from seed 7411 before any seed-7412 retry. No result-bearing stage is authorized meanwhile.

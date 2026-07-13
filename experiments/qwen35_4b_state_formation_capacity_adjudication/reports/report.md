@@ -13,8 +13,10 @@ final source `1d1368cf…434b0a`. Seed-7411 LoRA G0 passes canonically at identi
 except the registered aggregation scalar had finite nonzero gradients, while
 `aggregate_logit.grad` was present and finite with norm exactly zero. No canonical seed-7412 G0
 receipt was created. The exact failure is preserved at identity `ce3406f8…b634c` as mechanics
-evidence only. Seed 7413 and all result stages are blocked pending a narrow aggregation-precision
-repair, source-bound setup archival, complete regeneration, and replay from seed 7411. No training
+evidence only. The narrow aggregation-precision and durable G0-failure repair now passes 201/201
+tests and independent numerical/runtime/archive review under source `d4269bf3…8b36`. Seed 7413 and
+all result stages remain blocked pending source-bound setup archival, complete regeneration, and
+replay from seed 7411. No training
 checkpoint, evaluation row, or terminal analysis from this directory should be cited as scientific
 evidence.
 
@@ -26,12 +28,14 @@ is preserved as mechanics history only. The final-source setup has an empty cont
 same shared tensor values as the archived setup. Final-source seed-7411 G0 has now passed every
 registered mechanics gate. Its corrected control completes exactly 256 updates and 4,096
 presentations, scores 48/48 intact and 0/48 with adaptation disabled, and authorized later-seed setup
-under that source. The current BF16 path casts the FP32 aggregation weight before its convex mix;
+under that source. The pre-repair BF16 path cast the FP32 aggregation weight before its convex mix;
 matched seed-7411 observations put the scalar gradient on exact BF16 reduction-grid increments.
-Review therefore rejects an unchanged retry and permits only forming the same last-state/mean-state
-convex mix in FP32 before one cast back to model dtype. The frozen nonzero-gradient gate may not be
-weakened. Any source repair invalidates every current setup receipt, so replay must begin from seed
-7411. Every seed's setup gate must pass before any result-bearing arm is authorized.
+Review therefore rejects an unchanged retry. The implemented repair forms the same
+last-state/mean-state convex mix in FP32 before one cast back to model dtype while retaining the BF16
+mean, and persistent G0 failures now have independent canonical/mirror evidence. The frozen
+nonzero-gradient gate was not weakened. This source repair invalidates every current setup receipt,
+so replay must begin from seed 7411. Every seed's setup gate must pass before any result-bearing arm
+is authorized.
 
 ## Why this experiment exists
 

@@ -15,7 +15,7 @@ MODEL_ID = "Qwen/Qwen3.5-4B"
 MODEL_REVISION = "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
 BACKEND = "transformers"
 EXPERIMENT_ID = "qwen35_4b_state_formation_capacity_adjudication"
-SOURCE_CONTRACT_VERSION = 5
+SOURCE_CONTRACT_VERSION = 6
 CONFIRMATORY_CONFIG_SHA256 = "eeb4e828526f750dce1258bcc91d03114c80688d300112e03d18c9d911489393"
 SOURCE_CONTRACT_FILES = (
     "scripts/archive_failed_attempt.py",
@@ -44,13 +44,58 @@ SOURCE_CONTRACT_FILES = (
     "tests/test_fullrank_delta.py",
     "tests/test_initialization.py",
     "tests/test_mechanics.py",
+    "tests/test_model_smoke_failure.py",
     "tests/test_objectives.py",
     "tests/test_optimizer_receipts.py",
     "tests/test_positive_control.py",
     "tests/test_receipt_contracts.py",
+    "tests/test_state_loop_aggregation.py",
     "tests/test_static_contracts.py",
     "tests/test_substrate.py",
 )
+
+# Durable failed-G0 receipts are resumable setup state, not free-form
+# diagnostics.  The producer and invalidated-setup archiver share this exact
+# progress language so an archived failure cannot claim impossible work.
+G0_COMPLETED_CHECKS = (
+    "branch_authorization",
+    "train_only_data_manifest",
+    "shared_initialization",
+    "pinned_model_and_wrapper_setup",
+    "registered_setup_rows_and_encoding",
+    "pre_optimizer_k1_parity",
+    "zero_function_and_k4_call_geometry",
+    "two_step_state_only_optimizer_probe",
+    "live_joint_backward_and_optimizer_probe",
+    "optimizer_state_receipt",
+    "timed_ten_step_probe",
+    "post_optimizer_k1_parity",
+    "worst_depth_probe",
+    "common_initialization_rng_isolation",
+    "checkpoint_roundtrip",
+    "memory_headroom",
+)
+G0_FAILURE_STAGE_PREFIX_LENGTHS = {
+    "branch_authorization": (0,),
+    "data_manifest": (1,),
+    # Initialization is captured inside the canonical loader, while the full
+    # setup binding is installed immediately after that loader returns.
+    "model_setup": (2, 3, 4),
+    "setup_rows_and_encoding": (4,),
+    "pre_optimizer_k1_parity": (5,),
+    "zero_function_and_k4_call_geometry": (6,),
+    "two_step_state_only_optimizer_probe": (7,),
+    "live_joint_backward_probe": (8,),
+    "live_joint_optimizer_step": (8,),
+    "optimizer_state_receipt": (9,),
+    "timed_ten_step_probe": (10,),
+    "post_optimizer_k1_parity": (11,),
+    "worst_depth_probe": (12,),
+    "common_initialization_rng_isolation": (13,),
+    "checkpoint_roundtrip": (14,),
+    "memory_headroom": (15,),
+    "receipt_construction": (16,),
+}
 
 
 def _merge(base: dict[str, Any], override: Mapping[str, Any]) -> dict[str, Any]:

@@ -41,7 +41,7 @@ class ConfigContractTests(unittest.TestCase):
         self.assertEqual(MODEL_ID, "Qwen/Qwen3.5-4B")
         self.assertEqual(MODEL_REVISION, "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a")
         self.assertEqual(BACKEND, "transformers")
-        self.assertEqual(SOURCE_CONTRACT_VERSION, 5)
+        self.assertEqual(SOURCE_CONTRACT_VERSION, 6)
         self.assertEqual(
             CONFIRMATORY_CONFIG_SHA256,
             "eeb4e828526f750dce1258bcc91d03114c80688d300112e03d18c9d911489393",
@@ -194,10 +194,12 @@ class ConfigContractTests(unittest.TestCase):
                 "tests/test_fullrank_delta.py",
                 "tests/test_initialization.py",
                 "tests/test_mechanics.py",
+                "tests/test_model_smoke_failure.py",
                 "tests/test_objectives.py",
                 "tests/test_optimizer_receipts.py",
                 "tests/test_positive_control.py",
                 "tests/test_receipt_contracts.py",
+                "tests/test_state_loop_aggregation.py",
                 "tests/test_static_contracts.py",
                 "tests/test_substrate.py",
             ),

@@ -1,6 +1,6 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · frozen design unchanged; seed-7412 LoRA G0 stopped fail-closed on an exact-zero BF16 aggregation-scalar gradient; numerical repair and complete setup regeneration required; no result run is authorized
+**Status:** in-progress · since 2026-07-13 · frozen design unchanged; seed-7412 LoRA G0 precision failure preserved; narrow FP32 aggregation and durable G0-failure repair reviewed `GO`; source-1d setup must be archived and regenerated; no result run is authorized
 
 ## Current status
 
@@ -40,15 +40,22 @@ scores 0/48, confirming that the setup path actually exercised the LoRA update.
 
 Seed-7412 LoRA G0 then stopped at the frozen live-joint reachability gate. Every one of the 124 LoRA
 tensors and every other required recurrent group had a finite nonzero gradient, the base model had
-none, and `aggregate_logit.grad` existed and was finite but had norm exactly zero. The current code
-casts that FP32 scalar gate to BF16 before the last-state/mean-state convex mix. Two otherwise matched
+none, and `aggregate_logit.grad` existed and was finite but had norm exactly zero. The pre-repair code
+cast that FP32 scalar gate to BF16 before the last-state/mean-state convex mix. Two otherwise matched
 seed-7411 G0 executions had aggregate gradients on exact BF16 reduction-grid increments, so an
 unchanged retry would risk retry-to-pass rather than adjudicate connectivity. The failure is preserved
 at receipt identity `ce3406f8…b634c`; it is setup-mechanics evidence only. No canonical seed-7412 G0
 receipt exists, seed 7413 is blocked, and no result training or sealed scoring is authorized. Review
 permits only a narrow FP32 convex-mix repair with the same row, masks, objective, schedule, threshold,
-and registered nonzero gate. Because that repair changes the source contract, all setup must be
-archived and regenerated and execution must restart from seed 7411.
+and registered nonzero gate. That repair is now implemented under source contract
+`d4269bf3…8b36`: the recurrent mean remains BF16, only the scalar convex mix is FP32, and the
+completed aggregate is cast back once. G0 failures now persist a nonauthorizing canonical receipt and
+an independent byte-identical source-qualified mirror without overwriting existing or symlinked
+paths. The complete suite passes 201/201, a CUDA BF16 adversarial probe reproduces legacy gradient
+zero versus repaired analytic gradient 0.045, and independent numerical/runtime/archive re-audits
+give `GO`. The frozen nonzero gate is unchanged. Because the repair changes the source contract, all
+source-`1d1368cf…434b0a` setup must be archived and regenerated and execution must restart from seed
+7411.
 
 ## Research program and prior anchors
 

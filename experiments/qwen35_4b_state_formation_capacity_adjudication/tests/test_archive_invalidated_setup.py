@@ -251,6 +251,59 @@ class InvalidatedSetupArchiveTests(unittest.TestCase):
         self._write_json(mirror, payload)
         return canonical, mirror
 
+    def _replace_g0_with_failure(self, capacity: str, seed: int) -> tuple[Path, Path]:
+        setup_dir = self.experiment / "runs" / "setup"
+        canonical = setup_dir / f"g0_{capacity}_seed{seed}.json"
+        prior = json.loads(canonical.read_text(encoding="utf-8"))
+        payload = self._signed(
+            {
+                "schema_version": 1,
+                "status": "SETUP_CONTROL_FAILED",
+                "phase": f"{capacity}_g0",
+                "backend": "transformers",
+                **self._common(),
+                "capacity": capacity,
+                "model_seed": seed,
+                "data_manifest_sha256": self.module._sha256(
+                    self.experiment / "data" / "generated" / "manifest.json"
+                ),
+                "branch_authorization": prior["branch_authorization"],
+                "shared_initialization": prior["setup"]["shared_initialization"],
+                "setup": prior["setup"],
+                "failure_stage": "live_joint_backward_probe",
+                "error_type": "RuntimeError",
+                "error": "synthetic live-joint reachability failure",
+                "completed_checks": [
+                    "branch_authorization",
+                    "train_only_data_manifest",
+                    "shared_initialization",
+                    "pinned_model_and_wrapper_setup",
+                    "registered_setup_rows_and_encoding",
+                    "pre_optimizer_k1_parity",
+                    "zero_function_and_k4_call_geometry",
+                    "two_step_state_only_optimizer_probe",
+                ],
+                "authorizes_positive_control": False,
+                "authorizes_training": False,
+                "authorizes_result_training": False,
+                "authorizes_result_evaluation": False,
+                "benchmark_files_read": 0,
+                "result_payloads_opened": ["train"],
+                "sealed_contrast_payloads_opened": [],
+                "training_or_evaluation_started": False,
+                "scientific_evidence": False,
+            }
+        )
+        self._write_json(canonical, payload)
+        mirror = (
+            self.experiment
+            / "runs"
+            / "failures"
+            / f"g0_{capacity}_seed{seed}_source_{self.OLD_SOURCE[:12]}.json"
+        )
+        self._write_json(mirror, payload)
+        return canonical, mirror
+
     def _source_paths(self) -> set[Path]:
         return {
             item.source
@@ -411,6 +464,263 @@ class InvalidatedSetupArchiveTests(unittest.TestCase):
             f"tracked_receipts/{canonical.name}",
             {record["path"] for record in receipt["files"]},
         )
+
+    def test_canonical_g0_failure_and_identical_mirror_are_preserved(self) -> None:
+        canonical, mirror = self._replace_g0_with_failure("lora", 7411)
+        receipt = self.module.archive_invalidated_setup(
+            self.config,
+            self.OLD_SOURCE,
+            mirror,
+        )
+        self.assertFalse(canonical.exists())
+        self.assertTrue(mirror.is_file())
+        archived = self._archive_root() / "tracked_receipts" / canonical.name
+        self.assertEqual(archived.read_bytes(), mirror.read_bytes())
+        self.assertIn(
+            f"tracked_receipts/{canonical.name}",
+            {record["path"] for record in receipt["files"]},
+        )
+
+    def test_early_g0_failure_without_unreached_lineage_is_archivable(self) -> None:
+        canonical, mirror = self._replace_g0_with_failure("lora", 7411)
+        payload = json.loads(canonical.read_text(encoding="utf-8"))
+        payload.pop("receipt_identity_sha256")
+        payload.update(
+            {
+                "data_manifest_sha256": None,
+                "shared_initialization": None,
+                "setup": None,
+                "failure_stage": "branch_authorization",
+                "completed_checks": [],
+                "result_payloads_opened": [],
+            }
+        )
+        payload = self._signed(payload)
+        self._write_json(canonical, payload)
+        self._write_json(mirror, payload)
+        self.module.archive_invalidated_setup(
+            self.config,
+            self.OLD_SOURCE,
+            mirror,
+        )
+        archived = self._archive_root() / "tracked_receipts" / canonical.name
+        self.assertEqual(archived.read_bytes(), mirror.read_bytes())
+
+    def test_model_setup_failure_may_precede_initialization_validation(self) -> None:
+        canonical, mirror = self._replace_g0_with_failure("lora", 7411)
+        payload = json.loads(canonical.read_text(encoding="utf-8"))
+        payload.pop("receipt_identity_sha256")
+        payload.update(
+            {
+                "shared_initialization": None,
+                "setup": None,
+                "failure_stage": "model_setup",
+                "completed_checks": [
+                    "branch_authorization",
+                    "train_only_data_manifest",
+                ],
+            }
+        )
+        payload = self._signed(payload)
+        self._write_json(canonical, payload)
+        self._write_json(mirror, payload)
+        self.module.archive_invalidated_setup(
+            self.config,
+            self.OLD_SOURCE,
+            mirror,
+        )
+        archived = self._archive_root() / "tracked_receipts" / canonical.name
+        self.assertEqual(archived.read_bytes(), mirror.read_bytes())
+
+    def test_fullrank_branch_failure_may_precede_authorization(self) -> None:
+        canonical, mirror = self._replace_g0_with_failure("fullrank", 7412)
+        payload = json.loads(canonical.read_text(encoding="utf-8"))
+        payload.pop("receipt_identity_sha256")
+        payload.update(
+            {
+                "branch_authorization": None,
+                "data_manifest_sha256": None,
+                "shared_initialization": None,
+                "setup": None,
+                "failure_stage": "branch_authorization",
+                "completed_checks": [],
+                "result_payloads_opened": [],
+            }
+        )
+        payload = self._signed(payload)
+        self._write_json(canonical, payload)
+        self._write_json(mirror, payload)
+        self.module.archive_invalidated_setup(
+            self.config,
+            self.OLD_SOURCE,
+            mirror,
+        )
+        archived = self._archive_root() / "tracked_receipts" / canonical.name
+        self.assertEqual(archived.read_bytes(), mirror.read_bytes())
+
+    def test_g0_failure_progress_must_be_an_exact_stage_prefix(self) -> None:
+        canonical, mirror = self._replace_g0_with_failure("lora", 7411)
+        original = json.loads(canonical.read_text(encoding="utf-8"))
+        mutations = (
+            ("unknown-stage", {"failure_stage": "invented_future_stage"}),
+            (
+                "duplicate-check",
+                {"completed_checks": [
+                    *original["completed_checks"],
+                    original["completed_checks"][-1],
+                ]},
+            ),
+            (
+                "out-of-order",
+                {"completed_checks": [
+                    original["completed_checks"][1],
+                    original["completed_checks"][0],
+                    *original["completed_checks"][2:],
+                ]},
+            ),
+            ("late-empty-access", {"result_payloads_opened": []}),
+            ("late-null-manifest", {"data_manifest_sha256": None}),
+        )
+        for label, changes in mutations:
+            with self.subTest(label=label):
+                mutated = copy.deepcopy(original)
+                mutated.pop("receipt_identity_sha256")
+                mutated.update(changes)
+                mutated = self._signed(mutated)
+                self._write_json(canonical, mutated)
+                self._write_json(mirror, mutated)
+                with self.assertRaises(RuntimeError):
+                    self.module.archive_invalidated_setup(
+                        self.config,
+                        self.OLD_SOURCE,
+                        self.trigger,
+                    )
+
+    def test_g0_failure_duplicate_initialization_bindings_must_both_match(self) -> None:
+        canonical, mirror = self._replace_g0_with_failure("lora", 7411)
+        payload = json.loads(canonical.read_text(encoding="utf-8"))
+        payload.pop("receipt_identity_sha256")
+        payload["shared_initialization"] = {"wrong": "top-level lineage"}
+        payload = self._signed(payload)
+        self._write_json(canonical, payload)
+        self._write_json(mirror, payload)
+        with self.assertRaisesRegex(RuntimeError, "top-level binding"):
+            self.module.archive_invalidated_setup(
+                self.config,
+                self.OLD_SOURCE,
+                self.trigger,
+            )
+
+    def test_g0_pass_new_access_contract_is_all_or_exact(self) -> None:
+        path = self.experiment / "runs" / "setup" / "g0_lora_seed7411.json"
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        payload.pop("receipt_identity_sha256")
+        payload["scientific_evidence"] = False
+        payload = self._signed(payload)
+        self._write_json(path, payload)
+        with self.assertRaisesRegex(RuntimeError, "partial access contract"):
+            self.module.archive_invalidated_setup(
+                self.config,
+                self.OLD_SOURCE,
+                self.trigger,
+            )
+
+    def test_g0_failure_missing_or_changed_mirror_is_rejected_without_deletion(self) -> None:
+        canonical, mirror = self._replace_g0_with_failure("lora", 7411)
+        source_paths = self._source_paths()
+        mirror.unlink()
+        with self.assertRaisesRegex(RuntimeError, "lacks its identical tracked mirror"):
+            self.module.archive_invalidated_setup(
+                self.config,
+                self.OLD_SOURCE,
+                self.trigger,
+            )
+        self.assertTrue(all(path.exists() for path in source_paths))
+        self._write_json(mirror, json.loads(canonical.read_text(encoding="utf-8")))
+        mirror.write_bytes(mirror.read_bytes() + b" ")
+        with self.assertRaisesRegex(RuntimeError, "lacks its identical tracked mirror"):
+            self.module.archive_invalidated_setup(
+                self.config,
+                self.OLD_SOURCE,
+                self.trigger,
+            )
+        self.assertTrue(all(path.exists() for path in source_paths))
+
+    def test_g0_failure_unsafe_access_or_authorization_is_rejected(self) -> None:
+        canonical, mirror = self._replace_g0_with_failure("lora", 7411)
+        original = json.loads(canonical.read_text(encoding="utf-8"))
+        for field, value, message in (
+            ("authorizes_positive_control", True, "authorizes_positive_control mismatch"),
+            ("result_payloads_opened", ["validation"], "unsafe result access"),
+            ("sealed_contrast_payloads_opened", ["contrast_depth"], "sealed_contrast_payloads_opened mismatch"),
+        ):
+            with self.subTest(field=field):
+                mutated = copy.deepcopy(original)
+                mutated.pop("receipt_identity_sha256")
+                mutated[field] = value
+                mutated = self._signed(mutated)
+                self._write_json(canonical, mutated)
+                self._write_json(mirror, mutated)
+                with self.assertRaisesRegex(RuntimeError, message):
+                    self.module.archive_invalidated_setup(
+                        self.config,
+                        self.OLD_SOURCE,
+                        self.trigger,
+                    )
+                self.assertFalse(self._archive_root().exists())
+
+    def test_g0_failure_wrong_phase_or_initialization_is_rejected(self) -> None:
+        canonical, mirror = self._replace_g0_with_failure("lora", 7411)
+        original = json.loads(canonical.read_text(encoding="utf-8"))
+        mutations = (
+            ("phase", "fullrank_g0", "phase mismatch"),
+            ("shared_initialization", {"wrong": True}, "wrong initialization lineage"),
+        )
+        for field, value, message in mutations:
+            with self.subTest(field=field):
+                mutated = copy.deepcopy(original)
+                mutated.pop("receipt_identity_sha256")
+                mutated[field] = value
+                if field == "shared_initialization":
+                    mutated["setup"] = None
+                mutated = self._signed(mutated)
+                self._write_json(canonical, mutated)
+                self._write_json(mirror, mutated)
+                with self.assertRaisesRegex(RuntimeError, message):
+                    self.module.archive_invalidated_setup(
+                        self.config,
+                        self.OLD_SOURCE,
+                        self.trigger,
+                    )
+                self.assertFalse(self._archive_root().exists())
+
+    def test_failed_g0_cannot_coexist_with_positive_control(self) -> None:
+        self._replace_g0_with_failure("lora", 7411)
+        self._add_positive_control_failure("lora", 7411)
+        source_paths = self._source_paths()
+        with self.assertRaisesRegex(RuntimeError, "cannot coexist with a positive control"):
+            self.module.archive_invalidated_setup(
+                self.config,
+                self.OLD_SOURCE,
+                self.trigger,
+            )
+        self.assertTrue(all(path.exists() for path in source_paths))
+
+    @unittest.skipUnless(hasattr(os, "symlink"), "symlink creation is unavailable")
+    def test_symlinked_g0_failure_mirror_is_rejected(self) -> None:
+        _, mirror = self._replace_g0_with_failure("lora", 7411)
+        source_paths = self._source_paths()
+        target = mirror.with_name("g0-mirror-target.json")
+        mirror.rename(target)
+        mirror.symlink_to(target)
+        with self.assertRaisesRegex(RuntimeError, "lacks its identical tracked mirror"):
+            self.module.archive_invalidated_setup(
+                self.config,
+                self.OLD_SOURCE,
+                self.trigger,
+            )
+        self.assertTrue(all(path.exists() for path in source_paths))
+        self.assertFalse(self._archive_root().exists())
 
     @unittest.skipUnless(hasattr(os, "symlink"), "symlink creation is unavailable")
     def test_symlinked_positive_control_failure_mirror_is_rejected(self) -> None:
@@ -583,6 +893,43 @@ class InvalidatedSetupArchiveTests(unittest.TestCase):
         self.assertTrue(all(not path.exists() for path in source_paths))
         self.assertFalse((self.experiment / "runs" / "cpu_smoke").exists())
         self.assertFalse((self.experiment / "runs" / "setup").exists())
+
+    def test_resume_revalidates_nontrigger_failed_g0_mirror_before_deletion(self) -> None:
+        _, mirror = self._replace_g0_with_failure("lora", 7411)
+        source_paths = self._source_paths()
+        original_unlink = self.module._unlink_source
+        calls = 0
+
+        def fail_second(path: Path) -> None:
+            nonlocal calls
+            calls += 1
+            if calls == 2:
+                raise OSError(errno.EIO, "synthetic second-unlink failure")
+            original_unlink(path)
+
+        with mock.patch.object(self.module, "_unlink_source", side_effect=fail_second):
+            with self.assertRaisesRegex(OSError, "second-unlink failure"):
+                self.module.archive_invalidated_setup(
+                    self.config,
+                    self.OLD_SOURCE,
+                    self.trigger,
+                )
+        remaining_before_resume = {
+            path for path in source_paths if os.path.lexists(path)
+        }
+        self.assertTrue(remaining_before_resume)
+        mirror.unlink()
+
+        with self.assertRaisesRegex(RuntimeError, "lacks its identical tracked mirror"):
+            self.module.archive_invalidated_setup(
+                self.config,
+                self.OLD_SOURCE,
+                self.trigger,
+            )
+        self.assertEqual(
+            remaining_before_resume,
+            {path for path in source_paths if os.path.lexists(path)},
+        )
 
     def test_rmdir_failure_resumes_after_all_sources_are_absent(self) -> None:
         source_paths = self._source_paths()

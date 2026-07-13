@@ -30,6 +30,7 @@ from transformers.utils.import_utils import (
 
 from .adaptation import microbatch_dropout_seed
 from .config import (
+    G0_COMPLETED_CHECKS,
     MODEL_ID,
     MODEL_REVISION,
     config_sha256,
@@ -87,6 +88,105 @@ def _atomic_copy(source: Path, destination: Path) -> None:
         writer.flush()
         os.fsync(writer.fileno())
     os.replace(temporary, destination)
+
+
+def _fsync_directory(path: Path) -> None:
+    descriptor = os.open(path, os.O_RDONLY | os.O_DIRECTORY)
+    try:
+        os.fsync(descriptor)
+    finally:
+        os.close(descriptor)
+
+
+def _require_no_symlink_ancestors(path: Path) -> None:
+    current = path.parent
+    while True:
+        if current.is_symlink():
+            raise RuntimeError(f"refusing to persist through symlinked ancestor: {current}")
+        parent = current.parent
+        if parent == current:
+            return
+        current = parent
+
+
+def _write_new_json_pair(
+    canonical: Path,
+    mirror: Path,
+    payload: Mapping[str, Any],
+) -> None:
+    """Install one serialized receipt at two new paths without replacement.
+
+    The source-qualified mirror is linked first so a process interruption can
+    never leave only an untracked canonical failure.  One serialization is
+    written to two independently fsynced staging inodes, preventing later
+    in-place mutation of either final path from changing the other.  Existing
+    regular files, symlinks, and broken symlinks are all immutable.
+    """
+
+    _require_no_symlink_ancestors(canonical)
+    _require_no_symlink_ancestors(mirror)
+    canonical.parent.mkdir(parents=True, exist_ok=True)
+    mirror.parent.mkdir(parents=True, exist_ok=True)
+    _require_no_symlink_ancestors(canonical)
+    _require_no_symlink_ancestors(mirror)
+    for path in (canonical, mirror):
+        if os.path.lexists(path):
+            raise RuntimeError(f"refusing to overwrite failure receipt: {path}")
+    encoded = (json.dumps(payload, indent=2, sort_keys=True) + "\n").encode("utf-8")
+    temporaries: list[Path] = []
+    try:
+        for destination in (mirror, canonical):
+            descriptor, temporary_name = tempfile.mkstemp(
+                prefix=f".{destination.name}.tmp-", dir=destination.parent
+            )
+            temporary = Path(temporary_name)
+            temporaries.append(temporary)
+            with os.fdopen(descriptor, "wb") as handle:
+                handle.write(encoded)
+                handle.flush()
+                os.fsync(handle.fileno())
+        mirror_temporary, canonical_temporary = temporaries
+        os.link(mirror_temporary, mirror, follow_symlinks=False)
+        _fsync_directory(mirror.parent)
+        os.link(canonical_temporary, canonical, follow_symlinks=False)
+        _fsync_directory(canonical.parent)
+    finally:
+        cleaned_parents: set[Path] = set()
+        for temporary in temporaries:
+            if temporary.exists():
+                temporary.unlink()
+                cleaned_parents.add(temporary.parent)
+        for parent in cleaned_parents:
+            _fsync_directory(parent)
+
+
+def _write_new_json(path: Path, payload: Mapping[str, Any]) -> None:
+    """Durably install one new JSON file without ever replacing a leaf."""
+
+    _require_no_symlink_ancestors(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    _require_no_symlink_ancestors(path)
+    if os.path.lexists(path):
+        raise RuntimeError(f"refusing to overwrite receipt: {path}")
+    encoded = (json.dumps(payload, indent=2, sort_keys=True) + "\n").encode("utf-8")
+    descriptor, temporary_name = tempfile.mkstemp(
+        prefix=f".{path.name}.tmp-", dir=path.parent
+    )
+    temporary = Path(temporary_name)
+    try:
+        with os.fdopen(descriptor, "wb") as handle:
+            handle.write(encoded)
+            handle.flush()
+            os.fsync(handle.fileno())
+        try:
+            os.link(temporary, path, follow_symlinks=False)
+        except FileExistsError as exc:
+            raise RuntimeError(f"refusing to overwrite receipt: {path}") from exc
+        _fsync_directory(path.parent)
+    finally:
+        if temporary.exists():
+            temporary.unlink()
+            _fsync_directory(temporary.parent)
 
 
 def _append_jsonl(path: Path, payload: Mapping[str, Any]) -> None:
@@ -163,7 +263,7 @@ def _resolve_repo_path(value: str) -> Path:
 
 
 def _require_new_output(path: Path, *, directory: bool, kind: str) -> None:
-    if path.exists():
+    if os.path.lexists(path):
         raise RuntimeError(f"refusing to resume or overwrite {kind}: {path}")
     if directory:
         path.mkdir(parents=True, exist_ok=False)
@@ -263,6 +363,8 @@ def _read_receipt(
         raise RuntimeError(f"{label} receipt is missing: {path}")
     receipt = json.loads(path.read_text(encoding="utf-8"))
     status = str(receipt.get("status", receipt.get("verdict", "")))
+    if status == "SETUP_CONTROL_FAILED":
+        raise RuntimeError(f"{label} did not authorize this stage: {status!r}")
     if status not in statuses or receipt.get("phase") not in phases:
         raise RuntimeError(f"{label} did not authorize this stage: {status!r}/{receipt.get('phase')!r}")
     claimed = receipt.get("receipt_identity_sha256")
@@ -277,6 +379,39 @@ def _read_receipt(
     ):
         if receipt.get(key) != expected[key]:
             raise RuntimeError(f"{label} identity mismatch for {key}")
+    return receipt
+
+
+def _read_g0_pass(
+    path: Path,
+    config: Mapping[str, Any],
+    *,
+    capacity: str,
+) -> dict[str, Any]:
+    """Read a G0 pass only when its access and authorization claims are exact."""
+
+    receipt = _read_receipt(
+        path,
+        config,
+        statuses={"MODEL_SMOKE_PASS"},
+        phases={f"{capacity}_g0"},
+        label=f"{capacity} G0",
+    )
+    expected = {
+        "authorizes_positive_control": True,
+        "authorizes_training": False,
+        "authorizes_result_training": False,
+        "authorizes_result_evaluation": False,
+        "benchmark_files_read": 0,
+        "result_payloads_opened": ["train"],
+        "sealed_contrast_payloads_opened": [],
+        "training_or_evaluation_started": False,
+        "scientific_evidence": False,
+    }
+    for field, value in expected.items():
+        actual = receipt.get(field)
+        if type(actual) is not type(value) or actual != value:
+            raise RuntimeError(f"{capacity} G0 has invalid {field}")
     return receipt
 
 
@@ -719,6 +854,7 @@ def _build_new(
     capacity: str,
     model_seed: int,
     initialization_bundle: Path,
+    failure_state: dict[str, Any] | None = None,
 ) -> tuple[Any, StateLoopModel, dict[str, Any]]:
     if capacity not in {"lora", "fullrank"}:
         raise ValueError(capacity)
@@ -727,6 +863,9 @@ def _build_new(
     shared_state, init_receipt = load_initialization_bundle(
         config, model_seed, initialization_bundle
     )
+    if failure_state is not None:
+        failure_state["shared_initialization"] = init_receipt
+        _mark_g0_complete(failure_state, "shared_initialization")
     tokenizer, base, token_receipt = _load_base(config)
     arch = config["architecture"]
     targets = _discover_targets(base, int(arch["loop_start"]), int(arch["loop_end"]))
@@ -963,6 +1102,36 @@ def _authorization_for(
     return _read_receipt(path, config, statuses=statuses, phases=phases, label="branch authorization")
 
 
+def _g0_failure_mirror_path(
+    capacity: str,
+    model_seed: int,
+    source_contract: str,
+) -> Path:
+    return (
+        ROOT
+        / "runs"
+        / "failures"
+        / f"g0_{capacity}_seed{model_seed}_source_{source_contract[:12]}.json"
+    )
+
+
+def _mark_g0_complete(failure_state: dict[str, Any], check: str) -> None:
+    """Append exactly the next registered G0 check and reject progress drift."""
+
+    completed = failure_state.get("completed_checks")
+    if not isinstance(completed, list):
+        raise RuntimeError("G0 failure state lacks a completed-check list")
+    expected_prefix = list(G0_COMPLETED_CHECKS[: len(completed)])
+    if completed != expected_prefix:
+        raise RuntimeError("G0 completed checks are not the registered ordered prefix")
+    if len(completed) >= len(G0_COMPLETED_CHECKS):
+        raise RuntimeError("G0 completed-check sequence is already complete")
+    expected = G0_COMPLETED_CHECKS[len(completed)]
+    if check != expected:
+        raise RuntimeError(f"G0 check order changed: expected {expected}, found {check}")
+    completed.append(check)
+
+
 def model_smoke(
     config: Mapping[str, Any],
     output: Path,
@@ -976,7 +1145,88 @@ def model_smoke(
     validate_design_receipt(config)
     if model_seed not in set(map(int, config["training"]["train_seeds"])):
         raise RuntimeError("model-smoke seed is not preregistered")
+    expected_output = (
+        ROOT
+        / config["paths"]["runs_dir"]
+        / "setup"
+        / f"g0_{capacity}_seed{model_seed}.json"
+    )
+    if output.resolve() != expected_output.resolve():
+        raise RuntimeError(f"model-smoke output is not canonical: {output}")
+    _require_no_symlink_ancestors(output)
     _require_new_output(output, directory=False, kind="model-smoke receipt")
+    common_identity = _identity(config, phase=f"{capacity}_g0")
+    failure_mirror = _g0_failure_mirror_path(
+        capacity, model_seed, common_identity["source_contract_sha256"]
+    )
+    _require_no_symlink_ancestors(failure_mirror)
+    if os.path.lexists(failure_mirror):
+        raise RuntimeError(
+            f"refusing to replay model smoke with an existing failure mirror: {failure_mirror}"
+        )
+    failure_state: dict[str, Any] = {
+        "failure_stage": "branch_authorization",
+        "completed_checks": [],
+        "data_manifest_sha256": None,
+        "branch_authorization": None,
+        "setup": None,
+        "shared_initialization": None,
+        "result_payloads_opened": [],
+    }
+    try:
+        receipt = _model_smoke_attempt(
+            config,
+            capacity=capacity,
+            model_seed=model_seed,
+            initialization_bundle=initialization_bundle,
+            authorization_receipt=authorization_receipt,
+            failure_state=failure_state,
+        )
+    except Exception as exc:
+        failure = _with_identity({
+            "schema_version": 1,
+            "status": "SETUP_CONTROL_FAILED",
+            **common_identity,
+            "capacity": capacity,
+            "model_seed": int(model_seed),
+            "data_manifest_sha256": failure_state["data_manifest_sha256"],
+            "branch_authorization": failure_state["branch_authorization"],
+            "shared_initialization": failure_state["shared_initialization"],
+            "setup": failure_state["setup"],
+            "failure_stage": failure_state["failure_stage"],
+            "error_type": type(exc).__name__,
+            "error": str(exc) or repr(exc) or type(exc).__name__,
+            "completed_checks": failure_state["completed_checks"],
+            "live_joint_gradient_summary": failure_state.get(
+                "live_joint_gradient_summary"
+            ),
+            "live_joint_dropout_probe": failure_state.get(
+                "live_joint_dropout_probe"
+            ),
+            "authorizes_positive_control": False,
+            "authorizes_training": False,
+            "authorizes_result_training": False,
+            "authorizes_result_evaluation": False,
+            "benchmark_files_read": 0,
+            "result_payloads_opened": failure_state["result_payloads_opened"],
+            "sealed_contrast_payloads_opened": [],
+            "training_or_evaluation_started": False,
+            "scientific_evidence": False,
+        })
+        _write_new_json_pair(output, failure_mirror, failure)
+        raise
+    _write_new_json(output, receipt)
+
+
+def _model_smoke_attempt(
+    config: Mapping[str, Any],
+    *,
+    capacity: str,
+    model_seed: int,
+    initialization_bundle: Path,
+    authorization_receipt: Path | None,
+    failure_state: dict[str, Any],
+) -> dict[str, Any]:
     if capacity == "fullrank":
         authorization = _authorization_for(
             config, capacity, "joint", authorization_receipt
@@ -985,15 +1235,30 @@ def model_smoke(
         raise RuntimeError("LoRA model smoke accepts no branch authorization")
     else:
         authorization = None
+    failure_state["branch_authorization"] = (
+        _lineage(authorization_receipt, authorization)
+        if authorization_receipt and authorization else None
+    )
+    _mark_g0_complete(failure_state, "branch_authorization")
+    failure_state["failure_stage"] = "data_manifest"
+    failure_state["result_payloads_opened"] = ["train"]
     data_dir, data_manifest, data_manifest_sha256 = _load_data_manifest(
         config, content_splits={"train"}
     )
+    failure_state["data_manifest_sha256"] = data_manifest_sha256
+    _mark_g0_complete(failure_state, "train_only_data_manifest")
+    failure_state["failure_stage"] = "model_setup"
     started = time.time()
     torch.cuda.reset_peak_memory_stats()
     tokenizer, wrapper, setup = _build_new(
         config, capacity=capacity, model_seed=model_seed,
         initialization_bundle=initialization_bundle,
+        failure_state=failure_state,
     )
+    failure_state["setup"] = setup
+    failure_state["shared_initialization"] = setup["shared_initialization"]
+    _mark_g0_complete(failure_state, "pinned_model_and_wrapper_setup")
+    failure_state["failure_stage"] = "setup_rows_and_encoding"
     training_rows = read_jsonl(data_dir / "train.jsonl.gz")
     row = next(item for item in training_rows if int(item["depth"]) == 4)
     substrate = config["substrate"]
@@ -1026,7 +1291,9 @@ def model_smoke(
     if worst_k != int(config["architecture"]["max_recurrence"]):
         raise RuntimeError("G0 worst row is not the registered maximum recurrence")
     worst_batch = _encode_row(tokenizer, worst, config, k=worst_k, device=torch.device("cuda"))
+    _mark_g0_complete(failure_state, "registered_setup_rows_and_encoding")
 
+    failure_state["failure_stage"] = "pre_optimizer_k1_parity"
     wrapper.eval()
     wrapper.adaptation.reset_call_count()
     parity_before = _k1_parity(wrapper, k1_batch)
@@ -1034,6 +1301,8 @@ def model_smoke(
     allowed = float(config["gates"]["k1_max_logit_abs_error"])
     if parity_before > allowed or k1_adaptation_calls != 0:
         raise RuntimeError(f"K=1 parity failed before optimizer: {parity_before}")
+    _mark_g0_complete(failure_state, "pre_optimizer_k1_parity")
+    failure_state["failure_stage"] = "zero_function_and_k4_call_geometry"
     wrapper.adaptation.reset_call_count()
     with torch.no_grad(), torch.autocast("cuda", dtype=torch.bfloat16):
         enabled = _forward(wrapper, batch, k=4, compute_answer=True)
@@ -1046,7 +1315,9 @@ def model_smoke(
     zero_function_error = float((enabled.answer_logits - disabled.answer_logits).abs().max().cpu())
     if zero_function_error != 0.0:
         raise RuntimeError("zero-function adaptation changed initial logits")
+    _mark_g0_complete(failure_state, "zero_function_and_k4_call_geometry")
 
+    failure_state["failure_stage"] = "two_step_state_only_optimizer_probe"
     adaptation_parameters, common_parameters = _parameter_groups(wrapper)
     optimizer = _build_optimizer(
         adaptation_parameters,
@@ -1098,6 +1369,8 @@ def model_smoke(
                 "preclip_common_gradient_norm": float(common_norm.detach().cpu()),
             }
         )
+    _mark_g0_complete(failure_state, "two_step_state_only_optimizer_probe")
+    failure_state["failure_stage"] = "live_joint_backward_probe"
     optimizer.zero_grad(set_to_none=True)
     joint_dropout_seed = microbatch_dropout_seed(model_seed, 3, str(row["id"]), 4)
     wrapper.adaptation.begin_microbatch(joint_dropout_seed, capture_masks=True)
@@ -1116,6 +1389,7 @@ def model_smoke(
     torch.cuda.synchronize()
     joint_elapsed = time.time() - joint_started
     joint_dropout_probe = wrapper.adaptation.end_microbatch()
+    failure_state["live_joint_dropout_probe"] = joint_dropout_probe
     if (
         joint_dropout_probe["calls"] != expected_calls
         or joint_dropout_probe["cycles"] != 3
@@ -1124,6 +1398,7 @@ def model_smoke(
     ):
         raise RuntimeError("live joint G0 adaptation schedule changed")
     joint_gradients = _gradient_receipt(wrapper)
+    failure_state["live_joint_gradient_summary"] = joint_gradients
     joint_required_groups = (
         "adaptation", "initializer", "step", "sufficiency", "damping",
         "aggregate_exempt",
@@ -1136,6 +1411,7 @@ def model_smoke(
     )
     if joint_gradients["base_gradient_tensors"] != 0 or not joint_gradients_complete:
         raise RuntimeError(f"live joint G0 gradient reachability failed: {joint_gradients}")
+    failure_state["failure_stage"] = "live_joint_optimizer_step"
     joint_adaptation_norm = torch.nn.utils.clip_grad_norm_(
         adaptation_parameters, float(config["training"]["adaptation_gradient_clip"])
     )
@@ -1168,12 +1444,16 @@ def model_smoke(
             float(config["training"]["common_gradient_clip"]),
         ),
     }
+    _mark_g0_complete(failure_state, "live_joint_backward_and_optimizer_probe")
+    failure_state["failure_stage"] = "optimizer_state_receipt"
     optimizer_receipt = optimizer_state_receipt(
         optimizer, delta_parameters=adaptation_parameters
     )
+    _mark_g0_complete(failure_state, "optimizer_state_receipt")
 
     # A fixed ten-step state-only timing probe catches practical OOM/nonfinite
     # behavior without producing a scientific checkpoint.
+    failure_state["failure_stage"] = "timed_ten_step_probe"
     torch.cuda.synchronize()
     timed_started = time.time()
     timed_losses = []
@@ -1207,13 +1487,17 @@ def model_smoke(
         timed_losses.append(float(timed_loss.detach().cpu()))
     torch.cuda.synchronize()
     timed_seconds = time.time() - timed_started
+    _mark_g0_complete(failure_state, "timed_ten_step_probe")
 
+    failure_state["failure_stage"] = "post_optimizer_k1_parity"
     wrapper.adaptation.reset_call_count()
     parity_after = _k1_parity(wrapper, k1_batch)
     k1_adaptation_calls_after_optimizer = wrapper.adaptation.active_call_count
     if parity_after > allowed or k1_adaptation_calls_after_optimizer != 0:
         raise RuntimeError(f"K=1 parity failed after optimizer: {parity_after}")
+    _mark_g0_complete(failure_state, "post_optimizer_k1_parity")
 
+    failure_state["failure_stage"] = "worst_depth_probe"
     wrapper.train()
     worst_dropout_seed = microbatch_dropout_seed(
         model_seed, 99, str(worst["id"]), worst_k
@@ -1249,9 +1533,11 @@ def model_smoke(
     if any(tensor is None or not bool(torch.isfinite(tensor).all()) for tensor in worst_tensors):
         raise RuntimeError("worst-depth output is nonfinite")
     worst_seconds = time.time() - worst_started
+    _mark_g0_complete(failure_state, "worst_depth_probe")
 
     # Rebuild the serialized common state after unrelated RNG consumption and
     # require exact tensor equality with the per-seed bundle.
+    failure_state["failure_stage"] = "common_initialization_rng_isolation"
     _ = torch.rand(4096)
     rebuilt_manifest, rebuilt_digest = tensor_manifest(build_shared_state(config, model_seed))
     init_metadata = setup["shared_initialization"]["metadata"]
@@ -1262,7 +1548,9 @@ def model_smoke(
     }
     if not rng_isolation["tensor_manifest_equal"] or rebuilt_digest != init_metadata["tensor_values_sha256"]:
         raise RuntimeError("common initialization changed after unrelated RNG consumption")
+    _mark_g0_complete(failure_state, "common_initialization_rng_isolation")
 
+    failure_state["failure_stage"] = "checkpoint_roundtrip"
     wrapper.eval()
     with tempfile.TemporaryDirectory(prefix=f"state-capacity-{capacity}-") as temporary:
         adaptation_path = Path(temporary) / "adaptation.pt"
@@ -1312,11 +1600,15 @@ def model_smoke(
         }
     if roundtrip_error != 0.0:
         raise RuntimeError("checkpoint payload roundtrip changed recurrent logits")
+    _mark_g0_complete(failure_state, "checkpoint_roundtrip")
+    failure_state["failure_stage"] = "memory_headroom"
     free_memory_after_g0 = torch.cuda.mem_get_info(0)[0] / (1024**3)
     if free_memory_after_g0 < 4.0:
         raise RuntimeError(
             f"G0 leaves insufficient registered VRAM headroom: {free_memory_after_g0:.2f} GiB"
         )
+    _mark_g0_complete(failure_state, "memory_headroom")
+    failure_state["failure_stage"] = "receipt_construction"
 
     receipt = _with_identity({
         "schema_version": 1,
@@ -1359,8 +1651,17 @@ def model_smoke(
         "common_initialization_rng_isolation": rng_isolation,
         "free_memory_gib_after_g0": free_memory_after_g0,
         "elapsed_seconds": time.time() - started,
+        "authorizes_positive_control": True,
+        "authorizes_training": False,
+        "authorizes_result_training": False,
+        "authorizes_result_evaluation": False,
+        "benchmark_files_read": 0,
+        "result_payloads_opened": ["train"],
+        "sealed_contrast_payloads_opened": [],
+        "training_or_evaluation_started": False,
+        "scientific_evidence": False,
     })
-    _write_json(output, receipt)
+    return receipt
 
 
 def _oracle_readout_control(wrapper: StateLoopModel, config: Mapping[str, Any]) -> float:
@@ -1969,9 +2270,10 @@ def positive_control(
     }
     wrapper: StateLoopModel | None = None
     try:
-        g0 = _read_receipt(
-            model_smoke_receipt, config, statuses={"MODEL_SMOKE_PASS"},
-            phases={f"{capacity}_g0"}, label=f"{capacity} G0",
+        g0 = _read_g0_pass(
+            model_smoke_receipt,
+            config,
+            capacity=capacity,
         )
         failure_stage = "branch_authorization"
         if capacity == "fullrank":
@@ -2370,7 +2672,7 @@ def positive_control(
             "oracle_readout_accuracy": oracle_accuracy,
             "failure_stage": failure_stage,
             "error_type": type(exc).__name__,
-            "error": str(exc),
+            "error": str(exc) or repr(exc) or type(exc).__name__,
             "completed_updates": completed_updates,
             "completed_microbatches": completed_microbatches,
             "training_diagnostics": diagnostics,
@@ -2506,9 +2808,10 @@ def train(
         raise ValueError(f"invalid training cell: {capacity}/{objective}")
     if model_seed not in set(map(int, config["training"]["train_seeds"])):
         raise RuntimeError("model seed is not preregistered")
-    g0 = _read_receipt(
-        model_smoke_receipt, config, statuses={"MODEL_SMOKE_PASS"},
-        phases={f"{capacity}_g0"}, label=f"{capacity} G0",
+    g0 = _read_g0_pass(
+        model_smoke_receipt,
+        config,
+        capacity=capacity,
     )
     control = _read_receipt(
         positive_control_receipt, config, statuses={"POSITIVE_CONTROL_PASS"},

@@ -88,16 +88,19 @@ notes: >-
   its aggregation scalar had a present finite gradient of exact norm zero while all other required
   trainable groups were finite and nonzero. The tracked-only failure receipt identity is
   ce3406f8fa788c08421687d5d6a0843a2eb7035fd254d5086123d895b2bb634c; no canonical seed-7412 G0
-  output exists and the receipt authorizes nothing. A reviewed FP32 convex-mix repair will change the
-  source contract, so the current source-1d1368 setup must be archived intact before regeneration and
-  replay from seed 7411.
+  output exists and the receipt authorizes nothing. The reviewed FP32 convex-mix and durable G0
+  failure-persistence repair is complete under replacement source
+  d4269bf34f7c80affcc8c1e8a33fee9afddcd912d1bd9dead223e520ee108b36 with 201/201 tests passing.
+  The current source-1d1368 setup must be archived intact before regeneration and replay from seed
+  7411; it remains present and unmodified until that transaction runs.
   The first Qwen load stopped before wrapper construction or mechanics and is preserved by a tracked
   failure receipt; it opened
   only the permitted training validator, no sealed contrast, and produced no canonical G0 output.
   The second Qwen load passed every registered in-memory G0 mechanic but failed at the final receipt
   write because a local probe value shadowed the output path. It also produced no canonical G0
   output, opened no sealed contrast, and authorizes no positive control or result-bearing stage.
-  No positive-control pass or result-bearing artifact exists. Populate exact SHA256 values only from
+  Those two attempts produced no positive-control pass or result-bearing artifact; the later
+  canonical seed-7411 positive-control pass is recorded above. Populate exact SHA256 values only from
   regenerated receipts after each later artifact is created. Small data manifests,
   the contrast access ledger, the canonical reports/design_receipt.json, initialization receipts,
   mechanics and branch receipts, training metrics, evaluation rows and summaries, analysis outputs,

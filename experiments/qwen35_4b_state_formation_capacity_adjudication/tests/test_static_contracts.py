@@ -772,7 +772,7 @@ class StaticContractTests(unittest.TestCase):
             for node in tree.body
             if isinstance(node, ast.FunctionDef)
         }
-        smoke = functions["model_smoke"]
+        smoke = functions["_model_smoke_attempt"]
         gradients = functions["_gradient_receipt"]
         self.assertIn("for probe_step in (1, 2):", smoke)
         self.assertIn('probe_step == 2', smoke)
@@ -808,7 +808,7 @@ class StaticContractTests(unittest.TestCase):
             next(
                 node
                 for node in tree.body
-                if isinstance(node, ast.FunctionDef) and node.name == "model_smoke"
+                if isinstance(node, ast.FunctionDef) and node.name == "_model_smoke_attempt"
             ),
         ) or ""
         joint_start = smoke.index("joint_dropout_seed =")
@@ -1081,22 +1081,25 @@ class StaticContractTests(unittest.TestCase):
         }
         self.assertIn(
             'content_splits={"train"}',
-            functions["model_smoke"],
+            functions["_model_smoke_attempt"],
         )
         self.assertIn(
             'seed=int(config["training"]["g0_control"]["worst_depth_seed"])',
-            functions["model_smoke"],
+            functions["_model_smoke_attempt"],
         )
         self.assertIn(
             'worst["structural_fingerprint"] in result_fingerprints',
-            functions["model_smoke"],
+            functions["_model_smoke_attempt"],
         )
         self.assertIn(
             '"cross_result_structural_overlap": 0',
-            functions["model_smoke"],
+            functions["_model_smoke_attempt"],
         )
         for split in ("validation", "depth_extrapolation", "joint_holdout"):
-            self.assertNotIn(f'read_jsonl(data_dir / "{split}.jsonl.gz")', functions["model_smoke"])
+            self.assertNotIn(
+                f'read_jsonl(data_dir / "{split}.jsonl.gz")',
+                functions["_model_smoke_attempt"],
+            )
         self.assertIn("content_splits=set()", functions["positive_control"])
         self.assertIn('content_splits={"train"}', functions["train"])
         for name in ("model_smoke", "positive_control", "train"):

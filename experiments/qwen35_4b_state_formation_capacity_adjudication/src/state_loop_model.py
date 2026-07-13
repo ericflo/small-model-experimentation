@@ -32,6 +32,31 @@ class StateLoopOutput:
     diagnostics: dict[str, Any]
 
 
+def _aggregate_recurrent_states(
+    states: tuple[torch.Tensor, ...] | list[torch.Tensor],
+    aggregate_logit: torch.Tensor,
+) -> torch.Tensor:
+    """Form the registered last/mean convex mix without quantizing its scalar path.
+
+    Recurrent states and their mean retain the live model dtype.  Only the
+    one-scalar convex mix is evaluated in FP32, outside autocast, before one
+    cast back to the recurrent-state dtype.  This preserves the registered
+    aggregation while preventing BF16 reduction-grid cancellation from
+    spuriously severing the live-joint reachability probe.
+    """
+
+    stacked = torch.stack(tuple(states), dim=1)
+    mean_state = stacked.mean(dim=1)
+    last_state = stacked[:, -1]
+    with torch.autocast(device_type=last_state.device.type, enabled=False):
+        last_weight = torch.sigmoid(aggregate_logit.float())
+        aggregate_fp32 = (
+            last_weight * last_state.float()
+            + (1.0 - last_weight) * mean_state.float()
+        )
+    return aggregate_fp32.to(dtype=states[0].dtype)
+
+
 class SinusoidalStepEncoder(nn.Module):
     """Stationary step signal defined beyond the trained recurrence horizon."""
 
@@ -350,11 +375,7 @@ class StateLoopModel(nn.Module):
                     updated = state_override[step].to(updated)
                 states.append(updated)
                 previous = updated
-            stacked_for_aggregate = torch.stack(states, dim=1)
-            last_weight = torch.sigmoid(self.aggregate_logit).to(dtype=first_state.dtype)
-            aggregated = last_weight * stacked_for_aggregate[:, -1] + (
-                1.0 - last_weight
-            ) * stacked_for_aggregate.mean(dim=1)
+            aggregated = _aggregate_recurrent_states(states, self.aggregate_logit)
 
         answer_logits = None
         answer_loss = None
