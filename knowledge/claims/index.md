@@ -2,14 +2,14 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 58
+- Claims: 59
 
 ## Status Counts
 
 | Status | Claims |
 | --- | ---: |
 | Confirmed | 7 |
-| Negative | 3 |
+| Negative | 4 |
 | Open | 2 |
 | Promising | 46 |
 
@@ -23,13 +23,13 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | `benchmark_generalization` | 13 |
 | `collective_experimentation_infrastructure` | 2 |
 | `evidence_conditioned_selection` | 11 |
-| `interpretability_and_diagnostics` | 9 |
+| `interpretability_and_diagnostics` | 10 |
 | `operator_and_skill_inventories` | 1 |
 | `posttraining_and_adaptation` | 30 |
 | `process_control_and_tool_use` | 3 |
 | `reliability_and_safety` | 7 |
 | `structured_execution_and_compilers` | 29 |
-| `test_time_reasoning_budget` | 11 |
+| `test_time_reasoning_budget` | 12 |
 
 ## C1: Structured intermediates improve small-model reliability
 
@@ -1418,3 +1418,25 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - Do not phrase the isolated re-computation abstractly ('what is k forward from prev'): the model mis-parses it as backward and scores a spurious 0.000; use the EXACT chain scaffold (a depth-1 chain) so the readout is valid.
 - Do not claim in-context targeted repair works verifier-free: the fix is reachable but not selectable without an external check or context-removal.
 - Do not ITERATE the repair loop: only the FIRST (single lowest-confidence step) repair helps (+0.048); a 2nd/3rd repair damages correct low-confidence steps via the 32%-accurate recompute and drops accuracy BELOW baseline (iter 3: 0.420 vs 0.450). Single-shot only.
+
+## C59: LATENT RECURRENCE (naive, training-free) does NOT cross the C44 serial-compute wall: appending the model's OWN last-layer hidden state (final position) back as the next input embedding for N extra forward passes -- emitting NO tokens -- does not lift held-out affine induction. Accuracy is flat-to-DECLINING with N (0.193 @N=0 -> 0.107 @N=8), whether the fed-back state is raw or input-norm-matched. The serial compute chain-of-thought provides is not replicated by naive continuous residual-looping; the wall is not a FREE compute-depth lever via input-embedding feedback.
+
+- Status: `Negative`
+- Programs: `interpretability_and_diagnostics`, `test_time_reasoning_budget`
+- Summary: Experiment qwen35_4b_meta_induction (latent_recurrence.py), probing the corpus's central TOKEN-vs-COMPUTE question: C44 showed the 4B induces held-out rules at ~chance in ONE forward pass but ~1.0 via chain-of-thought GENERATION, and every serial-compute claim (C44/C45/C54/C55/C56) is argued in TOKEN space. This tests compute WITHOUT tokens: a custom HF forward loop takes the last-layer hidden state at the final ('Answer: ') position, appends it as the next input embedding, and re-runs -- N latent 'thought' passes with no token emitted -- then reads the forced-Answer digit (argmax over the 10 digit tokens). On 150 held-out affine (out-of-family) induction episodes: N=0 (base single pass) 0.193; N=1 0.133/0.087; N=2 0.113/0.133; N=4 0.107/0.140; N=8 0.107/0.107 (raw / input-norm-matched). Adding latent passes does NOT help and mildly degrades. Likely mechanism: the model was never trained to interpret its own hidden states as INPUT embeddings, so the appended 'latent token' is out-of-distribution.
+- Implication: Naive, training-free latent recurrence (raw hidden-state -> input-embedding feedback) is NOT a free lever for the induction wall -- CoT's token-mediated re-encoding is not substituted by simply looping the residual stream. This is a bound, not a proof that the wall is fundamentally token-bound: the input-embedding injection point is degenerate (out-of-distribution for the model), so a TRAINED latent-recurrence adapter, an intermediate-LAYER injection (loop layers rather than re-embed), or a learned hidden->input projection remain untested and could differ. Practically: keep giving the 4B chain-of-thought tokens; do not expect free test-time compute from re-feeding hidden states.
+
+### Evidence
+
+- [`qwen35_4b_meta_induction`](../../experiments/qwen35_4b_meta_induction/reports/report.md)
+
+### Next Tests
+
+- Trained latent-recurrence: a small adapter that learns to consume the fed-back hidden state (does supervision make continuous recurrence usable?).
+- Intermediate-LAYER injection / layer-looping (re-run the last hidden state through the decoder layers again) rather than re-embedding at the input -- a less out-of-distribution compute-depth probe.
+- Replicate on the CLEAN C44 single-pass 0.01 substrate (this probe's N=0 was 0.193, an easier forced-read prompt) to confirm the flat-with-N result at the true wall.
+
+### Avoid
+
+- Do not feed a raw last-layer hidden state back as an INPUT embedding expecting compute-depth gains: it is out-of-distribution (the model never learned to read its own hidden states as input) and accuracy is flat-to-declining with N.
+- Do not read this as 'the wall is definitively token-bound': only the naive training-free input-injection variant was tested; trained or intermediate-layer latent recurrence is unexplored.
