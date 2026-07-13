@@ -1,0 +1,20 @@
+{
+  "conditional_transitions": [
+    "start_to_inspect",
+    "inspect_to_patch",
+    "rejected_patch_to_changed_patch",
+    "failed_test_to_diagnose",
+    "diagnosis_to_changed_patch",
+    "patch_ok_to_verify",
+    "passed_test_to_commit"
+  ],
+  "firewall_clean": true,
+  "fresh_locality_contexts": 48,
+  "initial_and_partial_fail": true,
+  "oracle_passes": true,
+  "schema_version": 1,
+  "status": "PASS",
+  "tasks_selftested": 20,
+  "train_transfer_disjoint": true,
+  "transaction_families": 10
+}

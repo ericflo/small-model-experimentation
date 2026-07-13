@@ -60,15 +60,16 @@
   sample-more. Feasibility stopped the selector; confirm, banking, and
   Menagerie remained sealed. Do not tune the tie break or try another public
   source router—the two policies had only one exclusive win each.
-- Highest-priority curriculum successor: create diverse transactional coding
-  families whose solutions require whole-request validation, state copying,
-  and atomic commit. Use executable tool-found/oracle repairs because the
-  incumbent proposed the full conjunction only once in 40 stochastic atomic
-  trajectories. Train action-seam targets from the recovery-action checkpoint,
-  mix the existing seven-transition recovery bank as retention replay, and
-  compare against matched replay-only training and sample-more. Require exact
-  locality, transition retention, unseen transactional-family transfer, and
-  broad recovery non-regression before Menagerie.
+- Active curriculum successor:
+  `qwen35_4b_transaction_invariant_recovery_curriculum` creates diverse
+  transactional coding families whose solutions require whole-request
+  validation, state copying, and atomic commit. It uses executable programmatic
+  repairs because the incumbent proposed the full conjunction only once in 40
+  stochastic atomic trajectories, trains action-seam targets from the
+  recovery-action checkpoint, mixes the existing seven-transition recovery
+  bank as retention replay, and compares against matched replay-only training
+  and sample-more. Exact locality, transition retention, unseen transactional-
+  family transfer, and broad recovery non-regression gate Menagerie.
 - Future retraining should calibrate plan dose by realized gradient/surprisal
   and avoid supervising plan starts already rank 1 or wildly off-policy lexical
   templates.

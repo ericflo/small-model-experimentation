@@ -5858,6 +5858,44 @@
     }
    ]
   },
+  "qwen35_4b_transaction_invariant_recovery_curriculum": {
+   "verdict_tag": "Can one missing repair rule be installed safely",
+   "concept_primer": "A shop should check every item in an order before changing stock, make changes on a copy, and publish them only when the entire order is valid. The coding model currently learns pieces of that rule but often drops one while fixing another.",
+   "plain_question": "Can focused worked repairs teach one small coding model to validate a whole request, copy state, and commit changes atomically without erasing its existing test-and-revise loop?",
+   "plain_answer": "Not run yet. The test rig now compares 24 focused transaction examples plus 24 existing recovery examples against 48 recovery examples alone, with the same training effort. The focused model must then win on different transaction APIs, preserve ordinary repair behavior, and finally improve an external benchmark.",
+   "why_it_matters": "If this works, coding-agent training can target a concrete shared failure rule instead of collecting more generic successful traces. If it fails, the staged checks will show whether the problem is memorizing familiar APIs, damaging the repair loop, or simply teaching a skill the external tasks do not need.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Training blocks per arm",
+     "value": "48",
+     "sub": "the focused and comparison models get equal example counts"
+    },
+    {
+     "label": "Conditional steps preserved per task",
+     "value": "7",
+     "sub": "from first inspection through commit after passing tests"
+    },
+    {
+     "label": "Transaction families",
+     "value": "6 practice + 4 transfer",
+     "sub": "different APIs test whether the rule carries over"
+    },
+    {
+     "label": "External benchmark calls so far",
+     "value": "zero",
+     "sub": "sealed until every internal safety and transfer check passes"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Both training arms receive 48 complete task blocks",
+     "chart_read": "Each group is one training arm. The two colored bars split its focused transaction examples from replayed recovery examples; compare the totals as well as the composition.",
+     "chart_takeaway": "Both arms total 48 blocks, so the focused arm can win only by replacing half the old examples with the new transaction rule, not by receiving more training data."
+    }
+   ]
+  },
   "qwen35_4b_state_carry_vs_state_bag": {
    "verdict_tag": "Does carrying memory forward beat repeating in parallel",
    "concept_primer": "Imagine tracking a piece moving across a board. One method keeps a single running note, updating and feeding it into each next turn. The other re-reads the opening position many times independently and pools its guesses. Same total effort — does chaining the note win?",

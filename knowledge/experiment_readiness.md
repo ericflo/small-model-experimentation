@@ -4,21 +4,21 @@ Generated from tracked experiment contents. Use this as a triage surface for tur
 
 Anchor-ready means the experiment has a human-authored README, a detected primary report, recognized local artifacts, and an assigned research program. It does not mean the result is correct or final.
 
-- Experiments: 229
-- Anchor-ready: 214
-- Human-authored READMEs: 216
+- Experiments: 230
+- Anchor-ready: 215
+- Human-authored READMEs: 217
 - Generated README stubs: 13
-- Primary reports: 229
-- Experiment logs: 133
-- Smoke commands: 98
-- Artifact manifests: 201
+- Primary reports: 230
+- Experiment logs: 134
+- Smoke commands: 99
+- Artifact manifests: 202
 
 ## Run Surface Counts
 
 | Run surface | Experiments |
 | --- | ---: |
 | `documented-command` | 38 |
-| `documented-scripts` | 118 |
+| `documented-scripts` | 119 |
 | `scripts-undocumented` | 20 |
 | `source-or-analysis` | 53 |
 
@@ -169,6 +169,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | yes | [`qwen35_4b_tool_seeded_banking`](../experiments/qwen35_4b_tool_seeded_banking/README.md) | algorithmic_memory_and_retrieval, evidence_conditioned_selection, process_control_and_tool_use, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_tool_seeded_banking/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_tool_state_policy_lora`](../experiments/qwen35_4b_tool_state_policy_lora/README.md) | posttraining_and_adaptation, process_control_and_tool_use, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_tool_state_policy_lora/reports/report.md) | no | `documented-scripts` | no |  | add-experiment-log, add-smoke-command, add-artifact-manifest |
 | no | [`qwen35_4b_trained_vs_frozen_repair_mdp`](../experiments/qwen35_4b_trained_vs_frozen_repair_mdp/README.md) | algorithmic_memory_and_retrieval, evidence_conditioned_selection, posttraining_and_adaptation, process_control_and_tool_use | `generated-stub` | [report](../experiments/qwen35_4b_trained_vs_frozen_repair_mdp/reports/qwen35_4b_trained_vs_frozen_repair_mdp_report.md) | no | `scripts-undocumented` | no | run-data | replace-generated-readme, add-experiment-log, document-run-path, add-smoke-command |
+| yes | [`qwen35_4b_transaction_invariant_recovery_curriculum`](../experiments/qwen35_4b_transaction_invariant_recovery_curriculum/README.md) | agentic_breadth_installation, benchmark_generalization, evidence_conditioned_selection, interpretability_and_diagnostics, posttraining_and_adaptation, process_control_and_tool_use, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_transaction_invariant_recovery_curriculum/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_transform_abi_compiler_pilot`](../experiments/qwen35_4b_transform_abi_compiler_pilot/README.md) | benchmark_generalization, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_transform_abi_compiler_pilot/reports/report.md) | no | `documented-scripts` | no | large-artifact | add-experiment-log, add-smoke-command |
 | yes | [`qwen35_4b_typed_sketch_synthesis`](../experiments/qwen35_4b_typed_sketch_synthesis/README.md) | benchmark_generalization, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_typed_sketch_synthesis/reports/qwen35_4b_typed_sketch_synthesis_report.md) | no | `documented-scripts` | yes | dataset, large-artifact | add-experiment-log |
 | yes | [`qwen35_4b_unsaturated_frontier_active_bridge`](../experiments/qwen35_4b_unsaturated_frontier_active_bridge/README.md) | active_evidence_acquisition, benchmark_generalization, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_unsaturated_frontier_active_bridge/reports/qwen35_4b_unsaturated_frontier_active_bridge_report.md) | no | `scripts-undocumented` | no | dataset, large-artifact | add-experiment-log, document-run-path, add-smoke-command |

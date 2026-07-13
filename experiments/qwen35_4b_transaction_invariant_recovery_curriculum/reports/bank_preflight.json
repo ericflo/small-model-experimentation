@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "model": "Qwen/Qwen3.5-4B",
+  "parent_weight_sha256_verified": "991d2da239ac2878dccac72ece419b00f37ac15d6a970538f384c36162b89aea",
+  "replay_source_sha256_verified": "c2cb0f1cb151f7c23bdb5bef44483e48481d0bafb0a8273e145ff36f3fa8e552",
+  "arms": {
+    "transaction_replay": {
+      "tasks": 48,
+      "transaction_tasks": 24,
+      "replay_tasks": 24,
+      "rows": 336,
+      "max_encoded_tokens": 1179,
+      "weighted_action_mass_total": 152992.0,
+      "weighted_action_mass_per_operator": 38248.0,
+      "jsonl_sha256": "9c196d1e7e49881bbf151e1575c98811bcdca66e6ef38858c34f60f1256b9315"
+    },
+    "replay_only": {
+      "tasks": 48,
+      "transaction_tasks": 0,
+      "replay_tasks": 48,
+      "rows": 336,
+      "max_encoded_tokens": 1086,
+      "weighted_action_mass_total": 152992.0,
+      "weighted_action_mass_per_operator": 38248.0,
+      "jsonl_sha256": "d5f376156b8fba7a1c083d85d6a35bc044cf94b29bb78359b0d4154fd0e559ff"
+    }
+  },
+  "transitions_per_task": 7,
+  "whole_task_padding_duplicates": 0,
+  "optimizer_steps_per_arm": 72,
+  "think_loss_weight": 0.0,
+  "firewall_clean": true,
+  "oracle_and_partial_replay_invariants": true,
+  "all_rows_within_4096_tokens": true,
+  "external_bank_receipt_sha256": "8c2c339bd78399fbfac1d29053bee6f92935ed97df52ce4d2d36c902bce6e63e"
+}

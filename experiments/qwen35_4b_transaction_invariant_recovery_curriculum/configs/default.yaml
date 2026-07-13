@@ -1,0 +1,143 @@
+schema_version: 1
+
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+  start_checkpoint: large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/merged/recovery_action
+  locality_anchor: large_artifacts/qwen35_4b_repo_search_compress_bank/merged/apex_replay
+  menagerie_incumbent: large_artifacts/qwen35_4b_repo_search_compress_bank/merged/apex_replay
+  start_weight_sha256: 991d2da239ac2878dccac72ece419b00f37ac15d6a970538f384c36162b89aea
+  anchor_weight_sha256: c933168075a0fc011f31ee54f83d722cc91423ce1a0ac19bfe40dfab92f608d5
+
+artifacts:
+  root: large_artifacts/qwen35_4b_transaction_invariant_recovery_curriculum
+
+engine:
+  max_model_len: 8192
+  gpu_memory_utilization: 0.85
+  max_num_seqs: 32
+  max_num_batched_tokens: 16384
+
+families:
+  transaction_train:
+    - batch_inventory
+    - ledger_transfers
+    - seat_groups
+    - quota_claims
+    - flag_batch
+    - rename_batch
+  transaction_transfer:
+    - atomic_reservations
+    - atomic_debits
+    - atomic_membership_moves
+    - atomic_patchset
+  broad_recovery:
+    - lease_cache
+    - quorum_value
+    - pattern_router
+    - rate_buckets
+
+bank:
+  seed: 86310
+  split: transaction_bank
+  tasks_per_transaction_family: 4
+  replay_source: large_artifacts/qwen35_4b_verifier_conditioned_recovery_bank/bank/recovery_action.jsonl
+  replay_source_sha256: c2cb0f1cb151f7c23bdb5bef44483e48481d0bafb0a8273e145ff36f3fa8e552
+  replay_tasks_in_primary: 24
+  replay_tasks_in_control: 48
+  tasks_per_arm: 48
+  target_operator_action_mass: 38248.0
+  require_replay_pass_rate: 1.0
+
+training:
+  seed: 43
+  epochs: 6
+  learning_rate: 0.00003
+  rank: 32
+  alpha: 64
+  dropout: 0.05
+  batch_size: 4
+  gradient_accumulation_steps: 7
+  loss_chunk_positions: 128
+  max_length: 4096
+  arms: [transaction_replay, replay_only]
+
+evaluation:
+  think_budget: 512
+  answer_max_tokens: 512
+  sample_temperature: 0.8
+  sample_top_p: 0.95
+  sample_top_k: 20
+  deep_run_seed: 87001
+  sample_run_seed: 87002
+  recovery:
+    deep_turns: 6
+    sample_more_trajectories: 2
+    sample_more_turns_each: 3
+  normal:
+    deep_turns: 8
+    sample_more_trajectories: 2
+    sample_more_turns_each: 4
+  blocks:
+    transaction_calibration:
+      families: transaction_train
+      seed: 86400
+      tasks_per_family: 5
+    transaction_dev:
+      families: transaction_transfer
+      seed: 86500
+      tasks_per_family: 8
+    transaction_confirm:
+      families: transaction_transfer
+      seed: 86600
+      tasks_per_family: 8
+    broad_recovery:
+      families: broad_recovery
+      seed: 86700
+      tasks_per_family: 10
+
+locality:
+  seed: 86900
+  contexts: experiments/qwen35_4b_transaction_invariant_recovery_curriculum/data/locality_contexts.json
+  count: 48
+  max_context_tokens: 1024
+  median_non_target_logit_drift_max: 0.15
+  mean_entropy_delta_min: -0.05
+
+calibration_gates:
+  success_absolute_min: 0.80
+  success_delta_vs_start_min: 0.15
+  success_delta_vs_replay_min: 0.10
+  invalid_action_delta_vs_start_max: 0.02
+  answer_cap_hit_delta_vs_start_max: 0.02
+  rejected_transition_absolute_min: 0.80
+  failed_transition_absolute_min: 0.70
+
+transaction_gates:
+  success_delta_vs_start_min: 0.10
+  success_delta_vs_replay_min: 0.05
+  success_delta_vs_sample_more_min: 0.05
+  paired_bootstrap_lower_bound_min: 0.0
+  invalid_action_delta_vs_start_max: 0.02
+  answer_cap_hit_delta_vs_start_max: 0.02
+  rejected_transition_absolute_min: 0.80
+  failed_transition_absolute_min: 0.70
+  minimum_nonnegative_families: 3
+  maximum_single_family_regression: -0.10
+
+retention_gates:
+  recovery_success_delta_vs_start_min: -0.03
+  normal_success_delta_vs_start_min: -0.03
+  verified_absolute_min: 0.75
+  commit_absolute_min: 0.70
+  rejected_transition_absolute_min: 0.80
+  failed_transition_absolute_min: 0.70
+  invalid_action_delta_vs_start_max: 0.02
+  answer_cap_hit_delta_vs_start_max: 0.02
+
+menagerie:
+  sealed_until_all_whitebox_gates_pass: true
+  tiers: [quick, medium]
+  paired_seeds: []
+  maximum_tier_regression: 0.03
+  minimum_positive_tier_delta: 0.02

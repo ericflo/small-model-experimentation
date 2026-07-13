@@ -5066,6 +5066,48 @@
   },
   {
     "file_counts": {
+      ".json": 3,
+      ".md": 7,
+      ".py": 17,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_transaction_invariant_recovery_curriculum",
+    "path": "experiments/qwen35_4b_transaction_invariant_recovery_curriculum",
+    "primary_readme": "experiments/qwen35_4b_transaction_invariant_recovery_curriculum/README.md",
+    "primary_report": "experiments/qwen35_4b_transaction_invariant_recovery_curriculum/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation",
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "posttraining_and_adaptation",
+      "process_control_and_tool_use",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "Teach a single Qwen3.5-4B coding policy to validate whole requests, copy state, and commit atomically while preserving its verifier-conditioned recovery loop.",
+    "tags": [
+      "curriculum",
+      "latent-state",
+      "policy",
+      "small-model",
+      "verification"
+    ],
+    "title": "Transaction-invariant recovery curriculum",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 30,
+    "total_size_bytes": 324308
+  },
+  {
+    "file_counts": {
       ".json": 13,
       ".jsonl": 13,
       ".log": 11,

@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 201
-- Manifest files: 503
+- Experiments with manifests: 202
+- Manifest files: 504
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 63 |
 | `run-data` | 101 |
-| `standard-artifact` | 74 |
+| `standard-artifact` | 75 |
 
 ## Manifests
 
@@ -254,6 +254,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_trained_vs_frozen_repair_mdp` | `run-data` | [manifest](../experiments/qwen35_4b_trained_vs_frozen_repair_mdp/data/smoke_frozen_repair_train_records.manifest.json) |
 | `qwen35_4b_trained_vs_frozen_repair_mdp` | `run-data` | [manifest](../experiments/qwen35_4b_trained_vs_frozen_repair_mdp/data/smoke_repair_dpo.manifest.json) |
 | `qwen35_4b_trained_vs_frozen_repair_mdp` | `run-data` | [manifest](../experiments/qwen35_4b_trained_vs_frozen_repair_mdp/data/smoke_repair_sft.manifest.json) |
+| `qwen35_4b_transaction_invariant_recovery_curriculum` | `standard-artifact` | [manifest](../experiments/qwen35_4b_transaction_invariant_recovery_curriculum/reports/artifact_manifest.yaml) |
 | `qwen35_4b_transform_abi_compiler_pilot` | `large-artifact` | [manifest](../experiments/qwen35_4b_transform_abi_compiler_pilot/large_artifacts_manifest.md) |
 | `qwen35_4b_typed_sketch_synthesis` | `dataset` | [manifest](../experiments/qwen35_4b_typed_sketch_synthesis/data/dataset_manifest.json) |
 | `qwen35_4b_typed_sketch_synthesis` | `large-artifact` | [manifest](../experiments/qwen35_4b_typed_sketch_synthesis/large_artifacts_manifest.md) |
