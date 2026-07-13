@@ -74,6 +74,7 @@ DATA_SETUP_FILES = (
     *DATA_PAYLOADS,
     "manifest.json",
 )
+TRACKED_SETUP_SENTINEL = ".gitkeep"
 G0_PASS_ACCESS_CONTRACT = {
     "authorizes_positive_control": True,
     "authorizes_training": False,
@@ -186,6 +187,18 @@ def _require_exact_directory(
         )
 
 
+def _require_empty_setup_sentinel(path: Path, label: str) -> None:
+    try:
+        with open_stable_regular(REPO_ROOT, path) as handle:
+            stat_result = os.fstat(handle.fileno())
+            if stat_result.st_size != 0 or stat_result.st_nlink != 1:
+                raise RuntimeError(
+                    f"{label} must be an empty inode-distinct regular file"
+                )
+    except StableArtifactError as exc:
+        raise RuntimeError(f"{label} is missing or unsafe") from exc
+
+
 def _large_root(config: dict[str, Any]) -> Path:
     return _safe_repo_path(
         ROOT / config["paths"]["large_artifacts_dir"],
@@ -210,7 +223,15 @@ def _inventory(config: dict[str, Any]) -> list[ArchiveItem]:
         "tracked runs root",
     )
     cpu_dir = _safe_repo_path(runs_dir / "cpu_smoke", "CPU setup receipt root")
-    _require_exact_directory(cpu_dir, {"receipt.json"}, "CPU setup receipt")
+    _require_exact_directory(
+        cpu_dir,
+        {TRACKED_SETUP_SENTINEL, "receipt.json"},
+        "CPU setup receipt",
+    )
+    _require_empty_setup_sentinel(
+        cpu_dir / TRACKED_SETUP_SENTINEL,
+        "CPU setup structural sentinel",
+    )
 
     setup_dir = _safe_repo_path(runs_dir / "setup", "tracked setup receipt root")
     if setup_dir.is_symlink() or not setup_dir.is_dir():
@@ -223,6 +244,8 @@ def _inventory(config: dict[str, Any]) -> list[ArchiveItem]:
         match = G0_RE.fullmatch(child.name)
         if child.is_symlink() or not child.is_file():
             unknown_setup.append(child.name)
+        elif child.name == TRACKED_SETUP_SENTINEL:
+            continue
         elif child.name in tracked_initialization:
             continue
         elif match is not None and int(match.group(2)) in seeds:
@@ -242,6 +265,10 @@ def _inventory(config: dict[str, Any]) -> list[ArchiveItem]:
             "tracked setup inventory is partial or unknown; "
             f"missing={missing_initialization}, unknown={sorted(unknown_setup)}"
         )
+    _require_empty_setup_sentinel(
+        setup_dir / TRACKED_SETUP_SENTINEL,
+        "tracked setup structural sentinel",
+    )
 
     large_root = _large_root(config)
     if large_root.is_symlink() or not large_root.is_dir():
@@ -1931,7 +1958,10 @@ def _validate_cleanup_inventory(
             continue
         if parent.is_symlink() or not parent.is_dir():
             raise RuntimeError(f"tracked setup cleanup root is unsafe: {parent}")
-        allowed = {item.source.name for item in items if item.source.parent == parent}
+        allowed = {
+            TRACKED_SETUP_SENTINEL,
+            *(item.source.name for item in items if item.source.parent == parent),
+        }
         children = list(parent.iterdir())
         if any(child.is_symlink() for child in children):
             raise RuntimeError(f"tracked setup cleanup root contains a symlink: {parent}")
@@ -1940,6 +1970,10 @@ def _validate_cleanup_inventory(
             raise RuntimeError(
                 f"tracked setup cleanup root contains unknown residue: {sorted(unknown)}"
             )
+        _require_empty_setup_sentinel(
+            parent / TRACKED_SETUP_SENTINEL,
+            f"tracked setup cleanup sentinel ({name})",
+        )
 
     large_root = _large_root(config)
     if large_root.is_symlink() or not large_root.is_dir():
@@ -1988,8 +2022,16 @@ def _verify_cleanup_postconditions(
     )
     for name in ("cpu_smoke", "setup"):
         path = runs_dir / name
-        if path.is_symlink() or not path.is_dir() or list(path.iterdir()):
+        if (
+            path.is_symlink()
+            or not path.is_dir()
+            or {child.name for child in path.iterdir()} != {TRACKED_SETUP_SENTINEL}
+        ):
             raise RuntimeError(f"tracked setup cleanup postcondition failed: {name}")
+        _require_empty_setup_sentinel(
+            path / TRACKED_SETUP_SENTINEL,
+            f"tracked setup cleanup postcondition sentinel ({name})",
+        )
     large_root = _large_root(config)
     if large_root.is_symlink() or not large_root.is_dir():
         raise RuntimeError("external cleanup postcondition failed")

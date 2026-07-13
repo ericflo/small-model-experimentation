@@ -1,21 +1,21 @@
 # Implementation Review
 
-**Source-contract version:** `8`
+**Source-contract version:** `9`
 
-**Reviewed implementation SHA-256:** `f9364c36cf7691f43acf1642d0867d63099a4f4926c3ed0318e3b76b79b9d873`
+**Reviewed implementation SHA-256:** `1c73fbf9bed5da102bd300ae9774ae75b57fe1d2269740205594fede2dd5ad3b`
 
 **Status:** `GO`
 
-Source-contract v8 passed integrated authorization, science/protocol, and terminal/recovery review.
+Source-contract v9 passed integrated authorization, science/protocol, and terminal/recovery review.
 This authorization binds exactly the implementation digest above plus the pinned training lock; any
 change to a reviewed source or test revokes it automatically. It authorizes only the registered
-source-v8 archive/regeneration/runbook sequence and does not make any historical setup artifact valid
-under v8.
+archive-checkpoint publication and source-v9 regeneration/runbook sequence; it does not make any
+historical setup artifact valid under v9.
 
-## Source-v8 integrated authorization
+## Source-v9 integrated authorization
 
-The complete source-bound CPU suite passes **357/357**. The focused terminal boundary passes
-**144/144** across stable I/O (31), invalidated-setup archive/recovery (54), failed-attempt
+The complete source-bound CPU suite passes **358/358**. The focused terminal boundary passes
+**145/145** across stable I/O (31), invalidated-setup archive/recovery (55), failed-attempt
 archive/recovery (28), and static execution contracts (31). The independent frozen-science audit
 passes **238/238** with no scientific defect: fixed seeds, split matrices, estimand, thresholds,
 10,000-draw crossed bootstrap, Stage A/B/C ordering, sealed-contrast logic, and the mandatory
@@ -31,6 +31,15 @@ coverage now archives a synthetic legacy successful control end to end and rejec
 substitute before an archive exists. The same preflight also exposed a redundant per-source lockfile
 under tracked failures. It is removed: the already-required ignored `runs/run.lock` remains the sole
 cooperating-writer serialization boundary, so failed preflight leaves no untracked lock residue.
+
+The first post-archive repository validation then caught that the archive's intentionally retained
+empty `runs/cpu_smoke` and `runs/setup` regeneration surfaces cannot be represented by Git and would
+therefore diverge in CI. Source v9 adds one tracked empty `.gitkeep` to each directory. The archiver
+requires each sentinel to be an empty, inode-distinct stable regular file; excludes it from the
+evidence inventory; allows no other residue; preserves it through cleanup; and revalidates it in the
+terminal postcondition. Missing, nonempty, hardlinked, symlinked, and extra entries remain fail-closed.
+This changes no model, data, objective, seed, threshold, branch, or scientific analysis behavior. No
+setup was regenerated between v8 archival and this v9 structural repair.
 
 The terminal review initially returned `NO_GO` and reproduced defects that ordinary happy-path tests
 missed: exceptional context exits skipped canonical rebinding; recursive directory creation could
@@ -56,7 +65,7 @@ exact training-journal recovery. Completion markers dominate without modifying a
 canonical source, but they are never accepted without descriptor revalidation and fresh fsync.
 
 This section supersedes historical prose below that describes cleanup as pathname deletion or
-directory removal. Those passages record earlier implementation states; v8 uses no destructive
+directory removal. Those passages record earlier implementation states; v9 uses no destructive
 unlink/rmtree operation on canonical or quarantine evidence. Private transaction-owned staging may
 still be discarded only after its exact ownership and destination state are validated.
 

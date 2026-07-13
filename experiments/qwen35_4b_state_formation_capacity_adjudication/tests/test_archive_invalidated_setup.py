@@ -135,6 +135,9 @@ class InvalidatedSetupArchiveTests(unittest.TestCase):
             self.experiment / self.config["paths"]["large_artifacts_dir"]
         ).resolve()
         setup_dir = self.experiment / "runs" / "setup"
+        (self.experiment / "runs" / "cpu_smoke" / ".gitkeep").touch()
+        setup_dir.mkdir(parents=True, exist_ok=True)
+        (setup_dir / ".gitkeep").touch()
         initialization_receipts = {}
         for seed in map(int, self.config["training"]["train_seeds"]):
             bundle = large_root / f"initialization_seed{seed}.pt"
@@ -475,9 +478,13 @@ class InvalidatedSetupArchiveTests(unittest.TestCase):
             ).is_file()
         )
         self.assertEqual(
-            list((self.experiment / "runs" / "cpu_smoke").iterdir()), []
+            {path.name for path in (self.experiment / "runs" / "cpu_smoke").iterdir()},
+            {".gitkeep"},
         )
-        self.assertEqual(list((self.experiment / "runs" / "setup").iterdir()), [])
+        self.assertEqual(
+            {path.name for path in (self.experiment / "runs" / "setup").iterdir()},
+            {".gitkeep"},
+        )
         self.assert_complete_zero_quarantine()
         self.assertTrue(
             (
@@ -550,9 +557,13 @@ class InvalidatedSetupArchiveTests(unittest.TestCase):
         )
 
         self.assertEqual(
-            list((self.experiment / "runs" / "cpu_smoke").iterdir()), []
+            {path.name for path in (self.experiment / "runs" / "cpu_smoke").iterdir()},
+            {".gitkeep"},
         )
-        self.assertEqual(list((self.experiment / "runs" / "setup").iterdir()), [])
+        self.assertEqual(
+            {path.name for path in (self.experiment / "runs" / "setup").iterdir()},
+            {".gitkeep"},
+        )
         self.assertTrue(data_dir.is_dir())
         self.assertEqual(
             {path.name for path in data_dir.iterdir()},
@@ -1150,9 +1161,13 @@ class InvalidatedSetupArchiveTests(unittest.TestCase):
 
         self.assertTrue(all(not path.exists() for path in source_paths))
         self.assertEqual(
-            list((self.experiment / "runs" / "cpu_smoke").iterdir()), []
+            {path.name for path in (self.experiment / "runs" / "cpu_smoke").iterdir()},
+            {".gitkeep"},
         )
-        self.assertEqual(list((self.experiment / "runs" / "setup").iterdir()), [])
+        self.assertEqual(
+            {path.name for path in (self.experiment / "runs" / "setup").iterdir()},
+            {".gitkeep"},
+        )
         self.assert_complete_zero_quarantine()
 
     def test_canonical_replacement_race_never_deletes_unvalidated_bytes(self) -> None:
@@ -1310,7 +1325,32 @@ class InvalidatedSetupArchiveTests(unittest.TestCase):
             self.experiment / "runs" / "setup",
         ):
             self.assertTrue(path.is_dir())
-            self.assertEqual(list(path.iterdir()), [])
+            self.assertEqual({child.name for child in path.iterdir()}, {".gitkeep"})
+
+    def test_setup_sentinels_are_required_empty_and_inode_distinct(self) -> None:
+        sentinels = (
+            self.experiment / "runs" / "cpu_smoke" / ".gitkeep",
+            self.experiment / "runs" / "setup" / ".gitkeep",
+        )
+        for sentinel in sentinels:
+            with self.subTest(parent=sentinel.parent.name, defect="missing"):
+                sentinel.unlink()
+                with self.assertRaises(RuntimeError):
+                    self.module._inventory(self.config)
+                sentinel.touch()
+            with self.subTest(parent=sentinel.parent.name, defect="nonempty"):
+                sentinel.write_bytes(b"not-structural")
+                with self.assertRaises(RuntimeError):
+                    self.module._inventory(self.config)
+                sentinel.write_bytes(b"")
+            with self.subTest(parent=sentinel.parent.name, defect="hardlink"):
+                alias = self.repo / f"{sentinel.parent.name}-sentinel-alias"
+                os.link(sentinel, alias)
+                try:
+                    with self.assertRaises(RuntimeError):
+                        self.module._inventory(self.config)
+                finally:
+                    alias.unlink()
 
     def test_unknown_residue_blocks_resume_before_further_deletion(self) -> None:
         source_paths = self._source_paths()

@@ -245,7 +245,6 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 - `qwen35_4b_partial_structure_search` (new): [README](../experiments/qwen35_4b_partial_structure_search/README.md)
 - `qwen35_4b_reliability_exec_opsd_audit` (track-z): [README](../experiments/qwen35_4b_reliability_exec_opsd_audit/README.md)
 - `qwen35_4b_repo_search_compress_bank` (new): [README](../experiments/qwen35_4b_repo_search_compress_bank/README.md)
-- `qwen35_4b_state_formation_capacity_adjudication` (new): [README](../experiments/qwen35_4b_state_formation_capacity_adjudication/README.md)
 - `qwen35_4b_static_bridge_ceiling_breaker` (track-z): [README](../experiments/qwen35_4b_static_bridge_ceiling_breaker/README.md)
 - `qwen35_4b_substrate_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_substrate_coverage_ladder/README.md)
 - `qwen35_4b_typed_sketch_synthesis` (track-z): [README](../experiments/qwen35_4b_typed_sketch_synthesis/README.md)

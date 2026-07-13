@@ -3,10 +3,17 @@
 ## Status
 
 **In progress; no scientific result exists.** Preregistration, adversarial design review, and the
-frozen design are complete. Source-v8 implementation authorization is `GO` at reviewed digest
-`f9364c36…b9d873` and full source contract `7991d46a…b1cc88`, with 357/357 source-bound tests passing.
-This authorizes only the ordered publish/CI, source-d426 archival, archive-checkpoint publish/CI, and
-fresh source-v8 regeneration sequence; no result-bearing command is yet authorized. The corrected setup-control source passed
+frozen design are complete. Source-v9 implementation authorization is `GO` at reviewed digest
+`1c73fbf9…d5ad3b` and full source contract `5629a3a4…99e236`, with 358/358 source-bound tests passing.
+Source-v8 is published at commit `ee729def` with both repository workflows green. The source-d426
+archive is complete and independently verified: 23 files, 18,927,960 bytes, files identity
+`1538f2f2…ec3ed0`, receipt file SHA-256 `9aa04d35…efc1a1`, and receipt identity
+`e7a71362…818b77`. Canonical setup paths are retired and the exact 23-leaf quarantine is zero-length;
+an idempotent replay made no further change. Post-archive validation caught that its retained empty
+setup directories were not clone-stable; source v9 adds tracked empty structural sentinels and
+requires their exact safe form without treating them as evidence. Only combined source-v9/archive-
+checkpoint publish/CI is now authorized; fresh source-v9 regeneration remains blocked until both
+workflows pass, and no result-bearing command is authorized. The corrected setup-control source passed
 171/171 local tests and independent code and GPU/runtime review. Every setup artifact from source
 `3baa7b53…d5c42` is durably archived. The later CPU smoke, data manifest, empty sealed-access ledger,
 and three shared initialization bundles were regenerated and strictly reopened under source
@@ -32,8 +39,9 @@ positive control then passed at identity `02a329d9…669a`: oracle 1.0, intact 4
 256 updates, and 4,096 presentations. A pre-result authorization re-audit nevertheless found that
 generic receipt consumers do not re-enforce every model/backend, access, scientific-evidence, and
 downstream-authorization field written by their producers, and that some runbook ordering barriers
-are not execution-enforced. No result stage ran. Source repair, archival, regeneration, and ordered
-setup replay are required before seed 7413 or scientific training. The audit failure is durably
+are not execution-enforced. No result stage ran. Source repair and source-d426 archival are complete;
+archive-checkpoint publication, regeneration, and ordered setup replay are required before seed 7413
+or scientific training. The audit failure is durably
 preserved at receipt identity `18892121…3a13` and authorizes nothing. No training checkpoint,
 evaluation row, or terminal analysis from this directory should be cited as scientific evidence.
 

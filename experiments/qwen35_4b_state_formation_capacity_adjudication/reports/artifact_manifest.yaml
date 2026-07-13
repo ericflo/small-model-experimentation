@@ -21,11 +21,11 @@ external_artifacts:
     required_for: "audit of the seed-7411 G0/control passes, seed-7412 precision failure, and exact preservation of their source-bound setup"
     checksum: "tracked receipt runs/failures/invalidated_setup_source_1d1368cf.json; receipt SHA256 e899bc465eb627d5919ef84c7f0bfda07cd96e73035a5ef73569debe34869484; receipt identity 13cdcaec2828e394c625e56955b8d36d4dc4dd6eabbd314dd686bbe143b2050b; files identity d05f410cb36cfc33e9eefcc69c3bb2a50723edb9776f278bce8fb43ac7af9d88; 21 files; 18,288,790 bytes"
     regenerate: "not regenerable as historical evidence; preserve this exact content-hashed archive"
-  - name: "invalidated source-d426 per-seed initialization bundles pending archival"
-    storage: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed{7411,7412,7413}.pt"
-    required_for: "one-time exact source-d426 invalidation archive only; these bundles cannot initialize a source-v8 arm"
-    checksum: "bundle SHA256 by seed: 7411 539e8e6cffaefd17ec96c64b5b9c40d0834c831da3fcce85787aa15b36b5dc26; 7412 bf916363d03260b31f126cc416332ace6c2476e804faca5c110a2e3816315e9d; 7413 596990254e8c80b0140725b0c0e4ab0bfa2bf5d4a9f618d64784648c5b72593c; tracked receipt identities a79d0f9b3d63df42637011409bad5d9d7f3fa1d66a1af0a3de33758561507f8a, 28e7d6db5093d2bcb49e7ef359b48de2eeb0518f0f1d602547bfc24abd536d86, c4e8657b8351e2386b03db4b085ba8b3208a8f209a75ef79f305db9bb2a40ffa"
-    regenerate: "do not reuse or recreate in place; after source-v8 is pushed and CI is green, archive them with the registered source-d426 invalidation command, then generate new source-v8 bundles"
+  - name: "invalidated authorization-boundary setup archive"
+    storage: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/invalidated_setup/source_d4269bf34f7c80affcc8c1e8a33fee9afddcd912d1bd9dead223e520ee108b36/"
+    required_for: "audit of the source-d426 seed-7411/7412 G0 and positive-control passes, pre-result authorization failure, and exact preservation of every source-bound setup payload"
+    checksum: "tracked receipt runs/failures/invalidated_setup_source_d4269bf3.json; receipt SHA256 9aa04d35c15f1338efcb9a650dea3d49248c3c3860fce36d28bded7b68efc1a1; receipt identity e7a713624d0738016f3d3f823b7487ed8de40e8bad4f32c12ae5540f72818b77; files identity 1538f2f2a3952dbfb000a8fe41b34b67cd82aa1c011e08143570503550ec3ed0; 23 files; 18,927,960 bytes"
+    regenerate: "not regenerable as historical evidence; preserve this exact content-hashed archive"
   - name: "fixed-final LoRA joint checkpoints"
     storage: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/lora_joint_seed{7411,7412,7413}/"
     required_for: "primary LoRA state-formation adjudication and intact/disabled reevaluation"
@@ -64,9 +64,7 @@ reproducibility:
     - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/invalidated_setup/source_9fd420f5f29fea2d9144bf50d3b187fc8e50d9acc9cb076656372281029614fb/"
     - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/invalidated_setup/source_3baa7b532d62bae4d9751dfe4be9c6ce314c11ca4524266f4cebea63289d5c42/"
     - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/invalidated_setup/source_1d1368cf064689322d9df7f345e67b026cecccc32d3a7b7514b82f253d434b0a/"
-    - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed7411.pt"
-    - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed7412.pt"
-    - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed7413.pt"
+    - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/invalidated_setup/source_d4269bf34f7c80affcc8c1e8a33fee9afddcd912d1bd9dead223e520ee108b36/"
 notes: >-
   The frozen design receipt remains authoritative. Setup artifacts produced under source digests
   903f1914, 9fd420f5, and 3baa7b53 are invalid and preserved in separate content-hashed external
@@ -127,8 +125,15 @@ notes: >-
   incomplete consumer-side enforcement of producer-written identity/access/authorization fields and
   runbook-only stage-order barriers. No result stage ran; source repair, archival, regeneration, and
   ordered setup replay are required before any scientific training. The source-d426 audit failure is
-  preserved at tracked receipt identity 1889212115ba1740039ff66b89eda4a02ea079573dc87f0d366a472ba39a3a13
-  and will be the invalidated-setup archive trigger after the replacement source is published.
+  preserved at tracked receipt identity 1889212115ba1740039ff66b89eda4a02ea079573dc87f0d366a472ba39a3a13.
+  It triggered the completed 23-file, 18,927,960-byte source-d426 archive at receipt identity
+  e7a713624d0738016f3d3f823b7487ed8de40e8bad4f32c12ae5540f72818b77 and files identity
+  1538f2f2a3952dbfb000a8fe41b34b67cd82aa1c011e08143570503550ec3ed0. Every archive payload and
+  zero-length quarantine leaf was independently verified, canonical setup cleanup was exact, and an
+  idempotent replay changed nothing. Post-archive validation required tracked empty structural
+  sentinels in the retained setup directories; source v9 validates and preserves those sentinels
+  without adding them to the evidence inventory. Fresh source-v9 regeneration waits for the combined
+  source-v9/archive checkpoint's publication and both repository workflows.
   The first Qwen load stopped before wrapper construction or mechanics and is preserved by a tracked
   failure receipt; it opened
   only the permitted training validator, no sealed contrast, and produced no canonical G0 output.

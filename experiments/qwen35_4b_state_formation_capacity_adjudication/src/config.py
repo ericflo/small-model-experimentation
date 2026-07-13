@@ -21,7 +21,7 @@ MODEL_ID = "Qwen/Qwen3.5-4B"
 MODEL_REVISION = "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
 BACKEND = "transformers"
 EXPERIMENT_ID = "qwen35_4b_state_formation_capacity_adjudication"
-SOURCE_CONTRACT_VERSION = 8
+SOURCE_CONTRACT_VERSION = 9
 CONFIRMATORY_CONFIG_SHA256 = "eeb4e828526f750dce1258bcc91d03114c80688d300112e03d18c9d911489393"
 SOURCE_CONTRACT_FILES = (
     "scripts/archive_failed_attempt.py",

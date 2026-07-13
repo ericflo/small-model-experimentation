@@ -635,3 +635,45 @@ until the seed-7412 control passes and is committed.
 No further model-bearing stage or result training is authorized. Preserve this source-d426 setup,
 repair and adversarially test the authorization consumers, archive every invalidated source-d426
 artifact, regenerate source-bound setup, and replay its gates in order before scientific execution.
+
+## 2026-07-13 — source-v8 published; source-d426 setup durably archived
+
+- The first source-v7 archive preflight stopped before mutation because successful legacy positive-
+  control receipts omit the later explicit result-evaluation deny bit. Source v8 accepts only that
+  legacy-safe omission or exact boolean `false`, rejects `true`, `null`, and integer substitutes, and
+  removes the redundant unignored per-source lock while retaining the shared `runs/run.lock`.
+- Source-v8 reviewed implementation `f9364c36…b9d873` and full contract `7991d46a…b1cc88` pass
+  357/357 tests and the exact machine GO. Commit `ee729def` was pushed to `main`; both Validate
+  Repository and Publish Research Site completed successfully before archival resumed.
+- The registered transaction preserved 23 source-d426 files totaling 18,927,960 bytes. The archive
+  files identity is `1538f2f2…ec3ed0`, tracked receipt file SHA-256 is `9aa04d35…efc1a1`, and receipt
+  identity is `e7a71362…818b77`; it binds replacement source `7991d46a…b1cc88` and trigger identity
+  `18892121…3a13`.
+- Independent verification recomputed every payload hash and both receipt identities, matched exact
+  archive and 23-leaf zero-quarantine membership, confirmed empty canonical CPU/setup directories,
+  only `.gitignore` under generated data, and no live initialization bundle. An immediate idempotent
+  rerun revalidated the same evidence without further mutation.
+
+## Current authorization
+
+Only archive-checkpoint validation, commit, push, and workflow verification are authorized. Do not
+regenerate CPU smoke, data, initialization, or any model-bearing setup until that checkpoint is green.
+No result training is authorized.
+
+## 2026-07-13 — source-v9 makes retained setup directories clone-stable
+
+- Repository validation correctly rejected the archive's empty retained `runs/cpu_smoke` and
+  `runs/setup` directories because Git cannot represent them and CI would see a different tree.
+- Source v9 adds one tracked empty `.gitkeep` per directory. The archiver requires an empty,
+  inode-distinct stable regular file; excludes it from archive evidence; permits no other residue;
+  preserves it through cleanup; and revalidates it at the terminal postcondition. Missing, nonempty,
+  hardlinked, symlinked, and extra entries fail closed.
+- Reviewed implementation `1c73fbf9…d5ad3b` and full source contract `5629a3a4…99e236` have exact
+  machine GO. No setup was regenerated and no model or sealed payload was opened during this
+  structural repair.
+
+## Current authorization
+
+Only combined source-v9/archive-checkpoint validation, commit, push, and workflow verification are
+authorized. Regeneration and every model-bearing or result stage remain blocked until both workflows
+are green.

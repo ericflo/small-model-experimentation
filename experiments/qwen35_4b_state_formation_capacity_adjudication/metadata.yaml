@@ -5,9 +5,8 @@ source_track: "new"
 path: "experiments/qwen35_4b_state_formation_capacity_adjudication"
 primary_readme: "experiments/qwen35_4b_state_formation_capacity_adjudication/README.md"
 primary_report: "experiments/qwen35_4b_state_formation_capacity_adjudication/reports/report.md"
-summary: "This is the canonical fresh adjudication of the unresolved LoRA-capacity question from `qwen35_4b_state_carry_vs_state_bag`. It is not a continuation of either prior checkpoint. Preregistration, adversarial design review, and the frozen scientific design are complete. The integrated source-v8 review is `GO` for reviewed implementation `f9364c36…b9d873` and full source contract `7991d46a…b1cc88`; the 357/357 suite and exact machine gate pass. Execution remains ordered: publish this source to `main`, require both workflows green, archive the source-d426 setup, publish that archive checkpoint, and only then regenerate source-v8 setup. Under source `3baa7b53…d5c42`, seed 7411 passed LoRA G0, then its 256-update setup control scored 0/48 exact terminal triples. Review found that the control had presented one singleton row per optimizer update and omitted the globally frozen accumulation of 16, so each high-entropy row appeared only five or six times. The scorer, targets, recurrence, gradients, and fixed-final gate were aligned. The miss is therefore preserved as a setup failure, not evidence about LoRA capacity."
+summary: "This is the canonical fresh adjudication of the unresolved LoRA-capacity question from `qwen35_4b_state_carry_vs_state_bag`. It is not a continuation of either prior checkpoint. Preregistration, adversarial design review, and the frozen scientific design are complete. The integrated source-v9 review is `GO` for reviewed implementation `1c73fbf9…d5ad3b` and full source contract `5629a3a4…99e236`; the 358/358 suite and exact machine gate pass. The required source-v8 publication/CI and source-d426 archival steps completed in order. The post-archive repository gate then required tracked empty structural sentinels in the retained setup directories; v9 adds and strictly validates only those sentinels. Publish the combined source-v9 and archive checkpoint next, require both workflows green, and only then regenerate source-v9 setup. The source-v8 code is published at commit `ee729def` with both workflows green, and the source-d426 archive is now complete: 23 files, 18,927,960 bytes, files identity `1538f2f2…ec3ed0`, receipt file SHA-256 `9aa04d35…efc1a1`, and receipt identity `e7a71362…818b77`. Independent verification matched every archive payload and zero-length quarantine leaf, confirmed exact canonical cleanup, and an idempotent replay made no further change. Setup regeneration remains blocked until this archive checkpoint is committed, pushed, and green. Under source `3baa7b53…d5c42`, seed 7411 passed LoRA G0, then its 256-update setup control scored 0/48 exact terminal triples. Review found that the control had presented one singleton row per optimizer update and omitted the globally frozen accumulation of 16, so each high-entropy row appeared only five or six times. The scorer, targets, recurrence, gradients, and fixed-final gate were aligned. The miss is therefore preserved as a setup failure, not evidence about LoRA capacity."
 tags:
-  - "execution"
   - "latent-state"
   - "lora"
   - "small-model"
@@ -26,10 +25,10 @@ top_level_dirs:
   - "tests"
 file_counts:
   csv: 1
-  json: 20
+  json: 11
   md: 11
   py: 42
   yaml: 4
-  "[none]": 1
-total_files: 79
-total_size_bytes: 4609150
+  "[none]": 3
+total_files: 72
+total_size_bytes: 1951315

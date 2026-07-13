@@ -1,16 +1,24 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · frozen design unchanged; source-v8 implementation review `GO`; source-v8 publication/CI and source-d426 archival still required; no result run is authorized
+**Status:** in-progress · since 2026-07-13 · frozen design unchanged; source-v9 implementation review `GO`; source-d426 archive complete; combined source-v9/archive-checkpoint publication/CI required before regeneration; no result run is authorized
 
 ## Current status
 
 This is the canonical fresh adjudication of the unresolved LoRA-capacity question from
 `qwen35_4b_state_carry_vs_state_bag`. It is not a continuation of either prior checkpoint.
 Preregistration, adversarial design review, and the frozen scientific design are complete. The
-integrated source-v8 review is `GO` for reviewed implementation
-`f9364c36…b9d873` and full source contract `7991d46a…b1cc88`; the 357/357 suite and exact machine gate
-pass. Execution remains ordered: publish this source to `main`, require both workflows green, archive
-the source-d426 setup, publish that archive checkpoint, and only then regenerate source-v8 setup.
+integrated source-v9 review is `GO` for reviewed implementation
+`1c73fbf9…d5ad3b` and full source contract `5629a3a4…99e236`; the 358/358 suite and exact machine gate
+pass. The required source-v8 publication/CI and source-d426 archival steps completed in order. The
+post-archive repository gate then required tracked empty structural sentinels in the retained setup
+directories; v9 adds and strictly validates only those sentinels. Publish the combined source-v9 and
+archive checkpoint next, require both workflows green, and only then regenerate source-v9 setup.
+The source-v8 code is published at commit `ee729def` with both workflows green, and the source-d426
+archive is now complete: 23 files, 18,927,960 bytes, files identity `1538f2f2…ec3ed0`, receipt file
+SHA-256 `9aa04d35…efc1a1`, and receipt identity `e7a71362…818b77`. Independent verification matched every
+archive payload and zero-length quarantine leaf, confirmed exact canonical cleanup, and an idempotent
+replay made no further change. Setup regeneration remains blocked until this archive checkpoint is
+committed, pushed, and green.
 Under source `3baa7b53…d5c42`, seed 7411 passed LoRA G0, then its 256-update setup
 control scored 0/48 exact terminal triples. Review found that the control had presented one singleton
 row per optimizer update and omitted the globally frozen accumulation of 16, so each high-entropy row
@@ -88,15 +96,18 @@ replacement-source seed-7411 and seed-7412 G0/controls passed. A pre-result auth
 found fail-open generic receipt checks; source repair and setup archival/regeneration are required
 before seed 7413 or any result-bearing stage.
 
-### Source-v8 operator boundary
+### Source-v9 operator boundary
 
 The frozen GPU runbook is the complete from-zero phase order, not the current resume point. Preserve
 `reports/design_receipt.json` and every file it freezes; do not rerun `design-boundary` or rewrite the
 preregistration, design review, architecture, runbook, handoff, or default config. After
-source-contract v8 is committed, pushed to `main`, and both repository workflows are green, archive
-every source-`d4269bf3…8b36` downstream setup artifact through the registered invalidation helper.
-Then regenerate CPU smoke, procedural data and the empty contrast ledger, all three initialization
-bundles, and all three LoRA G0/positive-control pairs under the one final v8 source before Stage A.
+Source-contract v8 was committed and green before every source-`d4269bf3…8b36` downstream setup
+artifact was archived through the registered invalidation helper. That transition is complete at
+receipt identity `e7a71362…818b77`. Source v9 adds only the tracked structural sentinels required for
+clone-stable retained setup directories. After the combined v9/archive checkpoint is committed,
+pushed, and green, regenerate CPU smoke, procedural data and the empty contrast ledger, all three
+initialization bundles, and all three LoRA G0/positive-control pairs under the one final v9 source
+before Stage A.
 
 The exact one-time transition command is:
 
@@ -107,8 +118,9 @@ EXP=experiments/qwen35_4b_state_formation_capacity_adjudication
   --trigger-failure "$EXP/runs/failures/pre_result_authorization_audit_failure.json"
 ```
 
-Inspect the emitted tracked receipt and external archive, run `make check`, commit and push that
-archive checkpoint, and wait for both repository workflows before regenerating any v7 setup.
+The emitted tracked receipt and external archive have been independently verified. Run `make check`,
+commit and push this archive checkpoint, and wait for both repository workflows before regenerating
+any v9 setup.
 
 A result checkpoint directory is not a completed training cell. Completion requires the exact
 external and tracked `TRAINING_COMPLETE` receipts, byte-identical but inode-distinct attempt-marker,
@@ -303,9 +315,10 @@ fresh successor.
 
 ## Run
 
-The run is deliberately non-monolithic. At the current source-v8 resume point, perform the
-source-d426 archive transition in **Source-v8 operator boundary** above first. Only after that archive
-checkpoint is committed, pushed, and green should setup regeneration start with the non-model smoke:
+The run is deliberately non-monolithic. At the current source-v9 resume point, the source-d426
+archive transition in **Source-v9 operator boundary** above is complete. Only after the combined
+source-v9/archive checkpoint is committed, pushed, and green should setup regeneration start with
+the non-model smoke:
 
 ```bash
 .venv/bin/python -B experiments/qwen35_4b_state_formation_capacity_adjudication/scripts/run.py --stage cpu-smoke
