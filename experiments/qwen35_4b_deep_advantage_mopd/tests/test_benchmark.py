@@ -6,6 +6,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 
 EXP = Path(__file__).resolve().parents[1]
@@ -28,7 +29,8 @@ from bench import (  # noqa: E402
     benchmark_source_inventory,
     model_provenance,
 )
-from authorize_benchmark import _audit_merge_receipt  # noqa: E402
+import authorize_benchmark  # noqa: E402
+from authorize_benchmark import _audit_integration, _audit_merge_receipt  # noqa: E402
 from io_utils import (  # noqa: E402
     confirmation_evaluator_source_inventory,
     sha256_file,
@@ -307,6 +309,128 @@ class BenchmarkAnalysisTests(unittest.TestCase):
         model_weights.write_bytes(b"after")
         with self.assertRaises(ValueError):
             _audit_merge_receipt(merged, base, adapter)
+
+    def test_replicate_audit_reuses_only_primary_round_zero_online_data(self):
+        root = Path(self.temporary.name) / "shared_round_zero"
+        experiment = root / "experiment"
+        artifacts = root / "artifacts"
+        soup = root / "soup"
+        config_path = experiment / "configs" / "default.yaml"
+        receipt_path = experiment / "runs" / "integration" / "seed_43.json"
+        config_path.parent.mkdir(parents=True)
+        receipt_path.parent.mkdir(parents=True)
+        soup.mkdir(parents=True)
+        config_path.write_text("synthetic: true\n", encoding="utf-8")
+        (soup / "merge_receipt.json").write_text("{}\n", encoding="utf-8")
+        config = {
+            "model": {
+                "artifacts_root": str(artifacts),
+                "student_checkpoint": str(soup),
+            },
+            "seeds": {"integration_training": [42, 43, 44]},
+            "mopd": {"rounds": 4, "updates_per_round": 20},
+        }
+
+        rounds = []
+        expected_target_caches = []
+        for round_index, data_seed in enumerate((42, 43, 43, 43)):
+            data_root = (
+                artifacts
+                / "online"
+                / "primary"
+                / f"seed_{data_seed}"
+                / f"round_{round_index}"
+            )
+            data_root.mkdir(parents=True)
+            manifest = data_root / "training_round.json"
+            target_cache = data_root / "all_policy_targets.pt"
+            manifest.write_text(
+                json.dumps({"round": round_index, "data_seed": data_seed}) + "\n",
+                encoding="utf-8",
+            )
+            target_cache.write_bytes(f"cache-{round_index}".encode())
+            expected_target_caches.append(target_cache.resolve())
+
+            adapter = (
+                artifacts
+                / "adapters"
+                / "primary"
+                / "seed_43"
+                / f"round_{round_index}"
+            )
+            merged = (
+                artifacts
+                / "merged"
+                / "primary"
+                / "seed_43"
+                / f"round_{round_index}"
+            )
+            adapter.mkdir(parents=True)
+            merged.mkdir(parents=True)
+            training_receipt = adapter / "training_receipt.json"
+            merge_receipt = merged / "merge_receipt.json"
+            training_receipt.write_text("{}\n", encoding="utf-8")
+            merge_receipt.write_text("{}\n", encoding="utf-8")
+            round_gate = {"passed": True, "completed_all_updates": True}
+            rounds.append(
+                {
+                    "round": round_index,
+                    "round_manifest": str(manifest.resolve()),
+                    "round_manifest_sha256": sha256_file(manifest),
+                    "target_cache": str(target_cache.resolve()),
+                    "target_cache_sha256": sha256_file(target_cache),
+                    "training_receipt": str(training_receipt.resolve()),
+                    "training_receipt_sha256": sha256_file(training_receipt),
+                    "round_gate": round_gate,
+                    "merged": str(merged.resolve()),
+                    "merge_receipt_sha256": sha256_file(merge_receipt),
+                }
+            )
+
+        primary = artifacts / "merged" / "primary" / "seed_43" / "round_3"
+        receipt_path.write_text(
+            json.dumps(
+                {
+                    "stage": "four_round_deep_advantage_routed_mopd",
+                    "config_sha256": sha256_file(config_path),
+                    "seed": 43,
+                    "rounds": rounds,
+                    "completed_rounds": 4,
+                    "gate": {"passed": True},
+                    "final_model": str(primary.resolve()),
+                }
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+
+        with (
+            mock.patch.object(authorize_benchmark, "EXP", experiment),
+            mock.patch.object(
+                authorize_benchmark,
+                "resolve_repo_path",
+                side_effect=lambda value: Path(value).resolve(),
+            ),
+            mock.patch.object(
+                authorize_benchmark,
+                "_audit_mopd_training_receipt",
+            ) as audit_training,
+            mock.patch.object(
+                authorize_benchmark,
+                "_audit_merge_receipt",
+                side_effect=lambda merged, _base, _adapter: sha256_file(
+                    merged / "merge_receipt.json"
+                ),
+            ),
+        ):
+            artifact = _audit_integration(config, config_path, 43, primary)
+
+        self.assertEqual(artifact["path"], str(receipt_path.resolve()))
+        self.assertEqual(audit_training.call_count, 4)
+        self.assertEqual(
+            [call.kwargs["target_cache"] for call in audit_training.call_args_list],
+            expected_target_caches,
+        )
 
     def test_all_paired_events_must_be_positive(self):
         passed = self._run(inject_score_failure=False)

@@ -320,6 +320,7 @@ def _audit_integration(
         raise ValueError("primary integration final-round provenance is stale")
     artifacts_root = resolve_repo_path(config["model"]["artifacts_root"])
     soup = resolve_repo_path(config["model"]["student_checkpoint"])
+    primary_seed = int(config["seeds"]["integration_training"][0])
     for round_index, row in enumerate(rounds):
         adapter = (
             artifacts_root
@@ -336,11 +337,15 @@ def _audit_integration(
             / f"seed_{seed}"
             / f"round_{round_index}"
         ).resolve()
+        # All integration seeds start from the identical frozen soup, so the
+        # runner reuses the primary seed's exact round-zero on-policy draw.
+        # Once checkpoints diverge, every later round is seed-local.
+        data_seed = primary_seed if round_index == 0 else seed
         data_root = (
             artifacts_root
             / "online"
             / "primary"
-            / f"seed_{seed}"
+            / f"seed_{data_seed}"
             / f"round_{round_index}"
         ).resolve()
         round_manifest = data_root / "training_round.json"
