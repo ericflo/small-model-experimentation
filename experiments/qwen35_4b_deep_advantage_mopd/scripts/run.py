@@ -20,8 +20,13 @@ VLLM_PY = REPO / ".venv-vllm" / "bin" / "python"
 sys.path.insert(0, str(EXP / "src"))
 
 from gym.families import ALL_FAMILIES  # noqa: E402
+from control_rematch import (  # noqa: E402
+    validate_control_overlay_cache,
+    validate_control_rematch_manifest,
+)
 from io_utils import (  # noqa: E402
     canonical_hash,
+    confirmation_evaluator_source_inventory,
     load_config,
     resolve_repo_path,
     sha256_file,
@@ -69,6 +74,20 @@ def _paths(config: dict) -> dict[str, Path]:
 
 def _merged_complete(path: Path) -> bool:
     return all((path / name).is_file() for name in ("config.json", "model.safetensors", "merge_receipt.json"))
+
+
+def _model_inference_inventory_sha256(model: Path) -> str:
+    rows = [
+        {
+            "path": path.relative_to(model).as_posix(),
+            "sha256": sha256_file(path),
+        }
+        for path in sorted(model.rglob("*"))
+        if path.is_file()
+    ]
+    if not rows:
+        raise SystemExit(f"merged checkpoint inference inventory is empty: {model}")
+    return canonical_hash(rows)
 
 
 def _source_complete(adapter: Path, merged: Path) -> bool:
@@ -1018,6 +1037,92 @@ def _control_final_model(config: dict, name: str) -> Path:
     )
 
 
+def _prepare_non_advantage_route_cache(
+    config: dict,
+    config_path: Path,
+    *,
+    data_root: Path,
+    manifest: Path,
+    source_cache: Path,
+) -> tuple[Path, Path]:
+    """Return a full-prefix cache overlay without modifying primary evidence."""
+
+    paths = _paths(config)
+    overlay_root = data_root / "control_overlays" / "non_advantage_route"
+    rematch_manifest = overlay_root / "rematch_manifest.json"
+    derived_cache = overlay_root / "all_policy_targets.pt"
+    derived_receipt = derived_cache.with_suffix(derived_cache.suffix + ".receipt.json")
+    if not rematch_manifest.is_file():
+        if overlay_root.exists() and any(overlay_root.iterdir()):
+            raise SystemExit(f"partial non-advantage control overlay: {overlay_root}")
+        _run(
+            [
+                str(PY), str(EXP / "scripts" / "build_control_overlay.py"),
+                "--config", str(config_path),
+                "--round-manifest", str(manifest),
+                "--source-cache", str(source_cache),
+                "--quick", str(paths["quick"]),
+                "--deep", str(paths["deep"]),
+                "--soup", str(paths["soup"]),
+                "--out-dir", str(overlay_root),
+            ],
+            training=True,
+            allowed=(0, 3),
+        )
+    try:
+        rematch = validate_control_rematch_manifest(
+            rematch_manifest,
+            config=config,
+            config_path=config_path,
+            source_manifest=manifest,
+            source_cache=source_cache,
+        )
+    except ValueError as error:
+        raise SystemExit(f"stale non-advantage control rematch: {error}") from error
+    replacements = int(rematch.get("replacement_count", -1))
+    if replacements == 0:
+        if derived_cache.exists() or derived_receipt.exists():
+            raise SystemExit(
+                f"no-op control rematch has unexpected derived cache: {overlay_root}"
+            )
+        return source_cache, rematch_manifest
+    if replacements < 1:
+        raise SystemExit(f"invalid control rematch replacement count: {rematch_manifest}")
+    try:
+        validate_control_overlay_cache(
+            derived_cache,
+            rematch_manifest=rematch_manifest,
+            source_cache=source_cache,
+            config=config,
+            config_path=config_path,
+        )
+    except ValueError as error:
+        raise SystemExit(f"stale non-advantage control cache: {error}") from error
+    return derived_cache, rematch_manifest
+
+
+def _effective_control_target_cache(
+    control_name: str,
+    config: dict,
+    config_path: Path,
+    *,
+    data_root: Path,
+    manifest: Path,
+    source_cache: Path,
+) -> tuple[Path, Path | None]:
+    """Route only the non-advantage arm through the full-prefix overlay."""
+
+    if control_name != "non_advantage_route":
+        return source_cache, None
+    return _prepare_non_advantage_route_cache(
+        config,
+        config_path,
+        data_root=data_root,
+        manifest=manifest,
+        source_cache=source_cache,
+    )
+
+
 def _build_parameter_controls(config: dict) -> dict[str, Path]:
     paths = _paths(config)
     result = {}
@@ -1077,6 +1182,16 @@ def _controls(config: dict, config_path: Path) -> None:
             )
             primary_receipt = _require_round_gate(primary_adapter / "training_receipt.json")
             target_pressure = float(primary_receipt["initial_probe"]["mean_loss"])
+            effective_target_cache, rematch_manifest = (
+                _effective_control_target_cache(
+                    control_name,
+                    config,
+                    config_path,
+                    data_root=data_root,
+                    manifest=manifest,
+                    source_cache=target_cache,
+                )
+            )
             adapter = (
                 paths["root"] / "adapters" / "controls" / control_name
                 / f"round_{round_index}"
@@ -1089,7 +1204,7 @@ def _controls(config: dict, config_path: Path) -> None:
                 config,
                 config_path,
                 base_model=current,
-                target_cache=target_cache,
+                target_cache=effective_target_cache,
                 adapter=adapter,
                 merged=merged,
                 round_index=round_index,
@@ -1102,10 +1217,26 @@ def _controls(config: dict, config_path: Path) -> None:
                     "round": round_index,
                     "primary_manifest_sha256": sha256_file(manifest),
                     "primary_target_cache_sha256": sha256_file(target_cache),
+                    "effective_target_cache": str(effective_target_cache.resolve()),
+                    "effective_target_cache_sha256": sha256_file(
+                        effective_target_cache
+                    ),
+                    "control_rematch_manifest": (
+                        str(rematch_manifest.resolve())
+                        if rematch_manifest is not None else None
+                    ),
+                    "control_rematch_manifest_sha256": (
+                        sha256_file(rematch_manifest)
+                        if rematch_manifest is not None else None
+                    ),
                     "training_receipt": str((adapter / "training_receipt.json").resolve()),
                     "training_receipt_sha256": sha256_file(adapter / "training_receipt.json"),
                     "round_gate": receipt.get("round_gate"),
                     "merged": str(merged.resolve()) if merged_result is not None else None,
+                    "merge_receipt_sha256": (
+                        sha256_file(merged / "merge_receipt.json")
+                        if merged_result is not None else None
+                    ),
                 }
             )
             if merged_result is None:
@@ -1168,6 +1299,10 @@ def _controls(config: dict, config_path: Path) -> None:
                 "training_receipt_sha256": sha256_file(adapter / "training_receipt.json"),
                 "round_gate": receipt.get("round_gate"),
                 "merged": str(merged.resolve()) if merged_result is not None else None,
+                "merge_receipt_sha256": (
+                    sha256_file(merged / "merge_receipt.json")
+                    if merged_result is not None else None
+                ),
             }
         )
         if merged_result is None:
@@ -1224,13 +1359,23 @@ def _validate_confirmation_score(
 ) -> dict:
     payload = json.loads(path.read_text(encoding="utf-8"))
     expected_k = 1 if decode == "greedy" else 8
+    evaluator_source = confirmation_evaluator_source_inventory()
     if (
         payload.get("stage") != "policy_eval"
         or payload.get("scope") != "confirmatory"
+        or payload.get("evaluator_sha256")
+        != sha256_file(EXP / "scripts" / "eval_policy.py")
+        or payload.get("evaluator_source_inventory_sha256")
+        != evaluator_source["sha256"]
+        or int(payload.get("evaluator_source_file_count", -1))
+        != evaluator_source["file_count"]
         or payload.get("config_sha256") != sha256_file(config_path)
         or payload.get("model") != str(model.resolve())
         or payload.get("model_merge_receipt_sha256")
         != sha256_file(model / "merge_receipt.json")
+        or payload.get("model_config_sha256") != sha256_file(model / "config.json")
+        or payload.get("model_inference_inventory_sha256")
+        != _model_inference_inventory_sha256(model)
         or int(payload.get("block_seed", -1)) != seed
         or payload.get("decode") != decode
         or int(payload.get("k", -1)) != expected_k
@@ -1313,6 +1458,12 @@ def _confirm(config: dict, config_path: Path) -> None:
             name: sha256_file(model / "merge_receipt.json")
             for name, model in evaluation_arms.items()
         },
+        "model_inference_inventories": {
+            name: _model_inference_inventory_sha256(model)
+            for name, model in evaluation_arms.items()
+        },
+        "evaluator_sha256": sha256_file(EXP / "scripts" / "eval_policy.py"),
+        "evaluator_source_inventory": confirmation_evaluator_source_inventory(),
     }
     manifest_path = EXP / "runs" / "confirmation" / "manifest.json"
     write_json(manifest_path, manifest)
@@ -1331,6 +1482,16 @@ def _confirm(config: dict, config_path: Path) -> None:
 
 def _benchmark(config: dict, config_path: Path) -> None:
     _require_gate(EXP / "analysis" / "confirmation.json")
+    authorization = EXP / "analysis" / "benchmark_authorization.json"
+    _run(
+        [
+            str(PY),
+            str(EXP / "scripts" / "authorize_benchmark.py"),
+            "--out",
+            str(authorization),
+        ]
+    )
+    _require_gate(authorization)
     paths = _paths(config)
     primary = _integration_final_model(
         config, int(config["seeds"]["integration_training"][0])
@@ -1342,6 +1503,8 @@ def _benchmark(config: dict, config_path: Path) -> None:
         "quick": list(range(first, first + quick_n)),
         "medium": list(range(first + quick_n, first + quick_n + medium_n)),
     }
+    if sum(len(seeds) for seeds in tier_seeds.values()) * 3 != 33:
+        raise SystemExit("frozen benchmark inventory is not exactly 33 events")
     events = []
     for tier, seeds in tier_seeds.items():
         models = {
@@ -1376,6 +1539,8 @@ def _benchmark(config: dict, config_path: Path) -> None:
                     ]
                 )
                 events.append(out)
+    if len(events) != 33:
+        raise AssertionError("benchmark orchestration did not map exactly 33 events")
     code = _run(
         [
             str(PY),
