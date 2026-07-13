@@ -133,7 +133,7 @@
     "qwen35_4b_jacobian_counterfactual_branching": {
       "status": "in-progress",
       "since": "2026-07-13",
-      "reason": "Valid smoke 002 failed frozen live non-J norm/span controls; quantization-aware geometry repair is implemented but needs push/re-anchor before smoke 003."
+      "reason": "Quantization-aware live non-J repair is pushed/re-anchored; outcome-blind smoke 003 remains before mechanics."
     },
     "qwen35_4b_confidence_guided_compute": {
       "status": "finished",

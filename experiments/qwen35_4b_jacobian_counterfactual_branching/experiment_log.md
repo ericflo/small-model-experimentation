@@ -58,3 +58,5 @@
 - Added vectorized outcome-blind repair of each fixed non-J request toward its
   paired realized J norm outside the complete J span, with 512 iterations and
   0.5 damping. Code must be pushed/re-anchored before smoke 003.
+- Repair implementation pushed at `934f4d59`; exact updated hashes are anchored
+  for smoke 003.

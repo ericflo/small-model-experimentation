@@ -106,9 +106,9 @@ gates:
 
 design_boundary:
   status: anchored
-  implementation_commit: 802cf1a5dbc3149c75e8352c1b28d1f163ff407a
+  implementation_commit: 934f4d59719660191fd7b0f6e07029a0da5e1c76
   implementation_hashes:
-    runner_sha256: f78a26c2479a129184f14cde971f780e3b82679fec7bf5ff6152b5250282f90c
-    model_ops_sha256: ee7c3765d38f53f60f9b58b6c5199a28e1c981ccf14cc7d4902b46344e30e59e
+    runner_sha256: 2468a947db609afda40db1e6f105785a6d2e8e36910cdd6991bd87272dcbcb70
+    model_ops_sha256: c69f96853bfb76dfec66b9502328c7f0ab96e855f2bacb4fe13fec765c0b9155
     branch_geometry_sha256: 68df4c9b45626eab4e6b0e98aa686f6e58aaa6abc450c55da7e2cfd4c258a150
-    tests_sha256: ac7741e8cd718091fff6c54eebdcaff012ed477e3ef4fa549b90785ee0cad5a9
+    tests_sha256: 4d259439512fc0aa57ee73a470e22a7902c42cc19bf3386291bd2033d7525ab7
