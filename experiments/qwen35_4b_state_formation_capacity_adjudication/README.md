@@ -1,6 +1,6 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · frozen design unchanged; seed-7412 LoRA G0 precision failure preserved; narrow FP32 aggregation and durable G0-failure repair reviewed `GO`; source-1d setup must be archived and regenerated; no result run is authorized
+**Status:** in-progress · since 2026-07-13 · frozen design unchanged; seed-7412 LoRA G0 precision failure preserved; narrow FP32 aggregation and durable G0-failure repair reviewed `GO`; source-1d setup archived; replacement-source regeneration pending; no result run is authorized
 
 ## Current status
 
@@ -23,18 +23,19 @@ independent code and GPU/runtime audits both gave `GO` before live seed-7412 G0 
 aggregation-precision defect described below.
 
 Every setup artifact tied to `3baa7b53…d5c42` remains preserved in a verified 20-file archive whose
-receipt identity is `1daa86e…e283aa`. Fresh setup under final source `1d1368cf…434b0a` has now been
-created and strictly reopened: CPU smoke SHA-256 `56032f75…7ad43`, data-manifest SHA-256
+receipt identity is `1daa86e…e283aa`. The later setup under source `1d1368cf…434b0a` was created,
+strictly reopened, and is now preserved in a verified 21-file archive at identity
+`13cdcaec…2050b`: CPU smoke SHA-256 `56032f75…7ad43`, data-manifest SHA-256
 `85286a95…0cd9`, data contract `891ad784…e9c8`, and empty-ledger identity `b122d490…3c14`.
-All three source-bound initialization bundles pass the canonical loader, their tracked receipts are
-byte-identical to their external sidecars, and their tensor-value digests exactly reproduce the
+All three source-bound initialization bundles passed the canonical loader, their tracked receipts were
+byte-identical to their external sidecars, and their tensor-value digests exactly reproduced the
 archived shared initialization. No sealed contrast row was decompressed, no model was loaded during
-regeneration, and the ledger still has zero events. Seed-7411 LoRA G0 now passes canonically under
+regeneration, and the ledger still had zero events. Seed-7411 LoRA G0 passed canonically under
 the final source at receipt identity `928e756f…820c`: both PEFT parity regimes have zero observed
 error, K=1 is exact, every required recurrent group and all 124 LoRA tensors receive finite nonzero
 gradients while the base receives none, the K=12 path is finite, and checkpoint restoration is exact.
 The earlier source-3baa G0 pass and 0/48 control miss remain historical mechanics records only. The
-corrected final-source control now passes 48/48 after exactly
+corrected source-1d control passed 48/48 after exactly
 256 optimizer updates and 4,096 singleton presentations; disabling adaptation at the same fixed final
 scores 0/48, confirming that the setup path actually exercised the LoRA update.
 
@@ -53,9 +54,8 @@ completed aggregate is cast back once. G0 failures now persist a nonauthorizing 
 an independent byte-identical source-qualified mirror without overwriting existing or symlinked
 paths. The complete suite passes 201/201, a CUDA BF16 adversarial probe reproduces legacy gradient
 zero versus repaired analytic gradient 0.045, and independent numerical/runtime/archive re-audits
-give `GO`. The frozen nonzero gate is unchanged. Because the repair changes the source contract, all
-source-`1d1368cf…434b0a` setup must be archived and regenerated and execution must restart from seed
-7411.
+give `GO`. The frozen nonzero gate is unchanged. All source-`1d1368cf…434b0a` setup is now archived;
+replacement-source setup must be regenerated and execution must restart from seed 7411.
 
 ## Research program and prior anchors
 

@@ -16,11 +16,16 @@ external_artifacts:
     required_for: "audit of the first durable G0, the under-presented setup-control failure, and exact preservation of their source-bound setup"
     checksum: "tracked receipt runs/failures/invalidated_setup_source_3baa7b53.json; receipt identity 1daa86e02f7d3f3c612c2f1ec01db89e4967b5b9ce7eb19ba75c752fe1e283aa; files identity 115b9dd5e810cb1bcf88e58a4da366370cbb48c4a1fc1adfcdcb37a5283e1a25; 20 files; 17,775,495 bytes"
     regenerate: "not regenerable as historical evidence; preserve this exact content-hashed archive"
-  - name: "per-seed common loop-state initialization bundles"
+  - name: "invalidated aggregation-precision setup archive"
+    storage: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/invalidated_setup/source_1d1368cf064689322d9df7f345e67b026cecccc32d3a7b7514b82f253d434b0a/"
+    required_for: "audit of the seed-7411 G0/control passes, seed-7412 precision failure, and exact preservation of their source-bound setup"
+    checksum: "tracked receipt runs/failures/invalidated_setup_source_1d1368cf.json; receipt SHA256 e899bc465eb627d5919ef84c7f0bfda07cd96e73035a5ef73569debe34869484; receipt identity 13cdcaec2828e394c625e56955b8d36d4dc4dd6eabbd314dd686bbe143b2050b; files identity d05f410cb36cfc33e9eefcc69c3bb2a50723edb9776f278bce8fb43ac7af9d88; 21 files; 18,288,790 bytes"
+    regenerate: "not regenerable as historical evidence; preserve this exact content-hashed archive"
+  - name: "replacement-source per-seed common loop-state initialization bundles"
     storage: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed{7411,7412,7413}.pt"
     required_for: "bit-identical reconstruction of every reached capacity/objective arm"
-    checksum: "bundle SHA256 by seed: 7411 64f6ac313ee46335c4e8869ac3333136b4fe1739c8c59954b81f971fb96a2971; 7412 ef662c4a3f184b5d18a88142362a9803b51627e2bb59b4d0180afb331f5820ae; 7413 29f35ec72113039aed8c278a9166c5a70e0c9c575b88d3c077d62dacc3ce8f9a; tracked receipt identities bbb21fef784beb1bf9dc50de27ff41624a85904c39191f2288e94cb7a8ad10ae, a5d1a3fdc574ac4968709c65c49b59e859b03ab4226d847dde40fdbdc98ce3f7, 42f9f66b848bcadd6e320db5421d2dfe39572793511b2b38151f6163a92e19e7"
-    regenerate: "preserve these exact final-source bundles; recreate only as part of an explicitly archived source-contract invalidation"
+    checksum: "not yet recreated under replacement source d4269bf34f7c80affcc8c1e8a33fee9afddcd912d1bd9dead223e520ee108b36; the source-1d bundles are preserved only inside the invalidated archive"
+    regenerate: "recreate all three bundles through the canonical setup workflow before any model-bearing replay"
   - name: "fixed-final LoRA joint checkpoints"
     storage: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/lora_joint_seed{7411,7412,7413}/"
     required_for: "primary LoRA state-formation adjudication and intact/disabled reevaluation"
@@ -58,9 +63,7 @@ reproducibility:
     - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/invalidated_setup/source_903f19141ef982f0e90ea856edd72d75fb48d2dbd96e81dc166a6c32d4c14116/"
     - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/invalidated_setup/source_9fd420f5f29fea2d9144bf50d3b187fc8e50d9acc9cb076656372281029614fb/"
     - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/invalidated_setup/source_3baa7b532d62bae4d9751dfe4be9c6ce314c11ca4524266f4cebea63289d5c42/"
-    - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed7411.pt"
-    - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed7412.pt"
-    - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed7413.pt"
+    - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/invalidated_setup/source_1d1368cf064689322d9df7f345e67b026cecccc32d3a7b7514b82f253d434b0a/"
 notes: >-
   The frozen design receipt remains authoritative. Setup artifacts produced under source digests
   903f1914, 9fd420f5, and 3baa7b53 are invalid and preserved in separate content-hashed external
@@ -74,11 +77,11 @@ notes: >-
   created between those source changes. Adversarial recovery review then added resumable cleanup and
   no-follow canonical path checks; no setup was created during that source change either. The final
   regeneration source is
-  1d1368cf064689322d9df7f345e67b026cecccc32d3a7b7514b82f253d434b0a. Current CPU smoke, data
-  manifest, empty seal ledger, and all three initialization bundles have been recreated under that
-  final source and strictly reopened. The manifest SHA256 is
+  1d1368cf064689322d9df7f345e67b026cecccc32d3a7b7514b82f253d434b0a. The now-archived CPU smoke,
+  data manifest, empty seal ledger, and all three initialization bundles were recreated under that
+  source and strictly reopened. The manifest SHA256 is
   85286a9549b0e74111eaa0c1254f04f68cad4d75159abc8ba59c169637280cd9 and the ledger identity is
-  b122d49054cd37474784a8b4ec3bcc0026e745321718dee799615e3051983c14. The current seed-7411 LoRA G0
+  b122d49054cd37474784a8b4ec3bcc0026e745321718dee799615e3051983c14. The archived seed-7411 LoRA G0
   receipt has SHA256 8c381fc7e883e384debef6ce64e55dd57aacab6f30e4a17dd6ef82d4db56aa01 and identity
   928e756fa6aea30104f0ed8a71c03620ed8663198a4811f6fcf9b6fda53f820c. The corrected seed-7411
   positive-control receipt has SHA256 f71ee195b3e326abe59daca019b266932990f17adff20ceba8b414f5ac8c88ec,
@@ -91,8 +94,11 @@ notes: >-
   output exists and the receipt authorizes nothing. The reviewed FP32 convex-mix and durable G0
   failure-persistence repair is complete under replacement source
   d4269bf34f7c80affcc8c1e8a33fee9afddcd912d1bd9dead223e520ee108b36 with 201/201 tests passing.
-  The current source-1d1368 setup must be archived intact before regeneration and replay from seed
-  7411; it remains present and unmodified until that transaction runs.
+  The complete source-1d1368 setup is now durably preserved in a 21-file, 18,288,790-byte archive at
+  receipt identity 13cdcaec2828e394c625e56955b8d36d4dc4dd6eabbd314dd686bbe143b2050b.
+  Canonical source-1d setup paths were removed only after byte-for-byte archive verification, and an
+  idempotent replay revalidated the same receipts without mutation. Replacement-source setup has not
+  yet been regenerated, so no model-bearing stage is currently authorized.
   The first Qwen load stopped before wrapper construction or mechanics and is preserved by a tracked
   failure receipt; it opened
   only the permitted training validator, no sealed contrast, and produced no canonical G0 output.

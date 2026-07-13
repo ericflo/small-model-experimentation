@@ -5,18 +5,19 @@
 **In progress; no scientific result exists.** Preregistration, adversarial design review,
 implementation review, and the frozen design are complete. The corrected setup-control source passed
 171/171 local tests and independent code and GPU/runtime review. Every setup artifact from source
-`3baa7b53…d5c42` is durably archived. CPU smoke, the data manifest, the empty sealed-access ledger,
-and all three shared initialization bundles have now been regenerated and strictly reopened under
-final source `1d1368cf…434b0a`. Seed-7411 LoRA G0 passes canonically at identity
-`928e756f…820c`, and its corrected positive control passes 48/48 at identity `8db4595e…2df7`. Seed
+`3baa7b53…d5c42` is durably archived. The later CPU smoke, data manifest, empty sealed-access ledger,
+and three shared initialization bundles were regenerated and strictly reopened under source
+`1d1368cf…434b0a` before entering their own archive. Seed-7411 LoRA G0 passed canonically at identity
+`928e756f…820c`, and its corrected positive control passed 48/48 at identity `8db4595e…2df7`. Seed
 7412 then stopped fail-closed during its live-joint G0 probe: every adaptation and recurrent group
 except the registered aggregation scalar had finite nonzero gradients, while
 `aggregate_logit.grad` was present and finite with norm exactly zero. No canonical seed-7412 G0
 receipt was created. The exact failure is preserved at identity `ce3406f8…b634c` as mechanics
 evidence only. The narrow aggregation-precision and durable G0-failure repair now passes 201/201
-tests and independent numerical/runtime/archive review under source `d4269bf3…8b36`. Seed 7413 and
-all result stages remain blocked pending source-bound setup archival, complete regeneration, and
-replay from seed 7411. No training
+tests and independent numerical/runtime/archive review under source `d4269bf3…8b36`. The complete
+source-`1d1368cf…434b0a` setup is now durably archived at receipt identity `13cdcaec…2050b` (21
+files, 18,288,790 bytes). Seed 7413 and all result stages remain blocked pending complete regeneration
+and replay from seed 7411. No training
 checkpoint, evaluation row, or terminal analysis from this directory should be cited as scientific
 evidence.
 
@@ -24,17 +25,17 @@ Under the invalidated source, seed 7411 passed LoRA G0 and then scored 0/48 on t
 The control had omitted the globally frozen accumulation of 16, presenting only one singleton row per
 optimizer update. The corrected path retains 256 optimizer updates and every explicit control value,
 but uses 16 loss-scaled singleton microbatches per update and records fixed diagnostics. The prior miss
-is preserved as mechanics history only. The final-source setup has an empty contrast ledger and the
-same shared tensor values as the archived setup. Final-source seed-7411 G0 has now passed every
-registered mechanics gate. Its corrected control completes exactly 256 updates and 4,096
-presentations, scores 48/48 intact and 0/48 with adaptation disabled, and authorized later-seed setup
+is preserved as mechanics history only. The source-1d setup had an empty contrast ledger and the
+same shared tensor values as the earlier archived setup. Source-1d seed-7411 G0 passed every
+registered mechanics gate. Its corrected control completed exactly 256 updates and 4,096
+presentations, scored 48/48 intact and 0/48 with adaptation disabled, and authorized later-seed setup
 under that source. The pre-repair BF16 path cast the FP32 aggregation weight before its convex mix;
 matched seed-7411 observations put the scalar gradient on exact BF16 reduction-grid increments.
 Review therefore rejects an unchanged retry. The implemented repair forms the same
 last-state/mean-state convex mix in FP32 before one cast back to model dtype while retaining the BF16
 mean, and persistent G0 failures now have independent canonical/mirror evidence. The frozen
-nonzero-gradient gate was not weakened. This source repair invalidates every current setup receipt,
-so replay must begin from seed 7411. Every seed's setup gate must pass before any result-bearing arm
+nonzero-gradient gate was not weakened. The source repair invalidated and the archive preserved every
+source-1d setup receipt, so replacement replay must begin from seed 7411. Every seed's setup gate must pass before any result-bearing arm
 is authorized.
 
 ## Why this experiment exists

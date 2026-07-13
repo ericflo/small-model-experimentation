@@ -520,3 +520,24 @@ repair is reviewed and the source-bound setup is regenerated. No result training
 
 Archival of source-`1d1368cf…434b0a` setup is authorized after this repair is published and green in
 CI. No model-bearing stage or result training is authorized until replacement setup is regenerated.
+
+## 2026-07-13 — source-1d setup archived under the repaired source
+
+- Commit `799fb98b` passed both repository-validation and site-publish workflows before mutation.
+- Archived the exact 21-file source-`1d1368cf…434b0a` setup (18,288,790 bytes; files identity
+  `d05f410c…9d88`) under replacement source `d4269bf3…8b36`, using the preserved seed-7412 G0
+  failure identity `ce3406f8…b634c` as the external trigger.
+- The durable and tracked archive receipts are byte-identical at SHA-256 `e899bc46…9484`, receipt
+  identity `13cdcaec…2050b`. Canonical CPU-smoke, generated-data, initialization, G0, and control
+  paths were deleted only after archive verification. The generated-data directory retains only its
+  tracked `.gitignore`; both tracked setup directories are absent; all source-1d initialization
+  payloads now live only in the immutable archive.
+- Replayed the archival command as a read-only idempotency check; it reopened the complete archive,
+  trigger, tracked receipt, and cleanup postconditions without rewriting the archive.
+
+## Current authorization
+
+Replacement-source CPU smoke, deterministic data/empty-ledger generation, and all three shared
+initialization bundles are authorized. No G0 or model-bearing stage is authorized until that entire
+setup is regenerated and strictly reopened under source `d4269bf3…8b36`. No result training is
+authorized.
