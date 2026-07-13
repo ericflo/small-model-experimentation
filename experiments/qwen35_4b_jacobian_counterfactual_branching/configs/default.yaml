@@ -80,6 +80,7 @@ controls:
   bootstrap_resamples: 10000
   live_control_correction_iterations: 512
   live_control_correction_damping: 0.5
+  live_control_lattice_pair_steps: 32
 
 gates:
   mechanics:

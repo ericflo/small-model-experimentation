@@ -96,6 +96,8 @@ Design and adversarial review in progress. No model or outcome has run.
   cause, repaired guards, and explicit non-authorization.
 - `reports/post_model_smoke_002_audit.md`: valid naïve-bf16 control failure and
   geometry-only live repair boundary.
+- `reports/post_model_smoke_003_audit.md`: 51/60 iterative-repair near miss and
+  exact neighboring-bf16 lattice boundary.
 - `assets/context_lens.pt`: byte-identical causal lens anchor.
 - `src/`: frozen tasks, branch geometry, cache-fork model operations, and pure
   statistics.

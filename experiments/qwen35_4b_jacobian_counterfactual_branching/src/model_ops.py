@@ -147,6 +147,7 @@ class QuantizationAwareFixedNonJPatcher:
         projection_tolerance: float,
         correction_iterations: int,
         correction_damping: float,
+        lattice_pair_steps: int,
     ) -> None:
         keys = set(branches_by_layer)
         if keys != set(directions_by_layer) or keys != set(target_norms_by_layer):
@@ -159,6 +160,7 @@ class QuantizationAwareFixedNonJPatcher:
         self.projection_tolerance = float(projection_tolerance)
         self.correction_iterations = int(correction_iterations)
         self.correction_damping = float(correction_damping)
+        self.lattice_pair_steps_max = int(lattice_pair_steps)
         self.geometry = {}
         for layer in keys:
             directions = directions_by_layer[layer].float()
@@ -181,6 +183,7 @@ class QuantizationAwareFixedNonJPatcher:
         self.projection_fractions: dict[int, torch.Tensor] = {}
         self.passed_rows: dict[int, torch.Tensor] = {}
         self.iterations_used: dict[int, int] = {}
+        self.lattice_pair_steps: dict[int, torch.Tensor] = {}
 
     @staticmethod
     def _actual(current: torch.Tensor, requested: torch.Tensor) -> torch.Tensor:
@@ -237,6 +240,26 @@ class QuantizationAwareFixedNonJPatcher:
                 )
                 updated = requests + self.correction_damping * (desired - actual)
                 requests = torch.where(passed[:, None], best_request, updated)
+            lattice_steps = torch.zeros(
+                self.width, dtype=torch.long, device=tensor.device
+            )
+            failing = (
+                (best_error > self.norm_tolerance)
+                | (best_projection > self.projection_tolerance)
+            ).nonzero(as_tuple=False).flatten()
+            for row_tensor in failing:
+                row = int(row_tensor.item())
+                repaired, error, fraction, steps = self._lattice_pair_repair(
+                    current[row],
+                    best_actual[row],
+                    float(targets[row]),
+                    dictionary,
+                    inverse,
+                )
+                best_actual[row] = repaired
+                best_error[row] = error
+                best_projection[row] = fraction
+                lattice_steps[row] = steps
             changed = (current + best_actual).to(tensor.dtype)
             patched[:, self.position, :] = changed
             realized = changed.float() - current
@@ -254,10 +277,112 @@ class QuantizationAwareFixedNonJPatcher:
                 & (fractions <= self.projection_tolerance)
             ).detach().cpu()
             self.iterations_used[layer] = used
+            self.lattice_pair_steps[layer] = lattice_steps.detach().cpu()
             self.applications[layer] += 1
             return _with_tensor(output, patched)
 
         return hook
+
+    def _lattice_pair_repair(
+        self,
+        current: torch.Tensor,
+        initial_actual: torch.Tensor,
+        target_norm: float,
+        dictionary: torch.Tensor,
+        inverse: torch.Tensor,
+    ) -> tuple[torch.Tensor, float, float, int]:
+        """Search exact pairs of neighboring bf16 states using only geometry."""
+
+        changed = (current + initial_actual).to(torch.bfloat16)
+        projection_matrix = dictionary @ inverse
+        diagonal = projection_matrix.diagonal()
+        width = current.numel()
+        coordinate = torch.arange(width, device=current.device).repeat(2)
+        last = None
+        for step in range(self.lattice_pair_steps_max + 1):
+            delta = changed.float() - current
+            projection = (delta @ inverse.T) @ dictionary.T
+            norm = delta.norm()
+            error = (norm - target_norm).abs() / max(target_norm, 1e-12)
+            fraction = projection.norm() / norm.clamp_min(1e-12)
+            objective = torch.maximum(
+                error / self.norm_tolerance,
+                fraction / self.projection_tolerance,
+            )
+            last = (delta, float(error), float(fraction), step)
+            if float(objective) <= 1.0 or step == self.lattice_pair_steps_max:
+                return last
+            upper = torch.nextafter(changed, torch.full_like(changed, float("inf")))
+            lower = torch.nextafter(changed, torch.full_like(changed, float("-inf")))
+            move = torch.cat((
+                upper.float() - changed.float(),
+                lower.float() - changed.float(),
+            ))
+            norm_change = 2.0 * move * delta[coordinate] + move.square()
+            projection_change = (
+                2.0 * move * projection[coordinate]
+                + move.square() * diagonal[coordinate]
+            )
+            best_value = float(objective)
+            best_pair: tuple[int, int] | None = None
+            block = 256
+            for start in range(0, move.numel(), block):
+                stop = min(move.numel(), start + block)
+                first = torch.arange(start, stop, device=current.device)
+                cross = (
+                    2.0
+                    * move[first, None]
+                    * move[None, :]
+                    * projection_matrix[
+                        coordinate[first, None], coordinate[None, :]
+                    ]
+                )
+                candidate_norm_sq = (
+                    norm.square()
+                    + norm_change[first, None]
+                    + norm_change[None, :]
+                ).clamp_min(0.0)
+                candidate_projection_sq = (
+                    projection.square().sum()
+                    + projection_change[first, None]
+                    + projection_change[None, :]
+                    + cross
+                ).clamp_min(0.0)
+                candidate_norm = candidate_norm_sq.sqrt()
+                candidate_error = (
+                    candidate_norm - target_norm
+                ).abs() / max(target_norm, 1e-12)
+                candidate_fraction = (
+                    candidate_projection_sq.sqrt()
+                    / candidate_norm.clamp_min(1e-12)
+                )
+                candidate_objective = torch.maximum(
+                    candidate_error / self.norm_tolerance,
+                    candidate_fraction / self.projection_tolerance,
+                )
+                candidate_objective = candidate_objective.masked_fill(
+                    coordinate[first, None] == coordinate[None, :],
+                    float("inf"),
+                )
+                local_value, local_flat = candidate_objective.flatten().min(dim=0)
+                if float(local_value) < best_value:
+                    local_row = int(local_flat) // move.numel()
+                    local_column = int(local_flat) % move.numel()
+                    best_value = float(local_value)
+                    best_pair = (int(first[local_row]), local_column)
+            if best_pair is None:
+                return last
+            first, second = best_pair
+            first_coordinate = int(coordinate[first])
+            second_coordinate = int(coordinate[second])
+            changed[first_coordinate] = (
+                upper if first < width else lower
+            )[first_coordinate]
+            changed[second_coordinate] = (
+                upper if second < width else lower
+            )[second_coordinate]
+        assert last is not None
+        return last
 
     def __enter__(self):
         for layer in sorted(self.branches_by_layer):
@@ -695,6 +820,7 @@ class QwenCommitModel:
                 projection_tolerance=float(quantization_control["projection_tolerance"]),
                 correction_iterations=int(quantization_control["correction_iterations"]),
                 correction_damping=float(quantization_control["correction_damping"]),
+                lattice_pair_steps=int(quantization_control["lattice_pair_steps"]),
             )
         with patcher:
             output = self.model(input_ids=full_ids, use_cache=False, logits_to_keep=1)
@@ -722,4 +848,5 @@ class QwenCommitModel:
             "control_projection_fractions": getattr(patcher, "projection_fractions", {}),
             "control_passed_rows": getattr(patcher, "passed_rows", {}),
             "control_iterations_used": getattr(patcher, "iterations_used", {}),
+            "control_lattice_pair_steps": getattr(patcher, "lattice_pair_steps", {}),
         }

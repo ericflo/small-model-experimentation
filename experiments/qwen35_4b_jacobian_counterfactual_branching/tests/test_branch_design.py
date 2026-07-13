@@ -131,6 +131,7 @@ def test_quantization_aware_control_passes_exact_orthogonal_case():
         projection_tolerance=0.01,
         correction_iterations=8,
         correction_damping=0.5,
+        lattice_pair_steps=4,
     )
     with patcher:
         output = layer(hidden)

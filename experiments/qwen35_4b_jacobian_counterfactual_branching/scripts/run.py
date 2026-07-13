@@ -286,6 +286,7 @@ def model_smoke() -> None:
             "projection_tolerance": config["controls"]["post_bf16_non_j_span_projection_max"],
             "correction_iterations": config["controls"]["live_control_correction_iterations"],
             "correction_damping": config["controls"]["live_control_correction_damping"],
+            "lattice_pair_steps": config["controls"]["live_control_lattice_pair_steps"],
         },
     )
     numeric = _live_numeric_receipt(config, lens, j_result, non_j_result)
@@ -313,6 +314,10 @@ def model_smoke() -> None:
             str(layer): int(value.sum().item())
             for layer, value in non_j_result["control_passed_rows"].items()
         },
+        "non_j_control_lattice_pair_steps": {
+            str(layer): [int(item) for item in value.tolist()]
+            for layer, value in non_j_result["control_lattice_pair_steps"].items()
+        },
         "numeric": numeric,
         "outcomes_loaded": False,
         "correct_alias_loaded": False,
@@ -325,7 +330,7 @@ def model_smoke() -> None:
         "lens_sha256": sha256(lens_path),
         "design_boundary": boundary,
     }
-    write_json(EXP / "runs" / "smoke" / "model_003.json", result)
+    write_json(EXP / "runs" / "smoke" / "model_004.json", result)
     print(json.dumps(result, indent=2, sort_keys=True))
 
 

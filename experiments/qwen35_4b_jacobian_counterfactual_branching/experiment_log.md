@@ -60,3 +60,13 @@
   0.5 damping. Code must be pushed/re-anchored before smoke 003.
 - Repair implementation pushed at `934f4d59`; exact updated hashes are anchored
   for smoke 003.
+
+## 2026-07-13 — Smoke 003 reaches 51/60, exact lattice repair next
+
+- Iterative outcome-blind repair validates all 12 rows at layers 5--7 and
+  reaches the paired norm/span boundary on layer 4; layer 8 retains nine fails.
+- Maximum remaining norm error is 1.3206e-5 and span leakage 2.096%; no tolerance
+  changed.
+- Added the independent transport replication's exact one-ULP pair search for
+  only failing rows, bounded at 32 pairs. Code must be pushed/re-anchored before
+  smoke 004.

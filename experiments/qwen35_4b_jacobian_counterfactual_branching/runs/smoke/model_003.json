@@ -1,0 +1,119 @@
+{
+  "applications_j": {
+    "4": 1,
+    "5": 1,
+    "6": 1,
+    "7": 1,
+    "8": 1
+  },
+  "applications_non_j": {
+    "4": 1,
+    "5": 1,
+    "6": 1,
+    "7": 1,
+    "8": 1
+  },
+  "branch_probabilities_recorded": false,
+  "branches": 12,
+  "config_sha256": "25cd35627350df1ce0599f67acc20b96787027517083bc515f0d973f1ac9b66f",
+  "confirmation_opened": false,
+  "correct_alias_loaded": false,
+  "design_boundary": {
+    "implementation_commit": "934f4d59719660191fd7b0f6e07029a0da5e1c76",
+    "implementation_hashes": {
+      "branch_geometry_sha256": "68df4c9b45626eab4e6b0e98aa686f6e58aaa6abc450c55da7e2cfd4c258a150",
+      "model_ops_sha256": "c69f96853bfb76dfec66b9502328c7f0ab96e855f2bacb4fe13fec765c0b9155",
+      "runner_sha256": "2468a947db609afda40db1e6f105785a6d2e8e36910cdd6991bd87272dcbcb70",
+      "tests_sha256": "4d259439512fc0aa57ee73a470e22a7902c42cc19bf3386291bd2033d7525ab7"
+    }
+  },
+  "j_finite": true,
+  "lens_sha256": "e373b6e93956fdfc5cb446e9bee8249655707c8258a7868f0653d11f1ffd0213",
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_load_seconds": 5.804217331111431,
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "non_j_control_iterations_used": {
+    "4": 7,
+    "5": 370,
+    "6": 120,
+    "7": 168,
+    "8": 512
+  },
+  "non_j_control_passed_rows": {
+    "4": 12,
+    "5": 12,
+    "6": 12,
+    "7": 12,
+    "8": 3
+  },
+  "non_j_finite": true,
+  "numeric": {
+    "by_layer": {
+      "4": {
+        "j_realized_sum_abs": 0.015625,
+        "j_requested_norm_relative_error": 0.0005101996939629316,
+        "non_j_paired_norm_relative_error": 1.0338040738133714e-05,
+        "non_j_realized_sum_abs": 0.00390625,
+        "non_j_span_projection_fraction": 0.0003757674421649426,
+        "realized_gram_relative_error": 0.0006890427321195602
+      },
+      "5": {
+        "j_realized_sum_abs": 0.00439453125,
+        "j_requested_norm_relative_error": 0.02394677698612213,
+        "non_j_paired_norm_relative_error": 7.837942575861234e-06,
+        "non_j_realized_sum_abs": 0.00390625,
+        "non_j_span_projection_fraction": 0.009858516044914722,
+        "realized_gram_relative_error": 0.014971890486776829
+      },
+      "6": {
+        "j_realized_sum_abs": 0.00537109375,
+        "j_requested_norm_relative_error": 0.01292372401803732,
+        "non_j_paired_norm_relative_error": 9.923946890921798e-06,
+        "non_j_realized_sum_abs": 0.00390625,
+        "non_j_span_projection_fraction": 0.008523687720298767,
+        "realized_gram_relative_error": 0.017842186614871025
+      },
+      "7": {
+        "j_realized_sum_abs": 0.007080078125,
+        "j_requested_norm_relative_error": 0.013596422970294952,
+        "non_j_paired_norm_relative_error": 7.918398296169471e-06,
+        "non_j_realized_sum_abs": 0.00390625,
+        "non_j_span_projection_fraction": 0.00980352982878685,
+        "realized_gram_relative_error": 0.01579529233276844
+      },
+      "8": {
+        "j_realized_sum_abs": 0.0107421875,
+        "j_requested_norm_relative_error": 0.041595060378313065,
+        "non_j_paired_norm_relative_error": 1.3205559298512526e-05,
+        "non_j_realized_sum_abs": 0.00390625,
+        "non_j_span_projection_fraction": 0.02096312865614891,
+        "realized_gram_relative_error": 0.04658572003245354
+      }
+    },
+    "live_frozen_gates": [
+      "non_j_paired_norm_relative_error",
+      "non_j_span_projection_fraction"
+    ],
+    "maxima": {
+      "j_realized_sum_abs": 0.015625,
+      "j_requested_norm_relative_error": 0.041595060378313065,
+      "non_j_paired_norm_relative_error": 1.3205559298512526e-05,
+      "non_j_realized_sum_abs": 0.00390625,
+      "non_j_span_projection_fraction": 0.02096312865614891,
+      "realized_gram_relative_error": 0.04658572003245354
+    },
+    "passed": false,
+    "pre_bf16_geometry_gates_verified_in_cpu_smoke": [
+      "zero_sum",
+      "full_gram",
+      "rank"
+    ]
+  },
+  "outcomes_loaded": false,
+  "passed": false,
+  "peak_allocated_bytes": 9115230720,
+  "prompt_tokens": 386,
+  "schema_version": 1,
+  "stage": "model-smoke",
+  "thought_tokens": 32
+}
