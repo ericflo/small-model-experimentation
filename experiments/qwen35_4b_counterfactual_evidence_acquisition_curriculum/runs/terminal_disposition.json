@@ -1,4 +1,26 @@
 {
+  "closeout_documentation_commit": "c6aebe267e0505abff0344bad503425f92171ae3",
+  "closeout_files": {
+    "experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/README.md": "81a2bbf5fb66ed1c1651de56f71562d766a81c78d33262cd8b7f1e6493828ef5",
+    "experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/experiment_log.md": "643a973c656628aa2e39d34bd0eab44a6b3f4b80bc5d9d58c4a17d467c8c3c5f",
+    "experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/reports/artifact_manifest.yaml": "7c07881a0775fbc2a5e56b2224ccddff49b8f6dc6fa893a33c6194d29eab0872",
+    "experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/reports/report.md": "61a469e5eb8565408fd2f7438681db4d740add1129ec62d5dccce20e2e719153",
+    "knowledge/claims/claim_ledger.json": "7aef8c589a7e21a957f3c0cdf75f06cdc03b2817c99b181b185dd71f48a10a4f",
+    "knowledge/experiment_brief.json": "7bd0bedbb980b1ca432894b5ed694ae0d06f726c47278d20226fead462530477",
+    "knowledge/experiment_dates.json": "48cc2f45c001c87fad58fffd6697f5d8e7fb0fbbcb56a854e62d598b9ff9cb8a",
+    "knowledge/experiment_status.json": "be572c81fa52cf3e9d6e4dff23f0f5814fa3ba39da8711266d595f155bf5e801",
+    "knowledge/experiment_viz.json": "94a7eae9d02fee4d1e8b4d75ac7266622f23f8920b9f920baf3abd66d8302346",
+    "knowledge/program_scorecards.md": "9b8be5a0ff349565a3593fddd0acd0d433d17cfe20eae49b15f9030653f3eb00",
+    "knowledge/synthesis.md": "451597535878eef493397e4b17de32f3e12778f421d29d8e974cf5f321f5983b",
+    "research_programs/agentic_breadth_installation/backlog.md": "87896e2c08ef2a34a6c1fa36e7f56e464bb22ee60eaba69e744ac9def98d8034",
+    "research_programs/agentic_breadth_installation/evidence.md": "f6902827c1b419e07c76a9e5861d6756e11dad933a2899f3d429351fb6f33a8d"
+  },
+  "closeout_receipt_requires_push": true,
+  "closeout_validation": {
+    "command": "make check",
+    "passed": true,
+    "validated_commit": "c6aebe267e0505abff0344bad503425f92171ae3"
+  },
   "design_lock_sha256": "642e057f72dbe8e8eccae1ff59396ed7156677350f222ef862259cf2d20dc0be",
   "experiment_id": "qwen35_4b_counterfactual_evidence_acquisition_curriculum",
   "gate_receipts": {
@@ -7,8 +29,9 @@
       "sha256": "6af8e9bcb8e2de9090a012a9bc33525c1ad48822f745930f5ccd4e24dfdee64f"
     }
   },
-  "lifecycle_closed": false,
+  "lifecycle_closed": true,
   "menagerie_exposed": false,
+  "open_terminal_disposition_sha256": "bd56873463a4ccc668452c92b0035a203eb7bd8c1ee767e05ef12e98dd390e68",
   "required_closeout": [
     "README_and_report",
     "experiment_log",
