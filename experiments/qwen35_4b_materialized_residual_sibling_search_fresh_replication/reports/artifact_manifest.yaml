@@ -23,4 +23,10 @@ local_receipts:
   mechanics_preoutcome:
     path: "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/runs/mechanics/prepared/preoutcome_receipt.json"
     sha256: "80647e830ccb90026b30b00ea674d22aa247eba925b4ebe38d6ddad8b49e0d0e"
-notes: "Corrected construction and reviewed model-free mechanics preparation passed with zero benchmark reads, model loads, and model calls. Live mechanics remains unauthorized pending publication, green CI, and a separate committed/pushed lock."
+  mechanics_lock_attempt_1_incident:
+    path: "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/runs/mechanics/lock_attempt_1_incident.json"
+    sha256: "056fd507e83eedbc45648bcb73b4972faa61d0d164b5e57a472dfa667583c5aa"
+  mechanics_preoutcome_v2:
+    path: "experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/runs/mechanics/prepared/preoutcome_receipt_v2.json"
+    sha256: "04d8ba59d212adac3193d88c19a38f58298fa18cbdd41321bf9e312bea72fe72"
+notes: "Append-only V2 recovery preserved the original 12 prepared payloads and passed with zero benchmark reads, model loads, model calls, and sampled outputs. Live mechanics remains unauthorized pending V2 publication, green CI, and a separate committed/pushed lock."

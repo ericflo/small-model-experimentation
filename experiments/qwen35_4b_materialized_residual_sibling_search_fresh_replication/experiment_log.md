@@ -59,9 +59,24 @@
   terminal intersections, 576+576 control rows, 24 folds, and the exact EOS
   pair with zero model loads/calls. Preoutcome SHA-256 is
   `80647e830ccb90026b30b00ea674d22aa247eba925b4ebe38d6ddad8b49e0d0e`.
+- 2026-07-13: The first clean lock attempt failed closed before lock creation:
+  generated construction outputs were incorrectly requested from
+  pre-construction commit `e43c701e` instead of publication commit `9fc288eb`.
+  No raw directory, runner, model/GPU activity, request, or sampled output was
+  created. The append-only incident SHA-256 is
+  `056fd507e83eedbc45648bcb73b4972faa61d0d164b5e57a472dfa667583c5aa`.
+- 2026-07-13: Three independent V2 adversarial reviews initially blocked the
+  recovery on write-before-review ordering, lifecycle poisoning, missing exact
+  V1 table equality, and dangling-symlink replacement. All four defects were
+  fixed and mutation-tested before preparation-only `PASS` verdicts.
+- 2026-07-13: Ran the authorized model-free V2 preparation twice. It preserved
+  the original preoutcome and every one of its 12 payload bytes, produced the
+  idempotent V2 preoutcome SHA-256
+  `04d8ba59d212adac3193d88c19a38f58298fa18cbdd41321bf9e312bea72fe72`,
+  and again recorded zero model loads/calls and zero sampled outputs.
 
 ## Pending
 
-- Publish reviewed code and prepared bytes; wait for green CI.
+- Publish reviewed V2 code and append-only receipts; wait for green CI.
 - Generate, commit, and push the separate clean mechanics lock before any model
   load, GPU use, or request.

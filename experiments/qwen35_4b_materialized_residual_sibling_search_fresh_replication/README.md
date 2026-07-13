@@ -1,6 +1,6 @@
 # Qwen3.5-4B Materialized Residual Sibling Search Fresh Replication
 
-**Status:** in-progress · since 2026-07-13 · mechanics implementation audit and model-free preoutcome passed; code publication, separate lock, and model run remain sealed
+**Status:** in-progress · since 2026-07-13 · append-only V2 recovery and model-free preoutcome passed; V2 publication, separate lock, and model run remain sealed
 
 This separately registered recovery replication preserves the parent's frozen
 materialized-residual science while regenerating tasks, request IDs, and
@@ -88,10 +88,14 @@ reviews. Its model-free preparation command is:
 VLLM_ENABLE_V1_MULTIPROCESSING=0 .venv-vllm/bin/python experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/scripts/run_mechanics.py --stage prepare
 ```
 
-That command has passed and frozen the preoutcome. Live mechanics remains
-unauthorized until these reviewed code and prepared bytes are published on
-`main`, CI is green, and a separate clean implementation lock is generated,
-committed, and pushed.
+That command first passed and froze the original preoutcome. A later lock
+attempt failed closed on an incorrect historical source commit before creating
+a lock, raw directory, runner, model load, GPU initialization, or model request.
+After three independent adversarial reviews, the same command passed again as
+an append-only V2 recovery without changing any original prepared payload.
+Live mechanics remains unauthorized until the reviewed V2 code and receipts
+are published on `main`, CI is green, and a separate clean implementation lock
+is generated, committed, and pushed.
 
 ## Results
 
@@ -120,6 +124,19 @@ preoutcome SHA-256 is
 The full fresh suite now passes 108 tests and 96 subtests. Preparation records
 zero model loads and zero model calls; no live mechanics artifact exists.
 
+The first lock attempt then failed closed because the generated construction
+manifest was looked up at pre-construction commit `e43c701e` rather than
+published construction commit `9fc288eb`. Its zero-model incident receipt has
+SHA-256
+`056fd507e83eedbc45648bcb73b4972faa61d0d164b5e57a472dfa667583c5aa`.
+The append-only V2 repair assigns the three generated construction outputs to
+`9fc288eb` and all other frozen design/code files to `e43c701e`. Its preoutcome
+SHA-256 is
+`04d8ba59d212adac3193d88c19a38f58298fa18cbdd41321bf9e312bea72fe72`.
+It proves exact equality with the original 12-file payload table and is
+byte-idempotent across reruns. There is still no implementation lock, raw
+directory, model load, GPU initialization, model call, or sampled output.
+
 ## Interpretation
 
 The parent incident and this model-free construction change no belief about
@@ -130,8 +147,8 @@ Scientific arms and outcome gates remain frozen.
 ## Knowledgebase Update
 
 - Program evidence updated: no model evidence yet.
-- Program backlog updated: reviewed preparation passed; publication and the
-  separate mechanics lock are next.
+- Program backlog updated: append-only V2 recovery passed; V2 publication and
+  the separate mechanics lock are next.
 - Claim ledger updated: no; no model result exists.
 
 ## Artifacts
@@ -142,6 +159,8 @@ Scientific arms and outcome gates remain frozen.
 - `runs/smoke/summary.json`
 - `runs/smoke/publication_receipt.json`
 - `runs/mechanics/prepared/preoutcome_receipt.json`
+- `runs/mechanics/lock_attempt_1_incident.json`
+- `runs/mechanics/prepared/preoutcome_receipt_v2.json`
 - `idea_intake.md`
 - `reports/artifact_manifest.yaml`
 - `reports/report.md`

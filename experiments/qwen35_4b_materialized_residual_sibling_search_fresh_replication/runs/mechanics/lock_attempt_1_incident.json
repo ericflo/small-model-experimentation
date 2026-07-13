@@ -1,0 +1,21 @@
+{
+  "benchmark_files_read": [],
+  "confirmation_files_read": [],
+  "decision": "FAILED_CLOSED_BEFORE_LOCK_CREATION",
+  "error": "construction manifest was requested from pre-construction commit e43c701e instead of published construction commit 9fc288eb",
+  "error_type": "subprocess.CalledProcessError",
+  "gpu_initialized": false,
+  "hidden_files_read": [],
+  "implementation_commit": "8a0547cb0ba6c28c4deeb24eb33303c71d5533f9",
+  "implementation_lock_created": false,
+  "model_calls": 0,
+  "model_loaded": false,
+  "preoutcome_receipt_sha256": "80647e830ccb90026b30b00ea674d22aa247eba925b4ebe38d6ddad8b49e0d0e",
+  "qualification_files_read": [],
+  "raw_directory_created": false,
+  "recovery": "append_only_preoutcome_v2_with_split_frozen_commits",
+  "runner_constructed": false,
+  "sampled_model_outputs": 0,
+  "schema_version": 1,
+  "stage": "mechanics_lock_attempt_1"
+}

@@ -85,3 +85,52 @@ This verdict authorizes only creation and publication of the model-free
 preoutcome. Live mechanics remains sealed until the reviewed code and prepared
 artifacts are committed and pushed on `main`, CI is green, and a separate clean
 implementation lock is generated, committed, and pushed.
+
+## Append-only V2 recovery review
+
+The first clean lock attempt failed closed before lock creation because the
+generated construction manifest was requested from pre-construction commit
+`e43c701e` instead of published construction commit `9fc288eb`. It created no
+raw directory, runner, model load, GPU initialization, model request, or sampled
+output. The original published preoutcome remains immutable at SHA-256
+`80647e830ccb90026b30b00ea674d22aa247eba925b4ebe38d6ddad8b49e0d0e`;
+the deterministic incident receipt has SHA-256
+`056fd507e83eedbc45648bcb73b4972faa61d0d164b5e57a472dfa667583c5aa`.
+
+Three independent adversarial re-reviews initially blocked the V2 repair. They
+found that a pending review could write the incident before failing, historical
+incident validation would reject legitimate later lock/raw artifacts, the V1
+payload table was not required to match exactly, and dangling final-component
+symlinks could be replaced by frozen writes. The corrected implementation now
+checks this unique V2 verdict before every preparation write, separates the
+one-time pristine boundary from pure historical reconstruction, requires exact
+V1 payload-table equality, and rejects dangling symlinks without replacement.
+
+The split frozen-source mapping is now explicit and symmetric in schema V4:
+only `manifest.json`, `mechanics_public.jsonl`, and `mechanics_audit.jsonl` map
+to `9fc288eb`; all remaining frozen design/code files map to `e43c701e`. Both
+publish and verification paths require the exact per-file map and both commit
+ancestries. The implementation-critical inventory closes over both preoutcome
+receipts, the incident, every prepared payload, and all implementation inputs.
+
+Independent model-free reconstruction produced all 1,984 requests with the
+exact V1 payload table and byte-identical request/control payloads, zero model
+loads, zero model calls, and zero sampled outputs. The complete fresh suite
+passed 108 tests and 96 subtests; the focused mechanics suite passed 67 tests
+and 72 subtests.
+
+### Stable V2 reviewed bytes
+
+- `scripts/run_mechanics.py`:
+  `0fdf3c49af599c0b732afa72d38697b50fc40dc5f789f4486a75a0369c39f549`
+- `tests/test_mechanics.py`:
+  `6ef55de00f939013147b7d1221bf1d7a896c6b6a8e0f9dce097fae303f9640ab`
+- `runs/mechanics/lock_attempt_1_incident.json`:
+  `056fd507e83eedbc45648bcb73b4972faa61d0d164b5e57a472dfa667583c5aa`
+
+**V2 final verdict:** `PASS_FOR_MODEL_FREE_MECHANICS_PREPARATION_V2`
+
+This V2 verdict authorizes only append-only model-free preparation and
+publication. It grants no model, GPU, lock, or live-run authorization. Any
+change to the reviewed implementation, test, or incident bytes requires a new
+review.

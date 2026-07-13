@@ -263,7 +263,9 @@ CONSTRUCTION_MANIFEST = EXP / "data" / "procedural" / "manifest.json"
 PUBLIC_PATH = EXP / "data" / "procedural" / "mechanics_public.jsonl"
 AUDIT_PATH = EXP / "data" / "procedural" / "mechanics_audit.jsonl"
 PREPARED = EXP / "runs" / "mechanics" / "prepared"
-PREOUTCOME_RECEIPT = PREPARED / "preoutcome_receipt.json"
+PRIOR_PREOUTCOME_RECEIPT = PREPARED / "preoutcome_receipt.json"
+PREOUTCOME_RECEIPT = PREPARED / "preoutcome_receipt_v2.json"
+LOCK_ATTEMPT_1_INCIDENT = EXP / "runs" / "mechanics" / "lock_attempt_1_incident.json"
 RAW = EXP / "runs" / "mechanics" / "raw"
 SCORED = EXP / "runs" / "mechanics" / "scored"
 SUMMARY = EXP / "runs" / "mechanics" / "summary.json"
@@ -274,9 +276,11 @@ DESIGN_COMMIT = CONSTRUCTION_COMMIT
 DESIGN_MANIFEST_SHA256 = "5d4fb6a000ac4830d2f34e9f5235856ccea42fb400e6b7ee091ff1abad0f45c0"
 CONSTRUCTION_SUMMARY_SHA256 = "ddd6612485d91c16528760e0b2f75a5dd9f4baa3bff927006662b346c3e6e26a"
 PUBLICATION_RECEIPT_SHA256 = "634e8801d30386febbd8aea4af041a62c1bb97a6757ecd30ec1a579b3ae8ff55"
+PRIOR_PREOUTCOME_SHA256 = "80647e830ccb90026b30b00ea674d22aa247eba925b4ebe38d6ddad8b49e0d0e"
+LOCK_ATTEMPT_1_IMPLEMENTATION_COMMIT = "8a0547cb0ba6c28c4deeb24eb33303c71d5533f9"
 PUBLICATION_RECEIPT = EXP / "runs" / "smoke" / "publication_receipt.json"
 IMPLEMENTATION_REVIEW = EXP / "reports" / "mechanics_implementation_review.md"
-IMPLEMENTATION_REVIEW_VERDICT = "**Final verdict:** `PASS_FOR_MODEL_FREE_MECHANICS_PREPARATION`"
+IMPLEMENTATION_REVIEW_VERDICT = "**V2 final verdict:** `PASS_FOR_MODEL_FREE_MECHANICS_PREPARATION_V2`"
 IMPLEMENTATION_REVIEW_AUTHORIZATION = "**Model/GPU authorization:** none"
 PARENT_EXP = ROOT / "experiments" / "qwen35_4b_materialized_residual_sibling_search"
 DESIGN_FROZEN_FILES = (
@@ -295,6 +299,13 @@ DESIGN_FROZEN_FILES = (
     str(EXP_REL / "tests/test_identity.py"),
     str(EXP_REL / "tests/test_task_data.py"),
     str(EXP_REL / "tests/test_vllm_runner.py"),
+)
+CONSTRUCTION_OUTPUT_FROZEN_FILES = frozenset(
+    {
+        str(EXP_REL / "data/procedural/manifest.json"),
+        str(EXP_REL / "data/procedural/mechanics_public.jsonl"),
+        str(EXP_REL / "data/procedural/mechanics_audit.jsonl"),
+    }
 )
 
 SUFFIX_ARMS = (
@@ -347,6 +358,8 @@ PREPARED_RELATIVE_FILES = tuple(
     for name in INVOCATIONS
 ) + tuple(str(EXP_REL / "runs/mechanics/prepared" / name) for name in CONTROL_FILES) + (
     str(EXP_REL / "runs/mechanics/prepared/preoutcome_receipt.json"),
+    str(EXP_REL / "runs/mechanics/prepared/preoutcome_receipt_v2.json"),
+    str(EXP_REL / "runs/mechanics/lock_attempt_1_incident.json"),
 )
 IMPLEMENTATION_CRITICAL_FILES = frozenset(
     (*PREPARE_SOURCE_FILES, *PREPARED_RELATIVE_FILES)
@@ -423,12 +436,16 @@ def jsonl_bytes(rows: list[dict[str, Any]]) -> bytes:
 
 def write_frozen(path: Path, value: Any, *, jsonl: bool = False) -> None:
     data = jsonl_bytes(value) if jsonl else json_bytes(value)
+    if path.is_symlink():
+        raise RuntimeError(f"frozen artifact path is a symlink: {path}")
     if path.exists():
-        if path.is_symlink() or not path.is_file() or path.read_bytes() != data:
+        if not path.is_file() or path.read_bytes() != data:
             raise RuntimeError(f"frozen artifact differs on rebuild: {path}")
         return
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(path.name + ".tmp")
+    if temporary.is_symlink():
+        raise RuntimeError(f"frozen temporary path is a symlink: {temporary}")
     temporary.write_bytes(data)
     temporary.replace(path)
 
@@ -472,7 +489,7 @@ def _prepared_file_table() -> dict[str, dict[str, Any]]:
     observed = {
         path.name
         for path in PREPARED.iterdir()
-        if path.name != "preoutcome_receipt.json"
+        if path.name not in {"preoutcome_receipt.json", "preoutcome_receipt_v2.json"}
     }
     if observed != expected:
         raise RuntimeError("prepared payload inventory changed")
@@ -1104,10 +1121,54 @@ def _source_hashes() -> dict[str, str]:
     return result
 
 
-def build_prepared() -> tuple[
-    dict[str, list[dict[str, Any]]], list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]
-]:
-    config = yaml.safe_load(CONFIG_PATH.read_text())
+def _frozen_commit_for(relative: str) -> str:
+    if relative not in DESIGN_FROZEN_FILES:
+        raise RuntimeError(f"unknown frozen file: {relative}")
+    return (
+        PUBLISHED_CONSTRUCTION_COMMIT
+        if relative in CONSTRUCTION_OUTPUT_FROZEN_FILES
+        else DESIGN_COMMIT
+    )
+
+
+def build_lock_attempt_1_incident(*, require_pristine: bool = False) -> dict[str, Any]:
+    if (
+        PRIOR_PREOUTCOME_RECEIPT.is_symlink()
+        or not PRIOR_PREOUTCOME_RECEIPT.is_file()
+        or sha256_file(PRIOR_PREOUTCOME_RECEIPT) != PRIOR_PREOUTCOME_SHA256
+    ):
+        raise RuntimeError("failed lock-attempt boundary changed")
+    if require_pristine and (
+        any(path.exists() or path.is_symlink() for path in (RAW, SCORED, SUMMARY, IMPLEMENTATION_LOCK))
+    ):
+        raise RuntimeError("lock-attempt incident was not recorded before later artifacts")
+    return {
+        "schema_version": 1,
+        "stage": "mechanics_lock_attempt_1",
+        "decision": "FAILED_CLOSED_BEFORE_LOCK_CREATION",
+        "implementation_commit": LOCK_ATTEMPT_1_IMPLEMENTATION_COMMIT,
+        "preoutcome_receipt_sha256": PRIOR_PREOUTCOME_SHA256,
+        "error_type": "subprocess.CalledProcessError",
+        "error": (
+            "construction manifest was requested from pre-construction commit "
+            "e43c701e instead of published construction commit 9fc288eb"
+        ),
+        "implementation_lock_created": False,
+        "raw_directory_created": False,
+        "runner_constructed": False,
+        "model_loaded": False,
+        "gpu_initialized": False,
+        "model_calls": 0,
+        "sampled_model_outputs": 0,
+        "recovery": "append_only_preoutcome_v2_with_split_frozen_commits",
+        "benchmark_files_read": [],
+        "hidden_files_read": [],
+        "qualification_files_read": [],
+        "confirmation_files_read": [],
+    }
+
+
+def _validate_v2_review_authorization() -> None:
     if IMPLEMENTATION_REVIEW.is_symlink() or not IMPLEMENTATION_REVIEW.is_file():
         raise RuntimeError("mechanics implementation review is missing or unsafe")
     review_text = IMPLEMENTATION_REVIEW.read_text()
@@ -1116,6 +1177,24 @@ def build_prepared() -> tuple[
         or review_text.count(IMPLEMENTATION_REVIEW_AUTHORIZATION) != 1
     ):
         raise RuntimeError("mechanics implementation review does not authorize preparation")
+
+
+def build_prepared() -> tuple[
+    dict[str, list[dict[str, Any]]], list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]
+]:
+    config = yaml.safe_load(CONFIG_PATH.read_text())
+    _validate_v2_review_authorization()
+    if (
+        PRIOR_PREOUTCOME_RECEIPT.is_symlink()
+        or sha256_file(PRIOR_PREOUTCOME_RECEIPT) != PRIOR_PREOUTCOME_SHA256
+        or read_json(LOCK_ATTEMPT_1_INCIDENT) != build_lock_attempt_1_incident()
+    ):
+        raise RuntimeError("append-only mechanics lock incident changed")
+    prior_preoutcome = read_json(PRIOR_PREOUTCOME_RECEIPT)
+    prior_files = prior_preoutcome.get("files")
+    current_files = _prepared_file_table()
+    if prior_files != current_files:
+        raise RuntimeError("v1 prepared payload table changed before v2")
     construction = read_json(CONSTRUCTION_MANIFEST)
     if sha256_file(CONSTRUCTION_MANIFEST) != DESIGN_MANIFEST_SHA256:
         raise RuntimeError("published construction manifest changed")
@@ -1204,14 +1283,18 @@ def build_prepared() -> tuple[
     if not static_fit:
         raise RuntimeError("published top-four context receipt does not fit")
     receipt = {
-        "schema_version": 3,
-        "stage": "fresh_replication_mechanics_prepare",
+        "schema_version": 4,
+        "stage": "fresh_replication_mechanics_prepare_v2",
         "decision": "MECHANICS_PREPARE_PASS",
         "design_commit": DESIGN_COMMIT,
         "published_construction_commit": PUBLISHED_CONSTRUCTION_COMMIT,
         "construction_manifest_sha256": DESIGN_MANIFEST_SHA256,
         "construction_summary_sha256": CONSTRUCTION_SUMMARY_SHA256,
         "construction_publication_receipt_sha256": PUBLICATION_RECEIPT_SHA256,
+        "prior_preoutcome_receipt_sha256": PRIOR_PREOUTCOME_SHA256,
+        "lock_attempt_1_incident_sha256": sha256_file(LOCK_ATTEMPT_1_INCIDENT),
+        "prior_prepared_payload_table_sha256": canonical_sha256(prior_files),
+        "prepared_payloads_byte_identical_to_v1": True,
         "parent_lineage": lineage,
         "model": MODEL_ID,
         "revision": MODEL_REVISION,
@@ -1268,6 +1351,12 @@ def build_prepared() -> tuple[
 
 def prepare() -> dict[str, Any]:
     _validate_current_scientific_environment(yaml.safe_load(CONFIG_PATH.read_text()))
+    _validate_v2_review_authorization()
+    build_lock_attempt_1_incident(require_pristine=True)
+    write_frozen(
+        LOCK_ATTEMPT_1_INCIDENT,
+        build_lock_attempt_1_incident(require_pristine=True),
+    )
     requests, surface_scores, surface_folds, random_scores, receipt = build_prepared()
     for name in INVOCATIONS:
         write_frozen(PREPARED / f"{name}_requests.jsonl", requests[name], jsonl=True)
@@ -1319,6 +1408,7 @@ def verify_implementation_lock(lock_path: Path) -> dict[str, Any]:
         "construction_publication_receipt_sha256",
         "published_construction_commit",
         "design_frozen_files",
+        "frozen_file_commits",
         "implementation_commit",
         "critical_files",
         "parent_lineage",
@@ -1327,7 +1417,7 @@ def verify_implementation_lock(lock_path: Path) -> dict[str, Any]:
         "sampled_model_outputs_before_lock",
         "authorization",
     }
-    if set(lock) != required or lock["schema_version"] != 3:
+    if set(lock) != required or lock["schema_version"] != 4:
         raise RuntimeError("implementation lock schema changed")
     if (
         lock["design_commit"] != DESIGN_COMMIT
@@ -1350,17 +1440,25 @@ def verify_implementation_lock(lock_path: Path) -> dict[str, Any]:
     if not isinstance(critical, dict) or set(critical) != IMPLEMENTATION_CRITICAL_FILES:
         raise RuntimeError("implementation critical-file allowlist changed")
     frozen = lock["design_frozen_files"]
+    frozen_commits = lock["frozen_file_commits"]
     if not isinstance(frozen, dict) or set(frozen) != set(DESIGN_FROZEN_FILES):
         raise RuntimeError("implementation frozen-design allowlist changed")
+    if (
+        not isinstance(frozen_commits, dict)
+        or set(frozen_commits) != set(DESIGN_FROZEN_FILES)
+    ):
+        raise RuntimeError("implementation frozen-commit mapping changed")
     for relative in DESIGN_FROZEN_FILES:
+        source_commit = _frozen_commit_for(relative)
         try:
-            design_blob = _git_bytes("show", f"{DESIGN_COMMIT}:{relative}")
+            design_blob = _git_bytes("show", f"{source_commit}:{relative}")
         except subprocess.CalledProcessError as exc:
             raise RuntimeError(f"frozen design file absent: {relative}") from exc
         expected = sha256_bytes(design_blob)
         path = ROOT / relative
         if (
-            frozen[relative] != expected
+            frozen_commits[relative] != source_commit
+            or frozen[relative] != expected
             or path.is_symlink()
             or not path.is_file()
             or sha256_file(path) != expected
@@ -1391,6 +1489,7 @@ def verify_implementation_lock(lock_path: Path) -> dict[str, Any]:
         raise RuntimeError("implementation boundary contains an invalid commit")
     for ancestor, descendant in (
         (DESIGN_COMMIT, implementation_commit),
+        (PUBLISHED_CONSTRUCTION_COMMIT, implementation_commit),
         (implementation_commit, "HEAD"),
         ("HEAD", "origin/main"),
     ):
@@ -1414,7 +1513,7 @@ def verify_implementation_lock(lock_path: Path) -> dict[str, Any]:
 def publish_implementation_lock() -> dict[str, Any]:
     _validate_current_scientific_environment(yaml.safe_load(CONFIG_PATH.read_text()))
     _load_prepared()
-    if RAW.exists() or SCORED.exists() or SUMMARY.exists():
+    if any(path.exists() or path.is_symlink() for path in (RAW, SCORED, SUMMARY)):
         raise RuntimeError("implementation lock must precede every live mechanics artifact")
     if _git("status", "--porcelain=v1", "--untracked-files=all"):
         raise RuntimeError("implementation lock requires a clean committed worktree")
@@ -1422,6 +1521,7 @@ def publish_implementation_lock() -> dict[str, Any]:
     implementation_commit = _git("rev-parse", "HEAD")
     for ancestor, descendant in (
         (DESIGN_COMMIT, implementation_commit),
+        (PUBLISHED_CONSTRUCTION_COMMIT, implementation_commit),
         (implementation_commit, "origin/main"),
     ):
         if subprocess.run(
@@ -1440,19 +1540,23 @@ def publish_implementation_lock() -> dict[str, Any]:
         blob = _verify_committed_file_bytes(path, relative, implementation_commit)
         critical[relative] = sha256_bytes(blob)
     frozen: dict[str, str] = {}
+    frozen_commits: dict[str, str] = {}
     for relative in DESIGN_FROZEN_FILES:
-        design_blob = _git_bytes("show", f"{DESIGN_COMMIT}:{relative}")
+        source_commit = _frozen_commit_for(relative)
+        design_blob = _git_bytes("show", f"{source_commit}:{relative}")
         if (ROOT / relative).read_bytes() != design_blob:
             raise RuntimeError(f"frozen design file changed: {relative}")
         frozen[relative] = sha256_bytes(design_blob)
+        frozen_commits[relative] = source_commit
     lock = {
-        "schema_version": 3,
+        "schema_version": 4,
         "design_commit": DESIGN_COMMIT,
         "design_manifest_sha256": DESIGN_MANIFEST_SHA256,
         "construction_summary_sha256": CONSTRUCTION_SUMMARY_SHA256,
         "construction_publication_receipt_sha256": PUBLICATION_RECEIPT_SHA256,
         "published_construction_commit": PUBLISHED_CONSTRUCTION_COMMIT,
         "design_frozen_files": dict(sorted(frozen.items())),
+        "frozen_file_commits": dict(sorted(frozen_commits.items())),
         "implementation_commit": implementation_commit,
         "critical_files": critical,
         "parent_lineage": verify_parent_lineage(ROOT),
@@ -1487,6 +1591,8 @@ def _load_prepared() -> tuple[dict[str, Any], dict[str, list[dict[str, Any]]]]:
     expected["files"] = _prepared_file_table()
     if receipt != expected:
         raise RuntimeError("prepared preoutcome receipt changed")
+    if read_json(LOCK_ATTEMPT_1_INCIDENT) != build_lock_attempt_1_incident():
+        raise RuntimeError("lock-attempt incident receipt changed")
     return receipt, stored
 
 

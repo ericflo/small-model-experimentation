@@ -51,8 +51,12 @@
   identity/prompt intersections and zero model calls. The crash-safe mechanics
   implementation then passed three independent audits and model-free
   preparation with 1,984 requests, 676 unique identities, zero in all nine
-  parent/terminal intersections, and zero model calls. The next gate is to
-  publish those bytes, clear CI, and separately publish the mechanics lock.
+  parent/terminal intersections, and zero model calls. Its first lock attempt
+  failed closed on an incorrect historical source commit before any lock/raw/
+  model activity. A three-reviewer append-only V2 repair preserves every V1
+  payload byte and again records zero model calls. The next gate is to publish
+  the V2 implementation and receipts, clear CI, and separately publish the
+  mechanics lock.
 - Measure the exact behavioral quotient at fresh depth 6 before assuming model-guided pruning is economically
   needed; record wall time, memory, physical transitions, coverage, and selector success.
 - If a real search wall appears, test a residualized partial state (feasible parameter domains, materialized

@@ -3,8 +3,8 @@
 ## Summary
 
 The experiment identity, fresh seed block, 264-task construction, reviewed
-mechanics implementation, and model-free preoutcome are frozen. No model has
-been loaded or called. This is the separately
+mechanics implementation, and append-only V2 model-free preoutcome are frozen.
+No model has been loaded or called. This is the separately
 registered recovery path required by the parent experiment's terminal
 sampled-but-unpersisted transaction.
 
@@ -62,6 +62,20 @@ any-stage derived seeds and terminal rendered token IDs. Preoutcome SHA-256 is
 `80647e830ccb90026b30b00ea674d22aa247eba925b4ebe38d6ddad8b49e0d0e`.
 It records zero model loads/calls. No live mechanics have run.
 
+The first clean lock attempt failed closed before creating a lock because its
+source map requested generated construction outputs from pre-construction
+commit `e43c701e` rather than publication commit `9fc288eb`. The incident
+records no raw directory, runner, model/GPU activity, request, or sampled
+output and has SHA-256
+`056fd507e83eedbc45648bcb73b4972faa61d0d164b5e57a472dfa667583c5aa`.
+Three independent adversarial reviews blocked and then passed an append-only V2
+repair. Its split per-file source map is explicit, its V1 table equality is
+exact, and its preparation-only review gate precedes every write. Two real
+model-free V2 preparations produced the same receipt SHA-256,
+`04d8ba59d212adac3193d88c19a38f58298fa18cbdd41321bf9e312bea72fe72`,
+while preserving every V1 payload byte and again recording zero model loads,
+calls, and sampled outputs. No implementation lock or live artifact exists.
+
 ## Controls
 
 The planned primary controls are all-24 name-only, all-24 token-preserving
@@ -86,12 +100,12 @@ work.
 
 ## Next Experiments
 
-Publish the reviewed implementation and preoutcome, wait for green CI, then
-create and separately publish the clean mechanics lock. Training or banking
-remains a separate experiment even if this search interface passes.
+Publish the reviewed V2 implementation and append-only receipts, wait for green
+CI, then create and separately publish the clean mechanics lock. Training or
+banking remains a separate experiment even if this search interface passes.
 
 ## Artifact Manifest
 
 `artifact_manifest.yaml` binds the historical scaffold, construction receipts,
-and mechanics preoutcome. No external, omitted, model, or capability-result
-artifact exists.
+both mechanics preoutcomes, and the failed-lock incident. No external, omitted,
+model, or capability-result artifact exists.

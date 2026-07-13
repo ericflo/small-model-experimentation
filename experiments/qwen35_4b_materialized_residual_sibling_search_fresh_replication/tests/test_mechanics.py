@@ -340,6 +340,75 @@ class RequestConstructionTests(unittest.TestCase):
                     runner, "IMPLEMENTATION_REVIEW", review
                 ), self.assertRaisesRegex(RuntimeError, "does not authorize"):
                     runner.build_prepared()
+                with mock.patch.object(
+                    runner, "IMPLEMENTATION_REVIEW", review
+                ), mock.patch.object(
+                    runner, "_validate_current_scientific_environment"
+                ), mock.patch.object(
+                    runner, "write_frozen"
+                ) as write, self.assertRaisesRegex(
+                    RuntimeError, "does not authorize"
+                ):
+                    runner.prepare()
+                write.assert_not_called()
+
+    def test_v2_requires_exact_v1_prepared_payload_table(self) -> None:
+        with mock.patch.object(
+            runner, "_validate_v2_review_authorization"
+        ), mock.patch.object(
+            runner, "_prepared_file_table", return_value={}
+        ), self.assertRaisesRegex(RuntimeError, "payload table changed"):
+            runner.build_prepared()
+
+    def test_lock_incident_and_split_frozen_commit_mapping_are_exact(self) -> None:
+        incident = runner.build_lock_attempt_1_incident()
+        self.assertEqual(incident["decision"], "FAILED_CLOSED_BEFORE_LOCK_CREATION")
+        self.assertEqual(incident["model_calls"], 0)
+        self.assertFalse(incident["implementation_lock_created"])
+        self.assertEqual(
+            runner.sha256_file(runner.PRIOR_PREOUTCOME_RECEIPT),
+            runner.PRIOR_PREOUTCOME_SHA256,
+        )
+        for relative in runner.CONSTRUCTION_OUTPUT_FROZEN_FILES:
+            self.assertEqual(
+                runner._frozen_commit_for(relative),
+                runner.PUBLISHED_CONSTRUCTION_COMMIT,
+            )
+        self.assertEqual(
+            runner._frozen_commit_for(str(runner.EXP_REL / "src/identity.py")),
+            runner.DESIGN_COMMIT,
+        )
+        with tempfile.TemporaryDirectory(dir=ROOT) as value:
+            later_raw = Path(value) / "raw"
+            later_raw.mkdir()
+            with mock.patch.object(runner, "RAW", later_raw):
+                self.assertEqual(
+                    runner.build_lock_attempt_1_incident(), incident
+                )
+                with self.assertRaisesRegex(RuntimeError, "before later artifacts"):
+                    runner.build_lock_attempt_1_incident(require_pristine=True)
+
+    def test_dangling_symlinks_cannot_be_replaced_by_frozen_writes_or_pristine_gate(self) -> None:
+        with tempfile.TemporaryDirectory(dir=ROOT) as value:
+            root = Path(value)
+            for name in (
+                "lock_attempt_1_incident.json",
+                "preoutcome_receipt_v2.json",
+                "implementation_lock.json",
+            ):
+                path = root / name
+                path.symlink_to(root / "missing-target")
+                with self.subTest(name=name), self.assertRaisesRegex(
+                    RuntimeError, "path is a symlink"
+                ):
+                    runner.write_frozen(path, {"status": "FORBIDDEN"})
+                self.assertTrue(path.is_symlink())
+            dangling_lock = root / "implementation_lock_dangling.json"
+            dangling_lock.symlink_to(root / "missing-lock")
+            with mock.patch.object(
+                runner, "IMPLEMENTATION_LOCK", dangling_lock
+            ), self.assertRaisesRegex(RuntimeError, "before later artifacts"):
+                runner.build_lock_attempt_1_incident(require_pristine=True)
 
 
 class EnvironmentAuthenticationTests(unittest.TestCase):
