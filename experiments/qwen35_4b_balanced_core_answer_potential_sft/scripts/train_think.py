@@ -10,6 +10,7 @@ import importlib.metadata
 import json
 import os
 import random
+import tempfile
 import time
 import types
 from pathlib import Path
@@ -21,6 +22,7 @@ import torch
 import yaml
 from huggingface_hub import hf_hub_download
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
+from safetensors import safe_open
 from torch.utils.checkpoint import checkpoint
 from torch.utils.data import Dataset
 from transformers import (
@@ -30,6 +32,7 @@ from transformers import (
     Qwen3_5ForCausalLM,
     Trainer,
     TrainingArguments,
+    set_seed,
 )
 from transformers.modeling_outputs import BaseModelOutputWithPast
 from transformers.modeling_utils import ALL_ATTENTION_FUNCTIONS
@@ -38,6 +41,7 @@ from transformers.models.qwen3_5.modeling_qwen3_5 import (
 )
 
 EXP = Path(__file__).resolve().parents[1]
+ROOT = EXP.parents[1]
 CONFIG_PATH = EXP / "configs" / "default.yaml"
 MODEL_ID = "Qwen/Qwen3.5-4B"
 MODEL_REVISION = "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
@@ -54,12 +58,83 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+def write_json_atomic(path: Path, value: Any) -> None:
+    """Durably replace a JSON receipt without exposing a partial file."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    descriptor, temporary_name = tempfile.mkstemp(
+        prefix=f".{path.name}.", dir=path.parent
+    )
+    try:
+        with os.fdopen(descriptor, "w", encoding="utf-8") as handle:
+            json.dump(
+                value,
+                handle,
+                indent=2,
+                sort_keys=True,
+                ensure_ascii=False,
+                allow_nan=False,
+            )
+            handle.write("\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(temporary_name, path)
+    except BaseException:
+        try:
+            os.unlink(temporary_name)
+        except FileNotFoundError:
+            pass
+        raise
+
+
+def trainable_state_receipt(model: Any) -> dict[str, Any]:
+    digest = hashlib.sha256()
+    tensors = 0
+    elements = 0
+    for name, parameter in sorted(model.named_parameters()):
+        if not parameter.requires_grad:
+            continue
+        value = parameter.detach().cpu().contiguous()
+        metadata = f"{name}\0{tuple(value.shape)}\0{value.dtype}\0".encode("utf-8")
+        digest.update(metadata)
+        digest.update(value.view(torch.uint8).numpy().tobytes())
+        tensors += 1
+        elements += int(value.numel())
+    if tensors == 0:
+        raise RuntimeError("no trainable tensors found for initialization receipt")
+    return {
+        "sha256": digest.hexdigest(),
+        "tensors": tensors,
+        "elements": elements,
+    }
+
+
+def adapter_tensor_manifest(path: Path) -> dict[str, Any]:
+    digest = hashlib.sha256()
+    with safe_open(str(path), framework="pt", device="cpu") as tensors:
+        keys = sorted(tensors.keys())
+        for key in keys:
+            value = tensors.get_tensor(key)
+            digest.update(
+                f"{key}\0{tuple(value.shape)}\0{value.dtype}\0".encode("utf-8")
+            )
+    if not keys:
+        raise RuntimeError("saved adapter contains no tensors")
+    return {"sha256": digest.hexdigest(), "tensors": len(keys)}
+
+
 def read_jsonl_gz(path: Path) -> list[dict[str, Any]]:
     with gzip.open(path, "rt", encoding="utf-8") as handle:
         return [json.loads(line) for line in handle if line.strip()]
 
 
-def exact_encode(rec: dict[str, Any], *, max_length: int, w_think: float) -> dict[str, Any]:
+def exact_encode(
+    rec: dict[str, Any],
+    *,
+    max_length: int,
+    w_prompt: float,
+    w_think: float,
+    w_close_answer: float,
+) -> dict[str, Any]:
     prompt = [int(value) for value in rec["prompt_token_ids"]]
     trace = [int(value) for value in rec["trace_token_ids"]]
     boundary = [int(value) for value in rec["answer_boundary_token_ids"]]
@@ -74,9 +149,9 @@ def exact_encode(rec: dict[str, Any], *, max_length: int, w_think: float) -> dic
             f"{rec['record_id']} {len(ids)} > {max_length}"
         )
     weights = (
-        [0.0] * len(prompt)
+        [w_prompt] * len(prompt)
         + [w_think] * len(trace)
-        + [1.0] * (len(boundary) + len(answer) + 1)
+        + [w_close_answer] * (len(boundary) + len(answer) + 1)
     )
     labels = [-100 if weight == 0 else token for token, weight in zip(ids, weights)]
     return {
@@ -258,7 +333,7 @@ def memory_bounded_text_forward(
     return BaseModelOutputWithPast(last_hidden_state=hidden_states)
 
 
-def load_text_model(rank: int, alpha: int, dropout: float) -> Any:
+def load_text_model(rank: int, alpha: int, dropout: float, *, seed: int) -> Any:
     outer = AutoConfig.from_pretrained(
         MODEL_ID,
         revision=MODEL_REVISION,
@@ -290,6 +365,8 @@ def load_text_model(rank: int, alpha: int, dropout: float) -> Any:
         memory_bounded_text_forward, model.model
     )
     model = prepare_model_for_kbit_training(model, use_gradient_checkpointing=True)
+    # Base-model loading must not make LoRA initialization arm-dependent.
+    set_seed(seed)
     model = get_peft_model(
         model,
         LoraConfig(
@@ -314,6 +391,9 @@ def main() -> int:
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--smoke", action="store_true")
     args = parser.parse_args()
+    # TrainingArguments seeds Trainer later; adapter parameters are created
+    # before that point, so establish the global contract before any model work.
+    set_seed(args.seed)
 
     config = yaml.safe_load(CONFIG_PATH.read_text(encoding="utf-8"))
     if args.arm not in config["sft"]["arms"]:
@@ -341,7 +421,9 @@ def main() -> int:
         exact_encode(
             row,
             max_length=int(config["sft"]["max_length"]),
+            w_prompt=float(config["sft"]["weight_prompt"]),
             w_think=float(config["sft"]["weight_think"]),
+            w_close_answer=float(config["sft"]["weight_close_answer"]),
         )
         for row in records
     ]
@@ -360,8 +442,10 @@ def main() -> int:
         int(config["sft"]["rank"]),
         int(config["sft"]["alpha"]),
         float(config["sft"]["dropout"]),
+        seed=args.seed,
     )
     model.print_trainable_parameters()
+    initial_trainable_state = trainable_state_receipt(model)
 
     training_args = TrainingArguments(
         output_dir=str(args.out),
@@ -453,18 +537,39 @@ def main() -> int:
         data_collator=Collator(int(tokenizer.pad_token_id)),
     )
     train_result = trainer.train()
+    completed_epochs = float(train_result.metrics.get("epoch", 0.0))
+    if abs(completed_epochs - epochs) > 1e-9:
+        raise RuntimeError(
+            f"training did not complete the frozen epoch exposure: {completed_epochs} != {epochs}"
+        )
+    if not epochs.is_integer():
+        raise RuntimeError("exact token exposure receipt requires integer frozen epochs")
     args.out.mkdir(parents=True, exist_ok=True)
+    receipt_path = args.out / "training_receipt.json"
+    # Invalidate a receipt from any deliberate direct rerun before replacing
+    # adapter artifacts.  An interruption can then only leave an unreceipted
+    # directory, which the orchestrator safely retrains.
+    receipt_path.unlink(missing_ok=True)
     model.save_pretrained(str(args.out))
     tokenizer.save_pretrained(str(args.out))
+    adapter_manifest = adapter_tensor_manifest(args.out / "adapter_model.safetensors")
     artifacts = {
         path.name: {"bytes": path.stat().st_size, "sha256": sha256_file(path)}
         for path in sorted(args.out.iterdir())
-        if path.is_file()
+        if path.is_file() and path.name != "training_receipt.json"
     }
     receipt = {
         "schema_version": 1,
         "arm": args.arm,
         "seed": args.seed,
+        "seed_contract": {
+            "global_seed_before_model": True,
+            "lora_seed_reset_before_adapter_init": True,
+            "trainer_seed": args.seed,
+            "data_seed": args.seed,
+        },
+        "adapter_initial_state": initial_trainable_state,
+        "adapter_tensor_manifest": adapter_manifest,
         "smoke": args.smoke,
         "model": MODEL_ID,
         "revision": MODEL_REVISION,
@@ -484,11 +589,52 @@ def main() -> int:
         "full_attention_backend": "xformers_memory_efficient",
         "long_row_threshold": FULL_LOGIT_MAX_LENGTH,
         "long_loss_chunk": LONG_LOSS_CHUNK,
+        "loss_weights": {
+            "prompt": float(config["sft"]["weight_prompt"]),
+            "think": float(config["sft"]["weight_think"]),
+            "close_answer": float(config["sft"]["weight_close_answer"]),
+        },
         "dataset": str(dataset),
         "dataset_sha256": sha256_file(dataset),
+        "selection_manifest_sha256": sha256_file(
+            EXP / "data" / "sft_manifest.json"
+        ),
+        "preselection_amendment_receipt_sha256": sha256_file(
+            EXP / "runs" / "preselection_amendment_receipt.json"
+        ),
+        "training_lock": {
+            "path": str(ROOT / "requirements-training.lock.txt"),
+            "sha256": sha256_file(ROOT / "requirements-training.lock.txt"),
+        },
+        "training_contract": {
+            "script_sha256": sha256_file(Path(__file__)),
+            "rank": int(config["sft"]["rank"]),
+            "alpha": int(config["sft"]["alpha"]),
+            "dropout": float(config["sft"]["dropout"]),
+            "learning_rate": float(config["sft"]["learning_rate"]),
+            "batch_size": int(config["sft"]["batch_size"]),
+            "gradient_accumulation": int(config["sft"]["gradient_accumulation"]),
+            "max_length": int(config["sft"]["max_length"]),
+            "optimizer": "paged_adamw_8bit",
+            "scheduler": "cosine",
+            "warmup_ratio": 0.03,
+        },
         "rows": len(encoded),
-        "forward_tokens": sum(len(row["input_ids"]) for row in encoded),
-        "supervised_weighted_tokens": sum(sum(row["loss_weights"]) for row in encoded),
+        "dataset_forward_tokens_one_pass": sum(
+            len(row["input_ids"]) for row in encoded
+        ),
+        "dataset_supervised_weighted_tokens_one_pass": sum(
+            sum(row["loss_weights"]) for row in encoded
+        ),
+        "actual_examples_seen": len(encoded) * int(epochs),
+        "actual_forward_tokens_seen": sum(
+            len(row["input_ids"]) for row in encoded
+        )
+        * int(epochs),
+        "actual_supervised_weighted_tokens_seen": sum(
+            sum(row["loss_weights"]) for row in encoded
+        )
+        * int(epochs),
         "skipped_rows": 0,
         "full_logit_rows": sum(
             len(row["input_ids"]) <= FULL_LOGIT_MAX_LENGTH for row in encoded
@@ -497,14 +643,14 @@ def main() -> int:
             len(row["input_ids"]) > FULL_LOGIT_MAX_LENGTH for row in encoded
         ),
         "epochs": epochs,
+        "completed_epochs": completed_epochs,
+        "optimizer_steps": int(train_result.global_step),
         "elapsed_seconds": time.perf_counter() - started,
         "peak_cuda_bytes": torch.cuda.max_memory_allocated(),
         "train_metrics": train_result.metrics,
         "artifacts": artifacts,
     }
-    (args.out / "training_receipt.json").write_text(
-        json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8"
-    )
+    write_json_atomic(receipt_path, receipt)
     print(f"[train] saved {args.arm} to {args.out}", flush=True)
     return 0
 

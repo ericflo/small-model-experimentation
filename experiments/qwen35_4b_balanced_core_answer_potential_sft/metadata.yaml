@@ -5,9 +5,11 @@ source_track: "new"
 path: "experiments/qwen35_4b_balanced_core_answer_potential_sft"
 primary_readme: "experiments/qwen35_4b_balanced_core_answer_potential_sft/README.md"
 primary_report: "experiments/qwen35_4b_balanced_core_answer_potential_sft/reports/report.md"
-summary: "Prospective resource-constrained follow-up to `qwen35_4b_long_horizon_answer_potential_sft`. The design is frozen before the remaining 29 harvest tasks, any training-pool scoring, any SFT, or any held-out evaluation. No capability result exists yet."
+summary: "Prospective resource-constrained follow-up to `qwen35_4b_long_horizon_answer_potential_sft`. The original balanced-funnel design was frozen before the remaining 29 harvest tasks, any training-pool scoring, any SFT, or any held-out evaluation. A selector balance defect was then discovered only after all candidate scores existed; its repair is transparently classified as a post-score/partial-rollout, pre-official-selection implementation deviation, not a prospective amendment. Partial R1 success labels were subsequently inspected for cost planning before the deviation was committed; they did not determine the repair. No official SFT dataset, adapter, or held-out outcome existed, and no capability result exists yet."
 tags:
   - "abi"
+  - "lora"
+  - "repair"
   - "small-model"
 research_programs:
   - "evidence_conditioned_selection"
@@ -23,10 +25,10 @@ top_level_dirs:
   - "src"
   - "tests"
 file_counts:
-  json: 6
+  json: 8
   jsonl: 7
   md: 7
-  py: 36
+  py: 38
   yaml: 3
-total_files: 59
-total_size_bytes: 3587067
+total_files: 63
+total_size_bytes: 3716941

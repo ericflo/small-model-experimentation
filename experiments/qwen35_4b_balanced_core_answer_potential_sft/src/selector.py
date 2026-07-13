@@ -11,6 +11,16 @@ from typing import Any, Mapping, Sequence
 
 ANSWER_BOUNDARY = "</think>\n\nANSWER: "
 
+SHUFFLE_AUDIT_FIELDS = (
+    "answer_gain_per_answer_token",
+    "joint_gain_per_answer_token",
+    "rollout_any_success",
+    "selection_mode",
+    "selection_metric",
+    "selection_gap_from_best",
+    "source_kind",
+)
+
 
 def _normalized_trigrams(text: str) -> set[tuple[str, str, str]]:
     value = re.sub(r"\b[-+]?\d+(?:\.\d+)?\b", " <num> ", text.lower())
@@ -51,27 +61,58 @@ def select_quality_diverse(
     )[:top_candidates]
     if not ranked:
         return []
-    selected = [ranked[0]]
+    selected = [
+        {
+            **ranked[0],
+            "selection_mode": "best",
+            "selection_metric": metric,
+            "selection_gap_from_best": 0.0,
+        }
+    ]
     while len(selected) < max_selected:
-        eligible = [
+        unused = [
             row
             for row in ranked
             if row["trace_id"] not in {prior["trace_id"] for prior in selected}
-            and float(row[metric]) >= float(ranked[0][metric]) - near_best
         ]
-        if not eligible:
+        if not unused:
             break
-        winner = max(
-            eligible,
-            key=lambda row: (
-                min(
-                    structural_distance(str(row.get("text", "")), str(prior.get("text", "")))
-                    for prior in selected
+        near_best_unused = [
+            row
+            for row in unused
+            if float(row[metric]) >= float(ranked[0][metric]) - near_best
+        ]
+        if near_best_unused:
+            winner = max(
+                near_best_unused,
+                key=lambda row: (
+                    min(
+                        structural_distance(
+                            str(row.get("text", "")), str(prior.get("text", ""))
+                        )
+                        for prior in selected
+                    ),
+                    float(row[metric]),
+                    str(row["trace_id"]),
                 ),
-                float(row[metric]),
-                str(row["trace_id"]),
-            ),
-        )
+            )
+            winner = {
+                **winner,
+                "selection_mode": "near_best_diverse",
+                "selection_metric": metric,
+                "selection_gap_from_best": float(ranked[0][metric])
+                - float(winner[metric]),
+            }
+        else:
+            # Preserve the frozen two-rows-per-task balance with the next
+            # score-ranked member of the already-frozen top-k.
+            winner = {
+                **unused[0],
+                "selection_mode": "fallback_second_ranked",
+                "selection_metric": metric,
+                "selection_gap_from_best": float(ranked[0][metric])
+                - float(unused[0][metric]),
+            }
         selected.append(winner)
     return selected
 
@@ -162,7 +203,7 @@ def select_task(
 
 
 def deranged_sources(rows: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
-    """One-to-one within-stratum reassignment with no same-task source."""
+    """Minimum-cost one-to-one within-stratum reassignment, forbidding same-task sources."""
     groups: dict[tuple[str, int], list[dict[str, Any]]] = defaultdict(list)
     for row in rows:
         groups[(str(row["family"]), int(row["level"]))].append(dict(row))
@@ -174,22 +215,93 @@ def deranged_sources(rows: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
         )
         if len({str(row["task_id"]) for row in targets}) < 2:
             raise ValueError(f"cannot derange single-task stratum {stratum}")
-        valid: list[tuple[int, int]] = []
-        for offset in range(1, len(targets)):
-            sources = targets[offset:] + targets[:offset]
-            if all(str(target["task_id"]) != str(source["task_id"]) for target, source in zip(targets, sources)):
-                cost = sum(abs(int(target["n_tokens"]) - int(source["n_tokens"])) for target, source in zip(targets, sources))
-                valid.append((cost, offset))
-        if not valid:
+        # Deterministic Hungarian assignment.  Rows/columns are already stably
+        # ordered, so equal-cost optima have a reproducible resolution.
+        n = len(targets)
+        max_gap = max(int(row["n_tokens"]) for row in targets) - min(
+            int(row["n_tokens"]) for row in targets
+        )
+        forbidden = (max_gap + 1) * (n + 1)
+        costs = [
+            [
+                forbidden
+                if str(target["task_id"]) == str(source["task_id"])
+                else abs(int(target["n_tokens"]) - int(source["n_tokens"]))
+                for source in targets
+            ]
+            for target in targets
+        ]
+        u = [0] * (n + 1)
+        v = [0] * (n + 1)
+        p = [0] * (n + 1)
+        way = [0] * (n + 1)
+        for i in range(1, n + 1):
+            p[0] = i
+            j0 = 0
+            minv = [forbidden * (n + 1)] * (n + 1)
+            used = [False] * (n + 1)
+            while True:
+                used[j0] = True
+                i0 = p[j0]
+                delta = forbidden * (n + 1)
+                j1 = 0
+                for j in range(1, n + 1):
+                    if used[j]:
+                        continue
+                    cur = costs[i0 - 1][j - 1] - u[i0] - v[j]
+                    if cur < minv[j]:
+                        minv[j] = cur
+                        way[j] = j0
+                    if minv[j] < delta:
+                        delta = minv[j]
+                        j1 = j
+                for j in range(n + 1):
+                    if used[j]:
+                        u[p[j]] += delta
+                        v[j] -= delta
+                    else:
+                        minv[j] -= delta
+                j0 = j1
+                if p[j0] == 0:
+                    break
+            while True:
+                j1 = way[j0]
+                p[j0] = p[j1]
+                j0 = j1
+                if j0 == 0:
+                    break
+        assigned = [0] * n
+        for j in range(1, n + 1):
+            assigned[p[j] - 1] = j - 1
+        sources = [targets[index] for index in assigned]
+        if any(
+            str(target["task_id"]) == str(source["task_id"])
+            for target, source in zip(targets, sources)
+        ):
             raise ValueError(f"no one-to-one task derangement for {stratum}")
-        _, offset = min(valid)
-        sources = targets[offset:] + targets[:offset]
         for target, source in zip(targets, sources):
+            target_audit = {
+                f"shuffle_target_{key}": target.get(key)
+                for key in SHUFFLE_AUDIT_FIELDS
+            }
+            source_audit = {
+                f"shuffle_source_{key}": source.get(key)
+                for key in SHUFFLE_AUDIT_FIELDS
+            }
             output.append(
                 {
                     **target,
+                    **target_audit,
+                    **source_audit,
+                    # The unprefixed selection/quality fields describe the
+                    # trace that is actually placed after the target prompt.
+                    **{key: source.get(key) for key in SHUFFLE_AUDIT_FIELDS},
+                    "shuffle_target_trace_id": target["trace_id"],
+                    "shuffle_target_task_id": target["task_id"],
                     "shuffle_source_trace_id": source["trace_id"],
                     "shuffle_source_task_id": source["task_id"],
+                    "shuffle_target_trace_tokens": int(target["n_tokens"]),
+                    "shuffle_source_trace_tokens": int(source["n_tokens"]),
                     "token_ids": list(source["token_ids"]),
                     "text": source.get("text", ""),
                     "n_tokens": int(source["n_tokens"]),
@@ -255,8 +367,32 @@ def sft_record(
         "answer_gain_per_answer_token": None if trace is None else trace.get("answer_gain_per_answer_token"),
         "joint_gain_per_answer_token": None if trace is None else trace.get("joint_gain_per_answer_token"),
         "rollout_any_success": None if trace is None else trace.get("rollout_any_success"),
+        "selection_mode": None if trace is None else trace.get("selection_mode"),
+        "selection_metric": None if trace is None else trace.get("selection_metric"),
+        "selection_gap_from_best": None
+        if trace is None
+        else trace.get("selection_gap_from_best"),
+        "shuffle_target_trace_id": None
+        if trace is None
+        else trace.get("shuffle_target_trace_id"),
+        "shuffle_target_task_id": None
+        if trace is None
+        else trace.get("shuffle_target_task_id"),
         "shuffle_source_trace_id": None if trace is None else trace.get("shuffle_source_trace_id"),
         "shuffle_source_task_id": None if trace is None else trace.get("shuffle_source_task_id"),
+        "shuffle_target_trace_tokens": None
+        if trace is None
+        else trace.get("shuffle_target_trace_tokens"),
+        "shuffle_source_trace_tokens": None
+        if trace is None
+        else trace.get("shuffle_source_trace_tokens"),
+        **{
+            f"shuffle_{side}_{key}": (
+                None if trace is None else trace.get(f"shuffle_{side}_{key}")
+            )
+            for side in ("target", "source")
+            for key in SHUFFLE_AUDIT_FIELDS
+        },
     }
 
 

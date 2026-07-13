@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import gzip
 import hashlib
+import io
 import json
 import os
 import tempfile
@@ -29,19 +30,29 @@ def write_jsonl_gz(path: Path, rows: Iterable[dict[str, Any]]) -> dict[str, Any]
     temporary = Path(temporary_name)
     count = 0
     try:
-        with gzip.open(temporary, "wt", encoding="utf-8", compresslevel=6) as handle:
-            for row in rows:
-                handle.write(
-                    json.dumps(
-                        row,
-                        ensure_ascii=False,
-                        sort_keys=True,
-                        separators=(",", ":"),
-                        allow_nan=False,
-                    )
-                    + "\n"
-                )
-                count += 1
+        with temporary.open("wb") as raw:
+            with gzip.GzipFile(
+                filename="",
+                mode="wb",
+                compresslevel=6,
+                fileobj=raw,
+                mtime=0,
+            ) as compressed:
+                with io.TextIOWrapper(
+                    compressed, encoding="utf-8", newline="\n"
+                ) as handle:
+                    for row in rows:
+                        handle.write(
+                            json.dumps(
+                                row,
+                                ensure_ascii=False,
+                                sort_keys=True,
+                                separators=(",", ":"),
+                                allow_nan=False,
+                            )
+                            + "\n"
+                        )
+                        count += 1
         os.replace(temporary, path)
     except BaseException:
         temporary.unlink(missing_ok=True)

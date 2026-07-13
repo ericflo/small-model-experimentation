@@ -68,8 +68,10 @@ the frozen design.
 ## Expensive-Run Authorization
 
 Authorized only after the design commit is pushed, the implementation test suite passes, inherited receipts
-validate, the 32-row joint parity gate passes, and the exact long-row training stress receipt remains valid on
-the current environment.
+validate, and the exact long-row training stress receipt remains valid on the current environment. Train
+likelihood scoring additionally requires either the 32-row joint parity gate to pass or a committed dated
+instrument amendment after that gate fails. Selection additionally requires the committed post-score
+deviation/evidence seal described below.
 
 ## Post-Freeze Instrument Audit — 2026-07-12
 
@@ -78,3 +80,46 @@ the frozen 0.15 ceiling. No bulk score existed. The scientifically conservative 
 or friendlier row set; it is uniform use of the single-context Transformers reference that defined the other
 side of the comparison. This removes batching from the measurement and preserves every scientific selector,
 control, and decision threshold. Bulk scoring is authorized only under that amended backend.
+
+## Post-Score, Pre-Official-Selection Balance Deviation — 2026-07-13
+
+After all 360 tasks had canonical scores, but before R1 was complete and before any official selection
+dataset or adapter existed, a read-only CPU application of the registered helper exposed that it could return
+only the best row when no second trace was within 0.25 nats/answer-token. The resulting 116-task subset and
+its family imbalance were observed. This violates the preregistration's rule that candidate scores not be
+observed before an amendment; a later seal cannot restore prospectivity. The implementation deviation keeps
+the near-best rule when possible and otherwise uses the deterministic second-ranked trace from the same
+frozen top-12. Hard gates require all 360 tasks, 40 tasks in every family/level cell, and 720 rows per arm.
+No score value, rollout label, SFT outcome, or held-out outcome was used to choose the repair. Partial R1
+labels were subsequently inspected for cost planning before commit. Claims about this repaired selector are
+therefore explicitly post-score/partial-rollout exploratory within the otherwise frozen evaluation.
+
+## Pre-Training Seed Audit — 2026-07-13
+
+Before any adapter existed, the same preflight found that `TrainingArguments(seed=...)` was constructed after
+`get_peft_model`, so the advertised seed did not control LoRA initialization. The training entry point now
+sets the global seed before model creation and resets it immediately before adapter construction. A CPU
+contract test enforces ordering and every training receipt exposes the global, adapter, Trainer, and data-seed
+contract. Hyperparameters, data, and evaluation rules are unchanged.
+
+## Pre-Training Provenance Audit — 2026-07-13
+
+The same audit repaired three restart/accounting hazards before any adapter existed: one-pass receipt totals
+despite two epochs, permissive partial-adapter merge acceptance, and path-bound probe/evaluation caches. The
+training receipt now records actual two-epoch exposure, optimizer steps, lock digest, initial-state digest,
+and final artifact hashes. Merge requires all 128 A/B pairs and fingerprints every deployed file. Probe and
+evaluation receipts bind the checkpoint fingerprint plus their task, sampling, engine, and code contracts.
+Stage-A analysis also verifies exact task identity and an explicit conservative strongest-baseline tie rule.
+
+The shuffle-control implementation was upgraded from best cyclic rotation to an exact deterministic
+minimum-cost assignment with same-task edges forbidden, matching the original wording. Length mismatch is
+reported, and target/source selection metadata are namespaced so the trained source can be audited row by
+row. Training receipts are written by atomic replacement and are never included in their own artifact map.
+This changed no treatment trace, score, threshold, or observed evaluation outcome.
+
+Applying the repaired selector in memory to the frozen score bank before writing official datasets showed
+answer fallback on 5/360 tasks (median gap 3.409, maximum 7.378 nats/answer-token) and joint fallback on
+244/360 tasks (median 0.893, mean 1.410, p90 2.954, maximum 12.128). The latter is scientifically material:
+the joint arm is a mixed best-plus-near-best-diverse-or-second-ranked treatment, not a uniformly
+near-best-diverse treatment. Selection receipts and any result interpretation must stratify it by mode and
+gap.

@@ -6,8 +6,12 @@
 
 Prospective resource-constrained follow-up to
 `qwen35_4b_long_horizon_answer_potential_sft`.
-The design is frozen before the remaining 29 harvest tasks, any training-pool scoring, any SFT, or any
-held-out evaluation. No capability result exists yet.
+The original balanced-funnel design was frozen before the remaining 29 harvest tasks, any training-pool
+scoring, any SFT, or any held-out evaluation. A selector balance defect was then discovered only after all
+candidate scores existed; its repair is transparently classified as a post-score/partial-rollout,
+pre-official-selection implementation deviation, not a prospective amendment. Partial R1 success labels were
+subsequently inspected for cost planning before the deviation was committed; they did not determine the repair. No official SFT
+dataset, adapter, or held-out outcome existed, and no capability result exists yet.
 
 The preserved parent is [linked here](../qwen35_4b_long_horizon_answer_potential_sft/README.md).
 
@@ -136,8 +140,16 @@ Selection is within task and keeps two full traces per arm:
 | `potential_shuffle` | answer-treatment multiset reassigned within family/level/length | task-specific content control |
 
 Potential selection retains the top 12 by score, takes the best, then the structurally most distant trace
-within 0.25 nats per answer token. It never rewards brevity. The shortest arm is intentionally not
-token-matched; its lower token dose is part of the mechanism being tested and is reported.
+within 0.25 nats per answer token. If that band contains no unused second trace, it deterministically uses
+the second-ranked member of the same frozen top 12 so every balanced task still contributes two rows. It
+never rewards brevity. The shortest arm is intentionally not token-matched; its lower token dose is part of
+the mechanism being tested and is reported.
+
+The pre-selection audit found that this fallback is rare for answer potential (5/360 tasks) but common for
+joint potential (244/360 tasks). The joint arm is therefore explicitly interpreted as a best-plus-diverse-or-
+second-ranked hybrid, and results must be stratified by selection mode and score gap rather than described as
+a uniformly near-best-diverse treatment. This disclosure narrows the selector claim; a commit-and-evidence
+seal prevents any further selector change after the completed score bank was inspected.
 
 All arms otherwise use identical QLoRA settings: rank 32, alpha 64, dropout 0.05, two epochs, learning rate
 2e-4, batch 1 x gradient accumulation 16, maximum length 16,000, prompt loss 0, thought loss 0.5, and
@@ -194,20 +206,31 @@ follow-up must be a new experiment.
 .venv-vllm/bin/python experiments/qwen35_4b_balanced_core_answer_potential_sft/scripts/run.py --stage full
 ```
 
-The granular path is `import -> harvest -> parity -> score -> rollouts -> select -> train -> merge ->
-deployment-probe -> evaluate-stage-a -> analyze-stage-a`, followed only conditionally by Stage B.
+The granular path is `import -> harvest -> parity -> score -> rollouts -> evidence-seal -> select -> train ->
+merge -> deployment-probe -> evaluate-stage-a -> analyze-stage-a`, followed only conditionally by Stage B.
+`evidence-seal` is a one-time retrospective attestation for the legacy indexes; `select` remains blocked until
+that seal and the post-score deviation are committed in the machine amendment receipt.
+
+`full` is resume-only across these commit boundaries: it intentionally stops if the evidence/amendment seal
+is not committed, and a fresh selection is not trainable until the byte-identical tracked SFT manifest and
+selection summary are committed and pushed. This prevents a one-process run from selecting and immediately
+training on an unreviewed dataset. The current execution stops after selection in any case pending the user's
+compute choice.
 
 ## Results
 
 No capability result yet. The balanced bank is complete: 360 tasks, 23,040 traces, 108,759,239 sampled
 thought tokens, 22,681 natural closes, four loops, and zero deficient tasks. The candidate vLLM scoring
 instrument failed its strict cross-backend gate before bulk scoring; the reference-scoring amendment above
-is frozen before any training score or outcome.
+was frozen before any training score or outcome. Exact single-context reference scoring then completed for
+all 22,681 eligible traces in 17,296 seconds, and R1 completed one answer rollout for every scored trace in
+10,915 seconds. All 360 raw/score/R1 shards, hashes, task scopes, source links, trace joins, and eligibility
+sets pass the read-only pre-seal audit. No official selection dataset or adapter exists yet.
 
 ## Artifacts
 
 - `idea_intake.md`: routing, novelty, and post-calibration boundary
-- `reports/preregistration.md`: prospective frozen protocol
+- `reports/preregistration.md`: original frozen protocol plus dated amendments/deviations
 - `reports/design_review.md`: adversarial review and applied fixes
 - `configs/default.yaml`: exact counts, seeds, and gates
 - `reports/artifact_manifest.yaml`: inherited pool, external scores, adapters, and checkpoints

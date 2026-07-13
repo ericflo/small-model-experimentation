@@ -11,6 +11,7 @@ import os
 import subprocess
 import sys
 import time
+from contextlib import nullcontext
 from pathlib import Path
 from typing import Any
 
@@ -48,6 +49,31 @@ from vllm_runner import (  # noqa: E402
 CONFIG_PATH = EXP / "configs" / "default.yaml"
 DATA_DIR = EXP / "data" / "procedural"
 RUNS_DIR = EXP / "runs"
+AMENDMENT_RECEIPT_PATH = RUNS_DIR / "preselection_amendment_receipt.json"
+AMENDMENT_FROZEN_FILES = tuple(
+    sorted(
+        {
+            str(path.relative_to(ROOT))
+            for directory, pattern in (
+                (EXP / "configs", "*.yaml"),
+                (EXP / "data" / "procedural", "*.json"),
+                (EXP / "data" / "procedural", "*.jsonl"),
+                (EXP / "scripts", "*.py"),
+                (EXP / "src", "*.py"),
+            )
+            for path in directory.rglob(pattern)
+            if not any(
+                part.startswith(".") for part in path.relative_to(directory).parts
+            )
+        }
+        | {
+            str((EXP / "reports" / "design_review.md").relative_to(ROOT)),
+            str((EXP / "reports" / "preregistration.md").relative_to(ROOT)),
+            "requirements-training.lock.txt",
+            "requirements-vllm.lock.txt",
+        }
+    )
+)
 
 
 def optional_mean(values: list[float | int | bool]) -> float | None:
@@ -65,12 +91,689 @@ def _run(command: list[str], *, check: bool = True) -> subprocess.CompletedProce
     )
 
 
+def git_file_sha256(commit: str, path: str) -> str:
+    payload = _run(["git", "show", f"{commit}:{path}"]).stdout.encode("utf-8")
+    return hashlib.sha256(payload).hexdigest()
+
+
+def canonical_sha256(value: Any) -> str:
+    return hashlib.sha256(
+        json.dumps(value, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+
+
+def base_model_fingerprint() -> str:
+    return canonical_sha256({"model": MODEL_ID, "revision": MODEL_REVISION})
+
+
+def checkpoint_fingerprint(path: Path) -> dict[str, Any]:
+    excluded = {"merge_receipt.json", "merge_application_receipt.json"}
+    files = sorted(
+        item
+        for item in path.rglob("*")
+        if item.is_file() and item.name not in excluded
+    )
+    if not (path / "config.json").is_file() or not any(
+        item.suffix == ".safetensors" for item in files
+    ):
+        raise RuntimeError(f"incomplete merged checkpoint: {path}")
+    entries = [
+        {
+            "name": str(item.relative_to(path)),
+            "bytes": item.stat().st_size,
+            "sha256": sha256_file(item),
+        }
+        for item in files
+    ]
+    return {"sha256": canonical_sha256(entries), "files": entries}
+
+
+def sampling_contract(sampling: SamplingConfig) -> dict[str, Any]:
+    return dict(vars(sampling))
+
+
+def task_scope_sha256(config: dict[str, Any], split: str) -> str:
+    items = load_core_train(config) if split == "train" else load_split(split)
+    return canonical_sha256(
+        [
+            {
+                "id": item["id"],
+                "prompt": item["prompt"],
+                "canonical_answer": item["canonical_answer"],
+                "family": item["family"],
+                "level": item["level"],
+            }
+            for item in items
+        ]
+    )
+
+
+def score_operation_contract(config: dict[str, Any]) -> str:
+    return canonical_sha256(
+        {
+            "model": config["model"],
+            "task_scope_sha256": task_scope_sha256(config, "train"),
+            "scoring": config["scoring"],
+            "max_train_length": int(config["selector"]["max_train_length"]),
+            "scorer_sha256": sha256_file(EXP / "src" / "hf_scorer.py"),
+            "environment_lock_sha256": sha256_file(
+                ROOT / "requirements-vllm.lock.txt"
+            ),
+            "canonical_only": True,
+        }
+    )
+
+
+def rollout_operation_contract(
+    config: dict[str, Any], *, source_stages: list[str], r: int
+) -> str:
+    sampling = config["sampling"]
+    return canonical_sha256(
+        {
+            "model": config["model"],
+            "task_scope_sha256": task_scope_sha256(config, "train"),
+            "engine": config["engine"],
+            "source_stages": source_stages,
+            "r": r,
+            "answer_max_tokens": int(sampling["answer_max_tokens"]),
+            "run_seed": int(sampling["continuation_seed"]) + 101 * r,
+            "temperature": float(sampling["temperature"]),
+            "top_p": float(sampling["top_p"]),
+            "top_k": int(sampling["top_k"]),
+            "runner_sha256": sha256_file(EXP / "src" / "vllm_runner.py"),
+            "model_ops_sha256": sha256_file(EXP / "src" / "model_ops.py"),
+            "vllm_lock_sha256": sha256_file(ROOT / "requirements-vllm.lock.txt"),
+        }
+    )
+
+
+def raw_pool_operation_contract(
+    config: dict[str, Any], *, split: str, n: int, stage: str
+) -> str:
+    sampling = config["sampling"]
+    return canonical_sha256(
+        {
+            "model": config["model"],
+            "task_scope_sha256": task_scope_sha256(config, split),
+            "engine": config["engine"],
+            "split": split,
+            "stage": stage,
+            "n": n,
+            "natural_close_allowance": int(sampling["natural_close_allowance"]),
+            "nonloop_continuation_tokens": int(
+                sampling["nonloop_continuation_tokens"]
+            ),
+            "run_seed": int(sampling["run_seed"]),
+            "continuation_seed": int(sampling["continuation_seed"]),
+            "temperature": float(sampling["temperature"]),
+            "top_p": float(sampling["top_p"]),
+            "top_k": int(sampling["top_k"]),
+            "logprobs": int(sampling["logprobs"]),
+            "runner_sha256": sha256_file(EXP / "src" / "vllm_runner.py"),
+            "model_ops_sha256": sha256_file(EXP / "src" / "model_ops.py"),
+            "environment_lock_sha256": sha256_file(
+                ROOT / "requirements-vllm.lock.txt"
+            ),
+            "minimum_natural_per_task": int(
+                config["selector"]["minimum_natural_per_task"]
+            ),
+            "topup": {
+                "n": 16,
+                "maximum_batches": 4,
+                "seed_stride": 10_000,
+            },
+            "inherited_source_index_sha256": config.get("inherit", {}).get(
+                "source_index_sha256"
+            ),
+        }
+    )
+
+
+def selection_evidence_contracts(config: dict[str, Any]) -> dict[str, str]:
+    return {
+        "independent": raw_pool_operation_contract(
+            config,
+            split="train",
+            n=int(config["sampling"]["train_independent_n"]),
+            stage="train_independent",
+        ),
+        "independent_scores": score_operation_contract(config),
+        "rollouts": rollout_operation_contract(
+            config,
+            source_stages=["train_independent"],
+            r=int(config["sampling"]["train_rollouts_per_trace"]),
+        ),
+    }
+
+
+def selection_evidence_bundle(
+    config: dict[str, Any], *, allow_missing_contracts: bool
+) -> tuple[
+    dict[str, dict[str, Any]], dict[str, str], dict[str, dict[str, Any]]
+]:
+    """Validate and fingerprint the exact three indexes consumed by selection."""
+    root = external_root(config)
+    source_names = {
+        "independent": "train_independent",
+        "independent_scores": "train_independent_scores",
+        "rollouts": "train_rollouts_r1",
+    }
+    index_paths = {
+        key: root / "pools" / stage / "index.json"
+        for key, stage in source_names.items()
+    }
+    missing = [str(path) for path in index_paths.values() if not path.is_file()]
+    if missing:
+        raise RuntimeError(f"selection evidence index missing: {missing}")
+    indices = {key: read_json(path) for key, path in index_paths.items()}
+    expected_contracts = selection_evidence_contracts(config)
+    for key, expected in expected_contracts.items():
+        observed = indices[key].get("operation_contract_sha256")
+        if observed not in (None, expected):
+            raise RuntimeError(f"{key} operation contract mismatch")
+        if observed is None and not allow_missing_contracts:
+            raise RuntimeError(f"{key} operation contract is not sealed")
+
+    for key, index in indices.items():
+        if (
+            index.get("stage") != source_names[key]
+            or index.get("split") != "train"
+            or index.get("model") != MODEL_ID
+            or index.get("revision") != MODEL_REVISION
+        ):
+            raise RuntimeError(f"{key} evidence-index identity mismatch")
+    if indices["independent_scores"].get("backend") != str(
+        config["scoring"]["backend"]
+    ):
+        raise RuntimeError("selection score backend mismatch")
+
+    task_ids = {str(item["id"]) for item in load_core_train(config)}
+    expected_tasks = int(config["splits"]["full_train_tasks"])
+    if len(task_ids) != expected_tasks:
+        raise RuntimeError("frozen train scope count mismatch during evidence seal")
+    if any(set(index.get("shards", {})) != task_ids for index in indices.values()):
+        raise RuntimeError("selection evidence does not cover the exact frozen task scope")
+
+    for task_id in sorted(task_ids):
+        raw_entry = indices["independent"]["shards"][task_id]
+        score_entry = indices["independent_scores"]["shards"][task_id]
+        rollout_entry = indices["rollouts"]["shards"][task_id]
+        for label, entry in (
+            ("raw", raw_entry),
+            ("score", score_entry),
+            ("rollout", rollout_entry),
+        ):
+            if not valid_receipt(entry["artifact"]):
+                raise RuntimeError(f"invalid {label} evidence artifact: {task_id}")
+        raw_sha256 = raw_entry["artifact"]["sha256"]
+        if score_entry.get("source_artifact_sha256") != raw_sha256:
+            raise RuntimeError(f"score/raw provenance mismatch: {task_id}")
+        if rollout_entry.get("source_sha256") != [raw_sha256]:
+            raise RuntimeError(f"rollout/raw provenance mismatch: {task_id}")
+        if int(score_entry.get("eligible", -1)) != int(
+            score_entry["artifact"]["rows"]
+        ):
+            raise RuntimeError(f"score eligibility receipt mismatch: {task_id}")
+        if int(rollout_entry.get("eligible", -1)) != int(
+            rollout_entry["artifact"]["rows"]
+        ):
+            raise RuntimeError(f"rollout eligibility receipt mismatch: {task_id}")
+        if int(score_entry["artifact"]["rows"]) != int(
+            rollout_entry["artifact"]["rows"]
+        ):
+            raise RuntimeError(f"score/rollout row-count mismatch: {task_id}")
+        if allow_missing_contracts:
+            raw_rows = read_jsonl_gz(Path(raw_entry["artifact"]["path"]))
+            score_rows = read_jsonl_gz(Path(score_entry["artifact"]["path"]))
+            rollout_rows = read_jsonl_gz(Path(rollout_entry["artifact"]["path"]))
+            if any(
+                str(row.get("task_id")) != task_id
+                for row in (*raw_rows, *score_rows, *rollout_rows)
+            ):
+                raise RuntimeError(f"evidence shard contains another task ID: {task_id}")
+            raw_ids = [str(row["trace_id"]) for row in raw_rows]
+            score_ids = [str(row["trace_id"]) for row in score_rows]
+            rollout_ids = [str(row["trace_id"]) for row in rollout_rows]
+            if (
+                len(raw_ids) != len(set(raw_ids))
+                or len(score_ids) != len(set(score_ids))
+                or len(rollout_ids) != len(set(rollout_ids))
+                or set(score_ids) != set(rollout_ids)
+                or not set(score_ids).issubset(set(raw_ids))
+            ):
+                raise RuntimeError(f"evidence trace-ID join mismatch: {task_id}")
+            eligible_raw_ids = {
+                str(row["trace_id"])
+                for row in raw_rows
+                if bool(row["natural_close"]) and not bool(row["loop_flag"])
+            }
+            if set(score_ids) != eligible_raw_ids:
+                raise RuntimeError(f"evidence eligibility-set mismatch: {task_id}")
+
+    summaries = {
+        key: {
+            "stage": source_names[key],
+            "index": str(index_paths[key]),
+            "index_sha256": sha256_file(index_paths[key]),
+            "tasks": len(indices[key]["shards"]),
+            "rows": sum(
+                int(entry["artifact"]["rows"])
+                for entry in indices[key]["shards"].values()
+            ),
+            "operation_contract_sha256": expected_contracts[key],
+        }
+        for key in source_names
+    }
+    if summaries["independent_scores"]["rows"] != summaries["rollouts"]["rows"]:
+        raise RuntimeError("score and rollout evidence totals differ")
+    if summaries["independent"]["rows"] < (
+        expected_tasks * int(config["sampling"]["train_independent_n"])
+    ):
+        raise RuntimeError("raw evidence total is below the frozen N per task")
+    return indices, expected_contracts, summaries
+
+
+def apply_selection_operation_contracts(
+    config: dict[str, Any],
+    indices: dict[str, dict[str, Any]],
+    contracts: dict[str, str],
+) -> None:
+    """Apply a validated retrospective attestation, safely across restarts."""
+    root = external_root(config)
+    source_names = {
+        "independent": "train_independent",
+        "independent_scores": "train_independent_scores",
+        "rollouts": "train_rollouts_r1",
+    }
+    for key, stage in source_names.items():
+        expected = contracts[key]
+        observed = indices[key].get("operation_contract_sha256")
+        if observed not in (None, expected):
+            raise RuntimeError(f"{key} operation contract changed before attestation")
+        if observed is None:
+            indices[key]["operation_contract_sha256"] = expected
+            indices[key]["operation_contract_sealed_post_run"] = True
+            write_json(root / "pools" / stage / "index.json", indices[key])
+
+
+def committed_amendment_file_hashes(commit: str) -> dict[str, str]:
+    """Require every frozen scientific input to match one committed tree."""
+    frozen_files: dict[str, str] = {}
+    for relative in AMENDMENT_FROZEN_FILES:
+        path = ROOT / relative
+        current_sha256 = sha256_file(path)
+        if git_file_sha256(commit, relative) != current_sha256:
+            raise RuntimeError(
+                f"cannot seal an uncommitted amendment file: {relative}"
+            )
+        frozen_files[relative] = current_sha256
+    return frozen_files
+
+
+def seal_selection_evidence(config: dict[str, Any]) -> dict[str, Any]:
+    """One-time post-run seal before the amendment receipt is committed."""
+    root = external_root(config)
+    stage_keys = {
+        "independent": "train_independent",
+        "independent_scores": "train_independent_scores",
+        "rollouts": "train_rollouts_r1",
+    }
+    forbidden = [
+        root / "selection",
+        root / "sft",
+        root / "adapters",
+        root / "merged",
+        EXP / "data" / "sft_manifest.json",
+    ]
+    present = [str(path) for path in forbidden if path.exists()]
+    if present:
+        raise RuntimeError(
+            f"cannot create a pre-selection seal after downstream artifacts: {present}"
+        )
+    existing_seal_path = RUNS_DIR / "preselection_evidence_seal.json"
+    if existing_seal_path.is_file():
+        existing = read_json(existing_seal_path)
+        _, _, current_summaries = selection_evidence_bundle(
+            config, allow_missing_contracts=False
+        )
+        operation_path = RUNS_DIR / "evidence_operation_contracts.json"
+        legacy_path = RUNS_DIR / "preselection_legacy_indexes.json"
+        if (
+            existing.get("passed") is not True
+            or existing.get("selection_artifacts_absent") is not True
+            or existing.get("adapter_artifacts_absent") is not True
+            or existing.get("indexes") != current_summaries
+            or not operation_path.is_file()
+            or not legacy_path.is_file()
+            or existing.get("evidence_operation_contracts_sha256")
+            != sha256_file(operation_path)
+            or existing.get("legacy_index_receipt_sha256")
+            != sha256_file(legacy_path)
+        ):
+            raise RuntimeError("existing pre-selection evidence seal is stale")
+        committed_amendment_file_hashes(
+            _run(["git", "rev-parse", "HEAD"]).stdout.strip()
+        )
+        design_boundary_receipt(config)
+        write_preselection_amendment_receipt(config, existing)
+        return existing
+
+    # This complete pass is deliberately read-only.  Incomplete or corrupt
+    # evidence must leave neither a legacy receipt nor partially attested
+    # upstream indexes behind.
+    pre_indices, contracts, _ = selection_evidence_bundle(
+        config, allow_missing_contracts=True
+    )
+    committed_amendment_file_hashes(
+        _run(["git", "rev-parse", "HEAD"]).stdout.strip()
+    )
+    design_boundary_receipt(config)
+    legacy_path = RUNS_DIR / "preselection_legacy_indexes.json"
+    if legacy_path.is_file():
+        legacy = read_json(legacy_path)
+    else:
+        legacy = {
+            "schema_version": 1,
+            "classification": "retrospective_pre_operation_contract_attestation",
+            "indexes": {
+                stage: {
+                    "path": str(root / "pools" / stage / "index.json"),
+                    "sha256": sha256_file(root / "pools" / stage / "index.json"),
+                    "observed_operation_contract_sha256": pre_indices[key].get(
+                        "operation_contract_sha256"
+                    ),
+                }
+                for key, stage in stage_keys.items()
+            },
+        }
+        write_json(legacy_path, legacy)
+    if set(legacy.get("indexes", {})) != set(stage_keys.values()):
+        raise RuntimeError("legacy evidence-index receipt scope mismatch")
+    for key, stage in stage_keys.items():
+        legacy_entry = legacy["indexes"][stage]
+        legacy_contract = legacy_entry.get("observed_operation_contract_sha256")
+        if (
+            legacy_entry.get("path")
+            != str(root / "pools" / stage / "index.json")
+            or len(str(legacy_entry.get("sha256", ""))) != 64
+            or legacy_contract not in (None, contracts[key])
+        ):
+            raise RuntimeError(f"legacy evidence-index receipt mismatch: {stage}")
+        current_contract = pre_indices[key].get("operation_contract_sha256")
+        if current_contract is None or legacy_contract == contracts[key]:
+            reconstructed_sha256 = sha256_file(
+                root / "pools" / stage / "index.json"
+            )
+        else:
+            reconstructed = dict(pre_indices[key])
+            reconstructed.pop("operation_contract_sha256", None)
+            reconstructed.pop("operation_contract_sealed_post_run", None)
+            reconstructed_sha256 = hashlib.sha256(
+                (
+                    json.dumps(
+                        reconstructed,
+                        indent=2,
+                        sort_keys=True,
+                        ensure_ascii=False,
+                        allow_nan=False,
+                    )
+                    + "\n"
+                ).encode("utf-8")
+            ).hexdigest()
+        if reconstructed_sha256 != legacy_entry["sha256"]:
+            raise RuntimeError(f"unattested legacy evidence-index drift: {stage}")
+    original_index_sha256 = {
+        stage: str(legacy["indexes"][stage]["sha256"])
+        for stage in stage_keys.values()
+    }
+    apply_selection_operation_contracts(config, pre_indices, contracts)
+    indices, contracts, summaries = selection_evidence_bundle(
+        config, allow_missing_contracts=False
+    )
+    operation_receipt = {
+        "schema_version": 1,
+        "contracts": contracts,
+        "score_backend": indices["independent_scores"].get("backend"),
+        "indexes": summaries,
+    }
+    operation_path = RUNS_DIR / "evidence_operation_contracts.json"
+    write_json(operation_path, operation_receipt)
+    result = {
+        "schema_version": 1,
+        "passed": True,
+        "indexes": summaries,
+        "legacy_index_sha256_before_operation_seal": original_index_sha256,
+        "legacy_index_receipt_sha256": sha256_file(legacy_path),
+        "operation_contract_attestation": (
+            "retrospective post-run attestation over preserved artifacts; "
+            "not metadata emitted by the original generation/scoring process"
+        ),
+        "evidence_operation_contracts_sha256": sha256_file(operation_path),
+        "selection_artifacts_absent": True,
+        "adapter_artifacts_absent": True,
+    }
+    write_json(existing_seal_path, result)
+    write_preselection_amendment_receipt(config, result)
+    return result
+
+
+def resolve_preselection_amendment_commit() -> str:
+    """Keep commit A stable across later commits; recover it after a rebase."""
+    head = _run(["git", "rev-parse", "HEAD"]).stdout.strip()
+    receipt_rel = str(AMENDMENT_RECEIPT_PATH.relative_to(ROOT))
+    if AMENDMENT_RECEIPT_PATH.is_file():
+        stored = str(read_json(AMENDMENT_RECEIPT_PATH).get("amendment_commit", ""))
+        if stored and (
+            _run(
+                ["git", "merge-base", "--is-ancestor", stored, head],
+                check=False,
+            ).returncode
+            == 0
+        ):
+            return stored
+    receipt_is_committed = (
+        _run(["git", "cat-file", "-e", f"HEAD:{receipt_rel}"], check=False).returncode
+        == 0
+    )
+    if not receipt_is_committed:
+        return head
+    receipt_commit = _run(
+        [
+            "git",
+            "log",
+            "-1",
+            "--diff-filter=A",
+            "--format=%H",
+            "--",
+            receipt_rel,
+        ]
+    ).stdout.strip()
+    if not receipt_commit:
+        raise RuntimeError("cannot recover the amendment boundary after rebase")
+    return _run(["git", "rev-parse", f"{receipt_commit}^"]).stdout.strip()
+
+
+def write_preselection_amendment_receipt(
+    config: dict[str, Any], evidence_seal: dict[str, Any]
+) -> dict[str, Any]:
+    """Materialize the commit-B receipt while selection remains impossible."""
+    if config["preselection_amendment"]["classification"] != (
+        "post_score_partial_rollout_pre_official_selection_deviation"
+    ):
+        raise RuntimeError("unexpected amendment classification")
+    amendment_commit = resolve_preselection_amendment_commit()
+    frozen_files = committed_amendment_file_hashes(amendment_commit)
+    operation_path = RUNS_DIR / "evidence_operation_contracts.json"
+    legacy_path = RUNS_DIR / "preselection_legacy_indexes.json"
+    evidence_seal_path = RUNS_DIR / "preselection_evidence_seal.json"
+    receipt = {
+        "schema_version": 1,
+        "passed": True,
+        "classification": (
+            "post_score_partial_rollout_pre_official_selection_deviation"
+        ),
+        "amendment_commit": amendment_commit,
+        "frozen_files": frozen_files,
+        "evidence_indexes": evidence_seal["indexes"],
+        "evidence_operation_contracts_sha256": sha256_file(operation_path),
+        "legacy_index_receipt_sha256": sha256_file(legacy_path),
+        "evidence_seal_sha256": sha256_file(evidence_seal_path),
+        "selection_artifacts_absent_at_seal": bool(
+            evidence_seal["selection_artifacts_absent"]
+        ),
+        "adapter_artifacts_absent_at_seal": bool(
+            evidence_seal["adapter_artifacts_absent"]
+        ),
+        "deviation_disclosure": {
+            "candidate_scores_observed_before_commit": True,
+            "original_helper_retained_tasks": 116,
+            "official_selection_observed": False,
+            "partial_rollout_labels_observed_before_commit": True,
+            "partial_rollout_labels_used_for_cost_planning": True,
+            "rollout_labels_informed_repair": False,
+            "adapter_or_evaluation_outcome_observed": False,
+        },
+    }
+    if (
+        not AMENDMENT_RECEIPT_PATH.is_file()
+        or read_json(AMENDMENT_RECEIPT_PATH) != receipt
+    ):
+        write_json(AMENDMENT_RECEIPT_PATH, receipt)
+    return receipt
+
+
+def validate_preselection_amendment_receipt(
+    config: dict[str, Any],
+) -> tuple[
+    dict[str, dict[str, Any]], dict[str, str], dict[str, dict[str, Any]]
+]:
+    """Fail closed unless committed amendment code and evidence remain exact."""
+    if not AMENDMENT_RECEIPT_PATH.is_file():
+        raise RuntimeError(
+            "missing committed pre-selection amendment receipt; run evidence-seal, "
+            "commit its receipt, and do not select yet"
+        )
+    receipt = read_json(AMENDMENT_RECEIPT_PATH)
+    receipt_rel = str(AMENDMENT_RECEIPT_PATH.relative_to(ROOT))
+    try:
+        committed_receipt_sha256 = git_file_sha256("HEAD", receipt_rel)
+    except subprocess.CalledProcessError as error:
+        raise RuntimeError("pre-selection amendment receipt is not committed") from error
+    if committed_receipt_sha256 != sha256_file(AMENDMENT_RECEIPT_PATH):
+        raise RuntimeError("pre-selection amendment receipt differs from committed HEAD")
+
+    amendment_commit = str(receipt.get("amendment_commit", ""))
+    head = _run(["git", "rev-parse", "HEAD"]).stdout.strip()
+    if not amendment_commit or (
+        _run(
+            ["git", "merge-base", "--is-ancestor", amendment_commit, head],
+            check=False,
+        ).returncode
+        != 0
+    ):
+        raise RuntimeError("pre-selection amendment commit is not an ancestor of HEAD")
+    frozen = receipt.get("frozen_files", {})
+    if set(frozen) != set(AMENDMENT_FROZEN_FILES):
+        raise RuntimeError("pre-selection amendment frozen-file set mismatch")
+    for relative in AMENDMENT_FROZEN_FILES:
+        expected = str(frozen[relative])
+        path = ROOT / relative
+        if (
+            not path.is_file()
+            or sha256_file(path) != expected
+            or git_file_sha256(amendment_commit, relative) != expected
+            or git_file_sha256("HEAD", relative) != expected
+        ):
+            raise RuntimeError(f"pre-selection amendment file drift: {relative}")
+
+    committed_auxiliary = {
+        RUNS_DIR / "evidence_operation_contracts.json": receipt.get(
+            "evidence_operation_contracts_sha256"
+        ),
+        RUNS_DIR / "preselection_legacy_indexes.json": receipt.get(
+            "legacy_index_receipt_sha256"
+        ),
+        RUNS_DIR / "preselection_evidence_seal.json": receipt.get(
+            "evidence_seal_sha256"
+        ),
+    }
+    for path, expected_sha256 in committed_auxiliary.items():
+        relative = str(path.relative_to(ROOT))
+        if (
+            not path.is_file()
+            or sha256_file(path) != expected_sha256
+            or git_file_sha256("HEAD", relative) != expected_sha256
+        ):
+            raise RuntimeError(f"pre-selection committed auxiliary drift: {relative}")
+    operation_receipt = read_json(RUNS_DIR / "evidence_operation_contracts.json")
+    legacy_receipt = read_json(RUNS_DIR / "preselection_legacy_indexes.json")
+    evidence_seal = read_json(RUNS_DIR / "preselection_evidence_seal.json")
+    indices, contracts, summaries = selection_evidence_bundle(
+        config, allow_missing_contracts=False
+    )
+    if (
+        receipt.get("classification")
+        != "post_score_partial_rollout_pre_official_selection_deviation"
+        or receipt.get("passed") is not True
+        or evidence_seal.get("passed") is not True
+        or evidence_seal.get("selection_artifacts_absent") is not True
+        or evidence_seal.get("adapter_artifacts_absent") is not True
+        or receipt.get("selection_artifacts_absent_at_seal")
+        != evidence_seal.get("selection_artifacts_absent")
+        or receipt.get("adapter_artifacts_absent_at_seal")
+        != evidence_seal.get("adapter_artifacts_absent")
+        or receipt.get("evidence_indexes") != summaries
+        or evidence_seal.get("indexes") != summaries
+        or operation_receipt.get("contracts") != contracts
+        or operation_receipt.get("indexes") != summaries
+        or operation_receipt.get("score_backend")
+        != indices["independent_scores"].get("backend")
+        or evidence_seal.get("evidence_operation_contracts_sha256")
+        != receipt.get("evidence_operation_contracts_sha256")
+        or evidence_seal.get("legacy_index_receipt_sha256")
+        != receipt.get("legacy_index_receipt_sha256")
+        or legacy_receipt.get("classification")
+        != "retrospective_pre_operation_contract_attestation"
+        or set(legacy_receipt.get("indexes", {}))
+        != {
+            "train_independent",
+            "train_independent_scores",
+            "train_rollouts_r1",
+        }
+        or evidence_seal.get("legacy_index_sha256_before_operation_seal")
+        != {
+            stage: str(entry["sha256"])
+            for stage, entry in legacy_receipt.get("indexes", {}).items()
+        }
+        or receipt.get("deviation_disclosure")
+        != {
+            "candidate_scores_observed_before_commit": True,
+            "original_helper_retained_tasks": 116,
+            "official_selection_observed": False,
+            "partial_rollout_labels_observed_before_commit": True,
+            "partial_rollout_labels_used_for_cost_planning": True,
+            "rollout_labels_informed_repair": False,
+            "adapter_or_evaluation_outcome_observed": False,
+        }
+    ):
+        raise RuntimeError("pre-selection amendment seal semantics mismatch")
+    return indices, contracts, summaries
+
+
 def load_config() -> dict[str, Any]:
     value = yaml.safe_load(CONFIG_PATH.read_text(encoding="utf-8"))
     if not isinstance(value, dict):
         raise ValueError("default config must be a mapping")
     if value["model"] != {"id": MODEL_ID, "revision": MODEL_REVISION}:
         raise ValueError("one-model invariant mismatch")
+    if value.get("preselection_amendment") != {
+        "receipt": "runs/preselection_amendment_receipt.json",
+        "classification": (
+            "post_score_partial_rollout_pre_official_selection_deviation"
+        ),
+        "required_before": ["select", "train", "merge", "evaluate"],
+    }:
+        raise ValueError("pre-selection amendment contract mismatch")
     return value
 
 
@@ -310,13 +1013,38 @@ def generate_pool(
     shard_dir = root / "traces"
     index_path = root / "index.json"
     index = _stage_index(index_path, stage=stage, split=split)
+    operation_contract = raw_pool_operation_contract(
+        config, split=split, n=n, stage=stage
+    )
+    observed_contract = index.get("operation_contract_sha256")
+    if observed_contract not in (None, operation_contract):
+        raise RuntimeError("refusing to mix raw-pool operation contracts")
+    if observed_contract is None and index["shards"]:
+        index["operation_contract_sealed_post_run"] = True
+    index["operation_contract_sha256"] = operation_contract
+    write_json(index_path, index)
     started = time.perf_counter()
-    with AnswerPotentialModel(engine_config(config)) as model:
+    pending_task_ids = [
+        str(item["id"])
+        for item in items
+        if not (
+            (previous := index["shards"].get(str(item["id"])))
+            and valid_receipt(previous["artifact"])
+        )
+    ]
+    model_context = (
+        AnswerPotentialModel(engine_config(config))
+        if pending_task_ids
+        else nullcontext(None)
+    )
+    with model_context as model:
         for item_number, item in enumerate(items, 1):
             task_id = str(item["id"])
             previous = index["shards"].get(task_id)
             if previous and valid_receipt(previous["artifact"]):
                 continue
+            if model is None:
+                raise RuntimeError("internal raw-pool pending-task mismatch")
             print(f"[{stage}] {item_number}/{len(items)} {task_id}", flush=True)
             rows, generation_meta = model.generate_thoughts(
                 [item],
@@ -381,6 +1109,19 @@ def ensure_minimum_natural_train_pool(config: dict[str, Any]) -> dict[str, Any]:
     root = external_root(config) / "pools" / "train_independent"
     index_path = root / "index.json"
     index = read_json(index_path)
+    expected_contract = raw_pool_operation_contract(
+        config,
+        split="train",
+        n=int(config["sampling"]["train_independent_n"]),
+        stage="train_independent",
+    )
+    observed_contract = index.get("operation_contract_sha256")
+    if observed_contract not in (None, expected_contract):
+        raise RuntimeError("top-up input raw-pool operation contract mismatch")
+    if observed_contract is None:
+        index["operation_contract_sha256"] = expected_contract
+        index["operation_contract_sealed_post_run"] = True
+        write_json(index_path, index)
     items = {str(item["id"]): item for item in load_core_train(config)}
     minimum = int(config["selector"]["minimum_natural_per_task"])
 
@@ -515,21 +1256,43 @@ def score_pool(
     if output_index.get("backend", backend) != backend:
         raise RuntimeError("refusing to mix scoring backends in one stage index")
     output_index["backend"] = backend
+    operation_contract = score_operation_contract(config)
+    if output_index.get("operation_contract_sha256", operation_contract) != operation_contract:
+        raise RuntimeError("refusing to reuse a score index from another operation contract")
+    output_index["operation_contract_sha256"] = operation_contract
     output_index["vllm_candidate_instrument"] = {
         "receipt": str(RUNS_DIR / "scorer_parity_joint_32.json"),
         "passed": False,
         "retired_before_bulk_scoring": True,
     }
+    write_json(output_index_path, output_index)
     started = time.perf_counter()
-    scorer = HFAnswerPotentialScorer()
+    pending_task_ids = [
+        task_id
+        for task_id in sorted(source_index["shards"])
+        if not (
+            (previous := output_index["shards"].get(task_id))
+            and valid_receipt(previous["artifact"])
+            and previous.get("source_artifact_sha256")
+            == source_index["shards"][task_id]["artifact"]["sha256"]
+        )
+    ]
+    scorer = HFAnswerPotentialScorer() if pending_task_ids else None
     try:
         for task_number, task_id in enumerate(sorted(source_index["shards"]), 1):
             previous = output_index["shards"].get(task_id)
-            if previous and valid_receipt(previous["artifact"]):
+            source_sha256 = source_index["shards"][task_id]["artifact"]["sha256"]
+            if (
+                previous
+                and valid_receipt(previous["artifact"])
+                and previous.get("source_artifact_sha256") == source_sha256
+            ):
                 continue
             rows = read_jsonl_gz(
                 Path(source_index["shards"][task_id]["artifact"]["path"])
             )
+            if scorer is None:
+                raise RuntimeError("internal scorer pending-task mismatch")
             prompt_ids = scorer.prompt_ids(items[task_id])
             answer_ids = scorer.tokenizer.encode(
                 str(items[task_id]["canonical_answer"]), add_special_tokens=False
@@ -559,9 +1322,7 @@ def score_pool(
             )
             output_index["shards"][task_id] = {
                 "artifact": artifact,
-                "source_artifact_sha256": source_index["shards"][task_id][
-                    "artifact"
-                ]["sha256"],
+                "source_artifact_sha256": source_sha256,
                 "eligible": len(eligible),
                 "excluded": len(rows) - len(eligible),
                 "scoring_elapsed_seconds": time.perf_counter() - task_started,
@@ -571,7 +1332,8 @@ def score_pool(
             )
             write_json(output_index_path, output_index)
     finally:
-        scorer.close()
+        if scorer is not None:
+            scorer.close()
     summary = {
         "schema_version": 1,
         "stage": output_stage,
@@ -1093,21 +1855,54 @@ def rollout_pool(
     index_path = output_root / "index.json"
     index = _stage_index(index_path, stage=output_stage, split=split)
     sampling = config["sampling"]
+    operation_contract = rollout_operation_contract(
+        config, source_stages=source_stages, r=r
+    )
+    if index.get("operation_contract_sha256", operation_contract) != operation_contract:
+        raise RuntimeError("refusing to reuse rollouts from another operation contract")
+    index["operation_contract_sha256"] = operation_contract
+    write_json(index_path, index)
     started = time.perf_counter()
-    with AnswerPotentialModel(engine_config(config)) as model:
+    pending_task_ids = [
+        task_id
+        for task_id in task_ids
+        if not (
+            (previous := index["shards"].get(task_id))
+            and valid_receipt(previous["artifact"])
+            and previous.get("source_sha256")
+            == [
+                source_index["shards"][task_id]["artifact"]["sha256"]
+                for source_index in source_indices
+            ]
+        )
+    ]
+    model_context = (
+        AnswerPotentialModel(engine_config(config))
+        if pending_task_ids
+        else nullcontext(None)
+    )
+    with model_context as model:
         for task_number, task_id in enumerate(task_ids, 1):
             previous = index["shards"].get(task_id)
-            if previous and valid_receipt(previous["artifact"]):
+            source_sha256 = [
+                source_index["shards"][task_id]["artifact"]["sha256"]
+                for source_index in source_indices
+            ]
+            if (
+                previous
+                and valid_receipt(previous["artifact"])
+                and previous.get("source_sha256") == source_sha256
+            ):
                 continue
             traces: list[dict[str, Any]] = []
-            source_sha256 = []
             for source_index in source_indices:
                 entry = source_index["shards"][task_id]
-                source_sha256.append(entry["artifact"]["sha256"])
                 traces.extend(read_jsonl_gz(Path(entry["artifact"]["path"])))
             traces = [
                 row for row in traces if row["natural_close"] and not row["loop_flag"]
             ]
+            if model is None:
+                raise RuntimeError("internal rollout pending-task mismatch")
             rows, metadata = model.generate_answer_rollouts(
                 [items[task_id]],
                 traces,
@@ -1149,19 +1944,13 @@ def rollout_pool(
 
 def build_sft_datasets(config: dict[str, Any]) -> dict[str, Any]:
     """Join independent evidence and materialize all six balanced-core arms."""
+    indices, expected_contracts, evidence_summaries = (
+        validate_preselection_amendment_receipt(config)
+    )
     from transformers import AutoTokenizer
 
     design_boundary_receipt(config)
     root = external_root(config)
-    source_names = {
-        "independent": "train_independent",
-        "independent_scores": "train_independent_scores",
-        "rollouts": "train_rollouts_r1",
-    }
-    indices = {
-        key: read_json(root / "pools" / value / "index.json")
-        for key, value in source_names.items()
-    }
     items = {str(item["id"]): item for item in load_core_train(config)}
     selector_config = config["selector"]
     seed = int(config["sampling"]["control_seed"])
@@ -1170,7 +1959,26 @@ def build_sft_datasets(config: dict[str, Any]) -> dict[str, Any]:
     available_tasks = sorted(
         set.intersection(*(set(index["shards"]) for index in indices.values()))
     )
+    expected_tasks = int(config["splits"]["full_train_tasks"])
+    if len(available_tasks) != expected_tasks or set(available_tasks) != set(items):
+        raise RuntimeError(
+            "selection inputs do not cover the frozen balanced task set: "
+            f"available={len(available_tasks)} expected={expected_tasks}"
+        )
     for task_number, task_id in enumerate(available_tasks, 1):
+        raw_entry = indices["independent"]["shards"][task_id]
+        score_entry = indices["independent_scores"]["shards"][task_id]
+        rollout_entry = indices["rollouts"]["shards"][task_id]
+        if not all(
+            valid_receipt(entry["artifact"])
+            for entry in (raw_entry, score_entry, rollout_entry)
+        ):
+            raise RuntimeError(f"invalid selection input artifact: {task_id}")
+        raw_sha256 = raw_entry["artifact"]["sha256"]
+        if score_entry.get("source_artifact_sha256") != raw_sha256:
+            raise RuntimeError(f"score/raw provenance mismatch: {task_id}")
+        if rollout_entry.get("source_sha256") != [raw_sha256]:
+            raise RuntimeError(f"rollout/raw provenance mismatch: {task_id}")
         traces: list[dict[str, Any]] = []
         scores: list[dict[str, Any]] = []
         traces.extend(
@@ -1190,6 +1998,30 @@ def build_sft_datasets(config: dict[str, Any]) -> dict[str, Any]:
         rollouts = read_jsonl_gz(
             Path(indices["rollouts"]["shards"][task_id]["artifact"]["path"])
         )
+        if any(str(row.get("task_id")) != task_id for row in traces):
+            raise RuntimeError(f"raw shard contains another task ID: {task_id}")
+        if any(str(row.get("task_id")) != task_id for row in scores):
+            raise RuntimeError(f"score shard contains another task ID: {task_id}")
+        if any(str(row.get("task_id")) != task_id for row in rollouts):
+            raise RuntimeError(f"rollout shard contains another task ID: {task_id}")
+        trace_ids = [str(row["trace_id"]) for row in traces]
+        score_ids = [str(row["trace_id"]) for row in scores]
+        rollout_ids = [str(row["trace_id"]) for row in rollouts]
+        if len(trace_ids) != len(set(trace_ids)):
+            raise RuntimeError(f"duplicate raw trace IDs: {task_id}")
+        if len(score_ids) != len(set(score_ids)) or len(rollout_ids) != len(
+            set(rollout_ids)
+        ):
+            raise RuntimeError(f"duplicate evidence trace IDs: {task_id}")
+        if set(score_ids) != set(rollout_ids):
+            raise RuntimeError(f"score/rollout trace join mismatch: {task_id}")
+        if not set(score_ids).issubset(set(trace_ids)):
+            raise RuntimeError(f"evidence contains unknown trace IDs: {task_id}")
+        if (
+            len(score_ids) != int(score_entry["eligible"])
+            or len(rollout_ids) != int(rollout_entry["eligible"])
+        ):
+            raise RuntimeError(f"evidence eligibility count mismatch: {task_id}")
         selected = select_task(
             traces,
             scores,
@@ -1207,6 +2039,10 @@ def build_sft_datasets(config: dict[str, Any]) -> dict[str, Any]:
                     "trace_ids": [row["trace_id"] for row in rows],
                     "trace_tokens": [row["n_tokens"] for row in rows],
                     "source_kinds": [row.get("source_kind") for row in rows],
+                    "selection_modes": [row.get("selection_mode") for row in rows],
+                    "selection_gaps_from_best": [
+                        row.get("selection_gap_from_best") for row in rows
+                    ],
                 }
                 for arm, rows in selected.items()
                 if arm != "eligible"
@@ -1230,8 +2066,29 @@ def build_sft_datasets(config: dict[str, Any]) -> dict[str, Any]:
         )
     ]
     deficient = sorted(set(items) - set(core_tasks))
-    # The preregistered terminal top-up rule excludes any still-deficient task
-    # symmetrically; it never weakens the two-natural-trace requirement.
+    if deficient or len(core_tasks) != expected_tasks:
+        raise RuntimeError(
+            "balanced selection lost required tasks: "
+            f"core={len(core_tasks)} deficient={deficient[:10]}"
+        )
+    cell_task_counts: dict[str, int] = {}
+    for task_id in core_tasks:
+        item = items[task_id]
+        cell = f"{item['family']}-L{int(item['level'])}"
+        cell_task_counts[cell] = cell_task_counts.get(cell, 0) + 1
+    expected_per_cell = int(config["splits"]["train_per_family_level"])
+    expected_cells = {
+        f"{family}-L{int(level)}"
+        for family in config["splits"]["core_families"]
+        for level in config["splits"]["train_levels"]
+    }
+    if set(cell_task_counts) != expected_cells or any(
+        count != expected_per_cell for count in cell_task_counts.values()
+    ):
+        raise RuntimeError(
+            "selection broke frozen family/level balance: "
+            f"counts={cell_task_counts} expected_per_cell={expected_per_cell}"
+        )
 
     chosen: dict[str, list[dict[str, Any] | None]] = {
         "answer_potential": [],
@@ -1287,6 +2144,11 @@ def build_sft_datasets(config: dict[str, Any]) -> dict[str, Any]:
             )
         encoded[arm] = rows
     target_rows = len(encoded["answer_potential"])
+    expected_rows = expected_tasks * required
+    if target_rows != expected_rows:
+        raise RuntimeError(
+            f"balanced row target mismatch: {target_rows} != {expected_rows}"
+        )
     success_unique_rows = len(encoded["success_rft"])
     success_unique_tasks = len({row["task_id"] for row in encoded["success_rft"]})
     encoded["success_rft"] = oversample_to(
@@ -1303,13 +2165,63 @@ def build_sft_datasets(config: dict[str, Any]) -> dict[str, Any]:
     }
     arm_summary = {}
     for arm, rows in encoded.items():
+        selection_modes: dict[str, int] = {}
+        for row in rows:
+            mode = str(row.get("selection_mode") or "not_applicable")
+            selection_modes[mode] = selection_modes.get(mode, 0) + 1
+        gap_values_by_mode: dict[str, list[float]] = {}
+        for row in rows:
+            if row.get("selection_gap_from_best") is None:
+                continue
+            gap_values_by_mode.setdefault(str(row["selection_mode"]), []).append(
+                float(row["selection_gap_from_best"])
+            )
+        selection_gap_summary = {}
+        for mode, values in sorted(gap_values_by_mode.items()):
+            ordered = sorted(values)
+            selection_gap_summary[mode] = {
+                "rows": len(ordered),
+                "mean": sum(ordered) / len(ordered),
+                "median": ordered[len(ordered) // 2],
+                "p90": ordered[min(len(ordered) - 1, int(0.90 * len(ordered)))],
+                "max": ordered[-1],
+            }
+        shuffle_gaps = [
+            abs(int(row["trace_tokens"]) - int(row["shuffle_target_trace_tokens"]))
+            for row in rows
+            if row.get("shuffle_target_trace_tokens") is not None
+        ]
         arm_summary[arm] = {
             "rows": len(rows),
             "unique_record_ids": len({row["record_id"].split("::repeat", 1)[0] for row in rows}),
             "unique_tasks": len({row["task_id"] for row in rows}),
             "trace_tokens": sum(int(row["trace_tokens"]) for row in rows),
             "forward_tokens": sum(int(row["total_tokens"]) for row in rows),
+            "supervised_weighted_tokens": sum(
+                len(row["prompt_token_ids"])
+                * float(config["sft"]["weight_prompt"])
+                + len(row["trace_token_ids"])
+                * float(config["sft"]["weight_think"])
+                + (
+                    len(row["answer_boundary_token_ids"])
+                    + len(row["answer_token_ids"])
+                    + 1
+                )
+                * float(config["sft"]["weight_close_answer"])
+                for row in rows
+            ),
             "branch_rows": sum(row.get("source_kind") == "pivot_branch" for row in rows),
+            "selection_modes": selection_modes,
+            "selection_gap_from_best_by_mode": selection_gap_summary,
+            "shuffle_length_mismatch": (
+                {
+                    "total_tokens": sum(shuffle_gaps),
+                    "mean_tokens": sum(shuffle_gaps) / len(shuffle_gaps),
+                    "max_tokens": max(shuffle_gaps),
+                }
+                if shuffle_gaps
+                else None
+            ),
             "artifact": receipts[arm],
         }
     raw_trace_ids = {
@@ -1327,7 +2239,20 @@ def build_sft_datasets(config: dict[str, Any]) -> dict[str, Any]:
     }
     summary = {
         "schema_version": 1,
+        "preselection_amendment": {
+            "receipt": str(AMENDMENT_RECEIPT_PATH),
+            "receipt_sha256": sha256_file(AMENDMENT_RECEIPT_PATH),
+            "amendment_commit": read_json(AMENDMENT_RECEIPT_PATH)[
+                "amendment_commit"
+            ],
+            "evidence_indexes": evidence_summaries,
+            "operation_contracts": expected_contracts,
+            "selector_sha256": sha256_file(EXP / "src" / "selector.py"),
+            "run_sha256": sha256_file(Path(__file__)),
+            "config_sha256": sha256_file(CONFIG_PATH),
+        },
         "core_tasks": len(core_tasks),
+        "cell_task_counts": cell_task_counts,
         "deficient_tasks": deficient,
         "target_rows_per_arm": target_rows,
         "success_unique_rows_before_oversampling": success_unique_rows,
@@ -1437,6 +2362,7 @@ def evaluate_matrix(
         raise ValueError("mode must be greedy or sample8")
     if phase not in {"stage_a", "stage_b"}:
         raise ValueError("phase must be stage_a or stage_b")
+    validate_preselection_amendment_receipt(config)
     design_boundary_receipt(config)
     artifact_root = external_root(config)
     arms = arms_override or ["base", *config["sft"]["arms"]]
@@ -1456,22 +2382,102 @@ def evaluate_matrix(
         "arms": {},
     }
     evaluation = config["evaluation"]
+    if any(arm != "base" for arm in arms):
+        probe = behavioral_difference_probe(config)
+        if not probe.get("passed"):
+            raise RuntimeError("fresh behavioral deployment probe did not pass")
     for arm in arms:
+        model_override = (
+            None
+            if arm == "base"
+            else artifact_root / "merged" / "seed42" / arm
+        )
+        model_fingerprint = (
+            base_model_fingerprint()
+            if arm == "base"
+            else validated_merged_fingerprint(config, arm)
+        )
+        prepared: dict[str, dict[str, Any]] = {}
+        for split in splits:
+            split_items = load_evaluation_scope(config, split)
+            records = [
+                {
+                    "id": item["id"],
+                    "messages": [{"role": "user", "content": item["prompt"]}],
+                    "meta": {
+                        "family": item["family"],
+                        "level": item["level"],
+                        "split": split,
+                    },
+                }
+                for item in split_items
+            ]
+            sampling = SamplingConfig(
+                thinking="natural",
+                n=1 if mode == "greedy" else int(evaluation["sampled_k"]),
+                max_tokens=int(evaluation["natural_max_tokens"]),
+                greedy=mode == "greedy",
+                temperature=(
+                    None
+                    if mode == "greedy"
+                    else float(evaluation["sampling_temperature"])
+                ),
+                top_p=(
+                    None if mode == "greedy" else float(evaluation["sampling_top_p"])
+                ),
+                top_k=(
+                    None if mode == "greedy" else int(evaluation["sampling_top_k"])
+                ),
+                run_seed=int(
+                    evaluation["greedy_seed" if mode == "greedy" else "sample_seed"]
+                ),
+            )
+            contract = canonical_sha256(
+                {
+                    "phase": phase,
+                    "mode": mode,
+                    "arm": arm,
+                    "split": split,
+                    "model_fingerprint": model_fingerprint,
+                    "scope": [
+                        {
+                            "id": item["id"],
+                            "prompt": item["prompt"],
+                            "canonical_answer": item["canonical_answer"],
+                            "family": item["family"],
+                            "level": item["level"],
+                        }
+                        for item in split_items
+                    ],
+                    "sampling": sampling_contract(sampling),
+                    "engine": config["engine"],
+                    "runner_sha256": sha256_file(EXP / "src" / "vllm_runner.py"),
+                    "environment_lock_sha256": sha256_file(
+                        ROOT / "requirements-vllm.lock.txt"
+                    ),
+                    "analysis_script_sha256": sha256_file(Path(__file__)),
+                }
+            )
+            prepared[split] = {
+                "items": split_items,
+                "records": records,
+                "sampling": sampling,
+                "contract": contract,
+            }
         pending = [
             split
             for split in splits
             if not (
                 split in index["arms"].get(arm, {})
                 and valid_receipt(index["arms"][arm][split]["artifact"])
+                and index["arms"][arm][split].get("contract_sha256")
+                == prepared[split]["contract"]
+                and index["arms"][arm][split].get("model_fingerprint")
+                == model_fingerprint
             )
         ]
         if not pending:
             continue
-        model_override = (
-            None
-            if arm == "base"
-            else artifact_root / "merged" / "seed42" / arm
-        )
         if model_override is not None and not (model_override / "config.json").is_file():
             raise RuntimeError(f"missing merged checkpoint for {arm}: {model_override}")
         print(f"[eval:{mode}] loading {arm}", flush=True)
@@ -1479,36 +2485,10 @@ def evaluate_matrix(
             engine_config(config, model_override=model_override)
         ) as runner:
             for split in pending:
-                split_items = load_evaluation_scope(config, split)
+                split_items = prepared[split]["items"]
                 item_by_id = {str(item["id"]): item for item in split_items}
-                records = [
-                    {
-                        "id": item["id"],
-                        "messages": [{"role": "user", "content": item["prompt"]}],
-                        "meta": {
-                            "family": item["family"],
-                            "level": item["level"],
-                            "split": split,
-                        },
-                    }
-                    for item in split_items
-                ]
-                sampling = SamplingConfig(
-                    thinking="natural",
-                    n=1 if mode == "greedy" else int(evaluation["sampled_k"]),
-                    max_tokens=int(evaluation["natural_max_tokens"]),
-                    greedy=mode == "greedy",
-                    temperature=(
-                        None if mode == "greedy" else float(evaluation["sampling_temperature"])
-                    ),
-                    top_p=None if mode == "greedy" else float(evaluation["sampling_top_p"]),
-                    top_k=None if mode == "greedy" else int(evaluation["sampling_top_k"]),
-                    run_seed=int(
-                        evaluation[
-                            "greedy_seed" if mode == "greedy" else "sample_seed"
-                        ]
-                    ),
-                )
+                records = prepared[split]["records"]
+                sampling = prepared[split]["sampling"]
                 raw_rows, metadata = runner.generate(records, sampling)
                 scored, summary = _score_evaluation_rows(item_by_id, raw_rows)
                 artifact = write_jsonl_gz(
@@ -1519,6 +2499,8 @@ def evaluate_matrix(
                     "summary": summary,
                     "generation_metadata": metadata,
                     "model_override": None if model_override is None else str(model_override),
+                    "model_fingerprint": model_fingerprint,
+                    "contract_sha256": prepared[split]["contract"],
                 }
                 write_json(index_path, index)
                 print(
@@ -1537,8 +2519,170 @@ def evaluate_matrix(
     return compact
 
 
+def validate_selected_dataset_manifest(
+    config: dict[str, Any], *, arm: str, dataset: Path
+) -> dict[str, Any]:
+    """Bind training to the committed, amendment-sealed selection output."""
+    manifest_path = EXP / "data" / "sft_manifest.json"
+    summary_path = RUNS_DIR / "selection_summary.json"
+    if not manifest_path.is_file() or not summary_path.is_file():
+        raise RuntimeError("selected-dataset manifest is missing")
+    manifest_sha256 = sha256_file(manifest_path)
+    if manifest_sha256 != sha256_file(summary_path):
+        raise RuntimeError("tracked selection manifest and summary differ")
+    for path in (manifest_path, summary_path):
+        relative = str(path.relative_to(ROOT))
+        if git_file_sha256("HEAD", relative) != sha256_file(path):
+            raise RuntimeError(f"selected-dataset manifest is not committed: {relative}")
+    manifest = read_json(manifest_path)
+    if arm not in manifest.get("arms", {}):
+        raise RuntimeError(f"selected-dataset manifest lacks arm: {arm}")
+    manifest_arm = manifest["arms"][arm]
+    artifact = manifest_arm.get("artifact", {})
+    if (
+        artifact.get("path") != str(dataset)
+        or not valid_receipt(artifact)
+        or int(artifact.get("rows", -1)) != int(manifest_arm.get("rows", -2))
+    ):
+        raise RuntimeError(f"selected dataset artifact mismatch for {arm}")
+
+    amendment = read_json(AMENDMENT_RECEIPT_PATH)
+    selected_from = manifest.get("preselection_amendment", {})
+    if (
+        selected_from.get("receipt") != str(AMENDMENT_RECEIPT_PATH)
+        or selected_from.get("receipt_sha256")
+        != sha256_file(AMENDMENT_RECEIPT_PATH)
+        or selected_from.get("amendment_commit")
+        != amendment.get("amendment_commit")
+        or selected_from.get("evidence_indexes")
+        != amendment.get("evidence_indexes")
+        or selected_from.get("operation_contracts")
+        != selection_evidence_contracts(config)
+        or selected_from.get("selector_sha256")
+        != sha256_file(EXP / "src" / "selector.py")
+        or selected_from.get("run_sha256") != sha256_file(Path(__file__))
+        or selected_from.get("config_sha256") != sha256_file(CONFIG_PATH)
+    ):
+        raise RuntimeError("selected-dataset amendment provenance mismatch")
+    return manifest_arm
+
+
+def validate_training_receipt(
+    config: dict[str, Any],
+    *,
+    arm: str,
+    seed: int,
+    dataset: Path,
+    output: Path,
+    receipt: dict[str, Any],
+) -> None:
+    manifest_arm = validate_selected_dataset_manifest(
+        config, arm=arm, dataset=dataset
+    )
+    expected_rows = int(manifest_arm["rows"])
+    expected_forward_tokens = int(manifest_arm["forward_tokens"])
+    expected_supervised_tokens = float(manifest_arm["supervised_weighted_tokens"])
+    expected_epochs = float(config["sft"]["epochs"])
+    expected_steps = math.ceil(
+        expected_rows
+        / (
+            int(config["sft"]["batch_size"])
+            * int(config["sft"]["gradient_accumulation"])
+        )
+    ) * int(expected_epochs)
+    seed_contract = receipt.get("seed_contract", {})
+    expected_weights = {
+        "prompt": float(config["sft"]["weight_prompt"]),
+        "think": float(config["sft"]["weight_think"]),
+        "close_answer": float(config["sft"]["weight_close_answer"]),
+    }
+    expected_training_contract = {
+        "script_sha256": sha256_file(EXP / "scripts" / "train_think.py"),
+        "rank": int(config["sft"]["rank"]),
+        "alpha": int(config["sft"]["alpha"]),
+        "dropout": float(config["sft"]["dropout"]),
+        "learning_rate": float(config["sft"]["learning_rate"]),
+        "batch_size": int(config["sft"]["batch_size"]),
+        "gradient_accumulation": int(config["sft"]["gradient_accumulation"]),
+        "max_length": int(config["sft"]["max_length"]),
+        "optimizer": "paged_adamw_8bit",
+        "scheduler": "cosine",
+        "warmup_ratio": 0.03,
+    }
+    checks = {
+        "arm": receipt.get("arm") == arm,
+        "seed": int(receipt.get("seed", -1)) == seed,
+        "non_smoke": receipt.get("smoke") is False,
+        "model": receipt.get("model") == MODEL_ID,
+        "revision": receipt.get("revision") == MODEL_REVISION,
+        "dataset_sha256": receipt.get("dataset_sha256") == sha256_file(dataset),
+        "rows": int(receipt.get("rows", -1)) == expected_rows,
+        "epochs": float(receipt.get("epochs", -1)) == expected_epochs,
+        "completed_epochs": float(receipt.get("completed_epochs", -1)) == expected_epochs,
+        "optimizer_steps": int(receipt.get("optimizer_steps", -1)) == expected_steps,
+        "skipped_rows": int(receipt.get("skipped_rows", -1)) == 0,
+        "loss_weights": receipt.get("loss_weights") == expected_weights,
+        "training_contract": receipt.get("training_contract")
+        == expected_training_contract,
+        "global_seed": seed_contract.get("global_seed_before_model") is True,
+        "adapter_seed": seed_contract.get("lora_seed_reset_before_adapter_init") is True,
+        "trainer_seed": int(seed_contract.get("trainer_seed", -1)) == seed,
+        "data_seed": int(seed_contract.get("data_seed", -1)) == seed,
+        "initial_hash": len(str(receipt.get("adapter_initial_state", {}).get("sha256", ""))) == 64,
+        "initial_tensors": int(receipt.get("adapter_initial_state", {}).get("tensors", 0)) > 0,
+        "adapter_manifest_tensors": int(receipt.get("adapter_tensor_manifest", {}).get("tensors", -1)) == 256,
+        "adapter_manifest_hash": len(
+            str(receipt.get("adapter_tensor_manifest", {}).get("sha256", ""))
+        )
+        == 64,
+        "training_lock": receipt.get("training_lock", {}).get("sha256")
+        == sha256_file(ROOT / "requirements-training.lock.txt"),
+        "selection_manifest": receipt.get("selection_manifest_sha256")
+        == sha256_file(EXP / "data" / "sft_manifest.json"),
+        "amendment_receipt": receipt.get(
+            "preselection_amendment_receipt_sha256"
+        )
+        == sha256_file(AMENDMENT_RECEIPT_PATH),
+        "dataset_forward_tokens": int(
+            receipt.get("dataset_forward_tokens_one_pass", -1)
+        )
+        == expected_forward_tokens,
+        "actual_examples_seen": int(receipt.get("actual_examples_seen", -1))
+        == expected_rows * int(expected_epochs),
+        "actual_forward_tokens_seen": int(
+            receipt.get("actual_forward_tokens_seen", -1)
+        )
+        == expected_forward_tokens * int(expected_epochs),
+        "dataset_supervised_tokens": math.isclose(
+            float(receipt.get("dataset_supervised_weighted_tokens_one_pass", -1)),
+            expected_supervised_tokens,
+            rel_tol=0,
+            abs_tol=1e-6,
+        ),
+        "actual_supervised_tokens_seen": math.isclose(
+            float(receipt.get("actual_supervised_weighted_tokens_seen", -1)),
+            expected_supervised_tokens * int(expected_epochs),
+            rel_tol=0,
+            abs_tol=1e-6,
+        ),
+    }
+    failed = [name for name, passed in checks.items() if not passed]
+    if failed:
+        raise RuntimeError(
+            f"stale or mismatched training receipt for {arm}: {', '.join(failed)}"
+        )
+    artifacts = receipt.get("artifacts", {})
+    if "adapter_model.safetensors" not in artifacts:
+        raise RuntimeError(f"training receipt lacks adapter weights for {arm}")
+    for name, artifact in artifacts.items():
+        path = output / name
+        if not path.is_file() or sha256_file(path) != artifact.get("sha256"):
+            raise RuntimeError(f"invalid cached training artifact for {arm}: {path}")
+
+
 def train_matrix(config: dict[str, Any]) -> dict[str, Any]:
     """Train every mandatory seed-42 arm, restarting at completed receipts."""
+    validate_preselection_amendment_receipt(config)
     design_boundary_receipt(config)
     python = ROOT / ".venv" / "bin" / "python"
     if not python.is_file():
@@ -1552,17 +2696,19 @@ def train_matrix(config: dict[str, Any]) -> dict[str, Any]:
         dataset = artifact_root / "sft" / f"{arm}.jsonl.gz"
         output = artifact_root / "adapters" / "seed42" / arm
         receipt_path = output / "training_receipt.json"
+        validate_selected_dataset_manifest(config, arm=arm, dataset=dataset)
         if receipt_path.is_file():
             receipt = read_json(receipt_path)
-            if (
-                receipt.get("arm") == arm
-                and int(receipt.get("seed", -1)) == int(config["sft"]["screen_seed"])
-                and receipt.get("dataset_sha256") == sha256_file(dataset)
-                and int(receipt.get("skipped_rows", -1)) == 0
-            ):
-                results[arm] = receipt
-                continue
-            raise RuntimeError(f"stale or mismatched training receipt: {receipt_path}")
+            validate_training_receipt(
+                config,
+                arm=arm,
+                seed=int(config["sft"]["screen_seed"]),
+                dataset=dataset,
+                output=output,
+                receipt=receipt,
+            )
+            results[arm] = receipt
+            continue
         print(f"[train-matrix] starting {arm}", flush=True)
         subprocess.run(
             [
@@ -1580,13 +2726,31 @@ def train_matrix(config: dict[str, Any]) -> dict[str, Any]:
             cwd=ROOT,
             check=True,
         )
-        results[arm] = read_json(receipt_path)
+        receipt = read_json(receipt_path)
+        validate_training_receipt(
+            config,
+            arm=arm,
+            seed=int(config["sft"]["screen_seed"]),
+            dataset=dataset,
+            output=output,
+            receipt=receipt,
+        )
+        results[arm] = receipt
+    initial_hashes = {
+        str(receipt["adapter_initial_state"]["sha256"])
+        for receipt in results.values()
+    }
+    if len(initial_hashes) != 1:
+        raise RuntimeError(
+            f"seed-42 arms did not share one LoRA initialization: {sorted(initial_hashes)}"
+        )
     write_json(RUNS_DIR / "training_matrix_summary.json", results)
     return results
 
 
 def merge_matrix(config: dict[str, Any]) -> dict[str, Any]:
     """Merge all adapters into deployable composite checkpoints."""
+    validate_preselection_amendment_receipt(config)
     design_boundary_receipt(config)
     python = ROOT / ".venv" / "bin" / "python"
     if not python.is_file():
@@ -1598,10 +2762,23 @@ def merge_matrix(config: dict[str, Any]) -> dict[str, Any]:
         output = artifact_root / "merged" / "seed42" / arm
         receipt_path = output / "merge_receipt.json"
         adapter_receipt = read_json(adapter / "training_receipt.json")
+        validate_training_receipt(
+            config,
+            arm=arm,
+            seed=int(config["sft"]["screen_seed"]),
+            dataset=artifact_root / "sft" / f"{arm}.jsonl.gz",
+            output=adapter,
+            receipt=adapter_receipt,
+        )
         adapter_hash = adapter_receipt["artifacts"]["adapter_model.safetensors"]["sha256"]
         if receipt_path.is_file():
             receipt = read_json(receipt_path)
-            if receipt.get("adapter_sha256") == adapter_hash:
+            current_fingerprint = checkpoint_fingerprint(output)
+            if (
+                receipt.get("adapter_sha256") == adapter_hash
+                and receipt.get("merged_checkpoint_fingerprint")
+                == current_fingerprint
+            ):
                 receipts[arm] = receipt
                 continue
             raise RuntimeError(f"stale merged checkpoint receipt: {receipt_path}")
@@ -1618,22 +2795,27 @@ def merge_matrix(config: dict[str, Any]) -> dict[str, Any]:
             cwd=ROOT,
             check=True,
         )
-        index_files = sorted(output.glob("*.index.json"))
-        weight_files = sorted(output.glob("*.safetensors"))
+        application_path = output / "merge_application_receipt.json"
+        application = read_json(application_path)
+        if (
+            application.get("adapter_sha256") != adapter_hash
+            or application.get("adapter_tensor_manifest")
+            != adapter_receipt.get("adapter_tensor_manifest")
+            or int(application.get("applied_lora_pairs", -1)) != 128
+        ):
+            raise RuntimeError(f"merge application contract failed for {arm}")
+        merged_fingerprint = checkpoint_fingerprint(output)
         receipt = {
             "schema_version": 1,
             "arm": arm,
+            "seed": int(config["sft"]["screen_seed"]),
             "adapter": str(adapter),
             "adapter_sha256": adapter_hash,
+            "adapter_tensor_manifest": adapter_receipt["adapter_tensor_manifest"],
             "output": str(output),
-            "config_sha256": sha256_file(output / "config.json"),
-            "weight_files": [
-                {"name": path.name, "bytes": path.stat().st_size}
-                for path in weight_files
-            ],
-            "weight_index_sha256": (
-                sha256_file(index_files[0]) if index_files else None
-            ),
+            "merge_application_receipt_sha256": sha256_file(application_path),
+            "applied_lora_pairs": 128,
+            "merged_checkpoint_fingerprint": merged_fingerprint,
         }
         write_json(receipt_path, receipt)
         receipts[arm] = receipt
@@ -1641,8 +2823,51 @@ def merge_matrix(config: dict[str, Any]) -> dict[str, Any]:
     return receipts
 
 
+def validated_merged_fingerprint(
+    config: dict[str, Any], arm: str, *, seed: int = 42
+) -> str:
+    artifact_root = external_root(config)
+    root = artifact_root / "merged" / f"seed{seed}" / arm
+    receipt_path = root / "merge_receipt.json"
+    if not receipt_path.is_file():
+        raise RuntimeError(f"missing merge receipt for {arm} seed {seed}")
+    receipt = read_json(receipt_path)
+    adapter = artifact_root / "adapters" / f"seed{seed}" / arm
+    training_receipt = read_json(adapter / "training_receipt.json")
+    validate_training_receipt(
+        config,
+        arm=arm,
+        seed=seed,
+        dataset=artifact_root / "sft" / f"{arm}.jsonl.gz",
+        output=adapter,
+        receipt=training_receipt,
+    )
+    adapter_sha256 = training_receipt["artifacts"]["adapter_model.safetensors"][
+        "sha256"
+    ]
+    application_path = root / "merge_application_receipt.json"
+    application = read_json(application_path)
+    current = checkpoint_fingerprint(root)
+    if (
+        receipt.get("arm") != arm
+        or int(receipt.get("seed", seed)) != seed
+        or receipt.get("adapter_sha256") != adapter_sha256
+        or receipt.get("adapter_tensor_manifest")
+        != training_receipt.get("adapter_tensor_manifest")
+        or int(receipt.get("applied_lora_pairs", -1)) != 128
+        or receipt.get("merge_application_receipt_sha256")
+        != sha256_file(application_path)
+        or application.get("adapter_sha256") != adapter_sha256
+        or int(application.get("applied_lora_pairs", -1)) != 128
+        or receipt.get("merged_checkpoint_fingerprint") != current
+    ):
+        raise RuntimeError(f"merged checkpoint fingerprint mismatch for {arm} seed {seed}")
+    return str(current["sha256"])
+
+
 def behavioral_difference_probe(config: dict[str, Any]) -> dict[str, Any]:
     """Reject no-op merged deployments before result-bearing evaluation."""
+    validate_preselection_amendment_receipt(config)
     design_boundary_receipt(config)
     artifact_root = external_root(config)
     items = load_split("termination_pilot")[:8]
@@ -1662,13 +2887,32 @@ def behavioral_difference_probe(config: dict[str, Any]) -> dict[str, Any]:
         run_seed=int(config["evaluation"]["greedy_seed"]) + 901,
     )
 
-    def generate(label: str, model_override: Path | None) -> list[dict[str, Any]]:
+    def generate(
+        label: str, model_override: Path | None, model_fingerprint: str
+    ) -> tuple[list[dict[str, Any]], str]:
         path = artifact_root / "deployment_probe" / f"{label}.jsonl.gz"
         receipt_path = artifact_root / "deployment_probe" / f"{label}.receipt.json"
+        contract = canonical_sha256(
+            {
+                "label": label,
+                "model_fingerprint": model_fingerprint,
+                "records": records,
+                "sampling": sampling_contract(sampling),
+                "engine": config["engine"],
+                "runner_sha256": sha256_file(EXP / "src" / "vllm_runner.py"),
+                "environment_lock_sha256": sha256_file(
+                    ROOT / "requirements-vllm.lock.txt"
+                ),
+            }
+        )
         if receipt_path.is_file():
             receipt = read_json(receipt_path)
-            if valid_receipt(receipt):
-                return read_jsonl_gz(path)
+            if (
+                valid_receipt(receipt)
+                and receipt.get("contract_sha256") == contract
+                and receipt.get("model_fingerprint") == model_fingerprint
+            ):
+                return read_jsonl_gz(path), contract
         with VLLMRunner(
             engine_config(config, model_override=model_override)
         ) as runner:
@@ -1676,12 +2920,19 @@ def behavioral_difference_probe(config: dict[str, Any]) -> dict[str, Any]:
         receipt = write_jsonl_gz(path, rows)
         write_json(
             receipt_path,
-            {**receipt, "generation_metadata": metadata, "label": label},
+            {
+                **receipt,
+                "generation_metadata": metadata,
+                "label": label,
+                "contract_sha256": contract,
+                "model_fingerprint": model_fingerprint,
+            },
         )
-        return rows
+        return rows, contract
 
-    base0 = generate("base0", None)
-    base1 = generate("base1", None)
+    base_fingerprint = base_model_fingerprint()
+    base0, base0_contract = generate("base0", None, base_fingerprint)
+    base1, base1_contract = generate("base1", None, base_fingerprint)
     base_tokens = {
         str(row["id"]): row["outputs"][0]["token_ids"] for row in base0
     }
@@ -1697,10 +2948,17 @@ def behavioral_difference_probe(config: dict[str, Any]) -> dict[str, Any]:
             f"greedy base/base deployment probe is nondeterministic on {null_differences} tasks"
         )
     arms = {}
+    arm_fingerprints = {}
+    arm_contracts = {}
     for arm in config["sft"]["arms"]:
-        rows = generate(
-            arm, artifact_root / "merged" / "seed42" / arm
+        fingerprint = validated_merged_fingerprint(config, arm)
+        rows, contract = generate(
+            arm,
+            artifact_root / "merged" / "seed42" / arm,
+            fingerprint,
         )
+        arm_fingerprints[arm] = fingerprint
+        arm_contracts[arm] = contract
         installed = {
             str(row["id"]): row["outputs"][0]["token_ids"] for row in rows
         }
@@ -1714,6 +2972,10 @@ def behavioral_difference_probe(config: dict[str, Any]) -> dict[str, Any]:
         "schema_version": 1,
         "passed": True,
         "base_base_differences": null_differences,
+        "base_model_fingerprint": base_fingerprint,
+        "base_contracts": [base0_contract, base1_contract],
+        "arm_model_fingerprints": arm_fingerprints,
+        "arm_contracts": arm_contracts,
         "arms": arms,
     }
     write_json(RUNS_DIR / "behavioral_difference_probe.json", result)
@@ -1722,6 +2984,9 @@ def behavioral_difference_probe(config: dict[str, Any]) -> dict[str, Any]:
 
 def analyze_evaluation(config: dict[str, Any]) -> dict[str, Any]:
     """Apply the frozen Stage-A funnel and emit the conditional arm list."""
+    # Re-enter the cache-contract gate so standalone analysis cannot consume
+    # stale prompt/sampling/runner or checkpoint-bound generations.
+    evaluate_matrix(config, mode="greedy", phase="stage_a")
     artifact_root = external_root(config)
     greedy_index = read_json(
         artifact_root
@@ -1739,9 +3004,45 @@ def analyze_evaluation(config: dict[str, Any]) -> dict[str, Any]:
         task_scores[arm] = {}
         metrics[arm] = {}
         for split in splits:
-            rows = read_jsonl_gz(
-                Path(greedy_index["arms"][arm][split]["artifact"]["path"])
+            entry = greedy_index.get("arms", {}).get(arm, {}).get(split)
+            if not entry or not valid_receipt(entry["artifact"]):
+                raise RuntimeError(f"missing or invalid Stage-A artifact: {arm}/{split}")
+            expected_fingerprint = (
+                base_model_fingerprint()
+                if arm == "base"
+                else validated_merged_fingerprint(config, arm)
             )
+            if (
+                entry.get("model_fingerprint") != expected_fingerprint
+                or len(str(entry.get("contract_sha256", ""))) != 64
+            ):
+                raise RuntimeError(f"stale Stage-A model contract: {arm}/{split}")
+            rows = read_jsonl_gz(
+                Path(entry["artifact"]["path"])
+            )
+            row_ids = [str(row["id"]) for row in rows]
+            expected_ids = {
+                str(item["id"]) for item in load_evaluation_scope(config, split)
+            }
+            if len(row_ids) != len(set(row_ids)) or set(row_ids) != expected_ids:
+                raise RuntimeError(
+                    f"Stage-A task identity mismatch: {arm}/{split} "
+                    f"rows={len(row_ids)} unique={len(set(row_ids))} "
+                    f"expected={len(expected_ids)}"
+                )
+            if any(len(row.get("outputs", [])) != 1 for row in rows):
+                raise RuntimeError(f"greedy Stage-A row has non-unit outputs: {arm}/{split}")
+            if any(
+                int(row["outputs"][0].get("n_stage2_prompt_tokens", -1)) != 0
+                for row in rows
+            ):
+                raise RuntimeError(f"natural Stage-A unexpectedly used a second prefill: {arm}/{split}")
+            if any(
+                not math.isfinite(float(row["outputs"][0]["score"]))
+                or not isinstance(row["outputs"][0].get("parsed"), bool)
+                for row in rows
+            ):
+                raise RuntimeError(f"invalid Stage-A score/parse value: {arm}/{split}")
             scores = {
                 str(row["id"]): float(row["outputs"][0]["score"])
                 for row in rows
@@ -1775,7 +3076,8 @@ def analyze_evaluation(config: dict[str, Any]) -> dict[str, Any]:
                     [float(row["outputs"][0]["n_thinking_tokens"]) for row in rows]
                 ),
                 "actual_forward_tokens": sum(
-                    int(row["n_prompt_tokens"])
+                    int(row["outputs"][0]["n_stage1_prompt_tokens"])
+                    + int(row["outputs"][0]["n_stage2_prompt_tokens"])
                     + int(row["outputs"][0]["n_sampled_tokens"])
                     for row in rows
                 ),
@@ -1811,10 +3113,16 @@ def analyze_evaluation(config: dict[str, Any]) -> dict[str, Any]:
     reachability = {}
     treatment_verdicts = {}
     for treatment in treatments:
-        baseline = max(
-            baselines, key=lambda arm: metrics[arm]["core_iid"]["accuracy"]
+        baseline_accuracy = max(
+            float(metrics[arm]["core_iid"]["accuracy"]) for arm in baselines
         )
-        baseline_accuracy = float(metrics[baseline]["core_iid"]["accuracy"])
+        tied_baselines = [
+            arm
+            for arm in baselines
+            if abs(float(metrics[arm]["core_iid"]["accuracy"]) - baseline_accuracy)
+            <= 1e-12
+        ]
+        baseline = tied_baselines[0]
         positive_delta = float(config["evaluation"]["positive_delta"])
         reachable = baseline_accuracy + positive_delta <= 1.0 + 1e-12
         reachability[treatment] = {
@@ -1822,34 +3130,56 @@ def analyze_evaluation(config: dict[str, Any]) -> dict[str, Any]:
             "hard_lower": 0.0,
             "hard_upper": 1.0,
             "observed_strongest_baseline": baseline_accuracy,
+            "tied_strongest_baselines": tied_baselines,
             "required_delta": positive_delta,
             "required_treatment_value": baseline_accuracy + positive_delta,
             "reachable": reachable,
         }
-        primary = comparisons[f"{treatment}_minus_{baseline}"]
+        primary_contrasts = {
+            arm: comparisons[f"{treatment}_minus_{arm}"] for arm in tied_baselines
+        }
+        primary = primary_contrasts[baseline]
         shuffled = comparisons[f"{treatment}_minus_potential_shuffle"]
-        parse_delta = (
-            metrics[treatment]["core_iid"]["parse_rate"]
-            - metrics[baseline]["core_iid"]["parse_rate"]
-        )
-        family_delta = (
-            metrics[treatment]["core_iid"]["family_macro"]
-            - metrics[baseline]["core_iid"]["family_macro"]
-        )
+        parse_deltas = {
+            arm: metrics[treatment]["core_iid"]["parse_rate"]
+            - metrics[arm]["core_iid"]["parse_rate"]
+            for arm in tied_baselines
+        }
+        family_deltas = {
+            arm: metrics[treatment]["core_iid"]["family_macro"]
+            - metrics[arm]["core_iid"]["family_macro"]
+            for arm in tied_baselines
+        }
         positive = (
             reachable
-            and float(primary["mean_delta"]) >= positive_delta
-            and float(primary["ci95_low"]) > 0
+            and all(
+                float(contrast["mean_delta"]) >= positive_delta
+                and float(contrast["ci95_low"]) > 0
+                for contrast in primary_contrasts.values()
+            )
             and float(shuffled["mean_delta"]) > 0
-            and parse_delta >= float(config["evaluation"]["noninferiority_delta"])
-            and family_delta >= float(config["evaluation"]["noninferiority_delta"])
+            and all(
+                delta >= float(config["evaluation"]["noninferiority_delta"])
+                for delta in parse_deltas.values()
+            )
+            and all(
+                delta >= float(config["evaluation"]["noninferiority_delta"])
+                for delta in family_deltas.values()
+            )
         )
         treatment_verdicts[treatment] = {
             "strongest_trace_baseline": baseline,
+            "tied_strongest_baselines": tied_baselines,
+            "strongest_baseline_tie_rule": (
+                "require every accuracy tie; listed-order arm used for replication"
+            ),
             "primary_contrast": primary,
+            "primary_contrasts_for_all_ties": primary_contrasts,
             "shuffle_contrast": shuffled,
-            "parse_delta": parse_delta,
-            "family_macro_delta": family_delta,
+            "parse_delta": parse_deltas[baseline],
+            "parse_deltas_for_all_ties": parse_deltas,
+            "family_macro_delta": family_deltas[baseline],
+            "family_macro_deltas_for_all_ties": family_deltas,
             "stage_b_triggered": positive,
         }
 
@@ -1866,9 +3196,16 @@ def analyze_evaluation(config: dict[str, Any]) -> dict[str, Any]:
         "joint_potential",
         "potential_shuffle",
     ]
-    strongest_trace_arm = max(
-        trace_arms, key=lambda arm: metrics[arm]["core_iid"]["accuracy"]
+    strongest_trace_accuracy = max(
+        float(metrics[arm]["core_iid"]["accuracy"]) for arm in trace_arms
     )
+    tied_strongest_trace_arms = [
+        arm
+        for arm in trace_arms
+        if abs(float(metrics[arm]["core_iid"]["accuracy"]) - strongest_trace_accuracy)
+        <= 1e-12
+    ]
+    strongest_trace_arm = tied_strongest_trace_arms[0]
     result = {
         "schema_version": 1,
         "phase": "stage_a",
@@ -1878,6 +3215,7 @@ def analyze_evaluation(config: dict[str, Any]) -> dict[str, Any]:
         "treatment_verdicts": treatment_verdicts,
         "stage_b_triggered_treatments": triggered,
         "strongest_trace_arm": strongest_trace_arm,
+        "tied_strongest_trace_arms": tied_strongest_trace_arms,
         "shortest_banking_leads": strongest_trace_arm == "shortest_natural",
         "verdict": (
             "STAGE_B_TRIGGERED" if triggered else "CORE_BANKING_NEGATIVE"
@@ -1915,8 +3253,9 @@ def run_conditional_stage_b(
     config: dict[str, Any], stage_a: dict[str, Any] | None = None
 ) -> dict[str, Any]:
     """Run and analyze only the expansion licensed by the frozen Stage-A gate."""
+    validate_preselection_amendment_receipt(config)
     if stage_a is None:
-        stage_a = read_json(RUNS_DIR / "stage_a_analysis.json")
+        stage_a = analyze_evaluation(config)
     triggered = list(stage_a["stage_b_triggered_treatments"])
     if not triggered:
         result = {
@@ -1979,7 +3318,8 @@ def run_conditional_stage_b(
                 ),
                 "family_macro": mean([mean(value) for value in by_family.values()]),
                 "actual_forward_tokens": sum(
-                    int(row["n_prompt_tokens"])
+                    int(row["outputs"][0]["n_stage1_prompt_tokens"])
+                    + int(row["outputs"][0]["n_stage2_prompt_tokens"])
                     + int(row["outputs"][0]["n_sampled_tokens"])
                     for row in rows
                 ),
@@ -2059,9 +3399,10 @@ def run_conditional_stage_b(
                 ]
             ),
             "actual_forward_tokens": sum(
-                int(row["n_prompt_tokens"]) * k
-                + sum(
-                    int(output["n_sampled_tokens"])
+                sum(
+                    int(output["n_stage1_prompt_tokens"])
+                    + int(output["n_stage2_prompt_tokens"])
+                    + int(output["n_sampled_tokens"])
                     for output in row["outputs"][:k]
                 )
                 for row in base_rows
@@ -2123,8 +3464,9 @@ def run_seed43_replication(
     config: dict[str, Any], analysis: dict[str, Any] | None = None
 ) -> dict[str, Any]:
     """Run only the preregistered treatment/baseline pairs that triggered."""
+    validate_preselection_amendment_receipt(config)
     if analysis is None:
-        analysis = read_json(RUNS_DIR / "stage_a_analysis.json")
+        analysis = analyze_evaluation(config)
     triggered = {
         treatment: analysis["treatment_verdicts"][treatment][
             "strongest_trace_baseline"
@@ -2144,6 +3486,7 @@ def run_seed43_replication(
     artifact_root = external_root(config)
     arms = sorted(set(triggered) | set(triggered.values()))
     seed = int(config["sft"]["replication_seed"])
+    seed43_receipts: dict[str, dict[str, Any]] = {}
     for arm in arms:
         dataset = artifact_root / "sft" / f"{arm}.jsonl.gz"
         adapter = artifact_root / "adapters" / "seed43" / arm
@@ -2166,13 +3509,27 @@ def run_seed43_replication(
                 cwd=ROOT,
                 check=True,
             )
+        adapter_receipt = read_json(train_receipt)
+        validate_training_receipt(
+            config,
+            arm=arm,
+            seed=seed,
+            dataset=dataset,
+            output=adapter,
+            receipt=adapter_receipt,
+        )
+        seed43_receipts[arm] = adapter_receipt
         merged = artifact_root / "merged" / "seed43" / arm
         merge_receipt_path = merged / "merge_receipt.json"
-        adapter_receipt = read_json(train_receipt)
         adapter_hash = adapter_receipt["artifacts"]["adapter_model.safetensors"][
             "sha256"
         ]
-        if not merge_receipt_path.is_file():
+        if merge_receipt_path.is_file():
+            validated_merged_fingerprint(config, arm, seed=43)
+            existing_merge = read_json(merge_receipt_path)
+            if existing_merge.get("adapter_sha256") != adapter_hash:
+                raise RuntimeError(f"stale seed43 merge receipt for {arm}")
+        else:
             print(f"[replication] merging seed43 {arm}", flush=True)
             subprocess.run(
                 [
@@ -2186,6 +3543,16 @@ def run_seed43_replication(
                 cwd=ROOT,
                 check=True,
             )
+            application_path = merged / "merge_application_receipt.json"
+            application = read_json(application_path)
+            if (
+                application.get("adapter_sha256") != adapter_hash
+                or application.get("adapter_tensor_manifest")
+                != adapter_receipt.get("adapter_tensor_manifest")
+                or int(application.get("applied_lora_pairs", -1)) != 128
+            ):
+                raise RuntimeError(f"seed43 merge application contract failed for {arm}")
+            merged_fingerprint = checkpoint_fingerprint(merged)
             write_json(
                 merge_receipt_path,
                 {
@@ -2193,13 +3560,37 @@ def run_seed43_replication(
                     "arm": arm,
                     "seed": seed,
                     "adapter_sha256": adapter_hash,
-                    "config_sha256": sha256_file(merged / "config.json"),
-                    "weight_files": [
-                        {"name": path.name, "bytes": path.stat().st_size}
-                        for path in sorted(merged.glob("*.safetensors"))
+                    "adapter_tensor_manifest": adapter_receipt[
+                        "adapter_tensor_manifest"
                     ],
+                    "merge_application_receipt_sha256": sha256_file(
+                        application_path
+                    ),
+                    "applied_lora_pairs": 128,
+                    "merged_checkpoint_fingerprint": merged_fingerprint,
                 },
             )
+
+    seed43_initial_hashes = {
+        str(receipt["adapter_initial_state"]["sha256"])
+        for receipt in seed43_receipts.values()
+    }
+    if len(seed43_initial_hashes) != 1:
+        raise RuntimeError(
+            f"seed43 arms did not share one LoRA initialization: {seed43_initial_hashes}"
+        )
+    seed42_initial_hashes = {
+        str(
+            read_json(
+                artifact_root / "adapters" / "seed42" / arm / "training_receipt.json"
+            )["adapter_initial_state"]["sha256"]
+        )
+        for arm in arms
+    }
+    if len(seed42_initial_hashes) != 1 or seed42_initial_hashes == seed43_initial_hashes:
+        raise RuntimeError(
+            "seed42/seed43 initialization hashes do not establish distinct replications"
+        )
 
     iid_items = load_evaluation_scope(config, "core_iid")
     item_by_id = {str(item["id"]): item for item in iid_items}
@@ -2220,26 +3611,70 @@ def run_seed43_replication(
     )
     evaluation_rows = {}
     for arm in arms:
+        model_fingerprint = validated_merged_fingerprint(config, arm, seed=43)
+        contract = canonical_sha256(
+            {
+                "phase": "seed43_replication",
+                "arm": arm,
+                "model_fingerprint": model_fingerprint,
+                "scope": [
+                    {
+                        "id": item["id"],
+                        "prompt": item["prompt"],
+                        "canonical_answer": item["canonical_answer"],
+                        "family": item["family"],
+                        "level": item["level"],
+                    }
+                    for item in iid_items
+                ],
+                "sampling": sampling_contract(sampling),
+                "engine": config["engine"],
+                "runner_sha256": sha256_file(EXP / "src" / "vllm_runner.py"),
+                "environment_lock_sha256": sha256_file(
+                    ROOT / "requirements-vllm.lock.txt"
+                ),
+                "analysis_script_sha256": sha256_file(Path(__file__)),
+            }
+        )
         output_path = (
             artifact_root / "evaluation" / "seed43" / "core_iid" / f"{arm}.jsonl.gz"
         )
         receipt_path = output_path.with_suffix(".receipt.json")
-        if receipt_path.is_file() and valid_receipt(read_json(receipt_path)):
-            evaluation_rows[arm] = read_jsonl_gz(output_path)
-            continue
-        with VLLMRunner(
-            engine_config(
-                config,
-                model_override=artifact_root / "merged" / "seed43" / arm,
+        receipt = read_json(receipt_path) if receipt_path.is_file() else None
+        if (
+            receipt
+            and valid_receipt(receipt)
+            and receipt.get("contract_sha256") == contract
+            and receipt.get("model_fingerprint") == model_fingerprint
+        ):
+            scored = read_jsonl_gz(output_path)
+        else:
+            with VLLMRunner(
+                engine_config(
+                    config,
+                    model_override=artifact_root / "merged" / "seed43" / arm,
+                )
+            ) as runner:
+                raw, metadata = runner.generate(records, sampling)
+            scored, summary = _score_evaluation_rows(item_by_id, raw)
+            artifact = write_jsonl_gz(output_path, scored)
+            write_json(
+                receipt_path,
+                {
+                    **artifact,
+                    "summary": summary,
+                    "generation_metadata": metadata,
+                    "contract_sha256": contract,
+                    "model_fingerprint": model_fingerprint,
+                },
             )
-        ) as runner:
-            raw, metadata = runner.generate(records, sampling)
-        scored, summary = _score_evaluation_rows(item_by_id, raw)
-        receipt = write_jsonl_gz(output_path, scored)
-        write_json(
-            receipt_path,
-            {**receipt, "summary": summary, "generation_metadata": metadata},
-        )
+        row_ids = [str(row["id"]) for row in scored]
+        if (
+            len(row_ids) != len(set(row_ids))
+            or set(row_ids) != set(item_by_id)
+            or any(len(row.get("outputs", [])) != 1 for row in scored)
+        ):
+            raise RuntimeError(f"seed43 evaluation identity mismatch for {arm}")
         evaluation_rows[arm] = scored
 
     seed42_index = read_json(
@@ -2433,6 +3868,7 @@ def main(argv: list[str] | None = None) -> int:
             "parity",
             "score",
             "rollouts",
+            "evidence-seal",
             "select",
             "train",
             "merge",
@@ -2491,6 +3927,8 @@ def main(argv: list[str] | None = None) -> int:
             output_stage="train_rollouts_r1",
             r=int(config["sampling"]["train_rollouts_per_trace"]),
         )
+    elif args.stage == "evidence-seal":
+        seal_selection_evidence(config)
     elif args.stage == "select":
         build_sft_datasets(config)
     elif args.stage == "train":

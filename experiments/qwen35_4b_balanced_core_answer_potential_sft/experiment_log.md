@@ -44,3 +44,52 @@ or evaluation generation has run under this experiment.
   joint-gain max 0.692447. No threshold or row was changed.
 - Added the pre-outcome amendment to retire vLLM bulk likelihoods and use the single-context Transformers bf16
   reference uniformly. The failed receipt remains evidence; all generation and later evaluation stay on vLLM.
+
+## 2026-07-13 — Post-Score, Pre-Official-Selection Balance Deviation
+
+- Exact scoring completed for all 360 tasks and 22,681 natural traces. Before selection or training, a
+  read-only preflight found that the near-best diversity helper could return one row and silently remove the
+  entire task from every arm.
+- On the frozen scores, unchanged behavior would have retained only 116 tasks, distributed 23 Caravan, 71
+  Foundry Ledger, and 22 Runeward. This violates the declared balanced-core estimand.
+- Because the complete candidate score bank and the induced imbalance were observed before this repair was
+  committed, it violates the preregistration's amendment-timing rule. It is a post-score deviation, not a
+  prospective amendment; no later seal can restore that status. Partial incomplete-R1 labels were later
+  inspected for cost planning before commit, but did not determine the repair. Official selections, adapters,
+  and held-out outcomes remained unseen.
+- Repaired the contradiction by keeping near-best diversity when available and otherwise taking the
+  deterministic second-ranked trace from the same frozen top-12. Added fail-closed assertions for 360 total
+  tasks, 40 per family/level cell, and 720 rows per arm. No selection artifact or adapter existed.
+- The same audit found that Trainer seeding occurred after LoRA construction. Added global pre-model seeding,
+  an immediate pre-adapter seed reset, receipt provenance, and CPU ordering tests before any training run.
+- Hardened training, merge, deployment-probe, and evaluation restart contracts before any adapter existed:
+  exact two-epoch exposure/steps, initial LoRA digest, training-lock/final-artifact hashes, complete 128-pair
+  merge enforcement, deployed-file fingerprints, and prompt/sampling/runner-bound generation caches.
+- Replaced the shuffle control's cyclic heuristic with exact minimum-cost forbidden-edge assignment and made
+  Stage-A baseline ties conservative and explicit.
+- On the frozen score bank, the balance fallback applies to 5/360 answer tasks and 244/360 joint tasks. Answer
+  fallback gaps have median 3.409 and maximum 7.378 nats/answer-token; joint fallback gaps have median 0.893,
+  mean 1.410, p90 2.954, and maximum 12.128. The joint arm is consequently a registered hybrid treatment;
+  its result will be stratified by mode/gap.
+- Shuffle rows now namespace both target and actual-source selection/quality provenance, and their unprefixed
+  audit fields describe the trace actually trained. Training receipts are invalidated before artifact
+  replacement, exclude themselves from artifact hashes, and are installed atomically for safe restart.
+
+## 2026-07-13 — Training Cost Re-estimate
+
+- In-memory selection over all 360 completed score shards (without writing official selection artifacts)
+  gives 32,187,564 two-epoch forward tokens across the five rollout-independent arms. Current-path stress
+  receipts imply 9.0--16.9 GPU-hours for those five; allowing the unfinished success arm gives a provisional
+  six-arm range of roughly 9.3--20.7 GPU-hours.
+- This materially exceeds the user's stated time constraint. Finish and bank the already-running R1 rollout
+  and exact selection, but do not start SFT until choosing between the frozen full matrix and a smaller
+  prospective follow-up. No licensed shortcut exists inside this frozen experiment before mandatory Stage A.
+
+## 2026-07-13 — Exact Evidence Bank Complete
+
+- Single-context bf16 SDPA scoring finished 360/360 tasks and 22,681 eligible rows in 17,296 seconds.
+- R1 finished 360/360 tasks and exactly one rollout for each of the same 22,681 trace IDs in 10,915 seconds.
+- Before any seal write, the full read-only validator confirmed all three exact task scopes, every shard hash,
+  raw-to-score/R1 source links, per-shard task identity, unique trace IDs, exact score/R1 joins, and the
+  natural-close/non-loop eligibility set. The raw pool has 23,040 rows; score and R1 each have 22,681.
+- Selection remains absent and blocked pending the committed post-score/partial-rollout deviation seal.

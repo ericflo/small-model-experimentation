@@ -5,6 +5,10 @@ design_boundary:
   readme_sha256: 6ae4ba1488742033ef12c2499acb96f0455285deb39ee137018369a0a1ca684f
   preregistration_sha256: 7fd02f22b948aa34bae1b17a1ec5690585ee2ec3f3f3cad8b298acc1f922e642
   design_review_sha256: 9d96154ab7238dfc4fc0da106e2c46f5cca1426ec125d515270db9ab705f6809
+preselection_amendment:
+  receipt: runs/preselection_amendment_receipt.json
+  classification: post_score_partial_rollout_pre_official_selection_deviation
+  required_before: [select, train, merge, evaluate]
 model:
   id: Qwen/Qwen3.5-4B
   revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a

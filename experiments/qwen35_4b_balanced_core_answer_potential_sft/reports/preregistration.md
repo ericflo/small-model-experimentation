@@ -11,8 +11,10 @@ This protocol is frozen after the parent experiment's calibration and 331-task r
 - constructing or training any SFT arm; or
 - running any sealed evaluation task through base or an adapter.
 
-The parent calibration values are declared design inputs, never new confirmatory outcomes. This experiment's
-claim begins at the prospectively frozen SFT comparison.
+The parent calibration values are declared design inputs, never new confirmatory outcomes. This was the
+original prospective boundary. The dated post-score selector deviation below means the repaired selector
+comparison is outcome-prospective but not fully selector-prospective; that limitation travels with every
+claim.
 
 ## Claim Under Test
 
@@ -72,7 +74,8 @@ train scoring but is not reused as an outcome label.
 All scores and R1 rollouts are computed for every eligible independent trace before selection. Within task:
 
 - `answer_potential`: best answer gain, then maximum normalized-trigram distance among top-12 candidates
-  within 0.25 nats/answer-token of best;
+  within 0.25 nats/answer-token of best; if no unused second row is in-band, use the deterministic
+  second-ranked member of that same top-12;
 - `joint_potential`: the same rule using joint gain;
 - `random_natural`: without replacement, closest in length to each answer-treatment trace, with stable seeded
   tie breaks;
@@ -81,7 +84,22 @@ All scores and R1 rollouts are computed for every eligible independent trace bef
 - `potential_shuffle`: one-to-one reassignment of the exact answer-treatment trace multiset to different
   tasks within family/level while minimizing total length mismatch.
 
+Selection artifacts preserve the potential-row mode (`best`, `near_best_diverse`, or
+`fallback_second_ranked`). The shuffle uses an exact deterministic forbidden-edge assignment and reports
+total, mean, and maximum target/source token gaps.
+
 Every trace remains complete. There is no prefix pruning or after-the-fact compression.
+
+The deterministic fallback above is a post-score, pre-official-selection implementation deviation recorded
+on 2026-07-13. Without it, the near-best clause contradicted the frozen requirement that every target task
+contribute two rows and induced a severely family-imbalanced task filter. No selection dataset or adapter
+existed when the defect was found, but candidate scores and the filter were observed. Selection now fails
+closed unless it retains all 360 tasks, 40 per family/level cell, and 720 rows per arm.
+
+The pre-selection, in-memory audit over the frozen scores found fallback use on 5/360 answer tasks and
+244/360 joint tasks. The joint treatment is therefore analyzed as a best-plus-near-best-diverse-or-second-
+ranked hybrid. Its selection modes and score gaps are mandatory strata in reporting; it cannot be described
+post hoc as uniformly satisfying the 0.25 near-best band.
 
 ## Training
 
@@ -94,9 +112,21 @@ max length 16,000. Prompt loss is 0, full thought loss 0.5, and close/answer los
 failure, not truncation. Record rows, optimizer steps, thought/supervised/forward tokens, elapsed time, peak
 memory, package lock digest, and adapter hashes.
 
+A 2026-07-13 pre-training audit found that the CLI seed originally reached Trainer only after LoRA adapter
+creation. No adapter existed. The implementation now sets the global seed before model work and resets it
+immediately before `get_peft_model`, while retaining the same Trainer/data seed, so the six seed-42 arms have
+matched initialization and seed 43 is a real replication seed. The receipt records this seed contract.
+The receipt also hashes the initial trainable state, records exact two-epoch token exposure and optimizer
+steps, and binds the training lock and final adapter artifacts.
+
 Each adapter is merged into the full Qwen3.5 composite. A deterministic same-prompt base/base repeat must be
 identical and every merged arm must differ from base on at least one token sequence before scientific eval.
 Runtime LoRA is prohibited.
+
+Merge fails closed unless all 128 expected A/B tensor pairs are present, paired, uniquely mapped, and
+applied. Every merged model receives a fingerprint over its actual weight/config/tokenizer files. Deployment
+probe and evaluation caches bind that fingerprint, task/prompt scope, sampling settings, engine settings, and
+runner code; a changed checkpoint or contract cannot reuse stale generations.
 
 ## Mandatory Stage A
 
@@ -121,6 +151,11 @@ parse delta >= -0.02
 family-macro delta >= -0.02
 ```
 
+If multiple trace baselines tie for strongest accuracy, the trigger must clear every tied baseline; the
+listed-order tied arm is retained only as the singular conditional replication label. Stage-A analysis fails
+closed on duplicate/missing task IDs, non-unit greedy outputs, non-finite scores, stale model fingerprints, or
+invalid artifacts before statistics are computed.
+
 Before applying an absolute gate, write a reachability receipt from its hard [0,1] range and observed
 baseline. An unreachable gate fails closed and cannot be lowered in place.
 
@@ -144,10 +179,16 @@ The registered verdict labels are in the README. Calibration cannot produce a po
 only a three-family core verdict. No result may be presented as the unfinished parent's nine-family/pivot
 test, and no compression claim is allowed from shortest winning alone.
 
-## Amendments
+## Amendments And Deviations
 
-Only pre-outcome operational amendments may be appended below. Candidate scores, rollout labels, SFT
-outcomes, or evaluation outputs must not be observed before such an amendment is committed.
+The original rule allowed only pre-outcome operational amendments and prohibited observing candidate scores,
+rollout labels, SFT outcomes, or evaluation outputs first. The 2026-07-12 instrument amendment complied. The
+2026-07-13 selector repair did not: candidate scores and the registered helper's induced 116-task imbalance
+were inspected before the repair was committed. It is preserved below as a post-score, pre-official-selection
+deviation, not relabeled as prospective. No rollout label, official SFT selection, adapter, or held-out outcome
+determined the repair. Partial incomplete-R1 labels were subsequently inspected for cost planning before
+commit; no official SFT selection, adapter, or held-out outcome was observed. The resulting selector
+comparison is scoped accordingly.
 
 ### 2026-07-12 — Retire Batch-Sensitive vLLM Train Scoring
 
@@ -170,3 +211,22 @@ Because there is no backend comparison after this change, no cross-backend parit
 canonical-only format decision, score definitions, eligibility, selectors, arms, thresholds, and staged
 evaluation remain unchanged. Expected cost is about 2.5 GPU-hours from the parent's measured reference
 throughput, within the balanced funnel.
+
+### 2026-07-13 — Post-Score Selector Balance Deviation
+
+All 22,681 eligible candidate scores across 360 tasks were complete when a read-only application of the
+registered selector found that the near-best rule returned two rows on only 116 tasks: 23 Caravan, 71 Foundry
+Ledger, and 22 Runeward. The official selection dataset did not exist, R1 was incomplete, and no adapter or
+held-out evaluation existed. Partial R1 success labels were later inspected to estimate the success arm's
+cost, but not to choose this rule. The repair preserves the intended balanced estimand by using the deterministic
+second-ranked trace from the already-frozen top-12 only when there is no unused second in the 0.25 band, then
+fails closed unless all 360 tasks, all nine 40-task cells, and 720 rows per arm remain.
+
+The completed score bank also revealed that the fallback applies on 5/360 answer tasks and 244/360 joint
+tasks. Consequently, the answer comparison remains close to the intended rule, while the joint arm is a
+post-score-specified best-plus-near-best-diverse-or-second-ranked hybrid. Every row records mode and gap and
+the joint analysis must be stratified. A separate evidence seal records the pre-seal legacy index hashes,
+validates exact task/trace joins and source links, retrospectively attests operation contracts, and freezes
+the final post-seal index hashes. Runtime selection refuses to write unless a committed machine receipt binds
+those indexes and the exact amendment code/docs. This prevents further adaptation; it does not erase the
+deviation above.

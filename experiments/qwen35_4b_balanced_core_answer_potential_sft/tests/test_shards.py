@@ -20,6 +20,16 @@ class ShardTests(unittest.TestCase):
             self.assertTrue(valid_receipt(receipt))
             self.assertEqual(read_jsonl_gz(path), rows)
 
+    def test_identical_rows_have_identical_compressed_bytes(self) -> None:
+        rows = [{"id": "a", "value": 1}, {"id": "b", "value": 2}]
+        with tempfile.TemporaryDirectory() as directory:
+            left = Path(directory) / "left.jsonl.gz"
+            right = Path(directory) / "right.jsonl.gz"
+            first = write_jsonl_gz(left, rows)
+            second = write_jsonl_gz(right, rows)
+            self.assertEqual(first["sha256"], second["sha256"])
+            self.assertEqual(left.read_bytes(), right.read_bytes())
+
 
 if __name__ == "__main__":
     unittest.main()
