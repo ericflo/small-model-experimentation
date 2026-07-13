@@ -881,3 +881,21 @@ Only archive-checkpoint validation, commit, push, and workflow verification are 
 both workflows are green, retire the canonical empty Stage-A output and stale PREPARED journal only
 after revalidating their published failure/journal copies, then regenerate source-v11 setup. No model
 or result-bearing stage is authorized meanwhile.
+
+## 2026-07-13 — stale PREPARED attempt names retired after durable publication
+
+- Archive checkpoint `24733d34` passed both required workflows before retirement.
+- The canonical journal still matched its published source-v10 copy byte-for-byte at SHA-256
+  `209d4c1f…12df`, with one event whose head was exactly `PREPARED`. The external result directory
+  still had zero entries, and the tracked result directory was absent.
+- The source-v10 failure receipt and source-v10 setup archive receipt were rehashed to identities
+  `6b23f95d…b8c2` and `252be000…5d6a3`. Only then were the stale canonical journal and empty external
+  directory retired. The published journal copy remains immutable under tracked failures.
+- The retirement receipt records both retired paths, their preconditions, the green archive commit,
+  zero benchmark/sealed/result/model/training access, and no downstream authorization.
+
+## Current authorization
+
+Only retirement-checkpoint validation, commit, push, and workflow verification are authorized. After
+both workflows are green, regenerate source-v11 CPU/data/empty-ledger/initialization setup and publish
+that checkpoint before any model-bearing gate. No result-bearing stage is authorized.

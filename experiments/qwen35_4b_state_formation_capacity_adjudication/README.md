@@ -20,7 +20,10 @@ markerless output. Reviewed implementation `7d6cd93f…d278`, full source contra
 is now preserved in a verified 25-file, 19,566,021-byte archive at receipt identity
 `252be000…5d6a3` and files identity `f767eb80…d4b91`. Canonical setup cleanup and an immediate
 idempotent replay passed. Publish and validate that archive checkpoint, then retire the separately
-preserved stale PREPARED paths and regenerate/replay setup before Stage A restarts.
+preserved stale PREPARED paths and regenerate/replay setup before Stage A restarts. The archive
+checkpoint is green at `24733d34`; the canonical empty output and stale journal have now been retired
+only after byte-exact revalidation of their published copies. The retirement receipt authorizes no
+training and must be published/green before source-v11 setup regeneration.
 
 Historically, the integrated source-v10 review was `GO` for reviewed implementation
 `a5a494b7…6f1c4a` and full source contract `979a9012…f394b7`; the 360/360 suite and exact machine gate

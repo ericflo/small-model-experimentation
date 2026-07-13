@@ -1,0 +1,51 @@
+{
+  "archive_checkpoint_commit": "24733d346cf4fdb2208c8a201065e79d1876869b",
+  "archive_receipt_lineage": {
+    "path": "experiments/qwen35_4b_state_formation_capacity_adjudication/runs/failures/invalidated_setup_source_979a9012.json",
+    "receipt_identity_sha256": "252be0003d784c43c6f1917792b30a0adafbe9138a2a375369d628851b05d6a3",
+    "sha256": "ab583fc16f11205fd771ddf1edcf9bf49744a3fc381923e569098ff07054e217"
+  },
+  "authorizes_positive_control": false,
+  "authorizes_result_evaluation": false,
+  "authorizes_result_training": false,
+  "authorizes_training": false,
+  "backend": "transformers",
+  "benchmark_files_read": 0,
+  "canonical_paths_absent_after_retirement": true,
+  "experiment_id": "qwen35_4b_state_formation_capacity_adjudication",
+  "failure_receipt_lineage": {
+    "path": "experiments/qwen35_4b_state_formation_capacity_adjudication/runs/failures/training_launch_lora_joint_seed7411_source_979a90120e99.json",
+    "receipt_identity_sha256": "6b23f95d94844585113fd82d3903638a741a9b1155cd2d7f63269c55017db8c2",
+    "sha256": "8638f9ad43f642d5a1ff598d6b8fdda1f98a9ebdc79ced8d50258683cec1b809"
+  },
+  "invalidated_source_contract_sha256": "979a90120e994cdf2d066a91721596285a3f4456c579bc3e66d87c594bf394b7",
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "phase": "prestart_source_transition",
+  "preserved_journal": {
+    "bytes": 2693,
+    "journal_identity_sha256": "ef72ba4ebecf9fcbd37b362f7a1e27d7a849ece3a86503aaf3a022eab03f51c9",
+    "path": "experiments/qwen35_4b_state_formation_capacity_adjudication/runs/failures/prestart_lora_joint_seed7411_source_979a90120e99_journal.json",
+    "sha256": "209d4c1f9183359535a07fe5bef3f535ebc13e2f00d4ddcf10c289501b1912df",
+    "terminal_state": "PREPARED"
+  },
+  "receipt_identity_sha256": "94a6aee19bde3974179d3f7cb10978f58a071075a344d788b1e6f1d1adf2f9ee",
+  "replacement_source_contract_sha256": "5a8ed26ddb9446c728191ca8e7849ae44cff92a700e24b237dac522cf4286666",
+  "result_payloads_opened": [],
+  "retired_canonical_paths": [
+    {
+      "observed_before_retirement": "exact PREPARED journal bytes",
+      "path": "experiments/qwen35_4b_state_formation_capacity_adjudication/runs/attempts/training/lora_joint_seed7411.json"
+    },
+    {
+      "observed_before_retirement": "exactly empty directory",
+      "path": "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/lora_joint_seed7411"
+    }
+  ],
+  "schema_version": 1,
+  "scientific_evidence": false,
+  "sealed_contrast_payloads_opened": [],
+  "status": "PRESTART_ATTEMPT_RETIRED",
+  "tracked_result_output_observed_before_retirement": "absent",
+  "training_or_evaluation_started": false
+}
