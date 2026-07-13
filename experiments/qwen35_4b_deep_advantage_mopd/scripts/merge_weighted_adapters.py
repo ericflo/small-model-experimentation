@@ -6,6 +6,8 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
+import stat
 from pathlib import Path
 
 import torch
@@ -38,6 +40,43 @@ def _target_module_set(config: dict) -> frozenset[str]:
     if len(values) != len(set(values)):
         raise ValueError("adapter target_modules contains duplicates")
     return frozenset(values)
+
+
+def _inference_file_inventory(root: Path) -> list[dict[str, str]]:
+    """Hash every regular load artifact without following any symlink."""
+
+    root = Path(os.path.abspath(os.fspath(root)))
+    for component in reversed((root, *root.parents)):
+        metadata = component.lstat()
+        if stat.S_ISLNK(metadata.st_mode) or not stat.S_ISDIR(metadata.st_mode):
+            raise ValueError(f"weighted-merge output root is unsafe: {component}")
+    receipt_path = root / "merge_receipt.json"
+    if receipt_path.exists() or receipt_path.is_symlink():
+        raise ValueError(f"weighted-merge receipt already exists: {receipt_path}")
+
+    rows: list[dict[str, str]] = []
+    for current_value, directory_names, file_names in os.walk(
+        root, topdown=True, followlinks=False
+    ):
+        current = Path(current_value)
+        for name in sorted(directory_names):
+            path = current / name
+            entry = path.lstat()
+            if stat.S_ISLNK(entry.st_mode) or not stat.S_ISDIR(entry.st_mode):
+                raise ValueError(f"weighted-merge output directory is unsafe: {path}")
+        for name in sorted(file_names):
+            path = current / name
+            relative = path.relative_to(root).as_posix()
+            if relative == "merge_receipt.json":
+                continue
+            entry = path.lstat()
+            if stat.S_ISLNK(entry.st_mode) or not stat.S_ISREG(entry.st_mode):
+                raise ValueError(f"weighted-merge output artifact is unsafe: {path}")
+            rows.append({"path": relative, "sha256": _digest(path)})
+    rows.sort(key=lambda row: row["path"])
+    if not rows:
+        raise ValueError("weighted-merge output has no inference artifacts")
+    return rows
 
 
 def main() -> int:
@@ -109,6 +148,7 @@ def main() -> int:
     AutoTokenizer.from_pretrained(
         MODEL_ID, revision=MODEL_REVISION, trust_remote_code=True, use_fast=True
     ).save_pretrained(args.out)
+    inference_files = _inference_file_inventory(args.out)
     receipt = {
         "method": "explicit_convex_lora_delta_merge",
         "model": MODEL_ID, "revision": MODEL_REVISION,
@@ -129,6 +169,7 @@ def main() -> int:
             {"name": path.name, "sha256": _digest(path)}
             for path in sorted(args.out.glob("*.safetensors"))
         ],
+        "inference_files": inference_files,
     }
     (args.out / "merge_receipt.json").write_text(
         json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8"

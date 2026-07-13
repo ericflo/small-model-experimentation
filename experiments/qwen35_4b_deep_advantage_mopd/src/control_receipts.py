@@ -5,7 +5,9 @@ from __future__ import annotations
 import hashlib
 import json
 import math
+import os
 import random
+import stat
 from collections import Counter
 from pathlib import Path
 from typing import Any, Mapping
@@ -21,6 +23,222 @@ from training_units import (
 
 
 CONTROL_ARMS = ("non_advantage_route", "wrong_teacher", "offpolicy_sft")
+
+
+def _safe_parameter_control_path(
+    path: Path, *, label: str, directory: bool
+) -> Path:
+    """Require one existing parameter-control path without following symlinks."""
+
+    lexical = Path(os.path.abspath(os.fspath(path)))
+    for component in reversed((lexical, *lexical.parents)):
+        try:
+            metadata = component.lstat()
+        except FileNotFoundError:
+            raise ValueError(f"parameter-control {label} is missing: {lexical}")
+        if stat.S_ISLNK(metadata.st_mode):
+            raise ValueError(
+                f"parameter-control {label} has a symlinked component: {component}"
+            )
+    metadata = lexical.lstat()
+    expected = stat.S_ISDIR if directory else stat.S_ISREG
+    if not expected(metadata.st_mode):
+        kind = "directory" if directory else "regular file"
+        raise ValueError(f"parameter-control {label} is not a {kind}: {lexical}")
+    return lexical
+
+
+def _parameter_control_inference_inventory(
+    model: Path,
+) -> list[dict[str, str]]:
+    """Recompute every regular inference leaf without following symlinks."""
+
+    rows: list[dict[str, str]] = []
+    for current_value, directory_names, file_names in os.walk(
+        model, topdown=True, followlinks=False
+    ):
+        current = Path(current_value)
+        for name in sorted(directory_names):
+            path = current / name
+            metadata = path.lstat()
+            if stat.S_ISLNK(metadata.st_mode) or not stat.S_ISDIR(metadata.st_mode):
+                raise ValueError(
+                    f"parameter-control inference directory is unsafe: {path}"
+                )
+        for name in sorted(file_names):
+            path = current / name
+            relative = path.relative_to(model).as_posix()
+            metadata = path.lstat()
+            if stat.S_ISLNK(metadata.st_mode) or not stat.S_ISREG(metadata.st_mode):
+                raise ValueError(
+                    f"parameter-control inference artifact is unsafe: {path}"
+                )
+            if relative == "merge_receipt.json":
+                continue
+            rows.append({"path": relative, "sha256": sha256_file(path)})
+    rows.sort(key=lambda row: row["path"])
+    if not rows:
+        raise ValueError("parameter-control model has no inference artifacts")
+    return rows
+
+
+def validate_parameter_control_model(
+    model: Path,
+    *,
+    quick_adapter: Path,
+    deep_adapter: Path,
+    expected_deep_weight: float,
+    expected_model_id: str,
+    expected_revision: str,
+) -> dict[str, Any]:
+    """Authenticate one weighted-adapter control and every inference-artifact byte."""
+
+    model = _safe_parameter_control_path(
+        model, label="model directory", directory=True
+    )
+    quick_adapter = _safe_parameter_control_path(
+        quick_adapter, label="quick adapter directory", directory=True
+    )
+    deep_adapter = _safe_parameter_control_path(
+        deep_adapter, label="deep adapter directory", directory=True
+    )
+    config_path = _safe_parameter_control_path(
+        model / "config.json", label="model config", directory=False
+    )
+    receipt_path = _safe_parameter_control_path(
+        model / "merge_receipt.json", label="merge receipt", directory=False
+    )
+    quick_config = _safe_parameter_control_path(
+        quick_adapter / "adapter_config.json",
+        label="quick adapter config",
+        directory=False,
+    )
+    quick_weights = _safe_parameter_control_path(
+        quick_adapter / "adapter_model.safetensors",
+        label="quick adapter weights",
+        directory=False,
+    )
+    deep_config = _safe_parameter_control_path(
+        deep_adapter / "adapter_config.json",
+        label="deep adapter config",
+        directory=False,
+    )
+    deep_weights = _safe_parameter_control_path(
+        deep_adapter / "adapter_model.safetensors",
+        label="deep adapter weights",
+        directory=False,
+    )
+    try:
+        receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ValueError("parameter-control merge receipt is unreadable") from exc
+    if not isinstance(receipt, dict):
+        raise ValueError("parameter-control merge receipt is malformed")
+
+    deep_weight = receipt.get("deep_weight")
+    applied = receipt.get("applied_lora_modules")
+    nonzero = receipt.get("nonzero_lora_modules")
+    norm_sum = receipt.get("delta_frobenius_norm_sum")
+    if (
+        receipt.get("method") != "explicit_convex_lora_delta_merge"
+        or receipt.get("model") != expected_model_id
+        or receipt.get("revision") != expected_revision
+        or receipt.get("quick_adapter") != str(quick_adapter)
+        or receipt.get("deep_adapter") != str(deep_adapter)
+        or receipt.get("quick_config_sha256") != sha256_file(quick_config)
+        or receipt.get("quick_weights_sha256") != sha256_file(quick_weights)
+        or receipt.get("deep_config_sha256") != sha256_file(deep_config)
+        or receipt.get("deep_weights_sha256") != sha256_file(deep_weights)
+        or type(deep_weight) not in (int, float)
+        or float(deep_weight) != float(expected_deep_weight)
+        or type(applied) is not int
+        or applied < 1
+        or type(nonzero) is not int
+        or nonzero != applied
+        or type(norm_sum) not in (int, float)
+        or not math.isfinite(float(norm_sum))
+        or float(norm_sum) <= 0.0
+    ):
+        raise ValueError("parameter-control merge provenance is stale")
+
+    inference_rows = receipt.get("inference_files")
+    if not isinstance(inference_rows, list) or not inference_rows:
+        raise ValueError(
+            "parameter-control merge receipt lacks an inference inventory"
+        )
+    recorded_inference: list[dict[str, str]] = []
+    for row in inference_rows:
+        if not isinstance(row, dict) or set(row) != {"path", "sha256"}:
+            raise ValueError("parameter-control inference inventory is malformed")
+        relative = row.get("path")
+        digest = row.get("sha256")
+        if (
+            not isinstance(relative, str)
+            or not relative
+            or "\\" in relative
+            or Path(relative).is_absolute()
+            or Path(relative).as_posix() != relative
+            or any(part in {"", ".", ".."} for part in Path(relative).parts)
+            or relative == "merge_receipt.json"
+            or not isinstance(digest, str)
+            or len(digest) != 64
+        ):
+            raise ValueError(
+                "parameter-control inference inventory entry is invalid"
+            )
+        recorded_inference.append({"path": relative, "sha256": digest})
+    actual_inference = _parameter_control_inference_inventory(model)
+    if (
+        recorded_inference
+        != sorted(recorded_inference, key=lambda row: row["path"])
+        or len({row["path"] for row in recorded_inference})
+        != len(recorded_inference)
+    ):
+        raise ValueError("parameter-control inference inventory is not canonical")
+    inference_by_path = {
+        row["path"]: row["sha256"] for row in actual_inference
+    }
+
+    rows = receipt.get("weight_files")
+    if not isinstance(rows, list) or not rows:
+        raise ValueError("parameter-control merge receipt lacks a weight inventory")
+    recorded_names: list[str] = []
+    for row in rows:
+        if not isinstance(row, dict) or set(row) != {"name", "sha256"}:
+            raise ValueError("parameter-control weight inventory is malformed")
+        name = row.get("name")
+        digest = row.get("sha256")
+        if (
+            not isinstance(name, str)
+            or not name.endswith(".safetensors")
+            or Path(name).name != name
+            or not isinstance(digest, str)
+            or len(digest) != 64
+        ):
+            raise ValueError("parameter-control weight inventory entry is invalid")
+        if inference_by_path.get(name) != digest:
+            raise ValueError(
+                f"parameter-control model weight hash mismatch: {model / name}"
+            )
+        recorded_names.append(name)
+    actual_names = sorted(
+        path.name for path in model.iterdir() if path.name.endswith(".safetensors")
+    )
+    if (
+        recorded_names != sorted(recorded_names)
+        or len(recorded_names) != len(set(recorded_names))
+        or recorded_names != actual_names
+    ):
+        raise ValueError("parameter-control model weight inventory is incomplete")
+    if recorded_inference != actual_inference:
+        raise ValueError("parameter-control inference inventory is stale")
+
+    # Reading the config above is intentionally not enough: retain it as a
+    # required regular inference artifact while the receipt authenticates the
+    # exact model construction and every load-relevant output.
+    if config_path.stat().st_size < 1:
+        raise ValueError("parameter-control model config is empty")
+    return receipt
 
 
 def _load_round_manifest(

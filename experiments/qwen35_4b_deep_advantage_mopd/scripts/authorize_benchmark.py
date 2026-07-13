@@ -66,7 +66,10 @@ from control_rematch import (  # noqa: E402
     validate_control_overlay_cache,
     validate_control_rematch_manifest,
 )
-from control_receipts import validate_control_training_receipt  # noqa: E402
+from control_receipts import (  # noqa: E402
+    validate_control_training_receipt,
+    validate_parameter_control_model,
+)
 from io_utils import (  # noqa: E402
     confirmation_evaluator_source_inventory,
     load_config,
@@ -460,6 +463,32 @@ def _audit_offpolicy_training_receipt(
     return receipt
 
 
+def _audit_parameter_control(
+    config: dict,
+    *,
+    model: Path,
+    row: object,
+    expected_weight: float,
+) -> None:
+    """Independently authenticate one parameter-soup model and receipt binding."""
+
+    validate_parameter_control_model(
+        model,
+        quick_adapter=resolve_repo_path(config["model"]["quick_adapter"]),
+        deep_adapter=resolve_repo_path(config["model"]["deep_adapter"]),
+        expected_deep_weight=expected_weight,
+        expected_model_id=str(config["model"]["id"]),
+        expected_revision=str(config["model"]["revision"]),
+    )
+    receipt_path = model / "merge_receipt.json"
+    if (
+        not isinstance(row, dict)
+        or row.get("model") != str(model)
+        or row.get("merge_receipt_sha256") != sha256_file(receipt_path)
+    ):
+        raise ValueError("parameter-control provenance is stale")
+
+
 def _parameter_models(config: dict) -> dict[str, Path]:
     root = resolve_repo_path(config["model"]["artifacts_root"])
     return {
@@ -785,27 +814,15 @@ def _audit_controls(config: dict, config_path: Path) -> tuple[dict, dict[str, Pa
                 raise ValueError("matched-control merge provenance is stale")
         models[name] = model
 
-    quick_weights = sha256_file(
-        resolve_repo_path(config["model"]["quick_adapter"])
-        / "adapter_model.safetensors"
-    )
-    deep_weights = sha256_file(
-        resolve_repo_path(config["model"]["deep_adapter"])
-        / "adapter_model.safetensors"
-    )
     for index, (name, model) in enumerate(expected_parameters.items()):
         row = parameters[name]
-        receipt_path = model / "merge_receipt.json"
-        receipt = _load(receipt_path)
         expected_weight = float(config["controls"]["parameter_merge_deep_weights"][index])
-        if (
-            row.get("model") != str(model)
-            or row.get("merge_receipt_sha256") != sha256_file(receipt_path)
-            or abs(float(receipt.get("deep_weight", -1.0)) - expected_weight) > 1e-12
-            or receipt.get("quick_weights_sha256") != quick_weights
-            or receipt.get("deep_weights_sha256") != deep_weights
-        ):
-            raise ValueError("parameter-control provenance is stale")
+        _audit_parameter_control(
+            config,
+            model=model,
+            row=row,
+            expected_weight=expected_weight,
+        )
         models[name] = model
     return {
         "path": str(CONTROLS.resolve()),

@@ -208,3 +208,21 @@
   The seed-43 integration receipt remains deliberately in progress at two of
   four rounds; this infrastructure interruption is not a scientific stop and
   no capability conclusion exists yet.
+
+## 2026-07-13 — parameter-control outputs now fail closed
+
+- A pre-control transition audit found that the soup25/50/75 merge receipts
+  bound their source adapters and output safetensors, but resume and independent
+  authorization did not rehash those output bytes. Corruption could therefore
+  weaken a sealed comparator without invalidating the controls receipt.
+- Weighted merges now receipt an exhaustive, sorted recursive inventory of
+  every regular inference artifact (weights, model configuration, tokenizer,
+  and nested load assets), rejecting symlinked or non-regular paths. Both the
+  controls runner and the independent authorization path require exact current
+  names and hashes plus the frozen model, revision, adapters, mixture weight,
+  and merge semantics.
+- Regression coverage fails on mutated, missing, extra, and symlinked weight,
+  configuration, tokenizer, and nested artifacts, including both resume and
+  independent-audit call paths. All 199 experiment tests pass in the pinned
+  training environment. No parameter-control output existed when this was
+  fixed, so no result or frozen scientific choice changed.

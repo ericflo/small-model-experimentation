@@ -39,7 +39,10 @@ from control_rematch import (  # noqa: E402
     validate_control_overlay_cache,
     validate_control_rematch_manifest,
 )
-from control_receipts import validate_control_training_receipt  # noqa: E402
+from control_receipts import (  # noqa: E402
+    validate_control_training_receipt,
+    validate_parameter_control_model,
+)
 from io_utils import (  # noqa: E402
     canonical_hash,
     confirmation_evaluator_source_inventory,
@@ -1287,15 +1290,19 @@ def _build_parameter_controls(config: dict) -> dict[str, Path]:
                 ],
                 training=True,
             )
-        receipt = json.loads((out / "merge_receipt.json").read_text(encoding="utf-8"))
-        if (
-            abs(float(receipt.get("deep_weight", -1.0)) - value) > 1e-12
-            or receipt.get("quick_weights_sha256")
-            != sha256_file(paths["quick_adapter"] / "adapter_model.safetensors")
-            or receipt.get("deep_weights_sha256")
-            != sha256_file(paths["deep_adapter"] / "adapter_model.safetensors")
-        ):
-            raise SystemExit(f"parameter-soup control provenance failed: {out}")
+        try:
+            validate_parameter_control_model(
+                out,
+                quick_adapter=paths["quick_adapter"],
+                deep_adapter=paths["deep_adapter"],
+                expected_deep_weight=value,
+                expected_model_id=str(config["model"]["id"]),
+                expected_revision=str(config["model"]["revision"]),
+            )
+        except ValueError as error:
+            raise SystemExit(
+                f"parameter-soup control provenance failed: {out}: {error}"
+            ) from error
         result[name] = out
     return result
 

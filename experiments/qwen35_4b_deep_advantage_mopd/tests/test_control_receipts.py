@@ -19,6 +19,7 @@ sys.path.insert(0, str(EXP / "scripts"))
 
 import authorize_benchmark  # noqa: E402
 import control_receipts  # noqa: E402
+import merge_weighted_adapters  # noqa: E402
 import run as run_script  # noqa: E402
 from control_receipts import validate_control_training_receipt  # noqa: E402
 from io_utils import sha256_file  # noqa: E402
@@ -35,6 +36,92 @@ CONFIG = {
     }
 }
 TARGET_PRESSURE = 0.05
+PARAMETER_MODEL_ID = "Qwen/Qwen3.5-4B"
+PARAMETER_REVISION = "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
+
+
+def _parameter_control_fixture(root: Path) -> dict:
+    quick = root / "quick"
+    deep = root / "deep"
+    artifacts = root / "artifacts"
+    model = artifacts / "merged" / "soup25"
+    for path in (quick, deep, model):
+        path.mkdir(parents=True)
+    for adapter, marker in ((quick, b"quick"), (deep, b"deep")):
+        (adapter / "adapter_config.json").write_text(
+            '{"target_modules":["q_proj"]}\n', encoding="utf-8"
+        )
+        (adapter / "adapter_model.safetensors").write_bytes(marker)
+    model_config = model / "config.json"
+    model_config.write_text(
+        '{"model_type":"qwen3_5"}\n', encoding="utf-8"
+    )
+    tokenizer = model / "tokenizer.json"
+    tokenizer.write_text('{"model":{"type":"BPE"}}\n', encoding="utf-8")
+    tokenizer_config = model / "tokenizer_config.json"
+    tokenizer_config.write_text('{"model_max_length":16384}\n', encoding="utf-8")
+    nested = model / "assets" / "prompt.json"
+    nested.parent.mkdir()
+    nested.write_text('{"template":"frozen"}\n', encoding="utf-8")
+    weight = model / "model.safetensors"
+    weight.write_bytes(b"parameter-control-weight")
+    inference_files = [
+        {
+            "path": path.relative_to(model).as_posix(),
+            "sha256": sha256_file(path),
+        }
+        for path in sorted(model.rglob("*"))
+        if path.is_file()
+    ]
+    receipt = {
+        "method": "explicit_convex_lora_delta_merge",
+        "model": PARAMETER_MODEL_ID,
+        "revision": PARAMETER_REVISION,
+        "quick_adapter": str(quick.resolve()),
+        "quick_config_sha256": sha256_file(quick / "adapter_config.json"),
+        "quick_weights_sha256": sha256_file(
+            quick / "adapter_model.safetensors"
+        ),
+        "deep_adapter": str(deep.resolve()),
+        "deep_config_sha256": sha256_file(deep / "adapter_config.json"),
+        "deep_weights_sha256": sha256_file(deep / "adapter_model.safetensors"),
+        "deep_weight": 0.25,
+        "applied_lora_modules": 1,
+        "nonzero_lora_modules": 1,
+        "delta_frobenius_norm_sum": 1.0,
+        "merge_device": "cuda",
+        "fp32_tf32_allowed": False,
+        "weight_files": [
+            {"name": weight.name, "sha256": sha256_file(weight)}
+        ],
+        "inference_files": inference_files,
+    }
+    receipt_path = model / "merge_receipt.json"
+    receipt_path.write_text(
+        json.dumps(receipt, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    return {
+        "artifacts": artifacts,
+        "quick": quick,
+        "deep": deep,
+        "model": model,
+        "model_config": model_config,
+        "tokenizer": tokenizer,
+        "tokenizer_config": tokenizer_config,
+        "nested": nested,
+        "weight": weight,
+        "receipt": receipt_path,
+        "config": {
+            "model": {
+                "id": PARAMETER_MODEL_ID,
+                "revision": PARAMETER_REVISION,
+                "quick_adapter": str(quick.resolve()),
+                "deep_adapter": str(deep.resolve()),
+            },
+            "controls": {"parameter_merge_deep_weights": [0.25]},
+        },
+    }
 
 
 def _receipt(arm: str) -> dict:
@@ -376,6 +463,168 @@ def _offpolicy_bound_fixture(root: Path) -> tuple[dict, dict]:
 
 
 class ControlReceiptTests(unittest.TestCase):
+    def test_weighted_merge_receipts_recursive_inference_files(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            output = root / "output"
+            nested = output / "assets"
+            nested.mkdir(parents=True)
+            config = output / "config.json"
+            tokenizer = nested / "tokenizer.json"
+            config.write_text("{}\n", encoding="utf-8")
+            tokenizer.write_text("{}\n", encoding="utf-8")
+            self.assertEqual(
+                merge_weighted_adapters._inference_file_inventory(output),
+                [
+                    {
+                        "path": "assets/tokenizer.json",
+                        "sha256": sha256_file(tokenizer),
+                    },
+                    {"path": "config.json", "sha256": sha256_file(config)},
+                ],
+            )
+            outside = root / "outside.json"
+            outside.write_text("{}\n", encoding="utf-8")
+            (output / "alias.json").symlink_to(outside)
+            with self.assertRaisesRegex(ValueError, "artifact is unsafe"):
+                merge_weighted_adapters._inference_file_inventory(output)
+            linked_output = root / "linked-output"
+            linked_output.symlink_to(output, target_is_directory=True)
+            with self.assertRaisesRegex(ValueError, "output root is unsafe"):
+                merge_weighted_adapters._inference_file_inventory(linked_output)
+
+    def test_parameter_control_inference_inventory_fails_closed(self):
+        def symlink_tokenizer(fixture: dict) -> None:
+            target = fixture["model"].parent / "external-tokenizer.json"
+            target.write_bytes(fixture["tokenizer"].read_bytes())
+            fixture["tokenizer"].unlink()
+            fixture["tokenizer"].symlink_to(target)
+
+        def symlink_directory(fixture: dict) -> None:
+            target = fixture["model"].parent / "external-assets"
+            target.mkdir()
+            (target / "payload.json").write_text("{}\n", encoding="utf-8")
+            (fixture["model"] / "linked-assets").symlink_to(
+                target, target_is_directory=True
+            )
+
+        mutations = {
+            "weight_mutated": (
+                lambda fixture: fixture["weight"].write_bytes(b"mutated"),
+                "weight hash mismatch",
+            ),
+            "weight_missing": (
+                lambda fixture: fixture["weight"].unlink(),
+                "weight hash mismatch",
+            ),
+            "weight_extra": (
+                lambda fixture: (
+                    fixture["model"] / "extra.safetensors"
+                ).write_bytes(b"extra"),
+                "weight inventory is incomplete",
+            ),
+            "config_mutated": (
+                lambda fixture: fixture["model_config"].write_text(
+                    '{"model_type":"weakened"}\n', encoding="utf-8"
+                ),
+                "inference inventory is stale",
+            ),
+            "config_missing": (
+                lambda fixture: fixture["model_config"].unlink(),
+                "model config.*missing",
+            ),
+            "tokenizer_mutated": (
+                lambda fixture: fixture["tokenizer"].write_text(
+                    '{"model":{"type":"weakened"}}\n', encoding="utf-8"
+                ),
+                "inference inventory is stale",
+            ),
+            "tokenizer_missing": (
+                lambda fixture: fixture["tokenizer"].unlink(),
+                "inference inventory is stale",
+            ),
+            "tokenizer_extra": (
+                lambda fixture: (
+                    fixture["model"] / "special_tokens_map.json"
+                ).write_text(
+                    '{"additional_special_tokens":["<weakened>"]}\n',
+                    encoding="utf-8",
+                ),
+                "inference inventory is stale",
+            ),
+            "tokenizer_symlink": (
+                symlink_tokenizer,
+                "inference artifact is unsafe",
+            ),
+            "directory_symlink": (
+                symlink_directory,
+                "inference directory is unsafe",
+            ),
+        }
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            valid = _parameter_control_fixture(root / "valid")
+            control_receipts.validate_parameter_control_model(
+                valid["model"],
+                quick_adapter=valid["quick"],
+                deep_adapter=valid["deep"],
+                expected_deep_weight=0.25,
+                expected_model_id=PARAMETER_MODEL_ID,
+                expected_revision=PARAMETER_REVISION,
+            )
+            for name, (mutate, message) in mutations.items():
+                with self.subTest(name=name):
+                    fixture = _parameter_control_fixture(root / name)
+                    mutate(fixture)
+                    with self.assertRaisesRegex(ValueError, message):
+                        control_receipts.validate_parameter_control_model(
+                            fixture["model"],
+                            quick_adapter=fixture["quick"],
+                            deep_adapter=fixture["deep"],
+                            expected_deep_weight=0.25,
+                            expected_model_id=PARAMETER_MODEL_ID,
+                            expected_revision=PARAMETER_REVISION,
+                        )
+
+    def test_parameter_control_resume_reauthenticates_output_weights(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            fixture = _parameter_control_fixture(Path(temporary))
+            fixture["weight"].write_bytes(b"mutated-after-publication")
+            paths = {
+                "root": fixture["artifacts"],
+                "quick_adapter": fixture["quick"],
+                "deep_adapter": fixture["deep"],
+            }
+            with mock.patch.object(
+                run_script, "_paths", return_value=paths
+            ), mock.patch.object(run_script, "_run") as runner, self.assertRaisesRegex(
+                SystemExit, "weight hash mismatch"
+            ):
+                run_script._build_parameter_controls(fixture["config"])
+            runner.assert_not_called()
+
+    def test_independent_parameter_audit_reauthenticates_output_weights(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            fixture = _parameter_control_fixture(Path(temporary))
+            row = {
+                "model": str(fixture["model"].resolve()),
+                "merge_receipt_sha256": sha256_file(fixture["receipt"]),
+            }
+            authorize_benchmark._audit_parameter_control(
+                fixture["config"],
+                model=fixture["model"].resolve(),
+                row=row,
+                expected_weight=0.25,
+            )
+            fixture["weight"].write_bytes(b"mutated-after-controls-receipt")
+            with self.assertRaisesRegex(ValueError, "weight hash mismatch"):
+                authorize_benchmark._audit_parameter_control(
+                    fixture["config"],
+                    model=fixture["model"].resolve(),
+                    row=row,
+                    expected_weight=0.25,
+                )
+
     def test_all_control_receipts_realize_exact_frozen_semantics(self):
         for arm in ("non_advantage_route", "wrong_teacher", "offpolicy_sft"):
             with self.subTest(arm=arm):
