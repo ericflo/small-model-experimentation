@@ -4,10 +4,10 @@
 
 This source-bound review records the executable go/no-go decision separately from the immutable
 scientific design receipt. The runner, initialization and checkpoint lineage, sealed-data firewall,
-optimizer receipts, analyzer, and terminal branch taxonomy pass the complete 133-test local
+optimizer receipts, analyzer, and terminal branch taxonomy pass the complete 135-test local
 experiment suite plus independent adversarial science, CLI-matrix, and prose audits. Focused
 sealed-data and replay-lineage coverage passes 14/14 tests, and the static/CLI/provenance contract
-passes 26/26.
+passes 27/27.
 
 The first real CPU-smoke attempt exposed an empty-authorization sentinel defect before any model or
 result data ran. Execution authorization was retracted while it was repaired. The final runner now
@@ -32,8 +32,25 @@ fail closed. The real cache proof covers nine files totaling 9,342,815,919 bytes
 An independent post-repair audit gives `GO` under the repository's standard trusted-Hugging-Face-cache
 threat model.
 
+The corrected seed-7411 retry subsequently reached the final G0 receipt write after passing every
+registered in-memory check, but the two-step probe had rebound the canonical `output` path parameter
+to a `StateLoopOutput`. The final writer therefore failed before creating a durable receipt. No
+sealed contrast, positive control, result training, or evaluation ran, and all setup artifacts bound
+to that source contract are preserved in a separate invalidated archive. The repair renames the probe
+value, detaches a diagnostic before scalar conversion, and adds an AST regression that prohibits any
+store to the `model_smoke` output-path parameter. An independent function-level scan found no
+analogous destination shadow in CPU smoke, design freeze, data or initialization preparation,
+positive control, training, checkpoint saving, evaluation, or analysis.
+
+That audit also detected that the four hand-authored historical failure/archive receipts had hashed
+a trailing newline while the runtime identity contract hashes compact canonical JSON. Their evidence
+payloads and archived file manifests were correct; all four claimed identity fields were recomputed
+without changing evidence content. A new regression reopens every tracked `runs/failures/*.json`
+receipt with the runtime identity function. The full post-repair suite passes 135/135, including the
+new destination-shadow and historical-receipt checks. Independent re-review gives `GO`.
+
 This `GO` preserves the already frozen scientific design and authorizes regeneration of every
-old-source setup artifact followed by a fresh attempt at the live gates. It is not scientific evidence
+invalidated-source setup artifact followed by a fresh attempt at the live gates. It is not scientific evidence
 and does not waive G0, positive-control, hardware, parity, or branch-completeness requirements. Any
 later mechanical source repair likewise changes the source-contract digest and requires downstream
 data, initialization, and setup artifacts to be regenerated.

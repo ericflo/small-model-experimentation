@@ -175,7 +175,7 @@
   unchanged.
 - Preserved all 19 invalidated files (17,651,037 bytes) under the external `invalidated_setup/`
   archive. The tracked archive receipt reopens every byte count and SHA-256 and has identity
-  `67980d0a937ba3b9c53d1ac862e697bb8e65ddfda4a6513f5ab4040b4a34770d`.
+  `e29f2059058b621903c1bbf2933dd56aa0e500a0c73b70ffc8b19f72faa85014`.
 
 ## 2026-07-13 — corrected-source setup regenerated
 
@@ -193,8 +193,41 @@
   `cd9923902e25f04ba5aca0ba001f036aa5ac6e8ae6792ac059d78773f22b1bf3`, respectively. Every bundle
   reopened and each tracked receipt is byte-identical to its external sidecar.
 
+## 2026-07-13 — G0 reached final persistence, then path shadowing stopped it
+
+- The corrected seed-7411 retry passed pinned-snapshot proof and every registered in-memory G0 check,
+  including PEFT output/gradient parity, K=1 parity, K=4/K=12 call geometry, two-step and live joint
+  gradients, optimizer/clipping receipts, timing, finite worst-depth output, checkpoint roundtrip,
+  RNG isolation, and VRAM headroom.
+- The final `_write_json(output, receipt)` then received the last `StateLoopOutput` tensor container
+  rather than the canonical `Path`: the two-step probe had reused the parameter name `output` as a
+  local. Python function scoping retained that shadow through the final write. No canonical G0 receipt
+  was created, so the in-memory pass is not durable evidence and authorizes neither positive control
+  nor result training.
+- Preserved the exact failure at
+  `runs/failures/g0_lora_seed7411_receipt_path_shadow_failure.json`. The training payload was the only
+  result payload opened; no sealed contrast was opened and no positive-control/training/evaluation
+  stage ran.
+- Renamed the local to `probe_output` and added an AST regression prohibiting any assignment to the
+  canonical `output` parameter inside `model_smoke`. Audited all runtime sources: this was the only
+  G0/path-parameter shadow. Also detached the PEFT diagnostic before scalar conversion to remove its
+  non-semantic autograd warning.
+- Archived every setup artifact bound to source contract `9fd420f5…614fb` at
+  `large_artifacts/qwen35_4b_state_formation_capacity_adjudication/invalidated_setup/source_9fd420f5f29fea2d9144bf50d3b187fc8e50d9acc9cb076656372281029614fb/`.
+  The tracked archive receipt has identity
+  `7f974f52e153eb2fe7a3985c8221cfa8f7cd2d8440eb63d608abf03a63651d47` and independently reopens all
+  19 files totaling 17,651,037 bytes.
+- An independent audit found that all four hand-authored historical receipts had included a trailing
+  newline in their claimed self-hash, unlike the runtime's compact canonical-JSON identity. Corrected
+  the four identity fields without changing their evidence payloads and added a regression that
+  revalidates every tracked `runs/failures/*.json` receipt against the runtime identity function.
+- Final independent re-review is `GO`: the full suite passes 135/135, the static contract passes
+  27/27, both 19-file archives reopen byte-for-byte, and the post-review source contract is
+  `3baa7b532d62bae4d9751dfe4be9c6ce314c11ca4524266f4cebea63289d5c42`.
+
 ## Current authorization
 
-Corrected-source setup is complete and the sealed contrast ledger is fresh. The three LoRA G0
-mechanics gates and corresponding setup-only positive controls are authorized in seed order. Result
-training remains prohibited for each seed until both of its gates pass.
+The receipt-persistence repair and corrected historical identities pass independent review. Fresh
+CPU smoke, procedural data, empty seal ledger, and common initialization bundles are authorized under
+the resulting source contract. A new seed-7411 G0 remains prohibited until that setup is regenerated
+and reopened. No positive control or result training is authorized until its seed-matched G0 passes.

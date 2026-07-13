@@ -843,6 +843,24 @@ class StaticContractTests(unittest.TestCase):
         self.assertIn('"answer_loss": float(joint_output.answer_loss.detach().cpu())', joint)
         self.assertIn('"all_joint_trainable_groups_finite_nonzero"', joint)
 
+    def test_model_smoke_never_shadows_its_canonical_output_path(self) -> None:
+        path = ROOT / "src" / "gpu_runner.py"
+        source = path.read_text(encoding="utf-8")
+        tree = ast.parse(source, filename=str(path))
+        smoke = next(
+            node
+            for node in tree.body
+            if isinstance(node, ast.FunctionDef) and node.name == "model_smoke"
+        )
+        shadowing_stores = [
+            node
+            for node in ast.walk(smoke)
+            if isinstance(node, ast.Name)
+            and isinstance(node.ctx, ast.Store)
+            and node.id == "output"
+        ]
+        self.assertEqual(shadowing_stores, [])
+
     def test_pinned_snapshot_receipt_binds_every_weight_and_tokenizer_file(self) -> None:
         from src import gpu_runner
 

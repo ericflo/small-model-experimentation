@@ -4,13 +4,18 @@ external_artifacts:
   - name: "invalidated pre-repair setup archive"
     storage: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/invalidated_setup/source_903f19141ef982f0e90ea856edd72d75fb48d2dbd96e81dc166a6c32d4c14116/"
     required_for: "audit of the source-bound G0 mechanics failure and exact preservation of every invalidated setup payload"
-    checksum: "tracked receipt runs/failures/invalidated_setup_source_903f1914.json; receipt identity 67980d0a937ba3b9c53d1ac862e697bb8e65ddfda4a6513f5ab4040b4a34770d; 19 files; 17,651,037 bytes"
+    checksum: "tracked receipt runs/failures/invalidated_setup_source_903f1914.json; receipt identity e29f2059058b621903c1bbf2933dd56aa0e500a0c73b70ffc8b19f72faa85014; 19 files; 17,651,037 bytes"
+    regenerate: "not regenerable as historical evidence; preserve this exact content-hashed archive"
+  - name: "invalidated receipt-path repair setup archive"
+    storage: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/invalidated_setup/source_9fd420f5f29fea2d9144bf50d3b187fc8e50d9acc9cb076656372281029614fb/"
+    required_for: "audit of the seed-7411 G0 receipt-persistence failure and exact preservation of every invalidated setup payload"
+    checksum: "tracked receipt runs/failures/invalidated_setup_source_9fd420f5.json; receipt identity 7f974f52e153eb2fe7a3985c8221cfa8f7cd2d8440eb63d608abf03a63651d47; 19 files; 17,651,037 bytes"
     regenerate: "not regenerable as historical evidence; preserve this exact content-hashed archive"
   - name: "per-seed common loop-state initialization bundles"
     storage: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed{7411,7412,7413}.pt"
     required_for: "bit-identical reconstruction of every reached capacity/objective arm"
-    checksum: "seed7411=fbb40b74d97fd07dd0e6590382f99834d5091e1467df1f3edda814092f386c77; seed7412=b05cbafcf9a100dd80309a5b50309649372fe6841e32cdd38d37b15bdcaba6ed; seed7413=cd9923902e25f04ba5aca0ba001f036aa5ac6e8ae6792ac059d78773f22b1bf3"
-    regenerate: "already realized under source contract 9fd420f5f29fea2d9144bf50d3b187fc8e50d9acc9cb076656372281029614fb; preserve these exact external bundles and tracked mirrors"
+    checksum: "not currently realized; the source-9fd420f5 bundles are invalidated and preserved only in their historical archive"
+    regenerate: "create fresh bundles under the post-repair source contract after implementation-review GO; preserve the resulting external tensors and tracked mirrors"
   - name: "fixed-final LoRA joint checkpoints"
     storage: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/lora_joint_seed{7411,7412,7413}/"
     required_for: "primary LoRA state-formation adjudication and intact/disabled reevaluation"
@@ -46,17 +51,19 @@ reproducibility:
   full_command: "phase-gated and intentionally non-monolithic: follow docs/gpu_runbook.md; every result stage verifies its exact upstream receipts and branch authorization"
   required_external_artifacts:
     - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/invalidated_setup/source_903f19141ef982f0e90ea856edd72d75fb48d2dbd96e81dc166a6c32d4c14116/"
-    - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed7411.pt"
-    - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed7412.pt"
-    - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed7413.pt"
+    - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/invalidated_setup/source_9fd420f5f29fea2d9144bf50d3b187fc8e50d9acc9cb076656372281029614fb/"
 notes: >-
-  The immutable design receipt remains authoritative. All setup artifacts produced under the old
-  source digest are invalid and preserved in a content-hashed external archive. Corrected-source CPU
-  smoke, fresh data, empty contrast ledger, and initialization bundles are now realized and reopen
-  exactly under source contract 9fd420f5f29fea2d9144bf50d3b187fc8e50d9acc9cb076656372281029614fb.
+  The immutable design receipt remains authoritative. Setup artifacts produced under source digests
+  903f1914 and 9fd420f5 are invalid and preserved in separate content-hashed external archives. No
+  current CPU smoke, data manifest, contrast ledger, or initialization bundle exists. The
+  receipt-path repair has implementation-review GO; each setup artifact must now be regenerated under
+  the resulting source contract before G0 can run.
   The first Qwen load stopped before wrapper construction or mechanics and is preserved by a tracked
   failure receipt; it opened
   only the permitted training validator, no sealed contrast, and produced no canonical G0 output.
+  The second Qwen load passed every registered in-memory G0 mechanic but failed at the final receipt
+  write because a local probe value shadowed the output path. It also produced no canonical G0
+  output, opened no sealed contrast, and authorizes no positive control or result-bearing stage.
   No positive-control or result-bearing artifact exists. Populate exact SHA256 values only from
   regenerated receipts after each later artifact is created. Small data manifests,
   the contrast access ledger, the canonical reports/design_receipt.json, initialization receipts,

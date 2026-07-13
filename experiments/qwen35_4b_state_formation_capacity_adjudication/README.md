@@ -1,6 +1,6 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · frozen design unchanged; revision-provenance correction is `GO`; corrected-source setup is complete; LoRA G0 retry is next
+**Status:** in-progress · since 2026-07-13 · frozen design unchanged; receipt-path fix and historical receipt identities pass review; fresh source-bound setup regeneration is next; no result run has started
 
 ## Current status
 
@@ -12,11 +12,18 @@ wrapper construction or any mechanics probe because the pinned runtime drops the
 when it derives the Qwen text config. No sealed contrast was opened, no canonical G0 receipt was
 written, and no positive control, result training, evaluation, or scientific analysis ran. The
 source-bound correction records and commit-verifies every config/tokenizer/index/shard path through one
-pinned snapshot, forces local-only safetensors loading, passes 133/133 tests, and has independent
-implementation-review `GO`. The prior-source setup is preserved as invalidated history. CPU smoke,
+pinned snapshot, forces local-only safetensors loading, and passed its independent implementation
+review. The prior-source setup is preserved as invalidated history. CPU smoke,
 all seven procedural splits, the empty contrast-access ledger, and all three common initialization
-bundles have now been regenerated under source digest `9fd420f5…614fb` and independently reopened.
-The next step is to retry the three LoRA G0 gates and their seed-matched setup-only positive controls.
+bundles were regenerated under source digest `9fd420f5…614fb` and independently reopened. The retry
+then passed every transient G0 check, including snapshot proof and PEFT parity, but failed before
+durable receipt creation because a local state-output tensor had shadowed the canonical output path.
+That is mechanics evidence only and authorizes nothing. The minimal rename has a regression test, and
+an independent scan found no analogous destination shadow in any other stage. The complete
+source-`9fd420f5` setup is preserved in a second invalidated archive. The audit also caught a newline
+error in all four hand-authored historical receipt identities; the identities are corrected and now
+covered by an automatic corpus-wide check. The corrected source passes 135/135 tests. Fresh setup must
+now be regenerated under the resulting source contract before another G0 retry.
 
 ## Research program and prior anchors
 

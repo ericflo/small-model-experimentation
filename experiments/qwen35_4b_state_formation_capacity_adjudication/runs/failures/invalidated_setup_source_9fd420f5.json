@@ -1,0 +1,112 @@
+{
+  "archive_path": "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/invalidated_setup/source_9fd420f5f29fea2d9144bf50d3b187fc8e50d9acc9cb076656372281029614fb",
+  "benchmark_files_read": 0,
+  "experiment_id": "qwen35_4b_state_formation_capacity_adjudication",
+  "files": [
+    {
+      "bytes": 1245,
+      "path": "data_generated/contrast_access_ledger.json",
+      "sha256": "426d1f449821939881da9616ba265907fb2a1744b1ebd71fb4159c9bee3b6834"
+    },
+    {
+      "bytes": 558462,
+      "path": "data_generated/contrast_depth.jsonl.gz",
+      "sha256": "b82b53fdaf8798f25ed8084f6c535e479aa95ca9b3bc55bc3f9024d80f272444"
+    },
+    {
+      "bytes": 536402,
+      "path": "data_generated/contrast_joint.jsonl.gz",
+      "sha256": "823ce551ca068def7d25b8724550083a64ae8db374c9bfb7c14e752d7af8a803"
+    },
+    {
+      "bytes": 403740,
+      "path": "data_generated/contrast_validation.jsonl.gz",
+      "sha256": "0692f8b1dfc9a96b067859ffd73549191045feaf45b2088acf8c9fc045a7247b"
+    },
+    {
+      "bytes": 558226,
+      "path": "data_generated/depth_extrapolation.jsonl.gz",
+      "sha256": "8d31d4a925d951392d133e69e42d87f1d18e3b4b7e9bf78346e263200801f0f3"
+    },
+    {
+      "bytes": 536544,
+      "path": "data_generated/joint_holdout.jsonl.gz",
+      "sha256": "ee2aabab67df7bf1ec40ff844c391ea24d18edb32e4fb23d708946f234bb103b"
+    },
+    {
+      "bytes": 1378739,
+      "path": "data_generated/manifest.json",
+      "sha256": "fa871390b28a9a0119ad77957bc1b403cc7008aa7052a539e6788aa8d871be4c"
+    },
+    {
+      "bytes": 6262349,
+      "path": "data_generated/train.jsonl.gz",
+      "sha256": "2a09d336a8224856b41ac29b056b110f3089e7f0e7c49f4a63001793fda572b1"
+    },
+    {
+      "bytes": 536029,
+      "path": "data_generated/validation.jsonl.gz",
+      "sha256": "b2be96a63b1e27f990ecf3430db1473989e7e46245dd37a6ef524e7f3ddfc3b2"
+    },
+    {
+      "bytes": 2282758,
+      "path": "initialization/initialization_seed7411.pt",
+      "sha256": "fbb40b74d97fd07dd0e6590382f99834d5091e1467df1f3edda814092f386c77"
+    },
+    {
+      "bytes": 5012,
+      "path": "initialization/initialization_seed7411.pt.json",
+      "sha256": "8049d27051c5a2fabb1411339a5ed8adb21ab8a31e44e797017a41aa7926c6e9"
+    },
+    {
+      "bytes": 2282758,
+      "path": "initialization/initialization_seed7412.pt",
+      "sha256": "b05cbafcf9a100dd80309a5b50309649372fe6841e32cdd38d37b15bdcaba6ed"
+    },
+    {
+      "bytes": 5012,
+      "path": "initialization/initialization_seed7412.pt.json",
+      "sha256": "06802e39664cb7421d3a62aa60f4e25efd9ada8b31549b4f4ba60ebeab5d2847"
+    },
+    {
+      "bytes": 2282758,
+      "path": "initialization/initialization_seed7413.pt",
+      "sha256": "cd9923902e25f04ba5aca0ba001f036aa5ac6e8ae6792ac059d78773f22b1bf3"
+    },
+    {
+      "bytes": 5011,
+      "path": "initialization/initialization_seed7413.pt.json",
+      "sha256": "2a6b2b8ecc321d6c8cd97771172d97bd8c6358e2e55703aced6aea606a914551"
+    },
+    {
+      "bytes": 957,
+      "path": "tracked_receipts/cpu_smoke_receipt.json",
+      "sha256": "f2b1fcd7d3b99d09765bf484cd77e7477e2f0ea6097219fba4f9660477ba9ec6"
+    },
+    {
+      "bytes": 5012,
+      "path": "tracked_receipts/initialization_seed7411.json",
+      "sha256": "8049d27051c5a2fabb1411339a5ed8adb21ab8a31e44e797017a41aa7926c6e9"
+    },
+    {
+      "bytes": 5012,
+      "path": "tracked_receipts/initialization_seed7412.json",
+      "sha256": "06802e39664cb7421d3a62aa60f4e25efd9ada8b31549b4f4ba60ebeab5d2847"
+    },
+    {
+      "bytes": 5011,
+      "path": "tracked_receipts/initialization_seed7413.json",
+      "sha256": "2a6b2b8ecc321d6c8cd97771172d97bd8c6358e2e55703aced6aea606a914551"
+    }
+  ],
+  "invalidated_source_contract_sha256": "9fd420f5f29fea2d9144bf50d3b187fc8e50d9acc9cb076656372281029614fb",
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "phase": "setup_source_invalidation",
+  "receipt_identity_sha256": "7f974f52e153eb2fe7a3985c8221cfa8f7cd2d8440eb63d608abf03a63651d47",
+  "schema_version": 1,
+  "scientific_evidence": false,
+  "status": "INVALIDATED_SETUP_ARCHIVED",
+  "total_bytes": 17651037,
+  "trigger_failure_receipt": "experiments/qwen35_4b_state_formation_capacity_adjudication/runs/failures/g0_lora_seed7411_receipt_path_shadow_failure.json"
+}

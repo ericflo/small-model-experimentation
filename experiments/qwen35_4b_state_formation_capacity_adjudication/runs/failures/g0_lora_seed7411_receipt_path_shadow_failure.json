@@ -1,0 +1,29 @@
+{
+  "all_registered_in_memory_g0_checks_passed": true,
+  "benchmark_files_read": 0,
+  "canonical_output_created": false,
+  "capacity": "lora",
+  "command_stage": "model-smoke",
+  "data_manifest_sha256": "fa871390b28a9a0119ad77957bc1b403cc7008aa7052a539e6788aa8d871be4c",
+  "design_receipt_identity_sha256": "d943b909250c2ebd377b8094bb55324a5d5ccf555c7559736526f013d248ac52",
+  "error": "'StateLoopOutput' object has no attribute 'parent'",
+  "error_type": "AttributeError",
+  "experiment_id": "qwen35_4b_state_formation_capacity_adjudication",
+  "failure_location": "src/gpu_runner.py:model_smoke final _write_json",
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_loaded": true,
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "model_seed": 7411,
+  "phase": "lora_g0_receipt_persistence",
+  "pinned_snapshot_proof_passed": true,
+  "receipt_identity_sha256": "ae3e34fcf536ebfd8fdb1532bc8844fbb1470a34b147674290ec652199d70ead",
+  "result_payloads_opened": [
+    "train"
+  ],
+  "schema_version": 1,
+  "scientific_evidence": false,
+  "sealed_contrast_payloads_opened": [],
+  "source_contract_sha256": "9fd420f5f29fea2d9144bf50d3b187fc8e50d9acc9cb076656372281029614fb",
+  "status": "SETUP_MECHANICS_FAILURE_PRESERVED",
+  "training_or_evaluation_started": false
+}

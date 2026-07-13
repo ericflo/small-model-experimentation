@@ -70,6 +70,15 @@ class DurableLineageTests(unittest.TestCase):
                     label="synthetic G0",
                 )
 
+    def test_every_preserved_failure_receipt_has_canonical_identity(self) -> None:
+        paths = sorted((ROOT / "runs" / "failures").glob("*.json"))
+        self.assertGreater(len(paths), 0)
+        for path in paths:
+            with self.subTest(path=path.name):
+                payload = json.loads(path.read_text(encoding="utf-8"))
+                claimed = payload.pop("receipt_identity_sha256")
+                self.assertEqual(gpu_runner._canonical_sha256(payload), claimed)
+
     def test_lineage_reopens_file_and_rejects_payload_status_and_phase_tamper(self) -> None:
         # _lineage deliberately permits only repository-relative durable files.
         with tempfile.TemporaryDirectory(dir=ROOT / "tests") as directory:

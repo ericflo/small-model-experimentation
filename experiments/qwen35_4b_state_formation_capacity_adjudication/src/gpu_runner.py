@@ -652,7 +652,9 @@ def _peft_formula_parity_receipt() -> dict[str, Any]:
             custom_dropout = custom.end_microbatch()
             reference_output.sum().backward()
             custom_output.sum().backward()
-            output_error = float((reference_output - custom_output).abs().max().float().cpu())
+            output_error = float(
+                (reference_output - custom_output).detach().abs().max().float().cpu()
+            )
             a_gradient_error = float(
                 (
                     reference.lora_A["default"].weight.grad.float()
@@ -1061,8 +1063,8 @@ def model_smoke(
         )
         wrapper.adaptation.begin_microbatch(dropout_seed, capture_masks=True)
         with torch.autocast("cuda", dtype=torch.bfloat16):
-            output = _forward(wrapper, batch, k=4, compute_answer=False)
-            loss = _objective_loss(output, config, "state_only")
+            probe_output = _forward(wrapper, batch, k=4, compute_answer=False)
+            loss = _objective_loss(probe_output, config, "state_only")
         loss.backward()
         dropout_probe = wrapper.adaptation.end_microbatch()
         if (
