@@ -1,0 +1,46 @@
+{
+  "tag": "expl1_8192",
+  "adapter": null,
+  "merged": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_gauntlet_frontier/merged/exploration1",
+  "gen_seed": 90001,
+  "think_budget": 8192,
+  "seconds": 43.5,
+  "cells": {
+    "burrowmaze/atom/L1": {
+      "n": 15,
+      "mean": 1.0,
+      "parse_fail": 0,
+      "forced_close": 0
+    },
+    "burrowmaze/atom/L2": {
+      "n": 15,
+      "mean": 1.0,
+      "parse_fail": 0,
+      "forced_close": 0
+    },
+    "burrowmaze/atom/L3": {
+      "n": 15,
+      "mean": 1.0,
+      "parse_fail": 0,
+      "forced_close": 0
+    },
+    "burrowmaze/atom/L4": {
+      "n": 15,
+      "mean": 1.0,
+      "parse_fail": 0,
+      "forced_close": 0
+    },
+    "burrowmaze/atom/L5": {
+      "n": 15,
+      "mean": 1.0,
+      "parse_fail": 0,
+      "forced_close": 0
+    },
+    "burrowmaze/atom/L6": {
+      "n": 15,
+      "mean": 0.8,
+      "parse_fail": 0,
+      "forced_close": 0
+    }
+  }
+}

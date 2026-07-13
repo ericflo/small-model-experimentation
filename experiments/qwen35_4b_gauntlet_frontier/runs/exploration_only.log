@@ -1,0 +1,211 @@
+===== TRAIN exploration1 =====
+[train_think] 1326 examples (4 skipped as over-length)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|██████████| 2/2 [00:00<00:00, 18078.90it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<03:23,  2.09it/s]/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/bitsandbytes/backends/cuda/ops.py:213: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+Loading weights:   1%|▏         | 6/426 [00:00<00:35, 11.99it/s]Loading weights:   3%|▎         | 14/426 [00:00<00:15, 25.84it/s]Loading weights:   7%|▋         | 28/426 [00:00<00:07, 51.56it/s]Loading weights:  10%|▉         | 42/426 [00:00<00:05, 70.83it/s]Loading weights:  14%|█▍        | 60/426 [00:01<00:03, 98.37it/s]Loading weights:  18%|█▊        | 75/426 [00:01<00:03, 108.87it/s]Loading weights:  21%|██        | 90/426 [00:01<00:02, 117.14it/s]Loading weights:  24%|██▍       | 103/426 [00:01<00:03, 106.94it/s]Loading weights:  28%|██▊       | 119/426 [00:01<00:02, 118.50it/s]Loading weights:  31%|███       | 133/426 [00:01<00:02, 122.83it/s]Loading weights:  34%|███▍      | 146/426 [00:01<00:02, 117.31it/s]Loading weights:  37%|███▋      | 159/426 [00:01<00:02, 108.50it/s]Loading weights:  42%|████▏     | 181/426 [00:02<00:01, 136.96it/s]Loading weights:  46%|████▋     | 198/426 [00:02<00:01, 145.60it/s]Loading weights:  50%|█████     | 214/426 [00:02<00:01, 137.06it/s]Loading weights:  55%|█████▍    | 234/426 [00:02<00:01, 147.79it/s]Loading weights:  59%|█████▊    | 250/426 [00:02<00:01, 143.52it/s]Loading weights:  62%|██████▏   | 265/426 [00:02<00:01, 109.70it/s]Loading weights:  65%|██████▌   | 278/426 [00:02<00:01, 113.84it/s]Loading weights:  69%|██████▊   | 292/426 [00:02<00:01, 110.50it/s]Loading weights:  72%|███████▏  | 306/426 [00:03<00:01, 113.86it/s]Loading weights:  75%|███████▍  | 318/426 [00:03<00:00, 112.27it/s]Loading weights:  78%|███████▊  | 331/426 [00:03<00:00, 112.04it/s]Loading weights:  81%|████████  | 344/426 [00:03<00:00, 116.01it/s]Loading weights:  84%|████████▍ | 359/426 [00:03<00:00, 120.00it/s]Loading weights:  87%|████████▋ | 372/426 [00:03<00:00, 116.34it/s]Loading weights:  90%|█████████ | 385/426 [00:03<00:00, 116.22it/s]Loading weights:  93%|█████████▎| 398/426 [00:03<00:00, 119.87it/s]Loading weights:  97%|█████████▋| 412/426 [00:03<00:00, 121.35it/s]Loading weights: 100%|█████████▉| 425/426 [00:04<00:00, 118.07it/s]Loading weights: 100%|██████████| 426/426 [00:04<00:00, 104.68it/s]
+[transformers] warmup_ratio is deprecated and will be removed in v5.2. Use `warmup_steps` instead.
+trainable params: 42,467,328 || all params: 4,248,218,624 || trainable%: 0.9997
+  0%|          | 0/166 [00:00<?, ?it/s]  1%|          | 1/166 [00:14<41:03, 14.93s/it]  1%|          | 2/166 [00:29<39:44, 14.54s/it]  2%|▏         | 3/166 [00:42<38:17, 14.09s/it]  2%|▏         | 4/166 [00:56<38:08, 14.13s/it]  3%|▎         | 5/166 [01:10<37:36, 14.01s/it]  4%|▎         | 6/166 [01:24<37:11, 13.94s/it]  4%|▍         | 7/166 [01:37<36:16, 13.69s/it]  5%|▍         | 8/166 [01:49<34:40, 13.17s/it]  5%|▌         | 9/166 [02:02<33:41, 12.88s/it]  6%|▌         | 10/166 [02:16<34:32, 13.28s/it]                                                  6%|▌         | 10/166 [02:16<34:32, 13.28s/it]  7%|▋         | 11/166 [02:29<34:11, 13.23s/it]  7%|▋         | 12/166 [02:43<34:22, 13.39s/it]  8%|▊         | 13/166 [02:56<33:49, 13.27s/it]  8%|▊         | 14/166 [03:08<32:48, 12.95s/it]  9%|▉         | 15/166 [03:22<33:19, 13.24s/it] 10%|▉         | 16/166 [03:36<33:32, 13.42s/it] 10%|█         | 17/166 [03:49<33:42, 13.57s/it] 11%|█         | 18/166 [04:02<32:54, 13.34s/it] 11%|█▏        | 19/166 [04:16<33:16, 13.58s/it] 12%|█▏        | 20/166 [04:30<33:06, 13.61s/it]                                                 12%|█▏        | 20/166 [04:30<33:06, 13.61s/it] 13%|█▎        | 21/166 [04:45<33:31, 13.87s/it] 13%|█▎        | 22/166 [04:58<32:51, 13.69s/it] 14%|█▍        | 23/166 [05:12<32:47, 13.76s/it] 14%|█▍        | 24/166 [05:26<32:58, 13.93s/it] 15%|█▌        | 25/166 [05:41<33:29, 14.25s/it] 16%|█▌        | 26/166 [05:55<32:42, 14.02s/it] 16%|█▋        | 27/166 [06:08<32:07, 13.87s/it] 17%|█▋        | 28/166 [06:23<32:23, 14.09s/it] 17%|█▋        | 29/166 [06:36<31:48, 13.93s/it] 18%|█▊        | 30/166 [06:49<30:54, 13.64s/it]                                                 18%|█▊        | 30/166 [06:49<30:54, 13.64s/it] 19%|█▊        | 31/166 [07:03<30:40, 13.63s/it] 19%|█▉        | 32/166 [07:17<30:55, 13.85s/it] 20%|█▉        | 33/166 [07:32<31:14, 14.09s/it] 20%|██        | 34/166 [07:44<30:00, 13.64s/it] 21%|██        | 35/166 [07:56<28:42, 13.15s/it] 22%|██▏       | 36/166 [08:10<28:50, 13.31s/it] 22%|██▏       | 37/166 [08:25<29:32, 13.74s/it] 23%|██▎       | 38/166 [08:38<29:01, 13.61s/it] 23%|██▎       | 39/166 [08:51<28:17, 13.36s/it] 24%|██▍       | 40/166 [09:04<28:11, 13.43s/it]                                                 24%|██▍       | 40/166 [09:04<28:11, 13.43s/it] 25%|██▍       | 41/166 [09:18<27:44, 13.31s/it] 25%|██▌       | 42/166 [09:31<27:49, 13.46s/it] 26%|██▌       | 43/166 [09:45<27:26, 13.39s/it] 27%|██▋       | 44/166 [09:59<27:54, 13.73s/it] 27%|██▋       | 45/166 [10:13<27:31, 13.65s/it] 28%|██▊       | 46/166 [10:27<27:53, 13.94s/it] 28%|██▊       | 47/166 [10:41<27:19, 13.78s/it] 29%|██▉       | 48/166 [10:53<26:16, 13.36s/it] 30%|██▉       | 49/166 [11:07<26:19, 13.50s/it] 30%|███       | 50/166 [11:20<26:02, 13.47s/it]                                                 30%|███       | 50/166 [11:20<26:02, 13.47s/it] 31%|███       | 51/166 [11:33<25:15, 13.18s/it] 31%|███▏      | 52/166 [11:45<24:42, 13.00s/it] 32%|███▏      | 53/166 [11:58<24:35, 13.05s/it] 33%|███▎      | 54/166 [12:13<24:56, 13.37s/it] 33%|███▎      | 55/166 [12:25<24:19, 13.15s/it] 34%|███▎      | 56/166 [12:38<24:11, 13.20s/it] 34%|███▍      | 57/166 [12:52<23:56, 13.17s/it] 35%|███▍      | 58/166 [13:05<23:36, 13.12s/it] 36%|███▌      | 59/166 [13:18<23:28, 13.17s/it] 36%|███▌      | 60/166 [13:32<23:37, 13.37s/it]                                                 36%|███▌      | 60/166 [13:32<23:37, 13.37s/it] 37%|███▋      | 61/166 [13:46<23:47, 13.60s/it] 37%|███▋      | 62/166 [13:58<22:59, 13.26s/it] 38%|███▊      | 63/166 [14:12<22:52, 13.32s/it] 39%|███▊      | 64/166 [14:25<22:26, 13.20s/it] 39%|███▉      | 65/166 [14:37<21:57, 13.04s/it] 40%|███▉      | 66/166 [14:51<22:14, 13.35s/it] 40%|████      | 67/166 [15:05<22:16, 13.50s/it] 41%|████      | 68/166 [15:19<22:12, 13.60s/it] 42%|████▏     | 69/166 [15:32<21:40, 13.41s/it] 42%|████▏     | 70/166 [15:45<21:03, 13.17s/it]                                                 42%|████▏     | 70/166 [15:45<21:03, 13.17s/it] 43%|████▎     | 71/166 [15:59<21:14, 13.42s/it] 43%|████▎     | 72/166 [16:11<20:37, 13.16s/it] 44%|████▍     | 73/166 [16:25<20:45, 13.39s/it] 45%|████▍     | 74/166 [16:39<20:37, 13.45s/it] 45%|████▌     | 75/166 [16:53<20:34, 13.56s/it] 46%|████▌     | 76/166 [17:06<20:13, 13.48s/it] 46%|████▋     | 77/166 [17:20<20:05, 13.55s/it] 47%|████▋     | 78/166 [17:33<19:40, 13.41s/it] 48%|████▊     | 79/166 [17:47<19:56, 13.75s/it] 48%|████▊     | 80/166 [18:01<19:33, 13.65s/it]                                                 48%|████▊     | 80/166 [18:01<19:33, 13.65s/it] 49%|████▉     | 81/166 [18:15<19:46, 13.95s/it] 49%|████▉     | 82/166 [18:30<19:40, 14.06s/it] 50%|█████     | 83/166 [18:42<18:32, 13.41s/it] 51%|█████     | 84/166 [18:53<17:43, 12.96s/it] 51%|█████     | 85/166 [19:07<17:33, 13.01s/it] 52%|█████▏    | 86/166 [19:19<17:00, 12.76s/it] 52%|█████▏    | 87/166 [19:32<17:08, 13.02s/it] 53%|█████▎    | 88/166 [19:46<17:07, 13.18s/it] 54%|█████▎    | 89/166 [20:00<17:17, 13.47s/it] 54%|█████▍    | 90/166 [20:13<16:58, 13.40s/it]                                                 54%|█████▍    | 90/166 [20:13<16:58, 13.40s/it] 55%|█████▍    | 91/166 [20:27<16:48, 13.45s/it] 55%|█████▌    | 92/166 [20:40<16:32, 13.41s/it] 56%|█████▌    | 93/166 [20:54<16:21, 13.44s/it] 57%|█████▋    | 94/166 [21:07<16:06, 13.42s/it] 57%|█████▋    | 95/166 [21:21<16:05, 13.60s/it] 58%|█████▊    | 96/166 [21:36<16:26, 14.09s/it] 58%|█████▊    | 97/166 [21:50<16:08, 14.04s/it] 59%|█████▉    | 98/166 [22:03<15:29, 13.67s/it] 60%|█████▉    | 99/166 [22:17<15:18, 13.71s/it] 60%|██████    | 100/166 [22:30<15:03, 13.69s/it]                                                  60%|██████    | 100/166 [22:31<15:03, 13.69s/it] 61%|██████    | 101/166 [22:43<14:22, 13.27s/it] 61%|██████▏   | 102/166 [22:56<14:12, 13.32s/it] 62%|██████▏   | 103/166 [23:10<14:09, 13.48s/it] 63%|██████▎   | 104/166 [23:25<14:16, 13.82s/it] 63%|██████▎   | 105/166 [23:38<14:01, 13.80s/it] 64%|██████▍   | 106/166 [23:52<13:46, 13.78s/it] 64%|██████▍   | 107/166 [24:05<13:18, 13.54s/it] 65%|██████▌   | 108/166 [24:20<13:25, 13.88s/it] 66%|██████▌   | 109/166 [24:34<13:08, 13.84s/it] 66%|██████▋   | 110/166 [24:47<12:42, 13.61s/it]                                                  66%|██████▋   | 110/166 [24:47<12:42, 13.61s/it] 67%|██████▋   | 111/166 [25:00<12:21, 13.48s/it] 67%|██████▋   | 112/166 [25:12<11:51, 13.17s/it] 68%|██████▊   | 113/166 [25:24<11:20, 12.84s/it] 69%|██████▊   | 114/166 [25:38<11:17, 13.03s/it] 69%|██████▉   | 115/166 [25:51<11:09, 13.13s/it] 70%|██████▉   | 116/166 [26:05<11:05, 13.30s/it] 70%|███████   | 117/166 [26:18<10:54, 13.36s/it] 71%|███████   | 118/166 [26:32<10:45, 13.45s/it] 72%|███████▏  | 119/166 [26:46<10:35, 13.51s/it] 72%|███████▏  | 120/166 [27:00<10:28, 13.66s/it]                                                  72%|███████▏  | 120/166 [27:00<10:28, 13.66s/it] 73%|███████▎  | 121/166 [27:12<09:57, 13.28s/it] 73%|███████▎  | 122/166 [27:25<09:38, 13.15s/it] 74%|███████▍  | 123/166 [27:39<09:31, 13.30s/it] 75%|███████▍  | 124/166 [27:53<09:29, 13.55s/it] 75%|███████▌  | 125/166 [28:07<09:21, 13.70s/it] 76%|███████▌  | 126/166 [28:20<08:59, 13.49s/it] 77%|███████▋  | 127/166 [28:33<08:37, 13.27s/it] 77%|███████▋  | 128/166 [28:46<08:28, 13.38s/it] 78%|███████▊  | 129/166 [29:01<08:28, 13.75s/it] 78%|███████▊  | 130/166 [29:14<08:07, 13.54s/it]                                                  78%|███████▊  | 130/166 [29:14<08:07, 13.54s/it] 79%|███████▉  | 131/166 [29:27<07:50, 13.43s/it] 80%|███████▉  | 132/166 [29:40<07:34, 13.38s/it] 80%|████████  | 133/166 [29:55<07:38, 13.88s/it] 81%|████████  | 134/166 [30:09<07:19, 13.75s/it] 81%|████████▏ | 135/166 [30:21<06:52, 13.32s/it] 82%|████████▏ | 136/166 [30:34<06:37, 13.26s/it] 83%|████████▎ | 137/166 [30:47<06:24, 13.25s/it] 83%|████████▎ | 138/166 [31:01<06:09, 13.20s/it] 84%|████████▎ | 139/166 [31:13<05:52, 13.07s/it] 84%|████████▍ | 140/166 [31:27<05:41, 13.14s/it]                                                  84%|████████▍ | 140/166 [31:27<05:41, 13.14s/it] 85%|████████▍ | 141/166 [31:39<05:25, 13.02s/it] 86%|████████▌ | 142/166 [31:53<05:18, 13.29s/it] 86%|████████▌ | 143/166 [32:07<05:07, 13.38s/it] 87%|████████▋ | 144/166 [32:20<04:52, 13.31s/it] 87%|████████▋ | 145/166 [32:33<04:39, 13.30s/it] 88%|████████▊ | 146/166 [32:46<04:23, 13.15s/it] 89%|████████▊ | 147/166 [32:59<04:10, 13.20s/it] 89%|████████▉ | 148/166 [33:13<03:58, 13.24s/it] 90%|████████▉ | 149/166 [33:26<03:46, 13.35s/it] 90%|█████████ | 150/166 [33:40<03:37, 13.58s/it]                                                  90%|█████████ | 150/166 [33:40<03:37, 13.58s/it] 91%|█████████ | 151/166 [33:55<03:27, 13.83s/it] 92%|█████████▏| 152/166 [34:08<03:09, 13.52s/it] 92%|█████████▏| 153/166 [34:20<02:51, 13.16s/it] 93%|█████████▎| 154/166 [34:33<02:35, 12.99s/it] 93%|█████████▎| 155/166 [34:47<02:28, 13.46s/it] 94%|█████████▍| 156/166 [35:01<02:15, 13.52s/it] 95%|█████████▍| 157/166 [35:15<02:03, 13.75s/it] 95%|█████████▌| 158/166 [35:29<01:49, 13.71s/it] 96%|█████████▌| 159/166 [35:42<01:34, 13.47s/it] 96%|█████████▋| 160/166 [35:55<01:20, 13.49s/it]                                                  96%|█████████▋| 160/166 [35:55<01:20, 13.49s/it] 97%|█████████▋| 161/166 [36:08<01:06, 13.28s/it] 98%|█████████▊| 162/166 [36:22<00:54, 13.52s/it] 98%|█████████▊| 163/166 [36:37<00:41, 13.86s/it] 99%|█████████▉| 164/166 [36:51<00:27, 13.94s/it] 99%|█████████▉| 165/166 [37:04<00:13, 13.75s/it]100%|██████████| 166/166 [37:15<00:00, 12.98s/it]                                                 100%|██████████| 166/166 [37:15<00:00, 12.98s/it]100%|██████████| 166/166 [37:15<00:00, 13.47s/it]
+{'loss': '8.1', 'grad_norm': '8.422', 'learning_rate': '0.0001997', 'epoch': '0.1207'}
+{'loss': '4.395', 'grad_norm': '7.704', 'learning_rate': '0.0001963', 'epoch': '0.2413'}
+{'loss': '2.677', 'grad_norm': '5.595', 'learning_rate': '0.0001892', 'epoch': '0.362'}
+{'loss': '2.418', 'grad_norm': '9.322', 'learning_rate': '0.0001788', 'epoch': '0.4827'}
+{'loss': '2.257', 'grad_norm': '5.011', 'learning_rate': '0.0001654', 'epoch': '0.6033'}
+{'loss': '2.231', 'grad_norm': '5.925', 'learning_rate': '0.0001494', 'epoch': '0.724'}
+{'loss': '2.068', 'grad_norm': '5.356', 'learning_rate': '0.0001316', 'epoch': '0.8446'}
+{'loss': '1.873', 'grad_norm': '4.556', 'learning_rate': '0.0001126', 'epoch': '0.9653'}
+{'loss': '1.428', 'grad_norm': '3.849', 'learning_rate': '9.318e-05', 'epoch': '1.084'}
+{'loss': '1.276', 'grad_norm': '6.457', 'learning_rate': '7.396e-05', 'epoch': '1.205'}
+{'loss': '1.204', 'grad_norm': '3.898', 'learning_rate': '5.573e-05', 'epoch': '1.326'}
+{'loss': '0.85', 'grad_norm': '3.408', 'learning_rate': '3.919e-05', 'epoch': '1.446'}
+{'loss': '0.9291', 'grad_norm': '6.572', 'learning_rate': '2.495e-05', 'epoch': '1.567'}
+{'loss': '0.884', 'grad_norm': '4.065', 'learning_rate': '1.356e-05', 'epoch': '1.688'}
+{'loss': '1.018', 'grad_norm': '3.243', 'learning_rate': '5.452e-06', 'epoch': '1.808'}
+{'loss': '1.021', 'grad_norm': '4.175', 'learning_rate': '9.314e-07', 'epoch': '1.929'}
+{'train_runtime': '2236', 'train_samples_per_second': '1.186', 'train_steps_per_second': '0.074', 'train_loss': '2.115', 'epoch': '2'}
+[train_think] saved adapter to /home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_gauntlet_frontier/adapters/exploration1
+===== MERGE exploration1 =====
+[merge] loading composite Qwen/Qwen3.5-4B bf16 ...
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]Loading weights:  12%|█▏        | 86/723 [00:00<00:00, 830.25it/s]Loading weights:  24%|██▎       | 170/723 [00:00<00:00, 677.04it/s]Loading weights:  33%|███▎      | 240/723 [00:00<00:00, 582.46it/s]Loading weights:  41%|████▏     | 300/723 [00:00<00:00, 579.45it/s]Loading weights:  55%|█████▍    | 395/723 [00:00<00:00, 689.53it/s]Loading weights:  64%|██████▍   | 466/723 [00:00<00:00, 576.99it/s]Loading weights:  73%|███████▎  | 528/723 [00:00<00:00, 521.52it/s]Loading weights:  81%|████████  | 583/723 [00:01<00:00, 455.62it/s]Loading weights:  87%|████████▋ | 632/723 [00:01<00:00, 462.04it/s]Loading weights: 100%|██████████| 723/723 [00:01<00:00, 589.90it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[merge] example composite tail: '0.linear_attn.conv1d' -> ['model.language_model.layers.0.linear_attn.conv1d']
+[merge] applied 128 LoRA deltas (expected 7 modules x layers)
+[merge] saving composite merged model to /home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_gauntlet_frontier/merged/exploration1 ...
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:08<00:00,  8.17s/it]Writing model shards: 100%|██████████| 1/1 [00:08<00:00,  8.19s/it]
+[merge] processor save skipped: 
+Qwen3VLVideoProcessor requires the Torchvision library but it was not found in your environment. Check out the instructions on the
+installation page: https://pytorch.org/get-started/locally/ and follow the ones that match your environment.
+Please note that you may need to restart your runtime after installation.
+
+[merge] done
+===== GYM EVAL burrowmaze @8192 =====
+INFO 07-13 03:25:04 [api_utils.py:273] non-default args: {'trust_remote_code': True, 'dtype': 'bfloat16', 'max_model_len': 16384, 'max_cudagraph_capture_size': 64, 'enable_prefix_caching': False, 'gpu_memory_utilization': 0.85, 'max_num_batched_tokens': 16384, 'max_num_seqs': 64, 'disable_log_stats': True, 'language_model_only': True, 'generation_config': 'vllm', 'model': '/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_gauntlet_frontier/merged/exploration1'}
+WARNING 07-13 03:25:04 [arg_utils.py:1590] The global random seed is set to 0. Since VLLM_ENABLE_V1_MULTIPROCESSING is set to False, this may affect the random state of the Python process that launched vLLM.
+INFO 07-13 03:25:04 [model.py:598] Resolved architecture: Qwen3_5ForConditionalGeneration
+INFO 07-13 03:25:04 [model.py:1725] Using max model len 16384
+INFO 07-13 03:25:04 [scheduler.py:252] Chunked prefill is enabled with max_num_batched_tokens=16384.
+INFO 07-13 03:25:04 [vllm.py:1006] Asynchronous scheduling is enabled.
+INFO 07-13 03:25:04 [kernel.py:276] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'])
+INFO 07-13 03:25:06 [registry.py:134] All limits of multimodal modalities supported by the model are set to 0, running in text-only mode.
+INFO 07-13 03:25:08 [core.py:114] Initializing a V1 LLM engine (v0.24.0) with config: model='/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_gauntlet_frontier/merged/exploration1', speculative_config=None, tokenizer='/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_gauntlet_frontier/merged/exploration1', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=True, dtype=torch.bfloat16, max_seq_len=16384, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, decode_context_parallel_size=1, dcp_comm_backend=ag_rs, disable_custom_all_reduce=False, quantization=None, quantization_config=None, enforce_eager=False, enable_return_routed_experts=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False, jit_monitor_verbose=False), seed=0, served_model_name=/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_gauntlet_frontier/merged/exploration1, enable_prefix_caching=False, enable_chunked_prefill=True, pooler_config=None, compilation_config={'mode': <CompilationMode.VLLM_COMPILE: 3>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['none'], 'ir_enable_torch_wrap': True, 'splitting_ops': ['vllm::unified_attention_with_output', 'vllm::unified_mla_attention_with_output', 'vllm::mamba_mixer2', 'vllm::mamba_mixer', 'vllm::short_conv', 'vllm::linear_attention', 'vllm::plamo2_mamba_mixer', 'vllm::qwen_gdn_attention_core', 'vllm::gdn_attention_core_xpu', 'vllm::olmo_hybrid_gdn_full_forward', 'vllm::kda_attention', 'vllm::sparse_attn_indexer', 'vllm::rocm_aiter_sparse_attn_indexer', 'vllm::deepseek_v4_attention', 'vllm::unified_kv_cache_update', 'vllm::unified_mla_kv_cache_update'], 'compile_mm_encoder': False, 'cudagraph_mm_encoder': False, 'encoder_cudagraph_token_budgets': [], 'encoder_cudagraph_max_vision_items_per_batch': 0, 'encoder_cudagraph_max_frames_per_batch': None, 'compile_sizes': [], 'compile_ranges_endpoints': [16384], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'size_asserts': False, 'alignment_asserts': False, 'scalar_asserts': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.FULL_AND_PIECEWISE: (2, 1)>, 'cudagraph_num_of_warmups': 1, 'cudagraph_capture_sizes': [1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': False, 'fuse_act_quant': False, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False, 'fuse_rope_kvcache_cat_mla': False, 'fuse_act_padding': False}, 'max_cudagraph_capture_size': 64, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': False, 'static_all_moe_layers': []}, kernel_config=KernelConfig(ir_op_priority=IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native']), enable_flashinfer_autotune=True, moe_backend='auto', linear_backend='auto')
+INFO 07-13 03:25:08 [parallel_state.py:1588] world_size=1 rank=0 local_rank=0 distributed_init_method=tcp://172.20.168.144:57991 backend=nccl
+INFO 07-13 03:25:08 [parallel_state.py:1923] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, EP rank N/A, EPLB rank N/A
+INFO 07-13 03:25:10 [topk_topp_sampler.py:55] Using FlashInfer for top-p & top-k sampling.
+INFO 07-13 03:25:10 [gpu_model_runner.py:5160] Starting to load model /home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_gauntlet_frontier/merged/exploration1...
+INFO 07-13 03:25:10 [cuda.py:539] Using backend AttentionBackendEnum.FLASH_ATTN for vit attention
+INFO 07-13 03:25:10 [mm_encoder_attention.py:373] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
+INFO 07-13 03:25:10 [qwen_gdn_linear_attn.py:228] Using Triton/FLA GDN prefill kernel (requested=auto, head_k_dim=128).
+INFO 07-13 03:25:10 [cuda.py:480] Using FLASH_ATTN attention backend out of potential backends: ['FLASH_ATTN', 'FLASHINFER', 'TRITON_ATTN', 'FLEX_ATTENTION'].
+INFO 07-13 03:25:10 [flash_attn.py:670] Using FlashAttention version 2
+<frozen importlib._bootstrap_external>:1297: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
+<frozen importlib._bootstrap_external>:1297: FutureWarning: The cuda.nvrtc module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.nvrtc module instead.
+INFO 07-13 03:25:11 [weight_utils.py:849] Filesystem type for checkpoints: EXT4. Checkpoint size: 8.46 GiB. Available RAM: 12.72 GiB.
+INFO 07-13 03:25:11 [weight_utils.py:872] Auto-prefetch is disabled because the filesystem (EXT4) is not a recognized network FS (NFS/Lustre). If you want to force prefetching, start vLLM with --safetensors-load-strategy=prefetch.
+Loading safetensors checkpoint shards:   0% Completed | 0/1 [00:00<?, ?it/s]
+Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:06<00:00,  6.02s/it]
+Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:06<00:00,  6.02s/it]
+
+INFO 07-13 03:25:17 [default_loader.py:430] Loading weights took 6.21 seconds
+INFO 07-13 03:25:18 [gpu_model_runner.py:5255] Model loading took 7.96 GiB memory and 7.283485 seconds
+INFO 07-13 03:25:18 [interface.py:773] Setting attention block size to 528 tokens to ensure that attention page size is >= mamba page size.
+INFO 07-13 03:25:18 [interface.py:797] Padding mamba page size by 0.76% to ensure that mamba page size and attention page size are exactly equal.
+INFO 07-13 03:25:22 [backends.py:1089] Using cache directory: /home/ericflo/.cache/vllm/torch_compile_cache/3cfdd82a0e/rank_0_0/backbone for vLLM's torch.compile
+INFO 07-13 03:25:22 [backends.py:1148] Dynamo bytecode transform time: 4.37 s
+INFO 07-13 03:25:27 [backends.py:378] Cache the graph of compile range (1, 16384) for later use
+INFO 07-13 03:25:40 [backends.py:393] Compiling a graph for compile range (1, 16384) takes 17.19 s
+INFO 07-13 03:25:42 [decorators.py:708] saved AOT compiled function to /home/ericflo/.cache/vllm/torch_compile_cache/torch_aot_compile/b221a411871c31d9d29f543a25e15aa201154afd798d8271fbafd6be4c377098/rank_0_0/model
+INFO 07-13 03:25:42 [monitor.py:53] torch.compile took 24.00 s in total
+INFO 07-13 03:26:42 [monitor.py:81] Initial profiling/warmup run took 59.88 s
+INFO 07-13 03:26:49 [gpu_model_runner.py:6483] Profiling CUDA graph memory: PIECEWISE=11 (largest=64), FULL=11 (largest=64)
+INFO 07-13 03:26:53 [gpu_model_runner.py:6588] Estimated CUDA graph memory: 0.19 GiB total
+INFO 07-13 03:26:53 [gpu_worker.py:508] Available KV cache memory: 10.55 GiB
+INFO 07-13 03:26:53 [gpu_worker.py:523] CUDA graph memory profiling is enabled (default since v0.21.0). The current --gpu-memory-utilization=0.8500 is equivalent to --gpu-memory-utilization=0.8423 without CUDA graph memory profiling. To maintain the same effective KV cache size as before, increase --gpu-memory-utilization to 0.8577. To disable, set VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS=0.
+INFO 07-13 03:26:53 [kv_cache_utils.py:2146] GPU KV cache size: 306,146 tokens
+INFO 07-13 03:26:53 [kv_cache_utils.py:2147] Maximum concurrency for 16,384 tokens per request: 18.69x
+Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):   0%|          | 0/11 [00:00<?, ?it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  18%|█▊        | 2/11 [00:00<00:00, 14.33it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  45%|████▌     | 5/11 [00:00<00:00, 19.34it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  73%|███████▎  | 8/11 [00:00<00:00, 21.02it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE): 100%|██████████| 11/11 [00:00<00:00, 18.71it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE): 100%|██████████| 11/11 [00:00<00:00, 18.81it/s]
+Capturing CUDA graphs (decode, FULL):   0%|          | 0/11 [00:00<?, ?it/s]Capturing CUDA graphs (decode, FULL):   9%|▉         | 1/11 [00:00<00:01,  5.88it/s]Capturing CUDA graphs (decode, FULL):  18%|█▊        | 2/11 [00:00<00:01,  5.91it/s]Capturing CUDA graphs (decode, FULL):  36%|███▋      | 4/11 [00:00<00:00, 10.47it/s]Capturing CUDA graphs (decode, FULL):  55%|█████▍    | 6/11 [00:00<00:00, 13.00it/s]Capturing CUDA graphs (decode, FULL):  82%|████████▏ | 9/11 [00:00<00:00, 16.12it/s]Capturing CUDA graphs (decode, FULL): 100%|██████████| 11/11 [00:00<00:00, 12.97it/s]Capturing CUDA graphs (decode, FULL): 100%|██████████| 11/11 [00:00<00:00, 12.04it/s]
+INFO 07-13 03:26:56 [gpu_model_runner.py:6656] Graph capturing finished in 2 secs, took 0.14 GiB
+INFO 07-13 03:26:56 [gpu_worker.py:667] CUDA graph pool memory: 0.14 GiB (actual), 0.19 GiB (estimated), difference: 0.05 GiB (34.6%).
+INFO 07-13 03:26:56 [jit_monitor.py:60] Kernel JIT monitor activated — Triton JIT compilations during inference will be logged as warnings.
+INFO 07-13 03:26:56 [core.py:337] init engine (profile, create kv cache, warmup model) took 98.56 s (compilation: 24.00 s)
+[eval_gym] 90 atoms, 0 episodes
+WARNING 07-13 03:26:56 [jit_monitor.py:106] Triton kernel JIT compilation during inference: _zero_kv_blocks_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+WARNING 07-13 03:26:57 [jit_monitor.py:106] Triton kernel JIT compilation during inference: _compute_slot_mapping_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+WARNING 07-13 03:26:58 [jit_monitor.py:106] Triton kernel JIT compilation during inference: _causal_conv1d_fwd_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+WARNING 07-13 03:26:59 [jit_monitor.py:106] Triton kernel JIT compilation during inference: _fused_post_conv_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+WARNING 07-13 03:27:06 [jit_monitor.py:106] Triton kernel JIT compilation during inference: fused_sigmoid_gating_delta_rule_update_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+{
+ "burrowmaze/atom/L1": {
+  "n": 15,
+  "mean": 1.0,
+  "parse_fail": 0,
+  "forced_close": 0
+ },
+ "burrowmaze/atom/L2": {
+  "n": 15,
+  "mean": 1.0,
+  "parse_fail": 0,
+  "forced_close": 0
+ },
+ "burrowmaze/atom/L3": {
+  "n": 15,
+  "mean": 1.0,
+  "parse_fail": 0,
+  "forced_close": 0
+ },
+ "burrowmaze/atom/L4": {
+  "n": 15,
+  "mean": 1.0,
+  "parse_fail": 0,
+  "forced_close": 0
+ },
+ "burrowmaze/atom/L5": {
+  "n": 15,
+  "mean": 1.0,
+  "parse_fail": 0,
+  "forced_close": 0
+ },
+ "burrowmaze/atom/L6": {
+  "n": 15,
+  "mean": 0.8,
+  "parse_fail": 0,
+  "forced_close": 0
+ }
+}
+[eval_gym] wrote /home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_gauntlet_frontier/runs/eval_gym_expl1_8192 in 43s
+===== MENAGERIE retain-delta @8192 =====
+--- quick seed=57001 ---
+[bench] quick seed=57001 arm=base ...
+[bench] base: aggregate=0.4668 (409.9s)
+[bench] quick seed=57001 arm=merged ...
+[bench] merged: aggregate=0.6675 (308.4s)
+[bench] DELTA aggregate (merged - base): +0.2007
+{
+ "chronicle": 0.5,
+ "lockpick": 0.375,
+ "menders": 0.0,
+ "mirage": 0.125,
+ "rites": -0.25,
+ "siftstack": 0.75,
+ "sirens": 0.0,
+ "stockade": 0.6325,
+ "toolsmith": 0.125,
+ "warren": -0.25
+}
+--- quick seed=57002 ---
+[bench] quick seed=57002 arm=base ...
+[bench] base: aggregate=0.5290 (414.2s)
+[bench] quick seed=57002 arm=merged ...
+[bench] merged: aggregate=0.7269 (207.1s)
+[bench] DELTA aggregate (merged - base): +0.1978
+{
+ "chronicle": 0.25,
+ "lockpick": 0.625,
+ "menders": 0.0,
+ "mirage": 0.5,
+ "rites": -0.125,
+ "siftstack": 0.625,
+ "sirens": 0.0,
+ "stockade": 0.0617,
+ "toolsmith": 0.1667,
+ "warren": -0.125
+}
+--- medium seed=57003 ---
+[bench] medium seed=57003 arm=base ...
+[bench] base: aggregate=0.2834 (836.3s)
+[bench] medium seed=57003 arm=merged ...
+[bench] merged: aggregate=0.6155 (302.9s)
+[bench] DELTA aggregate (merged - base): +0.3321
+{
+ "chronicle": 0.6,
+ "lockpick": 0.6,
+ "menders": -0.2167,
+ "mirage": 0.5,
+ "rites": 0.2,
+ "siftstack": 0.6,
+ "sirens": 0.2,
+ "stockade": 0.1506,
+ "toolsmith": 0.5875,
+ "warren": 0.1
+}
+--- medium seed=57004 ---
+[bench] medium seed=57004 arm=base ...
+[bench] base: aggregate=0.3836 (823.2s)
+[bench] medium seed=57004 arm=merged ...
+[bench] merged: aggregate=0.6047 (348.3s)
+[bench] DELTA aggregate (merged - base): +0.2212
+{
+ "chronicle": 0.1,
+ "lockpick": 0.3,
+ "menders": 0.0,
+ "mirage": 0.6,
+ "rites": -0.1,
+ "siftstack": 0.7,
+ "sirens": 0.2,
+ "stockade": 0.095,
+ "toolsmith": 0.2667,
+ "warren": 0.05
+}
+===== exploration_only complete =====

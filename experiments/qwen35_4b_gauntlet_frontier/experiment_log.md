@@ -383,3 +383,28 @@ greenlit the goal's untried prescription: install what base CANNOT do even at
   inflated (C55) and, decomposed by axis, its residual is the induction wall
   (C39/C44/C48), which is a serial-compute property of the fixed model, not a
   data or method gap. Exploration is the one weak axis that installs and retains.
+
+## 2026-07-13 (clean exploration-only install) — the definitive exploration ceiling
+
+Isolating the installable axis (burrowmaze + replay, DROP the net-negative
+glyphgate induction traces; co-train from base, adapter exploration1):
+
+- **Gym burrowmaze @8192:** MEAN +0.200 (L3 0.87->1.00, L4 0.73->1.00,
+  L5 0.67->1.00, L6 0.33->0.80) — cleaner than the combined install (+0.167);
+  dropping the induction drag raised the lift.
+- **Menagerie retain-delta @8192:** medium **+0.261 +- 0.048 (n=6)** (merged mean
+  0.600, tight 0.575-0.616; base mean 0.339, the variance source; 1/6 seeds
+  crossed +0.32 on a low base draw), quick +0.199 (n=2, sd ~0.001).
+- **DEFINITIVE.** The clean exploration-only install is the STRONGEST single-4B
+  install measured: merged medium ABSOLUTE 0.60 (best; base ~0.34), a +0.261
+  delta that retains at the maxed budget and transfers to the held-out benchmark.
+  Yet it is still below +0.32 on medium and far below on quick (exploration lifts
+  the episode-bearing medium tier but not atoms-only quick), so the +0.32
+  conjunction stays unreachable and no single model does both (tier-Pareto C54).
+
+FINAL GAUNTLET VERDICT. Positive core: EXPLORATION is a genuinely installable,
+budget-robust capability (medium +0.261 n=6, transfers, retains at 8192).
+Negative core: the +0.32-on-both target was a budget-starvation artifact (C55);
+decomposed by axis its residual is the serial-compute induction wall
+(C39/C44/C48). The one path left to strong deltas on BOTH tiers is a tier-router
+(exploration-merged for medium, efficiency-merged for quick), not a single model.
