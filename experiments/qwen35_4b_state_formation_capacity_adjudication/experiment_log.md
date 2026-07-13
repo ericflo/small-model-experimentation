@@ -699,3 +699,30 @@ are green.
 Only non-model setup validation, commit, push, and workflow verification are authorized. LoRA G0,
 positive controls, result training, evaluation, and analysis remain blocked until both workflows are
 green.
+
+## 2026-07-13 — source-v9 seed-7411 G0 stops before model load; cache proof repaired
+
+- Non-model setup commit `ff4a8b9b` passed both repository workflows before the exact seed-7411 LoRA
+  G0 command began on an otherwise idle RTX 6000 Ada.
+- G0 stopped at `model_setup` before model load, wrapper construction, mechanics, training, or
+  evaluation. The general stable reader refused `chat_template.jinja` because Hugging Face's standard
+  cache snapshot is a symlink into `blobs/`. The canonical failure and source-qualified mirror are
+  byte-identical at file SHA-256 `39ec9625…46ec7` and identity `30af333c…9cfe9`; they record only
+  train validation, zero benchmark/sealed access, and no downstream authorization.
+- Source v10 keeps general repository/artifact reads no-symlink. Its dedicated cache proof requires
+  exact snapshot basename/revision and only canonical `../../blobs/<content-id>` targets, hashes an
+  inode-distinct stable blob while revalidating the held snapshot/link, and rejects traversal,
+  non-content targets, hardlinks, mixed roots/revisions, malformed indexes, and missing shards.
+- The real pinned cache proof passes all nine files totaling 9,342,815,919 bytes at exact revision
+  `851bf6e…cd0a`, file-set identity `06486f26…d1fe12`, without loading the model. The authorization
+  context also now preserves body `StableArtifactError` diagnostics instead of mislabeling them as an
+  aliased implementation review.
+- Reviewed implementation `a5a494b7…6f1c4a` and full source contract `979a9012…f394b7` pass 360/360
+  tests and exact machine GO.
+
+## Current authorization
+
+Only source-v10 validation, commit, push, and workflow verification are authorized. After both
+workflows pass, archive every source-v9 setup artifact with the source-qualified G0 failure as trigger,
+publish and validate that archive checkpoint, then regenerate from CPU smoke. No model-bearing retry
+or result stage is authorized before those gates.

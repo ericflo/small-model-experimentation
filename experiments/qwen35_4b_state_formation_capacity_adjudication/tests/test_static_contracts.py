@@ -2,10 +2,12 @@ from __future__ import annotations
 
 import ast
 import contextlib
+import hashlib
 import io
 import importlib
 import importlib.util
 import json
+import os
 import re
 import sys
 import tempfile
@@ -1010,7 +1012,7 @@ class StaticContractTests(unittest.TestCase):
             with mock.patch.object(
                 gpu_runner,
                 "cached_file",
-                side_effect=lambda _model, filename, revision: str(snapshot / filename),
+                side_effect=lambda _model, filename, **_kwargs: str(snapshot / filename),
             ):
                 receipt = gpu_runner._pinned_snapshot_receipt()
 
@@ -1031,7 +1033,7 @@ class StaticContractTests(unittest.TestCase):
             with mock.patch.object(
                 gpu_runner,
                 "cached_file",
-                side_effect=lambda _model, filename, revision: str(wrong / filename),
+                side_effect=lambda _model, filename, **_kwargs: str(wrong / filename),
             ):
                 with self.assertRaisesRegex(RuntimeError, "outside the pinned model revision"):
                     gpu_runner._pinned_snapshot_receipt()
@@ -1048,7 +1050,7 @@ class StaticContractTests(unittest.TestCase):
                 (snapshot / filename).write_bytes(b"{}")
 
             def cached_from(base: Path):
-                return lambda _model, filename, revision: str(base / filename)
+                return lambda _model, filename, **_kwargs: str(base / filename)
 
             with mock.patch.object(gpu_runner, "cached_file", side_effect=cached_from(snapshot)):
                 with self.assertRaisesRegex(RuntimeError, "has no weight map"):
@@ -1075,7 +1077,7 @@ class StaticContractTests(unittest.TestCase):
             second_snapshot.mkdir(parents=True)
             (second_snapshot / shard).write_bytes(b"weights")
 
-            def mixed(_model, filename, revision):
+            def mixed(_model, filename, **_kwargs):
                 base = second_snapshot if filename == shard else snapshot
                 return str(base / filename)
 
@@ -1088,10 +1090,74 @@ class StaticContractTests(unittest.TestCase):
             with mock.patch.object(
                 gpu_runner,
                 "cached_file",
-                side_effect=lambda _model, filename, revision: str(wrong_basename),
+                side_effect=lambda _model, filename, **_kwargs: str(wrong_basename),
             ):
                 with self.assertRaisesRegex(RuntimeError, "basename changed"):
                     gpu_runner._pinned_snapshot_receipt()
+
+    def test_pinned_snapshot_receipt_accepts_only_canonical_blob_symlinks(self) -> None:
+        gpu_runner = self.load_gpu_runner()
+
+        revision = gpu_runner.MODEL_REVISION
+        with tempfile.TemporaryDirectory() as directory:
+            model_cache = Path(directory) / "models--Qwen--Qwen3.5-4B"
+            snapshot = model_cache / "snapshots" / revision
+            blobs = model_cache / "blobs"
+            snapshot.mkdir(parents=True)
+            blobs.mkdir()
+            shards = (
+                "model.safetensors-00001-of-00002.safetensors",
+                "model.safetensors-00002-of-00002.safetensors",
+            )
+
+            blob_paths: dict[str, Path] = {}
+
+            def install(filename: str, payload: bytes) -> None:
+                blob_name = hashlib.sha256(payload).hexdigest()
+                blob = blobs / blob_name
+                blob.write_bytes(payload)
+                (snapshot / filename).symlink_to(f"../../blobs/{blob_name}")
+                blob_paths[filename] = blob
+
+            for filename in gpu_runner.PINNED_SNAPSHOT_FILES:
+                payload = b"{}"
+                if filename == "model.safetensors.index.json":
+                    payload = json.dumps(
+                        {"weight_map": {"a": shards[0], "b": shards[1]}}
+                    ).encode("utf-8")
+                install(filename, payload)
+            for index, shard in enumerate(shards):
+                install(shard, f"shard-{index}".encode("ascii"))
+
+            cached = lambda _model, filename, **_kwargs: str(snapshot / filename)
+            with mock.patch.object(gpu_runner, "cached_file", side_effect=cached):
+                receipt = gpu_runner._pinned_snapshot_receipt()
+            self.assertEqual(
+                [entry["filename"] for entry in receipt["files"]],
+                sorted((*gpu_runner.PINNED_SNAPSHOT_FILES, *shards)),
+            )
+
+            chat = snapshot / "chat_template.jinja"
+            chat.unlink()
+            chat.symlink_to("../../../outside")
+            with mock.patch.object(
+                gpu_runner, "cached_file", side_effect=cached
+            ), self.assertRaisesRegex(RuntimeError, "content-addressed blob"):
+                gpu_runner._pinned_snapshot_receipt()
+            chat.unlink()
+            chat.symlink_to(
+                f"../../blobs/{blob_paths['chat_template.jinja'].name}"
+            )
+
+            alias = Path(directory) / "aliased-blob"
+            os.link(blob_paths["chat_template.jinja"], alias)
+            try:
+                with mock.patch.object(
+                    gpu_runner, "cached_file", side_effect=cached
+                ), self.assertRaisesRegex(RuntimeError, "alias"):
+                    gpu_runner._pinned_snapshot_receipt()
+            finally:
+                alias.unlink()
 
     def test_load_base_accepts_missing_runtime_hash_only_after_snapshot_proof(self) -> None:
         gpu_runner = self.load_gpu_runner()

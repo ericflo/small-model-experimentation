@@ -80,6 +80,7 @@ from .oracle_control import (
     produce_oracle_analysis_receipt,
 )
 from .safe_io import (
+    open_stable_directory_for_update,
     open_stable_regular,
     publish_new_bytes,
     publish_new_file,
@@ -259,14 +260,19 @@ def _clip_scale(preclip_norm: float, maximum_norm: float) -> float:
     return min(1.0, maximum_norm / (preclip_norm + 1e-6))
 
 
-def _sha256(path: Path) -> str:
+def _stable_size_sha256(trusted_root: Path, path: Path) -> tuple[int, str]:
     digest = hashlib.sha256()
-    lexical = Path(os.path.abspath(os.fspath(path)))
-    trusted_root = REPO_ROOT if lexical.is_relative_to(REPO_ROOT) else lexical.parent
-    with open_stable_regular(trusted_root, lexical) as handle:
+    with open_stable_regular(trusted_root, path) as handle:
+        size = os.fstat(handle.fileno()).st_size
         for block in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(block)
-    return digest.hexdigest()
+    return int(size), digest.hexdigest()
+
+
+def _sha256(path: Path) -> str:
+    lexical = Path(os.path.abspath(os.fspath(path)))
+    trusted_root = REPO_ROOT if lexical.is_relative_to(REPO_ROOT) else lexical.parent
+    return _stable_size_sha256(trusted_root, lexical)[1]
 
 
 def _canonical_sha256(payload: Mapping[str, Any]) -> str:
@@ -611,13 +617,20 @@ def _pinned_snapshot_receipt() -> dict[str, Any]:
     receipts: dict[str, dict[str, Any]] = {}
     snapshot_roots: set[Path] = set()
 
+    resolved_content: dict[str, tuple[Path, Path]] = {}
+
     def resolve(filename: str) -> Path:
         if Path(filename).name != filename:
             raise RuntimeError(f"pinned snapshot filename is not basename-only: {filename}")
-        resolved = cached_file(MODEL_ID, filename, revision=MODEL_REVISION)
+        resolved = cached_file(
+            MODEL_ID,
+            filename,
+            revision=MODEL_REVISION,
+            local_files_only=True,
+        )
         if not resolved:
             raise RuntimeError(f"pinned snapshot file is missing: {filename}")
-        path = Path(resolved)
+        path = Path(os.path.abspath(os.fspath(resolved)))
         if path.name != filename:
             raise RuntimeError(
                 f"resolved pinned snapshot basename changed: {path.name!r} != {filename!r}"
@@ -628,29 +641,92 @@ def _pinned_snapshot_receipt() -> dict[str, Any]:
                 f"{filename} resolved outside the pinned model revision: "
                 f"{resolved_revision!r} != {MODEL_REVISION!r}"
             )
-        if not path.is_file():
-            raise RuntimeError(f"resolved pinned snapshot file is not readable: {path}")
         snapshot_root = path.parent
         if (
             snapshot_root.name != resolved_revision
             or snapshot_root.parent.name != "snapshots"
         ):
             raise RuntimeError("resolved pinned file is outside the canonical snapshot root")
+        model_cache_root = snapshot_root.parent.parent
+        try:
+            with open_stable_directory_for_update(
+                model_cache_root,
+                snapshot_root,
+            ) as snapshot_descriptor:
+                before = os.stat(
+                    filename,
+                    dir_fd=snapshot_descriptor,
+                    follow_symlinks=False,
+                )
+                if stat.S_ISLNK(before.st_mode):
+                    if before.st_nlink != 1:
+                        raise RuntimeError(
+                            f"resolved pinned snapshot symlink is aliased: {filename}"
+                        )
+                    target = os.readlink(filename, dir_fd=snapshot_descriptor)
+                    match = re.fullmatch(
+                        r"\.\./\.\./blobs/([0-9a-f]{40}|[0-9a-f]{64})",
+                        target,
+                    )
+                    if match is None:
+                        raise RuntimeError(
+                            "resolved pinned snapshot symlink is not one canonical "
+                            "content-addressed blob"
+                        )
+                    content_root = model_cache_root
+                    content_path = model_cache_root / "blobs" / match.group(1)
+                elif stat.S_ISREG(before.st_mode):
+                    if before.st_nlink != 1:
+                        raise RuntimeError(
+                            f"resolved pinned snapshot file is aliased: {filename}"
+                        )
+                    target = None
+                    content_root = snapshot_root
+                    content_path = path
+                else:
+                    raise RuntimeError(
+                        f"resolved pinned snapshot file is not readable: {path}"
+                    )
+                size, digest = _stable_size_sha256(content_root, content_path)
+                after = os.stat(
+                    filename,
+                    dir_fd=snapshot_descriptor,
+                    follow_symlinks=False,
+                )
+                if (
+                    (after.st_dev, after.st_ino, after.st_mode, after.st_nlink)
+                    != (before.st_dev, before.st_ino, before.st_mode, before.st_nlink)
+                    or (
+                        target is not None
+                        and os.readlink(filename, dir_fd=snapshot_descriptor) != target
+                    )
+                ):
+                    raise RuntimeError(
+                        f"resolved pinned snapshot entry changed while hashing: {filename}"
+                    )
+        except OSError as exc:
+            raise RuntimeError(
+                f"resolved pinned snapshot file is not readable: {path}"
+            ) from exc
         snapshot_roots.add(snapshot_root)
         receipts[filename] = {
             "filename": filename,
             "resolved_revision": resolved_revision,
-            "bytes": path.stat().st_size,
-            "sha256": _sha256(path),
+            "bytes": size,
+            "sha256": digest,
         }
+        resolved_content[filename] = (content_root, content_path)
         return path
 
     resolved_paths = {filename: resolve(filename) for filename in PINNED_SNAPSHOT_FILES}
     index_path = resolved_paths["model.safetensors.index.json"]
+    index_root, index_content_path = resolved_content[
+        "model.safetensors.index.json"
+    ]
     try:
         index = read_verified_json_object(
-            index_path.parent,
-            index_path,
+            index_root,
+            index_content_path,
             receipts["model.safetensors.index.json"]["sha256"],
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, RuntimeError) as exc:

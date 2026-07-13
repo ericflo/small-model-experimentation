@@ -1,22 +1,22 @@
 # Implementation Review
 
-**Source-contract version:** `9`
+**Source-contract version:** `10`
 
-**Reviewed implementation SHA-256:** `1c73fbf9bed5da102bd300ae9774ae75b57fe1d2269740205594fede2dd5ad3b`
+**Reviewed implementation SHA-256:** `a5a494b7a725e50bb1ba76b2672149ffa6537ccd9e3d287827fcad07156f1c4a`
 
 **Status:** `GO`
 
-Source-contract v9 passed integrated authorization, science/protocol, and terminal/recovery review.
+Source-contract v10 passed integrated authorization, science/protocol, and terminal/recovery review.
 This authorization binds exactly the implementation digest above plus the pinned training lock; any
 change to a reviewed source or test revokes it automatically. It authorizes only the registered
-archive-checkpoint publication and source-v9 regeneration/runbook sequence; it does not make any
-historical setup artifact valid under v9.
+source-v10 publication, source-v9 archival, and source-v10 regeneration/runbook sequence; it does not
+make any historical setup artifact valid under v10.
 
-## Source-v9 integrated authorization
+## Source-v10 integrated authorization
 
-The complete source-bound CPU suite passes **358/358**. The focused terminal boundary passes
-**145/145** across stable I/O (31), invalidated-setup archive/recovery (55), failed-attempt
-archive/recovery (28), and static execution contracts (31). The independent frozen-science audit
+The complete source-bound CPU suite passes **360/360**. The focused terminal boundary passes
+**146/146** across stable I/O (31), invalidated-setup archive/recovery (55), failed-attempt
+archive/recovery (28), and static execution contracts (32). The independent frozen-science audit
 passes **238/238** with no scientific defect: fixed seeds, split matrices, estimand, thresholds,
 10,000-draw crossed bootstrap, Stage A/B/C ordering, sealed-contrast logic, and the mandatory
 LoRA-negative full-shape/state-only branches remain exactly preregistered. No model or GPU was used
@@ -40,6 +40,26 @@ evidence inventory; allows no other residue; preserves it through cleanup; and r
 terminal postcondition. Missing, nonempty, hardlinked, symlinked, and extra entries remain fail-closed.
 This changes no model, data, objective, seed, threshold, branch, or scientific analysis behavior. No
 setup was regenerated between v8 archival and this v9 structural repair.
+
+The first source-v9 seed-7411 G0 stopped before model load or wrapper construction because the general
+stable reader correctly rejects symlinks while the standard Hugging Face snapshot cache represents
+all nine pinned assets as symlinks into content-addressed `blobs/`. The failure is preserved by
+byte-identical canonical and source-qualified receipts (file SHA-256 `39ec9625…46ec7`, identity
+`30af333c…9cfe9`) and authorizes nothing. Source v10 keeps the general reader fail-closed and adds a
+dedicated pinned-cache proof: every snapshot entry must have the exact registered basename and
+revision and be either one inode-distinct regular file or an inode-distinct symlink whose target is
+exactly `../../blobs/<40-or-64-lowercase-hex>`. The content blob is opened without following aliases
+from the held canonical model-cache root, must be regular and inode-distinct, and is hashed while the
+snapshot directory and link binding are revalidated. Traversal, absolute/non-content targets,
+hardlinked blobs, mixed roots/revisions, malformed indexes, and missing shards fail before either
+Transformers loader. The real cache proof covers nine files totaling 9,342,815,919 bytes at revision
+`851bf6e…cd0a` with file-set identity `06486f26…d1fe12`, without loading the model.
+
+That live failure also exposed an exception-labeling defect: a `StableArtifactError` raised by the
+authorized command body was caught by the outer implementation-review context and mislabeled as an
+aliased review. Source v10 distinguishes body execution from entry/exit validation, preserves body
+stable-artifact errors verbatim, and still lets review/source revalidation failures override an
+in-flight body exception. Regression coverage fixes both boundaries.
 
 The terminal review initially returned `NO_GO` and reproduced defects that ordinary happy-path tests
 missed: exceptional context exits skipped canonical rebinding; recursive directory creation could
@@ -65,7 +85,7 @@ exact training-journal recovery. Completion markers dominate without modifying a
 canonical source, but they are never accepted without descriptor revalidation and fresh fsync.
 
 This section supersedes historical prose below that describes cleanup as pathname deletion or
-directory removal. Those passages record earlier implementation states; v9 uses no destructive
+directory removal. Those passages record earlier implementation states; v10 uses no destructive
 unlink/rmtree operation on canonical or quarantine evidence. Private transaction-owned staging may
 still be discarded only after its exact ownership and destination state are validated.
 

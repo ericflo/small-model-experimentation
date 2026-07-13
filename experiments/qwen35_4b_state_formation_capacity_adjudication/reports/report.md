@@ -3,8 +3,8 @@
 ## Status
 
 **In progress; no scientific result exists.** Preregistration, adversarial design review, and the
-frozen design are complete. Source-v9 implementation authorization is `GO` at reviewed digest
-`1c73fbf9…d5ad3b` and full source contract `5629a3a4…99e236`, with 358/358 source-bound tests passing.
+frozen design are complete. Source-v10 implementation authorization is `GO` at reviewed digest
+`a5a494b7…6f1c4a` and full source contract `979a9012…f394b7`, with 360/360 source-bound tests passing.
 Source-v8 is published at commit `ee729def` with both repository workflows green. The source-d426
 archive is complete and independently verified: 23 files, 18,927,960 bytes, files identity
 `1538f2f2…ec3ed0`, receipt file SHA-256 `9aa04d35…efc1a1`, and receipt identity
@@ -18,8 +18,16 @@ ledger, and all three shared initialization bundles are now regenerated: CPU rec
 `eb8028bf…9c84dc` with `events: []`. The three bundle SHA-256 values are `5ed9d5c6…0e1b8`,
 `15366ea6…dcb2c`, and `bda608a2…bf8b4`; their tensor-value digests exactly match the archived source-
 d426 bundles and every sidecar matches its tracked mirror byte for byte. No model, benchmark, or
-sealed payload was opened during regeneration. Only non-model setup checkpoint publication/CI is now
-authorized; G0 and every result-bearing command remain blocked until both workflows pass. The corrected setup-control source passed
+sealed payload was opened during regeneration. That non-model checkpoint was published at `ff4a8b9b`
+with both workflows green. Source-v9 seed-7411 G0 then stopped before model load or wrapper
+construction: the general stable reader rejected the standard Hugging Face snapshot symlinks into
+content-addressed blobs. The byte-identical failure receipts have file SHA-256 `39ec9625…46ec7` and
+identity `30af333c…9cfe9`, report zero benchmark/sealed access and no training/evaluation, and
+authorize nothing. Source v10 retains the general no-alias rule and adds a dedicated exact-revision,
+exact-basename, content-addressed cache proof. The real nine-file, 9,342,815,919-byte cache passes at
+file-set identity `06486f26…d1fe12` without loading the model. Source-v10 publication/CI, source-v9
+setup archival, archive-checkpoint publication/CI, and full source-v10 setup regeneration are required
+before another G0; every result-bearing command remains blocked. The corrected setup-control source passed
 171/171 local tests and independent code and GPU/runtime review. Every setup artifact from source
 `3baa7b53…d5c42` is durably archived. The later CPU smoke, data manifest, empty sealed-access ledger,
 and three shared initialization bundles were regenerated and strictly reopened under source

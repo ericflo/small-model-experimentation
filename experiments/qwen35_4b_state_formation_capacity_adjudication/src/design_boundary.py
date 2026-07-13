@@ -157,6 +157,8 @@ def _require_tracked_clean_inputs() -> None:
 def _implementation_go_snapshot() -> Any:
     review = Path(os.path.abspath(os.fspath(IMPLEMENTATION_REVIEW)))
     review_root = REPO_ROOT if review.is_relative_to(REPO_ROOT) else review.parent
+    body_started = False
+    body_completed = False
     try:
         with open_stable_regular(review_root, review) as review_handle:
             with reviewed_implementation_snapshot() as current_digest:
@@ -188,8 +190,12 @@ def _implementation_go_snapshot() -> Any:
                     raise RuntimeError(
                         "implementation review has not authorized this source with exact GO"
                     )
+                body_started = True
                 yield
+                body_completed = True
     except StableArtifactError as exc:
+        if body_started and not body_completed:
+            raise
         raise RuntimeError("implementation review is missing or aliased") from exc
 
 

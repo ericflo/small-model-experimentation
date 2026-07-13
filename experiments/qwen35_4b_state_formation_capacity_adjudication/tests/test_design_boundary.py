@@ -20,6 +20,7 @@ from src.config import (  # noqa: E402
     SOURCE_CONTRACT_VERSION,
     load_config,
 )
+from src.safe_io import StableArtifactError  # noqa: E402
 
 
 class DesignBoundaryTests(unittest.TestCase):
@@ -176,6 +177,30 @@ class DesignBoundaryTests(unittest.TestCase):
                     design_boundary.require_implementation_go()
             finally:
                 alias.unlink()
+
+    def test_implementation_snapshot_preserves_body_stable_artifact_errors(self) -> None:
+        digest = "d" * 64
+        encoded = (
+            "# Review\n\n"
+            f"**Source-contract version:** `{SOURCE_CONTRACT_VERSION}`\n"
+            f"**Reviewed implementation SHA-256:** `{digest}`\n"
+            "**Status:** `GO`\n"
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "implementation_review.md"
+            path.write_text(encoded, encoding="utf-8")
+            with mock.patch.object(
+                design_boundary, "IMPLEMENTATION_REVIEW", path
+            ), mock.patch.object(
+                design_boundary,
+                "reviewed_implementation_snapshot",
+                side_effect=lambda: contextlib.nullcontext(digest),
+            ), self.assertRaisesRegex(
+                StableArtifactError,
+                "body stable artifact failure",
+            ):
+                with design_boundary._implementation_go_snapshot():
+                    raise StableArtifactError("body stable artifact failure")
 
     def test_design_lineage_never_splits_parsed_identity_and_byte_hash(self) -> None:
         synthetic_manifest = [
