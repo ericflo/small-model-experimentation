@@ -107,7 +107,11 @@ notes: >-
   e935c31ac313e9e6a08d5c1987fb7fd878d7dd0c328dedec45a2b2d9f2641e57, and
   b8c05d36623e98415a9cc8c68c1992c45c4e808a82fdd12397f16d211089420f. The ledger has zero events;
   no sealed payload was decompressed during reopening; and every initialization tensor-value digest
-  equals its source-1d predecessor. G0 replay must restart from seed 7411 before later setup.
+  equals its source-1d predecessor. Seed-7411 G0 subsequently passed at receipt SHA256
+  5127c305b7aa047866b9dfde34bf6e679b1749c3ea4a8d0ccffc44bfde4ecedd and identity
+  185835ee1fa6d51851f8e0c557d1144c40e4f0c297181673157a6ba402f93216. Its aggregation scalar has
+  finite nonzero live-joint gradient 5.328678525984287e-5, every other required group passed, and the
+  receipt authorizes only the seed-matched setup control. No result stage is authorized.
   The first Qwen load stopped before wrapper construction or mechanics and is preserved by a tracked
   failure receipt; it opened
   only the permitted training validator, no sealed contrast, and produced no canonical G0 output.

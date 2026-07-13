@@ -1,6 +1,6 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · frozen design unchanged; seed-7412 LoRA G0 precision failure preserved; narrow FP32 aggregation and durable G0-failure repair reviewed `GO`; source-1d setup archived; replacement-source setup regenerated; G0 replay pending; no result run is authorized
+**Status:** in-progress · since 2026-07-13 · frozen design unchanged; seed-7412 LoRA G0 precision failure preserved; narrow FP32 aggregation and durable G0-failure repair reviewed `GO`; source-1d setup archived; replacement-source seed-7411 G0 passed; setup-control replay pending; no result run is authorized
 
 ## Current status
 
@@ -44,6 +44,10 @@ Replacement setup under source `d4269bf3…8b36` is now strictly reopened: CPU s
 identity `eaf7ba23…b3cb`. All three initialization sidecars are byte-identical to their tracked
 mirrors, and every tensor-value digest exactly equals its source-1d predecessor. Regeneration loaded
 no model, decompressed no sealed payload during reopening, and left the ledger at zero events.
+Seed-7411 LoRA G0 then passed at identity `185835ee…3216`: the repaired aggregation scalar's live
+joint gradient is finite and nonzero at `5.3286785e-5`, all other required trainable groups are
+finite/nonzero, the frozen base has no gradients, K=1 is exact before and after optimization, K=12
+is finite, and checkpoint roundtrip error is zero. The receipt authorizes only its setup control.
 
 Seed-7412 LoRA G0 then stopped at the frozen live-joint reachability gate. Every one of the 124 LoRA
 tensors and every other required recurrent group had a finite nonzero gradient, the base model had
@@ -61,7 +65,7 @@ an independent byte-identical source-qualified mirror without overwriting existi
 paths. The complete suite passes 201/201, a CUDA BF16 adversarial probe reproduces legacy gradient
 zero versus repaired analytic gradient 0.045, and independent numerical/runtime/archive re-audits
 give `GO`. The frozen nonzero gate is unchanged. All source-`1d1368cf…434b0a` setup is archived and
-replacement-source setup is regenerated; G0/control replay must now restart from seed 7411.
+replacement-source setup is regenerated; seed-7411 G0 has passed and its setup control is next.
 
 ## Research program and prior anchors
 

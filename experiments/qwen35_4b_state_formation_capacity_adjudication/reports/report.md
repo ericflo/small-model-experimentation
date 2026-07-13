@@ -19,7 +19,9 @@ source-`1d1368cf…434b0a` setup is now durably archived at receipt identity `13
 files, 18,288,790 bytes). Replacement-source CPU smoke, data/empty ledger, and all three shared
 initializations are regenerated and strictly reopened under `d4269bf3…8b36`; their manifest is
 `e935c31a…1e57`, ledger identity is `eaf7ba23…b3cb`, and tensor values match source-1d exactly. Seed
-7413 and all result stages remain blocked pending G0/control replay from seed 7411. No training
+7411 LoRA G0 now passes at identity `185835ee…3216`, with repaired aggregation-scalar gradient
+`5.3286785e-5`, exact K=1 parity, finite K=12 execution, and zero checkpoint-roundtrip error. Seed
+7413 and all result stages remain blocked pending setup-control and later-seed replay. No training
 checkpoint, evaluation row, or terminal analysis from this directory should be cited as scientific
 evidence.
 

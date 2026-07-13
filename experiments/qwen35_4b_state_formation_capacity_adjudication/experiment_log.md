@@ -561,3 +561,20 @@ authorized.
 Seed-7411 LoRA G0 is authorized as the first model-bearing replay under source `d4269bf3…8b36`.
 Later seeds, positive controls, and all result training remain blocked until their exact predecessor
 setup gates pass and are committed.
+
+## 2026-07-13 — replacement-source seed-7411 LoRA G0 passes
+
+- Canonical receipt SHA-256 `5127c305…ecedd`, identity `185835ee…3216`, under source
+  `d4269bf3…8b36` and manifest `e935c31a…1e57`.
+- The repaired `aggregate_logit` has a present, finite, nonzero live-joint gradient norm
+  `5.328678525984287e-5`. Every one of 124 LoRA tensors and every other required recurrent group is
+  finite/nonzero; the frozen base has no gradient tensors.
+- Both K=1 parity probes are exact with zero adaptation calls, the K=12 setup path is finite with the
+  exact 682 adaptation calls, and destructive checkpoint restoration returns exact tensor digests
+  and zero logit error. The setup receipt records train-only access, zero benchmark/sealed access,
+  and authorizes only the seed-matched positive control.
+
+## Current authorization
+
+The seed-7411 LoRA positive control is authorized. Seeds 7412/7413 G0 and all result training remain
+blocked until this setup-control replay passes and is committed.
