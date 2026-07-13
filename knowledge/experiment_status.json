@@ -1,11 +1,6 @@
 {
   "_note": "Curated experiment lifecycle. FINISHED IS THE DEFAULT — list an experiment here ONLY to force 'in-progress'; you never need a 'finished' entry. Status is never inferred from report prose (preregistrations and finished ablations share the same 'verdict/negative/not run' wording, so guessing mislabels). Every in-progress entry MUST carry {\"status\":\"in-progress\",\"since\":\"YYYY-MM-DD\",\"reason\":\"...\"}; when the experiment concludes, delete its entry (it reverts to finished). CI (scripts/validate_repository.py) fails if an in-progress entry lacks a date/reason or has been in-progress too long — re-affirm by bumping 'since' or remove it.",
   "experiments": {
-    "qwen35_4b_counterfactual_evidence_acquisition_curriculum": {
-      "status": "in-progress",
-      "since": "2026-07-13",
-      "reason": "Model-free smoke passes; the immutable design lock and all model-bearing gates remain pending."
-    },
     "qwen35_4b_early_text_hypothesis_forking": {
       "status": "in-progress",
       "since": "2026-07-13",

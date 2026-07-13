@@ -185,27 +185,25 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "The three preregistered arms have equal row counts",
+     "title": "Start-to-anchor drift exceeded the locality ceiling",
      "categories": [
-      "evidence binding",
-      "redundant instructions",
-      "shuffled evidence"
+      "observed drift",
+      "gate ceiling"
      ],
      "series": [
       {
-       "label": "planned training rows",
+       "label": "centered non-target logit drift",
        "values": [
-        432,
-        432,
-        432
+        0.11073476076126099,
+        0.1
        ]
       }
      ],
-     "x_label": "training arm",
-     "y_label": "rows per arm",
-     "y_format": "integer",
-     "note": "Preregistered design only; no model-bearing run or scientific result exists yet. Every arm has 48 rows at each of nine conditional transitions, matched action-token mass at every transition, and zero loss on thinking text.",
-     "source": "experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/configs/default.yaml and experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/reports/preregistration.md"
+     "x_label": "prerequisite measurement",
+     "y_label": "median drift (lower is better)",
+     "y_format": "decimal3",
+     "note": "The 48-context start-to-apex audit stopped at LINEAGE_LOCALITY_INFEASIBLE. Entropy retained (+0.013636), varentropy was nearly flat (+0.000297), and behavior, training, transfer, and Menagerie remained sealed.",
+     "source": "experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/analysis/locality_start_vs_anchor.json"
     }
    ]
   },

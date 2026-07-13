@@ -1,0 +1,24 @@
+{
+  "design_lock_sha256": "642e057f72dbe8e8eccae1ff59396ed7156677350f222ef862259cf2d20dc0be",
+  "experiment_id": "qwen35_4b_counterfactual_evidence_acquisition_curriculum",
+  "gate_receipts": {
+    "locality_start_vs_anchor": {
+      "path": "/workspace/small-model-experimentation/experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/analysis/locality_start_vs_anchor.json",
+      "sha256": "6af8e9bcb8e2de9090a012a9bc33525c1ad48822f745930f5ccd4e24dfdee64f"
+    }
+  },
+  "lifecycle_closed": false,
+  "menagerie_exposed": false,
+  "required_closeout": [
+    "README_and_report",
+    "experiment_log",
+    "program_evidence_and_backlog",
+    "synthesis_and_claims_if_warranted",
+    "brief_chart_catalog_and_manifest",
+    "make_check_direct_main_push_and_CI"
+  ],
+  "schema_version": 1,
+  "stage": "lineage_locality",
+  "terminal": true,
+  "verdict": "LINEAGE_LOCALITY_INFEASIBLE"
+}

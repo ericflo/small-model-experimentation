@@ -53,6 +53,31 @@ tool-found solutions, on-policy RL at residual failures, and
 failure-forensics curricula are the queued beyond-recipe mechanisms
 (see C53 next tests). Same-recipe scaling is closed.
 
+## qwen35_4b_counterfactual_evidence_acquisition_curriculum (2026-07-13 — Lineage-locality infeasible)
+
+The exact transaction-replay start checkpoint was compared directly with the
+C54 apex anchor on the frozen 48-context block before interface behavior or
+training. Median centered non-target logit drift was 0.110735 against the
+registered 0.10 ceiling; all 48 row-level drift estimates exceeded 0.10. The
+entropy guard passed (+0.013636 versus a -0.05 floor), varentropy was
+essentially flat (+0.000297, diagnostic only), and rendered prompts matched.
+The formal verdict is `LINEAGE_LOCALITY_INFEASIBLE`.
+
+Per preregistration, interface selection, acquisition qualification, all three
+training arms, behavior, transfer, retention, uncertainty analysis, and
+Menagerie remained sealed. This result does not test counterfactual evidence
+acquisition, transition-balanced replay, or capability installation. It
+establishes only that this exact parent-anchor pair was ineligible under the
+new direct 0.10 attribution contract.
+
+Read: eligibility under a direct locality ceiling is not inherited from
+lineage or from a prior looser or different-context gate. A successor must use
+a new experiment and fresh locality contexts, begin from apex itself or
+prospectively select a fixed apex-compatible parent using outcome-free locality
+blocks, then independently re-establish complete-loop behavior and acquisition
+headroom before training. Do not raise the observed ceiling, swap lineage
+after the result, or rescue this directory.
+
 ## Deep-Advantage MOPD Qualification and Locality (2026-07-13 — Passed prerequisites)
 
 `qwen35_4b_deep_advantage_mopd` repeated same-prefix qualification on two new

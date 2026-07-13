@@ -379,6 +379,24 @@ replay the full recovery/verify/commit loop. Repair payload measurement in a
 fresh frozen preflight; do not turn answer closure, entropy, or varentropy into
 the capability label.
 
+**A curriculum cannot repair inherited comparator distance (2026-07-13,
+Stopped, unclaimed,
+[qwen35_4b_counterfactual_evidence_acquisition_curriculum](../experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/reports/report.md)).**
+Before any interface behavior or training, the exact transaction-replay parent
+missed the frozen direct C54-apex locality prerequisite: median centered
+non-target logit drift was 0.110735 on 48 fresh contexts versus 0.10, with all
+48 row estimates above the ceiling. Entropy was retained (+0.013636),
+varentropy was flat (+0.000297, diagnostic), and prompt equivalence held. The
+formal verdict is `LINEAGE_LOCALITY_INFEASIBLE`; qualification, training,
+transfer, retention, and Menagerie stayed sealed.
+
+This neither tests nor disfavors active specification acquisition. The
+reusable rule is narrower: direct locality eligibility must be established for
+the exact parent, anchor, context block, and ceiling; it cannot be inherited
+from lineage or a looser prior gate. Reopen the capability question only in a
+fresh, apex-rooted or prospectively parent-qualified successor—never by raising
+the observed ceiling or repairing this directory. No claim ID is allocated.
+
 The licensed J-value measurement is now a clean negative for the shared
 coordinate. All 144 value traces and 288 midpoint/endpoint states completed,
 but task-held-out shared J AUC was 0.5021 with one-sided task-bootstrap lower

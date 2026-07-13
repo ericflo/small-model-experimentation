@@ -83,17 +83,17 @@
   5% ceiling. No post-failure axis qualified independently—negative and
   non-integer were 9/9 in both blocks, while blank had only one in-band shape
   per block and the shape changed. Do not train on these failed-test states.
-- Active designed and preregistered successor:
-  `qwen35_4b_counterfactual_evidence_acquisition_curriculum`. On the opened
-  predecessor trajectories, all 72 failed-test cases reached a correct patch,
-  but inferred rejected-patch first-patch correctness was 0/54 and visible-test
-  inspection before first patch was 0/72. Build counterfactual pairs with
-  issue/source held constant and discriminating public evidence flipped; first
-  qualify, then train
-  `ambiguous_state→inspect_evidence→evidence_faithful_patch` alongside complete
-  recovery/verify/commit replay. Repair answer allowance in a separate frozen
-  preflight, and keep entropy/varentropy to mining/stratification rather than
-  correctness labels. No model-bearing run or result exists yet.
+- Completed prerequisite stop:
+  `qwen35_4b_counterfactual_evidence_acquisition_curriculum` ended at
+  `LINEAGE_LOCALITY_INFEASIBLE` before interface behavior or training. The
+  transaction-replay parent measured 0.110735 direct drift from C54 apex versus
+  the frozen 0.10 ceiling, while entropy passed; every downstream white-box
+  stage and Menagerie stayed sealed. The evidence-acquisition hypothesis
+  remains untested. Do not relax the gate or swap the parent/anchor in this
+  directory. Any successor must use fresh contexts and seeds, start from apex
+  or a prospectively fixed apex-compatible parent, and separately requalify
+  complete-loop retention plus acquisition headroom before copying the
+  curriculum onto fresh skins.
 - Future retraining should calibrate plan dose by realized gradient/surprisal
   and avoid supervising plan starts already rank 1 or wildly off-policy lexical
   templates.

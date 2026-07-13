@@ -18,6 +18,7 @@ research_programs:
   - "posttraining_and_adaptation"
   - "process_control_and_tool_use"
 top_level_dirs:
+  - "analysis"
   - "configs"
   - "data"
   - "reports"
@@ -26,9 +27,9 @@ top_level_dirs:
   - "src"
   - "tests"
 file_counts:
-  json: 4
+  json: 6
   md: 7
   py: 30
   yaml: 3
-total_files: 44
-total_size_bytes: 947121
+total_files: 46
+total_size_bytes: 968630

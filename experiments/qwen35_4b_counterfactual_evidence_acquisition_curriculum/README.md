@@ -1,7 +1,6 @@
 # Counterfactual evidence-acquisition curriculum
 
-**Status:** in-progress · since 2026-07-13 · designed and preregistered; no
-model-bearing run or scientific result.
+**Status:** finished · `LINEAGE_LOCALITY_INFEASIBLE` · 2026-07-13.
 
 This experiment tests whether transition-balanced action supervision can teach
 Qwen3.5-4B to search decisive public repository evidence *before* its first
@@ -37,6 +36,22 @@ across unseen coding families, evidence paths, and query wording while
 preserving `rejected_patch -> changed_patch`,
 `failed_test -> diagnose/revise`, `patch_ok -> verify`, and
 `passed_test -> commit`?
+
+## Result
+
+The experiment stopped at its first model-bearing gate, before interface
+sampling or training. On the frozen 48-context block, the transaction-replay
+start checkpoint had median centered non-target logit drift `0.110735` from
+the apex anchor, above the preregistered `0.100000` ceiling. Entropy retention
+passed: mean entropy changed by `+0.013636` against a `-0.050000` floor, and
+mean varentropy changed by `+0.000297`.
+
+The terminal verdict is `LINEAGE_LOCALITY_INFEASIBLE`. The answer-band ladder,
+qualification, all three training arms, transfer, retention, uncertainty
+diagnostics, and Menagerie remained sealed. This does not test whether the
+evidence-acquisition curriculum works; it shows that the chosen start/anchor
+pair was not local enough for the frozen causal comparison. Any repair requires
+a new intake and experiment rather than a wider post-result threshold here.
 
 ## Why this question is next
 
@@ -131,7 +146,11 @@ internal uncertainty measurement, or a universal capability unlock. A
 Menagerie pass would add cross-instrument evidence without erasing those
 limits.
 
-## Run plan
+## Frozen run protocol
+
+The commands below record the preregistered protocol. The terminal disposition
+now blocks every scientific command in this directory; they are retained for
+auditability, not as pending work.
 
 Model-free smoke:
 
@@ -180,21 +199,14 @@ design-only brief/headline chart, missing program evidence, or stale generated
 indexes. The experiment is not finished until the post-push verification
 succeeds and CI is green.
 
-## Current state
+## Final state
 
-The deterministic model-free smoke passed. Each arm contains 432 encoded rows,
-with 48 rows and approximately 16,000 weighted action tokens at every one of
-the nine registered transitions; the within-dyad shuffle preserves prompt and
-target multisets, and all counterfactual patches cross-fail. Exact start/anchor
-tokenizer prompts and token IDs also match on all 48 locality contexts. The CPU-
-only context-geometry receipt confirms that registered histories fit the
-16,384-token window at the largest answer rung with more than 10,000 tokens of
-worst-case headroom.
-
-These are implementation-readiness checks, not evidence for the hypothesis.
-No Qwen output, adapter, trained checkpoint, behavioral score, transfer score,
-or benchmark event exists for this experiment. The next boundary is the clean,
-pushed design commit followed by its digest-bound lock receipt.
+The deterministic model-free smoke passed, the immutable 35-file design was
+locked to commit `7311bbeeef2bffe72024eae5b4136c07bbaa7704`, and the exact
+lineage-locality gate then failed on drift while passing entropy retention.
+Only symmetric next-token logit measurements were produced. No behavioral
+trajectory, adapter, trained checkpoint, transfer score, or benchmark event
+exists for this experiment, and zero Menagerie seeds were consumed.
 
 ## Artifacts
 
@@ -206,5 +218,9 @@ pushed design commit followed by its digest-bound lock receipt.
 - `reports/context_geometry_receipt.json`: model-free context-fit check.
 - `reports/smoke_receipt.json`: deterministic bank, tokenizer, batching,
   firewall, and counterfactual-invariant smoke.
-- `reports/artifact_manifest.yaml`: external banks, adapters, merged models,
-  trajectories, logits, and regeneration commands.
+- `analysis/locality_start_vs_anchor.json`: terminal symmetric logit-locality
+  result.
+- `runs/terminal_disposition.json`: open/closed lifecycle record for
+  `LINEAGE_LOCALITY_INFEASIBLE`.
+- `reports/artifact_manifest.yaml`: exact external-bank checksums, tracked
+  result artifacts, absent downstream artifacts, and lifecycle commands.

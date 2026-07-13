@@ -98,10 +98,35 @@
   or scientific result exists.
 - No file under `benchmarks/` was read or imported.
 
-## Next boundary
+## 2026-07-13 — Immutable design and lock
 
-1. Finish the post-smoke adversarial implementation review.
-2. Commit and push the frozen design directly to `main`.
-3. Write, commit, and push the digest-bound design-lock receipt.
-4. Run exact start-to-apex locality feasibility.
-5. Only a pass may authorize the outcome-free interface ladder.
+- Committed and pushed the frozen 35-file design directly to `main` at
+  `7311bbeeef2bffe72024eae5b4136c07bbaa7704`.
+- Wrote the digest-bound preregistration receipt and pushed it directly to
+  `main` in commit `b31cd7a2`. The design-lock digest is
+  `642e057f72dbe8e8eccae1ff59396ed7156677350f222ef862259cf2d20dc0be`.
+- Confirmed that no model output preceded the immutable lock.
+
+## 2026-07-13 — Terminal lineage-locality gate
+
+- Ran only the registered direct start-to-apex locality prerequisite on the
+  frozen 48-context block. Rendered prompts and token IDs matched exactly.
+- Median centered non-target logit drift was `0.110735`, above the frozen
+  `0.100000` ceiling. All 48 row-level drift estimates exceeded the ceiling.
+- Mean entropy delta was `+0.013636` against the `-0.050000` retention floor;
+  mean varentropy delta was `+0.000297` and remained diagnostic only.
+- Recorded the terminal verdict `LINEAGE_LOCALITY_INFEASIBLE`. The answer-band
+  ladder, interface behavior, qualification, all training arms, candidate
+  evaluation, transfer, retention, uncertainty analysis, and Menagerie never
+  opened. Zero benchmark seeds were consumed.
+- This is a parent/anchor eligibility stop, not a negative result for
+  counterfactual evidence acquisition or conditional-transition training. No
+  claim-ledger entry is warranted.
+
+## Terminal boundary
+
+The experiment cannot be rescued, rerun, or re-referenced to a different
+checkpoint in this directory. Any successor requires a new intake, fresh
+contexts and seeds, and either an apex-rooted start or a prospectively selected
+apex-compatible parent. The registered ceiling must not be widened after the
+observed miss.

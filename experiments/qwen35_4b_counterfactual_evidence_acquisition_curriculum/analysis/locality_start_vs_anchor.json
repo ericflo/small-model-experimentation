@@ -1,0 +1,442 @@
+{
+  "after_merge_receipt_sha256": "9ed37162726874fd6750de477330949da343b1aeae3c837d9a2377282f3a90b3",
+  "after_model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_transaction_invariant_recovery_curriculum/merged/transaction_replay",
+  "after_model_config_sha256": "f64803e92c6b93971a8e4fa89a811c8607b9b4efd6d0df0e6ca6016404f42630",
+  "after_model_generation_config_sha256": "8e29eeb222454c2a417b17547a84aee206c110a033418b7c0342cd75e75d92a0",
+  "after_model_weight_sha256": "1cf5fbca317808d6d00225f5cd533c82c7e1602b2b2e5e2da8f4307b01941ba3",
+  "after_rendered_prompts_sha256": "dffc42e92a3609fd7165cf96d48c46b70016a24146421512c8116871653d10b8",
+  "after_tokenized_contexts_sha256": "e93343a4e228b64f75105e6a8f240acee7a0a2c200b442259d83a145b9ab2a71",
+  "after_tokenizer_compatibility_sha256": "8b1cfe687ea0e65383cddc72a798f4f3f7a27cc90bda070989e0818f0f153274",
+  "after_tokenizer_files": {
+    "chat_template.jinja": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+    "tokenizer.json": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+    "tokenizer_config.json": "bee8eba30f0eb4af73c0fe2cd06d0f89b657d7819941c438157ec42f7c80ea87"
+  },
+  "after_tokenizer_manifest_sha256": "0657bf69973ea13d68baf22583410459952ef43116e75031d0ff1d83fa247617",
+  "auditor_sha256": "260ad355e20c8ce00e6bcaa5954182c6e7798e1b06c459b93f1db5f282e6db2e",
+  "before_merge_receipt_sha256": "ece3c696e1abfb071d33ba523d8007bb1506d22047a1c11aa57a48a280cd1b0c",
+  "before_model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_repo_search_compress_bank/merged/apex_replay",
+  "before_model_config_sha256": "f64803e92c6b93971a8e4fa89a811c8607b9b4efd6d0df0e6ca6016404f42630",
+  "before_model_generation_config_sha256": "8e29eeb222454c2a417b17547a84aee206c110a033418b7c0342cd75e75d92a0",
+  "before_model_weight_sha256": "c933168075a0fc011f31ee54f83d722cc91423ce1a0ac19bfe40dfab92f608d5",
+  "before_rendered_prompts_sha256": "dffc42e92a3609fd7165cf96d48c46b70016a24146421512c8116871653d10b8",
+  "before_tokenized_contexts_sha256": "e93343a4e228b64f75105e6a8f240acee7a0a2c200b442259d83a145b9ab2a71",
+  "before_tokenizer_compatibility_sha256": "8b1cfe687ea0e65383cddc72a798f4f3f7a27cc90bda070989e0818f0f153274",
+  "before_tokenizer_files": {
+    "chat_template.jinja": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+    "tokenizer.json": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+    "tokenizer_config.json": "9cf04fffe3d8c3b85e439fb35c7acad0761ab51c422a8c4256d9f887c3a0be7d"
+  },
+  "before_tokenizer_manifest_sha256": "71f553a55518a7f58520d9cca5ac3f26fff3c4c63aa7aa4e52324b512d3ae887",
+  "ceiling": 0.1,
+  "checks": {
+    "context_count": true,
+    "entropy_retained": true,
+    "finite": true,
+    "within_drift_ceiling": false
+  },
+  "contexts": "/workspace/small-model-experimentation/experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/data/locality_contexts.json",
+  "contexts_sha256": "551d3cb46f8d8a572e7bfbd8e2d881947d34109a8daaccc87d1f4844504b6c67",
+  "entropy_delta_min": -0.05,
+  "gate": {
+    "passed": false
+  },
+  "max_context_tokens": 1024,
+  "mean_entropy_after": 0.2066735727712512,
+  "mean_entropy_before": 0.19303710091238221,
+  "mean_entropy_delta": 0.013636471858868987,
+  "mean_varentropy_after": 0.41717362341781455,
+  "mean_varentropy_before": 0.4168764818459749,
+  "mean_varentropy_delta": 0.00029714157183963197,
+  "median_non_target_centered_logit_drift": 0.11073476076126099,
+  "n_contexts": 48,
+  "rendered_prompts_equal": true,
+  "rows": [
+    {
+      "entropy_after": 0.2750815749168396,
+      "entropy_before": 0.2535289525985718,
+      "id": "policy-locality-s93900-00-00",
+      "median_non_target_centered_logit_drift": 0.10874950885772705,
+      "varentropy_after": 0.4981641471385956,
+      "varentropy_before": 0.4918472170829773
+    },
+    {
+      "entropy_after": 0.1475236862897873,
+      "entropy_before": 0.13459588587284088,
+      "id": "policy-locality-s93900-00-01",
+      "median_non_target_centered_logit_drift": 0.1094667911529541,
+      "varentropy_after": 0.3892131745815277,
+      "varentropy_before": 0.37406671047210693
+    },
+    {
+      "entropy_after": 0.11135978996753693,
+      "entropy_before": 0.10145926475524902,
+      "id": "policy-locality-s93900-00-02",
+      "median_non_target_centered_logit_drift": 0.11084491014480591,
+      "varentropy_after": 0.33685702085494995,
+      "varentropy_before": 0.32197150588035583
+    },
+    {
+      "entropy_after": 0.12350224703550339,
+      "entropy_before": 0.12397614121437073,
+      "id": "policy-locality-s93900-00-03",
+      "median_non_target_centered_logit_drift": 0.10941821336746216,
+      "varentropy_after": 0.36320504546165466,
+      "varentropy_before": 0.3672981262207031
+    },
+    {
+      "entropy_after": 0.13443176448345184,
+      "entropy_before": 0.13465993106365204,
+      "id": "policy-locality-s93900-00-04",
+      "median_non_target_centered_logit_drift": 0.10703670978546143,
+      "varentropy_after": 0.3722192943096161,
+      "varentropy_before": 0.3746268153190613
+    },
+    {
+      "entropy_after": 0.16154855489730835,
+      "entropy_before": 0.14759932458400726,
+      "id": "policy-locality-s93900-00-05",
+      "median_non_target_centered_logit_drift": 0.1028432846069336,
+      "varentropy_after": 0.4032241404056549,
+      "varentropy_before": 0.3891966938972473
+    },
+    {
+      "entropy_after": 0.12236501276493073,
+      "entropy_before": 0.134649857878685,
+      "id": "policy-locality-s93900-00-06",
+      "median_non_target_centered_logit_drift": 0.11090290546417236,
+      "varentropy_after": 0.3540709316730499,
+      "varentropy_before": 0.37358781695365906
+    },
+    {
+      "entropy_after": 0.1475558876991272,
+      "entropy_before": 0.1477293223142624,
+      "id": "policy-locality-s93900-00-07",
+      "median_non_target_centered_logit_drift": 0.11249446868896484,
+      "varentropy_after": 0.3888387084007263,
+      "varentropy_before": 0.3905439078807831
+    },
+    {
+      "entropy_after": 0.10110536217689514,
+      "entropy_before": 0.10128612071275711,
+      "id": "policy-locality-s93900-00-08",
+      "median_non_target_centered_logit_drift": 0.10990536212921143,
+      "varentropy_after": 0.31917497515678406,
+      "varentropy_before": 0.32118916511535645
+    },
+    {
+      "entropy_after": 0.19394363462924957,
+      "entropy_before": 0.1622573733329773,
+      "id": "policy-locality-s93900-00-09",
+      "median_non_target_centered_logit_drift": 0.11016201972961426,
+      "varentropy_after": 0.4385027587413788,
+      "varentropy_before": 0.40997087955474854
+    },
+    {
+      "entropy_after": 0.11130969971418381,
+      "entropy_before": 0.11136679351329803,
+      "id": "policy-locality-s93900-00-10",
+      "median_non_target_centered_logit_drift": 0.11179839074611664,
+      "varentropy_after": 0.3373183012008667,
+      "varentropy_before": 0.33813929557800293
+    },
+    {
+      "entropy_after": 0.16187302768230438,
+      "entropy_before": 0.1620541512966156,
+      "id": "policy-locality-s93900-00-11",
+      "median_non_target_centered_logit_drift": 0.11077618598937988,
+      "varentropy_after": 0.40708228945732117,
+      "varentropy_before": 0.40906989574432373
+    },
+    {
+      "entropy_after": 0.6167774200439453,
+      "entropy_before": 0.5667707324028015,
+      "id": "policy-locality-s93900-01-00",
+      "median_non_target_centered_logit_drift": 0.11801284551620483,
+      "varentropy_after": 0.26213496923446655,
+      "varentropy_before": 0.33065342903137207
+    },
+    {
+      "entropy_after": 0.31861746311187744,
+      "entropy_before": 0.272432416677475,
+      "id": "policy-locality-s93900-01-01",
+      "median_non_target_centered_logit_drift": 0.12238538265228271,
+      "varentropy_after": 0.47971948981285095,
+      "varentropy_before": 0.48216482996940613
+    },
+    {
+      "entropy_after": 0.23044931888580322,
+      "entropy_before": 0.21223212778568268,
+      "id": "policy-locality-s93900-01-02",
+      "median_non_target_centered_logit_drift": 0.12200915813446045,
+      "varentropy_after": 0.4625985026359558,
+      "varentropy_before": 0.45914629101753235
+    },
+    {
+      "entropy_after": 0.2726297080516815,
+      "entropy_before": 0.2731052339076996,
+      "id": "policy-locality-s93900-01-03",
+      "median_non_target_centered_logit_drift": 0.12157678604125977,
+      "varentropy_after": 0.4813019037246704,
+      "varentropy_before": 0.48632946610450745
+    },
+    {
+      "entropy_after": 0.2109975665807724,
+      "entropy_before": 0.2503678500652313,
+      "id": "policy-locality-s93900-01-04",
+      "median_non_target_centered_logit_drift": 0.11512434482574463,
+      "varentropy_after": 0.44778627157211304,
+      "varentropy_before": 0.46994784474372864
+    },
+    {
+      "entropy_after": 0.34343385696411133,
+      "entropy_before": 0.2944822311401367,
+      "id": "policy-locality-s93900-01-05",
+      "median_non_target_centered_logit_drift": 0.11558026075363159,
+      "varentropy_after": 0.4733244478702545,
+      "varentropy_before": 0.47802096605300903
+    },
+    {
+      "entropy_after": 0.344342440366745,
+      "entropy_before": 0.31926319003105164,
+      "id": "policy-locality-s93900-01-06",
+      "median_non_target_centered_logit_drift": 0.12359607219696045,
+      "varentropy_after": 0.47992128133773804,
+      "varentropy_before": 0.48411235213279724
+    },
+    {
+      "entropy_after": 0.31792476773262024,
+      "entropy_before": 0.2715839147567749,
+      "id": "policy-locality-s93900-01-07",
+      "median_non_target_centered_logit_drift": 0.11998414993286133,
+      "varentropy_after": 0.4718407988548279,
+      "varentropy_before": 0.47203317284584045
+    },
+    {
+      "entropy_after": 0.21131592988967896,
+      "entropy_before": 0.1936182975769043,
+      "id": "policy-locality-s93900-01-08",
+      "median_non_target_centered_logit_drift": 0.12294745445251465,
+      "varentropy_after": 0.4507850408554077,
+      "varentropy_before": 0.43841129541397095
+    },
+    {
+      "entropy_after": 0.3429979979991913,
+      "entropy_before": 0.3183225989341736,
+      "id": "policy-locality-s93900-01-09",
+      "median_non_target_centered_logit_drift": 0.12095937132835388,
+      "varentropy_after": 0.46895676851272583,
+      "varentropy_before": 0.47685563564300537
+    },
+    {
+      "entropy_after": 0.23047000169754028,
+      "entropy_before": 0.23055177927017212,
+      "id": "policy-locality-s93900-01-10",
+      "median_non_target_centered_logit_drift": 0.11762833595275879,
+      "varentropy_after": 0.4643399119377136,
+      "varentropy_before": 0.46539944410324097
+    },
+    {
+      "entropy_after": 0.3181596100330353,
+      "entropy_before": 0.2720162570476532,
+      "id": "policy-locality-s93900-01-11",
+      "median_non_target_centered_logit_drift": 0.11878538131713867,
+      "varentropy_after": 0.4745359718799591,
+      "varentropy_before": 0.4771948456764221
+    },
+    {
+      "entropy_after": 0.4605783522129059,
+      "entropy_before": 0.3791617751121521,
+      "id": "policy-locality-s93900-02-00",
+      "median_non_target_centered_logit_drift": 0.10871893167495728,
+      "varentropy_after": 0.4658252000808716,
+      "varentropy_before": 0.5255700349807739
+    },
+    {
+      "entropy_after": 0.16310502588748932,
+      "entropy_before": 0.16393686830997467,
+      "id": "policy-locality-s93900-02-01",
+      "median_non_target_centered_logit_drift": 0.11252760887145996,
+      "varentropy_after": 0.41614729166030884,
+      "varentropy_before": 0.42340582609176636
+    },
+    {
+      "entropy_after": 0.12464390695095062,
+      "entropy_before": 0.114352747797966,
+      "id": "policy-locality-s93900-02-02",
+      "median_non_target_centered_logit_drift": 0.11172342300415039,
+      "varentropy_after": 0.37043702602386475,
+      "varentropy_before": 0.35957908630371094
+    },
+    {
+      "entropy_after": 0.15220242738723755,
+      "entropy_before": 0.1388370394706726,
+      "id": "policy-locality-s93900-02-03",
+      "median_non_target_centered_logit_drift": 0.11337089538574219,
+      "varentropy_after": 0.41973280906677246,
+      "varentropy_before": 0.4023442566394806
+    },
+    {
+      "entropy_after": 0.16275973618030548,
+      "entropy_before": 0.14915288984775543,
+      "id": "policy-locality-s93900-02-04",
+      "median_non_target_centered_logit_drift": 0.10636591911315918,
+      "varentropy_after": 0.4138583838939667,
+      "varentropy_before": 0.4026688039302826
+    },
+    {
+      "entropy_after": 0.16395148634910583,
+      "entropy_before": 0.14982053637504578,
+      "id": "policy-locality-s93900-02-05",
+      "median_non_target_centered_logit_drift": 0.10494181513786316,
+      "varentropy_after": 0.421387255191803,
+      "varentropy_before": 0.4062589406967163
+    },
+    {
+      "entropy_after": 0.2143249362707138,
+      "entropy_before": 0.21533694863319397,
+      "id": "policy-locality-s93900-02-06",
+      "median_non_target_centered_logit_drift": 0.1111595630645752,
+      "varentropy_after": 0.4694567024707794,
+      "varentropy_before": 0.4775298535823822
+    },
+    {
+      "entropy_after": 0.19557495415210724,
+      "entropy_before": 0.1798427551984787,
+      "id": "policy-locality-s93900-02-07",
+      "median_non_target_centered_logit_drift": 0.11246263980865479,
+      "varentropy_after": 0.4493630826473236,
+      "varentropy_before": 0.4413084089756012
+    },
+    {
+      "entropy_after": 0.13753634691238403,
+      "entropy_before": 0.12528963387012482,
+      "id": "policy-locality-s93900-02-08",
+      "median_non_target_centered_logit_drift": 0.11478081345558167,
+      "varentropy_after": 0.39397114515304565,
+      "varentropy_before": 0.37679076194763184
+    },
+    {
+      "entropy_after": 0.2527591288089752,
+      "entropy_before": 0.23334240913391113,
+      "id": "policy-locality-s93900-02-09",
+      "median_non_target_centered_logit_drift": 0.10835433006286621,
+      "varentropy_after": 0.4829917848110199,
+      "varentropy_before": 0.4808236062526703
+    },
+    {
+      "entropy_after": 0.1959419846534729,
+      "entropy_before": 0.164145365357399,
+      "id": "policy-locality-s93900-02-10",
+      "median_non_target_centered_logit_drift": 0.11076068878173828,
+      "varentropy_after": 0.45347219705581665,
+      "varentropy_before": 0.4247768521308899
+    },
+    {
+      "entropy_after": 0.2139796018600464,
+      "entropy_before": 0.19644705951213837,
+      "id": "policy-locality-s93900-02-11",
+      "median_non_target_centered_logit_drift": 0.10461676120758057,
+      "varentropy_after": 0.4682748317718506,
+      "varentropy_before": 0.45803302526474
+    },
+    {
+      "entropy_after": 0.32082870602607727,
+      "entropy_before": 0.2973201870918274,
+      "id": "policy-locality-s93900-03-00",
+      "median_non_target_centered_logit_drift": 0.10768231749534607,
+      "varentropy_after": 0.4927879571914673,
+      "varentropy_before": 0.4973258376121521
+    },
+    {
+      "entropy_after": 0.16274017095565796,
+      "entropy_before": 0.1629304587841034,
+      "id": "policy-locality-s93900-03-01",
+      "median_non_target_centered_logit_drift": 0.10702879726886749,
+      "varentropy_after": 0.41406702995300293,
+      "varentropy_before": 0.41625484824180603
+    },
+    {
+      "entropy_after": 0.11218205094337463,
+      "entropy_before": 0.11272329837083817,
+      "id": "policy-locality-s93900-03-02",
+      "median_non_target_centered_logit_drift": 0.10573005676269531,
+      "varentropy_after": 0.343997061252594,
+      "varentropy_before": 0.348593145608902
+    },
+    {
+      "entropy_after": 0.12372300028800964,
+      "entropy_before": 0.11327575892210007,
+      "id": "policy-locality-s93900-03-03",
+      "median_non_target_centered_logit_drift": 0.11070883274078369,
+      "varentropy_after": 0.3646143972873688,
+      "varentropy_before": 0.3524019420146942
+    },
+    {
+      "entropy_after": 0.1348007768392563,
+      "entropy_before": 0.1352086216211319,
+      "id": "policy-locality-s93900-03-04",
+      "median_non_target_centered_logit_drift": 0.10343813896179199,
+      "varentropy_after": 0.3748698830604553,
+      "varentropy_before": 0.3786013722419739
+    },
+    {
+      "entropy_after": 0.16220076382160187,
+      "entropy_before": 0.1622609794139862,
+      "id": "policy-locality-s93900-03-05",
+      "median_non_target_centered_logit_drift": 0.10496410727500916,
+      "varentropy_after": 0.40870001912117004,
+      "varentropy_before": 0.4096415340900421
+    },
+    {
+      "entropy_after": 0.16356982290744781,
+      "entropy_before": 0.16454529762268066,
+      "id": "policy-locality-s93900-03-06",
+      "median_non_target_centered_logit_drift": 0.10655534267425537,
+      "varentropy_after": 0.4189675748348236,
+      "varentropy_before": 0.4269649386405945
+    },
+    {
+      "entropy_after": 0.16201071441173553,
+      "entropy_before": 0.14792217314243317,
+      "id": "policy-locality-s93900-03-07",
+      "median_non_target_centered_logit_drift": 0.10986857116222382,
+      "varentropy_after": 0.40696340799331665,
+      "varentropy_before": 0.39149972796440125
+    },
+    {
+      "entropy_after": 0.11165347695350647,
+      "entropy_before": 0.1016792505979538,
+      "id": "policy-locality-s93900-03-08",
+      "median_non_target_centered_logit_drift": 0.10951828956604004,
+      "varentropy_after": 0.3396259844303131,
+      "varentropy_before": 0.3242238461971283
+    },
+    {
+      "entropy_after": 0.1941906213760376,
+      "entropy_before": 0.17813298106193542,
+      "id": "policy-locality-s93900-03-09",
+      "median_non_target_centered_logit_drift": 0.10531306266784668,
+      "varentropy_after": 0.4397996962070465,
+      "varentropy_before": 0.4295007288455963
+    },
+    {
+      "entropy_after": 0.12278863787651062,
+      "entropy_before": 0.11201712489128113,
+      "id": "policy-locality-s93900-03-10",
+      "median_non_target_centered_logit_drift": 0.10416746139526367,
+      "varentropy_after": 0.35772469639778137,
+      "varentropy_before": 0.34330353140830994
+    },
+    {
+      "entropy_after": 0.16256853938102722,
+      "entropy_before": 0.17818893492221832,
+      "id": "policy-locality-s93900-03-11",
+      "median_non_target_centered_logit_drift": 0.10871851444244385,
+      "varentropy_after": 0.41218236088752747,
+      "varentropy_before": 0.43089261651039124
+    }
+  ],
+  "schema_version": 1,
+  "tokenized_context_ids_equal": true
+}

@@ -2,10 +2,11 @@
 
 ## Status
 
-**Designed and preregistered; no scientific result.** No model-bearing call,
-training update, transfer evaluation, or Menagerie event has occurred. This
-report records the pre-result research contract so later outcomes cannot change
-the question, controls, or interpretation boundary.
+**Finished — `LINEAGE_LOCALITY_INFEASIBLE` (2026-07-13).** The first
+model-bearing gate stopped the experiment before interface sampling, behavioral
+qualification, or training. The chosen transaction-replay start checkpoint was
+not sufficiently local to the frozen apex anchor for the registered causal
+comparison. No Menagerie event occurred.
 
 ## Research-program fit
 
@@ -139,28 +140,46 @@ No benchmark source, item, transcript, or result detail may be read. White-box
 behavior uses one pinned vLLM backend; Transformers is limited to symmetric
 logit audits and training internals.
 
-Banks, adapters, merged checkpoints, detailed trajectories, sample pools,
-locality logits, and uncertainty rows live under
+The three deterministic banks live under
 `large_artifacts/qwen35_4b_counterfactual_evidence_acquisition_curriculum` and
-are bound by compact checksums. Their planned locations and regeneration paths
-are in [`artifact_manifest.yaml`](artifact_manifest.yaml).
+are bound by compact checksums. The compact locality summary is tracked in
+`analysis/locality_start_vs_anchor.json`; row-level logits were not retained.
+No adapter, merged candidate, behavior trajectory, sample pool, uncertainty
+table, or benchmark artifact was created. The exact inventory is in
+[`artifact_manifest.yaml`](artifact_manifest.yaml).
 
-## Current evidence
+## Result
 
-The deterministic model-free smoke passed. All three banks encode 432 rows,
-with 48 rows and approximately 16,000 weighted action tokens at every registered
-conditional transition. The dyad-shuffle multiset checks, counterpart cross-
-failure checks, firewall checks, serial-forward compute accounting, and exact
-start/anchor prompt-token equivalence all pass. The separate context receipt
-reports that every registered synthetic history fits a 16,384-token context at
-the largest answer rung, with more than 10,000 tokens of worst-case headroom.
+The deterministic model-free smoke and exact prompt-token equivalence checks
+passed. The immutable 35-file design was locked to commit
+`7311bbeeef2bffe72024eae5b4136c07bbaa7704`, and the locality gate evaluated
+the registered 48 contexts symmetrically on the exact frozen checkpoints.
 
-These validate mechanical boundaries only. They loaded tokenizers but no model
-weights and generated no model output. There is still no evidence for or
-against the acquisition hypothesis, and no claim-ledger update is warranted.
+| Registered quantity | Observed | Gate | Result |
+| --- | ---: | ---: | --- |
+| Median centered non-target logit drift | 0.110735 | at most 0.100000 | fail |
+| Mean entropy delta, start minus anchor direction | +0.013636 | at least -0.050000 | pass |
+| Mean varentropy delta | +0.000297 | diagnostic only | neutral |
+| Contexts | 48 | exactly 48 | pass |
 
-## Next authorized action
+The drift failure triggered the preregistered terminal verdict
+`LINEAGE_LOCALITY_INFEASIBLE`. The answer-band ladder, qualification blocks,
+all three training arms, candidate locality, calibration, transfer, retention,
+uncertainty analysis, and Menagerie were sealed immediately. Zero benchmark
+seeds were consumed.
 
-Commit and push the immutable design, write and push the digest-bound lock
-receipt, and run the exact start-to-apex locality feasibility gate. A pass
-authorizes the interface preflight; nothing later is authorized yet.
+## Interpretation
+
+This result does not test evidence-acquisition behavior or the proposed
+curriculum. It establishes only that the registered start/anchor pair cannot
+support the intended attribution under the frozen 0.10 locality contract. The
+entropy guard rules out the specific failure mode of a broad entropy collapse;
+it does not rescue the failed drift gate, and varentropy remains diagnostic.
+
+No new shared claim is warranted because the comparison is specific to this
+checkpoint pair and context distribution. The durable operational lesson is
+to measure exact parent-to-anchor locality before investing in a downstream
+causal curriculum. A successor would need a new intake and preregistration
+using either a genuinely local reference pair or a design that treats their
+pre-existing difference as an explicit baseline. The threshold cannot be
+widened or the run rescued in this result-bearing directory.

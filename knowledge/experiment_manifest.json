@@ -1422,7 +1422,7 @@
   },
   {
     "file_counts": {
-      ".json": 4,
+      ".json": 6,
       ".md": 7,
       ".py": 30,
       ".yaml": 3
@@ -1448,6 +1448,7 @@
     ],
     "title": "Counterfactual evidence-acquisition curriculum",
     "top_level_dirs": [
+      "analysis",
       "configs",
       "data",
       "reports",
@@ -1456,8 +1457,8 @@
       "src",
       "tests"
     ],
-    "total_files": 44,
-    "total_size_bytes": 947121
+    "total_files": 46,
+    "total_size_bytes": 968630
   },
   {
     "file_counts": {
