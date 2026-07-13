@@ -3,35 +3,35 @@
  "generated_on": "2026-07-05",
  "experiments": {
   "qwen35_4b_semantic_anchor_coordinate_branching": {
-   "verdict_tag": "A stricter semantic-anchor bridge is ready, but not run",
-   "concept_primer": "Imagine pausing a scratchpad and writing a candidate name into a dedicated hypothesis slot. This study asks whether copying only the model's internal coordinates from another candidate can make that slot behave as the new candidate, even though the visible word stays unchanged.",
-   "plain_question": "Does internal candidate control work when it uses a named hypothesis slot and copies a real candidate state, rather than nudging an arbitrary scratchpad token?",
-   "plain_answer": "Not known yet. The design now requires more than copying a name: an internal candidate must select a task-randomized label for the result of actually applying that candidate's operation. Fresh tasks, controls, and the model-free smoke pass; no model outcome has run.",
-   "why_it_matters": "This is the final clean test of whether the earlier causal coordinate result can become a reasoning control. It also compares the simpler visible-text hypothesis method, so a useful prompting unlock will not be miscredited to hidden intervention.",
-   "verdict_tone": "neutral",
+   "verdict_tag": "The late anchor writes names, but the consequence test is invalid",
+   "concept_primer": "Imagine pausing a scratchpad, placing a candidate name in a dedicated slot, and copying the model's internal state for a different candidate into that slot. The important test is whether later computation follows the copied candidate—not merely whether the next word changes.",
+   "plain_question": "Can a copied internal candidate state at a named hypothesis slot drive a separately computed consequence inside real reasoning?",
+   "plain_answer": "This run cannot establish that. The internal edit strongly changed the model's choice among candidate names, but none of 440 consequence outputs began with a valid answer token. Even in a restricted twelve-choice readout, the edited state chose the intended consequence only 5 of 44 times, nearly the 4-of-44 control rate. A post-run audit also found that two rotating maps canceled, leaving the final name-to-label relation fixed across tasks.",
+   "why_it_matters": "The numerical intervention controls all passed, so the failure is not hidden drift. But formatting failure and the fixed composed mapping make this an invalid consequence interface, not a clean negative about internal-state transport. The safe lesson is narrower: changing the next candidate name is not evidence that reasoning consumed it.",
+   "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Fresh tasks reserved",
-     "value": "4 + 24 + 48",
-     "sub": "mechanics, qualification, and untouched confirmation"
+     "label": "Unrestricted outputs parsed",
+     "value": "56 / 880",
+     "sub": "6.36%, below the frozen 95% requirement"
     },
     {
-     "label": "Prior task fingerprints checked",
-     "value": "1,046",
-     "sub": "zero behavior collisions"
+     "label": "Consequence outputs parsed",
+     "value": "0 / 440",
+     "sub": "every first token was a formatting opener"
     },
     {
-     "label": "Candidate coordinates copied",
-     "value": "24 × 5",
-     "sub": "all frozen coordinates at layers 4 through 8"
+     "label": "Edited consequence choices",
+     "value": "5 / 44",
+     "sub": "versus 4/44 for source and generic controls"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "The study grows only after each earlier gate passes",
-     "chart_read": "The three bars show how many fresh task units are reserved for the no-answer mechanics check, the first correctness test, and the untouched replication. Later bars stay sealed until the earlier decision passes.",
-     "chart_takeaway": "The expensive 48-task replication cannot be opened by a weak write or a noisy 24-task result."
+     "chart_plain_title": "Writing a candidate name did not carry through to its consequence",
+     "chart_read": "For each method, compare the dark bar for choosing the supplied candidate name with the light bar for choosing the label produced by actually applying that candidate's operation. These are restricted-choice diagnostics; the unrestricted output gate failed separately.",
+     "chart_takeaway": "Visible text, full-state copying, and coordinate copying all changed the immediate name choice, while their computed consequences stayed near the control rate."
     }
    ]
   },
