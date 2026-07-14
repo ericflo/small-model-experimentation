@@ -1,5 +1,5 @@
 experiment_id: qwen35_4b_universal_failure_selected_restart_target_match
-status: in-progress
+status: complete_local_negative_aggregate_sealed
 model:
   id: Qwen/Qwen3.5-4B
   revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
@@ -115,7 +115,7 @@ deployment_results:
     tree_sha256: 9f64dc55f290de8f0b70bd51259f40cfe2a1c5f823614d0e7547e94201a14a1b
 local_gate:
   designed: true
-  completed: false
+  completed: true
   seed: 88010
   rows_per_arm: 26
   arms: [replay_parent, replay_control, counterfactual_restart_candidate]
@@ -126,6 +126,16 @@ local_gate:
   max_tokens: 1024
   max_model_len: 4096
   strict_control_relative_wins_required: true
+local_results:
+  source_git_head: 64e01a6d966ce5cbf2ccab25a5bc498eb1031686
+  replay_parent: {correct: 17, parsed: 21, cap_contacts: 5, target_correct: 2}
+  replay_control: {correct: 16, parsed: 22, cap_contacts: 4, target_correct: 2}
+  counterfactual_restart_candidate: {correct: 15, parsed: 25, cap_contacts: 1, target_correct: 0}
+  candidate_absolute_pass: false
+  candidate_relative_checks_passed: 0
+  eligible: []
+  local_receipt_sha256: 39fe68b97109535f4127be763c8737c98dce5b4f5df3eefec2d991e62c54de9e
+  promotion_receipt_sha256: 4c381fbd005d5179952a397168f718750943c012f042d859bf3149044d676759
 firewall:
   benchmark_data_read: false
   aggregate_seed_open: false

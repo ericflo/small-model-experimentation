@@ -1,6 +1,8 @@
 # Failure-Selected Counterfactual Restart Curriculum
 
-**Status:** in-progress · since 2026-07-14 · both current-arm composites complete; publish checkpoint before local evaluation
+**Status:** finished
+
+Fresh local negative on 2026-07-14; aggregate sealed.
 
 This experiment tests whether selecting the stronger parent's fresh procedural
 failures and teaching clean verified restarts can beat exactly exposure-matched replay
@@ -69,21 +71,10 @@ PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B \
 
 ```
 
-Both paired training events and both current-arm explicit merges have completed.
-The smoke path reauthenticates their tracked receipts/logs, external adapters, full
-composite trees, and separately frozen fresh-local design. After the candidate-merge
-result is published and both repository workflows are green, the only authorized
-next event is:
-
-```bash
-PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B \
-  experiments/qwen35_4b_universal_failure_selected_restart_target_match/scripts/run.py \
-  --stage local
-
-```
-
-Local generation requires both published current-arm merge receipts and runs with
-`--stage local`.
+The full staged sequence is complete. The smoke path reauthenticates every tracked
+receipt/log, external adapter, full composite tree, and frozen local design. Result
+artifacts are immutable and the harness refuses overwrite; no further model or
+aggregate event is authorized in this directory.
 
 ## Results
 
@@ -181,19 +172,38 @@ shape, and durable failure receipts close deployment and transaction ambiguity.
 Aggregate seed 78,140 remains sealed. This is frozen design evidence, not a
 capability result.
 
+The one authorized local event then completed from pushed-green candidate-merge
+commit `64e01a6d`. All 78 requests ran through the same vLLM backend and frozen
+geometry. Parent/replay/candidate scored 17/16/15 correct, parsed 21/22/25, contacted
+the cap 5/4/1 times, and solved 2/2/0 of the six execute+induct+probe items. The
+candidate passed the parse, cap, and route-abstention checks but missed the 17/26
+accuracy floor and was 0/2 separately on execute, induction, and probe. It lost all
+four strict comparisons with both controls. Local/promotion receipt hashes are
+`39fe68b9...de9e` and `4c381fbd...6759`; promotion is empty,
+`benchmark_data_read=false`, and aggregate seed 78,140 remains sealed.
+
+This is a terminal local negative. The clean restart package materially improved
+bounded emission—four fewer caps and four more parses than the parent—but did not
+install the selected execution/induction policy and erased both probe successes.
+
 ## Interpretation
 
-This trial distinguishes two ideas the predecessor confounded: selecting data from
-the parent's actual failures, and conditioning training on the parent's failed
-trajectory. A positive result would support task-level failure selection plus clean
-recomputation, not long-prefix repair. A negative result would reject this balanced
-13-skill restart package at the matched exposure, not all on-policy learning.
+Task-level on-policy failure selection plus clean recomputation fixes the
+predecessor's long-prefix and target-exposure confounds, but it still does not install
+broad competence at this dose. The intervention changes termination behavior more
+reliably than semantic execution: candidate parse/cap metrics improved sharply while
+correctness fell below both controls and target skills collapsed to zero. This
+rejects the balanced 52-restart package under exact exposure, not all on-policy
+learning. A successor should distill short verified trajectories that are already in
+the model's policy support—successful sampled siblings of greedy failures—rather
+than another hand-authored oracle trace surface.
 
 ## Knowledgebase Update
 
-- Program backlog: register as the active result-separated universal successor.
-- Program evidence: update after the first preserved model event.
-- Claim ledger: unchanged until held-out evidence warrants a claim.
+- Program backlog/evidence and shared synthesis: record the terminal local negative
+  and the policy-supported successful-sibling successor constraint.
+- Claim ledger: unchanged; no held-out benchmark was opened and no broad capability
+  claim is warranted.
 
 ## Artifacts
 
@@ -215,4 +225,6 @@ recomputation, not long-prefix repair. A negative result would reject this balan
 - `reports/local_design_review.md` — explicit-composite and fresh-local adversarial review.
 - `data/local_tasks_seed88010.jsonl`, `data/local_input_seed88010.jsonl`, and
   `data/local_design_receipt.json` — executable truth, hidden-free input, and frozen local protocol.
+- `runs/local/seed88010.json` and `seed88010_promotion.json` — complete grading and
+  empty-promotion receipts; sibling raw output/metadata/log files preserve all three arms.
 - `src/vllm_runner.py` — pinned same-backend runner with explicit-composite gate.

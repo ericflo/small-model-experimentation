@@ -220,7 +220,7 @@
   failure-prefix continuation. A successor must move to short pre-failure decision
   interventions and match supervised target exposure.
 
-- Active result-separated successor:
+- Completed counterfactual-restart mechanism negative:
   `qwen35_4b_universal_failure_selected_restart_target_match` uses the published
   stronger replay composite on 624 fresh tasks, four prospective failures per each
   of 13 universal skills, then removes the parent's failed trajectory and supervises
@@ -251,7 +251,22 @@
   commit `2c78e655`, that candidate trained 320/320 rows with zero skips and 40/40
   updates; receipt/log/adapter hashes are `6aa5c3f1...9871` /
   `c8572c88...202a` / `2072c5c8...39bc`. Publish paired training, then freeze
-  explicit merges and fresh-local evaluation. No capability result exists yet.
+  explicit merges and fresh-local evaluation. Both exact seven-file composite trees
+  authenticated. Fresh seed 88010 then scored parent/replay/candidate 17/16/15
+  correct, 21/22/25 parsed, 5/4/1 caps, and 2/2/0 of six on
+  execute+induct+probe. Candidate failed its accuracy and all three target floors
+  plus all four relative checks; local/promotion hashes are `39fe68b9...de9e` /
+  `4c381fbd...6759`, and aggregate seed 78140 remains sealed. Retire another
+  hand-authored oracle restart surface: it improved termination while losing semantic
+  target competence.
+- Next result-separated universal successor: mine fresh procedural tasks where the
+  deployed parent fails greedily but produces at least one short verifier-correct
+  sibling under prospectively fixed same-model sampling. Distill those
+  policy-supported successful sibling trajectories from the original prompt against
+  exact-exposure replay, with fresh collection/training/local/aggregate seeds. Include
+  an availability gate per skill and a matched-compute sample-more ceiling; do not
+  fall back to oracle traces on tasks with no successful sibling, lower the unchanged
+  local gate, or reuse this result directory.
 
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.

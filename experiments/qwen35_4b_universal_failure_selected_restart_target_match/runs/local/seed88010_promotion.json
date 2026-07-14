@@ -1,0 +1,100 @@
+{
+  "aggregate_seed": 78140,
+  "aggregate_seed_open": false,
+  "backend": "vllm_merged_composite",
+  "benchmark_data_read": false,
+  "candidate": "counterfactual_restart_candidate",
+  "controls": [
+    "replay_control",
+    "replay_parent"
+  ],
+  "design_receipt_sha256": "124bbf99607105c22613e80a1965cf528a04e6211573b9c823ab1fc6e3e82db5",
+  "eligible": [],
+  "experiment_id": "qwen35_4b_universal_failure_selected_restart_target_match",
+  "gates": {
+    "counterfactual_restart_candidate": {
+      "adapter": "counterfactual_restart_candidate",
+      "cap_contacts": 1,
+      "checks": {
+        "cap_contacts_at_most_2": true,
+        "correct_at_least_17_of_26": false,
+        "execute_correct_at_least_1_of_2": false,
+        "induct_correct_at_least_1_of_2": false,
+        "parsed_at_least_24_of_26": true,
+        "probe_correct_at_least_1_of_2": false,
+        "route_abstentions_at_most_1": true
+      },
+      "correct": 15,
+      "parsed": 25,
+      "passes": false,
+      "per_kind_correct": {
+        "u_execute": 0,
+        "u_induct": 0,
+        "u_probe": 0
+      },
+      "route_abstentions": 0,
+      "target_correct": 0
+    },
+    "replay_control": {
+      "adapter": "replay_control",
+      "cap_contacts": 4,
+      "checks": {
+        "cap_contacts_at_most_2": false,
+        "correct_at_least_17_of_26": false,
+        "execute_correct_at_least_1_of_2": false,
+        "induct_correct_at_least_1_of_2": false,
+        "parsed_at_least_24_of_26": false,
+        "probe_correct_at_least_1_of_2": true,
+        "route_abstentions_at_most_1": true
+      },
+      "correct": 16,
+      "parsed": 22,
+      "passes": false,
+      "per_kind_correct": {
+        "u_execute": 0,
+        "u_induct": 0,
+        "u_probe": 2
+      },
+      "route_abstentions": 0,
+      "target_correct": 2
+    },
+    "replay_parent": {
+      "adapter": "replay_parent",
+      "cap_contacts": 5,
+      "checks": {
+        "cap_contacts_at_most_2": false,
+        "correct_at_least_17_of_26": true,
+        "execute_correct_at_least_1_of_2": false,
+        "induct_correct_at_least_1_of_2": false,
+        "parsed_at_least_24_of_26": false,
+        "probe_correct_at_least_1_of_2": true,
+        "route_abstentions_at_most_1": true
+      },
+      "correct": 17,
+      "parsed": 21,
+      "passes": false,
+      "per_kind_correct": {
+        "u_execute": 0,
+        "u_induct": 0,
+        "u_probe": 2
+      },
+      "route_abstentions": 0,
+      "target_correct": 2
+    }
+  },
+  "local_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_universal_failure_selected_restart_target_match/runs/local/seed88010.json",
+  "local_receipt_sha256": "39fe68b97109535f4127be763c8737c98dce5b4f5df3eefec2d991e62c54de9e",
+  "relative_checks": {
+    "beats_parent_target_correct": false,
+    "beats_parent_total_correct": false,
+    "beats_replay_target_correct": false,
+    "beats_replay_total_correct": false
+  },
+  "schema_version": 1,
+  "seed": 88010,
+  "target_kinds": [
+    "u_execute",
+    "u_induct",
+    "u_probe"
+  ]
+}

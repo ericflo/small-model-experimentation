@@ -132,3 +132,14 @@ Run/log/external-receipt hashes are `2956fa41...8ea7`, `e138a06c...b483`, and
 `97edeb08...6df6`. This records the second frozen deployment artifact. Local
 evaluation becomes authorized only after this checkpoint is itself published and
 green in both workflows; the aggregate remains sealed.
+
+## Post-local receipt
+
+The authorized local event later completed from pushed-green commit `64e01a6d` with
+all pre/post-arm design, model-tree, and Git authentications intact. Parent, replay,
+and candidate scored 17/16/15 correct and 2/2/0 on the six target rows. Candidate
+passed only the parse, cap, and route-abstention mechanics, failed its accuracy and
+three per-target floors, and failed all four strict relative checks. Local/promotion
+receipt hashes are `39fe68b9...de9e` / `4c381fbd...6759`; eligibility is empty,
+`benchmark_data_read=false`, and aggregate seed 78,140 remains sealed. This closes
+the review sequence and authorizes no further event in the experiment.

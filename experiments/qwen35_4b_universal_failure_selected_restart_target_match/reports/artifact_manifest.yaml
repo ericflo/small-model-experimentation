@@ -14,22 +14,22 @@ external_artifacts:
     regenerate: "from the predecessor's published replay-control training checkpoint"
   - name: "current experiment replay-control adapter"
     storage: "large_artifacts/qwen35_4b_universal_failure_selected_restart_target_match/adapters/replay_control"
-    required_for: "candidate prerequisite authentication and future paired merged-composite evaluation"
+    required_for: "historical composite regeneration and completed paired evaluation authentication"
     checksum: "adapter_model.safetensors 5840757d2e639c224cb1abb43320c0b8581eb9eec453ce613e0279803eab6b1c; adapter_config.json dce1095c4a6c49611f51efed2a89177cf26945a8694c5fa0bba33cc069a9f8f6"
     regenerate: "from pushed-green exact-exposure commit 821d50d4: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_failure_selected_restart_target_match/scripts/run.py --stage train-control"
   - name: "current experiment restart-candidate adapter"
     storage: "large_artifacts/qwen35_4b_universal_failure_selected_restart_target_match/adapters/counterfactual_restart_candidate"
-    required_for: "future explicit candidate merge and paired evaluation"
+    required_for: "historical composite regeneration and completed paired evaluation authentication"
     checksum: "adapter_model.safetensors 2072c5c81e0ce35161bfe7b49d9995b2152b8e49aa09db3a2f247c37218639bc; adapter_config.json 6915787d341bdf3c932401586bd209b507e17a36f045c262084fdea7d97f7f50"
     regenerate: "from pushed-green control commit 2c78e655: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_failure_selected_restart_target_match/scripts/run.py --stage train-candidate"
   - name: "current experiment replay-control merged composite"
     storage: "large_artifacts/qwen35_4b_universal_failure_selected_restart_target_match/merged/replay_control"
-    required_for: "published prerequisite for candidate merge and one-arm input to the future local comparison"
+    required_for: "published prerequisite and replay-control input to the completed local comparison"
     checksum: "tree d1a8336d1648190cd2143fbf8e3bf9031b6572f611ebc51e6649beef6d456027; model.safetensors e48ed4a03ba8d040c4007f115af5346df51b886566a5798250586a10e989ae17; merge_receipt.json bcb0060ed551fcec1c3cca7d2b8e29ce46300abd94cfa80e8db6477c346553e2"
     regenerate: "from pushed-green local-design commit 3b8b46aa: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_failure_selected_restart_target_match/scripts/run.py --stage merge-control"
   - name: "current experiment counterfactual-restart merged composite"
     storage: "large_artifacts/qwen35_4b_universal_failure_selected_restart_target_match/merged/counterfactual_restart_candidate"
-    required_for: "candidate input to the future three-arm local comparison"
+    required_for: "candidate input to the completed three-arm local comparison"
     checksum: "tree 9f64dc55f290de8f0b70bd51259f40cfe2a1c5f823614d0e7547e94201a14a1b; model.safetensors d704af190171c133b77ce0bfc96e92096be3828e51124020200514859fd049a9; merge_receipt.json 97edeb08788c7f8e2890b66d13fe85294e8a5780ca6f0d1c9c4cd829303a6df6"
     regenerate: "from pushed-green control-merge commit 6c551000: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_failure_selected_restart_target_match/scripts/run.py --stage merge-candidate"
 omitted_artifacts:
@@ -83,4 +83,9 @@ notes: >-
   composite result was used to authorize local early. The separately checkpointed
   candidate merge from commit 6c551000 has run/log/external/weight/tree hashes
   2956fa41...8ea7, e138a06c...b483, 97edeb08...6df6, d704af19...49a9,
-  and 9f64dc55...4a1b. No local result or benchmark event exists.
+  and 9f64dc55...4a1b. The one local event scored parent/replay/candidate
+  17/16/15 correct, 21/22/25 parsed, 5/4/1 caps, and 2/2/0 target correct.
+  Local/promotion hashes are 39fe68b9...de9e and 4c381fbd...6759; raw output,
+  metadata, and log hashes are embedded in the local receipt. Promotion is empty,
+  no benchmark event exists, and aggregate seed 78140 remains sealed. The
+  experiment is terminal.

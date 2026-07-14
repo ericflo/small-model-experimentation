@@ -5,11 +5,11 @@ source_track: "new"
 path: "experiments/qwen35_4b_universal_failure_selected_restart_target_match"
 primary_readme: "experiments/qwen35_4b_universal_failure_selected_restart_target_match/README.md"
 primary_report: "experiments/qwen35_4b_universal_failure_selected_restart_target_match/reports/report.md"
-summary: "This experiment tests whether selecting the stronger parent's fresh procedural failures and teaching clean verified restarts can beat exactly exposure-matched replay without conditioning on the parent's failed trajectory."
+summary: "Fresh local negative on 2026-07-14; aggregate sealed."
 tags:
+  - "counterexamples"
   - "curriculum"
   - "small-model"
-  - "verification"
 research_programs:
   - "agentic_breadth_installation"
   - "benchmark_generalization"
@@ -28,11 +28,11 @@ top_level_dirs:
   - "src"
   - "tests"
 file_counts:
-  json: 16
-  jsonl: 9
-  log: 5
+  json: 21
+  jsonl: 12
+  log: 8
   md: 9
   py: 24
   yaml: 3
-total_files: 66
-total_size_bytes: 16441812
+total_files: 77
+total_size_bytes: 17032454

@@ -684,6 +684,25 @@ negative is the complete matched-forward-compute recipe, not all on-policy learn
 Retire long masked failure-prefix continuation; move the intervention to short
 pre-failure decisions and match target exposure in the next result-separated test.
 
+**Clean on-policy restarts improve termination but still do not install target
+competence (2026-07-14, local mechanism negative).** The result-separated
+[qwen35_4b_universal_failure_selected_restart_target_match](../experiments/qwen35_4b_universal_failure_selected_restart_target_match/reports/report.md)
+removes the failed trajectory entirely and closes the predecessor's exposure
+confound: candidate and replay each have 320 rows, 297,731 forward tokens, 126,796
+loss-bearing targets, absolute loss mass 27,632.8, 40 updates, zero skips, and 200
+aligned shared rows. The candidate teaches four fresh selected failures per each of
+13 skills from the original prompt. Fresh seed 88010 nevertheless gives
+parent/replay/candidate 17/16/15 correct, 21/22/25 parsed, 5/4/1 caps, and 2/2/0 of
+six on execute+induct+probe. Candidate fails its accuracy and every target floor plus
+all strict relative checks; promotion is empty and aggregate seed 78140 stays sealed.
+**The intervention learned bounded answer emission, not the semantic policy:** it
+cut parent cap contacts by four and mean output by 34 tokens while losing two correct
+tasks and both probe successes. Hand-authored executable truth remains off-policy
+even when it starts before the error. The next controlled mechanism should distill
+short verifier-correct sibling trajectories that the same model actually samples on
+greedy-failure tasks, with an availability gate, exact-exposure replay, and a
+matched-compute sample-more ceiling.
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.

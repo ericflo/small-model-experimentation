@@ -5959,9 +5959,9 @@
   },
   {
     "file_counts": {
-      ".json": 16,
-      ".jsonl": 9,
-      ".log": 5,
+      ".json": 21,
+      ".jsonl": 12,
+      ".log": 8,
       ".md": 9,
       ".py": 24,
       ".yaml": 3
@@ -5981,11 +5981,11 @@
       "structured_execution_and_compilers"
     ],
     "source_track": "new",
-    "summary": "This experiment tests whether selecting the stronger parent's fresh procedural failures and teaching clean verified restarts can beat exactly exposure-matched replay without conditioning on the parent's failed trajectory.",
+    "summary": "Fresh local negative on 2026-07-14; aggregate sealed.",
     "tags": [
+      "counterexamples",
       "curriculum",
-      "small-model",
-      "verification"
+      "small-model"
     ],
     "title": "Failure-Selected Counterfactual Restart Curriculum",
     "top_level_dirs": [
@@ -5997,8 +5997,8 @@
       "src",
       "tests"
     ],
-    "total_files": 66,
-    "total_size_bytes": 16441812
+    "total_files": 77,
+    "total_size_bytes": 17032454
   },
   {
     "file_counts": {

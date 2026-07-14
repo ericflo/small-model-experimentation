@@ -669,3 +669,31 @@ exposure remain coupled, so this rejects the complete matched-forward-compute re
 not every on-policy objective. Retire long masked failure-prefix continuation. A
 successor should supervise short pre-failure decision boundaries and match nonzero
 target exposure (or include an exact target-token control) before another local gate.
+
+## qwen35_4b_universal_failure_selected_restart_target_match (2026-07-14 — Clean-restart mechanism negative)
+
+This successor removed both registered predecessor confounds. It selected four fresh
+parent failures per each of 13 skills but discarded every failed trajectory, teaching
+52 truth-audited solutions from the original prompt. Candidate and replay each used
+320 rows, 297,731 forward tokens, 126,796 loss-bearing targets, absolute loss mass
+27,632.8, 40 updates, zero skips, and 200 aligned byte-identical replay rows. Both
+arms independently started from the same authenticated replay parent, then deployed
+as complete authenticated composites through one same-vLLM local event.
+
+Fresh seed 88010 rejected the candidate. Parent/replay/candidate scored 17/16/15
+correct, 21/22/25 parsed, 5/4/1 cap contacts, and 2/2/0 of six on
+execute+induct+probe. Candidate was 0/2 separately on all three target kinds, missed
+the 17/26 accuracy floor, and failed all four strict total/target comparisons. Local
+and empty-promotion hashes are `39fe68b9...de9e` / `4c381fbd...6759`; all 78 raw
+requests and model-tree boundaries authenticated, no benchmark data was read, and
+aggregate seed 78140 remains sealed.
+
+Read: clean restarts reliably changed bounded emission without installing semantic
+competence. Relative to parent, the candidate produced four more parses and four
+fewer cap contacts with 34 fewer mean sampled tokens, yet lost two correct tasks and
+erased both probe successes. Removing the wrong prefix and matching target exposure
+therefore do not make hand-authored oracle traces policy-compatible. Retire this
+balanced oracle-restart package. The warranted next test is policy-supported
+successful-sibling distillation: on fresh procedural tasks, train only where greedy
+fails but a prospectively sampled same-model sibling is short and verifier-correct,
+then compare against exact-exposure replay and matched-compute sample-more.

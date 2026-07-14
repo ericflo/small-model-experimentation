@@ -180,3 +180,30 @@
   capability evidence. Local evaluation remains blocked until this result is
   committed, rebased, pushed, and green in both workflows. Aggregate seed 78,140
   remains sealed.
+
+## 2026-07-14 — Terminal fresh-local negative
+
+- Launched the sole local event only after candidate-merge commit `64e01a6d` was
+  pushed directly to `main` and GitHub runs `29369408534` / `29369408581` both
+  succeeded.
+- The wrapper reauthenticated the committed design, branch/HEAD/origin, and complete
+  parent/control/candidate model tree before and after every arm. All 78 requests
+  completed with identical vLLM runner bytes, input order, sampling, context,
+  scheduler, and CUDA-graph geometry.
+- Parent/replay/candidate sampled 11,639/11,331/10,764 tokens and scored 17/16/15
+  correct, 21/22/25 parsed, and 5/4/1 cap contacts. Mean sampled tokens were
+  447.65/435.81/414.00.
+- Their execute+induct+probe subtotals were 2/2/0 of six. Candidate was separately
+  0/2 execute, 0/2 induct, and 0/2 probe. It missed the 17/26 accuracy floor and all
+  four strict total/target wins against both controls; promotion is empty.
+- Local/promotion receipt hashes are `39fe68b9...de9e` and `4c381fbd...6759`.
+  Parent/control/candidate raw-output hashes are `326ccff7...5e3`,
+  `f990c5ec...7361`, and `7d388793...277f`; metadata hashes are
+  `32c69eb8...5723`, `d7250bdb...9f47`, and `6f14b973...05dd`; log hashes are
+  `6dfbbaa5...6e27`, `ea397805...7521`, and `3f9c00f2...cab0`.
+- The candidate improved termination mechanics but not competence: four fewer caps
+  and four more parses than parent, yet two fewer correct and both probe successes
+  erased. Clean failure-selected oracle restarts remain an off-policy semantic
+  target even after removing the failed trajectory and exactly matching exposure.
+- Formal status is `complete_local_negative_aggregate_sealed`. No held-out data was
+  read, aggregate seed 78,140 stays sealed, and this directory is closed.

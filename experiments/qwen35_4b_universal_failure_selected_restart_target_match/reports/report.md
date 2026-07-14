@@ -5,7 +5,8 @@
 The model-free design, one authenticated parent rollout, frozen failure selection,
 exact-exposure stream freeze, both paired training events, and the separately
 reviewed fresh-local protocol, and both current-arm explicit merges are complete. No
-local result or benchmark event has run.
+benchmark event ran. The fresh local event is a terminal negative and the aggregate
+gateway remains sealed.
 
 The active hypothesis is that task-level on-policy failure selection can help when
 the supervised example restarts cleanly before the error and target exposure is
@@ -54,10 +55,31 @@ frozen contract.
   seven-file tree hash `9f64dc55...4a1b`; merged weight `d704af19...49a9`;
   run/external receipts `2956fa41...8ea7` / `97edeb08...6df6`. This likewise
   authenticates deployment only.
+- Fresh local result: parent/replay/candidate scored 17/16/15 correct, parsed
+  21/22/25, and contacted the cap 5/4/1 times. Execute+induct+probe subtotals were
+  2/2/0 of six. Candidate passed parse/cap/route-abstention mechanics but missed the
+  accuracy floor, was 0/2 on each target kind, and lost every strict comparison with
+  both controls. Local/promotion hashes are `39fe68b9...de9e` /
+  `4c381fbd...6759`; promotion is empty and aggregate seed 78,140 remains sealed.
 
-## Next authorized event
+## Interpretation
 
-After the candidate merge receipt/log are committed, rebased, pushed to `main`, and
-both workflows are green, run the frozen three-arm local stage. Aggregate access
-remains sealed unless that candidate passes every absolute and control-relative
-gate.
+Removing the parent's failed trajectory and exactly matching forward tokens,
+loss-bearing targets, loss mass, update count, and shared replay rows did not rescue
+on-policy failure selection. The candidate learned a shorter, more parseable
+termination policy—mean sampled tokens fell to 414 from 448 for parent and 436 for
+replay—but correctness fell, and the two probe wins present in both controls were
+erased. Clean oracle restarts were therefore in-distribution enough to shape emission
+but not to transfer the required execute/induct decisions.
+
+This rejects the complete balanced 52-restart curriculum at this dose, not every
+on-policy objective. The next result-separated mechanism should use verified
+successful sibling trajectories sampled from the same model on greedy-failure tasks,
+so supervision stays within policy support while retaining fresh procedural truth,
+exact-exposure replay, and the unchanged local gate.
+
+## Terminal disposition
+
+No further event is authorized in this experiment. Preserve the negative and move
+any successor to a fresh directory with fresh collection, training, local, and
+conditional aggregate seeds.
