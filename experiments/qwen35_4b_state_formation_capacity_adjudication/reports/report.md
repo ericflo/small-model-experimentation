@@ -45,6 +45,13 @@ selection. Handoff COMPLETE identity is `af0dd15c…2262`. This is setup-only ev
 result-payload, benchmark, contrast, or scientific-evidence access; later result training remains
 blocked on the full setup matrix.
 
+After seed-7411 setup commit `c507488c…3c06` passed both workflows, full-rank seed 7412 passed G0
+at file SHA-256 `10bf22fc…1d18`, identity `62ecb79e…951dc`, and its positive control at file SHA-256
+`1cbbd823…8510`, identity `6575e1d2…4554`. G0 has zero K=1/round-trip error, complete finite state
+for all 62 delta tensors, finite K=12, and 22.1 GiB free. The control has oracle/intact 48/48 and
+disabled 0/48 after exact 256 updates/4,096 presentations, with changed full-rank/shared state and
+zero result/benchmark/contrast/scientific access. Publish this pair before seed 7413.
+
 **Historical pre-result setup record follows.** Preregistration, adversarial design review, and the
 frozen design are complete. Source-v10 implementation authorization is `GO` at reviewed digest
 `a5a494b7…6f1c4a` and full source contract `979a9012…f394b7`, with 360/360 source-bound tests passing.

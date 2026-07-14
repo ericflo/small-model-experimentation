@@ -1,0 +1,27 @@
+{
+  "changed_runtime_function": "src.analysis._canonical_expected_path only",
+  "experiment_id": "qwen35_4b_state_formation_branch_handoff_recovery",
+  "handoff_source_contract_sha256": "4d2ffde3b1b7b017cd2ef27601c3c0eb6374be879f7badd92fdca494d19d8acd",
+  "invocation": {
+    "authorization_receipt": "experiments/qwen35_4b_state_formation_capacity_adjudication/analysis/lora_joint_trigger.json",
+    "capacity": "fullrank",
+    "checkpoint": null,
+    "eval_set": "trigger",
+    "initialization_bundle": "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed7412.pt",
+    "model_smoke_receipt": "experiments/qwen35_4b_state_formation_capacity_adjudication/runs/setup/g0_fullrank_seed7412.json",
+    "objective": "joint",
+    "output": "experiments/qwen35_4b_state_formation_capacity_adjudication/runs/setup/positive_control_fullrank_seed7412.json",
+    "positive_control_receipt": null,
+    "seed": 7412,
+    "stage": "positive-control"
+  },
+  "invocation_started_sha256": "ffc30b05a2cb076f2df73d1354af9e4e0e73fb0a573584634f81bbedc123d55c",
+  "producer_output": "experiments/qwen35_4b_state_formation_capacity_adjudication/runs/setup/positive_control_fullrank_seed7412.json",
+  "producer_output_sha256": "1cbbd823b86422653c0c7347fd9e1c0731d6144372b396aa307a796863f98510",
+  "producer_receipt_identity_sha256": "6575e1d293dce0d3233aca16500428f35fb57ed8c9fa7c06e02ddbabd4254554",
+  "producer_source_contract_sha256": "5a8ed26ddb9446c728191ca8e7849ae44cff92a700e24b237dac522cf4286666",
+  "producer_status": "POSITIVE_CONTROL_PASS",
+  "receipt_identity_sha256": "6334d72fe30370473793784f6d9ee013b070db7807e4baa976f7b6d5c465c14a",
+  "schema_version": 1,
+  "status": "HANDOFF_PRODUCER_INVOCATION_COMPLETE"
+}

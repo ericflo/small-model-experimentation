@@ -31,11 +31,11 @@ top_level_dirs:
   - "tests"
 file_counts:
   csv: 1
-  json: 44
+  json: 46
   jsonl: 12
   md: 12
   py: 42
   yaml: 4
   "[none]": 3
-total_files: 118
-total_size_bytes: 43448091
+total_files: 120
+total_size_bytes: 43987921

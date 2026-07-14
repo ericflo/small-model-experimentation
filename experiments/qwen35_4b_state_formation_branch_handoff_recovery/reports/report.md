@@ -29,6 +29,11 @@ receipts.
   4,096 presentations, and changed full-rank/shared-state parameters.
 - Handoff COMPLETE identity: `af0dd15c…2262`; producer result/benchmark/contrast access and
   scientific evidence remain zero.
+- Full-rank seed-7412 G0: file SHA-256 `10bf22fc…1d18`, identity `62ecb79e…951dc`; zero K=1/
+  round-trip error, complete finite optimizer state for all 62 deltas, finite K=12, 22.1 GiB free.
+- Full-rank seed-7412 control: file SHA-256 `1cbbd823…8510`, identity `6575e1d2…4554`; oracle/intact
+  48/48, disabled 0/48, 256 updates, accumulation 16, 4,096 presentations, changed full-rank/shared
+  state, and zero result/benchmark/contrast/scientific access.
 
 ## Interpretation
 
@@ -37,5 +42,5 @@ that its inputs independently authorize.
 
 ## Next action
 
-Publish the seed-7411 control and handoff invocation receipts, require both workflows green, then run
-the registered full-rank seed-7412 G0/control pair through this wrapper.
+Publish the seed-7412 G0/control and handoff invocation receipts, require both workflows green, then
+run the registered full-rank seed-7413 G0/control pair through this wrapper.

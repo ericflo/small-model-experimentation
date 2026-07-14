@@ -39,3 +39,17 @@
 - The receipt opens no result payload, benchmark, or contrast and claims no scientific evidence.
 - Current authorization: publish this setup checkpoint and require both workflows green before the
   full-rank seed-7412 G0/control pair. Result training remains blocked on the complete setup matrix.
+
+## 2026-07-14 — full-rank seed-7412 G0/control pair passes
+
+- Seed-7411 setup commit `c507488c…3c06` passed both workflows before seed 7412 began.
+- G0 file SHA-256 is `10bf22fc…1d18`, identity `62ecb79e…951dc`; handoff G0 STARTED/COMPLETE file
+  hashes are `01099e34…aec3` / `0b48b1e5…7d35`, COMPLETE identity `d61d6441…9246`.
+- G0 has zero K=1 and checkpoint-roundtrip error, all 62 deltas have complete finite optimizer state,
+  all joint trainable groups have finite nonzero gradients, K=12 is finite, and 22.1 GiB remains.
+- Control file SHA-256 is `1cbbd823…8510`, identity `6575e1d2…4554`; handoff STARTED/COMPLETE file
+  hashes are `ffc30b05…d55c` / `9535f515…f3a2`, COMPLETE identity `6334d72f…c14a`.
+- Oracle/intact are 48/48 and disabled is 0/48 after exact 256 updates, accumulation 16, and 4,096
+  presentations. Full-rank/shared-state parameters changed; no early stop or checkpoint selection.
+- Current authorization: publish this setup checkpoint and require both workflows green before seed
+  7413. Result training remains blocked on the complete setup matrix.

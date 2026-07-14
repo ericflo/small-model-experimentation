@@ -1206,6 +1206,24 @@ Only seed-7411 full-rank setup documentation, validation, commit, push, and work
 authorized. After both workflows are green, run the seed-7412 full-rank G0 and positive control
 through the handoff wrapper. Result training remains blocked on the complete setup matrix.
 
+## 2026-07-14 — full-rank seed-7412 setup pair passes
+
+- Seed-7411 setup commit `c507488c…3c06` passed both workflows before seed 7412 began.
+- G0 file SHA-256 / identity are `10bf22fc…1d18` / `62ecb79e…951dc`; handoff COMPLETE identity is
+  `d61d6441…9246`. K=1 and checkpoint-roundtrip error are zero, all 62 deltas have complete finite
+  optimizer state, joint gradients are finite/nonzero, K=12 is finite, and 22.1 GiB remains free.
+- Control file SHA-256 / identity are `1cbbd823…8510` / `6575e1d2…4554`; handoff COMPLETE identity
+  is `6334d72f…c14a`. Oracle/intact are 48/48 and disabled is 0/48 after exact 256 updates,
+  accumulation 16, and 4,096 presentations; full-rank/shared-state parameters changed.
+- Both receipts remain setup-only evidence with zero result-payload, benchmark, contrast, or
+  scientific-evidence access.
+
+## Current authorization
+
+Only seed-7412 setup documentation, validation, commit, push, and workflow verification are
+authorized. After both workflows are green, run the seed-7413 full-rank G0 and positive control.
+Result training remains blocked on the complete setup matrix.
+
 ## 2026-07-14 — source-v11 seed-7412 LoRA setup pair passes
 
 - Seed-7411 setup commit `5536f785` passed both required workflows before seed 7412 began. The next

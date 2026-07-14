@@ -158,6 +158,15 @@ changed; early stopping and checkpoint selection were disabled. Handoff COMPLETE
 or scientific-evidence access. Publish and require both workflows green before the registered full-
 rank seed-7412 G0/control pair; result training remains blocked on the complete setup matrix.
 
+Seed-7411 setup commit `c507488c…3c06` passed both workflows. Full-rank seed 7412 then independently
+passed G0 at file SHA-256 `10bf22fc…1d18`, identity `62ecb79e…951dc`, with zero K=1/round-trip
+error, complete finite optimizer state for all 62 deltas, finite/nonzero joint gradients, finite K=12,
+and 22.1 GiB free. Its control passed at file SHA-256 `1cbbd823…8510`, identity
+`6575e1d2…4554`: oracle/intact 48/48, disabled 0/48, exact 256 updates, accumulation 16, and 4,096
+presentations; both full-rank and shared-state parameters changed. Handoff G0/control COMPLETE
+identities are `d61d6441…9246` / `6334d72f…c14a`. Both remain setup-only evidence with zero result,
+benchmark, contrast, or scientific-evidence access. Publish/green this pair before seed 7413.
+
 Historically, the integrated source-v10 review was `GO` for reviewed implementation
 `a5a494b7…6f1c4a` and full source contract `979a9012…f394b7`; the 360/360 suite and exact machine gate
 pass. Source-v9 seed-7411 G0 stopped before model load or wrapper construction because the general

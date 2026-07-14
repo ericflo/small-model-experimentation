@@ -1,6 +1,6 @@
 # State-Formation Branch Handoff Recovery
 
-**Status:** in-progress · since 2026-07-14 · handoff is published/green and the full-rank seed-7411 positive control passes; publish that setup pair before seed 7412
+**Status:** in-progress · since 2026-07-14 · full-rank seed-7412 G0/control pair passes; publish it before seed 7413
 
 This operational successor lets immutable producer v11 continue after the first branch recovery
 successfully replaces the retired failed-G0 receipt at its canonical path. It changes no scientific
@@ -94,6 +94,15 @@ gradient accumulation 16, and 4,096 singleton presentations. Both the 892,272,64
 rank path and shared-state parameters changed; early stopping and checkpoint selection were false.
 The receipt authorizes later producer work only through its unchanged barriers and records zero
 result payload, benchmark, contrast, or scientific-evidence access.
+
+After seed-7411 setup commit `c507488c…3c06` passed both workflows, seed 7412 independently passed
+the same path. Its G0 file SHA-256 / identity are `10bf22fc…1d18` / `62ecb79e…951dc`: zero K=1 and
+checkpoint-roundtrip error, all 62 full-rank deltas with complete finite optimizer state, all joint
+trainable groups finite/nonzero, finite K=12, and 22.1 GiB free. Its positive-control file SHA-256 /
+identity are `1cbbd823…8510` / `6575e1d2…4554`: oracle/intact 48/48 and disabled 0/48 after exact
+256 updates, accumulation 16, and 4,096 presentations. Handoff G0/control COMPLETE identities are
+`d61d6441…9246` and `6334d72f…c14a`. Both receipts retain zero result, benchmark, contrast, and
+scientific-evidence access.
 
 ## Interpretation
 
