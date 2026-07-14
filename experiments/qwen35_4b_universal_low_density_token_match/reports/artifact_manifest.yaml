@@ -12,10 +12,10 @@ external_artifacts:
     required_for: "exact-token mechanism control"
     checksum: "weights bb4f0f8d35ce51e59fb06e8fc835ef043ac8960a5c178e6a511ec75c0a622a07; config 8a89c0cc0ec7d7d9db475479a916c51c8b442c46b354991aa2eb27ab91017f17"
     regenerate: ".venv/bin/python experiments/qwen35_4b_universal_low_density_token_match/scripts/run.py --stage train-control"
-  - name: "designed40 adapter (planned)"
+  - name: "designed40 adapter"
     storage: "large_artifacts/qwen35_4b_universal_low_density_token_match/adapters/designed40"
     required_for: "40-row candidate evaluation"
-    checksum: "pending training"
+    checksum: "weights b4ca4c0187797f57ae3259f7de1817be34aad927583c0a8728786c56b40ac4a9; config d70536028419d199d5ca4a273ad8af18a4819d3a1e40898cec2f74625eb1a964"
     regenerate: ".venv/bin/python experiments/qwen35_4b_universal_low_density_token_match/scripts/run.py --stage train-d40"
   - name: "designed80 adapter (planned)"
     storage: "large_artifacts/qwen35_4b_universal_low_density_token_match/adapters/designed80"
@@ -46,4 +46,8 @@ notes: >-
   e6f041e8b77dee0c80a625a7191a8609fed914238f3017e68ecb8f9517d6be5c) and its
   full log is runs/training/replay_repeat.log (SHA-256
   1083db586b0278745930eadb6088ca9c4b64f72d77d188714d33d5c340e76f1a).
+  The designed40 receipt is runs/training/designed40.json (SHA-256
+  820e6df4aec64639e3fb1639a799ba94645c2297810950bc3e5c95291586773f) and its
+  normalized log is runs/training/designed40.log (SHA-256
+  9dbb302ee6072b24abd39803ea85b80cab37099e400a51eb3c442ff5876470e8).
   Update the remaining planned checksums after each successful stage.

@@ -13253,7 +13253,7 @@
       "verdict_tag": "Replay control trained; transfer remains unmeasured",
    "concept_primer": "The previous designed mix may have been too dense, and its replay comparison also saw more tokens. This follow-up changes only a tiny number of rows while holding total training exposure exactly equal, so the later difference can be tied much more cleanly to curriculum content.",
    "plain_question": "Can a tiny dose of abstract skill lessons improve the replay-refreshed model without erasing any of its broad gains?",
-      "plain_answer": "Not measured yet. The replay-only control finished all 190 updates with zero skipped rows. The 40- and 80-lesson streams, local screen, and broad evaluation remain pending, so this checkpoint says nothing yet about transfer.",
+      "plain_answer": "Not measured yet. The replay-only control and 40-lesson stream each finished all 190 updates with zero skipped rows. The 80-lesson stream, local screen, and broad evaluation remain pending, so this checkpoint says nothing yet about transfer.",
    "why_it_matters": "The prior comparison could reject its candidate but could not separate content from a 17% token-exposure gap. Exact matching removes that ambiguity and tests whether designed lessons help at a gentle density rather than overwhelming a strong broad policy.",
    "verdict_tone": "neutral",
    "key_numbers": [
@@ -13274,8 +13274,8 @@
     },
     {
           "label": "training streams complete",
-          "value": "one of three",
-          "sub": "replay-only control complete; designed streams pending"
+          "value": "two of three",
+          "sub": "replay-only and 40-lesson streams complete"
     }
    ],
    "charts": [
