@@ -197,8 +197,11 @@
   fewer target tokens and lower absolute loss mass than replay, a required causal
   caveat. From pushed-green commit `a8529c04`, replay trained 320/320 rows with zero
   skips and 40/40 updates; receipt/adapter hashes are `f78f2069...d6de` /
-  `bb59d3bd...5154d`. Publish and verify that control checkpoint before candidate
-  training. Local and aggregate gates stay sealed.
+  `bb59d3bd...5154d`. After that checkpoint passed both workflows, the candidate
+  independently trained 320/320 rows with zero skips and 40/40 updates; its
+  receipt/adapter hashes are `846d8107...7098` / `85811191...0f14`. Publish and
+  verify paired training before freezing the fresh local design. Local and aggregate
+  gates stay sealed.
 
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.

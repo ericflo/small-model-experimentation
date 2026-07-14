@@ -48344,7 +48344,7 @@
    {
      "headline": true,
      "kind": "bar",
-     "title": "Exact compute reaches the sixth checkpoint",
+     "title": "Exact compute reaches the seventh checkpoint",
      "categories": [
       "intake",
       "CPU design",
@@ -48366,7 +48366,7 @@
         1,
         1,
         1,
-        0,
+        1,
         0,
         0
        ]
@@ -48375,7 +48375,7 @@
      "x_label": "preregistered experiment stage",
      "y_label": "completion indicator",
      "y_format": "integer",
-     "note": "Both 320-row streams are frozen at exactly 304,313 forward tokens, zero skips, 40 updates, and 200 aligned replay rows. Replay control completed 40/40 updates; the paired training stage remains incomplete until the candidate trains. Capability and benchmark stages have not begun.",
+     "note": "Both 320-row streams are frozen at exactly 304,313 forward tokens, zero skips, 40 updates, and 200 aligned replay rows. Replay control and prefix-repair candidate each completed 40/40 updates from the same parent. Capability and benchmark stages have not begun.",
      "source": "experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/data/stream_token_receipt.json"
     },
     {
@@ -48403,7 +48403,7 @@
      "x_label": "registered failure class",
      "y_label": "parent rows",
      "y_format": "integer",
-     "note": "The frozen miner selected exactly 10 rows per class from 230 total reachable failures. Availability passing is substrate evidence only; no training or capability event exists.",
+     "note": "The frozen miner selected exactly 10 rows per class from 230 total reachable failures. Availability passing is substrate evidence; paired training is complete, but no capability event exists.",
      "source": "experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/data/prefix_failure_inventory.json"
     },
     {

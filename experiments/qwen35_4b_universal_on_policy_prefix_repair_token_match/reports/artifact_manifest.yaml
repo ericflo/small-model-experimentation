@@ -17,16 +17,22 @@ external_artifacts:
     required_for: "mechanism control and fail-closed candidate prerequisite"
     checksum: "weights bb59d3bd9273ae3bb3dffe54e983590dada69e6e1bdba571009ffedbba05154d; config 0dfd9bda8a835926a87337782cc09b1e11e841a36f46b99c83fbae9bc89e120f"
     regenerate: "from pushed-green compute freeze only: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --stage train-control"
+  - name: "exact-compute prefix-repair candidate adapter"
+    storage: "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/adapters/prefix_repair_after_close"
+    required_for: "fresh paired local capability evaluation"
+    checksum: "weights 858111918bd8a0a5bb379d6b9b1b2b600f013bd1da516d2b4e7cdf8ebd510f14; config 91b7db5775a7ffac0e634257d7d1bb32a412bac17a51a239d64e68352f6037de"
+    regenerate: "from pushed-green control checkpoint b690a4b3 only: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --stage train-candidate"
 omitted_artifacts:
   - path: "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/"
-    reason: "registered merged parent and control are external above; the conditional candidate adapter remains large and gitignored"
+    reason: "registered merged parent and both trained adapters are external above and remain large and gitignored"
 reproducibility:
   smoke_command: "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --smoke"
-  full_command: "after this control checkpoint is pushed and both workflows pass: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --stage train-candidate"
+  full_command: "paired training is complete; freeze and publish the fresh local-evaluation design before any capability run"
   required_external_artifacts:
     - "large_artifacts/qwen35_4b_universal_close_weight_token_match/adapters/close_xi"
     - "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/merged/close_xi_parent"
     - "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/adapters/replay_after_close"
+    - "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/adapters/prefix_repair_after_close"
 notes: >-
   Model-free mining design. Model Qwen/Qwen3.5-4B revision 851bf6e8...d0a; parent
   weights/config 16e9dc75...c179 / de953bd5...7ff. Construction, parent-rollout,
@@ -45,4 +51,7 @@ notes: >-
   review preserves that caveat. The replay control trained 320/320 rows, zero skips,
   and 40 updates from clean commit a8529c04; log/receipt hashes are a49076ec...3501 /
   f78f2069...d6de and adapter config/weights hashes are 0dfd9bda...120f /
-  bb59d3bd...5154d. No candidate, capability, local, or benchmark receipt exists.
+  bb59d3bd...5154d. From clean commit b690a4b3, the candidate independently trained
+  320/320 rows, zero skips, and 40 updates; log/receipt hashes are e895c546...ca0 /
+  846d8107...7098 and adapter config/weights hashes are 91b7db57...37de /
+  85811191...0f14. No capability, local, or benchmark receipt exists.

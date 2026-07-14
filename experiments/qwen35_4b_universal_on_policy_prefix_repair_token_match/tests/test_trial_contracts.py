@@ -50,6 +50,14 @@ class FrozenTrainingContractTests(unittest.TestCase):
             self.trial.CONTROL_WEIGHTS_SHA256,
             "bb59d3bd9273ae3bb3dffe54e983590dada69e6e1bdba571009ffedbba05154d",
         )
+        self.assertEqual(
+            self.trial.CANDIDATE_RECEIPT_SHA256,
+            "846d8107ecadad458c18cd985d54feb42748e87677dd708c14a99e84cf4e7098",
+        )
+        self.assertEqual(
+            self.trial.CANDIDATE_WEIGHTS_SHA256,
+            "858111918bd8a0a5bb379d6b9b1b2b600f013bd1da516d2b4e7cdf8ebd510f14",
+        )
 
     def test_only_registered_hyperparameters_pass(self) -> None:
         frozen = argparse.Namespace(
@@ -95,6 +103,15 @@ class FrozenTrainingContractTests(unittest.TestCase):
         self.assertIn("validate_control_prerequisite()", wrapper)
         self.assertIn("committed_at_head(log)", wrapper)
         self.assertIn("validate_control_prerequisite(require_committed=False)", source)
+        self.assertIn("validate_candidate_checkpoint(require_committed=False)", source)
+
+    def test_candidate_checkpoint_reauthenticates_published_control(self) -> None:
+        source = (EXP / "scripts" / "train_trial.py").read_text(encoding="utf-8")
+        candidate = source[source.index("def validate_candidate_checkpoint") :]
+        self.assertIn("validate_control_prerequisite(", candidate)
+        self.assertIn('payload.get("control_prerequisite")', candidate)
+        self.assertIn("committed_at_head(CANDIDATE_RECEIPT)", candidate)
+        self.assertIn("committed_at_head(log)", candidate)
 
     def test_failure_receipt_is_durable_and_refuses_overwrite(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

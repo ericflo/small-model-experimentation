@@ -31,9 +31,17 @@ CONTROL_DATA_SHA256 = "541805df2d817707c1e76213e50c8f08fd9caff10d0a3887e1196424b
 CONTROL_RECEIPT_SHA256 = "f78f2069fd1c7b37bbd0b13b581df0ce7360de92256323fcf5f3c7b0936ed6de"
 CONTROL_CONFIG_SHA256 = "0dfd9bda8a835926a87337782cc09b1e11e841a36f46b99c83fbae9bc89e120f"
 CONTROL_WEIGHTS_SHA256 = "bb59d3bd9273ae3bb3dffe54e983590dada69e6e1bdba571009ffedbba05154d"
+CANDIDATE_DATA_SHA256 = "9a43f3bea7699af4899678042623a90ef1b6cfc0f17defe069570be908cc03f1"
+CANDIDATE_RECEIPT_SHA256 = "846d8107ecadad458c18cd985d54feb42748e87677dd708c14a99e84cf4e7098"
+CANDIDATE_CONFIG_SHA256 = "91b7db5775a7ffac0e634257d7d1bb32a412bac17a51a239d64e68352f6037de"
+CANDIDATE_WEIGHTS_SHA256 = "858111918bd8a0a5bb379d6b9b1b2b600f013bd1da516d2b4e7cdf8ebd510f14"
 CONTROL_RECEIPT = EXP / "runs" / "training" / "replay_after_close.json"
 CONTROL_ADAPTER = (
     ROOT / "large_artifacts" / EXP.name / "adapters" / "replay_after_close"
+)
+CANDIDATE_RECEIPT = EXP / "runs" / "training" / "prefix_repair_after_close.json"
+CANDIDATE_ADAPTER = (
+    ROOT / "large_artifacts" / EXP.name / "adapters" / "prefix_repair_after_close"
 )
 FROZEN_TRAIN_FILES = {
     "replay_after_close": EXP / "data" / "replay_after_close.jsonl",
@@ -165,6 +173,90 @@ def validate_control_prerequisite(*, require_committed: bool = True) -> dict:
         "receipt": str(CONTROL_RECEIPT.resolve()),
         "receipt_sha256": sha256_file(CONTROL_RECEIPT),
         "adapter": str(CONTROL_ADAPTER.resolve()),
+        "adapter_config_sha256": payload["adapter_config_sha256"],
+        "adapter_weights_sha256": payload["adapter_weights_sha256"],
+        "training_git_head": payload["preflight_git_head"],
+    }
+
+
+def validate_candidate_checkpoint(*, require_committed: bool = True) -> dict:
+    """Authenticate the completed prefix-repair arm and its published control."""
+    if not CANDIDATE_RECEIPT.is_file() or (
+        require_committed and not committed_at_head(CANDIDATE_RECEIPT)
+    ):
+        raise ValueError("candidate checkpoint requires its receipt committed at HEAD")
+    if sha256_file(CANDIDATE_RECEIPT) != CANDIDATE_RECEIPT_SHA256:
+        raise ValueError("published candidate receipt bytes changed")
+    control_prerequisite = validate_control_prerequisite(
+        require_committed=require_committed
+    )
+    payload = load_json(CANDIDATE_RECEIPT)
+    datasets = payload.get("datasets", [])
+    warm_start = payload.get("warm_start", {})
+    log = Path(payload.get("log", ""))
+    expected_hyperparameters = {
+        "epochs": 1.0,
+        "lr": 1e-5,
+        "rank": 32,
+        "alpha": 64,
+        "batch_size": 1,
+        "grad_accum": 8,
+        "max_length": 4096,
+        "w_think": 0.2,
+        "w_close": 0.2,
+        "seed": 47,
+        "optimizer_steps": 40,
+    }
+    if (
+        payload.get("experiment_id") != EXP.name
+        or payload.get("name") != "prefix_repair_after_close"
+        or payload.get("model_id") != MODEL_ID
+        or payload.get("model_revision") != MODEL_REVISION
+        or payload.get("returncode") != 0
+        or payload.get("adapter_complete") is not True
+        or payload.get("adapter_config_sha256") != CANDIDATE_CONFIG_SHA256
+        or payload.get("adapter_weights_sha256") != CANDIDATE_WEIGHTS_SHA256
+        or payload.get("token_receipt_sha256") != TOKEN_RECEIPT_SHA256
+        or payload.get("train_rows") != EXPECTED_ROWS
+        or payload.get("forward_tokens_per_epoch") != EXPECTED_FORWARD_TOKENS
+        or payload.get("skipped_rows") != 0
+        or payload.get("preflight_git_status") != ""
+        or not re.fullmatch(r"[0-9a-f]{40}", str(payload.get("preflight_git_head", "")))
+        or payload.get("hyperparameters") != expected_hyperparameters
+        or payload.get("control_prerequisite") != control_prerequisite
+        or len(datasets) != 1
+        or datasets[0].get("sha256") != CANDIDATE_DATA_SHA256
+        or datasets[0].get("rows") != EXPECTED_ROWS
+        or datasets[0].get("forward_tokens_per_epoch") != EXPECTED_FORWARD_TOKENS
+        or datasets[0].get("target_tokens_per_epoch") != 151587
+        or datasets[0].get("nonzero_weight_tokens_per_epoch") != 111983
+        or datasets[0].get("absolute_weight_mass_per_epoch") != 25049.4
+        or Path(datasets[0].get("path", "")).resolve()
+        != FROZEN_TRAIN_FILES["prefix_repair_after_close"].resolve()
+        or warm_start.get("weights_sha256") != PARENT_WEIGHTS_SHA256
+        or warm_start.get("config_sha256") != PARENT_CONFIG_SHA256
+        or Path(payload.get("adapter", "")).resolve() != CANDIDATE_ADAPTER.resolve()
+    ):
+        raise ValueError("published candidate receipt violates the frozen contract")
+    config = CANDIDATE_ADAPTER / "adapter_config.json"
+    weights = CANDIDATE_ADAPTER / "adapter_model.safetensors"
+    if (
+        not config.is_file()
+        or not weights.is_file()
+        or sha256_file(config) != CANDIDATE_CONFIG_SHA256
+        or sha256_file(weights) != CANDIDATE_WEIGHTS_SHA256
+    ):
+        raise ValueError("published candidate adapter is absent or changed")
+    if (
+        not log.is_file()
+        or (require_committed and not committed_at_head(log))
+        or payload.get("log_sha256") != sha256_file(log)
+    ):
+        raise ValueError("published candidate log is absent or changed")
+    return {
+        "receipt": str(CANDIDATE_RECEIPT.resolve()),
+        "receipt_sha256": sha256_file(CANDIDATE_RECEIPT),
+        "adapter": str(CANDIDATE_ADAPTER.resolve()),
         "adapter_config_sha256": payload["adapter_config_sha256"],
         "adapter_weights_sha256": payload["adapter_weights_sha256"],
         "training_git_head": payload["preflight_git_head"],

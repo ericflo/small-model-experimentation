@@ -1,6 +1,6 @@
 # On-Policy Failure-Prefix Universal Curriculum
 
-**Status:** in-progress · since 2026-07-14 · replay control trained; candidate training is next
+**Status:** in-progress · since 2026-07-14 · paired training complete; fresh local-gate design is next
 
 This result-separated successor tests whether training corrective continuations from
 the model's own fresh procedural failure prefixes installs a reusable reasoning and
@@ -70,15 +70,10 @@ separate published checkpoints. Verify every model-free derived artifact with:
 PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --smoke
 ```
 
-After this control checkpoint is pushed to `main` and both required workflows are
-green, run exactly the candidate stage from a clean worktree:
-
-```bash
-PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --stage train-candidate
-```
-
-The wrapper authenticates the committed control log, receipt, and external adapter
-before loading the candidate. Local capability and benchmark stages remain sealed.
+This paired-training checkpoint must be committed, rebased, pushed to `main`, and
+green in both required workflows before a fresh local-evaluation design is added.
+No local-evaluation command exists yet. Capability and benchmark stages remain
+sealed.
 
 ## Results
 
@@ -122,10 +117,16 @@ epoch and 40 updates from the authenticated parent. It encoded 320/320 rows with
 skips, consumed the registered 304,313 forward tokens, and finished with training
 loss 0.4588 in 272.8 trainer seconds (292.4 wrapper seconds). The normalized
 log/receipt hashes are `a49076ec...3501` / `f78f2069...d6de`; adapter config/weights
-are `0dfd9bda...120f` / `bb59d3bd...5154d`. Its 256 tensors contain exactly
-42,467,328 elements; every tensor is finite and nonzero. This is an operational
-training result only. No candidate training, capability measurement, local
-evaluation, or benchmark event exists.
+are `0dfd9bda...120f` / `bb59d3bd...5154d`. From separately pushed-green control
+checkpoint `b690a4b3`, the prefix-repair candidate independently restarted from the
+same authenticated parent and also completed 320/320 rows, zero skips, one epoch,
+and 40/40 updates over 304,313 forward tokens. Its final training loss was 1.288 in
+282.4 trainer seconds (298.2 wrapper seconds). Candidate log/receipt hashes are
+`e895c546...ca0` / `846d8107...7098`; adapter config/weights are
+`91b7db57...37de` / `85811191...0f14`. Each 169,903,320-byte adapter has 256 tensors
+and 42,467,328 elements; every tensor is finite and nonzero. These are operational
+training results only. No capability measurement, local evaluation, or benchmark
+event exists.
 
 ## Interpretation
 
@@ -140,7 +141,7 @@ not isolate prefix conditioning from target-composition differences.
 
 - Program evidence: unchanged until a capability result exists.
 - Program backlog: records the quota-satisfying inventory, exposure caveat, and
-  authenticated replay control.
+  authenticated paired training.
 - Claim ledger and shared synthesis: unchanged.
 
 ## Artifacts
@@ -166,6 +167,8 @@ not isolate prefix conditioning from target-composition differences.
 - `runs/parent_rollout/seed66113.receipt.json`
 - `runs/training/replay_after_close.log`
 - `runs/training/replay_after_close.json`
+- `runs/training/prefix_repair_after_close.log`
+- `runs/training/prefix_repair_after_close.json`
 - `analysis/prefix_failure_inventory.md`
 - `reports/design_review.md`
 - `reports/compute_review.md`

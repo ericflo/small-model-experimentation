@@ -172,3 +172,29 @@ log and receipt before any candidate event.
 Next: publish and CI-verify this control log/receipt. Then run only
 `train-candidate`; its direct wrapper must authenticate the committed control receipt,
 committed log, and external adapter before loading the model.
+
+## 2026-07-14 — Exact-compute prefix-repair candidate trained
+
+- Published control checkpoint `b690a4b3` directly to `main`; Validate Repository run
+  `29351333012` and Publish Research Site run `29351333028` both passed.
+- From that clean aligned checkpoint, ran only `--stage train-candidate`. Before model
+  load, the direct wrapper reauthenticated the committed control receipt and log,
+  external control adapter, token receipt, candidate stream bytes, parent adapter,
+  and all frozen hyperparameters.
+- The candidate independently restarted from `close_xi`, encoded 320/320 rows with
+  zero skips, and performed 40/40 updates over one epoch and 304,313 forward tokens.
+  Batch size, gradient accumulation, learning rate, and seed remained 1/8/`1e-5`/47.
+  Trainer/wrapper wall times were 282.4/298.2 seconds; final training loss was 1.288.
+- Preserved normalized log/receipt hashes `e895c546...ca0` /
+  `846d8107...7098`. The external adapter config/weights hashes are
+  `91b7db57...37de` / `85811191...0f14`; weights are 169,903,320 bytes.
+- Structural audit found 256 tensors and 42,467,328 elements. Every tensor was finite
+  and nonzero. The preflight Git status was empty at commit `b690a4b3`; only the new
+  candidate log and receipt were created in the tracked tree.
+- This completes paired training only. The candidate's lower supervised-token count
+  and loss mass remain explicit causal caveats, and no capability measurement, local
+  event, merge, generation, or benchmark event ran.
+
+Next: publish and CI-verify this paired-training checkpoint. Then design and freeze
+the fresh paired local gate in a separate model-free checkpoint before evaluating
+the parent, replay control, or prefix-repair candidate.
