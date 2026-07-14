@@ -17,6 +17,13 @@ EXP = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(EXP / "src"))
 
 from firewall import install_benchmark_firewall  # noqa: E402
+from eval_inputs import task_metadata  # noqa: E402
+from provenance import (  # noqa: E402
+    validate_action_inputs,
+    validate_generation_protocol,
+    validate_sampling,
+)
+from vllm_runner import SamplingConfig  # noqa: E402
 
 install_benchmark_firewall(EXP.parents[1])
 
@@ -54,71 +61,56 @@ def main() -> int:
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     config = yaml.safe_load((EXP / "configs" / "default.yaml").read_text())
+    config_path = EXP / "configs" / "default.yaml"
     evaluation = config["evaluation"]
     if args.arm not in set(evaluation["arms"]):
         raise ValueError("arm is not preregistered")
     metadata = json.loads(args.metadata.read_text())
     input_receipt = json.loads(args.input_receipt.read_text())
+    split, expected_task_metadata, sealed = validate_action_inputs(
+        config=config,
+        config_path=config_path,
+        receipt_path=args.input_receipt,
+        labels_path=args.labels,
+    )
     generated_sha256 = hashlib.sha256(args.generated.read_bytes()).hexdigest()
-    if (
-        metadata.get("output", {}).get("sha256") != generated_sha256
-        or int(metadata.get("output", {}).get("rows", -1)) != int(input_receipt["rows"])
-    ):
-        raise ValueError("generation output differs from its runner metadata")
-    runner_path = EXP / "src" / "vllm_runner.py"
-    if metadata["runner_sha256"] != hashlib.sha256(runner_path.read_bytes()).hexdigest():
-        raise ValueError("generation used a different vLLM runner")
-    if metadata["input"]["sha256"] != input_receipt["prompt_sha256"]:
-        raise ValueError("generation input differs from the construction receipt")
-    if hashlib.sha256(args.labels.read_bytes()).hexdigest() != input_receipt["label_sha256"]:
-        raise ValueError("label bundle differs from the construction receipt")
-    if (
-        metadata["base_model"] != config["model"]["id"]
-        or metadata["model_revision"] != config["model"]["revision"]
-    ):
-        raise ValueError("generation used the wrong base model identity")
-    sampling = metadata["sampling"]
-    expected_sampling = {
-        "thinking": "budget",
-        "thinking_budget": int(evaluation["thinking_budget"]),
-        "n": int(evaluation["primary_candidate_count"]),
-        "answer_max_tokens": int(evaluation["answer_max_tokens"]),
-        "temperature": float(evaluation["temperature"]),
-        "top_p": float(evaluation["top_p"]),
-        "top_k": int(evaluation["top_k"]),
-    }
-    for key, expected in expected_sampling.items():
-        if sampling[key] != expected:
-            raise ValueError(f"generation sampling {key} differs from preregistration")
-    expected_seed = int(evaluation["sample_seeds"][input_receipt["split"]])
-    if int(sampling["run_seed"]) != expected_seed:
-        raise ValueError("generation run seed differs from the frozen split seed")
-    engine = evaluation["engine"]
-    for key in ("max_model_len", "max_num_seqs", "max_num_batched_tokens"):
-        if int(metadata["engine"][key]) != int(engine[key]):
-            raise ValueError(f"generation engine {key} differs from preregistration")
-    if float(metadata["engine"]["gpu_memory_utilization"]) != float(
-        engine["gpu_memory_utilization"]
-    ):
-        raise ValueError("generation GPU memory utilization differs from preregistration")
-    if metadata["engine"]["cudagraph_capture_sizes"] != engine["cudagraph_capture_sizes"]:
-        raise ValueError("generation CUDA-graph geometry differs from preregistration")
-    if bool(metadata["engine"]["enable_prefix_caching"]) != bool(
-        engine["prefix_caching"]
-    ):
-        raise ValueError("generation prefix caching differs from preregistration")
-    if bool(metadata["engine_args"]["async_scheduling"]) != bool(
-        engine["async_scheduling"]
-    ):
-        raise ValueError("generation async scheduling differs from preregistration")
-    if metadata["runtime"]["git_dirty"]:
-        raise ValueError("generation ran from a dirty worktree")
-    lock_path = EXP.parents[1] / "requirements-vllm.lock.txt"
-    if metadata["runtime"]["environment_lock"]["sha256"] != hashlib.sha256(
-        lock_path.read_bytes()
-    ).hexdigest():
-        raise ValueError("generation environment lock differs from the repository pin")
+    expected_seed = int(evaluation["sample_seeds"][split])
+    validate_sampling(
+        metadata,
+        SamplingConfig(
+            thinking="budget",
+            thinking_budget=int(evaluation["thinking_budget"]),
+            n=int(evaluation["primary_candidate_count"]),
+            answer_max_tokens=int(evaluation["answer_max_tokens"]),
+            temperature=float(evaluation["temperature"]),
+            top_p=float(evaluation["top_p"]),
+            top_k=int(evaluation["top_k"]),
+            run_seed=expected_seed,
+        ),
+    )
     frozen = args.arm == "frozen_action"
+    if split == "confirmation":
+        expected_stage = "confirmation"
+    elif split == "calibration" and frozen:
+        expected_stage = "calibration_generation"
+    elif frozen or args.training_seed == config["training"]["staged_seeds"]["screen"]:
+        expected_stage = "screen_training"
+    else:
+        expected_stage = "replication_training"
+    runtime_protocol_sha256 = validate_generation_protocol(
+        metadata=metadata,
+        config=config,
+        experiment_root=EXP,
+        generated_path=args.generated,
+        expected_rows=int(input_receipt["rows"]),
+        expect_merged=not frozen,
+        expected_stage=expected_stage,
+        expected_split=split,
+        expected_input_kind="action",
+        expected_source_seed=None if frozen else args.training_seed,
+    )
+    if metadata["input"]["sha256"] != sealed["prompt_sha256"]:
+        raise ValueError("generation input differs from sealed reconstruction")
     if frozen:
         if (
             args.training_seed is not None
@@ -134,6 +126,13 @@ def main() -> int:
         if args.adapter_gate_receipt is None:
             raise ValueError("trained arm lacks its adapter ON/OFF gate receipt")
         adapter_gate = json.loads(args.adapter_gate_receipt.read_text())
+        expected_gate_keys = {
+            "schema_version", "experiment_id", "config_sha256", "arm", "seed",
+            "pass", "changed_tasks", "total_tasks", "model_override",
+            "runtime_protocol_sha256", "base_generated_sha256",
+            "merged_generated_sha256", "base_metadata_sha256",
+            "merged_metadata_sha256",
+        }
         training_arm = {
             "reflection_correct_action": "reflection_correct",
             "reflection_shuffled_action": "reflection_shuffled",
@@ -141,13 +140,20 @@ def main() -> int:
             "direct_plan_answer_positive_control_action": "direct_plan_answer_positive_control",
         }[args.arm]
         if (
-            adapter_gate.get("pass") is not True
+            set(adapter_gate) != expected_gate_keys
+            or adapter_gate.get("schema_version") != 2
+            or adapter_gate.get("pass") is not True
             or adapter_gate.get("experiment_id") != config["experiment_id"]
             or adapter_gate.get("config_sha256")
             != hashlib.sha256((EXP / "configs" / "default.yaml").read_bytes()).hexdigest()
             or adapter_gate.get("arm") != training_arm
             or adapter_gate.get("seed") != args.training_seed
             or adapter_gate.get("model_override") != metadata["model_override"]
+            or adapter_gate.get("runtime_protocol_sha256")
+            != runtime_protocol_sha256
+            or int(adapter_gate.get("changed_tasks", 0)) < 1
+            or int(adapter_gate.get("total_tasks", -1))
+            != len(task_metadata(config, "calibration"))
         ):
             raise ValueError("adapter ON/OFF gate does not bind this arm/seed/merged model")
         if (
@@ -173,9 +179,13 @@ def main() -> int:
     )
     metadata_sha256 = hashlib.sha256(args.metadata.read_bytes()).hexdigest()
     for row in scored:
+        expected_family, expected_depth = expected_task_metadata[row["task_id"]]
+        if row["family"] != expected_family or int(row["depth"]) != expected_depth:
+            raise ValueError("scored task metadata differs from sealed reconstruction")
         row["training_seed"] = args.training_seed
         row["generated_sha256"] = generated_sha256
         row["metadata_sha256"] = metadata_sha256
+        row["runtime_protocol_sha256"] = runtime_protocol_sha256
         row["adapter_gate_receipt_sha256"] = (
             None
             if args.adapter_gate_receipt is None

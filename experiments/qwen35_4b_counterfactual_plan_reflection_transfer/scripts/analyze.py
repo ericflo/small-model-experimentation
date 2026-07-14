@@ -18,7 +18,8 @@ sys.path.insert(0, str(EXP / "src"))
 
 from analyze import evaluate_positive_control, evaluate_seed_block  # noqa: E402
 from firewall import install_benchmark_firewall  # noqa: E402
-from taskgen import build_corpus  # noqa: E402
+from eval_inputs import task_metadata  # noqa: E402
+from stages import read_and_validate_stage_receipt  # noqa: E402
 
 install_benchmark_firewall(EXP.parents[1])
 
@@ -53,7 +54,6 @@ def main() -> int:
     config = yaml.safe_load((EXP / "configs" / "default.yaml").read_text())
     if args.seed not in set(config["training"]["staged_seeds"].values()):
         raise SystemExit("seed is not preregistered")
-    stage_receipt = json.loads(args.stage_receipt.read_text())
     if args.block == "confirmation":
         expected_stage = "confirmation"
     elif args.seed == config["training"]["staged_seeds"]["screen"]:
@@ -61,13 +61,12 @@ def main() -> int:
     else:
         expected_stage = "replication_training"
     config_path = EXP / "configs" / "default.yaml"
-    if (
-        stage_receipt.get("experiment_id") != config["experiment_id"]
-        or stage_receipt.get("authorized_stage") != expected_stage
-        or stage_receipt.get("config_sha256")
-        != hashlib.sha256(config_path.read_bytes()).hexdigest()
-    ):
-        raise ValueError("stage receipt does not authorize this decision block/seed")
+    read_and_validate_stage_receipt(
+        args.stage_receipt,
+        config=config,
+        config_path=config_path,
+        expected_stage=expected_stage,
+    )
     rows = _rows(args.scores)
     if {row["split"] for row in rows} != {args.block}:
         raise ValueError("score bundle contains the wrong evaluation block")
@@ -76,14 +75,7 @@ def main() -> int:
         if row.get("training_seed") != expected_seed:
             raise ValueError("score bundle training seed differs from requested decision seed")
     decision = config["decision_gates"]
-    construction = config["construction"]
-    counts = {
-        split: int(construction["per_family"][split])
-        for split in ("train", "calibration", "qualification", "confirmation")
-    }
-    expected_tasks = build_corpus(counts, int(construction["seed"]))[args.block]
-    expected_task_ids = {task["task_id"] for task in expected_tasks}
-    expected_families = {task["family"] for task in expected_tasks}
+    expected_task_metadata = task_metadata(config, args.block)
     thresholds = dict(decision["per_seed_qualification_and_confirmation"])
     thresholds["reflection_specific_correct_minus_auxiliary_min"] = decision[
         "reflection_specific_mechanism"
@@ -92,8 +84,7 @@ def main() -> int:
         rows,
         thresholds,
         decision["bootstrap"],
-        expected_task_ids,
-        expected_families,
+        expected_task_metadata,
     )
     result = {
         "schema_version": 1,
@@ -115,7 +106,7 @@ def main() -> int:
             rows,
             decision["positive_control_sanity_on_qualification"],
             decision["bootstrap"],
-            expected_task_ids,
+            expected_task_metadata,
         )
     digest = _write_exclusive(args.output, result)
     print(

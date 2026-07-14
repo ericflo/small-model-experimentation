@@ -88,3 +88,9 @@
   and zero model/GPU/benchmark events. Correct reflection, shuffled reflection, and
   auxiliary plan-label arms each have exactly 77,020 prompt, 5,164 target, and 82,184
   forward tokens; all 12 optimizer groups match correct versus shuffled.
+- Implemented all eight Review 3 full-execution remediations without tokenizer/model/GPU
+  events: sealed-byte reconstruction; complete sampling equality; exact task metadata
+  and cross-arm runtime identity; dedicated literal-reflection inputs; strict staged
+  generation ancestry; embedded training/PEFT/merge lineage; installed-lock and adapter
+  ON/OFF parity; and live hybrid KV token/block preflight. The suite passes 55 focused
+  tests. Authorization remains tokenizer-only pending a fresh Review 4.

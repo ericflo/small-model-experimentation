@@ -18,7 +18,7 @@ sys.path.insert(0, str(EXP / "src"))
 
 from analyze import evaluate_calibration  # noqa: E402
 from firewall import install_benchmark_firewall  # noqa: E402
-from taskgen import build_corpus  # noqa: E402
+from eval_inputs import task_metadata  # noqa: E402
 
 install_benchmark_firewall(EXP.parents[1])
 
@@ -36,15 +36,7 @@ def main() -> int:
         raise ValueError("calibration score bundle has the wrong split")
     if any(row["arm"] != "frozen_action" or row.get("training_seed") is not None for row in rows):
         raise ValueError("calibration must contain only receipt-bound frozen rows")
-    construction = config["construction"]
-    counts = {
-        split: int(construction["per_family"][split])
-        for split in ("train", "calibration", "qualification", "confirmation")
-    }
-    expected_task_ids = {
-        task["task_id"]
-        for task in build_corpus(counts, int(construction["seed"]))["calibration"]
-    }
+    expected_task_metadata = task_metadata(config, "calibration")
     result = {
         "schema_version": 1,
         "experiment_id": config["experiment_id"],
@@ -54,7 +46,7 @@ def main() -> int:
         "gate": evaluate_calibration(
             rows,
             config["decision_gates"]["calibration_before_training"],
-            expected_task_ids,
+            expected_task_metadata,
         ),
     }
     payload = (json.dumps(result, indent=2, sort_keys=True) + "\n").encode()

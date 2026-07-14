@@ -61,6 +61,11 @@ adapter lineage/runtime parity, and live KV-capacity preflight also remain block
 Remediate all Review 3 blockers model-free and obtain a fresh adversarial verdict.
 Nothing beyond that repair is authorized yet.
 
+All eight blockers now have committed-code candidates and focused regression coverage,
+including the exact forged-label, family/depth imbalance, stage-cardinality, sampling,
+merged-lineage, and live-capacity seams. They remain non-authorizing until Review 4
+inspects an immutable pushed revision.
+
 ## Artifact Manifest
 
 See `artifact_manifest.yaml`.

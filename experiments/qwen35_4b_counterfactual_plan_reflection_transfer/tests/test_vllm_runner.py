@@ -9,12 +9,16 @@ import sys
 import tempfile
 import types
 import unittest
+import yaml
 from pathlib import Path
 from types import SimpleNamespace
 from unittest import mock
 
 
 RUNNER_PATH = Path(__file__).resolve().parents[1] / "src" / "vllm_runner.py"
+sys.path.insert(0, str(RUNNER_PATH.parent))
+import stages as stage_module  # noqa: E402
+
 SPEC = importlib.util.spec_from_file_location("template_vllm_runner", RUNNER_PATH)
 assert SPEC and SPEC.loader
 runner = importlib.util.module_from_spec(SPEC)
@@ -56,6 +60,78 @@ def _compilation_config(
 
 
 class EngineConfigCaptureGeometryTests(unittest.TestCase):
+    @staticmethod
+    def live_cache(num_blocks: int = 1100) -> dict:
+        concurrency = num_blocks / 11
+        return {
+            "num_gpu_blocks": num_blocks,
+            "block_size": 528,
+            "kv_cache_size_tokens": int(concurrency * 4096),
+            "kv_cache_max_concurrency": concurrency,
+            "enable_prefix_caching": False,
+            "mamba_cache_mode": "none",
+            "mamba_block_size": 4096,
+        }
+
+    def test_live_hybrid_capacity_geometry_and_invocation_preflight(self) -> None:
+        config = runner.EngineConfig(
+            max_model_len=4096,
+            max_num_seqs=64,
+            max_num_batched_tokens=16384,
+            cudagraph_capture_sizes=(1, 2, 4, 8, 16, 32, 64),
+        )
+        cache = self.live_cache()
+        shape = runner._validate_live_cache_geometry(cache, config)
+        self.assertEqual(shape["blocks_per_max_request"], 11)
+        live = {
+            "live_model": {"max_model_len": 4096, "dtype": "torch.bfloat16"},
+            "live_scheduler": {
+                "max_num_seqs": 64,
+                "max_num_batched_tokens": 16384,
+                "async_scheduling": False,
+            },
+            "live_parallel": {
+                "world_size": 1,
+                "tensor_parallel_size": 1,
+                "data_parallel_size": 1,
+            },
+            "live_cache": cache,
+            "cache_shape": shape,
+        }
+        receipt = runner._capacity_preflight(
+            live=live,
+            config=config,
+            prompt_lengths=[500] * 144,
+            sampling=runner.SamplingConfig(
+                thinking="budget", thinking_budget=1024, answer_max_tokens=128, n=16
+            ),
+            close_tokens=2,
+        )
+        self.assertEqual(receipt["decision"], "LIVE_KV_CAPACITY_PASS")
+        self.assertEqual(receipt["invocation"]["active_sequences"], 64)
+        self.assertGreater(receipt["invocation"]["remaining_cache_blocks"], 0)
+
+    def test_live_capacity_rejects_changed_geometry_and_overcommit(self) -> None:
+        config = runner.EngineConfig(max_model_len=4096, max_num_seqs=64)
+        changed = self.live_cache()
+        changed["block_size"] = 512
+        with self.assertRaisesRegex(RuntimeError, "geometry changed"):
+            runner._validate_live_cache_geometry(changed, config)
+
+        cache = self.live_cache(704)
+        shape = runner._validate_live_cache_geometry(cache, config)
+        live = {"live_cache": cache, "cache_shape": shape}
+        with self.assertRaisesRegex(RuntimeError, "cannot fit"):
+            runner._capacity_preflight(
+                live=live,
+                config=config,
+                prompt_lengths=[3000] * 64,
+                sampling=runner.SamplingConfig(
+                    thinking="budget", thinking_budget=1024, answer_max_tokens=128, n=1
+                ),
+                close_tokens=2,
+            )
+
     def test_merged_model_override_is_existing_and_mutually_exclusive(self) -> None:
         runner.EngineConfig(model_override=RUNNER_PATH.parent).validate()
         with self.assertRaisesRegex(ValueError, "existing merged-checkpoint"):
@@ -72,23 +148,120 @@ class EngineConfigCaptureGeometryTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             (root / "weights.safetensors").write_bytes(b"weights")
+            lineage = root / "source_lineage"
+            lineage.mkdir()
+            config_sha = runner._sha256_file(
+                RUNNER_PATH.parents[1] / "configs" / "default.yaml"
+            )
+            git_commit = runner._run_text(["git", "rev-parse", "HEAD"])
+            stage_receipt = {
+                "schema_version": 2,
+                "experiment_id": "qwen35_4b_counterfactual_plan_reflection_transfer",
+                "authorized_stage": "screen_training",
+                "config_sha256": config_sha,
+                "issuer_git_commit": git_commit,
+                "issuer_script_sha256": runner._sha256_file(
+                    RUNNER_PATH.parents[1] / "scripts" / "authorize_stage.py"
+                ),
+                "prerequisites": [
+                    {"kind": "calibration_gate", "sha256": "c" * 64, "pass": True}
+                ],
+            }
+            (lineage / "stage_receipt.json").write_text(json.dumps(stage_receipt))
+            tokenizer_receipt = {
+                "experiment_id": "qwen35_4b_counterfactual_plan_reflection_transfer",
+                "model_id": runner.MODEL_ID,
+                "model_revision": runner.MODEL_REVISION,
+                "tokenizer_eos_token_id": 248046,
+            }
+            (lineage / "tokenizer_receipt.json").write_text(json.dumps(tokenizer_receipt))
+            adapter_config = {
+                "r": 32,
+                "lora_alpha": 64,
+                "lora_dropout": 0.05,
+                "bias": "none",
+                "target_modules": [
+                    "q_proj", "k_proj", "v_proj", "o_proj",
+                    "gate_proj", "up_proj", "down_proj",
+                ],
+            }
+            (lineage / "adapter_config.json").write_text(json.dumps(adapter_config))
+            trainer_sha = runner._sha256_file(
+                RUNNER_PATH.parents[1] / "scripts" / "train.py"
+            )
+            training_receipt = {
+                "schema_version": 2,
+                "experiment_id": "qwen35_4b_counterfactual_plan_reflection_transfer",
+                "config_sha256": config_sha,
+                "arm": "reflection_correct",
+                "seed": 47,
+                "model_id": runner.MODEL_ID,
+                "model_revision": runner.MODEL_REVISION,
+                "optimizer_steps": 36,
+                "train_loss": 0.1,
+                "trainer_sha256": trainer_sha,
+                "trainer_git_commit": git_commit,
+                "recipe_sha256": runner._sha256_bytes(
+                    json.dumps(
+                        yaml.safe_load(
+                            (RUNNER_PATH.parents[1] / "configs" / "default.yaml").read_text()
+                        )["training"]["recipe"],
+                        sort_keys=True,
+                        separators=(",", ":"),
+                    ).encode()
+                ),
+                "stage_receipt_sha256": runner._sha256_file(lineage / "stage_receipt.json"),
+                "tokenizer_receipt_sha256": runner._sha256_file(
+                    lineage / "tokenizer_receipt.json"
+                ),
+                "copied_stage_receipt_sha256": runner._sha256_file(
+                    lineage / "stage_receipt.json"
+                ),
+                "copied_tokenizer_receipt_sha256": runner._sha256_file(
+                    lineage / "tokenizer_receipt.json"
+                ),
+                "record_receipt_sha256": "1" * 64,
+                "parity_sha256": "2" * 64,
+                "adapter_tree_excluding_training_receipt_sha256": "b" * 64,
+            }
+            (lineage / "training_receipt.json").write_text(json.dumps(training_receipt))
             tree_hash = runner._sha256_tree(root)
             receipt = {
+                "schema_version": 2,
+                "experiment_id": "qwen35_4b_counterfactual_plan_reflection_transfer",
+                "config_sha256": config_sha,
                 "model_id": runner.MODEL_ID,
                 "model_revision": runner.MODEL_REVISION,
                 "applied_lora_modules": 7,
                 "merged_tree_sha256": tree_hash,
-                "source_training_receipt_sha256": "a" * 64,
+                "source_training_receipt_sha256": runner._sha256_file(
+                    lineage / "training_receipt.json"
+                ),
+                "source_stage_receipt_sha256": runner._sha256_file(
+                    lineage / "stage_receipt.json"
+                ),
+                "source_tokenizer_receipt_sha256": runner._sha256_file(
+                    lineage / "tokenizer_receipt.json"
+                ),
+                "source_trainer_sha256": trainer_sha,
+                "source_trainer_git_commit": git_commit,
+                "source_recipe_sha256": training_receipt["recipe_sha256"],
                 "source_adapter_tree_sha256": "b" * 64,
+                "source_adapter_sha256": "f" * 64,
+                "source_adapter_config_sha256": runner._sha256_file(
+                    lineage / "adapter_config.json"
+                ),
                 "source_arm": "reflection_correct",
                 "source_seed": 47,
             }
             (root / "merge_receipt.json").write_text(json.dumps(receipt))
-            validated = runner._validate_model_override(root)
+            with mock.patch.object(stage_module, "require_clean_worktree"):
+                validated = runner._validate_model_override(root)
             self.assertEqual(validated["merged_tree_sha256"], tree_hash)
             (root / "weights.safetensors").write_bytes(b"tampered")
             with self.assertRaisesRegex(ValueError, "tree hash differs"):
-                runner._validate_model_override(root)
+                with mock.patch.object(stage_module, "require_clean_worktree"):
+                    runner._validate_model_override(root)
 
     def test_explicit_capture_list_requires_strict_positive_tied_geometry(self) -> None:
         runner.EngineConfig(
@@ -414,9 +587,33 @@ class ResolvedCudagraphTests(unittest.TestCase):
         class FakeLLM:
             def __init__(self, **kwargs: object):
                 captured_engine_args.update(kwargs)
+                cache_blocks = 1100
                 self.llm_engine = SimpleNamespace(
                     vllm_config=SimpleNamespace(
-                        compilation_config=_compilation_config()
+                        compilation_config=_compilation_config(),
+                        cache_config=SimpleNamespace(
+                            num_gpu_blocks=cache_blocks,
+                            block_size=528,
+                            kv_cache_size_tokens=int((cache_blocks / 11) * 4096),
+                            kv_cache_max_concurrency=cache_blocks / 11,
+                            enable_prefix_caching=False,
+                            mamba_cache_mode="none",
+                            mamba_block_size=4096,
+                        ),
+                        scheduler_config=SimpleNamespace(
+                            max_num_seqs=15,
+                            max_num_batched_tokens=32768,
+                            async_scheduling=False,
+                        ),
+                        model_config=SimpleNamespace(
+                            max_model_len=4096,
+                            dtype="torch.bfloat16",
+                        ),
+                        parallel_config=SimpleNamespace(
+                            world_size=1,
+                            tensor_parallel_size=1,
+                            data_parallel_size=1,
+                        ),
                     ),
                     engine_core=SimpleNamespace(shutdown=lambda: None),
                 )
@@ -437,6 +634,7 @@ class ResolvedCudagraphTests(unittest.TestCase):
         ):
             instance = runner.VLLMRunner(
                 runner.EngineConfig(
+                    max_model_len=4096,
                     max_num_seqs=15,
                     cudagraph_capture_sizes=effective,
                 )

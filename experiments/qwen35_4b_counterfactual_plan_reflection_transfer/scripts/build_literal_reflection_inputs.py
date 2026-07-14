@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build disjoint action-prompt and oracle-label bundles for one frozen split."""
+"""Build the dedicated sealed literal-reflection prompt bundle."""
 
 from __future__ import annotations
 
@@ -16,11 +16,10 @@ import yaml
 EXP = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(EXP / "src"))
 
+from eval_inputs import jsonl_payload, reflection_prompts, reflection_receipt  # noqa: E402
 from firewall import install_benchmark_firewall  # noqa: E402
 
 install_benchmark_firewall(EXP.parents[1])
-
-from eval_inputs import action_bundles, action_receipt, jsonl_payload  # noqa: E402
 
 
 def _write_exclusive(path: Path, payload: bytes) -> None:
@@ -35,32 +34,23 @@ def _write_exclusive(path: Path, payload: bytes) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument(
-        "--split",
-        choices=("calibration", "qualification", "confirmation", "retention"),
-        required=True,
-    )
+    parser.add_argument("--split", choices=("qualification",), required=True)
     parser.add_argument("--prompts", type=Path, required=True)
-    parser.add_argument("--labels", type=Path, required=True)
     parser.add_argument("--receipt", type=Path, required=True)
     args = parser.parse_args()
-    if len({args.prompts.resolve(), args.labels.resolve(), args.receipt.resolve()}) != 3:
-        raise SystemExit("prompt, label, and receipt paths must differ")
-    config = yaml.safe_load((EXP / "configs" / "default.yaml").read_text())
+    if args.prompts.resolve() == args.receipt.resolve():
+        raise ValueError("prompt and receipt paths must differ")
+    config_path = EXP / "configs" / "default.yaml"
+    config = yaml.safe_load(config_path.read_text())
     if config["authorization"]["cpu_construction"] is not True:
         raise SystemExit("CPU construction is not authorized")
-    prompts, labels = action_bundles(config, args.split)
-    prompt_payload = jsonl_payload(prompts)
-    label_payload = jsonl_payload(labels)
-    config_sha256 = hashlib.sha256(
-        (EXP / "configs" / "default.yaml").read_bytes()
-    ).hexdigest()
-    receipt = action_receipt(config, config_sha256, args.split)
-    _write_exclusive(args.prompts, prompt_payload)
-    _write_exclusive(args.labels, label_payload)
+    prompts = reflection_prompts(config, args.split)
+    receipt = reflection_receipt(
+        config, hashlib.sha256(config_path.read_bytes()).hexdigest(), args.split
+    )
+    _write_exclusive(args.prompts, jsonl_payload(prompts))
     _write_exclusive(
-        args.receipt,
-        (json.dumps(receipt, indent=2, sort_keys=True) + "\n").encode(),
+        args.receipt, (json.dumps(receipt, indent=2, sort_keys=True) + "\n").encode()
     )
     print(json.dumps(receipt, indent=2, sort_keys=True))
     return 0

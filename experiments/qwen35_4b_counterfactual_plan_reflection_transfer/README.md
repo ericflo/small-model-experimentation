@@ -152,6 +152,15 @@ runner metadata to the generated JSONL and exact engine/environment/checkpoint l
 requires a real merged-adapter ON/OFF effect, and makes retention and literal-reflection
 controls executable. These repairs remain non-authorizing until independently reviewed.
 
+Review-3 remediation now reconstructs prompt and oracle-label bytes from sealed task
+code inside every scorer; compares the complete raw and resolved sampling dictionaries;
+requires exact task→family/depth mappings and one cross-arm runtime protocol; adds a
+dedicated literal-reflection input bundle; validates exact stage schemas and ancestry
+before every non-smoke generation; embeds training/stage/tokenizer/PEFT lineage inside
+the hashed merged tree; verifies installed packages against the vLLM lock; and performs
+a live hybrid-cache token/block preflight before generation. This remains model-free,
+non-authorizing work pending clean Review 4.
+
 ## Interpretation
 
 The paper unlocks a training hypothesis, not an already-demonstrated Qwen capability.
@@ -181,6 +190,7 @@ additional sampling. No scientific result exists yet.
 - `scripts/merge_adapter.py`
 - `scripts/adapter_behavior_gate.py`
 - `scripts/build_eval_inputs.py`
+- `scripts/build_literal_reflection_inputs.py`
 - `scripts/build_literal_action_inputs.py`
 - `scripts/score.py`
 - `scripts/score_literal.py`
@@ -193,5 +203,7 @@ additional sampling. No scientific result exists yet.
 - `tests/test_scoring.py`
 - `tests/test_analyze.py`
 - `tests/test_vllm_runner.py`
+- `tests/test_eval_inputs.py`
+- `tests/test_stages.py`
 - `reports/artifact_manifest.yaml`
 - `reports/power_analysis.md`

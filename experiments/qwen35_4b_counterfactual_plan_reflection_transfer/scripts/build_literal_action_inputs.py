@@ -20,7 +20,13 @@ from firewall import install_benchmark_firewall  # noqa: E402
 
 install_benchmark_firewall(EXP.parents[1])
 
-from taskgen import ACTION_QUESTION, REFLECTION_QUESTION, build_corpus  # noqa: E402
+from eval_inputs import (  # noqa: E402
+    literal_action_prompts,
+    literal_action_receipt,
+    reflection_receipt,
+)
+from provenance import validate_generation_protocol, validate_sampling  # noqa: E402
+from vllm_runner import SamplingConfig  # noqa: E402
 
 
 def _read_jsonl(path: Path) -> list[dict]:
@@ -47,7 +53,7 @@ def main() -> int:
     parser.add_argument("--split", choices=("qualification",), required=True)
     parser.add_argument("--reflection-generated", type=Path, required=True)
     parser.add_argument("--reflection-metadata", type=Path, required=True)
-    parser.add_argument("--input-receipt", type=Path, required=True)
+    parser.add_argument("--reflection-input-receipt", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--receipt", type=Path, required=True)
     args = parser.parse_args()
@@ -57,114 +63,63 @@ def main() -> int:
     if config["authorization"]["evaluation"] is not True:
         raise SystemExit("evaluation is not authorized")
     reflection_metadata = json.loads(args.reflection_metadata.read_text())
-    input_receipt = json.loads(args.input_receipt.read_text())
+    input_receipt = json.loads(args.reflection_input_receipt.read_text())
     reflection_generated_sha256 = hashlib.sha256(
         args.reflection_generated.read_bytes()
     ).hexdigest()
     diagnostic = config["evaluation"]["literal_reflection_diagnostic"]
-    runner_sha256 = hashlib.sha256((EXP / "src" / "vllm_runner.py").read_bytes()).hexdigest()
-    if (
-        input_receipt.get("split") != args.split
-        or reflection_metadata["input"]["sha256"] != input_receipt["prompt_sha256"]
-        or reflection_metadata["runner_sha256"] != runner_sha256
-        or reflection_metadata["base_model"] != config["model"]["id"]
-        or reflection_metadata["model_revision"] != config["model"]["revision"]
-        or reflection_metadata["model_override"] is not None
-        or reflection_metadata["runtime"]["git_dirty"]
-        or reflection_metadata.get("output", {}).get("sha256")
-        != reflection_generated_sha256
-        or int(reflection_metadata.get("output", {}).get("rows", -1))
-        != int(input_receipt["rows"])
-    ):
-        raise ValueError("literal reflection generation provenance is invalid")
-    engine = config["evaluation"]["engine"]
-    for key in ("max_model_len", "max_num_seqs", "max_num_batched_tokens"):
-        if int(reflection_metadata["engine"][key]) != int(engine[key]):
-            raise ValueError(f"literal reflection engine {key} differs")
-    if float(reflection_metadata["engine"]["gpu_memory_utilization"]) != float(
-        engine["gpu_memory_utilization"]
-    ):
-        raise ValueError("literal reflection GPU memory utilization differs")
-    if (
-        reflection_metadata["engine"]["cudagraph_capture_sizes"]
-        != engine["cudagraph_capture_sizes"]
-    ):
-        raise ValueError("literal reflection CUDA-graph geometry differs")
-    if bool(reflection_metadata["engine"]["enable_prefix_caching"]) != bool(
-        engine["prefix_caching"]
-    ):
-        raise ValueError("literal reflection prefix caching differs")
-    if bool(reflection_metadata["engine_args"]["async_scheduling"]) != bool(
-        engine["async_scheduling"]
-    ):
-        raise ValueError("literal reflection async scheduling differs")
-    lock_path = EXP.parents[1] / "requirements-vllm.lock.txt"
-    if reflection_metadata["runtime"]["environment_lock"]["sha256"] != hashlib.sha256(
-        lock_path.read_bytes()
-    ).hexdigest():
-        raise ValueError("literal reflection environment lock differs")
-    reflection_sampling = reflection_metadata["sampling"]
-    expected_reflection = {
-        "thinking": "off",
-        "n": int(diagnostic["candidate_count"]),
-        "max_tokens": int(diagnostic["reflection_max_tokens"]),
-        "temperature": float(diagnostic["reflection_temperature"]),
-        "top_p": float(diagnostic["reflection_top_p"]),
-        "top_k": int(diagnostic["reflection_top_k"]),
-        "run_seed": int(diagnostic["reflection_seed"]),
-    }
-    if any(reflection_sampling[key] != value for key, value in expected_reflection.items()):
-        raise ValueError("literal reflection sampling differs from preregistration")
-    construction = config["construction"]
-    counts = {
-        split: int(construction["per_family"][split])
-        for split in ("train", "calibration", "qualification", "confirmation")
-    }
-    tasks = build_corpus(counts, int(construction["seed"]))[args.split]
-    task_by_id = {task["task_id"]: task for task in tasks}
+    config_path = EXP / "configs" / "default.yaml"
+    expected_input_receipt = reflection_receipt(
+        config, hashlib.sha256(config_path.read_bytes()).hexdigest(), args.split
+    )
+    if input_receipt != expected_input_receipt:
+        raise ValueError("literal reflection input receipt differs from sealed reconstruction")
+    if reflection_metadata["input"]["sha256"] != expected_input_receipt["prompt_sha256"]:
+        raise ValueError("literal reflection generation used the wrong sealed prompts")
+    validate_sampling(
+        reflection_metadata,
+        SamplingConfig(
+            thinking="off",
+            n=int(diagnostic["candidate_count"]),
+            max_tokens=int(diagnostic["reflection_max_tokens"]),
+            temperature=float(diagnostic["reflection_temperature"]),
+            top_p=float(diagnostic["reflection_top_p"]),
+            top_k=int(diagnostic["reflection_top_k"]),
+            run_seed=int(diagnostic["reflection_seed"]),
+        ),
+    )
+    validate_generation_protocol(
+        metadata=reflection_metadata,
+        config=config,
+        experiment_root=EXP,
+        generated_path=args.reflection_generated,
+        expected_rows=int(expected_input_receipt["rows"]),
+        expect_merged=False,
+        expected_stage="screen_training",
+        expected_split=args.split,
+        expected_input_kind="literal_reflection",
+        expected_source_seed=None,
+    )
     reflected = _read_jsonl(args.reflection_generated)
-    if {row["id"] for row in reflected} != set(task_by_id):
-        raise ValueError("literal reflection rows do not match the qualification tasks")
-    candidate_count = int(diagnostic["candidate_count"])
-    prompts = []
-    for row in reflected:
-        task = task_by_id[row["id"]]
-        if len(row["outputs"]) != candidate_count:
-            raise ValueError("literal reflection candidate count differs from config")
-        for sample_index, output in enumerate(row["outputs"]):
-            prompts.append(
-                {
-                    "id": f"{task['task_id']}::literal::{sample_index}",
-                    "messages": [
-                        *task["common_messages"],
-                        {"role": "user", "content": REFLECTION_QUESTION},
-                        {"role": "assistant", "content": str(output["text"])},
-                        {"role": "user", "content": ACTION_QUESTION},
-                    ],
-                    "meta": {
-                        "split": args.split,
-                        "family": task["family"],
-                        "depth": task["depth"],
-                        "parent_task_id": task["task_id"],
-                        "sample_index": sample_index,
-                        "reflection_text_sha256": hashlib.sha256(
-                            str(output["text"]).encode()
-                        ).hexdigest(),
-                    },
-                }
-            )
+    prompts = literal_action_prompts(
+        config, args.split, reflected, int(diagnostic["candidate_count"])
+    )
     digest = _write_exclusive(args.output, prompts)
-    receipt = {
-        "schema_version": 1,
-        "experiment_id": config["experiment_id"],
-        "split": args.split,
-        "rows": len(prompts),
-        "prompt_sha256": digest,
-        "source_reflection_generated_sha256": reflection_generated_sha256,
-        "source_reflection_metadata_sha256": hashlib.sha256(
+    receipt = literal_action_receipt(
+        config=config,
+        config_sha256=hashlib.sha256(config_path.read_bytes()).hexdigest(),
+        split=args.split,
+        prompts=prompts,
+        source_reflection_generated_sha256=reflection_generated_sha256,
+        source_reflection_metadata_sha256=hashlib.sha256(
             args.reflection_metadata.read_bytes()
         ).hexdigest(),
-    }
+        source_reflection_input_receipt_sha256=hashlib.sha256(
+            args.reflection_input_receipt.read_bytes()
+        ).hexdigest(),
+    )
+    if receipt["prompt_sha256"] != digest:
+        raise RuntimeError("literal action prompt serialization changed")
     _write_exclusive(args.receipt, [receipt])
     print(json.dumps(receipt, indent=2))
     return 0

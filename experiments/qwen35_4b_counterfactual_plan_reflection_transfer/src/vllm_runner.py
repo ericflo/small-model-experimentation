@@ -149,8 +149,57 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
     if not receipt_path.is_file():
         raise ValueError("merged model override lacks merge_receipt.json")
     receipt = json.loads(receipt_path.read_text())
+    required = {
+        "schema_version", "experiment_id", "config_sha256", "model_id",
+        "model_revision", "source_training_receipt_sha256",
+        "source_stage_receipt_sha256", "source_tokenizer_receipt_sha256",
+        "source_trainer_sha256", "source_trainer_git_commit",
+        "source_recipe_sha256", "source_adapter_tree_sha256",
+        "source_adapter_sha256", "source_adapter_config_sha256", "source_arm", "source_seed",
+        "applied_lora_modules", "merged_tree_sha256",
+    }
+    config_path = Path(__file__).resolve().parents[1] / "configs" / "default.yaml"
+    lineage = path / "source_lineage"
+    training_lineage_path = lineage / "training_receipt.json"
+    stage_lineage_path = lineage / "stage_receipt.json"
+    tokenizer_lineage_path = lineage / "tokenizer_receipt.json"
+    adapter_config_lineage_path = lineage / "adapter_config.json"
+    if not all(
+        item.is_file()
+        for item in (
+            training_lineage_path,
+            stage_lineage_path,
+            tokenizer_lineage_path,
+            adapter_config_lineage_path,
+        )
+    ):
+        raise ValueError("merged model override lacks embedded source lineage")
+    training_lineage = json.loads(training_lineage_path.read_text())
+    tokenizer_lineage = json.loads(tokenizer_lineage_path.read_text())
+    adapter_lineage = json.loads(adapter_config_lineage_path.read_text())
+    import yaml
+
+    config = yaml.safe_load(config_path.read_text())
+    recipe = config["training"]["recipe"]
+    recipe_sha256 = _sha256_bytes(
+        json.dumps(recipe, sort_keys=True, separators=(",", ":")).encode()
+    )
+    required_training_lineage = {
+        "schema_version", "experiment_id", "arm", "seed", "model_id",
+        "model_revision", "optimizer_steps", "train_loss", "config_sha256",
+        "tokenizer_receipt_sha256", "stage_receipt_sha256",
+        "copied_tokenizer_receipt_sha256", "copied_stage_receipt_sha256",
+        "trainer_git_commit", "trainer_sha256", "recipe_sha256",
+        "record_receipt_sha256", "parity_sha256",
+        "adapter_tree_excluding_training_receipt_sha256",
+    }
     if (
-        receipt.get("model_id") != MODEL_ID
+        set(receipt) != required
+        or receipt.get("schema_version") != 2
+        or receipt.get("experiment_id")
+        != "qwen35_4b_counterfactual_plan_reflection_transfer"
+        or receipt.get("config_sha256") != _sha256_file(config_path)
+        or receipt.get("model_id") != MODEL_ID
         or receipt.get("model_revision") != MODEL_REVISION
         or int(receipt.get("applied_lora_modules", 0)) < 1
         or receipt.get("source_arm")
@@ -161,8 +210,72 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
             "direct_plan_answer_positive_control",
         }
         or receipt.get("source_seed") not in {47, 53}
+        or (
+            receipt.get("source_arm") == "direct_plan_answer_positive_control"
+            and receipt.get("source_seed") != 47
+        )
+        or receipt.get("source_trainer_sha256")
+        != _sha256_file(Path(__file__).resolve().parents[1] / "scripts" / "train.py")
+        or receipt.get("source_trainer_git_commit")
+        != _run_text(["git", "rev-parse", "HEAD"])
+        or receipt.get("source_recipe_sha256") != recipe_sha256
+        or receipt.get("source_training_receipt_sha256")
+        != _sha256_file(training_lineage_path)
+        or receipt.get("source_stage_receipt_sha256")
+        != _sha256_file(stage_lineage_path)
+        or receipt.get("source_tokenizer_receipt_sha256")
+        != _sha256_file(tokenizer_lineage_path)
+        or receipt.get("source_adapter_config_sha256")
+        != _sha256_file(adapter_config_lineage_path)
+        or training_lineage.get("experiment_id")
+        != "qwen35_4b_counterfactual_plan_reflection_transfer"
+        or set(training_lineage) != required_training_lineage
+        or training_lineage.get("schema_version") != 2
+        or training_lineage.get("config_sha256") != receipt.get("config_sha256")
+        or training_lineage.get("model_id") != MODEL_ID
+        or training_lineage.get("model_revision") != MODEL_REVISION
+        or training_lineage.get("optimizer_steps") != 36
+        or training_lineage.get("arm") != receipt.get("source_arm")
+        or training_lineage.get("seed") != receipt.get("source_seed")
+        or training_lineage.get("trainer_sha256")
+        != receipt.get("source_trainer_sha256")
+        or training_lineage.get("trainer_git_commit")
+        != receipt.get("source_trainer_git_commit")
+        or training_lineage.get("recipe_sha256")
+        != receipt.get("source_recipe_sha256")
+        or training_lineage.get("stage_receipt_sha256")
+        != receipt.get("source_stage_receipt_sha256")
+        or training_lineage.get("tokenizer_receipt_sha256")
+        != receipt.get("source_tokenizer_receipt_sha256")
+        or training_lineage.get("copied_stage_receipt_sha256")
+        != receipt.get("source_stage_receipt_sha256")
+        or training_lineage.get("copied_tokenizer_receipt_sha256")
+        != receipt.get("source_tokenizer_receipt_sha256")
+        or training_lineage.get("adapter_tree_excluding_training_receipt_sha256")
+        != receipt.get("source_adapter_tree_sha256")
+        or tokenizer_lineage.get("experiment_id")
+        != "qwen35_4b_counterfactual_plan_reflection_transfer"
+        or tokenizer_lineage.get("model_id") != MODEL_ID
+        or tokenizer_lineage.get("model_revision") != MODEL_REVISION
+        or tokenizer_lineage.get("tokenizer_eos_token_id") != 248046
+        or int(adapter_lineage.get("r", -1)) != int(recipe["lora_rank"])
+        or float(adapter_lineage.get("lora_alpha", -1)) != float(recipe["lora_alpha"])
+        or float(adapter_lineage.get("lora_dropout", -1))
+        != float(recipe["lora_dropout"])
+        or str(adapter_lineage.get("bias")) != str(recipe["lora_bias"])
+        or set(adapter_lineage.get("target_modules", []))
+        != set(recipe["target_modules"])
     ):
         raise ValueError("merged model override receipt has invalid base or delta identity")
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from stages import read_and_validate_stage_receipt
+
+    read_and_validate_stage_receipt(
+        stage_lineage_path,
+        config=config,
+        config_path=config_path,
+        expected_stage=("screen_training" if receipt["source_seed"] == 47 else "replication_training"),
+    )
     observed = _sha256_tree(path, excluded={"merge_receipt.json"})
     if receipt.get("merged_tree_sha256") != observed:
         raise ValueError("merged model override tree hash differs from its receipt")
@@ -171,7 +284,13 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
         "merge_receipt_sha256": _sha256_file(receipt_path),
         "merged_tree_sha256": observed,
         "source_training_receipt_sha256": receipt.get("source_training_receipt_sha256"),
+        "source_stage_receipt_sha256": receipt.get("source_stage_receipt_sha256"),
+        "source_tokenizer_receipt_sha256": receipt.get("source_tokenizer_receipt_sha256"),
+        "source_trainer_sha256": receipt.get("source_trainer_sha256"),
+        "source_trainer_git_commit": receipt.get("source_trainer_git_commit"),
+        "source_recipe_sha256": receipt.get("source_recipe_sha256"),
         "source_adapter_tree_sha256": receipt.get("source_adapter_tree_sha256"),
+        "source_adapter_config_sha256": receipt.get("source_adapter_config_sha256"),
         "source_arm": receipt.get("source_arm"),
         "source_seed": receipt.get("source_seed"),
     }
@@ -417,6 +536,194 @@ def _validate_explicit_cudagraph_resolution(
             f"decode_mode={decode_mode}, mixed_mode={mixed_mode}, "
             f"has_full_cudagraphs={has_full}"
         )
+
+
+def _engine_config_metadata(config: "EngineConfig") -> dict[str, Any]:
+    return {
+        key: str(value.resolve()) if isinstance(value, Path) else value
+        for key, value in dataclasses.asdict(config).items()
+    }
+
+
+def _validate_live_cache_geometry(
+    cache: dict[str, Any], config: "EngineConfig"
+) -> dict[str, int]:
+    """Authenticate pinned vLLM/Qwen hybrid-cache counters without float inversion."""
+    required = {
+        "num_gpu_blocks",
+        "block_size",
+        "kv_cache_size_tokens",
+        "kv_cache_max_concurrency",
+        "enable_prefix_caching",
+        "mamba_cache_mode",
+        "mamba_block_size",
+    }
+    if not isinstance(cache, dict) or set(cache) != required:
+        raise RuntimeError("live preflight cache geometry schema changed")
+    num_blocks = cache["num_gpu_blocks"]
+    block_size = cache["block_size"]
+    capacity = cache["kv_cache_size_tokens"]
+    concurrency_value = cache["kv_cache_max_concurrency"]
+    mamba_block_size = cache["mamba_block_size"]
+    if (
+        not isinstance(num_blocks, int)
+        or isinstance(num_blocks, bool)
+        or num_blocks < config.max_num_seqs
+        or not isinstance(block_size, int)
+        or isinstance(block_size, bool)
+        or block_size < 1
+        or not isinstance(capacity, int)
+        or isinstance(capacity, bool)
+        or capacity < 1
+        or isinstance(concurrency_value, bool)
+        or not isinstance(concurrency_value, (int, float))
+        or not math.isfinite(float(concurrency_value))
+        or float(concurrency_value) < config.max_num_seqs
+        or not isinstance(mamba_block_size, int)
+        or isinstance(mamba_block_size, bool)
+        or mamba_block_size < 1
+        or cache["enable_prefix_caching"] is not config.enable_prefix_caching
+        or cache["mamba_cache_mode"]
+        != ("align" if config.enable_prefix_caching else "none")
+    ):
+        raise RuntimeError("live preflight cache geometry changed")
+    concurrency = float(concurrency_value)
+    mamba_group_count = 3
+    attention_blocks_at_max = math.ceil(config.max_model_len / block_size)
+    mamba_blocks_at_max = mamba_group_count * math.ceil(
+        config.max_model_len / mamba_block_size
+    )
+    blocks_per_max_request = attention_blocks_at_max + mamba_blocks_at_max
+    if (
+        int(concurrency * config.max_model_len) != capacity
+        or not math.isclose(
+            concurrency,
+            num_blocks / blocks_per_max_request,
+            rel_tol=1e-12,
+            abs_tol=1e-12,
+        )
+        or block_size != 528
+        or mamba_block_size != config.max_model_len
+        or blocks_per_max_request != 11
+    ):
+        raise RuntimeError("live preflight cache geometry changed")
+    return {
+        "blocks_per_max_request": blocks_per_max_request,
+        "attention_blocks_at_max": attention_blocks_at_max,
+        "mamba_blocks_at_max": mamba_blocks_at_max,
+        "mamba_group_count": mamba_group_count,
+    }
+
+
+def _read_live_engine_geometry(llm: Any, config: "EngineConfig") -> dict[str, Any]:
+    try:
+        vllm_config = llm.llm_engine.vllm_config
+        cache = vllm_config.cache_config
+        scheduler = vllm_config.scheduler_config
+        model = vllm_config.model_config
+        parallel = vllm_config.parallel_config
+        cache_receipt = {
+            key: getattr(cache, key)
+            for key in (
+                "num_gpu_blocks",
+                "block_size",
+                "kv_cache_size_tokens",
+                "kv_cache_max_concurrency",
+                "enable_prefix_caching",
+                "mamba_cache_mode",
+                "mamba_block_size",
+            )
+        }
+        if (
+            int(model.max_model_len) != config.max_model_len
+            or str(model.dtype) not in {"bfloat16", "torch.bfloat16"}
+            or int(scheduler.max_num_seqs) != config.max_num_seqs
+            or int(scheduler.max_num_batched_tokens) != config.max_num_batched_tokens
+            or bool(scheduler.async_scheduling)
+            or int(parallel.world_size) != 1
+            or int(parallel.tensor_parallel_size) != 1
+            or int(parallel.data_parallel_size) != 1
+        ):
+            raise RuntimeError("live engine geometry differs from frozen protocol")
+        cache_shape = _validate_live_cache_geometry(cache_receipt, config)
+    except (AttributeError, TypeError, ValueError) as error:
+        raise RuntimeError("live engine did not expose the pinned capacity geometry") from error
+    return {
+        "live_model": {
+            "max_model_len": int(model.max_model_len),
+            "dtype": str(model.dtype),
+        },
+        "live_scheduler": {
+            "max_num_seqs": int(scheduler.max_num_seqs),
+            "max_num_batched_tokens": int(scheduler.max_num_batched_tokens),
+            "async_scheduling": bool(scheduler.async_scheduling),
+        },
+        "live_parallel": {
+            "world_size": int(parallel.world_size),
+            "tensor_parallel_size": int(parallel.tensor_parallel_size),
+            "data_parallel_size": int(parallel.data_parallel_size),
+        },
+        "live_cache": cache_receipt,
+        "cache_shape": cache_shape,
+    }
+
+
+def _capacity_preflight(
+    *,
+    live: dict[str, Any],
+    config: "EngineConfig",
+    prompt_lengths: Sequence[int],
+    sampling: "SamplingConfig",
+    close_tokens: int,
+) -> dict[str, Any]:
+    if not prompt_lengths:
+        raise ValueError("capacity preflight requires prompts")
+    reserve = (
+        int(sampling.thinking_budget) + close_tokens + sampling.answer_max_tokens
+        if sampling.thinking == "budget"
+        else sampling.max_tokens
+    )
+    maximum_total = max(prompt_lengths) + reserve
+    active = min(len(prompt_lengths) * sampling.n, config.max_num_seqs)
+    block_size = int(live["live_cache"]["block_size"])
+    rounded_reservation = math.ceil(maximum_total / block_size) * block_size
+    required_tokens = active * rounded_reservation
+    capacity_tokens = int(live["live_cache"]["kv_cache_size_tokens"])
+    blocks_per_request = int(live["cache_shape"]["blocks_per_max_request"])
+    required_blocks = active * blocks_per_request
+    available_blocks = int(live["live_cache"]["num_gpu_blocks"])
+    if (
+        maximum_total > config.max_model_len
+        or required_tokens > capacity_tokens
+        or required_blocks > available_blocks
+    ):
+        raise RuntimeError(
+            "live KV capacity cannot fit the frozen prompt/generation reservation"
+        )
+    return {
+        "schema_version": 1,
+        "decision": "LIVE_KV_CAPACITY_PASS",
+        "engine": _engine_config_metadata(config),
+        **live,
+        "invocation": {
+            "requests": len(prompt_lengths),
+            "logical_sequences": len(prompt_lengths) * sampling.n,
+            "active_sequences": active,
+            "prompt_tokens_min": min(prompt_lengths),
+            "prompt_tokens_max": max(prompt_lengths),
+            "generation_reserve_tokens": reserve,
+            "max_prompt_plus_reserve": maximum_total,
+            "attention_rounding_block_tokens": block_size,
+            "rounded_sequence_reservation_tokens": rounded_reservation,
+            "required_cache_tokens": required_tokens,
+            "available_cache_tokens": capacity_tokens,
+            "remaining_cache_tokens": capacity_tokens - required_tokens,
+            "reserved_blocks_per_sequence": blocks_per_request,
+            "required_cache_blocks": required_blocks,
+            "available_cache_blocks": available_blocks,
+            "remaining_cache_blocks": available_blocks - required_blocks,
+        },
+    }
 
 
 @dataclasses.dataclass(frozen=True)
@@ -924,6 +1231,7 @@ class VLLMRunner:
                 _validate_explicit_cudagraph_resolution(
                     config.cudagraph_capture_sizes, self.resolved_cudagraph
                 )
+            self.live_engine_geometry = _read_live_engine_geometry(self.llm, config)
         except (AttributeError, RuntimeError):
             self.close()
             raise
@@ -1178,6 +1486,13 @@ class VLLMRunner:
         if not prepared:
             raise ValueError("input is empty")
         self._check_context(prepared, sampling)
+        capacity_preflight = _capacity_preflight(
+            live=self.live_engine_geometry,
+            config=self.config,
+            prompt_lengths=[len(record.prompt_token_ids) for record in prepared],
+            sampling=sampling,
+            close_tokens=len(self.close_ids),
+        )
         prompts = [{"prompt_token_ids": record.prompt_token_ids} for record in prepared]
         seeds = [
             _stable_seed(sampling.run_seed, record.record_id, -1, "stage1")
@@ -1376,15 +1691,13 @@ class VLLMRunner:
             "base_model": MODEL_ID,
             "model_revision": MODEL_REVISION,
             "runner_sha256": _sha256_file(Path(__file__).resolve()),
-            "engine": {
-                key: str(value) if isinstance(value, Path) else value
-                for key, value in dataclasses.asdict(self.config).items()
-            },
+            "engine": _engine_config_metadata(self.config),
             "engine_args": {
                 key: str(value) if isinstance(value, Path) else value
                 for key, value in self.engine_args.items()
             },
             "resolved_cudagraph": self.resolved_cudagraph,
+            "capacity_preflight": capacity_preflight,
             "sampling": dataclasses.asdict(sampling),
             "resolved_sampling": sampling.resolved_sampling(),
             "adapter": self.adapter_info,
@@ -1506,6 +1819,11 @@ def _parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     source.add_argument("--smoke", type=int, metavar="N", help="use N built-in smoke prompts")
     parser.add_argument("--output", type=Path, required=True, help="output JSONL")
     parser.add_argument("--metadata", type=Path, help="metadata JSON; default: OUTPUT.meta.json")
+    parser.add_argument(
+        "--stage-receipt",
+        type=Path,
+        help="required hash-bound experiment stage receipt for every non-smoke input run",
+    )
     parser.add_argument("--thinking", choices=["off", "natural", "budget"], default="off")
     parser.add_argument("--thinking-budget", type=int)
     parser.add_argument("--n", type=int, default=1)
@@ -1559,6 +1877,68 @@ def _parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     return parser.parse_args(argv)
 
 
+def _validate_cli_stage_receipt(
+    path: Path,
+    records: Sequence[dict[str, Any]],
+    model_override: Path | None,
+) -> dict[str, Any]:
+    """Bind every experiment generation to the exact staged evidence ancestry."""
+    import yaml
+
+    experiment_root = Path(__file__).resolve().parents[1]
+    config_path = experiment_root / "configs" / "default.yaml"
+    config = yaml.safe_load(config_path.read_text())
+    if config["authorization"]["evaluation"] is not True:
+        raise ValueError("evaluation is not authorized by the committed config")
+    metas = [record.get("meta") for record in records]
+    if any(not isinstance(meta, dict) for meta in metas):
+        raise ValueError("staged generation requires sealed metadata on every input")
+    splits = {str(meta.get("split", "")) for meta in metas}
+    kinds = {str(meta.get("input_kind", "")) for meta in metas}
+    if len(splits) != 1 or len(kinds) != 1 or "" in splits or "" in kinds:
+        raise ValueError("staged generation input split/kind is ambiguous")
+    split = splits.pop()
+    input_kind = kinds.pop()
+    source_seed = None
+    if model_override is not None:
+        merge_receipt = json.loads((model_override / "merge_receipt.json").read_text())
+        source_seed = int(merge_receipt.get("source_seed", -1))
+    screen = int(config["training"]["staged_seeds"]["screen"])
+    replication = int(config["training"]["staged_seeds"]["replication"])
+    if split == "confirmation":
+        expected_stage = "confirmation"
+    elif split == "calibration" and model_override is None:
+        expected_stage = "calibration_generation"
+    elif source_seed == replication:
+        expected_stage = "replication_training"
+    elif source_seed in {None, screen} and split in {
+        "calibration",
+        "qualification",
+        "retention",
+    }:
+        expected_stage = "screen_training"
+    else:
+        raise ValueError("generation model/split does not map to a frozen stage")
+    sys.path.insert(0, str(experiment_root / "src"))
+    from stages import read_and_validate_stage_receipt
+
+    receipt = read_and_validate_stage_receipt(
+        path,
+        config=config,
+        config_path=config_path,
+        expected_stage=expected_stage,
+    )
+    return {
+        "authorized_stage": expected_stage,
+        "stage_receipt_sha256": _sha256_file(path),
+        "config_sha256": receipt["config_sha256"],
+        "issuer_git_commit": receipt["issuer_git_commit"],
+        "split": split,
+        "input_kind": input_kind,
+        "source_seed": source_seed,
+    }
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     global _RUNNING_AS_CLI
     _RUNNING_AS_CLI = True
@@ -1574,13 +1954,21 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.input is not None:
         records, input_sha256 = _read_jsonl(args.input)
         input_description = str(args.input.resolve())
+        if args.stage_receipt is None:
+            raise ValueError("--stage-receipt is required for every non-smoke input run")
+        generation_stage = _validate_cli_stage_receipt(
+            args.stage_receipt, records, args.model_override
+        )
     else:
+        if args.stage_receipt is not None:
+            raise ValueError("built-in smoke must not consume an experiment stage receipt")
         if args.smoke < 1:
             raise ValueError("--smoke N requires N >= 1")
         records = _smoke_records(args.smoke)
         encoded = "".join(json.dumps(row, sort_keys=True) + "\n" for row in records).encode()
         input_sha256 = _sha256_bytes(encoded)
         input_description = f"built-in-smoke:{args.smoke}"
+        generation_stage = None
 
     engine = EngineConfig(
         max_model_len=args.max_model_len,
@@ -1634,6 +2022,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             "description": input_description,
             "sha256": input_sha256,
         }
+        summary["generation_stage"] = generation_stage
         output_sha256 = _write_json_atomic(args.output, rows, jsonl=True)
         summary["output"] = {
             "description": "generated JSONL",

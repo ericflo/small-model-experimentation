@@ -41,21 +41,22 @@ def rows(correct: int, shuffled: int, frozen: int, auxiliary: int) -> list[dict]
                 {
                     "task_id": task_id,
                     "family": family,
+                    "depth": 3,
                     "arm": arm,
                     "coverage_at_16": int(index < cutoff),
                     "strict_parse_rate": 1.0,
                     "answer_limit_contact": 0.0,
                     "periodic_loop_contact": 0.0,
+                    "runtime_protocol_sha256": "same-protocol",
                 }
             )
     return output
 
 
-def expected(data: list[dict]) -> tuple[set[str], set[str]]:
-    return (
-        {row["task_id"] for row in data},
-        {row["family"] for row in data},
-    )
+def expected(data: list[dict]) -> dict[str, tuple[str, int]]:
+    return {
+        row["task_id"]: (row["family"], int(row["depth"])) for row in data
+    }
 
 
 class AnalyzeTests(unittest.TestCase):
@@ -70,25 +71,19 @@ class AnalyzeTests(unittest.TestCase):
                 "answer_limit_contact_max": 0.01,
                 "periodic_loop_contact_max": 0.01,
             },
-            expected(data)[0],
+            expected(data),
         )
         self.assertTrue(result["pass"])
 
     def test_large_broad_effect_passes_capability_and_mechanism(self) -> None:
         data = rows(50, 25, 20, 35)
-        task_ids, families = expected(data)
-        result = A.evaluate_seed_block(
-            data, THRESHOLDS, BOOTSTRAP, task_ids, families
-        )
+        result = A.evaluate_seed_block(data, THRESHOLDS, BOOTSTRAP, expected(data))
         self.assertTrue(result["capability_pass"])
         self.assertTrue(result["reflection_specific_pass"])
 
     def test_auxiliary_tie_preserves_capability_but_rejects_reflection_claim(self) -> None:
         data = rows(50, 25, 20, 50)
-        task_ids, families = expected(data)
-        result = A.evaluate_seed_block(
-            data, THRESHOLDS, BOOTSTRAP, task_ids, families
-        )
+        result = A.evaluate_seed_block(data, THRESHOLDS, BOOTSTRAP, expected(data))
         self.assertTrue(result["capability_pass"])
         self.assertFalse(result["reflection_specific_pass"])
 
@@ -102,10 +97,7 @@ class AnalyzeTests(unittest.TestCase):
                     if other["task_id"] == row["task_id"]
                     and other["arm"] == "reflection_shuffled_action"
                 )
-        task_ids, families = expected(data)
-        result = A.evaluate_seed_block(
-            data, THRESHOLDS, BOOTSTRAP, task_ids, families
-        )
+        result = A.evaluate_seed_block(data, THRESHOLDS, BOOTSTRAP, expected(data))
         self.assertFalse(result["capability_pass"])
         self.assertFalse(result["capability_checks"]["each_family_correct_minus_shuffled"])
 
@@ -114,24 +106,24 @@ class AnalyzeTests(unittest.TestCase):
         data.pop()
         with self.assertRaisesRegex(ValueError, "sealed evaluation split"):
             A.evaluate_seed_block(
-                data, THRESHOLDS, BOOTSTRAP, *expected(rows(50, 25, 20, 35))
+                data, THRESHOLDS, BOOTSTRAP, expected(rows(50, 25, 20, 35))
             )
 
     def test_incomplete_exact_task_set_fails_closed(self) -> None:
         data = rows(50, 25, 20, 35)
-        task_ids, families = expected(data)
+        task_metadata = expected(data)
         data = [row for row in data if row["task_id"] != "t059"]
         with self.assertRaisesRegex(ValueError, "sealed evaluation split"):
-            A.evaluate_seed_block(data, THRESHOLDS, BOOTSTRAP, task_ids, families)
+            A.evaluate_seed_block(data, THRESHOLDS, BOOTSTRAP, task_metadata)
 
     def test_retention_requires_exact_ids_all_families_and_both_depths(self) -> None:
         data = []
-        task_ids = set()
+        task_metadata = {}
         families = {"list", "string", "register"}
         for depth in (1, 2):
             for family in sorted(families):
                 task_id = f"r-{depth}-{family}"
-                task_ids.add(task_id)
+                task_metadata[task_id] = (family, depth)
                 for arm, coverage in (
                     ("frozen_action", 0.0),
                     ("reflection_correct_action", 1.0),
@@ -143,6 +135,7 @@ class AnalyzeTests(unittest.TestCase):
                             "depth": depth,
                             "arm": arm,
                             "coverage_at_16": coverage,
+                            "runtime_protocol_sha256": "same-protocol",
                         }
                     )
         result = A.evaluate_retention(
@@ -150,8 +143,7 @@ class AnalyzeTests(unittest.TestCase):
             "reflection_correct_action",
             depth_min=-0.05,
             family_min=-0.125,
-            expected_task_ids=task_ids,
-            expected_families=families,
+            expected_task_metadata=task_metadata,
         )
         self.assertTrue(result["pass"])
         incomplete = [row for row in data if row["depth"] == 1]
@@ -161,9 +153,20 @@ class AnalyzeTests(unittest.TestCase):
                 "reflection_correct_action",
                 -0.05,
                 -0.125,
-                task_ids,
-                families,
+                task_metadata,
             )
+
+    def test_exact_task_mapping_and_runtime_protocol_are_required(self) -> None:
+        data = rows(50, 25, 20, 35)
+        mapping = expected(data)
+        data[0]["family"] = "register"
+        with self.assertRaisesRegex(ValueError, "task metadata"):
+            A.evaluate_seed_block(data, THRESHOLDS, BOOTSTRAP, mapping)
+
+        data = rows(50, 25, 20, 35)
+        data[0]["runtime_protocol_sha256"] = "different-protocol"
+        with self.assertRaisesRegex(ValueError, "runtime protocol"):
+            A.evaluate_seed_block(data, THRESHOLDS, BOOTSTRAP, expected(data))
 
 
 if __name__ == "__main__":

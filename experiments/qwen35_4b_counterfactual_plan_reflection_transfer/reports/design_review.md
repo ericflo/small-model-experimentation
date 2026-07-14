@@ -142,3 +142,37 @@ passes using substituted constant labels plus internally consistent synthetic
 receipts. It also demonstrated qualification with family counts 142/1/1 and retention
 with depth counts 1/47 and family counts 46/1/1. These are decisive HOLD findings.
 They must be remediated and independently reviewed before any full execution.
+
+### Review 3 remediation implemented, pending Review 4
+
+- `src/eval_inputs.py` is now the single canonical builder for action prompts, exact
+  oracle labels, literal-reflection prompts, literal-action branches, receipts, and
+  task metadata. Scorers reconstruct these bytes and reject self-consistent forged
+  receipts; a regression test reproduces the constant-label attack and fails closed.
+- Primary, adapter-gate, and literal paths compare every `SamplingConfig` field plus
+  the complete resolved sampling dictionary, including penalties, custom-prompt flags,
+  logprob settings, and thinking shuffling.
+- Capability, positive-control, calibration, and retention gates require the exact
+  per-task family/depth mapping. Every compared row must share one runtime-protocol
+  hash, closing the 142/1/1 family and 1/47 depth attacks.
+- A dedicated sealed literal-reflection constructor is distinct from the action input.
+  Literal action prompts and their receipt are deterministically reconstructed from
+  the exact reflection generation.
+- Stage receipts have an exact schema, prerequisite claim cardinality, both frozen
+  seeds, source hashes, issuer Git/script identity, and clean-worktree requirement.
+  The runner requires and validates a stage receipt before every non-smoke model load,
+  including confirmation generation.
+- Training copies its tokenizer and stage receipts, records trainer Git/code, recipe,
+  record, parity, and full adapter-tree identities. Merge validates the complete PEFT
+  recipe and embeds the source training/stage/tokenizer/adapter-config files in the
+  hashed merged tree; the runner revalidates them at load time.
+- Runtime validation checks every locked distribution version and exact cross-arm
+  package/GPU/Git/engine/cache identity.
+- The runner authenticates pinned Qwen hybrid-cache geometry, then requires both the
+  rounded live KV-token inequality and conservative `active_sequences * 11` block
+  inequality before generation. The complete terms and margins enter metadata.
+
+The model-free suite now passes 55 focused tests plus syntax and full construction.
+All model/GPU/training/evaluation/J/benchmark flags remain false. These changes are
+not self-authorizing and require a fresh clean adversarial verdict on their committed
+revision.

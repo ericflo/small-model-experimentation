@@ -18,7 +18,8 @@ sys.path.insert(0, str(EXP / "src"))
 
 from analyze import evaluate_retention  # noqa: E402
 from firewall import install_benchmark_firewall  # noqa: E402
-from taskgen import FAMILIES, build_retention_corpus  # noqa: E402
+from eval_inputs import task_metadata  # noqa: E402
+from stages import read_and_validate_stage_receipt  # noqa: E402
 
 install_benchmark_firewall(EXP.parents[1])
 
@@ -40,20 +41,18 @@ def main() -> int:
         raise ValueError("retention arm is not preregistered")
     if args.seed not in set(config["training"]["staged_seeds"].values()):
         raise ValueError("retention seed is not preregistered")
-    stage_receipt = json.loads(args.stage_receipt.read_text())
     expected_stage = (
         "screen_training"
         if args.seed == config["training"]["staged_seeds"]["screen"]
         else "replication_training"
     )
     config_path = EXP / "configs" / "default.yaml"
-    if (
-        stage_receipt.get("experiment_id") != config["experiment_id"]
-        or stage_receipt.get("authorized_stage") != expected_stage
-        or stage_receipt.get("config_sha256")
-        != hashlib.sha256(config_path.read_bytes()).hexdigest()
-    ):
-        raise ValueError("stage receipt does not authorize this retention seed")
+    read_and_validate_stage_receipt(
+        args.stage_receipt,
+        config=config,
+        config_path=config_path,
+        expected_stage=expected_stage,
+    )
     rows = []
     for path in args.scores:
         rows.extend(json.loads(line) for line in path.read_text().splitlines() if line.strip())
@@ -63,11 +62,7 @@ def main() -> int:
         expected_seed = None if row["arm"] == "frozen_action" else args.seed
         if row.get("training_seed") != expected_seed:
             raise ValueError("retention score seed differs from the requested adapter seed")
-    construction = config["construction"]
-    tasks = build_retention_corpus(
-        int(construction["per_family"]["retention_per_family_per_depth"]),
-        int(construction["retention_seed"]),
-    )
+    expected_task_metadata = task_metadata(config, "retention")
     thresholds = config["decision_gates"]["retention_noninferiority"]
     result = {
         "schema_version": 1,
@@ -81,8 +76,7 @@ def main() -> int:
             args.arm,
             depth_min=float(thresholds["each_depth_delta_min"]),
             family_min=float(thresholds["each_family_delta_min"]),
-            expected_task_ids={task["task_id"] for task in tasks},
-            expected_families={family.name for family in FAMILIES},
+            expected_task_metadata=expected_task_metadata,
         ),
     }
     payload = (json.dumps(result, indent=2, sort_keys=True) + "\n").encode()

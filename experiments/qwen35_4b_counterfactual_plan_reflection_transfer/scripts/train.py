@@ -7,6 +7,8 @@ import argparse
 import hashlib
 import json
 import random
+import shutil
+import subprocess
 import sys
 from pathlib import Path
 
@@ -37,6 +39,7 @@ from records import (  # noqa: E402
     validate_tokenized_parity,
 )
 from taskgen import build_corpus  # noqa: E402
+from stages import read_and_validate_stage_receipt  # noqa: E402
 
 
 def _sha256_file(path: Path) -> str:
@@ -129,23 +132,30 @@ def main() -> int:
     allowed_seeds = set(config["training"]["staged_seeds"].values())
     if args.seed not in allowed_seeds:
         raise SystemExit(f"seed {args.seed} is not preregistered")
-    stage_receipt = json.loads(args.stage_receipt.read_text())
     expected_stage = (
         "screen_training"
         if args.seed == config["training"]["staged_seeds"]["screen"]
         else "replication_training"
     )
-    if (
-        stage_receipt.get("experiment_id") != config["experiment_id"]
-        or stage_receipt.get("authorized_stage") != expected_stage
-        or stage_receipt.get("config_sha256") != _sha256_file(config_path)
-    ):
-        raise SystemExit("stage receipt does not authorize this training seed/config")
+    read_and_validate_stage_receipt(
+        args.stage_receipt,
+        config=config,
+        config_path=config_path,
+        expected_stage=expected_stage,
+    )
     positive = config["training"]["positive_control"]["arm"]
     if args.arm == positive and args.seed != config["training"]["staged_seeds"]["screen"]:
         raise SystemExit("the noncomparable positive control has no replication-seed authorization")
     if args.output.exists():
         raise SystemExit(f"output already exists: {args.output}")
+    git_status = subprocess.run(
+        ["git", "status", "--porcelain"], check=True, capture_output=True, text=True
+    ).stdout
+    if git_status:
+        raise SystemExit("training requires a clean worktree")
+    trainer_git_commit = subprocess.run(
+        ["git", "rev-parse", "HEAD"], check=True, capture_output=True, text=True
+    ).stdout.strip()
 
     construction = config["construction"]
     counts = {
@@ -189,12 +199,26 @@ def main() -> int:
     }
     parity = validate_tokenized_parity(arms, encoded)
     expected_tokenizer_receipt = json.loads(args.tokenizer_receipt.read_text())
+    if (
+        expected_tokenizer_receipt.get("experiment_id") != config["experiment_id"]
+        or expected_tokenizer_receipt.get("model_id") != model_config["id"]
+        or expected_tokenizer_receipt.get("model_revision") != model_config["revision"]
+        or expected_tokenizer_receipt.get("tokenizer_eos_token_id") != 248046
+        or expected_tokenizer_receipt.get("model_calls") != 0
+        or expected_tokenizer_receipt.get("gpu_events") != 0
+        or expected_tokenizer_receipt.get("benchmark_reads") != 0
+    ):
+        raise ValueError("tokenizer receipt identity is invalid")
     if expected_tokenizer_receipt["parity"] != parity:
         raise ValueError("live token/mask parity differs from the prerequisite receipt")
     if expected_tokenizer_receipt["record_receipt"] != record_receipt:
         raise ValueError("live training records differ from the prerequisite receipt")
 
     args.output.mkdir(parents=True, exist_ok=False)
+    copied_tokenizer_receipt = args.output / "source_tokenizer_receipt.json"
+    copied_stage_receipt = args.output / "source_stage_receipt.json"
+    shutil.copyfile(args.tokenizer_receipt, copied_tokenizer_receipt)
+    shutil.copyfile(args.stage_receipt, copied_stage_receipt)
     (args.output / "STARTED.json").write_text(
         json.dumps(
             {
@@ -204,6 +228,8 @@ def main() -> int:
                 "config_sha256": _sha256_file(config_path),
                 "tokenizer_receipt_sha256": _sha256_file(args.tokenizer_receipt),
                 "stage_receipt_sha256": _sha256_file(args.stage_receipt),
+                "trainer_git_commit": trainer_git_commit,
+                "trainer_sha256": _sha256_file(Path(__file__).resolve()),
             },
             indent=2,
             sort_keys=True,
@@ -276,7 +302,7 @@ def main() -> int:
     model.save_pretrained(str(args.output))
     tokenizer.save_pretrained(str(args.output))
     training_receipt = {
-        "schema_version": 1,
+        "schema_version": 2,
         "experiment_id": config["experiment_id"],
         "arm": args.arm,
         "seed": args.seed,
@@ -287,6 +313,16 @@ def main() -> int:
         "config_sha256": _sha256_file(config_path),
         "tokenizer_receipt_sha256": _sha256_file(args.tokenizer_receipt),
         "stage_receipt_sha256": _sha256_file(args.stage_receipt),
+        "copied_tokenizer_receipt_sha256": _sha256_file(copied_tokenizer_receipt),
+        "copied_stage_receipt_sha256": _sha256_file(copied_stage_receipt),
+        "trainer_git_commit": trainer_git_commit,
+        "trainer_sha256": _sha256_file(Path(__file__).resolve()),
+        "recipe_sha256": hashlib.sha256(
+            json.dumps(recipe, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest(),
+        "record_receipt_sha256": hashlib.sha256(
+            json.dumps(record_receipt, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest(),
         "parity_sha256": hashlib.sha256(
             json.dumps(parity, sort_keys=True, separators=(",", ":")).encode()
         ).hexdigest(),

@@ -15,6 +15,25 @@ def _index(rows: list[dict[str, Any]], arm: str) -> dict[str, dict[str, Any]]:
     return result
 
 
+def _require_exact_tasks(
+    rows: list[dict[str, Any]], arm: str, expected: dict[str, tuple[str, int]]
+) -> dict[str, dict[str, Any]]:
+    indexed = _index(rows, arm)
+    if set(indexed) != set(expected):
+        raise ValueError(f"{arm} task IDs differ from the sealed evaluation split")
+    for task_id, row in indexed.items():
+        family, depth = expected[task_id]
+        if str(row.get("family")) != family or int(row.get("depth", -1)) != depth:
+            raise ValueError(f"{arm} task metadata differs from the sealed evaluation split")
+    return indexed
+
+
+def _require_one_runtime_protocol(rows: list[dict[str, Any]]) -> None:
+    protocols = {row.get("runtime_protocol_sha256") for row in rows}
+    if len(protocols) != 1 or None in protocols:
+        raise ValueError("compared arms do not share one exact runtime protocol")
+
+
 def paired_values(
     rows: list[dict[str, Any]], left: str, right: str, metric: str
 ) -> list[tuple[str, str, float]]:
@@ -80,8 +99,7 @@ def evaluate_seed_block(
     rows: list[dict[str, Any]],
     thresholds: dict[str, Any],
     bootstrap: dict[str, Any],
-    expected_task_ids: set[str],
-    expected_families: set[str],
+    expected_task_metadata: dict[str, tuple[str, int]],
 ) -> dict[str, Any]:
     """Apply the exact per-seed qualification/confirmation capability gates."""
     required = {
@@ -95,11 +113,10 @@ def evaluate_seed_block(
     if missing:
         raise ValueError(f"missing required evaluation arms: {sorted(missing)}")
     for arm in required:
-        arm_rows = _index(rows, arm)
-        if set(arm_rows) != expected_task_ids:
-            raise ValueError(f"{arm} task IDs differ from the sealed evaluation split")
-        if {str(row["family"]) for row in arm_rows.values()} != expected_families:
-            raise ValueError(f"{arm} does not contain every sealed family")
+        _require_exact_tasks(rows, arm, expected_task_metadata)
+    _require_one_runtime_protocol(
+        [row for row in rows if row.get("arm") in required]
+    )
     resamples = int(bootstrap["paired_task_resamples"])
     seed = int(bootstrap["seed"])
     shuffle = _comparison(
@@ -183,11 +200,18 @@ def evaluate_positive_control(
     rows: list[dict[str, Any]],
     thresholds: dict[str, Any],
     bootstrap: dict[str, Any],
-    expected_task_ids: set[str],
+    expected_task_metadata: dict[str, tuple[str, int]],
 ) -> dict[str, Any]:
     for arm in ("direct_plan_answer_positive_control_action", "frozen_action"):
-        if set(_index(rows, arm)) != expected_task_ids:
-            raise ValueError(f"{arm} task IDs differ from the sealed evaluation split")
+        _require_exact_tasks(rows, arm, expected_task_metadata)
+    _require_one_runtime_protocol(
+        [
+            row
+            for row in rows
+            if row.get("arm")
+            in {"direct_plan_answer_positive_control_action", "frozen_action"}
+        ]
+    )
     comparison = _comparison(
         rows,
         "direct_plan_answer_positive_control_action",
@@ -208,11 +232,12 @@ def evaluate_positive_control(
 
 
 def evaluate_calibration(
-    rows: list[dict[str, Any]], thresholds: dict[str, Any], expected_task_ids: set[str]
+    rows: list[dict[str, Any]],
+    thresholds: dict[str, Any],
+    expected_task_metadata: dict[str, tuple[str, int]],
 ) -> dict[str, Any]:
-    indexed = _index(rows, "frozen_action")
-    if set(indexed) != expected_task_ids:
-        raise ValueError("calibration task IDs differ from the sealed calibration split")
+    indexed = _require_exact_tasks(rows, "frozen_action", expected_task_metadata)
+    _require_one_runtime_protocol(list(indexed.values()))
     frozen = list(indexed.values())
     if not frozen:
         raise ValueError("calibration has no frozen rows")
@@ -242,15 +267,16 @@ def evaluate_retention(
     arm: str,
     depth_min: float,
     family_min: float,
-    expected_task_ids: set[str],
-    expected_families: set[str],
+    expected_task_metadata: dict[str, tuple[str, int]],
 ) -> dict[str, Any]:
     for compared_arm in (arm, "frozen_action"):
-        indexed_arm = _index(rows, compared_arm)
-        if set(indexed_arm) != expected_task_ids:
-            raise ValueError(f"{compared_arm} task IDs differ from sealed retention")
-        if {str(row["family"]) for row in indexed_arm.values()} != expected_families:
-            raise ValueError(f"{compared_arm} does not contain every retention family")
+        try:
+            _require_exact_tasks(rows, compared_arm, expected_task_metadata)
+        except ValueError as error:
+            raise ValueError(f"{compared_arm} differs from sealed retention: {error}") from error
+    _require_one_runtime_protocol(
+        [row for row in rows if row.get("arm") in {arm, "frozen_action"}]
+    )
     paired = paired_values(rows, arm, "frozen_action", "coverage_at_16")
     indexed = _index(rows, arm)
     by_depth: dict[int, list[float]] = {}

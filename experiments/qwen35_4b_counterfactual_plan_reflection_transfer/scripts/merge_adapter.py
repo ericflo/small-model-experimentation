@@ -6,6 +6,8 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import subprocess
+import shutil
 import sys
 from pathlib import Path
 
@@ -19,6 +21,7 @@ EXP = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(EXP / "src"))
 
 from firewall import install_benchmark_firewall  # noqa: E402
+from stages import read_and_validate_stage_receipt  # noqa: E402
 
 install_benchmark_firewall(EXP.parents[1])
 
@@ -51,13 +54,25 @@ def main() -> int:
     parser.add_argument("--adapter", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
-    config = yaml.safe_load((EXP / "configs" / "default.yaml").read_text())
+    config_path = EXP / "configs" / "default.yaml"
+    config = yaml.safe_load(config_path.read_text())
     if config["authorization"]["evaluation"] is not True:
         raise SystemExit("adapter merge/evaluation is not authorized by the committed config")
     if args.output.exists():
         raise SystemExit(f"output already exists: {args.output}")
     source_receipt_path = args.adapter / "training_receipt.json"
     source_receipt = json.loads(source_receipt_path.read_text())
+    required_training_receipt = {
+        "schema_version", "experiment_id", "arm", "seed", "model_id",
+        "model_revision", "optimizer_steps", "train_loss", "config_sha256",
+        "tokenizer_receipt_sha256", "stage_receipt_sha256",
+        "copied_tokenizer_receipt_sha256", "copied_stage_receipt_sha256",
+        "trainer_git_commit", "trainer_sha256", "recipe_sha256",
+        "record_receipt_sha256", "parity_sha256",
+        "adapter_tree_excluding_training_receipt_sha256",
+    }
+    if set(source_receipt) != required_training_receipt or source_receipt["schema_version"] != 2:
+        raise ValueError("training receipt schema changed")
     observed_adapter_tree = _sha256_tree(
         args.adapter, excluded={"training_receipt.json"}
     )
@@ -66,6 +81,83 @@ def main() -> int:
         != observed_adapter_tree
     ):
         raise ValueError("adapter tree differs from its training receipt")
+    if subprocess.run(
+        ["git", "status", "--porcelain"], check=True, capture_output=True, text=True
+    ).stdout:
+        raise ValueError("adapter merge requires a clean worktree")
+    current_commit = subprocess.run(
+        ["git", "rev-parse", "HEAD"], check=True, capture_output=True, text=True
+    ).stdout.strip()
+    recipe = config["training"]["recipe"]
+    allowed_arms = set(config["training"]["arms"])
+    allowed_seeds = set(config["training"]["staged_seeds"].values())
+    if (
+        source_receipt["experiment_id"] != config["experiment_id"]
+        or source_receipt["config_sha256"] != _sha256_file(config_path)
+        or source_receipt["arm"] not in allowed_arms
+        or source_receipt["seed"] not in allowed_seeds
+        or int(source_receipt["optimizer_steps"])
+        != int(config["training"]["schedule"]["optimizer_steps_total"])
+        or source_receipt["trainer_git_commit"] != current_commit
+        or source_receipt["trainer_sha256"]
+        != _sha256_file(EXP / "scripts" / "train.py")
+        or source_receipt["recipe_sha256"]
+        != hashlib.sha256(
+            json.dumps(recipe, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest()
+    ):
+        raise ValueError("training receipt differs from frozen experiment lineage")
+    positive_arm = config["training"]["positive_control"]["arm"]
+    if (
+        source_receipt["arm"] == positive_arm
+        and source_receipt["seed"] != config["training"]["staged_seeds"]["screen"]
+    ):
+        raise ValueError("positive-control replication adapter is unauthorized")
+    copied_tokenizer = args.adapter / "source_tokenizer_receipt.json"
+    copied_stage = args.adapter / "source_stage_receipt.json"
+    if (
+        _sha256_file(copied_tokenizer) != source_receipt["tokenizer_receipt_sha256"]
+        or _sha256_file(copied_tokenizer)
+        != source_receipt["copied_tokenizer_receipt_sha256"]
+        or _sha256_file(copied_stage) != source_receipt["stage_receipt_sha256"]
+        or _sha256_file(copied_stage) != source_receipt["copied_stage_receipt_sha256"]
+    ):
+        raise ValueError("copied prerequisite receipts differ from training lineage")
+    tokenizer_receipt = json.loads(copied_tokenizer.read_text())
+    if (
+        tokenizer_receipt.get("experiment_id") != config["experiment_id"]
+        or tokenizer_receipt.get("model_id") != config["model"]["id"]
+        or tokenizer_receipt.get("model_revision") != config["model"]["revision"]
+        or tokenizer_receipt.get("tokenizer_eos_token_id") != 248046
+        or hashlib.sha256(
+            json.dumps(
+                tokenizer_receipt.get("record_receipt"),
+                sort_keys=True,
+                separators=(",", ":"),
+            ).encode()
+        ).hexdigest()
+        != source_receipt["record_receipt_sha256"]
+        or hashlib.sha256(
+            json.dumps(
+                tokenizer_receipt.get("parity"),
+                sort_keys=True,
+                separators=(",", ":"),
+            ).encode()
+        ).hexdigest()
+        != source_receipt["parity_sha256"]
+    ):
+        raise ValueError("copied tokenizer receipt identity changed")
+    expected_stage = (
+        "screen_training"
+        if source_receipt["seed"] == config["training"]["staged_seeds"]["screen"]
+        else "replication_training"
+    )
+    read_and_validate_stage_receipt(
+        copied_stage,
+        config=config,
+        config_path=config_path,
+        expected_stage=expected_stage,
+    )
     model_id = config["model"]["id"]
     revision = config["model"]["revision"]
     if (
@@ -74,12 +166,28 @@ def main() -> int:
     ):
         raise ValueError("adapter training receipt has the wrong base identity")
     peft_config = json.loads((args.adapter / "adapter_config.json").read_text())
-    if int(peft_config["r"]) != int(config["training"]["recipe"]["lora_rank"]):
+    if int(peft_config["r"]) != int(recipe["lora_rank"]):
         raise ValueError("adapter rank differs from preregistration")
     if set(peft_config["target_modules"]) != set(
-        config["training"]["recipe"]["target_modules"]
+        recipe["target_modules"]
     ):
         raise ValueError("adapter target modules differ from preregistration")
+    if (
+        float(peft_config["lora_alpha"]) != float(recipe["lora_alpha"])
+        or float(peft_config["lora_dropout"]) != float(recipe["lora_dropout"])
+        or str(peft_config["bias"]) != str(recipe["lora_bias"])
+        or str(peft_config.get("peft_type", "")).upper() != "LORA"
+        or str(peft_config.get("task_type", "")).upper() != "CAUSAL_LM"
+        or peft_config.get("base_model_name_or_path") != model_id
+        or peft_config.get("init_lora_weights") is not True
+        or peft_config.get("fan_in_fan_out") not in {False, None}
+        or peft_config.get("use_dora") not in {False, None}
+        or peft_config.get("use_rslora") not in {False, None}
+        or peft_config.get("modules_to_save") not in (None, [])
+        or peft_config.get("rank_pattern") not in (None, {})
+        or peft_config.get("alpha_pattern") not in (None, {})
+    ):
+        raise ValueError("adapter PEFT recipe differs from preregistration")
     scale = float(peft_config["lora_alpha"]) / float(peft_config["r"])
     model = AutoModelForImageTextToText.from_pretrained(
         model_id,
@@ -108,7 +216,7 @@ def main() -> int:
             for key in keys
             if key.startswith(ADAPTER_PREFIX)
         }
-        target_modules = set(config["training"]["recipe"]["target_modules"])
+        target_modules = set(recipe["target_modules"])
         expected_cores = {
             tail
             for tail, paths in tail_to_path.items()
@@ -150,14 +258,29 @@ def main() -> int:
         ).save_pretrained(str(args.output))
     except Exception as error:  # noqa: BLE001 - processor is irrelevant to text-only serving
         (args.output / "processor_save_warning.txt").write_text(str(error) + "\n")
+    lineage = args.output / "source_lineage"
+    lineage.mkdir(parents=False, exist_ok=False)
+    shutil.copyfile(source_receipt_path, lineage / "training_receipt.json")
+    shutil.copyfile(copied_stage, lineage / "stage_receipt.json")
+    shutil.copyfile(copied_tokenizer, lineage / "tokenizer_receipt.json")
+    shutil.copyfile(args.adapter / "adapter_config.json", lineage / "adapter_config.json")
     receipt = {
-        "schema_version": 1,
+        "schema_version": 2,
         "experiment_id": config["experiment_id"],
+        "config_sha256": _sha256_file(config_path),
         "model_id": model_id,
         "model_revision": revision,
         "source_training_receipt_sha256": _sha256_file(source_receipt_path),
+        "source_stage_receipt_sha256": _sha256_file(copied_stage),
+        "source_tokenizer_receipt_sha256": _sha256_file(copied_tokenizer),
+        "source_trainer_sha256": source_receipt["trainer_sha256"],
+        "source_trainer_git_commit": source_receipt["trainer_git_commit"],
+        "source_recipe_sha256": source_receipt["recipe_sha256"],
         "source_adapter_tree_sha256": observed_adapter_tree,
         "source_adapter_sha256": _sha256_file(adapter_path),
+        "source_adapter_config_sha256": _sha256_file(
+            lineage / "adapter_config.json"
+        ),
         "source_arm": source_receipt["arm"],
         "source_seed": source_receipt["seed"],
         "applied_lora_modules": applied,
