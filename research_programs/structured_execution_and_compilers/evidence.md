@@ -301,6 +301,24 @@ register first tokenizer EOS as the answer-stage deployment commit boundary,
 use fresh identities, retain strict pre-commit grammar and an HF-EOS control,
 and stop if that interface does not independently qualify.
 
+## Tokenizer-EOS answer-commit calibration (2026-07-14)
+
+[qwen35_4b_tokenizer_eos_answer_commit_factorial](../../experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/reports/report.md)
+isolated the boundary cause on 48 fresh known-answer rows under an independently
+reviewed, committed-green implementation and lock. Both tokenizer-EOS no-think
+cells achieved 48/48 strict exactness and parseability with zero cap contacts;
+every matched HF-model-EOS cell achieved 0/48. All 192 paired boundary
+comparisons authenticated with shared prompts, seeds, thoughts where applicable,
+and identical sampled prefixes through the earlier stop. Thinking did not
+magnify the interface: the structured cell fell to 38/48 and freeform to 30/48,
+with 16 freeform cap contacts. The frozen decision is
+`TOKENIZER_EOS_ONLY_INTERFACE_QUALIFIED`, and the sole advancing winner is
+`tokenizer_eos_no_think_program_slot`. This establishes that termination-token
+identity is a causal part of Qwen3.5-4B's short structured-output interface; it
+does **not** establish residual-mechanics or capability gain. Mechanics and all
+protected labels remained sealed and require a second winner-bound published
+lock before access.
+
 ## Materialized residual mechanics incident (2026-07-13)
 
 [qwen35_4b_materialized_residual_sibling_search](../../experiments/qwen35_4b_materialized_residual_sibling_search/reports/report.md)

@@ -563,6 +563,19 @@ event, retains HF EOS and malformed terminators as controls, and must
 independently qualify before residual mechanics. If it fails, retire this
 residual-generation branch.
 
+That fresh successor has now qualified the interface cleanly in
+[qwen35_4b_tokenizer_eos_answer_commit_factorial](../experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/reports/report.md).
+Across 48 fresh known-answer rows, both tokenizer-EOS no-think cells were 48/48
+strict exact/parse with zero cap contacts, while all matched HF-model-EOS cells
+were 0/48; all 192 paired prefixes authenticated. Thinking was worse at this
+short exact-output interface (38/48 structured, 30/48 freeform, with 16
+freeform cap contacts), so only the frozen no-think `PROGRAM:` cell advances.
+This is strong causal evidence that **the termination token is part of the
+deployed interface**, not evidence that a capability was installed or
+magnified. Residual mechanics and hidden labels stayed sealed. The next result
+must come from the frozen winner behind a second committed-green lock and must
+beat every structured and taskwise matched-compute direct control.
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.
