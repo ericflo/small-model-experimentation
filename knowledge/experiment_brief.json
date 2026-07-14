@@ -6380,11 +6380,11 @@
    ]
   },
   "qwen35_4b_state_formation_branch_handoff_recovery": {
-   "verdict_tag": "Safe handoff is ready",
+   "verdict_tag": "Safe handoff is working",
    "concept_primer": "A retired error slot is like a reserved parking space: once a verified replacement arrives, later checks must recognize the new vehicle without forgetting the old incident.",
    "plain_question": "Can later full-size setup work continue after a successful replacement occupies the file location that previously held a preserved failure?",
-   "plain_answer": "Yes, the narrow handoff passed every safety check without loading the model. It accepts only the exact successful setup record and its history, while rejecting the old failed bytes, changed records, and a restored failure copy.",
-   "why_it_matters": "Practitioners can continue the promised compact-versus-full-size comparison without rewriting published history or weakening the original safety checks. The next model run remains blocked until this handoff is published.",
+   "plain_answer": "Yes, the narrow handoff passed every safety check, then the first full-size setup control reached 48 of 48 with its learned path and zero of 48 with that path disabled after all 256 updates.",
+   "why_it_matters": "Practitioners can continue the promised compact-versus-full-size comparison without rewriting published history or weakening the original safety checks. Later work still waits for each completed setup checkpoint to be published.",
    "verdict_tone": "neutral",
    "key_numbers": [
     {
@@ -6393,19 +6393,19 @@
      "sub": "handoff lineage controls passed"
     },
     {
-     "label": "Focused tests",
-     "value": "8 of 8",
-     "sub": "failure and invocation cases passed"
+     "label": "Learned path intact",
+     "value": "48 of 48",
+     "sub": "setup cases reached the complete state"
     },
     {
-     "label": "Model activity",
+     "label": "Learned path disabled",
      "value": "0",
-     "sub": "model loads or training runs during smoke"
+     "sub": "of 48 setup cases reached the complete state"
     },
     {
-     "label": "Sealed cases opened",
-     "value": "0",
-     "sub": "future comparison rows touched"
+     "label": "Training presentations",
+     "value": "4,096",
+     "sub": "exact fixed setup-control total"
     }
    ],
    "charts": [

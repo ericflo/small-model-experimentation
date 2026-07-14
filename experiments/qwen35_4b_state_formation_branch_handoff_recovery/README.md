@@ -1,6 +1,6 @@
 # State-Formation Branch Handoff Recovery
 
-**Status:** in-progress · since 2026-07-14 · frozen no-model handoff smoke passes; publish it with the successful G0 before retrying the full-rank positive control
+**Status:** in-progress · since 2026-07-14 · handoff is published/green and the full-rank seed-7411 positive control passes; publish that setup pair before seed 7412
 
 This operational successor lets immutable producer v11 continue after the first branch recovery
 successfully replaces the retired failed-G0 receipt at its canonical path. It changes no scientific
@@ -86,11 +86,20 @@ changed no scientific interpretation. No positive-control or downstream scientif
 claimed here. Use remains blocked until this complete checkpoint is published and both workflows
 are green.
 
+Handoff commit `627254f1…d892` passed both workflows. The exact full-rank seed-7411 positive control
+then completed once through this wrapper. Producer file SHA-256 is `a0d17e2e…7a16`, producer receipt
+identity `6708a4d4…9649`, and handoff COMPLETE identity `af0dd15c…2262`. The producer control passed
+oracle and intact joint state at 48/48, adaptation-disabled joint state at 0/48, exactly 256 updates,
+gradient accumulation 16, and 4,096 singleton presentations. Both the 892,272,640-parameter full-
+rank path and shared-state parameters changed; early stopping and checkpoint selection were false.
+The receipt authorizes later producer work only through its unchanged barriers and records zero
+result payload, benchmark, contrast, or scientific-evidence access.
+
 ## Interpretation
 
-The valid G0 establishes full-rank feasibility but does not authorize training. This recovery is
-only a safe handoff from that G0 to its preregistered positive control. Capacity interpretation
-remains unchanged.
+The valid G0 and control establish full-rank feasibility and a working state path, not a capacity
+result. This recovery safely handed producer authority from G0 to the preregistered control without
+changing scientific logic. Capacity interpretation remains unchanged.
 
 ## Knowledgebase Update
 

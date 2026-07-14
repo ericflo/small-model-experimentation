@@ -149,6 +149,15 @@ bytes from the exact successful G0 and passes its frozen no-model smoke at ident
 `d6fecf0a…de4c`, source contract `4d2ffde3…8acd`. Publish that checkpoint and require both workflows
 green before retrying the positive control through the handoff wrapper.
 
+Handoff commit `627254f1…d892` passed both workflows. The full-rank seed-7411 positive control then
+passed at producer file SHA-256 `a0d17e2e…7a16`, identity `6708a4d4…9649`: oracle and intact fixed-
+final joint state are 48/48, adaptation-disabled is 0/48, after exactly 256 updates, accumulation 16,
+and 4,096 singleton presentations. Both the 892,272,640-parameter full-rank path and shared state
+changed; early stopping and checkpoint selection were disabled. Handoff COMPLETE identity is
+`af0dd15c…2262`. The pair remains setup-only evidence with zero result-payload, benchmark, contrast,
+or scientific-evidence access. Publish and require both workflows green before the registered full-
+rank seed-7412 G0/control pair; result training remains blocked on the complete setup matrix.
+
 Historically, the integrated source-v10 review was `GO` for reviewed implementation
 `a5a494b7…6f1c4a` and full source contract `979a9012…f394b7`; the 360/360 suite and exact machine gate
 pass. Source-v9 seed-7411 G0 stopped before model load or wrapper construction because the general

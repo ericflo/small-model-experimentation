@@ -1187,11 +1187,24 @@ analysis remain blocked on the complete three-seed setup barrier.
   at file SHA-256 `0e0409de…6e5b`, identity `d6fecf0a…de4c`, under source contract
   `4d2ffde3…8acd`.
 
+## 2026-07-14 — full-rank seed-7411 setup pair passes
+
+- Handoff commit `627254f1…d892` passed both workflows before the positive control.
+- Producer control file SHA-256 is `a0d17e2e…7a16`, identity `6708a4d4…9649`; handoff STARTED/
+  COMPLETE file hashes are `b1b91cb2…ff2b` / `e0887536…13f1`, with COMPLETE identity
+  `af0dd15c…2262`.
+- Oracle and intact fixed-final joint state are 48/48; adaptation-disabled joint state is 0/48 after
+  exactly 256 optimizer updates, accumulation 16, and 4,096 presentations. The 892,272,640 full-
+  rank parameters and shared-state parameters both changed; early stop and checkpoint selection are
+  false.
+- G0/control are setup-only evidence and record zero result-payload, benchmark, contrast, or
+  scientific-evidence access.
+
 ## Current authorization
 
-Only handoff/G0 documentation, validation, commit, push, and workflow verification are authorized.
-After both workflows are green, run the seed-7411 full-rank positive control through the handoff
-wrapper. Training and later seeds remain blocked.
+Only seed-7411 full-rank setup documentation, validation, commit, push, and workflow verification are
+authorized. After both workflows are green, run the seed-7412 full-rank G0 and positive control
+through the handoff wrapper. Result training remains blocked on the complete setup matrix.
 
 ## 2026-07-14 — source-v11 seed-7412 LoRA setup pair passes
 

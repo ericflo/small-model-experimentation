@@ -4,8 +4,9 @@
 
 The first recovery produced a valid full-rank seed-7411 G0, but its frozen pathname-only retirement
 guard stopped the following positive control before producer or model work. The handoff suite and
-frozen no-model smoke now pass; publication and both green workflows remain required before use.
-This report records only operational evidence; producer receipts remain scientifically authoritative.
+frozen no-model smoke passed, commit `627254f1…d892` cleared both workflows, and the full-rank
+seed-7411 positive control now passes through this wrapper. Producer receipts remain scientifically
+authoritative.
 
 ## Method
 
@@ -23,6 +24,11 @@ receipts.
 - Six smoke controls pass; unit controls reject failed bytes, changed G0 bytes, a reappearing mirror,
   and unregistered invocation shapes.
 - Model load, training/evaluation, benchmark/contrast access, and scientific interpretation: zero.
+- Full-rank seed-7411 positive control: producer SHA-256 `a0d17e2e…7a16`, identity
+  `6708a4d4…9649`; oracle/intact 48/48, adaptation-disabled 0/48, 256 updates, accumulation 16,
+  4,096 presentations, and changed full-rank/shared-state parameters.
+- Handoff COMPLETE identity: `af0dd15c…2262`; producer result/benchmark/contrast access and
+  scientific evidence remain zero.
 
 ## Interpretation
 
@@ -31,5 +37,5 @@ that its inputs independently authorize.
 
 ## Next action
 
-Publish this frozen checkpoint with the successful G0 and require both workflows green, then retry
-the full-rank seed-7411 positive control through this wrapper.
+Publish the seed-7411 control and handoff invocation receipts, require both workflows green, then run
+the registered full-rank seed-7412 G0/control pair through this wrapper.

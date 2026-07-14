@@ -37,6 +37,14 @@ before STARTED publication or producer/model work. A separate byte/status-aware 
 frozen no-model smoke at identity `d6fecf0a…de4c`, source contract `4d2ffde3…8acd`; publication and
 both green workflows are required before the positive control.
 
+Handoff commit `627254f1…d892` passed both workflows. The full-rank seed-7411 positive control then
+passed at producer file SHA-256 `a0d17e2e…7a16`, identity `6708a4d4…9649`: oracle/intact joint state
+is 48/48 and adaptation-disabled is 0/48 after exactly 256 updates, accumulation 16, and 4,096
+presentations. Full-rank and shared-state parameters changed, with no early stop or checkpoint
+selection. Handoff COMPLETE identity is `af0dd15c…2262`. This is setup-only evidence with zero
+result-payload, benchmark, contrast, or scientific-evidence access; later result training remains
+blocked on the full setup matrix.
+
 **Historical pre-result setup record follows.** Preregistration, adversarial design review, and the
 frozen design are complete. Source-v10 implementation authorization is `GO` at reviewed digest
 `a5a494b7…6f1c4a` and full source contract `979a9012…f394b7`, with 360/360 source-bound tests passing.
