@@ -48305,6 +48305,39 @@
      "source": "experiments/qwen35_4b_universal_search_scaffold_token_match/runs/local/seed88007.json"
     }
    ]
+  },
+  "qwen35_4b_universal_state_table_compiler_token_match": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Only the result-separated intake is complete",
+     "categories": [
+      "intake",
+      "CPU design",
+      "training",
+      "local gate",
+      "broad gate"
+     ],
+     "series": [
+      {
+       "label": "completed checkpoint",
+       "values": [
+        1,
+        0,
+        0,
+        0,
+        0
+       ]
+      }
+     ],
+     "x_label": "preregistered experiment stage",
+     "y_label": "completion indicator",
+     "y_format": "integer",
+     "note": "Intake reserves fresh seeds 77112/46/88008/78138 and authorizes CPU feasibility only. No stream, model result, merge, local event, or benchmark event exists.",
+     "source": "experiments/qwen35_4b_universal_state_table_compiler_token_match/idea_intake.md"
+    }
+   ]
   }
  }
 }

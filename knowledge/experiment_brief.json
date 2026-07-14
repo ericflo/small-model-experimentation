@@ -14002,6 +14002,44 @@
      "chart_takeaway": "The candidate fails five gates and loses all execute, induction, and probe-selection cases; broad evaluation remains sealed."
     }
    ]
+  },
+  "qwen35_4b_universal_state_table_compiler_token_match": {
+   "verdict_tag": "Fresh mechanism intake; no model result",
+   "concept_primer": "A state table is a compact scratchpad: after each instruction, it records exactly what changed. This trial pairs that scratchpad with a separate scorecard for competing explanations, then asks for one short verified answer.",
+   "plain_question": "Can explicit natural-language state tracking and hypothesis scoring teach a small model to execute, compare, and finish more reliably than another equal replay update?",
+   "plain_answer": "Not known yet. The intake, parent identity, four fresh seeds, and exact-compute control requirement are frozen, but no synthetic stream has been generated and no model has been trained or evaluated.",
+   "why_it_matters": "The preceding staged-search curriculum often computed the right state but failed to answer, and it damaged branch selection. This successor changes the training interface to match those observed deployment failures while keeping benchmark data sealed.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Model results",
+     "value": "zero",
+     "sub": "intake and CPU design only"
+    },
+    {
+     "label": "Fresh reserved seeds",
+     "value": "4",
+     "sub": "construction, training, local, and conditional aggregate"
+    },
+    {
+     "label": "Active replay control",
+     "value": "required",
+     "sub": "same parent, exact forward-token and step match"
+    },
+    {
+     "label": "Broad access",
+     "value": "sealed",
+     "sub": "unavailable until every local gate passes"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Only intake is complete",
+     "chart_read": "A bar at one marks a completed admission stage. CPU design, training, local evaluation, and broad evaluation remain at zero.",
+     "chart_takeaway": "The experiment has frozen its question and identities without creating a capability result or consuming an evaluation event."
+    }
+   ]
   }
  }
 }

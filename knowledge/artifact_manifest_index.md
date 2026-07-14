@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 226
-- Manifest files: 536
+- Experiments with manifests: 227
+- Manifest files: 537
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 71 |
 | `run-data` | 101 |
-| `standard-artifact` | 99 |
+| `standard-artifact` | 100 |
 
 ## Manifests
 
@@ -289,6 +289,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_universal_search_scaffold_token_match` | `other` | [manifest](../experiments/qwen35_4b_universal_search_scaffold_token_match/data/predecessor_stream_manifest.json) |
 | `qwen35_4b_universal_search_scaffold_token_match` | `other` | [manifest](../experiments/qwen35_4b_universal_search_scaffold_token_match/data/stream_manifest.json) |
 | `qwen35_4b_universal_search_scaffold_token_match` | `standard-artifact` | [manifest](../experiments/qwen35_4b_universal_search_scaffold_token_match/reports/artifact_manifest.yaml) |
+| `qwen35_4b_universal_state_table_compiler_token_match` | `standard-artifact` | [manifest](../experiments/qwen35_4b_universal_state_table_compiler_token_match/reports/artifact_manifest.yaml) |
 | `qwen35_4b_unsaturated_frontier_active_bridge` | `dataset` | [manifest](../experiments/qwen35_4b_unsaturated_frontier_active_bridge/data/adaptive/dataset_manifest.json) |
 | `qwen35_4b_unsaturated_frontier_active_bridge` | `dataset` | [manifest](../experiments/qwen35_4b_unsaturated_frontier_active_bridge/data/dataset_manifest.json) |
 | `qwen35_4b_unsaturated_frontier_active_bridge` | `dataset` | [manifest](../experiments/qwen35_4b_unsaturated_frontier_active_bridge/data/seed_mined/dataset_manifest.json) |

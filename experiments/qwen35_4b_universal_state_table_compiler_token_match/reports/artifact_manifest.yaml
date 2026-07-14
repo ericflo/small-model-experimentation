@@ -1,0 +1,22 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_universal_state_table_compiler_token_match"
+external_artifacts:
+  - name: "authenticated close_xi parent adapter"
+    storage: "large_artifacts/qwen35_4b_universal_close_weight_token_match/adapters/close_xi"
+    required_for: "frozen common warm start"
+    checksum: "weights 16e9dc75a0e33e182e916600ff6e1d75fc46dfa45e870216e2c149a41253c179; config de953bd57502ff728a12d1627d5aacab6284b045428ec7b83026388afd8c47ff"
+    regenerate: ".venv/bin/python experiments/qwen35_4b_universal_close_weight_token_match/scripts/run.py --stage train-close"
+omitted_artifacts:
+  - path: "large_artifacts/qwen35_4b_universal_state_table_compiler_token_match/"
+    reason: "future adapters and merged checkpoints are large and gitignored"
+reproducibility:
+  smoke_command: "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_state_table_compiler_token_match/scripts/run.py --smoke"
+  full_command: "unavailable until design freeze"
+  required_external_artifacts:
+    - "large_artifacts/qwen35_4b_universal_close_weight_token_match/adapters/close_xi"
+notes: >-
+  Intake only. Model Qwen/Qwen3.5-4B revision 851bf6e8...d0a; parent weights/config
+  16e9dc75...c179 / de953bd5...7ff. Construction/training/local/conditional aggregate
+  seeds are 77112/46/88008/78138. No generated stream, adapter, capability receipt,
+  merge, or benchmark receipt exists.

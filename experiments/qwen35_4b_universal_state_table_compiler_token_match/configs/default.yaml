@@ -1,0 +1,12 @@
+experiment_id: qwen35_4b_universal_state_table_compiler_token_match
+model_id: Qwen/Qwen3.5-4B
+model_revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+parent_experiment: qwen35_4b_universal_close_weight_token_match
+parent_arm: close_xi
+parent_weights_sha256: 16e9dc75a0e33e182e916600ff6e1d75fc46dfa45e870216e2c149a41253c179
+parent_config_sha256: de953bd57502ff728a12d1627d5aacab6284b045428ec7b83026388afd8c47ff
+construction_seed: 77112
+training_seed: 46
+local_seed: 88008
+conditional_aggregate_seed: 78138
+status: intake_cpu_only

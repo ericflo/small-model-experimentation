@@ -6093,6 +6093,45 @@
   },
   {
     "file_counts": {
+      ".md": 5,
+      ".py": 3,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_universal_state_table_compiler_token_match",
+    "path": "experiments/qwen35_4b_universal_state_table_compiler_token_match",
+    "primary_readme": "experiments/qwen35_4b_universal_state_table_compiler_token_match/README.md",
+    "primary_report": "experiments/qwen35_4b_universal_state_table_compiler_token_match/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation",
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "This result-separated successor tests whether truth-audited, variable-depth natural-language state tables plus independent hypothesis scoring and a short verified commit install a reusable reasoning procedure better than an exact-token replay continuation from the same parent.",
+    "tags": [
+      "abi",
+      "curriculum",
+      "latent-state",
+      "small-model",
+      "table-transform",
+      "verification"
+    ],
+    "title": "Natural-Language State-Table Universal Curriculum",
+    "top_level_dirs": [
+      "configs",
+      "reports",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 11,
+    "total_size_bytes": 100497
+  },
+  {
+    "file_counts": {
       ".json": 16,
       ".jsonl": 11,
       ".log": 19,
