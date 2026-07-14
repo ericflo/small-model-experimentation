@@ -9,6 +9,7 @@ SFT target in the reflection-only arms.
 from __future__ import annotations
 
 import hashlib
+import itertools
 import json
 import random
 from dataclasses import dataclass
@@ -54,10 +55,12 @@ LIST = Family(
         Primitive("sort", "sort ascending", lambda x: sorted(x)),
         Primitive("unique", "keep first occurrences", lambda x: _stable_unique(x)),
         Primitive("absolute", "replace values by absolute values", lambda x: [abs(v) for v in x]),
-        Primitive("negate", "negate every value", lambda x: [-v for v in x]),
         Primitive("square", "square every value", lambda x: [v * v for v in x]),
         Primitive("running", "replace by running sums", lambda x: _running_sum(x)),
         Primitive("difference", "take adjacent forward differences", lambda x: _adjacent_diff(x)),
+        Primitive("rotate", "move the first element to the end", lambda x: x[1:] + x[:1] if x else x),
+        Primitive("evens", "keep values at even zero-based positions", lambda x: x[::2]),
+        Primitive("odds", "keep values at odd zero-based positions", lambda x: x[1::2]),
     ),
     sample=lambda rng: [rng.randint(-5, 5) for _ in range(rng.randint(4, 7))],
     probes=(
@@ -77,9 +80,14 @@ STRING = Family(
         Primitive("adjacent", "collapse adjacent repeated characters", lambda x: "".join(c for i, c in enumerate(x) if i == 0 or c != x[i - 1])),
         Primitive("vowels", "remove vowels", lambda x: "".join(c for c in x if c not in "aeiou")),
         Primitive("pairs", "reverse each consecutive character pair", lambda x: "".join(x[i:i + 2][::-1] for i in range(0, len(x), 2))),
-        Primitive("odd", "keep characters at even zero-based positions", lambda x: x[::2]),
+        Primitive("evens", "keep characters at even zero-based positions", lambda x: x[::2]),
+        Primitive("odds", "keep characters at odd zero-based positions", lambda x: x[1::2]),
+        Primitive("rotate", "move the first character to the end", lambda x: x[1:] + x[:1] if x else x),
+        Primitive("partition", "move vowels before consonants while preserving order", lambda x: "".join(c for c in x if c in "aeiou") + "".join(c for c in x if c not in "aeiou")),
     ),
-    sample=lambda rng: "".join(rng.choice("aabbccddeeffgghhiijjklmnop") for _ in range(rng.randint(5, 9))),
+    # Lengths through 13 expose distinctions among nested stride operations that
+    # are behaviorally invisible when every sampled string has length at most 9.
+    sample=lambda rng: "".join(rng.choice("aabbccddeeffgghhiijjklmnop") for _ in range(rng.randint(5, 13))),
     probes=("abcaef", "hheelloo", "qwerty", "mississippi", "aeioubc", "abcdefg"),
 )
 
@@ -108,6 +116,7 @@ REGISTER = Family(
 
 
 FAMILIES = (LIST, STRING, REGISTER)
+_SIGNATURE_MULTIPLICITY: dict[str, dict[tuple[str, ...], int]] = {}
 
 
 def _copy(state: State) -> State:
@@ -134,6 +143,51 @@ def _shallow_signatures(family: Family) -> set[tuple[str, ...]]:
     names = tuple(primitive.name for primitive in family.primitives)
     sequences = [()] + [(a,) for a in names] + [(a, b) for a in names for b in names]
     return {_signature(family, sequence) for sequence in sequences}
+
+
+def _depth_three_signature_multiplicity(family: Family) -> dict[tuple[str, ...], int]:
+    cached = _SIGNATURE_MULTIPLICITY.get(family.name)
+    if cached is not None:
+        return cached
+    names = tuple(primitive.name for primitive in family.primitives)
+    shallow = _shallow_signatures(family)
+    counts: dict[tuple[str, ...], int] = {}
+    for sequence in itertools.product(names, repeat=3):
+        try:
+            signature = _signature(family, sequence)
+        except ValueError:
+            continue
+        if signature in shallow:
+            continue
+        counts[signature] = counts.get(signature, 0) + 1
+    _SIGNATURE_MULTIPLICITY[family.name] = counts
+    return counts
+
+
+def _matches(
+    family: Family, sequence: tuple[str, ...], inputs: list[State], outputs: list[State]
+) -> bool:
+    try:
+        return all(execute(family, sequence, state) == expected for state, expected in zip(inputs, outputs))
+    except ValueError:
+        return False
+
+
+def _visible_identifies_exact_plan(
+    family: Family, target: tuple[str, ...], inputs: list[State], outputs: list[State]
+) -> bool:
+    names = tuple(primitive.name for primitive in family.primitives)
+    for depth in (0, 1, 2):
+        for sequence in itertools.product(names, repeat=depth):
+            if _matches(family, sequence, inputs, outputs):
+                return False
+    matches = []
+    for sequence in itertools.product(names, repeat=3):
+        if _matches(family, sequence, inputs, outputs):
+            matches.append(sequence)
+            if len(matches) > 1:
+                return False
+    return matches == [target]
 
 
 def _state_text(state: State) -> str:
@@ -172,23 +226,89 @@ def _hash_signature(signature: tuple[str, ...]) -> str:
     return hashlib.sha256("\0".join(signature).encode()).hexdigest()
 
 
-def _make_task(
+def _eligible_programs(family: Family) -> list[tuple[tuple[str, ...], tuple[str, ...]]]:
+    """Enumerate exact-depth programs with a unique global behavior spelling."""
+    names = tuple(primitive.name for primitive in family.primitives)
+    shallow = _shallow_signatures(family)
+    multiplicity = _depth_three_signature_multiplicity(family)
+    eligible = []
+    for ops in itertools.product(names, repeat=3):
+        try:
+            signature = _signature(family, ops)
+        except ValueError:
+            continue
+        if signature not in shallow and multiplicity.get(signature) == 1:
+            eligible.append((ops, signature))
+    return eligible
+
+
+def _allocate_programs(
+    family: Family, counts: dict[str, int], seed: int
+) -> dict[str, list[tuple[tuple[str, ...], tuple[str, ...]]]]:
+    """Partition the finite catalog while covering every operation in every slot.
+
+    Coverage rows for all splits are reserved before any split is filled, preventing
+    a large early split from consuming a rare operation/position combination.
+    """
+    catalog = _eligible_programs(family)
+    required = sum(counts.values())
+    if len(catalog) < required:
+        raise ValueError(
+            f"{family.name} has {len(catalog)} eligible programs but {required} are required"
+        )
+    names = tuple(primitive.name for primitive in family.primitives)
+    universe = {(position, name) for position in range(3) for name in names}
+    # Multiple deterministic restarts make this fail closed even if a future
+    # primitive library introduces unusually rare eligible slot placements.
+    for attempt in range(256):
+        rng = random.Random(seed + 104_729 * attempt)
+        remaining = catalog[:]
+        rng.shuffle(remaining)
+        selected: dict[str, list[tuple[tuple[str, ...], tuple[str, ...]]]] = {
+            split: [] for split in counts
+        }
+        feasible = True
+        for split in sorted(counts, key=lambda key: (counts[key], key)):
+            # Tiny smoke splits exercise construction but cannot contain every
+            # operation in every slot. Full proposed splits can and must.
+            uncovered = set(universe) if counts[split] >= len(names) else set()
+            while uncovered:
+                scores = [
+                    sum((position, name) in uncovered for position, name in enumerate(ops))
+                    for ops, _ in remaining
+                ]
+                best = max(scores, default=0)
+                if best == 0:
+                    feasible = False
+                    break
+                choices = [index for index, score in enumerate(scores) if score == best]
+                index = rng.choice(choices)
+                ops, signature = remaining.pop(index)
+                selected[split].append((ops, signature))
+                uncovered -= {(position, name) for position, name in enumerate(ops)}
+            if not feasible or len(selected[split]) > counts[split]:
+                feasible = False
+                break
+        if not feasible:
+            continue
+        rng.shuffle(remaining)
+        for split in counts:
+            needed = counts[split] - len(selected[split])
+            selected[split].extend(remaining[:needed])
+            del remaining[:needed]
+        return selected
+    raise RuntimeError(f"unable to allocate a position-complete {family.name} catalog")
+
+
+def _make_task_for_program(
     family: Family,
+    ops: tuple[str, ...],
+    signature: tuple[str, ...],
     split: str,
     ordinal: int,
     rng: random.Random,
-    used_compositions: set[tuple[str, tuple[str, ...]]],
-    used_signatures: set[tuple[str, tuple[str, ...]]],
 ) -> dict[str, Any]:
-    names = tuple(primitive.name for primitive in family.primitives)
-    shallow = _shallow_signatures(family)
-    for _ in range(20_000):
-        ops = tuple(rng.choice(names) for _ in range(3))
-        key = (family.name, ops)
-        signature = _signature(family, ops)
-        sig_key = (family.name, signature)
-        if key in used_compositions or sig_key in used_signatures or signature in shallow:
-            continue
+    for _ in range(2_000):
         states: list[State] = []
         seen: set[str] = set()
         for _ in range(300):
@@ -202,18 +322,21 @@ def _make_task(
                 break
         if len(states) != 10:
             continue
-        outputs = [execute(family, ops, state) for state in states]
+        try:
+            outputs = [execute(family, ops, state) for state in states]
+        except ValueError:
+            continue
         if len({_state_text(output) for output in outputs}) < 5:
             continue
         examples = [{"input": states[i], "output": outputs[i]} for i in range(7)]
+        if not _visible_identifies_exact_plan(family, ops, states[:7], outputs[:7]):
+            continue
         queries = states[7:10]
         answers = outputs[7:10]
         plan = "PLAN: " + " -> ".join(ops)
         answer = "ANSWER: " + _state_text(answers)
         if answer in plan or _state_text(answers) in plan:
             continue
-        used_compositions.add(key)
-        used_signatures.add(sig_key)
         task_id = f"cprt-{split}-{family.name}-{ordinal:04d}"
         return {
             "task_id": task_id,
@@ -233,22 +356,30 @@ def _make_task(
             "action_question": ACTION_QUESTION,
             "target_plan": plan,
             "target_answer": answer,
+            "visible_shallow_candidate_count": 0,
+            "visible_depth3_candidate_count": 1,
         }
-    raise RuntimeError(f"unable to construct unique {family.name}/{split} task")
+    raise RuntimeError(
+        f"unable to materialize visible-identifiable {family.name}/{split} program {ops}"
+    )
 
 
 def build_corpus(counts: dict[str, int], seed: int) -> dict[str, list[dict[str, Any]]]:
     """Build disjoint splits; each count is per family."""
-    used_compositions: set[tuple[str, tuple[str, ...]]] = set()
-    used_signatures: set[tuple[str, tuple[str, ...]]] = set()
     corpus: dict[str, list[dict[str, Any]]] = {split: [] for split in counts}
-    for split_index, (split, count) in enumerate(counts.items()):
-        for family_index, family in enumerate(FAMILIES):
+    for family_index, family in enumerate(FAMILIES):
+        allocated = _allocate_programs(family, counts, seed + 1_009 * family_index)
+        for split_index, (split, programs) in enumerate(allocated.items()):
             rng = random.Random(seed + 10_007 * split_index + 1_009 * family_index)
-            for ordinal in range(count):
+            for ordinal, (ops, signature) in enumerate(programs):
                 corpus[split].append(
-                    _make_task(
-                        family, split, ordinal, rng, used_compositions, used_signatures
+                    _make_task_for_program(
+                        family,
+                        ops,
+                        signature,
+                        split,
+                        ordinal,
+                        rng,
                     )
                 )
     return corpus
@@ -262,22 +393,49 @@ def build_reflection_arms(tasks: list[dict[str, Any]], seed: int) -> dict[str, l
     by_family: dict[str, list[int]] = {}
     for index, task in enumerate(tasks):
         by_family.setdefault(task["family"], []).append(index)
-        correct.append(dict(task))
+        row = dict(task)
+        row["supervision_plan"] = task["target_plan"]
+        row["supervision_ops"] = list(task["target_ops"])
+        row["reflection_donor_task_id"] = task["task_id"]
+        correct.append(row)
     donor: dict[int, int] = {}
     for indices in by_family.values():
-        perm = indices[:]
-        for _ in range(1_000):
-            rng.shuffle(perm)
-            if all(a != b and tasks[a]["target_ops"] != tasks[b]["target_ops"] for a, b in zip(indices, perm)):
-                break
-        else:
-            raise RuntimeError("could not construct reflection derangement")
-        donor.update(dict(zip(indices, perm)))
+        adjacency: dict[int, list[int]] = {}
+        family = next(family for family in FAMILIES if family.name == tasks[indices[0]]["family"])
+        for recipient in indices:
+            task = tasks[recipient]
+            states = [row["input"] for row in task["examples"]] + task["queries"]
+            outputs = [row["output"] for row in task["examples"]] + task["answers"]
+            allowed = [
+                source
+                for source in indices
+                if source != recipient
+                and tasks[source]["target_ops"] != task["target_ops"]
+                and not _matches(family, tuple(tasks[source]["target_ops"]), states, outputs)
+            ]
+            rng.shuffle(allowed)
+            adjacency[recipient] = allowed
+        source_to_recipient: dict[int, int] = {}
+
+        def augment(recipient: int, seen: set[int]) -> bool:
+            for source in adjacency[recipient]:
+                if source in seen:
+                    continue
+                seen.add(source)
+                if source not in source_to_recipient or augment(source_to_recipient[source], seen):
+                    source_to_recipient[source] = recipient
+                    return True
+            return False
+
+        for recipient in indices:
+            if not augment(recipient, set()):
+                raise RuntimeError("could not construct behaviorally wrong reflection derangement")
+        donor.update({recipient: source for source, recipient in source_to_recipient.items()})
     for index, task in enumerate(tasks):
         row = dict(task)
         source = tasks[donor[index]]
-        row["target_plan"] = source["target_plan"]
-        row["target_ops"] = source["target_ops"]
+        row["supervision_plan"] = source["target_plan"]
+        row["supervision_ops"] = list(source["target_ops"])
         row["reflection_donor_task_id"] = source["task_id"]
         shuffled.append(row)
     return {"reflection_correct": correct, "reflection_shuffled": shuffled}
@@ -311,10 +469,29 @@ def validate_corpus(
         for row in rows
     )
     expected = sum(counts.values()) * len(FAMILIES)
-    assert len(rows) == expected
-    assert len(set(ids)) == len(ids)
-    assert len(set(compositions)) == len(compositions)
-    assert len(set(signatures)) == len(signatures)
+    if len(rows) != expected:
+        raise ValueError(f"expected {expected} tasks, found {len(rows)}")
+    if len(set(ids)) != len(ids):
+        raise ValueError("task IDs are not unique")
+    if len(set(compositions)) != len(compositions):
+        raise ValueError("program compositions are not unique")
+    if len(set(signatures)) != len(signatures):
+        raise ValueError("behavior signatures are not unique")
+    if composition_collisions or signature_collisions:
+        raise ValueError("cross-split program or behavior collision")
+    if exact_answer_in_reflection:
+        raise ValueError("a reflection target contains its exact query answer")
+    for split, count in counts.items():
+        for family in FAMILIES:
+            family_rows = [row for row in corpus[split] if row["family"] == family.name]
+            if len(family_rows) != count:
+                raise ValueError(f"expected {count} {family.name}/{split} rows")
+            expected_names = {primitive.name for primitive in family.primitives}
+            if count >= len(expected_names):
+                for position in range(3):
+                    observed = {row["target_ops"][position] for row in family_rows}
+                    if observed != expected_names:
+                        raise ValueError(f"incomplete {family.name}/{split} slot {position} coverage")
     return {
         "families": [family.name for family in FAMILIES],
         "unique_task_ids": len(set(ids)),

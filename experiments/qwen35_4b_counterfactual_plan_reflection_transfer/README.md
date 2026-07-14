@@ -1,6 +1,6 @@
 # Qwen3.5-4B Counterfactual Plan Reflection Transfer
 
-**Status:** in-progress · since 2026-07-14 · model-free construction smoke complete; adversarial design review required before any model or GPU event
+**Status:** in-progress · since 2026-07-14 · adversarial HOLD; repaired full CPU construction passes, but no tokenizer/model/GPU/training event is authorized
 
 This experiment tests the paper's most actionable claim without relying on its
 consciousness framing: can supervision on what the model *would say if interrupted
@@ -44,7 +44,9 @@ then replicates on a fresh confirmation split against sample-more.
   `851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a`.
 - Task source: experiment-owned procedural list, string, and three-register
   machines. Every task composes exactly three parameter-free primitives, shows seven
-  examples, and asks for outputs on three new inputs.
+  examples, and asks for outputs on three new inputs. The exact ordered plan is the
+  only depth-three program consistent with the seven visible examples; globally
+  behavior-equivalent spellings and shallower-equivalent programs are excluded.
 - Common context: the user supplies the machine and says not to solve; the Assistant
   gives the fixed content-free response `READY`. The next turn branches.
 - Reflection branch: asks only for `PLAN: first -> second -> third`; its target never
@@ -52,7 +54,7 @@ then replicates on a fresh confirmation split against sample-more.
   turn.
 - Action branch: asks only for `ANSWER: <JSON outputs>`. Reflection-only training
   never receives loss on this branch or its answer.
-- Splits: proposed 288 train tasks and independent 144-task qualification and
+- Splits: proposed 216 train tasks and independent 144-task qualification and
   144-task confirmation blocks, balanced across three families; composition and
   behavioral signatures must be disjoint across all splits. Sizes remain
   design-reviewable and no model event is authorized yet.
@@ -96,15 +98,26 @@ PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B \
   experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/run.py --smoke
 ```
 
-No full, model, training, evaluation, or Jacobian command is authorized yet.
+The full configured CPU construction is also authorized:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B \
+  experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/run.py --construct
+```
+
+No tokenizer, model, GPU, training, evaluation, or Jacobian command is authorized yet.
 
 ## Results
 
-The model-free smoke constructs 30 tasks (four/three/three per family across
-train/qualification/confirmation), re-executes every target, and verifies zero task,
-composition, or behavioral-signature collisions; the correct and shuffled arms have
-byte-identical contexts and a strict within-family derangement. It makes zero model
-calls, GPU events, or benchmark reads. This is readiness evidence only.
+The repaired full model-free construction deterministically creates all 504 proposed
+tasks: 216 train, 144 qualification, and 144 confirmation. It has 504 unique ordered
+programs and 504 unique behavior signatures, zero cross-split collisions, unique
+visible exact plans, complete operation-by-position support in every full split, and
+zero exact answer strings in reflection targets. Shuffled supervision preserves
+immutable task truth and uses a within-family donor plan that is observably wrong on
+the recipient's demonstrations or queries. A Python audit hook denies file and
+directory access beneath the repository benchmark root. This repairs the first two
+adversarial blockers but does not lift the design HOLD.
 
 ## Interpretation
 

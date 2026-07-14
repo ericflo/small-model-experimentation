@@ -1,9 +1,10 @@
-# Counterfactual Plan Reflection Transfer — Intake Report
+# Counterfactual Plan Reflection Transfer — Design-Hold Report
 
 ## Summary
 
-The experiment is model-free and intake-only. A real construction smoke exists, but
-no Qwen generation, training, capability measurement, or Jacobian event exists.
+The experiment remains model-free under an adversarial HOLD. The repaired full CPU
+construction succeeds, but no tokenizer, Qwen generation, training, capability
+measurement, or Jacobian event exists.
 
 ## Research Program Fit
 
@@ -22,14 +23,19 @@ asks for the answer on a different next-turn branch.
 
 ## Results
 
-The smoke validates construction and arm identity without loading a tokenizer or
-model. See the README for the current receipt. This is readiness evidence only.
+The full configured construction creates 504 unique exact-depth tasks: 216 train,
+144 qualification, and 144 confirmation. It has zero cross-split program or behavior
+collisions, unique exact plans on the seven visible demonstrations, complete
+operation-position coverage, and behaviorally wrong shuffled donors. See the README
+and adversarial design review for the receipt and remaining blockers. This is CPU
+readiness evidence only.
 
 ## Controls
 
-The design proposes frozen, within-family shuffled-reflection, direct-plan-answer,
-literal-reflection-at-test, retention, and same-backend matched-sampling controls.
-Exact training parity and gates remain subject to adversarial review.
+The first review requires a matched non-reflective plan-label arm in addition to the
+within-family shuffled-reflection control, and requires exact direct-control,
+literal-reflection, retention, rendering, loss-mask, parity, and decision contracts.
+Those remaining contracts are not yet authorized.
 
 ## Oracle Versus Deployable Evidence
 
@@ -39,8 +45,8 @@ against frozen sample-more, can become deployable evidence.
 
 ## Interpretation
 
-No scientific inference is licensed. The experiment has claimed a distinct question
-and made the first model-free construction path real.
+No scientific inference is licensed. The experiment has repaired its construction
+layer but has not passed design review.
 
 ## Next Experiments
 

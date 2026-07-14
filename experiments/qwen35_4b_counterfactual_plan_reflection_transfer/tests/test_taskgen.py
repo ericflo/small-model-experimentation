@@ -43,9 +43,45 @@ class ConstructionTests(unittest.TestCase):
         for correct, shuffled in zip(arms["reflection_correct"], arms["reflection_shuffled"]):
             self.assertEqual(correct["task_id"], shuffled["task_id"])
             self.assertEqual(correct["family"], shuffled["family"])
-            self.assertNotEqual(correct["target_ops"], shuffled["target_ops"])
-            self.assertNotEqual(correct["target_plan"], shuffled["target_plan"])
+            # Immutable task truth is preserved; only the supervised label changes.
+            self.assertEqual(correct["target_ops"], shuffled["target_ops"])
+            self.assertEqual(correct["target_plan"], shuffled["target_plan"])
+            self.assertNotEqual(correct["supervision_ops"], shuffled["supervision_ops"])
+            self.assertNotEqual(correct["supervision_plan"], shuffled["supervision_plan"])
             self.assertEqual(correct["common_messages"], shuffled["common_messages"])
+            family = next(family for family in T.FAMILIES if family.name == correct["family"])
+            inputs = [row["input"] for row in correct["examples"]] + correct["queries"]
+            outputs = [row["output"] for row in correct["examples"]] + correct["answers"]
+            self.assertFalse(
+                T._matches(family, tuple(shuffled["supervision_ops"]), inputs, outputs)
+            )
+
+    def test_explosive_candidates_are_skipped(self) -> None:
+        with self.assertRaisesRegex(ValueError, "state explosion"):
+            T.execute(T.LIST, ("square", "square", "square"), [6, 4, 3, 2])
+        # A neighboring corpus still constructs instead of leaking the exception.
+        corpus = T.build_corpus({"train": 8}, 91_337)
+        self.assertEqual(len(corpus["train"]), 8 * len(T.FAMILIES))
+
+    def test_proposed_full_splits_are_feasible_and_position_complete(self) -> None:
+        counts = {"train": 72, "qualification": 48, "confirmation": 48}
+        corpus = T.build_corpus(counts, 73_301)
+        receipt = T.validate_corpus(corpus, counts)
+        self.assertEqual(receipt["unique_behavior_signatures"], 504)
+        for rows in corpus.values():
+            for family in T.FAMILIES:
+                family_rows = [row for row in rows if row["family"] == family.name]
+                expected = {primitive.name for primitive in family.primitives}
+                for position in range(3):
+                    self.assertEqual(
+                        {row["target_ops"][position] for row in family_rows}, expected
+                    )
+                self.assertTrue(
+                    all(row["visible_shallow_candidate_count"] == 0 for row in family_rows)
+                )
+                self.assertTrue(
+                    all(row["visible_depth3_candidate_count"] == 1 for row in family_rows)
+                )
 
 
 if __name__ == "__main__":

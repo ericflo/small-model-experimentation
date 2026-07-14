@@ -1,17 +1,47 @@
 #!/usr/bin/env python3
-"""Model-free construction smoke for counterfactual plan reflection transfer."""
+"""Fail-closed CPU construction for counterfactual plan reflection transfer."""
 
 from __future__ import annotations
 
 import argparse
 import hashlib
 import json
+import os
 import sys
 from pathlib import Path
+from typing import Any
+
+import yaml
 
 
 EXP = Path(__file__).resolve().parents[1]
+REPO = EXP.parents[1]
 sys.path.insert(0, str(EXP / "src"))
+
+
+def _install_benchmark_firewall() -> None:
+    """Deny Python file and directory access beneath the repository benchmark root."""
+    benchmark_root = os.path.realpath(REPO / "benchmarks")
+
+    def forbidden(value: object) -> bool:
+        if not isinstance(value, (str, bytes, os.PathLike)):
+            return False
+        path = os.path.realpath(os.fsdecode(value))
+        try:
+            return os.path.commonpath((path, benchmark_root)) == benchmark_root
+        except ValueError:
+            return False
+
+    def audit(event: str, args: tuple[object, ...]) -> None:
+        if event == "open" and args and forbidden(args[0]):
+            raise PermissionError("benchmark read firewall: open denied")
+        if event in {"os.listdir", "os.scandir"} and args and forbidden(args[0]):
+            raise PermissionError(f"benchmark read firewall: {event} denied")
+
+    sys.addaudithook(audit)
+
+
+_install_benchmark_firewall()
 
 from taskgen import build_corpus, build_reflection_arms, validate_corpus  # noqa: E402
 
@@ -21,23 +51,29 @@ def _digest(value: object) -> str:
     return hashlib.sha256(payload).hexdigest()
 
 
-def smoke() -> dict[str, object]:
-    counts = {"train": 4, "qualification": 3, "confirmation": 3}
-    tasks = build_corpus(counts=counts, seed=73_301)
+def construct(
+    counts: dict[str, int], seed: int, shuffle_seed: int, mode: str
+) -> dict[str, object]:
+    tasks = build_corpus(counts=counts, seed=seed)
     validation = validate_corpus(tasks, counts)
-    arms = build_reflection_arms(tasks["train"], seed=73_319)
+    arms = build_reflection_arms(tasks["train"], seed=shuffle_seed)
 
     for correct, shuffled in zip(arms["reflection_correct"], arms["reflection_shuffled"]):
-        assert correct["common_messages"] == shuffled["common_messages"]
-        assert correct["reflection_question"] == shuffled["reflection_question"]
-        assert correct["task_id"] == shuffled["task_id"]
-        assert correct["target_plan"] != shuffled["target_plan"]
-        assert correct["target_ops"] != shuffled["target_ops"]
+        if correct["common_messages"] != shuffled["common_messages"]:
+            raise ValueError("correct/shuffled common contexts differ")
+        if correct["reflection_question"] != shuffled["reflection_question"]:
+            raise ValueError("correct/shuffled reflection questions differ")
+        if correct["task_id"] != shuffled["task_id"]:
+            raise ValueError("correct/shuffled task pairing differs")
+        if correct["target_plan"] != shuffled["target_plan"]:
+            raise ValueError("shuffling mutated immutable task truth")
+        if correct["supervision_plan"] == shuffled["supervision_plan"]:
+            raise ValueError("shuffled reflection target was not changed")
 
     summary = {
         "schema_version": 1,
         "experiment_id": "qwen35_4b_counterfactual_plan_reflection_transfer",
-        "mode": "model_free_smoke",
+        "mode": mode,
         "counts": {split: len(rows) for split, rows in tasks.items()},
         "families": validation["families"],
         "unique_task_ids": validation["unique_task_ids"],
@@ -49,24 +85,50 @@ def smoke() -> dict[str, object]:
         "exact_answer_in_reflection_targets": validation["exact_answer_in_reflection_targets"],
         "corpus_sha256": _digest(tasks),
         "arms_sha256": _digest(arms),
+        "benchmark_firewall": "python_audit_hook_open_listdir_scandir",
         "model_calls": 0,
         "gpu_events": 0,
         "benchmark_reads": 0,
         "authorized_next_stage": "CPU construction and adversarial design review only",
     }
-    assert summary["cross_split_composition_collisions"] == 0
-    assert summary["cross_split_behavior_collisions"] == 0
-    assert summary["exact_answer_in_reflection_targets"] == 0
+    if summary["cross_split_composition_collisions"] != 0:
+        raise ValueError("cross-split composition collision")
+    if summary["cross_split_behavior_collisions"] != 0:
+        raise ValueError("cross-split behavior collision")
+    if summary["exact_answer_in_reflection_targets"] != 0:
+        raise ValueError("reflection contains exact answer")
     return summary
+
+
+def _config() -> dict[str, Any]:
+    with (EXP / "configs" / "default.yaml").open() as handle:
+        return yaml.safe_load(handle)
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--smoke", action="store_true")
+    parser.add_argument("--construct", action="store_true")
     args = parser.parse_args()
-    if not args.smoke:
-        parser.error("only the model-free smoke is authorized before design review")
-    print(json.dumps(smoke(), indent=2, sort_keys=True))
+    if args.smoke == args.construct:
+        parser.error("select exactly one of --smoke or --construct")
+    config = _config()
+    construction = config["construction"]
+    counts = (
+        {"train": 4, "qualification": 3, "confirmation": 3}
+        if args.smoke
+        else {
+            split: int(construction["per_family"][split])
+            for split in ("train", "qualification", "confirmation")
+        }
+    )
+    result = construct(
+        counts=counts,
+        seed=int(construction["seed"]),
+        shuffle_seed=int(construction["shuffle_seed"]),
+        mode="model_free_smoke" if args.smoke else "model_free_full_construction",
+    )
+    print(json.dumps(result, indent=2, sort_keys=True))
     return 0
 
 

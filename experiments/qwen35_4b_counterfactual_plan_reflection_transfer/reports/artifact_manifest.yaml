@@ -8,10 +8,13 @@ reproducibility:
   smoke_command: >-
     PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B
     experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/run.py --smoke
-  full_command: not authorized before adversarial design and implementation review
+  full_command: >-
+    PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B
+    experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/run.py --construct
   required_external_artifacts: []
 notes: >-
-  Intake only. Qwen/Qwen3.5-4B revision 851bf6e8...d0a is the sole permitted
-  future model. Reserved construction/shuffle/training/qualification/confirmation
-  seeds are 73301/73319/47,53/88031/88037. No adapter, model output, activation,
-  Jacobian, capability, benchmark, or hidden artifact exists.
+  Full CPU construction is authorized and passes, but adversarial status remains
+  HOLD. Qwen/Qwen3.5-4B revision 851bf6e8...d0a is the sole permitted future
+  model. Reserved construction/shuffle/training/qualification/confirmation seeds
+  are 73301/73319/47,53/88031/88037. No tokenizer, adapter, model output,
+  activation, Jacobian, capability, benchmark, or hidden artifact exists.

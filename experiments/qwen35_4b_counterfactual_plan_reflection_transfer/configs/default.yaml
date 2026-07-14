@@ -12,7 +12,7 @@ construction:
   depth: 3
   families: [list, string, register]
   per_family:
-    train: 96
+    train: 72
     qualification: 48
     confirmation: 48
     retention_depth_1_2: 24
@@ -21,6 +21,8 @@ construction:
   require_zero_cross_split_composition_collisions: true
   require_zero_cross_split_behavior_collisions: true
   require_zero_exact_answer_strings_in_reflections: true
+  require_unique_global_depth_3_composition_per_behavior: true
+  require_visible_examples_identify_exact_ordered_plan: true
 training_proposal:
   seeds: [47, 53]
   arms:
