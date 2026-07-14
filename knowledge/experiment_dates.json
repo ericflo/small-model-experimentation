@@ -1247,6 +1247,14 @@
     "git commit 531fa77 2026-06-30 10:39:41 -0700 'Add thinking separability probe' (upper bound; dir first appears post-import)"
    ]
   },
+  "qwen35_4b_tokenizer_eos_answer_commit_factorial": {
+   "start": "2026-07-14",
+   "end": "2026-07-14",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_tool_seeded_banking": {
    "start": "2026-07-04",
    "end": "2026-07-04",
