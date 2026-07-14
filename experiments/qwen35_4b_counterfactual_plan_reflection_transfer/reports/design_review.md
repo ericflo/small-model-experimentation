@@ -442,3 +442,50 @@ qualification, confirmation, cache, or tensor-payload content.
 Authorization remains tokenizer-only. A fresh Review 8 must attack the exact pushed
 implementation and its full artifact chain before any model, GPU, training, or
 evaluation flag changes.
+
+## Review 8 — 2026-07-14
+
+**Reviewed commit:** `dc95ab8cdea18257ca7630bf59d6594eea70f9e7`
+
+**Verdict:** **HOLD full implementation.**
+
+The independent read-only audit confirmed the exact clean commit at `origin/main`,
+green Validate Repository run `29362140847`, green Publish Research Site run
+`29362140803`, AST parsing for all 44 tracked experiment Python files, and 54 unique
+restricted model-free/synthetic checks. It confirmed false remote-code parity, the six
+separate YAML gates, raw-byte tensor replay, two-seed stage cardinality, outcome-blind
+reservoir CLI and compute-only stop, maximum-block failure, and transitive final replay.
+
+Six blockers remain:
+
+1. The tokenizer commitment pins five files but does not reject extra semantic files.
+   Transformers can resolve `added_tokens.json` and `special_tokens_map.json`; a
+   synthetic added-token file beside the five pinned files was accepted. Tokenizer
+   users also load by model ID rather than from one closed authenticated local path,
+   and downstream code does not enforce the recorded tokenizer class.
+2. Post-load integrity rehashes only current filesystem bytes. A
+   validate→swap→load→restore race leaves different state resident in vLLM or
+   Transformers while both pre/post hashes pass. No opened-inode/load-window or
+   resident-state commitment exists.
+3. Training records GPU UUID while vLLM omits it, and no validator requires training,
+   correct confirmation, frozen block zero, and reservoir blocks to share hardware.
+   Synthetic fast-training/slow-evaluation receipts passed the wall-time target.
+4. Compute-controlling counters are trusted rather than reconstructed. Synthetic empty
+   token arrays with a billion claimed sampled tokens passed scoring, and fabricated
+   metadata produced a two-billion-token reservoir charge. Booleans/non-finite numeric
+   values are not uniformly rejected.
+5. The fixed multiplier of three omits the additional forward recomputation induced by
+   the frozen gradient-checkpointed training recipe, so token-forward accounting can
+   undercharge training when that unit binds.
+6. Ordinary `git status --porcelain` ignores code-bearing ignored files. A malicious,
+   timestamp-valid `.pyc` or ignored in-worktree environment can affect execution while
+   the detached worktree receipt still reports clean exact-SHA state.
+
+Required remediation is a closed tokenizer file/absence surface loaded only from the
+authenticated local snapshot; an inode/event- or resident-state-bound load window with
+swap-restore tests; exact GPU/runtime parity; raw token-array reconstruction and strict
+finite/non-boolean numeric schemas; conservative checkpoint-aware compute accounting;
+and explicit rejection/authentication of ignored executable state and interpreter
+provisioning. Authorization remains tokenizer-only. Review 8 read no benchmarks,
+protected outputs, caches, qualification/confirmation contents, or tensor payloads and
+made zero tokenizer/model/GPU/training/evaluation/Jacobian calls.

@@ -23,6 +23,12 @@
 - All authorization flags remain unchanged. The historical tokenizer receipt is
   invalid as a training prerequisite under the stronger schema; a fresh exact-SHA
   tokenizer-only receipt awaits Review 8.
+- Review 8 on exact `dc95ab8cdea18257ca7630bf59d6594eea70f9e7` returned HOLD.
+  It confirmed the structural matched-compute and provenance repairs but reproduced
+  six new false-acceptance classes: extra tokenizer-semantic files, swap-load-restore
+  TOCTOU, cross-hardware wall matching, fabricated raw/metadata token counters,
+  checkpoint-recomputation undercharging, and ignored executable state inside a
+  nominally clean worktree. No execution authorization changes occur.
 
 ## 2026-07-14 — discovery and scaffold
 

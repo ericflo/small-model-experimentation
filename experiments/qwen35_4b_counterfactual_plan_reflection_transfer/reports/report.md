@@ -42,10 +42,11 @@ The repaired design now includes a rendered-token-matched non-reflective plan-la
 arm, a direct action-branch positive control, real retention data, exact target-only
 loss masks, within-optimizer-step derangement, a frozen QLoRA recipe, paired
 qualification/confirmation gates, and a specified literal-reflection diagnostic.
-The implementation now additionally binds exact base/tokenizer/runtime bytes across
+The implementation additionally attempts to bind exact base/tokenizer/runtime bytes across
 training, merge, and post-vLLM-load boundaries, enforces a detached execution worktree,
 and makes end-to-end matched-compute sample-more a transitive final-stage gate. Model,
-GPU, training, evaluation, and J-space execution remain unauthorized pending Review 8.
+GPU, training, evaluation, and J-space execution remain unauthorized after Review 8
+reproduced six remaining false-acceptance classes.
 
 ## Oracle Versus Deployable Evidence
 
@@ -55,15 +56,17 @@ against frozen sample-more, can become deployable evidence.
 
 ## Interpretation
 
-No capability inference is licensed. The complete Review-7 remediation passes 80
-pinned-environment model-free tests, but this is implementation evidence only. A fresh
-adversarial review of the exact pushed SHA remains blocking.
+No capability inference is licensed. The Review-7 remediation passes 80 local
+pinned-environment model-free tests, but Review 8 demonstrated that extra tokenizer
+files, transient load swaps, cross-hardware timing, and fabricated token counters can
+still pass. Checkpointed training is undercharged and ignored executable state is not
+part of the clean-worktree decision.
 
 ## Next Experiments
 
-Push the complete Review-7 remediation, obtain a fresh Review-8 verdict, and remediate
-any new counterexample before changing authorization. Nothing beyond tokenizer-only
-work is authorized yet.
+Remediate all six Review-8 counterexamples model-free, publish the exact implementation,
+and obtain a fresh Review-9 verdict before changing authorization. Nothing beyond
+tokenizer-only work is authorized yet.
 
 ## Artifact Manifest
 
