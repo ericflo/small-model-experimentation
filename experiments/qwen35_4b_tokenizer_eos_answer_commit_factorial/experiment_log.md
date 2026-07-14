@@ -36,6 +36,10 @@
   serialization and an invalid disjointness proof. Prospectively froze an
   injective base-24/two-byte program ID for all 13,824 semantic triples and the
   correct cap-bounded-overlap impossibility proof. Model calls remain zero.
+- Sixth-pass focused review passed those repairs, while the global scan held on
+  stale abbreviated proofs in the intake and README. Aligned both with the
+  <=2/<=1 cap-overlap bounds and `86>48`/`43>24` arithmetic. Model calls remain
+  zero.
 
 ## Scaffold
 

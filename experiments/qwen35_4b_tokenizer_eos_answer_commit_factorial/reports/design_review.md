@@ -144,3 +144,16 @@ exactly two-byte big-endian for hashing. It also replaces disjointness with the
 cap-bounded-overlap proof: global overlap <=2 makes `44+44-2>48`, and per-arity
 overlap <=1 makes `22+22-1>24`. Live calls remain held pending another exact-
 commit design rereview and implementation release review.
+
+## Independent review: sixth pass
+
+Rereview of exact pushed/green commit
+`d919a969fd8bd0d3b5bfdf170421fda77530716a` returned `HOLD_DESIGN`. The
+focused audit passed the semantic program ID and overlap proof, but the global
+scan found stale summaries in the intake and README that still attributed
+dual-qualification impossibility to prefix equality plus exactness alone.
+
+Those summaries now explicitly include the cap ceilings and the same bounded-
+overlap arithmetic as the preregistration: overlap <=2 gives `44+44-2>48`, and
+overlap <=1 per arity gives `22+22-1>24`. Live calls remain held pending another
+exact-commit design rereview and implementation release review.

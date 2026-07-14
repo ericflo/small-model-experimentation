@@ -39,7 +39,7 @@ oracle ceilings remain sealed.
 
 ## Interpretation
 
-Five independent review passes returned prospective holds. The contract now
+Six independent review passes returned prospective holds. The contract now
 also freezes the dual-qualification invariant, distinct parse/cap metrics,
 calibration/transport balance, arm-blind selection and all-eight-row task
 success, resource-exhaustion terminal, and pilot-only claim scope. It awaits
@@ -58,6 +58,9 @@ while malformed stop/length/reason geometry is an authentication failure.
 Fifth-pass review replaced tokenizer-dependent selector identity with a
 semantic base-24/two-byte program ID and corrected the dual-qualification proof
 to account for the at-most-two exact-cap overlaps.
+
+Sixth-pass global review aligned the intake and README summaries with that
+cap-bounded proof; no scientific or implementation result exists yet.
 
 ## Next Experiments
 

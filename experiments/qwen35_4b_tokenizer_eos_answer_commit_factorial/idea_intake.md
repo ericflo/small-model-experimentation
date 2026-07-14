@@ -44,9 +44,11 @@ transport, and mechanics artifacts.
 - If tokenizer EOS qualifies and HF EOS does not, the answer ABI failure is a
   causal termination-boundary mismatch.
 - Dual qualification within a matched thinking/prefix pair is mathematically
-  incompatible with authenticated prefix equality plus the 44/48 exactness
-  floors; observing it is a scoring-invariant failure, not a usable interface
-  result.
+  incompatible with authenticated prefix equality, the 44/48 and 22/24
+  exactness floors, and the cap ceilings. Shared exact-cap overlap is bounded
+  at <=2 globally and <=1 per arity, so `44+44-2=86>48` and
+  `22+22-1=43>24`; observing dual qualification is a scoring-invariant failure,
+  not a usable interface result.
 - If neither qualifies, retire this materialized-residual generation branch;
   do not try another cap or parser tweak.
 - If an interface qualifies, disjoint mechanics can finally adjudicate

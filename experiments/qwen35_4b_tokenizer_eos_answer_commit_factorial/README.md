@@ -84,9 +84,10 @@ This is an interface hypothesis, not yet a capability hypothesis.
 The prefix cells share tasks and seed derivation and are paired conditions, not
 independent replications. Only tokenizer-pass/HF-fail in the selected matched
 cell supports a causal termination-boundary claim. Dual qualification within
-one matched thinking/prefix pair is mathematically incompatible with the
-authenticated-prefix/exactness contract and terminates as a scoring invariant
-violation.
+one matched thinking/prefix pair is impossible under the authenticated-prefix,
+exactness, and cap gates: shared exact-cap overlap is <=2 globally and <=1 per
+arity, yielding `44+44-2>48` and `22+22-1>24`. Any observed dual qualification
+terminates as a scoring invariant violation.
 
 ## Run
 
