@@ -12,6 +12,14 @@ import scoring as S  # noqa: E402
 
 
 class ScoringTests(unittest.TestCase):
+    @staticmethod
+    def output(text: str, tokens: int) -> dict:
+        return {
+            "text": text,
+            "n_sampled_tokens": tokens,
+            "n_injected_tokens": 0,
+        }
+
     def test_strict_parser_accepts_only_exact_three_output_array(self) -> None:
         self.assertEqual(S.parse_answer("</think>\nANSWER: [[1],\"x\",[2,3]]"), [[1], "x", [2, 3]])
         for bad in (
@@ -55,6 +63,32 @@ class ScoringTests(unittest.TestCase):
         self.assertEqual(scored["answer_limit_contact"], 0.25)
         self.assertEqual(scored["periodic_loop_contact"], 0.25)
         self.assertEqual(scored["logical_tokens"], 48)
+
+    def test_literal_diagnostic_uses_shortest_base_prefix_reaching_token_spend(self) -> None:
+        answer = "ANSWER: [1,2,3]"
+        reflection = [{"id": "t1", "outputs": [self.output("PLAN: x", 5)] * 4}]
+        action = [
+            {
+                "id": f"t1::literal::{index}",
+                "meta": {"parent_task_id": "t1", "sample_index": index},
+                "outputs": [self.output(answer if index == 3 else "bad", 10)],
+            }
+            for index in range(4)
+        ]
+        base = [
+            {
+                "id": "t1",
+                "outputs": [self.output("bad", 25), self.output(answer, 25), self.output("bad", 25)],
+            }
+        ]
+        labels = [{"id": "t1", "family": "list", "split": "qualification", "answers": [1, 2, 3]}]
+        scored = S.score_literal_reflection_diagnostic(
+            reflection, action, base, labels, literal_candidate_count=4
+        )[0]
+        self.assertEqual(scored["literal_logical_tokens"], 60)
+        self.assertEqual(scored["matched_base_candidates"], 3)
+        self.assertEqual(scored["literal_coverage"], 1.0)
+        self.assertEqual(scored["matched_base_coverage"], 1.0)
 
 
 if __name__ == "__main__":

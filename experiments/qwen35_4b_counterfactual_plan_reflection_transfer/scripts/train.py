@@ -118,6 +118,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--arm", choices=TRAINING_ARMS, required=True)
     parser.add_argument("--seed", type=int, required=True)
+    parser.add_argument("--stage-receipt", type=Path, required=True)
     parser.add_argument("--tokenizer-receipt", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
@@ -128,6 +129,18 @@ def main() -> int:
     allowed_seeds = set(config["training"]["staged_seeds"].values())
     if args.seed not in allowed_seeds:
         raise SystemExit(f"seed {args.seed} is not preregistered")
+    stage_receipt = json.loads(args.stage_receipt.read_text())
+    expected_stage = (
+        "screen_training"
+        if args.seed == config["training"]["staged_seeds"]["screen"]
+        else "replication_training"
+    )
+    if (
+        stage_receipt.get("experiment_id") != config["experiment_id"]
+        or stage_receipt.get("authorized_stage") != expected_stage
+        or stage_receipt.get("config_sha256") != _sha256_file(config_path)
+    ):
+        raise SystemExit("stage receipt does not authorize this training seed/config")
     positive = config["training"]["positive_control"]["arm"]
     if args.arm == positive and args.seed != config["training"]["staged_seeds"]["screen"]:
         raise SystemExit("the noncomparable positive control has no replication-seed authorization")
@@ -190,6 +203,7 @@ def main() -> int:
                 "seed": args.seed,
                 "config_sha256": _sha256_file(config_path),
                 "tokenizer_receipt_sha256": _sha256_file(args.tokenizer_receipt),
+                "stage_receipt_sha256": _sha256_file(args.stage_receipt),
             },
             indent=2,
             sort_keys=True,
@@ -272,10 +286,11 @@ def main() -> int:
         "train_loss": float(outcome.training_loss),
         "config_sha256": _sha256_file(config_path),
         "tokenizer_receipt_sha256": _sha256_file(args.tokenizer_receipt),
+        "stage_receipt_sha256": _sha256_file(args.stage_receipt),
         "parity_sha256": hashlib.sha256(
             json.dumps(parity, sort_keys=True, separators=(",", ":")).encode()
         ).hexdigest(),
-        "adapter_tree_sha256": _sha256_tree(args.output),
+        "adapter_tree_excluding_training_receipt_sha256": _sha256_tree(args.output),
     }
     receipt_path = args.output / "training_receipt.json"
     receipt_path.write_text(json.dumps(training_receipt, indent=2, sort_keys=True) + "\n")

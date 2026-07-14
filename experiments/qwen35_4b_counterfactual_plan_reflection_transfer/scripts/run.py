@@ -62,6 +62,7 @@ def construct(
     counts: dict[str, int],
     retention_per_family_per_depth: int,
     seed: int,
+    retention_seed: int,
     shuffle_seed: int,
     schedule_seed: int,
     per_family_per_optimizer_group: int,
@@ -69,7 +70,7 @@ def construct(
 ) -> dict[str, object]:
     tasks = build_corpus(counts=counts, seed=seed)
     validation = validate_corpus(tasks, counts)
-    retention = build_retention_corpus(retention_per_family_per_depth, seed + 36)
+    retention = build_retention_corpus(retention_per_family_per_depth, retention_seed)
     retention_validation = validate_retention_corpus(
         retention, retention_per_family_per_depth
     )
@@ -157,6 +158,7 @@ def main() -> int:
             1 if args.smoke else int(construction["per_family"]["retention_per_family_per_depth"])
         ),
         seed=int(construction["seed"]),
+        retention_seed=int(construction["retention_seed"]),
         shuffle_seed=int(construction["shuffle_seed"]),
         schedule_seed=int(construction["schedule_seed"]),
         per_family_per_optimizer_group=(

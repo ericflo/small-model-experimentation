@@ -129,6 +129,54 @@ def _sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+def _sha256_tree(path: Path, excluded: set[str] | None = None) -> str:
+    excluded = excluded or set()
+    digest = hashlib.sha256()
+    for item in sorted(candidate for candidate in path.rglob("*") if candidate.is_file()):
+        relative = item.relative_to(path).as_posix()
+        if relative in excluded:
+            continue
+        digest.update(relative.encode())
+        digest.update(b"\0")
+        digest.update(bytes.fromhex(_sha256_file(item)))
+    return digest.hexdigest()
+
+
+def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
+    if path is None:
+        return None
+    receipt_path = path / "merge_receipt.json"
+    if not receipt_path.is_file():
+        raise ValueError("merged model override lacks merge_receipt.json")
+    receipt = json.loads(receipt_path.read_text())
+    if (
+        receipt.get("model_id") != MODEL_ID
+        or receipt.get("model_revision") != MODEL_REVISION
+        or int(receipt.get("applied_lora_modules", 0)) < 1
+        or receipt.get("source_arm")
+        not in {
+            "reflection_correct",
+            "reflection_shuffled",
+            "auxiliary_plan_label_correct",
+            "direct_plan_answer_positive_control",
+        }
+        or receipt.get("source_seed") not in {47, 53}
+    ):
+        raise ValueError("merged model override receipt has invalid base or delta identity")
+    observed = _sha256_tree(path, excluded={"merge_receipt.json"})
+    if receipt.get("merged_tree_sha256") != observed:
+        raise ValueError("merged model override tree hash differs from its receipt")
+    return {
+        "path": str(path.resolve()),
+        "merge_receipt_sha256": _sha256_file(receipt_path),
+        "merged_tree_sha256": observed,
+        "source_training_receipt_sha256": receipt.get("source_training_receipt_sha256"),
+        "source_adapter_tree_sha256": receipt.get("source_adapter_tree_sha256"),
+        "source_arm": receipt.get("source_arm"),
+        "source_seed": receipt.get("source_seed"),
+    }
+
+
 def _run_text(command: Sequence[str]) -> str:
     try:
         return subprocess.run(
@@ -394,6 +442,10 @@ class EngineConfig:
             raise ValueError("max_num_seqs and max_num_batched_tokens must be positive")
         if self.adapter is not None and self.model_override is not None:
             raise ValueError("adapter and model_override are mutually exclusive")
+        if self.adapter is not None:
+            raise ValueError(
+                "runtime LoRA adapters are forbidden for Qwen3.5; use a receipt-bound merged model"
+            )
         if self.model_override is not None and not self.model_override.is_dir():
             raise ValueError("model_override must be an existing merged-checkpoint directory")
         if self.cudagraph_capture_sizes is not None:
@@ -645,6 +697,7 @@ class VLLMRunner:
                     )
         self.config = config
         self.adapter_info = _validate_adapter(config.adapter)
+        self.model_override_info = _validate_model_override(config.model_override)
         self._closed = False
 
         # In-process vLLM intentionally seeds Python, NumPy, and Torch. Capture
@@ -1335,6 +1388,7 @@ class VLLMRunner:
             "sampling": dataclasses.asdict(sampling),
             "resolved_sampling": sampling.resolved_sampling(),
             "adapter": self.adapter_info,
+            "model_override": self.model_override_info,
             "think_token_ids": {
                 "open": self.think_open_id,
                 "close": self.think_close_id,
@@ -1430,7 +1484,7 @@ def _smoke_records(count: int) -> list[dict[str, Any]]:
     ]
 
 
-def _write_json_atomic(path: Path, value: Any, *, jsonl: bool = False) -> None:
+def _write_json_atomic(path: Path, value: Any, *, jsonl: bool = False) -> str:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(path.name + ".tmp")
     with temporary.open("w", encoding="utf-8") as handle:
@@ -1440,7 +1494,9 @@ def _write_json_atomic(path: Path, value: Any, *, jsonl: bool = False) -> None:
         else:
             json.dump(value, handle, indent=2, ensure_ascii=False)
             handle.write("\n")
+    digest = _sha256_file(temporary)
     temporary.replace(path)
+    return digest
 
 
 def _parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
@@ -1578,7 +1634,12 @@ def main(argv: Sequence[str] | None = None) -> int:
             "description": input_description,
             "sha256": input_sha256,
         }
-        _write_json_atomic(args.output, rows, jsonl=True)
+        output_sha256 = _write_json_atomic(args.output, rows, jsonl=True)
+        summary["output"] = {
+            "description": "generated JSONL",
+            "sha256": output_sha256,
+            "rows": len(rows),
+        }
         _write_json_atomic(metadata_path, summary)
         timing = summary["timing"]
         counts = summary["counts"]

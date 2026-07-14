@@ -6,6 +6,7 @@ import io
 import json
 import os
 import sys
+import tempfile
 import types
 import unittest
 from pathlib import Path
@@ -64,6 +65,30 @@ class EngineConfigCaptureGeometryTests(unittest.TestCase):
                 model_override=RUNNER_PATH.parent,
                 adapter=RUNNER_PATH.parent,
             ).validate()
+        with self.assertRaisesRegex(ValueError, "runtime LoRA adapters are forbidden"):
+            runner.EngineConfig(adapter=RUNNER_PATH.parent).validate()
+
+    def test_merged_override_receipt_binds_full_tree(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / "weights.safetensors").write_bytes(b"weights")
+            tree_hash = runner._sha256_tree(root)
+            receipt = {
+                "model_id": runner.MODEL_ID,
+                "model_revision": runner.MODEL_REVISION,
+                "applied_lora_modules": 7,
+                "merged_tree_sha256": tree_hash,
+                "source_training_receipt_sha256": "a" * 64,
+                "source_adapter_tree_sha256": "b" * 64,
+                "source_arm": "reflection_correct",
+                "source_seed": 47,
+            }
+            (root / "merge_receipt.json").write_text(json.dumps(receipt))
+            validated = runner._validate_model_override(root)
+            self.assertEqual(validated["merged_tree_sha256"], tree_hash)
+            (root / "weights.safetensors").write_bytes(b"tampered")
+            with self.assertRaisesRegex(ValueError, "tree hash differs"):
+                runner._validate_model_override(root)
 
     def test_explicit_capture_list_requires_strict_positive_tied_geometry(self) -> None:
         runner.EngineConfig(
@@ -111,6 +136,16 @@ class EngineConfigCaptureGeometryTests(unittest.TestCase):
 
 
 class PackageInventoryTests(unittest.TestCase):
+    def test_atomic_json_writer_returns_exact_file_hash(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary) / "rows.jsonl"
+            digest = runner._write_json_atomic(
+                output, [{"id": "one"}, {"id": "two"}], jsonl=True
+            )
+
+            self.assertEqual(digest, runner._sha256_file(output))
+            self.assertEqual(len(output.read_text().splitlines()), 2)
+
     def test_vendored_duplicate_cannot_override_real_distribution(self) -> None:
         real = SimpleNamespace(
             metadata={"Name": "packaging"},

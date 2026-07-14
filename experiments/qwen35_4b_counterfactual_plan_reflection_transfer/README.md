@@ -140,6 +140,11 @@ four-arm record and optimizer-schedule hashes. A Python audit hook denies file a
 directory access beneath the repository benchmark root. This remains model-free and
 does not lift the adversarial HOLD.
 
+Review-2 remediation additionally makes all promotion stages receipt-gated, binds
+runner metadata to the generated JSONL and exact engine/environment/checkpoint lineage,
+requires a real merged-adapter ON/OFF effect, and makes retention and literal-reflection
+controls executable. These repairs remain non-authorizing until independently reviewed.
+
 ## Interpretation
 
 The paper unlocks a training hypothesis, not an already-demonstrated Qwen capability.
@@ -167,10 +172,15 @@ additional sampling. No scientific result exists yet.
 - `scripts/tokenizer_receipt.py`
 - `scripts/train.py`
 - `scripts/merge_adapter.py`
+- `scripts/adapter_behavior_gate.py`
 - `scripts/build_eval_inputs.py`
+- `scripts/build_literal_action_inputs.py`
 - `scripts/score.py`
+- `scripts/score_literal.py`
 - `scripts/analyze.py`
 - `scripts/calibration_gate.py`
+- `scripts/retention_gate.py`
+- `scripts/authorize_stage.py`
 - `tests/test_taskgen.py`
 - `tests/test_records.py`
 - `tests/test_scoring.py`

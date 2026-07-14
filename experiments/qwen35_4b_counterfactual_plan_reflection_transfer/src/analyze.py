@@ -80,6 +80,8 @@ def evaluate_seed_block(
     rows: list[dict[str, Any]],
     thresholds: dict[str, Any],
     bootstrap: dict[str, Any],
+    expected_task_ids: set[str],
+    expected_families: set[str],
 ) -> dict[str, Any]:
     """Apply the exact per-seed qualification/confirmation capability gates."""
     required = {
@@ -92,6 +94,12 @@ def evaluate_seed_block(
     missing = required - observed
     if missing:
         raise ValueError(f"missing required evaluation arms: {sorted(missing)}")
+    for arm in required:
+        arm_rows = _index(rows, arm)
+        if set(arm_rows) != expected_task_ids:
+            raise ValueError(f"{arm} task IDs differ from the sealed evaluation split")
+        if {str(row["family"]) for row in arm_rows.values()} != expected_families:
+            raise ValueError(f"{arm} does not contain every sealed family")
     resamples = int(bootstrap["paired_task_resamples"])
     seed = int(bootstrap["seed"])
     shuffle = _comparison(
@@ -175,7 +183,11 @@ def evaluate_positive_control(
     rows: list[dict[str, Any]],
     thresholds: dict[str, Any],
     bootstrap: dict[str, Any],
+    expected_task_ids: set[str],
 ) -> dict[str, Any]:
+    for arm in ("direct_plan_answer_positive_control_action", "frozen_action"):
+        if set(_index(rows, arm)) != expected_task_ids:
+            raise ValueError(f"{arm} task IDs differ from the sealed evaluation split")
     comparison = _comparison(
         rows,
         "direct_plan_answer_positive_control_action",
@@ -196,9 +208,12 @@ def evaluate_positive_control(
 
 
 def evaluate_calibration(
-    rows: list[dict[str, Any]], thresholds: dict[str, Any]
+    rows: list[dict[str, Any]], thresholds: dict[str, Any], expected_task_ids: set[str]
 ) -> dict[str, Any]:
-    frozen = list(_index(rows, "frozen_action").values())
+    indexed = _index(rows, "frozen_action")
+    if set(indexed) != expected_task_ids:
+        raise ValueError("calibration task IDs differ from the sealed calibration split")
+    frozen = list(indexed.values())
     if not frozen:
         raise ValueError("calibration has no frozen rows")
     rates = {
@@ -223,8 +238,19 @@ def evaluate_calibration(
 
 
 def evaluate_retention(
-    rows: list[dict[str, Any]], arm: str, depth_min: float, family_min: float
+    rows: list[dict[str, Any]],
+    arm: str,
+    depth_min: float,
+    family_min: float,
+    expected_task_ids: set[str],
+    expected_families: set[str],
 ) -> dict[str, Any]:
+    for compared_arm in (arm, "frozen_action"):
+        indexed_arm = _index(rows, compared_arm)
+        if set(indexed_arm) != expected_task_ids:
+            raise ValueError(f"{compared_arm} task IDs differ from sealed retention")
+        if {str(row["family"]) for row in indexed_arm.values()} != expected_families:
+            raise ValueError(f"{compared_arm} does not contain every retention family")
     paired = paired_values(rows, arm, "frozen_action", "coverage_at_16")
     indexed = _index(rows, arm)
     by_depth: dict[int, list[float]] = {}
@@ -235,6 +261,8 @@ def evaluate_retention(
         by_family.setdefault(family, []).append(delta)
     depth_delta = {depth: mean(values) for depth, values in sorted(by_depth.items())}
     family_delta = {family: mean(values) for family, values in sorted(by_family.items())}
+    if set(depth_delta) != {1, 2}:
+        raise ValueError("retention does not contain both sealed depths")
     checks = {
         "each_depth": all(value >= depth_min for value in depth_delta.values()),
         "each_family": all(value >= family_min for value in family_delta.values()),

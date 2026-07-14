@@ -58,6 +58,14 @@ def main() -> int:
         raise SystemExit(f"output already exists: {args.output}")
     source_receipt_path = args.adapter / "training_receipt.json"
     source_receipt = json.loads(source_receipt_path.read_text())
+    observed_adapter_tree = _sha256_tree(
+        args.adapter, excluded={"training_receipt.json"}
+    )
+    if (
+        source_receipt.get("adapter_tree_excluding_training_receipt_sha256")
+        != observed_adapter_tree
+    ):
+        raise ValueError("adapter tree differs from its training receipt")
     model_id = config["model"]["id"]
     revision = config["model"]["revision"]
     if (
@@ -68,6 +76,10 @@ def main() -> int:
     peft_config = json.loads((args.adapter / "adapter_config.json").read_text())
     if int(peft_config["r"]) != int(config["training"]["recipe"]["lora_rank"]):
         raise ValueError("adapter rank differs from preregistration")
+    if set(peft_config["target_modules"]) != set(
+        config["training"]["recipe"]["target_modules"]
+    ):
+        raise ValueError("adapter target modules differ from preregistration")
     scale = float(peft_config["lora_alpha"]) / float(peft_config["r"])
     model = AutoModelForImageTextToText.from_pretrained(
         model_id,
@@ -78,14 +90,34 @@ def main() -> int:
     )
     tail_to_path: dict[str, list[str]] = {}
     for name, module in model.named_modules():
-        if ".layers." in name and hasattr(module, "weight"):
-            tail = name.split(".layers.", 1)[1]
+        if ".language_model.layers." in name and hasattr(module, "weight"):
+            tail = name.split(".language_model.layers.", 1)[1]
             tail_to_path.setdefault(tail, []).append(name)
 
     applied = 0
     adapter_path = args.adapter / "adapter_model.safetensors"
     with safe_open(str(adapter_path), "pt") as tensors:
-        keys = [key for key in tensors.keys() if key.endswith(".lora_A.weight")]
+        all_keys = set(tensors.keys())
+        keys = sorted(key for key in all_keys if key.endswith(".lora_A.weight"))
+        expected_b = {key.replace(".lora_A.", ".lora_B.") for key in keys}
+        observed_b = {key for key in all_keys if key.endswith(".lora_B.weight")}
+        if expected_b != observed_b or len(all_keys) != len(keys) + len(observed_b):
+            raise ValueError("adapter tensor set is not an exact A/B LoRA pair set")
+        observed_cores = {
+            key[len(ADAPTER_PREFIX):-len(".lora_A.weight")]
+            for key in keys
+            if key.startswith(ADAPTER_PREFIX)
+        }
+        target_modules = set(config["training"]["recipe"]["target_modules"])
+        expected_cores = {
+            tail
+            for tail, paths in tail_to_path.items()
+            if len(paths) == 1 and tail.rsplit(".", 1)[-1] in target_modules
+        }
+        if observed_cores != expected_cores:
+            raise ValueError(
+                "adapter LoRA core set differs from the exact composite text-module target set"
+            )
         for key_a in keys:
             if not key_a.startswith(ADAPTER_PREFIX):
                 raise ValueError(f"unexpected adapter key layout: {key_a}")
@@ -124,7 +156,10 @@ def main() -> int:
         "model_id": model_id,
         "model_revision": revision,
         "source_training_receipt_sha256": _sha256_file(source_receipt_path),
+        "source_adapter_tree_sha256": observed_adapter_tree,
         "source_adapter_sha256": _sha256_file(adapter_path),
+        "source_arm": source_receipt["arm"],
+        "source_seed": source_receipt["seed"],
         "applied_lora_modules": applied,
         "merged_tree_sha256": _sha256_tree(args.output),
     }

@@ -111,8 +111,23 @@ training:
 evaluation:
   backend: vllm_only_for_all_compared_generation_arms
   adapter_deployment: merged_composite_checkpoint_required
-  adapter_gate: real_adapter_on_vs_off_must_change_behavior
-  max_model_len: 4096
+  adapter_gate:
+    split: calibration
+    run_seed: 88029
+    thinking_budget: 256
+    answer_max_tokens: 128
+    candidate_count: 1
+    greedy: true
+    logprobs: 1
+    pass: at_least_one_token_sequence_or_sampled_cumulative_logprob_differs
+  engine:
+    max_model_len: 4096
+    gpu_memory_utilization: 0.85
+    max_num_seqs: 64
+    max_num_batched_tokens: 16384
+    cudagraph_capture_sizes: [1, 2, 4, 8, 16, 32, 64]
+    prefix_caching: false
+    async_scheduling: false
   thinking_budget: 1024
   answer_max_tokens: 128
   temperature: 0.6
@@ -147,6 +162,11 @@ evaluation:
     candidate_count: 4
     reflection_thinking: false
     reflection_max_tokens: 64
+    reflection_temperature: 0.7
+    reflection_top_p: 0.8
+    reflection_top_k: 20
+    reflection_seed: 88047
+    action_seed: 88049
     action_settings: same_as_primary
     append_exact_generated_reflection_as_assistant_turn: true
     matched_frozen_reserve_candidates: 16
@@ -192,8 +212,9 @@ decision_gates:
   staging:
     - frozen_base_must_pass_calibration_before_any_training
     - screen_seed_all_four_arms_must_pass_their_qualification_gates
+    - screen_correct_reflection_must_pass_retention_before_replication_training
     - replication_seed_trains_three_nonpositive_control_arms_only
-    - both_seeds_must_independently_pass_qualification_before_confirmation_opens
+    - both_seeds_must_independently_pass_qualification_and_retention_before_confirmation_opens
     - both_seeds_must_independently_pass_confirmation_no_seed_selection_or_ensembling
     - any_gate_miss_is_preserved_and_stops_that_branch
 

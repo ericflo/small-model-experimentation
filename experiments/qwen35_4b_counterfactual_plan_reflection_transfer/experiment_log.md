@@ -57,3 +57,18 @@
 - Removed the conditional J stage from this result-bearing experiment. A behavioral
   replication can only license a separate experiment with fresh J fit, confirmation,
   and causal evidence.
+- Published design-freeze commit `1cb3c351b1ca14b518abe7cbff02ac67e6134726`;
+  exact Validate Repository `29347022799` and Publish Research Site `29347024862`
+  completed successfully.
+- Review 2 kept training/evaluation on HOLD after reproducing construction and parity:
+  incomplete evidence could satisfy decision functions, provenance and stage ancestry
+  were not enforced, and literal/ON-OFF/retention controls were not executable end to
+  end. Its tokenizer implementation assessment was favorable but not accepted as a
+  clean authorization because an overly broad search surfaced unrelated protected-log
+  lines.
+- Implemented all eight Review 2 remediations model-free: exact evidence sets,
+  output/input/model/environment/checkpoint lineage, mechanical stage receipts,
+  executable retention and literal-reflection controls, adapter ON/OFF proof, and
+  adapter-tree validation. Generated JSONL is now hashed into runner metadata so an
+  output cannot be substituted under otherwise valid provenance. Authorization remains
+  unchanged pending a fresh independent review of the committed revision.
