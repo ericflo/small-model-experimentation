@@ -152,6 +152,10 @@ Its source-anchor means are `0.580068` on the deep stratum (`n=3,072`) and
 `0.810029` on the quick stratum (`n=1,344`), using 4,261,790 sampled tokens.
 This resolves the attempt-1 schema-contract question and supplies one sealed
 comparator only; it does not establish a MOPD gain or routing causality.
+Block-0 non-advantage then scored `0.565173` deep and `0.790951` quick,
+respectively `−0.014895` and `−0.019078` versus that source anchor, using
+4,468,793 sampled tokens. This is one control/source comparison on one block;
+the treatment arms and second block remain necessary.
 
 Together, the three frozen optimizer seeds establish that the registered
 four-round update can complete safely and that strict-deep route supply

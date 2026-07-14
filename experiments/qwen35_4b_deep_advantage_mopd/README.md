@@ -219,8 +219,11 @@ strict journal validator that stopped attempt 1, and atomically published score
 The registered block-0 source anchor is `0.580068` on the deep stratum
 (`n=3,072`) and `0.810029` on the quick stratum (`n=1,344`), using 4,261,790
 sampled tokens. This establishes only the first comparator; it cannot show a
-MOPD gain or causal advantage-routing effect. The remaining sealed arms and
-second block are in progress.
+MOPD gain or causal advantage-routing effect. The block-0 non-advantage control
+then scored `0.565173` deep and `0.790951` quick, respectively `−0.014895` and
+`−0.019078` below the deep source anchor, using 4,468,793 sampled tokens. That
+shows only that this control is weaker on block 0; the treatment arms, remaining
+controls, and second block are still required.
 
 ## NF4/BF16 Interpretation Diagnostic
 

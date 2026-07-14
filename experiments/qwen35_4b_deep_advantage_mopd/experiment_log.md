@@ -525,3 +525,19 @@
   sampled tokens. This is a single source-arm anchor, not treatment evidence;
   block-0 non-advantage evaluation started next with external journal hash
   `b5b1a6c6b19d95630c066ba0767fbaa62f8627836a03deb8384ab71003c7286a`.
+
+## 2026-07-14 — block-0 non-advantage control completes
+
+- The non-advantage control completed the same 4,032-atom/384-episode sealed
+  geometry and passed strict journal validation. `GENERATED.json` and
+  `COMPLETE.json` hash to
+  `42b5c16414a6d3eb1c013990ea47cae02c132c3b983908023bccf107298eb947`
+  and `c614b53218d0c46e89e9ebc185441b7bea6af5c6b364d8a8eda55acef79e0f3d`;
+  the score hashes to
+  `d3e7b57fb437c3ca4194b74f8e7f4fa63ab067d50e62188de8e07d6f6d7ba7d8`.
+- Registered means are `0.565173` deep and `0.790951` quick, respectively
+  `−0.014895` and `−0.019078` versus the block-0 deep source anchor, with
+  4,468,793 sampled tokens. This is a one-block control/source comparison, not
+  treatment evidence or a causal advantage-routing result. Off-policy SFT
+  evaluation started next with external journal hash
+  `fbd64d2cd877e2e84a811337541e1d60de63a3d680ad8fad67fcf785e9db4e2e`.
