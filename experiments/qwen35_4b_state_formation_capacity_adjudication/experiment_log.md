@@ -867,6 +867,36 @@ authorized. After both workflows pass, freeze and adversarially review the separ
 consumer. Remaining trigger evaluations may resume only after that consumer is mechanically ready;
 no result value, LoRA verdict, sealed contrast, or conditional training arm is yet authorized.
 
+## 2026-07-14 — recovery published; seed-7412 trigger completes; operator visibility deviation
+
+- The separate `qwen35_4b_state_formation_analysis_recovery` consumer passed 10/10 focused tests and
+  its non-result smoke at file SHA-256 `02f6f927…43f7`, receipt identity `30353be5…2f8f`, and
+  recovery source contract `6ab26016…e94b`. It changes only the exact registered external prefix and
+  clean descendants before calling the unchanged v11 canonical repository/no-symlink validator.
+- Recovery commit `a6360cc1` and its fully enriched date follow-up `e35e071e` passed both repository
+  workflows. The producer source remains exact v11; no result value was opened by the recovery smoke.
+- The fixed seed-7412 LoRA joint trigger command then completed once, without retry, in
+  1,008.6487309932709 seconds. Summary file SHA-256 is `a18ba761…f4e2`, receipt identity
+  `03eaf96b…597d`, intact rows SHA-256 `dd3f9424…cc4f`, and disabled rows SHA-256
+  `743f821a…c085`; both modes contain exactly 3,072 rows. The receipt reopens checkpoint
+  `90750967…0324`, has exact K=1 bypass, opens only the three trigger payloads, and records zero
+  benchmark/sealed-contrast access and no branch authorization.
+- During post-run integrity validation, an intended metadata-only `jq` projection included the whole
+  `modes` object. That object contains per-split scientific metrics, so their values were printed
+  before seed 7413. This was an unauthorized operator-visibility deviation, not a model, data,
+  receipt, or analyzer defect. It is documented separately and cannot be undone.
+- No metric was classified, pooled, compared to the gate, or used to choose an action. Seed 7413,
+  the analysis code, seed order, fixed finals, thresholds, and all conditional branches were frozen
+  before exposure. To prevent adaptive stopping, seed 7413 remains compulsory and must run unchanged
+  after this exact evaluation/deviation record is published and both workflows pass.
+
+## Current authorization
+
+Only seed-7412 evaluation/deviation documentation, full validation, commit, push, and workflow
+verification are authorized. After both workflows pass, run the fixed seed-7413 LoRA joint trigger
+evaluation. Aggregate analysis and every conditional branch remain blocked on the complete exact
+three-seed evaluation matrix. The terminal report must disclose imperfect operator blinding.
+
 ## 2026-07-13 — source-v9 seed-7411 G0 stops before model load; cache proof repaired
 
 - Non-model setup commit `ff4a8b9b` passed both repository workflows before the exact seed-7411 LoRA

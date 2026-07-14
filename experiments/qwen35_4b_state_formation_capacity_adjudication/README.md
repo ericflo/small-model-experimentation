@@ -1,6 +1,6 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · frozen design unchanged; all three Stage-A LoRA joint training cells complete and published; seed-7411 trigger evaluation complete; source-v11 analysis loader has a pre-result canonical-path defect, so a separate frozen recovery consumer is required before remaining evaluations
+**Status:** in-progress · since 2026-07-13 · frozen design unchanged; recovery consumer published and green; seed-7412 trigger evaluation complete; fixed seed 7413 remains mandatory before aggregate analysis
 
 ## Current status
 
@@ -84,6 +84,22 @@ own registered `../../large_artifacts/...` path after `ROOT / value` preserves `
 same deterministic defect would block `run.py --stage analyze`. It does not invalidate training or
 evaluation production, but source v11 cannot emit a terminal analysis receipt. Preserve the v11
 artifacts unchanged and freeze a separate analysis-recovery consumer before further evaluation.
+The separate recovery experiment passed its exact-prefix smoke at receipt identity
+`30353be5…2f8f`, was published at `a6360cc1`, and reached full site/validation coverage at
+`e35e071e`; both workflows are green. Seed-7412 trigger evaluation then completed in 1,008.649
+seconds with 3,072 intact and 3,072 adaptation-disabled rows. Its summary identity is
+`03eaf96b…597d`; intact rows SHA-256 is `dd3f9424…cc4f`, disabled rows SHA-256 is
+`743f821a…c085`, and summary file SHA-256 is `a18ba761…f4e2`. The receipt binds checkpoint
+`90750967…0324`, exact source v11/config, and records zero benchmark or sealed-contrast access.
+
+An operator validation command accidentally selected the complete `modes` mapping rather than its
+three row-lineage fields, printing seed-7412 per-split scientific metrics before seed 7413. This
+violated the intended within-stage no-value-inspection procedure and is preserved in
+`reports/operator_deviation.md`; no analyzer, classifier, branch, source edit, seed choice, retry,
+checkpoint selection, or conditional action occurred. Seed 7413 and every downstream command were
+already fixed and remain mandatory regardless of the exposed values. The final result must disclose
+that operator blinding was imperfect; it may not use this deviation to stop, repair, or relabel the
+precommitted analysis.
 
 Historically, the integrated source-v10 review was `GO` for reviewed implementation
 `a5a494b7…6f1c4a` and full source contract `979a9012…f394b7`; the 360/360 suite and exact machine gate
