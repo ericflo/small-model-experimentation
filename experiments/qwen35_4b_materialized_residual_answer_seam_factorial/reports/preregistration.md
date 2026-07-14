@@ -176,7 +176,13 @@ ties. It may abstain.
 
 Oracle proposal coverage—whether any generated program is hidden-correct—is a
 diagnostic, not a deployable result. The exhaustive CPU ceiling is also
-diagnostic.
+diagnostic. The ceiling enumerates all 13,824 frozen depth-three programs,
+filters only on public-visible rows, and then reports whether any surviving
+program is hidden-correct. Paired materialized-versus-control selected and
+oracle outcomes receive deterministic 10,000-resample paired bootstrap 95%
+intervals and one-sided exact McNemar tests using bootstrap seed `2026072804`
+plus frozen arm offsets. Every inferential and ceiling field is report-only and
+is excluded from the decision predicate.
 
 `MATERIALIZED_RESIDUAL_LARGE_EFFECT_PILOT_PASS` requires all of:
 

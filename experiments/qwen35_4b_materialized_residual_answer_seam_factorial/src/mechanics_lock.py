@@ -35,6 +35,7 @@ from mechanics_stage import (
     RAW_DIR,
     TRANSPORT_DECISION,
     VISIBLE_SELECTION,
+    analyze_visible,
     canonical_sha256,
     mechanics_sampling_plan,
     selected_interface,
@@ -43,6 +44,7 @@ from transactions import (
     MODEL_ID,
     MODEL_REVISION,
     read_canonical,
+    sha256_bytes,
     sha256_file,
     write_exclusive_durable,
 )
@@ -256,6 +258,20 @@ def verify_mechanics_lock(
         raise RuntimeError("mechanics lock is not committed")
     if _git_bytes("show", f"HEAD:{relative}") != path.read_bytes():
         raise RuntimeError("mechanics lock differs from HEAD")
+    relative_decision = _relative(CALIBRATION_DECISION)
+    if (
+        _git("ls-files", "--error-unmatch", "--", relative_decision)
+        != relative_decision
+        or _git_bytes("show", f"HEAD:{relative_decision}")
+        != CALIBRATION_DECISION.read_bytes()
+        or sha256_bytes(
+            _git_bytes(
+                "show", f"{value['authorization_commit']}:{relative_decision}"
+            )
+        )
+        != value["calibration_decision_sha256"]
+    ):
+        raise RuntimeError("calibration decision differs from mechanics authorization")
     if verify_network:
         _git("fetch", "--quiet", "origin", "main")
     head = _commit_id(_git("rev-parse", "HEAD"))
@@ -358,6 +374,11 @@ def authorize_hidden_read(path: Path = VISIBLE_SELECTION) -> dict[str, Any]:
     if path.is_symlink() or not path.is_file():
         raise RuntimeError("hidden scoring requires a visible selection receipt")
     visible = read_canonical(path)
+    inputs = load_calibration_inputs()
+    decision = read_canonical(CALIBRATION_DECISION)
+    expected_visible = analyze_visible(decision=decision, inputs=inputs)
+    if visible != expected_visible:
+        raise RuntimeError("visible receipt differs from exact visible analysis")
     if (
         visible.get("decision") != "MECHANICS_VISIBLE_SELECTION_FROZEN"
         or visible.get("selector_uses_hidden") is not False

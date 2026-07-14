@@ -14,7 +14,13 @@ from calibration_stage import CalibrationInputs, sampling_configs
 from interface_analysis import answer_cap_contact, choose_interface, score_interface_rows
 from plans import freeze_taskwise_matches
 from protocol import hidden_correct, parse_program, select_visible
-from task_data import CONCRETE_OPERATIONS, OPERATION_TO_ALIAS, operation_from_record
+from stats import paired_report
+from task_data import (
+    DEPTH_THREE,
+    OPERATION_TO_ALIAS,
+    apply_pipeline,
+    operation_from_record,
+)
 from transactions import (
     artifact_paths,
     authenticate_registered_complete_chain,
@@ -698,16 +704,49 @@ def score_hidden(
     *,
     visible: Mapping[str, Any],
     gold_path: Path = GOLD_PATH,
+    public_path: Path = PUBLIC_PATH,
     config: Mapping[str, Any],
+    program_inventory: Sequence[tuple[Any, ...]] = DEPTH_THREE,
 ) -> dict[str, Any]:
-    if visible.get("decision") != "MECHANICS_VISIBLE_SELECTION_FROZEN" or visible.get(
-        "selector_uses_hidden"
-    ) is not False:
+    expected_visible_keys = {
+        "schema_version",
+        "decision",
+        "winner",
+        "generation_abi_pass",
+        "generation_metrics",
+        "tasks",
+        "transaction_chain",
+        "public_sha256",
+        "selector_uses_hidden",
+        "hidden_files_read",
+        "benchmark_files_read",
+    }
+    if (
+        set(visible) != expected_visible_keys
+        or visible.get("schema_version") != 1
+        or visible.get("decision") != "MECHANICS_VISIBLE_SELECTION_FROZEN"
+        or visible.get("generation_abi_pass") is not True
+        or visible.get("selector_uses_hidden") is not False
+        or visible.get("hidden_files_read") != []
+        or visible.get("benchmark_files_read") != []
+    ):
         raise RuntimeError("hidden scoring requires a frozen passing visible receipt")
+    public_rows = _load_public(public_path)
+    public = {row["task_id"]: row for row in public_rows}
+    public_sha = hashlib.sha256(public_path.read_bytes()).hexdigest()
+    if visible.get("public_sha256") != public_sha:
+        raise RuntimeError("visible receipt differs from current public mechanics data")
     gold_rows = read_jsonl(gold_path)
     gold = {row.get("task_id"): row for row in gold_rows}
-    if len(gold_rows) != 24 or len(gold) != 24 or set(gold) != set(visible["tasks"]):
+    if (
+        len(gold_rows) != 24
+        or len(gold) != 24
+        or set(gold) != set(visible["tasks"])
+        or set(public) != set(gold)
+    ):
         raise RuntimeError("mechanics gold task identity changed")
+    if not program_inventory:
+        raise RuntimeError("exhaustive program inventory is empty")
     arms = (
         "materialized",
         "name_only",
@@ -718,8 +757,12 @@ def score_hidden(
     per_task: dict[str, Any] = {}
     selected_successes = {arm: 0 for arm in arms}
     oracle_successes = {arm: 0 for arm in arms}
+    selected_vectors = {arm: [] for arm in arms}
+    oracle_vectors = {arm: [] for arm in arms}
     materialized_support: set[str] = set()
-    for task_id, task in visible["tasks"].items():
+    exhaustive: dict[str, Any] = {}
+    for task_id in sorted(visible["tasks"]):
+        task = visible["tasks"][task_id]
         outcomes: dict[str, Any] = {}
         for arm in arms:
             selection = task["selections"][arm]
@@ -734,6 +777,8 @@ def score_hidden(
             oracle = bool(correct)
             selected_successes[arm] += selected_ok
             oracle_successes[arm] += oracle
+            selected_vectors[arm].append(bool(selected_ok))
+            oracle_vectors[arm].append(oracle)
             if arm == "materialized":
                 materialized_support.update(
                     OPERATION_TO_ALIAS[program[0]] for program in correct
@@ -745,6 +790,21 @@ def score_hidden(
                 "hidden_correct_proposals": len(correct),
             }
         per_task[task_id] = outcomes
+        visible_consistent = []
+        for program in program_inventory:
+            if all(
+                apply_pipeline(row["input"], program) == row["output"]
+                for row in public[task_id]["visible"]
+            ):
+                visible_consistent.append(program)
+        ceiling_correct = sum(
+            hidden_correct(gold[task_id], program) for program in visible_consistent
+        )
+        exhaustive[task_id] = {
+            "visible_consistent_programs": len(visible_consistent),
+            "hidden_correct_visible_consistent_programs": ceiling_correct,
+            "any_hidden_correct": ceiling_correct > 0,
+        }
     selected_accuracy = {arm: selected_successes[arm] / 24 for arm in arms}
     oracle_coverage = {arm: oracle_successes[arm] / 24 for arm in arms}
     gate = config["mechanics"]
@@ -783,6 +843,27 @@ def score_hidden(
         and len(materialized_support)
         >= int(gate["materialized_oracle_first_operation_support_min"])
     )
+    bootstrap_seed = int(config["seeds"]["bootstrap"])
+    paired_inference = {
+        "selected": {
+            arm: paired_report(
+                selected_vectors["materialized"],
+                selected_vectors[arm],
+                seed=bootstrap_seed + index,
+            )
+            for index, arm in enumerate(comparisons)
+        },
+        "oracle": {
+            arm: paired_report(
+                oracle_vectors["materialized"],
+                oracle_vectors[arm],
+                seed=bootstrap_seed + 100 + index,
+            )
+            for index, arm in enumerate(comparisons)
+        },
+        "affects_gate": False,
+    }
+    ceiling_successes = sum(row["any_hidden_correct"] for row in exhaustive.values())
     return {
         "schema_version": 1,
         "decision": (
@@ -797,6 +878,14 @@ def score_hidden(
         "oracle_coverage_gain_diagnostic": oracle_gain,
         "materialized_oracle_first_operation_aliases": sorted(materialized_support),
         "per_task": per_task,
+        "report_only_paired_inference": paired_inference,
+        "report_only_exhaustive_cpu_ceiling": {
+            "program_inventory_size": len(program_inventory),
+            "tasks": exhaustive,
+            "tasks_with_any_hidden_correct_visible_consistent_program": ceiling_successes,
+            "coverage": ceiling_successes / 24,
+            "affects_gate": False,
+        },
         "visible_selection_sha256": canonical_sha256(visible),
         "gold_sha256": hashlib.sha256(gold_path.read_bytes()).hexdigest(),
         "hidden_files_read": [str(gold_path)],

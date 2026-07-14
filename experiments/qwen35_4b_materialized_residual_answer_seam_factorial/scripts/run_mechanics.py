@@ -31,6 +31,19 @@ _BOOTSTRAP_IMPORT_FILES = (
     str(EXP_REL / "src/mechanics_stage.py"),
     str(EXP_REL / "src/plans.py"),
     str(EXP_REL / "src/protocol.py"),
+    str(EXP_REL / "src/stats.py"),
+    str(EXP_REL / "src/task_data.py"),
+    str(EXP_REL / "src/transactions.py"),
+    str(EXP_REL / "src/vllm_runner.py"),
+)
+_MECHANICS_FROZEN_IMPORT_FILES = (
+    str(EXP_REL / "scripts/run_mechanics.py"),
+    str(EXP_REL / "src/identity.py"),
+    str(EXP_REL / "src/mechanics_lock.py"),
+    str(EXP_REL / "src/mechanics_stage.py"),
+    str(EXP_REL / "src/plans.py"),
+    str(EXP_REL / "src/protocol.py"),
+    str(EXP_REL / "src/stats.py"),
     str(EXP_REL / "src/task_data.py"),
     str(EXP_REL / "src/transactions.py"),
     str(EXP_REL / "src/vllm_runner.py"),
@@ -160,33 +173,42 @@ def _validate_environment() -> None:
 def _bootstrap_verify_before_local_imports() -> None:
     sys.dont_write_bytecode = True
     stage = _bootstrap_stage()
-    if stage not in {"run", "analyze-visible", "score-hidden"}:
+    if stage not in {"lock", "run", "analyze-visible", "score-hidden"}:
         return
     if any(EXP.rglob("__pycache__")):
         raise RuntimeError("pre-import mechanics refuses local Python caches")
     calibration = _strict_json(
         EXP / "runs/calibration/implementation_lock.json", "calibration lock"
     )
-    mechanics = _strict_json(
-        EXP / "runs/mechanics/implementation_lock.json", "mechanics lock"
-    )
     critical = calibration.get("critical_files")
     runtime = calibration.get("calibration_runtime_files")
     implementation = calibration.get("implementation_commit")
-    frozen = mechanics.get("frozen_mechanics_blobs")
+    frozen = calibration.get("frozen_mechanics_blobs")
+    mechanics = None
+    if stage != "lock":
+        mechanics = _strict_json(
+            EXP / "runs/mechanics/implementation_lock.json", "mechanics lock"
+        )
     if (
         calibration.get("model") != _MODEL_ID
         or calibration.get("revision") != _MODEL_REVISION
-        or mechanics.get("model") != _MODEL_ID
-        or mechanics.get("revision") != _MODEL_REVISION
-        or mechanics.get("calibration_implementation_commit") != implementation
         or not isinstance(critical, dict)
         or not isinstance(runtime, list)
         or not isinstance(frozen, dict)
         or not isinstance(implementation, str)
         or len(implementation) != 40
         or any(relative not in critical for relative in _BOOTSTRAP_IMPORT_FILES)
-        or any(relative not in frozen for relative in _BOOTSTRAP_IMPORT_FILES if "run_calibration.py" not in relative and "calibration_" not in Path(relative).name and "interface_analysis.py" not in relative)
+        or any(relative not in frozen for relative in _MECHANICS_FROZEN_IMPORT_FILES)
+        or (
+            mechanics is not None
+            and (
+                mechanics.get("model") != _MODEL_ID
+                or mechanics.get("revision") != _MODEL_REVISION
+                or mechanics.get("calibration_implementation_commit")
+                != implementation
+                or mechanics.get("frozen_mechanics_blobs") != frozen
+            )
+        )
     ):
         raise RuntimeError("pre-import mechanics lock schema changed")
     _validate_environment()
@@ -206,6 +228,14 @@ def _bootstrap_verify_before_local_imports() -> None:
         )
         if hashlib.sha256(blob).hexdigest() != expected:
             raise RuntimeError(f"pre-import committed mechanics file changed: {relative}")
+    for relative in _MECHANICS_FROZEN_IMPORT_FILES:
+        observed_blob = subprocess.check_output(
+            ["git", "rev-parse", f"{implementation}:{relative}"],
+            cwd=ROOT,
+            text=True,
+        ).strip()
+        if observed_blob != frozen[relative]:
+            raise RuntimeError(f"pre-import frozen mechanics blob changed: {relative}")
 
 
 def _bootstrap_authorize_gold_path() -> None:

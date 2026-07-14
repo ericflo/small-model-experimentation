@@ -53,7 +53,7 @@ did not yet define a falsifiable or transaction-safe experiment.
   `b39e0ad1ccf49503eb48353eac118500432953f32ad27ae2acc1448ed99f622d`.
 - Preoutcome receipt SHA-256:
   `a73b5a0a8fa65700a5ddc8e4a4aa7a50355d7e1826ee63d27a0f790a2c8b350e`.
-- The experiment suite currently has 76 passing model-free tests.
+- The experiment suite currently has 82 passing model-free tests.
 
 ## Remaining blockers before a calibration lock
 
@@ -98,7 +98,10 @@ did not yet define a falsifiable or transaction-safe experiment.
    must not be minted until item 6 passes. The implemented mechanics path still
    requires its later winner-bound lock and committed visible-selection
    authorization receipts.
-6. Re-run independent implementation review over exact committed hashes.
+6. **Still blocking:** re-run independent implementation review over the exact
+   final pushed hashes. The second review at `88c3c9e2` remained HOLD and its
+   seven follow-up findings are preserved in
+   `reports/calibration_implementation_review.md`.
 
 Verdict: no live model or GPU request is authorized. Proceed only with the
 remaining model-free implementation and review.

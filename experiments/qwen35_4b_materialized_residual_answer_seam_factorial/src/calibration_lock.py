@@ -55,6 +55,7 @@ CRITICAL_FILES = (
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/mechanics_stage.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/plans.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/protocol.py",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/stats.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/task_data.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/transactions.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/vllm_runner.py",
@@ -67,6 +68,7 @@ CRITICAL_FILES = (
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/tests/test_mechanics_stage.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/tests/test_plans.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/tests/test_protocol.py",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/tests/test_stats.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/tests/test_tokenizer_receipt.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/tests/test_transactions.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/tests/test_vllm_runner.py",
@@ -83,6 +85,7 @@ CALIBRATION_RUNTIME_FILES = (
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/identity.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/interface_analysis.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/protocol.py",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/stats.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/task_data.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/transactions.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/vllm_runner.py",
@@ -102,12 +105,14 @@ FROZEN_MECHANICS_FILES = (
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/plans.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/identity.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/protocol.py",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/stats.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/task_data.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/transactions.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/src/vllm_runner.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/tests/test_mechanics_lock.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/tests/test_mechanics_stage.py",
     "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/tests/test_plans.py",
+    "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/tests/test_stats.py",
 )
 if not set(CALIBRATION_RUNTIME_FILES) <= set(CRITICAL_FILES):
     raise RuntimeError("calibration runtime inventory escapes critical files")

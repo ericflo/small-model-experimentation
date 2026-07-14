@@ -22,6 +22,19 @@ class BootstrapTests(unittest.TestCase):
         self.assertIn("forbids unregistered repository access", source[:local_import])
         self.assertIn("pre-import calibration refuses local Python caches", source)
 
+    def test_mechanics_lock_stage_authenticates_calibration_frozen_sources(self) -> None:
+        source = (EXP / "scripts/run_mechanics.py").read_text()
+        tree = ast.parse(source)
+        self.assertIn(
+            'stage not in {"lock", "run", "analyze-visible", "score-hidden"}',
+            source,
+        )
+        self.assertIn("_MECHANICS_FROZEN_IMPORT_FILES", source)
+        self.assertIn("frozen = calibration.get", source)
+        self.assertIn('if stage != "lock"', source)
+        self.assertIn("pre-import frozen mechanics blob changed", source)
+        self.assertIsInstance(tree, ast.Module)
+
     def test_mechanics_gold_hook_opens_only_after_publication_authorization(self) -> None:
         source = (EXP / "scripts/run_mechanics.py").read_text()
         ast.parse(source)

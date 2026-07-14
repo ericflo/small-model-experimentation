@@ -15,7 +15,7 @@ sys.path.insert(0, str(EXP / "src"))
 import calibration_lock  # noqa: E402
 import mechanics_lock  # noqa: E402
 from calibration_stage import load_calibration_inputs  # noqa: E402
-from transactions import MODEL_ID, MODEL_REVISION  # noqa: E402
+from transactions import MODEL_ID, MODEL_REVISION, json_bytes  # noqa: E402
 
 
 def _complete_calibration_decision(inputs):
@@ -137,6 +137,33 @@ class MechanicsLockTests(unittest.TestCase):
                         calibration_decision=self.decision,
                         inputs=self.inputs,
                     )
+
+    def test_hidden_authorization_exact_compares_visible_reanalysis(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            path = root / "visible.json"
+            calibration_decision = root / "calibration_decision.json"
+            visible = {
+                "decision": "MECHANICS_VISIBLE_SELECTION_FROZEN",
+                "selector_uses_hidden": False,
+                "hidden_files_read": [],
+                "benchmark_files_read": [],
+                "tasks": {},
+            }
+            path.write_bytes(json_bytes(visible))
+            calibration_decision.write_bytes(json_bytes(self.decision))
+            forged_reanalysis = {**visible, "tasks": {"forged": {}}}
+            with mock.patch.object(
+                mechanics_lock, "verify_mechanics_lock"
+            ), mock.patch.object(
+                mechanics_lock, "load_calibration_inputs", return_value=self.inputs
+            ), mock.patch.object(
+                mechanics_lock, "CALIBRATION_DECISION", calibration_decision
+            ), mock.patch.object(
+                mechanics_lock, "analyze_visible", return_value=forged_reanalysis
+            ):
+                with self.assertRaisesRegex(RuntimeError, "exact visible analysis"):
+                    mechanics_lock.authorize_hidden_read(path)
 
 
 if __name__ == "__main__":

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import dataclasses
+import hashlib
 import json
 import sys
 import tempfile
@@ -181,9 +182,11 @@ class MechanicsStageTests(unittest.TestCase):
     def test_hidden_scoring_keeps_selector_primary_and_coverage_diagnostic(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             gold_path = Path(directory) / "gold.jsonl"
+            public_path = Path(directory) / "public.jsonl"
             program = (("reverse", None), ("reverse", None), ("reverse", None))
             visible_tasks: dict[str, Any] = {}
             gold = []
+            public = []
             for index in range(24):
                 task_id = f"task-{index:02d}"
                 selection = {
@@ -213,15 +216,40 @@ class MechanicsStageTests(unittest.TestCase):
                         "hidden": [{"input": [1, 2, 3], "output": [3, 2, 1]}],
                     }
                 )
+                public.append(
+                    {
+                        "task_id": task_id,
+                        "depth": 3,
+                        "visible": [
+                            {"input": [1, 2, 3], "output": [3, 2, 1]}
+                        ],
+                        "unlabeled_probe_inputs": [[4, 5, 6]],
+                    }
+                )
             gold_path.write_text("".join(json.dumps(row) + "\n" for row in gold))
+            public_path.write_text(
+                "".join(json.dumps(row) + "\n" for row in public)
+            )
             result = stage.score_hidden(
                 visible={
+                    "schema_version": 1,
                     "decision": "MECHANICS_VISIBLE_SELECTION_FROZEN",
+                    "winner": "think512_freeform",
+                    "generation_abi_pass": True,
+                    "generation_metrics": {},
                     "selector_uses_hidden": False,
                     "tasks": visible_tasks,
+                    "transaction_chain": {},
+                    "public_sha256": hashlib.sha256(
+                        public_path.read_bytes()
+                    ).hexdigest(),
+                    "hidden_files_read": [],
+                    "benchmark_files_read": [],
                 },
                 gold_path=gold_path,
+                public_path=public_path,
                 config=self.inputs.config,
+                program_inventory=(program,),
             )
             self.assertEqual(result["primary_selected_accuracy"]["materialized"], 1.0)
             self.assertEqual(
@@ -229,6 +257,12 @@ class MechanicsStageTests(unittest.TestCase):
             )
             self.assertEqual(
                 result["decision"], "MATERIALIZED_RESIDUAL_LARGE_EFFECT_PILOT_FAIL"
+            )
+            self.assertEqual(
+                result["report_only_exhaustive_cpu_ceiling"]["coverage"], 1.0
+            )
+            self.assertFalse(
+                result["report_only_paired_inference"]["affects_gate"]
             )
 
 

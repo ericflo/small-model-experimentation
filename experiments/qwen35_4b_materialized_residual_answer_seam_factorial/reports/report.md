@@ -55,7 +55,7 @@ Construction summary SHA-256:
   close `[248069,271]`, all 14,400 canonical answer compositions, 1,396-token
   worst-case context, and zero overlap with 1,984 parent rendered prompts;
 - zero model loads, calls, or sampled outputs; and
-- 52/52 current model-free tests pass, including append-only transaction and
+- 82/82 current model-free tests pass, including append-only transaction and
   crash-recovery mutations.
 
 The first random-order constructor attempt was interrupted after 3m35s before
@@ -87,10 +87,10 @@ materialized residuals help.
 
 ## Remaining Work
 
-Before calibration: transaction integration with the exact lock/preflight;
-reader allowlists; exact batch
-and shared-thought parity; implementation locks/live preflight; independent
-review of committed hashes; push to `main`; and green validation/site CI.
+Before calibration: finish the model-free authentication audit, obtain an
+independent PASS over the exact final pushed hashes, and only then publish the
+calibration implementation lock after both required workflows are green. The
+second implementation review remained HOLD; no live call is authorized.
 
 ## Artifact Manifest
 

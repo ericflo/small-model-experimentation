@@ -113,6 +113,46 @@ class ProtocolTests(unittest.TestCase):
             "unexpected thinking answer boundary",
         )
 
+    def test_visible_selector_hash_tie_ignores_duplicate_program_multiplicity(self) -> None:
+        task = {
+            "task_id": "selector-multiplicity-regression",
+            "depth": 3,
+            "visible": [
+                {"input": [1, 2, 3], "output": [3, 2, 1]},
+                {"input": [4, 5, 6], "output": [6, 5, 4]},
+            ],
+            "unlabeled_probe_inputs": [[7, 8, 9], [10, 11, 12]],
+        }
+        reverse = {
+            "candidate_id": "reverse-0",
+            "candidate": None,
+            "text": "PROGRAM: A | A | A",
+        }
+        sorted_desc = {
+            "candidate_id": "sorted-desc-0",
+            "candidate": None,
+            "text": "PROGRAM: A | B | C",
+        }
+        balanced = select_visible(task, [reverse, sorted_desc])
+        duplicated = select_visible(
+            task,
+            [
+                {
+                    **reverse,
+                    "candidate_id": f"reverse-{index}",
+                }
+                for index in range(7)
+            ]
+            + [sorted_desc],
+        )
+        self.assertEqual(balanced["eligible_unique_programs"], 2)
+        self.assertEqual(duplicated["eligible_unique_programs"], 2)
+        self.assertEqual(balanced["consensus_unique_programs"], 2)
+        self.assertEqual(
+            balanced["selected_full_canonical"],
+            duplicated["selected_full_canonical"],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

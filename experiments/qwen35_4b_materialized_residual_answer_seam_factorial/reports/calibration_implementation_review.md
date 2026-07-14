@@ -50,3 +50,32 @@ totals and tests for compute-prefix plans.
 These bullets are implementation claims, not a PASS verdict. No calibration
 lock may be minted and no model/GPU call may run until a fresh adversarial
 review inspects the final committed hashes and explicitly releases this HOLD.
+
+## Second review at `88c3c9e2`
+
+A fresh science adversary found the original four blockers materially repaired
+but kept `HOLD_LIVE_CALLS` for seven additional issues:
+
+1. analysis still inferred the thinking parser from mutable output metadata, so
+   a self-consistently rewritten no-think row could masquerade as thought;
+2. the mechanics lock trusted a shallow, metricless calibration-winner JSON
+   instead of recomputing the authenticated calibration analysis;
+3. downstream transactions did not durably bind the transport-decision hash;
+4. the pre-hidden gate checked shallow receipt fields instead of recomputing the
+   complete visible selection;
+5. duplicate proposal multiplicity affected the selector's within-cluster tie;
+6. `run_mechanics.py --stage lock` imported local mechanics code before checking
+   the calibration lock's frozen Git blobs; and
+7. the promised report-only exact inference, bootstrap intervals, and exhaustive
+   CPU ceiling were absent.
+
+The remediation after that review reconstructs prompt channels and token/text
+semantics from registered arm identity, exact-compares calibration and transport
+analyses, binds authorization-file hashes into `STARTED` receipts, recomputes
+visible selection before hidden authorization, uses hash-only unique-program
+ties, bootstraps the mechanics lock stage from the calibration freeze, and adds
+deterministic paired inference plus the frozen 13,824-program CPU ceiling.
+
+These are again implementation claims, not a PASS. The HOLD remains until an
+independent adversary reviews the final pushed commit and explicitly releases
+live calls.
