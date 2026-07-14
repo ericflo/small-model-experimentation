@@ -237,8 +237,14 @@
   and 228 hard-failure rows, cleared all 13 quotas, and froze 52 restarts: 40 hard
   failures plus 12 budget-only cases. Inventory/restart/selection/summary hashes are
   `c19d3de7...66240` / `022b1ea4...d951f` / `567d6b02...b662` /
-  `2e8a2192...e28ddf`. Publish selection next, then test exact three-axis exposure
-  feasibility and perform the second review. No capability result exists yet.
+  `2e8a2192...e28ddf`. The self-contained replay and inherited partition hashes are
+  `25a9595f...f0c2` / `abf8b505...0966f`. Exact integral
+  matching then passed: both 320-row arms have 297731 forward tokens, 126796
+  loss-bearing targets, absolute loss mass 27632.8, zero skips, and 200 aligned shared
+  rows. Manifest/control/candidate/final-receipt hashes are `7ba55045...91de1` /
+  `7a8d4566...b5078` / `28deb20e...3190` / `52a761ef...170`. Second-review verdict
+  `PASS_CONTROL_TRAINING` authorizes replay control only after this freeze is
+  published green. No capability result exists yet.
 
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.

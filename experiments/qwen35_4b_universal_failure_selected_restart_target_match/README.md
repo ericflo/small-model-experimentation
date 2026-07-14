@@ -1,6 +1,6 @@
 # Failure-Selected Counterfactual Restart Curriculum
 
-**Status:** in-progress · since 2026-07-14 · restart selection passed; exact-exposure feasibility is next
+**Status:** in-progress · since 2026-07-14 · exact-exposure freeze passed; replay-control training is next
 
 This experiment tests whether selecting the stronger parent's fresh procedural
 failures and teaching clean verified restarts can beat exactly exposure-matched replay
@@ -47,17 +47,21 @@ that mechanism from extra compute or extra supervision.
   tokens. Hard correctness/cap failures rank before budget-only failures.
 - Selection: exactly four failures per skill, 52 total, deterministic seed 55,114.
   An undersupplied skill ends the experiment before training.
-- Planned control: same-parent replay continuation. Both future arms must have 320
-  rows, 200 byte-identical aligned replay rows, 40 effective-batch-eight updates, and
-  exact equality on forward tokens, loss-bearing targets, and absolute loss mass.
+- Frozen control: same-parent replay continuation. Both arms have 320 rows, 200
+  byte-identical aligned replay rows, 40 effective-batch-eight updates, 297,731
+  forward tokens, 126,796 loss-bearing targets, and absolute loss mass 27,632.8.
+- Training warm start: the published replay adapter, weights/config SHA-256
+  `bb59d3bd...5154d` / `0dfd9bda...120f`. Each arm continues independently from
+  that same adapter.
 - Train seed: 48. Fresh local seed: 88,010. Conditional aggregate seed: 78,140.
 - Hidden-label boundary: no benchmark item, transcript, source, or detailed result is
   read. Aggregate access remains sealed until strict local promotion.
 
 ## Run
 
-The current checkpoint exposes only the CPU smoke path. Selection is complete, and
-training remains gated on a separately published exact-exposure feasibility review:
+The CPU smoke path reauthenticates task construction, collection, selection, source
+tokenization, materialized streams, independent token validation, and the second
+adversarial review:
 
 ```bash
 PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B \
@@ -65,8 +69,17 @@ PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B \
 
 ```
 
-No multi-stage invocation is supported. Training and evaluation remain unauthorized
-until the observed restart source passes a second exact-exposure design review.
+After this exact-exposure checkpoint is committed, rebased, pushed to `main`, and
+green in both workflows, the only authorized model event is:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B \
+  experiments/qwen35_4b_universal_failure_selected_restart_target_match/scripts/run.py \
+  --stage train-control
+```
+
+Candidate training remains gated on a separately committed and CI-green control
+receipt. No merge, local evaluation, or benchmark event is authorized yet.
 
 ## Results
 
@@ -90,10 +103,32 @@ availability are now frozen by the separately checkpointed mining stage:
   51 over-budget flags; reasons overlap by row.
 - Inventory/restart/selection/summary hashes are `c19d3de7...66240`,
   `022b1ea4...d951f`, `567d6b02...b662`, and `2e8a2192...e28ddf`.
-- All 52 rows restart from the original prompt, zero contain a parent prefix,
-  training is unauthorized, and benchmark/aggregate gates remain sealed.
+- All 52 rows restart from the original prompt and zero contain a parent prefix. At
+  this selection checkpoint training was unauthorized; benchmark/aggregate gates
+  remain sealed.
 
 This is still construction evidence, not a capability result.
+
+Exact exposure is feasible without modifying any target, duplicating any row, or
+truncating any sequence. A deterministic integral solver froze disjoint 68-row
+candidate-filler and 120-row control blocks around the inherited 200-row shared core.
+Independent encoding of the final files confirmed:
+
+- 320/320 encoded rows and zero skips in each arm;
+- exact equality at 297,731 forward tokens, 126,796 nonzero target tokens, and
+  absolute loss mass 27,632.8;
+- exactly 200 byte-identical rows at the same stream positions;
+- zero parent-prefix tokens and four clean restarts per each of 13 skills;
+- source-token/manifest/control/candidate/final-receipt hashes
+  `ac9b9c8a...0bd6`, `7ba55045...91de1`, `7a8d4566...b5078`,
+  `28deb20e...3190`, and `52a761ef...170`.
+
+The candidate has 16,414 more total thinking-span tokens and 16,414 fewer masked
+context tokens because of differing zero-weight forced-close composition, but equal
+answer tokens, close tokens, actual loss-bearing tokens, and weighted loss mass. The
+second review records this residual sequence-composition difference and authorizes
+only replay-control training after publication. This remains construction evidence,
+not a capability result.
 
 ## Interpretation
 
@@ -120,4 +155,10 @@ recomputation, not long-prefix repair. A negative result would reject this balan
 - `data/failure_inventory_seed66114.json` — complete frozen failure inventory.
 - `data/counterfactual_restart_source.jsonl` — 52 clean selected restarts.
 - `data/restart_selection_receipt.json` and `data/selection_summary.json` — quota and composition receipts.
+- `data/sft_blend.jsonl` and `data/predecessor_stream_manifest.json` — self-contained authenticated replay lineage.
+- `data/source_token_lengths.json` — exact trainer-encoder source measurements.
+- `data/stream_manifest.json`, `data/replay_control.jsonl`, and
+  `data/counterfactual_restart_candidate.jsonl` — exact integral partition and frozen streams.
+- `data/stream_token_receipt.json` — independent final-stream exposure validation.
+- `reports/compute_review.md` — second adversarial review and control-only authorization.
 - `src/vllm_runner.py` — pinned same-backend runner with explicit-composite gate.

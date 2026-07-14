@@ -7,16 +7,22 @@ external_artifacts:
     required_for: "fresh failure-selection rollout; runtime LoRA is forbidden"
     checksum: "model.safetensors 7ab4c419f70135d3fe058dba6e79e3a9a61c6661d43e6acb9662f331efe36e2e; merge_receipt.json aa763255cb3b05599e765948d3a3db1787d5813b1cfafbdc7e1c21653ae745a3"
     regenerate: "from the predecessor's published-green replay-control merge checkpoint: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --stage merge-control"
+  - name: "authenticated replay-parent adapter"
+    storage: "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/adapters/replay_after_close"
+    required_for: "independent replay-control and counterfactual-restart continuations"
+    checksum: "adapter_model.safetensors bb59d3bd9273ae3bb3dffe54e983590dada69e6e1bdba571009ffedbba05154d; adapter_config.json 0dfd9bda8a835926a87337782cc09b1e11e841a36f46b99c83fbae9bc89e120f"
+    regenerate: "from the predecessor's published replay-control training checkpoint"
 omitted_artifacts:
   - path: "large_artifacts/qwen35_4b_universal_failure_selected_restart_target_match/"
-    reason: "future adapters and merged candidate/control composites are large and gitignored; none exists at the design checkpoint"
+    reason: "future adapters and merged candidate/control composites are large and gitignored; none exists at the exact-exposure checkpoint"
 reproducibility:
   smoke_command: "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_failure_selected_restart_target_match/scripts/run.py --smoke"
-  full_command: "none yet: failure selection is complete; exact-exposure streams and a second review must be published before training"
+  full_command: "after this checkpoint is pushed and both workflows are green: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_failure_selected_restart_target_match/scripts/run.py --stage train-control"
   required_external_artifacts:
     - "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/merged/replay_after_close"
+    - "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/adapters/replay_after_close"
 notes: >-
-  Model-free design only. Model Qwen/Qwen3.5-4B revision 851bf6e8...d0a. Frozen
+  Model-free exact-exposure freeze. Model Qwen/Qwen3.5-4B revision 851bf6e8...d0a. Frozen
   construction/rollout/selection/training/local/aggregate seeds are
   77114/66114/55114/48/88010/78140. The 624-row source, oracle-free input, task
   manifest, and design receipt hashes are 81edc9ea...de304, 25382689...0f5b,
@@ -25,5 +31,10 @@ notes: >-
   receipt hashes are 4bf15134...1099f, b43b3a0...1206d, 668e9b70...369ff, and
   1d35c63a...2b381. The frozen selector produced 52 balanced clean restarts; its
   inventory/restart/selection/summary hashes are c19d3de7...66240,
-  022b1ea4...d951f, 567d6b02...b662, and 2e8a2192...e28ddf. No adapter, new
-  composite, local event, or benchmark event exists.
+  022b1ea4...d951f, 567d6b02...b662, and 2e8a2192...e28ddf. The self-contained
+  replay/source-token/stream-manifest/control/candidate/final-receipt hashes are
+  25a9595f...f0c2, ac9b9c8a...0bd6, 7ba55045...91de1, 7a8d4566...b5078,
+  28deb20e...3190, and 52a761ef...170. Both arms have 320 rows, 297731 forward
+  tokens, 126796 nonzero targets, absolute loss mass 27632.8, zero skips, and 200
+  aligned shared rows. Verdict PASS_CONTROL_TRAINING authorizes control only after
+  publication. No new adapter, composite, local event, or benchmark event exists.

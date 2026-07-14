@@ -123,3 +123,19 @@ Every restart is reconstructed from executable source truth at the original prom
 no parent prefix is present. This result authorizes no training. The next checkpoint
 must copy replay self-contained, tokenize all sources, solve exact forward/target/loss
 mass equality without modifying targets, and pass the second adversarial review.
+
+## 2026-07-14 — Frozen exact-exposure receipt
+
+The replay copy and predecessor partition hashes are `25a9595f...f0c2` and
+`abf8b505...0966f`. Exact trainer encoding plus an integral solver produced the
+preregistered 200-shared / 52-restart / 68-filler / 120-control layout. Source-token,
+stream-manifest, control, candidate, and final independent-receipt hashes are
+`ac9b9c8a...0bd6`, `7ba55045...91de1`, `7a8d4566...b5078`,
+`28deb20e...3190`, and `52a761ef...170`.
+
+Both arms encode 320 rows and zero skips at exactly 297,731 forward tokens, 126,796
+nonzero target tokens, and absolute loss mass 27,632.8. They retain exactly 200
+byte-identical position-aligned rows. No target was modified, duplicated, truncated,
+or post-hoc masked. The second review verdict is `PASS_CONTROL_TRAINING`; after this
+freeze is published and green, it authorizes only the replay control. Candidate
+training still requires a published-green control receipt.

@@ -54,3 +54,32 @@
   and a second adversarial compute review.
 - No model call or benchmark read occurred during selection; aggregate seed remains
   sealed.
+
+## 2026-07-14 — Exact-exposure feasibility and second review
+
+- Ran only after selection commit `f0d08544` was pushed to `main` and GitHub runs
+  `29360679439` / `29360679657` both succeeded.
+- Copied the predecessor's 2,240-row replay source and inherited partition manifest
+  into the experiment. Their hashes are `25a9595f...f0c2` and
+  `abf8b505...0966f`; the training encoder remains byte-identical at
+  `0cfb126f...2cc4`.
+- Measured every replay and restart row with the exact Qwen tokenizer and actual
+  trainer encoder. Source-token receipt hash: `ac9b9c8a...0bd6`.
+- SciPy 1.18 HiGHS found an exact integral partition in 4.43 seconds and 801 nodes:
+  200 shared replay rows, 52 clean restarts plus 68 replay fillers, and 120 disjoint
+  replay-control rows. Solver gap was zero.
+- Final stream/manifest hashes are replay `7a8d4566...b5078`, candidate
+  `28deb20e...3190`, and manifest `7ba55045...91de1`.
+- Independent final-file encoding confirmed 320 rows, 297,731 forward tokens,
+  126,796 nonzero target tokens, absolute loss mass 27,632.8, and zero skips in each
+  arm. Exactly 200 rows are byte-identical at aligned positions. Final receipt hash:
+  `52a761ef...170`.
+- Candidate minus control is zero on every registered axis, answer targets, close
+  targets, and parent prefixes. It has 16,414 more total zero/nonzero thinking-span
+  tokens and 16,414 fewer masked context tokens because the variable replay blocks
+  contain different forced-close composition; this is disclosed in the review.
+- Second adversarial verdict: `PASS_CONTROL_TRAINING`. It authorizes only the replay
+  control after this checkpoint is committed, rebased, pushed, and green in both
+  workflows. Candidate training must wait for a separately published control.
+- No model call or benchmark read occurred; local seed 88,010 is unmaterialized and
+  aggregate seed 78,140 remains sealed.

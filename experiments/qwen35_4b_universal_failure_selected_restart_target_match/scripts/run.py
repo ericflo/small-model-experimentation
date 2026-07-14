@@ -27,6 +27,23 @@ SELECTION_HASHES = {
     "restart_selection_receipt.json": "567d6b020b9120c82bd19fdc7992dc49b927df2b604978ab3d6ae64e2c05b662",
     "selection_summary.json": "2e8a21927fd1e4bb9ad4ca5e26cbf39c6ca97982542ae9d2bb496a3ef6e28ddf",
 }
+EXPOSURE_HASHES = {
+    "sft_blend.jsonl": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2",
+    "predecessor_stream_manifest.json": "abf8b5055e68c0fb2bb6e32a29f7be3b3677a0dd179e77397647777a2aa0966f",
+    "source_token_lengths.json": "ac9b9c8a3c9bfc66699781c96792ea72c37701b11719772764e74b35dba10bd6",
+    "stream_manifest.json": "7ba55045e72371e3675ba67bcf0bd72f6a0bf645c3ad7d0e92f7282e59d91de1",
+    "replay_control.jsonl": "7a8d45666000cbb6bffabf6faab8f9d61006bf3a80275a631238a23cd03b5078",
+    "counterfactual_restart_candidate.jsonl": "28deb20e6bfca81f760549b071d0d0df39bfa561c4d09fde0580d81699413190",
+    "stream_token_receipt.json": "52a761ef8fd37f3eac88abf8f090013f571a47511daeb26820ca030201b1c170",
+}
+PARENT_ADAPTER = (
+    ROOT
+    / "large_artifacts"
+    / "qwen35_4b_universal_on_policy_prefix_repair_token_match"
+    / "adapters"
+    / "replay_after_close"
+)
+ADAPTER_ROOT = ROOT / "large_artifacts" / EXP.name / "adapters"
 
 
 def sha256_file(path: Path) -> str:
@@ -155,14 +172,54 @@ def smoke() -> None:
             or summary.get("aggregate_seed_open") is not False
         ):
             raise SystemExit("published restart selection failed smoke authentication")
-    print("PASS: model-free design, merged-parent, freshness, and restart-selection contracts")
+    token_receipt_path = EXP / "data" / "stream_token_receipt.json"
+    if token_receipt_path.exists():
+        for name, expected in EXPOSURE_HASHES.items():
+            path = EXP / "data" / name
+            if not path.is_file() or sha256_file(path) != expected:
+                raise SystemExit(f"published exposure artifact changed: {path}")
+        run([sys.executable, "-B", str(SCRIPTS / "measure_source_tokens.py"), "--check"])
+        run([sys.executable, "-B", str(SCRIPTS / "materialize_streams.py"), "--check"])
+        run([sys.executable, "-B", str(SCRIPTS / "validate_streams.py"), "--check"])
+        receipt = json.loads(token_receipt_path.read_text(encoding="utf-8"))
+        if (
+            receipt.get("rows_per_arm") != 320
+            or receipt.get("forward_tokens_per_arm") != 297731
+            or receipt.get("nonzero_target_tokens_per_arm") != 126796
+            or receipt.get("absolute_loss_mass_x5_per_arm") != 138164
+            or receipt.get("shared_position_aligned_rows") != 200
+            or receipt.get("skipped_rows") != 0
+            or any(receipt.get("candidate_minus_control_spans", {}).get(axis) != 0 for axis in receipt.get("match_axes", []))
+            or receipt.get("training_authorized") is not False
+        ):
+            raise SystemExit("published exact-exposure receipt failed smoke authentication")
+        review = (EXP / "reports" / "compute_review.md").read_text(encoding="utf-8")
+        if "**Verdict:** `PASS_CONTROL_TRAINING`." not in review:
+            raise SystemExit("second adversarial review has not authorized control training")
+        training_dir = EXP / "runs" / "training"
+        if (training_dir / "replay_control.json").exists():
+            sys.path.insert(0, str(SCRIPTS))
+            from train_trial import validate_published_arm
+
+            validate_published_arm("replay_control", require_committed=False)
+            if (training_dir / "counterfactual_restart_candidate.json").exists():
+                validate_published_arm(
+                    "counterfactual_restart_candidate", require_committed=False
+                )
+    print(
+        "PASS: model-free design, merged-parent, freshness, restart selection, "
+        "exact exposure, and control-training authorization contracts"
+    )
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, allow_abbrev=False)
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("--smoke", action="store_true")
-    group.add_argument("--stage", choices=("collect-parent", "mine-restarts"))
+    group.add_argument(
+        "--stage",
+        choices=("collect-parent", "mine-restarts", "train-control", "train-candidate"),
+    )
     args = parser.parse_args()
     if args.smoke:
         smoke()
@@ -178,6 +235,58 @@ def main() -> int:
             "experiments/qwen35_4b_universal_failure_selected_restart_target_match/runs/parent_rollout/seed66114.receipt.json"
         )
         run([sys.executable, "-B", str(SCRIPTS / "mine_restarts.py")])
+        return 0
+    if args.stage in {"train-control", "train-candidate"}:
+        require_pushed_checkpoint(
+            "experiments/qwen35_4b_universal_failure_selected_restart_target_match/data/stream_token_receipt.json"
+        )
+        require_pushed_checkpoint(
+            "experiments/qwen35_4b_universal_failure_selected_restart_target_match/reports/compute_review.md"
+        )
+        name = (
+            "replay_control"
+            if args.stage == "train-control"
+            else "counterfactual_restart_candidate"
+        )
+        if args.stage == "train-candidate":
+            require_pushed_checkpoint(
+                "experiments/qwen35_4b_universal_failure_selected_restart_target_match/runs/training/replay_control.json"
+            )
+        run([
+            sys.executable,
+            "-B",
+            str(SCRIPTS / "train_trial.py"),
+            "--name",
+            name,
+            "--train",
+            str(EXP / "data" / f"{name}.jsonl"),
+            "--token-receipt",
+            str(EXP / "data" / "stream_token_receipt.json"),
+            "--out",
+            str(ADAPTER_ROOT / name),
+            "--warm-start",
+            str(PARENT_ADAPTER),
+            "--epochs",
+            "1",
+            "--lr",
+            "1e-5",
+            "--rank",
+            "32",
+            "--alpha",
+            "64",
+            "--batch-size",
+            "1",
+            "--grad-accum",
+            "8",
+            "--max-length",
+            "4096",
+            "--w-think",
+            "0.2",
+            "--w-close",
+            "0.2",
+            "--seed",
+            "48",
+        ])
         return 0
     raise AssertionError(args.stage)
 

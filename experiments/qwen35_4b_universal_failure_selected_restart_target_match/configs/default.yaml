@@ -39,13 +39,18 @@ selection:
   restart_source_sha256: 022b1ea4cfe2bb50fca7f5fdc472a0bf228a5d7a7adb637b221b8efe434d951f
   receipt_sha256: 567d6b020b9120c82bd19fdc7992dc49b927df2b604978ab3d6ae64e2c05b662
 training_plan:
-  authorized: false
+  control_authorized_after_published_green_freeze: true
+  candidate_authorized: false
   rows_per_arm: 320
   shared_aligned_replay_rows: 200
   candidate_restart_rows: 52
   candidate_replay_rows: 68
   control_variable_replay_rows: 120
   exact_match_axes: [forward_tokens, loss_bearing_target_tokens, absolute_loss_mass]
+  forward_tokens_per_arm: 297731
+  nonzero_target_tokens_per_arm: 126796
+  absolute_loss_mass_per_arm: 27632.8
+  zero_skips: true
   epochs: 1
   optimizer_steps: 40
   learning_rate: 1.0e-5

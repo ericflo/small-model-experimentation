@@ -2,9 +2,9 @@
 
 ## Current status
 
-The model-free design, one authenticated parent rollout, and frozen failure selection
-are complete. No stream exposure match, training event, local evaluation, or
-benchmark event has run.
+The model-free design, one authenticated parent rollout, frozen failure selection,
+and exact-exposure stream freeze are complete. No training, merge, local evaluation,
+or benchmark event has run.
 
 The active hypothesis is that task-level on-policy failure selection can help when
 the supervised example restarts cleanly before the error and target exposure is
@@ -24,9 +24,18 @@ frozen contract.
 - Selection: 602 eligible, 228 hard failures, 52 selected (four per skill), with 40
   hard and 12 budget-only rows. All 52 are full oracle restarts from the original
   prompt and zero contain a parent prefix.
+- Exact final-arm equality: 320 rows, 297,731 forward tokens, 126,796 loss-bearing
+  target tokens, absolute loss mass 27,632.8, zero skips, and 200 byte-identical
+  aligned replay rows per arm.
+- Stream hashes: control `7a8d4566...b5078`, candidate `28deb20e...3190`, manifest
+  `7ba55045...91de1`, and independent token receipt `52a761ef...170`.
+- Candidate minus control is zero on the three preregistered axes, answer targets,
+  close targets, and parent prefixes. Its 16,414-token target-span difference is
+  zero-weight forced-close composition and is disclosed in `compute_review.md`.
 
 ## Next authorized event
 
-Self-contained replay copying, token measurement, deterministic exact three-axis
-exposure feasibility, and a second adversarial compute review after this selection
-checkpoint is committed, rebased, pushed to `main`, and both workflows are green.
+After this exact-exposure freeze is committed, rebased, pushed to `main`, and both
+workflows are green, train only the replay control. Candidate training requires the
+control receipt and log to receive their own checked, rebased, pushed, two-workflow-
+green checkpoint.

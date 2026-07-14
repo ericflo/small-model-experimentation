@@ -3,7 +3,7 @@
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
 - Experiments with manifests: 230
-- Manifest files: 546
+- Manifest files: 548
 
 ## Manifest Types
 
@@ -12,7 +12,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `checkpoint` | 83 |
 | `dataset` | 132 |
 | `large-artifact` | 50 |
-| `other` | 77 |
+| `other` | 79 |
 | `run-data` | 101 |
 | `standard-artifact` | 103 |
 
@@ -281,7 +281,9 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_universal_close_weight_token_match` | `other` | [manifest](../experiments/qwen35_4b_universal_close_weight_token_match/data/stream_manifest.json) |
 | `qwen35_4b_universal_close_weight_token_match` | `standard-artifact` | [manifest](../experiments/qwen35_4b_universal_close_weight_token_match/reports/artifact_manifest.yaml) |
 | `qwen35_4b_universal_curriculum` | `standard-artifact` | [manifest](../experiments/qwen35_4b_universal_curriculum/reports/artifact_manifest.yaml) |
+| `qwen35_4b_universal_failure_selected_restart_target_match` | `other` | [manifest](../experiments/qwen35_4b_universal_failure_selected_restart_target_match/data/predecessor_stream_manifest.json) |
 | `qwen35_4b_universal_failure_selected_restart_target_match` | `other` | [manifest](../experiments/qwen35_4b_universal_failure_selected_restart_target_match/data/rollout_task_manifest.json) |
+| `qwen35_4b_universal_failure_selected_restart_target_match` | `other` | [manifest](../experiments/qwen35_4b_universal_failure_selected_restart_target_match/data/stream_manifest.json) |
 | `qwen35_4b_universal_failure_selected_restart_target_match` | `standard-artifact` | [manifest](../experiments/qwen35_4b_universal_failure_selected_restart_target_match/reports/artifact_manifest.yaml) |
 | `qwen35_4b_universal_low_density_token_match` | `other` | [manifest](../experiments/qwen35_4b_universal_low_density_token_match/data/dose_manifest.json) |
 | `qwen35_4b_universal_low_density_token_match` | `standard-artifact` | [manifest](../experiments/qwen35_4b_universal_low_density_token_match/reports/artifact_manifest.yaml) |
