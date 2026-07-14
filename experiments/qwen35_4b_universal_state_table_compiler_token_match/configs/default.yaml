@@ -16,4 +16,4 @@ shared_position_aligned_replay_rows: 200
 curriculum_rows: 80
 candidate_replay_filler_rows: 40
 replay_control_rows: 120
-status: replay_control_trained_candidate_awaits_pushed_green_checkpoint
+status: both_arms_trained_local_awaits_pushed_green_checkpoint

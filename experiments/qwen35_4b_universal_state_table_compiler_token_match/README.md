@@ -1,6 +1,6 @@
 # Natural-Language State-Table Universal Curriculum
 
-**Status:** in-progress · since 2026-07-14 · replay control trained; candidate awaits this pushed-green checkpoint
+**Status:** in-progress · since 2026-07-14 · both training arms complete; fresh local gate awaits this pushed-green checkpoint
 
 This result-separated successor tests whether truth-audited, variable-depth
 natural-language state tables plus independent hypothesis scoring and a short
@@ -80,9 +80,12 @@ replay positions per arm. The frozen smoke passes 48 tests. The active replay co
 then trained from the authenticated parent for all 40 steps over all 320 rows with
 zero skips and final loss 0.4226. Its adapter weights/config hashes are
 `83a741e4...409a` / `13838f2e...843`; receipt/log hashes are
-`b05dc72e...e99a` / `5f4d1fe3...60ba`. Training loss is operational evidence only;
-no candidate, capability result, merge, local capability event, or benchmark event
-exists.
+`b05dc72e...e99a` / `5f4d1fe3...60ba`. The candidate independently restarted from
+the same parent and completed the same 320 rows, zero skips, and 40 steps with final
+loss 1.059. Its adapter weights/config hashes are `36e54804...5d0f` /
+`7101cc87...4b34`; receipt/log hashes are `6aab42b3...2be2` /
+`26907944...c059`. Training losses are operational evidence only; no capability
+result, merge, local capability event, or benchmark event exists.
 
 ## Interpretation
 
@@ -105,6 +108,8 @@ ablation separates the pieces.
 - `data/stream_token_receipt.json`
 - `runs/training/replay_after_close.json`
 - `runs/training/replay_after_close.log`
+- `runs/training/state_table_after_close.json`
+- `runs/training/state_table_after_close.log`
 - `scripts/run.py`
 - `reports/design_review.md`
 - `reports/preregistration.md`

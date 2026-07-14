@@ -59,3 +59,26 @@ control.
 
 Next: publish and CI-verify this replay-control checkpoint, then train only the frozen
 candidate.
+
+## 2026-07-14 — State-table candidate training
+
+- Began only after replay-control commit `5b906a4e` was pushed to `main` and GitHub
+  Validate Repository run `29337458833` and Publish Research Site run `29337458951`
+  both completed successfully.
+- Verified the clean worktree was exactly aligned with `origin/main`, revalidated the
+  committed replay-control receipt, and re-ran the frozen design plus all 48 tests.
+- Independently restarted from authenticated `close_xi`; the candidate did not
+  continue from the replay control or inspect any capability behavior.
+- Trained `state_table_after_close` for the frozen 320 rows, one epoch, 40 optimizer
+  steps, seed 46, and ordinary thought/close weights 0.2. All 320 rows encoded and
+  zero skipped.
+- Completed in 290.9 wrapper wall seconds with final train loss 1.059. This loss is
+  not compared causally with replay loss because the target composition differs.
+- Preserved receipt/log hashes `6aab42b3...2be2` / `26907944...c059`. The external
+  169,903,320-byte adapter weights/config hashes are `36e54804...5d0f` /
+  `7101cc87...4b34` and independently match the receipt.
+- No local generation, merge, or benchmark event ran; fresh local seed 88,008 remains
+  unconsumed.
+
+Next: publish and CI-verify this candidate checkpoint, then run the single frozen
+paired local evaluation.

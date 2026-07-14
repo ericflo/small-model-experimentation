@@ -2,7 +2,7 @@
 
 ## Summary
 
-The design is frozen and the exact-token replay control has trained successfully.
+The design is frozen and both matched training arms have completed successfully.
 This result-separated successor implements a truth-audited natural-language
 state-table and hypothesis-scoring curriculum after canonical staged search failed
 its fresh local gate. No capability result exists.
@@ -29,8 +29,12 @@ are reachable, and 48 tests plus the frozen smoke pass. The replay control compl
 40/40 updates over 320 rows with zero skips, final loss 0.4226, and 294.1 wrapper wall
 seconds. Its 169,903,320-byte external adapter has weights/config hashes
 `83a741e4...409a` / `13838f2e...843`; the preserved receipt/log hashes are
-`b05dc72e...e99a` / `5f4d1fe3...60ba`. No candidate training, model generation,
-merge, local evaluation, or benchmark event has run.
+`b05dc72e...e99a` / `5f4d1fe3...60ba`. The candidate independently restarted from
+the same authenticated parent and completed 40/40 updates over 320 rows with zero
+skips, final loss 1.059, and 290.9 wrapper wall seconds. Its 169,903,320-byte adapter
+weights/config hashes are `36e54804...5d0f` / `7101cc87...4b34`; receipt/log hashes
+are `6aab42b3...2be2` / `26907944...c059`. No model generation, merge, local
+evaluation, or benchmark event has run.
 
 ## Controls
 
@@ -49,15 +53,17 @@ frozen local check.
 
 ## Interpretation
 
-None yet. Successful control optimization is not capability evidence. The mechanism
+None yet. Successful optimization of either arm—and the difference between their
+losses—is not capability evidence because target composition differs. The mechanism
 remains a preregistered package-level hypothesis; score lessons occupy 25,683 of
 48,806 intervention tokens, so a later result cannot isolate a stage without a fresh
 ablation.
 
 ## Next Experiments
 
-Commit, rebase, push, and CI-verify this replay-control checkpoint. Do not train the
-candidate until both GitHub workflows are green on the pushed `main` checkpoint.
+Commit, rebase, push, and CI-verify this candidate-training checkpoint. Do not consume
+fresh local seed 88,008 until both GitHub workflows are green on the pushed `main`
+checkpoint.
 
 ## Artifact Manifest
 
