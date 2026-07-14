@@ -132,6 +132,34 @@ class AnswerCommitProtocolTests(unittest.TestCase):
                 ["B", "C"], candidate_first_alias="candidate-row-7"
             )
 
+    def test_unique_final_early_stop_authenticates_then_scores_content(self) -> None:
+        content = protocol.content_for_terminal_event(
+            [10, protocol.TOKENIZER_EOS_ID],
+            registered_stop_token_id=protocol.TOKENIZER_EOS_ID,
+            event="stop",
+            cap=24,
+        )
+        self.assertEqual(content, (10,))
+
+    def test_exact_cap_length_retains_every_token_as_content(self) -> None:
+        sampled = list(range(24))
+        content = protocol.content_for_terminal_event(
+            sampled,
+            registered_stop_token_id=protocol.TOKENIZER_EOS_ID,
+            event="length",
+            cap=24,
+        )
+        self.assertEqual(content, tuple(sampled))
+
+    def test_claimed_stop_without_registered_stop_is_auth_failure(self) -> None:
+        with self.assertRaisesRegex(ValueError, "malformed_registered_stop"):
+            protocol.content_for_terminal_event(
+                [10, 11],
+                registered_stop_token_id=protocol.TOKENIZER_EOS_ID,
+                event="stop",
+                cap=24,
+            )
+
 
 if __name__ == "__main__":
     unittest.main()

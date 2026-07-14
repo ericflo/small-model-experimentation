@@ -28,6 +28,10 @@
   operation and canonical full-tuple identity for every downstream selector,
   execution, hash, hidden/oracle score, and support count. Model calls remain
   zero.
+- Fourth-pass review verified canonical proposal identity but held on terminal
+  classification. Prospectively separated authenticated unique-final stops,
+  authenticated exact-cap length traces with all tokens scored, and malformed
+  geometry authentication failures. Model calls remain zero.
 
 ## Scaffold
 

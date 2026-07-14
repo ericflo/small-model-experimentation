@@ -112,3 +112,19 @@ Every selector, execution, hash, hidden/oracle metric, and first-operation-
 support count now operates on that full tuple and never on row index or sampled
 order. Live calls remain held pending another exact-commit design rereview and
 the separate implementation release review.
+
+## Independent review: fourth pass
+
+Rereview of exact pushed/green commit
+`a7c183f3c2f9b47a0913b77c998b09eefd4fb9c1` returned `HOLD_DESIGN`. It
+confirmed the canonical full-triple repair end to end, then found that the
+termination controls conflated a well-formed but grammatically early stop, a
+valid exact-cap length event, and malformed stop geometry.
+
+The prospective repair freezes three classes. A unique final stop with matching
+reasons is authenticated and its preceding content is scored normally. An
+exact-24 length event without the registered stop is authenticated, counts as a
+cap contact, retains all 24 IDs as content, and is scored normally. Claimed-
+stop-without-stop, short length, repeated/interior/post-stop tokens, or wrong
+reasons are authentication failures. Live calls remain held pending another
+exact-commit design rereview and the implementation release review.

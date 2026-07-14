@@ -131,6 +131,20 @@ so a valid stop emitted as sampled token 24 is still a cap contact. A stop at
 or before 24 can be authenticated and exact while independently counting
 against the cap-contact gate.
 
+Terminal classification is separate from grammatical correctness. A unique
+registered stop at the final sampled position with matching finish/stop reasons
+is an authenticated stop trace even when it occurs before a complete program;
+remove only that terminal ID and score every preceding ID for parse and exact.
+An exact-24 `finish_reason == "length"` trace with no registered stop is an
+authenticated length trace and cap contact; all 24 sampled IDs remain content
+and are scored normally for parse and exact, with nothing trimmed. A claimed
+stop event lacking its registered stop, a length event with other than exactly
+24 IDs, any repeated/interior/post-stop registered token, or any wrong/unknown
+finish/stop reason is an authentication failure. Thus a well-formed but early
+model stop usually scores parse/exact false without violating transaction
+authentication, while malformed geometry fails the cell's zero-authentication-
+failure gate.
+
 Within each matched thinking/prefix pair, the only valid qualifier outcomes are
 tokenizer-only, HF-only, and neither. Under authenticated paired prefixes,
 tokenizer-exact and HF-exact are disjoint row sets: the first registered
@@ -170,12 +184,15 @@ branch.
 
 ## Required termination and transaction controls
 
-Before a live lock, model-free and malformed-runner tests must reject missing,
-early, repeated, interior-plus-terminal, and post-stop registered tokens;
-wrong stop or finish reason; cap overflow or short output relabeled length;
-extra newline, close, chat marker, or byte before commit; tokenizer stopping on
-thought; natural-answer bypass; pair-prefix divergence; pair prompt/seed/
-thought mutation; and prompt/token/text/cost/summary mutations. Append-only
+Before a live lock, model-free and malformed-runner tests must enforce the three
+terminal classes above. They must authentication-reject claimed-stop-without-
+stop, short output relabeled length, repeated/interior-plus-terminal/post-stop
+registered tokens, wrong stop/finish reason, and cap overflow. They must also
+score—but not authentication-reject—a unique final grammatically early stop and
+an exact-cap length trace. Further rejection controls cover extra newline,
+close, chat marker, or byte before commit; tokenizer stopping on thought;
+natural-answer bypass; pair-prefix divergence; pair prompt/seed/thought
+mutation; and prompt/token/text/cost/summary mutations. Append-only
 transactions must crash safely and authenticate exact stop configuration,
 first-stop sampled IDs, pre-commit IDs, physical and logical costs, runner,
 backend, model, and revision.

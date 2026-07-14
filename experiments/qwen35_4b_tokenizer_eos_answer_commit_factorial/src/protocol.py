@@ -89,6 +89,27 @@ def is_answer_cap_contact(
     return len(tuple(sampled_token_ids)) >= cap or finish_reason == "length"
 
 
+def content_for_terminal_event(
+    sampled_token_ids: Sequence[int],
+    *,
+    registered_stop_token_id: int,
+    event: str,
+    cap: int = 24,
+) -> tuple[int, ...]:
+    """Return scored content only after terminal geometry authenticates."""
+
+    sampled = tuple(int(token_id) for token_id in sampled_token_ids)
+    failure = _authenticate_terminal_event(
+        sampled,
+        registered_stop_token_id=registered_stop_token_id,
+        event=event,
+        cap=cap,
+    )
+    if failure is not None:
+        raise ValueError(failure)
+    return sampled[:-1] if event == "stop" else sampled
+
+
 def authenticate_boundary_pair(
     tokenizer_sampled_token_ids: Sequence[int],
     hf_sampled_token_ids: Sequence[int],

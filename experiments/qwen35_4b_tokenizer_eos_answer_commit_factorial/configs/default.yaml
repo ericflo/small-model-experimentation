@@ -74,6 +74,11 @@ interface:
   sampled_answer_cap: 24
   cap_contact_rule: sampled_answer_token_ids_gte_24_or_finish_reason_length
   terminal_stop_on_token_24_is_cap_contact: true
+  terminal_event_classes:
+    authenticated_stop: unique_registered_stop_final_with_matching_finish_and_stop_reason
+    authenticated_length: exactly_24_ids_no_registered_stop_with_finish_reason_length
+    length_content: all_24_sampled_ids_are_scored_precommit_content
+    authentication_failure: claimed_stop_missing_or_short_length_or_repeated_interior_poststop_or_wrong_reason
   temperature: 0.6
   top_p: 0.95
   top_k: 20

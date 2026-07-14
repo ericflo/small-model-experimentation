@@ -108,7 +108,10 @@ The model-free protocol smoke passes with zero model calls. It accepts only a
 clean expected answer followed by one terminal registered stop token. The
 matched HF boundary preserves tokenizer EOS/newline as strict answer content
 and therefore fails exactness. Early stops, interior-plus-terminal stops,
-missing stops, and extra pre-commit bytes all fail their registered contract.
+missing claimed stops, and extra pre-commit bytes all fail exactness or their
+registered contract as appropriate. A unique final early stop is authenticated
+but scored; an exact-cap length trace is authenticated with all tokens retained
+as content.
 
 The first independent review returned `HOLD_DESIGN`; its four blockers are now
 addressed prospectively in the config and preregistration. The remediation has
