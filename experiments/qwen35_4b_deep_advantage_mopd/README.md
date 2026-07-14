@@ -1,14 +1,15 @@
 # Qwen3.5-4B Deep-Advantage MOPD
 
-**Status:** in-progress · since 2026-07-12 · Fresh deep qualification, exact-logit locality, all three four-round integrations, and all controls pass; sealed confirmation remains.
+**Status:** in-progress · since 2026-07-12 · Fresh deep qualification, exact-logit locality, all three four-round integrations, and all controls pass; sealed confirmation is running.
 
 ## Status
 
 **Fresh deep qualification passes on both untouched blocks, the frozen
 five-update MOPD pilot passes exact-logit locality, and seeds 42, 43, and 44
 each complete all four integration rounds. All trained and parameter controls
-also pass their artifact/training gates; no procedural performance result
-exists yet.** This is a new result-bearing successor to
+also pass their artifact/training gates; the first sealed source-arm anchor is
+complete, but no treatment comparison exists yet.** This is a new
+result-bearing successor to
 `qwen35_4b_same_prefix_advantage_routing`, not an extension of its terminal
 result.
 
@@ -212,9 +213,14 @@ and hashes to
 `6424b68d01420154d10b7a999332eb4b9d44fca3cad63cf7266f098b9d9c990e`.
 Block-0 deep then entered `STARTED`; its external journal hashes to
 `ca44441a2784a79d314b7c359dde6f136617d6bf68301b9dd0741fe3325b8d38`.
-No generated bundle or score exists at this in-progress checkpoint, so it
-changes no capability conclusion; the empty-tree full rerun remains in
-progress.
+It completed all 4,032 atom rows and 384 18-turn episodes, passed the unchanged
+strict journal validator that stopped attempt 1, and atomically published score
+`f6d7c0271aa2d7acdc04e1e62e54dfb79d7a49f244fe332e898b4b813937d1e6`.
+The registered block-0 source anchor is `0.580068` on the deep stratum
+(`n=3,072`) and `0.810029` on the quick stratum (`n=1,344`), using 4,261,790
+sampled tokens. This establishes only the first comparator; it cannot show a
+MOPD gain or causal advantage-routing effect. The remaining sealed arms and
+second block are in progress.
 
 ## NF4/BF16 Interpretation Diagnostic
 

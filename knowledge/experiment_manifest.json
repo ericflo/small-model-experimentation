@@ -1727,7 +1727,7 @@
   {
     "file_counts": {
       ".gz": 10,
-      ".json": 32,
+      ".json": 33,
       ".jsonl": 8,
       ".md": 10,
       ".py": 78,
@@ -1743,7 +1743,7 @@
       "structured_execution_and_compilers"
     ],
     "source_track": "new",
-    "summary": "**Fresh deep qualification passes on both untouched blocks, the frozen five-update MOPD pilot passes exact-logit locality, and seeds 42, 43, and 44 each complete all four integration rounds. All trained and parameter controls also pass their artifact/training gates; no procedural performance result exists yet.** This is a new result-bearing successor to `qwen35_4b_same_prefix_advantage_routing`, not an extension of its terminal result.",
+    "summary": "**Fresh deep qualification passes on both untouched blocks, the frozen five-update MOPD pilot passes exact-logit locality, and seeds 42, 43, and 44 each complete all four integration rounds. All trained and parameter controls also pass their artifact/training gates; the first sealed source-arm anchor is complete, but no treatment comparison exists yet.** This is a new result-bearing successor to `qwen35_4b_same_prefix_advantage_routing`, not an extension of its terminal result.",
     "tags": [
       "small-model"
     ],
@@ -1757,8 +1757,8 @@
       "src",
       "tests"
     ],
-    "total_files": 141,
-    "total_size_bytes": 26269786
+    "total_files": 142,
+    "total_size_bytes": 27394867
   },
   {
     "file_counts": {

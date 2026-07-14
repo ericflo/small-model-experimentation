@@ -6,7 +6,8 @@ The preregistered CPU/scientific smoke, pinned-model preflight, installation
 canary, fresh route qualification, five-update exact-logit locality pilot, and
 all three four-round integrations pass. All matched trained controls and fixed
 parameter soups also pass their artifact/training gates. The sealed capability
-comparison has not run yet.
+comparison is running: its first block-0 deep source anchor is complete, but no
+treatment comparison exists yet.
 
 ## Research Program Fit
 
@@ -142,7 +143,15 @@ pass. Attempt-1 bytes remain terminal and will not be reused.
 Fresh semantic authorization now passes and hashes to
 `2b9b86aa76bfb87169a2c70313f967f20c13a09e62fbab25069120e29f0ef9f1`;
 its pre/post control inventories both hash to `690a5b5e…` and include repaired
-runner `1e065b9c…`. No fresh admission or score exists at this boundary.
+runner `1e065b9c…`. Fresh empty-tree admission hashes to
+`6424b68d01420154d10b7a999332eb4b9d44fca3cad63cf7266f098b9d9c990e`.
+Block-0 deep then completed 4,032 atom rows and 384 full episode rows, passed
+the unchanged strict call-journal validator, and published score
+`f6d7c0271aa2d7acdc04e1e62e54dfb79d7a49f244fe332e898b4b813937d1e6`.
+Its source-anchor means are `0.580068` on the deep stratum (`n=3,072`) and
+`0.810029` on the quick stratum (`n=1,344`), using 4,261,790 sampled tokens.
+This resolves the attempt-1 schema-contract question and supplies one sealed
+comparator only; it does not establish a MOPD gain or routing causality.
 
 Together, the three frozen optimizer seeds establish that the registered
 four-round update can complete safely and that strict-deep route supply

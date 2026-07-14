@@ -506,3 +506,22 @@
   external journal hashes to
   `ca44441a2784a79d314b7c359dde6f136617d6bf68301b9dd0741fe3325b8d38`.
   No generated bundle or score existed when this start marker was recorded.
+
+## 2026-07-14 — attempt-2 block-0 deep completes and validates
+
+- Block-0 deep generated 4,032 atom rows and 384 episode rows through all 18
+  turns. The generated journal hashes to
+  `adc322ff06f1c585653467c7f8b745e6bc89aad5103dbd31e29312cbad8ac09c`;
+  atom and episode raw files hash to
+  `80fe4abcb8f09fff268f514e4b9fc2cfb3718d566b537988a2fab50d46339754`
+  and `2e5b0b467e9a543d468fc7759675c022b6c4b29cbd5cdf6e8109335003a8c150`.
+- The unchanged strict call-journal validator passed, directly resolving the
+  attempt-1 evidence-pipeline question. `COMPLETE.json` hashes to
+  `d029202d1f11626bdf76ef6f6607b5e7033fc58584d852a83cc30da48dc6663a`
+  and binds score hash
+  `f6d7c0271aa2d7acdc04e1e62e54dfb79d7a49f244fe332e898b4b813937d1e6`.
+- The parent accepted registered aggregates `0.580068` (`n=3,072`) on the deep
+  stratum and `0.810029` (`n=1,344`) on the quick stratum, with 4,261,790
+  sampled tokens. This is a single source-arm anchor, not treatment evidence;
+  block-0 non-advantage evaluation started next with external journal hash
+  `b5b1a6c6b19d95630c066ba0767fbaa62f8627836a03deb8384ab71003c7286a`.
