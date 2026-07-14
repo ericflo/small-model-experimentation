@@ -717,3 +717,31 @@ least four failures as the residual intervention set and preserve saturated skil
 with active replay and an unchanged all-skill retention gate. Reuse of the published
 immutable collection is legitimate only in a new result directory with a new sampling
 seed and prospective residual policy.
+
+## qwen35_4b_universal_residual_successful_sibling_target_match (2026-07-14 — Terminal availability stop)
+
+The residual successor inherited the immutable 624-task source and 227-failure
+inventory, prospectively treated the ten skills with at least four hard failures
+(225 rows), and completed its single authenticated same-parent `n=16` event at seed
+66117 from published-green commit `fc5a333b`: 3,600/3,600 outputs, 2,337,087 sampled
+tokens at 739.2 tok/s, no recovery or rerun.
+
+The frozen model-free selection ran from green checkpoint `915a7c62` and qualified
+855/3,600 siblings (natural stop, closed canonical thinking, exact answer, ≤768
+thinking tokens; dominant rejections: over the short budget 1,527, wrong answer
+1,359). Per-task availability was execute 29, optimize/probe/repair 21,
+state/trace/verify 12, order 11, abstain 6 — and induct 2, below the mandatory four.
+The outcome is `STOP_INSUFFICIENT_SUCCESSFUL_SIBLINGS` with zero selected rows;
+inventory/receipt hashes are `60c95b7a...083e` / `d3926daf...ad01`. No training
+corpus, adapter, local result, or benchmark result exists; seeds 50/88012/78142
+remain unconsumed and benchmark data was never read.
+
+Read: this closes same-parent successful-sibling mining as a universal-curriculum
+source. Nine of ten residual skills supplied quota easily, so the residual/retention
+separation worked; the design failed only at induct, where 46 failure tasks and 736
+samples yielded two supported tasks. The parent's policy support is empty exactly at
+the program's wall skill (C38/C39): what greedy decoding cannot do, temperature-0.6
+re-sampling within a short-thinking budget cannot supply either. Curriculum signal
+for the wall must come from designed synthetic data that does not depend on parent
+policy support — per the queued bounded-computation plus canonical-answer-commitment
+successor spec — not from harvesting the parent's own successes.

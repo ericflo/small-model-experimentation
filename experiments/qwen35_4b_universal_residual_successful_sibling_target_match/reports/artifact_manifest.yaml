@@ -6,17 +6,10 @@ external_artifacts:
     required_for: sibling collection and conditional paired arm warm starts
     checksum: 7ab4c419f70135d3fe058dba6e79e3a9a61c6661d43e6acb9662f331efe36e2e
     regenerate: experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/runs/merges/replay_after_close.json
-  - name: future paired adapters and explicit composites
-    storage: large_artifacts/qwen35_4b_universal_residual_successful_sibling_target_match
-    required_for: conditional local and aggregate evaluation
-    checksum: pending; training is not authorized
-    regenerate: checkpointed scripts/run.py stages after successful-sibling and compute reviews
-omitted_artifacts:
-  - path: large_artifacts/qwen35_4b_universal_residual_successful_sibling_target_match
-    reason: future model weights exceed repository limits and require tracked cryptographic receipts
+omitted_artifacts: []
 reproducibility:
   smoke_command: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_residual_successful_sibling_target_match/scripts/run.py --smoke
   full_command: checkpointed scripts/run.py stages only
   required_external_artifacts:
     - authenticated replay parent composite
-notes: Inherited lineage and residual input/design artifacts plus the complete 225-row, 3600-output sibling collection, metadata, log, and receipt are tracked. No selected sibling corpus, adapter, experiment-local composite, local result, or benchmark result exists yet.
+notes: Inherited lineage, residual input/design artifacts, the complete 225-row 3600-output sibling collection with metadata/log/receipt, and the terminal model-free grading inventory and stop receipt are all tracked in-repo. The experiment closed STOP_INSUFFICIENT_SUCCESSFUL_SIBLINGS before selection; no sibling corpus, adapter, composite, local result, or benchmark result was ever created, so no large artifacts exist for this experiment.

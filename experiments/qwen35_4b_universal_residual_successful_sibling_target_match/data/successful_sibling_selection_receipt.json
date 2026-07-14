@@ -1,0 +1,30 @@
+{
+  "aggregate_seed_open": false,
+  "availability_by_skill": {
+    "abstain": 6,
+    "execute": 29,
+    "induct": 2,
+    "optimize": 21,
+    "order": 11,
+    "probe": 21,
+    "repair": 21,
+    "state": 12,
+    "trace": 12,
+    "verify": 12
+  },
+  "benchmark_data_read": false,
+  "exact_exposure_match_pending": false,
+  "experiment_id": "qwen35_4b_universal_residual_successful_sibling_target_match",
+  "hand_authored_oracle_targets": false,
+  "inventory_sha256": "60c95b7a96e0c325d25aa28e5583e42935081d9c372e0ce334f81ec7693a083e",
+  "next_required_review": null,
+  "outcome": "STOP_INSUFFICIENT_SUCCESSFUL_SIBLINGS",
+  "schema_version": 1,
+  "selected_rows": 0,
+  "selected_rows_by_skill": {},
+  "shortest_qualified_sibling_per_selected_task": true,
+  "stage": "policy_supported_successful_sibling_selection",
+  "training_authorized": false,
+  "training_source_sha256": null,
+  "training_targets_from_sampled_parent_only": true
+}

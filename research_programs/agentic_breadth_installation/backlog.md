@@ -273,21 +273,23 @@
   failures as the residual treatment set, sample only those failures, and protect
   saturated skills through exact-exposure replay plus the unchanged all-skill local
   gate. Do not lower this experiment's quota or rescue it in place.
-- Active residual successful-sibling successor:
-  `qwen35_4b_universal_residual_successful_sibling_target_match` copies the immutable
-  624-task source and 227-failure inventory, then prospectively treats only the ten
-  skills with at least four hard failures. Its oracle-free input has 225 rows;
-  select/count/route remain replay-protected retention skills and stay in the full
-  local gate. The one fresh same-parent `n=16` event at seed 66117 completed from
-  published-green commit `fc5a333b`: 225 prompts, 3,600 outputs, 2,337,087 sampled
-  tokens, 739.2 tok/s, and no recovery or rerun. Raw/receipt hashes are
-  `688c4f7e...c332` / `c3a3a297...f614`. Correctness grading remains unopened;
-  four shortest qualified tasks per residual skill at selection seed 55116 are the
-  only next stage after this collection checkpoint publishes green. Input/manifest/
-  design hashes remain `dafeb012...1119` / `cee88012...c7e7` /
-  `e1066596...93d7`. Training/local/aggregate seeds are 50/88012/78142;
-  exact-exposure replay, all-skill retention, all-family aggregate lift,
-  higher-tier confirmation, and matched-compute sample-more remain mandatory.
+- Completed residual successful-sibling availability stop:
+  `qwen35_4b_universal_residual_successful_sibling_target_match` copied the immutable
+  624-task source and 227-failure inventory, treated only the ten skills with at
+  least four hard failures (225 oracle-free rows), and completed the one same-parent
+  `n=16` event at seed 66117 from published-green commit `fc5a333b`: 225 prompts,
+  3,600 outputs, 2,337,087 sampled tokens, 739.2 tok/s, no recovery or rerun
+  (raw/receipt `688c4f7e...c332` / `c3a3a297...f614`). The frozen model-free
+  selection from green checkpoint `915a7c62` qualified 855/3,600 siblings but only
+  two of 46 induct failure tasks supplied any qualified sibling, below the four-task
+  quota (all other skills ≥6). Outcome `STOP_INSUFFICIENT_SUCCESSFUL_SIBLINGS`;
+  inventory/receipt hashes `60c95b7a...083e` / `d3926daf...ad01`; training/local/
+  aggregate seeds 50/88012/78142 were never consumed. Read together with the
+  balanced predecessor: same-parent successful-sibling mining is closed as a
+  curriculum source — the residual skill that most needs repair (induct) is the one
+  whose successes the parent cannot sample (736 samples, 2 supported tasks). Do not
+  reopen with larger `n`, relaxed token ceilings, or a nine-skill treatment; the
+  wall skill would be untreated by construction.
 
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.

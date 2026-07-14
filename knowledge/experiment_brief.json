@@ -7751,40 +7751,40 @@
    ]
   },
   "qwen35_4b_universal_residual_successful_sibling_target_match": {
-   "verdict_tag": "Residual retry bank is collected",
+   "verdict_tag": "Stopped: too few correct retries",
    "concept_primer": "Use the model’s own correct sampled retries as lessons only where its first answer still fails. Keep ordinary broad practice for skills it already handles, then test every skill again.",
    "plain_question": "Can short correct retries improve the ten skills that still fail without damaging counting, routing, or selection?",
-   "plain_answer": "The one fixed retry event is complete: 225 real first-attempt failures from ten skills each received 16 same-model retries, for 3,600 outputs. Correctness grading has not opened yet; each skill still needs four short correct tasks before training. Counting, routing, and selection stay protected by broad replay and full fresh testing.",
-   "why_it_matters": "The prior all-skill plan stopped because already-strong skills had too few failures. Separating repair from retention spends data where errors exist without lowering the standard that every skill must survive.",
-   "verdict_tone": "neutral",
+   "plain_answer": "Grading the 3,600 retries found 855 short fully-correct ones, and nine of ten weak skills had plenty. But rule-guessing (induction) yielded a usable correct retry on only 2 of its 46 failed tasks, below the required four, so the frozen rule stopped the experiment before any training. No model was trained and no benchmark was touched.",
+   "why_it_matters": "The skill the model most needs to repair is the one where its own retries are never correct: rule-guessing. Together with the earlier stop this closes learning-from-own-retries as the path, and points the program back to purpose-designed practice data that does not depend on the model already being able to succeed.",
+   "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Collected retries",
-     "value": "3,600",
-     "sub": "16 fixed outputs for each of 225 prompts"
+     "label": "Qualified retries",
+     "value": "855 / 3,600",
+     "sub": "short, fully correct, cleanly finished"
     },
     {
-     "label": "Sampled tokens",
-     "value": "2,337,087",
-     "sub": "739.2 tokens per second"
+     "label": "Rule-guessing coverage",
+     "value": "2 / 46",
+     "sub": "failed tasks with any usable correct retry"
     },
     {
-     "label": "Recovery or reruns",
-     "value": "0",
-     "sub": "one authenticated same-model event"
+     "label": "Required per skill",
+     "value": "4",
+     "sub": "nine of ten skills met it; induction did not"
     },
     {
-     "label": "Replay-protected skills",
-     "value": "3",
-     "sub": "select, count, and route remain in the full local test"
+     "label": "Training and benchmarks",
+     "value": "never opened",
+     "sub": "seeds 50 / 88,012 / 78,142 unconsumed"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "The fixed retry bank is complete; grading is next",
-     "chart_read": "The groups move from inherited data and residual input through sampled retries, training, full fresh testing, and broad testing. A bar at one means that checkpoint is complete.",
-     "chart_takeaway": "The first five checkpoints, including all 3,600 fixed retries, are done. Correctness selection, training, and evaluation have not run; model-free grading is the only next step."
+     "chart_plain_title": "Usable correct retries per skill: rule-guessing falls below the bar",
+     "chart_read": "Each bar counts failed tasks where at least one same-model retry was short and fully correct. Four per skill were required.",
+     "chart_takeaway": "Nine skills clear the bar easily; rule-guessing manages two of forty-six, so the preregistered rule stopped the experiment before training."
     }
    ]
   },

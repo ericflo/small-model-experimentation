@@ -2,7 +2,7 @@
 
 ## Summary
 
-The residual design and its one authenticated sibling collection are complete. The experiment reuses the published immutable greedy collection, samples one fixed 16-output bank for each of 225 failures across ten live-residual skills, and keeps all 13 skills in the future retention gate. Correctness grading remains unopened. No training, local evaluation, or benchmark access has occurred.
+The residual design, its one authenticated sibling collection, and the frozen model-free selection are complete, and the experiment is closed terminally. Grading found 855/3,600 qualified siblings, but only two of 46 induct failure tasks supplied any qualified sibling, below the mandatory four per skill. The outcome is `STOP_INSUFFICIENT_SUCCESSFUL_SIBLINGS`: no training corpus exists, and training, local evaluation, and benchmark access never opened.
 
 ## Research Program Fit
 
@@ -23,7 +23,10 @@ The inherited parent event supplied 227 hard failures. A prospective rule retain
 - It completed 225/225 prompts and 3,600/3,600 outputs, sampling 2,337,087 tokens at 739.2 tok/s in 3,210.1 wrapper seconds.
 - Raw output, metadata, log, and receipt SHA-256 are `688c4f7ed461228ac7fad7f4f484c178fe07b205b1305fd39439e18c8e70c332`, `56951f0044ffd53208f78916eb1620bfc1d64b20d9c650a5d7c992d7e5bf9cdf`, `d0b31be82a11bea55af205b6e4b73f4c0ac9cefbe92262158e901add4683df29`, and `c3a3a297ba11ce9242f5b842d353cdb60171e6376e4ea9d3efd68b0e75a5f614`.
 - Collection used the frozen explicit parent and sampling geometry with no recovery or generation rerun. Aggregate seed 78,142 remains sealed.
-- Twenty-nine experiment tests pass. Sibling correctness grading is unopened and no capability result exists.
+- Twenty-nine experiment tests pass.
+- The frozen selection, run from published-green checkpoint `915a7c62`, qualified 855/3,600 siblings (natural stop, closed canonical thinking, exact answer, ≤768 thinking tokens).
+- Per-task availability was execute 29, optimize/probe/repair 21, state/trace/verify 12, order 11, abstain 6, and induct 2 — induct alone fell below the four-task quota.
+- The outcome is `STOP_INSUFFICIENT_SUCCESSFUL_SIBLINGS` with zero selected rows; inventory/receipt hashes are `60c95b7a...083e` / `d3926daf...ad01`. Training, local, and aggregate seeds 50/88,012/78,142 were never consumed.
 
 ## Controls
 
@@ -35,11 +38,11 @@ Executable truth grades outputs only. It is absent from model-facing bytes. The 
 
 ## Interpretation
 
-The complete fixed bank concentrates sampling compute on real residuals and preserves the preregistered one-event boundary. Whether enough short correct siblings are available—and whether selecting and training on them moves fresh greedy behavior—remains unknown.
+The availability negative lands exactly on the program's wall skill. Nine of ten residual skills supplied their quota easily, so the residual/retention separation did its job; the design failed only where the parent's policy support is genuinely empty. Induction failures are not near-misses recoverable by re-sampling at n=16 within a short-thinking budget — consistent with C38/C39's finding that induction, not execution, is the modality-general deficit. Same-parent successful-sibling mining is therefore structurally unable to cover the full residual set: the skill that most needs repair is the skill whose successes the parent cannot produce.
 
 ## Next Stage
 
-Publish this complete raw collection and receipt. Only after that checkpoint is green may the frozen model-free `select-siblings` stage grade availability; do not run another model event or resample a deficient skill.
+None. The experiment is closed terminally under the preregistered no-fallback rule. Any successor — a nine-skill sibling curriculum, a larger sampling budget, or a designed synthetic curriculum that does not depend on parent policy support — is a new experiment with its own intake, design review, and receipts.
 
 ## Artifact Manifest
 

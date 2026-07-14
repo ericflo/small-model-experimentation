@@ -48563,29 +48563,40 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "Residual sibling collection is complete; selection is unopened",
+     "title": "Qualified successful-sibling availability by residual skill (quota 4)",
      "categories": [
-      "intake",
-      "lineage copy",
-      "residual input",
-      "design review",
-      "sibling collection",
-      "sibling selection",
-      "exposure freeze",
-      "paired training",
-      "all-skill local gate",
-      "broad gate"
+      "execute",
+      "optimize",
+      "probe",
+      "repair",
+      "state",
+      "trace",
+      "verify",
+      "order",
+      "abstain",
+      "induct"
      ],
      "series": [
       {
-       "label": "completed checkpoint",
-       "values": [1, 1, 1, 1, 1, 0, 0, 0, 0, 0]
+       "label": "failure tasks with a qualified sibling",
+       "values": [
+        29,
+        21,
+        21,
+        21,
+        12,
+        12,
+        12,
+        11,
+        6,
+        2
+       ]
       }
      ],
-     "x_label": "preregistered experiment stage",
-     "y_label": "completion indicator",
+     "x_label": "residual treatment skill",
+     "y_label": "tasks with at least one qualified sibling",
      "y_format": "integer",
-     "note": "The published lineage and one authenticated event now preserve 3,600 outputs over 225 residual prompts. Correctness selection is unopened; training and every evaluation stage remain gated.",
+     "note": "The frozen selector required four tasks per skill. Induct supplied two of its 46 failure tasks from 736 samples, so the experiment stopped terminally (STOP_INSUFFICIENT_SUCCESSFUL_SIBLINGS) before any training, local, or benchmark event.",
      "source": "experiments/qwen35_4b_universal_residual_successful_sibling_target_match/reports/report.md"
     }
    ]
