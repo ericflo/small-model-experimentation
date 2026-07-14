@@ -2,16 +2,18 @@
 
 ## Status
 
-**Current result-bearing status (2026-07-14):** all three fixed Stage-A LoRA-joint training cells
-and all three preregistered trigger evaluations are complete under exact source v11
-`5a8ed26d…6666`. Seed 7413 completed once without retry and records 3,072 intact plus 3,072
-adaptation-disabled rows, exact checkpoint/source/config lineage, and zero benchmark or sealed-
-contrast access. The aggregate scientific receipt is still pending: this exact seed-7413 checkpoint
-must be published and both workflows must pass before the frozen analysis-recovery consumer runs
-the original v11 `lora_joint` analyzer. Seed-7412 values were accidentally printed by an overbroad
-metadata projection before seed 7413; no classification or action followed, all remaining choices
-were already frozen, and the terminal interpretation must therefore disclose imperfect operator
-blinding.
+**Current result-bearing status (2026-07-14): `LORA_JOINT_MISS_CONTROLS_REQUIRED`.** All three fixed
+Stage-A LoRA-joint cells and trigger evaluations completed under source v11 `5a8ed26d…6666`. The
+published recovery consumer executed the exact v11 analyzer after both workflows passed. Zero of 57
+required seed×split×depth cells reached the 0.40 terminal joint-state threshold; the best intact
+required cell was 0.0234375. Trained-depth, depth-extrapolation, and joint-shift categories all miss,
+and adaptation contrast is uncertain. Producer receipt identity is `b973bc01…a862`; recovery sidecar
+identity is `d068482a…f40e`. This is a valid negative for the registered LoRA joint recipe, not yet a
+rank-causal conclusion: the frozen next stage mandates three LoRA state-only controls plus three
+direct-full-shape joint runs. No sealed contrast was opened. Seed-7412 values were accidentally
+printed by an overbroad metadata projection before seed 7413; no classification or action followed,
+all remaining choices were already frozen, and the terminal interpretation must disclose imperfect
+operator blinding.
 
 **In progress; no scientific result exists.** Preregistration, adversarial design review, and the
 frozen design are complete. Source-v10 implementation authorization is `GO` at reviewed digest

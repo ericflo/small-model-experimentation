@@ -60,3 +60,13 @@ complete.
   blinding must remain visible in the final report.
 - The frozen recovery contract is unchanged. Recovered `lora_joint` analysis remains prohibited
   until the seed-7413 producer checkpoint is committed, pushed, and both workflows are green.
+
+## 2026-07-14 — exact v11 LoRA-joint analysis recovered
+
+- Producer checkpoint `b326f6cd` passed both workflows before the recovery phase began.
+- `--phase lora_joint` completed once without resume. It changed only
+  `_canonical_expected_path`; the scientific functions remained exact immutable producer v11.
+- Producer output SHA-256 is `cb9fee75…818a`, producer receipt identity `b973bc01…a862`, recovery
+  sidecar SHA-256 `aa43077b…6b7e`, and sidecar identity `d068482a…f40e`.
+- Producer status/verdict is `LORA_JOINT_MISS_CONTROLS_REQUIRED`; the exact next stage is
+  `run_lora_state_only_and_fullrank_joint`. No sealed contrast was opened.

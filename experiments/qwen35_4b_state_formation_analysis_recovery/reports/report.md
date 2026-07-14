@@ -2,10 +2,10 @@
 
 ## Summary
 
-This report is intentionally pre-result. The immutable producer's analyzer has one mechanical path
-boundary defect: it rejects its own registered `../../large_artifacts/...` prefix before any result
-row is interpreted. A separately source-bound consumer now pins source-v11 and temporarily repairs
-only that exact prefix. Scientific execution remains gated on all three LoRA trigger evaluations.
+The immutable producer's analyzer had one mechanical path-boundary defect: it rejected its own
+registered `../../large_artifacts/...` prefix before any result row was interpreted. A separately
+source-bound consumer pins source v11, temporarily repairs only that exact prefix, and has now
+completed the authorized `lora_joint` phase without changing scientific code.
 
 ## Research Program Fit
 
@@ -26,14 +26,17 @@ The permitted pre-result outcome passed. `RECOVERY_SMOKE_PASS` has file SHA-256
 `02f6f9275f9c30fddb2f49d4b061237e4e11985d92569642d60cd107b05243f7`, receipt identity
 `30353be5429d4987509715cfa56a6187f24a80ab353b9b774908071de7ed2f8f`, and recovery source contract
 `6ab26016b3de397307c7c8def9c685315b6660370ee98af1a757da11fe1ee94b`. All four frozen controls pass,
-with zero scientific rows, benchmark paths, or sealed contrast rows opened. Scientific results remain
-pending.
+with zero scientific rows, benchmark paths, or sealed contrast rows opened.
 
-The producer's complete three-seed LoRA trigger matrix is now present, but seed 7413 must first be
-published and pass both repository workflows. A producer-side metadata projection accidentally
-printed seed-7412 per-split values before the already-mandatory seed 7413 ran unchanged. It did not
-invoke this analyzer or alter any registered choice, but the eventual scientific interpretation
-must disclose imperfect operator blinding.
+After the complete producer matrix was published and both workflows passed, the recovered analysis
+emitted `RECOVERED_V11_ANALYSIS_COMPLETE`. Producer output SHA-256 is `cb9fee75…818a`, producer
+receipt identity `b973bc01…a862`, and recovery sidecar identity `d068482a…f40e`. The producer verdict
+is `LORA_JOINT_MISS_CONTROLS_REQUIRED`: 0/57 required cells passed the 0.40 threshold, maximum intact
+required accuracy was 0.0234375, all formation categories missed, and adaptation contrast was
+uncertain. The exact next stage is LoRA state-only plus direct-full-shape joint. A producer-side
+metadata projection accidentally printed seed-7412 values before the mandatory seed 7413 ran
+unchanged; it did not invoke this analyzer or alter a registered choice, but interpretation must
+disclose imperfect operator blinding.
 
 ## Controls
 
@@ -46,18 +49,20 @@ must disclose imperfect operator blinding.
 
 ## Oracle Versus Deployable Evidence
 
-This is neither deployable model evidence nor oracle outcome evidence. The recovery manipulates only
-artifact addressing. All later state metrics retain the producer's oracle-only interpretation.
+The recovery manipulates only artifact addressing. Its successful execution is operational evidence;
+the state metrics and Stage-A negative remain producer-owned oracle evidence, not deployable answer
+capability evidence.
 
 ## Interpretation
 
-A passing smoke establishes only that the analysis consumer is narrow and reproducible. The original
-LoRA/full-rank decision tree remains the sole source of a scientific verdict.
+The original decision tree remains the sole source of the scientific verdict. It now mandates the
+capacity controls because Stage A cannot distinguish a LoRA limit from a joint-objective/recipe miss.
 
 ## Next Experiments
 
-None are licensed by recovery alone. Publish and validate the complete producer trigger matrix, run
-the original `lora_joint` phase through this consumer, then execute every branch it mandates.
+None are licensed by recovery alone. Execute the producer's authorized full-rank setup, all three
+LoRA state-only controls, and all three direct-full-shape joint arms, then follow the next immutable
+producer receipt.
 
 ## Artifact Manifest
 

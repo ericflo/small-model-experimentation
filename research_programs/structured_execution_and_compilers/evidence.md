@@ -44,6 +44,18 @@
   LoRA-versus-full-rank state-formation adjudication is mandatory before drawing a rank conclusion;
   neither existing pilot is eligible for confirmation, edge cuts, or sample-more.
 
+- [qwen35_4b_state_formation_capacity_adjudication](../../experiments/qwen35_4b_state_formation_capacity_adjudication/reports/report.md)
+  (unclaimed; in-progress producer verdict `LORA_JOINT_MISS_CONTROLS_REQUIRED`): the fresh
+  adjudication fixes the prior confounds with bit-identical shared state initialization,
+  seed-matched dropout/order, exact K=1 bypass, setup positive controls, three fixed-final 1,500-step
+  seeds, and a source-bound immutable analyzer. The rank-32 LoRA joint arm validly failed state
+  formation: **0/57 required seed×split×depth cells passed 0.40**, with maximum intact accuracy
+  0.0234375 and per-seed maxima 0.0234375/0.015625/0.015625. Trained, deep-extrapolation, and
+  joint-shift categories all missed; adaptation contrast was uncertain. This is stronger evidence
+  that the registered LoRA joint recipe fails than either predecessor, but it still does not identify
+  rank as the cause. The frozen branch now mandates three LoRA state-only controls and three
+  direct-full-shape joint arms before any rank-causal conclusion or sealed contrast.
+
 - [qwen35_4b_commit_slot_jacobian_value_transport](../../experiments/qwen35_4b_commit_slot_jacobian_value_transport/reports/report.md)
   (unclaimed; terminal `COMMIT_SLOT_SEAM_FAIL`): a fixed latent answer interface
   repaired formatting—an alias was already the unmasked next token on 41/48 at

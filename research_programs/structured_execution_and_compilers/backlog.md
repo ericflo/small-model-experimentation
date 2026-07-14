@@ -10,13 +10,13 @@
   positive Carry-minus-Bag and positive query-kind effects. It therefore does not isolate or close
   the rank/capacity question. Do not run either existing experiment's confirmation, edge-cut, or
   sample-more stages, and do not open the interface successor.
-- Run the mandatory fresh RNG-matched three-seed state-formation adjudication, pairing rank-32 LoRA
-  and full-rank deltas under matched generated rows, initialization/training randomness, inference
-  randomness, and identical state readouts. Use it to decide whether adapter capacity prevented the
-  deeper representation from forming. Defer any conclusion that future serial-latent recurrence
-  work must use a materially new representation or supervision design until that adjudication.
-  Retain an equal-compute noncarrying control, the exact untouched K=1 path, and an early registered
-  state-decoding positive control before expensive extrapolation or causal work.
+- Continue the mandatory fresh RNG-matched state-formation adjudication. Its three-seed rank-32 LoRA
+  joint arm validly emitted `LORA_JOINT_MISS_CONTROLS_REQUIRED`: 0/57 required cells passed 0.40 and
+  the best intact cell was 0.0234375, while the setup path, exact K=1 bypass, and positive controls
+  passed. Execute the now-authorized Stage B exactly: seed-matched full-rank G0/positive controls,
+  all three LoRA state-only fixed finals, and all three direct-full-shape joint fixed finals on the
+  same rows, initialization, stochastic streams, and readouts. Do not attribute the miss to LoRA,
+  open sealed contrast, or pivot representation/supervision until the registered Stage-B receipt.
 - Cross-program interface probe completed:
   `qwen35_4b_commit_slot_jacobian_value_transport` showed that a fixed latent
   answer slot repairs formatting but its semantic hint remains task/alias

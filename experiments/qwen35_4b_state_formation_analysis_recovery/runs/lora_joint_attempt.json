@@ -1,0 +1,14 @@
+{
+  "experiment_id": "qwen35_4b_state_formation_analysis_recovery",
+  "phase": "lora_joint",
+  "producer_analysis_sha256": "876888987d816fe29ae93fde0053fb91ed58301d16bf429d5cabaa809c23a2b0",
+  "producer_authorization": null,
+  "producer_config_sha256": "eeb4e828526f750dce1258bcc91d03114c80688d300112e03d18c9d911489393",
+  "producer_output": "experiments/qwen35_4b_state_formation_capacity_adjudication/analysis/lora_joint_trigger.json",
+  "producer_source_contract_sha256": "5a8ed26ddb9446c728191ca8e7849ae44cff92a700e24b237dac522cf4286666",
+  "receipt_identity_sha256": "b69119b49e3fa4b9429cde37830313991528bbac01dda9dc9f1f2d882f6ee15f",
+  "recovery_smoke_sha256": "02f6f9275f9c30fddb2f49d4b061237e4e11985d92569642d60cd107b05243f7",
+  "recovery_source_contract_sha256": "6ab26016b3de397307c7c8def9c685315b6660370ee98af1a757da11fe1ee94b",
+  "schema_version": 1,
+  "status": "RECOVERY_ANALYSIS_STARTED"
+}

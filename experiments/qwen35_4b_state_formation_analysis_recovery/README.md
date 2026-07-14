@@ -1,6 +1,6 @@
 # State-Formation Analysis Recovery
 
-**Status:** in-progress · since 2026-07-13 · recovery smoke published and green; all three LoRA trigger evaluations complete; producer checkpoint publication precedes recovered analysis
+**Status:** in-progress · since 2026-07-13 · recovered `lora_joint` analysis complete; producer verdict `LORA_JOINT_MISS_CONTROLS_REQUIRED` mandates Stage B
 
 This experiment recovers the exact frozen v11 state-formation analyzer through one source-bound
 path seam, without changing any LoRA/full-rank scientific logic or inspecting a result value.
@@ -105,26 +105,27 @@ The non-result smoke passed at file SHA-256
 the receipt records zero result rows, benchmark paths, sealed contrast rows, and scientific analysis
 calls.
 
-No aggregate scientific result has been classified or inspected by this recovery. All three trigger
-evaluations are now preserved in the producer; recovered aggregate analysis remains pending until
-the seed-7413 checkpoint is published and both workflows are green. A producer-side metadata
-projection accidentally exposed seed-7412 per-split values before seed 7413, but did not invoke an
-analyzer, classification, branch, retry, source edit, or checkpoint choice; the already-fixed seed
-7413 then ran unchanged. The frozen smoke proves only path and source-contract mechanics, and the
-terminal interpretation must disclose this imperfect operator blinding.
+After seed-7413 publication and green workflows, the recovery ran `lora_joint` exactly once. The
+unchanged producer v11 analyzer emitted `LORA_JOINT_MISS_CONTROLS_REQUIRED`, next stage
+`run_lora_state_only_and_fullrank_joint`, at producer output SHA-256 `cb9fee75…818a` and receipt
+identity `b973bc01…a862`. The recovery sidecar identity is `d068482a…f40e`. Zero of 57 required
+formation cells passed the 0.40 threshold; the maximum intact required accuracy was 0.0234375, all
+three formation categories missed, and adaptation contrast was uncertain. This licenses the
+producer's registered Stage B, not any new recovery-defined action. A producer-side metadata
+projection had accidentally exposed seed-7412 values before the already-fixed seed 7413 ran
+unchanged; no analyzer or choice followed, but terminal interpretation must disclose imperfect
+operator blinding.
 
 ## Interpretation
 
-A passing smoke establishes that the original decision tree can be executed without changing its
-scientific contract. It says nothing about whether LoRA forms state. After the complete LoRA matrix,
-the original analyzer decides: a pass stops the capacity branch; a complete miss mandates LoRA
-state-only plus full-rank joint, and subsequent registered controls/contrast remain compulsory.
+The recovery has now demonstrated both a narrow path repair and exact execution of the original
+decision tree. Scientific interpretation remains producer-owned: the LoRA joint recipe missed, so
+LoRA state-only plus full-rank joint are compulsory before attributing the miss to capacity.
 
 ## Knowledgebase Update
 
-- Program evidence: update only after a scientific producer verdict; the recovery alone is not
-  scientific evidence.
-- Program backlog: no change from a smoke-only recovery.
+- Program evidence: record the producer Stage-A miss and its mandatory rank-causal controls.
+- Program backlog: replace the pending adjudication with the exact Stage-B execution branch.
 - Claim ledger: no claim is available from an operational repair.
 - Reusable artifact: an exact-prefix, source-bound recovery pattern for immutable analyzers.
 

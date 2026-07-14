@@ -1,6 +1,6 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · frozen design unchanged; all three LoRA-joint trigger evaluations complete; publish seed 7413 before recovered aggregate analysis
+**Status:** in-progress · since 2026-07-13 · authoritative Stage-A result is `LORA_JOINT_MISS_CONTROLS_REQUIRED`; Stage B LoRA-state-only and full-rank-joint arms are mandatory
 
 ## Current status
 
@@ -110,6 +110,18 @@ bypass, zero benchmark or sealed-contrast access, and no branch authorization. S
 were not inspected. The complete three-seed trigger matrix is now present; publish this exact
 checkpoint and require both workflows green before the frozen recovery consumer runs
 `--phase lora_joint`.
+
+Seed-7413 checkpoint `b326f6cd` passed both workflows. The frozen recovery consumer then executed
+the exact immutable v11 analyzer and emitted authoritative producer receipt identity
+`b973bc01…a862` (`cb9fee75…818a` on disk), bound by recovery sidecar identity
+`d068482a…f40e`. Its status and verdict are `LORA_JOINT_MISS_CONTROLS_REQUIRED`, and its sole next
+stage is `run_lora_state_only_and_fullrank_joint`. All 57 required seed×split×depth cells missed the
+0.40 joint node+phase+checksum threshold; the best intact required cell was 0.0234375, with per-seed
+maxima 0.0234375, 0.015625, and 0.015625. Trained, depth-extrapolation, and joint-shift categories
+all miss. The intact-versus-disabled result is `ADAPTATION_CONTRAST_UNCERTAIN`, so Stage A shows that
+this LoRA joint recipe did not form the registered state; it does **not** yet show that LoRA capacity
+caused the miss. The registered capacity adjudication now requires all three LoRA state-only controls
+and all three direct-full-shape joint runs. No contrast split was opened.
 
 Historically, the integrated source-v10 review was `GO` for reviewed implementation
 `a5a494b7…6f1c4a` and full source contract `979a9012…f394b7`; the 360/360 suite and exact machine gate

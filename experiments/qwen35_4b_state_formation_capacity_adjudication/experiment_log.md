@@ -922,6 +922,35 @@ authorized. After both workflows are green, run the already-published recovery c
 `--phase lora_joint`. Its original v11 receipt alone classifies Stage A and authorizes the next
 registered branch; no conditional training, sealed contrast, or source edit is authorized before it.
 
+## 2026-07-14 — recovered immutable analysis mandates Stage B capacity controls
+
+- Seed-7413 evaluation commit `b326f6cd` passed Validate Repository and Publish Research Site before
+  analysis. Local `main` and `origin/main` matched, and the producer/recovery frozen contracts were
+  unchanged.
+- The recovery consumer ran exactly once as `--phase lora_joint`. It changed only
+  `_canonical_expected_path`, delegated all scientific work to immutable producer v11
+  `analysis.py`, and emitted `RECOVERED_V11_ANALYSIS_COMPLETE` at sidecar identity
+  `d068482a…f40e`.
+- The producer output has file SHA-256 `cb9fee75…818a` and receipt identity `b973bc01…a862`. Status
+  and verdict are `LORA_JOINT_MISS_CONTROLS_REQUIRED`; next stage is exactly
+  `run_lora_state_only_and_fullrank_joint`.
+- Zero of 57 required seed×split×depth cells passed the 0.40 terminal joint-state threshold. The
+  maximum intact required accuracy was 0.0234375; per-seed maxima were 0.0234375, 0.015625, and
+  0.015625. Trained, depth-extrapolation, and joint-shift categories all miss. Adaptation contrast is
+  `ADAPTATION_CONTRAST_UNCERTAIN`, with neither a consistent positive intact effect nor a disabled
+  reversal.
+- The result establishes a valid failure of the registered LoRA joint recipe, not a rank-causal
+  conclusion. No sealed contrast was opened. The previously disclosed seed-7412 visibility
+  deviation did not change the frozen analysis, and imperfect operator blinding remains a terminal
+  limitation.
+
+## Current authorization
+
+Only analysis publication, validation, commit, push, and workflow verification are authorized.
+After both workflows are green, Stage B must run all three LoRA state-only controls and all three
+direct-full-shape joint arms under the exact analysis authorization. Full-rank G0/positive-control
+setup precedes result training; sealed contrast remains prohibited.
+
 ## 2026-07-13 — source-v9 seed-7411 G0 stops before model load; cache proof repaired
 
 - Non-model setup commit `ff4a8b9b` passed both repository workflows before the exact seed-7411 LoRA
