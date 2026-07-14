@@ -128,12 +128,12 @@
   family below base. Replay refresh scored 0.4851, +0.0441 over `blend`, with
   eight positive and two tied families. It is a new anchor, not a universal
   winner.
-- Next universal-feature successor: start from the authenticated replay-refresh
-  policy and test an order-of-magnitude lower designed fraction against another
-  replay continuation matched on optimizer steps and forward-token exposure.
-  Freeze new local and benchmark seeds, retain all eight observed gains, require
-  strict lift on every family, and keep matched-compute sampling in the
-  confirmation path.
+- Active exact-token successor:
+  `qwen35_4b_universal_low_density_token_match` starts from authenticated replay
+  refresh and freezes nested 0/40/80-row designed doses. All arms share 1,440
+  replay rows and have exactly 1,429,053 forward tokens, 1,520 rows, and 190
+  steps. New local/benchmark seeds are 88004/78134. Require strict lift on every
+  family and keep matched-compute sampling in the confirmation path.
 
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.

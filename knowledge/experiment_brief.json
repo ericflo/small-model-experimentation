@@ -13249,6 +13249,44 @@
     }
    ]
   },
+  "qwen35_4b_universal_low_density_token_match": {
+   "verdict_tag": "Exact-token low-density ladder is frozen, not run",
+   "concept_primer": "The previous designed mix may have been too dense, and its replay comparison also saw more tokens. This follow-up changes only a tiny number of rows while holding total training exposure exactly equal, so the later difference can be tied much more cleanly to curriculum content.",
+   "plain_question": "Can a tiny dose of abstract skill lessons improve the replay-refreshed model without erasing any of its broad gains?",
+   "plain_answer": "Not measured yet. Three training streams are frozen: replay only, 40 designed lessons, and 80 designed lessons. They share 1,440 replay rows in the same positions, contain 1,520 rows each, and total exactly 1,429,053 forward tokens. Training begins only after this design is checked in.",
+   "why_it_matters": "The prior comparison could reject its candidate but could not separate content from a 17% token-exposure gap. Exact matching removes that ambiguity and tests whether designed lessons help at a gentle density rather than overwhelming a strong broad policy.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "forward tokens per stream",
+     "value": "1,429,053",
+     "sub": "exactly equal across all three training streams"
+    },
+    {
+     "label": "shared replay rows",
+     "value": "1,440",
+     "sub": "identical rows in identical shuffled slots"
+    },
+    {
+     "label": "designed doses",
+     "value": "40 / 80",
+     "sub": "both cover all 13 abstract skills"
+    },
+    {
+     "label": "model training so far",
+     "value": "zero",
+     "sub": "design, tokenization, and smoke checks only"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Only the final 80 training slots change",
+     "chart_read": "Every bar totals 1,520 rows. Moving from replay only to the 40- and 80-lesson doses replaces one or both token-matched replay blocks while the 1,440-row core stays fixed.",
+     "chart_takeaway": "The ladder isolates a very small designed-content increment at exactly equal forward-token exposure."
+    }
+   ]
+  },
   "qwen35_4b_universal_replay_anchor": {
    "verdict_tag": "Designed mix loses; replay-only sets a stronger anchor",
    "concept_primer": "This experiment kept the model practicing broad tasks while adding a smaller set of abstract lessons. A replay-only comparison received the same number of updates, revealing whether any gain came from the designed lessons or simply from continuing broad practice.",

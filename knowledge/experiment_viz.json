@@ -47812,6 +47812,51 @@
     }
    ]
   },
+  "qwen35_4b_universal_low_density_token_match": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Nested doses replace exactly 0, 40, or 80 replay rows",
+     "categories": [
+      "shared replay",
+      "designed curriculum",
+      "matched replay replacements"
+     ],
+     "series": [
+      {
+       "label": "replay_repeat",
+       "values": [
+        1440,
+        0,
+        80
+       ]
+      },
+      {
+       "label": "designed40",
+       "values": [
+        1440,
+        40,
+        40
+       ]
+      },
+      {
+       "label": "designed80",
+       "values": [
+        1440,
+        80,
+        0
+       ]
+      }
+     ],
+     "x_label": "frozen dose component",
+     "y_label": "training rows",
+     "y_format": "integer",
+     "note": "All arms share slot order, contain 1,520 rows, run 190 optimizer steps, and total exactly 1,429,053 forward tokens. This is a frozen design chart; model results are pending.",
+     "source": "experiments/qwen35_4b_universal_low_density_token_match/data/dose_manifest.json"
+    }
+   ]
+  },
   "qwen35_4b_universal_replay_anchor": {
    "charts": [
     {

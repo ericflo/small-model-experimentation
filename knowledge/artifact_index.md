@@ -19,16 +19,16 @@ This is a repository-level inventory. Each experiment remains the source of trut
 
 | Directory | Experiments |
 | --- | ---: |
-| `reports/` | 246 |
-| `src/` | 232 |
+| `reports/` | 247 |
+| `src/` | 233 |
 | `runs/` | 174 |
 | `analysis/` | 159 |
-| `scripts/` | 155 |
-| `configs/` | 150 |
-| `data/` | 136 |
+| `scripts/` | 156 |
+| `configs/` | 151 |
+| `data/` | 137 |
 | `logs/` | 64 |
 | `run_logs/` | 55 |
-| `tests/` | 46 |
+| `tests/` | 47 |
 | `figures/` | 10 |
 | `assets/` | 7 |
 | `docs/` | 3 |
@@ -39,14 +39,14 @@ This is a repository-level inventory. Each experiment remains the source of trut
 
 | Extension | Files |
 | --- | ---: |
-| `.json` | 3068 |
+| `.json` | 3071 |
 | `.csv` | 2144 |
-| `.py` | 2069 |
-| `.md` | 1203 |
-| `.jsonl` | 921 |
+| `.py` | 2083 |
+| `.md` | 1210 |
+| `.jsonl` | 926 |
 | `.png` | 848 |
 | `.log` | 555 |
-| `.yaml` | 439 |
+| `.yaml` | 442 |
 | `.gz` | 169 |
 | `.html` | 90 |
 | `.sh` | 31 |
@@ -88,4 +88,4 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | 7.0 | `experiments/qwen35_4b_learned_active_trace_policy/data/eval/dsl_eval_ceiling.jsonl` |
 | 7.0 | `experiments/qwen35_4b_active_counterexample_trace_selection/data/eval/dsl_eval_ceiling.jsonl` |
 | 6.9 | `experiments/qwen35_4b_universal_replay_anchor/data/sft_blend.jsonl` |
-| 6.9 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_blend.jsonl` |
+| 6.9 | `experiments/qwen35_4b_universal_low_density_token_match/data/sft_blend.jsonl` |

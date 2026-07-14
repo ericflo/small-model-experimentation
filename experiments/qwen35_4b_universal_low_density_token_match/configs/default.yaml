@@ -1,0 +1,25 @@
+model_id: Qwen/Qwen3.5-4B
+model_revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+parent_experiment: qwen35_4b_universal_replay_anchor
+warm_start: large_artifacts/qwen35_4b_universal_replay_anchor/adapters/replay_refresh
+arms:
+  replay_repeat: 0
+  designed40: 40
+  designed80: 80
+shared_replay_rows: 1440
+rows_per_arm: 1520
+forward_tokens_per_arm: 1429053
+epochs: 1.0
+learning_rate: 1.0e-5
+rank: 32
+alpha: 64
+batch_size: 1
+gradient_accumulation: 8
+optimizer_steps: 190
+max_length: 4096
+think_loss_weight: 0.2
+training_seed: 43
+local_seed: 88004
+benchmark_seed: 78134
+benchmark_tier: quick
+benchmark_think_budget: 1024
