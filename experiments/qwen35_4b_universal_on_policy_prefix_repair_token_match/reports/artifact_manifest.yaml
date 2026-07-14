@@ -17,13 +17,17 @@ omitted_artifacts:
     reason: "registered merged parent is external above; future adapters/checkpoints remain large and gitignored"
 reproducibility:
   smoke_command: "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --smoke"
-  full_command: "next stage only: scripts/run.py --stage collect-parent; requires committed merge receipt"
+  full_command: "next stage only: scripts/run.py --stage mine-prefixes; requires committed parent-rollout receipt"
   required_external_artifacts:
     - "large_artifacts/qwen35_4b_universal_close_weight_token_match/adapters/close_xi"
+    - "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/merged/close_xi_parent"
 notes: >-
-  Model-free collection design. Model Qwen/Qwen3.5-4B revision 851bf6e8...d0a; parent
+  Model-free mining design. Model Qwen/Qwen3.5-4B revision 851bf6e8...d0a; parent
   weights/config 16e9dc75...c179 / de953bd5...7ff. Construction, parent-rollout,
   training, local, and conditional aggregate seeds are 77113/66113/47/88009/78139.
   Frozen task/model-input hashes are 32589348...1172 / 7a643e96...a5485c. Explicit
-  merged-parent weight/receipt hashes are 4933f2dd...eb373 / 1fbc84b3...5557. No
-  model rollout, adapter training, capability, or benchmark receipt exists.
+  merged-parent weight/receipt hashes are 4933f2dd...eb373 / 1fbc84b3...5557.
+  The tracked 288-row parent rollout, metadata, normalized log, and receipt hashes are
+  8010632f...3b17f / 9fe81276...664 / ed0d4fc4...26b7 / c6b98b79...74fa.
+  Recovery authenticated completed atomic output and reran no generation. No failure
+  grading, adapter training, capability, or benchmark receipt exists.

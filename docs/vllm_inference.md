@@ -114,6 +114,23 @@ records the runner hash, pinned model revision, adapter hashes, requested engine
 resolved CUDA-graph geometry and mode, the full installed-package inventory, environment-lock
 digest, GPU/driver, Git state, and load/generation throughput.
 
+### Wrapper-created artifacts and Git-state receipts
+
+If an experiment wrapper writes its log under `runs/`, capture `git rev-parse HEAD`
+and require an empty `git status --short` **before** opening that log. The vLLM
+runner samples Git state later, after generation, so its metadata will truthfully
+report `git_dirty: true` once the wrapper's untracked log/output exists. A
+post-generation assertion that runner metadata must say `git_dirty: false` is
+therefore impossible by construction and can reject a fully completed expensive
+event.
+
+Bind the preflight commit, the empty preflight status, the runner hash, and the exact
+allowed output paths in the durable receipt. Then require the runner metadata's
+`git_commit` to match that preflight commit and record why its later dirty bit is
+expected. If an older wrapper hits this footgun after writing complete atomic output,
+do not rerun blindly: authenticate every frozen model/input/sampling/output/metadata
+field, preserve the failure, and use an explicit no-generation recovery path.
+
 ### Package-inventory mutation after engine import
 
 Snapshot the installed-package inventory **before** importing or constructing

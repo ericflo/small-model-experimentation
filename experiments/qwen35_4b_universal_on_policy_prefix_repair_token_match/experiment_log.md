@@ -58,3 +58,32 @@ explicit parent-merge stage and checkpoint its receipt.
   benchmark event ran.
 
 Next: publish and CI-verify this merge receipt, then run only `collect-parent`.
+
+## 2026-07-14 — Authenticated parent rollout collection
+
+- Published parent-merge commit `21e1eb59` directly to `main`; Validate Repository
+  run `29345395690` and Publish Research Site run `29345395680` both passed.
+- From that clean checkpoint, ran only `--stage collect-parent`: the explicitly
+  merged `close_xi` composite generated one greedy natural-thinking completion for
+  each of all 288 frozen prompts at seed 66,113 and a 1,024-token cap. The same vLLM
+  event used max model length 4,096, max 16 sequences, max 8,192 batched tokens, and
+  explicit CUDA-graph sizes 1/2/4/8/16.
+- Completed 288/288 rollouts with 170,252 sampled tokens, 61,981 unique/logical input
+  prompt tokens, and zero injected or stage-two tokens. Model load plus generation
+  took 311.869 seconds; generation throughput was 849.923 sampled tokens/s.
+- Preserved rollout/metadata/normalized-log hashes `8010632f...3b17f` /
+  `9fe81276...664` / `ed0d4fc4...26b7`; the model runner hash is
+  `2099c674...32aaf` and metadata binds generation to commit `21e1eb59`.
+- Generation completed atomically, but the original wrapper's postvalidator exited
+  only because it demanded runner `git_dirty=false` after the wrapper itself had
+  opened an untracked log. Every other frozen contract check passed. The collector
+  now captures clean Git state before opening outputs and includes an explicit
+  `--recover-completed` path. That path authenticated the completed event, reran no
+  generation, and wrote receipt hash `c6b98b79...74fa`.
+- Added a repository-wide operational guard and regression test for this self-dirty
+  wrapper failure. No rollout outcome was graded, no prefix was selected, and no
+  training, capability, local, or benchmark event ran.
+
+Next: publish and CI-verify this rollout checkpoint, then run only the model-free
+`mine-prefixes` stage and preserve either the 60-repair inventory or the frozen
+insufficient-quota negative.

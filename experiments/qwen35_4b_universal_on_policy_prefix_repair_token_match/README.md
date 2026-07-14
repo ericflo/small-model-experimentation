@@ -1,6 +1,6 @@
 # On-Policy Failure-Prefix Universal Curriculum
 
-**Status:** in-progress · since 2026-07-14 · authenticated parent composite merged; rollout collection is next
+**Status:** in-progress · since 2026-07-14 · authenticated parent rollout collected; prefix mining is next
 
 This result-separated successor tests whether training corrective continuations from
 the model's own fresh procedural failure prefixes installs a reusable reasoning and
@@ -63,17 +63,17 @@ Model-free design smoke:
 PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --smoke
 ```
 
-The design checkpoint and parent-merge checkpoint are pushed separately. After this
-merge receipt is pushed and both required workflows are green, run exactly one stage:
+The design, parent-merge, and parent-rollout checkpoints are published separately.
+After the rollout receipt is pushed and both required workflows are green, run exactly
+one model-free stage:
 
 ```bash
-PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --stage collect-parent
+PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --stage mine-prefixes
 ```
 
-Publish the rollout receipt before model-free `mine-prefixes`. Training remains
-unavailable until actual prefix lengths
-support exact-token streams, a zero-skip receipt, and a second adversarial compute
-review.
+Publish the resulting failure inventory before any further stage. Training remains
+unavailable until actual prefix lengths support exact-token streams, a zero-skip
+receipt, and a second adversarial compute review.
 
 ## Results
 
@@ -84,14 +84,22 @@ selection, delayed-commit cutoff, declaration misuse, generation caps, and the
 merged-Qwen architecture gate. The authenticated `close_xi` adapter was explicitly
 merged into a full composite: 128/128 applied LoRA modules were nonzero, the merged
 weight hash is `4933f2dd...eb373`, and the external merge-receipt hash is
-`1fbc84b3...5557`. No model generation, training, capability measurement, or
-benchmark event exists.
+`1fbc84b3...5557`. From pushed-green commit `21e1eb59`, one frozen same-backend
+parent event produced all 288/288 greedy natural-thinking rollouts, 170,252 sampled
+tokens at 849.9 tokens/s. Rollout/metadata/log/receipt hashes are
+`8010632f...3b17f` / `9fe81276...664` / `ed0d4fc4...26b7` /
+`c6b98b79...74fa`. The original postvalidator rejected only an impossible
+post-open `git_dirty=false` assertion; an explicit no-generation recovery path
+authenticated every other frozen field and wrote the receipt without rerunning the
+model. Failure outcomes have not been graded. No training, capability measurement,
+local evaluation, or benchmark event exists.
 
 ## Interpretation
 
-This is a deployment-authentication result, not evidence that on-policy correction
-works. The explicit merge closes vLLM's runtime-LoRA silent no-op, but failure quotas
-may still prove unreachable; that outcome stops training and is preserved.
+This is a collection-authentication result, not evidence that on-policy correction
+works. The explicit merge closes vLLM's runtime-LoRA silent no-op and the rollout is
+complete, but failure quotas may still prove unreachable; that outcome stops training
+and will be preserved.
 
 ## Knowledgebase Update
 
@@ -108,6 +116,7 @@ may still prove unreachable; that outcome stops training and is preserved.
 - `scripts/mine_prefix_repairs.py`
 - `data/design_receipt.json`
 - `data/rollout_task_manifest.json`
+- `runs/parent_rollout/seed66113.receipt.json`
 - `reports/design_review.md`
 - `reports/preregistration.md`
 - `reports/report.md`

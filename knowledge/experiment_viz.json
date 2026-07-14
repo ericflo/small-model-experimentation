@@ -48341,15 +48341,16 @@
   },
   "qwen35_4b_universal_on_policy_prefix_repair_token_match": {
    "charts": [
-    {
+   {
      "headline": true,
      "kind": "bar",
-     "title": "On-policy prefix repair has a frozen model-free design",
+     "title": "Authenticated parent rollout reaches the fourth checkpoint",
      "categories": [
       "intake",
       "CPU design",
       "parent deploy",
-      "prefix mine",
+      "parent rollout",
+      "prefix + compute",
       "training",
       "local gate",
       "broad gate"
@@ -48360,7 +48361,8 @@
        "values": [
         1,
         1,
-        0,
+        1,
+        1,
         0,
         0,
         0,
@@ -48368,11 +48370,11 @@
        ]
       }
      ],
-     "x_label": "prospective experiment stage",
+     "x_label": "preregistered experiment stage",
      "y_label": "completion indicator",
      "y_format": "integer",
-     "note": "Intake, model-free design, and the authenticated parent composite are complete. No rollout, prefix inventory, training, capability, or benchmark event exists.",
-     "source": "experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/runs/merges/close_xi_parent.json"
+     "note": "The authenticated parent receipt records 288 rows, 170252 sampled tokens, and 849.923 sampled tokens/s. Failure grading, exact-compute review, training, capability, and benchmark stages remain incomplete.",
+     "source": "experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/runs/parent_rollout/seed66113.receipt.json"
     }
    ]
   },

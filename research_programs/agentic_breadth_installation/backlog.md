@@ -184,10 +184,13 @@
   reachable failures per class. Reserved construction/rollout/training/local/
   aggregate seeds are 77113/66113/47/88009/78139. Design receipt
   `98c6a168...5638` authorized the parent merge. That merge applied 128/128 nonzero
-  LoRA modules and produced composite weight hash `4933f2dd...eb373`; rollout and
-  model-free prefix mining remain separately checkpointed. Training stays sealed
-  until observed prefix lengths support exact-token replay streams and a second
-  adversarial compute review.
+  LoRA modules and produced composite weight hash `4933f2dd...eb373`. The separately
+  checkpointed parent event then completed 288/288 rollouts and 170252 sampled tokens
+  at 849.9 tokens/s; rollout/receipt hashes are `8010632f...3b17f` /
+  `c6b98b79...74fa`, with no generation rerun during wrapper recovery. No outcome has
+  been graded yet. Model-free prefix mining is next, and training stays sealed until
+  observed prefix lengths support exact-token replay streams and a second adversarial
+  compute review.
 
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.

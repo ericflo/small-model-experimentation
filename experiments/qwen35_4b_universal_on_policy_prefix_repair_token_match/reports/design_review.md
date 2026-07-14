@@ -165,3 +165,15 @@ This verdict authorizes only `merge-parent`, followed after its separately publi
 receipt by `collect-parent`, and then model-free `mine-prefixes`. It does not authorize
 stream materialization, training, local evaluation, merge of trained arms, or any
 benchmark access. Those require a second pushed-green compute review.
+
+## 2026-07-14 — Post-collection operational clarification
+
+The review's requirement that collection metadata record “clean Git state” applies to
+the wrapper's preflight, before it opens experiment-owned outputs. The runner samples
+Git state after that open and therefore correctly observes the new untracked log as a
+dirty tree. The authenticated receipt must bind the clean preflight commit, match the
+runner metadata to that commit, enumerate the permitted artifacts, and explain the
+later dirty bit; it must not require the runner's post-open `git_dirty` field to be
+false. This clarification repairs an impossible postcondition only. It changes no
+model, input, sampling, quota, seed, promotion, or authorization decision, and it does
+not broaden the `PASS_PARENT_MERGE` verdict.

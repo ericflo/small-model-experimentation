@@ -39,6 +39,7 @@ This file plus `docs/` and `knowledge/` are the complete operating context: ever
 - Keep `reports/artifact_manifest.yaml` or a historical large-artifact manifest current when outputs are external or omitted.
 - Update program evidence and shared synthesis when a result changes strategy.
 - Run `make check` before committing, and check `gh run list` after pushing — local checks can pass while CI diverges (see [docs/quality_gates.md](docs/quality_gates.md)).
+- Capture and validate a clean Git preflight **before** an in-repo runner wrapper opens logs or outputs. Runner metadata sampled afterward will correctly report a dirty tree caused by those new artifacts; bind the original commit and allowed artifact paths instead of asserting post-open `git_dirty=false`.
 
 ## When Starting A New Experiment
 
