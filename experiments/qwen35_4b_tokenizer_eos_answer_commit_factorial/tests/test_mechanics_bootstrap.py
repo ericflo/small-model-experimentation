@@ -33,6 +33,7 @@ class MechanicsBootstrapTests(unittest.TestCase):
             "_BOOTSTRAP_IMPORT_FILES",
             "_BOOTSTRAP_RUNTIME_FILES",
             "_BOOTSTRAP_SUPPORT_FILES",
+            "_BOOTSTRAP_CRITICAL_TEST_FILES",
         }
         assignments = [
             node
@@ -101,6 +102,25 @@ class MechanicsBootstrapTests(unittest.TestCase):
         )
         self.assertIn(
             "_BOOTSTRAP_SUPPORT_FILES",
+            {node.id for node in ast.walk(audit) if isinstance(node, ast.Name)},
+        )
+
+    def test_critical_test_inventory_is_exact_and_path_audited(self) -> None:
+        namespace = self._bootstrap_namespace()
+        self.assertEqual(
+            set(namespace["_BOOTSTRAP_CRITICAL_TEST_FILES"]),
+            set(mechanics_lock.MECHANICS_CRITICAL_FILES)
+            - set(mechanics_lock.MECHANICS_RUNTIME_FILES),
+        )
+        tree = ast.parse(SCRIPT.read_text())
+        audit = next(
+            node
+            for node in tree.body
+            if isinstance(node, ast.FunctionDef)
+            and node.name == "_install_mechanics_path_audit"
+        )
+        self.assertIn(
+            "_BOOTSTRAP_CRITICAL_TEST_FILES",
             {node.id for node in ast.walk(audit) if isinstance(node, ast.Name)},
         )
 

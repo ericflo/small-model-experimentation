@@ -61,6 +61,15 @@ _BOOTSTRAP_SUPPORT_FILES = (
     str(EXP_REL / "scripts/run_calibration.py"),
     str(EXP_REL / "src/process_lock.py"),
 )
+_BOOTSTRAP_CRITICAL_TEST_FILES = (
+    str(EXP_REL / "tests/test_mechanics_bootstrap.py"),
+    str(EXP_REL / "tests/test_mechanics_lock.py"),
+    str(EXP_REL / "tests/test_mechanics_runtime.py"),
+    str(EXP_REL / "tests/test_mechanics_stage.py"),
+    str(EXP_REL / "tests/test_mechanics_transactions.py"),
+    str(EXP_REL / "tests/test_plans.py"),
+    str(EXP_REL / "tests/test_stats.py"),
+)
 _MODEL_ID = "Qwen/Qwen3.5-4B"
 _MODEL_REVISION = "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
 _BOOTSTRAP_GOLD_AUTHORIZED = False
@@ -251,7 +260,11 @@ def _install_mechanics_path_audit(
     }
     allowed = {
         (ROOT / relative).resolve()
-        for relative in (*allowed_relative, *_BOOTSTRAP_SUPPORT_FILES)
+        for relative in (
+            *allowed_relative,
+            *_BOOTSTRAP_SUPPORT_FILES,
+            *_BOOTSTRAP_CRITICAL_TEST_FILES,
+        )
     }
     allowed.add((EXP / "runs/construction/summary.json").resolve())
     git_root = (ROOT / ".git").resolve()

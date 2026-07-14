@@ -1,6 +1,6 @@
 # Qwen3.5-4B Tokenizer-EOS Answer Commit Factorial
 
-**Status:** in-progress · since 2026-07-14 · `PASS_DESIGN` + calibration `PASS_IMPLEMENTATION`; fresh calibration: tokenizer-EOS-only interface qualified; round-eight mechanics `PASS_IMPLEMENTATION`, replacement receipt release pending
+**Status:** in-progress · since 2026-07-14 · `PASS_DESIGN` + calibration `PASS_IMPLEMENTATION`; fresh calibration: tokenizer-EOS-only interface qualified; lock-stage critical-test audit allowlist repaired, exact-commit rereview pending
 
 This fresh successor tests whether the prior strict answer-seam failure was
 caused by waiting past Qwen3.5's tokenizer chat-end token. It registers the
@@ -343,6 +343,18 @@ resource, calibration, routing, launcher, and static checks also passed. All
 mechanics/protected read inventories and model/GPU counters remained zero. The
 replacement hash-bound receipt must be committed, pushed, and green before the
 lock-only stage is retried.
+
+After that replacement receipt was published green, the next lock-only attempt
+failed closed while hashing reviewed critical evidence: the pre-import path
+audit allowed all 22 runtime files and 11 support files but omitted the seven
+reviewed mechanics test files in the 29-file critical inventory. The lock was
+not written, and no mechanics payload, model, or GPU call occurred. A separate
+exact seven-file critical-test allowlist now permits only those review inputs;
+it does not widen runtime imports, prepared/mechanics data, or hidden access.
+The bootstrap test proves that this tuple is exactly the critical-minus-runtime
+set and is actually consumed by the path audit. Because bootstrap-reviewed code
+changed, another exact-commit review and replacement receipt are required. The
+model-free suite passes 141/141.
 
 ## Interpretation
 

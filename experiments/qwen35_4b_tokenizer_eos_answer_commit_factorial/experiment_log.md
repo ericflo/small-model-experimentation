@@ -164,6 +164,16 @@
   calibration normalization, read-only lock build/validation, and every prior
   regression family passed. Model/GPU calls and protected reads remained zero.
   The replacement canonical receipt is still a separate release gate.
+- After the replacement receipt was committed, pushed, and green, lock-only
+  publication failed closed while hashing `test_mechanics_bootstrap.py`: the
+  path audit omitted all seven reviewed test files from the 29-file critical
+  inventory. No lock, mechanics payload read, model request, or GPU call
+  occurred.
+- Added a separate exact seven-file pre-import critical-test allowlist and a
+  bootstrap proof that it equals critical-minus-runtime and is consumed by the
+  path audit. Runtime and data-access inventories remain unchanged. A fresh
+  exact-SHA review and replacement receipt are required before retrying lock;
+  the model-free suite passes 141/141.
 
 ## Scaffold
 
