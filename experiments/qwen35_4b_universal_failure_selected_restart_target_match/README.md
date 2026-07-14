@@ -1,6 +1,6 @@
 # Failure-Selected Counterfactual Restart Curriculum
 
-**Status:** in-progress · since 2026-07-14 · replay control trained; restart-candidate training is next
+**Status:** in-progress · since 2026-07-14 · paired training complete; merged-composite local design is next
 
 This experiment tests whether selecting the stronger parent's fresh procedural
 failures and teaching clean verified restarts can beat exactly exposure-matched replay
@@ -69,18 +69,10 @@ PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B \
 
 ```
 
-The replay control has completed. After its receipt checkpoint is committed, rebased,
-pushed to `main`, and green in both workflows, the only authorized model event is:
-
-```bash
-PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B \
-  experiments/qwen35_4b_universal_failure_selected_restart_target_match/scripts/run.py \
-  --stage train-candidate
-```
-
-The harness reauthenticates the committed control receipt, log, and external adapter
-before candidate launch. No merge, local evaluation, or benchmark event is
-authorized yet.
+Both paired training events have completed. The smoke path reauthenticates their
+tracked receipts/logs and external adapters. No further model event is currently
+authorized: explicit merged-composite construction and fresh-local evaluation must
+receive a separate design/checkpoint before they run.
 
 ## Results
 
@@ -139,6 +131,16 @@ reported final train loss 0.3873. Receipt/log/adapter-config/adapter-weight hash
 `5840757d...b1c`; the adapter is 169,903,320 bytes. The preflight binds clean pushed
 `main` at `821d50d4`, the frozen stream, and the original parent adapter. This is an
 authenticated training event, not capability evidence.
+
+From the separately pushed-green control checkpoint `2c78e655`, the candidate then
+continued the same original parent for exactly 40/40 steps. It encoded 320/320 rows
+with zero skips, completed in 298.5 trainer seconds (315.33 wrapper seconds), and
+reported final train loss 0.5838. Receipt/log/adapter-config/adapter-weight hashes are
+`6aa5c3f1...9871`, `c8572c88...202a`, `6915787d...7f50`, and
+`2072c5c8...39bc`; the adapter is 169,903,320 bytes. Its receipt embeds and
+reauthenticates the published control prerequisite while proving the candidate warm
+start remained the original parent. Training loss is not a capability comparison.
+No merge or evaluation has run.
 
 ## Interpretation
 

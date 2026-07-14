@@ -45,6 +45,15 @@ class FrozenTrainingContractTests(unittest.TestCase):
             "adapter_config": "dce1095c4a6c49611f51efed2a89177cf26945a8694c5fa0bba33cc069a9f8f6",
             "adapter_weights": "5840757d2e639c224cb1abb43320c0b8581eb9eec453ce613e0279803eab6b1c",
         })
+        self.assertEqual(
+            self.trial.PUBLISHED_ARM_HASHES["counterfactual_restart_candidate"],
+            {
+                "receipt": "6aa5c3f10699019cedcfb37d179656d534b8fd80e6b9107b2b4b0574790e9871",
+                "log": "c8572c88b6977ecb2666dd5ab471b1079517b75bfedf6387ece98551f9f2202a",
+                "adapter_config": "6915787d341bdf3c932401586bd209b507e17a36f045c262084fdea7d97f7f50",
+                "adapter_weights": "2072c5c81e0ce35161bfe7b49d9995b2152b8e49aa09db3a2f247c37218639bc",
+            },
+        )
 
     def test_only_frozen_hyperparameters_are_registered(self) -> None:
         expected = self.trial.expected_hyperparameters()

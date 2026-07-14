@@ -152,3 +152,17 @@ This amendment records the event without changing the paired design. Once these
 bytes are committed, rebased, pushed, and green in both workflows, the only next
 authorized event is independent candidate training from the original replay-parent
 adapter. No merge or capability evaluation is authorized.
+
+## 2026-07-14 — Frozen restart-candidate receipt
+
+The sole authorized candidate event ran from pushed-green control commit
+`2c78e655`. It independently warm-started from the original replay-parent adapter,
+trained 320/320 rows with zero skips for exactly 40 updates, and authenticated the
+published control prerequisite. Trainer/wrapper runtime was 298.5/315.33 seconds and
+final train loss was 0.5838. Receipt, log, adapter config, and adapter weight hashes
+are `6aa5c3f1...9871`, `c8572c88...202a`, `6915787d...7f50`, and
+`2072c5c8...39bc`.
+
+This amendment closes paired training without changing promotion. Once published
+green, the next checkpoint may design explicit merged composites and fresh-local
+evaluation. It authorizes no merge, local capability run, or benchmark access.

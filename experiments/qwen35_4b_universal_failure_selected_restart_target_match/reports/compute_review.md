@@ -151,3 +151,12 @@ rows, zero skips, and 40/40 steps. Receipt/log/config/weight hashes are
 `5840757d...b1c`. This note records the frozen event and does not expand the verdict.
 Candidate training becomes authorized only after this receipt checkpoint is itself
 published and green in both workflows.
+
+## Post-candidate receipt
+
+The authorized candidate later completed from pushed-green commit `2c78e655`:
+320/320 rows, zero skips, and 40/40 steps, independently from the original parent.
+Receipt/log/config/weight hashes are `6aa5c3f1...9871`, `c8572c88...202a`,
+`6915787d...7f50`, and `2072c5c8...39bc`. The receipt reauthenticates the published
+control prerequisite. This closes the review's training sequence and authorizes no
+merge or evaluation.

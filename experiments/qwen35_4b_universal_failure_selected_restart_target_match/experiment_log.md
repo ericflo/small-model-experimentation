@@ -100,3 +100,22 @@
   merge, capability evaluation, or benchmark event occurred.
 - Candidate training remains blocked until these tracked results are committed,
   rebased, pushed to `main`, and both workflows are green.
+
+## 2026-07-14 — Authenticated counterfactual-restart training
+
+- Launched only after control commit `2c78e655` was pushed directly to `main` and
+  GitHub runs `29363304029` / `29363304074` both succeeded.
+- The wrapper reauthenticated the committed control receipt/log/external adapter,
+  then independently loaded the original replay-parent adapter rather than
+  continuing from control.
+- Trained exactly 320/320 rows with zero skips and 40/40 optimizer steps at the same
+  seed and hyperparameters. Trainer runtime was 298.5 seconds, wrapper runtime 315.33
+  seconds, and final train loss was 0.5838.
+- Receipt/log/config/weight hashes are `6aa5c3f1...9871`,
+  `c8572c88...202a`, `6915787d...7f50`, and `2072c5c8...39bc`. The complete external
+  adapter is 169,903,320 bytes.
+- The receipt records `benchmark_data_read=false`, a sealed aggregate seed, and the
+  exact published control prerequisite. No merge or capability event occurred.
+- Paired training is complete. Explicit-composite merge and fresh-local evaluation
+  require a new checked, committed, rebased, pushed, two-workflow-green design
+  checkpoint.

@@ -247,8 +247,11 @@
   published green. From pushed-green commit `821d50d4`, replay control then trained
   320/320 rows with zero skips and 40/40 updates; receipt/log/adapter hashes are
   `3a9cc1ea...6d49` / `3bedc341...f25` / `5840757d...b1c`. Publish this control
-  checkpoint before the independently warm-started candidate. No capability result
-  exists yet.
+  checkpoint before the independently warm-started candidate. From pushed-green
+  commit `2c78e655`, that candidate trained 320/320 rows with zero skips and 40/40
+  updates; receipt/log/adapter hashes are `6aa5c3f1...9871` /
+  `c8572c88...202a` / `2072c5c8...39bc`. Publish paired training, then freeze
+  explicit merges and fresh-local evaluation. No capability result exists yet.
 
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.
