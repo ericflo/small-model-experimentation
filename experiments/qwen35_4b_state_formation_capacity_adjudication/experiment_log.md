@@ -924,3 +924,26 @@ that checkpoint before any model-bearing gate. No result-bearing stage is author
 Only source-v11 non-model setup validation, commit, push, and workflow verification are authorized.
 After both workflows are green, replay seed-7411 LoRA G0 and its positive control. Later setup and
 all result-bearing stages remain blocked by their frozen ordered barriers.
+
+## 2026-07-13 — source-v11 seed-7411 LoRA setup pair passes
+
+- Non-model setup commit `bcd57181` passed both required workflows before seed 7411 began.
+- LoRA G0 passed at file SHA-256 `9292794f…1264d`, receipt identity `da06c198…94d0f`, with exact
+  lineage to initialization bundle `a03486a1…c77`, manifest `d104a9c0…a22c`, and source
+  `5a8ed26d…6666`.
+- Both PEFT parity regimes, K=1 before/after, zero function, and destructive checkpoint restoration
+  have zero observed error. All 124 LoRA tensors and every required common-state group have finite
+  nonzero live-joint gradients, the base has none, the aggregation-scalar norm is
+  `6.167606625240296e-5`, and the K=12 path is finite. The ten-step probe measured
+  `0.2844161748886108` seconds/step with 11.197 GiB peak allocation and 35.629 GiB free after G0.
+- The seed-matched positive control passed at file SHA-256 `ee1de715…c98d8`, receipt identity
+  `c830e65b…0c259`: oracle accuracy 1.0; fixed-final intact 48/48; disabled 0/48; exactly 256 updates,
+  accumulation 16, and 4,096 presentations; parameter values changed.
+- Both receipts record zero benchmark and sealed-contrast access and remain setup evidence rather
+  than scientific results. The complete setup barrier still lacks seeds 7412 and 7413.
+
+## Current authorization
+
+Only seed-7411 setup-pair validation, commit, push, and workflow verification are authorized. Seed
+7412 G0/control may begin only after both workflows are green. Result training, evaluation, and
+analysis remain blocked on the complete three-seed setup barrier.

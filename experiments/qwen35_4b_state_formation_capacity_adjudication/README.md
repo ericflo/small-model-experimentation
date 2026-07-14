@@ -1,6 +1,6 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · frozen design unchanged; source-v11 PREPARED-output repair reviewed at 363/363; source-v10 setup invalidated before any result training; source-v11 non-model setup regenerated and awaiting publication before model-bearing setup replay
+**Status:** in-progress · since 2026-07-13 · frozen design unchanged; source-v11 PREPARED-output repair reviewed at 363/363; source-v10 setup invalidated before any result training; source-v11 seed-7411 LoRA setup pair passed and awaits publication before seed 7412
 
 ## Current status
 
@@ -26,7 +26,15 @@ receipt SHA-256 `d46b32bd…0192`, data-manifest SHA-256 `d104a9c0…a22c`, data
 `43363814…6669`, and empty-ledger identity `01b2724b…41f3f`. All three initialization bundles reopen
 canonically, their tracked mirrors are byte-identical and inode-distinct, and their tensor values
 exactly reproduce source v10. No model or benchmark was opened and no sealed payload was
-decompressed. Publish and validate this non-model checkpoint before replaying model-bearing setup.
+decompressed. The non-model checkpoint is green at `bcd57181`. Source-v11 seed-7411 LoRA G0 then
+passed at file SHA-256 `9292794f…1264d` and identity `da06c198…94d0f`: exact PEFT parity, zero K=1
+and checkpoint-roundtrip error, finite K=12, all 124 LoRA tensors and every recurrent group with
+finite nonzero live-joint gradients, no base gradient, and aggregation gradient `6.1676066e-5`. Its
+positive control passed at file SHA-256 `ee1de715…c98d8` and identity `c830e65b…0c259`: oracle and
+intact fixed-final 48/48, adaptation-disabled 0/48, exactly 256 updates, accumulation 16, and 4,096
+presentations. Both remain setup-only evidence with zero benchmark/sealed access. Publish this pair
+and require both workflows green before seed 7412; result training remains blocked on all three
+setup pairs.
 
 Historically, the integrated source-v10 review was `GO` for reviewed implementation
 `a5a494b7…6f1c4a` and full source contract `979a9012…f394b7`; the 360/360 suite and exact machine gate
