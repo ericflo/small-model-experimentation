@@ -40,6 +40,11 @@ _BOOTSTRAP_RUNTIME_FILES = (
     str(EXP_REL / "runs/tokenizer/receipt.json"),
     *_BOOTSTRAP_IMPORT_FILES,
 )
+_BOOTSTRAP_REVIEW_FILES = (
+    str(EXP_REL / "reports/calibration_implementation_review.md"),
+    str(EXP_REL / "reports/calibration_implementation_review.json"),
+)
+_BOOTSTRAP_AUDIT_FILES = (*_BOOTSTRAP_RUNTIME_FILES, *_BOOTSTRAP_REVIEW_FILES)
 _BOOTSTRAP_CRITICAL_FILES = (
     "requirements-vllm.lock.txt",
     str(EXP_REL / "configs/default.yaml"),
@@ -418,7 +423,7 @@ def _bootstrap_verify_before_local_imports() -> None:
     for published_commit in dict.fromkeys((review_commit, lock_commit, head)):
         _bootstrap_validate_ci(published_commit)
     _bootstrap_validate_environment()
-    _install_calibration_path_audit(list(_BOOTSTRAP_RUNTIME_FILES))
+    _install_calibration_path_audit(list(_BOOTSTRAP_AUDIT_FILES))
 
 
 _bootstrap_verify_before_local_imports()

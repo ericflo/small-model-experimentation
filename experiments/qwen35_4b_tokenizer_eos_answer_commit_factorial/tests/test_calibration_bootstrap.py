@@ -43,6 +43,10 @@ class CalibrationBootstrapTests(unittest.TestCase):
             self.assertIn(relative, source)
         self.assertIn("set(critical) != set(_BOOTSTRAP_CRITICAL_FILES)", source)
         self.assertIn("allowed != list(_BOOTSTRAP_RUNTIME_FILES)", source)
+        self.assertIn(
+            "_install_calibration_path_audit(list(_BOOTSTRAP_AUDIT_FILES))",
+            source,
+        )
         self.assertIn("pre-import review provenance changed", source)
         self.assertIn("pre-import frozen mechanics changed", source)
         self.assertIn("for published_commit in dict.fromkeys", source)
@@ -60,6 +64,14 @@ class CalibrationBootstrapTests(unittest.TestCase):
         self.assertEqual(
             tuple(module._BOOTSTRAP_RUNTIME_FILES),
             calibration_lock.CALIBRATION_RUNTIME_FILES,
+        )
+        self.assertEqual(
+            set(module._BOOTSTRAP_AUDIT_FILES)
+            - set(module._BOOTSTRAP_RUNTIME_FILES),
+            {
+                str(module.EXP_REL / "reports/calibration_implementation_review.md"),
+                str(module.EXP_REL / "reports/calibration_implementation_review.json"),
+            },
         )
         self.assertEqual(
             set(module._BOOTSTRAP_CRITICAL_FILES),
