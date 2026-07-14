@@ -13174,40 +13174,78 @@
    ]
   },
   "qwen35_4b_universal_curriculum": {
-   "verdict_tag": "Set up, not yet run: teach generic reasoning skills on made-up alphabets — deliberately nothing like the test — to see if the skills carry over to a held-out benchmark.",
-   "concept_primer": "Instead of showing the model examples that look like the test (which only teaches the test), we hand-write lessons that teach a general skill — like 'follow a rule step by step' or 'check whether an answer is right' — using invented symbols the test never uses. If the model then does better on a hidden benchmark it was never shown, the skill it learned is genuinely general, not memorized.",
-   "plain_question": "Can we install a general reasoning skill in the small model by designing lessons that look nothing like the test, and prove it by improvement on a held-out benchmark we never train on?",
-   "plain_answer": "Not measured yet — this is the setup. The lessons are written and checked for correctness: six general skills (infer a hidden rule, follow a stated procedure, pick the item that fits the constraints, follow a chain of links, check whether a claimed answer is right, and count what matches), each taught over five different made-up alphabets so the skill cannot be tied to any one set of symbols. A search harness is ready to train each mix of lessons and measure whether it lifts the held-out benchmark. The first numbers arrive when the search runs. The starting point to beat: the untrained model scores about 0.13 on the fast proxy.",
-   "why_it_matters": "If designed lessons on unrelated material can raise a held-out benchmark, we can install real capability in the fixed small model by writing curriculum — not by collecting more of the model's own answers (which cannot teach what it lacks), and not by leaning on a bigger model. It is the cheapest, most controllable lever available, and the research program turns on whether this kind of transfer is achievable at all.",
-   "verdict_tone": "neutral",
+   "verdict_tag": "Synthetic skills installed locally but displaced broad behavior",
+   "concept_primer": "The curriculum teaches abstract procedures with invented symbols that do not resemble the benchmark. The crucial test is not whether the model learns those exercises, but whether the same update improves every unrelated family without erasing behavior it already had.",
+   "plain_question": "Can carefully checked synthetic lessons add general procedures that improve every unseen benchmark family while preserving a strong starting policy?",
+   "plain_answer": "Not with either tested training geometry. Continuing from the strong policy raised fresh synthetic accuracy from 50% to 69% and beat the untrained base overall, but it scored 31% aggregate versus 45% for the strong starting policy and fell below base on three of ten families. A second mixture trained from base with broad replay also reached 69% local accuracy, yet only 85% of its answers were well formed and it hit the response limit four times, so its broad test stayed sealed.",
+   "why_it_matters": "The lessons clearly changed the model, but local learning was not a universal gain. The result narrows the search toward gentler joint training that keeps mature broad behavior active during every update, with a replay-only comparison to separate designed-skill transfer from ordinary continued practice.",
+   "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "training rows (v1)",
-     "value": "1400",
-     "sub": "600 infer-rule + 400 follow-procedure + 400 pick-by-constraints; six skills available via the --mix selector"
+     "label": "fresh synthetic accuracy",
+     "value": "69%",
+     "sub": "up from 50% for the strong starting policy"
     },
     {
-     "label": "disjoint surfaces",
-     "value": "5",
-     "sub": "digits, letters, roman numerals, invented words, greek syllables — none shared with the test"
+     "label": "aggregate benchmark score",
+     "value": "31%",
+     "sub": "versus 17% for base and 45% for the strong starting policy"
     },
     {
-     "label": "starting score to beat",
-     "value": "~0.13",
-     "sub": "untrained model on the fast held-out proxy at think-budget 1024; a strong reference adapter reaches ~0.44"
+     "label": "families below base",
+     "value": "3 of 10",
+     "sub": "the update specialized instead of lifting every family"
     },
     {
-     "label": "transfer result",
-     "value": "pending",
-     "sub": "first base-vs-trained comparison not yet run (set up, deliberately not executed)"
+     "label": "from-base replay mixture",
+     "value": "local gate failed",
+     "sub": "85% well-formed answers and four response-limit contacts"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "What the v1 curriculum teaches (by number of lessons)",
-     "chart_read": "Bars show how many hand-written lessons of each general skill are in the first curriculum. This is the design, not a result — a transfer measurement replaces it once a run exists.",
-     "chart_takeaway": "Three skills in v1; three more (follow-links, check-answer, count) are ready to add and search over."
+     "chart_plain_title": "Designed continuation trades broad gains across families",
+     "chart_read": "For each family, compare the strong starting policy's change from base with the designed continuation's change from base. Bars below zero mark regressions.",
+     "chart_takeaway": "The designed lessons create large wins in two families but regress three below base and lose overall to the strong starting policy."
+    }
+   ]
+  },
+  "qwen35_4b_universal_replay_anchor": {
+   "verdict_tag": "Local pass; broad transfer test is next",
+   "concept_primer": "This experiment keeps the model practicing a broad set of tasks while slipping a smaller set of deliberately abstract lessons into the same training stream. A replay-only comparison receives the same number of updates, so the later score difference can be tied to the designed lessons rather than continued practice alone.",
+   "plain_question": "Can gentle joint practice add designed general skills without erasing the broad behavior the model already learned?",
+   "plain_answer": "The first screen says the lessons installed on fresh synthetic checks, but the decisive broad test has not run. The candidate answered 19 of 26 checks correctly, produced well-formed answers on 25 of 26, hit the response cap once, and never refused a feasible route. A replay-only comparison completed the same 1,520 training rows and 190 updates with more token exposure. Both full checkpoints are authenticated; the next paired ten-family score will determine whether the local gain transfers without displacement.",
+   "why_it_matters": "Adding a skill is not useful if the update silently erases other abilities. This design tests a practical way to protect a mature small model: mix every designed lesson with broad practice, lower the update strength, and demand that the resulting model beat both its starting point and continued practice alone across every measured family.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "fresh synthetic check accuracy",
+     "value": "73%",
+     "sub": "19 of 26 correct; enough to pass the frozen local screen"
+    },
+    {
+     "label": "well-formed answers",
+     "value": "96%",
+     "sub": "25 of 26 parsed, with one response-cap contact"
+    },
+    {
+     "label": "training rows",
+     "value": "1,520 each",
+     "sub": "the candidate replaces 400 replay examples with 400 designed lessons"
+    },
+    {
+     "label": "forward-token exposure",
+     "value": "1.23M vs 1.44M",
+     "sub": "the replay-only comparison receives about 17% more compute"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Both training streams share the same broad core",
+     "chart_read": "Each bar totals 1,520 rows. Both streams share 1,120 replay rows; the candidate adds 400 designed lessons while the comparison adds 400 more replay examples.",
+     "chart_takeaway": "The later score difference isolates designed lessons from the benefit of simply continuing broad practice."
     }
    ]
   }

@@ -47707,27 +47707,93 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "v1 universal curriculum — rows per generic circuit (design; transfer result pending)",
+     "title": "Designed-only continuation specializes instead of lifting every family",
      "categories": [
-      "induct (compose/search)",
-      "execute (procedure)",
-      "select (constraints)"
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "sirens",
+      "stockade",
+      "toolsmith",
+      "warren"
      ],
      "series": [
       {
-       "label": "synthetic training rows",
+       "label": "blend minus base",
        "values": [
-        600,
+        0.5,
+        0.5,
+        0.0,
+        0.5,
+        0.125,
+        0.5,
+        0.125,
+        0.33305555555555555,
+        0.33333333333333337,
+        -0.125
+       ]
+      },
+      {
+       "label": "sequential designed continuation minus base",
+       "values": [
+        0.75,
+        0.0,
+        0.020833333333333332,
+        0.125,
+        -0.125,
+        0.75,
+        0.125,
+        -0.125,
+        0.01041666666666674,
+        -0.125
+       ]
+      }
+     ],
+     "x_label": "public benchmark family",
+     "y_label": "paired score delta versus base",
+     "y_format": "decimal",
+     "note": "Aggregate-only quick@1024, seed 78131, same merged qwen_vllm backend. The designed continuation makes two large positive moves but creates three negative families and loses 0.1385 aggregate to blend.",
+     "source": "experiments/qwen35_4b_universal_curriculum/runs/benchmark/quick_tb1024_seed78131_pilot1_tb1024/summary.json"
+    }
+   ]
+  },
+  "qwen35_4b_universal_replay_anchor": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Matched-step arms isolate 400 designed rows against extra replay",
+     "categories": [
+      "shared replay",
+      "designed curriculum",
+      "additional replay"
+     ],
+     "series": [
+      {
+       "label": "warm_union candidate",
+       "values": [
+        1120,
         400,
+        0
+       ]
+      },
+      {
+       "label": "replay_refresh control",
+       "values": [
+        1120,
+        0,
         400
        ]
       }
      ],
-     "x_label": "generic circuit taught",
-     "y_label": "synthetic training rows",
+     "x_label": "frozen dose component",
+     "y_label": "training rows",
      "y_format": "integer",
-     "note": "v1 installs three surface-agnostic circuits over five disjoint surfaces (digits/letters/romans/invented-words/greek). The generator also ships trace/verify/count, selectable via --mix. TRANSFER to the held-out menagerie is the real metric (measured by search.py); when a run exists, a base-vs-adapter transfer chart replaces this design view.",
-     "source": "experiments/qwen35_4b_universal_curriculum/data/sft_universal.jsonl"
+     "note": "Both warm-start blend, contain 1,520 rows, and run 190 optimizer steps. The replay control receives 17.3% more forward-token compute, so a candidate win is conservative.",
+     "source": "experiments/qwen35_4b_universal_replay_anchor/data/dose_manifest.json"
     }
    ]
   }

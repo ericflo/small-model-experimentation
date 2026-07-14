@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 216
-- Manifest files: 519
+- Experiments with manifests: 217
+- Manifest files: 521
 
 ## Manifest Types
 
@@ -12,9 +12,9 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `checkpoint` | 83 |
 | `dataset` | 132 |
 | `large-artifact` | 50 |
-| `other` | 64 |
+| `other` | 65 |
 | `run-data` | 101 |
-| `standard-artifact` | 89 |
+| `standard-artifact` | 90 |
 
 ## Manifests
 
@@ -272,6 +272,8 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_typed_sketch_synthesis` | `dataset` | [manifest](../experiments/qwen35_4b_typed_sketch_synthesis/data/dataset_manifest.json) |
 | `qwen35_4b_typed_sketch_synthesis` | `large-artifact` | [manifest](../experiments/qwen35_4b_typed_sketch_synthesis/large_artifacts_manifest.md) |
 | `qwen35_4b_universal_curriculum` | `standard-artifact` | [manifest](../experiments/qwen35_4b_universal_curriculum/reports/artifact_manifest.yaml) |
+| `qwen35_4b_universal_replay_anchor` | `other` | [manifest](../experiments/qwen35_4b_universal_replay_anchor/data/dose_manifest.json) |
+| `qwen35_4b_universal_replay_anchor` | `standard-artifact` | [manifest](../experiments/qwen35_4b_universal_replay_anchor/reports/artifact_manifest.yaml) |
 | `qwen35_4b_unsaturated_frontier_active_bridge` | `dataset` | [manifest](../experiments/qwen35_4b_unsaturated_frontier_active_bridge/data/adaptive/dataset_manifest.json) |
 | `qwen35_4b_unsaturated_frontier_active_bridge` | `dataset` | [manifest](../experiments/qwen35_4b_unsaturated_frontier_active_bridge/data/dataset_manifest.json) |
 | `qwen35_4b_unsaturated_frontier_active_bridge` | `dataset` | [manifest](../experiments/qwen35_4b_unsaturated_frontier_active_bridge/data/seed_mined/dataset_manifest.json) |

@@ -45,6 +45,7 @@ OUTPUT_KEYS = frozenset(
         "schema_version",
         "stage",
         "tier",
+        "think_budget",
         "seed",
         "backend",
         "model",
@@ -63,12 +64,13 @@ OUTPUT_KEYS = frozenset(
 class RunnerFailure(RuntimeError):
     """A safe benchmark-runner failure with no captured child output."""
 
-    def __init__(self, returncode: int):
+    def __init__(self, returncode: int, private_output_state: str = "not_checked"):
         super().__init__(
             f"benchmark runner failed with exit code {returncode}; "
-            "raw stdout/stderr suppressed"
+            f"private aggregate state={private_output_state}; raw stdout/stderr suppressed"
         )
         self.returncode = int(returncode)
+        self.private_output_state = private_output_state
 
 
 class AggregateFailure(RuntimeError):
@@ -172,6 +174,7 @@ def _write_json_atomic(path: Path, payload: dict[str, Any]) -> None:
 def run_event(
     *,
     tier: str,
+    think_budget: int | None = None,
     seed: int,
     model: Path,
     out: Path,
@@ -182,6 +185,8 @@ def run_event(
 
     if tier not in {"quick", "medium"}:
         raise AggregateFailure("unsupported benchmark tier")
+    if think_budget is not None and think_budget <= 0:
+        raise AggregateFailure("thinking budget is invalid")
     runner = runner.resolve()
     model = model.resolve()
     merge_receipt = model / "merge_receipt.json"
@@ -212,6 +217,8 @@ def run_event(
                 "--out",
                 str(raw),
             ]
+            if think_budget is not None:
+                command.extend(("--think-budget", str(int(think_budget))))
             completed = subprocess.run(
                 command,
                 cwd=runner.parent,
@@ -222,7 +229,20 @@ def run_event(
                 check=False,
             )
             if completed.returncode != 0:
-                raise RunnerFailure(completed.returncode)
+                private_output_state = "missing"
+                if raw.is_file():
+                    try:
+                        _sanitize(json.loads(raw.read_text(encoding="utf-8")))
+                        private_output_state = "aggregate_schema_valid"
+                    except AggregateFailure as exc:
+                        private_output_state = (
+                            "budget_gate_failed"
+                            if "budget" in str(exc)
+                            else "aggregate_schema_invalid"
+                        )
+                    except Exception:  # noqa: BLE001 - expose no private detail
+                        private_output_state = "aggregate_schema_invalid"
+                raise RunnerFailure(completed.returncode, private_output_state)
             try:
                 private_payload = json.loads(raw.read_text(encoding="utf-8"))
                 aggregate = _sanitize(private_payload)
@@ -240,6 +260,7 @@ def run_event(
         "schema_version": 1,
         "stage": "menagerie_aggregate_gateway",
         "tier": tier,
+        "think_budget": int(think_budget) if think_budget is not None else None,
         "seed": int(seed),
         "backend": BACKEND,
         "model": str(model),
@@ -260,17 +281,38 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--tier", choices=("quick", "medium"), required=True)
     parser.add_argument("--seed", type=int, required=True)
+    parser.add_argument("--think-budget", type=int)
     parser.add_argument("--model", type=Path, required=True)
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
     try:
-        run_event(tier=args.tier, seed=args.seed, model=args.model, out=args.out)
+        run_event(
+            tier=args.tier,
+            think_budget=args.think_budget,
+            seed=args.seed,
+            model=args.model,
+            out=args.out,
+        )
     except RunnerFailure as exc:
         print(str(exc), file=sys.stderr)
         return exc.returncode or 1
-    except AggregateFailure:
+    except AggregateFailure as exc:
+        message = str(exc)
+        if "budget" in message:
+            category = "budget_gate_failed"
+        elif "source inventory changed" in message:
+            category = "source_inventory_changed"
+        elif "output path" in message:
+            category = "output_path_invalid"
+        elif "runner is missing" in message:
+            category = "runner_missing"
+        elif "merge receipt is missing" in message:
+            category = "merge_receipt_missing"
+        else:
+            category = "aggregate_schema_invalid"
         print(
-            "aggregate benchmark gateway failed; private output suppressed",
+            f"aggregate benchmark gateway failed; category={category}; "
+            "private output suppressed",
             file=sys.stderr,
         )
         return 2

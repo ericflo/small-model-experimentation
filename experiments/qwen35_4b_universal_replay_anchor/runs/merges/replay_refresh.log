@@ -1,0 +1,25 @@
+[merge] loading composite Qwen/Qwen3.5-4B bf16 ...
+
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]
+Loading weights:  21%|██▏       | 154/723 [00:00<00:00, 1533.14it/s]
+Loading weights:  43%|████▎     | 308/723 [00:00<00:00, 1460.19it/s]
+Loading weights:  63%|██████▎   | 455/723 [00:00<00:00, 1062.04it/s]
+Loading weights:  79%|███████▉  | 571/723 [00:00<00:00, 568.30it/s]
+Loading weights:  90%|█████████ | 653/723 [00:01<00:00, 447.60it/s]
+Loading weights:  99%|█████████▉| 716/723 [00:01<00:00, 446.51it/s]
+Loading weights: 100%|██████████| 723/723 [00:01<00:00, 588.14it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[merge] LoRA products use cuda with FP32 matmul
+[merge] example composite tail: '0.linear_attn.conv1d' -> ['model.language_model.layers.0.linear_attn.conv1d']
+[merge] applied 128 LoRA deltas (expected 7 modules x layers)
+[merge] saving composite merged model to /home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_replay_anchor/merged/replay_refresh ...
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.15s/it]
+Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.15s/it]
+[merge] processor save skipped:
+Qwen3VLVideoProcessor requires the Torchvision library but it was not found in your environment. Check out the instructions on the
+installation page: https://pytorch.org/get-started/locally/ and follow the ones that match your environment.
+Please note that you may need to restart your runtime after installation.
+
+[merge] done

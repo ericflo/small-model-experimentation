@@ -1,0 +1,77 @@
+{
+  "adapter": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_replay_anchor/adapters/warm_union",
+  "adapter_config_sha256": "486e063aad356fe13ecd2f4dd3fbd41892e5d0818ed6a6fcd8cd54406152e0f5",
+  "adapter_size_bytes": 169903320,
+  "adapter_weights_sha256": "26837fade89e75ffd6cc5922b0dec4a1361e93d98228c9137ca59240e1a18f18",
+  "command": [
+    "/home/ericflo/Development/small-model-experimentation/.venv/bin/python",
+    "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_gauntlet_frontier/scripts/train_think.py",
+    "--train",
+    "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_universal_replay_anchor/data/warm_union.jsonl",
+    "--out",
+    "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_replay_anchor/adapters/warm_union",
+    "--epochs",
+    "1.0",
+    "--lr",
+    "1e-05",
+    "--rank",
+    "32",
+    "--alpha",
+    "64",
+    "--batch-size",
+    "1",
+    "--grad-accum",
+    "8",
+    "--max-length",
+    "4096",
+    "--w-think",
+    "0.2",
+    "--seed",
+    "42",
+    "--warm-start",
+    "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_gauntlet_frontier/adapters/blend"
+  ],
+  "datasets": [
+    {
+      "path": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_universal_replay_anchor/data/warm_union.jsonl",
+      "rows": 1520,
+      "sha256": "f209c677a734308525a0feb04a14c1e1e3773bea750ef3ee50172687e67a61aa"
+    }
+  ],
+  "experiment_id": "qwen35_4b_universal_replay_anchor",
+  "git_head": "6c0dc78f36e878620b05990981c948a00ae09a47",
+  "git_status": "M benchmarks/README.md\n M benchmarks/menagerie/results/instrument_validation.json\n M docs/compute_environment.md\n M docs/installing_universal_features.md\n M experiments/qwen35_4b_deep_advantage_mopd/metadata.yaml\n M experiments/qwen35_4b_deep_advantage_mopd/tests/test_benchmark_firewall.py\n M experiments/qwen35_4b_universal_curriculum/README.md\n M experiments/qwen35_4b_universal_curriculum/data/sft_universal.jsonl\n M experiments/qwen35_4b_universal_curriculum/metadata.yaml\n M experiments/qwen35_4b_universal_curriculum/reports/artifact_manifest.yaml\n M experiments/qwen35_4b_universal_curriculum/scripts/gen_curriculum.py\n M experiments/qwen35_4b_universal_curriculum/scripts/search.py\n D experiments/qwen35_4b_universal_curriculum/scripts/search_configs.json\n M experiments/qwen35_4b_universal_curriculum/scripts/train_eval_chain.sh\n M knowledge/artifact_index.md\n M knowledge/artifact_manifest_index.csv\n M knowledge/artifact_manifest_index.md\n M knowledge/experiment_catalog.csv\n M knowledge/experiment_catalog.md\n M knowledge/experiment_manifest.json\n M knowledge/experiment_readiness.csv\n M knowledge/experiment_readiness.md\n M knowledge/experiment_viz.json\n M knowledge/readme_coverage.md\n M knowledge/research_program_index.csv\n M knowledge/research_program_index.md\n M knowledge/source_tracks.csv\n M knowledge/tag_index.md\n M research_programs/agentic_breadth_installation/backlog.md\n M research_programs/agentic_breadth_installation/evidence.md\n M scripts/run_benchmark_aggregate.py\n?? experiments/qwen35_4b_universal_curriculum/data/sft_universal_fast.jsonl\n?? experiments/qwen35_4b_universal_curriculum/data/sft_universal_fast.receipt.json\n?? experiments/qwen35_4b_universal_curriculum/data/sft_universal_fast_plus_replay.receipt.json\n?? experiments/qwen35_4b_universal_curriculum/data/sft_universal_plus_replay.receipt.json\n?? experiments/qwen35_4b_universal_curriculum/idea_intake.md\n?? experiments/qwen35_4b_universal_curriculum/reports/design_review.md\n?? experiments/qwen35_4b_universal_curriculum/reports/pilot_report.md\n?? experiments/qwen35_4b_universal_curriculum/reports/preregistration.md\n?? experiments/qwen35_4b_universal_curriculum/reports/protocol_amendment_001.md\n?? experiments/qwen35_4b_universal_curriculum/reports/protocol_amendment_002.md\n?? experiments/qwen35_4b_universal_curriculum/runs/\n?? experiments/qwen35_4b_universal_curriculum/scripts/check_local.py\n?? experiments/qwen35_4b_universal_curriculum/scripts/eval_curriculum.py\n?? experiments/qwen35_4b_universal_curriculum/scripts/materialize_base.py\n?? experiments/qwen35_4b_universal_curriculum/scripts/merge_trial.py\n?? experiments/qwen35_4b_universal_curriculum/scripts/run_benchmark.py\n?? experiments/qwen35_4b_universal_curriculum/scripts/train_trial.py\n?? experiments/qwen35_4b_universal_curriculum/scripts/validate_curriculum.py\n?? experiments/qwen35_4b_universal_curriculum/tests/\n?? experiments/qwen35_4b_universal_replay_anchor/",
+  "hyperparameters": {
+    "alpha": 64,
+    "batch_size": 1,
+    "epochs": 1.0,
+    "grad_accum": 8,
+    "lr": 1e-05,
+    "max_length": 4096,
+    "rank": 32,
+    "seed": 42,
+    "w_think": 0.2
+  },
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "name": "warm_union",
+  "packages": {
+    "accelerate": "1.14.0",
+    "bitsandbytes": "0.49.2",
+    "peft": "0.19.1",
+    "torch": "2.12.1",
+    "transformers": "5.12.1"
+  },
+  "schema_version": 1,
+  "skipped_rows": 0,
+  "token_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_universal_replay_anchor/data/dose_token_receipt.json",
+  "token_receipt_sha256": "926221a481d2b098fa47b7da76ae5624f222466344f355b31117caf356d1a287",
+  "train_loss": 0.7727,
+  "train_rows": 1520,
+  "wall_seconds": 1320.4452190250158,
+  "warm_start": {
+    "config_sha256": "cd764ae869b8a55526e283dd133e1940896b428839c6abf2e55d6ae2a0b32635",
+    "path": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_gauntlet_frontier/adapters/blend",
+    "weights_sha256": "ad2ef4fae785debedf5e50932a79bda97869d3efc212f53d48ccb04c59e25d21"
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "adapter": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_curriculum/adapters/blend_then_designed_fast",
+  "adapter_config_sha256": "4a51dd5c5a56acc2f3663331ae6664eab593b7a64d63039acb41948bf2fac941",
+  "adapter_size_bytes": 169903320,
+  "adapter_weights_sha256": "72af43458777245f7236f0df6edf89013eeade67140a9a16c4aee279f95e6e77",
+  "command": [
+    "/home/ericflo/Development/small-model-experimentation/.venv/bin/python",
+    "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_gauntlet_frontier/scripts/train_think.py",
+    "--train",
+    "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_universal_curriculum/data/sft_universal_fast.jsonl",
+    "--out",
+    "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_curriculum/adapters/blend_then_designed_fast",
+    "--epochs",
+    "1.0",
+    "--lr",
+    "5e-05",
+    "--rank",
+    "32",
+    "--alpha",
+    "64",
+    "--batch-size",
+    "2",
+    "--grad-accum",
+    "4",
+    "--max-length",
+    "2048",
+    "--w-think",
+    "0.2",
+    "--seed",
+    "42",
+    "--warm-start",
+    "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_gauntlet_frontier/adapters/blend"
+  ],
+  "datasets": [
+    {
+      "path": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_universal_curriculum/data/sft_universal_fast.jsonl",
+      "rows": 800,
+      "sha256": "4a0833756b5497fcbccf278476ece8c98bcbfce80e900ecc2489150e496b27c4"
+    }
+  ],
+  "experiment_id": "qwen35_4b_universal_curriculum",
+  "git_head": "6c0dc78f36e878620b05990981c948a00ae09a47",
+  "git_status": "M experiments/qwen35_4b_universal_curriculum/data/sft_universal.jsonl\n M experiments/qwen35_4b_universal_curriculum/scripts/gen_curriculum.py\n?? experiments/qwen35_4b_universal_curriculum/data/sft_universal_fast.jsonl\n?? experiments/qwen35_4b_universal_curriculum/data/sft_universal_fast.receipt.json\n?? experiments/qwen35_4b_universal_curriculum/data/sft_universal_plus_replay.receipt.json\n?? experiments/qwen35_4b_universal_curriculum/idea_intake.md\n?? experiments/qwen35_4b_universal_curriculum/reports/design_review.md\n?? experiments/qwen35_4b_universal_curriculum/reports/preregistration.md\n?? experiments/qwen35_4b_universal_curriculum/runs/\n?? experiments/qwen35_4b_universal_curriculum/scripts/train_trial.py\n?? experiments/qwen35_4b_universal_curriculum/scripts/validate_curriculum.py\n?? experiments/qwen35_4b_universal_curriculum/tests/",
+  "hyperparameters": {
+    "alpha": 64,
+    "batch_size": 2,
+    "epochs": 1.0,
+    "grad_accum": 4,
+    "lr": 5e-05,
+    "max_length": 2048,
+    "rank": 32,
+    "seed": 42,
+    "w_think": 0.2
+  },
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "name": "blend_then_designed_fast",
+  "packages": {
+    "accelerate": "1.14.0",
+    "bitsandbytes": "0.49.2",
+    "peft": "0.19.1",
+    "torch": "2.12.1",
+    "transformers": "5.12.1"
+  },
+  "schema_version": 1,
+  "skipped_rows": 0,
+  "token_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_universal_curriculum/data/sft_universal_fast.receipt.json",
+  "token_receipt_sha256": "f191b1b932b05d0c74dab6d46388f6f672042f70983bf1c487817f23b3abd3ca",
+  "train_loss": 0.3495,
+  "train_rows": 800,
+  "wall_seconds": 346.65813078999054,
+  "warm_start": {
+    "config_sha256": "cd764ae869b8a55526e283dd133e1940896b428839c6abf2e55d6ae2a0b32635",
+    "path": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_gauntlet_frontier/adapters/blend",
+    "weights_sha256": "ad2ef4fae785debedf5e50932a79bda97869d3efc212f53d48ccb04c59e25d21"
+  }
+}

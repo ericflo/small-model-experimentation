@@ -1,0 +1,120 @@
+{
+  "candidate_minus_blend": {
+    "aggregate_delta": -0.13851388888888888,
+    "per_family_delta": {
+      "chronicle": 0.25,
+      "lockpick": -0.5,
+      "menders": 0.020833333333333332,
+      "mirage": -0.375,
+      "rites": -0.25,
+      "siftstack": 0.25,
+      "sirens": 0.0,
+      "stockade": -0.45805555555555555,
+      "toolsmith": -0.32291666666666663,
+      "warren": 0.0
+    }
+  },
+  "comparisons": {
+    "blend_minus_base": {
+      "aggregate_delta": 0.2791388888888888,
+      "minimum_family_delta": -0.125,
+      "nonnegative_families": 9,
+      "per_family_delta": {
+        "chronicle": 0.5,
+        "lockpick": 0.5,
+        "menders": 0.0,
+        "mirage": 0.5,
+        "rites": 0.125,
+        "siftstack": 0.5,
+        "sirens": 0.125,
+        "stockade": 0.33305555555555555,
+        "toolsmith": 0.33333333333333337,
+        "warren": -0.125
+      },
+      "positive_families": 8
+    },
+    "candidate_minus_base": {
+      "aggregate_delta": 0.14062499999999997,
+      "minimum_family_delta": -0.125,
+      "nonnegative_families": 7,
+      "per_family_delta": {
+        "chronicle": 0.75,
+        "lockpick": 0.0,
+        "menders": 0.020833333333333332,
+        "mirage": 0.125,
+        "rites": -0.125,
+        "siftstack": 0.75,
+        "sirens": 0.125,
+        "stockade": -0.125,
+        "toolsmith": 0.01041666666666674,
+        "warren": -0.125
+      },
+      "positive_families": 6
+    }
+  },
+  "gateway_sha256": "53cf6533dbd710eb167503363c39f73dbf7559a0d91f40a00436a3c218a01c17",
+  "models": {
+    "base": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized",
+    "blend": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_curriculum/merged/blend",
+    "candidate": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_curriculum/merged/blend_then_designed_fast"
+  },
+  "name": "pilot1_tb1024",
+  "promotion": {
+    "beats_control_aggregate": false,
+    "no_negative_family": false,
+    "passes_pilot_gate": false,
+    "positive_aggregate": true,
+    "strictly_positive_every_family": false
+  },
+  "schema_version": 1,
+  "scores": {
+    "base": {
+      "aggregate": 0.16666666666666666,
+      "per_family": {
+        "chronicle": 0.125,
+        "lockpick": 0.0,
+        "menders": 0.0,
+        "mirage": 0.125,
+        "rites": 0.125,
+        "siftstack": 0.0,
+        "sirens": 0.375,
+        "stockade": 0.125,
+        "toolsmith": 0.6666666666666666,
+        "warren": 0.125
+      }
+    },
+    "blend": {
+      "aggregate": 0.4458055555555555,
+      "per_family": {
+        "chronicle": 0.625,
+        "lockpick": 0.5,
+        "menders": 0.0,
+        "mirage": 0.625,
+        "rites": 0.25,
+        "siftstack": 0.5,
+        "sirens": 0.5,
+        "stockade": 0.45805555555555555,
+        "toolsmith": 1.0,
+        "warren": 0.0
+      }
+    },
+    "candidate": {
+      "aggregate": 0.30729166666666663,
+      "per_family": {
+        "chronicle": 0.875,
+        "lockpick": 0.0,
+        "menders": 0.020833333333333332,
+        "mirage": 0.25,
+        "rites": 0.0,
+        "siftstack": 0.75,
+        "sirens": 0.5,
+        "stockade": 0.0,
+        "toolsmith": 0.6770833333333334,
+        "warren": 0.0
+      }
+    }
+  },
+  "seed": 78131,
+  "think_budget": 1024,
+  "tier": "quick"
+}

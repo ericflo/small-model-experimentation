@@ -1,0 +1,13 @@
+{
+  "arm": "base",
+  "benchmark_output_exposed": false,
+  "gateway_exit_code": 2,
+  "model": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized",
+  "model_merge_receipt_sha256": "25aee794cfffe4d58110defc61177edef1f5324e47deb28fbd3cb7ccd61ae54f",
+  "name": "pilot1_retry1",
+  "raw_streams_exposed": false,
+  "schema_version": 1,
+  "score_emitted": false,
+  "seed": 78131,
+  "tier": "quick"
+}

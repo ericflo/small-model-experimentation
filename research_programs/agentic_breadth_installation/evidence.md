@@ -436,3 +436,37 @@ successor should counterfactually pair nearly identical issue/source states
 with flipped public evidence, teach evidence inspection then evidence-faithful
 first patches, replay the full conditional loop, and beat matched replay and
 sample-more on held-out evidence channels before Menagerie.
+
+## qwen35_4b_universal_curriculum (2026-07-13 — First pilot specialization negative)
+
+The inherited designed-curriculum scaffold was not admissible: 16/600 induction
+traces contradicted their answers, at least 33/600 nominal two-step rules
+collapsed to one primitive, its smoke command was dead, its shell failed open,
+and the advertised run had never started. A replacement deterministic 13-skill,
+six-surface generator now enforces executable truth, induction
+query-identifiability, genuine dead ends, behavioral depth, byte determinism,
+and zero tokenizer skips.
+
+The first frozen arm continued C53 `blend` for one epoch on 800 designed rows.
+It installed locally: fresh synthetic accuracy rose 0.500->0.692, parse rate
+0.615->0.962, and cap contacts fell 10/26->1/26. Firewall-clean paired
+quick@1024 (seed 78131, merged qwen_vllm) rejected universality. Candidate was
+0.3073 versus base 0.1667 (+0.1406) and blend 0.4458 (-0.1385); chronicle and
+siftstack each gained +0.75 over base, but rites, stockade, and warren each
+fell -0.125. Six families were positive, one zero, three negative.
+
+The from-base factorial arm then co-trained all 800 designed and 2,240 replay
+rows. Its effective-batch-8 recovery completed 3,040/3,040 rows with zero skips
+and loss 1.366. On prospectively frozen local seed 88002 it reached 0.692
+accuracy and recovered routing to 2/2, but parse rate was 0.846 (<0.90) and cap
+contacts were 4/26 (>2); induction and execution were each 0/2. It failed two
+local gates, so benchmark seed 78132 remained sealed.
+
+Read: human-designed executable supervision has real held-out signal, but a
+designed-only continuation specializes and displaces the mature broad policy,
+while from-base replay co-training does not reliably install concise execution.
+Local accuracy is not a retention or emission proxy. The result-separated
+`qwen35_4b_universal_replay_anchor` successor now tests the more direct
+integration repair: low-rate mature warm start with replay in every optimizer
+window versus a matched replay-only refresh. No shared claim changes from this
+negative parent factorial.

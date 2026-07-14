@@ -129,17 +129,27 @@ To search the curriculum‑design space we must make one cycle cheap. Current st
   (the real generator: multi‑skill, surface‑agnostic, truth‑blind) writes a designed
   curriculum in seconds, CPU‑only. It builds on the `generic_curriculum.py` prototype
   in `gauntlet_frontier` (same abstract‑index op logic over 5 alphabets).
-- **Kill the 9 GB merge.** vLLM runtime‑LoRA is a silent no‑op on this model (C49),
-  which forced a full merged checkpoint per recipe (~5 min + disk). **The HF `qwen`
-  backend applies a PEFT adapter directly** — no merge. Verified: apex adapter at
-  budget 1024 lifts menagerie‑quick 0.128 → 0.436. So eval an *adapter*, not a merge.
-- **Fast eval proxy.** Menagerie‑quick at a *low* think budget (1024) via the HF
-  backend, adapter arm only vs a once‑measured base baseline (~3–4 min). Or a direct
-  gym eval for the specific circuit under test. Confirm winners at 8192 + medium.
+- **Do not trust runtime LoRA.** vLLM runtime‑LoRA is a silent no‑op on this model
+  (C49). Use direct PEFT only for a fresh, non-benchmark synthetic installability
+  screen. A candidate that reaches the benchmark must be explicitly merged into the
+  full composite model, with nonzero LoRA application and weight hashes authenticated.
+- **Keep the benchmark comparison paired.** Run base, the strongest frozen control,
+  and candidate on the same fresh seed through `scripts/run_benchmark_aggregate.py`.
+  Every arm uses the canonical `qwen_vllm` backend and tier budget; a once-measured HF
+  base is not a valid comparator. Raw suite output remains inside the gateway's private
+  temporary directory. Confirm promoted quick results on independent seeds and medium.
 
-Net: ~8–15 min per curriculum (fast‑train + adapter eval) vs the old ~90 min —
-roughly **10×**, and a real *search* becomes possible. The driver
-`fast_search.py` runs a grid of recipes and logs each score.
+Net: synthesize and truth-audit every arm in seconds, fast-train and reject locally bad
+arms before paying merge/benchmark cost, then reserve fresh aggregate-only benchmark
+events for promoted candidates. This retains a dense local search loop without trading
+away backend parity or the benchmark firewall.
+
+**Do not reduce the local gate to exact accuracy.** In the first parent factorial,
+designed-only warm continuation and from-base designed-plus-replay both scored 0.6923
+on their respective fresh 26-task screens. The former parsed 0.9615 with 1 cap contact;
+the latter parsed only 0.8462 with 4 cap contacts and failed before benchmark. Track
+accuracy, parse rate, cap contacts, and semantic failure modes prospectively; equal
+accuracy can hide materially different installed policies.
 
 **Speed is not a nicety here; it is the enabling condition for the whole thesis.**
 A universal feature is found by *many* fast, varied curriculum experiments — see
@@ -178,34 +188,36 @@ single‑tenant the GPU. Qwen3.5‑4B only (hard rule), pinned revision
 
 Scripts:
 - `qwen35_4b_universal_curriculum/scripts/gen_curriculum.py` — **the data generator**:
-  a generic, MULTI‑SKILL, surface‑agnostic curriculum (INDUCT = composed‑rule
-  induction via decomposition search; EXECUTE = apply a stated multi‑step
-  procedure; SELECT = pick the item satisfying a constraint conjunction), rendered
-  over digits/letters/romans/invented‑words/greek — disjoint from any menagerie
-  surface. Truth‑blind. Output `data/sft_universal.jsonl`. Add skills here (repair,
-  abstain, longer‑horizon exploration) as new lesson types.
+  a generic, MULTI‑SKILL, surface‑agnostic curriculum spanning induction, execution,
+  selection, tracing, verification, counting, repair, optimization, abstention, state
+  carry, ordering, probe choice, and routing. It renders over six abstract surfaces
+  disjoint from the held-out benchmark, and its executable specifications are
+  truth/minimum-depth audited. Output: `data/sft_universal.jsonl`.
 - `qwen35_4b_gauntlet_frontier/scripts/train_think.py` — QLoRA think‑channel SFT
-  (custom per‑token loss; `--rank`, `--epochs`, `--w-think`; **no `--warm-start` =
-  co‑train from base**). Fast tier for search: `--rank 16 --epochs 1 --batch-size 2
-  --grad-accum 4 --max-length 2048` (~5 min). Confirm winners at r32 / 2–3 epochs.
-- `qwen35_4b_gauntlet_frontier/scripts/bench.py --backend qwen --adapter <dir>
-  --think-budget 1024` — **the transfer metric AND the search fitness function**:
-  menagerie‑quick with the adapter applied in HF (no 9 GB merge; vLLM LoRA no‑ops,
-  C49). ~4 min/arm. base@1024 ≈ 0.128; apex reference ≈ 0.436. Lifting the menagerie
-  aggregate here = the universal feature transferred to the held‑out benchmark.
+  (custom per‑token loss; `--rank`, `--epochs`, `--w-think`, `--warm-start`). Fast
+  search tiers must freeze row count, token dose, skipped-row count, and package receipt;
+  promoted winners are retrained at a registered full dose.
+- `scripts/run_benchmark_aggregate.py --tier quick --model <merged-dir>` — **the
+  transfer metric**. It exposes only aggregate and public per-family scores from the
+  canonical vLLM event. Lifting aggregate without a negative family is the pilot gate;
+  strict positive replicated family deltas are required for universality.
 - Harvest‑remix fallback (if you want to search *selections* of real data instead
   of synthesizing): `qwen35_4b_gauntlet_frontier/scripts/{build_pool,build_recipe,
   fast_search}.py`.
 
 The experiment loop:
 1. `gen_curriculum.py` → `data/sft_universal.jsonl` (seconds).
-2. Fast‑train (co‑train from base) → an adapter in `large_artifacts/`.
-3. `bench.py --backend qwen --adapter … --think-budget 1024`, base vs adapter,
-   fresh seed. **Success = the menagerie aggregate lifts** having trained on zero
-   menagerie‑shaped data. Confirm real wins at 8192 + medium; codify as a claim.
+2. Fast‑train (from base, replay union, or a preregistered warm start) → an adapter in
+   `large_artifacts/`; reject it unless zero rows were skipped and fresh synthetic
+   installability/retention gates pass.
+3. Explicitly merge each promoted arm, then run paired base/control/candidate quick
+   events through the aggregate gateway on a fresh seed. **Pilot success = positive
+   aggregate with no negative family**, after training on zero benchmark-shaped data.
+   Confirm strict wins on independent quick seeds and medium before codifying a claim.
 4. Iterate the *curriculum design* fast: which skills / surfaces / lesson framings
    carry the transfer, and what "lifts all boats"? Ablate; add skills; loop.
-   `train_eval_chain.sh` runs steps 2–3 end‑to‑end.
+   Every result-bearing adaptive change moves to a successor experiment so the search
+   history and benchmark exposure remain auditable.
 
 ## 8. The north star, and the open frontier
 

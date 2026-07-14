@@ -5,20 +5,22 @@ environment or model changes.
 
 ## Current box
 
-- RunPod Linux container currently exposing one **NVIDIA L40 (46,068 MiB)**, driver
-  **550.127.08**, compute capability **8.9** (CUDA 12.4 interface), CUDA 12.8 toolkit,
-  Python 3.12.3, and `uv 0.9.0`. This was re-queried on 2026-07-13 after the allocation changed;
-  receipts from the preceding RTX 6000 Ada allocation remain historical measurements and must not
-  be treated as current-host timings.
+- WSL2 Linux currently exposes one **NVIDIA GeForce RTX 4090 (24,564 MiB)**, driver
+  **595.79**, compute capability **8.9**, Python 3.12.3, and `uv 0.11.25`. This was
+  re-queried on 2026-07-13 after the workspace moved back from its RunPod L40 allocation;
+  L40 and RTX 6000 Ada receipts below remain historical and must not be treated as
+  current-host timings.
 - The high-throughput environment is **`.venv-vllm`** (gitignored), created with `uv`. Its validated
   core stack is vLLM **0.24.0+cu129**, torch **2.11.0+cu129**, and transformers **5.13.0**. CUDA 12
   minor-version compatibility works on this driver: a CUDA allocation and full Qwen3.5 load/generate
   smoke both passed. Install the complete pinned graph from `requirements-vllm.lock.txt`.
-- The separate Transformers training environment is **`.venv`** (gitignored), reproduced with `uv`
-  from `requirements-training.lock.txt`. Its current core stack is torch **2.11.0+cu129**, transformers
-  **5.13.0**, PEFT **0.19.1**, bitsandbytes **0.49.2**, and accelerate **1.14.0**. Rebuild it with
-  the commands below. Keep it separate from `.venv-vllm`; vLLM pins Torch and should not be allowed
-  to rewrite the training stack.
+- The separate active Transformers training environment is **`.venv`** (gitignored): torch
+  **2.12.1+cu130**, transformers **5.12.1**, PEFT **0.19.1**, bitsandbytes **0.49.2**,
+  and accelerate **1.14.0**. `uv pip check` and both Qwen fast-path checks pass. This
+  restored WSL environment is not byte-identical to the newer cu129 training lock, so preserve
+  package versions in every result receipt; use the commands below when a canonical lock rebuild
+  is required. Keep it separate from `.venv-vllm`; vLLM pins Torch and should not be allowed to
+  rewrite the training stack.
 - Both Qwen3.5 training fast-path checks currently pass: flash-linear-attention **0.5.1** and
   causal-conv1d **1.6.2.post1**. The latter has no matching wheel and must be installed *after* the
   base requirements (so torch, ninja, and the build backend already exist):
@@ -36,9 +38,9 @@ environment or model changes.
   checkpointing; the xFormers causal kernel completed the same full-token backward in 29.1 s at
   15.0 GiB peak. Keep the batch at one, use the experiment's >8k layer-checkpoint/chunked-loss path,
   and retain the pre-run 14k stress test whenever this stack changes.
-- The Transformers throughput, OOM, and training measurements later in this document came from the
-  previous single **RTX 4090 (24 GB), WSL** environment. They remain recovery/reference evidence, not
-  measurements of this RunPod.
+- The Transformers throughput, OOM, and training measurements later in this document came from an
+  earlier run on this **RTX 4090 (24 GB), WSL** hardware class. They remain reference evidence, not
+  fresh timings for the current package/driver state.
 
 Recreate and validate the training environment without allowing it to modify the vLLM environment:
 
@@ -70,7 +72,7 @@ at `templates/experiment/src/vllm_runner.py`; new experiment scaffolds copy it a
 CLI examples, thinking-budget semantics, parity gates, and backend-mixing rules live in
 [`docs/vllm_inference.md`](vllm_inference.md).
 
-Current L40 behavior (revalidate whenever the allocation changes):
+Last validated L40 behavior (historical; revalidate on the current 4090):
 
 - pinned Qwen3.5 revision loaded in text-only bf16 using about **8.0 GiB VRAM** on that L40;
 - the first 4k/16-sequence engine startup took **210.7 seconds**, including one-time downloads,
@@ -107,11 +109,10 @@ Tune against the real workload and retain the metadata sidecar. Base generation 
 plumbing are validated; an actual repository rank-32 adapter still requires its separate behavioral
 parity gate after restoration.
 
-## Historical Transformers fast path (previous 4090 only)
+## Transformers fast path (current WSL/4090)
 
-The recipe below describes the previous WSL/torch-cu130 environment. Do not run it verbatim on the
-current RunPod; use `requirements-training.lock.txt` and revalidate the two fast-path imports after
-installation.
+The active environment is WSL/torch-cu130. Revalidate both imports after any package rebuild; use
+`requirements-training.lock.txt` when exact canonical-lock replication matters.
 
 The qwen3_5 fast path needs **both** `flash-linear-attention` (Triton; `is_flash_linear_attention_available()`)
 and **`causal-conv1d`** (`is_causal_conv1d_available()`). If either is missing the model prints
@@ -129,7 +130,8 @@ Rebuild `causal-conv1d` from source if the venv is reset (no prebuilt wheel matc
 
 ```bash
 CUDA_HOME=/usr/local/cuda TORCH_CUDA_ARCH_LIST=8.9 CAUSAL_CONV1D_FORCE_BUILD=TRUE MAX_JOBS=8 \
-  uv pip install --python .venv/bin/python --no-build-isolation --no-binary :all: causal-conv1d
+  uv pip install --python .venv/bin/python --no-build-isolation \
+  --no-binary causal-conv1d causal-conv1d==1.6.2.post1
 ```
 
 ## Historical Transformers throughput is batch-bound, not VRAM-bound
@@ -155,7 +157,7 @@ Recommended batch sizes (used in `experiments/qwen35_4b_thinking_budget_scaling/
 runtime auto-halves a batch that OOMs). Going much past bs≈48 for long (≥2048-token) generations gave
 diminishing/negative returns, so cap long-sequence batches there.
 
-## Historical OOM, CUDA corruption, and recovery (WSL2/4090)
+## OOM, CUDA corruption, and recovery (WSL2/4090)
 
 Hard-won failure knowledge — read before launching anything training-scale:
 
@@ -166,6 +168,13 @@ Hard-won failure knowledge — read before launching anything training-scale:
   ~150K vocab) crashes. Recovery without a WSL restart: train *under* the threshold
   (per-device batch 2 + gradient accumulation — slow but works). The clean fix is
   `wsl --shutdown` (user action).
+- **The safe threshold is workload-specific, not permanently "batch 2."** On the
+  restored 2026-07-13 stack, a mixed max-length-4,096 QLoRA run (longest row 3,193)
+  loaded and completed its first forward at batch 2, then failed in full-vocabulary
+  cross-entropy with `device not ready`; a small CUDA matmul immediately passed.
+  Re-running the exact frozen 3,040 rows at batch 1 / accumulation 8 completed all 380
+  steps at about 6.8 s/step. Preserve the failed launch, lower only the microbatch, and
+  keep the effective batch and corpus fixed before concluding the context is poisoned.
 - **Do not launch a second GPU job while one is running.** A competing job is how the OOM →
   corruption sequence gets triggered; single-tenant the 4090.
 - **OOM can masquerade as "device not ready"** under `expandable_segments`; to surface the
@@ -238,7 +247,7 @@ The full-vocab logits tensor is the recurring OOM source (~150K vocab):
   to requests admitted after a mixed-termination first `max_num_seqs=32` scheduling wave. This
   happened with vLLM 0.24 asynchronous scheduling both enabled *and disabled*. vLLM's true
   batch-invariant mode (`VLLM_BATCH_INVARIANT=1`) requires compute capability >=9.0 and is therefore
-  unavailable on Ada GPUs including the current L40 (8.9). Keep explicit seeds and freeze every tier, but treat
+  unavailable on Ada GPUs including the current RTX 4090 (8.9). Keep explicit seeds and freeze every tier, but treat
   different budgets/batch compositions as independent reproducible protocols rather than common-
   random-number continuations. The shared runner disables async scheduling and records that choice,
   but this simplifies scheduling; it does not make pre-Hopper inference batch-invariant.

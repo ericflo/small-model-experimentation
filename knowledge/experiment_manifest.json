@@ -1758,7 +1758,7 @@
       "tests"
     ],
     "total_files": 131,
-    "total_size_bytes": 26073109
+    "total_size_bytes": 26073349
   },
   {
     "file_counts": {
@@ -5664,40 +5664,82 @@
   },
   {
     "file_counts": {
-      ".json": 1,
-      ".jsonl": 1,
-      ".md": 1,
-      ".py": 2,
+      ".json": 17,
+      ".jsonl": 3,
+      ".log": 5,
+      ".md": 7,
+      ".py": 11,
       ".sh": 1,
       ".yaml": 2
     },
     "id": "qwen35_4b_universal_curriculum",
     "path": "experiments/qwen35_4b_universal_curriculum",
     "primary_readme": "experiments/qwen35_4b_universal_curriculum/README.md",
-    "primary_report": "",
+    "primary_report": "experiments/qwen35_4b_universal_curriculum/reports/pilot_report.md",
     "research_programs": [
       "benchmark_generalization",
       "evidence_conditioned_selection",
       "interpretability_and_diagnostics",
+      "posttraining_and_adaptation",
+      "process_control_and_tool_use",
       "reliability_and_safety",
       "structured_execution_and_compilers"
     ],
     "source_track": "new",
-    "summary": "This is the working experiment for the doctrine in `docs/installing_universal_features.md` (at the repo root). The bet: we can *install* a generic capability in the fixed 4B by **designing and synthesizing** training text (not harvesting the model's own outputs, not narrating oracle answers), teaching an abstract circuit on surfaces **deliberately disjoint from the eval**, and proving the feature is *universal* by **transfer** to a held-out benchmark we never train on or read.",
+    "summary": "Outcome: sequential arm failed aggregate transfer; from-base replay union failed its frozen local gate before benchmark.",
     "tags": [
-      "abi",
       "curriculum",
-      "small-model",
-      "verification"
+      "small-model"
     ],
     "title": "Qwen3.5-4B: Installing Universal Features via Designed Synthetic Curricula",
     "top_level_dirs": [
       "data",
       "reports",
-      "scripts"
+      "runs",
+      "scripts",
+      "tests"
     ],
-    "total_files": 8,
-    "total_size_bytes": 1998446
+    "total_files": 46,
+    "total_size_bytes": 4791687
+  },
+  {
+    "file_counts": {
+      ".json": 8,
+      ".jsonl": 4,
+      ".log": 4,
+      ".md": 7,
+      ".py": 13,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_universal_replay_anchor",
+    "path": "experiments/qwen35_4b_universal_replay_anchor",
+    "primary_readme": "experiments/qwen35_4b_universal_replay_anchor/README.md",
+    "primary_report": "experiments/qwen35_4b_universal_replay_anchor/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation",
+      "benchmark_generalization",
+      "posttraining_and_adaptation",
+      "process_control_and_tool_use"
+    ],
+    "source_track": "new",
+    "summary": "Can a low-rate continuation from the strong C53 `blend` policy install the parent's truth-audited general procedures without displacing broad behavior when every update window is anchored by broad replay?",
+    "tags": [
+      "curriculum",
+      "policy",
+      "small-model"
+    ],
+    "title": "Replay-Anchored Universal Curriculum Continuation",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "runs",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 39,
+    "total_size_bytes": 17653364
   },
   {
     "file_counts": {

@@ -1,0 +1,24 @@
+{
+  "adapter": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_replay_anchor/adapters/replay_refresh",
+  "adapter_weights_sha256": "c296c774d20403c7de9c810bfa825dbbe22bd0683c37692a929bd2bb13e3d36a",
+  "command": [
+    "/home/ericflo/Development/small-model-experimentation/.venv/bin/python",
+    "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_same_prefix_advantage_routing/scripts/merge_adapter.py",
+    "--adapter",
+    "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_replay_anchor/adapters/replay_refresh",
+    "--out",
+    "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_replay_anchor/merged/replay_refresh"
+  ],
+  "merge_receipt_sha256": "f32d7fc6ae0906d0b584a7b9db5e061c945e3641df487da624e773ee7d0caf1c",
+  "merged": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_replay_anchor/merged/replay_refresh",
+  "merger": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_same_prefix_advantage_routing/scripts/merge_adapter.py",
+  "merger_sha256": "cb9af8b45ca1e5754cb36f2213b7e25290f6eb16427d1a8b41f0b12b10396672",
+  "name": "replay_refresh",
+  "schema_version": 1,
+  "weight_files": [
+    {
+      "name": "model.safetensors",
+      "sha256": "22c61cebd6091d0b8380e2d7318b4d4db99ef24eb30b942157e44f37d26cbc9e"
+    }
+  ]
+}

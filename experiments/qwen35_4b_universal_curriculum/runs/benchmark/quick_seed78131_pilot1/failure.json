@@ -1,0 +1,12 @@
+{
+  "arm": "base",
+  "benchmark_output_exposed": false,
+  "failure_class": "runner_exit_2_private_output_suppressed",
+  "model": "large_artifacts/qwen35_4b_universal_curriculum/merged/base",
+  "model_merge_receipt_sha256": "c8df77af82fce42706d37c84f8a7acdd2ea838d502cd01ee3dfe7436bc366099",
+  "name": "pilot1",
+  "raw_streams_exposed": false,
+  "score_emitted": false,
+  "seed": 78131,
+  "tier": "quick"
+}

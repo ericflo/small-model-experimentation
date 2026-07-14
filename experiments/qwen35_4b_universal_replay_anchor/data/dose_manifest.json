@@ -1,0 +1,89 @@
+{
+  "experiment_id": "qwen35_4b_universal_replay_anchor",
+  "outputs": {
+    "replay_refresh.jsonl": {
+      "families": {
+        "burrowmaze": 161,
+        "caravan": 27,
+        "ferrier": 361,
+        "foundry_ledger": 27,
+        "gatepost": 85,
+        "glyphgate": 203,
+        "kilnrite": 356,
+        "loomfix": 123,
+        "packhouse": 41,
+        "patchwheel": 57,
+        "runeward": 17,
+        "stallwright": 62
+      },
+      "kinds": {
+        "atom": 87,
+        "atom_fc": 147,
+        "episode": 1000,
+        "oracle_trace": 286
+      },
+      "rows": 1520,
+      "sha256": "5d5d7c4b8a4b0a4f270fe8b2ecaebe356c771948d71b0f7bbeead6bfc04308b6"
+    },
+    "warm_union.jsonl": {
+      "families": {
+        "burrowmaze": 119,
+        "caravan": 20,
+        "ferrier": 266,
+        "foundry_ledger": 20,
+        "gatepost": 64,
+        "glyphgate": 150,
+        "kilnrite": 262,
+        "loomfix": 90,
+        "packhouse": 30,
+        "patchwheel": 42,
+        "runeward": 12,
+        "stallwright": 45,
+        "universal": 400
+      },
+      "kinds": {
+        "atom": 64,
+        "atom_fc": 109,
+        "episode": 737,
+        "oracle_trace": 210,
+        "u_abstain": 35,
+        "u_count": 15,
+        "u_execute": 30,
+        "u_induct": 40,
+        "u_optimize": 35,
+        "u_order": 25,
+        "u_probe": 25,
+        "u_repair": 45,
+        "u_route": 25,
+        "u_select": 25,
+        "u_state": 40,
+        "u_trace": 30,
+        "u_verify": 30
+      },
+      "rows": 1520,
+      "sha256": "f209c677a734308525a0feb04a14c1e1e3773bea750ef3ee50172687e67a61aa"
+    }
+  },
+  "schema_version": 1,
+  "seed": 77102,
+  "selection": {
+    "candidate_total_rows": 1520,
+    "control_total_rows": 1520,
+    "designed_rows": 400,
+    "extra_control_replay_rows": 400,
+    "nested_replay_control": true,
+    "shared_replay_rows": 1120
+  },
+  "sources": {
+    "designed": {
+      "path": "data/sft_universal_fast.jsonl",
+      "rows": 800,
+      "sha256": "4a0833756b5497fcbccf278476ece8c98bcbfce80e900ecc2489150e496b27c4"
+    },
+    "replay": {
+      "path": "data/sft_blend.jsonl",
+      "rows": 2240,
+      "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+    }
+  }
+}

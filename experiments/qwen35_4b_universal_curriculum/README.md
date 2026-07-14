@@ -1,137 +1,167 @@
 # Qwen3.5-4B: Installing Universal Features via Designed Synthetic Curricula
 
-**Status:** in-progress · since 2026-07-13 · first transfer measurement (base vs. `universal1` on the held-out menagerie) is running; Results/Interpretation land when it returns.
+**Status:** finished
 
-This is the working experiment for the doctrine in `docs/installing_universal_features.md`
-(at the repo root). The bet: we can *install* a generic capability in the fixed 4B by
-**designing and synthesizing** training text (not harvesting the model's own outputs,
-not narrating oracle answers), teaching an abstract circuit on surfaces **deliberately
-disjoint from the eval**, and proving the feature is *universal* by **transfer** to a
-held-out benchmark we never train on or read.
+Outcome: sequential arm failed aggregate transfer; from-base replay union failed its
+frozen local gate before benchmark.
 
-See [the doctrine](../../docs/installing_universal_features.md) for the full write-up.
+This experiment turns the doctrine in
+[`docs/installing_universal_features.md`](../../docs/installing_universal_features.md)
+into a contamination-controlled search. It asks whether hand-designed, executable
+synthetic lessons can add procedures that transfer beyond their surfaces while retaining
+the strongest existing broad emission-policy install.
 
-## Research Program
+## Research program
 
-- Program: `posttraining_and_adaptation` (capability installation), with
-  `structured_execution_and_compilers` and `test_time_reasoning_budget` as the
-  circuits under test.
-- Program question: can supervised curriculum design install a *generic* reasoning
-  circuit in the fixed 4B — one that lifts a held-out benchmark it was never shaped
-  to — rather than only memorizing the eval's surface?
-- Prior anchors: **C11** (harvest is coverage-bounded), **C39** (the 4B is an
-  executor/retriever of pretrained structure, not an inducer), **C56** (oracle-answer
-  SFT trains to 1.0 but deploys near 0 on composed induction; *exploration* — a real
-  executable procedure — did install and transfer), **C59** (serial compute crosses
-  the induction wall only via reasoning *content*, so *designed content* is the
-  lever). The retracted "+0.32 capacity boundary" (C54–C56, softened) is the negative
-  result this program is built to overturn: those walls were declared from slow,
-  sparse curriculum search, not a proof of impossibility.
+- Primary program: `agentic_breadth_installation`.
+- Supporting programs: `benchmark_generalization` and
+  `structured_execution_and_compilers`.
+- Prior anchors: C11 (self-harvest is coverage-bounded), C49 (runtime LoRA is a
+  silent no-op for this composite), C53 (the broad emission install is a strong but
+  saturating control), C56 (executable exploration transfers while answer narration
+  does not), and C59 (reasoning content—not nominal token count—crosses serial walls).
+- Intake and closest duplicates: [`idea_intake.md`](idea_intake.md).
 
-## Question
+## Frozen pilot question
 
-Does a generic, multi-skill, surface-agnostic curriculum — trained on abstract
-surfaces the menagerie does not use — lift the **held-out menagerie** aggregate,
-demonstrating that the installed circuit binds to *structure*, not tokens?
+Does a truth-audited, surface-varied curriculum of generic search, execution,
+verification, repair, uncertainty, state, and routing procedures add broad held-out
+transfer beyond the existing C53 `blend` install?
 
-## Hypothesis
+The pilot succeeds only if candidate-minus-base aggregate is positive and none of the
+ten public family deltas is negative on a fresh quick event. That is a screening result,
+not a universal-feature claim. Confirmation requires independent quick seeds, strictly
+positive mean deltas for every family, medium-tier transfer, paired uncertainty, and a
+matched-compute sampling baseline.
 
-If the circuits we teach (compose/decompose, execute-a-stated-procedure,
-check-constraints) are genuinely abstract, then rendering them over five disjoint
-surfaces (digits, letters, roman numerals, invented words, greek syllables) and
-varying everything the feature must be invariant to (alphabet, length, order,
-vocabulary) should install a *surface-independent* feature. A universal feature
-lifts *every* menagerie axis that shares the circuit; a memorized shape would lift
-none of a benchmark it never saw. Transfer is therefore the proof, and the training
-data looking nothing like the eval is the point — not a handicap.
+## Design
 
-## Setup
+- Model: only `Qwen/Qwen3.5-4B`, pinned revision
+  `851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a`.
+- Generator: [`scripts/gen_curriculum.py`](scripts/gen_curriculum.py) emits 13 lesson
+  types—induction, execution, selection, tracing, verification, counting, repair,
+  optimization, abstention, state carry, ordering, probe choice, and routing—over six
+  randomized abstract surfaces.
+- Truth controls: every row comes from an executable specification; induction rows
+  require query-identifiability, a real dead end, and a deterministic witness that the
+  claimed two-step rule does not collapse to one primitive.
+- Frozen doses: the full v2 corpus has 2,300 rows. The fast search tier is exactly 800
+  rows and one epoch. Exact tokenizer receipts require zero boundary merges, truncations,
+  or skipped targets.
+- Arms: pinned base, frozen C53 `blend`, designed-only, designed-plus-replay, and the
+  first sequential arm `blend_then_designed_fast`. The initial event compares base,
+  `blend`, and the sequential arm.
+- Firewall: benchmark access is exclusively through
+  [`scripts/run_benchmark_aggregate.py`](../../scripts/run_benchmark_aggregate.py).
+  Each promoted arm is explicitly merged and evaluated with the same `qwen_vllm`
+  backend, tier, and seed. Raw suite output never enters this experiment.
 
-- Model: Qwen3.5-4B only (hard rule), pinned revision
-  `851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a`; QLoRA think-channel SFT, co-trained
-  from base (no warm-start).
-- Dataset/task source: `scripts/gen_curriculum.py` synthesizes
-  `data/sft_universal.jsonl` (CPU, seconds, truth-blind — values computed from the
-  operators we wrote, never sampled from the model). 1400 rows, three skills:
-  - **INDUCT** (600): infer a hidden *composed* rule from probe examples by
-    decomposition *search* — fix a candidate step-1, compute intermediates, find the
-    step-2 that maps them (includes a worked dead-end). Reuses the proven
-    `generic_curriculum.comp_lesson` pedagogy.
-  - **EXECUTE** (400): apply a *stated* multi-step procedure to an input, carrying
-    the result forward step by step.
-  - **SELECT** (400): pick the item satisfying a conjunction of stated constraints,
-    checking every constraint explicitly.
+The adversarial review and frozen interpretation rules are in
+[`reports/design_review.md`](reports/design_review.md) and
+[`reports/preregistration.md`](reports/preregistration.md). Hardware caps are frozen in
+[`reports/protocol_amendment_001.md`](reports/protocol_amendment_001.md); the quantitative
+from-base replay-union local gate is frozen in
+[`reports/protocol_amendment_002.md`](reports/protocol_amendment_002.md).
 
-  The generator also ships three more generic circuits the search explores — **TRACE**
-  (multi-hop pointer dereference / navigation), **VERIFY** (check a candidate result
-  against a stated procedure, the meta-skill behind the P(True) judge, C46), and
-  **COUNT** (tally under a predicate) — selectable via `--mix`.
-- Train/eval split: train is 100% synthetic abstract-surface curriculum; eval is the
-  menagerie, which shares **no** surface, family, or generator with train.
-- Baseline: base Qwen3.5-4B, same eval, same seed (paired arms).
-- Controls: the menagerie firewall guarantees train/eval disjointness (we never read
-  family contents). Same-surface performance would only be an upper-bound control and
-  is not the claim.
-- Primary metric: **menagerie transfer** — aggregate score delta (adapter − base) on
-  menagerie-quick at think-budget 1024 via the HF `qwen` backend (adapter applied
-  directly; no 9 GB merge — vLLM runtime-LoRA is a silent no-op on this model, C49).
-- Oracle-only metrics: none — the transfer metric is the deployable metric.
-- Hidden-label boundary: eval scores come only from the menagerie's own verifier;
-  training never sees a menagerie item.
+## Reproduction
 
-## Run
-
-Smoke (synthesize a tiny curriculum, CPU, seconds):
+Generate and test the frozen corpus:
 
 ```bash
-python scripts/gen_curriculum.py --n-induct 20 --n-execute 10 --n-select 10 --out /tmp/sft_universal_smoke.jsonl
+.venv/bin/python experiments/qwen35_4b_universal_curriculum/scripts/gen_curriculum.py
+.venv/bin/python -m unittest \
+  experiments.qwen35_4b_universal_curriculum.tests.test_curriculum -v
+.venv/bin/python experiments/qwen35_4b_universal_curriculum/scripts/validate_curriculum.py \
+  --data experiments/qwen35_4b_universal_curriculum/data/sft_universal_fast.jsonl \
+  --mix induct=80,execute=60,select=50,trace=60,verify=60,count=30,repair=90,optimize=70,abstain=70,state=80,order=50,probe=50,route=50 \
+  --max-length 2048 \
+  --receipt experiments/qwen35_4b_universal_curriculum/data/sft_universal_fast.receipt.json
 ```
 
-Single config (synthesize → fast-train `universal1` → paired transfer eval):
+The first training command is preserved verbatim in
+[`runs/training/blend_then_designed_fast.json`](runs/training/blend_then_designed_fast.json).
+The fail-closed entry point is [`scripts/train_trial.py`](scripts/train_trial.py); it
+authenticates corpus hashes, exact token exposure, model lineage, trainer row counts,
+and the final adapter.
 
-```bash
-python scripts/gen_curriculum.py                    # writes data/sft_universal.jsonl (v1 mix)
-bash scripts/train_eval_chain.sh                    # train + base-vs-adapter menagerie-quick@1024
-```
+Fresh synthetic screening uses [`scripts/eval_curriculum.py`](scripts/eval_curriculum.py).
+Promoted adapters use [`scripts/merge_trial.py`](scripts/merge_trial.py), and paired
+aggregate events use [`scripts/run_benchmark.py`](scripts/run_benchmark.py). Both refuse
+stale or unauthenticated artifacts.
 
-Search over curriculum designs (the doctrine's fast loop — the real intent):
+## Results so far
 
-```bash
-python scripts/search.py                            # runs scripts/search_configs.json, logs the transfer leaderboard
-```
+### Corpus and training gates
 
-`scripts/gen_curriculum.py --mix "induct=600,execute=400,trace=300,verify=300"` selects any
-mix of the six generic skills (induct, execute, select, trace, verify, count); the default
-`--mix` reproduces v1 byte-for-byte. `search.py` fast-trains + transfer-evals each config in
-`search_configs.json` and ranks them by menagerie transfer delta.
+- The original v1 corpus was rejected before training: 16/600 induction traces
+  contradicted their answers and at least 33/600 nominal two-step rules collapsed to a
+  primitive. The advertised historical run had never started.
+- The deterministic v2 full corpus contains 2,300 valid rows; the fast corpus contains
+  800. All six generator tests pass across process hash seeds.
+- `blend_then_designed_fast` consumed 800/800 rows with zero skips at max length 2,048.
+  It ran for 346.7 seconds, ending at train loss 0.3495. Adapter weights SHA-256:
+  `72af43458777245f7236f0df6edf89013eeade67140a9a16c4aee279f95e6e77`.
+- `designed_plus_replay_fast_b1` consumed all 3,040 frozen designed-plus-replay
+  rows from base with zero skips at max length 4,096. The batch-2 launch hit a
+  first-step WSL/CUDA residency failure; the exact effective-batch-8 recovery used
+  batch 1 / accumulation 8, ran 380 steps in 2,622.6 seconds, and ended at finite
+  train loss 1.366. Adapter weights SHA-256:
+  `e551c1d291fca993f94bdd03c1cbaeef43b1b7b7bd4f4f16d277cfa12bc6412b`.
 
-## Results
+### Fresh synthetic screen
 
-_First transfer measurement (base vs. `universal1`, menagerie-quick@1024, seed
-59001) in flight — numbers land here when the chain completes. Deployable evidence
-(transfer to the held-out menagerie) is the only evidence; there is no oracle track._
+On 26 unseen generator tasks at seed 88001 and a 1,024-token cap:
 
-## Interpretation
+| arm | exact accuracy | parse rate | cap contacts | mean generated tokens |
+| --- | ---: | ---: | ---: | ---: |
+| frozen `blend` | 0.500 | 0.615 | 10/26 | 763.7 |
+| `blend_then_designed_fast` | 0.692 | 0.962 | 1/26 | 231.1 |
 
-_Pending the first result. The design question this loop then chases: which skills /
-surfaces / lesson framings carry the transfer, and what "lifts all boats the most"._
+This passes installability/emission screening but is not transfer evidence. Induction
+and repair remain imperfect locally, and the sequential arm over-abstained on two route
+items; those negatives are retained in the local result.
 
-## Knowledgebase Update
+The from-base replay union was screened prospectively on fresh seed 88002:
 
-- Program evidence updated: pending first result.
-- Program backlog updated: pending first result.
-- Claim ledger updated: pending first result (a new claim on universal-feature
-  transfer if it survives confirmation at 8192 + medium).
+| arm | exact accuracy | parse rate | cap contacts | mean generated tokens |
+| --- | ---: | ---: | ---: | ---: |
+| `designed_plus_replay_fast_b1` | 0.692 | 0.846 | 4/26 | 394.4 |
+
+It met the 0.65 accuracy bar and recovered routing to 2/2, but failed the frozen parse
+rate (required at least 0.90) and cap-contact (required at most 2/26) gates. Induction
+was 0/2 and execution 0/2. Benchmark seed 78132 was therefore never consumed.
+
+### Aggregate transfer
+
+Native quick@8,192 was rejected before any score: the permitted estimator marks it over
+the 60-second hardware gate on this RTX 4090. Two raw-suppressed failures and one
+interrupted diagnostic are retained. Protocol amendment 001 freezes quick@1,024 and
+medium@2,048, the highest power-of-two caps that pass their tier estimates.
+
+Quick@1,024 seed 78131 completed through the paired `qwen_vllm` gateway:
+
+| arm | aggregate | delta vs. base | positive / nonnegative families | minimum family delta |
+| --- | ---: | ---: | ---: | ---: |
+| base | 0.1667 | — | — | — |
+| frozen `blend` | 0.4458 | +0.2791 | 8 / 9 | -0.1250 |
+| `blend_then_designed_fast` | 0.3073 | +0.1406 | 6 / 7 | -0.1250 |
+
+The sequential candidate fails the pilot gate. It moves real axes—chronicle and
+siftstack are each +0.75 versus base, and aggregate is +0.1406—but rites, stockade, and
+warren are negative. Relative to `blend`, it loses 0.1385 aggregate and sharply regresses
+lockpick, mirage, rites, stockade, and toolsmith. This is specialization plus catastrophic
+displacement, not a universal feature. The full authenticated event is
+[`runs/benchmark/quick_tb1024_seed78131_pilot1_tb1024/summary.json`](runs/benchmark/quick_tb1024_seed78131_pilot1_tb1024/summary.json).
 
 ## Artifacts
 
-- `scripts/gen_curriculum.py` — the multi-skill synthetic curriculum generator
-  (six generic skills; `--mix` selects any subset/dose).
-- `scripts/search.py` + `scripts/search_configs.json` — the curriculum-design search
-  driver and its starter config grid (the doctrine's fast loop).
-- `scripts/train_eval_chain.sh` — train one config (`universal1`) then paired transfer eval.
-- `data/sft_universal.jsonl` — the synthesized v1 curriculum (checked in).
-- Transfer-result JSONs land in `../qwen35_4b_gauntlet_frontier/runs/menagerie/`
-  (that experiment owns `bench.py`); the training log is written to `runs/train.log`
-  at run time (self-created by the runner).
-- `reports/artifact_manifest.yaml` — external/omitted artifacts + reproduction.
+- Checked in: deterministic corpora, tokenizer receipts, source, tests, intake,
+  preregistration, design review, training/local receipts, and aggregate-only events.
+- External: adapters and 9 GB composite checkpoints under
+  `large_artifacts/qwen35_4b_universal_curriculum/`.
+- Manifest: [`reports/artifact_manifest.yaml`](reports/artifact_manifest.yaml).
+
+Negative controls and failed infrastructure attempts are never overwritten. Any
+post-result adaptive curriculum or confirmation moves to a successor experiment. The
+parent factorial is complete; the next registered mechanism is
+`qwen35_4b_universal_replay_anchor`.

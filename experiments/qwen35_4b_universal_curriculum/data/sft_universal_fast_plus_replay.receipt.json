@@ -1,0 +1,107 @@
+{
+  "files": [
+    {
+      "answer_target_tokens_per_epoch": 8587,
+      "encoded_rows": 800,
+      "families": {
+        "universal": 800
+      },
+      "kinds": {
+        "u_abstain": 70,
+        "u_count": 30,
+        "u_execute": 60,
+        "u_induct": 80,
+        "u_optimize": 70,
+        "u_order": 50,
+        "u_probe": 50,
+        "u_repair": 90,
+        "u_route": 50,
+        "u_select": 50,
+        "u_state": 80,
+        "u_trace": 60,
+        "u_verify": 60
+      },
+      "max_sequence_tokens": 1722,
+      "min_sequence_tokens": 108,
+      "path": "experiments/qwen35_4b_universal_curriculum/data/sft_universal_fast.jsonl",
+      "prompt_tokens_per_epoch": 140059,
+      "rows": 800,
+      "sha256": "4a0833756b5497fcbccf278476ece8c98bcbfce80e900ecc2489150e496b27c4",
+      "skipped": [],
+      "skipped_rows": 0,
+      "think_target_tokens_per_epoch": 181312,
+      "total_forward_tokens_per_epoch": 329958
+    },
+    {
+      "answer_target_tokens_per_epoch": 19938,
+      "encoded_rows": 2240,
+      "families": {
+        "burrowmaze": 236,
+        "caravan": 39,
+        "ferrier": 531,
+        "foundry_ledger": 39,
+        "gatepost": 126,
+        "glyphgate": 298,
+        "kilnrite": 527,
+        "loomfix": 181,
+        "packhouse": 60,
+        "patchwheel": 85,
+        "runeward": 26,
+        "stallwright": 92
+      },
+      "kinds": {
+        "atom": 127,
+        "atom_fc": 220,
+        "episode": 1473,
+        "oracle_trace": 420
+      },
+      "max_sequence_tokens": 3193,
+      "min_sequence_tokens": 299,
+      "path": "experiments/qwen35_4b_gauntlet_frontier/data/sft_blend.jsonl",
+      "prompt_tokens_per_epoch": 830064,
+      "rows": 2240,
+      "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2",
+      "skipped": [],
+      "skipped_rows": 0,
+      "think_target_tokens_per_epoch": 1286803,
+      "total_forward_tokens_per_epoch": 2136805
+    }
+  ],
+  "generated_summary": {
+    "kinds": {
+      "u_abstain": 70,
+      "u_count": 30,
+      "u_execute": 60,
+      "u_induct": 80,
+      "u_optimize": 70,
+      "u_order": 50,
+      "u_probe": 50,
+      "u_repair": 90,
+      "u_route": 50,
+      "u_select": 50,
+      "u_state": 80,
+      "u_trace": 60,
+      "u_verify": 60
+    },
+    "max_estimated_think_tokens": 667,
+    "rows": 800,
+    "surfaces": {
+      "colors": 118,
+      "digits": 126,
+      "letters": 176,
+      "nonce": 130,
+      "romans": 127,
+      "syllables": 123
+    }
+  },
+  "generator_seed": 77001,
+  "max_length": 4096,
+  "mix": "induct=80,execute=60,select=50,trace=60,verify=60,count=30,repair=90,optimize=70,abstain=70,state=80,order=50,probe=50,route=50",
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "schema_version": 1,
+  "skipped_rows": 0,
+  "total_forward_tokens_per_epoch": 2466763,
+  "total_rows": 3040,
+  "total_target_tokens_per_epoch": 1496640
+}

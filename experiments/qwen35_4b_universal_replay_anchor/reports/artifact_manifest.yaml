@@ -1,0 +1,38 @@
+schema_version: 1
+experiment_id: "qwen35_4b_universal_replay_anchor"
+external_artifacts:
+  - name: "warm_union adapter"
+    storage: "large_artifacts/qwen35_4b_universal_replay_anchor/adapters/warm_union"
+    required_for: "candidate local evaluation and merge"
+    checksum: "adapter weights 26837fade89e75ffd6cc5922b0dec4a1361e93d98228c9137ca59240e1a18f18; config 486e063aad356fe13ecd2f4dd3fbd41892e5d0818ed6a6fcd8cd54406152e0f5"
+    regenerate: ".venv/bin/python experiments/qwen35_4b_universal_replay_anchor/scripts/run.py --stage train-candidate"
+  - name: "replay_refresh adapter"
+    storage: "large_artifacts/qwen35_4b_universal_replay_anchor/adapters/replay_refresh"
+    required_for: "mechanism-control evaluation and merge"
+    checksum: "adapter weights c296c774d20403c7de9c810bfa825dbbe22bd0683c37692a929bd2bb13e3d36a; config 6b91df7d16d9a306ca3f04d84b4f9397394c12062112ce84a8198fe47e39e4d6"
+    regenerate: ".venv/bin/python experiments/qwen35_4b_universal_replay_anchor/scripts/run.py --stage train-control"
+  - name: "warm_union merged model"
+    storage: "large_artifacts/qwen35_4b_universal_replay_anchor/merged/warm_union"
+    required_for: "same-backend aggregate evaluation"
+    checksum: "model.safetensors 29baf3ad182e900d01186058d795004b984a5f436958d8cca5e0ebcf199422f6; external merge receipt 35894a3131c59e69bd54030e95c67ea3c3bde397deb0b7248fa5d7ebbac963cf"
+    regenerate: ".venv/bin/python experiments/qwen35_4b_universal_replay_anchor/scripts/run.py --stage merge"
+  - name: "replay_refresh merged model"
+    storage: "large_artifacts/qwen35_4b_universal_replay_anchor/merged/replay_refresh"
+    required_for: "same-backend aggregate evaluation"
+    checksum: "model.safetensors 22c61cebd6091d0b8380e2d7318b4d4db99ef24eb30b942157e44f37d26cbc9e; external merge receipt f32d7fc6ae0906d0b584a7b9db5e061c945e3641df487da624e773ee7d0caf1c"
+    regenerate: ".venv/bin/python experiments/qwen35_4b_universal_replay_anchor/scripts/run.py --stage merge"
+omitted_artifacts:
+  - path: "large_artifacts/qwen35_4b_universal_replay_anchor/"
+    reason: "large trained adapters and explicitly merged model weights are gitignored"
+reproducibility:
+  smoke_command: ".venv/bin/python experiments/qwen35_4b_universal_replay_anchor/scripts/run.py --smoke"
+  full_command: ".venv/bin/python experiments/qwen35_4b_universal_replay_anchor/scripts/run.py --stage all"
+  required_external_artifacts:
+    - "large_artifacts/qwen35_4b_gauntlet_frontier/adapters/blend"
+    - "large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized"
+    - "large_artifacts/qwen35_4b_universal_curriculum/merged/blend"
+notes: >-
+  Source and derived data are checked in. Source hashes are 4a0833756b5497fcbccf278476ece8c98bcbfce80e900ecc2489150e496b27c4
+  (designed) and 25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2
+  (replay). Adapter and merged-model checksums are authenticated above; benchmark
+  outputs remain pending the frozen aggregate event.

@@ -1,24 +1,49 @@
-# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
 schema_version: 1
 experiment_id: "qwen35_4b_universal_curriculum"
 external_artifacts:
-  - name: "universal1 LoRA adapter (r32/alpha64, 2 epochs, co-trained from base)"
-    storage: "large_artifacts/qwen35_4b_universal_curriculum/adapters/universal1"
-    required_for: "rerun the HF-adapter menagerie-transfer eval"
-    checksum: ""
-    regenerate: "bash experiments/qwen35_4b_universal_curriculum/scripts/train_eval_chain.sh"
+  - name: "frozen C53 blend source adapter"
+    storage: "large_artifacts/qwen35_4b_gauntlet_frontier/adapters/blend"
+    required_for: "strong control and regeneration of the sequential candidate"
+    checksum: "adapter weights ad2ef4fae785debedf5e50932a79bda97869d3efc212f53d48ccb04c59e25d21; config cd764aea869b8a55526e283dd133e1940896b428839c6abf2e55d6ae2a0b32635"
+    regenerate: "restore from qwen35_4b_gauntlet_frontier artifact storage"
+  - name: "blend_then_designed_fast LoRA adapter"
+    storage: "large_artifacts/qwen35_4b_universal_curriculum/adapters/blend_then_designed_fast"
+    required_for: "local screening, explicit merge, and pilot reproduction"
+    checksum: "adapter weights 72af43458777245f7236f0df6edf89013eeade67140a9a16c4aee279f95e6e77; config 4a51dd5c5a56acc2f3663331ae6664eab593b7a64d63039acb41948bf2fac941"
+    regenerate: "run the authenticated command in runs/training/blend_then_designed_fast.json through scripts/train_trial.py"
+  - name: "designed_plus_replay_fast_b1 LoRA adapter"
+    storage: "large_artifacts/qwen35_4b_universal_curriculum/adapters/designed_plus_replay_fast_b1"
+    required_for: "reproduction of the local-gated from-base replay-union negative"
+    checksum: "adapter weights e551c1d291fca993f94bdd03c1cbaeef43b1b7b7bd4f4f16d277cfa12bc6412b; config cc299ec8b4089fef3e4c15de81371a53d6ba78ed84155e18dff2475182bc2d99"
+    regenerate: "run the authenticated command in runs/training/designed_plus_replay_fast_b1.json through scripts/train_trial.py"
+  - name: "paired serialized/merged benchmark composites"
+    storage: "large_artifacts/qwen35_4b_universal_curriculum/merged/{base_reserialized,blend,blend_then_designed_fast}"
+    required_for: "same-backend paired aggregate evaluation"
+    checksum: "base weight b654e033d525d87cbbd746bb681d80813c4b00d8e6202cb3edcfb6dfa3b416db; blend weight 2da0e9034a404b2e4618007755e1bb9fabe7759aab45c6c6423f49eb475b4470; candidate weight 571f6ea9affefd70288c94be0a77b1924a41547e9c196c0842ff0a09854017e8"
+    regenerate: "scripts/materialize_base.py for base_reserialized; scripts/merge_trial.py for adapter arms"
+  - name: "failed hard-linked base packaging control"
+    storage: "large_artifacts/qwen35_4b_universal_curriculum/merged/base"
+    required_for: "inspection of the preserved no-score infrastructure failure only"
+    checksum: "merge receipt c8df77af82fce42706d37c84f8a7acdd2ea838d502cd01ee3dfe7436bc366099"
+    regenerate: "not required; raw Hub snapshot packaging was retired in favor of composite reserialization"
 omitted_artifacts:
   - path: "large_artifacts/qwen35_4b_universal_curriculum/**"
-    reason: "trained LoRA adapters; do not check into git (see docs/artifact_policy.md)"
+    reason: "adapters and full composite checkpoints are too large for git"
 reproducibility:
-  smoke_command: "python experiments/qwen35_4b_universal_curriculum/scripts/gen_curriculum.py --n-induct 20 --n-execute 10 --n-select 10 --out /tmp/sft_universal_smoke.jsonl"
-  full_command: "bash experiments/qwen35_4b_universal_curriculum/scripts/train_eval_chain.sh"
-  required_external_artifacts: []
+  smoke_command: >-
+    .venv/bin/python experiments/qwen35_4b_universal_curriculum/scripts/gen_curriculum.py
+    --smoke --out /tmp/qwen35_universal_smoke.jsonl
+  full_command: >-
+    Rebuild the checked-in token receipt, run scripts/train_trial.py using the frozen
+    parameters in reports/preregistration.md, pass scripts/eval_curriculum.py, then use
+    scripts/materialize_base.py, scripts/merge_trial.py, and scripts/run_benchmark.py.
+  required_external_artifacts:
+    - "large_artifacts/qwen35_4b_gauntlet_frontier/adapters/blend"
 notes: >-
-  Data (data/sft_universal.jsonl) is CPU-synthesized in seconds by
-  scripts/gen_curriculum.py and checked in. The only large artifact is the trained
-  LoRA adapter under large_artifacts/ (not tracked). The transfer eval reads only
-  aggregate + per-family menagerie scores (firewall-safe); the per-arm result JSONs
-  land in ../qwen35_4b_gauntlet_frontier/runs/ (that experiment owns bench.py) and
-  a row is appended to its runs/menagerie_log.jsonl. Requires the local Qwen3.5-4B
-  weights (pinned revision 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a).
+  Training, local-evaluation, merge, failure, and aggregate receipts are checked in.
+  The preserved batch-2 failure is authenticated by
+  runs/training/designed_plus_replay_fast.failure.json. The batch-1 recovery receipt is
+  SHA-256 4ba2b52f17a90dd9cdb9de873539af5b4d2a5ad9724673288a6f6198e46f6dc2;
+  its local gate receipt is
+  142af9ecad42f250042e9e465cc11c5d57765e46ebfb428cfc0e6a240c6e445d.
+  Benchmark raw streams and item-level outputs never leave the trusted aggregate gateway.

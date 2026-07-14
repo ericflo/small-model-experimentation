@@ -117,6 +117,16 @@
   control, but its earlier feasibility stop meant the control never ran. Do not
   independently rerun this broad warm start.
 
+- Completed negative parent factorial: `qwen35_4b_universal_curriculum`. The
+  designed-only continuation is a specialization negative (+0.1406 versus base
+  but three negative families and -0.1385 versus blend). The from-base replay
+  union reached 0.692 local accuracy but failed parse (0.846 < 0.90) and cap
+  (4 > 2) gates, so benchmark seed 78132 remained sealed.
+- Active successor: `qwen35_4b_universal_replay_anchor`. Test whether
+  low-rate warm continuation with replay in every update window retains blend
+  while adding the designed signal, against an optimizer-step-matched
+  replay-only refresh. Require local retention before a fresh quick@1024 event.
+
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.
 - Experiment: round 2 re-harvest with the round-1 adapter (does the frontier

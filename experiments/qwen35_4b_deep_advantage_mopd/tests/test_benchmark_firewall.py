@@ -46,9 +46,11 @@ class AggregateFirewallTests(unittest.TestCase):
     def test_item_and_transcript_sentinels_do_not_cross_gateway(self):
         out = self.root / "aggregate.json"
         private_paths = []
+        commands = []
 
         def synthetic_run(command, **kwargs):
             self._assert_private_stdio(kwargs)
+            commands.append(command)
             raw = Path(command[command.index("--out") + 1])
             private_paths.append(raw)
             raw.write_text(
@@ -76,6 +78,7 @@ class AggregateFirewallTests(unittest.TestCase):
             with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):
                 result = gateway.run_event(
                     tier="quick",
+                    think_budget=1024,
                     seed=123,
                     model=self.model,
                     out=out,
@@ -84,6 +87,8 @@ class AggregateFirewallTests(unittest.TestCase):
                 )
         persisted = out.read_text(encoding="utf-8")
         self.assertEqual(set(result), gateway.OUTPUT_KEYS)
+        self.assertEqual(result["think_budget"], 1024)
+        self.assertEqual(commands[0][commands[0].index("--think-budget") + 1], "1024")
         self.assertNotIn(SENTINEL, persisted)
         self.assertNotIn(SENTINEL, stdout.getvalue())
         self.assertNotIn(SENTINEL, stderr.getvalue())

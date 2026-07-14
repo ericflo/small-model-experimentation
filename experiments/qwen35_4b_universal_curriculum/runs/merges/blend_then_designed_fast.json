@@ -1,0 +1,24 @@
+{
+  "adapter": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_curriculum/adapters/blend_then_designed_fast",
+  "adapter_weights_sha256": "72af43458777245f7236f0df6edf89013eeade67140a9a16c4aee279f95e6e77",
+  "command": [
+    "/home/ericflo/Development/small-model-experimentation/.venv/bin/python",
+    "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_same_prefix_advantage_routing/scripts/merge_adapter.py",
+    "--adapter",
+    "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_curriculum/adapters/blend_then_designed_fast",
+    "--out",
+    "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_curriculum/merged/blend_then_designed_fast"
+  ],
+  "merge_receipt_sha256": "d1a77ff76f3f00598534fec7f44623c6a00ed344be6863c2be6af9f3f26154e9",
+  "merged": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_curriculum/merged/blend_then_designed_fast",
+  "merger": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_same_prefix_advantage_routing/scripts/merge_adapter.py",
+  "merger_sha256": "cb9af8b45ca1e5754cb36f2213b7e25290f6eb16427d1a8b41f0b12b10396672",
+  "name": "blend_then_designed_fast",
+  "schema_version": 1,
+  "weight_files": [
+    {
+      "name": "model.safetensors",
+      "sha256": "571f6ea9affefd70288c94be0a77b1924a41547e9c196c0842ff0a09854017e8"
+    }
+  ]
+}

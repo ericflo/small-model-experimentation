@@ -1301,6 +1301,23 @@
    ],
    "caveat": "configs/experiment.json \"seed\": 20260701 is date-shaped but is a seed (and post-dates the 2026-06-28 import that added this dir in commit 42c23ac, so it cannot be a run date); metadata.yaml 2026-07-01 is the catalog sweep. Only bound: dir existed by 2026-06-28 (import commit)"
   },
+  "qwen35_4b_universal_curriculum": {
+   "start": "2026-07-13",
+   "end": "2026-07-13",
+   "confidence": "high",
+   "sources": [
+    "experiments/qwen35_4b_universal_curriculum/reports/protocol_amendment_002.md: frozen 2026-07-13 before the final adapter finished",
+    "git commit history for the completed run evidence (post-import, trustworthy)"
+   ]
+  },
+  "qwen35_4b_universal_replay_anchor": {
+   "start": "2026-07-13",
+   "end": "2026-07-13",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_unsaturated_frontier_active_bridge": {
    "start": "2026-06-22",
    "end": "2026-06-22",
@@ -2172,16 +2189,6 @@
     "trace_keyed_symbol_repair/configs/experiment.json: \"date_utc\": \"2026-06-20\"",
     "trace_keyed_symbol_repair/reports/trace_keyed_symbol_repair_paper.md: 2026-06-20"
    ]
-  },
-  "qwen35_4b_universal_curriculum": {
-   "start": "2026-07-13",
-   "end": "2026-07-13",
-   "confidence": "low",
-   "sources": [
-    "experiments/qwen35_4b_universal_curriculum/README.md: 'Status: in-progress · since 2026-07-13' (literal date)",
-    "git commit date of the scaffolding commit (post-import, trustworthy)"
-   ],
-   "caveat": "Experiment scaffolded 2026-07-13; deliberately NOT yet run (no run records). Date reflects setup, not a completed run window."
   }
  }
 }

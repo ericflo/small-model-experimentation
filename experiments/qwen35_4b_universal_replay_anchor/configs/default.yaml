@@ -1,0 +1,26 @@
+model:
+  id: "Qwen/Qwen3.5-4B"
+  revision: "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
+training:
+  warm_start: "large_artifacts/qwen35_4b_gauntlet_frontier/adapters/blend"
+  epochs: 1.0
+  learning_rate: 0.00001
+  rank: 32
+  alpha: 64
+  batch_size: 1
+  gradient_accumulation: 8
+  max_length: 4096
+  think_loss_weight: 0.2
+  seed: 42
+doses:
+  selection_seed: 77102
+  candidate: "data/warm_union.jsonl"
+  mechanism_control: "data/replay_refresh.jsonl"
+  rows_per_arm: 1520
+  optimizer_steps: 190
+evaluation:
+  local_seed: 88003
+  local_max_new_tokens: 1024
+  benchmark_tier: "quick"
+  benchmark_think_budget: 1024
+  benchmark_seed: 78133

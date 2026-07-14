@@ -4,29 +4,32 @@ title: "Qwen3.5-4B: Installing Universal Features via Designed Synthetic Curricu
 source_track: "new"
 path: "experiments/qwen35_4b_universal_curriculum"
 primary_readme: "experiments/qwen35_4b_universal_curriculum/README.md"
-primary_report: ""
-summary: "This is the working experiment for the doctrine in `docs/installing_universal_features.md` (at the repo root). The bet: we can *install* a generic capability in the fixed 4B by **designing and synthesizing** training text (not harvesting the model's own outputs, not narrating oracle answers), teaching an abstract circuit on surfaces **deliberately disjoint from the eval**, and proving the feature is *universal* by **transfer** to a held-out benchmark we never train on or read."
+primary_report: "experiments/qwen35_4b_universal_curriculum/reports/pilot_report.md"
+summary: "Outcome: sequential arm failed aggregate transfer; from-base replay union failed its frozen local gate before benchmark."
 tags:
-  - "abi"
   - "curriculum"
   - "small-model"
-  - "verification"
 research_programs:
   - "benchmark_generalization"
   - "evidence_conditioned_selection"
   - "interpretability_and_diagnostics"
+  - "posttraining_and_adaptation"
+  - "process_control_and_tool_use"
   - "reliability_and_safety"
   - "structured_execution_and_compilers"
 top_level_dirs:
   - "data"
   - "reports"
+  - "runs"
   - "scripts"
+  - "tests"
 file_counts:
-  json: 1
-  jsonl: 1
-  md: 1
-  py: 2
+  json: 17
+  jsonl: 3
+  log: 5
+  md: 7
+  py: 11
   sh: 1
   yaml: 2
-total_files: 8
-total_size_bytes: 1998446
+total_files: 46
+total_size_bytes: 4791687

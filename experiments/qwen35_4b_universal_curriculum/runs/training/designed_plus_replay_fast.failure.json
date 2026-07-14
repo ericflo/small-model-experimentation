@@ -1,0 +1,68 @@
+{
+  "adapter_complete": false,
+  "command": [
+    "/home/ericflo/Development/small-model-experimentation/.venv/bin/python",
+    "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_gauntlet_frontier/scripts/train_think.py",
+    "--train",
+    "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_universal_curriculum/data/sft_universal_fast.jsonl",
+    "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_gauntlet_frontier/data/sft_blend.jsonl",
+    "--out",
+    "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_curriculum/adapters/designed_plus_replay_fast",
+    "--epochs",
+    "1.0",
+    "--lr",
+    "5e-05",
+    "--rank",
+    "32",
+    "--alpha",
+    "64",
+    "--batch-size",
+    "2",
+    "--grad-accum",
+    "4",
+    "--max-length",
+    "4096",
+    "--w-think",
+    "0.2",
+    "--seed",
+    "42"
+  ],
+  "datasets": [
+    {
+      "path": "experiments/qwen35_4b_universal_curriculum/data/sft_universal_fast.jsonl",
+      "rows": 800,
+      "sha256": "4a0833756b5497fcbccf278476ece8c98bcbfce80e900ecc2489150e496b27c4"
+    },
+    {
+      "path": "experiments/qwen35_4b_gauntlet_frontier/data/sft_blend.jsonl",
+      "rows": 2240,
+      "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+    }
+  ],
+  "experiment_id": "qwen35_4b_universal_curriculum",
+  "failure_category": "cuda_driver_device_not_ready_first_optimizer_step",
+  "hyperparameters": {
+    "alpha": 64,
+    "batch_size": 2,
+    "epochs": 1.0,
+    "grad_accum": 4,
+    "lr": 0.00005,
+    "max_length": 4096,
+    "rank": 32,
+    "seed": 42,
+    "w_think": 0.2
+  },
+  "log": "experiments/qwen35_4b_universal_curriculum/runs/training/designed_plus_replay_fast.log",
+  "log_sha256": "334f0cf895d95c20183b4cdf9f3faddd6759c65b5243632a4270fbbf0845691b",
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "name": "designed_plus_replay_fast",
+  "reconstructed_after_failure": true,
+  "returncode": 1,
+  "schema_version": 1,
+  "token_receipt": "experiments/qwen35_4b_universal_curriculum/data/sft_universal_fast_plus_replay.receipt.json",
+  "token_receipt_sha256": "00d67268002b09af38b0e5a3bc8539891bff884788272bf452684591ac5458a7",
+  "train_rows": 3040,
+  "wall_seconds": null,
+  "warm_start": null
+}

@@ -38,8 +38,9 @@ moves scores *here* moved something general.
 - Raw suite stdout, stderr, and output files must not enter an experiment
   process. The aggregate gateway suppresses child streams, owns any raw output
   in a private temporary directory, and deletes it before returning a fixed
-  aggregate-only schema. Infrastructure failures therefore report only a
-  generic exit status; raw logs are never echoed into agent context.
+  aggregate-only schema. Infrastructure failures report only a generic exit
+  status plus whether a private output existed and passed the aggregate schema;
+  no score or raw log is echoed into agent context.
 
 ## Suites
 
