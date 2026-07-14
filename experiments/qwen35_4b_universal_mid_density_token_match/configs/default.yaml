@@ -1,0 +1,33 @@
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+warm_start:
+  experiment: qwen35_4b_universal_replay_anchor
+  adapter: large_artifacts/qwen35_4b_universal_replay_anchor/adapters/replay_refresh
+arms:
+  replay_repeat: data/replay_repeat.jsonl
+  designed160: data/designed160.jsonl
+  designed240: data/designed240.jsonl
+exposure:
+  rows_per_arm: 1520
+  forward_tokens_per_arm: 1405510
+  optimizer_steps: 190
+  shared_replay_rows: 1280
+  designed_doses: [0, 160, 240]
+training:
+  epochs: 1.0
+  learning_rate: 1.0e-5
+  rank: 32
+  alpha: 64
+  batch_size: 1
+  gradient_accumulation: 8
+  max_length: 4096
+  think_loss_weight: 0.2
+  seed: 43
+local:
+  seed: 88005
+  max_new_tokens: 1024
+benchmark:
+  tier: quick
+  think_budget: 1024
+  seed: 78135

@@ -134,12 +134,16 @@
   1,520 rows, and 190 steps per arm. On fresh seed 88004 every arm missed the
   0.65 accuracy, 0.90 parse, and at-most-two cap bars; the best 80-row arm was
   0.538/0.615/10 and benchmark seed 78134 remained sealed.
-- Next universal-feature successor must be result-separated and use fresh seeds.
-  Either prospectively bridge the 80-to-400-row installation gap with exact-token
-  replay controls, or isolate concise answer commitment as the mechanism. Do not
-  rerun 40/80 rows, lower the observed local gates, or spend the sealed benchmark
-  seed. Any arm that passes must still beat replay continuation on every family
-  and matched-compute sampling before a universal claim.
+- Active exact-token bridge: `qwen35_4b_universal_mid_density_token_match` freezes
+  representative 0/160/240-row doses from authenticated replay refresh. Every arm
+  has a common 1,280-row replay core, 1,520 total rows, 190 updates, and exactly
+  1,405,510 forward tokens. The initially considered 320-row dose was removed
+  before registration because representative rows could not be token-matched to
+  320 replay rows without a new length bias. Fresh local seed 88005 gates any
+  conditional aggregate-only seed 78135 event. Do not adapt doses from partial
+  outputs, rerun 40/80 rows, lower the local bars, or spend sealed seed 78134.
+  Any pilot pass still requires result-separated confirmation, medium-tier
+  evaluation, uncertainty, and matched-compute sampling before a universal claim.
 
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.

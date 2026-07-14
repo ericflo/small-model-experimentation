@@ -1,0 +1,45 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_universal_mid_density_token_match"
+external_artifacts:
+  - name: "replay-refresh parent adapter"
+    storage: "large_artifacts/qwen35_4b_universal_replay_anchor/adapters/replay_refresh"
+    required_for: "common warm start"
+    checksum: "weights c296c774d20403c7de9c810bfa825dbbe22bd0683c37692a929bd2bb13e3d36a; config 6b91df7d16d9a306ca3f04d84b4f9397394c12062112ce84a8198fe47e39e4d6"
+    regenerate: ".venv/bin/python experiments/qwen35_4b_universal_replay_anchor/scripts/run.py --stage train-control"
+  - name: "replay_repeat adapter (planned)"
+    storage: "large_artifacts/qwen35_4b_universal_mid_density_token_match/adapters/replay_repeat"
+    required_for: "exact-token mechanism control"
+    checksum: "pending training"
+    regenerate: ".venv/bin/python experiments/qwen35_4b_universal_mid_density_token_match/scripts/run.py --stage train-control"
+  - name: "designed160 adapter (planned)"
+    storage: "large_artifacts/qwen35_4b_universal_mid_density_token_match/adapters/designed160"
+    required_for: "160-row candidate evaluation"
+    checksum: "pending training"
+    regenerate: ".venv/bin/python experiments/qwen35_4b_universal_mid_density_token_match/scripts/run.py --stage train-d160"
+  - name: "designed240 adapter (planned)"
+    storage: "large_artifacts/qwen35_4b_universal_mid_density_token_match/adapters/designed240"
+    required_for: "240-row candidate evaluation"
+    checksum: "pending training"
+    regenerate: ".venv/bin/python experiments/qwen35_4b_universal_mid_density_token_match/scripts/run.py --stage train-d240"
+  - name: "eligible merged checkpoints (planned)"
+    storage: "large_artifacts/qwen35_4b_universal_mid_density_token_match/merged/"
+    required_for: "same-backend aggregate evaluation"
+    checksum: "pending local gates and explicit merge"
+    regenerate: ".venv/bin/python experiments/qwen35_4b_universal_mid_density_token_match/scripts/run.py --stage merge"
+omitted_artifacts:
+  - path: "large_artifacts/qwen35_4b_universal_mid_density_token_match/"
+    reason: "large trained adapters and explicitly merged model weights are gitignored"
+reproducibility:
+  smoke_command: ".venv/bin/python experiments/qwen35_4b_universal_mid_density_token_match/scripts/run.py --smoke"
+  full_command: ".venv/bin/python experiments/qwen35_4b_universal_mid_density_token_match/scripts/run.py --stage all"
+  required_external_artifacts:
+    - "large_artifacts/qwen35_4b_universal_replay_anchor/adapters/replay_refresh"
+    - "large_artifacts/qwen35_4b_universal_replay_anchor/merged/replay_refresh"
+    - "large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized"
+    - "large_artifacts/qwen35_4b_universal_curriculum/merged/blend"
+notes: >-
+  Checked-in source and derived data are bound by source_token_lengths.json,
+  dose_manifest.json, and dose_token_receipt.json. All three arms have exactly
+  1,405,510 forward tokens and zero tokenizer skips. Update planned checksums after
+  each successful stage.

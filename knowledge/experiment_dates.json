@@ -1327,6 +1327,16 @@
     "experiments/qwen35_4b_universal_low_density_token_match/experiment_log.md: dated design-freeze entry"
    ]
   },
+  "qwen35_4b_universal_mid_density_token_match": {
+   "start": "2026-07-13",
+   "end": "2026-07-13",
+   "confidence": "high",
+   "sources": [
+    "experiments/qwen35_4b_universal_mid_density_token_match/reports/preregistration.md: frozen 2026-07-13 before training",
+    "experiments/qwen35_4b_universal_mid_density_token_match/experiment_log.md: dated design-freeze entry"
+   ],
+   "caveat": "Training and result-bearing evaluation had not started at this design boundary."
+  },
   "qwen35_4b_universal_replay_anchor": {
    "start": "2026-07-13",
    "end": "2026-07-13",

@@ -47901,6 +47901,51 @@
     }
    ]
   },
+  "qwen35_4b_universal_mid_density_token_match": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Mid-density doses replace exactly 0, 160, or 240 replay rows",
+     "categories": [
+      "shared replay",
+      "designed curriculum",
+      "matched replay replacements"
+     ],
+     "series": [
+      {
+       "label": "replay_repeat",
+       "values": [
+        1280,
+        0,
+        240
+       ]
+      },
+      {
+       "label": "designed160",
+       "values": [
+        1280,
+        160,
+        80
+       ]
+      },
+      {
+       "label": "designed240",
+       "values": [
+        1280,
+        240,
+        0
+       ]
+      }
+     ],
+     "x_label": "frozen dose component",
+     "y_label": "training rows",
+     "y_format": "integer",
+     "note": "All arms share slot order, contain 1,520 rows, run 190 optimizer steps, and total exactly 1,405,510 forward tokens. This is a frozen pre-run design, not a model result.",
+     "source": "experiments/qwen35_4b_universal_mid_density_token_match/data/dose_manifest.json"
+    }
+   ]
+  },
   "qwen35_4b_universal_replay_anchor": {
    "charts": [
     {

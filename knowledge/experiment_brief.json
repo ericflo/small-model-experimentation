@@ -13293,6 +13293,44 @@
     }
    ]
   },
+  "qwen35_4b_universal_mid_density_token_match": {
+   "verdict_tag": "Mid-density dose bridge is frozen, not run",
+   "concept_primer": "Very small doses of abstract lessons did not install reliable execution, while a much larger earlier dose learned locally but displaced broad behavior. This experiment tests two doses between those endpoints while keeping training exposure exactly equal to replay-only practice.",
+   "plain_question": "Can a middle-sized dose of abstract skill lessons cross the local installation threshold without sacrificing the replay practice that protects broad capability?",
+   "plain_answer": "The test is prepared but has not trained or evaluated a model. Its replay-only, 160-lesson, and 240-lesson streams have identical row counts, token exposure, update counts, and slot order, so later differences can be attributed cleanly to lesson content.",
+   "why_it_matters": "This is the shortest direct test of the remaining dose gap. A strict fresh local screen prevents weak candidates from consuming a broad evaluation event, while a successful candidate would still have to beat replay continuation and every family before advancing.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "registered training streams",
+     "value": "three",
+     "sub": "replay only plus two designed doses"
+    },
+    {
+     "label": "designed lesson doses",
+     "value": "160 / 240",
+     "sub": "both frozen before training"
+    },
+    {
+     "label": "rows per stream",
+     "value": "1,520",
+     "sub": "position aligned across every arm"
+    },
+    {
+     "label": "forward tokens per stream",
+     "value": "1,405,510",
+     "sub": "exactly matched with zero skipped rows"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Two middle doses replace matched replay blocks",
+     "chart_read": "Every bar totals 1,520 rows. The designed streams replace two or three token-matched 80-row replay blocks while the 1,280-row replay core stays fixed.",
+     "chart_takeaway": "The frozen ladder isolates lesson density at equal token exposure; no training result exists yet."
+    }
+   ]
+  },
   "qwen35_4b_universal_replay_anchor": {
    "verdict_tag": "Designed mix loses; replay-only sets a stronger anchor",
    "concept_primer": "This experiment kept the model practicing broad tasks while adding a smaller set of abstract lessons. A replay-only comparison received the same number of updates, revealing whether any gain came from the designed lessons or simply from continuing broad practice.",
