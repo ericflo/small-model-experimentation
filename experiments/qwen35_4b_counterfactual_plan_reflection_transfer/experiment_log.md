@@ -142,5 +142,15 @@
   official config and index, rejects unexpected/executable/symlink checkpoint content,
   enforces full physical allocation, and all local/runtime loads disable remote code.
   Mixed-dtype, one-shard, `auto_map`, executable-injection, and 4,096-byte punched-hole
-  regressions pass as part of 67 pinned-environment model-free tests. Authorization remains tokenizer-only
-  pending fresh Review 7.
+  regressions pass as part of 67 pinned-environment model-free tests. Authorization
+  remains tokenizer-only pending fresh Review 7.
+- Review 7 on exact commit `2b79995a50c13275a3bacf7fa7cb71ef16525188`
+  returned HOLD. The real tensor writer, mixed-dtype preservation, 67 tests, full
+  construction, exact public inventory, and both CI workflows passed, but generation
+  provenance still expects remote-code trust while the runner records false; the
+  frozen baseline does not include 36-step training compute; base/tokenizer/runtime
+  bytes and the merged load handoff are underbound; tokenizer/training still enable
+  remote code; numeric equality accepts negative-zero/positive-zero byte changes;
+  staged artifacts cannot survive an in-place commit/rebase; and malformed YAML joins
+  two parity gates. No execution authorization changes until all seven counterexamples
+  have executable fail-closed regressions and a fresh exact-commit review.

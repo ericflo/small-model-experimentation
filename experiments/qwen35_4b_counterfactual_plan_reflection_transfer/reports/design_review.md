@@ -368,3 +368,48 @@ qualification, or confirmation event occurred during Review 6.
 Authorization remains tokenizer-only. Review 7 must independently attack the exact
 committed remediation and its real-runtime feasibility before any model/GPU/training
 or evaluation flag changes.
+
+## Review 7 — 2026-07-14
+
+**Reviewed commit:** `2b79995a50c13275a3bacf7fa7cb71ef16525188`
+
+**Verdict:** **HOLD full implementation.**
+
+The fresh read-only audit confirmed the exact clean commit and ancestry, green Validate
+Repository run `29358785262`, green Publish Research Site run `29358785257`, all 67
+pinned-environment tests (including the real multi-tensor mixed-dtype safetensors
+writer), AST parsing for 37 Python files, and full 216/72/144/144 plus 48 construction
+with zero collisions or prohibited events. It independently confirmed the official
+738-tensor, 9,319,737,856-byte, 690-BF16/48-F32 inventory; 128 adapted/610 unchanged
+partition; exact two-shard serialization; partial-hole, executable, and symlink
+rejections; representative cross-environment LoRA replay; and host feasibility.
+
+Seven blockers remain:
+
+1. `vllm_runner.py` now records `trust_remote_code: false`, but `provenance.py` still
+   requires `true`, so every valid frozen or merged generation fails before scoring.
+2. Frozen sample-more still has only the same 16 candidates and caps as each evaluated
+   checkpoint. It receives no compute corresponding to 36 optimizer steps, so it is
+   not the repository-required end-to-end matched-compute baseline.
+3. Loaded bytes are not fully bound to validated bytes. Frozen evaluation and training
+   do not authenticate the exact cached source shards before load; training receipts
+   omit the exact package/runtime/hardware/base commitments; and merged validation
+   releases the path before vLLM opens it, leaving a TOCTOU interval.
+4. Tokenizer receipt and training still enable remote code, and evaluation binds only
+   selected token semantics rather than the complete tokenizer artifact identity.
+5. `torch.equal` is numeric rather than bitwise: an unchanged F32 tensor changed from
+   negative zero to positive zero passed the claimed exact replay.
+6. Every stage requires its commit to equal current HEAD. The pipeline is feasible only
+   if all execution stays in one immutable clean exact-SHA worktree while result commits
+   and rebases happen elsewhere; this workflow is neither documented nor enforced.
+7. A misindented YAML dash concatenates the rendered-prompt parity gate and exact-mask
+   receipt gate into one string, leaving five parsed gates rather than six.
+
+Required remediation is executable provenance parity with false remote-code trust; a
+preregistered end-to-end compute unit, amortization horizon, same-backend frozen
+sampling reservoir, and decision gate; exact base/tokenizer/environment commitments
+at training and evaluation load boundaries plus an immutable handoff; raw-byte replay;
+an enforced detached execution-worktree contract; and exact config-schema tests.
+Authorization remains tokenizer-only. Review 7 made zero tokenizer/model/GPU/training/
+evaluation/Jacobian calls and accessed no benchmark, run, large-artifact, hidden,
+qualification, confirmation, cache, or tensor-payload content.
