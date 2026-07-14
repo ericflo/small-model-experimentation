@@ -14,6 +14,7 @@ from calibration_stage import (
     EXPECTED_ROWS,
     INVOCATION_ORDER,
     ROOT,
+    RUNTIME_METADATA_KEYS,
     CalibrationInputs,
     engine_config,
     load_calibration_inputs,
@@ -31,10 +32,53 @@ from transactions import (
 
 
 IMPLEMENTATION_LOCK = EXP / "runs/calibration/implementation_lock.json"
+IMPLEMENTATION_REVIEW = EXP / "reports/calibration_implementation_review.json"
+IMPLEMENTATION_REVIEW_REPORT = EXP / "reports/calibration_implementation_review.md"
 LIVE_PREFLIGHT = EXP / "runs/calibration/live_preflight.json"
 RAW_DIR = EXP / "runs/calibration/raw"
 DECISION = EXP / "runs/calibration/decision.json"
 REQUIRED_WORKFLOWS = ("Validate Repository", "Publish Research Site")
+REVIEW_RECEIPT_KEYS = {
+    "schema_version",
+    "verdict",
+    "reviewed_commit",
+    "reviewer",
+    "review_report_sha256",
+    "reviewed_ci",
+    "adversarial_review_rounds",
+    "experimental_model_requests_reviewed",
+    "sampled_model_outputs_reviewed",
+    "hidden_files_read",
+    "qualification_files_read",
+    "confirmation_files_read",
+    "benchmark_files_read",
+}
+LIVE_PREFLIGHT_KEYS = {
+    "schema_version",
+    "decision",
+    "model",
+    "revision",
+    "implementation_lock_sha256",
+    "implementation_commit",
+    "live_head",
+    "live_head_ci",
+    "engine",
+    "engine_args_sha256",
+    "resolved_cudagraph",
+    "resolved_logprobs_mode",
+    "prompt_receipt",
+    "runtime",
+    "invocation_order",
+    "expected_source_rows",
+    "expected_answer_pairs",
+    "expected_answer_requests",
+    "experimental_generation_requests_before_preflight",
+    "sampled_model_outputs_before_preflight",
+    "hidden_files_read",
+    "qualification_files_read",
+    "confirmation_files_read",
+    "benchmark_files_read",
+}
 PREFIX = "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/"
 CRITICAL_FILES = (
     "requirements-vllm.lock.txt",
@@ -56,6 +100,7 @@ CRITICAL_FILES = (
     PREFIX + "src/transactions.py",
     PREFIX + "src/vllm_runner.py",
     PREFIX + "tests/test_calibration_lock.py",
+    PREFIX + "tests/test_calibration_process_lock.py",
     PREFIX + "tests/test_calibration_stage.py",
     PREFIX + "tests/test_calibration_bootstrap.py",
     PREFIX + "tests/test_construction.py",
@@ -205,6 +250,117 @@ def verify_recorded_ci(commit: str, evidence: Mapping[str, Mapping[str, Any]]) -
             raise RuntimeError(f"recorded workflow is not green: {workflow}")
 
 
+def _validate_ci_evidence(
+    commit: str, evidence: Any, *, label: str
+) -> dict[str, Mapping[str, Any]]:
+    commit = _commit_id(commit)
+    if not isinstance(evidence, dict) or set(evidence) != set(REQUIRED_WORKFLOWS):
+        raise RuntimeError(f"{label} workflow inventory changed")
+    for workflow, row in evidence.items():
+        if (
+            not isinstance(row, dict)
+            or set(row)
+            != {"database_id", "head_sha", "status", "conclusion", "url"}
+            or row["head_sha"] != commit
+            or row["status"] != "completed"
+            or row["conclusion"] != "success"
+            or not isinstance(row["database_id"], int)
+            or isinstance(row["database_id"], bool)
+            or row["database_id"] < 1
+            or not isinstance(row["url"], str)
+            or not row["url"].startswith("https://github.com/")
+        ):
+            raise RuntimeError(f"{label} workflow evidence changed: {workflow}")
+    return evidence
+
+
+def _tracked_commit(relative: str) -> str:
+    commit = _git("log", "-1", "--format=%H", "--", relative)
+    if not commit:
+        raise RuntimeError(f"required artifact is not committed: {relative}")
+    return _commit_id(commit)
+
+
+def validate_implementation_review(value: Any) -> dict[str, Any]:
+    if not isinstance(value, dict) or set(value) != REVIEW_RECEIPT_KEYS:
+        raise RuntimeError("implementation review receipt schema changed")
+    reviewed_commit = _commit_id(value["reviewed_commit"])
+    if (
+        value["schema_version"] != 1
+        or value["verdict"] != "PASS_IMPLEMENTATION"
+        or not isinstance(value["reviewer"], str)
+        or not value["reviewer"].strip()
+        or not isinstance(value["review_report_sha256"], str)
+        or len(value["review_report_sha256"]) != 64
+        or any(
+            character not in "0123456789abcdef"
+            for character in value["review_report_sha256"]
+        )
+        or not isinstance(value["adversarial_review_rounds"], int)
+        or isinstance(value["adversarial_review_rounds"], bool)
+        or value["adversarial_review_rounds"] < 1
+        or value["experimental_model_requests_reviewed"] != 0
+        or value["sampled_model_outputs_reviewed"] != 0
+        or any(
+            value[field] != []
+            for field in (
+                "hidden_files_read",
+                "qualification_files_read",
+                "confirmation_files_read",
+                "benchmark_files_read",
+            )
+        )
+    ):
+        raise RuntimeError("implementation review receipt boundary changed")
+    _validate_ci_evidence(
+        reviewed_commit, value["reviewed_ci"], label="reviewed implementation"
+    )
+    return value
+
+
+def authenticate_implementation_review(
+    path: Path = IMPLEMENTATION_REVIEW, *, verify_network: bool = True
+) -> dict[str, Any]:
+    value = validate_implementation_review(read_canonical(path))
+    reviewed_commit = _commit_id(value["reviewed_commit"])
+    relative = str(path.relative_to(ROOT))
+    receipt_commit = _tracked_commit(relative)
+    if path.read_bytes() != _git_bytes("show", f"{receipt_commit}:{relative}"):
+        raise RuntimeError("implementation review receipt differs from committed bytes")
+    report_relative = str(IMPLEMENTATION_REVIEW_REPORT.relative_to(ROOT))
+    report_blob = _git_bytes("show", f"{receipt_commit}:{report_relative}")
+    if (
+        sha256_bytes(report_blob) != value["review_report_sha256"]
+        or IMPLEMENTATION_REVIEW_REPORT.read_bytes() != report_blob
+    ):
+        raise RuntimeError("implementation review report differs from receipt")
+    head = _commit_id(_git("rev-parse", "HEAD"))
+    if not _ancestor(reviewed_commit, receipt_commit) or not _ancestor(
+        receipt_commit, head
+    ):
+        raise RuntimeError("implementation review commit ancestry changed")
+    for relative in CALIBRATION_RUNTIME_FILES:
+        current = ROOT / relative
+        reviewed_blob = _git_bytes("show", f"{reviewed_commit}:{relative}")
+        if current.is_symlink() or current.read_bytes() != reviewed_blob:
+            raise RuntimeError(
+                f"reviewed calibration runtime changed after review: {relative}"
+            )
+    if verify_network:
+        subprocess.run(["git", "fetch", "--quiet", "origin", "main"], cwd=ROOT, check=True)
+        origin = _commit_id(_git("rev-parse", "origin/main"))
+        if not _ancestor(receipt_commit, origin) or not _ancestor(head, origin):
+            raise RuntimeError("implementation review is not published on main")
+        verify_recorded_ci(reviewed_commit, value["reviewed_ci"])
+        query_green_ci(receipt_commit)
+        query_green_ci(head)
+    return {
+        **value,
+        "receipt_commit": receipt_commit,
+        "receipt_sha256": sha256_file(path),
+    }
+
+
 def _critical_hashes(commit: str) -> dict[str, str]:
     result = {}
     for relative in CRITICAL_FILES:
@@ -214,8 +370,10 @@ def _critical_hashes(commit: str) -> dict[str, str]:
         if _git("ls-files", "--error-unmatch", "--", relative) != relative:
             raise RuntimeError(f"critical implementation file is untracked: {relative}")
         blob = _git_bytes("show", f"{commit}:{relative}")
-        if path.read_bytes() != blob:
-            raise RuntimeError(f"critical working bytes differ from commit: {relative}")
+        if relative in CALIBRATION_RUNTIME_FILES and path.read_bytes() != blob:
+            raise RuntimeError(
+                f"reviewed runtime bytes differ from implementation: {relative}"
+            )
         result[relative] = sha256_bytes(blob)
     return result
 
@@ -236,17 +394,34 @@ def build_lock_value(
     critical_files: Mapping[str, str],
     frozen_mechanics_blobs: Mapping[str, str],
     inputs: CalibrationInputs,
-    ci_evidence: Mapping[str, Mapping[str, Any]],
+    review_receipt: Mapping[str, Any],
+    review_receipt_sha256: str,
+    review_receipt_commit: str,
+    release_commit: str,
+    release_ci: Mapping[str, Mapping[str, Any]],
 ) -> dict[str, Any]:
     implementation_commit = _commit_id(implementation_commit)
+    review = validate_implementation_review(dict(review_receipt))
+    review_receipt_commit = _commit_id(review_receipt_commit)
+    release_commit = _commit_id(release_commit)
     if tuple(critical_files) != CRITICAL_FILES:
         raise RuntimeError("critical implementation allowlist changed")
     if set(frozen_mechanics_blobs) != set(FROZEN_MECHANICS_FILES):
         raise RuntimeError("frozen mechanics inventory changed")
-    if tuple(ci_evidence) != REQUIRED_WORKFLOWS:
-        raise RuntimeError("implementation CI inventory changed")
+    if implementation_commit != review["reviewed_commit"]:
+        raise RuntimeError("implementation commit differs from review receipt")
+    if (
+        not isinstance(review_receipt_sha256, str)
+        or len(review_receipt_sha256) != 64
+        or any(
+            character not in "0123456789abcdef"
+            for character in review_receipt_sha256
+        )
+    ):
+        raise RuntimeError("implementation review receipt hash changed")
+    _validate_ci_evidence(release_commit, release_ci, label="release")
     return {
-        "schema_version": 1,
+        "schema_version": 2,
         "stage": "calibration_implementation_lock",
         "authorization": "interface_calibration_only",
         "model": MODEL_ID,
@@ -266,9 +441,17 @@ def build_lock_value(
             for name, value in sampling_configs(inputs).items()
         },
         "implementation_ci": {
-            name: dict(value) for name, value in ci_evidence.items()
+            name: dict(value) for name, value in review["reviewed_ci"].items()
         },
-        "implementation_review_verdict": "PASS_IMPLEMENTATION",
+        "implementation_review": {
+            "verdict": review["verdict"],
+            "reviewer": review["reviewer"],
+            "reviewed_commit": review["reviewed_commit"],
+            "receipt_sha256": review_receipt_sha256,
+            "receipt_commit": review_receipt_commit,
+        },
+        "release_commit": release_commit,
+        "release_ci": {name: dict(value) for name, value in release_ci.items()},
         "experimental_model_requests_before_lock": 0,
         "sampled_model_outputs_before_lock": 0,
         "hidden_files_read": [],
@@ -297,7 +480,9 @@ def validate_lock_value(lock: Any, *, inputs: CalibrationInputs) -> dict[str, An
         "engine",
         "sampling",
         "implementation_ci",
-        "implementation_review_verdict",
+        "implementation_review",
+        "release_commit",
+        "release_ci",
         "experimental_model_requests_before_lock",
         "sampled_model_outputs_before_lock",
         "hidden_files_read",
@@ -312,7 +497,7 @@ def validate_lock_value(lock: Any, *, inputs: CalibrationInputs) -> dict[str, An
     if not isinstance(lock, dict) or set(lock) != expected_keys:
         raise RuntimeError("calibration implementation lock schema changed")
     if (
-        lock["schema_version"] != 1
+        lock["schema_version"] != 2
         or lock["stage"] != "calibration_implementation_lock"
         or lock["authorization"] != "interface_calibration_only"
         or lock["model"] != MODEL_ID
@@ -325,7 +510,6 @@ def validate_lock_value(lock: Any, *, inputs: CalibrationInputs) -> dict[str, An
         or lock["expected_answer_requests"] != 384
         or lock["engine"] != _normalized(dataclasses.asdict(engine_config(inputs)))
         or lock["sampling"] != expected_sampling
-        or lock["implementation_review_verdict"] != "PASS_IMPLEMENTATION"
         or lock["experimental_model_requests_before_lock"] != 0
         or lock["sampled_model_outputs_before_lock"] != 0
         or any(
@@ -339,7 +523,32 @@ def validate_lock_value(lock: Any, *, inputs: CalibrationInputs) -> dict[str, An
         )
     ):
         raise RuntimeError("calibration implementation lock boundary changed")
-    _commit_id(lock["implementation_commit"])
+    implementation_commit = _commit_id(lock["implementation_commit"])
+    release_commit = _commit_id(lock["release_commit"])
+    review = lock["implementation_review"]
+    if (
+        not isinstance(review, dict)
+        or set(review)
+        != {
+            "verdict",
+            "reviewer",
+            "reviewed_commit",
+            "receipt_sha256",
+            "receipt_commit",
+        }
+        or review["verdict"] != "PASS_IMPLEMENTATION"
+        or not isinstance(review["reviewer"], str)
+        or not review["reviewer"].strip()
+        or review["reviewed_commit"] != implementation_commit
+        or _commit_id(review["receipt_commit"]) != review["receipt_commit"]
+        or not isinstance(review["receipt_sha256"], str)
+        or len(review["receipt_sha256"]) != 64
+        or any(
+            character not in "0123456789abcdef"
+            for character in review["receipt_sha256"]
+        )
+    ):
+        raise RuntimeError("calibration implementation review binding changed")
     if not isinstance(lock["critical_files"], dict) or set(
         lock["critical_files"]
     ) != set(CRITICAL_FILES):
@@ -362,32 +571,13 @@ def validate_lock_value(lock: Any, *, inputs: CalibrationInputs) -> dict[str, An
         for value in lock["frozen_mechanics_blobs"].values()
     ):
         raise RuntimeError("calibration frozen mechanics blob changed")
-    if not isinstance(lock["implementation_ci"], dict) or set(
-        lock["implementation_ci"]
-    ) != set(REQUIRED_WORKFLOWS):
-        raise RuntimeError("calibration implementation CI inventory changed")
-    for workflow, row in lock["implementation_ci"].items():
-        if (
-            not isinstance(row, dict)
-            or set(row)
-            != {"database_id", "head_sha", "status", "conclusion", "url"}
-            or row["head_sha"] != lock["implementation_commit"]
-            or row["status"] != "completed"
-            or row["conclusion"] != "success"
-            or not isinstance(row["database_id"], int)
-            or isinstance(row["database_id"], bool)
-            or row["database_id"] < 1
-            or not isinstance(row["url"], str)
-            or not row["url"].startswith("https://github.com/")
-        ):
-            raise RuntimeError(f"calibration implementation CI changed: {workflow}")
+    _validate_ci_evidence(
+        implementation_commit,
+        lock["implementation_ci"],
+        label="calibration implementation",
+    )
+    _validate_ci_evidence(release_commit, lock["release_ci"], label="calibration release")
     return lock
-
-
-def _review_passes() -> None:
-    text = (EXP / "reports/calibration_implementation_review.md").read_text()
-    if "`PASS_IMPLEMENTATION`" not in text or "`HOLD_LIVE_CALLS`" in text:
-        raise RuntimeError("independent implementation review has not passed")
 
 
 def publish_calibration_lock(path: Path = IMPLEMENTATION_LOCK) -> dict[str, Any]:
@@ -401,17 +591,24 @@ def publish_calibration_lock(path: Path = IMPLEMENTATION_LOCK) -> dict[str, Any]
     ):
         raise RuntimeError("calibration lock must precede every calibration artifact")
     subprocess.run(["git", "fetch", "--quiet", "origin", "main"], cwd=ROOT, check=True)
-    commit = _commit_id(_git("rev-parse", "HEAD"))
-    if commit != _commit_id(_git("rev-parse", "origin/main")):
-        raise RuntimeError("implementation commit must equal current origin/main")
-    _review_passes()
+    release_commit = _commit_id(_git("rev-parse", "HEAD"))
+    if release_commit != _commit_id(_git("rev-parse", "origin/main")):
+        raise RuntimeError("release commit must equal current origin/main")
+    review = authenticate_implementation_review()
+    implementation_commit = _commit_id(review["reviewed_commit"])
     inputs = load_calibration_inputs()
     value = build_lock_value(
-        implementation_commit=commit,
-        critical_files=_critical_hashes(commit),
-        frozen_mechanics_blobs=_blob_inventory(commit, FROZEN_MECHANICS_FILES),
+        implementation_commit=implementation_commit,
+        critical_files=_critical_hashes(implementation_commit),
+        frozen_mechanics_blobs=_blob_inventory(
+            release_commit, FROZEN_MECHANICS_FILES
+        ),
         inputs=inputs,
-        ci_evidence=query_green_ci(commit),
+        review_receipt={key: review[key] for key in REVIEW_RECEIPT_KEYS},
+        review_receipt_sha256=review["receipt_sha256"],
+        review_receipt_commit=review["receipt_commit"],
+        release_commit=release_commit,
+        release_ci=query_green_ci(release_commit),
     )
     write_exclusive_durable(path, value)
     return value
@@ -423,23 +620,43 @@ def verify_calibration_lock(
     inputs = load_calibration_inputs()
     lock = validate_lock_value(read_canonical(path), inputs=inputs)
     commit = _commit_id(lock["implementation_commit"])
+    review = authenticate_implementation_review(verify_network=verify_network)
+    expected_review = lock["implementation_review"]
+    if (
+        review["verdict"] != expected_review["verdict"]
+        or review["reviewer"] != expected_review["reviewer"]
+        or review["reviewed_commit"] != expected_review["reviewed_commit"]
+        or review["receipt_sha256"] != expected_review["receipt_sha256"]
+        or review["receipt_commit"] != expected_review["receipt_commit"]
+    ):
+        raise RuntimeError("implementation review no longer matches lock")
     for relative, expected in lock["critical_files"].items():
         current = ROOT / relative
-        if sha256_file(current) != expected:
+        if relative in CALIBRATION_RUNTIME_FILES and sha256_file(current) != expected:
             raise RuntimeError(f"critical runtime file changed after lock: {relative}")
         if sha256_bytes(_git_bytes("show", f"{commit}:{relative}")) != expected:
             raise RuntimeError(f"implementation Git blob changed: {relative}")
-    for relative, blob in lock["frozen_mechanics_blobs"].items():
-        if _git("rev-parse", f"{commit}:{relative}") != blob:
-            raise RuntimeError(f"frozen mechanics Git blob changed: {relative}")
     head = _commit_id(_git("rev-parse", "HEAD"))
-    if not _ancestor(commit, head):
-        raise RuntimeError("current HEAD does not descend from implementation")
+    for relative, blob in lock["frozen_mechanics_blobs"].items():
+        if _git("rev-parse", f"{head}:{relative}") != blob:
+            raise RuntimeError(f"frozen mechanics Git blob changed: {relative}")
+    lock_relative = str(path.relative_to(ROOT))
+    lock_commit = _tracked_commit(lock_relative)
+    if path.read_bytes() != _git_bytes("show", f"{lock_commit}:{lock_relative}"):
+        raise RuntimeError("calibration lock differs from committed bytes")
+    release_commit = _commit_id(lock["release_commit"])
+    if not _ancestor(commit, release_commit) or not _ancestor(
+        release_commit, lock_commit
+    ) or not _ancestor(lock_commit, head):
+        raise RuntimeError("calibration lock commit ancestry changed")
     if verify_network:
         subprocess.run(["git", "fetch", "--quiet", "origin", "main"], cwd=ROOT, check=True)
-        if not _ancestor(head, _git("rev-parse", "origin/main")):
+        origin = _commit_id(_git("rev-parse", "origin/main"))
+        if not _ancestor(head, origin):
             raise RuntimeError("current live HEAD is not published on main")
         verify_recorded_ci(commit, lock["implementation_ci"])
+        verify_recorded_ci(release_commit, lock["release_ci"])
+        query_green_ci(lock_commit)
         query_green_ci(head)
     allowed_prefix = PREFIX + "runs/calibration/"
     dirty = _git("status", "--porcelain=v1", "--untracked-files=all").splitlines()
@@ -547,25 +764,36 @@ def live_preflight_value(
     }
 
 
-def verify_recorded_live_preflight(
+def validate_live_preflight_value(
+    value: Any,
     *,
     inputs: CalibrationInputs,
-    lock_path: Path = IMPLEMENTATION_LOCK,
-    path: Path = LIVE_PREFLIGHT,
-    runner: Any | None = None,
+    implementation_commit: str,
+    implementation_lock_sha256: str,
 ) -> dict[str, Any]:
-    lock = verify_calibration_lock(lock_path)
-    value = read_canonical(path)
     if (
-        value.get("schema_version") != 1
+        not isinstance(value, dict)
+        or set(value) != LIVE_PREFLIGHT_KEYS
+        or value.get("schema_version") != 1
         or value.get("decision") != "CALIBRATION_LIVE_ENGINE_PREFLIGHT_PASS"
         or value.get("model") != MODEL_ID
         or value.get("revision") != MODEL_REVISION
-        or value.get("implementation_lock_sha256") != sha256_file(lock_path)
-        or value.get("implementation_commit") != lock["implementation_commit"]
+        or value.get("implementation_lock_sha256")
+        != implementation_lock_sha256
+        or value.get("implementation_commit") != implementation_commit
         or value.get("engine")
         != _normalized(dataclasses.asdict(engine_config(inputs)))
+        or not isinstance(value.get("engine_args_sha256"), str)
+        or len(value["engine_args_sha256"]) != 64
+        or any(
+            character not in "0123456789abcdef"
+            for character in value["engine_args_sha256"]
+        )
+        or not isinstance(value.get("resolved_cudagraph"), dict)
         or value.get("resolved_logprobs_mode") != "raw_logprobs"
+        or not isinstance(value.get("prompt_receipt"), dict)
+        or not isinstance(value.get("runtime"), dict)
+        or set(value["runtime"]) != RUNTIME_METADATA_KEYS
         or value.get("invocation_order") != list(INVOCATION_ORDER)
         or value.get("expected_source_rows") != 48
         or value.get("expected_answer_pairs") != 192
@@ -584,16 +812,41 @@ def verify_recorded_live_preflight(
     ):
         raise RuntimeError("recorded calibration live preflight boundary changed")
     live_head = _commit_id(value["live_head"])
+    _validate_ci_evidence(live_head, value["live_head_ci"], label="live preflight")
+    return value
+
+
+def verify_recorded_live_preflight(
+    *,
+    inputs: CalibrationInputs,
+    lock_path: Path = IMPLEMENTATION_LOCK,
+    path: Path = LIVE_PREFLIGHT,
+    runner: Any | None = None,
+) -> dict[str, Any]:
+    lock = verify_calibration_lock(lock_path)
+    value = validate_live_preflight_value(
+        read_canonical(path),
+        inputs=inputs,
+        implementation_commit=lock["implementation_commit"],
+        implementation_lock_sha256=sha256_file(lock_path),
+    )
+    live_head = _commit_id(value["live_head"])
     if not _ancestor(lock["implementation_commit"], live_head):
         raise RuntimeError("live preflight predates implementation")
+    _validate_ci_evidence(live_head, value["live_head_ci"], label="live preflight")
     verify_recorded_ci(live_head, value["live_head_ci"])
     if runner is not None:
         loaded = _validate_loaded_runner(runner, inputs)
+        stable_runtime_keys = RUNTIME_METADATA_KEYS - {"git_dirty"}
         if (
             value["engine_args_sha256"]
             != canonical_sha256(_normalized(runner.engine_args))
             or value["resolved_cudagraph"] != _normalized(runner.resolved_cudagraph)
             or value["prompt_receipt"] != loaded["prompts"]
+            or any(
+                value["runtime"].get(key) != loaded["runtime"].get(key)
+                for key in stable_runtime_keys
+            )
         ):
             raise RuntimeError("current runner differs from live preflight")
     return value

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import ast
+import importlib.util
 import unittest
 from pathlib import Path
 
@@ -40,6 +41,34 @@ class CalibrationBootstrapTests(unittest.TestCase):
             "src/vllm_runner.py",
         ):
             self.assertIn(relative, source)
+        self.assertIn("set(critical) != set(_BOOTSTRAP_CRITICAL_FILES)", source)
+        self.assertIn("allowed != list(_BOOTSTRAP_RUNTIME_FILES)", source)
+        self.assertIn("pre-import review provenance changed", source)
+        self.assertIn("pre-import frozen mechanics changed", source)
+        self.assertIn("for published_commit in dict.fromkeys", source)
+
+    def test_compiled_bootstrap_inventories_equal_runtime_lock_inventories(self) -> None:
+        script = EXP / "scripts/run_calibration.py"
+        spec = importlib.util.spec_from_file_location(
+            "run_calibration_bootstrap_test", script
+        )
+        module = importlib.util.module_from_spec(spec)
+        assert spec.loader is not None
+        spec.loader.exec_module(module)
+        import calibration_lock
+
+        self.assertEqual(
+            tuple(module._BOOTSTRAP_RUNTIME_FILES),
+            calibration_lock.CALIBRATION_RUNTIME_FILES,
+        )
+        self.assertEqual(
+            set(module._BOOTSTRAP_CRITICAL_FILES),
+            set(calibration_lock.CRITICAL_FILES),
+        )
+        self.assertEqual(
+            set(module._BOOTSTRAP_FROZEN_MECHANICS),
+            set(calibration_lock.FROZEN_MECHANICS_FILES),
+        )
 
 
 if __name__ == "__main__":

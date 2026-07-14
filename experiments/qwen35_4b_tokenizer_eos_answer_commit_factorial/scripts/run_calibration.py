@@ -32,6 +32,65 @@ _BOOTSTRAP_IMPORT_FILES = (
     str(EXP_REL / "src/transactions.py"),
     str(EXP_REL / "src/vllm_runner.py"),
 )
+_BOOTSTRAP_RUNTIME_FILES = (
+    "requirements-vllm.lock.txt",
+    str(EXP_REL / "configs/default.yaml"),
+    str(EXP_REL / "runs/prepared/calibration_requests.jsonl"),
+    str(EXP_REL / "runs/prepared/preoutcome_receipt.json"),
+    str(EXP_REL / "runs/tokenizer/receipt.json"),
+    *_BOOTSTRAP_IMPORT_FILES,
+)
+_BOOTSTRAP_CRITICAL_FILES = (
+    "requirements-vllm.lock.txt",
+    str(EXP_REL / "configs/default.yaml"),
+    str(EXP_REL / "reports/design_review.md"),
+    str(EXP_REL / "reports/preregistration.md"),
+    str(EXP_REL / "reports/calibration_implementation_review.md"),
+    str(EXP_REL / "runs/prepared/calibration_requests.jsonl"),
+    str(EXP_REL / "runs/prepared/preoutcome_receipt.json"),
+    str(EXP_REL / "runs/tokenizer/receipt.json"),
+    *_BOOTSTRAP_IMPORT_FILES,
+    str(EXP_REL / "scripts/tokenizer_receipt.py"),
+    str(EXP_REL / "tests/test_calibration_lock.py"),
+    str(EXP_REL / "tests/test_calibration_process_lock.py"),
+    str(EXP_REL / "tests/test_calibration_stage.py"),
+    str(EXP_REL / "tests/test_calibration_bootstrap.py"),
+    str(EXP_REL / "tests/test_construction.py"),
+    str(EXP_REL / "tests/test_interface_analysis.py"),
+    str(EXP_REL / "tests/test_protocol.py"),
+    str(EXP_REL / "tests/test_tokenizer_receipt.py"),
+    str(EXP_REL / "tests/test_transactions.py"),
+    str(EXP_REL / "tests/test_vllm_runner.py"),
+)
+_BOOTSTRAP_FROZEN_MECHANICS = (
+    str(EXP_REL / "data/procedural/mechanics_public.jsonl"),
+    str(EXP_REL / "data/procedural/mechanics_audit.jsonl"),
+    str(EXP_REL / "data/procedural/mechanics_gold.jsonl.aesgcm"),
+    str(EXP_REL / "runs/construction/summary.json"),
+    str(EXP_REL / "runs/prepared/transport_requests.jsonl"),
+    str(EXP_REL / "runs/prepared/direct_requests.jsonl"),
+    str(EXP_REL / "runs/prepared/suffix_materialized_requests.jsonl"),
+    str(EXP_REL / "runs/prepared/suffix_name_only_requests.jsonl"),
+    str(EXP_REL / "runs/prepared/suffix_shuffled_requests.jsonl"),
+)
+_BOOTSTRAP_REQUIRED_WORKFLOWS = ("Validate Repository", "Publish Research Site")
+_BOOTSTRAP_LOCK_KEYS = {
+    "schema_version", "stage", "authorization", "model", "revision",
+    "implementation_commit", "critical_files", "calibration_runtime_files",
+    "frozen_mechanics_blobs", "calibration_inputs", "invocation_order",
+    "expected_source_rows", "expected_answer_pairs", "expected_answer_requests",
+    "engine", "sampling", "implementation_ci", "implementation_review",
+    "release_commit", "release_ci", "experimental_model_requests_before_lock",
+    "sampled_model_outputs_before_lock", "hidden_files_read",
+    "qualification_files_read", "confirmation_files_read", "benchmark_files_read",
+}
+_BOOTSTRAP_REVIEW_KEYS = {
+    "schema_version", "verdict", "reviewed_commit", "reviewer",
+    "review_report_sha256", "reviewed_ci", "adversarial_review_rounds",
+    "experimental_model_requests_reviewed", "sampled_model_outputs_reviewed",
+    "hidden_files_read", "qualification_files_read", "confirmation_files_read",
+    "benchmark_files_read",
+}
 _MODEL_ID = "Qwen/Qwen3.5-4B"
 _MODEL_REVISION = "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
 
@@ -67,20 +126,119 @@ def _bootstrap_sha256(path: Path) -> str:
 
 def _bootstrap_strict_json(path: Path) -> dict[str, Any]:
     if path.is_symlink() or not path.is_file():
-        raise RuntimeError("local imports require a real implementation lock")
+        raise RuntimeError(f"pre-import JSON is unsafe or absent: {path}")
 
     def no_duplicates(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
         result: dict[str, Any] = {}
         for key, value in pairs:
             if key in result:
-                raise RuntimeError("duplicate key in pre-import implementation lock")
+                raise RuntimeError(f"duplicate key in pre-import JSON: {path}")
             result[key] = value
         return result
 
-    value = json.loads(path.read_bytes(), object_pairs_hook=no_duplicates)
+    raw = path.read_bytes()
+    value = json.loads(raw, object_pairs_hook=no_duplicates)
     if not isinstance(value, dict):
-        raise RuntimeError("pre-import implementation lock schema changed")
+        raise RuntimeError(f"pre-import JSON schema changed: {path}")
+    canonical = (
+        json.dumps(
+            value,
+            indent=2,
+            sort_keys=True,
+            ensure_ascii=True,
+            allow_nan=False,
+        )
+        + "\n"
+    ).encode()
+    if raw != canonical:
+        raise RuntimeError(f"pre-import JSON is noncanonical: {path}")
     return value
+
+
+def _bootstrap_commit(value: Any, *, label: str) -> str:
+    if (
+        not isinstance(value, str)
+        or len(value) != 40
+        or any(character not in "0123456789abcdef" for character in value)
+    ):
+        raise RuntimeError(f"pre-import {label} is not a full commit ID")
+    return value
+
+
+def _bootstrap_git(*arguments: str) -> str:
+    return subprocess.check_output(["git", *arguments], cwd=ROOT, text=True).strip()
+
+
+def _bootstrap_git_bytes(*arguments: str) -> bytes:
+    return subprocess.check_output(["git", *arguments], cwd=ROOT)
+
+
+def _bootstrap_ancestor(older: str, newer: str) -> bool:
+    return subprocess.run(
+        ["git", "merge-base", "--is-ancestor", older, newer],
+        cwd=ROOT,
+        capture_output=True,
+    ).returncode == 0
+
+
+def _bootstrap_tracked_commit(relative: str) -> str:
+    commit = _bootstrap_git("log", "-1", "--format=%H", "--", relative)
+    if not commit:
+        raise RuntimeError(f"pre-import artifact is uncommitted: {relative}")
+    return _bootstrap_commit(commit, label=f"{relative} commit")
+
+
+def _bootstrap_validate_ci(
+    commit: str, recorded: Any | None = None
+) -> dict[str, dict[str, Any]]:
+    rows = json.loads(
+        subprocess.check_output(
+            [
+                "gh", "run", "list", "--commit", commit, "--limit", "20",
+                "--json", "databaseId,headSha,status,conclusion,workflowName,url",
+            ],
+            cwd=ROOT,
+            text=True,
+        )
+    )
+    result: dict[str, dict[str, Any]] = {}
+    if recorded is not None and (
+        not isinstance(recorded, dict)
+        or set(recorded) != set(_BOOTSTRAP_REQUIRED_WORKFLOWS)
+    ):
+        raise RuntimeError("pre-import workflow inventory changed")
+    for workflow in _BOOTSTRAP_REQUIRED_WORKFLOWS:
+        candidates = [
+            row for row in rows
+            if row.get("workflowName") == workflow and row.get("headSha") == commit
+        ]
+        if not candidates:
+            raise RuntimeError(f"pre-import workflow has no run: {workflow}")
+        if recorded is None:
+            row = max(candidates, key=lambda item: int(item["databaseId"]))
+        else:
+            recorded_id = recorded[workflow].get("database_id")
+            matches = [
+                row for row in candidates
+                if int(row.get("databaseId", -1)) == recorded_id
+            ]
+            if len(matches) != 1:
+                raise RuntimeError(
+                    f"pre-import recorded workflow disappeared: {workflow}"
+                )
+            row = matches[0]
+        result[workflow] = {
+            "database_id": int(row["databaseId"]),
+            "head_sha": commit,
+            "status": str(row["status"]),
+            "conclusion": str(row["conclusion"]),
+            "url": str(row["url"]),
+        }
+        if result[workflow]["status"] != "completed" or result[workflow]["conclusion"] != "success":
+            raise RuntimeError(f"pre-import workflow is not green: {workflow}")
+    if recorded is not None and recorded != result:
+        raise RuntimeError("pre-import recorded workflow evidence changed")
+    return result
 
 
 def _install_calibration_path_audit(allowed_relative: list[str]) -> None:
@@ -145,31 +303,122 @@ def _bootstrap_verify_before_local_imports() -> None:
     lock = _bootstrap_strict_json(lock_path)
     critical = lock.get("critical_files")
     allowed = lock.get("calibration_runtime_files")
-    implementation = lock.get("implementation_commit")
+    frozen = lock.get("frozen_mechanics_blobs")
+    review_binding = lock.get("implementation_review")
     if (
-        lock.get("stage") != "calibration_implementation_lock"
+        set(lock) != _BOOTSTRAP_LOCK_KEYS
+        or lock.get("schema_version") != 2
+        or lock.get("stage") != "calibration_implementation_lock"
         or lock.get("authorization") != "interface_calibration_only"
         or lock.get("model") != _MODEL_ID
         or lock.get("revision") != _MODEL_REVISION
         or not isinstance(critical, dict)
-        or not isinstance(allowed, list)
-        or not isinstance(implementation, str)
-        or len(implementation) != 40
-        or any(relative not in allowed for relative in _BOOTSTRAP_IMPORT_FILES)
+        or set(critical) != set(_BOOTSTRAP_CRITICAL_FILES)
+        or allowed != list(_BOOTSTRAP_RUNTIME_FILES)
+        or not isinstance(frozen, dict)
+        or set(frozen) != set(_BOOTSTRAP_FROZEN_MECHANICS)
+        or not isinstance(review_binding, dict)
+        or set(review_binding)
+        != {"verdict", "reviewer", "reviewed_commit", "receipt_sha256", "receipt_commit"}
+        or review_binding.get("verdict") != "PASS_IMPLEMENTATION"
+        or lock.get("expected_source_rows") != 48
+        or lock.get("expected_answer_pairs") != 192
+        or lock.get("expected_answer_requests") != 384
+        or lock.get("experimental_model_requests_before_lock") != 0
+        or lock.get("sampled_model_outputs_before_lock") != 0
+        or any(
+            lock.get(field) != []
+            for field in (
+                "hidden_files_read", "qualification_files_read",
+                "confirmation_files_read", "benchmark_files_read",
+            )
+        )
     ):
         raise RuntimeError("pre-import implementation lock schema changed")
-    _bootstrap_validate_environment()
-    _install_calibration_path_audit(allowed)
-    for relative in _BOOTSTRAP_IMPORT_FILES:
-        path = ROOT / relative
-        expected = critical.get(relative)
-        if not isinstance(expected, str) or _bootstrap_sha256(path) != expected:
-            raise RuntimeError(f"pre-import critical file changed: {relative}")
-        blob = subprocess.check_output(
-            ["git", "show", f"{implementation}:{relative}"], cwd=ROOT
+    implementation = _bootstrap_commit(
+        lock["implementation_commit"], label="implementation commit"
+    )
+    release = _bootstrap_commit(lock["release_commit"], label="release commit")
+    review_commit = _bootstrap_commit(
+        review_binding["receipt_commit"], label="review receipt commit"
+    )
+    if review_binding["reviewed_commit"] != implementation:
+        raise RuntimeError("pre-import review names another implementation")
+    review_path = EXP / "reports/calibration_implementation_review.json"
+    review = _bootstrap_strict_json(review_path)
+    if (
+        set(review) != _BOOTSTRAP_REVIEW_KEYS
+        or review.get("schema_version") != 1
+        or review.get("verdict") != "PASS_IMPLEMENTATION"
+        or review.get("reviewed_commit") != implementation
+        or review.get("reviewer") != review_binding.get("reviewer")
+        or review.get("reviewed_ci") != lock.get("implementation_ci")
+        or review.get("experimental_model_requests_reviewed") != 0
+        or review.get("sampled_model_outputs_reviewed") != 0
+        or any(
+            review.get(field) != []
+            for field in (
+                "hidden_files_read", "qualification_files_read",
+                "confirmation_files_read", "benchmark_files_read",
+            )
         )
-        if hashlib.sha256(blob).hexdigest() != expected:
-            raise RuntimeError(f"pre-import committed file changed: {relative}")
+        or _bootstrap_sha256(review_path) != review_binding.get("receipt_sha256")
+    ):
+        raise RuntimeError("pre-import implementation review changed")
+    review_relative = str(review_path.relative_to(ROOT))
+    report_path = EXP / "reports/calibration_implementation_review.md"
+    report_relative = str(report_path.relative_to(ROOT))
+    lock_relative = str(lock_path.relative_to(ROOT))
+    if (
+        _bootstrap_tracked_commit(review_relative) != review_commit
+        or review_path.read_bytes()
+        != _bootstrap_git_bytes("show", f"{review_commit}:{review_relative}")
+        or _bootstrap_sha256(report_path) != review.get("review_report_sha256")
+        or report_path.read_bytes()
+        != _bootstrap_git_bytes("show", f"{review_commit}:{report_relative}")
+    ):
+        raise RuntimeError("pre-import review provenance changed")
+    lock_commit = _bootstrap_tracked_commit(lock_relative)
+    head = _bootstrap_commit(_bootstrap_git("rev-parse", "HEAD"), label="HEAD")
+    if (
+        lock_path.read_bytes()
+        != _bootstrap_git_bytes("show", f"{lock_commit}:{lock_relative}")
+        or not _bootstrap_ancestor(implementation, review_commit)
+        or not _bootstrap_ancestor(review_commit, release)
+        or not _bootstrap_ancestor(release, lock_commit)
+        or not _bootstrap_ancestor(lock_commit, head)
+    ):
+        raise RuntimeError("pre-import implementation ancestry changed")
+    for relative in _BOOTSTRAP_CRITICAL_FILES:
+        expected = critical.get(relative)
+        implementation_blob = _bootstrap_git_bytes(
+            "show", f"{implementation}:{relative}"
+        )
+        if (
+            not isinstance(expected, str)
+            or len(expected) != 64
+            or hashlib.sha256(implementation_blob).hexdigest() != expected
+        ):
+            raise RuntimeError(f"pre-import reviewed blob changed: {relative}")
+        if relative in _BOOTSTRAP_RUNTIME_FILES and _bootstrap_sha256(
+            ROOT / relative
+        ) != expected:
+            raise RuntimeError(f"pre-import runtime changed: {relative}")
+    for relative in _BOOTSTRAP_FROZEN_MECHANICS:
+        if _bootstrap_git("rev-parse", f"{head}:{relative}") != frozen[relative]:
+            raise RuntimeError(f"pre-import frozen mechanics changed: {relative}")
+    subprocess.run(["git", "fetch", "--quiet", "origin", "main"], cwd=ROOT, check=True)
+    origin = _bootstrap_commit(
+        _bootstrap_git("rev-parse", "origin/main"), label="origin/main"
+    )
+    if not _bootstrap_ancestor(head, origin):
+        raise RuntimeError("pre-import live HEAD is not published on main")
+    _bootstrap_validate_ci(implementation, lock.get("implementation_ci"))
+    _bootstrap_validate_ci(release, lock.get("release_ci"))
+    for published_commit in dict.fromkeys((review_commit, lock_commit, head)):
+        _bootstrap_validate_ci(published_commit)
+    _bootstrap_validate_environment()
+    _install_calibration_path_audit(list(_BOOTSTRAP_RUNTIME_FILES))
 
 
 _bootstrap_verify_before_local_imports()
@@ -210,19 +459,18 @@ RUNNER_PATH = SRC / "vllm_runner.py"
 def calibration_process_lock() -> Iterator[None]:
     RUN_LOCK.parent.mkdir(parents=True, exist_ok=True)
     descriptor = os.open(RUN_LOCK, os.O_CREAT | os.O_RDWR, 0o644)
+    acquired = False
     try:
         try:
             fcntl.flock(descriptor, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            acquired = True
         except BlockingIOError as error:
             raise RuntimeError("another calibration process holds the live lock") from error
         yield
     finally:
-        fcntl.flock(descriptor, fcntl.LOCK_UN)
+        if acquired:
+            fcntl.flock(descriptor, fcntl.LOCK_UN)
         os.close(descriptor)
-        try:
-            RUN_LOCK.unlink()
-        except FileNotFoundError:
-            pass
 
 
 def _write_or_verify_decision(value: dict[str, Any]) -> dict[str, Any]:

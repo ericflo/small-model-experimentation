@@ -34,6 +34,21 @@ class CalibrationLockTests(unittest.TestCase):
 
     def value(self) -> dict:
         commit = "a" * 40
+        review = {
+            "schema_version": 1,
+            "verdict": "PASS_IMPLEMENTATION",
+            "reviewed_commit": commit,
+            "reviewer": "adversarial-reviewer",
+            "review_report_sha256": "d" * 64,
+            "reviewed_ci": self.ci(commit),
+            "adversarial_review_rounds": 2,
+            "experimental_model_requests_reviewed": 0,
+            "sampled_model_outputs_reviewed": 0,
+            "hidden_files_read": [],
+            "qualification_files_read": [],
+            "confirmation_files_read": [],
+            "benchmark_files_read": [],
+        }
         return lock.build_lock_value(
             implementation_commit=commit,
             critical_files={name: "b" * 64 for name in lock.CRITICAL_FILES},
@@ -41,7 +56,11 @@ class CalibrationLockTests(unittest.TestCase):
                 name: "c" * 40 for name in lock.FROZEN_MECHANICS_FILES
             },
             inputs=self.inputs,
-            ci_evidence=self.ci(commit),
+            review_receipt=review,
+            review_receipt_sha256="e" * 64,
+            review_receipt_commit=commit,
+            release_commit=commit,
+            release_ci=self.ci(commit),
         )
 
     def test_lock_binds_pair_counts_runtime_and_mechanics_without_authorizing_them(self) -> None:
@@ -50,7 +69,9 @@ class CalibrationLockTests(unittest.TestCase):
         self.assertEqual(value["expected_source_rows"], 48)
         self.assertEqual(value["expected_answer_pairs"], 192)
         self.assertEqual(value["expected_answer_requests"], 384)
-        self.assertEqual(value["implementation_review_verdict"], "PASS_IMPLEMENTATION")
+        self.assertEqual(
+            value["implementation_review"]["verdict"], "PASS_IMPLEMENTATION"
+        )
         self.assertEqual(set(value["frozen_mechanics_blobs"]), set(lock.FROZEN_MECHANICS_FILES))
         self.assertFalse(
             any(
@@ -65,8 +86,8 @@ class CalibrationLockTests(unittest.TestCase):
         value["expected_answer_pairs"] = 191
         mutations.append((value, "boundary changed"))
         value = self.value()
-        value["implementation_review_verdict"] = "HOLD"
-        mutations.append((value, "boundary changed"))
+        value["implementation_review"]["verdict"] = "HOLD"
+        mutations.append((value, "review binding changed"))
         value = self.value()
         value["calibration_runtime_files"].append(lock.PREFIX + "data/procedural/mechanics_public.jsonl")
         mutations.append((value, "boundary changed"))
@@ -82,9 +103,32 @@ class CalibrationLockTests(unittest.TestCase):
             ):
                 lock.validate_lock_value(value, inputs=self.inputs)
 
-    def test_placeholder_review_cannot_mint_a_lock(self) -> None:
-        with self.assertRaisesRegex(RuntimeError, "has not passed"):
-            lock._review_passes()
+    def test_only_strict_machine_review_receipt_can_mint_a_lock(self) -> None:
+        receipt = {
+            "schema_version": 1,
+            "verdict": "HOLD_IMPLEMENTATION",
+            "reviewed_commit": "a" * 40,
+            "reviewer": "adversarial-reviewer",
+            "review_report_sha256": "d" * 64,
+            "reviewed_ci": self.ci("a" * 40),
+            "adversarial_review_rounds": 2,
+            "experimental_model_requests_reviewed": 0,
+            "sampled_model_outputs_reviewed": 0,
+            "hidden_files_read": [],
+            "qualification_files_read": [],
+            "confirmation_files_read": [],
+            "benchmark_files_read": [],
+        }
+        with self.assertRaisesRegex(RuntimeError, "receipt boundary changed"):
+            lock.validate_implementation_review(receipt)
+        receipt["verdict"] = "PASS_IMPLEMENTATION"
+        self.assertEqual(
+            lock.validate_implementation_review(receipt)["reviewed_commit"],
+            "a" * 40,
+        )
+        receipt["unexpected"] = True
+        with self.assertRaisesRegex(RuntimeError, "schema changed"):
+            lock.validate_implementation_review(receipt)
 
     def test_prompt_preflight_matches_every_registered_prompt_id(self) -> None:
         registry = self.inputs.tokenizer_receipt["calibration_prompt_token_ids"]
@@ -107,6 +151,58 @@ class CalibrationLockTests(unittest.TestCase):
         self.assertEqual(receipt["think512"]["rows"], 48)
         self.assertEqual(receipt["no_think"]["rows"], 48)
         self.assertEqual(receipt["think512"]["ids"], receipt["no_think"]["ids"])
+
+    def test_live_preflight_schema_and_runtime_are_exact(self) -> None:
+        commit = "a" * 40
+        runtime = {key: f"value-{key}" for key in lock.RUNTIME_METADATA_KEYS}
+        runtime["git_dirty"] = False
+        value = {
+            "schema_version": 1,
+            "decision": "CALIBRATION_LIVE_ENGINE_PREFLIGHT_PASS",
+            "model": "Qwen/Qwen3.5-4B",
+            "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+            "implementation_lock_sha256": "f" * 64,
+            "implementation_commit": commit,
+            "live_head": commit,
+            "live_head_ci": self.ci(commit),
+            "engine": lock._normalized(
+                lock.dataclasses.asdict(lock.engine_config(self.inputs))
+            ),
+            "engine_args_sha256": "b" * 64,
+            "resolved_cudagraph": {"has_full_cudagraphs": True},
+            "resolved_logprobs_mode": "raw_logprobs",
+            "prompt_receipt": {},
+            "runtime": runtime,
+            "invocation_order": list(lock.INVOCATION_ORDER),
+            "expected_source_rows": 48,
+            "expected_answer_pairs": 192,
+            "expected_answer_requests": 384,
+            "experimental_generation_requests_before_preflight": 0,
+            "sampled_model_outputs_before_preflight": 0,
+            "hidden_files_read": [],
+            "qualification_files_read": [],
+            "confirmation_files_read": [],
+            "benchmark_files_read": [],
+        }
+        validate = lambda candidate: lock.validate_live_preflight_value(
+            candidate,
+            inputs=self.inputs,
+            implementation_commit=commit,
+            implementation_lock_sha256="f" * 64,
+        )
+        self.assertEqual(validate(value)["live_head"], commit)
+        for mutation in ("extra_key", "runtime_key", "engine"):
+            bad = copy.deepcopy(value)
+            if mutation == "extra_key":
+                bad["unexpected"] = True
+            elif mutation == "runtime_key":
+                bad["runtime"].pop("gpu")
+            else:
+                bad["engine"]["max_model_len"] += 1
+            with self.subTest(mutation=mutation), self.assertRaisesRegex(
+                RuntimeError, "preflight boundary changed"
+            ):
+                validate(bad)
 
 
 if __name__ == "__main__":
