@@ -1,6 +1,6 @@
 # Qwen3.5-4B Counterfactual Plan Reflection Transfer
 
-**Status:** in-progress · since 2026-07-14 · Review 9 blockers are remediated model-free and await independent Review 10; model/GPU/training/evaluation remain unauthorized
+**Status:** in-progress · since 2026-07-14 · Review 10 HOLD: four runtime/import/re-exec/device-auth blockers are under model-free remediation; model/GPU/training/evaluation remain unauthorized
 
 This experiment tests the paper's most actionable claim without relying on its
 consciousness framing: can supervision on what the model would say on a later
@@ -264,8 +264,19 @@ GPU receipts now bind exactly one `CUDA_VISIBLE_DEVICES=GPU-...` selector to its
 physical UUID row. Receipt schemas were bumped so historical artifacts fail closed.
 The resulting 90-test suite and both real environment-authentication passes are green;
 no tokenizer, model, GPU, training, evaluation, Jacobian, or benchmark event occurred.
-These are implementation results only. Authorization stays unchanged until a fresh
-independent Review 10 audits the exact pushed revision.
+These were implementation results only. Authorization stayed unchanged while
+independent Review 10 audited the exact pushed revision.
+
+Independent Review 10 on exact pushed commit
+`e0f33860a26ee46d0b64061cf68d70ed7cba05dc` returned HOLD. It passed the
+guard-held tokenizer/model transactions, raw prompt and sealed training-token replay,
+stage-specific dependency closure, receipt schemas, and structured GPU-identity
+propagation. It then reproduced four residual false-acceptance/operational paths: a
+swap→import→restore window after environment authentication; an interpreter hash that
+is recorded rather than committed plus path-only stdlib/native closure; `-S` dropping
+required venv-bin/allowlisted path effects and Mamba re-exec dropping `-I -B -S`; and
+selected-device inventory accepted from a PATH-shadowed `nvidia-smi`. Authorization
+remains unchanged while those findings are remediated model-free.
 
 ## Interpretation
 

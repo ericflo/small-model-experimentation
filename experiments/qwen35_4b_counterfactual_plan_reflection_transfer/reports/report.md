@@ -5,9 +5,9 @@
 The experiment remains without model forward passes under a full-implementation
 adversarial HOLD. Full CPU construction succeeds and the historical tokenizer receipt
 is invalid as a training prerequisite. Review 9's five load, counter, runtime,
-environment, and selected-hardware gaps are now remediated model-free and await an
-independent Review 10 of the exact pushed revision. No Qwen generation, GPU, training,
-capability measurement, or Jacobian event exists.
+environment, and selected-hardware gaps were remediated model-free, but Review 10
+reproduced four narrower runtime/import/re-exec/device-auth blockers. No Qwen
+generation, GPU, training, capability measurement, or Jacobian event exists.
 
 ## Research Program Fit
 
@@ -49,7 +49,7 @@ and protected load windows; enforces a detached execution worktree with no ignor
 state; binds a hashed external isolated interpreter and exact GPU identity; reconstructs
 generation compute from raw token arrays; and makes checkpoint-aware end-to-end
 matched-compute sample-more a transitive final-stage gate. Model, GPU, training,
-evaluation, and J-space execution remain unauthorized pending Review 10.
+evaluation, and J-space execution remain unauthorized after Review 10 returned HOLD.
 
 ## Oracle Versus Deployable Evidence
 
@@ -64,13 +64,17 @@ pinned-environment model-free tests. It now authenticates content inside protect
 load windows, reconstructs prompt and training spend from raw/sealed token evidence,
 starts under `-I -B -S` with complete stage-specific environment-byte authentication,
 documents the distinct training and vLLM runtimes, and binds the selected physical GPU
-UUID. Those are implementation claims awaiting independent adversarial review.
+UUID. Those implementation claims were then subjected to independent adversarial
+review.
+Review 10 accepted those Review-9 closures but rejected the remaining auth→import
+window, unpinned interpreter/stdlib/native boundary, broken `-S` venv/re-exec semantics,
+and PATH-resolved selected-device query.
 
 ## Next Experiments
 
-Publish the exact remediated implementation and obtain a fresh independent Review 10
-verdict before changing authorization. Nothing beyond tokenizer-only work is
-authorized yet.
+Remediate the four Review-10 runtime counterexamples model-free, publish the exact
+implementation, and obtain a fresh independent Review 11 verdict before changing
+authorization. Nothing beyond tokenizer-only work is authorized yet.
 
 ## Artifact Manifest
 

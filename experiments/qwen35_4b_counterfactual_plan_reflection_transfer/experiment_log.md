@@ -1,5 +1,25 @@
 # Counterfactual Plan Reflection Transfer Experiment Log
 
+## 2026-07-14 — Review-10 HOLD
+
+- Independent Review 10 audited exact pushed commit
+  `e0f33860a26ee46d0b64061cf68d70ed7cba05dc`. The shared branch advanced by one
+  unrelated descendant during review, but the experiment and both runtime locks were
+  byte-identical; all conclusions remained pinned to the reviewed blobs.
+- The review passed guard-held tokenizer/base/merged-model transactions, raw prompt-ID
+  compute reconstruction, copied-tokenizer training-forward replay, distinct
+  training/vLLM dependencies, receipt-schema transitions, and exact structured
+  GPU-identity propagation through matched compute.
+- It returned HOLD on four reproduced paths: environment bytes can be swapped after
+  authentication, imported, and restored; interpreter/stdlib/native closure is
+  self-recorded or path-only rather than committed; `-S` loses venv-bin and allowlisted
+  `.pth` path effects while Mamba re-exec drops `-I -B -S`; and bare `nvidia-smi` can
+  be PATH-shadowed to forge the selected-device row.
+- All 90 model-free tests and exact-SHA Validate/Publish workflows passed. Review 10
+  made zero tokenizer/model/GPU/training/evaluation/Jacobian/benchmark calls and left
+  no repository residue. Authorization remains unchanged pending remediation and a
+  fresh exact-SHA Review 11.
+
 ## 2026-07-14 — Review-9 remediation, pending Review 10
 
 - Moved both pre-load and post-load content authentication inside every active

@@ -604,3 +604,44 @@ model-free suite passes 90/90, both live environment-authentication audits pass,
 no tokenizer, model, GPU, training, evaluation, Jacobian, benchmark, or protected-data
 event occurred. Authorization remains unchanged. Review 10 must audit the exact clean
 pushed SHA before any execution flag can change.
+
+## Review 10 — 2026-07-14
+
+**Reviewed commit:** `e0f33860a26ee46d0b64061cf68d70ed7cba05dc`
+
+**Verdict:** **HOLD full implementation.**
+
+The shared branch advanced to one unrelated descendant during the audit, but the
+experiment and both runtime locks were byte-identical; all conclusions used the exact
+review target. Exact-SHA Validate Repository run `29372243317`, Publish Research Site
+run `29372243306`, and all 90 model-free tests passed.
+
+Four blockers remain:
+
+1. **High:** environment authentication ends before stage scripts import third-party
+   modules. A synthetic valid distribution authenticated, was replaced with alternate
+   executable content, imported, restored, and authenticated again under the original
+   pins. The alternate code executed. An enforceable immutable window must span
+   authentication through third-party/native-extension import, or the runtime must be
+   genuinely immutable/content-addressed.
+2. **High:** the resolved interpreter path/hash is self-recorded rather than pinned in
+   committed config; stdlib roots, `lib-dynload`, and native/shared-library bytes are
+   only path-allowed or omitted. A synthetic `LD_PRELOAD` constructor executed before
+   Python despite `-I -B -S`. The interpreter, stdlib/native dependency closure, and
+   sanitized pre-Python environment need a trusted committed boundary.
+3. **High operational:** under `-S`, both venv interpreters report `sys.prefix=/usr`,
+   so the runner prepends `/usr/bin` rather than `.venv-vllm/bin`; authenticated
+   `nvidia_cutlass_dsl.pth` path effects are not applied, leaving `cutlass` absent.
+   Mamba fallback re-execs without `-I -B -S` and deterministically trips the startup
+   contract. Allowed path effects must be reproduced explicitly, the venv bin must
+   derive from `sys.executable`, and fallback must preserve flags or be prohibited.
+4. **Medium:** selected-device identity invokes bare, PATH-resolved `nvidia-smi`. A
+   synthetic shadow executable produced a fully accepted fake UUID/driver/device row.
+   Use an absolute pinned executable or native API and bind the reported UUID to the
+   active CUDA device after initialization.
+
+Review 10 passed the five intended Review-9 closures apart from these narrower runtime
+residuals. It made zero tokenizer/model/GPU/training/evaluation/Jacobian calls; read no
+benchmark, protected, hidden, qualification, confirmation, cache, large-artifact, or
+weight payload; and left the tree clean. Authorization remains unchanged. A fresh
+Review 11 is required after model-free remediation.
