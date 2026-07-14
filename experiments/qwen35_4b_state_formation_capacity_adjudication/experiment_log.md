@@ -840,6 +840,33 @@ Only final Stage-A training validation, commit, push, and workflow verification 
 After both workflows pass, evaluate the three LoRA joint checkpoints on the trigger set in frozen
 seed order, then analyze `lora_joint`. Conditional branches remain blocked on that analysis receipt.
 
+## 2026-07-14 — seed-7411 trigger evaluation completes; analyzer path defect found pre-result
+
+- Complete Stage-A commit `664d6574` passed both required workflows before evaluation began. The
+  reached-training barrier authorized the exact seed-7411 trigger invocation on source v11.
+- Evaluation completed in 978.507162809372 seconds with exactly 3,072 intact and 3,072
+  adaptation-disabled rows. Summary identity is `fd7a516e…9264`; intact rows SHA-256 is
+  `59e55adc…f6c`; disabled rows SHA-256 is `65323163…745`. The receipt binds checkpoint
+  `174f3c69…cf9e`, reached-training barrier `6d506285…589e`, and source `5a8ed26d…6666`.
+- The evaluator opened only `validation`, `depth_extrapolation`, and `joint_holdout`; it records zero
+  benchmark reads, no sealed-contrast payload, and no contrast-ledger event. Scientific values were
+  not inspected.
+- The independent production `_load_evaluation` reopen stopped before consuming result rows because
+  `_canonical_expected_path(ROOT / config["paths"]["large_artifacts_dir"])` rejects the registered
+  `../../large_artifacts/...` value as non-lexical-canonical. The CLI analyzer necessarily reaches
+  the same path. This is a deterministic mechanics defect, not a LoRA result.
+- Changing source v11 would invalidate the source-bound setup/training/evaluation graph. Preserve it
+  unchanged. Freeze a separate, self-contained analysis-recovery experiment that consumes the exact
+  v11 receipts and changes only the internal registered-path resolution boundary before opening any
+  scientific values.
+
+## Current authorization
+
+Only seed-7411 evaluation validation, documentation, commit, push, and workflow verification are
+authorized. After both workflows pass, freeze and adversarially review the separate analysis-recovery
+consumer. Remaining trigger evaluations may resume only after that consumer is mechanically ready;
+no result value, LoRA verdict, sealed contrast, or conditional training arm is yet authorized.
+
 ## 2026-07-13 — source-v9 seed-7411 G0 stops before model load; cache proof repaired
 
 - Non-model setup commit `ff4a8b9b` passed both repository workflows before the exact seed-7411 LoRA

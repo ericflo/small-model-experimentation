@@ -1,6 +1,6 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · frozen design unchanged; source-v11 PREPARED-output repair reviewed at 363/363; source-v10 setup invalidated before any result training; all three Stage-A LoRA joint training cells complete, with the training barrier awaiting publication before trigger evaluation
+**Status:** in-progress · since 2026-07-13 · frozen design unchanged; all three Stage-A LoRA joint training cells complete and published; seed-7411 trigger evaluation complete; source-v11 analysis loader has a pre-result canonical-path defect, so a separate frozen recovery consumer is required before remaining evaluations
 
 ## Current status
 
@@ -74,7 +74,16 @@ mirrors are byte-identical and inode-distinct from their external artifacts; the
 terminal `COMPLETE`; all 1,500 optimizer rows are finite. The cell opened only train, no benchmark
 or sealed contrast. All three cells reopen `COMPLETE`, producing the exact Stage-A training barrier
 identity `31d7f6f3…6451`. Publish this checkpoint and require both workflows green before the three
-preregistered trigger evaluations.
+preregistered trigger evaluations. That checkpoint is green at `664d6574`. Seed-7411 trigger
+evaluation then completed in 978.507 seconds with exactly 3,072 intact and 3,072
+adaptation-disabled rows. Its summary identity is `fd7a516e…9264`; it binds checkpoint
+`174f3c69…cf9e`, source v11, and reached-training barrier `6d506285…589e`, and records zero benchmark
+or sealed-contrast access. No result values were inspected. An independent production-loader reopen
+then stopped before result consumption: `analysis._canonical_expected_path` rejects the experiment's
+own registered `../../large_artifacts/...` path after `ROOT / value` preserves `..` lexically. The
+same deterministic defect would block `run.py --stage analyze`. It does not invalidate training or
+evaluation production, but source v11 cannot emit a terminal analysis receipt. Preserve the v11
+artifacts unchanged and freeze a separate analysis-recovery consumer before further evaluation.
 
 Historically, the integrated source-v10 review was `GO` for reviewed implementation
 `a5a494b7…6f1c4a` and full source contract `979a9012…f394b7`; the 360/360 suite and exact machine gate
