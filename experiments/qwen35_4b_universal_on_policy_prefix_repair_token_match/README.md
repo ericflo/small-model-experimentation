@@ -1,6 +1,6 @@
 # On-Policy Failure-Prefix Universal Curriculum
 
-**Status:** in-progress · since 2026-07-14 · fresh local gate frozen; replay-control merge is next
+**Status:** in-progress · since 2026-07-14 · replay-control composite ready; candidate merge is next
 
 This result-separated successor tests whether training corrective continuations from
 the model's own fresh procedural failure prefixes installs a reusable reasoning and
@@ -70,15 +70,16 @@ separate published checkpoints. Verify every model-free derived artifact with:
 PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --smoke
 ```
 
-After this local-design checkpoint is committed, rebased, pushed to `main`, and green
-in both required workflows, run only the replay-control merge from a clean worktree:
+After this control-merge checkpoint is committed, rebased, pushed to `main`, and
+green in both required workflows, run only the candidate merge from a clean worktree:
 
 ```bash
-PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --stage merge-control
+PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --stage merge-candidate
 ```
 
-Candidate merge requires the separately published control-merge receipt; the local
-event requires both. Capability and benchmark stages remain sealed.
+The wrapper requires the committed control-merge receipt before candidate deployment;
+the local event requires both merges committed. Capability and benchmark stages
+remain sealed.
 
 ## Results
 
@@ -142,9 +143,18 @@ seeds. A pre-outcome protocol amendment moves all three arms from the prospectiv
 Transformers path to the now-mandatory pinned vLLM runner. Each arm will use an
 explicit merged composite and identical greedy natural-thinking geometry. The
 absolute 24-parse/17-correct gate and strict total plus execute/induct/probe wins over
-both controls remain frozen. Review verdict `PASS_CONTROL_MERGE` authorizes only the
-replay-control merge. No trained-arm merge, local model call, capability score, or
-benchmark event exists.
+both controls remain frozen. At that design checkpoint, review verdict
+`PASS_CONTROL_MERGE` authorized only the replay-control merge; no trained-arm merge,
+local model call, capability score, or benchmark event yet existed.
+
+From pushed-green local-design commit `6dc0e677`, the replay-control adapter was then
+explicitly merged into the Qwen3.5 composite. All 128 applied LoRA modules were
+nonzero. Tracked run-receipt/log hashes are `bc78f332...d550` /
+`7ab404b8...8995`; external merge-receipt/full-weight hashes are
+`aa763255...45a3` / `7ab4c419...6e2e`. The 9,078,620,536-byte shard passed the exact
+merged-Qwen architecture and frozen local engine-request gate. This is deployment
+lineage only. No candidate merge, local model call, capability score, or benchmark
+event exists.
 
 ## Interpretation
 
@@ -195,6 +205,8 @@ differences.
 - `runs/training/replay_after_close.json`
 - `runs/training/prefix_repair_after_close.log`
 - `runs/training/prefix_repair_after_close.json`
+- `runs/merges/replay_after_close.log`
+- `runs/merges/replay_after_close.json`
 - `analysis/prefix_failure_inventory.md`
 - `reports/design_review.md`
 - `reports/compute_review.md`

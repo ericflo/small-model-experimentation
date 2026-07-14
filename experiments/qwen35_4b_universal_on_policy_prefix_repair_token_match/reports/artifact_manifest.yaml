@@ -22,17 +22,23 @@ external_artifacts:
     required_for: "fresh paired local capability evaluation"
     checksum: "weights 858111918bd8a0a5bb379d6b9b1b2b600f013bd1da516d2b4e7cdf8ebd510f14; config 91b7db5775a7ffac0e634257d7d1bb32a412bac17a51a239d64e68352f6037de"
     regenerate: "from pushed-green control checkpoint b690a4b3 only: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --stage train-candidate"
+  - name: "explicit merged replay-control composite"
+    storage: "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/merged/replay_after_close"
+    required_for: "same-backend three-arm fresh local gate"
+    checksum: "model.safetensors 7ab4c419f70135d3fe058dba6e79e3a9a61c6661d43e6acb9662f331efe36e2e; merge_receipt.json aa763255cb3b05599e765948d3a3db1787d5813b1cfafbdc7e1c21653ae745a3"
+    regenerate: "from pushed-green local-design commit 6dc0e677 only: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --stage merge-control"
 omitted_artifacts:
   - path: "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/"
-    reason: "registered merged parent and both trained adapters are external above; the separately gated control/candidate composites will also remain large and gitignored"
+    reason: "registered merged parent, trained adapters, and replay composite are external above; the separately gated candidate composite will also remain large and gitignored"
 reproducibility:
   smoke_command: "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --smoke"
-  full_command: "after this local-design checkpoint is pushed and both workflows pass: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --stage merge-control"
+  full_command: "after this control-merge checkpoint is pushed and both workflows pass: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --stage merge-candidate"
   required_external_artifacts:
     - "large_artifacts/qwen35_4b_universal_close_weight_token_match/adapters/close_xi"
     - "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/merged/close_xi_parent"
     - "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/adapters/replay_after_close"
     - "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/adapters/prefix_repair_after_close"
+    - "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/merged/replay_after_close"
 notes: >-
   Model-free mining design. Model Qwen/Qwen3.5-4B revision 851bf6e8...d0a; parent
   weights/config 16e9dc75...c179 / de953bd5...7ff. Construction, parent-rollout,
@@ -58,5 +64,7 @@ notes: >-
   are 9682744e...acdee / ff407551...ce988 / 3982d5b8...6e85a. Message overlap is
   zero against 658 training/collection messages and 234 prior reserved-local messages.
   All arms now freeze one merged-composite vLLM protocol; verdict PASS_CONTROL_MERGE
-  authorizes only the replay-control merge. No trained-arm merge, capability, local
-  result, or benchmark receipt exists.
+  authorized only replay-control merge. That merge applied 128/128 nonzero modules;
+  tracked receipt/log hashes are bc78f332...d550 / 7ab404b8...8995 and external
+  receipt/weight hashes are aa763255...45a3 / 7ab4c419...6e2e. No candidate merge,
+  capability, local result, or benchmark receipt exists.

@@ -48375,7 +48375,7 @@
      "x_label": "preregistered experiment stage",
      "y_label": "completion indicator",
      "y_format": "integer",
-     "note": "Both 320-row streams are frozen at exactly 304,313 forward tokens, zero skips, 40 updates, and 200 aligned replay rows. Both arms completed 40/40 updates, and a disjoint 26-item merged-composite vLLM local design is frozen. The local capability and benchmark result stages have not begun.",
+     "note": "Both 320-row streams are frozen at exactly 304,313 forward tokens, zero skips, 40 updates, and 200 aligned replay rows. Both arms completed 40/40 updates, and a disjoint 26-item merged-composite vLLM local design is frozen. The replay-control composite is the first of two deployment merges; candidate merge is next, and the local capability and benchmark result stages have not begun.",
      "source": "experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/data/stream_token_receipt.json"
     },
     {

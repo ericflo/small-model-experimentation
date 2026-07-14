@@ -36,6 +36,11 @@ LOCAL_DESIGN_RECEIPT = EXP / "data" / "local_design_receipt.json"
 LOCAL_DESIGN_RECEIPT_SHA256 = "3982d5b80e17a39c23b2e93d1d57ffd9895067ba08c7b74b39e7b50b04f6e85a"
 LOCAL_DESIGN_REVIEW = EXP / "reports" / "local_design_review.md"
 CONTROL_MERGE_RECEIPT = EXP / "runs" / "merges" / "replay_after_close.json"
+CONTROL_MERGE_RECEIPT_SHA256 = "bc78f33218afb99b4ebd5b173f1f24aa628b20fad82d627b00529cabf911d550"
+CONTROL_MERGED_WEIGHTS_SHA256 = "7ab4c419f70135d3fe058dba6e79e3a9a61c6661d43e6acb9662f331efe36e2e"
+CONTROL_EXTERNAL_MERGE_RECEIPT_SHA256 = (
+    "aa763255cb3b05599e765948d3a3db1787d5813b1cfafbdc7e1c21653ae745a3"
+)
 CANDIDATE_MERGE_RECEIPT = (
     EXP / "runs" / "merges" / "prefix_repair_after_close.json"
 )
@@ -101,13 +106,16 @@ def smoke() -> None:
         f"model_revision: {MODEL_REVISION}",
         f"parent_weights_sha256: {PARENT_WEIGHTS_SHA256}",
         f"parent_config_sha256: {PARENT_CONFIG_SHA256}",
-        "status: local_design_frozen_control_merge_next",
+        "status: control_merge_complete_candidate_merge_next",
         "rows_per_training_arm: 320",
         "forward_tokens_per_training_arm: 304313",
         "optimizer_steps_per_training_arm: 40",
         "control_receipt_sha256: f78f2069fd1c7b37bbd0b13b581df0ce7360de92256323fcf5f3c7b0936ed6de",
         "candidate_receipt_sha256: 846d8107ecadad458c18cd985d54feb42748e87677dd708c14a99e84cf4e7098",
         f"local_design_receipt_sha256: {LOCAL_DESIGN_RECEIPT_SHA256}",
+        f"control_merge_receipt_sha256: {CONTROL_MERGE_RECEIPT_SHA256}",
+        f"control_external_merge_receipt_sha256: {CONTROL_EXTERNAL_MERGE_RECEIPT_SHA256}",
+        f"control_merged_weights_sha256: {CONTROL_MERGED_WEIGHTS_SHA256}",
     )
     missing = [entry for entry in required if entry not in config]
     if missing:
@@ -198,6 +206,8 @@ def smoke() -> None:
         from merge_trained_arm import validate_published_merge
 
         if CONTROL_MERGE_RECEIPT.is_file():
+            if sha256_file(CONTROL_MERGE_RECEIPT) != CONTROL_MERGE_RECEIPT_SHA256:
+                raise SystemExit("published replay-control merge receipt bytes changed")
             merge_receipts.append(
                 validate_published_merge(
                     "replay_after_close", require_committed=False

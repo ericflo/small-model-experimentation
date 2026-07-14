@@ -232,3 +232,29 @@ the parent, replay control, or prefix-repair candidate.
 Next: publish and CI-verify this local-design checkpoint. Then run only
 `merge-control`, preserve its full composite receipt, and repeat the publish gate
 before candidate merge.
+
+## 2026-07-14 — Replay-control composite merged
+
+- Published rebased local-design checkpoint `6dc0e677` directly to `main`; Validate
+  Repository run `29354204797` and Publish Research Site run `29354205108` both
+  passed.
+- From that clean aligned checkpoint, ran only `--stage merge-control`. The harness
+  reauthenticated both training checkpoints, fresh local receipt, review verdict,
+  replay adapter bytes, and external merger before opening output.
+- The explicit merger loaded the pinned Qwen3.5-4B composite, applied 128/128 LoRA
+  modules, and found every applied delta nonzero. It used CUDA FP32 LoRA products and
+  saved one 9,078,620,536-byte full composite shard.
+- Preserved tracked run-receipt/log hashes `bc78f332...d550` /
+  `7ab404b8...8995`. External merge-receipt/full-weight hashes are
+  `aa763255...45a3` / `7ab4c419...6e2e`; the merger hash remained
+  `cb9af8b4...96672`.
+- Independently reran the trained-arm receipt authenticator and the experiment-local
+  merged-Qwen architecture plus frozen engine-request gate against the saved
+  composite. Both passed.
+- Preflight Git status was empty at commit `6dc0e677`; only the tracked control merge
+  log/receipt and external gitignored composite were created. No candidate merge,
+  local model call, capability score, benchmark access, or aggregate event ran.
+
+Next: publish and CI-verify this replay-control merge. Then run only
+`merge-candidate`; it must require the committed control-merge receipt before opening
+output.

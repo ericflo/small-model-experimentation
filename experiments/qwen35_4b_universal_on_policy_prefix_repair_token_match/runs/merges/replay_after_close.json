@@ -1,0 +1,37 @@
+{
+  "adapter": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/adapters/replay_after_close",
+  "adapter_config_sha256": "0dfd9bda8a835926a87337782cc09b1e11e841a36f46b99c83fbae9bc89e120f",
+  "adapter_weights_sha256": "bb59d3bd9273ae3bb3dffe54e983590dada69e6e1bdba571009ffedbba05154d",
+  "applied_lora_modules": 128,
+  "command": [
+    "/home/ericflo/Development/small-model-experimentation/.venv/bin/python",
+    "-B",
+    "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_same_prefix_advantage_routing/scripts/merge_adapter.py",
+    "--adapter",
+    "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/adapters/replay_after_close",
+    "--out",
+    "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/merged/replay_after_close"
+  ],
+  "experiment_id": "qwen35_4b_universal_on_policy_prefix_repair_token_match",
+  "log": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/runs/merges/replay_after_close.log",
+  "log_sha256": "7ab404b8ba71b40a0274e55a0c46357bf3a308f1922ad2ecfb10ccb0dc258995",
+  "merge_receipt_sha256": "aa763255cb3b05599e765948d3a3db1787d5813b1cfafbdc7e1c21653ae745a3",
+  "merged": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/merged/replay_after_close",
+  "merger": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_same_prefix_advantage_routing/scripts/merge_adapter.py",
+  "merger_sha256": "cb9af8b45ca1e5754cb36f2213b7e25290f6eb16427d1a8b41f0b12b10396672",
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "name": "replay_after_close",
+  "nonzero_lora_modules": 128,
+  "preflight_git_head": "6dc0e6779c7e2ad442106cc9b1584c797a7ba1f0",
+  "preflight_git_status": "",
+  "schema_version": 1,
+  "training_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/runs/training/replay_after_close.json",
+  "training_receipt_sha256": "f78f2069fd1c7b37bbd0b13b581df0ce7360de92256323fcf5f3c7b0936ed6de",
+  "weight_files": [
+    {
+      "name": "model.safetensors",
+      "sha256": "7ab4c419f70135d3fe058dba6e79e3a9a61c6661d43e6acb9662f331efe36e2e"
+    }
+  ]
+}

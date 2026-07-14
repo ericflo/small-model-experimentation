@@ -205,7 +205,11 @@
   `9682744e...acdee` / `ff407551...ce988` / `3982d5b8...6e85a`, zero overlap against
   training and prior reserved local messages, and an identical merged-composite vLLM
   protocol for all arms. Verdict `PASS_CONTROL_MERGE` authorizes control merge only;
-  local outcome and aggregate remain sealed.
+  from pushed-green commit `6dc0e677`, that merge applied 128/128 nonzero modules.
+  Its tracked receipt, external receipt, and full-weight hashes are
+  `bc78f332...d550` / `aa763255...45a3` / `7ab4c419...6e2e`. One of two deployment
+  merges is now ready; candidate merge is next, while local outcome and aggregate
+  remain sealed.
 
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.
