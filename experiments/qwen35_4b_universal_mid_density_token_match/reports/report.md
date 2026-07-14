@@ -21,11 +21,11 @@ and B, and `designed240` replaces A, B, and C. Every arm contains 1,520 rows,
 
 ## Results
 
-Training checkpoint only. The exact-token `replay_repeat` and `designed160` arms each
-completed 190/190 updates over 1,520 rows with zero skips. Final training losses were
-0.4199 and 0.6606; wall times were 1,396.686 and 1,390.190 seconds. The 240-row arm,
-local screen, and paired benchmark remain pending, so no generalized-transfer
-comparison is available yet.
+Training checkpoint only. All three exact-token arms completed 190/190 updates over
+1,520 rows with zero skips. Final training losses were 0.4199, 0.6606, and 0.7284;
+wall times were 1,396.686, 1,390.190, and 1,373.185 seconds for replay, 160-row, and
+240-row arms respectively. The local screen and paired benchmark remain pending, so
+no generalized-transfer comparison is available yet.
 
 ## Controls
 

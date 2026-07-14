@@ -52,3 +52,22 @@
   Normalized full log: `runs/training/designed160.log`, SHA-256
   `34ce943073908585c933991161f84a076a734b98cc8a23c0fc953dde1db995f3`.
 - No local or benchmark evaluation was performed at this checkpoint.
+
+## 2026-07-13 — 240-row exact-token arm training
+
+- Ran `scripts/run.py --stage train-d240` from published 160-row checkpoint
+  `71d6e641`.
+- The wrapper reauthenticated the replay-refresh parent, checked-in `designed240`
+  bytes, and zero-skip token receipt before launching training.
+- Completed 190/190 optimizer steps over 1,520 rows with zero skips in 1,373.185
+  wall seconds. Final training loss was 0.7284.
+- Adapter weights: 169,903,320 bytes,
+  SHA-256 `9b159156a7fd59f259454427371e7eb6f72dc2bb1f4e51d6cb6c9dc169af0116`.
+  Adapter config SHA-256:
+  `66fb435d789ce43a741a04cdbceca1f3c133f157310e2751cbead79d7e51531c`.
+- Durable receipt: `runs/training/designed240.json`, SHA-256
+  `8bc2f0528f75766c0954ec55455cf9873e4396324c55707f8b1a617af707d82d`.
+  Normalized full log: `runs/training/designed240.log`, SHA-256
+  `3c2e0692742ac13f3712a0825d86fb728ef561eca22c3a551b1d8923aca77838`.
+- All three exact-token arms are now trained. No local or benchmark evaluation was
+  performed at this checkpoint.

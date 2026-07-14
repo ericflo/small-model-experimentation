@@ -17,10 +17,10 @@ external_artifacts:
     required_for: "160-row candidate evaluation"
     checksum: "weights f05c13ae66e19bbd29abbd2b62ae3c1a577642efefbdba435879012bf4494654; config 0cd3ca7c710e48c264fd1d4c019c304ec0b9e5b13098b89a5b4aa0b171191e58"
     regenerate: ".venv/bin/python experiments/qwen35_4b_universal_mid_density_token_match/scripts/run.py --stage train-d160"
-  - name: "designed240 adapter (planned)"
+  - name: "designed240 adapter"
     storage: "large_artifacts/qwen35_4b_universal_mid_density_token_match/adapters/designed240"
     required_for: "240-row candidate evaluation"
-    checksum: "pending training"
+    checksum: "weights 9b159156a7fd59f259454427371e7eb6f72dc2bb1f4e51d6cb6c9dc169af0116; config 66fb435d789ce43a741a04cdbceca1f3c133f157310e2751cbead79d7e51531c"
     regenerate: ".venv/bin/python experiments/qwen35_4b_universal_mid_density_token_match/scripts/run.py --stage train-d240"
   - name: "eligible merged checkpoints (planned)"
     storage: "large_artifacts/qwen35_4b_universal_mid_density_token_match/merged/"
@@ -50,4 +50,8 @@ notes: >-
   485e3a76a8ef45d92df0a60dbcc338d5c1d4ddfc53fbb4e83acb10af7e75d258) and its
   normalized log is runs/training/designed160.log (SHA-256
   34ce943073908585c933991161f84a076a734b98cc8a23c0fc953dde1db995f3).
-  Update the remaining planned checksums after each successful stage.
+  The designed240 receipt is runs/training/designed240.json (SHA-256
+  8bc2f0528f75766c0954ec55455cf9873e4396324c55707f8b1a617af707d82d) and its
+  normalized log is runs/training/designed240.log (SHA-256
+  3c2e0692742ac13f3712a0825d86fb728ef561eca22c3a551b1d8923aca77838).
+  Update the remaining planned merge checksums after each successful stage.

@@ -1,6 +1,6 @@
 # Mid-Density Token-Matched Universal Curriculum
 
-**Status:** in-progress · since 2026-07-13 · replay control and 160-row arm trained; 240-row arm, fresh local gates, and conditional paired pilot remain
+**Status:** in-progress · since 2026-07-13 · all three exact-token arms trained; fresh local gates and conditional paired pilot remain
 
 ## Research program
 
@@ -67,12 +67,11 @@ Smoke and staged run:
 
 ## Results
 
-Training checkpoint only. `replay_repeat` and `designed160` each completed all 190
-updates over their authenticated 1,520-row, 1,405,510-forward-token streams with
-zero skips. Final training losses were 0.4199 and 0.6606; the 160-row adapter weights
-hash is `f05c13ae66e19bbd29abbd2b62ae3c1a577642efefbdba435879012bf4494654`.
-The 240-row arm, local screen, and new benchmark event have not run, so there is no
-transfer result yet.
+Training checkpoint only. All three arms completed all 190 updates over their
+authenticated 1,520-row, 1,405,510-forward-token streams with zero skips. Final
+training losses were 0.4199 (`replay_repeat`), 0.6606 (`designed160`), and 0.7284
+(`designed240`). The local screen and new benchmark event have not run, so there is
+no transfer result yet.
 
 ## Interpretation
 
