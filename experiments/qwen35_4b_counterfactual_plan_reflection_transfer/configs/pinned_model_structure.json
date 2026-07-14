@@ -1,0 +1,29 @@
+{
+  "architecture": "Qwen3_5ForConditionalGeneration",
+  "base_config_sha256": "ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670",
+  "base_index_sha256": "cf3f798ee02ba45f9622aa8892a47369ab667d0afbf154ee7c2212de42e6302d",
+  "config_structure_sha256": "3ae1c4e747738b21b6cf0f9458274e8878f498fa429f65473742ff47820de138",
+  "dtype_counts": {
+    "BF16": 690,
+    "F32": 48
+  },
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "model_type": "qwen3_5",
+  "schema_version": 1,
+  "source_shard_header_sha256": {
+    "model.safetensors-00001-of-00002.safetensors": "fc8cd0862b9e575bfbaa97b5959126776c8faab316adf46ecfb0f3120237fe60",
+    "model.safetensors-00002-of-00002.safetensors": "118708adf773eb1ffff51165ad1a703058280b08167f4587ebbd735bb315309d"
+  },
+  "source_shard_sha256": {
+    "model.safetensors-00001-of-00002.safetensors": "26a93f066e1916adb13453dae5a0c707c0fbc71299ed98779571a907b8e74c61",
+    "model.safetensors-00002-of-00002.safetensors": "cb544bd9bfae93dc59b0f22b292f5933573854a7f9b97835c67060d7d910e188"
+  },
+  "source_shard_size": {
+    "model.safetensors-00001-of-00002.safetensors": 5329398688,
+    "model.safetensors-00002-of-00002.safetensors": 3990429408
+  },
+  "tensor_bytes": 9319737856,
+  "tensor_count": 738,
+  "tensor_inventory_sha256": "be593cb6d0cc276d368669cd02f0b335a6f0033ec150ffd7860b164e39b384e4"
+}

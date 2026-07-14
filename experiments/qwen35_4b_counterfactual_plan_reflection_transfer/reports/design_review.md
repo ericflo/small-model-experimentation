@@ -262,3 +262,33 @@ Authorization remains tokenizer-only. Required remediation is exact base-structu
 binding, tensor-derived byte accounting, and deterministic replay of every retained
 LoRA delta against pinned base tensors with comparison to the corresponding merged
 tensor or an independently verifiable tensor commitment.
+
+### Review 5b remediation implemented, pending Review 6
+
+- `configs/pinned_model_structure.json` freezes public structural metadata for exact
+  revision `851bf6e...`: config and weight-index hashes, both official LFS shard hashes
+  and sizes, shard-header hashes, exact Qwen model type/architecture, 738-tensor
+  name/shape/dtype inventory hash, BF16/F32 counts, and 9,319,737,856 derived bytes.
+  Only `config.json`, the index, and HTTP range bytes covering safetensors headers were
+  fetched while constructing this contract; no weight payload, tokenizer, model load,
+  model request, or GPU event occurred.
+- The checkpoint validator parses safetensors headers directly. It recomputes each
+  tensor's bytes from shape and dtype, requires contiguous exact offsets and exact file
+  length, compares the complete canonical inventory to the pinned commitment, and
+  checks allocated filesystem blocks against logical length. Index size metadata is no
+  longer trusted, and sparse shards fail closed.
+- `src/merge_replay.py` authenticates the locally cached base shards against the exact
+  official LFS SHA-256 commitments. It then compares every merged tensor: 610
+  unmodified tensors must equal base bit-for-bit, and all 128 frozen target modules
+  must exactly equal the BF16 result of `base.float() + (B.float() @ A.float()) *
+  alpha/rank`. It records per-adapted-tensor commitments and an aggregate commitment
+  for unchanged tensors.
+- Merge runs the replay after saving and retaining the source adapter. The vLLM runner
+  independently repeats it before accepting the override and requires byte-identical
+  replay evidence in the merge receipt. An unrelated same-shape composite or relabeled
+  arm therefore cannot reach model initialization.
+- Regression fixtures cover sparse logical allocation, non-Qwen structure, derived
+  metadata/index mismatch, altered adapted tensors, and altered unmodified tensors.
+
+The model-free suite passes 63 tests. Full execution remains unauthorized pending a
+fresh exact-commit Review 6 and green CI.

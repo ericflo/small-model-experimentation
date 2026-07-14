@@ -158,7 +158,7 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
         "source_adapter_sha256", "source_adapter_config_sha256", "source_arm", "source_seed",
         "source_adapter_inventory", "applied_lora_modules",
         "merge_script_sha256", "merge_git_commit", "merged_checkpoint_inventory",
-        "merged_tree_sha256",
+        "merge_replay", "merged_tree_sha256",
     }
     config_path = Path(__file__).resolve().parents[1] / "configs" / "default.yaml"
     lineage = path / "source_lineage"
@@ -202,7 +202,7 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
     }
     if (
         set(receipt) != required
-        or receipt.get("schema_version") != 3
+        or receipt.get("schema_version") != 4
         or receipt.get("experiment_id")
         != "qwen35_4b_counterfactual_plan_reflection_transfer"
         or receipt.get("config_sha256") != _sha256_file(config_path)
@@ -319,6 +319,17 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
         config_path=config_path,
         expected_stage=("screen_training" if receipt["source_seed"] == 47 else "replication_training"),
     )
+    from merge_replay import verify_merge_equation
+
+    observed_replay = verify_merge_equation(
+        merged_path=path,
+        adapter_tree=adapter_tree,
+        recipe=recipe,
+    )
+    if observed_replay != receipt.get("merge_replay"):
+        raise ValueError("merged tensors differ from exact pinned-base plus LoRA replay")
+    if observed_replay["adapted_module_count"] != source_inventory["module_count"]:
+        raise ValueError("merge replay module count differs from retained source adapter")
     observed = _sha256_tree(path, excluded={"merge_receipt.json"})
     if receipt.get("merged_tree_sha256") != observed:
         raise ValueError("merged model override tree hash differs from its receipt")
@@ -336,6 +347,9 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
         "source_adapter_config_sha256": receipt.get("source_adapter_config_sha256"),
         "source_adapter_inventory": source_inventory,
         "merged_checkpoint_inventory": checkpoint_inventory,
+        "merge_replay_sha256": _sha256_bytes(
+            json.dumps(observed_replay, sort_keys=True, separators=(",", ":")).encode()
+        ),
         "source_arm": receipt.get("source_arm"),
         "source_seed": receipt.get("source_seed"),
     }

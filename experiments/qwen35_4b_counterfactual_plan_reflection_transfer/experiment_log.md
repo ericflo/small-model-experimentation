@@ -115,3 +115,11 @@
   also confirmed that retained LoRA and merged trees are not yet linked by replaying
   `base + LoRA delta`. No execution authorization changes occur until exact pinned-base
   structure, tensor-derived bytes, and deterministic merge equality are enforced.
+- Replaced size-threshold checkpoint validation with a pinned structural contract for
+  the exact Qwen3.5-4B revision and a full deterministic merge replay. The validator
+  derives bytes from all 738 tensor headers and rejects sparse allocation; merge and
+  runner authenticate both official base shards by LFS SHA-256, compare 610 unchanged
+  tensors exactly, and replay all 128 LoRA equations. Public config/index/header
+  metadata only was fetched; no model weight payload, tokenizer, model call, GPU, or
+  benchmark event occurred. Sixty-three model-free tests pass; authorization remains
+  tokenizer-only pending Review 6.

@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import gc
 import hashlib
 import json
 import subprocess
@@ -25,6 +26,7 @@ from checkpoint_lineage import (  # noqa: E402
     adapter_tensor_inventory,
     merged_checkpoint_inventory,
 )
+from merge_replay import verify_merge_equation  # noqa: E402
 from stages import read_and_validate_stage_receipt  # noqa: E402
 
 install_benchmark_firewall(EXP.parents[1])
@@ -253,6 +255,8 @@ def main() -> int:
 
     args.output.mkdir(parents=True, exist_ok=False)
     model.save_pretrained(str(args.output), safe_serialization=True)
+    del model
+    gc.collect()
     tokenizer = AutoTokenizer.from_pretrained(
         model_id, revision=revision, trust_remote_code=True, use_fast=True
     )
@@ -278,8 +282,13 @@ def main() -> int:
     if retained_inventory != source_adapter_inventory:
         raise ValueError("retained source adapter tensors differ after copy")
     checkpoint_inventory = merged_checkpoint_inventory(args.output)
+    merge_replay = verify_merge_equation(
+        merged_path=args.output,
+        adapter_tree=retained_adapter,
+        recipe=recipe,
+    )
     receipt = {
-        "schema_version": 3,
+        "schema_version": 4,
         "experiment_id": config["experiment_id"],
         "config_sha256": _sha256_file(config_path),
         "model_id": model_id,
@@ -300,6 +309,7 @@ def main() -> int:
         "merge_script_sha256": _sha256_file(Path(__file__).resolve()),
         "merge_git_commit": current_commit,
         "merged_checkpoint_inventory": checkpoint_inventory,
+        "merge_replay": merge_replay,
         "merged_tree_sha256": _sha256_tree(args.output),
     }
     (args.output / "merge_receipt.json").write_text(
