@@ -475,3 +475,19 @@
   `reports/confirmation_recovery_review.md`.
 - Repository checks pass after the correction. This was a pre-authorization
   evidence-pipeline stop and changes neither design nor result.
+
+## 2026-07-14 — corrected runtime receives fresh authorization
+
+- Fresh no-clobber semantic authorization passed after independently replaying
+  every integration/control ledger and reauthenticating all 13 arm models. The
+  arm-map hash remains
+  `709694b7d770b5cbb09afe8b932bba3891ab4fea39c54c625fc84c5da973072d`;
+  model selection and decoding are unchanged from attempt 1.
+- The corrected 56-file control inventory hashes to
+  `690a5b5e345f7f4070f731eb69f7a6d9adf7f8148d4b4c07e8234cb8916250ef`
+  both before and after authorization and explicitly binds runner hash
+  `1e065b9c3718e4d2353dc3215928b936ed3fdaeb0d1e04ce96f215d4c9331054`.
+  The new authorization receipt hashes to
+  `2b9b86aa76bfb87169a2c70313f967f20c13a09e62fbab25069120e29f0ef9f1`.
+- Fresh admission, raw output, and scores remain absent. This authorizes only a
+  new empty-tree sealed campaign and contributes no performance evidence.

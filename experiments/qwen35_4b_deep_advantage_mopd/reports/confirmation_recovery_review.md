@@ -32,5 +32,13 @@ the corrected source inventory.
    in full. No archived generation receives compute credit or evidence status.
 
 The implemented repair satisfies items 1–3 and all 212 experiment tests pass.
-The terminal archive and no-peek boundary satisfy items 4–5. Fresh receipts and
-the empty-tree full rerun in items 6–7 remain runtime gates.
+The terminal archive and no-peek boundary satisfy items 4–5. Fresh admission
+and the empty-tree full rerun in items 6–7 remain runtime gates.
+
+## Authorization Status
+
+The fresh controls authorization now passes and hashes to
+`2b9b86aa76bfb87169a2c70313f967f20c13a09e62fbab25069120e29f0ef9f1`.
+It binds the restored frozen design review, unchanged 13-arm map, and corrected
+runner in control inventory `690a5b5e…`. Item 6 still requires fresh global
+admission; item 7 remains wholly unstarted.

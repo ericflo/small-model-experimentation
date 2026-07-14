@@ -139,6 +139,10 @@ The repair now makes the ordinary runner emit the already-established `[]`
 projection explicitly while leaving the strict validator and every generated
 or scored semantic unchanged. A direct regression and all 212 experiment tests
 pass. Attempt-1 bytes remain terminal and will not be reused.
+Fresh semantic authorization now passes and hashes to
+`2b9b86aa76bfb87169a2c70313f967f20c13a09e62fbab25069120e29f0ef9f1`;
+its pre/post control inventories both hash to `690a5b5e…` and include repaired
+runner `1e065b9c…`. No fresh admission or score exists at this boundary.
 
 Together, the three frozen optimizer seeds establish that the registered
 four-round update can complete safely and that strict-deep route supply

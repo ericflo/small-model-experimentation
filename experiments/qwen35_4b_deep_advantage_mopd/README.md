@@ -204,7 +204,10 @@ missing field as the established empty-list value on ordinary outputs. It does
 not alter sampled IDs, text, seeds, token budgets, scores, task geometry, or
 backend settings. All 212 experiment tests pass, including a direct naturally
 closed budget-output regression. The archived generation will not be reused;
-fresh authorization and admission remain mandatory before rerun.
+fresh authorization then passed with receipt
+`2b9b86aa76bfb87169a2c70313f967f20c13a09e62fbab25069120e29f0ef9f1`,
+binding corrected control inventory `690a5b5e345f7f4070f731eb69f7a6d9adf7f8148d4b4c07e8234cb8916250ef`.
+Fresh admission and an empty-tree full rerun remain mandatory.
 
 ## NF4/BF16 Interpretation Diagnostic
 
