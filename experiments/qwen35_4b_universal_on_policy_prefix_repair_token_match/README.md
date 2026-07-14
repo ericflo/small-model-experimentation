@@ -1,6 +1,6 @@
 # On-Policy Failure-Prefix Universal Curriculum
 
-**Status:** in-progress · since 2026-07-14 · model-free collection design frozen; explicit parent merge is next
+**Status:** in-progress · since 2026-07-14 · authenticated parent composite merged; rollout collection is next
 
 This result-separated successor tests whether training corrective continuations from
 the model's own fresh procedural failure prefixes installs a reusable reasoning and
@@ -63,15 +63,15 @@ Model-free design smoke:
 PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --smoke
 ```
 
-After this design commit is pushed and both required workflows are green, run exactly
-one stage:
+The design checkpoint and parent-merge checkpoint are pushed separately. After this
+merge receipt is pushed and both required workflows are green, run exactly one stage:
 
 ```bash
-PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --stage merge-parent
+PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --stage collect-parent
 ```
 
-Publish that receipt before `collect-parent`, then publish the rollout receipt before
-model-free `mine-prefixes`. Training remains unavailable until actual prefix lengths
+Publish the rollout receipt before model-free `mine-prefixes`. Training remains
+unavailable until actual prefix lengths
 support exact-token streams, a zero-skip receipt, and a second adversarial compute
 review.
 
@@ -81,15 +81,17 @@ CPU feasibility passed. Construction seed 77,113 deterministically freezes 288
 truth-audited tasks, 48 for each of six failure classes. The model-facing JSONL omits
 hidden oracle and answer fields. Tests cover exact prefix masking, failure-only
 selection, delayed-commit cutoff, declaration misuse, generation caps, and the
-merged-Qwen architecture gate. No model generation, training, capability
-measurement, merge, or benchmark event exists.
+merged-Qwen architecture gate. The authenticated `close_xi` adapter was explicitly
+merged into a full composite: 128/128 applied LoRA modules were nonzero, the merged
+weight hash is `4933f2dd...eb373`, and the external merge-receipt hash is
+`1fbc84b3...5557`. No model generation, training, capability measurement, or
+benchmark event exists.
 
 ## Interpretation
 
-This is a design result, not evidence that on-policy correction works. vLLM runtime
-LoRA would silently collect the wrong policy, so the authenticated parent must first
-be merged explicitly. Failure quotas may still prove unreachable; that outcome stops
-training and is preserved.
+This is a deployment-authentication result, not evidence that on-policy correction
+works. The explicit merge closes vLLM's runtime-LoRA silent no-op, but failure quotas
+may still prove unreachable; that outcome stops training and is preserved.
 
 ## Knowledgebase Update
 

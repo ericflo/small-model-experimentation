@@ -1,0 +1,28 @@
+{
+  "adapter": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_close_weight_token_match/adapters/close_xi",
+  "adapter_config_sha256": "de953bd57502ff728a12d1627d5aacab6284b045428ec7b83026388afd8c47ff",
+  "adapter_weights_sha256": "16e9dc75a0e33e182e916600ff6e1d75fc46dfa45e870216e2c149a41253c179",
+  "command": [
+    "/home/ericflo/Development/small-model-experimentation/.venv/bin/python",
+    "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_same_prefix_advantage_routing/scripts/merge_adapter.py",
+    "--adapter",
+    "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_close_weight_token_match/adapters/close_xi",
+    "--out",
+    "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/merged/close_xi_parent"
+  ],
+  "experiment_id": "qwen35_4b_universal_on_policy_prefix_repair_token_match",
+  "merge_receipt_sha256": "1fbc84b33dfbcef30ec0c7f5f184b5bebcbeb09f2a42033c5b47bd469b275557",
+  "merged": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/merged/close_xi_parent",
+  "merger": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_same_prefix_advantage_routing/scripts/merge_adapter.py",
+  "merger_sha256": "cb9af8b45ca1e5754cb36f2213b7e25290f6eb16427d1a8b41f0b12b10396672",
+  "name": "close_xi_parent",
+  "schema_version": 1,
+  "training_receipt": null,
+  "training_receipt_sha256": null,
+  "weight_files": [
+    {
+      "name": "model.safetensors",
+      "sha256": "4933f2dd2e5140597bf3e1dd4e9fecc700a3e3eb7d422b59b84fd0f6e28eb373"
+    }
+  ]
+}

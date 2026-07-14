@@ -2,9 +2,9 @@
 
 ## Summary
 
-Model-free design complete. This result-separated successor freezes fresh procedural
-tasks, an explicitly merged parent rollout path, failure-only prefix mining, and exact
-loss masking. No scientific result exists.
+Model-free design and explicit parent deployment complete. This result-separated
+successor freezes fresh procedural tasks, a verified merged parent rollout path,
+failure-only prefix mining, and exact loss masking. No capability result exists.
 
 ## Research Program Fit
 
@@ -26,8 +26,10 @@ exist.
 
 CPU feasibility, deterministic generation, and adversarial design review passed.
 Source/model-input hashes are `32589348...1172` / `7a643e96...a5485c`; design receipt
-hash is `98c6a168...5638`. No model rollout, training, capability measurement, merge,
-or benchmark event ran.
+hash is `98c6a168...5638`. The parent composite merge then applied 128/128 nonzero
+LoRA modules. Its single weight shard is `4933f2dd...eb373` and its external merge
+receipt is `1fbc84b3...5557`. No model rollout, training, capability measurement, or
+benchmark event ran.
 
 ## Controls
 
@@ -46,15 +48,14 @@ stays sealed.
 
 ## Interpretation
 
-The design is feasible and the vLLM parent-deployment footgun is closed. This is not
-evidence for on-policy correction, and “first failure” means the first
+The design is feasible and the vLLM parent-deployment footgun is now closed by an
+authenticated composite. This is not evidence for on-policy correction, and “first failure” means the first
 machine-observable boundary rather than an unobservable latent error.
 
 ## Next Experiments
 
-Publish this design checkpoint. Then merge the parent, publish its receipt, collect
-the parent rollout, publish it, and mine prefixes. Do not train until the second
-compute review is committed and green.
+Publish this merge receipt. Then collect the parent rollout, publish it, and mine
+prefixes. Do not train until the second compute review is committed and green.
 
 ## Artifact Manifest
 

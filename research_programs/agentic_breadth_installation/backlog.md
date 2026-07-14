@@ -183,9 +183,11 @@
   merged `close_xi` vLLM deployment, exact generated-token prefix masking, and ten
   reachable failures per class. Reserved construction/rollout/training/local/
   aggregate seeds are 77113/66113/47/88009/78139. Design receipt
-  `98c6a168...5638` authorizes the parent merge, then separately checkpointed rollout
-  and model-free prefix mining. Training remains sealed until observed prefix lengths
-  support exact-token replay streams and a second adversarial compute review.
+  `98c6a168...5638` authorized the parent merge. That merge applied 128/128 nonzero
+  LoRA modules and produced composite weight hash `4933f2dd...eb373`; rollout and
+  model-free prefix mining remain separately checkpointed. Training stays sealed
+  until observed prefix lengths support exact-token replay streams and a second
+  adversarial compute review.
 
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.

@@ -87,7 +87,7 @@ def smoke() -> None:
         f"model_revision: {MODEL_REVISION}",
         f"parent_weights_sha256: {PARENT_WEIGHTS_SHA256}",
         f"parent_config_sha256: {PARENT_CONFIG_SHA256}",
-        "status: design_frozen_parent_merge_next",
+        "status: parent_merged_rollout_collection_next",
     )
     missing = [entry for entry in required if entry not in config]
     if missing:

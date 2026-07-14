@@ -48325,7 +48325,7 @@
        "values": [
         1,
         1,
-        0,
+        1,
         0,
         0
        ]
@@ -48371,8 +48371,8 @@
      "x_label": "prospective experiment stage",
      "y_label": "completion indicator",
      "y_format": "integer",
-     "note": "Intake and the model-free collection design are complete. No parent merge, rollout, prefix inventory, training, capability, or benchmark event exists.",
-     "source": "experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/data/design_receipt.json"
+     "note": "Intake, model-free design, and the authenticated parent composite are complete. No rollout, prefix inventory, training, capability, or benchmark event exists.",
+     "source": "experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/runs/merges/close_xi_parent.json"
     }
    ]
   },

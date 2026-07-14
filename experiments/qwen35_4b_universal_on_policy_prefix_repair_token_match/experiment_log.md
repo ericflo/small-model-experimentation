@@ -40,3 +40,21 @@
 
 Next: commit/rebase/push this design and verify both workflows; then run only the
 explicit parent-merge stage and checkpoint its receipt.
+
+## 2026-07-14 — Explicit parent composite merge
+
+- Published design commit `3f75c992` directly to `main`; Validate Repository run
+  `29344691083` and Publish Research Site run `29344691096` both passed.
+- From that clean checkpoint, ran only `--stage merge-parent`. The explicit composite
+  merger loaded `Qwen/Qwen3.5-4B` revision `851bf6e8...d0a` and authenticated the
+  `close_xi` adapter as weights/config `16e9dc75...c179` / `de953bd5...7ff`.
+- Applied 128 LoRA deltas on CUDA; all 128 were nonzero. Sum/max delta Frobenius norms
+  were 159.990169 / 2.824141, with FP32 TF32 disabled and scale 2.0.
+- Saved one 8.5-GiB composite shard with SHA-256 `4933f2dd...eb373`. External
+  `merge_receipt.json` SHA-256 is `1fbc84b3...5557`; durable log/experiment receipt
+  hashes are `fc0b938b...53d2` / `10c3870d...95b`.
+- Re-ran the merge authenticator and the exact Qwen3.5-4B architecture-fingerprint
+  gate against the saved composite. No generation, training, capability, local, or
+  benchmark event ran.
+
+Next: publish and CI-verify this merge receipt, then run only `collect-parent`.

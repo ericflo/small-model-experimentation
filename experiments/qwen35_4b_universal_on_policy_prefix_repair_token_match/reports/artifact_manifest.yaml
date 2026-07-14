@@ -7,19 +7,23 @@ external_artifacts:
     required_for: "proposed common warm start and parent rollout policy"
     checksum: "weights 16e9dc75a0e33e182e916600ff6e1d75fc46dfa45e870216e2c149a41253c179; config de953bd57502ff728a12d1627d5aacab6284b045428ec7b83026388afd8c47ff"
     regenerate: ".venv/bin/python experiments/qwen35_4b_universal_close_weight_token_match/scripts/run.py --stage train-close"
+  - name: "explicit merged close_xi parent composite"
+    storage: "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/merged/close_xi_parent"
+    required_for: "vLLM parent rollout collection; runtime LoRA is forbidden"
+    checksum: "model.safetensors 4933f2dd2e5140597bf3e1dd4e9fecc700a3e3eb7d422b59b84fd0f6e28eb373; merge_receipt.json 1fbc84b33dfbcef30ec0c7f5f184b5bebcbeb09f2a42033c5b47bd469b275557"
+    regenerate: "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --stage merge-parent"
 omitted_artifacts:
-  - path: "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/merged/close_xi_parent/"
-    reason: "future explicit composite parent required for vLLM rollout; large and gitignored"
   - path: "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/"
-    reason: "future merged parent, adapters, and checkpoints are large and gitignored"
+    reason: "registered merged parent is external above; future adapters/checkpoints remain large and gitignored"
 reproducibility:
   smoke_command: "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --smoke"
-  full_command: "one stage only: scripts/run.py --stage merge-parent; later stages require committed receipts"
+  full_command: "next stage only: scripts/run.py --stage collect-parent; requires committed merge receipt"
   required_external_artifacts:
     - "large_artifacts/qwen35_4b_universal_close_weight_token_match/adapters/close_xi"
 notes: >-
   Model-free collection design. Model Qwen/Qwen3.5-4B revision 851bf6e8...d0a; parent
   weights/config 16e9dc75...c179 / de953bd5...7ff. Construction, parent-rollout,
   training, local, and conditional aggregate seeds are 77113/66113/47/88009/78139.
-  Frozen task/model-input hashes are 32589348...1172 / 7a643e96...a5485c. No model
-  rollout, adapter training, capability, parent merge, or benchmark receipt exists.
+  Frozen task/model-input hashes are 32589348...1172 / 7a643e96...a5485c. Explicit
+  merged-parent weight/receipt hashes are 4933f2dd...eb373 / 1fbc84b3...5557. No
+  model rollout, adapter training, capability, or benchmark receipt exists.
