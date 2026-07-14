@@ -947,3 +947,27 @@ all result-bearing stages remain blocked by their frozen ordered barriers.
 Only seed-7411 setup-pair validation, commit, push, and workflow verification are authorized. Seed
 7412 G0/control may begin only after both workflows are green. Result training, evaluation, and
 analysis remain blocked on the complete three-seed setup barrier.
+
+## 2026-07-14 — source-v11 seed-7412 LoRA setup pair passes
+
+- Seed-7411 setup commit `5536f785` passed both required workflows before seed 7412 began. The next
+  remote commit touched only another experiment and generated indexes; source contract
+  `5a8ed26d…6666` was reverified after fast-forward.
+- Seed-7412 G0 passed at file SHA-256 `c19a6944…6b82d0`, receipt identity `e2229ad2…da380`, with
+  exact lineage to initialization bundle `3ae97463…021f5` and the unchanged manifest/source.
+- Both PEFT parity regimes, K=1 before/after, zero function, and destructive checkpoint restoration
+  have zero observed error. All 124 LoRA tensors and every required common-state group have finite
+  nonzero live-joint gradients, the base has none, the aggregation-scalar norm is
+  `4.465342499315739e-5`, and the K=12 path is finite. The ten-step probe measured
+  `0.2639180898666382` seconds/step with 11.197 GiB peak allocation and 35.629 GiB free after G0.
+- The seed-matched positive control passed at file SHA-256 `1a8d263b…a27a37`, receipt identity
+  `fdb1a16e…cd72a3`: oracle accuracy 1.0; fixed-final intact 48/48; disabled 0/48; exactly 256
+  updates, accumulation 16, and 4,096 presentations; parameter values changed.
+- Both receipts record zero benchmark and sealed-contrast access and remain setup evidence rather
+  than scientific results. The complete setup barrier still lacks seed 7413.
+
+## Current authorization
+
+Only seed-7412 setup-pair validation, commit, push, and workflow verification are authorized. Seed
+7413 G0/control may begin only after both workflows are green. Result training, evaluation, and
+analysis remain blocked on the complete three-seed setup barrier.

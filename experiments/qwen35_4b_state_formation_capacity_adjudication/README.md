@@ -1,6 +1,6 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · frozen design unchanged; source-v11 PREPARED-output repair reviewed at 363/363; source-v10 setup invalidated before any result training; source-v11 seed-7411 LoRA setup pair passed and awaits publication before seed 7412
+**Status:** in-progress · since 2026-07-13 · frozen design unchanged; source-v11 PREPARED-output repair reviewed at 363/363; source-v10 setup invalidated before any result training; source-v11 seed-7412 LoRA setup pair passed and awaits publication before seed 7413
 
 ## Current status
 
@@ -33,8 +33,15 @@ finite nonzero live-joint gradients, no base gradient, and aggregation gradient 
 positive control passed at file SHA-256 `ee1de715…c98d8` and identity `c830e65b…0c259`: oracle and
 intact fixed-final 48/48, adaptation-disabled 0/48, exactly 256 updates, accumulation 16, and 4,096
 presentations. Both remain setup-only evidence with zero benchmark/sealed access. Publish this pair
-and require both workflows green before seed 7412; result training remains blocked on all three
-setup pairs.
+and require both workflows green before seed 7412. The seed-7411 setup checkpoint is green at
+`5536f785`. Source-v11 seed-7412 LoRA G0 then passed at file SHA-256 `c19a6944…6b82d0` and identity
+`e2229ad2…da380`: exact PEFT parity, zero K=1 and checkpoint-roundtrip error, finite K=12, all 124
+LoRA tensors and every recurrent group with finite nonzero live-joint gradients, no base gradient,
+and aggregation gradient `4.4653425e-5`. Its positive control passed at file SHA-256
+`1a8d263b…a27a37` and identity `fdb1a16e…cd72a3`: oracle and intact fixed-final 48/48,
+adaptation-disabled 0/48, exactly 256 updates, accumulation 16, and 4,096 presentations. Both remain
+setup-only evidence with zero benchmark/sealed access. Publish this pair and require both workflows
+green before seed 7413; result training remains blocked on all three setup pairs.
 
 Historically, the integrated source-v10 review was `GO` for reviewed implementation
 `a5a494b7…6f1c4a` and full source contract `979a9012…f394b7`; the 360/360 suite and exact machine gate
