@@ -151,3 +151,35 @@ Created as a new experiment scaffold.
 - It records zero experimental mechanics generation requests and sampled
   outputs before lock. Mechanics remains sealed until this lock commit is
   pushed and green in both exact workflows.
+
+## Fresh mechanics and visible selection
+
+- Mechanics lock commit `d02ebf56` passed exact workflows `29337577321` and
+  `29337577892`. A first launch on a concurrently advanced `main` failed closed
+  because its Publish workflow was still running; two later attempts failed
+  closed before model load because the static launcher's credential-free
+  GitHub verifier pool was exhausted. No preflight or generation artifact was
+  created by those attempts. The unchanged launcher ran after the recorded
+  quota reset.
+- Loaded only `Qwen/Qwen3.5-4B@851bf6e8` in bf16 on pinned vLLM
+  0.24.0+cu129. Live preflight SHA-256 is
+  `8d2a693c20e783e24c490a0e98c821e00d024f87cfeb071f0fec4048975bf879`.
+- Fresh transport passed 24/24 exact and parse, 12/12 in both arity strata,
+  with zero cap contacts. Transport decision SHA-256 is
+  `0036aaab7f9af12d0fb4a94272ace7f02bb2642d6f3e9d9bcedb494a2687a65b`.
+- Completed and authenticated 4,056 outputs: 24 transport, 2,304 direct, and
+  576 each materialized, name-only, and shuffled. The complete five-stage
+  chain passed historical replay with no recovery generation.
+- All generation arms passed the ABI gate with zero cap contacts. Parse was
+  2,299/2,304 direct, 571/576 materialized, 575/576 name-only, and 569/576
+  shuffled. Sampled-token direct matching required 16--17 rows per task;
+  logical-token matching required 30--34. No direct pool exhausted.
+- Visible selection froze with SHA-256
+  `c64dd163c617216a50c03a0e6b536057088cb7bbd7042e69b04649e7e3c965ed`.
+  Materialized, name-only, shuffled, sampled-matched direct, and
+  logical-matched direct each had zero visible-passing candidates and zero
+  selections on all 24 tasks. The non-primary 96-sample direct diagnostic had
+  two visible-passing candidates on one task and selected one.
+- Visible analysis read no hidden or benchmark file. Hidden scoring remains
+  unauthorized until this exact visible checkpoint is committed, pushed, and
+  green in both workflows.

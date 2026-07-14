@@ -1,6 +1,6 @@
 # Qwen3.5-4B Tokenizer-EOS Residual Mechanics Fresh Replay
 
-**Status:** in-progress · since 2026-07-14 · fresh calibration qualified tokenizer-EOS/no-think/`PROGRAM:`; mechanics lock minted with zero prior mechanics calls and awaiting exact lock-commit CI
+**Status:** in-progress · since 2026-07-14 · visible mechanics selection frozen with zero deployable selections; hidden scoring remains sealed pending visible-checkpoint CI
 
 This fresh-identity successor preserves the parent's qualified tokenizer-EOS
 interface and frozen residual-mechanics science while separating initial
@@ -180,6 +180,25 @@ sampling, and `tokenizer_eos_no_think_program_slot`. It records zero mechanics
 generation requests or sampled outputs before lock. No mechanics model call is
 authorized until this lock is committed, pushed, and green in both exact
 workflows.
+
+Mechanics lock commit `d02ebf56` passed exact workflows `29337577321` and
+`29337577892`. After a fail-closed wait for the static launcher's anonymous
+GitHub verifier quota to reset, the sealed run used only the pinned model and
+backend. Transport passed 24/24 exact and parse with zero cap contacts. All
+4,056 outputs then completed and the five-stage transaction chain
+authenticated. Visible selection SHA-256 is
+`c64dd163c617216a50c03a0e6b536057088cb7bbd7042e69b04649e7e3c965ed`.
+
+All generation arms passed the ABI gate with zero cap contacts. Parse rates
+were 2,299/2,304 direct, 571/576 materialized, 575/576 name-only, and 569/576
+shuffled. The sampled-token direct match used 16--17 candidates per task and
+the logical-model-token match used 30--34; no direct pool exhausted. The
+frozen selector found no visible-passing candidate for materialized,
+name-only, shuffled, or either matched-direct comparator on any of 24 tasks,
+so all five deployable arms abstain on all tasks. The non-primary 96-sample
+full-direct diagnostic found two visible-passing candidates on one task and
+selected one. The visible receipt records no hidden or benchmark read. It must
+be committed, pushed, and green before the hidden key may be opened once.
 
 ## Interpretation
 

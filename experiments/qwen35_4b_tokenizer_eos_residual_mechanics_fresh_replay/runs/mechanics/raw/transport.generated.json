@@ -1,0 +1,2538 @@
+{
+  "invocation": "transport",
+  "rows": [
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "0281a6d73bac65aea04950f0dd1ad01ebbc8cbbe689f125a7301a919d47bc3f6",
+      "id": "84818b9a1553a5ffe48ed9384731ed9a220e996262138d5232c1fdbd98b2c8bd",
+      "meta": {
+        "arity": 2,
+        "expected": "PROGRAM: X | S",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-residual-mechanics-fresh-replay-transport-v1",
+          "transport",
+          "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00000"
+        ],
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00000"
+      },
+      "n_original_prompt_tokens": 702,
+      "n_prompt_tokens": 704,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 4,
+          "n_completion_tokens": 6,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 4,
+          "n_stage1_prompt_tokens": 704,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            1543,
+            735,
+            326,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 907138835,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 907138835,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            1543,
+            735,
+            326,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: X | S<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            1543,
+            735,
+            326,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "7a4ead29f5195b5e6798c212a611321947b7799cde556a680cb47bec2d998594"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "27ef9250d11f893712dfc3c3a77410924f481acd6a5d00aba859abf3bc7d0099",
+      "id": "a73469a926ee6975f8ffb5e7b7f1d0aa42418f5eff91d9972d4dba2486073858",
+      "meta": {
+        "arity": 3,
+        "expected": "PROGRAM: V | H | K",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-residual-mechanics-fresh-replay-transport-v1",
+          "transport",
+          "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00001"
+        ],
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00001"
+      },
+      "n_original_prompt_tokens": 546,
+      "n_prompt_tokens": 548,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 6,
+          "n_completion_tokens": 8,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 6,
+          "n_stage1_prompt_tokens": 548,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            629,
+            735,
+            462,
+            735,
+            710,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 785471112,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 785471112,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            629,
+            735,
+            462,
+            735,
+            710,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: V | H | K<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            629,
+            735,
+            462,
+            735,
+            710,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "23eee815ab1a2aa07836d7ca2dd43dfd0a70313d5402251f4368ca5f5cb87f7a"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "03688e554723714fe42e005d8f6c58274da03af89939ca52ceb9639a85f1e796",
+      "id": "e18b963a0f5133b0b9ed435eaeda0a4b87e98611c372e2b976460ebbcb81fd96",
+      "meta": {
+        "arity": 2,
+        "expected": "PROGRAM: Q | E",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-residual-mechanics-fresh-replay-transport-v1",
+          "transport",
+          "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00002"
+        ],
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00002"
+      },
+      "n_original_prompt_tokens": 875,
+      "n_prompt_tokens": 877,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 4,
+          "n_completion_tokens": 6,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 4,
+          "n_stage1_prompt_tokens": 877,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            1167,
+            735,
+            458,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 2034090253,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 2034090253,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            1167,
+            735,
+            458,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: Q | E<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            1167,
+            735,
+            458,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "58dea71899b1eb129d1300499b9fa6182a50108e1d4294fcc865f72c1756cb31"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "d0c36c468193adba93b9af2f8bedac766cccb6639741206c2da3623b738f9f5f",
+      "id": "a58b864fd2f60b8ba3beb977122f0cc5d0014e518aa3ab1fe95b18e2661b8903",
+      "meta": {
+        "arity": 3,
+        "expected": "PROGRAM: H | C | O",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-residual-mechanics-fresh-replay-transport-v1",
+          "transport",
+          "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00003"
+        ],
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00003"
+      },
+      "n_original_prompt_tokens": 557,
+      "n_prompt_tokens": 559,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 6,
+          "n_completion_tokens": 8,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 6,
+          "n_stage1_prompt_tokens": 559,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            462,
+            735,
+            351,
+            735,
+            496,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 1729094904,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 1729094904,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            462,
+            735,
+            351,
+            735,
+            496,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: H | C | O<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            462,
+            735,
+            351,
+            735,
+            496,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "0cd64763da6e95bdb08e1d5b30e6930bd4ce74d54d28958a8b802ec2c56ed410"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "fff659d46d7c5df35cf8a4982b3ee0a69048362cf9d6bf4a8e6136fbc93bd0e5",
+      "id": "360bcbac2513418e6b88b7a373fda2dc32b57db3c6b596eec6cb7bf75796e81b",
+      "meta": {
+        "arity": 2,
+        "expected": "PROGRAM: F | U",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-residual-mechanics-fresh-replay-transport-v1",
+          "transport",
+          "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00004"
+        ],
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00004"
+      },
+      "n_original_prompt_tokens": 683,
+      "n_prompt_tokens": 685,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 4,
+          "n_completion_tokens": 6,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 4,
+          "n_stage1_prompt_tokens": 685,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            426,
+            735,
+            533,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 1003869558,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 1003869558,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            426,
+            735,
+            533,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: F | U<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            426,
+            735,
+            533,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "ed9d5d9050473cd35d517806e3b52e0ce1d44dc4920284ecf520a468358f92e4"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "36897dd1d2f641de11c6122511f76471c3eef75de70387117242699a9a8245e5",
+      "id": "b56db87dc4f5ba0586767e7caa1883d5a4086e8c0b0cc1310268125057c8af0d",
+      "meta": {
+        "arity": 3,
+        "expected": "PROGRAM: A | H | G",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-residual-mechanics-fresh-replay-transport-v1",
+          "transport",
+          "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00005"
+        ],
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00005"
+      },
+      "n_original_prompt_tokens": 511,
+      "n_prompt_tokens": 513,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 6,
+          "n_completion_tokens": 8,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 6,
+          "n_stage1_prompt_tokens": 513,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            357,
+            735,
+            462,
+            735,
+            469,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 410981429,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 410981429,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            357,
+            735,
+            462,
+            735,
+            469,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: A | H | G<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            357,
+            735,
+            462,
+            735,
+            469,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "f7eb488ba742377456ce78605195845484f6700e5cdb40944b2b610b07d91101"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "804cf141d3b8800095fa8218f2c641bafcd2087ebf82d1faad2c3be47aad12eb",
+      "id": "7c19fc43126622a5d8ad24bafd2da3274def20bee446d0b6bfb20238afe5979d",
+      "meta": {
+        "arity": 2,
+        "expected": "PROGRAM: O | T",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-residual-mechanics-fresh-replay-transport-v1",
+          "transport",
+          "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00006"
+        ],
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00006"
+      },
+      "n_original_prompt_tokens": 713,
+      "n_prompt_tokens": 715,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 4,
+          "n_completion_tokens": 6,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 4,
+          "n_stage1_prompt_tokens": 715,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            496,
+            735,
+            345,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 1934029499,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 1934029499,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            496,
+            735,
+            345,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: O | T<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            496,
+            735,
+            345,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "2edcc267e2c38fca2844f970cd5a97b8303e62afb30eda6fa182c327a77cdf23"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "b595d8838d24936ca83071c006077de7aff3a4c005e8e4fea60f36f0485ced1e",
+      "id": "d56bb6ac5959633936ac813f046cfe591d8bf9bd8f4043903ddb7a04238fae35",
+      "meta": {
+        "arity": 3,
+        "expected": "PROGRAM: C | E | E",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-residual-mechanics-fresh-replay-transport-v1",
+          "transport",
+          "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00007"
+        ],
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00007"
+      },
+      "n_original_prompt_tokens": 716,
+      "n_prompt_tokens": 718,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 6,
+          "n_completion_tokens": 8,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 6,
+          "n_stage1_prompt_tokens": 718,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            351,
+            735,
+            458,
+            735,
+            458,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 916093731,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 916093731,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            351,
+            735,
+            458,
+            735,
+            458,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: C | E | E<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            351,
+            735,
+            458,
+            735,
+            458,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "c923916f78225f74907eaab2dca1c6bc7c82cd39f731e683ed5396399824badd"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "d210ef0677425ff25c13904db0ea6bd0fc53a26a55b3266e8bf1d6dfd54360aa",
+      "id": "8b1538f15e7464161834f170725490dba711d24267e0465319e9097a18933e29",
+      "meta": {
+        "arity": 2,
+        "expected": "PROGRAM: F | N",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-residual-mechanics-fresh-replay-transport-v1",
+          "transport",
+          "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00008"
+        ],
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00008"
+      },
+      "n_original_prompt_tokens": 772,
+      "n_prompt_tokens": 774,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 4,
+          "n_completion_tokens": 6,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 4,
+          "n_stage1_prompt_tokens": 774,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            426,
+            735,
+            443,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 744040433,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 744040433,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            426,
+            735,
+            443,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: F | N<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            426,
+            735,
+            443,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "2f106a3100c0f7e5dc28ea783251c5e92c7f11788ce18558a1c6d98da2ffa903"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "1aebbaf333a2711f06b1ab9daf5dfa2e47aee2383b331d266ff353b5c989f2c7",
+      "id": "cf53eea17f5a1304cb8295e17a3513469dceab0db630bc69647c01f370d581aa",
+      "meta": {
+        "arity": 3,
+        "expected": "PROGRAM: D | W | T",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-residual-mechanics-fresh-replay-transport-v1",
+          "transport",
+          "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00009"
+        ],
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00009"
+      },
+      "n_original_prompt_tokens": 493,
+      "n_prompt_tokens": 495,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 6,
+          "n_completion_tokens": 8,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 6,
+          "n_stage1_prompt_tokens": 495,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            414,
+            735,
+            457,
+            735,
+            345,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 1042659759,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 1042659759,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            414,
+            735,
+            457,
+            735,
+            345,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: D | W | T<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            414,
+            735,
+            457,
+            735,
+            345,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "956719223a36e88f9beea8c8c204409d5fa866ec54e117755d64545acf237d69"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "69133c7e284159ef014583654e1507905657f2c2e9cfe752e9833685d09ad36a",
+      "id": "8c59a2079b536cd2568947b5a63fea85b58d8e3b2dbf24ff7246994e1da32129",
+      "meta": {
+        "arity": 2,
+        "expected": "PROGRAM: I | K",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-residual-mechanics-fresh-replay-transport-v1",
+          "transport",
+          "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00010"
+        ],
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00010"
+      },
+      "n_original_prompt_tokens": 782,
+      "n_prompt_tokens": 784,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 4,
+          "n_completion_tokens": 6,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 4,
+          "n_stage1_prompt_tokens": 784,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            353,
+            735,
+            710,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 1969073153,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 1969073153,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            353,
+            735,
+            710,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: I | K<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            353,
+            735,
+            710,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "5ae82fa0003a0c11f7a21b4e44125bc3940a58201c5e101a872bda8e24b09141"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "59ca50cd3d3ba63852a9cd3a11817ee203477304745bfc644e5a321934192eaa",
+      "id": "8268ef06c46989c1d04abace952ce945aade58279f9d300878ee8a5b825a3f0b",
+      "meta": {
+        "arity": 3,
+        "expected": "PROGRAM: M | D | P",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-residual-mechanics-fresh-replay-transport-v1",
+          "transport",
+          "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00011"
+        ],
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00011"
+      },
+      "n_original_prompt_tokens": 562,
+      "n_prompt_tokens": 564,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 6,
+          "n_completion_tokens": 8,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 6,
+          "n_stage1_prompt_tokens": 564,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            380,
+            735,
+            414,
+            735,
+            387,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 792245086,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 792245086,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            380,
+            735,
+            414,
+            735,
+            387,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: M | D | P<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            380,
+            735,
+            414,
+            735,
+            387,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "478e29e888f4ca89340c9ec0ba418ec6e18d1d552cd5527a52f7d59f9253f537"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "bbb976b88e413c8076aad5e5fa863b23319f6c38cce3c034c002c08059b9829c",
+      "id": "cdbe4ae58ce000a005cec0a136241ecc78220a110c616b304cb3c9ea8447057f",
+      "meta": {
+        "arity": 2,
+        "expected": "PROGRAM: H | T",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-residual-mechanics-fresh-replay-transport-v1",
+          "transport",
+          "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00012"
+        ],
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00012"
+      },
+      "n_original_prompt_tokens": 630,
+      "n_prompt_tokens": 632,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 4,
+          "n_completion_tokens": 6,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 4,
+          "n_stage1_prompt_tokens": 632,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            462,
+            735,
+            345,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 1843946266,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 1843946266,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            462,
+            735,
+            345,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: H | T<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            462,
+            735,
+            345,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "dd6ac65df2131641e5f6a398f2fdb68e467bc077fa058c01348d3be8f9c0fcd0"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "eab0858a9cc190672b1c0361528bb8266be962e7983365c578b4bec830710f5e",
+      "id": "ee52b61fb6e284a26295ba6f6750ec1eff800180e0f21373675d1ab3960e579c",
+      "meta": {
+        "arity": 3,
+        "expected": "PROGRAM: I | O | K",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-residual-mechanics-fresh-replay-transport-v1",
+          "transport",
+          "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00013"
+        ],
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00013"
+      },
+      "n_original_prompt_tokens": 621,
+      "n_prompt_tokens": 623,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 6,
+          "n_completion_tokens": 8,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 6,
+          "n_stage1_prompt_tokens": 623,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            353,
+            735,
+            496,
+            735,
+            710,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 872025187,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 872025187,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            353,
+            735,
+            496,
+            735,
+            710,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: I | O | K<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            353,
+            735,
+            496,
+            735,
+            710,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "7492d1a3019e1d4c78a6d5a7426285b1dcdb18faa6681e2fe5d6a2105588abf7"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "1cb3d6ef9ac2f4d4f5eb6600cf04fb1cd42cee46b6c051c32d31c530e97f644e",
+      "id": "4d948077a4c066a999a84c9124167f70866a9684419c3ce7d6f98a3f7426357d",
+      "meta": {
+        "arity": 2,
+        "expected": "PROGRAM: J | T",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-residual-mechanics-fresh-replay-transport-v1",
+          "transport",
+          "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00014"
+        ],
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00014"
+      },
+      "n_original_prompt_tokens": 661,
+      "n_prompt_tokens": 663,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 4,
+          "n_completion_tokens": 6,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 4,
+          "n_stage1_prompt_tokens": 663,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            604,
+            735,
+            345,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 1021635603,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 1021635603,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            604,
+            735,
+            345,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: J | T<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            604,
+            735,
+            345,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "dd0b84eaec6036f13f8ec87626a1406e900f8f4336e0ecef9496d288a879cb18"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "4c6ab10d315a2a64abb0b8659d2490dac36b0a03da5721f10b295bea249c8ca7",
+      "id": "84d331556603bfe2c87f1aec38da0fb12563cda1f118806f09903f4760696bf2",
+      "meta": {
+        "arity": 3,
+        "expected": "PROGRAM: A | M | W",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-residual-mechanics-fresh-replay-transport-v1",
+          "transport",
+          "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00015"
+        ],
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00015"
+      },
+      "n_original_prompt_tokens": 581,
+      "n_prompt_tokens": 583,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 6,
+          "n_completion_tokens": 8,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 6,
+          "n_stage1_prompt_tokens": 583,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            357,
+            735,
+            380,
+            735,
+            457,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 1277385654,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 1277385654,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            357,
+            735,
+            380,
+            735,
+            457,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: A | M | W<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            357,
+            735,
+            380,
+            735,
+            457,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "2a5300353f6fd26c814f141c9b36b29536566f844ad3ccd96981c59fbbcf6b16"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "432015d5b235346f43c6f81cb5f79081f59ddd259feb32b23d30196c1f4d4794",
+      "id": "96de1c7c25ede03dfe8d4994c3e1f22c4fc0a9772cfd109a24871b9d5e100489",
+      "meta": {
+        "arity": 2,
+        "expected": "PROGRAM: V | X",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-residual-mechanics-fresh-replay-transport-v1",
+          "transport",
+          "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00016"
+        ],
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00016"
+      },
+      "n_original_prompt_tokens": 836,
+      "n_prompt_tokens": 838,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 4,
+          "n_completion_tokens": 6,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 4,
+          "n_stage1_prompt_tokens": 838,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            629,
+            735,
+            1543,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 964997055,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 964997055,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            629,
+            735,
+            1543,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: V | X<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            629,
+            735,
+            1543,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "62718ce9fc8de145f8660c65990bb104a34882ff20aa8aa725af4a9166618847"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "f431288ce0b2de05cbd3d5e5f8228673f16c7262c50ac55f566cb7a5a8a1c380",
+      "id": "a722e51d770e57c4d76498c97470c4299a9bd09a69e55593779bdf1e71d7d18d",
+      "meta": {
+        "arity": 3,
+        "expected": "PROGRAM: D | C | F",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-residual-mechanics-fresh-replay-transport-v1",
+          "transport",
+          "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00017"
+        ],
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00017"
+      },
+      "n_original_prompt_tokens": 574,
+      "n_prompt_tokens": 576,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 6,
+          "n_completion_tokens": 8,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 6,
+          "n_stage1_prompt_tokens": 576,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            414,
+            735,
+            351,
+            735,
+            426,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 1644446604,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 1644446604,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            414,
+            735,
+            351,
+            735,
+            426,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: D | C | F<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            414,
+            735,
+            351,
+            735,
+            426,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "6b7099c26c1b8c44cff8a281ed6243aa1d2e0f0d9e0efd016db9167de1b53ab0"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "5a1f7d4299a0abf7a97ce56a5af97c27b4aba66b85e14bbf3016976222df3682",
+      "id": "fb4fad20d580f7cd4e8f77ecaca4050ad6af16d980706cf6c49b42e2234c5237",
+      "meta": {
+        "arity": 2,
+        "expected": "PROGRAM: H | O",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-residual-mechanics-fresh-replay-transport-v1",
+          "transport",
+          "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00018"
+        ],
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00018"
+      },
+      "n_original_prompt_tokens": 748,
+      "n_prompt_tokens": 750,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 4,
+          "n_completion_tokens": 6,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 4,
+          "n_stage1_prompt_tokens": 750,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            462,
+            735,
+            496,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 1495945115,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 1495945115,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            462,
+            735,
+            496,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: H | O<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            462,
+            735,
+            496,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "057790a982f3641e1e21df76c6a3ac16c91edfd3c346f671cece8a0422f29c86"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "5f2fbb79675499fce16a2ef5c88d8fda5a0135eb1d8c5d8751459e71acaffd15",
+      "id": "d2f3ac2f51650fa7460d274f6a3dd19c6f71f34f3217a3f0df26c5d5a3a6bfd6",
+      "meta": {
+        "arity": 3,
+        "expected": "PROGRAM: D | W | A",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-residual-mechanics-fresh-replay-transport-v1",
+          "transport",
+          "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00019"
+        ],
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00019"
+      },
+      "n_original_prompt_tokens": 574,
+      "n_prompt_tokens": 576,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 6,
+          "n_completion_tokens": 8,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 6,
+          "n_stage1_prompt_tokens": 576,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            414,
+            735,
+            457,
+            735,
+            357,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 471930228,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 471930228,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            414,
+            735,
+            457,
+            735,
+            357,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: D | W | A<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            414,
+            735,
+            457,
+            735,
+            357,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "207ae4245e4f5cb5c58e13ecefaadf01502d617c632fa02cb3105c186a6d1562"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "ebf359e64266cba6be02e143583a11b78931a5064b668c3a0c18dd3c636a1706",
+      "id": "f0212341232054e827c727ea8fdddf2213a48c5a457f529967a67eb5bbd46258",
+      "meta": {
+        "arity": 2,
+        "expected": "PROGRAM: M | G",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-residual-mechanics-fresh-replay-transport-v1",
+          "transport",
+          "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00020"
+        ],
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00020"
+      },
+      "n_original_prompt_tokens": 798,
+      "n_prompt_tokens": 800,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 4,
+          "n_completion_tokens": 6,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 4,
+          "n_stage1_prompt_tokens": 800,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            380,
+            735,
+            469,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 123326778,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 123326778,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            380,
+            735,
+            469,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: M | G<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            380,
+            735,
+            469,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "6207a1c5f27560dcf53ed2f4969d090ce6cd3d1258a4a1a774ea0305d1d0d427"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "40cf0bc474de6c4a0d6e016ce981da29002e80eca116964b4d2a98480d10459b",
+      "id": "0a28fa4659e3c62d53e6296ccc1659cf5f1552603639d782798eece4c8b7cc1a",
+      "meta": {
+        "arity": 3,
+        "expected": "PROGRAM: A | H | T",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-residual-mechanics-fresh-replay-transport-v1",
+          "transport",
+          "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00021"
+        ],
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00021"
+      },
+      "n_original_prompt_tokens": 494,
+      "n_prompt_tokens": 496,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 6,
+          "n_completion_tokens": 8,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 6,
+          "n_stage1_prompt_tokens": 496,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            357,
+            735,
+            462,
+            735,
+            345,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 704148217,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 704148217,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            357,
+            735,
+            462,
+            735,
+            345,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: A | H | T<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            357,
+            735,
+            462,
+            735,
+            345,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "683939fec1777a6911a32fe123cb8dc85cd868296ca8cfdd477e2858fb6cbb48"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "25e1eb981ac52248c2910ddcf54ddcbc9a16930795298ebeb3b74f4bb4b8fba3",
+      "id": "37f2b55c35633a1137b44d975c14ff77cd8f8910dc6c0b659dace256d9939416",
+      "meta": {
+        "arity": 2,
+        "expected": "PROGRAM: W | X",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-residual-mechanics-fresh-replay-transport-v1",
+          "transport",
+          "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00022"
+        ],
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00022"
+      },
+      "n_original_prompt_tokens": 774,
+      "n_prompt_tokens": 776,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 4,
+          "n_completion_tokens": 6,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 4,
+          "n_stage1_prompt_tokens": 776,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            457,
+            735,
+            1543,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 1658488093,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 1658488093,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            457,
+            735,
+            1543,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: W | X<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            457,
+            735,
+            1543,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "503583aeabdf4d0cc836a5887a0781c4e8fa860bbfd4bf6c61a856f1d369a22d"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "2669e0365fe46fbd5df861c45a914bbe4ef52cec0f7e0ef8c7dbc8093f41a6d3",
+      "id": "5b229e09a8d2c6c4a020fe871246da6b1d20d1cda611bf95eb40f9022e0e995e",
+      "meta": {
+        "arity": 3,
+        "expected": "PROGRAM: H | Q | T",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-residual-mechanics-fresh-replay-transport-v1",
+          "transport",
+          "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00023"
+        ],
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00023"
+      },
+      "n_original_prompt_tokens": 530,
+      "n_prompt_tokens": 532,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 6,
+          "n_completion_tokens": 8,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 6,
+          "n_stage1_prompt_tokens": 532,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            462,
+            735,
+            1167,
+            735,
+            345,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 1625767765,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 1625767765,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            462,
+            735,
+            1167,
+            735,
+            345,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: H | Q | T<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            462,
+            735,
+            1167,
+            735,
+            345,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "8709684db1b9ccfdcdbd1a09fa1385fa68387c0eec2bee39477eca400a72cf28"
+    }
+  ],
+  "runner_metadata": {
+    "adapter": null,
+    "counts": {
+      "completions": 24,
+      "injected_tokens": 48,
+      "logical_model_input_tokens": 15781,
+      "logical_model_tokens": 15901,
+      "logical_prompt_tokens": 15781,
+      "physical_model_tokens": 15901,
+      "physical_prompt_tokens": 15781,
+      "physical_sampled_tokens": 120,
+      "requests": 24,
+      "reused_model_tokens": 0,
+      "reused_prompt_tokens": 0,
+      "reused_sampled_tokens": 0,
+      "sampled_tokens": 120,
+      "stage1_logical_prompt_tokens": 15781,
+      "stage2_logical_prompt_tokens": 0,
+      "unique_input_prompt_tokens": 15781
+    },
+    "engine": {
+      "adapter": null,
+      "cudagraph_capture_sizes": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "enable_prefix_caching": false,
+      "enforce_eager": false,
+      "gpu_memory_utilization": 0.9,
+      "max_model_len": 4096,
+      "max_num_batched_tokens": 16384,
+      "max_num_seqs": 64
+    },
+    "engine_args": {
+      "async_scheduling": false,
+      "cudagraph_capture_sizes": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "dtype": "bfloat16",
+      "enable_prefix_caching": false,
+      "enforce_eager": false,
+      "generation_config": "vllm",
+      "gpu_memory_utilization": 0.9,
+      "language_model_only": true,
+      "logprobs_mode": "raw_logprobs",
+      "mamba_cache_mode": "none",
+      "max_cudagraph_capture_size": 64,
+      "max_logprobs": 24,
+      "max_model_len": 4096,
+      "max_num_batched_tokens": 16384,
+      "max_num_seqs": 64,
+      "model": "Qwen/Qwen3.5-4B",
+      "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+      "seed": 0,
+      "tensor_parallel_size": 1,
+      "tokenizer_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+      "trust_remote_code": true
+    },
+    "generation_mode": "winner_bound_tokenizer_eos_no_think",
+    "model": "Qwen/Qwen3.5-4B",
+    "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "registered_answer_stop_token_id": 248046,
+    "resolved_cudagraph": {
+      "cudagraph_capture_sizes": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "decode_mode": "FULL",
+      "has_full_cudagraphs": true,
+      "max_cudagraph_capture_size": 64,
+      "mixed_mode": "PIECEWISE",
+      "mode": "FULL_AND_PIECEWISE",
+      "source": "llm_engine.vllm_config.compilation_config"
+    },
+    "resolved_logprobs_mode": "raw_logprobs",
+    "resolved_sampling": {
+      "frequency_penalty": 0.0,
+      "min_p": 0.0,
+      "presence_penalty": 0.0,
+      "repetition_penalty": 1.0,
+      "temperature": 0.6,
+      "top_k": 20,
+      "top_p": 0.95
+    },
+    "rng_isolation": {
+      "caller_global_rng_state_restored": true,
+      "engine_seed": 0
+    },
+    "runner_sha256": "4ce61e646357ef64351a0b3f3558b865ca2b27e87ddd29bd4c73d309cd514320",
+    "runtime": {
+      "cuda_toolkit": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Fri_Feb_21_20:23:50_PST_2025\nCuda compilation tools, release 12.8, V12.8.93\nBuild cuda_12.8.r12.8/compiler.35583870_0",
+      "environment_lock": {
+        "path": "/workspace/small-model-experimentation/requirements-vllm.lock.txt",
+        "sha256": "64c3dde1e24f2b18a83cda3a3d84daf8701aad728e864c508854b10e3e3734c6"
+      },
+      "git_commit": "c3a42774ed8477e3f9f9d55f72bd41b42c5ac541",
+      "git_dirty": true,
+      "gpu": "NVIDIA RTX 6000 Ada Generation, 550.127.05, 49140",
+      "packages": {
+        "aiohappyeyeballs": "2.7.1",
+        "aiohttp": "3.14.1",
+        "aiosignal": "1.4.0",
+        "annotated-doc": "0.0.4",
+        "annotated-types": "0.7.0",
+        "anthropic": "0.116.0",
+        "anyio": "4.14.1",
+        "apache-tvm-ffi": "0.1.9",
+        "astor": "0.8.1",
+        "attrs": "26.1.0",
+        "blake3": "1.0.9",
+        "cachetools": "7.1.4",
+        "cbor2": "6.1.3",
+        "certifi": "2026.6.17",
+        "cffi": "2.1.0",
+        "charset-normalizer": "3.4.9",
+        "click": "8.4.2",
+        "cloudpickle": "3.1.2",
+        "compressed-tensors": "0.17.0",
+        "cryptography": "49.0.0",
+        "cuda-bindings": "12.9.7",
+        "cuda-pathfinder": "1.5.6",
+        "cuda-python": "12.9.7",
+        "cuda-tile": "1.3.0",
+        "cuda-toolkit": "12.9.1",
+        "depyf": "0.20.0",
+        "detect-installer": "0.1.0",
+        "dill": "0.4.1",
+        "diskcache": "5.6.3",
+        "distro": "1.9.0",
+        "dnspython": "2.8.0",
+        "docstring-parser": "0.18.0",
+        "einops": "0.8.2",
+        "email-validator": "2.3.0",
+        "fastapi": "0.136.3",
+        "fastapi-cli": "0.0.29",
+        "fastapi-cloud-cli": "0.22.1",
+        "fastar": "0.11.0",
+        "fastsafetensors": "0.3.3",
+        "filelock": "3.29.7",
+        "flashinfer-cubin": "0.6.12",
+        "flashinfer-python": "0.6.12",
+        "frozenlist": "1.8.0",
+        "fsspec": "2026.6.0",
+        "googleapis-common-protos": "1.75.0",
+        "grpcio": "1.82.1",
+        "h11": "0.16.0",
+        "hf-xet": "1.5.1",
+        "httpcore": "1.0.9",
+        "httptools": "0.8.0",
+        "httpx": "0.28.1",
+        "httpx-sse": "0.4.3",
+        "huggingface-hub": "1.23.0",
+        "humming-kernels": "0.1.6",
+        "idna": "3.18",
+        "ijson": "3.5.1",
+        "interegular": "0.3.3",
+        "jinja2": "3.1.6",
+        "jiter": "0.16.0",
+        "jmespath": "1.1.0",
+        "jsonschema": "4.26.0",
+        "jsonschema-specifications": "2025.9.1",
+        "lark": "1.2.2",
+        "llguidance": "1.7.6",
+        "llvmlite": "0.47.0",
+        "lm-format-enforcer": "0.11.3",
+        "loguru": "0.7.3",
+        "markdown-it-py": "4.2.0",
+        "markupsafe": "3.0.3",
+        "mcp": "1.28.1",
+        "mdurl": "0.1.2",
+        "mistral-common": "1.11.5",
+        "ml-dtypes": "0.5.4",
+        "model-hosting-container-standards": "0.1.16",
+        "mpmath": "1.3.0",
+        "msgspec": "0.21.1",
+        "multidict": "6.7.1",
+        "networkx": "3.6.1",
+        "ninja": "1.13.0",
+        "numba": "0.65.0",
+        "numpy": "2.3.5",
+        "nvidia-cublas-cu12": "12.9.1.4",
+        "nvidia-cuda-cccl-cu12": "12.9.27",
+        "nvidia-cuda-crt": "13.3.73",
+        "nvidia-cuda-cupti-cu12": "12.9.79",
+        "nvidia-cuda-nvcc": "13.2.78",
+        "nvidia-cuda-nvcc-cu12": "12.9.86",
+        "nvidia-cuda-nvrtc-cu12": "12.9.86",
+        "nvidia-cuda-runtime": "13.3.29",
+        "nvidia-cuda-runtime-cu12": "12.9.79",
+        "nvidia-cuda-tileiras": "13.2.78",
+        "nvidia-cudnn-cu12": "9.17.1.4",
+        "nvidia-cudnn-frontend": "1.26.0",
+        "nvidia-cufft-cu12": "11.4.1.4",
+        "nvidia-cufile-cu12": "1.14.1.1",
+        "nvidia-curand-cu12": "10.3.10.19",
+        "nvidia-cusolver-cu12": "11.7.5.82",
+        "nvidia-cusparse-cu12": "12.5.10.65",
+        "nvidia-cusparselt-cu12": "0.7.1",
+        "nvidia-cutlass-dsl": "4.5.2",
+        "nvidia-cutlass-dsl-libs-base": "4.5.2",
+        "nvidia-ml-py": "13.610.43",
+        "nvidia-nccl-cu12": "2.28.9",
+        "nvidia-nvjitlink-cu12": "12.9.86",
+        "nvidia-nvshmem-cu12": "3.4.5",
+        "nvidia-nvtx-cu12": "12.9.79",
+        "nvidia-nvvm": "13.2.78",
+        "openai": "2.45.0",
+        "openai-harmony": "0.0.8",
+        "opencv-python-headless": "5.0.0.93",
+        "opentelemetry-api": "1.43.0",
+        "opentelemetry-exporter-otlp": "1.43.0",
+        "opentelemetry-exporter-otlp-proto-common": "1.43.0",
+        "opentelemetry-exporter-otlp-proto-grpc": "1.43.0",
+        "opentelemetry-exporter-otlp-proto-http": "1.43.0",
+        "opentelemetry-proto": "1.43.0",
+        "opentelemetry-sdk": "1.43.0",
+        "opentelemetry-semantic-conventions": "0.64b0",
+        "opentelemetry-semantic-conventions-ai": "0.5.1",
+        "outlines-core": "0.2.14",
+        "packaging": "26.2",
+        "partial-json-parser": "0.2.1.1.post7",
+        "pillow": "12.3.0",
+        "prometheus-client": "0.25.0",
+        "prometheus-fastapi-instrumentator": "8.0.2",
+        "propcache": "0.5.2",
+        "protobuf": "7.35.1",
+        "psutil": "7.2.2",
+        "py-cpuinfo": "9.0.0",
+        "pybase64": "1.4.3",
+        "pycountry": "26.2.16",
+        "pycparser": "3.0",
+        "pydantic": "2.13.4",
+        "pydantic-core": "2.46.4",
+        "pydantic-extra-types": "2.11.1",
+        "pydantic-settings": "2.14.2",
+        "pyelftools": "0.33",
+        "pygments": "2.20.0",
+        "pyjwt": "2.13.0",
+        "python-dotenv": "1.2.2",
+        "python-json-logger": "4.1.0",
+        "python-multipart": "0.0.32",
+        "pyyaml": "6.0.3",
+        "pyzmq": "27.1.0",
+        "quack-kernels": "0.5.0",
+        "referencing": "0.37.0",
+        "regex": "2026.6.28",
+        "requests": "2.34.2",
+        "rich": "15.0.0",
+        "rich-toolkit": "0.20.1",
+        "rignore": "0.7.6",
+        "rpds-py": "2026.6.3",
+        "safetensors": "0.8.0",
+        "sentencepiece": "0.2.1",
+        "sentry-sdk": "2.64.0",
+        "setproctitle": "1.3.7",
+        "setuptools": "80.10.2",
+        "shellingham": "1.5.4",
+        "six": "1.17.0",
+        "sniffio": "1.3.1",
+        "sse-starlette": "3.4.5",
+        "starlette": "1.3.1",
+        "supervisor": "4.3.0",
+        "sympy": "1.14.0",
+        "tabulate": "0.10.0",
+        "tiktoken": "0.13.0",
+        "tilelang": "0.1.9",
+        "tokenizers": "0.22.2",
+        "tokenspeed-mla": "0.1.2",
+        "tokenspeed-triton": "3.7.10.post20260531",
+        "torch": "2.11.0+cu129",
+        "torch-c-dlpack-ext": "0.1.5",
+        "torchaudio": "2.11.0+cu129",
+        "torchvision": "0.26.0+cu129",
+        "tqdm": "4.68.4",
+        "transformers": "5.13.0",
+        "triton": "3.6.0",
+        "typer": "0.26.8",
+        "typing-extensions": "4.16.0",
+        "typing-inspection": "0.4.2",
+        "urllib3": "2.7.0",
+        "uvicorn": "0.51.0",
+        "uvloop": "0.22.1",
+        "vllm": "0.24.0+cu129",
+        "watchfiles": "1.2.0",
+        "websockets": "16.0",
+        "xgrammar": "0.2.3",
+        "yarl": "1.24.2",
+        "z3-solver": "4.15.4.0"
+      },
+      "platform": "Linux-6.8.0-52-generic-x86_64-with-glibc2.39",
+      "python": "3.12.3",
+      "python_executable": "/workspace/small-model-experimentation/.venv-vllm/bin/python",
+      "uv": "uv 0.9.0",
+      "vllm_enable_v1_multiprocessing": "0"
+    },
+    "sampling": {
+      "allow_custom_prompts": false,
+      "answer_max_tokens": 24,
+      "answer_prefix": "PROGRAM:",
+      "force_answer_seam": false,
+      "frequency_penalty": 0.0,
+      "greedy": false,
+      "logprob_token_ids": [],
+      "logprobs": null,
+      "max_tokens": 24,
+      "min_p": 0.0,
+      "n": 1,
+      "paired_answer_seed": true,
+      "presence_penalty": 0.0,
+      "prompt_logprobs": null,
+      "repetition_penalty": 1.0,
+      "run_seed": 2026140806,
+      "shuffle_thinking": false,
+      "temperature": 0.6,
+      "thinking": "off",
+      "thinking_budget": null,
+      "top_k": 20,
+      "top_p": 0.95
+    },
+    "schema_version": 6,
+    "selected_interface": "tokenizer_eos_no_think_program_slot",
+    "terminal_token_preserved_in_raw_and_text": true,
+    "termination": {
+      "hf_model_eos_token_id": 248044,
+      "vllm_tokenizer_eos_ignored": 248046
+    },
+    "think_token_ids": {
+      "close": 248069,
+      "forced_close_sequence": [
+        248069,
+        271
+      ],
+      "no_thinking_prompt_suffix": [
+        248045,
+        74455,
+        198,
+        248068,
+        271,
+        248069,
+        271
+      ],
+      "open": 248068,
+      "thinking_prompt_suffix": [
+        248045,
+        74455,
+        198,
+        248068,
+        198
+      ]
+    },
+    "timing": {
+      "generation_seconds": 1.3242913112044334,
+      "model_load_seconds": 22.963047444820404,
+      "sampled_tokens_per_second": 90.61450376115575
+    }
+  },
+  "schema_version": 1
+}

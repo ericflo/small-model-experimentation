@@ -1,0 +1,251 @@
+{
+  "benchmark_files_read": [],
+  "bundle_sha256": "be0cf680e99c68401010e4ab95ced8f6cd5d64a8dd44206b1a3b4a9d3e7ce494",
+  "decision": "SELECTED_INTERFACE_TRANSPORT_PASS",
+  "generation_authentication": {
+    "engine_preflight_authenticated": true,
+    "exact_typed_schema_authenticated": true,
+    "model_token_accounting": {
+      "completions": 24,
+      "injected_tokens": 48,
+      "logical_model_input_tokens": 15781,
+      "logical_model_tokens": 15901,
+      "logical_prompt_tokens": 15781,
+      "physical_model_tokens": 15901,
+      "physical_prompt_tokens": 15781,
+      "physical_sampled_tokens": 120,
+      "requests": 24,
+      "reused_model_tokens": 0,
+      "reused_prompt_tokens": 0,
+      "reused_sampled_tokens": 0,
+      "sampled_tokens": 120,
+      "stage1_logical_prompt_tokens": 15781,
+      "stage2_logical_prompt_tokens": 0,
+      "unique_input_prompt_tokens": 15781
+    },
+    "prompt_token_text_seed_coherence": true,
+    "registered_answer_stop_token_id": 248046,
+    "rows": 24,
+    "selected_interface": "tokenizer_eos_no_think_program_slot",
+    "terminal_geometry_authenticated": true,
+    "unrequested_logprob_diagnostics_omitted": true
+  },
+  "hidden_files_read": [],
+  "metrics": {
+    "answer_cap_contacts": 0,
+    "by_arity": {
+      "2": {
+        "answer_cap_contacts": 0,
+        "exact_echo_successes": 12,
+        "parse_successes": 12,
+        "rows": 12
+      },
+      "3": {
+        "answer_cap_contacts": 0,
+        "exact_echo_successes": 12,
+        "parse_successes": 12,
+        "rows": 12
+      }
+    },
+    "exact_echo_successes": 24,
+    "parse_successes": 24,
+    "rows": 24,
+    "scored": [
+      {
+        "answer_cap_contact": false,
+        "arity": 2,
+        "exact_echo": true,
+        "id": "84818b9a1553a5ffe48ed9384731ed9a220e996262138d5232c1fdbd98b2c8bd",
+        "parsed": true,
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00000"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 3,
+        "exact_echo": true,
+        "id": "a73469a926ee6975f8ffb5e7b7f1d0aa42418f5eff91d9972d4dba2486073858",
+        "parsed": true,
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00001"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 2,
+        "exact_echo": true,
+        "id": "e18b963a0f5133b0b9ed435eaeda0a4b87e98611c372e2b976460ebbcb81fd96",
+        "parsed": true,
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00002"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 3,
+        "exact_echo": true,
+        "id": "a58b864fd2f60b8ba3beb977122f0cc5d0014e518aa3ab1fe95b18e2661b8903",
+        "parsed": true,
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00003"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 2,
+        "exact_echo": true,
+        "id": "360bcbac2513418e6b88b7a373fda2dc32b57db3c6b596eec6cb7bf75796e81b",
+        "parsed": true,
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00004"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 3,
+        "exact_echo": true,
+        "id": "b56db87dc4f5ba0586767e7caa1883d5a4086e8c0b0cc1310268125057c8af0d",
+        "parsed": true,
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00005"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 2,
+        "exact_echo": true,
+        "id": "7c19fc43126622a5d8ad24bafd2da3274def20bee446d0b6bfb20238afe5979d",
+        "parsed": true,
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00006"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 3,
+        "exact_echo": true,
+        "id": "d56bb6ac5959633936ac813f046cfe591d8bf9bd8f4043903ddb7a04238fae35",
+        "parsed": true,
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00007"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 2,
+        "exact_echo": true,
+        "id": "8b1538f15e7464161834f170725490dba711d24267e0465319e9097a18933e29",
+        "parsed": true,
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00008"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 3,
+        "exact_echo": true,
+        "id": "cf53eea17f5a1304cb8295e17a3513469dceab0db630bc69647c01f370d581aa",
+        "parsed": true,
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00009"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 2,
+        "exact_echo": true,
+        "id": "8c59a2079b536cd2568947b5a63fea85b58d8e3b2dbf24ff7246994e1da32129",
+        "parsed": true,
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00010"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 3,
+        "exact_echo": true,
+        "id": "8268ef06c46989c1d04abace952ce945aade58279f9d300878ee8a5b825a3f0b",
+        "parsed": true,
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00011"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 2,
+        "exact_echo": true,
+        "id": "cdbe4ae58ce000a005cec0a136241ecc78220a110c616b304cb3c9ea8447057f",
+        "parsed": true,
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00012"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 3,
+        "exact_echo": true,
+        "id": "ee52b61fb6e284a26295ba6f6750ec1eff800180e0f21373675d1ab3960e579c",
+        "parsed": true,
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00013"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 2,
+        "exact_echo": true,
+        "id": "4d948077a4c066a999a84c9124167f70866a9684419c3ce7d6f98a3f7426357d",
+        "parsed": true,
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00014"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 3,
+        "exact_echo": true,
+        "id": "84d331556603bfe2c87f1aec38da0fb12563cda1f118806f09903f4760696bf2",
+        "parsed": true,
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00015"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 2,
+        "exact_echo": true,
+        "id": "96de1c7c25ede03dfe8d4994c3e1f22c4fc0a9772cfd109a24871b9d5e100489",
+        "parsed": true,
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00016"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 3,
+        "exact_echo": true,
+        "id": "a722e51d770e57c4d76498c97470c4299a9bd09a69e55593779bdf1e71d7d18d",
+        "parsed": true,
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00017"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 2,
+        "exact_echo": true,
+        "id": "fb4fad20d580f7cd4e8f77ecaca4050ad6af16d980706cf6c49b42e2234c5237",
+        "parsed": true,
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00018"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 3,
+        "exact_echo": true,
+        "id": "d2f3ac2f51650fa7460d274f6a3dd19c6f71f34f3217a3f0df26c5d5a3a6bfd6",
+        "parsed": true,
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00019"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 2,
+        "exact_echo": true,
+        "id": "f0212341232054e827c727ea8fdddf2213a48c5a457f529967a67eb5bbd46258",
+        "parsed": true,
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00020"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 3,
+        "exact_echo": true,
+        "id": "0a28fa4659e3c62d53e6296ccc1659cf5f1552603639d782798eece4c8b7cc1a",
+        "parsed": true,
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00021"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 2,
+        "exact_echo": true,
+        "id": "37f2b55c35633a1137b44d975c14ff77cd8f8910dc6c0b659dace256d9939416",
+        "parsed": true,
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00022"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 3,
+        "exact_echo": true,
+        "id": "5b229e09a8d2c6c4a020fe871246da6b1d20d1cda611bf95eb40f9022e0e995e",
+        "parsed": true,
+        "task_id": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00023"
+      }
+    ]
+  },
+  "qualifies": true,
+  "schema_version": 1,
+  "winner": "tokenizer_eos_no_think_program_slot"
+}

@@ -2,11 +2,11 @@
 
 ## Summary
 
-No residual-capability result exists yet. Fresh construction passed every
-preregistered collision and balance gate, and the locked fresh calibration
-qualified the tokenizer-EOS/no-think/`PROGRAM:` interface. Mechanics and hidden
-scoring remain sealed while the zero-call mechanics lock awaits exact-commit
-CI.
+No hidden residual-capability result exists yet. Fresh construction passed
+every preregistered collision and balance gate, calibration qualified the
+tokenizer-EOS/no-think/`PROGRAM:` interface, and all 4,056 mechanics outputs
+completed. Visible selection froze with zero deployable selections; hidden
+scoring remains sealed until this visible checkpoint passes exact-commit CI.
 
 ## Research Program Fit
 
@@ -60,6 +60,20 @@ Completed reruns authenticate tracked outputs without reading that key.
   the qualified interface and five frozen mechanics arms and records zero
   mechanics requests or sampled outputs. Mechanics stays unauthorized until
   the lock commit itself passes exact CI.
+- Mechanics lock commit `d02ebf56` passed exact CI before the sealed run.
+  Transport was 24/24 exact and parse with zero cap contacts. The complete
+  chain authenticated 4,056 outputs: 2,304 direct, 576 per suffix arm, and 24
+  transport.
+- Generation passed the ABI gate: parse was 99.78% direct, 99.13%
+  materialized, 99.83% name-only, and 98.78% shuffled, with zero cap contacts.
+  Matched direct pools used 16--17 sampled-token rows and 30--34 logical-token
+  rows per task without exhaustion.
+- No deployable arm produced a candidate that passed all eight visible rows on
+  any task. Materialized, name-only, shuffled, sampled-matched direct, and
+  logical-matched direct therefore each froze 0/24 selections. Only the
+  non-primary full 96-sample direct diagnostic selected on one task. Visible
+  selection SHA-256 is `c64dd163...c965ed`; it records no hidden or benchmark
+  read.
 
 ## Controls
 

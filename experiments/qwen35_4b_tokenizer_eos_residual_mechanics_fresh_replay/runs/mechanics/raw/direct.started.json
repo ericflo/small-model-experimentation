@@ -1,0 +1,47 @@
+{
+  "authorization_files": {
+    "transport_decision": {
+      "path": "/workspace/small-model-experimentation/experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/runs/mechanics/transport_decision.json",
+      "sha256": "0036aaab7f9af12d0fb4a94272ace7f02bb2642d6f3e9d9bcedb494a2687a65b"
+    }
+  },
+  "expected_rows": 2304,
+  "implementation_lock_path": "/workspace/small-model-experimentation/experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/runs/mechanics/implementation_lock.json",
+  "implementation_lock_sha256": "5ce13cfec79fca9faa91a3edfc7854751474774abce5f76ca3cd51732d780e2f",
+  "invocation": "direct",
+  "live_preflight_path": "/workspace/small-model-experimentation/experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/runs/mechanics/live_preflight.json",
+  "live_preflight_sha256": "8d2a693c20e783e24c490a0e98c821e00d024f87cfeb071f0fec4048975bf879",
+  "model": "Qwen/Qwen3.5-4B",
+  "predecessor_complete_sha256": "591d344eda1a035497594d1a33c20d9b3761a2ba59977f4a97578459ff39033b",
+  "prepared_path": "/workspace/small-model-experimentation/experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/runs/prepared/direct_requests.jsonl",
+  "prepared_sha256": "dd5a04f9ed93d7d67250351295c69c9510fc69495c657d0da572e4aaadcd26fe",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "runner_path": "/workspace/small-model-experimentation/experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/src/vllm_runner.py",
+  "runner_sha256": "4ce61e646357ef64351a0b3f3558b865ca2b27e87ddd29bd4c73d309cd514320",
+  "sampling": {
+    "allow_custom_prompts": false,
+    "answer_max_tokens": 24,
+    "answer_prefix": "PROGRAM:",
+    "force_answer_seam": false,
+    "frequency_penalty": 0.0,
+    "greedy": false,
+    "logprob_token_ids": [],
+    "logprobs": null,
+    "max_tokens": 24,
+    "min_p": 0.0,
+    "n": 1,
+    "paired_answer_seed": true,
+    "presence_penalty": 0.0,
+    "prompt_logprobs": null,
+    "repetition_penalty": 1.0,
+    "run_seed": 2026140803,
+    "shuffle_thinking": false,
+    "temperature": 0.6,
+    "thinking": "off",
+    "thinking_budget": null,
+    "top_k": 20,
+    "top_p": 0.95
+  },
+  "schema_version": 1,
+  "state": "STARTED"
+}
