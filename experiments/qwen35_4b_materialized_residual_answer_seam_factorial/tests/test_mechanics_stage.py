@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import dataclasses
+import copy
 import hashlib
 import json
 import sys
@@ -15,8 +16,20 @@ EXP = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(EXP / "src"))
 
 import mechanics_stage as stage  # noqa: E402
-from calibration_stage import load_calibration_inputs  # noqa: E402
-from transactions import MODEL_ID, MODEL_REVISION, sha256_file  # noqa: E402
+import transactions as tx  # noqa: E402
+from calibration_stage import (  # noqa: E402
+    authenticate_full_generation_bundle,
+    load_calibration_inputs,
+)
+from transactions import (  # noqa: E402
+    MODEL_ID,
+    MODEL_REVISION,
+    artifact_paths,
+    json_bytes,
+    read_canonical,
+    sha256_file,
+)
+from vllm_runner import SamplingConfig, _stable_seed  # noqa: E402
 
 
 def _complete_calibration_decision(inputs):
@@ -66,9 +79,53 @@ def _complete_calibration_decision(inputs):
     }
 
 
+class FakeTokenizer:
+    def apply_chat_template(
+        self, messages, *, tokenize, add_generation_prompt, enable_thinking
+    ):
+        if tokenize or not add_generation_prompt:
+            raise AssertionError("unexpected fake chat-template call")
+        return ("THINK:" if enable_thinking else "OFF:") + messages[0]["content"]
+
+    def encode(self, text, *, add_special_tokens=False):
+        if add_special_tokens:
+            raise AssertionError("fake tokenizer forbids special-token injection")
+        if text == "</think>\n\n":
+            return [248069, 271]
+        if text == "PROGRAM:":
+            return [78041, 25]
+        return [1000 + ord(character) for character in text]
+
+    def decode(self, token_ids, *, skip_special_tokens=False):
+        if skip_special_tokens:
+            raise AssertionError("fake tokenizer preserves all tokens")
+        pieces = []
+        for token_id in token_ids:
+            if token_id == 248069:
+                pieces.append("</think>")
+            elif token_id == 271:
+                pieces.append("\n\n")
+            elif token_id == 78041:
+                pieces.append("PROGRAM")
+            elif token_id == 25:
+                pieces.append(":")
+            elif token_id == 248044:
+                pieces.append("<|endoftext|>")
+            else:
+                pieces.append(chr(token_id - 1000))
+        return "".join(pieces)
+
+
+def _token_ids_sha256(token_ids: list[int]) -> str:
+    return hashlib.sha256(
+        b"".join(token_id.to_bytes(4, "big") for token_id in token_ids)
+    ).hexdigest()
+
+
 class FakeRunner:
-    def __init__(self, runner_path: Path):
+    def __init__(self, runner_path: Path, tokenizer: FakeTokenizer):
         self.runner_path = runner_path
+        self.tokenizer = tokenizer
         self.calls = 0
 
     def generate(self, records, sampling):
@@ -76,31 +133,105 @@ class FakeRunner:
         rows = []
         for record in records:
             expected = record["meta"]["expected"]
+            rendered = self.tokenizer.apply_chat_template(
+                record["messages"],
+                tokenize=False,
+                add_generation_prompt=True,
+                enable_thinking=True,
+            )
+            original = self.tokenizer.encode(rendered, add_special_tokens=False)
+            stage1 = self.tokenizer.encode("reason", add_special_tokens=False)
+            stage2 = self.tokenizer.encode(expected, add_special_tokens=False)
+            close = [248069, 271]
+            final_ids = stage1 + close + stage2
+            thought_seed = _stable_seed(
+                sampling.run_seed, record["id"], -1, "thought"
+            )
+            answer_seed = _stable_seed(
+                sampling.run_seed, record["id"], 0, "answer"
+            )
             rows.append(
                 {
                     "id": record["id"],
                     "meta": record["meta"],
+                    "prompt_sha256": hashlib.sha256(rendered.encode()).hexdigest(),
+                    "effective_prompt_sha256": _token_ids_sha256(original),
+                    "n_prompt_tokens": len(original),
+                    "n_original_prompt_tokens": len(original),
+                    "prompt_channel": "thinking",
+                    "answer_prefix_token_ids": [],
+                    "prompt_logprobs": None,
                     "outputs": [
                         {
-                            "text": "reason</think>\n\n" + expected,
+                            "sample_index": 0,
+                            "stage1_parent_seed": thought_seed,
+                            "seed_stage1": thought_seed,
+                            "seed_stage2": answer_seed,
                             "seed_domain_stage1": "thought",
-                            "n_answer_tokens": 5,
-                            "n_thinking_tokens": 2,
-                            "n_sampled_tokens": 7,
-                            "n_stage1_prompt_tokens": 10,
-                            "n_stage2_prompt_tokens": 14,
+                            "seed_domain_stage2": "answer",
+                            "text": self.tokenizer.decode(
+                                final_ids, skip_special_tokens=False
+                            ),
+                            "token_ids": final_ids,
+                            "stage1_token_ids": stage1,
+                            "retained_thinking_token_ids": stage1,
+                            "answer_prefix_token_ids": [],
+                            "injected_token_ids": close,
+                            "stage2_token_ids": stage2,
+                            "n_answer_tokens": len(stage2),
+                            "n_thinking_tokens": len(stage1),
+                            "n_sampled_tokens": len(stage1) + len(stage2),
+                            "n_injected_tokens": len(close),
+                            "n_completion_tokens": len(final_ids),
+                            "n_terminal_tokens_trimmed": 0,
+                            "n_stage1_prompt_tokens": len(original),
+                            "n_stage2_prompt_tokens": len(original)
+                            + len(stage1)
+                            + len(close),
+                            "thinking_closed": True,
+                            "forced_close": True,
                             "finish_reason": "stop",
+                            "stop_reason": None,
                             "stage1_finish_reason": "stop",
+                            "stage1_stop_reason": None,
+                            "truncated": False,
                         }
                     ],
                 }
             )
+        outputs = [row["outputs"][0] for row in rows]
+        stage1_prompt = sum(row["n_stage1_prompt_tokens"] for row in outputs)
+        stage2_prompt = sum(row["n_stage2_prompt_tokens"] for row in outputs)
+        logical_prompt = stage1_prompt + stage2_prompt
+        sampled = sum(row["n_sampled_tokens"] for row in outputs)
         return rows, {
+            "generation_mode": "full_generation",
             "model": MODEL_ID,
             "model_revision": MODEL_REVISION,
             "runner_sha256": sha256_file(self.runner_path),
             "sampling": dataclasses.asdict(sampling),
-            "counts": {"requests": len(rows), "completions": len(rows)},
+            "counts": {
+                "requests": len(rows),
+                "completions": len(rows),
+                "unique_input_prompt_tokens": sum(
+                    row["n_prompt_tokens"] for row in rows
+                ),
+                "stage1_logical_prompt_tokens": stage1_prompt,
+                "stage2_logical_prompt_tokens": stage2_prompt,
+                "logical_model_input_tokens": logical_prompt,
+                "logical_prompt_tokens": logical_prompt,
+                "physical_prompt_tokens": logical_prompt,
+                "reused_prompt_tokens": 0,
+                "sampled_tokens": sampled,
+                "physical_sampled_tokens": sampled,
+                "reused_sampled_tokens": 0,
+                "logical_model_tokens": logical_prompt + sampled,
+                "physical_model_tokens": logical_prompt + sampled,
+                "reused_model_tokens": 0,
+                "injected_tokens": sum(
+                    row["n_injected_tokens"] for row in outputs
+                ),
+            },
         }
 
 
@@ -146,7 +277,8 @@ class MechanicsStageTests(unittest.TestCase):
             preflight.write_text("{}\n")
             runner_path.write_text("# exact fake runner\n")
             raw = root / "raw"
-            fake = FakeRunner(runner_path)
+            tokenizer = FakeTokenizer()
+            fake = FakeRunner(runner_path, tokenizer)
             with mock.patch.dict(stage.PREPARED_PATHS, {"transport": prepared}):
                 receipt = stage.run_transport_transaction(
                     decision=self.decision,
@@ -164,7 +296,56 @@ class MechanicsStageTests(unittest.TestCase):
                     mechanics_lock_path=lock,
                     live_preflight_path=preflight,
                     runner_path=runner_path,
+                    tokenizer=tokenizer,
                 )
+                original_bundle = read_canonical(
+                    artifact_paths(raw, "transport")["bundle"]
+                )
+                sampling = SamplingConfig(
+                    **stage.mechanics_sampling_plan(
+                        self.decision, self.inputs
+                    )["transport"]
+                )
+                for label, mutate in (
+                    (
+                        "prompt",
+                        lambda bundle: bundle["rows"][0].__setitem__(
+                            "prompt_channel", "off"
+                        ),
+                    ),
+                    (
+                        "seed",
+                        lambda bundle: bundle["rows"][0]["outputs"][0].__setitem__(
+                            "seed_stage2",
+                            bundle["rows"][0]["outputs"][0]["seed_stage2"] + 1,
+                        ),
+                    ),
+                    (
+                        "text",
+                        lambda bundle: bundle["rows"][0]["outputs"][0].__setitem__(
+                            "text", "PROGRAM: A | B"
+                        ),
+                    ),
+                    (
+                        "cost",
+                        lambda bundle: bundle["rows"][0]["outputs"][0].__setitem__(
+                            "n_sampled_tokens",
+                            bundle["rows"][0]["outputs"][0]["n_sampled_tokens"]
+                            + 1,
+                        ),
+                    ),
+                ):
+                    with self.subTest(forgery=label):
+                        forged = copy.deepcopy(original_bundle)
+                        mutate(forged)
+                        with self.assertRaises(RuntimeError):
+                            authenticate_full_generation_bundle(
+                                records=rows,
+                                bundle=forged,
+                                sampling=sampling,
+                                tokenizer=tokenizer,
+                                tokenizer_receipt=self.inputs.tokenizer_receipt,
+                            )
                 stage.run_transport_transaction(
                     decision=self.decision,
                     inputs=self.inputs,
@@ -174,6 +355,35 @@ class MechanicsStageTests(unittest.TestCase):
                     live_preflight_path=preflight,
                     runner_path=runner_path,
                 )
+                paths = artifact_paths(raw, "transport")
+                forged = copy.deepcopy(original_bundle)
+                forged["rows"][0]["prompt_channel"] = "off"
+                paths["bundle"].write_bytes(json_bytes(forged))
+                generated = tx._generated_receipt_value(
+                    invocation="transport",
+                    started_path=paths["started"],
+                    bundle_path=paths["bundle"],
+                    bundle=forged,
+                )
+                paths["generated"].write_bytes(json_bytes(generated))
+                complete = tx._complete_value(
+                    invocation="transport",
+                    started_path=paths["started"],
+                    bundle_path=paths["bundle"],
+                    generated_path=paths["generated"],
+                    predecessor_complete_sha256=None,
+                )
+                paths["complete"].write_bytes(json_bytes(complete))
+                with self.assertRaisesRegex(RuntimeError, "semantic fields changed"):
+                    stage.analyze_transport(
+                        decision=self.decision,
+                        inputs=self.inputs,
+                        raw_dir=raw,
+                        mechanics_lock_path=lock,
+                        live_preflight_path=preflight,
+                        runner_path=runner_path,
+                        tokenizer=tokenizer,
+                    )
             self.assertEqual(receipt["registered_invocations"], ["transport"])
             self.assertEqual(decision["decision"], "SELECTED_INTERFACE_TRANSPORT_PASS")
             self.assertEqual(decision["metrics"]["exact_echo_successes"], 24)
@@ -237,6 +447,7 @@ class MechanicsStageTests(unittest.TestCase):
                     "winner": "think512_freeform",
                     "generation_abi_pass": True,
                     "generation_metrics": {},
+                    "generation_authentication": {},
                     "selector_uses_hidden": False,
                     "tasks": visible_tasks,
                     "transaction_chain": {},

@@ -32,6 +32,7 @@ from transactions import (  # noqa: E402
     artifact_paths,
     sha256_file,
 )
+from vllm_runner import _stable_seed  # noqa: E402
 
 
 class _FakeTokenizer:
@@ -170,7 +171,7 @@ class _FakeCalibrationRunner:
         for index, record in enumerate(records):
             stage1 = self.tokenizer.encode("reason", add_special_tokens=False)
             prompt, original = self._prompt_fields(record, thinking=True, prefix=[])
-            seed = 2000 + index
+            seed = _stable_seed(sampling.run_seed, record["id"], -1, "thought")
             rows.append(
                 {
                     "id": record["id"],
@@ -250,7 +251,9 @@ class _FakeCalibrationRunner:
                                 "retained_thinking_token_ids"
                             ],
                             "seed_stage1": source["seed_stage1"],
-                            "seed_stage2": 3000 + index,
+                            "seed_stage2": _stable_seed(
+                                sampling.run_seed, record["id"], 0, "answer"
+                            ),
                             "seed_domain_stage1": "thought",
                             "seed_domain_stage2": "answer",
                             "answer_prefix_token_ids": prefix,
@@ -303,7 +306,7 @@ class _FakeCalibrationRunner:
             answer = expected[len("PROGRAM:") :] if prefix else expected
             stage1 = self.tokenizer.encode(answer, add_special_tokens=False)
             final_ids = prefix + stage1
-            seed = 3000 + index
+            seed = _stable_seed(sampling.run_seed, record["id"], 0, "answer")
             rows.append(
                 {
                     "id": record["id"],
@@ -445,6 +448,22 @@ class CalibrationStageTests(unittest.TestCase):
         output["text"] = "junk</think>\n\n" + inputs.records[0]["meta"]["expected"]
         with self.assertRaisesRegex(RuntimeError, "semantic fields changed"):
             _authenticate_factorial_pairing(forged, inputs, tokenizer)
+
+        forged_seed = json.loads(json.dumps(bundles))
+        source = forged_seed["calibration_thoughts"]["rows"][0]["outputs"][0]
+        source["stage1_parent_seed"] += 1
+        source["seed_stage1"] += 1
+        for arm in ("think512_freeform", "think512_program_slot"):
+            output = forged_seed[arm]["rows"][0]["outputs"][0]
+            output["stage1_parent_seed"] += 1
+            output["seed_stage1"] += 1
+            output["seed_stage2"] += 1
+        for arm in ("no_think_freeform", "no_think_program_slot"):
+            output = forged_seed[arm]["rows"][0]["outputs"][0]
+            output["stage1_parent_seed"] += 1
+            output["seed_stage1"] += 1
+        with self.assertRaisesRegex(RuntimeError, "stable seed changed"):
+            _authenticate_factorial_pairing(forged_seed, inputs, tokenizer)
 
         restarted = _FakeCalibrationRunner(
             runner_path, tokenizer, fail_on_call=True

@@ -99,8 +99,8 @@ did not yet define a falsifiable or transaction-safe experiment.
    requires its later winner-bound lock and committed visible-selection
    authorization receipts.
 6. **Still blocking:** re-run independent implementation review over the exact
-   final pushed hashes. The second review at `88c3c9e2` remained HOLD and its
-   seven follow-up findings are preserved in
+   final pushed hashes. The third review at `263046c0` remained HOLD and its
+   two follow-up authentication findings are preserved in
    `reports/calibration_implementation_review.md`.
 
 Verdict: no live model or GPU request is authorized. Proceed only with the

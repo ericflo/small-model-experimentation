@@ -79,3 +79,30 @@ deterministic paired inference plus the frozen 13,824-program CPU ceiling.
 These are again implementation claims, not a PASS. The HOLD remains until an
 independent adversary reviews the final pushed commit and explicitly releases
 live calls.
+
+## Third review at `263046c0`
+
+The exact pushed commit and both green workflows were independently verified.
+The reviewer confirmed every earlier HOLD item materially repaired, then found
+two further decisive gaps:
+
+1. transport and mechanics generation authenticated transaction identity but
+   did not reconstruct prompt, seed, token/text, seam, or cost semantics before
+   using outputs for a gate, selector, or matched-compute plan; and
+2. calibration required seed equality across arms but did not recompute the
+   registered numeric seed from run seed, request ID, sample index, and domain.
+
+A synthetic self-consistently receipted transport bundle with unrelated prompt
+semantics passed the generic chain and scored 24/24. The committed calibration
+fake also demonstrated that arbitrary `2000+index`/`3000+index` seeds passed.
+The resulting verdict was `HOLD_RELEASE_LIVE_CALLS`.
+
+The current model-free remediation runs every transport and generation bundle
+through tokenizer-based reconstruction before any scoring, cost plan, or
+selection. It exact-checks rendered/effective prompts, prompt channel, stable
+numeric seeds, seam/prefix/injected tokens, EOS trimming, token/text agreement,
+all token counts, generation mode, and complete summary counters. Calibration
+now recomputes the same stable seeds. Regressions reject prompt, seed, text, and
+cost forgeries, including a rehashed transport chain that generic transaction
+authentication alone accepts. This remediation still requires a new exact-hash
+review; the HOLD remains.

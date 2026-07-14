@@ -23,7 +23,7 @@ from transactions import (
     run_transaction,
     sha256_file,
 )
-from vllm_runner import EngineConfig, SamplingConfig
+from vllm_runner import EngineConfig, SamplingConfig, _stable_seed
 
 
 EXP = Path(__file__).resolve().parents[1]
@@ -662,6 +662,178 @@ def _authenticate_arm_output(
     )
 
 
+def authenticate_full_generation_bundle(
+    *,
+    records: Sequence[Mapping[str, Any]],
+    bundle: Mapping[str, Any],
+    sampling: SamplingConfig,
+    tokenizer: Any,
+    tokenizer_receipt: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Authenticate prompt, seed, token, text, and cost semantics for one batch."""
+    sampling.validate()
+    if sampling.n != 1 or sampling.thinking not in {"budget", "off"}:
+        raise RuntimeError("full-generation authentication supports frozen n=1 policies")
+    thinking = sampling.thinking == "budget"
+    if thinking != sampling.force_answer_seam:
+        raise RuntimeError("full-generation reasoning/seam policy changed")
+    prefix_ids = list(
+        tokenizer.encode(sampling.answer_prefix, add_special_tokens=False)
+    )
+    expected_prefix = (
+        tokenizer_receipt["answer_prefix"]["token_ids"]
+        if sampling.answer_prefix
+        else []
+    )
+    close_ids = tokenizer_receipt["think_token_ids"]["forced_close_sequence"]
+    eos_id = int(tokenizer_receipt["termination"]["hf_model_eos_token_id"])
+    if (
+        prefix_ids != expected_prefix
+        or tokenizer.encode("</think>\n\n", add_special_tokens=False) != close_ids
+    ):
+        raise RuntimeError("full-generation tokenizer boundary changed")
+    rows = bundle.get("rows")
+    metadata = bundle.get("runner_metadata")
+    if (
+        not isinstance(rows, list)
+        or not isinstance(metadata, dict)
+        or metadata.get("generation_mode") != "full_generation"
+        or [row.get("id") for row in rows] != [record["id"] for record in records]
+        or [row.get("meta") for row in rows] != [record["meta"] for record in records]
+    ):
+        raise RuntimeError("full-generation batch identity changed")
+    for index, (record, row) in enumerate(zip(records, rows, strict=True)):
+        expected_prompt, original_prompt_ids = _expected_prompt(
+            tokenizer=tokenizer,
+            record=record,
+            thinking=thinking,
+            prefix_ids=prefix_ids,
+        )
+        _require_fields(row, expected_prompt, f"full-generation prompt row {index}")
+        outputs = row.get("outputs")
+        if not isinstance(outputs, list) or len(outputs) != 1:
+            raise RuntimeError("full-generation output geometry changed")
+        output = outputs[0]
+        if not isinstance(output, Mapping):
+            raise RuntimeError("full-generation output schema changed")
+        if thinking:
+            stage1 = _ids(
+                output.get("stage1_token_ids"), label="full-generation stage one"
+            )
+            stage1_trimmed = _trim_model_eos(stage1, eos_id)
+            close_id = int(close_ids[0])
+            close_index = (
+                stage1_trimmed.index(close_id)
+                if close_id in stage1_trimmed
+                else None
+            )
+            retained = (
+                stage1_trimmed[:close_index]
+                if close_index is not None
+                else stage1_trimmed
+            )
+            stage2 = _ids(
+                output.get("stage2_token_ids"), label="full-generation stage two"
+            )
+            stage2_trimmed = _trim_model_eos(stage2, eos_id)
+            final_ids = retained + list(close_ids) + prefix_ids + stage2_trimmed
+            parent_seed = _stable_seed(
+                sampling.run_seed, record["id"], -1, "thought"
+            )
+            answer_seed = _stable_seed(
+                sampling.run_seed, record["id"], 0, "answer"
+            )
+            _require_fields(
+                output,
+                {
+                    "sample_index": 0,
+                    "stage1_parent_seed": parent_seed,
+                    "seed_stage1": parent_seed,
+                    "seed_stage2": answer_seed,
+                    "seed_domain_stage1": "thought",
+                    "seed_domain_stage2": "answer",
+                    "text": tokenizer.decode(final_ids, skip_special_tokens=False),
+                    "token_ids": final_ids,
+                    "retained_thinking_token_ids": retained,
+                    "answer_prefix_token_ids": prefix_ids,
+                    "injected_token_ids": list(close_ids) + prefix_ids,
+                    "n_thinking_tokens": len(retained),
+                    "n_answer_tokens": len(stage2_trimmed),
+                    "n_sampled_tokens": len(stage1) + len(stage2),
+                    "n_injected_tokens": len(close_ids) + len(prefix_ids),
+                    "n_completion_tokens": len(final_ids),
+                    "n_terminal_tokens_trimmed": len(stage1)
+                    - len(stage1_trimmed)
+                    + len(stage2)
+                    - len(stage2_trimmed),
+                    "n_stage1_prompt_tokens": len(original_prompt_ids),
+                    "n_stage2_prompt_tokens": len(original_prompt_ids)
+                    + len(retained)
+                    + len(close_ids)
+                    + len(prefix_ids),
+                    "thinking_closed": True,
+                    "forced_close": True,
+                    "truncated": output.get("finish_reason") == "length",
+                },
+                f"full-generation thinking output {index}",
+            )
+        else:
+            parent_seed = _stable_seed(
+                sampling.run_seed, record["id"], 0, "answer"
+            )
+            _authenticate_arm_output(
+                arm="no_think_registered",
+                output=output,
+                source={},
+                tokenizer=tokenizer,
+                original_prompt_ids=original_prompt_ids,
+                prefix_ids=prefix_ids,
+                close_ids=close_ids,
+                eos_id=eos_id,
+            )
+            _require_fields(
+                output,
+                {
+                    "stage1_parent_seed": parent_seed,
+                    "seed_stage1": parent_seed,
+                },
+                f"full-generation no-think seed {index}",
+            )
+    outputs = [row["outputs"][0] for row in rows]
+    sampled = sum(output["n_sampled_tokens"] for output in outputs)
+    stage1_prompt = sum(output["n_stage1_prompt_tokens"] for output in outputs)
+    stage2_prompt = sum(output["n_stage2_prompt_tokens"] for output in outputs)
+    logical_prompt = stage1_prompt + stage2_prompt
+    injected = sum(output["n_injected_tokens"] for output in outputs)
+    unique_prompt = sum(row["n_prompt_tokens"] for row in rows)
+    expected_counts = {
+        "requests": len(rows),
+        "completions": len(rows),
+        "unique_input_prompt_tokens": unique_prompt,
+        "stage1_logical_prompt_tokens": stage1_prompt,
+        "stage2_logical_prompt_tokens": stage2_prompt,
+        "logical_model_input_tokens": logical_prompt,
+        "logical_prompt_tokens": logical_prompt,
+        "physical_prompt_tokens": logical_prompt,
+        "reused_prompt_tokens": 0,
+        "sampled_tokens": sampled,
+        "physical_sampled_tokens": sampled,
+        "reused_sampled_tokens": 0,
+        "logical_model_tokens": logical_prompt + sampled,
+        "physical_model_tokens": logical_prompt + sampled,
+        "reused_model_tokens": 0,
+        "injected_tokens": injected,
+    }
+    if metadata.get("counts") != expected_counts:
+        raise RuntimeError("full-generation model-token accounting changed")
+    return {
+        "rows": len(rows),
+        "thinking_expected": thinking,
+        "prompt_token_text_seed_coherence": True,
+        "model_token_accounting": expected_counts,
+    }
+
+
 def _authenticate_factorial_pairing(
     bundles: Mapping[str, dict[str, Any]], inputs: CalibrationInputs, tokenizer: Any
 ) -> dict[str, Any]:
@@ -670,6 +842,7 @@ def _authenticate_factorial_pairing(
     if [row.get("id") for row in thought_rows] != ids:
         raise RuntimeError("shared-thought row identity/order changed")
     thought_outputs = [row["outputs"][0] for row in thought_rows]
+    plan = sampling_configs(inputs)
     prefix_ids = inputs.tokenizer_receipt["answer_prefix"]["token_ids"]
     close_ids = inputs.tokenizer_receipt["think_token_ids"]["forced_close_sequence"]
     eos_id = inputs.tokenizer_receipt["termination"]["hf_model_eos_token_id"]
@@ -704,6 +877,17 @@ def _authenticate_factorial_pairing(
             prompt_ids=prompt_ids,
             eos_id=eos_id,
         )
+        expected_thought_seed = _stable_seed(
+            plan["calibration_thoughts"].run_seed,
+            record["id"],
+            -1,
+            "thought",
+        )
+        if (
+            output.get("stage1_parent_seed") != expected_thought_seed
+            or output.get("seed_stage1") != expected_thought_seed
+        ):
+            raise RuntimeError("shared thought stable seed changed")
     for arm, rows in arms.items():
         thinking = arm.startswith("think512_")
         arm_prefix = prefix_ids if arm.endswith("program_slot") else []
@@ -727,6 +911,34 @@ def _authenticate_factorial_pairing(
                 close_ids=close_ids,
                 eos_id=eos_id,
             )
+            expected_answer_seed = _stable_seed(
+                plan[arm].run_seed,
+                record["id"],
+                0,
+                "answer",
+            )
+            arm_output = row["outputs"][0]
+            if thinking:
+                expected_thought_seed = _stable_seed(
+                    plan[arm].run_seed,
+                    record["id"],
+                    -1,
+                    "thought",
+                )
+                valid_seeds = (
+                    arm_output.get("stage1_parent_seed")
+                    == expected_thought_seed
+                    and arm_output.get("seed_stage1") == expected_thought_seed
+                    and arm_output.get("seed_stage2") == expected_answer_seed
+                )
+            else:
+                valid_seeds = (
+                    arm_output.get("stage1_parent_seed") == expected_answer_seed
+                    and arm_output.get("seed_stage1") == expected_answer_seed
+                    and arm_output.get("seed_stage2") is None
+                )
+            if not valid_seeds:
+                raise RuntimeError(f"factorial stable seed changed: {arm}")
     for index, thought in enumerate(thought_outputs):
         outputs = {name: arms[name][index]["outputs"][0] for name in INTERFACE_ARMS}
         for name in ("think512_freeform", "think512_program_slot"):

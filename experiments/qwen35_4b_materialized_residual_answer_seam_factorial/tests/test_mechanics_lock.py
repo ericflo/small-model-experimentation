@@ -160,6 +160,8 @@ class MechanicsLockTests(unittest.TestCase):
             ), mock.patch.object(
                 mechanics_lock, "CALIBRATION_DECISION", calibration_decision
             ), mock.patch.object(
+                mechanics_lock, "load_analysis_tokenizer", return_value=object()
+            ), mock.patch.object(
                 mechanics_lock, "analyze_visible", return_value=forged_reanalysis
             ):
                 with self.assertRaisesRegex(RuntimeError, "exact visible analysis"):

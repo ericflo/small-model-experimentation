@@ -10,7 +10,11 @@ from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
 
-from calibration_stage import CalibrationInputs, sampling_configs
+from calibration_stage import (
+    CalibrationInputs,
+    authenticate_full_generation_bundle,
+    sampling_configs,
+)
 from interface_analysis import answer_cap_contact, choose_interface, score_interface_rows
 from plans import freeze_taskwise_matches
 from protocol import hidden_correct, parse_program, select_visible
@@ -29,6 +33,7 @@ from transactions import (
     read_canonical,
     run_transaction,
 )
+from vllm_runner import SamplingConfig
 
 
 EXP = Path(__file__).resolve().parents[1]
@@ -314,6 +319,7 @@ def analyze_transport(
     live_preflight_path: Path = DEFAULT_MECHANICS_PREFLIGHT,
     runner_path: Path = DEFAULT_RUNNER_PATH,
     transport_decision_path: Path = TRANSPORT_DECISION,
+    tokenizer: Any,
 ) -> dict[str, Any]:
     selected_interface(decision, inputs)
     authenticate_registered_complete_prefix(
@@ -330,6 +336,13 @@ def analyze_transport(
         through="transport",
     )
     bundle = read_canonical(artifact_paths(raw_dir, "transport")["bundle"])
+    semantic_authentication = authenticate_full_generation_bundle(
+        records=read_jsonl(PREPARED_PATHS["transport"]),
+        bundle=bundle,
+        sampling=SamplingConfig(**mechanics_sampling_plan(decision, inputs)["transport"]),
+        tokenizer=tokenizer,
+        tokenizer_receipt=inputs.tokenizer_receipt,
+    )
     interface = inputs.config["interface"]
     metrics = score_interface_rows(
         bundle["rows"],
@@ -366,6 +379,7 @@ def analyze_transport(
         "qualifies": qualifies,
         "metrics": metrics,
         "bundle_sha256": canonical_sha256(bundle),
+        "generation_authentication": semantic_authentication,
         "hidden_files_read": [],
         "benchmark_files_read": [],
     }
@@ -380,6 +394,7 @@ def authenticate_transport_decision(
     live_preflight_path: Path = DEFAULT_MECHANICS_PREFLIGHT,
     runner_path: Path = DEFAULT_RUNNER_PATH,
     transport_decision_path: Path = TRANSPORT_DECISION,
+    tokenizer: Any,
 ) -> dict[str, Any]:
     observed = read_canonical(transport_decision_path)
     expected = analyze_transport(
@@ -390,6 +405,7 @@ def authenticate_transport_decision(
         live_preflight_path=live_preflight_path,
         runner_path=runner_path,
         transport_decision_path=transport_decision_path,
+        tokenizer=tokenizer,
     )
     if observed != expected:
         raise RuntimeError("recorded transport decision differs from exact analysis")
@@ -412,6 +428,7 @@ def run_generation_transactions(
     live_preflight_path: Path = DEFAULT_MECHANICS_PREFLIGHT,
     runner_path: Path = DEFAULT_RUNNER_PATH,
     transport_decision_path: Path = TRANSPORT_DECISION,
+    tokenizer: Any,
 ) -> dict[str, Any]:
     authenticated_transport = authenticate_transport_decision(
         decision=decision,
@@ -421,6 +438,7 @@ def run_generation_transactions(
         live_preflight_path=live_preflight_path,
         runner_path=runner_path,
         transport_decision_path=transport_decision_path,
+        tokenizer=tokenizer,
     )
     if dict(transport) != authenticated_transport:
         raise RuntimeError("caller transport differs from authenticated decision")
@@ -483,9 +501,9 @@ def _load_public(path: Path = PUBLIC_PATH) -> list[dict[str, Any]]:
     return rows
 
 
-def _bundle_rows(raw_dir: Path) -> dict[str, list[dict[str, Any]]]:
+def _bundles(raw_dir: Path) -> dict[str, dict[str, Any]]:
     return {
-        name: read_canonical(artifact_paths(raw_dir, name)["bundle"])["rows"]
+        name: read_canonical(artifact_paths(raw_dir, name)["bundle"])
         for name in GENERATION_INVOCATIONS
     }
 
@@ -557,6 +575,7 @@ def analyze_visible(
     live_preflight_path: Path = DEFAULT_MECHANICS_PREFLIGHT,
     runner_path: Path = DEFAULT_RUNNER_PATH,
     transport_decision_path: Path = TRANSPORT_DECISION,
+    tokenizer: Any,
 ) -> dict[str, Any]:
     winner = selected_interface(decision, inputs)
     authenticate_transport_decision(
@@ -567,6 +586,7 @@ def analyze_visible(
         live_preflight_path=live_preflight_path,
         runner_path=runner_path,
         transport_decision_path=transport_decision_path,
+        tokenizer=tokenizer,
     )
     chain = authenticate_registered_complete_chain(
         raw_dir=raw_dir,
@@ -582,7 +602,19 @@ def analyze_visible(
     )
     public = _load_public(public_path)
     public_by_id = {row["task_id"]: row for row in public}
-    rows = _bundle_rows(raw_dir)
+    bundles = _bundles(raw_dir)
+    sampling_plan = mechanics_sampling_plan(decision, inputs)
+    generation_authentication = {
+        name: authenticate_full_generation_bundle(
+            records=read_jsonl(PREPARED_PATHS[name]),
+            bundle=bundle,
+            sampling=SamplingConfig(**sampling_plan[name]),
+            tokenizer=tokenizer,
+            tokenizer_receipt=inputs.tokenizer_receipt,
+        )
+        for name, bundle in bundles.items()
+    }
+    rows = {name: bundle["rows"] for name, bundle in bundles.items()}
     thinking = winner.startswith("think512_")
     by_task: dict[str, dict[str, list[dict[str, Any]]]] = {
         task_id: defaultdict(list) for task_id in public_by_id
@@ -679,6 +711,7 @@ def analyze_visible(
         "winner": winner,
         "generation_abi_pass": abi_pass,
         "generation_metrics": metrics,
+        "generation_authentication": generation_authentication,
         "tasks": tasks,
         "transaction_chain": chain,
         "public_sha256": hashlib.sha256(public_path.read_bytes()).hexdigest(),
@@ -714,6 +747,7 @@ def score_hidden(
         "winner",
         "generation_abi_pass",
         "generation_metrics",
+        "generation_authentication",
         "tasks",
         "transaction_chain",
         "public_sha256",

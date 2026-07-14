@@ -89,7 +89,7 @@ authenticated parent instances, exact live-sibling strata, 4,104 prepared rows,
 model calls, and empty forbidden-read receipts. Append-only real-tokenizer
 receipts also authenticate all answer compositions, context fit, zero rendered
 parent overlap, and the current shared-thought/physical-compute runner.
-Seventy-six model-free
+Eighty-two model-free
 tests pass, including adversarial durable transaction/recovery mutations and
 exact persisted-token thought forking. A calibration-only loader is byte-
 identical with every mechanics artifact absent, and a fake-runner integration

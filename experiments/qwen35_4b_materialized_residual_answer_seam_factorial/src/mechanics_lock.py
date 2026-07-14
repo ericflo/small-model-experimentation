@@ -375,8 +375,11 @@ def authorize_hidden_read(path: Path = VISIBLE_SELECTION) -> dict[str, Any]:
         raise RuntimeError("hidden scoring requires a visible selection receipt")
     visible = read_canonical(path)
     inputs = load_calibration_inputs()
+    tokenizer = load_analysis_tokenizer(inputs)
     decision = read_canonical(CALIBRATION_DECISION)
-    expected_visible = analyze_visible(decision=decision, inputs=inputs)
+    expected_visible = analyze_visible(
+        decision=decision, inputs=inputs, tokenizer=tokenizer
+    )
     if visible != expected_visible:
         raise RuntimeError("visible receipt differs from exact visible analysis")
     if (

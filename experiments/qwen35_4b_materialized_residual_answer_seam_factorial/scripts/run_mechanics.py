@@ -248,7 +248,11 @@ _bootstrap_verify_before_local_imports()
 sys.path.insert(0, str(SRC))
 
 from calibration_lock import DECISION as CALIBRATION_DECISION  # noqa: E402
-from calibration_stage import engine_config, load_calibration_inputs  # noqa: E402
+from calibration_stage import (  # noqa: E402
+    engine_config,
+    load_analysis_tokenizer,
+    load_calibration_inputs,
+)
 from mechanics_lock import (  # noqa: E402
     MECHANICS_LOCK,
     MECHANICS_PREFLIGHT,
@@ -307,6 +311,7 @@ def _write_or_verify(path: Path, value: dict[str, Any]) -> dict[str, Any]:
 
 def visible_analysis() -> dict[str, Any]:
     inputs = load_calibration_inputs()
+    tokenizer = load_analysis_tokenizer(inputs)
     decision = read_canonical(CALIBRATION_DECISION)
     verify_mechanics_lock()
     value = analyze_visible(
@@ -315,12 +320,14 @@ def visible_analysis() -> dict[str, Any]:
         mechanics_lock_path=MECHANICS_LOCK,
         live_preflight_path=MECHANICS_PREFLIGHT,
         runner_path=RUNNER_PATH,
+        tokenizer=tokenizer,
     )
     return _write_or_verify(VISIBLE_SELECTION, value)
 
 
 def run_live() -> dict[str, Any]:
     inputs = load_calibration_inputs()
+    tokenizer = load_analysis_tokenizer(inputs)
     decision = read_canonical(CALIBRATION_DECISION)
     verify_mechanics_lock()
     states = [inventory_state(RAW_DIR, name) for name in MECHANICS_INVOCATION_ORDER]
@@ -335,6 +342,7 @@ def run_live() -> dict[str, Any]:
                 mechanics_lock_path=MECHANICS_LOCK,
                 live_preflight_path=MECHANICS_PREFLIGHT,
                 runner_path=RUNNER_PATH,
+                tokenizer=tokenizer,
             ),
         )
         if transport["decision"] != "SELECTED_INTERFACE_TRANSPORT_PASS":
@@ -358,6 +366,7 @@ def run_live() -> dict[str, Any]:
                     mechanics_lock_path=MECHANICS_LOCK,
                     live_preflight_path=MECHANICS_PREFLIGHT,
                     runner_path=RUNNER_PATH,
+                    tokenizer=tokenizer,
                 ),
             )
             if transport["decision"] != "SELECTED_INTERFACE_TRANSPORT_PASS":
@@ -370,6 +379,7 @@ def run_live() -> dict[str, Any]:
             mechanics_lock_path=MECHANICS_LOCK,
             live_preflight_path=MECHANICS_PREFLIGHT,
             runner_path=RUNNER_PATH,
+            tokenizer=tokenizer,
         )
     return visible_analysis()
 
