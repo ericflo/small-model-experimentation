@@ -147,9 +147,8 @@
   fresh execute/induct continuation, and byte-identical continuation whose natural
   close span is weighted like the answer. Every arm has 320 rows, 286,814 forward
   tokens, and 40 updates; local seed 88006 and conditional aggregate seed 78136 are
-  fresh. Replay control and ordinary-weight target control have now completed 40/40
-  updates with zero skips; close-weight training and paired local evaluation remain
-  pending. Do not add another
+  fresh. All three arms have now completed 40/40 updates with zero skips; paired
+  local evaluation remains pending. Do not add another
   representative dose, lower the observed gates, reuse
   seed 88005, or consume sealed seeds 78134/78135. No comparative result exists yet. Any arm that
   passes must still beat replay continuation on every family and matched-compute

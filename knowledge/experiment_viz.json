@@ -47794,7 +47794,7 @@
      "x_label": "frozen stream component",
      "y_label": "training rows",
      "y_format": "integer",
-     "note": "Every arm has 320 rows, 40 optimizer steps, exactly 286,814 forward tokens, and zero skips. standard_xi and close_xi use identical bytes; only the assigned close-span weight differs on the 80 fresh target rows. Replay and standard training are complete; close training and evaluation remain pending.",
+     "note": "Every arm has 320 rows, 40 optimizer steps, exactly 286,814 forward tokens, and zero skips. standard_xi and close_xi use identical bytes; only the assigned close-span weight differs on the 80 fresh target rows. All training is complete; fresh behavior evaluation remains pending.",
      "source": "experiments/qwen35_4b_universal_close_weight_token_match/data/stream_manifest.json"
     }
    ]

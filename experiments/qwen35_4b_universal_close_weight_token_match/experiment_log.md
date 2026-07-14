@@ -45,3 +45,19 @@ Next: publish this control receipt checkpoint, then train `standard_xi`.
 - The close-weighted arm, local evaluation, merge, and benchmark remain unrun.
 
 Next: publish this standard receipt checkpoint, then train byte-identical `close_xi`.
+
+## 2026-07-14 — Close-weighted target training
+
+- Published ordinary-weight checkpoint `f8f1b13b` to `main`; repository validation
+  and site publication both passed on GitHub before the close arm began.
+- Trained `close_xi` for exactly 40/40 updates on the byte-identical target stream;
+  320 rows, 286,814 forward tokens, and zero skips.
+- The receipt authenticates the sole registered contrast: target close kinds
+  `u_execute`/`u_induct` at weight 1.0; all ordinary close spans remain 0.2.
+- Train loss: 0.6822. Wrapper wall time: 287.1305 seconds.
+- Adapter weights/config: `16e9dc75...3c179` / `de953bd5...c47ff`.
+- Training receipt/log: `b18df864...3195a` / `66c00e2b...42308`.
+- All three arms are trained. Local seed 88006, merge, and benchmark remain unrun.
+
+Next: publish this final training checkpoint, then run the preregistered paired local
+evaluation exactly once.

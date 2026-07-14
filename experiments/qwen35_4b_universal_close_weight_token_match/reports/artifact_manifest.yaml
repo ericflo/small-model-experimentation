@@ -16,10 +16,10 @@ external_artifacts:
     required_for: "ordinary-weight target control evaluation"
     checksum: "weights 271569fdd4b45160a8e0b46eb66f300a82e7f95a77e19edd29227a274ad3569c; config 3e035fbbf9f446c3827a6e770101c595ff3131f4416b2210a96c1ddaf94f91ec"
     regenerate: ".venv/bin/python experiments/qwen35_4b_universal_close_weight_token_match/scripts/run.py --stage train-standard"
-  - name: "remaining close_xi adapter"
+  - name: "close_xi adapter"
     storage: "large_artifacts/qwen35_4b_universal_close_weight_token_match/adapters/close_xi"
     required_for: "close-weight treatment evaluation"
-    checksum: "not created at standard-arm checkpoint; training receipt will record exact hashes"
+    checksum: "weights 16e9dc75a0e33e182e916600ff6e1d75fc46dfa45e870216e2c149a41253c179; config de953bd57502ff728a12d1627d5aacab6284b045428ec7b83026388afd8c47ff"
     regenerate: ".venv/bin/python experiments/qwen35_4b_universal_close_weight_token_match/scripts/run.py --stage train-close"
   - name: "conditional explicitly merged checkpoints"
     storage: "large_artifacts/qwen35_4b_universal_close_weight_token_match/merged/"
@@ -47,4 +47,6 @@ notes: >-
   runs/training/replay_repeat.json (ffac35d1...1067) and normalized log
   runs/training/replay_repeat.log (b24444b8...ed28). standard_xi completed with
   receipt runs/training/standard_xi.json (9ed47653...af8b4) and normalized log
-  runs/training/standard_xi.log (73c55663...76294); close_xi remains pending.
+  runs/training/standard_xi.log (73c55663...76294). close_xi completed with receipt
+  runs/training/close_xi.json (b18df864...3195a) and normalized log
+  runs/training/close_xi.log (66c00e2b...42308). All evaluation remains pending.

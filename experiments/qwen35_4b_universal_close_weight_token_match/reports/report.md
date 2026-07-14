@@ -1,6 +1,6 @@
 # Close-Weighted Universal Commit Seam Report
 
-**Status:** replay and ordinary-weight target arms trained; close arm and evaluation pending
+**Status:** all three arms trained; paired local evaluation pending
 
 ## Design result
 
@@ -13,12 +13,12 @@ matches their total forward-token exposure.
 
 ## Model results
 
-`replay_repeat` and `standard_xi` completed exactly 40 updates each with zero skips.
-Their train losses were 0.4477 and 0.6882; wrapper wall times were 303.44 and 302.15
-seconds; weights hashes were `ca5601cd...59d78` and `271569fd...3569c`. These are
-training receipts, not behavioral evidence. The close-weighted arm has not trained,
-fresh local seed 88,006 has not been evaluated, and conditional aggregate seed
-78,136 remains sealed.
+All three arms completed exactly 40 updates with zero skips. Replay, standard, and
+close train losses were 0.4477, 0.6882, and 0.6822; wrapper wall times were 303.44,
+302.15, and 287.13 seconds; weights hashes were `ca5601cd...59d78`,
+`271569fd...3569c`, and `16e9dc75...3c179`. These are authenticated training
+receipts, not behavioral evidence. Fresh local seed 88,006 has not been evaluated,
+and conditional aggregate seed 78,136 remains sealed.
 
 ## Interpretation boundary
 
