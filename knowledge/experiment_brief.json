@@ -6863,6 +6863,44 @@
     }
    ]
   },
+  "qwen35_4b_tokenizer_eos_answer_commit_factorial": {
+   "verdict_tag": "First-stop answer contract is registered; no model run is open",
+   "concept_primer": "Qwen has two different end markers here: a chat-end token and a later model-end token. The prior test waited for the later one, so a correct short answer looked like it had extra text. This follow-up registers exactly where answer content must stop before trying the reasoning task again.",
+   "plain_question": "Does stopping at the first chat-end token create a strict, usable program answer without loosening the parser?",
+   "plain_answer": "No model result exists yet. A synthetic smoke now accepts only the exact answer followed by one terminal chat-end token. It rejects the old later boundary, early or repeated stops, missing stops, and any extra byte before commit.",
+   "why_it_matters": "The design can distinguish a real token-boundary repair from arbitrary suffix stripping. Fresh tasks and a matched old-boundary control are still required before residual mechanics can open.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Registered answer boundaries",
+     "value": "2",
+     "sub": "tokenizer chat end versus HF model end"
+    },
+    {
+     "label": "Synthetic boundary cases",
+     "value": "6",
+     "sub": "clean, old boundary, early, repeated, missing, and extra byte"
+    },
+    {
+     "label": "Model-free tests passing",
+     "value": "20 / 20",
+     "sub": "protocol plus pinned runner template"
+    },
+    {
+     "label": "Model calls",
+     "value": "zero",
+     "sub": "construction and adversarial review still block live work"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Only one synthetic trace is both physically valid and exactly parsed",
+     "chart_read": "Each category is one frozen boundary case. The first bar says whether its stop-token geometry could be real; the second says whether every pre-commit token is exactly the requested answer.",
+     "chart_takeaway": "Only the clean first-chat-end case passes exactness. Valid-looking old, early, or extra-byte traces still fail the strict answer grammar."
+    }
+   ]
+  },
   "qwen35_4b_tool_seeded_banking": {
    "verdict_tag": "Search finds the harder skill",
    "concept_primer": "This small model writes little programs by chaining list operations. It normally improves by restudying solutions it found itself — but it almost never discovers three-operation chains, so none enter its study pile. Here a plain brute-force search supplies those missing three-chain answers for it to copy.",

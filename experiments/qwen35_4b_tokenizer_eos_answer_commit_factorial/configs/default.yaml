@@ -1,0 +1,36 @@
+schema_version: 1
+model: Qwen/Qwen3.5-4B
+revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+backend: vllm
+termination:
+  hf_model_eos_id: 248044
+  tokenizer_eos_id: 248046
+  tokenizer_eos_scope: answer_stage_only
+  commit_rule: first_registered_stop_token
+calibration:
+  rows: 48
+  answer_max_tokens: 24
+  thinking_budget: 512
+  exact_echo_floor: 44
+  parse_floor: 44
+  answer_cap_contact_ceiling: 2
+  per_arity_rows: 24
+  per_arity_exact_floor: 22
+  per_arity_parse_floor: 22
+  per_arity_cap_ceiling: 1
+factorial:
+  boundaries:
+    - tokenizer_eos
+    - hf_model_eos_control
+  thinking:
+    - off
+    - budget_512
+  answer_prefixes:
+    - freeform
+    - PROGRAM:
+selection_priority:
+  - tokenizer_eos_no_think_PROGRAM
+  - tokenizer_eos_no_think_freeform
+  - tokenizer_eos_think512_PROGRAM
+  - tokenizer_eos_think512_freeform
+live_authorization: sealed_pending_fresh_construction_and_design_review

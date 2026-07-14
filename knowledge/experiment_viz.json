@@ -43008,6 +43008,38 @@
     }
    ]
   },
+  "qwen35_4b_tokenizer_eos_answer_commit_factorial": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Strict first-stop smoke accepts only the clean tokenizer-EOS answer",
+     "categories": [
+      "tokenizer clean",
+      "HF boundary control",
+      "early stop",
+      "interior + terminal",
+      "missing stop",
+      "extra precommit byte"
+     ],
+     "series": [
+      {
+       "label": "physically valid first-stop trace",
+       "values": [1, 1, 1, 0, 0, 1]
+      },
+      {
+       "label": "strict exact precommit answer",
+       "values": [1, 0, 0, 0, 0, 0]
+      }
+     ],
+     "x_label": "frozen synthetic boundary case",
+     "y_label": "passes contract",
+     "y_format": "integer",
+     "note": "Model-free protocol smoke only. Tokenizer EOS is scoped to the answer stage; no model was loaded or called.",
+     "source": "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/runs/smoke/summary.json"
+    }
+   ]
+  },
   "qwen35_4b_tool_seeded_banking": {
    "charts": [
     {

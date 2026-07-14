@@ -72,6 +72,10 @@
   current HF EOS as a control, uses new tasks/IDs/seeds, tests malformed/extra
   pre-commit bytes, and must independently clear the same >=90% echo/parse and
   <=5% cap gates before fresh transport and disjoint mechanics.
+  That successor is now active as
+  `qwen35_4b_tokenizer_eos_answer_commit_factorial`; its first-stop and strict-
+  precommit model-free smoke passes with zero model calls, while live execution
+  remains held pending fresh construction and adversarial design review.
 - Measure the exact behavioral quotient at fresh depth 6 before assuming model-guided pruning is economically
   needed; record wall time, memory, physical transitions, coverage, and selector success.
 - If a real search wall appears, test a residualized partial state (feasible parameter domains, materialized

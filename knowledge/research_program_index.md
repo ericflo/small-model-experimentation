@@ -3,14 +3,14 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 13
-- Experiments: 245
+- Experiments: 246
 
 ## Structured Execution And Compilers
 
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 177
+- Assigned experiments: 178
 
 ### Seed Evidence
 
@@ -116,6 +116,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_thinking_content_vs_compute` (new): [README](../experiments/qwen35_4b_thinking_content_vs_compute/README.md)
 - `qwen35_4b_thinking_lookahead` (new): [README](../experiments/qwen35_4b_thinking_lookahead/README.md)
 - `qwen35_4b_thinking_separability_probe` (new): [README](../experiments/qwen35_4b_thinking_separability_probe/README.md)
+- `qwen35_4b_tokenizer_eos_answer_commit_factorial` (new): [README](../experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/README.md)
 - `qwen35_4b_tool_seeded_banking` (new): [README](../experiments/qwen35_4b_tool_seeded_banking/README.md)
 - `qwen35_4b_tool_state_policy_lora` (track-z): [README](../experiments/qwen35_4b_tool_state_policy_lora/README.md)
 - `qwen35_4b_transaction_invariant_recovery_curriculum` (new): [README](../experiments/qwen35_4b_transaction_invariant_recovery_curriculum/README.md)

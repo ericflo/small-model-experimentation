@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 217
-- Manifest files: 521
+- Experiments with manifests: 218
+- Manifest files: 522
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 65 |
 | `run-data` | 101 |
-| `standard-artifact` | 90 |
+| `standard-artifact` | 91 |
 
 ## Manifests
 
@@ -251,6 +251,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_thinking_content_vs_compute` | `standard-artifact` | [manifest](../experiments/qwen35_4b_thinking_content_vs_compute/reports/artifact_manifest.yaml) |
 | `qwen35_4b_thinking_lookahead` | `standard-artifact` | [manifest](../experiments/qwen35_4b_thinking_lookahead/reports/artifact_manifest.yaml) |
 | `qwen35_4b_thinking_separability_probe` | `standard-artifact` | [manifest](../experiments/qwen35_4b_thinking_separability_probe/reports/artifact_manifest.yaml) |
+| `qwen35_4b_tokenizer_eos_answer_commit_factorial` | `standard-artifact` | [manifest](../experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/reports/artifact_manifest.yaml) |
 | `qwen35_4b_tool_seeded_banking` | `standard-artifact` | [manifest](../experiments/qwen35_4b_tool_seeded_banking/reports/artifact_manifest.yaml) |
 | `qwen35_4b_trained_vs_frozen_repair_mdp` | `run-data` | [manifest](../experiments/qwen35_4b_trained_vs_frozen_repair_mdp/data/base_direct_heldout_records.manifest.json) |
 | `qwen35_4b_trained_vs_frozen_repair_mdp` | `run-data` | [manifest](../experiments/qwen35_4b_trained_vs_frozen_repair_mdp/data/base_direct_train_records.manifest.json) |

@@ -1,0 +1,16 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_tokenizer_eos_answer_commit_factorial"
+external_artifacts: []
+omitted_artifacts: []
+reproducibility:
+  smoke_command: "python3 -B experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/run.py --smoke"
+  full_command: "sealed pending construction, design review, implementation lock, and green publication boundary"
+  required_external_artifacts: []
+local_receipts:
+  model_free_protocol_smoke:
+    path: "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/runs/smoke/summary.json"
+    sha256: "e73a9396066b92276f67fe6766195e294383f5a27346065e75ea848af98f486a"
+notes: >-
+  Model-free protocol scaffold only. No task construction, model call, sampled
+  output, calibration, mechanics, protected-label, or benchmark read exists.
