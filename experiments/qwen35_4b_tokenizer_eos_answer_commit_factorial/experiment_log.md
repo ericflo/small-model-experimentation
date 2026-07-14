@@ -40,6 +40,10 @@
   stale abbreviated proofs in the intake and README. Aligned both with the
   <=2/<=1 cap-overlap bounds and `86>48`/`43>24` arithmetic. Model calls remain
   zero.
+- Seventh-pass global review returned `PASS_DESIGN` for exact pushed/green
+  commit `abd2ffcd8bf4aa35c7f79e175a99cf6614c2ae27`; both workflows succeeded
+  and the immutable archive passed 35/35 tests. Construction is authorized,
+  but live calls remain sealed pending implementation review and lock.
 
 ## Scaffold
 

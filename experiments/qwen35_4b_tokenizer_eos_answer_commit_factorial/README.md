@@ -1,6 +1,6 @@
 # Qwen3.5-4B Tokenizer-EOS Answer Commit Factorial
 
-**Status:** in-progress · since 2026-07-14 · first adversarial design review held; prospective remediation frozen; no construction or model call
+**Status:** in-progress · since 2026-07-14 · adversarial `PASS_DESIGN` at `abd2ffcd`; construction/implementation next; no model call
 
 This fresh successor tests whether the prior strict answer-seam failure was
 caused by waiting past Qwen3.5's tokenizer chat-end token. It registers the
@@ -114,9 +114,10 @@ registered contract as appropriate. A unique final early stop is authenticated
 but scored; an exact-cap length trace is authenticated with all tokens retained
 as content.
 
-The first independent review returned `HOLD_DESIGN`; its four blockers are now
-addressed prospectively in the config and preregistration. The remediation has
-not yet passed independent rereview. No model or capability result exists.
+After six prospective holds, global independent rereview returned
+`PASS_DESIGN` for exact pushed/green commit `abd2ffcd`. No model or capability
+result exists; live execution remains sealed behind construction,
+implementation review, and a committed-green lock.
 
 ## Interpretation
 

@@ -2,10 +2,10 @@
 
 ## Status
 
-`HOLD_LIVE_CALLS`. Independent adversarial review of scaffold commit
-`56b0b67b0b054610f783d6b6107a0e4c32b5c95e` returned `HOLD_DESIGN`.
-The remediation is prospective and must receive a new independent review at an
-exact pushed commit before construction or live calls.
+`PASS_DESIGN` for exact immutable commit
+`abd2ffcd8bf4aa35c7f79e175a99cf6614c2ae27`. Construction is authorized;
+live model calls remain held pending implementation release review, a committed-
+green implementation lock, and the staged publication boundary.
 
 ## Self-review before delegation
 
@@ -157,3 +157,20 @@ Those summaries now explicitly include the cap ceilings and the same bounded-
 overlap arithmetic as the preregistration: overlap <=2 gives `44+44-2>48`, and
 overlap <=1 per arity gives `22+22-1>24`. Live calls remain held pending another
 exact-commit design rereview and implementation release review.
+
+## Independent review: seventh pass
+
+Global rereview of exact pushed/green commit
+`abd2ffcd8bf4aa35c7f79e175a99cf6614c2ae27` returned `PASS_DESIGN`. The
+reviewer authenticated current `origin/main`, both successful workflows, and
+35/35 immutable-archive model-free tests. It confirmed the intake and README
+now carry the correct cap-bounded-overlap proof, found no remaining prospective
+contradiction, and revalidated all earlier pairing, shared-thought, grammar,
+terminal, proposal-identity, selector/hash, resource, firewall, and pilot-scope
+repairs.
+
+This pass authorizes fresh construction and implementation only. It does not
+authorize a model load or call. The HF-EOS scaffold, construction receipts,
+live paired-boundary transactions, selector/mechanics implementation,
+malformed-runner tests, and implementation lock remain a separate adversarial
+release gate.

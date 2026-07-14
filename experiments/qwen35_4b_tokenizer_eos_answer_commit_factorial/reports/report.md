@@ -39,7 +39,8 @@ oracle ceilings remain sealed.
 
 ## Interpretation
 
-Six independent review passes returned prospective holds. The contract now
+Six independent review passes returned prospective holds; the seventh returned
+`PASS_DESIGN` for exact commit `abd2ffcd`. The contract now
 also freezes the dual-qualification invariant, distinct parse/cap metrics,
 calibration/transport balance, arm-blind selection and all-eight-row task
 success, resource-exhaustion terminal, and pilot-only claim scope. It awaits
@@ -61,6 +62,10 @@ to account for the at-most-two exact-cap overlaps.
 
 Sixth-pass global review aligned the intake and README summaries with that
 cap-bounded proof; no scientific or implementation result exists yet.
+
+The design pass authorizes fresh construction and implementation, not model
+execution. A separate adversarial implementation release review and committed-
+green lock remain mandatory.
 
 ## Next Experiments
 
