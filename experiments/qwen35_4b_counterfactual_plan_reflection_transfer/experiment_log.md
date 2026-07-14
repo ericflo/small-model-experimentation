@@ -1,5 +1,19 @@
 # Counterfactual Plan Reflection Transfer Experiment Log
 
+## 2026-07-14 — Review-9 HOLD
+
+- Independent Review 9 on exact clean commit `73bef40429ccc85ba9b6ddaf7e00629a5fb29c26`
+  returned HOLD after confirming both exact-SHA CI workflows and all 86 model-free
+  tests.
+- It passed the closed tokenizer surface, receipt-schema transitions, and consistent
+  checkpoint multiplier of four, but reproduced five remaining gaps: authentication
+  outside the guarded load interval, absent raw prompt IDs and unbound training-token
+  totals, unauthenticated external startup/import files, an impossible single-vLLM-
+  environment training instruction, and host-inventory rather than selected-device
+  GPU parity.
+- Authorization remains unchanged. No tokenizer, model, GPU, training, evaluation,
+  Jacobian, benchmark, or protected-output event occurred during the review.
+
 ## 2026-07-14 — Review-8 false-acceptance remediation
 
 - Closed tokenizer provenance to an exact authenticated five-file local surface and

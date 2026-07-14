@@ -1,6 +1,6 @@
 # Qwen3.5-4B Counterfactual Plan Reflection Transfer
 
-**Status:** in-progress · since 2026-07-14 · Review-8 blockers remediated model-free and pending fresh Review 9; model/GPU/training/evaluation remain on adversarial HOLD
+**Status:** in-progress · since 2026-07-14 · Review 9 HOLD: five reproduced provenance/compute/runtime blockers are under model-free remediation; model/GPU/training/evaluation remain unauthorized
 
 This experiment tests the paper's most actionable claim without relying on its
 consciousness framing: can supervision on what the model would say on a later
@@ -241,9 +241,12 @@ training, confirmation, and reservoir receipts require one exact GPU identity; a
 gradient-checkpointed training is charged at four forward-token equivalents. All
 artifact-producing stages also reject ignored worktree state and bind an isolated,
 external, hashed interpreter and exact no-extras package inventory. The 86-test
-model-free suite and
-full CPU construction pass. These are implementation results only: authorization
-remains unchanged until an independent Review 9 attacks the exact pushed revision.
+model-free suite and full CPU construction pass. These are implementation results
+only. Independent Review 9 passed the tokenizer closure and multiplier-four
+consistency but reproduced gaps around the guarded load window, prompt/training token
+reconstruction, external environment closure, documented training environment, and
+selected-GPU identity. Authorization remains unchanged while those findings are
+remediated.
 
 ## Interpretation
 

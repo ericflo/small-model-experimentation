@@ -522,3 +522,48 @@ authorized CPU construction still produces the frozen 576-task geometry with zer
 model calls, GPU events, or benchmark reads. Authorization remains tokenizer-only.
 A fresh Review 9 must attack the exact pushed implementation before any additional
 execution flag changes.
+
+## Review 9 — 2026-07-14
+
+**Reviewed commit:** `73bef40429ccc85ba9b6ddaf7e00629a5fb29c26`
+
+**Verdict:** **HOLD full implementation.**
+
+The independent read-only audit verified the exact clean commit, green Validate
+Repository run `29367168462`, green Publish Research Site run `29367168387`, and all
+86 model-free tests. It passed the closed tokenizer present/absent/class/local-loader
+surface, the schema 3→4→6→5 receipt transitions, strict numeric types for the counters
+that are present, and the consistent checkpoint-aware multiplier of four.
+
+Five blockers remain:
+
+1. **High:** the load-window guard commits inode metadata but authentication happens
+   before guard acquisition and post-load hashing after guard release. A same-inode,
+   same-size, restored-metadata substitution in those gaps loaded different bytes
+   while emitting zero lease/inotify evidence and later validating the restored root.
+   Authentication, load, and post-authentication must all occur while the guard is
+   held, and its receipt must bind the authenticated content commitment.
+2. **High:** sampled/injected/output arrays are reconstructed, but raw prompt token IDs
+   are absent. A fabricated billion-token prompt count entered matched-compute spend.
+   Training `forward_tokens` is also checked only against its multiplier, not against
+   the sealed per-arm tokenized-row totals carried by the tokenizer receipt.
+3. **High:** an external interpreter hash and exact distribution names/versions do not
+   authenticate site-package files, startup files, or import roots. A restricted
+   temporary-environment probe demonstrated startup code executing under `-I -B`
+   without changing the package inventory. Training imports also precede the runtime
+   contract check.
+4. **High:** the README assigns all stages to `.venv-vllm`, but that environment lacks
+   the pinned `peft` and `bitsandbytes` dependencies required by training. The repo
+   already has a distinct exact training lock/environment; the experiment does not yet
+   bind and document the two stage-specific runtimes coherently.
+5. **Medium:** GPU parity compares the host `nvidia-smi` inventory string, not the
+   selected CUDA device and its UUID. Different devices on a multi-GPU host can share
+   one recorded host inventory.
+
+Required remediation is one guard-held authenticate→load→reauthenticate transaction;
+raw prompt-ID persistence and sealed training-token replay; authenticated executable
+environment/import surfaces with the contract checked before third-party imports;
+explicit stage-specific training and vLLM locks/interpreters; and actual selected-GPU
+UUID binding. Authorization remains tokenizer-only. Review 9 read no benchmarks,
+protected outputs, caches, qualification/confirmation contents, or weight payloads
+and made zero tokenizer/model/GPU/training/evaluation/Jacobian calls.

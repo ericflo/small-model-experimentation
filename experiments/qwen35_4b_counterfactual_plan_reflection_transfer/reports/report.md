@@ -3,10 +3,11 @@
 ## Summary
 
 The experiment remains without model forward passes under a full-implementation
-adversarial HOLD. Full CPU construction succeeds, the historical tokenizer receipt is
-invalid as a training prerequisite, and all six Review-8 false-acceptance classes now
-have model-free remediations and regression tests. A fresh Review 9 is still required.
-No Qwen generation, GPU, training, capability measurement, or Jacobian event exists.
+adversarial HOLD. Full CPU construction succeeds and the historical tokenizer receipt
+is invalid as a training prerequisite. Review 9 confirmed the tokenizer closure and
+checkpoint multiplier but reproduced five remaining load, counter, runtime,
+environment, and selected-hardware gaps. No Qwen generation, GPU, training, capability
+measurement, or Jacobian event exists.
 
 ## Research Program Fit
 
@@ -48,7 +49,7 @@ and protected load windows; enforces a detached execution worktree with no ignor
 state; binds a hashed external isolated interpreter and exact GPU identity; reconstructs
 generation compute from raw token arrays; and makes checkpoint-aware end-to-end
 matched-compute sample-more a transitive final-stage gate. Model, GPU, training,
-evaluation, and J-space execution remain unauthorized pending Review 9.
+evaluation, and J-space execution remain unauthorized after Review 9 returned HOLD.
 
 ## Oracle Versus Deployable Evidence
 
@@ -59,14 +60,15 @@ against frozen sample-more, can become deployable evidence.
 ## Interpretation
 
 No capability inference is licensed. The current implementation passes 86 local
-pinned-environment model-free tests, including executable regressions for all six
-Review-8 attacks. This establishes only that the known false-acceptance paths now fail
-closed; it does not substitute for an independent adversarial review or model evidence.
+pinned-environment model-free tests, but Review 9 proved those tests do not close the
+guard-boundary, raw-prompt/training-token, external-runtime, documented-environment,
+or actual-device identity paths.
 
 ## Next Experiments
 
-Publish the exact remediated implementation and obtain a fresh Review-9 verdict before
-changing authorization. Nothing beyond tokenizer-only work is authorized yet.
+Remediate the five Review-9 counterexamples model-free, publish the exact
+implementation, and obtain a fresh independent verdict before changing authorization.
+Nothing beyond tokenizer-only work is authorized yet.
 
 ## Artifact Manifest
 
