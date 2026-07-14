@@ -232,8 +232,11 @@ MOPD treatment, primary seed 42, scored `0.577005` deep and `0.795225` quick,
 both strata. One optimizer seed and one block are insufficient for the frozen
 gate. Primary seed 43 then scored `0.576097` deep and `0.804167` quick,
 `−0.003971` and `−0.005862` versus the source, with 4,408,848 sampled tokens.
-Two optimizer seeds now agree on a negative block-0 deep sign; seed 44 and
-block 1 remain decisive.
+Primary seed 44 then scored `0.572010` deep and `0.805422` quick, `−0.008058`
+and `−0.004607` versus the source, with 4,393,570 sampled tokens. All three
+optimizer seeds therefore agree on a negative block-0 deep sign. The frozen
+success condition is unreachable, but the full campaign continues to quantify
+the control landscape and produce the registered terminal receipt.
 
 ## NF4/BF16 Interpretation Diagnostic
 

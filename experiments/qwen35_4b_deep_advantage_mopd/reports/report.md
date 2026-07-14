@@ -167,7 +167,11 @@ This is an unfavorable first treatment block; seeds 43/44 and block 1 remain
 required by the frozen decision rule.
 Primary seed 43 repeats the negative block-0 deep sign: `0.576097` deep and
 `0.804167` quick, `−0.003971` and `−0.005862` versus the source, using
-4,408,848 sampled tokens. Seed 44 and block 1 remain required.
+4,408,848 sampled tokens. Primary seed 44 scores `0.572010` deep and `0.805422`
+quick, `−0.008058` and `−0.004607` versus the source, using 4,393,570 sampled
+tokens. All three optimizer seeds therefore have negative block-0 deep signs;
+the frozen success condition is unreachable, while the full campaign continues
+for the registered terminal receipt and control ranking.
 
 Together, the three frozen optimizer seeds establish that the registered
 four-round update can complete safely and that strict-deep route supply

@@ -586,3 +586,19 @@
   repeats seed 42's unfavorable result; seed 44 and block 1 remain required.
   Primary seed 44 started next with external journal hash
   `a607b9b93f7c629aff92083f308c53cb0058e353f00a4ee7f2603bcd4e4082e2`.
+
+## 2026-07-14 — all three block-0 treatment seeds are below deep
+
+- Primary seed 44 completed sealed generation and strict validation.
+  `GENERATED.json` and `COMPLETE.json` hash to
+  `49ca7c8cfb9597b2b8ec8b047a82ce9de321f11cf323d695ff7d068d44b0c1af`
+  and `2cb75d45ba30974e3457212001377804a951cb422ad2f62951326e752b8b9dc9`;
+  the score hashes to
+  `cf3021207260a30357df7dc52d74c1b75fb81a315a04d22fb8424f03dfff4a45`.
+- Registered means are `0.572010` deep and `0.805422` quick, `−0.008058` and
+  `−0.004607` versus the source, using 4,393,570 sampled tokens. Seeds 42, 43,
+  and 44 all have negative block-0 deep signs, so the frozen success condition
+  is already unreachable. The preregistered campaign nevertheless requires all
+  arms and both blocks for the terminal control ranking and receipt.
+- The block-0 quick source evaluation started next with external journal hash
+  `0ab077980fc97ee8cc5481575a0059896f686735539903ea6634cb15f59b154d`.
