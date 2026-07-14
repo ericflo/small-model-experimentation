@@ -60,9 +60,9 @@ capacity controls because Stage A cannot distinguish a LoRA limit from a joint-o
 
 ## Next Experiments
 
-None are licensed by recovery alone. Execute the producer's authorized full-rank setup, all three
-LoRA state-only controls, and all three direct-full-shape joint arms, then follow the next immutable
-producer receipt.
+The recovery is complete and licenses no new experiment by itself. Producer-owned full-rank setup and
+Stage-B execution continue under `qwen35_4b_state_formation_capacity_adjudication` and its immutable
+receipts.
 
 ## Artifact Manifest
 

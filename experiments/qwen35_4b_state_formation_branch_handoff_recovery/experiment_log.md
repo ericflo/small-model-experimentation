@@ -71,7 +71,8 @@
 
 ## 2026-07-14 — handoff scope closed
 
-- The branch handoff and all three full-rank G0/control setup pairs completed, answering
-  this recovery experiment's operational question.
-- Stage-B execution belongs to the canonical capacity-adjudication producer. Continued
-  use of the frozen wrapper does not keep this recovery experiment `in-progress`.
+- The branch handoff and all three full-rank G0/control setup pairs completed, the complete matrix was
+  published, both workflows passed, and the producer subsequently launched its first mandatory Stage-B
+  cell. This answers the recovery experiment's operational question.
+- Stage-B execution belongs to the canonical capacity-adjudication producer. Continued use of the frozen
+  wrapper is a producer dependency, not unfinished recovery work.

@@ -80,7 +80,7 @@ small dips only at the k=1 and k=12 extremes). So the compute-optimal-allocation
 result is domain-general — code (MBPP, HumanEval, P(True) judge) AND reasoning
 (toy, P(answer)) — a robust, verifier-free, provenance-clean deployable policy.
 
-## 2026-07-13 — agentic-domain arbitration: STARTED, deferred on infra
+## 2026-07-13 — agentic-domain arbitration: deferred to a separate follow-up
 
 Began testing whether the confidence policy generalizes from static code/reasoning
 to the multi-step GYM (gym_confidence.py in ../qwen35_4b_gauntlet_frontier/scripts).
@@ -92,11 +92,13 @@ two-phase sampler does not reproduce the proven gym harness's emission handling
 (fast, correct answers at 8192) and add a confidence signal — either answer-span
 logprobs (P(answer)/C40) exposed from the VLLMRunner, or a P(True) judge pass over
 gym answers. That is a ~half-day build vs the post-hoc code/reasoning analyses;
-deferred pending direction. gym_confidence.py kept as a WIP starting point.
+deferred to a separate prospective experiment. `gym_confidence.py` is retained only as a historical WIP
+starting point; it does not keep this completed C57 experiment open.
 
 ## 2026-07-14 — capstone closed
 
 - C57 is the terminal result of this experiment: confidence-gated adaptive breadth
   allocation wins at matched compute, while depth escalation failed replication.
-- Agentic-domain arbitration remains a prospective follow-up and must receive its own
-  experiment boundary; it no longer keeps this completed capstone `in-progress`.
+- The n=400 correction, HumanEval check, and reasoning-domain check are complete. Agentic-domain
+  arbitration remains a prospective follow-up with a new instrument and must receive its own experiment
+  boundary.

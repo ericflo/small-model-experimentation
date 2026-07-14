@@ -2,10 +2,10 @@
 
 ## Summary
 
-Experiment in progress. The balanced raw pool is complete and the failed candidate scoring instrument has
-been replaced prospectively by its single-context reference. A later selector-balance repair is explicitly a
-post-score, pre-official-selection deviation and is machine-sealed before selection; no trained
-capability result has been observed.
+Experiment finished at its selection-only stop. The balanced raw pool is complete and the failed candidate
+scoring instrument was replaced prospectively by its single-context reference. A later selector-balance
+repair is explicitly a post-score, pre-official-selection deviation and is machine-sealed before selection;
+no SFT ran and no trained capability result was observed.
 
 ## Plain-Language Question
 
@@ -55,7 +55,8 @@ accuracy; answer likelihood is not itself a deployment metric.
 ## Interpretation
 
 Selection alone is not a capability result. The full frozen matrix is too slow for the current budget, and
-the success control's narrow task support must be considered when choosing a smaller prospective fork.
+the success control's narrow task support must be considered when choosing a smaller prospective fork. This
+experiment is closed; any such fork must receive a new experiment directory and prospective boundary.
 
 ## Next Experiments
 

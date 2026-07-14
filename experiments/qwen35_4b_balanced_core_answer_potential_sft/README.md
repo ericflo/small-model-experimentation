@@ -14,9 +14,10 @@ subsequently inspected for cost planning before the deviation was committed; the
 boundary no official SFT dataset, adapter, or held-out outcome existed. Selection is now banked behind the
 committed seal, but no adapter or capability result exists yet.
 
-This experiment is closed as a preserved, compute-stopped negative boundary rather than left
-indefinitely active. Its six selections remain reusable only through a separately preregistered
-follow-up; they are not evidence that answer-potential training works.
+This experiment is closed as a preserved, compute-stopped negative boundary. The exact six-arm matrix was
+estimated at 9.6--18.1 GPU-hours before merge and evaluation, beyond the accepted budget, so no SFT was
+started. Its deterministic selections are not evidence that answer-potential training works and remain
+reusable only through a separately preregistered follow-up.
 
 The preserved parent is [linked here](../qwen35_4b_long_horizon_answer_potential_sft/README.md).
 

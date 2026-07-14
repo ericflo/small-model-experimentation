@@ -115,6 +115,9 @@ from a ~0.12 base.
 
 ## Next Experiments
 
+This experiment is closed. Each item below is a candidate successor and must use a new experiment
+directory rather than extending this result-bearing one.
+
 - Failure forensics on the residual axes at deployed budgets (gym proxies).
 - Scaffold-distillation arm (tools find what the model cannot sample; bank
   the verified result — C22-24 precedent, now with a blackbox arbiter).

@@ -2,11 +2,10 @@
 
 ## Status
 
-The first recovery produced a valid full-rank seed-7411 G0, but its frozen pathname-only retirement
-guard stopped the following positive control before producer or model work. The handoff suite and
-frozen no-model smoke passed, commit `627254f1…d892` cleared both workflows, and the full-rank
-seed-7411 positive control now passes through this wrapper. Producer receipts remain scientifically
-authoritative.
+Finished. The first recovery produced a valid full-rank seed-7411 G0, but its frozen pathname-only
+retirement guard stopped the following positive control before producer or model work. This handoff
+then carried all three full-rank G0/control pairs through the unchanged producer barriers. Producer
+receipts remain scientifically authoritative.
 
 ## Method
 
@@ -48,6 +47,5 @@ that its inputs independently authorize.
 
 ## Next action
 
-Publish the complete three-seed setup matrix and require both workflows green. Then run the six
-already-mandated Stage-B cells—three LoRA state-only and three full-rank joint—through this wrapper;
-no scientific evaluation begins until the producer's exact training barriers authorize it.
+No recovery action remains. The complete setup matrix was published and the producer's Stage-B cells are
+tracked in `qwen35_4b_state_formation_capacity_adjudication`; their scientific barriers remain unchanged.

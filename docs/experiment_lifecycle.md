@@ -87,6 +87,27 @@ Prefer controls that test the mechanism:
 
 Put derived outputs under `analysis/` and final narrative under `reports/`. Preserve raw run outputs when they are small enough or update `reports/artifact_manifest.yaml` for external or omitted artifacts.
 
+## 4.5 Close Or Reaffirm The Lifecycle
+
+`**Status:** in-progress` means a concrete stage in that experiment is currently being executed or
+prepared for its already-frozen result. It is not a parking place for a deferred idea, a next-test,
+an inactive data bank, or work that has moved to a successor experiment.
+
+In the same commit that records a terminal result, deliberate resource stop, deferral, or completed
+handoff, change the README status to `**Status:** finished` and record the disposition. A stopped
+experiment may finish without a capability conclusion, but its README and report must say exactly
+what was completed, why execution stopped, and that no capability claim follows. Any later restart,
+replication, reduced design, new substrate, or downstream branch gets a new experiment directory.
+
+Before every push, run:
+
+```bash
+make active-experiments
+```
+
+Reconcile every listed row against its latest receipt and log. `make check` prints the same roster so
+an inflated active count is visible during the normal release gate.
+
 ## 5. Update Shared Knowledge
 
 Run:

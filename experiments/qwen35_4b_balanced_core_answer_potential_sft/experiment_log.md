@@ -132,7 +132,8 @@ or evaluation generation has run under this experiment.
 
 ## 2026-07-14 — administrative closure at the selection boundary
 
-- The experiment is finished as compute-stopped, not successful. No SFT, adapter,
-  merge, or capability evaluation exists, and selection alone supports no capability claim.
-- The already-documented lower-cost continuation must be a new preregistered experiment;
-  leaving this banked boundary `in-progress` incorrectly implied an active run.
+- The experiment is finished as compute-stopped, not successful. The frozen six-arm matrix remains
+  estimated at 9.6--18.1 GPU-hours before merge/evaluation; no SFT, adapter, merge, deployment probe, or
+  capability evaluation exists, and selection alone supports no capability claim.
+- The deterministic bank is preserved, but any lower-cost continuation or restart must be a new
+  preregistered experiment. Leaving this boundary `in-progress` incorrectly implied an active run.

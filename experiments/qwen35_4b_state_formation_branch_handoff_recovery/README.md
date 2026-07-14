@@ -86,8 +86,8 @@ mirror, and unregistered invocation shapes.
 
 Smoke loaded no model, started no training/evaluation, opened no benchmark or contrast path, and
 changed no scientific interpretation. No positive-control or downstream scientific result is
-claimed here. Use remains blocked until this complete checkpoint is published and both workflows
-are green.
+claimed here. At that checkpoint, use remained blocked until publication and both workflows were
+green; the later paragraphs record that completed progression.
 
 Handoff commit `627254f1…d892` passed both workflows. The exact full-rank seed-7411 positive control
 then completed once through this wrapper. Producer file SHA-256 is `a0d17e2e…7a16`, producer receipt
@@ -125,7 +125,7 @@ changing scientific logic. Capacity interpretation remains unchanged.
 ## Knowledgebase Update
 
 - Program evidence: no scientific evidence from an invocation repair.
-- Program backlog: full-rank seed-7411 positive control remains next after green publication.
+- Program backlog: producer Stage B now owns the mandatory LoRA-state-only and full-rank-joint work.
 - Claim ledger: unchanged.
 
 ## Artifacts

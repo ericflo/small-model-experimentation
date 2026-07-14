@@ -5,6 +5,7 @@
 ## What It Checks
 
 - Regenerates catalogs and verifies generated files are committed.
+- Prints the complete canonical in-progress roster so every release reviews active lifecycle state.
 - Proves catalog output is invariant to gitignored/external experiment artifacts.
 - Regenerates the experiment readiness matrix so curation gaps stay visible.
 - Regenerates and validates the future experiment queue so every program keeps a launchpad for new work.
@@ -30,6 +31,7 @@ The repository is meant to grow through many independent experiments and researc
 
 ```bash
 make check
+make active-experiments
 make new-program PROGRAM=<program_id> TITLE="<Title>" FOCUS="<one-sentence focus>"
 make new-experiment EXPERIMENT=<experiment_id> PROGRAM=<program_id> TITLE="<Title>"
 ```

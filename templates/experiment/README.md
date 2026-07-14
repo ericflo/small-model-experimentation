@@ -1,6 +1,6 @@
 # Experiment Title
 
-**Status:** in-progress · since YYYY-MM-DD · what still has to happen before a result exists
+**Status:** in-progress · since YYYY-MM-DD · concrete stage currently under way before this experiment concludes
 
 ## Research Program
 

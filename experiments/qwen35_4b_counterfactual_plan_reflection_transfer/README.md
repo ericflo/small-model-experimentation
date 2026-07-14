@@ -1,6 +1,6 @@
 # Qwen3.5-4B Counterfactual Plan Reflection Transfer
 
-**Status:** in-progress · since 2026-07-14 · tokenizer-only stage authorized with fresh receipt pending; model/GPU/training/evaluation remain on adversarial HOLD
+**Status:** in-progress · since 2026-07-14 · Review 8 remediation and a fresh exact-commit review remain; model/GPU/training/evaluation are still on adversarial HOLD
 
 This experiment tests the paper's most actionable claim without relying on its
 consciousness framing: can supervision on what the model would say on a later

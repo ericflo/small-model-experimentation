@@ -73,7 +73,7 @@ complete.
 
 ## 2026-07-14 — recovery scope closed
 
-- The exact v11 analyzer successfully consumed its producer receipts and emitted the
-  authoritative result. This answers the operational recovery question.
-- Stage B remains active only in the result-bearing capacity-adjudication producer;
-  reuse of this frozen seam is infrastructure, not unfinished recovery research.
+- The narrow path repair and exact v11 analyzer successfully consumed the producer receipts and emitted
+  the authoritative result. This answers the operational recovery question with authenticated receipts.
+- Stage B remains active only in `qwen35_4b_state_formation_capacity_adjudication`; reuse of this frozen
+  seam is infrastructure, not unfinished recovery research.
