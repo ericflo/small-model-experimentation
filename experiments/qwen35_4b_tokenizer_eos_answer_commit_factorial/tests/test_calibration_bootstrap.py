@@ -21,7 +21,7 @@ class CalibrationBootstrapTests(unittest.TestCase):
         self.assertTrue(os.access(launcher, os.X_OK))
         self.assertEqual(
             hashlib.sha256(launcher.read_bytes()).hexdigest(),
-            "5947d78038cb969caaf2df633468eed9075c90e449fbaa1f634981bc252e41c2",
+            "34133e00c226f176d5d8a2b4f355af04b52788dbebc99486d18f5e90ee355a93",
         )
         headers = subprocess.run(
             ["/usr/bin/readelf", "-l", str(launcher)],
@@ -69,6 +69,37 @@ class CalibrationBootstrapTests(unittest.TestCase):
         self.assertNotIn("trusted static calibration_launcher", result.stderr)
         self.assertNotIn("cannot be preloaded", result.stderr)
 
+    def test_environment_marker_and_caller_opened_fd_cannot_forge_launch(self) -> None:
+        launcher = EXP / "scripts/calibration_launcher"
+        script = EXP / "scripts/run_calibration.py"
+        proof_fd = 198
+        saved_fd: int | None = None
+        opened = os.open(launcher, os.O_RDONLY)
+        try:
+            try:
+                saved_fd = os.dup(proof_fd)
+            except OSError:
+                saved_fd = None
+            os.dup2(opened, proof_fd, inheritable=True)
+            environment = dict(os.environ)
+            environment["QWEN_CALIBRATION_STATIC_LAUNCHER"] = "1"
+            result = subprocess.run(
+                [sys.executable, "-B", "-I", str(script), "--stage", "invalid"],
+                env=environment,
+                pass_fds=(proof_fd,),
+                capture_output=True,
+                text=True,
+            )
+        finally:
+            os.close(opened)
+            if saved_fd is None:
+                os.close(proof_fd)
+            else:
+                os.dup2(saved_fd, proof_fd, inheritable=True)
+                os.close(saved_fd)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("proof names different executable bytes", result.stderr)
+
     def test_firewall_is_installed_before_every_local_runtime_import(self) -> None:
         source = (EXP / "scripts/run_calibration.py").read_text()
         ast.parse(source)
@@ -93,8 +124,8 @@ class CalibrationBootstrapTests(unittest.TestCase):
         self.assertIn('"--repo", _CANONICAL_REPOSITORY', source)
         self.assertIn("env=_bootstrap_child_environment()", source)
         self.assertIn("pre-import Git origin URL changed", source)
-        self.assertIn("requires the trusted static calibration_launcher", source)
-        self.assertIn("sealed calibration static launcher bytes changed", source)
+        self.assertIn("live static-launcher parent and proof descriptor", source)
+        self.assertIn("sealed calibration static-launcher proof bytes changed", source)
 
     def test_bootstrap_binds_exact_model_and_runtime_import_inventory(self) -> None:
         source = (EXP / "scripts/run_calibration.py").read_text()
@@ -159,7 +190,7 @@ class CalibrationBootstrapTests(unittest.TestCase):
                 text=True,
             )
             self.assertNotEqual(isolated.returncode, 0)
-            self.assertIn("trusted static calibration_launcher", isolated.stderr)
+            self.assertIn("static-launcher parent and proof descriptor", isolated.stderr)
             self.assertFalse(sentinel.exists())
 
 

@@ -2,7 +2,7 @@
 
 ## Status
 
-`HOLD_LIVE_CALLS` pending a sixth clean adversarial review of the exact
+`HOLD_LIVE_CALLS` pending a seventh clean adversarial review of the exact
 pushed, green repair commit. No model load or generation is authorized.
 
 ## First adversarial review
@@ -123,3 +123,30 @@ engine/sampling structures through typed canonical hashes. Reproducible-build,
 no-interpreter, inherited-environment, Boolean-alias, and engine-type mutation
 tests cover the repair. The runtime remains sealed until a fresh reviewer
 examines the next exact pushed-green commit.
+
+## Sixth adversarial review
+
+The sixth review cleanly examined exact published-green commit
+`46160f72a4d2218ed21ec589c3e124f23d38a97b`. The reviewed commit remained an
+ancestor after concurrent `main` advancement; both exact-SHA workflows were
+green; 94/94 permitted model-free tests passed; the launcher rebuilt
+byte-identically as a static x86-64 ELF with no `PT_INTERP`; and benchmark,
+hidden, qualification, confirmation, and protected-content inventories stayed
+empty. The verdict was `HOLD_IMPLEMENTATION` on one blocker:
+
+1. The Python bootstrap used a caller-controlled environment marker plus an
+   on-disk hash. Those facts did not prove that the current interpreter was
+   actually entered through the static launcher, so the claimed pre-Python
+   boundary was not fail-closed.
+
+The prospective seventh-round repair replaces the marker with two linked
+kernel facts. The static launcher forks and remains alive as the child's
+parent; before `execve`, the child opens `/proc/self/exe` and duplicates that
+open executable to inherited descriptor 198. The dynamic child has a
+parent-death signal. Before local imports, Python requires the live parent
+executable, descriptor 198, and the tracked launcher path to name the same
+stable regular-file inode, then rewinds and SHA-256 hashes the inherited open
+file. The proof persists across the sanctioned Mamba recovery `execve`.
+A regression test confirms that a direct caller supplying both the old marker
+and an open launcher descriptor still fails because its parent executable is
+not the static launcher. No model or GPU work occurred during this repair.

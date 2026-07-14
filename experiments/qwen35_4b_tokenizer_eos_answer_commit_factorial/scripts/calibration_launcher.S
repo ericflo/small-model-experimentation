@@ -16,6 +16,87 @@ _start:
     mov (%rsp), %r12                  /* original argc */
     lea 8(%rsp), %r13                 /* original argv */
 
+    /* Keep the authenticated static image alive as Python's parent. */
+    mov $57, %rax                     /* fork */
+    syscall
+    test %rax, %rax
+    js .Lproof_failed
+    jz .Lchild
+
+    mov %rax, %r15                    /* child PID */
+    sub $16, %rsp                     /* wait status */
+.Lwait:
+    mov %r15, %rdi
+    mov %rsp, %rsi
+    xor %rdx, %rdx
+    xor %r10, %r10
+    mov $61, %rax                     /* wait4 */
+    syscall
+    cmp $-4, %rax                     /* EINTR */
+    je .Lwait
+    test %rax, %rax
+    js .Lproof_failed
+    mov (%rsp), %eax
+    mov %eax, %ecx
+    and $0x7f, %ecx
+    jnz .Lchild_signaled
+    shr $8, %eax
+    and $0xff, %eax
+    mov %rax, %rdi
+    mov $60, %rax
+    syscall
+
+.Lchild_signaled:
+    add $128, %ecx
+    mov %rcx, %rdi
+    mov $60, %rax
+    syscall
+
+.Lchild:
+    /* Kill the dynamic child if its authenticating parent disappears. */
+    mov $157, %rax                    /* prctl */
+    mov $1, %rdi                      /* PR_SET_PDEATHSIG */
+    mov $9, %rsi                      /* SIGKILL */
+    xor %rdx, %rdx
+    xor %r10, %r10
+    xor %r8, %r8
+    syscall
+    test %rax, %rax
+    js .Lproof_failed
+    mov $110, %rax                    /* getppid */
+    syscall
+    cmp $1, %rax
+    je .Lproof_failed
+
+    /*
+     * Carry the exact launcher inode through execve on descriptor 198.  The
+     * Python bootstrap verifies this open file, not a caller-controlled
+     * environment assertion.  dup3 with flags zero keeps it across execve.
+     */
+    mov $257, %rax                    /* openat */
+    mov $-100, %rdi                   /* AT_FDCWD */
+    lea self_executable(%rip), %rsi
+    xor %rdx, %rdx                    /* O_RDONLY */
+    xor %r10, %r10
+    syscall
+    test %rax, %rax
+    js .Lproof_failed
+    mov %rax, %r14
+    cmp $198, %rax
+    je .Lproof_ready
+    mov %r14, %rdi
+    mov $198, %rsi
+    xor %rdx, %rdx
+    mov $292, %rax                    /* dup3 */
+    syscall
+    test %rax, %rax
+    js .Lproof_failed
+    mov %r14, %rdi
+    mov $3, %rax                      /* close original descriptor */
+    syscall
+
+.Lproof_ready:
+
     /* Four fixed arguments, original argv[1:], and a trailing NULL. */
     mov %r12, %rax
     add $4, %rax
@@ -55,6 +136,11 @@ _start:
     mov $127, %rdi
     mov $60, %rax                     /* _exit */
     syscall
+
+.Lproof_failed:
+    mov $126, %rdi
+    mov $60, %rax                     /* _exit */
+    syscall
     .size _start, .-_start
 
     .section .rodata
@@ -66,9 +152,9 @@ no_bytecode_flag:
     .asciz "-B"
 script_path:
     .asciz "/workspace/small-model-experimentation/experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/run_calibration.py"
+self_executable:
+    .asciz "/proc/self/exe"
 
-env_launcher:
-    .asciz "QWEN_CALIBRATION_STATIC_LAUNCHER=1"
 env_home:
     .asciz "HOME=/root"
 env_path:
@@ -105,7 +191,6 @@ env_tokenizers_parallelism:
     .section .data.rel.ro
     .align 8
 launcher_environment:
-    .quad env_launcher
     .quad env_home
     .quad env_path
     .quad env_lang

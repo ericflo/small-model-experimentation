@@ -118,23 +118,75 @@ _GIT_EXECUTABLE = "/usr/bin/git"
 _GH_EXECUTABLE = "/usr/bin/gh"
 _PINNED_PATH = f"{ROOT}/.venv-vllm/bin:/usr/local/cuda/bin:/usr/bin:/bin"
 _STATIC_LAUNCHER = EXP / "scripts/calibration_launcher"
+_STATIC_LAUNCHER_PROOF_FD = 198
 _STATIC_LAUNCHER_SHA256 = (
-    "5947d78038cb969caaf2df633468eed9075c90e449fbaa1f634981bc252e41c2"
+    "34133e00c226f176d5d8a2b4f355af04b52788dbebc99486d18f5e90ee355a93"
 )
 
 
-def _bootstrap_sanitize_process_environment() -> None:
-    if os.environ.get("QWEN_CALIBRATION_STATIC_LAUNCHER") != "1":
+def _bootstrap_authenticate_static_launcher() -> None:
+    parent_fd: int | None = None
+    try:
+        parent_pid = os.getppid()
+        if parent_pid <= 1:
+            raise RuntimeError("static-launcher parent is absent")
+        parent_fd = os.open(f"/proc/{parent_pid}/exe", os.O_RDONLY)
+        if not os.get_inheritable(_STATIC_LAUNCHER_PROOF_FD):
+            raise RuntimeError("static-launcher proof descriptor will not survive re-exec")
+        parent_before = os.fstat(parent_fd)
+        fd_before = os.fstat(_STATIC_LAUNCHER_PROOF_FD)
+        path_before = os.stat(_STATIC_LAUNCHER, follow_symlinks=False)
+        if (
+            _STATIC_LAUNCHER.is_symlink()
+            or (parent_before.st_mode & 0o170000) != 0o100000
+            or (fd_before.st_mode & 0o170000) != 0o100000
+            or (path_before.st_mode & 0o170000) != 0o100000
+            or (parent_before.st_dev, parent_before.st_ino)
+            != (path_before.st_dev, path_before.st_ino)
+            or (fd_before.st_dev, fd_before.st_ino)
+            != (path_before.st_dev, path_before.st_ino)
+        ):
+            raise RuntimeError("static-launcher proof names different executable bytes")
+        os.lseek(_STATIC_LAUNCHER_PROOF_FD, 0, os.SEEK_SET)
+        digest = hashlib.sha256()
+        while True:
+            block = os.read(_STATIC_LAUNCHER_PROOF_FD, 1024 * 1024)
+            if not block:
+                break
+            digest.update(block)
+        parent_after = os.fstat(parent_fd)
+        fd_after = os.fstat(_STATIC_LAUNCHER_PROOF_FD)
+        path_after = os.stat(_STATIC_LAUNCHER, follow_symlinks=False)
+    except OSError as error:
         raise RuntimeError(
-            "sealed calibration requires the trusted static calibration_launcher"
-        )
+            "sealed calibration requires live static-launcher parent and proof descriptor"
+        ) from error
+    finally:
+        if parent_fd is not None:
+            os.close(parent_fd)
+    stable_fields = ("st_dev", "st_ino", "st_mode", "st_size", "st_mtime_ns")
     if (
-        _STATIC_LAUNCHER.is_symlink()
-        or not _STATIC_LAUNCHER.is_file()
-        or hashlib.sha256(_STATIC_LAUNCHER.read_bytes()).hexdigest()
-        != _STATIC_LAUNCHER_SHA256
+        any(
+            getattr(parent_before, field) != getattr(parent_after, field)
+            for field in stable_fields
+        )
+        or any(
+            getattr(fd_before, field) != getattr(fd_after, field)
+            for field in stable_fields
+        )
+        or any(
+            getattr(path_before, field) != getattr(path_after, field)
+            for field in stable_fields
+        )
+        or (fd_after.st_dev, fd_after.st_ino)
+        != (path_after.st_dev, path_after.st_ino)
+        or digest.hexdigest() != _STATIC_LAUNCHER_SHA256
     ):
-        raise RuntimeError("sealed calibration static launcher bytes changed")
+        raise RuntimeError("sealed calibration static-launcher proof bytes changed")
+
+
+def _bootstrap_sanitize_process_environment() -> None:
+    _bootstrap_authenticate_static_launcher()
     if any(
         os.environ.get(key)
         for key in ("LD_PRELOAD", "LD_AUDIT", "LD_DEBUG", "GLIBC_TUNABLES")

@@ -114,10 +114,14 @@ experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/calibration_
 ```
 
 `calibration_launcher` is a 12.6-KiB static x86-64 ELF with no dynamic
-interpreter. It discards the inherited environment before a direct `execve` of
-the pinned Python interpreter with `-I -B`, closing the pre-Python dynamic-
-loader boundary. Its source is `scripts/calibration_launcher.S`; its exact
-reproducible build command is:
+interpreter. It retains a waiting static parent, opens its exact executable on
+inherited descriptor 198, discards the inherited environment, and directly
+`execve`s the pinned Python interpreter with `-I -B` in a child protected by a
+parent-death signal. The Python bootstrap requires the live parent executable,
+the inherited descriptor, and the tracked launcher path to be the same stable
+inode with the reviewed SHA-256. This kernel-carried provenance cannot be
+forged by an environment marker. Its source is
+`scripts/calibration_launcher.S`; its exact reproducible build command is:
 
 ```bash
 /usr/bin/gcc -nostdlib -static -no-pie -s -Wl,--build-id=none \
@@ -125,9 +129,10 @@ reproducible build command is:
   experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/calibration_launcher.S
 ```
 
-The Python bootstrap requires and hash-binds that launcher before any local
-import. Direct Python invocation, missing/malformed stages, non-isolated
-Python, altered launcher bytes, and dynamic-loader variables all fail closed.
+Direct Python invocation—even with a caller-supplied marker and an open copy of
+the launcher on descriptor 198—fails because its live parent is not the static
+launcher. Missing/malformed stages, non-isolated Python, altered launcher
+bytes, and dynamic-loader variables also fail before local imports.
 
 ## Results
 
@@ -165,6 +170,12 @@ zero counters still accepted JSON Boolean aliases. The prospective static
 launcher now sanitizes before Python exists, and exact integer predicates plus
 typed-canonical engine comparisons reject those aliases. These are model-free
 repairs; no calibration request or sampled output has yet occurred.
+
+The next clean rereview held again because the first static-launch repair used
+a caller-controlled environment marker to assert entry. The parent-plus-open-
+executable proof above replaces that assertion with kernel process/file state
+that remains valid across the sanctioned Mamba recovery `execve`. The repair
+is still model-free; live authorization remains absent.
 
 ## Interpretation
 
