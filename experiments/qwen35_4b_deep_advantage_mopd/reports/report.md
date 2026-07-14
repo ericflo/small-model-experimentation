@@ -128,8 +128,13 @@ The complete control-code inventory hash was unchanged on both sides of
 publication. Global confirmation admission then passed the independent
 pre/post model-map checks and hashes to
 `18c019e92fb6b7f7caed0b0f916b958d528b36b9a30607c2890e6b9385d0125d`.
-The block-0 deep arm has entered `STARTED`; no generated bundle or confirmation
-score exists at this checkpoint.
+The first block-0 deep attempt completed generation but was quarantined before
+score publication: the ordinary runner-output schema omitted
+`retained_thinking_token_ids`, while the strict journal validator required the
+field that the scoring projection had already defaulted to `[]`. No generated
+text, task semantics, score, or aggregate performance was inspected. Failure
+receipt `2e645322ead3fbbdf58760849fe17def81fd12b62cdfa4b6c58808e24612ed41`
+licenses only a contract repair, fresh authorization/admission, and full rerun.
 
 Together, the three frozen optimizer seeds establish that the registered
 four-round update can complete safely and that strict-deep route supply
@@ -137,7 +142,7 @@ persists on fresh seed-local states after the shared round-0 block. They do not
 establish capability gain, causal advantage routing, superiority to any
 source, router, control, parameter soup, or sample-more baseline, retention,
 transfer, or composability. Those questions remain reserved for the sealed
-confirmation.
+confirmation; the quarantined attempt contributes no performance evidence.
 
 The valid interpretation-only NF4/bf16 diagnostic further weakens any inference
 from trainer-side improvement. Across 32 fixed consumed units and 7,970 target

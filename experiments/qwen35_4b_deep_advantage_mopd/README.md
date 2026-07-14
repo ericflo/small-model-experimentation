@@ -190,8 +190,14 @@ the complete control-code inventory was identical immediately before and after
 publication. Global confirmation admission subsequently passed its independent
 pre/post arm-byte checks and hashes to
 `18c019e92fb6b7f7caed0b0f916b958d528b36b9a30607c2890e6b9385d0125d`.
-Block-0 deep evaluation has a hash-bound `STARTED` journal, but no generated
-bundle or score exists at this checkpoint.
+That first admission is now archived: block-0 deep completed all generation but
+failed closed before `scores.json` because the ordinary runner path omitted a
+strictly required journal field that the scoring projection had represented as
+an empty list. The complete 6,879-output transaction is quarantined and no
+performance content was inspected. The failure receipt hashes to
+`2e645322ead3fbbdf58760849fe17def81fd12b62cdfa4b6c58808e24612ed41`;
+it authorizes only a schema-contract fix, fresh no-clobber authorization, and a
+full rerun from an empty current confirmation tree.
 
 ## NF4/BF16 Interpretation Diagnostic
 

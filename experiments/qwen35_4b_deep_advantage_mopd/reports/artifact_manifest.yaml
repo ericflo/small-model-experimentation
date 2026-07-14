@@ -28,10 +28,10 @@ external_artifacts:
       seed-43 terminal merge receipt 4af497550de22d9bbafdd9de97dd95eabeb6b16b6fa9a7516bf78c4c719d6ecf;
       seed-44 terminal merge receipt 33ae673db2abda3bfee69f311f5d5d5b8e1bda29fb2c1b286b3adbe514d4ba00;
       controls receipt 103ef4cc0b24d7c10666b6f0adfcd4dfae4720415c7fbbc76b681ab79162640b;
-      semantic controls authorization receipt f4a5456844adeafd39e2e4f2a8036ed9fff2c78830b2eab9d4a7bfa1300d2278;
+      attempt-1 semantic controls authorization receipt f4a5456844adeafd39e2e4f2a8036ed9fff2c78830b2eab9d4a7bfa1300d2278;
       canonical confirmation arm-map hash 709694b7d770b5cbb09afe8b932bba3891ab4fea39c54c625fc84c5da973072d;
-      global confirmation admission 18c019e92fb6b7f7caed0b0f916b958d528b36b9a30607c2890e6b9385d0125d;
-      block-0 deep STARTED journal c1eb2878bf936d95b62885309257aa1c98e39bbfa9096f3e6a6cf01d3a2a32f1;
+      attempt-1 global confirmation admission 18c019e92fb6b7f7caed0b0f916b958d528b36b9a30607c2890e6b9385d0125d;
+      attempt-1 failure receipt 2e645322ead3fbbdf58760849fe17def81fd12b62cdfa4b6c58808e24612ed41;
       non-advantage terminal merge receipt 99e4d3258f450173204466bd4a2b4f1dfadfc54d706008e6fc3944a5f7bd57f5;
       wrong-teacher terminal merge receipt 90ba5ad70a6dede8e0181c1c05f80ffa9a0d9651b604a1cc27659a8da69df544;
       off-policy terminal merge receipt 5f6b2c9c1d2a68001b7556c30324976c8312c3c4f170fe489496f0580853c435;
@@ -47,11 +47,22 @@ external_artifacts:
     required_for: confirmation resume, analysis, independent authorization, benchmark execution, and audit
     checksum: score markers bind exact paths, SHA-256, byte/row counts, and raw-derived item semantics; authorization rebinds raw hashes
     regenerate: python3 experiments/qwen35_4b_deep_advantage_mopd/scripts/run.py --stage confirm
+  - name: quarantined confirmation attempt 1
+    storage: large_artifacts/qwen35_4b_deep_advantage_mopd/confirmation_attempt_1
+    required_for: preserve the terminal pre-score validator-contract failure and its no-peek audit
+    checksum: >-
+      QUARANTINED marker 7c93540429dc340c1b62d4cce9e5d2aa82fa3439e615d5ffb3ae4d5300e33580;
+      retained-file inventory 553675edd924d5971e46eb99937431e567eda25faace16f347cafaa82312274e;
+      atom rows 0e5dd2bea3808d4524301276288380fb6a301bd72fbb6fd6caa54286dbb15595;
+      episode rows a2b105819aabfdcc5b8643d919746d379b72c0fc81bae028f8ed47d40be9039d.
+    regenerate: not regenerable; terminal failed attempt preserved verbatim
 omitted_artifacts:
   - path: large_artifacts/qwen35_4b_deep_advantage_mopd
     reason: checkpoints, adapters, online branches, and tensor caches are too large for git
   - path: large_artifacts/qwen35_4b_deep_advantage_mopd/confirmation
     reason: raw confirmation rollouts are external and hash-bound by committed score descriptors
+  - path: large_artifacts/qwen35_4b_deep_advantage_mopd/confirmation_attempt_1
+    reason: quarantined raw confirmation rollouts are external and hash-bound by the failure receipt
 reproducibility:
   smoke_command: python3 experiments/qwen35_4b_deep_advantage_mopd/scripts/run.py --smoke
   full_command: >-

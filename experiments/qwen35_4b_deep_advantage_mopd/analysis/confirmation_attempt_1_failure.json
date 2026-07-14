@@ -1,0 +1,76 @@
+{
+  "attempt": 1,
+  "failure_class": "pre_score_evidence_pipeline_contract",
+  "gate": {
+    "passed": false
+  },
+  "inspection_boundary": {
+    "aggregate_performance_inspected": false,
+    "generated_text_inspected": false,
+    "gold_or_task_semantics_inspected": false,
+    "scope": "marker metadata, file hashes, and output key-presence counts only"
+  },
+  "licensed_claims": [],
+  "original_admission": {
+    "archived_path": "experiments/qwen35_4b_deep_advantage_mopd/runs/confirmation_attempt_1/ADMISSION.json",
+    "sha256": "18c019e92fb6b7f7caed0b0f916b958d528b36b9a30607c2890e6b9385d0125d"
+  },
+  "original_controls_authorization": {
+    "archived_path": "experiments/qwen35_4b_deep_advantage_mopd/analysis/confirmation_attempt_1/controls_authorization.json",
+    "sha256": "f4a5456844adeafd39e2e4f2a8036ed9fff2c78830b2eab9d4a7bfa1300d2278"
+  },
+  "quarantined_transaction": {
+    "atom_rows": {
+      "bytes": 5255687,
+      "rows": 4032,
+      "sha256": "0e5dd2bea3808d4524301276288380fb6a301bd72fbb6fd6caa54286dbb15595"
+    },
+    "call_bundle_count": 19,
+    "episode_rows": {
+      "bytes": 3057391,
+      "rows": 384,
+      "sha256": "a2b105819aabfdcc5b8643d919746d379b72c0fc81bae028f8ed47d40be9039d"
+    },
+    "external_root": "large_artifacts/qwen35_4b_deep_advantage_mopd/confirmation_attempt_1/block_0/deep",
+    "generated_candidate_payload_sha256": "8a3823824fc8224873a0d164a078c2aa5faa1762cf60f16669db46476685805f",
+    "generated_marker_sha256": "9ea45044270ace956219c429576b2c92ef6b11f190d8c4abb2718a3c5ddb0819",
+    "quarantined_marker_sha256": "7c93540429dc340c1b62d4cce9e5d2aa82fa3439e615d5ffb3ae4d5300e33580",
+    "retained_files_canonical_sha256": "553675edd924d5971e46eb99937431e567eda25faace16f347cafaa82312274e",
+    "started_marker_sha256": "c1eb2878bf936d95b62885309257aa1c98e39bbfa9096f3e6a6cf01d3a2a32f1",
+    "state": "QUARANTINED",
+    "tag": "block_0_deep"
+  },
+  "registered_error": "ValueError: confirmation call journal output lacks a scored runner field",
+  "required_recovery": {
+    "reuse_quarantined_generation": false,
+    "steps": [
+      "make the ordinary runner output satisfy the already-registered strict journal projection without changing generated text or scoring semantics",
+      "add a regression covering naturally closed budget outputs",
+      "run the full experiment and repository checks",
+      "issue a fresh no-clobber controls authorization and admission bound to the corrected evaluator inventory",
+      "rerun the entire sealed campaign from an empty current confirmation tree"
+    ]
+  },
+  "root_cause_evidence": {
+    "forced_close_outputs": 1363,
+    "journal_outputs": 6879,
+    "missing_field_patterns": [
+      {
+        "count": 1392,
+        "fields": []
+      },
+      {
+        "count": 5487,
+        "fields": [
+          "retained_thinking_token_ids"
+        ]
+      }
+    ],
+    "raw_projection_behavior": "harness._slim projects an absent retained_thinking_token_ids field to an empty list",
+    "runner_behavior": "VLLMRunner._ordinary_output omitted retained_thinking_token_ids while the strict call-journal schema required it",
+    "thinking_closed_outputs": 6879
+  },
+  "schema_version": 1,
+  "score_committed": false,
+  "stage": "sealed_confirmation_attempt_failure"
+}

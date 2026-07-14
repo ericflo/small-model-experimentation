@@ -422,3 +422,27 @@
   `c1eb2878bf936d95b62885309257aa1c98e39bbfa9096f3e6a6cf01d3a2a32f1`.
   No generated bundle or score exists at this in-progress checkpoint, so it
   changes no capability, comparison, retention, or routing conclusion.
+
+## 2026-07-14 — attempt-1 deep transaction quarantined before score
+
+- Block-0 deep completed 4,032 atom rows, 384 episode rows through 18 turns,
+  and 19 contiguous inference-call bundles. Semantic finalization then failed
+  closed before `scores.json` with `confirmation call journal output lacks a
+  scored runner field`; the terminal `QUARANTINED` marker hashes to
+  `7c93540429dc340c1b62d4cce9e5d2aa82fa3439e615d5ffb3ae4d5300e33580`.
+- A key-presence-only audit found 6,879 journal outputs. The 1,392 outputs that
+  carried `retained_thinking_token_ids` satisfied the strict schema; the other
+  5,487 lacked only that field. `VLLMRunner._ordinary_output` omitted it, while
+  `harness._slim` intentionally defaulted the absent optional evidence to
+  `[]`. Thus the generated/scored projection and strict journal schema had
+  diverged; model outputs were not malformed.
+- No prompt, gold, generated text, item score, aggregate score, or performance
+  comparison was inspected. The entire transaction, original authorization,
+  and admission are archived as attempt 1 and will not be reused. The failure
+  receipt hashes to
+  `2e645322ead3fbbdf58760849fe17def81fd12b62cdfa4b6c58808e24612ed41`.
+- Recovery is limited to making the ordinary runner output satisfy the already
+  registered strict schema without changing text or scoring, adding a direct
+  regression, issuing fresh no-clobber authorization/admission, and rerunning
+  both sealed blocks from an empty current tree. This is evidence-pipeline
+  failure, not capability evidence or a scientific stop.
