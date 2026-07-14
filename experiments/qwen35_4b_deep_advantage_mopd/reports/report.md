@@ -165,6 +165,9 @@ Primary seed 42, the first MOPD treatment, then scored `0.577005` deep and
 and slightly below off-policy on both strata, using 4,422,572 sampled tokens.
 This is an unfavorable first treatment block; seeds 43/44 and block 1 remain
 required by the frozen decision rule.
+Primary seed 43 repeats the negative block-0 deep sign: `0.576097` deep and
+`0.804167` quick, `−0.003971` and `−0.005862` versus the source, using
+4,408,848 sampled tokens. Seed 44 and block 1 remain required.
 
 Together, the three frozen optimizer seeds establish that the registered
 four-round update can complete safely and that strict-deep route supply

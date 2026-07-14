@@ -230,7 +230,10 @@ than non-advantage but still below the source anchor on both strata. The first
 MOPD treatment, primary seed 42, scored `0.577005` deep and `0.795225` quick,
 `−0.003063` and `−0.014804` versus the source and slightly below off-policy on
 both strata. One optimizer seed and one block are insufficient for the frozen
-gate; seeds 43/44 and block 1 remain decisive.
+gate. Primary seed 43 then scored `0.576097` deep and `0.804167` quick,
+`−0.003971` and `−0.005862` versus the source, with 4,408,848 sampled tokens.
+Two optimizer seeds now agree on a negative block-0 deep sign; seed 44 and
+block 1 remain decisive.
 
 ## NF4/BF16 Interpretation Diagnostic
 

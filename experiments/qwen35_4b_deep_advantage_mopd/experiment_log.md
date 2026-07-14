@@ -572,3 +572,17 @@
   decision requires all treatment seeds, comparators, and both blocks. Primary
   seed 43 started next with external journal hash
   `81047c1f3329eb71fd76dfa47a4a2c6dd87627c2bcc227761567b155d400d3ef`.
+
+## 2026-07-14 — block-0 primary seed 43 repeats negative deep sign
+
+- Primary seed 43 completed sealed generation and strict validation.
+  `GENERATED.json` and `COMPLETE.json` hash to
+  `32c006cfa1e970cf845b2b1d8af23d606a314f1ee09aeba49a1466a0721a2d95`
+  and `44c7f6c239d00fb512f3c474ca20f711a7d85f39b3fd7f1607729a97caaa36bb`;
+  the score hashes to
+  `9ebf64444ce068a14de943d2c3c28c34e2dc567a23197e7307c93a029d42111e`.
+- Registered means are `0.576097` deep and `0.804167` quick, `−0.003971` and
+  `−0.005862` versus the source, using 4,408,848 sampled tokens. The deep sign
+  repeats seed 42's unfavorable result; seed 44 and block 1 remain required.
+  Primary seed 44 started next with external journal hash
+  `a607b9b93f7c629aff92083f308c53cb0058e353f00a4ee7f2603bcd4e4082e2`.
