@@ -50,6 +50,23 @@
   namespace, and 5,904-derived-seed collision gates. Sealed 24 mechanics-gold
   rows as AES-256-GCM ciphertext under an ignored local key. No model was loaded
   or called and hidden plaintext was not written.
+- The committed-green calibration qualified only
+  `tokenizer_eos_no_think_program_slot`: 48/48 exact and parse with zero cap
+  contacts, while its matched HF-model-EOS control was 0/48. This is an
+  interface result, not a capability result.
+- Implemented a prospective winner-bound mechanics candidate behind a second
+  exact-commit lock. It uses the immutable calibration runner's registered
+  tokenizer-EOS primitive, authenticates exact prompts/seeds/tokens/costs and
+  terminal geometry, and preserves the frozen selector's canonical two-byte
+  semantic program-ID tie-break independently of candidate row order.
+- Added a static parent/inode-provenance launcher, pre-import runtime hashing,
+  public/mechanics/hidden path-audit boundaries, exact review and CI receipts,
+  and model-free hostile controls for internal EOS, Boolean integer aliases,
+  selector order, canonical pre-import receipts, lock ancestry, and hidden-read
+  authorization. The full local experiment suite passes 118/118. Mechanics
+  requests, outputs, protected
+  arrays, ciphertext reads, key reads, hidden plaintext reads, and model calls
+  remain zero pending a fresh independent adversarial implementation review.
 
 ## Scaffold
 

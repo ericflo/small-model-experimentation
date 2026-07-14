@@ -5428,10 +5428,10 @@
       ".json": 28,
       ".jsonl": 9,
       ".md": 8,
-      ".py": 24,
-      ".s": 1,
+      ".py": 36,
+      ".s": 2,
       ".yaml": 3,
-      "[none]": 2
+      "[none]": 3
     },
     "id": "qwen35_4b_tokenizer_eos_answer_commit_factorial",
     "path": "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial",
@@ -5456,8 +5456,8 @@
       "src",
       "tests"
     ],
-    "total_files": 76,
-    "total_size_bytes": 26298645
+    "total_files": 90,
+    "total_size_bytes": 26465476
   },
   {
     "file_counts": {

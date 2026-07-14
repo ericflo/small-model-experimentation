@@ -41,7 +41,7 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | --- | ---: |
 | `.json` | 3116 |
 | `.csv` | 2144 |
-| `.py` | 2120 |
+| `.py` | 2132 |
 | `.md` | 1218 |
 | `.jsonl` | 942 |
 | `.png` | 848 |
@@ -50,12 +50,12 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | `.gz` | 169 |
 | `.html` | 90 |
 | `.sh` | 31 |
+| `[none]` | 12 |
 | `.pt` | 11 |
-| `[none]` | 11 |
 | `.txt` | 5 |
+| `.s` | 2 |
 | `.aesgcm` | 1 |
 | `.npy` | 1 |
-| `.s` | 1 |
 
 ## Largest Files
 

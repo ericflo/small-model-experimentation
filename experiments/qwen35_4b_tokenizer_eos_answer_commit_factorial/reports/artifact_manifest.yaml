@@ -15,6 +15,10 @@ reproducibility:
   construction_command: "python3 -B experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/construct.py"
   tokenizer_receipt_command: ".venv/bin/python -B experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/tokenizer_receipt.py"
   full_command: "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/calibration_launcher --stage run"
+  mechanics_lock_command: "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/mechanics_launcher --stage lock"
+  mechanics_run_command: "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/mechanics_launcher --stage run"
+  mechanics_visible_analysis_command: "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/mechanics_launcher --stage analyze-visible"
+  mechanics_hidden_score_command: "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/mechanics_launcher --stage score-hidden"
   required_external_artifacts:
     - mechanics_gold_aes256_key
 local_receipts:
@@ -49,6 +53,8 @@ notes: >-
   The tracked calibration transaction contains 48 shared-thought requests and
   384 paired answer requests (432 sampled outputs total). All 192 boundary
   pairs authenticated and the decision is TOKENIZER_EOS_ONLY_INTERFACE_QUALIFIED.
-  Conditional mechanics, protected-label plaintext, and benchmarks remain
-  unread; the mechanics key is still required only after the visible-selection
-  publication boundary.
+  The winner-bound mechanics implementation candidate has only model-free test
+  coverage; it is not authorized and has generated no mechanics requests or
+  outputs. Conditional mechanics, protected-label plaintext, and benchmarks
+  remain unread; the mechanics key is still required only after the visible-
+  selection publication boundary.

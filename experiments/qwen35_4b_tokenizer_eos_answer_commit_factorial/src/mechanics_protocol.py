@@ -9,6 +9,7 @@ from collections import Counter, defaultdict
 from collections.abc import Mapping, Sequence
 from typing import Any
 
+from protocol import canonical_program_id, canonical_program_id_bytes
 from task_data import (
     ALIASES,
     ALIAS_TO_OPERATION,
@@ -33,6 +34,16 @@ SHUFFLE_SEED = 2026140705
 
 def _digest(*parts: str) -> str:
     return hashlib.sha256("\0".join(parts).encode("utf-8")).hexdigest()
+
+
+def _selector_hash(task_id: str, aliases: Sequence[str]) -> bytes:
+    return hashlib.sha256(
+        SELECTOR_POLICY.encode("utf-8")
+        + b"\0"
+        + task_id.encode("utf-8")
+        + b"\0"
+        + canonical_program_id_bytes(aliases)
+    ).digest()
 
 
 def _validate_public(task: dict[str, Any]) -> None:
@@ -364,34 +375,53 @@ def select_visible(
             "abstained": True,
             "selected_candidate_id": None,
             "selected_full_canonical": None,
+            "selected_program_id": None,
+            "selected_program_id_hex": None,
             "eligible_rows": 0,
             "eligible_unique_programs": 0,
             "scored": scored,
         }
-    by_program: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    by_program: dict[int, list[dict[str, Any]]] = defaultdict(list)
+    aliases_by_program: dict[int, tuple[str, str, str]] = {}
     for row in eligible:
-        by_program[row["full_canonical"]].append(row)
+        aliases = tuple(alias_program(tuple(row["full_program"])).split(" | "))
+        program_id = canonical_program_id(aliases)
+        if len(aliases) != 3:
+            raise ValueError("eligible proposal is not a full three-operation tuple")
+        aliases_by_program[program_id] = aliases
+        by_program[program_id].append(row)
     representatives = {
-        program: min(rows, key=lambda row: _digest(task["task_id"], row["candidate_id"]))
+        program: min(rows, key=lambda row: row["candidate_id"])
         for program, rows in by_program.items()
     }
-    clusters: dict[str, list[str]] = defaultdict(list)
+    clusters: dict[str, list[int]] = defaultdict(list)
     for program, row in representatives.items():
         clusters[repr(row["probe_vector"])].append(program)
+
+    def program_rank(program: int) -> tuple[bytes, tuple[str, str, str]]:
+        aliases = aliases_by_program[program]
+        return (_selector_hash(task["task_id"], aliases), aliases)
+
+    def cluster_rank(key: str) -> tuple[int, bytes, tuple[str, str, str]]:
+        member = min(clusters[key], key=program_rank)
+        digest, aliases = program_rank(member)
+        return (-len(clusters[key]), digest, aliases)
+
     chosen_cluster = min(
         clusters,
-        key=lambda key: (-len(clusters[key]), _digest(task["task_id"], "cluster", key)),
+        key=cluster_rank,
     )
-    chosen_program = min(
-        clusters[chosen_cluster],
-        key=lambda program: _digest(task["task_id"], "program", program),
-    )
+    chosen_program = min(clusters[chosen_cluster], key=program_rank)
     chosen = representatives[chosen_program]
     return {
         "selector_policy": SELECTOR_POLICY,
         "abstained": False,
         "selected_candidate_id": chosen["candidate_id"],
-        "selected_full_canonical": chosen_program,
+        "selected_full_canonical": chosen["full_canonical"],
+        "selected_program_id": chosen_program,
+        "selected_program_id_hex": canonical_program_id_bytes(
+            aliases_by_program[chosen_program]
+        ).hex(),
         "eligible_rows": len(eligible),
         "eligible_unique_programs": len(by_program),
         "consensus_unique_programs": len(clusters[chosen_cluster]),

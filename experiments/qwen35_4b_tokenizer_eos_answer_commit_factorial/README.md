@@ -113,6 +113,18 @@ experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/calibration_
 experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/calibration_launcher --stage analyze
 ```
 
+Winner-bound mechanics (still unauthorized until the implementation review,
+review receipt, and mechanics lock have each been committed, pushed, and
+green):
+
+```bash
+experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/mechanics_launcher --stage lock
+experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/mechanics_launcher --stage run
+experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/mechanics_launcher --stage analyze-visible
+# Only after visible_selection.json is committed, pushed, and green:
+experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/mechanics_launcher --stage score-hidden
+```
+
 `calibration_launcher` is a 12.6-KiB static x86-64 ELF with no dynamic
 interpreter. It retains a waiting static parent, opens its exact executable on
 inherited descriptor 198, discards the inherited environment, and directly
@@ -127,6 +139,15 @@ forged by an environment marker. Its source is
 /usr/bin/gcc -nostdlib -static -no-pie -s -Wl,--build-id=none \
   -o experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/calibration_launcher \
   experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/calibration_launcher.S
+```
+
+The mechanics launcher applies the same kernel-carried provenance design to
+the winner-bound runner. Its exact reproducible build command is:
+
+```bash
+/usr/bin/gcc -nostdlib -static -no-pie -s -Wl,--build-id=none \
+  -o experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/mechanics_launcher \
+  experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/mechanics_launcher.S
 ```
 
 Direct Python invocation—even with a caller-supplied marker and an open copy of
@@ -241,3 +262,8 @@ large-effect pilot; it is not a confirmatory or general deployability claim.
 - `runs/calibration/implementation_lock.json`
 - `runs/calibration/live_preflight.json`
 - `runs/calibration/decision.json`
+- `src/mechanics_runtime.py`
+- `src/mechanics_stage.py`
+- `src/mechanics_lock.py`
+- `scripts/run_mechanics.py`
+- `scripts/mechanics_launcher`
