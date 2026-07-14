@@ -257,6 +257,12 @@ versus the deep source, using 4,494,796 sampled tokens. Relative to the 40/60
 initialization it trades `−0.009208` deep for only `+0.001415` quick. Every MOPD
 seed is above soup50 on deep and below it on quick, again describing a Pareto
 trade rather than capability installation. Soup75 is running next.
+Soup75 then scored `0.576786` deep and `0.807131` quick, only `−0.003282`
+and `−0.002897` versus the deep source, using 4,332,931 sampled tokens. It
+dominates MOPD seeds 43 and 44 on both strata; seed 42 is merely `+0.000219`
+deep and `−0.011906` quick versus soup75. Ordinary interpolation therefore
+matches or exceeds the treatment tradeoff. The registered soup best-of-eight
+sample-more comparator is running next.
 
 ## NF4/BF16 Interpretation Diagnostic
 

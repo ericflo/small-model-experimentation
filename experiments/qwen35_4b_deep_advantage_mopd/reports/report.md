@@ -194,6 +194,11 @@ and `+0.002514` versus the deep source, using 4,494,796 sampled tokens. It gives
 up `0.009208` deep for only `0.001415` quick versus the immutable 40/60 soup.
 All three treatments lie on the opposite side of that trade—higher deep and
 lower quick—so neither checkpoint class dominates the other.
+Soup75 then scores `0.576786` deep and `0.807131` quick, `−0.003282` and
+`−0.002897` versus the deep source, using 4,332,931 sampled tokens. It dominates
+MOPD seeds 43 and 44 on both strata. Seed 42 exceeds it by only `0.000219` deep
+while losing `0.011906` quick. Thus a registered parameter interpolation matches
+or exceeds the treatment's block-0 tradeoff without online advantage updates.
 
 Together, the three frozen optimizer seeds establish that the registered
 four-round update can complete safely and that strict-deep route supply

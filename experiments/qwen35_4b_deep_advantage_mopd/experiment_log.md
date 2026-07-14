@@ -664,3 +664,19 @@
   neither checkpoint class dominates the other.
 - Soup75 started next with external journal hash
   `4e2c0077e11ab05405721899382e64609824af62146372d229ce4c1ede874263`.
+
+## 2026-07-14 — block-0 soup75 matches or dominates MOPD
+
+- Soup75 completed sealed generation and strict validation. `GENERATED.json`
+  and `COMPLETE.json` hash to
+  `f7257cc5f275aed3aaabfcd1058578471a1c9778d1b5e5b02913a10bd8467d8a`
+  and `e9b38a1aa7194347df551857c49ee3499bceb1c850db6bdcecf166d54f61fd93`;
+  the score hashes to
+  `90ec218905010e0469cf306e2b5bb901d06d5853334959515c98745bde74adad`.
+- Registered means are `0.576786` deep and `0.807131` quick, `−0.003282` and
+  `−0.002897` versus the deep source, using 4,332,931 sampled tokens. Soup75
+  dominates primary seeds 43 and 44 on both strata. Seed 42 is only `+0.000219`
+  deep and `−0.011906` quick versus soup75.
+- The 40/60 soup best-of-eight sample-more comparator started next with external
+  journal hash
+  `f085310f00e629c80f4fd387aa44a077b9e6ae34dac133136029ed866d6d1745`.
