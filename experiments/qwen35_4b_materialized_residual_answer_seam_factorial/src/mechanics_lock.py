@@ -22,7 +22,12 @@ from calibration_lock import (
     verify_calibration_lock,
     verify_recorded_ci,
 )
-from calibration_stage import CalibrationInputs, load_calibration_inputs
+from calibration_stage import (
+    CalibrationInputs,
+    authenticate_calibration_decision,
+    load_analysis_tokenizer,
+    load_calibration_inputs,
+)
 from mechanics_stage import (
     DEFAULT_MECHANICS_LOCK,
     DEFAULT_MECHANICS_PREFLIGHT,
@@ -190,7 +195,13 @@ def publish_mechanics_lock(path: Path = MECHANICS_LOCK) -> dict[str, Any]:
     _ensure_clean_for_lock()
     calibration_lock = verify_calibration_lock()
     inputs = load_calibration_inputs()
-    decision = read_canonical(CALIBRATION_DECISION)
+    tokenizer = load_analysis_tokenizer(inputs)
+    decision = authenticate_calibration_decision(
+        inputs=inputs,
+        raw_dir=CALIBRATION_DECISION.parent / "raw",
+        tokenizer=tokenizer,
+        decision_path=CALIBRATION_DECISION,
+    )
     selected_interface(decision, inputs)
     relative_decision = _relative(CALIBRATION_DECISION)
     if _git("ls-files", "--error-unmatch", "--", relative_decision) != relative_decision:
@@ -225,7 +236,13 @@ def verify_mechanics_lock(
         allowed_live_prefixes=("runs/calibration/", "runs/mechanics/"),
     )
     inputs = load_calibration_inputs()
-    decision = read_canonical(CALIBRATION_DECISION)
+    tokenizer = load_analysis_tokenizer(inputs)
+    decision = authenticate_calibration_decision(
+        inputs=inputs,
+        raw_dir=CALIBRATION_DECISION.parent / "raw",
+        tokenizer=tokenizer,
+        decision_path=CALIBRATION_DECISION,
+    )
     if path.is_symlink() or not path.is_file():
         raise RuntimeError("live mechanics requires a committed mechanics lock")
     value = validate_mechanics_lock_value(

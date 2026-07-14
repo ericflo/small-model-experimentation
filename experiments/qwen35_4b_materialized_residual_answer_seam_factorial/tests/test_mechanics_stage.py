@@ -18,6 +18,53 @@ from calibration_stage import load_calibration_inputs  # noqa: E402
 from transactions import MODEL_ID, MODEL_REVISION, sha256_file  # noqa: E402
 
 
+def _complete_calibration_decision(inputs):
+    arms = list(inputs.config["interface"]["fixed_winner_priority"])
+    metrics = {}
+    for index, arm in enumerate(arms):
+        successes = 48 if index == 0 else 0
+        metrics[arm] = {
+            "rows": 48,
+            "exact_echo_successes": successes,
+            "parse_successes": successes,
+            "answer_cap_contacts": 0,
+            "thinking_cap_contacts": 0,
+            "arity_counts": {"2": 24, "3": 24},
+            "by_arity": {
+                str(arity): {
+                    "rows": 24,
+                    "exact_echo_successes": successes // 2,
+                    "parse_successes": successes // 2,
+                    "answer_cap_contacts": 0,
+                    "thinking_cap_contacts": 0,
+                }
+                for arity in (2, 3)
+            },
+        }
+    return {
+        "schema_version": 1,
+        "stage": "interface_calibration",
+        "model": MODEL_ID,
+        "revision": MODEL_REVISION,
+        "decision": "CALIBRATION_INTERFACE_SELECTED",
+        "winner": arms[0],
+        "fixed_priority": arms,
+        "qualification": {arm: index == 0 for index, arm in enumerate(arms)},
+        "selection_uses_metric_ranking": False,
+        "metrics": metrics,
+        "scored_rows_sha256": {arm: "a" * 64 for arm in arms},
+        "pairing": {},
+        "transaction_chain": {},
+        "calibration_read_receipt": {},
+        "hidden_files_read": [],
+        "qualification_files_read": [],
+        "confirmation_files_read": [],
+        "benchmark_files_read": [],
+        "implementation_lock_sha256": "b" * 64,
+        "live_preflight_sha256": "c" * 64,
+    }
+
+
 class FakeRunner:
     def __init__(self, runner_path: Path):
         self.runner_path = runner_path
@@ -60,18 +107,7 @@ class MechanicsStageTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.inputs = load_calibration_inputs()
-        cls.decision = {
-            "decision": "CALIBRATION_INTERFACE_SELECTED",
-            "winner": "think512_freeform",
-            "fixed_priority": list(
-                cls.inputs.config["interface"]["fixed_winner_priority"]
-            ),
-            "qualification": {
-                arm: arm == "think512_freeform"
-                for arm in cls.inputs.config["interface"]["fixed_winner_priority"]
-            },
-            "selection_uses_metric_ranking": False,
-        }
+        cls.decision = _complete_calibration_decision(cls.inputs)
 
     def test_selected_sampling_uses_separate_frozen_direct_seed(self) -> None:
         plan = stage.mechanics_sampling_plan(self.decision, self.inputs)

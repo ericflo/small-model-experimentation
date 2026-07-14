@@ -47,6 +47,7 @@ DEFAULT_PREPARED_PATH = EXP / "runs/prepared/calibration_requests.jsonl"
 DEFAULT_IMPLEMENTATION_LOCK_PATH = EXP / "runs/calibration/implementation_lock.json"
 DEFAULT_LIVE_PREFLIGHT_PATH = EXP / "runs/calibration/live_preflight.json"
 DEFAULT_RUNNER_PATH = EXP / "src/vllm_runner.py"
+DEFAULT_DECISION_PATH = EXP / "runs/calibration/decision.json"
 
 
 def canonical_sha256(value: Any) -> str:
@@ -281,6 +282,31 @@ def _thought_bundle(raw_dir: Path) -> tuple[list[dict[str, Any]], dict[str, Any]
     return bundle["rows"], bundle["runner_metadata"]
 
 
+def load_analysis_tokenizer(inputs: CalibrationInputs) -> Any:
+    """Load only the frozen tokenizer; never model weights."""
+    from transformers import AutoTokenizer
+
+    tokenizer = AutoTokenizer.from_pretrained(
+        MODEL_ID,
+        revision=MODEL_REVISION,
+        trust_remote_code=True,
+        local_files_only=True,
+    )
+    receipt = inputs.tokenizer_receipt
+    if (
+        type(tokenizer).__name__ != receipt["tokenizer_class"]
+        or len(tokenizer) != receipt["tokenizer_length"]
+        or tokenizer.eos_token_id
+        != receipt["termination"]["tokenizer_eos_token_id"]
+        or tokenizer.encode("</think>\n\n", add_special_tokens=False)
+        != receipt["think_token_ids"]["forced_close_sequence"]
+        or tokenizer.encode("PROGRAM:", add_special_tokens=False)
+        != receipt["answer_prefix"]["token_ids"]
+    ):
+        raise RuntimeError("analysis tokenizer differs from frozen receipt")
+    return tokenizer
+
+
 def calibration_registrations(
     *,
     inputs: CalibrationInputs,
@@ -298,6 +324,7 @@ def calibration_registrations(
             "live_preflight_path": live_preflight_path,
             "runner_path": runner_path,
             "sampling": dataclasses.asdict(plan[invocation]),
+            "authorization_paths": {},
         }
         for invocation in INVOCATION_ORDER
     }
@@ -403,6 +430,7 @@ def run_calibration_transactions(
             live_preflight_path=live_preflight_path,
             runner_path=runner_path,
             sampling=dataclasses.asdict(plan[invocation]),
+            authorization_paths={},
             generate=generate,
         )
     return authenticate_calibration_chain(
@@ -438,8 +466,204 @@ def load_calibration_bundles(
     }
 
 
+def _token_ids_sha256(token_ids: Sequence[int]) -> str:
+    return hashlib.sha256(
+        b"".join(int(token_id).to_bytes(4, "big") for token_id in token_ids)
+    ).hexdigest()
+
+
+def _ids(value: Any, *, label: str) -> list[int]:
+    if not isinstance(value, list) or any(
+        not isinstance(token, int) or isinstance(token, bool) or token < 0
+        for token in value
+    ):
+        raise RuntimeError(f"invalid token IDs in {label}")
+    return value
+
+
+def _trim_model_eos(token_ids: Sequence[int], eos_id: int) -> list[int]:
+    values = list(token_ids)
+    return values[: values.index(eos_id)] if eos_id in values else values
+
+
+def _expected_prompt(
+    *,
+    tokenizer: Any,
+    record: Mapping[str, Any],
+    thinking: bool,
+    prefix_ids: Sequence[int],
+) -> tuple[dict[str, Any], list[int]]:
+    rendered = tokenizer.apply_chat_template(
+        record["messages"],
+        tokenize=False,
+        add_generation_prompt=True,
+        enable_thinking=thinking,
+    )
+    if not isinstance(rendered, str):
+        raise RuntimeError("analysis chat template returned non-text")
+    original = list(tokenizer.encode(rendered, add_special_tokens=False))
+    effective = original + ([] if thinking else list(prefix_ids))
+    return {
+        "prompt_sha256": hashlib.sha256(rendered.encode("utf-8")).hexdigest(),
+        "effective_prompt_sha256": _token_ids_sha256(effective),
+        "n_prompt_tokens": len(effective),
+        "n_original_prompt_tokens": len(original),
+        "prompt_channel": "thinking" if thinking else "off",
+        "answer_prefix_token_ids": list(prefix_ids),
+        "prompt_logprobs": None,
+    }, original
+
+
+def _require_fields(value: Mapping[str, Any], expected: Mapping[str, Any], label: str) -> None:
+    changed = {
+        key: (value.get(key), wanted)
+        for key, wanted in expected.items()
+        if value.get(key) != wanted
+    }
+    if changed:
+        raise RuntimeError(f"{label} semantic fields changed: {sorted(changed)}")
+
+
+def _authenticate_source_output(
+    *, output: Mapping[str, Any], tokenizer: Any, prompt_ids: Sequence[int], eos_id: int
+) -> None:
+    sampled = _ids(output.get("stage1_token_ids"), label="source stage one")
+    without_eos = _trim_model_eos(sampled, eos_id)
+    close_id = int(tokenizer.encode("</think>", add_special_tokens=False)[0])
+    close_index = without_eos.index(close_id) if close_id in without_eos else None
+    retained = without_eos[:close_index] if close_index is not None else without_eos
+    _require_fields(
+        output,
+        {
+            "sample_index": 0,
+            "seed_stage1": output.get("stage1_parent_seed"),
+            "seed_stage2": None,
+            "seed_domain_stage1": "thought",
+            "seed_domain_stage2": None,
+            "text": tokenizer.decode(retained, skip_special_tokens=False),
+            "token_ids": retained,
+            "retained_thinking_token_ids": retained,
+            "answer_prefix_token_ids": [],
+            "injected_token_ids": [],
+            "stage2_token_ids": [],
+            "n_thinking_tokens": len(retained),
+            "n_answer_tokens": 0,
+            "n_sampled_tokens": len(sampled),
+            "n_injected_tokens": 0,
+            "n_completion_tokens": len(retained),
+            "n_terminal_tokens_trimmed": len(sampled) - len(without_eos),
+            "n_tokens_discarded_after_close": len(without_eos) - len(retained),
+            "n_stage1_prompt_tokens": len(prompt_ids),
+            "n_stage2_prompt_tokens": 0,
+            "thinking_closed": close_index is not None,
+            "forced_close": False,
+            "stage1_finish_reason": output.get("finish_reason"),
+            "stage1_stop_reason": output.get("stop_reason"),
+            "truncated": output.get("finish_reason") == "length",
+        },
+        "shared thought output",
+    )
+
+
+def _authenticate_arm_output(
+    *,
+    arm: str,
+    output: Mapping[str, Any],
+    source: Mapping[str, Any],
+    tokenizer: Any,
+    original_prompt_ids: Sequence[int],
+    prefix_ids: Sequence[int],
+    close_ids: Sequence[int],
+    eos_id: int,
+) -> None:
+    thinking = arm.startswith("think512_")
+    if thinking:
+        stage1 = _ids(source.get("stage1_token_ids"), label=f"{arm} source")
+        retained = _ids(
+            source.get("retained_thinking_token_ids"), label=f"{arm} retained source"
+        )
+        stage2 = _ids(output.get("stage2_token_ids"), label=f"{arm} stage two")
+        stage2_trimmed = _trim_model_eos(stage2, eos_id)
+        final_ids = retained + list(close_ids) + list(prefix_ids) + stage2_trimmed
+        _require_fields(
+            output,
+            {
+                "sample_index": 0,
+                "stage1_parent_seed": source.get("stage1_parent_seed"),
+                "seed_stage1": source.get("seed_stage1"),
+                "seed_domain_stage1": "thought",
+                "seed_domain_stage2": "answer",
+                "text": tokenizer.decode(final_ids, skip_special_tokens=False),
+                "token_ids": final_ids,
+                "stage1_token_ids": stage1,
+                "retained_thinking_token_ids": retained,
+                "answer_prefix_token_ids": list(prefix_ids),
+                "injected_token_ids": list(close_ids) + list(prefix_ids),
+                "n_thinking_tokens": len(retained),
+                "n_answer_tokens": len(stage2_trimmed),
+                "n_sampled_tokens": len(stage1) + len(stage2),
+                "n_injected_tokens": len(close_ids) + len(prefix_ids),
+                "n_completion_tokens": len(final_ids),
+                "n_terminal_tokens_trimmed": source.get(
+                    "n_terminal_tokens_trimmed"
+                )
+                + len(stage2)
+                - len(stage2_trimmed),
+                "n_tokens_discarded_after_close": source.get(
+                    "n_tokens_discarded_after_close"
+                ),
+                "n_stage1_prompt_tokens": len(original_prompt_ids),
+                "n_stage2_prompt_tokens": len(original_prompt_ids)
+                + len(retained)
+                + len(close_ids)
+                + len(prefix_ids),
+                "thinking_closed": True,
+                "forced_close": True,
+                "stage1_finish_reason": source.get("stage1_finish_reason"),
+                "stage1_stop_reason": source.get("stage1_stop_reason"),
+                "truncated": output.get("finish_reason") == "length",
+            },
+            f"{arm} output",
+        )
+        if not isinstance(output.get("seed_stage2"), int):
+            raise RuntimeError(f"{arm} answer seed changed")
+        return
+    stage1 = _ids(output.get("stage1_token_ids"), label=f"{arm} stage one")
+    stage1_trimmed = _trim_model_eos(stage1, eos_id)
+    final_ids = list(prefix_ids) + stage1_trimmed
+    _require_fields(
+        output,
+        {
+            "sample_index": 0,
+            "seed_stage1": output.get("stage1_parent_seed"),
+            "seed_stage2": None,
+            "seed_domain_stage1": "answer",
+            "seed_domain_stage2": None,
+            "text": tokenizer.decode(final_ids, skip_special_tokens=False),
+            "token_ids": final_ids,
+            "answer_prefix_token_ids": list(prefix_ids),
+            "injected_token_ids": list(prefix_ids),
+            "stage2_token_ids": [],
+            "n_thinking_tokens": 0,
+            "n_answer_tokens": len(stage1_trimmed),
+            "n_sampled_tokens": len(stage1),
+            "n_injected_tokens": len(prefix_ids),
+            "n_completion_tokens": len(final_ids),
+            "n_terminal_tokens_trimmed": len(stage1) - len(stage1_trimmed),
+            "n_stage1_prompt_tokens": len(original_prompt_ids) + len(prefix_ids),
+            "n_stage2_prompt_tokens": 0,
+            "thinking_closed": False,
+            "forced_close": False,
+            "stage1_finish_reason": output.get("finish_reason"),
+            "stage1_stop_reason": output.get("stop_reason"),
+            "truncated": output.get("finish_reason") == "length",
+        },
+        f"{arm} output",
+    )
+
+
 def _authenticate_factorial_pairing(
-    bundles: Mapping[str, dict[str, Any]], inputs: CalibrationInputs
+    bundles: Mapping[str, dict[str, Any]], inputs: CalibrationInputs, tokenizer: Any
 ) -> dict[str, Any]:
     ids = [row["id"] for row in inputs.records]
     thought_rows = bundles["calibration_thoughts"]["rows"]
@@ -447,6 +671,8 @@ def _authenticate_factorial_pairing(
         raise RuntimeError("shared-thought row identity/order changed")
     thought_outputs = [row["outputs"][0] for row in thought_rows]
     prefix_ids = inputs.tokenizer_receipt["answer_prefix"]["token_ids"]
+    close_ids = inputs.tokenizer_receipt["think_token_ids"]["forced_close_sequence"]
+    eos_id = inputs.tokenizer_receipt["termination"]["hf_model_eos_token_id"]
     arms = {name: bundles[name]["rows"] for name in INTERFACE_ARMS}
     if any([row["id"] for row in rows] != ids for rows in arms.values()):
         raise RuntimeError("factorial arm row identity/order changed")
@@ -462,6 +688,45 @@ def _authenticate_factorial_pairing(
         for name, mode in expected_modes.items()
     ):
         raise RuntimeError("factorial generation mode changed")
+    for index, (record, row, output) in enumerate(
+        zip(inputs.records, thought_rows, thought_outputs, strict=True)
+    ):
+        expected_prompt, prompt_ids = _expected_prompt(
+            tokenizer=tokenizer,
+            record=record,
+            thinking=True,
+            prefix_ids=(),
+        )
+        _require_fields(row, expected_prompt, f"shared thought prompt row {index}")
+        _authenticate_source_output(
+            output=output,
+            tokenizer=tokenizer,
+            prompt_ids=prompt_ids,
+            eos_id=eos_id,
+        )
+    for arm, rows in arms.items():
+        thinking = arm.startswith("think512_")
+        arm_prefix = prefix_ids if arm.endswith("program_slot") else []
+        for index, (record, row, source) in enumerate(
+            zip(inputs.records, rows, thought_outputs, strict=True)
+        ):
+            expected_prompt, prompt_ids = _expected_prompt(
+                tokenizer=tokenizer,
+                record=record,
+                thinking=thinking,
+                prefix_ids=arm_prefix,
+            )
+            _require_fields(row, expected_prompt, f"{arm} prompt row {index}")
+            _authenticate_arm_output(
+                arm=arm,
+                output=row["outputs"][0],
+                source=source,
+                tokenizer=tokenizer,
+                original_prompt_ids=prompt_ids,
+                prefix_ids=arm_prefix,
+                close_ids=close_ids,
+                eos_id=eos_id,
+            )
     for index, thought in enumerate(thought_outputs):
         outputs = {name: arms[name][index]["outputs"][0] for name in INTERFACE_ARMS}
         for name in ("think512_freeform", "think512_program_slot"):
@@ -581,6 +846,7 @@ def analyze_calibration(
     implementation_lock_path: Path = DEFAULT_IMPLEMENTATION_LOCK_PATH,
     live_preflight_path: Path = DEFAULT_LIVE_PREFLIGHT_PATH,
     runner_path: Path = DEFAULT_RUNNER_PATH,
+    tokenizer: Any,
 ) -> dict[str, Any]:
     bundles = load_calibration_bundles(
         inputs=inputs,
@@ -590,13 +856,14 @@ def analyze_calibration(
         live_preflight_path=live_preflight_path,
         runner_path=runner_path,
     )
-    pairing = _authenticate_factorial_pairing(bundles, inputs)
+    pairing = _authenticate_factorial_pairing(bundles, inputs, tokenizer)
     interface = inputs.config["interface"]
     metrics_full = {
         arm: score_interface_rows(
             bundles[arm]["rows"],
             answer_cap=int(interface["sampled_answer_cap"]),
             thinking_budget=int(interface["thinking_budget"]),
+            thinking_expected=arm.startswith("think512_"),
         )
         for arm in INTERFACE_ARMS
     }
@@ -636,3 +903,56 @@ def analyze_calibration(
         "confirmation_files_read": [],
         "benchmark_files_read": [],
     }
+
+
+def calibration_decision_value(
+    *,
+    inputs: CalibrationInputs,
+    raw_dir: Path,
+    tokenizer: Any,
+    prepared_path: Path = DEFAULT_PREPARED_PATH,
+    implementation_lock_path: Path = DEFAULT_IMPLEMENTATION_LOCK_PATH,
+    live_preflight_path: Path = DEFAULT_LIVE_PREFLIGHT_PATH,
+    runner_path: Path = DEFAULT_RUNNER_PATH,
+) -> dict[str, Any]:
+    """Recompute the complete durable calibration decision from sealed evidence."""
+    return {
+        **analyze_calibration(
+            inputs=inputs,
+            raw_dir=raw_dir,
+            prepared_path=prepared_path,
+            implementation_lock_path=implementation_lock_path,
+            live_preflight_path=live_preflight_path,
+            runner_path=runner_path,
+            tokenizer=tokenizer,
+        ),
+        "implementation_lock_sha256": sha256_file(implementation_lock_path),
+        "live_preflight_sha256": sha256_file(live_preflight_path),
+    }
+
+
+def authenticate_calibration_decision(
+    *,
+    inputs: CalibrationInputs,
+    raw_dir: Path,
+    tokenizer: Any,
+    decision_path: Path = DEFAULT_DECISION_PATH,
+    prepared_path: Path = DEFAULT_PREPARED_PATH,
+    implementation_lock_path: Path = DEFAULT_IMPLEMENTATION_LOCK_PATH,
+    live_preflight_path: Path = DEFAULT_LIVE_PREFLIGHT_PATH,
+    runner_path: Path = DEFAULT_RUNNER_PATH,
+) -> dict[str, Any]:
+    """Exact-compare a recorded winner with a fresh authenticated analysis."""
+    observed = read_canonical(decision_path)
+    expected = calibration_decision_value(
+        inputs=inputs,
+        raw_dir=raw_dir,
+        tokenizer=tokenizer,
+        prepared_path=prepared_path,
+        implementation_lock_path=implementation_lock_path,
+        live_preflight_path=live_preflight_path,
+        runner_path=runner_path,
+    )
+    if observed != expected:
+        raise RuntimeError("recorded calibration decision differs from exact analysis")
+    return observed

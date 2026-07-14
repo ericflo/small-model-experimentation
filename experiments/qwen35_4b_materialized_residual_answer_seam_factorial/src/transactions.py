@@ -208,8 +208,15 @@ def _started_value(
     live_preflight_path: Path,
     runner_path: Path,
     sampling: Mapping[str, Any],
+    authorization_paths: Mapping[str, Path],
     predecessor_complete_sha256: str | None,
 ) -> dict[str, Any]:
+    if any(
+        not label
+        or any(character not in "abcdefghijklmnopqrstuvwxyz0123456789_" for character in label)
+        for label in authorization_paths
+    ):
+        raise ValueError("authorization labels must be lowercase snake_case")
     canonical_sampling = json.loads(
         json.dumps(
             dict(sampling),
@@ -234,6 +241,13 @@ def _started_value(
         "runner_path": str(runner_path),
         "runner_sha256": sha256_file(runner_path),
         "sampling": canonical_sampling,
+        "authorization_files": {
+            label: {
+                "path": str(path),
+                "sha256": sha256_file(path),
+            }
+            for label, path in sorted(authorization_paths.items())
+        },
         "predecessor_complete_sha256": predecessor_complete_sha256,
     }
 
@@ -391,6 +405,7 @@ def run_transaction(
     live_preflight_path: Path,
     runner_path: Path,
     sampling: Mapping[str, Any],
+    authorization_paths: Mapping[str, Path],
     generate: Callable[[Sequence[dict[str, Any]], Mapping[str, Any]], tuple[list[dict[str, Any]], dict[str, Any]]],
     crash_after: str | None = None,
 ) -> dict[str, Any]:
@@ -424,6 +439,7 @@ def run_transaction(
         live_preflight_path=live_preflight_path,
         runner_path=runner_path,
         sampling=sampling,
+        authorization_paths=authorization_paths,
         predecessor_complete_sha256=predecessor_sha,
     )
     state = inventory_state(raw_dir, invocation)
@@ -523,6 +539,7 @@ def _authenticate_complete_prefix(
             "runner_path",
             "runner_sha256",
             "sampling",
+            "authorization_files",
             "predecessor_complete_sha256",
         }:
             raise RuntimeError("STARTED receipt schema changed")
@@ -534,6 +551,7 @@ def _authenticate_complete_prefix(
             or started["revision"] != MODEL_REVISION
             or started["predecessor_complete_sha256"] != predecessor_sha
             or not isinstance(started["sampling"], dict)
+            or not isinstance(started["authorization_files"], dict)
         ):
             raise RuntimeError("STARTED identity/predecessor changed")
         prepared_path = Path(started["prepared_path"])
@@ -549,6 +567,22 @@ def _authenticate_complete_prefix(
         for path, expected_sha, label in current_files:
             if not isinstance(expected_sha, str) or sha256_file(path) != expected_sha:
                 raise RuntimeError(f"{label} changed after STARTED")
+        for label, authorization in started["authorization_files"].items():
+            if (
+                not isinstance(label, str)
+                or not label
+                or any(
+                    character not in "abcdefghijklmnopqrstuvwxyz0123456789_"
+                    for character in label
+                )
+                or not isinstance(authorization, dict)
+                or set(authorization) != {"path", "sha256"}
+                or not isinstance(authorization["path"], str)
+                or not isinstance(authorization["sha256"], str)
+                or sha256_file(Path(authorization["path"]))
+                != authorization["sha256"]
+            ):
+                raise RuntimeError(f"authorization file changed after STARTED: {label}")
         prepared_rows = read_jsonl(prepared_path)
         expected_rows = started["expected_rows"]
         if not isinstance(expected_rows, int) or isinstance(expected_rows, bool):
@@ -651,8 +685,11 @@ def authenticate_registered_complete_prefix(
             "live_preflight_path",
             "runner_path",
             "sampling",
+            "authorization_paths",
         }:
             raise ValueError("registered invocation schema changed")
+        if not isinstance(registration["authorization_paths"], Mapping):
+            raise ValueError("registered authorization paths changed")
         expected = _started_value(
             invocation=invocation,
             prepared_path=Path(registration["prepared_path"]),
@@ -663,6 +700,10 @@ def authenticate_registered_complete_prefix(
             live_preflight_path=Path(registration["live_preflight_path"]),
             runner_path=Path(registration["runner_path"]),
             sampling=registration["sampling"],
+            authorization_paths={
+                label: Path(path)
+                for label, path in registration["authorization_paths"].items()
+            },
             predecessor_complete_sha256=predecessor_sha,
         )
         paths = artifact_paths(raw_dir, invocation)

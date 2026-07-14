@@ -380,10 +380,7 @@ def select_visible(
     )
     chosen_program = min(
         clusters[chosen_cluster],
-        key=lambda program: (
-            -len(by_program[program]),
-            _digest(task["task_id"], "program", program),
-        ),
+        key=lambda program: _digest(task["task_id"], "program", program),
     )
     chosen = representatives[chosen_program]
     return {

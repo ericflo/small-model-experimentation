@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import dataclasses
+import hashlib
 import json
 import shutil
 import sys
@@ -17,6 +18,7 @@ from calibration_stage import (  # noqa: E402
     CALIBRATION_RELATIVE_READS,
     INTERFACE_ARMS,
     INVOCATION_ORDER,
+    _authenticate_factorial_pairing,
     analyze_calibration,
     canonical_sha256,
     engine_config,
@@ -24,14 +26,94 @@ from calibration_stage import (  # noqa: E402
     run_calibration_transactions,
     sampling_configs,
 )
-from transactions import MODEL_ID, MODEL_REVISION, sha256_file  # noqa: E402
+from transactions import (  # noqa: E402
+    MODEL_ID,
+    MODEL_REVISION,
+    artifact_paths,
+    sha256_file,
+)
+
+
+class _FakeTokenizer:
+    eos_token_id = 248046
+
+    def apply_chat_template(
+        self, messages, *, tokenize, add_generation_prompt, enable_thinking
+    ):
+        if tokenize or not add_generation_prompt:
+            raise AssertionError("unexpected fake chat-template call")
+        return ("THINK:" if enable_thinking else "OFF:") + messages[0]["content"]
+
+    def encode(self, text, *, add_special_tokens=False):
+        if add_special_tokens:
+            raise AssertionError("fake tokenizer forbids special-token injection")
+        if text == "</think>\n\n":
+            return [248069, 271]
+        if text == "</think>":
+            return [248069]
+        if text == "PROGRAM:":
+            return [78041, 25]
+        return [1000 + ord(character) for character in text]
+
+    def decode(self, token_ids, *, skip_special_tokens=False):
+        if skip_special_tokens:
+            raise AssertionError("fake tokenizer preserves all tokens")
+        pieces = []
+        for token_id in token_ids:
+            if token_id == 248069:
+                pieces.append("</think>")
+            elif token_id == 271:
+                pieces.append("\n\n")
+            elif token_id == 78041:
+                pieces.append("PROGRAM")
+            elif token_id == 25:
+                pieces.append(":")
+            elif token_id == 248044:
+                pieces.append("<|endoftext|>")
+            else:
+                pieces.append(chr(token_id - 1000))
+        return "".join(pieces)
+
+
+def _token_ids_sha256(token_ids: list[int]) -> str:
+    return hashlib.sha256(
+        b"".join(token_id.to_bytes(4, "big") for token_id in token_ids)
+    ).hexdigest()
 
 
 class _FakeCalibrationRunner:
-    def __init__(self, runner_path: Path, *, fail_on_call: bool = False):
+    def __init__(
+        self,
+        runner_path: Path,
+        tokenizer: _FakeTokenizer,
+        *,
+        fail_on_call: bool = False,
+    ):
         self.runner_path = runner_path
+        self.tokenizer = tokenizer
         self.fail_on_call = fail_on_call
         self.calls: list[str] = []
+
+    def _prompt_fields(
+        self, record: dict[str, Any], *, thinking: bool, prefix: list[int]
+    ) -> tuple[dict[str, Any], list[int]]:
+        rendered = self.tokenizer.apply_chat_template(
+            record["messages"],
+            tokenize=False,
+            add_generation_prompt=True,
+            enable_thinking=thinking,
+        )
+        original = self.tokenizer.encode(rendered, add_special_tokens=False)
+        effective = original + ([] if thinking else prefix)
+        return {
+            "prompt_sha256": hashlib.sha256(rendered.encode()).hexdigest(),
+            "effective_prompt_sha256": _token_ids_sha256(effective),
+            "n_prompt_tokens": len(effective),
+            "n_original_prompt_tokens": len(original),
+            "prompt_channel": "thinking" if thinking else "off",
+            "answer_prefix_token_ids": prefix,
+            "prompt_logprobs": None,
+        }, original
 
     def _metadata(
         self, rows: list[dict[str, Any]], sampling: Any, mode: str
@@ -86,20 +168,45 @@ class _FakeCalibrationRunner:
         self._called("calibration_thoughts")
         rows = []
         for index, record in enumerate(records):
-            token = 1000 + index
+            stage1 = self.tokenizer.encode("reason", add_special_tokens=False)
+            prompt, original = self._prompt_fields(record, thinking=True, prefix=[])
+            seed = 2000 + index
             rows.append(
                 {
                     "id": record["id"],
                     "meta": record["meta"],
+                    **prompt,
                     "outputs": [
                         {
-                            "stage1_token_ids": [token],
-                            "retained_thinking_token_ids": [token],
-                            "seed_stage1": 2000 + index,
+                            "sample_index": 0,
+                            "stage1_parent_seed": seed,
+                            "seed_stage1": seed,
+                            "seed_stage2": None,
+                            "seed_domain_stage1": "thought",
+                            "seed_domain_stage2": None,
+                            "text": "reason",
+                            "token_ids": stage1,
+                            "stage1_token_ids": stage1,
+                            "retained_thinking_token_ids": stage1,
+                            "answer_prefix_token_ids": [],
+                            "injected_token_ids": [],
                             "stage2_token_ids": [],
-                            "n_stage1_prompt_tokens": 10,
+                            "n_thinking_tokens": len(stage1),
+                            "n_answer_tokens": 0,
+                            "n_sampled_tokens": len(stage1),
+                            "n_injected_tokens": 0,
+                            "n_completion_tokens": len(stage1),
+                            "n_terminal_tokens_trimmed": 0,
+                            "n_tokens_discarded_after_close": 0,
+                            "n_stage1_prompt_tokens": len(original),
                             "n_stage2_prompt_tokens": 0,
-                            "n_sampled_tokens": 1,
+                            "thinking_closed": False,
+                            "forced_close": False,
+                            "finish_reason": "length",
+                            "stop_reason": None,
+                            "stage1_finish_reason": "length",
+                            "stage1_stop_reason": None,
+                            "truncated": True,
                         }
                     ],
                 }
@@ -115,13 +222,29 @@ class _FakeCalibrationRunner:
         rows = []
         for index, (record, source_row) in enumerate(zip(records, thought_rows)):
             source = source_row["outputs"][0]
+            prompt, original = self._prompt_fields(
+                record, thinking=True, prefix=prefix
+            )
+            expected = record["meta"]["expected"]
+            continuation = expected[len("PROGRAM:") :] if prefix else expected
+            stage2 = self.tokenizer.encode(continuation, add_special_tokens=False)
+            close = [248069, 271]
+            final_ids = (
+                source["retained_thinking_token_ids"] + close + prefix + stage2
+            )
             rows.append(
                 {
                     "id": record["id"],
                     "meta": record["meta"],
+                    **prompt,
                     "outputs": [
                         {
-                            "text": "reason</think>\n\n" + record["meta"]["expected"],
+                            "sample_index": 0,
+                            "stage1_parent_seed": source["stage1_parent_seed"],
+                            "text": self.tokenizer.decode(
+                                final_ids, skip_special_tokens=False
+                            ),
+                            "token_ids": final_ids,
                             "stage1_token_ids": source["stage1_token_ids"],
                             "retained_thinking_token_ids": source[
                                 "retained_thinking_token_ids"
@@ -129,15 +252,34 @@ class _FakeCalibrationRunner:
                             "seed_stage1": source["seed_stage1"],
                             "seed_stage2": 3000 + index,
                             "seed_domain_stage1": "thought",
+                            "seed_domain_stage2": "answer",
                             "answer_prefix_token_ids": prefix,
-                            "n_answer_tokens": 5,
-                            "n_thinking_tokens": 1,
-                            "stage2_token_ids": [5000 + index],
-                            "n_stage1_prompt_tokens": 10,
-                            "n_stage2_prompt_tokens": 14 + len(prefix),
-                            "n_sampled_tokens": 2,
+                            "injected_token_ids": close + prefix,
+                            "n_answer_tokens": len(stage2),
+                            "n_thinking_tokens": len(
+                                source["retained_thinking_token_ids"]
+                            ),
+                            "stage2_token_ids": stage2,
+                            "n_stage1_prompt_tokens": len(original),
+                            "n_stage2_prompt_tokens": len(original)
+                            + len(source["retained_thinking_token_ids"])
+                            + len(close)
+                            + len(prefix),
+                            "n_sampled_tokens": len(source["stage1_token_ids"])
+                            + len(stage2),
+                            "n_injected_tokens": len(close) + len(prefix),
+                            "n_completion_tokens": len(final_ids),
+                            "n_terminal_tokens_trimmed": 0,
+                            "n_tokens_discarded_after_close": 0,
+                            "thinking_closed": True,
+                            "forced_close": True,
                             "finish_reason": "stop",
-                            "stage1_finish_reason": "stop",
+                            "stop_reason": None,
+                            "stage1_finish_reason": source[
+                                "stage1_finish_reason"
+                            ],
+                            "stage1_stop_reason": None,
+                            "truncated": False,
                         }
                     ],
                 }
@@ -152,31 +294,56 @@ class _FakeCalibrationRunner:
         name = "no_think_program_slot" if sampling.answer_prefix else "no_think_freeform"
         self._called(name)
         prefix = [78041, 25] if sampling.answer_prefix else []
-        rows = [
-            {
-                "id": record["id"],
-                "meta": record["meta"],
-                "outputs": [
-                    {
-                        "text": record["meta"]["expected"],
-                        "stage1_token_ids": [4000 + index],
-                        "seed_stage1": 3000 + index,
-                        "seed_stage2": None,
-                        "seed_domain_stage1": "answer",
-                        "answer_prefix_token_ids": prefix,
-                        "n_answer_tokens": 5,
-                        "n_thinking_tokens": 0,
-                        "stage2_token_ids": [],
-                        "n_stage1_prompt_tokens": 10 + len(prefix),
-                        "n_stage2_prompt_tokens": 0,
-                        "n_sampled_tokens": 1,
-                        "finish_reason": "stop",
-                        "stage1_finish_reason": "stop",
-                    }
-                ],
-            }
-            for index, record in enumerate(records)
-        ]
+        rows = []
+        for index, record in enumerate(records):
+            prompt, original = self._prompt_fields(
+                record, thinking=False, prefix=prefix
+            )
+            expected = record["meta"]["expected"]
+            answer = expected[len("PROGRAM:") :] if prefix else expected
+            stage1 = self.tokenizer.encode(answer, add_special_tokens=False)
+            final_ids = prefix + stage1
+            seed = 3000 + index
+            rows.append(
+                {
+                    "id": record["id"],
+                    "meta": record["meta"],
+                    **prompt,
+                    "outputs": [
+                        {
+                            "sample_index": 0,
+                            "stage1_parent_seed": seed,
+                            "seed_stage1": seed,
+                            "seed_stage2": None,
+                            "seed_domain_stage1": "answer",
+                            "seed_domain_stage2": None,
+                            "text": self.tokenizer.decode(
+                                final_ids, skip_special_tokens=False
+                            ),
+                            "token_ids": final_ids,
+                            "stage1_token_ids": stage1,
+                            "answer_prefix_token_ids": prefix,
+                            "injected_token_ids": prefix,
+                            "stage2_token_ids": [],
+                            "n_answer_tokens": len(stage1),
+                            "n_thinking_tokens": 0,
+                            "n_stage1_prompt_tokens": len(original) + len(prefix),
+                            "n_stage2_prompt_tokens": 0,
+                            "n_sampled_tokens": len(stage1),
+                            "n_injected_tokens": len(prefix),
+                            "n_completion_tokens": len(final_ids),
+                            "n_terminal_tokens_trimmed": 0,
+                            "thinking_closed": False,
+                            "forced_close": False,
+                            "finish_reason": "stop",
+                            "stop_reason": None,
+                            "stage1_finish_reason": "stop",
+                            "stage1_stop_reason": None,
+                            "truncated": False,
+                        }
+                    ],
+                }
+            )
         return rows, self._metadata(rows, sampling, "full_generation")
 
 
@@ -234,7 +401,8 @@ class CalibrationStageTests(unittest.TestCase):
         lock.write_text(json.dumps({"locked": True}) + "\n")
         preflight.write_text(json.dumps({"preflight": True}) + "\n")
         runner_path.write_text("# fake exact runner\n")
-        fake = _FakeCalibrationRunner(runner_path)
+        tokenizer = _FakeTokenizer()
+        fake = _FakeCalibrationRunner(runner_path, tokenizer)
         chain = run_calibration_transactions(
             inputs=inputs,
             runner=fake,
@@ -255,6 +423,7 @@ class CalibrationStageTests(unittest.TestCase):
             implementation_lock_path=lock,
             live_preflight_path=preflight,
             runner_path=runner_path,
+            tokenizer=tokenizer,
         )
         self.assertEqual(decision["decision"], "CALIBRATION_INTERFACE_SELECTED")
         self.assertEqual(decision["winner"], "think512_freeform")
@@ -264,7 +433,22 @@ class CalibrationStageTests(unittest.TestCase):
             48,
         )
 
-        restarted = _FakeCalibrationRunner(runner_path, fail_on_call=True)
+        bundles = {
+            invocation: json.loads(
+                artifact_paths(raw, invocation)["bundle"].read_text()
+            )
+            for invocation in INVOCATION_ORDER
+        }
+        forged = json.loads(json.dumps(bundles))
+        output = forged["no_think_freeform"]["rows"][0]["outputs"][0]
+        output["seed_domain_stage1"] = "thought"
+        output["text"] = "junk</think>\n\n" + inputs.records[0]["meta"]["expected"]
+        with self.assertRaisesRegex(RuntimeError, "semantic fields changed"):
+            _authenticate_factorial_pairing(forged, inputs, tokenizer)
+
+        restarted = _FakeCalibrationRunner(
+            runner_path, tokenizer, fail_on_call=True
+        )
         run_calibration_transactions(
             inputs=inputs,
             runner=restarted,

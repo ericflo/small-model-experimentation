@@ -82,6 +82,7 @@ class TransactionTests(unittest.TestCase):
         order=("a",),
         crash_after: str | None = None,
         generate=None,
+        authorization_paths=None,
     ):
         return run_transaction(
             raw_dir=self.raw,
@@ -93,6 +94,7 @@ class TransactionTests(unittest.TestCase):
             live_preflight_path=self.preflight,
             runner_path=self.runner,
             sampling={"thinking": "off", "max_tokens": 24},
+            authorization_paths=authorization_paths or {},
             generate=self.generate if generate is None else generate,
             crash_after=crash_after,
         )
@@ -256,6 +258,14 @@ class TransactionTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, "prepared changed after STARTED"):
             authenticate_complete_chain(raw_dir=self.raw, invocation_order=("a",))
 
+    def test_authentication_rechecks_durable_authorization_hash(self) -> None:
+        authorization = self.root / "authorization.json"
+        authorization.write_bytes(json_bytes({"decision": "PASS"}))
+        self.run_tx(authorization_paths={"upstream_gate": authorization})
+        authorization.write_bytes(json_bytes({"decision": "FORGED_PASS"}))
+        with self.assertRaisesRegex(RuntimeError, "authorization file changed"):
+            authenticate_complete_chain(raw_dir=self.raw, invocation_order=("a",))
+
     def test_registered_chain_rejects_self_consistent_sampling_rewrite(self) -> None:
         self.run_tx()
         paths = artifact_paths(self.raw, "a")
@@ -294,6 +304,7 @@ class TransactionTests(unittest.TestCase):
                 "live_preflight_path": self.preflight,
                 "runner_path": self.runner,
                 "sampling": {"thinking": "off", "max_tokens": 24},
+                "authorization_paths": {},
             }
         }
         with self.assertRaisesRegex(RuntimeError, "current locked invocation"):

@@ -36,6 +36,7 @@ def score_interface_rows(
     *,
     answer_cap: int,
     thinking_budget: int,
+    thinking_expected: bool,
 ) -> dict[str, Any]:
     if not rows:
         raise ValueError("interface scoring requires rows")
@@ -57,14 +58,14 @@ def score_interface_rows(
         arity = int(meta["arity"])
         expected = str(meta["expected"])
         output = outputs[0]
-        seed_domain = output.get("seed_domain_stage1")
-        if seed_domain not in {"thought", "answer"}:
-            raise ValueError("interface result has an invalid stage-one seed domain")
+        expected_seed_domain = "thought" if thinking_expected else "answer"
+        if output.get("seed_domain_stage1") != expected_seed_domain:
+            raise ValueError("interface result differs from registered reasoning policy")
         echo = score_echo(
             output["text"],
             expected=expected,
             arity=arity,
-            thinking_expected=seed_domain == "thought",
+            thinking_expected=thinking_expected,
         )
         scored.append(
             {
@@ -108,7 +109,10 @@ def score_interface_rows(
         "thinking_cap_contacts": sum(
             row["thinking_cap_contact"] for row in scored
         ),
-        "arity_counts": dict(sorted(Counter(row["arity"] for row in scored).items())),
+        "arity_counts": {
+            str(arity): count
+            for arity, count in sorted(Counter(row["arity"] for row in scored).items())
+        },
         "by_arity": by_arity,
         "scored": scored,
     }

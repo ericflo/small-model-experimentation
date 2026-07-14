@@ -11,7 +11,7 @@ from pathlib import Path
 from typing import Any
 
 from calibration_stage import CalibrationInputs, sampling_configs
-from interface_analysis import answer_cap_contact, score_interface_rows
+from interface_analysis import answer_cap_contact, choose_interface, score_interface_rows
 from plans import freeze_taskwise_matches
 from protocol import hidden_correct, parse_program, select_visible
 from task_data import CONCRETE_OPERATIONS, OPERATION_TO_ALIAS, operation_from_record
@@ -87,16 +87,70 @@ def read_jsonl(path: Path) -> list[dict[str, Any]]:
 
 def selected_interface(decision: Mapping[str, Any], inputs: CalibrationInputs) -> str:
     arms = tuple(inputs.config["interface"]["fixed_winner_priority"])
+    expected_keys = {
+        "schema_version",
+        "stage",
+        "model",
+        "revision",
+        "decision",
+        "winner",
+        "fixed_priority",
+        "qualification",
+        "selection_uses_metric_ranking",
+        "metrics",
+        "scored_rows_sha256",
+        "pairing",
+        "transaction_chain",
+        "calibration_read_receipt",
+        "hidden_files_read",
+        "qualification_files_read",
+        "confirmation_files_read",
+        "benchmark_files_read",
+        "implementation_lock_sha256",
+        "live_preflight_sha256",
+    }
     winner = decision.get("winner")
     qualification = decision.get("qualification")
+    metrics = decision.get("metrics")
+    if not isinstance(metrics, dict) or set(metrics) != set(arms):
+        raise RuntimeError("calibration decision metrics are incomplete")
+    recomputed = choose_interface(
+        metrics,
+        priority=arms,
+        gate=inputs.config["interface"]["calibration"],
+    )
     if (
-        decision.get("decision") != "CALIBRATION_INTERFACE_SELECTED"
+        set(decision) != expected_keys
+        or decision.get("schema_version") != 1
+        or decision.get("stage") != "interface_calibration"
+        or decision.get("model") != "Qwen/Qwen3.5-4B"
+        or decision.get("revision")
+        != "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
+        or decision.get("decision") != "CALIBRATION_INTERFACE_SELECTED"
         or winner not in arms
         or not isinstance(qualification, dict)
         or set(qualification) != set(arms)
         or qualification.get(winner) is not True
         or decision.get("fixed_priority") != list(arms)
         or decision.get("selection_uses_metric_ranking") is not False
+        or any(decision.get(key) != value for key, value in recomputed.items())
+        or any(
+            not isinstance(decision.get(field), str)
+            or len(decision[field]) != 64
+            for field in (
+                "implementation_lock_sha256",
+                "live_preflight_sha256",
+            )
+        )
+        or any(
+            decision.get(field) != []
+            for field in (
+                "hidden_files_read",
+                "qualification_files_read",
+                "confirmation_files_read",
+                "benchmark_files_read",
+            )
+        )
     ):
         raise RuntimeError("calibration decision does not authorize mechanics")
     return str(winner)
@@ -136,6 +190,7 @@ def mechanics_registrations(
     mechanics_lock_path: Path = DEFAULT_MECHANICS_LOCK,
     live_preflight_path: Path = DEFAULT_MECHANICS_PREFLIGHT,
     runner_path: Path = DEFAULT_RUNNER_PATH,
+    transport_decision_path: Path = TRANSPORT_DECISION,
 ) -> dict[str, dict[str, Any]]:
     sampling = mechanics_sampling_plan(decision, inputs)
     return {
@@ -146,6 +201,11 @@ def mechanics_registrations(
             "live_preflight_path": live_preflight_path,
             "runner_path": runner_path,
             "sampling": sampling[invocation],
+            "authorization_paths": (
+                {}
+                if invocation == "transport"
+                else {"transport_decision": transport_decision_path}
+            ),
         }
         for invocation in MECHANICS_INVOCATION_ORDER
     }
@@ -161,6 +221,7 @@ def _run_invocation(
     mechanics_lock_path: Path,
     live_preflight_path: Path,
     runner_path: Path,
+    transport_decision_path: Path,
 ) -> dict[str, Any]:
     registration = mechanics_registrations(
         decision=decision,
@@ -168,6 +229,7 @@ def _run_invocation(
         mechanics_lock_path=mechanics_lock_path,
         live_preflight_path=live_preflight_path,
         runner_path=runner_path,
+        transport_decision_path=transport_decision_path,
     )[invocation]
 
     def generate(
@@ -195,6 +257,7 @@ def run_transport_transaction(
     mechanics_lock_path: Path = DEFAULT_MECHANICS_LOCK,
     live_preflight_path: Path = DEFAULT_MECHANICS_PREFLIGHT,
     runner_path: Path = DEFAULT_RUNNER_PATH,
+    transport_decision_path: Path = TRANSPORT_DECISION,
 ) -> dict[str, Any]:
     state = inventory_state(raw_dir, "transport")
     registrations = mechanics_registrations(
@@ -203,6 +266,7 @@ def run_transport_transaction(
         mechanics_lock_path=mechanics_lock_path,
         live_preflight_path=live_preflight_path,
         runner_path=runner_path,
+        transport_decision_path=transport_decision_path,
     )
     if state == "complete":
         return authenticate_registered_complete_prefix(
@@ -225,6 +289,7 @@ def run_transport_transaction(
         mechanics_lock_path=mechanics_lock_path,
         live_preflight_path=live_preflight_path,
         runner_path=runner_path,
+        transport_decision_path=transport_decision_path,
     )
     return authenticate_registered_complete_prefix(
         raw_dir=raw_dir,
@@ -242,6 +307,7 @@ def analyze_transport(
     mechanics_lock_path: Path = DEFAULT_MECHANICS_LOCK,
     live_preflight_path: Path = DEFAULT_MECHANICS_PREFLIGHT,
     runner_path: Path = DEFAULT_RUNNER_PATH,
+    transport_decision_path: Path = TRANSPORT_DECISION,
 ) -> dict[str, Any]:
     selected_interface(decision, inputs)
     authenticate_registered_complete_prefix(
@@ -253,6 +319,7 @@ def analyze_transport(
             mechanics_lock_path=mechanics_lock_path,
             live_preflight_path=live_preflight_path,
             runner_path=runner_path,
+            transport_decision_path=transport_decision_path,
         ),
         through="transport",
     )
@@ -262,6 +329,7 @@ def analyze_transport(
         bundle["rows"],
         answer_cap=int(interface["sampled_answer_cap"]),
         thinking_budget=int(interface["thinking_budget"]),
+        thinking_expected=str(decision["winner"]).startswith("think512_"),
     )
     gate = interface["transport"]
     qualifies = bool(
@@ -297,6 +365,36 @@ def analyze_transport(
     }
 
 
+def authenticate_transport_decision(
+    *,
+    decision: Mapping[str, Any],
+    inputs: CalibrationInputs,
+    raw_dir: Path = RAW_DIR,
+    mechanics_lock_path: Path = DEFAULT_MECHANICS_LOCK,
+    live_preflight_path: Path = DEFAULT_MECHANICS_PREFLIGHT,
+    runner_path: Path = DEFAULT_RUNNER_PATH,
+    transport_decision_path: Path = TRANSPORT_DECISION,
+) -> dict[str, Any]:
+    observed = read_canonical(transport_decision_path)
+    expected = analyze_transport(
+        decision=decision,
+        inputs=inputs,
+        raw_dir=raw_dir,
+        mechanics_lock_path=mechanics_lock_path,
+        live_preflight_path=live_preflight_path,
+        runner_path=runner_path,
+        transport_decision_path=transport_decision_path,
+    )
+    if observed != expected:
+        raise RuntimeError("recorded transport decision differs from exact analysis")
+    if (
+        observed["decision"] != "SELECTED_INTERFACE_TRANSPORT_PASS"
+        or observed["qualifies"] is not True
+    ):
+        raise RuntimeError("failed transport cannot authorize mechanics generation")
+    return observed
+
+
 def run_generation_transactions(
     *,
     decision: Mapping[str, Any],
@@ -307,19 +405,26 @@ def run_generation_transactions(
     mechanics_lock_path: Path = DEFAULT_MECHANICS_LOCK,
     live_preflight_path: Path = DEFAULT_MECHANICS_PREFLIGHT,
     runner_path: Path = DEFAULT_RUNNER_PATH,
+    transport_decision_path: Path = TRANSPORT_DECISION,
 ) -> dict[str, Any]:
-    if (
-        transport.get("decision") != "SELECTED_INTERFACE_TRANSPORT_PASS"
-        or transport.get("winner") != selected_interface(decision, inputs)
-        or transport.get("qualifies") is not True
-    ):
-        raise RuntimeError("failed transport cannot authorize mechanics generation")
+    authenticated_transport = authenticate_transport_decision(
+        decision=decision,
+        inputs=inputs,
+        raw_dir=raw_dir,
+        mechanics_lock_path=mechanics_lock_path,
+        live_preflight_path=live_preflight_path,
+        runner_path=runner_path,
+        transport_decision_path=transport_decision_path,
+    )
+    if dict(transport) != authenticated_transport:
+        raise RuntimeError("caller transport differs from authenticated decision")
     registrations = mechanics_registrations(
         decision=decision,
         inputs=inputs,
         mechanics_lock_path=mechanics_lock_path,
         live_preflight_path=live_preflight_path,
         runner_path=runner_path,
+        transport_decision_path=transport_decision_path,
     )
     states = [inventory_state(raw_dir, name) for name in MECHANICS_INVOCATION_ORDER]
     if states[0] != "complete":
@@ -355,6 +460,7 @@ def run_generation_transactions(
             mechanics_lock_path=mechanics_lock_path,
             live_preflight_path=live_preflight_path,
             runner_path=runner_path,
+            transport_decision_path=transport_decision_path,
         )
     return authenticate_registered_complete_chain(
         raw_dir=raw_dir,
@@ -444,8 +550,18 @@ def analyze_visible(
     mechanics_lock_path: Path = DEFAULT_MECHANICS_LOCK,
     live_preflight_path: Path = DEFAULT_MECHANICS_PREFLIGHT,
     runner_path: Path = DEFAULT_RUNNER_PATH,
+    transport_decision_path: Path = TRANSPORT_DECISION,
 ) -> dict[str, Any]:
     winner = selected_interface(decision, inputs)
+    authenticate_transport_decision(
+        decision=decision,
+        inputs=inputs,
+        raw_dir=raw_dir,
+        mechanics_lock_path=mechanics_lock_path,
+        live_preflight_path=live_preflight_path,
+        runner_path=runner_path,
+        transport_decision_path=transport_decision_path,
+    )
     chain = authenticate_registered_complete_chain(
         raw_dir=raw_dir,
         invocation_order=MECHANICS_INVOCATION_ORDER,
@@ -455,6 +571,7 @@ def analyze_visible(
             mechanics_lock_path=mechanics_lock_path,
             live_preflight_path=live_preflight_path,
             runner_path=runner_path,
+            transport_decision_path=transport_decision_path,
         ),
     )
     public = _load_public(public_path)

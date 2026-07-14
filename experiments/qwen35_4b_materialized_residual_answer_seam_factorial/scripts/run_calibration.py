@@ -188,15 +188,15 @@ from calibration_lock import (  # noqa: E402
 )
 from calibration_stage import (  # noqa: E402
     INVOCATION_ORDER,
-    analyze_calibration,
+    calibration_decision_value,
     engine_config,
+    load_analysis_tokenizer,
     load_calibration_inputs,
     run_calibration_transactions,
 )
 from transactions import (  # noqa: E402
     inventory_state,
     read_canonical,
-    sha256_file,
     write_exclusive_durable,
 )
 from vllm_runner import VLLMRunner  # noqa: E402
@@ -238,11 +238,12 @@ def analyze() -> dict[str, Any]:
     inputs = load_calibration_inputs()
     verify_calibration_lock()
     verify_recorded_live_preflight(inputs=inputs)
-    value = {
-        **analyze_calibration(inputs=inputs, raw_dir=RAW_DIR),
-        "implementation_lock_sha256": sha256_file(IMPLEMENTATION_LOCK),
-        "live_preflight_sha256": sha256_file(LIVE_PREFLIGHT),
-    }
+    tokenizer = load_analysis_tokenizer(inputs)
+    value = calibration_decision_value(
+        inputs=inputs,
+        raw_dir=RAW_DIR,
+        tokenizer=tokenizer,
+    )
     return _write_or_verify_decision(value)
 
 
