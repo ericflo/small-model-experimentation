@@ -15,6 +15,9 @@
   safetensors shards before a model override is accepted.
 - `merge_replay.py` authenticates the exact pinned base shards and proves every merged
   tensor is either unchanged or the exact registered LoRA update.
+- `tensor_merge.py` writes the exact pinned two-shard layout without instantiating the
+  model, preserving every unchanged tensor's source dtype and applying LoRA only to
+  the registered target weights.
 - `vllm_runner.py` is the repository-pinned Qwen3.5-4B bulk-inference runner.
 
 Only the completed tokenizer receipt is authorized. QLoRA training, vLLM model

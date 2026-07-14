@@ -337,3 +337,34 @@ content, loads local composites with `trust_remote_code=False`, tightens physica
 allocation to filesystem-block rounding, and adds model-free regressions for all four
 counterexamples. No model, tokenizer, GPU, training, evaluation, benchmark, hidden,
 qualification, or confirmation event occurred during Review 6.
+
+### Review 6 remediation implemented, pending Review 7
+
+- The model-level load/save path has been removed. `src/tensor_merge.py` opens the
+  authenticated official shards directly, copies all 610 unchanged mmap-backed
+  tensors in source dtype, computes only the exact 128 adapter targets using
+  `base.float32 + (B.float32 @ A.float32) * alpha/rank`, casts each result back to its
+  own source dtype, and emits the same frozen two-shard filenames and byte-exact index.
+  No Transformers model object or global dtype coercion is involved.
+- `configs/default.yaml` now freezes the tensor writer, exact two-shard placement,
+  unchanged/source-dtype rule, update equation, full-allocation rule, and false
+  remote-code policy. Merge receipt schema 5 binds that complete contract and a
+  tensor-writer receipt; the runner independently reconstructs both.
+- Production checkpoint validation now requires the complete official `config.json`
+  SHA-256 and byte-exact official weight-index SHA-256, not only a structural
+  projection. The runtime root is a minimal allowlist of config, index, two shards,
+  receipt, and retained lineage; symlinks, executable suffixes/modes, and every other
+  root file or directory are rejected. AutoConfig, AutoTokenizer, and vLLM all use
+  `trust_remote_code=False`.
+- Physical allocation must now be at least the complete logical file length. The 1%
+  tolerance is gone; a synthetic otherwise-valid 10 MB safetensors with a punched
+  4,096-byte payload hole fails.
+- Regressions exercise two-shard serialization, a mixed BF16/F32 source, exact F32
+  preservation, update math/order/source-dtype cast, one-shard policy drift, injected
+  `auto_map`, executable-file injection, and a partial sparse hole. The complete
+  model-free suite passes 67 tests in the pinned environment, including the real
+  safetensors writer (the system-Python run skips only that dependency-gated case).
+
+Authorization remains tokenizer-only. Review 7 must independently attack the exact
+committed remediation and its real-runtime feasibility before any model/GPU/training
+or evaluation flag changes.

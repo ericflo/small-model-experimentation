@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import argparse
-import gc
 import hashlib
 import json
 import subprocess
@@ -12,10 +11,7 @@ import shutil
 import sys
 from pathlib import Path
 
-import torch
 import yaml
-from safetensors import safe_open
-from transformers import AutoModelForImageTextToText, AutoProcessor, AutoTokenizer
 
 
 EXP = Path(__file__).resolve().parents[1]
@@ -26,13 +22,11 @@ from checkpoint_lineage import (  # noqa: E402
     adapter_tensor_inventory,
     merged_checkpoint_inventory,
 )
-from merge_replay import verify_merge_equation  # noqa: E402
+from merge_replay import authenticate_base_snapshot, verify_merge_equation  # noqa: E402
 from stages import read_and_validate_stage_receipt  # noqa: E402
+from tensor_merge import write_tensor_level_merge  # noqa: E402
 
 install_benchmark_firewall(EXP.parents[1])
-
-ADAPTER_PREFIX = "base_model.model.model.layers."
-
 
 def _sha256_file(path: Path) -> str:
     digest = hashlib.sha256()
@@ -194,79 +188,19 @@ def main() -> int:
         or peft_config.get("alpha_pattern") not in (None, {})
     ):
         raise ValueError("adapter PEFT recipe differs from preregistration")
-    scale = float(peft_config["lora_alpha"]) / float(peft_config["r"])
-    model = AutoModelForImageTextToText.from_pretrained(
-        model_id,
-        revision=revision,
-        trust_remote_code=True,
-        dtype=torch.bfloat16,
-        device_map="cpu",
-    )
-    tail_to_path: dict[str, list[str]] = {}
-    for name, module in model.named_modules():
-        if ".language_model.layers." in name and hasattr(module, "weight"):
-            tail = name.split(".language_model.layers.", 1)[1]
-            tail_to_path.setdefault(tail, []).append(name)
-
-    applied = 0
     adapter_path = args.adapter / "adapter_model.safetensors"
     source_adapter_inventory = adapter_tensor_inventory(adapter_path)
-    with safe_open(str(adapter_path), "pt") as tensors:
-        all_keys = set(tensors.keys())
-        keys = sorted(key for key in all_keys if key.endswith(".lora_A.weight"))
-        expected_b = {key.replace(".lora_A.", ".lora_B.") for key in keys}
-        observed_b = {key for key in all_keys if key.endswith(".lora_B.weight")}
-        if expected_b != observed_b or len(all_keys) != len(keys) + len(observed_b):
-            raise ValueError("adapter tensor set is not an exact A/B LoRA pair set")
-        observed_cores = {
-            key[len(ADAPTER_PREFIX):-len(".lora_A.weight")]
-            for key in keys
-            if key.startswith(ADAPTER_PREFIX)
-        }
-        target_modules = set(recipe["target_modules"])
-        expected_cores = {
-            tail
-            for tail, paths in tail_to_path.items()
-            if len(paths) == 1 and tail.rsplit(".", 1)[-1] in target_modules
-        }
-        if observed_cores != expected_cores:
-            raise ValueError(
-                "adapter LoRA core set differs from the exact composite text-module target set"
-            )
-        for key_a in keys:
-            if not key_a.startswith(ADAPTER_PREFIX):
-                raise ValueError(f"unexpected adapter key layout: {key_a}")
-            core = key_a[len(ADAPTER_PREFIX):-len(".lora_A.weight")]
-            paths = tail_to_path.get(core, [])
-            if len(paths) != 1:
-                raise ValueError(f"ambiguous or missing composite module for {core!r}: {paths}")
-            module = model.get_submodule(paths[0])
-            lora_a = tensors.get_tensor(key_a).float()
-            lora_b = tensors.get_tensor(key_a.replace(".lora_A.", ".lora_B.")).float()
-            delta = (lora_b @ lora_a) * scale
-            if delta.shape != module.weight.shape:
-                raise ValueError(
-                    f"shape mismatch at {core}: {delta.shape} vs {module.weight.shape}"
-                )
-            module.weight.data = (module.weight.data.float() + delta).to(torch.bfloat16)
-            applied += 1
-    if applied == 0:
-        raise ValueError("no LoRA deltas applied")
-
-    args.output.mkdir(parents=True, exist_ok=False)
-    model.save_pretrained(str(args.output), safe_serialization=True)
-    del model
-    gc.collect()
-    tokenizer = AutoTokenizer.from_pretrained(
-        model_id, revision=revision, trust_remote_code=True, use_fast=True
+    merge_contract = config["merge"]
+    base_root, base_index, _structure = authenticate_base_snapshot()
+    tensor_merge = write_tensor_level_merge(
+        base_root=base_root,
+        base_index=base_index,
+        adapter_path=adapter_path,
+        output=args.output,
+        recipe=recipe,
+        contract=merge_contract,
     )
-    tokenizer.save_pretrained(str(args.output))
-    try:
-        AutoProcessor.from_pretrained(
-            model_id, revision=revision, trust_remote_code=True
-        ).save_pretrained(str(args.output))
-    except Exception as error:  # noqa: BLE001 - processor is irrelevant to text-only serving
-        (args.output / "processor_save_warning.txt").write_text(str(error) + "\n")
+    applied = int(tensor_merge["adapted_module_count"])
     lineage = args.output / "source_lineage"
     lineage.mkdir(parents=False, exist_ok=False)
     retained_adapter = lineage / "adapter_tree"
@@ -288,7 +222,7 @@ def main() -> int:
         recipe=recipe,
     )
     receipt = {
-        "schema_version": 4,
+        "schema_version": 5,
         "experiment_id": config["experiment_id"],
         "config_sha256": _sha256_file(config_path),
         "model_id": model_id,
@@ -306,6 +240,10 @@ def main() -> int:
         "source_arm": source_receipt["arm"],
         "source_seed": source_receipt["seed"],
         "applied_lora_modules": applied,
+        "merge_contract_sha256": hashlib.sha256(
+            json.dumps(merge_contract, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest(),
+        "tensor_merge": tensor_merge,
         "merge_script_sha256": _sha256_file(Path(__file__).resolve()),
         "merge_git_commit": current_commit,
         "merged_checkpoint_inventory": checkpoint_inventory,

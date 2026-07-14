@@ -110,7 +110,7 @@ def verify_tensor_equations(
             unchanged_digest.update(bytes.fromhex(_tensor_sha256(merged_tensor)))
         del base_tensor, merged_tensor
     return {
-        "equation": "merged == bf16(base.float32 + (B.float32 @ A.float32) * alpha/r)",
+        "equation": "merged == base_dtype(base.float32 + (B.float32 @ A.float32) * alpha/r)",
         "checked_tensor_count": len(base_keys),
         "adapted_module_count": len(adapted_hashes),
         "unchanged_tensor_count": len(base_keys) - len(adapted_hashes),
@@ -179,14 +179,10 @@ def _base_snapshot(structure: dict[str, Any]) -> Path:
     )
 
 
-def verify_merge_equation(
-    *,
-    merged_path: Path,
-    adapter_tree: Path,
-    recipe: dict[str, Any],
+def authenticate_base_snapshot(
     base_snapshot: Path | None = None,
-) -> dict[str, Any]:
-    """Authenticate pinned base files and exactly replay the entire merge."""
+) -> tuple[Path, dict[str, Any], dict[str, Any]]:
+    """Locate and fully authenticate the exact cached source checkpoint."""
     structure = load_pinned_structure()
     base_root = _base_snapshot(structure) if base_snapshot is None else base_snapshot
     base_config = base_root / "config.json"
@@ -197,13 +193,8 @@ def verify_merge_equation(
     ):
         raise ValueError("cached base config/index differs from the pinned revision")
     base_index = json.loads(base_index_path.read_text())
-    merged_index = json.loads(
-        (merged_path / "model.safetensors.index.json").read_text()
-    )
-    if set(base_index) != {"metadata", "weight_map"} or set(merged_index) != {
-        "metadata", "weight_map"
-    }:
-        raise ValueError("base or merged weight-index schema changed")
+    if set(base_index) != {"metadata", "weight_map"}:
+        raise ValueError("cached base weight-index schema changed")
     base_shards = set(base_index["weight_map"].values())
     if base_shards != set(structure["source_shard_sha256"]):
         raise ValueError("cached base shard names differ from the pinned revision")
@@ -219,6 +210,25 @@ def verify_merge_equation(
         base_header_hashes[name] = details["header_sha256"]
     if base_header_hashes != structure["source_shard_header_sha256"]:
         raise ValueError("cached base shard headers differ from the pinned revision")
+    return base_root, base_index, structure
+
+
+def verify_merge_equation(
+    *,
+    merged_path: Path,
+    adapter_tree: Path,
+    recipe: dict[str, Any],
+    base_snapshot: Path | None = None,
+) -> dict[str, Any]:
+    """Authenticate pinned base files and exactly replay the entire merge."""
+    base_root, base_index, structure = authenticate_base_snapshot(base_snapshot)
+    merged_index = json.loads(
+        (merged_path / "model.safetensors.index.json").read_text()
+    )
+    if set(merged_index) != {
+        "metadata", "weight_map"
+    }:
+        raise ValueError("merged weight-index schema changed")
     adapter_path = adapter_tree / "adapter_model.safetensors"
     with ExitStack() as stack:
         result = verify_tensor_equations(

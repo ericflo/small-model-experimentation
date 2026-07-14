@@ -134,3 +134,13 @@
   execution remains unauthorized pending tensor-level mixed-dtype-preserving merge,
   explicit indexed sharding, exact config/runtime-code binding, and stricter sparse
   regression fixtures.
+- Replaced the failing Transformers model-level merge with a deterministic tensor-level
+  writer. It preserves the exact official two-shard index and all 610 unchanged tensors
+  in source dtype, including the 48 F32 state-space tensors, while applying the 128
+  LoRA deltas in the exact preregistered FP32 operation order and casting each result
+  back to its own base dtype. Production validation now requires the byte-exact full
+  official config and index, rejects unexpected/executable/symlink checkpoint content,
+  enforces full physical allocation, and all local/runtime loads disable remote code.
+  Mixed-dtype, one-shard, `auto_map`, executable-injection, and 4,096-byte punched-hole
+  regressions pass as part of 67 pinned-environment model-free tests. Authorization remains tokenizer-only
+  pending fresh Review 7.

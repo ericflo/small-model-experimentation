@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import math
+import stat
 import struct
 from collections import Counter
 from pathlib import Path
@@ -13,7 +14,6 @@ from typing import Any
 
 STRUCTURE_PATH = Path(__file__).resolve().parents[1] / "configs" / "pinned_model_structure.json"
 MIN_ADAPTER_BYTES = 1_000_000
-MIN_PHYSICAL_ALLOCATION_FRACTION = 0.99
 DTYPE_BYTES = {
     "BOOL": 1,
     "U8": 1,
@@ -165,7 +165,10 @@ def _read_safetensors_header(path: Path) -> tuple[dict[str, dict[str, Any]], dic
     if logical_bytes != 8 + header_bytes + cursor:
         raise ValueError("safetensors logical file size differs from its tensor payload")
     allocated_bytes = int(getattr(path.stat(), "st_blocks", 0)) * 512
-    if allocated_bytes < int(logical_bytes * MIN_PHYSICAL_ALLOCATION_FRACTION):
+    # st_blocks is reported in 512-byte units and allocated storage is rounded up
+    # to filesystem blocks.  Requiring at least the logical length permits only
+    # that rounding; a punched payload hole of even one filesystem block fails.
+    if allocated_bytes < logical_bytes:
         raise ValueError("safetensors shard is sparse or physically incomplete")
     return tensors, {
         "logical_bytes": logical_bytes,
@@ -178,24 +181,23 @@ def merged_checkpoint_inventory(
     path: Path, *, expected: dict[str, Any] | None = None
 ) -> dict[str, Any]:
     expected = load_pinned_structure() if expected is None else expected
-    required_assets = {
-        "config.json",
-        "generation_config.json",
-        "tokenizer.json",
-        "tokenizer_config.json",
-        "model.safetensors.index.json",
-    }
+    required_assets = {"config.json", "model.safetensors.index.json"}
     missing = sorted(name for name in required_assets if not (path / name).is_file())
     if missing:
-        raise ValueError(f"merged checkpoint lacks required model/tokenizer assets: {missing}")
+        raise ValueError(f"merged checkpoint lacks required model assets: {missing}")
+    config_path = path / "config.json"
     config = json.loads((path / "config.json").read_text())
     config_hash = canonical_sha256(config_structure(config))
     if (
         config.get("model_type") != expected["model_type"]
         or config.get("architectures") != [expected["architecture"]]
         or config_hash != expected["config_structure_sha256"]
+        or (
+            "base_config_sha256" in expected
+            and sha256_file(config_path) != expected["base_config_sha256"]
+        )
     ):
-        raise ValueError("merged checkpoint config differs from pinned Qwen3.5-4B structure")
+        raise ValueError("merged checkpoint config differs from the exact pinned Qwen3.5-4B config")
     index_path = path / "model.safetensors.index.json"
     index = json.loads(index_path.read_text())
     if set(index) != {"metadata", "weight_map"}:
@@ -218,6 +220,40 @@ def merged_checkpoint_inventory(
     observed_shards = {item.name for item in path.glob("*.safetensors")}
     if referenced != observed_shards:
         raise ValueError("merged checkpoint shard set differs from its weight index")
+    if "source_shard_sha256" in expected:
+        expected_shards = set(expected["source_shard_sha256"])
+        if (
+            referenced != expected_shards
+            or len(referenced) != 2
+            or sha256_file(index_path) != expected["base_index_sha256"]
+        ):
+            raise ValueError(
+                "merged checkpoint does not preserve the exact pinned two-shard index policy"
+            )
+    allowed_root_files = {
+        "config.json",
+        "model.safetensors.index.json",
+        "merge_receipt.json",
+        *referenced,
+    }
+    for item in path.iterdir():
+        if item.is_symlink():
+            raise ValueError("merged checkpoint contains a symbolic link")
+        if item.is_dir():
+            if item.name != "source_lineage":
+                raise ValueError("merged checkpoint contains an unexpected root directory")
+            continue
+        if not item.is_file() or item.name not in allowed_root_files:
+            raise ValueError("merged checkpoint contains an unexpected runtime file")
+    executable_suffixes = {".py", ".pyc", ".pyo", ".so", ".dll", ".dylib", ".pth"}
+    for item in path.rglob("*"):
+        if item.is_symlink():
+            raise ValueError("merged checkpoint lineage contains a symbolic link")
+        if item.is_file() and (
+            item.suffix.lower() in executable_suffixes
+            or item.stat().st_mode & (stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
+        ):
+            raise ValueError("merged checkpoint contains executable content")
     inventory: dict[str, dict[str, Any]] = {}
     shard_details: dict[str, dict[str, Any]] = {}
     for shard_name in sorted(referenced):
@@ -243,9 +279,9 @@ def merged_checkpoint_inventory(
         raise ValueError("merged checkpoint tensor inventory differs from pinned Qwen3.5-4B")
     return {
         "weight_index_sha256": sha256_file(index_path),
-        "config_sha256": sha256_file(path / "config.json"),
+        "config_sha256": sha256_file(config_path),
         "config_structure_sha256": config_hash,
-        "tokenizer_json_sha256": sha256_file(path / "tokenizer.json"),
+        "shard_policy": "exact_pinned_source_index_and_two_shard_placement",
         "shard_count": len(referenced),
         "tensor_count": len(inventory),
         "tensor_bytes": tensor_bytes,

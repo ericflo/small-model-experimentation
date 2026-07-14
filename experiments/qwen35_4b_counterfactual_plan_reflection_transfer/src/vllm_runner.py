@@ -158,7 +158,7 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
         "source_adapter_sha256", "source_adapter_config_sha256", "source_arm", "source_seed",
         "source_adapter_inventory", "applied_lora_modules",
         "merge_script_sha256", "merge_git_commit", "merged_checkpoint_inventory",
-        "merge_replay", "merged_tree_sha256",
+        "merge_contract_sha256", "tensor_merge", "merge_replay", "merged_tree_sha256",
     }
     config_path = Path(__file__).resolve().parents[1] / "configs" / "default.yaml"
     lineage = path / "source_lineage"
@@ -188,6 +188,7 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
 
     config = yaml.safe_load(config_path.read_text())
     recipe = config["training"]["recipe"]
+    merge_contract = config["merge"]
     recipe_sha256 = _sha256_bytes(
         json.dumps(recipe, sort_keys=True, separators=(",", ":")).encode()
     )
@@ -202,7 +203,7 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
     }
     if (
         set(receipt) != required
-        or receipt.get("schema_version") != 4
+        or receipt.get("schema_version") != 5
         or receipt.get("experiment_id")
         != "qwen35_4b_counterfactual_plan_reflection_transfer"
         or receipt.get("config_sha256") != _sha256_file(config_path)
@@ -229,6 +230,10 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
         or receipt.get("merge_script_sha256")
         != _sha256_file(Path(__file__).resolve().parents[1] / "scripts" / "merge_adapter.py")
         or receipt.get("source_recipe_sha256") != recipe_sha256
+        or receipt.get("merge_contract_sha256")
+        != _sha256_bytes(
+            json.dumps(merge_contract, sort_keys=True, separators=(",", ":")).encode()
+        )
         or receipt.get("source_training_receipt_sha256")
         != _sha256_file(training_lineage_path)
         or receipt.get("source_stage_receipt_sha256")
@@ -291,6 +296,18 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
     checkpoint_inventory = merged_checkpoint_inventory(path)
     if checkpoint_inventory != receipt.get("merged_checkpoint_inventory"):
         raise ValueError("merged checkpoint inventory differs from its receipt")
+    expected_tensor_merge = {
+        "schema_version": 1,
+        "implementation": merge_contract["implementation"],
+        "shard_policy": merge_contract["shard_policy"],
+        "shards": merge_contract["expected_shards"],
+        "adapted_module_count": receipt["applied_lora_modules"],
+        "unchanged_tensor_count": checkpoint_inventory["tensor_count"]
+        - receipt["applied_lora_modules"],
+        "equation": merge_contract["adapted_tensor_math"],
+    }
+    if receipt.get("tensor_merge") != expected_tensor_merge:
+        raise ValueError("tensor-level merge receipt differs from the frozen merge contract")
     started = json.loads(started_lineage_path.read_text())
     if (
         set(started)
@@ -1088,11 +1105,11 @@ class VLLMRunner:
         self.tokenizer = AutoTokenizer.from_pretrained(
             MODEL_ID,
             revision=MODEL_REVISION,
-            trust_remote_code=True,
+            trust_remote_code=False,
             use_fast=True,
         )
         model_config = AutoConfig.from_pretrained(
-            MODEL_ID, revision=MODEL_REVISION, trust_remote_code=True
+            MODEL_ID, revision=MODEL_REVISION, trust_remote_code=False
         )
         self.hf_eos_id = int(model_config.text_config.eos_token_id)
         self.tokenizer_eos_id = int(self.tokenizer.eos_token_id)
@@ -1133,7 +1150,7 @@ class VLLMRunner:
             "model": engine_model,
             "tokenizer": MODEL_ID,
             "tokenizer_revision": MODEL_REVISION,
-            "trust_remote_code": True,
+            "trust_remote_code": False,
             "dtype": "bfloat16",
             "tensor_parallel_size": 1,
             "max_model_len": config.max_model_len,

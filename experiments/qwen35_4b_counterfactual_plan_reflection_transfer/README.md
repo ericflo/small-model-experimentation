@@ -161,6 +161,16 @@ the hashed merged tree; verifies installed packages against the vLLM lock; and p
 a live hybrid-cache token/block preflight before generation. This remains model-free,
 non-authorizing work pending clean Review 4.
 
+Review-6 remediation replaces model-level `save_pretrained()` merging with an exact
+tensor-level writer. It authenticates and preserves the frozen two-shard index, copies
+all 610 unchanged tensors in their source dtype (including 48 F32 tensors), computes
+only the 128 registered LoRA updates in FP32, and casts each update back to that
+tensor's source dtype. The local composite must carry the byte-exact official config,
+may contain only the frozen model files plus retained lineage/receipt, rejects dynamic
+or executable checkpoint content, and is loaded with `trust_remote_code=False`.
+Physical allocation must cover the complete logical safetensors length. These repairs
+remain model-free and non-authorizing pending a fresh Review 7.
+
 ## Interpretation
 
 The paper unlocks a training hypothesis, not an already-demonstrated Qwen capability.

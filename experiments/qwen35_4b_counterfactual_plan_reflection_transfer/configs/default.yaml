@@ -106,7 +106,18 @@ training:
     - identical_correct_shuffle_prompt_target_forward_token_totals_per_optimizer_group
     - identical_correct_shuffle_optimizer_steps_and_task_order
     - equal_reflection_auxiliary_rendered_prompt_tokens_per_task
-    - exact_input_target_mask_hash_receipt_before_training
+      - exact_input_target_mask_hash_receipt_before_training
+
+merge:
+  implementation: tensor_level_safetensors
+  shard_policy: preserve_exact_pinned_source_index
+  expected_shards:
+    - model.safetensors-00001-of-00002.safetensors
+    - model.safetensors-00002-of-00002.safetensors
+  unchanged_tensor_policy: exact_value_shape_and_source_dtype
+  adapted_tensor_math: "base_dtype(base.float32 + (B.float32 @ A.float32) * alpha/rank)"
+  local_trust_remote_code: false
+  physical_allocation: allocated_bytes_gte_logical_bytes
 
 evaluation:
   backend: vllm_only_for_all_compared_generation_arms

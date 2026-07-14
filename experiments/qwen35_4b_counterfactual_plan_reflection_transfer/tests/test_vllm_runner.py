@@ -6,6 +6,7 @@ import io
 import json
 import os
 import struct
+import subprocess
 import sys
 import tempfile
 import types
@@ -19,6 +20,7 @@ RUNNER_PATH = Path(__file__).resolve().parents[1] / "src" / "vllm_runner.py"
 sys.path.insert(0, str(RUNNER_PATH.parent))
 import checkpoint_lineage  # noqa: E402
 import merge_replay  # noqa: E402
+import tensor_merge  # noqa: E402
 
 SPEC = importlib.util.spec_from_file_location("template_vllm_runner", RUNNER_PATH)
 assert SPEC and SPEC.loader
@@ -215,12 +217,7 @@ class EngineConfigCaptureGeometryTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             config = self._synthetic_config()
-            for name, value in {
-                "config.json": config,
-                "generation_config.json": {},
-                "tokenizer.json": {},
-                "tokenizer_config.json": {},
-            }.items():
+            for name, value in {"config.json": config}.items():
                 (root / name).write_text(json.dumps(value))
             shard = root / "model-00001-of-00001.safetensors"
             tensors = {
@@ -265,15 +262,300 @@ class EngineConfigCaptureGeometryTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "tensor placement|tensor keys"):
                 checkpoint_lineage.merged_checkpoint_inventory(root, expected=expected)
 
+    def test_tensor_level_merge_preserves_f32_and_exact_two_shard_contract(self) -> None:
+        import torch
+
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            base = root / "base"
+            output = root / "merged"
+            base.mkdir()
+            config = self._synthetic_config()
+            (base / "config.json").write_text(json.dumps(config))
+            shard_names = [
+                "model.safetensors-00001-of-00002.safetensors",
+                "model.safetensors-00002-of-00002.safetensors",
+            ]
+            adapted = "model.language_model.layers.0.mlp.up_proj.weight"
+            unchanged = "model.language_model.layers.0.mixer.A_log"
+            storage = {
+                str(base / shard_names[0]): {
+                    adapted: torch.tensor(
+                        [[1.0, 2.0], [3.0, 4.0]], dtype=torch.bfloat16
+                    )
+                },
+                str(base / shard_names[1]): {
+                    unchanged: torch.tensor([5.0, 6.0], dtype=torch.float32)
+                },
+            }
+            for shard_name in shard_names:
+                (base / shard_name).write_bytes(b"synthetic handle")
+            weight_map = {adapted: shard_names[0], unchanged: shard_names[1]}
+            index = {"metadata": {"total_size": 16}, "weight_map": weight_map}
+            index_path = base / "model.safetensors.index.json"
+            index_path.write_text(json.dumps(index))
+            adapter_path = root / "adapter.safetensors"
+            adapter_path.write_bytes(b"synthetic handle")
+            key_a = "base_model.model.model.layers.0.mlp.up_proj.lora_A.weight"
+            key_b = "base_model.model.model.layers.0.mlp.up_proj.lora_B.weight"
+            storage[str(adapter_path)] = {
+                    key_a: torch.tensor([[1.0, -1.0]], dtype=torch.float32),
+                    key_b: torch.tensor([[2.0], [3.0]], dtype=torch.float32),
+                }
+
+            class FakeSafeOpen:
+                def __init__(self, path: str, **_kwargs):
+                    self.path = path
+
+                def __enter__(self):
+                    return self
+
+                def __exit__(self, *_args):
+                    return False
+
+                def keys(self):
+                    return storage[self.path].keys()
+
+                def get_tensor(self, key: str):
+                    return storage[self.path][key]
+
+                def metadata(self):
+                    return {"format": "pt"}
+
+            def fake_save_file(tensors, path: str, metadata=None):
+                self.assertEqual(metadata, {"format": "pt"})
+                storage[path] = {key: value.clone() for key, value in tensors.items()}
+                Path(path).write_bytes(b"synthetic serialized shard")
+
+            fake_safetensors = types.ModuleType("safetensors")
+            fake_safetensors.safe_open = FakeSafeOpen
+            fake_safetensors_torch = types.ModuleType("safetensors.torch")
+            fake_safetensors_torch.save_file = fake_save_file
+            contract = {
+                "implementation": "tensor_level_safetensors",
+                "shard_policy": "preserve_exact_pinned_source_index",
+                "expected_shards": shard_names,
+                "unchanged_tensor_policy": "exact_value_shape_and_source_dtype",
+                "adapted_tensor_math": (
+                    "base_dtype(base.float32 + (B.float32 @ A.float32) * alpha/rank)"
+                ),
+                "local_trust_remote_code": False,
+                "physical_allocation": "allocated_bytes_gte_logical_bytes",
+            }
+            with mock.patch.dict(
+                sys.modules,
+                {
+                    "safetensors": fake_safetensors,
+                    "safetensors.torch": fake_safetensors_torch,
+                },
+            ):
+                result = tensor_merge.write_tensor_level_merge(
+                    base_root=base,
+                    base_index=index,
+                    adapter_path=adapter_path,
+                    output=output,
+                    recipe={
+                        "target_modules": ["up_proj"],
+                        "lora_alpha": 1,
+                        "lora_rank": 1,
+                    },
+                    contract=contract,
+                )
+            self.assertEqual(result["adapted_module_count"], 1)
+            self.assertEqual(result["unchanged_tensor_count"], 1)
+            self.assertEqual(
+                checkpoint_lineage.sha256_file(output / "model.safetensors.index.json"),
+                checkpoint_lineage.sha256_file(index_path),
+            )
+            expected_adapted = (
+                torch.tensor([[1.0, 2.0], [3.0, 4.0]], dtype=torch.bfloat16).float()
+                + torch.tensor([[2.0], [3.0]]) @ torch.tensor([[1.0, -1.0]])
+            ).to(torch.bfloat16)
+            self.assertTrue(
+                torch.equal(storage[str(output / shard_names[0])][adapted], expected_adapted)
+            )
+            preserved = storage[str(output / shard_names[1])][unchanged]
+            self.assertEqual(preserved.dtype, torch.float32)
+            self.assertTrue(torch.equal(preserved, torch.tensor([5.0, 6.0])))
+
+            bad_contract = {**contract, "expected_shards": [shard_names[0]]}
+            with mock.patch.dict(
+                sys.modules,
+                {
+                    "safetensors": fake_safetensors,
+                    "safetensors.torch": fake_safetensors_torch,
+                },
+            ), self.assertRaisesRegex(ValueError, "frozen two-shard policy"):
+                tensor_merge.write_tensor_level_merge(
+                    base_root=base,
+                    base_index=index,
+                    adapter_path=adapter_path,
+                    output=root / "bad-merged",
+                    recipe={
+                        "target_modules": ["up_proj"],
+                        "lora_alpha": 1,
+                        "lora_rank": 1,
+                    },
+                    contract=bad_contract,
+                )
+
+    def test_exact_config_shard_surface_and_executable_injection_fail_closed(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            config = self._synthetic_config()
+            config_path = root / "config.json"
+            config_path.write_text(json.dumps(config))
+            shard_names = [
+                "model.safetensors-00001-of-00002.safetensors",
+                "model.safetensors-00002-of-00002.safetensors",
+            ]
+            tensors = {
+                "first": {"dtype": "BF16", "shape": [2], "nbytes": 4},
+                "second": {"dtype": "F32", "shape": [1], "nbytes": 4},
+            }
+            self._write_safetensors(root / shard_names[0], {"first": tensors["first"]})
+            self._write_safetensors(root / shard_names[1], {"second": tensors["second"]})
+            index = {
+                "metadata": {"total_size": 8},
+                "weight_map": {"first": shard_names[0], "second": shard_names[1]},
+            }
+            index_path = root / "model.safetensors.index.json"
+            index_path.write_text(json.dumps(index))
+            expected = self._synthetic_expected(tensors)
+            expected.update(
+                base_config_sha256=checkpoint_lineage.sha256_file(config_path),
+                base_index_sha256=checkpoint_lineage.sha256_file(index_path),
+                source_shard_sha256={name: "synthetic" for name in shard_names},
+            )
+            inventory = checkpoint_lineage.merged_checkpoint_inventory(
+                root, expected=expected
+            )
+            self.assertEqual(inventory["dtype_counts"], {"BF16": 1, "F32": 1})
+            self.assertEqual(inventory["shard_count"], 2)
+
+            injected = {**config, "auto_map": {"AutoConfig": "unrelated.Config"}}
+            config_path.write_text(json.dumps(injected))
+            with self.assertRaisesRegex(ValueError, "exact pinned Qwen3.5-4B config"):
+                checkpoint_lineage.merged_checkpoint_inventory(root, expected=expected)
+            config_path.write_text(json.dumps(config))
+            (root / "configuration_unrelated.py").write_text("raise RuntimeError\n")
+            with self.assertRaisesRegex(ValueError, "unexpected runtime file"):
+                checkpoint_lineage.merged_checkpoint_inventory(root, expected=expected)
+
+    def test_real_safetensors_mixed_dtype_serialization_when_available(self) -> None:
+        if importlib.util.find_spec("safetensors") is None:
+            self.skipTest("real safetensors regression runs in the pinned experiment environment")
+        import torch
+        from safetensors import safe_open
+        from safetensors.torch import save_file
+
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            base = root / "base"
+            output = root / "merged"
+            base.mkdir()
+            (base / "config.json").write_text(json.dumps(self._synthetic_config()))
+            shards = [
+                "model.safetensors-00001-of-00002.safetensors",
+                "model.safetensors-00002-of-00002.safetensors",
+            ]
+            adapted = "model.language_model.layers.0.mlp.up_proj.weight"
+            unchanged = "model.language_model.layers.0.mixer.A_log"
+            same_shard_unchanged = "model.language_model.embed_tokens.weight"
+            base_adapted = torch.tensor(
+                [[1.0, 2.0], [3.0, 4.0]], dtype=torch.bfloat16
+            )
+            base_unchanged = torch.tensor([5.0, 6.0], dtype=torch.float32)
+            base_same_shard = torch.tensor([7.0, 8.0], dtype=torch.bfloat16)
+            save_file(
+                {adapted: base_adapted, same_shard_unchanged: base_same_shard},
+                str(base / shards[0]),
+            )
+            save_file({unchanged: base_unchanged}, str(base / shards[1]))
+            index = {
+                "metadata": {"total_size": 20},
+                "weight_map": {
+                    adapted: shards[0],
+                    same_shard_unchanged: shards[0],
+                    unchanged: shards[1],
+                },
+            }
+            (base / "model.safetensors.index.json").write_text(json.dumps(index))
+            adapter_path = root / "adapter.safetensors"
+            key_a = "base_model.model.model.layers.0.mlp.up_proj.lora_A.weight"
+            key_b = "base_model.model.model.layers.0.mlp.up_proj.lora_B.weight"
+            tensor_a = torch.tensor([[1.0, -1.0]], dtype=torch.float32)
+            tensor_b = torch.tensor([[2.0], [3.0]], dtype=torch.float32)
+            save_file({key_a: tensor_a, key_b: tensor_b}, str(adapter_path))
+            contract = {
+                "implementation": "tensor_level_safetensors",
+                "shard_policy": "preserve_exact_pinned_source_index",
+                "expected_shards": shards,
+                "unchanged_tensor_policy": "exact_value_shape_and_source_dtype",
+                "adapted_tensor_math": (
+                    "base_dtype(base.float32 + (B.float32 @ A.float32) * alpha/rank)"
+                ),
+                "local_trust_remote_code": False,
+                "physical_allocation": "allocated_bytes_gte_logical_bytes",
+            }
+            tensor_merge.write_tensor_level_merge(
+                base_root=base,
+                base_index=index,
+                adapter_path=adapter_path,
+                output=output,
+                recipe={"target_modules": ["up_proj"], "lora_alpha": 1, "lora_rank": 1},
+                contract=contract,
+            )
+            self.assertEqual(
+                json.loads((output / "model.safetensors.index.json").read_text()), index
+            )
+            with safe_open(str(output / shards[0]), framework="pt") as merged:
+                expected = (
+                    base_adapted.float() + tensor_b.float() @ tensor_a.float()
+                ).to(torch.bfloat16)
+                self.assertTrue(torch.equal(merged.get_tensor(adapted), expected))
+                self.assertTrue(
+                    torch.equal(merged.get_tensor(same_shard_unchanged), base_same_shard)
+                )
+            with safe_open(str(output / shards[1]), framework="pt") as merged:
+                observed = merged.get_tensor(unchanged)
+                self.assertEqual(observed.dtype, torch.float32)
+                self.assertTrue(torch.equal(observed, base_unchanged))
+
+    def test_partially_punched_safetensors_payload_fails_closed(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "punched.safetensors"
+            self._write_safetensors(
+                path,
+                {"payload": {"dtype": "U8", "shape": [10_000_000], "nbytes": 10_000_000}},
+            )
+            with path.open("rb") as handle:
+                header_bytes = struct.unpack("<Q", handle.read(8))[0]
+            data_start = 8 + header_bytes
+            punch_offset = ((data_start + 8191) // 4096) * 4096
+            punched = subprocess.run(
+                [
+                    "fallocate",
+                    "--punch-hole",
+                    "--keep-size",
+                    "--offset",
+                    str(punch_offset),
+                    "--length",
+                    "4096",
+                    str(path),
+                ],
+                capture_output=True,
+                text=True,
+            )
+            if punched.returncode != 0:
+                self.skipTest(f"filesystem cannot punch a payload hole: {punched.stderr}")
+            with self.assertRaisesRegex(ValueError, "sparse or physically incomplete"):
+                checkpoint_lineage._read_safetensors_header(path)
+
     def test_sparse_logical_shard_and_non_qwen_config_fail_closed(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
-            for name, value in {
-                "config.json": self._synthetic_config(),
-                "generation_config.json": {},
-                "tokenizer.json": {},
-                "tokenizer_config.json": {},
-            }.items():
+            for name, value in {"config.json": self._synthetic_config()}.items():
                 (root / name).write_text(json.dumps(value))
             shard = root / "model-00001-of-00001.safetensors"
             tensors = {
@@ -296,7 +578,7 @@ class EngineConfigCaptureGeometryTests(unittest.TestCase):
                 checkpoint_lineage.merged_checkpoint_inventory(
                     root, expected=self._synthetic_expected(tensors)
                 )
-            with self.assertRaisesRegex(ValueError, "pinned Qwen3.5-4B structure"):
+            with self.assertRaisesRegex(ValueError, "exact pinned Qwen3.5-4B config"):
                 checkpoint_lineage.merged_checkpoint_inventory(root)
 
     def test_exact_merge_replay_checks_adapted_and_unchanged_tensors(self) -> None:
@@ -727,6 +1009,7 @@ class ResolvedCudagraphTests(unittest.TestCase):
             )
 
         self.assertEqual(captured_engine_args["max_num_seqs"], 15)
+        self.assertIs(captured_engine_args["trust_remote_code"], False)
         self.assertEqual(captured_engine_args["cudagraph_capture_sizes"], list(effective))
         self.assertEqual(captured_engine_args["max_cudagraph_capture_size"], 15)
         self.assertEqual(instance.engine_args["requested_max_num_seqs"], 19)
