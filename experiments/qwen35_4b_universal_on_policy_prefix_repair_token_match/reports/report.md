@@ -2,9 +2,9 @@
 
 ## Summary
 
-Intake only. This result-separated successor proposes executable-oracle corrective
-continuations at the authenticated parent's own fresh procedural failure prefixes.
-No scientific result exists.
+Model-free design complete. This result-separated successor freezes fresh procedural
+tasks, an explicitly merged parent rollout path, failure-only prefix mining, and exact
+loss masking. No scientific result exists.
 
 ## Research Program Fit
 
@@ -14,41 +14,49 @@ the universal line's exact-token replay and strict promotion contract.
 
 ## Method
 
-Not frozen. CPU feasibility and adversarial review must specify fresh task generation,
-same-backend parent rollout collection, first-failure localization, masked-prefix
-loss, failure-class balance, exact-token replay matching, and fail-closed local
-promotion before any expensive event.
+Construction seed 77,113 produces 288 truth-audited tasks balanced across six failure
+classes. The authenticated `close_xi` adapter must be explicitly merged because
+runtime vLLM LoRA is a verified silent no-op. One greedy natural-thinking vLLM event
+will collect 288 parent outputs at seed 66,113 and cap 1,024. A frozen model-free miner
+selects ten reachable failures per class and masks every generated parent-prefix token
+from loss. Exact-token replay materialization is deferred until the actual prefixes
+exist.
 
 ## Results
 
-Related-work discovery, seed reservation, and parent authentication only. No rollout,
-training, capability measurement, merge, or benchmark event ran.
+CPU feasibility, deterministic generation, and adversarial design review passed.
+Source/model-input hashes are `32589348...1172` / `7a643e96...a5485c`; design receipt
+hash is `98c6a168...5638`. No model rollout, training, capability measurement, merge,
+or benchmark event ran.
 
 ## Controls
 
-Proposed baseline is authenticated `close_xi`. The mechanism-falsifying control is an
-independent same-parent replay continuation matched on exact encoded forward tokens,
-optimizer steps, backend, seed, and aligned shared replay. The design review may
-reject or narrow the treatment before it is frozen.
+Baseline is authenticated `close_xi`. The future mechanism-falsifying control remains
+an independent same-parent replay continuation matched on exact encoded forward
+tokens, optimizer steps, seed, and aligned shared replay. Training is fail-closed
+until those post-rollout facts are frozen in a second review.
 
 ## Oracle Versus Deployable Evidence
 
-Executable truth is permitted only to construct and audit fresh training corrections.
-It cannot enter model inputs or promotion scoring. Prior local events remain held out;
-`benchmarks/` remains read-forbidden and the aggregate gateway stays sealed.
+Executable truth is permitted only to construct tasks, grade parent failures, and
+build corrections. Hidden oracle fields are excluded from the rollout input; commit
+tasks deliberately expose verified work as their public task substrate. Prior local
+events remain held out; `benchmarks/` remains read-forbidden and the aggregate gateway
+stays sealed.
 
 ## Interpretation
 
-None yet. The intake records a prospective mechanism and its falsification boundary,
-not evidence for on-policy correction.
+The design is feasible and the vLLM parent-deployment footgun is closed. This is not
+evidence for on-policy correction, and “first failure” means the first
+machine-observable boundary rather than an unobservable latent error.
 
 ## Next Experiments
 
-Commit, rebase, push, and CI-verify this intake. Then run CPU-only feasibility and an
-adversarial design review; do not collect parent rollouts until the reviewed design is
-itself committed and green.
+Publish this design checkpoint. Then merge the parent, publish its receipt, collect
+the parent rollout, publish it, and mine prefixes. Do not train until the second
+compute review is committed and green.
 
 ## Artifact Manifest
 
-The proposed parent identity and reserved seeds are recorded in
-`artifact_manifest.yaml`; no result artifact exists.
+Parent identity, frozen task hashes, replay hashes, and the staged external merged
+checkpoint are recorded in `artifact_manifest.yaml`; no model result exists.

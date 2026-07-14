@@ -10,4 +10,12 @@ parent_rollout_seed: 66113
 training_seed: 47
 local_seed: 88009
 conditional_aggregate_seed: 78139
-status: intake_only_design_review_required
+rollout_rows: 288
+rollout_rows_per_failure_class: 48
+selected_repairs_per_failure_class: 10
+selected_prefix_repairs: 60
+parent_rollout_backend: vllm_merged_composite
+parent_rollout_max_tokens: 1024
+shared_position_aligned_replay_rows: 200
+rows_per_training_arm: 320
+status: design_frozen_parent_merge_next

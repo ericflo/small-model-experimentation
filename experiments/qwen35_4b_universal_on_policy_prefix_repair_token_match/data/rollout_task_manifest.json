@@ -1,0 +1,27 @@
+{
+  "benchmark_data_read": false,
+  "construction_seed": 77113,
+  "experiment_id": "qwen35_4b_universal_on_policy_prefix_repair_token_match",
+  "failure_classes": [
+    "declaration_operation",
+    "state_transition",
+    "bounded_induction",
+    "probe_scoring",
+    "repair_propagation",
+    "commit_serialization"
+  ],
+  "local_seed_materialized": false,
+  "rows": 288,
+  "rows_per_failure_class": 48,
+  "runner_input": {
+    "path": "data/parent_rollout_input.jsonl",
+    "sha256": "7a643e9609b7562053c5434fbcc07e48e38bc34c08ec8cdb0e88440324a5485c"
+  },
+  "runner_input_excludes_hidden_oracle_fields": true,
+  "schema_version": 1,
+  "source": {
+    "path": "data/rollout_tasks.jsonl",
+    "sha256": "32589348d7de63a005c046ae23ccb8e8402f67c16213817e7bbb920a50ac1172"
+  },
+  "stage": "model_free_rollout_task_freeze"
+}

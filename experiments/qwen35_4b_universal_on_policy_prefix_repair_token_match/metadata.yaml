@@ -18,13 +18,16 @@ research_programs:
   - "process_control_and_tool_use"
 top_level_dirs:
   - "configs"
+  - "data"
   - "reports"
   - "scripts"
   - "src"
   - "tests"
 file_counts:
-  md: 5
-  py: 3
+  json: 3
+  jsonl: 3
+  md: 7
+  py: 14
   yaml: 3
-total_files: 11
-total_size_bytes: 102445
+total_files: 30
+total_size_bytes: 8240536

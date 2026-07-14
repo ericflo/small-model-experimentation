@@ -1,0 +1,133 @@
+{
+  "checkpoint_policy": {
+    "clean_worktree_required": true,
+    "merge_then_rollout_then_mine": true,
+    "next_authorized_stage": "merge-parent",
+    "one_stage_per_invocation": true,
+    "preceding_receipt_committed_at_head": true
+  },
+  "experiment_id": "qwen35_4b_universal_on_policy_prefix_repair_token_match",
+  "failure_selection": {
+    "commit_think_limit": 32,
+    "failure_only": true,
+    "insufficient_quota_fails_closed": true,
+    "masked_parent_prefix": true,
+    "quota_per_class": 10,
+    "reachability": {
+      "bounded_induction": {
+        "available_tasks": 48,
+        "required_reachable_failures": 10,
+        "structurally_reachable": true
+      },
+      "commit_serialization": {
+        "available_tasks": 48,
+        "required_reachable_failures": 10,
+        "structurally_reachable": true
+      },
+      "declaration_operation": {
+        "available_tasks": 48,
+        "required_reachable_failures": 10,
+        "structurally_reachable": true
+      },
+      "probe_scoring": {
+        "available_tasks": 48,
+        "required_reachable_failures": 10,
+        "structurally_reachable": true
+      },
+      "repair_propagation": {
+        "available_tasks": 48,
+        "required_reachable_failures": 10,
+        "structurally_reachable": true
+      },
+      "state_transition": {
+        "available_tasks": 48,
+        "required_reachable_failures": 10,
+        "structurally_reachable": true
+      }
+    },
+    "selected_rows_if_reachable": 60
+  },
+  "firewall": {
+    "aggregate_seed_sealed": true,
+    "benchmark_data_read": false,
+    "benchmark_gateway_exposed": false
+  },
+  "future_compute_freeze": {
+    "planned_optimizer_steps": 40,
+    "planned_rows_per_arm": 320,
+    "planned_shared_position_aligned_replay_rows": 200,
+    "reason": "actual prefix lengths and class reachability are unobserved",
+    "required_before_training": [
+      "committed parent rollout receipt",
+      "committed failure inventory and correction source",
+      "exact forward-token matched replay streams",
+      "zero-skip tokenizer receipt",
+      "second adversarial compute review"
+    ],
+    "training_authorized": false
+  },
+  "model": {
+    "calls": 0,
+    "id": "Qwen/Qwen3.5-4B",
+    "loaded": false,
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
+  },
+  "parent": {
+    "arm": "close_xi",
+    "config_sha256": "de953bd57502ff728a12d1627d5aacab6284b045428ec7b83026388afd8c47ff",
+    "deployment": "explicit_composite_merge_required",
+    "experiment": "qwen35_4b_universal_close_weight_token_match",
+    "runtime_lora_forbidden": true,
+    "weights_sha256": "16e9dc75a0e33e182e916600ff6e1d75fc46dfa45e870216e2c149a41253c179"
+  },
+  "rollout": {
+    "all_tasks_one_batched_runner_event": true,
+    "backend": "vllm_merged_composite",
+    "greedy": true,
+    "max_tokens": 1024,
+    "metadata_sidecar_required": true,
+    "samples_per_task": 1,
+    "thinking": "natural"
+  },
+  "rollout_tasks": {
+    "counts": {
+      "bounded_induction": 48,
+      "commit_serialization": 48,
+      "declaration_operation": 48,
+      "probe_scoring": 48,
+      "repair_propagation": 48,
+      "state_transition": 48
+    },
+    "failure_classes": [
+      "declaration_operation",
+      "state_transition",
+      "bounded_induction",
+      "probe_scoring",
+      "repair_propagation",
+      "commit_serialization"
+    ],
+    "fresh_local_seed_materialized": false,
+    "manifest_sha256": "7d45a51f036821b565da952024cc69fd00785a9c489b038d1b918aa2406caf07",
+    "rows": 288,
+    "rows_per_failure_class": 48,
+    "runner_input_excludes_hidden_oracle_fields": true,
+    "runner_input_sha256": "7a643e9609b7562053c5434fbcc07e48e38bc34c08ec8cdb0e88440324a5485c",
+    "source_sha256": "32589348d7de63a005c046ae23ccb8e8402f67c16213817e7bbb920a50ac1172",
+    "truth_audits_present": true
+  },
+  "schema_version": 1,
+  "seeds": {
+    "conditional_aggregate": 78139,
+    "construction": 77113,
+    "local": 88009,
+    "parent_rollout": 66113,
+    "training": 47
+  },
+  "sources": {
+    "clean_replay_sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2",
+    "predecessor_partition_sha256": "abf8b5055e68c0fb2bb6e32a29f7be3b3677a0dd179e77397647777a2aa0966f",
+    "runner_sha256": "2099c6742bf768f8cc3eccbda23bd114a1554383e48c52f6734f4ac507e32aaf",
+    "trainer_sha256": "0cfb126feae6d73238c02362066229fff0b6a846625eed167d7681edde322cc4"
+  },
+  "stage": "model_free_on_policy_collection_design"
+}

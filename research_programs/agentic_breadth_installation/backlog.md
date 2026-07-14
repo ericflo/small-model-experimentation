@@ -178,15 +178,14 @@
   candidate 19/16/16 correct, 23/21/22 parsed, and 3/5/5 caps; target subtotals were
   4/2/1 of six. Candidate failed five absolute gates and every relative gate, so seed
   78138 remains sealed. Retire another idealized trace surface.
-- Active intake: `qwen35_4b_universal_on_policy_prefix_repair_token_match` proposes
-  collecting authenticated `close_xi` rollouts on fresh procedural tasks, locating
-  the first observable failure prefix, and training masked executable-oracle
-  corrective continuations for commit, declaration/operator parsing, bounded
-  induction, probe scoring, repair propagation, and exact serialization. Reserved
-  construction/rollout/training/local/aggregate seeds are
-  77113/66113/47/88009/78139. Intake only: CPU feasibility and adversarial review
-  must freeze same-backend collection, prefix provenance/masking, failure-class
-  balance, exact-token replay, and unchanged promotion gates before any model event.
+- Active design: `qwen35_4b_universal_on_policy_prefix_repair_token_match` froze 288
+  fresh truth-audited tasks (48 each across six failure classes), an explicitly
+  merged `close_xi` vLLM deployment, exact generated-token prefix masking, and ten
+  reachable failures per class. Reserved construction/rollout/training/local/
+  aggregate seeds are 77113/66113/47/88009/78139. Design receipt
+  `98c6a168...5638` authorizes the parent merge, then separately checkpointed rollout
+  and model-free prefix mining. Training remains sealed until observed prefix lengths
+  support exact-token replay streams and a second adversarial compute review.
 
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.

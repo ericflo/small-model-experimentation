@@ -1,30 +1,36 @@
 #!/usr/bin/env python3
-"""Fail-closed intake smoke for the on-policy prefix-repair experiment."""
+"""Fail-closed staged harness for on-policy failure-prefix correction."""
 
 from __future__ import annotations
 
 import argparse
 import hashlib
+import json
+import os
+import subprocess
 import sys
 from pathlib import Path
 
 
-EXPERIMENT_ID = "qwen35_4b_universal_on_policy_prefix_repair_token_match"
-MODEL_ID = "Qwen/Qwen3.5-4B"
-MODEL_REVISION = "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
-PARENT_WEIGHTS_SHA256 = "16e9dc75a0e33e182e916600ff6e1d75fc46dfa45e870216e2c149a41253c179"
-PARENT_CONFIG_SHA256 = "de953bd57502ff728a12d1627d5aacab6284b045428ec7b83026388afd8c47ff"
-SEEDS = (77113, 66113, 47, 88009, 78139)
-
-EXPERIMENT_ROOT = Path(__file__).resolve().parents[1]
-REPOSITORY_ROOT = EXPERIMENT_ROOT.parents[1]
-PARENT = (
-    REPOSITORY_ROOT
+EXP = Path(__file__).resolve().parents[1]
+ROOT = EXP.parents[1]
+PYTHON = ROOT / ".venv" / "bin" / "python"
+SCRIPTS = EXP / "scripts"
+PARENT_ADAPTER = (
+    ROOT
     / "large_artifacts"
     / "qwen35_4b_universal_close_weight_token_match"
     / "adapters"
     / "close_xi"
 )
+MERGED_PARENT = ROOT / "large_artifacts" / EXP.name / "merged" / "close_xi_parent"
+MERGE_RECEIPT = EXP / "runs" / "merges" / "close_xi_parent.json"
+ROLLOUT_RECEIPT = EXP / "runs" / "parent_rollout" / "seed66113.receipt.json"
+DESIGN_RECEIPT = EXP / "data" / "design_receipt.json"
+MODEL_ID = "Qwen/Qwen3.5-4B"
+MODEL_REVISION = "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
+PARENT_WEIGHTS_SHA256 = "16e9dc75a0e33e182e916600ff6e1d75fc46dfa45e870216e2c149a41253c179"
+PARENT_CONFIG_SHA256 = "de953bd57502ff728a12d1627d5aacab6284b045428ec7b83026388afd8c47ff"
 
 
 def sha256_file(path: Path) -> str:
@@ -35,56 +41,135 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
-def smoke() -> None:
-    config = (EXPERIMENT_ROOT / "configs" / "default.yaml").read_text()
-    intake = (EXPERIMENT_ROOT / "idea_intake.md").read_text()
-    report = (EXPERIMENT_ROOT / "reports" / "report.md").read_text()
+def run(command: list[str], *, check: bool = True) -> int:
+    print("+ " + " ".join(command), flush=True)
+    completed = subprocess.run(
+        command,
+        cwd=ROOT,
+        env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"},
+        check=False,
+    )
+    if check and completed.returncode != 0:
+        raise subprocess.CalledProcessError(completed.returncode, command)
+    return completed.returncode
 
-    required_config = (
-        f"experiment_id: {EXPERIMENT_ID}",
+
+def require_clean_committed_checkpoint(required_paths: tuple[Path, ...] = ()) -> None:
+    status = subprocess.run(
+        ["git", "status", "--porcelain"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+    if status:
+        raise SystemExit("stage requires a clean incrementally committed worktree")
+    for path in required_paths:
+        relative = path.resolve().relative_to(ROOT.resolve()).as_posix()
+        committed = subprocess.run(
+            ["git", "show", f"HEAD:{relative}"],
+            cwd=ROOT,
+            check=False,
+            capture_output=True,
+        )
+        if (
+            committed.returncode != 0
+            or not path.is_file()
+            or committed.stdout != path.read_bytes()
+        ):
+            raise SystemExit(f"required checkpoint receipt is not committed at HEAD: {relative}")
+
+
+def smoke() -> None:
+    config = (EXP / "configs" / "default.yaml").read_text(encoding="utf-8")
+    required = (
         f"model_id: {MODEL_ID}",
         f"model_revision: {MODEL_REVISION}",
         f"parent_weights_sha256: {PARENT_WEIGHTS_SHA256}",
         f"parent_config_sha256: {PARENT_CONFIG_SHA256}",
-        "status: intake_only_design_review_required",
+        "status: design_frozen_parent_merge_next",
     )
-    missing = [entry for entry in required_config if entry not in config]
+    missing = [entry for entry in required if entry not in config]
     if missing:
-        raise RuntimeError(f"intake config missing frozen entries: {missing}")
-    for seed in SEEDS:
-        if str(seed) not in config or str(seed) not in intake:
-            raise RuntimeError(f"reserved seed {seed} is not recorded in both intake and config")
-    if len(SEEDS) != len(set(SEEDS)):
-        raise RuntimeError("reserved seeds must be distinct")
-    for placeholder in ("YYYY-MM-DD", "What specific uncertainty", "Fill this"):
-        if placeholder in intake or placeholder in report:
-            raise RuntimeError(f"unfinished intake placeholder remains: {placeholder!r}")
+        raise SystemExit(f"frozen config entries are missing: {missing}")
+    if (
+        sha256_file(PARENT_ADAPTER / "adapter_model.safetensors")
+        != PARENT_WEIGHTS_SHA256
+        or sha256_file(PARENT_ADAPTER / "adapter_config.json")
+        != PARENT_CONFIG_SHA256
+    ):
+        raise SystemExit("authenticated close_xi parent identity changed")
+    run([str(PYTHON), "-B", str(SCRIPTS / "gen_rollout_tasks.py"), "--check"])
+    run([str(PYTHON), "-B", str(SCRIPTS / "check_design.py"), "--check"])
+    review = (EXP / "reports" / "design_review.md").read_text(encoding="utf-8")
+    if "**Verdict:** `PASS_PARENT_MERGE`." not in review:
+        raise SystemExit("adversarial design review has not authorized the parent merge")
+    for path in sorted(SCRIPTS.glob("*.py")):
+        compile(path.read_text(encoding="utf-8"), str(path), "exec")
+    run(
+        [
+            str(PYTHON),
+            "-B",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            str(EXP / "tests"),
+            "-q",
+        ]
+    )
+    design = json.loads(DESIGN_RECEIPT.read_text(encoding="utf-8"))
+    print(
+        "design smoke passed: "
+        f"{design['rollout_tasks']['rows']} fresh tasks, six balanced failure classes, "
+        "masked-prefix and merged-parent gates frozen"
+    )
 
-    weights = PARENT / "adapter_model.safetensors"
-    adapter_config = PARENT / "adapter_config.json"
-    if not weights.is_file() or not adapter_config.is_file():
-        raise RuntimeError(f"authenticated parent adapter is missing: {PARENT}")
-    observed = (sha256_file(weights), sha256_file(adapter_config))
-    expected = (PARENT_WEIGHTS_SHA256, PARENT_CONFIG_SHA256)
-    if observed != expected:
-        raise RuntimeError(f"parent identity mismatch: expected {expected}, observed {observed}")
+
+def merge_parent() -> None:
+    run(
+        [
+            str(PYTHON),
+            "-B",
+            str(SCRIPTS / "merge_parent.py"),
+            "--name",
+            "close_xi_parent",
+            "--adapter",
+            str(PARENT_ADAPTER),
+            "--out",
+            str(MERGED_PARENT),
+        ]
+    )
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, allow_abbrev=False)
+    parser.add_argument("--smoke", action="store_true")
     parser.add_argument(
-        "--smoke", action="store_true", help="authenticate intake files and proposed parent"
+        "--stage",
+        choices=("merge-parent", "collect-parent", "mine-prefixes"),
+        help="run exactly one frozen stage",
     )
     args = parser.parse_args()
-    if not args.smoke:
-        parser.error("intake exposes no rollout, training, evaluation, merge, or benchmark stage")
+    if args.smoke:
+        if args.stage:
+            parser.error("--smoke and --stage are mutually exclusive")
+        smoke()
+        return 0
+    if not args.stage:
+        parser.error("choose --smoke or one explicit --stage")
     smoke()
-    print(
-        "intake smoke passed: one Qwen3.5-4B parent authenticated; "
-        "five fresh identities reserved; no scientific stage authorized"
-    )
+    if args.stage == "merge-parent":
+        require_clean_committed_checkpoint((DESIGN_RECEIPT,))
+        merge_parent()
+    elif args.stage == "collect-parent":
+        require_clean_committed_checkpoint((MERGE_RECEIPT,))
+        run([str(PYTHON), "-B", str(SCRIPTS / "collect_parent_rollouts.py")])
+    elif args.stage == "mine-prefixes":
+        require_clean_committed_checkpoint((ROLLOUT_RECEIPT,))
+        run([str(PYTHON), "-B", str(SCRIPTS / "mine_prefix_repairs.py")])
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

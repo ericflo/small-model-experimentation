@@ -6,6 +6,7 @@ import io
 import json
 import os
 import sys
+import tempfile
 import types
 import unittest
 from pathlib import Path
@@ -98,6 +99,52 @@ class EngineConfigCaptureGeometryTests(unittest.TestCase):
             runner._clamp_cudagraph_capture_sizes((1, 2, 4), 0)
         with self.assertRaisesRegex(ValueError, "empty"):
             runner._clamp_cudagraph_capture_sizes((), 15)
+
+
+class EngineConfigModelOverrideTests(unittest.TestCase):
+    @staticmethod
+    def _valid_config() -> dict:
+        return {
+            "model_type": "qwen3_5",
+            "architectures": ["Qwen3_5ForConditionalGeneration"],
+            "text_config": {
+                "model_type": "qwen3_5_text",
+                "vocab_size": 248320,
+                "hidden_size": 2560,
+                "num_hidden_layers": 32,
+            },
+        }
+
+    def test_model_override_requires_exact_qwen35_4b_fingerprint(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            composite = Path(directory)
+            (composite / "config.json").write_text(
+                json.dumps(self._valid_config()), encoding="utf-8"
+            )
+            runner.EngineConfig(model_override=composite).validate()
+
+            wrong = self._valid_config()
+            wrong["text_config"]["hidden_size"] = 4096
+            (composite / "config.json").write_text(json.dumps(wrong), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "not a merged Qwen/Qwen3.5-4B"):
+                runner.EngineConfig(model_override=composite).validate()
+
+    def test_model_override_is_mutually_exclusive_with_runtime_lora(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            composite = Path(directory)
+            (composite / "config.json").write_text(
+                json.dumps(self._valid_config()), encoding="utf-8"
+            )
+            with self.assertRaisesRegex(ValueError, "mutually exclusive"):
+                runner.EngineConfig(
+                    model_override=composite, adapter=composite / "adapter"
+                ).validate()
+
+    def test_model_override_requires_local_config(self) -> None:
+        with self.assertRaisesRegex(ValueError, "has no config.json"):
+            runner.EngineConfig(
+                model_override=Path("/definitely/missing/qwen35-composite")
+            ).validate()
 
 
 class PackageInventoryTests(unittest.TestCase):

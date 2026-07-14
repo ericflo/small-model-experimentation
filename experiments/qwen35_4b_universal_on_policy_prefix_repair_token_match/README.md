@@ -1,6 +1,6 @@
 # On-Policy Failure-Prefix Universal Curriculum
 
-**Status:** in-progress · since 2026-07-14 · intake only; CPU feasibility and adversarial design review remain before rollout collection
+**Status:** in-progress · since 2026-07-14 · model-free collection design frozen; explicit parent merge is next
 
 This result-separated successor tests whether training corrective continuations from
 the model's own fresh procedural failure prefixes installs a reusable reasoning and
@@ -57,29 +57,39 @@ fresh paired local gate, overall and on execute/induct/probe.
 
 ## Run
 
-Intake smoke only:
+Model-free design smoke:
 
 ```bash
 PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --smoke
 ```
 
-No rollout, materialization, training, local evaluation, merge, or benchmark command
-is authorized yet. CPU feasibility and `reports/design_review.md` must freeze the
-backend, prefix-masking contract, oracle boundary, exact-token control, and promotion
-logic first; that design then needs its own pushed-green checkpoint.
+After this design commit is pushed and both required workflows are green, run exactly
+one stage:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --stage merge-parent
+```
+
+Publish that receipt before `collect-parent`, then publish the rollout receipt before
+model-free `mine-prefixes`. Training remains unavailable until actual prefix lengths
+support exact-token streams, a zero-skip receipt, and a second adversarial compute
+review.
 
 ## Results
 
-Intake only. Related-work discovery selected the existing program, named the
-state-table predecessor as the closest near-duplicate, and reserved fresh identities.
-The smoke authenticates the proposed parent and repository-local intake contract. No
-model generation, training, capability measurement, merge, or benchmark event exists.
+CPU feasibility passed. Construction seed 77,113 deterministically freezes 288
+truth-audited tasks, 48 for each of six failure classes. The model-facing JSONL omits
+hidden oracle and answer fields. Tests cover exact prefix masking, failure-only
+selection, delayed-commit cutoff, declaration misuse, generation caps, and the
+merged-Qwen architecture gate. No model generation, training, capability
+measurement, merge, or benchmark event exists.
 
 ## Interpretation
 
-This is authorization to test feasibility and adversarially review the design, not
-evidence that on-policy correction works. The intervention must remain a prospective
-single-candidate package until a later ablation separates its failure classes.
+This is a design result, not evidence that on-policy correction works. vLLM runtime
+LoRA would silently collect the wrong policy, so the authenticated parent must first
+be merged explicitly. Failure quotas may still prove unreachable; that outcome stops
+training and is preserved.
 
 ## Knowledgebase Update
 
@@ -92,5 +102,11 @@ single-candidate package until a later ablation separates its failure classes.
 - `idea_intake.md`
 - `configs/default.yaml`
 - `scripts/run.py`
+- `scripts/gen_rollout_tasks.py`
+- `scripts/mine_prefix_repairs.py`
+- `data/design_receipt.json`
+- `data/rollout_task_manifest.json`
+- `reports/design_review.md`
+- `reports/preregistration.md`
 - `reports/report.md`
 - `reports/artifact_manifest.yaml`

@@ -20,5 +20,23 @@
   selection, GPU model generation, training, local capability, merge, or benchmark
   event ran.
 
-Next: publish and CI-verify this intake, then implement the smallest failure-prefix
-collector and exact-token control for adversarial design review before any rollout.
+## 2026-07-14 — Model-free collection design
+
+- Published intake commit `10ae8923` directly to `main`; Validate Repository run
+  `29342538743` and Publish Research Site run `29342538693` both passed.
+- Froze 288 fresh truth-audited tasks at construction seed 77,113: 48 each across
+  declaration/operation, state transition, bounded induction, probe scoring, repair
+  propagation, and commit serialization.
+- Separated hidden oracle source (`32589348...1172`) from model-facing rollout input
+  (`7a643e96...a5485c`). Fresh local seed 88,009 remains unmaterialized.
+- Added exact generated-token prefix masking and model-free failure mining. Fixed ten
+  reachable failures per class, a 32-token immediate-commit boundary, and fail-closed
+  insufficient-quota behavior.
+- Closed the documented vLLM runtime-LoRA silent no-op by requiring an explicitly
+  merged `close_xi` composite with exact Qwen3.5-4B architecture fingerprinting.
+- Adversarial review verdict is `PASS_PARENT_MERGE`; training, local evaluation, and
+  benchmark access remain unauthorized pending observed prefix lengths and a second
+  exact-compute review.
+
+Next: commit/rebase/push this design and verify both workflows; then run only the
+explicit parent-merge stage and checkpoint its receipt.
