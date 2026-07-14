@@ -108,3 +108,10 @@
   and installed vLLM is checked against the direct-URL `0.24.0+cu129` wheel pin. The
   suite passes 61 focused tests plus full construction with zero model/GPU/benchmark
   events. Authorization remains tokenizer-only pending clean Review 5.
+- Review 5b on exact commit `d5ed01aceb39bd6164dafee4051ba2d236d576c2`
+  returned HOLD despite passing stage/gate replay and direct-URL vLLM checks. A
+  synthetic non-Qwen checkpoint with arbitrary U8 tensors and a 5 GB sparse logical
+  shard passed the static inventory while using 12 KB of physical storage. The review
+  also confirmed that retained LoRA and merged trees are not yet linked by replaying
+  `base + LoRA delta`. No execution authorization changes occur until exact pinned-base
+  structure, tensor-derived bytes, and deterministic merge equality are enforced.

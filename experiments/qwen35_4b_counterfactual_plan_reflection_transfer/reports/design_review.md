@@ -233,3 +233,32 @@ checkpoint inventory, and enforcing the normalized direct-URL vLLM build pin.
 The repaired suite passes 61 focused model-free tests, syntax, and full construction.
 Authorization remains tokenizer-only. Review 5 must independently attack the exact
 committed revision before any model/GPU/training/evaluation stage is opened.
+
+## Review 5b — 2026-07-14
+
+**Reviewed commit:** `d5ed01aceb39bd6164dafee4051ba2d236d576c2`
+
+**Verdict:** **HOLD full implementation.**
+
+The first Review 5 worker was terminated by an automated safety classifier before
+returning a verdict. A fresh read-only scientific audit then verified both exact-commit
+CI runs, 61 focused tests plus 30 subtests, AST parsing for 35 Python files, and full
+216/72/144/144 plus 48 construction with zero collisions or prohibited events.
+
+Stage/gate replay and the direct-URL vLLM fix passed independent negative fixtures.
+The reviewer nevertheless reproduced one high-severity checkpoint false acceptance:
+`merged_checkpoint_inventory()` accepted `model_type: fabricated`, architecture
+`DefinitelyNotQwen`, 100 arbitrary U8 tensor names, and a sparse 5,000,009,064-byte
+logical shard that occupied only 12,288 physical bytes. The implementation trusts
+logical file length and index `metadata.total_size`; it does not bind the exact pinned
+Qwen config, names, shapes, dtypes, or recomputed tensor payload bytes.
+
+More fundamentally, the retained LoRA source and merged tree are authenticated only
+independently. Consumption does not prove that each merged module equals its pinned
+base tensor plus `B @ A * alpha / rank`. An unrelated loadable composite can therefore
+be paired with self-consistent arm/seed lineage.
+
+Authorization remains tokenizer-only. Required remediation is exact base-structure
+binding, tensor-derived byte accounting, and deterministic replay of every retained
+LoRA delta against pinned base tensors with comparison to the corresponding merged
+tensor or an independently verifiable tensor commitment.
