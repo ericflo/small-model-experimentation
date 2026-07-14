@@ -194,6 +194,20 @@
   29 critical and 22 runtime files, and records zero pre-lock generation
   requests, sampled outputs, and protected reads. Live mechanics remains held
   until this lock is committed, pushed, and green.
+- Committed and pushed the lock at `77c50a75fe82ca93d993f19a1897a6b3048c5824`;
+  both exact-commit workflows passed before live mechanics began.
+- Live mechanics completed all five durable transactions and preserved 4,056
+  outputs. Transport passed 24/24 exact echo and parse with zero caps, split
+  12/12 across both arities. Visible analysis then raised
+  `authentication requires later invocation to be absent: direct`: replay of
+  the stored transport decision incorrectly reused the initial authorization
+  path after later invocations existed. No visible selection, resource
+  decision, hidden score, hidden read, or benchmark read occurred.
+- Recorded terminal `TERMINAL_INSTRUMENT_FAILURE` in
+  `runs/mechanics/failure.json`. The capability question is unadjudicated. Do
+  not repair or rerun this result-bearing experiment; use fresh task/record
+  identities and seeds in a successor whose reviewed transaction API separates
+  initial transport authorization from post-chain replay authentication.
 
 ## Scaffold
 

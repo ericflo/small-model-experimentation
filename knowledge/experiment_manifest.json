@@ -5462,7 +5462,7 @@
   {
     "file_counts": {
       ".aesgcm": 1,
-      ".json": 30,
+      ".json": 53,
       ".jsonl": 9,
       ".md": 9,
       ".py": 38,
@@ -5478,9 +5478,9 @@
       "structured_execution_and_compilers"
     ],
     "source_track": "new",
-    "summary": "This fresh successor tests whether the prior strict answer-seam failure was caused by waiting past Qwen3.5's tokenizer chat-end token. It registers the first tokenizer EOS only during answer generation, preserves every pre-commit byte under the strict grammar, and compares it with the existing HF-model-EOS boundary on new calibration and residual-mechanics identities.",
+    "summary": "Calibration qualified the tokenizer-EOS-only interface; mechanics transport passed 24/24, but visible selection ended in terminal instrument failure after all five transactions. Residual capability remains unadjudicated.",
     "tags": [
-      "latent-state",
+      "abi",
       "small-model"
     ],
     "title": "Qwen3.5-4B Tokenizer-EOS Answer Commit Factorial",
@@ -5493,8 +5493,8 @@
       "src",
       "tests"
     ],
-    "total_files": 95,
-    "total_size_bytes": 26588627
+    "total_files": 118,
+    "total_size_bytes": 37719789
   },
   {
     "file_counts": {

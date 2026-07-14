@@ -83,6 +83,12 @@
   calibration decision, exact winner/control, request inventory, runtime, and
   zero pre-lock mechanics activity. This qualifies an interface only; the
   residual-capability question remains unadjudicated.
+  The winner-bound run subsequently passed transport 24/24 and durably
+  completed all five transactions, but visible analysis failed because
+  post-chain transport-decision replay reused the initial later-absent
+  authorization gate. No hidden read occurred. Replace it with a fresh-identity
+  successor that separates initial authorization from immutable replay under a
+  new review and lock; do not rerun the result-bearing experiment.
 - Measure the exact behavioral quotient at fresh depth 6 before assuming model-guided pruning is economically
   needed; record wall time, memory, physical transitions, coverage, and selector success.
 - If a real search wall appears, test a residualized partial state (feasible parameter domains, materialized

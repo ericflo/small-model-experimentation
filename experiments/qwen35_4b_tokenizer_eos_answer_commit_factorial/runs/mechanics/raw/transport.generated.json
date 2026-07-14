@@ -1,0 +1,2538 @@
+{
+  "invocation": "transport",
+  "rows": [
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "b0ae814f17563f80573c57e2c0c78f89684164bf95dfa1a3458352520d06562d",
+      "id": "5b715ecd73861a5ba0bab4eec825d31e50cb81b3843f3d05e0e68b287197f5b1",
+      "meta": {
+        "arity": 2,
+        "expected": "PROGRAM: E | P",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-answer-commit-factorial-transport-v1",
+          "transport",
+          "tokenizer-eos-answer-commit-factorial-v1/mechanics/00000"
+        ],
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00000"
+      },
+      "n_original_prompt_tokens": 843,
+      "n_prompt_tokens": 845,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 4,
+          "n_completion_tokens": 6,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 4,
+          "n_stage1_prompt_tokens": 845,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            458,
+            735,
+            387,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 1578428671,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 1578428671,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            458,
+            735,
+            387,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: E | P<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            458,
+            735,
+            387,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "8279f8c5cb1fb363859f357a0361787b2c135b67b67ade730acb9425a431bba7"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "d4de39fc69fc202fa37203d4281e6fd0d2d28592a2202b6d804353c47d1308e9",
+      "id": "64750dad474809e407cbb7c816587dec31b2c9b6257bf48e221b38590f50788a",
+      "meta": {
+        "arity": 3,
+        "expected": "PROGRAM: L | N | W",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-answer-commit-factorial-transport-v1",
+          "transport",
+          "tokenizer-eos-answer-commit-factorial-v1/mechanics/00001"
+        ],
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00001"
+      },
+      "n_original_prompt_tokens": 581,
+      "n_prompt_tokens": 583,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 6,
+          "n_completion_tokens": 8,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 6,
+          "n_stage1_prompt_tokens": 583,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            436,
+            735,
+            443,
+            735,
+            457,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 1274124023,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 1274124023,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            436,
+            735,
+            443,
+            735,
+            457,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: L | N | W<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            436,
+            735,
+            443,
+            735,
+            457,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "32398b3810987677710554007466be51faac60306ecccce199adaed0784e8301"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "761802f949841799e3ef32a9617cfab932686083ae26b26b5d8fbc1c19c50592",
+      "id": "da25c2bcff55e2a7828255db7dabc4dd7c645f023aa4b5887dee6c5a9f3692d6",
+      "meta": {
+        "arity": 2,
+        "expected": "PROGRAM: Q | T",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-answer-commit-factorial-transport-v1",
+          "transport",
+          "tokenizer-eos-answer-commit-factorial-v1/mechanics/00002"
+        ],
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00002"
+      },
+      "n_original_prompt_tokens": 630,
+      "n_prompt_tokens": 632,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 4,
+          "n_completion_tokens": 6,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 4,
+          "n_stage1_prompt_tokens": 632,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            1167,
+            735,
+            345,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 1741823167,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 1741823167,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            1167,
+            735,
+            345,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: Q | T<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            1167,
+            735,
+            345,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "c425d7443319cd01a5d0029117f70e37c780467b6b7dac522a125e5c2d88445e"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "9b1aab05b78328dd520d2cf5b6616326f41ea969a7bea42d6e2996706e763c77",
+      "id": "d8cbba0af6fc3d39e80a39289d8ed8978b3d98b476d839323b208af5d79af0ba",
+      "meta": {
+        "arity": 3,
+        "expected": "PROGRAM: O | L | V",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-answer-commit-factorial-transport-v1",
+          "transport",
+          "tokenizer-eos-answer-commit-factorial-v1/mechanics/00003"
+        ],
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00003"
+      },
+      "n_original_prompt_tokens": 566,
+      "n_prompt_tokens": 568,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 6,
+          "n_completion_tokens": 8,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 6,
+          "n_stage1_prompt_tokens": 568,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            496,
+            735,
+            436,
+            735,
+            629,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 1134486242,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 1134486242,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            496,
+            735,
+            436,
+            735,
+            629,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: O | L | V<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            496,
+            735,
+            436,
+            735,
+            629,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "64f2abbebee4b3c30918b4fb337e8853a538fd5887337ad629c6dbb4f662b1cd"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "e6d20c79a12c87be179293f6ae8fdc7730a2201fb4d4f5a011fe0fc62642d974",
+      "id": "3e63080aed08c7b51de18730257cb7a0f7ca1ef0a948f18f342326235e9845ba",
+      "meta": {
+        "arity": 2,
+        "expected": "PROGRAM: U | A",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-answer-commit-factorial-transport-v1",
+          "transport",
+          "tokenizer-eos-answer-commit-factorial-v1/mechanics/00004"
+        ],
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00004"
+      },
+      "n_original_prompt_tokens": 695,
+      "n_prompt_tokens": 697,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 4,
+          "n_completion_tokens": 6,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 4,
+          "n_stage1_prompt_tokens": 697,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            533,
+            735,
+            357,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 1432369563,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 1432369563,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            533,
+            735,
+            357,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: U | A<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            533,
+            735,
+            357,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "5a0fe3e265b97fd65d2465f5b4f323bde6d6c5f1216cc265cb947df046ac966b"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "afe333e464c42714c847c6ed873318ed4f339af9c32faf77cd9aa90b8c3c5b11",
+      "id": "cd100da195d7c6631fd55b5ebce187b685196de2a34af8043aadf3afaa4c7415",
+      "meta": {
+        "arity": 3,
+        "expected": "PROGRAM: B | Q | V",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-answer-commit-factorial-transport-v1",
+          "transport",
+          "tokenizer-eos-answer-commit-factorial-v1/mechanics/00005"
+        ],
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00005"
+      },
+      "n_original_prompt_tokens": 598,
+      "n_prompt_tokens": 600,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 6,
+          "n_completion_tokens": 8,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 6,
+          "n_stage1_prompt_tokens": 600,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            417,
+            735,
+            1167,
+            735,
+            629,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 1835600195,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 1835600195,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            417,
+            735,
+            1167,
+            735,
+            629,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: B | Q | V<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            417,
+            735,
+            1167,
+            735,
+            629,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "e2e42c9fcb9cfb2e91994c4e5a484569873f50a5c1ba21830721e9d16041d734"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "df42ef6d9a9a6b7a628f0b4957680bfdf9a5e65b6fd7011b52c8046b79423e94",
+      "id": "f9b1fa650870720f95dab9f76d91606865927c761e8bc18a25a1194a0cdaff19",
+      "meta": {
+        "arity": 2,
+        "expected": "PROGRAM: L | N",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-answer-commit-factorial-transport-v1",
+          "transport",
+          "tokenizer-eos-answer-commit-factorial-v1/mechanics/00006"
+        ],
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00006"
+      },
+      "n_original_prompt_tokens": 698,
+      "n_prompt_tokens": 700,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 4,
+          "n_completion_tokens": 6,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 4,
+          "n_stage1_prompt_tokens": 700,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            436,
+            735,
+            443,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 135007748,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 135007748,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            436,
+            735,
+            443,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: L | N<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            436,
+            735,
+            443,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "1c2260a29fb63eaeedca6b085f1061ad0d53dd6e4f8ec19ad4e28b9e8b7d242f"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "fa3620a82b4f9c1487c37956f9a13dda2608cf006937e0e5b369ce45bb6a83bd",
+      "id": "42db9baf340176177e9c664ec38753a95447c571f830d6afce22802e32a5774b",
+      "meta": {
+        "arity": 3,
+        "expected": "PROGRAM: A | D | Q",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-answer-commit-factorial-transport-v1",
+          "transport",
+          "tokenizer-eos-answer-commit-factorial-v1/mechanics/00007"
+        ],
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00007"
+      },
+      "n_original_prompt_tokens": 557,
+      "n_prompt_tokens": 559,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 6,
+          "n_completion_tokens": 8,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 6,
+          "n_stage1_prompt_tokens": 559,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            357,
+            735,
+            414,
+            735,
+            1167,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 1577964429,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 1577964429,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            357,
+            735,
+            414,
+            735,
+            1167,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: A | D | Q<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            357,
+            735,
+            414,
+            735,
+            1167,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "23f1be89ead1c8765c99aae72a16829a3ebbb0aa8a395fae8b90a65992a38747"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "c899d1cda5c3cb3572eeb5b2981a4ba5bf37346b9ce38a4ab5ea5fd2b8a32e92",
+      "id": "0659c3798cc848beed8fcf1e99e92f677fd416426d3caab57d7b65fd5ee91802",
+      "meta": {
+        "arity": 2,
+        "expected": "PROGRAM: G | K",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-answer-commit-factorial-transport-v1",
+          "transport",
+          "tokenizer-eos-answer-commit-factorial-v1/mechanics/00008"
+        ],
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00008"
+      },
+      "n_original_prompt_tokens": 734,
+      "n_prompt_tokens": 736,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 4,
+          "n_completion_tokens": 6,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 4,
+          "n_stage1_prompt_tokens": 736,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            469,
+            735,
+            710,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 1067312366,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 1067312366,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            469,
+            735,
+            710,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: G | K<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            469,
+            735,
+            710,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "c225b22484d096e0f8040627252e4e76ec6e9f9d224a915e3860b860a89b1771"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "6e8add5a517dfdc5333169f9cbf04554440ee277bcfd9ba74fc5e9db51f948d7",
+      "id": "cc581d77f8ed7de5f391ebffddb9b89e2d321944711a912044e00315f22a7157",
+      "meta": {
+        "arity": 3,
+        "expected": "PROGRAM: E | L | E",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-answer-commit-factorial-transport-v1",
+          "transport",
+          "tokenizer-eos-answer-commit-factorial-v1/mechanics/00009"
+        ],
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00009"
+      },
+      "n_original_prompt_tokens": 696,
+      "n_prompt_tokens": 698,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 6,
+          "n_completion_tokens": 8,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 6,
+          "n_stage1_prompt_tokens": 698,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            458,
+            735,
+            436,
+            735,
+            458,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 1801956834,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 1801956834,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            458,
+            735,
+            436,
+            735,
+            458,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: E | L | E<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            458,
+            735,
+            436,
+            735,
+            458,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "1a5fc68d422345f5ea5c0e6faff3330ed0ca8e99e3be555775827523ed862bc8"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "297d4d31614447b1138b2b19582774b7a57a3cf4610a009a0929d44c624356ea",
+      "id": "be9a346304cd8c49e9f259e1a111b45612436317594f9e7b829c7caee777db4c",
+      "meta": {
+        "arity": 2,
+        "expected": "PROGRAM: E | S",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-answer-commit-factorial-transport-v1",
+          "transport",
+          "tokenizer-eos-answer-commit-factorial-v1/mechanics/00010"
+        ],
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00010"
+      },
+      "n_original_prompt_tokens": 638,
+      "n_prompt_tokens": 640,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 4,
+          "n_completion_tokens": 6,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 4,
+          "n_stage1_prompt_tokens": 640,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            458,
+            735,
+            326,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 308239794,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 308239794,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            458,
+            735,
+            326,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: E | S<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            458,
+            735,
+            326,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "4d46a2f8dd9bae56d1a99dbe9f5e9be4e29e3b0b5601c23ec98075fcdaea4cd6"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "bc961b6f2edf11eb858c18ad1ddb80eddefdf750847eb82d481889f6b58a6c3a",
+      "id": "62c91a07df6595a7fb04e055ed845f28ec8dbcd70601b502979f3d9a98dd2d91",
+      "meta": {
+        "arity": 3,
+        "expected": "PROGRAM: C | Q | Q",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-answer-commit-factorial-transport-v1",
+          "transport",
+          "tokenizer-eos-answer-commit-factorial-v1/mechanics/00011"
+        ],
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00011"
+      },
+      "n_original_prompt_tokens": 584,
+      "n_prompt_tokens": 586,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 6,
+          "n_completion_tokens": 8,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 6,
+          "n_stage1_prompt_tokens": 586,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            351,
+            735,
+            1167,
+            735,
+            1167,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 1726773820,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 1726773820,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            351,
+            735,
+            1167,
+            735,
+            1167,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: C | Q | Q<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            351,
+            735,
+            1167,
+            735,
+            1167,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "e51f9faa13a1927f7915d4da53a2426dc09c9e0ced2473d3ac54ee7287fb364d"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "4810b7f7880bf819b8f7c657c058df8d7b83525c08ea537dac8cb9b454e964d5",
+      "id": "47264d9dcdbccab3f0d522e455878b9f137be5cff4ef97a4413383776ae6097f",
+      "meta": {
+        "arity": 2,
+        "expected": "PROGRAM: G | L",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-answer-commit-factorial-transport-v1",
+          "transport",
+          "tokenizer-eos-answer-commit-factorial-v1/mechanics/00012"
+        ],
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00012"
+      },
+      "n_original_prompt_tokens": 774,
+      "n_prompt_tokens": 776,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 4,
+          "n_completion_tokens": 6,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 4,
+          "n_stage1_prompt_tokens": 776,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            469,
+            735,
+            436,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 1240259598,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 1240259598,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            469,
+            735,
+            436,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: G | L<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            469,
+            735,
+            436,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "8e94e13958d43d1e6baf5ba7712ebe599fa6f397a3cded972166c6c6ead041ca"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "8d5e19386b38db6f972ed2575a268e99a91a0f86a54e7353c8e4cc43a6879d23",
+      "id": "cb803174215ec6c285748bbca330de2ada9b601e056688fb0686b554af5a90b6",
+      "meta": {
+        "arity": 3,
+        "expected": "PROGRAM: F | I | K",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-answer-commit-factorial-transport-v1",
+          "transport",
+          "tokenizer-eos-answer-commit-factorial-v1/mechanics/00013"
+        ],
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00013"
+      },
+      "n_original_prompt_tokens": 552,
+      "n_prompt_tokens": 554,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 6,
+          "n_completion_tokens": 8,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 6,
+          "n_stage1_prompt_tokens": 554,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            426,
+            735,
+            353,
+            735,
+            710,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 2027007816,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 2027007816,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            426,
+            735,
+            353,
+            735,
+            710,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: F | I | K<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            426,
+            735,
+            353,
+            735,
+            710,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "9bba138e21fef622bc49249a983606aa229afaf0cf7fea91d1085c65645d0bdb"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "243b7f71c8ee6ad3a108364a96075106ddd8c2def9a74bde8407269d67289c5f",
+      "id": "b97c927e3c14cfeb393f356c5d1755bfbb9c12e49d6bb09343b45bf97509010a",
+      "meta": {
+        "arity": 2,
+        "expected": "PROGRAM: G | G",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-answer-commit-factorial-transport-v1",
+          "transport",
+          "tokenizer-eos-answer-commit-factorial-v1/mechanics/00014"
+        ],
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00014"
+      },
+      "n_original_prompt_tokens": 900,
+      "n_prompt_tokens": 902,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 4,
+          "n_completion_tokens": 6,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 4,
+          "n_stage1_prompt_tokens": 902,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            469,
+            735,
+            469,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 1907672806,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 1907672806,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            469,
+            735,
+            469,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: G | G<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            469,
+            735,
+            469,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "ed0a9bcd64f5539b5a9a36e903ba4cc465581e4d6f61e31997febbb163132fbd"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "77117bff2ff32c78218994eb71c0140d9f3cec174764a8f10171c4cca432b5bb",
+      "id": "cace926a384f810d6e9db7e05f9d33e65a2f8810af101025de47de14550111b6",
+      "meta": {
+        "arity": 3,
+        "expected": "PROGRAM: F | J | T",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-answer-commit-factorial-transport-v1",
+          "transport",
+          "tokenizer-eos-answer-commit-factorial-v1/mechanics/00015"
+        ],
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00015"
+      },
+      "n_original_prompt_tokens": 498,
+      "n_prompt_tokens": 500,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 6,
+          "n_completion_tokens": 8,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 6,
+          "n_stage1_prompt_tokens": 500,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            426,
+            735,
+            604,
+            735,
+            345,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 350707102,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 350707102,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            426,
+            735,
+            604,
+            735,
+            345,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: F | J | T<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            426,
+            735,
+            604,
+            735,
+            345,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "df0dffe4f8c1d3b9e8849455af3ea5052a63979db46f309e5b776eb81acfa724"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "f0f7fd3c82d79a0e1d1a7a32899783f3a0ccd19bed446cb789650902cb182bb4",
+      "id": "4dfedf6e2fcad76d6b54493a939ef7b4410e07f404e8344946341214e1634ec1",
+      "meta": {
+        "arity": 2,
+        "expected": "PROGRAM: M | W",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-answer-commit-factorial-transport-v1",
+          "transport",
+          "tokenizer-eos-answer-commit-factorial-v1/mechanics/00016"
+        ],
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00016"
+      },
+      "n_original_prompt_tokens": 864,
+      "n_prompt_tokens": 866,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 4,
+          "n_completion_tokens": 6,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 4,
+          "n_stage1_prompt_tokens": 866,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            380,
+            735,
+            457,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 1280771813,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 1280771813,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            380,
+            735,
+            457,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: M | W<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            380,
+            735,
+            457,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "1799b59c0b8b7339ab4d324d1710b07ec85e463ae9da2f2172e8fc7f6b4272fb"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "490fee1b42e95268dcc107d2df1a057ce0e680ad4d5f836da82d5b93caa9aeb1",
+      "id": "7bd8d56a2e7e7e83bb23d6a84ef479f6a86fe0dde6dc5cb0323c728300d7ed43",
+      "meta": {
+        "arity": 3,
+        "expected": "PROGRAM: H | J | Q",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-answer-commit-factorial-transport-v1",
+          "transport",
+          "tokenizer-eos-answer-commit-factorial-v1/mechanics/00017"
+        ],
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00017"
+      },
+      "n_original_prompt_tokens": 570,
+      "n_prompt_tokens": 572,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 6,
+          "n_completion_tokens": 8,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 6,
+          "n_stage1_prompt_tokens": 572,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            462,
+            735,
+            604,
+            735,
+            1167,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 1500106103,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 1500106103,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            462,
+            735,
+            604,
+            735,
+            1167,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: H | J | Q<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            462,
+            735,
+            604,
+            735,
+            1167,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "c0bf3ad74ef68eedd4590aeb6cf88d2552198e2084201695ab66c5812f25bc9c"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "c32c710c89ea6855c4e044abcb94bb3d57f5b82431d4466cf6baea6e19621305",
+      "id": "452ce8f90f3c4832374fac19765c3a7ddcdf9ebd217236ddb5e86b799eb514d5",
+      "meta": {
+        "arity": 2,
+        "expected": "PROGRAM: E | V",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-answer-commit-factorial-transport-v1",
+          "transport",
+          "tokenizer-eos-answer-commit-factorial-v1/mechanics/00018"
+        ],
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00018"
+      },
+      "n_original_prompt_tokens": 669,
+      "n_prompt_tokens": 671,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 4,
+          "n_completion_tokens": 6,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 4,
+          "n_stage1_prompt_tokens": 671,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            458,
+            735,
+            629,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 629057354,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 629057354,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            458,
+            735,
+            629,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: E | V<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            458,
+            735,
+            629,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "73d6b7cdae3057e3faf4da68a4616566b6f0985a303a67e88de7c7d323605ca6"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "d54c8c0f4b94036eec4b24d843f217eabe3271f93ff692a5a43ab74c332b22a6",
+      "id": "bfaea88727d81b6c7dac03be310e23d595b4f0ef5e6e08fb9a4ed5bf2cf732d7",
+      "meta": {
+        "arity": 3,
+        "expected": "PROGRAM: P | K | T",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-answer-commit-factorial-transport-v1",
+          "transport",
+          "tokenizer-eos-answer-commit-factorial-v1/mechanics/00019"
+        ],
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00019"
+      },
+      "n_original_prompt_tokens": 529,
+      "n_prompt_tokens": 531,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 6,
+          "n_completion_tokens": 8,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 6,
+          "n_stage1_prompt_tokens": 531,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            387,
+            735,
+            710,
+            735,
+            345,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 1467175310,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 1467175310,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            387,
+            735,
+            710,
+            735,
+            345,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: P | K | T<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            387,
+            735,
+            710,
+            735,
+            345,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "6f6e312091abf1ad763e48528f36022296ce5431be088e0696532ff78b66d29c"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "ba4d35a014b4b9637ab0e6913088555cabf30f2c0b9904fd0d22ad3ff7a326df",
+      "id": "a81fe0c433f7d57a70087c0d644adaba82743057bad67bee3882f54f8bccb209",
+      "meta": {
+        "arity": 2,
+        "expected": "PROGRAM: V | H",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-answer-commit-factorial-transport-v1",
+          "transport",
+          "tokenizer-eos-answer-commit-factorial-v1/mechanics/00020"
+        ],
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00020"
+      },
+      "n_original_prompt_tokens": 629,
+      "n_prompt_tokens": 631,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 4,
+          "n_completion_tokens": 6,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 4,
+          "n_stage1_prompt_tokens": 631,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            629,
+            735,
+            462,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 160249480,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 160249480,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            629,
+            735,
+            462,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: V | H<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            629,
+            735,
+            462,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "8c01c0ceccf5b3dc6f72fc62ba63f05548e4d568653d206511dce2bb6a2f58cc"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "07a9693eb209f856efd296fa50adfa79d1dc93c16b9f6ceb83ccb4a98e82e6cc",
+      "id": "fec22398d516d82aca0103a49a46fdd7d9f56335273a145fe09773ebb636c5d1",
+      "meta": {
+        "arity": 3,
+        "expected": "PROGRAM: L | N | S",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-answer-commit-factorial-transport-v1",
+          "transport",
+          "tokenizer-eos-answer-commit-factorial-v1/mechanics/00021"
+        ],
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00021"
+      },
+      "n_original_prompt_tokens": 471,
+      "n_prompt_tokens": 473,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 6,
+          "n_completion_tokens": 8,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 6,
+          "n_stage1_prompt_tokens": 473,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            436,
+            735,
+            443,
+            735,
+            326,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 1367704802,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 1367704802,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            436,
+            735,
+            443,
+            735,
+            326,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: L | N | S<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            436,
+            735,
+            443,
+            735,
+            326,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "34be35730210d84cc7f3850e2dfaef0ee83a5dca1999d9e90f56ecdc3845d29c"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "fa2686c217ec489cefcce799856b2f293c14af5af5dde403e2c494329c2706f7",
+      "id": "a3c8521e00e6557989c959bd34ea82ecc701eb70648b4a853cf88ca3565bcd5d",
+      "meta": {
+        "arity": 2,
+        "expected": "PROGRAM: T | V",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-answer-commit-factorial-transport-v1",
+          "transport",
+          "tokenizer-eos-answer-commit-factorial-v1/mechanics/00022"
+        ],
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00022"
+      },
+      "n_original_prompt_tokens": 702,
+      "n_prompt_tokens": 704,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 4,
+          "n_completion_tokens": 6,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 4,
+          "n_stage1_prompt_tokens": 704,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            345,
+            735,
+            629,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 1638512357,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 1638512357,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            345,
+            735,
+            629,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: T | V<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            345,
+            735,
+            629,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "8159ad2666a733cf4c6b42594e9c5d8a15997f6a2067a03d293259ee836d71d6"
+    },
+    {
+      "answer_prefix_token_ids": [
+        78041,
+        25
+      ],
+      "effective_prompt_sha256": "82c8a7de1be55b2d39225457f31488b2f7539525ffce0ce0e35d53f73e6e9d2c",
+      "id": "d1c6646fb3997c98732ef2ad92067e8d55e5d541e2412370ccf915cf196718ef",
+      "meta": {
+        "arity": 3,
+        "expected": "PROGRAM: F | M | T",
+        "family": "transport",
+        "seed_key": [
+          "tokenizer-eos-answer-commit-factorial-transport-v1",
+          "transport",
+          "tokenizer-eos-answer-commit-factorial-v1/mechanics/00023"
+        ],
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00023"
+      },
+      "n_original_prompt_tokens": 491,
+      "n_prompt_tokens": 493,
+      "outputs": [
+        {
+          "answer_cap_contact": false,
+          "answer_prefix_token_ids": [
+            78041,
+            25
+          ],
+          "finish_reason": "stop",
+          "forced_close": false,
+          "injected_token_ids": [
+            78041,
+            25
+          ],
+          "n_answer_tokens": 6,
+          "n_completion_tokens": 8,
+          "n_injected_tokens": 2,
+          "n_sampled_tokens": 6,
+          "n_stage1_prompt_tokens": 493,
+          "n_stage2_prompt_tokens": 0,
+          "n_terminal_tokens_trimmed": 0,
+          "n_thinking_tokens": 0,
+          "raw_answer_token_ids": [
+            426,
+            735,
+            380,
+            735,
+            345,
+            248046
+          ],
+          "registered_stop_token_id": 248046,
+          "sample_index": 0,
+          "sampled_cumulative_logprob": null,
+          "seed_domain_stage1": "answer",
+          "seed_domain_stage2": null,
+          "seed_stage1": 680771211,
+          "seed_stage2": null,
+          "stage1_cumulative_logprob": null,
+          "stage1_finish_reason": "stop",
+          "stage1_logprobs": null,
+          "stage1_parent_seed": 680771211,
+          "stage1_stop_reason": 248046,
+          "stage1_token_ids": [
+            426,
+            735,
+            380,
+            735,
+            345,
+            248046
+          ],
+          "stage2_cumulative_logprob": null,
+          "stage2_logprobs": null,
+          "stage2_token_ids": [],
+          "stop_reason": 248046,
+          "terminal_event": "stop",
+          "text": "PROGRAM: F | M | T<|im_end|>",
+          "thinking_closed": false,
+          "token_ids": [
+            78041,
+            25,
+            426,
+            735,
+            380,
+            735,
+            345,
+            248046
+          ],
+          "truncated": false
+        }
+      ],
+      "prompt_channel": "off",
+      "prompt_logprobs": null,
+      "prompt_sha256": "a80d1e0a9ba1f8723db978f23a8902f9bd3a73462aa49a6414c1b0f04fd85141"
+    }
+  ],
+  "runner_metadata": {
+    "adapter": null,
+    "counts": {
+      "completions": 24,
+      "injected_tokens": 48,
+      "logical_model_input_tokens": 15517,
+      "logical_model_tokens": 15637,
+      "logical_prompt_tokens": 15517,
+      "physical_model_tokens": 15637,
+      "physical_prompt_tokens": 15517,
+      "physical_sampled_tokens": 120,
+      "requests": 24,
+      "reused_model_tokens": 0,
+      "reused_prompt_tokens": 0,
+      "reused_sampled_tokens": 0,
+      "sampled_tokens": 120,
+      "stage1_logical_prompt_tokens": 15517,
+      "stage2_logical_prompt_tokens": 0,
+      "unique_input_prompt_tokens": 15517
+    },
+    "engine": {
+      "adapter": null,
+      "cudagraph_capture_sizes": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "enable_prefix_caching": false,
+      "enforce_eager": false,
+      "gpu_memory_utilization": 0.9,
+      "max_model_len": 4096,
+      "max_num_batched_tokens": 16384,
+      "max_num_seqs": 64
+    },
+    "engine_args": {
+      "async_scheduling": false,
+      "cudagraph_capture_sizes": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "dtype": "bfloat16",
+      "enable_prefix_caching": false,
+      "enforce_eager": false,
+      "generation_config": "vllm",
+      "gpu_memory_utilization": 0.9,
+      "language_model_only": true,
+      "logprobs_mode": "raw_logprobs",
+      "mamba_cache_mode": "none",
+      "max_cudagraph_capture_size": 64,
+      "max_logprobs": 24,
+      "max_model_len": 4096,
+      "max_num_batched_tokens": 16384,
+      "max_num_seqs": 64,
+      "model": "Qwen/Qwen3.5-4B",
+      "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+      "seed": 0,
+      "tensor_parallel_size": 1,
+      "tokenizer_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+      "trust_remote_code": true
+    },
+    "generation_mode": "winner_bound_tokenizer_eos_no_think",
+    "model": "Qwen/Qwen3.5-4B",
+    "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "registered_answer_stop_token_id": 248046,
+    "resolved_cudagraph": {
+      "cudagraph_capture_sizes": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "decode_mode": "FULL",
+      "has_full_cudagraphs": true,
+      "max_cudagraph_capture_size": 64,
+      "mixed_mode": "PIECEWISE",
+      "mode": "FULL_AND_PIECEWISE",
+      "source": "llm_engine.vllm_config.compilation_config"
+    },
+    "resolved_logprobs_mode": "raw_logprobs",
+    "resolved_sampling": {
+      "frequency_penalty": 0.0,
+      "min_p": 0.0,
+      "presence_penalty": 0.0,
+      "repetition_penalty": 1.0,
+      "temperature": 0.6,
+      "top_k": 20,
+      "top_p": 0.95
+    },
+    "rng_isolation": {
+      "caller_global_rng_state_restored": true,
+      "engine_seed": 0
+    },
+    "runner_sha256": "4ce61e646357ef64351a0b3f3558b865ca2b27e87ddd29bd4c73d309cd514320",
+    "runtime": {
+      "cuda_toolkit": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Fri_Feb_21_20:23:50_PST_2025\nCuda compilation tools, release 12.8, V12.8.93\nBuild cuda_12.8.r12.8/compiler.35583870_0",
+      "environment_lock": {
+        "path": "/workspace/small-model-experimentation/requirements-vllm.lock.txt",
+        "sha256": "64c3dde1e24f2b18a83cda3a3d84daf8701aad728e864c508854b10e3e3734c6"
+      },
+      "git_commit": "77c50a75fe82ca93d993f19a1897a6b3048c5824",
+      "git_dirty": true,
+      "gpu": "NVIDIA RTX 6000 Ada Generation, 550.127.05, 49140",
+      "packages": {
+        "aiohappyeyeballs": "2.7.1",
+        "aiohttp": "3.14.1",
+        "aiosignal": "1.4.0",
+        "annotated-doc": "0.0.4",
+        "annotated-types": "0.7.0",
+        "anthropic": "0.116.0",
+        "anyio": "4.14.1",
+        "apache-tvm-ffi": "0.1.9",
+        "astor": "0.8.1",
+        "attrs": "26.1.0",
+        "blake3": "1.0.9",
+        "cachetools": "7.1.4",
+        "cbor2": "6.1.3",
+        "certifi": "2026.6.17",
+        "cffi": "2.1.0",
+        "charset-normalizer": "3.4.9",
+        "click": "8.4.2",
+        "cloudpickle": "3.1.2",
+        "compressed-tensors": "0.17.0",
+        "cryptography": "49.0.0",
+        "cuda-bindings": "12.9.7",
+        "cuda-pathfinder": "1.5.6",
+        "cuda-python": "12.9.7",
+        "cuda-tile": "1.3.0",
+        "cuda-toolkit": "12.9.1",
+        "depyf": "0.20.0",
+        "detect-installer": "0.1.0",
+        "dill": "0.4.1",
+        "diskcache": "5.6.3",
+        "distro": "1.9.0",
+        "dnspython": "2.8.0",
+        "docstring-parser": "0.18.0",
+        "einops": "0.8.2",
+        "email-validator": "2.3.0",
+        "fastapi": "0.136.3",
+        "fastapi-cli": "0.0.29",
+        "fastapi-cloud-cli": "0.22.1",
+        "fastar": "0.11.0",
+        "fastsafetensors": "0.3.3",
+        "filelock": "3.29.7",
+        "flashinfer-cubin": "0.6.12",
+        "flashinfer-python": "0.6.12",
+        "frozenlist": "1.8.0",
+        "fsspec": "2026.6.0",
+        "googleapis-common-protos": "1.75.0",
+        "grpcio": "1.82.1",
+        "h11": "0.16.0",
+        "hf-xet": "1.5.1",
+        "httpcore": "1.0.9",
+        "httptools": "0.8.0",
+        "httpx": "0.28.1",
+        "httpx-sse": "0.4.3",
+        "huggingface-hub": "1.23.0",
+        "humming-kernels": "0.1.6",
+        "idna": "3.18",
+        "ijson": "3.5.1",
+        "interegular": "0.3.3",
+        "jinja2": "3.1.6",
+        "jiter": "0.16.0",
+        "jmespath": "1.1.0",
+        "jsonschema": "4.26.0",
+        "jsonschema-specifications": "2025.9.1",
+        "lark": "1.2.2",
+        "llguidance": "1.7.6",
+        "llvmlite": "0.47.0",
+        "lm-format-enforcer": "0.11.3",
+        "loguru": "0.7.3",
+        "markdown-it-py": "4.2.0",
+        "markupsafe": "3.0.3",
+        "mcp": "1.28.1",
+        "mdurl": "0.1.2",
+        "mistral-common": "1.11.5",
+        "ml-dtypes": "0.5.4",
+        "model-hosting-container-standards": "0.1.16",
+        "mpmath": "1.3.0",
+        "msgspec": "0.21.1",
+        "multidict": "6.7.1",
+        "networkx": "3.6.1",
+        "ninja": "1.13.0",
+        "numba": "0.65.0",
+        "numpy": "2.3.5",
+        "nvidia-cublas-cu12": "12.9.1.4",
+        "nvidia-cuda-cccl-cu12": "12.9.27",
+        "nvidia-cuda-crt": "13.3.73",
+        "nvidia-cuda-cupti-cu12": "12.9.79",
+        "nvidia-cuda-nvcc": "13.2.78",
+        "nvidia-cuda-nvcc-cu12": "12.9.86",
+        "nvidia-cuda-nvrtc-cu12": "12.9.86",
+        "nvidia-cuda-runtime": "13.3.29",
+        "nvidia-cuda-runtime-cu12": "12.9.79",
+        "nvidia-cuda-tileiras": "13.2.78",
+        "nvidia-cudnn-cu12": "9.17.1.4",
+        "nvidia-cudnn-frontend": "1.26.0",
+        "nvidia-cufft-cu12": "11.4.1.4",
+        "nvidia-cufile-cu12": "1.14.1.1",
+        "nvidia-curand-cu12": "10.3.10.19",
+        "nvidia-cusolver-cu12": "11.7.5.82",
+        "nvidia-cusparse-cu12": "12.5.10.65",
+        "nvidia-cusparselt-cu12": "0.7.1",
+        "nvidia-cutlass-dsl": "4.5.2",
+        "nvidia-cutlass-dsl-libs-base": "4.5.2",
+        "nvidia-ml-py": "13.610.43",
+        "nvidia-nccl-cu12": "2.28.9",
+        "nvidia-nvjitlink-cu12": "12.9.86",
+        "nvidia-nvshmem-cu12": "3.4.5",
+        "nvidia-nvtx-cu12": "12.9.79",
+        "nvidia-nvvm": "13.2.78",
+        "openai": "2.45.0",
+        "openai-harmony": "0.0.8",
+        "opencv-python-headless": "5.0.0.93",
+        "opentelemetry-api": "1.43.0",
+        "opentelemetry-exporter-otlp": "1.43.0",
+        "opentelemetry-exporter-otlp-proto-common": "1.43.0",
+        "opentelemetry-exporter-otlp-proto-grpc": "1.43.0",
+        "opentelemetry-exporter-otlp-proto-http": "1.43.0",
+        "opentelemetry-proto": "1.43.0",
+        "opentelemetry-sdk": "1.43.0",
+        "opentelemetry-semantic-conventions": "0.64b0",
+        "opentelemetry-semantic-conventions-ai": "0.5.1",
+        "outlines-core": "0.2.14",
+        "packaging": "26.2",
+        "partial-json-parser": "0.2.1.1.post7",
+        "pillow": "12.3.0",
+        "prometheus-client": "0.25.0",
+        "prometheus-fastapi-instrumentator": "8.0.2",
+        "propcache": "0.5.2",
+        "protobuf": "7.35.1",
+        "psutil": "7.2.2",
+        "py-cpuinfo": "9.0.0",
+        "pybase64": "1.4.3",
+        "pycountry": "26.2.16",
+        "pycparser": "3.0",
+        "pydantic": "2.13.4",
+        "pydantic-core": "2.46.4",
+        "pydantic-extra-types": "2.11.1",
+        "pydantic-settings": "2.14.2",
+        "pyelftools": "0.33",
+        "pygments": "2.20.0",
+        "pyjwt": "2.13.0",
+        "python-dotenv": "1.2.2",
+        "python-json-logger": "4.1.0",
+        "python-multipart": "0.0.32",
+        "pyyaml": "6.0.3",
+        "pyzmq": "27.1.0",
+        "quack-kernels": "0.5.0",
+        "referencing": "0.37.0",
+        "regex": "2026.6.28",
+        "requests": "2.34.2",
+        "rich": "15.0.0",
+        "rich-toolkit": "0.20.1",
+        "rignore": "0.7.6",
+        "rpds-py": "2026.6.3",
+        "safetensors": "0.8.0",
+        "sentencepiece": "0.2.1",
+        "sentry-sdk": "2.64.0",
+        "setproctitle": "1.3.7",
+        "setuptools": "80.10.2",
+        "shellingham": "1.5.4",
+        "six": "1.17.0",
+        "sniffio": "1.3.1",
+        "sse-starlette": "3.4.5",
+        "starlette": "1.3.1",
+        "supervisor": "4.3.0",
+        "sympy": "1.14.0",
+        "tabulate": "0.10.0",
+        "tiktoken": "0.13.0",
+        "tilelang": "0.1.9",
+        "tokenizers": "0.22.2",
+        "tokenspeed-mla": "0.1.2",
+        "tokenspeed-triton": "3.7.10.post20260531",
+        "torch": "2.11.0+cu129",
+        "torch-c-dlpack-ext": "0.1.5",
+        "torchaudio": "2.11.0+cu129",
+        "torchvision": "0.26.0+cu129",
+        "tqdm": "4.68.4",
+        "transformers": "5.13.0",
+        "triton": "3.6.0",
+        "typer": "0.26.8",
+        "typing-extensions": "4.16.0",
+        "typing-inspection": "0.4.2",
+        "urllib3": "2.7.0",
+        "uvicorn": "0.51.0",
+        "uvloop": "0.22.1",
+        "vllm": "0.24.0+cu129",
+        "watchfiles": "1.2.0",
+        "websockets": "16.0",
+        "xgrammar": "0.2.3",
+        "yarl": "1.24.2",
+        "z3-solver": "4.15.4.0"
+      },
+      "platform": "Linux-6.8.0-52-generic-x86_64-with-glibc2.39",
+      "python": "3.12.3",
+      "python_executable": "/workspace/small-model-experimentation/.venv-vllm/bin/python",
+      "uv": "uv 0.9.0",
+      "vllm_enable_v1_multiprocessing": "0"
+    },
+    "sampling": {
+      "allow_custom_prompts": false,
+      "answer_max_tokens": 24,
+      "answer_prefix": "PROGRAM:",
+      "force_answer_seam": false,
+      "frequency_penalty": 0.0,
+      "greedy": false,
+      "logprob_token_ids": [],
+      "logprobs": null,
+      "max_tokens": 24,
+      "min_p": 0.0,
+      "n": 1,
+      "paired_answer_seed": true,
+      "presence_penalty": 0.0,
+      "prompt_logprobs": null,
+      "repetition_penalty": 1.0,
+      "run_seed": 2026140706,
+      "shuffle_thinking": false,
+      "temperature": 0.6,
+      "thinking": "off",
+      "thinking_budget": null,
+      "top_k": 20,
+      "top_p": 0.95
+    },
+    "schema_version": 6,
+    "selected_interface": "tokenizer_eos_no_think_program_slot",
+    "terminal_token_preserved_in_raw_and_text": true,
+    "termination": {
+      "hf_model_eos_token_id": 248044,
+      "vllm_tokenizer_eos_ignored": 248046
+    },
+    "think_token_ids": {
+      "close": 248069,
+      "forced_close_sequence": [
+        248069,
+        271
+      ],
+      "no_thinking_prompt_suffix": [
+        248045,
+        74455,
+        198,
+        248068,
+        271,
+        248069,
+        271
+      ],
+      "open": 248068,
+      "thinking_prompt_suffix": [
+        248045,
+        74455,
+        198,
+        248068,
+        198
+      ]
+    },
+    "timing": {
+      "generation_seconds": 1.3026792854070663,
+      "model_load_seconds": 23.919162914156914,
+      "sampled_tokens_per_second": 92.1178384766454
+    }
+  },
+  "schema_version": 1
+}

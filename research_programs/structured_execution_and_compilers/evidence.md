@@ -331,6 +331,14 @@ does **not** establish residual-mechanics or capability gain. Mechanics and all
 protected labels remained sealed and require a second winner-bound published
 lock before access.
 
+The later winner-bound run passed its independent transport gate (24/24 exact
+echo and parse, zero caps) and completed five durable transactions containing
+4,056 outputs. It stopped before visible selection: replay authentication of
+the stored transport decision incorrectly reused the initial temporal gate
+after later invocations were complete. Hidden scoring and benchmark access
+remained sealed. Record this as terminal instrument failure, not capability
+evidence; a fresh-identity successor is required.
+
 ## Materialized residual mechanics incident (2026-07-13)
 
 [qwen35_4b_materialized_residual_sibling_search](../../experiments/qwen35_4b_materialized_residual_sibling_search/reports/report.md)

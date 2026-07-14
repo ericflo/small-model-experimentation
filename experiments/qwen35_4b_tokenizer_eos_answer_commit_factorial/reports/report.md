@@ -48,6 +48,22 @@ The winner is the first qualifying cell in the preregistered priority:
 No mechanics, hidden label, qualification, confirmation, or benchmark content
 was read.
 
+### Conditional mechanics
+
+After a separate nine-round implementation review and committed-green
+winner-bound lock, live mechanics completed all five durable transactions and
+preserved 4,056 sampled outputs. The transport gate independently confirmed
+the selected interface: 24/24 exact echoes, 24/24 parses, zero cap contacts,
+and 12/12 successes in each arity.
+
+Visible selection then stopped with terminal instrument failure. Its replay
+authentication recomputed the stored transport decision through the initial
+authorization path, whose temporal invariant correctly requires all later
+invocations to be absent. By then `direct` and all three suffix invocations
+were durably complete. Thus no visible selection or resource decision was
+written, hidden scoring was never authorized, and hidden and benchmark reads
+remained zero. The residual-capability comparison is unadjudicated.
+
 ## Controls
 
 Matched HF EOS, all-192-pair fail-closed authentication, one persisted thought
@@ -57,11 +73,12 @@ mechanics are preregistered.
 
 ## Oracle Versus Deployable Evidence
 
-The 48 known-answer rows are a calibration instrument, so 48/48 demonstrates
-a deployable strict answer boundary on this fresh substrate but not new task
-capability. Mechanics candidates, visible selection, hidden labels, and oracle
-ceilings remain sealed. Only a later winner-bound residual-mechanics result can
-support a capability claim.
+The 48 known-answer rows and the 24-row transport gate are interface
+instruments, so their perfect scores demonstrate a deployable strict answer
+boundary on this fresh substrate but not new task capability. Mechanics
+candidates were sampled, but the failed visible selector left hidden labels
+and oracle ceilings sealed. Only a fresh successor with a valid winner-bound
+residual-mechanics result can support a capability claim.
 
 ## Interpretation
 
@@ -104,14 +121,18 @@ ignored local key. Model calls and sampled outputs remain zero.
 
 ## Next Experiments
 
-Commit and publish this calibration result, then mint a second lock binding the
-winner `tokenizer_eos_no_think_program_slot`. Only after that lock is green,
-run the frozen conditional transport/mechanics sequence. The capability test
-must still beat all structured controls and taskwise sampled/logical-token
-matched-compute direct baselines; the interface result alone is not sufficient.
+Create a fresh-identity successor rather than altering this result-bearing
+experiment. Preserve the initial generation-time invariant that transport must
+be the sole completed invocation; add a distinct replay path that authenticates
+the exact stored transport decision against the transport bundle while the
+separate full-chain verifier requires all later invocations complete. Mutate
+every temporal state in tests, obtain a new adversarial review and lock, and
+use new task IDs, record IDs, token identities, seeds, ciphertext, and key. The
+capability test must still beat every structured control and taskwise sampled-
+and logical-token-matched direct baseline.
 
 ## Artifact Manifest
 
-All calibration artifacts are small and tracked. The only external artifact is
-the pre-existing ignored AES-256 key required after the visible-selection
-publication boundary for hidden mechanics scoring.
+All calibration and failed mechanics artifacts are tracked. The only external
+artifact is the ignored AES-256 key; it was not used because visible selection
+never authorized hidden scoring.

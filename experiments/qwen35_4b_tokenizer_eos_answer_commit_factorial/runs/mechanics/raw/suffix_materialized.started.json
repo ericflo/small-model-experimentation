@@ -1,0 +1,47 @@
+{
+  "authorization_files": {
+    "transport_decision": {
+      "path": "/workspace/small-model-experimentation/experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/runs/mechanics/transport_decision.json",
+      "sha256": "7f8fa8a70bf3a21e7edbe1bd42d70d990acd7fbe5546c52a11cb376eda32a1f3"
+    }
+  },
+  "expected_rows": 576,
+  "implementation_lock_path": "/workspace/small-model-experimentation/experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/runs/mechanics/implementation_lock.json",
+  "implementation_lock_sha256": "d42e2db4b589e470f42d963b19e01a8b880fa7858a40b10966150c775c3d925b",
+  "invocation": "suffix_materialized",
+  "live_preflight_path": "/workspace/small-model-experimentation/experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/runs/mechanics/live_preflight.json",
+  "live_preflight_sha256": "dc7b837edbbb4443c4172e5d84a3195aabca96a22ce7f5ed6372c6d238259ddc",
+  "model": "Qwen/Qwen3.5-4B",
+  "predecessor_complete_sha256": "681dce20eb8d557c071fa732cccb2cb2b60088ae6746f317e39a49bf5cf4e9f3",
+  "prepared_path": "/workspace/small-model-experimentation/experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/runs/prepared/suffix_materialized_requests.jsonl",
+  "prepared_sha256": "54130f04de5159f50f18d25cf7352c8c6a5ae6e61f8ab65bc0e4e825d814192e",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "runner_path": "/workspace/small-model-experimentation/experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/src/vllm_runner.py",
+  "runner_sha256": "4ce61e646357ef64351a0b3f3558b865ca2b27e87ddd29bd4c73d309cd514320",
+  "sampling": {
+    "allow_custom_prompts": false,
+    "answer_max_tokens": 24,
+    "answer_prefix": "PROGRAM:",
+    "force_answer_seam": false,
+    "frequency_penalty": 0.0,
+    "greedy": false,
+    "logprob_token_ids": [],
+    "logprobs": null,
+    "max_tokens": 24,
+    "min_p": 0.0,
+    "n": 1,
+    "paired_answer_seed": true,
+    "presence_penalty": 0.0,
+    "prompt_logprobs": null,
+    "repetition_penalty": 1.0,
+    "run_seed": 2026140702,
+    "shuffle_thinking": false,
+    "temperature": 0.6,
+    "thinking": "off",
+    "thinking_budget": null,
+    "top_k": 20,
+    "top_p": 0.95
+  },
+  "schema_version": 1,
+  "state": "STARTED"
+}

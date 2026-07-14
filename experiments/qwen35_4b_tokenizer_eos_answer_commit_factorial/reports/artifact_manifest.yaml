@@ -49,12 +49,27 @@ local_receipts:
   mechanics_gold_ciphertext:
     path: "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/data/procedural/mechanics_gold.jsonl.aesgcm"
     sha256: "01e252ded8155761a5f3186581244969c78f0037a46aade5e23eb1a4853441ab"
+  mechanics_implementation_lock:
+    path: "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/runs/mechanics/implementation_lock.json"
+    sha256: "d42e2db4b589e470f42d963b19e01a8b880fa7858a40b10966150c775c3d925b"
+  mechanics_live_preflight:
+    path: "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/runs/mechanics/live_preflight.json"
+    sha256: "dc7b837edbbb4443c4172e5d84a3195aabca96a22ce7f5ed6372c6d238259ddc"
+  mechanics_transport_decision:
+    path: "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/runs/mechanics/transport_decision.json"
+    sha256: "7f8fa8a70bf3a21e7edbe1bd42d70d990acd7fbe5546c52a11cb376eda32a1f3"
+  mechanics_terminal_transaction:
+    path: "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/runs/mechanics/raw/suffix_shuffled.complete.json"
+    sha256: "5606b76ca062ac4f1f4d33a4b22f4fb1a34d75d993a2be6748286dc3854060c7"
+  mechanics_terminal_failure:
+    path: "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/runs/mechanics/failure.json"
+    sha256: "06d5c60c8d761b2a0f6236190a3fc1446c1ebaf213f98594f86094aff416fc61"
 notes: >-
   The tracked calibration transaction contains 48 shared-thought requests and
   384 paired answer requests (432 sampled outputs total). All 192 boundary
   pairs authenticated and the decision is TOKENIZER_EOS_ONLY_INTERFACE_QUALIFIED.
-  The winner-bound mechanics implementation candidate has only model-free test
-  coverage; it is not authorized and has generated no mechanics requests or
-  outputs. Conditional mechanics, protected-label plaintext, and benchmarks
-  remain unread; the mechanics key is still required only after the visible-
-  selection publication boundary.
+  Winner-bound mechanics passed transport 24/24 and completed five durable
+  transactions with 4,056 sampled outputs, but visible analysis ended in a
+  terminal temporal-authentication instrument failure before selection. No
+  visible selection, hidden score, hidden read, or benchmark read occurred.
+  The mechanics key was not used.

@@ -1,0 +1,29 @@
+{
+  "benchmark_files_read": [],
+  "completed_invocations": [
+    "transport",
+    "direct",
+    "suffix_materialized",
+    "suffix_name_only",
+    "suffix_shuffled"
+  ],
+  "decision": "TERMINAL_INSTRUMENT_FAILURE",
+  "failure": "TRANSPORT_DECISION_REPLAY_REQUIRES_LATER_INVOCATIONS_ABSENT",
+  "hidden_files_read": [],
+  "hidden_score_written": false,
+  "implementation_lock_sha256": "d42e2db4b589e470f42d963b19e01a8b880fa7858a40b10966150c775c3d925b",
+  "model": "Qwen/Qwen3.5-4B",
+  "resource_decision_written": false,
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "sampled_model_outputs": 4056,
+  "schema_version": 1,
+  "stage": "mechanics_visible_analysis",
+  "transport": {
+    "answer_cap_contacts": 0,
+    "decision": "SELECTED_INTERFACE_TRANSPORT_PASS",
+    "exact_echo_successes": 24,
+    "parse_successes": 24,
+    "rows": 24
+  },
+  "visible_selection_written": false
+}

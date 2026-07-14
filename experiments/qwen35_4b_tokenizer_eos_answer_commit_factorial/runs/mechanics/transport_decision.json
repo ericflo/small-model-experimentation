@@ -1,0 +1,251 @@
+{
+  "benchmark_files_read": [],
+  "bundle_sha256": "ce8fff9dd1174355e5284b7dae527daf54908140ea2067e17a91aeb88b3e5712",
+  "decision": "SELECTED_INTERFACE_TRANSPORT_PASS",
+  "generation_authentication": {
+    "engine_preflight_authenticated": true,
+    "exact_typed_schema_authenticated": true,
+    "model_token_accounting": {
+      "completions": 24,
+      "injected_tokens": 48,
+      "logical_model_input_tokens": 15517,
+      "logical_model_tokens": 15637,
+      "logical_prompt_tokens": 15517,
+      "physical_model_tokens": 15637,
+      "physical_prompt_tokens": 15517,
+      "physical_sampled_tokens": 120,
+      "requests": 24,
+      "reused_model_tokens": 0,
+      "reused_prompt_tokens": 0,
+      "reused_sampled_tokens": 0,
+      "sampled_tokens": 120,
+      "stage1_logical_prompt_tokens": 15517,
+      "stage2_logical_prompt_tokens": 0,
+      "unique_input_prompt_tokens": 15517
+    },
+    "prompt_token_text_seed_coherence": true,
+    "registered_answer_stop_token_id": 248046,
+    "rows": 24,
+    "selected_interface": "tokenizer_eos_no_think_program_slot",
+    "terminal_geometry_authenticated": true,
+    "unrequested_logprob_diagnostics_omitted": true
+  },
+  "hidden_files_read": [],
+  "metrics": {
+    "answer_cap_contacts": 0,
+    "by_arity": {
+      "2": {
+        "answer_cap_contacts": 0,
+        "exact_echo_successes": 12,
+        "parse_successes": 12,
+        "rows": 12
+      },
+      "3": {
+        "answer_cap_contacts": 0,
+        "exact_echo_successes": 12,
+        "parse_successes": 12,
+        "rows": 12
+      }
+    },
+    "exact_echo_successes": 24,
+    "parse_successes": 24,
+    "rows": 24,
+    "scored": [
+      {
+        "answer_cap_contact": false,
+        "arity": 2,
+        "exact_echo": true,
+        "id": "5b715ecd73861a5ba0bab4eec825d31e50cb81b3843f3d05e0e68b287197f5b1",
+        "parsed": true,
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00000"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 3,
+        "exact_echo": true,
+        "id": "64750dad474809e407cbb7c816587dec31b2c9b6257bf48e221b38590f50788a",
+        "parsed": true,
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00001"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 2,
+        "exact_echo": true,
+        "id": "da25c2bcff55e2a7828255db7dabc4dd7c645f023aa4b5887dee6c5a9f3692d6",
+        "parsed": true,
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00002"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 3,
+        "exact_echo": true,
+        "id": "d8cbba0af6fc3d39e80a39289d8ed8978b3d98b476d839323b208af5d79af0ba",
+        "parsed": true,
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00003"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 2,
+        "exact_echo": true,
+        "id": "3e63080aed08c7b51de18730257cb7a0f7ca1ef0a948f18f342326235e9845ba",
+        "parsed": true,
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00004"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 3,
+        "exact_echo": true,
+        "id": "cd100da195d7c6631fd55b5ebce187b685196de2a34af8043aadf3afaa4c7415",
+        "parsed": true,
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00005"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 2,
+        "exact_echo": true,
+        "id": "f9b1fa650870720f95dab9f76d91606865927c761e8bc18a25a1194a0cdaff19",
+        "parsed": true,
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00006"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 3,
+        "exact_echo": true,
+        "id": "42db9baf340176177e9c664ec38753a95447c571f830d6afce22802e32a5774b",
+        "parsed": true,
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00007"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 2,
+        "exact_echo": true,
+        "id": "0659c3798cc848beed8fcf1e99e92f677fd416426d3caab57d7b65fd5ee91802",
+        "parsed": true,
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00008"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 3,
+        "exact_echo": true,
+        "id": "cc581d77f8ed7de5f391ebffddb9b89e2d321944711a912044e00315f22a7157",
+        "parsed": true,
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00009"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 2,
+        "exact_echo": true,
+        "id": "be9a346304cd8c49e9f259e1a111b45612436317594f9e7b829c7caee777db4c",
+        "parsed": true,
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00010"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 3,
+        "exact_echo": true,
+        "id": "62c91a07df6595a7fb04e055ed845f28ec8dbcd70601b502979f3d9a98dd2d91",
+        "parsed": true,
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00011"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 2,
+        "exact_echo": true,
+        "id": "47264d9dcdbccab3f0d522e455878b9f137be5cff4ef97a4413383776ae6097f",
+        "parsed": true,
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00012"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 3,
+        "exact_echo": true,
+        "id": "cb803174215ec6c285748bbca330de2ada9b601e056688fb0686b554af5a90b6",
+        "parsed": true,
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00013"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 2,
+        "exact_echo": true,
+        "id": "b97c927e3c14cfeb393f356c5d1755bfbb9c12e49d6bb09343b45bf97509010a",
+        "parsed": true,
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00014"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 3,
+        "exact_echo": true,
+        "id": "cace926a384f810d6e9db7e05f9d33e65a2f8810af101025de47de14550111b6",
+        "parsed": true,
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00015"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 2,
+        "exact_echo": true,
+        "id": "4dfedf6e2fcad76d6b54493a939ef7b4410e07f404e8344946341214e1634ec1",
+        "parsed": true,
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00016"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 3,
+        "exact_echo": true,
+        "id": "7bd8d56a2e7e7e83bb23d6a84ef479f6a86fe0dde6dc5cb0323c728300d7ed43",
+        "parsed": true,
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00017"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 2,
+        "exact_echo": true,
+        "id": "452ce8f90f3c4832374fac19765c3a7ddcdf9ebd217236ddb5e86b799eb514d5",
+        "parsed": true,
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00018"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 3,
+        "exact_echo": true,
+        "id": "bfaea88727d81b6c7dac03be310e23d595b4f0ef5e6e08fb9a4ed5bf2cf732d7",
+        "parsed": true,
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00019"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 2,
+        "exact_echo": true,
+        "id": "a81fe0c433f7d57a70087c0d644adaba82743057bad67bee3882f54f8bccb209",
+        "parsed": true,
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00020"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 3,
+        "exact_echo": true,
+        "id": "fec22398d516d82aca0103a49a46fdd7d9f56335273a145fe09773ebb636c5d1",
+        "parsed": true,
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00021"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 2,
+        "exact_echo": true,
+        "id": "a3c8521e00e6557989c959bd34ea82ecc701eb70648b4a853cf88ca3565bcd5d",
+        "parsed": true,
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00022"
+      },
+      {
+        "answer_cap_contact": false,
+        "arity": 3,
+        "exact_echo": true,
+        "id": "d1c6646fb3997c98732ef2ad92067e8d55e5d541e2412370ccf915cf196718ef",
+        "parsed": true,
+        "task_id": "tokenizer-eos-answer-commit-factorial-v1/mechanics/00023"
+      }
+    ]
+  },
+  "qualifies": true,
+  "schema_version": 1,
+  "winner": "tokenizer_eos_no_think_program_slot"
+}

@@ -1,6 +1,10 @@
 # Qwen3.5-4B Tokenizer-EOS Answer Commit Factorial
 
-**Status:** in-progress · since 2026-07-14 · `PASS_DESIGN` + calibration `PASS_IMPLEMENTATION`; fresh calibration: tokenizer-EOS-only interface qualified; mechanics round-nine `PASS_IMPLEMENTATION` + authenticated implementation lock, lock release pending
+**Status:** finished
+
+Calibration qualified the tokenizer-EOS-only interface; mechanics transport
+passed 24/24, but visible selection ended in terminal instrument failure after
+all five transactions. Residual capability remains unadjudicated.
 
 This fresh successor tests whether the prior strict answer-seam failure was
 caused by waiting past Qwen3.5's tokenizer chat-end token. It registers the
@@ -377,6 +381,20 @@ lock has SHA-256
 binds all 29 critical and 22 runtime files, and records zero pre-lock
 generation requests, sampled outputs, and protected reads. Live mechanics
 remains unauthorized until this lock is itself committed, pushed, and green.
+
+The lock was committed and both exact-commit workflows passed before live
+mechanics. The selected interface then transported perfectly: 24/24 exact
+echoes, 24/24 parses, and zero answer-cap contacts, balanced 12/12 in each
+arity. All five durable transactions completed and preserved 4,056 sampled
+outputs. Visible analysis nevertheless failed before selection because it
+recomputed the already-recorded transport decision through the initial
+authorization path, which correctly requires every later invocation to be
+absent; at replay time `direct` and all suffix invocations were already
+complete. No visible selection, resource decision, hidden score, hidden read,
+or benchmark read occurred. This is terminal instrument failure, not evidence
+for or against residual capability. The generated result is preserved, and a
+fresh-identity successor must separate initial transport authorization from
+post-chain replay authentication under a new review and lock.
 
 ## Interpretation
 

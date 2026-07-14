@@ -576,6 +576,17 @@ magnified. Residual mechanics and hidden labels stayed sealed. The next result
 must come from the frozen winner behind a second committed-green lock and must
 beat every structured and taskwise matched-compute direct control.
 
+The conditional run later confirmed transport but did not reach a capability
+comparison. Under a separately reviewed and committed-green lock, the selected
+interface achieved 24/24 exact echo and parse with zero caps, and all five
+transactions durably preserved 4,056 outputs. Visible analysis then failed
+because post-chain replay of the stored transport decision reused the initial
+authorization primitive, which requires later invocations to be absent. No
+visible selection or hidden read occurred. This is a terminal instrument
+failure: it strengthens the local interface result but leaves residual
+capability unadjudicated. A fresh successor must distinguish one-time temporal
+authorization from later immutable-decision replay.
+
 **Exact-token universal dose interpolation exposes a narrow answer-commit seam
 (2026-07-13, local mechanism evidence).** The contamination-free
 [qwen35_4b_universal_mid_density_token_match](../experiments/qwen35_4b_universal_mid_density_token_match/reports/report.md)
