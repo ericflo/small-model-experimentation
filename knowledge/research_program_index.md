@@ -3,14 +3,14 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 13
-- Experiments: 256
+- Experiments: 257
 
 ## Structured Execution And Compilers
 
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 187
+- Assigned experiments: 188
 
 ### Seed Evidence
 
@@ -52,6 +52,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_context_composition` (new): [README](../experiments/qwen35_4b_context_composition/README.md)
 - `qwen35_4b_counterexample_directed_dsl` (track-z): [README](../experiments/qwen35_4b_counterexample_directed_dsl/README.md)
 - `qwen35_4b_counterfactual_order_support_selector` (new): [README](../experiments/qwen35_4b_counterfactual_order_support_selector/README.md)
+- `qwen35_4b_counterfactual_plan_reflection_transfer` (new): [README](../experiments/qwen35_4b_counterfactual_plan_reflection_transfer/README.md)
 - `qwen35_4b_coverage_banking` (new): [README](../experiments/qwen35_4b_coverage_banking/README.md)
 - `qwen35_4b_coverage_vs_selection` (new): [README](../experiments/qwen35_4b_coverage_vs_selection/README.md)
 - `qwen35_4b_crossfamily_laws` (new): [README](../experiments/qwen35_4b_crossfamily_laws/README.md)
@@ -434,7 +435,7 @@ Grow, search, shortlist, compose, and stress-test reusable operator and skill ba
 Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and other update mechanisms.
 
 - Charter: [posttraining_and_adaptation](../research_programs/posttraining_and_adaptation/charter.md)
-- Assigned experiments: 87
+- Assigned experiments: 88
 
 ### Seed Evidence
 
@@ -460,6 +461,7 @@ Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and o
 - `qwen35_4b_constrained_coverage_dpo` (track-z): [README](../experiments/qwen35_4b_constrained_coverage_dpo/README.md)
 - `qwen35_4b_context_local_jacobian_clamp` (new): [README](../experiments/qwen35_4b_context_local_jacobian_clamp/README.md)
 - `qwen35_4b_counterfactual_evidence_acquisition_curriculum` (new): [README](../experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/README.md)
+- `qwen35_4b_counterfactual_plan_reflection_transfer` (new): [README](../experiments/qwen35_4b_counterfactual_plan_reflection_transfer/README.md)
 - `qwen35_4b_decompose_compose_frontier` (new): [README](../experiments/qwen35_4b_decompose_compose_frontier/README.md)
 - `qwen35_4b_deployable_information_ceiling_sweep` (track-z): [README](../experiments/qwen35_4b_deployable_information_ceiling_sweep/README.md)
 - `qwen35_4b_early_text_hypothesis_forking` (new): [README](../experiments/qwen35_4b_early_text_hypothesis_forking/README.md)
@@ -742,7 +744,7 @@ Stress whether mechanisms transfer across substrates, families, lengths, distrib
 Measure why methods work or fail through attribution, probes, pressure audits, and controlled ablations.
 
 - Charter: [interpretability_and_diagnostics](../research_programs/interpretability_and_diagnostics/charter.md)
-- Assigned experiments: 78
+- Assigned experiments: 79
 
 ### Seed Evidence
 
@@ -761,6 +763,7 @@ Measure why methods work or fail through attribution, probes, pressure audits, a
 - `qwen35_4b_confidence_policy` (new): [README](../experiments/qwen35_4b_confidence_policy/README.md)
 - `qwen35_4b_context_local_jacobian_clamp` (new): [README](../experiments/qwen35_4b_context_local_jacobian_clamp/README.md)
 - `qwen35_4b_counterfactual_order_support_selector` (new): [README](../experiments/qwen35_4b_counterfactual_order_support_selector/README.md)
+- `qwen35_4b_counterfactual_plan_reflection_transfer` (new): [README](../experiments/qwen35_4b_counterfactual_plan_reflection_transfer/README.md)
 - `qwen35_4b_coverage_banking` (new): [README](../experiments/qwen35_4b_coverage_banking/README.md)
 - `qwen35_4b_early_text_hypothesis_forking` (new): [README](../experiments/qwen35_4b_early_text_hypothesis_forking/README.md)
 - `qwen35_4b_foofah_program_ensemble_consensus` (track-z): [README](../experiments/qwen35_4b_foofah_program_ensemble_consensus/README.md)

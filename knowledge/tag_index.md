@@ -593,6 +593,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 - `qwen35_4b_counterexample_directed_dsl` (track-z): [README](../experiments/qwen35_4b_counterexample_directed_dsl/README.md)
 - `qwen35_4b_counterfactual_evidence_acquisition_curriculum` (new): [README](../experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/README.md)
 - `qwen35_4b_counterfactual_order_support_selector` (new): [README](../experiments/qwen35_4b_counterfactual_order_support_selector/README.md)
+- `qwen35_4b_counterfactual_plan_reflection_transfer` (new): [README](../experiments/qwen35_4b_counterfactual_plan_reflection_transfer/README.md)
 - `qwen35_4b_coverage_banking` (new): [README](../experiments/qwen35_4b_coverage_banking/README.md)
 - `qwen35_4b_coverage_vs_selection` (new): [README](../experiments/qwen35_4b_coverage_vs_selection/README.md)
 - `qwen35_4b_crossfamily_laws` (new): [README](../experiments/qwen35_4b_crossfamily_laws/README.md)

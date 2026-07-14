@@ -48373,6 +48373,35 @@
      "source": "experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/idea_intake.md"
     }
    ]
+  },
+  "qwen35_4b_counterfactual_plan_reflection_transfer": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Counterfactual plan reflection is model-free",
+     "categories": [
+      "intake",
+      "CPU smoke",
+      "design review",
+      "model calibration",
+      "training",
+      "capability confirmation",
+      "Jacobian mediation"
+     ],
+     "series": [
+      {
+       "label": "completed checkpoint",
+       "values": [1, 1, 0, 0, 0, 0, 0]
+      }
+     ],
+     "x_label": "prospective experiment stage",
+     "y_label": "completion indicator",
+     "y_format": "integer",
+     "note": "Only related-work intake and a 30-task model-free construction smoke are complete. No model, GPU, training, capability, Jacobian, benchmark, or hidden event exists.",
+     "source": "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/README.md"
+    }
+   ]
   }
  }
 }

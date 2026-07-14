@@ -2,6 +2,16 @@
 
 ## Next Experiments
 
+- Active model-free intake:
+  `qwen35_4b_counterfactual_plan_reflection_transfer` isolates the workspace paper's
+  counterfactual-reflection training claim from C28's direct plan-and-answer SFT. The
+  correct and within-family shuffled arms receive loss only on a hypothetical plan
+  response after a shared `READY` state; neither receives the query answer as a
+  target. CPU construction and adversarial design/implementation review must finish
+  before any model event. Require a replicated held-out action-branch win over
+  shuffled reflection and same-backend frozen sample-more before opening conditional
+  J readout or causal ablation.
+
 - Completed cross-program qualification negative:
   `qwen35_4b_pareto_policy_integration` replaced the arbitrary absolute bar
   with replicated paired `delta > 0`, then found that C54's labels did not

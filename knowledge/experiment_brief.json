@@ -13622,6 +13622,44 @@
     }
    ]
   },
+  "qwen35_4b_counterfactual_plan_reflection_transfer": {
+   "verdict_tag": "Ready for review; no model result",
+   "concept_primer": "The training lesson asks a hypothetical follow-up: name the three-step plan, but do not calculate the answer. Testing then removes that follow-up and asks for the answer directly.",
+   "plain_question": "Can teaching a small model what plan it should describe in a hypothetical pause make it solve the original problem better, even though the answer itself was never trained?",
+   "plain_answer": "Not known yet. The current checkpoint builds and checks fresh list, text, and register puzzles, plus a control where every plan is deliberately assigned to the wrong puzzle. No model has been loaded or trained.",
+   "why_it_matters": "If the idea works, useful problem-solving habits could be taught through explanations on a separate training branch instead of requiring a correct worked answer for every action. The wrong-plan control will show whether the plan's content truly matters.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Checked smoke tasks",
+     "value": "30",
+     "sub": "fresh train, first test, and confirmation examples"
+    },
+    {
+     "label": "Task families",
+     "value": "3",
+     "sub": "integer lists, text strings, and three registers"
+    },
+    {
+     "label": "Cross-split collisions",
+     "value": "zero",
+     "sub": "both exact plans and full behavior signatures"
+    },
+    {
+     "label": "Model or training runs",
+     "value": "zero",
+     "sub": "design review is still required"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Only intake and the construction smoke are complete",
+     "chart_read": "The groups run from intake and task construction through review, model testing, training, confirmation, and the final internal check. A bar at one means that stage is complete; more completed stages are better.",
+     "chart_takeaway": "The first two bars are complete. Every model-facing stage remains blocked until the design is challenged and repaired."
+    }
+   ]
+  },
   "trace_keyed_symbol_repair": {
    "verdict_tag": "The fix was hiding in the error message",
    "concept_primer": "Give the code a wrong constant and its tests fail with a message that literally spells out the value it expected — a value found nowhere else, not in the source files, not in the bug report. The only way to fix the code is to read that failure message.",

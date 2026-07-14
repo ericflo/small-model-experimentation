@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 228
-- Manifest files: 540
+- Experiments with manifests: 229
+- Manifest files: 541
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 73 |
 | `run-data` | 101 |
-| `standard-artifact` | 101 |
+| `standard-artifact` | 102 |
 
 ## Manifests
 
@@ -82,6 +82,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_counterexample_directed_dsl` | `large-artifact` | [manifest](../experiments/qwen35_4b_counterexample_directed_dsl/large_artifacts_manifest.md) |
 | `qwen35_4b_counterfactual_evidence_acquisition_curriculum` | `standard-artifact` | [manifest](../experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/reports/artifact_manifest.yaml) |
 | `qwen35_4b_counterfactual_order_support_selector` | `standard-artifact` | [manifest](../experiments/qwen35_4b_counterfactual_order_support_selector/reports/artifact_manifest.yaml) |
+| `qwen35_4b_counterfactual_plan_reflection_transfer` | `standard-artifact` | [manifest](../experiments/qwen35_4b_counterfactual_plan_reflection_transfer/reports/artifact_manifest.yaml) |
 | `qwen35_4b_coverage_banking` | `standard-artifact` | [manifest](../experiments/qwen35_4b_coverage_banking/reports/artifact_manifest.yaml) |
 | `qwen35_4b_coverage_vs_selection` | `standard-artifact` | [manifest](../experiments/qwen35_4b_coverage_vs_selection/reports/artifact_manifest.yaml) |
 | `qwen35_4b_crossfamily_laws` | `standard-artifact` | [manifest](../experiments/qwen35_4b_crossfamily_laws/reports/artifact_manifest.yaml) |

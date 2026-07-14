@@ -4,21 +4,21 @@ Generated from tracked experiment contents. Use this as a triage surface for tur
 
 Anchor-ready means the experiment has a human-authored README, a detected primary report, recognized local artifacts, and an assigned research program. It does not mean the result is correct or final.
 
-- Experiments: 256
-- Anchor-ready: 240
-- Human-authored READMEs: 243
+- Experiments: 257
+- Anchor-ready: 241
+- Human-authored READMEs: 244
 - Generated README stubs: 13
-- Primary reports: 255
-- Experiment logs: 159
-- Smoke commands: 124
-- Artifact manifests: 228
+- Primary reports: 256
+- Experiment logs: 160
+- Smoke commands: 125
+- Artifact manifests: 229
 
 ## Run Surface Counts
 
 | Run surface | Experiments |
 | --- | ---: |
 | `documented-command` | 38 |
-| `documented-scripts` | 143 |
+| `documented-scripts` | 144 |
 | `scripts-undocumented` | 22 |
 | `source-or-analysis` | 53 |
 
@@ -79,6 +79,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | yes | [`qwen35_4b_counterexample_directed_dsl`](../experiments/qwen35_4b_counterexample_directed_dsl/README.md) | benchmark_generalization, evidence_conditioned_selection, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_counterexample_directed_dsl/reports/qwen35_4b_counterexample_directed_dsl_report.md) | no | `documented-scripts` | no | dataset, large-artifact | add-experiment-log, add-smoke-command |
 | yes | [`qwen35_4b_counterfactual_evidence_acquisition_curriculum`](../experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/README.md) | active_evidence_acquisition, agentic_breadth_installation, benchmark_generalization, posttraining_and_adaptation, process_control_and_tool_use | `human-authored` | [report](../experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_counterfactual_order_support_selector`](../experiments/qwen35_4b_counterfactual_order_support_selector/README.md) | evidence_conditioned_selection, interpretability_and_diagnostics, structured_execution_and_compilers, test_time_reasoning_budget | `human-authored` | [report](../experiments/qwen35_4b_counterfactual_order_support_selector/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
+| yes | [`qwen35_4b_counterfactual_plan_reflection_transfer`](../experiments/qwen35_4b_counterfactual_plan_reflection_transfer/README.md) | interpretability_and_diagnostics, posttraining_and_adaptation, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_counterfactual_plan_reflection_transfer/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_coverage_banking`](../experiments/qwen35_4b_coverage_banking/README.md) | algorithmic_memory_and_retrieval, evidence_conditioned_selection, interpretability_and_diagnostics, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_coverage_banking/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_coverage_vs_selection`](../experiments/qwen35_4b_coverage_vs_selection/README.md) | algorithmic_memory_and_retrieval, evidence_conditioned_selection, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_coverage_vs_selection/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_crossfamily_laws`](../experiments/qwen35_4b_crossfamily_laws/README.md) | benchmark_generalization, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_crossfamily_laws/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |

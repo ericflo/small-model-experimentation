@@ -1,0 +1,75 @@
+schema_version: 1
+experiment_id: qwen35_4b_counterfactual_plan_reflection_transfer
+status: pre_model_design
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+  bulk_backend: vllm
+  internals_backend: transformers
+construction:
+  seed: 73301
+  shuffle_seed: 73319
+  depth: 3
+  families: [list, string, register]
+  per_family:
+    train: 96
+    qualification: 48
+    confirmation: 48
+    retention_depth_1_2: 24
+  visible_examples: 7
+  query_inputs: 3
+  require_zero_cross_split_composition_collisions: true
+  require_zero_cross_split_behavior_collisions: true
+  require_zero_exact_answer_strings_in_reflections: true
+training_proposal:
+  seeds: [47, 53]
+  arms:
+    - reflection_correct
+    - reflection_shuffled
+    - direct_plan_answer_positive_control
+  loss_contract:
+    reflection_correct: final_reflection_assistant_turn_only
+    reflection_shuffled: final_reflection_assistant_turn_only
+    direct_plan_answer_positive_control: actual_action_assistant_turn_only
+  lora_rank: 32
+  lora_alpha: 64
+  learning_rate: 0.0002
+  epochs: 3
+  note: hyperparameters and exact token matching are not frozen until design review
+evaluation_proposal:
+  candidate_counts: [1, 4, 16]
+  qualification_seed: 88031
+  confirmation_seed: 88037
+  arms:
+    - frozen_action
+    - frozen_literal_reflection_then_action
+    - reflection_correct_action
+    - reflection_shuffled_action
+    - direct_plan_answer_action
+  primary: paired_hidden_exact_accuracy_at_matched_candidate_count
+  required_controls:
+    - frozen_same_backend_sample_more
+    - shuffled_reflection
+    - direct_plan_answer_training_positive_control
+    - literal_reflection_at_inference
+    - family_and_depth_retention
+jacobian_stage:
+  status: sealed_until_capability_replication
+  proposed_layers: [4, 5, 6, 7, 8]
+  required_readout_controls:
+    - slot_margin
+    - unembedding_logit_direction
+    - equal_width_non_j
+    - shuffled_operation_labels
+  required_causal_controls:
+    - wrong_operation
+    - random_same_norm
+    - full_activation
+    - non_j_component
+  note: exact lens corpus, layer selection, and gates require adversarial review
+authorization:
+  model_calls: false
+  gpu: false
+  training: false
+  jacobian: false
+  benchmarks: false
