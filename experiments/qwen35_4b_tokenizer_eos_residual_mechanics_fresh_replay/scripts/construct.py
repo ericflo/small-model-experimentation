@@ -50,6 +50,10 @@ DATA = EXP / "data" / "procedural"
 PREPARED = EXP / "runs" / "prepared"
 CONSTRUCTION = EXP / "runs" / "construction" / "summary.json"
 PREOUTCOME = PREPARED / "preoutcome_receipt.json"
+TOKENIZER_RECEIPT = EXP / "runs" / "tokenizer" / "receipt.json"
+PARENT_COLLISION_REPAIR = (
+    EXP / "runs" / "construction" / "parent_collision_receipt_repair.json"
+)
 HIDDEN_CIPHERTEXT = DATA / "mechanics_gold.jsonl.aesgcm"
 HIDDEN_KEY = EXP / ".secrets" / "mechanics_gold.aes256.key"
 HIDDEN_AAD = b"tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics-gold-v1"
@@ -160,6 +164,15 @@ def validate_completed_construction() -> dict[str, Any] | None:
         raise RuntimeError("completed preoutcome no longer binds construction")
     if receipt.get("config_sha256") != file_sha256(CONFIG):
         raise RuntimeError("completed preoutcome no longer binds config")
+    verified_parent_collision_manifest(ROOT)
+    expected_parent_read = {
+        PARENT_COLLISION_MANIFEST["path"]: {
+            "sha256": PARENT_COLLISION_MANIFEST["sha256"],
+            "purpose": "authenticated_hash_only_parent_collision_domains",
+        }
+    }
+    if summary.get("parent_read_receipt") != expected_parent_read:
+        raise RuntimeError("completed construction no longer binds parent collision export")
     recorded_files = {
         **summary.get("data_files", {}),
         **summary.get("prepared_request_files", {}),
@@ -187,6 +200,37 @@ def validate_completed_construction() -> dict[str, Any] | None:
         raise RuntimeError("completed hidden ciphertext changed")
     if ROOT / str(hidden.get("local_key_path", "")) != HIDDEN_KEY:
         raise RuntimeError("completed hidden key path changed")
+    if PARENT_COLLISION_REPAIR.exists() or PARENT_COLLISION_REPAIR.is_symlink():
+        repair = read_json(PARENT_COLLISION_REPAIR)
+        migrations = repair.get("receipt_migrations", {})
+        expected_current = {
+            str(CONSTRUCTION.relative_to(ROOT)): file_sha256(CONSTRUCTION),
+            str(PREOUTCOME.relative_to(ROOT)): file_sha256(PREOUTCOME),
+            str(TOKENIZER_RECEIPT.relative_to(ROOT)): file_sha256(TOKENIZER_RECEIPT),
+        }
+        if (
+            repair.get("decision") != "PARENT_COLLISION_RECEIPT_REPAIR_PASS"
+            or repair.get("new_manifest_sha256")
+            != PARENT_COLLISION_MANIFEST["sha256"]
+            or repair.get("collision_domains_exactly_unchanged") is not True
+            or not isinstance(migrations, dict)
+            or set(migrations) != set(expected_current)
+            or any(
+                not isinstance(migrations.get(relative), dict)
+                or migrations[relative].get("new_sha256") != digest
+                for relative, digest in expected_current.items()
+            )
+            or repair.get("hidden_files_read") != []
+            or repair.get("local_key_files_read") != []
+            or repair.get("benchmark_files_read") != []
+            or repair.get("parent_raw_sampled_bundles_read") != []
+            or repair.get("model_loaded") is not False
+            or type(repair.get("model_calls")) is not int
+            or repair.get("model_calls") != 0
+            or type(repair.get("sampled_model_outputs_read")) is not int
+            or repair.get("sampled_model_outputs_read") != 0
+        ):
+            raise RuntimeError("parent collision repair receipt changed")
     return summary
 
 
@@ -319,7 +363,7 @@ def parent_inventory() -> tuple[set[str], set[str], dict[str, Any]]:
     sources = manifest.get("administrative_sources")
     if (
         not isinstance(sources, dict)
-        or len(sources) != 7
+        or len(sources) != 8
         or any(
             not isinstance(path, str)
             or not path.startswith(

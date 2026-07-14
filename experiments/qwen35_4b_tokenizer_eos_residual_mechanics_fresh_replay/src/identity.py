@@ -20,7 +20,7 @@ PARENT_COLLISION_MANIFEST = {
         "experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/"
         "runs/parent_lineage/collision_manifest.json"
     ),
-    "sha256": "72faacf5bebf4a8964faaba81d5088dc9602e1a228f818f8e998a03dc145e8e5",
+    "sha256": "450eb55d41b09aabff33967d5c75e6315e41cf093bd043004045a8ae5d0d07ef",
 }
 
 

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import copy
 import hashlib
 import json
 import sys
@@ -112,9 +113,67 @@ class MechanicsStageTests(unittest.TestCase):
             self.assertEqual(
                 transport["decision"], "SELECTED_INTERFACE_TRANSPORT_PASS"
             )
-            write_exclusive_durable(
-                transport_path, durable_json_native(transport)
+            original_transport_analysis = (
+                stage._transport_decision_from_authenticated_transaction
             )
+            descendant_started = stage.artifact_paths(raw, "direct")["started"]
+
+            def introduce_descendant_during_replay(**kwargs):
+                result = original_transport_analysis(**kwargs)
+                descendant_started.write_text("{}\n")
+                return result
+
+            with mock.patch.object(
+                stage,
+                "_transport_decision_from_authenticated_transaction",
+                side_effect=introduce_descendant_during_replay,
+            ):
+                with self.assertRaisesRegex(
+                    RuntimeError, "later invocation|during initial replay"
+                ):
+                    stage.authorize_initial_transport(
+                        decision=self.decision,
+                        inputs=self.inputs,
+                        raw_dir=raw,
+                        mechanics_lock_path=lock_path,
+                        live_preflight_path=preflight_path,
+                        runner_path=Path(stage.__file__).with_name("vllm_runner.py"),
+                        transport_decision_path=transport_path,
+                        tokenizer=runner.tokenizer,
+                    )
+            descendant_started.unlink()
+
+            forged_transport = copy.deepcopy(transport)
+            forged_transport["generation_authentication"]["rows"] = True
+            write_exclusive_durable(
+                transport_path, durable_json_native(forged_transport)
+            )
+            with self.assertRaisesRegex(RuntimeError, "differs from exact analysis"):
+                stage.authenticate_initial_transport_decision(
+                    decision=self.decision,
+                    inputs=self.inputs,
+                    raw_dir=raw,
+                    mechanics_lock_path=lock_path,
+                    live_preflight_path=preflight_path,
+                    runner_path=Path(stage.__file__).with_name("vllm_runner.py"),
+                    transport_decision_path=transport_path,
+                    tokenizer=runner.tokenizer,
+                )
+            transport_path.unlink()
+            write_exclusive_durable(transport_path, durable_json_native(transport))
+            with self.assertRaisesRegex(RuntimeError, "caller transport differs"):
+                stage.run_generation_transactions(
+                    decision=self.decision,
+                    transport=forged_transport,
+                    inputs=self.inputs,
+                    runner=runner,
+                    raw_dir=raw,
+                    mechanics_lock_path=lock_path,
+                    live_preflight_path=preflight_path,
+                    runner_path=Path(stage.__file__).with_name("vllm_runner.py"),
+                    transport_decision_path=transport_path,
+                    tokenizer=runner.tokenizer,
+                )
             chain = stage.run_generation_transactions(
                 decision=self.decision,
                 transport=transport,
@@ -130,6 +189,34 @@ class MechanicsStageTests(unittest.TestCase):
             self.assertEqual(
                 chain["decision"], "REGISTERED_TRANSACTION_CHAIN_AUTHENTICATED"
             )
+            terminal_complete = stage.artifact_paths(raw, "suffix_shuffled")[
+                "complete"
+            ]
+            terminal_bytes = terminal_complete.read_bytes()
+
+            def mutate_chain_during_replay(**kwargs):
+                result = original_transport_analysis(**kwargs)
+                terminal_complete.write_bytes(terminal_bytes + b" ")
+                return result
+
+            with mock.patch.object(
+                stage,
+                "_transport_decision_from_authenticated_transaction",
+                side_effect=mutate_chain_during_replay,
+            ):
+                with self.assertRaises(RuntimeError):
+                    stage.authenticate_historical_transport(
+                        decision=self.decision,
+                        inputs=self.inputs,
+                        authenticated_chain=chain,
+                        raw_dir=raw,
+                        mechanics_lock_path=lock_path,
+                        live_preflight_path=preflight_path,
+                        runner_path=Path(stage.__file__).with_name("vllm_runner.py"),
+                        transport_decision_path=transport_path,
+                        tokenizer=runner.tokenizer,
+                    )
+            terminal_complete.write_bytes(terminal_bytes)
             visible = stage.analyze_visible(
                 decision=self.decision,
                 inputs=self.inputs,

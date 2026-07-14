@@ -1,0 +1,39 @@
+{
+  "administrative_source_added": {
+    "path": "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/src/protocol.py",
+    "sha256": "628b1235bfa84e476b5bad62c899e8f2279c6a6edb0c5617f98d59af6ad297ec"
+  },
+  "benchmark_files_read": [],
+  "collision_domains_exactly_unchanged": true,
+  "decision": "PARENT_COLLISION_RECEIPT_REPAIR_PASS",
+  "files_rewritten": [
+    "experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/runs/construction/summary.json",
+    "experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/runs/prepared/preoutcome_receipt.json",
+    "experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/runs/tokenizer/receipt.json"
+  ],
+  "hidden_files_read": [],
+  "local_key_files_read": [],
+  "model_calls": 0,
+  "model_loaded": false,
+  "new_manifest_sha256": "450eb55d41b09aabff33967d5c75e6315e41cf093bd043004045a8ae5d0d07ef",
+  "old_git_object": "98e9e9f6cac0eade7fd352157b32f62b67d55ef0",
+  "old_manifest_sha256": "72faacf5bebf4a8964faaba81d5088dc9602e1a228f818f8e998a03dc145e8e5",
+  "parent_raw_sampled_bundles_read": [],
+  "receipt_migrations": {
+    "experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/runs/construction/summary.json": {
+      "new_sha256": "fd7f09c22c468fd7678f16c5bc294461cc432382a1310c4c7d7aa3feff665115",
+      "old_sha256": "7e1ff08290dd3b963e312fcec21c88ef2c5290d72984c1fb8d26d1d2138942b6"
+    },
+    "experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/runs/prepared/preoutcome_receipt.json": {
+      "new_sha256": "42b3710a3e52cbad9e8c00110410574ac233775eebf3c8fa5f7ed70e1568887f",
+      "old_sha256": "41c7dd32a1edcf95f1afe7c6ea3eabf8b680a54cd2e77e5723978a3ca84a7331"
+    },
+    "experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/runs/tokenizer/receipt.json": {
+      "new_sha256": "ea6bf73d06d94112ead421d2c408ab2cc1cd5e28079fd6cc17f93079bb373896",
+      "old_sha256": "da57c1a7da9d35aef45676167d57fcea704b74612ab92ee8c0302cf6a366bd16"
+    }
+  },
+  "sampled_model_outputs_read": 0,
+  "schema_version": 1,
+  "stage": "outcome_blind_parent_collision_receipt_repair"
+}

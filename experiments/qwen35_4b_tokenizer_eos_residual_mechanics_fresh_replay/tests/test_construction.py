@@ -73,6 +73,7 @@ class ConstructionTests(unittest.TestCase):
             hashlib.sha256(manifest_path.read_bytes()).hexdigest(),
             PARENT_COLLISION_MANIFEST["sha256"],
         )
+        self.assertEqual(len(manifest["administrative_sources"]), 8)
         self.assertEqual(len(manifest["common_function_fingerprints"]), 72)
         self.assertEqual(len(manifest["public_instance_fingerprints"]), 72)
         self.assertEqual(len(manifest["request_ids"]), 2952)
@@ -96,6 +97,61 @@ class ConstructionTests(unittest.TestCase):
                 }
             },
         )
+
+    def test_parent_collision_receipt_repair_changes_only_administrative_bindings(self) -> None:
+        repair_path = EXP / "runs/construction/parent_collision_receipt_repair.json"
+        repair = json.loads(repair_path.read_text())
+        self.assertEqual(
+            repair["decision"], "PARENT_COLLISION_RECEIPT_REPAIR_PASS"
+        )
+        self.assertTrue(repair["collision_domains_exactly_unchanged"])
+        self.assertEqual(repair["new_manifest_sha256"], PARENT_COLLISION_MANIFEST["sha256"])
+        for field in (
+            "hidden_files_read",
+            "local_key_files_read",
+            "benchmark_files_read",
+            "parent_raw_sampled_bundles_read",
+        ):
+            self.assertEqual(repair[field], [])
+        self.assertFalse(repair["model_loaded"])
+        self.assertEqual(repair["model_calls"], 0)
+        self.assertEqual(repair["sampled_model_outputs_read"], 0)
+        for relative, entry in repair["receipt_migrations"].items():
+            self.assertEqual(
+                hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(),
+                entry["new_sha256"],
+            )
+
+        old_payload = subprocess.run(
+            [
+                "git",
+                "show",
+                (
+                    repair["old_git_object"]
+                    + ":"
+                    + PARENT_COLLISION_MANIFEST["path"]
+                ),
+            ],
+            cwd=ROOT,
+            check=True,
+            stdout=subprocess.PIPE,
+        ).stdout
+        self.assertEqual(
+            hashlib.sha256(old_payload).hexdigest(), repair["old_manifest_sha256"]
+        )
+        old_manifest = json.loads(old_payload)
+        new_manifest = json.loads(
+            (ROOT / PARENT_COLLISION_MANIFEST["path"]).read_text()
+        )
+        self.assertEqual(
+            {key: value for key, value in old_manifest.items() if key != "administrative_sources"},
+            {key: value for key, value in new_manifest.items() if key != "administrative_sources"},
+        )
+        exporter_source = (
+            EXP / "scripts/export_parent_collision_manifest.py"
+        ).read_text()
+        self.assertNotIn("parent.parent_inventory(", exporter_source)
+        self.assertIn("install_repository_read_firewall()", exporter_source)
 
     def test_calibration_aliases_and_strata_are_balanced_per_arity(self) -> None:
         rows = read_jsonl(EXP / "data/procedural/calibration_public.jsonl")

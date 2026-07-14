@@ -6,6 +6,7 @@
     "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/construct.py": "79a7c2a87889255622b87ca06ef68603af22e69d739e1a78e7dac211a319cfbe",
     "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/src/identity.py": "ed6a03b939e4f5b1512a29d4844840520422447da3134bafb0be047b572ba551",
     "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/src/mechanics_protocol.py": "b2802a1278d660ba21d89c127429cf991c97a5415c7110da1d46861a260aeaa9",
+    "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/src/protocol.py": "628b1235bfa84e476b5bad62c899e8f2279c6a6edb0c5617f98d59af6ad297ec",
     "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/src/task_data.py": "f3a45c095dd0cb4e013402a89986240bc7877b1d3a9d91a1f7bc4b821f75c134"
   },
   "benchmark_files_read": [],

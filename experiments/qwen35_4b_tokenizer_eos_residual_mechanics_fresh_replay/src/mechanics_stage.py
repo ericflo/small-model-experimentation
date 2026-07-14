@@ -34,6 +34,7 @@ from mechanics_transactions import (
     authenticate_registered_complete_chain,
     authenticate_registered_historical_prefix,
     authenticate_registered_complete_prefix,
+    exact_json_equal,
     inventory_state,
     read_canonical,
     run_transaction,
@@ -497,7 +498,7 @@ def authorize_initial_transport(
 ) -> dict[str, Any]:
     """Analyze transport exactly once while every later invocation is absent."""
 
-    authenticate_registered_complete_prefix(
+    initial_authentication = authenticate_registered_complete_prefix(
         raw_dir=raw_dir,
         invocation_order=MECHANICS_INVOCATION_ORDER,
         registrations=mechanics_registrations(
@@ -510,7 +511,7 @@ def authorize_initial_transport(
         ),
         through="transport",
     )
-    return _transport_decision_from_authenticated_transaction(
+    result = _transport_decision_from_authenticated_transaction(
         decision=decision,
         inputs=inputs,
         raw_dir=raw_dir,
@@ -520,6 +521,22 @@ def authorize_initial_transport(
         transport_decision_path=transport_decision_path,
         tokenizer=tokenizer,
     )
+    final_authentication = authenticate_registered_complete_prefix(
+        raw_dir=raw_dir,
+        invocation_order=MECHANICS_INVOCATION_ORDER,
+        registrations=mechanics_registrations(
+            decision=decision,
+            inputs=inputs,
+            mechanics_lock_path=mechanics_lock_path,
+            live_preflight_path=live_preflight_path,
+            runner_path=runner_path,
+            transport_decision_path=transport_decision_path,
+        ),
+        through="transport",
+    )
+    if not exact_json_equal(initial_authentication, final_authentication):
+        raise RuntimeError("transport transaction changed during initial replay")
+    return result
 
 
 def authenticate_initial_transport_decision(
@@ -544,7 +561,7 @@ def authenticate_initial_transport_decision(
         transport_decision_path=transport_decision_path,
         tokenizer=tokenizer,
     )
-    if observed != expected:
+    if not exact_json_equal(observed, expected):
         raise RuntimeError("recorded transport decision differs from exact analysis")
     if (
         observed["decision"] != "SELECTED_INTERFACE_TRANSPORT_PASS"
@@ -576,7 +593,7 @@ def authenticate_historical_transport(
         runner_path=runner_path,
         transport_decision_path=transport_decision_path,
     )
-    authenticate_registered_historical_prefix(
+    initial_authentication = authenticate_registered_historical_prefix(
         raw_dir=raw_dir,
         invocation_order=MECHANICS_INVOCATION_ORDER,
         registrations=registrations,
@@ -594,7 +611,16 @@ def authenticate_historical_transport(
         transport_decision_path=transport_decision_path,
         tokenizer=tokenizer,
     )
-    if observed != expected:
+    final_authentication = authenticate_registered_historical_prefix(
+        raw_dir=raw_dir,
+        invocation_order=MECHANICS_INVOCATION_ORDER,
+        registrations=registrations,
+        through="transport",
+        authenticated_chain=authenticated_chain,
+    )
+    if not exact_json_equal(initial_authentication, final_authentication):
+        raise RuntimeError("transaction chain changed during historical replay")
+    if not exact_json_equal(observed, expected):
         raise RuntimeError("recorded transport decision differs on historical replay")
     if (
         observed["decision"] != "SELECTED_INTERFACE_TRANSPORT_PASS"
@@ -678,7 +704,7 @@ def run_generation_transactions(
         authenticated_transport = _read_passing_transport_decision(
             transport_decision_path
         )
-    if dict(transport) != authenticated_transport:
+    if not exact_json_equal(dict(transport), authenticated_transport):
         raise RuntimeError("caller transport differs from authenticated decision")
     incomplete = [index for index, state in enumerate(states) if state != "complete"]
     if not incomplete:

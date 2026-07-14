@@ -71,3 +71,24 @@ balance/strata; a fresh ciphertext and key with no plaintext artifact or key
 reread; and zero model/GPU/protected reads.
 
 **Verdict:** `PASS_DESIGN_FOR_MODEL_FREE_CONSTRUCTION_ONLY`.
+
+## Implementation review status
+
+This design verdict is not an implementation release. Three-round independent
+review of exact commit `98e9e9f6cac0eade7fd352157b32f62b67d55ef0`
+returned `HOLD_IMPLEMENTATION`: ordinary Python equality accepted nested JSON
+integer/Boolean aliases, and initial/historical semantic replay did not
+reauthenticate the transaction state after analysis. A second review found an
+undeclared transitive administrative read in the parent collision exporter.
+
+The repaired candidate uses recursive exact JSON comparison, reauthenticates
+the later-absent prefix or complete historical chain after semantic replay,
+and reconstructs the parent collision inventory under an exact eight-file
+repository read firewall. Its outcome-blind receipt migration proves every
+non-administrative collision field unchanged and records zero protected or
+model access. Regression tests cover all three mutations; the full model-free
+suite is 146/146.
+
+The prior HOLD remains controlling until these new bytes are committed,
+pushed, green in exact-commit CI, and independently reviewed again. Model/GPU,
+lock creation, and hidden access remain unauthorized.

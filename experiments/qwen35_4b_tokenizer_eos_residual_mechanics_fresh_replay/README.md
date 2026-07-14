@@ -1,6 +1,6 @@
 # Qwen3.5-4B Tokenizer-EOS Residual Mechanics Fresh Replay
 
-**Status:** in-progress · since 2026-07-14 · `CONSTRUCTION_PASS`; implementation candidate 145/145, adversarial review, locks, and all model calls remain
+**Status:** in-progress · since 2026-07-14 · `CONSTRUCTION_PASS`; repaired implementation candidate 146/146, fresh adversarial review, locks, and all model calls remain
 
 This fresh-identity successor preserves the parent's qualified tokenizer-EOS
 interface and frozen residual-mechanics science while separating initial
@@ -98,18 +98,41 @@ No scientific result exists. Fresh model-free construction passed:
 - Construction and tokenizer receipts record zero model calls, sampled model
   outputs, hidden reads, benchmark reads, and parent raw-bundle reads.
 
-The authenticated parent collision manifest is
-`72faacf5bebf4a8964faaba81d5088dc9602e1a228f818f8e998a03dc145e8e5`;
-the construction receipt is
-`7e1ff08290dd3b963e312fcec21c88ef2c5290d72984c1fb8d26d1d2138942b6`.
+An adversarial audit found that the first parent exporter reached one
+transitively imported protocol source without declaring it. The corrected
+exporter installs a repository read firewall and reconstructs the complete
+parent inventory from exactly eight authenticated administrative files. All
+scientific collision domains are byte-for-byte unchanged. The repaired receipt
+chain is recorded in `runs/construction/parent_collision_receipt_repair.json`:
 
-The model-free implementation candidate passes 145/145 tests. Its production
+- parent collision manifest:
+  `450eb55d41b09aabff33967d5c75e6315e41cf093bd043004045a8ae5d0d07ef`;
+- construction receipt:
+  `fd7f09c22c468fd7678f16c5bc294461cc432382a1310c4c7d7aa3feff665115`;
+- preoutcome receipt:
+  `42b3710a3e52cbad9e8c00110410574ac233775eebf3c8fa5f7ed70e1568887f`;
+- tokenizer receipt:
+  `ea6bf73d06d94112ead421d2c408ab2cc1cd5e28079fd6cc17f93079bb373896`.
+
+The earlier hashes beginning `72fa`, `7e1f`, `41c7`, and `da57` are retained
+inside that migration receipt as superseded administrative bindings.
+
+The repaired model-free implementation candidate passes 146/146 tests. Its production
 path now has distinct APIs for initial transport authorization and historical
 transport replay. Initial authorization requires every later invocation to be
 absent; historical replay first authenticates the complete five-invocation
-chain. An unmocked synthetic lifecycle runs the real transport, all four
-descendant transactions, historical replay, and visible selection with no
-hidden access or recovery generation.
+chain. Both paths reauthenticate after semantic replay, and all transport
+comparisons use recursive exact JSON types, so nested Boolean/integer aliases,
+descendant injection, and in-replay chain mutation fail closed. An unmocked
+synthetic lifecycle runs the real transport, all four descendant transactions,
+historical replay, and visible selection with no hidden access or recovery
+generation.
+
+The independent review of exact commit `98e9e9f6` returned
+`HOLD_IMPLEMENTATION` for the undeclared source, exact-type alias, and temporal
+reauthentication defects. Those findings are repaired here, but that verdict
+does not transfer: a fresh independent review of the new exact pushed-green
+commit is still required before any lock or model call.
 
 ## Interpretation
 

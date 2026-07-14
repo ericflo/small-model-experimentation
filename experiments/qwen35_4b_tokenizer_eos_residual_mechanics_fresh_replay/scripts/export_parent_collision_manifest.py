@@ -6,6 +6,7 @@ from __future__ import annotations
 import hashlib
 import importlib.util
 import json
+import os
 import sys
 from collections.abc import Mapping
 from pathlib import Path
@@ -29,6 +30,7 @@ ADMINISTRATIVE_SOURCES = {
     "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/construct.py": "79a7c2a87889255622b87ca06ef68603af22e69d739e1a78e7dac211a319cfbe",
     "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/src/identity.py": "ed6a03b939e4f5b1512a29d4844840520422447da3134bafb0be047b572ba551",
     "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/src/mechanics_protocol.py": "b2802a1278d660ba21d89c127429cf991c97a5415c7110da1d46861a260aeaa9",
+    "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/src/protocol.py": "628b1235bfa84e476b5bad62c899e8f2279c6a6edb0c5617f98d59af6ad297ec",
     "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/src/task_data.py": "f3a45c095dd0cb4e013402a89986240bc7877b1d3a9d91a1f7bc4b821f75c134",
 }
 
@@ -74,6 +76,38 @@ def load_parent_constructor() -> Any:
     return module
 
 
+def install_repository_read_firewall() -> None:
+    """Deny every repository read outside the exact administrative allowlist."""
+
+    root = ROOT.resolve()
+    environment_root = (ROOT / ".venv-vllm").resolve()
+    allowed = {
+        (ROOT / relative).resolve() for relative in ADMINISTRATIVE_SOURCES
+    }
+    allowed.add(OUTPUT.resolve())
+
+    def audit(event: str, arguments: tuple[Any, ...]) -> None:
+        if event != "open" or not arguments:
+            return
+        raw = arguments[0]
+        if not isinstance(raw, (str, bytes, os.PathLike)):
+            return
+        try:
+            path = Path(raw).resolve()
+        except (OSError, TypeError, ValueError):
+            return
+        if (
+            path.is_relative_to(root)
+            and not path.is_relative_to(environment_root)
+            and path not in allowed
+        ):
+            raise PermissionError(
+                f"parent collision export forbids undeclared repository read: {path}"
+            )
+
+    sys.addaudithook(audit)
+
+
 def rendered_token_digest(tokenizer: Any, prompt: str, thinking: bool) -> str:
     token_ids = tokenizer.apply_chat_template(
         [{"role": "user", "content": prompt}],
@@ -90,14 +124,13 @@ def rendered_token_digest(tokenizer: Any, prompt: str, thinking: bool) -> str:
 
 def build_manifest() -> dict[str, Any]:
     sources = verified_sources()
+    install_repository_read_firewall()
     parent = load_parent_constructor()
     config = yaml.safe_load((PARENT / "configs/default.yaml").read_text())
-    excluded, earlier_parent = parent.parent_inventory()
     tasks, construction = parent.build_tasks(
-        config, excluded_public_fingerprints=excluded
+        config, excluded_public_fingerprints=set()
     )
     data_rows, requests = parent.build_requests(tasks)
-    parent.validate_request_freshness(requests, earlier_parent, config)
 
     recorded_construction = json.loads(
         (PARENT / "runs/construction/summary.json").read_text()

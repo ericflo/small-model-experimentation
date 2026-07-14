@@ -27,9 +27,17 @@ Completed reruns authenticate tracked outputs without reading that key.
   rows.
 - Zero model calls, sampled outputs, protected reads, benchmark reads, and
   parent sampled-bundle reads.
-- The implementation candidate passes 145/145 model-free tests, including an
+- The repaired implementation candidate passes 146/146 model-free tests, including an
   unmocked complete production lifecycle through visible selection and exact
-  rejection of initial transport replay after descendants exist.
+  rejection of initial transport replay after descendants exist. It also
+  rejects nested Boolean/integer aliases, descendant creation during initial
+  replay, and chain mutation during historical replay.
+- The parent collision exporter is constrained by an exact eight-file read
+  firewall. Its administrative receipt was migrated without changing any
+  scientific collision domain or reading the key, sampled outputs, parent raw
+  bundles, or benchmarks.
+- Exact commit `98e9e9f6` remains under `HOLD_IMPLEMENTATION`; repaired bytes
+  require a new exact-commit independent review before release.
 
 ## Controls
 

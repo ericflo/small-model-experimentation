@@ -53,3 +53,29 @@ Created as a new experiment scaffold.
 - Added a real five-transaction historical-prefix lifecycle and an unmocked
   production-stage lifecycle through visible selection. The complete suite is
   145/145 with zero model/GPU/hidden/benchmark access.
+
+## Adversarial implementation HOLD and repair
+
+- Three-round independent review of exact pushed-green commit `98e9e9f6`
+  returned `HOLD_IMPLEMENTATION`. It reproduced nested `1`/`true` transport
+  aliases and introduced or mutated descendants during semantic replay without
+  a post-analysis authentication.
+- A separate science review found the parent collision exporter called a
+  helper that transitively read earlier-lineage task/request payloads beyond
+  the seven declared administrative sources.
+- Replaced that helper with direct reconstruction of the scientific parent's
+  own task/request inventory under a repository read firewall. The exporter
+  now declares exactly eight source files, including the transitively imported
+  protocol module. Every scientific collision domain remains exactly equal to
+  the old authenticated Git object.
+- Migrated only the parent-manifest hash and its downstream construction,
+  preoutcome, and tokenizer bindings. The outcome-blind repair receipt records
+  old/new hashes and zero model, sampled-output, hidden, key, benchmark, or
+  parent-raw reads.
+- Added recursive exact-type transport comparison plus post-semantic
+  reauthentication for both initial and historical replay. Regression probes
+  now reject nested integer-to-Boolean mutation, descendant injection, and
+  complete-chain mutation.
+- The repaired model-free suite is 146/146. The prior HOLD remains controlling
+  until a fresh independent review passes the new exact pushed-green commit;
+  no lock, model, GPU, or hidden access is authorized.
