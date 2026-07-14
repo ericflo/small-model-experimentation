@@ -1,0 +1,4331 @@
+{
+  "authorizes_positive_control": true,
+  "authorizes_result_evaluation": false,
+  "authorizes_result_training": false,
+  "authorizes_training": false,
+  "backend": "transformers",
+  "benchmark_files_read": 0,
+  "branch_authorization": null,
+  "capacity": "lora",
+  "checkpoint_roundtrip": {
+    "adaptation_bytes": 64973005,
+    "adaptation_sha256": "db9583026d51c8b2547009f3f9cdda9a809ac8ba51b21a57ae212bd8ca1ac890",
+    "common_bytes": 2278369,
+    "common_sha256": "c9812e9f34e67d12e93f3934682f04beb1bccd060995f111c5638fd5e1139fca",
+    "destructive_adaptation_digest_changed": true,
+    "destructive_common_digest_changed": true,
+    "max_logit_abs_error": 0.0,
+    "restored_adaptation_digest_equal": true,
+    "restored_common_digest_equal": true
+  },
+  "common_initialization_rng_isolation": {
+    "expected_tensor_values_sha256": "04054449d7c403a4a384b08554f0e471e06e2627356c10b1af44c9f9bdebefeb",
+    "tensor_manifest_equal": true,
+    "tensor_values_sha256": "04054449d7c403a4a384b08554f0e471e06e2627356c10b1af44c9f9bdebefeb"
+  },
+  "config_sha256": "eeb4e828526f750dce1258bcc91d03114c80688d300112e03d18c9d911489393",
+  "data_manifest_sha256": "d104a9c01a9173faf9764cdda673cdfbe93d799ce96cd9a315d9782839e3a22c",
+  "design_receipt_identity_sha256": "d943b909250c2ebd377b8094bb55324a5d5ccf555c7559736526f013d248ac52",
+  "design_receipt_sha256": "490035fe77519739e18eb3494ad693544c423a62d4222cf4ea0b4e3d5684d45e",
+  "elapsed_seconds": 26.334046602249146,
+  "experiment_id": "qwen35_4b_state_formation_capacity_adjudication",
+  "free_memory_gib_after_g0": 35.62921142578125,
+  "k1_adaptation_calls": 0,
+  "k1_adaptation_calls_after_optimizer": 0,
+  "k1_max_logit_abs_error_after_optimizer": 0.0,
+  "k1_max_logit_abs_error_before_optimizer": 0.0,
+  "live_joint_backward_probe": {
+    "adaptation_applied_clip_scale": 1.0,
+    "all_joint_trainable_groups_finite_nonzero": true,
+    "answer_loss": 13.0,
+    "common_state_applied_clip_scale": 0.32705786964384836,
+    "dropout_probe": {
+      "call_manifest_sha256": "3436262cdc884b35663442aff34032438bc01d578abc6e53c9982c709806ce88",
+      "calls": 186,
+      "cycle_manifest_sha256s": [
+        "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368",
+        "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368",
+        "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368"
+      ],
+      "cycle_order_identical": true,
+      "cycles": 3,
+      "each_cycle_exact_target_set": true,
+      "mask_sha256": "bab049c6e4c43abb486f9d2e5dab9b0ef18559e2bd8954ef0ee5631ed51ac7c6"
+    },
+    "elapsed_seconds": 0.6634409427642822,
+    "gradients": {
+      "adaptation": {
+        "finite": 124,
+        "items": [
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d000.weight",
+            "norm": 0.00012438722478691489
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d001.weight",
+            "norm": 0.0006780678522773087
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d002.weight",
+            "norm": 0.00624219560995698
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d003.weight",
+            "norm": 0.007023041136562824
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d004.weight",
+            "norm": 0.011927912011742592
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d005.weight",
+            "norm": 0.016208237037062645
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d006.weight",
+            "norm": 0.01612899824976921
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d007.weight",
+            "norm": 0.020070871338248253
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d008.weight",
+            "norm": 0.0002178853756049648
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d009.weight",
+            "norm": 0.0001618924579815939
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d010.weight",
+            "norm": 0.006280464120209217
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d011.weight",
+            "norm": 0.002919605001807213
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d012.weight",
+            "norm": 0.008277886547148228
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d013.weight",
+            "norm": 0.016846753656864166
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d014.weight",
+            "norm": 0.011604088358581066
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d015.weight",
+            "norm": 0.016973745077848434
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d016.weight",
+            "norm": 0.0001407179661327973
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d017.weight",
+            "norm": 0.00029605109011754394
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d018.weight",
+            "norm": 0.007140141911804676
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d019.weight",
+            "norm": 0.0037909711245447397
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d020.weight",
+            "norm": 0.011582398787140846
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d021.weight",
+            "norm": 0.01720907725393772
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d022.weight",
+            "norm": 0.015471511520445347
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d023.weight",
+            "norm": 0.022699711844325066
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d024.weight",
+            "norm": 0.022642113268375397
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d025.weight",
+            "norm": 0.015238146297633648
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d026.weight",
+            "norm": 0.01976008526980877
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d027.weight",
+            "norm": 0.006881664041429758
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d028.weight",
+            "norm": 0.02626333199441433
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d029.weight",
+            "norm": 0.02211063914000988
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d030.weight",
+            "norm": 0.009501753374934196
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d031.weight",
+            "norm": 9.055218106368557e-05
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d032.weight",
+            "norm": 0.0003211146395187825
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d033.weight",
+            "norm": 0.014478140510618687
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d034.weight",
+            "norm": 0.004167451523244381
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d035.weight",
+            "norm": 0.01991783082485199
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d036.weight",
+            "norm": 0.02477765642106533
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d037.weight",
+            "norm": 0.023371752351522446
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d038.weight",
+            "norm": 0.030622364953160286
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d039.weight",
+            "norm": 0.00016244743892457336
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d040.weight",
+            "norm": 0.0003057248250115663
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d041.weight",
+            "norm": 0.006945863366127014
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d042.weight",
+            "norm": 0.0025601356755942106
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d043.weight",
+            "norm": 0.012572895735502243
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d044.weight",
+            "norm": 0.030428100377321243
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d045.weight",
+            "norm": 0.023165695369243622
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d046.weight",
+            "norm": 0.032797347754240036
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d047.weight",
+            "norm": 0.00015350028115790337
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d048.weight",
+            "norm": 0.0003105668001808226
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d049.weight",
+            "norm": 0.007630340289324522
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d050.weight",
+            "norm": 0.0068281060084700584
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d051.weight",
+            "norm": 0.018028350546956062
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d052.weight",
+            "norm": 0.04441177845001221
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d053.weight",
+            "norm": 0.03440338745713234
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d054.weight",
+            "norm": 0.05054229497909546
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d055.weight",
+            "norm": 0.036129023879766464
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d056.weight",
+            "norm": 0.028918078169226646
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d057.weight",
+            "norm": 0.04943511262536049
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d058.weight",
+            "norm": 0.007760999724268913
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d059.weight",
+            "norm": 0.03132327273488045
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d060.weight",
+            "norm": 0.014728762209415436
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.down.d061.weight",
+            "norm": 0.013093444518744946
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d000.weight",
+            "norm": 0.006490402854979038
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d001.weight",
+            "norm": 0.018337372690439224
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d002.weight",
+            "norm": 0.059595879167318344
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d003.weight",
+            "norm": 0.05911760777235031
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d004.weight",
+            "norm": 0.0663338154554367
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d005.weight",
+            "norm": 0.09241468459367752
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d006.weight",
+            "norm": 0.11516522616147995
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d007.weight",
+            "norm": 0.1268777698278427
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d008.weight",
+            "norm": 0.0052360729314386845
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d009.weight",
+            "norm": 0.0066752503626048565
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d010.weight",
+            "norm": 0.05189572647213936
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d011.weight",
+            "norm": 0.03426920995116234
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d012.weight",
+            "norm": 0.04962515830993652
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d013.weight",
+            "norm": 0.10778338462114334
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d014.weight",
+            "norm": 0.10965721309185028
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d015.weight",
+            "norm": 0.10684371739625931
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d016.weight",
+            "norm": 0.005602091085165739
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d017.weight",
+            "norm": 0.0101127615198493
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d018.weight",
+            "norm": 0.06582718342542648
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d019.weight",
+            "norm": 0.061808038502931595
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d020.weight",
+            "norm": 0.06160290539264679
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d021.weight",
+            "norm": 0.10592310130596161
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d022.weight",
+            "norm": 0.11541873961687088
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d023.weight",
+            "norm": 0.10681512206792831
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d024.weight",
+            "norm": 0.1162654384970665
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d025.weight",
+            "norm": 0.10498902946710587
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d026.weight",
+            "norm": 0.1204633042216301
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d027.weight",
+            "norm": 0.04862888157367706
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d028.weight",
+            "norm": 0.14444389939308167
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d029.weight",
+            "norm": 0.08596063405275345
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d030.weight",
+            "norm": 0.1034206748008728
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d031.weight",
+            "norm": 0.0022482750937342644
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d032.weight",
+            "norm": 0.009975678287446499
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d033.weight",
+            "norm": 0.13837449252605438
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d034.weight",
+            "norm": 0.06267200410366058
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d035.weight",
+            "norm": 0.08689102530479431
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d036.weight",
+            "norm": 0.12408095598220825
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d037.weight",
+            "norm": 0.11729732155799866
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d038.weight",
+            "norm": 0.1280372142791748
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d039.weight",
+            "norm": 0.005456923972815275
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d040.weight",
+            "norm": 0.00872002262622118
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d041.weight",
+            "norm": 0.04651850461959839
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d042.weight",
+            "norm": 0.037352509796619415
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d043.weight",
+            "norm": 0.055076442658901215
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d044.weight",
+            "norm": 0.13558709621429443
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d045.weight",
+            "norm": 0.1322864443063736
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d046.weight",
+            "norm": 0.1642325222492218
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d047.weight",
+            "norm": 0.005835817661136389
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d048.weight",
+            "norm": 0.013054903596639633
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d049.weight",
+            "norm": 0.07621845602989197
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d050.weight",
+            "norm": 0.07659061253070831
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d051.weight",
+            "norm": 0.07726725935935974
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d052.weight",
+            "norm": 0.17266945540905
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d053.weight",
+            "norm": 0.2009693831205368
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d054.weight",
+            "norm": 0.23190683126449585
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d055.weight",
+            "norm": 0.1821732223033905
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d056.weight",
+            "norm": 0.1796250194311142
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d057.weight",
+            "norm": 0.1923467367887497
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d058.weight",
+            "norm": 0.06047068163752556
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d059.weight",
+            "norm": 0.16988614201545715
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d060.weight",
+            "norm": 0.11483225226402283
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.up.d061.weight",
+            "norm": 0.11322708427906036
+          }
+        ],
+        "nonzero": 124,
+        "tensors": 124,
+        "with_gradient": 124
+      },
+      "aggregate_exempt": {
+        "finite": 1,
+        "items": [
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "aggregate_logit",
+            "norm": 0.0015512113459408283
+          }
+        ],
+        "nonzero": 1,
+        "tensors": 1,
+        "with_gradient": 1
+      },
+      "all_required_tensors_finite_nonzero": true,
+      "base_gradient_tensors": 0,
+      "damping": {
+        "finite": 1,
+        "items": [
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "damping_logit",
+            "norm": 0.08461837470531464
+          }
+        ],
+        "nonzero": 1,
+        "tensors": 1,
+        "with_gradient": 1
+      },
+      "initializer": {
+        "finite": 4,
+        "items": [
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "state_initializer.norm.weight",
+            "norm": 0.0052239010110497475
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "state_initializer.norm.bias",
+            "norm": 0.005493904463946819
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "state_initializer.down.weight",
+            "norm": 0.23553456366062164
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "state_initializer.up.weight",
+            "norm": 2.1586430072784424
+          }
+        ],
+        "nonzero": 4,
+        "tensors": 4,
+        "with_gradient": 4
+      },
+      "step": {
+        "finite": 1,
+        "items": [
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "step_encoder.project.weight",
+            "norm": 0.7541449069976807
+          }
+        ],
+        "nonzero": 1,
+        "tensors": 1,
+        "with_gradient": 1
+      },
+      "sufficiency": {
+        "finite": 8,
+        "items": [
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "sufficiency.norm.weight",
+            "norm": 0.024712244048714638
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "sufficiency.norm.bias",
+            "norm": 0.022480469197034836
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "sufficiency.node.weight",
+            "norm": 1.521772861480713
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "sufficiency.node.bias",
+            "norm": 0.02935653366148472
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "sufficiency.phase.weight",
+            "norm": 0.7542442679405212
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "sufficiency.phase.bias",
+            "norm": 0.014630751684308052
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "sufficiency.checksum.weight",
+            "norm": 1.0817686319351196
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "sufficiency.checksum.bias",
+            "norm": 0.02051609940826893
+          }
+        ],
+        "nonzero": 8,
+        "tensors": 8,
+        "with_gradient": 8
+      }
+    },
+    "loss": 13.548828125,
+    "objective": "joint",
+    "peak_allocated_gib": 11.196930408477783,
+    "preclip_adaptation_gradient_norm": 0.8315865397453308,
+    "preclip_common_gradient_norm": 3.0575618743896484
+  },
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "model_seed": 7413,
+  "optimizer_state": {
+    "all_required_group_states_complete_and_finite": true,
+    "bytes_by_dtype": {
+      "torch.float32": 134406924
+    },
+    "delta_moment_bytes": 129859584,
+    "delta_moment_tensors": 248,
+    "delta_parameters_audited": 124,
+    "delta_state_manifest_sha256": "e6b56237651f5634255c5f0a27f5a852bb7dccfe2d41cb3d4208c14e5e5abe98",
+    "delta_states_complete": true,
+    "groups": [
+      {
+        "group_name": "adaptation",
+        "moment_bytes": 129859584,
+        "moment_tensors": 248,
+        "parameters": 124,
+        "registered_missing_state_exemptions": 0,
+        "required_states_complete_and_finite": true,
+        "state_manifest_sha256": "6770f1e738656388550d8d4378f18ed170c2f397e329a5cc15c669b193ebe54e"
+      },
+      {
+        "group_name": "common_state",
+        "moment_bytes": 4546784,
+        "moment_tensors": 30,
+        "parameters": 15,
+        "registered_missing_state_exemptions": 0,
+        "required_states_complete_and_finite": true,
+        "state_manifest_sha256": "399c07f0226e8eb7b8e156b69c5c029d6009bec77f8552e1311c0c9f9f218e1f"
+      }
+    ],
+    "registered_missing_state_exemptions": 0,
+    "tensors": 417,
+    "total_bytes": 134406924,
+    "total_gib": 0.12517620250582695
+  },
+  "peak_allocated_gib": 11.196930408477783,
+  "peak_reserved_gib": 11.357421875,
+  "peft_formula_reference": {
+    "actual_adaptation_bank_hook": true,
+    "device": "cuda",
+    "exact_fp32_dropout_disabled": {
+      "atol": 1e-06,
+      "autocast": false,
+      "custom_dropout_receipt": {
+        "call_manifest_sha256": "ee6f01a4f61a2f0e035e2831eef34f9f118c993f2c1364b51c8cb9905b0495c8",
+        "calls": 1,
+        "cycle_manifest_sha256s": [
+          "ee6f01a4f61a2f0e035e2831eef34f9f118c993f2c1364b51c8cb9905b0495c8"
+        ],
+        "cycle_order_identical": true,
+        "cycles": 1,
+        "each_cycle_exact_target_set": true,
+        "mask_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "dropout": 0.0,
+      "dtype": "torch.float32",
+      "max_a_gradient_abs_error": 0.0,
+      "max_b_gradient_abs_error": 0.0,
+      "max_output_abs_error": 0.0,
+      "output_shape_dtype_equal": true,
+      "passes": true,
+      "rtol": 1e-05
+    },
+    "live_bfloat16_dropout_0_05": {
+      "atol": 0.002,
+      "autocast": true,
+      "custom_dropout_receipt": {
+        "call_manifest_sha256": "f9e7f1655f39c132ee6d5c7817dc7219f580372a9aecf93f6398c74737e6a520",
+        "calls": 1,
+        "cycle_manifest_sha256s": [
+          "f9e7f1655f39c132ee6d5c7817dc7219f580372a9aecf93f6398c74737e6a520"
+        ],
+        "cycle_order_identical": true,
+        "cycles": 1,
+        "each_cycle_exact_target_set": true,
+        "mask_sha256": "e6e2f3eac544e1611e6631e167146564b0199422bda83175d11f26bd094b8d7c"
+      },
+      "dropout": 0.05,
+      "dtype": "torch.bfloat16",
+      "max_a_gradient_abs_error": 0.0,
+      "max_b_gradient_abs_error": 0.0,
+      "max_output_abs_error": 0.0,
+      "output_shape_dtype_equal": true,
+      "passes": true,
+      "rtol": 0.01
+    },
+    "peft_version": "0.19.1",
+    "scale": 2.0
+  },
+  "phase": "lora_g0",
+  "receipt_identity_sha256": "1fa2b054afe51db717575743444dfeb17b628171e887caa98f224b03e7eec8d5",
+  "requirements_training_lock_sha256": "05546fe977583116d6169ea0dfa7b27e1184dd4a2b61d556dfb3f889d5b2b7b1",
+  "result_payloads_opened": [
+    "train"
+  ],
+  "schema_version": 1,
+  "scientific_evidence": false,
+  "sealed_contrast_payloads_opened": [],
+  "setup": {
+    "adaptation_parameters": 16232448,
+    "adaptation_target_manifest": [
+      {
+        "dtype": "torch.float32",
+        "key": "d000",
+        "parameters": 82944,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            32,
+            32
+          ]
+        ],
+        "target": "model.layers.12.linear_attn.in_proj_a"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d001",
+        "parameters": 82944,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            32,
+            32
+          ]
+        ],
+        "target": "model.layers.12.linear_attn.in_proj_b"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d002",
+        "parameters": 344064,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            8192,
+            32
+          ]
+        ],
+        "target": "model.layers.12.linear_attn.in_proj_qkv"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d003",
+        "parameters": 212992,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            4096,
+            32
+          ]
+        ],
+        "target": "model.layers.12.linear_attn.in_proj_z"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d004",
+        "parameters": 212992,
+        "shapes": [
+          [
+            32,
+            4096
+          ],
+          [
+            2560,
+            32
+          ]
+        ],
+        "target": "model.layers.12.linear_attn.out_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d005",
+        "parameters": 376832,
+        "shapes": [
+          [
+            32,
+            9216
+          ],
+          [
+            2560,
+            32
+          ]
+        ],
+        "target": "model.layers.12.mlp.down_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d006",
+        "parameters": 376832,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            9216,
+            32
+          ]
+        ],
+        "target": "model.layers.12.mlp.gate_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d007",
+        "parameters": 376832,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            9216,
+            32
+          ]
+        ],
+        "target": "model.layers.12.mlp.up_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d008",
+        "parameters": 82944,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            32,
+            32
+          ]
+        ],
+        "target": "model.layers.13.linear_attn.in_proj_a"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d009",
+        "parameters": 82944,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            32,
+            32
+          ]
+        ],
+        "target": "model.layers.13.linear_attn.in_proj_b"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d010",
+        "parameters": 344064,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            8192,
+            32
+          ]
+        ],
+        "target": "model.layers.13.linear_attn.in_proj_qkv"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d011",
+        "parameters": 212992,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            4096,
+            32
+          ]
+        ],
+        "target": "model.layers.13.linear_attn.in_proj_z"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d012",
+        "parameters": 212992,
+        "shapes": [
+          [
+            32,
+            4096
+          ],
+          [
+            2560,
+            32
+          ]
+        ],
+        "target": "model.layers.13.linear_attn.out_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d013",
+        "parameters": 376832,
+        "shapes": [
+          [
+            32,
+            9216
+          ],
+          [
+            2560,
+            32
+          ]
+        ],
+        "target": "model.layers.13.mlp.down_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d014",
+        "parameters": 376832,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            9216,
+            32
+          ]
+        ],
+        "target": "model.layers.13.mlp.gate_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d015",
+        "parameters": 376832,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            9216,
+            32
+          ]
+        ],
+        "target": "model.layers.13.mlp.up_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d016",
+        "parameters": 82944,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            32,
+            32
+          ]
+        ],
+        "target": "model.layers.14.linear_attn.in_proj_a"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d017",
+        "parameters": 82944,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            32,
+            32
+          ]
+        ],
+        "target": "model.layers.14.linear_attn.in_proj_b"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d018",
+        "parameters": 344064,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            8192,
+            32
+          ]
+        ],
+        "target": "model.layers.14.linear_attn.in_proj_qkv"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d019",
+        "parameters": 212992,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            4096,
+            32
+          ]
+        ],
+        "target": "model.layers.14.linear_attn.in_proj_z"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d020",
+        "parameters": 212992,
+        "shapes": [
+          [
+            32,
+            4096
+          ],
+          [
+            2560,
+            32
+          ]
+        ],
+        "target": "model.layers.14.linear_attn.out_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d021",
+        "parameters": 376832,
+        "shapes": [
+          [
+            32,
+            9216
+          ],
+          [
+            2560,
+            32
+          ]
+        ],
+        "target": "model.layers.14.mlp.down_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d022",
+        "parameters": 376832,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            9216,
+            32
+          ]
+        ],
+        "target": "model.layers.14.mlp.gate_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d023",
+        "parameters": 376832,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            9216,
+            32
+          ]
+        ],
+        "target": "model.layers.14.mlp.up_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d024",
+        "parameters": 376832,
+        "shapes": [
+          [
+            32,
+            9216
+          ],
+          [
+            2560,
+            32
+          ]
+        ],
+        "target": "model.layers.15.mlp.down_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d025",
+        "parameters": 376832,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            9216,
+            32
+          ]
+        ],
+        "target": "model.layers.15.mlp.gate_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d026",
+        "parameters": 376832,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            9216,
+            32
+          ]
+        ],
+        "target": "model.layers.15.mlp.up_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d027",
+        "parameters": 114688,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            1024,
+            32
+          ]
+        ],
+        "target": "model.layers.15.self_attn.k_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d028",
+        "parameters": 212992,
+        "shapes": [
+          [
+            32,
+            4096
+          ],
+          [
+            2560,
+            32
+          ]
+        ],
+        "target": "model.layers.15.self_attn.o_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d029",
+        "parameters": 344064,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            8192,
+            32
+          ]
+        ],
+        "target": "model.layers.15.self_attn.q_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d030",
+        "parameters": 114688,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            1024,
+            32
+          ]
+        ],
+        "target": "model.layers.15.self_attn.v_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d031",
+        "parameters": 82944,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            32,
+            32
+          ]
+        ],
+        "target": "model.layers.16.linear_attn.in_proj_a"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d032",
+        "parameters": 82944,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            32,
+            32
+          ]
+        ],
+        "target": "model.layers.16.linear_attn.in_proj_b"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d033",
+        "parameters": 344064,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            8192,
+            32
+          ]
+        ],
+        "target": "model.layers.16.linear_attn.in_proj_qkv"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d034",
+        "parameters": 212992,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            4096,
+            32
+          ]
+        ],
+        "target": "model.layers.16.linear_attn.in_proj_z"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d035",
+        "parameters": 212992,
+        "shapes": [
+          [
+            32,
+            4096
+          ],
+          [
+            2560,
+            32
+          ]
+        ],
+        "target": "model.layers.16.linear_attn.out_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d036",
+        "parameters": 376832,
+        "shapes": [
+          [
+            32,
+            9216
+          ],
+          [
+            2560,
+            32
+          ]
+        ],
+        "target": "model.layers.16.mlp.down_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d037",
+        "parameters": 376832,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            9216,
+            32
+          ]
+        ],
+        "target": "model.layers.16.mlp.gate_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d038",
+        "parameters": 376832,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            9216,
+            32
+          ]
+        ],
+        "target": "model.layers.16.mlp.up_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d039",
+        "parameters": 82944,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            32,
+            32
+          ]
+        ],
+        "target": "model.layers.17.linear_attn.in_proj_a"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d040",
+        "parameters": 82944,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            32,
+            32
+          ]
+        ],
+        "target": "model.layers.17.linear_attn.in_proj_b"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d041",
+        "parameters": 344064,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            8192,
+            32
+          ]
+        ],
+        "target": "model.layers.17.linear_attn.in_proj_qkv"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d042",
+        "parameters": 212992,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            4096,
+            32
+          ]
+        ],
+        "target": "model.layers.17.linear_attn.in_proj_z"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d043",
+        "parameters": 212992,
+        "shapes": [
+          [
+            32,
+            4096
+          ],
+          [
+            2560,
+            32
+          ]
+        ],
+        "target": "model.layers.17.linear_attn.out_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d044",
+        "parameters": 376832,
+        "shapes": [
+          [
+            32,
+            9216
+          ],
+          [
+            2560,
+            32
+          ]
+        ],
+        "target": "model.layers.17.mlp.down_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d045",
+        "parameters": 376832,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            9216,
+            32
+          ]
+        ],
+        "target": "model.layers.17.mlp.gate_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d046",
+        "parameters": 376832,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            9216,
+            32
+          ]
+        ],
+        "target": "model.layers.17.mlp.up_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d047",
+        "parameters": 82944,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            32,
+            32
+          ]
+        ],
+        "target": "model.layers.18.linear_attn.in_proj_a"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d048",
+        "parameters": 82944,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            32,
+            32
+          ]
+        ],
+        "target": "model.layers.18.linear_attn.in_proj_b"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d049",
+        "parameters": 344064,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            8192,
+            32
+          ]
+        ],
+        "target": "model.layers.18.linear_attn.in_proj_qkv"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d050",
+        "parameters": 212992,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            4096,
+            32
+          ]
+        ],
+        "target": "model.layers.18.linear_attn.in_proj_z"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d051",
+        "parameters": 212992,
+        "shapes": [
+          [
+            32,
+            4096
+          ],
+          [
+            2560,
+            32
+          ]
+        ],
+        "target": "model.layers.18.linear_attn.out_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d052",
+        "parameters": 376832,
+        "shapes": [
+          [
+            32,
+            9216
+          ],
+          [
+            2560,
+            32
+          ]
+        ],
+        "target": "model.layers.18.mlp.down_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d053",
+        "parameters": 376832,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            9216,
+            32
+          ]
+        ],
+        "target": "model.layers.18.mlp.gate_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d054",
+        "parameters": 376832,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            9216,
+            32
+          ]
+        ],
+        "target": "model.layers.18.mlp.up_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d055",
+        "parameters": 376832,
+        "shapes": [
+          [
+            32,
+            9216
+          ],
+          [
+            2560,
+            32
+          ]
+        ],
+        "target": "model.layers.19.mlp.down_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d056",
+        "parameters": 376832,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            9216,
+            32
+          ]
+        ],
+        "target": "model.layers.19.mlp.gate_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d057",
+        "parameters": 376832,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            9216,
+            32
+          ]
+        ],
+        "target": "model.layers.19.mlp.up_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d058",
+        "parameters": 114688,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            1024,
+            32
+          ]
+        ],
+        "target": "model.layers.19.self_attn.k_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d059",
+        "parameters": 212992,
+        "shapes": [
+          [
+            32,
+            4096
+          ],
+          [
+            2560,
+            32
+          ]
+        ],
+        "target": "model.layers.19.self_attn.o_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d060",
+        "parameters": 344064,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            8192,
+            32
+          ]
+        ],
+        "target": "model.layers.19.self_attn.q_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d061",
+        "parameters": 114688,
+        "shapes": [
+          [
+            32,
+            2560
+          ],
+          [
+            1024,
+            32
+          ]
+        ],
+        "target": "model.layers.19.self_attn.v_proj"
+      }
+    ],
+    "adaptation_target_manifest_sha256": "c64a2ffb5f92b6f7b4597550e69fe374c7e3b051d4eca426469eebc3d9f36eec",
+    "adaptation_targets": [
+      "model.layers.12.linear_attn.in_proj_a",
+      "model.layers.12.linear_attn.in_proj_b",
+      "model.layers.12.linear_attn.in_proj_qkv",
+      "model.layers.12.linear_attn.in_proj_z",
+      "model.layers.12.linear_attn.out_proj",
+      "model.layers.12.mlp.down_proj",
+      "model.layers.12.mlp.gate_proj",
+      "model.layers.12.mlp.up_proj",
+      "model.layers.13.linear_attn.in_proj_a",
+      "model.layers.13.linear_attn.in_proj_b",
+      "model.layers.13.linear_attn.in_proj_qkv",
+      "model.layers.13.linear_attn.in_proj_z",
+      "model.layers.13.linear_attn.out_proj",
+      "model.layers.13.mlp.down_proj",
+      "model.layers.13.mlp.gate_proj",
+      "model.layers.13.mlp.up_proj",
+      "model.layers.14.linear_attn.in_proj_a",
+      "model.layers.14.linear_attn.in_proj_b",
+      "model.layers.14.linear_attn.in_proj_qkv",
+      "model.layers.14.linear_attn.in_proj_z",
+      "model.layers.14.linear_attn.out_proj",
+      "model.layers.14.mlp.down_proj",
+      "model.layers.14.mlp.gate_proj",
+      "model.layers.14.mlp.up_proj",
+      "model.layers.15.mlp.down_proj",
+      "model.layers.15.mlp.gate_proj",
+      "model.layers.15.mlp.up_proj",
+      "model.layers.15.self_attn.k_proj",
+      "model.layers.15.self_attn.o_proj",
+      "model.layers.15.self_attn.q_proj",
+      "model.layers.15.self_attn.v_proj",
+      "model.layers.16.linear_attn.in_proj_a",
+      "model.layers.16.linear_attn.in_proj_b",
+      "model.layers.16.linear_attn.in_proj_qkv",
+      "model.layers.16.linear_attn.in_proj_z",
+      "model.layers.16.linear_attn.out_proj",
+      "model.layers.16.mlp.down_proj",
+      "model.layers.16.mlp.gate_proj",
+      "model.layers.16.mlp.up_proj",
+      "model.layers.17.linear_attn.in_proj_a",
+      "model.layers.17.linear_attn.in_proj_b",
+      "model.layers.17.linear_attn.in_proj_qkv",
+      "model.layers.17.linear_attn.in_proj_z",
+      "model.layers.17.linear_attn.out_proj",
+      "model.layers.17.mlp.down_proj",
+      "model.layers.17.mlp.gate_proj",
+      "model.layers.17.mlp.up_proj",
+      "model.layers.18.linear_attn.in_proj_a",
+      "model.layers.18.linear_attn.in_proj_b",
+      "model.layers.18.linear_attn.in_proj_qkv",
+      "model.layers.18.linear_attn.in_proj_z",
+      "model.layers.18.linear_attn.out_proj",
+      "model.layers.18.mlp.down_proj",
+      "model.layers.18.mlp.gate_proj",
+      "model.layers.18.mlp.up_proj",
+      "model.layers.19.mlp.down_proj",
+      "model.layers.19.mlp.gate_proj",
+      "model.layers.19.mlp.up_proj",
+      "model.layers.19.self_attn.k_proj",
+      "model.layers.19.self_attn.o_proj",
+      "model.layers.19.self_attn.q_proj",
+      "model.layers.19.self_attn.v_proj"
+    ],
+    "adaptation_targets_sha256": "c7b8e521de33c854144a64d69d88469ce609c1b13988e0e668ba3b0f2e53bed7",
+    "adaptation_zero_function": {
+      "max_abs_output_weight": 0.0,
+      "nonzero_output_weights": 0
+    },
+    "capacity": "lora",
+    "dropout_control": {
+      "active_nn_dropout_modules": [],
+      "matched_adaptation_dropout": 0.05,
+      "model_config_dropout_values": {
+        "attention_dropout": 0.0
+      }
+    },
+    "environment": {
+      "cuda_runtime": "12.9",
+      "device": {
+        "compute_capability": "8.9",
+        "cuda_runtime": "12.9",
+        "free_memory_gib_before_load": 39.09405517578125,
+        "name": "NVIDIA RTX 6000 Ada Generation",
+        "runtime_total_memory_gib": 47.5001220703125,
+        "torch": "2.11.0+cu129",
+        "total_memory_gib": 47.5001220703125,
+        "uuid": "GPU-c6cd13ea-fb21-74f2-b9bc-d5aa828621e3"
+      },
+      "platform": "Linux-6.5.0-41-generic-x86_64-with-glibc2.39",
+      "python": "3.12.3",
+      "python_implementation": "CPython",
+      "torch": "2.11.0+cu129",
+      "transformers": "5.13.0"
+    },
+    "installed_environment_lock": {
+      "causal_conv1d_out_of_band_pin": "1.6.2.post1",
+      "packages": {
+        "accelerate": "1.14.0",
+        "annotated-doc": "0.0.4",
+        "anyio": "4.14.1",
+        "bitsandbytes": "0.49.2",
+        "causal_conv1d": "1.6.2.post1",
+        "certifi": "2026.6.17",
+        "click": "8.4.2",
+        "contourpy": "1.3.3",
+        "cuda-bindings": "12.9.7",
+        "cuda-pathfinder": "1.5.6",
+        "cuda-toolkit": "12.9.1",
+        "cycler": "0.12.1",
+        "einops": "0.8.2",
+        "filelock": "3.29.7",
+        "fla-core": "0.5.1",
+        "flash-linear-attention": "0.5.1",
+        "fonttools": "4.63.0",
+        "fsspec": "2026.6.0",
+        "h11": "0.16.0",
+        "hf-xet": "1.5.1",
+        "httpcore": "1.0.9",
+        "httpx": "0.28.1",
+        "huggingface-hub": "1.23.0",
+        "idna": "3.18",
+        "jinja2": "3.1.6",
+        "kiwisolver": "1.5.0",
+        "markdown-it-py": "4.2.0",
+        "markupsafe": "3.0.3",
+        "matplotlib": "3.10.8",
+        "mdurl": "0.1.2",
+        "mpmath": "1.3.0",
+        "networkx": "3.6.1",
+        "ninja": "1.13.0",
+        "numpy": "2.3.5",
+        "nvidia-cublas-cu12": "12.9.1.4",
+        "nvidia-cuda-cupti-cu12": "12.9.79",
+        "nvidia-cuda-nvrtc-cu12": "12.9.86",
+        "nvidia-cuda-runtime-cu12": "12.9.79",
+        "nvidia-cudnn-cu12": "9.17.1.4",
+        "nvidia-cufft-cu12": "11.4.1.4",
+        "nvidia-cufile-cu12": "1.14.1.1",
+        "nvidia-curand-cu12": "10.3.10.19",
+        "nvidia-cusolver-cu12": "11.7.5.82",
+        "nvidia-cusparse-cu12": "12.5.10.65",
+        "nvidia-cusparselt-cu12": "0.7.1",
+        "nvidia-nccl-cu12": "2.28.9",
+        "nvidia-nvjitlink-cu12": "12.9.86",
+        "nvidia-nvshmem-cu12": "3.4.5",
+        "nvidia-nvtx-cu12": "12.9.79",
+        "packaging": "26.2",
+        "pathspec": "1.1.1",
+        "peft": "0.19.1",
+        "pillow": "12.3.0",
+        "psutil": "7.2.2",
+        "pygments": "2.20.0",
+        "pyparsing": "3.3.2",
+        "python-dateutil": "2.9.0.post0",
+        "pyyaml": "6.0.3",
+        "regex": "2026.7.10",
+        "rich": "15.0.0",
+        "safetensors": "0.8.0",
+        "scikit-build-core": "1.0.2",
+        "scipy": "1.17.0",
+        "setuptools": "81.0.0",
+        "shellingham": "1.5.4",
+        "six": "1.17.0",
+        "sympy": "1.14.0",
+        "tokenizers": "0.22.2",
+        "torch": "2.11.0+cu129",
+        "tqdm": "4.68.4",
+        "transformers": "5.13.0",
+        "triton": "3.6.0",
+        "typer": "0.26.8",
+        "typing-extensions": "4.16.0",
+        "wheel": "0.47.0",
+        "xformers": "0.0.35"
+      },
+      "packages_sha256": "9b0c524b68a284d59fbc690c55c87b83dae167bf2a3dbe2f9066f330c6272259",
+      "requirements_training_lock_sha256": "05546fe977583116d6169ea0dfa7b27e1184dd4a2b61d556dfb3f889d5b2b7b1"
+    },
+    "model_seed": 7413,
+    "preflight_device": {
+      "compute_capability": "8.9",
+      "cuda_runtime": "12.9",
+      "free_memory_gib_before_load": 47.07843017578125,
+      "name": "NVIDIA RTX 6000 Ada Generation",
+      "runtime_total_memory_gib": 47.5001220703125,
+      "torch": "2.11.0+cu129",
+      "total_memory_gib": 47.5001220703125,
+      "uuid": "GPU-c6cd13ea-fb21-74f2-b9bc-d5aa828621e3"
+    },
+    "shared_initialization": {
+      "bundle_path": "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed7413.pt",
+      "bundle_sha256": "1167ebebf1365fe23fa6326c8c9f2859540ae2df9a7ef565c534768d2128b2f2",
+      "metadata": {
+        "config_sha256": "eeb4e828526f750dce1258bcc91d03114c80688d300112e03d18c9d911489393",
+        "design_lineage": {
+          "path": "experiments/qwen35_4b_state_formation_capacity_adjudication/reports/design_receipt.json",
+          "phase": "design_boundary",
+          "receipt_identity_sha256": "d943b909250c2ebd377b8094bb55324a5d5ccf555c7559736526f013d248ac52",
+          "sha256": "490035fe77519739e18eb3494ad693544c423a62d4222cf4ea0b4e3d5684d45e",
+          "status": "DESIGN_FROZEN"
+        },
+        "experiment_id": "qwen35_4b_state_formation_capacity_adjudication",
+        "initialization_seed": 914612187101609913,
+        "model_id": "Qwen/Qwen3.5-4B",
+        "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+        "model_seed": 7413,
+        "receipt_identity_sha256": "8a55981bb118d5738720fb214a01bb4b6afb51ede79b05f243b11836c238072f",
+        "requirements_training_lock_sha256": "05546fe977583116d6169ea0dfa7b27e1184dd4a2b61d556dfb3f889d5b2b7b1",
+        "schema_version": 1,
+        "source_contract_sha256": "5a8ed26ddb9446c728191ca8e7849ae44cff92a700e24b237dac522cf4286666",
+        "tensor_manifest": [
+          {
+            "dtype": "torch.float32",
+            "name": "scalars.aggregate_logit",
+            "sha256": "8140938e36a855e921cfae926d044ca6a244c26ca9b361e94624571bec469114",
+            "shape": []
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "scalars.damping_logit",
+            "sha256": "a9d9a7d1670eeec8f058c14dd7b85199e433e5d2e105f136dee3328f52c67feb",
+            "shape": []
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "state_initializer.down.weight",
+            "sha256": "ead4252d040882be83fb00f576160051a1ba067d58916e39a091efef5bf7a0b1",
+            "shape": [
+              64,
+              2560
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "state_initializer.norm.bias",
+            "sha256": "84ff92691f909a05b224e1c56abb4864f01b4f8e3c854e4bb4c7baf1d3f6d652",
+            "shape": [
+              2560
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "state_initializer.norm.weight",
+            "sha256": "37e287184de6a92556d6620dc350bb5fe1ee478ac42c1c7879ba7c77e9af235e",
+            "shape": [
+              2560
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "state_initializer.up.weight",
+            "sha256": "ff6335069b6e140eb47149d847aea80bf7e2b06bd80ae9708aa382efb3ae21ee",
+            "shape": [
+              2560,
+              64
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "step_encoder.project.weight",
+            "sha256": "ff6335069b6e140eb47149d847aea80bf7e2b06bd80ae9708aa382efb3ae21ee",
+            "shape": [
+              2560,
+              64
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "sufficiency.checksum.bias",
+            "sha256": "7caba37fee0d4bc8b074ccf05c28921f5ec57ac297aaa3293723a4b5b63e8188",
+            "shape": [
+              8
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "sufficiency.checksum.weight",
+            "sha256": "26e0f57b612d08ee6d3626fab04ee3fff7c8807f03cfe42db55184756880a86d",
+            "shape": [
+              8,
+              2560
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "sufficiency.node.bias",
+            "sha256": "6cfa22eeac8b3839f08ebef5999bc2c64fe20ddea719f26652df351b1d223559",
+            "shape": [
+              16
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "sufficiency.node.weight",
+            "sha256": "06769d19179414eba9d3efce7f62092010c5747c80382c14670aa1f349e68d18",
+            "shape": [
+              16,
+              2560
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "sufficiency.norm.bias",
+            "sha256": "84ff92691f909a05b224e1c56abb4864f01b4f8e3c854e4bb4c7baf1d3f6d652",
+            "shape": [
+              2560
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "sufficiency.norm.weight",
+            "sha256": "37e287184de6a92556d6620dc350bb5fe1ee478ac42c1c7879ba7c77e9af235e",
+            "shape": [
+              2560
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "sufficiency.phase.bias",
+            "sha256": "3c297925944d4d11384ae61c113aeb7ec5abb936eba643fab3929bf38427f9fc",
+            "shape": [
+              2
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "sufficiency.phase.weight",
+            "sha256": "a683a6a6509e8ef29408232ad077f50e454c16e29e1247e900ac94ae450eb9c6",
+            "shape": [
+              2,
+              2560
+            ]
+          }
+        ],
+        "tensor_values_sha256": "04054449d7c403a4a384b08554f0e471e06e2627356c10b1af44c9f9bdebefeb"
+      },
+      "phase": "shared_initialization",
+      "receipt_identity_sha256": "f7b95a1c72c96cd375e7ba9b7c35c1d5afe1aec29766d840a89b7dc30b345ddc",
+      "schema_version": 1,
+      "status": "SHARED_INITIALIZATION_PREPARED"
+    },
+    "tokenizer": {
+      "answer_token_ids": [
+        357,
+        417,
+        351,
+        414
+      ],
+      "pinned_snapshot": {
+        "files": [
+          {
+            "bytes": 7756,
+            "filename": "chat_template.jinja",
+            "resolved_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+            "sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715"
+          },
+          {
+            "bytes": 3161,
+            "filename": "config.json",
+            "resolved_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+            "sha256": "ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670"
+          },
+          {
+            "bytes": 3353259,
+            "filename": "merges.txt",
+            "resolved_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+            "sha256": "a9d356d7bdf1ef4949e3e748e95b8e10ad9d4e2e838eddc38a0a7b6b94d1db8d"
+          },
+          {
+            "bytes": 5329398688,
+            "filename": "model.safetensors-00001-of-00002.safetensors",
+            "resolved_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+            "sha256": "26a93f066e1916adb13453dae5a0c707c0fbc71299ed98779571a907b8e74c61"
+          },
+          {
+            "bytes": 3990429408,
+            "filename": "model.safetensors-00002-of-00002.safetensors",
+            "resolved_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+            "sha256": "cb544bd9bfae93dc59b0f22b292f5933573854a7f9b97835c67060d7d910e188"
+          },
+          {
+            "bytes": 76196,
+            "filename": "model.safetensors.index.json",
+            "resolved_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+            "sha256": "cf3f798ee02ba45f9622aa8892a47369ab667d0afbf154ee7c2212de42e6302d"
+          },
+          {
+            "bytes": 12807982,
+            "filename": "tokenizer.json",
+            "resolved_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+            "sha256": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42"
+          },
+          {
+            "bytes": 16710,
+            "filename": "tokenizer_config.json",
+            "resolved_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+            "sha256": "316230d6a809701f4db5ea8f8fc862bc3a6f3229c937c174e674ff3ca0a64ac8"
+          },
+          {
+            "bytes": 6722759,
+            "filename": "vocab.json",
+            "resolved_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+            "sha256": "ce99b4cb2983d118806ce0a8b777a35b093e2000a503ebde25853284c9dfa003"
+          }
+        ],
+        "files_sha256": "06486f260c8e9135835c768802e0e947bab0470e4454a36e138da6d10ed1fe12",
+        "model_id": "Qwen/Qwen3.5-4B",
+        "requested_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+        "resolved_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+        "snapshot_layout": "snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
+      },
+      "runtime_model_config_commit_hash": null,
+      "state_token_id": 248063
+    },
+    "trainable_parameters": {
+      "adaptation": 16232448,
+      "common": 568348,
+      "names_sha256": "b0173fff3d82747c721b0bfc0a16bacf66fa84349f7560c7425b09e331a3ee48",
+      "tensor_count": 139,
+      "total": 16800796,
+      "values_sha256": "3313c8c915c221441f6b9f3820d7c3b063ef9b6127da0a903374208669d087d1"
+    }
+  },
+  "source_contract_sha256": "5a8ed26ddb9446c728191ca8e7849ae44cff92a700e24b237dac522cf4286666",
+  "status": "MODEL_SMOKE_PASS",
+  "timed_ten_step_probe": {
+    "elapsed_seconds": 2.8136518001556396,
+    "losses": [
+      0.459716796875,
+      0.4032796323299408,
+      0.3568115234375,
+      0.3175048828125,
+      0.2825927734375,
+      0.251953125,
+      0.2228800505399704,
+      0.2007039487361908,
+      0.1733195036649704,
+      0.142181396484375
+    ],
+    "seconds_per_step": 0.281365180015564,
+    "steps": 10
+  },
+  "training_or_evaluation_started": false,
+  "two_step_gradient_probe": [
+    {
+      "dropout_probe": {
+        "call_manifest_sha256": "3436262cdc884b35663442aff34032438bc01d578abc6e53c9982c709806ce88",
+        "calls": 186,
+        "cycle_manifest_sha256s": [
+          "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368",
+          "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368",
+          "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368"
+        ],
+        "cycle_order_identical": true,
+        "cycles": 3,
+        "each_cycle_exact_target_set": true,
+        "mask_sha256": "3e358ac564720186ecd04a746505633e024341384d251cdffba3778b2f1705a5"
+      },
+      "gradients": {
+        "adaptation": {
+          "finite": 124,
+          "items": [
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d000.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d001.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d002.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d003.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d004.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d005.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d006.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d007.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d008.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d009.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d010.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d011.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d012.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d013.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d014.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d015.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d016.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d017.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d018.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d019.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d020.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d021.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d022.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d023.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d024.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d025.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d026.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d027.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d028.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d029.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d030.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d031.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d032.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d033.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d034.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d035.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d036.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d037.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d038.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d039.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d040.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d041.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d042.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d043.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d044.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d045.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d046.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d047.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d048.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d049.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d050.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d051.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d052.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d053.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d054.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d055.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d056.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d057.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d058.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d059.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d060.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d061.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d000.weight",
+              "norm": 0.001114423735998571
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d001.weight",
+              "norm": 0.0029428605921566486
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d002.weight",
+              "norm": 0.014223702251911163
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d003.weight",
+              "norm": 0.013076210394501686
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d004.weight",
+              "norm": 0.01828308030962944
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d005.weight",
+              "norm": 0.016547085717320442
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d006.weight",
+              "norm": 0.029603760689496994
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d007.weight",
+              "norm": 0.030493944883346558
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d008.weight",
+              "norm": 0.0014201378216966987
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d009.weight",
+              "norm": 0.0023175303358584642
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d010.weight",
+              "norm": 0.015863087028265
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d011.weight",
+              "norm": 0.009292859584093094
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d012.weight",
+              "norm": 0.011147426441311836
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d013.weight",
+              "norm": 0.019106008112430573
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d014.weight",
+              "norm": 0.027940241619944572
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d015.weight",
+              "norm": 0.02398514747619629
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d016.weight",
+              "norm": 0.000986261642538011
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d017.weight",
+              "norm": 0.0022236702498048544
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d018.weight",
+              "norm": 0.01670713908970356
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d019.weight",
+              "norm": 0.014908555895090103
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d020.weight",
+              "norm": 0.01257290318608284
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d021.weight",
+              "norm": 0.01903175748884678
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d022.weight",
+              "norm": 0.02689896896481514
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d023.weight",
+              "norm": 0.028743533417582512
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d024.weight",
+              "norm": 0.018688926473259926
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d025.weight",
+              "norm": 0.026754219084978104
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d026.weight",
+              "norm": 0.032663650810718536
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d027.weight",
+              "norm": 0.01087978482246399
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d028.weight",
+              "norm": 0.03255874291062355
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d029.weight",
+              "norm": 0.020074084401130676
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d030.weight",
+              "norm": 0.030156394466757774
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d031.weight",
+              "norm": 0.0005311600398272276
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d032.weight",
+              "norm": 0.0026040449738502502
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d033.weight",
+              "norm": 0.0289592482149601
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d034.weight",
+              "norm": 0.013492581434547901
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d035.weight",
+              "norm": 0.015851689502596855
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d036.weight",
+              "norm": 0.022193724289536476
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d037.weight",
+              "norm": 0.030001332983374596
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d038.weight",
+              "norm": 0.03368998318910599
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d039.weight",
+              "norm": 0.0015421404968947172
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d040.weight",
+              "norm": 0.0016030223341658711
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d041.weight",
+              "norm": 0.015013654716312885
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d042.weight",
+              "norm": 0.01439753919839859
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d043.weight",
+              "norm": 0.013515422120690346
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d044.weight",
+              "norm": 0.024533361196517944
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d045.weight",
+              "norm": 0.03163168951869011
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d046.weight",
+              "norm": 0.05170190706849098
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d047.weight",
+              "norm": 0.0012986932415515184
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d048.weight",
+              "norm": 0.002857984509319067
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d049.weight",
+              "norm": 0.0213155597448349
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d050.weight",
+              "norm": 0.019747138023376465
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d051.weight",
+              "norm": 0.02254992164671421
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d052.weight",
+              "norm": 0.03681888058781624
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d053.weight",
+              "norm": 0.044472210109233856
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d054.weight",
+              "norm": 0.06234787404537201
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d055.weight",
+              "norm": 0.04646514356136322
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d056.weight",
+              "norm": 0.053114309906959534
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d057.weight",
+              "norm": 0.06888525933027267
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d058.weight",
+              "norm": 0.020219065248966217
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d059.weight",
+              "norm": 0.04615316912531853
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d060.weight",
+              "norm": 0.04827168583869934
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d061.weight",
+              "norm": 0.029124494642019272
+            }
+          ],
+          "nonzero": 62,
+          "tensors": 124,
+          "with_gradient": 124
+        },
+        "aggregate_exempt": {
+          "finite": 0,
+          "items": [
+            {
+              "finite": false,
+              "has_gradient": false,
+              "name": "aggregate_logit",
+              "norm": null
+            }
+          ],
+          "nonzero": 0,
+          "tensors": 1,
+          "with_gradient": 0
+        },
+        "all_required_tensors_finite_nonzero": false,
+        "base_gradient_tensors": 0,
+        "damping": {
+          "finite": 1,
+          "items": [
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "damping_logit",
+              "norm": 0.0071563720703125
+            }
+          ],
+          "nonzero": 1,
+          "tensors": 1,
+          "with_gradient": 1
+        },
+        "initializer": {
+          "finite": 4,
+          "items": [
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "state_initializer.norm.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "state_initializer.norm.bias",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "state_initializer.down.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "state_initializer.up.weight",
+              "norm": 1.0676827430725098
+            }
+          ],
+          "nonzero": 1,
+          "tensors": 4,
+          "with_gradient": 4
+        },
+        "step": {
+          "finite": 1,
+          "items": [
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "step_encoder.project.weight",
+              "norm": 0.25527507066726685
+            }
+          ],
+          "nonzero": 1,
+          "tensors": 1,
+          "with_gradient": 1
+        },
+        "sufficiency": {
+          "finite": 8,
+          "items": [
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "sufficiency.norm.weight",
+              "norm": 0.05578497052192688
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "sufficiency.norm.bias",
+              "norm": 0.05580553784966469
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "sufficiency.node.weight",
+              "norm": 3.907639741897583
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "sufficiency.node.bias",
+              "norm": 0.07710813730955124
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "sufficiency.phase.weight",
+              "norm": 0.7004473805427551
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "sufficiency.phase.bias",
+              "norm": 0.013896996155381203
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "sufficiency.checksum.weight",
+              "norm": 2.93481183052063
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "sufficiency.checksum.bias",
+              "norm": 0.057949721813201904
+            }
+          ],
+          "nonzero": 8,
+          "tensors": 8,
+          "with_gradient": 8
+        }
+      },
+      "loss": 0.942626953125,
+      "preclip_adaptation_gradient_norm": 0.2119358628988266,
+      "preclip_common_gradient_norm": 5.059079170227051,
+      "step": 1
+    },
+    {
+      "dropout_probe": {
+        "call_manifest_sha256": "3436262cdc884b35663442aff34032438bc01d578abc6e53c9982c709806ce88",
+        "calls": 186,
+        "cycle_manifest_sha256s": [
+          "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368",
+          "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368",
+          "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368"
+        ],
+        "cycle_order_identical": true,
+        "cycles": 3,
+        "each_cycle_exact_target_set": true,
+        "mask_sha256": "15ecc243fc09ff1a9c220a111edf136174e3d43f1400675bf9ba8b2c94025e1a"
+      },
+      "gradients": {
+        "adaptation": {
+          "finite": 124,
+          "items": [
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d000.weight",
+              "norm": 3.4471195249352604e-05
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d001.weight",
+              "norm": 7.034779991954565e-05
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d002.weight",
+              "norm": 0.004427877254784107
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d003.weight",
+              "norm": 0.003968337085098028
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d004.weight",
+              "norm": 0.008997929282486439
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d005.weight",
+              "norm": 0.012596874497830868
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d006.weight",
+              "norm": 0.013117085210978985
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d007.weight",
+              "norm": 0.016829296946525574
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d008.weight",
+              "norm": 5.954598600510508e-05
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d009.weight",
+              "norm": 4.416758383740671e-05
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d010.weight",
+              "norm": 0.005492262076586485
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d011.weight",
+              "norm": 0.0025524012744426727
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d012.weight",
+              "norm": 0.006676124408841133
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d013.weight",
+              "norm": 0.01394602470099926
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d014.weight",
+              "norm": 0.012520447373390198
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d015.weight",
+              "norm": 0.016925325617194176
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d016.weight",
+              "norm": 2.3075135686667636e-05
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d017.weight",
+              "norm": 4.232491482980549e-05
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d018.weight",
+              "norm": 0.006704816594719887
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d019.weight",
+              "norm": 0.004035406745970249
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d020.weight",
+              "norm": 0.00932240393012762
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d021.weight",
+              "norm": 0.013847172260284424
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d022.weight",
+              "norm": 0.014461565762758255
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d023.weight",
+              "norm": 0.01847570575773716
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d024.weight",
+              "norm": 0.017016984522342682
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d025.weight",
+              "norm": 0.013903159648180008
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d026.weight",
+              "norm": 0.02150302566587925
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d027.weight",
+              "norm": 0.0013507392723113298
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d028.weight",
+              "norm": 0.021186083555221558
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d029.weight",
+              "norm": 0.01000234019011259
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d030.weight",
+              "norm": 0.006887116469442844
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d031.weight",
+              "norm": 1.7810169083531946e-05
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d032.weight",
+              "norm": 6.33370946161449e-05
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d033.weight",
+              "norm": 0.007886822335422039
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d034.weight",
+              "norm": 0.0038143934216350317
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d035.weight",
+              "norm": 0.012835867702960968
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d036.weight",
+              "norm": 0.017971068620681763
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d037.weight",
+              "norm": 0.016305746510624886
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d038.weight",
+              "norm": 0.02178669162094593
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d039.weight",
+              "norm": 5.736613820772618e-05
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d040.weight",
+              "norm": 4.328219802118838e-05
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d041.weight",
+              "norm": 0.005534416995942593
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d042.weight",
+              "norm": 0.0027763559482991695
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d043.weight",
+              "norm": 0.008711428381502628
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d044.weight",
+              "norm": 0.021771440282464027
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d045.weight",
+              "norm": 0.01872093789279461
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d046.weight",
+              "norm": 0.027511313557624817
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d047.weight",
+              "norm": 5.124191375216469e-05
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d048.weight",
+              "norm": 8.077210804913193e-05
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d049.weight",
+              "norm": 0.007591206580400467
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d050.weight",
+              "norm": 0.004832141567021608
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d051.weight",
+              "norm": 0.013357964344322681
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d052.weight",
+              "norm": 0.03426766023039818
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d053.weight",
+              "norm": 0.024383211508393288
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d054.weight",
+              "norm": 0.03782850131392479
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d055.weight",
+              "norm": 0.03792533650994301
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d056.weight",
+              "norm": 0.024166027083992958
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d057.weight",
+              "norm": 0.04426193609833717
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d058.weight",
+              "norm": 0.001948174205608666
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d059.weight",
+              "norm": 0.028971971943974495
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d060.weight",
+              "norm": 0.015873072668910027
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.down.d061.weight",
+              "norm": 0.00923131499439478
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d000.weight",
+              "norm": 0.0010956033365800977
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d001.weight",
+              "norm": 0.00238485774025321
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d002.weight",
+              "norm": 0.011568676680326462
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d003.weight",
+              "norm": 0.01228056289255619
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d004.weight",
+              "norm": 0.014538196846842766
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d005.weight",
+              "norm": 0.013064678758382797
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d006.weight",
+              "norm": 0.023800594732165337
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d007.weight",
+              "norm": 0.024312881752848625
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d008.weight",
+              "norm": 0.0014496112708002329
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d009.weight",
+              "norm": 0.0017709602834656835
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d010.weight",
+              "norm": 0.013046789914369583
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d011.weight",
+              "norm": 0.007998913526535034
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d012.weight",
+              "norm": 0.00885908305644989
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d013.weight",
+              "norm": 0.015215101651847363
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d014.weight",
+              "norm": 0.022321408614516258
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d015.weight",
+              "norm": 0.018596194684505463
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d016.weight",
+              "norm": 0.0007610880420543253
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d017.weight",
+              "norm": 0.0016853014240041375
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d018.weight",
+              "norm": 0.013697527348995209
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d019.weight",
+              "norm": 0.012665007263422012
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d020.weight",
+              "norm": 0.009735489264130592
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d021.weight",
+              "norm": 0.015686949715018272
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d022.weight",
+              "norm": 0.02158975414931774
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d023.weight",
+              "norm": 0.023366231471300125
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d024.weight",
+              "norm": 0.015581706538796425
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d025.weight",
+              "norm": 0.021410208195447922
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d026.weight",
+              "norm": 0.02515259198844433
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d027.weight",
+              "norm": 0.008089069277048111
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d028.weight",
+              "norm": 0.027274565771222115
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d029.weight",
+              "norm": 0.015448445454239845
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d030.weight",
+              "norm": 0.023890119045972824
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d031.weight",
+              "norm": 0.0003653981548268348
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d032.weight",
+              "norm": 0.0019939623307436705
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d033.weight",
+              "norm": 0.02595067024230957
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d034.weight",
+              "norm": 0.011860157363116741
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d035.weight",
+              "norm": 0.013768069446086884
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d036.weight",
+              "norm": 0.017978278920054436
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d037.weight",
+              "norm": 0.024688949808478355
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d038.weight",
+              "norm": 0.028492597863078117
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d039.weight",
+              "norm": 0.0012429571943357587
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d040.weight",
+              "norm": 0.0013816173886880279
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d041.weight",
+              "norm": 0.012042790651321411
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d042.weight",
+              "norm": 0.011646006256341934
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d043.weight",
+              "norm": 0.010646219365298748
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d044.weight",
+              "norm": 0.018872639164328575
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d045.weight",
+              "norm": 0.0270511694252491
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d046.weight",
+              "norm": 0.04246540367603302
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d047.weight",
+              "norm": 0.0010691710049286485
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d048.weight",
+              "norm": 0.0022083923686295748
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d049.weight",
+              "norm": 0.01734825409948826
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d050.weight",
+              "norm": 0.016622144728899002
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d051.weight",
+              "norm": 0.017661631107330322
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d052.weight",
+              "norm": 0.028929749503731728
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d053.weight",
+              "norm": 0.03734830766916275
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d054.weight",
+              "norm": 0.048311997205019
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d055.weight",
+              "norm": 0.03589608520269394
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d056.weight",
+              "norm": 0.04116882011294365
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d057.weight",
+              "norm": 0.051444511860609055
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d058.weight",
+              "norm": 0.010149615816771984
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d059.weight",
+              "norm": 0.03779757767915726
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d060.weight",
+              "norm": 0.02991909720003605
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.up.d061.weight",
+              "norm": 0.024649670347571373
+            }
+          ],
+          "nonzero": 124,
+          "tensors": 124,
+          "with_gradient": 124
+        },
+        "aggregate_exempt": {
+          "finite": 0,
+          "items": [
+            {
+              "finite": false,
+              "has_gradient": false,
+              "name": "aggregate_logit",
+              "norm": null
+            }
+          ],
+          "nonzero": 0,
+          "tensors": 1,
+          "with_gradient": 0
+        },
+        "all_required_tensors_finite_nonzero": true,
+        "base_gradient_tensors": 0,
+        "damping": {
+          "finite": 1,
+          "items": [
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "damping_logit",
+              "norm": 0.03931265324354172
+            }
+          ],
+          "nonzero": 1,
+          "tensors": 1,
+          "with_gradient": 1
+        },
+        "initializer": {
+          "finite": 4,
+          "items": [
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "state_initializer.norm.weight",
+              "norm": 0.004908627364784479
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "state_initializer.norm.bias",
+              "norm": 0.005129803437739611
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "state_initializer.down.weight",
+              "norm": 0.22331900894641876
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "state_initializer.up.weight",
+              "norm": 0.7776510119438171
+            }
+          ],
+          "nonzero": 4,
+          "tensors": 4,
+          "with_gradient": 4
+        },
+        "step": {
+          "finite": 1,
+          "items": [
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "step_encoder.project.weight",
+              "norm": 0.2030966579914093
+            }
+          ],
+          "nonzero": 1,
+          "tensors": 1,
+          "with_gradient": 1
+        },
+        "sufficiency": {
+          "finite": 8,
+          "items": [
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "sufficiency.norm.weight",
+              "norm": 0.04067150875926018
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "sufficiency.norm.bias",
+              "norm": 0.039640866219997406
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "sufficiency.node.weight",
+              "norm": 2.8605048656463623
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "sufficiency.node.bias",
+              "norm": 0.05643036216497421
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "sufficiency.phase.weight",
+              "norm": 1.169539213180542
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "sufficiency.phase.bias",
+              "norm": 0.02304673194885254
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "sufficiency.checksum.weight",
+              "norm": 1.612139105796814
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "sufficiency.checksum.bias",
+              "norm": 0.03146106377243996
+            }
+          ],
+          "nonzero": 8,
+          "tensors": 8,
+          "with_gradient": 8
+        }
+      },
+      "loss": 0.7271728515625,
+      "preclip_adaptation_gradient_norm": 0.20869307219982147,
+      "preclip_common_gradient_norm": 3.585343837738037,
+      "step": 2
+    }
+  ],
+  "worst_call_receipt": {
+    "call_manifest_sha256": "cb094307b7ad8b9ed808b60be2f0938a3ba31b4fe7646b80551e005a817343e2",
+    "calls": 682,
+    "cycle_manifest_sha256s": [
+      "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368",
+      "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368",
+      "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368",
+      "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368",
+      "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368",
+      "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368",
+      "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368",
+      "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368",
+      "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368",
+      "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368",
+      "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368"
+    ],
+    "cycle_order_identical": true,
+    "cycles": 11,
+    "each_cycle_exact_target_set": true,
+    "mask_sha256": "a4bbcf1ccef4ecb8b31dc037b8443281f95b22cec0fb6f5d8c975a031f9ab22b"
+  },
+  "worst_depth": 12,
+  "worst_forward_seconds": 1.547273874282837,
+  "worst_setup_row": {
+    "cross_result_structural_overlap": 0,
+    "id": "setup_g0_worst_depth-73992-3d78d0259088",
+    "seed": 73992,
+    "structural_fingerprint": "978250bc4503025c00b9feb9f9ff8726450f52351cbcb51b2a4a4a880277c41e"
+  },
+  "zero_function_enabled_minus_disabled_error": 0.0
+}

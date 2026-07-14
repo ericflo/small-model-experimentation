@@ -1,6 +1,6 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · frozen design unchanged; source-v11 PREPARED-output repair reviewed at 363/363; source-v10 setup invalidated before any result training; source-v11 seed-7412 LoRA setup pair passed and awaits publication before seed 7413
+**Status:** in-progress · since 2026-07-13 · frozen design unchanged; source-v11 PREPARED-output repair reviewed at 363/363; source-v10 setup invalidated before any result training; complete source-v11 LoRA setup matrix passed and awaits publication before Stage A
 
 ## Current status
 
@@ -41,7 +41,15 @@ and aggregation gradient `4.4653425e-5`. Its positive control passed at file SHA
 `1a8d263b…a27a37` and identity `fdb1a16e…cd72a3`: oracle and intact fixed-final 48/48,
 adaptation-disabled 0/48, exactly 256 updates, accumulation 16, and 4,096 presentations. Both remain
 setup-only evidence with zero benchmark/sealed access. Publish this pair and require both workflows
-green before seed 7413; result training remains blocked on all three setup pairs.
+green before seed 7413. The seed-7412 setup checkpoint is green at `47e160bf`. Source-v11 seed-7413
+LoRA G0 then passed at file SHA-256 `87faadfa…aca4d0` and identity `1fa2b054…eec8d5`: exact PEFT
+parity, zero K=1 and checkpoint-roundtrip error, finite K=12, all 124 LoRA tensors and every
+recurrent group with finite nonzero live-joint gradients, no base gradient, and aggregation gradient
+`1.5512113e-3`. Its positive control passed at file SHA-256 `e2e70edf…fc5b57` and identity
+`8d74b90d…d689b7c`: oracle and intact fixed-final 48/48, adaptation-disabled 0/48, exactly 256
+updates, accumulation 16, and 4,096 presentations. The complete three-seed source-v11 LoRA setup
+matrix now passes with zero benchmark/sealed access and no scientific evidence. Publish and require
+both workflows green before the three Stage-A LoRA joint cells; no result run has started.
 
 Historically, the integrated source-v10 review was `GO` for reviewed implementation
 `a5a494b7…6f1c4a` and full source contract `979a9012…f394b7`; the 360/360 suite and exact machine gate
