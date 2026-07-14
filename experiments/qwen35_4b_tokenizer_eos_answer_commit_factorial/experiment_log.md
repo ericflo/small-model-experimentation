@@ -132,6 +132,13 @@
   and comparison against the original authenticated receipt. Added generation,
   publication, and recovery regressions for each non-terminal predecessor
   artifact. The suite passes 139/139 pending a sixth exact-SHA review.
+- Round six returned `PASS_IMPLEMENTATION` for exact pushed-green commit
+  `df096d330f09847ce844af6255b349b4f707f464`: 139/139 tests passed, both
+  launchers rebuilt byte-identically, every full-prefix boundary family passed,
+  and the production tuple, hidden binding, typed gate, resource receipt,
+  immutable calibration, and routing checks all passed. Model/GPU calls and
+  all protected-read inventories remained zero. The canonical hash-bound review
+  receipt is still a separate release gate before the mechanics lock.
 
 ## Scaffold
 

@@ -1,6 +1,6 @@
 # Qwen3.5-4B Tokenizer-EOS Answer Commit Factorial
 
-**Status:** in-progress · since 2026-07-14 · `PASS_DESIGN` + calibration `PASS_IMPLEMENTATION`; fresh calibration: tokenizer-EOS-only interface qualified; five conditional-mechanics implementation reviews held and repaired, fresh rereview pending
+**Status:** in-progress · since 2026-07-14 · `PASS_DESIGN` + calibration `PASS_IMPLEMENTATION`; fresh calibration: tokenizer-EOS-only interface qualified; conditional-mechanics `PASS_IMPLEMENTATION` at exact reviewed commit, review-receipt release pending
 
 This fresh successor tests whether the prior strict answer-seam failure was
 caused by waiting past Qwen3.5's tokenizer chat-end token. It registers the
@@ -297,6 +297,17 @@ non-terminal predecessor artifact during generation, publication, or recovery;
 all fail closed without a successful successor return or recovery resample.
 The model-free suite passes 139/139 with zero mechanics model/GPU calls or
 protected reads. A sixth pushed-green exact-commit review is required.
+
+Round six returned `PASS_IMPLEMENTATION` for exact pushed-green commit
+`df096d330f09847ce844af6255b349b4f707f464`. It passed 139/139 tests, rebuilt
+the static launcher byte-identically, rejected all full-prefix changes across
+pre-call, callback, publication, and recovery checks, and reconfirmed the
+production tuple path, hidden object/commit binding, exact typed gates,
+resource receipts, immutable calibration files, and bootstrap routing. All
+protected-read arrays and model/GPU counters were zero. The hash-bound review
+report and canonical receipt must now be committed, pushed, and green before
+the mechanics lock can be published; this PASS alone does not authorize a
+model call.
 
 ## Interpretation
 

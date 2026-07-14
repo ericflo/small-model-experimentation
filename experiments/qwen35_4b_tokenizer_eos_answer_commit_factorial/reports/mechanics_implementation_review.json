@@ -1,0 +1,32 @@
+{
+  "adversarial_review_rounds": 6,
+  "allowed_tests_passed": 139,
+  "allowed_tests_total": 139,
+  "benchmark_files_read": [],
+  "confirmation_files_read": [],
+  "experimental_model_requests_reviewed": 0,
+  "hidden_files_read": [],
+  "qualification_files_read": [],
+  "review_report_sha256": "d130575817c85542a77a8f85a0a6177dd021b300d43ba259af0f123152e4f5e0",
+  "reviewed_ci": {
+    "Publish Research Site": {
+      "conclusion": "success",
+      "database_id": 29324011938,
+      "head_sha": "df096d330f09847ce844af6255b349b4f707f464",
+      "status": "completed",
+      "url": "https://github.com/ericflo/small-model-experimentation/actions/runs/29324011938"
+    },
+    "Validate Repository": {
+      "conclusion": "success",
+      "database_id": 29324011879,
+      "head_sha": "df096d330f09847ce844af6255b349b4f707f464",
+      "status": "completed",
+      "url": "https://github.com/ericflo/small-model-experimentation/actions/runs/29324011879"
+    }
+  },
+  "reviewed_commit": "df096d330f09847ce844af6255b349b4f707f464",
+  "reviewer": "fresh_mechanics_adversary",
+  "sampled_model_outputs_reviewed": 0,
+  "schema_version": 1,
+  "verdict": "PASS_IMPLEMENTATION"
+}
