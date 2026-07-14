@@ -34,6 +34,46 @@ def _confirmation_arms() -> dict:
 
 
 class ControlsAuthorizationTests(unittest.TestCase):
+    def test_model_stage_reexecs_under_pinned_training_runtime(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            pinned = root / ".venv" / "bin" / "python"
+            pinned.parent.mkdir(parents=True)
+            pinned.write_bytes(b"python")
+            script = root / "run.py"
+            script.write_text("# synthetic\n", encoding="utf-8")
+
+            command = run_script._stage_reexec_argv(
+                ["run.py", "--stage", "controls"],
+                executable=root / "system-python",
+                pinned_python=pinned,
+                script=script,
+            )
+
+            self.assertEqual(
+                command,
+                [str(pinned), str(script), "--stage", "controls"],
+            )
+
+    def test_nonstage_and_already_pinned_invocations_do_not_reexec(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            pinned = Path(temporary) / "python"
+            pinned.write_bytes(b"python")
+            self.assertIsNone(
+                run_script._stage_reexec_argv(
+                    ["run.py", "--smoke"],
+                    executable=Path("/system/python"),
+                    pinned_python=pinned,
+                )
+            )
+            self.assertIsNone(
+                run_script._stage_reexec_argv(
+                    ["run.py", "--stage", "controls"],
+                    executable=pinned,
+                    pinned_python=pinned,
+                )
+            )
+
     def test_control_code_inventory_covers_all_executed_control_surfaces(self):
         inventory = control_code_inventory()
         names = {Path(row["path"]).name for row in inventory["files"]}

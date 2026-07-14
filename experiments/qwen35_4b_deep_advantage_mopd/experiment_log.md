@@ -348,3 +348,22 @@
   SFT, and parameter controls run. The aggregate tracked controls receipt does
   not yet exist, so this arm is not admitted to confirmation and supports no
   causal or capability conclusion.
+
+## 2026-07-14 — control-runtime recovery before off-policy merge
+
+- All four wrong-teacher training rounds and merges completed. Off-policy SFT
+  round 0 then completed 20/20 consume-once updates and passed its frozen round
+  gate, but the parent orchestrator stopped before merge: the documented
+  `python3` entrypoint ran under the system interpreter while strengthened
+  canonical off-policy replay lazily required `transformers` from `.venv`.
+- This was an orchestration-environment failure, not a scientific stop. No
+  off-policy merge or later round had started, and the complete round-0 adapter
+  receipt was preserved for semantic replay rather than retrained.
+- Every model stage now re-execs under the pinned `.venv` before importing
+  dependency-bearing validators. The guard preserves the exact arguments,
+  accepts the normal virtual-environment Python symlink, and fails before stage
+  work if the runtime is absent. The README documents this boundary and two
+  regression tests cover re-exec and no-re-exec paths.
+- All 211 experiment tests pass after the fix. Resumption must first replay and
+  validate the existing round-0 receipt under `.venv`; this recovery changes no
+  treatment, seed, target, update, or gate.

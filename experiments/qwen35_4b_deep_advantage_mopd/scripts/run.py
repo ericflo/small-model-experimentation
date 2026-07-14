@@ -17,6 +17,47 @@ EXP = Path(__file__).resolve().parents[1]
 REPO = EXP.parents[1]
 PY = REPO / ".venv" / "bin" / "python"
 VLLM_PY = REPO / ".venv-vllm" / "bin" / "python"
+
+
+def _stage_reexec_argv(
+    argv: list[str],
+    *,
+    executable: Path,
+    pinned_python: Path = PY,
+    script: Path = Path(__file__),
+) -> list[str] | None:
+    """Return the pinned-runtime invocation required for a model stage."""
+
+    if "--stage" not in argv:
+        return None
+    executable = Path(os.path.abspath(executable))
+    pinned_python = Path(os.path.abspath(pinned_python))
+    if executable == pinned_python:
+        return None
+    if not pinned_python.is_file():
+        raise SystemExit(f"pinned training Python is unavailable: {pinned_python}")
+    return [
+        str(pinned_python),
+        str(script.resolve()),
+        *argv[1:],
+    ]
+
+
+def _ensure_stage_runtime() -> None:
+    """Re-exec model stages before importing dependency-bearing validators."""
+
+    command = _stage_reexec_argv(
+        list(sys.argv), executable=Path(sys.executable)
+    )
+    if command is None:
+        return
+    os.environ.setdefault("PYTHONDONTWRITEBYTECODE", "1")
+    os.execv(command[0], command)
+
+
+if __name__ == "__main__":
+    _ensure_stage_runtime()
+
 sys.path.insert(0, str(EXP / "src"))
 
 from gym.families import ALL_FAMILIES  # noqa: E402

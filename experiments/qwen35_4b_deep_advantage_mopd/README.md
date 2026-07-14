@@ -90,7 +90,9 @@ python3 experiments/qwen35_4b_deep_advantage_mopd/scripts/run.py --stage benchma
 ```
 
 Every command after smoke requires an immutable design receipt. A failed gate
-forbids later stages.
+forbids later stages. Model stages re-exec the orchestrator under the pinned
+`.venv` before dependency-bearing validators load; a missing training runtime
+therefore fails before any stage work rather than after producing an artifact.
 
 ## Decision Rule
 
