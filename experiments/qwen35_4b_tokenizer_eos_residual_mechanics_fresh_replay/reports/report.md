@@ -2,11 +2,12 @@
 
 ## Summary
 
-No hidden residual-capability result exists yet. Fresh construction passed
-every preregistered collision and balance gate, calibration qualified the
-tokenizer-EOS/no-think/`PROGRAM:` interface, and all 4,056 mechanics outputs
-completed. Visible selection froze with zero deployable selections; hidden
-scoring remains sealed until this visible checkpoint passes exact-commit CI.
+The fresh replay is a clean large-effect pilot fail. Construction, calibration,
+transport, generation ABI, transaction replay, visible selection, and the
+hidden boundary all passed. Materialized residuals and every matched comparator
+then had 0/24 selected success and 0/24 oracle proposal coverage, while
+exhaustive CPU search covered 24/24 tasks. The failed mechanism is proposal
+formation, not the answer interface, selector, or task generator.
 
 ## Research Program Fit
 
@@ -74,14 +75,64 @@ Completed reruns authenticate tracked outputs without reading that key.
   non-primary full 96-sample direct diagnostic selected on one task. Visible
   selection SHA-256 is `c64dd163...c965ed`; it records no hidden or benchmark
   read.
+- Visible checkpoint `5bce0231` passed exact workflows `29341369041` and
+  `29341369091` before hidden access. The one-time hidden stage returned
+  `TOKENIZER_EOS_MATERIALIZED_RESIDUAL_LARGE_EFFECT_PILOT_FAIL` with 0/24
+  selected success and 0/24 oracle proposal coverage for materialized,
+  name-only, shuffled, sampled-matched direct, and logical-matched direct.
+  Every materialized gain was 0.0 and first-operation support was empty.
+- Exhaustive evaluation of all 13,824 programs found 88 visible-consistent,
+  hidden-correct programs: 1--9 per task and 24/24 task coverage. The scorer
+  therefore had valid solutions for every task; the sampled proposal pools did
+  not reach any. Hidden-result SHA-256 is `71090626...f1245a6`. Visible
+  publication authorization binds indented file bytes `c64dd163...c965ed`,
+  whereas hidden scoring records canonical-object digest
+  `a62bd73e...04a03`; these are distinct, consistent hash domains.
 
 ## Controls
 
+- Name-only and token-preserving shuffled suffix prompts distinguish semantic
+  consequences from candidate naming and prompt length/order.
+- Direct full-program pools are matched taskwise at the first sampled-token and
+  logical-model-token overtake points; neither pool exhausted.
+- The non-primary 96-sample direct pool is diagnostic only and does not affect
+  the gate.
+- Exact tokenizer-EOS transport and strict ABI checks rule out parser or
+  termination collapse. Exhaustive CPU search rules out unsatisfiable tasks.
+
 ## Oracle Versus Deployable Evidence
+
+Deployable selected accuracy is 0.0 for all five arms because every arm
+abstained on all 24 tasks. Oracle proposal coverage is independently also 0.0
+for all five arms. Thus this is not the common selector-gap pattern in which a
+correct candidate exists but cannot be chosen. By contrast, exhaustive search
+has 1.0 coverage and is explicitly report-only; it demonstrates task
+solvability without being credited as model capability.
 
 ## Interpretation
 
+Tokenizer EOS plus no-think is a reliable short-output interface, not a latent
+residual solver. Exposing every candidate first-operation consequence did not
+move correct programs into the model's proposal support at matched compute.
+Because oracle coverage is zero, selector repair cannot rescue this variant.
+
+The conclusion is local to this frozen depth-three DSL, prompt ABI, seed block,
+and one-sample-per-first-operation treatment. It does not rule out different
+residual representations, learned state interfaces, or causal Jacobian
+interventions. It does rule out repeating this semantic-materialization prompt
+with looser parsing, the same selector, or a larger matched budget as if that
+were a new mechanism.
+
 ## Next Experiments
+
+1. Retire this all-candidate semantic-materialization prompt branch.
+2. For J-space work, preregister a measurement-first gate on fresh tasks:
+   determine whether a within-`<think>` Jacobian coordinate predicts eventual
+   executable correctness across task-held-out splits beyond answer margin,
+   token position, and equal-width non-J residual controls.
+3. Only if that gate passes, intervene at the same prefix and require a forward
+   increase in correct-proposal coverage over taskwise matched sampling. A
+   readable coordinate without causal proposal lift remains diagnostic.
 
 ## Artifact Manifest
 

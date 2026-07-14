@@ -1,6 +1,6 @@
 # Qwen3.5-4B Tokenizer-EOS Residual Mechanics Fresh Replay
 
-**Status:** in-progress · since 2026-07-14 · visible mechanics selection frozen with zero deployable selections; hidden scoring remains sealed pending visible-checkpoint CI
+**Status:** finished
 
 This fresh-identity successor preserves the parent's qualified tokenizer-EOS
 interface and frozen residual-mechanics science while separating initial
@@ -200,14 +200,49 @@ full-direct diagnostic found two visible-passing candidates on one task and
 selected one. The visible receipt records no hidden or benchmark read. It must
 be committed, pushed, and green before the hidden key may be opened once.
 
+Visible checkpoint commit `5bce0231` passed exact workflows `29341369041`
+and `29341369091`. The separately authorized one-time hidden stage then
+returned `TOKENIZER_EOS_MATERIALIZED_RESIDUAL_LARGE_EFFECT_PILOT_FAIL`.
+Materialized, name-only, shuffled, sampled-token-matched direct, and
+logical-model-token-matched direct each scored 0/24 selected success and 0/24
+oracle proposal coverage; every gain was 0.0 and materialized first-operation
+support was empty. This is not task impossibility: exhaustive CPU evaluation
+of all 13,824 programs found 1--9 visible-consistent, hidden-correct programs
+per task, 88 total, for 24/24 coverage. Hidden-result SHA-256 is
+`71090626bcea3f8fb0ef1d3b802f2535107bfba6419a0056c3fae7bb5f1245a6`.
+The authorized stage read only the fresh ciphertext/key, read no benchmark,
+and made no model request. The visible publication authorization binds file
+bytes `c64dd163...c965ed`; the hidden scorer separately records canonical-object
+digest `a62bd73e...04a03`. They are intentionally different hash domains.
+
 ## Interpretation
 
-Pending.
+The tokenizer-EOS answer boundary is a real and highly reliable output
+interface, but it does not make residual synthesis available. Materializing
+every first operation's public consequences changed prompt content and compute
+without moving the generated proposal support: the treatment and all frozen
+controls missed every hidden-correct program, despite exhaustive proof that
+each task had multiple reachable solutions. The bottleneck is proposal
+formation, not parsing, termination, selector quality, direct-pool exhaustion,
+or task unsatisfiability.
+
+This clean pilot retires this exact all-candidate semantic-materialization
+prompt branch. It does not prove that every residual representation or
+Jacobian-derived intervention must fail. A successor must alter the mechanism,
+not merely sample more, loosen the selector, repeat the tokenizer boundary, or
+raise the same prompt's budget. In particular, a J-space successor should first
+show that a pre-answer coordinate predicts executable correctness across held-
+out tasks beyond ordinary margins and equal-width residual controls, then show
+that an intervention at the same prefix causally increases correct-proposal
+coverage over matched sampling. A readable coordinate without forward causal
+proposal lift is diagnostic only.
 
 ## Knowledgebase Update
 
-- Program evidence updated: not until a result exists.
-- Program backlog updated: this fresh successor is now registered.
+- Program evidence updated: clean null recorded; semantic materialization
+  retired as a proposal-generation lever under this interface.
+- Program backlog updated: next work must change the mechanism and require
+  forward causal proposal lift, not selector repair or more of the same prompt.
 - Claim ledger updated: no claim ID allocated.
 
 ## Artifacts

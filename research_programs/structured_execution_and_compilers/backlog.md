@@ -99,7 +99,17 @@
   successor is now registered as
   `qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay`, with fresh function
   fingerprints, identities, prompts/token sequences, seeds, ciphertext/key,
-  and an enforced parent-sampled-bundle denylist; design review is pending.
+  and an enforced parent-sampled-bundle denylist. It completed cleanly:
+  calibration again qualified no-think tokenizer EOS, transport was 24/24,
+  every generation arm passed ABI, and all 4,056 outputs authenticated.
+  Materialized and all four frozen comparators nevertheless had 0/24 selected
+  success and 0/24 oracle proposal coverage, while exhaustive search covered
+  24/24 tasks. Retire the all-candidate semantic-materialization prompt branch.
+  Do not spend another run on selector repair, parser relaxation, or a larger
+  matched budget for the same mechanism. A J-space successor must first show a
+  task-held-out correctness coordinate beyond margin/position/equal-width
+  non-J controls, then causally increase correct-proposal coverage at the same
+  prefix over matched sampling; stop at measurement if that forward gate fails.
 - Measure the exact behavioral quotient at fresh depth 6 before assuming model-guided pruning is economically
   needed; record wall time, memory, physical transitions, coverage, and selector success.
 - If a real search wall appears, test a residualized partial state (feasible parameter domains, materialized

@@ -17,11 +17,12 @@ reproducibility:
   parent_receipt_repair_command: "python3 experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/scripts/repair_parent_collision_receipts.py"
   calibration_command: "experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/scripts/calibration_launcher --stage run"
   mechanics_command: "experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/scripts/mechanics_launcher --stage run"
-  hidden_command: "experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/scripts/mechanics_launcher --stage score-hidden (unauthorized until the visible-selection commit passes exact CI)"
+  hidden_command: "experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/scripts/mechanics_launcher --stage score-hidden (completed once after visible-selection exact CI; reruns only authenticate the durable result)"
   required_external_artifacts:
     - fresh_mechanics_gold_key
 notes: >-
   Parent collision domains are preserved only as hashes and reconstructed under
   an exact eight-source repository read firewall. No parent task payload or
   sampled bundle is a successor input. Construction created the fresh key once;
-  the key remains unread until post-selection authorization.
+  it was opened only after visible checkpoint 5bce0231 passed both exact
+  workflows, and the durable hidden result authenticates that authorization.

@@ -1,0 +1,1118 @@
+{
+  "benchmark_files_read": [],
+  "decision": "TOKENIZER_EOS_MATERIALIZED_RESIDUAL_LARGE_EFFECT_PILOT_FAIL",
+  "gold_plaintext_sha256": "dabd40963c55d606d93ef614c81042c8339a0caa8e33fa30a71b7b06ee3feb15",
+  "hidden_ciphertext_receipt": {
+    "aad_utf8": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics-gold-v1",
+    "algorithm": "AES-256-GCM",
+    "ciphertext_sha256": "0a68bcc7f317d7b6eff0cce2a1482138fe4fa9451ba59d2526a33c4fd5b2ad1c",
+    "hidden_files_read": [
+      "/workspace/small-model-experimentation/experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/data/procedural/mechanics_gold.jsonl.aesgcm",
+      "/workspace/small-model-experimentation/experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/.secrets/mechanics_gold.aes256.key"
+    ],
+    "local_key_sha256": "d1f0258fe63bd9e602739c5e3a7aa6ea0b23742ba99953254e1b81030552606e",
+    "plaintext_sha256": "dabd40963c55d606d93ef614c81042c8339a0caa8e33fa30a71b7b06ee3feb15"
+  },
+  "hidden_files_read": [
+    "/workspace/small-model-experimentation/experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/data/procedural/mechanics_gold.jsonl.aesgcm",
+    "/workspace/small-model-experimentation/experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/.secrets/mechanics_gold.aes256.key"
+  ],
+  "hidden_read_authorization": {
+    "authorization": "COMMITTED_VISIBLE_SELECTION_AUTHORIZES_HIDDEN_READ",
+    "authorization_ci": {
+      "Publish Research Site": {
+        "conclusion": "success",
+        "database_id": 29341369091,
+        "head_sha": "5bce02313a19f6fb94868843e44af628b639ad0a",
+        "status": "completed",
+        "url": "https://github.com/ericflo/small-model-experimentation/actions/runs/29341369091"
+      },
+      "Validate Repository": {
+        "conclusion": "success",
+        "database_id": 29341369041,
+        "head_sha": "5bce02313a19f6fb94868843e44af628b639ad0a",
+        "status": "completed",
+        "url": "https://github.com/ericflo/small-model-experimentation/actions/runs/29341369041"
+      }
+    },
+    "authorization_commit": "5bce02313a19f6fb94868843e44af628b639ad0a",
+    "visible_selection_sha256": "c64dd163c617216a50c03a0e6b536057088cb7bbd7042e69b04649e7e3c965ed"
+  },
+  "materialized_oracle_first_operation_aliases": [],
+  "oracle_coverage_gain_diagnostic": {
+    "direct_logical": 0.0,
+    "direct_sampled": 0.0,
+    "name_only": 0.0,
+    "shuffled": 0.0
+  },
+  "oracle_proposal_coverage_diagnostic": {
+    "direct_logical": 0.0,
+    "direct_sampled": 0.0,
+    "materialized": 0.0,
+    "name_only": 0.0,
+    "shuffled": 0.0
+  },
+  "per_task": {
+    "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00000": {
+      "direct_logical": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "direct_sampled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "materialized": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "name_only": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "shuffled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      }
+    },
+    "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00001": {
+      "direct_logical": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "direct_sampled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "materialized": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "name_only": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "shuffled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      }
+    },
+    "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00002": {
+      "direct_logical": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "direct_sampled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "materialized": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "name_only": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "shuffled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      }
+    },
+    "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00003": {
+      "direct_logical": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "direct_sampled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "materialized": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "name_only": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "shuffled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      }
+    },
+    "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00004": {
+      "direct_logical": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "direct_sampled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "materialized": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "name_only": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "shuffled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      }
+    },
+    "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00005": {
+      "direct_logical": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "direct_sampled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "materialized": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "name_only": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "shuffled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      }
+    },
+    "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00006": {
+      "direct_logical": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "direct_sampled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "materialized": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "name_only": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "shuffled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      }
+    },
+    "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00007": {
+      "direct_logical": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "direct_sampled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "materialized": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "name_only": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "shuffled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      }
+    },
+    "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00008": {
+      "direct_logical": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "direct_sampled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "materialized": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "name_only": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "shuffled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      }
+    },
+    "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00009": {
+      "direct_logical": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "direct_sampled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "materialized": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "name_only": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "shuffled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      }
+    },
+    "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00010": {
+      "direct_logical": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "direct_sampled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "materialized": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "name_only": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "shuffled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      }
+    },
+    "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00011": {
+      "direct_logical": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "direct_sampled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "materialized": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "name_only": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "shuffled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      }
+    },
+    "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00012": {
+      "direct_logical": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "direct_sampled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "materialized": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "name_only": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "shuffled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      }
+    },
+    "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00013": {
+      "direct_logical": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "direct_sampled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "materialized": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "name_only": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "shuffled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      }
+    },
+    "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00014": {
+      "direct_logical": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "direct_sampled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "materialized": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "name_only": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "shuffled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      }
+    },
+    "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00015": {
+      "direct_logical": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "direct_sampled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "materialized": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "name_only": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "shuffled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      }
+    },
+    "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00016": {
+      "direct_logical": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "direct_sampled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "materialized": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "name_only": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "shuffled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      }
+    },
+    "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00017": {
+      "direct_logical": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "direct_sampled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "materialized": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "name_only": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "shuffled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      }
+    },
+    "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00018": {
+      "direct_logical": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "direct_sampled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "materialized": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "name_only": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "shuffled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      }
+    },
+    "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00019": {
+      "direct_logical": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "direct_sampled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "materialized": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "name_only": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "shuffled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      }
+    },
+    "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00020": {
+      "direct_logical": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "direct_sampled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "materialized": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "name_only": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "shuffled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      }
+    },
+    "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00021": {
+      "direct_logical": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "direct_sampled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "materialized": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "name_only": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "shuffled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      }
+    },
+    "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00022": {
+      "direct_logical": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "direct_sampled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "materialized": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "name_only": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "shuffled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      }
+    },
+    "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00023": {
+      "direct_logical": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "direct_sampled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "materialized": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "name_only": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      },
+      "shuffled": {
+        "hidden_correct_proposals": 0,
+        "oracle_coverage": false,
+        "selected_candidate_id": null,
+        "selected_correct": false
+      }
+    }
+  },
+  "primary_selected_accuracy": {
+    "direct_logical": 0.0,
+    "direct_sampled": 0.0,
+    "materialized": 0.0,
+    "name_only": 0.0,
+    "shuffled": 0.0
+  },
+  "report_only_exhaustive_cpu_ceiling": {
+    "affects_gate": false,
+    "coverage": 1.0,
+    "program_inventory_size": 13824,
+    "tasks": {
+      "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00000": {
+        "any_hidden_correct": true,
+        "hidden_correct_visible_consistent_programs": 3,
+        "visible_consistent_programs": 3
+      },
+      "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00001": {
+        "any_hidden_correct": true,
+        "hidden_correct_visible_consistent_programs": 1,
+        "visible_consistent_programs": 1
+      },
+      "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00002": {
+        "any_hidden_correct": true,
+        "hidden_correct_visible_consistent_programs": 4,
+        "visible_consistent_programs": 4
+      },
+      "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00003": {
+        "any_hidden_correct": true,
+        "hidden_correct_visible_consistent_programs": 3,
+        "visible_consistent_programs": 3
+      },
+      "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00004": {
+        "any_hidden_correct": true,
+        "hidden_correct_visible_consistent_programs": 3,
+        "visible_consistent_programs": 3
+      },
+      "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00005": {
+        "any_hidden_correct": true,
+        "hidden_correct_visible_consistent_programs": 1,
+        "visible_consistent_programs": 1
+      },
+      "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00006": {
+        "any_hidden_correct": true,
+        "hidden_correct_visible_consistent_programs": 3,
+        "visible_consistent_programs": 3
+      },
+      "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00007": {
+        "any_hidden_correct": true,
+        "hidden_correct_visible_consistent_programs": 1,
+        "visible_consistent_programs": 1
+      },
+      "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00008": {
+        "any_hidden_correct": true,
+        "hidden_correct_visible_consistent_programs": 6,
+        "visible_consistent_programs": 6
+      },
+      "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00009": {
+        "any_hidden_correct": true,
+        "hidden_correct_visible_consistent_programs": 3,
+        "visible_consistent_programs": 3
+      },
+      "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00010": {
+        "any_hidden_correct": true,
+        "hidden_correct_visible_consistent_programs": 9,
+        "visible_consistent_programs": 9
+      },
+      "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00011": {
+        "any_hidden_correct": true,
+        "hidden_correct_visible_consistent_programs": 3,
+        "visible_consistent_programs": 3
+      },
+      "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00012": {
+        "any_hidden_correct": true,
+        "hidden_correct_visible_consistent_programs": 2,
+        "visible_consistent_programs": 2
+      },
+      "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00013": {
+        "any_hidden_correct": true,
+        "hidden_correct_visible_consistent_programs": 5,
+        "visible_consistent_programs": 5
+      },
+      "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00014": {
+        "any_hidden_correct": true,
+        "hidden_correct_visible_consistent_programs": 3,
+        "visible_consistent_programs": 3
+      },
+      "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00015": {
+        "any_hidden_correct": true,
+        "hidden_correct_visible_consistent_programs": 3,
+        "visible_consistent_programs": 3
+      },
+      "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00016": {
+        "any_hidden_correct": true,
+        "hidden_correct_visible_consistent_programs": 9,
+        "visible_consistent_programs": 9
+      },
+      "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00017": {
+        "any_hidden_correct": true,
+        "hidden_correct_visible_consistent_programs": 2,
+        "visible_consistent_programs": 2
+      },
+      "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00018": {
+        "any_hidden_correct": true,
+        "hidden_correct_visible_consistent_programs": 6,
+        "visible_consistent_programs": 6
+      },
+      "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00019": {
+        "any_hidden_correct": true,
+        "hidden_correct_visible_consistent_programs": 3,
+        "visible_consistent_programs": 3
+      },
+      "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00020": {
+        "any_hidden_correct": true,
+        "hidden_correct_visible_consistent_programs": 1,
+        "visible_consistent_programs": 1
+      },
+      "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00021": {
+        "any_hidden_correct": true,
+        "hidden_correct_visible_consistent_programs": 2,
+        "visible_consistent_programs": 2
+      },
+      "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00022": {
+        "any_hidden_correct": true,
+        "hidden_correct_visible_consistent_programs": 6,
+        "visible_consistent_programs": 6
+      },
+      "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics/00023": {
+        "any_hidden_correct": true,
+        "hidden_correct_visible_consistent_programs": 6,
+        "visible_consistent_programs": 6
+      }
+    },
+    "tasks_with_any_hidden_correct_visible_consistent_program": 24
+  },
+  "report_only_paired_inference": {
+    "affects_gate": false,
+    "oracle": {
+      "direct_logical": {
+        "bootstrap_resamples": 10000,
+        "bootstrap_seed": 2026140907,
+        "control_only": 0,
+        "control_successes": 0,
+        "discordant": 0,
+        "effect": 0.0,
+        "one_sided_exact_mcnemar_p": 1.0,
+        "paired_bootstrap_95_interval": [
+          0.0,
+          0.0
+        ],
+        "report_only": true,
+        "rows": 24,
+        "treatment_only": 0,
+        "treatment_successes": 0
+      },
+      "direct_sampled": {
+        "bootstrap_resamples": 10000,
+        "bootstrap_seed": 2026140906,
+        "control_only": 0,
+        "control_successes": 0,
+        "discordant": 0,
+        "effect": 0.0,
+        "one_sided_exact_mcnemar_p": 1.0,
+        "paired_bootstrap_95_interval": [
+          0.0,
+          0.0
+        ],
+        "report_only": true,
+        "rows": 24,
+        "treatment_only": 0,
+        "treatment_successes": 0
+      },
+      "name_only": {
+        "bootstrap_resamples": 10000,
+        "bootstrap_seed": 2026140904,
+        "control_only": 0,
+        "control_successes": 0,
+        "discordant": 0,
+        "effect": 0.0,
+        "one_sided_exact_mcnemar_p": 1.0,
+        "paired_bootstrap_95_interval": [
+          0.0,
+          0.0
+        ],
+        "report_only": true,
+        "rows": 24,
+        "treatment_only": 0,
+        "treatment_successes": 0
+      },
+      "shuffled": {
+        "bootstrap_resamples": 10000,
+        "bootstrap_seed": 2026140905,
+        "control_only": 0,
+        "control_successes": 0,
+        "discordant": 0,
+        "effect": 0.0,
+        "one_sided_exact_mcnemar_p": 1.0,
+        "paired_bootstrap_95_interval": [
+          0.0,
+          0.0
+        ],
+        "report_only": true,
+        "rows": 24,
+        "treatment_only": 0,
+        "treatment_successes": 0
+      }
+    },
+    "selected": {
+      "direct_logical": {
+        "bootstrap_resamples": 10000,
+        "bootstrap_seed": 2026140807,
+        "control_only": 0,
+        "control_successes": 0,
+        "discordant": 0,
+        "effect": 0.0,
+        "one_sided_exact_mcnemar_p": 1.0,
+        "paired_bootstrap_95_interval": [
+          0.0,
+          0.0
+        ],
+        "report_only": true,
+        "rows": 24,
+        "treatment_only": 0,
+        "treatment_successes": 0
+      },
+      "direct_sampled": {
+        "bootstrap_resamples": 10000,
+        "bootstrap_seed": 2026140806,
+        "control_only": 0,
+        "control_successes": 0,
+        "discordant": 0,
+        "effect": 0.0,
+        "one_sided_exact_mcnemar_p": 1.0,
+        "paired_bootstrap_95_interval": [
+          0.0,
+          0.0
+        ],
+        "report_only": true,
+        "rows": 24,
+        "treatment_only": 0,
+        "treatment_successes": 0
+      },
+      "name_only": {
+        "bootstrap_resamples": 10000,
+        "bootstrap_seed": 2026140804,
+        "control_only": 0,
+        "control_successes": 0,
+        "discordant": 0,
+        "effect": 0.0,
+        "one_sided_exact_mcnemar_p": 1.0,
+        "paired_bootstrap_95_interval": [
+          0.0,
+          0.0
+        ],
+        "report_only": true,
+        "rows": 24,
+        "treatment_only": 0,
+        "treatment_successes": 0
+      },
+      "shuffled": {
+        "bootstrap_resamples": 10000,
+        "bootstrap_seed": 2026140805,
+        "control_only": 0,
+        "control_successes": 0,
+        "discordant": 0,
+        "effect": 0.0,
+        "one_sided_exact_mcnemar_p": 1.0,
+        "paired_bootstrap_95_interval": [
+          0.0,
+          0.0
+        ],
+        "report_only": true,
+        "rows": 24,
+        "treatment_only": 0,
+        "treatment_successes": 0
+      }
+    }
+  },
+  "schema_version": 1,
+  "selected_accuracy_gain": {
+    "direct_logical": 0.0,
+    "direct_sampled": 0.0,
+    "name_only": 0.0,
+    "shuffled": 0.0
+  },
+  "selected_successes": {
+    "direct_logical": 0,
+    "direct_sampled": 0,
+    "materialized": 0,
+    "name_only": 0,
+    "shuffled": 0
+  },
+  "visible_selection_sha256": "a62bd73ea2695b964f5dec5b98172bc82733c2b548b97fc93dd7f9ad05704a03"
+}

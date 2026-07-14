@@ -339,6 +339,31 @@ after later invocations were complete. Hidden scoring and benchmark access
 remained sealed. Record this as terminal instrument failure, not capability
 evidence; a fresh-identity successor is required.
 
+## Replay-hardened tokenizer-EOS residual result (2026-07-14)
+
+[qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay](../../experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/reports/report.md)
+supplies the clean adjudication. The fresh successor excluded every parent
+function, identity, prompt/token rendering, and seed domain; passed independent
+implementation review; and crossed separate calibration, mechanics-lock, and
+visible-publication CI boundaries. Calibration replicated the interface
+(48/48 in both no-think tokenizer-EOS cells; all HF-EOS controls 0/48), and
+transport was 24/24 exact/parse with zero caps. All 4,056 mechanics outputs and
+the repaired five-stage replay authenticated. Generation itself was healthy:
+parse was 99.78% direct, 99.13% materialized, 99.83% name-only, and 98.78%
+shuffled, with zero cap contacts and no direct-pool exhaustion.
+
+The scientific result is a clean negative. Materialized, name-only, shuffled,
+sampled-token-matched direct, and logical-model-token-matched direct each had
+0/24 deployable success **and 0/24 oracle proposal coverage**. This is not a
+selector or task-solvability artifact: exhaustive CPU evaluation of all 13,824
+programs found 88 visible-consistent, hidden-correct programs, 1--9 on every
+task, for 24/24 coverage. Under this depth-three DSL and frozen answer seam,
+all-candidate semantic materialization did not move correct residual programs
+into Qwen3.5-4B's proposal support. Retire this prompt mechanism; future
+residual/Jacobian work must change the proposal-formation mechanism and show a
+forward causal coverage gain over matched sampling, not merely a readable
+coordinate, a looser selector, or more of the same prompt.
+
 ## Materialized residual mechanics incident (2026-07-13)
 
 [qwen35_4b_materialized_residual_sibling_search](../../experiments/qwen35_4b_materialized_residual_sibling_search/reports/report.md)

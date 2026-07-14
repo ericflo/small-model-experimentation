@@ -183,3 +183,27 @@ Created as a new experiment scaffold.
 - Visible analysis read no hidden or benchmark file. Hidden scoring remains
   unauthorized until this exact visible checkpoint is committed, pushed, and
   green in both workflows.
+
+## Hidden scoring and terminal decision
+
+- Visible checkpoint commit `5bce0231` passed exact workflows `29341369041`
+  and `29341369091`. Invoked the sealed `score-hidden` stage once; it
+  authenticated that exact commit and visible-selection SHA before opening the
+  fresh key. No generation call occurred.
+- Terminal decision is
+  `TOKENIZER_EOS_MATERIALIZED_RESIDUAL_LARGE_EFFECT_PILOT_FAIL`. Selected
+  success was 0/24 for materialized, name-only, shuffled, sampled-token-matched
+  direct, and logical-model-token-matched direct.
+- Oracle proposal coverage was also 0/24 for every arm; every materialized
+  gain was 0.0 and materialized first-operation support was empty. The result
+  therefore cannot be repaired by changing only the visible selector.
+- Exhaustive CPU evaluation of all 13,824 programs found 1--9
+  visible-consistent, hidden-correct programs per task, 88 total, and covered
+  24/24 tasks. This separates proposal-distribution failure from task
+  impossibility.
+- Hidden-result SHA-256 is
+  `71090626bcea3f8fb0ef1d3b802f2535107bfba6419a0056c3fae7bb5f1245a6`.
+  The authorized stage read only the fresh ciphertext/key, read no benchmark,
+  and made no model request. Visible publication authorization binds file-byte
+  SHA-256 `c64dd163...c965ed`; hidden scoring separately records canonical-
+  object digest `a62bd73e...04a03`.

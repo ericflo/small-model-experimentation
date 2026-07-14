@@ -587,6 +587,23 @@ failure: it strengthens the local interface result but leaves residual
 capability unadjudicated. A fresh successor must distinguish one-time temporal
 authorization from later immutable-decision replay.
 
+The replay-hardened fresh successor now closes that uncertainty in
+[qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay](../experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/reports/report.md).
+It replicated calibration (48/48 in both no-think tokenizer-EOS cells; all
+HF-EOS controls 0/48), passed transport 24/24, authenticated all 4,056 outputs,
+and cleared the generation ABI with 98.78--99.83% parse and zero cap contacts.
+The result is nevertheless terminal negative: materialized, name-only,
+shuffled, sampled-token-matched direct, and logical-model-token-matched direct
+all achieved 0/24 selected success and 0/24 oracle proposal coverage. Exhaustive
+CPU search found 88 visible-consistent, hidden-correct programs and covered all
+24 tasks, so this is proposal-distribution failure rather than interface,
+selector, or task failure. **A reliable answer-commit seam does not expose a
+residual synthesis capability.** Retire this semantic-materialization prompt.
+Any J-space continuation must earn a task-held-out correctness readout beyond
+ordinary and equal-width non-J controls and then a forward causal increase in
+correct-proposal coverage over matched sampling; a readable coordinate alone
+does not install or elicit capability.
+
 **Exact-token universal dose interpolation exposes a narrow answer-commit seam
 (2026-07-13, local mechanism evidence).** The contamination-free
 [qwen35_4b_universal_mid_density_token_match](../experiments/qwen35_4b_universal_mid_density_token_match/reports/report.md)
