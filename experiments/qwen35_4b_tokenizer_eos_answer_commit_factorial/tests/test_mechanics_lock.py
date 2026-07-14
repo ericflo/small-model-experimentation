@@ -181,6 +181,30 @@ class MechanicsLockTests(unittest.TestCase):
                         calibration_decision=self.decision,
                         inputs=self.inputs,
                     )
+                for arm, sampling in value["sampling"].items():
+                    with self.subTest(arm=arm, field="n"):
+                        mutated = copy.deepcopy(value)
+                        mutated["sampling"][arm]["n"] = True
+                        with self.assertRaisesRegex(RuntimeError, "boundary"):
+                            mechanics_lock.validate_mechanics_lock_value(
+                                mutated,
+                                calibration_lock=calibration,
+                                calibration_decision=self.decision,
+                                inputs=self.inputs,
+                            )
+                    for field, field_value in sampling.items():
+                        if type(field_value) is not bool:
+                            continue
+                        with self.subTest(arm=arm, field=field):
+                            mutated = copy.deepcopy(value)
+                            mutated["sampling"][arm][field] = int(field_value)
+                            with self.assertRaisesRegex(RuntimeError, "boundary"):
+                                mechanics_lock.validate_mechanics_lock_value(
+                                    mutated,
+                                    calibration_lock=calibration,
+                                    calibration_decision=self.decision,
+                                    inputs=self.inputs,
+                                )
 
     def test_hidden_authorization_exact_compares_visible_reanalysis(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

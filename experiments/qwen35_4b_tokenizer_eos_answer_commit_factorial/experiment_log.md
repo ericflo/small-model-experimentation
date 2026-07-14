@@ -141,15 +141,23 @@
   receipt is still a separate release gate before the mechanics lock.
 - After the round-six report and receipt were committed, pushed, and green, the
   lock-only launcher failed closed before writing a lock because the
-  recomputed calibration decision contained an in-memory tuple where its
-  canonical JSON receipt contained a list. No mechanics payload, model, or GPU
-  call occurred.
+  recomputed calibration decision retained 32 integer dictionary keys where
+  canonical JSON requires string object keys; there were zero tuple/list
+  differences. No mechanics payload, model, or GPU call occurred.
 - JSON-normalized the recomputed calibration decision before recursive exact-
   typed comparison, retaining Boolean/integer rejection. The actual frozen
   decision now reauthenticates model-free. This reviewed-code change invalidates
   the earlier release for lock purposes; a fresh exact-SHA rereview and updated
   canonical receipt are required before another lock attempt. The suite passes
   140/140.
+- Round seven confirmed the real decision path, 20/20 typed aliases, four
+  semantic mutations, and a complete read-only prospective lock build, then
+  returned `HOLD_IMPLEMENTATION`: ordinary equality in durable sampling-plan
+  validation accepted 30/30 integer/Boolean aliases across the five real arms.
+- Replaced sampling-plan equality with recursive exact JSON equality and added
+  bidirectional real-plan regressions for all 30 aliases. Mechanics data,
+  model/GPU calls, and protected reads remain zero pending another exact-SHA
+  review and replacement receipt.
 
 ## Scaffold
 

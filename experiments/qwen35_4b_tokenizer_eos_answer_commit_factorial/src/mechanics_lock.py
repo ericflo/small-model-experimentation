@@ -369,8 +369,10 @@ def validate_mechanics_lock_value(
         or value["calibration_lock_sha256"] != sha256_file(CALIBRATION_LOCK)
         or value["calibration_decision_sha256"] != sha256_file(CALIBRATION_DECISION)
         or value["selected_interface"] != winner
-        or value["sampling"]
-        != _normalized(mechanics_sampling_plan(calibration_decision, inputs))
+        or not exact_json_equal(
+            value["sampling"],
+            _normalized(mechanics_sampling_plan(calibration_decision, inputs)),
+        )
         or value["invocation_order"] != list(MECHANICS_INVOCATION_ORDER)
         or value["frozen_mechanics_blobs"]
         != calibration_lock["frozen_mechanics_blobs"]

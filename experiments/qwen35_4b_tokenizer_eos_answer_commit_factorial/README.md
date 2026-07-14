@@ -1,6 +1,6 @@
 # Qwen3.5-4B Tokenizer-EOS Answer Commit Factorial
 
-**Status:** in-progress · since 2026-07-14 · `PASS_DESIGN` + calibration `PASS_IMPLEMENTATION`; fresh calibration: tokenizer-EOS-only interface qualified; post-PASS mechanics lock-entry mismatch repaired, exact-commit rereview pending
+**Status:** in-progress · since 2026-07-14 · `PASS_DESIGN` + calibration `PASS_IMPLEMENTATION`; fresh calibration: tokenizer-EOS-only interface qualified; mechanics lock-boundary exact-type repairs complete, exact-commit rereview pending
 
 This fresh successor tests whether the prior strict answer-seam failure was
 caused by waiting past Qwen3.5's tokenizer chat-end token. It registers the
@@ -310,10 +310,11 @@ the mechanics lock can be published; this PASS alone does not authorize a
 model call.
 
 After that receipt was published green, the first lock-only invocation failed
-closed before creating a lock: calibration decision recomputation retained a
-tuple-valued in-memory field while the already-published canonical JSON receipt
-contained the corresponding list. The lock compared across that serialization
-boundary without first entering the JSON domain. The prospective mechanics
+closed before creating a lock: calibration decision recomputation retained 32
+integer dictionary keys while canonical JSON represented those object keys as
+strings. There were zero actual tuple/list mismatches. The lock compared across
+that serialization boundary without first entering the JSON domain. The
+prospective mechanics
 verifier now JSON-normalizes the recomputation and then applies recursive exact-
 typed comparison, preserving rejection of Boolean/integer aliases. A direct
 model-free recomputation now authenticates the frozen
@@ -321,6 +322,16 @@ model-free recomputation now authenticates the frozen
 model, or GPU call occurred. Because this changes reviewed mechanics code, a
 fresh exact-commit implementation review and replacement receipt are required
 before retrying the lock. The model-free suite passes 140/140.
+
+Round seven verified that real decision repair, rejecting 20/20 typed aliases
+and four semantic mutations, and completed a read-only prospective lock build.
+It nevertheless held on the next exact-type boundary: durable sampling-plan
+validation used ordinary Python equality, accepting five `n=1` to `true`
+aliases and 25 Boolean-to-integer aliases across the five arms. Sampling-plan
+validation now uses recursive exact JSON equality. The real-plan regression
+mutates both directions for all 30 fields and requires every case to fail.
+No mechanics payload, model, or GPU call occurred; another exact-commit review
+and replacement receipt remain required.
 
 ## Interpretation
 
