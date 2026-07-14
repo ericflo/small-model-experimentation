@@ -42,6 +42,60 @@ class AnswerCommitProtocolTests(unittest.TestCase):
         self.assertFalse(result.strict_exact)
         self.assertEqual(result.content_token_ids, (10, 11, 198))
 
+    def test_all_pair_gate_accepts_tokenizer_stop_prefix(self) -> None:
+        result = protocol.authenticate_boundary_pair(
+            [10, 11, 248046],
+            [10, 11, 248046, 198, 248044],
+            tokenizer_event="stop",
+            hf_event="stop",
+            cap=24,
+        )
+        self.assertTrue(result.valid_pair)
+        self.assertEqual(result.compared_tokens, 3)
+
+    def test_all_pair_gate_accepts_early_hf_event(self) -> None:
+        result = protocol.authenticate_boundary_pair(
+            [10, 248044, 11, 248046],
+            [10, 248044],
+            tokenizer_event="stop",
+            hf_event="stop",
+            cap=24,
+        )
+        self.assertTrue(result.valid_pair)
+        self.assertEqual(result.compared_tokens, 2)
+
+    def test_all_pair_gate_authenticates_cap_pairs(self) -> None:
+        result = protocol.authenticate_boundary_pair(
+            [10, 11, 12],
+            [10, 11, 12],
+            tokenizer_event="length",
+            hf_event="length",
+            cap=3,
+        )
+        self.assertTrue(result.valid_pair)
+
+    def test_all_pair_gate_rejects_prefix_divergence(self) -> None:
+        result = protocol.authenticate_boundary_pair(
+            [10, 11, 248046],
+            [10, 12, 248044],
+            tokenizer_event="stop",
+            hf_event="stop",
+            cap=24,
+        )
+        self.assertFalse(result.valid_pair)
+        self.assertEqual(result.failure, "sampled_prefix_divergence")
+
+    def test_all_pair_gate_rejects_short_length_claim(self) -> None:
+        result = protocol.authenticate_boundary_pair(
+            [10, 11],
+            [10, 11],
+            tokenizer_event="length",
+            hf_event="length",
+            cap=3,
+        )
+        self.assertFalse(result.valid_pair)
+        self.assertEqual(result.failure, "tokenizer_short_output_relabeled_length")
+
 
 if __name__ == "__main__":
     unittest.main()

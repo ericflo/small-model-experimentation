@@ -32,11 +32,19 @@ transport, and mechanics artifacts.
 - Thought generation retains its historical HF-EOS/cap semantics.
 - Malformed traces test early, repeated/interior, missing, and extra pre-commit
   behavior.
+- Every boundary pair is an authenticated causal unit through its earliest
+  stop or cap. Any divergence terminates the entire comparison; paired numeric
+  seeds alone are explicitly insufficient.
+- One persisted thought transaction per task is reused across boundary and
+  prefix cells, with all naturally emitted answer content discarded before the
+  forced answer stage.
 
 ## Expected information gain
 
 - If tokenizer EOS qualifies and HF EOS does not, the answer ABI failure is a
   causal termination-boundary mismatch.
+- If both matched cells qualify, the tokenizer interface may be usable but the
+  termination-boundary claim is unsupported.
 - If neither qualifies, retire this materialized-residual generation branch;
   do not try another cap or parser tweak.
 - If an interface qualifies, disjoint mechanics can finally adjudicate

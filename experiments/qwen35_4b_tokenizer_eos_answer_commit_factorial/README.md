@@ -1,6 +1,6 @@
 # Qwen3.5-4B Tokenizer-EOS Answer Commit Factorial
 
-**Status:** in-progress · since 2026-07-14 · model-free protocol smoke complete; fresh construction and adversarial design review still required before any live call
+**Status:** in-progress · since 2026-07-14 · first adversarial design review held; prospective remediation frozen; no construction or model call
 
 This fresh successor tests whether the prior strict answer-seam failure was
 caused by waiting past Qwen3.5's tokenizer chat-end token. It registers the
@@ -43,10 +43,17 @@ This is an interface hypothesis, not yet a capability hypothesis.
   baseline.
 - Dataset/task source: fresh procedural exact-depth-three list transforms;
   never `benchmarks/`.
-- Fresh splits: 48 known-answer calibration tasks and disjoint residual-
-  mechanics tasks, with new functions, task IDs, record IDs, and seed domain.
+- Frozen fresh splits: 48 known-answer calibration tasks and 24 disjoint
+  residual-mechanics tasks, with new functions, task IDs, record IDs, token
+  sequences, and seed domain.
 - Factorial: answer boundary {first tokenizer EOS, HF model EOS control} x
   thinking {off, forced close at 512} x answer prefix {freeform, `PROGRAM:`}.
+- All 192 boundary pairs must share prompts, answer seeds, persisted thought
+  IDs, request adjacency, and sampled token prefix through the earliest stop or
+  cap; one mismatch terminates the experiment before qualification.
+- Every task has one persisted thought transaction reused by all four thinking
+  answer cells. Natural post-close answer content is discarded and cannot
+  bypass the answer-stage comparison.
 - Answer-stage tokenizer EOS never applies to thought generation.
 - Calibration gates: >=44/48 strict exact echoes, >=44/48 parses, <=2/48
   answer-cap contacts, plus >=22/24 exact/parse and <=1/24 cap contact in each
@@ -56,7 +63,9 @@ This is an interface hypothesis, not yet a capability hypothesis.
 - Boundary controls: matched HF EOS, first-stop uniqueness, early/interior/
   missing tokenizer EOS, extra pre-commit bytes, and exact stop/token/cost
   receipt authentication.
-- Conditional mechanics controls: materialized state, name-only, shuffled
+- Conditional mechanics is fully frozen at 24 tasks, 24 candidates per suffix
+  arm, and a 96-row-per-task direct ceiling. Controls are materialized state,
+  name-only, shuffled
   materialized state/target, candidate-blind direct samples, exhaustive CPU
   ceiling, and taskwise sampled/logical-token matched-compute prefixes.
 - Primary capability metric if opened: hidden exact accuracy of a frozen
@@ -66,8 +75,10 @@ This is an interface hypothesis, not yet a capability hypothesis.
   calibration decision and second winner-bound lock; hidden labels remain
   sealed until a committed-green visible-selection receipt.
 
-The paired no-think prefix cells share tasks and seeds and are not independent
-replications.
+The prefix cells share tasks and seed derivation and are paired conditions, not
+independent replications. Only tokenizer-pass/HF-fail in the selected matched
+cell supports a causal termination-boundary claim; a both-pass result can
+authorize interface use but not boundary causality.
 
 ## Run
 
@@ -91,7 +102,9 @@ matched HF boundary preserves tokenizer EOS/newline as strict answer content
 and therefore fails exactness. Early stops, interior-plus-terminal stops,
 missing stops, and extra pre-commit bytes all fail their registered contract.
 
-No model or capability result exists.
+The first independent review returned `HOLD_DESIGN`; its four blockers are now
+addressed prospectively in the config and preregistration. The remediation has
+not yet passed independent rereview. No model or capability result exists.
 
 ## Interpretation
 

@@ -1,36 +1,162 @@
-schema_version: 1
-model: Qwen/Qwen3.5-4B
-revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
-backend: vllm
-termination:
-  hf_model_eos_id: 248044
-  tokenizer_eos_id: 248046
-  tokenizer_eos_scope: answer_stage_only
-  commit_rule: first_registered_stop_token
-calibration:
-  rows: 48
-  answer_max_tokens: 24
+schema_version: 2
+
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+  dtype: bfloat16
+  backend: vllm
+  vllm_version: 0.24.0+cu129
+
+identity:
+  experiment_id: qwen35_4b_tokenizer_eos_answer_commit_factorial
+  task_namespace: tokenizer-eos-answer-commit-factorial-v1
+  request_namespace: tokenizer-eos-answer-commit-factorial-v1
+
+seeds:
+  construction: 2026140700
+  calibration: 2026140701
+  mechanics: 2026140702
+  direct_pool: 2026140703
+  bootstrap: 2026140704
+  shuffle: 2026140705
+
+data:
+  calibration_tasks: 48
+  mechanics_tasks: 24
+  tasks_per_balance_block: 24
+  calibration_arity_rows:
+    2: 24
+    3: 24
+  mechanics_live_first_operation_strata:
+    1: 8
+    2: 8
+    3: 4
+    4: 4
+  visible_examples: 8
+  hidden_examples: 8
+  unlabeled_probe_inputs: 16
+  input_min_length: 4
+  input_max_length: 8
+  input_value_min: -9
+  input_value_max: 9
+  common_panel_per_length: 8
+  max_input_draws: 10000
+  max_visible_attempts: 12
+  candidates_per_task: 24
+  suffixes_per_first_operation: 24
+  direct_master_pool_per_task: 96
+
+interface:
+  boundary_pair_count: 192
+  answer_boundaries:
+    tokenizer_eos:
+      stop_token_id: 248046
+      answer_stage_only: true
+    hf_model_eos_control:
+      stop_token_id: 248044
+      answer_stage_only: true
+  thinking_policies: [no_think, think512]
+  answer_prefixes: [freeform, program_slot]
+  answer_prefix_text: "PROGRAM:"
+  output_arities: [2, 3]
+  grammar: "PROGRAM: <alias_1> | ... | <alias_k>; k equals registered output arity"
   thinking_budget: 512
-  exact_echo_floor: 44
-  parse_floor: 44
-  answer_cap_contact_ceiling: 2
-  per_arity_rows: 24
-  per_arity_exact_floor: 22
-  per_arity_parse_floor: 22
-  per_arity_cap_ceiling: 1
-factorial:
-  boundaries:
-    - tokenizer_eos
-    - hf_model_eos_control
-  thinking:
-    - off
-    - budget_512
-  answer_prefixes:
-    - freeform
-    - PROGRAM:
-selection_priority:
-  - tokenizer_eos_no_think_PROGRAM
-  - tokenizer_eos_no_think_freeform
-  - tokenizer_eos_think512_PROGRAM
-  - tokenizer_eos_think512_freeform
-live_authorization: sealed_pending_fresh_construction_and_design_review
+  sampled_answer_cap: 24
+  temperature: 0.6
+  top_p: 0.95
+  top_k: 20
+  n: 1
+  unconstrained_sampling: true
+  grammar_mask: false
+  logit_bias: false
+  teacher_forced_answer_tokens: false
+  one_shared_thought_transaction_per_task: true
+  paired_answer_seed: true
+  paired_request_adjacency: true
+  all_pair_prefix_authentication: true
+  boundary_pair_divergence_terminal: BOUNDARY_PAIRING_INVALID
+  fixed_tokenizer_winner_priority:
+    - tokenizer_eos_no_think_program_slot
+    - tokenizer_eos_no_think_freeform
+    - tokenizer_eos_think512_program_slot
+    - tokenizer_eos_think512_freeform
+  calibration:
+    rows_per_cell: 48
+    total_answer_requests: 384
+    shared_thought_requests: 48
+    exact_echo_successes_min: 44
+    parse_successes_min: 44
+    answer_cap_contacts_max: 2
+    each_arity_rows: 24
+    each_arity_exact_successes_min: 22
+    each_arity_parse_successes_min: 22
+    each_arity_answer_cap_contacts_max: 1
+  transport:
+    rows: 24
+    suffix_arity_two_rows: 12
+    direct_arity_three_rows: 12
+    exact_echo_successes_min: 22
+    parse_successes_min: 22
+    answer_cap_contacts_max: 1
+    each_arity_exact_successes_min: 11
+    each_arity_parse_successes_min: 11
+
+generation:
+  max_model_len: 4096
+  max_num_seqs: 64
+  max_num_batched_tokens: 16384
+  enable_prefix_caching: false
+  cudagraph_capture_sizes: [1, 2, 4, 8, 16, 32, 64]
+  logprobs_mode: raw_logprobs
+
+mechanics:
+  arms: [materialized, name_only, shuffled, direct]
+  suffix_rows_per_task: 24
+  direct_master_pool_per_task: 96
+  invocation_order: [transport, direct, materialized, name_only, shuffled]
+  matched_direct_prefixes: [sampled_token_first_over, logical_model_token_first_over]
+  selector: visible-probe-consensus-v1
+  all_generation_parse_rate_min: 0.90
+  all_generation_answer_cap_contact_rate_max: 0.05
+  materialized_selected_accuracy_min: 0.25
+  materialized_selected_successful_tasks_min: 6
+  selected_accuracy_gain_vs_name_min: 0.125
+  selected_accuracy_gain_vs_shuffled_min: 0.125
+  selected_accuracy_gain_vs_direct_sampled_min: 0.125
+  selected_accuracy_gain_vs_direct_logical_min: 0.125
+  materialized_oracle_coverage_min: 0.35
+  oracle_coverage_gain_vs_name_min: 0.125
+  oracle_coverage_gain_vs_shuffled_min: 0.125
+  oracle_coverage_gain_vs_direct_sampled_min: 0.125
+  oracle_coverage_gain_vs_direct_logical_min: 0.125
+  materialized_oracle_first_operation_support_min: 8
+  inferential_unit: task
+  inferential_scope: large_effect_pilot
+  exact_tests: report_only
+  bootstrap_resamples: 10000
+  direct_pool_exhaustion_allowed: false
+  exhaustive_depth_three_programs: 13824
+
+outcomes:
+  boundary_pairing_invalid: BOUNDARY_PAIRING_INVALID
+  tokenizer_only_interface: TOKENIZER_EOS_ONLY_INTERFACE_QUALIFIED
+  both_interfaces: BOTH_BOUNDARIES_QUALIFY_NO_UNIQUE_BOUNDARY_EFFECT
+  hf_only_interface: HF_ONLY_CONTROL_QUALIFIES_TOKENIZER_FAIL
+  neither_interface: NO_VALID_TOKENIZER_EOS_ANSWER_SEAM
+  transport_fail: SELECTED_INTERFACE_DID_NOT_TRANSPORT
+  mechanics_abi_fail: MECHANICS_INTERFACE_NONTRANSPORT
+  capability_pass: TOKENIZER_EOS_MATERIALIZED_RESIDUAL_LARGE_EFFECT_PILOT_PASS
+  capability_fail: TOKENIZER_EOS_MATERIALIZED_RESIDUAL_LARGE_EFFECT_PILOT_FAIL
+
+boundaries:
+  calibration_disjoint_from_mechanics: true
+  calibration_reads_mechanics: false
+  mechanics_reads_hidden_before_visible_selection_receipt: false
+  construction_collision_receipts_required: true
+  hidden_files_read: []
+  mechanics_files_read_by_calibration: []
+  qualification_files_read: []
+  confirmation_files_read: []
+  benchmark_files_read: []
+  cheap_ranking_reopened: false
+  live_authorization: sealed_pending_design_pass_fresh_construction_and_implementation_lock

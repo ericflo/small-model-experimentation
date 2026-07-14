@@ -19,7 +19,9 @@ from protocol import (  # noqa: E402
     MODEL_ID,
     MODEL_REVISION,
     TOKENIZER_EOS_ID,
+    boundary_pair_smoke_cases,
     smoke_cases,
+    validate_boundary_pair_smoke_cases,
     validate_smoke_cases,
 )
 
@@ -31,8 +33,10 @@ def _canonical_bytes(value: object) -> bytes:
 def run_smoke() -> dict[str, object]:
     cases = smoke_cases()
     validate_smoke_cases(cases)
+    pair_cases = boundary_pair_smoke_cases()
+    validate_boundary_pair_smoke_cases(pair_cases)
     payload: dict[str, object] = {
-        "schema_version": 1,
+        "schema_version": 2,
         "stage": "model_free_protocol_smoke",
         "model": MODEL_ID,
         "revision": MODEL_REVISION,
@@ -46,6 +50,11 @@ def run_smoke() -> dict[str, object]:
         "cases": {
             label: dataclasses.asdict(result) for label, result in cases.items()
         },
+        "boundary_pair_cases": {
+            label: dataclasses.asdict(result)
+            for label, result in pair_cases.items()
+        },
+        "boundary_pair_policy": "all_pairs_through_earliest_stop_or_cap",
         "decision": "MODEL_FREE_COMMIT_PROTOCOL_VALID",
     }
     payload["content_sha256"] = hashlib.sha256(_canonical_bytes(payload)).hexdigest()

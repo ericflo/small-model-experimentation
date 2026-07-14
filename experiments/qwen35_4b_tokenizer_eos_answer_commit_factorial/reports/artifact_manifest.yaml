@@ -10,7 +10,8 @@ reproducibility:
 local_receipts:
   model_free_protocol_smoke:
     path: "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/runs/smoke/summary.json"
-    sha256: "e73a9396066b92276f67fe6766195e294383f5a27346065e75ea848af98f486a"
+    sha256: "25a48f16b04153786277bed2c6ac751434bf3c559fe1d7e2df4abff450b1bea9"
 notes: >-
-  Model-free protocol scaffold only. No task construction, model call, sampled
-  output, calibration, mechanics, protected-label, or benchmark read exists.
+  Model-free protocol and all-pair smoke only. No task construction, model
+  call, sampled output, calibration, mechanics, protected-label, or benchmark
+  read exists.

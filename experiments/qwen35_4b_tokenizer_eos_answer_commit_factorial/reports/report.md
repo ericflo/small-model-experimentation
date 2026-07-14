@@ -21,12 +21,16 @@ tokenizer-EOS interface.
 
 The model-free synthetic smoke accepts the clean tokenizer-EOS trace and
 rejects the HF-boundary content mismatch, early/interior/missing stops, and
-extra pre-commit bytes. Model calls: zero.
+extra pre-commit bytes. Its all-pair primitive accepts authenticated tokenizer-
+first, HF-first, and shared-cap traces and rejects prefix divergence and short
+length claims. Model calls: zero.
 
 ## Controls
 
-Matched HF EOS, malformed stop traces, strict token content, fresh identities,
-same backend, and conditional matched-compute mechanics are preregistered.
+Matched HF EOS, all-192-pair fail-closed authentication, one persisted thought
+per task, malformed stop traces, strict arity-parametric token content, fresh
+identities, same backend, and fully frozen conditional matched-compute
+mechanics are preregistered.
 
 ## Oracle Versus Deployable Evidence
 
@@ -35,8 +39,9 @@ oracle ceilings remain sealed.
 
 ## Interpretation
 
-The contract is precise enough to construct and adversarially review. It does
-not establish a live interface or capability gain.
+The first independent review returned `HOLD_DESIGN`; the contract now freezes
+its requested remediation and awaits rereview at an exact pushed commit. It
+does not establish a live interface or capability gain.
 
 ## Next Experiments
 
