@@ -1,6 +1,6 @@
 # State-Formation Analysis Recovery
 
-**Status:** in-progress · since 2026-07-13 · recovery smoke passed with results unopened; publish this frozen consumer before completing the two remaining LoRA trigger evaluations
+**Status:** in-progress · since 2026-07-13 · recovery smoke published and green; all three LoRA trigger evaluations complete; producer checkpoint publication precedes recovered analysis
 
 This experiment recovers the exact frozen v11 state-formation analyzer through one source-bound
 path seam, without changing any LoRA/full-rank scientific logic or inspecting a result value.
@@ -105,9 +105,13 @@ The non-result smoke passed at file SHA-256
 the receipt records zero result rows, benchmark paths, sealed contrast rows, and scientific analysis
 calls.
 
-No scientific result has been inspected. Seed 7411's trigger evaluation is preserved in the
-producer; seeds 7412 and 7413 and aggregate analysis remain pending. The frozen smoke proves only
-path and source-contract mechanics.
+No aggregate scientific result has been classified or inspected by this recovery. All three trigger
+evaluations are now preserved in the producer; recovered aggregate analysis remains pending until
+the seed-7413 checkpoint is published and both workflows are green. A producer-side metadata
+projection accidentally exposed seed-7412 per-split values before seed 7413, but did not invoke an
+analyzer, classification, branch, retry, source edit, or checkpoint choice; the already-fixed seed
+7413 then ran unchanged. The frozen smoke proves only path and source-contract mechanics, and the
+terminal interpretation must disclose this imperfect operator blinding.
 
 ## Interpretation
 

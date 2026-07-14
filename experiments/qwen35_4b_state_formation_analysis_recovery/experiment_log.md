@@ -46,3 +46,17 @@ Any change to the frozen config, design review, runner, source, or tests now inv
 The next licensed action is publication and green CI, followed by LoRA trigger evaluation seeds 7412
 and 7413. Running a recovery analysis phase remains prohibited until that three-seed matrix is
 complete.
+
+## 2026-07-14 — complete trigger matrix awaits publication before recovered analysis
+
+- Recovery commits `a6360cc1` and `e35e071e` passed both repository workflows before the remaining
+  producer evaluations.
+- Producer seeds 7412 and 7413 each completed once without retry, making the fixed three-seed LoRA
+  trigger matrix complete. All evaluation receipts bind exact producer source/config/checkpoints,
+  only the three trigger payloads, and zero benchmark or sealed-contrast access.
+- An overbroad producer-side metadata projection exposed seed-7412 per-split values before seed
+  7413. No recovery analyzer, classifier, branch, retry, source edit, seed choice, or checkpoint
+  choice followed; seed 7413 was already compulsory and ran unchanged. This imperfect operator
+  blinding must remain visible in the final report.
+- The frozen recovery contract is unchanged. Recovered `lora_joint` analysis remains prohibited
+  until the seed-7413 producer checkpoint is committed, pushed, and both workflows are green.

@@ -897,6 +897,31 @@ verification are authorized. After both workflows pass, run the fixed seed-7413 
 evaluation. Aggregate analysis and every conditional branch remain blocked on the complete exact
 three-seed evaluation matrix. The terminal report must disclose imperfect operator blinding.
 
+## 2026-07-14 — seed-7413 trigger completes; exact Stage-A evaluation matrix complete
+
+- Seed-7412 evaluation/deviation commit `27166420` passed both required workflows before the fixed
+  seed-7413 command began. Source v11 remained exactly `5a8ed26d…6666`, the seed/checkpoint/runner
+  were unchanged, and the sole GPU was idle.
+- The authorized seed-7413 trigger evaluation completed once, without retry, in
+  986.8842830657959 seconds. Summary file SHA-256 is `411af149…80a`, receipt identity
+  `b35b9e14…da70`, intact rows SHA-256 `d62c43a9…b30c`, and disabled rows SHA-256
+  `683156e9…6cb`; both modes contain exactly 3,072 rows.
+- The receipt strictly reopens checkpoint metadata `25936f83…fbfd`, checkpoint identity
+  `d65d5bb3…e68d`, target-cell receipt `07f91939…362b`, training barrier `6d506285…589e`, exact
+  source v11/config, and the fixed evaluation axes. It reports exact K=1 bypass, opens only
+  `validation`, `depth_extrapolation`, and `joint_holdout`, and records zero benchmark or
+  sealed-contrast access and no downstream authorization.
+- The corrected post-run projection selected metadata and row-lineage fields only; no seed-7413
+  scientific metric was printed or inspected. The prior seed-7412 visibility deviation remains
+  disclosed and does not change the frozen analysis or branch rule.
+
+## Current authorization
+
+Only seed-7413 evaluation documentation, validation, commit, push, and workflow verification are
+authorized. After both workflows are green, run the already-published recovery consumer exactly as
+`--phase lora_joint`. Its original v11 receipt alone classifies Stage A and authorizes the next
+registered branch; no conditional training, sealed contrast, or source edit is authorized before it.
+
 ## 2026-07-13 — source-v9 seed-7411 G0 stops before model load; cache proof repaired
 
 - Non-model setup commit `ff4a8b9b` passed both repository workflows before the exact seed-7411 LoRA

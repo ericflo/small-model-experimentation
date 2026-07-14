@@ -29,6 +29,12 @@ The permitted pre-result outcome passed. `RECOVERY_SMOKE_PASS` has file SHA-256
 with zero scientific rows, benchmark paths, or sealed contrast rows opened. Scientific results remain
 pending.
 
+The producer's complete three-seed LoRA trigger matrix is now present, but seed 7413 must first be
+published and pass both repository workflows. A producer-side metadata projection accidentally
+printed seed-7412 per-split values before the already-mandatory seed 7413 ran unchanged. It did not
+invoke this analyzer or alter any registered choice, but the eventual scientific interpretation
+must disclose imperfect operator blinding.
+
 ## Controls
 
 - Original v11 rejection reproduced for its own registered prefix.
@@ -50,8 +56,8 @@ LoRA/full-rank decision tree remains the sole source of a scientific verdict.
 
 ## Next Experiments
 
-None are licensed by recovery alone. Complete LoRA trigger seeds 7412 and 7413, run the original
-`lora_joint` phase through this consumer, then execute every branch it mandates.
+None are licensed by recovery alone. Publish and validate the complete producer trigger matrix, run
+the original `lora_joint` phase through this consumer, then execute every branch it mandates.
 
 ## Artifact Manifest
 

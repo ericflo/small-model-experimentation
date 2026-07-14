@@ -1,6 +1,6 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · frozen design unchanged; recovery consumer published and green; seed-7412 trigger evaluation complete; fixed seed 7413 remains mandatory before aggregate analysis
+**Status:** in-progress · since 2026-07-13 · frozen design unchanged; all three LoRA-joint trigger evaluations complete; publish seed 7413 before recovered aggregate analysis
 
 ## Current status
 
@@ -100,6 +100,16 @@ checkpoint selection, or conditional action occurred. Seed 7413 and every downst
 already fixed and remain mandatory regardless of the exposed values. The final result must disclose
 that operator blinding was imperfect; it may not use this deviation to stop, repair, or relabel the
 precommitted analysis.
+
+Seed-7413 trigger evaluation then completed once, without retry, in 986.884 seconds with exactly
+3,072 intact and 3,072 adaptation-disabled rows. Its summary identity is `b35b9e14…da70`; intact
+rows SHA-256 is `d62c43a9…b30c`, disabled rows SHA-256 is `683156e9…6cb`, and summary file SHA-256
+is `411af149…80a`. The receipt binds checkpoint `d65d5bb3…e68d`, exact source v11/config, the
+reached training barrier, and only the three preregistered trigger payloads. It records exact K=1
+bypass, zero benchmark or sealed-contrast access, and no branch authorization. Scientific values
+were not inspected. The complete three-seed trigger matrix is now present; publish this exact
+checkpoint and require both workflows green before the frozen recovery consumer runs
+`--phase lora_joint`.
 
 Historically, the integrated source-v10 review was `GO` for reviewed implementation
 `a5a494b7…6f1c4a` and full source contract `979a9012…f394b7`; the 360/360 suite and exact machine gate

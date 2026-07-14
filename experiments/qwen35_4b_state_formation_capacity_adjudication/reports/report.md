@@ -2,6 +2,17 @@
 
 ## Status
 
+**Current result-bearing status (2026-07-14):** all three fixed Stage-A LoRA-joint training cells
+and all three preregistered trigger evaluations are complete under exact source v11
+`5a8ed26d…6666`. Seed 7413 completed once without retry and records 3,072 intact plus 3,072
+adaptation-disabled rows, exact checkpoint/source/config lineage, and zero benchmark or sealed-
+contrast access. The aggregate scientific receipt is still pending: this exact seed-7413 checkpoint
+must be published and both workflows must pass before the frozen analysis-recovery consumer runs
+the original v11 `lora_joint` analyzer. Seed-7412 values were accidentally printed by an overbroad
+metadata projection before seed 7413; no classification or action followed, all remaining choices
+were already frozen, and the terminal interpretation must therefore disclose imperfect operator
+blinding.
+
 **In progress; no scientific result exists.** Preregistration, adversarial design review, and the
 frozen design are complete. Source-v10 implementation authorization is `GO` at reviewed digest
 `a5a494b7…6f1c4a` and full source contract `979a9012…f394b7`, with 360/360 source-bound tests passing.
