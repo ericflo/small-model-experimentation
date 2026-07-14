@@ -59,3 +59,22 @@ Next: commit, rebase, run the full repository check, push this design freeze to
 - No candidate training, local generation, merge, or benchmark event ran.
 
 Next: publish and CI-verify this control checkpoint, then train the frozen candidate.
+
+## 2026-07-14 — Scaffold candidate training
+
+- Began only after control commit `b8f11db6` was pushed to `main` and both GitHub
+  workflows completed successfully.
+- Independently restarted from the authenticated `close_xi` parent; did not continue
+  from or inspect capability behavior of the replay control.
+- Trained `scaffold_after_close` for the frozen 320 rows, one epoch, 40 optimizer
+  steps, seed 45, and ordinary thought/close weights 0.2. All 320 rows encoded and
+  zero skipped.
+- Completed in 291.4 wall seconds with final train loss 1.492. This loss is not
+  compared causally with replay loss because target composition differs.
+- Preserved receipt/log hashes `13ba8897...6dd0` / `ccaffa7b...99c1`.
+  External adapter weights/config hashes are `e7957d90...84618` /
+  `22859c76...2c4ce`; weight size is 169,903,320 bytes.
+- No local generation, merge, or benchmark event ran.
+
+Next: publish and CI-verify this candidate checkpoint, then consume the single frozen
+local seed 88,007 over parent, replay control, and candidate together.

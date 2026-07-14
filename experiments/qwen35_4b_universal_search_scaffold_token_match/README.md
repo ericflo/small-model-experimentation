@@ -1,6 +1,6 @@
 # Search-Scaffold Universal Curriculum
 
-**Status:** in-progress · since 2026-07-14 · replay control trained; candidate pending
+**Status:** in-progress · since 2026-07-14 · both arms trained; fresh local gate pending
 
 This experiment tests whether independently supervised, executable search substates
 compose into a bounded general reasoning procedure better than an exact-token replay
@@ -89,10 +89,14 @@ CPU feasibility passed. The deterministic source has 80 truth-audited rows over 
 surface families. The two frozen streams each contain 320 trainable rows and exactly
 286,814 forward tokens at max length 4,096, with zero skips. All 43 experiment tests
 and the staged smoke harness pass. The replay control has now trained from the
-authenticated parent on all 320 rows with
-zero skips and 40/40 updates. Its final loss is 0.4215; adapter weights SHA-256 is
-`10155232...fc538` and config SHA-256 is `373c1426...ac9b`. No candidate training,
-local capability evaluation, merge, or benchmark event has run.
+authenticated parent on all 320 rows with zero skips and 40/40 updates. Its final
+loss is 0.4215; adapter weights/config SHA-256 are `10155232...fc538` /
+`373c1426...ac9b`.
+The scaffold candidate then trained independently on all 320 rows with zero skips and
+40/40 updates. Its final loss is 1.492; adapter weights/config SHA-256 are
+`e7957d90...84618` / `22859c76...2c4ce`. Losses are not compared across the different
+target distributions. No local capability evaluation, merge, or benchmark event has
+run.
 
 ## Interpretation
 

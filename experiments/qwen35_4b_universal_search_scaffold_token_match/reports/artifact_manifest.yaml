@@ -12,20 +12,27 @@ external_artifacts:
     required_for: "fresh paired local control and conditional explicit merge"
     checksum: "weights 1015523285c3ca23eb57305a730af310aa686b16bfc17e005d2aa2d023afc538; config 373c142676eac28d0519e7f88dcb63389de6e92b500e3b9e3d7d58e1b312ac9b"
     regenerate: ".venv/bin/python experiments/qwen35_4b_universal_search_scaffold_token_match/scripts/run.py --stage train-control"
+  - name: "scaffold_after_close adapter"
+    storage: "large_artifacts/qwen35_4b_universal_search_scaffold_token_match/adapters/scaffold_after_close"
+    required_for: "fresh local candidate and conditional explicit merge"
+    checksum: "weights e7957d90bbbabda79273b00bf8d24b70229aff05d2eb348fa4283aa2e1d84618; config 22859c76a284a0c18a552aaca3e117c63f47b9dc3baeb6bedf0299cccf02c4ce"
+    regenerate: ".venv/bin/python experiments/qwen35_4b_universal_search_scaffold_token_match/scripts/run.py --stage train-candidate"
 omitted_artifacts:
   - path: "large_artifacts/qwen35_4b_universal_search_scaffold_token_match/"
-    reason: "adapters and future merged checkpoints are large and gitignored; replay control exists"
+    reason: "both adapters and future merged checkpoints are large and gitignored"
 reproducibility:
   smoke_command: "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_search_scaffold_token_match/scripts/run.py --smoke"
   full_command: "run.py --stage train-control; commit/push/verify; --stage train-candidate; commit/push/verify; --stage local; conditionally --stage merge; conditionally --stage benchmark"
   required_external_artifacts:
     - "large_artifacts/qwen35_4b_universal_close_weight_token_match/adapters/close_xi"
     - "large_artifacts/qwen35_4b_universal_search_scaffold_token_match/adapters/replay_after_close"
+    - "large_artifacts/qwen35_4b_universal_search_scaffold_token_match/adapters/scaffold_after_close"
 notes: >-
   Design frozen. Construction seed 77111 produced source 5854c218...a093; replay and
   candidate streams are c157fb13...355d and 79a8d7c9...0b90, each 320 rows and
   286814 exact forward tokens under receipt eeb12b95...e4a0f. Training seed 45,
   fresh local seed 88007, and conditional aggregate seed 78137 are frozen. Replay
   training completed at git 603b8107 with receipt 5b293eb6...5a66, loss 0.4215,
-  and zero skips. No candidate adapter, merge, local receipt, or benchmark receipt
-  exists yet.
+  and zero skips. Candidate training completed at git b8f11db6 with receipt
+  13ba8897...6dd0, loss 1.492, and zero skips. No merge, local receipt, or benchmark
+  receipt exists yet.

@@ -164,8 +164,9 @@
   adversarial review passed: both arms have 320 rows, exactly 286814 forward tokens,
   zero skips, 40 updates, and 200 identical replay positions. Train replay first,
   publish/verify it, then train the sole scaffold candidate; local failure seals the
-  benchmark. Replay training is complete (320/320 rows, zero skips, loss 0.4215,
-  weights `10155232...fc538`) and awaits its publication checkpoint.
+  benchmark. Replay (loss 0.4215, weights `10155232...fc538`) and scaffold (loss
+  1.492, weights `e7957d90...84618`) training both completed at 320/320 rows and zero
+  skips. Publish/verify the candidate, then run the single frozen local event.
 
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.

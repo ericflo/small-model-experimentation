@@ -3,8 +3,8 @@
 ## Summary
 
 The design is frozen after successful CPU feasibility. The same-parent exact-token
-replay control has trained successfully; the staged-search candidate and all
-capability evaluation remain pending. No capability result exists.
+replay control and staged-search candidate have both trained successfully; all
+capability evaluation remains pending. No capability result exists.
 
 ## Research Program Fit
 
@@ -29,8 +29,13 @@ CPU construction passed: source SHA-256 `5854c218...a093`; candidate stream
 The replay control completed 40/40 updates over 320/320 rows with zero skips in
 281.2 seconds. Final train loss was 0.4215. Its adapter weights/config SHA-256 are
 `10155232...fc538` / `373c1426...ac9b`; receipt/log SHA-256 are
-`5b293eb6...5a66` / `7d3bc262...d5f7`. No candidate training, local evaluation,
-merge, or benchmark event has run.
+`5b293eb6...5a66` / `7d3bc262...d5f7`.
+
+The scaffold candidate then completed 40/40 updates over 320/320 rows with zero
+skips in 291.4 seconds. Final train loss was 1.492. Its adapter weights/config
+SHA-256 are `e7957d90...84618` / `22859c76...2c4ce`; receipt/log SHA-256 are
+`13ba8897...6dd0` / `ccaffa7b...99c1`. The losses are not a capability comparison
+because the targets differ. No local evaluation, merge, or benchmark event has run.
 
 ## Controls
 
@@ -57,13 +62,12 @@ registered interpretation limits, not hidden after-the-fact caveats.
 
 ## Next Experiments
 
-Publish and verify the completed replay control, then train the candidate from the
-same parent. Run the single fresh local event only after both receipts are published.
-Consume the paired aggregate pilot only if the sole candidate passes every frozen
-local check.
+Publish and verify the completed candidate, then run the single fresh local event
+over parent, replay control, and scaffold candidate. Consume the paired aggregate
+pilot only if the sole candidate passes every frozen local check.
 
 ## Artifact Manifest
 
 The parent, frozen data identities, commands, and future external-artifact locations
-are recorded in `artifact_manifest.yaml`. The replay adapter exists externally; no
-candidate artifact exists yet.
+are recorded in `artifact_manifest.yaml`. Both adapters exist externally; no local,
+merge, or benchmark artifact exists yet.

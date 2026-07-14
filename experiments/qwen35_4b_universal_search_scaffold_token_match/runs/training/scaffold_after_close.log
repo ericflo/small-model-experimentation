@@ -1,0 +1,90 @@
+[train_think] 320 examples (0 skipped as over-length)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]
+Fetching 2 files: 100%|██████████| 2/2 [00:00<00:00, 7397.36it/s]
+
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]
+Loading weights:   0%|          | 1/426 [00:00<01:09,  6.15it/s]/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/bitsandbytes/backends/cuda/ops.py:213: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+
+Loading weights:   3%|▎         | 11/426 [00:00<00:08, 49.71it/s]
+Loading weights:  11%|█         | 46/426 [00:00<00:02, 165.61it/s]
+Loading weights:  19%|█▉        | 82/426 [00:00<00:01, 235.04it/s]
+Loading weights:  28%|██▊       | 118/426 [00:00<00:01, 274.23it/s]
+Loading weights:  36%|███▌      | 152/426 [00:00<00:00, 293.15it/s]
+Loading weights:  46%|████▋     | 198/426 [00:00<00:00, 342.13it/s]
+Loading weights:  55%|█████▍    | 233/426 [00:01<00:00, 206.82it/s]
+Loading weights:  61%|██████▏   | 261/426 [00:01<00:01, 158.76it/s]
+Loading weights:  66%|██████▋   | 283/426 [00:01<00:00, 146.35it/s]
+Loading weights:  73%|███████▎  | 312/426 [00:01<00:00, 169.55it/s]
+Loading weights:  84%|████████▍ | 358/426 [00:01<00:00, 224.73it/s]
+Loading weights:  91%|█████████ | 386/426 [00:02<00:00, 131.30it/s]
+Loading weights:  98%|█████████▊| 416/426 [00:02<00:00, 156.32it/s]
+Loading weights: 100%|██████████| 426/426 [00:02<00:00, 177.66it/s]
+[transformers] warmup_ratio is deprecated and will be removed in v5.2. Use `warmup_steps` instead.
+trainable params: 42,467,328 || all params: 4,248,218,624 || trainable%: 0.9997
+
+  0%|          | 0/40 [00:00<?, ?it/s]
+  2%|▎         | 1/40 [00:08<05:39,  8.71s/it]
+  5%|▌         | 2/40 [00:15<04:54,  7.76s/it]
+  8%|▊         | 3/40 [00:22<04:21,  7.07s/it]
+ 10%|█         | 4/40 [00:28<04:08,  6.92s/it]
+ 12%|█▎        | 5/40 [00:34<03:51,  6.62s/it]
+ 15%|█▌        | 6/40 [00:42<03:54,  6.91s/it]
+ 18%|█▊        | 7/40 [00:48<03:44,  6.80s/it]
+ 20%|██        | 8/40 [00:55<03:36,  6.78s/it]
+ 22%|██▎       | 9/40 [01:02<03:32,  6.87s/it]
+ 25%|██▌       | 10/40 [01:09<03:28,  6.96s/it]
+
+
+ 25%|██▌       | 10/40 [01:09<03:28,  6.96s/it]
+ 28%|██▊       | 11/40 [01:15<03:14,  6.69s/it]
+ 30%|███       | 12/40 [01:21<03:00,  6.46s/it]
+ 32%|███▎      | 13/40 [01:28<02:57,  6.59s/it]
+ 35%|███▌      | 14/40 [01:35<02:51,  6.60s/it]
+ 38%|███▊      | 15/40 [01:41<02:45,  6.60s/it]
+ 40%|████      | 16/40 [01:48<02:41,  6.73s/it]
+ 42%|████▎     | 17/40 [01:56<02:38,  6.87s/it]
+ 45%|████▌     | 18/40 [02:03<02:32,  6.93s/it]
+ 48%|████▊     | 19/40 [02:09<02:23,  6.83s/it]
+ 50%|█████     | 20/40 [02:16<02:17,  6.85s/it]
+
+
+ 50%|█████     | 20/40 [02:16<02:17,  6.85s/it]
+ 52%|█████▎    | 21/40 [02:23<02:09,  6.80s/it]
+ 55%|█████▌    | 22/40 [02:29<02:00,  6.68s/it]
+ 57%|█████▊    | 23/40 [02:37<01:56,  6.86s/it]
+ 60%|██████    | 24/40 [02:44<01:50,  6.91s/it]
+ 62%|██████▎   | 25/40 [02:50<01:40,  6.69s/it]
+ 65%|██████▌   | 26/40 [02:57<01:34,  6.74s/it]
+ 68%|██████▊   | 27/40 [03:04<01:30,  6.93s/it]
+ 70%|███████   | 28/40 [03:12<01:25,  7.10s/it]
+ 72%|███████▎  | 29/40 [03:19<01:19,  7.20s/it]
+ 75%|███████▌  | 30/40 [03:27<01:14,  7.43s/it]
+
+
+ 75%|███████▌  | 30/40 [03:27<01:14,  7.43s/it]
+ 78%|███████▊  | 31/40 [03:34<01:04,  7.17s/it]
+ 80%|████████  | 32/40 [03:40<00:55,  6.93s/it]
+ 82%|████████▎ | 33/40 [03:47<00:47,  6.84s/it]
+ 85%|████████▌ | 34/40 [03:53<00:41,  6.85s/it]
+ 88%|████████▊ | 35/40 [04:00<00:34,  6.90s/it]
+ 90%|█████████ | 36/40 [04:07<00:27,  6.83s/it]
+ 92%|█████████▎| 37/40 [04:14<00:20,  6.89s/it]
+ 95%|█████████▌| 38/40 [04:21<00:14,  7.02s/it]
+ 98%|█████████▊| 39/40 [04:28<00:06,  6.94s/it]
+100%|██████████| 40/40 [04:35<00:00,  6.78s/it]
+
+
+100%|██████████| 40/40 [04:35<00:00,  6.78s/it]
+
+
+100%|██████████| 40/40 [04:35<00:00,  6.78s/it]
+100%|██████████| 40/40 [04:35<00:00,  6.88s/it]
+{'loss': '2.161', 'grad_norm': '12.56', 'learning_rate': '9.186e-06', 'epoch': '0.25'}
+{'loss': '1.621', 'grad_norm': '4.995', 'learning_rate': '5.823e-06', 'epoch': '0.5'}
+{'loss': '1.045', 'grad_norm': '11.11', 'learning_rate': '1.929e-06', 'epoch': '0.75'}
+{'loss': '1.141', 'grad_norm': '5.084', 'learning_rate': '1.708e-08', 'epoch': '1'}
+{'train_runtime': '275.1', 'train_samples_per_second': '1.163', 'train_steps_per_second': '0.145', 'train_loss': '1.492', 'epoch': '1'}
+[train_think] saved adapter to /home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_search_scaffold_token_match/adapters/scaffold_after_close
