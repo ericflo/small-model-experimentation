@@ -32,3 +32,16 @@ each training arm as its own incremental checkpoint.
 - No treatment, local evaluation, merge, or benchmark event has run.
 
 Next: publish this control receipt checkpoint, then train `standard_xi`.
+
+## 2026-07-14 — Ordinary-weight target training
+
+- Published replay-control checkpoint `6d1761e7` to `main`; repository validation
+  and site publication both passed on GitHub before the next arm began.
+- Trained `standard_xi` for exactly 40/40 updates on the byte-frozen target stream;
+  320 rows, 286,814 forward tokens, and zero skips.
+- Train loss: 0.6882. Wrapper wall time: 302.1492 seconds.
+- Adapter weights/config: `271569fd...3569c` / `3e035fbb...f91ec`.
+- Training receipt/log: `9ed47653...af8b4` / `73c55663...76294`.
+- The close-weighted arm, local evaluation, merge, and benchmark remain unrun.
+
+Next: publish this standard receipt checkpoint, then train byte-identical `close_xi`.
