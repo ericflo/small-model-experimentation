@@ -187,8 +187,11 @@ The no-clobber semantic authorization then sealed the exact 13-arm map at hash
 Its receipt hashes to
 `f4a5456844adeafd39e2e4f2a8036ed9fff2c78830b2eab9d4a7bfa1300d2278`;
 the complete control-code inventory was identical immediately before and after
-publication. Global confirmation admission and all score artifacts remain
-uncreated at this point.
+publication. Global confirmation admission subsequently passed its independent
+pre/post arm-byte checks and hashes to
+`18c019e92fb6b7f7caed0b0f916b958d528b36b9a30607c2890e6b9385d0125d`.
+Block-0 deep evaluation has a hash-bound `STARTED` journal, but no generated
+bundle or score exists at this checkpoint.
 
 ## NF4/BF16 Interpretation Diagnostic
 

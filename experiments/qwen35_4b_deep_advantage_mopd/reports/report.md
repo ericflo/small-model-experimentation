@@ -125,8 +125,11 @@ map hash `709694b7d770b5cbb09afe8b932bba3891ab4fea39c54c625fc84c5da973072d`
 and receipt hash
 `f4a5456844adeafd39e2e4f2a8036ed9fff2c78830b2eab9d4a7bfa1300d2278`.
 The complete control-code inventory hash was unchanged on both sides of
-publication. This authorizes creation of global confirmation admission; no
-confirmation score exists yet.
+publication. Global confirmation admission then passed the independent
+pre/post model-map checks and hashes to
+`18c019e92fb6b7f7caed0b0f916b958d528b36b9a30607c2890e6b9385d0125d`.
+The block-0 deep arm has entered `STARTED`; no generated bundle or confirmation
+score exists at this checkpoint.
 
 Together, the three frozen optimizer seeds establish that the registered
 four-round update can complete safely and that strict-deep route supply

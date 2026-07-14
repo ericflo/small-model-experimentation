@@ -408,3 +408,17 @@
   Global `ADMISSION.json` and every confirmation score remain absent at this
   boundary, so this receipt supports no capability, superiority, retention,
   or causal-routing claim.
+
+## 2026-07-14 — sealed confirmation admitted; first arm started
+
+- The live confirmation entrypoint reproduced the no-clobber semantic
+  authorization exactly, then independently reauthenticated the full 13-arm
+  model map before and after atomic global admission publication.
+- `runs/confirmation/ADMISSION.json` hashes to
+  `18c019e92fb6b7f7caed0b0f916b958d528b36b9a30607c2890e6b9385d0125d`.
+  It binds block seeds `98700`/`98800`, the exact authorized arm map, evaluator
+  inventory, configuration, and authorization receipt.
+- Block-0 deep evaluation entered `STARTED`; its external journal hashes to
+  `c1eb2878bf936d95b62885309257aa1c98e39bbfa9096f3e6a6cf01d3a2a32f1`.
+  No generated bundle or score exists at this in-progress checkpoint, so it
+  changes no capability, comparison, retention, or routing conclusion.
