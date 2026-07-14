@@ -1,6 +1,6 @@
 # Failure-Selected Counterfactual Restart Curriculum
 
-**Status:** in-progress · since 2026-07-14 · exact-exposure freeze passed; replay-control training is next
+**Status:** in-progress · since 2026-07-14 · replay control trained; restart-candidate training is next
 
 This experiment tests whether selecting the stronger parent's fresh procedural
 failures and teaching clean verified restarts can beat exactly exposure-matched replay
@@ -69,17 +69,18 @@ PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B \
 
 ```
 
-After this exact-exposure checkpoint is committed, rebased, pushed to `main`, and
-green in both workflows, the only authorized model event is:
+The replay control has completed. After its receipt checkpoint is committed, rebased,
+pushed to `main`, and green in both workflows, the only authorized model event is:
 
 ```bash
 PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B \
   experiments/qwen35_4b_universal_failure_selected_restart_target_match/scripts/run.py \
-  --stage train-control
+  --stage train-candidate
 ```
 
-Candidate training remains gated on a separately committed and CI-green control
-receipt. No merge, local evaluation, or benchmark event is authorized yet.
+The harness reauthenticates the committed control receipt, log, and external adapter
+before candidate launch. No merge, local evaluation, or benchmark event is
+authorized yet.
 
 ## Results
 
@@ -129,6 +130,15 @@ answer tokens, close tokens, actual loss-bearing tokens, and weighted loss mass.
 second review records this residual sequence-composition difference and authorizes
 only replay-control training after publication. This remains construction evidence,
 not a capability result.
+
+From pushed-green exact-exposure commit `821d50d4`, the replay control independently
+continued the authenticated parent for exactly 40/40 steps. It encoded 320/320 rows
+with zero skips, completed in 297.3 trainer seconds (318.70 wrapper seconds), and
+reported final train loss 0.3873. Receipt/log/adapter-config/adapter-weight hashes are
+`3a9cc1ea...6d49`, `3bedc341...f25`, `dce1095c...f8f6`, and
+`5840757d...b1c`; the adapter is 169,903,320 bytes. The preflight binds clean pushed
+`main` at `821d50d4`, the frozen stream, and the original parent adapter. This is an
+authenticated training event, not capability evidence.
 
 ## Interpretation
 

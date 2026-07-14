@@ -3,8 +3,8 @@
 ## Current status
 
 The model-free design, one authenticated parent rollout, frozen failure selection,
-and exact-exposure stream freeze are complete. No training, merge, local evaluation,
-or benchmark event has run.
+exact-exposure stream freeze, and replay-control training are complete. No candidate
+training, merge, local evaluation, or benchmark event has run.
 
 The active hypothesis is that task-level on-policy failure selection can help when
 the supervised example restarts cleanly before the error and target exposure is
@@ -32,10 +32,12 @@ frozen contract.
 - Candidate minus control is zero on the three preregistered axes, answer targets,
   close targets, and parent prefixes. Its 16,414-token target-span difference is
   zero-weight forced-close composition and is disclosed in `compute_review.md`.
+- Replay control: 320/320 rows, zero skips, 40/40 steps, train loss 0.3873, complete
+  169,903,320-byte adapter. Receipt/log/adapter hashes are `3a9cc1ea...6d49`,
+  `3bedc341...f25`, and `5840757d...b1c`.
 
 ## Next authorized event
 
-After this exact-exposure freeze is committed, rebased, pushed to `main`, and both
-workflows are green, train only the replay control. Candidate training requires the
-control receipt and log to receive their own checked, rebased, pushed, two-workflow-
-green checkpoint.
+After the control receipt and log are committed, rebased, pushed to `main`, and both
+workflows are green, train only the counterfactual-restart candidate. Any merge or
+capability evaluation requires a later separately frozen checkpoint.

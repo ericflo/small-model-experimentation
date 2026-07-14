@@ -244,7 +244,11 @@
   rows. Manifest/control/candidate/final-receipt hashes are `7ba55045...91de1` /
   `7a8d4566...b5078` / `28deb20e...3190` / `52a761ef...170`. Second-review verdict
   `PASS_CONTROL_TRAINING` authorizes replay control only after this freeze is
-  published green. No capability result exists yet.
+  published green. From pushed-green commit `821d50d4`, replay control then trained
+  320/320 rows with zero skips and 40/40 updates; receipt/log/adapter hashes are
+  `3a9cc1ea...6d49` / `3bedc341...f25` / `5840757d...b1c`. Publish this control
+  checkpoint before the independently warm-started candidate. No capability result
+  exists yet.
 
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.

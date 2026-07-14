@@ -40,7 +40,7 @@ selection:
   receipt_sha256: 567d6b020b9120c82bd19fdc7992dc49b927df2b604978ab3d6ae64e2c05b662
 training_plan:
   control_authorized_after_published_green_freeze: true
-  candidate_authorized: false
+  candidate_authorized_after_published_green_control: true
   rows_per_arm: 320
   shared_aligned_replay_rows: 200
   candidate_restart_rows: 52
@@ -56,6 +56,18 @@ training_plan:
   learning_rate: 1.0e-5
   thought_weight: 0.2
   close_weight: 0.2
+training_results:
+  replay_control:
+    completed: true
+    source_git_head: 821d50d46bd237340a429eef4d368a325596f9e1
+    rows: 320
+    skipped_rows: 0
+    optimizer_steps: 40
+    train_loss: 0.3873
+    receipt_sha256: 3a9cc1ea291e201c742a9f72d428387dbb4d421e46fe1236db0bc016caf56d49
+    log_sha256: 3bedc341a075c6c0ed72204cb64aa919bf9763ebe6656e8c8f92707650a86f25
+    adapter_config_sha256: dce1095c4a6c49611f51efed2a89177cf26945a8694c5fa0bba33cc069a9f8f6
+    adapter_weights_sha256: 5840757d2e639c224cb1abb43320c0b8581eb9eec453ce613e0279803eab6b1c
 firewall:
   benchmark_data_read: false
   aggregate_seed_open: false

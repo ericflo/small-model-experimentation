@@ -39,6 +39,12 @@ class FrozenTrainingContractTests(unittest.TestCase):
             self.trial.TOKEN_RECEIPT_SHA256,
             "52a761ef8fd37f3eac88abf8f090013f571a47511daeb26820ca030201b1c170",
         )
+        self.assertEqual(self.trial.PUBLISHED_ARM_HASHES["replay_control"], {
+            "receipt": "3a9cc1ea291e201c742a9f72d428387dbb4d421e46fe1236db0bc016caf56d49",
+            "log": "3bedc341a075c6c0ed72204cb64aa919bf9763ebe6656e8c8f92707650a86f25",
+            "adapter_config": "dce1095c4a6c49611f51efed2a89177cf26945a8694c5fa0bba33cc069a9f8f6",
+            "adapter_weights": "5840757d2e639c224cb1abb43320c0b8581eb9eec453ce613e0279803eab6b1c",
+        })
 
     def test_only_frozen_hyperparameters_are_registered(self) -> None:
         expected = self.trial.expected_hyperparameters()

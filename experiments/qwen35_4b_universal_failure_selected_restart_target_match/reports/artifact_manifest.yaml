@@ -12,15 +12,21 @@ external_artifacts:
     required_for: "independent replay-control and counterfactual-restart continuations"
     checksum: "adapter_model.safetensors bb59d3bd9273ae3bb3dffe54e983590dada69e6e1bdba571009ffedbba05154d; adapter_config.json 0dfd9bda8a835926a87337782cc09b1e11e841a36f46b99c83fbae9bc89e120f"
     regenerate: "from the predecessor's published replay-control training checkpoint"
+  - name: "current experiment replay-control adapter"
+    storage: "large_artifacts/qwen35_4b_universal_failure_selected_restart_target_match/adapters/replay_control"
+    required_for: "candidate prerequisite authentication and future paired merged-composite evaluation"
+    checksum: "adapter_model.safetensors 5840757d2e639c224cb1abb43320c0b8581eb9eec453ce613e0279803eab6b1c; adapter_config.json dce1095c4a6c49611f51efed2a89177cf26945a8694c5fa0bba33cc069a9f8f6"
+    regenerate: "from pushed-green exact-exposure commit 821d50d4: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_failure_selected_restart_target_match/scripts/run.py --stage train-control"
 omitted_artifacts:
   - path: "large_artifacts/qwen35_4b_universal_failure_selected_restart_target_match/"
-    reason: "future adapters and merged candidate/control composites are large and gitignored; none exists at the exact-exposure checkpoint"
+    reason: "the replay-control adapter is recorded above; the future candidate adapter and merged composites are large and gitignored"
 reproducibility:
   smoke_command: "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_failure_selected_restart_target_match/scripts/run.py --smoke"
-  full_command: "after this checkpoint is pushed and both workflows are green: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_failure_selected_restart_target_match/scripts/run.py --stage train-control"
+  full_command: "after this control checkpoint is pushed and both workflows are green: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_failure_selected_restart_target_match/scripts/run.py --stage train-candidate"
   required_external_artifacts:
     - "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/merged/replay_after_close"
     - "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/adapters/replay_after_close"
+    - "large_artifacts/qwen35_4b_universal_failure_selected_restart_target_match/adapters/replay_control"
 notes: >-
   Model-free exact-exposure freeze. Model Qwen/Qwen3.5-4B revision 851bf6e8...d0a. Frozen
   construction/rollout/selection/training/local/aggregate seeds are
@@ -36,5 +42,8 @@ notes: >-
   25a9595f...f0c2, ac9b9c8a...0bd6, 7ba55045...91de1, 7a8d4566...b5078,
   28deb20e...3190, and 52a761ef...170. Both arms have 320 rows, 297731 forward
   tokens, 126796 nonzero targets, absolute loss mass 27632.8, zero skips, and 200
-  aligned shared rows. Verdict PASS_CONTROL_TRAINING authorizes control only after
-  publication. No new adapter, composite, local event, or benchmark event exists.
+  aligned shared rows. From pushed-green commit 821d50d4, replay control trained
+  320/320 rows with zero skips and 40/40 updates; receipt/log/config/weight hashes
+  are 3a9cc1ea...6d49, 3bedc341...f25, dce1095c...f8f6, and
+  5840757d...b1c. No candidate adapter, composite, local event, or benchmark event
+  exists.

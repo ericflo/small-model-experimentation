@@ -47,6 +47,14 @@ ARM_FILES = {
         "28deb20e6bfca81f760549b071d0d0df39bfa561c4d09fde0580d81699413190",
     ),
 }
+PUBLISHED_ARM_HASHES = {
+    "replay_control": {
+        "receipt": "3a9cc1ea291e201c742a9f72d428387dbb4d421e46fe1236db0bc016caf56d49",
+        "log": "3bedc341a075c6c0ed72204cb64aa919bf9763ebe6656e8c8f92707650a86f25",
+        "adapter_config": "dce1095c4a6c49611f51efed2a89177cf26945a8694c5fa0bba33cc069a9f8f6",
+        "adapter_weights": "5840757d2e639c224cb1abb43320c0b8581eb9eec453ce613e0279803eab6b1c",
+    },
+}
 ADAPTER_ROOT = ROOT / "large_artifacts" / EXP.name / "adapters"
 
 
@@ -114,6 +122,7 @@ def validate_published_arm(name: str, *, require_committed: bool = True) -> dict
     ):
         raise ValueError(f"published {name} receipt/log is absent from HEAD")
     payload = load_json(receipt_path)
+    published = PUBLISHED_ARM_HASHES.get(name)
     data_path, data_hash = ARM_FILES[name]
     dataset = payload.get("dataset", {})
     warm_start = payload.get("warm_start", {})
@@ -148,6 +157,15 @@ def validate_published_arm(name: str, *, require_committed: bool = True) -> dict
         or payload.get("adapter_weights_sha256") != sha256_file(weights)
         or payload.get("benchmark_data_read") is not False
         or payload.get("aggregate_seed_open") is not False
+        or (
+            published is not None
+            and (
+                sha256_file(receipt_path) != published["receipt"]
+                or sha256_file(log_path) != published["log"]
+                or sha256_file(config) != published["adapter_config"]
+                or sha256_file(weights) != published["adapter_weights"]
+            )
+        )
     ):
         raise ValueError(f"published {name} violates the frozen training contract")
     return {

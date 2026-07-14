@@ -83,3 +83,20 @@
   workflows. Candidate training must wait for a separately published control.
 - No model call or benchmark read occurred; local seed 88,010 is unmaterialized and
   aggregate seed 78,140 remains sealed.
+
+## 2026-07-14 — Authenticated replay-control training
+
+- Launched only after exact-exposure commit `821d50d4` was pushed directly to
+  `main` and GitHub runs `29362464655` / `29362464584` both succeeded.
+- The wrapper authenticated a clean pushed `main`, the frozen 320-row replay stream,
+  exact token receipt, and original replay-parent adapter before opening outputs.
+- Trained exactly 320/320 rows with zero skips and 40/40 optimizer steps at the
+  frozen seed and hyperparameters. Trainer runtime was 297.3 seconds, wrapper runtime
+  318.70 seconds, and final train loss was 0.3873.
+- Receipt/log/config/weight hashes are `3a9cc1ea...6d49`,
+  `3bedc341...f25`, `dce1095c...f8f6`, and `5840757d...b1c`. The complete external
+  adapter is 169,903,320 bytes.
+- The receipt records `benchmark_data_read=false` and a sealed aggregate seed. No
+  merge, capability evaluation, or benchmark event occurred.
+- Candidate training remains blocked until these tracked results are committed,
+  rebased, pushed to `main`, and both workflows are green.

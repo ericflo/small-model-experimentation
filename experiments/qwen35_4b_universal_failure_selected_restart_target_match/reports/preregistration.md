@@ -139,3 +139,16 @@ byte-identical position-aligned rows. No target was modified, duplicated, trunca
 or post-hoc masked. The second review verdict is `PASS_CONTROL_TRAINING`; after this
 freeze is published and green, it authorizes only the replay control. Candidate
 training still requires a published-green control receipt.
+
+## 2026-07-14 — Frozen replay-control receipt
+
+The sole authorized control event ran from pushed-green commit `821d50d4`. It trained
+320/320 rows with zero skips for exactly 40 updates. Trainer/wrapper runtime was
+297.3/318.70 seconds and final train loss was 0.3873. Receipt, log, adapter config,
+and adapter weight hashes are `3a9cc1ea...6d49`, `3bedc341...f25`,
+`dce1095c...f8f6`, and `5840757d...b1c`.
+
+This amendment records the event without changing the paired design. Once these
+bytes are committed, rebased, pushed, and green in both workflows, the only next
+authorized event is independent candidate training from the original replay-parent
+adapter. No merge or capability evaluation is authorized.

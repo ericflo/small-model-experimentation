@@ -142,3 +142,12 @@ passes its absolute and relative promotion rules.
 Any hash drift, skipped row, overwrite condition, dirty or unpushed preflight,
 incomplete adapter, or failed training stops the sequence and is preserved rather
 than repaired in place.
+
+## Post-control receipt
+
+The authorized control later completed from pushed-green commit `821d50d4`: 320/320
+rows, zero skips, and 40/40 steps. Receipt/log/config/weight hashes are
+`3a9cc1ea...6d49`, `3bedc341...f25`, `dce1095c...f8f6`, and
+`5840757d...b1c`. This note records the frozen event and does not expand the verdict.
+Candidate training becomes authorized only after this receipt checkpoint is itself
+published and green in both workflows.
