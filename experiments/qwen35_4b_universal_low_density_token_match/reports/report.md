@@ -2,8 +2,8 @@
 
 ## Summary
 
-Prepared, not yet run. This experiment tests a nested 0/40/80-row designed-dose
-ladder from the stronger replay-refreshed anchor, with exact forward-token matching.
+Completed negative. All three exact-token arms trained cleanly, but none passed the
+fresh local gate. The benchmark remained sealed.
 
 ## Research Program Fit
 
@@ -21,14 +21,16 @@ half; `designed80` swaps both. The replay blocks match the two designed halves a
 
 ## Results
 
-Training checkpoint only. The exact-token `replay_repeat` control completed 190/190
-updates over 1,520 rows with zero skips. Final training loss was 0.4069; wall time
-was 1,380.519 seconds. `designed40` completed the identical update and token budget
-with zero skips; its final training loss was 0.5128 and wall time was 1,362.717
-seconds. `designed80` also completed the identical update and token budget with zero
-skips; its final training loss was 0.5864 and wall time was 1,334.550 seconds. The
-local screen and paired benchmark remain pending, so no generalized-transfer
-comparison is available yet.
+All arms completed 190/190 updates over 1,520 rows with zero skips. Final training
+losses were 0.4069 (`replay_repeat`), 0.5128 (`designed40`), and 0.5864
+(`designed80`); wall times were 1,380.519, 1,362.717, and 1,334.550 seconds.
+
+On fresh local seed 88,004, replay repeat and the 40-row arm each scored 0.500
+accuracy and 0.538 parse with 13 and 12 cap contacts. The 80-row arm scored 0.538
+accuracy, 0.615 parse, and 10 cap contacts. The inherited replay-refresh anchor was
+0.538 / 0.577 / 11. Every candidate missed the registered accuracy, parse, and cap
+bars, while all passed the feasible-route abstention check. No arm was eligible;
+explicit merge and paired benchmark stages did not run.
 
 ## Controls
 
@@ -46,14 +48,21 @@ training signal.
 
 ## Interpretation
 
-Pending. Local success alone will not be interpreted as generalized transfer.
+The exact-token comparison shows that 40 and 80 designed rows are below the local
+installation threshold from this anchor. The 80-row arm directionally improved
+parseability and cap behavior over replay repeat, but it did not improve accuracy
+over the inherited anchor and remained far below every absolute gate. This is a
+local mechanism negative, not a broad-retention measurement.
 
 ## Next Experiments
 
-A passing pilot requires independent quick replication, medium@2,048, paired
-uncertainty, and matched-compute sampling in a new confirmation experiment.
+Use a new result-separated experiment. The next design should explicitly bridge the
+large gap between the locally passing 400-row parent and the locally failing 80-row
+arm, or target concise answer commitment directly while preserving an exact-token
+replay control. It must use fresh local and benchmark seeds and keep the benchmark
+sealed until a prospectively frozen local mechanism gate passes.
 
 ## Artifact Manifest
 
-See `artifact_manifest.yaml`; planned entries must be replaced with authenticated
-checksums immediately after each successful stage.
+See `artifact_manifest.yaml`. All adapters and local receipts are authenticated;
+no merged checkpoint was produced.

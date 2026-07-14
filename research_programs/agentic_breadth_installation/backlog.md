@@ -128,12 +128,18 @@
   family below base. Replay refresh scored 0.4851, +0.0441 over `blend`, with
   eight positive and two tied families. It is a new anchor, not a universal
   winner.
-- Active exact-token successor:
-  `qwen35_4b_universal_low_density_token_match` starts from authenticated replay
-  refresh and freezes nested 0/40/80-row designed doses. All arms share 1,440
-  replay rows and have exactly 1,429,053 forward tokens, 1,520 rows, and 190
-  steps. New local/benchmark seeds are 88004/78134. Require strict lift on every
-  family and keep matched-compute sampling in the confirmation path.
+- Completed exact-token local negative:
+  `qwen35_4b_universal_low_density_token_match` trained nested 0/40/80-row doses
+  from authenticated replay refresh with exactly 1,429,053 forward tokens,
+  1,520 rows, and 190 steps per arm. On fresh seed 88004 every arm missed the
+  0.65 accuracy, 0.90 parse, and at-most-two cap bars; the best 80-row arm was
+  0.538/0.615/10 and benchmark seed 78134 remained sealed.
+- Next universal-feature successor must be result-separated and use fresh seeds.
+  Either prospectively bridge the 80-to-400-row installation gap with exact-token
+  replay controls, or isolate concise answer commitment as the mechanism. Do not
+  rerun 40/80 rows, lower the observed local gates, or spend the sealed benchmark
+  seed. Any arm that passes must still beat replay continuation on every family
+  and matched-compute sampling before a universal claim.
 
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.

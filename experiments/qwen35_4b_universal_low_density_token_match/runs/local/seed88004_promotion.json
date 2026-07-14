@@ -1,0 +1,326 @@
+{
+  "eligible": [],
+  "gates": {
+    "designed40": {
+      "candidate": "designed40",
+      "checks": {
+        "accuracy_at_least_0_65": false,
+        "cap_contacts_at_most_2": false,
+        "no_repeated_feasible_route_abstention": true,
+        "parse_rate_at_least_0_90": false
+      },
+      "mix": "induct=2,execute=2,select=2,trace=2,verify=2,count=2,repair=2,optimize=2,abstain=2,state=2,order=2,probe=2,route=2",
+      "passes": false,
+      "route_abstentions": 0,
+      "schema_version": 1,
+      "seed": 88004,
+      "summary": {
+        "accuracy": 0.5,
+        "answer_counts": {
+          "3": 1,
+          "4": 1,
+          "79>80>35>57>13>12>46": 1,
+          "80": 1,
+          "<NONE>": 12,
+          "A": 1,
+          "INSUFFICIENT": 1,
+          "IX": 1,
+          "P3": 1,
+          "VII": 1,
+          "W>P>J>A>T>C>F": 1,
+          "den": 1,
+          "dun=2; cor=3; pov=3": 1,
+          "ochre+indigo": 1,
+          "van": 1
+        },
+        "cap_contacts": 12,
+        "mean_generated_tokens": 787.5769230769231,
+        "parse_rate": 0.5384615384615384,
+        "per_kind": {
+          "u_abstain": {
+            "accuracy": 1.0,
+            "n": 2,
+            "parse_rate": 1.0
+          },
+          "u_count": {
+            "accuracy": 1.0,
+            "n": 2,
+            "parse_rate": 1.0
+          },
+          "u_execute": {
+            "accuracy": 0.0,
+            "n": 2,
+            "parse_rate": 0.0
+          },
+          "u_induct": {
+            "accuracy": 0.0,
+            "n": 2,
+            "parse_rate": 0.0
+          },
+          "u_optimize": {
+            "accuracy": 0.5,
+            "n": 2,
+            "parse_rate": 0.5
+          },
+          "u_order": {
+            "accuracy": 1.0,
+            "n": 2,
+            "parse_rate": 1.0
+          },
+          "u_probe": {
+            "accuracy": 0.5,
+            "n": 2,
+            "parse_rate": 0.5
+          },
+          "u_repair": {
+            "accuracy": 0.0,
+            "n": 2,
+            "parse_rate": 0.0
+          },
+          "u_route": {
+            "accuracy": 1.0,
+            "n": 2,
+            "parse_rate": 1.0
+          },
+          "u_select": {
+            "accuracy": 1.0,
+            "n": 2,
+            "parse_rate": 1.0
+          },
+          "u_state": {
+            "accuracy": 0.0,
+            "n": 2,
+            "parse_rate": 0.5
+          },
+          "u_trace": {
+            "accuracy": 0.5,
+            "n": 2,
+            "parse_rate": 0.5
+          },
+          "u_verify": {
+            "accuracy": 0.0,
+            "n": 2,
+            "parse_rate": 0.0
+          }
+        },
+        "rows": 26
+      }
+    },
+    "designed80": {
+      "candidate": "designed80",
+      "checks": {
+        "accuracy_at_least_0_65": false,
+        "cap_contacts_at_most_2": false,
+        "no_repeated_feasible_route_abstention": true,
+        "parse_rate_at_least_0_90": false
+      },
+      "mix": "induct=2,execute=2,select=2,trace=2,verify=2,count=2,repair=2,optimize=2,abstain=2,state=2,order=2,probe=2,route=2",
+      "passes": false,
+      "route_abstentions": 0,
+      "schema_version": 1,
+      "seed": 88004,
+      "summary": {
+        "accuracy": 0.5384615384615384,
+        "answer_counts": {
+          "3": 1,
+          "4": 1,
+          "80": 1,
+          "<NONE>": 10,
+          "A": 1,
+          "INSUFFICIENT": 1,
+          "IX": 1,
+          "NO": 1,
+          "P3": 1,
+          "VII": 1,
+          "W>P>J>A>T>C>F": 1,
+          "XI+VIII": 1,
+          "den": 1,
+          "dun=4;cor=9;pov=0": 1,
+          "ochre+indigo": 1,
+          "van": 1,
+          "violet=3;rust=6;pearl=7": 1
+        },
+        "cap_contacts": 10,
+        "mean_generated_tokens": 734.3076923076923,
+        "parse_rate": 0.6153846153846154,
+        "per_kind": {
+          "u_abstain": {
+            "accuracy": 1.0,
+            "n": 2,
+            "parse_rate": 1.0
+          },
+          "u_count": {
+            "accuracy": 1.0,
+            "n": 2,
+            "parse_rate": 1.0
+          },
+          "u_execute": {
+            "accuracy": 0.0,
+            "n": 2,
+            "parse_rate": 0.0
+          },
+          "u_induct": {
+            "accuracy": 0.0,
+            "n": 2,
+            "parse_rate": 0.0
+          },
+          "u_optimize": {
+            "accuracy": 0.5,
+            "n": 2,
+            "parse_rate": 1.0
+          },
+          "u_order": {
+            "accuracy": 0.5,
+            "n": 2,
+            "parse_rate": 0.5
+          },
+          "u_probe": {
+            "accuracy": 0.5,
+            "n": 2,
+            "parse_rate": 0.5
+          },
+          "u_repair": {
+            "accuracy": 0.0,
+            "n": 2,
+            "parse_rate": 0.0
+          },
+          "u_route": {
+            "accuracy": 1.0,
+            "n": 2,
+            "parse_rate": 1.0
+          },
+          "u_select": {
+            "accuracy": 1.0,
+            "n": 2,
+            "parse_rate": 1.0
+          },
+          "u_state": {
+            "accuracy": 1.0,
+            "n": 2,
+            "parse_rate": 1.0
+          },
+          "u_trace": {
+            "accuracy": 0.5,
+            "n": 2,
+            "parse_rate": 0.5
+          },
+          "u_verify": {
+            "accuracy": 0.0,
+            "n": 2,
+            "parse_rate": 0.5
+          }
+        },
+        "rows": 26
+      }
+    },
+    "replay_repeat": {
+      "candidate": "replay_repeat",
+      "checks": {
+        "accuracy_at_least_0_65": false,
+        "cap_contacts_at_most_2": false,
+        "no_repeated_feasible_route_abstention": true,
+        "parse_rate_at_least_0_90": false
+      },
+      "mix": "induct=2,execute=2,select=2,trace=2,verify=2,count=2,repair=2,optimize=2,abstain=2,state=2,order=2,probe=2,route=2",
+      "passes": false,
+      "route_abstentions": 0,
+      "schema_version": 1,
+      "seed": 88004,
+      "summary": {
+        "accuracy": 0.5,
+        "answer_counts": {
+          "3": 1,
+          "4": 1,
+          "80": 1,
+          "<NONE>": 12,
+          "<answer> (join ids with '>')": 1,
+          "A": 1,
+          "INSUFFICIENT": 1,
+          "IX": 1,
+          "R": 1,
+          "VII": 1,
+          "W>P>J>A>T>C>F": 1,
+          "YES": 1,
+          "den": 1,
+          "ochre+indigo": 1,
+          "van": 1
+        },
+        "cap_contacts": 13,
+        "mean_generated_tokens": 803.0384615384615,
+        "parse_rate": 0.5384615384615384,
+        "per_kind": {
+          "u_abstain": {
+            "accuracy": 1.0,
+            "n": 2,
+            "parse_rate": 1.0
+          },
+          "u_count": {
+            "accuracy": 1.0,
+            "n": 2,
+            "parse_rate": 1.0
+          },
+          "u_execute": {
+            "accuracy": 0.0,
+            "n": 2,
+            "parse_rate": 0.0
+          },
+          "u_induct": {
+            "accuracy": 0.0,
+            "n": 2,
+            "parse_rate": 0.0
+          },
+          "u_optimize": {
+            "accuracy": 0.5,
+            "n": 2,
+            "parse_rate": 0.5
+          },
+          "u_order": {
+            "accuracy": 0.5,
+            "n": 2,
+            "parse_rate": 1.0
+          },
+          "u_probe": {
+            "accuracy": 0.0,
+            "n": 2,
+            "parse_rate": 0.0
+          },
+          "u_repair": {
+            "accuracy": 0.0,
+            "n": 2,
+            "parse_rate": 0.0
+          },
+          "u_route": {
+            "accuracy": 1.0,
+            "n": 2,
+            "parse_rate": 1.0
+          },
+          "u_select": {
+            "accuracy": 1.0,
+            "n": 2,
+            "parse_rate": 1.0
+          },
+          "u_state": {
+            "accuracy": 0.0,
+            "n": 2,
+            "parse_rate": 0.0
+          },
+          "u_trace": {
+            "accuracy": 1.0,
+            "n": 2,
+            "parse_rate": 1.0
+          },
+          "u_verify": {
+            "accuracy": 0.5,
+            "n": 2,
+            "parse_rate": 0.5
+          }
+        },
+        "rows": 26
+      }
+    }
+  },
+  "local_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_universal_low_density_token_match/runs/local/seed88004.json",
+  "local_receipt_sha256": "5a012f15225d93cca00e7ea974472e3319a66e39b071b54418d323750631fcbb",
+  "schema_version": 1,
+  "seed": 88004
+}

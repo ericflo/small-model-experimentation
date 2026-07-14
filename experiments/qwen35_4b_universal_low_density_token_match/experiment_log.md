@@ -74,3 +74,21 @@
   `23685837e14702657bcb941d34166e9997ed19d5c249f81fe30a3a6c553a9af1`.
 - All three arms are now trained. No local or benchmark evaluation was performed
   at this checkpoint.
+
+## 2026-07-13 — fresh local gate negative
+
+- Ran `scripts/run.py --stage local` from pushed checkpoint `f30098ce` after all
+  three training arms and their receipts were independently published.
+- Evaluated the inherited replay-refresh anchor and all three arms on the same 26
+  fresh procedural cases at seed 88,004, greedy decoding, and a 1,024-token cap.
+- `replay_repeat` scored 0.500 accuracy, 0.538 parse, and 13 cap contacts;
+  `designed40` scored 0.500, 0.538, and 12; `designed80` scored 0.538, 0.615,
+  and 10. The inherited anchor scored 0.538, 0.577, and 11.
+- Every candidate passed the feasible-route abstention check but failed the frozen
+  accuracy ≥0.65, parse ≥0.90, and cap-contact ≤2 checks. The promotion
+  receipt therefore contains `eligible: []` and exited nonzero as designed.
+- Full local receipt: `runs/local/seed88004.json`, SHA-256
+  `5a012f15225d93cca00e7ea974472e3319a66e39b071b54418d323750631fcbb`.
+  Promotion receipt: `runs/local/seed88004_promotion.json`, SHA-256
+  `fc90df3c56c861819c2bc6f8776fd659d6d37484c4357a3320bc6598288a1da7`.
+- The merge stage did not run and benchmark seed 78,134 remains unconsumed.

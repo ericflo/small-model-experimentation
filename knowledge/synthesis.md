@@ -125,7 +125,7 @@ the next brute crossover, and make feasible-domain/residual state explicit befor
 
 ### Universal-Feature Curriculum Search
 
-The first two contamination-controlled designed-curriculum experiments separate
+The first three contamination-controlled designed-curriculum experiments separate
 local installability from broad transfer. A truth-audited 13-skill curriculum can
 raise fresh synthetic accuracy, but an 800-row sequential continuation specialized
 and regressed three public families. Mixing 400 designed rows into 1,120 replay rows
@@ -133,12 +133,15 @@ at lower rate still passed the local gate yet lost to both the mature policy and
 matched replay-only continuation. The control is the productive surprise:
 replay-only reached 0.4851 aggregate, +0.0441 over the mature policy, with eight
 strict family gains and no regressions. Thus broad replay had not saturated, and it
-must be treated as an active capability baseline. Replay received 17.3% more forward
-tokens despite matched steps, so the next comparison must also match token exposure.
-The open search is a low-density designed update from this stronger anchor that beats
-replay continuation while lifting the two remaining ties and retaining the other
-eight; no universal-feature claim exists until every family improves on replicated
-same-backend events.
+must be treated as an active capability baseline. The exact-token follow-up removed
+the prior 17.3% exposure gap, but 40- and 80-row designed doses both failed the fresh
+local screen; even the stronger 80-row arm reached only 0.538 accuracy, 0.615 parse,
+and 10 cap contacts. Its benchmark stayed sealed. The open search is therefore not
+"make the designed dose tiny": it must bridge the 80-to-400-row install/retention
+gap or isolate concise answer commitment while preserving an exact-token replay
+control. No universal-feature claim exists until one arm passes fresh local gates,
+beats replay continuation on every family, replicates on same-backend events, and
+beats matched-compute sampling.
 
 ### Selection Under Visible Evidence Is A Core Bottleneck
 

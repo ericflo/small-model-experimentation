@@ -1,6 +1,9 @@
 # Low-Density Token-Matched Universal Curriculum
 
-**Status:** in-progress · since 2026-07-13 · all three arms trained; local gates and paired pilot remain
+**Status:** finished
+
+**Outcome:** completed negative on 2026-07-13; all arms failed the fresh local
+gate and the benchmark remained sealed.
 
 ## Research program
 
@@ -66,28 +69,38 @@ Full:
 
 ## Results
 
-Training checkpoint only. `replay_repeat` completed all 190 updates over the
-authenticated 1,520-row, 1,429,053-forward-token stream with zero skips. Its final
-training loss was 0.4069 and its adapter weights hash is
-`bb4f0f8d35ce51e59fb06e8fc835ef043ac8960a5c178e6a511ec75c0a622a07`.
-`designed40` then completed the same 190 updates and exact exposure with zero skips;
-its final training loss was 0.5128 and its adapter weights hash is
-`b4ca4c0187797f57ae3259f7de1817be34aad927583c0a8728786c56b40ac4a9`.
-`designed80` also completed the exact update and exposure contract with zero skips;
-its final training loss was 0.5864 and its adapter weights hash is
-`ba82457d127c63662b5b86b4a2e1d94ed18014651b59aefd6512690eef1dabc4`.
-The local screen and new benchmark event have not run, so there is no transfer
-result yet.
+All three arms completed the exact 190-update, 1,429,053-forward-token contract with
+zero skips. Fresh local seed 88,004 then produced:
+
+| Model | Accuracy | Parse rate | Cap contacts | Gate |
+| --- | ---: | ---: | ---: | --- |
+| inherited `replay_refresh` anchor | 0.538 | 0.577 | 11 | diagnostic only |
+| `replay_repeat` | 0.500 | 0.538 | 13 | fail |
+| `designed40` | 0.500 | 0.538 | 12 | fail |
+| `designed80` | 0.538 | 0.615 | 10 | fail |
+
+Every candidate missed the frozen accuracy ≥0.65, parse ≥0.90, and cap-contact
+≤2 gates; all passed the feasible-route abstention check. The 80-row dose was the
+least degenerate candidate, but it only tied the inherited anchor's accuracy and
+remained far from deployable parsing. No arm became eligible, so the merge stage and
+aggregate-only seed 78,134 event did not run.
 
 ## Interpretation
 
-No result interpretation before the frozen stages complete.
+Exact token matching closes the prior compute-exposure ambiguity for these doses:
+replacing 40 or 80 of 1,520 replay rows was insufficient to install robust concise
+execution into the replay-refreshed policy. The 80-row trend in parse rate and cap
+contacts is directional, not a pass and not evidence of broad transfer. The result
+does not say whether an intermediate dose, a termination-focused loss, or a
+lower-collateral integration mechanism can cross the local threshold while preserving
+the replay anchor; each requires a new result-separated experiment.
 
 ## Knowledgebase Update
 
-- Program evidence: pending result.
-- Program backlog: this exact-token ladder is active.
-- Claim ledger: unchanged; a single pilot cannot create a universal-feature claim.
+- Program evidence: records the exact-token low-density local negative.
+- Program backlog: closes this ladder and requires a new result-separated mechanism.
+- Shared synthesis: low density alone does not resolve the install/retention tradeoff.
+- Claim ledger: unchanged; no benchmark event ran and no universal-feature claim exists.
 
 ## Artifacts
 
@@ -95,5 +108,7 @@ No result interpretation before the frozen stages complete.
 - `data/dose_manifest.json`: exact nested selection and hashes.
 - `data/dose_token_receipt.json`: zero-skip proof and exact arm exposures.
 - `scripts/materialize_doses.py`: deterministic nested token-matched constructor.
+- `runs/local/seed88004.json`: complete fresh local receipt.
+- `runs/local/seed88004_promotion.json`: authenticated fail-closed promotion decision.
 - `reports/design_review.md` and `reports/preregistration.md`: frozen review and gates.
 - `reports/artifact_manifest.yaml`: external adapter and merged-model locations.

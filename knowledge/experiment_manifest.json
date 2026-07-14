@@ -5740,7 +5740,7 @@
   },
   {
     "file_counts": {
-      ".json": 6,
+      ".json": 11,
       ".jsonl": 5,
       ".log": 3,
       ".md": 7,
@@ -5754,16 +5754,17 @@
     "research_programs": [
       "agentic_breadth_installation",
       "benchmark_generalization",
+      "evidence_conditioned_selection",
       "posttraining_and_adaptation",
       "process_control_and_tool_use",
+      "reliability_and_safety",
       "structured_execution_and_compilers"
     ],
     "source_track": "new",
-    "summary": "Can an order-of-magnitude lower density of truth-audited designed procedures add transfer to the replay-refreshed policy without giving back its broad gains, once the designed and replay-only arms are matched exactly on rows, optimizer steps, slot order, and forward-token exposure?",
+    "summary": "**Outcome:** completed negative on 2026-07-13; all arms failed the fresh local gate and the benchmark remained sealed.",
     "tags": [
+      "counterexamples",
       "curriculum",
-      "latent-state",
-      "policy",
       "small-model"
     ],
     "title": "Low-Density Token-Matched Universal Curriculum",
@@ -5776,8 +5777,8 @@
       "src",
       "tests"
     ],
-    "total_files": 39,
-    "total_size_bytes": 23412571
+    "total_files": 44,
+    "total_size_bytes": 24008365
   },
   {
     "file_counts": {

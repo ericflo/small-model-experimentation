@@ -502,3 +502,28 @@ reduce designed density by an order of magnitude, and match both optimizer steps
 and forward-token exposure against replay continuation. Require retention of all
 eight observed gains and strict lift of every family; do not tune on seed 78133
 or reuse this directory.
+
+## qwen35_4b_universal_low_density_token_match (2026-07-13 — Exact-token local negative)
+
+Three 1,520-row continuations started from the authenticated replay-refresh
+adapter and received exactly 190 effective-batch-8 updates and 1,429,053 forward
+tokens. A common 1,440-row replay core occupied identical slots. The 0-, 40-, and
+80-row designed doses replaced two, one, or zero independently token-matched
+40-row replay blocks. All three trained with zero tokenizer skips.
+
+Fresh local seed 88004 rejected every arm before merge or benchmark. Replay repeat
+scored 0.500 accuracy, 0.538 parse, and 13 cap contacts; designed40 scored
+0.500/0.538/12; designed80 scored 0.538/0.615/10. The inherited replay-refresh
+anchor was 0.538/0.577/11. Every candidate passed the feasible-route abstention
+check but failed the frozen accuracy ≥0.65, parse ≥0.90, and cap-contact ≤2
+requirements. The promotion receipt contained no eligible arm, and benchmark seed
+78134 remained unconsumed.
+
+Read: exact forward-token parity removes the prior compute-dose ambiguity at these
+low densities. Forty or 80 designed rows are insufficient to install concise local
+execution from the strong replay anchor. The 80-row arm directionally improves
+parseability and cap behavior over replay repeat, but only ties the inherited
+anchor's accuracy and remains far outside the gate. This does not measure broad
+retention and does not reject intermediate doses or termination-focused mechanisms.
+A successor must use a new directory and fresh seeds, preserve exact-token replay
+controls, and pass a prospectively frozen local gate before any benchmark event.

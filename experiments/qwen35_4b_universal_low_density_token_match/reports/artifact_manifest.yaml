@@ -22,10 +22,10 @@ external_artifacts:
     required_for: "80-row candidate evaluation"
     checksum: "weights ba82457d127c63662b5b86b4a2e1d94ed18014651b59aefd6512690eef1dabc4; config 6f3710860c78a559d3592d4a43389f0347b171d1f9bfc083737d448e2fe04520"
     regenerate: ".venv/bin/python experiments/qwen35_4b_universal_low_density_token_match/scripts/run.py --stage train-d80"
-  - name: "eligible merged checkpoints (planned)"
+  - name: "eligible merged checkpoints (not produced)"
     storage: "large_artifacts/qwen35_4b_universal_low_density_token_match/merged/"
-    required_for: "same-backend aggregate evaluation"
-    checksum: "pending local gates and explicit merge"
+    required_for: "same-backend aggregate evaluation, conditional on local pass"
+    checksum: "not produced; every arm failed the frozen local gate"
     regenerate: ".venv/bin/python experiments/qwen35_4b_universal_low_density_token_match/scripts/run.py --stage merge"
 omitted_artifacts:
   - path: "large_artifacts/qwen35_4b_universal_low_density_token_match/"
@@ -54,5 +54,8 @@ notes: >-
   8f1ab673b7570452474639d351ac8e5d756fc574dce607c221d84edacd3838b5) and its
   normalized log is runs/training/designed80.log (SHA-256
   23685837e14702657bcb941d34166e9997ed19d5c249f81fe30a3a6c553a9af1).
-  Update the remaining planned merged-checkpoint checksums after successful local
-  gates and merge.
+  The complete local receipt is runs/local/seed88004.json (SHA-256
+  5a012f15225d93cca00e7ea974472e3319a66e39b071b54418d323750631fcbb) and the
+  fail-closed promotion receipt is runs/local/seed88004_promotion.json (SHA-256
+  fc90df3c56c861819c2bc6f8776fd659d6d37484c4357a3320bc6598288a1da7).
+  No merged checkpoint or benchmark artifact was produced.

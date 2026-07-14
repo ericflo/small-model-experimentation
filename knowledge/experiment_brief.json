@@ -13250,32 +13250,32 @@
    ]
   },
   "qwen35_4b_universal_low_density_token_match": {
-      "verdict_tag": "Replay control trained; transfer remains unmeasured",
+      "verdict_tag": "Low-density doses failed the local gate",
    "concept_primer": "The previous designed mix may have been too dense, and its replay comparison also saw more tokens. This follow-up changes only a tiny number of rows while holding total training exposure exactly equal, so the later difference can be tied much more cleanly to curriculum content.",
    "plain_question": "Can a tiny dose of abstract skill lessons improve the replay-refreshed model without erasing any of its broad gains?",
-      "plain_answer": "Not measured yet. All three streams finished all 190 updates with zero skipped rows and exactly equal exposure. The fresh local screen and broad evaluation remain pending, so training completion alone says nothing yet about transfer.",
-   "why_it_matters": "The prior comparison could reject its candidate but could not separate content from a 17% token-exposure gap. Exact matching removes that ambiguity and tests whether designed lessons help at a gentle density rather than overwhelming a strong broad policy.",
-   "verdict_tone": "neutral",
+      "plain_answer": "No. Neither 40 nor 80 abstract lessons passed the fresh local screen. The stronger 80-lesson stream matched the inherited anchor at 54% accuracy and parsed 62% of answers, but still hit the answer cap 10 times; broad evaluation stayed sealed.",
+   "why_it_matters": "Exact exposure removes the prior compute ambiguity: these gentle lesson doses were too small to install reliable concise execution. The next attempt must bridge the dose gap or target answer commitment directly, while keeping a replay-only comparison and fresh evaluation seeds.",
+   "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "forward tokens per stream",
-     "value": "1,429,053",
-     "sub": "exactly equal across all three training streams"
+     "label": "best local accuracy",
+     "value": "54%",
+     "sub": "80-lesson stream tied the inherited anchor"
     },
     {
-     "label": "shared replay rows",
-     "value": "1,440",
-     "sub": "identical rows in identical shuffled slots"
+     "label": "best answer parse rate",
+     "value": "62%",
+     "sub": "below the registered 90% gate"
     },
     {
-     "label": "designed doses",
-     "value": "40 / 80",
-     "sub": "both cover all 13 abstract skills"
+     "label": "fewest answer-cap contacts",
+     "value": "10 of 26",
+     "sub": "the registered ceiling was two"
     },
     {
-          "label": "training streams complete",
-          "value": "three of three",
-          "sub": "all exact-exposure streams completed cleanly"
+          "label": "broad events consumed",
+          "value": "zero",
+          "sub": "all arms stopped at the local screen"
     }
    ],
    "charts": [
@@ -13284,6 +13284,12 @@
      "chart_plain_title": "Only the final 80 training slots change",
      "chart_read": "Every bar totals 1,520 rows. Moving from replay only to the 40- and 80-lesson doses replaces one or both token-matched replay blocks while the 1,440-row core stays fixed.",
      "chart_takeaway": "The ladder isolates a very small designed-content increment at exactly equal forward-token exposure."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "Every exact-exposure stream missed the local gate",
+     "chart_read": "Two bars per model show exact-answer accuracy and answer parse rate on the same 26 fresh cases. The 80-lesson stream is best among the new streams, but neither bar reaches its registered threshold.",
+     "chart_takeaway": "Adding 80 lessons modestly improves readable answers over replay alone, yet accuracy only ties the inherited anchor and answer-cap failures remain frequent."
     }
    ]
   },
