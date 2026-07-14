@@ -2,9 +2,10 @@
 
 ## Summary
 
-No scientific result exists. Fresh construction passed every preregistered
-collision and balance gate without model or GPU access. The implementation and
-all live calls remain sealed.
+No residual-capability result exists yet. Fresh construction passed every
+preregistered collision and balance gate, and the locked fresh calibration
+qualified the tokenizer-EOS/no-think/`PROGRAM:` interface. Mechanics and hidden
+scoring remain sealed.
 
 ## Research Program Fit
 
@@ -36,19 +37,23 @@ Completed reruns authenticate tracked outputs without reading that key.
   firewall. Its administrative receipt was migrated without changing any
   scientific collision domain or reading the key, sampled outputs, parent raw
   bundles, or benchmarks.
-- Exact commit `98e9e9f6` remains under `HOLD_IMPLEMENTATION`; repaired bytes
-  require a new exact-commit independent review before release.
+- Exact commit `98e9e9f6` remains under `HOLD_IMPLEMENTATION`; the repaired
+  bytes later received a separate exact-commit independent review.
 - The calibration review report is now pre-scaffolded as a tracked,
   non-authorizing HOLD artifact because the lock's reviewed critical inventory
   requires that path to exist in the implementation commit.
 - Fresh three-round review of exact pushed-green commit `50fd804b` returned
   `PASS_IMPLEMENTATION`: 145/145 protected-safe tests and 48/48 predecessor
   mutation probes passed with zero model/GPU/protected access. Machine review
-  receipts and both release locks remain to be published separately.
+  receipts were subsequently published as a separate checkpoint.
 - The authenticated static launcher minted calibration-only implementation
   lock `b2204667...b733e`, binding the reviewed bytes, receipt release, exact
   inputs/runtime, and frozen mechanics blobs with zero prior model/protected
-  access. Exact lock-commit CI remains required before calibration.
+  access. Exact lock-commit CI passed before calibration.
+- After exact lock CI, calibration authenticated all 192 boundary pairs and
+  selected `tokenizer_eos_no_think_program_slot`: both no-think tokenizer-EOS
+  forms were 48/48, think512 forms were 34/48 and 26/48, and all HF-model-EOS
+  controls were 0/48. This qualifies transport; it is not capability evidence.
 
 ## Controls
 

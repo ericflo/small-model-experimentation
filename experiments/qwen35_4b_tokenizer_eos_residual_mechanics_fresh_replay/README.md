@@ -1,6 +1,6 @@
 # Qwen3.5-4B Tokenizer-EOS Residual Mechanics Fresh Replay
 
-**Status:** in-progress · since 2026-07-14 · `CONSTRUCTION_PASS`; repaired implementation and exact review PASS; calibration lock minted model-free, exact lock CI and all model calls remain
+**Status:** in-progress · since 2026-07-14 · fresh calibration qualified tokenizer-EOS/no-think/`PROGRAM:`; calibration publication CI, mechanics lock, and mechanics calls remain
 
 This fresh-identity successor preserves the parent's qualified tokenizer-EOS
 interface and frozen residual-mechanics science while separating initial
@@ -83,7 +83,7 @@ review, exact-commit green CI, and separately published locks.
 
 ## Results
 
-No scientific result exists. Fresh model-free construction passed:
+No residual-capability result exists yet. Fresh model-free construction passed:
 
 - 72/72 new exact-depth-three functions and public instances are disjoint from
   the parent.
@@ -131,8 +131,8 @@ generation.
 The independent review of exact commit `98e9e9f6` returned
 `HOLD_IMPLEMENTATION` for the undeclared source, exact-type alias, and temporal
 reauthentication defects. Those findings are repaired here, but that verdict
-does not transfer: a fresh independent review of the new exact pushed-green
-commit is still required before any lock or model call.
+did not transfer: a fresh independent review of the new exact pushed-green
+commit was required before release.
 
 A release-path audit also found that the calibration critical inventory named
 an implementation-review report that had never been scaffolded in the
@@ -144,8 +144,8 @@ Fresh three-round independent review of exact pushed-green commit `50fd804b`
 returned `PASS_IMPLEMENTATION`: 145/145 protected-safe tests passed, the full
 48/48 predecessor mutation matrix failed closed, both static launchers rebuilt
 byte-identically, and model/GPU/protected access remained zero. Canonical
-calibration and mechanics machine receipts must still be committed, pushed,
-and green before either model-free lock can be published.
+calibration and mechanics machine receipts were then committed, pushed, and
+green before calibration-lock publication.
 
 The authenticated static launcher subsequently minted the calibration-only
 implementation lock with SHA-256
@@ -153,8 +153,25 @@ implementation lock with SHA-256
 It binds reviewed implementation `50fd804b`, review-release commit `21f964e6`,
 all 31 calibration critical files, the exact Qwen3.5-4B revision/backend, and
 the frozen mechanics Git blobs. The lock records zero prior model requests,
-sampled outputs, or protected reads. Calibration remains sealed until this
-lock commit is pushed and green in both exact workflows.
+sampled outputs, or protected reads. Calibration remained sealed until this
+lock commit was pushed and green in both exact workflows.
+
+After lock commit `e21aa1bb` passed exact workflows `29336526045` and
+`29336525980`, the sealed calibration completed and authenticated all 192
+boundary pairs / 384 answer requests. Decision SHA-256 is
+`7a52bb4f097bffd220ac9d54f22a07e474b1600f822004c05a66645b896166eb`:
+
+- tokenizer-EOS no-think `PROGRAM:`: 48/48 exact and parse;
+- tokenizer-EOS no-think freeform: 48/48 exact and parse;
+- tokenizer-EOS think512 `PROGRAM:`: 34/48;
+- tokenizer-EOS think512 freeform: 26/48;
+- all four matched HF-model-EOS cells: 0/48.
+
+The fixed tokenizer-priority rule selected
+`tokenizer_eos_no_think_program_slot`. This is interface qualification, not a
+capability claim. Calibration read no mechanics, hidden, or benchmark files.
+Its decision must be committed, pushed, and green before the separately
+reviewed winner-bound mechanics lock may be published.
 
 ## Interpretation
 

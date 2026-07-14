@@ -117,3 +117,22 @@ Created as a new experiment scaffold.
 - The lock records zero experimental requests, sampled outputs, hidden reads,
   qualification reads, confirmation reads, and benchmark reads. No model call
   is authorized until the lock commit itself is pushed and green.
+
+## Fresh calibration
+
+- Lock commit `e21aa1bb` passed exact workflows `29336526045` and
+  `29336525980`; GPU availability was 48,639 MiB free with no compute process.
+- Ran the sealed static calibration launcher with only
+  `Qwen/Qwen3.5-4B@851bf6e8` and the pinned vLLM 0.24.0+cu129 backend. The live
+  preflight passed before 0 experimental requests / 0 sampled outputs and has
+  SHA-256 `43ab69bb...e6d5d5`.
+- All 192 boundary pairs and 384 answer requests authenticated. No-think
+  tokenizer-EOS `PROGRAM:` and freeform were each 48/48 exact/parse; think512
+  `PROGRAM:` was 34/48 and think512 freeform 26/48. Every matched HF-model-EOS
+  cell was 0/48.
+- The fixed priority selected `tokenizer_eos_no_think_program_slot`, yielding
+  `TOKENIZER_EOS_ONLY_INTERFACE_QUALIFIED`. Decision SHA-256 is
+  `7a52bb4f097bffd220ac9d54f22a07e474b1600f822004c05a66645b896166eb`.
+- Calibration read no mechanics, hidden, qualification, confirmation, or
+  benchmark file. Mechanics remains sealed until this decision is committed,
+  pushed, green, and bound by the separately reviewed mechanics lock.
