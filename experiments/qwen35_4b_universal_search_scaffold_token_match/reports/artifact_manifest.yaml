@@ -7,17 +7,25 @@ external_artifacts:
     required_for: "frozen common warm start"
     checksum: "weights 16e9dc75a0e33e182e916600ff6e1d75fc46dfa45e870216e2c149a41253c179; config de953bd57502ff728a12d1627d5aacab6284b045428ec7b83026388afd8c47ff"
     regenerate: ".venv/bin/python experiments/qwen35_4b_universal_close_weight_token_match/scripts/run.py --stage train-close"
+  - name: "replay_after_close adapter"
+    storage: "large_artifacts/qwen35_4b_universal_search_scaffold_token_match/adapters/replay_after_close"
+    required_for: "fresh paired local control and conditional explicit merge"
+    checksum: "weights 1015523285c3ca23eb57305a730af310aa686b16bfc17e005d2aa2d023afc538; config 373c142676eac28d0519e7f88dcb63389de6e92b500e3b9e3d7d58e1b312ac9b"
+    regenerate: ".venv/bin/python experiments/qwen35_4b_universal_search_scaffold_token_match/scripts/run.py --stage train-control"
 omitted_artifacts:
   - path: "large_artifacts/qwen35_4b_universal_search_scaffold_token_match/"
-    reason: "future adapters and merged checkpoints are large and gitignored; none exist at design freeze"
+    reason: "adapters and future merged checkpoints are large and gitignored; replay control exists"
 reproducibility:
   smoke_command: "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_search_scaffold_token_match/scripts/run.py --smoke"
   full_command: "run.py --stage train-control; commit/push/verify; --stage train-candidate; commit/push/verify; --stage local; conditionally --stage merge; conditionally --stage benchmark"
   required_external_artifacts:
     - "large_artifacts/qwen35_4b_universal_close_weight_token_match/adapters/close_xi"
+    - "large_artifacts/qwen35_4b_universal_search_scaffold_token_match/adapters/replay_after_close"
 notes: >-
   Design frozen. Construction seed 77111 produced source 5854c218...a093; replay and
   candidate streams are c157fb13...355d and 79a8d7c9...0b90, each 320 rows and
   286814 exact forward tokens under receipt eeb12b95...e4a0f. Training seed 45,
-  fresh local seed 88007, and conditional aggregate seed 78137 are frozen. No
-  adapter, merge, local receipt, or benchmark receipt exists yet.
+  fresh local seed 88007, and conditional aggregate seed 78137 are frozen. Replay
+  training completed at git 603b8107 with receipt 5b293eb6...5a66, loss 0.4215,
+  and zero skips. No candidate adapter, merge, local receipt, or benchmark receipt
+  exists yet.

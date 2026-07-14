@@ -48258,7 +48258,7 @@
      "x_label": "frozen stream component",
      "y_label": "training rows",
      "y_format": "integer",
-     "note": "CPU feasibility passed: both arms have 320 rows, exactly 286,814 forward tokens, zero skips, and 40 frozen updates. No model run exists yet.",
+     "note": "CPU feasibility passed. The replay control completed 320 rows, zero skips, and 40 updates at loss 0.4215; the staged-search candidate and capability evaluation remain pending.",
      "source": "experiments/qwen35_4b_universal_search_scaffold_token_match/configs/default.yaml"
     }
    ]

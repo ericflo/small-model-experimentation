@@ -13926,7 +13926,7 @@
     "verdict_tag": "Staged-search design is frozen and feasible",
    "concept_primer": "Earlier lessons showed a complete worked search trace, but the model still wandered among candidates and ran out of room. This design turns the missing intermediate moves—apply, fit, reject, and execute—into separately graded practice before recombining them.",
    "plain_question": "Can teaching each step of a bounded two-operation search help the model solve and finish fresh abstract tasks better than another equal replay update?",
-    "plain_answer": "No model run exists yet. CPU feasibility succeeded: the replay control and staged-search candidate each contain 320 rows, exactly 286,814 forward tokens, zero skips, and 40 frozen updates from the same authenticated parent.",
+    "plain_answer": "CPU feasibility succeeded, and the replay control has trained successfully on all 320 rows with zero skips and 40 updates. The staged-search candidate and every capability evaluation remain pending.",
    "why_it_matters": "This tests a different causal idea from heavier stop-marker loss. If it works, the gain comes from making search substates reusable and composable rather than from showing another full answer narration or spending more compute.",
    "verdict_tone": "neutral",
    "key_numbers": [
@@ -13952,8 +13952,8 @@
     },
     {
      "label": "Model runs so far",
-     "value": "zero",
-        "sub": "43 tests and the CPU smoke pass"
+     "value": "one",
+        "sub": "replay control only; final loss 0.4215"
     }
    ],
    "charts": [

@@ -11,4 +11,4 @@ optimizer_steps: 40
 shared_position_aligned_replay_rows: 200
 scaffold_rows: 80
 replay_filler_rows: 40
-status: preregistered_design_frozen
+status: replay_control_trained_candidate_pending

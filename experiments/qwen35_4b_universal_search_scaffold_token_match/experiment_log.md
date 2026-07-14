@@ -43,3 +43,19 @@ runnable staged-search stream before adversarial review.
 
 Next: commit, rebase, run the full repository check, push this design freeze to
 `main`, verify both workflows, and only then train the replay control.
+
+## 2026-07-14 — Replay control training
+
+- Began only after design-freeze commit `603b8107` was pushed to `main` and both
+  Validate Repository and Publish Research Site completed successfully.
+- Authenticated the `close_xi` warm start and exact replay stream/token receipt.
+- Trained `replay_after_close` for the frozen 320 rows, one epoch, 40 optimizer
+  steps, seed 45, and ordinary thought/close weights 0.2. All 320 rows encoded and
+  zero skipped.
+- Completed in 281.2 wall seconds with final train loss 0.4215.
+- Preserved receipt/log hashes `5b293eb6...5a66` / `7d3bc262...d5f7`.
+  External adapter weights/config hashes are `10155232...fc538` /
+  `373c1426...ac9b`; weight size is 169,903,320 bytes.
+- No candidate training, local generation, merge, or benchmark event ran.
+
+Next: publish and CI-verify this control checkpoint, then train the frozen candidate.

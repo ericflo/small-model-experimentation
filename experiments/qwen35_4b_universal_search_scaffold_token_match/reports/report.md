@@ -2,9 +2,9 @@
 
 ## Summary
 
-The design is frozen after successful CPU feasibility. It will test staged executable
-search lessons against a same-parent, exact-token replay continuation. No model result
-exists.
+The design is frozen after successful CPU feasibility. The same-parent exact-token
+replay control has trained successfully; the staged-search candidate and all
+capability evaluation remain pending. No capability result exists.
 
 ## Research Program Fit
 
@@ -26,12 +26,16 @@ zero skips, and 40 frozen updates from the same authenticated parent.
 CPU construction passed: source SHA-256 `5854c218...a093`; candidate stream
 `79a8d7c9...0b90`; replay stream `c157fb13...355d`; exact token receipt
 `eeb12b95...e4a0f`. Forty-three experiment tests and the full smoke harness pass.
-No training, local evaluation, merge, or benchmark event has run.
+The replay control completed 40/40 updates over 320/320 rows with zero skips in
+281.2 seconds. Final train loss was 0.4215. Its adapter weights/config SHA-256 are
+`10155232...fc538` / `373c1426...ac9b`; receipt/log SHA-256 are
+`5b293eb6...5a66` / `7d3bc262...d5f7`. No candidate training, local evaluation,
+merge, or benchmark event has run.
 
 ## Controls
 
 - Authenticated `close_xi` parent.
-- Newly trained replay-only continuation from that parent.
+- Authenticated newly trained replay-only continuation from that parent.
 - Exact row, forward-token, update, seed, optimizer, close-weight, and parent matching.
 - Two hundred byte-identical replay positions; batch size one avoids padding-compute
   differences.
@@ -53,11 +57,13 @@ registered interpretation limits, not hidden after-the-fact caveats.
 
 ## Next Experiments
 
-Train the replay control, publish and verify it, then train the candidate. Run the
-single fresh local event only after both receipts are published. Consume the paired
-aggregate pilot only if the sole candidate passes every frozen local check.
+Publish and verify the completed replay control, then train the candidate from the
+same parent. Run the single fresh local event only after both receipts are published.
+Consume the paired aggregate pilot only if the sole candidate passes every frozen
+local check.
 
 ## Artifact Manifest
 
 The parent, frozen data identities, commands, and future external-artifact locations
-are recorded in `artifact_manifest.yaml`. No candidate artifact exists yet.
+are recorded in `artifact_manifest.yaml`. The replay adapter exists externally; no
+candidate artifact exists yet.
