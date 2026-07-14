@@ -36,3 +36,26 @@ The direct plan-plus-answer positive control has a deliberately higher sanity ba
 coverage@16 at least 0.50, improvement over frozen at least 0.20, and a positive
 paired lower bound. Failure means the training/generalization setup is not sensitive
 enough to adjudicate the treatment and stops the branch.
+
+## End-to-End Matched-Compute Promotion
+
+The ordinary qualification and confirmation decisions compare all arms at 16
+candidates to determine whether training produced a broad, replicated distributional
+shift. That is not the final sample-more comparison. After both confirmation decisions
+pass, frozen Qwen receives fixed-seed blocks of 16 candidates per task on the same
+persistent vLLM engine. Block generation stops using compute fields only—never labels,
+scores, or correctness—at the first completed block satisfying both:
+
+- token-forward equivalents at least the larger seed's full training charge
+  (`forward_tokens × 3`) plus its correct-model confirmation inference tokens; and
+- wall time at least the larger seed's training GPU phase plus correct-model load and
+  confirmation generation, versus one frozen load plus every completed block.
+
+The complete 36-step training cost is charged to each 144-task confirmation split;
+there is no cross-task, cross-seed, or hypothetical deployment amortization. The
+reservoir is capped at 16 blocks (256 candidates/task). Failure to reach both units by
+that cap is a protocol failure. Each correct-reflection seed must independently have
+a strictly positive mean coverage@16 advantage over the resulting frozen coverage,
+a positive paired-bootstrap lower 95% bound, and a nonnegative point delta in every
+family. Thus a larger trained-vs-frozen effect at equal candidate count cannot by
+itself support the capability claim.

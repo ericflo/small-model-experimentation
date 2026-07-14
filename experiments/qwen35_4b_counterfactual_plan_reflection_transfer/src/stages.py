@@ -36,7 +36,7 @@ def require_clean_worktree() -> None:
 
 
 def _validate_claim_schema(claim: dict[str, Any]) -> Path:
-    kinds = {"calibration_gate", "decision", "retention"}
+    kinds = {"calibration_gate", "decision", "retention", "matched_compute"}
     if claim.get("kind") not in kinds or set(claim) != {"kind", "path", "sha256"}:
         raise ValueError("stage prerequisite claim schema changed")
     digest = claim.get("sha256")
@@ -128,6 +128,11 @@ def validate_stage_receipt(
     retentions = [
         value for claim, value in zip(claims, resolved) if claim["kind"] == "retention"
     ]
+    matched = [
+        value
+        for claim, value in zip(claims, resolved)
+        if claim["kind"] == "matched_compute"
+    ]
     if expected_stage == "replication_training":
         if len(claims) != 2 or len(decisions) != 1 or len(retentions) != 1:
             raise ValueError("replication stage prerequisite cardinality changed")
@@ -166,7 +171,12 @@ def validate_stage_receipt(
         if "positive_control" in by_seed[replication]:
             raise ValueError("confirmation stage contains an unauthorized replication positive control")
         return
-    if len(claims) != 2 or len(decisions) != 2 or retentions:
+    if (
+        len(claims) != 3
+        or len(decisions) != 2
+        or len(matched) != 1
+        or retentions
+    ):
         raise ValueError("final stage prerequisite cardinality changed")
     by_seed = {int(value["seed"]): value for value in decisions}
     if set(by_seed) != {screen, replication} or any(
@@ -177,6 +187,17 @@ def validate_stage_receipt(
         raise ValueError("final stage lacks both passing confirmation decisions")
     if any("positive_control" in value for value in by_seed.values()):
         raise ValueError("final stage contains confirmation positive-control evidence")
+    matched_gate = matched[0].get("gate", {})
+    if (
+        matched_gate.get("pass") is not True
+        or matched_gate.get("budget_pass") is not True
+        or set(map(int, matched_gate.get("by_seed", {}))) != {screen, replication}
+        or any(
+            value.get("pass") is not True
+            for value in matched_gate.get("by_seed", {}).values()
+        )
+    ):
+        raise ValueError("final stage lacks the passing two-seed matched-compute gate")
 
 
 def read_and_validate_stage_receipt(

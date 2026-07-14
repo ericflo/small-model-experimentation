@@ -77,6 +77,22 @@ def _require_retention(
     return value
 
 
+def _require_matched_compute(path: Path, *, config: dict, config_path: Path) -> dict:
+    value = validate_gate_artifact(
+        path,
+        kind="matched_compute",
+        config=config,
+        config_path=config_path,
+        experiment_root=EXP,
+    )
+    if (
+        value.get("gate", {}).get("pass") is not True
+        or value.get("gate", {}).get("budget_pass") is not True
+    ):
+        raise ValueError(f"{path} did not pass the matched-compute gate")
+    return value
+
+
 def _claim(kind: str, path: Path) -> dict:
     resolved = path.resolve()
     return {"kind": kind, "path": str(resolved), "sha256": _sha(resolved)}
@@ -99,6 +115,7 @@ def main() -> int:
     parser.add_argument("--qualification", type=Path, action="append", default=[])
     parser.add_argument("--confirmation", type=Path, action="append", default=[])
     parser.add_argument("--retention", type=Path, action="append", default=[])
+    parser.add_argument("--matched-compute", type=Path, action="append", default=[])
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     config_path = EXP / "configs" / "default.yaml"
@@ -115,12 +132,18 @@ def main() -> int:
     if args.stage == "calibration_generation":
         if config["authorization"]["evaluation"] is not True:
             raise ValueError("calibration generation is not authorized")
-        if args.calibration is not None or args.qualification or args.confirmation or args.retention:
+        if (
+            args.calibration is not None
+            or args.qualification
+            or args.confirmation
+            or args.retention
+            or args.matched_compute
+        ):
             raise ValueError("calibration generation accepts no prerequisites")
     elif args.stage == "screen_training":
         if config["authorization"]["training"] is not True:
             raise ValueError("screen training is not authorized")
-        if args.qualification or args.confirmation or args.retention:
+        if args.qualification or args.confirmation or args.retention or args.matched_compute:
             raise ValueError("screen training accepts only calibration")
         if args.calibration is None:
             raise ValueError("screen training requires calibration")
@@ -142,7 +165,7 @@ def main() -> int:
     elif args.stage == "replication_training":
         if config["authorization"]["training"] is not True:
             raise ValueError("replication training is not authorized")
-        if args.calibration is not None or args.confirmation:
+        if args.calibration is not None or args.confirmation or args.matched_compute:
             raise ValueError("replication training received unrelated prerequisites")
         if len(args.qualification) != 1 or len(args.retention) != 1:
             raise ValueError("replication training requires screen qualification and retention")
@@ -161,7 +184,7 @@ def main() -> int:
     elif args.stage == "confirmation":
         if config["authorization"]["evaluation"] is not True:
             raise ValueError("confirmation is not authorized")
-        if args.calibration is not None or args.confirmation:
+        if args.calibration is not None or args.confirmation or args.matched_compute:
             raise ValueError("confirmation received unrelated prerequisites")
         if len(args.qualification) != 2 or len(args.retention) != 2:
             raise ValueError("confirmation requires two qualification and two retention passes")
@@ -193,9 +216,11 @@ def main() -> int:
         ]
     else:
         if args.calibration is not None or args.qualification or args.retention:
-            raise ValueError("final stage accepts only confirmation decisions")
+            raise ValueError("final stage accepts only confirmations and matched compute")
         if len(args.confirmation) != 2:
             raise ValueError("final authorization requires both confirmation decisions")
+        if len(args.matched_compute) != 1:
+            raise ValueError("final authorization requires one matched-compute gate")
         by_seed = {int(_read(path).get("seed", -1)): path for path in args.confirmation}
         if set(by_seed) != {screen, replication}:
             raise ValueError("final prerequisites do not contain both frozen seeds")
@@ -207,10 +232,19 @@ def main() -> int:
             by_seed[replication], "confirmation", replication, positive=False,
             config=config, config_path=config_path,
         )
-        inputs = list(args.confirmation)
+        matched_value = _require_matched_compute(
+            args.matched_compute[0], config=config, config_path=config_path
+        )
+        if set(map(int, matched_value.get("gate", {}).get("by_seed", {}))) != {
+            screen,
+            replication,
+        }:
+            raise ValueError("matched-compute gate does not contain both frozen seeds")
+        inputs = [*args.confirmation, *args.matched_compute]
         claims = [
             _claim("decision", by_seed[screen]),
             _claim("decision", by_seed[replication]),
+            _claim("matched_compute", args.matched_compute[0]),
         ]
     config_sha256 = _sha(config_path)
     for path in inputs:

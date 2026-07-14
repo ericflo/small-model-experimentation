@@ -166,9 +166,25 @@ evaluation:
     - auxiliary_plan_label_correct_action
     - direct_plan_answer_positive_control_action
   frozen_sample_more:
-    same_backend: true
-    same_candidate_count: 16
+    mode: outcome_blind_compute_stopped_reservoir
+    same_backend: vllm
+    block_candidate_count: 16
+    maximum_blocks: 16
+    maximum_candidates_per_task: 256
+    block_run_seeds:
+      [88037, 88103, 88169, 88237, 88303, 88369, 88439, 88507,
+       88573, 88643, 88711, 88777, 88843, 88913, 88979, 89047]
     same_thinking_and_answer_caps: true
+    prefix_caching: false
+    stop_rule: first_complete_block_whose_cumulative_wall_and_token_forward_equivalents_both_reach_target
+    stop_inputs: compute_receipts_only_no_labels_scores_or_correctness
+    target_across_seeds: maximum_of_the_two_independent_reflection_correct_seed_costs
+    amortization_horizon: full_training_charged_to_each_144_task_confirmation_split
+    training_token_charge: forward_tokens_times_fixed_forward_backward_multiplier_3
+    inference_token_charge: logical_model_input_tokens_plus_sampled_tokens
+    reservoir_wall_charge: one_base_model_load_plus_all_completed_block_generation_seconds
+    trained_wall_charge: training_gpu_phase_plus_merged_model_load_plus_confirmation_generation
+    fail_if_maximum_blocks_do_not_reach_both_compute_units: true
   literal_reflection_diagnostic:
     candidate_count: 4
     reflection_thinking: false
@@ -217,6 +233,12 @@ decision_gates:
     correct_minus_auxiliary_min: 0.05
     paired_delta_lower_95_gt: 0.0
     note: capability_pass_without_this_is_generic_auxiliary_plan_transfer_not_reflection_specific
+  final_matched_compute:
+    correct_at_16_minus_frozen_matched_delta_gt: 0.0
+    paired_delta_lower_95_gt: 0.0
+    each_family_delta_min: 0.0
+    require_both_seed_gates: true
+    require_wall_and_token_forward_budget: true
   retention_noninferiority:
     each_depth_delta_min: -0.05
     each_family_delta_min: -0.125

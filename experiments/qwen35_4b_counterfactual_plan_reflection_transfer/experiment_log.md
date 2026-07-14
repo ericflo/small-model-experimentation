@@ -1,5 +1,29 @@
 # Counterfactual Plan Reflection Transfer Experiment Log
 
+## 2026-07-14 — Review-7 provenance and matched-compute remediation
+
+- Review 7 held the full implementation on seven reproduced blockers: contradictory
+  remote-code provenance, no training-cost sample-more baseline, incomplete
+  base/tokenizer/runtime and post-load byte binding, numeric rather than bitwise replay,
+  no immutable execution-worktree enforcement, and a malformed parity-gate list.
+- Published the first remediation tranche on `main` as `9c8cfed7` after resolving a
+  concurrent generated-index rebase conflict. It pins all tokenizer-semantic files,
+  carries exact base/tokenizer/runtime/training-compute commitments through schema-6
+  merge lineage, reauthenticates after vLLM engine load, hashes raw tensor bytes, and
+  enforces one clean detached exact-SHA execution worktree.
+- Replaced the equal-16-candidate sample-more placeholder with an outcome-blind frozen
+  vLLM reservoir. It accumulates fixed 16-candidate blocks until both token-forward
+  equivalents and wall time reach the maximum full training-plus-confirmation cost of
+  the two correct-reflection seeds. Labels and scores are not accepted by the stopping
+  process.
+- Added a replayable final gate: both correct-reflection seeds must strictly beat the
+  compute-stopped frozen coverage with positive paired-bootstrap lower bounds and
+  nonnegative deltas in all three families. Final stage authorization now requires
+  both passing confirmation decisions plus this matched-compute artifact.
+- All authorization flags remain unchanged. The historical tokenizer receipt is
+  invalid as a training prerequisite under the stronger schema; a fresh exact-SHA
+  tokenizer-only receipt awaits Review 8.
+
 ## 2026-07-14 — discovery and scaffold
 
 - Re-read the workspace paper's methods, intervention figures, counterfactual

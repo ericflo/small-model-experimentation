@@ -19,7 +19,12 @@
   model, preserving every unchanged tensor's source dtype and applying LoRA only to
   the registered target weights.
 - `vllm_runner.py` is the repository-pinned Qwen3.5-4B bulk-inference runner.
+- `runtime_contract.py` and `tokenizer_lineage.py` bind every execution stage to one
+  detached exact-SHA worktree and the complete tokenizer/runtime identity.
+- `matched_compute.py` validates the outcome-blind frozen reservoir, dual-unit compute
+  stop, raw generation ancestry, and two-seed final promotion comparison.
 
-Only the completed tokenizer receipt is authorized. QLoRA training, vLLM model
-generation, evaluation, and any future Transformers Jacobian work remain unauthorized
-until an independent review opens the corresponding committed gates.
+Only a fresh tokenizer receipt is authorized; the historical receipt predates the
+current schema and cannot authorize training. QLoRA training, vLLM generation,
+evaluation, and any future Transformers Jacobian work remain unauthorized until an
+independent review opens the corresponding committed gates.

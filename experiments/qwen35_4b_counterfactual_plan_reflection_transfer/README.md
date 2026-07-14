@@ -1,6 +1,6 @@
 # Qwen3.5-4B Counterfactual Plan Reflection Transfer
 
-**Status:** in-progress · since 2026-07-14 · tokenizer receipt authorized; model/GPU/training/evaluation remain on adversarial HOLD
+**Status:** in-progress · since 2026-07-14 · tokenizer-only stage authorized with fresh receipt pending; model/GPU/training/evaluation remain on adversarial HOLD
 
 This experiment tests the paper's most actionable claim without relying on its
 consciousness framing: can supervision on what the model would say on a later
@@ -26,8 +26,8 @@ interrupted internal action state.
 
 Can correct, reflection-only SFT on fresh three-step machine-induction contexts
 increase held-out answer coverage on the same contexts' unreflected action branch,
-beating a within-family shuffled-reflection arm, frozen Qwen3.5-4B, and
-matched-candidate sample-more? If it does, is the gain specific to reflection framing,
+beating a within-family shuffled-reflection arm, frozen Qwen3.5-4B, and an end-to-end
+matched-compute frozen sampling reservoir? If it does, is the gain specific to reflection framing,
 or does an equally sized ordinary auxiliary plan-label branch work just as well?
 
 ## Hypothesis
@@ -77,6 +77,11 @@ the correct non-reflective auxiliary-label arm.
 - Primary deployable metric: paired exact full-query coverage@16 under identical vLLM
   thinking/answer budgets. Candidate counts 1 and 4 are descriptive. Report every
   family separately.
+- End-to-end baseline: frozen Qwen uses the same persistent vLLM engine, prompts,
+  thinking/answer caps, and fixed 16-candidate blocks. It stops at the first complete
+  preregistered block whose cumulative spend reaches the larger of the two correct
+  reflection seeds' full training-plus-confirmation spend in both token-forward
+  equivalents and wall time. The stopping process accepts no labels or scores.
 - Hidden-label boundary: answers are procedural oracle labels used only for grading
   and direct positive control construction. No `benchmarks/` path may be read,
   imported, or used for training.
@@ -98,10 +103,15 @@ the correct non-reflective auxiliary-label arm.
    Both seeds must independently pass qualification before the fresh confirmation
    split opens; both must independently pass confirmation. No seed selection or
    ensembling is permitted. Retention must remain within the frozen margins.
-6. Reflection-specific interpretation additionally requires correct reflection to
+6. Final capability promotion additionally requires each seed's correct-reflection
+   coverage@16 to strictly beat the compute-stopped frozen reservoir, with a positive
+   paired-bootstrap lower bound and no negative family delta. One reservoir is sized
+   to the maximum of the two seed costs; a failure to reach both compute units within
+   16 blocks is a gate failure, not permission to change the accounting.
+7. Reflection-specific interpretation additionally requires correct reflection to
    beat the non-reflective auxiliary arm by 0.05 with a positive paired lower bound.
    Otherwise any capability pass is generic auxiliary-plan transfer.
-7. A replicated behavioral pass may open a **new, result-separated experiment** with
+8. A replicated behavioral pass may open a **new, result-separated experiment** with
    fresh J-fit, J-confirmation, and causal-confirmation data. No J-space fitting or
    ablation may reuse this experiment's behavioral gates.
 
@@ -150,6 +160,27 @@ tokenizer/config/script commitments, so the earlier tokenizer receipt
 and cannot authorize training. A fresh tokenizer-only receipt will be issued from the
 next independently reviewed exact SHA; no model or GPU authorization is implied.
 
+After—and only after—a future reviewed config enables confirmation evaluation, the
+compute baseline is invoked with both embedded correct-reflection training receipts
+and both raw confirmation metadata files. Its CLI intentionally has no label or score
+argument:
+
+```bash
+.venv-vllm/bin/python -B experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/run_frozen_reservoir.py \
+  --input <confirmation-prompts> --input-receipt <confirmation-input-receipt> \
+  --stage-receipt <confirmation-stage-receipt> \
+  --training-receipt <seed-47-training-receipt> \
+  --training-receipt <seed-53-training-receipt> \
+  --correct-metadata <seed-47-correct-confirmation-metadata> \
+  --correct-metadata <seed-53-correct-confirmation-metadata> \
+  --output-dir <external-reservoir-directory>
+```
+
+`matched_compute_gate.py` then replays both confirmation decisions and the complete
+reservoir manifest. `authorize_stage.py --stage final` requires that artifact via
+`--matched-compute` in addition to both `--confirmation` decisions. These commands are
+documentation, not present authorization.
+
 ## Results
 
 The repaired full model-free construction deterministically creates 576 depth-three
@@ -192,8 +223,9 @@ the complete pinned base snapshot, records the full installed-package/runtime/GP
 identity and charged training compute, carries those commitments through a schema-6
 merge receipt, reauthenticates bytes immediately after vLLM engine load, compares
 unchanged tensors by raw bytes, and enforces the detached execution-worktree contract
-above. The end-to-end matched-compute sampling gate remains to be completed before a
-fresh adversarial verdict.
+above. It also implements an outcome-blind, fixed-seed frozen reservoir with a
+dual-unit compute stop and a transitive two-seed final promotion gate. All work remains
+model-free and non-authorizing pending a fresh adversarial verdict.
 
 ## Interpretation
 
@@ -218,6 +250,7 @@ additional sampling. No scientific result exists yet.
 - `src/scoring.py`
 - `src/analyze.py`
 - `src/vllm_runner.py`
+- `src/matched_compute.py`
 - `src/runtime_contract.py`
 - `src/tokenizer_lineage.py`
 - `scripts/run.py`
@@ -231,6 +264,8 @@ additional sampling. No scientific result exists yet.
 - `scripts/score.py`
 - `scripts/score_literal.py`
 - `scripts/analyze.py`
+- `scripts/run_frozen_reservoir.py`
+- `scripts/matched_compute_gate.py`
 - `scripts/calibration_gate.py`
 - `scripts/retention_gate.py`
 - `scripts/authorize_stage.py`
@@ -242,5 +277,6 @@ additional sampling. No scientific result exists yet.
 - `tests/test_eval_inputs.py`
 - `tests/test_stages.py`
 - `tests/test_runtime_contract.py`
+- `tests/test_matched_compute.py`
 - `reports/artifact_manifest.yaml`
 - `reports/power_analysis.md`

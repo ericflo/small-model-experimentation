@@ -413,3 +413,32 @@ an enforced detached execution-worktree contract; and exact config-schema tests.
 Authorization remains tokenizer-only. Review 7 made zero tokenizer/model/GPU/training/
 evaluation/Jacobian calls and accessed no benchmark, run, large-artifact, hidden,
 qualification, confirmation, cache, or tensor-payload content.
+
+### Review 7 remediation implemented, pending Review 8
+
+- Runtime metadata and provenance now agree on `trust_remote_code=False`. The six YAML
+  parity gates have exact schema coverage, and unchanged tensor replay hashes raw
+  tensor bytes so signed-zero changes fail.
+- The tokenizer receipt authenticates the exact five tokenizer-semantic files at the
+  pinned public revision. Training records the complete installed-package lock,
+  hardware/runtime, base snapshot, tokenizer snapshot, detached worktree, per-row
+  token/mask hashes, and full training compute. Schema-6 merge lineage retains and
+  replays those commitments.
+- Base, tokenizer, and merged-model commitments are checked before engine creation and
+  immediately after vLLM opens the model. A mocked mutation test proves that a changed
+  post-load commitment shuts the engine down before generation.
+- Tokenizer, training, merge, stage authorization, and generation now require a clean
+  detached execution worktree at one exact SHA and root CWD. The normal `main`
+  worktree is explicitly reserved for concurrent commits/rebases/pushes.
+- Frozen sample-more is now an outcome-blind same-vLLM reservoir. Fixed 16-candidate
+  blocks stop only when both token-forward equivalents and wall time match the maximum
+  full training-plus-confirmation cost across the two correct-reflection seeds. The
+  final stage requires a replayable matched-compute artifact, two independent positive
+  paired lower bounds, and nonnegative family deltas.
+- The pinned-environment suite passes 80 model-free tests, including real mixed-dtype
+  safetensors serialization, exact tokenizer mutation rejection, detached-worktree
+  rejection, dual-unit compute stopping, and final-stage matched-gate cardinality.
+
+Authorization remains tokenizer-only. A fresh Review 8 must attack the exact pushed
+implementation and its full artifact chain before any model, GPU, training, or
+evaluation flag changes.

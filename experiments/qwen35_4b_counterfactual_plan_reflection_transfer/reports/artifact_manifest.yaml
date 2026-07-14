@@ -3,8 +3,8 @@ experiment_id: "qwen35_4b_counterfactual_plan_reflection_transfer"
 external_artifacts:
   - name: "tokenizer and target-mask parity receipt"
     storage: "large_artifacts/qwen35_4b_counterfactual_plan_reflection_transfer/tokenizer_receipt.json"
-    status: "produced after clean PASS_TOKENIZER_ONLY review"
-    required_for: "any future training, if the full implementation later passes review"
+    status: "historical; invalidated by Review-7 schema/config/provenance remediation"
+    required_for: "historical construction evidence only; forbidden as a training prerequisite"
     size_bytes: 470960
     checksum: "sha256:ddaddd0f7af8a97802ab8f4cfde6c480ef60c94dc74a5c3577dd9db674432079"
     regenerate: >-
@@ -22,12 +22,13 @@ reproducibility:
     PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B
     experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/run.py --construct
   required_external_artifacts:
-    - "large_artifacts/qwen35_4b_counterfactual_plan_reflection_transfer/tokenizer_receipt.json"
+    - "none until a fresh exact-SHA tokenizer receipt is independently authorized"
 notes: >-
-  Full CPU construction and the tokenizer-only receipt are authorized, but all model,
+  Full CPU construction and a fresh tokenizer-only receipt are authorized, but all model,
   GPU, training, evaluation, J-space, and benchmark work remains on adversarial HOLD.
   Qwen/Qwen3.5-4B revision 851bf6e8...d0a is the sole permitted future
   model. Reserved construction/shuffle/schedule/retention/training/evaluation seeds
-  are committed in configs/default.yaml. The tokenizer receipt records exact three-arm
-  token parity with zero model/GPU/benchmark events. No adapter, model output,
+  are committed in configs/default.yaml. The historical tokenizer receipt records
+  exact three-arm token parity with zero model/GPU/benchmark events but cannot satisfy
+  the current receipt schema. No current adapter, model output,
   activation, Jacobian, capability, benchmark, or hidden artifact exists.

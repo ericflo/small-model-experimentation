@@ -71,6 +71,19 @@ class StageReceiptTests(unittest.TestCase):
         }
 
     @staticmethod
+    def matched(screen: int, replication: int, passed: bool = True) -> dict:
+        return {
+            "gate": {
+                "pass": passed,
+                "budget_pass": passed,
+                "by_seed": {
+                    str(screen): {"pass": passed},
+                    str(replication): {"pass": passed},
+                },
+            }
+        }
+
+    @staticmethod
     def _replay_fixture(path: Path, **_kwargs) -> dict:
         return json.loads(path.read_text())
 
@@ -125,10 +138,22 @@ class StageReceiptTests(unittest.TestCase):
         claims = [
             self.claim("decision", self.decision(self.screen, block="confirmation")),
             self.claim("decision", self.decision(self.replication, block="confirmation")),
+            self.claim(
+                "matched_compute", self.matched(self.screen, self.replication)
+            ),
         ]
         self.validate("final", claims)
         with self.assertRaisesRegex(ValueError, "cardinality"):
             self.validate("final", claims[:1])
+        failed = [
+            *claims[:2],
+            self.claim(
+                "matched_compute",
+                self.matched(self.screen, self.replication, passed=False),
+            ),
+        ]
+        with self.assertRaisesRegex(ValueError, "matched-compute"):
+            self.validate("final", failed)
 
     def test_fabricated_or_changed_prerequisite_hash_cannot_authorize(self) -> None:
         nonexistent = {

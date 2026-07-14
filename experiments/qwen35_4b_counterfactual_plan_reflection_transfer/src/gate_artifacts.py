@@ -247,7 +247,7 @@ def validate_gate_artifact(
     config_path: Path,
     experiment_root: Path,
 ) -> dict[str, Any]:
-    if kind not in {"calibration_gate", "decision", "retention"}:
+    if kind not in {"calibration_gate", "decision", "retention", "matched_compute"}:
         raise ValueError("unknown gate artifact kind")
     observed = json.loads(path.read_text())
     if not isinstance(observed, dict) or observed.get("schema_version") != 2:
@@ -280,7 +280,7 @@ def validate_gate_artifact(
             config_path=config_path,
             experiment_root=experiment_root,
         )
-    else:
+    elif kind == "retention":
         if set(invocation) != {"arm", "seed", "stage_receipt", "scores"}:
             raise ValueError("retention invocation schema changed")
         if not isinstance(invocation["scores"], list) or not invocation["scores"]:
@@ -292,6 +292,26 @@ def validate_gate_artifact(
             score_paths=[
                 _path_from_ref(value, "retention scores") for value in invocation["scores"]
             ],
+            config=config,
+            config_path=config_path,
+            experiment_root=experiment_root,
+        )
+    else:
+        if set(invocation) != {"confirmation_decisions", "reservoir_manifest"}:
+            raise ValueError("matched-compute invocation schema changed")
+        decisions = invocation["confirmation_decisions"]
+        if not isinstance(decisions, list) or len(decisions) != 2:
+            raise ValueError("matched-compute gate lacks both confirmation decisions")
+        from matched_compute import build_matched_compute_artifact
+
+        expected = build_matched_compute_artifact(
+            confirmation_decision_paths=[
+                _path_from_ref(value, "matched-compute confirmation decision")
+                for value in decisions
+            ],
+            reservoir_manifest_path=_path_from_ref(
+                invocation["reservoir_manifest"], "frozen reservoir manifest"
+            ),
             config=config,
             config_path=config_path,
             experiment_root=experiment_root,
