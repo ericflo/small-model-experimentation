@@ -2,7 +2,7 @@
 
 ## Summary
 
-The model-free design, fresh 624-task substrate, and sole authenticated greedy collection are complete. The next stage is model-free failure freezing after this receipt is published green. Sibling sampling, training, local capability evaluation, and benchmark access remain unopened.
+The experiment stopped at its first prospective availability gate. The authenticated greedy collection completed, but three skills could not supply the required four hard failures: count and route supplied zero, and select supplied two. No sibling sampling, training, local capability evaluation, or benchmark access occurred.
 
 ## Research Program Fit
 
@@ -21,12 +21,16 @@ Construction seed 77,115 creates 48 truth-audited tasks for each of 13 universal
 - Twenty-seven experiment tests pass in the repository environment.
 - The greedy event from pushed-green commit `0038fba1` completed 624/624 requests, 296,259 sampled tokens, 859.6 tok/s, and 392.0 wrapper seconds.
 - Raw output, metadata, log, and receipt SHA-256 are `e91313c04fb851bc760f7b080e3411b120fdf78b8a6e89fafbd9a9011a10f556`, `0e82ae73995033e80350e9cf340ea852b342fd819e35b2cfbf75222e125b15ce`, `f16571516efeae1feef5eec2a7dc065f940e231dee34fc0a271a917c39dafca4`, and `cee1f19d1319e01a9aa69cedb1e9261de29a3c24d9e07477b77a1f5d9cc94962`.
-- Collection used the frozen explicit composite and runner geometry with no recovery or generation rerun. No output has yet been graded into a failure inventory.
+- Collection used the frozen explicit composite and runner geometry with no recovery or generation rerun.
+- Model-free grading found 227 hard failures. Counts by skill were induct 46, execute 39, select 2, trace 12, verify 19, count 0, repair 30, optimize 24, abstain 6, state 17, order 11, probe 21, and route 0.
+- The frozen four-per-skill prerequisite failed on select, count, and route. Outcome: `STOP_INSUFFICIENT_GREEDY_FAILURES`.
+- Failure inventory and selection receipt SHA-256 are `8e21caf82b29ee800a4846401a7561e6624461457324e19f8a50a42175eed783` and `3397b7738eefcc12a0c6a8c6687e627e9a6125d7186d48f4a5c73e6e2a9d2a6e`.
+- No sibling model input was emitted; sibling seed 66,116 and aggregate seed 78,141 remain sealed.
 - No capability result exists yet.
 
 ## Controls
 
-The unchanged explicit parent is the baseline. The active control will independently continue the same parent on replay only and must match the future candidate on exact training exposure and update geometry. Candidate promotion later requires strict semantic wins over both controls, not merely better parsing or fewer cap contacts.
+The failure is upstream of the mechanism-falsifying replay control. No training stream or arm exists, so this result says nothing about replay versus successful-sibling supervision.
 
 ## Oracle Versus Deployable Evidence
 
@@ -34,12 +38,12 @@ Procedural truth constructs tasks and grades outputs. It is excluded from all mo
 
 ## Interpretation
 
-The event proves the registered parent/input/backend path is operational and fixes the only greedy pool this experiment may use. It does not yet reveal failure or sibling availability and cannot support an installation claim.
+The all-skill failure quota assumed every skill still had a repairable greedy residual. That assumption is false for this parent and substrate: count and route are already saturated under the hard-failure definition. Forcing balanced failure supervision would require manufacturing failures or adding correct rows, both prohibited. This is a clean feasibility stop, not evidence against the proposed distillation mechanism.
 
-## Next Stage
+## Terminal Disposition
 
-After this receipt commit passes both repository workflows, run only model-free `prepare-siblings`. Publish the complete failure inventory and oracle-free sibling input—or close on an availability failure—before any sibling sampling.
+No further stage is authorized. A result-separated successor may reuse the published immutable collection, define residual skills prospectively as the ten with at least four hard failures, sample only those failures, and rely on exact-exposure replay plus the unchanged all-skill local gate for retention. It may not reinterpret or rescue this directory.
 
 ## Artifact Manifest
 
-The parent composite is external and immutable. Future adapters and merged composites will live under `large_artifacts/qwen35_4b_universal_successful_sibling_target_match/`; tracked receipts and all small model outputs will remain in this experiment.
+The parent composite is external and immutable. All source, greedy output, metadata, log, receipts, and the terminal failure inventory are tracked. No experiment-local adapter, merged composite, sibling output, local result, or benchmark result exists.

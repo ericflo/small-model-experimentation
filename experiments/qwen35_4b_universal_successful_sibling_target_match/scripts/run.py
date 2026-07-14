@@ -149,7 +149,15 @@ def smoke() -> None:
     validate_collection_receipt("greedy")
     failure_receipt = EXP / "data" / "greedy_failure_selection_receipt.json"
     if failure_receipt.exists():
-        run([sys.executable, "-B", str(SCRIPTS / "prepare_sibling_sampling.py"), "--check"])
+        outcome = json.loads(failure_receipt.read_text(encoding="utf-8")).get("outcome")
+        checked = subprocess.run(
+            [sys.executable, "-B", str(SCRIPTS / "prepare_sibling_sampling.py"), "--check"],
+            cwd=ROOT,
+            check=False,
+        )
+        expected = 0 if outcome == "PASS_FAILURE_AVAILABILITY" else 2
+        if checked.returncode != expected:
+            raise SystemExit("greedy-failure gate artifacts failed smoke authentication")
     validate_collection_receipt("sibling")
     selection_receipt = EXP / "data" / "successful_sibling_selection_receipt.json"
     if selection_receipt.exists():

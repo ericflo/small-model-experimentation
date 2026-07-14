@@ -1,5 +1,5 @@
 experiment_id: qwen35_4b_universal_successful_sibling_target_match
-status: greedy_collection_complete_failure_freeze_pending
+status: complete_insufficient_greedy_failures
 model:
   id: Qwen/Qwen3.5-4B
   revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
@@ -48,6 +48,26 @@ selection:
   require_canonical_answer_tail: true
   select_shortest_qualified: true
   oracle_trace_fallback: false
+  completed: true
+  outcome: STOP_INSUFFICIENT_GREEDY_FAILURES
+  hard_failure_rows: 227
+  hard_failure_rows_by_skill:
+    induct: 46
+    execute: 39
+    select: 2
+    trace: 12
+    verify: 19
+    count: 0
+    repair: 30
+    optimize: 24
+    abstain: 6
+    state: 17
+    order: 11
+    probe: 21
+    route: 0
+  sibling_input_emitted: false
+  inventory_sha256: 8e21caf82b29ee800a4846401a7561e6624461457324e19f8a50a42175eed783
+  receipt_sha256: 3397b7738eefcc12a0c6a8c6687e627e9a6125d7186d48f4a5c73e6e2a9d2a6e
 training_plan:
   authorized: false
   rows_per_arm: 320

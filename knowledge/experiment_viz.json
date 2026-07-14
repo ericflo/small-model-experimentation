@@ -48495,7 +48495,7 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "Successful-sibling design is frozen before any model event",
+     "title": "The all-skill sibling design stops before sampling",
      "categories": [
       "intake",
       "fresh source",
@@ -48512,14 +48512,49 @@
      "series": [
       {
        "label": "completed checkpoint",
-       "values": [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0]
+       "values": [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0]
       }
      ],
      "x_label": "preregistered experiment stage",
      "y_label": "completion indicator",
      "y_format": "integer",
-     "note": "Intake, the 624-task source, adversarial design review, and the complete 624-row greedy collection are done. Failure freezing is next; sibling sampling, selection, training, evaluation, and benchmark access remain gated.",
+     "note": "Intake, source, review, greedy collection, and failure freezing completed. The four-per-skill prerequisite failed, so sibling sampling and every downstream stage stayed sealed.",
      "source": "experiments/qwen35_4b_universal_successful_sibling_target_match/reports/report.md"
+    },
+    {
+     "headline": false,
+     "kind": "bar",
+     "title": "Three skills cannot supply the frozen failure quota",
+     "categories": [
+      "induct",
+      "execute",
+      "select",
+      "trace",
+      "verify",
+      "count",
+      "repair",
+      "optimize",
+      "abstain",
+      "state",
+      "order",
+      "probe",
+      "route"
+     ],
+     "series": [
+      {
+       "label": "hard greedy failures",
+       "values": [46, 39, 2, 12, 19, 0, 30, 24, 6, 17, 11, 21, 0]
+      },
+      {
+       "label": "required quota",
+       "values": [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+      }
+     ],
+     "x_label": "universal procedural skill",
+     "y_label": "fresh tasks",
+     "y_format": "integer",
+     "note": "The parent produced 227 hard failures overall, but count and route produced zero and select produced two. Because every skill needed four, the experiment stopped before sibling sampling.",
+     "source": "experiments/qwen35_4b_universal_successful_sibling_target_match/data/greedy_failure_inventory_seed66115.json"
     }
    ]
   },

@@ -2,7 +2,7 @@
 
 Test whether the deployed parent’s own short verifier-correct sampled trajectories can turn fresh greedy failures into transferable supervision under exact-exposure replay.
 
-**Status:** in-progress · since 2026-07-14 · greedy collection is complete; model-free failure freezing is the next gated stage
+**Status:** finished · 2026-07-14 · terminal greedy-failure availability stop; sibling sampling, training, and benchmark access never opened
 
 ## Research Program
 
@@ -52,16 +52,16 @@ Every stage requires its prerequisite receipt committed on clean, synchronized `
 
 ## Results
 
-Model-free construction and the sole greedy event are complete. The 624 source rows and oracle-free input regenerate byte-for-byte, contain 48 rows for every skill, and have zero message overlap with the two closest predecessors or reserved local seeds 88,000–88,011. From pushed-green commit `0038fba1`, the authenticated parent produced 624/624 rows and 296,259 sampled tokens at 859.6 tok/s in 392.0 wrapper seconds. Raw/metadata/log/receipt hashes are `e91313c0...f556` / `0e82ae73...15ce` / `f1657151...ca4` / `cee1f19d...4962`; no recovery or rerun occurred. Failure grading, sibling sampling, training, local evaluation, and benchmark access remain unopened.
+Model-free construction and the sole greedy event completed. The authenticated parent produced 624/624 rows and 296,259 sampled tokens at 859.6 tok/s with no recovery or rerun. The frozen failure gate found 227 hard failures overall, but per-skill availability was `count=0`, `route=0`, and `select=2`, below the mandatory four for each skill. The outcome is `STOP_INSUFFICIENT_GREEDY_FAILURES`; inventory/selection-receipt hashes are `8e21caf8...d783` / `3397b773...2a6e`. No sibling input was emitted, sibling seed 66,116 was not consumed, and training, local evaluation, and benchmark access never opened.
 
 ## Interpretation
 
-No capability inference exists yet. The current evidence is design provenance plus an authenticated ungraded greedy collection. The sibling pool, selection rule, availability stop, and oracle-fallback prohibition were fixed before this parent output and cannot now change.
+This is a prerequisite negative, not a test of successful-sibling distillation. A balanced failure-only curriculum is ill-posed when the deployed parent already clears some procedural skills greedily: count and route supply no failures, while select supplies only two. The useful result is to separate residual repair from retention. A successor may reuse this published failure pool in a new directory, sample only the ten skills with at least four failures, and use exact-exposure replay plus the unchanged all-skill local gate to protect mastered skills.
 
 ## Knowledgebase Update
 
-- Program evidence updated: operational collection evidence is recorded in the backlog; capability evidence remains pending.
-- Program backlog updated: this trial claims the queued successful-sibling successor.
+- Program evidence updated: terminal availability result recorded.
+- Program backlog updated: residual-only successor is queued; this record is closed.
 - Claim ledger updated: no; no capability result exists.
 
 ## Artifacts
@@ -71,3 +71,7 @@ No capability inference exists yet. The current evidence is design provenance pl
 - `data/collection_task_manifest.json` and `data/design_receipt.json`: frozen provenance.
 - `reports/preregistration.md` and `reports/design_review.md`: prospective contract and adversarial authorization.
 - `reports/artifact_manifest.yaml`: external parent and future adapter/composite plan.
+
+## Terminal Disposition
+
+No later event is authorized here. Do not lower the quota, borrow across skills, sample the two select failures, or add oracle rows. Any residual-skill design is a new experiment with its own intake, receipts, and lifecycle.

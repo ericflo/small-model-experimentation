@@ -697,3 +697,23 @@ balanced oracle-restart package. The warranted next test is policy-supported
 successful-sibling distillation: on fresh procedural tasks, train only where greedy
 fails but a prospectively sampled same-model sibling is short and verifier-correct,
 then compare against exact-exposure replay and matched-compute sample-more.
+
+## qwen35_4b_universal_successful_sibling_target_match (2026-07-14 — Prerequisite stop)
+
+The registered same-parent trial materialized 624 fresh tasks, 48 per each of 13
+skills, and collected one authenticated greedy event before opening sibling sampling.
+The event completed 624/624 rows and 296,259 sampled tokens at 859.6 tok/s with no
+recovery or rerun. Model-free grading found 227 hard failures overall.
+
+The prospective four-failures-per-skill prerequisite was impossible: count and route
+had zero hard failures and select had two. The experiment therefore stopped
+`STOP_INSUFFICIENT_GREEDY_FAILURES`; no sibling input, sibling event, training arm,
+local result, or benchmark result exists, and aggregate seed 78141 remains sealed.
+
+Read: this is not evidence against successful-sibling distillation. It falsifies the
+design assumption that every universal skill needs and can supply failure-only
+repair data from the current parent. A successor should treat the ten skills with at
+least four failures as the residual intervention set and preserve saturated skills
+with active replay and an unchanged all-skill retention gate. Reuse of the published
+immutable collection is legitimate only in a new result directory with a new sampling
+seed and prospective residual policy.

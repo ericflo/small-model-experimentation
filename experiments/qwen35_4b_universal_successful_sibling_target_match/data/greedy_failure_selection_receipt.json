@@ -1,0 +1,33 @@
+{
+  "aggregate_seed_open": false,
+  "benchmark_data_read": false,
+  "experiment_id": "qwen35_4b_universal_successful_sibling_target_match",
+  "greedy_seed": 66115,
+  "hard_failure_rows": 227,
+  "hard_failure_rows_by_skill": {
+    "abstain": 6,
+    "count": 0,
+    "execute": 39,
+    "induct": 46,
+    "optimize": 24,
+    "order": 11,
+    "probe": 21,
+    "repair": 30,
+    "route": 0,
+    "select": 2,
+    "state": 17,
+    "trace": 12,
+    "verify": 19
+  },
+  "inventory_sha256": "8e21caf82b29ee800a4846401a7561e6624461457324e19f8a50a42175eed783",
+  "next_authorized_stage": null,
+  "oracle_fields_in_sibling_input": false,
+  "outcome": "STOP_INSUFFICIENT_GREEDY_FAILURES",
+  "schema_version": 1,
+  "sibling_input_rows": 0,
+  "sibling_input_sha256": null,
+  "sibling_samples_per_failure": 16,
+  "sibling_sampling_seed": 66116,
+  "stage": "greedy_failure_selection",
+  "training_authorized": false
+}

@@ -703,6 +703,8 @@ short verifier-correct sibling trajectories that the same model actually samples
 greedy-failure tasks, with an availability gate, exact-exposure replay, and a
 matched-compute sample-more ceiling.
 
+**Balanced failure-only sibling mining can be infeasible precisely because some skills are already saturated (2026-07-14, prerequisite stop).** The result-separated [qwen35_4b_universal_successful_sibling_target_match](../experiments/qwen35_4b_universal_successful_sibling_target_match/reports/report.md) froze 624 fresh tasks and one authenticated parent event before any sibling sampling. It found 227 hard failures overall, but the mandatory four-per-skill gate failed: count and route had zero hard failures and select had two. No sibling input, training, local event, or benchmark event ran; aggregate seed 78141 stays sealed. This does not test successful-sibling distillation. It corrects the intervention unit: repair data should target the ten skills with a live residual, while active replay and the unchanged all-skill gate preserve already-mastered skills. A successor may reuse the immutable published collection only in a new result directory with a prospective residual policy.
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.
