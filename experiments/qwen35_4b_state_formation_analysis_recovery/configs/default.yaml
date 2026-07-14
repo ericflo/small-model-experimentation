@@ -1,0 +1,19 @@
+schema_version: 1
+experiment_id: qwen35_4b_state_formation_analysis_recovery
+producer_experiment_id: qwen35_4b_state_formation_capacity_adjudication
+producer_source_contract_version: 11
+producer_source_contract_sha256: 5a8ed26ddb9446c728191ca8e7849ae44cff92a700e24b237dac522cf4286666
+producer_implementation_sha256: 7d6cd93fead0e524e10e7afe4b60a531ea2d6aa7f3f70778ef962889aaeed278
+producer_analysis_sha256: 876888987d816fe29ae93fde0053fb91ed58301d16bf429d5cabaa809c23a2b0
+producer_config_file_sha256: b165537c8c86531ac17aecfa5c65045a708cd4b196b7614c6f98331a9fae1ca8
+producer_config_sha256: eeb4e828526f750dce1258bcc91d03114c80688d300112e03d18c9d911489393
+registered_external_prefix: ../../large_artifacts/qwen35_4b_state_formation_capacity_adjudication
+model_id: Qwen/Qwen3.5-4B
+model_revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+backend: transformers
+allowed_phases:
+  - lora_joint
+  - lora_control
+  - stage_b_seal
+  - fullrank_joint
+  - fullrank_control

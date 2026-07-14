@@ -2,6 +2,37 @@
  "note": "Native chart specs for the research site, extracted from each experiment's own result files (runs/reports/analysis JSON+CSV and README/report tables) by per-experiment agent passes and kept only when every plotted value was located verbatim in the cited source by machine verification. Rendered by scripts/build_site.py (chart_svg/chart_figure); raw matplotlib figures remain available further down each experiment page.",
  "extracted_on": "2026-07-10",
  "experiments": {
+  "qwen35_4b_state_formation_analysis_recovery": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "All four path-boundary controls pass before scientific analysis",
+     "categories": [
+      "defect reproduced",
+      "canonical equivalence",
+      "unrelated alias rejected",
+      "prefix traversal rejected"
+     ],
+     "series": [
+      {
+       "label": "pre-result control pass",
+       "values": [
+        1,
+        1,
+        1,
+        1
+       ]
+      }
+     ],
+     "x_label": "frozen recovery control",
+     "y_label": "pass indicator",
+     "y_format": "integer",
+     "note": "Operational smoke only. The receipt also records zero result rows, benchmark paths, sealed contrast rows, and scientific analysis calls; it is not evidence about LoRA or state formation.",
+     "source": "experiments/qwen35_4b_state_formation_analysis_recovery/runs/smoke.json"
+    }
+   ]
+  },
   "qwen35_4b_early_text_hypothesis_forking": {
    "charts": [
     {

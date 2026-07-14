@@ -1,0 +1,71 @@
+{
+  "backend": "transformers",
+  "experiment_id": "qwen35_4b_state_formation_analysis_recovery",
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "producer_analysis_sha256": "876888987d816fe29ae93fde0053fb91ed58301d16bf429d5cabaa809c23a2b0",
+  "producer_config_sha256": "eeb4e828526f750dce1258bcc91d03114c80688d300112e03d18c9d911489393",
+  "producer_experiment_id": "qwen35_4b_state_formation_capacity_adjudication",
+  "producer_implementation_sha256": "7d6cd93fead0e524e10e7afe4b60a531ea2d6aa7f3f70778ef962889aaeed278",
+  "producer_source_contract_sha256": "5a8ed26ddb9446c728191ca8e7849ae44cff92a700e24b237dac522cf4286666",
+  "producer_source_contract_version": 11,
+  "receipt_identity_sha256": "30353be5429d4987509715cfa56a6187f24a80ab353b9b774908071de7ed2f8f",
+  "recovery_source_contract_sha256": "6ab26016b3de397307c7c8def9c685315b6660370ee98af1a757da11fe1ee94b",
+  "recovery_source_files": [
+    {
+      "bytes": 963,
+      "path": "configs/default.yaml",
+      "sha256": "f728f346b3cf05fc4a21ba419e9be356c049a419e355e76f6f649c4215c4d443"
+    },
+    {
+      "bytes": 6829,
+      "path": "reports/design_review.md",
+      "sha256": "d08b24d4c111458703f75a15c1ed43cfc93c19d14d7bd7b94113c2ec99f065d8"
+    },
+    {
+      "bytes": 1294,
+      "path": "scripts/run.py",
+      "sha256": "6d404742ae20fcaf3db671eb2d91b4bedea5370fa7fddd9864845e0809e16339"
+    },
+    {
+      "bytes": 75,
+      "path": "src/__init__.py",
+      "sha256": "19a5927e7119b100a40492ad27696ac5668ee1f95c6ee8dc01ff4315ebbc8270"
+    },
+    {
+      "bytes": 26870,
+      "path": "src/recovery.py",
+      "sha256": "1965ba94eeaeac57c59f6c3fddf205dfc62ec64363c9a0c242f2ab18f3405af3"
+    },
+    {
+      "bytes": 4899,
+      "path": "tests/test_recovery.py",
+      "sha256": "bad3a3a0fd3b13049ee4678e02552cf71718a45621af7206372e6b63474548e6"
+    }
+  ],
+  "result_values_inspected": false,
+  "schema_version": 1,
+  "scientific_analysis_executed": false,
+  "seam_preflight": {
+    "benchmark_paths_opened": 0,
+    "canonical_equivalence": true,
+    "canonical_prefix": "large_artifacts/qwen35_4b_state_formation_capacity_adjudication",
+    "control_passes": {
+      "canonical_equivalence": 1,
+      "original_defect_reproduced": 1,
+      "unrelated_alias_rejected": 1,
+      "unsafe_descendant_rejected": 1
+    },
+    "original_rejection": "expected path is not lexical-canonical: /workspace/small-model-experimentation/experiments/qwen35_4b_state_formation_capacity_adjudication/../../large_artifacts/qwen35_4b_state_formation_capacity_adjudication",
+    "producer_analysis_sha256": "876888987d816fe29ae93fde0053fb91ed58301d16bf429d5cabaa809c23a2b0",
+    "producer_source_contract_sha256": "5a8ed26ddb9446c728191ca8e7849ae44cff92a700e24b237dac522cf4286666",
+    "registered_descendant_equivalence": true,
+    "registered_raw_prefix": "/workspace/small-model-experimentation/experiments/qwen35_4b_state_formation_capacity_adjudication/../../large_artifacts/qwen35_4b_state_formation_capacity_adjudication",
+    "result_rows_opened": 0,
+    "sealed_contrast_rows_opened": 0,
+    "status": "EXACT_REGISTERED_PREFIX_SEAM_READY",
+    "unrelated_alias_rejected": true,
+    "unsafe_descendant_rejected": true
+  },
+  "status": "RECOVERY_SMOKE_PASS"
+}

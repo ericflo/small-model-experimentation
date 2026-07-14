@@ -2,301 +2,6 @@
  "note": "Plain-language practitioner briefs shown above the fold on each experiment page (verdict + the-one-idea/question/finding/why-it-matters + KPI numbers + per-chart how-to-read/takeaway). Authored per experiment from its own README/report and verified chart specs under a strict no-jargon ban-list; all jargon-precise detail stays below the fold. Regenerate with scripts/enrichment/generate_briefs.workflow.js (see docs/site_maintenance.md).",
  "generated_on": "2026-07-05",
  "experiments": {
-  "qwen35_4b_early_text_hypothesis_forking": {
-   "verdict_tag": "A 24-way early-hint test has cleared its model-free checks",
-   "concept_primer": "Imagine giving the same puzzle to twenty-four independent scratchpads. Each starts with a different concrete guess about the first transformation, may reject that guess, and must still write the complete two-step rule. Public examples—not the hidden answer—choose one result.",
-   "plain_question": "Does giving each possible first transformation before reasoning produce better complete rules than giving it late or simply buying more ordinary attempts?",
-   "plain_answer": "The experiment design and model-free checks now pass, but the model has not run. Review expanded the first draft from twelve operation names to twenty-four fully specified operations, added two fair late-hint comparisons, and proved that all 576 possible two-step rules are covered by the public-data control. The next gate tests whether the model can actually use these hints rather than merely repeat them.",
-   "why_it_matters": "The previous internal-state experiment could change a candidate name without showing that later reasoning used it. This test moves a plain-text candidate to the start of reasoning and demands a full computed rule, while matched ordinary attempts and exhaustive search prevent extra branching from receiving free credit.",
-   "verdict_tone": "neutral",
-   "key_numbers": [
-    {
-     "label": "Fully specified first-step candidates",
-     "value": "24",
-     "sub": "parameters are included, not left for the model to guess"
-    },
-    {
-     "label": "Two-step rules checked per task",
-     "value": "576",
-     "sub": "the complete public search space"
-    },
-    {
-     "label": "Fresh procedural tasks frozen",
-     "value": "144",
-     "sub": "48 qualification and 96 untouched confirmation"
-    },
-    {
-     "label": "Model calls so far",
-     "value": "zero",
-     "sub": "this is design and model-free validation only"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Every diagnostic input distinguishes all twenty-four candidates",
-     "chart_read": "Each bar is one public diagnostic list. Its height is the number of fully specified operations that produce a distinct expected result; all four reach the required twenty-four.",
-     "chart_takeaway": "The upcoming model check cannot pass by exploiting two candidates that happen to mean the same thing on a diagnostic input."
-    }
-   ]
-  },
-  "qwen35_4b_materialized_residual_answer_seam_factorial": {
-   "verdict_tag": "Strict answer seam failed; native commit token isolates one fresh repair",
-   "concept_primer": "Before asking whether concrete intermediate states help solve a puzzle, this test first checks whether the model can reliably enter a short, machine-readable answer mode. A bad output format must not be mistaken for a reasoning failure.",
-   "plain_question": "Can any think/no-think and freeform/program-prefix answer style reliably emit a two-step program before the materialized-state test begins?",
-   "plain_answer": "No registered style qualified: all four scored zero strict parses out of 48, so mechanics stayed sealed. Removing only the final chat-end marker and newline made both no-think styles exact on all 48 rows; thinking still had extra close markers. That post-run clue motivates a fresh answer-stage commit-boundary test, not a retroactive pass.",
-   "why_it_matters": "The firewall prevented a token-boundary mismatch from being mistaken for failed reasoning or a residual-state result. The next test can now change one registered thing—stop at the first tokenizer chat-end token during the answer stage—while preserving strict parsing and every matched control.",
-   "verdict_tone": "negative",
-   "key_numbers": [
-    {
-     "label": "Authenticated outputs",
-     "value": "240",
-     "sub": "five durable calibration transactions"
-    },
-    {
-     "label": "Strictly qualified styles",
-     "value": "0 / 4",
-     "sub": "every style had zero strict parses"
-    },
-    {
-     "label": "No-think exact after suffix removal",
-     "value": "48 / 48",
-     "sub": "both paired no-think styles; post-decision only"
-    },
-    {
-     "label": "Mechanics rows opened",
-     "value": "zero",
-     "sub": "the interface firewall stopped the branch"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "The requested answers were often present before an unregistered terminal suffix",
-     "chart_read": "For each style, the strict bar is the registered rate. The frozen-parser diagnostic removes only final chat end plus newline; the separate expected-tail diagnostic takes the last segment after a thinking close and can hide extra close markers. Both are explanatory, not rescored results.",
-     "chart_takeaway": "All registered bars are zero. Suffix-only removal fully repairs no-think but not thinking, so the next fresh test should register the native answer-stage chat-end boundary and retain strict grammar."
-    }
-   ]
-  },
-  "qwen35_4b_materialized_residual_sibling_search": {
-   "verdict_tag": "Model-free design is ready for mechanics",
-   "concept_primer": "Imagine trying every possible first move, writing down the concrete intermediate state each move creates, and asking the same solver to finish from each state. Public examples then choose among the finished candidates.",
-   "plain_question": "Can concrete intermediate states help a small model finish multi-step rules better than names alone or the same spending on ordinary attempts?",
-   "plain_answer": "Not yet. The scientific design and every model-free construction check pass, but the model has not run. The frozen test contains 264 fresh functions, and all 38,596 planned prompt renderings fit their assigned context limits.",
-   "why_it_matters": "The controls prevent extra attempts, a cheaper exhaustive solver, or a broken answer format from masquerading as an improvement. Treat this as a trustworthy launch pad, not capability evidence.",
-   "verdict_tone": "neutral",
-   "key_numbers": [
-    {
-     "label": "Fresh functions frozen",
-     "value": "264",
-     "sub": "each has a distinct full-input behavior"
-    },
-    {
-     "label": "Eligible functions found",
-     "value": "3,525",
-     "sub": "enough capacity for every frozen split"
-    },
-    {
-     "label": "Prompt renderings checked",
-     "value": "38,596",
-     "sub": "every task, candidate, and planned condition"
-    },
-    {
-     "label": "Model calls so far",
-     "value": "zero",
-     "sub": "construction and review only"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Fresh tasks cover four ambiguity levels",
-     "chart_read": "The horizontal groups count tasks with one, two, three, or four publicly valid first moves; bar height is the number of frozen tasks. No height is better—the planned 8:8:4:4 balance repeats in every block.",
-     "chart_takeaway": "The first two bars match at 88 and the next two match at 44, confirming the planned ambiguity balance across 264 tasks."
-    }
-   ]
-  },
-  "qwen35_4b_materialized_residual_sibling_search_fresh_replication": {
-   "verdict_tag": "Cheap materialized ranking fails; free generation has no valid answer interface",
-   "concept_primer": "The previous test returned one batch of answers but lost them before saving. Its rules forbid drawing that same batch again, so this successor starts with entirely new puzzles and random draws while keeping the scientific comparison unchanged.",
-   "plain_question": "Can concrete intermediate states help the small model finish multi-step rules better than names alone or equally costly ordinary attempts?",
-   "plain_answer": "The generation test cannot answer the question because every reasoning trace reached its length cap and the materialized arm parsed only 12 of 52 outputs, with zero successes. The separate one-token ranking test is a clean negative: materialized recall among viable first moves was 0.257, below names alone, shuffled states, listwise choice, and a surface-only rule.",
-   "why_it_matters": "The full transaction record is finally durable, so the cheap ranking path can be retired confidently. But the free-generation null must stay narrow: it diagnoses a broken answer mode, not proof that concrete intermediate states are useless. A successor now qualifies the answer interface before mechanics.",
-   "verdict_tone": "negative",
-   "key_numbers": [
-    {
-     "label": "Materialized generation parses",
-     "value": "12 / 52",
-     "sub": "all 52 thoughts reached the registered cap"
-    },
-    {
-     "label": "Materialized visible successes",
-     "value": "0 / 52",
-     "sub": "not a clean mechanism verdict because the interface failed"
-    },
-    {
-     "label": "Materialized recall at four",
-     "value": "0.257",
-     "sub": "below every structured ranking comparison"
-    },
-    {
-     "label": "Authenticated requests",
-     "value": "1,984",
-     "sub": "all nine transaction chains completed and were rechecked"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Concrete-state ranking trails every structured comparison",
-     "chart_read": "Each bar is the average share of publicly viable first moves recovered among the top four choices. Compare materialized states with names alone, shuffled states, listwise choice, a surface-only rule, and random ranking.",
-     "chart_takeaway": "Materialized ranking beats random but remains below all five structured comparisons, so this cheap ranking route does not justify a larger search."
-    }
-   ]
-  },
-  "qwen35_4b_semantic_anchor_coordinate_branching": {
-   "verdict_tag": "The late anchor writes names, but the consequence test is invalid",
-   "concept_primer": "Imagine pausing a scratchpad, placing a candidate name in a dedicated slot, and copying the model's internal state for a different candidate into that slot. The important test is whether later computation follows the copied candidate—not merely whether the next word changes.",
-   "plain_question": "Can a copied internal candidate state at a named hypothesis slot drive a separately computed consequence inside real reasoning?",
-   "plain_answer": "This run cannot establish that. The internal edit strongly changed the model's choice among candidate names, but none of 440 consequence outputs began with a valid answer token. Even in a restricted twelve-choice readout, the edited state chose the intended consequence only 5 of 44 times, nearly the 4-of-44 control rate. A post-run audit also found that two rotating maps canceled, leaving the final name-to-label relation fixed across tasks.",
-   "why_it_matters": "The numerical intervention controls all passed, so the failure is not hidden drift. But formatting failure and the fixed composed mapping make this an invalid consequence interface, not a clean negative about internal-state transport. The safe lesson is narrower: changing the next candidate name is not evidence that reasoning consumed it.",
-   "verdict_tone": "negative",
-   "key_numbers": [
-    {
-     "label": "Unrestricted outputs parsed",
-     "value": "56 / 880",
-     "sub": "6.36%, below the frozen 95% requirement"
-    },
-    {
-     "label": "Consequence outputs parsed",
-     "value": "0 / 440",
-     "sub": "every first token was a formatting opener"
-    },
-    {
-     "label": "Edited consequence choices",
-     "value": "5 / 44",
-     "sub": "versus 4/44 for source and generic controls"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Writing a candidate name did not carry through to its consequence",
-     "chart_read": "For each method, compare the dark bar for choosing the supplied candidate name with the light bar for choosing the label produced by actually applying that candidate's operation. These are restricted-choice diagnostics; the unrestricted output gate failed separately.",
-     "chart_takeaway": "Visible text, full-state copying, and coordinate copying all changed the immediate name choice, while their computed consequences stayed near the control rate."
-    }
-   ]
-  },
-  "qwen35_4b_jacobian_counterfactual_branching": {
-   "verdict_tag": "Balanced internal nudges fail to steer real reasoning",
-   "concept_primer": "Imagine pausing one scratchpad halfway through, then making twelve balanced copies. Each copy gets a tiny internal nudge toward a different possible answer and is allowed to finish reasoning. Because every answer gets one nudge, no answer is secretly favored.",
-   "plain_question": "Can balanced internal nudges make one half-finished reasoning path explore better futures than spending the same effort on ordinary independent attempts?",
-   "plain_answer": "No. Across all three allowed strengths, the meaningful nudge made its assigned answer win only 4 of 48 times—exactly the one-in-twelve chance rate and identical to a generic nudge. The probabilities barely moved even at the strongest setting. Because the write itself failed, no expensive continuation or correctness run was opened.",
-   "why_it_matters": "A direction that works when copied from a clean semantic example is not automatically a push-button control inside arbitrary free-form reasoning. The next test must restore an explicit semantic anchor and copy full coordinates, rather than merely pushing the last scratchpad token harder.",
-   "verdict_tone": "negative",
-   "key_numbers": [
-    {
-     "label": "Assigned answer selected",
-     "value": "4 / 48",
-     "sub": "8.3%, exactly chance, at every tested strength"
-    },
-    {
-     "label": "Largest average probability lift",
-     "value": "+0.006",
-     "sub": "versus +0.15 required for a usable write"
-    },
-    {
-     "label": "Numeric control rows valid",
-     "value": "all",
-     "sub": "the null is behavioral, not a broken control"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Every nudge strength stays at chance",
-     "chart_read": "For each of three nudge strengths, compare the meaningful and generic bars with the tall required bar. Height is how often the branch's assigned answer became the model's answer.",
-     "chart_takeaway": "Meaningful and generic nudges overlap at one-in-twelve while the required bar is 60%, so this internal write method is unusable."
-    },
-    {
-     "index": 1,
-     "chart_plain_title": "Meaningful and generic nudges were physically matched",
-     "chart_read": "At each of five internal layers, neighboring bars show the physical size of the two nudges. Matching bars rule out a weaker generic control.",
-     "chart_takeaway": "The control matched the intervention's strength, confirming that the chance result is not a simple size mismatch."
-    }
-   ]
-  },
-  "qwen35_4b_counterfactual_evidence_acquisition_curriculum": {
-   "verdict_tag": "The chosen start and anchor were too far apart to test the curriculum",
-   "concept_primer": "When a coding request leaves two edge behaviors plausible, a capable agent should find the repository's own rule before editing. This study pairs nearly identical repositories where one public clue flips the right first patch.",
-   "plain_question": "Can training teach this small coding agent to find the decisive public clue before its first patch, then preserve its existing test-and-commit habits?",
-   "plain_answer": "The run stopped at its first checkpoint-compatibility test. Across 48 frozen contexts, the starting checkpoint differed from the comparison anchor by 0.110735 centered logits, above the fixed 0.100000 limit. Entropy stayed healthy, but the failed locality gate sealed behavior sampling and training. This therefore says nothing about whether the evidence-acquisition curriculum would work.",
-   "why_it_matters": "A training gain cannot be attributed cleanly when the starting and comparison checkpoints already exceed the registered locality allowance. Future work can preserve the counterfactual evidence idea, but it must begin from the anchor itself or qualify a compatible parent prospectively in a fresh experiment.",
-   "verdict_tone": "neutral",
-   "key_numbers": [
-    {
-     "label": "Observed checkpoint drift",
-     "value": "0.110735",
-     "sub": "median centered non-target logit drift across 48 contexts"
-    },
-    {
-     "label": "Frozen locality ceiling",
-     "value": "0.100000",
-     "sub": "the observed drift exceeded this prerequisite"
-    },
-    {
-     "label": "Entropy delta",
-     "value": "+0.013636",
-     "sub": "passed the -0.050000 retention floor"
-    },
-    {
-     "label": "Training and Menagerie events",
-     "value": "zero",
-     "sub": "all downstream stages remained sealed"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Start-to-anchor drift exceeded the fixed locality ceiling",
-     "chart_read": "The observed drift bar is 0.110735, while the eligibility ceiling is 0.100000. Lower drift is better.",
-     "chart_takeaway": "The checkpoint pair was ineligible for the intended causal comparison, so the curriculum itself was never tested."
-    }
-   ]
-  },
-  "qwen35_4b_counterfactual_order_support_selector": {
-   "verdict_tag": "Meaningful order helps, but not enough to trust this selector",
-   "concept_primer": "The model answered each puzzle after writing a long scratchpad. We also kept a version with exactly the same scratchpad words scrambled. The new idea is to ask which answer gained the most support from meaningful word order rather than from the words merely being present.",
-   "plain_question": "Can the change caused by meaningful scratchpad order tell us which of twelve possible answers to trust, without revealing the correct answer?",
-   "plain_answer": "Not reliably. The meaningful-order rule got 43 of 113 puzzles right, clearly better than first attempt or majority vote. But it was only two puzzles ahead of simply choosing the most decisive attempt, and a deliberately mismatched scrambled scratchpad did one puzzle better. Those small differences could be noise, so the separate confirmation set stayed closed.",
-   "why_it_matters": "Averaging the model's full answer probabilities can recover useful weak clues that voting throws away. But the exact scrambled counterpart was not doing enough task-specific work to justify its extra cost. Future work should change the reasoning path itself, not keep polishing this final score.",
-   "verdict_tone": "negative",
-   "key_numbers": [
-    {
-     "label": "Meaningful-order rule",
-     "value": "43 / 113",
-     "sub": "38.1% correct, versus 29.2% for majority vote"
-    },
-    {
-     "label": "Lead over simplest strong confidence rule",
-     "value": "2 puzzles",
-     "sub": "too small for a reliable advantage"
-    },
-    {
-     "label": "Correct answers found outside all three votes",
-     "value": "8",
-     "sub": "weak probability clues sometimes recover a new answer"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "A clear win over voting, but no clear win over confidence",
-     "chart_read": "Each bar is the share of 113 puzzles answered correctly by one way of combining three attempts; taller is better. The mismatched-scratchpad bar is a diagnostic with hidden balancing information, not a usable method.",
-     "chart_takeaway": "Meaningful-order subtraction rises above first attempt and majority, yet barely edges the strongest ordinary confidence bars and loses to the diagnostic mismatch, so it does not qualify."
-    }
-   ]
-  },
   "adaptive_cognitive_kernel": {
    "verdict_tag": "Self-rewiring does real work but wins nothing extra",
    "concept_primer": "Picture a calculator that, for each instruction in a program, physically swaps in a fresh set of gears — temporarily rewiring itself — instead of a fixed machine that reads each instruction as an input code. Does the rewiring execute programs any better?",
@@ -2273,6 +1978,48 @@
     }
    ]
   },
+  "qwen35_4b_confidence_policy": {
+   "verdict_tag": "Verifier-free SELECT + ABSTAIN work; selectively escalating hard tasks to more think budget is a null result at n=400",
+   "concept_primer": "Picture the model answering a coding problem several times. A cheap read of its own confidence (one logit: 'is this right?') picks the best try and flags the ones it is unsure about. A tempting extra step is to let the model think LONGER on the flagged-hard problems instead of drawing more tries. This experiment tests all three moves at matched compute — and powers up the shakiest one until the answer is trustworthy.",
+   "plain_question": "Can the model's own confidence be turned into one deployable policy — pick the best answer, abstain when unsure, and spend extra compute wisely — with no test-execution or grader?",
+   "plain_answer": "Partly. Picking the answer with the highest single-token P(True) confidence is the best grader-free selector at every compute level, and abstaining below a confidence threshold trades coverage for accuracy cleanly — both robust. But the appealing third move — spending compute on more THINKING for the flagged-hard tasks rather than more samples — showed no benefit once powered up to 400 tasks: an early small-sample win did not replicate (every 95% interval now includes zero). Thinking longer helps a little across the board, just not selectively on the hard tail — because these coding tasks nearly saturate the model's thinking budget already.",
+   "why_it_matters": "It gives a shippable, verifier-free recipe (select + abstain from one logit) AND a methodological lesson: a pre-registered, under-powered subset win was flagged as shaky and then REVERSED on the larger sample — power up before you claim. No grader, no bigger model, just the fixed 4B's own logits.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "P(True)-select accuracy @k=9",
+     "value": "0.762",
+     "sub": "best verifier-free selector; majority-vote 0.742, mean-logprob 0.725, greedy 0.701"
+    },
+    {
+     "label": "Abstention: accuracy at 68% coverage",
+     "value": "0.866",
+     "sub": "up from 0.757 at full coverage; solvability AUROC 0.72"
+    },
+    {
+     "label": "Escalate vs breadth (n=400)",
+     "value": "CIs span 0",
+     "sub": "esc-minus-breadth +0.004..+0.022 across abstain fractions — a null; the n=24-60 win did not replicate"
+    },
+    {
+     "label": "MBPP tasks powered up to",
+     "value": "400",
+     "sub": "regenerated on vLLM (~10x faster than the initial HF pass) with bootstrap CIs"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "P(True) confidence-select is the best verifier-free selector",
+     "chart_read": "Bars are MBPP accuracy at nine candidates for each selection rule. Single-token P(True)-select leads the verifier-free rules; the execution line and oracle need a grader."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "Escalating hard tasks to more think budget: a null result at n=400",
+     "chart_read": "Each group is the hardest X% of tasks by confidence. Escalating them to a bigger think budget (left) barely differs from spending the same compute on more samples (right) — every 95% interval on the difference includes zero."
+    }
+   ]
+  },
   "qwen35_4b_constrained_coverage_dpo": {
    "verdict_tag": "A cheap nudge helps, but more tries win",
    "concept_primer": "Two ways to crack a hard coding problem: coach the model so each attempt is smarter, or just let it fire off twice as many attempts. Here the coaching was leashed to the untrained model, so it could sharpen answers without drifting into broken code.",
@@ -2464,6 +2211,77 @@
      "chart_plain_title": "Scrambled examples hurt more than showing no examples",
      "chart_read": "Bottom axis shows what worked examples the model saw while fixing: proper matched examples, none at all, or scrambled ones. Each bar is the share of programs fully fixed on unseen cases; taller is better.",
      "chart_takeaway": "The scrambled-examples bar is by far the shortest, well below the no-examples bar, proving the model genuinely reads the examples rather than ignoring them."
+    }
+   ]
+  },
+  "qwen35_4b_counterfactual_evidence_acquisition_curriculum": {
+   "verdict_tag": "The chosen start and anchor were too far apart to test the curriculum",
+   "concept_primer": "When a coding request leaves two edge behaviors plausible, a capable agent should find the repository's own rule before editing. This study pairs nearly identical repositories where one public clue flips the right first patch.",
+   "plain_question": "Can training teach this small coding agent to find the decisive public clue before its first patch, then preserve its existing test-and-commit habits?",
+   "plain_answer": "The run stopped at its first checkpoint-compatibility test. Across 48 frozen contexts, the starting checkpoint differed from the comparison anchor by 0.110735 centered logits, above the fixed 0.100000 limit. Entropy stayed healthy, but the failed locality gate sealed behavior sampling and training. This therefore says nothing about whether the evidence-acquisition curriculum would work.",
+   "why_it_matters": "A training gain cannot be attributed cleanly when the starting and comparison checkpoints already exceed the registered locality allowance. Future work can preserve the counterfactual evidence idea, but it must begin from the anchor itself or qualify a compatible parent prospectively in a fresh experiment.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Observed checkpoint drift",
+     "value": "0.110735",
+     "sub": "median centered non-target logit drift across 48 contexts"
+    },
+    {
+     "label": "Frozen locality ceiling",
+     "value": "0.100000",
+     "sub": "the observed drift exceeded this prerequisite"
+    },
+    {
+     "label": "Entropy delta",
+     "value": "+0.013636",
+     "sub": "passed the -0.050000 retention floor"
+    },
+    {
+     "label": "Training and Menagerie events",
+     "value": "zero",
+     "sub": "all downstream stages remained sealed"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Start-to-anchor drift exceeded the fixed locality ceiling",
+     "chart_read": "The observed drift bar is 0.110735, while the eligibility ceiling is 0.100000. Lower drift is better.",
+     "chart_takeaway": "The checkpoint pair was ineligible for the intended causal comparison, so the curriculum itself was never tested."
+    }
+   ]
+  },
+  "qwen35_4b_counterfactual_order_support_selector": {
+   "verdict_tag": "Meaningful order helps, but not enough to trust this selector",
+   "concept_primer": "The model answered each puzzle after writing a long scratchpad. We also kept a version with exactly the same scratchpad words scrambled. The new idea is to ask which answer gained the most support from meaningful word order rather than from the words merely being present.",
+   "plain_question": "Can the change caused by meaningful scratchpad order tell us which of twelve possible answers to trust, without revealing the correct answer?",
+   "plain_answer": "Not reliably. The meaningful-order rule got 43 of 113 puzzles right, clearly better than first attempt or majority vote. But it was only two puzzles ahead of simply choosing the most decisive attempt, and a deliberately mismatched scrambled scratchpad did one puzzle better. Those small differences could be noise, so the separate confirmation set stayed closed.",
+   "why_it_matters": "Averaging the model's full answer probabilities can recover useful weak clues that voting throws away. But the exact scrambled counterpart was not doing enough task-specific work to justify its extra cost. Future work should change the reasoning path itself, not keep polishing this final score.",
+   "verdict_tone": "negative",
+   "key_numbers": [
+    {
+     "label": "Meaningful-order rule",
+     "value": "43 / 113",
+     "sub": "38.1% correct, versus 29.2% for majority vote"
+    },
+    {
+     "label": "Lead over simplest strong confidence rule",
+     "value": "2 puzzles",
+     "sub": "too small for a reliable advantage"
+    },
+    {
+     "label": "Correct answers found outside all three votes",
+     "value": "8",
+     "sub": "weak probability clues sometimes recover a new answer"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "A clear win over voting, but no clear win over confidence",
+     "chart_read": "Each bar is the share of 113 puzzles answered correctly by one way of combining three attempts; taller is better. The mismatched-scratchpad bar is a diagnostic with hidden balancing information, not a usable method.",
+     "chart_takeaway": "Meaningful-order subtraction rises above first attempt and majority, yet barely edges the strongest ordinary confidence bars and loses to the diagnostic mismatch, so it does not qualify."
     }
    ]
   },
@@ -2708,6 +2526,56 @@
      "chart_plain_title": "How much of the depth-3 crack was truly three steps?",
      "chart_read": "Two bars split the nominal three-step tasks by real difficulty: 16 that secretly collapse to two steps or fewer, and 24 that are genuinely three-step. Bar height is the share the step-by-step search solved; taller means more solved.",
      "chart_takeaway": "Search solved all 16 secretly-shallow tasks but only 4 of 24 truly three-step ones — a real frontier gain, but far smaller than the headline 40% suggests."
+    }
+   ]
+  },
+  "qwen35_4b_deep_advantage_mopd": {
+   "verdict_tag": "Five updates stayed local",
+   "concept_primer": "Imagine a strong all-round apprentice and two specialists standing at the same half-finished job. The deep specialist is copied only when separate trial runs show that it finishes that exact job better than both the apprentice and the other specialist.",
+   "plain_question": "Can carefully chosen lessons from the deep specialist improve one already blended small model without sacrificing its faster skills?",
+   "plain_answer": "The teacher choice and the small safety update both passed. Deep won on two fresh groups, and five training steps changed unrelated logits only slightly while improving the lesson-matching loss. That authorizes the full four-round trial; no improved-capability result exists yet.",
+   "why_it_matters": "The study has cleared the two common false starts: choosing a teacher that does not really help and making a weight edit that immediately spills everywhere. The remaining test is the important one: whether the full update creates one checkpoint that beats the specialists, runtime switching, controls, and eight tries.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Unrelated-logit drift after five steps",
+     "value": "0.0276",
+     "sub": "well below the frozen 0.10 safety ceiling on 20 exact probes"
+    },
+    {
+     "label": "Output uncertainty lost",
+     "value": "3.1%",
+     "sub": "below the frozen 10% collapse ceiling"
+    },
+    {
+     "label": "Exact lesson-matching loss",
+     "value": "0.0129 → 0.0117",
+     "sub": "improved rather than merely staying under the safety ceiling"
+    },
+    {
+     "label": "Deep wins available online",
+     "value": "90",
+     "sub": "enough to freeze 60 lessons plus 20 reminders and 60 matched controls"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Five update steps barely moved unrelated logits",
+     "chart_read": "Two short bars show the average unrelated-logit movement and the relative loss of output uncertainty on 20 exact before-and-after probes. Smaller is safer; both are far below one tenth.",
+     "chart_takeaway": "The small pilot cleared its safety gate, and its exact lesson-matching loss also improved, so the full four-round test may proceed."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "Deep wins on separate check runs in both fresh blocks",
+     "chart_read": "Each block has two positive bars: deep's score edge over the starting blend and over the quick specialist. Taller is better, but merely staying above zero in both untouched blocks is the key replication test.",
+     "chart_takeaway": "Deep's local teaching advantage repeated against both alternatives, so the experiment may now test whether that signal can be installed safely into one checkpoint."
+    },
+    {
+     "index": 2,
+     "chart_plain_title": "The proposed training and its two sharp controls receive identical lesson counts",
+     "chart_read": "Each group has a tall 60-unit capability bar and a shorter 20-unit reminder bar. Only the source of the 60 capability lessons changes: verified deep wins, matched places where deep did not win, or the wrong specialist on the verified-win states.",
+     "chart_takeaway": "Because all three arms get the same 80 lessons, a primary win can be attributed to choosing both the right state and the right specialist rather than to extra training."
     }
    ]
   },
@@ -2958,6 +2826,44 @@
      "chart_plain_title": "More compute buys more solved problems, with shrinking returns",
      "chart_read": "The line plots share of tasks solved (vertical) against total compute spent generating candidate answers (horizontal). Points climb up and to the right as budget grows; up-and-to-the-left would be more efficient.",
      "chart_takeaway": "Coverage keeps rising with spend but flattens; this no-training curve is the bar any future trained model must beat at equal cost."
+    }
+   ]
+  },
+  "qwen35_4b_early_text_hypothesis_forking": {
+   "verdict_tag": "A 24-way early-hint test has cleared its model-free checks",
+   "concept_primer": "Imagine giving the same puzzle to twenty-four independent scratchpads. Each starts with a different concrete guess about the first transformation, may reject that guess, and must still write the complete two-step rule. Public examples—not the hidden answer—choose one result.",
+   "plain_question": "Does giving each possible first transformation before reasoning produce better complete rules than giving it late or simply buying more ordinary attempts?",
+   "plain_answer": "The experiment design and model-free checks now pass, but the model has not run. Review expanded the first draft from twelve operation names to twenty-four fully specified operations, added two fair late-hint comparisons, and proved that all 576 possible two-step rules are covered by the public-data control. The next gate tests whether the model can actually use these hints rather than merely repeat them.",
+   "why_it_matters": "The previous internal-state experiment could change a candidate name without showing that later reasoning used it. This test moves a plain-text candidate to the start of reasoning and demands a full computed rule, while matched ordinary attempts and exhaustive search prevent extra branching from receiving free credit.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Fully specified first-step candidates",
+     "value": "24",
+     "sub": "parameters are included, not left for the model to guess"
+    },
+    {
+     "label": "Two-step rules checked per task",
+     "value": "576",
+     "sub": "the complete public search space"
+    },
+    {
+     "label": "Fresh procedural tasks frozen",
+     "value": "144",
+     "sub": "48 qualification and 96 untouched confirmation"
+    },
+    {
+     "label": "Model calls so far",
+     "value": "zero",
+     "sub": "this is design and model-free validation only"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Every diagnostic input distinguishes all twenty-four candidates",
+     "chart_read": "Each bar is one public diagnostic list. Its height is the number of fully specified operations that produce a distinct expected result; all four reach the required twenty-four.",
+     "chart_takeaway": "The upcoming model check cannot pass by exploiting two candidates that happen to mean the same thing on a diagnostic input."
     }
    ]
   },
@@ -4105,6 +4011,45 @@
     }
    ]
   },
+  "qwen35_4b_jacobian_counterfactual_branching": {
+   "verdict_tag": "Balanced internal nudges fail to steer real reasoning",
+   "concept_primer": "Imagine pausing one scratchpad halfway through, then making twelve balanced copies. Each copy gets a tiny internal nudge toward a different possible answer and is allowed to finish reasoning. Because every answer gets one nudge, no answer is secretly favored.",
+   "plain_question": "Can balanced internal nudges make one half-finished reasoning path explore better futures than spending the same effort on ordinary independent attempts?",
+   "plain_answer": "No. Across all three allowed strengths, the meaningful nudge made its assigned answer win only 4 of 48 times—exactly the one-in-twelve chance rate and identical to a generic nudge. The probabilities barely moved even at the strongest setting. Because the write itself failed, no expensive continuation or correctness run was opened.",
+   "why_it_matters": "A direction that works when copied from a clean semantic example is not automatically a push-button control inside arbitrary free-form reasoning. The next test must restore an explicit semantic anchor and copy full coordinates, rather than merely pushing the last scratchpad token harder.",
+   "verdict_tone": "negative",
+   "key_numbers": [
+    {
+     "label": "Assigned answer selected",
+     "value": "4 / 48",
+     "sub": "8.3%, exactly chance, at every tested strength"
+    },
+    {
+     "label": "Largest average probability lift",
+     "value": "+0.006",
+     "sub": "versus +0.15 required for a usable write"
+    },
+    {
+     "label": "Numeric control rows valid",
+     "value": "all",
+     "sub": "the null is behavioral, not a broken control"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Every nudge strength stays at chance",
+     "chart_read": "For each of three nudge strengths, compare the meaningful and generic bars with the tall required bar. Height is how often the branch's assigned answer became the model's answer.",
+     "chart_takeaway": "Meaningful and generic nudges overlap at one-in-twelve while the required bar is 60%, so this internal write method is unusable."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "Meaningful and generic nudges were physically matched",
+     "chart_read": "At each of five internal layers, neighboring bars show the physical size of the two nudges. Matching bars rule out a weaker generic control.",
+     "chart_takeaway": "The control matched the intervention's strength, confirming that the chance result is not a simple size mismatch."
+    }
+   ]
+  },
   "qwen35_4b_jacobian_transport_control_replication": {
    "verdict_tag": "Rewrite a model's early concept, later steps obey",
    "concept_primer": "Picture a package on a sorting line with its destination written up front. Rewrite that early label and it not only drops into a different bin but gets a different zip code stamped on it downstream. A few early internal numbers are that label.",
@@ -4604,6 +4549,120 @@
      "chart_plain_title": "How many candidate reasoning chains each stage collects",
      "chart_read": "Three bars, one per stage, on a vertical log scale of candidate reasoning chains gathered: an earlier length-capped run near 2,000, this study's calibration near 9,000, and its full planned pool near 95,000. Taller means a bigger search, not better quality.",
      "chart_takeaway": "The full pool towers about 46 times over the capped pilot, because uncapped, naturally finished reasoning needs a far larger haul to surface the rare high-quality chains."
+    }
+   ]
+  },
+  "qwen35_4b_materialized_residual_answer_seam_factorial": {
+   "verdict_tag": "Strict answer seam failed; native commit token isolates one fresh repair",
+   "concept_primer": "Before asking whether concrete intermediate states help solve a puzzle, this test first checks whether the model can reliably enter a short, machine-readable answer mode. A bad output format must not be mistaken for a reasoning failure.",
+   "plain_question": "Can any think/no-think and freeform/program-prefix answer style reliably emit a two-step program before the materialized-state test begins?",
+   "plain_answer": "No registered style qualified: all four scored zero strict parses out of 48, so mechanics stayed sealed. Removing only the final chat-end marker and newline made both no-think styles exact on all 48 rows; thinking still had extra close markers. That post-run clue motivates a fresh answer-stage commit-boundary test, not a retroactive pass.",
+   "why_it_matters": "The firewall prevented a token-boundary mismatch from being mistaken for failed reasoning or a residual-state result. The next test can now change one registered thing—stop at the first tokenizer chat-end token during the answer stage—while preserving strict parsing and every matched control.",
+   "verdict_tone": "negative",
+   "key_numbers": [
+    {
+     "label": "Authenticated outputs",
+     "value": "240",
+     "sub": "five durable calibration transactions"
+    },
+    {
+     "label": "Strictly qualified styles",
+     "value": "0 / 4",
+     "sub": "every style had zero strict parses"
+    },
+    {
+     "label": "No-think exact after suffix removal",
+     "value": "48 / 48",
+     "sub": "both paired no-think styles; post-decision only"
+    },
+    {
+     "label": "Mechanics rows opened",
+     "value": "zero",
+     "sub": "the interface firewall stopped the branch"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "The requested answers were often present before an unregistered terminal suffix",
+     "chart_read": "For each style, the strict bar is the registered rate. The frozen-parser diagnostic removes only final chat end plus newline; the separate expected-tail diagnostic takes the last segment after a thinking close and can hide extra close markers. Both are explanatory, not rescored results.",
+     "chart_takeaway": "All registered bars are zero. Suffix-only removal fully repairs no-think but not thinking, so the next fresh test should register the native answer-stage chat-end boundary and retain strict grammar."
+    }
+   ]
+  },
+  "qwen35_4b_materialized_residual_sibling_search": {
+   "verdict_tag": "Model-free design is ready for mechanics",
+   "concept_primer": "Imagine trying every possible first move, writing down the concrete intermediate state each move creates, and asking the same solver to finish from each state. Public examples then choose among the finished candidates.",
+   "plain_question": "Can concrete intermediate states help a small model finish multi-step rules better than names alone or the same spending on ordinary attempts?",
+   "plain_answer": "Not yet. The scientific design and every model-free construction check pass, but the model has not run. The frozen test contains 264 fresh functions, and all 38,596 planned prompt renderings fit their assigned context limits.",
+   "why_it_matters": "The controls prevent extra attempts, a cheaper exhaustive solver, or a broken answer format from masquerading as an improvement. Treat this as a trustworthy launch pad, not capability evidence.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Fresh functions frozen",
+     "value": "264",
+     "sub": "each has a distinct full-input behavior"
+    },
+    {
+     "label": "Eligible functions found",
+     "value": "3,525",
+     "sub": "enough capacity for every frozen split"
+    },
+    {
+     "label": "Prompt renderings checked",
+     "value": "38,596",
+     "sub": "every task, candidate, and planned condition"
+    },
+    {
+     "label": "Model calls so far",
+     "value": "zero",
+     "sub": "construction and review only"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Fresh tasks cover four ambiguity levels",
+     "chart_read": "The horizontal groups count tasks with one, two, three, or four publicly valid first moves; bar height is the number of frozen tasks. No height is better—the planned 8:8:4:4 balance repeats in every block.",
+     "chart_takeaway": "The first two bars match at 88 and the next two match at 44, confirming the planned ambiguity balance across 264 tasks."
+    }
+   ]
+  },
+  "qwen35_4b_materialized_residual_sibling_search_fresh_replication": {
+   "verdict_tag": "Cheap materialized ranking fails; free generation has no valid answer interface",
+   "concept_primer": "The previous test returned one batch of answers but lost them before saving. Its rules forbid drawing that same batch again, so this successor starts with entirely new puzzles and random draws while keeping the scientific comparison unchanged.",
+   "plain_question": "Can concrete intermediate states help the small model finish multi-step rules better than names alone or equally costly ordinary attempts?",
+   "plain_answer": "The generation test cannot answer the question because every reasoning trace reached its length cap and the materialized arm parsed only 12 of 52 outputs, with zero successes. The separate one-token ranking test is a clean negative: materialized recall among viable first moves was 0.257, below names alone, shuffled states, listwise choice, and a surface-only rule.",
+   "why_it_matters": "The full transaction record is finally durable, so the cheap ranking path can be retired confidently. But the free-generation null must stay narrow: it diagnoses a broken answer mode, not proof that concrete intermediate states are useless. A successor now qualifies the answer interface before mechanics.",
+   "verdict_tone": "negative",
+   "key_numbers": [
+    {
+     "label": "Materialized generation parses",
+     "value": "12 / 52",
+     "sub": "all 52 thoughts reached the registered cap"
+    },
+    {
+     "label": "Materialized visible successes",
+     "value": "0 / 52",
+     "sub": "not a clean mechanism verdict because the interface failed"
+    },
+    {
+     "label": "Materialized recall at four",
+     "value": "0.257",
+     "sub": "below every structured ranking comparison"
+    },
+    {
+     "label": "Authenticated requests",
+     "value": "1,984",
+     "sub": "all nine transaction chains completed and were rechecked"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Concrete-state ranking trails every structured comparison",
+     "chart_read": "Each bar is the average share of publicly viable first moves recovered among the top four choices. Compare materialized states with names alone, shuffled states, listwise choice, a surface-only rule, and random ranking.",
+     "chart_takeaway": "Materialized ranking beats random but remains below all five structured comparisons, so this cheap ranking route does not justify a larger search."
     }
    ]
   },
@@ -5978,6 +6037,89 @@
     }
    ]
   },
+  "qwen35_4b_semantic_anchor_coordinate_branching": {
+   "verdict_tag": "The late anchor writes names, but the consequence test is invalid",
+   "concept_primer": "Imagine pausing a scratchpad, placing a candidate name in a dedicated slot, and copying the model's internal state for a different candidate into that slot. The important test is whether later computation follows the copied candidate—not merely whether the next word changes.",
+   "plain_question": "Can a copied internal candidate state at a named hypothesis slot drive a separately computed consequence inside real reasoning?",
+   "plain_answer": "This run cannot establish that. The internal edit strongly changed the model's choice among candidate names, but none of 440 consequence outputs began with a valid answer token. Even in a restricted twelve-choice readout, the edited state chose the intended consequence only 5 of 44 times, nearly the 4-of-44 control rate. A post-run audit also found that two rotating maps canceled, leaving the final name-to-label relation fixed across tasks.",
+   "why_it_matters": "The numerical intervention controls all passed, so the failure is not hidden drift. But formatting failure and the fixed composed mapping make this an invalid consequence interface, not a clean negative about internal-state transport. The safe lesson is narrower: changing the next candidate name is not evidence that reasoning consumed it.",
+   "verdict_tone": "negative",
+   "key_numbers": [
+    {
+     "label": "Unrestricted outputs parsed",
+     "value": "56 / 880",
+     "sub": "6.36%, below the frozen 95% requirement"
+    },
+    {
+     "label": "Consequence outputs parsed",
+     "value": "0 / 440",
+     "sub": "every first token was a formatting opener"
+    },
+    {
+     "label": "Edited consequence choices",
+     "value": "5 / 44",
+     "sub": "versus 4/44 for source and generic controls"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Writing a candidate name did not carry through to its consequence",
+     "chart_read": "For each method, compare the dark bar for choosing the supplied candidate name with the light bar for choosing the label produced by actually applying that candidate's operation. These are restricted-choice diagnostics; the unrestricted output gate failed separately.",
+     "chart_takeaway": "Visible text, full-state copying, and coordinate copying all changed the immediate name choice, while their computed consequences stayed near the control rate."
+    }
+   ]
+  },
+  "qwen35_4b_semantic_policy_headroom_tournament": {
+   "verdict_tag": "The gap is before the failed test",
+   "concept_primer": "A coding agent can know how to fix a clearly reported failure yet still patch too early when the requirement is ambiguous. The missing skill can be gathering the decisive evidence before writing code.",
+   "plain_question": "Which malformed-input rules still challenge the transaction-trained model after a visible failure, and where in the coding loop does the remaining difficulty actually appear?",
+   "plain_answer": "No rule produced a stable training target after a failed test: every one of 72 cases reached a correct patch. But before seeing test output, the model got zero of 54 ambiguous first patches fully right and never opened the visible tests first. The run formally stopped because answers also exceeded their length allowance too often.",
+   "why_it_matters": "More post-failure practice would teach behavior the model already has. The promising strategy is to teach it to inspect the evidence that distinguishes two plausible requirements, then make its first patch follow what it found.",
+   "verdict_tone": "negative",
+   "key_numbers": [
+    {
+     "label": "Correct after failure",
+     "value": "72 of 72",
+     "sub": "every case reached a fully correct patch"
+    },
+    {
+     "label": "Ambiguous first patches",
+     "value": "0 of 54",
+     "sub": "fully correct without test output"
+    },
+    {
+     "label": "Tests read before patching",
+     "value": "0 of 72",
+     "sub": "in rejected-patch trajectories"
+    },
+    {
+     "label": "Answer-limit contacts",
+     "value": "12% / 13%",
+     "sub": "both blocks exceeded the 5% stop"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Most rules were already repaired after a visible failure",
+     "chart_read": "Each group is one hidden rule, with one bar for each fresh block. Taller means the model ended with the correct behavior more often after seeing the failed test.",
+     "chart_takeaway": "Negative and non-integer handling were perfect in both blocks; blank-resource misses moved between data shapes and did not form a stable lesson."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "The sharp gap appears before the first patch",
+     "chart_read": "The first bar asks whether a correct patch ever appeared after test output. The other bars ask whether the model got an ambiguous first patch right or read the tests before making it.",
+     "chart_takeaway": "The model can act on decisive failure evidence, but it does not seek that evidence before committing to a guess."
+    },
+    {
+     "index": 2,
+     "chart_plain_title": "Both blocks exceeded the answer-length stop",
+     "chart_read": "The first two bars are the share of tool turns that filled the answer allowance; the last bar is the maximum allowed rate. Shorter is better.",
+     "chart_takeaway": "The formal result remains an instrument failure even though most long answers contained a usable tool call."
+    }
+   ]
+  },
   "qwen35_4b_simulation_keystone_repair": {
    "verdict_tag": "A perfectly repaired skill reached no dependent task",
    "concept_primer": "This model runs a recipe forward: given the steps and an input, it computes each result in turn. The reverse — naming the hidden steps from a finished dish — is a separate ability. Drilling forward recipes to perfection never touched it; the two sit in sealed compartments.",
@@ -6122,50 +6264,6 @@
     }
    ]
   },
-  "qwen35_4b_transaction_invariant_recovery_curriculum": {
-   "verdict_tag": "The structure transferred but one exception did not",
-   "concept_primer": "A shop should reject a negative order as malformed, but simply decline an ordinary order when stock is too low. Both outcomes leave stock unchanged, yet they are different rules. The model learned the safe update pattern but confused these two kinds of failure.",
-   "plain_question": "Can focused worked repairs teach one small coding model to validate a whole request, copy state, and commit changes atomically without erasing its existing test-and-revise loop?",
-   "plain_answer": "Partly. Focused training lifted practice repairs from 52% to 82% and preserved the test-and-revise loop. But on different transaction APIs it reached 72% versus 70% before training, far below the required ten-point gain. Every target first patch copied state, checked the whole request, and updated atomically, yet all missed the separate negative-amount exception.",
-   "why_it_matters": "A worked repair can install the broad shape of a safe program without installing the exact policy for each failure case. The next training set should begin from almost-correct failed tests and teach the smallest distinction-preserving correction, rather than add more generic success examples.",
-   "verdict_tone": "mixed",
-   "key_numbers": [
-    {
-     "label": "Practice repairs before and after",
-     "value": "52% → 82%",
-     "sub": "strong local installation with the focused examples"
-    },
-    {
-     "label": "Different-API repairs before and after",
-     "value": "70% → 72%",
-     "sub": "only one additional success out of 64 cases"
-    },
-    {
-     "label": "First target patches with the safe structure",
-     "value": "16 of 16",
-     "sub": "all copied, checked every resource, and updated atomically"
-    },
-    {
-     "label": "External benchmark calls",
-     "value": "zero",
-     "sub": "stopped after the different-API gain missed its bar"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "A large practice gain shrinks to one new success",
-     "chart_read": "The two groups compare practice families with different transaction APIs. Within each, bars show the starting model, equal extra recovery training, and focused transaction training. Taller is better.",
-     "chart_takeaway": "Focused training dominates on practice tasks but barely moves the different APIs, so the learned rule shape did not become reliable task success."
-    },
-    {
-     "index": 1,
-     "chart_plain_title": "Every first patch learned three parts and missed one",
-     "chart_read": "Each bar is the share of 16 target first patches containing one required behavior. Full-height bars mean every patch had it; the missing bar is the exception policy.",
-     "chart_takeaway": "All patches copy state, check the whole request, and update atomically, but none reject negative amounts correctly—the precise residual for the next curriculum."
-    }
-   ]
-  },
   "qwen35_4b_state_carry_vs_state_bag": {
    "verdict_tag": "LoRA did not form the running state this test needed",
    "concept_primer": "Imagine tracking a piece moving across a board. One method keeps a single running note, updating and feeding it into each next turn. The other re-reads the opening position many times independently and pools its guesses. Same total effort — does chaining the note win?",
@@ -6245,6 +6343,39 @@
      "chart_plain_title": "The full-size update needs 13.30 GiB before model activations",
      "chart_read": "The three bars split memory among the update weights, their gradients, and Adam's two running statistics. The statistics bar is twice either single-tensor bar because Adam keeps two values per weight.",
      "chart_takeaway": "The real optimizer and worst-depth gate fit comfortably, so the negative state result cannot be dismissed as an unexecuted or memory-infeasible full-rank proposal."
+    }
+   ]
+  },
+  "qwen35_4b_state_formation_analysis_recovery": {
+   "verdict_tag": "Recovery path is ready",
+   "concept_primer": "A frozen analysis is like a sealed calculator: repair the cable that feeds it, while leaving every button and formula untouched.",
+   "plain_question": "Can the existing state-analysis run read its own saved files after a strict path check blocked them?",
+   "plain_answer": "Yes, the narrow recovery check passed. It accepts only the one registered file location, still rejects unsafe shortcuts, and has not yet examined any model result.",
+   "why_it_matters": "Practitioners can continue the original comparison without retraining or quietly changing how success is judged. The next evidence will still come from the frozen analysis.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Safety checks",
+     "value": "4 of 4",
+     "sub": "path-boundary controls passed"
+    },
+    {
+     "label": "Results examined",
+     "value": "0",
+     "sub": "scientific result rows opened"
+    },
+    {
+     "label": "Sealed cases opened",
+     "value": "0",
+     "sub": "future comparison rows touched"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Every recovery safety check passed",
+     "chart_read": "The horizontal groups are the four path-safety checks, and bar height is the pass indicator. Taller bars mean the recovery preserved that safeguard.",
+     "chart_takeaway": "All four bars reach the pass mark, showing the file-path repair stayed narrow before any result was read."
     }
    ]
   },
@@ -7045,6 +7176,50 @@
     }
    ]
   },
+  "qwen35_4b_transaction_invariant_recovery_curriculum": {
+   "verdict_tag": "The structure transferred but one exception did not",
+   "concept_primer": "A shop should reject a negative order as malformed, but simply decline an ordinary order when stock is too low. Both outcomes leave stock unchanged, yet they are different rules. The model learned the safe update pattern but confused these two kinds of failure.",
+   "plain_question": "Can focused worked repairs teach one small coding model to validate a whole request, copy state, and commit changes atomically without erasing its existing test-and-revise loop?",
+   "plain_answer": "Partly. Focused training lifted practice repairs from 52% to 82% and preserved the test-and-revise loop. But on different transaction APIs it reached 72% versus 70% before training, far below the required ten-point gain. Every target first patch copied state, checked the whole request, and updated atomically, yet all missed the separate negative-amount exception.",
+   "why_it_matters": "A worked repair can install the broad shape of a safe program without installing the exact policy for each failure case. The next training set should begin from almost-correct failed tests and teach the smallest distinction-preserving correction, rather than add more generic success examples.",
+   "verdict_tone": "mixed",
+   "key_numbers": [
+    {
+     "label": "Practice repairs before and after",
+     "value": "52% → 82%",
+     "sub": "strong local installation with the focused examples"
+    },
+    {
+     "label": "Different-API repairs before and after",
+     "value": "70% → 72%",
+     "sub": "only one additional success out of 64 cases"
+    },
+    {
+     "label": "First target patches with the safe structure",
+     "value": "16 of 16",
+     "sub": "all copied, checked every resource, and updated atomically"
+    },
+    {
+     "label": "External benchmark calls",
+     "value": "zero",
+     "sub": "stopped after the different-API gain missed its bar"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "A large practice gain shrinks to one new success",
+     "chart_read": "The two groups compare practice families with different transaction APIs. Within each, bars show the starting model, equal extra recovery training, and focused transaction training. Taller is better.",
+     "chart_takeaway": "Focused training dominates on practice tasks but barely moves the different APIs, so the learned rule shape did not become reliable task success."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "Every first patch learned three parts and missed one",
+     "chart_read": "Each bar is the share of 16 target first patches containing one required behavior. Full-height bars mean every patch had it; the missing bar is the exception policy.",
+     "chart_takeaway": "All patches copy state, check the whole request, and update atomically, but none reject negative amounts correctly—the precise residual for the next curriculum."
+    }
+   ]
+  },
   "qwen35_4b_transform_abi_compiler_pilot": {
    "verdict_tag": "Let the model pick recipes, not write code",
    "concept_primer": "Think of cleaning a messy spreadsheet or pulling an ID out of ragged text. Instead of asking the model to type the code, the system pre-writes every valid short recipe, shows a few input-to-output examples, and the model just ranks which recipe fits. A trusted program then runs the winner exactly.",
@@ -7139,6 +7314,214 @@
     }
    ]
   },
+  "qwen35_4b_universal_close_weight_token_match": {
+   "verdict_tag": "Design frozen; model runs are pending",
+   "concept_primer": "The previous training recipe nearly learned to finish fresh puzzles, but a few answers ran out of space before the model stopped reasoning. This follow-up teaches the exact transition from reasoning to a final answer while keeping the amount of practice equal across comparisons.",
+   "plain_question": "Does putting extra teaching weight on the moment reasoning ends help the model finish reliably, beyond simply adding targeted lessons or more replay practice?",
+   "plain_answer": "The comparison is ready, but the model has not run yet. Three versions will start from the same near-miss model and receive 320 examples apiece. One gets replay only, one gets 80 fresh execution and rule-finding lessons, and the third gets those exact same lessons with extra weight only on the two-piece closing marker.",
+   "why_it_matters": "This separates three explanations that earlier work could not: benefit from another short training pass, benefit from task-targeted lessons, and benefit from teaching the model when to stop reasoning. Equal example counts and equal processed text make the comparison unusually clean.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Examples per version",
+     "value": "320",
+     "sub": "the same total in all three comparisons"
+    },
+    {
+     "label": "Training pieces per version",
+     "value": "286,814",
+     "sub": "exactly equal processed text"
+    },
+    {
+     "label": "Fresh targeted lessons",
+     "value": "80",
+     "sub": "40 execution and 40 rule-finding examples"
+    },
+    {
+     "label": "Model evaluations so far",
+     "value": "zero",
+     "sub": "only design and integrity checks have run"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Three equal training streams isolate the closing lesson",
+     "chart_read": "Each stacked bar totals 320 examples. Replay-only keeps all 120 variable examples as replay; the other two replace 80 of them with fresh targeted lessons while sharing the same 200-example core.",
+     "chart_takeaway": "The two targeted versions use identical examples, so any difference between them comes from emphasizing the reasoning-to-answer transition."
+    }
+   ]
+  },
+  "qwen35_4b_universal_curriculum": {
+   "verdict_tag": "Synthetic skills installed locally but displaced broad behavior",
+   "concept_primer": "The curriculum teaches abstract procedures with invented symbols that do not resemble the benchmark. The crucial test is not whether the model learns those exercises, but whether the same update improves every unrelated family without erasing behavior it already had.",
+   "plain_question": "Can carefully checked synthetic lessons add general procedures that improve every unseen benchmark family while preserving a strong starting policy?",
+   "plain_answer": "Not with either tested training geometry. Continuing from the strong policy raised fresh synthetic accuracy from 50% to 69% and beat the untrained base overall, but it scored 31% aggregate versus 45% for the strong starting policy and fell below base on three of ten families. A second mixture trained from base with broad replay also reached 69% local accuracy, yet only 85% of its answers were well formed and it hit the response limit four times, so its broad test stayed sealed.",
+   "why_it_matters": "The lessons clearly changed the model, but local learning was not a universal gain. The result narrows the search toward gentler joint training that keeps mature broad behavior active during every update, with a replay-only comparison to separate designed-skill transfer from ordinary continued practice.",
+   "verdict_tone": "negative",
+   "key_numbers": [
+    {
+     "label": "fresh synthetic accuracy",
+     "value": "69%",
+     "sub": "up from 50% for the strong starting policy"
+    },
+    {
+     "label": "aggregate benchmark score",
+     "value": "31%",
+     "sub": "versus 17% for base and 45% for the strong starting policy"
+    },
+    {
+     "label": "families below base",
+     "value": "3 of 10",
+     "sub": "the update specialized instead of lifting every family"
+    },
+    {
+     "label": "from-base replay mixture",
+     "value": "local gate failed",
+     "sub": "85% well-formed answers and four response-limit contacts"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Designed continuation trades broad gains across families",
+     "chart_read": "For each family, compare the strong starting policy's change from base with the designed continuation's change from base. Bars below zero mark regressions.",
+     "chart_takeaway": "The designed lessons create large wins in two families but regress three below base and lose overall to the strong starting policy."
+    }
+   ]
+  },
+  "qwen35_4b_universal_low_density_token_match": {
+   "verdict_tag": "Low-density doses failed the local gate",
+   "concept_primer": "The previous designed mix may have been too dense, and its replay comparison also saw more tokens. This follow-up changes only a tiny number of rows while holding total training exposure exactly equal, so the later difference can be tied much more cleanly to curriculum content.",
+   "plain_question": "Can a tiny dose of abstract skill lessons improve the replay-refreshed model without erasing any of its broad gains?",
+   "plain_answer": "No. Neither 40 nor 80 abstract lessons passed the fresh local screen. The stronger 80-lesson stream matched the inherited anchor at 54% accuracy and parsed 62% of answers, but still hit the answer cap 10 times; broad evaluation stayed sealed.",
+   "why_it_matters": "Exact exposure removes the prior compute ambiguity: these gentle lesson doses were too small to install reliable concise execution. The next attempt must bridge the dose gap or target answer commitment directly, while keeping a replay-only comparison and fresh evaluation seeds.",
+   "verdict_tone": "negative",
+   "key_numbers": [
+    {
+     "label": "best local accuracy",
+     "value": "54%",
+     "sub": "80-lesson stream tied the inherited anchor"
+    },
+    {
+     "label": "best answer parse rate",
+     "value": "62%",
+     "sub": "below the registered 90% gate"
+    },
+    {
+     "label": "fewest answer-cap contacts",
+     "value": "10 of 26",
+     "sub": "the registered ceiling was two"
+    },
+    {
+     "label": "broad events consumed",
+     "value": "zero",
+     "sub": "all arms stopped at the local screen"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Only the final 80 training slots change",
+     "chart_read": "Every bar totals 1,520 rows. Moving from replay only to the 40- and 80-lesson doses replaces one or both token-matched replay blocks while the 1,440-row core stays fixed.",
+     "chart_takeaway": "The ladder isolates a very small designed-content increment at exactly equal forward-token exposure."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "Every exact-exposure stream missed the local gate",
+     "chart_read": "Two bars per model show exact-answer accuracy and answer parse rate on the same 26 fresh cases. The 80-lesson stream is best among the new streams, but neither bar reaches its registered threshold.",
+     "chart_takeaway": "Adding 80 lessons modestly improves readable answers over replay alone, yet accuracy only ties the inherited anchor and answer-cap failures remain frequent."
+    }
+   ]
+  },
+  "qwen35_4b_universal_mid_density_token_match": {
+   "verdict_tag": "160 lessons nearly pass; benchmark stays sealed",
+   "concept_primer": "Very small doses of abstract lessons did not install reliable execution, while a much larger earlier dose learned locally but displaced broad behavior. This experiment tests two doses between those endpoints while keeping training exposure exactly equal to replay-only practice.",
+   "plain_question": "Can a middle-sized dose of abstract skill lessons cross the local installation threshold without sacrificing the replay practice that protects broad capability?",
+   "plain_answer": "The 160-lesson stream improved fresh local accuracy from 17 to 19 of 26 cases, raised readable answers from 18 to 23, and cut answer-limit contacts from nine to three. It still missed the readability and length gates by one case each. Adding 80 more lessons erased the accuracy gain, so no model advanced to broad evaluation.",
+   "why_it_matters": "The middle dose moved the right behaviors and came close, while the larger dose moved backward. That narrows the next intervention to concise answer commitment at the 160-lesson mix instead of adding more generic lessons or weakening the gate.",
+   "verdict_tone": "negative",
+   "key_numbers": [
+    {
+     "label": "best local accuracy",
+     "value": "19 of 26",
+     "sub": "160 lessons versus 17 for replay only"
+    },
+    {
+     "label": "best readable answers",
+     "value": "23 of 26",
+     "sub": "one case short of the registered gate"
+    },
+    {
+     "label": "fewest answer-limit contacts",
+     "value": "three",
+     "sub": "one above the registered ceiling"
+    },
+    {
+     "label": "broad events consumed",
+     "value": "zero",
+     "sub": "promotion receipt was empty"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Two middle doses replace matched replay blocks",
+     "chart_read": "Every bar totals 1,520 rows. The designed streams replace two or three token-matched 80-row replay blocks while the 1,280-row replay core stays fixed.",
+     "chart_takeaway": "The frozen ladder isolates lesson density at equal token exposure; all three streams trained cleanly."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "The 160-lesson stream misses two local bars narrowly",
+     "chart_read": "Each model has bars for exact-answer accuracy and readable-answer rate on the same 26 fresh cases. The 160-lesson stream leads both, but readable answers remain one case short; its three answer-limit contacts are also one above the ceiling.",
+     "chart_takeaway": "A middle dose improves correctness and concise completion, while 240 lessons reverse part of the gain; no arm is eligible for broad evaluation."
+    }
+   ]
+  },
+  "qwen35_4b_universal_replay_anchor": {
+   "verdict_tag": "Designed mix loses; replay-only sets a stronger anchor",
+   "concept_primer": "This experiment kept the model practicing broad tasks while adding a smaller set of abstract lessons. A replay-only comparison received the same number of updates, revealing whether any gain came from the designed lessons or simply from continuing broad practice.",
+   "plain_question": "Can gentle joint practice add designed general skills without erasing the broad behavior the model already learned?",
+   "plain_answer": "No at this dose. The designed mix passed its fresh synthetic screen but scored about 42% overall, below both the 44% mature policy and the 49% replay-only comparison. It also fell below base on one family. Replay-only was the useful surprise: it improved eight of ten families, tied the other two, and regressed none.",
+   "why_it_matters": "Broad replay was not merely protecting old behavior; it was still adding capability. Future designed curricula must beat another replay continuation, not just the older starting policy. The next search should begin from this stronger replay-refreshed model, use far fewer designed rows, and match token exposure as well as update count.",
+   "verdict_tone": "mixed",
+   "key_numbers": [
+    {
+     "label": "designed-mix aggregate",
+     "value": "42.4%",
+     "sub": "below both the 44% mature policy and 49% replay-only comparison"
+    },
+    {
+     "label": "replay-only aggregate",
+     "value": "48.5%",
+     "sub": "about four points above the mature policy"
+    },
+    {
+     "label": "replay-only family lift",
+     "value": "8 of 10",
+     "sub": "two ties and zero regressions versus base"
+    },
+    {
+     "label": "fresh synthetic accuracy",
+     "value": "73%",
+     "sub": "the local pass did not predict broad transfer"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Replay-only protects every family and wins overall",
+     "chart_read": "For each family, compare the replay-only and designed-mix changes from base. Bars below zero are regressions; replay-only has none while the designed mix has one.",
+     "chart_takeaway": "The designed mix trails replay-only by about six aggregate points; replay saw 17% more token exposure, so the next test must token-match."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "Both training streams shared the same broad core",
+     "chart_read": "Each bar totals 1,520 rows. Both streams share 1,120 replay rows; the candidate adds 400 designed lessons while the comparison adds 400 more replay examples.",
+     "chart_takeaway": "The matched construction isolates designed lessons from the benefit of simply continuing broad practice."
+    }
+   ]
+  },
   "qwen35_4b_unsaturated_frontier_active_bridge": {
    "verdict_tag": "Spreading practice evenly beats chasing mistakes",
    "concept_primer": "Picture sixty tutoring sessions to split across ten tricky exam topics. Piling them onto the topic you flunk worst leaves shakier topics with too few sessions, and those quietly collapse on test day; splitting the sessions evenly covers every topic.",
@@ -7186,6 +7569,50 @@
      "chart_plain_title": "On the hardest task types, targeting fixes some but abandons others",
      "chart_read": "Five hardest task types along the bottom, four colored bars each for the recipes: no extra practice, evenly-spread, and two concentrate-on-mistakes versions. Height is share fully fixed on unseen inputs; taller is better.",
      "chart_takeaway": "Evenly-spread bars stay tall across every type, while a concentrate-on-mistakes bar drops to zero on at least one type, exposing the blind spots targeting creates."
+    }
+   ]
+  },
+  "qwen35_4b_validation_policy_counterexample_curriculum": {
+   "verdict_tag": "The lesson was already mastered",
+   "concept_primer": "A training experiment needs room to improve. If the starting model already fixes every practice case, even a perfect trained model cannot prove that the new lessons helped.",
+   "plain_question": "Can a tiny set of almost-correct failed-test revisions teach that exact distinction without erasing the coding loop already learned?",
+   "plain_answer": "The test could not answer the question. Before the newly trained model was allowed to run, the starting model and the equal-size old-lesson control each fixed all 48 practice cases. The required gains were therefore impossible, so the run stopped before transfer or the external benchmark.",
+   "why_it_matters": "Turning the old failure into a clear instruction plus an almost-correct program also made it easy. Future curricula must first prove that the starting model still fails the exact new practice distribution; failure forensics alone do not guarantee useful training headroom.",
+   "verdict_tone": "negative",
+   "key_numbers": [
+    {
+     "label": "Starting model practice score",
+     "value": "48 of 48",
+     "sub": "no room for the required fifteen-point gain"
+    },
+    {
+     "label": "Equal extra-training control",
+     "value": "48 of 48",
+     "sub": "no room for the required ten-point gain"
+    },
+    {
+     "label": "Unrelated-behavior drift",
+     "value": "0.109",
+     "sub": "the trained candidate stayed below the 0.15 safety ceiling"
+    },
+    {
+     "label": "External benchmark calls",
+     "value": "zero",
+     "sub": "stopped before candidate behavior and transfer"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Both controls already sit at the maximum score",
+     "chart_read": "The first two bars show practice success for the starting model and the equal extra-training control; the third is the best score any candidate could possibly achieve. All bars reach the same ceiling.",
+     "chart_takeaway": "With both controls at 100 percent, the promised improvement cannot be measured and the candidate must remain unopened."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "The small update stayed inside its unrelated-behavior limit",
+     "chart_read": "The first bar is measured drift from the older reference model; the second is the largest allowed drift. Shorter is better, and the measured bar remains below the limit.",
+     "chart_takeaway": "The narrow training update was local enough, but locality cannot rescue an evaluation set the parent already solves perfectly."
     }
    ]
   },

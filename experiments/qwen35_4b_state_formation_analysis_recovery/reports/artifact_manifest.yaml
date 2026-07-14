@@ -1,0 +1,24 @@
+schema_version: 1
+experiment_id: "qwen35_4b_state_formation_analysis_recovery"
+external_artifacts:
+  - name: "immutable producer initialization, training, and checkpoint payloads"
+    storage: "/workspace/large_artifacts/qwen35_4b_state_formation_capacity_adjudication"
+    required_for: "reopening the exact v11 training graph before result analysis"
+    checksum: "per-file SHA-256 values and checkpoint identities in the producer's tracked receipts"
+    regenerate: >-
+      follow experiments/qwen35_4b_state_formation_capacity_adjudication/README.md from exact
+      source-contract v11; do not substitute a later source digest
+omitted_artifacts: []
+reproducibility:
+  smoke_command: >-
+    .venv/bin/python -B
+    experiments/qwen35_4b_state_formation_analysis_recovery/scripts/run.py --smoke
+  full_command: >-
+    .venv/bin/python -B
+    experiments/qwen35_4b_state_formation_analysis_recovery/scripts/run.py --phase lora_joint
+  required_external_artifacts:
+    - "/workspace/large_artifacts/qwen35_4b_state_formation_capacity_adjudication"
+notes: >-
+  This experiment creates no model, adapter, dataset, or external payload. It consumes only the
+  producer's exact source-bound external artifacts. Scientific outputs remain in the producer's
+  canonical analysis paths; recovery lineage sidecars are tracked here.
