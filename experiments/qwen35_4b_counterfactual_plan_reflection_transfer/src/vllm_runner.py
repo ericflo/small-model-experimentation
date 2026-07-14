@@ -156,14 +156,19 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
         "source_trainer_sha256", "source_trainer_git_commit",
         "source_recipe_sha256", "source_adapter_tree_sha256",
         "source_adapter_sha256", "source_adapter_config_sha256", "source_arm", "source_seed",
-        "applied_lora_modules", "merged_tree_sha256",
+        "source_adapter_inventory", "applied_lora_modules",
+        "merge_script_sha256", "merge_git_commit", "merged_checkpoint_inventory",
+        "merged_tree_sha256",
     }
     config_path = Path(__file__).resolve().parents[1] / "configs" / "default.yaml"
     lineage = path / "source_lineage"
-    training_lineage_path = lineage / "training_receipt.json"
-    stage_lineage_path = lineage / "stage_receipt.json"
-    tokenizer_lineage_path = lineage / "tokenizer_receipt.json"
-    adapter_config_lineage_path = lineage / "adapter_config.json"
+    adapter_tree = lineage / "adapter_tree"
+    training_lineage_path = adapter_tree / "training_receipt.json"
+    stage_lineage_path = adapter_tree / "source_stage_receipt.json"
+    tokenizer_lineage_path = adapter_tree / "source_tokenizer_receipt.json"
+    adapter_config_lineage_path = adapter_tree / "adapter_config.json"
+    adapter_weights_lineage_path = adapter_tree / "adapter_model.safetensors"
+    started_lineage_path = adapter_tree / "STARTED.json"
     if not all(
         item.is_file()
         for item in (
@@ -171,6 +176,8 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
             stage_lineage_path,
             tokenizer_lineage_path,
             adapter_config_lineage_path,
+            adapter_weights_lineage_path,
+            started_lineage_path,
         )
     ):
         raise ValueError("merged model override lacks embedded source lineage")
@@ -195,7 +202,7 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
     }
     if (
         set(receipt) != required
-        or receipt.get("schema_version") != 2
+        or receipt.get("schema_version") != 3
         or receipt.get("experiment_id")
         != "qwen35_4b_counterfactual_plan_reflection_transfer"
         or receipt.get("config_sha256") != _sha256_file(config_path)
@@ -218,6 +225,9 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
         != _sha256_file(Path(__file__).resolve().parents[1] / "scripts" / "train.py")
         or receipt.get("source_trainer_git_commit")
         != _run_text(["git", "rev-parse", "HEAD"])
+        or receipt.get("merge_git_commit") != _run_text(["git", "rev-parse", "HEAD"])
+        or receipt.get("merge_script_sha256")
+        != _sha256_file(Path(__file__).resolve().parents[1] / "scripts" / "merge_adapter.py")
         or receipt.get("source_recipe_sha256") != recipe_sha256
         or receipt.get("source_training_receipt_sha256")
         != _sha256_file(training_lineage_path)
@@ -267,6 +277,39 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
         != set(recipe["target_modules"])
     ):
         raise ValueError("merged model override receipt has invalid base or delta identity")
+    from checkpoint_lineage import adapter_tensor_inventory, merged_checkpoint_inventory
+
+    source_inventory = adapter_tensor_inventory(adapter_weights_lineage_path)
+    if (
+        source_inventory != receipt.get("source_adapter_inventory")
+        or source_inventory["sha256"] != receipt.get("source_adapter_sha256")
+        or source_inventory["module_count"] != receipt.get("applied_lora_modules")
+        or _sha256_tree(adapter_tree, excluded={"training_receipt.json"})
+        != receipt.get("source_adapter_tree_sha256")
+    ):
+        raise ValueError("retained source adapter tensors/tree differ from merge lineage")
+    checkpoint_inventory = merged_checkpoint_inventory(path)
+    if checkpoint_inventory != receipt.get("merged_checkpoint_inventory"):
+        raise ValueError("merged checkpoint inventory differs from its receipt")
+    started = json.loads(started_lineage_path.read_text())
+    if (
+        set(started)
+        != {
+            "schema_version", "arm", "seed", "config_sha256",
+            "tokenizer_receipt_sha256", "stage_receipt_sha256",
+            "trainer_git_commit", "trainer_sha256",
+        }
+        or started.get("schema_version") != 1
+        or started.get("arm") != receipt.get("source_arm")
+        or started.get("seed") != receipt.get("source_seed")
+        or started.get("config_sha256") != receipt.get("config_sha256")
+        or started.get("tokenizer_receipt_sha256")
+        != receipt.get("source_tokenizer_receipt_sha256")
+        or started.get("stage_receipt_sha256") != receipt.get("source_stage_receipt_sha256")
+        or started.get("trainer_git_commit") != receipt.get("source_trainer_git_commit")
+        or started.get("trainer_sha256") != receipt.get("source_trainer_sha256")
+    ):
+        raise ValueError("retained source adapter start record differs from merge lineage")
     sys.path.insert(0, str(Path(__file__).resolve().parent))
     from stages import read_and_validate_stage_receipt
 
@@ -291,6 +334,8 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
         "source_recipe_sha256": receipt.get("source_recipe_sha256"),
         "source_adapter_tree_sha256": receipt.get("source_adapter_tree_sha256"),
         "source_adapter_config_sha256": receipt.get("source_adapter_config_sha256"),
+        "source_adapter_inventory": source_inventory,
+        "merged_checkpoint_inventory": checkpoint_inventory,
         "source_arm": receipt.get("source_arm"),
         "source_seed": receipt.get("source_seed"),
     }
@@ -1930,6 +1975,7 @@ def _validate_cli_stage_receipt(
     )
     return {
         "authorized_stage": expected_stage,
+        "stage_receipt_path": str(path.resolve()),
         "stage_receipt_sha256": _sha256_file(path),
         "config_sha256": receipt["config_sha256"],
         "issuer_git_commit": receipt["issuer_git_commit"],

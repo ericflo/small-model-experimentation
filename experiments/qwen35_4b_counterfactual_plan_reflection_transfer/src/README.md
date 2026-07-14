@@ -8,8 +8,13 @@
   exact Qwen thinking-channel targets, and final-Assistant-only loss masks.
 - `analyze.py` implements the paired bootstrap, family-breadth, mechanism, positive
   control, and retention gates.
+- `score_artifacts.py`, `gate_artifacts.py`, and `adapter_gate_artifacts.py` reconstruct
+  score and gate evidence from hash-bound raw artifacts instead of trusting copied
+  pass fields.
+- `checkpoint_lineage.py` opens and inventories retained LoRA tensors and merged
+  safetensors shards before a model override is accepted.
 - `vllm_runner.py` is the repository-pinned Qwen3.5-4B bulk-inference runner.
 
-The current path is deliberately model-free. The tokenizer receipt, QLoRA trainer,
-vLLM generation, and any future Transformers Jacobian work remain unauthorized until
-the corresponding committed gates open.
+Only the completed tokenizer receipt is authorized. QLoRA training, vLLM model
+generation, evaluation, and any future Transformers Jacobian work remain unauthorized
+until an independent review opens the corresponding committed gates.

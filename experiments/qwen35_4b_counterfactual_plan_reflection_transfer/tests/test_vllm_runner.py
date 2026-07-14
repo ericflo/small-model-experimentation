@@ -9,7 +9,6 @@ import sys
 import tempfile
 import types
 import unittest
-import yaml
 from pathlib import Path
 from types import SimpleNamespace
 from unittest import mock
@@ -17,7 +16,7 @@ from unittest import mock
 
 RUNNER_PATH = Path(__file__).resolve().parents[1] / "src" / "vllm_runner.py"
 sys.path.insert(0, str(RUNNER_PATH.parent))
-import stages as stage_module  # noqa: E402
+import checkpoint_lineage  # noqa: E402
 
 SPEC = importlib.util.spec_from_file_location("template_vllm_runner", RUNNER_PATH)
 assert SPEC and SPEC.loader
@@ -144,124 +143,55 @@ class EngineConfigCaptureGeometryTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "runtime LoRA adapters are forbidden"):
             runner.EngineConfig(adapter=RUNNER_PATH.parent).validate()
 
-    def test_merged_override_receipt_binds_full_tree(self) -> None:
+    def test_dummy_merged_override_and_self_issued_lineage_are_rejected(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             (root / "weights.safetensors").write_bytes(b"weights")
-            lineage = root / "source_lineage"
-            lineage.mkdir()
-            config_sha = runner._sha256_file(
-                RUNNER_PATH.parents[1] / "configs" / "default.yaml"
+            (root / "merge_receipt.json").write_text(json.dumps({"schema_version": 3}))
+            with self.assertRaisesRegex(ValueError, "embedded source lineage"):
+                runner._validate_model_override(root)
+
+    def test_checkpoint_inventory_opens_shards_and_rejects_index_tampering(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            for name, value in {
+                "config.json": {"architectures": ["SyntheticQwen"]},
+                "generation_config.json": {},
+                "tokenizer.json": {},
+                "tokenizer_config.json": {},
+            }.items():
+                (root / name).write_text(json.dumps(value))
+            shard = root / "model-00001-of-00001.safetensors"
+            shard.write_bytes(b"synthetic-safetensors-fixture")
+            index_path = root / "model.safetensors.index.json"
+            index_path.write_text(
+                json.dumps(
+                    {
+                        "metadata": {"total_size": 16},
+                        "weight_map": {"layer.weight": shard.name},
+                    }
+                )
             )
-            git_commit = runner._run_text(["git", "rev-parse", "HEAD"])
-            stage_receipt = {
-                "schema_version": 2,
-                "experiment_id": "qwen35_4b_counterfactual_plan_reflection_transfer",
-                "authorized_stage": "screen_training",
-                "config_sha256": config_sha,
-                "issuer_git_commit": git_commit,
-                "issuer_script_sha256": runner._sha256_file(
-                    RUNNER_PATH.parents[1] / "scripts" / "authorize_stage.py"
+            with (
+                mock.patch.object(checkpoint_lineage, "MIN_MERGED_TENSORS", 1),
+                mock.patch.object(checkpoint_lineage, "MIN_MERGED_SHARD_BYTES", 1),
+                mock.patch.object(checkpoint_lineage, "MIN_MERGED_TENSOR_BYTES", 1),
+                mock.patch.object(
+                    checkpoint_lineage, "_safetensor_keys", return_value={"layer.weight"}
                 ),
-                "prerequisites": [
-                    {"kind": "calibration_gate", "sha256": "c" * 64, "pass": True}
-                ],
-            }
-            (lineage / "stage_receipt.json").write_text(json.dumps(stage_receipt))
-            tokenizer_receipt = {
-                "experiment_id": "qwen35_4b_counterfactual_plan_reflection_transfer",
-                "model_id": runner.MODEL_ID,
-                "model_revision": runner.MODEL_REVISION,
-                "tokenizer_eos_token_id": 248046,
-            }
-            (lineage / "tokenizer_receipt.json").write_text(json.dumps(tokenizer_receipt))
-            adapter_config = {
-                "r": 32,
-                "lora_alpha": 64,
-                "lora_dropout": 0.05,
-                "bias": "none",
-                "target_modules": [
-                    "q_proj", "k_proj", "v_proj", "o_proj",
-                    "gate_proj", "up_proj", "down_proj",
-                ],
-            }
-            (lineage / "adapter_config.json").write_text(json.dumps(adapter_config))
-            trainer_sha = runner._sha256_file(
-                RUNNER_PATH.parents[1] / "scripts" / "train.py"
-            )
-            training_receipt = {
-                "schema_version": 2,
-                "experiment_id": "qwen35_4b_counterfactual_plan_reflection_transfer",
-                "config_sha256": config_sha,
-                "arm": "reflection_correct",
-                "seed": 47,
-                "model_id": runner.MODEL_ID,
-                "model_revision": runner.MODEL_REVISION,
-                "optimizer_steps": 36,
-                "train_loss": 0.1,
-                "trainer_sha256": trainer_sha,
-                "trainer_git_commit": git_commit,
-                "recipe_sha256": runner._sha256_bytes(
+            ):
+                inventory = checkpoint_lineage.merged_checkpoint_inventory(root)
+                self.assertEqual(inventory["tensor_count"], 1)
+                index_path.write_text(
                     json.dumps(
-                        yaml.safe_load(
-                            (RUNNER_PATH.parents[1] / "configs" / "default.yaml").read_text()
-                        )["training"]["recipe"],
-                        sort_keys=True,
-                        separators=(",", ":"),
-                    ).encode()
-                ),
-                "stage_receipt_sha256": runner._sha256_file(lineage / "stage_receipt.json"),
-                "tokenizer_receipt_sha256": runner._sha256_file(
-                    lineage / "tokenizer_receipt.json"
-                ),
-                "copied_stage_receipt_sha256": runner._sha256_file(
-                    lineage / "stage_receipt.json"
-                ),
-                "copied_tokenizer_receipt_sha256": runner._sha256_file(
-                    lineage / "tokenizer_receipt.json"
-                ),
-                "record_receipt_sha256": "1" * 64,
-                "parity_sha256": "2" * 64,
-                "adapter_tree_excluding_training_receipt_sha256": "b" * 64,
-            }
-            (lineage / "training_receipt.json").write_text(json.dumps(training_receipt))
-            tree_hash = runner._sha256_tree(root)
-            receipt = {
-                "schema_version": 2,
-                "experiment_id": "qwen35_4b_counterfactual_plan_reflection_transfer",
-                "config_sha256": config_sha,
-                "model_id": runner.MODEL_ID,
-                "model_revision": runner.MODEL_REVISION,
-                "applied_lora_modules": 7,
-                "merged_tree_sha256": tree_hash,
-                "source_training_receipt_sha256": runner._sha256_file(
-                    lineage / "training_receipt.json"
-                ),
-                "source_stage_receipt_sha256": runner._sha256_file(
-                    lineage / "stage_receipt.json"
-                ),
-                "source_tokenizer_receipt_sha256": runner._sha256_file(
-                    lineage / "tokenizer_receipt.json"
-                ),
-                "source_trainer_sha256": trainer_sha,
-                "source_trainer_git_commit": git_commit,
-                "source_recipe_sha256": training_receipt["recipe_sha256"],
-                "source_adapter_tree_sha256": "b" * 64,
-                "source_adapter_sha256": "f" * 64,
-                "source_adapter_config_sha256": runner._sha256_file(
-                    lineage / "adapter_config.json"
-                ),
-                "source_arm": "reflection_correct",
-                "source_seed": 47,
-            }
-            (root / "merge_receipt.json").write_text(json.dumps(receipt))
-            with mock.patch.object(stage_module, "require_clean_worktree"):
-                validated = runner._validate_model_override(root)
-            self.assertEqual(validated["merged_tree_sha256"], tree_hash)
-            (root / "weights.safetensors").write_bytes(b"tampered")
-            with self.assertRaisesRegex(ValueError, "tree hash differs"):
-                with mock.patch.object(stage_module, "require_clean_worktree"):
-                    runner._validate_model_override(root)
+                        {
+                            "metadata": {"total_size": 16},
+                            "weight_map": {"forged.weight": shard.name},
+                        }
+                    )
+                )
+                with self.assertRaisesRegex(ValueError, "tensor placement|tensor keys"):
+                    checkpoint_lineage.merged_checkpoint_inventory(root)
 
     def test_explicit_capture_list_requires_strict_positive_tied_geometry(self) -> None:
         runner.EngineConfig(

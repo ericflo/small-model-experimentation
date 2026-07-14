@@ -15,6 +15,7 @@ sys.path.insert(0, str(EXP / "src"))
 
 import eval_inputs as E  # noqa: E402
 import provenance as P  # noqa: E402
+import adapter_gate_artifacts as G  # noqa: E402
 from vllm_runner import SamplingConfig  # noqa: E402
 
 
@@ -130,6 +131,28 @@ class EvalInputTests(unittest.TestCase):
             lock.write_text("vllm @ https://example.invalid/vllm-source.tar.gz\n")
             with self.assertRaisesRegex(ValueError, "exact wheel pin"):
                 P._locked_versions(lock)
+
+    def test_standalone_adapter_pass_receipt_lacks_replayable_evidence(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "adapter-gate.json"
+            path.write_text(
+                json.dumps(
+                    {
+                        "schema_version": 2,
+                        "experiment_id": self.config["experiment_id"],
+                        "arm": "reflection_correct",
+                        "seed": 47,
+                        "pass": True,
+                    }
+                )
+            )
+            with self.assertRaisesRegex(ValueError, "replayable invocation"):
+                G.validate_adapter_gate_artifact(
+                    path,
+                    config=self.config,
+                    config_path=self.config_path,
+                    experiment_root=EXP,
+                )
 
 
 if __name__ == "__main__":

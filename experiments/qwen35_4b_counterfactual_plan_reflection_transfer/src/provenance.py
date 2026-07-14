@@ -221,6 +221,7 @@ def validate_generation_protocol(
         or set(generation_stage)
         != {
             "authorized_stage",
+            "stage_receipt_path",
             "stage_receipt_sha256",
             "config_sha256",
             "issuer_git_commit",
@@ -229,6 +230,13 @@ def validate_generation_protocol(
             "source_seed",
         }
         or generation_stage["authorized_stage"] != expected_stage
+        or not isinstance(generation_stage["stage_receipt_path"], str)
+        or not Path(generation_stage["stage_receipt_path"]).is_absolute()
+        or not Path(generation_stage["stage_receipt_path"]).is_file()
+        or hashlib.sha256(
+            Path(generation_stage["stage_receipt_path"]).read_bytes()
+        ).hexdigest()
+        != generation_stage["stage_receipt_sha256"]
         or not isinstance(generation_stage["stage_receipt_sha256"], str)
         or len(generation_stage["stage_receipt_sha256"]) != 64
         or generation_stage["config_sha256"]
@@ -239,6 +247,14 @@ def validate_generation_protocol(
         or generation_stage["source_seed"] != expected_source_seed
     ):
         raise ValueError("generation stage metadata differs from exact ancestry")
+    from stages import read_and_validate_stage_receipt
+
+    read_and_validate_stage_receipt(
+        Path(generation_stage["stage_receipt_path"]),
+        config=config,
+        config_path=experiment_root / "configs" / "default.yaml",
+        expected_stage=expected_stage,
+    )
     preflight = metadata.get("capacity_preflight")
     if not isinstance(preflight, dict) or preflight.get("decision") != "LIVE_KV_CAPACITY_PASS":
         raise ValueError("generation lacks a passing live KV-capacity preflight")

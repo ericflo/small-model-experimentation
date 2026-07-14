@@ -205,3 +205,31 @@ next implementation checkpoint must make the exact attacks fail by resolving and
 revalidating prerequisite artifacts, retaining and authenticating the actual source
 adapter tensors/tree through merge and consumption, validating a real composite
 checkpoint inventory, and enforcing the normalized direct-URL vLLM build pin.
+
+### Review 4 remediation implemented, pending Review 5
+
+- Every task-level score row now carries one exact, hash-bound invocation over the raw
+  generation, runner metadata, sealed prompt receipt, sealed labels, and any adapter
+  gate. Score artifacts are reconstructed byte-for-byte before they can enter a gate.
+- Calibration, qualification/confirmation, and retention artifacts now have exact
+  producer/invocation schemas. Consumers replay their score ancestry, analyzer code,
+  stage ancestry, and gate calculation. Stage claims contain only absolute artifact
+  paths and hashes; copied pass booleans have been removed. Nonexistent, changed, and
+  minimal self-consistent prerequisite fixtures are explicit rejection tests.
+- Adapter ON/OFF receipts now retain and replay the exact raw base/merged generations,
+  metadata, sealed inputs, and labels. Replaying generation provenance also revalidates
+  the underlying base or merged model and its stage receipt.
+- Merge retains the complete source adapter directory, including actual LoRA tensors,
+  start record, training receipt, stage/tokenizer receipts, and PEFT config. The runner
+  recomputes its full tree hash, opens the safetensors file, requires exact A/B pairs,
+  and binds module count and weight hash to the merge.
+- The merged model must contain a real sharded safetensors index, an exact on-disk
+  tensor-to-shard mapping, required model/tokenizer assets, at least 100 tensors, and
+  at least 5 GB of both indexed tensor bytes and physical shard bytes. The old literal
+  `b"weights"` fixture is now a rejection test.
+- Direct-URL lock requirements are parsed as wheel pins. Installed vLLM must be exactly
+  `0.24.0+cu129`; missing, non-wheel, and forged versions are rejection tests.
+
+The repaired suite passes 61 focused model-free tests, syntax, and full construction.
+Authorization remains tokenizer-only. Review 5 must independently attack the exact
+committed revision before any model/GPU/training/evaluation stage is opened.

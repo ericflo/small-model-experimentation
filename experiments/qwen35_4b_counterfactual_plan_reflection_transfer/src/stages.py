@@ -1,4 +1,4 @@
-"""Strict stage-receipt schema and transitive prerequisite validation."""
+"""Strict stage receipts with replayed, transitive prerequisite validation."""
 
 from __future__ import annotations
 
@@ -35,32 +35,37 @@ def require_clean_worktree() -> None:
         raise ValueError("stage consumption requires a clean worktree")
 
 
-def _validate_claim_schema(claim: dict[str, Any]) -> None:
-    schemas = {
-        "calibration_gate": {"kind", "sha256", "pass"},
-        "decision": {
-            "kind",
-            "sha256",
-            "block",
-            "seed",
-            "capability_pass",
-            "reflection_specific_pass",
-            "positive_control_pass",
-        },
-        "retention": {"kind", "sha256", "seed", "arm", "pass"},
-    }
-    kind = claim.get("kind")
-    if kind not in schemas or set(claim) != schemas[kind]:
+def _validate_claim_schema(claim: dict[str, Any]) -> Path:
+    kinds = {"calibration_gate", "decision", "retention"}
+    if claim.get("kind") not in kinds or set(claim) != {"kind", "path", "sha256"}:
         raise ValueError("stage prerequisite claim schema changed")
     digest = claim.get("sha256")
     if not isinstance(digest, str) or len(digest) != 64:
         raise ValueError("stage prerequisite lacks a SHA-256 identity")
-    if kind == "decision" and (
-        not isinstance(claim["capability_pass"], bool)
-        or not isinstance(claim["reflection_specific_pass"], bool)
-        or claim["positive_control_pass"] not in {None, True, False}
-    ):
-        raise ValueError("stage decision claim has invalid pass values")
+    path_value = claim.get("path")
+    if not isinstance(path_value, str):
+        raise ValueError("stage prerequisite lacks an absolute artifact path")
+    path = Path(path_value)
+    if not path.is_absolute() or not path.is_file() or sha256_file(path) != digest:
+        raise ValueError("stage prerequisite artifact is absent or differs from its claim")
+    return path
+
+
+def _resolved_claim(
+    claim: dict[str, Any],
+    *,
+    config: dict[str, Any],
+    config_path: Path,
+) -> dict[str, Any]:
+    from gate_artifacts import validate_gate_artifact
+
+    return validate_gate_artifact(
+        _validate_claim_schema(claim),
+        kind=claim["kind"],
+        config=config,
+        config_path=config_path,
+        experiment_root=config_path.parents[1],
+    )
 
 
 def validate_stage_receipt(
@@ -86,7 +91,7 @@ def validate_stage_receipt(
     if set(receipt) != required:
         raise ValueError("stage receipt top-level schema changed")
     if (
-        receipt["schema_version"] != 2
+        receipt["schema_version"] != 3
         or receipt["experiment_id"] != config["experiment_id"]
         or receipt["authorized_stage"] != expected_stage
         or receipt["config_sha256"] != sha256_file(config_path)
@@ -96,10 +101,13 @@ def validate_stage_receipt(
     ):
         raise ValueError("stage receipt identity differs from current frozen implementation")
     claims = receipt["prerequisites"]
+    resolved: list[dict[str, Any]] = []
     for claim in claims:
         if not isinstance(claim, dict):
             raise ValueError("stage prerequisite is not an object")
-        _validate_claim_schema(claim)
+        resolved.append(
+            _resolved_claim(claim, config=config, config_path=config_path)
+        )
     screen = int(config["training"]["staged_seeds"]["screen"])
     replication = int(config["training"]["staged_seeds"]["replication"])
     if expected_stage == "calibration_generation":
@@ -110,12 +118,16 @@ def validate_stage_receipt(
         if (
             len(claims) != 1
             or claims[0]["kind"] != "calibration_gate"
-            or claims[0]["pass"] is not True
+            or resolved[0].get("gate", {}).get("pass") is not True
         ):
             raise ValueError("screen stage lacks its exact calibration prerequisite")
         return
-    decisions = [claim for claim in claims if claim["kind"] == "decision"]
-    retentions = [claim for claim in claims if claim["kind"] == "retention"]
+    decisions = [
+        value for claim, value in zip(claims, resolved) if claim["kind"] == "decision"
+    ]
+    retentions = [
+        value for claim, value in zip(claims, resolved) if claim["kind"] == "retention"
+    ]
     if expected_stage == "replication_training":
         if len(claims) != 2 or len(decisions) != 1 or len(retentions) != 1:
             raise ValueError("replication stage prerequisite cardinality changed")
@@ -123,19 +135,19 @@ def validate_stage_receipt(
         if (
             decision["block"] != "qualification"
             or decision["seed"] != screen
-            or decision["capability_pass"] is not True
-            or decision["positive_control_pass"] is not True
+            or decision.get("capability", {}).get("capability_pass") is not True
+            or decision.get("positive_control", {}).get("pass") is not True
             or retention["seed"] != screen
             or retention["arm"] != "reflection_correct_action"
-            or retention["pass"] is not True
+            or retention.get("gate", {}).get("pass") is not True
         ):
             raise ValueError("replication stage lacks exact screen prerequisites")
         return
     if expected_stage == "confirmation":
         if len(claims) != 4 or len(decisions) != 2 or len(retentions) != 2:
             raise ValueError("confirmation stage prerequisite cardinality changed")
-        by_seed = {int(claim["seed"]): claim for claim in decisions}
-        retention_by_seed = {int(claim["seed"]): claim for claim in retentions}
+        by_seed = {int(value["seed"]): value for value in decisions}
+        retention_by_seed = {int(value["seed"]): value for value in retentions}
         if set(by_seed) != {screen, replication} or set(retention_by_seed) != {
             screen,
             replication,
@@ -144,25 +156,26 @@ def validate_stage_receipt(
         for seed in (screen, replication):
             if (
                 by_seed[seed]["block"] != "qualification"
-                or by_seed[seed]["capability_pass"] is not True
+                or by_seed[seed].get("capability", {}).get("capability_pass") is not True
                 or retention_by_seed[seed]["arm"] != "reflection_correct_action"
-                or retention_by_seed[seed]["pass"] is not True
+                or retention_by_seed[seed].get("gate", {}).get("pass") is not True
             ):
                 raise ValueError("confirmation stage has a failing prerequisite")
-        if by_seed[screen]["positive_control_pass"] is not True:
+        if by_seed[screen].get("positive_control", {}).get("pass") is not True:
             raise ValueError("confirmation stage lacks screen positive-control success")
-        if by_seed[replication]["positive_control_pass"] is not None:
+        if "positive_control" in by_seed[replication]:
             raise ValueError("confirmation stage contains an unauthorized replication positive control")
         return
     if len(claims) != 2 or len(decisions) != 2 or retentions:
         raise ValueError("final stage prerequisite cardinality changed")
-    by_seed = {int(claim["seed"]): claim for claim in decisions}
+    by_seed = {int(value["seed"]): value for value in decisions}
     if set(by_seed) != {screen, replication} or any(
-        claim["block"] != "confirmation" or claim["capability_pass"] is not True
-        for claim in by_seed.values()
+        value["block"] != "confirmation"
+        or value.get("capability", {}).get("capability_pass") is not True
+        for value in by_seed.values()
     ):
         raise ValueError("final stage lacks both passing confirmation decisions")
-    if any(claim["positive_control_pass"] is not None for claim in by_seed.values()):
+    if any("positive_control" in value for value in by_seed.values()):
         raise ValueError("final stage contains confirmation positive-control evidence")
 
 

@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import os
 import sys
@@ -16,9 +15,8 @@ import yaml
 EXP = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(EXP / "src"))
 
-from analyze import evaluate_calibration  # noqa: E402
 from firewall import install_benchmark_firewall  # noqa: E402
-from eval_inputs import task_metadata  # noqa: E402
+from gate_artifacts import build_calibration_artifact  # noqa: E402
 
 install_benchmark_firewall(EXP.parents[1])
 
@@ -28,27 +26,14 @@ def main() -> int:
     parser.add_argument("--scores", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
-    config = yaml.safe_load((EXP / "configs" / "default.yaml").read_text())
-    rows = [
-        json.loads(line) for line in args.scores.read_text().splitlines() if line.strip()
-    ]
-    if {row["split"] for row in rows} != {"calibration"}:
-        raise ValueError("calibration score bundle has the wrong split")
-    if any(row["arm"] != "frozen_action" or row.get("training_seed") is not None for row in rows):
-        raise ValueError("calibration must contain only receipt-bound frozen rows")
-    expected_task_metadata = task_metadata(config, "calibration")
-    result = {
-        "schema_version": 1,
-        "experiment_id": config["experiment_id"],
-        "config_sha256": hashlib.sha256(
-            (EXP / "configs" / "default.yaml").read_bytes()
-        ).hexdigest(),
-        "gate": evaluate_calibration(
-            rows,
-            config["decision_gates"]["calibration_before_training"],
-            expected_task_metadata,
-        ),
-    }
+    config_path = EXP / "configs" / "default.yaml"
+    config = yaml.safe_load(config_path.read_text())
+    result = build_calibration_artifact(
+        scores_path=args.scores,
+        config=config,
+        config_path=config_path,
+        experiment_root=EXP,
+    )
     payload = (json.dumps(result, indent=2, sort_keys=True) + "\n").encode()
     args.output.parent.mkdir(parents=True, exist_ok=True)
     descriptor = os.open(args.output, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o644)

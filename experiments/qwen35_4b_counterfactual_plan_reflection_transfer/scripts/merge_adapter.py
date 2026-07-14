@@ -21,6 +21,10 @@ EXP = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(EXP / "src"))
 
 from firewall import install_benchmark_firewall  # noqa: E402
+from checkpoint_lineage import (  # noqa: E402
+    adapter_tensor_inventory,
+    merged_checkpoint_inventory,
+)
 from stages import read_and_validate_stage_receipt  # noqa: E402
 
 install_benchmark_firewall(EXP.parents[1])
@@ -204,6 +208,7 @@ def main() -> int:
 
     applied = 0
     adapter_path = args.adapter / "adapter_model.safetensors"
+    source_adapter_inventory = adapter_tensor_inventory(adapter_path)
     with safe_open(str(adapter_path), "pt") as tensors:
         all_keys = set(tensors.keys())
         keys = sorted(key for key in all_keys if key.endswith(".lora_A.weight"))
@@ -260,30 +265,41 @@ def main() -> int:
         (args.output / "processor_save_warning.txt").write_text(str(error) + "\n")
     lineage = args.output / "source_lineage"
     lineage.mkdir(parents=False, exist_ok=False)
-    shutil.copyfile(source_receipt_path, lineage / "training_receipt.json")
-    shutil.copyfile(copied_stage, lineage / "stage_receipt.json")
-    shutil.copyfile(copied_tokenizer, lineage / "tokenizer_receipt.json")
-    shutil.copyfile(args.adapter / "adapter_config.json", lineage / "adapter_config.json")
+    retained_adapter = lineage / "adapter_tree"
+    shutil.copytree(args.adapter, retained_adapter)
+    retained_training = retained_adapter / "training_receipt.json"
+    retained_stage = retained_adapter / "source_stage_receipt.json"
+    retained_tokenizer = retained_adapter / "source_tokenizer_receipt.json"
+    retained_adapter_config = retained_adapter / "adapter_config.json"
+    retained_adapter_weights = retained_adapter / "adapter_model.safetensors"
+    if _sha256_tree(retained_adapter, excluded={"training_receipt.json"}) != observed_adapter_tree:
+        raise ValueError("retained source adapter tree differs after copy")
+    retained_inventory = adapter_tensor_inventory(retained_adapter_weights)
+    if retained_inventory != source_adapter_inventory:
+        raise ValueError("retained source adapter tensors differ after copy")
+    checkpoint_inventory = merged_checkpoint_inventory(args.output)
     receipt = {
-        "schema_version": 2,
+        "schema_version": 3,
         "experiment_id": config["experiment_id"],
         "config_sha256": _sha256_file(config_path),
         "model_id": model_id,
         "model_revision": revision,
-        "source_training_receipt_sha256": _sha256_file(source_receipt_path),
-        "source_stage_receipt_sha256": _sha256_file(copied_stage),
-        "source_tokenizer_receipt_sha256": _sha256_file(copied_tokenizer),
+        "source_training_receipt_sha256": _sha256_file(retained_training),
+        "source_stage_receipt_sha256": _sha256_file(retained_stage),
+        "source_tokenizer_receipt_sha256": _sha256_file(retained_tokenizer),
         "source_trainer_sha256": source_receipt["trainer_sha256"],
         "source_trainer_git_commit": source_receipt["trainer_git_commit"],
         "source_recipe_sha256": source_receipt["recipe_sha256"],
         "source_adapter_tree_sha256": observed_adapter_tree,
-        "source_adapter_sha256": _sha256_file(adapter_path),
-        "source_adapter_config_sha256": _sha256_file(
-            lineage / "adapter_config.json"
-        ),
+        "source_adapter_sha256": _sha256_file(retained_adapter_weights),
+        "source_adapter_config_sha256": _sha256_file(retained_adapter_config),
+        "source_adapter_inventory": retained_inventory,
         "source_arm": source_receipt["arm"],
         "source_seed": source_receipt["seed"],
         "applied_lora_modules": applied,
+        "merge_script_sha256": _sha256_file(Path(__file__).resolve()),
+        "merge_git_commit": current_commit,
+        "merged_checkpoint_inventory": checkpoint_inventory,
         "merged_tree_sha256": _sha256_tree(args.output),
     }
     (args.output / "merge_receipt.json").write_text(

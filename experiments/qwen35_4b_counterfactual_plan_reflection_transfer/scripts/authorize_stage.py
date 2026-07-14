@@ -18,6 +18,7 @@ EXP = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(EXP / "src"))
 
 from firewall import install_benchmark_firewall  # noqa: E402
+from gate_artifacts import validate_gate_artifact  # noqa: E402
 from stages import git_commit  # noqa: E402
 
 install_benchmark_firewall(EXP.parents[1])
@@ -31,8 +32,22 @@ def _sha(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def _require_decision(path: Path, block: str, seed: int, positive: bool) -> dict:
-    value = _read(path)
+def _require_decision(
+    path: Path,
+    block: str,
+    seed: int,
+    positive: bool,
+    *,
+    config: dict,
+    config_path: Path,
+) -> dict:
+    value = validate_gate_artifact(
+        path,
+        kind="decision",
+        config=config,
+        config_path=config_path,
+        experiment_root=EXP,
+    )
     if value.get("block") != block or int(value.get("seed", -1)) != seed:
         raise ValueError(f"{path} has the wrong block or seed")
     if value.get("capability", {}).get("capability_pass") is not True:
@@ -42,8 +57,16 @@ def _require_decision(path: Path, block: str, seed: int, positive: bool) -> dict
     return value
 
 
-def _require_retention(path: Path, seed: int) -> dict:
-    value = _read(path)
+def _require_retention(
+    path: Path, seed: int, *, config: dict, config_path: Path
+) -> dict:
+    value = validate_gate_artifact(
+        path,
+        kind="retention",
+        config=config,
+        config_path=config_path,
+        experiment_root=EXP,
+    )
     if (
         value.get("arm") != "reflection_correct_action"
         or int(value.get("seed", -1)) != seed
@@ -53,26 +76,9 @@ def _require_retention(path: Path, seed: int) -> dict:
     return value
 
 
-def _decision_claim(path: Path, value: dict) -> dict:
-    return {
-        "kind": "decision",
-        "sha256": _sha(path),
-        "block": value["block"],
-        "seed": int(value["seed"]),
-        "capability_pass": value["capability"]["capability_pass"],
-        "reflection_specific_pass": value["capability"]["reflection_specific_pass"],
-        "positive_control_pass": value.get("positive_control", {}).get("pass"),
-    }
-
-
-def _retention_claim(path: Path, value: dict) -> dict:
-    return {
-        "kind": "retention",
-        "sha256": _sha(path),
-        "seed": int(value["seed"]),
-        "arm": value["arm"],
-        "pass": value["gate"]["pass"],
-    }
+def _claim(kind: str, path: Path) -> dict:
+    resolved = path.resolve()
+    return {"kind": kind, "path": str(resolved), "sha256": _sha(resolved)}
 
 
 def main() -> int:
@@ -116,15 +122,19 @@ def main() -> int:
             raise ValueError("screen training accepts only calibration")
         if args.calibration is None:
             raise ValueError("screen training requires calibration")
-        value = _read(args.calibration)
+        value = validate_gate_artifact(
+            args.calibration,
+            kind="calibration_gate",
+            config=config,
+            config_path=config_path,
+            experiment_root=EXP,
+        )
         if value.get("gate", {}).get("pass") is not True:
             raise ValueError("calibration did not pass")
         inputs = [args.calibration]
         claims = [
             {
-                "kind": "calibration_gate",
-                "sha256": _sha(args.calibration),
-                "pass": True,
+                **_claim("calibration_gate", args.calibration),
             }
         ]
     elif args.stage == "replication_training":
@@ -135,13 +145,16 @@ def main() -> int:
         if len(args.qualification) != 1 or len(args.retention) != 1:
             raise ValueError("replication training requires screen qualification and retention")
         decision_value = _require_decision(
-            args.qualification[0], "qualification", screen, positive=True
+            args.qualification[0], "qualification", screen, positive=True,
+            config=config, config_path=config_path,
         )
-        retention_value = _require_retention(args.retention[0], screen)
+        retention_value = _require_retention(
+            args.retention[0], screen, config=config, config_path=config_path
+        )
         inputs = [*args.qualification, *args.retention]
         claims = [
-            _decision_claim(args.qualification[0], decision_value),
-            _retention_claim(args.retention[0], retention_value),
+            _claim("decision", args.qualification[0]),
+            _claim("retention", args.retention[0]),
         ]
     elif args.stage == "confirmation":
         if config["authorization"]["evaluation"] is not True:
@@ -155,21 +168,26 @@ def main() -> int:
         if set(by_seed) != {screen, replication} or set(retention_by_seed) != {screen, replication}:
             raise ValueError("confirmation prerequisites do not contain both frozen seeds")
         screen_value = _require_decision(
-            by_seed[screen], "qualification", screen, positive=True
+            by_seed[screen], "qualification", screen, positive=True,
+            config=config, config_path=config_path,
         )
         replication_value = _require_decision(
-            by_seed[replication], "qualification", replication, positive=False
+            by_seed[replication], "qualification", replication, positive=False,
+            config=config, config_path=config_path,
         )
-        screen_retention = _require_retention(retention_by_seed[screen], screen)
+        screen_retention = _require_retention(
+            retention_by_seed[screen], screen, config=config, config_path=config_path
+        )
         replication_retention = _require_retention(
-            retention_by_seed[replication], replication
+            retention_by_seed[replication], replication,
+            config=config, config_path=config_path,
         )
         inputs = [*args.qualification, *args.retention]
         claims = [
-            _decision_claim(by_seed[screen], screen_value),
-            _decision_claim(by_seed[replication], replication_value),
-            _retention_claim(retention_by_seed[screen], screen_retention),
-            _retention_claim(retention_by_seed[replication], replication_retention),
+            _claim("decision", by_seed[screen]),
+            _claim("decision", by_seed[replication]),
+            _claim("retention", retention_by_seed[screen]),
+            _claim("retention", retention_by_seed[replication]),
         ]
     else:
         if args.calibration is not None or args.qualification or args.retention:
@@ -180,15 +198,17 @@ def main() -> int:
         if set(by_seed) != {screen, replication}:
             raise ValueError("final prerequisites do not contain both frozen seeds")
         screen_value = _require_decision(
-            by_seed[screen], "confirmation", screen, positive=False
+            by_seed[screen], "confirmation", screen, positive=False,
+            config=config, config_path=config_path,
         )
         replication_value = _require_decision(
-            by_seed[replication], "confirmation", replication, positive=False
+            by_seed[replication], "confirmation", replication, positive=False,
+            config=config, config_path=config_path,
         )
         inputs = list(args.confirmation)
         claims = [
-            _decision_claim(by_seed[screen], screen_value),
-            _decision_claim(by_seed[replication], replication_value),
+            _claim("decision", by_seed[screen]),
+            _claim("decision", by_seed[replication]),
         ]
     config_sha256 = _sha(config_path)
     for path in inputs:
@@ -199,7 +219,7 @@ def main() -> int:
         ):
             raise ValueError(f"{path} is not bound to the current experiment config")
     receipt = {
-        "schema_version": 2,
+        "schema_version": 3,
         "experiment_id": config["experiment_id"],
         "authorized_stage": args.stage,
         "config_sha256": config_sha256,

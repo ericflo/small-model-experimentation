@@ -101,3 +101,10 @@
   a merged checkpoint with self-issued lineage; and the direct-URL vLLM pin is omitted
   from installed-package validation. Authorization remains tokenizer-only while these
   attacks are converted to fail-closed tests and remediated.
+- Implemented all three Review 4 remediations model-free. Stage promotion now replays
+  exact raw-generation score ancestry and recomputes every gate; merged checkpoints
+  retain and authenticate the real source adapter tensors/tree and must pass a static
+  4B safetensors/index inventory; adapter ON/OFF evidence is replayed from raw bundles;
+  and installed vLLM is checked against the direct-URL `0.24.0+cu129` wheel pin. The
+  suite passes 61 focused tests plus full construction with zero model/GPU/benchmark
+  events. Authorization remains tokenizer-only pending clean Review 5.
