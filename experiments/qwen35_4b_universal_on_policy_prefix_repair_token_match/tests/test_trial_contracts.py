@@ -42,6 +42,14 @@ class FrozenTrainingContractTests(unittest.TestCase):
             self.trial.CONTROL_DATA_SHA256,
             "541805df2d817707c1e76213e50c8f08fd9caff10d0a3887e1196424b6820be6",
         )
+        self.assertEqual(
+            self.trial.CONTROL_RECEIPT_SHA256,
+            "f78f2069fd1c7b37bbd0b13b581df0ce7360de92256323fcf5f3c7b0936ed6de",
+        )
+        self.assertEqual(
+            self.trial.CONTROL_WEIGHTS_SHA256,
+            "bb59d3bd9273ae3bb3dffe54e983590dada69e6e1bdba571009ffedbba05154d",
+        )
 
     def test_only_registered_hyperparameters_pass(self) -> None:
         frozen = argparse.Namespace(
@@ -86,6 +94,7 @@ class FrozenTrainingContractTests(unittest.TestCase):
         self.assertIn('args.name == "prefix_repair_after_close"', wrapper)
         self.assertIn("validate_control_prerequisite()", wrapper)
         self.assertIn("committed_at_head(log)", wrapper)
+        self.assertIn("validate_control_prerequisite(require_committed=False)", source)
 
     def test_failure_receipt_is_durable_and_refuses_overwrite(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

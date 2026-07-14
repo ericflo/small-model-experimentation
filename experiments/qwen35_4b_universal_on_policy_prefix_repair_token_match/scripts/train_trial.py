@@ -28,6 +28,9 @@ TOKEN_RECEIPT_SHA256 = "eb08026ffcf82b8780819a26a522f04d69358ffdfd4797dd4c603dd1
 EXPECTED_FORWARD_TOKENS = 304313
 EXPECTED_ROWS = 320
 CONTROL_DATA_SHA256 = "541805df2d817707c1e76213e50c8f08fd9caff10d0a3887e1196424b6820be6"
+CONTROL_RECEIPT_SHA256 = "f78f2069fd1c7b37bbd0b13b581df0ce7360de92256323fcf5f3c7b0936ed6de"
+CONTROL_CONFIG_SHA256 = "0dfd9bda8a835926a87337782cc09b1e11e841a36f46b99c83fbae9bc89e120f"
+CONTROL_WEIGHTS_SHA256 = "bb59d3bd9273ae3bb3dffe54e983590dada69e6e1bdba571009ffedbba05154d"
 CONTROL_RECEIPT = EXP / "runs" / "training" / "replay_after_close.json"
 CONTROL_ADAPTER = (
     ROOT / "large_artifacts" / EXP.name / "adapters" / "replay_after_close"
@@ -91,10 +94,14 @@ def committed_at_head(path: Path) -> bool:
     return committed.returncode == 0 and committed.stdout == path.read_bytes()
 
 
-def validate_control_prerequisite() -> dict:
+def validate_control_prerequisite(*, require_committed: bool = True) -> dict:
     """Authenticate the published replay control before candidate training."""
-    if not CONTROL_RECEIPT.is_file() or not committed_at_head(CONTROL_RECEIPT):
+    if not CONTROL_RECEIPT.is_file() or (
+        require_committed and not committed_at_head(CONTROL_RECEIPT)
+    ):
         raise ValueError("candidate requires the control receipt committed at HEAD")
+    if sha256_file(CONTROL_RECEIPT) != CONTROL_RECEIPT_SHA256:
+        raise ValueError("published control receipt bytes changed")
     payload = load_json(CONTROL_RECEIPT)
     datasets = payload.get("datasets", [])
     warm_start = payload.get("warm_start", {})
@@ -119,6 +126,8 @@ def validate_control_prerequisite() -> dict:
         or payload.get("model_revision") != MODEL_REVISION
         or payload.get("returncode") != 0
         or payload.get("adapter_complete") is not True
+        or payload.get("adapter_config_sha256") != CONTROL_CONFIG_SHA256
+        or payload.get("adapter_weights_sha256") != CONTROL_WEIGHTS_SHA256
         or payload.get("token_receipt_sha256") != TOKEN_RECEIPT_SHA256
         or payload.get("train_rows") != EXPECTED_ROWS
         or payload.get("forward_tokens_per_epoch") != EXPECTED_FORWARD_TOKENS
@@ -142,13 +151,13 @@ def validate_control_prerequisite() -> dict:
     if (
         not config.is_file()
         or not weights.is_file()
-        or payload.get("adapter_config_sha256") != sha256_file(config)
-        or payload.get("adapter_weights_sha256") != sha256_file(weights)
+        or sha256_file(config) != CONTROL_CONFIG_SHA256
+        or sha256_file(weights) != CONTROL_WEIGHTS_SHA256
     ):
         raise ValueError("published control adapter is absent or changed")
     if (
         not log.is_file()
-        or not committed_at_head(log)
+        or (require_committed and not committed_at_head(log))
         or payload.get("log_sha256") != sha256_file(log)
     ):
         raise ValueError("published control log is absent or changed")

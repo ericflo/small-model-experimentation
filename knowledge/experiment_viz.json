@@ -48375,7 +48375,7 @@
      "x_label": "preregistered experiment stage",
      "y_label": "completion indicator",
      "y_format": "integer",
-     "note": "Both 320-row streams are now frozen at exactly 304,313 forward tokens, zero skips, 40 updates, and 200 aligned replay rows. Training, capability, and benchmark stages remain incomplete.",
+     "note": "Both 320-row streams are frozen at exactly 304,313 forward tokens, zero skips, 40 updates, and 200 aligned replay rows. Replay control completed 40/40 updates; the paired training stage remains incomplete until the candidate trains. Capability and benchmark stages have not begun.",
      "source": "experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/data/stream_token_receipt.json"
     },
     {

@@ -1,0 +1,111 @@
+[train_think] 320 examples (0 skipped as over-length)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]
+Fetching 2 files: 100%|██████████| 2/2 [00:00<00:00, 7397.36it/s]
+
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]
+Loading weights:   0%|          | 1/426 [00:00<04:43,  1.50it/s]/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/bitsandbytes/backends/cuda/ops.py:213: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+
+Loading weights:   1%|▏         | 6/426 [00:00<00:47,  8.90it/s]
+Loading weights:   3%|▎         | 13/426 [00:00<00:21, 19.04it/s]
+Loading weights:   6%|▋         | 27/426 [00:01<00:09, 41.47it/s]
+Loading weights:   9%|▉         | 39/426 [00:01<00:06, 57.24it/s]
+Loading weights:  11%|█▏        | 48/426 [00:01<00:07, 49.30it/s]
+Loading weights:  14%|█▍        | 61/426 [00:01<00:05, 64.55it/s]
+Loading weights:  16%|█▋        | 70/426 [00:01<00:05, 66.12it/s]
+Loading weights:  19%|█▊        | 79/426 [00:01<00:04, 70.51it/s]
+Loading weights:  22%|██▏       | 92/426 [00:01<00:03, 84.60it/s]
+Loading weights:  24%|██▍       | 102/426 [00:02<00:04, 78.30it/s]
+Loading weights:  28%|██▊       | 118/426 [00:02<00:03, 93.65it/s]
+Loading weights:  31%|███       | 132/426 [00:02<00:02, 99.95it/s]
+Loading weights:  34%|███▍      | 145/426 [00:02<00:02, 104.78it/s]
+Loading weights:  37%|███▋      | 156/426 [00:02<00:02, 93.42it/s]
+Loading weights:  40%|████      | 171/426 [00:02<00:02, 104.58it/s]
+Loading weights:  43%|████▎     | 182/426 [00:02<00:02, 105.69it/s]
+Loading weights:  46%|████▌     | 195/426 [00:02<00:02, 108.22it/s]
+Loading weights:  49%|████▊     | 207/426 [00:03<00:02, 91.07it/s]
+Loading weights:  53%|█████▎    | 224/426 [00:03<00:01, 107.41it/s]
+Loading weights:  56%|█████▌    | 238/426 [00:03<00:01, 110.30it/s]
+Loading weights:  59%|█████▉    | 252/426 [00:03<00:01, 111.34it/s]
+Loading weights:  62%|██████▏   | 264/426 [00:03<00:01, 104.96it/s]
+Loading weights:  65%|██████▌   | 278/426 [00:03<00:01, 111.07it/s]
+Loading weights:  68%|██████▊   | 291/426 [00:03<00:01, 112.34it/s]
+Loading weights:  72%|███████▏  | 305/426 [00:03<00:01, 112.23it/s]
+Loading weights:  74%|███████▍  | 317/426 [00:04<00:01, 103.55it/s]
+Loading weights:  78%|███████▊  | 331/426 [00:04<00:00, 106.79it/s]
+Loading weights:  81%|████████  | 344/426 [00:04<00:00, 111.03it/s]
+Loading weights:  84%|████████▍ | 358/426 [00:04<00:00, 113.78it/s]
+Loading weights:  87%|████████▋ | 370/426 [00:04<00:00, 104.96it/s]
+Loading weights:  90%|████████▉ | 383/426 [00:04<00:00, 110.01it/s]
+Loading weights:  93%|█████████▎| 396/426 [00:04<00:00, 113.65it/s]
+Loading weights:  96%|█████████▌| 408/426 [00:04<00:00, 111.57it/s]
+Loading weights:  99%|█████████▊| 420/426 [00:05<00:00, 92.62it/s]
+Loading weights: 100%|██████████| 426/426 [00:05<00:00, 84.48it/s]
+[transformers] warmup_ratio is deprecated and will be removed in v5.2. Use `warmup_steps` instead.
+trainable params: 42,467,328 || all params: 4,248,218,624 || trainable%: 0.9997
+
+  0%|          | 0/40 [00:00<?, ?it/s]
+  2%|▎         | 1/40 [00:08<05:36,  8.64s/it]
+  5%|▌         | 2/40 [00:15<04:43,  7.47s/it]
+  8%|▊         | 3/40 [00:21<04:23,  7.12s/it]
+ 10%|█         | 4/40 [00:28<04:09,  6.92s/it]
+ 12%|█▎        | 5/40 [00:34<03:53,  6.68s/it]
+ 15%|█▌        | 6/40 [00:41<03:45,  6.64s/it]
+ 18%|█▊        | 7/40 [00:48<03:38,  6.63s/it]
+ 20%|██        | 8/40 [00:54<03:25,  6.43s/it]
+ 22%|██▎       | 9/40 [01:00<03:15,  6.32s/it]
+ 25%|██▌       | 10/40 [01:07<03:15,  6.52s/it]
+
+
+ 25%|██▌       | 10/40 [01:07<03:15,  6.52s/it]
+ 28%|██▊       | 11/40 [01:13<03:09,  6.55s/it]
+ 30%|███       | 12/40 [01:19<02:59,  6.40s/it]
+ 32%|███▎      | 13/40 [01:26<02:55,  6.51s/it]
+ 35%|███▌      | 14/40 [01:33<02:54,  6.70s/it]
+ 38%|███▊      | 15/40 [01:40<02:51,  6.87s/it]
+ 40%|████      | 16/40 [01:48<02:49,  7.06s/it]
+ 42%|████▎     | 17/40 [01:56<02:48,  7.31s/it]
+ 45%|████▌     | 18/40 [02:03<02:36,  7.13s/it]
+ 48%|████▊     | 19/40 [02:09<02:28,  7.08s/it]
+ 50%|█████     | 20/40 [02:16<02:20,  7.02s/it]
+
+
+ 50%|█████     | 20/40 [02:16<02:20,  7.02s/it]
+ 52%|█████▎    | 21/40 [02:23<02:09,  6.82s/it]
+ 55%|█████▌    | 22/40 [02:29<02:01,  6.76s/it]
+ 57%|█████▊    | 23/40 [02:36<01:55,  6.81s/it]
+ 60%|██████    | 24/40 [02:43<01:47,  6.73s/it]
+ 62%|██████▎   | 25/40 [02:50<01:42,  6.83s/it]
+ 65%|██████▌   | 26/40 [02:57<01:37,  6.96s/it]
+ 68%|██████▊   | 27/40 [03:04<01:30,  6.95s/it]
+ 70%|███████   | 28/40 [03:10<01:20,  6.68s/it]
+ 72%|███████▎  | 29/40 [03:17<01:15,  6.87s/it]
+ 75%|███████▌  | 30/40 [03:24<01:08,  6.86s/it]
+
+
+ 75%|███████▌  | 30/40 [03:24<01:08,  6.86s/it]
+ 78%|███████▊  | 31/40 [03:31<01:01,  6.84s/it]
+ 80%|████████  | 32/40 [03:37<00:53,  6.65s/it]
+ 82%|████████▎ | 33/40 [03:44<00:45,  6.55s/it]
+ 85%|████████▌ | 34/40 [03:51<00:40,  6.77s/it]
+ 88%|████████▊ | 35/40 [03:57<00:33,  6.73s/it]
+ 90%|█████████ | 36/40 [04:05<00:28,  7.04s/it]
+ 92%|█████████▎| 37/40 [04:11<00:20,  6.77s/it]
+ 95%|█████████▌| 38/40 [04:18<00:13,  6.79s/it]
+ 98%|█████████▊| 39/40 [04:26<00:07,  7.03s/it]
+100%|██████████| 40/40 [04:32<00:00,  6.86s/it]
+
+
+100%|██████████| 40/40 [04:32<00:00,  6.86s/it]
+
+
+100%|██████████| 40/40 [04:32<00:00,  6.86s/it]
+100%|██████████| 40/40 [04:32<00:00,  6.82s/it]
+{'loss': '0.3867', 'grad_norm': '2.73', 'learning_rate': '9.186e-06', 'epoch': '0.25'}
+{'loss': '0.4903', 'grad_norm': '2.892', 'learning_rate': '5.823e-06', 'epoch': '0.5'}
+{'loss': '0.5549', 'grad_norm': '3.062', 'learning_rate': '1.929e-06', 'epoch': '0.75'}
+{'loss': '0.4033', 'grad_norm': '2.931', 'learning_rate': '1.708e-08', 'epoch': '1'}
+{'train_runtime': '272.8', 'train_samples_per_second': '1.173', 'train_steps_per_second': '0.147', 'train_loss': '0.4588', 'epoch': '1'}
+[train_think] saved adapter to /home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/adapters/replay_after_close

@@ -146,3 +146,29 @@ review in a separate model-free checkpoint; do not expose training before it pas
 Next: commit/rebase/push this compute freeze and verify both workflows. Then run only
 `train-control` from that published clean checkpoint and immediately preserve its
 log and receipt before any candidate event.
+
+## 2026-07-14 — Exact-compute replay control trained
+
+- Published rebased compute-freeze commit `a8529c04` directly to `main` after
+  resolving a generated knowledge-index conflict by deterministic rebuild. Validate
+  Repository run `29350075815` and Publish Research Site run `29350075883` both
+  passed.
+- From that clean aligned checkpoint, ran only `--stage train-control`. The wrapper
+  reauthenticated design, mining, stream bytes, token receipt, parent adapter, and
+  frozen hyperparameters before opening any output.
+- The exact trainer encoded 320/320 replay rows with zero skips and performed 40/40
+  updates over one epoch, 304,313 forward tokens, batch size one, gradient
+  accumulation eight, learning rate `1e-5`, and seed 47. Trainer/wrapper wall times
+  were 272.8/292.4 seconds; final training loss was 0.4588.
+- Preserved normalized log/receipt hashes `a49076ec...3501` /
+  `f78f2069...d6de`. The external adapter config/weights hashes are
+  `0dfd9bda...120f` / `bb59d3bd...5154d`; weights are 169,903,320 bytes.
+- Structural audit found 256 tensors and 42,467,328 elements, matching the reported
+  trainable parameter count. Every tensor was finite and nonzero.
+- The preflight Git status was empty at commit `a8529c04`; the recorded post-training
+  dirtiness contains only the newly created durable training directory. No candidate,
+  capability, local, merge, generation, or benchmark event ran.
+
+Next: publish and CI-verify this control log/receipt. Then run only
+`train-candidate`; its direct wrapper must authenticate the committed control receipt,
+committed log, and external adapter before loading the model.

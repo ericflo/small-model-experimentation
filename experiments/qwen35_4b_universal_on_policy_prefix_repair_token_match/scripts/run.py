@@ -92,10 +92,11 @@ def smoke() -> None:
         f"model_revision: {MODEL_REVISION}",
         f"parent_weights_sha256: {PARENT_WEIGHTS_SHA256}",
         f"parent_config_sha256: {PARENT_CONFIG_SHA256}",
-        "status: compute_frozen_control_training_next",
+        "status: control_trained_candidate_training_next",
         "rows_per_training_arm: 320",
         "forward_tokens_per_training_arm: 304313",
         "optimizer_steps_per_training_arm: 40",
+        "control_receipt_sha256: f78f2069fd1c7b37bbd0b13b581df0ce7360de92256323fcf5f3c7b0936ed6de",
     )
     missing = [entry for entry in required if entry not in config]
     if missing:
@@ -145,12 +146,24 @@ def smoke() -> None:
     compute_review = COMPUTE_REVIEW.read_text(encoding="utf-8")
     if "**Verdict:** `PASS_CONTROL_TRAINING`." not in compute_review:
         raise SystemExit("second adversarial review has not authorized control training")
+    control_receipt = None
+    if CONTROL_RECEIPT.is_file():
+        sys.path.insert(0, str(SCRIPTS))
+        from train_trial import validate_control_prerequisite
+
+        control_receipt = validate_control_prerequisite(require_committed=False)
     design = json.loads(DESIGN_RECEIPT.read_text(encoding="utf-8"))
     print(
         "design, prefix-mining, and exact-compute smoke passed: "
         f"{design['rollout_tasks']['rows']} fresh tasks, six balanced failure classes, "
         "60 quota-satisfying masked repairs, 320 rows and 304313 forward tokens per arm"
     )
+    if control_receipt is not None:
+        print(
+            "authenticated replay control: "
+            f"receipt {Path(control_receipt['receipt']).name}, "
+            f"adapter {control_receipt['adapter_weights_sha256']}"
+        )
 
 
 def merge_parent() -> None:

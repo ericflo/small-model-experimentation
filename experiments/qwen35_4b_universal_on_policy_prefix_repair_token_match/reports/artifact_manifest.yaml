@@ -12,15 +12,21 @@ external_artifacts:
     required_for: "vLLM parent rollout collection; runtime LoRA is forbidden"
     checksum: "model.safetensors 4933f2dd2e5140597bf3e1dd4e9fecc700a3e3eb7d422b59b84fd0f6e28eb373; merge_receipt.json 1fbc84b33dfbcef30ec0c7f5f184b5bebcbeb09f2a42033c5b47bd469b275557"
     regenerate: "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --stage merge-parent"
+  - name: "exact-compute replay control adapter"
+    storage: "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/adapters/replay_after_close"
+    required_for: "mechanism control and fail-closed candidate prerequisite"
+    checksum: "weights bb59d3bd9273ae3bb3dffe54e983590dada69e6e1bdba571009ffedbba05154d; config 0dfd9bda8a835926a87337782cc09b1e11e841a36f46b99c83fbae9bc89e120f"
+    regenerate: "from pushed-green compute freeze only: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --stage train-control"
 omitted_artifacts:
   - path: "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/"
-    reason: "registered merged parent is external above; authorized control and conditional candidate adapters remain large and gitignored"
+    reason: "registered merged parent and control are external above; the conditional candidate adapter remains large and gitignored"
 reproducibility:
   smoke_command: "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --smoke"
-  full_command: "after this checkpoint is pushed and both workflows pass: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --stage train-control"
+  full_command: "after this control checkpoint is pushed and both workflows pass: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --stage train-candidate"
   required_external_artifacts:
     - "large_artifacts/qwen35_4b_universal_close_weight_token_match/adapters/close_xi"
     - "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/merged/close_xi_parent"
+    - "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/adapters/replay_after_close"
 notes: >-
   Model-free mining design. Model Qwen/Qwen3.5-4B revision 851bf6e8...d0a; parent
   weights/config 16e9dc75...c179 / de953bd5...7ff. Construction, parent-rollout,
@@ -36,5 +42,7 @@ notes: >-
   200 aligned replay rows per arm. Control/candidate/receipt hashes are
   541805df...be6 / 9a43f3be...03f1 / eb08026f...e0cfc. Candidate has 33421
   fewer target tokens and 6261.8 less absolute loss mass than control; the second
-  review preserves that caveat and authorizes control training only. No adapter,
-  capability, local, or benchmark receipt exists.
+  review preserves that caveat. The replay control trained 320/320 rows, zero skips,
+  and 40 updates from clean commit a8529c04; log/receipt hashes are a49076ec...3501 /
+  f78f2069...d6de and adapter config/weights hashes are 0dfd9bda...120f /
+  bb59d3bd...5154d. No candidate, capability, local, or benchmark receipt exists.

@@ -1,6 +1,6 @@
 # On-Policy Failure-Prefix Universal Curriculum
 
-**Status:** in-progress · since 2026-07-14 · exact-compute freeze passed; replay-control training is next
+**Status:** in-progress · since 2026-07-14 · replay control trained; candidate training is next
 
 This result-separated successor tests whether training corrective continuations from
 the model's own fresh procedural failure prefixes installs a reusable reasoning and
@@ -70,16 +70,15 @@ separate published checkpoints. Verify every model-free derived artifact with:
 PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --smoke
 ```
 
-After this checkpoint is pushed to `main` and both required workflows are green, run
-exactly the replay-control stage from a clean worktree:
+After this control checkpoint is pushed to `main` and both required workflows are
+green, run exactly the candidate stage from a clean worktree:
 
 ```bash
-PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --stage train-control
+PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --stage train-candidate
 ```
 
-Candidate training remains unavailable until the control log and receipt are
-committed, rebased, pushed, and green. Local capability and benchmark stages remain
-sealed.
+The wrapper authenticates the committed control log, receipt, and external adapter
+before loading the candidate. Local capability and benchmark stages remain sealed.
 
 ## Results
 
@@ -116,9 +115,17 @@ largest final row is 2,991 tokens. The candidate replaces 33,421 replay target t
 with masked context, leaving 111,983 nonzero-weight tokens and 25,049.4 absolute loss
 mass versus 145,404 and 31,311.2 for control. This is an explicit intervention
 caveat, not hidden behind the forward-token match. Token-receipt SHA-256 is
-`eb08026f...e0cfc`; the second review verdict is `PASS_CONTROL_TRAINING`. This is
-still construction evidence only. No adapter training, capability measurement,
-local evaluation, or benchmark event exists.
+`eb08026f...e0cfc`; the second review verdict is `PASS_CONTROL_TRAINING`.
+
+From pushed-green commit `a8529c04`, the replay control then trained for exactly one
+epoch and 40 updates from the authenticated parent. It encoded 320/320 rows with zero
+skips, consumed the registered 304,313 forward tokens, and finished with training
+loss 0.4588 in 272.8 trainer seconds (292.4 wrapper seconds). The normalized
+log/receipt hashes are `a49076ec...3501` / `f78f2069...d6de`; adapter config/weights
+are `0dfd9bda...120f` / `bb59d3bd...5154d`. Its 256 tensors contain exactly
+42,467,328 elements; every tensor is finite and nonzero. This is an operational
+training result only. No candidate training, capability measurement, local
+evaluation, or benchmark event exists.
 
 ## Interpretation
 
@@ -132,8 +139,8 @@ not isolate prefix conditioning from target-composition differences.
 ## Knowledgebase Update
 
 - Program evidence: unchanged until a capability result exists.
-- Program backlog: records the quota-satisfying failure inventory and compute-review
-  risk.
+- Program backlog: records the quota-satisfying inventory, exposure caveat, and
+  authenticated replay control.
 - Claim ledger and shared synthesis: unchanged.
 
 ## Artifacts
@@ -157,6 +164,8 @@ not isolate prefix conditioning from target-composition differences.
 - `data/replay_after_close.jsonl`
 - `data/prefix_repair_after_close.jsonl`
 - `runs/parent_rollout/seed66113.receipt.json`
+- `runs/training/replay_after_close.log`
+- `runs/training/replay_after_close.json`
 - `analysis/prefix_failure_inventory.md`
 - `reports/design_review.md`
 - `reports/compute_review.md`

@@ -5,8 +5,8 @@
 Model-free design, explicit parent deployment, authenticated rollout collection,
 failure-only mining, and the second exact-compute review are complete. Every fixed
 class quota passed, and two frozen 320-row streams match at exactly 304,313 forward
-tokens with zero skips. Replay-control training is authorized; no training or
-capability result exists yet.
+tokens with zero skips. The replay control has trained and authenticated; candidate
+training is next. No capability result exists yet.
 
 ## Research Program Fit
 
@@ -59,13 +59,22 @@ nonzero-weight tokens are 111,983/145,404; absolute loss masses are
 control. No model load, adapter training, capability measurement, or benchmark event
 ran during the freeze.
 
+After compute-freeze commit `a8529c04` passed both workflows, the replay control
+trained for one epoch and exactly 40 updates. It encoded 320/320 rows with zero skips,
+finished at loss 0.4588, and took 272.8 trainer seconds. Log/receipt hashes are
+`a49076ec...3501` / `f78f2069...d6de`; adapter config/weights hashes are
+`0dfd9bda...120f` / `bb59d3bd...5154d`. The 169,903,320-byte adapter contains 256
+finite, nonzero tensors and 42,467,328 elements. This authenticates the control
+artifact but is not capability evidence.
+
 ## Controls
 
 Baseline is authenticated `close_xi`. The mechanism-falsifying control is an
 independent same-parent replay continuation matched on exact encoded forward tokens,
 optimizer steps, seed, and aligned shared replay. It must train and publish first.
-Candidate training is fail-closed on that committed receipt; both arms independently
-restart from the parent.
+That training is complete. Candidate training remains fail-closed until the control
+receipt and log are committed and green; both arms independently restart from the
+parent.
 
 ## Oracle Versus Deployable Evidence
 
@@ -88,12 +97,12 @@ error.
 
 ## Next Experiments
 
-Publish and CI-verify the exact-compute freeze. Train only the replay control, publish
-its durable receipt, and wait for both workflows before training the sole candidate.
-Local capability design and execution remain separate later checkpoints.
+Publish and CI-verify the replay-control log and receipt. Then train only the sole
+candidate from the same parent. Local capability design and execution remain
+separate later checkpoints.
 
 ## Artifact Manifest
 
 Parent identity, frozen task hashes, replay hashes, the staged external merged
-checkpoint, parent-rollout hashes, stream hashes, and prospective adapter paths are
-recorded in `artifact_manifest.yaml`; no capability result exists.
+checkpoint, parent-rollout hashes, stream hashes, and control adapter are recorded in
+`artifact_manifest.yaml`; no capability result exists.

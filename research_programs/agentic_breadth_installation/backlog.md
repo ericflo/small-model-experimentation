@@ -195,8 +195,10 @@
   320-row arms at exactly 304313 forward tokens, zero skips, 40 updates, and 200
   aligned replay positions; receipt hash is `eb08026f...e0cfc`. Candidate has 33421
   fewer target tokens and lower absolute loss mass than replay, a required causal
-  caveat. Verdict `PASS_CONTROL_TRAINING` authorizes only replay first; publish and
-  verify its receipt before candidate training. Local and aggregate gates stay sealed.
+  caveat. From pushed-green commit `a8529c04`, replay trained 320/320 rows with zero
+  skips and 40/40 updates; receipt/adapter hashes are `f78f2069...d6de` /
+  `bb59d3bd...5154d`. Publish and verify that control checkpoint before candidate
+  training. Local and aggregate gates stay sealed.
 
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.
