@@ -15,6 +15,14 @@ printed by an overbroad metadata projection before seed 7413; no classification 
 all remaining choices were already frozen, and the terminal interpretation must disclose imperfect
 operator blinding.
 
+The first Stage-B full-rank seed-7411 G0 subsequently failed before model load because downstream
+branch evidence revalidation reaches the same immutable-v11 nonlexical path defect. Its exact
+canonical/mirror failure is `47305826…2c71`, identity `070c23af…aa24`, and authorizes nothing. A
+separate exact-consumer recovery passes all six controls at identity `d1135ea2…49b5` and has archived
+the failure at identity `ff478d40…0ec3`; archive publication and a separately published retirement
+are required before retry. This mechanics event does not change the Stage-A negative or Stage-B
+scientific mandate.
+
 **In progress; no scientific result exists.** Preregistration, adversarial design review, and the
 frozen design are complete. Source-v10 implementation authorization is `GO` at reviewed digest
 `a5a494b7…6f1c4a` and full source contract `979a9012…f394b7`, with 360/360 source-bound tests passing.

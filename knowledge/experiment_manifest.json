@@ -4945,8 +4945,47 @@
   },
   {
     "file_counts": {
+      ".json": 3,
+      ".md": 6,
+      ".py": 4,
+      ".yaml": 3,
+      "[none]": 2
+    },
+    "id": "qwen35_4b_state_formation_branch_recovery",
+    "path": "experiments/qwen35_4b_state_formation_branch_recovery",
+    "primary_readme": "experiments/qwen35_4b_state_formation_branch_recovery/README.md",
+    "primary_report": "experiments/qwen35_4b_state_formation_branch_recovery/reports/report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "posttraining_and_adaptation",
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "This operational successor lets immutable source-v11 branch consumers reopen the authoritative LoRA-miss receipt through the same exact registered-prefix seam already validated for analysis. It does not alter producer science.",
+    "tags": [
+      "latent-state",
+      "lora",
+      "small-model",
+      "table-transform"
+    ],
+    "title": "State-Formation Branch Authorization Recovery",
+    "top_level_dirs": [
+      "analysis",
+      "configs",
+      "data",
+      "reports",
+      "runs",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 18,
+    "total_size_bytes": 85285
+  },
+  {
+    "file_counts": {
       ".csv": 1,
-      ".json": 42,
+      ".json": 44,
       ".jsonl": 12,
       ".md": 12,
       ".py": 42,
@@ -4986,8 +5025,8 @@
       "src",
       "tests"
     ],
-    "total_files": 116,
-    "total_size_bytes": 42901300
+    "total_files": 118,
+    "total_size_bytes": 42907563
   },
   {
     "file_counts": {

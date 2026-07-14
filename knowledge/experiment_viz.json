@@ -33,6 +33,41 @@
     }
    ]
   },
+  "qwen35_4b_state_formation_branch_recovery": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "All six downstream recovery controls pass before model retry",
+     "categories": [
+      "defect reproduced",
+      "authorization recovered",
+      "canonical equivalence",
+      "unrelated alias rejected",
+      "prefix traversal rejected",
+      "helper restored"
+     ],
+     "series": [
+      {
+       "label": "control pass",
+       "values": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+       ]
+      }
+     ],
+     "x_label": "frozen downstream recovery control",
+     "y_label": "pass indicator",
+     "y_format": "integer",
+     "note": "Operational evidence only. Smoke loads no model, starts no training/evaluation, and opens no benchmark or sealed contrast.",
+     "source": "experiments/qwen35_4b_state_formation_branch_recovery/runs/smoke.json"
+    }
+   ]
+  },
   "qwen35_4b_early_text_hypothesis_forking": {
    "charts": [
     {

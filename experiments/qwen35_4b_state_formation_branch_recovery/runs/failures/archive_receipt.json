@@ -1,0 +1,23 @@
+{
+  "archive_inode_distinct": true,
+  "archive_path": "experiments/qwen35_4b_state_formation_branch_recovery/runs/failures/g0_fullrank_seed7411_branch_authorization.json",
+  "authorizes_retry_after_archive_publication": false,
+  "benchmark_paths_opened": 0,
+  "experiment_id": "qwen35_4b_state_formation_branch_recovery",
+  "failure_receipt_identity_sha256": "070c23aff4c08db60edcf8d548c80466d177fa116391845bab5a32e3f6dcaa24",
+  "failure_sha256": "47305826eb1f9b7e34a7edac8cb6c7ba0f5e34921037c02c7400921825ca2c71",
+  "model_loaded": false,
+  "receipt_identity_sha256": "ff478d407ff0fb6f022df45ebf170cdfb305e778fe05dfd77748b9ea47140ec3",
+  "recovery_smoke_sha256": "8bf5bb36f62504163b62f1962258fad15088ed307be6139068e9b0062b446849",
+  "recovery_source_contract_sha256": "55d0a4550abfd09da74bc065cfe61f405f288d32344df1607b0b37ed97f956f3",
+  "schema_version": 1,
+  "sealed_contrast_rows_opened": 0,
+  "source_pair_byte_identical": true,
+  "source_pair_inode_distinct": true,
+  "source_paths": [
+    "experiments/qwen35_4b_state_formation_capacity_adjudication/runs/setup/g0_fullrank_seed7411.json",
+    "experiments/qwen35_4b_state_formation_capacity_adjudication/runs/failures/g0_fullrank_seed7411_source_5a8ed26ddb94.json"
+  ],
+  "status": "BRANCH_AUTHORIZATION_FAILURE_ARCHIVED",
+  "training_or_evaluation_started": false
+}

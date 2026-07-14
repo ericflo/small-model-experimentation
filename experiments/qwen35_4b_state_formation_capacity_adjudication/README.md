@@ -123,6 +123,15 @@ this LoRA joint recipe did not form the registered state; it does **not** yet sh
 caused the miss. The registered capacity adjudication now requires all three LoRA state-only controls
 and all three direct-full-shape joint runs. No contrast split was opened.
 
+The first authorized full-rank seed-7411 G0 then failed at downstream branch-authorization
+revalidation before model load: v11's receipt consumer reaches the same nonlexical registered-prefix
+defect as its analyzer. Canonical/mirror failure SHA-256 is `47305826…2c71`, identity
+`070c23af…aa24`; no check, model load, training/evaluation, benchmark, sealed contrast, or scientific
+evidence occurred. The additive `qwen35_4b_state_formation_branch_recovery` successor now passes its
+real downstream smoke at identity `d1135ea2…49b5` and has archived the exact failure at archive
+identity `ff478d40…0ec3`. Publish that checkpoint, then retire the original failure pair and publish
+the retirement before retrying through the frozen wrapper.
+
 Historically, the integrated source-v10 review was `GO` for reviewed implementation
 `a5a494b7…6f1c4a` and full source contract `979a9012…f394b7`; the 360/360 suite and exact machine gate
 pass. Source-v9 seed-7411 G0 stopped before model load or wrapper construction because the general

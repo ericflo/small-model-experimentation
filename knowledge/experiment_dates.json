@@ -1140,6 +1140,14 @@
     "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
    ]
   },
+  "qwen35_4b_state_formation_branch_recovery": {
+   "start": "2026-07-14",
+   "end": "2026-07-14",
+   "confidence": "high",
+   "sources": [
+    "experiment_log.md: dated headings record defect discovery, recovery design, smoke, and archival on 2026-07-14"
+   ]
+  },
   "qwen35_4b_state_formation_capacity_adjudication": {
    "start": "2026-07-13",
    "end": "2026-07-13",

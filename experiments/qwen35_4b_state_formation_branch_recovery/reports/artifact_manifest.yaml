@@ -1,0 +1,18 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_state_formation_branch_recovery"
+external_artifacts:
+  - name: "producer state-formation artifacts"
+    storage: "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_state_formation_capacity_adjudication"
+    required_for: "downstream branch-evidence recomputation and producer Stage-B execution"
+    checksum: "Each producer receipt binds exact file and checkpoint identities."
+    regenerate: "Follow the producer's frozen source-v11 GPU runbook; do not regenerate selectively."
+omitted_artifacts:
+  - path: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/"
+    reason: "Large result-bearing artifacts are owned and manifest-bound by the producer experiment."
+reproducibility:
+  smoke_command: ".venv/bin/python -B experiments/qwen35_4b_state_formation_branch_recovery/scripts/run.py --smoke"
+  full_command: "Use the purpose-specific producer command in README.md through this recovery wrapper."
+  required_external_artifacts:
+    - "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_state_formation_capacity_adjudication"
+notes: "This recovery owns only operational smoke/archive/invocation receipts; scientific artifacts remain producer-owned."

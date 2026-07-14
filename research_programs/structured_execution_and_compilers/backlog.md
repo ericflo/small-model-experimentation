@@ -17,6 +17,9 @@
   all three LoRA state-only fixed finals, and all three direct-full-shape joint fixed finals on the
   same rows, initialization, stochastic streams, and readouts. Do not attribute the miss to LoRA,
   open sealed contrast, or pivot representation/supervision until the registered Stage-B receipt.
+  The first full-rank G0 exposed an immutable downstream path-consumer defect before model load; its
+  exact-prefix recovery smoke and failure archive pass, but archive and retirement checkpoints must
+  be green before Stage B resumes.
 - Cross-program interface probe completed:
   `qwen35_4b_commit_slot_jacobian_value_transport` showed that a fixed latent
   answer slot repairs formatting but its semantic hint remains task/alias

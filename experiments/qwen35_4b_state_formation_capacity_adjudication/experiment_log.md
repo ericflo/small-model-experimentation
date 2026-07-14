@@ -951,6 +951,26 @@ After both workflows are green, Stage B must run all three LoRA state-only contr
 direct-full-shape joint arms under the exact analysis authorization. Full-rank G0/positive-control
 setup precedes result training; sealed contrast remains prohibited.
 
+## 2026-07-14 — first Stage-B G0 exposes downstream copy of the path defect
+
+- Analysis commit `719c8e5a` passed both workflows before the exact source-v11 full-rank seed-7411
+  G0 command began.
+- The attempt failed at `branch_authorization` before its first completed check or model load. The
+  branch consumer recomputes LoRA-miss evidence and reaches v11's same nonlexical registered
+  external prefix. Canonical/mirror failure file SHA-256 is `47305826…2c71`, identity
+  `070c23af…aa24`; both are byte-identical and inode-distinct.
+- The receipt records no model load, training/evaluation, benchmark, sealed contrast, scientific
+  evidence, or downstream authorization. Producer v11 refuses overwrite until the pair is archived.
+- A separate branch-recovery experiment passed 14/14 tests and exact downstream smoke at identity
+  `d1135ea2…49b5`, then archived the failure at identity `ff478d40…0ec3` without removing either
+  producer path. Its checkpoint must be published and green before verified retirement.
+
+## Current authorization
+
+Only recovery/archive documentation, validation, commit, push, and workflow verification are
+authorized. After green CI, retire the exact producer failure pair through the frozen recovery,
+publish that retirement, and require both workflows green before retrying full-rank seed-7411 G0.
+
 ## 2026-07-13 — source-v9 seed-7411 G0 stops before model load; cache proof repaired
 
 - Non-model setup commit `ff4a8b9b` passed both repository workflows before the exact seed-7411 LoRA

@@ -1,0 +1,64 @@
+{
+  "authorization_receipt_identity_sha256": "b973bc01e4ec5dba12fb61493f122a657344300d38cf7e4a975e102588dda862",
+  "authorization_sha256": "cb9fee75368ce3f555bc182742126c49f5312d9ca3ab324baf0c39021a58818a",
+  "benchmark_paths_opened": 0,
+  "control_passes": {
+    "canonical_equivalence": 1,
+    "helper_restored": 1,
+    "original_downstream_defect_reproduced": 1,
+    "prefix_traversal_rejected": 1,
+    "recovered_downstream_authorization": 1,
+    "unrelated_alias_rejected": 1
+  },
+  "experiment_id": "qwen35_4b_state_formation_branch_recovery",
+  "failed_g0_receipt_identity_sha256": "070c23aff4c08db60edcf8d548c80466d177fa116391845bab5a32e3f6dcaa24",
+  "failed_g0_sha256": "47305826eb1f9b7e34a7edac8cb6c7ba0f5e34921037c02c7400921825ca2c71",
+  "model_loaded": false,
+  "original_rejection": "expected path is not lexical-canonical: /workspace/small-model-experimentation/experiments/qwen35_4b_state_formation_capacity_adjudication/../../large_artifacts/qwen35_4b_state_formation_capacity_adjudication/lora_joint_seed7411",
+  "producer_analysis_sha256": "876888987d816fe29ae93fde0053fb91ed58301d16bf429d5cabaa809c23a2b0",
+  "producer_cli_sha256": "32d2b9a5cd6293b7a01b17a10b8307157d068978d5fd2d6b74af58ad7e3be467",
+  "producer_config_sha256": "eeb4e828526f750dce1258bcc91d03114c80688d300112e03d18c9d911489393",
+  "producer_experiment_id": "qwen35_4b_state_formation_capacity_adjudication",
+  "producer_gpu_runner_sha256": "7faae60bba58b2083ed8cc2d958c279b3d70912f496997bdbd46475c320072a6",
+  "producer_implementation_sha256": "7d6cd93fead0e524e10e7afe4b60a531ea2d6aa7f3f70778ef962889aaeed278",
+  "producer_source_contract_sha256": "5a8ed26ddb9446c728191ca8e7849ae44cff92a700e24b237dac522cf4286666",
+  "receipt_identity_sha256": "d1135ea21f3f8f3815526ef0e23b52a22cd3baa237480c38897e34fd7cc349b5",
+  "recovery_source_contract_sha256": "55d0a4550abfd09da74bc065cfe61f405f288d32344df1607b0b37ed97f956f3",
+  "recovery_source_files": [
+    {
+      "bytes": 2411,
+      "path": "configs/default.yaml",
+      "sha256": "522956cb9f97d7540973252bd3d1ea6d30a79587326c6b5f9cf7d296b32da961"
+    },
+    {
+      "bytes": 3980,
+      "path": "reports/design_review.md",
+      "sha256": "c1fb8b0fe1a57ae2bc2b4d6dd435725720cdaca677e97c330ddd95b698c205da"
+    },
+    {
+      "bytes": 4321,
+      "path": "scripts/run.py",
+      "sha256": "b7ed45baed93a8d65d1eb4afd861828019b39a72dcf1defe8d1166524e58b256"
+    },
+    {
+      "bytes": 75,
+      "path": "src/__init__.py",
+      "sha256": "de59cd81bc31630142407a0c4f7cf87870449d20f69232445f136c1b887b94c5"
+    },
+    {
+      "bytes": 40490,
+      "path": "src/recovery.py",
+      "sha256": "035842cc748f535ce1611ea18e0b80754907f01ceb939b7ad020a5c889c11d01"
+    },
+    {
+      "bytes": 10232,
+      "path": "tests/test_recovery.py",
+      "sha256": "609481bd5d9397bc1b02ab973ffa882a126b7f8c5b5ae652c0a09e331b7f7dd8"
+    }
+  ],
+  "schema_version": 1,
+  "scientific_interpretation_changed": false,
+  "sealed_contrast_rows_opened": 0,
+  "status": "BRANCH_RECOVERY_SMOKE_PASS",
+  "training_or_evaluation_started": false
+}

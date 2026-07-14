@@ -6379,6 +6379,44 @@
     }
    ]
   },
+  "qwen35_4b_state_formation_branch_recovery": {
+   "verdict_tag": "Retry path passed its safety checks",
+   "concept_primer": "A sealed calculator can produce the right decision but still have a plug that downstream equipment cannot use. This recovery repairs that one plug while keeping the calculator and decision unchanged.",
+   "plain_question": "Can the frozen training runner verify the existing continue-to-controls decision after its strict file-path check blocked the first attempt?",
+   "plain_answer": "Yes for the no-model safety check: all six controls passed, and the failed first attempt now has a third preserved copy. The actual full-size model retry has not started and remains blocked until the archive and retirement commits pass both repository checks.",
+   "why_it_matters": "This keeps the promised compact-versus-full-size comparison moving without silently changing its model, data, success rule, or training plan, while preserving the failed attempt before retry.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Safety checks",
+     "value": "6 of 6",
+     "sub": "downstream path and restoration controls passed"
+    },
+    {
+     "label": "Model retries",
+     "value": "0",
+     "sub": "retry remains blocked on publication"
+    },
+    {
+     "label": "Preserved copies",
+     "value": "3",
+     "sub": "canonical, mirror, and recovery archive"
+    },
+    {
+     "label": "Sealed cases opened",
+     "value": "0",
+     "sub": "future comparison rows remain closed"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Every downstream recovery safety check passed",
+     "chart_read": "The six groups cover reproducing the defect, recovering the authorization, preserving canonical behavior, rejecting two unsafe path forms, and restoring the original helper. Bar height is the pass indicator.",
+     "chart_takeaway": "All six bars reach the pass mark before any model retry, so the continuation path is narrow and testable rather than an unreviewed bypass."
+    }
+   ]
+  },
   "qwen35_4b_state_formation_capacity_adjudication": {
    "verdict_tag": "Capacity test is ready, not yet run",
    "concept_primer": "Imagine testing whether a compact repair kit can build the same working memory as a full workshop. Start both from identical materials, then open the larger workshop only if the compact kit fails.",
