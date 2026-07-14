@@ -93,6 +93,8 @@ CRITICAL_FILES = (
     PREFIX + "reports/design_review.md",
     PREFIX + "reports/preregistration.md",
     PREFIX + "reports/calibration_implementation_review.md",
+    PREFIX + "scripts/calibration_launcher",
+    PREFIX + "scripts/calibration_launcher.S",
     PREFIX + "runs/prepared/calibration_requests.jsonl",
     PREFIX + "runs/prepared/preoutcome_receipt.json",
     PREFIX + "runs/tokenizer/receipt.json",
@@ -121,6 +123,8 @@ CRITICAL_FILES = (
 CALIBRATION_RUNTIME_FILES = (
     "requirements-vllm.lock.txt",
     PREFIX + "configs/default.yaml",
+    PREFIX + "scripts/calibration_launcher",
+    PREFIX + "scripts/calibration_launcher.S",
     PREFIX + "runs/prepared/calibration_requests.jsonl",
     PREFIX + "runs/prepared/preoutcome_receipt.json",
     PREFIX + "runs/tokenizer/receipt.json",
@@ -197,6 +201,10 @@ def _commit_id(value: Any) -> str:
     if len(commit) != 40 or any(character not in "0123456789abcdef" for character in commit):
         raise RuntimeError("implementation boundary has an invalid commit ID")
     return commit
+
+
+def _exact_int(value: Any, expected: int) -> bool:
+    return type(value) is int and value == expected
 
 
 def _ancestor(older: str, newer: str) -> bool:
@@ -353,7 +361,7 @@ def validate_implementation_review(value: Any) -> dict[str, Any]:
         raise RuntimeError("implementation review receipt schema changed")
     reviewed_commit = _commit_id(value["reviewed_commit"])
     if (
-        value["schema_version"] != 1
+        not _exact_int(value["schema_version"], 1)
         or value["verdict"] != "PASS_IMPLEMENTATION"
         or not isinstance(value["reviewer"], str)
         or not value["reviewer"].strip()
@@ -366,8 +374,8 @@ def validate_implementation_review(value: Any) -> dict[str, Any]:
         or not isinstance(value["adversarial_review_rounds"], int)
         or isinstance(value["adversarial_review_rounds"], bool)
         or value["adversarial_review_rounds"] < 3
-        or value["experimental_model_requests_reviewed"] != 0
-        or value["sampled_model_outputs_reviewed"] != 0
+        or not _exact_int(value["experimental_model_requests_reviewed"], 0)
+        or not _exact_int(value["sampled_model_outputs_reviewed"], 0)
         or any(
             value[field] != []
             for field in (
@@ -561,10 +569,11 @@ def validate_lock_value(lock: Any, *, inputs: CalibrationInputs) -> dict[str, An
         name: _normalized(dataclasses.asdict(value))
         for name, value in sampling_configs(inputs).items()
     }
+    expected_engine = _normalized(dataclasses.asdict(engine_config(inputs)))
     if not isinstance(lock, dict) or set(lock) != expected_keys:
         raise RuntimeError("calibration implementation lock schema changed")
     if (
-        lock["schema_version"] != 2
+        not _exact_int(lock["schema_version"], 2)
         or lock["stage"] != "calibration_implementation_lock"
         or lock["authorization"] != "interface_calibration_only"
         or lock["model"] != MODEL_ID
@@ -572,13 +581,14 @@ def validate_lock_value(lock: Any, *, inputs: CalibrationInputs) -> dict[str, An
         or lock["calibration_runtime_files"] != list(CALIBRATION_RUNTIME_FILES)
         or lock["calibration_inputs"] != inputs.read_receipt
         or lock["invocation_order"] != list(INVOCATION_ORDER)
-        or lock["expected_source_rows"] != 48
-        or lock["expected_answer_pairs"] != 192
-        or lock["expected_answer_requests"] != 384
-        or lock["engine"] != _normalized(dataclasses.asdict(engine_config(inputs)))
-        or lock["sampling"] != expected_sampling
-        or lock["experimental_model_requests_before_lock"] != 0
-        or lock["sampled_model_outputs_before_lock"] != 0
+        or not _exact_int(lock["expected_source_rows"], 48)
+        or not _exact_int(lock["expected_answer_pairs"], 192)
+        or not _exact_int(lock["expected_answer_requests"], 384)
+        or canonical_sha256(lock["engine"]) != canonical_sha256(expected_engine)
+        or canonical_sha256(lock["sampling"])
+        != canonical_sha256(expected_sampling)
+        or not _exact_int(lock["experimental_model_requests_before_lock"], 0)
+        or not _exact_int(lock["sampled_model_outputs_before_lock"], 0)
         or any(
             lock[field] != []
             for field in (
@@ -859,15 +869,15 @@ def validate_live_preflight_value(
     if (
         not isinstance(value, dict)
         or set(value) != LIVE_PREFLIGHT_KEYS
-        or value.get("schema_version") != 1
+        or not _exact_int(value.get("schema_version"), 1)
         or value.get("decision") != "CALIBRATION_LIVE_ENGINE_PREFLIGHT_PASS"
         or value.get("model") != MODEL_ID
         or value.get("revision") != MODEL_REVISION
         or value.get("implementation_lock_sha256")
         != implementation_lock_sha256
         or value.get("implementation_commit") != implementation_commit
-        or value.get("engine")
-        != _normalized(dataclasses.asdict(engine_config(inputs)))
+        or canonical_sha256(value.get("engine"))
+        != canonical_sha256(_normalized(dataclasses.asdict(engine_config(inputs))))
         or not isinstance(value.get("engine_args_sha256"), str)
         or len(value["engine_args_sha256"]) != 64
         or any(
@@ -884,11 +894,13 @@ def validate_live_preflight_value(
         or value["runtime"].get("git_commit") != value.get("live_head")
         or value["runtime"].get("git_dirty") is not False
         or value.get("invocation_order") != list(INVOCATION_ORDER)
-        or value.get("expected_source_rows") != 48
-        or value.get("expected_answer_pairs") != 192
-        or value.get("expected_answer_requests") != 384
-        or value.get("experimental_generation_requests_before_preflight") != 0
-        or value.get("sampled_model_outputs_before_preflight") != 0
+        or not _exact_int(value.get("expected_source_rows"), 48)
+        or not _exact_int(value.get("expected_answer_pairs"), 192)
+        or not _exact_int(value.get("expected_answer_requests"), 384)
+        or not _exact_int(
+            value.get("experimental_generation_requests_before_preflight"), 0
+        )
+        or not _exact_int(value.get("sampled_model_outputs_before_preflight"), 0)
         or any(
             value.get(field) != []
             for field in (

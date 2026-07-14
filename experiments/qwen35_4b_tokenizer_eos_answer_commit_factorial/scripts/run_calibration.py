@@ -45,6 +45,8 @@ _BOOTSTRAP_IMPORT_FILES = (
 _BOOTSTRAP_RUNTIME_FILES = (
     "requirements-vllm.lock.txt",
     str(EXP_REL / "configs/default.yaml"),
+    str(EXP_REL / "scripts/calibration_launcher"),
+    str(EXP_REL / "scripts/calibration_launcher.S"),
     str(EXP_REL / "runs/prepared/calibration_requests.jsonl"),
     str(EXP_REL / "runs/prepared/preoutcome_receipt.json"),
     str(EXP_REL / "runs/tokenizer/receipt.json"),
@@ -61,6 +63,8 @@ _BOOTSTRAP_CRITICAL_FILES = (
     str(EXP_REL / "reports/design_review.md"),
     str(EXP_REL / "reports/preregistration.md"),
     str(EXP_REL / "reports/calibration_implementation_review.md"),
+    str(EXP_REL / "scripts/calibration_launcher"),
+    str(EXP_REL / "scripts/calibration_launcher.S"),
     str(EXP_REL / "runs/prepared/calibration_requests.jsonl"),
     str(EXP_REL / "runs/prepared/preoutcome_receipt.json"),
     str(EXP_REL / "runs/tokenizer/receipt.json"),
@@ -113,11 +117,29 @@ _CANONICAL_ORIGIN = "https://github.com/ericflo/small-model-experimentation.git"
 _GIT_EXECUTABLE = "/usr/bin/git"
 _GH_EXECUTABLE = "/usr/bin/gh"
 _PINNED_PATH = f"{ROOT}/.venv-vllm/bin:/usr/local/cuda/bin:/usr/bin:/bin"
+_STATIC_LAUNCHER = EXP / "scripts/calibration_launcher"
+_STATIC_LAUNCHER_SHA256 = (
+    "5947d78038cb969caaf2df633468eed9075c90e449fbaa1f634981bc252e41c2"
+)
 
 
 def _bootstrap_sanitize_process_environment() -> None:
-    if os.environ.get("LD_PRELOAD"):
-        raise RuntimeError("sealed calibration forbids LD_PRELOAD")
+    if os.environ.get("QWEN_CALIBRATION_STATIC_LAUNCHER") != "1":
+        raise RuntimeError(
+            "sealed calibration requires the trusted static calibration_launcher"
+        )
+    if (
+        _STATIC_LAUNCHER.is_symlink()
+        or not _STATIC_LAUNCHER.is_file()
+        or hashlib.sha256(_STATIC_LAUNCHER.read_bytes()).hexdigest()
+        != _STATIC_LAUNCHER_SHA256
+    ):
+        raise RuntimeError("sealed calibration static launcher bytes changed")
+    if any(
+        os.environ.get(key)
+        for key in ("LD_PRELOAD", "LD_AUDIT", "LD_DEBUG", "GLIBC_TUNABLES")
+    ):
+        raise RuntimeError("sealed calibration forbids dynamic-loader injection")
     for key in tuple(os.environ):
         if (
             key in {"PYTHONPATH", "PYTHONHOME", "GH_REPO", "GH_HOST"}
@@ -152,6 +174,10 @@ def _bootstrap_child_environment() -> dict[str, str]:
 
 
 _bootstrap_sanitize_process_environment()
+
+
+def _bootstrap_exact_int(value: Any, expected: int) -> bool:
+    return type(value) is int and value == expected
 
 
 def _bootstrap_stage() -> str | None:
@@ -400,15 +426,17 @@ def _bootstrap_authenticate_review_release() -> dict[str, Any]:
     )
     if (
         set(review) != _BOOTSTRAP_REVIEW_KEYS
-        or review.get("schema_version") != 1
+        or not _bootstrap_exact_int(review.get("schema_version"), 1)
         or review.get("verdict") != "PASS_IMPLEMENTATION"
         or not isinstance(review.get("reviewer"), str)
         or not review["reviewer"].strip()
         or not isinstance(review.get("adversarial_review_rounds"), int)
         or isinstance(review.get("adversarial_review_rounds"), bool)
         or review["adversarial_review_rounds"] < 3
-        or review.get("experimental_model_requests_reviewed") != 0
-        or review.get("sampled_model_outputs_reviewed") != 0
+        or not _bootstrap_exact_int(
+            review.get("experimental_model_requests_reviewed"), 0
+        )
+        or not _bootstrap_exact_int(review.get("sampled_model_outputs_reviewed"), 0)
         or any(
             review.get(field) != []
             for field in (
@@ -493,7 +521,7 @@ def _bootstrap_verify_before_local_imports() -> None:
     review_binding = lock.get("implementation_review")
     if (
         set(lock) != _BOOTSTRAP_LOCK_KEYS
-        or lock.get("schema_version") != 2
+        or not _bootstrap_exact_int(lock.get("schema_version"), 2)
         or lock.get("stage") != "calibration_implementation_lock"
         or lock.get("authorization") != "interface_calibration_only"
         or lock.get("model") != _MODEL_ID
@@ -507,11 +535,13 @@ def _bootstrap_verify_before_local_imports() -> None:
         or set(review_binding)
         != {"verdict", "reviewer", "reviewed_commit", "receipt_sha256", "receipt_commit"}
         or review_binding.get("verdict") != "PASS_IMPLEMENTATION"
-        or lock.get("expected_source_rows") != 48
-        or lock.get("expected_answer_pairs") != 192
-        or lock.get("expected_answer_requests") != 384
-        or lock.get("experimental_model_requests_before_lock") != 0
-        or lock.get("sampled_model_outputs_before_lock") != 0
+        or not _bootstrap_exact_int(lock.get("expected_source_rows"), 48)
+        or not _bootstrap_exact_int(lock.get("expected_answer_pairs"), 192)
+        or not _bootstrap_exact_int(lock.get("expected_answer_requests"), 384)
+        or not _bootstrap_exact_int(
+            lock.get("experimental_model_requests_before_lock"), 0
+        )
+        or not _bootstrap_exact_int(lock.get("sampled_model_outputs_before_lock"), 0)
         or any(
             lock.get(field) != []
             for field in (
@@ -539,13 +569,15 @@ def _bootstrap_verify_before_local_imports() -> None:
     review = _bootstrap_strict_json(review_path)
     if (
         set(review) != _BOOTSTRAP_REVIEW_KEYS
-        or review.get("schema_version") != 1
+        or not _bootstrap_exact_int(review.get("schema_version"), 1)
         or review.get("verdict") != "PASS_IMPLEMENTATION"
         or review.get("reviewed_commit") != implementation
         or review.get("reviewer") != review_binding.get("reviewer")
         or review.get("reviewed_ci") != lock.get("implementation_ci")
-        or review.get("experimental_model_requests_reviewed") != 0
-        or review.get("sampled_model_outputs_reviewed") != 0
+        or not _bootstrap_exact_int(
+            review.get("experimental_model_requests_reviewed"), 0
+        )
+        or not _bootstrap_exact_int(review.get("sampled_model_outputs_reviewed"), 0)
         or any(
             review.get(field) != []
             for field in (

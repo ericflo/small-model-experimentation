@@ -51,10 +51,11 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | `.html` | 90 |
 | `.sh` | 31 |
 | `.pt` | 11 |
-| `[none]` | 10 |
+| `[none]` | 11 |
 | `.txt` | 5 |
 | `.aesgcm` | 1 |
 | `.npy` | 1 |
+| `.s` | 1 |
 
 ## Largest Files
 

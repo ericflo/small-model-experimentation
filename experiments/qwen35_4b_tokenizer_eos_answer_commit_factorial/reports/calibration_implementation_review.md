@@ -2,7 +2,7 @@
 
 ## Status
 
-`HOLD_LIVE_CALLS` pending a fourth clean adversarial review of the exact
+`HOLD_LIVE_CALLS` pending a sixth clean adversarial review of the exact
 pushed, green repair commit. No model load or generation is authorized.
 
 ## First adversarial review
@@ -88,3 +88,38 @@ not count toward `adversarial_review_rounds`.
 The next review must be fresh and clean. The machine receipt requires at least
 three valid independent rounds; with the disqualified attempt excluded, a clean
 fourth attempt would be the third countable round.
+
+## Fourth review (disqualified before implementation inspection)
+
+The fourth attempt targeted exact published-green commit
+`081e493069a230c022a6b0c43cfaed817c440c72` but stopped before inspecting the
+implementation, CI, or tests. Its worktree check named the whole tests
+directory and may therefore have statted the protected construction-test path.
+No protected contents, benchmark contents, model requests, sampled outputs, or
+GPU work were accessed. Under the deliberately strict review firewall, the
+attempt is disqualified and does not count toward review provenance.
+
+## Fifth adversarial review
+
+The fifth review cleanly examined exact published-green commit
+`081e493069a230c022a6b0c43cfaed817c440c72`. Both required workflows were
+green, all 92 permitted model-free tests passed under the pinned environment,
+and the reviewer attested empty benchmark, hidden, qualification,
+confirmation, and protected-content read inventories. It returned
+`HOLD_IMPLEMENTATION` on two blockers:
+
+1. Rejecting dynamic-loader variables inside Python is too late to establish a
+   pre-interpreter trust boundary. A trusted environment-sanitizing launcher is
+   required before the dynamic Python executable starts.
+2. Several exact-zero receipt and preflight counters used ordinary numeric
+   equality, allowing JSON Boolean aliases such as `false == 0`.
+
+The prospective sixth-round repair adds a reproducible 12.6-KiB static x86-64
+launcher with no ELF interpreter. It constructs an exact environment and uses
+the Linux `execve` syscall to start the pinned interpreter with `-I -B`; the
+Python bootstrap requires and hash-binds its exact bytes. Review, lock, and
+preflight schemas now require exact integer types for fixed counts and compare
+engine/sampling structures through typed canonical hashes. Reproducible-build,
+no-interpreter, inherited-environment, Boolean-alias, and engine-type mutation
+tests cover the repair. The runtime remains sealed until a fresh reviewer
+examines the next exact pushed-green commit.

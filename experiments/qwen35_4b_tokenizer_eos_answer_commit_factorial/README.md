@@ -108,14 +108,26 @@ Full:
 ```bash
 # Still sealed pending implementation review and the published-green lock.
 # Once those gates pass, these are the only supported entry points:
-.venv-vllm/bin/python -I experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/run_calibration.py --stage lock
-.venv-vllm/bin/python -I experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/run_calibration.py --stage run
-.venv-vllm/bin/python -I experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/run_calibration.py --stage analyze
+experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/calibration_launcher --stage lock
+experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/calibration_launcher --stage run
+experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/calibration_launcher --stage analyze
 ```
 
-The isolated-mode guard executes immediately after importing Python's built-in
-`sys` module and before any shadowable import. Invocations without `-I`, with a
-missing stage, or with a malformed stage fail before repository-local imports.
+`calibration_launcher` is a 12.6-KiB static x86-64 ELF with no dynamic
+interpreter. It discards the inherited environment before a direct `execve` of
+the pinned Python interpreter with `-I -B`, closing the pre-Python dynamic-
+loader boundary. Its source is `scripts/calibration_launcher.S`; its exact
+reproducible build command is:
+
+```bash
+/usr/bin/gcc -nostdlib -static -no-pie -s -Wl,--build-id=none \
+  -o experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/calibration_launcher \
+  experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/calibration_launcher.S
+```
+
+The Python bootstrap requires and hash-binds that launcher before any local
+import. Direct Python invocation, missing/malformed stages, non-isolated
+Python, altered launcher bytes, and dynamic-loader variables all fail closed.
 
 ## Results
 
@@ -146,6 +158,13 @@ child executables/environment and preserve isolation across recovery re-exec.
 The tokenizer receipt's sole runner binding was correspondingly refreshed from
 `cbbfae3e...` to `4ce61e64...`; its grammar, prompts, termination IDs,
 freshness inventories, and zero-call declarations were unchanged.
+
+A later clean implementation rereview held live calls because an in-Python
+`LD_PRELOAD` rejection occurs after interpreter startup and because several
+zero counters still accepted JSON Boolean aliases. The prospective static
+launcher now sanitizes before Python exists, and exact integer predicates plus
+typed-canonical engine comparisons reject those aliases. These are model-free
+repairs; no calibration request or sampled output has yet occurred.
 
 ## Interpretation
 

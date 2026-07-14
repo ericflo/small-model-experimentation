@@ -87,6 +87,15 @@ class CalibrationLockTests(unittest.TestCase):
         value["expected_answer_pairs"] = 191
         mutations.append((value, "boundary changed"))
         value = self.value()
+        value["schema_version"] = True
+        mutations.append((value, "boundary changed"))
+        value = self.value()
+        value["experimental_model_requests_before_lock"] = False
+        mutations.append((value, "boundary changed"))
+        value = self.value()
+        value["engine"]["seed"] = False
+        mutations.append((value, "boundary changed"))
+        value = self.value()
         value["implementation_review"]["verdict"] = "HOLD"
         mutations.append((value, "review binding changed"))
         value = self.value()
@@ -131,6 +140,17 @@ class CalibrationLockTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, "receipt boundary changed"):
             lock.validate_implementation_review(receipt)
         receipt["adversarial_review_rounds"] = 3
+        for field in (
+            "schema_version",
+            "experimental_model_requests_reviewed",
+            "sampled_model_outputs_reviewed",
+        ):
+            bad = copy.deepcopy(receipt)
+            bad[field] = True if field == "schema_version" else False
+            with self.subTest(field=field), self.assertRaisesRegex(
+                RuntimeError, "receipt boundary changed"
+            ):
+                lock.validate_implementation_review(bad)
         receipt["unexpected"] = True
         with self.assertRaisesRegex(RuntimeError, "schema changed"):
             lock.validate_implementation_review(receipt)
@@ -231,6 +251,9 @@ class CalibrationLockTests(unittest.TestCase):
             "runtime_commit",
             "runtime_dirty",
             "rng_types",
+            "counter_bool",
+            "schema_bool",
+            "engine_bool",
             "engine",
         ):
             bad = copy.deepcopy(value)
@@ -247,6 +270,12 @@ class CalibrationLockTests(unittest.TestCase):
                     "engine_seed": False,
                     "caller_global_rng_state_restored": 1,
                 }
+            elif mutation == "counter_bool":
+                bad["experimental_generation_requests_before_preflight"] = False
+            elif mutation == "schema_bool":
+                bad["schema_version"] = True
+            elif mutation == "engine_bool":
+                bad["engine"]["seed"] = False
             else:
                 bad["engine"]["max_model_len"] += 1
             with self.subTest(mutation=mutation), self.assertRaisesRegex(
