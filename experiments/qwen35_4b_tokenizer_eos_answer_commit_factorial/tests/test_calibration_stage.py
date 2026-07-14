@@ -17,6 +17,9 @@ from calibration_stage import (  # noqa: E402
     CALIBRATION_RELATIVE_READS,
     INVOCATION_ORDER,
     BoundaryAuthenticationError,
+    RUNTIME_METADATA_KEYS,
+    authenticate_bundle_engine_preflight,
+    authenticate_pair_thought_reuse,
     authenticate_thought_bundle,
     calibration_registrations,
     engine_config,
@@ -228,6 +231,43 @@ class CalibrationStageTests(unittest.TestCase):
                     bad, inputs=self.inputs, tokenizer=self.tokenizer
                 )
 
+    def test_pair_outputs_are_bound_directly_to_persisted_thoughts(self) -> None:
+        thought = self.thought_bundle()
+        source_sha = hashlib.sha256(
+            __import__("json").dumps(
+                {
+                    "rows": thought["rows"],
+                    "runner_metadata": thought["runner_metadata"],
+                },
+                sort_keys=True,
+                separators=(",", ":"),
+                ensure_ascii=True,
+                allow_nan=False,
+            ).encode()
+        ).hexdigest()
+        pair = {
+            "rows": [
+                {
+                    "id": row["id"],
+                    "meta": row["meta"],
+                    "outputs": [
+                        copy.deepcopy(row["outputs"][0]),
+                        copy.deepcopy(row["outputs"][0]),
+                    ],
+                }
+                for row in thought["rows"]
+            ],
+            "runner_metadata": {"thought_source_sha256": source_sha},
+        }
+        authenticate_pair_thought_reuse(pair, thought)
+        for value in pair["rows"][0]["outputs"]:
+            value["stage1_token_ids"] = [99, 248044]
+            value["retained_thinking_token_ids"] = [99]
+        with self.assertRaisesRegex(
+            BoundaryAuthenticationError, "differs from persisted thought"
+        ):
+            authenticate_pair_thought_reuse(pair, thought)
+
     def test_scoring_refuses_an_incomplete_bundle_inventory(self) -> None:
         with self.assertRaisesRegex(
             BoundaryAuthenticationError, "bundle inventory changed"
@@ -236,7 +276,40 @@ class CalibrationStageTests(unittest.TestCase):
                 {"calibration_thoughts": self.thought_bundle()},
                 inputs=self.inputs,
                 tokenizer=self.tokenizer,
+                live_preflight={},
             )
+
+    def test_bundle_engine_is_bound_absolutely_to_live_preflight(self) -> None:
+        runtime = {key: f"value-{key}" for key in RUNTIME_METADATA_KEYS}
+        runtime["git_dirty"] = False
+        engine = {"max_model_len": 4096}
+        engine_args = {"model": "Qwen/Qwen3.5-4B", "seed": 0}
+        resolved = {"cudagraph_capture_sizes": [1, 2]}
+        preflight = {
+            "engine": engine,
+            "engine_args_sha256": canonical_sha256(engine_args),
+            "resolved_cudagraph": resolved,
+            "resolved_logprobs_mode": "raw_logprobs",
+            "runtime": runtime,
+        }
+        bundle = {
+            "runner_metadata": {
+                "engine": copy.deepcopy(engine),
+                "engine_args": copy.deepcopy(engine_args),
+                "resolved_cudagraph": copy.deepcopy(resolved),
+                "resolved_logprobs_mode": "raw_logprobs",
+                "runtime": copy.deepcopy(runtime),
+            }
+        }
+        authenticate_bundle_engine_preflight(bundle, preflight)
+        bad = copy.deepcopy(bundle)
+        bad["runner_metadata"]["engine"]["max_model_len"] = 8192
+        with self.assertRaisesRegex(BoundaryAuthenticationError, "live engine"):
+            authenticate_bundle_engine_preflight(bad, preflight)
+        bad = copy.deepcopy(bundle)
+        bad["runner_metadata"]["runtime"]["gpu"] = "different"
+        with self.assertRaisesRegex(BoundaryAuthenticationError, "live runtime"):
+            authenticate_bundle_engine_preflight(bad, preflight)
 
 
 if __name__ == "__main__":

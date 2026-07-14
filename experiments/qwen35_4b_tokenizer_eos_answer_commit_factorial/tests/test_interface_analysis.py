@@ -12,6 +12,8 @@ sys.path.insert(0, str(ROOT / "src"))
 
 import interface_analysis as analysis  # noqa: E402
 
+RUN_SEED = 17
+
 
 class FakeTokenizer:
     @staticmethod
@@ -42,6 +44,7 @@ def grammar_receipt(row_ids: list[str]) -> dict:
             "program_slot": [90, 91, arity, local],
         }
     return {
+        "think_token_ids": {"forced_close_sequence": [248069, 271]},
         "program_slot_prefix_token_ids": [90, 91],
         "grammar_inventories": inventories,
         "calibration_expected_token_ids": expected,
@@ -69,7 +72,7 @@ def output(
     pair_offset: int,
 ) -> dict:
     stop = analysis.BOUNDARY_STOP_IDS[boundary]
-    seed = 1000 + pair_index
+    seed = analysis._stable_seed(RUN_SEED, f"row-{pair_index:02d}", 0, "answer")
     return {
         "sample_index": 0,
         "pair_index": pair_index,
@@ -199,6 +202,18 @@ def bundle() -> tuple[list[dict], dict, dict]:
         "model": "Qwen/Qwen3.5-4B",
         "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
         "think_token_ids": {"forced_close_sequence": [248069, 271]},
+        "termination": {
+            "hf_model_eos_token_id": 248044,
+            "vllm_tokenizer_eos_ignored": 248046,
+        },
+        "sampling": {
+            "thinking": "off",
+            "thinking_budget": None,
+            "n": 1,
+            "answer_max_tokens": 24,
+            "run_seed": RUN_SEED,
+            "paired_answer_seed": True,
+        },
         "boundary_pairing": {
             "boundary_order": ["tokenizer_eos", "hf_model_eos"],
             "registered_stop_token_ids": [248046, 248044],
@@ -320,13 +335,45 @@ class InterfaceAnalysisTests(unittest.TestCase):
         mutations.append((rows, metadata, receipt, "prompt changed"))
         rows, metadata, receipt = bundle()
         rows[0]["outputs"][1]["answer_seed"] += 1
-        mutations.append((rows, metadata, receipt, "fields diverged"))
+        mutations.append((rows, metadata, receipt, "output geometry changed"))
         rows, metadata, receipt = bundle()
         rows[0]["outputs"][0]["text"] = "mutated"
         mutations.append((rows, metadata, receipt, "text changed"))
         rows, metadata, receipt = bundle()
         metadata["counts"]["physical_sampled_tokens"] += 1
         mutations.append((rows, metadata, receipt, "cost summary changed"))
+        for rows, metadata, receipt, message in mutations:
+            with self.subTest(message=message), self.assertRaisesRegex(
+                analysis.BoundaryAuthenticationError, message
+            ):
+                self.score(rows, metadata, receipt)
+
+    def test_coordinated_seed_cost_and_close_rewrites_fail(self) -> None:
+        mutations = []
+        rows, metadata, receipt = bundle()
+        for value in rows[0]["outputs"]:
+            value["stage1_parent_seed"] += 1
+            value["seed_stage1"] += 1
+            value["answer_seed"] += 1
+        mutations.append((rows, metadata, receipt, "output geometry changed"))
+
+        rows, metadata, receipt = bundle()
+        for value in rows[0]["outputs"]:
+            value["n_stage1_prompt_tokens"] += 1
+        refresh_counts(rows, metadata)
+        mutations.append((rows, metadata, receipt, "answer geometry changed"))
+
+        rows, metadata, receipt = bundle()
+        for value in rows[0]["outputs"]:
+            value["n_sampled_tokens"] += 1
+            value["n_completion_tokens"] += 1
+        refresh_counts(rows, metadata)
+        mutations.append((rows, metadata, receipt, "answer geometry changed"))
+
+        rows, metadata, receipt = bundle()
+        metadata["think_token_ids"]["forced_close_sequence"] = [1, 2]
+        mutations.append((rows, metadata, receipt, "forced-close token receipt"))
+
         for rows, metadata, receipt, message in mutations:
             with self.subTest(message=message), self.assertRaisesRegex(
                 analysis.BoundaryAuthenticationError, message

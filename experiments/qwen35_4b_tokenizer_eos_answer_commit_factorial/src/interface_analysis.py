@@ -15,6 +15,7 @@ from protocol import (
     content_for_terminal_event,
     is_answer_cap_contact,
 )
+from vllm_runner import _stable_seed
 
 
 BOUNDARY_ORDER = ("tokenizer_eos", "hf_model_eos")
@@ -157,6 +158,10 @@ def _authenticate_metadata(
         or pairing.get("identical_answer_seed_within_pair") is not True
         or pairing.get("raw_answer_tokens_preserved") is not True
         or pairing.get("answer_cap_tokens") != cap
+        or metadata.get("termination", {}).get("hf_model_eos_token_id")
+        != HF_MODEL_EOS_ID
+        or metadata.get("termination", {}).get("vllm_tokenizer_eos_ignored")
+        != TOKENIZER_EOS_ID
     ):
         raise BoundaryAuthenticationError("boundary-pair runner metadata changed")
     if thinking_policy == "think512":
@@ -232,6 +237,9 @@ def _authenticate_output_shape(
     thinking_policy: str,
     prefix_ids: tuple[int, ...],
     close_ids: tuple[int, ...],
+    expected_answer_seed: int,
+    expected_thought_seed: int | None,
+    thinking_budget: int,
     cap: int,
     tokenizer: Any,
 ) -> tuple[str, tuple[int, ...], bool]:
@@ -258,6 +266,7 @@ def _authenticate_output_shape(
         or output.get("pair_adjacent") is not True
         or output.get("boundary") != boundary
         or output.get("registered_stop_token_id") != stop_id
+        or output.get("answer_seed") != expected_answer_seed
         or output.get("answer_prefix_token_ids") != list(prefix_ids)
         or output.get("n_answer_tokens") != len(raw_ids)
         or output.get("answer_cap_contact")
@@ -271,28 +280,114 @@ def _authenticate_output_shape(
         raise BoundaryAuthenticationError("completion token inventory changed")
     retained_ids = tuple(_integer(value, "retained thought token ID") for value in retained)
     full_ids = tuple(_integer(value, "completion token ID") for value in token_ids)
+    stage1 = output.get("stage1_token_ids")
+    if not isinstance(stage1, list):
+        raise BoundaryAuthenticationError("stage-one token inventory changed")
+    stage1_ids = tuple(_integer(value, "stage-one token ID") for value in stage1)
     if thinking_policy == "think512":
         expected_full = retained_ids + close_ids + prefix_ids + raw_ids
+        thought_finish = output.get("stage1_finish_reason")
+        thought_stop = output.get("stage1_stop_reason")
+        if thought_finish == "stop":
+            if (
+                thought_stop != HF_MODEL_EOS_ID
+                or not stage1_ids
+                or stage1_ids[-1] != HF_MODEL_EOS_ID
+                or HF_MODEL_EOS_ID in stage1_ids[:-1]
+                or len(stage1_ids) > thinking_budget
+            ):
+                raise BoundaryAuthenticationError("stage-one stop geometry changed")
+            thought_without_eos = stage1_ids[:-1]
+        elif thought_finish == "length":
+            if (
+                thought_stop is not None
+                or len(stage1_ids) != thinking_budget
+                or HF_MODEL_EOS_ID in stage1_ids
+            ):
+                raise BoundaryAuthenticationError("stage-one cap geometry changed")
+            thought_without_eos = stage1_ids
+        else:
+            raise BoundaryAuthenticationError("stage-one finish reason changed")
+        close_index = (
+            thought_without_eos.index(close_ids[0])
+            if close_ids[0] in thought_without_eos
+            else None
+        )
+        expected_retained = (
+            thought_without_eos[:close_index]
+            if close_index is not None
+            else thought_without_eos
+        )
         if (
-            output.get("stage2_token_ids") != list(raw_ids)
+            retained_ids != expected_retained
+            or expected_thought_seed is None
+            or output.get("stage1_parent_seed") != expected_thought_seed
+            or output.get("seed_stage1") != expected_thought_seed
+            or output.get("stage2_token_ids") != list(raw_ids)
             or output.get("n_thinking_tokens") != len(retained_ids)
             or output.get("thinking_closed") is not True
             or output.get("forced_close") is not True
             or output.get("seed_domain_stage1") != "thought"
             or output.get("seed_domain_stage2") != "answer"
+            or output.get("seed_stage2") != expected_answer_seed
+            or output.get("n_sampled_tokens")
+            != len(stage1_ids) + len(raw_ids)
+            or output.get("n_injected_tokens") != len(close_ids) + len(prefix_ids)
+            or output.get("n_completion_tokens") != len(expected_full)
+            or output.get("n_terminal_tokens_trimmed")
+            != len(stage1_ids) - len(thought_without_eos)
+            or output.get("n_tokens_discarded_after_close")
+            != len(thought_without_eos) - len(retained_ids)
+            or output.get("n_stage1_prompt_tokens")
+            != row.get("n_original_prompt_tokens")
+            or output.get("n_stage2_prompt_tokens")
+            != row.get("n_effective_prompt_tokens")
+            or output.get("injected_token_ids")
+            != list(close_ids + prefix_ids)
+            or output.get("stage2_finish_reason") != output.get("finish_reason")
+            or output.get("stage2_stop_reason") != output.get("stop_reason")
         ):
             raise BoundaryAuthenticationError("shared-thought answer geometry changed")
+        expected_cumulative = (
+            output.get("stage1_cumulative_logprob")
+            + output.get("stage2_cumulative_logprob")
+            if output.get("stage1_cumulative_logprob") is not None
+            and output.get("stage2_cumulative_logprob") is not None
+            else output.get("stage1_cumulative_logprob")
+        )
+        if output.get("sampled_cumulative_logprob") != expected_cumulative:
+            raise BoundaryAuthenticationError("shared-thought logprob geometry changed")
     else:
         expected_full = prefix_ids + raw_ids
         if (
             retained_ids
-            or output.get("stage1_token_ids") != list(raw_ids)
+            or stage1_ids != raw_ids
             or output.get("stage2_token_ids") != []
             or output.get("n_thinking_tokens") != 0
             or output.get("thinking_closed") is not False
             or output.get("forced_close") is not False
             or output.get("seed_domain_stage1") != "answer"
             or output.get("seed_domain_stage2") is not None
+            or output.get("stage1_parent_seed") != expected_answer_seed
+            or output.get("seed_stage1") != expected_answer_seed
+            or output.get("seed_stage2") is not None
+            or output.get("n_sampled_tokens") != len(raw_ids)
+            or output.get("n_injected_tokens") != len(prefix_ids)
+            or output.get("n_completion_tokens") != len(expected_full)
+            or output.get("n_terminal_tokens_trimmed") != 0
+            or output.get("n_tokens_discarded_after_close") != 0
+            or output.get("n_stage1_prompt_tokens")
+            != row.get("n_effective_prompt_tokens")
+            or output.get("n_stage2_prompt_tokens") != 0
+            or output.get("injected_token_ids") != list(prefix_ids)
+            or output.get("stage1_finish_reason") != output.get("finish_reason")
+            or output.get("stage1_stop_reason") != output.get("stop_reason")
+            or output.get("stage2_finish_reason") is not None
+            or output.get("stage2_stop_reason") is not None
+            or output.get("stage2_cumulative_logprob") is not None
+            or output.get("sampled_cumulative_logprob")
+            != output.get("stage1_cumulative_logprob")
+            or output.get("stage2_logprobs") is not None
         ):
             raise BoundaryAuthenticationError("no-think answer geometry changed")
     if full_ids != expected_full:
@@ -323,10 +418,30 @@ def authenticate_and_score_bundle(
         raise BoundaryAuthenticationError("calibration row denominator changed")
     _authenticate_metadata(rows, metadata, thinking_policy=thinking_policy, cap=cap)
     prefix_ids = _prefix_ids(grammar_receipt, prefix_condition)
-    close = metadata.get("think_token_ids", {}).get("forced_close_sequence")
-    if not isinstance(close, list):
+    close = grammar_receipt.get("think_token_ids", {}).get("forced_close_sequence")
+    if (
+        not isinstance(close, list)
+        or metadata.get("think_token_ids", {}).get("forced_close_sequence") != close
+    ):
         raise BoundaryAuthenticationError("forced-close token receipt changed")
     close_ids = tuple(_integer(value, "forced-close token ID") for value in close)
+    if not close_ids:
+        raise BoundaryAuthenticationError("forced-close token receipt is empty")
+    sampling = metadata.get("sampling")
+    if not isinstance(sampling, dict):
+        raise BoundaryAuthenticationError("runner sampling metadata changed")
+    run_seed = _integer(sampling.get("run_seed"), "run seed")
+    expected_thinking = "budget" if thinking_policy == "think512" else "off"
+    expected_thinking_budget = 512 if thinking_policy == "think512" else None
+    if (
+        sampling.get("thinking") != expected_thinking
+        or sampling.get("thinking_budget") != expected_thinking_budget
+        or sampling.get("n") != 1
+        or sampling.get("answer_max_tokens") != cap
+        or sampling.get("paired_answer_seed") is not True
+    ):
+        raise BoundaryAuthenticationError("runner sampling geometry changed")
+    thinking_budget = expected_thinking_budget or 0
     grammar = {arity: _grammar_set(grammar_receipt, prefix_condition, arity) for arity in (2, 3)}
     seen: set[str] = set()
     scored = {boundary: [] for boundary in BOUNDARY_ORDER}
@@ -350,6 +465,12 @@ def authenticate_and_score_bundle(
         if arity not in {2, 3}:
             raise BoundaryAuthenticationError("row arity changed")
         expected = _expected_ids(grammar_receipt, row_id, prefix_condition)
+        expected_answer_seed = _stable_seed(run_seed, row_id, 0, "answer")
+        expected_thought_seed = (
+            _stable_seed(run_seed, row_id, -1, "thought")
+            if thinking_policy == "think512"
+            else None
+        )
         terminal: dict[str, tuple[str, tuple[int, ...], bool]] = {}
         for pair_offset, boundary in enumerate(BOUNDARY_ORDER):
             terminal[boundary] = _authenticate_output_shape(
@@ -361,6 +482,9 @@ def authenticate_and_score_bundle(
                 thinking_policy=thinking_policy,
                 prefix_ids=prefix_ids,
                 close_ids=close_ids,
+                expected_answer_seed=expected_answer_seed,
+                expected_thought_seed=expected_thought_seed,
+                thinking_budget=thinking_budget,
                 cap=cap,
                 tokenizer=tokenizer,
             )

@@ -59,6 +59,19 @@ DEFAULT_IMPLEMENTATION_LOCK_PATH = EXP / "runs/calibration/implementation_lock.j
 DEFAULT_LIVE_PREFLIGHT_PATH = EXP / "runs/calibration/live_preflight.json"
 DEFAULT_RUNNER_PATH = EXP / "src/vllm_runner.py"
 DEFAULT_DECISION_PATH = EXP / "runs/calibration/decision.json"
+RUNTIME_METADATA_KEYS = {
+    "python",
+    "python_executable",
+    "platform",
+    "packages",
+    "environment_lock",
+    "uv",
+    "cuda_toolkit",
+    "gpu",
+    "vllm_enable_v1_multiprocessing",
+    "git_commit",
+    "git_dirty",
+}
 
 
 def _safe_bytes(path: Path) -> bytes:
@@ -639,14 +652,112 @@ def authenticate_thought_bundle(
     }
 
 
+def authenticate_pair_thought_reuse(
+    pair_bundle: Mapping[str, Any],
+    thought_bundle: Mapping[str, Any],
+) -> None:
+    """Bind each thinking continuation directly to its persisted source output."""
+    pair_rows = pair_bundle.get("rows")
+    thought_rows = thought_bundle.get("rows")
+    pair_metadata = pair_bundle.get("runner_metadata")
+    thought_metadata = thought_bundle.get("runner_metadata")
+    if (
+        not isinstance(pair_rows, list)
+        or not isinstance(thought_rows, list)
+        or len(pair_rows) != EXPECTED_ROWS
+        or len(thought_rows) != EXPECTED_ROWS
+        or not isinstance(pair_metadata, dict)
+        or not isinstance(thought_metadata, dict)
+    ):
+        raise BoundaryAuthenticationError("thought-reuse bundle geometry changed")
+    source_sha256 = hashlib.sha256(
+        json.dumps(
+            {"rows": thought_rows, "runner_metadata": thought_metadata},
+            sort_keys=True,
+            separators=(",", ":"),
+            ensure_ascii=True,
+            allow_nan=False,
+        ).encode()
+    ).hexdigest()
+    if pair_metadata.get("thought_source_sha256") != source_sha256:
+        raise BoundaryAuthenticationError("thinking cell used another thought source")
+    source_fields = (
+        "stage1_parent_seed",
+        "seed_stage1",
+        "stage1_token_ids",
+        "retained_thinking_token_ids",
+        "stage1_finish_reason",
+        "stage1_stop_reason",
+        "stage1_cumulative_logprob",
+        "stage1_logprobs",
+        "n_terminal_tokens_trimmed",
+        "n_tokens_discarded_after_close",
+    )
+    for pair_row, thought_row in zip(pair_rows, thought_rows, strict=True):
+        if not isinstance(pair_row, dict) or not isinstance(thought_row, dict):
+            raise BoundaryAuthenticationError("thought-reuse row identity changed")
+        pair_outputs = pair_row.get("outputs")
+        thought_outputs = thought_row.get("outputs")
+        if (
+            pair_row.get("id") != thought_row.get("id")
+            or pair_row.get("meta") != thought_row.get("meta")
+            or not isinstance(pair_outputs, list)
+            or len(pair_outputs) != 2
+            or not isinstance(thought_outputs, list)
+            or len(thought_outputs) != 1
+        ):
+            raise BoundaryAuthenticationError("thought-reuse row identity changed")
+        source = thought_outputs[0]
+        if not isinstance(source, dict) or any(
+            not isinstance(output, dict)
+            or any(output.get(field) != source.get(field) for field in source_fields)
+            for output in pair_outputs
+        ):
+            raise BoundaryAuthenticationError(
+                "thinking continuation differs from persisted thought"
+            )
+
+
+def authenticate_bundle_engine_preflight(
+    bundle: Mapping[str, Any], live_preflight: Mapping[str, Any]
+) -> None:
+    """Bind a runner sidecar to the engine/runtime attested before generation."""
+    metadata = bundle.get("runner_metadata")
+    preflight_runtime = live_preflight.get("runtime")
+    bundle_runtime = metadata.get("runtime") if isinstance(metadata, dict) else None
+    if (
+        not isinstance(metadata, dict)
+        or not isinstance(preflight_runtime, dict)
+        or not isinstance(bundle_runtime, dict)
+        or set(preflight_runtime) != RUNTIME_METADATA_KEYS
+        or set(bundle_runtime) != RUNTIME_METADATA_KEYS
+        or metadata.get("engine") != live_preflight.get("engine")
+        or canonical_sha256(metadata.get("engine_args"))
+        != live_preflight.get("engine_args_sha256")
+        or metadata.get("resolved_cudagraph")
+        != live_preflight.get("resolved_cudagraph")
+        or metadata.get("resolved_logprobs_mode")
+        != live_preflight.get("resolved_logprobs_mode")
+    ):
+        raise BoundaryAuthenticationError("bundle differs from live engine preflight")
+    stable_keys = RUNTIME_METADATA_KEYS - {"git_dirty"}
+    if any(
+        bundle_runtime.get(key) != preflight_runtime.get(key) for key in stable_keys
+    ):
+        raise BoundaryAuthenticationError("bundle differs from live runtime preflight")
+
+
 def score_calibration_bundles(
     bundles: Mapping[str, Mapping[str, Any]],
     *,
     inputs: CalibrationInputs,
     tokenizer: Any,
+    live_preflight: Mapping[str, Any],
 ) -> dict[str, Any]:
     if set(bundles) != set(INVOCATION_ORDER):
         raise BoundaryAuthenticationError("calibration bundle inventory changed")
+    for bundle in bundles.values():
+        authenticate_bundle_engine_preflight(bundle, live_preflight)
     thought = authenticate_thought_bundle(
         bundles["calibration_thoughts"], inputs=inputs, tokenizer=tokenizer
     )
@@ -670,6 +781,10 @@ def score_calibration_bundles(
             != thought["source_sha256"]
         ):
             raise BoundaryAuthenticationError("thinking cell used another thought source")
+        if thinking_policy == "think512":
+            authenticate_pair_thought_reuse(
+                bundle, bundles["calibration_thoughts"]
+            )
         condition = receipt["condition"]
         condition_receipts[condition] = receipt
         for boundary, metrics in receipt["cells"].items():
@@ -757,7 +872,10 @@ def calibration_decision_value(
     }
     try:
         scored = score_calibration_bundles(
-            bundles, inputs=inputs, tokenizer=tokenizer
+            bundles,
+            inputs=inputs,
+            tokenizer=tokenizer,
+            live_preflight=read_canonical(live_preflight_path),
         )
     except BoundaryAuthenticationError as error:
         scored = {
