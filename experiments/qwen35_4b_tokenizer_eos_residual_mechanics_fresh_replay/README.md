@@ -1,6 +1,6 @@
 # Qwen3.5-4B Tokenizer-EOS Residual Mechanics Fresh Replay
 
-**Status:** in-progress · since 2026-07-14 · fresh calibration qualified tokenizer-EOS/no-think/`PROGRAM:`; calibration publication CI, mechanics lock, and mechanics calls remain
+**Status:** in-progress · since 2026-07-14 · fresh calibration qualified tokenizer-EOS/no-think/`PROGRAM:`; mechanics lock minted with zero prior mechanics calls and awaiting exact lock-commit CI
 
 This fresh-identity successor preserves the parent's qualified tokenizer-EOS
 interface and frozen residual-mechanics science while separating initial
@@ -170,8 +170,16 @@ boundary pairs / 384 answer requests. Decision SHA-256 is
 The fixed tokenizer-priority rule selected
 `tokenizer_eos_no_think_program_slot`. This is interface qualification, not a
 capability claim. Calibration read no mechanics, hidden, or benchmark files.
-Its decision must be committed, pushed, and green before the separately
-reviewed winner-bound mechanics lock may be published.
+Calibration decision commit `3b5bcdfc` passed exact workflows `29337076993`
+and `29337076973`. The separately reviewed static mechanics launcher then
+minted the winner-bound mechanics lock with SHA-256
+`5ce13cfec79fca9faa91a3edfc7854751474774abce5f76ca3cd51732d780e2f`.
+It binds reviewed implementation `50fd804b`, release commit `3b5bcdfc`, the
+authenticated calibration decision, frozen mechanics code, exact five-arm
+sampling, and `tokenizer_eos_no_think_program_slot`. It records zero mechanics
+generation requests or sampled outputs before lock. No mechanics model call is
+authorized until this lock is committed, pushed, and green in both exact
+workflows.
 
 ## Interpretation
 

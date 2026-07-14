@@ -136,3 +136,18 @@ Created as a new experiment scaffold.
 - Calibration read no mechanics, hidden, qualification, confirmation, or
   benchmark file. Mechanics remains sealed until this decision is committed,
   pushed, green, and bound by the separately reviewed mechanics lock.
+
+## Mechanics implementation lock
+
+- Calibration decision commit `3b5bcdfc` passed exact workflows `29337076993`
+  and `29337076973` before mechanics lock construction.
+- Invoked the reviewed static mechanics launcher's model-free `lock` stage and
+  minted SHA-256
+  `5ce13cfec79fca9faa91a3edfc7854751474774abce5f76ca3cd51732d780e2f`.
+- The lock binds implementation `50fd804b`, release commit `3b5bcdfc`, the
+  authenticated calibration decision/lock, all frozen mechanics blobs, exact
+  transport/direct/control sampling, and selected interface
+  `tokenizer_eos_no_think_program_slot`.
+- It records zero experimental mechanics generation requests and sampled
+  outputs before lock. Mechanics remains sealed until this lock commit is
+  pushed and green in both exact workflows.

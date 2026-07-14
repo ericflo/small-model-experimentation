@@ -5,7 +5,8 @@
 No residual-capability result exists yet. Fresh construction passed every
 preregistered collision and balance gate, and the locked fresh calibration
 qualified the tokenizer-EOS/no-think/`PROGRAM:` interface. Mechanics and hidden
-scoring remain sealed.
+scoring remain sealed while the zero-call mechanics lock awaits exact-commit
+CI.
 
 ## Research Program Fit
 
@@ -54,6 +55,11 @@ Completed reruns authenticate tracked outputs without reading that key.
   selected `tokenizer_eos_no_think_program_slot`: both no-think tokenizer-EOS
   forms were 48/48, think512 forms were 34/48 and 26/48, and all HF-model-EOS
   controls were 0/48. This qualifies transport; it is not capability evidence.
+- After calibration decision commit `3b5bcdfc` passed both exact workflows,
+  the reviewed launcher minted mechanics lock `5ce13cfe...780e2f`. It binds
+  the qualified interface and five frozen mechanics arms and records zero
+  mechanics requests or sampled outputs. Mechanics stays unauthorized until
+  the lock commit itself passes exact CI.
 
 ## Controls
 

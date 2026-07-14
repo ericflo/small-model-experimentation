@@ -16,7 +16,7 @@ reproducibility:
   tokenizer_receipt_command: ".venv-vllm/bin/python -B experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/scripts/tokenizer_receipt.py"
   parent_receipt_repair_command: "python3 experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/scripts/repair_parent_collision_receipts.py"
   calibration_command: "experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/scripts/calibration_launcher --stage run"
-  full_command: "unauthorized pending implementation review and release locks"
+  full_command: "experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/scripts/mechanics_launcher --stage run (authorized only after the mechanics-lock commit passes exact CI)"
   required_external_artifacts:
     - fresh_mechanics_gold_key
 notes: >-
