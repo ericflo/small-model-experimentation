@@ -128,6 +128,12 @@ PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B \
 Only the pinned tokenizer receipt command is authorized. Model, GPU, training,
 evaluation, Jacobian, and benchmark commands remain forbidden.
 
+The authorized receipt passed: correct reflection, shuffled reflection, and auxiliary
+plan-label arms each have exactly 77,020 prompt tokens, 5,164 target tokens, and
+82,184 forward tokens, with parity in every optimizer group. The external receipt
+SHA-256 is `ddaddd0f7af8a97802ab8f4cfde6c480ef60c94dc74a5c3577dd9db674432079`;
+it records zero model calls, GPU events, and benchmark reads.
+
 ## Results
 
 The repaired full model-free construction deterministically creates 576 depth-three

@@ -79,3 +79,12 @@
   incomplete stage/adapter/runtime lineage, and absent live KV-capacity preflight.
   Enabled only `authorization.tokenizer`; every model/GPU/training/evaluation/J/benchmark
   flag remains false.
+- Published tokenizer-only authorization commit
+  `334d11a23b516147cb25007b6db0b6b826fd350e`; Validate Repository `29349549100`
+  and Publish Research Site `29349549237` both completed successfully.
+- Ran the sole authorized tokenizer receipt. It passed with Qwen2Tokenizer EOS 248046,
+  receipt SHA-256 `ddaddd0f7af8a97802ab8f4cfde6c480ef60c94dc74a5c3577dd9db674432079`,
+  row hash `5da1f43812d7fd2c3fb50976aba3a557e65f771d6506481499458fe26d305ca8`,
+  and zero model/GPU/benchmark events. Correct reflection, shuffled reflection, and
+  auxiliary plan-label arms each have exactly 77,020 prompt, 5,164 target, and 82,184
+  forward tokens; all 12 optimizer groups match correct versus shuffled.

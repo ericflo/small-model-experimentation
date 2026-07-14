@@ -1,6 +1,16 @@
 schema_version: 1
 experiment_id: "qwen35_4b_counterfactual_plan_reflection_transfer"
-external_artifacts: []
+external_artifacts:
+  - name: "tokenizer and target-mask parity receipt"
+    storage: "large_artifacts/qwen35_4b_counterfactual_plan_reflection_transfer/tokenizer_receipt.json"
+    status: "produced after clean PASS_TOKENIZER_ONLY review"
+    required_for: "any future training, if the full implementation later passes review"
+    size_bytes: 470960
+    checksum: "sha256:ddaddd0f7af8a97802ab8f4cfde6c480ef60c94dc74a5c3577dd9db674432079"
+    regenerate: >-
+      PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B
+      experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/tokenizer_receipt.py
+      --output large_artifacts/qwen35_4b_counterfactual_plan_reflection_transfer/tokenizer_receipt.json
 omitted_artifacts:
   - path: large_artifacts/qwen35_4b_counterfactual_plan_reflection_transfer/
     reason: future adapters, checkpoints, and large activation/Jacobian arrays are gitignored
@@ -11,11 +21,13 @@ reproducibility:
   full_command: >-
     PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B
     experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/run.py --construct
-  required_external_artifacts: []
+  required_external_artifacts:
+    - "large_artifacts/qwen35_4b_counterfactual_plan_reflection_transfer/tokenizer_receipt.json"
 notes: >-
   Full CPU construction and the tokenizer-only receipt are authorized, but all model,
   GPU, training, evaluation, J-space, and benchmark work remains on adversarial HOLD.
   Qwen/Qwen3.5-4B revision 851bf6e8...d0a is the sole permitted future
   model. Reserved construction/shuffle/schedule/retention/training/evaluation seeds
-  are committed in configs/default.yaml. No tokenizer receipt has run yet; no adapter,
-  model output, activation, Jacobian, capability, benchmark, or hidden artifact exists.
+  are committed in configs/default.yaml. The tokenizer receipt records exact three-arm
+  token parity with zero model/GPU/benchmark events. No adapter, model output,
+  activation, Jacobian, capability, benchmark, or hidden artifact exists.
