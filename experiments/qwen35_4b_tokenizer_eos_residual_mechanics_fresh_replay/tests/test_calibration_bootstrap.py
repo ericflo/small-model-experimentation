@@ -15,6 +15,25 @@ EXP = Path(__file__).resolve().parents[1]
 
 
 class CalibrationBootstrapTests(unittest.TestCase):
+    def test_review_report_is_scaffolded_in_the_critical_inventory(self) -> None:
+        report = EXP / "reports/calibration_implementation_review.md"
+        relative = str(report.relative_to(EXP.parents[1]))
+        self.assertTrue(report.is_file())
+        self.assertIn(
+            "`HOLD_IMPLEMENTATION`",
+            report.read_text(),
+        )
+        source = (EXP / "scripts/run_calibration.py").read_text()
+        self.assertIn("reports/calibration_implementation_review.md", source)
+        tracked = subprocess.run(
+            ["git", "ls-files", "--error-unmatch", "--", relative],
+            cwd=EXP.parents[1],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        self.assertEqual(tracked.returncode, 0)
+
     def test_static_launcher_is_reproducible_and_has_no_elf_interpreter(self) -> None:
         source = EXP / "scripts/calibration_launcher.S"
         launcher = EXP / "scripts/calibration_launcher"

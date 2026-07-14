@@ -1,6 +1,6 @@
 # Qwen3.5-4B Tokenizer-EOS Residual Mechanics Fresh Replay
 
-**Status:** in-progress · since 2026-07-14 · `CONSTRUCTION_PASS`; repaired implementation candidate 146/146, fresh adversarial review, locks, and all model calls remain
+**Status:** in-progress · since 2026-07-14 · `CONSTRUCTION_PASS`; repaired implementation candidate 147/147, fresh adversarial review, locks, and all model calls remain
 
 This fresh-identity successor preserves the parent's qualified tokenizer-EOS
 interface and frozen residual-mechanics science while separating initial
@@ -117,7 +117,7 @@ chain is recorded in `runs/construction/parent_collision_receipt_repair.json`:
 The earlier hashes beginning `72fa`, `7e1f`, `41c7`, and `da57` are retained
 inside that migration receipt as superseded administrative bindings.
 
-The repaired model-free implementation candidate passes 146/146 tests. Its production
+The repaired model-free implementation candidate passes 147/147 tests. Its production
 path now has distinct APIs for initial transport authorization and historical
 transport replay. Initial authorization requires every later invocation to be
 absent; historical replay first authenticates the complete five-invocation
@@ -133,6 +133,12 @@ The independent review of exact commit `98e9e9f6` returned
 reauthentication defects. Those findings are repaired here, but that verdict
 does not transfer: a fresh independent review of the new exact pushed-green
 commit is still required before any lock or model call.
+
+A release-path audit also found that the calibration critical inventory named
+an implementation-review report that had never been scaffolded in the
+successor. A tracked `HOLD_IMPLEMENTATION` placeholder and regression test now
+ensure the exact reviewed commit contains that required path; the placeholder
+cannot authorize a lock.
 
 ## Interpretation
 

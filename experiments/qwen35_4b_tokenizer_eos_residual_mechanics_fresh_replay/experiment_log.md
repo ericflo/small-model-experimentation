@@ -76,6 +76,13 @@ Created as a new experiment scaffold.
   reauthentication for both initial and historical replay. Regression probes
   now reject nested integer-to-Boolean mutation, descendant injection, and
   complete-chain mutation.
-- The repaired model-free suite is 146/146. The prior HOLD remains controlling
+- The repaired model-free suite was 146/146. The prior HOLD remains controlling
   until a fresh independent review passes the new exact pushed-green commit;
   no lock, model, GPU, or hidden access is authorized.
+- A dry audit of lock publication then found a successor-scaffolding omission:
+  the calibration critical inventory required
+  `reports/calibration_implementation_review.md`, but the path did not exist in
+  the candidate commit. Added a tracked non-authorizing HOLD placeholder and a
+  test that requires it to exist, remain in the bootstrap inventory, and be
+  Git-tracked. The suite is now 147/147; review of the superseded commit was
+  stopped and must restart on the next pushed-green SHA.

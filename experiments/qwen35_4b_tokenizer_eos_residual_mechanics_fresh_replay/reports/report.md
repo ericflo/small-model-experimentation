@@ -27,7 +27,7 @@ Completed reruns authenticate tracked outputs without reading that key.
   rows.
 - Zero model calls, sampled outputs, protected reads, benchmark reads, and
   parent sampled-bundle reads.
-- The repaired implementation candidate passes 146/146 model-free tests, including an
+- The repaired implementation candidate passes 147/147 model-free tests, including an
   unmocked complete production lifecycle through visible selection and exact
   rejection of initial transport replay after descendants exist. It also
   rejects nested Boolean/integer aliases, descendant creation during initial
@@ -38,6 +38,9 @@ Completed reruns authenticate tracked outputs without reading that key.
   bundles, or benchmarks.
 - Exact commit `98e9e9f6` remains under `HOLD_IMPLEMENTATION`; repaired bytes
   require a new exact-commit independent review before release.
+- The calibration review report is now pre-scaffolded as a tracked,
+  non-authorizing HOLD artifact because the lock's reviewed critical inventory
+  requires that path to exist in the implementation commit.
 
 ## Controls
 

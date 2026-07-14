@@ -87,7 +87,10 @@ and reconstructs the parent collision inventory under an exact eight-file
 repository read firewall. Its outcome-blind receipt migration proves every
 non-administrative collision field unchanged and records zero protected or
 model access. Regression tests cover all three mutations; the full model-free
-suite is 146/146.
+suite is 147/147. The reviewed calibration critical inventory also now includes
+a tracked non-authorizing review-report placeholder; without that preexisting
+path, a later PASS receipt could not have constructed the frozen lock
+inventory.
 
 The prior HOLD remains controlling until these new bytes are committed,
 pushed, green in exact-commit CI, and independently reviewed again. Model/GPU,
