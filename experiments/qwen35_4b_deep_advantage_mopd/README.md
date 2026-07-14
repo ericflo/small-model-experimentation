@@ -1,13 +1,13 @@
 # Qwen3.5-4B Deep-Advantage MOPD
 
-**Status:** in-progress · since 2026-07-12 · Fresh deep qualification, exact-logit locality, and seed-42/43 four-round integrations pass; seed 44 and controls remain.
+**Status:** in-progress · since 2026-07-12 · Fresh deep qualification, exact-logit locality, and all three four-round integrations pass; controls remain.
 
 ## Status
 
 **Fresh deep qualification passes on both untouched blocks, the frozen
-five-update MOPD pilot passes exact-logit locality, and seeds 42 and 43 each
-complete all four integration rounds. No procedural performance result exists
-yet.** This is a new result-bearing successor to
+five-update MOPD pilot passes exact-logit locality, and seeds 42, 43, and 44
+each complete all four integration rounds. No procedural performance result
+exists yet.** This is a new result-bearing successor to
 `qwen35_4b_same_prefix_advantage_routing`, not an extension of its terminal
 result.
 

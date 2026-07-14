@@ -4,8 +4,8 @@
 
 The preregistered CPU/scientific smoke, pinned-model preflight, installation
 canary, fresh route qualification, five-update exact-logit locality pilot, and
-seed-42/43 four-round integrations all pass. Seed 44, matched controls, and the
-sealed capability comparison have not run yet.
+all three four-round integrations pass. Matched controls and the sealed
+capability comparison have not run yet.
 
 ## Research Program Fit
 
@@ -82,6 +82,26 @@ Probe entropy contracted `12.49%`/`9.54%`/`10.66%`/`13.11%`, repeating the
 same collapse-risk warning. The independent four-round provenance audit passes.
 This establishes optimizer-seed/route-supply robustness only; it is not a
 deployed capability result.
+
+Seed 44 independently completed all four rounds. Deep-route supply was
+`90`/`82`/`69`/`65`; rounds 0 and 1 used three candidate batches and rounds 2
+and 3 used two. Mean corrected losses were
+`0.05674`/`0.05561`/`0.04284`/`0.05147`; every round reduced held-probe mean
+loss and increased top-50 overlap. Round-3 probe loss improved
+`0.05601→0.02952` and overlap `0.82982→0.83459`. Its terminal merge receipt
+is `33ae673db2abda3bfee69f311f5d5d5b8e1bda29fb2c1b286b3adbe514d4ba00`.
+Probe entropy contracted `11.05%`/`9.53%`/`10.62%`/`7.55%`; rounds 0 and 2
+therefore repeat the non-gating collapse-risk warning. The independent
+four-round provenance audit passes with integration-receipt hash
+`ff329ebccdc888689b6d6c985a558e66a2385aaa701babf8724d61444428bf1f`.
+
+Together, the three frozen optimizer seeds establish that the registered
+four-round update can complete safely and that strict-deep route supply
+persists on fresh seed-local states after the shared round-0 block. They do not
+establish capability gain, causal advantage routing, superiority to any
+source, router, control, parameter soup, or sample-more baseline, retention,
+transfer, or composability. Those questions remain reserved for the sealed
+confirmation.
 
 The valid interpretation-only NF4/bf16 diagnostic further weakens any inference
 from trainer-side improvement. Across 32 fixed consumed units and 7,970 target

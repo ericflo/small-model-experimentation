@@ -273,3 +273,30 @@
   This supports replication of route supply and optimizer stability only. It
   is not evidence of deployed capability gain; seed 44 and sealed comparison
   remain mandatory.
+
+## 2026-07-14 — seed-44 four-round integration passes
+
+- Seed 44 completed all four frozen integration rounds. Deep-route supply was
+  `90`/`82`/`69`/`65`; rounds 0 and 1 required three candidate batches and
+  rounds 2 and 3 required two. Every round froze 60 deep capability units, 20
+  soup anchors, and 60 disjoint controls. Control matching was
+  `57/3`, `56/3/1`, `57/3`, and `54/6` across exact-cell/family-kind/
+  kind-level tiers respectively.
+- All four rounds completed 20/20 consume-once updates with mean corrected
+  losses `0.05674`/`0.05561`/`0.04284`/`0.05147`. Held-probe loss improved in
+  every round: `0.08318→0.04540`, `0.05051→0.02258`,
+  `0.06825→0.04500`, and `0.05601→0.02952`. Top-50 overlap also increased in
+  every round.
+- Probe entropy contracted `11.05%`/`9.53%`/`10.62%`/`7.55%`. The registered
+  full-round gate still passes, but the round-0 and round-2 contractions retain
+  the material non-gating collapse-risk warning; no post-hoc stop is added.
+- The terminal merge receipt is
+  `33ae673db2abda3bfee69f311f5d5d5b8e1bda29fb2c1b286b3adbe514d4ba00`.
+  The independent manifest→cache→trainer→adapter→merge audit passes across
+  all four rounds; the tracked integration receipt hash is
+  `ff329ebccdc888689b6d6c985a558e66a2385aaa701babf8724d61444428bf1f`.
+- Three optimizer seeds now establish safe completion of the registered update
+  and replicated fresh strict-deep route supply after round 0. They do not
+  establish capability gain, causal routing, superiority to any comparison,
+  retention, transfer, or composability; sealed confirmation remains
+  mandatory.

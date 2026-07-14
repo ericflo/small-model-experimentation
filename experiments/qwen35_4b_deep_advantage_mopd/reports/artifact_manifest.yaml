@@ -26,6 +26,7 @@ external_artifacts:
       locality merge receipt 4ded904faca298dc91abf8e6f43e6aa2040e0cb7786116644504826d17775200;
       seed-42 terminal merge receipt 88512a57ebb190f0392118a30258eee5fb3bc58d5d34ae04e384afc8842f9122;
       seed-43 terminal merge receipt 4af497550de22d9bbafdd9de97dd95eabeb6b16b6fa9a7516bf78c4c719d6ecf;
+      seed-44 terminal merge receipt 33ae673db2abda3bfee69f311f5d5d5b8e1bda29fb2c1b286b3adbe514d4ba00;
       later artifacts remain bound by their per-artifact receipts.
     regenerate: >-
       Run verify-student, route-qualify, locality, three integrate seeds,
