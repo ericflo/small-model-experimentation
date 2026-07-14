@@ -42,7 +42,7 @@ from mechanics_stage import (
     mechanics_sampling_plan,
     selected_interface,
 )
-from mechanics_transactions import exact_json_equal
+from mechanics_transactions import exact_json_equal, json_native
 from transactions import (
     MODEL_ID,
     MODEL_REVISION,
@@ -225,12 +225,14 @@ def _authenticate_calibration_decision(
     *, inputs: CalibrationInputs, tokenizer: Any
 ) -> dict[str, Any]:
     observed = read_canonical(CALIBRATION_DECISION)
-    expected = calibration_decision_value(
-        inputs=inputs,
-        raw_dir=CALIBRATION_DECISION.parent / "raw",
-        tokenizer=tokenizer,
+    expected = json_native(
+        calibration_decision_value(
+            inputs=inputs,
+            raw_dir=CALIBRATION_DECISION.parent / "raw",
+            tokenizer=tokenizer,
+        )
     )
-    if observed != expected:
+    if not exact_json_equal(observed, expected):
         raise RuntimeError("calibration decision differs from exact authentication")
     selected_interface(observed, inputs)
     return observed

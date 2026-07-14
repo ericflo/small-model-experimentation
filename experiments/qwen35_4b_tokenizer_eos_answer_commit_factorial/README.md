@@ -1,6 +1,6 @@
 # Qwen3.5-4B Tokenizer-EOS Answer Commit Factorial
 
-**Status:** in-progress · since 2026-07-14 · `PASS_DESIGN` + calibration `PASS_IMPLEMENTATION`; fresh calibration: tokenizer-EOS-only interface qualified; conditional-mechanics `PASS_IMPLEMENTATION` at exact reviewed commit, review-receipt release pending
+**Status:** in-progress · since 2026-07-14 · `PASS_DESIGN` + calibration `PASS_IMPLEMENTATION`; fresh calibration: tokenizer-EOS-only interface qualified; post-PASS mechanics lock-entry mismatch repaired, exact-commit rereview pending
 
 This fresh successor tests whether the prior strict answer-seam failure was
 caused by waiting past Qwen3.5's tokenizer chat-end token. It registers the
@@ -308,6 +308,19 @@ protected-read arrays and model/GPU counters were zero. The hash-bound review
 report and canonical receipt must now be committed, pushed, and green before
 the mechanics lock can be published; this PASS alone does not authorize a
 model call.
+
+After that receipt was published green, the first lock-only invocation failed
+closed before creating a lock: calibration decision recomputation retained a
+tuple-valued in-memory field while the already-published canonical JSON receipt
+contained the corresponding list. The lock compared across that serialization
+boundary without first entering the JSON domain. The prospective mechanics
+verifier now JSON-normalizes the recomputation and then applies recursive exact-
+typed comparison, preserving rejection of Boolean/integer aliases. A direct
+model-free recomputation now authenticates the frozen
+`TOKENIZER_EOS_ONLY_INTERFACE_QUALIFIED` decision and winner. No mechanics data,
+model, or GPU call occurred. Because this changes reviewed mechanics code, a
+fresh exact-commit implementation review and replacement receipt are required
+before retrying the lock. The model-free suite passes 140/140.
 
 ## Interpretation
 

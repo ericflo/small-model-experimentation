@@ -139,6 +139,17 @@
   immutable calibration, and routing checks all passed. Model/GPU calls and
   all protected-read inventories remained zero. The canonical hash-bound review
   receipt is still a separate release gate before the mechanics lock.
+- After the round-six report and receipt were committed, pushed, and green, the
+  lock-only launcher failed closed before writing a lock because the
+  recomputed calibration decision contained an in-memory tuple where its
+  canonical JSON receipt contained a list. No mechanics payload, model, or GPU
+  call occurred.
+- JSON-normalized the recomputed calibration decision before recursive exact-
+  typed comparison, retaining Boolean/integer rejection. The actual frozen
+  decision now reauthenticates model-free. This reviewed-code change invalidates
+  the earlier release for lock purposes; a fresh exact-SHA rereview and updated
+  canonical receipt are required before another lock attempt. The suite passes
+  140/140.
 
 ## Scaffold
 

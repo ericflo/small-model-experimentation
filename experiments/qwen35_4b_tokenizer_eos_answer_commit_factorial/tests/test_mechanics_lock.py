@@ -20,6 +20,38 @@ from transactions import json_bytes, read_canonical  # noqa: E402
 
 
 class MechanicsLockTests(unittest.TestCase):
+    def test_calibration_decision_authentication_normalizes_json_boundary(self) -> None:
+        observed = {
+            "schema_version": 1,
+            "nested": {"tuple_field": [1, 2], "exact_bool": False},
+        }
+        expected = {
+            "schema_version": 1,
+            "nested": {"tuple_field": (1, 2), "exact_bool": False},
+        }
+        with mock.patch.object(
+            mechanics_lock, "read_canonical", return_value=observed
+        ), mock.patch.object(
+            mechanics_lock, "calibration_decision_value", return_value=expected
+        ), mock.patch.object(mechanics_lock, "selected_interface"):
+            self.assertEqual(
+                mechanics_lock._authenticate_calibration_decision(
+                    inputs=object(), tokenizer=object()
+                ),
+                observed,
+            )
+        forged = copy.deepcopy(observed)
+        forged["schema_version"] = True
+        with mock.patch.object(
+            mechanics_lock, "read_canonical", return_value=forged
+        ), mock.patch.object(
+            mechanics_lock, "calibration_decision_value", return_value=expected
+        ), mock.patch.object(mechanics_lock, "selected_interface"):
+            with self.assertRaisesRegex(RuntimeError, "exact authentication"):
+                mechanics_lock._authenticate_calibration_decision(
+                    inputs=object(), tokenizer=object()
+                )
+
     def test_calibration_verifier_adapter_uses_real_signature_and_restores_git(self) -> None:
         original_git = mechanics_lock.calibration_authority._git
 
