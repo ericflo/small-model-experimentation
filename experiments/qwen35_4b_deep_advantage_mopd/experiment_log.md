@@ -462,3 +462,16 @@
   replay suite. Attempt 1 remains terminal and no archived byte will be reused.
   A fresh no-clobber authorization/admission, bound to this corrected source
   inventory, is required before any GPU rerun.
+
+## 2026-07-14 — frozen recovery-review placement corrected
+
+- The first fresh authorization request stopped immediately, before model
+  hashing or output publication, because the post-quarantine review had been
+  appended to preregistered `reports/design_review.md`. The frozen-design audit
+  correctly rejected its changed hash; no authorization file was created.
+- The original design review is restored byte-for-byte at its registered hash
+  `cdeaad5b7bb363d0d650af6080d2d0be6c41d0873328e810965d017da271dd5b`.
+  The operational analysis now lives in the additive, non-frozen
+  `reports/confirmation_recovery_review.md`.
+- Repository checks pass after the correction. This was a pre-authorization
+  evidence-pipeline stop and changes neither design nor result.
