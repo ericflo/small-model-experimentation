@@ -7,10 +7,10 @@ external_artifacts:
     required_for: "common warm start"
     checksum: "weights c296c774d20403c7de9c810bfa825dbbe22bd0683c37692a929bd2bb13e3d36a; config 6b91df7d16d9a306ca3f04d84b4f9397394c12062112ce84a8198fe47e39e4d6"
     regenerate: ".venv/bin/python experiments/qwen35_4b_universal_replay_anchor/scripts/run.py --stage train-control"
-  - name: "replay_repeat adapter (planned)"
+  - name: "replay_repeat adapter"
     storage: "large_artifacts/qwen35_4b_universal_mid_density_token_match/adapters/replay_repeat"
     required_for: "exact-token mechanism control"
-    checksum: "pending training"
+    checksum: "weights 7db84c6313fbf479ec7d08334cfa41a1b4883c95a7a0215eb40b2059e55d2ac5; config 12943a035cdbe3cbded978903911fad6e135dddeb1872a1298371269ade3cd4f"
     regenerate: ".venv/bin/python experiments/qwen35_4b_universal_mid_density_token_match/scripts/run.py --stage train-control"
   - name: "designed160 adapter (planned)"
     storage: "large_artifacts/qwen35_4b_universal_mid_density_token_match/adapters/designed160"
@@ -41,5 +41,9 @@ reproducibility:
 notes: >-
   Checked-in source and derived data are bound by source_token_lengths.json,
   dose_manifest.json, and dose_token_receipt.json. All three arms have exactly
-  1,405,510 forward tokens and zero tokenizer skips. Update planned checksums after
-  each successful stage.
+  1,405,510 forward tokens and zero tokenizer skips. The replay_repeat training
+  receipt is runs/training/replay_repeat.json (SHA-256
+  950d30cd3a69ebe1957729e6da099913096f7eb2a2443585c4e25bed6c053eed) and its
+  normalized log is runs/training/replay_repeat.log (SHA-256
+  e8a72ef7fde6cdb7d3f642ffeb5e93755a8783f2c1bfe9feaf6f2b7c7a6c83f8).
+  Update the remaining planned checksums after each successful stage.

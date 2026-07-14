@@ -17,3 +17,20 @@
   quick@1,024 seed 78,135 before training.
 - Adversarial design review passed after the 320-row feasibility revision. No model
   training or new evaluation event has run.
+
+## 2026-07-13 — replay-only exact-token control training
+
+- Ran `scripts/run.py --stage train-control` from design commit `49e42f0b`.
+- The wrapper reauthenticated the replay-refresh parent, checked-in
+  `replay_repeat` bytes, and zero-skip token receipt before launching training.
+- Completed 190/190 optimizer steps over 1,520 rows with zero skips in 1,396.686
+  wall seconds. Final training loss was 0.4199.
+- Adapter weights: 169,903,320 bytes,
+  SHA-256 `7db84c6313fbf479ec7d08334cfa41a1b4883c95a7a0215eb40b2059e55d2ac5`.
+  Adapter config SHA-256:
+  `12943a035cdbe3cbded978903911fad6e135dddeb1872a1298371269ade3cd4f`.
+- Durable receipt: `runs/training/replay_repeat.json`, SHA-256
+  `950d30cd3a69ebe1957729e6da099913096f7eb2a2443585c4e25bed6c053eed`.
+  Normalized full log: `runs/training/replay_repeat.log`, SHA-256
+  `e8a72ef7fde6cdb7d3f642ffeb5e93755a8783f2c1bfe9feaf6f2b7c7a6c83f8`.
+- No local or benchmark evaluation was performed at this checkpoint.

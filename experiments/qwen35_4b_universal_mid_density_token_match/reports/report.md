@@ -21,7 +21,10 @@ and B, and `designed240` replaces A, B, and C. Every arm contains 1,520 rows,
 
 ## Results
 
-Pending. Construction, tokenization, smoke, and design review only.
+Training checkpoint only. The exact-token `replay_repeat` control completed 190/190
+updates over 1,520 rows with zero skips. Final training loss was 0.4199; wall time
+was 1,396.686 seconds. The designed arms, local screen, and paired benchmark remain
+pending, so no generalized-transfer comparison is available yet.
 
 ## Controls
 

@@ -1,6 +1,6 @@
 # Mid-Density Token-Matched Universal Curriculum
 
-**Status:** in-progress · since 2026-07-13 · training, fresh local gates, and conditional paired pilot remain
+**Status:** in-progress · since 2026-07-13 · replay control trained; designed arms, fresh local gates, and conditional paired pilot remain
 
 ## Research program
 
@@ -67,10 +67,12 @@ Smoke and staged run:
 
 ## Results
 
-Prepared, not run. Deterministic construction and tokenizer validation prove that all
-three arms have 1,520 rows, 1,405,510 forward tokens, 190 updates, zero skips, and
-position-aligned 0/160/240 substitutions. No model training or new evaluation event
-has run.
+Training checkpoint only. `replay_repeat` completed all 190 updates over the
+authenticated 1,520-row, 1,405,510-forward-token stream with zero skips. Final
+training loss was 0.4199 and its adapter weights hash is
+`7db84c6313fbf479ec7d08334cfa41a1b4883c95a7a0215eb40b2059e55d2ac5`.
+The designed arms, local screen, and new benchmark event have not run, so there is
+no transfer result yet.
 
 ## Interpretation
 
