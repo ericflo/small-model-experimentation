@@ -1,6 +1,6 @@
 # State-Formation Branch Handoff Recovery
 
-**Status:** in-progress · since 2026-07-14 · all three full-rank G0/control pairs pass; publish the complete setup matrix before Stage-B training
+**Status:** finished
 
 This operational successor lets immutable producer v11 continue after the first branch recovery
 successfully replaces the retired failed-G0 receipt at its canonical path. It changes no scientific

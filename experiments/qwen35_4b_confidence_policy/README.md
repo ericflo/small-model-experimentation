@@ -1,6 +1,6 @@
 # Qwen3.5-4B: The Compute-Optimal Confidence Policy (select + abstain + escalate)
 
-**Status:** in-progress · since 2026-07-13 · powering up the escalation subset n and a menagerie-arbitrated deployment check (C57 next-tests)
+**Status:** finished
 
 The confidence arc established three levers in isolation: confidence-select beats
 majority vote (C41), the single-token P(True) judge beats sequence mean-logprob

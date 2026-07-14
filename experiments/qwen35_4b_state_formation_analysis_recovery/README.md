@@ -1,6 +1,6 @@
 # State-Formation Analysis Recovery
 
-**Status:** in-progress · since 2026-07-13 · recovered `lora_joint` analysis complete; producer verdict `LORA_JOINT_MISS_CONTROLS_REQUIRED` mandates Stage B
+**Status:** finished
 
 This experiment recovers the exact frozen v11 state-formation analyzer through one source-bound
 path seam, without changing any LoRA/full-rank scientific logic or inspecting a result value.
