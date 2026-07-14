@@ -1,6 +1,6 @@
 # Natural-Language State-Table Universal Curriculum
 
-**Status:** in-progress · since 2026-07-14 · design frozen; control training awaits a pushed-green checkpoint
+**Status:** in-progress · since 2026-07-14 · replay control trained; candidate awaits this pushed-green checkpoint
 
 This result-separated successor tests whether truth-audited, variable-depth
 natural-language state tables plus independent hypothesis scoring and a short
@@ -76,8 +76,13 @@ CPU construction produced 80 truth-audited rows: 20 each execute, score, repair,
 commit. All 80 answers recompute from executable state; all score rows evaluate three
 hypotheses on five probes; correct hypothesis position is balanced 7/7/6. Exact-token
 materialization succeeded at 320 rows, 286,814 tokens, zero skips, and 200 aligned
-replay positions per arm. The frozen smoke passes 48 tests. No model result, merge,
-local capability event, or benchmark event exists.
+replay positions per arm. The frozen smoke passes 48 tests. The active replay control
+then trained from the authenticated parent for all 40 steps over all 320 rows with
+zero skips and final loss 0.4226. Its adapter weights/config hashes are
+`83a741e4...409a` / `13838f2e...843`; receipt/log hashes are
+`b05dc72e...e99a` / `5f4d1fe3...60ba`. Training loss is operational evidence only;
+no candidate, capability result, merge, local capability event, or benchmark event
+exists.
 
 ## Interpretation
 
@@ -98,6 +103,8 @@ ablation separates the pieces.
 - `configs/default.yaml`
 - `data/design_receipt.json`
 - `data/stream_token_receipt.json`
+- `runs/training/replay_after_close.json`
+- `runs/training/replay_after_close.log`
 - `scripts/run.py`
 - `reports/design_review.md`
 - `reports/preregistration.md`

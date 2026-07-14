@@ -7,6 +7,11 @@ external_artifacts:
     required_for: "frozen common warm start"
     checksum: "weights 16e9dc75a0e33e182e916600ff6e1d75fc46dfa45e870216e2c149a41253c179; config de953bd57502ff728a12d1627d5aacab6284b045428ec7b83026388afd8c47ff"
     regenerate: ".venv/bin/python experiments/qwen35_4b_universal_close_weight_token_match/scripts/run.py --stage train-close"
+  - name: "replay_after_close adapter"
+    storage: "large_artifacts/qwen35_4b_universal_state_table_compiler_token_match/adapters/replay_after_close"
+    required_for: "fresh paired local control and conditional explicit merge"
+    checksum: "weights 83a741e449a6a52fd2e11c556fb539499013bd85c5005415454a72b1e8cb409a; config 13838f2ea656a723ad516b5bde826a015846a1b5c5de2dfc12e5fc5c9c462843"
+    regenerate: ".venv/bin/python experiments/qwen35_4b_universal_state_table_compiler_token_match/scripts/run.py --stage train-control"
 omitted_artifacts:
   - path: "large_artifacts/qwen35_4b_universal_state_table_compiler_token_match/"
     reason: "future adapters and merged checkpoints are large and gitignored"
@@ -15,10 +20,14 @@ reproducibility:
   full_command: "run.py --stage train-control; commit/push/verify; --stage train-candidate; commit/push/verify; --stage local; commit/push/verify; conditionally --stage merge; commit/push/verify; conditionally --stage benchmark"
   required_external_artifacts:
     - "large_artifacts/qwen35_4b_universal_close_weight_token_match/adapters/close_xi"
+    - "large_artifacts/qwen35_4b_universal_state_table_compiler_token_match/adapters/replay_after_close"
 notes: >-
   Design frozen. Model Qwen/Qwen3.5-4B revision 851bf6e8...d0a; parent weights/config
   16e9dc75...c179 / de953bd5...7ff. Construction/training/local/conditional aggregate
   seeds are 77112/46/88008/78138. Source a7b453af...e88bb produced replay/candidate
   streams 2727e29a...a2b5 / 8e1b8fdc...1355, each 320 rows and 286814 forward
   tokens with zero skips under token/design receipts 163e40a6...f0b8 /
-  0bac3340...ef837. No adapter, capability, merge, or benchmark receipt exists.
+  0bac3340...ef837. Replay control training completed at git e21aa1bb with receipt
+  b05dc72e...e99a, log 5f4d1fe3...60ba, loss 0.4226, 40 steps, and zero skips.
+  Its external weights/config hashes are 83a741e4...409a / 13838f2e...843. No
+  candidate, capability, merge, or benchmark receipt exists.

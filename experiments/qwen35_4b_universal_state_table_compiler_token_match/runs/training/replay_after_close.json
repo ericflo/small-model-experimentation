@@ -1,0 +1,80 @@
+{
+  "adapter": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_state_table_compiler_token_match/adapters/replay_after_close",
+  "adapter_config_sha256": "13838f2ea656a723ad516b5bde826a015846a1b5c5de2dfc12e5fc5c9c462843",
+  "adapter_size_bytes": 169903320,
+  "adapter_weights_sha256": "83a741e449a6a52fd2e11c556fb539499013bd85c5005415454a72b1e8cb409a",
+  "command": [
+    "/home/ericflo/Development/small-model-experimentation/.venv/bin/python",
+    "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_universal_state_table_compiler_token_match/scripts/train_think.py",
+    "--train",
+    "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_universal_state_table_compiler_token_match/data/replay_after_close.jsonl",
+    "--out",
+    "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_state_table_compiler_token_match/adapters/replay_after_close",
+    "--epochs",
+    "1.0",
+    "--lr",
+    "1e-05",
+    "--rank",
+    "32",
+    "--alpha",
+    "64",
+    "--batch-size",
+    "1",
+    "--grad-accum",
+    "8",
+    "--max-length",
+    "4096",
+    "--w-think",
+    "0.2",
+    "--w-close",
+    "0.2",
+    "--seed",
+    "46",
+    "--warm-start",
+    "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_close_weight_token_match/adapters/close_xi"
+  ],
+  "datasets": [
+    {
+      "path": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_universal_state_table_compiler_token_match/data/replay_after_close.jsonl",
+      "rows": 320,
+      "sha256": "2727e29a7c18e551ed9defe21b7f4e4009c7e6399ac1b2376deb7a4c609ba2b5"
+    }
+  ],
+  "experiment_id": "qwen35_4b_universal_state_table_compiler_token_match",
+  "git_head": "e21aa1bbc4b0a002aa17246c61f4ff714c372ed5",
+  "git_status": "?? experiments/qwen35_4b_universal_state_table_compiler_token_match/runs/",
+  "hyperparameters": {
+    "alpha": 64,
+    "batch_size": 1,
+    "epochs": 1.0,
+    "grad_accum": 8,
+    "lr": 1e-05,
+    "max_length": 4096,
+    "rank": 32,
+    "seed": 46,
+    "w_close": 0.2,
+    "w_think": 0.2
+  },
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "name": "replay_after_close",
+  "packages": {
+    "accelerate": "1.14.0",
+    "bitsandbytes": "0.49.2",
+    "peft": "0.19.1",
+    "torch": "2.12.1",
+    "transformers": "5.12.1"
+  },
+  "schema_version": 1,
+  "skipped_rows": 0,
+  "token_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_universal_state_table_compiler_token_match/data/stream_token_receipt.json",
+  "token_receipt_sha256": "163e40a61d0b3f4dc541f56ea32510bacb8ce64f658e00f47e5867da4a45f0b8",
+  "train_loss": 0.4226,
+  "train_rows": 320,
+  "wall_seconds": 294.1257574229967,
+  "warm_start": {
+    "config_sha256": "de953bd57502ff728a12d1627d5aacab6284b045428ec7b83026388afd8c47ff",
+    "path": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_close_weight_token_match/adapters/close_xi",
+    "weights_sha256": "16e9dc75a0e33e182e916600ff6e1d75fc46dfa45e870216e2c149a41253c179"
+  }
+}

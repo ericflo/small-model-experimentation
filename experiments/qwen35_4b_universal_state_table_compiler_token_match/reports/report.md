@@ -2,9 +2,10 @@
 
 ## Summary
 
-The model-free design is frozen. This result-separated successor implements a
-truth-audited natural-language state-table and hypothesis-scoring curriculum after
-canonical staged search failed its fresh local gate. No capability result exists.
+The design is frozen and the exact-token replay control has trained successfully.
+This result-separated successor implements a truth-audited natural-language
+state-table and hypothesis-scoring curriculum after canonical staged search failed
+its fresh local gate. No capability result exists.
 
 ## Research Program Fit
 
@@ -24,15 +25,20 @@ zero skips, 40 updates, and 200 position-aligned identical replay rows.
 Construction source SHA-256 is `a7b453af...e88bb`; replay/candidate streams are
 `2727e29a...a2b5` / `8e1b8fdc...1355`; token and design receipts are
 `163e40a6...f0b8` / `0bac3340...ef837`. All truth audits recompute, all absolute gates
-are reachable, and 48 tests plus the frozen smoke pass. No model generation, training,
+are reachable, and 48 tests plus the frozen smoke pass. The replay control completed
+40/40 updates over 320 rows with zero skips, final loss 0.4226, and 294.1 wrapper wall
+seconds. Its 169,903,320-byte external adapter has weights/config hashes
+`83a741e4...409a` / `13838f2e...843`; the preserved receipt/log hashes are
+`b05dc72e...e99a` / `5f4d1fe3...60ba`. No candidate training, model generation,
 merge, local evaluation, or benchmark event has run.
 
 ## Controls
 
-The required active control is an independent same-parent replay continuation matched
-on exact forward tokens, optimizer steps, and 200 aligned replay positions. Candidate
-minus control target-token deltas are +1,196 prompt, -1,955 thought, 0 close, and +759
-answer. The failed predecessor adapter is not a parent or control.
+The required active control is an independently trained same-parent replay
+continuation matched on exact forward tokens, optimizer steps, and 200 aligned replay
+positions. Candidate minus control target-token deltas are +1,196 prompt, -1,955
+thought, 0 close, and +759 answer. The failed predecessor adapter is not a parent or
+control.
 
 ## Oracle Versus Deployable Evidence
 
@@ -43,15 +49,15 @@ frozen local check.
 
 ## Interpretation
 
-None yet. The mechanism remains a preregistered package-level hypothesis, not
-capability evidence. Score lessons occupy 25,683 of 48,806 intervention tokens, so a
-later result cannot isolate a stage without a fresh ablation.
+None yet. Successful control optimization is not capability evidence. The mechanism
+remains a preregistered package-level hypothesis; score lessons occupy 25,683 of
+48,806 intervention tokens, so a later result cannot isolate a stage without a fresh
+ablation.
 
 ## Next Experiments
 
-Commit, rebase, push, and CI-verify the frozen design. Then train only the replay
-control, preserve/publish its receipt, and do not train the candidate until that
-checkpoint is green.
+Commit, rebase, push, and CI-verify this replay-control checkpoint. Do not train the
+candidate until both GitHub workflows are green on the pushed `main` checkpoint.
 
 ## Artifact Manifest
 
