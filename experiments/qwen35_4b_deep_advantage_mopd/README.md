@@ -236,7 +236,12 @@ Primary seed 44 then scored `0.572010` deep and `0.805422` quick, `−0.008058`
 and `−0.004607` versus the source, with 4,393,570 sampled tokens. All three
 optimizer seeds therefore agree on a negative block-0 deep sign. The frozen
 success condition is unreachable, but the full campaign continues to quantify
-the control landscape and produce the registered terminal receipt.
+the control landscape and produce the registered terminal receipt. The quick
+source then scored `0.529284` deep and `0.775684` quick, respectively
+`−0.050784` and `−0.034344` versus the deep source, using 4,773,735 sampled
+tokens. Thus the deep source is the better source on both block-0 strata; all
+three MOPD seeds fall between the two sources, but none improves on the better
+source. The frozen soup comparison is running next.
 
 ## NF4/BF16 Interpretation Diagnostic
 

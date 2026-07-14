@@ -602,3 +602,18 @@
   arms and both blocks for the terminal control ranking and receipt.
 - The block-0 quick source evaluation started next with external journal hash
   `0ab077980fc97ee8cc5481575a0059896f686735539903ea6634cb15f59b154d`.
+
+## 2026-07-14 — block-0 deep source also dominates quick source
+
+- The quick source completed sealed generation and strict validation.
+  `GENERATED.json` and `COMPLETE.json` hash to
+  `8b826d1202add12808efd9951f964598b2f01bfe2775ae23b2abb6fe64621185`
+  and `a51a444f0d467dfa6005fda65ddb80c62acfdb7e75acdd3c64cde3c488a2fb80`;
+  the score hashes to
+  `089bbdb35d9749cece3fe23bead1f3da25149c5409994d2ca1c64de4364ab08b`.
+- Registered means are `0.529284` deep and `0.775684` quick, `−0.050784` and
+  `−0.034344` versus the deep source, using 4,773,735 sampled tokens. The deep
+  source is therefore the better source on both block-0 strata. All three MOPD
+  seeds lie between the two sources but fail to improve the better source.
+- The frozen soup comparator started next with external journal hash
+  `b2ca6c3aeb2348510d78c99ba7efefe417684a14e5ae946e5a11316fbedb699d`.

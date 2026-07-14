@@ -171,7 +171,13 @@ Primary seed 43 repeats the negative block-0 deep sign: `0.576097` deep and
 quick, `−0.008058` and `−0.004607` versus the source, using 4,393,570 sampled
 tokens. All three optimizer seeds therefore have negative block-0 deep signs;
 the frozen success condition is unreachable, while the full campaign continues
-for the registered terminal receipt and control ranking.
+for the registered terminal receipt and control ranking. The quick source then
+scores `0.529284` deep and `0.775684` quick, `−0.050784` and `−0.034344`
+versus the deep source, using 4,773,735 sampled tokens. The deep source is
+therefore the better source on both block-0 strata. All three MOPD seeds lie
+between the two sources, but none beats the better source; the soup and remaining
+controls are still needed to resolve whether the update added anything beyond
+the initialization or parameter interpolation.
 
 Together, the three frozen optimizer seeds establish that the registered
 four-round update can complete safely and that strict-deep route supply
