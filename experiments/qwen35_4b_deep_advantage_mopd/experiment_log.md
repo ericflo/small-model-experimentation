@@ -392,3 +392,19 @@
   A separate authorization-path audit replayed every canonical ledger and
   reauthenticated all model bytes. This authorizes requesting sealed
   comparison; it is not a capability or causal-routing result.
+
+## 2026-07-14 — semantic controls authorization sealed
+
+- The no-clobber semantic authorizer independently replayed all prerequisite
+  ledgers, reauthenticated every model byte, and sealed the exact 13-arm
+  confirmation map at
+  `709694b7d770b5cbb09afe8b932bba3891ab4fea39c54c625fc84c5da973072d`.
+- The complete control-code inventory hashed to
+  `0dff95e5f12847ca36435cad6bcbe752e97a67215968cebb68d52c5cd47efe54`
+  both immediately before and after publication. The authorization receipt
+  hashes to
+  `f4a5456844adeafd39e2e4f2a8036ed9fff2c78830b2eab9d4a7bfa1300d2278`.
+- The only licensed downstream action is sealed confirmation evaluation.
+  Global `ADMISSION.json` and every confirmation score remain absent at this
+  boundary, so this receipt supports no capability, superiority, retention,
+  or causal-routing claim.

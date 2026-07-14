@@ -120,6 +120,14 @@ adapter/merge chain, parameter mixture, and model byte. These are readiness and
 optimizer-safety results only; superiority and causal routing remain wholly
 reserved for sealed confirmation.
 
+The subsequent no-clobber semantic authorization passed with canonical 13-arm
+map hash `709694b7d770b5cbb09afe8b932bba3891ab4fea39c54c625fc84c5da973072d`
+and receipt hash
+`f4a5456844adeafd39e2e4f2a8036ed9fff2c78830b2eab9d4a7bfa1300d2278`.
+The complete control-code inventory hash was unchanged on both sides of
+publication. This authorizes creation of global confirmation admission; no
+confirmation score exists yet.
+
 Together, the three frozen optimizer seeds establish that the registered
 four-round update can complete safely and that strict-deep route supply
 persists on fresh seed-local states after the shared round-0 block. They do not

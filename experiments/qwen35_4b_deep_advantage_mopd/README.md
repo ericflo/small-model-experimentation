@@ -182,6 +182,14 @@ independent canonical replay and model-byte authentication pass. This licenses
 sealed comparison only. It does not show that any trained arm gained capability
 or that advantage routing is causal.
 
+The no-clobber semantic authorization then sealed the exact 13-arm map at hash
+`709694b7d770b5cbb09afe8b932bba3891ab4fea39c54c625fc84c5da973072d`.
+Its receipt hashes to
+`f4a5456844adeafd39e2e4f2a8036ed9fff2c78830b2eab9d4a7bfa1300d2278`;
+the complete control-code inventory was identical immediately before and after
+publication. Global confirmation admission and all score artifacts remain
+uncreated at this point.
+
 ## NF4/BF16 Interpretation Diagnostic
 
 The committed interpretation-only seed-42 diagnostic is valid over four fixed
