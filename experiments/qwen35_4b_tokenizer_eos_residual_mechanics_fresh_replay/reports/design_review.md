@@ -1,6 +1,6 @@
 # Adversarial design review
 
-**State:** `HOLD_DESIGN_PENDING_INDEPENDENT_REVIEW`
+**State:** `PASS_DESIGN_FOR_MODEL_FREE_CONSTRUCTION_ONLY`
 
 **Date:** 2026-07-14
 
@@ -10,8 +10,9 @@
 
 **Hidden/gold/benchmark access:** none
 
-This recovery successor is not authorized for construction or model calls
-until an independent reviewer closes every item below.
+This recovery successor is authorized for model-free construction only. Model,
+tokenizer, GPU, calibration, mechanics generation, and hidden access remain
+sealed.
 
 ## Known adversarial risks
 
@@ -51,9 +52,19 @@ until an independent reviewer closes every item below.
 - Same-model, same-revision, same-backend, same-arm, same-threshold proof.
 - Exact-commit CI and lock release sequence with no unreviewed runtime files.
 
-## Current verdict
+## Independent review result
 
-`HOLD_DESIGN_PENDING_INDEPENDENT_REVIEW`. The model-free scaffold smoke may
-verify that these declarations exist and that all access counters are zero. It
-does not authorize task construction, tokenizer loading, model loading, GPU
-initialization, or a model request.
+The independent reviewer returned
+`PASS_DESIGN_FOR_MODEL_FREE_CONSTRUCTION_ONLY` on exact pushed-green commit
+`035c3f8ce14064dd8ee843a43f07970e47bf40f1`. It confirmed scientific
+equivalence to the parent, genuine fresh-identity intent, the parent-sample
+quarantine, distinct typed temporal APIs, unmocked lifecycle requirements,
+matched-compute controls, the hidden boundary, and the release sequence.
+
+Construction must fail closed unless it proves default-deny parent access;
+zero parent intersections in function fingerprints, IDs, seed keys and derived
+seeds, identity-free prompts, and prompt-token sequences; exact depth-three
+balance/strata; a fresh ciphertext and key with no plaintext artifact or key
+reread; and zero model/GPU/protected reads.
+
+**Verdict:** `PASS_DESIGN_FOR_MODEL_FREE_CONSTRUCTION_ONLY`.

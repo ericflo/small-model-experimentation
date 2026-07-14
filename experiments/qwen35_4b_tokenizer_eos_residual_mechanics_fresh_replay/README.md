@@ -1,6 +1,6 @@
 # Qwen3.5-4B Tokenizer-EOS Residual Mechanics Fresh Replay
 
-**Status:** in-progress · since 2026-07-14 · intake and preregistration drafted; independent design review, fresh construction, implementation review, locks, and all model calls remain
+**Status:** in-progress · since 2026-07-14 · `PASS_DESIGN_FOR_MODEL_FREE_CONSTRUCTION_ONLY`; fresh construction, implementation review, locks, and all model calls remain
 
 This fresh-identity successor preserves the parent's qualified tokenizer-EOS
 interface and frozen residual-mechanics science while separating initial
@@ -75,8 +75,10 @@ Model-free smoke only:
 python3 -B experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/scripts/run.py --smoke
 ```
 
-No construction or live command is authorized before independent design and
-implementation reviews, exact-commit green CI, and separately published locks.
+The independent design review authorizes model-free construction only. No
+tokenizer/model/GPU access or live command is authorized before fresh
+construction, implementation review, exact-commit green CI, and separately
+published locks.
 
 ## Results
 

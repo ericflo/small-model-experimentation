@@ -14,7 +14,8 @@ reproducibility:
   smoke_command: "python3 -B experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/scripts/run.py --smoke"
   full_command: "unauthorized pending design and implementation release gates"
   required_external_artifacts:
-    - fresh_mechanics_gold_key_after_visible_selection_only
+    - fresh_mechanics_gold_key
 notes: >-
   Scaffold only. The parent failure receipt may be hashed for lineage, but no
-  parent task payload or sampled bundle is a valid input.
+  parent task payload or sampled bundle is a valid input. Construction creates
+  the fresh key, but the key remains unread until post-selection authorization.
