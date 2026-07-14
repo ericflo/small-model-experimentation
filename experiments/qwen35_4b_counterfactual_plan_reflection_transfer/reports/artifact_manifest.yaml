@@ -13,8 +13,9 @@ reproducibility:
     experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/run.py --construct
   required_external_artifacts: []
 notes: >-
-  Full CPU construction is authorized and passes, but adversarial status remains
-  HOLD. Qwen/Qwen3.5-4B revision 851bf6e8...d0a is the sole permitted future
+  Full CPU construction and the tokenizer-only receipt are authorized, but all model,
+  GPU, training, evaluation, J-space, and benchmark work remains on adversarial HOLD.
+  Qwen/Qwen3.5-4B revision 851bf6e8...d0a is the sole permitted future
   model. Reserved construction/shuffle/schedule/retention/training/evaluation seeds
-  are committed in configs/default.yaml. No tokenizer, adapter, model output,
-  activation, Jacobian, capability, benchmark, or hidden artifact exists.
+  are committed in configs/default.yaml. No tokenizer receipt has run yet; no adapter,
+  model output, activation, Jacobian, capability, benchmark, or hidden artifact exists.

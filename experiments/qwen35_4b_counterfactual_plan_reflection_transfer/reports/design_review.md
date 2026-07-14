@@ -100,3 +100,45 @@ authorization.
 The repaired model-free suite passes 45 focused tests and reconstructs all 624 sealed
 depth-three plus retention tasks with no collision. No authorization changes occur
 until these repairs are committed and a fresh clean reviewer returns its verdict.
+
+## Review 3 — 2026-07-14
+
+**Reviewed commit:** `492376af67fd03e8b75210b8bb42ebb297fdbeed`
+
+**Verdict:** **PASS_TOKENIZER_ONLY; HOLD full implementation.**
+
+This was the required clean review: it read only the allowlisted experiment/shared
+implementation files, used temporary synthetic fixtures, and made zero tokenizer,
+model, GPU, benchmark, protected-output, or web calls. Both exact-commit CI workflows
+were also green. It independently passed all 45 focused tests, syntax, and full
+construction.
+
+The tokenizer path is authorized because it pins the sole permitted model/revision,
+checks EOS 248046, reconstructs sealed records, forbids truncation, validates exact
+mask/loss boundaries and optimizer-step parity, and exclusively writes its receipt.
+This verdict does not authorize any model, GPU, training, evaluation, J-space, or
+benchmark event.
+
+The adversary reproduced eight full-implementation blockers:
+
+1. scoring trusts self-issued prompt/label receipts instead of reconstructing exact
+   sealed prompt bytes, label bytes, and per-task family/depth mappings;
+2. primary scoring does not compare the complete sampling and resolved-sampling
+   dictionaries, so unregistered penalties and custom-prompt flags can pass;
+3. family and retention-depth gates check sets rather than the exact per-task mapping
+   and balanced sealed counts;
+4. the literal branch lacks a dedicated sealed reflection-input constructor;
+5. consumers do not fully validate stage-receipt schema/cardinality/ancestry, and
+   confirmation generation is not mechanically stage-gated;
+6. merge/runner lineage omits parts of the source training receipt, PEFT recipe,
+   trainer/Git identity, and prerequisite receipt chain;
+7. adapter ON/OFF does not reconstruct exact sealed calibration mappings, and runtime
+   parity does not prove installed-lock or exact cross-arm environment identity;
+8. the runner lacks the live KV-capacity/preemption preflight required by the pinned
+   vLLM operating contract.
+
+Review 3 demonstrated false capability, positive-control, and reflection-specific
+passes using substituted constant labels plus internally consistent synthetic
+receipts. It also demonstrated qualification with family counts 142/1/1 and retention
+with depth counts 1/47 and family counts 46/1/1. These are decisive HOLD findings.
+They must be remediated and independently reviewed before any full execution.

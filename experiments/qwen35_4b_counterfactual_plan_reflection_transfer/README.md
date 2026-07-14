@@ -1,6 +1,6 @@
 # Qwen3.5-4B Counterfactual Plan Reflection Transfer
 
-**Status:** in-progress · since 2026-07-14 · adversarial HOLD; repaired full CPU construction passes, but no tokenizer/model/GPU/training event is authorized
+**Status:** in-progress · since 2026-07-14 · tokenizer receipt authorized; model/GPU/training/evaluation remain on adversarial HOLD
 
 This experiment tests the paper's most actionable claim without relying on its
 consciousness framing: can supervision on what the model would say on a later
@@ -87,7 +87,7 @@ the correct non-reflective auxiliary-label arm.
    identity/collision rules, shuffled-target derangement, and answer omission.
 2. A tokenizer-only receipt must prove exact rendering, mask boundaries,
    reflection/auxiliary prompt-length equality, and per-step correct/shuffled parity.
-   It remains unauthorized until the repaired design passes adversarial review.
+   Clean Review 3 authorized this stage only.
 3. Frozen calibration must establish a parseable action interface and non-saturated
    headroom before training.
 4. Screen seed 47 trains all four arms. The direct positive control must reach 0.50
@@ -125,7 +125,8 @@ PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B \
   experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/run.py --construct
 ```
 
-No tokenizer, model, GPU, training, evaluation, or Jacobian command is authorized yet.
+Only the pinned tokenizer receipt command is authorized. Model, GPU, training,
+evaluation, Jacobian, and benchmark commands remain forbidden.
 
 ## Results
 

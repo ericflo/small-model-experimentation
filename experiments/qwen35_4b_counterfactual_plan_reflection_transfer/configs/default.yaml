@@ -228,7 +228,7 @@ mechanism_followup:
 
 authorization:
   cpu_construction: true
-  tokenizer: false
+  tokenizer: true
   model_calls: false
   gpu: false
   training: false

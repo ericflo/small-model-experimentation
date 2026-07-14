@@ -72,3 +72,10 @@
   adapter-tree validation. Generated JSONL is now hashed into runner metadata so an
   output cannot be substituted under otherwise valid provenance. Authorization remains
   unchanged pending a fresh independent review of the committed revision.
+- Clean Review 3 on exact commit `492376af67fd03e8b75210b8bb42ebb297fdbeed`
+  returned `PASS_TOKENIZER_ONLY` and kept all full execution on HOLD. It passed 45
+  tests/full construction but reproduced forged-label false passes, unsealed sampling
+  fields, imbalanced family/depth false passes, missing literal reflection inputs,
+  incomplete stage/adapter/runtime lineage, and absent live KV-capacity preflight.
+  Enabled only `authorization.tokenizer`; every model/GPU/training/evaluation/J/benchmark
+  flag remains false.
