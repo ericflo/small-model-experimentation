@@ -5,16 +5,17 @@ source_track: "new"
 path: "experiments/qwen35_4b_universal_replay_anchor"
 primary_readme: "experiments/qwen35_4b_universal_replay_anchor/README.md"
 primary_report: "experiments/qwen35_4b_universal_replay_anchor/reports/report.md"
-summary: "Can a low-rate continuation from the strong C53 `blend` policy install the parent's truth-audited general procedures without displacing broad behavior when every update window is anchored by broad replay?"
+summary: "Outcome: replay anchoring preserved local installability but the designed candidate lost to both controls; replay-only refresh became the strongest measured anchor."
 tags:
+  - "abi"
   - "curriculum"
-  - "policy"
   - "small-model"
 research_programs:
   - "agentic_breadth_installation"
   - "benchmark_generalization"
   - "posttraining_and_adaptation"
   - "process_control_and_tool_use"
+  - "structured_execution_and_compilers"
 top_level_dirs:
   - "configs"
   - "data"
@@ -24,11 +25,11 @@ top_level_dirs:
   - "src"
   - "tests"
 file_counts:
-  json: 8
-  jsonl: 4
+  json: 13
+  jsonl: 5
   log: 4
   md: 7
   py: 13
   yaml: 3
-total_files: 39
-total_size_bytes: 17653364
+total_files: 45
+total_size_bytes: 17665856

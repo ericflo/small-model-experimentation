@@ -151,6 +151,19 @@ the latter parsed only 0.8462 with 4 cap contacts and failed before benchmark. T
 accuracy, parse rate, cap contacts, and semantic failure modes prospectively; equal
 accuracy can hide materially different installed policies.
 
+**Replay is an active capability intervention, not a neutral retention control.**
+In the result-separated replay-anchor successor, replacing 400 of 1,520 replay rows
+with designed lessons passed the fresh local screen but scored 0.4238 on paired
+quick@1,024: 0.0172 below the mature `blend` policy and 0.0613 below replay-only.
+Replay-only continuation reached 0.4851, improved eight of ten public families, tied
+two, and regressed none. It had 17.3% more forward-token exposure despite matched
+optimizer steps, so this event rejects the candidate but does not isolate the content
+effect behind the full gap. A designed-data experiment must beat a replay continuation
+matched on both steps and token exposure, not merely retain the pre-refresh checkpoint.
+The next useful dose search begins from the authenticated replay-refreshed policy and
+reduces designed density sharply; it does not reinterpret the replay control as a
+universal win.
+
 **Speed is not a nicety here; it is the enabling condition for the whole thesis.**
 A universal feature is found by *many* fast, varied curriculum experiments — see
 which designs transfer, double down, ablate what carries the transfer.

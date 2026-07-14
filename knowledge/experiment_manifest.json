@@ -5735,8 +5735,8 @@
   },
   {
     "file_counts": {
-      ".json": 8,
-      ".jsonl": 4,
+      ".json": 13,
+      ".jsonl": 5,
       ".log": 4,
       ".md": 7,
       ".py": 13,
@@ -5750,13 +5750,14 @@
       "agentic_breadth_installation",
       "benchmark_generalization",
       "posttraining_and_adaptation",
-      "process_control_and_tool_use"
+      "process_control_and_tool_use",
+      "structured_execution_and_compilers"
     ],
     "source_track": "new",
-    "summary": "Can a low-rate continuation from the strong C53 `blend` policy install the parent's truth-audited general procedures without displacing broad behavior when every update window is anchored by broad replay?",
+    "summary": "Outcome: replay anchoring preserved local installability but the designed candidate lost to both controls; replay-only refresh became the strongest measured anchor.",
     "tags": [
+      "abi",
       "curriculum",
-      "policy",
       "small-model"
     ],
     "title": "Replay-Anchored Universal Curriculum Continuation",
@@ -5769,8 +5770,8 @@
       "src",
       "tests"
     ],
-    "total_files": 39,
-    "total_size_bytes": 17653364
+    "total_files": 45,
+    "total_size_bytes": 17665856
   },
   {
     "file_counts": {

@@ -13250,40 +13250,46 @@
    ]
   },
   "qwen35_4b_universal_replay_anchor": {
-   "verdict_tag": "Local pass; broad transfer test is next",
-   "concept_primer": "This experiment keeps the model practicing a broad set of tasks while slipping a smaller set of deliberately abstract lessons into the same training stream. A replay-only comparison receives the same number of updates, so the later score difference can be tied to the designed lessons rather than continued practice alone.",
+   "verdict_tag": "Designed mix loses; replay-only sets a stronger anchor",
+   "concept_primer": "This experiment kept the model practicing broad tasks while adding a smaller set of abstract lessons. A replay-only comparison received the same number of updates, revealing whether any gain came from the designed lessons or simply from continuing broad practice.",
    "plain_question": "Can gentle joint practice add designed general skills without erasing the broad behavior the model already learned?",
-   "plain_answer": "The first screen says the lessons installed on fresh synthetic checks, but the decisive broad test has not run. The candidate answered 19 of 26 checks correctly, produced well-formed answers on 25 of 26, hit the response cap once, and never refused a feasible route. A replay-only comparison completed the same 1,520 training rows and 190 updates with more token exposure. Both full checkpoints are authenticated; the next paired ten-family score will determine whether the local gain transfers without displacement.",
-   "why_it_matters": "Adding a skill is not useful if the update silently erases other abilities. This design tests a practical way to protect a mature small model: mix every designed lesson with broad practice, lower the update strength, and demand that the resulting model beat both its starting point and continued practice alone across every measured family.",
-   "verdict_tone": "neutral",
+   "plain_answer": "No at this dose. The designed mix passed its fresh synthetic screen but scored about 42% overall, below both the 44% mature policy and the 49% replay-only comparison. It also fell below base on one family. Replay-only was the useful surprise: it improved eight of ten families, tied the other two, and regressed none.",
+   "why_it_matters": "Broad replay was not merely protecting old behavior; it was still adding capability. Future designed curricula must beat another replay continuation, not just the older starting policy. The next search should begin from this stronger replay-refreshed model, use far fewer designed rows, and match token exposure as well as update count.",
+   "verdict_tone": "mixed",
    "key_numbers": [
     {
-     "label": "fresh synthetic check accuracy",
+     "label": "designed-mix aggregate",
+     "value": "42.4%",
+     "sub": "below both the 44% mature policy and 49% replay-only comparison"
+    },
+    {
+     "label": "replay-only aggregate",
+     "value": "48.5%",
+     "sub": "about four points above the mature policy"
+    },
+    {
+     "label": "replay-only family lift",
+     "value": "8 of 10",
+     "sub": "two ties and zero regressions versus base"
+    },
+    {
+     "label": "fresh synthetic accuracy",
      "value": "73%",
-     "sub": "19 of 26 correct; enough to pass the frozen local screen"
-    },
-    {
-     "label": "well-formed answers",
-     "value": "96%",
-     "sub": "25 of 26 parsed, with one response-cap contact"
-    },
-    {
-     "label": "training rows",
-     "value": "1,520 each",
-     "sub": "the candidate replaces 400 replay examples with 400 designed lessons"
-    },
-    {
-     "label": "forward-token exposure",
-     "value": "1.23M vs 1.44M",
-     "sub": "the replay-only comparison receives about 17% more compute"
+     "sub": "the local pass did not predict broad transfer"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Both training streams share the same broad core",
+     "chart_plain_title": "Replay-only protects every family and wins overall",
+     "chart_read": "For each family, compare the replay-only and designed-mix changes from base. Bars below zero are regressions; replay-only has none while the designed mix has one.",
+     "chart_takeaway": "The designed mix trails replay-only by about six aggregate points; replay saw 17% more token exposure, so the next test must token-match."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "Both training streams shared the same broad core",
      "chart_read": "Each bar totals 1,520 rows. Both streams share 1,120 replay rows; the candidate adds 400 designed lessons while the comparison adds 400 more replay examples.",
-     "chart_takeaway": "The later score difference isolates designed lessons from the benefit of simply continuing broad practice."
+     "chart_takeaway": "The matched construction isolates designed lessons from the benefit of simply continuing broad practice."
     }
    ]
   }

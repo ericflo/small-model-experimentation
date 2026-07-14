@@ -10,7 +10,7 @@ Generated from `research_programs/registry.yaml` and experiment metadata. The im
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 178
+- Assigned experiments: 179
 
 ### Seed Evidence
 
@@ -123,6 +123,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_transform_abi_compiler_pilot` (track-z): [README](../experiments/qwen35_4b_transform_abi_compiler_pilot/README.md)
 - `qwen35_4b_typed_sketch_synthesis` (track-z): [README](../experiments/qwen35_4b_typed_sketch_synthesis/README.md)
 - `qwen35_4b_universal_curriculum` (new): [README](../experiments/qwen35_4b_universal_curriculum/README.md)
+- `qwen35_4b_universal_replay_anchor` (new): [README](../experiments/qwen35_4b_universal_replay_anchor/README.md)
 - `qwen35_4b_unsaturated_frontier_active_bridge` (track-z): [README](../experiments/qwen35_4b_unsaturated_frontier_active_bridge/README.md)
 - `qwen35_4b_validation_policy_counterexample_curriculum` (new): [README](../experiments/qwen35_4b_validation_policy_counterexample_curriculum/README.md)
 - `qwen35_4b_verified_edit_closure` (track-z): [README](../experiments/qwen35_4b_verified_edit_closure/README.md)

@@ -47817,6 +47817,60 @@
     {
      "headline": true,
      "kind": "bar",
+     "title": "Replay-only improves eight families; designed arm trails",
+     "categories": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "sirens",
+      "stockade",
+      "toolsmith",
+      "warren"
+     ],
+     "series": [
+      {
+       "label": "replay refresh minus base",
+       "values": [
+        0.5,
+        0.25,
+        0.125,
+        0.75,
+        0.0,
+        0.625,
+        0.0,
+        0.4759984639016897,
+        0.25,
+        0.125
+       ]
+      },
+      {
+       "label": "warm union minus base",
+       "values": [
+        0.625,
+        0.0,
+        0.0,
+        0.5,
+        -0.125,
+        0.875,
+        0.0,
+        0.4879032258064516,
+        0.125,
+        0.0
+       ]
+      }
+     ],
+     "x_label": "public benchmark family",
+     "y_label": "paired score delta versus base",
+     "y_format": "decimal",
+     "note": "Aggregate-only quick@1024, seed 78133, same merged qwen_vllm backend. Replay-only is nonnegative on all ten families and positive on eight; the designed arm regresses rites and loses 0.0613 aggregate. Replay received 17.3% more forward tokens, so mechanism attribution remains open.",
+     "source": "experiments/qwen35_4b_universal_replay_anchor/runs/benchmark/quick_tb1024_seed78133_pilot1/summary.json"
+    },
+    {
+     "headline": false,
+     "kind": "bar",
      "title": "Matched-step arms isolate 400 designed rows against extra replay",
      "categories": [
       "shared replay",

@@ -122,10 +122,18 @@
   but three negative families and -0.1385 versus blend). The from-base replay
   union reached 0.692 local accuracy but failed parse (0.846 < 0.90) and cap
   (4 > 2) gates, so benchmark seed 78132 remained sealed.
-- Active successor: `qwen35_4b_universal_replay_anchor`. Test whether
-  low-rate warm continuation with replay in every update window retains blend
-  while adding the designed signal, against an optimizer-step-matched
-  replay-only refresh. Require local retention before a fresh quick@1024 event.
+- Completed designed-arm negative with a stronger control:
+  `qwen35_4b_universal_replay_anchor`. The candidate passed local gates but
+  scored 0.4238, below `blend` by 0.0172 and replay refresh by 0.0613, with one
+  family below base. Replay refresh scored 0.4851, +0.0441 over `blend`, with
+  eight positive and two tied families. It is a new anchor, not a universal
+  winner.
+- Next universal-feature successor: start from the authenticated replay-refresh
+  policy and test an order-of-magnitude lower designed fraction against another
+  replay continuation matched on optimizer steps and forward-token exposure.
+  Freeze new local and benchmark seeds, retain all eight observed gains, require
+  strict lift on every family, and keep matched-compute sampling in the
+  confirmation path.
 
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.

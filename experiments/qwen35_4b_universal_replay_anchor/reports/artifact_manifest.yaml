@@ -34,5 +34,6 @@ reproducibility:
 notes: >-
   Source and derived data are checked in. Source hashes are 4a0833756b5497fcbccf278476ece8c98bcbfce80e900ecc2489150e496b27c4
   (designed) and 25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2
-  (replay). Adapter and merged-model checksums are authenticated above; benchmark
-  outputs remain pending the frozen aggregate event.
+  (replay). Adapter and merged-model checksums are authenticated above. The completed
+  aggregate-only quick@1,024 seed 78,133 receipts are checked in under
+  runs/benchmark/quick_tb1024_seed78133_pilot1/.

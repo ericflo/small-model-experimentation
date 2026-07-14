@@ -123,6 +123,23 @@ the next brute crossover, and make feasible-domain/residual state explicit befor
 
 **Two of these are now cross-substrate LAWS, one is not (2026-07-02, claim C16, [qwen35_4b_crossfamily_laws](../experiments/qwen35_4b_crossfamily_laws/reports/report.md)).** The C13–C15 ladder was re-run on two genuinely different fresh, execution-verified families (string char-edits, a 3-register integer machine) beside the list anchor. **Model-level and substrate-invariant:** (1) the *compiler* — plan-given execution ≈ 1.00 at every depth in all three families (one collapsed flat line); (2) the *generation wall* — bare identification of novel compositions decays toward chance everywhere (transcription−identification gap ≥ 0.84 at depth ≥ 3). So "tools identify, the model compiles" is a property of the weights, not of lists. **Substrate-dependent:** simulation fidelity — C15's decay "constant" was list-specific. Mental-simulation accuracy is set by the cost of tracking the *state representation*: a compact 3-int register state is simulated robustly to depth 4 (0.92→0.72, ~flat), a variable int list decays (1.00→0.56), a mutating character string is floored near-zero even at depth 1 (0.24→0.00). Deployment corollary: externalize simulation to a tool only where the representation is expensive to track; for compact integer state a tool call is wasted. New sub-law — the wall's *floor* ≈ f(hypothesis-space size, simulability): register alone is small-enough-to-search *and* simulable, and alone keeps a nonzero deep-identification floor.
 
+### Universal-Feature Curriculum Search
+
+The first two contamination-controlled designed-curriculum experiments separate
+local installability from broad transfer. A truth-audited 13-skill curriculum can
+raise fresh synthetic accuracy, but an 800-row sequential continuation specialized
+and regressed three public families. Mixing 400 designed rows into 1,120 replay rows
+at lower rate still passed the local gate yet lost to both the mature policy and a
+matched replay-only continuation. The control is the productive surprise:
+replay-only reached 0.4851 aggregate, +0.0441 over the mature policy, with eight
+strict family gains and no regressions. Thus broad replay had not saturated, and it
+must be treated as an active capability baseline. Replay received 17.3% more forward
+tokens despite matched steps, so the next comparison must also match token exposure.
+The open search is a low-density designed update from this stronger anchor that beats
+replay continuation while lifting the two remaining ties and retaining the other
+eight; no universal-feature claim exists until every family improves on replicated
+same-backend events.
+
 ### Selection Under Visible Evidence Is A Core Bottleneck
 
 [qwen35_4b_retrieval_adapt_verify_scale](../experiments/qwen35_4b_retrieval_adapt_verify_scale/reports/final_report.md) found additional hidden-correct candidates, but deployable selectors still made too many wrong commits. Future work should treat selection as its own research object, with precision, recall, abstention, and hidden-oracle ceilings separated.

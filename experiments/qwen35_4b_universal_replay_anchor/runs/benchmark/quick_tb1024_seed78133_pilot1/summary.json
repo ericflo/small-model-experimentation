@@ -1,0 +1,170 @@
+{
+  "comparisons": {
+    "blend_minus_base": {
+      "aggregate_delta": 0.2659821993313455,
+      "minimum_family_delta": -0.125,
+      "nonnegative_families": 9,
+      "per_family_delta": {
+        "chronicle": 0.625,
+        "lockpick": 0.125,
+        "menders": 0.0,
+        "mirage": 0.625,
+        "rites": -0.125,
+        "siftstack": 0.75,
+        "sirens": 0.0,
+        "stockade": 0.4098219933134544,
+        "toolsmith": 0.25,
+        "warren": 0.0
+      },
+      "positive_families": 6
+    },
+    "replay_refresh_minus_base": {
+      "aggregate_delta": 0.310099846390169,
+      "minimum_family_delta": 0.0,
+      "nonnegative_families": 10,
+      "per_family_delta": {
+        "chronicle": 0.5,
+        "lockpick": 0.25,
+        "menders": 0.125,
+        "mirage": 0.75,
+        "rites": 0.0,
+        "siftstack": 0.625,
+        "sirens": 0.0,
+        "stockade": 0.4759984639016897,
+        "toolsmith": 0.25,
+        "warren": 0.125
+      },
+      "positive_families": 8
+    },
+    "warm_union_minus_base": {
+      "aggregate_delta": 0.2487903225806452,
+      "minimum_family_delta": -0.125,
+      "nonnegative_families": 9,
+      "per_family_delta": {
+        "chronicle": 0.625,
+        "lockpick": 0.0,
+        "menders": 0.0,
+        "mirage": 0.5,
+        "rites": -0.125,
+        "siftstack": 0.875,
+        "sirens": 0.0,
+        "stockade": 0.4879032258064516,
+        "toolsmith": 0.125,
+        "warren": 0.0
+      },
+      "positive_families": 5
+    }
+  },
+  "gateway_sha256": "53cf6533dbd710eb167503363c39f73dbf7559a0d91f40a00436a3c218a01c17",
+  "models": {
+    "base": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized",
+    "blend": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_curriculum/merged/blend",
+    "replay_refresh": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_replay_anchor/merged/replay_refresh",
+    "warm_union": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_replay_anchor/merged/warm_union"
+  },
+  "name": "pilot1",
+  "promotion": {
+    "beats_mechanism_control_aggregate": false,
+    "meets_strong_control_aggregate": false,
+    "no_negative_family": false,
+    "passes_pilot_gate": false,
+    "positive_aggregate": true,
+    "strictly_positive_every_family": false
+  },
+  "schema_version": 1,
+  "scores": {
+    "base": {
+      "aggregate": 0.175,
+      "per_family": {
+        "chronicle": 0.125,
+        "lockpick": 0.125,
+        "menders": 0.0,
+        "mirage": 0.0,
+        "rites": 0.125,
+        "siftstack": 0.125,
+        "sirens": 0.5,
+        "stockade": 0.0,
+        "toolsmith": 0.75,
+        "warren": 0.0
+      }
+    },
+    "blend": {
+      "aggregate": 0.44098219933134547,
+      "per_family": {
+        "chronicle": 0.75,
+        "lockpick": 0.25,
+        "menders": 0.0,
+        "mirage": 0.625,
+        "rites": 0.0,
+        "siftstack": 0.875,
+        "sirens": 0.5,
+        "stockade": 0.4098219933134544,
+        "toolsmith": 1.0,
+        "warren": 0.0
+      }
+    },
+    "replay_refresh": {
+      "aggregate": 0.485099846390169,
+      "per_family": {
+        "chronicle": 0.625,
+        "lockpick": 0.375,
+        "menders": 0.125,
+        "mirage": 0.75,
+        "rites": 0.125,
+        "siftstack": 0.75,
+        "sirens": 0.5,
+        "stockade": 0.4759984639016897,
+        "toolsmith": 1.0,
+        "warren": 0.125
+      }
+    },
+    "warm_union": {
+      "aggregate": 0.4237903225806452,
+      "per_family": {
+        "chronicle": 0.75,
+        "lockpick": 0.125,
+        "menders": 0.0,
+        "mirage": 0.5,
+        "rites": 0.0,
+        "siftstack": 1.0,
+        "sirens": 0.5,
+        "stockade": 0.4879032258064516,
+        "toolsmith": 0.875,
+        "warren": 0.0
+      }
+    }
+  },
+  "seed": 78133,
+  "think_budget": 1024,
+  "tier": "quick",
+  "warm_union_minus_blend": {
+    "aggregate_delta": -0.017191876750700275,
+    "per_family_delta": {
+      "chronicle": 0.0,
+      "lockpick": -0.125,
+      "menders": 0.0,
+      "mirage": -0.125,
+      "rites": 0.0,
+      "siftstack": 0.125,
+      "sirens": 0.0,
+      "stockade": 0.0780812324929972,
+      "toolsmith": -0.125,
+      "warren": 0.0
+    }
+  },
+  "warm_union_minus_replay_refresh": {
+    "aggregate_delta": -0.061309523809523814,
+    "per_family_delta": {
+      "chronicle": 0.125,
+      "lockpick": -0.25,
+      "menders": -0.125,
+      "mirage": -0.25,
+      "rites": -0.125,
+      "siftstack": 0.25,
+      "sirens": 0.0,
+      "stockade": 0.011904761904761918,
+      "toolsmith": -0.125,
+      "warren": -0.125
+    }
+  }
+}

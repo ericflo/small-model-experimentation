@@ -1,6 +1,9 @@
 # Replay-Anchored Universal Curriculum Continuation
 
-**Status:** in-progress · since 2026-07-13 · aggregate-only pilot remains
+**Status:** finished
+
+Outcome: replay anchoring preserved local installability but the designed candidate
+lost to both controls; replay-only refresh became the strongest measured anchor.
 
 ## Research program
 
@@ -87,7 +90,19 @@ Both adapters were explicitly merged: the candidate merged weight SHA-256 is
 `29baf3ad182e900d01186058d795004b984a5f436958d8cca5e0ebcf199422f6`,
 and the replay-control merged weight SHA-256 is
 `22c61cebd6091d0b8380e2d7318b4d4db99ef24eb30b942157e44f37d26cbc9e`.
-The frozen aggregate-only event is now authorized but not yet consumed.
+On the frozen quick@1,024 seed 78,133 event, `warm_union` scored 0.4238 aggregate:
+0.2488 above base, but 0.0172 below `blend` and 0.0613 below `replay_refresh`. It
+regressed `rites` by 0.125 below base, tied four other families, and therefore failed
+every universality promotion rule except positive aggregate.
+
+The mechanism control was the important positive lead. `replay_refresh` scored 0.4851,
+beating base by 0.3101 and `blend` by 0.0441. It had no negative family, improved eight
+of ten, and tied base on `rites` and `sirens`. This is not a universal-feature result
+because the two ties violate the strict all-family requirement; it is the strongest
+next anchor and shows that continued broad replay itself had not saturated. Because
+the replay arm received 17.3% more forward tokens despite matched optimizer steps, the
+full candidate-control gap is not a clean content attribution; the successor must
+token-match the arms.
 
 ## Artifacts
 

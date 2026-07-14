@@ -2,9 +2,10 @@
 
 ## Summary
 
-In progress. The replay-anchored candidate completed training and passed every frozen
-local gate. The matched replay-only control completed, and both arms have authenticated
-explicit merges. The conditional paired aggregate event is next.
+Complete negative for the designed curriculum. Replay anchoring preserved a clean
+local install, but the candidate lost to both the strong starting policy and the
+replay-only mechanism control on the paired aggregate event. The replay-only control
+became a stronger next anchor with no family regression and eight strict family gains.
 
 ## Research program fit
 
@@ -38,7 +39,17 @@ does not establish universality.
 0.4365. Its adapter SHA-256 is `c296c774...d36a`, versus `26837fad...8f18` for the
 candidate. Both were explicitly merged. The candidate merged weight SHA-256 is
 `29baf3ad...22f6`; the replay-control merged weight SHA-256 is `22c61ceb...bc9e`.
-These completions authorize, but do not prejudge, the frozen paired Menagerie event.
+On frozen quick@1,024 seed 78,133, aggregate scores were base 0.1750, `blend` 0.4410,
+`replay_refresh` 0.4851, and `warm_union` 0.4238. The candidate was +0.2488 versus
+base, -0.0172 versus `blend`, and -0.0613 versus replay refresh. Its `rites` score
+fell 0.125 below base; only five families strictly improved. It therefore failed the
+no-negative-family, every-family-positive, strong-control, mechanism-control, and
+overall pilot gates.
+
+`replay_refresh` beat base by 0.3101 and `blend` by 0.0441. All ten family deltas
+versus base were nonnegative and eight were strictly positive; `rites` and `sirens`
+tied base. This is not the registered all-family outcome, but it is a material control
+result and the correct anchor for a result-separated successor.
 
 ## Controls
 
@@ -51,15 +62,22 @@ These completions authorize, but do not prejudge, the frozen paired Menagerie ev
 
 ## Interpretation
 
-No interpretation before results. A candidate that merely matches `blend`, fails local
-designed tasks, loses to replay refresh, or leaves any public family at or below base
-does not establish a universal feature.
+The designed signal remained locally learnable at low rate, but the arm containing 400
+designed rows transferred worse than replay alone. The candidate does not establish a
+universal feature. Because replay refresh had 17.3% more forward-token exposure despite
+matched optimizer steps, this comparison rejects the candidate but does not isolate
+designed content as the cause of the full gap. The replay control still shows that the
+mature policy was improvable by continued diverse practice; broad replay is an active
+capability baseline, not a neutral retention ingredient.
 
 ## Next experiments
 
-A passing pilot must move to a new confirmation experiment with independent quick
-seeds, medium@2,048, paired uncertainty, and matched-compute sampling. Any failed pilot
-is preserved before changing dose, rate, or curriculum.
+Use `replay_refresh` as the immutable anchor in a new experiment. Target the two tied
+families through abstract, contamination-free procedures only after a fresh local
+qualification, while requiring retention of all eight strict gains. Match both optimizer
+steps and forward-token exposure against replay continuation, and retain matched-compute
+sampling in confirmation on a fresh aggregate seed. Do not retune this result-bearing
+directory or reuse seed 78,133.
 
 ## Artifact manifest
 

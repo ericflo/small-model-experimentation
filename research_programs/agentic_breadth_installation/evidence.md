@@ -470,3 +470,35 @@ Local accuracy is not a retention or emission proxy. The result-separated
 integration repair: low-rate mature warm start with replay in every optimizer
 window versus a matched replay-only refresh. No shared claim changes from this
 negative parent factorial.
+
+## qwen35_4b_universal_replay_anchor (2026-07-13 — Designed arm negative; replay anchor advances)
+
+Both matched 1,520-row continuations started from C53 `blend`, used 190
+effective-batch-8 steps at `1e-5`, and were explicitly merged. The candidate
+substituted 400 truth-audited designed rows for 400 replay rows; the mechanism
+control used replay throughout and received 17.3% more forward-token compute.
+The candidate passed its frozen synthetic gate at 0.731 accuracy, 0.962 parse,
+one cap contact, and zero feasible-route abstentions.
+
+Firewall-clean paired quick@1024 seed 78133 rejected the designed candidate.
+`warm_union` scored 0.4238: +0.2488 versus base, -0.0172 versus `blend`, and
+-0.0613 versus replay refresh. It regressed `rites` -0.125 below base and
+strictly improved only five families. Every universality rule except positive
+aggregate failed.
+
+The replay-only control is the strategic result. `replay_refresh` scored 0.4851,
++0.3101 versus base and +0.0441 versus `blend`. All ten family deltas were
+nonnegative and eight were positive; `rites` and `sirens` tied base. This is not
+a universal-feature claim, because strict all-family lift and replication are
+absent. It does show that C53's broad replay policy was not saturated and that
+replay is an active capability intervention, not a neutral retention control.
+
+Read: the arm with a 26% designed substitution still failed broad retention even
+under a low-rate replay-anchored warm start. Because replay refresh had 17.3%
+more forward-token exposure despite matched steps, the failure rejects this arm
+but does not isolate designed content as the cause of the whole gap. The next
+result-separated test should start from the authenticated replay-refreshed policy,
+reduce designed density by an order of magnitude, and match both optimizer steps
+and forward-token exposure against replay continuation. Require retention of all
+eight observed gains and strict lift of every family; do not tune on seed 78133
+or reuse this directory.

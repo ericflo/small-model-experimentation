@@ -1,0 +1,28 @@
+{
+  "aggregate": 0.44098219933134547,
+  "backend": "qwen_vllm",
+  "benchmark_runner_sha256": "a3beecd8b5c89ccfd99a172a6d85321d39b9feb6c29d12f10b2f4d7499e273cb",
+  "benchmark_source_file_count": 56,
+  "benchmark_source_inventory_sha256": "218b8615a95f24da962c931e9cd2dba58d853a7bdcd2847cd8e2c42fc2c05f42",
+  "model": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_curriculum/merged/blend",
+  "model_merge_receipt_sha256": "09154e9d403b779877728af15c183c35905a87870e67c1c5b68c14e160a7bf38",
+  "per_family": {
+    "chronicle": 0.75,
+    "lockpick": 0.25,
+    "menders": 0.0,
+    "mirage": 0.625,
+    "rites": 0.0,
+    "siftstack": 0.875,
+    "sirens": 0.5,
+    "stockade": 0.4098219933134544,
+    "toolsmith": 1.0,
+    "warren": 0.0
+  },
+  "schema_version": 1,
+  "seed": 78133,
+  "stage": "menagerie_aggregate_gateway",
+  "think_budget": 1024,
+  "tier": "quick",
+  "wall_seconds": 85.71000968501903,
+  "within_budget": true
+}

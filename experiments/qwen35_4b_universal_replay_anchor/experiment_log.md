@@ -45,3 +45,21 @@ three benchmark families and lost 0.1385 aggregate to `blend`.
   `22c61ceb...bc9e`.
 - External merge-receipt SHA-256 values are `35894a31...63cf` (candidate) and
   `f32d7fc6...af1c` (control). The frozen paired aggregate event is now authorized.
+
+## 2026-07-13 — aggregate pilot; candidate negative, replay anchor advances
+
+- Consumed the sole frozen quick@1,024 seed 78,133 event through the trusted
+  aggregate-only vLLM gateway. All four arms used explicit merged checkpoints.
+- Aggregate scores: base 0.1750, `blend` 0.4410, `replay_refresh` 0.4851, and
+  `warm_union` 0.4238.
+- `warm_union` was +0.2488 versus base but -0.0172 versus `blend` and -0.0613
+  versus replay refresh. It regressed `rites` by 0.125 below base, so the frozen
+  all-family, strong-control, and mechanism-control gates all failed.
+- `replay_refresh` was +0.3101 versus base and +0.0441 versus `blend`, with eight
+  strictly positive families and no negative family. It tied base on `rites` and
+  `sirens`, so it is a stronger anchor rather than a universal-feature winner.
+- Replay refresh had 17.3% more forward-token exposure despite matched optimizer
+  steps. The candidate is rejected, but the whole gap cannot be assigned to content;
+  a successor must match both steps and token exposure.
+- Closed the experiment as a preserved negative. Any adaptive targeting of the two
+  tied axes must use a new experiment, new local seed, and new benchmark seed.
