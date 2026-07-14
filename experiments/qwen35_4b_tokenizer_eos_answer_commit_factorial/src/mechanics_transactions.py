@@ -342,7 +342,7 @@ def run_transaction(
     if state in {"bundle_durable", "generated_durable", "complete"}:
         _authenticate_started(paths["started"], started)
         assert_predecessor_unchanged()
-        return _promote_bundle(
+        complete = _promote_bundle(
             invocation=invocation,
             paths=paths,
             prepared_rows=prepared_rows,
@@ -351,6 +351,8 @@ def run_transaction(
             predecessor_complete_sha256=predecessor_sha,
             crash_after=crash_after,
         )
+        assert_predecessor_unchanged()
+        return complete
     if state != "absent":
         raise RuntimeError(f"unhandled transaction state: {state}")
 
@@ -359,6 +361,7 @@ def run_transaction(
         raise RuntimeError("injected crash after STARTED")
     assert_predecessor_unchanged()
     rows, runner_metadata = generate(prepared_rows, sampling)
+    assert_predecessor_unchanged()
     bundle = json_native(
         {
             "schema_version": 1,
@@ -377,7 +380,7 @@ def run_transaction(
     write_exclusive_durable(paths["bundle"], bundle)
     if crash_after == "bundle":
         raise RuntimeError("injected crash after bundle")
-    return _promote_bundle(
+    complete = _promote_bundle(
         invocation=invocation,
         paths=paths,
         prepared_rows=prepared_rows,
@@ -386,6 +389,8 @@ def run_transaction(
         predecessor_complete_sha256=predecessor_sha,
         crash_after=crash_after,
     )
+    assert_predecessor_unchanged()
+    return complete
 
 
 def _authenticate_complete_prefix(

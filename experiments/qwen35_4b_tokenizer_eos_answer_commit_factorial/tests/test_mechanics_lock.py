@@ -252,7 +252,7 @@ class MechanicsLockTests(unittest.TestCase):
                 mechanics_lock, "_git", side_effect=fake_git
             ), mock.patch.object(
                 mechanics_lock, "_git_bytes", return_value=json_bytes(visible)
-            ), mock.patch.object(
+            ) as git_bytes, mock.patch.object(
                 mechanics_lock, "_ancestor", return_value=True
             ), mock.patch.object(
                 mechanics_lock, "query_green_ci", return_value=self.ci(commit)
@@ -260,6 +260,7 @@ class MechanicsLockTests(unittest.TestCase):
                 authorization, authorized_visible = mechanics_lock.authorize_hidden_read(
                     path
                 )
+            git_bytes.assert_called_once_with("show", f"{commit}:visible.json")
             self.assertTrue(
                 mechanics_lock.exact_json_equal(authorized_visible, visible)
             )

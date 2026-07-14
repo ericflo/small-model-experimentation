@@ -1,6 +1,6 @@
 # Qwen3.5-4B Tokenizer-EOS Answer Commit Factorial
 
-**Status:** in-progress · since 2026-07-14 · `PASS_DESIGN` + calibration `PASS_IMPLEMENTATION`; fresh calibration: tokenizer-EOS-only interface qualified; three conditional-mechanics implementation reviews held and repaired, fresh rereview pending
+**Status:** in-progress · since 2026-07-14 · `PASS_DESIGN` + calibration `PASS_IMPLEMENTATION`; fresh calibration: tokenizer-EOS-only interface qualified; four conditional-mechanics implementation reviews held and repaired, fresh rereview pending
 
 This fresh successor tests whether the prior strict answer-seam failure was
 caused by waiting past Qwen3.5's tokenizer chat-end token. It registers the
@@ -272,6 +272,19 @@ sampling plan, assert no second visible read, and corrupt a predecessor before
 a fresh successor. The full model-free suite passes 134/134; mechanics calls
 and protected reads remain zero. A fourth pushed-green exact-commit review is
 required before any lock or generation.
+
+Round-four probes confirmed all production-shape and static-corruption repairs,
+then held on two narrower concurrent-mutation windows: a predecessor could
+change inside generation or promotion after the pre-call recheck, and visible
+authorization compared `HEAD:path` before separately resolving the commit
+recorded in its receipt. The primitive now rechecks the authenticated
+predecessor immediately after generation and again before returning from every
+promotion/recovery path. Visible authorization resolves one commit exactly
+once and uses that immutable commit ID for its blob comparison and receipt.
+New callbacks mutate the predecessor during generation and at COMPLETE
+publication; both are detected before bundle publication or successful return.
+The full model-free suite passes 136/136 with zero mechanics calls or protected
+reads. A fifth pushed-green exact-commit review is required.
 
 ## Interpretation
 

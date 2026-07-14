@@ -113,6 +113,16 @@
   sampling plan, inspect hidden-analysis dataflow, and corrupt a predecessor
   before a fresh successor. The model-free suite passes 134/134; mechanics
   calls and protected reads remain zero pending a fourth exact-SHA review.
+- Round-four probes confirmed the production tuple path, no-reread hidden
+  path, and eight static predecessor-corruption cases, but exposed concurrent
+  mutation after the pre-call predecessor check and a double resolution of
+  symbolic `HEAD` during hidden authorization. These were model-free synthetic
+  callbacks; mechanics model/GPU calls and protected reads remain zero.
+- Added predecessor rechecks immediately after generation and before every
+  successful promotion/recovery return, and resolved one commit once for both
+  the visible blob comparison and authorization receipt. Generation-time and
+  COMPLETE-publication mutation regressions fail closed. The full model-free
+  suite passes 136/136 pending a fifth exact-SHA review.
 
 ## Scaffold
 

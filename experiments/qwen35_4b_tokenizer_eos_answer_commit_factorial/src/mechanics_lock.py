@@ -706,10 +706,10 @@ def authorize_hidden_read(
     relative = _relative(path)
     if _git("ls-files", "--error-unmatch", "--", relative) != relative:
         raise RuntimeError("visible selection receipt is not committed")
-    if _git_bytes("show", f"HEAD:{relative}") != visible_bytes:
+    head = _commit_id(_git("rev-parse", "HEAD"))
+    if _git_bytes("show", f"{head}:{relative}") != visible_bytes:
         raise RuntimeError("visible selection receipt differs from HEAD")
     _git("fetch", "--quiet", "origin", "main")
-    head = _commit_id(_git("rev-parse", "HEAD"))
     if not _ancestor(head, "origin/main"):
         raise RuntimeError("visible selection receipt is not published on main")
     ci = query_green_ci(head)
