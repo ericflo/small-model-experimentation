@@ -299,18 +299,13 @@ def run_transaction(
     position = list(invocation_order).index(invocation)
     predecessor_sha: str | None = None
     if position:
-        predecessor_path = artifact_paths(
-            raw_dir, invocation_order[position - 1]
-        )["complete"]
-        if not predecessor_path.is_file() or predecessor_path.is_symlink():
-            raise RuntimeError("predecessor invocation is not complete")
-        predecessor = read_canonical(predecessor_path)
-        if (
-            not isinstance(predecessor, dict)
-            or predecessor.get("state") != "COMPLETE"
-        ):
-            raise RuntimeError("predecessor COMPLETE receipt changed")
-        predecessor_sha = sha256_file(predecessor_path)
+        predecessor = _authenticate_complete_prefix(
+            raw_dir=raw_dir,
+            invocation_order=invocation_order,
+            completed_count=position,
+            require_later_absent=False,
+        )
+        predecessor_sha = predecessor["terminal_complete_sha256"]
     for later in invocation_order[position + 1 :]:
         if inventory_state(raw_dir, later) != "absent":
             raise RuntimeError("later invocation exists before its predecessor")
@@ -329,6 +324,15 @@ def run_transaction(
         authorization_paths=authorization_paths,
         predecessor_complete_sha256=predecessor_sha,
     )
+
+    def assert_predecessor_unchanged() -> None:
+        if position:
+            predecessor_path = artifact_paths(
+                raw_dir, invocation_order[position - 1]
+            )["complete"]
+            if sha256_file(predecessor_path) != predecessor_sha:
+                raise RuntimeError("predecessor changed after exact authentication")
+
     state = inventory_state(raw_dir, invocation)
     if state == "started_only":
         _authenticate_started(paths["started"], started)
@@ -337,6 +341,7 @@ def run_transaction(
         )
     if state in {"bundle_durable", "generated_durable", "complete"}:
         _authenticate_started(paths["started"], started)
+        assert_predecessor_unchanged()
         return _promote_bundle(
             invocation=invocation,
             paths=paths,
@@ -352,13 +357,16 @@ def run_transaction(
     write_exclusive_durable(paths["started"], started)
     if crash_after == "started":
         raise RuntimeError("injected crash after STARTED")
+    assert_predecessor_unchanged()
     rows, runner_metadata = generate(prepared_rows, sampling)
-    bundle = {
-        "schema_version": 1,
-        "invocation": invocation,
-        "rows": rows,
-        "runner_metadata": runner_metadata,
-    }
+    bundle = json_native(
+        {
+            "schema_version": 1,
+            "invocation": invocation,
+            "rows": rows,
+            "runner_metadata": runner_metadata,
+        }
+    )
     _validate_bundle(
         bundle,
         invocation=invocation,
@@ -385,20 +393,23 @@ def _authenticate_complete_prefix(
     raw_dir: Path,
     invocation_order: Sequence[str],
     completed_count: int,
+    require_later_absent: bool = True,
 ) -> dict[str, Any]:
     if (
         not invocation_order
         or len(set(invocation_order)) != len(invocation_order)
         or not _exact_int(completed_count)
         or not 1 <= completed_count <= len(invocation_order)
+        or type(require_later_absent) is not bool
     ):
         raise ValueError("authenticated prefix geometry is invalid")
     audit_directory_inventory(raw_dir, invocation_order)
-    for invocation in invocation_order[completed_count:]:
-        if inventory_state(raw_dir, invocation) != "absent":
-            raise RuntimeError(
-                f"authentication requires later invocation to be absent: {invocation}"
-            )
+    if require_later_absent:
+        for invocation in invocation_order[completed_count:]:
+            if inventory_state(raw_dir, invocation) != "absent":
+                raise RuntimeError(
+                    f"authentication requires later invocation to be absent: {invocation}"
+                )
     predecessor_sha: str | None = None
     rows = 0
     outputs = 0

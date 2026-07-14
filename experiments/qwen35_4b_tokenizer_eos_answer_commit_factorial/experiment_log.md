@@ -99,6 +99,20 @@
   Ten preflight mutations and durable Boolean/integer aliases are explicit
   regression tests. The model-free suite passes 130/130; mechanics calls and
   all protected reads remain zero pending a third exact-commit rereview.
+- The round-three review of pushed-green commit `9b527cbf` confirmed the
+  round-two closures but returned `HOLD_IMPLEMENTATION`: actual tuple-valued
+  sampling would deadlock a fresh transaction after its first call, hidden
+  scoring reread the visible receipt after authorization, and the additive
+  primitive shallow-checked a predecessor before a fresh successor call. It
+  ran 130/130 tests and made zero protected reads, model requests, sampled-
+  output reads, or GPU calls.
+- JSON-normalized the complete fresh bundle before validation/write, carried the
+  exact authorized visible object directly into hidden scoring with no second
+  path read, and authenticated/rechecked the complete predecessor chain inside
+  the transaction primitive. Regression tests use the actual frozen mechanics
+  sampling plan, inspect hidden-analysis dataflow, and corrupt a predecessor
+  before a fresh successor. The model-free suite passes 134/134; mechanics
+  calls and protected reads remain zero pending a fourth exact-SHA review.
 
 ## Scaffold
 

@@ -210,6 +210,64 @@ class MechanicsLockTests(unittest.TestCase):
                 with self.assertRaisesRegex(RuntimeError, "exact visible analysis"):
                     mechanics_lock.authorize_hidden_read(path)
 
+    def test_hidden_authorization_returns_the_exact_authenticated_object(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            path = root / "visible.json"
+            calibration_decision = root / "calibration_decision.json"
+            visible = {
+                "schema_version": 1,
+                "decision": "MECHANICS_VISIBLE_SELECTION_FROZEN",
+                "selector_uses_hidden": False,
+                "hidden_files_read": [],
+                "benchmark_files_read": [],
+                "tasks": {},
+            }
+            path.write_bytes(json_bytes(visible))
+            calibration_decision.write_bytes(json_bytes(self.decision))
+            commit = "6" * 40
+
+            def fake_git(*args: str) -> str:
+                if args[:2] == ("ls-files", "--error-unmatch"):
+                    return "visible.json"
+                if args[:2] == ("fetch", "--quiet"):
+                    return ""
+                if args == ("rev-parse", "HEAD"):
+                    return commit
+                raise AssertionError(f"unexpected Git call: {args}")
+
+            with mock.patch.object(
+                mechanics_lock, "verify_mechanics_lock"
+            ), mock.patch.object(
+                mechanics_lock, "load_calibration_inputs", return_value=self.inputs
+            ), mock.patch.object(
+                mechanics_lock, "CALIBRATION_DECISION", calibration_decision
+            ), mock.patch.object(
+                mechanics_lock, "load_analysis_tokenizer", return_value=object()
+            ), mock.patch.object(
+                mechanics_lock, "analyze_visible", return_value=visible
+            ), mock.patch.object(
+                mechanics_lock, "_relative", return_value="visible.json"
+            ), mock.patch.object(
+                mechanics_lock, "_git", side_effect=fake_git
+            ), mock.patch.object(
+                mechanics_lock, "_git_bytes", return_value=json_bytes(visible)
+            ), mock.patch.object(
+                mechanics_lock, "_ancestor", return_value=True
+            ), mock.patch.object(
+                mechanics_lock, "query_green_ci", return_value=self.ci(commit)
+            ):
+                authorization, authorized_visible = mechanics_lock.authorize_hidden_read(
+                    path
+                )
+            self.assertTrue(
+                mechanics_lock.exact_json_equal(authorized_visible, visible)
+            )
+            self.assertEqual(
+                authorization["visible_selection_sha256"],
+                mechanics_lock.sha256_bytes(json_bytes(visible)),
+            )
+
     def test_preflight_replay_rejects_full_hostile_mutation_set(self) -> None:
         @dataclasses.dataclass(frozen=True)
         class FakeConfig:

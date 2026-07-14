@@ -149,6 +149,35 @@ class MechanicsBootstrapTests(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("launcher proof", result.stderr)
 
+    def test_hidden_scoring_consumes_the_authorized_visible_object(self) -> None:
+        tree = ast.parse(SCRIPT.read_text())
+        function = next(
+            node
+            for node in tree.body
+            if isinstance(node, ast.FunctionDef) and node.name == "hidden_analysis"
+        )
+        calls = [
+            node
+            for node in ast.walk(function)
+            if isinstance(node, ast.Call) and isinstance(node.func, ast.Name)
+        ]
+        self.assertEqual(
+            sum(call.func.id == "authorize_hidden_read" for call in calls), 1
+        )
+        self.assertFalse(any(call.func.id == "read_canonical" for call in calls))
+        assignment = next(
+            node
+            for node in function.body
+            if isinstance(node, ast.Assign)
+            and isinstance(node.value, ast.Call)
+            and isinstance(node.value.func, ast.Name)
+            and node.value.func.id == "authorize_hidden_read"
+        )
+        self.assertEqual(
+            [element.id for element in assignment.targets[0].elts],
+            ["authorization", "visible"],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

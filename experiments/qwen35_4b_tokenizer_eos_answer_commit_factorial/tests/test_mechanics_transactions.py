@@ -12,6 +12,8 @@ EXP = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(EXP / "src"))
 
 import mechanics_transactions as tx  # noqa: E402
+from calibration_stage import load_calibration_inputs  # noqa: E402
+from mechanics_stage import mechanics_sampling_plan  # noqa: E402
 
 
 class MechanicsTransactionTests(unittest.TestCase):
@@ -74,14 +76,17 @@ class MechanicsTransactionTests(unittest.TestCase):
             "authorization_paths": {},
         }
 
-    def run_tx(self, *, crash_after=None, generate=None):
+    def run_tx(self, *, crash_after=None, generate=None, sampling=None):
+        registration = self.registration()
+        if sampling is not None:
+            registration["sampling"] = sampling
         return tx.run_transaction(
             raw_dir=self.raw,
             invocation="direct",
             invocation_order=("direct",),
             generate=self.generate if generate is None else generate,
             crash_after=crash_after,
-            **self.registration(),
+            **registration,
         )
 
     @staticmethod
@@ -133,6 +138,49 @@ class MechanicsTransactionTests(unittest.TestCase):
                 invocation_order=("direct",),
                 registrations={"direct": registration},
             )
+
+    def test_production_sampling_tuple_is_normalized_before_fresh_write(self) -> None:
+        inputs = load_calibration_inputs()
+        decision = tx.read_canonical(EXP / "runs/calibration/decision.json")
+        sampling = mechanics_sampling_plan(decision, inputs)["transport"]
+        self.assertIs(type(sampling["logprob_token_ids"]), tuple)
+        complete = self.run_tx(sampling=sampling)
+        self.assertEqual(complete["state"], "COMPLETE")
+        paths = tx.artifact_paths(self.raw, "direct")
+        started = tx.read_canonical(paths["started"])
+        bundle = tx.read_canonical(paths["bundle"])
+        self.assertIs(type(started["sampling"]["logprob_token_ids"]), list)
+        self.assertIs(
+            type(
+                bundle["runner_metadata"]["sampling"]["logprob_token_ids"]
+            ),
+            list,
+        )
+        self.assertEqual(self.calls, 1)
+
+    def test_fresh_successor_authenticates_full_predecessor_before_call(self) -> None:
+        common = self.registration()
+        tx.run_transaction(
+            raw_dir=self.raw,
+            invocation="first",
+            invocation_order=("first", "second"),
+            generate=self.generate,
+            **common,
+        )
+        self.assertEqual(self.calls, 1)
+        complete_path = tx.artifact_paths(self.raw, "first")["complete"]
+        complete = tx.read_canonical(complete_path)
+        complete["schema_version"] = True
+        self.rewrite(complete_path, complete)
+        with self.assertRaisesRegex(RuntimeError, "COMPLETE receipt changed"):
+            tx.run_transaction(
+                raw_dir=self.raw,
+                invocation="second",
+                invocation_order=("first", "second"),
+                generate=self.fail_generate,
+                **common,
+            )
+        self.assertEqual(self.calls, 1)
 
 
 if __name__ == "__main__":

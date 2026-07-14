@@ -1,6 +1,6 @@
 # Qwen3.5-4B Tokenizer-EOS Answer Commit Factorial
 
-**Status:** in-progress · since 2026-07-14 · `PASS_DESIGN` + calibration `PASS_IMPLEMENTATION`; fresh calibration: tokenizer-EOS-only interface qualified; two conditional-mechanics implementation reviews held and repaired, fresh rereview pending
+**Status:** in-progress · since 2026-07-14 · `PASS_DESIGN` + calibration `PASS_IMPLEMENTATION`; fresh calibration: tokenizer-EOS-only interface qualified; three conditional-mechanics implementation reviews held and repaired, fresh rereview pending
 
 This fresh successor tests whether the prior strict answer-seam failure was
 caused by waiting past Qwen3.5's tokenizer chat-end token. It registers the
@@ -257,6 +257,21 @@ preflight mutations, visible `true` versus `1`, STARTED/bundle aliases,
 receipt aliases, and registered row-count aliases. The full model-free suite
 passes 130/130; mechanics calls and protected reads remain zero. A third fresh
 pushed-green exact-commit review is still required.
+
+That round-three review of pushed-green `9b527cbfd6934f579b0ebcb07cb4b695c370798b`
+returned `HOLD_IMPLEMENTATION` despite confirming all round-two closures. It
+found that production tuple-valued `logprob_token_ids` would mismatch the
+JSON-native STARTED sampling after the first call, that hidden scoring reread
+the visible receipt after authorization, and that the low-level transaction
+primitive authenticated only a predecessor's state before a fresh successor
+call. The repairs normalize the complete fresh generated bundle before its
+first validation/write, pass the exact in-memory authorized visible object
+directly into scoring, and fully authenticate plus recheck the predecessor
+chain inside the primitive itself. Tests now use the actual frozen mechanics
+sampling plan, assert no second visible read, and corrupt a predecessor before
+a fresh successor. The full model-free suite passes 134/134; mechanics calls
+and protected reads remain zero. A fourth pushed-green exact-commit review is
+required before any lock or generation.
 
 ## Interpretation
 

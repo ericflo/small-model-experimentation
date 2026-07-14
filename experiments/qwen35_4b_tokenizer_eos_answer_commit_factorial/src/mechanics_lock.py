@@ -46,6 +46,7 @@ from mechanics_transactions import exact_json_equal
 from transactions import (
     MODEL_ID,
     MODEL_REVISION,
+    json_bytes,
     read_canonical,
     sha256_bytes,
     sha256_file,
@@ -679,11 +680,14 @@ def publish_or_verify_mechanics_preflight(
     return value
 
 
-def authorize_hidden_read(path: Path = VISIBLE_SELECTION) -> dict[str, Any]:
+def authorize_hidden_read(
+    path: Path = VISIBLE_SELECTION,
+) -> tuple[dict[str, Any], dict[str, Any]]:
     verify_mechanics_lock()
     if path.is_symlink() or not path.is_file():
         raise RuntimeError("hidden scoring requires a visible selection receipt")
     visible = read_canonical(path)
+    visible_bytes = json_bytes(visible)
     inputs = load_calibration_inputs()
     tokenizer = load_analysis_tokenizer(inputs)
     decision = read_canonical(CALIBRATION_DECISION)
@@ -702,16 +706,19 @@ def authorize_hidden_read(path: Path = VISIBLE_SELECTION) -> dict[str, Any]:
     relative = _relative(path)
     if _git("ls-files", "--error-unmatch", "--", relative) != relative:
         raise RuntimeError("visible selection receipt is not committed")
-    if _git_bytes("show", f"HEAD:{relative}") != path.read_bytes():
+    if _git_bytes("show", f"HEAD:{relative}") != visible_bytes:
         raise RuntimeError("visible selection receipt differs from HEAD")
     _git("fetch", "--quiet", "origin", "main")
     head = _commit_id(_git("rev-parse", "HEAD"))
     if not _ancestor(head, "origin/main"):
         raise RuntimeError("visible selection receipt is not published on main")
     ci = query_green_ci(head)
-    return {
-        "authorization": "COMMITTED_VISIBLE_SELECTION_AUTHORIZES_HIDDEN_READ",
-        "visible_selection_sha256": sha256_file(path),
-        "authorization_commit": head,
-        "authorization_ci": ci,
-    }
+    return (
+        {
+            "authorization": "COMMITTED_VISIBLE_SELECTION_AUTHORIZES_HIDDEN_READ",
+            "visible_selection_sha256": sha256_bytes(visible_bytes),
+            "authorization_commit": head,
+            "authorization_ci": ci,
+        },
+        visible,
+    )

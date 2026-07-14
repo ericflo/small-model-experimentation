@@ -597,10 +597,9 @@ def run_live() -> dict[str, Any]:
 
 
 def hidden_analysis() -> dict[str, Any]:
-    authorization = authorize_hidden_read()
+    authorization, visible = authorize_hidden_read()
     _bootstrap_authorize_gold_path()
     inputs = load_calibration_inputs()
-    visible = read_canonical(VISIBLE_SELECTION)
     gold_rows, gold_receipt = decrypt_hidden_gold()
     value = {
         **score_hidden(
