@@ -54,3 +54,23 @@
   Normalized full log: `runs/training/designed40.log`, SHA-256
   `9dbb302ee6072b24abd39803ea85b80cab37099e400a51eb3c442ff5876470e8`.
 - No local or benchmark evaluation was performed at this checkpoint.
+
+## 2026-07-13 — 80-row designed arm training
+
+- Ran `scripts/run.py --stage train-d80` from 40-row checkpoint `83d9f078` after
+  that checkpoint was rebased, fully checked, and pushed to `main`.
+- Reauthenticated the same parent adapter and token receipt. The position-aligned
+  stream differed from `replay_repeat` in exactly 80 rows and retained the exact
+  1,429,053-forward-token exposure.
+- Completed 190/190 optimizer steps over 1,520 rows with zero skips in 1,334.550
+  wall seconds. Final training loss was 0.5864.
+- Adapter weights: 169,903,320 bytes,
+  SHA-256 `ba82457d127c63662b5b86b4a2e1d94ed18014651b59aefd6512690eef1dabc4`.
+  Adapter config SHA-256:
+  `6f3710860c78a559d3592d4a43389f0347b171d1f9bfc083737d448e2fe04520`.
+- Durable receipt: `runs/training/designed80.json`, SHA-256
+  `8f1ab673b7570452474639d351ac8e5d756fc574dce607c221d84edacd3838b5`.
+  Normalized full log: `runs/training/designed80.log`, SHA-256
+  `23685837e14702657bcb941d34166e9997ed19d5c249f81fe30a3a6c553a9af1`.
+- All three arms are now trained. No local or benchmark evaluation was performed
+  at this checkpoint.

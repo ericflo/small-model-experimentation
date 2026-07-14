@@ -25,8 +25,10 @@ Training checkpoint only. The exact-token `replay_repeat` control completed 190/
 updates over 1,520 rows with zero skips. Final training loss was 0.4069; wall time
 was 1,380.519 seconds. `designed40` completed the identical update and token budget
 with zero skips; its final training loss was 0.5128 and wall time was 1,362.717
-seconds. The 80-row arm, local screen, and paired benchmark remain pending, so no
-generalized-transfer comparison is available yet.
+seconds. `designed80` also completed the identical update and token budget with zero
+skips; its final training loss was 0.5864 and wall time was 1,334.550 seconds. The
+local screen and paired benchmark remain pending, so no generalized-transfer
+comparison is available yet.
 
 ## Controls
 

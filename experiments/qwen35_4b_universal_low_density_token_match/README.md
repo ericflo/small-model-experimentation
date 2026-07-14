@@ -1,6 +1,6 @@
 # Low-Density Token-Matched Universal Curriculum
 
-**Status:** in-progress · since 2026-07-13 · replay control and 40-row arm trained; 80-row arm, local gates, and paired pilot remain
+**Status:** in-progress · since 2026-07-13 · all three arms trained; local gates and paired pilot remain
 
 ## Research program
 
@@ -73,8 +73,11 @@ training loss was 0.4069 and its adapter weights hash is
 `designed40` then completed the same 190 updates and exact exposure with zero skips;
 its final training loss was 0.5128 and its adapter weights hash is
 `b4ca4c0187797f57ae3259f7de1817be34aad927583c0a8728786c56b40ac4a9`.
-The 80-row arm, local screen, and new benchmark event have not run, so there is no
-transfer result yet.
+`designed80` also completed the exact update and exposure contract with zero skips;
+its final training loss was 0.5864 and its adapter weights hash is
+`ba82457d127c63662b5b86b4a2e1d94ed18014651b59aefd6512690eef1dabc4`.
+The local screen and new benchmark event have not run, so there is no transfer
+result yet.
 
 ## Interpretation
 

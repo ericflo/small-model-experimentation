@@ -47852,7 +47852,7 @@
      "x_label": "frozen dose component",
      "y_label": "training rows",
      "y_format": "integer",
-          "note": "All arms share slot order, contain 1,520 rows, run 190 optimizer steps, and total exactly 1,429,053 forward tokens. The replay-only and 40-lesson streams are trained; the 80-lesson stream and model comparisons are pending.",
+          "note": "All arms share slot order, contain 1,520 rows, ran 190 optimizer steps, and total exactly 1,429,053 forward tokens. All three streams trained cleanly; fresh-seed model comparisons are pending.",
      "source": "experiments/qwen35_4b_universal_low_density_token_match/data/dose_manifest.json"
     }
    ]
