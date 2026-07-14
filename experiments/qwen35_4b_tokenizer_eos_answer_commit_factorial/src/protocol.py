@@ -53,6 +53,20 @@ def canonical_full_program(
     return (candidate_first_alias, aliases[0], aliases[1])
 
 
+def canonical_program_id(program: Sequence[str]) -> int:
+    """Map one semantic A-X triple injectively into the interval [0, 13823]."""
+
+    full = canonical_full_program(program)
+    indexes = tuple(OPERATION_ALIASES.index(alias) for alias in full)
+    return indexes[0] * (24**2) + indexes[1] * 24 + indexes[2]
+
+
+def canonical_program_id_bytes(program: Sequence[str]) -> bytes:
+    """Return the frozen prefix/tokenizer-independent two-byte program ID."""
+
+    return canonical_program_id(program).to_bytes(2, "big", signed=False)
+
+
 def _authenticate_terminal_event(
     sampled_token_ids: Sequence[int],
     *,

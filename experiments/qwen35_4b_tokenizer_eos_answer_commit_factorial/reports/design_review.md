@@ -128,3 +128,19 @@ cap contact, retains all 24 IDs as content, and is scored normally. Claimed-
 stop-without-stop, short length, repeated/interior/post-stop tokens, or wrong
 reasons are authentication failures. Live calls remain held pending another
 exact-commit design rereview and the implementation release review.
+
+## Independent review: fifth pass
+
+Rereview of exact pushed/green commit
+`2fb46a03c273161d09480300123f2ae1fb9aaa52` returned `HOLD_DESIGN`. It
+confirmed terminal classification, then found two global contradictions. The
+selector referenced an undefined normalized tokenizer encoding even though
+prefix inventories may tokenize differently, and the exact-success disjointness
+proof ignored shared exact-cap length traces.
+
+The prospective repair gives every full semantic operation tuple an injective,
+arm/prefix/tokenizer-independent base-24 ID in 0-13,823 and serializes it as
+exactly two-byte big-endian for hashing. It also replaces disjointness with the
+cap-bounded-overlap proof: global overlap <=2 makes `44+44-2>48`, and per-arity
+overlap <=1 makes `22+22-1>24`. Live calls remain held pending another exact-
+commit design rereview and implementation release review.

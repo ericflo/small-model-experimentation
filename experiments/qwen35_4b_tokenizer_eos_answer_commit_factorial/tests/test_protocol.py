@@ -160,6 +160,30 @@ class AnswerCommitProtocolTests(unittest.TestCase):
                 cap=24,
             )
 
+    def test_canonical_program_id_endpoints(self) -> None:
+        self.assertEqual(protocol.canonical_program_id(["A", "A", "A"]), 0)
+        self.assertEqual(protocol.canonical_program_id(["X", "X", "X"]), 13823)
+        self.assertEqual(
+            protocol.canonical_program_id_bytes(["X", "X", "X"]),
+            (13823).to_bytes(2, "big"),
+        )
+
+    def test_all_canonical_program_ids_are_injective(self) -> None:
+        ids = {
+            protocol.canonical_program_id((first, second, third))
+            for first in protocol.OPERATION_ALIASES
+            for second in protocol.OPERATION_ALIASES
+            for third in protocol.OPERATION_ALIASES
+        }
+        byte_ids = {
+            protocol.canonical_program_id_bytes((first, second, third))
+            for first in protocol.OPERATION_ALIASES
+            for second in protocol.OPERATION_ALIASES
+            for third in protocol.OPERATION_ALIASES
+        }
+        self.assertEqual(len(ids), 13824)
+        self.assertEqual(len(byte_ids), 13824)
+
 
 if __name__ == "__main__":
     unittest.main()

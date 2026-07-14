@@ -146,16 +146,20 @@ authentication, while malformed geometry fails the cell's zero-authentication-
 failure gate.
 
 Within each matched thinking/prefix pair, the only valid qualifier outcomes are
-tokenizer-only, HF-only, and neither. Under authenticated paired prefixes,
-tokenizer-exact and HF-exact are disjoint row sets: the first registered
-terminal ID for one policy is strict content for the other. Two disjoint sets
-cannot both meet 44/48. Observing both cells qualify in the same matched pair is
-therefore `SCORING_INVARIANT_VIOLATION`, not a scientific outcome and never
-mechanics authorization. Qualifiers in other HF thinking/prefix cells are
-reported but do not replace the HF control paired to the selected tokenizer
-cell. If no tokenizer cell qualifies, any HF qualifier yields the HF-only
-terminal; no qualifier yields neither. Only tokenizer-only in the selected
-matched pair supports a causal termination-boundary claim.
+tokenizer-only, HF-only, and neither. Non-cap exact rows cannot overlap because
+the first registered terminal ID for one policy is strict content for the
+other. Exact-24 shared-length rows can overlap, but every overlap is a cap
+contact in both cells. A qualifying cell allows at most two cap contacts, so
+matched-cell exact-success overlap is at most two and the union lower bound for
+dual qualification is `44 + 44 - 2 = 86 > 48`. Independently within each arity,
+overlap is at most one and `22 + 22 - 1 = 43 > 24`. Dual matched-cell
+qualification is therefore impossible under the frozen gates; observing it is
+`SCORING_INVARIANT_VIOLATION`, not a scientific outcome and never mechanics
+authorization. Qualifiers in other HF thinking/prefix cells are reported but
+do not replace the HF control paired to the selected tokenizer cell. If no
+tokenizer cell qualifies, any HF qualifier yields the HF-only terminal; no
+qualifier yields neither. Only tokenizer-only in the selected matched pair
+supports a causal termination-boundary claim.
 
 ## Interface gates and selection
 
@@ -269,6 +273,13 @@ identical sampled suffix bound to two different semantic first operations
 remains two distinct proposals, while suffix and direct proposals denoting the
 same full tuple are comparable.
 
+Canonical program identity is independent of arm, prefix, tokenizer
+segmentation, and sampled representation. Map A-X to integers 0-23 and assign
+tuple `(a, b, c)` the injective base-24 ID `a*24^2 + b*24 + c`, ranging from 0
+through 13,823. Its canonical bytes are exactly that unsigned integer encoded
+as two-byte big-endian. The constructor exhaustively proves 13,824 unique
+tuples, IDs, and byte strings. No tokenizer token IDs define proposal identity.
+
 For each task, the complete 24-row materialized arm freezes two conservative
 first-over prefixes of the already generated direct pool. Sampled-token cost is
 the count of every stage-one and stage-two sampled token ID, including terminal
@@ -288,9 +299,8 @@ public target on every one of the eight visible rows. It deduplicates canonical
 full three-operation tuples and clusters survivors by their output vector on
 the 16 unlabeled probes. It chooses the largest cluster; tied clusters are
 ordered by the minimum member hash of the canonical byte string UTF-8
-`visible-probe-consensus-v1`, NUL, UTF-8 task ID, NUL, then each program token
-ID from the tokenizer receipt's normalized full-program encoding as unsigned
-four-byte big-endian. The member with minimum same hash
+`visible-probe-consensus-v1`, NUL, UTF-8 task ID, NUL, then the canonical
+two-byte program ID. The member with minimum same hash
 represents the winning cluster; an exact hash collision falls back to
 lexicographically smallest canonical operation-alias tuple. This tie-break
 contains no arm, candidate index, sampled order, hidden value, or outcome. If

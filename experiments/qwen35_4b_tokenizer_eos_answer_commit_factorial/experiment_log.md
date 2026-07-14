@@ -32,6 +32,10 @@
   classification. Prospectively separated authenticated unique-final stops,
   authenticated exact-cap length traces with all tokens scored, and malformed
   geometry authentication failures. Model calls remain zero.
+- Fifth-pass review verified terminal classification but held on canonical hash
+  serialization and an invalid disjointness proof. Prospectively froze an
+  injective base-24/two-byte program ID for all 13,824 semantic triples and the
+  correct cap-bounded-overlap impossibility proof. Model calls remain zero.
 
 ## Scaffold
 
