@@ -1,6 +1,6 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · frozen design unchanged; source-v11 PREPARED-output repair reviewed at 363/363; source-v10 setup invalidated before any result training; complete source-v11 LoRA setup matrix passed and awaits publication before Stage A
+**Status:** in-progress · since 2026-07-13 · frozen design unchanged; source-v11 PREPARED-output repair reviewed at 363/363; source-v10 setup invalidated before any result training; Stage-A seed-7411 LoRA joint training complete and awaits publication before seed 7412
 
 ## Current status
 
@@ -49,7 +49,15 @@ recurrent group with finite nonzero live-joint gradients, no base gradient, and 
 `8d74b90d…d689b7c`: oracle and intact fixed-final 48/48, adaptation-disabled 0/48, exactly 256
 updates, accumulation 16, and 4,096 presentations. The complete three-seed source-v11 LoRA setup
 matrix now passes with zero benchmark/sealed access and no scientific evidence. Publish and require
-both workflows green before the three Stage-A LoRA joint cells; no result run has started.
+both workflows green before the three Stage-A LoRA joint cells. The setup checkpoint is green at
+`5b7c22fe`. Stage-A seed-7411 LoRA joint training then completed exactly 1,500 fixed updates in
+9,217.946 seconds. The canonical classifier returns `COMPLETE` with no errors: run SHA-256
+`19cac1e2…7aa60`, run identity `6db22c2f…f81f1`, checkpoint identity `174f3c69…cf9e`, adaptation
+state SHA-256 `9af35963…9e71f`, and loop-state SHA-256 `333f8c44…50a5`. All four tracked mirrors are
+byte-identical and inode-distinct from their external artifacts; the attempt journal is terminal
+`COMPLETE`; all 1,500 optimizer rows are finite. The cell opened only train, no benchmark or sealed
+contrast, and authorizes no evaluation until the complete three-cell Stage-A barrier exists. Publish
+this training checkpoint and require both workflows green before seed 7412.
 
 Historically, the integrated source-v10 review was `GO` for reviewed implementation
 `a5a494b7…6f1c4a` and full source contract `979a9012…f394b7`; the 360/360 suite and exact machine gate
