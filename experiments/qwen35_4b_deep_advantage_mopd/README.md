@@ -242,6 +242,13 @@ source then scored `0.529284` deep and `0.775684` quick, respectively
 tokens. Thus the deep source is the better source on both block-0 strata; all
 three MOPD seeds fall between the two sources, but none improves on the better
 source. The frozen soup comparison is running next.
+The immutable 40/60 soup then scored `0.571744` deep and `0.811128` quick,
+`−0.008324` and `+0.001099` versus the deep source, using 4,392,180 sampled
+tokens. Each MOPD seed is slightly above soup on deep (`+0.005261`,
+`+0.004353`, and `+0.000266`) but below it on quick (`−0.015903`,
+`−0.006961`, and `−0.005706`). The update therefore does not dominate its own
+initialization on block 0. The registered interpolation controls are running
+next.
 
 ## NF4/BF16 Interpretation Diagnostic
 

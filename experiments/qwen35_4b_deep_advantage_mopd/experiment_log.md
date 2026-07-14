@@ -617,3 +617,19 @@
   seeds lie between the two sources but fail to improve the better source.
 - The frozen soup comparator started next with external journal hash
   `b2ca6c3aeb2348510d78c99ba7efefe417684a14e5ae946e5a11316fbedb699d`.
+
+## 2026-07-14 — block-0 MOPD does not dominate its soup initialization
+
+- The immutable 40/60 soup completed sealed generation and strict validation.
+  `GENERATED.json` and `COMPLETE.json` hash to
+  `243d7fb8d00b0ccb430811cdb9017650395139dcdf0504eb630716adc1728da8`
+  and `742f388e187847f1e74654a855cd3529cc6145cf392f8aa676dc63b8942251ca`;
+  the score hashes to
+  `57dce804f32f7e0c2c0c18b23cb170075698eb9216587a34ce8818cbc7eb090c`.
+- Registered means are `0.571744` deep and `0.811128` quick, `−0.008324` and
+  `+0.001099` versus the deep source, using 4,392,180 sampled tokens. Primary
+  seeds 42/43/44 are only `+0.005261`/`+0.004353`/`+0.000266` above soup on
+  deep and are `−0.015903`/`−0.006961`/`−0.005706` below it on quick. The
+  treatment does not dominate its own initialization on this block.
+- Soup25 started next with external journal hash
+  `4bd39562939e2d3b726ce5221e22370fed9f2accdb6ddee8b702a9c558a8c2b6`.

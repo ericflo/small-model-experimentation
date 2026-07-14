@@ -177,7 +177,13 @@ versus the deep source, using 4,773,735 sampled tokens. The deep source is
 therefore the better source on both block-0 strata. All three MOPD seeds lie
 between the two sources, but none beats the better source; the soup and remaining
 controls are still needed to resolve whether the update added anything beyond
-the initialization or parameter interpolation.
+the initialization or parameter interpolation. The immutable 40/60 soup then
+scores `0.571744` deep and `0.811128` quick, `−0.008324` and `+0.001099`
+versus the deep source, using 4,392,180 sampled tokens. Seeds 42/43/44 exceed
+soup by only `+0.005261`/`+0.004353`/`+0.000266` on deep while losing by
+`−0.015903`/`−0.006961`/`−0.005706` on quick. The treatment therefore does
+not dominate its own initialization on block 0; the registered interpolation
+controls remain necessary to locate the Pareto tradeoff.
 
 Together, the three frozen optimizer seeds establish that the registered
 four-round update can complete safely and that strict-deep route supply
