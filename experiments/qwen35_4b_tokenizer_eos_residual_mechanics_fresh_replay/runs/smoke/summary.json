@@ -1,0 +1,15 @@
+{
+  "benchmark_files_read": [],
+  "design_review_status": "PENDING_INDEPENDENT_REVIEW",
+  "freshness_controls_declared": 7,
+  "hidden_files_read": [],
+  "lifecycle_controls_declared": 8,
+  "model": "Qwen/Qwen3.5-4B",
+  "model_calls": 0,
+  "parent_failure_sha256": "06d5c60c8d761b2a0f6236190a3fc1446c1ebaf213f98594f86094aff416fc61",
+  "parent_sampled_bundles_read": [],
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "sampled_model_outputs": 0,
+  "schema_version": 1,
+  "stage": "model_free_scaffold_smoke"
+}

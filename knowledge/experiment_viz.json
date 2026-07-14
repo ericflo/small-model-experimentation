@@ -43071,6 +43071,32 @@
     }
    ]
   },
+  "qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Fresh replay scaffold declares controls with zero experimental access",
+     "categories": [
+      "freshness controls",
+      "lifecycle controls",
+      "model calls",
+      "sampled outputs"
+     ],
+     "series": [
+      {
+       "label": "model-free scaffold count",
+       "values": [7, 8, 0, 0]
+      }
+     ],
+     "x_label": "scaffold receipt field",
+     "y_label": "count",
+     "y_format": "integer",
+     "note": "Readiness evidence only. Independent design review remains pending; the smoke read no parent sampled bundle, hidden file, or benchmark and authorizes no model call.",
+     "source": "experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/runs/smoke/summary.json"
+    }
+   ]
+  },
   "qwen35_4b_tool_seeded_banking": {
    "charts": [
     {

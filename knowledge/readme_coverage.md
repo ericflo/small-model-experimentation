@@ -165,6 +165,7 @@ Top-level README files are required for all experiments. Generated entries shoul
 | `qwen35_4b_thinking_lookahead` | [README](../experiments/qwen35_4b_thinking_lookahead/README.md) | [report](../experiments/qwen35_4b_thinking_lookahead/reports/report.md) |
 | `qwen35_4b_thinking_separability_probe` | [README](../experiments/qwen35_4b_thinking_separability_probe/README.md) | [report](../experiments/qwen35_4b_thinking_separability_probe/reports/report.md) |
 | `qwen35_4b_tokenizer_eos_answer_commit_factorial` | [README](../experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/README.md) | [report](../experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/reports/report.md) |
+| `qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay` | [README](../experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/README.md) | [report](../experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/reports/report.md) |
 | `qwen35_4b_tool_seeded_banking` | [README](../experiments/qwen35_4b_tool_seeded_banking/README.md) | [report](../experiments/qwen35_4b_tool_seeded_banking/reports/report.md) |
 | `qwen35_4b_tool_state_policy_lora` | [README](../experiments/qwen35_4b_tool_state_policy_lora/README.md) | [report](../experiments/qwen35_4b_tool_state_policy_lora/reports/report.md) |
 | `qwen35_4b_trained_vs_frozen_repair_mdp` | [README](../experiments/qwen35_4b_trained_vs_frozen_repair_mdp/README.md) | [report](../experiments/qwen35_4b_trained_vs_frozen_repair_mdp/reports/qwen35_4b_trained_vs_frozen_repair_mdp_report.md) |

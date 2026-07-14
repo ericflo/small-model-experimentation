@@ -1263,6 +1263,14 @@
     "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
    ]
   },
+  "qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay": {
+   "start": "2026-07-14",
+   "end": "2026-07-14",
+   "confidence": "high",
+   "sources": [
+    "dated preregistration and experiment log; git history will supersede after first commit"
+   ]
+  },
   "qwen35_4b_tool_seeded_banking": {
    "start": "2026-07-04",
    "end": "2026-07-04",

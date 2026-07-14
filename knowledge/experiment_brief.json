@@ -6995,32 +6995,32 @@
    ]
   },
   "qwen35_4b_tokenizer_eos_answer_commit_factorial": {
-   "verdict_tag": "First-stop answer contract is registered; no model run is open",
-   "concept_primer": "Qwen has two different end markers here: a chat-end token and a later model-end token. The prior test waited for the later one, so a correct short answer looked like it had extra text. This follow-up registers exactly where answer content must stop before trying the reasoning task again.",
-   "plain_question": "Does stopping at the first chat-end token create a strict, usable program answer without loosening the parser?",
-   "plain_answer": "No model result exists yet. A synthetic smoke now accepts only the exact answer followed by one terminal chat-end token. It rejects the old later boundary, early or repeated stops, missing stops, and any extra byte before commit.",
-   "why_it_matters": "The design can distinguish a real token-boundary repair from arbitrary suffix stripping. Fresh tasks and a matched old-boundary control are still required before residual mechanics can open.",
-   "verdict_tone": "neutral",
+   "verdict_tag": "Boundary works; capability test failed instrumentally",
+   "concept_primer": "Qwen emits a chat-end marker before a later model-end marker. Waiting for the later marker made correct short programs look as if they contained extra text. This experiment stopped at the first marker, then tried to use that repaired answer boundary in a harder reasoning comparison.",
+   "plain_question": "Does stopping at the first chat-end marker create a strict program answer and unlock the harder residual task?",
+   "plain_answer": "The boundary worked cleanly: both no-thinking chat-end conditions produced 48 correct strict answers out of 48, while every matched later-end condition produced zero. The harder transport check also scored 24 of 24. But the final comparison never completed because the analysis code incorrectly demanded that later completed stages be absent.",
+   "why_it_matters": "The end marker is a real part of the usable interface, but this run says nothing about a new reasoning capability. All 4,056 harder-task outputs remain quarantined, and a fresh successor is required.",
+   "verdict_tone": "mixed",
    "key_numbers": [
     {
-     "label": "Registered answer boundaries",
-     "value": "2",
-     "sub": "tokenizer chat end versus HF model end"
+     "label": "No-thinking chat-end answers",
+     "value": "48 / 48",
+     "sub": "strictly correct in both prefix conditions"
     },
     {
-     "label": "Synthetic boundary cases",
-     "value": "6",
-     "sub": "clean, old boundary, early, repeated, missing, and extra byte"
+     "label": "Matched later-end answers",
+     "value": "0 / 48",
+     "sub": "failed in every factorial condition"
     },
     {
-     "label": "Model-free tests passing",
-     "value": "20 / 20",
-     "sub": "protocol plus pinned runner template"
+     "label": "Fresh transport check",
+     "value": "24 / 24",
+     "sub": "exact answers with zero cap contacts"
     },
     {
-     "label": "Model calls",
-     "value": "zero",
-     "sub": "construction and adversarial review still block live work"
+     "label": "Quarantined harder-task outputs",
+     "value": "4,056",
+     "sub": "not scored because visible analysis failed"
     }
    ],
    "charts": [
@@ -7029,6 +7029,44 @@
      "chart_plain_title": "Only one synthetic trace is both physically valid and exactly parsed",
      "chart_read": "Each category is one frozen boundary case. The first bar says whether its stop-token geometry could be real; the second says whether every pre-commit token is exactly the requested answer.",
      "chart_takeaway": "Only the clean first-chat-end case passes exactness. Valid-looking old, early, or extra-byte traces still fail the strict answer grammar."
+    }
+   ]
+  },
+  "qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay": {
+   "verdict_tag": "Fresh replay is designed, not yet run",
+   "concept_primer": "The parent experiment fixed where a short answer ends, but its final analysis mixed up two timing rules: the first transport check must have no later stages, while a later replay must accept a fully completed history. This successor separates those rules and starts from entirely fresh tasks.",
+   "plain_question": "Can a clean replay finally test whether concrete intermediate consequences help this small model solve three-step programs better than spending the same effort on ordinary sampling?",
+   "plain_answer": "No result exists yet. The scaffold declares seven freshness controls and eight lifecycle controls, reads none of the parent's sampled bundles, and authorizes no model call until independent review and release gates pass.",
+   "why_it_matters": "A valid rerun could answer the capability question the parent left open without learning from its 4,056 quarantined outputs or weakening the matched-effort baseline.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Freshness controls declared",
+     "value": "7",
+     "sub": "functions, prompts, identities, seeds, ciphertext, and key"
+    },
+    {
+     "label": "Lifecycle controls declared",
+     "value": "8",
+     "sub": "full replay, restart, mutation, and access checks"
+    },
+    {
+     "label": "Model calls",
+     "value": "zero",
+     "sub": "design review is still pending"
+    },
+    {
+     "label": "Parent sampled bundles read",
+     "value": "zero",
+     "sub": "the old result remains quarantined"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Controls are declared before any experimental access",
+     "chart_read": "The first two bars count declared freshness and lifecycle checks. The last two bars show model calls and sampled outputs, both at zero.",
+     "chart_takeaway": "This is readiness evidence only: the successor has a stricter plan but no scientific result."
     }
    ]
   },

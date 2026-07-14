@@ -1,0 +1,54 @@
+schema_version: 1
+
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+  dtype: bfloat16
+  backend: vllm
+  vllm_version: 0.24.0+cu129
+
+identity:
+  experiment_id: qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay
+  namespace: tokenizer-eos-residual-mechanics-fresh-replay-v1
+  scientific_parent: qwen35_4b_tokenizer_eos_answer_commit_factorial
+  forbid_parent_sampled_bundles: true
+
+seeds:
+  construction: 2026140800
+  calibration: 2026140801
+  mechanics: 2026140802
+  direct_pool: 2026140803
+  bootstrap: 2026140804
+  shuffle: 2026140805
+  transport: 2026140806
+
+freshness:
+  reject_parent_function_fingerprints: true
+  reject_parent_task_ids: true
+  reject_parent_record_ids: true
+  reject_parent_request_ids: true
+  reject_parent_rendered_prompt_token_sequences: true
+  reject_parent_sampling_seeds: true
+  fresh_ciphertext_and_key: true
+
+interface:
+  selected_boundary: tokenizer_eos
+  selected_thinking: no_think
+  selected_prefix: "PROGRAM:"
+  tokenizer_eos_token_id: 248046
+  hf_model_eos_control_token_id: 248044
+  answer_cap: 24
+
+mechanics:
+  arms: [materialized, name_only, shuffled, direct]
+  invocation_order: [transport, direct, materialized, name_only, shuffled]
+  initial_transport_requires_later_absent: true
+  historical_transport_requires_authenticated_complete_chain: true
+  matched_direct_prefixes: [sampled_token_first_over, logical_model_token_first_over]
+  selector: visible-probe-consensus-v1
+  hidden_task_success: exact_correctness_on_all_8_hidden_rows
+
+boundaries:
+  model_calls_authorized: false
+  hidden_read_authorized: false
+  benchmark_files_read: []

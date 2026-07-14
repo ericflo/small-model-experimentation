@@ -5494,7 +5494,39 @@
       "tests"
     ],
     "total_files": 119,
-    "total_size_bytes": 37722859
+    "total_size_bytes": 37723031
+  },
+  {
+    "file_counts": {
+      ".json": 1,
+      ".md": 7,
+      ".py": 3,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay",
+    "path": "experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay",
+    "primary_readme": "experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/README.md",
+    "primary_report": "experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/reports/report.md",
+    "research_programs": [
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "This fresh-identity successor preserves the parent's qualified tokenizer-EOS interface and frozen residual-mechanics science while separating initial transport authorization from post-chain replay. It forbids every parent sampled bundle and requires fresh functions, prompts, identities, seeds, ciphertext, and key before testing capability against matched-compute sampling.",
+    "tags": [
+      "abi",
+      "small-model"
+    ],
+    "title": "Qwen3.5-4B Tokenizer-EOS Residual Mechanics Fresh Replay",
+    "top_level_dirs": [
+      "configs",
+      "reports",
+      "runs",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 14,
+    "total_size_bytes": 110723
   },
   {
     "file_counts": {

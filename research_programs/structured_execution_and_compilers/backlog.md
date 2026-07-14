@@ -77,18 +77,20 @@
   precommit calibration has now passed under a committed-green reviewed lock.
   Both tokenizer-EOS no-think cells were 48/48 exact/parse with zero cap
   contacts, while all matched HF-model-EOS controls were 0/48; thinking fell to
-  38/48 in the structured cell and 30/48 in freeform. Advance only the frozen
-  `tokenizer_eos_no_think_program_slot` winner. Before any protected mechanics
-  read or model request, publish a second lock that binds the committed-green
-  calibration decision, exact winner/control, request inventory, runtime, and
-  zero pre-lock mechanics activity. This qualifies an interface only; the
-  residual-capability question remains unadjudicated.
+  38/48 in the structured cell and 30/48 in freeform. Only the frozen
+  `tokenizer_eos_no_think_program_slot` winner advanced from calibration under
+  a second committed-green lock. This qualified an interface only; the
+  residual-capability question remained unadjudicated.
   The winner-bound run subsequently passed transport 24/24 and durably
   completed all five transactions, but visible analysis failed because
   post-chain transport-decision replay reused the initial later-absent
   authorization gate. No hidden read occurred. Replace it with a fresh-identity
   successor that separates initial authorization from immutable replay under a
-  new review and lock; do not rerun the result-bearing experiment.
+  new review and lock; do not rerun the result-bearing experiment. That
+  successor is now registered as
+  `qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay`, with fresh function
+  fingerprints, identities, prompts/token sequences, seeds, ciphertext/key,
+  and an enforced parent-sampled-bundle denylist; design review is pending.
 - Measure the exact behavioral quotient at fresh depth 6 before assuming model-guided pruning is economically
   needed; record wall time, memory, physical transitions, coverage, and selector success.
 - If a real search wall appears, test a residualized partial state (feasible parameter domains, materialized

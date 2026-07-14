@@ -93,7 +93,11 @@ exactness, and cap gates: shared exact-cap overlap is <=2 globally and <=1 per
 arity, yielding `44+44-2>48` and `22+22-1>24`. Any observed dual qualification
 terminates as a scoring invariant violation.
 
-## Run
+## Historical reproduction commands
+
+This experiment is finished and its result-bearing mechanics transaction must
+not be executed or rerun. The commands below document historical provenance
+only. Use the fresh successor named in the report for any further model call.
 
 Model-free smoke:
 
@@ -107,25 +111,21 @@ Fresh construction:
 python3 -B experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/construct.py
 ```
 
-Full:
+Historical calibration entry points:
 
 ```bash
-# Still sealed pending implementation review and the published-green lock.
-# Once those gates pass, these are the only supported entry points:
 experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/calibration_launcher --stage lock
 experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/calibration_launcher --stage run
 experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/calibration_launcher --stage analyze
 ```
 
-Winner-bound mechanics (still unauthorized until the implementation review,
-review receipt, and mechanics lock have each been committed, pushed, and
-green):
+Historical winner-bound mechanics entry points (do not execute):
 
 ```bash
 experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/mechanics_launcher --stage lock
 experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/mechanics_launcher --stage run
 experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/mechanics_launcher --stage analyze-visible
-# Only after visible_selection.json is committed, pushed, and green:
+# Hidden scoring was never authorized and must not be executed:
 experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/mechanics_launcher --stage score-hidden
 ```
 
@@ -402,9 +402,11 @@ The fresh result isolates a real termination-boundary effect: with identical
 paired prompts/seeds and authenticated shared prefixes, stopping on tokenizer
 EOS yields 48/48 strict structured answers while waiting for HF model EOS yields
 0/48 because tokenizer EOS/newline remains pre-commit content. This is an
-interface qualification, not yet a capability gain. Thinking is actively worse
+interface qualification, not a capability gain. Thinking is actively worse
 at this interface (38/48 and 30/48, including 16 freeform cap contacts), so the
-frozen no-think `PROGRAM:` winner is the only branch that advances.
+no-think `PROGRAM:` winner was the only branch that advanced from calibration.
+That branch is now frozen after terminal instrument failure; only the
+fresh-identity successor may continue it.
 
 Any conditional mechanics pass is scoped to a 24-task contamination-free
 large-effect pilot; it is not a confirmatory or general deployability claim.

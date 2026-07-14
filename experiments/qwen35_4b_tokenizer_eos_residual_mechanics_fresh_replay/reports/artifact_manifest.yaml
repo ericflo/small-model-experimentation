@@ -1,0 +1,20 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay"
+external_artifacts:
+  - name: fresh_mechanics_gold_key
+    storage: "not created before fresh construction"
+    required_for: "post-selection hidden scoring only"
+    checksum: "pending"
+    regenerate: "fresh construction only; never copy the parent key"
+omitted_artifacts:
+  - path: "parent runs/mechanics/raw/*.generated.json"
+    reason: "scientifically quarantined and forbidden as successor inputs"
+reproducibility:
+  smoke_command: "python3 -B experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/scripts/run.py --smoke"
+  full_command: "unauthorized pending design and implementation release gates"
+  required_external_artifacts:
+    - fresh_mechanics_gold_key_after_visible_selection_only
+notes: >-
+  Scaffold only. The parent failure receipt may be hashed for lineage, but no
+  parent task payload or sampled bundle is a valid input.
