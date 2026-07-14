@@ -71,7 +71,7 @@ if _PYTHON_BIN not in os.environ.get("PATH", "").split(os.pathsep):
 
 MODEL_ID = "Qwen/Qwen3.5-4B"
 MODEL_REVISION = "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
-RUNNER_SCHEMA_VERSION = 4
+RUNNER_SCHEMA_VERSION = 6
 
 _MAMBA_CACHE_BLOCKS_RE = re.compile(
     r"max_num_seqs\b.*?(?:exceeds?|greater\s+than|larger\s+than|more\s+than)"
@@ -95,6 +95,7 @@ NO_THINK_TOP_K = 20
 MIN_NONZERO_TEMPERATURE = 0.01
 MAX_TEMPERATURE = 2.0
 MAX_N = 16_384
+MAX_LOGPROBS = 24
 HF_MODEL_EOS_TOKEN_ID = 248044
 TOKENIZER_EOS_TOKEN_ID = 248046
 HF_MODEL_EOS_TOKEN = "<|endoftext|>"
@@ -127,6 +128,12 @@ def _sha256_file(path: Path) -> str:
         for block in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(block)
     return digest.hexdigest()
+
+
+def _token_ids_sha256(token_ids: Sequence[int]) -> str:
+    return _sha256_bytes(
+        bytes().join(int(token_id).to_bytes(4, "big") for token_id in token_ids)
+    )
 
 
 def _run_text(command: Sequence[str]) -> str:
@@ -437,6 +444,9 @@ class SamplingConfig:
     prompt_logprobs: int | None = None
     logprob_token_ids: tuple[int, ...] = ()
     allow_custom_prompts: bool = False
+    answer_prefix: str = ""
+    force_answer_seam: bool = False
+    paired_answer_seed: bool = False
 
     def validate(self) -> None:
         if self.thinking not in {"off", "natural", "budget"}:
@@ -458,8 +468,11 @@ class SamplingConfig:
             raise ValueError("shuffle_thinking is only valid for budget thinking")
         if self.logprobs is not None and self.logprobs < 0:
             raise ValueError("logprobs must be non-negative")
-        if self.logprobs is not None and self.logprobs > 20:
-            raise ValueError("logprobs cannot exceed this runner's vLLM max_logprobs=20")
+        if self.logprobs is not None and self.logprobs > MAX_LOGPROBS:
+            raise ValueError(
+                "logprobs cannot exceed this runner's vLLM "
+                f"max_logprobs={MAX_LOGPROBS}"
+            )
         if self.prompt_logprobs is not None and self.prompt_logprobs < 0:
             raise ValueError("prompt_logprobs must be non-negative")
         if self.prompt_logprobs is not None and self.prompt_logprobs > 20:
@@ -470,6 +483,22 @@ class SamplingConfig:
             raise ValueError(
                 "prompt_logprobs with two-stage budget thinking are not yet supported; "
                 "score the completed sequences in a separate pass"
+            )
+        if not isinstance(self.answer_prefix, str):
+            raise ValueError("answer_prefix must be text")
+        if self.answer_prefix and self.thinking == "natural":
+            raise ValueError("answer_prefix is unsupported for natural thinking")
+        if self.answer_prefix and self.thinking == "budget" and not self.force_answer_seam:
+            raise ValueError(
+                "budgeted answer_prefix requires force_answer_seam so natural closes "
+                "cannot silently bypass the registered slot"
+            )
+        if self.force_answer_seam and self.thinking != "budget":
+            raise ValueError("force_answer_seam is only valid for budget thinking")
+        if self.paired_answer_seed and self.n != 1:
+            raise ValueError(
+                "paired_answer_seed requires n=1; represent master-pool samples "
+                "as distinct canonical request IDs"
             )
         if self.logprob_token_ids and self.logprobs != len(self.logprob_token_ids):
             raise ValueError(
@@ -720,7 +749,8 @@ class VLLMRunner:
             "mamba_cache_mode": "align" if config.enable_prefix_caching else "none",
             "enforce_eager": config.enforce_eager,
             "generation_config": "vllm",
-            "max_logprobs": 20,
+            "max_logprobs": MAX_LOGPROBS,
+            "logprobs_mode": "raw_logprobs",
             "seed": 0,
             # vLLM 0.24 auto-enables async scheduling.  Keep the simpler
             # synchronous mode explicit for offline research.  On pre-Hopper
@@ -866,6 +896,19 @@ class VLLMRunner:
         except (AttributeError, RuntimeError):
             self.close()
             raise
+        try:
+            self.resolved_logprobs_mode = str(
+                self.llm.llm_engine.vllm_config.model_config.logprobs_mode
+            )
+        except AttributeError:
+            self.close()
+            raise RuntimeError("vLLM did not expose resolved logprobs_mode") from None
+        if self.resolved_logprobs_mode != "raw_logprobs":
+            self.close()
+            raise RuntimeError(
+                "vLLM did not honor raw_logprobs: "
+                f"{self.resolved_logprobs_mode!r}"
+            )
 
         self.lora_request = None
         if self.adapter_info is not None:
@@ -993,15 +1036,21 @@ class VLLMRunner:
             )
         return prepared
 
-    def _check_context(self, records: Sequence[_PreparedRecord], sampling: SamplingConfig) -> None:
+    def _check_context(
+        self,
+        records: Sequence[_PreparedRecord],
+        sampling: SamplingConfig,
+        answer_prefix_ids: Sequence[int],
+    ) -> None:
         if sampling.thinking == "budget":
             reserve = (
                 int(sampling.thinking_budget)
                 + len(self.close_ids)
+                + len(answer_prefix_ids)
                 + sampling.answer_max_tokens
             )
         else:
-            reserve = sampling.max_tokens
+            reserve = len(answer_prefix_ids) + sampling.max_tokens
         too_long = [
             (record.record_id, len(record.prompt_token_ids) + reserve)
             for record in records
@@ -1014,9 +1063,22 @@ class VLLMRunner:
                 + detail
             )
 
-    def _params(self, sampling: SamplingConfig, *, max_tokens: int, seed: int, n: int):
+    def _params(
+        self,
+        sampling: SamplingConfig,
+        *,
+        max_tokens: int,
+        seed: int,
+        n: int,
+        stop_token_id: int | None = None,
+    ):
         from vllm import SamplingParams
 
+        registered_stop = self.hf_eos_id if stop_token_id is None else stop_token_id
+        if registered_stop not in {self.hf_eos_id, self.tokenizer_eos_id}:
+            raise ValueError(
+                "stop_token_id must be the pinned HF model EOS or tokenizer EOS"
+            )
         resolved = sampling.resolved_sampling()
         return SamplingParams(
             n=n,
@@ -1034,7 +1096,7 @@ class VLLMRunner:
             # vLLM's tokenizer EOS and use the model EOS so migrations preserve
             # the established HF answer boundary and token accounting.
             ignore_eos=True,
-            stop_token_ids=[self.hf_eos_id],
+            stop_token_ids=[registered_stop],
             logprobs=sampling.logprobs,
             prompt_logprobs=sampling.prompt_logprobs,
             logprob_token_ids=list(sampling.logprob_token_ids) or None,
@@ -1056,9 +1118,13 @@ class VLLMRunner:
         sample_index: int,
         seed: int,
         thinking: str,
+        answer_prefix_ids: Sequence[int] = (),
+        seed_domain: str = "stage1",
     ) -> dict[str, Any]:
         sampled_ids = list(completion.token_ids)
-        token_ids = self._trim_hf_eos(sampled_ids)
+        sampled_without_eos = self._trim_hf_eos(sampled_ids)
+        prefix_ids = list(answer_prefix_ids)
+        token_ids = prefix_ids + sampled_without_eos
         close_index = (
             token_ids.index(self.think_close_id)
             if self.think_close_id in token_ids
@@ -1066,7 +1132,7 @@ class VLLMRunner:
         )
         if thinking == "off":
             n_thinking = 0
-            n_answer = len(token_ids)
+            n_answer = len(sampled_without_eos)
         elif close_index is None:
             n_thinking = len(token_ids)
             n_answer = 0
@@ -1078,18 +1144,21 @@ class VLLMRunner:
             "stage1_parent_seed": seed,
             "seed_stage1": seed + sample_index,
             "seed_stage2": None,
+            "seed_domain_stage1": seed_domain,
+            "seed_domain_stage2": None,
             "text": self._decode(token_ids),
             "token_ids": token_ids,
             "stage1_token_ids": sampled_ids,
-            "injected_token_ids": [],
+            "answer_prefix_token_ids": prefix_ids,
+            "injected_token_ids": prefix_ids,
             "stage2_token_ids": [],
             "n_thinking_tokens": n_thinking,
             "n_answer_tokens": n_answer,
             "n_sampled_tokens": len(sampled_ids),
-            "n_injected_tokens": 0,
+            "n_injected_tokens": len(prefix_ids),
             "n_completion_tokens": len(token_ids),
-            "n_terminal_tokens_trimmed": len(sampled_ids) - len(token_ids),
-            "n_stage1_prompt_tokens": len(record.prompt_token_ids),
+            "n_terminal_tokens_trimmed": len(sampled_ids) - len(sampled_without_eos),
+            "n_stage1_prompt_tokens": len(record.prompt_token_ids) + len(prefix_ids),
             "n_stage2_prompt_tokens": 0,
             "thinking_closed": close_index is not None,
             "forced_close": False,
@@ -1105,6 +1174,121 @@ class VLLMRunner:
             "stage2_logprobs": None,
         }
 
+    def _generation_summary(
+        self,
+        rows: Sequence[dict[str, Any]],
+        sampling: SamplingConfig,
+        generation_seconds: float,
+        *,
+        generation_mode: str,
+        physical_sampled_tokens: int | None = None,
+        extra: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        unique_input_prompt = sum(row["n_prompt_tokens"] for row in rows)
+        stage1_logical_prompt = sum(
+            output["n_stage1_prompt_tokens"]
+            for row in rows
+            for output in row["outputs"]
+        )
+        stage2_logical_prompt = sum(
+            output["n_stage2_prompt_tokens"]
+            for row in rows
+            for output in row["outputs"]
+        )
+        total_sampled = sum(
+            output["n_sampled_tokens"] for row in rows for output in row["outputs"]
+        )
+        total_injected = sum(
+            output["n_injected_tokens"] for row in rows for output in row["outputs"]
+        )
+        if physical_sampled_tokens is None:
+            physical_sampled_tokens = total_sampled
+        if not 0 <= physical_sampled_tokens <= total_sampled:
+            raise RuntimeError("physical sampled-token accounting is inconsistent")
+        logical_prompt_tokens = stage1_logical_prompt + stage2_logical_prompt
+        physical_prompt_tokens = (
+            stage2_logical_prompt
+            if generation_mode
+            in {"shared_thought_continuation", "shared_thought_boundary_pairs"}
+            else logical_prompt_tokens
+        )
+        summary = {
+            "schema_version": RUNNER_SCHEMA_VERSION,
+            "generation_mode": generation_mode,
+            "model": MODEL_ID,
+            "model_revision": MODEL_REVISION,
+            "runner_sha256": _sha256_file(Path(__file__).resolve()),
+            "engine": {
+                key: str(value) if isinstance(value, Path) else value
+                for key, value in dataclasses.asdict(self.config).items()
+            },
+            "engine_args": {
+                key: str(value) if isinstance(value, Path) else value
+                for key, value in self.engine_args.items()
+            },
+            "resolved_cudagraph": self.resolved_cudagraph,
+            "resolved_logprobs_mode": self.resolved_logprobs_mode,
+            "sampling": dataclasses.asdict(sampling),
+            "resolved_sampling": sampling.resolved_sampling(),
+            "adapter": self.adapter_info,
+            "think_token_ids": {
+                "open": self.think_open_id,
+                "close": self.think_close_id,
+                "forced_close_sequence": self.close_ids,
+                "thinking_prompt_suffix": self.thinking_prompt_suffix_ids,
+                "no_thinking_prompt_suffix": self.no_thinking_prompt_suffix_ids,
+            },
+            "termination": {
+                "hf_model_eos_token_id": self.hf_eos_id,
+                "vllm_tokenizer_eos_ignored": self.tokenizer_eos_id,
+            },
+            "rng_isolation": {
+                "engine_seed": self.engine_args["seed"],
+                "caller_global_rng_state_restored": True,
+            },
+            "counts": {
+                "requests": len(rows),
+                "completions": sum(len(row["outputs"]) for row in rows),
+                "unique_input_prompt_tokens": unique_input_prompt,
+                "stage1_logical_prompt_tokens": stage1_logical_prompt,
+                "stage2_logical_prompt_tokens": stage2_logical_prompt,
+                "logical_model_input_tokens": logical_prompt_tokens,
+                "logical_prompt_tokens": logical_prompt_tokens,
+                "physical_prompt_tokens": physical_prompt_tokens,
+                "reused_prompt_tokens": logical_prompt_tokens
+                - physical_prompt_tokens,
+                "sampled_tokens": total_sampled,
+                "physical_sampled_tokens": physical_sampled_tokens,
+                "reused_sampled_tokens": total_sampled - physical_sampled_tokens,
+                "logical_model_tokens": logical_prompt_tokens + total_sampled,
+                "physical_model_tokens": physical_prompt_tokens
+                + physical_sampled_tokens,
+                "reused_model_tokens": (
+                    logical_prompt_tokens
+                    + total_sampled
+                    - physical_prompt_tokens
+                    - physical_sampled_tokens
+                ),
+                "injected_tokens": total_injected,
+            },
+            "timing": {
+                "model_load_seconds": self.load_seconds,
+                "generation_seconds": generation_seconds,
+                "sampled_tokens_per_second": (
+                    physical_sampled_tokens / generation_seconds
+                    if generation_seconds > 0
+                    else None
+                ),
+            },
+            "runtime": self.runtime_metadata(),
+        }
+        if extra:
+            overlap = set(summary) & set(extra)
+            if overlap:
+                raise RuntimeError(f"summary extension collides with core fields: {overlap}")
+            summary.update(extra)
+        return summary
+
     def generate(
         self,
         records: Sequence[dict[str, Any]],
@@ -1116,10 +1300,35 @@ class VLLMRunner:
         )
         if not prepared:
             raise ValueError("input is empty")
-        self._check_context(prepared, sampling)
-        prompts = [{"prompt_token_ids": record.prompt_token_ids} for record in prepared]
+        answer_prefix_ids = self.tokenizer.encode(
+            sampling.answer_prefix, add_special_tokens=False
+        )
+        if sampling.answer_prefix and not answer_prefix_ids:
+            raise RuntimeError("nonempty answer_prefix tokenized to no tokens")
+        self._check_context(prepared, sampling, answer_prefix_ids)
+        prompt_prefix_ids = answer_prefix_ids if sampling.thinking == "off" else []
+        effective_prompt_ids = [
+            record.prompt_token_ids + list(prompt_prefix_ids) for record in prepared
+        ]
+        prompts = [{"prompt_token_ids": ids} for ids in effective_prompt_ids]
+        stage1_seed_domain = (
+            "thought"
+            if sampling.paired_answer_seed and sampling.thinking == "budget"
+            else "answer"
+            if sampling.paired_answer_seed
+            else "stage1"
+        )
         seeds = [
-            _stable_seed(sampling.run_seed, record.record_id, -1, "stage1")
+            _stable_seed(
+                sampling.run_seed,
+                record.record_id,
+                (
+                    0
+                    if sampling.paired_answer_seed and sampling.thinking == "off"
+                    else -1
+                ),
+                stage1_seed_domain,
+            )
             for record in prepared
         ]
         first_cap = (
@@ -1143,9 +1352,11 @@ class VLLMRunner:
         rows: list[dict[str, Any]] = []
         continuation_prompts: list[dict[str, list[int]]] = []
         continuation_params: list[Any] = []
-        continuation_meta: list[tuple[int, int, list[int], list[int], bool, int, Any]] = []
+        continuation_meta: list[
+            tuple[int, int, list[int], list[int], bool, int, str, Any]
+        ] = []
         # (row index, output index, original stage1, retained thinking,
-        #  forced_close, stage2 seed, stage1 completion)
+        #  forced_close, stage2 seed, stage2 seed domain, stage1 completion)
 
         for row_index, (record, request_output, seed) in enumerate(
             zip(prepared, first_outputs, seeds)
@@ -1154,8 +1365,16 @@ class VLLMRunner:
                 "id": record.record_id,
                 "meta": record.meta,
                 "prompt_sha256": _sha256_bytes(record.prompt_text.encode("utf-8")),
-                "n_prompt_tokens": len(record.prompt_token_ids),
+                "effective_prompt_sha256": _sha256_bytes(
+                    bytes().join(
+                        int(token_id).to_bytes(4, "big")
+                        for token_id in effective_prompt_ids[row_index]
+                    )
+                ),
+                "n_prompt_tokens": len(effective_prompt_ids[row_index]),
+                "n_original_prompt_tokens": len(record.prompt_token_ids),
                 "prompt_channel": record.prompt_channel,
+                "answer_prefix_token_ids": list(answer_prefix_ids),
                 "prompt_logprobs": _jsonable_logprobs(request_output.prompt_logprobs),
                 "outputs": [None] * len(request_output.outputs),
             }
@@ -1164,7 +1383,13 @@ class VLLMRunner:
                 sample_index = int(completion.index)
                 if sampling.thinking != "budget":
                     row["outputs"][sample_index] = self._ordinary_output(
-                        record, completion, sample_index, seed, sampling.thinking
+                        record,
+                        completion,
+                        sample_index,
+                        seed,
+                        sampling.thinking,
+                        answer_prefix_ids,
+                        stage1_seed_domain,
                     )
                     continue
 
@@ -1175,17 +1400,33 @@ class VLLMRunner:
                     if self.think_close_id in stage1
                     else None
                 )
-                naturally_finished = close_index is not None and completion.finish_reason == "stop"
+                naturally_finished = (
+                    close_index is not None
+                    and completion.finish_reason == "stop"
+                    and not sampling.force_answer_seam
+                )
                 if naturally_finished:
                     row["outputs"][sample_index] = self._ordinary_output(
-                        record, completion, sample_index, seed, "budget"
+                        record,
+                        completion,
+                        sample_index,
+                        seed,
+                        "budget",
+                        (),
+                        stage1_seed_domain,
                     )
                     continue
 
                 retained = stage1[:close_index] if close_index is not None else list(stage1)
-                forced_close = close_index is None
+                forced_close = sampling.force_answer_seam or close_index is None
+                stage2_seed_domain = (
+                    "answer" if sampling.paired_answer_seed else "stage2"
+                )
                 stage2_seed = _stable_seed(
-                    sampling.run_seed, record.record_id, sample_index, "stage2"
+                    sampling.run_seed,
+                    record.record_id,
+                    sample_index,
+                    stage2_seed_domain,
                 )
                 if sampling.shuffle_thinking and retained:
                     random.Random(
@@ -1194,7 +1435,14 @@ class VLLMRunner:
                         )
                     ).shuffle(retained)
                 continuation_prompts.append(
-                    {"prompt_token_ids": record.prompt_token_ids + retained + self.close_ids}
+                    {
+                        "prompt_token_ids": (
+                            record.prompt_token_ids
+                            + retained
+                            + self.close_ids
+                            + list(answer_prefix_ids)
+                        )
+                    }
                 )
                 continuation_params.append(
                     self._params(
@@ -1212,6 +1460,7 @@ class VLLMRunner:
                         retained,
                         forced_close,
                         stage2_seed,
+                        stage2_seed_domain,
                         completion,
                     )
                 )
@@ -1231,16 +1480,18 @@ class VLLMRunner:
                     retained,
                     forced_close,
                     stage2_seed,
+                    stage2_seed_domain,
                     first_completion,
                 ) = meta
                 completion = request_output.outputs[0]
                 stage2_sampled = list(completion.token_ids)
                 stage2 = self._trim_hf_eos(stage2_sampled)
-                final_ids = retained + self.close_ids + stage2
+                final_ids = retained + self.close_ids + list(answer_prefix_ids) + stage2
                 stage2_prompt_tokens = (
                     len(prepared[row_index].prompt_token_ids)
                     + len(retained)
                     + len(self.close_ids)
+                    + len(answer_prefix_ids)
                 )
                 stage1_cumulative = first_completion.cumulative_logprob
                 stage2_cumulative = completion.cumulative_logprob
@@ -1254,16 +1505,19 @@ class VLLMRunner:
                     "stage1_parent_seed": seeds[row_index],
                     "seed_stage1": seeds[row_index] + sample_index,
                     "seed_stage2": stage2_seed,
+                    "seed_domain_stage1": stage1_seed_domain,
+                    "seed_domain_stage2": stage2_seed_domain,
                     "text": self._decode(final_ids),
                     "token_ids": final_ids,
                     "stage1_token_ids": stage1_sampled,
                     "retained_thinking_token_ids": retained,
-                    "injected_token_ids": list(self.close_ids),
+                    "answer_prefix_token_ids": list(answer_prefix_ids),
+                    "injected_token_ids": list(self.close_ids) + list(answer_prefix_ids),
                     "stage2_token_ids": stage2_sampled,
                     "n_thinking_tokens": len(retained),
                     "n_answer_tokens": len(stage2),
                     "n_sampled_tokens": len(stage1_sampled) + len(stage2_sampled),
-                    "n_injected_tokens": len(self.close_ids),
+                    "n_injected_tokens": len(self.close_ids) + len(answer_prefix_ids),
                     "n_completion_tokens": len(final_ids),
                     "n_terminal_tokens_trimmed": (
                         len(stage1_sampled) - len(self._trim_hf_eos(stage1_sampled))
@@ -1292,75 +1546,747 @@ class VLLMRunner:
             if any(output is None for output in row["outputs"]):
                 raise RuntimeError(f"internal error: missing output for {row['id']!r}")
 
-        unique_input_prompt = sum(row["n_prompt_tokens"] for row in rows)
-        stage1_logical_prompt = sum(
-            output["n_stage1_prompt_tokens"]
-            for row in rows
-            for output in row["outputs"]
+        return rows, self._generation_summary(
+            rows,
+            sampling,
+            generation_seconds,
+            generation_mode="full_generation",
         )
-        stage2_logical_prompt = sum(
-            output["n_stage2_prompt_tokens"]
-            for row in rows
-            for output in row["outputs"]
+
+    @staticmethod
+    def _validate_shared_thought_sampling(sampling: SamplingConfig) -> None:
+        sampling.validate()
+        if sampling.thinking != "budget":
+            raise ValueError("shared-thought generation requires budget thinking")
+        if sampling.n != 1 or not sampling.paired_answer_seed:
+            raise ValueError("shared-thought generation requires paired n=1 sampling")
+        if not sampling.force_answer_seam:
+            raise ValueError("shared-thought generation requires a forced answer seam")
+        if sampling.shuffle_thinking:
+            raise ValueError("shared-thought generation forbids thought shuffling")
+
+    def generate_thought_prefixes(
+        self,
+        records: Sequence[dict[str, Any]],
+        sampling: SamplingConfig,
+    ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+        """Sample one durable thought prefix per record without sampling an answer.
+
+        The returned token IDs are the sole permitted source for later paired
+        continuations.  A natural ``</think>`` or model EOS is removed from the
+        retained prefix; no decoded text is ever fed back to the model.
+        """
+        self._validate_shared_thought_sampling(sampling)
+        if sampling.answer_prefix:
+            raise ValueError("thought-prefix sampling requires an empty answer_prefix")
+        prepared = self.prepare(
+            records, sampling.thinking, sampling.allow_custom_prompts
         )
-        total_sampled = sum(
-            output["n_sampled_tokens"] for row in rows for output in row["outputs"]
+        if not prepared:
+            raise ValueError("input is empty")
+        self._check_context(prepared, sampling, ())
+        seeds = [
+            _stable_seed(sampling.run_seed, record.record_id, -1, "thought")
+            for record in prepared
+        ]
+        prompts = [
+            {"prompt_token_ids": list(record.prompt_token_ids)} for record in prepared
+        ]
+        params = [
+            self._params(
+                sampling,
+                max_tokens=int(sampling.thinking_budget),
+                seed=seed,
+                n=1,
+            )
+            for seed in seeds
+        ]
+        started = time.perf_counter()
+        request_outputs = self.llm.generate(
+            prompts,
+            params,
+            use_tqdm=False,
+            lora_request=self.lora_request,
         )
-        total_injected = sum(
-            output["n_injected_tokens"] for row in rows for output in row["outputs"]
+        rows: list[dict[str, Any]] = []
+        for record, request_output, seed in zip(prepared, request_outputs, seeds):
+            if len(request_output.outputs) != 1 or int(request_output.outputs[0].index) != 0:
+                raise RuntimeError("shared-thought output geometry changed")
+            completion = request_output.outputs[0]
+            sampled = list(completion.token_ids)
+            without_eos = self._trim_hf_eos(sampled)
+            close_index = (
+                without_eos.index(self.think_close_id)
+                if self.think_close_id in without_eos
+                else None
+            )
+            retained = (
+                without_eos[:close_index]
+                if close_index is not None
+                else list(without_eos)
+            )
+            rows.append(
+                {
+                    "id": record.record_id,
+                    "meta": record.meta,
+                    "prompt_sha256": _sha256_bytes(record.prompt_text.encode("utf-8")),
+                    "effective_prompt_sha256": _token_ids_sha256(
+                        record.prompt_token_ids
+                    ),
+                    "n_prompt_tokens": len(record.prompt_token_ids),
+                    "n_original_prompt_tokens": len(record.prompt_token_ids),
+                    "prompt_channel": record.prompt_channel,
+                    "answer_prefix_token_ids": [],
+                    "prompt_logprobs": _jsonable_logprobs(
+                        request_output.prompt_logprobs
+                    ),
+                    "outputs": [
+                        {
+                            "sample_index": 0,
+                            "stage1_parent_seed": seed,
+                            "seed_stage1": seed,
+                            "seed_stage2": None,
+                            "seed_domain_stage1": "thought",
+                            "seed_domain_stage2": None,
+                            "text": self._decode(retained),
+                            "token_ids": retained,
+                            "stage1_token_ids": sampled,
+                            "retained_thinking_token_ids": retained,
+                            "answer_prefix_token_ids": [],
+                            "injected_token_ids": [],
+                            "stage2_token_ids": [],
+                            "n_thinking_tokens": len(retained),
+                            "n_answer_tokens": 0,
+                            "n_sampled_tokens": len(sampled),
+                            "n_injected_tokens": 0,
+                            "n_completion_tokens": len(retained),
+                            "n_terminal_tokens_trimmed": len(sampled)
+                            - len(without_eos),
+                            "n_tokens_discarded_after_close": (
+                                len(without_eos) - len(retained)
+                            ),
+                            "n_stage1_prompt_tokens": len(record.prompt_token_ids),
+                            "n_stage2_prompt_tokens": 0,
+                            "thinking_closed": close_index is not None,
+                            "forced_close": False,
+                            "finish_reason": completion.finish_reason,
+                            "stop_reason": completion.stop_reason,
+                            "stage1_finish_reason": completion.finish_reason,
+                            "stage1_stop_reason": completion.stop_reason,
+                            "truncated": completion.finish_reason == "length",
+                            "stage1_cumulative_logprob": completion.cumulative_logprob,
+                            "stage2_cumulative_logprob": None,
+                            "sampled_cumulative_logprob": completion.cumulative_logprob,
+                            "stage1_logprobs": _jsonable_logprobs(
+                                completion.logprobs
+                            ),
+                            "stage2_logprobs": None,
+                        }
+                    ],
+                }
+            )
+        elapsed = time.perf_counter() - started
+        return rows, self._generation_summary(
+            rows,
+            sampling,
+            elapsed,
+            generation_mode="shared_thought_prefixes",
         )
-        summary = {
-            "schema_version": RUNNER_SCHEMA_VERSION,
-            "model": MODEL_ID,
-            "model_revision": MODEL_REVISION,
-            "runner_sha256": _sha256_file(Path(__file__).resolve()),
-            "engine": {
-                key: str(value) if isinstance(value, Path) else value
-                for key, value in dataclasses.asdict(self.config).items()
+
+    def _authenticate_thought_prefixes(
+        self,
+        prepared: Sequence[_PreparedRecord],
+        thought_rows: Sequence[dict[str, Any]],
+        thought_metadata: dict[str, Any],
+        sampling: SamplingConfig,
+    ) -> list[dict[str, Any]]:
+        expected_source_sampling = json.loads(
+            json.dumps(
+                dataclasses.asdict(dataclasses.replace(sampling, answer_prefix="")),
+                sort_keys=True,
+                ensure_ascii=True,
+                allow_nan=False,
+            )
+        )
+        observed_source_sampling = json.loads(
+            json.dumps(
+                thought_metadata.get("sampling"),
+                sort_keys=True,
+                ensure_ascii=True,
+                allow_nan=False,
+            )
+        )
+        runner_sha = _sha256_file(Path(__file__).resolve())
+        if (
+            thought_metadata.get("schema_version") != RUNNER_SCHEMA_VERSION
+            or thought_metadata.get("generation_mode")
+            != "shared_thought_prefixes"
+            or thought_metadata.get("model") != MODEL_ID
+            or thought_metadata.get("model_revision") != MODEL_REVISION
+            or thought_metadata.get("runner_sha256") != runner_sha
+            or observed_source_sampling != expected_source_sampling
+            or thought_metadata.get("counts", {}).get("requests") != len(prepared)
+            or thought_metadata.get("counts", {}).get("completions") != len(prepared)
+        ):
+            raise RuntimeError("shared-thought runner metadata authentication failed")
+        if len(thought_rows) != len(prepared):
+            raise RuntimeError("shared-thought row count changed")
+        authenticated: list[dict[str, Any]] = []
+        for record, row in zip(prepared, thought_rows):
+            prompt_sha = _sha256_bytes(record.prompt_text.encode("utf-8"))
+            token_sha = _token_ids_sha256(record.prompt_token_ids)
+            if (
+                not isinstance(row, dict)
+                or row.get("id") != record.record_id
+                or row.get("meta") != record.meta
+                or row.get("prompt_sha256") != prompt_sha
+                or row.get("effective_prompt_sha256") != token_sha
+                or row.get("n_prompt_tokens") != len(record.prompt_token_ids)
+                or row.get("n_original_prompt_tokens")
+                != len(record.prompt_token_ids)
+                or row.get("prompt_channel") != record.prompt_channel
+                or row.get("answer_prefix_token_ids") != []
+                or not isinstance(row.get("outputs"), list)
+                or len(row["outputs"]) != 1
+            ):
+                raise RuntimeError("shared-thought record identity authentication failed")
+            output = row["outputs"][0]
+            sampled = output.get("stage1_token_ids")
+            retained = output.get("retained_thinking_token_ids")
+            if (
+                not isinstance(sampled, list)
+                or not isinstance(retained, list)
+                or any(
+                    not isinstance(token_id, int) or isinstance(token_id, bool)
+                    for token_id in sampled + retained
+                )
+            ):
+                raise RuntimeError("shared-thought token schema changed")
+            without_eos = self._trim_hf_eos(sampled)
+            close_index = (
+                without_eos.index(self.think_close_id)
+                if self.think_close_id in without_eos
+                else None
+            )
+            expected_retained = (
+                without_eos[:close_index]
+                if close_index is not None
+                else list(without_eos)
+            )
+            expected_seed = _stable_seed(
+                sampling.run_seed, record.record_id, -1, "thought"
+            )
+            if (
+                retained != expected_retained
+                or output.get("token_ids") != retained
+                or output.get("sample_index") != 0
+                or output.get("stage1_parent_seed") != expected_seed
+                or output.get("seed_stage1") != expected_seed
+                or output.get("seed_domain_stage1") != "thought"
+                or output.get("seed_stage2") is not None
+                or output.get("n_thinking_tokens") != len(retained)
+                or output.get("n_answer_tokens") != 0
+                or output.get("n_sampled_tokens") != len(sampled)
+                or output.get("n_stage1_prompt_tokens")
+                != len(record.prompt_token_ids)
+                or output.get("n_stage2_prompt_tokens") != 0
+            ):
+                raise RuntimeError("shared-thought token/seed authentication failed")
+            authenticated.append(output)
+        return authenticated
+
+    def generate_from_thought_prefixes(
+        self,
+        records: Sequence[dict[str, Any]],
+        thought_rows: Sequence[dict[str, Any]],
+        thought_metadata: dict[str, Any],
+        sampling: SamplingConfig,
+    ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+        """Fork answer continuations from authenticated, persisted token prefixes."""
+        self._validate_shared_thought_sampling(sampling)
+        prepared = self.prepare(
+            records, sampling.thinking, sampling.allow_custom_prompts
+        )
+        if not prepared:
+            raise ValueError("input is empty")
+        answer_prefix_ids = self.tokenizer.encode(
+            sampling.answer_prefix, add_special_tokens=False
+        )
+        if sampling.answer_prefix and not answer_prefix_ids:
+            raise RuntimeError("nonempty answer_prefix tokenized to no tokens")
+        self._check_context(prepared, sampling, answer_prefix_ids)
+        sources = self._authenticate_thought_prefixes(
+            prepared, thought_rows, thought_metadata, sampling
+        )
+        prompts: list[dict[str, list[int]]] = []
+        params: list[Any] = []
+        seeds: list[int] = []
+        for record, source in zip(prepared, sources):
+            retained = list(source["retained_thinking_token_ids"])
+            prompts.append(
+                {
+                    "prompt_token_ids": (
+                        record.prompt_token_ids
+                        + retained
+                        + self.close_ids
+                        + list(answer_prefix_ids)
+                    )
+                }
+            )
+            seed = _stable_seed(sampling.run_seed, record.record_id, 0, "answer")
+            seeds.append(seed)
+            params.append(
+                self._params(
+                    sampling,
+                    max_tokens=sampling.answer_max_tokens,
+                    seed=seed,
+                    n=1,
+                )
+            )
+        started = time.perf_counter()
+        request_outputs = self.llm.generate(
+            prompts,
+            params,
+            use_tqdm=False,
+            lora_request=self.lora_request,
+        )
+        rows: list[dict[str, Any]] = []
+        physical_sampled = 0
+        for record, source, request_output, answer_seed in zip(
+            prepared, sources, request_outputs, seeds
+        ):
+            if len(request_output.outputs) != 1 or int(request_output.outputs[0].index) != 0:
+                raise RuntimeError("shared-thought continuation output geometry changed")
+            completion = request_output.outputs[0]
+            stage2_sampled = list(completion.token_ids)
+            physical_sampled += len(stage2_sampled)
+            stage2 = self._trim_hf_eos(stage2_sampled)
+            retained = list(source["retained_thinking_token_ids"])
+            final_ids = retained + self.close_ids + list(answer_prefix_ids) + stage2
+            stage1_sampled = list(source["stage1_token_ids"])
+            stage1_cumulative = source.get("stage1_cumulative_logprob")
+            stage2_cumulative = completion.cumulative_logprob
+            sampled_cumulative = (
+                stage1_cumulative + stage2_cumulative
+                if stage1_cumulative is not None and stage2_cumulative is not None
+                else None
+            )
+            rows.append(
+                {
+                    "id": record.record_id,
+                    "meta": record.meta,
+                    "prompt_sha256": _sha256_bytes(record.prompt_text.encode("utf-8")),
+                    "effective_prompt_sha256": _token_ids_sha256(
+                        record.prompt_token_ids
+                    ),
+                    "n_prompt_tokens": len(record.prompt_token_ids),
+                    "n_original_prompt_tokens": len(record.prompt_token_ids),
+                    "prompt_channel": record.prompt_channel,
+                    "answer_prefix_token_ids": list(answer_prefix_ids),
+                    "prompt_logprobs": None,
+                    "outputs": [
+                        {
+                            "sample_index": 0,
+                            "stage1_parent_seed": source["stage1_parent_seed"],
+                            "seed_stage1": source["seed_stage1"],
+                            "seed_stage2": answer_seed,
+                            "seed_domain_stage1": "thought",
+                            "seed_domain_stage2": "answer",
+                            "text": self._decode(final_ids),
+                            "token_ids": final_ids,
+                            "stage1_token_ids": stage1_sampled,
+                            "retained_thinking_token_ids": retained,
+                            "answer_prefix_token_ids": list(answer_prefix_ids),
+                            "injected_token_ids": list(self.close_ids)
+                            + list(answer_prefix_ids),
+                            "stage2_token_ids": stage2_sampled,
+                            "n_thinking_tokens": len(retained),
+                            "n_answer_tokens": len(stage2),
+                            "n_sampled_tokens": len(stage1_sampled)
+                            + len(stage2_sampled),
+                            "n_injected_tokens": len(self.close_ids)
+                            + len(answer_prefix_ids),
+                            "n_completion_tokens": len(final_ids),
+                            "n_terminal_tokens_trimmed": source.get(
+                                "n_terminal_tokens_trimmed", 0
+                            )
+                            + (len(stage2_sampled) - len(stage2)),
+                            "n_tokens_discarded_after_close": source.get(
+                                "n_tokens_discarded_after_close", 0
+                            ),
+                            "n_stage1_prompt_tokens": len(record.prompt_token_ids),
+                            "n_stage2_prompt_tokens": len(prompts[len(rows)]["prompt_token_ids"]),
+                            "thinking_closed": True,
+                            "forced_close": True,
+                            "finish_reason": completion.finish_reason,
+                            "stop_reason": completion.stop_reason,
+                            "stage1_finish_reason": source.get("stage1_finish_reason"),
+                            "stage1_stop_reason": source.get("stage1_stop_reason"),
+                            "truncated": completion.finish_reason == "length",
+                            "stage1_cumulative_logprob": stage1_cumulative,
+                            "stage2_cumulative_logprob": stage2_cumulative,
+                            "sampled_cumulative_logprob": sampled_cumulative,
+                            "stage1_logprobs": source.get("stage1_logprobs"),
+                            "stage2_logprobs": _jsonable_logprobs(
+                                completion.logprobs
+                            ),
+                        }
+                    ],
+                }
+            )
+        elapsed = time.perf_counter() - started
+        thought_source_sha = _sha256_bytes(
+            json.dumps(
+                {"rows": thought_rows, "runner_metadata": thought_metadata},
+                sort_keys=True,
+                separators=(",", ":"),
+                ensure_ascii=True,
+                allow_nan=False,
+            ).encode("utf-8")
+        )
+        return rows, self._generation_summary(
+            rows,
+            sampling,
+            elapsed,
+            generation_mode="shared_thought_continuation",
+            physical_sampled_tokens=physical_sampled,
+            extra={
+                "thought_source_sha256": thought_source_sha,
+                "thought_source_generation_mode": thought_metadata[
+                    "generation_mode"
+                ],
             },
-            "engine_args": {
-                key: str(value) if isinstance(value, Path) else value
-                for key, value in self.engine_args.items()
-            },
-            "resolved_cudagraph": self.resolved_cudagraph,
-            "sampling": dataclasses.asdict(sampling),
-            "resolved_sampling": sampling.resolved_sampling(),
-            "adapter": self.adapter_info,
-            "think_token_ids": {
-                "open": self.think_open_id,
-                "close": self.think_close_id,
-                "forced_close_sequence": self.close_ids,
-                "thinking_prompt_suffix": self.thinking_prompt_suffix_ids,
-                "no_thinking_prompt_suffix": self.no_thinking_prompt_suffix_ids,
-            },
-            "termination": {
-                "hf_model_eos_token_id": self.hf_eos_id,
-                "vllm_tokenizer_eos_ignored": self.tokenizer_eos_id,
-            },
-            "rng_isolation": {
-                "engine_seed": self.engine_args["seed"],
-                "caller_global_rng_state_restored": True,
-            },
-            "counts": {
-                "requests": len(rows),
-                "completions": sum(len(row["outputs"]) for row in rows),
-                "unique_input_prompt_tokens": unique_input_prompt,
-                "stage1_logical_prompt_tokens": stage1_logical_prompt,
-                "stage2_logical_prompt_tokens": stage2_logical_prompt,
-                "logical_model_input_tokens": (
-                    stage1_logical_prompt + stage2_logical_prompt
-                ),
-                "sampled_tokens": total_sampled,
-                "injected_tokens": total_injected,
-            },
-            "timing": {
-                "model_load_seconds": self.load_seconds,
-                "generation_seconds": generation_seconds,
-                "sampled_tokens_per_second": total_sampled / generation_seconds,
-            },
-            "runtime": self.runtime_metadata(),
+        )
+
+    @staticmethod
+    def _validate_boundary_pair_sampling(sampling: SamplingConfig) -> None:
+        sampling.validate()
+        if sampling.thinking == "natural":
+            raise ValueError("boundary-pair generation forbids natural thinking")
+        if sampling.n != 1 or not sampling.paired_answer_seed:
+            raise ValueError("boundary-pair generation requires paired n=1 sampling")
+        if sampling.answer_max_tokens != 24:
+            raise ValueError("boundary-pair generation requires answer_max_tokens=24")
+        if sampling.thinking == "off" and sampling.max_tokens != 24:
+            raise ValueError(
+                "no-think boundary-pair generation requires max_tokens=24"
+            )
+        if sampling.prompt_logprobs is not None:
+            raise ValueError("boundary-pair generation forbids prompt_logprobs")
+        if sampling.thinking == "budget":
+            VLLMRunner._validate_shared_thought_sampling(sampling)
+
+    def generate_boundary_pairs(
+        self,
+        records: Sequence[dict[str, Any]],
+        sampling: SamplingConfig,
+        *,
+        thought_rows: Sequence[dict[str, Any]] | None = None,
+        thought_metadata: dict[str, Any] | None = None,
+    ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+        """Generate adjacent tokenizer-EOS/HF-EOS answer pairs in one call.
+
+        Each record contributes two consecutive vLLM requests with byte-identical
+        prompt token IDs and the same answer seed.  Only the registered stop token
+        differs.  Unlike the ordinary runner paths, raw answer token IDs are not
+        trimmed: the transaction authenticator must inspect the terminal token,
+        stop reason, finish reason, and cap contact itself.
+        """
+        self._validate_boundary_pair_sampling(sampling)
+        prepared = self.prepare(
+            records, sampling.thinking, sampling.allow_custom_prompts
+        )
+        if not prepared:
+            raise ValueError("input is empty")
+        answer_prefix_ids = self.tokenizer.encode(
+            sampling.answer_prefix, add_special_tokens=False
+        )
+        if sampling.answer_prefix and not answer_prefix_ids:
+            raise RuntimeError("nonempty answer_prefix tokenized to no tokens")
+        self._check_context(prepared, sampling, answer_prefix_ids)
+
+        sources: list[dict[str, Any] | None]
+        thought_source_sha: str | None = None
+        if sampling.thinking == "budget":
+            if thought_rows is None or thought_metadata is None:
+                raise ValueError(
+                    "thinking boundary pairs require persisted thought rows and metadata"
+                )
+            sources = list(
+                self._authenticate_thought_prefixes(
+                    prepared, thought_rows, thought_metadata, sampling
+                )
+            )
+            thought_source_sha = _sha256_bytes(
+                json.dumps(
+                    {"rows": thought_rows, "runner_metadata": thought_metadata},
+                    sort_keys=True,
+                    separators=(",", ":"),
+                    ensure_ascii=True,
+                    allow_nan=False,
+                ).encode("utf-8")
+            )
+        else:
+            if thought_rows is not None or thought_metadata is not None:
+                raise ValueError("no-think boundary pairs forbid thought inputs")
+            sources = [None] * len(prepared)
+
+        boundary_specs = (
+            ("tokenizer_eos", self.tokenizer_eos_id),
+            ("hf_model_eos", self.hf_eos_id),
+        )
+        prompts: list[dict[str, list[int]]] = []
+        params: list[Any] = []
+        seeds: list[int] = []
+        effective_prompt_ids: list[list[int]] = []
+        for record, source in zip(prepared, sources):
+            if source is None:
+                prompt_ids = record.prompt_token_ids + list(answer_prefix_ids)
+            else:
+                prompt_ids = (
+                    record.prompt_token_ids
+                    + list(source["retained_thinking_token_ids"])
+                    + self.close_ids
+                    + list(answer_prefix_ids)
+                )
+            effective_prompt_ids.append(prompt_ids)
+            answer_seed = _stable_seed(
+                sampling.run_seed, record.record_id, 0, "answer"
+            )
+            seeds.append(answer_seed)
+            for _boundary_name, stop_token_id in boundary_specs:
+                prompts.append({"prompt_token_ids": list(prompt_ids)})
+                params.append(
+                    self._params(
+                        sampling,
+                        max_tokens=sampling.answer_max_tokens,
+                        seed=answer_seed,
+                        n=1,
+                        stop_token_id=stop_token_id,
+                    )
+                )
+
+        if any(
+            prompts[position]["prompt_token_ids"]
+            != prompts[position + 1]["prompt_token_ids"]
+            for position in range(0, len(prompts), 2)
+        ):
+            raise RuntimeError("internal error: boundary-pair prompts diverged")
+        if any(
+            params[position].seed != params[position + 1].seed
+            for position in range(0, len(params), 2)
+        ):
+            raise RuntimeError("internal error: boundary-pair seeds diverged")
+
+        started = time.perf_counter()
+        request_outputs = self.llm.generate(
+            prompts,
+            params,
+            use_tqdm=False,
+            lora_request=self.lora_request,
+        )
+        if len(request_outputs) != len(prompts):
+            raise RuntimeError("boundary-pair request geometry changed")
+
+        rows: list[dict[str, Any]] = []
+        physical_sampled = 0
+        for pair_index, (record, source, answer_seed, prompt_ids) in enumerate(
+            zip(prepared, sources, seeds, effective_prompt_ids)
+        ):
+            pair_outputs: list[dict[str, Any]] = []
+            for boundary_offset, (boundary_name, stop_token_id) in enumerate(
+                boundary_specs
+            ):
+                batch_position = pair_index * 2 + boundary_offset
+                request_output = request_outputs[batch_position]
+                if (
+                    len(request_output.outputs) != 1
+                    or int(request_output.outputs[0].index) != 0
+                ):
+                    raise RuntimeError("boundary-pair completion geometry changed")
+                completion = request_output.outputs[0]
+                raw_answer_ids = list(completion.token_ids)
+                physical_sampled += len(raw_answer_ids)
+                if source is None:
+                    stage1_ids = raw_answer_ids
+                    stage2_ids: list[int] = []
+                    final_ids = list(answer_prefix_ids) + raw_answer_ids
+                    stage1_parent_seed = answer_seed
+                    seed_stage1 = answer_seed
+                    seed_stage2 = None
+                    seed_domain_stage1 = "answer"
+                    seed_domain_stage2 = None
+                    retained: list[int] = []
+                    n_stage1_prompt_tokens = len(prompt_ids)
+                    n_stage2_prompt_tokens = 0
+                    stage1_cumulative = completion.cumulative_logprob
+                    stage2_cumulative = None
+                    stage1_logprobs = _jsonable_logprobs(completion.logprobs)
+                    stage2_logprobs = None
+                    n_sampled_tokens = len(raw_answer_ids)
+                    n_terminal_tokens_trimmed = 0
+                    n_tokens_discarded_after_close = 0
+                else:
+                    stage1_ids = list(source["stage1_token_ids"])
+                    stage2_ids = raw_answer_ids
+                    retained = list(source["retained_thinking_token_ids"])
+                    final_ids = (
+                        retained
+                        + self.close_ids
+                        + list(answer_prefix_ids)
+                        + raw_answer_ids
+                    )
+                    stage1_parent_seed = source["stage1_parent_seed"]
+                    seed_stage1 = source["seed_stage1"]
+                    seed_stage2 = answer_seed
+                    seed_domain_stage1 = "thought"
+                    seed_domain_stage2 = "answer"
+                    n_stage1_prompt_tokens = len(record.prompt_token_ids)
+                    n_stage2_prompt_tokens = len(prompt_ids)
+                    stage1_cumulative = source.get("stage1_cumulative_logprob")
+                    stage2_cumulative = completion.cumulative_logprob
+                    stage1_logprobs = source.get("stage1_logprobs")
+                    stage2_logprobs = _jsonable_logprobs(completion.logprobs)
+                    n_sampled_tokens = len(stage1_ids) + len(raw_answer_ids)
+                    n_terminal_tokens_trimmed = source.get(
+                        "n_terminal_tokens_trimmed", 0
+                    )
+                    n_tokens_discarded_after_close = source.get(
+                        "n_tokens_discarded_after_close", 0
+                    )
+                sampled_cumulative = (
+                    stage1_cumulative + stage2_cumulative
+                    if stage1_cumulative is not None
+                    and stage2_cumulative is not None
+                    else stage1_cumulative
+                )
+                pair_outputs.append(
+                    {
+                        "sample_index": 0,
+                        "pair_index": pair_index,
+                        "pair_offset": boundary_offset,
+                        "batch_position": batch_position,
+                        "pair_adjacent": True,
+                        "boundary": boundary_name,
+                        "registered_stop_token_id": stop_token_id,
+                        "stage1_parent_seed": stage1_parent_seed,
+                        "seed_stage1": seed_stage1,
+                        "seed_stage2": seed_stage2,
+                        "answer_seed": answer_seed,
+                        "seed_domain_stage1": seed_domain_stage1,
+                        "seed_domain_stage2": seed_domain_stage2,
+                        "text": self._decode(final_ids),
+                        "token_ids": final_ids,
+                        "raw_answer_token_ids": raw_answer_ids,
+                        "stage1_token_ids": stage1_ids,
+                        "retained_thinking_token_ids": retained,
+                        "answer_prefix_token_ids": list(answer_prefix_ids),
+                        "injected_token_ids": (
+                            ([] if source is None else list(self.close_ids))
+                            + list(answer_prefix_ids)
+                        ),
+                        "stage2_token_ids": stage2_ids,
+                        "n_thinking_tokens": len(retained),
+                        "n_answer_tokens": len(raw_answer_ids),
+                        "n_sampled_tokens": n_sampled_tokens,
+                        "n_injected_tokens": (
+                            (0 if source is None else len(self.close_ids))
+                            + len(answer_prefix_ids)
+                        ),
+                        "n_completion_tokens": len(final_ids),
+                        "n_terminal_tokens_trimmed": n_terminal_tokens_trimmed,
+                        "n_tokens_discarded_after_close": n_tokens_discarded_after_close,
+                        "n_stage1_prompt_tokens": n_stage1_prompt_tokens,
+                        "n_stage2_prompt_tokens": n_stage2_prompt_tokens,
+                        "thinking_closed": source is not None,
+                        "forced_close": source is not None,
+                        "finish_reason": completion.finish_reason,
+                        "stop_reason": completion.stop_reason,
+                        "stage1_finish_reason": (
+                            completion.finish_reason
+                            if source is None
+                            else source.get("stage1_finish_reason")
+                        ),
+                        "stage1_stop_reason": (
+                            completion.stop_reason
+                            if source is None
+                            else source.get("stage1_stop_reason")
+                        ),
+                        "stage2_finish_reason": (
+                            None if source is None else completion.finish_reason
+                        ),
+                        "stage2_stop_reason": (
+                            None if source is None else completion.stop_reason
+                        ),
+                        "truncated": completion.finish_reason == "length",
+                        "answer_cap_contact": (
+                            len(raw_answer_ids) >= sampling.answer_max_tokens
+                            or completion.finish_reason == "length"
+                        ),
+                        "stage1_cumulative_logprob": stage1_cumulative,
+                        "stage2_cumulative_logprob": stage2_cumulative,
+                        "sampled_cumulative_logprob": sampled_cumulative,
+                        "stage1_logprobs": stage1_logprobs,
+                        "stage2_logprobs": stage2_logprobs,
+                    }
+                )
+            rows.append(
+                {
+                    "id": record.record_id,
+                    "meta": record.meta,
+                    "prompt_sha256": _sha256_bytes(
+                        record.prompt_text.encode("utf-8")
+                    ),
+                    "effective_prompt_sha256": _token_ids_sha256(prompt_ids),
+                    "effective_prompt_token_ids": list(prompt_ids),
+                    "n_prompt_tokens": len(record.prompt_token_ids),
+                    "n_original_prompt_tokens": len(record.prompt_token_ids),
+                    "n_effective_prompt_tokens": len(prompt_ids),
+                    "prompt_channel": record.prompt_channel,
+                    "answer_prefix_token_ids": list(answer_prefix_ids),
+                    "prompt_logprobs": None,
+                    "outputs": pair_outputs,
+                }
+            )
+
+        elapsed = time.perf_counter() - started
+        generation_mode = (
+            "shared_thought_boundary_pairs"
+            if sampling.thinking == "budget"
+            else "answer_boundary_pairs"
+        )
+        extra: dict[str, Any] = {
+            "boundary_pairing": {
+                "boundary_order": [name for name, _token_id in boundary_specs],
+                "registered_stop_token_ids": [
+                    token_id for _name, token_id in boundary_specs
+                ],
+                "pairs": len(rows),
+                "requests": len(prompts),
+                "adjacent_in_single_generate_call": True,
+                "identical_prompt_ids_within_pair": True,
+                "identical_answer_seed_within_pair": True,
+                "raw_answer_tokens_preserved": True,
+                "answer_cap_tokens": sampling.answer_max_tokens,
+            }
         }
-        return rows, summary
+        if thought_source_sha is not None:
+            extra.update(
+                {
+                    "thought_source_sha256": thought_source_sha,
+                    "thought_source_generation_mode": thought_metadata[
+                        "generation_mode"
+                    ],
+                }
+            )
+        return rows, self._generation_summary(
+            rows,
+            sampling,
+            elapsed,
+            generation_mode=generation_mode,
+            physical_sampled_tokens=physical_sampled,
+            extra=extra,
+        )
 
     @staticmethod
     def runtime_metadata() -> dict[str, Any]:

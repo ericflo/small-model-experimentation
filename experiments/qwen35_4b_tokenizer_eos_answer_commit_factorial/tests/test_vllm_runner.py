@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import contextlib
+import copy
+import dataclasses
 import importlib.util
 import io
 import json
@@ -145,6 +147,7 @@ class TerminationSemanticsTests(unittest.TestCase):
         fake_vllm.SamplingParams = FakeSamplingParams
         instance = object.__new__(runner.VLLMRunner)
         instance.hf_eos_id = 248044
+        instance.tokenizer_eos_id = 248046
         with mock.patch.dict(sys.modules, {"vllm": fake_vllm}):
             instance._params(
                 runner.SamplingConfig(thinking="off", greedy=True),
@@ -155,6 +158,38 @@ class TerminationSemanticsTests(unittest.TestCase):
 
         self.assertIs(captured["ignore_eos"], True)
         self.assertEqual(captured["stop_token_ids"], [248044])
+
+    def test_sampling_can_register_only_the_pinned_tokenizer_eos(self) -> None:
+        captured: dict[str, object] = {}
+
+        class FakeSamplingParams:
+            def __init__(self, **kwargs: object):
+                captured.update(kwargs)
+
+        fake_vllm = types.ModuleType("vllm")
+        fake_vllm.SamplingParams = FakeSamplingParams
+        instance = object.__new__(runner.VLLMRunner)
+        instance.hf_eos_id = 248044
+        instance.tokenizer_eos_id = 248046
+        with mock.patch.dict(sys.modules, {"vllm": fake_vllm}):
+            instance._params(
+                runner.SamplingConfig(thinking="off", greedy=True),
+                max_tokens=8,
+                seed=17,
+                n=1,
+                stop_token_id=248046,
+            )
+            with self.assertRaisesRegex(ValueError, "pinned HF model EOS"):
+                instance._params(
+                    runner.SamplingConfig(thinking="off", greedy=True),
+                    max_tokens=8,
+                    seed=17,
+                    n=1,
+                    stop_token_id=1,
+                )
+
+        self.assertIs(captured["ignore_eos"], True)
+        self.assertEqual(captured["stop_token_ids"], [248046])
 
     def test_trimming_preserves_tokenizer_eos_and_removes_model_eos(self) -> None:
         instance = object.__new__(runner.VLLMRunner)
@@ -350,7 +385,7 @@ class ResolvedCudagraphTests(unittest.TestCase):
                     "<|im_end|>": [248046],
                     "<think>": [248068],
                     "</think>": [248069],
-                    "</think>\n\n": [248069, 198],
+                    "</think>\n\n": [248069, 271],
                     "<|im_start|>assistant\n<think>\n": [1, 2, 3],
                     "<|im_start|>assistant\n<think>\n\n</think>\n\n": [1, 2, 4],
                 }
@@ -371,7 +406,8 @@ class ResolvedCudagraphTests(unittest.TestCase):
                 captured_engine_args.update(kwargs)
                 self.llm_engine = SimpleNamespace(
                     vllm_config=SimpleNamespace(
-                        compilation_config=_compilation_config()
+                        compilation_config=_compilation_config(),
+                        model_config=SimpleNamespace(logprobs_mode="raw_logprobs"),
                     ),
                     engine_core=SimpleNamespace(shutdown=lambda: None),
                 )
@@ -398,6 +434,8 @@ class ResolvedCudagraphTests(unittest.TestCase):
             )
 
         self.assertEqual(captured_engine_args["max_num_seqs"], 15)
+        self.assertEqual(captured_engine_args["max_logprobs"], 24)
+        self.assertEqual(captured_engine_args["logprobs_mode"], "raw_logprobs")
         self.assertEqual(captured_engine_args["cudagraph_capture_sizes"], list(effective))
         self.assertEqual(captured_engine_args["max_cudagraph_capture_size"], 15)
         self.assertEqual(instance.engine_args["requested_max_num_seqs"], 19)
@@ -411,7 +449,566 @@ class ResolvedCudagraphTests(unittest.TestCase):
         self.assertEqual(
             instance.resolved_cudagraph["cudagraph_capture_sizes"], list(effective)
         )
+        self.assertEqual(instance.resolved_logprobs_mode, "raw_logprobs")
         instance.close()
+
+
+class AnswerSeamTests(unittest.TestCase):
+    class FakeTokenizer:
+        def encode(self, text: str, *, add_special_tokens: bool) -> list[int]:
+            if add_special_tokens:
+                raise AssertionError("tests require exact no-special-token encoding")
+            return {
+                "": [],
+                "prompt": [7],
+                "PROGRAM:": [90, 91],
+            }[text]
+
+        def decode(self, token_ids: list[int], *, skip_special_tokens: bool) -> str:
+            if skip_special_tokens:
+                raise AssertionError("special-token-preserving decode is required")
+            pieces = {
+                50: "reason",
+                248069: "</think>",
+                271: "\n\n",
+                90: "PRO",
+                91: "GRAM:",
+                101: " A",
+                102: " |",
+                103: " B",
+                248044: "<|endoftext|>",
+                248046: "<|im_end|>",
+            }
+            return "".join(pieces[value] for value in token_ids)
+
+    class FakeLLM:
+        def __init__(self, calls: list[list[SimpleNamespace]]):
+            self.calls = list(calls)
+            self.prompts: list[list[dict[str, list[int]]]] = []
+            self.params: list[list[SimpleNamespace]] = []
+
+        def generate(self, prompts, params, **kwargs):
+            self.prompts.append(prompts)
+            self.params.append(params)
+            completions = self.calls.pop(0)
+            if len(completions) != len(prompts):
+                raise AssertionError("fake completion geometry differs from prompts")
+            return [
+                SimpleNamespace(prompt_logprobs=None, outputs=[completion])
+                for completion in completions
+            ]
+
+    @staticmethod
+    def completion(
+        token_ids: list[int], *, finish_reason: str = "stop", stop_reason=None
+    ) -> SimpleNamespace:
+        return SimpleNamespace(
+            index=0,
+            token_ids=token_ids,
+            finish_reason=finish_reason,
+            stop_reason=(
+                (248044 if stop_reason is None else stop_reason)
+                if finish_reason == "stop"
+                else None
+            ),
+            cumulative_logprob=-1.0,
+            logprobs=None,
+        )
+
+    def instance(self, calls: list[list[SimpleNamespace]]) -> runner.VLLMRunner:
+        value = object.__new__(runner.VLLMRunner)
+        value.config = runner.EngineConfig(max_model_len=1024)
+        value.tokenizer = self.FakeTokenizer()
+        value.hf_eos_id = 248044
+        value.tokenizer_eos_id = 248046
+        value.think_open_id = 248068
+        value.think_close_id = 248069
+        value.close_ids = [248069, 271]
+        value.thinking_prompt_suffix_ids = [1, 2, 3]
+        value.no_thinking_prompt_suffix_ids = [1, 2, 4]
+        value.llm = self.FakeLLM(calls)
+        value.lora_request = None
+        value.adapter_info = None
+        value.load_seconds = 0.0
+        value.engine_args = {"seed": 0}
+        value.resolved_cudagraph = {}
+        value.resolved_logprobs_mode = "raw_logprobs"
+        return value
+
+    def run_generate(
+        self,
+        value: runner.VLLMRunner,
+        sampling: runner.SamplingConfig,
+    ):
+        fake_vllm = types.ModuleType("vllm")
+        fake_vllm.SamplingParams = lambda **kwargs: SimpleNamespace(**kwargs)
+        with mock.patch.dict(sys.modules, {"vllm": fake_vllm}), mock.patch.object(
+            runner.VLLMRunner,
+            "runtime_metadata",
+            return_value={"test": True},
+        ):
+            return value.generate(
+                [{"id": "paired-record", "prompt": "prompt"}], sampling
+            )
+
+    def run_shared(
+        self,
+        value: runner.VLLMRunner,
+        action,
+    ):
+        fake_vllm = types.ModuleType("vllm")
+        fake_vllm.SamplingParams = lambda **kwargs: SimpleNamespace(**kwargs)
+        with mock.patch.dict(sys.modules, {"vllm": fake_vllm}), mock.patch.object(
+            runner.VLLMRunner,
+            "runtime_metadata",
+            return_value={"test": True},
+        ):
+            return action()
+
+    def test_sampling_contract_rejects_unpaired_or_ambiguous_slot_modes(self) -> None:
+        with self.assertRaisesRegex(ValueError, "natural thinking"):
+            runner.SamplingConfig(
+                thinking="natural", answer_prefix="PROGRAM:"
+            ).validate()
+        with self.assertRaisesRegex(ValueError, "requires force_answer_seam"):
+            runner.SamplingConfig(
+                thinking="budget",
+                thinking_budget=8,
+                answer_prefix="PROGRAM:",
+            ).validate()
+        with self.assertRaisesRegex(ValueError, "requires n=1"):
+            runner.SamplingConfig(
+                thinking="off", n=2, paired_answer_seed=True
+            ).validate()
+
+    def test_no_think_slot_is_injected_prefill_and_not_sampled_answer(self) -> None:
+        value = self.instance(
+            [[self.completion([101, 102, 103, 248044])]]
+        )
+        rows, metadata = self.run_generate(
+            value,
+            runner.SamplingConfig(
+                thinking="off",
+                max_tokens=24,
+                answer_max_tokens=24,
+                greedy=True,
+                allow_custom_prompts=True,
+                answer_prefix="PROGRAM:",
+                paired_answer_seed=True,
+                run_seed=19,
+            ),
+        )
+
+        self.assertEqual(value.llm.prompts, [[{"prompt_token_ids": [7, 90, 91]}]])
+        output = rows[0]["outputs"][0]
+        self.assertEqual(output["text"], "PROGRAM: A | B")
+        self.assertEqual(output["token_ids"], [90, 91, 101, 102, 103])
+        self.assertEqual(output["stage1_token_ids"], [101, 102, 103, 248044])
+        self.assertEqual(output["answer_prefix_token_ids"], [90, 91])
+        self.assertEqual(output["n_answer_tokens"], 3)
+        self.assertEqual(output["n_injected_tokens"], 2)
+        self.assertEqual(output["n_stage1_prompt_tokens"], 3)
+        self.assertEqual(output["seed_domain_stage1"], "answer")
+        self.assertEqual(metadata["counts"]["sampled_tokens"], 4)
+        self.assertEqual(metadata["counts"]["injected_tokens"], 2)
+
+    def test_think_slot_forces_registered_prefix_after_any_natural_close(self) -> None:
+        value = self.instance(
+            [
+                [self.completion([50, 248069, 77, 248044])],
+                [self.completion([101, 102, 103, 248044])],
+            ]
+        )
+        rows, _metadata = self.run_generate(
+            value,
+            runner.SamplingConfig(
+                thinking="budget",
+                thinking_budget=8,
+                max_tokens=8,
+                answer_max_tokens=24,
+                greedy=True,
+                allow_custom_prompts=True,
+                answer_prefix="PROGRAM:",
+                force_answer_seam=True,
+                paired_answer_seed=True,
+                run_seed=19,
+            ),
+        )
+
+        self.assertEqual(
+            value.llm.prompts,
+            [
+                [{"prompt_token_ids": [7]}],
+                [
+                    {
+                        "prompt_token_ids": [
+                            7,
+                            50,
+                            248069,
+                            271,
+                            90,
+                            91,
+                        ]
+                    }
+                ],
+            ],
+        )
+        output = rows[0]["outputs"][0]
+        self.assertEqual(output["text"], "reason</think>\n\nPROGRAM: A | B")
+        self.assertEqual(output["retained_thinking_token_ids"], [50])
+        self.assertEqual(
+            output["injected_token_ids"], [248069, 271, 90, 91]
+        )
+        self.assertEqual(output["n_thinking_tokens"], 1)
+        self.assertEqual(output["n_answer_tokens"], 3)
+        self.assertEqual(output["n_injected_tokens"], 4)
+        self.assertEqual(output["seed_domain_stage1"], "thought")
+        self.assertEqual(output["seed_domain_stage2"], "answer")
+        self.assertTrue(output["forced_close"])
+
+    def test_answer_seed_is_paired_across_no_think_and_think_slot(self) -> None:
+        no_think = self.instance(
+            [[self.completion([101, 102, 103, 248044])]]
+        )
+        no_rows, _ = self.run_generate(
+            no_think,
+            runner.SamplingConfig(
+                thinking="off",
+                max_tokens=24,
+                greedy=True,
+                allow_custom_prompts=True,
+                answer_prefix="PROGRAM:",
+                paired_answer_seed=True,
+                run_seed=23,
+            ),
+        )
+        thinking = self.instance(
+            [
+                [self.completion([50], finish_reason="length")],
+                [self.completion([101, 102, 103, 248044])],
+            ]
+        )
+        think_rows, _ = self.run_generate(
+            thinking,
+            runner.SamplingConfig(
+                thinking="budget",
+                thinking_budget=1,
+                max_tokens=1,
+                answer_max_tokens=24,
+                greedy=True,
+                allow_custom_prompts=True,
+                answer_prefix="PROGRAM:",
+                force_answer_seam=True,
+                paired_answer_seed=True,
+                run_seed=23,
+            ),
+        )
+        self.assertEqual(
+            no_rows[0]["outputs"][0]["seed_stage1"],
+            think_rows[0]["outputs"][0]["seed_stage2"],
+        )
+
+    def test_thinking_arms_fork_from_one_exact_persistable_token_prefix(self) -> None:
+        value = self.instance(
+            [
+                [self.completion([50, 248069, 77, 248044])],
+                [self.completion([101, 102, 103, 248044])],
+                [self.completion([101, 102, 103, 248044])],
+            ]
+        )
+        records = [{"id": "paired-record", "prompt": "prompt"}]
+        source_sampling = runner.SamplingConfig(
+            thinking="budget",
+            thinking_budget=8,
+            max_tokens=8,
+            answer_max_tokens=24,
+            greedy=True,
+            allow_custom_prompts=True,
+            force_answer_seam=True,
+            paired_answer_seed=True,
+            run_seed=29,
+        )
+
+        def execute():
+            thought_rows, thought_metadata = value.generate_thought_prefixes(
+                records, source_sampling
+            )
+            persisted_rows = json.loads(json.dumps(thought_rows))
+            persisted_metadata = json.loads(json.dumps(thought_metadata))
+            free_rows, free_metadata = value.generate_from_thought_prefixes(
+                records, persisted_rows, persisted_metadata, source_sampling
+            )
+            slot_rows, slot_metadata = value.generate_from_thought_prefixes(
+                records,
+                persisted_rows,
+                persisted_metadata,
+                dataclasses.replace(source_sampling, answer_prefix="PROGRAM:"),
+            )
+            return (
+                thought_rows,
+                thought_metadata,
+                free_rows,
+                free_metadata,
+                slot_rows,
+                slot_metadata,
+            )
+
+        (
+            thought_rows,
+            thought_metadata,
+            free_rows,
+            free_metadata,
+            slot_rows,
+            slot_metadata,
+        ) = self.run_shared(value, execute)
+
+        self.assertEqual(
+            value.llm.prompts,
+            [
+                [{"prompt_token_ids": [7]}],
+                [{"prompt_token_ids": [7, 50, 248069, 271]}],
+                [{"prompt_token_ids": [7, 50, 248069, 271, 90, 91]}],
+            ],
+        )
+        source = thought_rows[0]["outputs"][0]
+        free = free_rows[0]["outputs"][0]
+        slot = slot_rows[0]["outputs"][0]
+        self.assertEqual(source["stage1_token_ids"], [50, 248069, 77, 248044])
+        self.assertEqual(source["retained_thinking_token_ids"], [50])
+        self.assertEqual(source["n_tokens_discarded_after_close"], 2)
+        self.assertEqual(free["stage1_token_ids"], source["stage1_token_ids"])
+        self.assertEqual(slot["stage1_token_ids"], source["stage1_token_ids"])
+        self.assertEqual(free["retained_thinking_token_ids"], [50])
+        self.assertEqual(slot["retained_thinking_token_ids"], [50])
+        self.assertEqual(free["seed_stage2"], slot["seed_stage2"])
+        self.assertEqual(free["n_stage2_prompt_tokens"], 4)
+        self.assertEqual(slot["n_stage2_prompt_tokens"], 6)
+        self.assertEqual(thought_metadata["generation_mode"], "shared_thought_prefixes")
+        self.assertEqual(free_metadata["counts"]["physical_sampled_tokens"], 4)
+        self.assertEqual(free_metadata["counts"]["reused_sampled_tokens"], 4)
+        self.assertEqual(free_metadata["counts"]["logical_prompt_tokens"], 5)
+        self.assertEqual(free_metadata["counts"]["physical_prompt_tokens"], 4)
+        self.assertEqual(free_metadata["counts"]["reused_prompt_tokens"], 1)
+        self.assertEqual(free_metadata["counts"]["logical_model_tokens"], 13)
+        self.assertEqual(free_metadata["counts"]["physical_model_tokens"], 8)
+        self.assertEqual(free_metadata["counts"]["reused_model_tokens"], 5)
+        self.assertEqual(slot_metadata["counts"]["physical_sampled_tokens"], 4)
+        self.assertEqual(slot_metadata["counts"]["reused_sampled_tokens"], 4)
+        self.assertEqual(slot_metadata["counts"]["logical_prompt_tokens"], 7)
+        self.assertEqual(slot_metadata["counts"]["physical_prompt_tokens"], 6)
+        self.assertEqual(slot_metadata["counts"]["reused_prompt_tokens"], 1)
+        self.assertEqual(slot_metadata["counts"]["logical_model_tokens"], 15)
+        self.assertEqual(slot_metadata["counts"]["physical_model_tokens"], 10)
+        self.assertEqual(slot_metadata["counts"]["reused_model_tokens"], 5)
+
+    def test_no_think_boundary_pair_is_adjacent_seed_paired_and_untrimmed(self) -> None:
+        value = self.instance(
+            [
+                [
+                    self.completion([101, 248046], stop_reason=248046),
+                    self.completion([101, 102, 248044], stop_reason=248044),
+                ]
+            ]
+        )
+        sampling = runner.SamplingConfig(
+            thinking="off",
+            max_tokens=24,
+            answer_max_tokens=24,
+            greedy=True,
+            allow_custom_prompts=True,
+            answer_prefix="PROGRAM:",
+            paired_answer_seed=True,
+            run_seed=37,
+        )
+        rows, metadata = self.run_shared(
+            value,
+            lambda: value.generate_boundary_pairs(
+                [{"id": "paired-record", "prompt": "prompt"}], sampling
+            ),
+        )
+
+        self.assertEqual(
+            value.llm.prompts,
+            [
+                [
+                    {"prompt_token_ids": [7, 90, 91]},
+                    {"prompt_token_ids": [7, 90, 91]},
+                ]
+            ],
+        )
+        params = value.llm.params[0]
+        self.assertEqual([item.stop_token_ids for item in params], [[248046], [248044]])
+        self.assertEqual(params[0].seed, params[1].seed)
+        tokenizer_output, hf_output = rows[0]["outputs"]
+        self.assertEqual(tokenizer_output["batch_position"], 0)
+        self.assertEqual(hf_output["batch_position"], 1)
+        self.assertEqual(tokenizer_output["boundary"], "tokenizer_eos")
+        self.assertEqual(hf_output["boundary"], "hf_model_eos")
+        self.assertEqual(
+            tokenizer_output["raw_answer_token_ids"], [101, 248046]
+        )
+        self.assertEqual(hf_output["raw_answer_token_ids"], [101, 102, 248044])
+        self.assertEqual(
+            tokenizer_output["token_ids"], [90, 91, 101, 248046]
+        )
+        self.assertEqual(tokenizer_output["text"], "PROGRAM: A<|im_end|>")
+        self.assertEqual(tokenizer_output["n_terminal_tokens_trimmed"], 0)
+        self.assertEqual(rows[0]["effective_prompt_token_ids"], [7, 90, 91])
+        self.assertEqual(metadata["generation_mode"], "answer_boundary_pairs")
+        self.assertEqual(metadata["counts"]["completions"], 2)
+        self.assertEqual(metadata["counts"]["physical_sampled_tokens"], 5)
+        self.assertEqual(
+            metadata["boundary_pairing"]["registered_stop_token_ids"],
+            [248046, 248044],
+        )
+
+    def test_thinking_boundary_pair_reuses_one_authenticated_thought(self) -> None:
+        value = self.instance(
+            [
+                [self.completion([50, 248069, 77, 248044])],
+                [
+                    self.completion([101, 248046], stop_reason=248046),
+                    self.completion([101, 103, 248044], stop_reason=248044),
+                ],
+            ]
+        )
+        records = [{"id": "paired-record", "prompt": "prompt"}]
+        source_sampling = runner.SamplingConfig(
+            thinking="budget",
+            thinking_budget=8,
+            max_tokens=8,
+            answer_max_tokens=24,
+            greedy=True,
+            allow_custom_prompts=True,
+            force_answer_seam=True,
+            paired_answer_seed=True,
+            run_seed=41,
+        )
+
+        def execute():
+            thought_rows, thought_metadata = value.generate_thought_prefixes(
+                records, source_sampling
+            )
+            pair_rows, pair_metadata = value.generate_boundary_pairs(
+                records,
+                dataclasses.replace(source_sampling, answer_prefix="PROGRAM:"),
+                thought_rows=json.loads(json.dumps(thought_rows)),
+                thought_metadata=json.loads(json.dumps(thought_metadata)),
+            )
+            return thought_rows, pair_rows, pair_metadata
+
+        thought_rows, rows, metadata = self.run_shared(value, execute)
+        expected_prompt = [7, 50, 248069, 271, 90, 91]
+        self.assertEqual(
+            value.llm.prompts,
+            [
+                [{"prompt_token_ids": [7]}],
+                [
+                    {"prompt_token_ids": expected_prompt},
+                    {"prompt_token_ids": expected_prompt},
+                ],
+            ],
+        )
+        self.assertEqual(
+            thought_rows[0]["outputs"][0]["stage1_token_ids"],
+            [50, 248069, 77, 248044],
+        )
+        tokenizer_output, hf_output = rows[0]["outputs"]
+        self.assertEqual(tokenizer_output["retained_thinking_token_ids"], [50])
+        self.assertEqual(hf_output["retained_thinking_token_ids"], [50])
+        self.assertEqual(tokenizer_output["stage1_token_ids"], hf_output["stage1_token_ids"])
+        self.assertEqual(tokenizer_output["answer_seed"], hf_output["answer_seed"])
+        self.assertEqual(
+            tokenizer_output["token_ids"],
+            [50, 248069, 271, 90, 91, 101, 248046],
+        )
+        self.assertEqual(metadata["generation_mode"], "shared_thought_boundary_pairs")
+        self.assertEqual(metadata["counts"]["physical_sampled_tokens"], 5)
+        self.assertEqual(metadata["counts"]["reused_sampled_tokens"], 8)
+        self.assertIn("thought_source_sha256", metadata)
+
+    def test_boundary_pair_contract_rejects_wrong_cap_and_thought_geometry(self) -> None:
+        value = self.instance([])
+        records = [{"id": "paired-record", "prompt": "prompt"}]
+        with self.assertRaisesRegex(ValueError, "answer_max_tokens=24"):
+            self.run_shared(
+                value,
+                lambda: value.generate_boundary_pairs(
+                    records,
+                    runner.SamplingConfig(
+                        thinking="off",
+                        max_tokens=24,
+                        answer_max_tokens=23,
+                        greedy=True,
+                        allow_custom_prompts=True,
+                        paired_answer_seed=True,
+                    ),
+                ),
+            )
+        with self.assertRaisesRegex(ValueError, "require persisted thought"):
+            self.run_shared(
+                value,
+                lambda: value.generate_boundary_pairs(
+                    records,
+                    runner.SamplingConfig(
+                        thinking="budget",
+                        thinking_budget=8,
+                        max_tokens=8,
+                        answer_max_tokens=24,
+                        greedy=True,
+                        allow_custom_prompts=True,
+                        force_answer_seam=True,
+                        paired_answer_seed=True,
+                    ),
+                ),
+            )
+
+    def test_shared_thought_authentication_rejects_identity_token_and_runner_drift(self) -> None:
+        value = self.instance(
+            [[self.completion([50], finish_reason="length")]]
+        )
+        records = [{"id": "paired-record", "prompt": "prompt"}]
+        sampling = runner.SamplingConfig(
+            thinking="budget",
+            thinking_budget=1,
+            max_tokens=1,
+            answer_max_tokens=24,
+            greedy=True,
+            allow_custom_prompts=True,
+            force_answer_seam=True,
+            paired_answer_seed=True,
+            run_seed=31,
+        )
+        thought_rows, thought_metadata = self.run_shared(
+            value,
+            lambda: value.generate_thought_prefixes(records, sampling),
+        )
+        self.assertEqual(
+            thought_rows[0]["outputs"][0]["retained_thinking_token_ids"], [50]
+        )
+
+        mutations = []
+        bad_id = copy.deepcopy(thought_rows)
+        bad_id[0]["id"] = "other"
+        mutations.append((bad_id, thought_metadata, "identity"))
+        bad_token = copy.deepcopy(thought_rows)
+        bad_token[0]["outputs"][0]["retained_thinking_token_ids"] = []
+        mutations.append((bad_token, thought_metadata, "token/seed"))
+        bad_metadata = copy.deepcopy(thought_metadata)
+        bad_metadata["runner_sha256"] = "0" * 64
+        mutations.append((thought_rows, bad_metadata, "metadata"))
+
+        for rows, metadata, message in mutations:
+            with self.subTest(message=message), self.assertRaisesRegex(
+                RuntimeError, message
+            ):
+                self.run_shared(
+                    value,
+                    lambda rows=rows, metadata=metadata: value.generate_from_thought_prefixes(
+                        records, rows, metadata, sampling
+                    ),
+                )
+        self.assertEqual(len(value.llm.prompts), 1)
 
 
 if __name__ == "__main__":
