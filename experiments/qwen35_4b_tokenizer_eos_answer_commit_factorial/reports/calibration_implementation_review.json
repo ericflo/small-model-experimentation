@@ -1,0 +1,30 @@
+{
+  "adversarial_review_rounds": 5,
+  "benchmark_files_read": [],
+  "confirmation_files_read": [],
+  "experimental_model_requests_reviewed": 0,
+  "hidden_files_read": [],
+  "qualification_files_read": [],
+  "review_report_sha256": "68fe2beb0a6a4fecacba40a9d367c47181e200c617476f7a4256cd7477504022",
+  "reviewed_ci": {
+    "Publish Research Site": {
+      "conclusion": "success",
+      "database_id": 29314456054,
+      "head_sha": "d70756122bc768e82fa4d77a61e05522ef5bca79",
+      "status": "completed",
+      "url": "https://github.com/ericflo/small-model-experimentation/actions/runs/29314456054"
+    },
+    "Validate Repository": {
+      "conclusion": "success",
+      "database_id": 29314456061,
+      "head_sha": "d70756122bc768e82fa4d77a61e05522ef5bca79",
+      "status": "completed",
+      "url": "https://github.com/ericflo/small-model-experimentation/actions/runs/29314456061"
+    }
+  },
+  "reviewed_commit": "d70756122bc768e82fa4d77a61e05522ef5bca79",
+  "reviewer": "fresh_parent_provenance_review",
+  "sampled_model_outputs_reviewed": 0,
+  "schema_version": 1,
+  "verdict": "PASS_IMPLEMENTATION"
+}

@@ -1,6 +1,6 @@
 # Qwen3.5-4B Tokenizer-EOS Answer Commit Factorial
 
-**Status:** in-progress · since 2026-07-14 · adversarial `PASS_DESIGN`; fresh construction and preoutcome receipt pass; implementation review next; no model call
+**Status:** in-progress · since 2026-07-14 · adversarial `PASS_DESIGN`; fresh construction passes; exact-commit `PASS_IMPLEMENTATION`; machine receipt/lock publication pending; no model call
 
 This fresh successor tests whether the prior strict answer-seam failure was
 caused by waiting past Qwen3.5's tokenizer chat-end token. It registers the
@@ -176,6 +176,13 @@ a caller-controlled environment marker to assert entry. The parent-plus-open-
 executable proof above replaces that assertion with kernel process/file state
 that remains valid across the sanctioned Mamba recovery `execve`. The repair
 is still model-free; live authorization remains absent.
+
+The seventh clean review then returned `PASS_IMPLEMENTATION` for exact
+pushed-green commit `d70756122bc768e82fa4d77a61e05522ef5bca79`: 95/95
+permitted tests passed, the launcher rebuilt byte-identically, all protected
+read inventories were empty, and model/GPU calls remained zero. The PASS does
+not itself authorize generation; its canonical hash-bound receipt and the
+subsequent implementation lock must each be committed, pushed, and green.
 
 ## Interpretation
 
