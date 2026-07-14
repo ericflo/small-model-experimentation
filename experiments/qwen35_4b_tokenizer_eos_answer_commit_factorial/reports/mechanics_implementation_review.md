@@ -2,11 +2,11 @@
 
 **Verdict:** `PASS_IMPLEMENTATION`
 
-**Reviewed commit:** `3e7b650a90ff1d65fe371552354895756efcf728`
+**Reviewed commit:** `c0075a019fd0f202c3b0e6cf0be5528e08c61649`
 
 **Reviewer:** `fresh_mechanics_adversary`
 
-**Review rounds:** 8
+**Review rounds:** 9
 
 ## Release evidence
 
@@ -16,11 +16,11 @@ published ancestor after concurrent work advanced the branch. No scoped
 mechanics implementation, transaction-test, launcher, or bootstrap file
 changed in that advancement.
 
-- Validate Repository run `29325912079`: completed successfully at the exact
+- Validate Repository run `29326662483`: completed successfully at the exact
   reviewed SHA.
-- Publish Research Site run `29325912092`: completed successfully at the exact
+- Publish Research Site run `29326662409`: completed successfully at the exact
   reviewed SHA.
-- Pinned model-free experiment suite: 140/140 tests passed.
+- Pinned model-free experiment suite: 141/141 tests passed.
 - The static launchers rebuilt byte-identically, static, stripped, and without
   `PT_INTERP`.
 - Mechanics launcher SHA-256:
@@ -28,7 +28,7 @@ changed in that advancement.
 
 ## Adversarial coverage
 
-The final review rechecked every blocker found during the preceding seven
+The final review rechecked every blocker found during the preceding eight
 rounds, plus a new global scan.
 
 - Full predecessor-prefix authentication rejected 8/8 pre-call changes before
@@ -50,6 +50,11 @@ rounds, plus a new global scan.
 - A read-only prospective lock build and validation completed with all 29
   current critical files and canonical JSON-native output; it wrote no lock and
   exposed no next deterministic failure.
+- Under the active lock-stage path audit, the seven-file critical-test inventory
+  exactly equaled critical-minus-runtime, all 29 critical files were hashable,
+  and two neighboring unregistered files were denied. The 22 runtime and 11
+  support inventories remained unchanged. An audited prospective lock build
+  completed with zero unregistered-path failures and no write.
 - Hidden authorization resolved one immutable commit, compared that exact
   commit-qualified blob, returned the exact authenticated visible object, and
   introduced no second visible-object read during scoring.
@@ -73,9 +78,9 @@ The implementation review was model-free. It did not inspect experimental
 mechanics data or outputs and did not authorize execution by itself.
 
 ```text
-adversarial_review_rounds=8
-allowed_tests_passed=140
-allowed_tests_total=140
+adversarial_review_rounds=9
+allowed_tests_passed=141
+allowed_tests_total=141
 experimental_model_requests_reviewed=0
 sampled_model_outputs_reviewed=0
 gpu_calls=0
