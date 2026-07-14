@@ -1,11 +1,13 @@
 from __future__ import annotations
 
 import sys
+import fcntl
 import hashlib
 import os
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 
 EXP = Path(__file__).resolve().parents[1]
@@ -80,6 +82,52 @@ class LoadWindowGuardTests(unittest.TestCase):
                 with L.LoadWindowGuard([root], expected_content=expected) as guard:
                     observed = _content(root)
                     guard.bind_authenticated_content(observed, observed)
+
+    def test_kernel_denied_leases_are_scoped_to_declared_system_roots(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            outer = Path(temporary)
+            environment = outer / "environment"
+            system = outer / "system"
+            environment.mkdir()
+            system.mkdir()
+            (environment / "weights.bin").write_bytes(b"environment")
+            (system / "library.so").write_bytes(b"system")
+            expected = {"runtime": "pinned"}
+            original_fcntl = fcntl.fcntl
+
+            def scoped_lease(descriptor: int, command: int, argument: int):
+                path = Path(os.readlink(f"/proc/self/fd/{descriptor}"))
+                if (
+                    command == fcntl.F_SETLEASE
+                    and argument == fcntl.F_RDLCK
+                    and system in path.parents
+                ):
+                    raise PermissionError(13, "synthetic kernel denial")
+                return original_fcntl(descriptor, command, argument)
+
+            with mock.patch.object(L.fcntl, "fcntl", side_effect=scoped_lease):
+                guard = L.LoadWindowGuard(
+                    [environment, system],
+                    expected_content=expected,
+                    unleased_roots=[system],
+                )
+                guard.__enter__()
+                guard.bind_authenticated_content(expected, expected)
+                receipt = guard.verify()
+            self.assertEqual(receipt["schema_version"], 3)
+            self.assertEqual(receipt["unleased_files"], 1)
+            L.validate_load_window_receipt(
+                receipt,
+                [environment, system],
+                expected_content=expected,
+                unleased_roots=[system],
+            )
+            with self.assertRaisesRegex(ValueError, "invalid or stale"):
+                L.validate_load_window_receipt(
+                    receipt,
+                    [environment, system],
+                    expected_content=expected,
+                )
 
 
 if __name__ == "__main__":

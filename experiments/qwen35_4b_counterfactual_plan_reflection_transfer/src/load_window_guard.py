@@ -125,14 +125,24 @@ class LoadWindowGuard:
     """Hold read leases and detect any transient namespace/content mutation."""
 
     def __init__(
-        self, roots: Iterable[Path], *, expected_content: dict[str, Any]
+        self,
+        roots: Iterable[Path],
+        *,
+        expected_content: dict[str, Any],
+        unleased_roots: Iterable[Path] = (),
     ):
         self.roots = tuple(sorted({Path(root).resolve() for root in roots}, key=str))
+        self._unleased_roots = tuple(
+            sorted({Path(root).resolve() for root in unleased_roots}, key=str)
+        )
+        if any(root not in self.roots for root in self._unleased_roots):
+            raise ValueError("unleased roots must be a subset of guarded roots")
         self._expected_content = _content_hashes(expected_content)
         self._authenticated_content: dict[str, str] | None = None
         self._before: list[dict[str, Any]] | None = None
         self._inotify_fd: int | None = None
         self._lease_fds: list[int] = []
+        self._unleased_files: list[Path] = []
         self._watch_count = 0
         self._sigio_previous: Any = None
         self._sigio_count = 0
@@ -175,9 +185,15 @@ class LoadWindowGuard:
                 file_descriptor = os.open(path, os.O_RDONLY | os.O_CLOEXEC)
                 try:
                     fcntl.fcntl(file_descriptor, fcntl.F_SETLEASE, fcntl.F_RDLCK)
-                except Exception:
+                except OSError:
                     os.close(file_descriptor)
-                    raise
+                    if not any(
+                        root == path or root in path.parents
+                        for root in self._unleased_roots
+                    ):
+                        raise
+                    self._unleased_files.append(path)
+                    continue
                 self._lease_fds.append(file_descriptor)
         except Exception:
             self._close()
@@ -222,9 +238,14 @@ class LoadWindowGuard:
             raise RuntimeError("load-window content was not authenticated while guarded")
         events = self._event_bytes()
         after = root_commitments(self.roots)
+        unleased_paths = [str(path) for path in self._unleased_files]
         receipt = {
-            "schema_version": 2,
-            "method": "linux_inotify_plus_read_leases_plus_inode_surface",
+            "schema_version": 3 if unleased_paths else 2,
+            "method": (
+                "linux_inotify_plus_scoped_read_leases_plus_inode_surface"
+                if unleased_paths
+                else "linux_inotify_plus_read_leases_plus_inode_surface"
+            ),
             "roots": self._before,
             "authenticated_content_sha256": self._authenticated_content,
             "protected_files": len(self._lease_fds),
@@ -233,6 +254,12 @@ class LoadWindowGuard:
             "lease_break_signals": self._sigio_count,
             "decision": "LOAD_WINDOW_IMMUTABLE",
         }
+        if unleased_paths:
+            receipt.update(
+                unleased_files=len(unleased_paths),
+                unleased_file_paths=unleased_paths,
+                unleased_files_sha256=_canonical_sha256(unleased_paths),
+            )
         self._close()
         if events or self._sigio_count or after != self._before:
             raise RuntimeError("authenticated files changed during the load window")
@@ -270,31 +297,74 @@ def validate_load_window_receipt(
     roots: Iterable[Path],
     *,
     expected_content: dict[str, Any],
+    unleased_roots: Iterable[Path] = (),
 ) -> None:
     expected_roots = root_commitments(roots)
     expected_content_hashes = _content_hashes(expected_content)
+    schema = receipt.get("schema_version") if isinstance(receipt, dict) else None
+    required = {
+        "schema_version",
+        "method",
+        "roots",
+        "authenticated_content_sha256",
+        "protected_files",
+        "watched_directories",
+        "inotify_event_bytes",
+        "lease_break_signals",
+        "decision",
+    }
+    if schema == 3:
+        required |= {
+            "unleased_files",
+            "unleased_file_paths",
+            "unleased_files_sha256",
+        }
+    files, _directories = _files_and_watch_directories(roots)
+    allowed_unleased_roots = tuple(
+        sorted({Path(root).resolve() for root in unleased_roots}, key=str)
+    )
+    unleased_file_paths = receipt.get("unleased_file_paths", []) if isinstance(receipt, dict) else []
     if (
         not isinstance(receipt, dict)
-        or set(receipt)
-        != {
-            "schema_version",
-            "method",
-            "roots",
-            "authenticated_content_sha256",
-            "protected_files",
-            "watched_directories",
-            "inotify_event_bytes",
-            "lease_break_signals",
-            "decision",
-        }
+        or set(receipt) != required
         or type(receipt.get("schema_version")) is not int
-        or receipt.get("schema_version") != 2
-        or receipt.get("method")
-        != "linux_inotify_plus_read_leases_plus_inode_surface"
+        or schema not in {2, 3}
+        or receipt.get("method") != (
+            "linux_inotify_plus_scoped_read_leases_plus_inode_surface"
+            if schema == 3
+            else "linux_inotify_plus_read_leases_plus_inode_surface"
+        )
         or receipt.get("roots") != expected_roots
         or receipt.get("authenticated_content_sha256") != expected_content_hashes
         or type(receipt.get("protected_files")) is not int
         or receipt["protected_files"] < 1
+        or (
+            schema == 3
+            and (
+                type(receipt.get("unleased_files")) is not int
+                or receipt["unleased_files"] < 1
+                or not allowed_unleased_roots
+                or not isinstance(unleased_file_paths, list)
+                or unleased_file_paths != sorted(set(unleased_file_paths))
+                or any(
+                    not isinstance(path, str)
+                    or Path(path).resolve() not in files
+                    or not any(
+                        root == Path(path).resolve()
+                        or root in Path(path).resolve().parents
+                        for root in allowed_unleased_roots
+                    )
+                    for path in unleased_file_paths
+                )
+                or len(unleased_file_paths) != receipt["unleased_files"]
+                or receipt["protected_files"] + receipt["unleased_files"]
+                != len(files)
+                or not isinstance(receipt.get("unleased_files_sha256"), str)
+                or receipt["unleased_files_sha256"]
+                != _canonical_sha256(unleased_file_paths)
+            )
+        )
+        or (schema == 2 and receipt["protected_files"] != len(files))
         or type(receipt.get("watched_directories")) is not int
         or receipt["watched_directories"] < 1
         or type(receipt.get("inotify_event_bytes")) is not int

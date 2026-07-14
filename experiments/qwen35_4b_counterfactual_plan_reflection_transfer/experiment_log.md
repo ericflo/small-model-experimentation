@@ -1,5 +1,29 @@
 # Counterfactual Plan Reflection Transfer Experiment Log
 
+## 2026-07-14 — Review-10 remediation, pending Review 11
+
+- Extended one authenticated runtime window from pre-import verification through the
+  final artifact-relevant import, then reauthenticated and sealed it before writes.
+  Committed pins now cover the resolved interpreter plus complete stdlib,
+  site-packages, executable, system-library, locale, and CUDA-library surfaces. Loaded native
+  mappings outside those roots fail closed.
+- Mutable Python-environment files retain mandatory read leases. Root-owned injected
+  driver files on which the container kernel denies leases are explicitly enumerated
+  in a schema-3 receipt and remain protected by inotify, inode-surface comparison,
+  and cryptographic before/after authentication. A detached real-runtime audit found
+  34 such files and no mutation.
+- Reproduced the authenticated CUTLASS path explicitly under `-S`, derived the venv
+  bin from `sys.executable`, removed all adaptive Mamba re-exec code, and froze the
+  already observed capacity-fit geometry at 15 sequences and `[1,2,4,8,15]` graph
+  captures.
+- Pinned absolute `/usr/bin/nvidia-smi` bytes and a sanitized subprocess environment;
+  after CUDA initialization, training and vLLM must bind that selected physical UUID
+  row to exactly one logical device with matching name and memory.
+- Training and vLLM detached bootstrap/seal audits both returned
+  `LOAD_WINDOW_IMMUTABLE`; CUTLASS discovery works under `-S`. The model-free suite
+  passes. No tokenizer/model/GPU/training/evaluation/Jacobian/benchmark event occurred.
+  Authorization remains unchanged pending independent Review 11 of the pushed SHA.
+
 ## 2026-07-14 — Review-10 HOLD
 
 - Independent Review 10 audited exact pushed commit

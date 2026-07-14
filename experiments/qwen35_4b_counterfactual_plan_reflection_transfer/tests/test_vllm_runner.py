@@ -15,6 +15,8 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest import mock
 
+import yaml
+
 
 RUNNER_PATH = Path(__file__).resolve().parents[1] / "src" / "vllm_runner.py"
 sys.path.insert(0, str(RUNNER_PATH.parent))
@@ -693,19 +695,14 @@ class EngineConfigCaptureGeometryTests(unittest.TestCase):
                 enforce_eager=True,
             ).validate()
 
-    def test_mamba_clamp_from_19_to_15_is_deterministic_and_tied(self) -> None:
-        requested = (1, 2, 4, 8, 16, 19)
-        expected = (1, 2, 4, 8, 15)
-        self.assertEqual(runner._clamp_cudagraph_capture_sizes(requested, 15), expected)
-        self.assertEqual(runner._clamp_cudagraph_capture_sizes(requested, 15), expected)
-        self.assertEqual(expected[-1], 15)
-        self.assertEqual(tuple(sorted(set(expected))), expected)
-
-    def test_mamba_clamp_rejects_invalid_target_or_empty_source(self) -> None:
-        with self.assertRaisesRegex(ValueError, "positive"):
-            runner._clamp_cudagraph_capture_sizes((1, 2, 4), 0)
-        with self.assertRaisesRegex(ValueError, "empty"):
-            runner._clamp_cudagraph_capture_sizes((), 15)
+    def test_frozen_default_geometry_is_capacity_fitted_and_tied(self) -> None:
+        config = yaml.safe_load(
+            (RUNNER_PATH.parents[1] / "configs" / "default.yaml").read_text()
+        )
+        engine = config["evaluation"]["engine"]
+        self.assertEqual(engine["max_num_seqs"], 15)
+        self.assertEqual(engine["cudagraph_capture_sizes"], [1, 2, 4, 8, 15])
+        self.assertEqual(engine["cudagraph_capture_sizes"][-1], engine["max_num_seqs"])
 
 
 class PackageInventoryTests(unittest.TestCase):
@@ -784,68 +781,10 @@ class TerminationSemanticsTests(unittest.TestCase):
 
 
 class CliRewriteTests(unittest.TestCase):
-    def test_rewrite_replaces_every_split_and_equals_spelling(self) -> None:
-        argv = [
-            "vllm_runner.py",
-            "--smoke",
-            "1",
-            "--max-num-seqs",
-            "64",
-            "--cudagraph-capture-size=1",
-            "--max-num-seqs=32",
-            "--cudagraph-capture-size",
-            "2",
-            "--max-num-seqs",
-            "19",
-            "--cudagraph-capture-size=19",
-            "--output",
-            "out.jsonl",
-        ]
-        capture_sizes = (1, 2, 4, 8, 15)
-
-        rewritten = runner._rewrite_max_num_seqs_argv(argv, 15, capture_sizes)
-
-        self.assertEqual(
-            rewritten,
-            [
-                "vllm_runner.py",
-                "--smoke",
-                "1",
-                "--output",
-                "out.jsonl",
-                "--max-num-seqs",
-                "15",
-                "--cudagraph-capture-size",
-                "1",
-                "--cudagraph-capture-size",
-                "2",
-                "--cudagraph-capture-size",
-                "4",
-                "--cudagraph-capture-size",
-                "8",
-                "--cudagraph-capture-size",
-                "15",
-            ],
-        )
-        parsed = runner._parse_args(rewritten[1:])
-        self.assertEqual(parsed.max_num_seqs, 15)
-        self.assertEqual(parsed.cudagraph_capture_size, list(capture_sizes))
-
-    def test_rewrite_leaves_explicit_graph_flags_alone_when_not_replacing_them(self) -> None:
-        argv = [
-            "vllm_runner.py",
-            "--max-num-seqs=19",
-            "--cudagraph-capture-size=19",
-        ]
-        self.assertEqual(
-            runner._rewrite_max_num_seqs_argv(argv, 15),
-            [
-                "vllm_runner.py",
-                "--cudagraph-capture-size=19",
-                "--max-num-seqs",
-                "15",
-            ],
-        )
+    def test_runner_contains_no_adaptive_exec_path(self) -> None:
+        source = RUNNER_PATH.read_text()
+        self.assertNotIn("os.exec", source)
+        self.assertNotIn("_rewrite_max_num_seqs_argv", source)
 
     def test_cli_disables_long_option_abbreviation(self) -> None:
         for abbreviated in ("--max-num-seq", "--cudagraph-capture-siz"):
@@ -859,55 +798,14 @@ class CliRewriteTests(unittest.TestCase):
 
 
 class MambaReexecGuardTests(unittest.TestCase):
-    def test_guard_parser_accepts_consistent_original_geometry(self) -> None:
-        sizes = (1, 2, 4, 8, 16, 19)
-        self.assertEqual(
-            runner._parse_mamba_reexec_geometry("19", json.dumps(sizes)),
-            (19, sizes),
-        )
-        self.assertEqual(runner._parse_mamba_reexec_geometry(None, None), (None, None))
-
-    def test_guard_parser_rejects_orphaned_or_malformed_provenance(self) -> None:
-        invalid = (
-            (None, "[1,2,4,8,16,19]", "orphaned"),
-            ("zero", None, "invalid"),
-            ("0", None, "invalid"),
-            ("19", "not-json", "invalid"),
-            ("19", "[]", "invalid"),
-            ("19", "[1,2,true,19]", "invalid"),
-            ("19", "[1,4,2,19]", "inconsistent"),
-            ("19", "[1,2,2,19]", "inconsistent"),
-            ("19", "[1,2,4,15]", "inconsistent"),
-        )
-        for max_num_seqs, sizes, message in invalid:
-            with self.subTest(
-                max_num_seqs=max_num_seqs, sizes=sizes
-            ), self.assertRaisesRegex(RuntimeError, message):
-                runner._parse_mamba_reexec_geometry(max_num_seqs, sizes)
-
-    def test_stale_guard_is_rejected_before_model_import(self) -> None:
-        sizes = (1, 2, 4, 8, 16, 19)
-        environment = {
-            runner._MAMBA_CACHE_REEXEC_ENV: "19",
-            runner._MAMBA_CACHE_REEXEC_CUDAGRAPH_ENV: json.dumps(sizes),
-        }
-        with mock.patch.dict(os.environ, environment), self.assertRaisesRegex(
-            RuntimeError, "did not lower max_num_seqs"
+    def test_obsolete_adaptive_geometry_state_is_rejected_before_import(self) -> None:
+        for name in (
+            "QWEN_RUNNER_MAMBA_REEXEC",
+            "QWEN_RUNNER_MAMBA_REEXEC_CUDAGRAPH",
         ):
-            runner.VLLMRunner(
-                runner.EngineConfig(
-                    max_num_seqs=19,
-                    cudagraph_capture_sizes=sizes,
-                )
-            )
-
-    def test_changed_explicitness_is_rejected_before_model_import(self) -> None:
-        with mock.patch.dict(
-            os.environ,
-            {runner._MAMBA_CACHE_REEXEC_ENV: "19"},
-        ):
-            os.environ.pop(runner._MAMBA_CACHE_REEXEC_CUDAGRAPH_ENV, None)
-            with self.assertRaisesRegex(RuntimeError, "changed whether"):
+            with self.subTest(name=name), mock.patch.dict(
+                os.environ, {name: "synthetic"}, clear=False
+            ), self.assertRaisesRegex(RuntimeError, "adaptive Mamba geometry is forbidden"):
                 runner.VLLMRunner(
                     runner.EngineConfig(
                         max_num_seqs=15,
@@ -953,8 +851,7 @@ class ResolvedCudagraphTests(unittest.TestCase):
             ):
                 runner._validate_explicit_cudagraph_resolution(requested, resolved)
 
-    def test_reexec_metadata_preserves_original_and_effective_geometry(self) -> None:
-        requested = (1, 2, 4, 8, 16, 19)
+    def test_frozen_geometry_is_forwarded_without_adaptation(self) -> None:
         effective = (1, 2, 4, 8, 15)
         captured_engine_args: dict[str, object] = {}
 
@@ -1023,15 +920,11 @@ class ResolvedCudagraphTests(unittest.TestCase):
         fake_transformers.AutoConfig = FakeAutoConfig
         fake_vllm = types.ModuleType("vllm")
         fake_vllm.LLM = FakeLLM
-        environment = {
-            runner._MAMBA_CACHE_REEXEC_ENV: "19",
-            runner._MAMBA_CACHE_REEXEC_CUDAGRAPH_ENV: json.dumps(requested),
-        }
         base_path = Path("/synthetic/base")
         tokenizer_path = Path("/synthetic/tokenizer")
         tokenizer_commitment = {"synthetic": "tokenizer"}
 
-        with mock.patch.dict(os.environ, environment), mock.patch.dict(
+        with mock.patch.dict(
             sys.modules,
             {"transformers": fake_transformers, "vllm": fake_vllm},
         ), mock.patch(
@@ -1051,6 +944,9 @@ class ResolvedCudagraphTests(unittest.TestCase):
             return_value=tokenizer_commitment,
         ), mock.patch(
             "load_window_guard.LoadWindowGuard", _FakeLoadWindowGuard
+        ), mock.patch(
+            "runtime_contract.bind_active_cuda_identity",
+            return_value={"synthetic": "gpu"},
         ):
             instance = runner.VLLMRunner(
                 runner.EngineConfig(
@@ -1064,14 +960,8 @@ class ResolvedCudagraphTests(unittest.TestCase):
         self.assertIs(captured_engine_args["trust_remote_code"], False)
         self.assertEqual(captured_engine_args["cudagraph_capture_sizes"], list(effective))
         self.assertEqual(captured_engine_args["max_cudagraph_capture_size"], 15)
-        self.assertEqual(instance.engine_args["requested_max_num_seqs"], 19)
-        self.assertEqual(instance.engine_args["effective_max_num_seqs"], 15)
-        self.assertEqual(
-            instance.engine_args["requested_cudagraph_capture_sizes"], list(requested)
-        )
-        self.assertEqual(
-            instance.engine_args["effective_cudagraph_capture_sizes"], list(effective)
-        )
+        self.assertNotIn("requested_max_num_seqs", instance.engine_args)
+        self.assertNotIn("effective_max_num_seqs", instance.engine_args)
         self.assertEqual(
             instance.resolved_cudagraph["cudagraph_capture_sizes"], list(effective)
         )

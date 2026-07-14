@@ -19,6 +19,7 @@ sys.path.insert(0, str(EXP / "src"))
 from runtime_contract import (  # noqa: E402
     bootstrap_runtime_environment,
     require_detached_execution_worktree,
+    seal_runtime_environment,
 )
 
 bootstrap_runtime_environment(EXP.parents[1], "training")
@@ -149,8 +150,9 @@ def main() -> int:
         ]
         for arm in TRAINING_ARMS
     }
+    runtime_bootstrap = seal_runtime_environment(EXP.parents[1], "training")
     receipt = {
-        "schema_version": 4,
+        "schema_version": 5,
         "experiment_id": config["experiment_id"],
         "config_sha256": hashlib.sha256(config_path.read_bytes()).hexdigest(),
         "runner_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
@@ -162,6 +164,7 @@ def main() -> int:
         "tokenizer_snapshot": tokenizer_snapshot,
         "load_window_guard": tokenizer_load_guard,
         "worktree": worktree,
+        "runtime_bootstrap": runtime_bootstrap,
         "record_receipt": record_receipt,
         "parity": parity,
         "rows": row_receipts,

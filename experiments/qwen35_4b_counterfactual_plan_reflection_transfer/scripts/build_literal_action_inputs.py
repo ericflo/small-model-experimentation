@@ -19,6 +19,7 @@ sys.path.insert(0, str(EXP / "src"))
 from runtime_contract import (  # noqa: E402
     bootstrap_runtime_environment,
     require_detached_execution_worktree,
+    seal_runtime_environment,
 )
 
 bootstrap_runtime_environment(EXP.parents[1], "training")
@@ -43,6 +44,7 @@ def _read_jsonl(path: Path) -> list[dict]:
 
 
 def _write_exclusive(path: Path, rows: list[dict]) -> str:
+    seal_runtime_environment(EXP.parents[1], "training")
     payload = b"".join(
         (json.dumps(row, sort_keys=True, separators=(",", ":")) + "\n").encode()
         for row in rows

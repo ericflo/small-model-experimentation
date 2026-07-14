@@ -26,7 +26,8 @@ reproducibility:
     - "none until a fresh exact-SHA tokenizer receipt is independently authorized"
 notes: >-
   Full CPU construction and a fresh tokenizer-only receipt are authorized, but all model,
-  GPU, training, evaluation, J-space, and benchmark work remains on adversarial HOLD.
+  GPU, training, evaluation, J-space, and benchmark work remains on adversarial HOLD
+  pending exact-SHA Review 11 of the model-free Review-10 remediation.
   Qwen/Qwen3.5-4B revision 851bf6e8...d0a is the sole permitted future
   model. Reserved construction/shuffle/schedule/retention/training/evaluation seeds
   are committed in configs/default.yaml. The historical tokenizer receipt records

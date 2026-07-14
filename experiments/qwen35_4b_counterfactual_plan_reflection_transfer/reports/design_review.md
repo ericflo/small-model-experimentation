@@ -645,3 +645,30 @@ residuals. It made zero tokenizer/model/GPU/training/evaluation/Jacobian calls; 
 benchmark, protected, hidden, qualification, confirmation, cache, large-artifact, or
 weight payload; and left the tree clean. Authorization remains unchanged. A fresh
 Review 11 is required after model-free remediation.
+
+### Review 10 remediation implemented, pending Review 11
+
+1. Runtime bootstrap now enters a single immutable window before authenticating the
+   stage environment and retains it across all artifact-relevant third-party and
+   native imports. Every output path seals the window only after reauthenticating the
+   complete surfaces and loaded native mapping closure. Tokenizer, training, merge,
+   and generation receipts carry the replayable seal.
+2. Committed pins now name the exact resolved Python executable and hash, the complete
+   standard-library surface, and complete executable, locale, system-library,
+   CUDA-library, and stage-specific site-package surfaces. `LD_PRELOAD`/`LD_AUDIT` and any unexpected
+   initial or post-import native mapping fail closed. Mutable environment files require
+   read leases; kernel-denied leases are permitted only under declared system roots
+   and are explicitly enumerated while inotify plus before/after hashes remain active.
+3. The vLLM bin path derives from `sys.executable`; the authenticated CUTLASS path is
+   applied explicitly under `-S`. Automatic geometry rewriting and `os.exec` are
+   absent. The result-bearing config is frozen at the previously observed viable
+   `max_num_seqs=15` and capture list `[1,2,4,8,15]`; a capacity mismatch is terminal.
+4. Device inventory invokes committed `/usr/bin/nvidia-smi` bytes through a sanitized
+   environment. After model initialization, the selected UUID row is bound to CUDA's
+   only visible logical device and must match its name and total memory.
+
+The model-free suite and both real detached runtime bootstrap/seal audits pass; the
+vLLM audit also proves CUTLASS discovery without executing it. No tokenizer, model,
+GPU, training, evaluation, Jacobian, benchmark, protected-data, or weight event
+occurred. Authorization remains unchanged. Review 11 must audit the exact clean pushed
+SHA before any execution flag can change.

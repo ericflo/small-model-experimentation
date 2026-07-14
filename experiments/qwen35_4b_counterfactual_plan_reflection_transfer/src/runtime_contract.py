@@ -17,10 +17,16 @@ from typing import Any
 
 RUNTIME_PIN = Path(__file__).resolve().parents[1] / "configs" / "pinned_runtime_environments.json"
 _BOOTSTRAP_RECEIPT: dict[str, Any] | None = None
+_RUNTIME_IMPORT_GUARD: Any | None = None
+_RUNTIME_IMPORT_CONTENT: dict[str, Any] | None = None
 
 
-def _run(command: list[str], *, cwd: Path) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(command, cwd=cwd, capture_output=True, text=True, check=False)
+def _run(
+    command: list[str], *, cwd: Path, env: dict[str, str] | None = None
+) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(
+        command, cwd=cwd, capture_output=True, text=True, check=False, env=env
+    )
 
 
 def require_detached_execution_worktree(repo_root: Path) -> dict[str, str]:
@@ -76,7 +82,10 @@ def _sha256_file(path: Path) -> str:
 
 def _runtime_pin(backend: str) -> dict[str, Any]:
     value = json.loads(RUNTIME_PIN.read_text())
-    if set(value) != {"schema_version", "training", "vllm"} or value["schema_version"] != 1:
+    if (
+        set(value) != {"schema_version", "system", "training", "vllm"}
+        or value["schema_version"] != 2
+    ):
         raise ValueError("runtime environment pin schema changed")
     if backend not in {"training", "vllm"}:
         raise ValueError(f"unknown runtime backend: {backend}")
@@ -87,14 +96,46 @@ def _runtime_pin(backend: str) -> dict[str, Any]:
         != {
             "environment_root",
             "lock_file",
+            "path_extensions",
             "record_surface_sha256",
             "site_surface_sha256",
             "startup_files",
         }
         or not isinstance(selected["startup_files"], dict)
+        or not isinstance(selected["path_extensions"], list)
+        or any(
+            not isinstance(item, str) or not item or Path(item).is_absolute()
+            for item in selected["path_extensions"]
+        )
     ):
         raise ValueError("runtime environment backend pin changed")
     return selected
+
+
+def _system_pin() -> dict[str, Any]:
+    value = json.loads(RUNTIME_PIN.read_text()).get("system")
+    required = {
+        "resolved_python",
+        "resolved_python_sha256",
+        "stdlib_root",
+        "stdlib_surface_sha256",
+        "ld_library_path",
+        "native_library_roots",
+        "native_mappings",
+        "nvidia_smi",
+    }
+    if (
+        not isinstance(value, dict)
+        or set(value) != required
+        or not isinstance(value.get("native_mappings"), dict)
+        or not value["native_mappings"]
+        or not isinstance(value.get("native_library_roots"), dict)
+        or not value["native_library_roots"]
+        or not isinstance(value.get("nvidia_smi"), dict)
+        or set(value["nvidia_smi"]) != {"path", "sha256"}
+    ):
+        raise ValueError("runtime system pin changed")
+    return value
 
 
 def _normalized_distribution_name(value: str) -> str:
@@ -224,6 +265,125 @@ def authenticate_site_packages(
     }
 
 
+def authenticate_tree(root: Path, expected_surface_sha256: str) -> dict[str, Any]:
+    """Authenticate regular files plus exact symlink targets under one runtime tree."""
+    root = root.resolve()
+    if not root.is_dir():
+        raise ValueError("authenticated runtime tree is absent")
+    rows: list[dict[str, Any]] = []
+    total_bytes = 0
+    for path in sorted(root.rglob("*"), key=lambda item: item.as_posix()):
+        relative = path.relative_to(root).as_posix()
+        if path.is_symlink():
+            target = path.resolve(strict=True)
+            if target.is_file():
+                size = target.stat().st_size
+                rows.append(
+                    {
+                        "path": relative,
+                        "kind": "file_symlink",
+                        "target": str(target),
+                        "target_sha256": _sha256_file(target),
+                        "target_size": size,
+                    }
+                )
+                total_bytes += size
+            elif target.is_dir():
+                rows.append(
+                    {
+                        "path": relative,
+                        "kind": "directory_symlink",
+                        "target": str(target),
+                    }
+                )
+            else:
+                raise ValueError("runtime tree symlink has an unsupported target")
+        elif path.is_file():
+            size = path.stat().st_size
+            rows.append(
+                {
+                    "path": relative,
+                    "kind": "file",
+                    "sha256": _sha256_file(path),
+                    "size": size,
+                }
+            )
+            total_bytes += size
+        elif not path.is_dir():
+            raise ValueError("runtime tree contains an unsupported filesystem entry")
+    surface = hashlib.sha256(
+        json.dumps(rows, sort_keys=True, separators=(",", ":")).encode()
+    ).hexdigest()
+    if surface != expected_surface_sha256:
+        raise ValueError(f"runtime tree differs from its pin: {surface}")
+    return {"entries": len(rows), "bytes": total_bytes, "surface_sha256": surface}
+
+
+def _native_mapping_authentication() -> dict[str, str]:
+    mappings = {
+        fields[-1]
+        for line in Path("/proc/self/maps").read_text().splitlines()
+        if (fields := line.split()) and fields[-1].startswith("/")
+    }
+    return {path: _sha256_file(Path(path)) for path in sorted(mappings)}
+
+
+def _authenticate_system_runtime() -> dict[str, Any]:
+    pin = _system_pin()
+    resolved_python = Path(sys.executable).resolve()
+    if (
+        str(resolved_python) != pin["resolved_python"]
+        or _sha256_file(resolved_python) != pin["resolved_python_sha256"]
+        or os.environ.get("LD_LIBRARY_PATH", "") != pin["ld_library_path"]
+        or any(os.environ.get(name) for name in ("LD_PRELOAD", "LD_AUDIT"))
+    ):
+        raise ValueError("interpreter or pre-Python native environment differs from its pin")
+    mappings = _native_mapping_authentication()
+    if mappings != pin["native_mappings"]:
+        raise ValueError("initial native mapping closure differs from its pin")
+    return {
+        "resolved_python": str(resolved_python),
+        "resolved_python_sha256": _sha256_file(resolved_python),
+        "ld_library_path": os.environ.get("LD_LIBRARY_PATH", ""),
+        "native_mappings": mappings,
+        "native_mappings_sha256": hashlib.sha256(
+            json.dumps(mappings, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest(),
+    }
+
+
+def _authenticate_loaded_native_closure(
+    site_packages: Path, stdlib_root: Path, native_roots: list[Path]
+) -> dict[str, Any]:
+    mappings = _native_mapping_authentication()
+    allowed_roots = [
+        site_packages.resolve(),
+        stdlib_root.resolve(),
+        *(root.resolve() for root in native_roots),
+    ]
+    interpreter = Path(_system_pin()["resolved_python"]).resolve()
+    unexpected = [
+        path
+        for path in mappings
+        if Path(path).resolve() != interpreter
+        and not any(
+            root == Path(path).resolve() or root in Path(path).resolve().parents
+            for root in allowed_roots
+        )
+    ]
+    if unexpected:
+        raise ValueError(
+            "loaded native mapping escaped authenticated roots: "
+            + ", ".join(sorted(unexpected)[:5])
+        )
+    return {
+        "mappings": mappings,
+        "mappings_sha256": hashlib.sha256(
+            json.dumps(mappings, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest(),
+    }
+
+
 def _initial_import_path_allowed(value: str) -> bool:
     source_root = str(Path(__file__).resolve().parent)
     return (
@@ -237,14 +397,16 @@ def _initial_import_path_allowed(value: str) -> bool:
 
 
 def bootstrap_runtime_environment(repo_root: Path, backend: str) -> dict[str, Any]:
-    """Add one pinned site-packages root after -S prevented startup execution."""
-    global _BOOTSTRAP_RECEIPT
+    """Authenticate and guard stdlib/site bytes before enabling third-party imports."""
+    global _BOOTSTRAP_RECEIPT, _RUNTIME_IMPORT_CONTENT, _RUNTIME_IMPORT_GUARD
     if _BOOTSTRAP_RECEIPT is not None:
         if _BOOTSTRAP_RECEIPT.get("backend") != backend:
             raise ValueError("process already bootstrapped for a different runtime backend")
         return dict(_BOOTSTRAP_RECEIPT)
     worktree = require_detached_execution_worktree(repo_root)
     pin = _runtime_pin(backend)
+    system_pin = _system_pin()
+    system_authentication = _authenticate_system_runtime()
     environment_root = Path(pin["environment_root"])
     invoked_python = environment_root / "bin" / "python"
     if Path(sys.executable) != invoked_python or not invoked_python.is_file():
@@ -257,6 +419,9 @@ def bootstrap_runtime_environment(repo_root: Path, backend: str) -> dict[str, An
     )
     if not site_packages.is_dir() or repo_root.resolve() in site_packages.resolve().parents:
         raise ValueError("pinned runtime import root is absent or inside the worktree")
+    stdlib_root = Path(system_pin["stdlib_root"])
+    if not stdlib_root.is_dir():
+        raise ValueError("pinned standard-library root is absent")
     if not sys.path or any(not _initial_import_path_allowed(item) for item in sys.path):
         raise ValueError("unapproved import roots were active before runtime authentication")
     startup_paths = {
@@ -272,24 +437,92 @@ def bootstrap_runtime_environment(repo_root: Path, backend: str) -> dict[str, An
     lock_path = repo_root / pin["lock_file"]
     if not lock_path.is_file():
         raise ValueError("pinned stage-specific runtime lock is absent")
-    before = list(sys.path)
-    sys.path.append(str(site_packages.resolve()))
-    environment_authentication = authenticate_site_packages(
-        site_packages,
-        _bootstrap_locked_versions(lock_path, backend),
-        pin["record_surface_sha256"],
-        pin["site_surface_sha256"],
+    expected_versions = _bootstrap_locked_versions(lock_path, backend)
+    native_roots = [Path(path) for path in system_pin["native_library_roots"]]
+    expected_content = {
+        "record_surface_sha256": pin["record_surface_sha256"],
+        "site_surface_sha256": pin["site_surface_sha256"],
+        "packages_sha256": hashlib.sha256(
+            json.dumps(
+                expected_versions, sort_keys=True, separators=(",", ":")
+            ).encode()
+        ).hexdigest(),
+        "stdlib_surface_sha256": system_pin["stdlib_surface_sha256"],
+        "native_library_surfaces": system_pin["native_library_roots"],
+    }
+    from load_window_guard import LoadWindowGuard
+
+    import_guard = LoadWindowGuard(
+        [site_packages, stdlib_root, *native_roots],
+        expected_content={"runtime_environment": expected_content},
+        unleased_roots=[stdlib_root, *native_roots],
     )
+    import_guard.__enter__()
+    before = list(sys.path)
+    try:
+        environment_authentication = authenticate_site_packages(
+            site_packages,
+            expected_versions,
+            pin["record_surface_sha256"],
+            pin["site_surface_sha256"],
+        )
+        stdlib_authentication = authenticate_tree(
+            stdlib_root, system_pin["stdlib_surface_sha256"]
+        )
+        native_library_authentication = {
+            str(root): authenticate_tree(
+                root, system_pin["native_library_roots"][str(root)]
+            )
+            for root in native_roots
+        }
+        content = {
+            "record_surface_sha256": environment_authentication[
+                "record_surface_sha256"
+            ],
+            "site_surface_sha256": environment_authentication[
+                "site_surface_sha256"
+            ],
+            "packages_sha256": environment_authentication["packages_sha256"],
+            "stdlib_surface_sha256": stdlib_authentication["surface_sha256"],
+            "native_library_surfaces": {
+                path: authentication["surface_sha256"]
+                for path, authentication in native_library_authentication.items()
+            },
+        }
+        if content != expected_content:
+            raise ValueError("runtime environment content differs from its committed pin")
+        activated_extensions: list[str] = []
+        sys.path.append(str(site_packages.resolve()))
+        for relative in pin["path_extensions"]:
+            extension = (site_packages / relative).resolve()
+            if (
+                not extension.is_dir()
+                or extension.is_symlink()
+                or site_packages.resolve() not in extension.parents
+            ):
+                raise ValueError("pinned site-packages path extension is invalid")
+            sys.path.append(str(extension))
+            activated_extensions.append(str(extension))
+    except BaseException as error:
+        import_guard.__exit__(type(error), error, error.__traceback__)
+        raise
+    _RUNTIME_IMPORT_GUARD = import_guard
+    _RUNTIME_IMPORT_CONTENT = {"runtime_environment": content}
     _BOOTSTRAP_RECEIPT = {
-        "schema_version": 1,
+        "schema_version": 2,
         "backend": backend,
         "worktree": worktree,
         "environment_root": str(environment_root),
         "invoked_python": str(invoked_python),
         "resolved_python": str(invoked_python.resolve()),
         "resolved_python_sha256": _sha256_file(invoked_python.resolve()),
+        "system_authentication": system_authentication,
+        "stdlib_root": str(stdlib_root.resolve()),
+        "stdlib_authentication": stdlib_authentication,
+        "native_library_authentication": native_library_authentication,
         "site_packages": str(site_packages.resolve()),
         "initial_sys_path": before,
+        "activated_path_extensions": activated_extensions,
         "startup_files": observed_startup,
         "environment_authentication": environment_authentication,
         "lock_file": pin["lock_file"],
@@ -301,12 +534,93 @@ def bootstrap_runtime_environment(repo_root: Path, backend: str) -> dict[str, An
     return dict(_BOOTSTRAP_RECEIPT)
 
 
+def seal_runtime_environment(repo_root: Path, expected_backend: str) -> dict[str, Any]:
+    """Reauthenticate and close the immutable environment import window."""
+    global _RUNTIME_IMPORT_CONTENT, _RUNTIME_IMPORT_GUARD
+    if _BOOTSTRAP_RECEIPT is None or _BOOTSTRAP_RECEIPT.get("backend") != expected_backend:
+        raise ValueError("runtime bootstrap is absent or belongs to another backend")
+    if _RUNTIME_IMPORT_GUARD is None:
+        if "import_window_guard" not in _BOOTSTRAP_RECEIPT:
+            raise ValueError("runtime import guard disappeared before sealing")
+        return dict(_BOOTSTRAP_RECEIPT)
+    if _RUNTIME_IMPORT_CONTENT is None:
+        raise ValueError("runtime import content commitment is absent")
+    pin = _runtime_pin(expected_backend)
+    system_pin = _system_pin()
+    environment_root = Path(pin["environment_root"])
+    site_packages = (
+        environment_root
+        / "lib"
+        / f"python{sys.version_info.major}.{sys.version_info.minor}"
+        / "site-packages"
+    )
+    stdlib_root = Path(system_pin["stdlib_root"])
+    native_roots = [Path(path) for path in system_pin["native_library_roots"]]
+    lock_path = repo_root.resolve() / pin["lock_file"]
+    try:
+        environment_authentication = authenticate_site_packages(
+            site_packages,
+            _bootstrap_locked_versions(lock_path, expected_backend),
+            pin["record_surface_sha256"],
+            pin["site_surface_sha256"],
+        )
+        stdlib_authentication = authenticate_tree(
+            stdlib_root, system_pin["stdlib_surface_sha256"]
+        )
+        native_library_authentication = {
+            str(root): authenticate_tree(
+                root, system_pin["native_library_roots"][str(root)]
+            )
+            for root in native_roots
+        }
+        loaded_native_closure = _authenticate_loaded_native_closure(
+            site_packages, stdlib_root, native_roots
+        )
+        after_content = {
+            "runtime_environment": {
+                "record_surface_sha256": environment_authentication[
+                    "record_surface_sha256"
+                ],
+                "site_surface_sha256": environment_authentication[
+                    "site_surface_sha256"
+                ],
+                "packages_sha256": environment_authentication["packages_sha256"],
+                "stdlib_surface_sha256": stdlib_authentication["surface_sha256"],
+                "native_library_surfaces": {
+                    path: authentication["surface_sha256"]
+                    for path, authentication in native_library_authentication.items()
+                },
+            }
+        }
+        _RUNTIME_IMPORT_GUARD.bind_authenticated_content(
+            _RUNTIME_IMPORT_CONTENT, after_content
+        )
+        guard_receipt = _RUNTIME_IMPORT_GUARD.verify()
+    except BaseException as error:
+        _RUNTIME_IMPORT_GUARD.__exit__(type(error), error, error.__traceback__)
+        raise
+    _BOOTSTRAP_RECEIPT["post_import_environment_authentication"] = (
+        environment_authentication
+    )
+    _BOOTSTRAP_RECEIPT["post_import_stdlib_authentication"] = stdlib_authentication
+    _BOOTSTRAP_RECEIPT["post_import_native_library_authentication"] = (
+        native_library_authentication
+    )
+    _BOOTSTRAP_RECEIPT["post_import_loaded_native_closure"] = loaded_native_closure
+    _BOOTSTRAP_RECEIPT["import_window_guard"] = guard_receipt
+    _RUNTIME_IMPORT_GUARD = None
+    _RUNTIME_IMPORT_CONTENT = None
+    return dict(_BOOTSTRAP_RECEIPT)
+
+
 def runtime_bootstrap_receipt(expected_backend: str) -> dict[str, Any]:
     if (
         _BOOTSTRAP_RECEIPT is None
         or _BOOTSTRAP_RECEIPT.get("backend") != expected_backend
+        or _RUNTIME_IMPORT_GUARD is not None
+        or "import_window_guard" not in _BOOTSTRAP_RECEIPT
     ):
-        raise ValueError("runtime was not authenticated before third-party imports")
+        raise ValueError("runtime import window was not sealed")
     return dict(_BOOTSTRAP_RECEIPT)
 
 
@@ -325,13 +639,28 @@ def selected_gpu_identity(repo_root: Path) -> dict[str, Any]:
     selector = os.environ.get("CUDA_VISIBLE_DEVICES", "")
     if not selector or "," in selector or not selector.startswith("GPU-"):
         raise ValueError("CUDA_VISIBLE_DEVICES must name exactly one physical GPU UUID")
+    executable_pin = _system_pin()["nvidia_smi"]
+    executable = Path(executable_pin["path"])
+    if (
+        not executable.is_absolute()
+        or not executable.is_file()
+        or executable.is_symlink()
+        or _sha256_file(executable) != executable_pin["sha256"]
+    ):
+        raise ValueError("selected GPU inventory executable differs from its pin")
     query = _run(
         [
-            "nvidia-smi",
+            str(executable),
             "--query-gpu=index,name,uuid,driver_version,memory.total",
             "--format=csv,noheader,nounits",
         ],
         cwd=repo_root,
+        env={
+            "LANG": "C",
+            "LC_ALL": "C",
+            "PATH": "/usr/bin:/bin",
+            "LD_LIBRARY_PATH": _system_pin()["ld_library_path"],
+        },
     )
     if query.returncode != 0:
         raise ValueError("selected GPU inventory query failed")
@@ -360,13 +689,44 @@ def selected_gpu_identity(repo_root: Path) -> dict[str, Any]:
     return matches[0]
 
 
-def runtime_metadata(repo_root: Path, lock_path: Path) -> dict[str, Any]:
+def bind_active_cuda_identity(
+    repo_root: Path, torch_module: Any
+) -> dict[str, Any]:
+    """Bind the selected physical UUID to CUDA's sole active logical device."""
+    selected = selected_gpu_identity(repo_root)
+    cuda = torch_module.cuda
+    if not cuda.is_initialized():
+        raise ValueError("CUDA runtime was not initialized before device authentication")
+    visible_count = int(cuda.device_count())
+    logical_index = int(cuda.current_device())
+    if visible_count != 1 or logical_index != 0:
+        raise ValueError("runtime does not expose exactly one active logical CUDA device")
+    properties = cuda.get_device_properties(logical_index)
+    active_name = str(properties.name)
+    active_memory_mib = int(properties.total_memory) // (1024 * 1024)
+    if (
+        active_name != selected["name"]
+        or active_memory_mib != selected["memory_total_mib"]
+    ):
+        raise ValueError("active CUDA device differs from the selected physical GPU row")
+    return {
+        **selected,
+        "active_logical_index": logical_index,
+        "active_visible_device_count": visible_count,
+        "active_name": active_name,
+        "active_memory_total_mib": active_memory_mib,
+    }
+
+
+def runtime_metadata(
+    repo_root: Path, lock_path: Path, gpu_identity: dict[str, Any]
+) -> dict[str, Any]:
     """Record the complete installed/runtime/hardware identity for training."""
     worktree = require_detached_execution_worktree(repo_root)
     nvcc = _run(["nvcc", "--version"], cwd=repo_root)
     packages = installed_packages()
     value = {
-        "schema_version": 3,
+        "schema_version": 4,
         "bootstrap": runtime_bootstrap_receipt("training"),
         "worktree": worktree,
         "python": platform.python_version(),
@@ -384,7 +744,7 @@ def runtime_metadata(repo_root: Path, lock_path: Path) -> dict[str, Any]:
             "path": str(lock_path.resolve()),
             "sha256": _sha256_file(lock_path),
         },
-        "gpu": selected_gpu_identity(repo_root),
+        "gpu": dict(gpu_identity),
         "cuda_toolkit": nvcc.stdout.strip() if nvcc.returncode == 0 else "",
     }
     return value

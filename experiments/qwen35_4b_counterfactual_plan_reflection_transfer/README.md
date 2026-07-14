@@ -1,6 +1,6 @@
 # Qwen3.5-4B Counterfactual Plan Reflection Transfer
 
-**Status:** in-progress · since 2026-07-14 · Review 10 HOLD: four runtime/import/re-exec/device-auth blockers are under model-free remediation; model/GPU/training/evaluation remain unauthorized
+**Status:** in-progress · since 2026-07-14 · Review 10 blockers are remediated model-free and awaiting exact-SHA Review 11; model/GPU/training/evaluation remain unauthorized
 
 This experiment tests the paper's most actionable claim without relying on its
 consciousness framing: can supervision on what the model would say on a later
@@ -276,7 +276,25 @@ swap→import→restore window after environment authentication; an interpreter 
 is recorded rather than committed plus path-only stdlib/native closure; `-S` dropping
 required venv-bin/allowlisted path effects and Mamba re-exec dropping `-I -B -S`; and
 selected-device inventory accepted from a PATH-shadowed `nvidia-smi`. Authorization
-remains unchanged while those findings are remediated model-free.
+remained unchanged while those findings were remediated model-free.
+
+Review-10 remediation now holds one immutable import window from pre-import
+authentication through the last artifact-relevant import and reauthenticates before
+any result write. It pins the resolved interpreter, complete stdlib, executable,
+system-library, CUDA-library, and stage-specific site-package surfaces in committed config. System
+roots use inotify, inode surfaces, and cryptographic before/after checks; read leases
+remain mandatory for the mutable Python environments, while 34 root-owned injected
+driver files whose leases are denied by the kernel are explicitly enumerated in the
+guard receipt. Loaded native mappings must remain inside those authenticated roots.
+Under `-S`, vLLM now derives its bin directory from `sys.executable` and explicitly
+activates the authenticated CUTLASS package path. Adaptive Mamba geometry and process
+re-exec are removed; the frozen engine is capacity-fitted at 15 sequences with capture
+sizes `[1, 2, 4, 8, 15]`. The selected-device query uses the pinned absolute
+`/usr/bin/nvidia-smi`, and after CUDA initialization its UUID row must match the sole
+active logical device's name and memory. Receipt schemas again invalidate every prior
+artifact. Both real detached training/vLLM bootstrap-seal audits and the model-free
+suite pass without tokenizer/model/GPU/training/evaluation/Jacobian/benchmark events.
+Authorization remains unchanged pending independent Review 11 of the pushed SHA.
 
 ## Interpretation
 

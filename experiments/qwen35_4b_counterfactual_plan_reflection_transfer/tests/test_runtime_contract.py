@@ -143,16 +143,59 @@ class RuntimeContractTests(unittest.TestCase):
             ),
             stderr="",
         )
-        with mock.patch.object(R, "_run", return_value=inventory), mock.patch.dict(
+        with mock.patch.object(R, "_run", return_value=inventory) as run, mock.patch.dict(
             os.environ, {"CUDA_VISIBLE_DEVICES": "GPU-BBBB"}, clear=False
         ):
             identity = R.selected_gpu_identity(Path("/synthetic"))
         self.assertEqual(identity["uuid"], "GPU-BBBB")
         self.assertEqual(identity["physical_index"], 1)
+        self.assertEqual(run.call_args.args[0][0], "/usr/bin/nvidia-smi")
+        self.assertEqual(run.call_args.kwargs["env"]["PATH"], "/usr/bin:/bin")
         with mock.patch.object(R, "_run", return_value=inventory), mock.patch.dict(
             os.environ, {"CUDA_VISIBLE_DEVICES": "0"}, clear=False
         ), self.assertRaisesRegex(ValueError, "physical GPU UUID"):
             R.selected_gpu_identity(Path("/synthetic"))
+
+    def test_active_cuda_device_is_bound_to_selected_uuid_row(self) -> None:
+        selected = {
+            "cuda_visible_devices": "GPU-BBBB",
+            "physical_index": 1,
+            "name": "Synthetic GPU",
+            "uuid": "GPU-BBBB",
+            "driver_version": "999.0",
+            "memory_total_mib": 80000,
+        }
+
+        class FakeCuda:
+            @staticmethod
+            def is_initialized() -> bool:
+                return True
+
+            @staticmethod
+            def device_count() -> int:
+                return 1
+
+            @staticmethod
+            def current_device() -> int:
+                return 0
+
+            @staticmethod
+            def get_device_properties(_index: int):
+                return type(
+                    "Properties",
+                    (),
+                    {"name": "Synthetic GPU", "total_memory": 80000 * 1024 * 1024},
+                )()
+
+        torch_module = type("Torch", (), {"cuda": FakeCuda})()
+        with mock.patch.object(R, "selected_gpu_identity", return_value=selected):
+            identity = R.bind_active_cuda_identity(Path("/synthetic"), torch_module)
+        self.assertEqual(identity["active_logical_index"], 0)
+        self.assertEqual(identity["active_visible_device_count"], 1)
+        self.assertEqual(identity["active_name"], identity["name"])
+        self.assertEqual(
+            identity["active_memory_total_mib"], identity["memory_total_mib"]
+        )
 
     def test_execution_requires_clean_detached_root_cwd(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

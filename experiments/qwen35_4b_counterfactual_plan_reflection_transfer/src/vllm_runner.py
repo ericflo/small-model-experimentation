@@ -74,7 +74,7 @@ os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
 # Calling ``.venv-vllm/bin/python`` directly does not activate the venv, so
 # console tools installed beside it (notably ninja, used by FlashInfer JIT)
 # are otherwise invisible.  Keep direct invocation as reliable as activation.
-_PYTHON_BIN = str(Path(sys.prefix) / "bin")
+_PYTHON_BIN = str(Path(sys.executable).resolve().parent)
 if _PYTHON_BIN not in os.environ.get("PATH", "").split(os.pathsep):
     os.environ["PATH"] = _PYTHON_BIN + os.pathsep + os.environ.get("PATH", "")
 
@@ -87,9 +87,6 @@ _MAMBA_CACHE_BLOCKS_RE = re.compile(
     r".*?available.*?mamba.*?cache.*?blocks?\D+(\d+)",
     re.IGNORECASE | re.DOTALL,
 )
-_MAMBA_CACHE_REEXEC_ENV = "QWEN_RUNNER_MAMBA_REEXEC"
-_MAMBA_CACHE_REEXEC_CUDAGRAPH_ENV = "QWEN_RUNNER_MAMBA_REEXEC_CUDAGRAPH"
-_RUNNING_AS_CLI = False
 _MAMBA_CACHE_REEXEC_HINT = (
     "lower --max-num-seqs or raise --gpu-memory-utilization; "
     "hybrid Qwen3.5 Mamba cache scales with GPU memory"
@@ -169,6 +166,7 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
         "source_adapter_sha256", "source_adapter_config_sha256", "source_arm", "source_seed",
         "source_adapter_inventory", "applied_lora_modules",
         "merge_script_sha256", "merge_git_commit", "merge_worktree",
+        "merge_runtime_bootstrap",
         "merge_base_snapshot", "merge_tokenizer_snapshot",
         "merged_checkpoint_inventory",
         "merge_contract_sha256", "tensor_merge", "merge_replay", "merged_tree_sha256",
@@ -221,7 +219,7 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
         "model_id", "model_revision", "tokenizer_class", "tokenizer_eos_token_id",
         "trust_remote_code", "tokenizer_snapshot", "worktree", "record_receipt",
         "parity", "rows", "rows_sha256", "model_calls", "gpu_events",
-        "benchmark_reads", "load_window_guard",
+        "benchmark_reads", "load_window_guard", "runtime_bootstrap",
     }
     training_runtime = training_lineage.get("runtime")
     required_training_runtime = {
@@ -245,7 +243,7 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
         not isinstance(training_runtime, dict)
         or set(training_runtime) != required_training_runtime
         or type(training_runtime.get("schema_version")) is not int
-        or training_runtime["schema_version"] != 3
+        or training_runtime["schema_version"] != 4
         or training_runtime.get("packages_sha256")
         != _sha256_bytes(
             json.dumps(
@@ -350,7 +348,7 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
     )
     if (
         set(receipt) != required
-        or receipt.get("schema_version") != 7
+        or receipt.get("schema_version") != 8
         or receipt.get("experiment_id")
         != "qwen35_4b_counterfactual_plan_reflection_transfer"
         or receipt.get("config_sha256") != _sha256_file(config_path)
@@ -392,7 +390,7 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
         or training_lineage.get("experiment_id")
         != "qwen35_4b_counterfactual_plan_reflection_transfer"
         or set(training_lineage) != required_training_lineage
-        or training_lineage.get("schema_version") != 5
+        or training_lineage.get("schema_version") != 6
         or training_lineage.get("config_sha256") != receipt.get("config_sha256")
         or training_lineage.get("model_id") != MODEL_ID
         or training_lineage.get("model_revision") != MODEL_REVISION
@@ -434,7 +432,7 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
         or tokenizer_lineage.get("experiment_id")
         != "qwen35_4b_counterfactual_plan_reflection_transfer"
         or set(tokenizer_lineage) != required_tokenizer_lineage
-        or tokenizer_lineage.get("schema_version") != 4
+        or tokenizer_lineage.get("schema_version") != 5
         or tokenizer_lineage.get("config_sha256") != receipt.get("config_sha256")
         or tokenizer_lineage.get("runner_sha256")
         != _sha256_file(Path(__file__).resolve().parents[1] / "scripts" / "tokenizer_receipt.py")
@@ -483,6 +481,22 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
         [exact_tokenizer_path],
         expected_content={"tokenizer": exact_tokenizer},
     )
+    validate_runtime_bootstrap(
+        {
+            "bootstrap": tokenizer_lineage["runtime_bootstrap"],
+            "worktree": tokenizer_lineage["worktree"],
+        },
+        Path(__file__).resolve().parents[3],
+        "training",
+    )
+    validate_runtime_bootstrap(
+        {
+            "bootstrap": receipt["merge_runtime_bootstrap"],
+            "worktree": receipt["merge_worktree"],
+        },
+        Path(__file__).resolve().parents[3],
+        "training",
+    )
     from checkpoint_lineage import adapter_tensor_inventory, merged_checkpoint_inventory
 
     source_inventory = adapter_tensor_inventory(adapter_weights_lineage_path)
@@ -515,11 +529,11 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
         != {
             "schema_version", "arm", "seed", "config_sha256",
             "tokenizer_receipt_sha256", "stage_receipt_sha256",
-            "trainer_git_commit", "trainer_sha256", "worktree", "runtime",
+            "trainer_git_commit", "trainer_sha256", "worktree", "runtime_pending",
             "base_snapshot", "tokenizer_snapshot",
             "tokenizer_load_window_guard",
         }
-        or started.get("schema_version") != 4
+        or started.get("schema_version") != 5
         or started.get("arm") != receipt.get("source_arm")
         or started.get("seed") != receipt.get("source_seed")
         or started.get("config_sha256") != receipt.get("config_sha256")
@@ -529,7 +543,7 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
         or started.get("trainer_git_commit") != receipt.get("source_trainer_git_commit")
         or started.get("trainer_sha256") != receipt.get("source_trainer_sha256")
         or started.get("worktree") != exact_worktree
-        or started.get("runtime") != training_runtime
+        or started.get("runtime_pending") is not True
         or started.get("base_snapshot") != exact_base
         or started.get("tokenizer_snapshot") != exact_tokenizer
         or started.get("tokenizer_load_window_guard") != load_guards["tokenizer"]
@@ -607,101 +621,6 @@ def _available_mamba_cache_blocks(exc: BaseException) -> int | None:
                 return int(match.group(1))
         pending.extend((current.__cause__, current.__context__))
     return None
-
-
-def _rewrite_max_num_seqs_argv(
-    argv: Sequence[str],
-    max_num_seqs: int,
-    cudagraph_capture_sizes: tuple[int, ...] | None = None,
-) -> list[str]:
-    """Rewrite CLI concurrency and, when supplied, its tied graph geometry."""
-    rewritten: list[str] = []
-    index = 0
-    while index < len(argv):
-        argument = argv[index]
-        if argument == "--max-num-seqs":
-            index += 2
-            continue
-        if argument.startswith("--max-num-seqs="):
-            index += 1
-            continue
-        if cudagraph_capture_sizes is not None:
-            if argument == "--cudagraph-capture-size":
-                index += 2
-                continue
-            if argument.startswith("--cudagraph-capture-size="):
-                index += 1
-                continue
-        rewritten.append(argument)
-        index += 1
-    rewritten.extend(("--max-num-seqs", str(max_num_seqs)))
-    if cudagraph_capture_sizes is not None:
-        for size in cudagraph_capture_sizes:
-            rewritten.extend(("--cudagraph-capture-size", str(size)))
-    return rewritten
-
-
-def _clamp_cudagraph_capture_sizes(
-    sizes: tuple[int, ...], max_num_seqs: int
-) -> tuple[int, ...]:
-    """Keep an explicit capture list valid when Mamba capacity lowers concurrency."""
-    if max_num_seqs < 1:
-        raise ValueError("max_num_seqs must be positive")
-    if not sizes:
-        raise ValueError("cannot clamp an empty CUDA-graph capture list")
-    return (*tuple(size for size in sizes if size < max_num_seqs), max_num_seqs)
-
-
-def _parse_mamba_reexec_geometry(
-    max_num_seqs_guard: str | None, cudagraph_guard: str | None
-) -> tuple[int | None, tuple[int, ...] | None]:
-    """Validate provenance carried across the one permitted Mamba re-exec."""
-    if max_num_seqs_guard is None:
-        if cudagraph_guard is not None:
-            raise RuntimeError(
-                f"orphaned {_MAMBA_CACHE_REEXEC_CUDAGRAPH_ENV} re-exec guard"
-            )
-        return None, None
-    try:
-        requested_max_num_seqs = int(max_num_seqs_guard)
-    except ValueError as exc:
-        raise RuntimeError(
-            f"invalid {_MAMBA_CACHE_REEXEC_ENV} re-exec guard"
-        ) from exc
-    if requested_max_num_seqs < 1:
-        raise RuntimeError(f"invalid {_MAMBA_CACHE_REEXEC_ENV} re-exec guard")
-    if cudagraph_guard is None:
-        return requested_max_num_seqs, None
-    try:
-        raw_sizes = json.loads(cudagraph_guard)
-    except (TypeError, json.JSONDecodeError) as exc:
-        raise RuntimeError(
-            f"invalid {_MAMBA_CACHE_REEXEC_CUDAGRAPH_ENV} re-exec guard"
-        ) from exc
-    if (
-        not isinstance(raw_sizes, list)
-        or not raw_sizes
-        or any(
-            not isinstance(size, int) or isinstance(size, bool) or size < 1
-            for size in raw_sizes
-        )
-    ):
-        raise RuntimeError(
-            f"invalid {_MAMBA_CACHE_REEXEC_CUDAGRAPH_ENV} re-exec guard"
-        )
-    sizes = tuple(raw_sizes)
-    if tuple(sorted(set(sizes))) != sizes or sizes[-1] != requested_max_num_seqs:
-        raise RuntimeError(
-            f"inconsistent {_MAMBA_CACHE_REEXEC_CUDAGRAPH_ENV} re-exec guard"
-        )
-    return requested_max_num_seqs, sizes
-
-
-def _mamba_reexec_decision(
-    reexec_guard: int | str | None, running_as_cli: bool
-) -> str:
-    """Choose one CLI process re-exec, then an actionable error."""
-    return "exec" if running_as_cli and reexec_guard is None else "raise"
 
 
 def _installed_packages() -> dict[str, str]:
@@ -1258,36 +1177,19 @@ class VLLMRunner:
 
     def __init__(self, config: EngineConfig = EngineConfig()):
         config.validate()
-        mamba_reexec_requested, mamba_reexec_requested_cudagraph = (
-            _parse_mamba_reexec_geometry(
-                os.environ.get(_MAMBA_CACHE_REEXEC_ENV),
-                os.environ.get(_MAMBA_CACHE_REEXEC_CUDAGRAPH_ENV),
+        obsolete_reexec = sorted(
+            name
+            for name in (
+                "QWEN_RUNNER_MAMBA_REEXEC",
+                "QWEN_RUNNER_MAMBA_REEXEC_CUDAGRAPH",
             )
+            if os.environ.get(name) is not None
         )
-        if (
-            mamba_reexec_requested is not None
-            and (mamba_reexec_requested_cudagraph is None)
-            != (config.cudagraph_capture_sizes is None)
-        ):
+        if obsolete_reexec:
             raise RuntimeError(
-                "Mamba re-exec changed whether CUDA-graph geometry is explicit; "
-                "refusing ambiguous engine configuration"
+                "adaptive Mamba geometry is forbidden; unset obsolete re-exec state: "
+                + ", ".join(obsolete_reexec)
             )
-        if mamba_reexec_requested is not None:
-            if config.max_num_seqs >= mamba_reexec_requested:
-                raise RuntimeError(
-                    "Mamba re-exec did not lower max_num_seqs; refusing stale or "
-                    "ambiguous re-exec guards"
-                )
-            if mamba_reexec_requested_cudagraph is not None:
-                expected_cudagraph = _clamp_cudagraph_capture_sizes(
-                    mamba_reexec_requested_cudagraph, config.max_num_seqs
-                )
-                if config.cudagraph_capture_sizes != expected_cudagraph:
-                    raise RuntimeError(
-                        "Mamba re-exec did not deterministically clamp the explicit "
-                        "CUDA-graph list; refusing ambiguous engine configuration"
-                    )
         self.config = config
         from merge_replay import authenticate_base_snapshot, base_snapshot_commitment
         from load_window_guard import LoadWindowGuard
@@ -1519,81 +1421,13 @@ class VLLMRunner:
                 ):
                     raise
                 original_message = str(exc)
-                if _mamba_reexec_decision(
-                    mamba_reexec_requested, _RUNNING_AS_CLI
-                ) == "raise":
-                    if _RUNNING_AS_CLI:
-                        detail = (
-                            "limit recurred after the runner already re-executed once "
-                            f"({_MAMBA_CACHE_REEXEC_ENV}={mamba_reexec_requested!r}). "
-                            f"Hint: {_MAMBA_CACHE_REEXEC_HINT}."
-                        )
-                    else:
-                        capture_hint = (
-                            " and clamp cudagraph_capture_sizes to a list ending "
-                            f"at {available_blocks}"
-                            if config.cudagraph_capture_sizes is not None
-                            else ""
-                        )
-                        detail = (
-                            "limit cannot trigger automatic process re-exec when VLLMRunner "
-                            "is imported as a library. Construct EngineConfig with a lower "
-                            f"max_num_seqs (at most {available_blocks} for this load)"
-                            f"{capture_hint}. "
-                            f"Hint: {_MAMBA_CACHE_REEXEC_HINT}."
-                        )
-                    exc.args = (
-                        f"{original_message}\n\nThe Qwen3.5 hybrid-Mamba cache {detail}",
-                    )
-                    raise
-
-                clamped_cudagraph_capture_sizes = (
-                    _clamp_cudagraph_capture_sizes(
-                        config.cudagraph_capture_sizes, available_blocks
-                    )
-                    if config.cudagraph_capture_sizes is not None
-                    else None
+                exc.args = (
+                    f"{original_message}\n\nFrozen max_num_seqs={config.max_num_seqs} "
+                    f"exceeds the reported Mamba cache capacity {available_blocks}; "
+                    "adaptive geometry and process re-exec are forbidden. "
+                    f"Hint: {_MAMBA_CACHE_REEXEC_HINT}.",
                 )
-                rewritten_argv = _rewrite_max_num_seqs_argv(
-                    sys.argv,
-                    available_blocks,
-                    clamped_cudagraph_capture_sizes,
-                )
-                if clamped_cudagraph_capture_sizes is None:
-                    cudagraph_detail = (
-                        "the tied CUDA-graph capture cap will use the same value"
-                    )
-                else:
-                    cudagraph_detail = (
-                        "the explicit CUDA-graph capture list will be rewritten "
-                        f"from {config.cudagraph_capture_sizes} to "
-                        f"{clamped_cudagraph_capture_sizes} so its endpoint remains tied"
-                    )
-                print(
-                    "[vllm_runner] *** WARNING: Qwen3.5-4B hybrid Mamba cache "
-                    "process re-exec *** "
-                    "vLLM reported only "
-                    f"{available_blocks} available Mamba cache blocks at "
-                    f"gpu_memory_utilization={config.gpu_memory_utilization}. "
-                    "Qwen3.5 is a hybrid model whose Mamba/linear-attention cache "
-                    "capacity scales with the GPU memory budget. The runner is "
-                    f"re-executing itself with --max-num-seqs {available_blocks} "
-                    f"(clamped from {config.max_num_seqs}); {cudagraph_detail}, "
-                    "and the replacement "
-                    "process starts with clean GPU state.",
-                    file=sys.stderr,
-                    flush=True,
-                )
-                os.environ[_MAMBA_CACHE_REEXEC_ENV] = str(config.max_num_seqs)
-                if config.cudagraph_capture_sizes is None:
-                    os.environ.pop(_MAMBA_CACHE_REEXEC_CUDAGRAPH_ENV, None)
-                else:
-                    os.environ[_MAMBA_CACHE_REEXEC_CUDAGRAPH_ENV] = json.dumps(
-                        list(config.cudagraph_capture_sizes), separators=(",", ":")
-                    )
-                sys.stdout.flush()
-                sys.stderr.flush()
-                os.execv(sys.executable, [sys.executable] + rewritten_argv)
+                raise
             engine_guard_receipt = engine_guard.verify()
             post_base = base_snapshot_commitment(self.base_snapshot_path)
             post_tokenizer = authenticate_tokenizer_snapshot()
@@ -1613,6 +1447,11 @@ class VLLMRunner:
                     raise RuntimeError(
                         "model/tokenizer bytes changed between validation and engine load"
                     )
+            from runtime_contract import bind_active_cuda_identity
+
+            self.gpu_identity = bind_active_cuda_identity(
+                Path(__file__).resolve().parents[3], torch
+            )
             self.post_load_integrity = {
                 "base_snapshot": post_base,
                 "tokenizer_snapshot": post_tokenizer,
@@ -1633,16 +1472,6 @@ class VLLMRunner:
             elif torch.cuda.is_initialized():
                 torch.cuda.manual_seed_all(torch_initial_seed)
         self.engine_args = engine_args
-        if mamba_reexec_requested is not None:
-            self.engine_args["requested_max_num_seqs"] = mamba_reexec_requested
-            self.engine_args["effective_max_num_seqs"] = config.max_num_seqs
-        if mamba_reexec_requested_cudagraph is not None:
-            self.engine_args["requested_cudagraph_capture_sizes"] = (
-                list(mamba_reexec_requested_cudagraph)
-            )
-            self.engine_args["effective_cudagraph_capture_sizes"] = list(
-                config.cudagraph_capture_sizes or ()
-            )
 
         try:
             compilation_config = self.llm.llm_engine.vllm_config.compilation_config
@@ -2164,8 +1993,7 @@ class VLLMRunner:
         }
         return rows, summary
 
-    @staticmethod
-    def runtime_metadata() -> dict[str, Any]:
+    def runtime_metadata(self) -> dict[str, Any]:
         git_root = _run_text(["git", "rev-parse", "--show-toplevel"])
         git_commit = _run_text(["git", "rev-parse", "HEAD"]) if git_root else ""
         git_status = _run_text(
@@ -2178,11 +2006,14 @@ class VLLMRunner:
             ]
         ) if git_root else ""
         git_branch = _run_text(["git", "symbolic-ref", "-q", "HEAD"]) if git_root else ""
-        from runtime_contract import runtime_bootstrap_receipt, selected_gpu_identity
+        from runtime_contract import (
+            runtime_bootstrap_receipt,
+            seal_runtime_environment,
+        )
 
-        gpu = selected_gpu_identity(Path(git_root))
+        seal_runtime_environment(Path(git_root), "vllm")
         return {
-            "schema_version": 3,
+            "schema_version": 4,
             "bootstrap": runtime_bootstrap_receipt("vllm"),
             "python": platform.python_version(),
             "python_executable": str(Path(sys.executable).resolve()),
@@ -2200,7 +2031,7 @@ class VLLMRunner:
             "environment_lock": _environment_lock_metadata(),
             "uv": _run_text(["uv", "--version"]),
             "cuda_toolkit": _run_text(["nvcc", "--version"]),
-            "gpu": gpu,
+            "gpu": dict(self.gpu_identity),
             "vllm_enable_v1_multiprocessing": os.environ.get(
                 "VLLM_ENABLE_V1_MULTIPROCESSING"
             ),
@@ -2386,8 +2217,6 @@ def _validate_cli_stage_receipt(
 
 
 def main(argv: Sequence[str] | None = None) -> int:
-    global _RUNNING_AS_CLI
-    _RUNNING_AS_CLI = True
     from runtime_contract import require_detached_execution_worktree
 
     require_detached_execution_worktree(Path(__file__).resolve().parents[3])

@@ -162,15 +162,21 @@ def validate_runtime_packages(
 
 
 def validate_interpreter_runtime(runtime: dict[str, Any], repo_root: Path) -> None:
+    from runtime_contract import _system_pin
+
     executable_value = runtime.get("python_executable")
     if not isinstance(executable_value, str):
         raise ValueError("runtime lacks an exact interpreter path")
     executable = Path(executable_value)
     repo_root = repo_root.resolve()
+    system_pin = _system_pin()
     if (
         not executable.is_absolute()
         or not executable.is_file()
         or executable.is_symlink()
+        or str(executable.resolve()) != system_pin["resolved_python"]
+        or runtime.get("python_executable_sha256")
+        != system_pin["resolved_python_sha256"]
         or repo_root == executable.resolve()
         or repo_root in executable.resolve().parents
         or runtime.get("python_executable_sha256")
@@ -189,8 +195,12 @@ def validate_runtime_bootstrap(
         _bootstrap_locked_versions,
         _initial_import_path_allowed,
         _runtime_pin,
+        _sha256_file,
+        _system_pin,
         authenticate_site_packages,
+        authenticate_tree,
     )
+    from load_window_guard import validate_load_window_receipt
 
     bootstrap = runtime.get("bootstrap")
     required = {
@@ -201,10 +211,20 @@ def validate_runtime_bootstrap(
         "invoked_python",
         "resolved_python",
         "resolved_python_sha256",
+        "system_authentication",
+        "stdlib_root",
+        "stdlib_authentication",
+        "native_library_authentication",
         "site_packages",
         "initial_sys_path",
+        "activated_path_extensions",
         "startup_files",
         "environment_authentication",
+        "post_import_environment_authentication",
+        "post_import_stdlib_authentication",
+        "post_import_native_library_authentication",
+        "post_import_loaded_native_closure",
+        "import_window_guard",
         "lock_file",
         "lock_sha256",
         "python_isolated",
@@ -212,6 +232,7 @@ def validate_runtime_bootstrap(
         "python_no_site",
     }
     pin = _runtime_pin(expected_backend)
+    system_pin = _system_pin()
     environment_root = Path(pin["environment_root"])
     invoked_python = environment_root / "bin" / "python"
     site_packages = (
@@ -236,6 +257,64 @@ def validate_runtime_bootstrap(
         pin["record_surface_sha256"],
         pin["site_surface_sha256"],
     )
+    stdlib_root = Path(system_pin["stdlib_root"])
+    stdlib_authentication = authenticate_tree(
+        stdlib_root, system_pin["stdlib_surface_sha256"]
+    )
+    native_roots = [Path(path) for path in system_pin["native_library_roots"]]
+    native_library_authentication = {
+        str(root): authenticate_tree(
+            root, system_pin["native_library_roots"][str(root)]
+        )
+        for root in native_roots
+    }
+    native_mappings = system_pin["native_mappings"]
+    for path, expected_sha256 in native_mappings.items():
+        candidate = Path(path)
+        if (
+            not candidate.is_file()
+            or candidate.is_symlink()
+            or _sha256_file(candidate) != expected_sha256
+        ):
+            raise ValueError("pinned native runtime mapping changed after execution")
+    expected_system_authentication = {
+        "resolved_python": system_pin["resolved_python"],
+        "resolved_python_sha256": system_pin["resolved_python_sha256"],
+        "ld_library_path": system_pin["ld_library_path"],
+        "native_mappings": native_mappings,
+        "native_mappings_sha256": canonical_sha256(native_mappings),
+    }
+    expected_extensions = [
+        str((site_packages / relative).resolve()) for relative in pin["path_extensions"]
+    ]
+    loaded_native_closure = (
+        bootstrap.get("post_import_loaded_native_closure")
+        if isinstance(bootstrap, dict)
+        else None
+    )
+    loaded_mappings = (
+        loaded_native_closure.get("mappings")
+        if isinstance(loaded_native_closure, dict)
+        else None
+    )
+    allowed_native_roots = [
+        site_packages.resolve(), stdlib_root.resolve(),
+        *(root.resolve() for root in native_roots),
+    ]
+    valid_loaded_mappings = isinstance(loaded_mappings, dict) and all(
+        isinstance(path, str)
+        and isinstance(digest, str)
+        and Path(path).is_file()
+        and _sha256_file(Path(path)) == digest
+        and (
+            Path(path).resolve() == Path(system_pin["resolved_python"]).resolve()
+            or any(
+                root == Path(path).resolve() or root in Path(path).resolve().parents
+                for root in allowed_native_roots
+            )
+        )
+        for path, digest in (loaded_mappings.items() if isinstance(loaded_mappings, dict) else ())
+    )
     expected_worktree = runtime.get("worktree")
     if expected_worktree is None:
         expected_worktree = {
@@ -247,21 +326,37 @@ def validate_runtime_bootstrap(
     if (
         not isinstance(bootstrap, dict)
         or set(bootstrap) != required
-        or bootstrap.get("schema_version") != 1
+        or bootstrap.get("schema_version") != 2
         or bootstrap.get("backend") != expected_backend
         or bootstrap.get("worktree") != expected_worktree
         or bootstrap.get("environment_root") != str(environment_root)
         or bootstrap.get("invoked_python") != str(invoked_python)
         or bootstrap.get("resolved_python") != str(invoked_python.resolve())
         or bootstrap.get("resolved_python_sha256")
-        != hashlib.sha256(invoked_python.resolve().read_bytes()).hexdigest()
+        != system_pin["resolved_python_sha256"]
+        or bootstrap.get("system_authentication") != expected_system_authentication
+        or bootstrap.get("stdlib_root") != str(stdlib_root.resolve())
+        or bootstrap.get("stdlib_authentication") != stdlib_authentication
+        or bootstrap.get("native_library_authentication")
+        != native_library_authentication
         or bootstrap.get("site_packages") != str(site_packages.resolve())
         or not isinstance(bootstrap.get("initial_sys_path"), list)
         or not bootstrap["initial_sys_path"]
         or any(not _initial_import_path_allowed(item) for item in bootstrap["initial_sys_path"])
+        or bootstrap.get("activated_path_extensions") != expected_extensions
         or bootstrap.get("startup_files") != pin["startup_files"]
         or observed_startup != pin["startup_files"]
         or bootstrap.get("environment_authentication") != environment_authentication
+        or bootstrap.get("post_import_environment_authentication")
+        != environment_authentication
+        or bootstrap.get("post_import_stdlib_authentication")
+        != stdlib_authentication
+        or bootstrap.get("post_import_native_library_authentication")
+        != native_library_authentication
+        or not valid_loaded_mappings
+        or set(loaded_native_closure or {}) != {"mappings", "mappings_sha256"}
+        or loaded_native_closure.get("mappings_sha256")
+        != canonical_sha256(loaded_mappings)
         or bootstrap.get("lock_file") != pin["lock_file"]
         or bootstrap.get("lock_sha256")
         != hashlib.sha256(lock_path.read_bytes()).hexdigest()
@@ -270,6 +365,26 @@ def validate_runtime_bootstrap(
         or bootstrap.get("python_no_site") is not True
     ):
         raise ValueError("runtime bootstrap/import/startup surface is invalid or stale")
+    expected_content = {
+        "runtime_environment": {
+            "record_surface_sha256": environment_authentication[
+                "record_surface_sha256"
+            ],
+            "site_surface_sha256": environment_authentication["site_surface_sha256"],
+            "packages_sha256": environment_authentication["packages_sha256"],
+            "stdlib_surface_sha256": stdlib_authentication["surface_sha256"],
+            "native_library_surfaces": {
+                path: authentication["surface_sha256"]
+                for path, authentication in native_library_authentication.items()
+            },
+        }
+    }
+    validate_load_window_receipt(
+        bootstrap["import_window_guard"],
+        [site_packages, stdlib_root, *native_roots],
+        expected_content=expected_content,
+        unleased_roots=[stdlib_root, *native_roots],
+    )
 
 
 def validate_gpu_identity(value: Any) -> dict[str, Any]:
@@ -280,6 +395,10 @@ def validate_gpu_identity(value: Any) -> dict[str, Any]:
         "uuid",
         "driver_version",
         "memory_total_mib",
+        "active_logical_index",
+        "active_visible_device_count",
+        "active_name",
+        "active_memory_total_mib",
     }
     if (
         not isinstance(value, dict)
@@ -295,6 +414,10 @@ def validate_gpu_identity(value: Any) -> dict[str, Any]:
         or not value["driver_version"]
         or type(value.get("memory_total_mib")) is not int
         or value["memory_total_mib"] < 1
+        or value.get("active_logical_index") != 0
+        or value.get("active_visible_device_count") != 1
+        or value.get("active_name") != value.get("name")
+        or value.get("active_memory_total_mib") != value.get("memory_total_mib")
     ):
         raise ValueError("runtime lacks one exact selected GPU UUID identity")
     return value
@@ -468,7 +591,7 @@ def validate_generation_protocol(
         not isinstance(runtime, dict)
         or set(runtime) != expected_runtime_keys
         or type(runtime.get("schema_version")) is not int
-        or runtime["schema_version"] != 3
+        or runtime["schema_version"] != 4
         or runtime.get("git_dirty")
         or runtime.get("git_root") != str(repo_root)
         or runtime.get("cwd") != str(repo_root)

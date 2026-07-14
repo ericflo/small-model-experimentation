@@ -19,6 +19,7 @@ sys.path.insert(0, str(EXP / "src"))
 from runtime_contract import (  # noqa: E402
     bootstrap_runtime_environment,
     require_detached_execution_worktree,
+    seal_runtime_environment,
 )
 
 bootstrap_runtime_environment(EXP.parents[1], "training")
@@ -32,6 +33,7 @@ install_benchmark_firewall(EXP.parents[1])
 
 
 def _write_exclusive(path: Path, payload: bytes) -> None:
+    seal_runtime_environment(EXP.parents[1], "training")
     path.parent.mkdir(parents=True, exist_ok=True)
     descriptor = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o644)
     try:

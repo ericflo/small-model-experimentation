@@ -19,6 +19,7 @@ sys.path.insert(0, str(EXP / "src"))
 from runtime_contract import (  # noqa: E402
     bootstrap_runtime_environment,
     require_detached_execution_worktree,
+    seal_runtime_environment,
 )
 
 bootstrap_runtime_environment(EXP.parents[1], "training")
@@ -35,7 +36,11 @@ from merge_replay import (  # noqa: E402
     base_snapshot_commitment,
     verify_merge_equation,
 )
-from provenance import validate_runtime_packages  # noqa: E402
+from provenance import (  # noqa: E402
+    validate_interpreter_runtime,
+    validate_runtime_bootstrap,
+    validate_runtime_packages,
+)
 from load_window_guard import validate_load_window_receipt  # noqa: E402
 from stages import read_and_validate_stage_receipt  # noqa: E402
 from tensor_merge import write_tensor_level_merge  # noqa: E402
@@ -97,7 +102,7 @@ def main() -> int:
         "worktree", "runtime", "base_snapshot", "tokenizer_snapshot", "compute",
         "load_window_guards",
     }
-    if set(source_receipt) != required_training_receipt or source_receipt["schema_version"] != 5:
+    if set(source_receipt) != required_training_receipt or source_receipt["schema_version"] != 6:
         raise ValueError("training receipt schema changed")
     observed_adapter_tree = _sha256_tree(
         args.adapter, excluded={"training_receipt.json"}
@@ -112,6 +117,10 @@ def main() -> int:
     lock_path = EXP.parents[1] / "requirements-training.lock.txt"
     validate_runtime_packages(
         source_receipt["runtime"], lock_path, required_backend="training"
+    )
+    validate_interpreter_runtime(source_receipt["runtime"], EXP.parents[1])
+    validate_runtime_bootstrap(
+        source_receipt["runtime"], EXP.parents[1], "training"
     )
     base_root, base_index, _base_structure = authenticate_base_snapshot()
     base_snapshot = base_snapshot_commitment(base_root)
@@ -176,11 +185,11 @@ def main() -> int:
         "model_id", "model_revision", "tokenizer_class", "tokenizer_eos_token_id",
         "trust_remote_code", "tokenizer_snapshot", "worktree", "record_receipt",
         "parity", "rows", "rows_sha256", "model_calls", "gpu_events",
-        "benchmark_reads", "load_window_guard",
+        "benchmark_reads", "load_window_guard", "runtime_bootstrap",
     }
     if (
         set(tokenizer_receipt) != required_tokenizer_receipt
-        or tokenizer_receipt.get("schema_version") != 4
+        or tokenizer_receipt.get("schema_version") != 5
         or tokenizer_receipt.get("experiment_id") != config["experiment_id"]
         or tokenizer_receipt.get("config_sha256") != _sha256_file(config_path)
         or tokenizer_receipt.get("runner_sha256")
@@ -217,6 +226,14 @@ def main() -> int:
         tokenizer_receipt["load_window_guard"],
         [tokenizer_path],
         expected_content={"tokenizer": tokenizer_snapshot},
+    )
+    validate_runtime_bootstrap(
+        {
+            "bootstrap": tokenizer_receipt["runtime_bootstrap"],
+            "worktree": tokenizer_receipt["worktree"],
+        },
+        EXP.parents[1],
+        "training",
     )
     expected_stage = (
         "screen_training"
@@ -296,8 +313,11 @@ def main() -> int:
         adapter_tree=retained_adapter,
         recipe=recipe,
     )
+    merge_runtime_bootstrap = seal_runtime_environment(
+        EXP.parents[1], "training"
+    )
     receipt = {
-        "schema_version": 7,
+        "schema_version": 8,
         "experiment_id": config["experiment_id"],
         "config_sha256": _sha256_file(config_path),
         "model_id": model_id,
@@ -327,6 +347,7 @@ def main() -> int:
         "merge_script_sha256": _sha256_file(Path(__file__).resolve()),
         "merge_git_commit": current_commit,
         "merge_worktree": worktree,
+        "merge_runtime_bootstrap": merge_runtime_bootstrap,
         "merge_base_snapshot": base_snapshot,
         "merge_tokenizer_snapshot": tokenizer_snapshot,
         "merged_checkpoint_inventory": checkpoint_inventory,

@@ -24,6 +24,10 @@ def gpu(uuid: str = "GPU-0000") -> dict:
         "uuid": uuid,
         "driver_version": "999.0",
         "memory_total_mib": 80000,
+        "active_logical_index": 0,
+        "active_visible_device_count": 1,
+        "active_name": "Synthetic GPU",
+        "active_memory_total_mib": 80000,
     }
 
 
