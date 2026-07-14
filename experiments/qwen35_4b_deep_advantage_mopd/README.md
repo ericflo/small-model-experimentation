@@ -207,7 +207,14 @@ closed budget-output regression. The archived generation will not be reused;
 fresh authorization then passed with receipt
 `2b9b86aa76bfb87169a2c70313f967f20c13a09e62fbab25069120e29f0ef9f1`,
 binding corrected control inventory `690a5b5e345f7f4070f731eb69f7a6d9adf7f8148d4b4c07e8234cb8916250ef`.
-Fresh admission and an empty-tree full rerun remain mandatory.
+Fresh attempt-2 global admission subsequently passed from an empty live tree
+and hashes to
+`6424b68d01420154d10b7a999332eb4b9d44fca3cad63cf7266f098b9d9c990e`.
+Block-0 deep then entered `STARTED`; its external journal hashes to
+`ca44441a2784a79d314b7c359dde6f136617d6bf68301b9dd0741fe3325b8d38`.
+No generated bundle or score exists at this in-progress checkpoint, so it
+changes no capability conclusion; the empty-tree full rerun remains in
+progress.
 
 ## NF4/BF16 Interpretation Diagnostic
 

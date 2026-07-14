@@ -491,3 +491,18 @@
   `2b9b86aa76bfb87169a2c70313f967f20c13a09e62fbab25069120e29f0ef9f1`.
 - Fresh admission, raw output, and scores remain absent. This authorizes only a
   new empty-tree sealed campaign and contributes no performance evidence.
+
+## 2026-07-14 — attempt-2 confirmation admitted from an empty live tree
+
+- The live confirmation entrypoint reproduced the corrected no-clobber
+  authorization exactly, independently reauthenticated all 13 arm models, and
+  atomically published fresh `runs/confirmation/ADMISSION.json` at hash
+  `6424b68d01420154d10b7a999332eb4b9d44fca3cad63cf7266f098b9d9c990e`.
+- At this checkpoint, no external confirmation file, evaluator process, GPU
+  allocation, generated row, or score existed. The parent was still performing
+  its post-admission arm-byte recheck. This is in-progress provenance evidence
+  only and changes no scientific conclusion.
+- The post-admission check then passed and block-0 deep entered `STARTED`; the
+  external journal hashes to
+  `ca44441a2784a79d314b7c359dde6f136617d6bf68301b9dd0741fe3325b8d38`.
+  No generated bundle or score existed when this start marker was recorded.
