@@ -1,6 +1,6 @@
 # Gauntlet frontier: difficulty escalation past the breadth-install plateau
 
-**Status:** finished
+**Status:** finished · 2026-07-13 · Goal closed as characterized: exploration is installable, while the single-model two-tier conjunction is a demonstrated capacity boundary.
 
 Follow-up to `qwen35_4b_gauntlet_breadth_round1` (claims C49/C50). Executes
 every escalation lever against the +0.22..+0.33 plateau: attribution

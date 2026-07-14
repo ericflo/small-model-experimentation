@@ -1,6 +1,6 @@
 # Qwen3.5-4B: The Compute-Optimal Confidence Policy (select + abstain + escalate)
 
-**Status:** finished
+**Status:** finished · 2026-07-14 · C57 capstone complete; adaptive breadth allocation wins, depth escalation does not replicate, and agentic-domain extension is deferred to a new experiment.
 
 The confidence arc established three levers in isolation: confidence-select beats
 majority vote (C41), the single-token P(True) judge beats sequence mean-logprob
@@ -12,6 +12,9 @@ This experiment builds that policy on the fixed Qwen3.5-4B and asks: for a
 low-confidence (abstained) task, is compute better spent on **more breadth**
 (more samples) or **more serial depth** (a higher think budget on the same
 model)?
+
+The registered capstone is complete. The deferred agentic-domain arbitration is an unexecuted
+follow-up direction, not unfinished work in this result-bearing experiment.
 
 ## What it does
 

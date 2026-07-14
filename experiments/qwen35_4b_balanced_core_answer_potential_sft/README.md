@@ -1,6 +1,6 @@
 # Qwen3.5-4B Balanced-Core Answer-Potential SFT
 
-**Status:** in-progress · since 2026-07-12 · Reasoning bank and six official selections banked; no SFT has run.
+**Status:** finished · 2026-07-14 · Stopped at the committed selection-only boundary; no SFT or capability claim exists, and any lower-cost continuation must be a new experiment.
 
 ## Status
 
@@ -13,6 +13,10 @@ pre-official-selection implementation deviation, not a prospective amendment. Pa
 subsequently inspected for cost planning before the deviation was committed; they did not determine the repair. At that
 boundary no official SFT dataset, adapter, or held-out outcome existed. Selection is now banked behind the
 committed seal, but no adapter or capability result exists yet.
+
+This experiment is closed as a preserved, compute-stopped negative boundary rather than left
+indefinitely active. Its six selections remain reusable only through a separately preregistered
+follow-up; they are not evidence that answer-potential training works.
 
 The preserved parent is [linked here](../qwen35_4b_long_horizon_answer_potential_sft/README.md).
 

@@ -129,3 +129,10 @@ or evaluation generation has run under this experiment.
 - A second official selection invocation left all six deterministic gzip SHA-256 values, the manifest, the
   selection summary, and the design receipt byte-identical. Both tracked manifest copies have SHA-256
   `27d4b0b4b1120381a48cb3cd14ddd06f7630a5b8bee9bb43225fb0f7300acfa2`.
+
+## 2026-07-14 — administrative closure at the selection boundary
+
+- The experiment is finished as compute-stopped, not successful. No SFT, adapter,
+  merge, or capability evaluation exists, and selection alone supports no capability claim.
+- The already-documented lower-cost continuation must be a new preregistered experiment;
+  leaving this banked boundary `in-progress` incorrectly implied an active run.

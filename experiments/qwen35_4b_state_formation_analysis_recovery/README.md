@@ -1,9 +1,12 @@
 # State-Formation Analysis Recovery
 
-**Status:** finished
+**Status:** finished · 2026-07-14 · Exact v11 analysis recovery completed; the result-bearing producer owns the mandated Stage B continuation.
 
 This experiment recovers the exact frozen v11 state-formation analyzer through one source-bound
 path seam, without changing any LoRA/full-rank scientific logic or inspecting a result value.
+
+The operational recovery question is answered and this experiment is closed. Later invocations of
+the frozen seam are infrastructure use; they do not keep the recovery experiment in progress.
 
 ## Research Program
 

@@ -93,3 +93,10 @@ two-phase sampler does not reproduce the proven gym harness's emission handling
 logprobs (P(answer)/C40) exposed from the VLLMRunner, or a P(True) judge pass over
 gym answers. That is a ~half-day build vs the post-hoc code/reasoning analyses;
 deferred pending direction. gym_confidence.py kept as a WIP starting point.
+
+## 2026-07-14 — capstone closed
+
+- C57 is the terminal result of this experiment: confidence-gated adaptive breadth
+  allocation wins at matched compute, while depth escalation failed replication.
+- Agentic-domain arbitration remains a prospective follow-up and must receive its own
+  experiment boundary; it no longer keeps this completed capstone `in-progress`.

@@ -1,10 +1,13 @@
 # State-Formation Branch Handoff Recovery
 
-**Status:** finished
+**Status:** finished · 2026-07-14 · Branch handoff and the three-seed full-rank setup matrix completed; the producer owns Stage B.
 
 This operational successor lets immutable producer v11 continue after the first branch recovery
 successfully replaces the retired failed-G0 receipt at its canonical path. It changes no scientific
 arm, model, data, metric, threshold, or branch rule.
+
+The handoff question is answered and the setup matrix has passed. Continued Stage-B training through
+this frozen wrapper belongs to the canonical producer and does not make this recovery experiment active.
 
 ## Research Program
 

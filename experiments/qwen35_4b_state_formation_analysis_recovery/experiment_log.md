@@ -70,3 +70,10 @@ complete.
   sidecar SHA-256 `aa43077b…6b7e`, and sidecar identity `d068482a…f40e`.
 - Producer status/verdict is `LORA_JOINT_MISS_CONTROLS_REQUIRED`; the exact next stage is
   `run_lora_state_only_and_fullrank_joint`. No sealed contrast was opened.
+
+## 2026-07-14 — recovery scope closed
+
+- The exact v11 analyzer successfully consumed its producer receipts and emitted the
+  authoritative result. This answers the operational recovery question.
+- Stage B remains active only in the result-bearing capacity-adjudication producer;
+  reuse of this frozen seam is infrastructure, not unfinished recovery research.

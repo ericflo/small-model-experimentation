@@ -68,3 +68,10 @@
   presentations. Full-rank/shared-state parameters changed; no early stop or checkpoint selection.
 - All three full-rank setup pairs now pass with zero result, benchmark, contrast, or scientific
   evidence. Publish/green the complete matrix before any Stage-B training cell.
+
+## 2026-07-14 — handoff scope closed
+
+- The branch handoff and all three full-rank G0/control setup pairs completed, answering
+  this recovery experiment's operational question.
+- Stage-B execution belongs to the canonical capacity-adjudication producer. Continued
+  use of the frozen wrapper does not keep this recovery experiment `in-progress`.
