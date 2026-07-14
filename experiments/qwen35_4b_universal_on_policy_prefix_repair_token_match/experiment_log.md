@@ -258,3 +258,29 @@ before candidate merge.
 Next: publish and CI-verify this replay-control merge. Then run only
 `merge-candidate`; it must require the committed control-merge receipt before opening
 output.
+
+## 2026-07-14 — Prefix-repair candidate composite merged
+
+- Published rebased replay-control checkpoint `619f1e53` directly to `main` after
+  resolving the sole generated-index conflict by deterministic rebuild. Validate
+  Repository run `29355088731` and Publish Research Site run `29355089298` passed.
+- From that clean, origin-aligned SHA, ran only `--stage merge-candidate`. Preflight
+  reauthenticated the fresh local design, committed replay-control merge, candidate
+  training receipt, adapter bytes, and external merger before opening output.
+- The explicit merger loaded only pinned Qwen3.5-4B revision `851bf6e8...d0a`, used
+  CUDA FP32 LoRA products with TF32 disabled, applied 128/128 modules, and found
+  every applied delta nonzero. It saved one 9,078,620,536-byte full composite shard.
+- Preserved tracked run-receipt/log hashes `3deff026...438d` /
+  `58c7c9ec...d9f6`. External merge-receipt/full-weight hashes are
+  `baa2027e...6d5a` / `376e2082...b528`; the merger remained
+  `cb9af8b4...96672`.
+- Independently reran candidate lineage validation and the merged-Qwen architecture
+  plus exact 4,096-context, 16-sequence, 8,192-batched-token, CUDA-graph-1/2/4/8/16
+  engine-request validation. Both passed.
+- Preflight Git status was empty at `619f1e53`; only the tracked candidate merge
+  log/receipt and external gitignored composite were created. No local model call,
+  capability score, benchmark access, or aggregate event ran.
+
+Next: publish and CI-verify this candidate merge. Then run only the already frozen
+three-arm local event; aggregate access remains sealed unless every preregistered
+promotion gate passes.

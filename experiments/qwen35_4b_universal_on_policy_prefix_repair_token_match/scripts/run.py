@@ -44,6 +44,15 @@ CONTROL_EXTERNAL_MERGE_RECEIPT_SHA256 = (
 CANDIDATE_MERGE_RECEIPT = (
     EXP / "runs" / "merges" / "prefix_repair_after_close.json"
 )
+CANDIDATE_MERGE_RECEIPT_SHA256 = (
+    "3deff026e85f7f855fa6cc8db2218fa0ed7c7da48b6c992174ec5bc5e38a438d"
+)
+CANDIDATE_MERGED_WEIGHTS_SHA256 = (
+    "376e208298c2a13308c4955c42d87f5ce1464ca7cd46efb35d5c608b3bedb528"
+)
+CANDIDATE_EXTERNAL_MERGE_RECEIPT_SHA256 = (
+    "baa2027e0e2032315913a3e2b41a986f296fedd932f6c71a8f1fa289d0746d5a"
+)
 ADAPTER_ROOT = ROOT / "large_artifacts" / EXP.name / "adapters"
 MERGED_ROOT = ROOT / "large_artifacts" / EXP.name / "merged"
 MODEL_ID = "Qwen/Qwen3.5-4B"
@@ -106,7 +115,7 @@ def smoke() -> None:
         f"model_revision: {MODEL_REVISION}",
         f"parent_weights_sha256: {PARENT_WEIGHTS_SHA256}",
         f"parent_config_sha256: {PARENT_CONFIG_SHA256}",
-        "status: control_merge_complete_candidate_merge_next",
+        "status: deployment_merges_complete_local_next",
         "rows_per_training_arm: 320",
         "forward_tokens_per_training_arm: 304313",
         "optimizer_steps_per_training_arm: 40",
@@ -116,6 +125,9 @@ def smoke() -> None:
         f"control_merge_receipt_sha256: {CONTROL_MERGE_RECEIPT_SHA256}",
         f"control_external_merge_receipt_sha256: {CONTROL_EXTERNAL_MERGE_RECEIPT_SHA256}",
         f"control_merged_weights_sha256: {CONTROL_MERGED_WEIGHTS_SHA256}",
+        f"candidate_merge_receipt_sha256: {CANDIDATE_MERGE_RECEIPT_SHA256}",
+        f"candidate_external_merge_receipt_sha256: {CANDIDATE_EXTERNAL_MERGE_RECEIPT_SHA256}",
+        f"candidate_merged_weights_sha256: {CANDIDATE_MERGED_WEIGHTS_SHA256}",
     )
     missing = [entry for entry in required if entry not in config]
     if missing:
@@ -214,6 +226,11 @@ def smoke() -> None:
                 )
             )
         if CANDIDATE_MERGE_RECEIPT.is_file():
+            if (
+                sha256_file(CANDIDATE_MERGE_RECEIPT)
+                != CANDIDATE_MERGE_RECEIPT_SHA256
+            ):
+                raise SystemExit("published prefix-repair merge receipt bytes changed")
             merge_receipts.append(
                 validate_published_merge(
                     "prefix_repair_after_close", require_committed=False

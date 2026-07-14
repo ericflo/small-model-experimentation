@@ -7593,10 +7593,10 @@
    ]
   },
   "qwen35_4b_universal_on_policy_prefix_repair_token_match": {
-   "verdict_tag": "First deployment merge is ready; candidate is next",
+   "verdict_tag": "Both deployments are ready; the local gate is next",
    "concept_primer": "A repair lesson can start from the exact point where a worker went wrong, instead of showing a perfect solution from the beginning.",
    "plain_question": "Can corrections attached to the model's own fresh mistakes teach it to reason, stop, and answer more reliably than equal extra practice?",
-   "plain_answer": "The data and compute tests passed: all six repair quotas cleared, both 320-row streams contain exactly 304,313 forward tokens, and both arms independently completed 40 updates. A disjoint 26-item local gate and one identical merged-composite vLLM protocol are frozen. The replay-control composite is merged and architecture-checked; the candidate merge and capability test have not run.",
+   "plain_answer": "The data and compute tests passed: all six repair quotas cleared, both 320-row streams contain exactly 304,313 forward tokens, and both arms independently completed 40 updates. A disjoint 26-item local gate and one identical merged-composite vLLM protocol are frozen. Both trained-arm composites are merged and architecture-checked, but the capability test has not run.",
    "why_it_matters": "If this works, future training can target real failure states instead of inventing cleaner demonstrations that the deployed model never visits.",
    "verdict_tone": "neutral",
    "key_numbers": [
@@ -7628,7 +7628,7 @@
     {
      "label": "Completed stages",
      "value": "7 of 9",
-     "sub": "one of two deployment merges is ready; candidate is next"
+     "sub": "both deployment merges are ready; the local gate is next"
     }
    ],
    "charts": [
@@ -7636,7 +7636,7 @@
      "index": 0,
      "chart_plain_title": "Exact compute reaches the seventh checkpoint",
      "chart_read": "The groups run from intake and design through parent deployment, parent rollout, failure mining, exact token matching, training, local testing, and broad testing. A bar at one means that checkpoint is complete.",
-     "chart_takeaway": "The repair source, exact-compute comparison, both training arms, and a disjoint same-backend local design are frozen. The replay-control composite is ready; capability claims remain blocked until the candidate is merged and the gate is run."
+     "chart_takeaway": "The repair source, exact-compute comparison, both training arms, and a disjoint same-backend local design are frozen. Both trained-arm composites are ready; capability claims remain blocked until the gate is run."
     },
     {
      "index": 1,

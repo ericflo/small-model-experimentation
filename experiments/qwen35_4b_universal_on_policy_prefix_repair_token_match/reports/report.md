@@ -99,6 +99,13 @@ weight shard hash to `aa763255...45a3` / `7ab4c419...6e2e`. The saved composite
 passes the exact Qwen3.5 architecture and frozen local engine-request gate. This is
 an authenticated deployment artifact, not capability evidence.
 
+After that checkpoint passed Validate Repository run `29355088731` and Publish
+Research Site run `29355089298`, candidate merge from clean SHA `619f1e53` applied
+128/128 nonzero modules. Tracked receipt/log hashes are `3deff026...438d` /
+`58c7c9ec...d9f6`; external receipt and 9,078,620,536-byte weight shard hash to
+`baa2027e...6d5a` / `376e2082...b528`. Independent lineage, architecture, and frozen
+engine-request validation passed. This too is deployment evidence only.
+
 ## Controls
 
 Baseline is authenticated `close_xi`. The mechanism-falsifying control is an
@@ -107,8 +114,8 @@ optimizer steps, seed, and aligned shared replay. It must train and publish firs
 Both arms have now trained independently from the parent, and candidate preflight
 authenticated the committed control receipt, log, and external adapter before model
 load. The local deployment order is published parent composite, replay-control merge,
-candidate merge, then one three-arm vLLM local stage; the replay-control merge is now
-complete, and every remaining transition keeps its own published receipt.
+candidate merge, then one three-arm vLLM local stage. Both trained-arm merges are now
+complete; the local event remains a separately published transition.
 
 ## Oracle Versus Deployable Evidence
 
@@ -132,13 +139,13 @@ means the first machine-observable boundary rather than an unobservable latent e
 
 ## Next Experiments
 
-Publish and CI-verify the replay-control composite. Then merge and publish the
-candidate. Only after both merge receipts are committed may the three-arm local event
-run. Aggregate access remains conditional on the strict local gate.
+Publish and CI-verify the candidate composite. Only after both merge receipts are
+committed at the pushed-green HEAD may the three-arm local event run. Aggregate
+access remains conditional on the strict local gate.
 
 ## Artifact Manifest
 
 Parent identity, frozen task hashes, replay hashes, the staged external merged
 checkpoint, parent-rollout hashes, stream hashes, and both trained adapters are
-recorded in `artifact_manifest.yaml`; local task/input/protocol hashes are tracked and
-the prospective merged-arm paths are registered. No capability result exists.
+recorded in `artifact_manifest.yaml`; local task/input/protocol hashes and both
+merged-arm deployments are registered. No capability result exists.

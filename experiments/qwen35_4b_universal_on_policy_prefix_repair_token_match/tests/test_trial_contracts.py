@@ -142,6 +142,18 @@ class FrozenTrainingContractTests(unittest.TestCase):
             self.harness.CONTROL_EXTERNAL_MERGE_RECEIPT_SHA256,
             "aa763255cb3b05599e765948d3a3db1787d5813b1cfafbdc7e1c21653ae745a3",
         )
+        self.assertEqual(
+            self.harness.CANDIDATE_MERGE_RECEIPT_SHA256,
+            "3deff026e85f7f855fa6cc8db2218fa0ed7c7da48b6c992174ec5bc5e38a438d",
+        )
+        self.assertEqual(
+            self.harness.CANDIDATE_MERGED_WEIGHTS_SHA256,
+            "376e208298c2a13308c4955c42d87f5ce1464ca7cd46efb35d5c608b3bedb528",
+        )
+        self.assertEqual(
+            self.harness.CANDIDATE_EXTERNAL_MERGE_RECEIPT_SHA256,
+            "baa2027e0e2032315913a3e2b41a986f296fedd932f6c71a8f1fa289d0746d5a",
+        )
 
     def test_failure_receipt_is_durable_and_refuses_overwrite(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

@@ -207,9 +207,12 @@
   protocol for all arms. Verdict `PASS_CONTROL_MERGE` authorizes control merge only;
   from pushed-green commit `6dc0e677`, that merge applied 128/128 nonzero modules.
   Its tracked receipt, external receipt, and full-weight hashes are
-  `bc78f332...d550` / `aa763255...45a3` / `7ab4c419...6e2e`. One of two deployment
-  merges is now ready; candidate merge is next, while local outcome and aggregate
-  remain sealed.
+  `bc78f332...d550` / `aa763255...45a3` / `7ab4c419...6e2e`. From the resulting
+  pushed-green commit `619f1e53`, the candidate merge also applied 128/128 nonzero
+  modules; its tracked receipt, external receipt, and full-weight hashes are
+  `3deff026...438d` / `baa2027e...6d5a` / `376e2082...b528`. Both deployments are
+  ready; the frozen local event is next, while local outcome and aggregate remain
+  sealed.
 
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.
