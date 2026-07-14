@@ -39,13 +39,13 @@ This is a repository-level inventory. Each experiment remains the source of trut
 
 | Extension | Files |
 | --- | ---: |
-| `.json` | 3325 |
+| `.json` | 3326 |
 | `.py` | 2344 |
 | `.csv` | 2144 |
 | `.md` | 1298 |
 | `.jsonl` | 992 |
 | `.png` | 848 |
-| `.log` | 581 |
+| `.log` | 582 |
 | `.yaml` | 475 |
 | `.gz` | 169 |
 | `.html` | 90 |

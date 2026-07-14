@@ -1,6 +1,6 @@
 # Failure-Selected Counterfactual Restart Curriculum
 
-**Status:** in-progress · since 2026-07-14 · replay-control composite complete; publish checkpoint before candidate merge
+**Status:** in-progress · since 2026-07-14 · both current-arm composites complete; publish checkpoint before local evaluation
 
 This experiment tests whether selecting the stronger parent's fresh procedural
 failures and teaching clean verified restarts can beat exactly exposure-matched replay
@@ -69,16 +69,16 @@ PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B \
 
 ```
 
-Both paired training events and the replay-control explicit merge have completed.
+Both paired training events and both current-arm explicit merges have completed.
 The smoke path reauthenticates their tracked receipts/logs, external adapters, full
-control-composite tree, and separately frozen fresh-local design. After the control
-merge result is published and both repository workflows are green, the only
-authorized next event is:
+composite trees, and separately frozen fresh-local design. After the candidate-merge
+result is published and both repository workflows are green, the only authorized
+next event is:
 
 ```bash
 PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B \
   experiments/qwen35_4b_universal_failure_selected_restart_target_match/scripts/run.py \
-  --stage merge-candidate
+  --stage local
 
 ```
 
@@ -159,6 +159,14 @@ nonzero deltas at scale 2; TF32 was disabled, and delta-norm sum/max were
 `e48ed4a0...ae17`, and `d1a8336d...6027`. The complete seven-file tree passed exact
 config/tokenizer and file-set authentication. This is a deployment artifact, not a
 capability result; no local evaluation has run.
+
+From the separately pushed-green control-merge commit `6c551000`, the restart
+candidate was merged with the identical method. It applied 128/128 nonzero modules
+at scale 2 with TF32 disabled; delta-norm sum/max were 160.3715/2.8331.
+Run-receipt/log/external-receipt/weight/tree hashes are `2956fa41...8ea7`,
+`e138a06c...b483`, `97edeb08...6df6`, `d704af19...49a9`, and
+`9f64dc55...4a1b`. This is also authenticated deployment construction, not
+capability evidence. No local output has been observed.
 
 The separately reviewed fresh-local design now freezes 26 new procedural items at
 seed 88,010, exactly two per universal skill, and compares the unchanged replay

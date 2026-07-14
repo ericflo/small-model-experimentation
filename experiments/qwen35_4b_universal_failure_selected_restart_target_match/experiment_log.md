@@ -162,3 +162,21 @@
 - This is authenticated deployment construction, not capability evidence. Candidate
   merge remains blocked until this result is committed, rebased, pushed, and green
   in both workflows. No local or benchmark event ran; aggregate seed remains sealed.
+
+## 2026-07-14 — Authenticated counterfactual-restart composite
+
+- Launched only after replay-control merge commit `6c551000` was pushed directly to
+  `main` and GitHub runs `29368901329` / `29368901293` both succeeded.
+- The wrapper reauthenticated clean pushed `main`, the immutable local design,
+  candidate training receipt/adapter, and the separately committed control-merge
+  prerequisite before opening output.
+- The identical explicit merger applied 128/128 nonzero candidate modules at scale
+  2 on CUDA with TF32 disabled. Delta Frobenius-norm sum/max were
+  160.3715/2.8331.
+- Run-receipt/log/external-receipt/weight hashes are `2956fa41...8ea7`,
+  `e138a06c...b483`, `97edeb08...6df6`, and `d704af19...49a9`; the exact seven-file
+  tree hash is `9f64dc55...4a1b`.
+- Both current-arm composites now exist and authenticate independently. This is not
+  capability evidence. Local evaluation remains blocked until this result is
+  committed, rebased, pushed, and green in both workflows. Aggregate seed 78,140
+  remains sealed.

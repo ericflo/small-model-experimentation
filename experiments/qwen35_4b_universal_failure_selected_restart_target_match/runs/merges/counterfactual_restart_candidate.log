@@ -1,0 +1,46 @@
+[merge] loading composite Qwen/Qwen3.5-4B bf16 ...
+
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]
+Loading weights:   3%|▎         | 24/723 [00:00<00:03, 217.25it/s]
+Loading weights:   6%|▋         | 46/723 [00:00<00:03, 170.50it/s]
+Loading weights:   9%|▉         | 64/723 [00:00<00:04, 158.12it/s]
+Loading weights:  12%|█▏        | 84/723 [00:00<00:03, 159.90it/s]
+Loading weights:  14%|█▍        | 103/723 [00:00<00:03, 165.88it/s]
+Loading weights:  17%|█▋        | 122/723 [00:00<00:03, 170.52it/s]
+Loading weights:  20%|█▉        | 143/723 [00:00<00:03, 176.32it/s]
+Loading weights:  22%|██▏       | 162/723 [00:00<00:03, 166.76it/s]
+Loading weights:  25%|██▍       | 179/723 [00:01<00:03, 166.31it/s]
+Loading weights:  27%|██▋       | 196/723 [00:01<00:03, 161.42it/s]
+Loading weights:  30%|███       | 217/723 [00:01<00:02, 173.25it/s]
+Loading weights:  33%|███▎      | 242/723 [00:01<00:02, 191.32it/s]
+Loading weights:  36%|███▌      | 262/723 [00:01<00:02, 191.51it/s]
+Loading weights:  39%|███▉      | 282/723 [00:01<00:02, 186.62it/s]
+Loading weights:  42%|████▏     | 301/723 [00:01<00:02, 179.32it/s]
+Loading weights:  45%|████▍     | 324/723 [00:01<00:02, 181.54it/s]
+Loading weights:  47%|████▋     | 343/723 [00:01<00:02, 179.41it/s]
+Loading weights:  50%|████▉     | 361/723 [00:02<00:02, 176.39it/s]
+Loading weights:  52%|█████▏    | 379/723 [00:02<00:02, 171.46it/s]
+Loading weights:  55%|█████▍    | 397/723 [00:02<00:01, 172.00it/s]
+Loading weights:  57%|█████▋    | 415/723 [00:02<00:01, 162.07it/s]
+Loading weights:  62%|██████▏   | 448/723 [00:02<00:01, 205.56it/s]
+Loading weights:  68%|██████▊   | 490/723 [00:02<00:00, 264.93it/s]
+Loading weights:  73%|███████▎  | 527/723 [00:02<00:00, 294.43it/s]
+Loading weights:  79%|███████▊  | 568/723 [00:02<00:00, 322.72it/s]
+Loading weights:  84%|████████▍ | 610/723 [00:02<00:00, 350.61it/s]
+Loading weights:  92%|█████████▏| 662/723 [00:03<00:00, 392.77it/s]
+Loading weights: 100%|██████████| 723/723 [00:03<00:00, 235.20it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[merge] LoRA products use cuda with FP32 matmul
+[merge] example composite tail: '0.linear_attn.conv1d' -> ['model.language_model.layers.0.linear_attn.conv1d']
+[merge] applied 128 LoRA deltas (expected 7 modules x layers)
+[merge] saving composite merged model to /home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_failure_selected_restart_target_match/merged/counterfactual_restart_candidate ...
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.26s/it]
+Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.26s/it]
+[merge] processor save skipped:
+Qwen3VLVideoProcessor requires the Torchvision library but it was not found in your environment. Check out the instructions on the
+installation page: https://pytorch.org/get-started/locally/ and follow the ones that match your environment.
+Please note that you may need to restart your runtime after installation.
+
+[merge] done

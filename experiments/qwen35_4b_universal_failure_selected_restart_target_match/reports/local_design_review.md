@@ -120,3 +120,15 @@ Run/log/external-receipt hashes are `751a0152...f72f`, `8a438197...281b`, and
 `bcb0060e...53e2`. This records the frozen deployment artifact and does not expand
 the original verdict. Candidate merge becomes authorized only after this receipt
 checkpoint is itself published and green in both workflows.
+
+## Post-candidate receipt
+
+The authorized candidate merge later completed from pushed-green commit `6c551000`:
+128/128 nonzero modules at scale 2, full weight SHA-256
+`d704af190171c133b77ce0bfc96e92096be3828e51124020200514859fd049a9`, and
+complete-tree SHA-256
+`9f64dc55f290de8f0b70bd51259f40cfe2a1c5f823614d0e7547e94201a14a1b`.
+Run/log/external-receipt hashes are `2956fa41...8ea7`, `e138a06c...b483`, and
+`97edeb08...6df6`. This records the second frozen deployment artifact. Local
+evaluation becomes authorized only after this checkpoint is itself published and
+green in both workflows; the aggregate remains sealed.
