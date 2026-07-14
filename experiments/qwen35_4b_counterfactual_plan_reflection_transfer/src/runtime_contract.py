@@ -19,11 +19,25 @@ def _run(command: list[str], *, cwd: Path) -> subprocess.CompletedProcess[str]:
 def require_detached_execution_worktree(repo_root: Path) -> dict[str, str]:
     """Require commands to run from one clean, detached, exact-SHA worktree."""
     repo_root = repo_root.resolve()
+    executable = Path(sys.executable).resolve()
     if Path.cwd().resolve() != repo_root:
         raise ValueError("execution must be invoked with the detached worktree root as cwd")
+    if repo_root == executable or repo_root in executable.parents:
+        raise ValueError("execution interpreter must be provisioned outside the worktree")
+    if sys.flags.isolated != 1 or not sys.dont_write_bytecode:
+        raise ValueError("execution requires an isolated -I -B Python interpreter")
     top = _run(["git", "rev-parse", "--show-toplevel"], cwd=repo_root)
     head = _run(["git", "rev-parse", "HEAD"], cwd=repo_root)
-    status = _run(["git", "status", "--porcelain"], cwd=repo_root)
+    status = _run(
+        [
+            "git",
+            "status",
+            "--porcelain=v1",
+            "--untracked-files=all",
+            "--ignored=matching",
+        ],
+        cwd=repo_root,
+    )
     branch = _run(["git", "symbolic-ref", "-q", "HEAD"], cwd=repo_root)
     if (
         top.returncode != 0
@@ -34,7 +48,9 @@ def require_detached_execution_worktree(repo_root: Path) -> dict[str, str]:
         or status.stdout
         or branch.returncode == 0
     ):
-        raise ValueError("execution requires a clean detached exact-SHA Git worktree")
+        raise ValueError(
+            "execution requires a clean detached exact-SHA Git worktree with no ignored state"
+        )
     return {
         "repo_root": str(repo_root),
         "git_commit": head.stdout.strip(),
@@ -75,10 +91,13 @@ def runtime_metadata(repo_root: Path, lock_path: Path) -> dict[str, Any]:
     nvcc = _run(["nvcc", "--version"], cwd=repo_root)
     packages = installed_packages()
     value = {
-        "schema_version": 1,
+        "schema_version": 2,
         "worktree": worktree,
         "python": platform.python_version(),
-        "python_executable": sys.executable,
+        "python_executable": str(Path(sys.executable).resolve()),
+        "python_executable_sha256": _sha256_file(Path(sys.executable).resolve()),
+        "python_isolated": sys.flags.isolated == 1,
+        "python_dont_write_bytecode": bool(sys.dont_write_bytecode),
         "platform": platform.platform(),
         "packages": packages,
         "packages_sha256": hashlib.sha256(

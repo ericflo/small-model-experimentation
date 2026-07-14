@@ -22,6 +22,25 @@ def _git(root: Path, *args: str) -> str:
     ).stdout.strip()
 
 
+def _require(root: Path, *, executable: Path | None = None) -> dict[str, str]:
+    original_flags = sys.flags
+
+    class IsolatedFlags:
+        isolated = 1
+
+        def __getattr__(self, name: str):
+            return getattr(original_flags, name)
+
+    with mock.patch.object(
+        R.sys, "flags", IsolatedFlags()
+    ), mock.patch.object(
+        R.sys, "dont_write_bytecode", True
+    ), mock.patch.object(
+        R.sys, "executable", str(executable or Path(sys.executable).resolve())
+    ):
+        return R.require_detached_execution_worktree(root)
+
+
 class RuntimeContractTests(unittest.TestCase):
     def test_execution_requires_clean_detached_root_cwd(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -37,12 +56,12 @@ class RuntimeContractTests(unittest.TestCase):
 
             with mock.patch("pathlib.Path.cwd", return_value=root):
                 with self.assertRaisesRegex(ValueError, "clean detached"):
-                    R.require_detached_execution_worktree(root)
+                    _require(root)
 
             _git(root, "checkout", "--detach", "-q", commit)
             with mock.patch("pathlib.Path.cwd", return_value=root):
                 self.assertEqual(
-                    R.require_detached_execution_worktree(root),
+                    _require(root),
                     {
                         "repo_root": str(root.resolve()),
                         "git_commit": commit,
@@ -51,13 +70,32 @@ class RuntimeContractTests(unittest.TestCase):
                     },
                 )
 
+            (root / ".gitignore").write_text("__pycache__/\n")
+            _git(root, "add", ".gitignore")
+            _git(root, "commit", "-qm", "ignore bytecode")
+            ignored = root / "__pycache__"
+            ignored.mkdir()
+            (ignored / "injected.pyc").write_bytes(b"injected")
+            with mock.patch("pathlib.Path.cwd", return_value=root):
+                with self.assertRaisesRegex(ValueError, "no ignored state"):
+                    _require(root)
+            (ignored / "injected.pyc").unlink()
+            ignored.rmdir()
+
+            fake_interpreter = root / "python"
+            fake_interpreter.write_bytes(b"synthetic")
+            with mock.patch("pathlib.Path.cwd", return_value=root):
+                with self.assertRaisesRegex(ValueError, "outside the worktree"):
+                    _require(root, executable=fake_interpreter)
+            fake_interpreter.unlink()
+
             (root / "tracked.txt").write_text("dirty\n")
             with mock.patch("pathlib.Path.cwd", return_value=root):
                 with self.assertRaisesRegex(ValueError, "clean detached"):
-                    R.require_detached_execution_worktree(root)
+                    _require(root)
             with mock.patch("pathlib.Path.cwd", return_value=root.parent):
                 with self.assertRaisesRegex(ValueError, "worktree root as cwd"):
-                    R.require_detached_execution_worktree(root)
+                    _require(root)
 
     def test_tokenizer_authentication_is_exact_and_mutation_closed(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -72,9 +110,10 @@ class RuntimeContractTests(unittest.TestCase):
             for name, payload in files.items():
                 (root / name).write_bytes(payload)
             pin = {
-                "schema_version": 1,
+                "schema_version": 2,
                 "model_id": "Qwen/Qwen3.5-4B",
                 "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+                "absent_files": ["added_tokens.json", "special_tokens_map.json"],
                 "files": {
                     name: {
                         "sha256": __import__("hashlib").sha256(payload).hexdigest(),
@@ -87,6 +126,20 @@ class RuntimeContractTests(unittest.TestCase):
                 receipt = T.authenticate_tokenizer_snapshot(root)
                 self.assertEqual(receipt["files"], pin["files"])
                 self.assertEqual(len(receipt["files_sha256"]), 64)
+                (root / "added_tokens.json").write_text("{}\n")
+                with self.assertRaisesRegex(ValueError, "must be absent"):
+                    T.authenticate_tokenizer_snapshot(root)
+                (root / "added_tokens.json").unlink()
+                closed = root / "closed"
+                closed.mkdir()
+                for name, payload in files.items():
+                    (closed / name).write_bytes(payload)
+                self.assertEqual(
+                    T.authenticate_closed_tokenizer_view(closed), receipt
+                )
+                (closed / "special_tokens_map.json").write_text("{}\n")
+                with self.assertRaisesRegex(ValueError, "missing or extra"):
+                    T.authenticate_closed_tokenizer_view(closed)
                 (root / "vocab.json").write_bytes(b"tampered\n")
                 with self.assertRaisesRegex(ValueError, "differs from exact revision"):
                     T.authenticate_tokenizer_snapshot(root)
@@ -102,6 +155,10 @@ class RuntimeContractTests(unittest.TestCase):
                 "tokenizer_config.json",
                 "vocab.json",
             },
+        )
+        self.assertEqual(
+            pin["absent_files"],
+            ["added_tokens.json", "special_tokens_map.json"],
         )
         self.assertEqual(T.load_pinned_tokenizer(), pin)
 

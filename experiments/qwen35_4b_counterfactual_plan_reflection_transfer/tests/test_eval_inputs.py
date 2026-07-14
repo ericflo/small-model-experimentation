@@ -122,6 +122,9 @@ class EvalInputTests(unittest.TestCase):
         runtime["packages"] = {**versions, "vllm": "999.0-forged"}
         with self.assertRaisesRegex(ValueError, "installed packages"):
             P.validate_runtime_packages(runtime, lock)
+        runtime["packages"] = {**versions, "unexpected-startup-hook": "1.0"}
+        with self.assertRaisesRegex(ValueError, "package surface"):
+            P.validate_runtime_packages(runtime, lock)
 
     def test_missing_or_non_wheel_vllm_direct_pin_fails_closed(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -168,10 +171,11 @@ class EvalInputTests(unittest.TestCase):
                 enforce_eager=False,
             )
         )
+        base_snapshot_path = Path("/synthetic/base-snapshot")
+        closed_tokenizer_path = Path("/synthetic/closed-tokenizer")
         engine_args = {
-            "model": self.config["model"]["id"],
-            "tokenizer": self.config["model"]["id"],
-            "tokenizer_revision": self.config["model"]["revision"],
+            "model": str(base_snapshot_path),
+            "tokenizer": str(closed_tokenizer_path),
             "trust_remote_code": False,
             "dtype": "bfloat16",
             "tensor_parallel_size": 1,
@@ -189,7 +193,6 @@ class EvalInputTests(unittest.TestCase):
             "async_scheduling": False,
             "cudagraph_capture_sizes": list(frozen["cudagraph_capture_sizes"]),
             "max_cudagraph_capture_size": max(frozen["cudagraph_capture_sizes"]),
-            "revision": self.config["model"]["revision"],
         }
         lock = EXP.parents[1] / "requirements-vllm.lock.txt"
         commit = P.subprocess.run(
@@ -198,12 +201,38 @@ class EvalInputTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             generated = root / "generated.jsonl"
-            generated.write_text('{"id":"synthetic"}\n')
+            generated_row = {
+                "id": "synthetic",
+                "n_prompt_tokens": 5,
+                "outputs": [
+                    {
+                        "sample_index": 0,
+                        "text": "synthetic",
+                        "token_ids": [1, 2],
+                        "stage1_token_ids": [1, 2, 248044],
+                        "stage2_token_ids": [],
+                        "injected_token_ids": [],
+                        "n_thinking_tokens": 0,
+                        "n_answer_tokens": 2,
+                        "n_sampled_tokens": 3,
+                        "n_injected_tokens": 0,
+                        "n_completion_tokens": 2,
+                        "n_terminal_tokens_trimmed": 1,
+                        "n_stage1_prompt_tokens": 5,
+                        "n_stage2_prompt_tokens": 0,
+                        "thinking_closed": False,
+                        "forced_close": False,
+                        "truncated": False,
+                    }
+                ],
+            }
+            generated.write_text(json.dumps(generated_row) + "\n")
             stage = root / "stage.json"
             stage.write_text("{}\n")
             exact_base = {"synthetic": "base"}
             exact_tokenizer = {"synthetic": "tokenizer"}
             metadata = {
+                "schema_version": 5,
                 "output": {
                     "description": "generated JSONL",
                     "sha256": hashlib.sha256(generated.read_bytes()).hexdigest(),
@@ -222,20 +251,63 @@ class EvalInputTests(unittest.TestCase):
                     "base_snapshot": exact_base,
                     "tokenizer_snapshot": exact_tokenizer,
                     "model_override": None,
-                    "decision": "POST_ENGINE_BYTES_MATCH_PRELOAD_COMMITMENTS",
+                    "load_window_guards": {
+                        "tokenizer_and_config": {"synthetic": "tokenizer-config"},
+                        "engine": {"synthetic": "engine"},
+                    },
+                    "decision": "LOAD_WINDOWS_IMMUTABLE_AND_POSTLOAD_BYTES_MATCH",
+                },
+                "sampling": {"thinking": "off", "shuffle_thinking": False},
+                "termination": {
+                    "hf_model_eos_token_id": 248044,
+                    "vllm_tokenizer_eos_ignored": 248046,
+                },
+                "think_token_ids": {
+                    "open": 248068,
+                    "close": 248069,
+                    "forced_close_sequence": [248069, 198, 198],
+                    "thinking_prompt_suffix": [1],
+                    "no_thinking_prompt_suffix": [2],
+                },
+                "counts": {
+                    "requests": 1,
+                    "completions": 1,
+                    "unique_input_prompt_tokens": 5,
+                    "stage1_logical_prompt_tokens": 5,
+                    "stage2_logical_prompt_tokens": 0,
+                    "logical_model_input_tokens": 5,
+                    "sampled_tokens": 3,
+                    "injected_tokens": 0,
+                },
+                "timing": {
+                    "model_load_seconds": 1.0,
+                    "generation_seconds": 2.0,
+                    "sampled_tokens_per_second": 1.5,
                 },
                 "engine": engine,
                 "engine_args": engine_args,
                 "runtime": {
+                    "schema_version": 2,
                     "git_dirty": False,
                     "git_commit": commit,
                     "git_root": str(EXP.parents[1].resolve()),
                     "cwd": str(EXP.parents[1].resolve()),
                     "git_head_mode": "detached",
+                    "gpu": "Synthetic GPU, GPU-0000, 999.0, 80000",
+                    "python_executable": "/synthetic/python",
+                    "python_executable_sha256": "f" * 64,
+                    "python_isolated": True,
+                    "python_dont_write_bytecode": True,
                     "environment_lock": {
                         "sha256": hashlib.sha256(lock.read_bytes()).hexdigest()
                     },
                     "packages": P._locked_versions(lock),
+                    "packages_sha256": P.canonical_sha256(P._locked_versions(lock)),
+                    "python": "3.12.0",
+                    "platform": "synthetic",
+                    "uv": "synthetic",
+                    "cuda_toolkit": "synthetic",
+                    "vllm_enable_v1_multiprocessing": "0",
                 },
                 "generation_stage": {
                     "authorized_stage": "calibration_generation",
@@ -259,8 +331,18 @@ class EvalInputTests(unittest.TestCase):
             ), mock.patch(
                 "merge_replay.base_snapshot_commitment", return_value=exact_base
             ), mock.patch(
+                "merge_replay.authenticate_base_snapshot",
+                return_value=(base_snapshot_path, {}, {}),
+            ), mock.patch(
                 "tokenizer_lineage.authenticate_tokenizer_snapshot",
                 return_value=exact_tokenizer,
+            ), mock.patch(
+                "tokenizer_lineage.ensure_closed_tokenizer_view",
+                return_value=(closed_tokenizer_path, exact_tokenizer),
+            ), mock.patch(
+                "load_window_guard.validate_load_window_receipt"
+            ), mock.patch(
+                "provenance.validate_interpreter_runtime"
             ):
                 protocol = P.validate_generation_protocol(
                     metadata=metadata,
@@ -279,8 +361,18 @@ class EvalInputTests(unittest.TestCase):
             with mock.patch(
                 "merge_replay.base_snapshot_commitment", return_value=exact_base
             ), mock.patch(
+                "merge_replay.authenticate_base_snapshot",
+                return_value=(base_snapshot_path, {}, {}),
+            ), mock.patch(
                 "tokenizer_lineage.authenticate_tokenizer_snapshot",
                 return_value=exact_tokenizer,
+            ), mock.patch(
+                "tokenizer_lineage.ensure_closed_tokenizer_view",
+                return_value=(closed_tokenizer_path, exact_tokenizer),
+            ), mock.patch(
+                "load_window_guard.validate_load_window_receipt"
+            ), mock.patch(
+                "provenance.validate_interpreter_runtime"
             ), self.assertRaisesRegex(ValueError, "engine arguments"):
                 P.validate_generation_protocol(
                     metadata=metadata,

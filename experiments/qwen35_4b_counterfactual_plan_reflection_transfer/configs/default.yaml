@@ -180,7 +180,7 @@ evaluation:
     stop_inputs: compute_receipts_only_no_labels_scores_or_correctness
     target_across_seeds: maximum_of_the_two_independent_reflection_correct_seed_costs
     amortization_horizon: full_training_charged_to_each_144_task_confirmation_split
-    training_token_charge: forward_tokens_times_fixed_forward_backward_multiplier_3
+    training_token_charge: forward_tokens_times_checkpoint_aware_multiplier_4
     inference_token_charge: logical_model_input_tokens_plus_sampled_tokens
     reservoir_wall_charge: one_base_model_load_plus_all_completed_block_generation_seconds
     trained_wall_charge: training_gpu_phase_plus_merged_model_load_plus_confirmation_generation

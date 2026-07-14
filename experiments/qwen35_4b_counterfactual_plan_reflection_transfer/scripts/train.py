@@ -18,8 +18,8 @@ from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
 from torch.utils.data import Dataset, SequentialSampler
 from transformers import (
     AutoModelForCausalLM,
-    AutoTokenizer,
     BitsAndBytesConfig,
+    Qwen2Tokenizer,
     Trainer,
     TrainingArguments,
 )
@@ -40,13 +40,18 @@ from records import (  # noqa: E402
 )
 from taskgen import build_corpus  # noqa: E402
 from stages import read_and_validate_stage_receipt  # noqa: E402
-from merge_replay import base_snapshot_commitment  # noqa: E402
+from merge_replay import authenticate_base_snapshot, base_snapshot_commitment  # noqa: E402
+from load_window_guard import LoadWindowGuard, validate_load_window_receipt  # noqa: E402
 from provenance import validate_runtime_packages  # noqa: E402
 from runtime_contract import (  # noqa: E402
     require_detached_execution_worktree,
     runtime_metadata,
 )
-from tokenizer_lineage import authenticate_tokenizer_snapshot  # noqa: E402
+from tokenizer_lineage import (  # noqa: E402
+    authenticate_closed_tokenizer_view,
+    authenticate_tokenizer_snapshot,
+    ensure_closed_tokenizer_view,
+)
 
 
 def _sha256_file(path: Path) -> str:
@@ -166,8 +171,9 @@ def main() -> int:
     lock_path = EXP.parents[1] / "requirements-vllm.lock.txt"
     training_runtime = runtime_metadata(EXP.parents[1], lock_path)
     validate_runtime_packages(training_runtime, lock_path)
-    base_snapshot = base_snapshot_commitment()
-    tokenizer_snapshot = authenticate_tokenizer_snapshot()
+    base_root, _base_index, _base_structure = authenticate_base_snapshot()
+    base_snapshot = base_snapshot_commitment(base_root)
+    tokenizer_path, tokenizer_snapshot = ensure_closed_tokenizer_view()
 
     construction = config["construction"]
     counts = {
@@ -183,13 +189,19 @@ def main() -> int:
         per_family_per_step=int(schedule["per_family_per_optimizer_group"]),
     )
     model_config = config["model"]
-    tokenizer = AutoTokenizer.from_pretrained(
-        model_config["id"],
-        revision=model_config["revision"],
-        trust_remote_code=False,
-        use_fast=True,
-    )
-    if authenticate_tokenizer_snapshot() != tokenizer_snapshot:
+    with LoadWindowGuard([tokenizer_path]) as tokenizer_guard:
+        tokenizer = Qwen2Tokenizer.from_pretrained(
+            str(tokenizer_path),
+            trust_remote_code=False,
+            local_files_only=True,
+        )
+    tokenizer_load_guard = tokenizer_guard.receipt
+    if tokenizer_load_guard is None:
+        raise RuntimeError("training tokenizer load-window guard emitted no receipt")
+    if (
+        authenticate_tokenizer_snapshot() != tokenizer_snapshot
+        or authenticate_closed_tokenizer_view(tokenizer_path) != tokenizer_snapshot
+    ):
         raise ValueError("tokenizer files changed across training tokenizer initialization")
     if int(tokenizer.eos_token_id) != 248046:
         raise ValueError(f"unexpected tokenizer EOS: {tokenizer.eos_token_id}")
@@ -236,11 +248,11 @@ def main() -> int:
         "model_id", "model_revision", "tokenizer_class", "tokenizer_eos_token_id",
         "trust_remote_code", "tokenizer_snapshot", "worktree", "record_receipt",
         "parity", "rows", "rows_sha256", "model_calls", "gpu_events",
-        "benchmark_reads",
+        "benchmark_reads", "load_window_guard",
     }
     if (
         set(expected_tokenizer_receipt) != tokenizer_receipt_keys
-        or expected_tokenizer_receipt.get("schema_version") != 2
+        or expected_tokenizer_receipt.get("schema_version") != 3
         or expected_tokenizer_receipt.get("experiment_id") != config["experiment_id"]
         or expected_tokenizer_receipt.get("config_sha256") != _sha256_file(config_path)
         or expected_tokenizer_receipt.get("runner_sha256")
@@ -248,14 +260,19 @@ def main() -> int:
         or expected_tokenizer_receipt.get("model_id") != model_config["id"]
         or expected_tokenizer_receipt.get("model_revision") != model_config["revision"]
         or expected_tokenizer_receipt.get("tokenizer_eos_token_id") != 248046
+        or expected_tokenizer_receipt.get("tokenizer_class") != "Qwen2Tokenizer"
         or expected_tokenizer_receipt.get("trust_remote_code") is not False
         or expected_tokenizer_receipt.get("tokenizer_snapshot") != tokenizer_snapshot
+        or expected_tokenizer_receipt.get("load_window_guard") is None
         or expected_tokenizer_receipt.get("worktree") != worktree
         or expected_tokenizer_receipt.get("model_calls") != 0
         or expected_tokenizer_receipt.get("gpu_events") != 0
         or expected_tokenizer_receipt.get("benchmark_reads") != 0
     ):
         raise ValueError("tokenizer receipt identity is invalid")
+    validate_load_window_receipt(
+        expected_tokenizer_receipt["load_window_guard"], [tokenizer_path]
+    )
     if expected_tokenizer_receipt["parity"] != parity:
         raise ValueError("live token/mask parity differs from the prerequisite receipt")
     if expected_tokenizer_receipt["record_receipt"] != record_receipt:
@@ -275,7 +292,7 @@ def main() -> int:
     (args.output / "STARTED.json").write_text(
         json.dumps(
             {
-                "schema_version": 2,
+                "schema_version": 3,
                 "arm": args.arm,
                 "seed": args.seed,
                 "config_sha256": _sha256_file(config_path),
@@ -287,6 +304,7 @@ def main() -> int:
                 "runtime": training_runtime,
                 "base_snapshot": base_snapshot,
                 "tokenizer_snapshot": tokenizer_snapshot,
+                "tokenizer_load_window_guard": tokenizer_load_guard,
             },
             indent=2,
             sort_keys=True,
@@ -302,19 +320,24 @@ def main() -> int:
         bnb_4bit_compute_dtype=torch.bfloat16,
     )
     load_started = time.perf_counter()
-    model = AutoModelForCausalLM.from_pretrained(
-        model_config["id"],
-        revision=model_config["revision"],
-        trust_remote_code=False,
-        device_map="cuda",
-        dtype=torch.bfloat16,
-        quantization_config=quantization,
-        attn_implementation="sdpa",
-    )
+    with LoadWindowGuard([base_root]) as model_guard:
+        model = AutoModelForCausalLM.from_pretrained(
+            str(base_root),
+            local_files_only=True,
+            trust_remote_code=False,
+            device_map="cuda",
+            dtype=torch.bfloat16,
+            quantization_config=quantization,
+            attn_implementation="sdpa",
+        )
+    model_load_guard = model_guard.receipt
+    if model_load_guard is None:
+        raise RuntimeError("training model load-window guard emitted no receipt")
     torch.cuda.synchronize()
     model_load_seconds = time.perf_counter() - load_started
-    if base_snapshot_commitment() != base_snapshot:
+    if base_snapshot_commitment(base_root) != base_snapshot:
         raise ValueError("base checkpoint files changed across training model initialization")
+    model.config._name_or_path = model_config["id"]
     model = prepare_model_for_kbit_training(model, use_gradient_checkpointing=True)
     model = get_peft_model(
         model,
@@ -370,7 +393,7 @@ def main() -> int:
     epochs = int(recipe["epochs"])
     forward_tokens = sum(len(row["input_ids"]) for row in encoded[args.arm]) * epochs
     training_receipt = {
-        "schema_version": 3,
+        "schema_version": 4,
         "experiment_id": config["experiment_id"],
         "arm": args.arm,
         "seed": args.seed,
@@ -399,12 +422,18 @@ def main() -> int:
         "runtime": training_runtime,
         "base_snapshot": base_snapshot,
         "tokenizer_snapshot": tokenizer_snapshot,
+        "load_window_guards": {
+            "tokenizer": tokenizer_load_guard,
+            "model": model_load_guard,
+        },
         "compute": {
             "schema_version": 1,
             "amortization_horizon": "full_training_charged_to_each_confirmation_split",
             "forward_tokens": forward_tokens,
-            "forward_backward_multiplier": 3,
-            "token_forward_equivalents": forward_tokens * 3,
+            # Conservative checkpoint-aware charge: one original forward,
+            # two backward-equivalent passes, and one recomputed forward.
+            "forward_backward_multiplier": 4,
+            "token_forward_equivalents": forward_tokens * 4,
             "model_load_seconds": model_load_seconds,
             "training_seconds": training_seconds,
             "gpu_phase_wall_seconds": model_load_seconds + training_seconds,

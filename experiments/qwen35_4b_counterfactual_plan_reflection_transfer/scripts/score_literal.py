@@ -28,6 +28,7 @@ from provenance import (  # noqa: E402
     validate_sampling,
 )
 from scoring import score_literal_reflection_diagnostic  # noqa: E402
+from runtime_contract import require_detached_execution_worktree  # noqa: E402
 from vllm_runner import SamplingConfig  # noqa: E402
 
 install_benchmark_firewall(EXP.parents[1])
@@ -38,6 +39,7 @@ def _read(path: Path) -> list[dict]:
 
 
 def main() -> int:
+    require_detached_execution_worktree(EXP.parents[1])
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--reflection-generated", type=Path, required=True)
     parser.add_argument("--reflection-metadata", type=Path, required=True)

@@ -26,6 +26,7 @@ from eval_inputs import (  # noqa: E402
     reflection_receipt,
 )
 from provenance import validate_generation_protocol, validate_sampling  # noqa: E402
+from runtime_contract import require_detached_execution_worktree  # noqa: E402
 from vllm_runner import SamplingConfig  # noqa: E402
 
 
@@ -49,6 +50,7 @@ def _write_exclusive(path: Path, rows: list[dict]) -> str:
 
 
 def main() -> int:
+    require_detached_execution_worktree(EXP.parents[1])
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--split", choices=("qualification",), required=True)
     parser.add_argument("--reflection-generated", type=Path, required=True)

@@ -47,7 +47,8 @@ persistent vLLM engine. Block generation stops using compute fields only—never
 scores, or correctness—at the first completed block satisfying both:
 
 - token-forward equivalents at least the larger seed's full training charge
-  (`forward_tokens × 3`) plus its correct-model confirmation inference tokens; and
+  (`forward_tokens × 4`, conservatively including gradient-checkpoint recomputation)
+  plus its correct-model confirmation inference tokens; and
 - wall time at least the larger seed's training GPU phase plus correct-model load and
   confirmation generation, versus one frozen load plus every completed block.
 

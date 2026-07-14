@@ -11,7 +11,7 @@ import sys
 from pathlib import Path
 
 import yaml
-from transformers import AutoTokenizer
+from transformers import Qwen2Tokenizer
 
 
 EXP = Path(__file__).resolve().parents[1]
@@ -19,7 +19,12 @@ sys.path.insert(0, str(EXP / "src"))
 
 from firewall import install_benchmark_firewall  # noqa: E402
 from runtime_contract import require_detached_execution_worktree  # noqa: E402
-from tokenizer_lineage import authenticate_tokenizer_snapshot  # noqa: E402
+from load_window_guard import LoadWindowGuard  # noqa: E402
+from tokenizer_lineage import (  # noqa: E402
+    authenticate_closed_tokenizer_view,
+    authenticate_tokenizer_snapshot,
+    ensure_closed_tokenizer_view,
+)
 
 install_benchmark_firewall(EXP.parents[1])
 
@@ -71,14 +76,22 @@ def main() -> int:
         per_family_per_step=int(schedule["per_family_per_optimizer_group"]),
     )
     model = config["model"]
-    tokenizer_snapshot = authenticate_tokenizer_snapshot(ensure_downloaded=True)
-    tokenizer = AutoTokenizer.from_pretrained(
-        model["id"],
-        revision=model["revision"],
-        trust_remote_code=False,
-        use_fast=True,
+    tokenizer_path, tokenizer_snapshot = ensure_closed_tokenizer_view(
+        ensure_downloaded=True
     )
-    if authenticate_tokenizer_snapshot() != tokenizer_snapshot:
+    with LoadWindowGuard([tokenizer_path]) as load_guard:
+        tokenizer = Qwen2Tokenizer.from_pretrained(
+            str(tokenizer_path),
+            trust_remote_code=False,
+            local_files_only=True,
+        )
+    tokenizer_load_guard = load_guard.receipt
+    if tokenizer_load_guard is None:
+        raise RuntimeError("tokenizer load-window guard emitted no receipt")
+    if (
+        authenticate_tokenizer_snapshot() != tokenizer_snapshot
+        or authenticate_closed_tokenizer_view(tokenizer_path) != tokenizer_snapshot
+    ):
         raise ValueError("tokenizer files changed across tokenizer initialization")
     if int(tokenizer.eos_token_id) != 248046:
         raise ValueError(f"unexpected tokenizer EOS: {tokenizer.eos_token_id}")
@@ -117,7 +130,7 @@ def main() -> int:
         for arm in TRAINING_ARMS
     }
     receipt = {
-        "schema_version": 2,
+        "schema_version": 3,
         "experiment_id": config["experiment_id"],
         "config_sha256": hashlib.sha256(config_path.read_bytes()).hexdigest(),
         "runner_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
@@ -127,6 +140,7 @@ def main() -> int:
         "tokenizer_eos_token_id": int(tokenizer.eos_token_id),
         "trust_remote_code": False,
         "tokenizer_snapshot": tokenizer_snapshot,
+        "load_window_guard": tokenizer_load_guard,
         "worktree": worktree,
         "record_receipt": record_receipt,
         "parity": parity,

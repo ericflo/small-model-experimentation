@@ -20,11 +20,12 @@ def training(seed: int, *, tokens: int = 300, wall: float = 30.0) -> dict:
     return {
         "arm": "reflection_correct",
         "seed": seed,
+        "runtime": {"gpu": "Synthetic GPU, GPU-0000, 999.0, 80000"},
         "compute": {
             "schema_version": 1,
             "amortization_horizon": "full_training_charged_to_each_confirmation_split",
-            "forward_tokens": tokens // 3,
-            "forward_backward_multiplier": 3,
+            "forward_tokens": tokens // 4,
+            "forward_backward_multiplier": 4,
             "token_forward_equivalents": tokens,
             "model_load_seconds": wall / 3,
             "training_seconds": wall * 2 / 3,
@@ -43,6 +44,7 @@ def metadata(
 ) -> dict:
     return {
         "model_override": None if seed is None else {"source_seed": seed},
+        "runtime": {"gpu": "Synthetic GPU, GPU-0000, 999.0, 80000"},
         "counts": {
             "logical_model_input_tokens": logical,
             "sampled_tokens": sampled,
@@ -62,13 +64,13 @@ class MatchedComputeTests(unittest.TestCase):
     def test_target_charges_full_training_to_each_seed_then_takes_max(self) -> None:
         target = M.target_compute_budget(
             [
-                (training(47, tokens=300, wall=30), metadata(47)),
-                (training(53, tokens=600, wall=60), metadata(53)),
+                (training(47, tokens=400, wall=30), metadata(47)),
+                (training(53, tokens=800, wall=60), metadata(53)),
             ],
             {47, 53},
         )
-        self.assertEqual(target["per_seed"]["47"]["total_token_forward_equivalents"], 450)
-        self.assertEqual(target["required_token_forward_equivalents"], 750)
+        self.assertEqual(target["per_seed"]["47"]["total_token_forward_equivalents"], 550)
+        self.assertEqual(target["required_token_forward_equivalents"], 950)
         self.assertEqual(target["required_gpu_phase_wall_seconds"], 90.0)
 
     def test_both_token_and_wall_units_are_required_for_compute_stop(self) -> None:
@@ -106,6 +108,23 @@ class MatchedComputeTests(unittest.TestCase):
                 [(training(47), metadata(47)), (training(47), metadata(47))],
                 {47, 53},
             )
+
+    def test_cross_hardware_target_and_reservoir_are_rejected(self) -> None:
+        changed_confirmation = metadata(47)
+        changed_confirmation["runtime"]["gpu"] = "Synthetic GPU, GPU-DIFFERENT, 999.0, 80000"
+        with self.assertRaisesRegex(ValueError, "hardware identities differ"):
+            M.target_compute_budget(
+                [(training(47), changed_confirmation), (training(53), metadata(53))],
+                {47, 53},
+            )
+        target = M.target_compute_budget(
+            [(training(47), metadata(47)), (training(53), metadata(53))],
+            {47, 53},
+        )
+        reservoir = metadata(None)
+        reservoir["runtime"]["gpu"] = "Synthetic GPU, GPU-DIFFERENT, 999.0, 80000"
+        with self.assertRaisesRegex(ValueError, "reservoir hardware differs"):
+            M.validate_reservoir_hardware([reservoir], target)
 
     def test_reservoir_contract_is_fixed_outcome_blind_blocks(self) -> None:
         contract = self.config["evaluation"]["frozen_sample_more"]
@@ -182,7 +201,7 @@ class MatchedComputeTests(unittest.TestCase):
             target_refs = []
             targets = []
             for seed in (47, 53):
-                training_value = training(seed, tokens=3, wall=1.0)
+                training_value = training(seed, tokens=4, wall=1.0)
                 metadata_value = metadata(
                     seed, logical=1, sampled=1, load=1.0, generation=1.0
                 )
@@ -220,6 +239,7 @@ class MatchedComputeTests(unittest.TestCase):
                         "git_commit": "a" * 40,
                         "git_head_mode": "detached",
                         "cwd": "/synthetic",
+                        "gpu": "Synthetic GPU, GPU-0000, 999.0, 80000",
                     },
                     generation_stage={"stage_receipt_path": str(stage_path.resolve())},
                     input={"sha256": M.sha256_file(input_path)},

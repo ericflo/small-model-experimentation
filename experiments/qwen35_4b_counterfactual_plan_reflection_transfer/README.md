@@ -1,6 +1,6 @@
 # Qwen3.5-4B Counterfactual Plan Reflection Transfer
 
-**Status:** in-progress · since 2026-07-14 · Review 8 remediation and a fresh exact-commit review remain; model/GPU/training/evaluation are still on adversarial HOLD
+**Status:** in-progress · since 2026-07-14 · Review-8 blockers remediated model-free and pending fresh Review 9; model/GPU/training/evaluation remain on adversarial HOLD
 
 This experiment tests the paper's most actionable claim without relying on its
 consciousness framing: can supervision on what the model would say on a later
@@ -147,6 +147,9 @@ in progress:
 git fetch origin main
 git worktree add --detach /workspace/sme-reflection-exec <reviewed-authorization-sha>
 cd /workspace/sme-reflection-exec
+# Use the pinned environment from outside this immutable worktree. Every
+# artifact-producing command requires this absolute interpreter with -I -B.
+PYTHON=/workspace/small-model-experimentation/.venv-vllm/bin/python
 # Invoke only the stages enabled by that exact committed config, writing outputs
 # outside this worktree so it remains clean for the entire staged pipeline.
 ```
@@ -166,7 +169,8 @@ and both raw confirmation metadata files. Its CLI intentionally has no label or 
 argument:
 
 ```bash
-.venv-vllm/bin/python -B experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/run_frozen_reservoir.py \
+/workspace/small-model-experimentation/.venv-vllm/bin/python -I -B \
+  experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/run_frozen_reservoir.py \
   --input <confirmation-prompts> --input-receipt <confirmation-input-receipt> \
   --stage-receipt <confirmation-stage-receipt> \
   --training-receipt <seed-47-training-receipt> \
@@ -227,6 +231,20 @@ above. It also implements an outcome-blind, fixed-seed frozen reservoir with a
 dual-unit compute stop and a transitive two-seed final promotion gate. All work remains
 model-free and non-authorizing pending a fresh adversarial verdict.
 
+Review-8 remediation closes the six reproduced false-acceptance classes without a
+model or GPU event. Tokenizer loading now uses an exact five-file authenticated local
+surface and rejects both extra and missing semantic files. Linux inotify, read leases,
+and inode-surface receipts protect tokenizer/config/model engine load windows and
+reject a validate→swap→load→restore attack. Raw token arrays reconstruct every
+compute-controlling counter; numeric schemas reject booleans and non-finite values;
+training, confirmation, and reservoir receipts require one exact GPU identity; and
+gradient-checkpointed training is charged at four forward-token equivalents. All
+artifact-producing stages also reject ignored worktree state and bind an isolated,
+external, hashed interpreter and exact no-extras package inventory. The 86-test
+model-free suite and
+full CPU construction pass. These are implementation results only: authorization
+remains unchanged until an independent Review 9 attacks the exact pushed revision.
+
 ## Interpretation
 
 The paper unlocks a training hypothesis, not an already-demonstrated Qwen capability.
@@ -252,6 +270,7 @@ additional sampling. No scientific result exists yet.
 - `src/vllm_runner.py`
 - `src/matched_compute.py`
 - `src/runtime_contract.py`
+- `src/load_window_guard.py`
 - `src/tokenizer_lineage.py`
 - `scripts/run.py`
 - `scripts/tokenizer_receipt.py`

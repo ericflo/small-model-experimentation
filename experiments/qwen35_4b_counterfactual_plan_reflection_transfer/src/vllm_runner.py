@@ -71,7 +71,7 @@ if _PYTHON_BIN not in os.environ.get("PATH", "").split(os.pathsep):
 
 MODEL_ID = "Qwen/Qwen3.5-4B"
 MODEL_REVISION = "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
-RUNNER_SCHEMA_VERSION = 4
+RUNNER_SCHEMA_VERSION = 5
 
 _MAMBA_CACHE_BLOCKS_RE = re.compile(
     r"max_num_seqs\b.*?(?:exceeds?|greater\s+than|larger\s+than|more\s+than)"
@@ -205,28 +205,70 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
         "record_receipt_sha256", "parity_sha256",
         "adapter_tree_excluding_training_receipt_sha256",
         "worktree", "runtime", "base_snapshot", "tokenizer_snapshot", "compute",
+        "load_window_guards",
     }
     required_tokenizer_lineage = {
         "schema_version", "experiment_id", "config_sha256", "runner_sha256",
         "model_id", "model_revision", "tokenizer_class", "tokenizer_eos_token_id",
         "trust_remote_code", "tokenizer_snapshot", "worktree", "record_receipt",
         "parity", "rows", "rows_sha256", "model_calls", "gpu_events",
-        "benchmark_reads",
+        "benchmark_reads", "load_window_guard",
     }
     training_runtime = training_lineage.get("runtime")
-    if not isinstance(training_runtime, dict):
+    required_training_runtime = {
+        "schema_version",
+        "worktree",
+        "python",
+        "python_executable",
+        "python_executable_sha256",
+        "python_isolated",
+        "python_dont_write_bytecode",
+        "platform",
+        "packages",
+        "packages_sha256",
+        "environment_lock",
+        "gpu",
+        "cuda_toolkit",
+    }
+    if (
+        not isinstance(training_runtime, dict)
+        or set(training_runtime) != required_training_runtime
+        or type(training_runtime.get("schema_version")) is not int
+        or training_runtime["schema_version"] != 2
+        or not isinstance(training_runtime.get("gpu"), str)
+        or not training_runtime["gpu"]
+        or training_runtime.get("packages_sha256")
+        != _sha256_bytes(
+            json.dumps(
+                training_runtime.get("packages"),
+                sort_keys=True,
+                separators=(",", ":"),
+            ).encode()
+        )
+    ):
         raise ValueError("training receipt lacks exact runtime metadata")
-    from provenance import validate_runtime_packages
+    from provenance import validate_interpreter_runtime, validate_runtime_packages
 
     validate_runtime_packages(
         training_runtime,
         Path(__file__).resolve().parents[3] / "requirements-vllm.lock.txt",
     )
-    from merge_replay import base_snapshot_commitment
-    from tokenizer_lineage import authenticate_tokenizer_snapshot
+    validate_interpreter_runtime(
+        training_runtime,
+        Path(__file__).resolve().parents[3],
+    )
+    from merge_replay import authenticate_base_snapshot, base_snapshot_commitment
+    from tokenizer_lineage import (
+        authenticate_tokenizer_snapshot,
+        ensure_closed_tokenizer_view,
+    )
+    from load_window_guard import validate_load_window_receipt
 
-    exact_base = base_snapshot_commitment()
-    exact_tokenizer = authenticate_tokenizer_snapshot()
+    exact_base_root, _base_index, _base_structure = authenticate_base_snapshot()
+    exact_base = base_snapshot_commitment(exact_base_root)
+    exact_tokenizer_path, exact_tokenizer = ensure_closed_tokenizer_view()
+    if authenticate_tokenizer_snapshot() != exact_tokenizer:
+        raise ValueError("closed/source tokenizer commitments differ")
     exact_worktree = {
         "repo_root": _run_text(["git", "rev-parse", "--show-toplevel"]),
         "git_commit": _run_text(["git", "rev-parse", "HEAD"]),
@@ -242,17 +284,22 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
             "forward_backward_multiplier", "token_forward_equivalents",
             "model_load_seconds", "training_seconds", "gpu_phase_wall_seconds",
         }
+        and type(compute.get("schema_version")) is int
         and compute.get("schema_version") == 1
         and compute.get("amortization_horizon")
         == "full_training_charged_to_each_confirmation_split"
-        and isinstance(compute.get("forward_tokens"), int)
+        and type(compute.get("forward_tokens")) is int
         and compute["forward_tokens"] > 0
-        and compute.get("forward_backward_multiplier") == 3
-        and compute.get("token_forward_equivalents") == compute["forward_tokens"] * 3
-        and isinstance(compute.get("model_load_seconds"), (int, float))
+        and compute.get("forward_backward_multiplier") == 4
+        and compute.get("token_forward_equivalents") == compute["forward_tokens"] * 4
+        and type(compute.get("model_load_seconds")) in {int, float}
+        and math.isfinite(compute["model_load_seconds"])
         and compute["model_load_seconds"] > 0
-        and isinstance(compute.get("training_seconds"), (int, float))
+        and type(compute.get("training_seconds")) in {int, float}
+        and math.isfinite(compute["training_seconds"])
         and compute["training_seconds"] > 0
+        and type(compute.get("gpu_phase_wall_seconds")) in {int, float}
+        and math.isfinite(compute["gpu_phase_wall_seconds"])
         and compute.get("gpu_phase_wall_seconds")
         == compute["model_load_seconds"] + compute["training_seconds"]
     )
@@ -300,7 +347,7 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
         or training_lineage.get("experiment_id")
         != "qwen35_4b_counterfactual_plan_reflection_transfer"
         or set(training_lineage) != required_training_lineage
-        or training_lineage.get("schema_version") != 3
+        or training_lineage.get("schema_version") != 4
         or training_lineage.get("config_sha256") != receipt.get("config_sha256")
         or training_lineage.get("model_id") != MODEL_ID
         or training_lineage.get("model_revision") != MODEL_REVISION
@@ -342,13 +389,14 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
         or tokenizer_lineage.get("experiment_id")
         != "qwen35_4b_counterfactual_plan_reflection_transfer"
         or set(tokenizer_lineage) != required_tokenizer_lineage
-        or tokenizer_lineage.get("schema_version") != 2
+        or tokenizer_lineage.get("schema_version") != 3
         or tokenizer_lineage.get("config_sha256") != receipt.get("config_sha256")
         or tokenizer_lineage.get("runner_sha256")
         != _sha256_file(Path(__file__).resolve().parents[1] / "scripts" / "tokenizer_receipt.py")
         or tokenizer_lineage.get("model_id") != MODEL_ID
         or tokenizer_lineage.get("model_revision") != MODEL_REVISION
         or tokenizer_lineage.get("tokenizer_eos_token_id") != 248046
+        or tokenizer_lineage.get("tokenizer_class") != "Qwen2Tokenizer"
         or tokenizer_lineage.get("trust_remote_code") is not False
         or tokenizer_lineage.get("tokenizer_snapshot") != exact_tokenizer
         or tokenizer_lineage.get("worktree") != exact_worktree
@@ -372,6 +420,14 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
         != set(recipe["target_modules"])
     ):
         raise ValueError("merged model override receipt has invalid base or delta identity")
+    load_guards = training_lineage.get("load_window_guards")
+    if not isinstance(load_guards, dict) or set(load_guards) != {"tokenizer", "model"}:
+        raise ValueError("training lineage lacks exact tokenizer/model load guards")
+    validate_load_window_receipt(load_guards["tokenizer"], [exact_tokenizer_path])
+    validate_load_window_receipt(load_guards["model"], [exact_base_root])
+    validate_load_window_receipt(
+        tokenizer_lineage["load_window_guard"], [exact_tokenizer_path]
+    )
     from checkpoint_lineage import adapter_tensor_inventory, merged_checkpoint_inventory
 
     source_inventory = adapter_tensor_inventory(adapter_weights_lineage_path)
@@ -406,8 +462,9 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
             "tokenizer_receipt_sha256", "stage_receipt_sha256",
             "trainer_git_commit", "trainer_sha256", "worktree", "runtime",
             "base_snapshot", "tokenizer_snapshot",
+            "tokenizer_load_window_guard",
         }
-        or started.get("schema_version") != 2
+        or started.get("schema_version") != 3
         or started.get("arm") != receipt.get("source_arm")
         or started.get("seed") != receipt.get("source_seed")
         or started.get("config_sha256") != receipt.get("config_sha256")
@@ -420,6 +477,7 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
         or started.get("runtime") != training_runtime
         or started.get("base_snapshot") != exact_base
         or started.get("tokenizer_snapshot") != exact_tokenizer
+        or started.get("tokenizer_load_window_guard") != load_guards["tokenizer"]
     ):
         raise ValueError("retained source adapter start record differs from merge lineage")
     sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -454,6 +512,8 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
         "source_tokenizer_receipt_sha256": receipt.get("source_tokenizer_receipt_sha256"),
         "source_trainer_sha256": receipt.get("source_trainer_sha256"),
         "source_trainer_git_commit": receipt.get("source_trainer_git_commit"),
+        "source_runtime_sha256": receipt.get("source_runtime_sha256"),
+        "source_training_gpu": training_runtime["gpu"],
         "source_recipe_sha256": receipt.get("source_recipe_sha256"),
         "source_adapter_tree_sha256": receipt.get("source_adapter_tree_sha256"),
         "source_adapter_config_sha256": receipt.get("source_adapter_config_sha256"),
@@ -1174,11 +1234,26 @@ class VLLMRunner:
                         "CUDA-graph list; refusing ambiguous engine configuration"
                     )
         self.config = config
-        from merge_replay import base_snapshot_commitment
-        from tokenizer_lineage import authenticate_tokenizer_snapshot
+        from merge_replay import authenticate_base_snapshot, base_snapshot_commitment
+        from load_window_guard import LoadWindowGuard
+        from tokenizer_lineage import (
+            authenticate_closed_tokenizer_view,
+            authenticate_tokenizer_snapshot,
+            ensure_closed_tokenizer_view,
+        )
 
-        self.base_snapshot_commitment = base_snapshot_commitment()
-        self.tokenizer_snapshot_commitment = authenticate_tokenizer_snapshot()
+        (
+            self.base_snapshot_path,
+            _base_index,
+            _base_structure,
+        ) = authenticate_base_snapshot()
+        self.base_snapshot_commitment = base_snapshot_commitment(
+            self.base_snapshot_path
+        )
+        (
+            self.closed_tokenizer_path,
+            self.tokenizer_snapshot_commitment,
+        ) = ensure_closed_tokenizer_view()
         self.adapter_info = _validate_adapter(config.adapter)
         self.model_override_info = _validate_model_override(config.model_override)
         self._closed = False
@@ -1200,19 +1275,28 @@ class VLLMRunner:
 
         # Tokenize ourselves so the exact input IDs are auditable and do not
         # depend on vLLM's chat endpoint or reasoning parser.
-        from transformers import AutoConfig, AutoTokenizer
+        from transformers import AutoConfig, Qwen2Tokenizer
 
-        self.tokenizer = AutoTokenizer.from_pretrained(
-            MODEL_ID,
-            revision=MODEL_REVISION,
-            trust_remote_code=False,
-            use_fast=True,
-        )
-        model_config = AutoConfig.from_pretrained(
-            MODEL_ID, revision=MODEL_REVISION, trust_remote_code=False
-        )
+        with LoadWindowGuard(
+            [self.base_snapshot_path, self.closed_tokenizer_path]
+        ) as tokenizer_config_guard:
+            self.tokenizer = Qwen2Tokenizer.from_pretrained(
+                str(self.closed_tokenizer_path),
+                trust_remote_code=False,
+                local_files_only=True,
+            )
+            model_config = AutoConfig.from_pretrained(
+                str(self.base_snapshot_path),
+                trust_remote_code=False,
+                local_files_only=True,
+            )
+        tokenizer_config_guard_receipt = tokenizer_config_guard.receipt
+        if tokenizer_config_guard_receipt is None:
+            raise RuntimeError("tokenizer/config load-window guard emitted no receipt")
         if (
             authenticate_tokenizer_snapshot()
+            != self.tokenizer_snapshot_commitment
+            or authenticate_closed_tokenizer_view(self.closed_tokenizer_path)
             != self.tokenizer_snapshot_commitment
         ):
             raise RuntimeError("tokenizer files changed across runner tokenizer initialization")
@@ -1250,11 +1334,14 @@ class VLLMRunner:
             add_special_tokens=False,
         )
 
-        engine_model = str(config.model_override.resolve()) if config.model_override else MODEL_ID
+        engine_model = str(
+            config.model_override.resolve()
+            if config.model_override
+            else self.base_snapshot_path
+        )
         engine_args: dict[str, Any] = {
             "model": engine_model,
-            "tokenizer": MODEL_ID,
-            "tokenizer_revision": MODEL_REVISION,
+            "tokenizer": str(self.closed_tokenizer_path),
             "trust_remote_code": False,
             "dtype": "bfloat16",
             "tensor_parallel_size": 1,
@@ -1275,8 +1362,6 @@ class VLLMRunner:
             # cross-budget prefix-identical samples.
             "async_scheduling": False,
         }
-        if config.model_override is None:
-            engine_args["revision"] = MODEL_REVISION
         if config.cudagraph_capture_sizes is None:
             engine_args["max_cudagraph_capture_size"] = config.max_num_seqs
         else:
@@ -1296,9 +1381,18 @@ class VLLMRunner:
             from vllm import LLM
 
             started = time.perf_counter()
+            engine_load_roots = [
+                self.closed_tokenizer_path,
+                config.model_override.resolve()
+                if config.model_override is not None
+                else self.base_snapshot_path,
+            ]
+            engine_guard = LoadWindowGuard(engine_load_roots)
+            engine_guard.__enter__()
             try:
                 self.llm = LLM(**engine_args)
             except Exception as exc:
+                engine_guard.__exit__(*sys.exc_info())
                 available_blocks = _available_mamba_cache_blocks(exc)
                 if (
                     available_blocks is None
@@ -1382,12 +1476,17 @@ class VLLMRunner:
                 sys.stdout.flush()
                 sys.stderr.flush()
                 os.execv(sys.executable, [sys.executable] + rewritten_argv)
-            post_base = base_snapshot_commitment()
+            engine_guard_receipt = engine_guard.verify()
+            post_base = base_snapshot_commitment(self.base_snapshot_path)
             post_tokenizer = authenticate_tokenizer_snapshot()
+            post_closed_tokenizer = authenticate_closed_tokenizer_view(
+                self.closed_tokenizer_path
+            )
             post_override = _validate_model_override(config.model_override)
             if (
                 post_base != self.base_snapshot_commitment
                 or post_tokenizer != self.tokenizer_snapshot_commitment
+                or post_closed_tokenizer != self.tokenizer_snapshot_commitment
                 or post_override != self.model_override_info
             ):
                 try:
@@ -1400,7 +1499,11 @@ class VLLMRunner:
                 "base_snapshot": post_base,
                 "tokenizer_snapshot": post_tokenizer,
                 "model_override": post_override,
-                "decision": "POST_ENGINE_BYTES_MATCH_PRELOAD_COMMITMENTS",
+                "load_window_guards": {
+                    "tokenizer_and_config": tokenizer_config_guard_receipt,
+                    "engine": engine_guard_receipt,
+                },
+                "decision": "LOAD_WINDOWS_IMMUTABLE_AND_POSTLOAD_BYTES_MATCH",
             }
             self.load_seconds = time.perf_counter() - started
         finally:
@@ -1946,20 +2049,37 @@ class VLLMRunner:
     def runtime_metadata() -> dict[str, Any]:
         git_root = _run_text(["git", "rev-parse", "--show-toplevel"])
         git_commit = _run_text(["git", "rev-parse", "HEAD"]) if git_root else ""
-        git_status = _run_text(["git", "status", "--short"]) if git_root else ""
+        git_status = _run_text(
+            [
+                "git",
+                "status",
+                "--porcelain=v1",
+                "--untracked-files=all",
+                "--ignored=matching",
+            ]
+        ) if git_root else ""
         git_branch = _run_text(["git", "symbolic-ref", "-q", "HEAD"]) if git_root else ""
         gpu = _run_text(
             [
                 "nvidia-smi",
-                "--query-gpu=name,driver_version,memory.total",
+                "--query-gpu=name,uuid,driver_version,memory.total",
                 "--format=csv,noheader,nounits",
             ]
         )
         return {
+            "schema_version": 2,
             "python": platform.python_version(),
-            "python_executable": sys.executable,
+            "python_executable": str(Path(sys.executable).resolve()),
+            "python_executable_sha256": _sha256_file(Path(sys.executable).resolve()),
+            "python_isolated": sys.flags.isolated == 1,
+            "python_dont_write_bytecode": bool(sys.dont_write_bytecode),
             "platform": platform.platform(),
             "packages": dict(_INITIAL_PACKAGES),
+            "packages_sha256": _sha256_bytes(
+                json.dumps(
+                    dict(_INITIAL_PACKAGES), sort_keys=True, separators=(",", ":")
+                ).encode()
+            ),
             "environment_lock": _environment_lock_metadata(),
             "uv": _run_text(["uv", "--version"]),
             "cuda_toolkit": _run_text(["nvcc", "--version"]),

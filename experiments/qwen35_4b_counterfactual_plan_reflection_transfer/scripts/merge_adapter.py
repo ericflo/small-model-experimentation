@@ -27,10 +27,14 @@ from merge_replay import (  # noqa: E402
     verify_merge_equation,
 )
 from provenance import validate_runtime_packages  # noqa: E402
+from load_window_guard import validate_load_window_receipt  # noqa: E402
 from runtime_contract import require_detached_execution_worktree  # noqa: E402
 from stages import read_and_validate_stage_receipt  # noqa: E402
 from tensor_merge import write_tensor_level_merge  # noqa: E402
-from tokenizer_lineage import authenticate_tokenizer_snapshot  # noqa: E402
+from tokenizer_lineage import (  # noqa: E402
+    authenticate_tokenizer_snapshot,
+    ensure_closed_tokenizer_view,
+)
 
 install_benchmark_firewall(EXP.parents[1])
 
@@ -83,8 +87,9 @@ def main() -> int:
         "record_receipt_sha256", "parity_sha256",
         "adapter_tree_excluding_training_receipt_sha256",
         "worktree", "runtime", "base_snapshot", "tokenizer_snapshot", "compute",
+        "load_window_guards",
     }
-    if set(source_receipt) != required_training_receipt or source_receipt["schema_version"] != 3:
+    if set(source_receipt) != required_training_receipt or source_receipt["schema_version"] != 4:
         raise ValueError("training receipt schema changed")
     observed_adapter_tree = _sha256_tree(
         args.adapter, excluded={"training_receipt.json"}
@@ -98,8 +103,11 @@ def main() -> int:
     current_commit = worktree["git_commit"]
     lock_path = EXP.parents[1] / "requirements-vllm.lock.txt"
     validate_runtime_packages(source_receipt["runtime"], lock_path)
-    base_snapshot = base_snapshot_commitment()
-    tokenizer_snapshot = authenticate_tokenizer_snapshot()
+    base_root, base_index, _base_structure = authenticate_base_snapshot()
+    base_snapshot = base_snapshot_commitment(base_root)
+    tokenizer_path, tokenizer_snapshot = ensure_closed_tokenizer_view()
+    if authenticate_tokenizer_snapshot() != tokenizer_snapshot:
+        raise ValueError("closed/source tokenizer commitments differ during merge")
     recipe = config["training"]["recipe"]
     allowed_arms = set(config["training"]["arms"])
     allowed_seeds = set(config["training"]["staged_seeds"].values())
@@ -123,6 +131,11 @@ def main() -> int:
         ).hexdigest()
     ):
         raise ValueError("training receipt differs from frozen experiment lineage")
+    guards = source_receipt.get("load_window_guards")
+    if not isinstance(guards, dict) or set(guards) != {"tokenizer", "model"}:
+        raise ValueError("training receipt lacks both exact load-window guards")
+    validate_load_window_receipt(guards["tokenizer"], [tokenizer_path])
+    validate_load_window_receipt(guards["model"], [base_root])
     positive_arm = config["training"]["positive_control"]["arm"]
     if (
         source_receipt["arm"] == positive_arm
@@ -145,11 +158,11 @@ def main() -> int:
         "model_id", "model_revision", "tokenizer_class", "tokenizer_eos_token_id",
         "trust_remote_code", "tokenizer_snapshot", "worktree", "record_receipt",
         "parity", "rows", "rows_sha256", "model_calls", "gpu_events",
-        "benchmark_reads",
+        "benchmark_reads", "load_window_guard",
     }
     if (
         set(tokenizer_receipt) != required_tokenizer_receipt
-        or tokenizer_receipt.get("schema_version") != 2
+        or tokenizer_receipt.get("schema_version") != 3
         or tokenizer_receipt.get("experiment_id") != config["experiment_id"]
         or tokenizer_receipt.get("config_sha256") != _sha256_file(config_path)
         or tokenizer_receipt.get("runner_sha256")
@@ -157,6 +170,7 @@ def main() -> int:
         or tokenizer_receipt.get("model_id") != config["model"]["id"]
         or tokenizer_receipt.get("model_revision") != config["model"]["revision"]
         or tokenizer_receipt.get("tokenizer_eos_token_id") != 248046
+        or tokenizer_receipt.get("tokenizer_class") != "Qwen2Tokenizer"
         or tokenizer_receipt.get("trust_remote_code") is not False
         or tokenizer_receipt.get("tokenizer_snapshot") != tokenizer_snapshot
         or tokenizer_receipt.get("worktree") != worktree
@@ -181,6 +195,9 @@ def main() -> int:
         != source_receipt["parity_sha256"]
     ):
         raise ValueError("copied tokenizer receipt identity changed")
+    validate_load_window_receipt(
+        tokenizer_receipt["load_window_guard"], [tokenizer_path]
+    )
     expected_stage = (
         "screen_training"
         if source_receipt["seed"] == config["training"]["staged_seeds"]["screen"]
@@ -225,7 +242,6 @@ def main() -> int:
     adapter_path = args.adapter / "adapter_model.safetensors"
     source_adapter_inventory = adapter_tensor_inventory(adapter_path)
     merge_contract = config["merge"]
-    base_root, base_index, _structure = authenticate_base_snapshot()
     tensor_merge = write_tensor_level_merge(
         base_root=base_root,
         base_index=base_index,

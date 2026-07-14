@@ -489,3 +489,36 @@ and explicit rejection/authentication of ignored executable state and interprete
 provisioning. Authorization remains tokenizer-only. Review 8 read no benchmarks,
 protected outputs, caches, qualification/confirmation contents, or tensor payloads and
 made zero tokenizer/model/GPU/training/evaluation/Jacobian calls.
+
+### Review 8 remediation implemented, pending Review 9
+
+- Tokenizer provenance is now a closed five-file local view: the source snapshot pins
+  hashes and sizes, explicitly requires the two optional semantic files to be absent,
+  rejects every extra entry, loads `Qwen2Tokenizer` locally with remote code disabled,
+  and enforces the exact tokenizer class in downstream receipts.
+- Tokenizer, config, Transformers model, and vLLM engine initialization now run inside
+  a Linux load-window guard combining inotify events, read leases, and exact inode/
+  namespace surfaces. The regression suite proves that an unchanged read succeeds and
+  a validate→rename→malicious-load→restore attack fails despite identical final
+  content hashes.
+- Training and generation use the same exact GPU identity tuple (name, UUID, driver,
+  and total memory). Both correct-confirmation seeds and every frozen reservoir block
+  must match the training hardware before wall-time evidence can enter the budget.
+- Every generation counter used by scoring or matched-compute replay is reconstructed
+  from raw stage, injected, final, and prompt token arrays. Exact schemas reject
+  booleans, non-integers, non-finite timing, incorrect forced-close accounting, and
+  self-consistent fabricated metadata.
+- The frozen gradient-checkpointed recipe is conservatively charged at four forward-
+  token equivalents: original forward, two backward-equivalent passes, and the
+  recomputed forward. The same multiplier is enforced in training, provenance,
+  target-budget construction, reservoir accounting, and tests.
+- Artifact-producing commands require an exact detached root CWD, isolated `-I`
+  execution, `-B`, an external hashed interpreter, an exact no-extras package
+  inventory matching the lock, and a Git status including ignored entries. Extra
+  distributions, ignored bytecode, and in-worktree interpreter fixtures now fail closed.
+
+The pinned-environment suite passes 86 model-free/synthetic tests, and the full
+authorized CPU construction still produces the frozen 576-task geometry with zero
+model calls, GPU events, or benchmark reads. Authorization remains tokenizer-only.
+A fresh Review 9 must attack the exact pushed implementation before any additional
+execution flag changes.

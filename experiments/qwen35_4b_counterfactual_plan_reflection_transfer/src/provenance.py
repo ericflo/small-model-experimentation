@@ -15,6 +15,7 @@ from packaging.requirements import Requirement
 from packaging.utils import canonicalize_name, parse_wheel_filename
 
 from eval_inputs import action_bundles, action_receipt, jsonl_payload, task_metadata
+from scoring import validate_generation_counters
 from vllm_runner import EngineConfig, SamplingConfig, _validate_model_override
 
 
@@ -121,14 +122,42 @@ def validate_runtime_packages(runtime: dict[str, Any], lock_path: Path) -> None:
     packages = runtime.get("packages")
     if not isinstance(packages, dict):
         raise ValueError("generation runtime lacks the installed-package inventory")
+    locked = _locked_versions(lock_path)
+    if set(packages) != set(locked):
+        missing = sorted(set(locked) - set(packages))[:5]
+        extra = sorted(set(packages) - set(locked))[:5]
+        raise ValueError(
+            "installed package surface differs from the exact vLLM lock: "
+            f"missing={missing}, extra={extra}"
+        )
     mismatches = {
         name: (version, packages.get(name))
-        for name, version in _locked_versions(lock_path).items()
+        for name, version in locked.items()
         if packages.get(name) != version
     }
     if mismatches:
         first = sorted(mismatches.items())[:5]
         raise ValueError(f"installed packages differ from vLLM lock: {first}")
+
+
+def validate_interpreter_runtime(runtime: dict[str, Any], repo_root: Path) -> None:
+    executable_value = runtime.get("python_executable")
+    if not isinstance(executable_value, str):
+        raise ValueError("runtime lacks an exact interpreter path")
+    executable = Path(executable_value)
+    repo_root = repo_root.resolve()
+    if (
+        not executable.is_absolute()
+        or not executable.is_file()
+        or executable.is_symlink()
+        or repo_root == executable.resolve()
+        or repo_root in executable.resolve().parents
+        or runtime.get("python_executable_sha256")
+        != hashlib.sha256(executable.read_bytes()).hexdigest()
+        or runtime.get("python_isolated") is not True
+        or runtime.get("python_dont_write_bytecode") is not True
+    ):
+        raise ValueError("runtime interpreter is mutable, unauthenticated, or non-isolated")
 
 
 def validate_generation_protocol(
@@ -146,12 +175,25 @@ def validate_generation_protocol(
 ) -> str:
     runner_path = experiment_root / "src" / "vllm_runner.py"
     generated_sha256 = hashlib.sha256(generated_path.read_bytes()).hexdigest()
+    if type(metadata.get("schema_version")) is not int or metadata["schema_version"] != 5:
+        raise ValueError("generation runner schema differs from the reviewed version")
     if metadata.get("output") != {
         "description": "generated JSONL",
         "sha256": generated_sha256,
         "rows": expected_rows,
     }:
         raise ValueError("generation output differs from exact runner metadata")
+    try:
+        generated_rows = [
+            json.loads(line)
+            for line in generated_path.read_text().splitlines()
+            if line.strip()
+        ]
+    except (UnicodeDecodeError, json.JSONDecodeError) as error:
+        raise ValueError("generated output is not valid UTF-8 JSONL") from error
+    if len(generated_rows) != expected_rows:
+        raise ValueError("generated output row count differs from protocol expectation")
+    validate_generation_counters(generated_rows, metadata)
     if (
         metadata.get("runner_sha256") != hashlib.sha256(runner_path.read_bytes()).hexdigest()
         or metadata.get("base_model") != config["model"]["id"]
@@ -163,29 +205,58 @@ def validate_generation_protocol(
         raise ValueError("generation base/merged model status differs from its arm")
     if metadata.get("adapter") is not None:
         raise ValueError("runtime LoRA adapter use is forbidden")
-    from merge_replay import base_snapshot_commitment
-    from tokenizer_lineage import authenticate_tokenizer_snapshot
+    from merge_replay import authenticate_base_snapshot, base_snapshot_commitment
+    from load_window_guard import validate_load_window_receipt
+    from tokenizer_lineage import (
+        authenticate_tokenizer_snapshot,
+        ensure_closed_tokenizer_view,
+    )
 
-    exact_base = base_snapshot_commitment()
-    exact_tokenizer = authenticate_tokenizer_snapshot()
+    exact_base_root, _base_index, _base_structure = authenticate_base_snapshot()
+    exact_base = base_snapshot_commitment(exact_base_root)
+    closed_tokenizer_path, exact_tokenizer = ensure_closed_tokenizer_view()
+    if authenticate_tokenizer_snapshot() != exact_tokenizer:
+        raise ValueError("closed/source tokenizer commitments differ")
     exact_override = _validate_model_override(
         None if model_override is None else Path(model_override["path"])
     )
+    override_path = None if model_override is None else Path(model_override["path"])
+    post_load = metadata.get("post_load_integrity")
     if (
         metadata.get("base_snapshot") != exact_base
         or metadata.get("tokenizer_snapshot") != exact_tokenizer
-        or metadata.get("post_load_integrity")
+        or not isinstance(post_load, dict)
+        or set(post_load)
         != {
-            "base_snapshot": exact_base,
-            "tokenizer_snapshot": exact_tokenizer,
-            "model_override": exact_override,
-            "decision": "POST_ENGINE_BYTES_MATCH_PRELOAD_COMMITMENTS",
+            "base_snapshot",
+            "tokenizer_snapshot",
+            "model_override",
+            "load_window_guards",
+            "decision",
         }
+        or post_load.get("base_snapshot") != exact_base
+        or post_load.get("tokenizer_snapshot") != exact_tokenizer
+        or post_load.get("model_override") != exact_override
+        or post_load.get("decision")
+        != "LOAD_WINDOWS_IMMUTABLE_AND_POSTLOAD_BYTES_MATCH"
     ):
         raise ValueError("generation model/tokenizer load commitments differ from exact bytes")
+    load_guards = post_load["load_window_guards"]
+    if not isinstance(load_guards, dict) or set(load_guards) != {
+        "tokenizer_and_config",
+        "engine",
+    }:
+        raise ValueError("generation lacks both load-window guard receipts")
+    validate_load_window_receipt(
+        load_guards["tokenizer_and_config"],
+        [exact_base_root, closed_tokenizer_path],
+    )
+    validate_load_window_receipt(
+        load_guards["engine"],
+        [closed_tokenizer_path, exact_base_root if override_path is None else override_path],
+    )
     evaluation = config["evaluation"]
     frozen_engine = evaluation["engine"]
-    override_path = None if model_override is None else Path(model_override["path"])
     expected_engine = canonical(
         EngineConfig(
             max_model_len=int(frozen_engine["max_model_len"]),
@@ -201,9 +272,8 @@ def validate_generation_protocol(
     if metadata.get("engine") != expected_engine:
         raise ValueError("generation engine dictionary differs from preregistration")
     expected_engine_args = {
-        "model": config["model"]["id"] if override_path is None else str(override_path),
-        "tokenizer": config["model"]["id"],
-        "tokenizer_revision": config["model"]["revision"],
+        "model": str(exact_base_root if override_path is None else override_path),
+        "tokenizer": str(closed_tokenizer_path),
         "trust_remote_code": False,
         "dtype": "bfloat16",
         "tensor_parallel_size": 1,
@@ -222,19 +292,53 @@ def validate_generation_protocol(
         "cudagraph_capture_sizes": list(frozen_engine["cudagraph_capture_sizes"]),
         "max_cudagraph_capture_size": max(frozen_engine["cudagraph_capture_sizes"]),
     }
-    if override_path is None:
-        expected_engine_args["revision"] = config["model"]["revision"]
     if metadata.get("engine_args") != expected_engine_args:
         raise ValueError("generation engine arguments differ from preregistration")
     runtime = metadata.get("runtime", {})
     repo_root = experiment_root.parents[1].resolve()
+    expected_runtime_keys = {
+        "schema_version",
+        "python",
+        "python_executable",
+        "python_executable_sha256",
+        "python_isolated",
+        "python_dont_write_bytecode",
+        "platform",
+        "packages",
+        "packages_sha256",
+        "environment_lock",
+        "uv",
+        "cuda_toolkit",
+        "gpu",
+        "vllm_enable_v1_multiprocessing",
+        "git_commit",
+        "git_dirty",
+        "git_root",
+        "cwd",
+        "git_head_mode",
+    }
     if (
-        runtime.get("git_dirty")
+        not isinstance(runtime, dict)
+        or set(runtime) != expected_runtime_keys
+        or type(runtime.get("schema_version")) is not int
+        or runtime["schema_version"] != 2
+        or runtime.get("git_dirty")
         or runtime.get("git_root") != str(repo_root)
         or runtime.get("cwd") != str(repo_root)
         or runtime.get("git_head_mode") != "detached"
+        or not isinstance(runtime.get("gpu"), str)
+        or not runtime["gpu"]
+        or runtime.get("python_isolated") is not True
+        or runtime.get("python_dont_write_bytecode") is not True
+        or not isinstance(runtime.get("python_executable"), str)
+        or not isinstance(runtime.get("python_executable_sha256"), str)
+        or len(runtime["python_executable_sha256"]) != 64
+        or runtime.get("packages_sha256") != canonical_sha256(runtime.get("packages"))
     ):
         raise ValueError("generation did not run from the clean detached execution worktree")
+    if exact_override is not None and runtime["gpu"] != exact_override["source_training_gpu"]:
+        raise ValueError("trained generation hardware differs from its training hardware")
+    validate_interpreter_runtime(runtime, repo_root)
     current_commit = subprocess.run(
         ["git", "rev-parse", "HEAD"], check=True, capture_output=True, text=True
     ).stdout.strip()

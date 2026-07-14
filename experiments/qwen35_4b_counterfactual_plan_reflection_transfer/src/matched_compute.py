@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 from pathlib import Path
 from statistics import mean
 from typing import Any
@@ -58,17 +59,22 @@ def validate_training_compute(receipt: dict[str, Any]) -> dict[str, Any]:
     if (
         not isinstance(compute, dict)
         or set(compute) != required
+        or type(compute.get("schema_version")) is not int
         or compute.get("schema_version") != 1
         or compute.get("amortization_horizon")
         != "full_training_charged_to_each_confirmation_split"
-        or not isinstance(compute.get("forward_tokens"), int)
+        or type(compute.get("forward_tokens")) is not int
         or compute["forward_tokens"] < 1
-        or compute.get("forward_backward_multiplier") != 3
-        or compute.get("token_forward_equivalents") != compute["forward_tokens"] * 3
-        or not isinstance(compute.get("model_load_seconds"), (int, float))
+        or compute.get("forward_backward_multiplier") != 4
+        or compute.get("token_forward_equivalents") != compute["forward_tokens"] * 4
+        or type(compute.get("model_load_seconds")) not in {int, float}
+        or not math.isfinite(compute["model_load_seconds"])
         or compute["model_load_seconds"] <= 0
-        or not isinstance(compute.get("training_seconds"), (int, float))
+        or type(compute.get("training_seconds")) not in {int, float}
+        or not math.isfinite(compute["training_seconds"])
         or compute["training_seconds"] <= 0
+        or type(compute.get("gpu_phase_wall_seconds")) not in {int, float}
+        or not math.isfinite(compute["gpu_phase_wall_seconds"])
         or compute.get("gpu_phase_wall_seconds")
         != compute["model_load_seconds"] + compute["training_seconds"]
     ):
@@ -86,13 +92,15 @@ def inference_compute(metadata: dict[str, Any]) -> dict[str, float | int]:
     load = timing.get("model_load_seconds")
     generation = timing.get("generation_seconds")
     if (
-        not isinstance(logical, int)
+        type(logical) is not int
         or logical < 1
-        or not isinstance(sampled, int)
+        or type(sampled) is not int
         or sampled < 1
-        or not isinstance(load, (int, float))
+        or type(load) not in {int, float}
+        or not math.isfinite(load)
         or load <= 0
-        or not isinstance(generation, (int, float))
+        or type(generation) not in {int, float}
+        or not math.isfinite(generation)
         or generation <= 0
     ):
         raise ValueError("generation compute fields are invalid")
@@ -111,6 +119,7 @@ def target_compute_budget(
     if len(targets) != len(expected_seeds):
         raise ValueError("matched-compute target cardinality changed")
     per_seed: dict[str, dict[str, float | int]] = {}
+    gpu_identities: set[str] = set()
     for receipt, metadata in targets:
         seed = int(receipt.get("seed", -1))
         if seed in {int(value) for value in per_seed} or seed not in expected_seeds:
@@ -120,6 +129,15 @@ def target_compute_budget(
         override = metadata.get("model_override")
         if not isinstance(override, dict) or override.get("source_seed") != seed:
             raise ValueError("trained confirmation metadata has the wrong source seed")
+        training_gpu = receipt.get("runtime", {}).get("gpu")
+        confirmation_gpu = metadata.get("runtime", {}).get("gpu")
+        if (
+            not isinstance(training_gpu, str)
+            or not training_gpu
+            or confirmation_gpu != training_gpu
+        ):
+            raise ValueError("training and confirmation hardware identities differ")
+        gpu_identities.add(training_gpu)
         training = validate_training_compute(receipt)
         inference = inference_compute(metadata)
         per_seed[str(seed)] = {
@@ -146,9 +164,12 @@ def target_compute_budget(
         }
     if set(map(int, per_seed)) != expected_seeds:
         raise ValueError("matched-compute target seeds changed")
+    if len(gpu_identities) != 1:
+        raise ValueError("matched-compute target seeds used different hardware identities")
     return {
         "schema_version": 1,
         "amortization_horizon": "full_training_charged_to_each_144_task_confirmation_split",
+        "gpu_identity": next(iter(gpu_identities)),
         "per_seed": per_seed,
         "required_token_forward_equivalents": max(
             int(value["total_token_forward_equivalents"])
@@ -159,6 +180,19 @@ def target_compute_budget(
             for value in per_seed.values()
         ),
     }
+
+
+def validate_reservoir_hardware(
+    metadata_values: list[dict[str, Any]], target_budget: dict[str, Any]
+) -> None:
+    expected = target_budget.get("gpu_identity")
+    if not isinstance(expected, str) or not expected:
+        raise ValueError("matched-compute target lacks an exact hardware identity")
+    if not metadata_values or any(
+        metadata.get("runtime", {}).get("gpu") != expected
+        for metadata in metadata_values
+    ):
+        raise ValueError("frozen reservoir hardware differs from trained target hardware")
 
 
 def cumulative_reservoir_compute(
@@ -367,6 +401,7 @@ def validate_reservoir_manifest(
         metadata_values.append(metadata)
     if len(runtime_protocols) != 1:
         raise ValueError("reservoir blocks do not share one runtime protocol")
+    validate_reservoir_hardware(metadata_values, target_budget)
     first_runtime = metadata_values[0].get("runtime", {})
     expected_worktree = {
         "repo_root": first_runtime.get("git_root"),

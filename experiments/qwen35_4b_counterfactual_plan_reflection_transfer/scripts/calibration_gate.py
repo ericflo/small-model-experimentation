@@ -17,11 +17,13 @@ sys.path.insert(0, str(EXP / "src"))
 
 from firewall import install_benchmark_firewall  # noqa: E402
 from gate_artifacts import build_calibration_artifact  # noqa: E402
+from runtime_contract import require_detached_execution_worktree  # noqa: E402
 
 install_benchmark_firewall(EXP.parents[1])
 
 
 def main() -> int:
+    require_detached_execution_worktree(EXP.parents[1])
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--scores", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)

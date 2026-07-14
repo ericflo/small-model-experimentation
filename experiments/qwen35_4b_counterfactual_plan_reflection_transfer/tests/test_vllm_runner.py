@@ -62,6 +62,21 @@ def _compilation_config(
     )
 
 
+class _FakeLoadWindowGuard:
+    def __init__(self, roots: object):
+        self.roots = roots
+        self.receipt = {"synthetic": "immutable-load-window"}
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type: object, exc: object, traceback: object) -> bool:
+        return False
+
+    def verify(self) -> dict[str, str]:
+        return self.receipt
+
+
 class EngineConfigCaptureGeometryTests(unittest.TestCase):
     @staticmethod
     def live_cache(num_blocks: int = 1100) -> dict:
@@ -999,7 +1014,7 @@ class ResolvedCudagraphTests(unittest.TestCase):
                 )
 
         fake_transformers = types.ModuleType("transformers")
-        fake_transformers.AutoTokenizer = FakeAutoTokenizer
+        fake_transformers.Qwen2Tokenizer = FakeAutoTokenizer
         fake_transformers.AutoConfig = FakeAutoConfig
         fake_vllm = types.ModuleType("vllm")
         fake_vllm.LLM = FakeLLM
@@ -1007,16 +1022,30 @@ class ResolvedCudagraphTests(unittest.TestCase):
             runner._MAMBA_CACHE_REEXEC_ENV: "19",
             runner._MAMBA_CACHE_REEXEC_CUDAGRAPH_ENV: json.dumps(requested),
         }
+        base_path = Path("/synthetic/base")
+        tokenizer_path = Path("/synthetic/tokenizer")
+        tokenizer_commitment = {"synthetic": "tokenizer"}
 
         with mock.patch.dict(os.environ, environment), mock.patch.dict(
             sys.modules,
             {"transformers": fake_transformers, "vllm": fake_vllm},
         ), mock.patch(
+            "merge_replay.authenticate_base_snapshot",
+            return_value=(base_path, {}, {}),
+        ), mock.patch(
             "merge_replay.base_snapshot_commitment",
             return_value={"synthetic": "base"},
         ), mock.patch(
             "tokenizer_lineage.authenticate_tokenizer_snapshot",
-            return_value={"synthetic": "tokenizer"},
+            return_value=tokenizer_commitment,
+        ), mock.patch(
+            "tokenizer_lineage.ensure_closed_tokenizer_view",
+            return_value=(tokenizer_path, tokenizer_commitment),
+        ), mock.patch(
+            "tokenizer_lineage.authenticate_closed_tokenizer_view",
+            return_value=tokenizer_commitment,
+        ), mock.patch(
+            "load_window_guard.LoadWindowGuard", _FakeLoadWindowGuard
         ):
             instance = runner.VLLMRunner(
                 runner.EngineConfig(
@@ -1107,19 +1136,33 @@ class ResolvedCudagraphTests(unittest.TestCase):
                 )
 
         fake_transformers = types.ModuleType("transformers")
-        fake_transformers.AutoTokenizer = FakeAutoTokenizer
+        fake_transformers.Qwen2Tokenizer = FakeAutoTokenizer
         fake_transformers.AutoConfig = FakeAutoConfig
         fake_vllm = types.ModuleType("vllm")
         fake_vllm.LLM = FakeLLM
+        base_path = Path("/synthetic/base")
+        tokenizer_path = Path("/synthetic/tokenizer")
+        tokenizer_commitment = {"synthetic": "tokenizer"}
         with mock.patch.dict(
             sys.modules,
             {"transformers": fake_transformers, "vllm": fake_vllm},
+        ), mock.patch(
+            "merge_replay.authenticate_base_snapshot",
+            return_value=(base_path, {}, {}),
         ), mock.patch(
             "merge_replay.base_snapshot_commitment",
             side_effect=[{"version": 1}, {"version": 2}],
         ), mock.patch(
             "tokenizer_lineage.authenticate_tokenizer_snapshot",
-            return_value={"synthetic": "tokenizer"},
+            return_value=tokenizer_commitment,
+        ), mock.patch(
+            "tokenizer_lineage.ensure_closed_tokenizer_view",
+            return_value=(tokenizer_path, tokenizer_commitment),
+        ), mock.patch(
+            "tokenizer_lineage.authenticate_closed_tokenizer_view",
+            return_value=tokenizer_commitment,
+        ), mock.patch(
+            "load_window_guard.LoadWindowGuard", _FakeLoadWindowGuard
         ), self.assertRaisesRegex(RuntimeError, "changed between validation"):
             runner.VLLMRunner(
                 runner.EngineConfig(

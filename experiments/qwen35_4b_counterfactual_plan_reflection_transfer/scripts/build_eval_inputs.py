@@ -17,6 +17,7 @@ EXP = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(EXP / "src"))
 
 from firewall import install_benchmark_firewall  # noqa: E402
+from runtime_contract import require_detached_execution_worktree  # noqa: E402
 
 install_benchmark_firewall(EXP.parents[1])
 
@@ -34,6 +35,7 @@ def _write_exclusive(path: Path, payload: bytes) -> None:
 
 
 def main() -> int:
+    require_detached_execution_worktree(EXP.parents[1])
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--split",

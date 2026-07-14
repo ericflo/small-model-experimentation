@@ -1,5 +1,24 @@
 # Counterfactual Plan Reflection Transfer Experiment Log
 
+## 2026-07-14 — Review-8 false-acceptance remediation
+
+- Closed tokenizer provenance to an exact authenticated five-file local surface and
+  explicit absent-file set; all tokenizer users load `Qwen2Tokenizer` locally with
+  remote code disabled and reject class or file-surface drift.
+- Added Linux inotify/read-lease/inode load-window guards around tokenizer, config,
+  Transformers model, and vLLM engine initialization. A swap-load-restore regression
+  now fails even when the final bytes match the original commitment.
+- Reconstruct all generation and compute counters from raw token arrays, reject
+  boolean/non-finite numeric values, require exact training/confirmation/reservoir GPU
+  identity, and charge checkpointed training at four forward-token equivalents.
+- Expanded the detached-worktree contract to include ignored state and an external,
+  hashed, isolated `-I -B` interpreter plus an exact no-extras package inventory. All
+  artifact-producing stages enforce the same boundary.
+- The complete pinned-environment suite passes 86 model-free/synthetic tests, and the
+  authorized full CPU construction remains unchanged at 576 unique depth-three tasks
+  with zero model, GPU, or benchmark events. Authorization remains tokenizer-only
+  pending independent Review 9 of the exact pushed revision.
+
 ## 2026-07-14 — Review-7 provenance and matched-compute remediation
 
 - Review 7 held the full implementation on seven reproduced blockers: contradictory
