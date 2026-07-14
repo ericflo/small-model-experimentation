@@ -1,0 +1,55 @@
+{
+  "authorization_files": {
+    "config": {
+      "path": "/workspace/small-model-experimentation/experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/configs/default.yaml",
+      "sha256": "6f3b065e471ed0f9b602816882993e98294d97527a539589a6f1bda08217a4d3"
+    },
+    "preoutcome": {
+      "path": "/workspace/small-model-experimentation/experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/runs/prepared/preoutcome_receipt.json",
+      "sha256": "180058c6beba980c2c4b3a9dbe3f583231163474d393526773aecca84e23a263"
+    },
+    "tokenizer_receipt": {
+      "path": "/workspace/small-model-experimentation/experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/runs/tokenizer/receipt.json",
+      "sha256": "ec0e14d6ef5e350d79e61ad2bf8db54cf80cf84eb00452296b8928c896b552c6"
+    }
+  },
+  "expected_rows": 48,
+  "implementation_lock_path": "/workspace/small-model-experimentation/experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/runs/calibration/implementation_lock.json",
+  "implementation_lock_sha256": "8b0bb9d90d3dc5a3baa5eaf5eb24518abd42e4b329de92e966b76b01746bd2b2",
+  "invocation": "no_think_program_slot_pairs",
+  "live_preflight_path": "/workspace/small-model-experimentation/experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/runs/calibration/live_preflight.json",
+  "live_preflight_sha256": "39d1449ebca7c3ae98699cdd24dc1c938957978f8aadbd9fc98dd115bad29cfa",
+  "model": "Qwen/Qwen3.5-4B",
+  "predecessor_complete_sha256": "164122bc4ea7ad405525e3805dc51cce70b383750aa5e91492c4dd605093ed9f",
+  "prepared_path": "/workspace/small-model-experimentation/experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/runs/prepared/calibration_requests.jsonl",
+  "prepared_sha256": "5ba7bdc2e50830cd57eda2e8eb655a1eba82d5259f5f66ad9a8a5a1f4cd7a011",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "runner_path": "/workspace/small-model-experimentation/experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/src/vllm_runner.py",
+  "runner_sha256": "4ce61e646357ef64351a0b3f3558b865ca2b27e87ddd29bd4c73d309cd514320",
+  "sampling": {
+    "allow_custom_prompts": false,
+    "answer_max_tokens": 24,
+    "answer_prefix": "PROGRAM:",
+    "force_answer_seam": false,
+    "frequency_penalty": 0.0,
+    "greedy": false,
+    "logprob_token_ids": [],
+    "logprobs": null,
+    "max_tokens": 24,
+    "min_p": 0.0,
+    "n": 1,
+    "paired_answer_seed": true,
+    "presence_penalty": 0.0,
+    "prompt_logprobs": null,
+    "repetition_penalty": 1.0,
+    "run_seed": 2026140701,
+    "shuffle_thinking": false,
+    "temperature": 0.6,
+    "thinking": "off",
+    "thinking_budget": null,
+    "top_k": 20,
+    "top_p": 0.95
+  },
+  "schema_version": 1,
+  "state": "STARTED"
+}

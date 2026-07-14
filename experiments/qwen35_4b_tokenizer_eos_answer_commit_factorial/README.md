@@ -1,6 +1,6 @@
 # Qwen3.5-4B Tokenizer-EOS Answer Commit Factorial
 
-**Status:** in-progress · since 2026-07-14 · adversarial `PASS_DESIGN`; fresh construction passes; exact-commit `PASS_IMPLEMENTATION`; machine receipt/lock publication pending; no model call
+**Status:** in-progress · since 2026-07-14 · `PASS_DESIGN` + exact-commit `PASS_IMPLEMENTATION`; fresh calibration: tokenizer-EOS-only interface qualified; conditional mechanics pending winner-bound lock
 
 This fresh successor tests whether the prior strict answer-seam failure was
 caused by waiting past Qwen3.5's tokenizer chat-end token. It registers the
@@ -184,22 +184,47 @@ read inventories were empty, and model/GPU calls remained zero. The PASS does
 not itself authorize generation; its canonical hash-bound receipt and the
 subsequent implementation lock must each be committed, pushed, and green.
 
+The independently committed receipt and implementation lock both passed their
+two required workflows. The sealed live calibration then completed 48 shared-
+thought requests plus 384 paired answer requests. All 192 boundary pairs and
+the five-invocation transaction chain authenticated. Results were:
+
+| Cell | Exact | Parse | Cap contacts | Arity-2 exact | Arity-3 exact |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| tokenizer EOS · no-think · `PROGRAM:` | 48/48 | 48/48 | 0 | 24/24 | 24/24 |
+| tokenizer EOS · no-think · freeform | 48/48 | 48/48 | 0 | 24/24 | 24/24 |
+| tokenizer EOS · think512 · `PROGRAM:` | 38/48 | 38/48 | 0 | 18/24 | 20/24 |
+| tokenizer EOS · think512 · freeform | 30/48 | 30/48 | 16 | 15/24 | 15/24 |
+| HF model EOS · no-think · `PROGRAM:` | 0/48 | 0/48 | 0 | 0/24 | 0/24 |
+| HF model EOS · no-think · freeform | 0/48 | 0/48 | 0 | 0/24 | 0/24 |
+| HF model EOS · think512 · `PROGRAM:` | 0/48 | 0/48 | 0 | 0/24 | 0/24 |
+| HF model EOS · think512 · freeform | 0/48 | 0/48 | 16 | 0/24 | 0/24 |
+
+The frozen decision is `TOKENIZER_EOS_ONLY_INTERFACE_QUALIFIED`; the winner is
+`tokenizer_eos_no_think_program_slot`, and its matched HF control is
+`hf_model_eos_no_think_program_slot`. This opens the preregistered conditional
+mechanics branch only after this calibration result and a second winner-bound
+lock are committed, pushed, and green.
+
 ## Interpretation
 
-The smoke proves that the proposed measurement is precise and falsifiable. It
-does not show that live vLLM emits the expected first-stop receipts on fresh
-rows, that a tokenizer-EOS arm qualifies, or that materialized residuals improve
-capability. The branch stops permanently if no fresh tokenizer-EOS interface
-qualifies.
+The fresh result isolates a real termination-boundary effect: with identical
+paired prompts/seeds and authenticated shared prefixes, stopping on tokenizer
+EOS yields 48/48 strict structured answers while waiting for HF model EOS yields
+0/48 because tokenizer EOS/newline remains pre-commit content. This is an
+interface qualification, not yet a capability gain. Thinking is actively worse
+at this interface (38/48 and 30/48, including 16 freeform cap contacts), so the
+frozen no-think `PROGRAM:` winner is the only branch that advances.
 
 Any conditional mechanics pass is scoped to a 24-task contamination-free
 large-effect pilot; it is not a confirmatory or general deployability claim.
 
 ## Knowledgebase Update
 
-- Program evidence updated: predecessor terminal result only.
-- Program backlog updated: this fresh successor is now active.
-- Claim ledger updated: no; no result.
+- Program evidence update pending the committed-green calibration artifact.
+- Program backlog: advance only the frozen no-think `PROGRAM:` winner.
+- Claim ledger: add a narrowly scoped tokenizer-EOS interface claim after the
+  result commit is published and synchronized to avoid claim-number collision.
 
 ## Artifacts
 
@@ -210,3 +235,6 @@ large-effect pilot; it is not a confirmatory or general deployability claim.
 - `reports/preregistration.md`
 - `reports/design_review.md`
 - `reports/artifact_manifest.yaml`
+- `runs/calibration/implementation_lock.json`
+- `runs/calibration/live_preflight.json`
+- `runs/calibration/decision.json`

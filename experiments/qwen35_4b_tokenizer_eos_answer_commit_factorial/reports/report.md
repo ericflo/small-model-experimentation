@@ -2,7 +2,12 @@
 
 ## Summary
 
-Model-free scaffold and answer-boundary smoke only. No model result exists.
+Fresh sealed calibration passed: the tokenizer-EOS no-think interface was
+48/48 exact and parseable in both prefix cells, while every matched HF-model-
+EOS control was 0/48. All 192 boundary pairs authenticated. The frozen decision
+is `TOKENIZER_EOS_ONLY_INTERFACE_QUALIFIED`, with
+`tokenizer_eos_no_think_program_slot` selected for the conditional mechanics
+stage. This establishes an interface effect, not yet a capability gain.
 
 ## Research Program Fit
 
@@ -19,11 +24,29 @@ tokenizer-EOS interface.
 
 ## Results
 
-The model-free synthetic smoke accepts the clean tokenizer-EOS trace and
-rejects the HF-boundary content mismatch, early/interior/missing stops, and
-extra pre-commit bytes. Its all-pair primitive accepts authenticated tokenizer-
-first, HF-first, and shared-cap traces and rejects prefix divergence and short
-length claims. Model calls: zero.
+The committed-green implementation receipt and lock authorized 48 shared-
+thought requests and 384 paired answer requests. The transaction chain contains
+432 sampled outputs across five invocations; all receipts, runner metadata,
+token costs, paired prefixes/seeds, thought-source rows, and terminal events
+authenticated.
+
+| Cell | Exact | Parse | Caps | Arity 2 exact | Arity 3 exact | Qualifies |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| tokenizer EOS · no-think · `PROGRAM:` | 48/48 | 48/48 | 0 | 24/24 | 24/24 | yes |
+| tokenizer EOS · no-think · freeform | 48/48 | 48/48 | 0 | 24/24 | 24/24 | yes |
+| tokenizer EOS · think512 · `PROGRAM:` | 38/48 | 38/48 | 0 | 18/24 | 20/24 | no |
+| tokenizer EOS · think512 · freeform | 30/48 | 30/48 | 16 | 15/24 | 15/24 | no |
+| HF EOS · no-think · `PROGRAM:` | 0/48 | 0/48 | 0 | 0/24 | 0/24 | no |
+| HF EOS · no-think · freeform | 0/48 | 0/48 | 0 | 0/24 | 0/24 | no |
+| HF EOS · think512 · `PROGRAM:` | 0/48 | 0/48 | 0 | 0/24 | 0/24 | no |
+| HF EOS · think512 · freeform | 0/48 | 0/48 | 16 | 0/24 | 0/24 | no |
+
+The winner is the first qualifying cell in the preregistered priority:
+`tokenizer_eos_no_think_program_slot`. Its matched control is
+`hf_model_eos_no_think_program_slot`. Calibration decision SHA-256 is
+`2195c3d15ad9ece124ad99244baf637076963e53fc2532f1131ea01226d11ee5`.
+No mechanics, hidden label, qualification, confirmation, or benchmark content
+was read.
 
 ## Controls
 
@@ -34,18 +57,24 @@ mechanics are preregistered.
 
 ## Oracle Versus Deployable Evidence
 
-No outcome exists. Calibration is an interface gate. Hidden mechanics and
-oracle ceilings remain sealed.
+The 48 known-answer rows are a calibration instrument, so 48/48 demonstrates
+a deployable strict answer boundary on this fresh substrate but not new task
+capability. Mechanics candidates, visible selection, hidden labels, and oracle
+ceilings remain sealed. Only a later winner-bound residual-mechanics result can
+support a capability claim.
 
 ## Interpretation
 
-Six independent review passes returned prospective holds; the seventh returned
-`PASS_DESIGN` for exact commit `abd2ffcd`. The contract now
-also freezes the dual-qualification invariant, distinct parse/cap metrics,
-calibration/transport balance, arm-blind selection and all-eight-row task
-success, resource-exhaustion terminal, and pilot-only claim scope. It awaits
-rereview at a new exact pushed commit and does not establish a live interface
-or capability gain.
+The fresh matched result supports the causal interface hypothesis. The paired
+arms generated the same answer-token prefix through the earliest stop, but the
+HF boundary retained tokenizer EOS plus newline as answer content and therefore
+failed strict grammar/exactness on all 48 rows. Tokenizer EOS commits exactly
+the intended alias sequence on all 48 rows in both no-think prefixes.
+
+Thinking does not magnify this interface. The structured think512 cell fell to
+38/48 and freeform to 30/48 with 16 cap contacts. This reinforces a practical
+lesson already visible elsewhere in the corpus: extra reasoning can damage a
+short exact-output channel even when it sometimes helps semantic reasoning.
 
 Third-pass review additionally required one canonical proposal type. Every
 two-operation suffix is now bound to its semantic candidate first operation,
@@ -63,9 +92,9 @@ to account for the at-most-two exact-cap overlaps.
 Sixth-pass global review aligned the intake and README summaries with that
 cap-bounded proof; no scientific or implementation result exists yet.
 
-The design pass authorizes fresh construction and implementation, not model
-execution. A separate adversarial implementation release review and committed-
-green lock remain mandatory.
+Seven implementation review rounds (five countable) ended in exact-commit
+`PASS_IMPLEMENTATION`; the machine receipt, implementation lock, and their
+required CI workflows all authenticated before model execution.
 
 Fresh model-free construction now passes. It produced 72 predecessor-disjoint
 tasks, all frozen calibration/transport/mechanics request inventories, balanced
@@ -75,10 +104,14 @@ ignored local key. Model calls and sampled outputs remain zero.
 
 ## Next Experiments
 
-Complete paired-boundary runner, transaction, tokenizer-grammar, selector,
-lock, and malformed-runner implementation; pass adversarial release review;
-then stop if calibration fails.
+Commit and publish this calibration result, then mint a second lock binding the
+winner `tokenizer_eos_no_think_program_slot`. Only after that lock is green,
+run the frozen conditional transport/mechanics sequence. The capability test
+must still beat all structured controls and taskwise sampled/logical-token
+matched-compute direct baselines; the interface result alone is not sufficient.
 
 ## Artifact Manifest
 
-All current artifacts are small and tracked; no external artifact exists.
+All calibration artifacts are small and tracked. The only external artifact is
+the pre-existing ignored AES-256 key required after the visible-selection
+publication boundary for hidden mechanics scoring.
