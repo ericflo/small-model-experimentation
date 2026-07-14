@@ -8,9 +8,10 @@ external_artifacts:
     size_bytes: 470960
     checksum: "sha256:ddaddd0f7af8a97802ab8f4cfde6c480ef60c94dc74a5c3577dd9db674432079"
     regenerate: >-
-      PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B
+      From a clean detached independently reviewed SHA, run
+      /workspace/small-model-experimentation/.venv/bin/python -I -B -S
       experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/tokenizer_receipt.py
-      --output large_artifacts/qwen35_4b_counterfactual_plan_reflection_transfer/tokenizer_receipt.json
+      --output /workspace/sme-reflection-artifacts/tokenizer_receipt.json
 omitted_artifacts:
   - path: large_artifacts/qwen35_4b_counterfactual_plan_reflection_transfer/
     reason: future adapters, checkpoints, and large activation/Jacobian arrays are gitignored

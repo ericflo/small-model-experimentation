@@ -47,7 +47,12 @@ class ScoringTests(unittest.TestCase):
             "forced_close": False,
             "truncated": False,
         }
-        generated = [{"id": "t1", "n_prompt_tokens": 5, "outputs": [output]}]
+        generated = [{
+            "id": "t1",
+            "prompt_token_ids": [1, 2, 3, 4, 5],
+            "n_prompt_tokens": 5,
+            "outputs": [output],
+        }]
         metadata = {
             "sampling": {"thinking": "off", "shuffle_thinking": False},
             "termination": {
@@ -135,6 +140,16 @@ class ScoringTests(unittest.TestCase):
         forged["counts"]["sampled_tokens"] = 1_000_000_000
         with self.assertRaisesRegex(ValueError, "raw token reconstruction"):
             S.validate_generation_counters(generated, forged)
+        forged_rows = copy.deepcopy(generated)
+        forged_rows[0]["n_prompt_tokens"] = 1_000_000_000
+        forged = copy.deepcopy(metadata)
+        forged["counts"].update(
+            unique_input_prompt_tokens=1_000_000_000,
+            stage1_logical_prompt_tokens=1_000_000_000,
+            logical_model_input_tokens=1_000_000_000,
+        )
+        with self.assertRaisesRegex(ValueError, "differs from raw token arrays"):
+            S.validate_generation_counters(forged_rows, forged)
 
     def test_counter_schema_rejects_booleans_and_nonfinite_timing(self) -> None:
         generated, metadata = self.ordinary_generation()
@@ -173,7 +188,12 @@ class ScoringTests(unittest.TestCase):
             "forced_close": True,
             "truncated": False,
         }
-        generated = [{"id": "t1", "n_prompt_tokens": 5, "outputs": [output]}]
+        generated = [{
+            "id": "t1",
+            "prompt_token_ids": [1, 2, 3, 4, 5],
+            "n_prompt_tokens": 5,
+            "outputs": [output],
+        }]
         _, metadata = self.ordinary_generation()
         metadata["sampling"]["thinking"] = "budget"
         metadata["counts"].update(

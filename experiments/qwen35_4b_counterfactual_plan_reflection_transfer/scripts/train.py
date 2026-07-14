@@ -12,6 +12,20 @@ import sys
 import time
 from pathlib import Path
 
+if sys.flags.no_site != 1:
+    raise SystemExit("training must start with the pinned interpreter and -I -B -S")
+
+EXP = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(EXP / "src"))
+
+from runtime_contract import (  # noqa: E402
+    bootstrap_runtime_environment,
+    require_detached_execution_worktree,
+    runtime_metadata,
+)
+
+bootstrap_runtime_environment(EXP.parents[1], "training")
+
 import torch
 import yaml
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
@@ -23,10 +37,6 @@ from transformers import (
     Trainer,
     TrainingArguments,
 )
-
-
-EXP = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(EXP / "src"))
 
 from firewall import install_benchmark_firewall  # noqa: E402
 
@@ -43,10 +53,6 @@ from stages import read_and_validate_stage_receipt  # noqa: E402
 from merge_replay import authenticate_base_snapshot, base_snapshot_commitment  # noqa: E402
 from load_window_guard import LoadWindowGuard, validate_load_window_receipt  # noqa: E402
 from provenance import validate_runtime_packages  # noqa: E402
-from runtime_contract import (  # noqa: E402
-    require_detached_execution_worktree,
-    runtime_metadata,
-)
 from tokenizer_lineage import (  # noqa: E402
     authenticate_closed_tokenizer_view,
     authenticate_tokenizer_snapshot,
@@ -168,9 +174,11 @@ def main() -> int:
         raise SystemExit(f"output already exists: {args.output}")
     worktree = require_detached_execution_worktree(EXP.parents[1])
     trainer_git_commit = worktree["git_commit"]
-    lock_path = EXP.parents[1] / "requirements-vllm.lock.txt"
+    lock_path = EXP.parents[1] / "requirements-training.lock.txt"
     training_runtime = runtime_metadata(EXP.parents[1], lock_path)
-    validate_runtime_packages(training_runtime, lock_path)
+    validate_runtime_packages(
+        training_runtime, lock_path, required_backend="training"
+    )
     base_root, _base_index, _base_structure = authenticate_base_snapshot()
     base_snapshot = base_snapshot_commitment(base_root)
     tokenizer_path, tokenizer_snapshot = ensure_closed_tokenizer_view()
@@ -189,11 +197,23 @@ def main() -> int:
         per_family_per_step=int(schedule["per_family_per_optimizer_group"]),
     )
     model_config = config["model"]
-    with LoadWindowGuard([tokenizer_path]) as tokenizer_guard:
+    expected_tokenizer_content = {"tokenizer": tokenizer_snapshot}
+    with LoadWindowGuard(
+        [tokenizer_path], expected_content=expected_tokenizer_content
+    ) as tokenizer_guard:
+        before_tokenizer_content = {
+            "tokenizer": authenticate_closed_tokenizer_view(tokenizer_path)
+        }
         tokenizer = Qwen2Tokenizer.from_pretrained(
             str(tokenizer_path),
             trust_remote_code=False,
             local_files_only=True,
+        )
+        after_tokenizer_content = {
+            "tokenizer": authenticate_closed_tokenizer_view(tokenizer_path)
+        }
+        tokenizer_guard.bind_authenticated_content(
+            before_tokenizer_content, after_tokenizer_content
         )
     tokenizer_load_guard = tokenizer_guard.receipt
     if tokenizer_load_guard is None:
@@ -252,7 +272,7 @@ def main() -> int:
     }
     if (
         set(expected_tokenizer_receipt) != tokenizer_receipt_keys
-        or expected_tokenizer_receipt.get("schema_version") != 3
+        or expected_tokenizer_receipt.get("schema_version") != 4
         or expected_tokenizer_receipt.get("experiment_id") != config["experiment_id"]
         or expected_tokenizer_receipt.get("config_sha256") != _sha256_file(config_path)
         or expected_tokenizer_receipt.get("runner_sha256")
@@ -271,7 +291,9 @@ def main() -> int:
     ):
         raise ValueError("tokenizer receipt identity is invalid")
     validate_load_window_receipt(
-        expected_tokenizer_receipt["load_window_guard"], [tokenizer_path]
+        expected_tokenizer_receipt["load_window_guard"],
+        [tokenizer_path],
+        expected_content=expected_tokenizer_content,
     )
     if expected_tokenizer_receipt["parity"] != parity:
         raise ValueError("live token/mask parity differs from the prerequisite receipt")
@@ -292,7 +314,7 @@ def main() -> int:
     (args.output / "STARTED.json").write_text(
         json.dumps(
             {
-                "schema_version": 3,
+                "schema_version": 4,
                 "arm": args.arm,
                 "seed": args.seed,
                 "config_sha256": _sha256_file(config_path),
@@ -320,7 +342,11 @@ def main() -> int:
         bnb_4bit_compute_dtype=torch.bfloat16,
     )
     load_started = time.perf_counter()
-    with LoadWindowGuard([base_root]) as model_guard:
+    expected_model_content = {"base": base_snapshot}
+    with LoadWindowGuard(
+        [base_root], expected_content=expected_model_content
+    ) as model_guard:
+        before_model_content = {"base": base_snapshot_commitment(base_root)}
         model = AutoModelForCausalLM.from_pretrained(
             str(base_root),
             local_files_only=True,
@@ -329,6 +355,10 @@ def main() -> int:
             dtype=torch.bfloat16,
             quantization_config=quantization,
             attn_implementation="sdpa",
+        )
+        after_model_content = {"base": base_snapshot_commitment(base_root)}
+        model_guard.bind_authenticated_content(
+            before_model_content, after_model_content
         )
     model_load_guard = model_guard.receipt
     if model_load_guard is None:
@@ -393,7 +423,7 @@ def main() -> int:
     epochs = int(recipe["epochs"])
     forward_tokens = sum(len(row["input_ids"]) for row in encoded[args.arm]) * epochs
     training_receipt = {
-        "schema_version": 4,
+        "schema_version": 5,
         "experiment_id": config["experiment_id"],
         "arm": args.arm,
         "seed": args.seed,
@@ -429,6 +459,7 @@ def main() -> int:
         "compute": {
             "schema_version": 1,
             "amortization_horizon": "full_training_charged_to_each_confirmation_split",
+            "epochs": epochs,
             "forward_tokens": forward_tokens,
             # Conservative checkpoint-aware charge: one original forward,
             # two backward-equivalent passes, and one recomputed forward.

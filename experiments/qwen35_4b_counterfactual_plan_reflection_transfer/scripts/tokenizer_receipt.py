@@ -10,15 +10,23 @@ import os
 import sys
 from pathlib import Path
 
-import yaml
-from transformers import Qwen2Tokenizer
-
+if sys.flags.no_site != 1:
+    raise SystemExit("tokenizer receipt must start with the pinned interpreter and -I -B -S")
 
 EXP = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(EXP / "src"))
 
+from runtime_contract import (  # noqa: E402
+    bootstrap_runtime_environment,
+    require_detached_execution_worktree,
+)
+
+bootstrap_runtime_environment(EXP.parents[1], "training")
+
+import yaml
+from transformers import Qwen2Tokenizer
+
 from firewall import install_benchmark_firewall  # noqa: E402
-from runtime_contract import require_detached_execution_worktree  # noqa: E402
 from load_window_guard import LoadWindowGuard  # noqa: E402
 from tokenizer_lineage import (  # noqa: E402
     authenticate_closed_tokenizer_view,
@@ -79,11 +87,23 @@ def main() -> int:
     tokenizer_path, tokenizer_snapshot = ensure_closed_tokenizer_view(
         ensure_downloaded=True
     )
-    with LoadWindowGuard([tokenizer_path]) as load_guard:
+    expected_load_content = {"tokenizer": tokenizer_snapshot}
+    with LoadWindowGuard(
+        [tokenizer_path], expected_content=expected_load_content
+    ) as load_guard:
+        before_load_content = {
+            "tokenizer": authenticate_closed_tokenizer_view(tokenizer_path)
+        }
         tokenizer = Qwen2Tokenizer.from_pretrained(
             str(tokenizer_path),
             trust_remote_code=False,
             local_files_only=True,
+        )
+        after_load_content = {
+            "tokenizer": authenticate_closed_tokenizer_view(tokenizer_path)
+        }
+        load_guard.bind_authenticated_content(
+            before_load_content, after_load_content
         )
     tokenizer_load_guard = load_guard.receipt
     if tokenizer_load_guard is None:
@@ -130,7 +150,7 @@ def main() -> int:
         for arm in TRAINING_ARMS
     }
     receipt = {
-        "schema_version": 3,
+        "schema_version": 4,
         "experiment_id": config["experiment_id"],
         "config_sha256": hashlib.sha256(config_path.read_bytes()).hexdigest(),
         "runner_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),

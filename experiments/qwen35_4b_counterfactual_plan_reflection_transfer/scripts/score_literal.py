@@ -10,11 +10,20 @@ import os
 import sys
 from pathlib import Path
 
-import yaml
-
+if sys.flags.no_site != 1:
+    raise SystemExit("stage must start with the pinned interpreter and -I -B -S")
 
 EXP = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(EXP / "src"))
+
+from runtime_contract import (  # noqa: E402
+    bootstrap_runtime_environment,
+    require_detached_execution_worktree,
+)
+
+bootstrap_runtime_environment(EXP.parents[1], "training")
+
+import yaml
 
 from firewall import install_benchmark_firewall  # noqa: E402
 from eval_inputs import (  # noqa: E402
@@ -28,7 +37,6 @@ from provenance import (  # noqa: E402
     validate_sampling,
 )
 from scoring import score_literal_reflection_diagnostic  # noqa: E402
-from runtime_contract import require_detached_execution_worktree  # noqa: E402
 from vllm_runner import SamplingConfig  # noqa: E402
 
 install_benchmark_firewall(EXP.parents[1])

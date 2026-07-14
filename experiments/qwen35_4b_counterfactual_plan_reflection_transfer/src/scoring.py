@@ -114,7 +114,11 @@ def validate_generation_counters(
         if row["id"] in seen_ids:
             raise ValueError("generation rows contain duplicate IDs")
         seen_ids.add(row["id"])
-        prompt_tokens = _exact_int(row.get("n_prompt_tokens"), "n_prompt_tokens", minimum=1)
+        prompt_ids = _token_ids(row.get("prompt_token_ids"), "prompt_token_ids")
+        if not prompt_ids:
+            raise ValueError("prompt_token_ids must not be empty")
+        prompt_tokens = len(prompt_ids)
+        _require_counter(row, "n_prompt_tokens", prompt_tokens)
         outputs = row.get("outputs")
         if not isinstance(outputs, list) or not outputs:
             raise ValueError("generation row has no outputs")

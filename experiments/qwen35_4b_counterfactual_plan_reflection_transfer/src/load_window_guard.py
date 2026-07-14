@@ -113,11 +113,23 @@ def _files_and_watch_directories(roots: Iterable[Path]) -> tuple[list[Path], lis
     return sorted(files, key=str), sorted(directories, key=str)
 
 
+def _content_hashes(value: dict[str, Any]) -> dict[str, str]:
+    if not isinstance(value, dict) or not value or any(
+        not isinstance(key, str) or not key for key in value
+    ):
+        raise ValueError("load-window content commitments must be a non-empty mapping")
+    return {key: _canonical_sha256(item) for key, item in sorted(value.items())}
+
+
 class LoadWindowGuard:
     """Hold read leases and detect any transient namespace/content mutation."""
 
-    def __init__(self, roots: Iterable[Path]):
+    def __init__(
+        self, roots: Iterable[Path], *, expected_content: dict[str, Any]
+    ):
         self.roots = tuple(sorted({Path(root).resolve() for root in roots}, key=str))
+        self._expected_content = _content_hashes(expected_content)
+        self._authenticated_content: dict[str, str] | None = None
         self._before: list[dict[str, Any]] | None = None
         self._inotify_fd: int | None = None
         self._lease_fds: list[int] = []
@@ -172,6 +184,22 @@ class LoadWindowGuard:
             raise
         return self
 
+    def bind_authenticated_content(
+        self, before_load: dict[str, Any], after_load: dict[str, Any]
+    ) -> None:
+        """Bind two in-guard content authentications to the pinned expectation."""
+        if self._before is None or self._closed:
+            raise RuntimeError("load-window guard is not active")
+        if self._authenticated_content is not None:
+            raise RuntimeError("load-window content can be authenticated only once")
+        before = _content_hashes(before_load)
+        after = _content_hashes(after_load)
+        if before != self._expected_content or after != self._expected_content:
+            raise RuntimeError(
+                "authenticated content differs before/after load or from expectation"
+            )
+        self._authenticated_content = before
+
     def _event_bytes(self) -> bytes:
         if self._inotify_fd is None:
             return b""
@@ -189,12 +217,16 @@ class LoadWindowGuard:
     def verify(self) -> dict[str, Any]:
         if self._before is None or self._closed:
             raise RuntimeError("load-window guard is not active")
+        if self._authenticated_content is None:
+            self._close()
+            raise RuntimeError("load-window content was not authenticated while guarded")
         events = self._event_bytes()
         after = root_commitments(self.roots)
         receipt = {
-            "schema_version": 1,
+            "schema_version": 2,
             "method": "linux_inotify_plus_read_leases_plus_inode_surface",
             "roots": self._before,
+            "authenticated_content_sha256": self._authenticated_content,
             "protected_files": len(self._lease_fds),
             "watched_directories": self._watch_count,
             "inotify_event_bytes": len(events),
@@ -234,9 +266,13 @@ class LoadWindowGuard:
 
 
 def validate_load_window_receipt(
-    receipt: Any, roots: Iterable[Path]
+    receipt: Any,
+    roots: Iterable[Path],
+    *,
+    expected_content: dict[str, Any],
 ) -> None:
     expected_roots = root_commitments(roots)
+    expected_content_hashes = _content_hashes(expected_content)
     if (
         not isinstance(receipt, dict)
         or set(receipt)
@@ -244,6 +280,7 @@ def validate_load_window_receipt(
             "schema_version",
             "method",
             "roots",
+            "authenticated_content_sha256",
             "protected_files",
             "watched_directories",
             "inotify_event_bytes",
@@ -251,10 +288,11 @@ def validate_load_window_receipt(
             "decision",
         }
         or type(receipt.get("schema_version")) is not int
-        or receipt.get("schema_version") != 1
+        or receipt.get("schema_version") != 2
         or receipt.get("method")
         != "linux_inotify_plus_read_leases_plus_inode_surface"
         or receipt.get("roots") != expected_roots
+        or receipt.get("authenticated_content_sha256") != expected_content_hashes
         or type(receipt.get("protected_files")) is not int
         or receipt["protected_files"] < 1
         or type(receipt.get("watched_directories")) is not int

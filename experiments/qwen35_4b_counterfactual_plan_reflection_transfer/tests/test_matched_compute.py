@@ -16,14 +16,34 @@ sys.path.insert(0, str(EXP / "src"))
 import matched_compute as M  # noqa: E402
 
 
+def gpu(uuid: str = "GPU-0000") -> dict:
+    return {
+        "cuda_visible_devices": uuid,
+        "physical_index": 0,
+        "name": "Synthetic GPU",
+        "uuid": uuid,
+        "driver_version": "999.0",
+        "memory_total_mib": 80000,
+    }
+
+
 def training(seed: int, *, tokens: int = 300, wall: float = 30.0) -> dict:
+    if tokens % 12:
+        raise ValueError("synthetic training token equivalents must be divisible by 12")
+    parity = {
+        "totals": {
+            "reflection_correct": {"forward_tokens": tokens // 12}
+        }
+    }
     return {
         "arm": "reflection_correct",
         "seed": seed,
-        "runtime": {"gpu": "Synthetic GPU, GPU-0000, 999.0, 80000"},
+        "parity_sha256": M.canonical_sha256(parity),
+        "runtime": {"gpu": gpu()},
         "compute": {
             "schema_version": 1,
             "amortization_horizon": "full_training_charged_to_each_confirmation_split",
+            "epochs": 3,
             "forward_tokens": tokens // 4,
             "forward_backward_multiplier": 4,
             "token_forward_equivalents": tokens,
@@ -32,6 +52,25 @@ def training(seed: int, *, tokens: int = 300, wall: float = 30.0) -> dict:
             "gpu_phase_wall_seconds": wall,
         },
     }
+
+
+def tokenizer_receipt(receipt: dict) -> dict:
+    return {
+        "parity": {
+            "totals": {
+                receipt["arm"]: {
+                    "forward_tokens": receipt["compute"]["forward_tokens"] // 3
+                }
+            }
+        }
+    }
+
+
+def target_pair(
+    seed: int, *, tokens: int = 300, wall: float = 30.0
+) -> tuple[dict, dict, dict]:
+    receipt = training(seed, tokens=tokens, wall=wall)
+    return receipt, tokenizer_receipt(receipt), metadata(seed)
 
 
 def metadata(
@@ -44,7 +83,7 @@ def metadata(
 ) -> dict:
     return {
         "model_override": None if seed is None else {"source_seed": seed},
-        "runtime": {"gpu": "Synthetic GPU, GPU-0000, 999.0, 80000"},
+        "runtime": {"gpu": gpu()},
         "counts": {
             "logical_model_input_tokens": logical,
             "sampled_tokens": sampled,
@@ -64,13 +103,13 @@ class MatchedComputeTests(unittest.TestCase):
     def test_target_charges_full_training_to_each_seed_then_takes_max(self) -> None:
         target = M.target_compute_budget(
             [
-                (training(47, tokens=400, wall=30), metadata(47)),
-                (training(53, tokens=800, wall=60), metadata(53)),
+                target_pair(47, tokens=480, wall=30),
+                target_pair(53, tokens=840, wall=60),
             ],
             {47, 53},
         )
-        self.assertEqual(target["per_seed"]["47"]["total_token_forward_equivalents"], 550)
-        self.assertEqual(target["required_token_forward_equivalents"], 950)
+        self.assertEqual(target["per_seed"]["47"]["total_token_forward_equivalents"], 630)
+        self.assertEqual(target["required_token_forward_equivalents"], 990)
         self.assertEqual(target["required_gpu_phase_wall_seconds"], 90.0)
 
     def test_both_token_and_wall_units_are_required_for_compute_stop(self) -> None:
@@ -102,27 +141,36 @@ class MatchedComputeTests(unittest.TestCase):
         forged = training(47)
         forged["compute"]["token_forward_equivalents"] += 1
         with self.assertRaisesRegex(ValueError, "invalid matched-compute"):
-            M.validate_training_compute(forged)
+            M.validate_training_compute(forged, tokenizer_receipt(training(47)))
+        forged = training(47)
+        source_tokenizer = tokenizer_receipt(forged)
+        forged["compute"]["forward_tokens"] = 1_000_000_000
+        forged["compute"]["token_forward_equivalents"] = 4_000_000_000
+        with self.assertRaisesRegex(ValueError, "invalid matched-compute"):
+            M.validate_training_compute(forged, source_tokenizer)
         with self.assertRaisesRegex(ValueError, "both unique seeds"):
             M.target_compute_budget(
-                [(training(47), metadata(47)), (training(47), metadata(47))],
+                [target_pair(47), target_pair(47)],
                 {47, 53},
             )
 
     def test_cross_hardware_target_and_reservoir_are_rejected(self) -> None:
         changed_confirmation = metadata(47)
-        changed_confirmation["runtime"]["gpu"] = "Synthetic GPU, GPU-DIFFERENT, 999.0, 80000"
+        changed_confirmation["runtime"]["gpu"] = gpu("GPU-DIFFERENT")
         with self.assertRaisesRegex(ValueError, "hardware identities differ"):
             M.target_compute_budget(
-                [(training(47), changed_confirmation), (training(53), metadata(53))],
+                [
+                    (training(47), tokenizer_receipt(training(47)), changed_confirmation),
+                    target_pair(53),
+                ],
                 {47, 53},
             )
         target = M.target_compute_budget(
-            [(training(47), metadata(47)), (training(53), metadata(53))],
+            [target_pair(47), target_pair(53)],
             {47, 53},
         )
         reservoir = metadata(None)
-        reservoir["runtime"]["gpu"] = "Synthetic GPU, GPU-DIFFERENT, 999.0, 80000"
+        reservoir["runtime"]["gpu"] = gpu("GPU-DIFFERENT")
         with self.assertRaisesRegex(ValueError, "reservoir hardware differs"):
             M.validate_reservoir_hardware([reservoir], target)
 
@@ -201,21 +249,31 @@ class MatchedComputeTests(unittest.TestCase):
             target_refs = []
             targets = []
             for seed in (47, 53):
-                training_value = training(seed, tokens=4, wall=1.0)
+                training_value = training(seed, tokens=12, wall=1.0)
+                tokenizer_value = tokenizer_receipt(training_value)
                 metadata_value = metadata(
                     seed, logical=1, sampled=1, load=1.0, generation=1.0
                 )
-                training_path = write(f"training-{seed}.json", training_value)
+                adapter_root = root / f"adapter-{seed}"
+                adapter_root.mkdir()
+                tokenizer_path = adapter_root / "source_tokenizer_receipt.json"
+                tokenizer_path.write_text(json.dumps(tokenizer_value, sort_keys=True) + "\n")
+                tokenizer_sha256 = M.sha256_file(tokenizer_path)
+                training_value["tokenizer_receipt_sha256"] = tokenizer_sha256
+                training_value["copied_tokenizer_receipt_sha256"] = tokenizer_sha256
+                training_path = adapter_root / "training_receipt.json"
+                training_path.write_text(json.dumps(training_value, sort_keys=True) + "\n")
                 metadata_path = write(f"correct-{seed}.json", metadata_value)
                 target_paths[seed] = (training_path, metadata_path)
                 target_refs.append(
                     {
                         "seed": seed,
                         "training_receipt": M.artifact_ref(training_path),
+                        "source_tokenizer_receipt": M.artifact_ref(tokenizer_path),
                         "correct_confirmation_metadata": M.artifact_ref(metadata_path),
                     }
                 )
-                targets.append((training_value, metadata_value))
+                targets.append((training_value, tokenizer_value, metadata_value))
             contract = self.config["evaluation"]["frozen_sample_more"]
             blocks = []
             block_metadata = []
@@ -231,7 +289,7 @@ class MatchedComputeTests(unittest.TestCase):
                     },
                 )
                 metadata_value = metadata(
-                    None, logical=2, sampled=1, load=1.0, generation=1.0
+                    None, logical=6, sampled=1, load=1.0, generation=1.0
                 )
                 metadata_value.update(
                     runtime={
@@ -239,7 +297,7 @@ class MatchedComputeTests(unittest.TestCase):
                         "git_commit": "a" * 40,
                         "git_head_mode": "detached",
                         "cwd": "/synthetic",
-                        "gpu": "Synthetic GPU, GPU-0000, 999.0, 80000",
+                        "gpu": gpu(),
                     },
                     generation_stage={"stage_receipt_path": str(stage_path.resolve())},
                     input={"sha256": M.sha256_file(input_path)},

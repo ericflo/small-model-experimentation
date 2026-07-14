@@ -63,8 +63,9 @@ def _compilation_config(
 
 
 class _FakeLoadWindowGuard:
-    def __init__(self, roots: object):
+    def __init__(self, roots: object, *, expected_content: object):
         self.roots = roots
+        self.expected_content = expected_content
         self.receipt = {"synthetic": "immutable-load-window"}
 
     def __enter__(self):
@@ -75,6 +76,10 @@ class _FakeLoadWindowGuard:
 
     def verify(self) -> dict[str, str]:
         return self.receipt
+
+    def bind_authenticated_content(self, before_load: object, after_load: object) -> None:
+        if before_load != self.expected_content or after_load != self.expected_content:
+            raise RuntimeError("synthetic content commitment changed")
 
 
 class EngineConfigCaptureGeometryTests(unittest.TestCase):
@@ -1151,7 +1156,13 @@ class ResolvedCudagraphTests(unittest.TestCase):
             return_value=(base_path, {}, {}),
         ), mock.patch(
             "merge_replay.base_snapshot_commitment",
-            side_effect=[{"version": 1}, {"version": 2}],
+            side_effect=[
+                {"version": 1},
+                {"version": 1},
+                {"version": 1},
+                {"version": 1},
+                {"version": 2},
+            ],
         ), mock.patch(
             "tokenizer_lineage.authenticate_tokenizer_snapshot",
             return_value=tokenizer_commitment,
@@ -1163,7 +1174,7 @@ class ResolvedCudagraphTests(unittest.TestCase):
             return_value=tokenizer_commitment,
         ), mock.patch(
             "load_window_guard.LoadWindowGuard", _FakeLoadWindowGuard
-        ), self.assertRaisesRegex(RuntimeError, "changed between validation"):
+        ), self.assertRaisesRegex(RuntimeError, "synthetic content commitment changed"):
             runner.VLLMRunner(
                 runner.EngineConfig(
                     max_model_len=4096,

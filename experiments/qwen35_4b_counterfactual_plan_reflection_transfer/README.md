@@ -1,6 +1,6 @@
 # Qwen3.5-4B Counterfactual Plan Reflection Transfer
 
-**Status:** in-progress · since 2026-07-14 · Review 9 HOLD: five reproduced provenance/compute/runtime blockers are under model-free remediation; model/GPU/training/evaluation remain unauthorized
+**Status:** in-progress · since 2026-07-14 · Review 9 blockers are remediated model-free and await independent Review 10; model/GPU/training/evaluation remain unauthorized
 
 This experiment tests the paper's most actionable claim without relying on its
 consciousness framing: can supervision on what the model would say on a later
@@ -147,9 +147,12 @@ in progress:
 git fetch origin main
 git worktree add --detach /workspace/sme-reflection-exec <reviewed-authorization-sha>
 cd /workspace/sme-reflection-exec
-# Use the pinned environment from outside this immutable worktree. Every
-# artifact-producing command requires this absolute interpreter with -I -B.
-PYTHON=/workspace/small-model-experimentation/.venv-vllm/bin/python
+# Use the stage-specific pinned environments from outside this immutable
+# worktree. Every artifact-producing command requires -I -B -S.
+TRAINING_PYTHON=/workspace/small-model-experimentation/.venv/bin/python
+VLLM_PYTHON=/workspace/small-model-experimentation/.venv-vllm/bin/python
+# Every GPU stage must select exactly one physical UUID, never an index.
+export CUDA_VISIBLE_DEVICES=GPU-<exact-uuid-from-nvidia-smi>
 # Invoke only the stages enabled by that exact committed config, writing outputs
 # outside this worktree so it remains clean for the entire staged pipeline.
 ```
@@ -169,7 +172,7 @@ and both raw confirmation metadata files. Its CLI intentionally has no label or 
 argument:
 
 ```bash
-/workspace/small-model-experimentation/.venv-vllm/bin/python -I -B \
+/workspace/small-model-experimentation/.venv-vllm/bin/python -I -B -S \
   experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/run_frozen_reservoir.py \
   --input <confirmation-prompts> --input-receipt <confirmation-input-receipt> \
   --stage-receipt <confirmation-stage-receipt> \
@@ -248,6 +251,22 @@ reconstruction, external environment closure, documented training environment, a
 selected-GPU identity. Authorization remains unchanged while those findings are
 remediated.
 
+Review-9 remediation now keeps content authentication before and after every
+tokenizer/model load inside the active inotify/read-lease guard and binds those exact
+content commitments into its receipt. Generation rows persist raw prompt token IDs;
+scoring reconstructs prompt spend from those arrays; and training forward tokens must
+equal the copied tokenizer-parity total times the fixed three epochs before the
+checkpoint multiplier is applied. Artifact stages start under `-I -B -S`, authenticate
+the exact stage-specific interpreter, lock, startup-file set, RECORD claims, and full
+site-packages file surface before third-party imports, and use the training environment
+for Transformers/PEFT/bitsandbytes versus the separate vLLM environment for generation.
+GPU receipts now bind exactly one `CUDA_VISIBLE_DEVICES=GPU-...` selector to its
+physical UUID row. Receipt schemas were bumped so historical artifacts fail closed.
+The resulting 90-test suite and both real environment-authentication passes are green;
+no tokenizer, model, GPU, training, evaluation, Jacobian, or benchmark event occurred.
+These are implementation results only. Authorization stays unchanged until a fresh
+independent Review 10 audits the exact pushed revision.
+
 ## Interpretation
 
 The paper unlocks a training hypothesis, not an already-demonstrated Qwen capability.
@@ -273,6 +292,7 @@ additional sampling. No scientific result exists yet.
 - `src/vllm_runner.py`
 - `src/matched_compute.py`
 - `src/runtime_contract.py`
+- `configs/pinned_runtime_environments.json`
 - `src/load_window_guard.py`
 - `src/tokenizer_lineage.py`
 - `scripts/run.py`

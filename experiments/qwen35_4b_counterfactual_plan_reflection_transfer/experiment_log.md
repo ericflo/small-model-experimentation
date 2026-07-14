@@ -1,5 +1,31 @@
 # Counterfactual Plan Reflection Transfer Experiment Log
 
+## 2026-07-14 — Review-9 remediation, pending Review 10
+
+- Moved both pre-load and post-load content authentication inside every active
+  tokenizer/model load-window guard and bound the authenticated commitment into the
+  replayable guard receipt. Metadata-preserving pre-guard substitution and
+  swap/read/restore attacks now fail closed.
+- Persisted raw prompt token IDs and reconstruct prompt spend from them. Training
+  compute now replays the exact copied tokenizer-parity forward-token total for the
+  arm, multiplies it by the fixed three epochs, and only then charges the preregistered
+  checkpoint-aware factor of four. A self-consistent billion-token forgery is rejected
+  on both generation and training paths.
+- Split artifact execution across the actual pinned training and vLLM interpreters.
+  Both start with `-I -B -S`; before any third-party import they authenticate the
+  interpreter, stage lock, exact startup-file set, every RECORD claim, and the complete
+  importable site-packages file surface. The real training surface has 79
+  distributions/28,222 files; vLLM has 189/68,353. One overlapping vLLM RECORD path is
+  explicitly counted while the selected final byte surface remains exact and pinned.
+- Bound every GPU-stage receipt to a single physical `CUDA_VISIBLE_DEVICES=GPU-...`
+  selector and the matching UUID/name/driver/memory row, then requires exact identity
+  across training, confirmation, and the frozen reservoir.
+- Bumped generation, tokenizer, training, STARTED, merge, runtime, and load-guard
+  receipt schemas so all historical evidence fails closed. Syntax and all 90
+  model-free/synthetic tests pass; both real environment surfaces authenticate. No
+  tokenizer, model, GPU, training, evaluation, Jacobian, or benchmark event occurred.
+  Authorization remains unchanged pending independent Review 10 of the pushed SHA.
+
 ## 2026-07-14 — Review-9 HOLD
 
 - Independent Review 9 on exact clean commit `73bef40429ccc85ba9b6ddaf7e00629a5fb29c26`

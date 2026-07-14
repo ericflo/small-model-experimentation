@@ -10,7 +10,12 @@ from statistics import mean
 from typing import Any
 
 from analyze import paired_bootstrap_interval
-from provenance import validate_action_inputs, validate_generation_protocol, validate_sampling
+from provenance import (
+    validate_action_inputs,
+    validate_generation_protocol,
+    validate_gpu_identity,
+    validate_sampling,
+)
 from score_artifacts import validate_score_artifact
 from scoring import score_generation_rows
 from vllm_runner import SamplingConfig
@@ -49,13 +54,22 @@ def read_jsonl(path: Path) -> list[dict[str, Any]]:
     return [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
 
 
-def validate_training_compute(receipt: dict[str, Any]) -> dict[str, Any]:
+def validate_training_compute(
+    receipt: dict[str, Any], tokenizer_receipt: dict[str, Any]
+) -> dict[str, Any]:
     compute = receipt.get("compute")
     required = {
         "schema_version", "amortization_horizon", "forward_tokens",
         "forward_backward_multiplier", "token_forward_equivalents",
-        "model_load_seconds", "training_seconds", "gpu_phase_wall_seconds",
+        "epochs", "model_load_seconds", "training_seconds", "gpu_phase_wall_seconds",
     }
+    parity = tokenizer_receipt.get("parity")
+    arm = receipt.get("arm")
+    totals = parity.get("totals") if isinstance(parity, dict) else None
+    arm_totals = totals.get(arm) if isinstance(totals, dict) else None
+    sealed_per_epoch = (
+        arm_totals.get("forward_tokens") if isinstance(arm_totals, dict) else None
+    )
     if (
         not isinstance(compute, dict)
         or set(compute) != required
@@ -63,8 +77,14 @@ def validate_training_compute(receipt: dict[str, Any]) -> dict[str, Any]:
         or compute.get("schema_version") != 1
         or compute.get("amortization_horizon")
         != "full_training_charged_to_each_confirmation_split"
+        or type(compute.get("epochs")) is not int
+        or compute["epochs"] != 3
         or type(compute.get("forward_tokens")) is not int
         or compute["forward_tokens"] < 1
+        or type(sealed_per_epoch) is not int
+        or sealed_per_epoch < 1
+        or compute["forward_tokens"] != sealed_per_epoch * compute["epochs"]
+        or receipt.get("parity_sha256") != canonical_sha256(parity)
         or compute.get("forward_backward_multiplier") != 4
         or compute.get("token_forward_equivalents") != compute["forward_tokens"] * 4
         or type(compute.get("model_load_seconds")) not in {int, float}
@@ -113,14 +133,14 @@ def inference_compute(metadata: dict[str, Any]) -> dict[str, float | int]:
 
 
 def target_compute_budget(
-    targets: list[tuple[dict[str, Any], dict[str, Any]]],
+    targets: list[tuple[dict[str, Any], dict[str, Any], dict[str, Any]]],
     expected_seeds: set[int],
 ) -> dict[str, Any]:
     if len(targets) != len(expected_seeds):
         raise ValueError("matched-compute target cardinality changed")
     per_seed: dict[str, dict[str, float | int]] = {}
-    gpu_identities: set[str] = set()
-    for receipt, metadata in targets:
+    gpu_identities: dict[str, dict[str, Any]] = {}
+    for receipt, tokenizer_receipt, metadata in targets:
         seed = int(receipt.get("seed", -1))
         if seed in {int(value) for value in per_seed} or seed not in expected_seeds:
             raise ValueError("matched-compute targets do not contain both unique seeds")
@@ -131,14 +151,12 @@ def target_compute_budget(
             raise ValueError("trained confirmation metadata has the wrong source seed")
         training_gpu = receipt.get("runtime", {}).get("gpu")
         confirmation_gpu = metadata.get("runtime", {}).get("gpu")
-        if (
-            not isinstance(training_gpu, str)
-            or not training_gpu
-            or confirmation_gpu != training_gpu
-        ):
+        training_gpu = validate_gpu_identity(training_gpu)
+        confirmation_gpu = validate_gpu_identity(confirmation_gpu)
+        if confirmation_gpu != training_gpu:
             raise ValueError("training and confirmation hardware identities differ")
-        gpu_identities.add(training_gpu)
-        training = validate_training_compute(receipt)
+        gpu_identities[canonical_sha256(training_gpu)] = training_gpu
+        training = validate_training_compute(receipt, tokenizer_receipt)
         inference = inference_compute(metadata)
         per_seed[str(seed)] = {
             "training_token_forward_equivalents": int(
@@ -169,7 +187,7 @@ def target_compute_budget(
     return {
         "schema_version": 1,
         "amortization_horizon": "full_training_charged_to_each_144_task_confirmation_split",
-        "gpu_identity": next(iter(gpu_identities)),
+        "gpu_identity": next(iter(gpu_identities.values())),
         "per_seed": per_seed,
         "required_token_forward_equivalents": max(
             int(value["total_token_forward_equivalents"])
@@ -186,8 +204,7 @@ def validate_reservoir_hardware(
     metadata_values: list[dict[str, Any]], target_budget: dict[str, Any]
 ) -> None:
     expected = target_budget.get("gpu_identity")
-    if not isinstance(expected, str) or not expected:
-        raise ValueError("matched-compute target lacks an exact hardware identity")
+    validate_gpu_identity(expected)
     if not metadata_values or any(
         metadata.get("runtime", {}).get("gpu") != expected
         for metadata in metadata_values
@@ -307,11 +324,12 @@ def validate_reservoir_manifest(
     target_refs = observed["targets"]
     if not isinstance(target_refs, list) or len(target_refs) != len(expected_targets):
         raise ValueError("reservoir target reference cardinality changed")
-    targets: list[tuple[dict[str, Any], dict[str, Any]]] = []
+    targets: list[tuple[dict[str, Any], dict[str, Any], dict[str, Any]]] = []
     seen_seeds: set[int] = set()
     for value in target_refs:
         if not isinstance(value, dict) or set(value) != {
-            "seed", "training_receipt", "correct_confirmation_metadata"
+            "seed", "training_receipt", "source_tokenizer_receipt",
+            "correct_confirmation_metadata"
         }:
             raise ValueError("reservoir target reference schema changed")
         seed = int(value["seed"])
@@ -319,6 +337,9 @@ def validate_reservoir_manifest(
             raise ValueError("reservoir target seed changed")
         seen_seeds.add(seed)
         training_path = path_from_ref(value["training_receipt"], "training receipt")
+        tokenizer_path = path_from_ref(
+            value["source_tokenizer_receipt"], "source tokenizer receipt"
+        )
         metadata_path = path_from_ref(
             value["correct_confirmation_metadata"], "correct confirmation metadata"
         )
@@ -327,7 +348,23 @@ def validate_reservoir_manifest(
             or metadata_path.resolve() != expected_targets[seed][1].resolve()
         ):
             raise ValueError("reservoir target does not bind exact confirmation evidence")
-        targets.append((json.loads(training_path.read_text()), json.loads(metadata_path.read_text())))
+        training_receipt = json.loads(training_path.read_text())
+        if (
+            tokenizer_path.resolve()
+            != (training_path.parent / "source_tokenizer_receipt.json").resolve()
+            or sha256_file(tokenizer_path)
+            != training_receipt.get("tokenizer_receipt_sha256")
+            or sha256_file(tokenizer_path)
+            != training_receipt.get("copied_tokenizer_receipt_sha256")
+        ):
+            raise ValueError("reservoir target lacks exact tokenizer parity evidence")
+        targets.append(
+            (
+                training_receipt,
+                json.loads(tokenizer_path.read_text()),
+                json.loads(metadata_path.read_text()),
+            )
+        )
     target_budget = target_compute_budget(targets, set(expected_targets))
     if observed["target_budget"] != target_budget:
         raise ValueError("reservoir target budget differs from exact receipts")

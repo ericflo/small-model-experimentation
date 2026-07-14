@@ -1,6 +1,9 @@
 from __future__ import annotations
 
 import json
+import os
+import base64
+import hashlib
 import subprocess
 import sys
 import tempfile
@@ -27,6 +30,7 @@ def _require(root: Path, *, executable: Path | None = None) -> dict[str, str]:
 
     class IsolatedFlags:
         isolated = 1
+        no_site = 1
 
         def __getattr__(self, name: str):
             return getattr(original_flags, name)
@@ -42,6 +46,114 @@ def _require(root: Path, *, executable: Path | None = None) -> dict[str, str]:
 
 
 class RuntimeContractTests(unittest.TestCase):
+    def test_site_package_record_bytes_are_authenticated_before_import(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            site = Path(temporary)
+            module = site / "demo.py"
+            module.write_text("VALUE = 1\n")
+            info = site / "demo-1.0.dist-info"
+            info.mkdir()
+            metadata = info / "METADATA"
+            metadata.write_text("Name: demo\nVersion: 1.0\n")
+
+            def record_line(path: Path) -> str:
+                digest = hashlib.sha256(path.read_bytes()).digest()
+                encoded = base64.urlsafe_b64encode(digest).rstrip(b"=").decode()
+                return f"{path.relative_to(site).as_posix()},sha256={encoded},{path.stat().st_size}"
+
+            record = info / "RECORD"
+            record.write_text(
+                "\n".join(
+                    [
+                        record_line(module),
+                        record_line(metadata),
+                        "demo-1.0.dist-info/RECORD,,",
+                    ]
+                )
+                + "\n"
+            )
+            surface = hashlib.sha256()
+            surface.update(
+                (
+                    "demo\0"
+                    "1.0\0"
+                    f"{hashlib.sha256(record.read_bytes()).hexdigest()}\n"
+                ).encode()
+            )
+            site_surface = hashlib.sha256()
+            for path in sorted((module, metadata, record)):
+                relative = path.relative_to(site).as_posix()
+                site_surface.update(
+                    f"{relative}\0{hashlib.sha256(path.read_bytes()).hexdigest()}\0"
+                    f"{path.stat().st_size}\n".encode()
+                )
+            receipt = R.authenticate_site_packages(
+                site, {"demo": "1.0"}, surface.hexdigest(), site_surface.hexdigest()
+            )
+            self.assertEqual(receipt["record_claims"], 2)
+            self.assertEqual(receipt["verified_files"], 2)
+            self.assertEqual(receipt["superseded_record_claims"], 0)
+            self.assertEqual(receipt["site_files"], 3)
+            module.write_text("VALUE = 2\n")
+            with self.assertRaisesRegex(ValueError, "differs from every RECORD"):
+                R.authenticate_site_packages(
+                    site,
+                    {"demo": "1.0"},
+                    surface.hexdigest(),
+                    site_surface.hexdigest(),
+                )
+            module.write_text("VALUE = 1\n")
+            (site / "shadow_module.py").write_text("VALUE = 'injected'\n")
+            with self.assertRaisesRegex(ValueError, "complete site-packages"):
+                R.authenticate_site_packages(
+                    site,
+                    {"demo": "1.0"},
+                    surface.hexdigest(),
+                    site_surface.hexdigest(),
+                )
+
+    def test_no_site_mode_keeps_pth_startup_code_inert(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            marker = root / "executed"
+            (root / "injected.pth").write_text(
+                f"import pathlib; pathlib.Path({str(marker)!r}).write_text('bad')\n"
+            )
+            code = (
+                "import sys; "
+                f"sys.path.append({str(root)!r}); "
+                f"print(int(__import__('pathlib').Path({str(marker)!r}).exists()))"
+            )
+            result = subprocess.run(
+                [sys.executable, "-I", "-B", "-S", "-c", code],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(result.stdout.strip(), "0")
+            self.assertFalse(marker.exists())
+
+    def test_selected_gpu_requires_one_exact_uuid_not_host_inventory(self) -> None:
+        inventory = subprocess.CompletedProcess(
+            args=[],
+            returncode=0,
+            stdout=(
+                "0, GPU A, GPU-AAAA, 999.0, 80000\n"
+                "1, GPU B, GPU-BBBB, 999.0, 40000\n"
+            ),
+            stderr="",
+        )
+        with mock.patch.object(R, "_run", return_value=inventory), mock.patch.dict(
+            os.environ, {"CUDA_VISIBLE_DEVICES": "GPU-BBBB"}, clear=False
+        ):
+            identity = R.selected_gpu_identity(Path("/synthetic"))
+        self.assertEqual(identity["uuid"], "GPU-BBBB")
+        self.assertEqual(identity["physical_index"], 1)
+        with mock.patch.object(R, "_run", return_value=inventory), mock.patch.dict(
+            os.environ, {"CUDA_VISIBLE_DEVICES": "0"}, clear=False
+        ), self.assertRaisesRegex(ValueError, "physical GPU UUID"):
+            R.selected_gpu_identity(Path("/synthetic"))
+
     def test_execution_requires_clean_detached_root_cwd(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary) / "repo"

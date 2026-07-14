@@ -567,3 +567,40 @@ explicit stage-specific training and vLLM locks/interpreters; and actual selecte
 UUID binding. Authorization remains tokenizer-only. Review 9 read no benchmarks,
 protected outputs, caches, qualification/confirmation contents, or weight payloads
 and made zero tokenizer/model/GPU/training/evaluation/Jacobian calls.
+
+### Review 9 remediation implemented, pending Review 10
+
+All five findings now have fail-closed implementations and regressions:
+
+1. `LoadWindowGuard` takes a pinned content expectation. Tokenizer/base/merged-model
+   authentication runs immediately before and after each load while inotify watches
+   and read leases are still held; the receipt binds both authentications. A
+   metadata-preserving substitution already present at guard entry fails before the
+   load, and a transient swap/read/restore fails during it.
+2. Every generated row carries the exact raw prompt-token array, and compute counters
+   are reconstructed from raw prompt/stage/injection/output arrays. The training
+   receipt's per-epoch forward count is replayed from the copied tokenizer receipt's
+   arm parity, fixed to three epochs, and linked by the parity hash before the factor
+   of four is charged. Billion-token prompt/training forgeries fail.
+3. Artifact scripts require `-I -B -S` and perform the worktree/runtime contract
+   before any third-party import. The bootstrap admits only the experiment source and
+   standard library initially, pins the external interpreter and `.pth`/customization
+   set, and authenticates exact package versions, RECORD claims, and every importable
+   site-packages file. The real training environment authenticates 79 distributions,
+   24,235 claims, and 28,222 files; vLLM authenticates 189 distributions, 63,406
+   claims, and 68,353 files. The vLLM surface has one legitimate overlapping
+   `build_backend.py` RECORD claim; the superseded claim is counted and the exact final
+   full-file surface is independently pinned.
+4. Training/tokenizer/merge/scoring use the pinned `.venv` plus
+   `requirements-training.lock.txt`, including PEFT 0.19.1 and bitsandbytes 0.49.2.
+   Generation and the persistent reservoir use `.venv-vllm` plus the exact vLLM lock.
+   Documentation names both absolute interpreters and requires `-I -B -S`.
+5. GPU identity is the single selected physical UUID from
+   `CUDA_VISIBLE_DEVICES=GPU-...`, resolved against `nvidia-smi`; training,
+   confirmation, and reservoir receipts must carry the exact same structured row.
+
+Receipt schema transitions invalidate all pre-remediation artifacts. The full
+model-free suite passes 90/90, both live environment-authentication audits pass, and
+no tokenizer, model, GPU, training, evaluation, Jacobian, benchmark, or protected-data
+event occurred. Authorization remains unchanged. Review 10 must audit the exact clean
+pushed SHA before any execution flag can change.

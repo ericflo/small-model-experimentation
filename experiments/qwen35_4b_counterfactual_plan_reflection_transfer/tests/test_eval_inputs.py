@@ -203,6 +203,7 @@ class EvalInputTests(unittest.TestCase):
             generated = root / "generated.jsonl"
             generated_row = {
                 "id": "synthetic",
+                "prompt_token_ids": [10, 11, 12, 13, 14],
                 "n_prompt_tokens": 5,
                 "outputs": [
                     {
@@ -232,7 +233,7 @@ class EvalInputTests(unittest.TestCase):
             exact_base = {"synthetic": "base"}
             exact_tokenizer = {"synthetic": "tokenizer"}
             metadata = {
-                "schema_version": 5,
+                "schema_version": 6,
                 "output": {
                     "description": "generated JSONL",
                     "sha256": hashlib.sha256(generated.read_bytes()).hexdigest(),
@@ -287,17 +288,26 @@ class EvalInputTests(unittest.TestCase):
                 "engine": engine,
                 "engine_args": engine_args,
                 "runtime": {
-                    "schema_version": 2,
+                    "schema_version": 3,
+                    "bootstrap": {},
                     "git_dirty": False,
                     "git_commit": commit,
                     "git_root": str(EXP.parents[1].resolve()),
                     "cwd": str(EXP.parents[1].resolve()),
                     "git_head_mode": "detached",
-                    "gpu": "Synthetic GPU, GPU-0000, 999.0, 80000",
+                    "gpu": {
+                        "cuda_visible_devices": "GPU-0000",
+                        "physical_index": 0,
+                        "name": "Synthetic GPU",
+                        "uuid": "GPU-0000",
+                        "driver_version": "999.0",
+                        "memory_total_mib": 80000,
+                    },
                     "python_executable": "/synthetic/python",
                     "python_executable_sha256": "f" * 64,
                     "python_isolated": True,
                     "python_dont_write_bytecode": True,
+                    "python_no_site": True,
                     "environment_lock": {
                         "sha256": hashlib.sha256(lock.read_bytes()).hexdigest()
                     },
@@ -343,6 +353,8 @@ class EvalInputTests(unittest.TestCase):
                 "load_window_guard.validate_load_window_receipt"
             ), mock.patch(
                 "provenance.validate_interpreter_runtime"
+            ), mock.patch(
+                "provenance.validate_runtime_bootstrap"
             ):
                 protocol = P.validate_generation_protocol(
                     metadata=metadata,
@@ -373,6 +385,8 @@ class EvalInputTests(unittest.TestCase):
                 "load_window_guard.validate_load_window_receipt"
             ), mock.patch(
                 "provenance.validate_interpreter_runtime"
+            ), mock.patch(
+                "provenance.validate_runtime_bootstrap"
             ), self.assertRaisesRegex(ValueError, "engine arguments"):
                 P.validate_generation_protocol(
                     metadata=metadata,

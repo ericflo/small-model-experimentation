@@ -9,11 +9,20 @@ import json
 import sys
 from pathlib import Path
 
-import yaml
-
+if sys.flags.no_site != 1:
+    raise SystemExit("reservoir generation must start with the pinned interpreter and -I -B -S")
 
 EXP = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(EXP / "src"))
+
+from runtime_contract import (  # noqa: E402
+    bootstrap_runtime_environment,
+    require_detached_execution_worktree,
+)
+
+bootstrap_runtime_environment(EXP.parents[1], "vllm")
+
+import yaml
 
 from firewall import install_benchmark_firewall  # noqa: E402
 
@@ -25,7 +34,6 @@ from matched_compute import (  # noqa: E402
     first_budget_prefix,
     target_compute_budget,
 )
-from runtime_contract import require_detached_execution_worktree  # noqa: E402
 from vllm_runner import (  # noqa: E402
     EngineConfig,
     SamplingConfig,
@@ -42,7 +50,7 @@ def _sha256_file(path: Path) -> str:
 
 def _target_pairs(
     training_paths: list[Path], metadata_paths: list[Path], expected_seeds: set[int]
-) -> tuple[list[tuple[dict, dict]], list[dict]]:
+) -> tuple[list[tuple[dict, dict, dict]], list[dict]]:
     receipts: dict[int, tuple[Path, dict]] = {}
     metadata: dict[int, tuple[Path, dict]] = {}
     for path in training_paths:
@@ -60,15 +68,29 @@ def _target_pairs(
         metadata[seed] = (path, value)
     if set(receipts) != expected_seeds or set(metadata) != expected_seeds:
         raise ValueError("reservoir target paths do not contain both frozen seeds")
-    pairs = [(receipts[seed][1], metadata[seed][1]) for seed in sorted(expected_seeds)]
-    references = [
-        {
-            "seed": seed,
-            "training_receipt": artifact_ref(receipts[seed][0]),
-            "correct_confirmation_metadata": artifact_ref(metadata[seed][0]),
-        }
-        for seed in sorted(expected_seeds)
-    ]
+    pairs = []
+    references = []
+    for seed in sorted(expected_seeds):
+        training_path, training_receipt = receipts[seed]
+        tokenizer_path = training_path.parent / "source_tokenizer_receipt.json"
+        if (
+            not tokenizer_path.is_file()
+            or _sha256_file(tokenizer_path)
+            != training_receipt.get("tokenizer_receipt_sha256")
+            or _sha256_file(tokenizer_path)
+            != training_receipt.get("copied_tokenizer_receipt_sha256")
+        ):
+            raise ValueError("training compute lacks its exact source tokenizer receipt")
+        tokenizer_receipt = json.loads(tokenizer_path.read_text())
+        pairs.append((training_receipt, tokenizer_receipt, metadata[seed][1]))
+        references.append(
+            {
+                "seed": seed,
+                "training_receipt": artifact_ref(training_path),
+                "source_tokenizer_receipt": artifact_ref(tokenizer_path),
+                "correct_confirmation_metadata": artifact_ref(metadata[seed][0]),
+            }
+        )
     return pairs, references
 
 

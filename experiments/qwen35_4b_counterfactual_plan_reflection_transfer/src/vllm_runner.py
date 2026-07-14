@@ -51,6 +51,15 @@ import time
 from pathlib import Path
 from typing import Any, Iterable, Sequence
 
+if __name__ == "__main__":
+    if sys.flags.no_site != 1:
+        raise SystemExit("vLLM generation must start with the pinned interpreter and -I -B -S")
+    _EXP_FOR_BOOTSTRAP = Path(__file__).resolve().parents[1]
+    sys.path.insert(0, str(_EXP_FOR_BOOTSTRAP / "src"))
+    from runtime_contract import bootstrap_runtime_environment
+
+    bootstrap_runtime_environment(_EXP_FOR_BOOTSTRAP.parents[1], "vllm")
+
 
 # vLLM's reproducibility guide requires the in-process V1 engine for offline
 # deterministic scheduling.  This must be set before importing vllm.
@@ -71,7 +80,7 @@ if _PYTHON_BIN not in os.environ.get("PATH", "").split(os.pathsep):
 
 MODEL_ID = "Qwen/Qwen3.5-4B"
 MODEL_REVISION = "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
-RUNNER_SCHEMA_VERSION = 5
+RUNNER_SCHEMA_VERSION = 6
 
 _MAMBA_CACHE_BLOCKS_RE = re.compile(
     r"max_num_seqs\b.*?(?:exceeds?|greater\s+than|larger\s+than|more\s+than)"
@@ -217,12 +226,14 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
     training_runtime = training_lineage.get("runtime")
     required_training_runtime = {
         "schema_version",
+        "bootstrap",
         "worktree",
         "python",
         "python_executable",
         "python_executable_sha256",
         "python_isolated",
         "python_dont_write_bytecode",
+        "python_no_site",
         "platform",
         "packages",
         "packages_sha256",
@@ -234,9 +245,7 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
         not isinstance(training_runtime, dict)
         or set(training_runtime) != required_training_runtime
         or type(training_runtime.get("schema_version")) is not int
-        or training_runtime["schema_version"] != 2
-        or not isinstance(training_runtime.get("gpu"), str)
-        or not training_runtime["gpu"]
+        or training_runtime["schema_version"] != 3
         or training_runtime.get("packages_sha256")
         != _sha256_bytes(
             json.dumps(
@@ -247,16 +256,28 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
         )
     ):
         raise ValueError("training receipt lacks exact runtime metadata")
-    from provenance import validate_interpreter_runtime, validate_runtime_packages
+    from provenance import (
+        validate_gpu_identity,
+        validate_interpreter_runtime,
+        validate_runtime_bootstrap,
+        validate_runtime_packages,
+    )
 
     validate_runtime_packages(
         training_runtime,
-        Path(__file__).resolve().parents[3] / "requirements-vllm.lock.txt",
+        Path(__file__).resolve().parents[3] / "requirements-training.lock.txt",
+        required_backend="training",
     )
     validate_interpreter_runtime(
         training_runtime,
         Path(__file__).resolve().parents[3],
     )
+    validate_runtime_bootstrap(
+        training_runtime,
+        Path(__file__).resolve().parents[3],
+        "training",
+    )
+    validate_gpu_identity(training_runtime.get("gpu"))
     from merge_replay import authenticate_base_snapshot, base_snapshot_commitment
     from tokenizer_lineage import (
         authenticate_tokenizer_snapshot,
@@ -276,20 +297,44 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
         "cwd": str(Path.cwd().resolve()),
     }
     compute = training_lineage.get("compute")
+    tokenizer_parity = tokenizer_lineage.get("parity")
+    tokenizer_totals = (
+        tokenizer_parity.get("totals") if isinstance(tokenizer_parity, dict) else None
+    )
+    training_arm_totals = (
+        tokenizer_totals.get(training_lineage.get("arm"))
+        if isinstance(tokenizer_totals, dict)
+        else None
+    )
+    sealed_forward_tokens = (
+        training_arm_totals.get("forward_tokens")
+        if isinstance(training_arm_totals, dict)
+        else None
+    )
     valid_compute = (
         isinstance(compute, dict)
         and set(compute)
         == {
             "schema_version", "amortization_horizon", "forward_tokens",
             "forward_backward_multiplier", "token_forward_equivalents",
-            "model_load_seconds", "training_seconds", "gpu_phase_wall_seconds",
+            "epochs", "model_load_seconds", "training_seconds", "gpu_phase_wall_seconds",
         }
         and type(compute.get("schema_version")) is int
         and compute.get("schema_version") == 1
         and compute.get("amortization_horizon")
         == "full_training_charged_to_each_confirmation_split"
+        and type(compute.get("epochs")) is int
+        and compute["epochs"] == 3
         and type(compute.get("forward_tokens")) is int
         and compute["forward_tokens"] > 0
+        and type(sealed_forward_tokens) is int
+        and compute["forward_tokens"] == sealed_forward_tokens * compute["epochs"]
+        and training_lineage.get("parity_sha256")
+        == _sha256_bytes(
+            json.dumps(
+                tokenizer_parity, sort_keys=True, separators=(",", ":")
+            ).encode()
+        )
         and compute.get("forward_backward_multiplier") == 4
         and compute.get("token_forward_equivalents") == compute["forward_tokens"] * 4
         and type(compute.get("model_load_seconds")) in {int, float}
@@ -305,7 +350,7 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
     )
     if (
         set(receipt) != required
-        or receipt.get("schema_version") != 6
+        or receipt.get("schema_version") != 7
         or receipt.get("experiment_id")
         != "qwen35_4b_counterfactual_plan_reflection_transfer"
         or receipt.get("config_sha256") != _sha256_file(config_path)
@@ -347,7 +392,7 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
         or training_lineage.get("experiment_id")
         != "qwen35_4b_counterfactual_plan_reflection_transfer"
         or set(training_lineage) != required_training_lineage
-        or training_lineage.get("schema_version") != 4
+        or training_lineage.get("schema_version") != 5
         or training_lineage.get("config_sha256") != receipt.get("config_sha256")
         or training_lineage.get("model_id") != MODEL_ID
         or training_lineage.get("model_revision") != MODEL_REVISION
@@ -389,7 +434,7 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
         or tokenizer_lineage.get("experiment_id")
         != "qwen35_4b_counterfactual_plan_reflection_transfer"
         or set(tokenizer_lineage) != required_tokenizer_lineage
-        or tokenizer_lineage.get("schema_version") != 3
+        or tokenizer_lineage.get("schema_version") != 4
         or tokenizer_lineage.get("config_sha256") != receipt.get("config_sha256")
         or tokenizer_lineage.get("runner_sha256")
         != _sha256_file(Path(__file__).resolve().parents[1] / "scripts" / "tokenizer_receipt.py")
@@ -423,10 +468,20 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
     load_guards = training_lineage.get("load_window_guards")
     if not isinstance(load_guards, dict) or set(load_guards) != {"tokenizer", "model"}:
         raise ValueError("training lineage lacks exact tokenizer/model load guards")
-    validate_load_window_receipt(load_guards["tokenizer"], [exact_tokenizer_path])
-    validate_load_window_receipt(load_guards["model"], [exact_base_root])
     validate_load_window_receipt(
-        tokenizer_lineage["load_window_guard"], [exact_tokenizer_path]
+        load_guards["tokenizer"],
+        [exact_tokenizer_path],
+        expected_content={"tokenizer": exact_tokenizer},
+    )
+    validate_load_window_receipt(
+        load_guards["model"],
+        [exact_base_root],
+        expected_content={"base": exact_base},
+    )
+    validate_load_window_receipt(
+        tokenizer_lineage["load_window_guard"],
+        [exact_tokenizer_path],
+        expected_content={"tokenizer": exact_tokenizer},
     )
     from checkpoint_lineage import adapter_tensor_inventory, merged_checkpoint_inventory
 
@@ -464,7 +519,7 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
             "base_snapshot", "tokenizer_snapshot",
             "tokenizer_load_window_guard",
         }
-        or started.get("schema_version") != 3
+        or started.get("schema_version") != 4
         or started.get("arm") != receipt.get("source_arm")
         or started.get("seed") != receipt.get("source_seed")
         or started.get("config_sha256") != receipt.get("config_sha256")
@@ -1277,13 +1332,33 @@ class VLLMRunner:
         # depend on vLLM's chat endpoint or reasoning parser.
         from transformers import AutoConfig, Qwen2Tokenizer
 
+        tokenizer_config_content = {
+            "base": self.base_snapshot_commitment,
+            "tokenizer": self.tokenizer_snapshot_commitment,
+        }
         with LoadWindowGuard(
-            [self.base_snapshot_path, self.closed_tokenizer_path]
+            [self.base_snapshot_path, self.closed_tokenizer_path],
+            expected_content=tokenizer_config_content,
         ) as tokenizer_config_guard:
+            before_tokenizer_config_content = {
+                "base": base_snapshot_commitment(self.base_snapshot_path),
+                "tokenizer": authenticate_closed_tokenizer_view(
+                    self.closed_tokenizer_path
+                ),
+            }
             self.tokenizer = Qwen2Tokenizer.from_pretrained(
                 str(self.closed_tokenizer_path),
                 trust_remote_code=False,
                 local_files_only=True,
+            )
+            after_tokenizer_config_content = {
+                "base": base_snapshot_commitment(self.base_snapshot_path),
+                "tokenizer": authenticate_closed_tokenizer_view(
+                    self.closed_tokenizer_path
+                ),
+            }
+            tokenizer_config_guard.bind_authenticated_content(
+                before_tokenizer_config_content, after_tokenizer_config_content
             )
             model_config = AutoConfig.from_pretrained(
                 str(self.base_snapshot_path),
@@ -1387,12 +1462,55 @@ class VLLMRunner:
                 if config.model_override is not None
                 else self.base_snapshot_path,
             ]
-            engine_guard = LoadWindowGuard(engine_load_roots)
+            engine_expected_content = {
+                "tokenizer": self.tokenizer_snapshot_commitment,
+                "engine_model": (
+                    self.model_override_info
+                    if config.model_override is not None
+                    else self.base_snapshot_commitment
+                ),
+            }
+            engine_guard = LoadWindowGuard(
+                engine_load_roots, expected_content=engine_expected_content
+            )
             engine_guard.__enter__()
             try:
+                before_engine_content = {
+                    "tokenizer": authenticate_closed_tokenizer_view(
+                        self.closed_tokenizer_path
+                    ),
+                    "engine_model": (
+                        _validate_model_override(config.model_override)
+                        if config.model_override is not None
+                        else base_snapshot_commitment(self.base_snapshot_path)
+                    ),
+                }
                 self.llm = LLM(**engine_args)
+                after_engine_content = {
+                    "tokenizer": authenticate_closed_tokenizer_view(
+                        self.closed_tokenizer_path
+                    ),
+                    "engine_model": (
+                        _validate_model_override(config.model_override)
+                        if config.model_override is not None
+                        else base_snapshot_commitment(self.base_snapshot_path)
+                    ),
+                }
+                engine_guard.bind_authenticated_content(
+                    before_engine_content, after_engine_content
+                )
             except Exception as exc:
                 engine_guard.__exit__(*sys.exc_info())
+                loaded_llm = getattr(self, "llm", None)
+                if loaded_llm is not None:
+                    engine_core = getattr(
+                        getattr(loaded_llm, "llm_engine", None),
+                        "engine_core",
+                        None,
+                    )
+                    shutdown = getattr(engine_core, "shutdown", None)
+                    if callable(shutdown):
+                        shutdown()
                 available_blocks = _available_mamba_cache_blocks(exc)
                 if (
                     available_blocks is None
@@ -1834,6 +1952,7 @@ class VLLMRunner:
                 "id": record.record_id,
                 "meta": record.meta,
                 "prompt_sha256": _sha256_bytes(record.prompt_text.encode("utf-8")),
+                "prompt_token_ids": list(record.prompt_token_ids),
                 "n_prompt_tokens": len(record.prompt_token_ids),
                 "prompt_channel": record.prompt_channel,
                 "prompt_logprobs": _jsonable_logprobs(request_output.prompt_logprobs),
@@ -2059,20 +2178,18 @@ class VLLMRunner:
             ]
         ) if git_root else ""
         git_branch = _run_text(["git", "symbolic-ref", "-q", "HEAD"]) if git_root else ""
-        gpu = _run_text(
-            [
-                "nvidia-smi",
-                "--query-gpu=name,uuid,driver_version,memory.total",
-                "--format=csv,noheader,nounits",
-            ]
-        )
+        from runtime_contract import runtime_bootstrap_receipt, selected_gpu_identity
+
+        gpu = selected_gpu_identity(Path(git_root))
         return {
-            "schema_version": 2,
+            "schema_version": 3,
+            "bootstrap": runtime_bootstrap_receipt("vllm"),
             "python": platform.python_version(),
             "python_executable": str(Path(sys.executable).resolve()),
             "python_executable_sha256": _sha256_file(Path(sys.executable).resolve()),
             "python_isolated": sys.flags.isolated == 1,
             "python_dont_write_bytecode": bool(sys.dont_write_bytecode),
+            "python_no_site": sys.flags.no_site == 1,
             "platform": platform.platform(),
             "packages": dict(_INITIAL_PACKAGES),
             "packages_sha256": _sha256_bytes(

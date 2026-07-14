@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "training": {
+    "environment_root": "/workspace/small-model-experimentation/.venv",
+    "lock_file": "requirements-training.lock.txt",
+    "record_surface_sha256": "a5457b06fc133b62b2496c4ad41be24cb6ee78503638919467651467b271dbcd",
+    "site_surface_sha256": "2ecb62fa623b41ec2fa2831d2f77d31225ac33449108fe98f0ea02afca0df0e9",
+    "startup_files": {
+      "_cuda_bindings_redirector.pth": "28d86507e791da835cf8b9dd21fe98b579b77b3ca27e3ad27bae6239bc94f769",
+      "_virtualenv.pth": "69ac3d8f27e679c81b94ab30b3b56e9cd138219b1ba94a1fa3606d5a76a1433d",
+      "distutils-precedence.pth": "2638ce9e2500e572a5e0de7faed6661eb569d1b696fcba07b0dd223da5f5d224"
+    }
+  },
+  "vllm": {
+    "environment_root": "/workspace/small-model-experimentation/.venv-vllm",
+    "lock_file": "requirements-vllm.lock.txt",
+    "record_surface_sha256": "5fde29c3b6bf24d652138953b52dfb88acbbb4ef33e04dfaac5d6c184b3dff58",
+    "site_surface_sha256": "9a6cfcfbd1f58394c41213fc524ca0a1f3317987d19ccde82c13cedb05ca4365",
+    "startup_files": {
+      "_cuda_bindings_redirector.pth": "28d86507e791da835cf8b9dd21fe98b579b77b3ca27e3ad27bae6239bc94f769",
+      "_virtualenv.pth": "69ac3d8f27e679c81b94ab30b3b56e9cd138219b1ba94a1fa3606d5a76a1433d",
+      "distutils-precedence.pth": "2638ce9e2500e572a5e0de7faed6661eb569d1b696fcba07b0dd223da5f5d224",
+      "nvidia_cutlass_dsl.pth": "ca9b44371adda32f6ee6e3bf090becc1b87f1c4a5602f1db535e616bf3fdf4fb"
+    }
+  }
+}

@@ -10,11 +10,20 @@ import shutil
 import sys
 from pathlib import Path
 
-import yaml
-
+if sys.flags.no_site != 1:
+    raise SystemExit("merge must start with the pinned interpreter and -I -B -S")
 
 EXP = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(EXP / "src"))
+
+from runtime_contract import (  # noqa: E402
+    bootstrap_runtime_environment,
+    require_detached_execution_worktree,
+)
+
+bootstrap_runtime_environment(EXP.parents[1], "training")
+
+import yaml
 
 from firewall import install_benchmark_firewall  # noqa: E402
 from checkpoint_lineage import (  # noqa: E402
@@ -28,7 +37,6 @@ from merge_replay import (  # noqa: E402
 )
 from provenance import validate_runtime_packages  # noqa: E402
 from load_window_guard import validate_load_window_receipt  # noqa: E402
-from runtime_contract import require_detached_execution_worktree  # noqa: E402
 from stages import read_and_validate_stage_receipt  # noqa: E402
 from tensor_merge import write_tensor_level_merge  # noqa: E402
 from tokenizer_lineage import (  # noqa: E402
@@ -89,7 +97,7 @@ def main() -> int:
         "worktree", "runtime", "base_snapshot", "tokenizer_snapshot", "compute",
         "load_window_guards",
     }
-    if set(source_receipt) != required_training_receipt or source_receipt["schema_version"] != 4:
+    if set(source_receipt) != required_training_receipt or source_receipt["schema_version"] != 5:
         raise ValueError("training receipt schema changed")
     observed_adapter_tree = _sha256_tree(
         args.adapter, excluded={"training_receipt.json"}
@@ -101,8 +109,10 @@ def main() -> int:
         raise ValueError("adapter tree differs from its training receipt")
     worktree = require_detached_execution_worktree(EXP.parents[1])
     current_commit = worktree["git_commit"]
-    lock_path = EXP.parents[1] / "requirements-vllm.lock.txt"
-    validate_runtime_packages(source_receipt["runtime"], lock_path)
+    lock_path = EXP.parents[1] / "requirements-training.lock.txt"
+    validate_runtime_packages(
+        source_receipt["runtime"], lock_path, required_backend="training"
+    )
     base_root, base_index, _base_structure = authenticate_base_snapshot()
     base_snapshot = base_snapshot_commitment(base_root)
     tokenizer_path, tokenizer_snapshot = ensure_closed_tokenizer_view()
@@ -134,8 +144,16 @@ def main() -> int:
     guards = source_receipt.get("load_window_guards")
     if not isinstance(guards, dict) or set(guards) != {"tokenizer", "model"}:
         raise ValueError("training receipt lacks both exact load-window guards")
-    validate_load_window_receipt(guards["tokenizer"], [tokenizer_path])
-    validate_load_window_receipt(guards["model"], [base_root])
+    validate_load_window_receipt(
+        guards["tokenizer"],
+        [tokenizer_path],
+        expected_content={"tokenizer": tokenizer_snapshot},
+    )
+    validate_load_window_receipt(
+        guards["model"],
+        [base_root],
+        expected_content={"base": base_snapshot},
+    )
     positive_arm = config["training"]["positive_control"]["arm"]
     if (
         source_receipt["arm"] == positive_arm
@@ -162,7 +180,7 @@ def main() -> int:
     }
     if (
         set(tokenizer_receipt) != required_tokenizer_receipt
-        or tokenizer_receipt.get("schema_version") != 3
+        or tokenizer_receipt.get("schema_version") != 4
         or tokenizer_receipt.get("experiment_id") != config["experiment_id"]
         or tokenizer_receipt.get("config_sha256") != _sha256_file(config_path)
         or tokenizer_receipt.get("runner_sha256")
@@ -196,7 +214,9 @@ def main() -> int:
     ):
         raise ValueError("copied tokenizer receipt identity changed")
     validate_load_window_receipt(
-        tokenizer_receipt["load_window_guard"], [tokenizer_path]
+        tokenizer_receipt["load_window_guard"],
+        [tokenizer_path],
+        expected_content={"tokenizer": tokenizer_snapshot},
     )
     expected_stage = (
         "screen_training"
@@ -277,7 +297,7 @@ def main() -> int:
         recipe=recipe,
     )
     receipt = {
-        "schema_version": 6,
+        "schema_version": 7,
         "experiment_id": config["experiment_id"],
         "config_sha256": _sha256_file(config_path),
         "model_id": model_id,
