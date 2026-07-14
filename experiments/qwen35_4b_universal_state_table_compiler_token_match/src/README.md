@@ -1,5 +1,6 @@
 # Source
 
-The pinned experiment-local vLLM runner is present for later same-backend generation.
-Scientific generator, stream, gate, and training modules are intentionally absent at
-intake and must be added only after the intake checkpoint is published and verified.
+The pinned experiment-local vLLM runner supports later same-backend generation. The
+truth-audited curriculum generator, exact-token stream materializer, local promotion
+gate, trainer wrapper, explicit merge, and aggregate gateway harness live under
+`scripts/`; every expensive transition requires a committed predecessor receipt.

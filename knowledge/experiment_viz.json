@@ -48311,7 +48311,7 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "Only the result-separated intake is complete",
+     "title": "Intake and exact-compute CPU design are complete",
      "categories": [
       "intake",
       "CPU design",
@@ -48324,7 +48324,7 @@
        "label": "completed checkpoint",
        "values": [
         1,
-        0,
+        1,
         0,
         0,
         0
@@ -48334,8 +48334,8 @@
      "x_label": "preregistered experiment stage",
      "y_label": "completion indicator",
      "y_format": "integer",
-     "note": "Intake reserves fresh seeds 77112/46/88008/78138 and authorizes CPU feasibility only. No stream, model result, merge, local event, or benchmark event exists.",
-     "source": "experiments/qwen35_4b_universal_state_table_compiler_token_match/idea_intake.md"
+     "note": "CPU design froze 80 truth-audited lessons and two 320-row, 286,814-token arms with zero skips and 200 aligned replay rows. No model result, merge, local event, or benchmark event exists.",
+     "source": "experiments/qwen35_4b_universal_state_table_compiler_token_match/data/design_receipt.json"
     }
    ]
   }

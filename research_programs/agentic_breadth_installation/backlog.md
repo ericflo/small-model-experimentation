@@ -171,13 +171,15 @@
   seeds to test variable-depth natural-language state tables plus independent
   hypothesis simulation/scoring and verified answer commitment.
 
-- Active intake: `qwen35_4b_universal_state_table_compiler_token_match` is the
+- Active design-frozen experiment: `qwen35_4b_universal_state_table_compiler_token_match` is the
   result-separated successor. It starts from the same authenticated `close_xi` parent
   with fresh seeds and tests variable-depth natural-language state tables,
   independently recomputed hypothesis scores, verification/repair, and a concise
   answer commit against exact-token replay. CPU feasibility and adversarial review
-  are the only authorized next steps; no training or benchmark event may start from
-  the intake checkpoint.
+  passed: both arms have 320 rows, exactly 286814 forward tokens, zero skips, 40
+  updates, and 200 identical replay positions. Publish/verify the frozen design, then
+  train only the replay control; every later stage requires its predecessor receipt
+  committed and green. Local failure seals aggregate seed 78138.
 
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.

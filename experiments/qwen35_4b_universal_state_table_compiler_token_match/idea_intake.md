@@ -75,3 +75,13 @@ copying the table vocabulary at evaluation.
 Reserved identities are construction seed `77112`, training seed `46`, local seed
 `88008`, and conditional aggregate seed `78138`. They must not be reused after an
 observed capability result.
+
+## Design-freeze outcome
+
+CPU feasibility succeeded without changing the reserved identities. The four-stage
+source has 80 truth-audited rows and SHA-256 `a7b453af...e88bb`. Candidate and replay
+each have 320 rows, exactly 286,814 forward tokens, zero skips, 40 updates, and 200
+byte-identical aligned replay positions. Adversarial review passed with a package-level
+claim, explicit probe and strict control-relative local gates, and a one-expensive-
+stage-per-committed-checkpoint harness. Training is authorized only after this frozen
+design is pushed to `main` and both workflows pass.

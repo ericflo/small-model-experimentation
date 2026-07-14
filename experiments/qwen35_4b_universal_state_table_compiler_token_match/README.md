@@ -1,6 +1,6 @@
 # Natural-Language State-Table Universal Curriculum
 
-**Status:** in-progress · since 2026-07-14 · CPU feasibility and adversarial design review remain
+**Status:** in-progress · since 2026-07-14 · design frozen; control training awaits a pushed-green checkpoint
 
 This result-separated successor tests whether truth-audited, variable-depth
 natural-language state tables plus independent hypothesis scoring and a short
@@ -44,8 +44,12 @@ unchanged local gate.
   scoring, verification/repair, and concise commit lessons.
 - Mechanism-falsifying control: same-parent replay continuation with identical forward
   tokens, optimizer steps, backend, seed, and position-aligned shared replay.
-- Primary admission: the unchanged absolute local capability gate plus paired wins
-  over parent and active replay on target execution/probe behavior.
+- Frozen arms: 320 rows and exactly 286,814 forward tokens each, zero skips, 40
+  optimizer steps, and 200 byte-identical replay rows at the same positions. Candidate
+  contains 80 curriculum rows plus 40 replay filler; control contains 120 replay rows.
+- Primary admission: the inherited absolute local capability gate, a new explicit
+  probe ≥0.50 check, and strict paired wins over parent and active replay both overall
+  and on execute/induct/probe combined.
 - Conditional broad admission: aggregate-only same-backend evaluation only after the
   sole candidate passes every local check; all reported families must improve before
   higher-tier confirmation or matched-compute sample-more.
@@ -54,24 +58,30 @@ unchanged local gate.
 
 ## Run
 
-Intake smoke:
+Frozen smoke:
 
 ```bash
 PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_state_table_compiler_token_match/scripts/run.py --smoke
 ```
 
-Scientific stages are intentionally unavailable until CPU feasibility and
-`reports/design_review.md` freeze the commands, byte identities, exact token counts,
-reachable gates, and aggregate firewall.
+The adversarial review passed and the harness now exposes exactly one expensive stage
+per invocation: `train-control`, `train-candidate`, `local`, `merge`, or `benchmark`.
+Each stage requires a clean worktree; every predecessor receipt must already be
+committed at `HEAD`. Follow `reports/preregistration.md` and publish/CI-verify every
+stage before starting the next.
 
 ## Results
 
-No model result exists. No GPU generation, training, merge, local capability event,
-or benchmark event has run.
+CPU construction produced 80 truth-audited rows: 20 each execute, score, repair, and
+commit. All 80 answers recompute from executable state; all score rows evaluate three
+hypotheses on five probes; correct hypothesis position is balanced 7/7/6. Exact-token
+materialization succeeded at 320 rows, 286,814 tokens, zero skips, and 200 aligned
+replay positions per arm. The frozen smoke passes 48 tests. No model result, merge,
+local capability event, or benchmark event exists.
 
 ## Interpretation
 
-This intake changes the interface, not the dose or close-token weight. Its novelty is
+This design changes the interface, not the dose or close-token weight. Its novelty is
 an executable natural-language state table connected to independent hypothesis scores
 and a verified answer seam. Any later gain belongs to that package unless a frozen
 ablation separates the pieces.
@@ -79,13 +89,17 @@ ablation separates the pieces.
 ## Knowledgebase Update
 
 - Program evidence: unchanged until a result exists.
-- Program backlog: this result-separated successor is active at intake.
+- Program backlog: this result-separated successor is design-frozen.
 - Claim ledger: unchanged.
 
 ## Artifacts
 
 - `idea_intake.md`
 - `configs/default.yaml`
+- `data/design_receipt.json`
+- `data/stream_token_receipt.json`
 - `scripts/run.py`
+- `reports/design_review.md`
+- `reports/preregistration.md`
 - `reports/report.md`
 - `reports/artifact_manifest.yaml`

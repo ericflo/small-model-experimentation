@@ -9,4 +9,11 @@ construction_seed: 77112
 training_seed: 46
 local_seed: 88008
 conditional_aggregate_seed: 78138
-status: intake_cpu_only
+rows_per_arm: 320
+forward_tokens_per_arm: 286814
+optimizer_steps: 40
+shared_position_aligned_replay_rows: 200
+curriculum_rows: 80
+candidate_replay_filler_rows: 40
+replay_control_rows: 120
+status: design_frozen_expensive_run_awaits_pushed_green_checkpoint

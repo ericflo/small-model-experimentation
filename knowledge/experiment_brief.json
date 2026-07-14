@@ -14004,27 +14004,32 @@
    ]
   },
   "qwen35_4b_universal_state_table_compiler_token_match": {
-   "verdict_tag": "Fresh mechanism intake; no model result",
+   "verdict_tag": "Design frozen; no model result",
    "concept_primer": "A state table is a compact scratchpad: after each instruction, it records exactly what changed. This trial pairs that scratchpad with a separate scorecard for competing explanations, then asks for one short verified answer.",
    "plain_question": "Can explicit natural-language state tracking and hypothesis scoring teach a small model to execute, compare, and finish more reliably than another equal replay update?",
-   "plain_answer": "Not known yet. The intake, parent identity, four fresh seeds, and exact-compute control requirement are frozen, but no synthetic stream has been generated and no model has been trained or evaluated.",
+   "plain_answer": "Not known yet. CPU construction produced 80 truth-checked lessons and two 320-row streams with exactly 286,814 tokens each. All 48 smoke tests pass, but no model has been trained or evaluated.",
    "why_it_matters": "The preceding staged-search curriculum often computed the right state but failed to answer, and it damaged branch selection. This successor changes the training interface to match those observed deployment failures while keeping benchmark data sealed.",
    "verdict_tone": "neutral",
    "key_numbers": [
     {
      "label": "Model results",
      "value": "zero",
-     "sub": "intake and CPU design only"
+     "sub": "CPU design only; training waits for a green checkpoint"
     },
     {
-     "label": "Fresh reserved seeds",
-     "value": "4",
-     "sub": "construction, training, local, and conditional aggregate"
+     "label": "Truth-audited lessons",
+     "value": "80",
+     "sub": "20 each execute, score, repair, and commit"
     },
     {
-     "label": "Active replay control",
-     "value": "required",
-     "sub": "same parent, exact forward-token and step match"
+     "label": "Tokens per arm",
+     "value": "286,814",
+     "sub": "exact match, zero skips, 40 planned updates"
+    },
+    {
+     "label": "Aligned replay rows",
+     "value": "200",
+     "sub": "byte-identical and in the same positions"
     },
     {
      "label": "Broad access",
@@ -14035,9 +14040,9 @@
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Only intake is complete",
-     "chart_read": "A bar at one marks a completed admission stage. CPU design, training, local evaluation, and broad evaluation remain at zero.",
-     "chart_takeaway": "The experiment has frozen its question and identities without creating a capability result or consuming an evaluation event."
+     "chart_plain_title": "Intake and CPU design are complete",
+     "chart_read": "Bars at one mark completed admission stages. Training, local evaluation, and broad evaluation remain at zero.",
+     "chart_takeaway": "The generator, exact-compute control, gates, and adversarial review are frozen without creating a model result or consuming an evaluation event."
     }
    ]
   }

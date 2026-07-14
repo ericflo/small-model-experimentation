@@ -12,11 +12,13 @@ omitted_artifacts:
     reason: "future adapters and merged checkpoints are large and gitignored"
 reproducibility:
   smoke_command: "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_state_table_compiler_token_match/scripts/run.py --smoke"
-  full_command: "unavailable until design freeze"
+  full_command: "run.py --stage train-control; commit/push/verify; --stage train-candidate; commit/push/verify; --stage local; commit/push/verify; conditionally --stage merge; commit/push/verify; conditionally --stage benchmark"
   required_external_artifacts:
     - "large_artifacts/qwen35_4b_universal_close_weight_token_match/adapters/close_xi"
 notes: >-
-  Intake only. Model Qwen/Qwen3.5-4B revision 851bf6e8...d0a; parent weights/config
+  Design frozen. Model Qwen/Qwen3.5-4B revision 851bf6e8...d0a; parent weights/config
   16e9dc75...c179 / de953bd5...7ff. Construction/training/local/conditional aggregate
-  seeds are 77112/46/88008/78138. No generated stream, adapter, capability receipt,
-  merge, or benchmark receipt exists.
+  seeds are 77112/46/88008/78138. Source a7b453af...e88bb produced replay/candidate
+  streams 2727e29a...a2b5 / 8e1b8fdc...1355, each 320 rows and 286814 forward
+  tokens with zero skips under token/design receipts 163e40a6...f0b8 /
+  0bac3340...ef837. No adapter, capability, merge, or benchmark receipt exists.
