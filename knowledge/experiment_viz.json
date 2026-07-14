@@ -47790,43 +47790,51 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "Three continuations hold total training rows fixed",
+     "title": "Close weighting adds no parse or cap benefit over ordinary target training",
      "categories": [
-      "shared replay",
-      "fresh execute/induct lessons",
-      "matched replay replacements"
+      "correct",
+      "parsed",
+      "cap contacts"
      ],
      "series": [
       {
-       "label": "replay_repeat",
+       "label": "designed160 parent",
        "values": [
-        200,
-        0,
-        120
+        16,
+        20,
+        6
        ]
       },
       {
-       "label": "standard_xi",
+       "label": "replay repeat",
        "values": [
-        200,
-        80,
-        40
+        14,
+        18,
+        8
        ]
       },
       {
-       "label": "close_xi",
+       "label": "ordinary target",
        "values": [
-        200,
-        80,
-        40
+        15,
+        23,
+        3
+       ]
+      },
+      {
+       "label": "close-weighted target",
+       "values": [
+        16,
+        23,
+        3
        ]
       }
      ],
-     "x_label": "frozen stream component",
-     "y_label": "training rows",
+     "x_label": "fresh local outcome",
+     "y_label": "cases out of 26",
      "y_format": "integer",
-     "note": "Every arm has 320 rows, 40 optimizer steps, exactly 286,814 forward tokens, and zero skips. standard_xi and close_xi use identical bytes; only the assigned close-span weight differs on the 80 fresh target rows. All training is complete; fresh behavior evaluation remains pending.",
-     "source": "experiments/qwen35_4b_universal_close_weight_token_match/data/stream_manifest.json"
+     "note": "Higher correct/parsed counts are better; lower cap contacts are better. Ordinary and close-weighted target arms used identical data bytes and differed only in close-span loss. Neither passed the frozen gate, so benchmark seed 78136 stayed sealed.",
+     "source": "experiments/qwen35_4b_universal_close_weight_token_match/runs/local/seed88006.json"
     }
    ]
   },

@@ -13639,40 +13639,40 @@
    ]
   },
   "qwen35_4b_universal_close_weight_token_match": {
-   "verdict_tag": "All arms trained; fresh evaluation remains",
+   "verdict_tag": "Close weighting missed the local gate",
    "concept_primer": "The previous training recipe nearly learned to finish fresh puzzles, but a few answers ran out of space before the model stopped reasoning. This follow-up teaches the exact transition from reasoning to a final answer while keeping the amount of practice equal across comparisons.",
    "plain_question": "Does putting extra teaching weight on the moment reasoning ends help the model finish reliably, beyond simply adding targeted lessons or more replay practice?",
-   "plain_answer": "All three versions completed their registered 40 training steps cleanly, and the fresh behavior check is next. They started from the same near-miss model and received 320 examples apiece. One got replay only, one got 80 fresh execution and rule-finding lessons, and the third got those exact same lessons with extra weight only on the two-piece closing marker.",
-   "why_it_matters": "This separates three explanations that earlier work could not: benefit from another short training pass, benefit from task-targeted lessons, and benefit from teaching the model when to stop reasoning. Equal example counts and equal processed text make the comparison unusually clean.",
-   "verdict_tone": "neutral",
+   "plain_answer": "No. On 26 fresh procedural cases, ordinary and close-weighted target training both produced 23 well-formed answers and three response-limit contacts. Close weighting scored 16 correct versus 15 for ordinary training, but only by gaining one unrelated abstention case; both remained zero for four targeted execution and rule-finding cases. The best arm missed each frozen numeric gate by one case or contact, so the benchmark stayed sealed.",
+   "why_it_matters": "The byte-identical comparison separates the effect of fresh target lessons from the effect of emphasizing the reasoning-to-answer marker. Fresh lessons improved answer emission, but extra marker weight did not. That retires close-weight tuning and redirects the search toward teaching a bounded search procedure itself.",
+   "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Examples per version",
-     "value": "320",
-     "sub": "the same total in all three comparisons"
+     "label": "Best fresh accuracy",
+     "value": "16 of 26",
+     "sub": "tied the immediate parent and missed the gate by one"
     },
     {
-     "label": "Training pieces per version",
-     "value": "286,814",
-     "sub": "exactly equal processed text"
+     "label": "Well-formed answers",
+     "value": "23 of 26",
+     "sub": "identical for ordinary and close-weighted training"
     },
     {
-     "label": "Fresh targeted lessons",
-     "value": "80",
-     "sub": "40 execution and 40 rule-finding examples"
+     "label": "Response-limit contacts",
+     "value": "3",
+     "sub": "identical for ordinary and close-weighted training"
     },
     {
-     "label": "Model evaluations so far",
-     "value": "zero",
-     "sub": "only design and integrity checks have run"
+     "label": "Targeted cases solved",
+     "value": "0 of 4",
+     "sub": "execution and rule-finding remained unsolved"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Three equal training streams isolate the closing lesson",
-     "chart_read": "Each stacked bar totals 320 examples. Replay-only keeps all 120 variable examples as replay; the other two replace 80 of them with fresh targeted lessons while sharing the same 200-example core.",
-     "chart_takeaway": "The two targeted versions use identical examples, so any difference between them comes from emphasizing the reasoning-to-answer transition."
+     "chart_plain_title": "Fresh target lessons improve finishing; close weight adds no finishing gain",
+     "chart_read": "Each group shows counts out of the same 26 fresh cases. Higher correct and parsed bars are better; lower response-limit contacts are better.",
+     "chart_takeaway": "Ordinary and close-weighted target arms tie at 23 parsed answers and three limit contacts, while close weight adds only one correct case and still misses promotion."
     }
    ]
   },
