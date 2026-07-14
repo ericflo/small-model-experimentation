@@ -1,11 +1,6 @@
 {
-  "_note": "Curated experiment lifecycle. FINISHED IS THE DEFAULT — list an experiment here ONLY to force 'in-progress'; you never need a 'finished' entry. Status is never inferred from report prose (preregistrations and finished ablations share the same 'verdict/negative/not run' wording, so guessing mislabels). Every in-progress entry MUST carry {\"status\":\"in-progress\",\"since\":\"YYYY-MM-DD\",\"reason\":\"...\"}; when the experiment concludes, delete its entry (it reverts to finished). CI (scripts/validate_repository.py) fails if an in-progress entry lacks a date/reason or has been in-progress too long — re-affirm by bumping 'since' or remove it.",
+  "_note": "Legacy confidence metadata retained for historical experiment replay. This file is not a lifecycle source and must not contain in-progress overrides. The authoritative lifecycle is the canonical **Status:** line in each experiment README, enforced by scripts/validate_repository.py and reported by make active-experiments.",
   "experiments": {
-    "qwen35_4b_early_text_hypothesis_forking": {
-      "status": "in-progress",
-      "since": "2026-07-13",
-      "reason": "Adversarially reviewed CPU smoke passes; live model mechanics remains sealed pending the pushed implementation boundary."
-    },
     "adaptive_cognitive_kernel": {
       "status": "finished",
       "confidence": 0.95
@@ -93,11 +88,6 @@
     "qwen35_4b_answer_potential_trace_sft": {
       "status": "finished",
       "confidence": 0.95
-    },
-    "qwen35_4b_balanced_core_answer_potential_sft": {
-      "status": "in-progress",
-      "since": "2026-07-12",
-      "reason": "Reasoning bank built; the six-arm selection training has not been run."
     },
     "qwen35_4b_balanced_discriminative_bridge": {
       "status": "finished",
@@ -246,11 +236,6 @@
     "qwen35_4b_gauntlet_breadth_round1": {
       "status": "finished",
       "confidence": 0.9
-    },
-    "qwen35_4b_gauntlet_frontier": {
-      "status": "in-progress",
-      "since": "2026-07-12",
-      "reason": "Expert-iteration arc still escalating difficulty; further phases running."
     },
     "qwen35_4b_generator_verifier_gap": {
       "status": "finished",
@@ -900,19 +885,9 @@
       "status": "finished",
       "confidence": 0.95
     },
-    "qwen35_4b_deep_advantage_mopd": {
-      "status": "in-progress",
-      "since": "2026-07-12",
-      "reason": "Instrument checks pass; the deciding coaching/eval run has not executed."
-    },
     "qwen35_4b_recovery_payload_budget_harness": {
       "status": "finished",
       "confidence": 0.99
-    },
-    "qwen35_4b_state_carry_vs_state_bag": {
-      "status": "in-progress",
-      "since": "2026-07-12",
-      "reason": "G0 mechanics pass; seed-7401 LoRA pilot not yet run — no training result exists."
     }
   }
 }

@@ -798,6 +798,29 @@ def validate_experiment_status(errors: list[str]) -> None:
                           f"Set '**Status:** finished' if it concluded, or bump the 'since' date to re-affirm it is "
                           f"still running."))
 
+    # Lifecycle moved from this legacy enrichment artifact to experiment-local
+    # README lines. Reject old overrides so audits cannot report a second,
+    # contradictory active roster even though the site ignores this file.
+    legacy_status_path = KNOWLEDGE / "experiment_status.json"
+    if legacy_status_path.exists():
+        try:
+            legacy = json.loads(legacy_status_path.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError) as exc:
+            fail(errors, f"{rel(legacy_status_path)}: cannot validate legacy statuses: {exc}")
+        else:
+            legacy_entries = legacy.get("experiments", {}) if isinstance(legacy, dict) else {}
+            if isinstance(legacy_entries, dict):
+                stale = sorted(
+                    experiment_id
+                    for experiment_id, metadata in legacy_entries.items()
+                    if isinstance(metadata, dict) and metadata.get("status") == "in-progress"
+                )
+                if stale:
+                    fail(errors, (
+                        f"{rel(legacy_status_path)}: obsolete in-progress override(s): {', '.join(stale)}; "
+                        "declare lifecycle only in each experiment README"
+                    ))
+
 
 def report(errors: list[str]) -> int:
     if errors:
