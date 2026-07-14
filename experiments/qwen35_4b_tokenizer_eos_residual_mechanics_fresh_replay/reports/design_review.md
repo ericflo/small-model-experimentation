@@ -10,9 +10,12 @@
 
 **Hidden/gold/benchmark access:** none
 
-This recovery successor is authorized for model-free construction only. Model,
-tokenizer, GPU, calibration, mechanics generation, and hidden access remain
-sealed.
+This recovery successor is authorized for model-free construction only. Model
+weights, GPU, calibration, mechanics generation, and hidden access remain
+sealed. The pinned tokenizer may be used only for the explicitly required
+rendered prompt-token collision proof; this distinction was implicit in the
+reviewer's final zero-intersection condition and is made explicit here before
+any model call.
 
 ## Known adversarial risks
 

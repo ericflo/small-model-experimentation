@@ -1,86 +1,80 @@
 #!/usr/bin/env python3
-"""Model-free scaffold smoke for the fresh temporal-replay successor."""
+"""Model-free smoke entry point; the live path remains sealed."""
 
 from __future__ import annotations
 
 import argparse
+import dataclasses
 import hashlib
 import json
 import sys
 from pathlib import Path
 
 
-EXP = Path(__file__).resolve().parents[1]
-ROOT = EXP.parents[1]
-PARENT = ROOT / "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial"
-SMOKE = EXP / "runs/smoke/summary.json"
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+
+from protocol import (  # noqa: E402
+    HF_MODEL_EOS_ID,
+    MODEL_ID,
+    MODEL_REVISION,
+    TOKENIZER_EOS_ID,
+    boundary_pair_smoke_cases,
+    smoke_cases,
+    validate_boundary_pair_smoke_cases,
+    validate_smoke_cases,
+)
 
 
-def sha256_file(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+def _canonical_bytes(value: object) -> bytes:
+    return (json.dumps(value, indent=2, sort_keys=True) + "\n").encode("utf-8")
 
 
-def write_canonical(path: Path, value: dict[str, object]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    payload = json.dumps(value, indent=2, sort_keys=True) + "\n"
-    if path.exists() and path.read_text() != payload:
-        raise RuntimeError("smoke receipt changed")
-    path.write_text(payload)
-
-
-def smoke() -> dict[str, object]:
-    required = (
-        EXP / "README.md",
-        EXP / "idea_intake.md",
-        EXP / "configs/default.yaml",
-        EXP / "reports/preregistration.md",
-        EXP / "reports/design_review.md",
-        PARENT / "runs/mechanics/failure.json",
-        PARENT / "reports/mechanics_failure_review.md",
-    )
-    missing = [str(path.relative_to(ROOT)) for path in required if not path.is_file()]
-    if missing:
-        raise RuntimeError(f"required design files missing: {missing}")
-    config = (EXP / "configs/default.yaml").read_text()
-    for literal in (
-        "Qwen/Qwen3.5-4B",
-        "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
-        "tokenizer-eos-residual-mechanics-fresh-replay-v1",
-        "forbid_parent_sampled_bundles: true",
-        "model_calls_authorized: false",
-        "hidden_read_authorized: false",
-    ):
-        if literal not in config:
-            raise RuntimeError(f"model-free boundary missing: {literal}")
-    return {
-        "benchmark_files_read": [],
-        "design_review_status": "PENDING_INDEPENDENT_REVIEW",
-        "freshness_controls_declared": 7,
-        "hidden_files_read": [],
-        "lifecycle_controls_declared": 8,
-        "model": "Qwen/Qwen3.5-4B",
+def run_smoke() -> dict[str, object]:
+    cases = smoke_cases()
+    validate_smoke_cases(cases)
+    pair_cases = boundary_pair_smoke_cases()
+    validate_boundary_pair_smoke_cases(pair_cases)
+    payload: dict[str, object] = {
+        "schema_version": 2,
+        "stage": "model_free_protocol_smoke",
+        "model": MODEL_ID,
+        "revision": MODEL_REVISION,
         "model_calls": 0,
-        "parent_failure_sha256": sha256_file(PARENT / "runs/mechanics/failure.json"),
-        "parent_sampled_bundles_read": [],
-        "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
-        "sampled_model_outputs": 0,
-        "schema_version": 1,
-        "stage": "model_free_scaffold_smoke",
+        "sampled_outputs": 0,
+        "answer_stage_stop_ids": {
+            "hf_model_eos_control": HF_MODEL_EOS_ID,
+            "tokenizer_eos_candidate": TOKENIZER_EOS_ID,
+        },
+        "thought_stage_policy_changed": False,
+        "cases": {
+            label: dataclasses.asdict(result) for label, result in cases.items()
+        },
+        "boundary_pair_cases": {
+            label: dataclasses.asdict(result)
+            for label, result in pair_cases.items()
+        },
+        "boundary_pair_policy": "all_pairs_through_earliest_stop_or_cap",
+        "decision": "MODEL_FREE_COMMIT_PROTOCOL_VALID",
     }
+    payload["content_sha256"] = hashlib.sha256(_canonical_bytes(payload)).hexdigest()
+    # Preserve the design-scaffold receipt at runs/smoke/summary.json.
+    output = ROOT / "runs" / "protocol_smoke" / "summary.json"
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_bytes(_canonical_bytes(payload))
+    return payload
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--smoke", action="store_true", help="check the scaffold without running the full experiment")
+    parser.add_argument(
+        "--smoke", action="store_true", help="run the model-free protocol smoke"
+    )
     args = parser.parse_args()
-
-    if args.smoke:
-        value = smoke()
-        write_canonical(SMOKE, value)
-        print(json.dumps(value, indent=2, sort_keys=True))
-        return 0
-    parser.error("implement the full experiment run before using this command")
-    return 2
+    if not args.smoke:
+        parser.error("live execution is sealed pending construction and design review")
+    print(json.dumps(run_smoke(), indent=2, sort_keys=True))
+    return 0
 
 
 if __name__ == "__main__":

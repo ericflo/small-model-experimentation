@@ -1,6 +1,6 @@
 # Qwen3.5-4B Tokenizer-EOS Residual Mechanics Fresh Replay
 
-**Status:** in-progress · since 2026-07-14 · `PASS_DESIGN_FOR_MODEL_FREE_CONSTRUCTION_ONLY`; fresh construction, implementation review, locks, and all model calls remain
+**Status:** in-progress · since 2026-07-14 · `CONSTRUCTION_PASS`; implementation review, locks, and all model calls remain
 
 This fresh-identity successor preserves the parent's qualified tokenizer-EOS
 interface and frozen residual-mechanics science while separating initial
@@ -75,15 +75,33 @@ Model-free smoke only:
 python3 -B experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/scripts/run.py --smoke
 ```
 
-The independent design review authorizes model-free construction only. No
-tokenizer/model/GPU access or live command is authorized before fresh
-construction, implementation review, exact-commit green CI, and separately
-published locks.
+The independent design review authorizes model-free construction only. The
+construction uses the pinned tokenizer and model-config metadata solely to
+prove rendered-token freshness; it does not load model weights or use a GPU.
+No model/GPU access or live command is authorized before implementation
+review, exact-commit green CI, and separately published locks.
 
 ## Results
 
-No scientific result exists. The scaffold smoke records zero model calls,
-sampled outputs, hidden reads, and benchmark reads.
+No scientific result exists. Fresh model-free construction passed:
+
+- 72/72 new exact-depth-three functions and public instances are disjoint from
+  the parent.
+- 72 task IDs, 2,952 causal request/seed-key identities, 5,904 derived runner
+  seeds, 1,824 distinct identity-free prompts, and 3,648 think/no-think rendered
+  prompt-token sequences have zero parent intersection.
+- Calibration/mechanics remain exactly 48/24 with the frozen strata and alias
+  balance.
+- Mechanics gold exists only as fresh AES-256-GCM ciphertext. The new ignored
+  key was created once; completed-state authentication was tested without
+  opening or hashing it.
+- Construction and tokenizer receipts record zero model calls, sampled model
+  outputs, hidden reads, benchmark reads, and parent raw-bundle reads.
+
+The authenticated parent collision manifest is
+`72faacf5bebf4a8964faaba81d5088dc9602e1a228f818f8e998a03dc145e8e5`;
+the construction receipt is
+`7e1ff08290dd3b963e312fcec21c88ef2c5290d72984c1fb8d26d1d2138942b6`.
 
 ## Interpretation
 

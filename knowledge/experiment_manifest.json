@@ -5537,10 +5537,14 @@
   },
   {
     "file_counts": {
-      ".json": 1,
+      ".aesgcm": 1,
+      ".json": 6,
+      ".jsonl": 9,
       ".md": 7,
-      ".py": 3,
-      ".yaml": 3
+      ".py": 39,
+      ".s": 2,
+      ".yaml": 3,
+      "[none]": 1
     },
     "id": "qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay",
     "path": "experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay",
@@ -5558,14 +5562,15 @@
     "title": "Qwen3.5-4B Tokenizer-EOS Residual Mechanics Fresh Replay",
     "top_level_dirs": [
       "configs",
+      "data",
       "reports",
       "runs",
       "scripts",
       "src",
       "tests"
     ],
-    "total_files": 14,
-    "total_size_bytes": 111840
+    "total_files": 68,
+    "total_size_bytes": 16689297
   },
   {
     "file_counts": {

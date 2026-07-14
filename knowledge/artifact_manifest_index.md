@@ -3,7 +3,7 @@
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
 - Experiments with manifests: 225
-- Manifest files: 534
+- Manifest files: 535
 
 ## Manifest Types
 
@@ -12,7 +12,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `checkpoint` | 83 |
 | `dataset` | 132 |
 | `large-artifact` | 50 |
-| `other` | 70 |
+| `other` | 71 |
 | `run-data` | 101 |
 | `standard-artifact` | 98 |
 
@@ -255,6 +255,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_thinking_separability_probe` | `standard-artifact` | [manifest](../experiments/qwen35_4b_thinking_separability_probe/reports/artifact_manifest.yaml) |
 | `qwen35_4b_tokenizer_eos_answer_commit_factorial` | `standard-artifact` | [manifest](../experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/reports/artifact_manifest.yaml) |
 | `qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay` | `standard-artifact` | [manifest](../experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/reports/artifact_manifest.yaml) |
+| `qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay` | `other` | [manifest](../experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/runs/parent_lineage/collision_manifest.json) |
 | `qwen35_4b_tool_seeded_banking` | `standard-artifact` | [manifest](../experiments/qwen35_4b_tool_seeded_banking/reports/artifact_manifest.yaml) |
 | `qwen35_4b_trained_vs_frozen_repair_mdp` | `run-data` | [manifest](../experiments/qwen35_4b_trained_vs_frozen_repair_mdp/data/base_direct_heldout_records.manifest.json) |
 | `qwen35_4b_trained_vs_frozen_repair_mdp` | `run-data` | [manifest](../experiments/qwen35_4b_trained_vs_frozen_repair_mdp/data/base_direct_train_records.manifest.json) |

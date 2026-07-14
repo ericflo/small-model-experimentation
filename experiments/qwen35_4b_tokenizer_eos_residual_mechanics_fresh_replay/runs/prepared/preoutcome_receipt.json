@@ -1,0 +1,62 @@
+{
+  "benchmark_files_read": [],
+  "config_sha256": "e21b68baad7984fba3abd838e0ece7da5df4281ea24db8769a4c936b45bb0bb5",
+  "confirmation_files_read": [],
+  "construction_summary_sha256": "7e1ff08290dd3b963e312fcec21c88ef2c5290d72984c1fb8d26d1d2138942b6",
+  "decision": "PREOUTCOME_PASS",
+  "expected_invocation_rows": {
+    "calibration_answer_total": 384,
+    "calibration_each_cell": 48,
+    "calibration_shared_thought": 48,
+    "direct_master_pool": 2304,
+    "suffix_materialized": 576,
+    "suffix_name_only": 576,
+    "suffix_shuffled": 576,
+    "transport_selected_interface": 24
+  },
+  "hidden_ciphertext": {
+    "aad_utf8": "tokenizer-eos-residual-mechanics-fresh-replay-v1/mechanics-gold-v1",
+    "algorithm": "AES-256-GCM",
+    "ciphertext_path": "experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/data/procedural/mechanics_gold.jsonl.aesgcm",
+    "ciphertext_sha256": "0a68bcc7f317d7b6eff0cce2a1482138fe4fa9451ba59d2526a33c4fd5b2ad1c",
+    "key_tracked": false,
+    "local_key_path": "experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/.secrets/mechanics_gold.aes256.key",
+    "local_key_sha256": "d1f0258fe63bd9e602739c5e3a7aa6ea0b23742ba99953254e1b81030552606e",
+    "plaintext_rows": 24,
+    "plaintext_sha256": "dabd40963c55d606d93ef614c81042c8339a0caa8e33fa30a71b7b06ee3feb15"
+  },
+  "hidden_files_read": [],
+  "model_calls": 0,
+  "model_loaded": false,
+  "qualification_files_read": [],
+  "request_files": {
+    "experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/runs/prepared/calibration_requests.jsonl": {
+      "rows": 48,
+      "sha256": "baaa1ac6fe5d789755bfb97c64b3c9ab6bb8f2a00ff10ec1fe8089f709c2a87b"
+    },
+    "experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/runs/prepared/direct_requests.jsonl": {
+      "rows": 2304,
+      "sha256": "dd5a04f9ed93d7d67250351295c69c9510fc69495c657d0da572e4aaadcd26fe"
+    },
+    "experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/runs/prepared/suffix_materialized_requests.jsonl": {
+      "rows": 576,
+      "sha256": "5395525456c4d3ef5c4fbae81b3fbc7f17eff9eb7b66855e1f568e22e0d11935"
+    },
+    "experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/runs/prepared/suffix_name_only_requests.jsonl": {
+      "rows": 576,
+      "sha256": "e1bfda2c53fa8a316d506eb93bb4afbb5b54a554e94803c359b4129ad91e8cce"
+    },
+    "experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/runs/prepared/suffix_shuffled_requests.jsonl": {
+      "rows": 576,
+      "sha256": "c61049c249100e5eedc02a2d9f51ab23ce2052258cb830920fd54f5d5107e9f1"
+    },
+    "experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/runs/prepared/transport_requests.jsonl": {
+      "rows": 24,
+      "sha256": "8aa5a9c9f5c24543125c16fc563d439e665978a04417c21bd83e09ba5064e26a"
+    }
+  },
+  "sampled_model_outputs": 0,
+  "schema_version": 2,
+  "stage": "preoutcome_prepare",
+  "tokenizer_loaded": true
+}

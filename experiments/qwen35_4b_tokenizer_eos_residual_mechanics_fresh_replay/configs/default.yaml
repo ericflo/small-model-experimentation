@@ -1,4 +1,4 @@
-schema_version: 1
+schema_version: 2
 
 model:
   id: Qwen/Qwen3.5-4B
@@ -9,9 +9,9 @@ model:
 
 identity:
   experiment_id: qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay
-  namespace: tokenizer-eos-residual-mechanics-fresh-replay-v1
-  scientific_parent: qwen35_4b_tokenizer_eos_answer_commit_factorial
-  forbid_parent_sampled_bundles: true
+  task_namespace: tokenizer-eos-residual-mechanics-fresh-replay-v1
+  request_namespace: tokenizer-eos-residual-mechanics-fresh-replay-v1
+  transport_request_namespace: tokenizer-eos-residual-mechanics-fresh-replay-transport-v1
 
 seeds:
   construction: 2026140800
@@ -22,33 +22,167 @@ seeds:
   shuffle: 2026140805
   transport: 2026140806
 
-freshness:
-  reject_parent_function_fingerprints: true
-  reject_parent_task_ids: true
-  reject_parent_record_ids: true
-  reject_parent_request_ids: true
-  reject_parent_rendered_prompt_token_sequences: true
-  reject_parent_sampling_seeds: true
-  fresh_ciphertext_and_key: true
+data:
+  calibration_tasks: 48
+  mechanics_tasks: 24
+  tasks_per_balance_block: 24
+  calibration_arity_rows:
+    2: 24
+    3: 24
+  calibration_live_first_operation_strata_per_arity:
+    1: 8
+    2: 8
+    3: 4
+    4: 4
+  calibration_alias_balance: each_A_through_X_once_in_every_answer_position_per_arity
+  mechanics_live_first_operation_strata:
+    1: 8
+    2: 8
+    3: 4
+    4: 4
+  visible_examples: 8
+  hidden_examples: 8
+  unlabeled_probe_inputs: 16
+  input_min_length: 4
+  input_max_length: 8
+  input_value_min: -9
+  input_value_max: 9
+  common_panel_per_length: 8
+  max_input_draws: 10000
+  max_visible_attempts: 12
+  candidates_per_task: 24
+  suffixes_per_first_operation: 24
+  direct_master_pool_per_task: 96
 
 interface:
-  selected_boundary: tokenizer_eos
-  selected_thinking: no_think
-  selected_prefix: "PROGRAM:"
-  tokenizer_eos_token_id: 248046
-  hf_model_eos_control_token_id: 248044
-  answer_cap: 24
+  boundary_pair_count: 192
+  answer_boundaries:
+    tokenizer_eos:
+      stop_token_id: 248046
+      answer_stage_only: true
+    hf_model_eos_control:
+      stop_token_id: 248044
+      answer_stage_only: true
+  thinking_policies: [no_think, think512]
+  answer_prefixes: [freeform, program_slot]
+  answer_prefix_text: "PROGRAM:"
+  output_arities: [2, 3]
+  grammar: "PROGRAM: <alias_1> | ... | <alias_k>; k equals registered output arity"
+  parse_rule: membership_in_registered_token_id_grammar_for_row_arity
+  exact_rule: equality_to_registered_known_answer_token_ids
+  thinking_budget: 512
+  sampled_answer_cap: 24
+  cap_contact_rule: sampled_answer_token_ids_gte_24_or_finish_reason_length
+  terminal_stop_on_token_24_is_cap_contact: true
+  terminal_event_classes:
+    authenticated_stop: unique_registered_stop_final_with_matching_finish_and_stop_reason
+    authenticated_length: exactly_24_ids_no_registered_stop_with_finish_reason_length
+    length_content: all_24_sampled_ids_are_scored_precommit_content
+    authentication_failure: claimed_stop_missing_or_short_length_or_repeated_interior_poststop_or_wrong_reason
+  temperature: 0.6
+  top_p: 0.95
+  top_k: 20
+  n: 1
+  unconstrained_sampling: true
+  grammar_mask: false
+  logit_bias: false
+  teacher_forced_answer_tokens: false
+  one_shared_thought_transaction_per_task: true
+  paired_answer_seed: true
+  paired_request_adjacency: true
+  all_pair_prefix_authentication: true
+  boundary_pair_divergence_terminal: BOUNDARY_PAIRING_INVALID
+  fixed_tokenizer_winner_priority:
+    - tokenizer_eos_no_think_program_slot
+    - tokenizer_eos_no_think_freeform
+    - tokenizer_eos_think512_program_slot
+    - tokenizer_eos_think512_freeform
+  calibration:
+    rows_per_cell: 48
+    total_answer_requests: 384
+    shared_thought_requests: 48
+    exact_echo_successes_min: 44
+    parse_successes_min: 44
+    answer_cap_contacts_max: 2
+    each_arity_rows: 24
+    each_arity_exact_successes_min: 22
+    each_arity_parse_successes_min: 22
+    each_arity_answer_cap_contacts_max: 1
+  transport:
+    rows: 24
+    suffix_arity_two_rows: 12
+    direct_arity_three_rows: 12
+    exact_echo_successes_min: 22
+    parse_successes_min: 22
+    answer_cap_contacts_max: 1
+    each_arity_exact_successes_min: 11
+    each_arity_parse_successes_min: 11
+
+generation:
+  max_model_len: 4096
+  max_num_seqs: 64
+  max_num_batched_tokens: 16384
+  enable_prefix_caching: false
+  cudagraph_capture_sizes: [1, 2, 4, 8, 16, 32, 64]
+  logprobs_mode: raw_logprobs
 
 mechanics:
   arms: [materialized, name_only, shuffled, direct]
+  suffix_rows_per_task: 24
+  direct_master_pool_per_task: 96
+  suffix_proposal_binding: canonical_tuple_of_semantic_candidate_first_plus_two_parsed_suffix_aliases
+  direct_proposal_binding: canonical_tuple_of_three_parsed_aliases
+  proposal_deduplication_unit: canonical_full_three_operation_tuple
+  canonical_full_program_id: base24_A_zero_two_byte_big_endian
   invocation_order: [transport, direct, materialized, name_only, shuffled]
-  initial_transport_requires_later_absent: true
-  historical_transport_requires_authenticated_complete_chain: true
   matched_direct_prefixes: [sampled_token_first_over, logical_model_token_first_over]
   selector: visible-probe-consensus-v1
+  visible_filter: exact_correctness_on_all_8_visible_rows
+  selector_tie_break: arm_blind_sha256_task_id_and_canonical_two_byte_program_id
+  abstention_task_score: 0
   hidden_task_success: exact_correctness_on_all_8_hidden_rows
+  all_generation_parse_rate_min: 0.90
+  all_generation_answer_cap_contact_rate_max: 0.05
+  materialized_selected_accuracy_min: 0.25
+  materialized_selected_successful_tasks_min: 6
+  selected_accuracy_gain_vs_name_min: 0.125
+  selected_accuracy_gain_vs_shuffled_min: 0.125
+  selected_accuracy_gain_vs_direct_sampled_min: 0.125
+  selected_accuracy_gain_vs_direct_logical_min: 0.125
+  materialized_oracle_coverage_min: 0.35
+  oracle_coverage_gain_vs_name_min: 0.125
+  oracle_coverage_gain_vs_shuffled_min: 0.125
+  oracle_coverage_gain_vs_direct_sampled_min: 0.125
+  oracle_coverage_gain_vs_direct_logical_min: 0.125
+  materialized_oracle_first_operation_support_min: 8
+  inferential_unit: task
+  inferential_scope: large_effect_pilot
+  exact_tests: report_only
+  bootstrap_resamples: 10000
+  direct_pool_exhaustion_allowed: false
+  exhaustive_depth_three_programs: 13824
+
+outcomes:
+  boundary_pairing_invalid: BOUNDARY_PAIRING_INVALID
+  tokenizer_only_interface: TOKENIZER_EOS_ONLY_INTERFACE_QUALIFIED
+  impossible_matched_pair_dual_qualification: SCORING_INVARIANT_VIOLATION
+  hf_only_interface: HF_ONLY_CONTROL_QUALIFIES_TOKENIZER_FAIL
+  neither_interface: NO_VALID_TOKENIZER_EOS_ANSWER_SEAM
+  transport_fail: SELECTED_INTERFACE_DID_NOT_TRANSPORT
+  mechanics_abi_fail: MECHANICS_INTERFACE_NONTRANSPORT
+  direct_resource_match_pool_exhausted: DIRECT_RESOURCE_MATCH_POOL_EXHAUSTED
+  capability_pass: TOKENIZER_EOS_MATERIALIZED_RESIDUAL_LARGE_EFFECT_PILOT_PASS
+  capability_fail: TOKENIZER_EOS_MATERIALIZED_RESIDUAL_LARGE_EFFECT_PILOT_FAIL
 
 boundaries:
-  model_calls_authorized: false
-  hidden_read_authorized: false
+  calibration_disjoint_from_mechanics: true
+  calibration_reads_mechanics: false
+  mechanics_reads_hidden_before_visible_selection_receipt: false
+  construction_collision_receipts_required: true
+  hidden_files_read: []
+  mechanics_files_read_by_calibration: []
+  qualification_files_read: []
+  confirmation_files_read: []
   benchmark_files_read: []
+  cheap_ranking_reopened: false
+  live_authorization: sealed_pending_design_pass_fresh_construction_and_implementation_lock

@@ -25,7 +25,7 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | `scripts/` | 162 |
 | `analysis/` | 161 |
 | `configs/` | 157 |
-| `data/` | 142 |
+| `data/` | 143 |
 | `logs/` | 64 |
 | `run_logs/` | 55 |
 | `tests/` | 53 |
@@ -39,22 +39,22 @@ This is a repository-level inventory. Each experiment remains the source of trut
 
 | Extension | Files |
 | --- | ---: |
-| `.json` | 3185 |
-| `.py` | 2183 |
+| `.json` | 3190 |
+| `.py` | 2219 |
 | `.csv` | 2144 |
 | `.md` | 1255 |
-| `.jsonl` | 958 |
+| `.jsonl` | 967 |
 | `.png` | 848 |
 | `.log` | 566 |
 | `.yaml` | 460 |
 | `.gz` | 169 |
 | `.html` | 90 |
 | `.sh` | 31 |
-| `[none]` | 16 |
+| `[none]` | 17 |
 | `.pt` | 11 |
 | `.txt` | 5 |
-| `.s` | 2 |
-| `.aesgcm` | 1 |
+| `.s` | 4 |
+| `.aesgcm` | 2 |
 | `.npy` | 1 |
 
 ## Largest Files
@@ -78,6 +78,7 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | 8.5 | `experiments/qwen35_4b_learned_active_trace_policy/data/static_bridge_80/dsl_train.jsonl` |
 | 8.4 | `experiments/qwen35_4b_foofah_program_ensemble_consensus/reports/full_ensemble_records.jsonl` |
 | 8.3 | `experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/runs/tokenizer/receipt.json` |
+| 8.3 | `experiments/qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay/runs/tokenizer/receipt.json` |
 | 8.2 | `experiments/qwen35_4b_learned_active_trace_policy/data/static_bridge_60/dsl_train.jsonl` |
 | 8.2 | `experiments/qwen35_4b_answer_potential_trace_sft/runs/calibration/thoughts.jsonl` |
 | 8.1 | `experiments/qwen35_4b_answer_potential_trace_sft/runs/calibration/rollouts.jsonl` |
@@ -90,4 +91,3 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | 7.1 | `experiments/qwen35_4b_verified_macro_long_context_rerun/runs/interface/think_16384/designed_ceiling.jsonl` |
 | 7.0 | `experiments/qwen35_4b_learned_active_trace_policy/data/eval/dsl_eval_ceiling.jsonl` |
 | 7.0 | `experiments/qwen35_4b_active_counterexample_trace_selection/data/eval/dsl_eval_ceiling.jsonl` |
-| 6.9 | `experiments/qwen35_4b_universal_search_scaffold_token_match/data/sft_blend.jsonl` |

@@ -1,0 +1,139 @@
+{
+  "answer_stage_stop_ids": {
+    "hf_model_eos_control": 248044,
+    "tokenizer_eos_candidate": 248046
+  },
+  "boundary_pair_cases": {
+    "hf_stop_first": {
+      "compared_tokens": 2,
+      "failure": null,
+      "hf_event": "stop",
+      "tokenizer_event": "stop",
+      "valid_pair": true
+    },
+    "prefix_divergence": {
+      "compared_tokens": 3,
+      "failure": "sampled_prefix_divergence",
+      "hf_event": "stop",
+      "tokenizer_event": "stop",
+      "valid_pair": false
+    },
+    "shared_cap": {
+      "compared_tokens": 3,
+      "failure": null,
+      "hf_event": "length",
+      "tokenizer_event": "length",
+      "valid_pair": true
+    },
+    "short_length_claim": {
+      "compared_tokens": 0,
+      "failure": "tokenizer_short_output_relabeled_length",
+      "hf_event": "length",
+      "tokenizer_event": "length",
+      "valid_pair": false
+    },
+    "tokenizer_stop_first": {
+      "compared_tokens": 3,
+      "failure": null,
+      "hf_event": "stop",
+      "tokenizer_event": "stop",
+      "valid_pair": true
+    }
+  },
+  "boundary_pair_policy": "all_pairs_through_earliest_stop_or_cap",
+  "cases": {
+    "early_tokenizer_stop": {
+      "content_token_ids": [
+        78041,
+        25
+      ],
+      "failure": "precommit_content_mismatch",
+      "policy": "tokenizer_eos_answer_stage",
+      "stop_token_id": 248046,
+      "strict_exact": false,
+      "valid_trace": true
+    },
+    "extra_precommit_byte": {
+      "content_token_ids": [
+        78041,
+        25,
+        357,
+        735,
+        426,
+        198
+      ],
+      "failure": "precommit_content_mismatch",
+      "policy": "tokenizer_eos_answer_stage",
+      "stop_token_id": 248046,
+      "strict_exact": false,
+      "valid_trace": true
+    },
+    "hf_boundary_control": {
+      "content_token_ids": [
+        78041,
+        25,
+        357,
+        735,
+        426,
+        248046,
+        198
+      ],
+      "failure": "precommit_content_mismatch",
+      "policy": "hf_model_eos_answer_stage",
+      "stop_token_id": 248044,
+      "strict_exact": false,
+      "valid_trace": true
+    },
+    "interior_and_terminal_stop": {
+      "content_token_ids": [
+        78041,
+        25,
+        357,
+        735,
+        426
+      ],
+      "failure": "tokens_after_first_registered_stop",
+      "policy": "tokenizer_eos_answer_stage",
+      "stop_token_id": 248046,
+      "strict_exact": false,
+      "valid_trace": false
+    },
+    "missing_stop": {
+      "content_token_ids": [
+        78041,
+        25,
+        357,
+        735,
+        426
+      ],
+      "failure": "missing_registered_stop",
+      "policy": "tokenizer_eos_answer_stage",
+      "stop_token_id": 248046,
+      "strict_exact": false,
+      "valid_trace": false
+    },
+    "tokenizer_clean": {
+      "content_token_ids": [
+        78041,
+        25,
+        357,
+        735,
+        426
+      ],
+      "failure": null,
+      "policy": "tokenizer_eos_answer_stage",
+      "stop_token_id": 248046,
+      "strict_exact": true,
+      "valid_trace": true
+    }
+  },
+  "content_sha256": "50791c24987d58780f1035cb10bb97d7515c3366af87e18ec06a35f506c20290",
+  "decision": "MODEL_FREE_COMMIT_PROTOCOL_VALID",
+  "model": "Qwen/Qwen3.5-4B",
+  "model_calls": 0,
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "sampled_outputs": 0,
+  "schema_version": 2,
+  "stage": "model_free_protocol_smoke",
+  "thought_stage_policy_changed": false
+}
