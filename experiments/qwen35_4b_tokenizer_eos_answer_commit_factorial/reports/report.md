@@ -67,10 +67,17 @@ The design pass authorizes fresh construction and implementation, not model
 execution. A separate adversarial implementation release review and committed-
 green lock remain mandatory.
 
+Fresh model-free construction now passes. It produced 72 predecessor-disjoint
+tasks, all frozen calibration/transport/mechanics request inventories, balanced
+arity/stratum/alias receipts, and zero request/seed/prompt/derived-seed
+collisions. Mechanics gold is sealed as tracked AES-256-GCM ciphertext with an
+ignored local key. Model calls and sampled outputs remain zero.
+
 ## Next Experiments
 
-Complete fresh construction, adversarial design review, and staged
-authorization. Stop if calibration fails.
+Complete paired-boundary runner, transaction, tokenizer-grammar, selector,
+lock, and malformed-runner implementation; pass adversarial release review;
+then stop if calibration fails.
 
 ## Artifact Manifest
 

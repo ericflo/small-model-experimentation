@@ -44,6 +44,12 @@
   commit `abd2ffcd8bf4aa35c7f79e175a99cf6614c2ae27`; both workflows succeeded
   and the immutable archive passed 35/35 tests. Construction is authorized,
   but live calls remain sealed pending implementation review and lock.
+- Ran deterministic model-free construction under seed `2026140700`: 48
+  calibration plus 24 mechanics tasks passed exact-depth, uniqueness, per-arity
+  8/8/4/4, alias-position, predecessor-fingerprint, request, prompt, transport-
+  namespace, and 5,904-derived-seed collision gates. Sealed 24 mechanics-gold
+  rows as AES-256-GCM ciphertext under an ignored local key. No model was loaded
+  or called and hidden plaintext was not written.
 
 ## Scaffold
 

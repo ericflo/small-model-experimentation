@@ -1,17 +1,35 @@
 # Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
 schema_version: 1
 experiment_id: "qwen35_4b_tokenizer_eos_answer_commit_factorial"
-external_artifacts: []
-omitted_artifacts: []
+external_artifacts:
+  - name: mechanics_gold_aes256_key
+    path: "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/.secrets/mechanics_gold.aes256.key"
+    sha256: "c22936fb4b60b26fe816b2e5db19f4e2e88d7750a840c764c9c1dac5e6f0cabc"
+    required_for: "post-selection hidden scoring only"
+    tracked: false
+omitted_artifacts:
+  - name: mechanics_gold_plaintext
+    reason: "never written; only AES-256-GCM ciphertext is tracked before hidden unlock"
 reproducibility:
   smoke_command: "python3 -B experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/run.py --smoke"
-  full_command: "sealed pending construction, design review, implementation lock, and green publication boundary"
-  required_external_artifacts: []
+  construction_command: "python3 -B experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/construct.py"
+  full_command: "sealed pending implementation review, implementation lock, and green publication boundary"
+  required_external_artifacts:
+    - mechanics_gold_aes256_key
 local_receipts:
   model_free_protocol_smoke:
     path: "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/runs/smoke/summary.json"
     sha256: "25a48f16b04153786277bed2c6ac751434bf3c559fe1d7e2df4abff450b1bea9"
+  construction_summary:
+    path: "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/runs/construction/summary.json"
+    sha256: "d507e9812af95256b7fe4c436d1fe851a3087360494a3b5333bde0eca187cb78"
+  preoutcome_receipt:
+    path: "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/runs/prepared/preoutcome_receipt.json"
+    sha256: "180058c6beba980c2c4b3a9dbe3f583231163474d393526773aecca84e23a263"
+  mechanics_gold_ciphertext:
+    path: "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/data/procedural/mechanics_gold.jsonl.aesgcm"
+    sha256: "01e252ded8155761a5f3186581244969c78f0037a46aade5e23eb1a4853441ab"
 notes: >-
-  Model-free protocol and all-pair smoke only. No task construction, model
-  call, sampled output, calibration, mechanics, protected-label, or benchmark
-  read exists.
+  Model-free protocol, all-pair smoke, fresh construction, and preoutcome
+  inventory only. No model call, sampled output, calibration, mechanics,
+  protected-label plaintext, or benchmark read exists.

@@ -1,0 +1,61 @@
+{
+  "benchmark_files_read": [],
+  "config_sha256": "6f3b065e471ed0f9b602816882993e98294d97527a539589a6f1bda08217a4d3",
+  "confirmation_files_read": [],
+  "construction_summary_sha256": "d507e9812af95256b7fe4c436d1fe851a3087360494a3b5333bde0eca187cb78",
+  "decision": "PREOUTCOME_PASS",
+  "expected_invocation_rows": {
+    "calibration_answer_total": 384,
+    "calibration_each_cell": 48,
+    "calibration_shared_thought": 48,
+    "direct_master_pool": 2304,
+    "suffix_materialized": 576,
+    "suffix_name_only": 576,
+    "suffix_shuffled": 576,
+    "transport_selected_interface": 24
+  },
+  "hidden_ciphertext": {
+    "aad_utf8": "tokenizer-eos-answer-commit-factorial-v1/mechanics-gold-v1",
+    "algorithm": "AES-256-GCM",
+    "ciphertext_path": "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/data/procedural/mechanics_gold.jsonl.aesgcm",
+    "ciphertext_sha256": "01e252ded8155761a5f3186581244969c78f0037a46aade5e23eb1a4853441ab",
+    "key_tracked": false,
+    "local_key_path": "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/.secrets/mechanics_gold.aes256.key",
+    "local_key_sha256": "c22936fb4b60b26fe816b2e5db19f4e2e88d7750a840c764c9c1dac5e6f0cabc",
+    "plaintext_rows": 24,
+    "plaintext_sha256": "76a3fee13739f6a3b28522bfdbf4bec6a3383f5a69acbd375f7eb94b609b8267"
+  },
+  "hidden_files_read": [],
+  "model_calls": 0,
+  "model_loaded": false,
+  "qualification_files_read": [],
+  "request_files": {
+    "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/runs/prepared/calibration_requests.jsonl": {
+      "rows": 48,
+      "sha256": "5ba7bdc2e50830cd57eda2e8eb655a1eba82d5259f5f66ad9a8a5a1f4cd7a011"
+    },
+    "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/runs/prepared/direct_requests.jsonl": {
+      "rows": 2304,
+      "sha256": "ad37f16546f311a7e0d68e0d7fc77d1dadb87a640560fc874af17d82ba673a4e"
+    },
+    "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/runs/prepared/suffix_materialized_requests.jsonl": {
+      "rows": 576,
+      "sha256": "54130f04de5159f50f18d25cf7352c8c6a5ae6e61f8ab65bc0e4e825d814192e"
+    },
+    "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/runs/prepared/suffix_name_only_requests.jsonl": {
+      "rows": 576,
+      "sha256": "31cb03ef9323044775ba0cc47d7da982e4a06f2846a8c72817975680a5215b26"
+    },
+    "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/runs/prepared/suffix_shuffled_requests.jsonl": {
+      "rows": 576,
+      "sha256": "af8b751621cc62ab1f6a591cd7c150c53eca102ad268b22244e93c333b0bcd2f"
+    },
+    "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/runs/prepared/transport_requests.jsonl": {
+      "rows": 24,
+      "sha256": "d3a591d3d2078c561fc00bc86759cacf5c51d42cdbc6eb613104a315043ab472"
+    }
+  },
+  "sampled_model_outputs": 0,
+  "schema_version": 2,
+  "stage": "preoutcome_prepare"
+}

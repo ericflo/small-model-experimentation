@@ -1,6 +1,6 @@
 # Qwen3.5-4B Tokenizer-EOS Answer Commit Factorial
 
-**Status:** in-progress · since 2026-07-14 · adversarial `PASS_DESIGN` at `abd2ffcd`; construction/implementation next; no model call
+**Status:** in-progress · since 2026-07-14 · adversarial `PASS_DESIGN`; fresh construction and preoutcome receipt pass; implementation review next; no model call
 
 This fresh successor tests whether the prior strict answer-seam failure was
 caused by waiting past Qwen3.5's tokenizer chat-end token. It registers the
@@ -97,10 +97,16 @@ Model-free smoke:
 python3 -B experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/run.py --smoke
 ```
 
+Fresh construction:
+
+```bash
+python3 -B experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/construct.py
+```
+
 Full:
 
 ```bash
-sealed pending fresh construction, adversarial design review, implementation lock, and green publication boundary
+sealed pending implementation release review, implementation lock, and green publication boundary
 ```
 
 ## Results
@@ -116,8 +122,16 @@ as content.
 
 After six prospective holds, global independent rereview returned
 `PASS_DESIGN` for exact pushed/green commit `abd2ffcd`. No model or capability
-result exists; live execution remains sealed behind construction,
-implementation review, and a committed-green lock.
+result exists; live execution remains sealed behind implementation release
+review and a committed-green lock.
+
+Model-free construction then passed with 48 calibration and 24 mechanics tasks,
+the frozen 8/8/4/4 strata in each calibration arity and mechanics, every A-X
+alias once per answer position, zero overlap with all 72 predecessor public
+fingerprints, zero request/seed/prompt/derived-seed overlap, and a distinct
+transport namespace. Mechanics gold exists only as tracked AES-256-GCM
+ciphertext; its key is local and ignored. Model calls and sampled outputs remain
+zero.
 
 ## Interpretation
 

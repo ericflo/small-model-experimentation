@@ -5424,10 +5424,13 @@
   },
   {
     "file_counts": {
-      ".json": 1,
+      ".aesgcm": 1,
+      ".json": 3,
+      ".jsonl": 9,
       ".md": 7,
-      ".py": 5,
-      ".yaml": 3
+      ".py": 10,
+      ".yaml": 3,
+      "[none]": 1
     },
     "id": "qwen35_4b_tokenizer_eos_answer_commit_factorial",
     "path": "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial",
@@ -5445,14 +5448,15 @@
     "title": "Qwen3.5-4B Tokenizer-EOS Answer Commit Factorial",
     "top_level_dirs": [
       "configs",
+      "data",
       "reports",
       "runs",
       "scripts",
       "src",
       "tests"
     ],
-    "total_files": 16,
-    "total_size_bytes": 162501
+    "total_files": 34,
+    "total_size_bytes": 6380441
   },
   {
     "file_counts": {
