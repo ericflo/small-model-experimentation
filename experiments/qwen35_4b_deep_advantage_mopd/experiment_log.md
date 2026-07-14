@@ -328,3 +328,23 @@
 - All 209 experiment tests pass, including explicit mutation transitions after
   authorization and after admission. This is evidence-pipeline hardening only;
   it changes no treatment, gate, or capability conclusion.
+
+## 2026-07-14 — non-advantage-route control arm completes (interim)
+
+- The four-round full-prefix non-advantage-route arm completed 20/20
+  consume-once updates in every round. Mean corrected losses were
+  `0.05393`/`0.05036`/`0.04990`/`0.04619`; every frozen full-round gate passed.
+- Held-probe loss improved `0.06090→0.03392`, `0.04644→0.02432`,
+  `0.04979→0.02781`, and `0.03674→0.02730`. Top-50 overlap increased in all
+  four rounds. Round-0 probe entropy contracted `10.47%`, retained as a
+  non-gating collapse-risk warning; later contractions were `7.79%`, `16.34%`,
+  and `4.33%`.
+- The full-prefix overlay reproduced the original matched mapping byte-for-byte
+  in rounds 0, 2, and 3. Round 1 deterministically replaced the sole original
+  state that violated zero-truncation eligibility; no training role was
+  truncated. The terminal merge receipt is
+  `99e4d3258f450173204466bd4a2b4f1dfadfc54d706008e6fc3944a5f7bd57f5`.
+- This is an explicit in-progress checkpoint while wrong-teacher, off-policy
+  SFT, and parameter controls run. The aggregate tracked controls receipt does
+  not yet exist, so this arm is not admitted to confirmation and supports no
+  causal or capability conclusion.
