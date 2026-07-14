@@ -1,6 +1,6 @@
 # Failure-Selected Counterfactual Restart Curriculum
 
-**Status:** in-progress · since 2026-07-14 · paired training complete; merged-composite local design is next
+**Status:** in-progress · since 2026-07-14 · paired training and fresh-local design complete; replay-control merge is next
 
 This experiment tests whether selecting the stronger parent's fresh procedural
 failures and teaching clean verified restarts can beat exactly exposure-matched replay
@@ -70,9 +70,19 @@ PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B \
 ```
 
 Both paired training events have completed. The smoke path reauthenticates their
-tracked receipts/logs and external adapters. No further model event is currently
-authorized: explicit merged-composite construction and fresh-local evaluation must
-receive a separate design/checkpoint before they run.
+tracked receipts/logs and external adapters plus the separately frozen fresh-local
+design. After that design is published and both repository workflows are green, the
+only authorized next event is:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B \
+  experiments/qwen35_4b_universal_failure_selected_restart_target_match/scripts/run.py \
+  --stage merge-control
+
+```
+
+Candidate merge requires the published control-merge receipt. Local generation
+requires both published current-arm merge receipts and runs with `--stage local`.
 
 ## Results
 
@@ -142,6 +152,19 @@ reauthenticates the published control prerequisite while proving the candidate w
 start remained the original parent. Training loss is not a capability comparison.
 No merge or evaluation has run.
 
+The separately reviewed fresh-local design now freezes 26 new procedural items at
+seed 88,010, exactly two per universal skill, and compares the unchanged replay
+parent, matched-exposure replay continuation, and counterfactual-restart candidate.
+Source/input/design-receipt SHA-256 values are `7b69473b...975f`,
+`6efefc92...15e2`, and `124bbf99...2db5`.
+Every arm uses the same explicit-composite vLLM runner and geometry. Promotion
+requires the candidate's absolute 17/26 floor plus strict wins over both controls on
+total correct and the six execute/induct/probe items. Complete seven-file composite
+tree manifests, pre/post-arm model and Git authentication, strict 78-row receipt
+shape, and durable failure receipts close deployment and transaction ambiguity.
+Aggregate seed 78,140 remains sealed. This is frozen design evidence, not a
+capability result.
+
 ## Interpretation
 
 This trial distinguishes two ideas the predecessor confounded: selecting data from
@@ -173,4 +196,7 @@ recomputation, not long-prefix repair. A negative result would reject this balan
   `data/counterfactual_restart_candidate.jsonl` — exact integral partition and frozen streams.
 - `data/stream_token_receipt.json` — independent final-stream exposure validation.
 - `reports/compute_review.md` — second adversarial review and control-only authorization.
+- `reports/local_design_review.md` — explicit-composite and fresh-local adversarial review.
+- `data/local_tasks_seed88010.jsonl`, `data/local_input_seed88010.jsonl`, and
+  `data/local_design_receipt.json` — executable truth, hidden-free input, and frozen local protocol.
 - `src/vllm_runner.py` — pinned same-backend runner with explicit-composite gate.

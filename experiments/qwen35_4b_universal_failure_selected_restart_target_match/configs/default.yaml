@@ -79,6 +79,26 @@ training_results:
     log_sha256: c8572c88b6977ecb2666dd5ab471b1079517b75bfedf6387ece98551f9f2202a
     adapter_config_sha256: 6915787d341bdf3c932401586bd209b507e17a36f045c262084fdea7d97f7f50
     adapter_weights_sha256: 2072c5c81e0ce35161bfe7b49d9995b2152b8e49aa09db3a2f247c37218639bc
+deployment_plan:
+  method: explicit_full_composite_merge
+  runtime_lora_forbidden: true
+  applied_nonzero_modules_per_arm: 128
+  lora_scale: 2.0
+  complete_tree_manifest_required: true
+  stage_order: [merge-control, merge-candidate, local]
+local_gate:
+  designed: true
+  completed: false
+  seed: 88010
+  rows_per_arm: 26
+  arms: [replay_parent, replay_control, counterfactual_restart_candidate]
+  backend: vllm_merged_composite
+  thinking: natural
+  greedy: true
+  samples_per_task: 1
+  max_tokens: 1024
+  max_model_len: 4096
+  strict_control_relative_wins_required: true
 firewall:
   benchmark_data_read: false
   aggregate_seed_open: false

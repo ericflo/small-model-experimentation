@@ -27,7 +27,13 @@ omitted_artifacts:
     reason: "both adapters are recorded above; future merged composites are large and gitignored"
 reproducibility:
   smoke_command: "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_failure_selected_restart_target_match/scripts/run.py --smoke"
-  full_command: "none yet: paired training is complete; explicit merge and local-evaluation design must be published next"
+  full_command: "checkpointed sequence below; never run stages back-to-back without publishing and waiting for both workflows"
+  result_stage_sequence:
+    - "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_failure_selected_restart_target_match/scripts/run.py --stage merge-control"
+    - "publish the control receipt and wait for both green workflows"
+    - "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_failure_selected_restart_target_match/scripts/run.py --stage merge-candidate"
+    - "publish the candidate receipt and wait for both green workflows"
+    - "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_failure_selected_restart_target_match/scripts/run.py --stage local"
   required_external_artifacts:
     - "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/merged/replay_after_close"
     - "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/adapters/replay_after_close"
@@ -54,4 +60,9 @@ notes: >-
   5840757d...b1c. From pushed-green commit 2c78e655, the candidate independently
   trained 320/320 rows with zero skips and 40/40 updates; its corresponding hashes
   are 6aa5c3f1...9871, c8572c88...202a, 6915787d...7f50, and
-  2072c5c8...39bc. No composite, local event, or benchmark event exists.
+  2072c5c8...39bc. Fresh-local seed 88010 now freezes 26 hidden-label procedural
+  items and a three-arm same-vLLM explicit-composite comparison. Source/input/design
+  hashes are 7b69473b...975f, 6efefc92...15e2, and 124bbf99...2db5. Its reviewed stage
+  order is control merge, publish, candidate merge, publish, then local. Complete
+  composite-tree hashing and pre/post-arm authentication are mandatory. No current-
+  arm composite, local result, or benchmark event exists.

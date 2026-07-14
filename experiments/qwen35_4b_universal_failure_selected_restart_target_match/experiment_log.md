@@ -119,3 +119,27 @@
 - Paired training is complete. Explicit-composite merge and fresh-local evaluation
   require a new checked, committed, rebased, pushed, two-workflow-green design
   checkpoint.
+
+## 2026-07-14 — Frozen explicit-composite local design
+
+- Materialized fresh local seed 88,010 only after both training receipts were
+  published. It contains 26 executable-truth tasks, exactly two per all 13 skills,
+  with an answer-free 26-row runner input.
+- Source/input/design-receipt hashes are `7b69473b...975f`, `6efefc92...15e2`,
+  and `124bbf99...2db5`.
+- Verified zero canonical-message overlap with both final training streams, the
+  parent collection source, and all 260 prior local items from seeds 88,000–88,009.
+- Froze one same-vLLM comparison of the unchanged replay parent, matched-exposure
+  replay control, and counterfactual-restart candidate: natural thinking, greedy
+  `n=1`, 1,024-token cap, 4,096 context, and identical scheduler/CUDA-graph geometry.
+- Froze candidate absolute gates and strict wins over both controls on total correct
+  and execute/induct/probe correct. Receipt shape requires exactly the same 26 tasks,
+  two per kind, in all three arms.
+- Hardened explicit merges to hash the complete seven-file config/tokenizer/weight
+  tree, validate the exact Qwen3.5-4B fingerprint and 128 nonzero LoRA applications,
+  and preserve post-merge validation failures.
+- Hardened the local transaction with full model/design/Git reauthentication before
+  and after every arm plus durable process/validation failure receipts.
+- Adversarial verdict: `PASS_CONTROL_MERGE` only. Candidate merge requires a
+  separately published control merge; local generation requires both. No model call
+  or capability result occurred, and aggregate seed 78,140 remains sealed.

@@ -3,8 +3,9 @@
 ## Current status
 
 The model-free design, one authenticated parent rollout, frozen failure selection,
-exact-exposure stream freeze, and both paired training events are complete. No merge,
-local evaluation, or benchmark event has run.
+exact-exposure stream freeze, both paired training events, and the separately
+reviewed fresh-local protocol are complete. No current-arm merge, local result, or
+benchmark event has run.
 
 The active hypothesis is that task-level on-policy failure selection can help when
 the supervised example restarts cleanly before the error and target exposure is
@@ -39,10 +40,16 @@ frozen contract.
   complete 169,903,320-byte adapter. Receipt/log/adapter hashes are
   `6aa5c3f1...9871`, `c8572c88...202a`, and `2072c5c8...39bc`. Its receipt binds the
   published control prerequisite and independent original-parent warm start.
+- Fresh local protocol: seed 88,010; 26 new tasks, two per all 13 skills; hidden-free
+  runner input; identical explicit-composite vLLM geometry across unchanged parent,
+  replay control, and candidate; complete model-tree authentication; strict absolute
+  and two-control-relative promotion rules. Source/input/design hashes are
+  `7b69473b...975f`, `6efefc92...15e2`, and `124bbf99...2db5`. This is design
+  evidence only.
 
 ## Next authorized event
 
-After the candidate receipt and log are committed, rebased, pushed to `main`, and
-both workflows are green, freeze explicit control/candidate merge authentication and
-the fresh-local design. No merge or capability event is authorized by this training
-checkpoint alone.
+After the fresh-local design is committed, rebased, pushed to `main`, and both
+workflows are green, run only the replay-control explicit merge. Candidate merge
+requires that control receipt to pass the same publication checkpoint. Local
+generation requires both published merge receipts; aggregate access remains sealed.

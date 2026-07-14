@@ -44,6 +44,7 @@ PARENT_ADAPTER = (
     / "replay_after_close"
 )
 ADAPTER_ROOT = ROOT / "large_artifacts" / EXP.name / "adapters"
+MERGED_ROOT = ROOT / "large_artifacts" / EXP.name / "merged"
 
 
 def sha256_file(path: Path) -> str:
@@ -206,9 +207,27 @@ def smoke() -> None:
                 validate_published_arm(
                     "counterfactual_restart_candidate", require_committed=False
                 )
+    local_design = EXP / "data" / "local_design_receipt.json"
+    if local_design.exists():
+        run([sys.executable, "-B", str(SCRIPTS / "gen_local_gate.py"), "--check"])
+        local_review = (EXP / "reports" / "local_design_review.md").read_text(
+            encoding="utf-8"
+        )
+        if "**Verdict:** `PASS_CONTROL_MERGE`." not in local_review:
+            raise SystemExit("local adversarial review has not authorized control merge")
+        sys.path.insert(0, str(SCRIPTS))
+        from merge_trained_arm import validate_published_merge
+
+        merge_dir = EXP / "runs" / "merges"
+        if (merge_dir / "replay_control.json").exists():
+            validate_published_merge("replay_control", require_committed=False)
+            if (merge_dir / "counterfactual_restart_candidate.json").exists():
+                validate_published_merge(
+                    "counterfactual_restart_candidate", require_committed=False
+                )
     print(
-        "PASS: model-free design, merged-parent, freshness, restart selection, "
-        "exact exposure, and control-training authorization contracts"
+        "PASS: model-free construction, paired training, and frozen "
+        "explicit-composite local-deployment contracts"
     )
 
 
@@ -218,7 +237,15 @@ def main() -> int:
     group.add_argument("--smoke", action="store_true")
     group.add_argument(
         "--stage",
-        choices=("collect-parent", "mine-restarts", "train-control", "train-candidate"),
+        choices=(
+            "collect-parent",
+            "mine-restarts",
+            "train-control",
+            "train-candidate",
+            "merge-control",
+            "merge-candidate",
+            "local",
+        ),
     )
     args = parser.parse_args()
     if args.smoke:
@@ -287,6 +314,54 @@ def main() -> int:
             "--seed",
             "48",
         ])
+        return 0
+    if args.stage in {"merge-control", "merge-candidate"}:
+        require_pushed_checkpoint(
+            "experiments/qwen35_4b_universal_failure_selected_restart_target_match/data/local_design_receipt.json"
+        )
+        require_pushed_checkpoint(
+            "experiments/qwen35_4b_universal_failure_selected_restart_target_match/reports/local_design_review.md"
+        )
+        name = (
+            "replay_control"
+            if args.stage == "merge-control"
+            else "counterfactual_restart_candidate"
+        )
+        require_pushed_checkpoint(
+            "experiments/qwen35_4b_universal_failure_selected_restart_target_match/"
+            f"runs/training/{name}.json"
+        )
+        if args.stage == "merge-candidate":
+            require_pushed_checkpoint(
+                "experiments/qwen35_4b_universal_failure_selected_restart_target_match/"
+                "runs/merges/replay_control.json"
+            )
+        run(
+            [
+                sys.executable,
+                "-B",
+                str(SCRIPTS / "merge_trained_arm.py"),
+                "--name",
+                name,
+                "--adapter",
+                str(ADAPTER_ROOT / name),
+                "--out",
+                str(MERGED_ROOT / name),
+            ]
+        )
+        return 0
+    if args.stage == "local":
+        for relative in (
+            "data/local_design_receipt.json",
+            "reports/local_design_review.md",
+            "runs/merges/replay_control.json",
+            "runs/merges/counterfactual_restart_candidate.json",
+        ):
+            require_pushed_checkpoint(
+                "experiments/qwen35_4b_universal_failure_selected_restart_target_match/"
+                + relative
+            )
+        run([sys.executable, "-B", str(SCRIPTS / "eval_local_vllm.py")])
         return 0
     raise AssertionError(args.stage)
 
