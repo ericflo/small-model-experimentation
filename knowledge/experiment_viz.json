@@ -68,6 +68,41 @@
     }
    ]
   },
+  "qwen35_4b_state_formation_branch_handoff_recovery": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "All six handoff lineage controls pass before downstream model work",
+     "categories": [
+      "false rejection reproduced",
+      "retirement exact",
+      "failure archive exact",
+      "retired mirror absent",
+      "successful G0 exact",
+      "G0 invocation exact"
+     ],
+     "series": [
+      {
+       "label": "control pass",
+       "values": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+       ]
+      }
+     ],
+     "x_label": "frozen handoff control",
+     "y_label": "pass indicator",
+     "y_format": "integer",
+     "note": "Operational evidence only. Smoke loads no model, starts no training/evaluation, and opens no benchmark or sealed contrast.",
+     "source": "experiments/qwen35_4b_state_formation_branch_handoff_recovery/runs/smoke.json"
+    }
+   ]
+  },
   "qwen35_4b_early_text_hypothesis_forking": {
    "charts": [
     {

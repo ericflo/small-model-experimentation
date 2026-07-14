@@ -1,0 +1,63 @@
+{
+  "benchmark_paths_opened": 0,
+  "control_passes": {
+    "archived_failure_exact": 1,
+    "pathname_only_false_rejection_reproduced": 1,
+    "retired_mirror_absent": 1,
+    "retirement_receipt_exact": 1,
+    "successful_g0_bytes_identity_and_status_exact": 1,
+    "successful_g0_invocation_lineage_exact": 1
+  },
+  "experiment_id": "qwen35_4b_state_formation_branch_handoff_recovery",
+  "first_recovery_smoke_sha256": "8bf5bb36f62504163b62f1962258fad15088ed307be6139068e9b0062b446849",
+  "first_recovery_source_contract_sha256": "55d0a4550abfd09da74bc065cfe61f405f288d32344df1607b0b37ed97f956f3",
+  "handoff_source_contract_sha256": "4d2ffde3b1b7b017cd2ef27601c3c0eb6374be879f7badd92fdca494d19d8acd",
+  "handoff_source_files": [
+    {
+      "bytes": 1574,
+      "path": "configs/default.yaml",
+      "sha256": "c2f5172804749f10ca149f4c546622b6bc2009fa9541d0cdedd1c45e32c24fe1"
+    },
+    {
+      "bytes": 4687,
+      "path": "reports/design_review.md",
+      "sha256": "3ff6d663ea65552021a312ca5037d634c75748f6baeb692703a7b020d1abb42a"
+    },
+    {
+      "bytes": 3649,
+      "path": "scripts/run.py",
+      "sha256": "bea3641c8b0d0d5200349cac9df6f050ff005b504e92843c74b8eae57f5fd674"
+    },
+    {
+      "bytes": 47,
+      "path": "src/__init__.py",
+      "sha256": "acec5263009548ecbf69c18a5e019e23cd0aac5d1b639dc40b3bd869161d5cbc"
+    },
+    {
+      "bytes": 19457,
+      "path": "src/handoff.py",
+      "sha256": "7e51e44e9910e4b4d1982bd2157b8bbdfe3724a993af070ecabcd8dc156165f8"
+    },
+    {
+      "bytes": 5096,
+      "path": "tests/test_handoff.py",
+      "sha256": "98051735eb7f28d3c8d2a778428e3fe79d89daf637c0a4415970e8df871e7b04"
+    }
+  ],
+  "lineage": {
+    "first_recovery_complete_identity_sha256": "0e85031d80977ed339126d1a548899dbcd17818a971078ae2aee0571349a4b96",
+    "first_recovery_started_identity_sha256": "d65037c34b45e506d05903cf388dec669cdbe2997883d0855392a45ce29cac81",
+    "retirement_receipt_identity_sha256": "c9abdc592669c3a2fb13388acdce9bde326b6960fe16175060eddea50612eae7",
+    "successful_g0_receipt_identity_sha256": "e1f1c9069b9d94224a358e26795e2938e6a9623b7be296eca0f5f55b0e6f89dc"
+  },
+  "model_loaded": false,
+  "original_false_rejection": "failed G0 pair must be archived and retired before recovered invocation",
+  "producer_experiment_id": "qwen35_4b_state_formation_capacity_adjudication",
+  "producer_source_contract_sha256": "5a8ed26ddb9446c728191ca8e7849ae44cff92a700e24b237dac522cf4286666",
+  "receipt_identity_sha256": "d6fecf0a0ee4d725f8a25c332d7f13ca1ca717836330c8ea97cdc8117934de4c",
+  "schema_version": 1,
+  "scientific_interpretation_changed": false,
+  "sealed_contrast_rows_opened": 0,
+  "status": "BRANCH_HANDOFF_RECOVERY_SMOKE_PASS",
+  "training_or_evaluation_started": false
+}

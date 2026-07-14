@@ -2,11 +2,11 @@
 
 ## Status
 
-Pre-retry. The first full-rank Stage-B G0 failed before model load while immutable v11 recomputed its
-LoRA-miss authorization through the already-known nonlexical external-prefix defect. The frozen
-downstream recovery smoke now passes, and the exact failure pair is durably archived. Archive commit
-`bdedabf4…b6b2` passed both workflows, and the exact producer pair is now retired under
-a terminal receipt awaiting publication. This is mechanics evidence, not a full-rank or LoRA result.
+Operational partial. The first full-rank Stage-B G0 failed before model load while immutable v11
+recomputed its LoRA-miss authorization through the already-known nonlexical external-prefix defect.
+This recovery archived and retired the exact failure and then produced a valid full-rank seed-7411
+G0. Its frozen pathname-only retirement guard cannot hand off to later stages, so an additive
+successor is active. This remains mechanics/setup evidence, not a LoRA/full-rank capacity result.
 
 ## Method
 
@@ -30,14 +30,20 @@ commit-backed failure archival/retirement precede retry.
   source pair and occupy a third inode.
 - Retirement: file SHA-256 `6e4c8ee3…53ad`, identity `c9abdc59…eae7`; all four archive-commit blobs
   revalidated, only the producer pair removed, and the recovery archive retained.
+- Recovered G0: `MODEL_SMOKE_PASS`, file SHA-256 `cdc90cd…c68f`, identity
+  `e1f1c906…f89dc`; exact K=1 and round-trip error zero, all 62 full-rank deltas have finite nonzero
+  joint gradients and complete finite optimizer state, with about 22.1 GiB free after G0.
+- Frozen handoff defect: the next stage was rejected before wrapper STARTED publication because the
+  retirement guard tests pathname existence rather than the retired failure's exact bytes/status.
 
 ## Interpretation
 
-The original analysis recovery was scientifically correct but operationally incomplete: it could
-produce branch receipts that immutable downstream consumers could not reopen. This successor must
-prove the same seam at the consumer boundary without broadening it. No capacity conclusion changes.
+The original analysis recovery was scientifically correct but operationally incomplete. This
+successor proved the consumer seam and produced a valid G0, then revealed that its one-time
+retirement guard cannot hand off after the canonical slot is legitimately repopulated. No capacity
+conclusion changes; an additive byte/status-aware handoff preserves this frozen result.
 
 ## Next action
 
-Publish and validate the retirement checkpoint, then retry the already-authorized full-rank
-seed-7411 G0 through the wrapper.
+Publish and validate `qwen35_4b_state_formation_branch_handoff_recovery`, then run the already-
+authorized full-rank seed-7411 positive control through that wrapper.

@@ -59,3 +59,19 @@ full commit SHA, then publish and validate the retirement before any model-beari
 Only retirement documentation, validation, commit, push, and workflow verification are authorized.
 After both workflows are green, retry the exact full-rank seed-7411 G0 through the frozen wrapper.
 No positive control or result training is authorized until that G0 passes and is published.
+
+## 2026-07-14 — recovered G0 passes; frozen wrapper cannot hand off
+
+- Retirement commit `e69c1960…c79` passed both workflows before retry.
+- Full-rank seed-7411 G0 passed at file SHA-256 `cdc90cd…c68f`, identity
+  `e1f1c906…f89dc`. Exact K=1 parity and checkpoint restoration have zero error; all 62 direct-
+  full-shape delta tensors have finite nonzero joint gradients and complete finite optimizer state;
+  the finite K=12 path leaves about 22.1 GiB free.
+- The receipt authorizes only the positive control and records no training/evaluation, benchmark,
+  contrast, or scientific evidence. Wrapper STARTED/COMPLETE SHA-256 values are
+  `f0c78055…3c87` / `755ad561…f941`.
+- The following positive-control attempt stopped before wrapper STARTED publication because the
+  frozen retirement guard rejects any occupant of the canonical G0 pathname, even this exact
+  successful receipt. No producer or model work occurred.
+- Preserve this recovery unchanged. Continue only through the additive byte/status-aware handoff
+  successor after its frozen smoke checkpoint is published and both workflows are green.

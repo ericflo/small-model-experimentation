@@ -28,7 +28,16 @@ source/archive blobs, retired only the producer failure pair, and retained the a
 Retirement receipt SHA-256 is `6e4c8ee3…53ad`, identity `c9abdc59…eae7`; publish and validate this
 checkpoint before recovered G0 retry.
 
-**In progress; no scientific result exists.** Preregistration, adversarial design review, and the
+Retirement commit `e69c1960…c79` passed both workflows. The recovered full-rank seed-7411 G0 then
+passed at file SHA-256 `cdc90cd…c68f`, identity `e1f1c906…f89dc`: exact K=1 parity and checkpoint
+round-trip error are zero, all 62 full-rank deltas have finite nonzero joint gradients and complete
+finite optimizer state, K=12 is finite, and about 22.1 GiB remains free. It authorizes only its
+positive control. The first recovery's frozen pathname-only retirement guard rejected that handoff
+before STARTED publication or producer/model work. A separate byte/status-aware handoff passes its
+frozen no-model smoke at identity `d6fecf0a…de4c`, source contract `4d2ffde3…8acd`; publication and
+both green workflows are required before the positive control.
+
+**Historical pre-result setup record follows.** Preregistration, adversarial design review, and the
 frozen design are complete. Source-v10 implementation authorization is `GO` at reviewed digest
 `a5a494b7…6f1c4a` and full source contract `979a9012…f394b7`, with 360/360 source-bound tests passing.
 Source-v8 is published at commit `ee729def` with both repository workflows green. The source-d426
@@ -163,9 +172,11 @@ is appended; completed evaluations cannot enter that archive path.
 
 ## Result table
 
-No result rows have been generated. The eventual report will preserve all reached arms, including
-negative controls and branch stops; unreached conditional arms will be labeled prohibited rather than
-scored as failures.
+Stage A generated the complete three-seed LoRA-joint trigger matrix: 0/57 required cells pass the
+0.40 gate, with maximum intact required-cell accuracy 0.0234375 and verdict
+`LORA_JOINT_MISS_CONTROLS_REQUIRED`. Stage-B scientific rows do not yet exist. The eventual terminal
+report will preserve every reached negative/control and label unreached conditional arms prohibited
+rather than scoring them as failures.
 
 ## Interpretation contract
 

@@ -4945,7 +4945,41 @@
   },
   {
     "file_counts": {
-      ".json": 5,
+      ".json": 1,
+      ".md": 5,
+      ".py": 4,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_state_formation_branch_handoff_recovery",
+    "path": "experiments/qwen35_4b_state_formation_branch_handoff_recovery",
+    "primary_readme": "experiments/qwen35_4b_state_formation_branch_handoff_recovery/README.md",
+    "primary_report": "experiments/qwen35_4b_state_formation_branch_handoff_recovery/reports/report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "This operational successor lets immutable producer v11 continue after the first branch recovery successfully replaces the retired failed-G0 receipt at its canonical path. It changes no scientific arm, model, data, metric, threshold, or branch rule.",
+    "tags": [
+      "latent-state",
+      "small-model",
+      "table-transform"
+    ],
+    "title": "State-Formation Branch Handoff Recovery",
+    "top_level_dirs": [
+      "configs",
+      "reports",
+      "runs",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 13,
+    "total_size_bytes": 49875
+  },
+  {
+    "file_counts": {
+      ".json": 7,
       ".md": 6,
       ".py": 4,
       ".yaml": 3,
@@ -4979,13 +5013,13 @@
       "src",
       "tests"
     ],
-    "total_files": 20,
-    "total_size_bytes": 89247
+    "total_files": 22,
+    "total_size_bytes": 95635
   },
   {
     "file_counts": {
       ".csv": 1,
-      ".json": 42,
+      ".json": 43,
       ".jsonl": 12,
       ".md": 12,
       ".py": 42,
@@ -5025,8 +5059,8 @@
       "src",
       "tests"
     ],
-    "total_files": 116,
-    "total_size_bytes": 42905608
+    "total_files": 117,
+    "total_size_bytes": 42995805
   },
   {
     "file_counts": {

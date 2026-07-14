@@ -1170,6 +1170,29 @@ Only seed-7411 setup-pair validation, commit, push, and workflow verification ar
 7412 G0/control may begin only after both workflows are green. Result training, evaluation, and
 analysis remain blocked on the complete three-seed setup barrier.
 
+## 2026-07-14 — recovered full-rank G0 passes; handoff repair frozen
+
+- The branch-recovery retirement checkpoint `e69c1960…c79` passed both workflows before retry.
+- Full-rank seed-7411 G0 passed at file SHA-256 `cdc90cd…c68f`, identity
+  `e1f1c906…f89dc`: K=1 parity before/after optimizer and checkpoint restoration have zero error;
+  all 62 direct-full-shape delta tensors have finite nonzero live-joint gradients and complete finite
+  optimizer state; K=12 is finite; and about 22.1 GiB remains free.
+- The G0 authorizes only its positive control and records zero training/evaluation, benchmark,
+  contrast, or scientific evidence. First-recovery STARTED/COMPLETE file hashes are
+  `f0c78055…3c87` / `755ad561…f941`.
+- The positive-control handoff stopped before wrapper STARTED publication because the frozen first
+  recovery tests the former failure pathname rather than its exact bytes/status. No producer or
+  model work occurred.
+- The additive byte/status-aware handoff suite passes 8/8. Its no-model smoke passes all six controls
+  at file SHA-256 `0e0409de…6e5b`, identity `d6fecf0a…de4c`, under source contract
+  `4d2ffde3…8acd`.
+
+## Current authorization
+
+Only handoff/G0 documentation, validation, commit, push, and workflow verification are authorized.
+After both workflows are green, run the seed-7411 full-rank positive control through the handoff
+wrapper. Training and later seeds remain blocked.
+
 ## 2026-07-14 — source-v11 seed-7412 LoRA setup pair passes
 
 - Seed-7411 setup commit `5536f785` passed both required workflows before seed 7412 began. The next

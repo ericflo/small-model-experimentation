@@ -137,6 +137,18 @@ archive/source blobs and retired exactly the two producer failure paths at retir
 `c9abdc59…eae7`, retaining the exact failure archive. Publish and require both workflows green on
 this retirement checkpoint before the recovered full-rank seed-7411 G0 retry.
 
+Retirement commit `e69c1960…c79` passed both workflows. The recovered full-rank seed-7411 G0 then
+passed at file SHA-256 `cdc90cd…c68f`, identity `e1f1c906…f89dc`: exact K=1 parity before/after
+optimizer and checkpoint-roundtrip error are zero; all 62 direct-full-shape delta tensors have
+finite nonzero joint gradients and complete finite optimizer state; K=12 is finite; and about 22.1
+GiB remains free. It authorizes only the positive control and records zero training/evaluation,
+benchmark, contrast, or scientific evidence. The first recovery's frozen pathname-only retirement
+guard then rejected the positive-control handoff before wrapper STARTED publication. The additive
+`qwen35_4b_state_formation_branch_handoff_recovery` successor distinguishes exact retired-failure
+bytes from the exact successful G0 and passes its frozen no-model smoke at identity
+`d6fecf0a…de4c`, source contract `4d2ffde3…8acd`. Publish that checkpoint and require both workflows
+green before retrying the positive control through the handoff wrapper.
+
 Historically, the integrated source-v10 review was `GO` for reviewed implementation
 `a5a494b7…6f1c4a` and full source contract `979a9012…f394b7`; the 360/360 suite and exact machine gate
 pass. Source-v9 seed-7411 G0 stopped before model load or wrapper construction because the general

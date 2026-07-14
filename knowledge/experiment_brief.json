@@ -6379,6 +6379,44 @@
     }
    ]
   },
+  "qwen35_4b_state_formation_branch_handoff_recovery": {
+   "verdict_tag": "Safe handoff is ready",
+   "concept_primer": "A retired error slot is like a reserved parking space: once a verified replacement arrives, later checks must recognize the new vehicle without forgetting the old incident.",
+   "plain_question": "Can later full-size setup work continue after a successful replacement occupies the file location that previously held a preserved failure?",
+   "plain_answer": "Yes, the narrow handoff passed every safety check without loading the model. It accepts only the exact successful setup record and its history, while rejecting the old failed bytes, changed records, and a restored failure copy.",
+   "why_it_matters": "Practitioners can continue the promised compact-versus-full-size comparison without rewriting published history or weakening the original safety checks. The next model run remains blocked until this handoff is published.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Safety checks",
+     "value": "6 of 6",
+     "sub": "handoff lineage controls passed"
+    },
+    {
+     "label": "Focused tests",
+     "value": "8 of 8",
+     "sub": "failure and invocation cases passed"
+    },
+    {
+     "label": "Model activity",
+     "value": "0",
+     "sub": "model loads or training runs during smoke"
+    },
+    {
+     "label": "Sealed cases opened",
+     "value": "0",
+     "sub": "future comparison rows touched"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Every handoff lineage check passed",
+     "chart_read": "The six horizontal groups cover the false rejection, retirement, failure archive, missing retired copy, successful setup record, and invocation history. Bar height is the pass indicator; higher is better.",
+     "chart_takeaway": "All six bars reach the pass mark before model work, showing the handoff recognizes the verified replacement without losing failure safeguards."
+    }
+   ]
+  },
   "qwen35_4b_state_formation_branch_recovery": {
    "verdict_tag": "Retry path passed its safety checks",
    "concept_primer": "A sealed calculator can produce the right decision but still have a plug that downstream equipment cannot use. This recovery repairs that one plug while keeping the calculator and decision unchanged.",

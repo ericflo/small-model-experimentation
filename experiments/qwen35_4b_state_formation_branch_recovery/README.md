@@ -1,6 +1,6 @@
 # State-Formation Branch Authorization Recovery
 
-**Status:** in-progress · since 2026-07-14 · archive checkpoint green and exact failed G0 pair retired; publish retirement checkpoint before recovered producer retry
+**Status:** finished
 
 This operational successor lets immutable source-v11 branch consumers reopen the authoritative
 LoRA-miss receipt through the same exact registered-prefix seam already validated for analysis. It
@@ -123,12 +123,26 @@ emitted `BRANCH_AUTHORIZATION_FAILURE_RETIRED`. Retirement-receipt file SHA-256 
 model load, training/evaluation, benchmark, or sealed contrast and authorizes recovered producer
 retry only after this retirement checkpoint is itself published and green.
 
+Retirement commit `e69c1960…c79` passed both workflows. The recovered producer G0 then passed at
+file SHA-256 `cdc90cd…c68f`, identity `e1f1c906…f89dc`, with exact K=1 parity before/after optimizer,
+zero checkpoint-roundtrip error, all 62 direct-full-shape delta tensors covered by finite nonzero
+joint gradients and complete finite optimizer state, finite K=12, and about 22.1 GiB free after G0.
+It authorizes only the positive control and records zero training/evaluation, benchmark, or contrast
+access. Recovery STARTED/COMPLETE SHA-256 values are `f0c78055…3c87` and `755ad561…f941`.
+
+The next positive-control invocation exposed a frozen orchestration defect before STARTED
+publication or producer/model work: this wrapper's retirement guard rejects any occupant of the
+former failure pathname, including the exact successful G0 that producer v11 must place there. The
+additive `qwen35_4b_state_formation_branch_handoff_recovery` successor preserves this experiment,
+pins the exact success/failure/retirement lineage, and passes its no-model smoke. Later stages must
+use that successor after its publication checkpoint is green.
+
 ## Interpretation
 
-This is a continuation mechanism, not a LoRA/full-rank result. The passing smoke establishes that
-immutable v11 can enforce its original branch evidence through the registered path. The producer's
-G0, controls, training, evaluation, and analysis receipts remain solely authoritative. Retry remains
-blocked until the retirement checkpoint passes both repository workflows.
+This is a continuation mechanism, not a LoRA/full-rank capacity result. It successfully established
+the exact path seam and produced an authoritative full-rank G0, but its pathname-only retirement
+guard is not a reusable downstream handoff. The producer's G0 remains authoritative; later stages
+move to the additive handoff successor without editing this frozen result-bearing recovery.
 
 ## Knowledgebase Update
 

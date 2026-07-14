@@ -1,0 +1,17 @@
+schema_version: 1
+experiment_id: "qwen35_4b_state_formation_branch_handoff_recovery"
+external_artifacts:
+  - name: "producer state-formation artifacts"
+    storage: "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_state_formation_capacity_adjudication"
+    required_for: "producer setup, training, and evaluation stages"
+    checksum: "producer receipts and historical producer manifest"
+    regenerate: "follow the producer GPU runbook under its frozen source-v11 contract"
+omitted_artifacts:
+  - path: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/"
+    reason: "producer-owned initialization bundles and checkpoints are external by artifact policy"
+reproducibility:
+  smoke_command: ".venv/bin/python -B experiments/qwen35_4b_state_formation_branch_handoff_recovery/scripts/run.py --smoke"
+  full_command: "run only an exact branch-authorized producer command documented in the producer GPU runbook through scripts/run.py"
+  required_external_artifacts:
+    - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/"
+notes: "This experiment owns operational receipts only; producer v11 owns model outputs and scientific evidence."

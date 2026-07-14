@@ -1,0 +1,27 @@
+{
+  "changed_runtime_function": "src.analysis._canonical_expected_path only",
+  "experiment_id": "qwen35_4b_state_formation_branch_recovery",
+  "invocation": {
+    "authorization_receipt": "experiments/qwen35_4b_state_formation_capacity_adjudication/analysis/lora_joint_trigger.json",
+    "capacity": "fullrank",
+    "checkpoint": null,
+    "eval_set": "trigger",
+    "initialization_bundle": "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed7411.pt",
+    "model_smoke_receipt": null,
+    "objective": "joint",
+    "output": "experiments/qwen35_4b_state_formation_capacity_adjudication/runs/setup/g0_fullrank_seed7411.json",
+    "positive_control_receipt": null,
+    "seed": 7411,
+    "stage": "model-smoke"
+  },
+  "invocation_started_sha256": "f0c7805551d511b71aa48a33391313f93c03ed6b7138c8e790eb07878abb3c87",
+  "producer_output": "experiments/qwen35_4b_state_formation_capacity_adjudication/runs/setup/g0_fullrank_seed7411.json",
+  "producer_output_sha256": "cdc90cd15748e4f7434598f76fb4c59bf64ef39a29fb729adbdfa8f8e178c68f",
+  "producer_receipt_identity_sha256": "e1f1c9069b9d94224a358e26795e2938e6a9623b7be296eca0f5f55b0e6f89dc",
+  "producer_source_contract_sha256": "5a8ed26ddb9446c728191ca8e7849ae44cff92a700e24b237dac522cf4286666",
+  "producer_status": "MODEL_SMOKE_PASS",
+  "receipt_identity_sha256": "0e85031d80977ed339126d1a548899dbcd17818a971078ae2aee0571349a4b96",
+  "recovery_source_contract_sha256": "55d0a4550abfd09da74bc065cfe61f405f288d32344df1607b0b37ed97f956f3",
+  "schema_version": 1,
+  "status": "RECOVERED_PRODUCER_INVOCATION_COMPLETE"
+}
