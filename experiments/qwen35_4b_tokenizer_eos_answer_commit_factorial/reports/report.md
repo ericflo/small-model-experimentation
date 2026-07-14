@@ -107,7 +107,9 @@ semantic base-24/two-byte program ID and corrected the dual-qualification proof
 to account for the at-most-two exact-cap overlaps.
 
 Sixth-pass global review aligned the intake and README summaries with that
-cap-bounded proof; no scientific or implementation result exists yet.
+cap-bounded proof. At that pre-execution checkpoint no scientific or
+implementation result existed; the later calibration and mechanics records
+supersede that historical state.
 
 Seven implementation review rounds (five countable) ended in exact-commit
 `PASS_IMPLEMENTATION`; the machine receipt, implementation lock, and their
@@ -117,7 +119,9 @@ Fresh model-free construction now passes. It produced 72 predecessor-disjoint
 tasks, all frozen calibration/transport/mechanics request inventories, balanced
 arity/stratum/alias receipts, and zero request/seed/prompt/derived-seed
 collisions. Mechanics gold is sealed as tracked AES-256-GCM ciphertext with an
-ignored local key. Model calls and sampled outputs remain zero.
+ignored local key. Those were pre-execution facts. The authorized live run
+later preserved 4,056 sampled mechanics outputs but failed before visible
+selection, as reported above.
 
 ## Next Experiments
 

@@ -411,9 +411,9 @@ large-effect pilot; it is not a confirmatory or general deployability claim.
 
 ## Knowledgebase Update
 
-- Program evidence, backlog, scorecard, and shared synthesis now record the
-  committed-green calibration result and advance only the frozen no-think
-  `PROGRAM:` winner.
+- Program evidence, backlog, scorecards, and shared synthesis now record the
+  committed-green calibration and transport evidence, terminal mechanics
+  instrument failure, and fresh-successor requirement.
 - Claim-ledger allocation is deferred: the repository's knowledgebase protocol
   forbids adding or promoting claims until the outstanding adversarial re-grade
   checklist is processed. No claim ID is consumed, avoiding a collision while
@@ -427,6 +427,7 @@ large-effect pilot; it is not a confirmatory or general deployability claim.
 - `runs/smoke/summary.json`
 - `reports/preregistration.md`
 - `reports/design_review.md`
+- `reports/mechanics_failure_review.md`
 - `reports/artifact_manifest.yaml`
 - `runs/calibration/implementation_lock.json`
 - `runs/calibration/live_preflight.json`
@@ -436,3 +437,4 @@ large-effect pilot; it is not a confirmatory or general deployability claim.
 - `src/mechanics_lock.py`
 - `scripts/run_mechanics.py`
 - `scripts/mechanics_launcher`
+- `runs/mechanics/failure.json`
