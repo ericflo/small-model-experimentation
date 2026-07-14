@@ -184,6 +184,12 @@ soup by only `+0.005261`/`+0.004353`/`+0.000266` on deep while losing by
 `−0.015903`/`−0.006961`/`−0.005706` on quick. The treatment therefore does
 not dominate its own initialization on block 0; the registered interpolation
 controls remain necessary to locate the Pareto tradeoff.
+Soup25 then scores `0.543311` deep and `0.801212` quick, `−0.036757` and
+`−0.008817` versus the deep source, using 4,693,690 sampled tokens. It is
+dominated by the 40/60 initialization by `−0.028434` deep and `−0.009916`
+quick. This first interpolation control therefore does not explain the
+treatment checkpoints; soup50, soup75, and the remaining controls are still
+required.
 
 Together, the three frozen optimizer seeds establish that the registered
 four-round update can complete safely and that strict-deep route supply

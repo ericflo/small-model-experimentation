@@ -248,7 +248,11 @@ tokens. Each MOPD seed is slightly above soup on deep (`+0.005261`,
 `+0.004353`, and `+0.000266`) but below it on quick (`−0.015903`,
 `−0.006961`, and `−0.005706`). The update therefore does not dominate its own
 initialization on block 0. The registered interpolation controls are running
-next.
+next. Soup25 then scored `0.543311` deep and `0.801212` quick, `−0.036757`
+and `−0.008817` versus the deep source, using 4,693,690 sampled tokens. It is
+also dominated by the 40/60 initialization by `−0.028434` deep and `−0.009916`
+quick, so this interpolation does not explain the treatment's position. Soup50
+is running next.
 
 ## NF4/BF16 Interpretation Diagnostic
 

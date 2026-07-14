@@ -633,3 +633,18 @@
   treatment does not dominate its own initialization on this block.
 - Soup25 started next with external journal hash
   `4bd39562939e2d3b726ce5221e22370fed9f2accdb6ddee8b702a9c558a8c2b6`.
+
+## 2026-07-14 — block-0 soup25 is dominated by the initialization
+
+- Soup25 completed sealed generation and strict validation. `GENERATED.json`
+  and `COMPLETE.json` hash to
+  `777084b5a15287b83302d20a6b40ba828c4a72f9276056e3eebf6d1ca04b065a`
+  and `f98a8d5e6581253c68b2e900f23cb53d1e740aff27ef9181ef6729fe842e0a28`;
+  the score hashes to
+  `574617cd1646ec8d00f7cb3d6861d3c89a6a892ecb454d2c79d08d2069bf3487`.
+- Registered means are `0.543311` deep and `0.801212` quick, `−0.036757` and
+  `−0.008817` versus the deep source, using 4,693,690 sampled tokens. Soup25
+  is also `−0.028434` deep and `−0.009916` quick versus the immutable 40/60
+  initialization, so it is dominated on both strata.
+- Soup50 started next with external journal hash
+  `b55a6675fea796006dc99e44bf7b24f42b7344f6ceae11d163c568d260fd544d`.
