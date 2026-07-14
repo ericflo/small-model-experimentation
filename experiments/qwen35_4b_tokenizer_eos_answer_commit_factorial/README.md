@@ -1,6 +1,6 @@
 # Qwen3.5-4B Tokenizer-EOS Answer Commit Factorial
 
-**Status:** in-progress · since 2026-07-14 · `PASS_DESIGN` + calibration `PASS_IMPLEMENTATION`; fresh calibration: tokenizer-EOS-only interface qualified; mechanics round-nine `PASS_IMPLEMENTATION`, replacement receipt release pending
+**Status:** in-progress · since 2026-07-14 · `PASS_DESIGN` + calibration `PASS_IMPLEMENTATION`; fresh calibration: tokenizer-EOS-only interface qualified; mechanics round-nine `PASS_IMPLEMENTATION` + authenticated implementation lock, lock release pending
 
 This fresh successor tests whether the prior strict answer-seam failure was
 caused by waiting past Qwen3.5's tokenizer chat-end token. It registers the
@@ -366,6 +366,17 @@ regression. The prospective lock build/validation was read-only, and mechanics
 payload reads, model/GPU calls, and protected-read inventories remained zero.
 The replacement hash-bound receipt must be committed, pushed, and green before
 the lock-only stage is retried.
+
+The replacement receipt was committed, rebased, pushed, and green. An initial
+lock retry then failed closed because the shared-main rebase advanced HEAD to a
+commit whose `Validate Repository` workflow was still running; it wrote no
+lock and made no mechanics/model/GPU call. After both workflows for that exact
+HEAD passed, lock-only publication succeeded. The canonical implementation
+lock has SHA-256
+`d42e2db4b589e470f42d963b19e01a8b880fa7858a40b10966150c775c3d925b`,
+binds all 29 critical and 22 runtime files, and records zero pre-lock
+generation requests, sampled outputs, and protected reads. Live mechanics
+remains unauthorized until this lock is itself committed, pushed, and green.
 
 ## Interpretation
 

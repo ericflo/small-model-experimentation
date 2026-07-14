@@ -181,6 +181,19 @@
   unchanged. All prior regression families passed; mechanics payload reads,
   model/GPU calls, and protected-read inventories remained zero. The
   replacement canonical receipt is the final release gate before lock retry.
+- Published the replacement receipt at shared-main commit
+  `608d8e13551ee49187cadffdea79733340226c2b`; both exact-commit workflows
+  passed. The first lock retry after rebasing onto newer shared HEAD
+  `7cebcf16981e2945aa0d71a6d78700fe82e2bef5` failed closed while that HEAD's
+  validation workflow was still running. It wrote no lock and made no
+  mechanics/model/GPU call.
+- After both workflows for `7cebcf16981e2945aa0d71a6d78700fe82e2bef5`
+  passed, lock-only publication succeeded. `implementation_lock.json` is
+  canonical with SHA-256
+  `d42e2db4b589e470f42d963b19e01a8b880fa7858a40b10966150c775c3d925b`, binds
+  29 critical and 22 runtime files, and records zero pre-lock generation
+  requests, sampled outputs, and protected reads. Live mechanics remains held
+  until this lock is committed, pushed, and green.
 
 ## Scaffold
 
