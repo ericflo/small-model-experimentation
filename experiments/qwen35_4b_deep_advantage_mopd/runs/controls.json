@@ -1,0 +1,292 @@
+{
+  "config": "/workspace/small-model-experimentation/experiments/qwen35_4b_deep_advantage_mopd/configs/default.yaml",
+  "config_sha256": "2fe8ce9acb1fbdcb83ce2f19ed4de111906ae943fcaccf1425a826fae4cca2a7",
+  "controls": {
+    "non_advantage_route": {
+      "final_merge_receipt_sha256": "99e4d3258f450173204466bd4a2b4f1dfadfc54d706008e6fc3944a5f7bd57f5",
+      "final_model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/merged/controls/non_advantage_route/round_3",
+      "gate": {
+        "passed": true
+      },
+      "rounds": [
+        {
+          "control_rematch_manifest": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/online/primary/seed_42/round_0/control_overlays/non_advantage_route/rematch_manifest.json",
+          "control_rematch_manifest_sha256": "48a5ae096f3e2f676cbca03f53fc9946c256d45a858ccffbbffb426188373cf8",
+          "effective_target_cache": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/online/primary/seed_42/round_0/all_policy_targets.pt",
+          "effective_target_cache_sha256": "20c21a5bb8e8b8058d0b7377929b37fd5e2eca8e55598d61b6ac827503761e76",
+          "merge_receipt_sha256": "ca417de2c29bcf0ff20c93de736b30f99a9301c30d355f529ff1d22172f22ae2",
+          "merged": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/merged/controls/non_advantage_route/round_0",
+          "primary_manifest_sha256": "f4a1eb0848804ddef874ece0afef89a1ea39d84f2717b971575f2ff5f021e0e8",
+          "primary_target_cache_sha256": "20c21a5bb8e8b8058d0b7377929b37fd5e2eca8e55598d61b6ac827503761e76",
+          "primary_training_receipt": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/adapters/primary/seed_42/round_0/training_receipt.json",
+          "primary_training_receipt_sha256": "783ff2671acfe1945f7c2b34fbf46920f9cf06c3fb0ef0bc3582329e91b750dd",
+          "round": 0,
+          "round_gate": {
+            "completed_all_updates": true,
+            "maximum_mean_loss": 0.1,
+            "overlap_non_decreasing": true,
+            "passed": true,
+            "unsafe_reason": null
+          },
+          "training_receipt": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/adapters/controls/non_advantage_route/round_0/training_receipt.json",
+          "training_receipt_sha256": "dca628e3fa564300af6c6487cc04e20791149a9eed96a3d780216c7235de87ea"
+        },
+        {
+          "control_rematch_manifest": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/online/primary/seed_42/round_1/control_overlays/non_advantage_route/rematch_manifest.json",
+          "control_rematch_manifest_sha256": "65b9c3445b211cc72c57ab114aa5d25515ba1f0ed1371bd63ebd411c883cea73",
+          "effective_target_cache": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/online/primary/seed_42/round_1/control_overlays/non_advantage_route/all_policy_targets.pt",
+          "effective_target_cache_sha256": "cb45840452a3f28b1b9659db62d907de076addb7f9d921349e20aebbe4e8256a",
+          "merge_receipt_sha256": "660a4b56ddba9a7dd4526fdbc0d80537dd4b044e55b89c83f6110e4d31b6ef39",
+          "merged": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/merged/controls/non_advantage_route/round_1",
+          "primary_manifest_sha256": "12ef14d051842189ebebf9161b6647a7edb972a0a95eba370800e01d5e22c330",
+          "primary_target_cache_sha256": "7ec7b7527ba9207540cf0c785ac4b3389e6b50c69a77b9f665984564a7237ba4",
+          "primary_training_receipt": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/adapters/primary/seed_42/round_1/training_receipt.json",
+          "primary_training_receipt_sha256": "5c686a0c01d2b5f843afbbe31bfccbdb5aa232986a6258c1c4ad58956632376a",
+          "round": 1,
+          "round_gate": {
+            "completed_all_updates": true,
+            "maximum_mean_loss": 0.1,
+            "overlap_non_decreasing": true,
+            "passed": true,
+            "unsafe_reason": null
+          },
+          "training_receipt": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/adapters/controls/non_advantage_route/round_1/training_receipt.json",
+          "training_receipt_sha256": "eb5fc99ab2a5975698c7e1b2859688fb8aa3d6581ec9bc2f768ce1391ef0fbe6"
+        },
+        {
+          "control_rematch_manifest": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/online/primary/seed_42/round_2/control_overlays/non_advantage_route/rematch_manifest.json",
+          "control_rematch_manifest_sha256": "4ac33cec72ccfbcbf9425d08aedc1cad335f7ab232fadef1c2cdfcfff41a051f",
+          "effective_target_cache": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/online/primary/seed_42/round_2/all_policy_targets.pt",
+          "effective_target_cache_sha256": "0240a4eec336dd5c53e72a83f4b948fd4fd058b9c1e94747741693fa9ea63c8f",
+          "merge_receipt_sha256": "8968e3247d1719ddb1c4247efe623c7d27168cb3ce8f6229b9b616fb130bfaf1",
+          "merged": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/merged/controls/non_advantage_route/round_2",
+          "primary_manifest_sha256": "099469a56b98bb10fbf2a2bf7b1ab632783a91db820639c86c2916f69bfc6073",
+          "primary_target_cache_sha256": "0240a4eec336dd5c53e72a83f4b948fd4fd058b9c1e94747741693fa9ea63c8f",
+          "primary_training_receipt": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/adapters/primary/seed_42/round_2/training_receipt.json",
+          "primary_training_receipt_sha256": "b6692bc83d7f013286f72afd171046895b43fdc4dafe16805f12e5bc9360008d",
+          "round": 2,
+          "round_gate": {
+            "completed_all_updates": true,
+            "maximum_mean_loss": 0.1,
+            "overlap_non_decreasing": true,
+            "passed": true,
+            "unsafe_reason": null
+          },
+          "training_receipt": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/adapters/controls/non_advantage_route/round_2/training_receipt.json",
+          "training_receipt_sha256": "94589d99b46a30460ac39bfcf70145ed229084cbe3a395ce62f0b6d97bf8e2cb"
+        },
+        {
+          "control_rematch_manifest": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/online/primary/seed_42/round_3/control_overlays/non_advantage_route/rematch_manifest.json",
+          "control_rematch_manifest_sha256": "93f78045b2a92806c7979d21832c660d7391a00735b230bdfd0259e9f596b84f",
+          "effective_target_cache": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/online/primary/seed_42/round_3/all_policy_targets.pt",
+          "effective_target_cache_sha256": "3ac053e3947bde9a4d97a1e97029332a6ff04b667e92d6fc7e6c6405987dcf61",
+          "merge_receipt_sha256": "99e4d3258f450173204466bd4a2b4f1dfadfc54d706008e6fc3944a5f7bd57f5",
+          "merged": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/merged/controls/non_advantage_route/round_3",
+          "primary_manifest_sha256": "70788f174e2618eb69b19e2be0bacdec6b33a3f51fc2d0d5c4331edf87dfc522",
+          "primary_target_cache_sha256": "3ac053e3947bde9a4d97a1e97029332a6ff04b667e92d6fc7e6c6405987dcf61",
+          "primary_training_receipt": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/adapters/primary/seed_42/round_3/training_receipt.json",
+          "primary_training_receipt_sha256": "9a3747416909949ed3507c354b70a4f00c917a10fbf08b5677a9be9936635e1f",
+          "round": 3,
+          "round_gate": {
+            "completed_all_updates": true,
+            "maximum_mean_loss": 0.1,
+            "overlap_non_decreasing": true,
+            "passed": true,
+            "unsafe_reason": null
+          },
+          "training_receipt": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/adapters/controls/non_advantage_route/round_3/training_receipt.json",
+          "training_receipt_sha256": "3807533f8b399eddfca5473e0f7dee69ef9c8d2735d2d55062bb6ce75cb9ae3a"
+        }
+      ],
+      "seed": 64
+    },
+    "offpolicy_sft": {
+      "final_merge_receipt_sha256": "5f6b2c9c1d2a68001b7556c30324976c8312c3c4f170fe489496f0580853c435",
+      "final_model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/merged/controls/offpolicy_sft/round_3",
+      "gate": {
+        "passed": true
+      },
+      "rounds": [
+        {
+          "merge_receipt_sha256": "06648a38b9c96b27fc565878eea0eaebc8ff8290767240ed86680b9aa5d88716",
+          "merged": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/merged/controls/offpolicy_sft/round_0",
+          "primary_manifest_sha256": "f4a1eb0848804ddef874ece0afef89a1ea39d84f2717b971575f2ff5f021e0e8",
+          "primary_training_receipt": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/adapters/primary/seed_42/round_0/training_receipt.json",
+          "primary_training_receipt_sha256": "783ff2671acfe1945f7c2b34fbf46920f9cf06c3fb0ef0bc3582329e91b750dd",
+          "round": 0,
+          "round_gate": {
+            "completed_all_updates": true,
+            "passed": true,
+            "unsafe_reason": null
+          },
+          "training_receipt": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/adapters/controls/offpolicy_sft/round_0/training_receipt.json",
+          "training_receipt_sha256": "1a4941e2866f26353cd4ca7a33bf09afbdc26476c192a82c3f404a011ecd9aae"
+        },
+        {
+          "merge_receipt_sha256": "76ab10a29f56bd491c741df5ed75a4696a786757e4930288e7efccc1f4bb9b28",
+          "merged": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/merged/controls/offpolicy_sft/round_1",
+          "primary_manifest_sha256": "12ef14d051842189ebebf9161b6647a7edb972a0a95eba370800e01d5e22c330",
+          "primary_training_receipt": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/adapters/primary/seed_42/round_1/training_receipt.json",
+          "primary_training_receipt_sha256": "5c686a0c01d2b5f843afbbe31bfccbdb5aa232986a6258c1c4ad58956632376a",
+          "round": 1,
+          "round_gate": {
+            "completed_all_updates": true,
+            "passed": true,
+            "unsafe_reason": null
+          },
+          "training_receipt": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/adapters/controls/offpolicy_sft/round_1/training_receipt.json",
+          "training_receipt_sha256": "0613a40921b74f1327ada267d2f705a441e0636a292a8d0a3faa5a1832076ccb"
+        },
+        {
+          "merge_receipt_sha256": "4d3b9f84193cf8cfa22164a2f48835418cf7452df23b34e2c9b2a59cee4b14dd",
+          "merged": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/merged/controls/offpolicy_sft/round_2",
+          "primary_manifest_sha256": "099469a56b98bb10fbf2a2bf7b1ab632783a91db820639c86c2916f69bfc6073",
+          "primary_training_receipt": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/adapters/primary/seed_42/round_2/training_receipt.json",
+          "primary_training_receipt_sha256": "b6692bc83d7f013286f72afd171046895b43fdc4dafe16805f12e5bc9360008d",
+          "round": 2,
+          "round_gate": {
+            "completed_all_updates": true,
+            "passed": true,
+            "unsafe_reason": null
+          },
+          "training_receipt": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/adapters/controls/offpolicy_sft/round_2/training_receipt.json",
+          "training_receipt_sha256": "a0b08a807a5fdc77e0dd12b9f1afa1a5732c3c2b3cedd34a3c588527fb383481"
+        },
+        {
+          "merge_receipt_sha256": "5f6b2c9c1d2a68001b7556c30324976c8312c3c4f170fe489496f0580853c435",
+          "merged": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/merged/controls/offpolicy_sft/round_3",
+          "primary_manifest_sha256": "70788f174e2618eb69b19e2be0bacdec6b33a3f51fc2d0d5c4331edf87dfc522",
+          "primary_training_receipt": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/adapters/primary/seed_42/round_3/training_receipt.json",
+          "primary_training_receipt_sha256": "9a3747416909949ed3507c354b70a4f00c917a10fbf08b5677a9be9936635e1f",
+          "round": 3,
+          "round_gate": {
+            "completed_all_updates": true,
+            "passed": true,
+            "unsafe_reason": null
+          },
+          "training_receipt": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/adapters/controls/offpolicy_sft/round_3/training_receipt.json",
+          "training_receipt_sha256": "fd338ef052d33a2310920593d6a7d77e4f0e429b756d9c15cd8d2128bc25fa90"
+        }
+      ],
+      "seed": 66
+    },
+    "wrong_teacher": {
+      "final_merge_receipt_sha256": "90ba5ad70a6dede8e0181c1c05f80ffa9a0d9651b604a1cc27659a8da69df544",
+      "final_model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/merged/controls/wrong_teacher/round_3",
+      "gate": {
+        "passed": true
+      },
+      "rounds": [
+        {
+          "control_rematch_manifest": null,
+          "control_rematch_manifest_sha256": null,
+          "effective_target_cache": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/online/primary/seed_42/round_0/all_policy_targets.pt",
+          "effective_target_cache_sha256": "20c21a5bb8e8b8058d0b7377929b37fd5e2eca8e55598d61b6ac827503761e76",
+          "merge_receipt_sha256": "857c418b0697a695cb5a61aac64836974678d49ffb4f30a8f117a592e3c98291",
+          "merged": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/merged/controls/wrong_teacher/round_0",
+          "primary_manifest_sha256": "f4a1eb0848804ddef874ece0afef89a1ea39d84f2717b971575f2ff5f021e0e8",
+          "primary_target_cache_sha256": "20c21a5bb8e8b8058d0b7377929b37fd5e2eca8e55598d61b6ac827503761e76",
+          "primary_training_receipt": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/adapters/primary/seed_42/round_0/training_receipt.json",
+          "primary_training_receipt_sha256": "783ff2671acfe1945f7c2b34fbf46920f9cf06c3fb0ef0bc3582329e91b750dd",
+          "round": 0,
+          "round_gate": {
+            "completed_all_updates": true,
+            "maximum_mean_loss": 0.1,
+            "overlap_non_decreasing": true,
+            "passed": true,
+            "unsafe_reason": null
+          },
+          "training_receipt": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/adapters/controls/wrong_teacher/round_0/training_receipt.json",
+          "training_receipt_sha256": "f0b9798f4b2dc47d129d9462567ef64253d9f0d0a4d285ca389a444837f5688d"
+        },
+        {
+          "control_rematch_manifest": null,
+          "control_rematch_manifest_sha256": null,
+          "effective_target_cache": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/online/primary/seed_42/round_1/all_policy_targets.pt",
+          "effective_target_cache_sha256": "7ec7b7527ba9207540cf0c785ac4b3389e6b50c69a77b9f665984564a7237ba4",
+          "merge_receipt_sha256": "dbb67e1c6e167fc50c8d6aa8524c06f568fdf0fa5a83d4ee5c08a93cfb065ec4",
+          "merged": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/merged/controls/wrong_teacher/round_1",
+          "primary_manifest_sha256": "12ef14d051842189ebebf9161b6647a7edb972a0a95eba370800e01d5e22c330",
+          "primary_target_cache_sha256": "7ec7b7527ba9207540cf0c785ac4b3389e6b50c69a77b9f665984564a7237ba4",
+          "primary_training_receipt": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/adapters/primary/seed_42/round_1/training_receipt.json",
+          "primary_training_receipt_sha256": "5c686a0c01d2b5f843afbbe31bfccbdb5aa232986a6258c1c4ad58956632376a",
+          "round": 1,
+          "round_gate": {
+            "completed_all_updates": true,
+            "maximum_mean_loss": 0.1,
+            "overlap_non_decreasing": true,
+            "passed": true,
+            "unsafe_reason": null
+          },
+          "training_receipt": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/adapters/controls/wrong_teacher/round_1/training_receipt.json",
+          "training_receipt_sha256": "1f18650866361b37d023e3d71001d5d4efd7aa8ad3a492f0718f6511d2122538"
+        },
+        {
+          "control_rematch_manifest": null,
+          "control_rematch_manifest_sha256": null,
+          "effective_target_cache": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/online/primary/seed_42/round_2/all_policy_targets.pt",
+          "effective_target_cache_sha256": "0240a4eec336dd5c53e72a83f4b948fd4fd058b9c1e94747741693fa9ea63c8f",
+          "merge_receipt_sha256": "ffbb1a42b339dc365e8656c61ad6b29466ca279db17a89d80929165128ccafe7",
+          "merged": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/merged/controls/wrong_teacher/round_2",
+          "primary_manifest_sha256": "099469a56b98bb10fbf2a2bf7b1ab632783a91db820639c86c2916f69bfc6073",
+          "primary_target_cache_sha256": "0240a4eec336dd5c53e72a83f4b948fd4fd058b9c1e94747741693fa9ea63c8f",
+          "primary_training_receipt": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/adapters/primary/seed_42/round_2/training_receipt.json",
+          "primary_training_receipt_sha256": "b6692bc83d7f013286f72afd171046895b43fdc4dafe16805f12e5bc9360008d",
+          "round": 2,
+          "round_gate": {
+            "completed_all_updates": true,
+            "maximum_mean_loss": 0.1,
+            "overlap_non_decreasing": true,
+            "passed": true,
+            "unsafe_reason": null
+          },
+          "training_receipt": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/adapters/controls/wrong_teacher/round_2/training_receipt.json",
+          "training_receipt_sha256": "b85a3fc620c6ffd9eedea1e7241224820ee239ecbc7ed9c31afbde957c5094bd"
+        },
+        {
+          "control_rematch_manifest": null,
+          "control_rematch_manifest_sha256": null,
+          "effective_target_cache": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/online/primary/seed_42/round_3/all_policy_targets.pt",
+          "effective_target_cache_sha256": "3ac053e3947bde9a4d97a1e97029332a6ff04b667e92d6fc7e6c6405987dcf61",
+          "merge_receipt_sha256": "90ba5ad70a6dede8e0181c1c05f80ffa9a0d9651b604a1cc27659a8da69df544",
+          "merged": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/merged/controls/wrong_teacher/round_3",
+          "primary_manifest_sha256": "70788f174e2618eb69b19e2be0bacdec6b33a3f51fc2d0d5c4331edf87dfc522",
+          "primary_target_cache_sha256": "3ac053e3947bde9a4d97a1e97029332a6ff04b667e92d6fc7e6c6405987dcf61",
+          "primary_training_receipt": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/adapters/primary/seed_42/round_3/training_receipt.json",
+          "primary_training_receipt_sha256": "9a3747416909949ed3507c354b70a4f00c917a10fbf08b5677a9be9936635e1f",
+          "round": 3,
+          "round_gate": {
+            "completed_all_updates": true,
+            "maximum_mean_loss": 0.1,
+            "overlap_non_decreasing": true,
+            "passed": true,
+            "unsafe_reason": null
+          },
+          "training_receipt": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/adapters/controls/wrong_teacher/round_3/training_receipt.json",
+          "training_receipt_sha256": "43f4ae6a0f688c425a347d51ad602b298f3a18da21620c92f6f930ec4aec33be"
+        }
+      ],
+      "seed": 65
+    }
+  },
+  "gate": {
+    "passed": true
+  },
+  "parameter_controls": {
+    "soup25": {
+      "merge_receipt_sha256": "aa42d8e67ee87f8cfd937404bf7c43daa5064483185e2fde72c20d3cb2f43d0d",
+      "model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/merged/soup25"
+    },
+    "soup50": {
+      "merge_receipt_sha256": "1599289b9b83932b6d0a5553daa7907ca2b95a22139140f22e5020f0e6b5280a",
+      "model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/merged/soup50"
+    },
+    "soup75": {
+      "merge_receipt_sha256": "95b607b4e644f2236b1f01498101dac5a274e008ba1c1fae26e0133234feeb1b",
+      "model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/merged/soup75"
+    }
+  },
+  "primary_seed": 42,
+  "schema_version": 1,
+  "stage": "matched_controls"
+}

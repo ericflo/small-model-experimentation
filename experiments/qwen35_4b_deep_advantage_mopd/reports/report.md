@@ -4,8 +4,9 @@
 
 The preregistered CPU/scientific smoke, pinned-model preflight, installation
 canary, fresh route qualification, five-update exact-logit locality pilot, and
-all three four-round integrations pass. Matched controls and the sealed
-capability comparison have not run yet.
+all three four-round integrations pass. All matched trained controls and fixed
+parameter soups also pass their artifact/training gates. The sealed capability
+comparison has not run yet.
 
 ## Research Program Fit
 
@@ -94,6 +95,30 @@ Probe entropy contracted `11.05%`/`9.53%`/`10.62%`/`7.55%`; rounds 0 and 2
 therefore repeat the non-gating collapse-risk warning. The independent
 four-round provenance audit passes with integration-receipt hash
 `ff329ebccdc888689b6d6c985a558e66a2385aaa701babf8724d61444428bf1f`.
+
+All controls then completed. Full-prefix non-advantage deep MOPD passed all four
+round gates with mean corrected losses
+`0.05393`/`0.05036`/`0.04990`/`0.04619`; probe loss improved and top-50 overlap
+non-decreased in every round. The rematcher reproduced the original mapping
+exactly in rounds 0, 2, and 3, and deterministically replaced the sole
+zero-truncation-ineligible round-1 match. Wrong-teacher quick MOPD also passed
+all four rounds, with losses `0.07040`/`0.06537`/`0.06047`/`0.06949` and the
+same probe-loss/overlap directions. Off-policy best-deep-continuation SFT
+completed all registered updates with mean CEs
+`0.10926`/`0.11021`/`0.09851`/`0.09942` and reduced probe loss in every round.
+Its frozen gate does not impose an MOPD overlap or CE threshold.
+
+The 25%/50%/75% deep parameter soups each contain 128/128 nonzero merged LoRA
+modules and an exhaustive inference inventory. The final trained-control merge
+receipts are `99e4d3258f450173204466bd4a2b4f1dfadfc54d706008e6fc3944a5f7bd57f5`,
+`90ba5ad70a6dede8e0181c1c05f80ffa9a0d9651b604a1cc27659a8da69df544`,
+and `5f6b2c9c1d2a68001b7556c30324976c8312c3c4f170fe489496f0580853c435`.
+The aggregate receipt hash is
+`103ef4cc0b24d7c10666b6f0adfcd4dfae4720415c7fbbc76b681ab79162640b`.
+Independent replay revalidated every canonical ledger, source binding,
+adapter/merge chain, parameter mixture, and model byte. These are readiness and
+optimizer-safety results only; superiority and causal routing remain wholly
+reserved for sealed confirmation.
 
 Together, the three frozen optimizer seeds establish that the registered
 four-round update can complete safely and that strict-deep route supply

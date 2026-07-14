@@ -367,3 +367,28 @@
 - All 211 experiment tests pass after the fix. Resumption must first replay and
   validate the existing round-0 receipt under `.venv`; this recovery changes no
   treatment, seed, target, update, or gate.
+
+## 2026-07-14 — all matched controls complete and independently audit
+
+- Resumption replayed the existing off-policy round-0 adapter under `.venv`,
+  validated it, and proceeded directly to merge without retraining. The other
+  three off-policy rounds then completed normally.
+- All 12 trained-control rounds completed 20/20 consume-once updates and passed
+  their frozen gates. Non-advantage MOPD mean corrected losses were
+  `0.05393`/`0.05036`/`0.04990`/`0.04619`; wrong-teacher losses were
+  `0.07040`/`0.06537`/`0.06047`/`0.06949`. Probe loss improved and top-50
+  overlap non-decreased in every MOPD control round.
+- Off-policy SFT mean CEs were
+  `0.10926`/`0.11021`/`0.09851`/`0.09942`; all registered update gates passed
+  and probe loss improved in every round. The frozen off-policy gate contains
+  no top-k-overlap or CE threshold, so no MOPD criterion was applied post hoc.
+- The 25%/50%/75% deep parameter soups each applied 128/128 nonzero modules and
+  recorded exhaustive inference-file inventories. Their receipt hashes are
+  `aa42d8e67ee87f8cfd937404bf7c43daa5064483185e2fde72c20d3cb2f43d0d`,
+  `1599289b9b83932b6d0a5553daa7907ca2b95a22139140f22e5020f0e6b5280a`,
+  and `95b607b4e644f2236b1f01498101dac5a274e008ba1c1fae26e0133234feeb1b`.
+- The tracked controls receipt passes and hashes to
+  `103ef4cc0b24d7c10666b6f0adfcd4dfae4720415c7fbbc76b681ab79162640b`.
+  A separate authorization-path audit replayed every canonical ledger and
+  reauthenticated all model bytes. This authorizes requesting sealed
+  comparison; it is not a capability or causal-routing result.

@@ -1,12 +1,13 @@
 # Qwen3.5-4B Deep-Advantage MOPD
 
-**Status:** in-progress · since 2026-07-12 · Fresh deep qualification, exact-logit locality, and all three four-round integrations pass; controls remain.
+**Status:** in-progress · since 2026-07-12 · Fresh deep qualification, exact-logit locality, all three four-round integrations, and all controls pass; sealed confirmation remains.
 
 ## Status
 
 **Fresh deep qualification passes on both untouched blocks, the frozen
 five-update MOPD pilot passes exact-logit locality, and seeds 42, 43, and 44
-each complete all four integration rounds. No procedural performance result
+each complete all four integration rounds. All trained and parameter controls
+also pass their artifact/training gates; no procedural performance result
 exists yet.** This is a new result-bearing successor to
 `qwen35_4b_same_prefix_advantage_routing`, not an extension of its terminal
 result.
@@ -151,6 +152,35 @@ registered full-round stop, so the result is preserved as a collapse-risk
 warning rather than post-hoc reclassified. Round 1's sole 131-token cut was a
 cache-only route control and no consumed capability/anchor was truncated;
 rounds 2/3 had zero cuts in every role.
+
+## Matched Controls Result
+
+All three trained controls completed four rounds of 20/20 consume-once updates
+and passed their frozen round gates. Full-prefix non-advantage routing had mean
+corrected losses `0.05393`/`0.05036`/`0.04990`/`0.04619`; held-probe loss fell
+and top-50 overlap rose in every round. Its overlay reproduced the original
+matched mapping exactly in rounds 0, 2, and 3; round 1 deterministically
+replaced the sole original state incompatible with zero-truncation eligibility.
+
+Wrong-teacher quick MOPD on the selected states had mean corrected losses
+`0.07040`/`0.06537`/`0.06047`/`0.06949`, again with improving probe loss and
+non-decreasing overlap in every round. Off-policy best-deep-continuation SFT
+had mean cross-entropies `0.10926`/`0.11021`/`0.09851`/`0.09942`; every round
+completed its registered update gate and reduced probe loss. The off-policy
+gate deliberately has no top-k-overlap or CE threshold, so those values are
+descriptive rather than borrowed MOPD gates.
+
+The 25%/50%/75% deep parameter soups each applied 128/128 nonzero LoRA modules
+and bind exhaustive inference-file inventories. Terminal merge-receipt hashes
+for non-advantage, wrong-teacher, and off-policy controls are respectively
+`99e4d3258f450173204466bd4a2b4f1dfadfc54d706008e6fc3944a5f7bd57f5`,
+`90ba5ad70a6dede8e0181c1c05f80ffa9a0d9651b604a1cc27659a8da69df544`,
+and `5f6b2c9c1d2a68001b7556c30324976c8312c3c4f170fe489496f0580853c435`.
+The aggregate controls receipt is
+`103ef4cc0b24d7c10666b6f0adfcd4dfae4720415c7fbbc76b681ab79162640b`;
+independent canonical replay and model-byte authentication pass. This licenses
+sealed comparison only. It does not show that any trained arm gained capability
+or that advantage routing is causal.
 
 ## NF4/BF16 Interpretation Diagnostic
 

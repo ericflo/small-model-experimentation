@@ -78,7 +78,7 @@ blocks, then independently re-establish complete-loop behavior and acquisition
 headroom before training. Do not raise the observed ceiling, swap lineage
 after the result, or rescue this directory.
 
-## Deep-Advantage MOPD Qualification and Locality (2026-07-13 — Passed prerequisites)
+## Deep-Advantage MOPD Through Controls (2026-07-14 — Confirmation pending)
 
 `qwen35_4b_deep_advantage_mopd` repeated same-prefix qualification on two new
 192-state blocks from the immutable 40/60 joint soup. Deep was selected on
@@ -93,7 +93,19 @@ matched non-advantage controls. The five-update 15-deep/5-soup pilot passed:
 centered non-target drift was 0.02760, entropy drop was 3.11%, and exact target
 loss improved 0.01293→0.01170. This authorizes four-round MOPD. The exact
 measurement is one midpoint token per consumed unit, and no capability result
-exists yet.
+exists yet. Seeds 42, 43, and 44 subsequently completed all four registered
+integration rounds, establishing replicated route supply and optimizer-gate
+completion but not deployed improvement.
+
+All matched controls are now built. Four-round full-prefix non-advantage MOPD,
+wrong-teacher quick MOPD, and off-policy continuation SFT each completed every
+consume-once update and passed their frozen training gates; the 25%/50%/75%
+deep parameter soups have exhaustive model-byte receipts. Independent canonical
+replay passes for aggregate controls receipt
+`103ef4cc0b24d7c10666b6f0adfcd4dfae4720415c7fbbc76b681ab79162640b`.
+This is the first line member to reach a controlled routed-MOPD capability
+comparison. It licenses sealed confirmation only: no causal-routing,
+installation, retention, transfer, or sample-more claim exists yet.
 
 Quick also passed diagnostically on 29/18 routes in this fresh replication,
 after failing one soup-relative block in the predecessor. This is not license

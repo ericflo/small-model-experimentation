@@ -130,3 +130,13 @@ failure. The shortest clean update test is therefore fresh deep-only routed
 MOPD from the joint soup. Two-teacher composition should wait for cross-fitted
 direct advantage prediction and a third untouched block, not a larger fixed
 effect-size threshold.
+
+That deep-only successor has now passed fresh qualification, exact-logit
+locality, three four-round optimizer seeds, all three matched trained controls,
+and the 25%/50%/75% parameter-soup construction gates. The independently
+replayed controls receipt is
+`103ef4cc0b24d7c10666b6f0adfcd4dfae4720415c7fbbc76b681ab79162640b`.
+Training-side loss improvement remains non-evidence of capability—especially
+given the measured NF4/bf16 update-parity weakness. Same-backend sealed
+comparison against sources, controls, visible routing, and sample-more is now
+the sole adjudicator.
