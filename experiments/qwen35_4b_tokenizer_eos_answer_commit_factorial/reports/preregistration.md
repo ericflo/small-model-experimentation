@@ -44,6 +44,16 @@ mechanics records, direct-pool order, shuffle maps, and hidden ciphertext/hash
 are frozen in that receipt. Calibration code is forbidden from reading any
 mechanics or hidden row. `benchmarks/` is never read.
 
+Each 24-row calibration arity block independently has the same 8/8/4/4
+mechanics-representative live-first-operation strata. Within each arity block,
+every A-X alias occurs exactly once in every answer position: two independently
+balanced position permutations for arity two and three independently balanced
+position permutations for arity three. The transport request namespace is
+separately frozen as `tokenizer-eos-answer-commit-factorial-transport-v1` with
+seed `2026140706`. The collision receipt must additionally prove that every
+transport request ID, seed key, derived seed, and prompt-token sequence is
+disjoint from calibration and bulk mechanics.
+
 ## Arity-parametric token-native grammar
 
 Calibration contains 24 arity-two and 24 arity-three mechanics-length echo
@@ -56,6 +66,18 @@ remaining registered token sequence is sampled. Exactness compares injected
 plus sampled pre-commit token IDs with the registered token IDs. The commit
 token is boundary metadata. No decoded-text trimming, re-tokenization, grammar
 mask, logit bias, or teacher-forced answer identity is allowed.
+
+For each prefix condition, the tokenizer receipt separately enumerates and
+hashes every grammatical token-ID sequence for A-X programs at each registered
+arity (24^2 plus 24^3 strings). The freeform inventory encodes the whole
+string; the slot inventory composes the separately registered injected prefix
+IDs with the registered sampled-remainder IDs. The receipt proves both
+inventories render the same grammatical bytes but does not assume their token
+segmentation matches. Parse success means that condition's composed pre-commit
+IDs are a member of its row-arity set, regardless of whether the program is the
+known answer. Exact echo success separately requires equality with that
+condition's one registered known-answer sequence. Thus parse and exact are
+distinct frozen metrics and neither depends on decoded text.
 
 ## Calibration factorial
 
@@ -103,12 +125,23 @@ position and have matching finish/stop reasons. Any divergence, missing pair,
 mutation, ambiguous first stop, or unmatched event terminates the entire
 experiment as `BOUNDARY_PAIRING_INVALID` before qualification or mechanics.
 
-The four per-pair interface outcomes are frozen as tokenizer-pass/HF-fail,
-tokenizer-fail/HF-pass, both pass, and neither pass. Only tokenizer-pass/HF-
-fail for the selected cell supports a causal termination-boundary claim. Both
-pass permits interface use but is labeled
-`BOTH_BOUNDARIES_QUALIFY_NO_UNIQUE_BOUNDARY_EFFECT`; it is not boundary
-evidence. HF-only and neither outcomes do not authorize mechanics.
+An answer-cap contact is `len(answer_stage_sampled_token_ids) >= 24` or
+`finish_reason == "length"`. Sampled IDs include the registered terminal stop,
+so a valid stop emitted as sampled token 24 is still a cap contact. A stop at
+or before 24 can be authenticated and exact while independently counting
+against the cap-contact gate.
+
+Within each matched thinking/prefix pair, the only valid qualifier outcomes are
+tokenizer-only, HF-only, and neither. Under authenticated paired prefixes,
+tokenizer-exact and HF-exact are disjoint row sets: the first registered
+terminal ID for one policy is strict content for the other. Two disjoint sets
+cannot both meet 44/48. Observing both cells qualify in the same matched pair is
+therefore `SCORING_INVARIANT_VIOLATION`, not a scientific outcome and never
+mechanics authorization. Qualifiers in other HF thinking/prefix cells are
+reported but do not replace the HF control paired to the selected tokenizer
+cell. If no tokenizer cell qualifies, any HF qualifier yields the HF-only
+terminal; no qualifier yields neither. Only tokenizer-only in the selected
+matched pair supports a causal termination-boundary claim.
 
 ## Interface gates and selection
 
@@ -181,6 +214,10 @@ echoes and parses, at most one cap contact, and at least 11/12 exact echoes and
 parses in each arity. Failure is `SELECTED_INTERFACE_DID_NOT_TRANSPORT` and no
 bulk mechanics runs.
 
+Transport IDs and seeds derive only from the frozen transport namespace/seed;
+they must pass the preoutcome disjointness receipt against calibration and
+every bulk arm before the calibration lock can be minted.
+
 ## Frozen conditional mechanics
 
 Mechanics uses the 24 fresh tasks and, per task:
@@ -196,7 +233,10 @@ Mechanics uses the 24 fresh tasks and, per task:
 Suffix arms share request IDs, candidate order, answer/thought seed derivation,
 caps, and batch geometry. Invocation order is transport, complete direct master
 pool, materialized, name-only, shuffled. The direct pool cannot be extended.
-Pool exhaustion fails the experiment.
+If either resource target exceeds the complete 96-row direct pool, stop before
+visible selection or hidden access as `DIRECT_RESOURCE_MATCH_POOL_EXHAUSTED`.
+This is a non-capability resource-design failure, not a materialized-residual
+failure.
 
 For each task, the complete 24-row materialized arm freezes two conservative
 first-over prefixes of the already generated direct pool. Sampled-token cost is
@@ -212,11 +252,23 @@ exhaustion. No outcome may affect a prefix.
 
 The deployable primary is task-level hidden accuracy of
 `visible-probe-consensus-v1`, selected before hidden plaintext opens. For each
-arm/task it rejects programs that fail to parse or execute on every visible
-row, deduplicates token-native programs, clusters them by outputs on the 16
-unlabeled probes, selects the largest cluster, and breaks all ties with a
-frozen task/arm/program hash. It may abstain. The same selector applies to
-materialized, name-only, shuffled, and both direct prefixes.
+arm/task it rejects programs that fail to parse, execute, or exactly match the
+public target on every one of the eight visible rows. It deduplicates canonical
+token-ID programs and clusters survivors by their output vector on the 16
+unlabeled probes. It chooses the largest cluster; tied clusters are ordered by
+the minimum member hash of the canonical byte string UTF-8
+`visible-probe-consensus-v1`, NUL, UTF-8 task ID, NUL, then each program token
+ID as unsigned four-byte big-endian. The member with minimum same hash
+represents the winning cluster; an exact hash collision falls back to
+lexicographically smallest token-ID tuple. This tie-break contains no arm,
+candidate index, sampled order, hidden value, or outcome. If no survivor
+exists, the selector abstains and the task scores zero. The same selector
+applies to materialized, name-only, shuffled, and both direct prefixes.
+
+A selected program succeeds on a task only if it executes and exactly matches
+the target on all eight hidden rows. Oracle coverage succeeds only if at least
+one proposal in that arm/task does so. Partial hidden-row correctness never
+counts as task success.
 
 Oracle proposal coverage is diagnostic. The diagnostic exhaustive CPU ceiling
 enumerates all 13,824 frozen depth-three programs, filters on public-visible
@@ -240,6 +292,11 @@ and cannot alter the decision.
 If an authenticated generation ABI gate fails after transport, emit
 `MECHANICS_INTERFACE_NONTRANSPORT`. Otherwise failure is
 `TOKENIZER_EOS_MATERIALIZED_RESIDUAL_LARGE_EFFECT_PILOT_FAIL`.
+
+Even a pass is evidence only for a contamination-free 24-task large-effect
+pilot under this frozen substrate and selector. It is neither confirmatory
+evidence nor a general claim that the interface installs a deployable
+capability.
 
 ## Non-rescue rules
 

@@ -39,9 +39,12 @@ oracle ceilings remain sealed.
 
 ## Interpretation
 
-The first independent review returned `HOLD_DESIGN`; the contract now freezes
-its requested remediation and awaits rereview at an exact pushed commit. It
-does not establish a live interface or capability gain.
+Two independent review passes returned prospective holds. The contract now
+also freezes the dual-qualification invariant, distinct parse/cap metrics,
+calibration/transport balance, arm-blind selection and all-eight-row task
+success, resource-exhaustion terminal, and pilot-only claim scope. It awaits
+rereview at a new exact pushed commit and does not establish a live interface
+or capability gain.
 
 ## Next Experiments
 

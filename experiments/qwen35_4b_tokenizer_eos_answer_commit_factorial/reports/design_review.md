@@ -68,3 +68,30 @@ pushed, both workflows are green, and the independent reviewer returns a
 design pass. A design pass will not authorize model calls by itself; a later
 implementation review and committed-green implementation lock are also
 required.
+
+## Independent review: second pass
+
+Rereview of exact pushed/green commit
+`3f5e6c10c927cac23a4198194b1b6f7c8ee35577` returned `HOLD_DESIGN`. It
+confirmed that all four first-pass blockers were closed, then found five narrow
+definitions that could still change qualification or interpretation:
+
+1. dual boundary qualification within a matched thinking/prefix pair was
+   listed as a usable outcome even though authenticated prefix equality makes
+   the two >=44/48 exact-success sets mathematically incompatible;
+2. parse success and cap contact were not independently defined;
+3. calibration alias/stratum balance and a distinct transport namespace were
+   absent;
+4. visible correctness, cluster representative, arm-blind tie-breaking,
+   abstention, and all-eight-hidden task success were underspecified; and
+5. direct-pool exhaustion lacked a non-capability terminal, while a pass needed
+   an explicit 24-task pilot scope.
+
+These are now prospectively frozen in config and preregistration. Matched-pair
+dual qualification is `SCORING_INVARIANT_VIOLATION`; parse is membership in the
+registered arity token grammar; stop token 24 counts as cap contact;
+calibration and transport balance/disjointness are explicit; selection uses an
+arm-blind task/program hash and all-row exactness; exhaustion is
+`DIRECT_RESOURCE_MATCH_POOL_EXHAUSTED`; and no pass is generalized beyond the
+large-effect pilot. Live calls remain held pending another exact-commit design
+rereview and a later implementation release review.

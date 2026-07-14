@@ -96,6 +96,19 @@ class AnswerCommitProtocolTests(unittest.TestCase):
         self.assertFalse(result.valid_pair)
         self.assertEqual(result.failure, "tokenizer_short_output_relabeled_length")
 
+    def test_terminal_stop_on_token_24_is_a_cap_contact(self) -> None:
+        sampled = [10] * 23 + [protocol.TOKENIZER_EOS_ID]
+        self.assertTrue(
+            protocol.is_answer_cap_contact(sampled, finish_reason="stop", cap=24)
+        )
+
+    def test_short_stop_is_not_a_cap_contact(self) -> None:
+        self.assertFalse(
+            protocol.is_answer_cap_contact(
+                [10, protocol.TOKENIZER_EOS_ID], finish_reason="stop", cap=24
+            )
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

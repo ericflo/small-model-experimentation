@@ -58,6 +58,9 @@ This is an interface hypothesis, not yet a capability hypothesis.
 - Calibration gates: >=44/48 strict exact echoes, >=44/48 parses, <=2/48
   answer-cap contacts, plus >=22/24 exact/parse and <=1/24 cap contact in each
   arity.
+- Parse is membership in a frozen token-ID grammar for any A-X program of the
+  registered arity; exact is equality to the known answer. A stop on sampled
+  token 24 still counts as a cap contact.
 - Eligible winner: first qualifying tokenizer-EOS arm in the frozen no-think
   `PROGRAM:`, no-think freeform, think `PROGRAM:`, think freeform priority.
 - Boundary controls: matched HF EOS, first-stop uniqueness, early/interior/
@@ -77,8 +80,10 @@ This is an interface hypothesis, not yet a capability hypothesis.
 
 The prefix cells share tasks and seed derivation and are paired conditions, not
 independent replications. Only tokenizer-pass/HF-fail in the selected matched
-cell supports a causal termination-boundary claim; a both-pass result can
-authorize interface use but not boundary causality.
+cell supports a causal termination-boundary claim. Dual qualification within
+one matched thinking/prefix pair is mathematically incompatible with the
+authenticated-prefix/exactness contract and terminates as a scoring invariant
+violation.
 
 ## Run
 
@@ -113,6 +118,9 @@ does not show that live vLLM emits the expected first-stop receipts on fresh
 rows, that a tokenizer-EOS arm qualifies, or that materialized residuals improve
 capability. The branch stops permanently if no fresh tokenizer-EOS interface
 qualifies.
+
+Any conditional mechanics pass is scoped to a 24-task contamination-free
+large-effect pilot; it is not a confirmatory or general deployability claim.
 
 ## Knowledgebase Update
 

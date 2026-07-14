@@ -11,6 +11,7 @@ identity:
   experiment_id: qwen35_4b_tokenizer_eos_answer_commit_factorial
   task_namespace: tokenizer-eos-answer-commit-factorial-v1
   request_namespace: tokenizer-eos-answer-commit-factorial-v1
+  transport_request_namespace: tokenizer-eos-answer-commit-factorial-transport-v1
 
 seeds:
   construction: 2026140700
@@ -19,6 +20,7 @@ seeds:
   direct_pool: 2026140703
   bootstrap: 2026140704
   shuffle: 2026140705
+  transport: 2026140706
 
 data:
   calibration_tasks: 48
@@ -27,6 +29,12 @@ data:
   calibration_arity_rows:
     2: 24
     3: 24
+  calibration_live_first_operation_strata_per_arity:
+    1: 8
+    2: 8
+    3: 4
+    4: 4
+  calibration_alias_balance: each_A_through_X_once_in_every_answer_position_per_arity
   mechanics_live_first_operation_strata:
     1: 8
     2: 8
@@ -60,8 +68,12 @@ interface:
   answer_prefix_text: "PROGRAM:"
   output_arities: [2, 3]
   grammar: "PROGRAM: <alias_1> | ... | <alias_k>; k equals registered output arity"
+  parse_rule: membership_in_registered_token_id_grammar_for_row_arity
+  exact_rule: equality_to_registered_known_answer_token_ids
   thinking_budget: 512
   sampled_answer_cap: 24
+  cap_contact_rule: sampled_answer_token_ids_gte_24_or_finish_reason_length
+  terminal_stop_on_token_24_is_cap_contact: true
   temperature: 0.6
   top_p: 0.95
   top_k: 20
@@ -116,6 +128,10 @@ mechanics:
   invocation_order: [transport, direct, materialized, name_only, shuffled]
   matched_direct_prefixes: [sampled_token_first_over, logical_model_token_first_over]
   selector: visible-probe-consensus-v1
+  visible_filter: exact_correctness_on_all_8_visible_rows
+  selector_tie_break: arm_blind_sha256_task_id_and_program_token_ids
+  abstention_task_score: 0
+  hidden_task_success: exact_correctness_on_all_8_hidden_rows
   all_generation_parse_rate_min: 0.90
   all_generation_answer_cap_contact_rate_max: 0.05
   materialized_selected_accuracy_min: 0.25
@@ -140,11 +156,12 @@ mechanics:
 outcomes:
   boundary_pairing_invalid: BOUNDARY_PAIRING_INVALID
   tokenizer_only_interface: TOKENIZER_EOS_ONLY_INTERFACE_QUALIFIED
-  both_interfaces: BOTH_BOUNDARIES_QUALIFY_NO_UNIQUE_BOUNDARY_EFFECT
+  impossible_matched_pair_dual_qualification: SCORING_INVARIANT_VIOLATION
   hf_only_interface: HF_ONLY_CONTROL_QUALIFIES_TOKENIZER_FAIL
   neither_interface: NO_VALID_TOKENIZER_EOS_ANSWER_SEAM
   transport_fail: SELECTED_INTERFACE_DID_NOT_TRANSPORT
   mechanics_abi_fail: MECHANICS_INTERFACE_NONTRANSPORT
+  direct_resource_match_pool_exhausted: DIRECT_RESOURCE_MATCH_POOL_EXHAUSTED
   capability_pass: TOKENIZER_EOS_MATERIALIZED_RESIDUAL_LARGE_EFFECT_PILOT_PASS
   capability_fail: TOKENIZER_EOS_MATERIALIZED_RESIDUAL_LARGE_EFFECT_PILOT_FAIL
 

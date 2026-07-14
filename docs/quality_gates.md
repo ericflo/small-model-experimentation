@@ -56,6 +56,12 @@ gate failures:
 
 ## Common failures and fixes
 
+- **Concurrent `make check` runs corrupt the generated `site/` tree.** `make site`
+  removes and rebuilds the same working-tree directory, so overlapping checks in one
+  checkout can produce missing assets/pages or `Directory not empty` errors even when
+  repository validation is green. Confirm no other check is running, then rerun one
+  `make check` to completion; do not diagnose the resulting site errors as content
+  failures.
 - **`generated-clean` red in CI but green locally.** The gate regenerates catalogs in CI's
   fresh checkout and diffs against the commit; anything that differs between your filesystem
   and a fresh clone breaks it. Known causes:

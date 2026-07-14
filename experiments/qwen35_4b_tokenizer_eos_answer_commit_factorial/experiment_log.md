@@ -18,6 +18,11 @@
 - Extended the zero-call smoke to accept tokenizer-first, HF-first, and shared-
   cap paired traces while rejecting divergence and false length claims. Live
   calls remain held pending independent rereview and implementation review.
+- Exact-commit rereview returned a narrower `HOLD_DESIGN`. Prospectively froze
+  the impossible-dual-qualification invariant, parse/cap semantics, per-arity
+  alias and live-operation balance, disjoint transport namespace, arm-blind
+  selector/all-eight-row success, direct-pool exhaustion terminal, and 24-task
+  pilot claim scope. Model calls remain zero.
 
 ## Scaffold
 

@@ -60,6 +60,14 @@ def _authenticate_terminal_event(
     return "unknown_terminal_event"
 
 
+def is_answer_cap_contact(
+    sampled_token_ids: Sequence[int], *, finish_reason: str, cap: int = 24
+) -> bool:
+    """Apply the frozen cap metric, including a stop emitted on token `cap`."""
+
+    return len(tuple(sampled_token_ids)) >= cap or finish_reason == "length"
+
+
 def authenticate_boundary_pair(
     tokenizer_sampled_token_ids: Sequence[int],
     hf_sampled_token_ids: Sequence[int],
