@@ -13,6 +13,7 @@ omitted_artifacts:
 reproducibility:
   smoke_command: "python3 -B experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/run.py --smoke"
   construction_command: "python3 -B experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/construct.py"
+  tokenizer_receipt_command: ".venv/bin/python -B experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/tokenizer_receipt.py"
   full_command: "sealed pending implementation review, implementation lock, and green publication boundary"
   required_external_artifacts:
     - mechanics_gold_aes256_key
@@ -26,10 +27,14 @@ local_receipts:
   preoutcome_receipt:
     path: "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/runs/prepared/preoutcome_receipt.json"
     sha256: "180058c6beba980c2c4b3a9dbe3f583231163474d393526773aecca84e23a263"
+  tokenizer_grammar_prompt_receipt:
+    path: "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/runs/tokenizer/receipt.json"
+    sha256: "6138bed608cb99c193afb311db70ac604c59aebfa2e00f978186a730ad3f33de"
   mechanics_gold_ciphertext:
     path: "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/data/procedural/mechanics_gold.jsonl.aesgcm"
     sha256: "01e252ded8155761a5f3186581244969c78f0037a46aade5e23eb1a4853441ab"
 notes: >-
-  Model-free protocol, all-pair smoke, fresh construction, and preoutcome
-  inventory only. No model call, sampled output, calibration, mechanics,
-  protected-label plaintext, or benchmark read exists.
+  Model-free protocol, all-pair smoke, fresh construction, preoutcome inventory,
+  and pinned-tokenizer grammar/prompt receipt only. No model call, sampled
+  output, calibration, mechanics, protected-label plaintext, or benchmark read
+  exists.
