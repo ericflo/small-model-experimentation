@@ -556,3 +556,19 @@
   one control on one block; treatment and replication conclusions are sealed.
   Primary seed 42 started next with external journal hash
   `fc7fd5c948893412f06d181a647a45ff9b183b5f833d291089b046096acc9ee4`.
+
+## 2026-07-14 — block-0 primary seed 42 completes below source
+
+- Primary seed 42 completed the sealed geometry and strict validation.
+  `GENERATED.json` and `COMPLETE.json` hash to
+  `a3ecc145f38c4413e27bd1f3b56bc868836129069dd647b30b6bdafd96159caf`
+  and `104601605d2ad0b5c12f41947242989c2cfdd11d24dedd954abc0134cf955274`;
+  the score hashes to
+  `585f99d71141a70de1db609b827b767218068645d31db0f7396324152c232841`.
+- Registered means are `0.577005` deep and `0.795225` quick, `−0.003063` and
+  `−0.014804` versus the deep source anchor, using 4,422,572 sampled tokens.
+  It is also `−0.000554` deep and `−0.002360` quick versus off-policy. This is
+  an unfavorable first treatment block, not a terminal conclusion: the frozen
+  decision requires all treatment seeds, comparators, and both blocks. Primary
+  seed 43 started next with external journal hash
+  `81047c1f3329eb71fd76dfa47a4a2c6dd87627c2bcc227761567b155d400d3ef`.

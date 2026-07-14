@@ -160,6 +160,11 @@ Block-0 off-policy SFT then scored `0.577559` deep and `0.797585` quick,
 `−0.002509` and `−0.012444` versus the deep source anchor, using 4,342,736
 sampled tokens. It exceeds non-advantage on both strata but remains a one-block
 control result.
+Primary seed 42, the first MOPD treatment, then scored `0.577005` deep and
+`0.795225` quick, `−0.003063` and `−0.014804` versus the deep source anchor
+and slightly below off-policy on both strata, using 4,422,572 sampled tokens.
+This is an unfavorable first treatment block; seeds 43/44 and block 1 remain
+required by the frozen decision rule.
 
 Together, the three frozen optimizer seeds establish that the registered
 four-round update can complete safely and that strict-deep route supply

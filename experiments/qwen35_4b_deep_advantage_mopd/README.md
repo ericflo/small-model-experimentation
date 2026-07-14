@@ -226,7 +226,11 @@ shows only that this control is weaker on block 0; the treatment arms, remaining
 controls, and second block are still required. Block-0 off-policy SFT then
 scored `0.577559` deep and `0.797585` quick, `−0.002509` and `−0.012444`
 versus the deep source anchor, with 4,342,736 sampled tokens. It is stronger
-than non-advantage but still below the source anchor on both strata.
+than non-advantage but still below the source anchor on both strata. The first
+MOPD treatment, primary seed 42, scored `0.577005` deep and `0.795225` quick,
+`−0.003063` and `−0.014804` versus the source and slightly below off-policy on
+both strata. One optimizer seed and one block are insufficient for the frozen
+gate; seeds 43/44 and block 1 remain decisive.
 
 ## NF4/BF16 Interpretation Diagnostic
 
