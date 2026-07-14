@@ -13847,22 +13847,27 @@
    ]
   },
   "qwen35_4b_universal_search_scaffold_token_match": {
-   "verdict_tag": "Staged-search design is at feasibility",
+    "verdict_tag": "Staged-search design is frozen and feasible",
    "concept_primer": "Earlier lessons showed a complete worked search trace, but the model still wandered among candidates and ran out of room. This design turns the missing intermediate moves—apply, fit, reject, and execute—into separately graded practice before recombining them.",
    "plain_question": "Can teaching each step of a bounded two-operation search help the model solve and finish fresh abstract tasks better than another equal replay update?",
-   "plain_answer": "No model run exists yet. The planned comparison starts from the best prior local near-miss. One version receives replay only; the other receives 80 executable staged-search lessons plus matched replay, with equal rows, processed tokens, and updates if CPU feasibility succeeds.",
+    "plain_answer": "No model run exists yet. CPU feasibility succeeded: the replay control and staged-search candidate each contain 320 rows, exactly 286,814 forward tokens, zero skips, and 40 frozen updates from the same authenticated parent.",
    "why_it_matters": "This tests a different causal idea from heavier stop-marker loss. If it works, the gain comes from making search substates reusable and composable rather than from showing another full answer narration or spending more compute.",
    "verdict_tone": "neutral",
    "key_numbers": [
     {
-     "label": "Planned staged lessons",
+        "label": "Frozen staged lessons",
      "value": "80",
      "sub": "16 rows for each of five executable search stages"
     },
     {
-     "label": "Planned rows per arm",
+        "label": "Exact rows per arm",
      "value": "320",
-     "sub": "candidate and replay control must match"
+        "sub": "candidate and replay control are token matched"
+      },
+      {
+        "label": "Forward tokens per arm",
+        "value": "286,814",
+        "sub": "zero skipped rows at max length 4,096"
     },
     {
      "label": "Fresh local seed",
@@ -13872,14 +13877,14 @@
     {
      "label": "Model runs so far",
      "value": "zero",
-     "sub": "only intake and design smoke are authorized"
+        "sub": "43 tests and the CPU smoke pass"
     }
    ],
    "charts": [
     {
      "index": 0,
      "chart_plain_title": "Two equal continuations isolate staged search lessons",
-     "chart_read": "Both planned bars total 320 rows. Each shares 200 replay rows; replay-only adds 120 replay rows, while the candidate substitutes 80 staged-search lessons and keeps 40 matched replay fillers.",
+      "chart_read": "Both frozen bars total 320 rows and exactly 286,814 forward tokens. Each shares 200 replay rows; replay-only adds 120 replay rows, while the candidate substitutes 80 staged-search lessons and keeps 40 matched replay fillers.",
      "chart_takeaway": "Equal row, token, and update budgets make lesson structure—not extra training—the intended difference."
     }
    ]

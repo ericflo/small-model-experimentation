@@ -5,7 +5,10 @@ construction_seed: 77111
 training_seed: 45
 local_seed: 88007
 conditional_aggregate_seed: 78137
-planned_rows_per_arm: 320
-planned_forward_tokens_per_arm: 286814
-planned_optimizer_steps: 40
-status: design_feasibility_only
+rows_per_arm: 320
+forward_tokens_per_arm: 286814
+optimizer_steps: 40
+shared_position_aligned_replay_rows: 200
+scaffold_rows: 80
+replay_filler_rows: 40
+status: preregistered_design_frozen

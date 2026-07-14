@@ -48170,7 +48170,7 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "Planned exact-token arms isolate staged search lessons",
+     "title": "Frozen exact-token arms isolate staged search lessons",
      "categories": [
       "common replay",
       "staged search lessons",
@@ -48194,10 +48194,10 @@
        ]
       }
      ],
-     "x_label": "prospective stream component",
+     "x_label": "frozen stream component",
      "y_label": "training rows",
      "y_format": "integer",
-     "note": "Design-stage plan only. Feasibility must also make both arms exactly 286,814 forward tokens and 40 updates before scientific work is authorized.",
+     "note": "CPU feasibility passed: both arms have 320 rows, exactly 286,814 forward tokens, zero skips, and 40 frozen updates. No model run exists yet.",
      "source": "experiments/qwen35_4b_universal_search_scaffold_token_match/configs/default.yaml"
     }
    ]

@@ -25,7 +25,7 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | `analysis/` | 160 |
 | `scripts/` | 160 |
 | `configs/` | 155 |
-| `data/` | 140 |
+| `data/` | 141 |
 | `logs/` | 64 |
 | `run_logs/` | 55 |
 | `tests/` | 51 |
@@ -39,11 +39,11 @@ This is a repository-level inventory. Each experiment remains the source of trut
 
 | Extension | Files |
 | --- | ---: |
-| `.json` | 3172 |
-| `.py` | 2158 |
+| `.json` | 3176 |
+| `.py` | 2176 |
 | `.csv` | 2144 |
-| `.md` | 1240 |
-| `.jsonl` | 954 |
+| `.md` | 1242 |
+| `.jsonl` | 958 |
 | `.png` | 848 |
 | `.log` | 564 |
 | `.yaml` | 454 |
@@ -90,4 +90,4 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | 7.1 | `experiments/qwen35_4b_verified_macro_long_context_rerun/runs/interface/think_16384/designed_ceiling.jsonl` |
 | 7.0 | `experiments/qwen35_4b_learned_active_trace_policy/data/eval/dsl_eval_ceiling.jsonl` |
 | 7.0 | `experiments/qwen35_4b_active_counterexample_trace_selection/data/eval/dsl_eval_ceiling.jsonl` |
-| 6.9 | `experiments/qwen35_4b_universal_replay_anchor/data/sft_blend.jsonl` |
+| 6.9 | `experiments/qwen35_4b_universal_search_scaffold_token_match/data/sft_blend.jsonl` |

@@ -1,6 +1,6 @@
 # Search-Scaffold Universal Curriculum
 
-**Status:** in-progress · since 2026-07-14 · implementation, adversarial review, and all model work remain
+**Status:** in-progress · since 2026-07-14 · design frozen; no model work has run
 
 This experiment tests whether independently supervised, executable search substates
 compose into a bounded general reasoning procedure better than an exact-token replay
@@ -37,17 +37,20 @@ close-weight or generic-dose sweep.
 ## Setup
 
 - Only model: `Qwen/Qwen3.5-4B`, pinned revision `851bf6e...`.
-- Prospective parent: authenticated `close_xi` adapter from the completed predecessor.
+- Parent: authenticated `close_xi` adapter from the completed predecessor (weights
+  `16e9dc75...c179`, config `de953bd5...7ff`).
 - Synthetic source: new executable abstract-index tasks over disjoint randomized
   surfaces; no benchmark content, outputs, or family implementation is read.
-- Intended candidate block: 80 rows, 16 each of apply-first, fit-second,
+- Candidate block: 80 rows, 16 each of apply-first, fit-second,
   reject-first, execute-pair, and bounded full-search lessons.
-- Intended exposure: 200 common replay rows plus the 80 staged rows and 40 matched
-  replay fillers; 320 rows, 286,814 forward tokens, and 40 updates if feasibility
-  succeeds. A new replay-only arm must match all three quantities from the same parent.
+- Frozen exposure: 200 common replay rows plus the 80 staged rows and 40 matched
+  replay fillers. The replay arm uses the same 200 rows plus 120 replay rows. Both
+  arms have 320 rows, exactly 286,814 forward tokens, zero skips, and 40 updates;
+  exactly 200 shuffled positions are byte-identical.
 - Training seed: 45. Fresh local seed: 88,007. Conditional aggregate seed: 78,137.
 - Local gate: accuracy ≥0.65, parse ≥0.90, cap contacts ≤2, no repeated feasible-route
-  abstention, plus at least one correct case in both `u_execute` and `u_induct`.
+  abstention, plus accuracy ≥0.50 (at least one of two) in both `u_execute` and
+  `u_induct`.
 - Hidden-label boundary: local cases are fresh procedural experiment data. Benchmark
   access is conditional and aggregate-only through the trusted gateway; benchmark
   sources, items, transcripts, and private outputs remain unread.
@@ -64,19 +67,35 @@ PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B \
 Full:
 
 ```bash
-Not authorized yet. The full command will be frozen only after stream feasibility,
-unit tests, preregistration, and adversarial design review pass.
+PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B \
+  experiments/qwen35_4b_universal_search_scaffold_token_match/scripts/run.py \
+  --stage train-control
+PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B \
+  experiments/qwen35_4b_universal_search_scaffold_token_match/scripts/run.py \
+  --stage train-candidate
+PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B \
+  experiments/qwen35_4b_universal_search_scaffold_token_match/scripts/run.py \
+  --stage local
 ```
+
+The local stage writes a promotion receipt even on failure. Merge and benchmark
+remain sealed unless the sole candidate passes; then run `--stage merge` and
+`--stage benchmark`. Each natural stage is committed, rebased, fully checked,
+pushed to `main`, and verified in both GitHub workflows before the next starts.
 
 ## Results
 
-No model training or evaluation has run. The current artifact is an intake and
-feasibility scaffold only.
+CPU feasibility passed. The deterministic source has 80 truth-audited rows over six
+surface families. The two frozen streams each contain 320 trainable rows and exactly
+286,814 forward tokens at max length 4,096, with zero skips. All 43 experiment tests
+and the staged smoke harness pass. No model training or evaluation has run.
 
 ## Interpretation
 
-None yet. A feasible stream and passed adversarial review are prerequisites for a
-scientific run.
+The design is feasible and passed adversarial review after explicitly narrowing the
+claim: the full lesson demonstrates one rejected and one successful branch, not
+exhaustive enumeration of the operation universe. Any gain is evidence for the
+five-stage scaffold package, not proof that a general search algorithm was learned.
 
 ## Knowledgebase Update
 

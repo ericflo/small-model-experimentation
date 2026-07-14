@@ -56,3 +56,13 @@ Proceed only to CPU feasibility and adversarial design review using construction
 77,111. Reserve training seed 45, local seed 88,007, and conditional aggregate seed
 78,137. Commit and push the intake before implementing scientific stages. No GPU or
 benchmark work is authorized by this note.
+
+## Design-freeze outcome
+
+CPU feasibility subsequently succeeded without changing the reserved seeds. The
+candidate and replay streams are exactly matched at 320 rows, 286,814 forward tokens,
+40 updates, and zero skips; 200 positions contain identical replay bytes. The
+adversarial review passed after narrowing the mechanism claim: the final search
+lesson trains a two-branch demonstration, while the separately supervised stages are
+the actual intervention. Expensive work is authorized only from the committed and
+pushed frozen design.

@@ -1,0 +1,96 @@
+{
+  "arm_data": {
+    "replay_after_close": "experiments/qwen35_4b_universal_search_scaffold_token_match/data/replay_after_close.jsonl",
+    "scaffold_after_close": "experiments/qwen35_4b_universal_search_scaffold_token_match/data/scaffold_after_close.jsonl"
+  },
+  "experiment_id": "qwen35_4b_universal_search_scaffold_token_match",
+  "files": [
+    {
+      "answer_target_tokens_per_epoch": 2727,
+      "close_target_tokens_per_epoch": 640,
+      "encoded_rows": 320,
+      "families": {
+        "burrowmaze": 43,
+        "caravan": 10,
+        "ferrier": 74,
+        "foundry_ledger": 5,
+        "gatepost": 17,
+        "glyphgate": 47,
+        "kilnrite": 71,
+        "loomfix": 23,
+        "packhouse": 6,
+        "patchwheel": 12,
+        "runeward": 3,
+        "stallwright": 9
+      },
+      "kinds": {
+        "atom": 32,
+        "atom_fc": 21,
+        "episode": 199,
+        "oracle_trace": 68
+      },
+      "max_sequence_tokens": 2991,
+      "min_sequence_tokens": 329,
+      "path": "experiments/qwen35_4b_universal_search_scaffold_token_match/data/replay_after_close.jsonl",
+      "prompt_tokens_per_epoch": 116036,
+      "rows": 320,
+      "sha256": "c157fb135f0934375de3c36d3258b4d2621a09f9831f4eb9f1a8f5bb959c355d",
+      "skipped": [],
+      "skipped_rows": 0,
+      "think_target_tokens_per_epoch": 167411,
+      "total_forward_tokens_per_epoch": 286814
+    },
+    {
+      "answer_target_tokens_per_epoch": 3618,
+      "close_target_tokens_per_epoch": 640,
+      "encoded_rows": 320,
+      "families": {
+        "burrowmaze": 19,
+        "caravan": 3,
+        "ferrier": 48,
+        "foundry_ledger": 4,
+        "gatepost": 11,
+        "glyphgate": 29,
+        "kilnrite": 64,
+        "loomfix": 27,
+        "packhouse": 10,
+        "patchwheel": 10,
+        "runeward": 2,
+        "stallwright": 13,
+        "universal_search_scaffold": 80
+      },
+      "kinds": {
+        "atom": 10,
+        "atom_fc": 21,
+        "episode": 164,
+        "oracle_trace": 45,
+        "u_scaffold_apply": 16,
+        "u_scaffold_execute": 16,
+        "u_scaffold_fit": 16,
+        "u_scaffold_reject": 16,
+        "u_scaffold_search": 16
+      },
+      "max_sequence_tokens": 2991,
+      "min_sequence_tokens": 181,
+      "path": "experiments/qwen35_4b_universal_search_scaffold_token_match/data/scaffold_after_close.jsonl",
+      "prompt_tokens_per_epoch": 124245,
+      "rows": 320,
+      "sha256": "79a8d7c933a220b809447f144f07c2352f89f462198b07b64b30275cf8790b90",
+      "skipped": [],
+      "skipped_rows": 0,
+      "think_target_tokens_per_epoch": 158311,
+      "total_forward_tokens_per_epoch": 286814
+    }
+  ],
+  "forward_tokens_per_arm": 286814,
+  "max_length": 4096,
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "position_aligned_streams": true,
+  "rows_per_arm": 320,
+  "schema_version": 1,
+  "skipped_rows": 0,
+  "stream_manifest": "experiments/qwen35_4b_universal_search_scaffold_token_match/data/stream_manifest.json",
+  "stream_manifest_sha256": "8035657a885935038c980b850c27da766e90d13c098fff2e1a67c0911d109dd8",
+  "total_unique_file_rows": 640
+}
