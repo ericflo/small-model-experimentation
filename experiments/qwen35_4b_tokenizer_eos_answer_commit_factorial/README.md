@@ -1,6 +1,6 @@
 # Qwen3.5-4B Tokenizer-EOS Answer Commit Factorial
 
-**Status:** in-progress · since 2026-07-14 · `PASS_DESIGN` + calibration `PASS_IMPLEMENTATION`; fresh calibration: tokenizer-EOS-only interface qualified; mechanics lock-boundary exact-type repairs complete, exact-commit rereview pending
+**Status:** in-progress · since 2026-07-14 · `PASS_DESIGN` + calibration `PASS_IMPLEMENTATION`; fresh calibration: tokenizer-EOS-only interface qualified; round-eight mechanics `PASS_IMPLEMENTATION`, replacement receipt release pending
 
 This fresh successor tests whether the prior strict answer-seam failure was
 caused by waiting past Qwen3.5's tokenizer chat-end token. It registers the
@@ -332,6 +332,17 @@ validation now uses recursive exact JSON equality. The real-plan regression
 mutates both directions for all 30 fields and requires every case to fail.
 No mechanics payload, model, or GPU call occurred; another exact-commit review
 and replacement receipt remain required.
+
+Round eight returned `PASS_IMPLEMENTATION` for exact pushed-green commit
+`3e7b650a90ff1d65fe371552354895756efcf728`. It passed 140/140 tests; rejected
+all 58 real-plan type/schema cases and all five semantic seed mutations;
+reauthenticated the real calibration decision with the correct 32 key
+conversions; and completed read-only lock build/validation over 29/29 current
+critical files. Full-prefix, production durability, hidden binding, preflight,
+resource, calibration, routing, launcher, and static checks also passed. All
+mechanics/protected read inventories and model/GPU counters remained zero. The
+replacement hash-bound receipt must be committed, pushed, and green before the
+lock-only stage is retried.
 
 ## Interpretation
 

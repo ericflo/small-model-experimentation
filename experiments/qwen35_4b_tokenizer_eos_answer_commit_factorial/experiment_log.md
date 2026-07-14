@@ -158,6 +158,12 @@
   bidirectional real-plan regressions for all 30 aliases. Mechanics data,
   model/GPU calls, and protected reads remain zero pending another exact-SHA
   review and replacement receipt.
+- Round eight returned `PASS_IMPLEMENTATION` for exact pushed-green commit
+  `3e7b650a90ff1d65fe371552354895756efcf728`: 140/140 tests, all 58 real-plan
+  type/schema mutations, five semantic seed mutations, the actual 32-key
+  calibration normalization, read-only lock build/validation, and every prior
+  regression family passed. Model/GPU calls and protected reads remained zero.
+  The replacement canonical receipt is still a separate release gate.
 
 ## Scaffold
 
