@@ -45,6 +45,10 @@ Completed reruns authenticate tracked outputs without reading that key.
   `PASS_IMPLEMENTATION`: 145/145 protected-safe tests and 48/48 predecessor
   mutation probes passed with zero model/GPU/protected access. Machine review
   receipts and both release locks remain to be published separately.
+- The authenticated static launcher minted calibration-only implementation
+  lock `b2204667...b733e`, binding the reviewed bytes, receipt release, exact
+  inputs/runtime, and frozen mechanics blobs with zero prior model/protected
+  access. Exact lock-commit CI remains required before calibration.
 
 ## Controls
 

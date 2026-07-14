@@ -103,3 +103,17 @@ Created as a new experiment scaffold.
   mechanics review receipts. Locks remain absent and all model calls remain
   sealed until the receipts and subsequent lock commits are separately pushed
   and green.
+
+## Calibration implementation lock
+
+- After the review-receipt commit `21f964e6` passed exact workflows
+  `29336107856` and `29336108419`, invoked the static calibration launcher's
+  model-free `lock` stage from a clean `origin/main` worktree.
+- Minted calibration-only lock
+  `b220466742071e3fa02a698925251132cd7bb05535a8ac54d0ce819ab90b733e`.
+  It binds implementation `50fd804b`, review receipt `21f964e6`, 31 critical
+  files, exact calibration inputs and sampling, and the frozen mechanics Git
+  blobs.
+- The lock records zero experimental requests, sampled outputs, hidden reads,
+  qualification reads, confirmation reads, and benchmark reads. No model call
+  is authorized until the lock commit itself is pushed and green.

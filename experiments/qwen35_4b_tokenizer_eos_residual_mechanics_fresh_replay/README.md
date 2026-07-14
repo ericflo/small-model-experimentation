@@ -1,6 +1,6 @@
 # Qwen3.5-4B Tokenizer-EOS Residual Mechanics Fresh Replay
 
-**Status:** in-progress · since 2026-07-14 · `CONSTRUCTION_PASS`; repaired implementation 147/147 and exact review PASS; review receipts, locks, and all model calls remain
+**Status:** in-progress · since 2026-07-14 · `CONSTRUCTION_PASS`; repaired implementation and exact review PASS; calibration lock minted model-free, exact lock CI and all model calls remain
 
 This fresh-identity successor preserves the parent's qualified tokenizer-EOS
 interface and frozen residual-mechanics science while separating initial
@@ -146,6 +146,15 @@ returned `PASS_IMPLEMENTATION`: 145/145 protected-safe tests passed, the full
 byte-identically, and model/GPU/protected access remained zero. Canonical
 calibration and mechanics machine receipts must still be committed, pushed,
 and green before either model-free lock can be published.
+
+The authenticated static launcher subsequently minted the calibration-only
+implementation lock with SHA-256
+`b220466742071e3fa02a698925251132cd7bb05535a8ac54d0ce819ab90b733e`.
+It binds reviewed implementation `50fd804b`, review-release commit `21f964e6`,
+all 31 calibration critical files, the exact Qwen3.5-4B revision/backend, and
+the frozen mechanics Git blobs. The lock records zero prior model requests,
+sampled outputs, or protected reads. Calibration remains sealed until this
+lock commit is pushed and green in both exact workflows.
 
 ## Interpretation
 

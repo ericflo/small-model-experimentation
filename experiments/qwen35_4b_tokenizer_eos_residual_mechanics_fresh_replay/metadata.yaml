@@ -21,12 +21,12 @@ top_level_dirs:
   - "tests"
 file_counts:
   aesgcm: 1
-  json: 9
+  json: 10
   jsonl: 9
   md: 9
   py: 41
   s: 2
   yaml: 3
   "[none]": 3
-total_files: 77
-total_size_bytes: 16772031
+total_files: 78
+total_size_bytes: 16788671
