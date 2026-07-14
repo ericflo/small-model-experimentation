@@ -223,7 +223,10 @@ MOPD gain or causal advantage-routing effect. The block-0 non-advantage control
 then scored `0.565173` deep and `0.790951` quick, respectively `−0.014895` and
 `−0.019078` below the deep source anchor, using 4,468,793 sampled tokens. That
 shows only that this control is weaker on block 0; the treatment arms, remaining
-controls, and second block are still required.
+controls, and second block are still required. Block-0 off-policy SFT then
+scored `0.577559` deep and `0.797585` quick, `−0.002509` and `−0.012444`
+versus the deep source anchor, with 4,342,736 sampled tokens. It is stronger
+than non-advantage but still below the source anchor on both strata.
 
 ## NF4/BF16 Interpretation Diagnostic
 

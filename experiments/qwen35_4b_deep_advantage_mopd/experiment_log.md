@@ -541,3 +541,18 @@
   treatment evidence or a causal advantage-routing result. Off-policy SFT
   evaluation started next with external journal hash
   `fbd64d2cd877e2e84a811337541e1d60de63a3d680ad8fad67fcf785e9db4e2e`.
+
+## 2026-07-14 — block-0 off-policy SFT control completes
+
+- Off-policy SFT completed the sealed geometry and strict journal validation.
+  `GENERATED.json` and `COMPLETE.json` hash to
+  `f865801c755fb2fc1ba2ff81d1dd4f780d432b99116b69986ecf06d535a8f8ae`
+  and `b23d72356ab3cedf7794462d6bc6d403705eaa1b964eda4893ec263e5b5195de`;
+  the score hashes to
+  `44e8e830e0a05c5d903b0638fcc756ea19203b80044b26ce70948b5d6c5ae002`.
+- Registered means are `0.577559` deep and `0.797585` quick, `−0.002509` and
+  `−0.012444` versus the deep source anchor, using 4,342,736 sampled tokens.
+  It is `+0.012386` deep and `+0.006634` quick versus non-advantage, but remains
+  one control on one block; treatment and replication conclusions are sealed.
+  Primary seed 42 started next with external journal hash
+  `fc7fd5c948893412f06d181a647a45ff9b183b5f833d291089b046096acc9ee4`.

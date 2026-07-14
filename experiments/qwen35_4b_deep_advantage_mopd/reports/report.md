@@ -156,6 +156,10 @@ Block-0 non-advantage then scored `0.565173` deep and `0.790951` quick,
 respectively `−0.014895` and `−0.019078` versus that source anchor, using
 4,468,793 sampled tokens. This is one control/source comparison on one block;
 the treatment arms and second block remain necessary.
+Block-0 off-policy SFT then scored `0.577559` deep and `0.797585` quick,
+`−0.002509` and `−0.012444` versus the deep source anchor, using 4,342,736
+sampled tokens. It exceeds non-advantage on both strata but remains a one-block
+control result.
 
 Together, the three frozen optimizer seeds establish that the registered
 four-round update can complete safely and that strict-deep route supply
