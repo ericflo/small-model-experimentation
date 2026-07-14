@@ -4,6 +4,7 @@ import sys
 import unittest
 from pathlib import Path
 
+import yaml
 
 EXP = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(EXP / "src"))
@@ -108,6 +109,20 @@ class RecordTests(unittest.TestCase):
             R.encode_training_record(
                 record, tokenizer, len(full["input_ids"]) - 1, 0.2, 0.2
             )
+
+    def test_frozen_parity_gate_schema_has_six_exact_entries(self) -> None:
+        config = yaml.safe_load((EXP / "configs" / "default.yaml").read_text())
+        self.assertEqual(
+            config["training"]["parity_gates"],
+            [
+                "byte_identical_correct_shuffle_messages_per_task",
+                "identical_correct_shuffle_target_multiset_per_optimizer_group",
+                "identical_correct_shuffle_prompt_target_forward_token_totals_per_optimizer_group",
+                "identical_correct_shuffle_optimizer_steps_and_task_order",
+                "equal_reflection_auxiliary_rendered_prompt_tokens_per_task",
+                "exact_input_target_mask_hash_receipt_before_training",
+            ],
+        )
 
 
 if __name__ == "__main__":

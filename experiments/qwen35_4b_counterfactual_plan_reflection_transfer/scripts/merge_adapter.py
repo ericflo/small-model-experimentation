@@ -6,7 +6,6 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import subprocess
 import shutil
 import sys
 from pathlib import Path
@@ -22,9 +21,16 @@ from checkpoint_lineage import (  # noqa: E402
     adapter_tensor_inventory,
     merged_checkpoint_inventory,
 )
-from merge_replay import authenticate_base_snapshot, verify_merge_equation  # noqa: E402
+from merge_replay import (  # noqa: E402
+    authenticate_base_snapshot,
+    base_snapshot_commitment,
+    verify_merge_equation,
+)
+from provenance import validate_runtime_packages  # noqa: E402
+from runtime_contract import require_detached_execution_worktree  # noqa: E402
 from stages import read_and_validate_stage_receipt  # noqa: E402
 from tensor_merge import write_tensor_level_merge  # noqa: E402
+from tokenizer_lineage import authenticate_tokenizer_snapshot  # noqa: E402
 
 install_benchmark_firewall(EXP.parents[1])
 
@@ -49,6 +55,12 @@ def _sha256_tree(path: Path, excluded: set[str] | None = None) -> str:
     return digest.hexdigest()
 
 
+def _sha256_value(value: object) -> str:
+    return hashlib.sha256(
+        json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
+    ).hexdigest()
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--adapter", type=Path, required=True)
@@ -70,8 +82,9 @@ def main() -> int:
         "trainer_git_commit", "trainer_sha256", "recipe_sha256",
         "record_receipt_sha256", "parity_sha256",
         "adapter_tree_excluding_training_receipt_sha256",
+        "worktree", "runtime", "base_snapshot", "tokenizer_snapshot", "compute",
     }
-    if set(source_receipt) != required_training_receipt or source_receipt["schema_version"] != 2:
+    if set(source_receipt) != required_training_receipt or source_receipt["schema_version"] != 3:
         raise ValueError("training receipt schema changed")
     observed_adapter_tree = _sha256_tree(
         args.adapter, excluded={"training_receipt.json"}
@@ -81,13 +94,12 @@ def main() -> int:
         != observed_adapter_tree
     ):
         raise ValueError("adapter tree differs from its training receipt")
-    if subprocess.run(
-        ["git", "status", "--porcelain"], check=True, capture_output=True, text=True
-    ).stdout:
-        raise ValueError("adapter merge requires a clean worktree")
-    current_commit = subprocess.run(
-        ["git", "rev-parse", "HEAD"], check=True, capture_output=True, text=True
-    ).stdout.strip()
+    worktree = require_detached_execution_worktree(EXP.parents[1])
+    current_commit = worktree["git_commit"]
+    lock_path = EXP.parents[1] / "requirements-vllm.lock.txt"
+    validate_runtime_packages(source_receipt["runtime"], lock_path)
+    base_snapshot = base_snapshot_commitment()
+    tokenizer_snapshot = authenticate_tokenizer_snapshot()
     recipe = config["training"]["recipe"]
     allowed_arms = set(config["training"]["arms"])
     allowed_seeds = set(config["training"]["staged_seeds"].values())
@@ -99,6 +111,10 @@ def main() -> int:
         or int(source_receipt["optimizer_steps"])
         != int(config["training"]["schedule"]["optimizer_steps_total"])
         or source_receipt["trainer_git_commit"] != current_commit
+        or source_receipt["worktree"] != worktree
+        or source_receipt["runtime"].get("worktree") != worktree
+        or source_receipt["base_snapshot"] != base_snapshot
+        or source_receipt["tokenizer_snapshot"] != tokenizer_snapshot
         or source_receipt["trainer_sha256"]
         != _sha256_file(EXP / "scripts" / "train.py")
         or source_receipt["recipe_sha256"]
@@ -124,11 +140,29 @@ def main() -> int:
     ):
         raise ValueError("copied prerequisite receipts differ from training lineage")
     tokenizer_receipt = json.loads(copied_tokenizer.read_text())
+    required_tokenizer_receipt = {
+        "schema_version", "experiment_id", "config_sha256", "runner_sha256",
+        "model_id", "model_revision", "tokenizer_class", "tokenizer_eos_token_id",
+        "trust_remote_code", "tokenizer_snapshot", "worktree", "record_receipt",
+        "parity", "rows", "rows_sha256", "model_calls", "gpu_events",
+        "benchmark_reads",
+    }
     if (
-        tokenizer_receipt.get("experiment_id") != config["experiment_id"]
+        set(tokenizer_receipt) != required_tokenizer_receipt
+        or tokenizer_receipt.get("schema_version") != 2
+        or tokenizer_receipt.get("experiment_id") != config["experiment_id"]
+        or tokenizer_receipt.get("config_sha256") != _sha256_file(config_path)
+        or tokenizer_receipt.get("runner_sha256")
+        != _sha256_file(EXP / "scripts" / "tokenizer_receipt.py")
         or tokenizer_receipt.get("model_id") != config["model"]["id"]
         or tokenizer_receipt.get("model_revision") != config["model"]["revision"]
         or tokenizer_receipt.get("tokenizer_eos_token_id") != 248046
+        or tokenizer_receipt.get("trust_remote_code") is not False
+        or tokenizer_receipt.get("tokenizer_snapshot") != tokenizer_snapshot
+        or tokenizer_receipt.get("worktree") != worktree
+        or tokenizer_receipt.get("model_calls") != 0
+        or tokenizer_receipt.get("gpu_events") != 0
+        or tokenizer_receipt.get("benchmark_reads") != 0
         or hashlib.sha256(
             json.dumps(
                 tokenizer_receipt.get("record_receipt"),
@@ -200,6 +234,11 @@ def main() -> int:
         recipe=recipe,
         contract=merge_contract,
     )
+    if (
+        base_snapshot_commitment() != base_snapshot
+        or authenticate_tokenizer_snapshot() != tokenizer_snapshot
+    ):
+        raise ValueError("base/tokenizer files changed across tensor merge")
     applied = int(tensor_merge["adapted_module_count"])
     lineage = args.output / "source_lineage"
     lineage.mkdir(parents=False, exist_ok=False)
@@ -222,7 +261,7 @@ def main() -> int:
         recipe=recipe,
     )
     receipt = {
-        "schema_version": 5,
+        "schema_version": 6,
         "experiment_id": config["experiment_id"],
         "config_sha256": _sha256_file(config_path),
         "model_id": model_id,
@@ -233,6 +272,11 @@ def main() -> int:
         "source_trainer_sha256": source_receipt["trainer_sha256"],
         "source_trainer_git_commit": source_receipt["trainer_git_commit"],
         "source_recipe_sha256": source_receipt["recipe_sha256"],
+        "source_worktree": source_receipt["worktree"],
+        "source_runtime_sha256": _sha256_value(source_receipt["runtime"]),
+        "source_base_snapshot": source_receipt["base_snapshot"],
+        "source_tokenizer_snapshot": source_receipt["tokenizer_snapshot"],
+        "source_training_compute": source_receipt["compute"],
         "source_adapter_tree_sha256": observed_adapter_tree,
         "source_adapter_sha256": _sha256_file(retained_adapter_weights),
         "source_adapter_config_sha256": _sha256_file(retained_adapter_config),
@@ -246,6 +290,9 @@ def main() -> int:
         "tensor_merge": tensor_merge,
         "merge_script_sha256": _sha256_file(Path(__file__).resolve()),
         "merge_git_commit": current_commit,
+        "merge_worktree": worktree,
+        "merge_base_snapshot": base_snapshot,
+        "merge_tokenizer_snapshot": tokenizer_snapshot,
         "merged_checkpoint_inventory": checkpoint_inventory,
         "merge_replay": merge_replay,
         "merged_tree_sha256": _sha256_tree(args.output),

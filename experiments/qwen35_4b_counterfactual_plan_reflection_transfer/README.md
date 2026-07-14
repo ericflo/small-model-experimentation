@@ -128,11 +128,27 @@ PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B \
 Only the pinned tokenizer receipt command is authorized. Model, GPU, training,
 evaluation, Jacobian, and benchmark commands remain forbidden.
 
-The authorized receipt passed: correct reflection, shuffled reflection, and auxiliary
-plan-label arms each have exactly 77,020 prompt tokens, 5,164 target tokens, and
-82,184 forward tokens, with parity in every optimizer group. The external receipt
-SHA-256 is `ddaddd0f7af8a97802ab8f4cfde6c480ef60c94dc74a5c3577dd9db674432079`;
-it records zero model calls, GPU events, and benchmark reads.
+All tokenizer/training/merge/generation/stage-authorization commands must run from a
+separate, clean, detached worktree at the one reviewed authorization SHA. The normal
+`main` worktree remains available for commits, rebases, and pushes while execution is
+in progress:
+
+```bash
+git fetch origin main
+git worktree add --detach /workspace/sme-reflection-exec <reviewed-authorization-sha>
+cd /workspace/sme-reflection-exec
+# Invoke only the stages enabled by that exact committed config, writing outputs
+# outside this worktree so it remains clean for the entire staged pipeline.
+```
+
+The scripts reject a branch checkout, a dirty tree, a different current directory,
+or a later SHA. Do not commit, rebase, or edit inside the execution worktree; remove it
+only after all required downstream consumers have authenticated the external
+artifacts. Review 7 remediation changed the tokenizer receipt schema and exact
+tokenizer/config/script commitments, so the earlier tokenizer receipt
+`ddaddd0f7af8a97802ab8f4cfde6c480ef60c94dc74a5c3577dd9db674432079` is historical
+and cannot authorize training. A fresh tokenizer-only receipt will be issued from the
+next independently reviewed exact SHA; no model or GPU authorization is implied.
 
 ## Results
 
@@ -171,6 +187,14 @@ or executable checkpoint content, and is loaded with `trust_remote_code=False`.
 Physical allocation must cover the complete logical safetensors length. These repairs
 remain model-free and non-authorizing pending a fresh Review 7.
 
+Review-7 provenance remediation authenticates all five tokenizer-semantic files and
+the complete pinned base snapshot, records the full installed-package/runtime/GPU
+identity and charged training compute, carries those commitments through a schema-6
+merge receipt, reauthenticates bytes immediately after vLLM engine load, compares
+unchanged tensors by raw bytes, and enforces the detached execution-worktree contract
+above. The end-to-end matched-compute sampling gate remains to be completed before a
+fresh adversarial verdict.
+
 ## Interpretation
 
 The paper unlocks a training hypothesis, not an already-demonstrated Qwen capability.
@@ -194,6 +218,8 @@ additional sampling. No scientific result exists yet.
 - `src/scoring.py`
 - `src/analyze.py`
 - `src/vllm_runner.py`
+- `src/runtime_contract.py`
+- `src/tokenizer_lineage.py`
 - `scripts/run.py`
 - `scripts/tokenizer_receipt.py`
 - `scripts/train.py`
@@ -215,5 +241,6 @@ additional sampling. No scientific result exists yet.
 - `tests/test_vllm_runner.py`
 - `tests/test_eval_inputs.py`
 - `tests/test_stages.py`
+- `tests/test_runtime_contract.py`
 - `reports/artifact_manifest.yaml`
 - `reports/power_analysis.md`

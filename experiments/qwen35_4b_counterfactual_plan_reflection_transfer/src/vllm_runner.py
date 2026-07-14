@@ -154,10 +154,14 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
         "model_revision", "source_training_receipt_sha256",
         "source_stage_receipt_sha256", "source_tokenizer_receipt_sha256",
         "source_trainer_sha256", "source_trainer_git_commit",
-        "source_recipe_sha256", "source_adapter_tree_sha256",
+        "source_recipe_sha256", "source_worktree", "source_runtime_sha256",
+        "source_base_snapshot", "source_tokenizer_snapshot",
+        "source_training_compute", "source_adapter_tree_sha256",
         "source_adapter_sha256", "source_adapter_config_sha256", "source_arm", "source_seed",
         "source_adapter_inventory", "applied_lora_modules",
-        "merge_script_sha256", "merge_git_commit", "merged_checkpoint_inventory",
+        "merge_script_sha256", "merge_git_commit", "merge_worktree",
+        "merge_base_snapshot", "merge_tokenizer_snapshot",
+        "merged_checkpoint_inventory",
         "merge_contract_sha256", "tensor_merge", "merge_replay", "merged_tree_sha256",
     }
     config_path = Path(__file__).resolve().parents[1] / "configs" / "default.yaml"
@@ -200,10 +204,61 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
         "trainer_git_commit", "trainer_sha256", "recipe_sha256",
         "record_receipt_sha256", "parity_sha256",
         "adapter_tree_excluding_training_receipt_sha256",
+        "worktree", "runtime", "base_snapshot", "tokenizer_snapshot", "compute",
     }
+    required_tokenizer_lineage = {
+        "schema_version", "experiment_id", "config_sha256", "runner_sha256",
+        "model_id", "model_revision", "tokenizer_class", "tokenizer_eos_token_id",
+        "trust_remote_code", "tokenizer_snapshot", "worktree", "record_receipt",
+        "parity", "rows", "rows_sha256", "model_calls", "gpu_events",
+        "benchmark_reads",
+    }
+    training_runtime = training_lineage.get("runtime")
+    if not isinstance(training_runtime, dict):
+        raise ValueError("training receipt lacks exact runtime metadata")
+    from provenance import validate_runtime_packages
+
+    validate_runtime_packages(
+        training_runtime,
+        Path(__file__).resolve().parents[3] / "requirements-vllm.lock.txt",
+    )
+    from merge_replay import base_snapshot_commitment
+    from tokenizer_lineage import authenticate_tokenizer_snapshot
+
+    exact_base = base_snapshot_commitment()
+    exact_tokenizer = authenticate_tokenizer_snapshot()
+    exact_worktree = {
+        "repo_root": _run_text(["git", "rev-parse", "--show-toplevel"]),
+        "git_commit": _run_text(["git", "rev-parse", "HEAD"]),
+        "head_mode": "detached",
+        "cwd": str(Path.cwd().resolve()),
+    }
+    compute = training_lineage.get("compute")
+    valid_compute = (
+        isinstance(compute, dict)
+        and set(compute)
+        == {
+            "schema_version", "amortization_horizon", "forward_tokens",
+            "forward_backward_multiplier", "token_forward_equivalents",
+            "model_load_seconds", "training_seconds", "gpu_phase_wall_seconds",
+        }
+        and compute.get("schema_version") == 1
+        and compute.get("amortization_horizon")
+        == "full_training_charged_to_each_confirmation_split"
+        and isinstance(compute.get("forward_tokens"), int)
+        and compute["forward_tokens"] > 0
+        and compute.get("forward_backward_multiplier") == 3
+        and compute.get("token_forward_equivalents") == compute["forward_tokens"] * 3
+        and isinstance(compute.get("model_load_seconds"), (int, float))
+        and compute["model_load_seconds"] > 0
+        and isinstance(compute.get("training_seconds"), (int, float))
+        and compute["training_seconds"] > 0
+        and compute.get("gpu_phase_wall_seconds")
+        == compute["model_load_seconds"] + compute["training_seconds"]
+    )
     if (
         set(receipt) != required
-        or receipt.get("schema_version") != 5
+        or receipt.get("schema_version") != 6
         or receipt.get("experiment_id")
         != "qwen35_4b_counterfactual_plan_reflection_transfer"
         or receipt.get("config_sha256") != _sha256_file(config_path)
@@ -245,7 +300,7 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
         or training_lineage.get("experiment_id")
         != "qwen35_4b_counterfactual_plan_reflection_transfer"
         or set(training_lineage) != required_training_lineage
-        or training_lineage.get("schema_version") != 2
+        or training_lineage.get("schema_version") != 3
         or training_lineage.get("config_sha256") != receipt.get("config_sha256")
         or training_lineage.get("model_id") != MODEL_ID
         or training_lineage.get("model_revision") != MODEL_REVISION
@@ -268,11 +323,46 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
         != receipt.get("source_tokenizer_receipt_sha256")
         or training_lineage.get("adapter_tree_excluding_training_receipt_sha256")
         != receipt.get("source_adapter_tree_sha256")
+        or training_lineage.get("worktree") != exact_worktree
+        or training_runtime.get("worktree") != exact_worktree
+        or training_lineage.get("base_snapshot") != exact_base
+        or training_lineage.get("tokenizer_snapshot") != exact_tokenizer
+        or not valid_compute
+        or receipt.get("source_worktree") != exact_worktree
+        or receipt.get("merge_worktree") != exact_worktree
+        or receipt.get("source_runtime_sha256")
+        != _sha256_bytes(
+            json.dumps(training_runtime, sort_keys=True, separators=(",", ":")).encode()
+        )
+        or receipt.get("source_base_snapshot") != exact_base
+        or receipt.get("merge_base_snapshot") != exact_base
+        or receipt.get("source_tokenizer_snapshot") != exact_tokenizer
+        or receipt.get("merge_tokenizer_snapshot") != exact_tokenizer
+        or receipt.get("source_training_compute") != compute
         or tokenizer_lineage.get("experiment_id")
         != "qwen35_4b_counterfactual_plan_reflection_transfer"
+        or set(tokenizer_lineage) != required_tokenizer_lineage
+        or tokenizer_lineage.get("schema_version") != 2
+        or tokenizer_lineage.get("config_sha256") != receipt.get("config_sha256")
+        or tokenizer_lineage.get("runner_sha256")
+        != _sha256_file(Path(__file__).resolve().parents[1] / "scripts" / "tokenizer_receipt.py")
         or tokenizer_lineage.get("model_id") != MODEL_ID
         or tokenizer_lineage.get("model_revision") != MODEL_REVISION
         or tokenizer_lineage.get("tokenizer_eos_token_id") != 248046
+        or tokenizer_lineage.get("trust_remote_code") is not False
+        or tokenizer_lineage.get("tokenizer_snapshot") != exact_tokenizer
+        or tokenizer_lineage.get("worktree") != exact_worktree
+        or tokenizer_lineage.get("rows_sha256")
+        != _sha256_bytes(
+            json.dumps(
+                tokenizer_lineage.get("rows"),
+                sort_keys=True,
+                separators=(",", ":"),
+            ).encode()
+        )
+        or tokenizer_lineage.get("model_calls") != 0
+        or tokenizer_lineage.get("gpu_events") != 0
+        or tokenizer_lineage.get("benchmark_reads") != 0
         or int(adapter_lineage.get("r", -1)) != int(recipe["lora_rank"])
         or float(adapter_lineage.get("lora_alpha", -1)) != float(recipe["lora_alpha"])
         or float(adapter_lineage.get("lora_dropout", -1))
@@ -314,9 +404,10 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
         != {
             "schema_version", "arm", "seed", "config_sha256",
             "tokenizer_receipt_sha256", "stage_receipt_sha256",
-            "trainer_git_commit", "trainer_sha256",
+            "trainer_git_commit", "trainer_sha256", "worktree", "runtime",
+            "base_snapshot", "tokenizer_snapshot",
         }
-        or started.get("schema_version") != 1
+        or started.get("schema_version") != 2
         or started.get("arm") != receipt.get("source_arm")
         or started.get("seed") != receipt.get("source_seed")
         or started.get("config_sha256") != receipt.get("config_sha256")
@@ -325,6 +416,10 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
         or started.get("stage_receipt_sha256") != receipt.get("source_stage_receipt_sha256")
         or started.get("trainer_git_commit") != receipt.get("source_trainer_git_commit")
         or started.get("trainer_sha256") != receipt.get("source_trainer_sha256")
+        or started.get("worktree") != exact_worktree
+        or started.get("runtime") != training_runtime
+        or started.get("base_snapshot") != exact_base
+        or started.get("tokenizer_snapshot") != exact_tokenizer
     ):
         raise ValueError("retained source adapter start record differs from merge lineage")
     sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -1079,6 +1174,11 @@ class VLLMRunner:
                         "CUDA-graph list; refusing ambiguous engine configuration"
                     )
         self.config = config
+        from merge_replay import base_snapshot_commitment
+        from tokenizer_lineage import authenticate_tokenizer_snapshot
+
+        self.base_snapshot_commitment = base_snapshot_commitment()
+        self.tokenizer_snapshot_commitment = authenticate_tokenizer_snapshot()
         self.adapter_info = _validate_adapter(config.adapter)
         self.model_override_info = _validate_model_override(config.model_override)
         self._closed = False
@@ -1111,6 +1211,11 @@ class VLLMRunner:
         model_config = AutoConfig.from_pretrained(
             MODEL_ID, revision=MODEL_REVISION, trust_remote_code=False
         )
+        if (
+            authenticate_tokenizer_snapshot()
+            != self.tokenizer_snapshot_commitment
+        ):
+            raise RuntimeError("tokenizer files changed across runner tokenizer initialization")
         self.hf_eos_id = int(model_config.text_config.eos_token_id)
         self.tokenizer_eos_id = int(self.tokenizer.eos_token_id)
         _validate_termination_ids(self.hf_eos_id, self.tokenizer_eos_id)
@@ -1277,6 +1382,26 @@ class VLLMRunner:
                 sys.stdout.flush()
                 sys.stderr.flush()
                 os.execv(sys.executable, [sys.executable] + rewritten_argv)
+            post_base = base_snapshot_commitment()
+            post_tokenizer = authenticate_tokenizer_snapshot()
+            post_override = _validate_model_override(config.model_override)
+            if (
+                post_base != self.base_snapshot_commitment
+                or post_tokenizer != self.tokenizer_snapshot_commitment
+                or post_override != self.model_override_info
+            ):
+                try:
+                    self.llm.llm_engine.engine_core.shutdown()
+                finally:
+                    raise RuntimeError(
+                        "model/tokenizer bytes changed between validation and engine load"
+                    )
+            self.post_load_integrity = {
+                "base_snapshot": post_base,
+                "tokenizer_snapshot": post_tokenizer,
+                "model_override": post_override,
+                "decision": "POST_ENGINE_BYTES_MATCH_PRELOAD_COMMITMENTS",
+            }
             self.load_seconds = time.perf_counter() - started
         finally:
             random.setstate(python_rng_state)
@@ -1778,6 +1903,9 @@ class VLLMRunner:
             "resolved_sampling": sampling.resolved_sampling(),
             "adapter": self.adapter_info,
             "model_override": self.model_override_info,
+            "base_snapshot": self.base_snapshot_commitment,
+            "tokenizer_snapshot": self.tokenizer_snapshot_commitment,
+            "post_load_integrity": self.post_load_integrity,
             "think_token_ids": {
                 "open": self.think_open_id,
                 "close": self.think_close_id,
@@ -1819,6 +1947,7 @@ class VLLMRunner:
         git_root = _run_text(["git", "rev-parse", "--show-toplevel"])
         git_commit = _run_text(["git", "rev-parse", "HEAD"]) if git_root else ""
         git_status = _run_text(["git", "status", "--short"]) if git_root else ""
+        git_branch = _run_text(["git", "symbolic-ref", "-q", "HEAD"]) if git_root else ""
         gpu = _run_text(
             [
                 "nvidia-smi",
@@ -1840,6 +1969,9 @@ class VLLMRunner:
             ),
             "git_commit": git_commit,
             "git_dirty": bool(git_status),
+            "git_root": git_root,
+            "cwd": str(Path.cwd().resolve()),
+            "git_head_mode": "branch" if git_branch else "detached",
         }
 
 
@@ -2019,6 +2151,9 @@ def _validate_cli_stage_receipt(
 def main(argv: Sequence[str] | None = None) -> int:
     global _RUNNING_AS_CLI
     _RUNNING_AS_CLI = True
+    from runtime_contract import require_detached_execution_worktree
+
+    require_detached_execution_worktree(Path(__file__).resolve().parents[3])
     args = _parse_args(argv)
     metadata_path = args.metadata or args.output.with_name(args.output.name + ".meta.json")
     if args.output.resolve() == metadata_path.resolve():

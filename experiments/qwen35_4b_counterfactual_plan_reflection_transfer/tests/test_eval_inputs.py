@@ -6,6 +6,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 import yaml
 
@@ -16,7 +17,7 @@ sys.path.insert(0, str(EXP / "src"))
 import eval_inputs as E  # noqa: E402
 import provenance as P  # noqa: E402
 import adapter_gate_artifacts as G  # noqa: E402
-from vllm_runner import SamplingConfig  # noqa: E402
+from vllm_runner import EngineConfig, SamplingConfig  # noqa: E402
 
 
 class EvalInputTests(unittest.TestCase):
@@ -152,6 +153,146 @@ class EvalInputTests(unittest.TestCase):
                     config=self.config,
                     config_path=self.config_path,
                     experiment_root=EXP,
+                )
+
+    def test_false_remote_code_runner_metadata_passes_full_protocol_validation(self) -> None:
+        frozen = self.config["evaluation"]["engine"]
+        engine = P.canonical(
+            EngineConfig(
+                max_model_len=int(frozen["max_model_len"]),
+                gpu_memory_utilization=float(frozen["gpu_memory_utilization"]),
+                max_num_seqs=int(frozen["max_num_seqs"]),
+                max_num_batched_tokens=int(frozen["max_num_batched_tokens"]),
+                cudagraph_capture_sizes=tuple(frozen["cudagraph_capture_sizes"]),
+                enable_prefix_caching=False,
+                enforce_eager=False,
+            )
+        )
+        engine_args = {
+            "model": self.config["model"]["id"],
+            "tokenizer": self.config["model"]["id"],
+            "tokenizer_revision": self.config["model"]["revision"],
+            "trust_remote_code": False,
+            "dtype": "bfloat16",
+            "tensor_parallel_size": 1,
+            "max_model_len": int(frozen["max_model_len"]),
+            "gpu_memory_utilization": float(frozen["gpu_memory_utilization"]),
+            "max_num_seqs": int(frozen["max_num_seqs"]),
+            "max_num_batched_tokens": int(frozen["max_num_batched_tokens"]),
+            "language_model_only": True,
+            "enable_prefix_caching": False,
+            "mamba_cache_mode": "none",
+            "enforce_eager": False,
+            "generation_config": "vllm",
+            "max_logprobs": 20,
+            "seed": 0,
+            "async_scheduling": False,
+            "cudagraph_capture_sizes": list(frozen["cudagraph_capture_sizes"]),
+            "max_cudagraph_capture_size": max(frozen["cudagraph_capture_sizes"]),
+            "revision": self.config["model"]["revision"],
+        }
+        lock = EXP.parents[1] / "requirements-vllm.lock.txt"
+        commit = P.subprocess.run(
+            ["git", "rev-parse", "HEAD"], check=True, capture_output=True, text=True
+        ).stdout.strip()
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            generated = root / "generated.jsonl"
+            generated.write_text('{"id":"synthetic"}\n')
+            stage = root / "stage.json"
+            stage.write_text("{}\n")
+            exact_base = {"synthetic": "base"}
+            exact_tokenizer = {"synthetic": "tokenizer"}
+            metadata = {
+                "output": {
+                    "description": "generated JSONL",
+                    "sha256": hashlib.sha256(generated.read_bytes()).hexdigest(),
+                    "rows": 1,
+                },
+                "runner_sha256": hashlib.sha256(
+                    (EXP / "src" / "vllm_runner.py").read_bytes()
+                ).hexdigest(),
+                "base_model": self.config["model"]["id"],
+                "model_revision": self.config["model"]["revision"],
+                "model_override": None,
+                "adapter": None,
+                "base_snapshot": exact_base,
+                "tokenizer_snapshot": exact_tokenizer,
+                "post_load_integrity": {
+                    "base_snapshot": exact_base,
+                    "tokenizer_snapshot": exact_tokenizer,
+                    "model_override": None,
+                    "decision": "POST_ENGINE_BYTES_MATCH_PRELOAD_COMMITMENTS",
+                },
+                "engine": engine,
+                "engine_args": engine_args,
+                "runtime": {
+                    "git_dirty": False,
+                    "git_commit": commit,
+                    "git_root": str(EXP.parents[1].resolve()),
+                    "cwd": str(EXP.parents[1].resolve()),
+                    "git_head_mode": "detached",
+                    "environment_lock": {
+                        "sha256": hashlib.sha256(lock.read_bytes()).hexdigest()
+                    },
+                    "packages": P._locked_versions(lock),
+                },
+                "generation_stage": {
+                    "authorized_stage": "calibration_generation",
+                    "stage_receipt_path": str(stage.resolve()),
+                    "stage_receipt_sha256": hashlib.sha256(stage.read_bytes()).hexdigest(),
+                    "config_sha256": self.config_sha,
+                    "issuer_git_commit": commit,
+                    "split": "calibration",
+                    "input_kind": "action",
+                    "source_seed": None,
+                },
+                "capacity_preflight": {
+                    "decision": "LIVE_KV_CAPACITY_PASS",
+                    "engine": engine,
+                    "live_cache": {"synthetic": True},
+                },
+                "resolved_cudagraph": {"synthetic": True},
+            }
+            with mock.patch(
+                "stages.read_and_validate_stage_receipt", return_value={}
+            ), mock.patch(
+                "merge_replay.base_snapshot_commitment", return_value=exact_base
+            ), mock.patch(
+                "tokenizer_lineage.authenticate_tokenizer_snapshot",
+                return_value=exact_tokenizer,
+            ):
+                protocol = P.validate_generation_protocol(
+                    metadata=metadata,
+                    config=self.config,
+                    experiment_root=EXP,
+                    generated_path=generated,
+                    expected_rows=1,
+                    expect_merged=False,
+                    expected_stage="calibration_generation",
+                    expected_split="calibration",
+                    expected_input_kind="action",
+                    expected_source_seed=None,
+                )
+            self.assertEqual(len(protocol), 64)
+            metadata["engine_args"]["trust_remote_code"] = True
+            with mock.patch(
+                "merge_replay.base_snapshot_commitment", return_value=exact_base
+            ), mock.patch(
+                "tokenizer_lineage.authenticate_tokenizer_snapshot",
+                return_value=exact_tokenizer,
+            ), self.assertRaisesRegex(ValueError, "engine arguments"):
+                P.validate_generation_protocol(
+                    metadata=metadata,
+                    config=self.config,
+                    experiment_root=EXP,
+                    generated_path=generated,
+                    expected_rows=1,
+                    expect_merged=False,
+                    expected_stage="calibration_generation",
+                    expected_split="calibration",
+                    expected_input_kind="action",
+                    expected_source_seed=None,
                 )
 
 

@@ -20,6 +20,7 @@ sys.path.insert(0, str(EXP / "src"))
 from firewall import install_benchmark_firewall  # noqa: E402
 from gate_artifacts import validate_gate_artifact  # noqa: E402
 from stages import git_commit  # noqa: E402
+from runtime_contract import require_detached_execution_worktree  # noqa: E402
 
 install_benchmark_firewall(EXP.parents[1])
 
@@ -102,6 +103,7 @@ def main() -> int:
     args = parser.parse_args()
     config_path = EXP / "configs" / "default.yaml"
     config = yaml.safe_load(config_path.read_text())
+    require_detached_execution_worktree(EXP.parents[1])
     screen = int(config["training"]["staged_seeds"]["screen"])
     replication = int(config["training"]["staged_seeds"]["replication"])
     inputs: list[Path] = []

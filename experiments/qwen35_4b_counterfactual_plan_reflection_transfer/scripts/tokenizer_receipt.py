@@ -18,6 +18,8 @@ EXP = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(EXP / "src"))
 
 from firewall import install_benchmark_firewall  # noqa: E402
+from runtime_contract import require_detached_execution_worktree  # noqa: E402
+from tokenizer_lineage import authenticate_tokenizer_snapshot  # noqa: E402
 
 install_benchmark_firewall(EXP.parents[1])
 
@@ -50,9 +52,11 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
-    config = yaml.safe_load((EXP / "configs" / "default.yaml").read_text())
+    config_path = EXP / "configs" / "default.yaml"
+    config = yaml.safe_load(config_path.read_text())
     if config["authorization"]["tokenizer"] is not True:
         raise SystemExit("tokenizer stage is not authorized by the committed config")
+    worktree = require_detached_execution_worktree(EXP.parents[1])
     construction = config["construction"]
     counts = {
         split: int(construction["per_family"][split])
@@ -67,12 +71,15 @@ def main() -> int:
         per_family_per_step=int(schedule["per_family_per_optimizer_group"]),
     )
     model = config["model"]
+    tokenizer_snapshot = authenticate_tokenizer_snapshot(ensure_downloaded=True)
     tokenizer = AutoTokenizer.from_pretrained(
         model["id"],
         revision=model["revision"],
-        trust_remote_code=True,
+        trust_remote_code=False,
         use_fast=True,
     )
+    if authenticate_tokenizer_snapshot() != tokenizer_snapshot:
+        raise ValueError("tokenizer files changed across tokenizer initialization")
     if int(tokenizer.eos_token_id) != 248046:
         raise ValueError(f"unexpected tokenizer EOS: {tokenizer.eos_token_id}")
     recipe = config["training"]["recipe"]
@@ -110,12 +117,17 @@ def main() -> int:
         for arm in TRAINING_ARMS
     }
     receipt = {
-        "schema_version": 1,
+        "schema_version": 2,
         "experiment_id": config["experiment_id"],
+        "config_sha256": hashlib.sha256(config_path.read_bytes()).hexdigest(),
+        "runner_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         "model_id": model["id"],
         "model_revision": model["revision"],
         "tokenizer_class": type(tokenizer).__name__,
         "tokenizer_eos_token_id": int(tokenizer.eos_token_id),
+        "trust_remote_code": False,
+        "tokenizer_snapshot": tokenizer_snapshot,
+        "worktree": worktree,
         "record_receipt": record_receipt,
         "parity": parity,
         "rows": row_receipts,

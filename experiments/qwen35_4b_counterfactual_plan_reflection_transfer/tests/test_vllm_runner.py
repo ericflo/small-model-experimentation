@@ -630,6 +630,18 @@ class EngineConfigCaptureGeometryTests(unittest.TestCase):
                 target_modules={"up_proj"},
                 scale=1.0,
             )
+        signed_zero = {**merged, unchanged: merged[unchanged].clone()}
+        signed_zero[unchanged][0, 0] = -0.0
+        base_zero = {**base, unchanged: base[unchanged].clone()}
+        base_zero[unchanged][0, 0] = 0.0
+        with self.assertRaisesRegex(ValueError, "unmodified merged tensor"):
+            merge_replay.verify_tensor_equations(
+                base=base_zero,
+                merged=signed_zero,
+                adapter=adapter,
+                target_modules={"up_proj"},
+                scale=1.0,
+            )
 
     def test_explicit_capture_list_requires_strict_positive_tied_geometry(self) -> None:
         runner.EngineConfig(
@@ -999,6 +1011,12 @@ class ResolvedCudagraphTests(unittest.TestCase):
         with mock.patch.dict(os.environ, environment), mock.patch.dict(
             sys.modules,
             {"transformers": fake_transformers, "vllm": fake_vllm},
+        ), mock.patch(
+            "merge_replay.base_snapshot_commitment",
+            return_value={"synthetic": "base"},
+        ), mock.patch(
+            "tokenizer_lineage.authenticate_tokenizer_snapshot",
+            return_value={"synthetic": "tokenizer"},
         ):
             instance = runner.VLLMRunner(
                 runner.EngineConfig(
@@ -1024,6 +1042,93 @@ class ResolvedCudagraphTests(unittest.TestCase):
             instance.resolved_cudagraph["cudagraph_capture_sizes"], list(effective)
         )
         instance.close()
+
+    def test_engine_load_byte_change_shuts_down_before_generation(self) -> None:
+        shutdown = {"called": False}
+
+        class FakeTokenizer:
+            eos_token_id = 248046
+            eos_token = "<|im_end|>"
+
+            def encode(self, text: str, *, add_special_tokens: bool) -> list[int]:
+                return {
+                    "<|endoftext|>": [248044],
+                    "<|im_end|>": [248046],
+                    "<think>": [248068],
+                    "</think>": [248069],
+                    "</think>\n\n": [248069, 198],
+                    "<|im_start|>assistant\n<think>\n": [1, 2, 3],
+                    "<|im_start|>assistant\n<think>\n\n</think>\n\n": [1, 2, 4],
+                }[text]
+
+        class FakeAutoTokenizer:
+            @staticmethod
+            def from_pretrained(*args: object, **kwargs: object) -> FakeTokenizer:
+                return FakeTokenizer()
+
+        class FakeAutoConfig:
+            @staticmethod
+            def from_pretrained(*args: object, **kwargs: object) -> SimpleNamespace:
+                return SimpleNamespace(text_config=SimpleNamespace(eos_token_id=248044))
+
+        class FakeLLM:
+            def __init__(self, **_kwargs: object):
+                cache_blocks = 1100
+                self.llm_engine = SimpleNamespace(
+                    vllm_config=SimpleNamespace(
+                        compilation_config=_compilation_config(),
+                        cache_config=SimpleNamespace(
+                            num_gpu_blocks=cache_blocks,
+                            block_size=528,
+                            kv_cache_size_tokens=int((cache_blocks / 11) * 4096),
+                            kv_cache_max_concurrency=cache_blocks / 11,
+                            enable_prefix_caching=False,
+                            mamba_cache_mode="none",
+                            mamba_block_size=4096,
+                        ),
+                        scheduler_config=SimpleNamespace(
+                            max_num_seqs=15,
+                            max_num_batched_tokens=32768,
+                            async_scheduling=False,
+                        ),
+                        model_config=SimpleNamespace(
+                            max_model_len=4096,
+                            dtype="torch.bfloat16",
+                        ),
+                        parallel_config=SimpleNamespace(
+                            world_size=1,
+                            tensor_parallel_size=1,
+                            data_parallel_size=1,
+                        ),
+                    ),
+                    engine_core=SimpleNamespace(
+                        shutdown=lambda: shutdown.__setitem__("called", True)
+                    ),
+                )
+
+        fake_transformers = types.ModuleType("transformers")
+        fake_transformers.AutoTokenizer = FakeAutoTokenizer
+        fake_transformers.AutoConfig = FakeAutoConfig
+        fake_vllm = types.ModuleType("vllm")
+        fake_vllm.LLM = FakeLLM
+        with mock.patch.dict(
+            sys.modules,
+            {"transformers": fake_transformers, "vllm": fake_vllm},
+        ), mock.patch(
+            "merge_replay.base_snapshot_commitment",
+            side_effect=[{"version": 1}, {"version": 2}],
+        ), mock.patch(
+            "tokenizer_lineage.authenticate_tokenizer_snapshot",
+            return_value={"synthetic": "tokenizer"},
+        ), self.assertRaisesRegex(RuntimeError, "changed between validation"):
+            runner.VLLMRunner(
+                runner.EngineConfig(
+                    max_model_len=4096,
+                    max_num_seqs=15,
+                    cudagraph_capture_sizes=(1, 2, 4, 8, 15),
+                )
+            )
+        self.assertTrue(shutdown["called"])
 
 
 if __name__ == "__main__":

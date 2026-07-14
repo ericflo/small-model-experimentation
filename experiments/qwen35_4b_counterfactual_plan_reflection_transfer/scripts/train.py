@@ -8,8 +8,8 @@ import hashlib
 import json
 import random
 import shutil
-import subprocess
 import sys
+import time
 from pathlib import Path
 
 import torch
@@ -40,6 +40,13 @@ from records import (  # noqa: E402
 )
 from taskgen import build_corpus  # noqa: E402
 from stages import read_and_validate_stage_receipt  # noqa: E402
+from merge_replay import base_snapshot_commitment  # noqa: E402
+from provenance import validate_runtime_packages  # noqa: E402
+from runtime_contract import (  # noqa: E402
+    require_detached_execution_worktree,
+    runtime_metadata,
+)
+from tokenizer_lineage import authenticate_tokenizer_snapshot  # noqa: E402
 
 
 def _sha256_file(path: Path) -> str:
@@ -48,6 +55,12 @@ def _sha256_file(path: Path) -> str:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
+
+
+def _sha256_value(value: object) -> str:
+    return hashlib.sha256(
+        json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
+    ).hexdigest()
 
 
 def _sha256_tree(path: Path, excluded: set[str] | None = None) -> str:
@@ -148,14 +161,13 @@ def main() -> int:
         raise SystemExit("the noncomparable positive control has no replication-seed authorization")
     if args.output.exists():
         raise SystemExit(f"output already exists: {args.output}")
-    git_status = subprocess.run(
-        ["git", "status", "--porcelain"], check=True, capture_output=True, text=True
-    ).stdout
-    if git_status:
-        raise SystemExit("training requires a clean worktree")
-    trainer_git_commit = subprocess.run(
-        ["git", "rev-parse", "HEAD"], check=True, capture_output=True, text=True
-    ).stdout.strip()
+    worktree = require_detached_execution_worktree(EXP.parents[1])
+    trainer_git_commit = worktree["git_commit"]
+    lock_path = EXP.parents[1] / "requirements-vllm.lock.txt"
+    training_runtime = runtime_metadata(EXP.parents[1], lock_path)
+    validate_runtime_packages(training_runtime, lock_path)
+    base_snapshot = base_snapshot_commitment()
+    tokenizer_snapshot = authenticate_tokenizer_snapshot()
 
     construction = config["construction"]
     counts = {
@@ -174,9 +186,11 @@ def main() -> int:
     tokenizer = AutoTokenizer.from_pretrained(
         model_config["id"],
         revision=model_config["revision"],
-        trust_remote_code=True,
+        trust_remote_code=False,
         use_fast=True,
     )
+    if authenticate_tokenizer_snapshot() != tokenizer_snapshot:
+        raise ValueError("tokenizer files changed across training tokenizer initialization")
     if int(tokenizer.eos_token_id) != 248046:
         raise ValueError(f"unexpected tokenizer EOS: {tokenizer.eos_token_id}")
     if tokenizer.pad_token is None:
@@ -198,12 +212,45 @@ def main() -> int:
         for arm, rows in arms.items()
     }
     parity = validate_tokenized_parity(arms, encoded)
+    live_row_receipts = {
+        arm: [
+            {
+                "task_id": record["task_id"],
+                "optimizer_group": record["optimizer_group"],
+                "prompt_tokens": tokenized["prompt_tokens"],
+                "target_tokens": tokenized["target_tokens"],
+                "think_target_tokens": tokenized["think_target_tokens"],
+                "close_target_tokens": tokenized["close_target_tokens"],
+                "answer_target_tokens": tokenized["answer_target_tokens"],
+                "input_ids_sha256": tokenized["input_ids_sha256"],
+                "target_ids_sha256": tokenized["target_ids_sha256"],
+                "mask_sha256": tokenized["mask_sha256"],
+            }
+            for record, tokenized in zip(arms[arm], encoded[arm], strict=True)
+        ]
+        for arm in TRAINING_ARMS
+    }
     expected_tokenizer_receipt = json.loads(args.tokenizer_receipt.read_text())
+    tokenizer_receipt_keys = {
+        "schema_version", "experiment_id", "config_sha256", "runner_sha256",
+        "model_id", "model_revision", "tokenizer_class", "tokenizer_eos_token_id",
+        "trust_remote_code", "tokenizer_snapshot", "worktree", "record_receipt",
+        "parity", "rows", "rows_sha256", "model_calls", "gpu_events",
+        "benchmark_reads",
+    }
     if (
-        expected_tokenizer_receipt.get("experiment_id") != config["experiment_id"]
+        set(expected_tokenizer_receipt) != tokenizer_receipt_keys
+        or expected_tokenizer_receipt.get("schema_version") != 2
+        or expected_tokenizer_receipt.get("experiment_id") != config["experiment_id"]
+        or expected_tokenizer_receipt.get("config_sha256") != _sha256_file(config_path)
+        or expected_tokenizer_receipt.get("runner_sha256")
+        != _sha256_file(EXP / "scripts" / "tokenizer_receipt.py")
         or expected_tokenizer_receipt.get("model_id") != model_config["id"]
         or expected_tokenizer_receipt.get("model_revision") != model_config["revision"]
         or expected_tokenizer_receipt.get("tokenizer_eos_token_id") != 248046
+        or expected_tokenizer_receipt.get("trust_remote_code") is not False
+        or expected_tokenizer_receipt.get("tokenizer_snapshot") != tokenizer_snapshot
+        or expected_tokenizer_receipt.get("worktree") != worktree
         or expected_tokenizer_receipt.get("model_calls") != 0
         or expected_tokenizer_receipt.get("gpu_events") != 0
         or expected_tokenizer_receipt.get("benchmark_reads") != 0
@@ -213,6 +260,12 @@ def main() -> int:
         raise ValueError("live token/mask parity differs from the prerequisite receipt")
     if expected_tokenizer_receipt["record_receipt"] != record_receipt:
         raise ValueError("live training records differ from the prerequisite receipt")
+    if (
+        expected_tokenizer_receipt["rows"] != live_row_receipts
+        or expected_tokenizer_receipt["rows_sha256"]
+        != _sha256_value(live_row_receipts)
+    ):
+        raise ValueError("live input/target/mask rows differ from tokenizer receipt")
 
     args.output.mkdir(parents=True, exist_ok=False)
     copied_tokenizer_receipt = args.output / "source_tokenizer_receipt.json"
@@ -222,7 +275,7 @@ def main() -> int:
     (args.output / "STARTED.json").write_text(
         json.dumps(
             {
-                "schema_version": 1,
+                "schema_version": 2,
                 "arm": args.arm,
                 "seed": args.seed,
                 "config_sha256": _sha256_file(config_path),
@@ -230,6 +283,10 @@ def main() -> int:
                 "stage_receipt_sha256": _sha256_file(args.stage_receipt),
                 "trainer_git_commit": trainer_git_commit,
                 "trainer_sha256": _sha256_file(Path(__file__).resolve()),
+                "worktree": worktree,
+                "runtime": training_runtime,
+                "base_snapshot": base_snapshot,
+                "tokenizer_snapshot": tokenizer_snapshot,
             },
             indent=2,
             sort_keys=True,
@@ -244,15 +301,20 @@ def main() -> int:
         bnb_4bit_use_double_quant=True,
         bnb_4bit_compute_dtype=torch.bfloat16,
     )
+    load_started = time.perf_counter()
     model = AutoModelForCausalLM.from_pretrained(
         model_config["id"],
         revision=model_config["revision"],
-        trust_remote_code=True,
+        trust_remote_code=False,
         device_map="cuda",
         dtype=torch.bfloat16,
         quantization_config=quantization,
         attn_implementation="sdpa",
     )
+    torch.cuda.synchronize()
+    model_load_seconds = time.perf_counter() - load_started
+    if base_snapshot_commitment() != base_snapshot:
+        raise ValueError("base checkpoint files changed across training model initialization")
     model = prepare_model_for_kbit_training(model, use_gradient_checkpointing=True)
     model = get_peft_model(
         model,
@@ -295,14 +357,20 @@ def main() -> int:
         train_dataset=EncodedDataset(encoded[args.arm]),
         data_collator=Collator(int(tokenizer.pad_token_id)),
     )
+    torch.cuda.synchronize()
+    training_started = time.perf_counter()
     outcome = trainer.train()
+    torch.cuda.synchronize()
+    training_seconds = time.perf_counter() - training_started
     expected_steps = int(schedule["optimizer_steps_total"])
     if int(outcome.global_step) != expected_steps:
         raise ValueError(f"expected {expected_steps} optimizer steps, got {outcome.global_step}")
     model.save_pretrained(str(args.output))
     tokenizer.save_pretrained(str(args.output))
+    epochs = int(recipe["epochs"])
+    forward_tokens = sum(len(row["input_ids"]) for row in encoded[args.arm]) * epochs
     training_receipt = {
-        "schema_version": 2,
+        "schema_version": 3,
         "experiment_id": config["experiment_id"],
         "arm": args.arm,
         "seed": args.seed,
@@ -327,6 +395,20 @@ def main() -> int:
             json.dumps(parity, sort_keys=True, separators=(",", ":")).encode()
         ).hexdigest(),
         "adapter_tree_excluding_training_receipt_sha256": _sha256_tree(args.output),
+        "worktree": worktree,
+        "runtime": training_runtime,
+        "base_snapshot": base_snapshot,
+        "tokenizer_snapshot": tokenizer_snapshot,
+        "compute": {
+            "schema_version": 1,
+            "amortization_horizon": "full_training_charged_to_each_confirmation_split",
+            "forward_tokens": forward_tokens,
+            "forward_backward_multiplier": 3,
+            "token_forward_equivalents": forward_tokens * 3,
+            "model_load_seconds": model_load_seconds,
+            "training_seconds": training_seconds,
+            "gpu_phase_wall_seconds": model_load_seconds + training_seconds,
+        },
     }
     receipt_path = args.output / "training_receipt.json"
     receipt_path.write_text(json.dumps(training_receipt, indent=2, sort_keys=True) + "\n")

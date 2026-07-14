@@ -106,7 +106,7 @@ training:
     - identical_correct_shuffle_prompt_target_forward_token_totals_per_optimizer_group
     - identical_correct_shuffle_optimizer_steps_and_task_order
     - equal_reflection_auxiliary_rendered_prompt_tokens_per_task
-      - exact_input_target_mask_hash_receipt_before_training
+    - exact_input_target_mask_hash_receipt_before_training
 
 merge:
   implementation: tensor_level_safetensors

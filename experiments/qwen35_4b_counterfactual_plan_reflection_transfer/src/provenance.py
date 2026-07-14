@@ -15,7 +15,7 @@ from packaging.requirements import Requirement
 from packaging.utils import canonicalize_name, parse_wheel_filename
 
 from eval_inputs import action_bundles, action_receipt, jsonl_payload, task_metadata
-from vllm_runner import EngineConfig, SamplingConfig
+from vllm_runner import EngineConfig, SamplingConfig, _validate_model_override
 
 
 LOCK_LINE = re.compile(r"^([A-Za-z0-9_.-]+)==([^\s;]+)$")
@@ -163,6 +163,26 @@ def validate_generation_protocol(
         raise ValueError("generation base/merged model status differs from its arm")
     if metadata.get("adapter") is not None:
         raise ValueError("runtime LoRA adapter use is forbidden")
+    from merge_replay import base_snapshot_commitment
+    from tokenizer_lineage import authenticate_tokenizer_snapshot
+
+    exact_base = base_snapshot_commitment()
+    exact_tokenizer = authenticate_tokenizer_snapshot()
+    exact_override = _validate_model_override(
+        None if model_override is None else Path(model_override["path"])
+    )
+    if (
+        metadata.get("base_snapshot") != exact_base
+        or metadata.get("tokenizer_snapshot") != exact_tokenizer
+        or metadata.get("post_load_integrity")
+        != {
+            "base_snapshot": exact_base,
+            "tokenizer_snapshot": exact_tokenizer,
+            "model_override": exact_override,
+            "decision": "POST_ENGINE_BYTES_MATCH_PRELOAD_COMMITMENTS",
+        }
+    ):
+        raise ValueError("generation model/tokenizer load commitments differ from exact bytes")
     evaluation = config["evaluation"]
     frozen_engine = evaluation["engine"]
     override_path = None if model_override is None else Path(model_override["path"])
@@ -184,7 +204,7 @@ def validate_generation_protocol(
         "model": config["model"]["id"] if override_path is None else str(override_path),
         "tokenizer": config["model"]["id"],
         "tokenizer_revision": config["model"]["revision"],
-        "trust_remote_code": True,
+        "trust_remote_code": False,
         "dtype": "bfloat16",
         "tensor_parallel_size": 1,
         "max_model_len": int(frozen_engine["max_model_len"]),
@@ -207,8 +227,14 @@ def validate_generation_protocol(
     if metadata.get("engine_args") != expected_engine_args:
         raise ValueError("generation engine arguments differ from preregistration")
     runtime = metadata.get("runtime", {})
-    if runtime.get("git_dirty"):
-        raise ValueError("generation ran from a dirty worktree")
+    repo_root = experiment_root.parents[1].resolve()
+    if (
+        runtime.get("git_dirty")
+        or runtime.get("git_root") != str(repo_root)
+        or runtime.get("cwd") != str(repo_root)
+        or runtime.get("git_head_mode") != "detached"
+    ):
+        raise ValueError("generation did not run from the clean detached execution worktree")
     current_commit = subprocess.run(
         ["git", "rev-parse", "HEAD"], check=True, capture_output=True, text=True
     ).stdout.strip()

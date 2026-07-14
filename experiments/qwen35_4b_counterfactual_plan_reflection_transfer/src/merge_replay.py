@@ -98,12 +98,12 @@ def verify_tensor_equations(
             expected = (
                 base_tensor.float() + (tensor_b.float() @ tensor_a.float()) * scale
             ).to(base_tensor.dtype)
-            if not torch.equal(expected, merged_tensor):
+            if _tensor_sha256(expected) != _tensor_sha256(merged_tensor):
                 raise ValueError(f"merged tensor does not equal pinned base plus LoRA at {key}")
             adapted_hashes[key] = _tensor_sha256(merged_tensor)
             del tensor_a, tensor_b, expected
         else:
-            if not torch.equal(base_tensor, merged_tensor):
+            if _tensor_sha256(base_tensor) != _tensor_sha256(merged_tensor):
                 raise ValueError(f"unmodified merged tensor differs from pinned base at {key}")
             unchanged_digest.update(key.encode())
             unchanged_digest.update(b"\0")
@@ -211,6 +211,20 @@ def authenticate_base_snapshot(
     if base_header_hashes != structure["source_shard_header_sha256"]:
         raise ValueError("cached base shard headers differ from the pinned revision")
     return base_root, base_index, structure
+
+
+def base_snapshot_commitment(base_snapshot: Path | None = None) -> dict[str, Any]:
+    """Return the exact content commitment after authenticating all base bytes."""
+    _root, _index, structure = authenticate_base_snapshot(base_snapshot)
+    return {
+        "schema_version": 1,
+        "model_id": structure["model_id"],
+        "model_revision": structure["model_revision"],
+        "config_sha256": structure["base_config_sha256"],
+        "index_sha256": structure["base_index_sha256"],
+        "shard_sha256": structure["source_shard_sha256"],
+        "shard_size": structure["source_shard_size"],
+    }
 
 
 def verify_merge_equation(
