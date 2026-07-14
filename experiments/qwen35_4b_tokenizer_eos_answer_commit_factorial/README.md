@@ -141,6 +141,12 @@ transport namespace. Mechanics gold exists only as tracked AES-256-GCM
 ciphertext; its key is local and ignored. Model calls and sampled outputs remain
 zero.
 
+Before any model call, the prospective runner was security-hardened to pin
+child executables/environment and preserve isolation across recovery re-exec.
+The tokenizer receipt's sole runner binding was correspondingly refreshed from
+`cbbfae3e...` to `4ce61e64...`; its grammar, prompts, termination IDs,
+freshness inventories, and zero-call declarations were unchanged.
+
 ## Interpretation
 
 The smoke proves that the proposed measurement is precise and falsifiable. It

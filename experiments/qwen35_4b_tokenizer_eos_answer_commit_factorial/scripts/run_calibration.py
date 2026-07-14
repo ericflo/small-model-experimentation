@@ -108,6 +108,50 @@ _BOOTSTRAP_REVIEW_KEYS = {
 }
 _MODEL_ID = "Qwen/Qwen3.5-4B"
 _MODEL_REVISION = "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
+_CANONICAL_REPOSITORY = "ericflo/small-model-experimentation"
+_CANONICAL_ORIGIN = "https://github.com/ericflo/small-model-experimentation.git"
+_GIT_EXECUTABLE = "/usr/bin/git"
+_GH_EXECUTABLE = "/usr/bin/gh"
+_PINNED_PATH = f"{ROOT}/.venv-vllm/bin:/usr/local/cuda/bin:/usr/bin:/bin"
+
+
+def _bootstrap_sanitize_process_environment() -> None:
+    if os.environ.get("LD_PRELOAD"):
+        raise RuntimeError("sealed calibration forbids LD_PRELOAD")
+    for key in tuple(os.environ):
+        if (
+            key in {"PYTHONPATH", "PYTHONHOME", "GH_REPO", "GH_HOST"}
+            or key.startswith("GIT_")
+        ):
+            os.environ.pop(key, None)
+    os.environ["PATH"] = _PINNED_PATH
+    os.environ["LD_LIBRARY_PATH"] = "/usr/local/cuda/lib64"
+    os.environ["PYTHONNOUSERSITE"] = "1"
+    os.environ["GH_HOST"] = "github.com"
+    os.environ["GIT_CONFIG_NOSYSTEM"] = "1"
+    os.environ["GIT_CONFIG_GLOBAL"] = "/dev/null"
+    os.environ["GIT_TERMINAL_PROMPT"] = "0"
+
+
+def _bootstrap_child_environment() -> dict[str, str]:
+    result = {
+        "HOME": "/root",
+        "PATH": _PINNED_PATH,
+        "LANG": "C.UTF-8",
+        "LC_ALL": "C.UTF-8",
+        "GH_CONFIG_DIR": "/root/.config/gh",
+        "GH_HOST": "github.com",
+        "NO_COLOR": "1",
+        "GIT_CONFIG_NOSYSTEM": "1",
+        "GIT_CONFIG_GLOBAL": "/dev/null",
+        "GIT_TERMINAL_PROMPT": "0",
+    }
+    if os.environ.get("GITHUB_TOKEN"):
+        result["GITHUB_TOKEN"] = os.environ["GITHUB_TOKEN"]
+    return result
+
+
+_bootstrap_sanitize_process_environment()
 
 
 def _bootstrap_stage() -> str | None:
@@ -181,18 +225,54 @@ def _bootstrap_commit(value: Any, *, label: str) -> str:
 
 
 def _bootstrap_git(*arguments: str) -> str:
-    return subprocess.check_output(["git", *arguments], cwd=ROOT, text=True).strip()
+    command = [
+        _GIT_EXECUTABLE,
+        "--no-replace-objects",
+        "-c",
+        "core.hooksPath=/dev/null",
+        "-c",
+        "core.fsmonitor=false",
+        *arguments,
+    ]
+    return subprocess.check_output(
+        command,
+        cwd=ROOT,
+        text=True,
+        env=_bootstrap_child_environment(),
+    ).strip()
 
 
 def _bootstrap_git_bytes(*arguments: str) -> bytes:
-    return subprocess.check_output(["git", *arguments], cwd=ROOT)
+    return subprocess.check_output(
+        [
+            _GIT_EXECUTABLE,
+            "--no-replace-objects",
+            "-c",
+            "core.hooksPath=/dev/null",
+            "-c",
+            "core.fsmonitor=false",
+            *arguments,
+        ],
+        cwd=ROOT,
+        env=_bootstrap_child_environment(),
+    )
 
 
 def _bootstrap_ancestor(older: str, newer: str) -> bool:
     return subprocess.run(
-        ["git", "merge-base", "--is-ancestor", older, newer],
+        [
+            _GIT_EXECUTABLE,
+            "--no-replace-objects",
+            "-c",
+            "core.hooksPath=/dev/null",
+            "merge-base",
+            "--is-ancestor",
+            older,
+            newer,
+        ],
         cwd=ROOT,
         capture_output=True,
+        env=_bootstrap_child_environment(),
     ).returncode == 0
 
 
@@ -209,11 +289,13 @@ def _bootstrap_validate_ci(
     rows = json.loads(
         subprocess.check_output(
             [
-                "gh", "run", "list", "--commit", commit, "--limit", "20",
+                _GH_EXECUTABLE, "run", "list", "--repo", _CANONICAL_REPOSITORY,
+                "--commit", commit, "--limit", "20",
                 "--json", "databaseId,headSha,status,conclusion,workflowName,url",
             ],
             cwd=ROOT,
             text=True,
+            env=_bootstrap_child_environment(),
         )
     )
     result: dict[str, dict[str, Any]] = {}
@@ -324,7 +406,7 @@ def _bootstrap_authenticate_review_release() -> dict[str, Any]:
         or not review["reviewer"].strip()
         or not isinstance(review.get("adversarial_review_rounds"), int)
         or isinstance(review.get("adversarial_review_rounds"), bool)
-        or review["adversarial_review_rounds"] < 1
+        or review["adversarial_review_rounds"] < 3
         or review.get("experimental_model_requests_reviewed") != 0
         or review.get("sampled_model_outputs_reviewed") != 0
         or any(
@@ -358,7 +440,24 @@ def _bootstrap_authenticate_review_release() -> dict[str, Any]:
             implementation_blob
         ).hexdigest():
             raise RuntimeError(f"pre-import reviewed runtime changed: {relative}")
-    subprocess.run(["git", "fetch", "--quiet", "origin", "main"], cwd=ROOT, check=True)
+    if _bootstrap_git("remote", "get-url", "origin") != _CANONICAL_ORIGIN:
+        raise RuntimeError("pre-import Git origin URL changed")
+    subprocess.run(
+        [
+            _GIT_EXECUTABLE,
+            "--no-replace-objects",
+            "-c",
+            "core.hooksPath=/dev/null",
+            "fetch",
+            "--quiet",
+            "--no-tags",
+            _CANONICAL_ORIGIN,
+            "+refs/heads/main:refs/remotes/origin/main",
+        ],
+        cwd=ROOT,
+        check=True,
+        env=_bootstrap_child_environment(),
+    )
     origin = _bootstrap_commit(
         _bootstrap_git("rev-parse", "origin/main"), label="origin/main"
     )

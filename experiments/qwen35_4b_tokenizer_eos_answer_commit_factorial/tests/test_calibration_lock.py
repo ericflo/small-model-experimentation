@@ -42,7 +42,7 @@ class CalibrationLockTests(unittest.TestCase):
             "reviewer": "adversarial-reviewer",
             "review_report_sha256": "d" * 64,
             "reviewed_ci": self.ci(commit),
-            "adversarial_review_rounds": 2,
+            "adversarial_review_rounds": 3,
             "experimental_model_requests_reviewed": 0,
             "sampled_model_outputs_reviewed": 0,
             "hidden_files_read": [],
@@ -112,7 +112,7 @@ class CalibrationLockTests(unittest.TestCase):
             "reviewer": "adversarial-reviewer",
             "review_report_sha256": "d" * 64,
             "reviewed_ci": self.ci("a" * 40),
-            "adversarial_review_rounds": 2,
+            "adversarial_review_rounds": 3,
             "experimental_model_requests_reviewed": 0,
             "sampled_model_outputs_reviewed": 0,
             "hidden_files_read": [],
@@ -127,6 +127,10 @@ class CalibrationLockTests(unittest.TestCase):
             lock.validate_implementation_review(receipt)["reviewed_commit"],
             "a" * 40,
         )
+        receipt["adversarial_review_rounds"] = 1
+        with self.assertRaisesRegex(RuntimeError, "receipt boundary changed"):
+            lock.validate_implementation_review(receipt)
+        receipt["adversarial_review_rounds"] = 3
         receipt["unexpected"] = True
         with self.assertRaisesRegex(RuntimeError, "schema changed"):
             lock.validate_implementation_review(receipt)
@@ -152,6 +156,29 @@ class CalibrationLockTests(unittest.TestCase):
         self.assertEqual(receipt["think512"]["rows"], 48)
         self.assertEqual(receipt["no_think"]["rows"], 48)
         self.assertEqual(receipt["think512"]["ids"], receipt["no_think"]["ids"])
+
+    def test_child_tools_and_environment_are_pinned(self) -> None:
+        with mock.patch.dict(
+            lock.os.environ,
+            {
+                "PATH": "/tmp/forged",
+                "GIT_DIR": "/tmp/forged-git",
+                "GH_REPO": "attacker/repository",
+                "PYTHONPATH": "/tmp/forged-python",
+            },
+        ):
+            environment = lock._child_environment()
+        self.assertEqual(lock._git_command("status")[0], "/usr/bin/git")
+        self.assertEqual(lock.GH_EXECUTABLE, "/usr/bin/gh")
+        self.assertEqual(
+            lock.CANONICAL_REPOSITORY, "ericflo/small-model-experimentation"
+        )
+        self.assertEqual(
+            environment["PATH"],
+            f"{lock.ROOT}/.venv-vllm/bin:/usr/local/cuda/bin:/usr/bin:/bin",
+        )
+        for forbidden in ("GIT_DIR", "GH_REPO", "PYTHONPATH"):
+            self.assertNotIn(forbidden, environment)
 
     def test_live_preflight_schema_and_runtime_are_exact(self) -> None:
         commit = "a" * 40
@@ -203,6 +230,7 @@ class CalibrationLockTests(unittest.TestCase):
             "runtime_key",
             "runtime_commit",
             "runtime_dirty",
+            "rng_types",
             "engine",
         ):
             bad = copy.deepcopy(value)
@@ -214,6 +242,11 @@ class CalibrationLockTests(unittest.TestCase):
                 bad["runtime"]["git_commit"] = "c" * 40
             elif mutation == "runtime_dirty":
                 bad["runtime"]["git_dirty"] = True
+            elif mutation == "rng_types":
+                bad["rng_isolation"] = {
+                    "engine_seed": False,
+                    "caller_global_rng_state_restored": 1,
+                }
             else:
                 bad["engine"]["max_model_len"] += 1
             with self.subTest(mutation=mutation), self.assertRaisesRegex(

@@ -725,6 +725,24 @@ def authenticate_bundle_engine_preflight(
     metadata = bundle.get("runner_metadata")
     preflight_runtime = live_preflight.get("runtime")
     bundle_runtime = metadata.get("runtime") if isinstance(metadata, dict) else None
+    expected_rng = live_preflight.get("rng_isolation")
+    observed_rng = metadata.get("rng_isolation") if isinstance(metadata, dict) else None
+    valid_expected_rng = (
+        isinstance(expected_rng, dict)
+        and set(expected_rng)
+        == {"engine_seed", "caller_global_rng_state_restored"}
+        and type(expected_rng["engine_seed"]) is int
+        and expected_rng["engine_seed"] == 0
+        and expected_rng["caller_global_rng_state_restored"] is True
+    )
+    valid_observed_rng = (
+        isinstance(observed_rng, dict)
+        and set(observed_rng)
+        == {"engine_seed", "caller_global_rng_state_restored"}
+        and type(observed_rng["engine_seed"]) is int
+        and observed_rng["engine_seed"] == 0
+        and observed_rng["caller_global_rng_state_restored"] is True
+    )
     if (
         not isinstance(metadata, dict)
         or not isinstance(preflight_runtime, dict)
@@ -738,8 +756,13 @@ def authenticate_bundle_engine_preflight(
         != live_preflight.get("resolved_cudagraph")
         or metadata.get("resolved_logprobs_mode")
         != live_preflight.get("resolved_logprobs_mode")
-        or metadata.get("adapter") != live_preflight.get("adapter")
-        or metadata.get("rng_isolation") != live_preflight.get("rng_isolation")
+        or "adapter" not in metadata
+        or metadata["adapter"] is not None
+        or live_preflight.get("adapter", object()) is not None
+        or "rng_isolation" not in metadata
+        or not valid_expected_rng
+        or not valid_observed_rng
+        or canonical_sha256(observed_rng) != canonical_sha256(expected_rng)
     ):
         raise BoundaryAuthenticationError("bundle differs from live engine preflight")
     stable_keys = RUNTIME_METADATA_KEYS - {"git_dirty"}

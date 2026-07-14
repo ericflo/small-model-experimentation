@@ -7,7 +7,9 @@ import importlib.util
 import io
 import json
 import os
+import subprocess
 import sys
+import tempfile
 import types
 import unittest
 from pathlib import Path
@@ -276,6 +278,58 @@ class CliRewriteTests(unittest.TestCase):
 
 
 class MambaReexecGuardTests(unittest.TestCase):
+    def test_reexec_preserves_isolation_and_ignores_injected_python_path(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            probe = root / "probe.py"
+            probe.write_text(
+                "import json, os, sys\n"
+                "try:\n"
+                " import injected_sentinel\n"
+                " injected = True\n"
+                "except ModuleNotFoundError:\n"
+                " injected = False\n"
+                "print(json.dumps({'isolated': sys.flags.isolated, "
+                "'safe_path': sys.flags.safe_path, 'dont_write': "
+                "sys.flags.dont_write_bytecode, 'injected': injected, "
+                "'path': os.environ['PATH']}))\n"
+            )
+            (root / "injected_sentinel.py").write_text(
+                "raise RuntimeError('PYTHONPATH sentinel executed')\n"
+            )
+            with mock.patch.dict(
+                os.environ,
+                {
+                    "PYTHONPATH": str(root),
+                    "PATH": str(root),
+                    "LD_PRELOAD": "/tmp/forged.so",
+                    "GIT_DIR": "/tmp/forged-git",
+                },
+            ):
+                command = runner._python_reexec_command(
+                    [str(probe)], isolated=True, dont_write_bytecode=True
+                )
+                environment = runner._reexec_environment(isolated=True)
+            self.assertNotIn("LD_PRELOAD", environment)
+            self.assertNotIn("GIT_DIR", environment)
+            self.assertEqual(
+                environment["LD_LIBRARY_PATH"], "/usr/local/cuda/lib64"
+            )
+            receipt = json.loads(
+                subprocess.check_output(command, env=environment, text=True)
+            )
+        self.assertEqual(command[1:3], ["-I", "-B"])
+        self.assertEqual(
+            receipt,
+            {
+                "isolated": 1,
+                "safe_path": True,
+                "dont_write": 1,
+                "injected": False,
+                "path": runner._PINNED_EXECUTABLE_PATH,
+            },
+        )
+
     def test_guard_parser_accepts_consistent_original_geometry(self) -> None:
         sizes = (1, 2, 4, 8, 16, 19)
         self.assertEqual(

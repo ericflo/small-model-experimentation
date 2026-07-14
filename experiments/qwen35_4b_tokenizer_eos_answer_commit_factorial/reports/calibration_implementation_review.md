@@ -2,7 +2,7 @@
 
 ## Status
 
-`HOLD_LIVE_CALLS` pending a third independent adversarial review of the exact
+`HOLD_LIVE_CALLS` pending a fourth clean adversarial review of the exact
 pushed, green repair commit. No model load or generation is authorized.
 
 ## First adversarial review
@@ -62,3 +62,29 @@ imports, a review-authenticated lock-publication bootstrap, exact clean-to-dirty
 runtime transition plus lock ancestry, and adapter/RNG binding for all five
 bundles. A third review must test these paths without reading construction,
 mechanics, ciphertext, key, benchmark, or hidden artifacts.
+
+## Third adversarial review (disqualified)
+
+The third review examined exact published-green commit
+`28855d21cfed8c96ecfb85106640a78d9efd4520` and returned
+`HOLD_IMPLEMENTATION`. It found four reproducible blockers:
+
+1. `-I` still inherited an attacker-controlled `PATH`, and a synthetic fake
+   `git` executed before provenance authentication.
+2. Adapter presence and RNG attestation types were not exact; missing adapter,
+   Boolean/integer aliases, and floating numeric aliases authenticated.
+3. A one-round PASS receipt could satisfy a release requiring three valid
+   adversarial rounds.
+4. The runner's Mamba-cache CLI re-exec did not preserve `-I` or the sanitized
+   environment.
+
+This review is permanently disqualified from PASS-receipt provenance: its
+search exclusions were incorrectly scoped and traversed protected experiment
+paths, visibly exposing mechanics-public/prepared content and potentially
+scanning mechanics audit/ciphertext. It did not access `benchmarks/` or call the
+model/GPU. Its synthetic failures remain useful repair evidence, but it does
+not count toward `adversarial_review_rounds`.
+
+The next review must be fresh and clean. The machine receipt requires at least
+three valid independent rounds; with the disqualified attempt excluded, a clean
+fourth attempt would be the third countable round.

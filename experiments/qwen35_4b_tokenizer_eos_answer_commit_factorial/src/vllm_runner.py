@@ -66,8 +66,10 @@ os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
 # console tools installed beside it (notably ninja, used by FlashInfer JIT)
 # are otherwise invisible.  Keep direct invocation as reliable as activation.
 _PYTHON_BIN = str(Path(sys.prefix) / "bin")
-if _PYTHON_BIN not in os.environ.get("PATH", "").split(os.pathsep):
-    os.environ["PATH"] = _PYTHON_BIN + os.pathsep + os.environ.get("PATH", "")
+_PINNED_EXECUTABLE_PATH = (
+    f"{_PYTHON_BIN}{os.pathsep}/usr/local/cuda/bin{os.pathsep}/usr/bin{os.pathsep}/bin"
+)
+os.environ["PATH"] = _PINNED_EXECUTABLE_PATH
 
 MODEL_ID = "Qwen/Qwen3.5-4B"
 MODEL_REVISION = "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
@@ -139,7 +141,19 @@ def _token_ids_sha256(token_ids: Sequence[int]) -> str:
 def _run_text(command: Sequence[str]) -> str:
     try:
         return subprocess.run(
-            list(command), check=True, capture_output=True, text=True
+            list(command),
+            check=True,
+            capture_output=True,
+            text=True,
+            env={
+                "HOME": "/root",
+                "PATH": _PINNED_EXECUTABLE_PATH,
+                "LANG": "C.UTF-8",
+                "LC_ALL": "C.UTF-8",
+                "GIT_CONFIG_NOSYSTEM": "1",
+                "GIT_CONFIG_GLOBAL": "/dev/null",
+                "GIT_TERMINAL_PROMPT": "0",
+            },
         ).stdout.strip()
     except (OSError, subprocess.CalledProcessError):
         return ""
@@ -193,6 +207,39 @@ def _rewrite_max_num_seqs_argv(
         for size in cudagraph_capture_sizes:
             rewritten.extend(("--cudagraph-capture-size", str(size)))
     return rewritten
+
+
+def _python_reexec_command(
+    argv: Sequence[str],
+    *,
+    isolated: bool | None = None,
+    dont_write_bytecode: bool | None = None,
+) -> list[str]:
+    if isolated is None:
+        isolated = bool(sys.flags.isolated)
+    if dont_write_bytecode is None:
+        dont_write_bytecode = bool(
+            sys.flags.dont_write_bytecode or sys.dont_write_bytecode
+        )
+    flags = (["-I"] if isolated else []) + (["-B"] if dont_write_bytecode else [])
+    return [sys.executable, *flags, *argv]
+
+
+def _reexec_environment(*, isolated: bool | None = None) -> dict[str, str]:
+    if isolated is None:
+        isolated = bool(sys.flags.isolated)
+    environment = dict(os.environ)
+    if isolated:
+        for key in tuple(environment):
+            if (
+                key in {"PYTHONPATH", "PYTHONHOME", "LD_PRELOAD", "GH_REPO", "GH_HOST"}
+                or key.startswith("GIT_")
+            ):
+                environment.pop(key, None)
+        environment["PYTHONNOUSERSITE"] = "1"
+        environment["PATH"] = _PINNED_EXECUTABLE_PATH
+        environment["LD_LIBRARY_PATH"] = "/usr/local/cuda/lib64"
+    return environment
 
 
 def _clamp_cudagraph_capture_sizes(
@@ -862,7 +909,11 @@ class VLLMRunner:
                     )
                 sys.stdout.flush()
                 sys.stderr.flush()
-                os.execv(sys.executable, [sys.executable] + rewritten_argv)
+                os.execve(
+                    sys.executable,
+                    _python_reexec_command(rewritten_argv),
+                    _reexec_environment(),
+                )
             self.load_seconds = time.perf_counter() - started
         finally:
             random.setstate(python_rng_state)
@@ -2290,12 +2341,20 @@ class VLLMRunner:
 
     @staticmethod
     def runtime_metadata() -> dict[str, Any]:
-        git_root = _run_text(["git", "rev-parse", "--show-toplevel"])
-        git_commit = _run_text(["git", "rev-parse", "HEAD"]) if git_root else ""
-        git_status = _run_text(["git", "status", "--short"]) if git_root else ""
+        git_prefix = [
+            "/usr/bin/git",
+            "--no-replace-objects",
+            "-c",
+            "core.hooksPath=/dev/null",
+            "-c",
+            "core.fsmonitor=false",
+        ]
+        git_root = _run_text([*git_prefix, "rev-parse", "--show-toplevel"])
+        git_commit = _run_text([*git_prefix, "rev-parse", "HEAD"]) if git_root else ""
+        git_status = _run_text([*git_prefix, "status", "--short"]) if git_root else ""
         gpu = _run_text(
             [
-                "nvidia-smi",
+                "/usr/bin/nvidia-smi",
                 "--query-gpu=name,driver_version,memory.total",
                 "--format=csv,noheader,nounits",
             ]
@@ -2306,8 +2365,8 @@ class VLLMRunner:
             "platform": platform.platform(),
             "packages": dict(_INITIAL_PACKAGES),
             "environment_lock": _environment_lock_metadata(),
-            "uv": _run_text(["uv", "--version"]),
-            "cuda_toolkit": _run_text(["nvcc", "--version"]),
+            "uv": _run_text(["/usr/bin/uv", "--version"]),
+            "cuda_toolkit": _run_text(["/usr/local/cuda/bin/nvcc", "--version"]),
             "gpu": gpu,
             "vllm_enable_v1_multiprocessing": os.environ.get(
                 "VLLM_ENABLE_V1_MULTIPROCESSING"

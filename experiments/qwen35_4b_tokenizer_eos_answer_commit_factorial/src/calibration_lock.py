@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import dataclasses
 import json
+import os
 import subprocess
 from collections.abc import Mapping, Sequence
 from pathlib import Path
@@ -82,6 +83,10 @@ LIVE_PREFLIGHT_KEYS = {
     "benchmark_files_read",
 }
 PREFIX = "experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/"
+CANONICAL_REPOSITORY = "ericflo/small-model-experimentation"
+CANONICAL_ORIGIN = "https://github.com/ericflo/small-model-experimentation.git"
+GIT_EXECUTABLE = "/usr/bin/git"
+GH_EXECUTABLE = "/usr/bin/gh"
 CRITICAL_FILES = (
     "requirements-vllm.lock.txt",
     PREFIX + "configs/default.yaml",
@@ -145,12 +150,46 @@ if not set(CALIBRATION_RUNTIME_FILES) <= set(CRITICAL_FILES):
     raise RuntimeError("calibration runtime inventory escapes critical files")
 
 
+def _child_environment() -> dict[str, str]:
+    result = {
+        "HOME": "/root",
+        "PATH": f"{ROOT}/.venv-vllm/bin:/usr/local/cuda/bin:/usr/bin:/bin",
+        "LANG": "C.UTF-8",
+        "LC_ALL": "C.UTF-8",
+        "GH_CONFIG_DIR": "/root/.config/gh",
+        "GH_HOST": "github.com",
+        "NO_COLOR": "1",
+        "GIT_CONFIG_NOSYSTEM": "1",
+        "GIT_CONFIG_GLOBAL": "/dev/null",
+        "GIT_TERMINAL_PROMPT": "0",
+    }
+    if os.environ.get("GITHUB_TOKEN"):
+        result["GITHUB_TOKEN"] = os.environ["GITHUB_TOKEN"]
+    return result
+
+
+def _git_command(*args: str) -> list[str]:
+    return [
+        GIT_EXECUTABLE,
+        "--no-replace-objects",
+        "-c",
+        "core.hooksPath=/dev/null",
+        "-c",
+        "core.fsmonitor=false",
+        *args,
+    ]
+
+
 def _git(*args: str) -> str:
-    return subprocess.check_output(["git", *args], cwd=ROOT, text=True).strip()
+    return subprocess.check_output(
+        _git_command(*args), cwd=ROOT, text=True, env=_child_environment()
+    ).strip()
 
 
 def _git_bytes(*args: str) -> bytes:
-    return subprocess.check_output(["git", *args], cwd=ROOT)
+    return subprocess.check_output(
+        _git_command(*args), cwd=ROOT, env=_child_environment()
+    )
 
 
 def _commit_id(value: Any) -> str:
@@ -163,9 +202,10 @@ def _commit_id(value: Any) -> str:
 def _ancestor(older: str, newer: str) -> bool:
     return (
         subprocess.run(
-            ["git", "merge-base", "--is-ancestor", older, newer],
+            _git_command("merge-base", "--is-ancestor", older, newer),
             cwd=ROOT,
             capture_output=True,
+            env=_child_environment(),
         ).returncode
         == 0
     )
@@ -179,9 +219,11 @@ def _normalized(value: Any) -> Any:
 
 def _query_ci_rows(commit: str) -> list[dict[str, Any]]:
     command = [
-        "gh",
+        GH_EXECUTABLE,
         "run",
         "list",
+        "--repo",
+        CANONICAL_REPOSITORY,
         "--commit",
         _commit_id(commit),
         "--limit",
@@ -190,12 +232,33 @@ def _query_ci_rows(commit: str) -> list[dict[str, Any]]:
         "databaseId,headSha,status,conclusion,workflowName,url",
     ]
     try:
-        rows = json.loads(subprocess.check_output(command, cwd=ROOT, text=True))
+        rows = json.loads(
+            subprocess.check_output(
+                command, cwd=ROOT, text=True, env=_child_environment()
+            )
+        )
     except (subprocess.CalledProcessError, json.JSONDecodeError) as error:
         raise RuntimeError("could not authenticate GitHub workflow state") from error
     if not isinstance(rows, list) or any(not isinstance(row, dict) for row in rows):
         raise RuntimeError("GitHub workflow response changed")
     return rows
+
+
+def _fetch_main() -> None:
+    if _git("remote", "get-url", "origin") != CANONICAL_ORIGIN:
+        raise RuntimeError("Git origin URL changed")
+    subprocess.run(
+        _git_command(
+            "fetch",
+            "--quiet",
+            "--no-tags",
+            CANONICAL_ORIGIN,
+            "+refs/heads/main:refs/remotes/origin/main",
+        ),
+        cwd=ROOT,
+        check=True,
+        env=_child_environment(),
+    )
 
 
 def query_green_ci(commit: str) -> dict[str, dict[str, Any]]:
@@ -302,7 +365,7 @@ def validate_implementation_review(value: Any) -> dict[str, Any]:
         )
         or not isinstance(value["adversarial_review_rounds"], int)
         or isinstance(value["adversarial_review_rounds"], bool)
-        or value["adversarial_review_rounds"] < 1
+        or value["adversarial_review_rounds"] < 3
         or value["experimental_model_requests_reviewed"] != 0
         or value["sampled_model_outputs_reviewed"] != 0
         or any(
@@ -351,7 +414,7 @@ def authenticate_implementation_review(
                 f"reviewed calibration runtime changed after review: {relative}"
             )
     if verify_network:
-        subprocess.run(["git", "fetch", "--quiet", "origin", "main"], cwd=ROOT, check=True)
+        _fetch_main()
         origin = _commit_id(_git("rev-parse", "origin/main"))
         if not _ancestor(receipt_commit, origin) or not _ancestor(head, origin):
             raise RuntimeError("implementation review is not published on main")
@@ -594,7 +657,7 @@ def publish_calibration_lock(path: Path = IMPLEMENTATION_LOCK) -> dict[str, Any]
         for candidate in (IMPLEMENTATION_LOCK, LIVE_PREFLIGHT, RAW_DIR, DECISION)
     ):
         raise RuntimeError("calibration lock must precede every calibration artifact")
-    subprocess.run(["git", "fetch", "--quiet", "origin", "main"], cwd=ROOT, check=True)
+    _fetch_main()
     release_commit = _commit_id(_git("rev-parse", "HEAD"))
     if release_commit != _commit_id(_git("rev-parse", "origin/main")):
         raise RuntimeError("release commit must equal current origin/main")
@@ -654,7 +717,7 @@ def verify_calibration_lock(
     ) or not _ancestor(lock_commit, head):
         raise RuntimeError("calibration lock commit ancestry changed")
     if verify_network:
-        subprocess.run(["git", "fetch", "--quiet", "origin", "main"], cwd=ROOT, check=True)
+        _fetch_main()
         origin = _commit_id(_git("rev-parse", "origin/main"))
         if not _ancestor(head, origin):
             raise RuntimeError("current live HEAD is not published on main")
@@ -785,6 +848,14 @@ def validate_live_preflight_value(
     implementation_commit: str,
     implementation_lock_sha256: str,
 ) -> dict[str, Any]:
+    rng = value.get("rng_isolation") if isinstance(value, dict) else None
+    valid_rng = (
+        isinstance(rng, dict)
+        and set(rng) == {"engine_seed", "caller_global_rng_state_restored"}
+        and type(rng["engine_seed"]) is int
+        and rng["engine_seed"] == 0
+        and rng["caller_global_rng_state_restored"] is True
+    )
     if (
         not isinstance(value, dict)
         or set(value) != LIVE_PREFLIGHT_KEYS
@@ -806,8 +877,7 @@ def validate_live_preflight_value(
         or not isinstance(value.get("resolved_cudagraph"), dict)
         or value.get("resolved_logprobs_mode") != "raw_logprobs"
         or value.get("adapter") is not None
-        or value.get("rng_isolation")
-        != {"engine_seed": 0, "caller_global_rng_state_restored": True}
+        or not valid_rng
         or not isinstance(value.get("prompt_receipt"), dict)
         or not isinstance(value.get("runtime"), dict)
         or set(value["runtime"]) != RUNTIME_METADATA_KEYS

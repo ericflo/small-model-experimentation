@@ -33,6 +33,11 @@ class CalibrationBootstrapTests(unittest.TestCase):
         self.assertIn("requires the pinned .venv-vllm interpreter", source)
         self.assertIn("review_release = _bootstrap_authenticate_review_release()", source)
         self.assertIn('if stage == "lock":', source)
+        self.assertIn('_GIT_EXECUTABLE = "/usr/bin/git"', source)
+        self.assertIn('_GH_EXECUTABLE = "/usr/bin/gh"', source)
+        self.assertIn('"--repo", _CANONICAL_REPOSITORY', source)
+        self.assertIn("env=_bootstrap_child_environment()", source)
+        self.assertIn("pre-import Git origin URL changed", source)
 
     def test_bootstrap_binds_exact_model_and_runtime_import_inventory(self) -> None:
         source = (EXP / "scripts/run_calibration.py").read_text()

@@ -337,6 +337,20 @@ class CalibrationStageTests(unittest.TestCase):
                 BoundaryAuthenticationError, "live engine"
             ):
                 authenticate_bundle_engine_preflight(bad, preflight)
+        bad = copy.deepcopy(bundle)
+        bad["runner_metadata"].pop("adapter")
+        with self.assertRaisesRegex(BoundaryAuthenticationError, "live engine"):
+            authenticate_bundle_engine_preflight(bad, preflight)
+        for forged_rng in (
+            {"engine_seed": False, "caller_global_rng_state_restored": 1},
+            {"engine_seed": 0.0, "caller_global_rng_state_restored": 1.0},
+        ):
+            bad = copy.deepcopy(bundle)
+            bad["runner_metadata"]["rng_isolation"] = forged_rng
+            with self.subTest(forged_rng=forged_rng), self.assertRaisesRegex(
+                BoundaryAuthenticationError, "live engine"
+            ):
+                authenticate_bundle_engine_preflight(bad, preflight)
 
 
 if __name__ == "__main__":
