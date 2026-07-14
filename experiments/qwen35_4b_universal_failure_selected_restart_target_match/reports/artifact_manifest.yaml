@@ -12,7 +12,7 @@ omitted_artifacts:
     reason: "future adapters and merged candidate/control composites are large and gitignored; none exists at the design checkpoint"
 reproducibility:
   smoke_command: "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_failure_selected_restart_target_match/scripts/run.py --smoke"
-  full_command: "none yet: PASS_PARENT_ROLLOUT authorizes only the separately checkpointed --stage collect-parent event"
+  full_command: "none yet: parent collection is complete; after its pushed-green checkpoint only --stage mine-restarts is authorized"
   required_external_artifacts:
     - "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/merged/replay_after_close"
 notes: >-
@@ -20,5 +20,7 @@ notes: >-
   construction/rollout/selection/training/local/aggregate seeds are
   77114/66114/55114/48/88010/78140. The 624-row source, oracle-free input, task
   manifest, and design receipt hashes are 81edc9ea...de304, 25382689...0f5b,
-  3a6c4e61...ef937, and e861cd64...ae24. No parent rollout, adapter, new composite,
-  local event, or benchmark event exists yet.
+  3a6c4e61...ef937, and e861cd64...ae24. The one parent event completed 624/624
+  rows and 304013 sampled tokens with no recovery/rerun. Rollout, metadata, log, and
+  receipt hashes are 4bf15134...1099f, b43b3a0...1206d, 668e9b70...369ff, and
+  1d35c63a...2b381. No adapter, new composite, local event, or benchmark event exists.

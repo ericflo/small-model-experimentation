@@ -48465,7 +48465,7 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "Clean-restart curriculum is frozen before any model event",
+     "title": "Parent failure-selection rollout is complete and mining remains gated",
      "categories": [
       "intake",
       "CPU design",
@@ -48479,14 +48479,14 @@
      "series": [
       {
        "label": "completed checkpoint",
-       "values": [1, 1, 0, 0, 0, 0, 0, 0]
+       "values": [1, 1, 1, 0, 0, 0, 0, 0]
       }
      ],
      "x_label": "preregistered experiment stage",
      "y_label": "completion indicator",
      "y_format": "integer",
-     "note": "CPU design froze 624 fresh tasks, four prospective failures per each of 13 skills, and exact future matching of forward tokens, target tokens, and loss mass. No parent rollout, training, evaluation, or benchmark event exists.",
-     "source": "experiments/qwen35_4b_universal_failure_selected_restart_target_match/data/design_receipt.json"
+     "note": "The authenticated merged replay parent completed 624/624 prompts and 304,013 sampled tokens in one event with no recovery or rerun. Failure selection, training, evaluation, and benchmark access remain gated.",
+     "source": "experiments/qwen35_4b_universal_failure_selected_restart_target_match/runs/parent_rollout/seed66114.receipt.json"
     }
    ]
   },

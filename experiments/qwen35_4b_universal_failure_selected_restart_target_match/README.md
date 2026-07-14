@@ -1,6 +1,6 @@
 # Failure-Selected Counterfactual Restart Curriculum
 
-**Status:** in-progress · since 2026-07-14 · CPU design is frozen; no parent rollout or training has run
+**Status:** in-progress · since 2026-07-14 · parent rollout is preserved; model-free failure selection is next
 
 This experiment tests whether selecting the stronger parent's fresh procedural
 failures and teaching clean verified restarts can beat exactly exposure-matched replay
@@ -56,21 +56,13 @@ that mechanism from extra compute or extra supervision.
 
 ## Run
 
-The current checkpoint exposes only the CPU smoke path and the single parent event:
+The current checkpoint exposes the CPU smoke path and, after this collection result is
+published green, model-free failure selection:
 
 ```bash
 PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B \
   experiments/qwen35_4b_universal_failure_selected_restart_target_match/scripts/run.py --smoke
 
-PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B \
-  experiments/qwen35_4b_universal_failure_selected_restart_target_match/scripts/run.py \
-  --stage collect-parent
-```
-
-After collection is preserved in a separately committed, rebased, pushed, and
-two-workflow-green checkpoint, failure mining is model-free:
-
-```bash
 PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B \
   experiments/qwen35_4b_universal_failure_selected_restart_target_match/scripts/run.py \
   --stage mine-restarts
@@ -81,8 +73,16 @@ until the observed restart source passes a second exact-exposure design review.
 
 ## Results
 
-No model event or capability result exists yet. The model-free design receipt SHA-256
-is `e861cd64...ae24`; it authorizes only the parent rollout.
+The one preregistered parent event completed from pushed-green commit `1744e753`:
+624/624 completions, 304,013 sampled tokens, 879.9 tok/s, and 394.96 seconds of
+wrapper wall time. Rollout/metadata/log/receipt SHA-256 values are
+`4bf15134...1099f`, `b43b3a0...1206d`, `668e9b70...369ff`, and
+`1d35c63a...2b381`. The receipt records a clean `main` preflight, the authenticated
+merged replay parent, no recovery or generation rerun, `benchmark_data_read=false`,
+and a sealed aggregate seed.
+
+This is collection evidence, not a capability result. Failure composition and quota
+availability remain unopened until the separately published mining stage.
 
 ## Interpretation
 

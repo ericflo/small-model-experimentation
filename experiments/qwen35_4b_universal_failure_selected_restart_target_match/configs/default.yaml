@@ -16,6 +16,7 @@ seeds:
   local: 88010
   conditional_aggregate: 78140
 collection:
+  completed: true
   rows_per_skill: 48
   skills: [induct, execute, select, trace, verify, count, repair, optimize, abstain, state, order, probe, route]
   thinking: natural
@@ -23,6 +24,9 @@ collection:
   samples_per_task: 1
   max_tokens: 1024
   max_model_len: 4096
+  sampled_tokens: 304013
+  rollout_sha256: 4bf15134b02ac9f4f4a1b424d9dfc10f280fead4e340a7f77284d0b920c1099f
+  receipt_sha256: 1d35c63a70d53d8803666cb8c30f4d0efffd884c7f6ab04adceaf8b05442b381
 selection:
   quota_per_skill: 4
   think_budget_tokens: 128

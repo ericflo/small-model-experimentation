@@ -7662,7 +7662,7 @@
    "verdict_tag": "Clean restarts are frozen; model test pending",
    "concept_primer": "Instead of making a model continue from its own long wrong reasoning, use the mistake only to choose the task, then teach a short correct solution from the original question.",
    "plain_question": "Can fresh tasks the model actually fails become broadly useful lessons if training restarts before the mistake and matches replay's supervised exposure exactly?",
-   "plain_answer": "The test is designed but has not run. It freezes 624 new tasks across all 13 universal skills, will select four failures per skill, and will compare clean verified restarts with ordinary replay at equal forward tokens, target tokens, and loss mass.",
+   "plain_answer": "The selection run is now collected but not yet mined: the stronger parent completed all 624 new tasks across 13 skills in one frozen event. The next checkpoint will select four failures per skill before clean restarts are compared with replay at equal forward tokens, target tokens, and loss mass.",
    "why_it_matters": "The previous real-failure curriculum lost while carrying long wrong prefixes and supervising fewer target tokens. This design removes both confounds before spending another training run.",
    "verdict_tone": "neutral",
    "key_numbers": [
@@ -7682,9 +7682,9 @@
      "sub": "574 predecessor and reserved-local messages checked"
     },
     {
-     "label": "Model events so far",
-     "value": "zero",
-     "sub": "only the CPU design is complete"
+     "label": "Parent completions collected",
+     "value": "624 of 624",
+     "sub": "one event; failure mining still sealed"
     }
    ],
    "charts": [
@@ -7692,7 +7692,7 @@
      "index": 0,
      "chart_plain_title": "The design is complete and every model stage remains gated",
      "chart_read": "Bars mark whether intake, CPU design, parent rollout, failure selection, exposure matching, paired training, local testing, and broad testing are complete.",
-     "chart_takeaway": "Only intake and CPU design are complete; the next permitted action is one parent rollout from a pushed green checkpoint."
+     "chart_takeaway": "Intake, CPU design, and parent rollout are complete; failure selection remains blocked until the collection receipt is pushed green."
     }
    ]
   },

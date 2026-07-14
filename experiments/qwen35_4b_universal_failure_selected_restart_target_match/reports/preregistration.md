@@ -97,3 +97,15 @@ event can supply training or selection data.
 
 Rebase conflicts require regenerating derived artifacts from the combined source tree
 and rerunning all checks. No dirty, unpushed, or non-`main` expensive stage is valid.
+
+## 2026-07-14 — Frozen post-collection receipt
+
+The single parent event completed from pushed-green commit `1744e753` without
+recovery or rerun. It wrote 624/624 completions and 304,013 sampled tokens at 879.9
+tok/s. Rollout/metadata/log/receipt hashes are `4bf15134...1099f`,
+`b43b3a0...1206d`, `668e9b70...369ff`, and `1d35c63a...2b381`.
+`benchmark_data_read=false`; local and aggregate seeds remain sealed.
+
+This amendment records the preregistered event only. It does not change selection
+rules or authorize training. After this receipt is committed, rebased, pushed, and
+green in both workflows, the next authorized stage is model-free `mine-restarts`.
