@@ -1,6 +1,6 @@
 # Close-Weighted Universal Commit Seam Report
 
-**Status:** preregistered; awaiting scientific GPU runs
+**Status:** replay control trained; treatment arms and evaluation pending
 
 ## Design result
 
@@ -13,8 +13,11 @@ matches their total forward-token exposure.
 
 ## Model results
 
-None yet. No adapter has been trained in this experiment, fresh local seed 88,006
-has not been evaluated, and conditional aggregate seed 78,136 remains sealed.
+The `replay_repeat` adapter completed exactly 40 updates with zero skips, train loss
+0.4477, and 303.44 seconds wrapper wall time. Its weights hash is
+`ca5601cd...59d78`. This is an active-control training result, not evidence for the
+hypothesis. Neither treatment has trained, fresh local seed 88,006 has not been
+evaluated, and conditional aggregate seed 78,136 remains sealed.
 
 ## Interpretation boundary
 

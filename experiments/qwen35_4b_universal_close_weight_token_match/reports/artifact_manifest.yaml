@@ -6,11 +6,16 @@ external_artifacts:
     required_for: "common warm start and paired local parent control"
     checksum: "weights f05c13ae66e19bbd29abbd2b62ae3c1a577642efefbdba435879012bf4494654; config 0cd3ca7c710e48c264fd1d4c019c304ec0b9e5b13098b89a5b4aa0b171191e58"
     regenerate: ".venv/bin/python experiments/qwen35_4b_universal_mid_density_token_match/scripts/run.py --stage train-d160"
-  - name: "registered continuation adapters"
-    storage: "large_artifacts/qwen35_4b_universal_close_weight_token_match/adapters/"
-    required_for: "paired local evaluation"
-    checksum: "not created at design freeze; each training receipt will record exact hashes"
-    regenerate: ".venv/bin/python experiments/qwen35_4b_universal_close_weight_token_match/scripts/run.py --stage train"
+  - name: "replay_repeat adapter"
+    storage: "large_artifacts/qwen35_4b_universal_close_weight_token_match/adapters/replay_repeat"
+    required_for: "exact-token active-control evaluation"
+    checksum: "weights ca5601cdf91f2d8fe9d68b852568e8f58248e64815207b7f20a341bddef59d78; config 63575f7291b6887d7bdd0ecbbc37a415788230f5a604db7e8a63b3939aa8a49b"
+    regenerate: ".venv/bin/python experiments/qwen35_4b_universal_close_weight_token_match/scripts/run.py --stage train-control"
+  - name: "remaining registered treatment adapters"
+    storage: "large_artifacts/qwen35_4b_universal_close_weight_token_match/adapters/{standard_xi,close_xi}"
+    required_for: "paired local treatment evaluation"
+    checksum: "not created at replay-control checkpoint; each training receipt will record exact hashes"
+    regenerate: ".venv/bin/python experiments/qwen35_4b_universal_close_weight_token_match/scripts/run.py --stage train-standard; then --stage train-close"
   - name: "conditional explicitly merged checkpoints"
     storage: "large_artifacts/qwen35_4b_universal_close_weight_token_match/merged/"
     required_for: "conditional same-backend aggregate evaluation"
@@ -33,4 +38,6 @@ notes: >-
   stream_token_receipt.json (e2e95429...2915b). The replay stream is
   6ec82e29...e81d4 and the byte-identical standard/close stream is
   12fc613b...14f00. All arms have 320 rows, 286814 forward tokens, 40 updates,
-  and zero tokenizer skips. No experiment-owned adapter exists at design freeze.
+  and zero tokenizer skips. replay_repeat completed with receipt
+  runs/training/replay_repeat.json (ffac35d1...1067) and normalized log
+  runs/training/replay_repeat.log (b24444b8...ed28); treatments remain pending.

@@ -13212,10 +13212,10 @@
    ]
   },
   "qwen35_4b_universal_close_weight_token_match": {
-   "verdict_tag": "Design frozen; model runs are pending",
+   "verdict_tag": "Replay control trained; treatments remain",
    "concept_primer": "The previous training recipe nearly learned to finish fresh puzzles, but a few answers ran out of space before the model stopped reasoning. This follow-up teaches the exact transition from reasoning to a final answer while keeping the amount of practice equal across comparisons.",
    "plain_question": "Does putting extra teaching weight on the moment reasoning ends help the model finish reliably, beyond simply adding targeted lessons or more replay practice?",
-   "plain_answer": "The comparison is ready, but the model has not run yet. Three versions will start from the same near-miss model and receive 320 examples apiece. One gets replay only, one gets 80 fresh execution and rule-finding lessons, and the third gets those exact same lessons with extra weight only on the two-piece closing marker.",
+   "plain_answer": "The comparison is underway. The replay-only version completed its registered 40 training steps cleanly; the two targeted versions still need to run. All three start from the same near-miss model and receive 320 examples apiece. One gets replay only, one gets 80 fresh execution and rule-finding lessons, and the third gets those exact same lessons with extra weight only on the two-piece closing marker.",
    "why_it_matters": "This separates three explanations that earlier work could not: benefit from another short training pass, benefit from task-targeted lessons, and benefit from teaching the model when to stop reasoning. Equal example counts and equal processed text make the comparison unusually clean.",
    "verdict_tone": "neutral",
    "key_numbers": [

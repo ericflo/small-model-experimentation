@@ -1,6 +1,6 @@
 # Close-Weighted Universal Commit Seam
 
-**Status:** in-progress · since 2026-07-13 · design frozen; scientific GPU runs remain
+**Status:** in-progress · since 2026-07-13 · replay control trained; two treatments and paired local evaluation remain
 
 ## Research program
 
@@ -84,10 +84,14 @@ Merge and benchmark stages are conditional on a treatment arm passing locally:
 
 ## Results
 
-No training or model evaluation has run. The outcome-free feasibility audit passes:
-the target rows have zero overlap with the parent designed160 rows, both unique data
-streams encode without skips, the replay variable block exactly matches the targeted
-block, and all three arms have 286,814 forward tokens and 40 updates.
+The replay control completed its registered 40/40 updates over 320 rows and 286,814
+forward tokens with zero skips. Train loss was 0.4477 and wrapper wall time was
+303.44 seconds. Its adapter weights/config hashes are `ca5601cd...59d78` /
+`63575f72...a49b`. The two treatment arms and all model evaluation remain pending.
+
+The outcome-free feasibility audit still passes: target rows have zero overlap with
+the parent designed160 rows, both unique data streams encode without skips, and the
+replay variable block exactly matches the targeted block.
 
 ## Interpretation
 
