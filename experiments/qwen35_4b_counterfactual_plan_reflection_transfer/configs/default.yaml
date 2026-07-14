@@ -1,21 +1,25 @@
-schema_version: 1
+schema_version: 2
 experiment_id: qwen35_4b_counterfactual_plan_reflection_transfer
-status: pre_model_design
+status: adversarial_hold
 model:
   id: Qwen/Qwen3.5-4B
   revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
   bulk_backend: vllm
   internals_backend: transformers
+
 construction:
   seed: 73301
   shuffle_seed: 73319
+  schedule_seed: 73323
+  retention_seed: 73337
   depth: 3
   families: [list, string, register]
   per_family:
     train: 72
+    calibration: 24
     qualification: 48
     confirmation: 48
-    retention_depth_1_2: 24
+    retention_per_family_per_depth: 8
   visible_examples: 7
   query_inputs: 3
   require_zero_cross_split_composition_collisions: true
@@ -23,55 +27,190 @@ construction:
   require_zero_exact_answer_strings_in_reflections: true
   require_unique_global_depth_3_composition_per_behavior: true
   require_visible_examples_identify_exact_ordered_plan: true
-training_proposal:
-  seeds: [47, 53]
+  require_complete_operation_position_support_per_full_split: true
+  benchmark_firewall: python_audit_hook_open_listdir_scandir
+
+rendering:
+  enable_thinking: true
+  common_branch_point: fixed_assistant_READY
+  scope: controlled_branch_transfer_not_literal_interrupted_action
+  reflection_question_prefix: "Pause before solving."
+  auxiliary_question_prefix: "Provide exact labels."
+  require_reflection_auxiliary_equal_rendered_prompt_tokens: true
+  think_target: "The exact ordered plan is <first> -> <second> -> <third>."
+  close_target: "</think>\\n\\n"
+  reflection_answer_target: "PLAN: <first> -> <second> -> <third>"
+  action_answer_target: "ANSWER: <compact JSON array of outputs>"
+  eos_contract: tokenizer_eos_248046_in_training_target
+  mask_contract: all_prompt_and_READY_tokens_zero_weight_final_assistant_only
+  truncation: forbidden_fail_closed
+
+training:
+  staged_seeds:
+    screen: 47
+    replication: 53
   arms:
     - reflection_correct
     - reflection_shuffled
+    - auxiliary_plan_label_correct
     - direct_plan_answer_positive_control
-  loss_contract:
-    reflection_correct: final_reflection_assistant_turn_only
-    reflection_shuffled: final_reflection_assistant_turn_only
-    direct_plan_answer_positive_control: actual_action_assistant_turn_only
-  lora_rank: 32
-  lora_alpha: 64
-  learning_rate: 0.0002
-  epochs: 3
-  note: hyperparameters and exact token matching are not frozen until design review
-evaluation_proposal:
-  candidate_counts: [1, 4, 16]
-  qualification_seed: 88031
-  confirmation_seed: 88037
+  causal_comparison: [reflection_correct, reflection_shuffled]
+  framing_comparison: [reflection_correct, auxiliary_plan_label_correct]
+  positive_control:
+    arm: direct_plan_answer_positive_control
+    target: actual_action_branch_plan_in_think_and_answer_in_final
+    interpretation: noncomparable_training_and_generalization_ceiling
+    replication_seed_required: false
+  recipe:
+    method: qlora
+    load_in_4bit: true
+    quant_type: nf4
+    double_quant: true
+    compute_dtype: bfloat16
+    attention: sdpa
+    lora_rank: 32
+    lora_alpha: 64
+    lora_dropout: 0.05
+    lora_bias: none
+    target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+    optimizer: paged_adamw_8bit
+    learning_rate: 0.0002
+    scheduler: cosine
+    warmup_ratio: 0.03
+    weight_decay: 0.0
+    max_grad_norm: 1.0
+    epochs: 3
+    per_device_batch: 1
+    gradient_accumulation: 18
+    effective_batch: 18
+    max_length: 3072
+    gradient_checkpointing: true
+    bf16: true
+    checkpoint_selection: final_only_no_metric_selection
+  loss_weights:
+    prompt: 0.0
+    thought: 0.2
+    autonomous_close: 0.2
+    final_answer: 1.0
+  schedule:
+    rows_per_arm: 216
+    per_family_per_optimizer_group: 6
+    rows_per_optimizer_group: 18
+    optimizer_groups_per_epoch: 12
+    optimizer_steps_total: 36
+    order: fixed_task_schedule_shared_across_arms
+    correct_shuffle_derangement: within_family_and_optimizer_group
+  parity_gates:
+    - byte_identical_correct_shuffle_messages_per_task
+    - identical_correct_shuffle_target_multiset_per_optimizer_group
+    - identical_correct_shuffle_prompt_target_forward_token_totals_per_optimizer_group
+    - identical_correct_shuffle_optimizer_steps_and_task_order
+    - equal_reflection_auxiliary_rendered_prompt_tokens_per_task
+    - exact_input_target_mask_hash_receipt_before_training
+
+evaluation:
+  backend: vllm_only_for_all_compared_generation_arms
+  adapter_deployment: merged_composite_checkpoint_required
+  adapter_gate: real_adapter_on_vs_off_must_change_behavior
+  max_model_len: 4096
+  thinking_budget: 1024
+  answer_max_tokens: 128
+  temperature: 0.6
+  top_p: 0.95
+  top_k: 20
+  primary_candidate_count: 16
+  descriptive_candidate_counts: [1, 4]
+  primary_metric: exact_full_query_coverage_at_16
+  secondary_metrics:
+    - exact_candidate_accuracy
+    - exact_full_query_coverage_at_1
+    - exact_full_query_coverage_at_4
+    - strict_parse_rate
+    - generated_token_count
+    - truncation_and_loop_contacts
+  sample_seeds:
+    calibration: 88027
+    qualification: 88031
+    confirmation: 88037
+    retention: 88043
   arms:
     - frozen_action
-    - frozen_literal_reflection_then_action
     - reflection_correct_action
     - reflection_shuffled_action
-    - direct_plan_answer_action
-  primary: paired_hidden_exact_accuracy_at_matched_candidate_count
-  required_controls:
-    - frozen_same_backend_sample_more
-    - shuffled_reflection
-    - direct_plan_answer_training_positive_control
-    - literal_reflection_at_inference
-    - family_and_depth_retention
-jacobian_stage:
-  status: sealed_until_capability_replication
-  proposed_layers: [4, 5, 6, 7, 8]
-  required_readout_controls:
-    - slot_margin
-    - unembedding_logit_direction
-    - equal_width_non_j
-    - shuffled_operation_labels
-  required_causal_controls:
-    - wrong_operation
-    - random_same_norm
-    - full_activation
-    - non_j_component
-  note: exact lens corpus, layer selection, and gates require adversarial review
+    - auxiliary_plan_label_correct_action
+    - direct_plan_answer_positive_control_action
+  frozen_sample_more:
+    same_backend: true
+    same_candidate_count: 16
+    same_thinking_and_answer_caps: true
+  literal_reflection_diagnostic:
+    candidate_count: 4
+    reflection_thinking: false
+    reflection_max_tokens: 64
+    action_settings: same_as_primary
+    append_exact_generated_reflection_as_assistant_turn: true
+    matched_frozen_reserve_candidates: 16
+    matched_rule: shortest_base_candidate_prefix_reaching_each_tasks_literal_total_logical_tokens
+    fail_if_reserve_does_not_reach_literal_tokens: true
+    status: diagnostic_not_primary_or_deployable
+  loop_detector:
+    min_repeats: 4
+    max_period_tokens: 256
+    min_total_repeated_tokens: 60
+
+decision_gates:
+  bootstrap:
+    paired_task_resamples: 10000
+    seed: 88991
+    interval: percentile_95
+  calibration_before_training:
+    strict_parse_rate_min: 0.95
+    answer_limit_contact_max: 0.01
+    periodic_loop_contact_max: 0.01
+    base_coverage_at_16_min: 0.05
+    base_coverage_at_16_max: 0.80
+  positive_control_sanity_on_qualification:
+    coverage_at_16_min: 0.50
+    delta_over_frozen_min: 0.20
+    paired_delta_lower_95_gt: 0.0
+  per_seed_qualification_and_confirmation:
+    correct_minus_shuffled_min: 0.10
+    correct_minus_frozen_min: 0.10
+    paired_delta_lower_95_gt: 0.0
+    each_family_correct_minus_shuffled_min: 0.05
+    each_family_correct_minus_frozen_min: 0.05
+    strict_parse_rate_min: 0.95
+    answer_limit_contact_max: 0.01
+    periodic_loop_contact_max: 0.01
+  reflection_specific_mechanism:
+    correct_minus_auxiliary_min: 0.05
+    paired_delta_lower_95_gt: 0.0
+    note: capability_pass_without_this_is_generic_auxiliary_plan_transfer_not_reflection_specific
+  retention_noninferiority:
+    each_depth_delta_min: -0.05
+    each_family_delta_min: -0.125
+  staging:
+    - frozen_base_must_pass_calibration_before_any_training
+    - screen_seed_all_four_arms_must_pass_their_qualification_gates
+    - replication_seed_trains_three_nonpositive_control_arms_only
+    - both_seeds_must_independently_pass_qualification_before_confirmation_opens
+    - both_seeds_must_independently_pass_confirmation_no_seed_selection_or_ensembling
+    - any_gate_miss_is_preserved_and_stops_that_branch
+
+mechanism_followup:
+  status: separate_fresh_experiment_only_after_two_seed_behavioral_confirmation
+  reason: J_fit_J_confirmation_and_causal_confirmation_must_not_reuse_behavioral_gate_data
+  required_future_controls:
+    readout: [slot_margin, unembedding_logit_direction, equal_width_non_j, shuffled_operation_labels]
+    causal: [wrong_operation, random_same_norm, full_activation, non_j_component]
+    outcome: forward_behavioral_mediation_not_coordinate_suppression_alone
+
 authorization:
+  cpu_construction: true
+  tokenizer: false
   model_calls: false
   gpu: false
   training: false
+  evaluation: false
   jacobian: false
   benchmarks: false

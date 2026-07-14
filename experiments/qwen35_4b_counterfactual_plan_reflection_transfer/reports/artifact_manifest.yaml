@@ -15,6 +15,6 @@ reproducibility:
 notes: >-
   Full CPU construction is authorized and passes, but adversarial status remains
   HOLD. Qwen/Qwen3.5-4B revision 851bf6e8...d0a is the sole permitted future
-  model. Reserved construction/shuffle/training/qualification/confirmation seeds
-  are 73301/73319/47,53/88031/88037. No tokenizer, adapter, model output,
+  model. Reserved construction/shuffle/schedule/retention/training/evaluation seeds
+  are committed in configs/default.yaml. No tokenizer, adapter, model output,
   activation, Jacobian, capability, benchmark, or hidden artifact exists.

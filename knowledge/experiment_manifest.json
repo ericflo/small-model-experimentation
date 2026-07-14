@@ -1538,8 +1538,8 @@
   },
   {
     "file_counts": {
-      ".md": 6,
-      ".py": 5,
+      ".md": 7,
+      ".py": 20,
       ".yaml": 3
     },
     "id": "qwen35_4b_counterfactual_plan_reflection_transfer",
@@ -1552,8 +1552,9 @@
       "structured_execution_and_compilers"
     ],
     "source_track": "new",
-    "summary": "This experiment tests the paper's most actionable claim without relying on its consciousness framing: can supervision on what the model *would say if interrupted and asked to reflect* change what it does on the unreflected action branch?",
+    "summary": "This experiment tests the paper's most actionable claim without relying on its consciousness framing: can supervision on what the model would say on a later reflection branch change what it does on an unreflected action branch? The fixed `READY` seam makes this controlled branch transfer, not a claim about a literal interrupted internal action state.",
     "tags": [
+      "latent-state",
       "small-model"
     ],
     "title": "Qwen3.5-4B Counterfactual Plan Reflection Transfer",
@@ -1564,8 +1565,8 @@
       "src",
       "tests"
     ],
-    "total_files": 14,
-    "total_size_bytes": 138031
+    "total_files": 30,
+    "total_size_bytes": 230215
   },
   {
     "file_counts": {

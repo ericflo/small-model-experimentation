@@ -176,13 +176,23 @@ def _matches(
 def _visible_identifies_exact_plan(
     family: Family, target: tuple[str, ...], inputs: list[State], outputs: list[State]
 ) -> bool:
+    return _visible_identifies_exact_program(family, target, 3, inputs, outputs)
+
+
+def _visible_identifies_exact_program(
+    family: Family,
+    target: tuple[str, ...],
+    depth: int,
+    inputs: list[State],
+    outputs: list[State],
+) -> bool:
     names = tuple(primitive.name for primitive in family.primitives)
-    for depth in (0, 1, 2):
-        for sequence in itertools.product(names, repeat=depth):
+    for candidate_depth in range(depth):
+        for sequence in itertools.product(names, repeat=candidate_depth):
             if _matches(family, sequence, inputs, outputs):
                 return False
     matches = []
-    for sequence in itertools.product(names, repeat=3):
+    for sequence in itertools.product(names, repeat=depth):
         if _matches(family, sequence, inputs, outputs):
             matches.append(sequence)
             if len(matches) > 1:
@@ -194,7 +204,9 @@ def _state_text(state: State) -> str:
     return json.dumps(state, separators=(",", ":"))
 
 
-def _task_prompt(family: Family, examples: list[dict[str, State]], queries: list[State]) -> str:
+def _task_prompt(
+    family: Family, examples: list[dict[str, State]], queries: list[State], depth: int = 3
+) -> str:
     library = "\n".join(
         f"- {primitive.name}: {primitive.description}" for primitive in family.primitives
     )
@@ -204,10 +216,10 @@ def _task_prompt(family: Family, examples: list[dict[str, State]], queries: list
     )
     query_text = ", ".join(_state_text(query) for query in queries)
     return (
-        "Study this deterministic three-step machine. Do not solve it yet; reply only READY.\n"
+        f"Study this deterministic {depth}-step machine. Do not solve it yet; reply only READY.\n"
         f"State type: {family.state_description}.\nPrimitive library:\n{library}\n"
         f"Observed examples:\n{demonstrations}\nQuery inputs: {query_text}\n"
-        "The machine applies exactly three listed primitives in a fixed order."
+        f"The machine applies exactly {depth} listed primitives in a fixed order."
     )
 
 
@@ -240,6 +252,35 @@ def _eligible_programs(family: Family) -> list[tuple[tuple[str, ...], tuple[str,
         if signature not in shallow and multiplicity.get(signature) == 1:
             eligible.append((ops, signature))
     return eligible
+
+
+def _eligible_programs_at_depth(
+    family: Family, depth: int
+) -> list[tuple[tuple[str, ...], tuple[str, ...]]]:
+    if depth == 3:
+        return _eligible_programs(family)
+    if depth < 1:
+        raise ValueError("program depth must be positive")
+    names = tuple(primitive.name for primitive in family.primitives)
+    shallower = set()
+    for candidate_depth in range(depth):
+        for ops in itertools.product(names, repeat=candidate_depth):
+            try:
+                shallower.add(_signature(family, ops))
+            except ValueError:
+                continue
+    rows = []
+    counts: dict[tuple[str, ...], int] = {}
+    for ops in itertools.product(names, repeat=depth):
+        try:
+            signature = _signature(family, ops)
+        except ValueError:
+            continue
+        if signature in shallower:
+            continue
+        rows.append((ops, signature))
+        counts[signature] = counts.get(signature, 0) + 1
+    return [(ops, signature) for ops, signature in rows if counts[signature] == 1]
 
 
 def _allocate_programs(
@@ -307,6 +348,7 @@ def _make_task_for_program(
     split: str,
     ordinal: int,
     rng: random.Random,
+    depth: int = 3,
 ) -> dict[str, Any]:
     for _ in range(2_000):
         states: list[State] = []
@@ -329,7 +371,7 @@ def _make_task_for_program(
         if len({_state_text(output) for output in outputs}) < 5:
             continue
         examples = [{"input": states[i], "output": outputs[i]} for i in range(7)]
-        if not _visible_identifies_exact_plan(family, ops, states[:7], outputs[:7]):
+        if not _visible_identifies_exact_program(family, ops, depth, states[:7], outputs[:7]):
             continue
         queries = states[7:10]
         answers = outputs[7:10]
@@ -342,22 +384,23 @@ def _make_task_for_program(
             "task_id": task_id,
             "split": split,
             "family": family.name,
-            "depth": 3,
+            "depth": depth,
             "target_ops": list(ops),
             "behavior_signature_sha256": _hash_signature(signature),
             "examples": examples,
             "queries": queries,
             "answers": answers,
             "common_messages": [
-                {"role": "user", "content": _task_prompt(family, examples, queries)},
+                {"role": "user", "content": _task_prompt(family, examples, queries, depth)},
                 {"role": "assistant", "content": "READY"},
             ],
-            "reflection_question": REFLECTION_QUESTION,
+            "reflection_question": REFLECTION_QUESTION if depth == 3 else None,
             "action_question": ACTION_QUESTION,
             "target_plan": plan,
             "target_answer": answer,
             "visible_shallow_candidate_count": 0,
-            "visible_depth3_candidate_count": 1,
+            "visible_exact_depth_candidate_count": 1,
+            "visible_depth3_candidate_count": 1 if depth == 3 else None,
         }
     raise RuntimeError(
         f"unable to materialize visible-identifiable {family.name}/{split} program {ops}"
@@ -385,7 +428,44 @@ def build_corpus(counts: dict[str, int], seed: int) -> dict[str, list[dict[str, 
     return corpus
 
 
-def build_reflection_arms(tasks: list[dict[str, Any]], seed: int) -> dict[str, list[dict[str, Any]]]:
+def build_retention_corpus(count_per_family_per_depth: int, seed: int) -> list[dict[str, Any]]:
+    """Build untouched exact-depth-1/2 action tasks for post-SFT retention checks."""
+    tasks: list[dict[str, Any]] = []
+    seen_signatures: set[tuple[str, str]] = set()
+    for family_index, family in enumerate(FAMILIES):
+        for depth in (1, 2):
+            catalog = _eligible_programs_at_depth(family, depth)
+            if len(catalog) < count_per_family_per_depth:
+                raise ValueError(
+                    f"{family.name} depth {depth} has {len(catalog)} eligible programs, "
+                    f"below requested {count_per_family_per_depth}"
+                )
+            selector = random.Random(seed + 1_009 * family_index + 97 * depth)
+            selector.shuffle(catalog)
+            for ordinal, (ops, signature) in enumerate(catalog[:count_per_family_per_depth]):
+                signature_hash = _hash_signature(signature)
+                key = (family.name, signature_hash)
+                if key in seen_signatures:
+                    raise ValueError("retention behavior collision across depths")
+                seen_signatures.add(key)
+                rng = random.Random(seed + 100_003 * depth + 1_009 * family_index + ordinal)
+                tasks.append(
+                    _make_task_for_program(
+                        family=family,
+                        ops=ops,
+                        signature=signature,
+                        split=f"retention_depth_{depth}",
+                        ordinal=ordinal,
+                        rng=rng,
+                        depth=depth,
+                    )
+                )
+    return tasks
+
+
+def build_reflection_arms(
+    tasks: list[dict[str, Any]], seed: int, derangement_group_size: int | None = None
+) -> dict[str, list[dict[str, Any]]]:
     """Return correct and within-family deranged reflection targets."""
     correct: list[dict[str, Any]] = []
     shuffled: list[dict[str, Any]] = []
@@ -399,7 +479,18 @@ def build_reflection_arms(tasks: list[dict[str, Any]], seed: int) -> dict[str, l
         row["reflection_donor_task_id"] = task["task_id"]
         correct.append(row)
     donor: dict[int, int] = {}
+    groups: list[list[int]] = []
     for indices in by_family.values():
+        if derangement_group_size is None:
+            groups.append(indices)
+            continue
+        if derangement_group_size < 2 or len(indices) % derangement_group_size:
+            raise ValueError("derangement group size must divide every family block")
+        groups.extend(
+            indices[start:start + derangement_group_size]
+            for start in range(0, len(indices), derangement_group_size)
+        )
+    for indices in groups:
         adjacency: dict[int, list[int]] = {}
         family = next(family for family in FAMILIES if family.name == tasks[indices[0]]["family"])
         for recipient in indices:
@@ -439,6 +530,44 @@ def build_reflection_arms(tasks: list[dict[str, Any]], seed: int) -> dict[str, l
         row["reflection_donor_task_id"] = source["task_id"]
         shuffled.append(row)
     return {"reflection_correct": correct, "reflection_shuffled": shuffled}
+
+
+def validate_retention_corpus(
+    tasks: list[dict[str, Any]], count_per_family_per_depth: int
+) -> dict[str, Any]:
+    expected = len(FAMILIES) * 2 * count_per_family_per_depth
+    if len(tasks) != expected:
+        raise ValueError(f"expected {expected} retention tasks, found {len(tasks)}")
+    ids = [task["task_id"] for task in tasks]
+    signatures = [(task["family"], task["behavior_signature_sha256"]) for task in tasks]
+    compositions = [(task["family"], tuple(task["target_ops"])) for task in tasks]
+    if len(set(ids)) != len(ids):
+        raise ValueError("retention task IDs are not unique")
+    if len(set(signatures)) != len(signatures):
+        raise ValueError("retention behavior signatures are not unique")
+    if len(set(compositions)) != len(compositions):
+        raise ValueError("retention programs are not unique")
+    families = {family.name: family for family in FAMILIES}
+    for task in tasks:
+        depth = int(task["depth"])
+        if depth not in {1, 2}:
+            raise ValueError("retention contains a non-retention depth")
+        family = families[task["family"]]
+        inputs = [row["input"] for row in task["examples"]]
+        outputs = [row["output"] for row in task["examples"]]
+        if not _visible_identifies_exact_program(
+            family, tuple(task["target_ops"]), depth, inputs, outputs
+        ):
+            raise ValueError("retention examples do not identify the exact program")
+        actual = [execute(family, tuple(task["target_ops"]), query) for query in task["queries"]]
+        if actual != task["answers"]:
+            raise ValueError("retention target does not re-execute")
+    return {
+        "tasks": len(tasks),
+        "depth_1": sum(task["depth"] == 1 for task in tasks),
+        "depth_2": sum(task["depth"] == 2 for task in tasks),
+        "unique_behavior_signatures": len(set(signatures)),
+    }
 
 
 def validate_corpus(

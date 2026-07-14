@@ -55,6 +55,16 @@ def _compilation_config(
 
 
 class EngineConfigCaptureGeometryTests(unittest.TestCase):
+    def test_merged_model_override_is_existing_and_mutually_exclusive(self) -> None:
+        runner.EngineConfig(model_override=RUNNER_PATH.parent).validate()
+        with self.assertRaisesRegex(ValueError, "existing merged-checkpoint"):
+            runner.EngineConfig(model_override=RUNNER_PATH.parent / "missing").validate()
+        with self.assertRaisesRegex(ValueError, "mutually exclusive"):
+            runner.EngineConfig(
+                model_override=RUNNER_PATH.parent,
+                adapter=RUNNER_PATH.parent,
+            ).validate()
+
     def test_explicit_capture_list_requires_strict_positive_tied_geometry(self) -> None:
         runner.EngineConfig(
             max_num_seqs=19,

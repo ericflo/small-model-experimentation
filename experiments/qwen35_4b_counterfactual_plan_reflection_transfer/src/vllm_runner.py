@@ -382,6 +382,7 @@ class EngineConfig:
     enable_prefix_caching: bool = False
     enforce_eager: bool = False
     adapter: Path | None = None
+    model_override: Path | None = None
     cudagraph_capture_sizes: tuple[int, ...] | None = None
 
     def validate(self) -> None:
@@ -391,6 +392,10 @@ class EngineConfig:
             raise ValueError("gpu_memory_utilization must be in [0.1, 1.0)")
         if self.max_num_seqs < 1 or self.max_num_batched_tokens < 1:
             raise ValueError("max_num_seqs and max_num_batched_tokens must be positive")
+        if self.adapter is not None and self.model_override is not None:
+            raise ValueError("adapter and model_override are mutually exclusive")
+        if self.model_override is not None and not self.model_override.is_dir():
+            raise ValueError("model_override must be an existing merged-checkpoint directory")
         if self.cudagraph_capture_sizes is not None:
             sizes = self.cudagraph_capture_sizes
             if not sizes or any(
@@ -704,9 +709,10 @@ class VLLMRunner:
             add_special_tokens=False,
         )
 
+        engine_model = str(config.model_override.resolve()) if config.model_override else MODEL_ID
         engine_args: dict[str, Any] = {
-            "model": MODEL_ID,
-            "revision": MODEL_REVISION,
+            "model": engine_model,
+            "tokenizer": MODEL_ID,
             "tokenizer_revision": MODEL_REVISION,
             "trust_remote_code": True,
             "dtype": "bfloat16",
@@ -728,6 +734,8 @@ class VLLMRunner:
             # cross-budget prefix-identical samples.
             "async_scheduling": False,
         }
+        if config.model_override is None:
+            engine_args["revision"] = MODEL_REVISION
         if config.cudagraph_capture_sizes is None:
             engine_args["max_cudagraph_capture_size"] = config.max_num_seqs
         else:
@@ -1311,7 +1319,8 @@ class VLLMRunner:
         )
         summary = {
             "schema_version": RUNNER_SCHEMA_VERSION,
-            "model": MODEL_ID,
+            "model": self.engine_args["model"],
+            "base_model": MODEL_ID,
             "model_revision": MODEL_REVISION,
             "runner_sha256": _sha256_file(Path(__file__).resolve()),
             "engine": {
@@ -1465,6 +1474,11 @@ def _parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
         help="allow raw prompts whose think-channel suffix does not match --thinking",
     )
     parser.add_argument("--adapter", type=Path)
+    parser.add_argument(
+        "--model-override",
+        type=Path,
+        help="local merged composite checkpoint; required for trained Qwen3.5 adapters",
+    )
     parser.add_argument("--max-model-len", type=int, default=16_384)
     parser.add_argument("--gpu-memory-utilization", type=float, default=0.90)
     parser.add_argument("--max-num-seqs", type=int, default=128)
@@ -1525,6 +1539,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         enable_prefix_caching=args.enable_prefix_caching,
         enforce_eager=args.enforce_eager,
         adapter=args.adapter,
+        model_override=args.model_override,
     )
     sampling = SamplingConfig(
         thinking=args.thinking,

@@ -32,10 +32,11 @@
 
 ## Novelty Claim
 
-This is the first repository experiment in which the correct solver behavior is
-never trained: only an appended hypothetical reflection that names a plan receives
-loss, and capability is measured on a separate unreflected action branch sharing the
-same pre-action context.
+This is the first repository experiment in which the treatment arms never train the
+deployed answer: only an appended reflection or auxiliary branch that names a plan
+receives loss, and capability is measured on a separate unreflected action branch
+sharing the same pre-action context. A separately labeled positive control does train
+the action continuation and cannot support the treatment claim.
 
 ## Mechanism
 
@@ -48,12 +49,15 @@ are deployed on the action branch, where neither saw answer targets.
 
 ## Mechanism-Falsifying Control
 
-The load-bearing control is a within-family derangement of the reflection targets.
+The first load-bearing control is a within-family, within-optimizer-step derangement
+of the reflection targets.
 It keeps common contexts, reflection question, target format, number of plan steps,
-training schedule, and target-token distribution matched while making the plan wrong
-for each task. If correct and shuffled reflection tie, the branch carries no usable
-task-specific mechanism. A direct plan-plus-answer arm is only a training/ceiling
-positive control; it cannot validate counterfactual transfer.
+training schedule, and target-token distribution matched within every optimizer step
+while making the plan behaviorally wrong for each task. If correct and shuffled tie,
+the branch carries no usable task-specific mechanism. The second control replaces
+reflection framing with an ordinary correct auxiliary label while preserving the
+target and rendered prompt-token count. A direct action-branch plan-plus-answer arm is
+only a training/generalization ceiling; it cannot validate counterfactual transfer.
 
 ## Evidence Output
 
@@ -64,9 +68,8 @@ positive control; it cannot validate counterfactual transfer.
   optimizer accounting, model revision, seeds, adapter hashes, and external paths.
 - Capability result: paired family-level greedy and coverage@4/@16 on qualification
   and conditionally confirmation, with frozen and matched-sampling rows.
-- Conditional mechanism result: adapter-specific J readout beyond margin/logit/non-J
-  controls, followed by correct/wrong/random ablation. No causal stage opens from a
-  behavioral miss or readout-only pass.
+- Conditional successor only: a replicated behavior pass may license a separate
+  experiment with disjoint J-fit, J-confirmation, and causal-confirmation evidence.
 
 ## Decision
 
@@ -78,6 +81,7 @@ positive control; it cannot validate counterfactual transfer.
 - Model/GPU/training/Jacobian authorization: none until reviewed design and exact
   implementation are committed, pushed, and green.
 
-Reserved seeds are construction `73301`, shuffle `73319`, training `47/53`,
-qualification `88031`, and confirmation `88037`. They may not be changed after an
-observed model event.
+Reserved seeds are construction `73301`, shuffle `73319`, schedule `73323`, retention
+`73337`, training `47/53`, calibration `88027`, qualification `88031`, confirmation
+`88037`, and retention evaluation `88043`. They may not be changed after an observed
+model event.

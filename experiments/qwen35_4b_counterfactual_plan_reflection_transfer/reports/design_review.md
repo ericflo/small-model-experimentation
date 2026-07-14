@@ -36,8 +36,8 @@ tests:
 - a finite exact-depth catalog is enumerated before allocation;
 - globally behavior-equivalent and shallower-equivalent programs are excluded;
 - seven visible demonstrations uniquely identify the exact ordered plan;
-- full 216/144/144 construction succeeds with zero program or behavior collisions and
-  complete per-split operation-position coverage;
+- full 216/72/144/144 construction succeeds with zero program or behavior collisions
+  and complete per-split operation-position coverage;
 - state explosions are rejected, not leaked;
 - shuffled donor labels occupy separate supervision fields, preserve task truth, and
   are behaviorally wrong for the recipient;
@@ -47,3 +47,12 @@ tests:
 
 The verdict remains HOLD. No tokenizer/model/GPU/training/Jacobian stage may run until
 the remaining design contracts are implemented, committed, and independently reviewed.
+
+### Post-review implementation awaiting Review 2
+
+The working repair adds the previously missing non-reflective correct-label arm,
+real retention tasks, exact record and mask code, a frozen QLoRA recipe, within-step
+token parity, executable paired gates, explicit literal-reflection accounting, and
+two-seed confirmation rules. The J stage has been moved to a required separate future
+experiment. These changes are not self-authorizing; Review 2 must inspect their exact
+committed revision.

@@ -3,8 +3,10 @@
 **Status:** in-progress · since 2026-07-14 · adversarial HOLD; repaired full CPU construction passes, but no tokenizer/model/GPU/training event is authorized
 
 This experiment tests the paper's most actionable claim without relying on its
-consciousness framing: can supervision on what the model *would say if interrupted
-and asked to reflect* change what it does on the unreflected action branch?
+consciousness framing: can supervision on what the model would say on a later
+reflection branch change what it does on an unreflected action branch? The fixed
+`READY` seam makes this controlled branch transfer, not a claim about a literal
+interrupted internal action state.
 
 ## Research Program
 
@@ -25,7 +27,8 @@ and asked to reflect* change what it does on the unreflected action branch?
 Can correct, reflection-only SFT on fresh three-step machine-induction contexts
 increase held-out answer coverage on the same contexts' unreflected action branch,
 beating a within-family shuffled-reflection arm, frozen Qwen3.5-4B, and
-matched-candidate sample-more?
+matched-candidate sample-more? If it does, is the gain specific to reflection framing,
+or does an equally sized ordinary auxiliary plan-label branch work just as well?
 
 ## Hypothesis
 
@@ -34,9 +37,10 @@ name the ordered latent plan but not calculate or state the query answer. If the
 paper's verbal-disposition mechanism transfers to capability learning, gradients
 from that final reflection answer should make the correct plan easier to assemble in
 the shared pre-action context. The actual action answer is never a target for the
-reflection arms. A gain is not evidence for this mechanism unless correct reflection
-beats shuffled reflection under byte-identical contexts and matched training, and
-then replicates on a fresh confirmation split against sample-more.
+reflection or auxiliary-label arms. A gain is not task-specific transfer unless
+correct reflection beats shuffled reflection under byte-identical contexts and
+stepwise token-matched training. It is not reflection-specific unless it also beats
+the correct non-reflective auxiliary-label arm.
 
 ## Setup
 
@@ -50,20 +54,29 @@ then replicates on a fresh confirmation split against sample-more.
 - Common context: the user supplies the machine and says not to solve; the Assistant
   gives the fixed content-free response `READY`. The next turn branches.
 - Reflection branch: asks only for `PLAN: first -> second -> third`; its target never
-  contains the exact query-answer string. Loss is restricted to that final Assistant
-  turn.
+  contains the exact query-answer string. The target Assistant turn contains a short
+  plan statement inside the Qwen thinking channel and the same plan in the final
+  answer; prompt and fixed `READY` tokens are fully masked.
+- Auxiliary-label branch: replaces only `Pause before solving.` with
+  `Provide exact labels.` and uses the identical correct target. Its rendered prompt
+  token count must exactly match the reflection branch for every row before training.
 - Action branch: asks only for `ANSWER: <JSON outputs>`. Reflection-only training
   never receives loss on this branch or its answer.
-- Splits: proposed 216 train tasks and independent 144-task qualification and
-  144-task confirmation blocks, balanced across three families; composition and
-  behavioral signatures must be disjoint across all splits. Sizes remain
-  design-reviewable and no model event is authorized yet.
+- Splits: 216 train, 72 frozen calibration, 144 qualification, and 144 confirmation
+  tasks, balanced across three families, plus 48 untouched depth-1/2 retention tasks.
+  Programs and behavioral signatures are disjoint.
 - Baselines and controls: frozen action; frozen literal-reflection-then-action;
-  correct reflection; within-family shuffled reflection; a direct
-  plan-plus-answer SFT positive control; depth-1/2 retention; same-backend
-  sample-more at candidate counts 1, 4, and 16.
-- Primary deployable metric: paired exact query-answer accuracy and coverage at the
-  same candidate count and generation cap. Report every family separately.
+  correct reflection; within-family shuffled reflection; correct non-reflective plan
+  labeling; a direct action-branch plan-plus-answer SFT positive control; depth-1/2
+  retention; and same-backend sample-more.
+- Training parity: QLoRA rank 32/alpha 64/dropout 0.05 on all seven projection
+  modules, three epochs, batch 1 × accumulation 18, 36 final-only optimizer steps.
+  Every optimizer group contains six rows per family. Correct/shuffled derangement is
+  restricted inside that group, so target and forward-token totals must match within
+  every step, not merely in aggregate.
+- Primary deployable metric: paired exact full-query coverage@16 under identical vLLM
+  thinking/answer budgets. Candidate counts 1 and 4 are descriptive. Report every
+  family separately.
 - Hidden-label boundary: answers are procedural oracle labels used only for grading
   and direct positive control construction. No `benchmarks/` path may be read,
   imported, or used for training.
@@ -72,18 +85,25 @@ then replicates on a fresh confirmation split against sample-more.
 
 1. CPU construction must prove exact re-execution, exact-depth feasibility, all
    identity/collision rules, shuffled-target derangement, and answer omission.
-2. Adversarial design review must freeze transcript rendering, loss masks, token and
-   optimizer matching, attainable gates, adapter seeds, and same-backend evaluation.
+2. A tokenizer-only receipt must prove exact rendering, mask boundaries,
+   reflection/auxiliary prompt-length equality, and per-step correct/shuffled parity.
+   It remains unauthorized until the repaired design passes adversarial review.
 3. Frozen calibration must establish a parseable action interface and non-saturated
    headroom before training.
-4. A one-seed qualification may open a second training seed only if correct
-   reflection beats shuffled reflection and frozen sample-more on the untouched
-   qualification split. The fresh confirmation block remains sealed until then.
-5. Jacobian measurement and ablation remain sealed until the behavioral result
-   passes on both training seeds and confirmation. The J stage must beat slot margin,
-   logit/unembedding, equal-width non-J, and shuffled-label readouts before causal
-   ablation; causal mediation then requires correct-operation ablation to erase more
-   of the gain than wrong-operation and random same-norm controls.
+4. Screen seed 47 trains all four arms. The direct positive control must reach 0.50
+   coverage@16 and improve over frozen by 0.20. Correct reflection must beat shuffled
+   and frozen by at least 0.10 overall and 0.05 in every family, with paired-bootstrap
+   lower bounds above zero.
+5. Only that pass opens replication seed 53 for the three non-positive-control arms.
+   Both seeds must independently pass qualification before the fresh confirmation
+   split opens; both must independently pass confirmation. No seed selection or
+   ensembling is permitted. Retention must remain within the frozen margins.
+6. Reflection-specific interpretation additionally requires correct reflection to
+   beat the non-reflective auxiliary arm by 0.05 with a positive paired lower bound.
+   Otherwise any capability pass is generic auxiliary-plan transfer.
+7. A replicated behavioral pass may open a **new, result-separated experiment** with
+   fresh J-fit, J-confirmation, and causal-confirmation data. No J-space fitting or
+   ablation may reuse this experiment's behavioral gates.
 
 No generic within-`<think>` correctness scalar is being retried: that exact proposal
 was already tested and failed task-held-out controls in
@@ -109,15 +129,16 @@ No tokenizer, model, GPU, training, evaluation, or Jacobian command is authorize
 
 ## Results
 
-The repaired full model-free construction deterministically creates all 504 proposed
-tasks: 216 train, 144 qualification, and 144 confirmation. It has 504 unique ordered
-programs and 504 unique behavior signatures, zero cross-split collisions, unique
-visible exact plans, complete operation-by-position support in every full split, and
-zero exact answer strings in reflection targets. Shuffled supervision preserves
+The repaired full model-free construction deterministically creates 576 depth-three
+tasks plus 48 depth-1/2 retention tasks. It has 576 unique ordered depth-three
+programs and behavior signatures, zero cross-split collisions, unique visible exact
+plans, complete operation-by-position support in every full split, and zero exact
+answer strings in reflection targets. Shuffled supervision preserves
 immutable task truth and uses a within-family donor plan that is observably wrong on
-the recipient's demonstrations or queries. A Python audit hook denies file and
-directory access beneath the repository benchmark root. This repairs the first two
-adversarial blockers but does not lift the design HOLD.
+the recipient's demonstrations or queries. The construction also emits immutable
+four-arm record and optimizer-schedule hashes. A Python audit hook denies file and
+directory access beneath the repository benchmark root. This remains model-free and
+does not lift the adversarial HOLD.
 
 ## Interpretation
 
@@ -138,8 +159,22 @@ additional sampling. No scientific result exists yet.
 - `idea_intake.md`
 - `configs/default.yaml`
 - `src/taskgen.py`
+- `src/records.py`
+- `src/scoring.py`
+- `src/analyze.py`
 - `src/vllm_runner.py`
 - `scripts/run.py`
+- `scripts/tokenizer_receipt.py`
+- `scripts/train.py`
+- `scripts/merge_adapter.py`
+- `scripts/build_eval_inputs.py`
+- `scripts/score.py`
+- `scripts/analyze.py`
+- `scripts/calibration_gate.py`
 - `tests/test_taskgen.py`
+- `tests/test_records.py`
+- `tests/test_scoring.py`
+- `tests/test_analyze.py`
 - `tests/test_vllm_runner.py`
 - `reports/artifact_manifest.yaml`
+- `reports/power_analysis.md`

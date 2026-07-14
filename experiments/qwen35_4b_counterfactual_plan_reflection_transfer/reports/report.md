@@ -23,8 +23,9 @@ asks for the answer on a different next-turn branch.
 
 ## Results
 
-The full configured construction creates 504 unique exact-depth tasks: 216 train,
-144 qualification, and 144 confirmation. It has zero cross-split program or behavior
+The full configured construction creates 576 unique exact-depth-three tasks: 216
+train, 72 calibration, 144 qualification, and 144 confirmation, plus 48 exact-depth
+1/2 retention tasks. It has zero cross-split program or behavior
 collisions, unique exact plans on the seven visible demonstrations, complete
 operation-position coverage, and behaviorally wrong shuffled donors. See the README
 and adversarial design review for the receipt and remaining blockers. This is CPU
@@ -32,10 +33,11 @@ readiness evidence only.
 
 ## Controls
 
-The first review requires a matched non-reflective plan-label arm in addition to the
-within-family shuffled-reflection control, and requires exact direct-control,
-literal-reflection, retention, rendering, loss-mask, parity, and decision contracts.
-Those remaining contracts are not yet authorized.
+The repaired design now includes a rendered-token-matched non-reflective plan-label
+arm, a direct action-branch positive control, real retention data, exact target-only
+loss masks, within-optimizer-step derangement, a frozen QLoRA recipe, paired
+qualification/confirmation gates, and a specified literal-reflection diagnostic.
+Tokenizer and model execution remain unauthorized pending adversarial re-review.
 
 ## Oracle Versus Deployable Evidence
 

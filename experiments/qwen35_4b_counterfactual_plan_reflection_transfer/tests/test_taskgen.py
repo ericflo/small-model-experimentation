@@ -64,10 +64,10 @@ class ConstructionTests(unittest.TestCase):
         self.assertEqual(len(corpus["train"]), 8 * len(T.FAMILIES))
 
     def test_proposed_full_splits_are_feasible_and_position_complete(self) -> None:
-        counts = {"train": 72, "qualification": 48, "confirmation": 48}
+        counts = {"train": 72, "calibration": 24, "qualification": 48, "confirmation": 48}
         corpus = T.build_corpus(counts, 73_301)
         receipt = T.validate_corpus(corpus, counts)
-        self.assertEqual(receipt["unique_behavior_signatures"], 504)
+        self.assertEqual(receipt["unique_behavior_signatures"], 576)
         for rows in corpus.values():
             for family in T.FAMILIES:
                 family_rows = [row for row in rows if row["family"] == family.name]
@@ -82,6 +82,22 @@ class ConstructionTests(unittest.TestCase):
                 self.assertTrue(
                     all(row["visible_depth3_candidate_count"] == 1 for row in family_rows)
                 )
+
+    def test_retention_depths_are_real_and_identifiable(self) -> None:
+        retention = T.build_retention_corpus(count_per_family_per_depth=8, seed=73_337)
+        receipt = T.validate_retention_corpus(retention, count_per_family_per_depth=8)
+        self.assertEqual(receipt["tasks"], 48)
+        self.assertEqual(receipt["depth_1"], 24)
+        self.assertEqual(receipt["depth_2"], 24)
+        main_signatures = {
+            (row["family"], row["behavior_signature_sha256"])
+            for rows in self.corpus.values()
+            for row in rows
+        }
+        retention_signatures = {
+            (row["family"], row["behavior_signature_sha256"]) for row in retention
+        }
+        self.assertTrue(main_signatures.isdisjoint(retention_signatures))
 
 
 if __name__ == "__main__":

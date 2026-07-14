@@ -43,7 +43,14 @@ def _install_benchmark_firewall() -> None:
 
 _install_benchmark_firewall()
 
-from taskgen import build_corpus, build_reflection_arms, validate_corpus  # noqa: E402
+from taskgen import (  # noqa: E402
+    build_corpus,
+    build_reflection_arms,
+    build_retention_corpus,
+    validate_corpus,
+    validate_retention_corpus,
+)
+from records import build_training_records  # noqa: E402
 
 
 def _digest(value: object) -> str:
@@ -52,11 +59,27 @@ def _digest(value: object) -> str:
 
 
 def construct(
-    counts: dict[str, int], seed: int, shuffle_seed: int, mode: str
+    counts: dict[str, int],
+    retention_per_family_per_depth: int,
+    seed: int,
+    shuffle_seed: int,
+    schedule_seed: int,
+    per_family_per_optimizer_group: int,
+    mode: str,
 ) -> dict[str, object]:
     tasks = build_corpus(counts=counts, seed=seed)
     validation = validate_corpus(tasks, counts)
+    retention = build_retention_corpus(retention_per_family_per_depth, seed + 36)
+    retention_validation = validate_retention_corpus(
+        retention, retention_per_family_per_depth
+    )
     arms = build_reflection_arms(tasks["train"], seed=shuffle_seed)
+    training_records, training_receipt = build_training_records(
+        tasks["train"],
+        shuffle_seed=shuffle_seed,
+        schedule_seed=schedule_seed,
+        per_family_per_step=per_family_per_optimizer_group,
+    )
 
     for correct, shuffled in zip(arms["reflection_correct"], arms["reflection_shuffled"]):
         if correct["common_messages"] != shuffled["common_messages"]:
@@ -74,7 +97,10 @@ def construct(
         "schema_version": 1,
         "experiment_id": "qwen35_4b_counterfactual_plan_reflection_transfer",
         "mode": mode,
-        "counts": {split: len(rows) for split, rows in tasks.items()},
+        "counts": {
+            **{split: len(rows) for split, rows in tasks.items()},
+            "retention": len(retention),
+        },
         "families": validation["families"],
         "unique_task_ids": validation["unique_task_ids"],
         "unique_compositions": validation["unique_compositions"],
@@ -83,8 +109,11 @@ def construct(
         "cross_split_behavior_collisions": validation["cross_split_behavior_collisions"],
         "shuffled_derangement_failures": 0,
         "exact_answer_in_reflection_targets": validation["exact_answer_in_reflection_targets"],
-        "corpus_sha256": _digest(tasks),
+        "retention": retention_validation,
+        "corpus_sha256": _digest({"depth_3": tasks, "retention": retention}),
         "arms_sha256": _digest(arms),
+        "training_records_sha256": _digest(training_records),
+        "training_record_receipt": training_receipt,
         "benchmark_firewall": "python_audit_hook_open_listdir_scandir",
         "model_calls": 0,
         "gpu_events": 0,
@@ -119,13 +148,22 @@ def main() -> int:
         if args.smoke
         else {
             split: int(construction["per_family"][split])
-            for split in ("train", "qualification", "confirmation")
+            for split in ("train", "calibration", "qualification", "confirmation")
         }
     )
     result = construct(
         counts=counts,
+        retention_per_family_per_depth=(
+            1 if args.smoke else int(construction["per_family"]["retention_per_family_per_depth"])
+        ),
         seed=int(construction["seed"]),
         shuffle_seed=int(construction["shuffle_seed"]),
+        schedule_seed=int(construction["schedule_seed"]),
+        per_family_per_optimizer_group=(
+            2
+            if args.smoke
+            else int(config["training"]["schedule"]["per_family_per_optimizer_group"])
+        ),
         mode="model_free_smoke" if args.smoke else "model_free_full_construction",
     )
     print(json.dumps(result, indent=2, sort_keys=True))
