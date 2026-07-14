@@ -78,3 +78,24 @@ Next: publish and CI-verify this control checkpoint, then train the frozen candi
 
 Next: publish and CI-verify this candidate checkpoint, then consume the single frozen
 local seed 88,007 over parent, replay control, and candidate together.
+
+## 2026-07-14 — Fresh local negative
+
+- Began only after candidate commit `9e34c675` was pushed to `main` and both GitHub
+  workflows completed successfully.
+- Consumed the single registered experiment-owned seed 88,007 over parent, active
+  replay, and scaffold in one greedy Transformers process at a 1,024-token cap.
+- Parent scored 18/26 correct, 23/26 parsed, and three caps; replay scored 16/26,
+  23/26, and three; scaffold scored 16/26, 23/26, and three.
+- Scaffold was 0/2 execute, 0/2 induct, and 0/2 probe. It failed accuracy, parse,
+  cap, execute, and induction checks; route abstention alone passed. Promotion is
+  empty and the harness stopped nonzero as registered.
+- Preserved local/gate/promotion receipts. Full local receipt SHA-256 is
+  `156acd37...acdb`; promotion SHA-256 is `7e1fd417...f1c1`.
+- Post-decision paired forensics show 2 wins/4 losses versus parent and 3/3 versus
+  replay. Candidate mean output grew to 520.5 tokens, and both execute failures
+  computed the correct state before running to cap without a parsed answer.
+- No merge ran. Aggregate seed 78,137 remains sealed and no benchmark data was read.
+
+Next: publish this completed negative, then create a fresh result-separated successor
+for natural-language variable-depth state execution and hypothesis scoring.

@@ -34,5 +34,7 @@ notes: >-
   fresh local seed 88007, and conditional aggregate seed 78137 are frozen. Replay
   training completed at git 603b8107 with receipt 5b293eb6...5a66, loss 0.4215,
   and zero skips. Candidate training completed at git b8f11db6 with receipt
-  13ba8897...6dd0, loss 1.492, and zero skips. No merge, local receipt, or benchmark
-  receipt exists yet.
+  13ba8897...6dd0, loss 1.492, and zero skips. Fresh local receipt
+  156acd37...acdb and promotion receipt 7e1fd417...f1c1 record an empty promotion:
+  scaffold scored 16/26, 23/26 parsed, and three caps, with 0/2 execute and 0/2
+  induction. No merge or benchmark receipt exists; seed 78137 remains sealed.

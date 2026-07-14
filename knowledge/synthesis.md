@@ -616,6 +616,21 @@ redistributes parent task wins. Do not tune close weight again. The next mechani
 must couple bounded computation with canonical answer commitment under a fresh,
 unchanged gate; broad transfer remains unmeasured.
 
+**Separately scored canonical search substates still do not transfer to the deployed
+execution interface (2026-07-14, local mechanism negative).** The result-separated
+[qwen35_4b_universal_search_scaffold_token_match](../experiments/qwen35_4b_universal_search_scaffold_token_match/reports/report.md)
+replaces 80 exact-token-matched replay rows with 16 each of apply, fit, reject,
+execute, and two-branch search lessons. Fresh seed 88007 gives parent/replay/scaffold
+18/16/16 correct, with all three at 23/26 parse and three caps. The scaffold is 0/2
+execute, 0/2 induct, and 0/2 probe; promotion is empty and seed 78137 stays sealed.
+The mechanism anatomy is sharper than the aggregate null: both execute traces reach
+the correct final state but run to cap without answering, while probe accuracy falls
+from 2/2 in both controls to 0/2. **Canonical two-operation decomposition neither
+installs commitment nor preserves independent simulation/scoring at the
+natural-language variable-depth interface.** The next trial must change that
+interface—explicit variable-depth state tables, separately verified hypothesis
+scores, and answer-only commit—not add another dose of the failed scaffold.
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.

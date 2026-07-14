@@ -3,8 +3,8 @@
 ## Summary
 
 The design is frozen after successful CPU feasibility. The same-parent exact-token
-replay control and staged-search candidate have both trained successfully; all
-capability evaluation remains pending. No capability result exists.
+replay control and staged-search candidate both trained successfully. The scaffold
+then failed the single fresh local mechanism gate; no merge or benchmark event ran.
 
 ## Research Program Fit
 
@@ -35,7 +35,14 @@ The scaffold candidate then completed 40/40 updates over 320/320 rows with zero
 skips in 291.4 seconds. Final train loss was 1.492. Its adapter weights/config
 SHA-256 are `e7957d90...84618` / `22859c76...2c4ce`; receipt/log SHA-256 are
 `13ba8897...6dd0` / `ccaffa7b...99c1`. The losses are not a capability comparison
-because the targets differ. No local evaluation, merge, or benchmark event has run.
+because the targets differ.
+
+Fresh paired local seed 88,007 gave parent 18/26 correct, 23/26 parsed, and three
+cap contacts; replay 16/26, 23/26, and three; scaffold 16/26, 23/26, and three.
+The candidate was 0/2 on execute, 0/2 on induction, and 0/2 on probe. It failed five
+of six registered checks—accuracy, parse, cap, execute, and induction—and passed
+only route abstention. Promotion is empty, so no checkpoint was merged and aggregate
+seed 78,137 remains sealed.
 
 ## Controls
 
@@ -54,20 +61,30 @@ aggregate-only firewall.
 
 ## Interpretation
 
-The intervention is now executable and causally sharper than another generic dose:
-only the 120 variable slots differ. Exact forward compute does not equalize target
-composition—the candidate has more prompt/answer and fewer thought tokens—and the
-full-search targets jump from one known-dead branch to the true branch. Those are
-registered interpretation limits, not hidden after-the-fact caveats.
+The intervention is executable but fails its intended mechanism. Against parent,
+candidate has two paired wins and four losses; against replay, three wins and three
+losses. Mean generation length is 520.5 tokens versus 434.2 parent and 471.6 replay.
+Both candidate execute failures compute the correct final state in visible thought
+but continue to the cap without an answer. Both probe cases regress from correct in
+both controls to wrong in candidate, and both induction cases are wrong. The package
+therefore neither commits after verified execution nor improves branch simulation.
+
+The post-result diagnosis is an interface mismatch: training uses exactly two
+canonical-coded operations and a two-branch demonstration, while the local executor
+uses natural-language procedures of variable depth and probe selection requires
+independent simulation/scoring. This does not justify tuning the observed arm. It
+justifies a new result-separated natural-language state-table/compiler mechanism.
 
 ## Next Experiments
 
-Publish and verify the completed candidate, then run the single fresh local event
-over parent, replay control, and scaffold candidate. Consume the paired aggregate
-pilot only if the sole candidate passes every frozen local check.
+Preserve and publish this negative. Start a new experiment with fresh seeds if the
+next natural-language state-table/compiler mechanism survives idea intake and design
+review. Do not lower the gate, reuse seed 88,007, merge this adapter, or consume
+aggregate seed 78,137.
 
 ## Artifact Manifest
 
 The parent, frozen data identities, commands, and future external-artifact locations
-are recorded in `artifact_manifest.yaml`. Both adapters exist externally; no local,
-merge, or benchmark artifact exists yet.
+are recorded in `artifact_manifest.yaml`. Both adapters exist externally; the full
+local receipt and empty promotion receipt are committed. No merge or benchmark
+artifact exists.

@@ -13961,45 +13961,45 @@
    ]
   },
   "qwen35_4b_universal_search_scaffold_token_match": {
-    "verdict_tag": "Staged-search design is frozen and feasible",
+    "verdict_tag": "Staged search fails its local mechanism gate",
    "concept_primer": "Earlier lessons showed a complete worked search trace, but the model still wandered among candidates and ran out of room. This design turns the missing intermediate moves—apply, fit, reject, and execute—into separately graded practice before recombining them.",
    "plain_question": "Can teaching each step of a bounded two-operation search help the model solve and finish fresh abstract tasks better than another equal replay update?",
-    "plain_answer": "CPU feasibility succeeded, and both exact-token arms trained successfully on all 320 rows with zero skips and 40 updates. The fresh paired local capability gate remains pending.",
-   "why_it_matters": "This tests a different causal idea from heavier stop-marker loss. If it works, the gain comes from making search substates reusable and composable rather than from showing another full answer narration or spending more compute.",
-   "verdict_tone": "neutral",
+    "plain_answer": "No. On 26 fresh paired cases, the staged-search model tied replay at 16 correct and trailed its parent at 18. All three parsed 23 answers and hit the limit three times; the candidate solved none of four execute/induct cases and neither probe-selection case.",
+   "why_it_matters": "Separately grading search substates was not enough to make them reusable. The candidate often reached a correct execution state but failed to commit, while its hypothesis simulation regressed. The next mechanism must match the natural-language variable-depth deployment interface rather than add more canonical two-operation lessons.",
+   "verdict_tone": "negative",
    "key_numbers": [
     {
-        "label": "Frozen staged lessons",
-     "value": "80",
-     "sub": "16 rows for each of five executable search stages"
+        "label": "Candidate local accuracy",
+     "value": "16 of 26",
+     "sub": "ties replay and trails the parent at 18"
     },
     {
-        "label": "Exact rows per arm",
-     "value": "320",
-        "sub": "candidate and replay control are token matched"
+        "label": "Readable answers",
+     "value": "23 of 26",
+        "sub": "identical across all arms; one short of the gate"
       },
       {
-        "label": "Forward tokens per arm",
-        "value": "286,814",
-        "sub": "zero skipped rows at max length 4,096"
+        "label": "Execute plus induct",
+        "value": "0 of 4",
+        "sub": "the parent solves two of four"
     },
     {
-     "label": "Fresh local seed",
-     "value": "88,007",
-     "sub": "the prior local seeds are retired"
+     "label": "Probe selection",
+     "value": "0 of 2",
+     "sub": "both controls solve both cases"
     },
     {
-     "label": "Model runs so far",
-     "value": "two",
-        "sub": "both arms complete; no capability evaluation yet"
+     "label": "Broad events consumed",
+     "value": "zero",
+        "sub": "promotion was empty; seed 78,137 stays sealed"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Two equal continuations isolate staged search lessons",
-      "chart_read": "Both frozen bars total 320 rows and exactly 286,814 forward tokens. Each shares 200 replay rows; replay-only adds 120 replay rows, while the candidate substitutes 80 staged-search lessons and keeps 40 matched replay fillers.",
-     "chart_takeaway": "Equal row, token, and update budgets make lesson structure—not extra training—the intended difference."
+     "chart_plain_title": "Staged search ties replay and trails the parent locally",
+      "chart_read": "The parent solves 18 of 26 fresh cases; replay and scaffold solve 16. All three parse 23 answers and finish within the cap on 23 cases, so the scaffold does not improve the registered emission seam.",
+     "chart_takeaway": "The candidate fails five gates and loses all execute, induction, and probe-selection cases; broad evaluation remains sealed."
     }
    ]
   }

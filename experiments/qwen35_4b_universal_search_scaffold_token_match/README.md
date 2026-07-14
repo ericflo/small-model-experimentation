@@ -1,6 +1,6 @@
 # Search-Scaffold Universal Curriculum
 
-**Status:** in-progress · since 2026-07-14 · both arms trained; fresh local gate pending
+**Status:** finished · 2026-07-14 · scaffold failed the fresh local gate; benchmark sealed
 
 This experiment tests whether independently supervised, executable search substates
 compose into a bounded general reasoning procedure better than an exact-token replay
@@ -95,20 +95,33 @@ loss is 0.4215; adapter weights/config SHA-256 are `10155232...fc538` /
 The scaffold candidate then trained independently on all 320 rows with zero skips and
 40/40 updates. Its final loss is 1.492; adapter weights/config SHA-256 are
 `e7957d90...84618` / `22859c76...2c4ce`. Losses are not compared across the different
-target distributions. No local capability evaluation, merge, or benchmark event has
-run.
+target distributions and carry no capability interpretation.
+
+Fresh paired local seed 88,007 produced:
+
+- `close_xi_parent`: 18/26 correct, 23/26 parsed, 3 cap contacts;
+- `replay_after_close`: 16/26 correct, 23/26 parsed, 3 cap contacts;
+- `scaffold_after_close`: 16/26 correct, 23/26 parsed, 3 cap contacts.
+
+The candidate scored 0/2 on execute, 0/2 on induct, and 0/2 on probe, versus parent
+1/2, 1/2, and 2/2. It failed accuracy ≥0.65, parse ≥0.90, caps ≤2, execute ≥0.50,
+and induct ≥0.50; only the route-abstention check passed. Promotion is empty. No
+merge occurred and conditional aggregate seed 78,137 remains sealed.
 
 ## Interpretation
 
-The design is feasible and passed adversarial review after explicitly narrowing the
-claim: the full lesson demonstrates one rejected and one successful branch, not
-exhaustive enumeration of the operation universe. Any gain is evidence for the
-five-stage scaffold package, not proof that a general search algorithm was learned.
+The registered scaffold does not install its target behavior. Relative to the parent
+it gains one trace and one repair case but loses one execute, one induct, and both
+probe cases; relative to replay it is a 3-win/3-loss redistribution. Mean output grows
+to 520.5 tokens (parent 434.2; replay 471.6), and both execute failures visibly reach
+the correct final state before over-explaining to the cap. Canonical two-operation
+scaffolds did not transfer to variable-depth natural-language execution or hypothesis
+discrimination. Do not repeat this interface or consume the sealed benchmark seed.
 
 ## Knowledgebase Update
 
-- Program evidence: unchanged until a result exists.
-- Program backlog: this result-separated staged-search successor is active.
+- Program evidence: staged search recorded as a local mechanism negative.
+- Program backlog: require a fresh natural-language state-table/compiler successor.
 - Claim ledger: unchanged.
 
 ## Artifacts
@@ -121,4 +134,7 @@ five-stage scaffold package, not proof that a general search algorithm was learn
 - `analysis/`
 - `reports/`
 - `reports/artifact_manifest.yaml`
+- `analysis/local_forensics.md`
+- `runs/local/seed88007.json`
+- `runs/local/seed88007_promotion.json`
 - `idea_intake.md`

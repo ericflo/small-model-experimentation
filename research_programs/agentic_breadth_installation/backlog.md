@@ -156,7 +156,7 @@
   control, and a prospective formatting/termination audit. It must pass the unchanged
   local gate before merge, then beat replay continuation on every benchmark family
   and matched-compute sampling before any universal claim.
-- Active design-frozen experiment: `qwen35_4b_universal_search_scaffold_token_match` decomposes
+- Completed staged-search mechanism negative: `qwen35_4b_universal_search_scaffold_token_match` decomposed
   two-step search into five independently scored executable lesson stages before a
   bounded full-search ledger. It starts from the authenticated
   close-weight near-miss, trains a new same-parent replay continuation, and reserves
@@ -164,9 +164,12 @@
   adversarial review passed: both arms have 320 rows, exactly 286814 forward tokens,
   zero skips, 40 updates, and 200 identical replay positions. Train replay first,
   publish/verify it, then train the sole scaffold candidate; local failure seals the
-  benchmark. Replay (loss 0.4215, weights `10155232...fc538`) and scaffold (loss
-  1.492, weights `e7957d90...84618`) training both completed at 320/320 rows and zero
-  skips. Publish/verify the candidate, then run the single frozen local event.
+  benchmark. On fresh seed 88007, parent/replay/scaffold scored 18/16/16 correct,
+  all parsed 23/26, and all had three caps. Scaffold was 0/2 execute, 0/2 induct,
+  and 0/2 probe, failed five gates, and seed 78137 remains sealed. Do not repeat
+  canonical two-op/two-branch lessons. A successor must use a new directory and fresh
+  seeds to test variable-depth natural-language state tables plus independent
+  hypothesis simulation/scoring and verified answer commitment.
 
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.

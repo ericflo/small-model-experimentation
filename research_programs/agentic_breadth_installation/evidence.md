@@ -589,3 +589,28 @@ Its parent-relative accuracy tie is a three-kind-for-three-kind redistribution, 
 a generalized install. Retire close-span dose tuning. A successor needs a different
 bounded-computation/canonical-answer commitment mechanism, fresh seeds, an active
 replay control, and the unchanged local gate before any broad evaluation.
+
+## qwen35_4b_universal_search_scaffold_token_match (2026-07-14 — Staged-search mechanism negative)
+
+Two short continuations started independently from the authenticated `close_xi`
+near-miss. The candidate replaced 80 of 120 variable replay rows with 16 each of
+executable apply, fit, reject, execute, and two-branch search lessons. The active
+control used replay only. Both arms had 320 rows, exactly 286,814 forward tokens,
+40 effective-batch-8 updates, ordinary thought/close weights, and zero skips; 200
+replay slots were byte-identical.
+
+Fresh local seed 88007 rejected the scaffold before merge or benchmark. Parent,
+replay, and scaffold scored 18/26, 16/26, and 16/26 correct; every arm parsed 23/26
+and contacted the cap three times. Scaffold was 0/2 execute, 0/2 induct, and 0/2
+probe, versus parent 1/2, 1/2, and 2/2. It failed accuracy, parse, cap, execute, and
+induct checks; promotion was empty and aggregate seed 78137 remained sealed.
+
+Read: separately supervising canonical two-operation search substates does not make
+them reusable at the deployment interface. Scaffold gains two cases and loses four
+versus parent; mean output lengthens to 520.5 tokens from 434.2. On both execute
+misses it computes the correct final state in visible thought but over-explains to
+the cap, while both probe regressions show damaged independent simulation/scoring.
+Do not add more canonical two-op/two-branch lessons. A successor must be
+result-separated and prospectively test variable-depth natural-language state tables,
+hypothesis scoring, and verified answer commitment under fresh seeds and exact-token
+replay control.

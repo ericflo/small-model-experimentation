@@ -11,4 +11,4 @@ optimizer_steps: 40
 shared_position_aligned_replay_rows: 200
 scaffold_rows: 80
 replay_filler_rows: 40
-status: both_arms_trained_local_pending
+status: completed_local_negative_benchmark_sealed
