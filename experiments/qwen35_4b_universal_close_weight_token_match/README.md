@@ -1,6 +1,6 @@
 # Close-Weighted Universal Commit Seam
 
-**Status:** in-progress · since 2026-07-13 · all three arms trained; paired local evaluation remains
+**Status:** finished · 2026-07-14 · no treatment passed the fresh local gate; benchmark remained sealed
 
 ## Research program
 
@@ -88,25 +88,43 @@ All three arms completed their registered 40/40 updates over 320 rows and 286,81
 forward tokens with zero skips. Replay, standard, and close train losses were
 0.4477, 0.6882, and 0.6822; wrapper wall times were 303.44, 302.15, and 287.13
 seconds. Their adapter weights hashes are `ca5601cd...59d78`,
-`271569fd...3569c`, and `16e9dc75...3c179`. All model evaluation remains pending;
-the small standard/close loss difference is not behavioral evidence.
+`271569fd...3569c`, and `16e9dc75...3c179`.
 
-The outcome-free feasibility audit still passes: target rows have zero overlap with
-the parent designed160 rows, both unique data streams encode without skips, and the
-replay variable block exactly matches the targeted block.
+Fresh paired local seed 88,006 produced:
+
+- immediate `designed160` parent: 16/26 accuracy, 20/26 parsed, 6 cap contacts;
+- `replay_repeat`: 14/26 accuracy, 18/26 parsed, 8 cap contacts;
+- `standard_xi`: 15/26 accuracy, 23/26 parsed, 3 cap contacts;
+- `close_xi`: 16/26 accuracy, 23/26 parsed, 3 cap contacts.
+
+Every arm had zero repeated feasible-route abstentions. Neither treatment passed:
+`standard_xi` failed all three numeric gates, while `close_xi` missed accuracy by
+one correct case, parse by one parsed case, and the cap ceiling by one contact. The
+promotion receipt is empty. No checkpoint was merged, and conditional aggregate
+seed 78,136 remains sealed.
 
 ## Interpretation
 
-None yet. A `standard_xi` improvement would support targeted-data continuation but
-not close weighting. A `close_xi` advantage over standard would isolate autonomous
-close loss placement. Failure of both while replay is stable would retire this small
-close-weight intervention and motivate a different termination mechanism rather than
-another generic dose.
+The fresh target continuation, not close reweighting, accounts for the emission
+improvement: `standard_xi` and `close_xi` have identical 23/26 parse and three-cap
+results. Close weighting adds one correct abstention case over ordinary weighting,
+but both score 0/4 on the targeted execute/induct cases and the close arm only ties
+the immediate parent's 16/26 accuracy. Relative to that parent it trades three
+task-kind wins for three losses while shortening output and improving parseability;
+this is redistribution, not a generalized install.
+
+The isolated 0.2→1.0 natural-close loss change therefore fails its mechanism test.
+Do not repeat another close-weight dose or spend the sealed aggregate seed. A
+successor needs a different, prospectively frozen interface mechanism—one that
+jointly teaches bounded computation and canonical answer commitment—under a fresh
+local seed and the same active replay discipline.
 
 ## Knowledgebase update
 
-- Program backlog: this is the active result-separated termination successor.
-- Program evidence and synthesis: unchanged until a result exists.
+- Program evidence: close weighting recorded as a local mechanism negative.
+- Program backlog: retire close-span reweighting and require a different bounded
+  commit mechanism in a new experiment.
+- Shared synthesis: target data improved emission, but close weighting did not.
 - Claim ledger: unchanged; no result or universal-feature claim exists.
 
 ## Artifacts
@@ -117,3 +135,5 @@ another generic dose.
 - `scripts/train_think_close.py`: separately weighted autonomous close span.
 - `reports/design_review.md` and `reports/preregistration.md`: frozen threats and gates.
 - `reports/artifact_manifest.yaml`: external parent and planned trained artifacts.
+- `runs/local/seed88006.json`: complete experiment-owned paired local receipt.
+- `runs/local/seed88006_promotion.json`: empty promotion decision; benchmark sealed.

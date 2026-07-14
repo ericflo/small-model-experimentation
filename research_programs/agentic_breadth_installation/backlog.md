@@ -141,18 +141,21 @@
   18/26 to 23/26 parse, and 9 to 3 cap contacts, but missed the parse and cap gates
   by one case each. The 240-row arm reversed the accuracy gain and worsened both
   emission metrics. No arm advanced; benchmark seed 78135 remains sealed.
-- Active result-separated successor:
-  `qwen35_4b_universal_close_weight_token_match` is design-frozen before GPU work.
-  From the authenticated designed160 parent it compares exact-token replay, ordinary
-  fresh execute/induct continuation, and byte-identical continuation whose natural
-  close span is weighted like the answer. Every arm has 320 rows, 286,814 forward
-  tokens, and 40 updates; local seed 88006 and conditional aggregate seed 78136 are
-  fresh. All three arms have now completed 40/40 updates with zero skips; paired
-  local evaluation remains pending. Do not add another
-  representative dose, lower the observed gates, reuse
-  seed 88005, or consume sealed seeds 78134/78135. No comparative result exists yet. Any arm that
-  passes must still beat replay continuation on every family and matched-compute
-  sampling before a universal claim.
+- Completed close-weight mechanism negative:
+  `qwen35_4b_universal_close_weight_token_match` compared exact-token replay,
+  ordinary fresh execute/induct continuation, and byte-identical continuation with
+  0.2→1.0 natural-close loss. Fresh seed 88006 scored parent 16/26 accuracy,
+  20/26 parse, 6 caps; replay 14/26, 18/26, 8; standard 15/26, 23/26, 3; and close
+  16/26, 23/26, 3. No treatment passed, and seed 78136 remains sealed. Retire
+  close-span dose tuning: it did not improve parse/cap over ordinary training and
+  both target arms remained 0/4 on execute/induct. Do not lower the gate, reuse
+  seeds 88005/88006, or consume sealed seeds 78134/78135/78136.
+- Next result-separated universal-curriculum experiment: test a different
+  bounded-computation plus canonical-answer commitment mechanism from an
+  authenticated parent, with fresh procedural seeds, an exact-exposure active replay
+  control, and a prospective formatting/termination audit. It must pass the unchanged
+  local gate before merge, then beat replay continuation on every benchmark family
+  and matched-compute sampling before any universal claim.
 
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.

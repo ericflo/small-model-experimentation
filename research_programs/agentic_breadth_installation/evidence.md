@@ -564,3 +564,28 @@ behavior, so further dose interpolation is not the warranted next move. A new
 experiment should hold the 160-row capability mix fixed and isolate concise answer
 commitment or termination with an exact-token active control and fresh local seed.
 This result contains no broad-retention evidence and does not license a lower gate.
+
+## qwen35_4b_universal_close_weight_token_match (2026-07-14 — Close-weight mechanism negative)
+
+Three short exact-token continuations started from the authenticated `designed160`
+adapter. All received 320 rows, 286,814 forward tokens, 40 effective-batch-8
+updates, and zero skips. The active control replayed only incumbent data. The two
+target arms shared byte-identical fresh execute/induct rows; their sole assigned-loss
+contrast was weight 0.2 versus 1.0 on the natural `</think>` span.
+
+Fresh local seed 88006 rejected both treatments before merge or benchmark. The
+immediate parent scored 16/26 accuracy, 20/26 parse, and six cap contacts; replay
+repeat scored 14/26, 18/26, and eight. Ordinary target training scored 15/26,
+23/26, and three, while close-weighted training scored 16/26, 23/26, and three.
+All arms passed the route-abstention check. Close weighting missed each frozen
+numeric bar by one case/contact, promotion was empty, and aggregate seed 78136
+remained sealed.
+
+Read: fresh target data improves emission relative to parent and replay, but the
+byte-identical contrast rejects higher close-span loss as the cause. Ordinary and
+close-weighted arms have identical parse and cap metrics, both remain 0/4 on the
+targeted execute/induct cases, and close only adds one non-target abstention win.
+Its parent-relative accuracy tie is a three-kind-for-three-kind redistribution, not
+a generalized install. Retire close-span dose tuning. A successor needs a different
+bounded-computation/canonical-answer commitment mechanism, fresh seeds, an active
+replay control, and the unchanged local gate before any broad evaluation.

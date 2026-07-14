@@ -61,3 +61,27 @@ Next: publish this standard receipt checkpoint, then train byte-identical `close
 
 Next: publish this final training checkpoint, then run the preregistered paired local
 evaluation exactly once.
+
+## 2026-07-14 — Fresh local gate negative
+
+- Published the all-arms checkpoint `755cfad4` to `main`; repository validation and
+  site publication both passed on GitHub before local evaluation began.
+- Ran the single registered paired seed 88,006 event across the immediate parent,
+  replay control, ordinary target arm, and close-weighted target arm at greedy decode
+  and 1,024 generated tokens.
+- Parent scored 16/26 accuracy, 20/26 parse, and 6 cap contacts. Replay scored
+  14/26, 18/26, and 8. Standard scored 15/26, 23/26, and 3. Close scored 16/26,
+  23/26, and 3. Every arm had zero repeated feasible-route abstentions.
+- Both treatment arms failed the frozen accuracy ≥0.65, parse ≥0.90, and cap ≤2
+  gates. Close weighting missed all three numeric bars by one case/contact and left
+  execute/induct at 0/4, so the promotion list is empty.
+- Full local receipt: `runs/local/seed88006.json`, SHA-256
+  `e51eec228a598b31f6fb54a1b04eb55cb43b2f841023b3c4865fdc78db2c436c`.
+  Promotion receipt: `runs/local/seed88006_promotion.json`, SHA-256
+  `e7b3cd56ba99b505c8b79b2495dbdb3b25e1368a1563de62d3738ce45aa4c060`.
+- Gate receipt hashes: replay `d0e8aa6e...39279`, standard
+  `dc51cc96...af83b`, and close `505e854c...fe29`.
+- No merge or benchmark event ran; conditional aggregate seed 78,136 remains sealed.
+
+Next: publish this negative result, then create a new result-separated successor
+with a different bounded-computation/canonical-commit mechanism and fresh seeds.

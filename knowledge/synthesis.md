@@ -590,6 +590,21 @@ and target the remaining commit/termination seam under a fresh exact-token contr
 This is local mechanism evidence only; broad retention and universality remain
 unmeasured.
 
+**Higher autonomous-close loss does not cross that seam (2026-07-14, local
+mechanism negative).** The result-separated
+[qwen35_4b_universal_close_weight_token_match](../experiments/qwen35_4b_universal_close_weight_token_match/reports/report.md)
+starts from the authenticated 160-row near-miss and compares replay, ordinary fresh
+execute/induct training, and byte-identical training that changes only the natural
+`</think>` span from weight 0.2 to 1.0. Fresh seed 88006 gives parent
+16/26 accuracy, 20/26 parse, and six caps; replay 14/26, 18/26, and eight;
+ordinary target 15/26, 23/26, and three; close-weighted target 16/26, 23/26,
+and three. Promotion is empty and seed 78136 remains sealed. The paired treatment
+contrast is decisive at this dose: **fresh target data improves emission, but close
+weighting adds no parse or cap benefit**, leaves execute/induct at 0/4, and only
+redistributes parent task wins. Do not tune close weight again. The next mechanism
+must couple bounded computation with canonical answer commitment under a fresh,
+unchanged gate; broad transfer remains unmeasured.
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.

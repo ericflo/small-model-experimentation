@@ -49,4 +49,11 @@ notes: >-
   receipt runs/training/standard_xi.json (9ed47653...af8b4) and normalized log
   runs/training/standard_xi.log (73c55663...76294). close_xi completed with receipt
   runs/training/close_xi.json (b18df864...3195a) and normalized log
-  runs/training/close_xi.log (66c00e2b...42308). All evaluation remains pending.
+  runs/training/close_xi.log (66c00e2b...42308). Fresh paired local seed 88006
+  completed with receipt runs/local/seed88006.json
+  (e51eec228a598b31f6fb54a1b04eb55cb43b2f841023b3c4865fdc78db2c436c)
+  and empty-promotion receipt runs/local/seed88006_promotion.json
+  (e7b3cd56ba99b505c8b79b2495dbdb3b25e1368a1563de62d3738ce45aa4c060).
+  Gate receipts are replay d0e8aa6e...39279, standard dc51cc96...af83b, and
+  close 505e854c...fe29. No merged checkpoint was created and aggregate seed
+  78136 remains sealed.
