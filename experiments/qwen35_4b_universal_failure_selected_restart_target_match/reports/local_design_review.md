@@ -108,3 +108,15 @@ weakness cannot independently promote the candidate.
 No remaining issue permits outcome-aware adjustment. After this checkpoint is
 published and both workflows are green, exactly `--stage merge-control` is
 authorized.
+
+## Post-control receipt
+
+The authorized replay-control merge later completed from pushed-green commit
+`3b8b46aa`: 128/128 nonzero modules at scale 2, full weight SHA-256
+`e48ed4a03ba8d040c4007f115af5346df51b886566a5798250586a10e989ae17`, and
+complete-tree SHA-256
+`d1a8336d1648190cd2143fbf8e3bf9031b6572f611ebc51e6649beef6d456027`.
+Run/log/external-receipt hashes are `751a0152...f72f`, `8a438197...281b`, and
+`bcb0060e...53e2`. This records the frozen deployment artifact and does not expand
+the original verdict. Candidate merge becomes authorized only after this receipt
+checkpoint is itself published and green in both workflows.

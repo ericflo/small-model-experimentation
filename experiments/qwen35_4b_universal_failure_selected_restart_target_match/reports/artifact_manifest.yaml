@@ -22,9 +22,14 @@ external_artifacts:
     required_for: "future explicit candidate merge and paired evaluation"
     checksum: "adapter_model.safetensors 2072c5c81e0ce35161bfe7b49d9995b2152b8e49aa09db3a2f247c37218639bc; adapter_config.json 6915787d341bdf3c932401586bd209b507e17a36f045c262084fdea7d97f7f50"
     regenerate: "from pushed-green control commit 2c78e655: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_failure_selected_restart_target_match/scripts/run.py --stage train-candidate"
+  - name: "current experiment replay-control merged composite"
+    storage: "large_artifacts/qwen35_4b_universal_failure_selected_restart_target_match/merged/replay_control"
+    required_for: "published prerequisite for candidate merge and one-arm input to the future local comparison"
+    checksum: "tree d1a8336d1648190cd2143fbf8e3bf9031b6572f611ebc51e6649beef6d456027; model.safetensors e48ed4a03ba8d040c4007f115af5346df51b886566a5798250586a10e989ae17; merge_receipt.json bcb0060ed551fcec1c3cca7d2b8e29ce46300abd94cfa80e8db6477c346553e2"
+    regenerate: "from pushed-green local-design commit 3b8b46aa: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_failure_selected_restart_target_match/scripts/run.py --stage merge-control"
 omitted_artifacts:
   - path: "large_artifacts/qwen35_4b_universal_failure_selected_restart_target_match/"
-    reason: "both adapters are recorded above; future merged composites are large and gitignored"
+    reason: "both adapters and replay-control composite are recorded above; the future candidate composite is large and gitignored"
 reproducibility:
   smoke_command: "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_failure_selected_restart_target_match/scripts/run.py --smoke"
   full_command: "checkpointed sequence below; never run stages back-to-back without publishing and waiting for both workflows"
@@ -39,6 +44,7 @@ reproducibility:
     - "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/adapters/replay_after_close"
     - "large_artifacts/qwen35_4b_universal_failure_selected_restart_target_match/adapters/replay_control"
     - "large_artifacts/qwen35_4b_universal_failure_selected_restart_target_match/adapters/counterfactual_restart_candidate"
+    - "large_artifacts/qwen35_4b_universal_failure_selected_restart_target_match/merged/replay_control"
 notes: >-
   Model-free exact-exposure freeze. Model Qwen/Qwen3.5-4B revision 851bf6e8...d0a. Frozen
   construction/rollout/selection/training/local/aggregate seeds are
@@ -64,5 +70,8 @@ notes: >-
   items and a three-arm same-vLLM explicit-composite comparison. Source/input/design
   hashes are 7b69473b...975f, 6efefc92...15e2, and 124bbf99...2db5. Its reviewed stage
   order is control merge, publish, candidate merge, publish, then local. Complete
-  composite-tree hashing and pre/post-arm authentication are mandatory. No current-
-  arm composite, local result, or benchmark event exists.
+  composite-tree hashing and pre/post-arm authentication are mandatory. The replay-
+  control merge from pushed-green commit 3b8b46aa applied 128/128 nonzero modules;
+  run/log/external/weight/tree hashes are 751a0152...f72f, 8a438197...281b,
+  bcb0060e...53e2, e48ed4a0...ae17, and d1a8336d...6027. No candidate
+  composite, local result, or benchmark event exists.

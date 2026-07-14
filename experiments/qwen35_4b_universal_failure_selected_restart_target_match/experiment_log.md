@@ -143,3 +143,22 @@
 - Adversarial verdict: `PASS_CONTROL_MERGE` only. Candidate merge requires a
   separately published control merge; local generation requires both. No model call
   or capability result occurred, and aggregate seed 78,140 remains sealed.
+
+## 2026-07-14 — Authenticated replay-control composite
+
+- Launched only after local-design commit `3b8b46aa` was pushed directly to `main`
+  and GitHub runs `29368418251` / `29368418260` both succeeded.
+- The wrapper authenticated clean pushed `main`, design receipt `124bbf99...2db5`,
+  training receipt `3a9cc1ea...6d49`, and replay-control adapter before opening any
+  output.
+- The pinned explicit merger applied 128/128 nonzero LoRA modules at scale 2 on
+  CUDA, with TF32 disabled. Delta Frobenius-norm sum/max were 160.3068/2.8268.
+- Run-receipt/log/external-receipt/weight hashes are `751a0152...f72f`,
+  `8a438197...281b`, `bcb0060e...53e2`, and `e48ed4a0...ae17`.
+- The exact seven-file composite manifest includes config, generation config, chat
+  template, tokenizer/config, external receipt, and the 9,078,620,536-byte weight.
+  Its canonical tree hash is `d1a8336d...6027`; no symlink, nested, missing, or
+  unexpected entry exists.
+- This is authenticated deployment construction, not capability evidence. Candidate
+  merge remains blocked until this result is committed, rebased, pushed, and green
+  in both workflows. No local or benchmark event ran; aggregate seed remains sealed.

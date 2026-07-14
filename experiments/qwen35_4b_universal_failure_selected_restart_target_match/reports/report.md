@@ -4,8 +4,8 @@
 
 The model-free design, one authenticated parent rollout, frozen failure selection,
 exact-exposure stream freeze, both paired training events, and the separately
-reviewed fresh-local protocol are complete. No current-arm merge, local result, or
-benchmark event has run.
+reviewed fresh-local protocol, and replay-control explicit merge are complete. No
+candidate merge, local result, or benchmark event has run.
 
 The active hypothesis is that task-level on-policy failure selection can help when
 the supervised example restarts cleanly before the error and target exposure is
@@ -46,10 +46,13 @@ frozen contract.
   and two-control-relative promotion rules. Source/input/design hashes are
   `7b69473b...975f`, `6efefc92...15e2`, and `124bbf99...2db5`. This is design
   evidence only.
+- Replay-control composite: 128/128 nonzero merged modules at scale 2; exact
+  seven-file tree hash `d1a8336d...6027`; merged weight `e48ed4a0...ae17`;
+  run/external receipts `751a0152...f72f` / `bcb0060e...53e2`. This authenticates
+  deployment and is not a capability result.
 
 ## Next authorized event
 
-After the fresh-local design is committed, rebased, pushed to `main`, and both
-workflows are green, run only the replay-control explicit merge. Candidate merge
-requires that control receipt to pass the same publication checkpoint. Local
+After the replay-control merge receipt/log are committed, rebased, pushed to `main`,
+and both workflows are green, run only the candidate explicit merge. Local
 generation requires both published merge receipts; aggregate access remains sealed.

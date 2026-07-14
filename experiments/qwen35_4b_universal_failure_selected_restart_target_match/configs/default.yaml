@@ -86,6 +86,20 @@ deployment_plan:
   lora_scale: 2.0
   complete_tree_manifest_required: true
   stage_order: [merge-control, merge-candidate, local]
+deployment_results:
+  replay_control:
+    completed: true
+    source_git_head: 3b8b46aa20822abd345395f7751e7c76293af088
+    applied_lora_modules: 128
+    nonzero_lora_modules: 128
+    scale: 2.0
+    delta_frobenius_norm_sum: 160.30682668089867
+    delta_frobenius_norm_max: 2.8268251419067383
+    receipt_sha256: 751a0152cb4be16c1c10ce1c2f1c285b075bf890ef384f2a0340f7a58d6cf72f
+    log_sha256: 8a438197a7fdb7c01c626c7aba07bd27fd9f3455ab11be47a5bf2a8355fd281b
+    external_receipt_sha256: bcb0060ed551fcec1c3cca7d2b8e29ce46300abd94cfa80e8db6477c346553e2
+    weights_sha256: e48ed4a03ba8d040c4007f115af5346df51b886566a5798250586a10e989ae17
+    tree_sha256: d1a8336d1648190cd2143fbf8e3bf9031b6572f611ebc51e6649beef6d456027
 local_gate:
   designed: true
   completed: false

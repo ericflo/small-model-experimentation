@@ -1,6 +1,6 @@
 # Failure-Selected Counterfactual Restart Curriculum
 
-**Status:** in-progress · since 2026-07-14 · paired training and fresh-local design complete; replay-control merge is next
+**Status:** in-progress · since 2026-07-14 · replay-control composite complete; publish checkpoint before candidate merge
 
 This experiment tests whether selecting the stronger parent's fresh procedural
 failures and teaching clean verified restarts can beat exactly exposure-matched replay
@@ -69,20 +69,21 @@ PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B \
 
 ```
 
-Both paired training events have completed. The smoke path reauthenticates their
-tracked receipts/logs and external adapters plus the separately frozen fresh-local
-design. After that design is published and both repository workflows are green, the
-only authorized next event is:
+Both paired training events and the replay-control explicit merge have completed.
+The smoke path reauthenticates their tracked receipts/logs, external adapters, full
+control-composite tree, and separately frozen fresh-local design. After the control
+merge result is published and both repository workflows are green, the only
+authorized next event is:
 
 ```bash
 PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B \
   experiments/qwen35_4b_universal_failure_selected_restart_target_match/scripts/run.py \
-  --stage merge-control
+  --stage merge-candidate
 
 ```
 
-Candidate merge requires the published control-merge receipt. Local generation
-requires both published current-arm merge receipts and runs with `--stage local`.
+Local generation requires both published current-arm merge receipts and runs with
+`--stage local`.
 
 ## Results
 
@@ -150,7 +151,14 @@ reported final train loss 0.5838. Receipt/log/adapter-config/adapter-weight hash
 `2072c5c8...39bc`; the adapter is 169,903,320 bytes. Its receipt embeds and
 reauthenticates the published control prerequisite while proving the candidate warm
 start remained the original parent. Training loss is not a capability comparison.
-No merge or evaluation has run.
+From pushed-green local-design commit `3b8b46aa`, the replay-control adapter was
+explicitly merged into the pinned full composite. All 128 expected LoRA modules had
+nonzero deltas at scale 2; TF32 was disabled, and delta-norm sum/max were
+160.3068/2.8268. Run-receipt/log/external-receipt/weight/tree hashes are
+`751a0152...f72f`, `8a438197...281b`, `bcb0060e...53e2`,
+`e48ed4a0...ae17`, and `d1a8336d...6027`. The complete seven-file tree passed exact
+config/tokenizer and file-set authentication. This is a deployment artifact, not a
+capability result; no local evaluation has run.
 
 The separately reviewed fresh-local design now freezes 26 new procedural items at
 seed 88,010, exactly two per universal skill, and compares the unchanged replay
