@@ -1,0 +1,22 @@
+schema_version: 1
+experiment_id: "qwen35_4b_universal_residual_successful_sibling_target_match"
+external_artifacts:
+  - name: authenticated replay parent composite
+    storage: large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/merged/replay_after_close
+    required_for: sibling collection and conditional paired arm warm starts
+    checksum: 7ab4c419f70135d3fe058dba6e79e3a9a61c6661d43e6acb9662f331efe36e2e
+    regenerate: experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/runs/merges/replay_after_close.json
+  - name: future paired adapters and explicit composites
+    storage: large_artifacts/qwen35_4b_universal_residual_successful_sibling_target_match
+    required_for: conditional local and aggregate evaluation
+    checksum: pending; training is not authorized
+    regenerate: checkpointed scripts/run.py stages after successful-sibling and compute reviews
+omitted_artifacts:
+  - path: large_artifacts/qwen35_4b_universal_residual_successful_sibling_target_match
+    reason: future model weights exceed repository limits and require tracked cryptographic receipts
+reproducibility:
+  smoke_command: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_residual_successful_sibling_target_match/scripts/run.py --smoke
+  full_command: checkpointed scripts/run.py stages only
+  required_external_artifacts:
+    - authenticated replay parent composite
+notes: Inherited lineage and residual input/design artifacts are tracked. No sibling collection, adapter, composite, local result, or benchmark result exists yet.

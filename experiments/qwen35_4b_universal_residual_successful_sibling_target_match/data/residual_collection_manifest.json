@@ -1,0 +1,69 @@
+{
+  "aggregate_seed_open": false,
+  "benchmark_data_read": false,
+  "experiment_id": "qwen35_4b_universal_residual_successful_sibling_target_match",
+  "origin": {
+    "balanced_stop_receipt_sha256": "3397b7738eefcc12a0c6a8c6687e627e9a6125d7186d48f4a5c73e6e2a9d2a6e",
+    "construction_seed": 77115,
+    "failure_inventory_sha256": "8e21caf82b29ee800a4846401a7561e6624461457324e19f8a50a42175eed783",
+    "greedy_receipt_sha256": "cee1f19d1319e01a9aa69cedb1e9261de29a3c24d9e07477b77a1f5d9cc94962",
+    "greedy_seed": 66115,
+    "hard_failure_rows": 227,
+    "source_sha256": "9071ce57e98e95ff9c0555e236abea5e71ab7e114883e3de68742c4e667603e9"
+  },
+  "origin_experiment": "qwen35_4b_universal_successful_sibling_target_match",
+  "residual_policy": {
+    "definition": "published skills with at least four hard greedy failures",
+    "excluded_skills": [
+      "select",
+      "count",
+      "route"
+    ],
+    "hard_failure_rows": 225,
+    "hard_failure_rows_by_skill": {
+      "abstain": 6,
+      "execute": 39,
+      "induct": 46,
+      "optimize": 24,
+      "order": 11,
+      "probe": 21,
+      "repair": 30,
+      "state": 17,
+      "trace": 12,
+      "verify": 19
+    },
+    "quota_per_skill": 4,
+    "skills": [
+      "induct",
+      "execute",
+      "trace",
+      "verify",
+      "repair",
+      "optimize",
+      "abstain",
+      "state",
+      "order",
+      "probe"
+    ]
+  },
+  "retention_policy": {
+    "protected_by_active_replay": true,
+    "saturated_or_thin_skills": [
+      "select",
+      "count",
+      "route"
+    ],
+    "unchanged_all_skill_local_gate_required": true
+  },
+  "schema_version": 1,
+  "sibling_collection": {
+    "input_path": "experiments/qwen35_4b_universal_residual_successful_sibling_target_match/data/residual_sibling_input_seed66117.jsonl",
+    "input_rows": 225,
+    "input_sha256": "dafeb0123abacb5dbc34e39fc8be2375aa5eb8cc0384d396bc61b63f908d1119",
+    "max_sibling_thinking_tokens": 768,
+    "oracle_fields_in_input": false,
+    "samples_per_failure": 16,
+    "seed": 66117
+  },
+  "stage": "inherited_residual_sibling_collection_substrate"
+}

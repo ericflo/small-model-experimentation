@@ -1,0 +1,59 @@
+experiment_id: qwen35_4b_universal_residual_successful_sibling_target_match
+status: design_frozen_sibling_collection_pending
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+parent:
+  experiment: qwen35_4b_universal_on_policy_prefix_repair_token_match
+  arm: replay_after_close
+  deployment: explicit_merged_composite
+  weights_sha256: 7ab4c419f70135d3fe058dba6e79e3a9a61c6661d43e6acb9662f331efe36e2e
+seeds:
+  inherited_construction: 77115
+  inherited_greedy: 66115
+  sibling_collection: 66117
+  selection: 55116
+  training: 50
+  local: 88012
+  conditional_aggregate: 78142
+residual_policy:
+  skills: [induct, execute, trace, verify, repair, optimize, abstain, state, order, probe]
+  retention_skills: [select, count, route]
+  hard_failure_rows: 225
+  quota_per_skill: 4
+collection:
+  thinking: natural
+  samples_per_failure: 16
+  temperature: 0.6
+  top_p: 0.95
+  top_k: 20
+  max_tokens: 1024
+  max_model_len: 4096
+selection:
+  max_sibling_thinking_tokens: 768
+  require_natural_close: true
+  require_exact_answer: true
+  require_canonical_answer_tail: true
+  select_shortest_qualified: true
+  oracle_trace_fallback: false
+training_plan:
+  authorized: false
+  rows_per_arm: 320
+  shared_aligned_replay_rows: 200
+  candidate_sibling_rows: 40
+  candidate_replay_rows: 80
+  control_variable_replay_rows: 120
+  exact_match_axes: [forward_tokens, loss_bearing_target_tokens, absolute_loss_mass]
+  optimizer_steps: 40
+  learning_rate: 1.0e-5
+  thought_weight: 0.2
+  close_weight: 0.2
+promotion:
+  all_thirteen_skills_in_local_gate: true
+  local_gate_unchanged: true
+  strict_parent_and_replay_wins: true
+  aggregate_requires_all_family_nonnegative: true
+  matched_compute_sample_more_required_before_claim: true
+firewall:
+  benchmark_data_read: false
+  aggregate_seed_open: false

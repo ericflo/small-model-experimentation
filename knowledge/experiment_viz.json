@@ -48558,6 +48558,38 @@
     }
    ]
   },
+  "qwen35_4b_universal_residual_successful_sibling_target_match": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Residual sibling sampling is frozen but has not run",
+     "categories": [
+      "intake",
+      "lineage copy",
+      "residual input",
+      "design review",
+      "sibling collection",
+      "sibling selection",
+      "exposure freeze",
+      "paired training",
+      "all-skill local gate",
+      "broad gate"
+     ],
+     "series": [
+      {
+       "label": "completed checkpoint",
+       "values": [1, 1, 1, 1, 0, 0, 0, 0, 0, 0]
+      }
+     ],
+     "x_label": "preregistered experiment stage",
+     "y_label": "completion indicator",
+     "y_format": "integer",
+     "note": "The published failure lineage, 225-row residual input, and adversarial review are complete. One sibling collection is the only authorized model event; all later stages remain gated.",
+     "source": "experiments/qwen35_4b_universal_residual_successful_sibling_target_match/reports/report.md"
+    }
+   ]
+  },
   "qwen35_4b_counterfactual_plan_reflection_transfer": {
    "charts": [
     {

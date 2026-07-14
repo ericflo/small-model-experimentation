@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 231
-- Manifest files: 550
+- Experiments with manifests: 232
+- Manifest files: 552
 
 ## Manifest Types
 
@@ -12,9 +12,9 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `checkpoint` | 83 |
 | `dataset` | 132 |
 | `large-artifact` | 50 |
-| `other` | 80 |
+| `other` | 81 |
 | `run-data` | 101 |
-| `standard-artifact` | 104 |
+| `standard-artifact` | 105 |
 
 ## Manifests
 
@@ -295,6 +295,8 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_universal_on_policy_prefix_repair_token_match` | `standard-artifact` | [manifest](../experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/reports/artifact_manifest.yaml) |
 | `qwen35_4b_universal_replay_anchor` | `other` | [manifest](../experiments/qwen35_4b_universal_replay_anchor/data/dose_manifest.json) |
 | `qwen35_4b_universal_replay_anchor` | `standard-artifact` | [manifest](../experiments/qwen35_4b_universal_replay_anchor/reports/artifact_manifest.yaml) |
+| `qwen35_4b_universal_residual_successful_sibling_target_match` | `other` | [manifest](../experiments/qwen35_4b_universal_residual_successful_sibling_target_match/data/residual_collection_manifest.json) |
+| `qwen35_4b_universal_residual_successful_sibling_target_match` | `standard-artifact` | [manifest](../experiments/qwen35_4b_universal_residual_successful_sibling_target_match/reports/artifact_manifest.yaml) |
 | `qwen35_4b_universal_search_scaffold_token_match` | `other` | [manifest](../experiments/qwen35_4b_universal_search_scaffold_token_match/data/predecessor_stream_manifest.json) |
 | `qwen35_4b_universal_search_scaffold_token_match` | `other` | [manifest](../experiments/qwen35_4b_universal_search_scaffold_token_match/data/stream_manifest.json) |
 | `qwen35_4b_universal_search_scaffold_token_match` | `standard-artifact` | [manifest](../experiments/qwen35_4b_universal_search_scaffold_token_match/reports/artifact_manifest.yaml) |

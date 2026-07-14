@@ -4,21 +4,21 @@ Generated from tracked experiment contents. Use this as a triage surface for tur
 
 Anchor-ready means the experiment has a human-authored README, a detected primary report, recognized local artifacts, and an assigned research program. It does not mean the result is correct or final.
 
-- Experiments: 259
-- Anchor-ready: 243
-- Human-authored READMEs: 246
+- Experiments: 260
+- Anchor-ready: 244
+- Human-authored READMEs: 247
 - Generated README stubs: 13
-- Primary reports: 258
-- Experiment logs: 162
-- Smoke commands: 127
-- Artifact manifests: 231
+- Primary reports: 259
+- Experiment logs: 163
+- Smoke commands: 128
+- Artifact manifests: 232
 
 ## Run Surface Counts
 
 | Run surface | Experiments |
 | --- | ---: |
 | `documented-command` | 38 |
-| `documented-scripts` | 146 |
+| `documented-scripts` | 147 |
 | `scripts-undocumented` | 22 |
 | `source-or-analysis` | 53 |
 
@@ -198,6 +198,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | yes | [`qwen35_4b_universal_mid_density_token_match`](../experiments/qwen35_4b_universal_mid_density_token_match/README.md) | agentic_breadth_installation, benchmark_generalization, posttraining_and_adaptation, process_control_and_tool_use, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_universal_mid_density_token_match/reports/report.md) | yes | `documented-scripts` | yes | other, standard-artifact | none |
 | yes | [`qwen35_4b_universal_on_policy_prefix_repair_token_match`](../experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/README.md) | agentic_breadth_installation, benchmark_generalization, posttraining_and_adaptation, process_control_and_tool_use | `human-authored` | [report](../experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/reports/report.md) | yes | `documented-scripts` | yes | other, standard-artifact | none |
 | yes | [`qwen35_4b_universal_replay_anchor`](../experiments/qwen35_4b_universal_replay_anchor/README.md) | agentic_breadth_installation, benchmark_generalization, posttraining_and_adaptation, process_control_and_tool_use, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_universal_replay_anchor/reports/report.md) | yes | `documented-scripts` | yes | other, standard-artifact | none |
+| yes | [`qwen35_4b_universal_residual_successful_sibling_target_match`](../experiments/qwen35_4b_universal_residual_successful_sibling_target_match/README.md) | agentic_breadth_installation, benchmark_generalization, posttraining_and_adaptation | `human-authored` | [report](../experiments/qwen35_4b_universal_residual_successful_sibling_target_match/reports/report.md) | yes | `documented-scripts` | yes | other, standard-artifact | none |
 | yes | [`qwen35_4b_universal_search_scaffold_token_match`](../experiments/qwen35_4b_universal_search_scaffold_token_match/README.md) | agentic_breadth_installation, benchmark_generalization, evidence_conditioned_selection, posttraining_and_adaptation, process_control_and_tool_use, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_universal_search_scaffold_token_match/reports/report.md) | yes | `documented-scripts` | yes | other, standard-artifact | none |
 | yes | [`qwen35_4b_universal_state_table_compiler_token_match`](../experiments/qwen35_4b_universal_state_table_compiler_token_match/README.md) | agentic_breadth_installation, benchmark_generalization, evidence_conditioned_selection, interpretability_and_diagnostics, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_universal_state_table_compiler_token_match/reports/report.md) | yes | `documented-scripts` | yes | other, standard-artifact | none |
 | yes | [`qwen35_4b_universal_successful_sibling_target_match`](../experiments/qwen35_4b_universal_successful_sibling_target_match/README.md) | agentic_breadth_installation, benchmark_generalization, evidence_conditioned_selection, interpretability_and_diagnostics, posttraining_and_adaptation, process_control_and_tool_use, reliability_and_safety | `human-authored` | [report](../experiments/qwen35_4b_universal_successful_sibling_target_match/reports/report.md) | yes | `documented-scripts` | yes | other, standard-artifact | none |

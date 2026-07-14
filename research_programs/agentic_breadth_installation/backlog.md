@@ -273,6 +273,18 @@
   failures as the residual treatment set, sample only those failures, and protect
   saturated skills through exact-exposure replay plus the unchanged all-skill local
   gate. Do not lower this experiment's quota or rescue it in place.
+- Active residual successful-sibling successor:
+  `qwen35_4b_universal_residual_successful_sibling_target_match` copies the immutable
+  624-task source and 227-failure inventory, then prospectively treats only the ten
+  skills with at least four hard failures. Its oracle-free input has 225 rows;
+  select/count/route remain replay-protected retention skills and stay in the full
+  local gate. One fresh same-parent `n=16` event at seed 66117 is frozen, followed by
+  four shortest qualified tasks per residual skill at selection seed 55116. Input/
+  manifest/design hashes are `dafeb012...1119` / `cee88012...c7e7` /
+  `e1066596...93d7`. Review verdict `PASS_SIBLING_COLLECTION` authorizes that event
+  only after this design is published green. Training/local/aggregate seeds are
+  50/88012/78142; exact-exposure replay, all-skill retention, all-family aggregate
+  lift, higher-tier confirmation, and matched-compute sample-more remain mandatory.
 
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.
