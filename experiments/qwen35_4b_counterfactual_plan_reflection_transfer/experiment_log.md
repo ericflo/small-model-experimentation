@@ -94,3 +94,10 @@
   generation ancestry; embedded training/PEFT/merge lineage; installed-lock and adapter
   ON/OFF parity; and live hybrid KV token/block preflight. The suite passes 55 focused
   tests. Authorization remains tokenizer-only pending a fresh Review 4.
+- Clean Review 4 on exact commit `542ba82592d96eafcf56cd5e70bfad948b43b65b`
+  returned HOLD. It confirmed the sealed inputs, sampling/task mappings, literal
+  branches, and live hybrid-cache checks, but reproduced three false acceptances:
+  arbitrary/nonexistent hashes can authorize stages; a dummy byte string can pass as
+  a merged checkpoint with self-issued lineage; and the direct-URL vLLM pin is omitted
+  from installed-package validation. Authorization remains tokenizer-only while these
+  attacks are converted to fail-closed tests and remediated.

@@ -176,3 +176,32 @@ The model-free suite now passes 55 focused tests plus syntax and full constructi
 All model/GPU/training/evaluation/J/benchmark flags remain false. These changes are
 not self-authorizing and require a fresh clean adversarial verdict on their committed
 revision.
+
+## Review 4 — 2026-07-14
+
+**Reviewed commit:** `542ba82592d96eafcf56cd5e70bfad948b43b65b`
+
+**Verdict:** **HOLD full implementation.**
+
+Both exact-commit CI workflows were green. The clean adversary passed all 55 focused
+model-free tests, syntax, full 216/72/144/144 plus 48 construction, and separate
+token- and block-overcommit attacks. It confirmed that Review 3 findings 1–4 and 8
+are genuinely closed.
+
+Three high-severity false-acceptance paths remain:
+
+1. stage consumers accept prerequisite claims containing arbitrary or nonexistent
+   SHA-256 strings, while the authorizer accepts minimal hand-written decision and
+   retention JSON without authentic score ancestry or analyzer identity;
+2. the committed merged-checkpoint test accepts `weights.safetensors` containing only
+   the bytes `weights` plus self-consistent fabricated lineage, so tree integrity does
+   not establish scientific origin or arm/seed identity;
+3. installed-package validation parses only `name==version` lock entries and silently
+   omits the direct-URL `vllm` requirement, allowing a forged vLLM build while checking
+   the other 188 distributions.
+
+No model, GPU, training, evaluation, J-space, or benchmark work is authorized. The
+next implementation checkpoint must make the exact attacks fail by resolving and
+revalidating prerequisite artifacts, retaining and authenticating the actual source
+adapter tensors/tree through merge and consumption, validating a real composite
+checkpoint inventory, and enforcing the normalized direct-URL vLLM build pin.
