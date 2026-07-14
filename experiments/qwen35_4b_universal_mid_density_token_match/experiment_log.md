@@ -34,3 +34,21 @@
   Normalized full log: `runs/training/replay_repeat.log`, SHA-256
   `e8a72ef7fde6cdb7d3f642ffeb5e93755a8783f2c1bfe9feaf6f2b7c7a6c83f8`.
 - No local or benchmark evaluation was performed at this checkpoint.
+
+## 2026-07-13 — 160-row exact-token arm training
+
+- Ran `scripts/run.py --stage train-d160` from published replay-control commit
+  `0ad7ca07`.
+- The wrapper reauthenticated the replay-refresh parent, checked-in `designed160`
+  bytes, and zero-skip token receipt before launching training.
+- Completed 190/190 optimizer steps over 1,520 rows with zero skips in 1,390.190
+  wall seconds. Final training loss was 0.6606.
+- Adapter weights: 169,903,320 bytes,
+  SHA-256 `f05c13ae66e19bbd29abbd2b62ae3c1a577642efefbdba435879012bf4494654`.
+  Adapter config SHA-256:
+  `0cd3ca7c710e48c264fd1d4c019c304ec0b9e5b13098b89a5b4aa0b171191e58`.
+- Durable receipt: `runs/training/designed160.json`, SHA-256
+  `485e3a76a8ef45d92df0a60dbcc338d5c1d4ddfc53fbb4e83acb10af7e75d258`.
+  Normalized full log: `runs/training/designed160.log`, SHA-256
+  `34ce943073908585c933991161f84a076a734b98cc8a23c0fc953dde1db995f3`.
+- No local or benchmark evaluation was performed at this checkpoint.
