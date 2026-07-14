@@ -22,10 +22,10 @@
   seed-7411 G0 now passes all registered feasibility gates, but that frozen wrapper's pathname-only
   retirement guard cannot hand off to the positive control after the successful G0 repopulates the
   canonical slot. The additive byte/status-aware handoff is published/green, and the full-rank
-  seed-7411 and seed-7412 G0/control pairs now pass independently: each intact control is 48/48
-  versus adaptation-disabled 0/48 after the exact 256-update, 4,096-presentation schedule. Publish
-  seed 7412 before seed 7413. This remains mechanics/setup evidence and does not change the
-  mandatory Stage-B matrix or authorize a LoRA rank conclusion.
+  all three full-rank G0/control pairs now pass independently: each intact control is 48/48 versus
+  adaptation-disabled 0/48 after the exact 256-update, 4,096-presentation schedule. Publish the
+  complete setup matrix, then run the three LoRA state-only and three full-rank joint fixed finals.
+  This remains mechanics/setup evidence and does not authorize a LoRA rank conclusion.
 - Cross-program interface probe completed:
   `qwen35_4b_commit_slot_jacobian_value_transport` showed that a fixed latent
   answer slot repairs formatting but its semantic hint remains task/alias

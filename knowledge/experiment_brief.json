@@ -6383,13 +6383,13 @@
    "verdict_tag": "Safe handoff is working",
    "concept_primer": "A retired error slot is like a reserved parking space: once a verified replacement arrives, later checks must recognize the new vehicle without forgetting the old incident.",
    "plain_question": "Can later full-size setup work continue after a successful replacement occupies the file location that previously held a preserved failure?",
-   "plain_answer": "Yes, the narrow handoff passed every safety check, then each of the first two full-size setup controls reached 48 of 48 with its learned path and zero of 48 with that path disabled.",
+   "plain_answer": "Yes, the narrow handoff passed every safety check, then all three full-size setup controls reached 48 of 48 with their learned path and zero of 48 with that path disabled.",
    "why_it_matters": "Practitioners can continue the promised compact-versus-full-size comparison without rewriting published history or weakening the original safety checks. Later work still waits for each completed setup checkpoint to be published.",
    "verdict_tone": "neutral",
    "key_numbers": [
     {
      "label": "Setup seeds complete",
-     "value": "2 of 3",
+     "value": "3 of 3",
      "sub": "full-size setup pairs passed"
     },
     {

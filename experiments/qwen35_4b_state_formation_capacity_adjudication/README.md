@@ -167,6 +167,14 @@ presentations; both full-rank and shared-state parameters changed. Handoff G0/co
 identities are `d61d6441…9246` / `6334d72f…c14a`. Both remain setup-only evidence with zero result,
 benchmark, contrast, or scientific-evidence access. Publish/green this pair before seed 7413.
 
+Seed-7412 setup commit `92473a53…8530` passed both workflows. Full-rank seed 7413 completed the
+matrix: G0 file SHA-256 / identity `021a8444…d635` / `4d2316d3…2ff0`, with zero K=1/round-trip
+error, complete finite state for all 62 deltas, finite K=12, and 22.1 GiB free; control file SHA-256 /
+identity `8a4af0d6…fde8` / `976f28ef…14df`, with oracle/intact 48/48 and disabled 0/48 after exact
+256 updates, accumulation 16, and 4,096 presentations. Handoff G0/control COMPLETE identities are
+`fbfb282f…5aef` / `ccff1520…58c9`. All three full-rank setup pairs pass with zero result, benchmark,
+contrast, or scientific evidence. Publish/green the complete matrix before any Stage-B training.
+
 Historically, the integrated source-v10 review was `GO` for reviewed implementation
 `a5a494b7…6f1c4a` and full source contract `979a9012…f394b7`; the 360/360 suite and exact machine gate
 pass. Source-v9 seed-7411 G0 stopped before model load or wrapper construction because the general

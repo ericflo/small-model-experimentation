@@ -1,0 +1,2922 @@
+{
+  "authorizes_positive_control": true,
+  "authorizes_result_evaluation": false,
+  "authorizes_result_training": false,
+  "authorizes_training": false,
+  "backend": "transformers",
+  "benchmark_files_read": 0,
+  "branch_authorization": {
+    "path": "experiments/qwen35_4b_state_formation_capacity_adjudication/analysis/lora_joint_trigger.json",
+    "phase": "lora_joint_analysis",
+    "receipt_identity_sha256": "b973bc01e4ec5dba12fb61493f122a657344300d38cf7e4a975e102588dda862",
+    "sha256": "cb9fee75368ce3f555bc182742126c49f5312d9ca3ab324baf0c39021a58818a",
+    "status": "LORA_JOINT_MISS_CONTROLS_REQUIRED"
+  },
+  "capacity": "fullrank",
+  "checkpoint_roundtrip": {
+    "adaptation_bytes": 3569112949,
+    "adaptation_sha256": "eace6450b715a121c037553757a07d898a94a0561f19e6692d34da2c323e0ba3",
+    "common_bytes": 2278369,
+    "common_sha256": "6929aee9ac39c10aea321ef0584c7ebba00d49adb7798731c489743fd76a4ad8",
+    "destructive_adaptation_digest_changed": true,
+    "destructive_common_digest_changed": true,
+    "max_logit_abs_error": 0.0,
+    "restored_adaptation_digest_equal": true,
+    "restored_common_digest_equal": true
+  },
+  "common_initialization_rng_isolation": {
+    "expected_tensor_values_sha256": "04054449d7c403a4a384b08554f0e471e06e2627356c10b1af44c9f9bdebefeb",
+    "tensor_manifest_equal": true,
+    "tensor_values_sha256": "04054449d7c403a4a384b08554f0e471e06e2627356c10b1af44c9f9bdebefeb"
+  },
+  "config_sha256": "eeb4e828526f750dce1258bcc91d03114c80688d300112e03d18c9d911489393",
+  "data_manifest_sha256": "d104a9c01a9173faf9764cdda673cdfbe93d799ce96cd9a315d9782839e3a22c",
+  "design_receipt_identity_sha256": "d943b909250c2ebd377b8094bb55324a5d5ccf555c7559736526f013d248ac52",
+  "design_receipt_sha256": "490035fe77519739e18eb3494ad693544c423a62d4222cf4ea0b4e3d5684d45e",
+  "elapsed_seconds": 76.23167538642883,
+  "experiment_id": "qwen35_4b_state_formation_capacity_adjudication",
+  "free_memory_gib_after_g0": 22.07843017578125,
+  "k1_adaptation_calls": 0,
+  "k1_adaptation_calls_after_optimizer": 0,
+  "k1_max_logit_abs_error_after_optimizer": 0.0,
+  "k1_max_logit_abs_error_before_optimizer": 0.0,
+  "live_joint_backward_probe": {
+    "adaptation_applied_clip_scale": 0.029231202572049697,
+    "all_joint_trainable_groups_finite_nonzero": true,
+    "answer_loss": 12.875,
+    "common_state_applied_clip_scale": 0.11893101573482326,
+    "dropout_probe": {
+      "call_manifest_sha256": "3436262cdc884b35663442aff34032438bc01d578abc6e53c9982c709806ce88",
+      "calls": 186,
+      "cycle_manifest_sha256s": [
+        "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368",
+        "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368",
+        "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368"
+      ],
+      "cycle_order_identical": true,
+      "cycles": 3,
+      "each_cycle_exact_target_set": true,
+      "mask_sha256": "bab049c6e4c43abb486f9d2e5dab9b0ef18559e2bd8954ef0ee5631ed51ac7c6"
+    },
+    "elapsed_seconds": 0.6334350109100342,
+    "gradients": {
+      "adaptation": {
+        "finite": 62,
+        "items": [
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d000.weight",
+            "norm": 0.24515463411808014
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d001.weight",
+            "norm": 0.5476913452148438
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d002.weight",
+            "norm": 2.710888147354126
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d003.weight",
+            "norm": 2.654999017715454
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d004.weight",
+            "norm": 4.264277935028076
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d005.weight",
+            "norm": 7.635574817657471
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d006.weight",
+            "norm": 4.597146987915039
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d007.weight",
+            "norm": 4.434967994689941
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d008.weight",
+            "norm": 0.621528148651123
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d009.weight",
+            "norm": 0.6847124099731445
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d010.weight",
+            "norm": 3.8157293796539307
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d011.weight",
+            "norm": 4.40540885925293
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d012.weight",
+            "norm": 6.32730770111084
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d013.weight",
+            "norm": 7.547946453094482
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d014.weight",
+            "norm": 4.838580131530762
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d015.weight",
+            "norm": 4.6563615798950195
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d016.weight",
+            "norm": 0.5338662266731262
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d017.weight",
+            "norm": 0.4567726254463196
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d018.weight",
+            "norm": 2.500267267227173
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d019.weight",
+            "norm": 3.4097607135772705
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d020.weight",
+            "norm": 4.335346221923828
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d021.weight",
+            "norm": 6.678381443023682
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d022.weight",
+            "norm": 4.534905433654785
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d023.weight",
+            "norm": 4.3478474617004395
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d024.weight",
+            "norm": 5.937342166900635
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d025.weight",
+            "norm": 4.548678874969482
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d026.weight",
+            "norm": 4.230691909790039
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d027.weight",
+            "norm": 1.2646002769470215
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d028.weight",
+            "norm": 9.637373924255371
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d029.weight",
+            "norm": 3.2242932319641113
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d030.weight",
+            "norm": 4.473285675048828
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d031.weight",
+            "norm": 0.5389957427978516
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d032.weight",
+            "norm": 0.7052985429763794
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d033.weight",
+            "norm": 5.476077556610107
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d034.weight",
+            "norm": 2.5312774181365967
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d035.weight",
+            "norm": 6.356536865234375
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d036.weight",
+            "norm": 5.330523490905762
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d037.weight",
+            "norm": 4.053492546081543
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d038.weight",
+            "norm": 3.9889678955078125
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d039.weight",
+            "norm": 0.4358818531036377
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d040.weight",
+            "norm": 0.4285275936126709
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d041.weight",
+            "norm": 2.5040793418884277
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d042.weight",
+            "norm": 2.4916317462921143
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d043.weight",
+            "norm": 3.4389593601226807
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d044.weight",
+            "norm": 5.03978157043457
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d045.weight",
+            "norm": 3.9502477645874023
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d046.weight",
+            "norm": 3.664947032928467
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d047.weight",
+            "norm": 0.4563794434070587
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d048.weight",
+            "norm": 0.31652259826660156
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d049.weight",
+            "norm": 2.5072290897369385
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d050.weight",
+            "norm": 2.5486481189727783
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d051.weight",
+            "norm": 3.7863709926605225
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d052.weight",
+            "norm": 5.395509719848633
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d053.weight",
+            "norm": 4.10910701751709
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d054.weight",
+            "norm": 4.134906768798828
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d055.weight",
+            "norm": 5.336697578430176
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d056.weight",
+            "norm": 4.846879482269287
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d057.weight",
+            "norm": 4.772919654846191
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d058.weight",
+            "norm": 1.7164429426193237
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d059.weight",
+            "norm": 10.418535232543945
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d060.weight",
+            "norm": 3.3199338912963867
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "adaptation.deltas.d061.weight",
+            "norm": 6.012148857116699
+          }
+        ],
+        "nonzero": 62,
+        "tensors": 62,
+        "with_gradient": 62
+      },
+      "aggregate_exempt": {
+        "finite": 1,
+        "items": [
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "aggregate_logit",
+            "norm": 0.008175362832844257
+          }
+        ],
+        "nonzero": 1,
+        "tensors": 1,
+        "with_gradient": 1
+      },
+      "all_required_tensors_finite_nonzero": true,
+      "base_gradient_tensors": 0,
+      "damping": {
+        "finite": 1,
+        "items": [
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "damping_logit",
+            "norm": 0.3999216854572296
+          }
+        ],
+        "nonzero": 1,
+        "tensors": 1,
+        "with_gradient": 1
+      },
+      "initializer": {
+        "finite": 4,
+        "items": [
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "state_initializer.norm.weight",
+            "norm": 0.00254993443377316
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "state_initializer.norm.bias",
+            "norm": 0.0026503996923565865
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "state_initializer.down.weight",
+            "norm": 0.11479829251766205
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "state_initializer.up.weight",
+            "norm": 3.1347107887268066
+          }
+        ],
+        "nonzero": 4,
+        "tensors": 4,
+        "with_gradient": 4
+      },
+      "step": {
+        "finite": 1,
+        "items": [
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "step_encoder.project.weight",
+            "norm": 1.1267890930175781
+          }
+        ],
+        "nonzero": 1,
+        "tensors": 1,
+        "with_gradient": 1
+      },
+      "sufficiency": {
+        "finite": 8,
+        "items": [
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "sufficiency.norm.weight",
+            "norm": 0.09524448961019516
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "sufficiency.norm.bias",
+            "norm": 0.091644786298275
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "sufficiency.node.weight",
+            "norm": 3.2211415767669678
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "sufficiency.node.bias",
+            "norm": 0.0642600879073143
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "sufficiency.phase.weight",
+            "norm": 6.208784580230713
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "sufficiency.phase.bias",
+            "norm": 0.13051092624664307
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "sufficiency.checksum.weight",
+            "norm": 3.2344248294830322
+          },
+          {
+            "finite": true,
+            "has_gradient": true,
+            "name": "sufficiency.checksum.bias",
+            "norm": 0.0651322677731514
+          }
+        ],
+        "nonzero": 8,
+        "tensors": 8,
+        "with_gradient": 8
+      }
+    },
+    "loss": 15.19042682647705,
+    "objective": "joint",
+    "peak_allocated_gib": 24.48108959197998,
+    "preclip_adaptation_gradient_norm": 34.210018157958984,
+    "preclip_common_gradient_norm": 8.408234596252441
+  },
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "model_seed": 7413,
+  "optimizer_state": {
+    "all_required_group_states_complete_and_finite": true,
+    "bytes_by_dtype": {
+      "torch.float32": 7142728212
+    },
+    "delta_moment_bytes": 7138181120,
+    "delta_moment_tensors": 124,
+    "delta_parameters_audited": 62,
+    "delta_state_manifest_sha256": "f417569d9a360466a61891de8626b460b48000eddc2b0716232abd670c571aae",
+    "delta_states_complete": true,
+    "groups": [
+      {
+        "group_name": "adaptation",
+        "moment_bytes": 7138181120,
+        "moment_tensors": 124,
+        "parameters": 62,
+        "registered_missing_state_exemptions": 0,
+        "required_states_complete_and_finite": true,
+        "state_manifest_sha256": "7bbdb73749642af3df628af15aa1f1567d87226efd74bc7d31e1e840fbed2f45"
+      },
+      {
+        "group_name": "common_state",
+        "moment_bytes": 4546784,
+        "moment_tensors": 30,
+        "parameters": 15,
+        "registered_missing_state_exemptions": 0,
+        "required_states_complete_and_finite": true,
+        "state_manifest_sha256": "399c07f0226e8eb7b8e156b69c5c029d6009bec77f8552e1311c0c9f9f218e1f"
+      }
+    ],
+    "registered_missing_state_exemptions": 0,
+    "tensors": 231,
+    "total_bytes": 7142728212,
+    "total_gib": 6.6521840281784534
+  },
+  "peak_allocated_gib": 24.48124647140503,
+  "peak_reserved_gib": 24.908203125,
+  "peft_formula_reference": null,
+  "phase": "fullrank_g0",
+  "receipt_identity_sha256": "4d2316d3fc699a7f43726c9dc78fe867c43bb694b3906c4111cd0e090d262ff0",
+  "requirements_training_lock_sha256": "05546fe977583116d6169ea0dfa7b27e1184dd4a2b61d556dfb3f889d5b2b7b1",
+  "result_payloads_opened": [
+    "train"
+  ],
+  "schema_version": 1,
+  "scientific_evidence": false,
+  "sealed_contrast_payloads_opened": [],
+  "setup": {
+    "adaptation_parameters": 892272640,
+    "adaptation_target_manifest": [
+      {
+        "dtype": "torch.float32",
+        "key": "d000",
+        "parameters": 81920,
+        "shapes": [
+          [
+            32,
+            2560
+          ]
+        ],
+        "target": "model.layers.12.linear_attn.in_proj_a"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d001",
+        "parameters": 81920,
+        "shapes": [
+          [
+            32,
+            2560
+          ]
+        ],
+        "target": "model.layers.12.linear_attn.in_proj_b"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d002",
+        "parameters": 20971520,
+        "shapes": [
+          [
+            8192,
+            2560
+          ]
+        ],
+        "target": "model.layers.12.linear_attn.in_proj_qkv"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d003",
+        "parameters": 10485760,
+        "shapes": [
+          [
+            4096,
+            2560
+          ]
+        ],
+        "target": "model.layers.12.linear_attn.in_proj_z"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d004",
+        "parameters": 10485760,
+        "shapes": [
+          [
+            2560,
+            4096
+          ]
+        ],
+        "target": "model.layers.12.linear_attn.out_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d005",
+        "parameters": 23592960,
+        "shapes": [
+          [
+            2560,
+            9216
+          ]
+        ],
+        "target": "model.layers.12.mlp.down_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d006",
+        "parameters": 23592960,
+        "shapes": [
+          [
+            9216,
+            2560
+          ]
+        ],
+        "target": "model.layers.12.mlp.gate_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d007",
+        "parameters": 23592960,
+        "shapes": [
+          [
+            9216,
+            2560
+          ]
+        ],
+        "target": "model.layers.12.mlp.up_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d008",
+        "parameters": 81920,
+        "shapes": [
+          [
+            32,
+            2560
+          ]
+        ],
+        "target": "model.layers.13.linear_attn.in_proj_a"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d009",
+        "parameters": 81920,
+        "shapes": [
+          [
+            32,
+            2560
+          ]
+        ],
+        "target": "model.layers.13.linear_attn.in_proj_b"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d010",
+        "parameters": 20971520,
+        "shapes": [
+          [
+            8192,
+            2560
+          ]
+        ],
+        "target": "model.layers.13.linear_attn.in_proj_qkv"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d011",
+        "parameters": 10485760,
+        "shapes": [
+          [
+            4096,
+            2560
+          ]
+        ],
+        "target": "model.layers.13.linear_attn.in_proj_z"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d012",
+        "parameters": 10485760,
+        "shapes": [
+          [
+            2560,
+            4096
+          ]
+        ],
+        "target": "model.layers.13.linear_attn.out_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d013",
+        "parameters": 23592960,
+        "shapes": [
+          [
+            2560,
+            9216
+          ]
+        ],
+        "target": "model.layers.13.mlp.down_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d014",
+        "parameters": 23592960,
+        "shapes": [
+          [
+            9216,
+            2560
+          ]
+        ],
+        "target": "model.layers.13.mlp.gate_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d015",
+        "parameters": 23592960,
+        "shapes": [
+          [
+            9216,
+            2560
+          ]
+        ],
+        "target": "model.layers.13.mlp.up_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d016",
+        "parameters": 81920,
+        "shapes": [
+          [
+            32,
+            2560
+          ]
+        ],
+        "target": "model.layers.14.linear_attn.in_proj_a"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d017",
+        "parameters": 81920,
+        "shapes": [
+          [
+            32,
+            2560
+          ]
+        ],
+        "target": "model.layers.14.linear_attn.in_proj_b"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d018",
+        "parameters": 20971520,
+        "shapes": [
+          [
+            8192,
+            2560
+          ]
+        ],
+        "target": "model.layers.14.linear_attn.in_proj_qkv"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d019",
+        "parameters": 10485760,
+        "shapes": [
+          [
+            4096,
+            2560
+          ]
+        ],
+        "target": "model.layers.14.linear_attn.in_proj_z"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d020",
+        "parameters": 10485760,
+        "shapes": [
+          [
+            2560,
+            4096
+          ]
+        ],
+        "target": "model.layers.14.linear_attn.out_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d021",
+        "parameters": 23592960,
+        "shapes": [
+          [
+            2560,
+            9216
+          ]
+        ],
+        "target": "model.layers.14.mlp.down_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d022",
+        "parameters": 23592960,
+        "shapes": [
+          [
+            9216,
+            2560
+          ]
+        ],
+        "target": "model.layers.14.mlp.gate_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d023",
+        "parameters": 23592960,
+        "shapes": [
+          [
+            9216,
+            2560
+          ]
+        ],
+        "target": "model.layers.14.mlp.up_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d024",
+        "parameters": 23592960,
+        "shapes": [
+          [
+            2560,
+            9216
+          ]
+        ],
+        "target": "model.layers.15.mlp.down_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d025",
+        "parameters": 23592960,
+        "shapes": [
+          [
+            9216,
+            2560
+          ]
+        ],
+        "target": "model.layers.15.mlp.gate_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d026",
+        "parameters": 23592960,
+        "shapes": [
+          [
+            9216,
+            2560
+          ]
+        ],
+        "target": "model.layers.15.mlp.up_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d027",
+        "parameters": 2621440,
+        "shapes": [
+          [
+            1024,
+            2560
+          ]
+        ],
+        "target": "model.layers.15.self_attn.k_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d028",
+        "parameters": 10485760,
+        "shapes": [
+          [
+            2560,
+            4096
+          ]
+        ],
+        "target": "model.layers.15.self_attn.o_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d029",
+        "parameters": 20971520,
+        "shapes": [
+          [
+            8192,
+            2560
+          ]
+        ],
+        "target": "model.layers.15.self_attn.q_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d030",
+        "parameters": 2621440,
+        "shapes": [
+          [
+            1024,
+            2560
+          ]
+        ],
+        "target": "model.layers.15.self_attn.v_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d031",
+        "parameters": 81920,
+        "shapes": [
+          [
+            32,
+            2560
+          ]
+        ],
+        "target": "model.layers.16.linear_attn.in_proj_a"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d032",
+        "parameters": 81920,
+        "shapes": [
+          [
+            32,
+            2560
+          ]
+        ],
+        "target": "model.layers.16.linear_attn.in_proj_b"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d033",
+        "parameters": 20971520,
+        "shapes": [
+          [
+            8192,
+            2560
+          ]
+        ],
+        "target": "model.layers.16.linear_attn.in_proj_qkv"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d034",
+        "parameters": 10485760,
+        "shapes": [
+          [
+            4096,
+            2560
+          ]
+        ],
+        "target": "model.layers.16.linear_attn.in_proj_z"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d035",
+        "parameters": 10485760,
+        "shapes": [
+          [
+            2560,
+            4096
+          ]
+        ],
+        "target": "model.layers.16.linear_attn.out_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d036",
+        "parameters": 23592960,
+        "shapes": [
+          [
+            2560,
+            9216
+          ]
+        ],
+        "target": "model.layers.16.mlp.down_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d037",
+        "parameters": 23592960,
+        "shapes": [
+          [
+            9216,
+            2560
+          ]
+        ],
+        "target": "model.layers.16.mlp.gate_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d038",
+        "parameters": 23592960,
+        "shapes": [
+          [
+            9216,
+            2560
+          ]
+        ],
+        "target": "model.layers.16.mlp.up_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d039",
+        "parameters": 81920,
+        "shapes": [
+          [
+            32,
+            2560
+          ]
+        ],
+        "target": "model.layers.17.linear_attn.in_proj_a"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d040",
+        "parameters": 81920,
+        "shapes": [
+          [
+            32,
+            2560
+          ]
+        ],
+        "target": "model.layers.17.linear_attn.in_proj_b"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d041",
+        "parameters": 20971520,
+        "shapes": [
+          [
+            8192,
+            2560
+          ]
+        ],
+        "target": "model.layers.17.linear_attn.in_proj_qkv"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d042",
+        "parameters": 10485760,
+        "shapes": [
+          [
+            4096,
+            2560
+          ]
+        ],
+        "target": "model.layers.17.linear_attn.in_proj_z"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d043",
+        "parameters": 10485760,
+        "shapes": [
+          [
+            2560,
+            4096
+          ]
+        ],
+        "target": "model.layers.17.linear_attn.out_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d044",
+        "parameters": 23592960,
+        "shapes": [
+          [
+            2560,
+            9216
+          ]
+        ],
+        "target": "model.layers.17.mlp.down_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d045",
+        "parameters": 23592960,
+        "shapes": [
+          [
+            9216,
+            2560
+          ]
+        ],
+        "target": "model.layers.17.mlp.gate_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d046",
+        "parameters": 23592960,
+        "shapes": [
+          [
+            9216,
+            2560
+          ]
+        ],
+        "target": "model.layers.17.mlp.up_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d047",
+        "parameters": 81920,
+        "shapes": [
+          [
+            32,
+            2560
+          ]
+        ],
+        "target": "model.layers.18.linear_attn.in_proj_a"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d048",
+        "parameters": 81920,
+        "shapes": [
+          [
+            32,
+            2560
+          ]
+        ],
+        "target": "model.layers.18.linear_attn.in_proj_b"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d049",
+        "parameters": 20971520,
+        "shapes": [
+          [
+            8192,
+            2560
+          ]
+        ],
+        "target": "model.layers.18.linear_attn.in_proj_qkv"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d050",
+        "parameters": 10485760,
+        "shapes": [
+          [
+            4096,
+            2560
+          ]
+        ],
+        "target": "model.layers.18.linear_attn.in_proj_z"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d051",
+        "parameters": 10485760,
+        "shapes": [
+          [
+            2560,
+            4096
+          ]
+        ],
+        "target": "model.layers.18.linear_attn.out_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d052",
+        "parameters": 23592960,
+        "shapes": [
+          [
+            2560,
+            9216
+          ]
+        ],
+        "target": "model.layers.18.mlp.down_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d053",
+        "parameters": 23592960,
+        "shapes": [
+          [
+            9216,
+            2560
+          ]
+        ],
+        "target": "model.layers.18.mlp.gate_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d054",
+        "parameters": 23592960,
+        "shapes": [
+          [
+            9216,
+            2560
+          ]
+        ],
+        "target": "model.layers.18.mlp.up_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d055",
+        "parameters": 23592960,
+        "shapes": [
+          [
+            2560,
+            9216
+          ]
+        ],
+        "target": "model.layers.19.mlp.down_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d056",
+        "parameters": 23592960,
+        "shapes": [
+          [
+            9216,
+            2560
+          ]
+        ],
+        "target": "model.layers.19.mlp.gate_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d057",
+        "parameters": 23592960,
+        "shapes": [
+          [
+            9216,
+            2560
+          ]
+        ],
+        "target": "model.layers.19.mlp.up_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d058",
+        "parameters": 2621440,
+        "shapes": [
+          [
+            1024,
+            2560
+          ]
+        ],
+        "target": "model.layers.19.self_attn.k_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d059",
+        "parameters": 10485760,
+        "shapes": [
+          [
+            2560,
+            4096
+          ]
+        ],
+        "target": "model.layers.19.self_attn.o_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d060",
+        "parameters": 20971520,
+        "shapes": [
+          [
+            8192,
+            2560
+          ]
+        ],
+        "target": "model.layers.19.self_attn.q_proj"
+      },
+      {
+        "dtype": "torch.float32",
+        "key": "d061",
+        "parameters": 2621440,
+        "shapes": [
+          [
+            1024,
+            2560
+          ]
+        ],
+        "target": "model.layers.19.self_attn.v_proj"
+      }
+    ],
+    "adaptation_target_manifest_sha256": "d9145af593481f7a3eea2d2e15be6613fd9af606c57978c0daa1afe9857466a0",
+    "adaptation_targets": [
+      "model.layers.12.linear_attn.in_proj_a",
+      "model.layers.12.linear_attn.in_proj_b",
+      "model.layers.12.linear_attn.in_proj_qkv",
+      "model.layers.12.linear_attn.in_proj_z",
+      "model.layers.12.linear_attn.out_proj",
+      "model.layers.12.mlp.down_proj",
+      "model.layers.12.mlp.gate_proj",
+      "model.layers.12.mlp.up_proj",
+      "model.layers.13.linear_attn.in_proj_a",
+      "model.layers.13.linear_attn.in_proj_b",
+      "model.layers.13.linear_attn.in_proj_qkv",
+      "model.layers.13.linear_attn.in_proj_z",
+      "model.layers.13.linear_attn.out_proj",
+      "model.layers.13.mlp.down_proj",
+      "model.layers.13.mlp.gate_proj",
+      "model.layers.13.mlp.up_proj",
+      "model.layers.14.linear_attn.in_proj_a",
+      "model.layers.14.linear_attn.in_proj_b",
+      "model.layers.14.linear_attn.in_proj_qkv",
+      "model.layers.14.linear_attn.in_proj_z",
+      "model.layers.14.linear_attn.out_proj",
+      "model.layers.14.mlp.down_proj",
+      "model.layers.14.mlp.gate_proj",
+      "model.layers.14.mlp.up_proj",
+      "model.layers.15.mlp.down_proj",
+      "model.layers.15.mlp.gate_proj",
+      "model.layers.15.mlp.up_proj",
+      "model.layers.15.self_attn.k_proj",
+      "model.layers.15.self_attn.o_proj",
+      "model.layers.15.self_attn.q_proj",
+      "model.layers.15.self_attn.v_proj",
+      "model.layers.16.linear_attn.in_proj_a",
+      "model.layers.16.linear_attn.in_proj_b",
+      "model.layers.16.linear_attn.in_proj_qkv",
+      "model.layers.16.linear_attn.in_proj_z",
+      "model.layers.16.linear_attn.out_proj",
+      "model.layers.16.mlp.down_proj",
+      "model.layers.16.mlp.gate_proj",
+      "model.layers.16.mlp.up_proj",
+      "model.layers.17.linear_attn.in_proj_a",
+      "model.layers.17.linear_attn.in_proj_b",
+      "model.layers.17.linear_attn.in_proj_qkv",
+      "model.layers.17.linear_attn.in_proj_z",
+      "model.layers.17.linear_attn.out_proj",
+      "model.layers.17.mlp.down_proj",
+      "model.layers.17.mlp.gate_proj",
+      "model.layers.17.mlp.up_proj",
+      "model.layers.18.linear_attn.in_proj_a",
+      "model.layers.18.linear_attn.in_proj_b",
+      "model.layers.18.linear_attn.in_proj_qkv",
+      "model.layers.18.linear_attn.in_proj_z",
+      "model.layers.18.linear_attn.out_proj",
+      "model.layers.18.mlp.down_proj",
+      "model.layers.18.mlp.gate_proj",
+      "model.layers.18.mlp.up_proj",
+      "model.layers.19.mlp.down_proj",
+      "model.layers.19.mlp.gate_proj",
+      "model.layers.19.mlp.up_proj",
+      "model.layers.19.self_attn.k_proj",
+      "model.layers.19.self_attn.o_proj",
+      "model.layers.19.self_attn.q_proj",
+      "model.layers.19.self_attn.v_proj"
+    ],
+    "adaptation_targets_sha256": "c7b8e521de33c854144a64d69d88469ce609c1b13988e0e668ba3b0f2e53bed7",
+    "adaptation_zero_function": {
+      "max_abs_output_weight": 0.0,
+      "nonzero_output_weights": 0
+    },
+    "capacity": "fullrank",
+    "dropout_control": {
+      "active_nn_dropout_modules": [],
+      "matched_adaptation_dropout": 0.05,
+      "model_config_dropout_values": {
+        "attention_dropout": 0.0
+      }
+    },
+    "environment": {
+      "cuda_runtime": "12.9",
+      "device": {
+        "compute_capability": "8.9",
+        "cuda_runtime": "12.9",
+        "free_memory_gib_before_load": 35.64874267578125,
+        "name": "NVIDIA RTX 6000 Ada Generation",
+        "runtime_total_memory_gib": 47.5001220703125,
+        "torch": "2.11.0+cu129",
+        "total_memory_gib": 47.5001220703125,
+        "uuid": "GPU-c6cd13ea-fb21-74f2-b9bc-d5aa828621e3"
+      },
+      "platform": "Linux-6.5.0-41-generic-x86_64-with-glibc2.39",
+      "python": "3.12.3",
+      "python_implementation": "CPython",
+      "torch": "2.11.0+cu129",
+      "transformers": "5.13.0"
+    },
+    "installed_environment_lock": {
+      "causal_conv1d_out_of_band_pin": "1.6.2.post1",
+      "packages": {
+        "accelerate": "1.14.0",
+        "annotated-doc": "0.0.4",
+        "anyio": "4.14.1",
+        "bitsandbytes": "0.49.2",
+        "causal_conv1d": "1.6.2.post1",
+        "certifi": "2026.6.17",
+        "click": "8.4.2",
+        "contourpy": "1.3.3",
+        "cuda-bindings": "12.9.7",
+        "cuda-pathfinder": "1.5.6",
+        "cuda-toolkit": "12.9.1",
+        "cycler": "0.12.1",
+        "einops": "0.8.2",
+        "filelock": "3.29.7",
+        "fla-core": "0.5.1",
+        "flash-linear-attention": "0.5.1",
+        "fonttools": "4.63.0",
+        "fsspec": "2026.6.0",
+        "h11": "0.16.0",
+        "hf-xet": "1.5.1",
+        "httpcore": "1.0.9",
+        "httpx": "0.28.1",
+        "huggingface-hub": "1.23.0",
+        "idna": "3.18",
+        "jinja2": "3.1.6",
+        "kiwisolver": "1.5.0",
+        "markdown-it-py": "4.2.0",
+        "markupsafe": "3.0.3",
+        "matplotlib": "3.10.8",
+        "mdurl": "0.1.2",
+        "mpmath": "1.3.0",
+        "networkx": "3.6.1",
+        "ninja": "1.13.0",
+        "numpy": "2.3.5",
+        "nvidia-cublas-cu12": "12.9.1.4",
+        "nvidia-cuda-cupti-cu12": "12.9.79",
+        "nvidia-cuda-nvrtc-cu12": "12.9.86",
+        "nvidia-cuda-runtime-cu12": "12.9.79",
+        "nvidia-cudnn-cu12": "9.17.1.4",
+        "nvidia-cufft-cu12": "11.4.1.4",
+        "nvidia-cufile-cu12": "1.14.1.1",
+        "nvidia-curand-cu12": "10.3.10.19",
+        "nvidia-cusolver-cu12": "11.7.5.82",
+        "nvidia-cusparse-cu12": "12.5.10.65",
+        "nvidia-cusparselt-cu12": "0.7.1",
+        "nvidia-nccl-cu12": "2.28.9",
+        "nvidia-nvjitlink-cu12": "12.9.86",
+        "nvidia-nvshmem-cu12": "3.4.5",
+        "nvidia-nvtx-cu12": "12.9.79",
+        "packaging": "26.2",
+        "pathspec": "1.1.1",
+        "peft": "0.19.1",
+        "pillow": "12.3.0",
+        "psutil": "7.2.2",
+        "pygments": "2.20.0",
+        "pyparsing": "3.3.2",
+        "python-dateutil": "2.9.0.post0",
+        "pyyaml": "6.0.3",
+        "regex": "2026.7.10",
+        "rich": "15.0.0",
+        "safetensors": "0.8.0",
+        "scikit-build-core": "1.0.2",
+        "scipy": "1.17.0",
+        "setuptools": "81.0.0",
+        "shellingham": "1.5.4",
+        "six": "1.17.0",
+        "sympy": "1.14.0",
+        "tokenizers": "0.22.2",
+        "torch": "2.11.0+cu129",
+        "tqdm": "4.68.4",
+        "transformers": "5.13.0",
+        "triton": "3.6.0",
+        "typer": "0.26.8",
+        "typing-extensions": "4.16.0",
+        "wheel": "0.47.0",
+        "xformers": "0.0.35"
+      },
+      "packages_sha256": "9b0c524b68a284d59fbc690c55c87b83dae167bf2a3dbe2f9066f330c6272259",
+      "requirements_training_lock_sha256": "05546fe977583116d6169ea0dfa7b27e1184dd4a2b61d556dfb3f889d5b2b7b1"
+    },
+    "model_seed": 7413,
+    "preflight_device": {
+      "compute_capability": "8.9",
+      "cuda_runtime": "12.9",
+      "free_memory_gib_before_load": 47.07843017578125,
+      "name": "NVIDIA RTX 6000 Ada Generation",
+      "runtime_total_memory_gib": 47.5001220703125,
+      "torch": "2.11.0+cu129",
+      "total_memory_gib": 47.5001220703125,
+      "uuid": "GPU-c6cd13ea-fb21-74f2-b9bc-d5aa828621e3"
+    },
+    "shared_initialization": {
+      "bundle_path": "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed7413.pt",
+      "bundle_sha256": "1167ebebf1365fe23fa6326c8c9f2859540ae2df9a7ef565c534768d2128b2f2",
+      "metadata": {
+        "config_sha256": "eeb4e828526f750dce1258bcc91d03114c80688d300112e03d18c9d911489393",
+        "design_lineage": {
+          "path": "experiments/qwen35_4b_state_formation_capacity_adjudication/reports/design_receipt.json",
+          "phase": "design_boundary",
+          "receipt_identity_sha256": "d943b909250c2ebd377b8094bb55324a5d5ccf555c7559736526f013d248ac52",
+          "sha256": "490035fe77519739e18eb3494ad693544c423a62d4222cf4ea0b4e3d5684d45e",
+          "status": "DESIGN_FROZEN"
+        },
+        "experiment_id": "qwen35_4b_state_formation_capacity_adjudication",
+        "initialization_seed": 914612187101609913,
+        "model_id": "Qwen/Qwen3.5-4B",
+        "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+        "model_seed": 7413,
+        "receipt_identity_sha256": "8a55981bb118d5738720fb214a01bb4b6afb51ede79b05f243b11836c238072f",
+        "requirements_training_lock_sha256": "05546fe977583116d6169ea0dfa7b27e1184dd4a2b61d556dfb3f889d5b2b7b1",
+        "schema_version": 1,
+        "source_contract_sha256": "5a8ed26ddb9446c728191ca8e7849ae44cff92a700e24b237dac522cf4286666",
+        "tensor_manifest": [
+          {
+            "dtype": "torch.float32",
+            "name": "scalars.aggregate_logit",
+            "sha256": "8140938e36a855e921cfae926d044ca6a244c26ca9b361e94624571bec469114",
+            "shape": []
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "scalars.damping_logit",
+            "sha256": "a9d9a7d1670eeec8f058c14dd7b85199e433e5d2e105f136dee3328f52c67feb",
+            "shape": []
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "state_initializer.down.weight",
+            "sha256": "ead4252d040882be83fb00f576160051a1ba067d58916e39a091efef5bf7a0b1",
+            "shape": [
+              64,
+              2560
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "state_initializer.norm.bias",
+            "sha256": "84ff92691f909a05b224e1c56abb4864f01b4f8e3c854e4bb4c7baf1d3f6d652",
+            "shape": [
+              2560
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "state_initializer.norm.weight",
+            "sha256": "37e287184de6a92556d6620dc350bb5fe1ee478ac42c1c7879ba7c77e9af235e",
+            "shape": [
+              2560
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "state_initializer.up.weight",
+            "sha256": "ff6335069b6e140eb47149d847aea80bf7e2b06bd80ae9708aa382efb3ae21ee",
+            "shape": [
+              2560,
+              64
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "step_encoder.project.weight",
+            "sha256": "ff6335069b6e140eb47149d847aea80bf7e2b06bd80ae9708aa382efb3ae21ee",
+            "shape": [
+              2560,
+              64
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "sufficiency.checksum.bias",
+            "sha256": "7caba37fee0d4bc8b074ccf05c28921f5ec57ac297aaa3293723a4b5b63e8188",
+            "shape": [
+              8
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "sufficiency.checksum.weight",
+            "sha256": "26e0f57b612d08ee6d3626fab04ee3fff7c8807f03cfe42db55184756880a86d",
+            "shape": [
+              8,
+              2560
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "sufficiency.node.bias",
+            "sha256": "6cfa22eeac8b3839f08ebef5999bc2c64fe20ddea719f26652df351b1d223559",
+            "shape": [
+              16
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "sufficiency.node.weight",
+            "sha256": "06769d19179414eba9d3efce7f62092010c5747c80382c14670aa1f349e68d18",
+            "shape": [
+              16,
+              2560
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "sufficiency.norm.bias",
+            "sha256": "84ff92691f909a05b224e1c56abb4864f01b4f8e3c854e4bb4c7baf1d3f6d652",
+            "shape": [
+              2560
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "sufficiency.norm.weight",
+            "sha256": "37e287184de6a92556d6620dc350bb5fe1ee478ac42c1c7879ba7c77e9af235e",
+            "shape": [
+              2560
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "sufficiency.phase.bias",
+            "sha256": "3c297925944d4d11384ae61c113aeb7ec5abb936eba643fab3929bf38427f9fc",
+            "shape": [
+              2
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "sufficiency.phase.weight",
+            "sha256": "a683a6a6509e8ef29408232ad077f50e454c16e29e1247e900ac94ae450eb9c6",
+            "shape": [
+              2,
+              2560
+            ]
+          }
+        ],
+        "tensor_values_sha256": "04054449d7c403a4a384b08554f0e471e06e2627356c10b1af44c9f9bdebefeb"
+      },
+      "phase": "shared_initialization",
+      "receipt_identity_sha256": "f7b95a1c72c96cd375e7ba9b7c35c1d5afe1aec29766d840a89b7dc30b345ddc",
+      "schema_version": 1,
+      "status": "SHARED_INITIALIZATION_PREPARED"
+    },
+    "tokenizer": {
+      "answer_token_ids": [
+        357,
+        417,
+        351,
+        414
+      ],
+      "pinned_snapshot": {
+        "files": [
+          {
+            "bytes": 7756,
+            "filename": "chat_template.jinja",
+            "resolved_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+            "sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715"
+          },
+          {
+            "bytes": 3161,
+            "filename": "config.json",
+            "resolved_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+            "sha256": "ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670"
+          },
+          {
+            "bytes": 3353259,
+            "filename": "merges.txt",
+            "resolved_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+            "sha256": "a9d356d7bdf1ef4949e3e748e95b8e10ad9d4e2e838eddc38a0a7b6b94d1db8d"
+          },
+          {
+            "bytes": 5329398688,
+            "filename": "model.safetensors-00001-of-00002.safetensors",
+            "resolved_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+            "sha256": "26a93f066e1916adb13453dae5a0c707c0fbc71299ed98779571a907b8e74c61"
+          },
+          {
+            "bytes": 3990429408,
+            "filename": "model.safetensors-00002-of-00002.safetensors",
+            "resolved_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+            "sha256": "cb544bd9bfae93dc59b0f22b292f5933573854a7f9b97835c67060d7d910e188"
+          },
+          {
+            "bytes": 76196,
+            "filename": "model.safetensors.index.json",
+            "resolved_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+            "sha256": "cf3f798ee02ba45f9622aa8892a47369ab667d0afbf154ee7c2212de42e6302d"
+          },
+          {
+            "bytes": 12807982,
+            "filename": "tokenizer.json",
+            "resolved_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+            "sha256": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42"
+          },
+          {
+            "bytes": 16710,
+            "filename": "tokenizer_config.json",
+            "resolved_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+            "sha256": "316230d6a809701f4db5ea8f8fc862bc3a6f3229c937c174e674ff3ca0a64ac8"
+          },
+          {
+            "bytes": 6722759,
+            "filename": "vocab.json",
+            "resolved_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+            "sha256": "ce99b4cb2983d118806ce0a8b777a35b093e2000a503ebde25853284c9dfa003"
+          }
+        ],
+        "files_sha256": "06486f260c8e9135835c768802e0e947bab0470e4454a36e138da6d10ed1fe12",
+        "model_id": "Qwen/Qwen3.5-4B",
+        "requested_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+        "resolved_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+        "snapshot_layout": "snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
+      },
+      "runtime_model_config_commit_hash": null,
+      "state_token_id": 248063
+    },
+    "trainable_parameters": {
+      "adaptation": 892272640,
+      "common": 568348,
+      "names_sha256": "5c0cfb64778b2e482f5cb4abc149dbee5c01af9930ce3872e0a710c2e70c4d66",
+      "tensor_count": 77,
+      "total": 892840988,
+      "values_sha256": "bbf90899fad5b1a5c06d82b5c059270dac0f2c2a381945639768912304df7cf2"
+    }
+  },
+  "source_contract_sha256": "5a8ed26ddb9446c728191ca8e7849ae44cff92a700e24b237dac522cf4286666",
+  "status": "MODEL_SMOKE_PASS",
+  "timed_ten_step_probe": {
+    "elapsed_seconds": 3.3726999759674072,
+    "losses": [
+      0.9636637568473816,
+      1.5792616605758667,
+      1.1696052551269531,
+      0.9430974721908569,
+      0.610595703125,
+      0.3423869013786316,
+      0.41690319776535034,
+      0.2578074336051941,
+      0.1955242156982422,
+      0.11493238061666489
+    ],
+    "seconds_per_step": 0.3372699975967407,
+    "steps": 10
+  },
+  "training_or_evaluation_started": false,
+  "two_step_gradient_probe": [
+    {
+      "dropout_probe": {
+        "call_manifest_sha256": "3436262cdc884b35663442aff34032438bc01d578abc6e53c9982c709806ce88",
+        "calls": 186,
+        "cycle_manifest_sha256s": [
+          "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368",
+          "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368",
+          "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368"
+        ],
+        "cycle_order_identical": true,
+        "cycles": 3,
+        "each_cycle_exact_target_set": true,
+        "mask_sha256": "3e358ac564720186ecd04a746505633e024341384d251cdffba3778b2f1705a5"
+      },
+      "gradients": {
+        "adaptation": {
+          "finite": 62,
+          "items": [
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d000.weight",
+              "norm": 0.01601644791662693
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d001.weight",
+              "norm": 0.04226956516504288
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d002.weight",
+              "norm": 0.225850448012352
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d003.weight",
+              "norm": 0.2169351875782013
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d004.weight",
+              "norm": 0.3219107687473297
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d005.weight",
+              "norm": 0.47763389348983765
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d006.weight",
+              "norm": 0.3772748112678528
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d007.weight",
+              "norm": 0.429390549659729
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d008.weight",
+              "norm": 0.022014960646629333
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d009.weight",
+              "norm": 0.03540220856666565
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d010.weight",
+              "norm": 0.21712319552898407
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d011.weight",
+              "norm": 0.1548825353384018
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d012.weight",
+              "norm": 0.25321513414382935
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d013.weight",
+              "norm": 0.49806058406829834
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d014.weight",
+              "norm": 0.367182195186615
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d015.weight",
+              "norm": 0.4533214271068573
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d016.weight",
+              "norm": 0.014000345021486282
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d017.weight",
+              "norm": 0.031124895438551903
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d018.weight",
+              "norm": 0.2905154526233673
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d019.weight",
+              "norm": 0.21312429010868073
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d020.weight",
+              "norm": 0.38085848093032837
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d021.weight",
+              "norm": 0.5010708570480347
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d022.weight",
+              "norm": 0.4136439263820648
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d023.weight",
+              "norm": 0.4621347188949585
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d024.weight",
+              "norm": 0.6102038025856018
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d025.weight",
+              "norm": 0.45792725682258606
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d026.weight",
+              "norm": 0.5208602547645569
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d027.weight",
+              "norm": 0.1739489883184433
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d028.weight",
+              "norm": 0.7605206370353699
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d029.weight",
+              "norm": 0.33992886543273926
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d030.weight",
+              "norm": 0.4723585247993469
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d031.weight",
+              "norm": 0.009059149771928787
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d032.weight",
+              "norm": 0.04039551317691803
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d033.weight",
+              "norm": 0.40107661485671997
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d034.weight",
+              "norm": 0.20226849615573883
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d035.weight",
+              "norm": 0.40753868222236633
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d036.weight",
+              "norm": 0.6342244148254395
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d037.weight",
+              "norm": 0.44904568791389465
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d038.weight",
+              "norm": 0.5534681677818298
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d039.weight",
+              "norm": 0.021095670759677887
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d040.weight",
+              "norm": 0.022991741076111794
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d041.weight",
+              "norm": 0.24225804209709167
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d042.weight",
+              "norm": 0.192544087767601
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d043.weight",
+              "norm": 0.2921704351902008
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d044.weight",
+              "norm": 0.703032910823822
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d045.weight",
+              "norm": 0.5570847988128662
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d046.weight",
+              "norm": 0.7053197026252747
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d047.weight",
+              "norm": 0.021515415981411934
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d048.weight",
+              "norm": 0.044620681554079056
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d049.weight",
+              "norm": 0.3054901361465454
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d050.weight",
+              "norm": 0.26104044914245605
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d051.weight",
+              "norm": 0.45614540576934814
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d052.weight",
+              "norm": 1.1938568353652954
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d053.weight",
+              "norm": 0.7315626740455627
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d054.weight",
+              "norm": 0.950400710105896
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d055.weight",
+              "norm": 1.124700665473938
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d056.weight",
+              "norm": 0.7324613332748413
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d057.weight",
+              "norm": 1.011102557182312
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d058.weight",
+              "norm": 0.2747478187084198
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d059.weight",
+              "norm": 0.9011873006820679
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d060.weight",
+              "norm": 0.5839408040046692
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d061.weight",
+              "norm": 0.5571540594100952
+            }
+          ],
+          "nonzero": 62,
+          "tensors": 62,
+          "with_gradient": 62
+        },
+        "aggregate_exempt": {
+          "finite": 0,
+          "items": [
+            {
+              "finite": false,
+              "has_gradient": false,
+              "name": "aggregate_logit",
+              "norm": null
+            }
+          ],
+          "nonzero": 0,
+          "tensors": 1,
+          "with_gradient": 0
+        },
+        "all_required_tensors_finite_nonzero": false,
+        "base_gradient_tensors": 0,
+        "damping": {
+          "finite": 1,
+          "items": [
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "damping_logit",
+              "norm": 0.0071563720703125
+            }
+          ],
+          "nonzero": 1,
+          "tensors": 1,
+          "with_gradient": 1
+        },
+        "initializer": {
+          "finite": 4,
+          "items": [
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "state_initializer.norm.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "state_initializer.norm.bias",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "state_initializer.down.weight",
+              "norm": 0.0
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "state_initializer.up.weight",
+              "norm": 1.0676528215408325
+            }
+          ],
+          "nonzero": 1,
+          "tensors": 4,
+          "with_gradient": 4
+        },
+        "step": {
+          "finite": 1,
+          "items": [
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "step_encoder.project.weight",
+              "norm": 0.2552734315395355
+            }
+          ],
+          "nonzero": 1,
+          "tensors": 1,
+          "with_gradient": 1
+        },
+        "sufficiency": {
+          "finite": 8,
+          "items": [
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "sufficiency.norm.weight",
+              "norm": 0.05578497052192688
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "sufficiency.norm.bias",
+              "norm": 0.05580553784966469
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "sufficiency.node.weight",
+              "norm": 3.907639741897583
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "sufficiency.node.bias",
+              "norm": 0.07710813730955124
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "sufficiency.phase.weight",
+              "norm": 0.7004473805427551
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "sufficiency.phase.bias",
+              "norm": 0.013896996155381203
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "sufficiency.checksum.weight",
+              "norm": 2.93481183052063
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "sufficiency.checksum.bias",
+              "norm": 0.057949721813201904
+            }
+          ],
+          "nonzero": 8,
+          "tensors": 8,
+          "with_gradient": 8
+        }
+      },
+      "loss": 0.942626953125,
+      "preclip_adaptation_gradient_norm": 3.8156135082244873,
+      "preclip_common_gradient_norm": 5.059072494506836,
+      "step": 1
+    },
+    {
+      "dropout_probe": {
+        "call_manifest_sha256": "3436262cdc884b35663442aff34032438bc01d578abc6e53c9982c709806ce88",
+        "calls": 186,
+        "cycle_manifest_sha256s": [
+          "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368",
+          "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368",
+          "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368"
+        ],
+        "cycle_order_identical": true,
+        "cycles": 3,
+        "each_cycle_exact_target_set": true,
+        "mask_sha256": "15ecc243fc09ff1a9c220a111edf136174e3d43f1400675bf9ba8b2c94025e1a"
+      },
+      "gradients": {
+        "adaptation": {
+          "finite": 62,
+          "items": [
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d000.weight",
+              "norm": 0.05137301981449127
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d001.weight",
+              "norm": 0.07745238393545151
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d002.weight",
+              "norm": 0.44422024488449097
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d003.weight",
+              "norm": 0.41380536556243896
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d004.weight",
+              "norm": 0.7898741364479065
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d005.weight",
+              "norm": 1.2002568244934082
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d006.weight",
+              "norm": 0.666472852230072
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d007.weight",
+              "norm": 0.6505285501480103
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d008.weight",
+              "norm": 0.05948814004659653
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d009.weight",
+              "norm": 0.08338594436645508
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d010.weight",
+              "norm": 0.46138155460357666
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d011.weight",
+              "norm": 0.4520077109336853
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d012.weight",
+              "norm": 0.6674334406852722
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d013.weight",
+              "norm": 0.9520856142044067
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d014.weight",
+              "norm": 0.7039951682090759
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d015.weight",
+              "norm": 0.7071549892425537
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d016.weight",
+              "norm": 0.05822020024061203
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d017.weight",
+              "norm": 0.06769728660583496
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d018.weight",
+              "norm": 0.45227280259132385
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d019.weight",
+              "norm": 0.3811720013618469
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d020.weight",
+              "norm": 0.8685493469238281
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d021.weight",
+              "norm": 0.984461784362793
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d022.weight",
+              "norm": 0.6828782558441162
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d023.weight",
+              "norm": 0.6594980955123901
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d024.weight",
+              "norm": 1.0098708868026733
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d025.weight",
+              "norm": 0.7264962792396545
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d026.weight",
+              "norm": 0.6942072510719299
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d027.weight",
+              "norm": 0.25296032428741455
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d028.weight",
+              "norm": 1.5824054479599
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d029.weight",
+              "norm": 0.5390713810920715
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d030.weight",
+              "norm": 0.9025795459747314
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d031.weight",
+              "norm": 0.031685326248407364
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d032.weight",
+              "norm": 0.06182491034269333
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d033.weight",
+              "norm": 0.538613498210907
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d034.weight",
+              "norm": 0.6546273827552795
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d035.weight",
+              "norm": 0.7486889958381653
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d036.weight",
+              "norm": 0.8624085187911987
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d037.weight",
+              "norm": 0.6556759476661682
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d038.weight",
+              "norm": 0.6337953805923462
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d039.weight",
+              "norm": 0.04819623753428459
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d040.weight",
+              "norm": 0.05389999598264694
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d041.weight",
+              "norm": 0.3018093705177307
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d042.weight",
+              "norm": 0.2711504101753235
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d043.weight",
+              "norm": 0.36184215545654297
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d044.weight",
+              "norm": 0.9770203828811646
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d045.weight",
+              "norm": 0.7474124431610107
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d046.weight",
+              "norm": 0.7173228859901428
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d047.weight",
+              "norm": 0.03331329673528671
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d048.weight",
+              "norm": 0.06496673077344894
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d049.weight",
+              "norm": 0.4552120566368103
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d050.weight",
+              "norm": 0.4613536298274994
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d051.weight",
+              "norm": 0.5068215727806091
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d052.weight",
+              "norm": 1.1137466430664062
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d053.weight",
+              "norm": 0.830729603767395
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d054.weight",
+              "norm": 0.8780052065849304
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d055.weight",
+              "norm": 0.9926774501800537
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d056.weight",
+              "norm": 0.8530400395393372
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d057.weight",
+              "norm": 0.8787586092948914
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d058.weight",
+              "norm": 0.3254510462284088
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d059.weight",
+              "norm": 1.6744831800460815
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d060.weight",
+              "norm": 0.695237398147583
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "adaptation.deltas.d061.weight",
+              "norm": 1.4402763843536377
+            }
+          ],
+          "nonzero": 62,
+          "tensors": 62,
+          "with_gradient": 62
+        },
+        "aggregate_exempt": {
+          "finite": 0,
+          "items": [
+            {
+              "finite": false,
+              "has_gradient": false,
+              "name": "aggregate_logit",
+              "norm": null
+            }
+          ],
+          "nonzero": 0,
+          "tensors": 1,
+          "with_gradient": 0
+        },
+        "all_required_tensors_finite_nonzero": true,
+        "base_gradient_tensors": 0,
+        "damping": {
+          "finite": 1,
+          "items": [
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "damping_logit",
+              "norm": 0.2580960988998413
+            }
+          ],
+          "nonzero": 1,
+          "tensors": 1,
+          "with_gradient": 1
+        },
+        "initializer": {
+          "finite": 4,
+          "items": [
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "state_initializer.norm.weight",
+              "norm": 0.0024623379576951265
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "state_initializer.norm.bias",
+              "norm": 0.0025802464224398136
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "state_initializer.down.weight",
+              "norm": 0.11213798075914383
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "state_initializer.up.weight",
+              "norm": 1.2443642616271973
+            }
+          ],
+          "nonzero": 4,
+          "tensors": 4,
+          "with_gradient": 4
+        },
+        "step": {
+          "finite": 1,
+          "items": [
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "step_encoder.project.weight",
+              "norm": 0.21531197428703308
+            }
+          ],
+          "nonzero": 1,
+          "tensors": 1,
+          "with_gradient": 1
+        },
+        "sufficiency": {
+          "finite": 8,
+          "items": [
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "sufficiency.norm.weight",
+              "norm": 0.08196229487657547
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "sufficiency.norm.bias",
+              "norm": 0.0800778865814209
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "sufficiency.node.weight",
+              "norm": 4.44899845123291
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "sufficiency.node.bias",
+              "norm": 0.08850525319576263
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "sufficiency.phase.weight",
+              "norm": 2.548218250274658
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "sufficiency.phase.bias",
+              "norm": 0.04799211025238037
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "sufficiency.checksum.weight",
+              "norm": 4.634135723114014
+            },
+            {
+              "finite": true,
+              "has_gradient": true,
+              "name": "sufficiency.checksum.bias",
+              "norm": 0.09210155159235
+            }
+          ],
+          "nonzero": 8,
+          "tensors": 8,
+          "with_gradient": 8
+        }
+      },
+      "loss": 0.8665241003036499,
+      "preclip_adaptation_gradient_norm": 5.594126224517822,
+      "preclip_common_gradient_norm": 7.033347129821777,
+      "step": 2
+    }
+  ],
+  "worst_call_receipt": {
+    "call_manifest_sha256": "cb094307b7ad8b9ed808b60be2f0938a3ba31b4fe7646b80551e005a817343e2",
+    "calls": 682,
+    "cycle_manifest_sha256s": [
+      "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368",
+      "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368",
+      "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368",
+      "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368",
+      "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368",
+      "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368",
+      "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368",
+      "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368",
+      "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368",
+      "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368",
+      "52a1ee27ed0f94cd07723d3636e66706909a002971cd6520fa44e43ea3206368"
+    ],
+    "cycle_order_identical": true,
+    "cycles": 11,
+    "each_cycle_exact_target_set": true,
+    "mask_sha256": "a4bbcf1ccef4ecb8b31dc037b8443281f95b22cec0fb6f5d8c975a031f9ab22b"
+  },
+  "worst_depth": 12,
+  "worst_forward_seconds": 1.5596201419830322,
+  "worst_setup_row": {
+    "cross_result_structural_overlap": 0,
+    "id": "setup_g0_worst_depth-73992-3d78d0259088",
+    "seed": 73992,
+    "structural_fingerprint": "978250bc4503025c00b9feb9f9ff8726450f52351cbcb51b2a4a4a880277c41e"
+  },
+  "zero_function_enabled_minus_disabled_error": 0.0
+}

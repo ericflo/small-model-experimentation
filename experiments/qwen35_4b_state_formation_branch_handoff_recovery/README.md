@@ -1,6 +1,6 @@
 # State-Formation Branch Handoff Recovery
 
-**Status:** in-progress · since 2026-07-14 · full-rank seed-7412 G0/control pair passes; publish it before seed 7413
+**Status:** in-progress · since 2026-07-14 · all three full-rank G0/control pairs pass; publish the complete setup matrix before Stage-B training
 
 This operational successor lets immutable producer v11 continue after the first branch recovery
 successfully replaces the retired failed-G0 receipt at its canonical path. It changes no scientific
@@ -104,10 +104,19 @@ identity are `1cbbd823…8510` / `6575e1d2…4554`: oracle/intact 48/48 and disa
 `d61d6441…9246` and `6334d72f…c14a`. Both receipts retain zero result, benchmark, contrast, and
 scientific-evidence access.
 
+After seed-7412 setup commit `92473a53…8530` passed both workflows, seed 7413 completed the matrix.
+Its G0 file SHA-256 / identity are `021a8444…d635` / `4d2316d3…2ff0`: zero K=1 and round-trip
+error, finite/nonzero joint gradients, complete finite optimizer state for all 62 deltas, finite K=12,
+and 22.1 GiB free. Its control file SHA-256 / identity are `8a4af0d6…fde8` / `976f28ef…14df`:
+oracle/intact 48/48 and disabled 0/48 after exact 256 updates, accumulation 16, and 4,096
+presentations, with changed full-rank/shared state. Handoff G0/control COMPLETE identities are
+`fbfb282f…5aef` / `ccff1520…58c9`. All three pairs now pass, remain setup-only, and open no result,
+benchmark, contrast, or scientific evidence.
+
 ## Interpretation
 
-The valid G0 and control establish full-rank feasibility and a working state path, not a capacity
-result. This recovery safely handed producer authority from G0 to the preregistered control without
+The three valid G0/control pairs establish full-rank feasibility and a working state path at every
+seed, not a capacity result. This recovery safely handed producer authority through setup without
 changing scientific logic. Capacity interpretation remains unchanged.
 
 ## Knowledgebase Update

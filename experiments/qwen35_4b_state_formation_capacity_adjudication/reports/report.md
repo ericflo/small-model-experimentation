@@ -52,6 +52,14 @@ for all 62 delta tensors, finite K=12, and 22.1 GiB free. The control has oracle
 disabled 0/48 after exact 256 updates/4,096 presentations, with changed full-rank/shared state and
 zero result/benchmark/contrast/scientific access. Publish this pair before seed 7413.
 
+Seed-7412 setup commit `92473a53…8530` passed both workflows. Full-rank seed 7413 then passed G0 at
+file SHA-256 `021a8444…d635`, identity `4d2316d3…2ff0`, and control at file SHA-256
+`8a4af0d6…fde8`, identity `976f28ef…14df`. G0 has zero K=1/round-trip error, complete finite state
+for all 62 deltas, finite K=12, and 22.1 GiB free. Control has oracle/intact 48/48 and disabled 0/48
+after exact 256 updates/4,096 presentations, changed full-rank/shared state, and zero result/
+benchmark/contrast/scientific access. The complete three-seed full-rank setup matrix passes; publish
+it before Stage-B training.
+
 **Historical pre-result setup record follows.** Preregistration, adversarial design review, and the
 frozen design are complete. Source-v10 implementation authorization is `GO` at reviewed digest
 `a5a494b7…6f1c4a` and full source contract `979a9012…f394b7`, with 360/360 source-bound tests passing.

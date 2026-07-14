@@ -34,6 +34,12 @@ receipts.
 - Full-rank seed-7412 control: file SHA-256 `1cbbd823…8510`, identity `6575e1d2…4554`; oracle/intact
   48/48, disabled 0/48, 256 updates, accumulation 16, 4,096 presentations, changed full-rank/shared
   state, and zero result/benchmark/contrast/scientific access.
+- Full-rank seed-7413 G0: file SHA-256 `021a8444…d635`, identity `4d2316d3…2ff0`; zero K=1/
+  round-trip error, complete finite optimizer state for all 62 deltas, finite K=12, 22.1 GiB free.
+- Full-rank seed-7413 control: file SHA-256 `8a4af0d6…fde8`, identity `976f28ef…14df`; oracle/intact
+  48/48, disabled 0/48, 256 updates, accumulation 16, 4,096 presentations, changed full-rank/shared
+  state, and zero result/benchmark/contrast/scientific access.
+- Complete matrix: all three independent full-rank G0/control pairs pass; this remains setup-only.
 
 ## Interpretation
 
@@ -42,5 +48,6 @@ that its inputs independently authorize.
 
 ## Next action
 
-Publish the seed-7412 G0/control and handoff invocation receipts, require both workflows green, then
-run the registered full-rank seed-7413 G0/control pair through this wrapper.
+Publish the complete three-seed setup matrix and require both workflows green. Then run the six
+already-mandated Stage-B cells—three LoRA state-only and three full-rank joint—through this wrapper;
+no scientific evaluation begins until the producer's exact training barriers authorize it.

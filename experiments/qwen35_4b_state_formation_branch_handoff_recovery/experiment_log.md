@@ -53,3 +53,18 @@
   presentations. Full-rank/shared-state parameters changed; no early stop or checkpoint selection.
 - Current authorization: publish this setup checkpoint and require both workflows green before seed
   7413. Result training remains blocked on the complete setup matrix.
+
+## 2026-07-14 — full-rank seed-7413 pair passes; setup matrix complete
+
+- Seed-7412 setup commit `92473a53…8530` passed both workflows before seed 7413 began.
+- G0 file SHA-256 / identity are `021a8444…d635` / `4d2316d3…2ff0`; handoff G0 STARTED/COMPLETE
+  file hashes are `a38ebcba…38ed` / `11229858…cea3`, COMPLETE identity `fbfb282f…5aef`.
+- G0 has zero K=1/round-trip error, finite/nonzero joint gradients, complete finite optimizer state
+  for all 62 deltas, finite K=12, and 22.1 GiB free.
+- Control file SHA-256 / identity are `8a4af0d6…fde8` / `976f28ef…14df`; handoff control STARTED/
+  COMPLETE file hashes are `d5dbe18e…afa5` / `8cd6ff71…3c89`, COMPLETE identity
+  `ccff1520…58c9`.
+- Oracle/intact are 48/48 and disabled is 0/48 after exact 256 updates, accumulation 16, and 4,096
+  presentations. Full-rank/shared-state parameters changed; no early stop or checkpoint selection.
+- All three full-rank setup pairs now pass with zero result, benchmark, contrast, or scientific
+  evidence. Publish/green the complete matrix before any Stage-B training cell.
