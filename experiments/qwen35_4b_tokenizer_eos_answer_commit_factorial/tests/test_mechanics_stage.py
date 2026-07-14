@@ -6,6 +6,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 
 EXP = Path(__file__).resolve().parents[1]
@@ -96,6 +97,9 @@ class MechanicsStageTests(unittest.TestCase):
         self.assertEqual(
             forward["selected_program_id"], mechanics.canonical_program_id(expected)
         )
+        durable = stage.json_native(forward)
+        self.assertEqual(durable, json.loads(json.dumps(durable)))
+        self.assertIsInstance(durable["scored"][0]["full_program"], list)
 
     def test_hidden_scoring_keeps_selector_primary_and_coverage_diagnostic(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -185,6 +189,110 @@ class MechanicsStageTests(unittest.TestCase):
                 result["report_only_exhaustive_cpu_ceiling"]["coverage"], 1.0
             )
             self.assertEqual(result["hidden_files_read"], ["ciphertext", "key"])
+
+    def test_direct_pool_exhaustion_emits_frozen_terminal_before_selection(self) -> None:
+        public = [{"task_id": f"task-{index:02d}"} for index in range(24)]
+        bundles = {name: {"rows": []} for name in stage.GENERATION_INVOCATIONS}
+        for task in public:
+            task_id = task["task_id"]
+            for index in range(96):
+                candidate_id = f"{task_id}-direct-{index:02d}"
+                bundles["direct"]["rows"].append(
+                    {
+                        "meta": {"task_id": task_id, "sample_index": index},
+                        "candidate_result": {
+                            "candidate_id": candidate_id,
+                            "candidate": None,
+                            "text": "",
+                            "cost": {},
+                            "sample_index": index,
+                        }
+                    }
+                )
+            for invocation in (
+                "suffix_materialized",
+                "suffix_name_only",
+                "suffix_shuffled",
+            ):
+                for index in range(24):
+                    bundles[invocation]["rows"].append(
+                        {
+                            "meta": {"task_id": task_id},
+                            "candidate_result": {
+                                "candidate_id": f"{task_id}-{invocation}-{index:02d}",
+                                "candidate": ["reverse", None],
+                                "text": "",
+                                "cost": {},
+                                "sample_index": None,
+                            }
+                        }
+                    )
+
+        def exhausted_plan(*, task_id, treatment_outputs, direct_outputs, direct_row_ids):
+            return {
+                "task_id": task_id,
+                "treatment": {},
+                "sampled": {
+                    "pool_exhausted": True,
+                    "first_over_k": None,
+                    "selected_direct_row_ids": direct_row_ids,
+                    "overshoot": None,
+                },
+                "logical": {
+                    "pool_exhausted": False,
+                    "first_over_k": 1,
+                    "selected_direct_row_ids": direct_row_ids[:1],
+                    "overshoot": 0,
+                },
+                "direct_pool_rows": len(direct_outputs),
+                "direct_pool_row_ids": direct_row_ids,
+                "resource_plan_sha256": "a" * 64,
+            }
+
+        with tempfile.TemporaryDirectory() as directory:
+            public_path = Path(directory) / "public.jsonl"
+            public_path.write_text("model-free synthetic public receipt\n")
+            patches = (
+                mock.patch.object(stage, "authenticate_transport_decision"),
+                mock.patch.object(
+                    stage, "authenticate_registered_complete_chain", return_value={}
+                ),
+                mock.patch.object(stage, "_load_public", return_value=public),
+                mock.patch.object(stage, "_bundles", return_value=bundles),
+                mock.patch.object(
+                    stage,
+                    "mechanics_sampling_plan",
+                    return_value={name: {} for name in stage.MECHANICS_INVOCATION_ORDER},
+                ),
+                mock.patch.object(stage, "read_jsonl", return_value=[]),
+                mock.patch.object(stage, "read_canonical", return_value={}),
+                mock.patch.object(
+                    stage,
+                    "authenticate_selected_interface_bundle",
+                    return_value={"authenticated": True},
+                ),
+                mock.patch.object(
+                    stage,
+                    "_visible_candidate",
+                    side_effect=lambda row, suffix: row["candidate_result"],
+                ),
+                mock.patch.object(
+                    stage, "freeze_taskwise_matches", side_effect=exhausted_plan
+                ),
+            )
+            with patches[0], patches[1], patches[2], patches[3], patches[4], patches[
+                5
+            ], patches[6], patches[7], patches[8], patches[9]:
+                result = stage.analyze_visible(
+                    decision=self.decision,
+                    inputs=self.inputs,
+                    public_path=public_path,
+                    tokenizer=object(),
+                )
+        self.assertEqual(result["decision"], "DIRECT_RESOURCE_MATCH_POOL_EXHAUSTED")
+        self.assertEqual(len(result["exhausted_tasks"]), 24)
+        self.assertNotIn("tasks", result)
+        self.assertEqual(result["hidden_files_read"], [])
 
 
 if __name__ == "__main__":

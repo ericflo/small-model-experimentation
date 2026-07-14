@@ -47,6 +47,19 @@ _BOOTSTRAP_RUNTIME_FILES = (
     str(EXP_REL / "scripts/mechanics_launcher.S"),
     *_BOOTSTRAP_IMPORT_FILES,
 )
+_BOOTSTRAP_SUPPORT_FILES = (
+    str(EXP_REL / "reports/calibration_implementation_review.json"),
+    str(EXP_REL / "reports/calibration_implementation_review.md"),
+    str(EXP_REL / "reports/mechanics_implementation_review.json"),
+    str(EXP_REL / "reports/mechanics_implementation_review.md"),
+    str(EXP_REL / "runs/prepared/calibration_requests.jsonl"),
+    str(EXP_REL / "runs/prepared/preoutcome_receipt.json"),
+    str(EXP_REL / "runs/tokenizer/receipt.json"),
+    str(EXP_REL / "scripts/calibration_launcher"),
+    str(EXP_REL / "scripts/calibration_launcher.S"),
+    str(EXP_REL / "scripts/run_calibration.py"),
+    str(EXP_REL / "src/process_lock.py"),
+)
 _MODEL_ID = "Qwen/Qwen3.5-4B"
 _MODEL_REVISION = "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
 _BOOTSTRAP_GOLD_AUTHORIZED = False
@@ -235,7 +248,10 @@ def _install_mechanics_path_audit(
             "suffix_shuffled_requests.jsonl",
         )
     }
-    allowed = {(ROOT / relative).resolve() for relative in allowed_relative}
+    allowed = {
+        (ROOT / relative).resolve()
+        for relative in (*allowed_relative, *_BOOTSTRAP_SUPPORT_FILES)
+    }
     allowed.add((EXP / "runs/construction/summary.json").resolve())
     git_root = (ROOT / ".git").resolve()
     environment_root = (ROOT / ".venv-vllm").resolve()
@@ -447,6 +463,7 @@ from mechanics_stage import (  # noqa: E402
     HIDDEN_RESULT,
     MECHANICS_INVOCATION_ORDER,
     RAW_DIR,
+    RESOURCE_DECISION,
     TRANSPORT_DECISION,
     VISIBLE_SELECTION,
     analyze_transport,
@@ -505,6 +522,12 @@ def visible_analysis() -> dict[str, Any]:
         runner_path=RUNNER_PATH,
         tokenizer=tokenizer,
     )
+    if value["decision"] == "DIRECT_RESOURCE_MATCH_POOL_EXHAUSTED":
+        if VISIBLE_SELECTION.exists() or VISIBLE_SELECTION.is_symlink():
+            raise RuntimeError("resource exhaustion cannot coexist with visible selection")
+        return _write_or_verify(RESOURCE_DECISION, value)
+    if RESOURCE_DECISION.exists() or RESOURCE_DECISION.is_symlink():
+        raise RuntimeError("visible selection cannot coexist with resource exhaustion")
     return _write_or_verify(VISIBLE_SELECTION, value)
 
 

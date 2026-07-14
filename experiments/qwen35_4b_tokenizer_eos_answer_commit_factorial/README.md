@@ -1,6 +1,6 @@
 # Qwen3.5-4B Tokenizer-EOS Answer Commit Factorial
 
-**Status:** in-progress · since 2026-07-14 · `PASS_DESIGN` + exact-commit `PASS_IMPLEMENTATION`; fresh calibration: tokenizer-EOS-only interface qualified; conditional mechanics pending winner-bound lock
+**Status:** in-progress · since 2026-07-14 · `PASS_DESIGN` + calibration `PASS_IMPLEMENTATION`; fresh calibration: tokenizer-EOS-only interface qualified; first conditional-mechanics implementation review held and repaired, fresh rereview pending
 
 This fresh successor tests whether the prior strict answer-seam failure was
 caused by waiting past Qwen3.5's tokenizer chat-end token. It registers the
@@ -226,6 +226,20 @@ The frozen decision is `TOKENIZER_EOS_ONLY_INTERFACE_QUALIFIED`; the winner is
 `hf_model_eos_no_think_program_slot`. This opens the preregistered conditional
 mechanics branch only after this calibration result and a second winner-bound
 lock are committed, pushed, and green.
+
+The first exact-commit conditional-mechanics review returned
+`HOLD_IMPLEMENTATION` for `fd06b5053c9327c61775d07061c9a84e070cdcb6`.
+It found four live-stage deadlocks (an incomplete path-audit allowlist, an
+invalid calibration-verifier call, and two Python-tuple/JSON-list durable
+comparison failures), partial type/schema authentication, a missing registered
+direct-pool-exhaustion terminal, and incomplete resource receipts. The
+prospective repairs add exact calibration/review support reads, a scoped and
+tested immutable-verifier adapter, JSON-domain receipts, exact typed
+engine/prompt/seed/token/terminal/cost authentication, omission of unrequested
+likelihood diagnostics, a durable `DIRECT_RESOURCE_MATCH_POOL_EXHAUSTED`
+receipt, and explicit overshoot/row-ID inventories. The model-free suite now
+passes 124/124. These repairs do not authorize mechanics; a fresh pushed-green
+exact-commit adversarial review and second lock are still required.
 
 ## Interpretation
 

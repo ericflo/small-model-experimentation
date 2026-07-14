@@ -29,7 +29,11 @@ class MechanicsBootstrapTests(unittest.TestCase):
     @staticmethod
     def _bootstrap_namespace() -> dict[str, Any]:
         tree = ast.parse(SCRIPT.read_text())
-        names = {"_BOOTSTRAP_IMPORT_FILES", "_BOOTSTRAP_RUNTIME_FILES"}
+        names = {
+            "_BOOTSTRAP_IMPORT_FILES",
+            "_BOOTSTRAP_RUNTIME_FILES",
+            "_BOOTSTRAP_SUPPORT_FILES",
+        }
         assignments = [
             node
             for node in tree.body
@@ -69,6 +73,35 @@ class MechanicsBootstrapTests(unittest.TestCase):
         self.assertEqual(
             namespace["_BOOTSTRAP_RUNTIME_FILES"],
             mechanics_lock.MECHANICS_RUNTIME_FILES,
+        )
+
+    def test_support_inventory_covers_immutable_calibration_and_reviews(self) -> None:
+        namespace = self._bootstrap_namespace()
+        prefix = str(EXP.relative_to(ROOT)) + "/"
+        expected = {
+            prefix + "reports/calibration_implementation_review.json",
+            prefix + "reports/calibration_implementation_review.md",
+            prefix + "reports/mechanics_implementation_review.json",
+            prefix + "reports/mechanics_implementation_review.md",
+            prefix + "runs/prepared/calibration_requests.jsonl",
+            prefix + "runs/prepared/preoutcome_receipt.json",
+            prefix + "runs/tokenizer/receipt.json",
+            prefix + "scripts/calibration_launcher",
+            prefix + "scripts/calibration_launcher.S",
+            prefix + "scripts/run_calibration.py",
+            prefix + "src/process_lock.py",
+        }
+        self.assertEqual(set(namespace["_BOOTSTRAP_SUPPORT_FILES"]), expected)
+        tree = ast.parse(SCRIPT.read_text())
+        audit = next(
+            node
+            for node in tree.body
+            if isinstance(node, ast.FunctionDef)
+            and node.name == "_install_mechanics_path_audit"
+        )
+        self.assertIn(
+            "_BOOTSTRAP_SUPPORT_FILES",
+            {node.id for node in ast.walk(audit) if isinstance(node, ast.Name)},
         )
 
     def test_preimport_json_requires_canonical_finite_unique_object(self) -> None:

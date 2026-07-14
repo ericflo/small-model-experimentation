@@ -7,6 +7,7 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
+import calibration_lock as calibration_authority
 from calibration_lock import (
     DECISION as CALIBRATION_DECISION,
     IMPLEMENTATION_LOCK as CALIBRATION_LOCK,
@@ -19,7 +20,6 @@ from calibration_lock import (
     _normalized,
     _validate_loaded_runner,
     query_green_ci,
-    verify_calibration_lock,
     verify_recorded_ci,
 )
 from calibration_stage import (
@@ -31,8 +31,10 @@ from calibration_stage import (
 from mechanics_stage import (
     DEFAULT_MECHANICS_LOCK,
     DEFAULT_MECHANICS_PREFLIGHT,
+    HIDDEN_RESULT,
     MECHANICS_INVOCATION_ORDER,
     RAW_DIR,
+    RESOURCE_DECISION,
     TRANSPORT_DECISION,
     VISIBLE_SELECTION,
     analyze_visible,
@@ -88,6 +90,46 @@ MECHANICS_CRITICAL_FILES = (
     PREFIX + "tests/test_plans.py",
     PREFIX + "tests/test_stats.py",
 )
+
+
+def _verify_calibration_lock_for_mechanics(
+    *, verify_network: bool = True
+) -> dict[str, Any]:
+    """Run the immutable calibration verifier with only live run dirt exempted.
+
+    The calibration verifier predates conditional mechanics and deliberately
+    accepts only calibration-run dirt.  We leave its reviewed bytes untouched,
+    first prove with Git pathspecs that no dirt exists outside the two exact run
+    trees, and then adapt only its exact status query to the already-proved
+    empty result.  Every content, hash, review, ancestry, and CI check remains
+    the immutable verifier's own implementation.
+    """
+
+    disallowed = _git(
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=all",
+        "--",
+        ".",
+        f":(exclude){PREFIX}runs/calibration/**",
+        f":(exclude){PREFIX}runs/mechanics/**",
+    )
+    if disallowed:
+        raise RuntimeError("calibration anchor has dirt outside registered live runs")
+    original_git = calibration_authority._git
+
+    def registered_live_status(*args: str) -> str:
+        if args == ("status", "--porcelain=v1", "--untracked-files=all"):
+            return ""
+        return original_git(*args)
+
+    calibration_authority._git = registered_live_status
+    try:
+        return calibration_authority.verify_calibration_lock(
+            verify_network=verify_network
+        )
+    finally:
+        calibration_authority._git = original_git
 
 
 def _exact_int(value: Any, minimum: int = 0) -> bool:
@@ -203,7 +245,15 @@ def _ensure_clean_for_lock() -> None:
         raise RuntimeError("publishing a mechanics lock requires a clean worktree")
     if any(
         path.exists() or path.is_symlink()
-        for path in (MECHANICS_LOCK, MECHANICS_PREFLIGHT, RAW_DIR, TRANSPORT_DECISION, VISIBLE_SELECTION)
+        for path in (
+            MECHANICS_LOCK,
+            MECHANICS_PREFLIGHT,
+            RAW_DIR,
+            TRANSPORT_DECISION,
+            RESOURCE_DECISION,
+            VISIBLE_SELECTION,
+            HIDDEN_RESULT,
+        )
     ):
         raise RuntimeError("mechanics lock must precede every mechanics artifact")
 
@@ -361,7 +411,7 @@ def publish_mechanics_lock(path: Path = MECHANICS_LOCK) -> dict[str, Any]:
     if path.resolve() != MECHANICS_LOCK.resolve():
         raise RuntimeError("mechanics lock path changed")
     _ensure_clean_for_lock()
-    calibration_lock = verify_calibration_lock()
+    calibration_lock = _verify_calibration_lock_for_mechanics()
     inputs = load_calibration_inputs()
     tokenizer = load_analysis_tokenizer(inputs)
     decision = _authenticate_calibration_decision(inputs=inputs, tokenizer=tokenizer)
@@ -428,9 +478,8 @@ def publish_mechanics_lock(path: Path = MECHANICS_LOCK) -> dict[str, Any]:
 def verify_mechanics_lock(
     path: Path = MECHANICS_LOCK, *, verify_network: bool = True
 ) -> dict[str, Any]:
-    calibration_lock = verify_calibration_lock(
-        verify_network=verify_network,
-        allowed_live_prefixes=("runs/calibration/", "runs/mechanics/"),
+    calibration_lock = _verify_calibration_lock_for_mechanics(
+        verify_network=verify_network
     )
     inputs = load_calibration_inputs()
     tokenizer = load_analysis_tokenizer(inputs)
@@ -526,10 +575,16 @@ def mechanics_preflight_value(
         "live_head_ci": query_green_ci(head),
         "selected_interface": lock["selected_interface"],
         "sampling": lock["sampling"],
+        "runner_sha256": sha256_file(EXP / "src/vllm_runner.py"),
         "engine": _normalized(dataclasses.asdict(runner.config)),
         "engine_args_sha256": canonical_sha256(_normalized(runner.engine_args)),
         "resolved_cudagraph": _normalized(runner.resolved_cudagraph),
         "resolved_logprobs_mode": runner.resolved_logprobs_mode,
+        "adapter": _normalized(runner.adapter_info),
+        "rng_isolation": {
+            "engine_seed": runner.engine_args["seed"],
+            "caller_global_rng_state_restored": True,
+        },
         "runtime": loaded["runtime"],
         "experimental_generation_requests_before_preflight": 0,
         "sampled_model_outputs_before_preflight": 0,
@@ -555,10 +610,13 @@ def publish_or_verify_mechanics_preflight(
             "live_head_ci",
             "selected_interface",
             "sampling",
+            "runner_sha256",
             "engine",
             "engine_args_sha256",
             "resolved_cudagraph",
             "resolved_logprobs_mode",
+            "adapter",
+            "rng_isolation",
             "runtime",
             "experimental_generation_requests_before_preflight",
             "sampled_model_outputs_before_preflight",
@@ -581,11 +639,19 @@ def publish_or_verify_mechanics_preflight(
             != value["live_head_ci"]
             or value["selected_interface"] != lock["selected_interface"]
             or value["sampling"] != lock["sampling"]
+            or value["runner_sha256"] != sha256_file(EXP / "src/vllm_runner.py")
             or value["engine"] != _normalized(dataclasses.asdict(runner.config))
             or value["engine_args_sha256"]
             != canonical_sha256(_normalized(runner.engine_args))
             or value["resolved_cudagraph"] != _normalized(runner.resolved_cudagraph)
             or value["resolved_logprobs_mode"] != runner.resolved_logprobs_mode
+            or value["adapter"] is not None
+            or not isinstance(value["rng_isolation"], dict)
+            or set(value["rng_isolation"])
+            != {"engine_seed", "caller_global_rng_state_restored"}
+            or type(value["rng_isolation"]["engine_seed"]) is not int
+            or value["rng_isolation"]["engine_seed"] != runner.engine_args["seed"]
+            or value["rng_isolation"]["caller_global_rng_state_restored"] is not True
             or value["experimental_generation_requests_before_preflight"] != 0
             or value["sampled_model_outputs_before_preflight"] != 0
             or value["hidden_files_read"] != []

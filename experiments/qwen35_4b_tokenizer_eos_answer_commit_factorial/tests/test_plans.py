@@ -89,12 +89,17 @@ class PlanTests(unittest.TestCase):
             task_id="task-1",
             treatment_outputs=treatment,
             direct_outputs=direct,
+            direct_row_ids=["d0", "d1", "d2"],
         )
         self.assertEqual(
             plan["treatment"],
             {"sampled_tokens": 9, "logical_model_tokens": 43},
         )
         self.assertEqual(plan["sampled"]["first_over_k"], 3)
+        self.assertEqual(plan["sampled"]["overshoot"], 0)
+        self.assertEqual(
+            plan["sampled"]["selected_direct_row_ids"], ["d0", "d1", "d2"]
+        )
         self.assertEqual(plan["logical"]["first_over_k"], 3)
         self.assertEqual(plan["direct_pool_rows"], 3)
         self.assertEqual(len(plan["resource_plan_sha256"]), 64)
@@ -104,14 +109,28 @@ class PlanTests(unittest.TestCase):
                 task_id="task-1",
                 treatment_outputs=treatment,
                 direct_outputs=direct,
+                direct_row_ids=["d0", "d1", "d2"],
             ),
         )
         reversed_plan = freeze_taskwise_matches(
             task_id="task-1",
             treatment_outputs=treatment,
             direct_outputs=list(reversed(direct)),
+            direct_row_ids=["d2", "d1", "d0"],
         )
         self.assertNotEqual(plan, reversed_plan)
+
+    def test_taskwise_exhaustion_receipt_is_self_contained(self) -> None:
+        plan = freeze_taskwise_matches(
+            task_id="task-exhausted",
+            treatment_outputs=[output(6, 0, 0)],
+            direct_outputs=[output(2, 1, 0), output(3, 1, 0)],
+            direct_row_ids=["d0", "d1"],
+        )
+        self.assertTrue(plan["sampled"]["pool_exhausted"])
+        self.assertIsNone(plan["sampled"]["overshoot"])
+        self.assertEqual(plan["sampled"]["selected_direct_row_ids"], ["d0", "d1"])
+        self.assertEqual(plan["direct_pool_row_ids"], ["d0", "d1"])
 
 
 if __name__ == "__main__":

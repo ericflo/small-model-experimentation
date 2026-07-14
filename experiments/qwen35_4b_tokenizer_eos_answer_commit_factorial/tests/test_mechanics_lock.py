@@ -18,6 +18,34 @@ from transactions import json_bytes, read_canonical  # noqa: E402
 
 
 class MechanicsLockTests(unittest.TestCase):
+    def test_calibration_verifier_adapter_uses_real_signature_and_restores_git(self) -> None:
+        original_git = mechanics_lock.calibration_authority._git
+
+        def fake_verify(*, verify_network=True):
+            self.assertEqual(
+                mechanics_lock.calibration_authority._git(
+                    "status", "--porcelain=v1", "--untracked-files=all"
+                ),
+                "",
+            )
+            return {"verified": verify_network}
+
+        with mock.patch.object(mechanics_lock, "_git", return_value=""), mock.patch.object(
+            mechanics_lock.calibration_authority,
+            "verify_calibration_lock",
+            side_effect=fake_verify,
+        ):
+            self.assertEqual(
+                mechanics_lock._verify_calibration_lock_for_mechanics(),
+                {"verified": True},
+            )
+        self.assertIs(mechanics_lock.calibration_authority._git, original_git)
+
+    def test_calibration_verifier_adapter_rejects_other_dirt(self) -> None:
+        with mock.patch.object(mechanics_lock, "_git", return_value=" M README.md"):
+            with self.assertRaises(RuntimeError):
+                mechanics_lock._verify_calibration_lock_for_mechanics()
+
     @classmethod
     def setUpClass(cls) -> None:
         cls.inputs = load_calibration_inputs()

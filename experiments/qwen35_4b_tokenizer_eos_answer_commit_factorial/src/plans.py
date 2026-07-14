@@ -74,7 +74,14 @@ def freeze_taskwise_matches(
     task_id: str,
     treatment_outputs: Sequence[dict[str, Any]],
     direct_outputs: Sequence[dict[str, Any]],
+    direct_row_ids: Sequence[str],
 ) -> dict[str, Any]:
+    if (
+        len(direct_row_ids) != len(direct_outputs)
+        or len(set(direct_row_ids)) != len(direct_row_ids)
+        or any(not isinstance(row_id, str) or not row_id for row_id in direct_row_ids)
+    ):
+        raise ValueError("direct row-ID inventory changed")
     treatment = pool_cost(treatment_outputs)
     sampled = conservative_first_over(
         direct_outputs, target=treatment["sampled_tokens"], metric="sampled_tokens"
@@ -84,12 +91,25 @@ def freeze_taskwise_matches(
         target=treatment["logical_model_tokens"],
         metric="logical_model_tokens",
     )
+    for receipt in (sampled, logical):
+        selected_k = (
+            len(direct_row_ids)
+            if receipt["pool_exhausted"]
+            else int(receipt["first_over_k"])
+        )
+        receipt["selected_direct_row_ids"] = list(direct_row_ids[:selected_k])
+        receipt["overshoot"] = (
+            None
+            if receipt["pool_exhausted"]
+            else int(receipt["first_over_cost"]) - int(receipt["target"])
+        )
     payload = {
         "task_id": task_id,
         "treatment": treatment,
         "sampled": sampled,
         "logical": logical,
         "direct_pool_rows": len(direct_outputs),
+        "direct_pool_row_ids": list(direct_row_ids),
     }
     payload["resource_plan_sha256"] = hashlib.sha256(
         json.dumps(payload, sort_keys=True, separators=(",", ":")).encode("utf-8")

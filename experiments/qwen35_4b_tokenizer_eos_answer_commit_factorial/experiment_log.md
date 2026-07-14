@@ -67,6 +67,23 @@
   requests, outputs, protected
   arrays, ciphertext reads, key reads, hidden plaintext reads, and model calls
   remain zero pending a fresh independent adversarial implementation review.
+- The first conditional-mechanics exact-SHA review returned
+  `HOLD_IMPLEMENTATION` for pushed-green commit `fd06b505`. It identified an
+  incomplete path-audit support allowlist, a nonexistent calibration-verifier
+  keyword, persisted tuple/list mismatches in generation and visible receipts,
+  partial type/schema/logprob checks, a missing durable direct-pool-exhaustion
+  terminal, and absent explicit overshoot/direct-row-ID receipt fields. The
+  review ran 118/118 tests, rebuilt the static launcher byte-identically, and
+  made zero protected reads, model requests, sampled outputs, or GPU calls.
+- Repaired all seven findings prospectively with exact support inventories, a
+  scoped adapter around the immutable calibration verifier, JSON-domain durable
+  comparisons, exact typed engine/prompt/seed/token/terminal/cost schemas,
+  omission of unrequested likelihood diagnostics, the registered resource-
+  exhaustion receipt, and self-contained resource matching. New hostile tests
+  cover the real cross-module signature, durable round trips, Boolean aliases,
+  extra keys, logprob injection, row-order-independent semantic IDs, and pool
+  exhaustion. The model-free suite passes 124/124; mechanics calls and all
+  protected reads remain zero pending a fresh exact-commit rereview.
 
 ## Scaffold
 

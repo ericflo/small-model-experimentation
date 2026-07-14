@@ -66,6 +66,7 @@ DEFAULT_RUNNER_PATH = EXP / "src/vllm_runner.py"
 RAW_DIR = EXP / "runs/mechanics/raw"
 TRANSPORT_DECISION = EXP / "runs/mechanics/transport_decision.json"
 VISIBLE_SELECTION = EXP / "runs/mechanics/visible_selection.json"
+RESOURCE_DECISION = EXP / "runs/mechanics/resource_decision.json"
 HIDDEN_RESULT = EXP / "runs/mechanics/hidden_result.json"
 PUBLIC_PATH = EXP / "data/procedural/mechanics_public.jsonl"
 GOLD_CIPHERTEXT_PATH = EXP / "data/procedural/mechanics_gold.jsonl.aesgcm"
@@ -84,6 +85,19 @@ def canonical_sha256(value: Any) -> str:
             allow_nan=False,
         ).encode("utf-8")
     ).hexdigest()
+
+
+def json_native(value: Any) -> Any:
+    """Return the exact JSON-domain value used by durable receipts."""
+
+    return json.loads(
+        json.dumps(
+            value,
+            sort_keys=True,
+            ensure_ascii=True,
+            allow_nan=False,
+        )
+    )
 
 
 def read_jsonl(path: Path) -> list[dict[str, Any]]:
@@ -430,12 +444,14 @@ def analyze_transport(
         through="transport",
     )
     bundle = read_canonical(artifact_paths(raw_dir, "transport")["bundle"])
+    engine_receipt = read_canonical(live_preflight_path)
     semantic_authentication = authenticate_selected_interface_bundle(
         records=read_jsonl(PREPARED_PATHS["transport"]),
         bundle=bundle,
         sampling=SamplingConfig(**mechanics_sampling_plan(decision, inputs)["transport"]),
         tokenizer=tokenizer,
         tokenizer_receipt=inputs.tokenizer_receipt,
+        engine_receipt=engine_receipt,
     )
     interface = inputs.config["interface"]
     metrics = _score_transport_rows(bundle["rows"])
@@ -701,6 +717,7 @@ def analyze_visible(
     public = _load_public(public_path)
     public_by_id = {row["task_id"]: row for row in public}
     bundles = _bundles(raw_dir)
+    engine_receipt = read_canonical(live_preflight_path)
     sampling_plan = mechanics_sampling_plan(decision, inputs)
     generation_authentication = {
         name: authenticate_selected_interface_bundle(
@@ -709,6 +726,7 @@ def analyze_visible(
             sampling=SamplingConfig(**sampling_plan[name]),
             tokenizer=tokenizer,
             tokenizer_receipt=inputs.tokenizer_receipt,
+            engine_receipt=engine_receipt,
         )
         for name, bundle in bundles.items()
     }
@@ -726,7 +744,10 @@ def analyze_visible(
             by_task[task_id][invocation].append(
                 _visible_candidate(row, suffix=suffix)
             )
-    tasks: dict[str, Any] = {}
+    resource_plans: dict[str, dict[str, Any]] = {}
+    task_groups: dict[
+        str, tuple[list[dict[str, Any]], list[dict[str, Any]], Mapping[str, list[dict[str, Any]]]]
+    ] = {}
     for task_id, groups in by_task.items():
         direct = sorted(groups["direct"], key=lambda row: row["sample_index"])
         materialized = groups["suffix_materialized"]
@@ -742,11 +763,40 @@ def analyze_visible(
             task_id=task_id,
             treatment_outputs=[row["cost"] for row in materialized],
             direct_outputs=[row["cost"] for row in direct],
+            direct_row_ids=[row["candidate_id"] for row in direct],
         )
-        if resource_plan["sampled"]["pool_exhausted"] or resource_plan["logical"][
-            "pool_exhausted"
-        ]:
-            raise RuntimeError("direct master pool exhausted a mandatory match")
+        resource_plans[task_id] = resource_plan
+        task_groups[task_id] = (direct, materialized, groups)
+    exhausted = {
+        task_id: [
+            metric
+            for metric in ("sampled", "logical")
+            if plan[metric]["pool_exhausted"]
+        ]
+        for task_id, plan in resource_plans.items()
+        if any(plan[metric]["pool_exhausted"] for metric in ("sampled", "logical"))
+    }
+    if exhausted:
+        return json_native(
+            {
+                "schema_version": 1,
+                "decision": inputs.config["outcomes"][
+                    "direct_resource_match_pool_exhausted"
+                ],
+                "winner": winner,
+                "resource_plans": resource_plans,
+                "exhausted_tasks": exhausted,
+                "generation_authentication": generation_authentication,
+                "transaction_chain": chain,
+                "public_sha256": hashlib.sha256(public_path.read_bytes()).hexdigest(),
+                "selector_uses_hidden": False,
+                "hidden_files_read": [],
+                "benchmark_files_read": [],
+            }
+        )
+    tasks: dict[str, Any] = {}
+    for task_id, (direct, materialized, groups) in task_groups.items():
+        resource_plan = resource_plans[task_id]
         sampled_k = int(resource_plan["sampled"]["first_over_k"])
         logical_k = int(resource_plan["logical"]["first_over_k"])
         controls = {
@@ -799,24 +849,26 @@ def analyze_visible(
         <= float(gate["all_generation_answer_cap_contact_rate_max"])
         for value in metrics.values()
     )
-    return {
-        "schema_version": 1,
-        "decision": (
-            "MECHANICS_VISIBLE_SELECTION_FROZEN"
-            if abi_pass
-            else "MECHANICS_INTERFACE_NONTRANSPORT"
-        ),
-        "winner": winner,
-        "generation_abi_pass": abi_pass,
-        "generation_metrics": metrics,
-        "generation_authentication": generation_authentication,
-        "tasks": tasks,
-        "transaction_chain": chain,
-        "public_sha256": hashlib.sha256(public_path.read_bytes()).hexdigest(),
-        "selector_uses_hidden": False,
-        "hidden_files_read": [],
-        "benchmark_files_read": [],
-    }
+    return json_native(
+        {
+            "schema_version": 1,
+            "decision": (
+                "MECHANICS_VISIBLE_SELECTION_FROZEN"
+                if abi_pass
+                else "MECHANICS_INTERFACE_NONTRANSPORT"
+            ),
+            "winner": winner,
+            "generation_abi_pass": abi_pass,
+            "generation_metrics": metrics,
+            "generation_authentication": generation_authentication,
+            "tasks": tasks,
+            "transaction_chain": chain,
+            "public_sha256": hashlib.sha256(public_path.read_bytes()).hexdigest(),
+            "selector_uses_hidden": False,
+            "hidden_files_read": [],
+            "benchmark_files_read": [],
+        }
+    )
 
 
 def _selected_program(selection: Mapping[str, Any]) -> tuple[Any, ...] | None:

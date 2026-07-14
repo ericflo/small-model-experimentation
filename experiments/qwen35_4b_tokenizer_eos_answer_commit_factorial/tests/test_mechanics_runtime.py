@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import copy
 import dataclasses
+import hashlib
+import json
 import sys
 import types
 import unittest
@@ -15,6 +17,7 @@ from mechanics_runtime import (  # noqa: E402
     authenticate_selected_interface_bundle,
     generate_selected_interface,
 )
+import vllm_runner  # noqa: E402
 from vllm_runner import SamplingConfig  # noqa: E402
 
 
@@ -80,6 +83,23 @@ class FakeRunner:
             self.tokenizer, [record["meta"]["expected"] for record in records]
         )
         self.lora_request = None
+        self.engine = {"fake_engine": "bound"}
+        self.engine_args = {"seed": 0, "fake": True}
+        self.resolved_cudagraph = {"mode": "fake"}
+        self.resolved_logprobs_mode = "raw_logprobs"
+        self.runtime = {
+            "python": "3.12.0",
+            "python_executable": "/pinned/python",
+            "platform": "fake",
+            "packages": {"vllm": "0.24.0+cu129"},
+            "environment_lock": {"sha256": "a" * 64},
+            "uv": "uv 1",
+            "cuda_toolkit": "cuda 12.9",
+            "gpu": "fake gpu",
+            "vllm_enable_v1_multiprocessing": "0",
+            "git_commit": "b" * 40,
+            "git_dirty": True,
+        }
 
     def prepare(self, records, thinking, allow_custom_prompts):
         if thinking != "off" or allow_custom_prompts:
@@ -124,7 +144,39 @@ class FakeRunner:
             "generation_mode": generation_mode,
             "model": "Qwen/Qwen3.5-4B",
             "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+            "runner_sha256": hashlib.sha256(
+                Path(vllm_runner.__file__).resolve().read_bytes()
+            ).hexdigest(),
+            "engine": self.engine,
+            "engine_args": self.engine_args,
+            "resolved_cudagraph": self.resolved_cudagraph,
+            "resolved_logprobs_mode": self.resolved_logprobs_mode,
             "sampling": dataclasses.asdict(sampling),
+            "resolved_sampling": sampling.resolved_sampling(),
+            "adapter": None,
+            "think_token_ids": {
+                "open": 248068,
+                "close": 248069,
+                "forced_close_sequence": [248069, 271],
+                "thinking_prompt_suffix": [248045, 74455, 198, 248068, 198],
+                "no_thinking_prompt_suffix": [
+                    248045,
+                    74455,
+                    198,
+                    248068,
+                    271,
+                    248069,
+                    271,
+                ],
+            },
+            "termination": {
+                "hf_model_eos_token_id": 248044,
+                "vllm_tokenizer_eos_ignored": 248046,
+            },
+            "rng_isolation": {
+                "engine_seed": 0,
+                "caller_global_rng_state_restored": True,
+            },
             "counts": {
                 "requests": len(rows),
                 "completions": len(rows),
@@ -145,6 +197,12 @@ class FakeRunner:
                 "reused_model_tokens": 0,
                 "injected_tokens": injected,
             },
+            "timing": {
+                "model_load_seconds": 1.0,
+                "generation_seconds": elapsed,
+                "sampled_tokens_per_second": sampled / elapsed,
+            },
+            "runtime": self.runtime,
             **extra,
         }
 
@@ -177,7 +235,49 @@ class MechanicsRuntimeTests(unittest.TestCase):
         )
         self.receipt = {
             "program_slot_prefix_token_ids": [78041, 25],
-            "termination": {"tokenizer_eos_token_id": 248046},
+            "termination": {
+                "tokenizer_eos_token_id": 248046,
+                "hf_model_eos_token_id": 248044,
+            },
+            "think_token_ids": {
+                "open": [248068],
+                "close": [248069],
+                "forced_close_sequence": [248069, 271],
+                "thinking_prompt_suffix": [248045, 74455, 198, 248068, 198],
+                "no_thinking_prompt_suffix": [
+                    248045,
+                    74455,
+                    198,
+                    248068,
+                    271,
+                    248069,
+                    271,
+                ],
+            },
+        }
+
+    @staticmethod
+    def engine_receipt(runner):
+        runtime = copy.deepcopy(runner.runtime)
+        runtime["git_dirty"] = False
+        return {
+            "runner_sha256": hashlib.sha256(
+                Path(vllm_runner.__file__).resolve().read_bytes()
+            ).hexdigest(),
+            "engine": runner.engine,
+            "engine_args_sha256": hashlib.sha256(
+                json.dumps(
+                    runner.engine_args, sort_keys=True, separators=(",", ":")
+                ).encode()
+            ).hexdigest(),
+            "resolved_cudagraph": runner.resolved_cudagraph,
+            "resolved_logprobs_mode": runner.resolved_logprobs_mode,
+            "adapter": None,
+            "rng_isolation": {
+                "engine_seed": 0,
+                "caller_global_rng_state_restored": True,
+            },
+            "runtime": runtime,
         }
 
     def test_generate_and_authenticate_exact_tokenizer_eos_boundary(self) -> None:
@@ -192,6 +292,7 @@ class MechanicsRuntimeTests(unittest.TestCase):
             sampling=self.sampling,
             tokenizer=runner.tokenizer,
             tokenizer_receipt=self.receipt,
+            engine_receipt=self.engine_receipt(runner),
         )
         self.assertEqual(receipt["rows"], 2)
         self.assertTrue(receipt["terminal_geometry_authenticated"])
@@ -215,6 +316,36 @@ class MechanicsRuntimeTests(unittest.TestCase):
                     "answer_cap_contact", 0
                 ),
             ),
+            (
+                "integer_thinking_closed",
+                lambda value: value["rows"][0]["outputs"][0].__setitem__(
+                    "thinking_closed", 0
+                ),
+            ),
+            (
+                "integer_sampling_boolean",
+                lambda value: value["runner_metadata"]["sampling"].__setitem__(
+                    "paired_answer_seed", 1
+                ),
+            ),
+            (
+                "boolean_count",
+                lambda value: value["runner_metadata"]["counts"].__setitem__(
+                    "reused_prompt_tokens", False
+                ),
+            ),
+            (
+                "forged_logprobs",
+                lambda value: value["rows"][0]["outputs"][0].__setitem__(
+                    "stage1_logprobs", [{"forged": True}]
+                ),
+            ),
+            (
+                "unregistered_output_key",
+                lambda value: value["rows"][0]["outputs"][0].__setitem__(
+                    "unregistered", 0
+                ),
+            ),
         ):
             with self.subTest(label=label):
                 forged = copy.deepcopy({"rows": rows, "runner_metadata": metadata})
@@ -226,7 +357,24 @@ class MechanicsRuntimeTests(unittest.TestCase):
                         sampling=self.sampling,
                         tokenizer=runner.tokenizer,
                         tokenizer_receipt=self.receipt,
+                        engine_receipt=self.engine_receipt(runner),
                     )
+
+    def test_authentication_survives_exact_durable_json_round_trip(self) -> None:
+        runner = FakeRunner(self.records)
+        rows, metadata = generate_selected_interface(
+            runner, self.records, self.sampling
+        )
+        bundle = json.loads(json.dumps({"rows": rows, "runner_metadata": metadata}))
+        receipt = authenticate_selected_interface_bundle(
+            records=self.records,
+            bundle=bundle,
+            sampling=self.sampling,
+            tokenizer=runner.tokenizer,
+            tokenizer_receipt=self.receipt,
+            engine_receipt=self.engine_receipt(runner),
+        )
+        self.assertEqual(receipt["rows"], 2)
 
 
 if __name__ == "__main__":
