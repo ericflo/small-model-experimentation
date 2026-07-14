@@ -1,6 +1,8 @@
 # Natural-Language State-Table Universal Curriculum
 
-**Status:** in-progress · since 2026-07-14 · both training arms complete; fresh local gate awaits this pushed-green checkpoint
+**Status:** finished
+
+Fresh local negative on 2026-07-14; aggregate sealed.
 
 This result-separated successor tests whether truth-audited, variable-depth
 natural-language state tables plus independent hypothesis scoring and a short
@@ -84,20 +86,35 @@ zero skips and final loss 0.4226. Its adapter weights/config hashes are
 the same parent and completed the same 320 rows, zero skips, and 40 steps with final
 loss 1.059. Its adapter weights/config hashes are `36e54804...5d0f` /
 `7101cc87...4b34`; receipt/log hashes are `6aab42b3...2be2` /
-`26907944...c059`. Training losses are operational evidence only; no capability
-result, merge, local capability event, or benchmark event exists.
+`26907944...c059`. Training losses are operational evidence only.
+
+Fresh paired local seed 88,008 rejected the candidate. Parent, replay, and candidate
+scored 19/26, 16/26, and 16/26 correct; parsed 23/26, 21/26, and 22/26; and contacted
+the 1,024-token cap 3, 5, and 5 times. Candidate execute/induct/probe was 0/2, 0/2,
+and 1/2, for 1/6 target cases versus replay 2/6 and parent 4/6. It failed accuracy,
+parse, cap, execute, induction, and every strict relative check. Promotion is empty,
+so no merge or benchmark event ran and conditional aggregate seed 78,138 remains
+sealed.
 
 ## Interpretation
 
-This design changes the interface, not the dose or close-token weight. Its novelty is
-an executable natural-language state table connected to independent hypothesis scores
-and a verified answer seam. Any later gain belongs to that package unless a frozen
-ablation separates the pieces.
+Truth-audited natural-language tables did not install a reusable deployed procedure.
+The candidate sometimes improved isolated computation: it solved one parent/replay
+trace miss, fixed one optimization case, and computed a state exactly before losing
+only on spaces. But it also treated a reference cycle declaration as an operation,
+repeated both induction cases to the cap, miscounted a probe score, and reached the
+correct execute result without committing before the cap. The idealized training
+interface therefore remained off-policy relative to the model's actual failure
+prefixes. Retire another hand-authored trace surface; the next result-separated test
+should use fresh on-policy failure-prefix correction with executable oracle
+continuations and exact serialization, under the same controls and gates.
 
 ## Knowledgebase Update
 
-- Program evidence: unchanged until a result exists.
-- Program backlog: this result-separated successor is design-frozen.
+- Program evidence: records the fresh exact-token local negative and failure anatomy.
+- Program backlog: retires idealized state-table surfaces and queues on-policy
+  failure-prefix correction.
+- Shared synthesis: adds the off-policy-interface boundary.
 - Claim ledger: unchanged.
 
 ## Artifacts
@@ -110,6 +127,9 @@ ablation separates the pieces.
 - `runs/training/replay_after_close.log`
 - `runs/training/state_table_after_close.json`
 - `runs/training/state_table_after_close.log`
+- `runs/local/seed88008.json`
+- `runs/local/seed88008_promotion.json`
+- `analysis/local_failure_forensics.md`
 - `scripts/run.py`
 - `reports/design_review.md`
 - `reports/preregistration.md`

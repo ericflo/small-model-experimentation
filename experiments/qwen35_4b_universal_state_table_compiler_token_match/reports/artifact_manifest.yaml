@@ -17,6 +17,11 @@ external_artifacts:
     required_for: "fresh local candidate and conditional explicit merge"
     checksum: "weights 36e54804558862fdbe5066fe523aba3847f826bd7036d6392945452dbe565d0f; config 7101cc8710dbdcc76a0adcb4574b6ee59168cb34f8d53a819b3f5becd9024b34"
     regenerate: ".venv/bin/python experiments/qwen35_4b_universal_state_table_compiler_token_match/scripts/run.py --stage train-candidate"
+  - name: "eligible merged checkpoints (not produced)"
+    storage: "large_artifacts/qwen35_4b_universal_state_table_compiler_token_match/merged/"
+    required_for: "conditional same-backend aggregate evaluation"
+    checksum: "not produced; state_table_after_close failed the frozen local gate"
+    regenerate: ".venv/bin/python experiments/qwen35_4b_universal_state_table_compiler_token_match/scripts/run.py --stage merge"
 omitted_artifacts:
   - path: "large_artifacts/qwen35_4b_universal_state_table_compiler_token_match/"
     reason: "both adapters and future merged checkpoints are large and gitignored"
@@ -39,5 +44,10 @@ notes: >-
   capability comparison exists. Candidate training independently restarted from the
   same parent at git 5b906a4e and completed with receipt 6aab42b3...2be2, log
   26907944...c059, loss 1.059, 40 steps, and zero skips. Its external weights/config
-  hashes are 36e54804...5d0f / 7101cc87...4b34. No capability, merge, or benchmark
-  receipt exists.
+  hashes are 36e54804...5d0f / 7101cc87...4b34. No capability receipt existed
+  before local evaluation. Fresh local seed 88008 produced complete receipt
+  027c0f63...f2869 and fail-closed promotion receipt 429770fd...70f5.
+  Parent/replay/candidate scored 19/16/16 correct and 4/2/1 target cases; candidate
+  failed five absolute checks and every strict relative check. No merged checkpoint
+  or benchmark artifact was produced; conditional aggregate seed 78138 remains
+  sealed.

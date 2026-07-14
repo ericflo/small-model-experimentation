@@ -1,0 +1,116 @@
+{
+  "candidate": "state_table_after_close",
+  "checks": {
+    "accuracy_at_least_0_65": false,
+    "cap_contacts_at_most_2": false,
+    "execute_accuracy_at_least_0_50": false,
+    "induct_accuracy_at_least_0_50": false,
+    "no_repeated_feasible_route_abstention": true,
+    "parse_rate_at_least_0_90": false,
+    "probe_accuracy_at_least_0_50": true
+  },
+  "mix": "induct=2,execute=2,select=2,trace=2,verify=2,count=2,repair=2,optimize=2,abstain=2,state=2,order=2,probe=2,route=2",
+  "passes": false,
+  "route_abstentions": 0,
+  "schema_version": 1,
+  "seed": 88008,
+  "summary": {
+    "accuracy": 0.6153846153846154,
+    "answer_counts": {
+      "24>79>68>02>91>13": 1,
+      "35": 1,
+      "4": 1,
+      "46+02": 1,
+      "6": 1,
+      "80": 1,
+      "<NONE>": 4,
+      "<answer>": 1,
+      "I": 1,
+      "II-XII-VIII-XI-VIII": 1,
+      "INSUFFICIENT": 1,
+      "NO": 1,
+      "P": 1,
+      "P1": 1,
+      "P3": 1,
+      "XI+III": 1,
+      "YES": 1,
+      "bex=7;kav=12;lem=5": 1,
+      "dun": 1,
+      "lem-ruz-kav-fal-fal-ruz": 1,
+      "non-gum-sam-vam-lex-bot-tex": 1,
+      "pet": 1,
+      "violet=9; rust=5; jade=10": 1
+    },
+    "cap_contacts": 5,
+    "mean_generated_tokens": 522.5,
+    "parse_rate": 0.8461538461538461,
+    "per_kind": {
+      "u_abstain": {
+        "accuracy": 1.0,
+        "n": 2,
+        "parse_rate": 1.0
+      },
+      "u_count": {
+        "accuracy": 1.0,
+        "n": 2,
+        "parse_rate": 1.0
+      },
+      "u_execute": {
+        "accuracy": 0.0,
+        "n": 2,
+        "parse_rate": 1.0
+      },
+      "u_induct": {
+        "accuracy": 0.0,
+        "n": 2,
+        "parse_rate": 0.0
+      },
+      "u_optimize": {
+        "accuracy": 1.0,
+        "n": 2,
+        "parse_rate": 1.0
+      },
+      "u_order": {
+        "accuracy": 0.5,
+        "n": 2,
+        "parse_rate": 0.5
+      },
+      "u_probe": {
+        "accuracy": 0.5,
+        "n": 2,
+        "parse_rate": 1.0
+      },
+      "u_repair": {
+        "accuracy": 0.0,
+        "n": 2,
+        "parse_rate": 1.0
+      },
+      "u_route": {
+        "accuracy": 1.0,
+        "n": 2,
+        "parse_rate": 1.0
+      },
+      "u_select": {
+        "accuracy": 1.0,
+        "n": 2,
+        "parse_rate": 1.0
+      },
+      "u_state": {
+        "accuracy": 0.5,
+        "n": 2,
+        "parse_rate": 1.0
+      },
+      "u_trace": {
+        "accuracy": 0.5,
+        "n": 2,
+        "parse_rate": 0.5
+      },
+      "u_verify": {
+        "accuracy": 1.0,
+        "n": 2,
+        "parse_rate": 1.0
+      }
+    },
+    "rows": 26
+  }
+}

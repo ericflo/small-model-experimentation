@@ -614,3 +614,30 @@ Do not add more canonical two-op/two-branch lessons. A successor must be
 result-separated and prospectively test variable-depth natural-language state tables,
 hypothesis scoring, and verified answer commitment under fresh seeds and exact-token
 replay control.
+
+## qwen35_4b_universal_state_table_compiler_token_match (2026-07-14 — State-table mechanism negative)
+
+Two short continuations again started independently from authenticated `close_xi`.
+The candidate replaced 80 of 120 variable replay rows with 20 each of variable-depth
+natural-language execution tables, independently recomputed hypothesis scores,
+first-error repair, and verified commit. Candidate and replay each used 320 rows,
+exactly 286,814 forward tokens, 40 updates, zero skips, and 200 position-aligned
+identical replay rows.
+
+Fresh local seed 88008 rejected the candidate before merge or benchmark.
+Parent/replay/candidate scored 19/16/16 correct, parsed 23/21/22, and contacted the
+cap 3/5/5 times. Their execute+induct+probe subtotals were 4/6, 2/6, and 1/6.
+Candidate was 0/2 execute, 0/2 induction, and 1/2 probe; it failed five absolute gates
+and every strict relative check. Promotion was empty and aggregate seed 78138 remains
+sealed.
+
+Read: truth-audited natural-language tables can improve isolated computation without
+installing the deployed procedure. The candidate gained one trace and one optimize
+case versus both controls and computed one state semantically correctly before losing
+only on whitespace. But it treated a cycle declaration as an extra operation,
+repeated both induction cases to cap, miscounted probe distinctness, and reached one
+correct execute result without committing. The idealized traces remained off-policy
+relative to actual failure prefixes. Retire another hand-authored trace surface. A
+successor should use fresh parent rollouts and executable-oracle corrections at the
+first observable failure prefix, while retaining exact-token replay, fresh seeds, and
+the unchanged strict local gate.

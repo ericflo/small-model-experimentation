@@ -171,15 +171,20 @@
   seeds to test variable-depth natural-language state tables plus independent
   hypothesis simulation/scoring and verified answer commitment.
 
-- Active design-frozen experiment: `qwen35_4b_universal_state_table_compiler_token_match` is the
-  result-separated successor. It starts from the same authenticated `close_xi` parent
-  with fresh seeds and tests variable-depth natural-language state tables,
-  independently recomputed hypothesis scores, verification/repair, and a concise
-  answer commit against exact-token replay. CPU feasibility and adversarial review
-  passed: both arms have 320 rows, exactly 286814 forward tokens, zero skips, 40
-  updates, and 200 identical replay positions. Publish/verify the frozen design, then
-  train only the replay control; every later stage requires its predecessor receipt
-  committed and green. Local failure seals aggregate seed 78138.
+- Completed state-table mechanism negative:
+  `qwen35_4b_universal_state_table_compiler_token_match` trained variable-depth
+  natural-language state tables, independent hypothesis scoring, repair, and commit
+  against same-parent exact-token replay. Fresh seed 88008 scored parent/replay/
+  candidate 19/16/16 correct, 23/21/22 parsed, and 3/5/5 caps; target subtotals were
+  4/2/1 of six. Candidate failed five absolute gates and every relative gate, so seed
+  78138 remains sealed. Retire another idealized trace surface.
+- Next result-separated universal-curriculum experiment: collect the authenticated
+  parent's own rollouts on fresh procedural tasks, locate the first observable
+  failure prefix, and train executable-oracle corrective continuations for commit,
+  declaration/operator parsing, bounded induction, probe scoring, and exact
+  serialization. Exclude all prior local gate instances. Match same-parent replay on
+  exact forward tokens and steps, use fresh seeds, and keep the unchanged strict gate
+  before any merge or benchmark event.
 
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.

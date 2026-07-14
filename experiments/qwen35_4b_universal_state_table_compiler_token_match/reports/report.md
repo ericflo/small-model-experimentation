@@ -2,10 +2,10 @@
 
 ## Summary
 
-The design is frozen and both matched training arms have completed successfully.
-This result-separated successor implements a truth-audited natural-language
-state-table and hypothesis-scoring curriculum after canonical staged search failed
-its fresh local gate. No capability result exists.
+The truth-audited state-table curriculum failed its fresh local gate. The candidate
+tied exact-token replay at 16/26 correct, lost to its 19/26 parent, and was worse than
+both controls on the targeted execute/induct/probe subtotal. No arm was promoted and
+the aggregate benchmark remained sealed.
 
 ## Research Program Fit
 
@@ -33,8 +33,15 @@ seconds. Its 169,903,320-byte external adapter has weights/config hashes
 the same authenticated parent and completed 40/40 updates over 320 rows with zero
 skips, final loss 1.059, and 290.9 wrapper wall seconds. Its 169,903,320-byte adapter
 weights/config hashes are `36e54804...5d0f` / `7101cc87...4b34`; receipt/log hashes
-are `6aab42b3...2be2` / `26907944...c059`. No model generation, merge, local
-evaluation, or benchmark event has run.
+are `6aab42b3...2be2` / `26907944...c059`.
+
+At fresh seed 88,008, parent/replay/candidate scored 19/16/16 correct, 23/21/22
+parsed, 3/5/5 cap contacts, and 438.1/508.1/522.5 mean generated tokens. The target
+subtotal over execute, induct, and probe was 4/6, 2/6, and 1/6. Candidate execute was
+0/2, induction 0/2, and probe 1/2. It failed the absolute accuracy, parse, cap,
+execute, and induction checks; every strict win over parent and replay was false.
+Promotion is empty. Local/promotion receipt hashes are `027c0f63...f2869` /
+`429770fd...70f5`; no merge or benchmark ran and seed 78,138 remains sealed.
 
 ## Controls
 
@@ -49,21 +56,28 @@ control.
 Generator execution and table recomputation are construction oracles. Model outputs
 must be scored without supplying hidden state. Benchmark data stays behind the
 aggregate-only firewall and is unavailable unless the sole candidate passes every
-frozen local check.
+frozen local check. It did not, so no benchmark source, item, transcript, result
+detail, or aggregate event was accessed.
 
 ## Interpretation
 
-None yet. Successful optimization of either arm—and the difference between their
-losses—is not capability evidence because target composition differs. The mechanism
-remains a preregistered package-level hypothesis; score lessons occupy 25,683 of
-48,806 intervention tokens, so a later result cannot isolate a stage without a fresh
-ablation.
+The package hypothesis is rejected at this dose and interface. Paired forensics show
+two narrow improvements—one trace and one optimization flip versus both controls—but
+five parent wins regressed, including both execute cases and one probe. One state
+answer was semantically exact but failed serialization only; one execute thought held
+the exact target but never committed before cap. Those seam failures coexist with
+semantic failures: a cycle declaration became a spurious operation, both induction
+cases repeated to cap, and a probe counted two distinct outputs as three. Idealized
+truth-audited traces therefore did not align training with the model's deployed
+failure prefixes. See `analysis/local_failure_forensics.md`.
 
 ## Next Experiments
 
-Commit, rebase, push, and CI-verify this candidate-training checkpoint. Do not consume
-fresh local seed 88,008 until both GitHub workflows are green on the pushed `main`
-checkpoint.
+Preserve and publish this negative. A new experiment may test fresh on-policy
+failure-prefix correction with executable oracle continuations, explicit bounded
+commit targets, and exact answer serialization. It must use new seeds, exclude this
+held-out local event from training, retain a same-parent exact-token replay control,
+and pass the unchanged local gate before any aggregate event.
 
 ## Artifact Manifest
 

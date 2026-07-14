@@ -631,6 +631,24 @@ natural-language variable-depth interface.** The next trial must change that
 interface—explicit variable-depth state tables, separately verified hypothesis
 scores, and answer-only commit—not add another dose of the failed scaffold.
 
+**Truth-audited natural-language state tables still remain off-policy at deployment
+(2026-07-14, local mechanism negative).** The result-separated
+[qwen35_4b_universal_state_table_compiler_token_match](../experiments/qwen35_4b_universal_state_table_compiler_token_match/reports/report.md)
+replaces 80 exact-token-matched replay rows with 20 each of variable-depth execution
+tables, independent hypothesis score tables, first-error repair, and verified commit.
+Fresh seed 88008 gives parent/replay/candidate 19/16/16 correct, 23/21/22 parsed, and
+3/5/5 caps; execute+induct+probe totals are 4/6, 2/6, and 1/6. Promotion is empty and
+seed 78138 stays sealed. The anatomy separates narrow computation gains from a failed
+procedure install: candidate fixes one trace and one optimization case, and computes
+one state exactly before losing only on whitespace, but treats a cycle declaration as
+an operation, repeats both induction cases to cap, miscounts probe distinctness, and
+fails to commit one correct execute result. **Executable truth in an idealized trace
+is insufficient when the trace is not conditioned on the model's actual failure
+prefix.** Retire another hand-authored surface. The next controlled test should train
+fresh on-policy failure-prefix corrections with executable oracle continuations and
+exact serialization, while preserving same-parent exact-token replay, fresh seeds,
+and the unchanged local gate.
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.

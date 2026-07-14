@@ -82,3 +82,31 @@ candidate.
 
 Next: publish and CI-verify this candidate checkpoint, then run the single frozen
 paired local evaluation.
+
+## 2026-07-14 — Fresh local gate negative
+
+- Began only after candidate commit `ed68aa81` was pushed to `main` and GitHub
+  Validate Repository run `29338242755` and Publish Research Site run `29338241500`
+  both completed successfully.
+- Fetched current `origin/main`, confirmed a clean aligned worktree, authenticated
+  both committed training receipts, and re-ran the frozen design plus all 48 tests.
+- Consumed local seed 88,008 exactly once across parent, replay control, and candidate
+  together in one Transformers process at batch size 4 and 1,024 generated tokens.
+- Parent/replay/candidate scored 19/16/16 correct, parsed 23/21/22, contacted the cap
+  3/5/5 times, and used 438.1/508.1/522.5 mean generated tokens. All had zero repeated
+  feasible-route abstentions.
+- Candidate execute/induct/probe was 0/2, 0/2, and 1/2: 1/6 targeted cases versus
+  replay 2/6 and parent 4/6. It failed accuracy, parse, cap, execute, induction, and
+  all four strict parent/replay win checks. Promotion is empty.
+- Preserved complete local receipt `027c0f63...f2869`; parent/replay/candidate gate
+  receipts `8af2f171...c964` / `d767cf2b...cdc0c` / `76dcd96a...b0957`; and promotion
+  receipt `429770fd...70f5`.
+- Paired forensics found a mixed but non-general pattern: candidate gained one trace,
+  one optimization, and one abstention case, but lost both execute cases, one probe,
+  one order case, and replay's repaired case. One state result was semantically exact
+  but failed only on spaces; one execute result was present in thought but never
+  committed before cap. Both induction cases repeated to cap.
+- No merge or benchmark event ran. Conditional aggregate seed 78,138 is sealed.
+
+Next: publish and CI-verify this negative, then open a result-separated on-policy
+failure-prefix correction experiment with fresh seeds and unchanged controls/gates.

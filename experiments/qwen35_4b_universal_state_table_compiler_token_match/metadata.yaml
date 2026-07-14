@@ -5,14 +5,14 @@ source_track: "new"
 path: "experiments/qwen35_4b_universal_state_table_compiler_token_match"
 primary_readme: "experiments/qwen35_4b_universal_state_table_compiler_token_match/README.md"
 primary_report: "experiments/qwen35_4b_universal_state_table_compiler_token_match/reports/report.md"
-summary: "This result-separated successor tests whether truth-audited, variable-depth natural-language state tables plus independent hypothesis scoring and a short verified commit install a reusable reasoning procedure better than an exact-token replay continuation from the same parent."
+summary: "Fresh local negative on 2026-07-14; aggregate sealed."
 tags:
   - "abi"
+  - "counterexamples"
   - "curriculum"
   - "latent-state"
   - "small-model"
   - "table-transform"
-  - "verification"
 research_programs:
   - "agentic_breadth_installation"
   - "benchmark_generalization"
@@ -21,6 +21,7 @@ research_programs:
   - "reliability_and_safety"
   - "structured_execution_and_compilers"
 top_level_dirs:
+  - "analysis"
   - "configs"
   - "data"
   - "reports"
@@ -29,11 +30,11 @@ top_level_dirs:
   - "src"
   - "tests"
 file_counts:
-  json: 7
+  json: 12
   jsonl: 4
   log: 2
-  md: 7
+  md: 8
   py: 23
   yaml: 3
-total_files: 46
-total_size_bytes: 10179170
+total_files: 52
+total_size_bytes: 10675353
