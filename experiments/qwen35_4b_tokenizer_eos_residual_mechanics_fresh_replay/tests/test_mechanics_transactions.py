@@ -13,10 +13,6 @@ EXP = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(EXP / "src"))
 
 import mechanics_transactions as tx  # noqa: E402
-from calibration_stage import load_calibration_inputs  # noqa: E402
-from mechanics_stage import mechanics_sampling_plan  # noqa: E402
-
-
 class MechanicsTransactionTests(unittest.TestCase):
     def setUp(self) -> None:
         self.temporary = tempfile.TemporaryDirectory()
@@ -141,9 +137,11 @@ class MechanicsTransactionTests(unittest.TestCase):
             )
 
     def test_production_sampling_tuple_is_normalized_before_fresh_write(self) -> None:
-        inputs = load_calibration_inputs()
-        decision = tx.read_canonical(EXP / "runs/calibration/decision.json")
-        sampling = mechanics_sampling_plan(decision, inputs)["transport"]
+        sampling = {
+            "thinking": "off",
+            "max_tokens": 24,
+            "logprob_token_ids": (248044, 248046),
+        }
         self.assertIs(type(sampling["logprob_token_ids"]), tuple)
         complete = self.run_tx(sampling=sampling)
         self.assertEqual(complete["state"], "COMPLETE")
@@ -158,6 +156,69 @@ class MechanicsTransactionTests(unittest.TestCase):
             list,
         )
         self.assertEqual(self.calls, 1)
+
+    def test_full_chain_precedes_historical_prefix_replay(self) -> None:
+        order = ("transport", "direct", "materialized", "name", "shuffled")
+        registrations = {name: self.registration() for name in order}
+        tx.run_transaction(
+            raw_dir=self.raw,
+            invocation=order[0],
+            invocation_order=order,
+            generate=self.generate,
+            **registrations[order[0]],
+        )
+        initial = tx.authenticate_registered_complete_prefix(
+            raw_dir=self.raw,
+            invocation_order=order,
+            registrations=registrations,
+            through="transport",
+        )
+        self.assertEqual(initial["registered_invocations"], ["transport"])
+        for name in order[1:]:
+            tx.run_transaction(
+                raw_dir=self.raw,
+                invocation=name,
+                invocation_order=order,
+                generate=self.generate,
+                **registrations[name],
+            )
+        self.assertEqual(self.calls, 5)
+        with self.assertRaisesRegex(RuntimeError, "later invocation to be absent"):
+            tx.authenticate_registered_complete_prefix(
+                raw_dir=self.raw,
+                invocation_order=order,
+                registrations=registrations,
+                through="transport",
+            )
+        chain = tx.authenticate_registered_complete_chain(
+            raw_dir=self.raw,
+            invocation_order=order,
+            registrations=registrations,
+        )
+        historical = tx.authenticate_registered_historical_prefix(
+            raw_dir=self.raw,
+            invocation_order=order,
+            registrations=registrations,
+            through="transport",
+            authenticated_chain=chain,
+        )
+        self.assertEqual(
+            historical["decision"],
+            "REGISTERED_HISTORICAL_PREFIX_AUTHENTICATED",
+        )
+        self.assertEqual(historical["registered_invocations"], ["transport"])
+        self.assertEqual(self.calls, 5)
+
+        forged_chain = copy.deepcopy(chain)
+        forged_chain["schema_version"] = True
+        with self.assertRaisesRegex(RuntimeError, "caller complete chain differs"):
+            tx.authenticate_registered_historical_prefix(
+                raw_dir=self.raw,
+                invocation_order=order,
+                registrations=registrations,
+                through="transport",
+                authenticated_chain=forged_chain,
+            )
 
     def test_fresh_successor_authenticates_full_predecessor_before_call(self) -> None:
         common = self.registration()

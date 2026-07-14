@@ -1,6 +1,6 @@
 # Qwen3.5-4B Tokenizer-EOS Residual Mechanics Fresh Replay
 
-**Status:** in-progress · since 2026-07-14 · `CONSTRUCTION_PASS`; implementation review, locks, and all model calls remain
+**Status:** in-progress · since 2026-07-14 · `CONSTRUCTION_PASS`; implementation candidate 145/145, adversarial review, locks, and all model calls remain
 
 This fresh-identity successor preserves the parent's qualified tokenizer-EOS
 interface and frozen residual-mechanics science while separating initial
@@ -102,6 +102,14 @@ The authenticated parent collision manifest is
 `72faacf5bebf4a8964faaba81d5088dc9602e1a228f818f8e998a03dc145e8e5`;
 the construction receipt is
 `7e1ff08290dd3b963e312fcec21c88ef2c5290d72984c1fb8d26d1d2138942b6`.
+
+The model-free implementation candidate passes 145/145 tests. Its production
+path now has distinct APIs for initial transport authorization and historical
+transport replay. Initial authorization requires every later invocation to be
+absent; historical replay first authenticates the complete five-invocation
+chain. An unmocked synthetic lifecycle runs the real transport, all four
+descendant transactions, historical replay, and visible selection with no
+hidden access or recovery generation.
 
 ## Interpretation
 

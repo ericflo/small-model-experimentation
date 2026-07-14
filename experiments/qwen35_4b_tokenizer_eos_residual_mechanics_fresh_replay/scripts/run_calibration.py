@@ -120,7 +120,7 @@ _PINNED_PATH = f"{ROOT}/.venv-vllm/bin:/usr/local/cuda/bin:/usr/bin:/bin"
 _STATIC_LAUNCHER = EXP / "scripts/calibration_launcher"
 _STATIC_LAUNCHER_PROOF_FD = 198
 _STATIC_LAUNCHER_SHA256 = (
-    "34133e00c226f176d5d8a2b4f355af04b52788dbebc99486d18f5e90ee355a93"
+    "f7a62bb63a49e8ff430e04a07c27b3e6e225ec1b1c15d2cf5071147ffdb77f6b"
 )
 
 

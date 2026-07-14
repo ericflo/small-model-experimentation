@@ -104,6 +104,15 @@ class FakeRunner:
     def prepare(self, records, thinking, allow_custom_prompts):
         if thinking != "off" or allow_custom_prompts:
             raise AssertionError("winner escaped no-think")
+        self.llm.expected = [
+            record["meta"].get("expected")
+            or (
+                "PROGRAM: A | A | A"
+                if record["meta"].get("family") == "direct"
+                else "PROGRAM: A | A"
+            )
+            for record in records
+        ]
         prepared = []
         for record in records:
             text = self.tokenizer.apply_chat_template(
@@ -207,6 +216,30 @@ class FakeRunner:
         }
 
 
+def fake_engine_receipt(runner):
+    runtime = copy.deepcopy(runner.runtime)
+    runtime["git_dirty"] = False
+    return {
+        "runner_sha256": hashlib.sha256(
+            Path(vllm_runner.__file__).resolve().read_bytes()
+        ).hexdigest(),
+        "engine": runner.engine,
+        "engine_args_sha256": hashlib.sha256(
+            json.dumps(
+                runner.engine_args, sort_keys=True, separators=(",", ":")
+            ).encode()
+        ).hexdigest(),
+        "resolved_cudagraph": runner.resolved_cudagraph,
+        "resolved_logprobs_mode": runner.resolved_logprobs_mode,
+        "adapter": None,
+        "rng_isolation": {
+            "engine_seed": 0,
+            "caller_global_rng_state_restored": True,
+        },
+        "runtime": runtime,
+    }
+
+
 class MechanicsRuntimeTests(unittest.TestCase):
     def setUp(self) -> None:
         self.records = [
@@ -258,27 +291,7 @@ class MechanicsRuntimeTests(unittest.TestCase):
 
     @staticmethod
     def engine_receipt(runner):
-        runtime = copy.deepcopy(runner.runtime)
-        runtime["git_dirty"] = False
-        return {
-            "runner_sha256": hashlib.sha256(
-                Path(vllm_runner.__file__).resolve().read_bytes()
-            ).hexdigest(),
-            "engine": runner.engine,
-            "engine_args_sha256": hashlib.sha256(
-                json.dumps(
-                    runner.engine_args, sort_keys=True, separators=(",", ":")
-                ).encode()
-            ).hexdigest(),
-            "resolved_cudagraph": runner.resolved_cudagraph,
-            "resolved_logprobs_mode": runner.resolved_logprobs_mode,
-            "adapter": None,
-            "rng_isolation": {
-                "engine_seed": 0,
-                "caller_global_rng_state_restored": True,
-            },
-            "runtime": runtime,
-        }
+        return fake_engine_receipt(runner)
 
     def test_generate_and_authenticate_exact_tokenizer_eos_boundary(self) -> None:
         runner = FakeRunner(self.records)

@@ -11,18 +11,24 @@ from unittest import mock
 
 EXP = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(EXP / "src"))
+sys.path.insert(0, str(EXP / "tests"))
 
 import mechanics_stage as stage  # noqa: E402
 import mechanics_protocol as mechanics  # noqa: E402
 from calibration_stage import load_calibration_inputs  # noqa: E402
-from transactions import read_canonical  # noqa: E402
+from mechanics_transactions import (  # noqa: E402
+    json_native as durable_json_native,
+    write_exclusive_durable,
+)
+from synthetic_calibration import passing_decision  # noqa: E402
+from test_mechanics_runtime import FakeRunner, fake_engine_receipt  # noqa: E402
 
 
 class MechanicsStageTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.inputs = load_calibration_inputs()
-        cls.decision = read_canonical(EXP / "runs/calibration/decision.json")
+        cls.decision = passing_decision(cls.inputs)
 
     def test_selected_sampling_is_no_think_tokenizer_winner_with_frozen_seeds(self) -> None:
         plan = stage.mechanics_sampling_plan(self.decision, self.inputs)
@@ -65,6 +71,81 @@ class MechanicsStageTests(unittest.TestCase):
         bad = stage._score_transport_rows(forged)
         self.assertEqual(bad["exact_echo_successes"], 23)
         self.assertEqual(bad["parse_successes"], 23)
+
+    def test_unmocked_complete_lifecycle_reaches_visible_selection(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            raw = root / "raw"
+            lock_path = root / "implementation_lock.json"
+            preflight_path = root / "live_preflight.json"
+            transport_path = root / "transport_decision.json"
+            lock_path.write_text('{\n  "synthetic_lock": true\n}\n')
+            runner = FakeRunner([])
+            preflight_path.write_text(
+                json.dumps(
+                    fake_engine_receipt(runner),
+                    indent=2,
+                    sort_keys=True,
+                )
+                + "\n"
+            )
+            stage.run_transport_transaction(
+                decision=self.decision,
+                inputs=self.inputs,
+                runner=runner,
+                raw_dir=raw,
+                mechanics_lock_path=lock_path,
+                live_preflight_path=preflight_path,
+                runner_path=Path(stage.__file__).with_name("vllm_runner.py"),
+                transport_decision_path=transport_path,
+            )
+            transport = stage.authorize_initial_transport(
+                decision=self.decision,
+                inputs=self.inputs,
+                raw_dir=raw,
+                mechanics_lock_path=lock_path,
+                live_preflight_path=preflight_path,
+                runner_path=Path(stage.__file__).with_name("vllm_runner.py"),
+                transport_decision_path=transport_path,
+                tokenizer=runner.tokenizer,
+            )
+            self.assertEqual(
+                transport["decision"], "SELECTED_INTERFACE_TRANSPORT_PASS"
+            )
+            write_exclusive_durable(
+                transport_path, durable_json_native(transport)
+            )
+            chain = stage.run_generation_transactions(
+                decision=self.decision,
+                transport=transport,
+                inputs=self.inputs,
+                runner=runner,
+                raw_dir=raw,
+                mechanics_lock_path=lock_path,
+                live_preflight_path=preflight_path,
+                runner_path=Path(stage.__file__).with_name("vllm_runner.py"),
+                transport_decision_path=transport_path,
+                tokenizer=runner.tokenizer,
+            )
+            self.assertEqual(
+                chain["decision"], "REGISTERED_TRANSACTION_CHAIN_AUTHENTICATED"
+            )
+            visible = stage.analyze_visible(
+                decision=self.decision,
+                inputs=self.inputs,
+                raw_dir=raw,
+                mechanics_lock_path=lock_path,
+                live_preflight_path=preflight_path,
+                runner_path=Path(stage.__file__).with_name("vllm_runner.py"),
+                transport_decision_path=transport_path,
+                tokenizer=runner.tokenizer,
+            )
+            self.assertEqual(
+                visible["decision"], "MECHANICS_VISIBLE_SELECTION_FROZEN"
+            )
+            self.assertEqual(len(visible["tasks"]), 24)
+            self.assertEqual(visible["hidden_files_read"], [])
+            self.assertEqual(visible["benchmark_files_read"], [])
 
     def test_selector_tie_break_is_canonical_program_hash_not_row_order(self) -> None:
         task = {
@@ -253,7 +334,7 @@ class MechanicsStageTests(unittest.TestCase):
             public_path = Path(directory) / "public.jsonl"
             public_path.write_text("model-free synthetic public receipt\n")
             patches = (
-                mock.patch.object(stage, "authenticate_transport_decision"),
+                mock.patch.object(stage, "authenticate_historical_transport"),
                 mock.patch.object(
                     stage, "authenticate_registered_complete_chain", return_value={}
                 ),

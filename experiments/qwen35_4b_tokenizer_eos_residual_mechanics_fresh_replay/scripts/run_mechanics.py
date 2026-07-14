@@ -62,6 +62,7 @@ _BOOTSTRAP_SUPPORT_FILES = (
     str(EXP_REL / "src/process_lock.py"),
 )
 _BOOTSTRAP_CRITICAL_TEST_FILES = (
+    str(EXP_REL / "tests/synthetic_calibration.py"),
     str(EXP_REL / "tests/test_mechanics_bootstrap.py"),
     str(EXP_REL / "tests/test_mechanics_lock.py"),
     str(EXP_REL / "tests/test_mechanics_runtime.py"),
@@ -76,7 +77,7 @@ _BOOTSTRAP_GOLD_AUTHORIZED = False
 _STATIC_LAUNCHER = EXP / "scripts/mechanics_launcher"
 _STATIC_LAUNCHER_PROOF_FD = 198
 _STATIC_LAUNCHER_SHA256 = (
-    "6fdfb46399c7880da2be42b93b78975cc3354301840dde79de74569e5e4cc4f2"
+    "5f051d9e63191ee66ffc593e0198d65a7e02d01862ec5ba5439a7e50a0052803"
 )
 
 
@@ -480,7 +481,7 @@ from mechanics_stage import (  # noqa: E402
     RESOURCE_DECISION,
     TRANSPORT_DECISION,
     VISIBLE_SELECTION,
-    analyze_transport,
+    authorize_initial_transport,
     analyze_visible,
     decrypt_hidden_gold,
     run_generation_transactions,
@@ -558,10 +559,12 @@ def run_live() -> dict[str, Any]:
     states = [inventory_state(RAW_DIR, name) for name in MECHANICS_INVOCATION_ORDER]
     if VISIBLE_SELECTION.exists() or all(state == "complete" for state in states):
         return visible_analysis()
-    if states[0] == "complete":
+    if states[0] == "complete" and all(
+        state == "absent" for state in states[1:]
+    ):
         transport = _write_or_verify(
             TRANSPORT_DECISION,
-            analyze_transport(
+            authorize_initial_transport(
                 decision=decision,
                 inputs=inputs,
                 mechanics_lock_path=MECHANICS_LOCK,
@@ -572,6 +575,10 @@ def run_live() -> dict[str, Any]:
         )
         if transport["decision"] != "SELECTED_INTERFACE_TRANSPORT_PASS":
             return transport
+    elif states[0] == "complete":
+        # A descendant transaction binds the immutable decision by hash. The
+        # stage authenticates that prefix without replaying initial transport.
+        transport = read_canonical(TRANSPORT_DECISION)
     with VLLMRunner(engine_config(inputs)) as runner:
         publish_or_verify_mechanics_preflight(runner=runner, inputs=inputs)
         if states[0] != "complete":
@@ -585,7 +592,7 @@ def run_live() -> dict[str, Any]:
             )
             transport = _write_or_verify(
                 TRANSPORT_DECISION,
-                analyze_transport(
+                authorize_initial_transport(
                     decision=decision,
                     inputs=inputs,
                     mechanics_lock_path=MECHANICS_LOCK,

@@ -76,7 +76,15 @@ class CalibrationLockTests(unittest.TestCase):
         self.assertEqual(set(value["frozen_mechanics_blobs"]), set(lock.FROZEN_MECHANICS_FILES))
         self.assertFalse(
             any(
-                "mechanics" in path
+                any(
+                    marker in path.removeprefix(lock.PREFIX)
+                    for marker in (
+                        "data/procedural/mechanics_",
+                        "runs/mechanics/",
+                        "src/mechanics_",
+                        "scripts/run_mechanics.py",
+                    )
+                )
                 for path in value["calibration_runtime_files"]
             )
         )

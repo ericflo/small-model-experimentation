@@ -559,6 +559,25 @@ def authenticate_registered_complete_prefix(
     registrations: Mapping[str, Mapping[str, Any]],
     through: str,
 ) -> dict[str, Any]:
+    """Authorize an initial contiguous prefix while every descendant is absent."""
+
+    return _authenticate_registered_prefix(
+        raw_dir=raw_dir,
+        invocation_order=invocation_order,
+        registrations=registrations,
+        through=through,
+        require_later_absent=True,
+    )
+
+
+def _authenticate_registered_prefix(
+    *,
+    raw_dir: Path,
+    invocation_order: Sequence[str],
+    registrations: Mapping[str, Mapping[str, Any]],
+    through: str,
+    require_later_absent: bool,
+) -> dict[str, Any]:
     if set(registrations) != set(invocation_order):
         raise ValueError("registered invocation inventory changed")
     if through not in invocation_order:
@@ -568,6 +587,7 @@ def authenticate_registered_complete_prefix(
         raw_dir=raw_dir,
         invocation_order=invocation_order,
         completed_count=completed_count,
+        require_later_absent=require_later_absent,
     )
     predecessor_sha: str | None = None
     for invocation in invocation_order[:completed_count]:
@@ -610,6 +630,37 @@ def authenticate_registered_complete_prefix(
         **receipt,
         "decision": "REGISTERED_TRANSACTION_PREFIX_AUTHENTICATED",
         "registered_invocations": list(invocation_order[:completed_count]),
+    }
+
+
+def authenticate_registered_historical_prefix(
+    *,
+    raw_dir: Path,
+    invocation_order: Sequence[str],
+    registrations: Mapping[str, Mapping[str, Any]],
+    through: str,
+    authenticated_chain: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Replay a prefix only after authenticating the complete descendant chain."""
+
+    complete_chain = authenticate_registered_complete_chain(
+        raw_dir=raw_dir,
+        invocation_order=invocation_order,
+        registrations=registrations,
+    )
+    if not exact_json_equal(dict(authenticated_chain), complete_chain):
+        raise RuntimeError("caller complete chain differs from exact authentication")
+    prefix = _authenticate_registered_prefix(
+        raw_dir=raw_dir,
+        invocation_order=invocation_order,
+        registrations=registrations,
+        through=through,
+        require_later_absent=False,
+    )
+    return {
+        **prefix,
+        "decision": "REGISTERED_HISTORICAL_PREFIX_AUTHENTICATED",
+        "authenticated_complete_chain_sha256": canonical_sha256(complete_chain),
     }
 
 

@@ -36,3 +36,20 @@ Created as a new experiment scaffold.
   terminal; completed-state validation never opens or hashes the key.
 - Construction, tokenizer grammar receipt, and protocol smoke passed with zero
   model calls, sampled outputs, hidden/benchmark reads, or parent raw reads.
+
+## Model-free implementation candidate
+
+- Rebuilt fresh-path static calibration and mechanics launchers and bound their
+  reproducible hashes in both bootstraps and tests.
+- Split transport into `authorize_initial_transport` and
+  `authenticate_historical_transport`. The former requires all descendants
+  absent; the latter requires exact authentication of the complete descendant
+  chain before replaying transport.
+- Made partial-generation restart authenticate the immutable transport-decision
+  hash through descendant transaction receipts instead of re-running the
+  initial later-absent gate.
+- Replaced pre-live mechanics tests' dependency on a nonexistent fresh
+  calibration outcome with an explicitly synthetic model-free fixture.
+- Added a real five-transaction historical-prefix lifecycle and an unmocked
+  production-stage lifecycle through visible selection. The complete suite is
+  145/145 with zero model/GPU/hidden/benchmark access.

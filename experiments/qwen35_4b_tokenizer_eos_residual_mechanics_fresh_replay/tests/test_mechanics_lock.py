@@ -12,11 +12,13 @@ from unittest import mock
 
 EXP = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(EXP / "src"))
+sys.path.insert(0, str(EXP / "tests"))
 
 import calibration_lock  # noqa: E402
 import mechanics_lock  # noqa: E402
 from calibration_stage import load_calibration_inputs  # noqa: E402
-from transactions import json_bytes, read_canonical  # noqa: E402
+from synthetic_calibration import passing_decision  # noqa: E402
+from transactions import json_bytes  # noqa: E402
 
 
 class MechanicsLockTests(unittest.TestCase):
@@ -83,7 +85,7 @@ class MechanicsLockTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.inputs = load_calibration_inputs()
-        cls.decision = read_canonical(EXP / "runs/calibration/decision.json")
+        cls.decision = passing_decision(cls.inputs)
 
     @staticmethod
     def ci(commit: str) -> dict[str, dict[str, object]]:

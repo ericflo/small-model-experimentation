@@ -27,6 +27,9 @@ Completed reruns authenticate tracked outputs without reading that key.
   rows.
 - Zero model calls, sampled outputs, protected reads, benchmark reads, and
   parent sampled-bundle reads.
+- The implementation candidate passes 145/145 model-free tests, including an
+  unmocked complete production lifecycle through visible selection and exact
+  rejection of initial transport replay after descendants exist.
 
 ## Controls
 

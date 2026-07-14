@@ -18,7 +18,7 @@ SOURCE = EXP / "scripts/mechanics_launcher.S"
 SCRIPT = EXP / "scripts/run_mechanics.py"
 PYTHON = ROOT / ".venv-vllm/bin/python"
 SRC = EXP / "src"
-EXPECTED_SHA256 = "6fdfb46399c7880da2be42b93b78975cc3354301840dde79de74569e5e4cc4f2"
+EXPECTED_SHA256 = "5f051d9e63191ee66ffc593e0198d65a7e02d01862ec5ba5439a7e50a0052803"
 
 sys.path.insert(0, str(SRC))
 

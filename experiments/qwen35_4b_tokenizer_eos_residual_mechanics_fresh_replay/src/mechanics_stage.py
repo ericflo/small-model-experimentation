@@ -32,6 +32,7 @@ from task_data import (
 from mechanics_transactions import (
     artifact_paths,
     authenticate_registered_complete_chain,
+    authenticate_registered_historical_prefix,
     authenticate_registered_complete_prefix,
     inventory_state,
     read_canonical,
@@ -418,7 +419,7 @@ def _score_transport_rows(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     }
 
 
-def analyze_transport(
+def _transport_decision_from_authenticated_transaction(
     *,
     decision: Mapping[str, Any],
     inputs: CalibrationInputs,
@@ -430,19 +431,6 @@ def analyze_transport(
     tokenizer: Any,
 ) -> dict[str, Any]:
     selected_interface(decision, inputs)
-    authenticate_registered_complete_prefix(
-        raw_dir=raw_dir,
-        invocation_order=MECHANICS_INVOCATION_ORDER,
-        registrations=mechanics_registrations(
-            decision=decision,
-            inputs=inputs,
-            mechanics_lock_path=mechanics_lock_path,
-            live_preflight_path=live_preflight_path,
-            runner_path=runner_path,
-            transport_decision_path=transport_decision_path,
-        ),
-        through="transport",
-    )
     bundle = read_canonical(artifact_paths(raw_dir, "transport")["bundle"])
     engine_receipt = read_canonical(live_preflight_path)
     semantic_authentication = authenticate_selected_interface_bundle(
@@ -496,7 +484,45 @@ def analyze_transport(
     }
 
 
-def authenticate_transport_decision(
+def authorize_initial_transport(
+    *,
+    decision: Mapping[str, Any],
+    inputs: CalibrationInputs,
+    raw_dir: Path = RAW_DIR,
+    mechanics_lock_path: Path = DEFAULT_MECHANICS_LOCK,
+    live_preflight_path: Path = DEFAULT_MECHANICS_PREFLIGHT,
+    runner_path: Path = DEFAULT_RUNNER_PATH,
+    transport_decision_path: Path = TRANSPORT_DECISION,
+    tokenizer: Any,
+) -> dict[str, Any]:
+    """Analyze transport exactly once while every later invocation is absent."""
+
+    authenticate_registered_complete_prefix(
+        raw_dir=raw_dir,
+        invocation_order=MECHANICS_INVOCATION_ORDER,
+        registrations=mechanics_registrations(
+            decision=decision,
+            inputs=inputs,
+            mechanics_lock_path=mechanics_lock_path,
+            live_preflight_path=live_preflight_path,
+            runner_path=runner_path,
+            transport_decision_path=transport_decision_path,
+        ),
+        through="transport",
+    )
+    return _transport_decision_from_authenticated_transaction(
+        decision=decision,
+        inputs=inputs,
+        raw_dir=raw_dir,
+        mechanics_lock_path=mechanics_lock_path,
+        live_preflight_path=live_preflight_path,
+        runner_path=runner_path,
+        transport_decision_path=transport_decision_path,
+        tokenizer=tokenizer,
+    )
+
+
+def authenticate_initial_transport_decision(
     *,
     decision: Mapping[str, Any],
     inputs: CalibrationInputs,
@@ -508,7 +534,7 @@ def authenticate_transport_decision(
     tokenizer: Any,
 ) -> dict[str, Any]:
     observed = read_canonical(transport_decision_path)
-    expected = analyze_transport(
+    expected = authorize_initial_transport(
         decision=decision,
         inputs=inputs,
         raw_dir=raw_dir,
@@ -528,6 +554,88 @@ def authenticate_transport_decision(
     return observed
 
 
+def authenticate_historical_transport(
+    *,
+    decision: Mapping[str, Any],
+    inputs: CalibrationInputs,
+    authenticated_chain: Mapping[str, Any],
+    raw_dir: Path = RAW_DIR,
+    mechanics_lock_path: Path = DEFAULT_MECHANICS_LOCK,
+    live_preflight_path: Path = DEFAULT_MECHANICS_PREFLIGHT,
+    runner_path: Path = DEFAULT_RUNNER_PATH,
+    transport_decision_path: Path = TRANSPORT_DECISION,
+    tokenizer: Any,
+) -> dict[str, Any]:
+    """Replay transport only after exact authentication of every descendant."""
+
+    registrations = mechanics_registrations(
+        decision=decision,
+        inputs=inputs,
+        mechanics_lock_path=mechanics_lock_path,
+        live_preflight_path=live_preflight_path,
+        runner_path=runner_path,
+        transport_decision_path=transport_decision_path,
+    )
+    authenticate_registered_historical_prefix(
+        raw_dir=raw_dir,
+        invocation_order=MECHANICS_INVOCATION_ORDER,
+        registrations=registrations,
+        through="transport",
+        authenticated_chain=authenticated_chain,
+    )
+    observed = read_canonical(transport_decision_path)
+    expected = _transport_decision_from_authenticated_transaction(
+        decision=decision,
+        inputs=inputs,
+        raw_dir=raw_dir,
+        mechanics_lock_path=mechanics_lock_path,
+        live_preflight_path=live_preflight_path,
+        runner_path=runner_path,
+        transport_decision_path=transport_decision_path,
+        tokenizer=tokenizer,
+    )
+    if observed != expected:
+        raise RuntimeError("recorded transport decision differs on historical replay")
+    if (
+        observed["decision"] != "SELECTED_INTERFACE_TRANSPORT_PASS"
+        or observed["qualifies"] is not True
+    ):
+        raise RuntimeError("failed transport cannot authorize historical replay")
+    return observed
+
+
+def _read_passing_transport_decision(path: Path) -> dict[str, Any]:
+    observed = read_canonical(path)
+    expected_keys = {
+        "schema_version",
+        "decision",
+        "winner",
+        "qualifies",
+        "metrics",
+        "bundle_sha256",
+        "generation_authentication",
+        "hidden_files_read",
+        "benchmark_files_read",
+    }
+    if (
+        not isinstance(observed, dict)
+        or set(observed) != expected_keys
+        or type(observed.get("schema_version")) is not int
+        or observed.get("schema_version") != 1
+        or observed.get("decision") != "SELECTED_INTERFACE_TRANSPORT_PASS"
+        or observed.get("qualifies") is not True
+        or observed.get("winner") != SELECTED_INTERFACE
+        or not isinstance(observed.get("metrics"), dict)
+        or not isinstance(observed.get("generation_authentication"), dict)
+        or not isinstance(observed.get("bundle_sha256"), str)
+        or len(observed["bundle_sha256"]) != 64
+        or observed.get("hidden_files_read") != []
+        or observed.get("benchmark_files_read") != []
+    ):
+        raise RuntimeError("recorded transport decision is not a passing exact receipt")
+    return observed
+
+
 def run_generation_transactions(
     *,
     decision: Mapping[str, Any],
@@ -541,18 +649,6 @@ def run_generation_transactions(
     transport_decision_path: Path = TRANSPORT_DECISION,
     tokenizer: Any,
 ) -> dict[str, Any]:
-    authenticated_transport = authenticate_transport_decision(
-        decision=decision,
-        inputs=inputs,
-        raw_dir=raw_dir,
-        mechanics_lock_path=mechanics_lock_path,
-        live_preflight_path=live_preflight_path,
-        runner_path=runner_path,
-        transport_decision_path=transport_decision_path,
-        tokenizer=tokenizer,
-    )
-    if dict(transport) != authenticated_transport:
-        raise RuntimeError("caller transport differs from authenticated decision")
     registrations = mechanics_registrations(
         decision=decision,
         inputs=inputs,
@@ -564,6 +660,26 @@ def run_generation_transactions(
     states = [inventory_state(raw_dir, name) for name in MECHANICS_INVOCATION_ORDER]
     if states[0] != "complete":
         raise RuntimeError("transport transaction is not complete")
+    if all(state == "absent" for state in states[1:]):
+        authenticated_transport = authenticate_initial_transport_decision(
+            decision=decision,
+            inputs=inputs,
+            raw_dir=raw_dir,
+            mechanics_lock_path=mechanics_lock_path,
+            live_preflight_path=live_preflight_path,
+            runner_path=runner_path,
+            transport_decision_path=transport_decision_path,
+            tokenizer=tokenizer,
+        )
+    else:
+        # Descendant STARTED/COMPLETE receipts bind this file by hash. Their
+        # transaction authentication below proves the historical authorization;
+        # semantic replay waits for the complete-chain API.
+        authenticated_transport = _read_passing_transport_decision(
+            transport_decision_path
+        )
+    if dict(transport) != authenticated_transport:
+        raise RuntimeError("caller transport differs from authenticated decision")
     incomplete = [index for index, state in enumerate(states) if state != "complete"]
     if not incomplete:
         return authenticate_registered_complete_chain(
@@ -692,16 +808,6 @@ def analyze_visible(
     tokenizer: Any,
 ) -> dict[str, Any]:
     winner = selected_interface(decision, inputs)
-    authenticate_transport_decision(
-        decision=decision,
-        inputs=inputs,
-        raw_dir=raw_dir,
-        mechanics_lock_path=mechanics_lock_path,
-        live_preflight_path=live_preflight_path,
-        runner_path=runner_path,
-        transport_decision_path=transport_decision_path,
-        tokenizer=tokenizer,
-    )
     chain = authenticate_registered_complete_chain(
         raw_dir=raw_dir,
         invocation_order=MECHANICS_INVOCATION_ORDER,
@@ -713,6 +819,17 @@ def analyze_visible(
             runner_path=runner_path,
             transport_decision_path=transport_decision_path,
         ),
+    )
+    authenticate_historical_transport(
+        decision=decision,
+        inputs=inputs,
+        authenticated_chain=chain,
+        raw_dir=raw_dir,
+        mechanics_lock_path=mechanics_lock_path,
+        live_preflight_path=live_preflight_path,
+        runner_path=runner_path,
+        transport_decision_path=transport_decision_path,
+        tokenizer=tokenizer,
     )
     public = _load_public(public_path)
     public_by_id = {row["task_id"]: row for row in public}

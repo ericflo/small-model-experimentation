@@ -21,7 +21,7 @@ class CalibrationBootstrapTests(unittest.TestCase):
         self.assertTrue(os.access(launcher, os.X_OK))
         self.assertEqual(
             hashlib.sha256(launcher.read_bytes()).hexdigest(),
-            "34133e00c226f176d5d8a2b4f355af04b52788dbebc99486d18f5e90ee355a93",
+            "f7a62bb63a49e8ff430e04a07c27b3e6e225ec1b1c15d2cf5071147ffdb77f6b",
         )
         headers = subprocess.run(
             ["/usr/bin/readelf", "-l", str(launcher)],

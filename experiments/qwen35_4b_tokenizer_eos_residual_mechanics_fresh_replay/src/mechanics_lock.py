@@ -86,6 +86,7 @@ MECHANICS_RUNTIME_FILES = (
 )
 MECHANICS_CRITICAL_FILES = (
     *MECHANICS_RUNTIME_FILES,
+    PREFIX + "tests/synthetic_calibration.py",
     PREFIX + "tests/test_mechanics_bootstrap.py",
     PREFIX + "tests/test_mechanics_lock.py",
     PREFIX + "tests/test_mechanics_runtime.py",
