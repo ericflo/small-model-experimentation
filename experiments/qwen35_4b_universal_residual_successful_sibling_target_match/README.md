@@ -2,7 +2,7 @@
 
 Test same-parent shortest-success distillation only on procedural skills with a live greedy residual, while exact-exposure replay and an unchanged all-skill gate protect saturated skills.
 
-**Status:** in-progress · since 2026-07-14 · residual design is frozen; one authenticated sibling collection is the only next model event
+**Status:** in-progress · since 2026-07-14 · authenticated sibling collection is complete; model-free sibling selection is the only next stage
 
 ## Research Program
 
@@ -51,16 +51,18 @@ Every model event requires clean synchronized `main`, its prerequisite committed
 
 ## Results
 
-Model-free inheritance and residual input construction are complete. The source, failure inventory, greedy receipt, and terminal stop receipt retain their published hashes. The derived input contains exactly 225 hard failures across the ten registered residual skills and no answer, reference thought, audit, or truth field. Input/manifest/design hashes are `dafeb012...1119` / `cee88012...c7e7` / `e1066596...93d7`. No model event, training, local evaluation, or benchmark access has occurred in this experiment.
+Model-free inheritance and residual input construction are complete. The source, failure inventory, greedy receipt, and terminal stop receipt retain their published hashes. The derived input contains exactly 225 hard failures across the ten registered residual skills and no answer, reference thought, audit, or truth field. Input/manifest/design hashes are `dafeb012...1119` / `cee88012...c7e7` / `e1066596...93d7`.
+
+The sole sibling event ran from synchronized published commit `fc5a333b` after Validate Repository `29373498273` and Publish Research Site `29373498296` passed. It produced 3,600/3,600 completions over 225 prompts, sampled 2,337,087 tokens at 739.2 tok/s, and took 3,210.1 wrapper seconds. Raw/metadata/log/receipt hashes are `688c4f7e...c332` / `56951f00...9cdf` / `d0b31be8...f29` / `c3a3a297...f614`. Recovery was unused and generation was not rerun. Sibling correctness grading and selection remain unopened; no training, local evaluation, or benchmark access has occurred.
 
 ## Interpretation
 
-There is no capability result yet. The evidence fixes a scientifically narrower and feasible intervention: residual repair is separated from all-skill retention before sampling.
+There is no capability result yet. The complete same-parent sample bank now permits the frozen model-free availability test, but no sibling has yet been graded or selected. Residual repair remains separated from all-skill retention.
 
 ## Knowledgebase Update
 
-- Program evidence updated: pending a collection or terminal gate result.
-- Program backlog updated: this result-separated residual successor is active.
+- Program evidence updated: pending the frozen successful-sibling availability result.
+- Program backlog updated: collection is complete and model-free selection is next.
 - Claim ledger updated: no; no capability result exists.
 
 ## Artifacts
@@ -68,5 +70,6 @@ There is no capability result yet. The evidence fixes a scientifically narrower 
 - `data/inherited_*`: self-contained published lineage artifacts.
 - `data/residual_sibling_input_seed66117.jsonl`: oracle-free model input.
 - `data/residual_collection_manifest.json` and `data/design_receipt.json`: frozen provenance.
+- `runs/sibling_collection/seed66117.*`: complete raw output, metadata, log, and authenticated receipt.
 - `reports/preregistration.md` and `reports/design_review.md`: prospective contract and collection authorization.
 - `reports/artifact_manifest.yaml`: external parent and conditional model-artifact plan.

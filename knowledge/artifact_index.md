@@ -21,7 +21,7 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | --- | ---: |
 | `reports/` | 260 |
 | `src/` | 246 |
-| `runs/` | 186 |
+| `runs/` | 187 |
 | `scripts/` | 169 |
 | `analysis/` | 164 |
 | `configs/` | 164 |
@@ -39,13 +39,13 @@ This is a repository-level inventory. Each experiment remains the source of trut
 
 | Extension | Files |
 | --- | ---: |
-| `.json` | 3345 |
+| `.json` | 3347 |
 | `.py` | 2369 |
 | `.csv` | 2144 |
 | `.md` | 1312 |
-| `.jsonl` | 1000 |
+| `.jsonl` | 1001 |
 | `.png` | 848 |
-| `.log` | 586 |
+| `.log` | 587 |
 | `.yaml` | 481 |
 | `.gz` | 169 |
 | `.html` | 90 |
@@ -63,6 +63,7 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | ---: | --- |
 | 52.5 | `experiments/qwen35_4b_gauntlet_frontier/data/cached_pool.jsonl` |
 | 29.5 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_apex_ep.jsonl` |
+| 27.9 | `experiments/qwen35_4b_universal_residual_successful_sibling_target_match/runs/sibling_collection/seed66117.jsonl` |
 | 20.6 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_apex_oi.jsonl` |
 | 15.7 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_sharp1024.jsonl` |
 | 14.9 | `experiments/qwen35_4b_gauntlet_frontier/data/sft_apex2.jsonl` |
@@ -90,4 +91,3 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | 7.3 | `experiments/qwen35_4b_learned_active_trace_policy/reports/policy_rows.json` |
 | 7.1 | `experiments/qwen35_4b_verified_macro_long_context_rerun/runs/interface/think_16384/designed_ceiling.jsonl` |
 | 7.0 | `experiments/qwen35_4b_learned_active_trace_policy/data/eval/dsl_eval_ceiling.jsonl` |
-| 7.0 | `experiments/qwen35_4b_active_counterexample_trace_selection/data/eval/dsl_eval_ceiling.jsonl` |

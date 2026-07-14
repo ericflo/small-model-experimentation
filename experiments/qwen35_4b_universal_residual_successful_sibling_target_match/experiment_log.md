@@ -10,3 +10,11 @@
 - Froze one `n=16` same-parent event, four qualified tasks per residual skill, a 768-thinking-token ceiling, shortest-success selection, and no oracle fallback or resampling.
 - Design receipt hash: `e1066596...93d7`; adversarial verdict `PASS_SIBLING_COLLECTION`.
 - Experiment tests pass 29/29. No model, GPU, training, local, or benchmark event ran.
+
+## 2026-07-14 — Authenticated residual sibling collection
+
+- Launched only after design commit `fc5a333b` passed Validate Repository `29373498273` and Publish Research Site `29373498296`; local `HEAD` and `origin/main` matched and the preflight worktree was clean.
+- The frozen explicit replay composite completed all 225 prompts with exactly 16 outputs each: 3,600 completions and 2,337,087 sampled tokens at 739.2 tok/s in 3,210.1 wrapper seconds.
+- Raw/metadata/log/receipt hashes are `688c4f7e...c332` / `56951f00...9cdf` / `d0b31be8...f29` / `c3a3a297...f614`.
+- Recovery was unused and generation was not rerun. Benchmark data was not read and aggregate seed 78,142 remains sealed.
+- Correctness grading and the frozen model-free selection remain unopened until this collection checkpoint is published green. No training or evaluation stage ran.

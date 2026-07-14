@@ -19,4 +19,4 @@ reproducibility:
   full_command: checkpointed scripts/run.py stages only
   required_external_artifacts:
     - authenticated replay parent composite
-notes: Inherited lineage and residual input/design artifacts are tracked. No sibling collection, adapter, composite, local result, or benchmark result exists yet.
+notes: Inherited lineage and residual input/design artifacts plus the complete 225-row, 3600-output sibling collection, metadata, log, and receipt are tracked. No selected sibling corpus, adapter, experiment-local composite, local result, or benchmark result exists yet.

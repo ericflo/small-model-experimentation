@@ -278,13 +278,16 @@
   624-task source and 227-failure inventory, then prospectively treats only the ten
   skills with at least four hard failures. Its oracle-free input has 225 rows;
   select/count/route remain replay-protected retention skills and stay in the full
-  local gate. One fresh same-parent `n=16` event at seed 66117 is frozen, followed by
-  four shortest qualified tasks per residual skill at selection seed 55116. Input/
-  manifest/design hashes are `dafeb012...1119` / `cee88012...c7e7` /
-  `e1066596...93d7`. Review verdict `PASS_SIBLING_COLLECTION` authorizes that event
-  only after this design is published green. Training/local/aggregate seeds are
-  50/88012/78142; exact-exposure replay, all-skill retention, all-family aggregate
-  lift, higher-tier confirmation, and matched-compute sample-more remain mandatory.
+  local gate. The one fresh same-parent `n=16` event at seed 66117 completed from
+  published-green commit `fc5a333b`: 225 prompts, 3,600 outputs, 2,337,087 sampled
+  tokens, 739.2 tok/s, and no recovery or rerun. Raw/receipt hashes are
+  `688c4f7e...c332` / `c3a3a297...f614`. Correctness grading remains unopened;
+  four shortest qualified tasks per residual skill at selection seed 55116 are the
+  only next stage after this collection checkpoint publishes green. Input/manifest/
+  design hashes remain `dafeb012...1119` / `cee88012...c7e7` /
+  `e1066596...93d7`. Training/local/aggregate seeds are 50/88012/78142;
+  exact-exposure replay, all-skill retention, all-family aggregate lift,
+  higher-tier confirmation, and matched-compute sample-more remain mandatory.
 
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.

@@ -7751,27 +7751,27 @@
    ]
   },
   "qwen35_4b_universal_residual_successful_sibling_target_match": {
-   "verdict_tag": "Residual-only sibling test is ready",
+   "verdict_tag": "Residual retry bank is collected",
    "concept_primer": "Use the model’s own correct sampled retries as lessons only where its first answer still fails. Keep ordinary broad practice for skills it already handles, then test every skill again.",
    "plain_question": "Can short correct retries improve the ten skills that still fail without damaging counting, routing, or selection?",
-   "plain_answer": "The design is ready but has not sampled retries yet. It carries forward 225 real first-attempt failures from ten skills, will take 16 fixed retries per failure, and requires four short correct tasks per skill before training. Counting, routing, and selection stay protected by broad replay and full fresh testing.",
+   "plain_answer": "The one fixed retry event is complete: 225 real first-attempt failures from ten skills each received 16 same-model retries, for 3,600 outputs. Correctness grading has not opened yet; each skill still needs four short correct tasks before training. Counting, routing, and selection stay protected by broad replay and full fresh testing.",
    "why_it_matters": "The prior all-skill plan stopped because already-strong skills had too few failures. Separating repair from retention spends data where errors exist without lowering the standard that every skill must survive.",
    "verdict_tone": "neutral",
    "key_numbers": [
     {
-     "label": "Residual failure prompts",
-     "value": "225",
-     "sub": "from ten skills with at least four failures"
+     "label": "Collected retries",
+     "value": "3,600",
+     "sub": "16 fixed outputs for each of 225 prompts"
     },
     {
-     "label": "Fixed retries per prompt",
-     "value": "16",
-     "sub": "one same-model event with no resampling"
+     "label": "Sampled tokens",
+     "value": "2,337,087",
+     "sub": "739.2 tokens per second"
     },
     {
-     "label": "Planned sampled lessons",
-     "value": "40",
-     "sub": "four shortest correct tasks per residual skill"
+     "label": "Recovery or reruns",
+     "value": "0",
+     "sub": "one authenticated same-model event"
     },
     {
      "label": "Replay-protected skills",
@@ -7782,9 +7782,9 @@
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Design is complete; sampled retries are next",
+     "chart_plain_title": "The fixed retry bank is complete; grading is next",
      "chart_read": "The groups move from inherited data and residual input through sampled retries, training, full fresh testing, and broad testing. A bar at one means that checkpoint is complete.",
-     "chart_takeaway": "The first four model-free checkpoints are done. No retry, training, or evaluation has run, and one sealed retry collection is the only next step."
+     "chart_takeaway": "The first five checkpoints, including all 3,600 fixed retries, are done. Correctness selection, training, and evaluation have not run; model-free grading is the only next step."
     }
    ]
   },
