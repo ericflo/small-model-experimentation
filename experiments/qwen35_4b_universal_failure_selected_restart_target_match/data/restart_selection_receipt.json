@@ -1,0 +1,31 @@
+{
+  "aggregate_seed_open": false,
+  "benchmark_data_read": false,
+  "experiment_id": "qwen35_4b_universal_failure_selected_restart_target_match",
+  "full_oracle_restart_from_original_prompt": true,
+  "inventory_sha256": "c19d3de700c1ccab931298816c259b587ae0476d5105e3a29b75d93007966240",
+  "next_required_review": "exact three-axis exposure feasibility and adversarial compute review",
+  "outcome": "PASS_RESTART_QUOTAS",
+  "parent_prefix_in_training_context": false,
+  "restart_source_sha256": "022b1ea4cfe2bb50fca7f5fdc472a0bf228a5d7a7adb637b221b8efe434d951f",
+  "schema_version": 1,
+  "selected_rows": 52,
+  "selected_rows_by_skill": {
+    "abstain": 4,
+    "count": 4,
+    "execute": 4,
+    "induct": 4,
+    "optimize": 4,
+    "order": 4,
+    "probe": 4,
+    "repair": 4,
+    "route": 4,
+    "select": 4,
+    "state": 4,
+    "trace": 4,
+    "verify": 4
+  },
+  "stage": "counterfactual_restart_selection",
+  "target_exposure_match_pending": true,
+  "training_authorized": false
+}

@@ -2,8 +2,9 @@
 
 ## Current status
 
-The model-free design and one authenticated parent rollout are complete. No failure
-selection, training event, local evaluation, or benchmark event has run.
+The model-free design, one authenticated parent rollout, and frozen failure selection
+are complete. No stream exposure match, training event, local evaluation, or
+benchmark event has run.
 
 The active hypothesis is that task-level on-policy failure selection can help when
 the supervised example restarts cleanly before the error and target exposure is
@@ -20,8 +21,12 @@ frozen contract.
 - Design receipt SHA-256: `e861cd647c5a39df893366b948a39fc2bf67ac08e1b1fe704a69032597ffae24`.
 - Parent event: 624/624 completions, 304,013 sampled tokens, 879.9 tok/s, 394.96
   seconds. Rollout receipt SHA-256: `1d35c63a70d53d8803666cb8c30f4d0efffd884c7f6ab04adceaf8b05442b381`.
+- Selection: 602 eligible, 228 hard failures, 52 selected (four per skill), with 40
+  hard and 12 budget-only rows. All 52 are full oracle restarts from the original
+  prompt and zero contain a parent prefix.
 
 ## Next authorized event
 
-Model-free failure selection after the collection receipt is committed, rebased,
-pushed to `main`, and both required GitHub workflows are green.
+Self-contained replay copying, token measurement, deterministic exact three-axis
+exposure feasibility, and a second adversarial compute review after this selection
+checkpoint is committed, rebased, pushed to `main`, and both workflows are green.

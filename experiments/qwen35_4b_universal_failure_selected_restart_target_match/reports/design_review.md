@@ -138,3 +138,12 @@ or uninterpretable at the package level.
 This verdict authorizes exactly one `collect-parent` stage from the committed,
 pushed, CI-green design checkpoint. It does not authorize mining before collection is
 published, or any training, evaluation, merge, benchmark, or aggregate access.
+
+## Post-selection composition note
+
+The frozen selector later cleared every quota. As anticipated in Remaining Risk 1,
+the 128-token policy budget is broad: 598/624 rows exceed it. Hard failures still rank
+first and account for 40/52 selected rows; the other 12 are budget-only rows in
+abstain, count, route, and select, whose hard-failure pools were smaller than four.
+This does not revise the verdict or selection. The second compute review must preserve
+and report that mixed accuracy-plus-bounded-compute causal unit.

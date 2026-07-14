@@ -7662,7 +7662,7 @@
    "verdict_tag": "Clean restarts are frozen; model test pending",
    "concept_primer": "Instead of making a model continue from its own long wrong reasoning, use the mistake only to choose the task, then teach a short correct solution from the original question.",
    "plain_question": "Can fresh tasks the model actually fails become broadly useful lessons if training restarts before the mistake and matches replay's supervised exposure exactly?",
-   "plain_answer": "The selection run is now collected but not yet mined: the stronger parent completed all 624 new tasks across 13 skills in one frozen event. The next checkpoint will select four failures per skill before clean restarts are compared with replay at equal forward tokens, target tokens, and loss mass.",
+   "plain_answer": "The data-selection stage passed: from 624 fresh attempts, the frozen rule selected 52 clean restarts, exactly four for each of 13 skills. Forty correct accuracy or cap failures and twelve correct-but-too-long cases are now frozen; training still waits for an exact exposure match to replay.",
    "why_it_matters": "The previous real-failure curriculum lost while carrying long wrong prefixes and supervising fewer target tokens. This design removes both confounds before spending another training run.",
    "verdict_tone": "neutral",
    "key_numbers": [
@@ -7684,7 +7684,12 @@
     {
      "label": "Parent completions collected",
      "value": "624 of 624",
-     "sub": "one event; failure mining still sealed"
+     "sub": "one event with 228 hard failures"
+    },
+    {
+     "label": "Selected hard vs too-long rows",
+     "value": "40 + 12",
+     "sub": "52 total, four per skill"
     }
    ],
    "charts": [
@@ -7692,7 +7697,7 @@
      "index": 0,
      "chart_plain_title": "The design is complete and every model stage remains gated",
      "chart_read": "Bars mark whether intake, CPU design, parent rollout, failure selection, exposure matching, paired training, local testing, and broad testing are complete.",
-     "chart_takeaway": "Intake, CPU design, and parent rollout are complete; failure selection remains blocked until the collection receipt is pushed green."
+     "chart_takeaway": "Intake, design, rollout, and balanced failure selection are complete; exposure matching and every model-training stage remain gated."
     }
    ]
   },

@@ -233,8 +233,12 @@
   only. From pushed-green commit `1744e753`, that event completed 624/624 rows and
   304013 sampled tokens at 879.9 tok/s with no recovery or rerun. Rollout/receipt
   hashes are `4bf15134...1099f` / `1d35c63a...2b381`; no benchmark data was read.
-  Publish this collection before model-free failure selection. No capability result
-  exists yet.
+  After that collection was published green, model-free selection found 602 eligible
+  and 228 hard-failure rows, cleared all 13 quotas, and froze 52 restarts: 40 hard
+  failures plus 12 budget-only cases. Inventory/restart/selection/summary hashes are
+  `c19d3de7...66240` / `022b1ea4...d951f` / `567d6b02...b662` /
+  `2e8a2192...e28ddf`. Publish selection next, then test exact three-axis exposure
+  feasibility and perform the second review. No capability result exists yet.
 
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.

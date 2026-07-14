@@ -1,0 +1,98 @@
+{
+  "aggregate_seed_open": false,
+  "benchmark_data_read": false,
+  "experiment_id": "qwen35_4b_universal_failure_selected_restart_target_match",
+  "next_required_gate": "exact three-axis exposure feasibility and second adversarial compute review",
+  "pool": {
+    "availability_by_skill": {
+      "abstain": 45,
+      "count": 48,
+      "execute": 46,
+      "induct": 48,
+      "optimize": 48,
+      "order": 43,
+      "probe": 48,
+      "repair": 48,
+      "route": 48,
+      "select": 40,
+      "state": 48,
+      "trace": 48,
+      "verify": 44
+    },
+    "eligible_rows": 602,
+    "failure_reasons": {
+      "cap_contact": 92,
+      "missing_answer": 87,
+      "over_think_budget": 598,
+      "wrong_answer": 139
+    },
+    "hard_availability_by_skill": {
+      "abstain": 2,
+      "count": 0,
+      "execute": 38,
+      "induct": 44,
+      "optimize": 24,
+      "order": 9,
+      "probe": 25,
+      "repair": 38,
+      "route": 1,
+      "select": 1,
+      "state": 22,
+      "trace": 10,
+      "verify": 14
+    },
+    "hard_failure_rows": 228,
+    "rows": 624
+  },
+  "schema_version": 1,
+  "selected": {
+    "budget_only_rows": 12,
+    "failure_reasons": {
+      "cap_contact": 29,
+      "missing_answer": 26,
+      "over_think_budget": 51,
+      "wrong_answer": 13
+    },
+    "full_oracle_restart_rows": 52,
+    "hard_failure_rows": 40,
+    "hard_rows_by_skill": {
+      "abstain": 2,
+      "count": 0,
+      "execute": 4,
+      "induct": 4,
+      "optimize": 4,
+      "order": 4,
+      "probe": 4,
+      "repair": 4,
+      "route": 1,
+      "select": 1,
+      "state": 4,
+      "trace": 4,
+      "verify": 4
+    },
+    "parent_prefix_rows": 0,
+    "rows": 52,
+    "rows_by_skill": {
+      "abstain": 4,
+      "count": 4,
+      "execute": 4,
+      "induct": 4,
+      "optimize": 4,
+      "order": 4,
+      "probe": 4,
+      "repair": 4,
+      "route": 4,
+      "select": 4,
+      "state": 4,
+      "trace": 4,
+      "verify": 4
+    }
+  },
+  "source_artifacts": {
+    "data/counterfactual_restart_source.jsonl": "022b1ea4cfe2bb50fca7f5fdc472a0bf228a5d7a7adb637b221b8efe434d951f",
+    "data/failure_inventory_seed66114.json": "c19d3de700c1ccab931298816c259b587ae0476d5105e3a29b75d93007966240",
+    "data/restart_selection_receipt.json": "567d6b020b9120c82bd19fdc7992dc49b927df2b604978ab3d6ae64e2c05b662"
+  },
+  "stage": "post_selection_model_free_summary",
+  "training_authorized": false
+}

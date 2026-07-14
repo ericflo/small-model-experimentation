@@ -1,6 +1,6 @@
 # Failure-Selected Counterfactual Restart Curriculum
 
-**Status:** in-progress · since 2026-07-14 · parent rollout is preserved; model-free failure selection is next
+**Status:** in-progress · since 2026-07-14 · restart selection passed; exact-exposure feasibility is next
 
 This experiment tests whether selecting the stronger parent's fresh procedural
 failures and teaching clean verified restarts can beat exactly exposure-matched replay
@@ -56,16 +56,13 @@ that mechanism from extra compute or extra supervision.
 
 ## Run
 
-The current checkpoint exposes the CPU smoke path and, after this collection result is
-published green, model-free failure selection:
+The current checkpoint exposes only the CPU smoke path. Selection is complete, and
+training remains gated on a separately published exact-exposure feasibility review:
 
 ```bash
 PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B \
   experiments/qwen35_4b_universal_failure_selected_restart_target_match/scripts/run.py --smoke
 
-PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B \
-  experiments/qwen35_4b_universal_failure_selected_restart_target_match/scripts/run.py \
-  --stage mine-restarts
 ```
 
 No multi-stage invocation is supported. Training and evaluation remain unauthorized
@@ -82,7 +79,21 @@ merged replay parent, no recovery or generation rerun, `benchmark_data_read=fals
 and a sealed aggregate seed.
 
 This is collection evidence, not a capability result. Failure composition and quota
-availability remain unopened until the separately published mining stage.
+availability are now frozen by the separately checkpointed mining stage:
+
+- 602/624 rows were eligible and 228 were hard correctness/cap failures.
+- Every skill cleared the four-row quota; availability ranged from 40 to 48.
+- The selected 52 rows are exactly four per skill: 40 hard failures and 12 correct but
+  over-budget cases. Hard-failure availability was below four for abstain, count,
+  route, and select, so their remaining slots prospectively used budget-only rows.
+- Selected reasons total 29 cap contacts, 26 missing answers, 13 wrong answers, and
+  51 over-budget flags; reasons overlap by row.
+- Inventory/restart/selection/summary hashes are `c19d3de7...66240`,
+  `022b1ea4...d951f`, `567d6b02...b662`, and `2e8a2192...e28ddf`.
+- All 52 rows restart from the original prompt, zero contain a parent prefix,
+  training is unauthorized, and benchmark/aggregate gates remain sealed.
+
+This is still construction evidence, not a capability result.
 
 ## Interpretation
 
@@ -106,4 +117,7 @@ recomputation, not long-prefix repair. A negative result would reject this balan
 - `data/rollout_tasks_seed77114.jsonl` — executable truth and oracle restarts.
 - `data/parent_rollout_input_seed66114.jsonl` — oracle-free vLLM input.
 - `data/rollout_task_manifest.json` and `data/design_receipt.json` — freshness and design receipts.
+- `data/failure_inventory_seed66114.json` — complete frozen failure inventory.
+- `data/counterfactual_restart_source.jsonl` — 52 clean selected restarts.
+- `data/restart_selection_receipt.json` and `data/selection_summary.json` — quota and composition receipts.
 - `src/vllm_runner.py` — pinned same-backend runner with explicit-composite gate.

@@ -35,3 +35,22 @@
 - Recovery was unused and generation was not rerun. No benchmark data was read and
   aggregate seed 78,140 remains sealed.
 - Failure mining was not run or inspected in this checkpoint.
+
+## 2026-07-14 — Frozen model-free failure selection
+
+- Ran only after collection commit `fd08c7fe` was pushed to `main` and GitHub runs
+  `29360147608` / `29360147678` both succeeded.
+- The preregistered selector found 602 eligible rows and 228 hard failures. All 13
+  four-row quotas passed; total eligibility ranged from 40 to 48 per skill.
+- Selected exactly 52 rows, four per skill. Forty are hard failures; 12 are correct
+  but over the 128-thinking-token budget. Count had zero hard failures, route/select
+  one each, and abstain two, so those four skills supplied all 12 budget-only rows.
+- Selected overlapping reasons: 29 cap contacts, 26 missing answers, 13 wrong
+  answers, and 51 over-budget flags.
+- Inventory/restart/selection/summary hashes: `c19d3de7...66240`,
+  `022b1ea4...d951f`, `567d6b02...b662`, `2e8a2192...e28ddf`.
+- All 52 trainable candidates begin at the original prompt; zero parent-prefix rows
+  exist. Training remains unauthorized pending exact three-axis exposure matching
+  and a second adversarial compute review.
+- No model call or benchmark read occurred during selection; aggregate seed remains
+  sealed.

@@ -21,6 +21,12 @@ ROLLOUT_HASHES = {
     "seed66114.log": "668e9b70c04d5714428a546ee28587d74af87ac823f807f4f9200265e4f369ff",
     "seed66114.receipt.json": "1d35c63a70d53d8803666cb8c30f4d0efffd884c7f6ab04adceaf8b05442b381",
 }
+SELECTION_HASHES = {
+    "counterfactual_restart_source.jsonl": "022b1ea4cfe2bb50fca7f5fdc472a0bf228a5d7a7adb637b221b8efe434d951f",
+    "failure_inventory_seed66114.json": "c19d3de700c1ccab931298816c259b587ae0476d5105e3a29b75d93007966240",
+    "restart_selection_receipt.json": "567d6b020b9120c82bd19fdc7992dc49b927df2b604978ab3d6ae64e2c05b662",
+    "selection_summary.json": "2e8a21927fd1e4bb9ad4ca5e26cbf39c6ca97982542ae9d2bb496a3ef6e28ddf",
+}
 
 
 def sha256_file(path: Path) -> str:
@@ -128,6 +134,27 @@ def smoke() -> None:
             or metadata.get("counts", {}).get("sampled_tokens") != 304013
         ):
             raise SystemExit("published rollout receipt failed smoke authentication")
+    selection_receipt = EXP / "data" / "restart_selection_receipt.json"
+    if selection_receipt.exists():
+        for name, expected in SELECTION_HASHES.items():
+            path = EXP / "data" / name
+            if not path.is_file() or sha256_file(path) != expected:
+                raise SystemExit(f"published restart-selection artifact changed: {path}")
+        receipt = json.loads(selection_receipt.read_text(encoding="utf-8"))
+        summary = json.loads((EXP / "data" / "selection_summary.json").read_text(encoding="utf-8"))
+        restarts = (EXP / "data" / "counterfactual_restart_source.jsonl").read_text(encoding="utf-8").splitlines()
+        if (
+            receipt.get("outcome") != "PASS_RESTART_QUOTAS"
+            or receipt.get("selected_rows") != 52
+            or receipt.get("training_authorized") is not False
+            or len(restarts) != 52
+            or summary.get("selected", {}).get("hard_failure_rows") != 40
+            or summary.get("selected", {}).get("budget_only_rows") != 12
+            or summary.get("selected", {}).get("parent_prefix_rows") != 0
+            or summary.get("benchmark_data_read") is not False
+            or summary.get("aggregate_seed_open") is not False
+        ):
+            raise SystemExit("published restart selection failed smoke authentication")
     print("PASS: model-free design, merged-parent, freshness, and restart-selection contracts")
 
 

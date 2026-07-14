@@ -109,3 +109,17 @@ tok/s. Rollout/metadata/log/receipt hashes are `4bf15134...1099f`,
 This amendment records the preregistered event only. It does not change selection
 rules or authorize training. After this receipt is committed, rebased, pushed, and
 green in both workflows, the next authorized stage is model-free `mine-restarts`.
+
+## 2026-07-14 — Frozen post-selection receipt
+
+The unchanged model-free selector found 602 eligible rows, including 228 hard
+correctness/cap failures, and cleared every fixed skill quota. It selected 52 rows,
+four per skill: 40 hard failures and 12 correct but over-budget rows. The budget-only
+rows are confined to skills with fewer than four hard failures: abstain, count, route,
+and select. Inventory/restart/selection/summary hashes are `c19d3de7...66240`,
+`022b1ea4...d951f`, `567d6b02...b662`, and `2e8a2192...e28ddf`.
+
+Every restart is reconstructed from executable source truth at the original prompt;
+no parent prefix is present. This result authorizes no training. The next checkpoint
+must copy replay self-contained, tokenize all sources, solve exact forward/target/loss
+mass equality without modifying targets, and pass the second adversarial review.

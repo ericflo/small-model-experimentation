@@ -12,7 +12,7 @@ omitted_artifacts:
     reason: "future adapters and merged candidate/control composites are large and gitignored; none exists at the design checkpoint"
 reproducibility:
   smoke_command: "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_failure_selected_restart_target_match/scripts/run.py --smoke"
-  full_command: "none yet: parent collection is complete; after its pushed-green checkpoint only --stage mine-restarts is authorized"
+  full_command: "none yet: failure selection is complete; exact-exposure streams and a second review must be published before training"
   required_external_artifacts:
     - "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/merged/replay_after_close"
 notes: >-
@@ -23,4 +23,7 @@ notes: >-
   3a6c4e61...ef937, and e861cd64...ae24. The one parent event completed 624/624
   rows and 304013 sampled tokens with no recovery/rerun. Rollout, metadata, log, and
   receipt hashes are 4bf15134...1099f, b43b3a0...1206d, 668e9b70...369ff, and
-  1d35c63a...2b381. No adapter, new composite, local event, or benchmark event exists.
+  1d35c63a...2b381. The frozen selector produced 52 balanced clean restarts; its
+  inventory/restart/selection/summary hashes are c19d3de7...66240,
+  022b1ea4...d951f, 567d6b02...b662, and 2e8a2192...e28ddf. No adapter, new
+  composite, local event, or benchmark event exists.

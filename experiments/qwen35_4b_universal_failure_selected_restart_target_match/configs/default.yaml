@@ -28,10 +28,16 @@ collection:
   rollout_sha256: 4bf15134b02ac9f4f4a1b424d9dfc10f280fead4e340a7f77284d0b920c1099f
   receipt_sha256: 1d35c63a70d53d8803666cb8c30f4d0efffd884c7f6ab04adceaf8b05442b381
 selection:
+  completed: true
   quota_per_skill: 4
   think_budget_tokens: 128
   hard_failure_reasons: [cap_contact, missing_answer, wrong_answer]
   budget_failure_reason: over_think_budget
+  selected_rows: 52
+  selected_hard_failure_rows: 40
+  selected_budget_only_rows: 12
+  restart_source_sha256: 022b1ea4cfe2bb50fca7f5fdc472a0bf228a5d7a7adb637b221b8efe434d951f
+  receipt_sha256: 567d6b020b9120c82bd19fdc7992dc49b927df2b604978ab3d6ae64e2c05b662
 training_plan:
   authorized: false
   rows_per_arm: 320

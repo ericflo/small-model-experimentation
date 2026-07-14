@@ -5959,11 +5959,11 @@
   },
   {
     "file_counts": {
-      ".json": 4,
-      ".jsonl": 3,
+      ".json": 7,
+      ".jsonl": 4,
       ".log": 1,
       ".md": 7,
-      ".py": 11,
+      ".py": 12,
       ".yaml": 3
     },
     "id": "qwen35_4b_universal_failure_selected_restart_target_match",
@@ -5997,8 +5997,8 @@
       "src",
       "tests"
     ],
-    "total_files": 29,
-    "total_size_bytes": 5670943
+    "total_files": 34,
+    "total_size_bytes": 6139664
   },
   {
     "file_counts": {
