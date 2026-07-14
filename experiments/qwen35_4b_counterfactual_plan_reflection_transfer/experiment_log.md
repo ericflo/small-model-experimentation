@@ -123,3 +123,14 @@
   metadata only was fetched; no model weight payload, tokenizer, model call, GPU, or
   benchmark event occurred. Sixty-three model-free tests pass; authorization remains
   tokenizer-only pending Review 6.
+- Review 6 on exact commit `3e144905db852c1c38cef393de7451100a0b86a7`
+  returned HOLD despite independently authenticating the exact base inventory, replay
+  target set, 63 tests, full construction, and both green CI runs. The real merge is
+  impossible as written: Transformers 5.13 emits one unindexed shard under its 50 GB
+  default, and explicit BF16 loading corrupts the frozen checkpoint's 48 F32 tensors.
+  The reviewer also reproduced dynamic-code config injection through `auto_map` because
+  only a config projection is checked and local vLLM loading trusts remote code, plus a
+  4,096-byte sparse payload hole accepted by the 99% allocation tolerance. Full
+  execution remains unauthorized pending tensor-level mixed-dtype-preserving merge,
+  explicit indexed sharding, exact config/runtime-code binding, and stricter sparse
+  regression fixtures.

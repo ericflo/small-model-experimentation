@@ -292,3 +292,48 @@ tensor or an independently verifiable tensor commitment.
 
 The model-free suite passes 63 tests. Full execution remains unauthorized pending a
 fresh exact-commit Review 6 and green CI.
+
+## Review 6 — 2026-07-14
+
+**Reviewed commit:** `3e144905db852c1c38cef393de7451100a0b86a7`
+
+**Verdict:** **HOLD full implementation.**
+
+The independent read-only review confirmed the exact commit on `origin/main`, green
+Validate Repository run `29356780301`, green Publish Research Site run `29356780131`,
+all 63 focused model-free tests, AST parsing for all 36 Python files, and full
+216/72/144/144 plus 48 construction with zero collisions or prohibited events. It
+also independently authenticated the public frozen config, index, both LFS shard
+hashes and sizes, both safetensors headers, the 738-tensor mixed-dtype inventory,
+the exact 128-module LoRA target set, and the 610 unchanged-tensor set.
+
+The reviewer nevertheless reproduced two independent contradictions that make every
+real merge fail before a usable receipt can exist:
+
+- Pinned Transformers 5.13 defaults `save_pretrained()` to a 50 GB shard cap. The
+  9,319,737,856-byte model is therefore emitted as one `model.safetensors` with no
+  index, while the validator requires `model.safetensors.index.json`.
+- Loading with explicit `dtype=torch.bfloat16` casts the official checkpoint's 48 F32
+  `A_log`/`dt_bias` tensors to BF16. The exact pinned inventory and unchanged-tensor
+  replay correctly reject that dtype/value change even if sharding is repaired.
+
+The audit also reproduced a high-severity configuration false acceptance. The
+validator hashes only a structural projection, so exact official tensors plus a config
+augmented with dynamic `auto_map`, unrelated `quantization_config`, and executable
+remote-code routing retains the accepted projection hash. Because the runner passes
+`trust_remote_code=True`, Transformers prefers that dynamic route even for locally
+known `qwen3_5`. Exact tensor replay does not authenticate execution semantics.
+
+Finally, the 99% physical-allocation tolerance accepted a synthetic safetensors file
+with a punched 4,096-byte payload hole; at model scale it permits roughly 93 MB of
+unallocated space. Exact replay remains a semantic backstop, but the static check is
+not as fail-closed as documented.
+
+Authorization remains tokenizer-only. Required remediation is a deterministic
+tensor-level merge that preserves every untouched tensor's original dtype and exact
+value, rewrites only the 128 target tensors, freezes and validates an explicit indexed
+shard policy, authenticates the complete base config and forbids executable checkpoint
+content, loads local composites with `trust_remote_code=False`, tightens physical
+allocation to filesystem-block rounding, and adds model-free regressions for all four
+counterexamples. No model, tokenizer, GPU, training, evaluation, benchmark, hidden,
+qualification, or confirmation event occurred during Review 6.
