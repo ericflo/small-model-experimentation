@@ -198,3 +198,37 @@ committed log, and external adapter before loading the model.
 Next: publish and CI-verify this paired-training checkpoint. Then design and freeze
 the fresh paired local gate in a separate model-free checkpoint before evaluating
 the parent, replay control, or prefix-repair candidate.
+
+## 2026-07-14 — Fresh same-backend local gate frozen
+
+- Published candidate-training checkpoint `66da846f` directly to `main` after
+  fetching incoming work and resolving the sole generated `knowledge/artifact_index.md`
+  conflict by deterministic rebuild. Validate Repository run `29352595725` and
+  Publish Research Site run `29352595744` both passed.
+- Only then materialized fresh local seed 88,009 model-free: 26 truth-audited tasks,
+  exactly two each across the 13 universal skills. Source/model-input/design-receipt
+  hashes are `9682744e...acdee` / `ff407551...ce988` /
+  `3982d5b8...6e85a`.
+- Model-facing rows contain only id, messages, and public kind/surface/seed metadata.
+  Canonical message bytes overlap zero of 658 frozen training or parent-collection
+  messages and zero of 234 messages regenerated at prior reserved local seeds
+  88,000–88,008.
+- Froze a pre-outcome protocol amendment required by the active repository guide:
+  all three arms move symmetrically from the prospective Transformers process to the
+  pinned experiment-local vLLM runner. Runtime LoRA remains forbidden; replay and
+  candidate require explicit authenticated composite merges.
+- Pinned identical natural-thinking, greedy, one-sample, seed-88,009, 1,024-token,
+  4,096-context, 16-sequence, 8,192-batched-token, CUDA-graph-1/2/4/8/16 geometry for
+  every arm. Code hashes cover the generator, gate, evaluator, runner, trained-arm
+  merge wrapper, external merger, curriculum, and training authenticator.
+- Integerized the unchanged absolute gate at 24 parses, 17 correct, at most two caps,
+  at most one route abstention, and at least one of two correct separately for
+  execute/induct/probe. Promotion still requires strict total and target wins over
+  both parent and replay. Review verdict is `PASS_CONTROL_MERGE`.
+- Ran 55 experiment tests plus the complete deterministic smoke. No trained-arm
+  merge, local model call, capability score, benchmark access, or aggregate event
+  occurred.
+
+Next: publish and CI-verify this local-design checkpoint. Then run only
+`merge-control`, preserve its full composite receipt, and repeat the publish gate
+before candidate merge.

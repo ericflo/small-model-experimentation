@@ -200,8 +200,12 @@
   `bb59d3bd...5154d`. After that checkpoint passed both workflows, the candidate
   independently trained 320/320 rows with zero skips and 40/40 updates; its
   receipt/adapter hashes are `846d8107...7098` / `85811191...0f14`. Publish and
-  verify paired training before freezing the fresh local design. Local and aggregate
-  gates stay sealed.
+  verify paired training before freezing the fresh local design. Seed 88009 now
+  freezes 26 truth-audited rows with source/input/receipt hashes
+  `9682744e...acdee` / `ff407551...ce988` / `3982d5b8...6e85a`, zero overlap against
+  training and prior reserved local messages, and an identical merged-composite vLLM
+  protocol for all arms. Verdict `PASS_CONTROL_MERGE` authorizes control merge only;
+  local outcome and aggregate remain sealed.
 
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.

@@ -32,7 +32,15 @@ TOKEN_RECEIPT_SHA256 = "eb08026ffcf82b8780819a26a522f04d69358ffdfd4797dd4c603dd1
 COMPUTE_REVIEW = EXP / "reports" / "compute_review.md"
 CONTROL_RECEIPT = EXP / "runs" / "training" / "replay_after_close.json"
 CANDIDATE_RECEIPT = EXP / "runs" / "training" / "prefix_repair_after_close.json"
+LOCAL_DESIGN_RECEIPT = EXP / "data" / "local_design_receipt.json"
+LOCAL_DESIGN_RECEIPT_SHA256 = "3982d5b80e17a39c23b2e93d1d57ffd9895067ba08c7b74b39e7b50b04f6e85a"
+LOCAL_DESIGN_REVIEW = EXP / "reports" / "local_design_review.md"
+CONTROL_MERGE_RECEIPT = EXP / "runs" / "merges" / "replay_after_close.json"
+CANDIDATE_MERGE_RECEIPT = (
+    EXP / "runs" / "merges" / "prefix_repair_after_close.json"
+)
 ADAPTER_ROOT = ROOT / "large_artifacts" / EXP.name / "adapters"
+MERGED_ROOT = ROOT / "large_artifacts" / EXP.name / "merged"
 MODEL_ID = "Qwen/Qwen3.5-4B"
 MODEL_REVISION = "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
 PARENT_WEIGHTS_SHA256 = "16e9dc75a0e33e182e916600ff6e1d75fc46dfa45e870216e2c149a41253c179"
@@ -93,12 +101,13 @@ def smoke() -> None:
         f"model_revision: {MODEL_REVISION}",
         f"parent_weights_sha256: {PARENT_WEIGHTS_SHA256}",
         f"parent_config_sha256: {PARENT_CONFIG_SHA256}",
-        "status: paired_training_complete_local_design_next",
+        "status: local_design_frozen_control_merge_next",
         "rows_per_training_arm: 320",
         "forward_tokens_per_training_arm: 304313",
         "optimizer_steps_per_training_arm: 40",
         "control_receipt_sha256: f78f2069fd1c7b37bbd0b13b581df0ce7360de92256323fcf5f3c7b0936ed6de",
         "candidate_receipt_sha256: 846d8107ecadad458c18cd985d54feb42748e87677dd708c14a99e84cf4e7098",
+        f"local_design_receipt_sha256: {LOCAL_DESIGN_RECEIPT_SHA256}",
     )
     missing = [entry for entry in required if entry not in config]
     if missing:
@@ -135,6 +144,12 @@ def smoke() -> None:
     run([str(PYTHON), "-B", str(SCRIPTS / "validate_streams.py"), "--check"])
     if sha256_file(TOKEN_RECEIPT) != TOKEN_RECEIPT_SHA256:
         raise SystemExit("frozen stream-token receipt bytes changed")
+    run([str(PYTHON), "-B", str(SCRIPTS / "gen_local_gate.py"), "--check"])
+    if sha256_file(LOCAL_DESIGN_RECEIPT) != LOCAL_DESIGN_RECEIPT_SHA256:
+        raise SystemExit("frozen local-design receipt bytes changed")
+    local_review = LOCAL_DESIGN_REVIEW.read_text(encoding="utf-8")
+    if "**Verdict:** `PASS_CONTROL_MERGE`." not in local_review:
+        raise SystemExit("local design review has not authorized the control merge")
     token_receipt = json.loads(TOKEN_RECEIPT.read_text(encoding="utf-8"))
     if (
         token_receipt.get("rows_per_arm") != 320
@@ -177,6 +192,27 @@ def smoke() -> None:
             "authenticated prefix-repair candidate: "
             f"receipt {Path(candidate_receipt['receipt']).name}, "
             f"adapter {candidate_receipt['adapter_weights_sha256']}"
+        )
+    merge_receipts = []
+    if CONTROL_MERGE_RECEIPT.is_file() or CANDIDATE_MERGE_RECEIPT.is_file():
+        from merge_trained_arm import validate_published_merge
+
+        if CONTROL_MERGE_RECEIPT.is_file():
+            merge_receipts.append(
+                validate_published_merge(
+                    "replay_after_close", require_committed=False
+                )
+            )
+        if CANDIDATE_MERGE_RECEIPT.is_file():
+            merge_receipts.append(
+                validate_published_merge(
+                    "prefix_repair_after_close", require_committed=False
+                )
+            )
+    for receipt in merge_receipts:
+        print(
+            "authenticated merged arm: "
+            f"{receipt['name']} -> {receipt['weight_files'][0]['sha256']}"
         )
 
 
@@ -237,6 +273,22 @@ def train_arm(name: str) -> None:
     )
 
 
+def merge_trained_arm(name: str) -> None:
+    run(
+        [
+            str(PYTHON),
+            "-B",
+            str(SCRIPTS / "merge_trained_arm.py"),
+            "--name",
+            name,
+            "--adapter",
+            str(ADAPTER_ROOT / name),
+            "--out",
+            str(MERGED_ROOT / name),
+        ]
+    )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, allow_abbrev=False)
     parser.add_argument("--smoke", action="store_true")
@@ -248,6 +300,9 @@ def main() -> int:
             "mine-prefixes",
             "train-control",
             "train-candidate",
+            "merge-control",
+            "merge-candidate",
+            "local",
         ),
         help="run exactly one frozen stage",
     )
@@ -277,6 +332,26 @@ def main() -> int:
             (TOKEN_RECEIPT, COMPUTE_REVIEW, CONTROL_RECEIPT)
         )
         train_arm("prefix_repair_after_close")
+    elif args.stage == "merge-control":
+        require_clean_committed_checkpoint(
+            (LOCAL_DESIGN_RECEIPT, CONTROL_RECEIPT, CANDIDATE_RECEIPT)
+        )
+        merge_trained_arm("replay_after_close")
+    elif args.stage == "merge-candidate":
+        require_clean_committed_checkpoint(
+            (LOCAL_DESIGN_RECEIPT, CONTROL_MERGE_RECEIPT, CANDIDATE_RECEIPT)
+        )
+        merge_trained_arm("prefix_repair_after_close")
+    elif args.stage == "local":
+        require_clean_committed_checkpoint(
+            (
+                LOCAL_DESIGN_RECEIPT,
+                MERGE_RECEIPT,
+                CONTROL_MERGE_RECEIPT,
+                CANDIDATE_MERGE_RECEIPT,
+            )
+        )
+        run([str(PYTHON), "-B", str(SCRIPTS / "eval_local_vllm.py")])
     return 0
 
 

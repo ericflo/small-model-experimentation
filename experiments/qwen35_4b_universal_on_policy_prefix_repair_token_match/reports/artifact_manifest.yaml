@@ -24,10 +24,10 @@ external_artifacts:
     regenerate: "from pushed-green control checkpoint b690a4b3 only: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --stage train-candidate"
 omitted_artifacts:
   - path: "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/"
-    reason: "registered merged parent and both trained adapters are external above and remain large and gitignored"
+    reason: "registered merged parent and both trained adapters are external above; the separately gated control/candidate composites will also remain large and gitignored"
 reproducibility:
   smoke_command: "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --smoke"
-  full_command: "paired training is complete; freeze and publish the fresh local-evaluation design before any capability run"
+  full_command: "after this local-design checkpoint is pushed and both workflows pass: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --stage merge-control"
   required_external_artifacts:
     - "large_artifacts/qwen35_4b_universal_close_weight_token_match/adapters/close_xi"
     - "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/merged/close_xi_parent"
@@ -54,4 +54,9 @@ notes: >-
   bb59d3bd...5154d. From clean commit b690a4b3, the candidate independently trained
   320/320 rows, zero skips, and 40 updates; log/receipt hashes are e895c546...ca0 /
   846d8107...7098 and adapter config/weights hashes are 91b7db57...37de /
-  85811191...0f14. No capability, local, or benchmark receipt exists.
+  85811191...0f14. Fresh local seed 88009 freezes 26 rows; source/input/design hashes
+  are 9682744e...acdee / ff407551...ce988 / 3982d5b8...6e85a. Message overlap is
+  zero against 658 training/collection messages and 234 prior reserved-local messages.
+  All arms now freeze one merged-composite vLLM protocol; verdict PASS_CONTROL_MERGE
+  authorizes only the replay-control merge. No trained-arm merge, capability, local
+  result, or benchmark receipt exists.

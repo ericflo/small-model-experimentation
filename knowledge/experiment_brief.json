@@ -7593,10 +7593,10 @@
    ]
   },
   "qwen35_4b_universal_on_policy_prefix_repair_token_match": {
-   "verdict_tag": "Paired training completes; capability remains gated",
+   "verdict_tag": "Fresh local gate freezes; control merge is next",
    "concept_primer": "A repair lesson can start from the exact point where a worker went wrong, instead of showing a perfect solution from the beginning.",
    "plain_question": "Can corrections attached to the model's own fresh mistakes teach it to reason, stop, and answer more reliably than equal extra practice?",
-   "plain_answer": "The data and compute tests passed: all six repair quotas cleared and both 320-row streams contain exactly 304,313 forward tokens with zero skips. The replay control and repair candidate independently completed all 40 updates from the same frozen parent. Neither has run a capability test.",
+   "plain_answer": "The data and compute tests passed: all six repair quotas cleared, both 320-row streams contain exactly 304,313 forward tokens, and both arms independently completed 40 updates. A disjoint 26-item local gate and one identical merged-composite vLLM protocol are now frozen, but neither adapter has run that capability test.",
    "why_it_matters": "If this works, future training can target real failure states instead of inventing cleaner demonstrations that the deployed model never visits.",
    "verdict_tone": "neutral",
    "key_numbers": [
@@ -7611,9 +7611,9 @@
      "sub": "exactly ten from each of six classes"
     },
     {
-     "label": "Smallest candidate pool",
-     "value": "24 vs 10",
-     "sub": "probe scoring still more than doubles its quota"
+     "label": "Fresh local gate",
+     "value": "26 tasks",
+     "sub": "two per skill with zero prompt overlap"
     },
     {
      "label": "Exact forward compute",
@@ -7628,7 +7628,7 @@
     {
      "label": "Completed stages",
      "value": "7 of 9",
-     "sub": "fresh local design and testing come next"
+     "sub": "local design is frozen; deployment comes next"
     }
    ],
    "charts": [
@@ -7636,7 +7636,7 @@
      "index": 0,
      "chart_plain_title": "Exact compute reaches the seventh checkpoint",
      "chart_read": "The groups run from intake and design through parent deployment, parent rollout, failure mining, exact token matching, training, local testing, and broad testing. A bar at one means that checkpoint is complete.",
-     "chart_takeaway": "The repair source, exact-compute comparison, and both independent training arms are complete; capability claims remain blocked until a fresh local gate is designed and run."
+     "chart_takeaway": "The repair source, exact-compute comparison, both training arms, and a disjoint same-backend local design are frozen; capability claims remain blocked until the composites are merged and the gate is run."
     },
     {
      "index": 1,

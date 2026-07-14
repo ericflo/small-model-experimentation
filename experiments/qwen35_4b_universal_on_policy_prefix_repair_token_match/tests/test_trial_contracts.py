@@ -113,6 +113,24 @@ class FrozenTrainingContractTests(unittest.TestCase):
         self.assertIn("committed_at_head(CANDIDATE_RECEIPT)", candidate)
         self.assertIn("committed_at_head(log)", candidate)
 
+    def test_local_design_and_merge_order_are_frozen(self) -> None:
+        self.assertEqual(
+            self.harness.LOCAL_DESIGN_RECEIPT_SHA256,
+            "3982d5b80e17a39c23b2e93d1d57ffd9895067ba08c7b74b39e7b50b04f6e85a",
+        )
+        source = (EXP / "scripts" / "run.py").read_text(encoding="utf-8")
+        self.assertLess(
+            source.index('elif args.stage == "merge-control"'),
+            source.index('elif args.stage == "merge-candidate"'),
+        )
+        self.assertLess(
+            source.index('elif args.stage == "merge-candidate"'),
+            source.index('elif args.stage == "local"'),
+        )
+        self.assertIn("CONTROL_MERGE_RECEIPT", source)
+        self.assertIn("CANDIDATE_MERGE_RECEIPT", source)
+        self.assertIn("PASS_CONTROL_MERGE", source)
+
     def test_failure_receipt_is_durable_and_refuses_overwrite(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "failure.json"

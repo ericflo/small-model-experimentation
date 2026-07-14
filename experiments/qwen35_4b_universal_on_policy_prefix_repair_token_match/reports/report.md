@@ -6,7 +6,8 @@ Model-free design, explicit parent deployment, authenticated rollout collection,
 failure-only mining, and the second exact-compute review are complete. Every fixed
 class quota passed, and two frozen 320-row streams match at exactly 304,313 forward
 tokens with zero skips. Both independently initialized arms have now trained and
-authenticated. No capability result exists yet.
+authenticated, and the fresh same-backend local gate is frozen. No capability result
+exists yet.
 
 ## Research Program Fit
 
@@ -76,6 +77,21 @@ hashes are `91b7db57...37de` / `85811191...0f14`. Its 169,903,320-byte adapter a
 contains 256 finite, nonzero tensors and 42,467,328 elements. This completes the
 paired operational training stage, not a capability comparison.
 
+After paired training, local seed 88,009 froze 26 truth-audited tasks, two per
+registered universal skill. Source/model-facing/receipt hashes are
+`9682744e...acdee` / `ff407551...ce988` / `3982d5b8...6e85a`. Model input contains
+only ids, messages, and public metadata. It has zero canonical-message overlap with
+658 training/collection messages and 234 regenerated messages at prior reserved
+local seeds. No model was called.
+
+Before any local outcome, the active repository inference contract required a
+symmetric amendment from the prospective Transformers process to the pinned vLLM
+runner. Parent, replay, and candidate will all deploy as explicit composites with
+identical natural-thinking, greedy, seed, token cap, batch geometry, and runner bytes.
+The frozen absolute and strict control-relative promotion rules are unchanged. Local
+review verdict `PASS_CONTROL_MERGE` authorizes only the separately checkpointed
+replay-control merge.
+
 ## Controls
 
 Baseline is authenticated `close_xi`. The mechanism-falsifying control is an
@@ -83,36 +99,39 @@ independent same-parent replay continuation matched on exact encoded forward tok
 optimizer steps, seed, and aligned shared replay. It must train and publish first.
 Both arms have now trained independently from the parent, and candidate preflight
 authenticated the committed control receipt, log, and external adapter before model
-load.
+load. The local deployment order is published parent composite, replay-control merge,
+candidate merge, then one three-arm vLLM local stage; every transition has its own
+published receipt.
 
 ## Oracle Versus Deployable Evidence
 
 Executable truth is permitted only to construct tasks, grade parent failures, and
-build corrections. Hidden oracle fields are excluded from the rollout input; commit
-tasks deliberately expose verified work as their public task substrate. Prior local
-events remain held out; `benchmarks/` remains read-forbidden and the aggregate gateway
-stays sealed.
+build corrections or the fresh local gate. Hidden oracle fields are excluded from
+both rollout and local model input; commit tasks deliberately expose verified work as
+their public task substrate. Local seed 88,009 was materialized only after training,
+and its messages are disjoint from training and prior reserved local seeds.
+`benchmarks/` remains read-forbidden and the aggregate gateway stays sealed.
 
 ## Interpretation
 
 The parent supplies enough failures in every registered class, and exact forward
-compute is matched. That closes substrate and runnability risks, not the mechanism
-claim. The selected set is dominated by long capped prefixes, and the candidate has
-fewer supervised tokens and lower loss mass than replay. A candidate win would show
-targeted repair beats additional replay under equal forward compute, but would not
-separate prefix-state conditioning from target-composition effects. “First failure”
-still means the first machine-observable boundary rather than an unobservable latent
-error.
+compute is matched. The fresh local gate and same-backend deployment path are now
+also frozen. That closes substrate and runnability risks, not the mechanism claim.
+The selected set is dominated by long capped prefixes, and the candidate has fewer
+supervised tokens and lower loss mass than replay. A candidate win would show targeted
+repair beats additional replay under equal forward compute, but would not separate
+prefix-state conditioning from target-composition effects. “First failure” still
+means the first machine-observable boundary rather than an unobservable latent error.
 
 ## Next Experiments
 
-Publish and CI-verify the paired-training checkpoint. Then freeze a fresh paired
-local capability design, review it adversarially, and publish that design before
-running any model. Aggregate access remains conditional on the strict local gate.
+Publish and CI-verify the fresh local design. Merge and publish replay control first,
+then merge and publish the candidate. Only then run the three-arm local event.
+Aggregate access remains conditional on the strict local gate.
 
 ## Artifact Manifest
 
 Parent identity, frozen task hashes, replay hashes, the staged external merged
 checkpoint, parent-rollout hashes, stream hashes, and both trained adapters are
-recorded in `artifact_manifest.yaml`; both adapters are authenticated, but no
-capability result exists.
+recorded in `artifact_manifest.yaml`; local task/input/protocol hashes are tracked and
+the prospective merged-arm paths are registered. No capability result exists.

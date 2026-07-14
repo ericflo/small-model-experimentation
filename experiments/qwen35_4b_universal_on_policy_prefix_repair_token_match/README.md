@@ -1,6 +1,6 @@
 # On-Policy Failure-Prefix Universal Curriculum
 
-**Status:** in-progress · since 2026-07-14 · paired training complete; fresh local-gate design is next
+**Status:** in-progress · since 2026-07-14 · fresh local gate frozen; replay-control merge is next
 
 This result-separated successor tests whether training corrective continuations from
 the model's own fresh procedural failure prefixes installs a reusable reasoning and
@@ -70,10 +70,15 @@ separate published checkpoints. Verify every model-free derived artifact with:
 PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --smoke
 ```
 
-This paired-training checkpoint must be committed, rebased, pushed to `main`, and
-green in both required workflows before a fresh local-evaluation design is added.
-No local-evaluation command exists yet. Capability and benchmark stages remain
-sealed.
+After this local-design checkpoint is committed, rebased, pushed to `main`, and green
+in both required workflows, run only the replay-control merge from a clean worktree:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --stage merge-control
+```
+
+Candidate merge requires the separately published control-merge receipt; the local
+event requires both. Capability and benchmark stages remain sealed.
 
 ## Results
 
@@ -128,20 +133,34 @@ and 42,467,328 elements; every tensor is finite and nonzero. These are operation
 training results only. No capability measurement, local evaluation, or benchmark
 event exists.
 
+Fresh local seed 88,009 is now frozen model-free after paired training. It contains
+26 truth-audited tasks, two for each of 13 skills. Source/model-input/receipt hashes
+are `9682744e...acdee` / `ff407551...ce988` / `3982d5b8...6e85a`; input rows expose
+neither answer nor oracle. Canonical messages have zero overlap with 658 training or
+parent-collection messages and 234 messages regenerated at prior reserved local
+seeds. A pre-outcome protocol amendment moves all three arms from the prospective
+Transformers path to the now-mandatory pinned vLLM runner. Each arm will use an
+explicit merged composite and identical greedy natural-thinking geometry. The
+absolute 24-parse/17-correct gate and strict total plus execute/induct/probe wins over
+both controls remain frozen. Review verdict `PASS_CONTROL_MERGE` authorizes only the
+replay-control merge. No trained-arm merge, local model call, capability score, or
+benchmark event exists.
+
 ## Interpretation
 
 The parent visits every registered failure class often enough to test the mechanism,
-and the exact-forward-compute comparison is runnable. This is not evidence that
-on-policy correction works. Selection is dominated by long severe prefixes, while
-the candidate has fewer supervised tokens and lower loss mass than replay. A win
-would show targeted repair beats more replay under matched forward compute; it would
-not isolate prefix conditioning from target-composition differences.
+the exact-forward-compute comparison and fresh same-backend gate are runnable. This
+is not evidence that on-policy correction works. Selection is dominated by long
+severe prefixes, while the candidate has fewer supervised tokens and lower loss mass
+than replay. A win would show targeted repair beats more replay under matched forward
+compute; it would not isolate prefix conditioning from target-composition
+differences.
 
 ## Knowledgebase Update
 
 - Program evidence: unchanged until a capability result exists.
-- Program backlog: records the quota-satisfying inventory, exposure caveat, and
-  authenticated paired training.
+- Program backlog: records the quota-satisfying inventory, exposure caveat,
+  authenticated paired training, and frozen same-backend local gate.
 - Claim ledger and shared synthesis: unchanged.
 
 ## Artifacts
@@ -155,6 +174,10 @@ not isolate prefix conditioning from target-composition differences.
 - `scripts/materialize_streams.py`
 - `scripts/validate_streams.py`
 - `scripts/train_trial.py`
+- `scripts/gen_local_gate.py`
+- `scripts/check_local.py`
+- `scripts/merge_trained_arm.py`
+- `scripts/eval_local_vllm.py`
 - `data/design_receipt.json`
 - `data/rollout_task_manifest.json`
 - `data/prefix_failure_inventory.json`
@@ -164,6 +187,9 @@ not isolate prefix conditioning from target-composition differences.
 - `data/stream_token_receipt.json`
 - `data/replay_after_close.jsonl`
 - `data/prefix_repair_after_close.jsonl`
+- `data/local_tasks_seed88009.jsonl`
+- `data/local_input_seed88009.jsonl`
+- `data/local_design_receipt.json`
 - `runs/parent_rollout/seed66113.receipt.json`
 - `runs/training/replay_after_close.log`
 - `runs/training/replay_after_close.json`
@@ -172,6 +198,7 @@ not isolate prefix conditioning from target-composition differences.
 - `analysis/prefix_failure_inventory.md`
 - `reports/design_review.md`
 - `reports/compute_review.md`
+- `reports/local_design_review.md`
 - `reports/preregistration.md`
 - `reports/report.md`
 - `reports/artifact_manifest.yaml`

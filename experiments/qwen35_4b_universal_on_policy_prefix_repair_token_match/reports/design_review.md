@@ -177,3 +177,14 @@ later dirty bit; it must not require the runner's post-open `git_dirty` field to
 false. This clarification repairs an impossible postcondition only. It changes no
 model, input, sampling, quota, seed, promotion, or authorization decision, and it does
 not broaden the `PASS_PARENT_MERGE` verdict.
+
+## 2026-07-14 — Post-training local-protocol amendment
+
+Paired training completed before local seed 88,009 was materialized or any local
+model call ran. The repository-wide vLLM contract now supersedes this review's
+prospective Transformers sentence: all three local arms will use identical pinned
+vLLM runner bytes and geometry over explicit merged composites. The complete
+pre-outcome task, freshness, deployment, gate, and checkpoint audit is preserved in
+`local_design_review.md`. Its verdict is `PASS_CONTROL_MERGE`; it authorizes only the
+separately checkpointed replay-control merge and leaves candidate merge, local
+generation, and benchmark access gated in order.

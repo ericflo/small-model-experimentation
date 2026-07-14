@@ -85,3 +85,30 @@ and matched-compute sample-more comparison. No broad event can provide training 
 - Train loss is never capability evidence.
 - No benchmark item, transcript, source, or private result may enter training or
   agent context.
+
+## 2026-07-14 — Frozen post-training local amendment
+
+Both arms completed before local seed 88,009 was materialized. The fresh gate now
+contains 26 truth-audited rows, two per universal skill; source/model-input/receipt
+hashes are `9682744e...acdee` / `ff407551...ce988` / `3982d5b8...6e85a`. Model input
+contains no answer, target trace, or audit. Canonical messages overlap zero of 658
+training/collection messages and zero of 234 messages regenerated at prior reserved
+local seeds 88,000–88,008.
+
+Before any local model call, the current repository inference rule supersedes the
+prospective Transformers implementation detail. Parent, replay control, and candidate
+will all run through the same pinned experiment-local vLLM runner as explicit merged
+composites. Every arm freezes natural thinking, greedy decoding, seed 88,009, one
+sample, 1,024 tokens, 4,096 context, 16 sequences, 8,192 batched tokens, and CUDA graph
+sizes 1/2/4/8/16. Runtime LoRA is forbidden by the verified silent-no-op result.
+
+The local gate is integerized without relaxing it: at least 24/26 parses, 17/26
+correct, no more than two cap contacts, no more than one route abstention, and at
+least 1/2 correct separately on execute, induct, and probe. Candidate must also
+strictly beat both parent and replay on total correct and on the combined six
+execute/induct/probe rows. Ties fail.
+
+The mandatory continuation is local design → replay-control merge → candidate merge
+→ three-arm local event, with a commit/rebase/push/two-workflow gate after every
+arrow. Verdict `PASS_CONTROL_MERGE` authorizes only the first merge. Aggregate seed
+78,139 remains sealed.
