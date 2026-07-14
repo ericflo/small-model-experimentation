@@ -641,3 +641,31 @@ relative to actual failure prefixes. Retire another hand-authored trace surface.
 successor should use fresh parent rollouts and executable-oracle corrections at the
 first observable failure prefix, while retaining exact-token replay, fresh seeds, and
 the unchanged strict local gate.
+
+## qwen35_4b_universal_on_policy_prefix_repair_token_match (2026-07-14 — On-policy prefix mechanism negative)
+
+The successor collected 288 fresh parent rollouts and found 230 reachable failures,
+then selected exactly ten from each of six failure classes. Its candidate masked the
+realized parent prefix and supervised executable-oracle correction from the first
+machine-observable failure. Candidate and replay independently trained 320 rows,
+40 updates, zero skips, and exactly 304,313 forward tokens; 200 replay positions were
+identical. The candidate carried 33,421 fewer supervised target tokens, a registered
+intervention caveat. Both adapters were explicitly merged and authenticated before
+one same-vLLM local event.
+
+Fresh seed 88009 rejected the candidate. Parent/replay/candidate scored 16/18/15
+correct, 24/23/23 parsed, 2/3/3 cap contacts, and 2/1/0 of six on
+execute+induct+probe. Candidate was 0/2 on every target kind, failed six absolute
+checks and all four strict relative checks, and had only one paired win against four
+losses versus replay. It improved no per-kind count; order, probe, and trace each
+lost one. Local/promotion hashes are `b4b333ca...b8c8` /
+`1e048e75...f5c`; all raw hashes revalidated, no benchmark data was read, and
+aggregate seed 78139 remains sealed.
+
+Read: collecting failures on-policy fixes substrate mismatch but conditioning loss on
+long realized failure prefixes does not teach the earlier decisions needed to avoid
+or repair analogous fresh trajectories. Cap-boundary selection and reduced target
+exposure remain coupled, so this rejects the complete matched-forward-compute recipe,
+not every on-policy objective. Retire long masked failure-prefix continuation. A
+successor should supervise short pre-failure decision boundaries and match nonzero
+target exposure (or include an exact target-token control) before another local gate.

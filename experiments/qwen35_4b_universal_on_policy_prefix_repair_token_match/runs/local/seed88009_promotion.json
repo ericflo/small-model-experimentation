@@ -1,0 +1,99 @@
+{
+  "aggregate_seed": 78139,
+  "aggregate_seed_open": false,
+  "backend": "vllm_merged_composite",
+  "candidate": "prefix_repair_after_close",
+  "controls": [
+    "replay_after_close",
+    "close_xi_parent"
+  ],
+  "design_receipt_sha256": "3982d5b80e17a39c23b2e93d1d57ffd9895067ba08c7b74b39e7b50b04f6e85a",
+  "eligible": [],
+  "experiment_id": "qwen35_4b_universal_on_policy_prefix_repair_token_match",
+  "gates": {
+    "close_xi_parent": {
+      "adapter": "close_xi_parent",
+      "cap_contacts": 2,
+      "checks": {
+        "cap_contacts_at_most_2": true,
+        "correct_at_least_17_of_26": false,
+        "execute_correct_at_least_1_of_2": false,
+        "induct_correct_at_least_1_of_2": false,
+        "parsed_at_least_24_of_26": true,
+        "probe_correct_at_least_1_of_2": true,
+        "route_abstentions_at_most_1": true
+      },
+      "correct": 16,
+      "parsed": 24,
+      "passes": false,
+      "per_kind_correct": {
+        "u_execute": 0,
+        "u_induct": 0,
+        "u_probe": 2
+      },
+      "route_abstentions": 0,
+      "target_correct": 2
+    },
+    "prefix_repair_after_close": {
+      "adapter": "prefix_repair_after_close",
+      "cap_contacts": 3,
+      "checks": {
+        "cap_contacts_at_most_2": false,
+        "correct_at_least_17_of_26": false,
+        "execute_correct_at_least_1_of_2": false,
+        "induct_correct_at_least_1_of_2": false,
+        "parsed_at_least_24_of_26": false,
+        "probe_correct_at_least_1_of_2": false,
+        "route_abstentions_at_most_1": true
+      },
+      "correct": 15,
+      "parsed": 23,
+      "passes": false,
+      "per_kind_correct": {
+        "u_execute": 0,
+        "u_induct": 0,
+        "u_probe": 0
+      },
+      "route_abstentions": 0,
+      "target_correct": 0
+    },
+    "replay_after_close": {
+      "adapter": "replay_after_close",
+      "cap_contacts": 3,
+      "checks": {
+        "cap_contacts_at_most_2": false,
+        "correct_at_least_17_of_26": true,
+        "execute_correct_at_least_1_of_2": false,
+        "induct_correct_at_least_1_of_2": false,
+        "parsed_at_least_24_of_26": false,
+        "probe_correct_at_least_1_of_2": true,
+        "route_abstentions_at_most_1": true
+      },
+      "correct": 18,
+      "parsed": 23,
+      "passes": false,
+      "per_kind_correct": {
+        "u_execute": 0,
+        "u_induct": 0,
+        "u_probe": 1
+      },
+      "route_abstentions": 0,
+      "target_correct": 1
+    }
+  },
+  "local_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/runs/local/seed88009.json",
+  "local_receipt_sha256": "b4b333ca1095e78b5eb8cc2c3395c99e03efe1b583fda270c3d3dc26c206b8c8",
+  "relative_checks": {
+    "beats_parent_target_correct": false,
+    "beats_parent_total_correct": false,
+    "beats_replay_target_correct": false,
+    "beats_replay_total_correct": false
+  },
+  "schema_version": 1,
+  "seed": 88009,
+  "target_kinds": [
+    "u_execute",
+    "u_induct",
+    "u_probe"
+  ]
+}

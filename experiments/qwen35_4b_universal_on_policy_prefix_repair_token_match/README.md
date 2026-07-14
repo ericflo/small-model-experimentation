@@ -1,6 +1,6 @@
 # On-Policy Failure-Prefix Universal Curriculum
 
-**Status:** in-progress · since 2026-07-14 · both trained-arm composites ready; local gate is next
+**Status:** finished
 
 This result-separated successor tests whether training corrective continuations from
 the model's own fresh procedural failure prefixes installs a reusable reasoning and
@@ -70,17 +70,9 @@ separate published checkpoints. Verify every model-free derived artifact with:
 PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --smoke
 ```
 
-After this candidate-merge checkpoint is committed, rebased, pushed to `main`, and
-green in both required workflows, run only the frozen local gate from a clean
-worktree:
-
-```bash
-PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --stage local
-```
-
-The wrapper requires the parent, control, and candidate merge receipts committed at
-HEAD before any model call. Benchmark stages remain sealed unless the candidate
-passes every frozen absolute and control-relative local gate.
+The terminal local event is preserved and authenticated by the same smoke command.
+Do not rerun it or open an aggregate stage in this directory. Any successor needs a
+new result-separated experiment and fresh seeds.
 
 ## Results
 
@@ -165,24 +157,37 @@ one 9,078,620,536-byte shard. Tracked run-receipt/log hashes are
 `baa2027e...6d5a` / `376e2082...b528`. Independent lineage, merged-Qwen
 architecture, and exact frozen engine-request validation passed. Both trained-arm
 deployments now exist, but no local model call, capability score, or benchmark event
-exists.
+yet existed.
+
+From pushed-green candidate-deployment commit `a12e4758`, one paired vLLM event ran
+on fresh seed 88,009. Parent/replay/candidate scored 16/18/15 correct, parsed
+24/23/23, and contacted the generation cap 2/3/3 times. Their execute+induct+probe
+subtotals were 2/1/0 of six: candidate was 0/2 on all three target skills. It failed
+the accuracy, parse, cap, execute, induct, and probe gates and all four strict
+control-relative checks. Paired against replay, candidate won one task and lost
+four; no per-skill count improved, while order, probe, and trace each lost one.
+Local/promotion receipt hashes are `b4b333ca...b8c8` / `1e048e75...f5c`. All nine
+raw output/metadata/log hashes independently recomputed, `benchmark_data_read=false`,
+promotion is empty, and aggregate seed 78,139 remains sealed.
 
 ## Interpretation
 
-The parent visits every registered failure class often enough to test the mechanism,
-the exact-forward-compute comparison and fresh same-backend gate are runnable. This
-is not evidence that on-policy correction works. Selection is dominated by long
-severe prefixes, while the candidate has fewer supervised tokens and lower loss mass
-than replay. A win would show targeted repair beats more replay under matched forward
-compute; it would not isolate prefix conditioning from target-composition
-differences.
+The on-policy source solved data availability, not installation. Teacher-forcing
+long realized failure prefixes did not teach the model to avoid or repair analogous
+states when it had to generate the prefix itself. Selection was dominated by cap
+boundaries, and the candidate sacrificed 33,421 supervised target tokens relative to
+replay; the result therefore rejects this complete matched-forward-compute recipe,
+not every possible on-policy correction objective. Retire long masked
+failure-prefix continuation as the next lever. A successor should move supervision
+before the failure—at short, prospectively detectable decision boundaries—and must
+preserve full target exposure or use an exact target-token control.
 
 ## Knowledgebase Update
 
-- Program evidence: unchanged until a capability result exists.
-- Program backlog: records the quota-satisfying inventory, exposure caveat,
-  authenticated paired training, and frozen same-backend local gate.
-- Claim ledger and shared synthesis: unchanged.
+- Program evidence and shared synthesis: record the terminal local negative and the
+  pre-failure/target-exposure design constraint it adds.
+- Program backlog: retires this mechanism and keeps aggregate seed 78,139 sealed.
+- Claim ledger: unchanged; no broad capability claim was exposed.
 
 ## Artifacts
 
@@ -220,6 +225,17 @@ differences.
 - `runs/merges/replay_after_close.json`
 - `runs/merges/prefix_repair_after_close.log`
 - `runs/merges/prefix_repair_after_close.json`
+- `runs/local/seed88009.json`
+- `runs/local/seed88009_promotion.json`
+- `runs/local/seed88009_close_xi_parent.jsonl`
+- `runs/local/seed88009_close_xi_parent.meta.json`
+- `runs/local/seed88009_close_xi_parent.log`
+- `runs/local/seed88009_replay_after_close.jsonl`
+- `runs/local/seed88009_replay_after_close.meta.json`
+- `runs/local/seed88009_replay_after_close.log`
+- `runs/local/seed88009_prefix_repair_after_close.jsonl`
+- `runs/local/seed88009_prefix_repair_after_close.meta.json`
+- `runs/local/seed88009_prefix_repair_after_close.log`
 - `analysis/prefix_failure_inventory.md`
 - `reports/design_review.md`
 - `reports/compute_review.md`

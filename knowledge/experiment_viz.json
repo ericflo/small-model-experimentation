@@ -48344,7 +48344,32 @@
    {
      "headline": true,
      "kind": "bar",
-     "title": "Exact compute reaches the seventh checkpoint",
+     "title": "Prefix repair loses to replay and erases every target win",
+     "categories": [
+      "parent",
+      "replay",
+      "prefix repair"
+     ],
+     "series": [
+      {
+       "label": "correct of 26",
+       "values": [16, 18, 15]
+      },
+      {
+       "label": "target correct of 6",
+       "values": [2, 1, 0]
+      }
+     ],
+     "x_label": "same-backend merged-composite arm",
+     "y_label": "fresh tasks correct",
+     "y_format": "integer",
+     "note": "All arms saw the same 26 fresh seed-88009 tasks. Prefix repair also parsed 23/26 and hit three caps, versus replay 23/26 and three and parent 24/26 and two. Candidate failed every strict relative check, so aggregate seed 78139 remained sealed.",
+     "source": "experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/runs/local/seed88009_promotion.json"
+    },
+    {
+     "headline": false,
+     "kind": "bar",
+     "title": "The failed local gate stops the ninth checkpoint",
      "categories": [
       "intake",
       "CPU design",
@@ -48367,7 +48392,7 @@
         1,
         1,
         1,
-        0,
+        1,
         0
        ]
       }
@@ -48375,8 +48400,8 @@
      "x_label": "preregistered experiment stage",
      "y_label": "completion indicator",
      "y_format": "integer",
-     "note": "Both 320-row streams are frozen at exactly 304,313 forward tokens, zero skips, 40 updates, and 200 aligned replay rows. Both arms completed 40/40 updates, and a disjoint 26-item merged-composite vLLM local design is frozen. Both trained-arm composites are merged and architecture-checked; the local capability and benchmark result stages have not begun.",
-     "source": "experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/data/stream_token_receipt.json"
+     "note": "Every design, training, and deployment checkpoint completed. The candidate then failed six absolute and all four relative local checks; no benchmark data was read and the broad gate remains sealed.",
+     "source": "experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/runs/local/seed88009_promotion.json"
     },
     {
      "headline": false,
@@ -48403,7 +48428,7 @@
      "x_label": "registered failure class",
      "y_label": "parent rows",
      "y_format": "integer",
-     "note": "The frozen miner selected exactly 10 rows per class from 230 total reachable failures. Availability passing is substrate evidence; paired training is complete, but no capability event exists.",
+     "note": "The frozen miner selected exactly 10 rows per class from 230 total reachable failures. Every quota cleared, yet the candidate lost locally, so failure availability was not the binding constraint.",
      "source": "experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/data/prefix_failure_inventory.json"
     },
     {
@@ -48430,7 +48455,7 @@
      "x_label": "per-epoch encoded exposure",
      "y_label": "tokens",
      "y_format": "integer",
-     "note": "The registered match is exact unpadded forward compute. Long masked parent prefixes leave the candidate with 33,421 fewer target and nonzero-weight tokens, so any capability result must retain this target-composition caveat.",
+     "note": "The registered match is exact unpadded forward compute. Long masked parent prefixes leave the losing candidate with 33,421 fewer target and nonzero-weight tokens, so prefix conditioning and target exposure remain coupled.",
      "source": "experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/data/stream_token_receipt.json"
     }
    ]

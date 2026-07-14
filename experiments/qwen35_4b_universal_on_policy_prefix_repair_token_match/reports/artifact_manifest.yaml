@@ -37,7 +37,7 @@ omitted_artifacts:
     reason: "registered merged parent, trained adapters, and both trained-arm composites are external above and remain large and gitignored"
 reproducibility:
   smoke_command: "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --smoke"
-  full_command: "after this candidate-merge checkpoint is pushed and both workflows pass: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --stage local"
+  full_command: "none: terminal local negative; verify the preserved event with smoke_command and use a new experiment for follow-up work"
   required_external_artifacts:
     - "large_artifacts/qwen35_4b_universal_close_weight_token_match/adapters/close_xi"
     - "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/merged/close_xi_parent"
@@ -75,5 +75,8 @@ notes: >-
   receipt/weight hashes are aa763255...45a3 / 7ab4c419...6e2e. After its checkpoint
   passed both workflows, the candidate merge also applied 128/128 nonzero modules;
   tracked receipt/log hashes are 3deff026...438d / 58c7c9ec...d9f6 and external
-  receipt/weight hashes are baa2027e...6d5a / 376e2082...b528. No capability, local
-  result, or benchmark receipt exists.
+  receipt/weight hashes are baa2027e...6d5a / 376e2082...b528. The single fresh
+  local event scored parent/replay/candidate 16/18/15 correct, 24/23/23 parsed, and
+  2/3/3 caps; target subtotals were 2/1/0 of six. Local/promotion receipt hashes are
+  b4b333ca...b8c8 / 1e048e75...f5c, all nine raw artifact hashes revalidated,
+  benchmark_data_read is false, and aggregate seed 78139 remains sealed.

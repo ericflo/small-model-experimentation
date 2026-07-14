@@ -53,6 +53,14 @@ CANDIDATE_MERGED_WEIGHTS_SHA256 = (
 CANDIDATE_EXTERNAL_MERGE_RECEIPT_SHA256 = (
     "baa2027e0e2032315913a3e2b41a986f296fedd932f6c71a8f1fa289d0746d5a"
 )
+LOCAL_RECEIPT = EXP / "runs" / "local" / "seed88009.json"
+LOCAL_RECEIPT_SHA256 = (
+    "b4b333ca1095e78b5eb8cc2c3395c99e03efe1b583fda270c3d3dc26c206b8c8"
+)
+PROMOTION_RECEIPT = EXP / "runs" / "local" / "seed88009_promotion.json"
+PROMOTION_RECEIPT_SHA256 = (
+    "1e048e75ef58eae94f2555f70a16002231f01d70750ff590c06aa553fcad5f5c"
+)
 ADAPTER_ROOT = ROOT / "large_artifacts" / EXP.name / "adapters"
 MERGED_ROOT = ROOT / "large_artifacts" / EXP.name / "merged"
 MODEL_ID = "Qwen/Qwen3.5-4B"
@@ -115,7 +123,7 @@ def smoke() -> None:
         f"model_revision: {MODEL_REVISION}",
         f"parent_weights_sha256: {PARENT_WEIGHTS_SHA256}",
         f"parent_config_sha256: {PARENT_CONFIG_SHA256}",
-        "status: deployment_merges_complete_local_next",
+        "status: complete_local_negative_aggregate_sealed",
         "rows_per_training_arm: 320",
         "forward_tokens_per_training_arm: 304313",
         "optimizer_steps_per_training_arm: 40",
@@ -128,6 +136,8 @@ def smoke() -> None:
         f"candidate_merge_receipt_sha256: {CANDIDATE_MERGE_RECEIPT_SHA256}",
         f"candidate_external_merge_receipt_sha256: {CANDIDATE_EXTERNAL_MERGE_RECEIPT_SHA256}",
         f"candidate_merged_weights_sha256: {CANDIDATE_MERGED_WEIGHTS_SHA256}",
+        f"local_receipt_sha256: {LOCAL_RECEIPT_SHA256}",
+        f"promotion_receipt_sha256: {PROMOTION_RECEIPT_SHA256}",
     )
     missing = [entry for entry in required if entry not in config]
     if missing:
@@ -241,6 +251,67 @@ def smoke() -> None:
             "authenticated merged arm: "
             f"{receipt['name']} -> {receipt['weight_files'][0]['sha256']}"
         )
+    if (
+        sha256_file(LOCAL_RECEIPT) != LOCAL_RECEIPT_SHA256
+        or sha256_file(PROMOTION_RECEIPT) != PROMOTION_RECEIPT_SHA256
+    ):
+        raise SystemExit("published local result receipt bytes changed")
+    local = json.loads(LOCAL_RECEIPT.read_text(encoding="utf-8"))
+    promotion = json.loads(PROMOTION_RECEIPT.read_text(encoding="utf-8"))
+    sys.path.insert(0, str(SCRIPTS))
+    from check_local import evaluate_promotion
+
+    recomputed = evaluate_promotion(local)
+    if (
+        local.get("schema_version") != 1
+        or local.get("stage") != "fresh_local_capability_gate"
+        or local.get("seed") != 88009
+        or local.get("rows_per_arm") != 26
+        or local.get("benchmark_data_read") is not False
+        or local.get("git", {}).get("preflight_status") != ""
+        or promotion.get("local_receipt_sha256") != LOCAL_RECEIPT_SHA256
+        or promotion.get("aggregate_seed") != 78139
+        or promotion.get("aggregate_seed_open") is not False
+        or promotion.get("eligible") != []
+        or any(promotion.get(key) != value for key, value in recomputed.items())
+        or promotion.get("relative_checks")
+        != {
+            "beats_parent_target_correct": False,
+            "beats_parent_total_correct": False,
+            "beats_replay_target_correct": False,
+            "beats_replay_total_correct": False,
+        }
+    ):
+        raise SystemExit("published local negative violates its frozen contract")
+    expected_scores = {
+        "close_xi_parent": (16, 24, 2, 2),
+        "replay_after_close": (18, 23, 3, 1),
+        "prefix_repair_after_close": (15, 23, 3, 0),
+    }
+    raw = local.get("raw_artifacts", {})
+    if set(raw) != set(expected_scores):
+        raise SystemExit("published local result lost a paired arm")
+    for label, expected in expected_scores.items():
+        gate = promotion.get("gates", {}).get(label, {})
+        observed = (
+            gate.get("correct"),
+            gate.get("parsed"),
+            gate.get("cap_contacts"),
+            gate.get("target_correct"),
+        )
+        if observed != expected:
+            raise SystemExit(f"published local score changed for {label}")
+        for key in ("output", "metadata", "log"):
+            path = Path(raw[label].get(key, ""))
+            if (
+                not path.is_file()
+                or raw[label].get(f"{key}_sha256") != sha256_file(path)
+            ):
+                raise SystemExit(f"published raw local artifact changed: {label}/{key}")
+    print(
+        "authenticated terminal local negative: parent/control/candidate "
+        "16/18/15 correct; aggregate seed 78139 sealed"
+    )
 
 
 def merge_parent() -> None:

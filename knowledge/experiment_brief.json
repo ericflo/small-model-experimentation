@@ -7593,12 +7593,12 @@
    ]
   },
   "qwen35_4b_universal_on_policy_prefix_repair_token_match": {
-   "verdict_tag": "Both deployments are ready; the local gate is next",
+   "verdict_tag": "Actual failure-prefix lessons lose to replay",
    "concept_primer": "A repair lesson can start from the exact point where a worker went wrong, instead of showing a perfect solution from the beginning.",
    "plain_question": "Can corrections attached to the model's own fresh mistakes teach it to reason, stop, and answer more reliably than equal extra practice?",
-   "plain_answer": "The data and compute tests passed: all six repair quotas cleared, both 320-row streams contain exactly 304,313 forward tokens, and both arms independently completed 40 updates. A disjoint 26-item local gate and one identical merged-composite vLLM protocol are frozen. Both trained-arm composites are merged and architecture-checked, but the capability test has not run.",
-   "why_it_matters": "If this works, future training can target real failure states instead of inventing cleaner demonstrations that the deployed model never visits.",
-   "verdict_tone": "neutral",
+   "plain_answer": "No. The unmodified parent solved 16 of 26 fresh tasks and equal-compute replay solved 18, while training corrections after the model's own real failures solved only 15. The repair model got none of the six targeted execution, induction, or probing cases right, and it hit the answer limit three times. Broad evaluation stayed sealed.",
+   "why_it_matters": "Collecting real failures is not enough if training begins after a long mistake-filled trajectory. Teach the short decision that causes the failure, and match how many answer-bearing tokens the comparison models actually learn from.",
+   "verdict_tone": "negative",
    "key_numbers": [
     {
      "label": "Rows needing repair",
@@ -7621,34 +7621,40 @@
      "sub": "320 rows, 40 updates, and zero skips per arm"
     },
     {
-     "label": "Paired training",
-     "value": "40 + 40",
-     "sub": "320 rows and zero skips in each arm"
+     "label": "Local result",
+     "value": "16 / 18 / 15",
+     "sub": "parent / replay / prefix repair, correct of 26"
     },
     {
      "label": "Completed stages",
-     "value": "7 of 9",
-     "sub": "both deployment merges are ready; the local gate is next"
+     "value": "8 of 9",
+     "sub": "local failed; broad gate remained sealed"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Exact compute reaches the seventh checkpoint",
-     "chart_read": "The groups run from intake and design through parent deployment, parent rollout, failure mining, exact token matching, training, local testing, and broad testing. A bar at one means that checkpoint is complete.",
-     "chart_takeaway": "The repair source, exact-compute comparison, both training arms, and a disjoint same-backend local design are frozen. Both trained-arm composites are ready; capability claims remain blocked until the gate is run."
+     "chart_plain_title": "Prefix repair loses to ordinary replay",
+     "chart_read": "For parent, replay, and prefix repair, the tall bars count all correct answers out of 26 and the short bars count correct answers on the six targeted execution, induction, and probing cases.",
+     "chart_takeaway": "Replay leads overall at 18, parent follows at 16, and prefix repair falls to 15 while scoring zero on all six target cases."
     },
     {
      "index": 1,
-     "chart_plain_title": "Every failure class clears the frozen quota",
-     "chart_read": "Each group is one kind of failure. The taller bar is the number of usable parent failures found, and the shorter bar is the fixed requirement of ten.",
-     "chart_takeaway": "Even the smallest pool has 24 usable failures, so data availability did not stop training; this says nothing yet about whether either adapter helps."
+     "chart_plain_title": "The failed local gate stops the ninth checkpoint",
+     "chart_read": "The groups run from intake and design through parent deployment, parent rollout, failure mining, exact token matching, training, local testing, and broad testing. A bar at one means that checkpoint is complete.",
+     "chart_takeaway": "The first eight checkpoints completed, but the candidate failed local testing, so broad evaluation correctly remains unopened."
     },
     {
      "index": 2,
+     "chart_plain_title": "Every failure class clears the frozen quota",
+     "chart_read": "Each group is one kind of failure. The taller bar is the number of usable parent failures found, and the shorter bar is the fixed requirement of ten.",
+     "chart_takeaway": "Even the smallest pool has 24 usable failures, so the negative result is not a shortage of real parent failures."
+    },
+    {
+     "index": 3,
      "chart_plain_title": "Forward compute matches but target exposure differs",
      "chart_read": "Each pair compares replay control with prefix repair for forward tokens, masked context, thinking targets, answer targets, and tokens carrying nonzero loss. Forward totals match exactly; the repair stream puts more tokens in context and fewer under supervision.",
-     "chart_takeaway": "The candidate gets equal forward compute but 33,421 fewer supervised tokens, so a later win would beat more replay under a conservative exposure disadvantage without isolating prefix state from target composition."
+     "chart_takeaway": "Equal forward compute masks 33,421 fewer supervised tokens for the candidate, so the negative rejects this full recipe without isolating prefix conditioning from target exposure."
     }
    ]
   },

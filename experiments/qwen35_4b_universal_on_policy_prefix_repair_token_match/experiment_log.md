@@ -284,3 +284,34 @@ output.
 Next: publish and CI-verify this candidate merge. Then run only the already frozen
 three-arm local event; aggregate access remains sealed unless every preregistered
 promotion gate passes.
+
+## 2026-07-14 — Fresh local gate rejects prefix repair
+
+- Published rebased candidate-deployment checkpoint `a12e4758` directly to `main`;
+  Validate Repository run `29355954273` and Publish Research Site run `29355954309`
+  both passed.
+- From that clean origin-aligned SHA, ran exactly one `--stage local` event. All arms
+  used the pinned experiment-local vLLM 0.24.0 runner, explicit merged composites,
+  natural thinking, greedy `n=1`, seed 88,009, 1,024 output tokens, 4,096 context,
+  16 sequences, 8,192 batched tokens, and CUDA graphs 1/2/4/8/16.
+- Parent/replay/candidate completed 26/26 rows and sampled 11,255 / 12,682 / 11,769
+  tokens. They scored 16/18/15 correct, 24/23/23 parsed, and 2/3/3 cap contacts.
+  Execute+induct+probe subtotals were 2/1/0 of six; candidate was 0/2 on each target
+  kind.
+- Candidate failed accuracy, parse, cap, execute, induct, and probe checks plus all
+  four strict relative checks. Paired versus replay, it won one task, lost four,
+  retained 14 shared wins, and shared seven misses. No per-kind count improved;
+  order, probe, and trace each lost one.
+- Preserved local/promotion hashes `b4b333ca...b8c8` / `1e048e75...f5c` plus raw
+  output/metadata/log hashes for every arm. Independent promotion recomputation and
+  all nine raw hashes passed. The wrapper's exit 1 is the preregistered failure
+  signal, not an infrastructure error.
+- `benchmark_data_read=false`, promotion is empty, no benchmark process ran, and
+  aggregate seed 78,139 remains sealed.
+
+Conclusion: terminal mechanism negative. Long masked on-policy failure-prefix
+continuations do not beat more replay under equal forward compute. Because the
+candidate also has 33,421 fewer supervised target tokens, retire this complete
+recipe without claiming that all on-policy correction is impossible. The next
+result-separated trial should move the intervention to short pre-failure decisions
+and match target exposure.

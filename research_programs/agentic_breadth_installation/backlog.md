@@ -178,7 +178,8 @@
   candidate 19/16/16 correct, 23/21/22 parsed, and 3/5/5 caps; target subtotals were
   4/2/1 of six. Candidate failed five absolute gates and every relative gate, so seed
   78138 remains sealed. Retire another idealized trace surface.
-- Active design: `qwen35_4b_universal_on_policy_prefix_repair_token_match` froze 288
+- Completed on-policy mechanism negative:
+  `qwen35_4b_universal_on_policy_prefix_repair_token_match` froze 288
   fresh truth-audited tasks (48 each across six failure classes), an explicitly
   merged `close_xi` vLLM deployment, exact generated-token prefix masking, and ten
   reachable failures per class. Reserved construction/rollout/training/local/
@@ -210,9 +211,14 @@
   `bc78f332...d550` / `aa763255...45a3` / `7ab4c419...6e2e`. From the resulting
   pushed-green commit `619f1e53`, the candidate merge also applied 128/128 nonzero
   modules; its tracked receipt, external receipt, and full-weight hashes are
-  `3deff026...438d` / `baa2027e...6d5a` / `376e2082...b528`. Both deployments are
-  ready; the frozen local event is next, while local outcome and aggregate remain
-  sealed.
+  `3deff026...438d` / `baa2027e...6d5a` / `376e2082...b528`. Fresh seed 88009 then
+  scored parent/replay/candidate 16/18/15 correct, 24/23/23 parsed, 2/3/3 caps, and
+  2/1/0 of six on execute+induct+probe. Candidate failed six absolute and all four
+  relative checks; it won one task and lost four versus replay, with no per-skill
+  count improvement. Local/promotion hashes are `b4b333ca...b8c8` /
+  `1e048e75...f5c`; aggregate seed 78139 remains sealed. Retire long masked
+  failure-prefix continuation. A successor must move to short pre-failure decision
+  interventions and match supervised target exposure.
 
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.

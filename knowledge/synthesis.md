@@ -666,6 +666,24 @@ fresh on-policy failure-prefix corrections with executable oracle continuations 
 exact serialization, while preserving same-parent exact-token replay, fresh seeds,
 and the unchanged local gate.
 
+**On-policy failure collection still fails when correction begins after a long
+realized prefix (2026-07-14, local mechanism negative).** The result-separated
+[qwen35_4b_universal_on_policy_prefix_repair_token_match](../experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/reports/report.md)
+mines 230 reachable failures from 288 fresh parent rollouts, balances six failure
+classes, and replaces replay targets with 60 masked-prefix executable-oracle
+corrections. Candidate and replay each train 320 rows for 40 updates and exactly
+304,313 forward tokens, with 200 aligned replay positions. Fresh seed 88009 gives
+parent/replay/candidate 16/18/15 correct, 24/23/23 parsed, 2/3/3 caps, and 2/1/0 of
+six on execute+induct+probe. Candidate is 0/2 on each target kind, fails every
+relative check, and has one paired win versus four losses against replay. Promotion
+is empty and aggregate seed 78139 stays sealed. **On-policy substrate alone is not
+enough: teacher-forcing the model's long realized failure state does not install the
+earlier decision policy needed on a fresh trajectory.** Because masking also removes
+33,421 supervised target tokens and selected prefixes are cap-heavy, the supported
+negative is the complete matched-forward-compute recipe, not all on-policy learning.
+Retire long masked failure-prefix continuation; move the intervention to short
+pre-failure decisions and match target exposure in the next result-separated test.
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.

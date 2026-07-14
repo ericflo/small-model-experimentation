@@ -6,8 +6,8 @@ Model-free design, explicit parent deployment, authenticated rollout collection,
 failure-only mining, and the second exact-compute review are complete. Every fixed
 class quota passed, and two frozen 320-row streams match at exactly 304,313 forward
 tokens with zero skips. Both independently initialized arms have now trained and
-authenticated, and the fresh same-backend local gate is frozen. No capability result
-exists yet.
+authenticated. The fresh same-backend local gate rejected prefix repair 15/26 versus
+replay 18/26 and parent 16/26; no benchmark event ran and aggregate remains sealed.
 
 ## Research Program Fit
 
@@ -106,6 +106,16 @@ Research Site run `29355089298`, candidate merge from clean SHA `619f1e53` appli
 `baa2027e...6d5a` / `376e2082...b528`. Independent lineage, architecture, and frozen
 engine-request validation passed. This too is deployment evidence only.
 
+The single authorized local event then ran from pushed-green commit `a12e4758`.
+Parent/replay/candidate scored 16/18/15 correct, 24/23/23 parsed, and 2/3/3 cap
+contacts on the same 26 fresh rows. Execute+induct+probe subtotals were 2/1/0 of six;
+candidate scored zero on every target kind. It failed six absolute checks and all
+four strict relative checks. Against replay it flipped one miss to a win but four
+wins to misses; no skill count improved, while order, probe, and trace each fell by
+one. Local/promotion receipt hashes are `b4b333ca...b8c8` / `1e048e75...f5c`.
+Independent recomputation verified the promotion decision and all nine raw hashes.
+No benchmark data was read and aggregate seed 78,139 remains sealed.
+
 ## Controls
 
 Baseline is authenticated `close_xi`. The mechanism-falsifying control is an
@@ -114,8 +124,8 @@ optimizer steps, seed, and aligned shared replay. It must train and publish firs
 Both arms have now trained independently from the parent, and candidate preflight
 authenticated the committed control receipt, log, and external adapter before model
 load. The local deployment order is published parent composite, replay-control merge,
-candidate merge, then one three-arm vLLM local stage. Both trained-arm merges are now
-complete; the local event remains a separately published transition.
+candidate merge, then one three-arm vLLM local stage. Every transition completed and
+was preserved separately; the failed local gate terminates the experiment.
 
 ## Oracle Versus Deployable Evidence
 
@@ -128,24 +138,26 @@ and its messages are disjoint from training and prior reserved local seeds.
 
 ## Interpretation
 
-The parent supplies enough failures in every registered class, and exact forward
-compute is matched. The fresh local gate and same-backend deployment path are now
-also frozen. That closes substrate and runnability risks, not the mechanism claim.
-The selected set is dominated by long capped prefixes, and the candidate has fewer
-supervised tokens and lower loss mass than replay. A candidate win would show targeted
-repair beats additional replay under equal forward compute, but would not separate
-prefix-state conditioning from target-composition effects. “First failure” still
-means the first machine-observable boundary rather than an unobservable latent error.
+The parent supplies enough failures in every registered class and exact forward
+compute is matched, so data availability and deployment do not explain the negative.
+Long realized failure-prefix teacher forcing did not transfer to generating or
+repairing analogous prefixes on fresh tasks. The selected set is dominated by capped
+states, while masking those contexts leaves 33,421 fewer supervised target tokens
+than replay. The result rejects the complete recipe but does not separate prefix
+conditioning from target-composition effects. “First failure” also remains the first
+machine-observable boundary, which can occur too late to teach the decision that
+caused it.
 
 ## Next Experiments
 
-Publish and CI-verify the candidate composite. Only after both merge receipts are
-committed at the pushed-green HEAD may the three-arm local event run. Aggregate
-access remains conditional on the strict local gate.
+Do not rerun seed 88,009 or open aggregate seed 78,139. A result-separated successor
+should intervene at short pre-failure decision boundaries and match supervised
+target exposure, with fresh local and conditional aggregate seeds.
 
 ## Artifact Manifest
 
 Parent identity, frozen task hashes, replay hashes, the staged external merged
 checkpoint, parent-rollout hashes, stream hashes, and both trained adapters are
 recorded in `artifact_manifest.yaml`; local task/input/protocol hashes and both
-merged-arm deployments are registered. No capability result exists.
+merged-arm deployments are registered. The terminal local receipt, promotion
+receipt, and every raw arm artifact are tracked; no benchmark result exists.
