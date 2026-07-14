@@ -114,3 +114,35 @@ insufficient-quota negative.
 Next: publish and CI-verify this failure-inventory checkpoint. Then materialize
 exact-token candidate/control streams and perform the second adversarial compute
 review in a separate model-free checkpoint; do not expose training before it passes.
+
+## 2026-07-14 — Model-free exact-compute freeze
+
+- Published rebased prefix-inventory commit `d16beecc` directly to `main`; Validate
+  Repository run `29347732698` and Publish Research Site run `29347732815` both
+  passed.
+- From that clean aligned checkpoint, measured all 60 frozen repairs with the exact
+  pinned Qwen tokenizer and the actual training encoder. All 60 fit at length 4,096;
+  no selected row was removed or replaced after lengths became visible.
+- Deterministically materialized two 320-row streams. Each has exactly 304,313
+  unpadded forward tokens, zero skips, 40 optimizer steps, and the same 200
+  byte-identical replay rows at aligned positions. Candidate repair/filler blocks
+  contain 76,953/28,000 tokens; the disjoint control-variable replay block contains
+  104,953.
+- Preserved source-token/stream-manifest/control/candidate/final-receipt hashes
+  `2ae6aded...654d` / `f836d0a1...93cd3` / `541805df...be6` /
+  `9a43f3be...03f1` / `eb08026f...e0cfc`. Final encoded lengths span 329–2,991.
+- Audited the non-compute match explicitly: candidate versus control has +33,421
+  masked-context tokens, −33,949 think targets, equal close targets, +528 answer
+  targets, and −33,421 total target tokens. Nonzero-weight tokens and absolute loss
+  mass are 111,983/25,049.4 versus 145,404/31,311.2. Any result must retain this
+  target-composition caveat.
+- Added a fail-closed training wrapper that authenticates stream receipt, bytes,
+  warm start, output path, and hyperparameters; captures clean Git state before
+  opening outputs; refuses overwrite; and preserves logs/receipts. Candidate training
+  additionally requires the committed control receipt.
+- Second adversarial verdict is `PASS_CONTROL_TRAINING`. No model load, adapter
+  training, capability measurement, local event, or benchmark event ran.
+
+Next: commit/rebase/push this compute freeze and verify both workflows. Then run only
+`train-control` from that published clean checkpoint and immediately preserve its
+log and receipt before any candidate event.

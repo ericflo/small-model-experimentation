@@ -191,9 +191,12 @@
   mining found 230 reachable failures and cleared every fixed class quota with
   availability 46/48/35/24/36/41, selecting 10 each. Inventory/source hashes are
   `7230af52...dfe7` / `30141538...d84b8`; the selected prefixes contain 47123 masked
-  tokens and are dominated by cap boundaries. Training stays sealed until exact-token
-  replay streams, zero skips, and a second adversarial compute review are committed
-  and green.
+  tokens and are dominated by cap boundaries. The second review now freezes two
+  320-row arms at exactly 304313 forward tokens, zero skips, 40 updates, and 200
+  aligned replay positions; receipt hash is `eb08026f...e0cfc`. Candidate has 33421
+  fewer target tokens and lower absolute loss mass than replay, a required causal
+  caveat. Verdict `PASS_CONTROL_TRAINING` authorizes only replay first; publish and
+  verify its receipt before candidate training. Local and aggregate gates stay sealed.
 
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.

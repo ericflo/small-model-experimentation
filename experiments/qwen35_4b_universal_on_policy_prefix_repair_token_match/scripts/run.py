@@ -27,6 +27,11 @@ MERGED_PARENT = ROOT / "large_artifacts" / EXP.name / "merged" / "close_xi_paren
 MERGE_RECEIPT = EXP / "runs" / "merges" / "close_xi_parent.json"
 ROLLOUT_RECEIPT = EXP / "runs" / "parent_rollout" / "seed66113.receipt.json"
 DESIGN_RECEIPT = EXP / "data" / "design_receipt.json"
+TOKEN_RECEIPT = EXP / "data" / "stream_token_receipt.json"
+TOKEN_RECEIPT_SHA256 = "eb08026ffcf82b8780819a26a522f04d69358ffdfd4797dd4c603dd1fbbe0cfc"
+COMPUTE_REVIEW = EXP / "reports" / "compute_review.md"
+CONTROL_RECEIPT = EXP / "runs" / "training" / "replay_after_close.json"
+ADAPTER_ROOT = ROOT / "large_artifacts" / EXP.name / "adapters"
 MODEL_ID = "Qwen/Qwen3.5-4B"
 MODEL_REVISION = "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
 PARENT_WEIGHTS_SHA256 = "16e9dc75a0e33e182e916600ff6e1d75fc46dfa45e870216e2c149a41253c179"
@@ -87,7 +92,10 @@ def smoke() -> None:
         f"model_revision: {MODEL_REVISION}",
         f"parent_weights_sha256: {PARENT_WEIGHTS_SHA256}",
         f"parent_config_sha256: {PARENT_CONFIG_SHA256}",
-        "status: prefix_quota_satisfied_compute_freeze_next",
+        "status: compute_frozen_control_training_next",
+        "rows_per_training_arm: 320",
+        "forward_tokens_per_training_arm: 304313",
+        "optimizer_steps_per_training_arm: 40",
     )
     missing = [entry for entry in required if entry not in config]
     if missing:
@@ -119,11 +127,29 @@ def smoke() -> None:
         ]
     )
     run([str(PYTHON), "-B", str(SCRIPTS / "mine_prefix_repairs.py"), "--check"])
+    run([str(PYTHON), "-B", str(SCRIPTS / "measure_source_tokens.py"), "--check"])
+    run([str(PYTHON), "-B", str(SCRIPTS / "materialize_streams.py"), "--check"])
+    run([str(PYTHON), "-B", str(SCRIPTS / "validate_streams.py"), "--check"])
+    if sha256_file(TOKEN_RECEIPT) != TOKEN_RECEIPT_SHA256:
+        raise SystemExit("frozen stream-token receipt bytes changed")
+    token_receipt = json.loads(TOKEN_RECEIPT.read_text(encoding="utf-8"))
+    if (
+        token_receipt.get("rows_per_arm") != 320
+        or token_receipt.get("forward_tokens_per_arm") != 304313
+        or token_receipt.get("forward_token_delta") != 0
+        or token_receipt.get("skipped_rows") != 0
+        or token_receipt.get("shared_position_aligned_rows") != 200
+        or token_receipt.get("training", {}).get("optimizer_steps") != 40
+    ):
+        raise SystemExit("frozen stream-token receipt contract changed")
+    compute_review = COMPUTE_REVIEW.read_text(encoding="utf-8")
+    if "**Verdict:** `PASS_CONTROL_TRAINING`." not in compute_review:
+        raise SystemExit("second adversarial review has not authorized control training")
     design = json.loads(DESIGN_RECEIPT.read_text(encoding="utf-8"))
     print(
-        "design and prefix-mining smoke passed: "
+        "design, prefix-mining, and exact-compute smoke passed: "
         f"{design['rollout_tasks']['rows']} fresh tasks, six balanced failure classes, "
-        "60 quota-satisfying masked repairs frozen"
+        "60 quota-satisfying masked repairs, 320 rows and 304313 forward tokens per arm"
     )
 
 
@@ -143,12 +169,59 @@ def merge_parent() -> None:
     )
 
 
+def train_arm(name: str) -> None:
+    train_data = EXP / "data" / f"{name}.jsonl"
+    run(
+        [
+            str(PYTHON),
+            "-B",
+            str(SCRIPTS / "train_trial.py"),
+            "--name",
+            name,
+            "--train",
+            str(train_data),
+            "--token-receipt",
+            str(TOKEN_RECEIPT),
+            "--out",
+            str(ADAPTER_ROOT / name),
+            "--warm-start",
+            str(PARENT_ADAPTER),
+            "--epochs",
+            "1",
+            "--lr",
+            "1e-5",
+            "--rank",
+            "32",
+            "--alpha",
+            "64",
+            "--batch-size",
+            "1",
+            "--grad-accum",
+            "8",
+            "--max-length",
+            "4096",
+            "--w-think",
+            "0.2",
+            "--w-close",
+            "0.2",
+            "--seed",
+            "47",
+        ]
+    )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, allow_abbrev=False)
     parser.add_argument("--smoke", action="store_true")
     parser.add_argument(
         "--stage",
-        choices=("merge-parent", "collect-parent", "mine-prefixes"),
+        choices=(
+            "merge-parent",
+            "collect-parent",
+            "mine-prefixes",
+            "train-control",
+            "train-candidate",
+        ),
         help="run exactly one frozen stage",
     )
     args = parser.parse_args()
@@ -169,6 +242,14 @@ def main() -> int:
     elif args.stage == "mine-prefixes":
         require_clean_committed_checkpoint((ROLLOUT_RECEIPT,))
         run([str(PYTHON), "-B", str(SCRIPTS / "mine_prefix_repairs.py")])
+    elif args.stage == "train-control":
+        require_clean_committed_checkpoint((TOKEN_RECEIPT, COMPUTE_REVIEW))
+        train_arm("replay_after_close")
+    elif args.stage == "train-candidate":
+        require_clean_committed_checkpoint(
+            (TOKEN_RECEIPT, COMPUTE_REVIEW, CONTROL_RECEIPT)
+        )
+        train_arm("prefix_repair_after_close")
     return 0
 
 

@@ -2,10 +2,11 @@
 
 ## Summary
 
-Model-free design, explicit parent deployment, and authenticated rollout collection
-are complete, and the failure-only miner satisfied every fixed class quota. This
-result-separated successor now has a frozen 60-row masked-prefix repair source. No
-training or capability result exists yet.
+Model-free design, explicit parent deployment, authenticated rollout collection,
+failure-only mining, and the second exact-compute review are complete. Every fixed
+class quota passed, and two frozen 320-row streams match at exactly 304,313 forward
+tokens with zero skips. Replay-control training is authorized; no training or
+capability result exists yet.
 
 ## Research Program Fit
 
@@ -20,8 +21,9 @@ classes. The authenticated `close_xi` adapter is explicitly merged because runti
 vLLM LoRA is a verified silent no-op. One greedy natural-thinking vLLM event collected
 288 parent outputs at seed 66,113 and cap 1,024. The frozen model-free miner selected
 ten reachable failures per class and masks every generated parent-prefix token from
-loss. Exact-token replay materialization is deferred to the separately gated compute
-freeze.
+loss. Deterministic stream construction combines 200 position-aligned shared replay
+rows with either 60 repairs plus 60 replay fillers or 120 disjoint replay-control
+rows. The actual training encoder and pinned tokenizer measure every final row.
 
 ## Results
 
@@ -44,15 +46,26 @@ repair/state class were 46/48/35/24/36/41, clearing every quota of ten. The 60-r
 repair source is `30141538...d84b8`; full inventory is `7230af52...dfe7`.
 Selected prefixes contain 47,123 masked tokens, with min/mean/max
 33/785.383/1,024. Forty-two cut at the generation-cap boundary, ten at the first
-token beyond the commit budget, and eight at the answer boundary. No stream
-materialization, training, capability measurement, or benchmark event ran.
+token beyond the commit budget, and eight at the answer boundary.
+
+The final control/candidate hashes are `541805df...be6` / `9a43f3be...03f1`, and
+the exact token receipt is `eb08026f...e0cfc`. Both arms contain 320 rows, 304,313
+forward tokens, zero skips, 200 aligned common rows, and 40 updates. The longest row
+is 2,991 of 4,096 tokens. Forward compute is equal, but target composition is not:
+candidate minus control is +33,421 masked-context, −33,949 think-target, zero
+close-target, +528 answer-target, and −33,421 total target tokens. Candidate/control
+nonzero-weight tokens are 111,983/145,404; absolute loss masses are
+25,049.4/31,311.2. The second review records this ambiguity and authorizes only the
+control. No model load, adapter training, capability measurement, or benchmark event
+ran during the freeze.
 
 ## Controls
 
-Baseline is authenticated `close_xi`. The future mechanism-falsifying control remains
-an independent same-parent replay continuation matched on exact encoded forward
-tokens, optimizer steps, seed, and aligned shared replay. Training is fail-closed
-until those post-rollout facts are frozen in a second review.
+Baseline is authenticated `close_xi`. The mechanism-falsifying control is an
+independent same-parent replay continuation matched on exact encoded forward tokens,
+optimizer steps, seed, and aligned shared replay. It must train and publish first.
+Candidate training is fail-closed on that committed receipt; both arms independently
+restart from the parent.
 
 ## Oracle Versus Deployable Evidence
 
@@ -64,21 +77,23 @@ stays sealed.
 
 ## Interpretation
 
-The parent supplies enough failures in every registered class to run the test. That
-closes the substrate-availability risk, not the mechanism claim. The selected set is
-dominated by long capped prefixes; the compute review must prove exact sequence fit,
-zero skips, masked/loss-bearing exposure, and a true forward-token replay match.
-“First failure” still means the first machine-observable boundary rather than an
-unobservable latent error.
+The parent supplies enough failures in every registered class, and exact forward
+compute is matched. That closes substrate and runnability risks, not the mechanism
+claim. The selected set is dominated by long capped prefixes, and the candidate has
+fewer supervised tokens and lower loss mass than replay. A candidate win would show
+targeted repair beats additional replay under equal forward compute, but would not
+separate prefix-state conditioning from target-composition effects. “First failure”
+still means the first machine-observable boundary rather than an unobservable latent
+error.
 
 ## Next Experiments
 
-Publish this quota-satisfying inventory. Then materialize both exact-token streams and
-perform the second adversarial compute review as a separate model-free checkpoint. Do
-not train until that review is committed and green.
+Publish and CI-verify the exact-compute freeze. Train only the replay control, publish
+its durable receipt, and wait for both workflows before training the sole candidate.
+Local capability design and execution remain separate later checkpoints.
 
 ## Artifact Manifest
 
 Parent identity, frozen task hashes, replay hashes, the staged external merged
-checkpoint, and parent-rollout hashes are recorded in `artifact_manifest.yaml`; no
-capability result exists.
+checkpoint, parent-rollout hashes, stream hashes, and prospective adapter paths are
+recorded in `artifact_manifest.yaml`; no capability result exists.

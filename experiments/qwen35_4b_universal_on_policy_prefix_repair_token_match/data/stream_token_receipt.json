@@ -1,0 +1,145 @@
+{
+  "arm_data": {
+    "prefix_repair_after_close": "experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/data/prefix_repair_after_close.jsonl",
+    "replay_after_close": "experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/data/replay_after_close.jsonl"
+  },
+  "candidate_minus_control_spans": {
+    "answer_target": 528,
+    "close_target": 0,
+    "forward": 0,
+    "masked_context": 33421,
+    "parent_prefix": 47123,
+    "prompt": -13702,
+    "target_span": -33421,
+    "think_target": -33949
+  },
+  "encoder": "scripts/train_think.py:encode_row",
+  "encoder_sha256": "0cfb126feae6d73238c02362066229fff0b6a846625eed167d7681edde322cc4",
+  "experiment_id": "qwen35_4b_universal_on_policy_prefix_repair_token_match",
+  "files": [
+    {
+      "absolute_weight_mass_per_epoch": 31311.2,
+      "encoded_rows": 320,
+      "families": {
+        "burrowmaze": 28,
+        "caravan": 5,
+        "ferrier": 66,
+        "foundry_ledger": 9,
+        "gatepost": 21,
+        "glyphgate": 57,
+        "kilnrite": 65,
+        "loomfix": 29,
+        "packhouse": 7,
+        "patchwheel": 18,
+        "runeward": 5,
+        "stallwright": 10
+      },
+      "kinds": {
+        "atom": 36,
+        "atom_fc": 21,
+        "episode": 201,
+        "oracle_trace": 62
+      },
+      "max_sequence_tokens": 2991,
+      "min_sequence_tokens": 329,
+      "nonzero_weight_tokens_per_epoch": 145404,
+      "path": "experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/data/replay_after_close.jsonl",
+      "rows": 320,
+      "sha256": "541805df2d817707c1e76213e50c8f08fd9caff10d0a3887e1196424b6820be6",
+      "skipped": [],
+      "skipped_rows": 0,
+      "spans_per_epoch": {
+        "answer_target": 2788,
+        "close_target": 640,
+        "forward": 304313,
+        "masked_context": 119305,
+        "parent_prefix": 0,
+        "prompt": 119305,
+        "target_span": 185008,
+        "think_target": 181580
+      }
+    },
+    {
+      "absolute_weight_mass_per_epoch": 25049.4,
+      "encoded_rows": 320,
+      "families": {
+        "burrowmaze": 26,
+        "caravan": 3,
+        "ferrier": 91,
+        "foundry_ledger": 4,
+        "gatepost": 13,
+        "glyphgate": 31,
+        "kilnrite": 51,
+        "loomfix": 16,
+        "packhouse": 6,
+        "patchwheel": 8,
+        "runeward": 2,
+        "stallwright": 9,
+        "universal_on_policy_prefix_repair": 60
+      },
+      "kinds": {
+        "atom": 10,
+        "atom_fc": 21,
+        "episode": 185,
+        "oracle_trace": 44,
+        "u_prefix_repair_bounded_induction": 10,
+        "u_prefix_repair_commit_serialization": 10,
+        "u_prefix_repair_declaration_operation": 10,
+        "u_prefix_repair_probe_scoring": 10,
+        "u_prefix_repair_repair_propagation": 10,
+        "u_prefix_repair_state_transition": 10
+      },
+      "max_sequence_tokens": 2991,
+      "min_sequence_tokens": 329,
+      "nonzero_weight_tokens_per_epoch": 111983,
+      "path": "experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/data/prefix_repair_after_close.jsonl",
+      "rows": 320,
+      "sha256": "9a43f3bea7699af4899678042623a90ef1b6cfc0f17defe069570be908cc03f1",
+      "skipped": [],
+      "skipped_rows": 0,
+      "spans_per_epoch": {
+        "answer_target": 3316,
+        "close_target": 640,
+        "forward": 304313,
+        "masked_context": 152726,
+        "parent_prefix": 47123,
+        "prompt": 105603,
+        "target_span": 151587,
+        "think_target": 147631
+      }
+    }
+  ],
+  "forward_token_delta": 0,
+  "forward_tokens_per_arm": 304313,
+  "max_length": 4096,
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "position_aligned_streams": true,
+  "rows_per_arm": 320,
+  "schema_version": 1,
+  "shared_position_aligned_rows": 200,
+  "skipped_rows": 0,
+  "source_token_receipt": "experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/data/source_token_lengths.json",
+  "source_token_receipt_sha256": "2ae6aded50fb4ad649bf69eea01e03aee58b73e58083276e2ab5f188b3ff654d",
+  "stream_manifest": "experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/data/stream_manifest.json",
+  "stream_manifest_sha256": "f836d0a192adfd1e85e4b3514b4854515b239be5faae0c33cebea46530593cd3",
+  "tokenizer": {
+    "class": "Qwen2Tokenizer",
+    "eos_token_id": 248046,
+    "think_close_token_id": 248069,
+    "vocab_size": 248077
+  },
+  "training": {
+    "batch_size": 1,
+    "close_weight": 0.2,
+    "epochs": 1,
+    "forward_tokens_per_arm": 304313,
+    "gradient_accumulation": 8,
+    "learning_rate": 1e-05,
+    "max_length": 4096,
+    "optimizer_steps": 40,
+    "rows_per_arm": 320,
+    "seed": 47,
+    "thought_weight": 0.2
+  }
+}

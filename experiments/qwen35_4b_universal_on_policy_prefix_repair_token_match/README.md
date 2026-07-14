@@ -1,6 +1,6 @@
 # On-Policy Failure-Prefix Universal Curriculum
 
-**Status:** in-progress · since 2026-07-14 · all six prefix quotas satisfied; exact-compute freeze is next
+**Status:** in-progress · since 2026-07-14 · exact-compute freeze passed; replay-control training is next
 
 This result-separated successor tests whether training corrective continuations from
 the model's own fresh procedural failure prefixes installs a reusable reasoning and
@@ -63,17 +63,23 @@ Model-free design smoke:
 PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --smoke
 ```
 
-The design, parent merge, parent rollout, and failure inventory are separate published
-checkpoints. Verify the committed inventory and repair source with:
+The design, parent merge, parent rollout, failure inventory, and exact-token freeze are
+separate published checkpoints. Verify every model-free derived artifact with:
 
 ```bash
-PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/mine_prefix_repairs.py --check
+PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --smoke
 ```
 
-No training command is authorized. After this checkpoint is pushed and both required
-workflows are green, materialize exact-token candidate/control streams and write the
-second adversarial compute review as their own model-free checkpoint. Training remains
-unavailable until that review records exact forward-token equality and zero skips.
+After this checkpoint is pushed to `main` and both required workflows are green, run
+exactly the replay-control stage from a clean worktree:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --stage train-control
+```
+
+Candidate training remains unavailable until the control log and receipt are
+committed, rebased, pushed, and green. Local capability and benchmark stages remain
+sealed.
 
 ## Results
 
@@ -101,15 +107,27 @@ exactly ten per class. The 60-row repair source and complete inventory hashes ar
 `30141538...d84b8` / `7230af52...dfe7`. Selected prefixes contain 47,123 masked
 tokens total (33 minimum, 785.4 mean, 1,024 maximum); 42 selections cut at the
 generation cap, ten at the immediate-commit boundary, and eight at the answer
-boundary. This is a data-availability result only. No stream materialization,
-training, capability measurement, local evaluation, or benchmark event exists.
+boundary.
+
+The separately frozen training streams now contain 320 rows and exactly 304,313
+forward tokens apiece, with zero skips, 200 byte-identical position-aligned replay
+rows, and 40 optimizer steps. All repairs fit below the 4,096-token ceiling; the
+largest final row is 2,991 tokens. The candidate replaces 33,421 replay target tokens
+with masked context, leaving 111,983 nonzero-weight tokens and 25,049.4 absolute loss
+mass versus 145,404 and 31,311.2 for control. This is an explicit intervention
+caveat, not hidden behind the forward-token match. Token-receipt SHA-256 is
+`eb08026f...e0cfc`; the second review verdict is `PASS_CONTROL_TRAINING`. This is
+still construction evidence only. No adapter training, capability measurement,
+local evaluation, or benchmark event exists.
 
 ## Interpretation
 
 The parent visits every registered failure class often enough to test the mechanism,
-but this is not evidence that on-policy correction works. Selection is dominated by
-long severe prefixes, so the exact-compute review must prove sequence fit, zero skips,
-and a genuine forward-token replay match before training.
+and the exact-forward-compute comparison is runnable. This is not evidence that
+on-policy correction works. Selection is dominated by long severe prefixes, while
+the candidate has fewer supervised tokens and lower loss mass than replay. A win
+would show targeted repair beats more replay under matched forward compute; it would
+not isolate prefix conditioning from target-composition differences.
 
 ## Knowledgebase Update
 
@@ -125,13 +143,23 @@ and a genuine forward-token replay match before training.
 - `scripts/run.py`
 - `scripts/gen_rollout_tasks.py`
 - `scripts/mine_prefix_repairs.py`
+- `scripts/measure_source_tokens.py`
+- `scripts/materialize_streams.py`
+- `scripts/validate_streams.py`
+- `scripts/train_trial.py`
 - `data/design_receipt.json`
 - `data/rollout_task_manifest.json`
 - `data/prefix_failure_inventory.json`
 - `data/prefix_repair_source.jsonl`
+- `data/source_token_lengths.json`
+- `data/stream_manifest.json`
+- `data/stream_token_receipt.json`
+- `data/replay_after_close.jsonl`
+- `data/prefix_repair_after_close.jsonl`
 - `runs/parent_rollout/seed66113.receipt.json`
 - `analysis/prefix_failure_inventory.md`
 - `reports/design_review.md`
+- `reports/compute_review.md`
 - `reports/preregistration.md`
 - `reports/report.md`
 - `reports/artifact_manifest.yaml`

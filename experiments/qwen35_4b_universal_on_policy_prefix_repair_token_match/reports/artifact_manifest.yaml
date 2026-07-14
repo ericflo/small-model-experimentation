@@ -14,10 +14,10 @@ external_artifacts:
     regenerate: "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --stage merge-parent"
 omitted_artifacts:
   - path: "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/"
-    reason: "registered merged parent is external above; future adapters/checkpoints remain large and gitignored"
+    reason: "registered merged parent is external above; authorized control and conditional candidate adapters remain large and gitignored"
 reproducibility:
   smoke_command: "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --smoke"
-  full_command: "verification only: scripts/mine_prefix_repairs.py --check; no training stage is authorized before exact-token materialization and second review"
+  full_command: "after this checkpoint is pushed and both workflows pass: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --stage train-control"
   required_external_artifacts:
     - "large_artifacts/qwen35_4b_universal_close_weight_token_match/adapters/close_xi"
     - "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/merged/close_xi_parent"
@@ -31,6 +31,10 @@ notes: >-
   8010632f...3b17f / 9fe81276...664 / ed0d4fc4...26b7 / c6b98b79...74fa.
   Recovery authenticated completed atomic output and reran no generation. Model-free
   mining found 230 reachable failures, satisfied all six quotas at 10 each, and wrote
-  inventory/source hashes 7230af52...dfe7 / 30141538...d84b8. The selected 60
-  prefixes contain 47123 masked tokens. No exact-token stream, adapter training,
-  capability, or benchmark receipt exists.
+  inventory/source hashes 7230af52...dfe7 / 30141538...d84b8. Exact-token
+  materialization froze 320 rows, 304313 forward tokens, 40 updates, zero skips, and
+  200 aligned replay rows per arm. Control/candidate/receipt hashes are
+  541805df...be6 / 9a43f3be...03f1 / eb08026f...e0cfc. Candidate has 33421
+  fewer target tokens and 6261.8 less absolute loss mass than control; the second
+  review preserves that caveat and authorizes control training only. No adapter,
+  capability, local, or benchmark receipt exists.

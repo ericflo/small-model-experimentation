@@ -48344,7 +48344,7 @@
    {
      "headline": true,
      "kind": "bar",
-     "title": "Failure mining reaches the fifth checkpoint",
+     "title": "Exact compute reaches the sixth checkpoint",
      "categories": [
       "intake",
       "CPU design",
@@ -48365,7 +48365,7 @@
         1,
         1,
         1,
-        0,
+        1,
         0,
         0,
         0
@@ -48375,8 +48375,8 @@
      "x_label": "preregistered experiment stage",
      "y_label": "completion indicator",
      "y_format": "integer",
-     "note": "Failure mining selected 60 rows after all six quotas passed. Exact-compute review, training, capability, and benchmark stages remain incomplete.",
-     "source": "experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/data/prefix_failure_inventory.json"
+     "note": "Both 320-row streams are now frozen at exactly 304,313 forward tokens, zero skips, 40 updates, and 200 aligned replay rows. Training, capability, and benchmark stages remain incomplete.",
+     "source": "experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/data/stream_token_receipt.json"
     },
     {
      "headline": false,
@@ -48405,6 +48405,33 @@
      "y_format": "integer",
      "note": "The frozen miner selected exactly 10 rows per class from 230 total reachable failures. Availability passing is substrate evidence only; no training or capability event exists.",
      "source": "experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/data/prefix_failure_inventory.json"
+    },
+    {
+     "headline": false,
+     "kind": "bar",
+     "title": "Forward compute matches while supervised exposure differs",
+     "categories": [
+      "forward tokens",
+      "masked context",
+      "think target",
+      "answer target",
+      "nonzero weight"
+     ],
+     "series": [
+      {
+       "label": "replay control",
+       "values": [304313, 119305, 181580, 2788, 145404]
+      },
+      {
+       "label": "prefix repair",
+       "values": [304313, 152726, 147631, 3316, 111983]
+      }
+     ],
+     "x_label": "per-epoch encoded exposure",
+     "y_label": "tokens",
+     "y_format": "integer",
+     "note": "The registered match is exact unpadded forward compute. Long masked parent prefixes leave the candidate with 33,421 fewer target and nonzero-weight tokens, so any capability result must retain this target-composition caveat.",
+     "source": "experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/data/stream_token_receipt.json"
     }
    ]
   },

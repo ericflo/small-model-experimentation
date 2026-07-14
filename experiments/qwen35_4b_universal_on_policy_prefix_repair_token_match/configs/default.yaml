@@ -18,4 +18,14 @@ parent_rollout_backend: vllm_merged_composite
 parent_rollout_max_tokens: 1024
 shared_position_aligned_replay_rows: 200
 rows_per_training_arm: 320
-status: prefix_quota_satisfied_compute_freeze_next
+forward_tokens_per_training_arm: 304313
+optimizer_steps_per_training_arm: 40
+training_epochs: 1
+training_batch_size: 1
+training_gradient_accumulation: 8
+training_learning_rate: 0.00001
+training_max_length: 4096
+training_thought_weight: 0.2
+training_close_weight: 0.2
+stream_token_receipt_sha256: eb08026ffcf82b8780819a26a522f04d69358ffdfd4797dd4c603dd1fbbe0cfc
+status: compute_frozen_control_training_next
