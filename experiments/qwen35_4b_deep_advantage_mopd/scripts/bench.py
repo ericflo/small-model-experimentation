@@ -50,6 +50,7 @@ from io_utils import (  # noqa: E402
     resolve_repo_path,
     sha256_file,
 )
+from model_provenance import validate_known_model_checkpoint  # noqa: E402
 
 
 GATEWAY_KEYS = frozenset(
@@ -315,61 +316,16 @@ def _finite_number(value: Any) -> bool:
 
 def model_provenance(model: Path) -> dict[str, str]:
     """Verify and hash weights plus every root-level inference file."""
-
-    model = model.resolve()
-    receipt_path = model / "merge_receipt.json"
-    config_path = model / "config.json"
-    if not receipt_path.is_file() or not config_path.is_file():
-        raise ValueError("merged checkpoint provenance files are missing")
-    try:
-        receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError) as exc:
-        raise ValueError("merged checkpoint receipt is invalid") from exc
-    rows = receipt.get("weight_files")
-    if not isinstance(rows, list) or not rows:
-        raise ValueError("merged checkpoint receipt lacks a weight inventory")
-    inventory = []
-    names = []
-    for row in rows:
-        if not isinstance(row, dict) or set(row) != {"name", "sha256"}:
-            raise ValueError("merged checkpoint weight inventory is malformed")
-        name, expected = row["name"], row["sha256"]
-        if (
-            not isinstance(name, str)
-            or not name
-            or Path(name).name != name
-            or not isinstance(expected, str)
-            or len(expected) != 64
-        ):
-            raise ValueError("merged checkpoint weight inventory entry is invalid")
-        artifact = model / name
-        if not artifact.is_file() or sha256_file(artifact) != expected:
-            raise ValueError("merged checkpoint weight hash mismatch")
-        names.append(name)
-        inventory.append({"name": name, "sha256": expected})
-    if len(names) != len(set(names)):
-        raise ValueError("merged checkpoint weight inventory contains duplicates")
-    actual_names = sorted(path.name for path in model.glob("*.safetensors"))
-    if sorted(names) != actual_names:
-        raise ValueError("merged checkpoint weight inventory is incomplete")
-    inference_inventory = [
-        {
-            "path": path.relative_to(model).as_posix(),
-            "sha256": sha256_file(path),
-        }
-        for path in sorted(model.rglob("*"))
-        if path.is_file()
-    ]
-    if not inference_inventory:
-        raise ValueError("merged checkpoint inference inventory is empty")
+    provenance = validate_known_model_checkpoint(model)
     return {
-        "model": str(model),
-        "model_merge_receipt_sha256": sha256_file(receipt_path),
-        "model_weight_inventory_sha256": canonical_hash(
-            sorted(inventory, key=lambda row: row["name"])
-        ),
-        "model_config_sha256": sha256_file(config_path),
-        "model_inference_inventory_sha256": canonical_hash(inference_inventory),
+        key: provenance[key]
+        for key in (
+            "model",
+            "model_merge_receipt_sha256",
+            "model_weight_inventory_sha256",
+            "model_config_sha256",
+            "model_inference_inventory_sha256",
+        )
     }
 
 

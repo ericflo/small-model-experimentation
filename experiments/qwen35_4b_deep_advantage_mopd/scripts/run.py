@@ -52,6 +52,11 @@ from io_utils import (  # noqa: E402
     validate_policy_cache_provenance,
     write_json,
 )
+from model_provenance import (  # noqa: E402
+    canonical_confirmation_arm_map,
+    confirmation_arm_map_sha256,
+    reauthenticate_confirmation_arm,
+)
 
 
 FROZEN_FILES = (
@@ -124,20 +129,6 @@ def _paths(config: dict) -> dict[str, Path]:
 
 def _merged_complete(path: Path) -> bool:
     return all((path / name).is_file() for name in ("config.json", "model.safetensors", "merge_receipt.json"))
-
-
-def _model_inference_inventory_sha256(model: Path) -> str:
-    rows = [
-        {
-            "path": path.relative_to(model).as_posix(),
-            "sha256": sha256_file(path),
-        }
-        for path in sorted(model.rglob("*"))
-        if path.is_file()
-    ]
-    if not rows:
-        raise SystemExit(f"merged checkpoint inference inventory is empty: {model}")
-    return canonical_hash(rows)
 
 
 def _source_complete(adapter: Path, merged: Path) -> bool:
@@ -1532,7 +1523,17 @@ def _validate_confirmation_score(
     raw_root: Path,
     authorization_binding: dict,
     admission_binding: dict,
+    arm_name: str,
+    expected_model_admission: dict,
 ) -> dict:
+    try:
+        observed_model_admission = reauthenticate_confirmation_arm(
+            config,
+            name=arm_name,
+            expected=expected_model_admission,
+        )
+    except ValueError as exc:
+        raise SystemExit(f"confirmation arm provenance changed: {arm_name}: {exc}") from exc
     try:
         payload = validate_confirmation_score_artifacts(
             path, expected_tag=tag, raw_root=raw_root
@@ -1572,10 +1573,11 @@ def _validate_confirmation_score(
         or payload.get("config_sha256") != sha256_file(config_path)
         or payload.get("model") != str(model.resolve())
         or payload.get("model_merge_receipt_sha256")
-        != sha256_file(model / "merge_receipt.json")
-        or payload.get("model_config_sha256") != sha256_file(model / "config.json")
+        != observed_model_admission["model_merge_receipt_sha256"]
+        or payload.get("model_config_sha256")
+        != observed_model_admission["model_config_sha256"]
         or payload.get("model_inference_inventory_sha256")
-        != _model_inference_inventory_sha256(model)
+        != observed_model_admission["model_inference_inventory_sha256"]
         or int(payload.get("block_seed", -1)) != seed
         or payload.get("decode") != decode
         or int(payload.get("k", -1)) != expected_k
@@ -1652,10 +1654,16 @@ def _authorize_confirmation_inputs(config: dict, config_path: Path) -> dict:
         for seed in seeds
     ]
     controls_path = EXP / "runs" / "controls.json"
+    try:
+        expected_arms = canonical_confirmation_arm_map(config)
+    except ValueError as exc:
+        raise SystemExit(f"confirmation arm provenance audit failed: {exc}") from exc
     if integrations != expected_integrations or controls != {
         "path": str(controls_path.resolve()),
         "sha256": sha256_file(controls_path),
-    }:
+    } or payload.get("confirmation_arms") != expected_arms or payload.get(
+        "confirmation_arms_sha256"
+    ) != confirmation_arm_map_sha256(expected_arms):
         raise SystemExit("semantic controls authorization evidence changed")
     return payload
 
@@ -1664,7 +1672,7 @@ def _confirm(config: dict, config_path: Path) -> None:
     seeds = [int(value) for value in config["seeds"]["integration_training"]]
     for seed in seeds:
         _require_gate(_integration_receipt_path(seed))
-    _authorize_confirmation_inputs(config, config_path)
+    authorization_payload = _authorize_confirmation_inputs(config, config_path)
     authorization_path = EXP / "analysis" / "controls_authorization.json"
     try:
         authorization_binding = controls_authorization_binding(
@@ -1673,24 +1681,18 @@ def _confirm(config: dict, config_path: Path) -> None:
         )
     except ValueError as exc:
         raise SystemExit(f"invalid confirmation control admission: {exc}") from exc
-    paths = _paths(config)
-    parameter_models = _build_parameter_controls(config)
-    model_arms: dict[str, Path] = {
-        "quick": paths["quick"],
-        "deep": paths["deep"],
-        "soup": paths["soup"],
-        "primary_seed42": _integration_final_model(config, seeds[0]),
-        "primary_seed43": _integration_final_model(config, seeds[1]),
-        "primary_seed44": _integration_final_model(config, seeds[2]),
-        "non_advantage_route": _control_final_model(config, "non_advantage_route"),
-        "wrong_teacher": _control_final_model(config, "wrong_teacher"),
-        "offpolicy_sft": _control_final_model(config, "offpolicy_sft"),
-        **parameter_models,
+    authorized_arms = authorization_binding["confirmation_arms"]
+    if authorization_payload.get("confirmation_arms") != authorized_arms:
+        raise SystemExit("confirmation authorization arm binding changed")
+    try:
+        if canonical_confirmation_arm_map(config) != authorized_arms:
+            raise ValueError("arm bytes differ from the semantic authorization")
+    except ValueError as exc:
+        raise SystemExit(f"confirmation arm provenance changed before admission: {exc}") from exc
+    evaluation_arms = {
+        name: Path(row["model"])
+        for name, row in authorized_arms.items()
     }
-    for name, model in model_arms.items():
-        if not _merged_complete(model):
-            raise SystemExit(f"confirmation arm {name} is incomplete: {model}")
-    evaluation_arms = {**model_arms, "soup_best8": paths["soup"]}
     raw_root = configured_confirmation_raw_root(config)
     block_seeds = [int(value) for value in config["seeds"]["confirmatory_blocks"]]
     admission_payload = {
@@ -1700,25 +1702,27 @@ def _confirm(config: dict, config_path: Path) -> None:
         "config_sha256": sha256_file(config_path),
         "controls_authorization": authorization_binding,
         "blocks": block_seeds,
-        "arms": {
-            name: {
-                "model": str(model.resolve()),
-                "model_merge_receipt_sha256": sha256_file(
-                    model / "merge_receipt.json"
-                ),
-                "model_config_sha256": sha256_file(model / "config.json"),
-                "model_inference_inventory_sha256": (
-                    _model_inference_inventory_sha256(model)
-                ),
-                "decode": "sample8" if name == "soup_best8" else "greedy",
-            }
-            for name, model in sorted(evaluation_arms.items())
-        },
+        "arms": authorized_arms,
         "evaluator_sha256": sha256_file(EXP / "scripts" / "eval_policy.py"),
         "evaluator_source_inventory": confirmation_evaluator_source_inventory(),
     }
     admission_path = EXP / "runs" / "confirmation" / "ADMISSION.json"
+    try:
+        if canonical_confirmation_arm_map(config) != authorized_arms:
+            raise ValueError("arm bytes changed before admission publication")
+    except ValueError as exc:
+        raise SystemExit(f"confirmation arm provenance changed before admission: {exc}") from exc
     _publish_global_json_no_clobber(admission_path, admission_payload)
+    try:
+        if canonical_confirmation_arm_map(config) != authorized_arms:
+            raise ValueError("arm bytes changed after admission publication")
+        confirmation_admission_binding(
+            admission_path,
+            expected_config_sha256=sha256_file(config_path),
+            expected_controls_authorization=authorization_binding,
+        )
+    except ValueError as exc:
+        raise SystemExit(f"confirmation arm provenance changed after admission: {exc}") from exc
     try:
         validate_confirmation_campaign_tree(
             admission_path, raw_root=raw_root, terminal=False
@@ -1728,11 +1732,21 @@ def _confirm(config: dict, config_path: Path) -> None:
     score_paths: dict[str, list[str]] = {name: [] for name in evaluation_arms}
     for block_index, block_seed in enumerate(block_seeds):
         for name, model in evaluation_arms.items():
-            decode = "sample8" if name == "soup_best8" else "greedy"
+            decode = authorized_arms[name]["decode"]
             out_dir = EXP / "runs" / "confirmation" / f"block_{block_index}" / name
             score_path = out_dir / "scores.json"
             tag = f"block_{block_index}_{name}"
             expected_model_admission = admission_payload["arms"][name]
+            try:
+                reauthenticate_confirmation_arm(
+                    config,
+                    name=name,
+                    expected=expected_model_admission,
+                )
+            except ValueError as exc:
+                raise SystemExit(
+                    f"confirmation arm provenance changed before STARTED: {name}: {exc}"
+                ) from exc
             try:
                 admission_binding = confirmation_admission_binding(
                     admission_path,
@@ -1783,6 +1797,8 @@ def _confirm(config: dict, config_path: Path) -> None:
                 raw_root=raw_root,
                 authorization_binding=authorization_binding,
                 admission_binding=admission_binding,
+                arm_name=name,
+                expected_model_admission=expected_model_admission,
             )
             score_paths[name].append(str(score_path.resolve()))
     try:
@@ -1810,12 +1826,12 @@ def _confirm(config: dict, config_path: Path) -> None:
         "strict_comparator_arms": strict,
         "arms": score_paths,
         "model_merge_receipts": {
-            name: sha256_file(model / "merge_receipt.json")
-            for name, model in evaluation_arms.items()
+            name: authorized_arms[name]["model_merge_receipt_sha256"]
+            for name in evaluation_arms
         },
         "model_inference_inventories": {
-            name: _model_inference_inventory_sha256(model)
-            for name, model in evaluation_arms.items()
+            name: authorized_arms[name]["model_inference_inventory_sha256"]
+            for name in evaluation_arms
         },
         "evaluator_sha256": sha256_file(EXP / "scripts" / "eval_policy.py"),
         "evaluator_source_inventory": confirmation_evaluator_source_inventory(),

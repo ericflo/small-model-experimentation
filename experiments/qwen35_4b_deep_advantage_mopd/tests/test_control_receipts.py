@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import copy
+import contextlib
 import hashlib
 import json
 import random
@@ -20,6 +21,7 @@ sys.path.insert(0, str(EXP / "scripts"))
 import authorize_benchmark  # noqa: E402
 import control_receipts  # noqa: E402
 import merge_weighted_adapters  # noqa: E402
+import model_provenance  # noqa: E402
 import run as run_script  # noqa: E402
 from control_receipts import validate_control_training_receipt  # noqa: E402
 from io_utils import sha256_file  # noqa: E402
@@ -60,9 +62,10 @@ def _parameter_control_fixture(root: Path) -> dict:
     tokenizer.write_text('{"model":{"type":"BPE"}}\n', encoding="utf-8")
     tokenizer_config = model / "tokenizer_config.json"
     tokenizer_config.write_text('{"model_max_length":16384}\n', encoding="utf-8")
-    nested = model / "assets" / "prompt.json"
-    nested.parent.mkdir()
-    nested.write_text('{"template":"frozen"}\n', encoding="utf-8")
+    generation_config = model / "generation_config.json"
+    generation_config.write_text('{"max_length":16384}\n', encoding="utf-8")
+    chat_template = model / "chat_template.jinja"
+    chat_template.write_text("{{ messages }}\n", encoding="utf-8")
     weight = model / "model.safetensors"
     weight.write_bytes(b"parameter-control-weight")
     inference_files = [
@@ -70,8 +73,8 @@ def _parameter_control_fixture(root: Path) -> dict:
             "path": path.relative_to(model).as_posix(),
             "sha256": sha256_file(path),
         }
-        for path in sorted(model.rglob("*"))
-        if path.is_file()
+        for path in sorted(model.iterdir())
+        if path.is_file() and path.name != "merge_receipt.json"
     ]
     receipt = {
         "method": "explicit_convex_lora_delta_merge",
@@ -109,7 +112,8 @@ def _parameter_control_fixture(root: Path) -> dict:
         "model_config": model_config,
         "tokenizer": tokenizer,
         "tokenizer_config": tokenizer_config,
-        "nested": nested,
+        "generation_config": generation_config,
+        "chat_template": chat_template,
         "weight": weight,
         "receipt": receipt_path,
         "config": {
@@ -122,6 +126,25 @@ def _parameter_control_fixture(root: Path) -> dict:
             "controls": {"parameter_merge_deep_weights": [0.25]},
         },
     }
+
+
+@contextlib.contextmanager
+def _parameter_profile(fixture: dict):
+    profile = {
+        name: sha256_file(fixture["model"] / name)
+        for name in (
+            "chat_template.jinja",
+            "config.json",
+            "generation_config.json",
+            "tokenizer.json",
+            "tokenizer_config.json",
+        )
+    }
+    with mock.patch.dict(
+        model_provenance.LOAD_PROFILES,
+        {"source": profile},
+    ):
+        yield
 
 
 def _receipt(arm: str) -> dict:
@@ -511,37 +534,37 @@ class ControlReceiptTests(unittest.TestCase):
         mutations = {
             "weight_mutated": (
                 lambda fixture: fixture["weight"].write_bytes(b"mutated"),
-                "weight hash mismatch",
+                "weight inventory is stale",
             ),
             "weight_missing": (
                 lambda fixture: fixture["weight"].unlink(),
-                "weight hash mismatch",
+                "root inventory",
             ),
             "weight_extra": (
                 lambda fixture: (
                     fixture["model"] / "extra.safetensors"
                 ).write_bytes(b"extra"),
-                "weight inventory is incomplete",
+                "root inventory",
             ),
             "config_mutated": (
                 lambda fixture: fixture["model_config"].write_text(
                     '{"model_type":"weakened"}\n', encoding="utf-8"
                 ),
-                "inference inventory is stale",
+                "load profile changed",
             ),
             "config_missing": (
                 lambda fixture: fixture["model_config"].unlink(),
-                "model config.*missing",
+                "root inventory",
             ),
             "tokenizer_mutated": (
                 lambda fixture: fixture["tokenizer"].write_text(
                     '{"model":{"type":"weakened"}}\n', encoding="utf-8"
                 ),
-                "inference inventory is stale",
+                "load profile changed",
             ),
             "tokenizer_missing": (
                 lambda fixture: fixture["tokenizer"].unlink(),
-                "inference inventory is stale",
+                "root inventory",
             ),
             "tokenizer_extra": (
                 lambda fixture: (
@@ -550,57 +573,60 @@ class ControlReceiptTests(unittest.TestCase):
                     '{"additional_special_tokens":["<weakened>"]}\n',
                     encoding="utf-8",
                 ),
-                "inference inventory is stale",
+                "root inventory",
             ),
             "tokenizer_symlink": (
                 symlink_tokenizer,
-                "inference artifact is unsafe",
+                "unsafe entry",
             ),
             "directory_symlink": (
                 symlink_directory,
-                "inference directory is unsafe",
+                "unsafe entry",
             ),
         }
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             valid = _parameter_control_fixture(root / "valid")
-            control_receipts.validate_parameter_control_model(
-                valid["model"],
-                quick_adapter=valid["quick"],
-                deep_adapter=valid["deep"],
-                expected_deep_weight=0.25,
-                expected_model_id=PARAMETER_MODEL_ID,
-                expected_revision=PARAMETER_REVISION,
-            )
+            with _parameter_profile(valid):
+                control_receipts.validate_parameter_control_model(
+                    valid["model"],
+                    quick_adapter=valid["quick"],
+                    deep_adapter=valid["deep"],
+                    expected_deep_weight=0.25,
+                    expected_model_id=PARAMETER_MODEL_ID,
+                    expected_revision=PARAMETER_REVISION,
+                )
             for name, (mutate, message) in mutations.items():
                 with self.subTest(name=name):
                     fixture = _parameter_control_fixture(root / name)
-                    mutate(fixture)
-                    with self.assertRaisesRegex(ValueError, message):
-                        control_receipts.validate_parameter_control_model(
-                            fixture["model"],
-                            quick_adapter=fixture["quick"],
-                            deep_adapter=fixture["deep"],
-                            expected_deep_weight=0.25,
-                            expected_model_id=PARAMETER_MODEL_ID,
-                            expected_revision=PARAMETER_REVISION,
-                        )
+                    with _parameter_profile(fixture):
+                        mutate(fixture)
+                        with self.assertRaisesRegex(ValueError, message):
+                            control_receipts.validate_parameter_control_model(
+                                fixture["model"],
+                                quick_adapter=fixture["quick"],
+                                deep_adapter=fixture["deep"],
+                                expected_deep_weight=0.25,
+                                expected_model_id=PARAMETER_MODEL_ID,
+                                expected_revision=PARAMETER_REVISION,
+                            )
 
     def test_parameter_control_resume_reauthenticates_output_weights(self):
         with tempfile.TemporaryDirectory() as temporary:
             fixture = _parameter_control_fixture(Path(temporary))
-            fixture["weight"].write_bytes(b"mutated-after-publication")
             paths = {
                 "root": fixture["artifacts"],
                 "quick_adapter": fixture["quick"],
                 "deep_adapter": fixture["deep"],
             }
-            with mock.patch.object(
-                run_script, "_paths", return_value=paths
-            ), mock.patch.object(run_script, "_run") as runner, self.assertRaisesRegex(
-                SystemExit, "weight hash mismatch"
-            ):
-                run_script._build_parameter_controls(fixture["config"])
+            with _parameter_profile(fixture):
+                fixture["weight"].write_bytes(b"mutated-after-publication")
+                with mock.patch.object(
+                    run_script, "_paths", return_value=paths
+                ), mock.patch.object(run_script, "_run") as runner, self.assertRaisesRegex(
+                    SystemExit, "weight inventory is stale"
+                ):
+                    run_script._build_parameter_controls(fixture["config"])
             runner.assert_not_called()
 
     def test_independent_parameter_audit_reauthenticates_output_weights(self):
@@ -610,20 +636,21 @@ class ControlReceiptTests(unittest.TestCase):
                 "model": str(fixture["model"].resolve()),
                 "merge_receipt_sha256": sha256_file(fixture["receipt"]),
             }
-            authorize_benchmark._audit_parameter_control(
-                fixture["config"],
-                model=fixture["model"].resolve(),
-                row=row,
-                expected_weight=0.25,
-            )
-            fixture["weight"].write_bytes(b"mutated-after-controls-receipt")
-            with self.assertRaisesRegex(ValueError, "weight hash mismatch"):
+            with _parameter_profile(fixture):
                 authorize_benchmark._audit_parameter_control(
                     fixture["config"],
                     model=fixture["model"].resolve(),
                     row=row,
                     expected_weight=0.25,
                 )
+                fixture["weight"].write_bytes(b"mutated-after-controls-receipt")
+                with self.assertRaisesRegex(ValueError, "weight inventory is stale"):
+                    authorize_benchmark._audit_parameter_control(
+                        fixture["config"],
+                        model=fixture["model"].resolve(),
+                        row=row,
+                        expected_weight=0.25,
+                    )
 
     def test_all_control_receipts_realize_exact_frozen_semantics(self):
         for arm in ("non_advantage_route", "wrong_teacher", "offpolicy_sft"):

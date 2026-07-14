@@ -24,6 +24,12 @@ from authorize_benchmark import (  # noqa: E402
 )
 from control_code_inventory import control_code_inventory  # noqa: E402
 from io_utils import canonical_hash, load_config, sha256_file  # noqa: E402
+from model_provenance import (  # noqa: E402
+    SOURCE_RECEIPT,
+    SOURCE_RECEIPT_COMMIT,
+    canonical_confirmation_arm_map,
+    confirmation_arm_map_sha256,
+)
 
 
 CONFIG = EXP / "configs" / "default.yaml"
@@ -41,6 +47,7 @@ def _build_authorization(config: dict, config_path: Path) -> dict:
             _audit_integration(config, config_path, seed, _integration_model(config, seed))
         )
     controls, models = _audit_controls(config, config_path)
+    confirmation_arms = canonical_confirmation_arm_map(config)
     inventory_after = control_code_inventory()
     if inventory_after != inventory_before:
         raise ValueError("control code changed during semantic authorization")
@@ -59,6 +66,15 @@ def _build_authorization(config: dict, config_path: Path) -> dict:
             }
             for name, model in sorted(models.items())
         },
+        "source_checkpoint_receipt": {
+            "path": str(SOURCE_RECEIPT),
+            "sha256": sha256_file(SOURCE_RECEIPT),
+            "commit": SOURCE_RECEIPT_COMMIT,
+        },
+        "confirmation_arms": confirmation_arms,
+        "confirmation_arms_sha256": confirmation_arm_map_sha256(
+            confirmation_arms
+        ),
         "authorizer_sha256": sha256_file(Path(__file__)),
         "benchmark_control_audit_sha256": sha256_file(BENCHMARK_AUTHORIZER),
         "control_receipts_sha256": sha256_file(CONTROL_RECEIPTS),
@@ -71,6 +87,8 @@ def _build_authorization(config: dict, config_path: Path) -> dict:
     }
     if control_code_inventory() != inventory_after:
         raise ValueError("control code changed after semantic authorization")
+    if canonical_confirmation_arm_map(config) != confirmation_arms:
+        raise ValueError("confirmation model bytes changed after semantic authorization")
     return result
 
 
@@ -198,6 +216,8 @@ def main() -> int:
     try:
         if control_code_inventory() != result["control_code_inventory"]:
             raise ValueError("control code changed before authorization publication")
+        if canonical_confirmation_arm_map(config) != result["confirmation_arms"]:
+            raise ValueError("confirmation model bytes changed before authorization publication")
         _publish_no_clobber(args.out, result)
     except (OSError, TypeError, ValueError) as error:
         failure = {

@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from pathlib import Path
 
 import torch
@@ -28,6 +29,10 @@ from transformers import AutoModelForImageTextToText, AutoProcessor, AutoTokeniz
 MODEL_ID = "Qwen/Qwen3.5-4B"
 MODEL_REVISION = "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
 ADAPTER_PREFIX = "base_model.model.model.layers."
+EXP = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(EXP / "src"))
+
+from model_provenance import inference_file_inventory_for_receipt  # noqa: E402
 
 
 def main() -> int:
@@ -156,6 +161,7 @@ def main() -> int:
             {"name": path.name, "sha256": digest(path)}
             for path in sorted(args.out.glob("*.safetensors"))
         ],
+        "inference_files": inference_file_inventory_for_receipt(args.out),
     }
     (args.out / "merge_receipt.json").write_text(
         json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8"

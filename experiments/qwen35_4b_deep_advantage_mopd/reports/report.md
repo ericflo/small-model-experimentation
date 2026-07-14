@@ -118,6 +118,17 @@ It therefore establishes the literal preregistered local-safety gate, not
 global invariance. No procedural capability, control, sampling, routing, or
 benchmark result exists yet.
 
+Before starting controls, a fail-closed review found that the prior semantic
+authorization did not fully reauthenticate the frozen quick/deep/soup source
+bytes and could adopt a model mutation between authorization and global
+confirmation admission. No control authorization, admission, or confirmation
+output existed, so the boundary was hardened without changing a result or a
+frozen scientific choice. The shared validator now requires the exact
+seven-file checkpoint root and one of two frozen load profiles, authenticates
+all model and receipt bytes, seals the canonical 13-arm map in controls
+authorization, rechecks the full map on both sides of `ADMISSION`, and rechecks
+each arm around evaluation. All provenance and transition regressions pass.
+
 ## Oracle Versus Deployable Boundary
 
 Same-prefix verifier scores are training-only acquisition evidence. The

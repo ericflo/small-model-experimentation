@@ -236,6 +236,7 @@ def confirmation_evaluator_source_inventory() -> dict[str, int | str]:
         EXP / "src" / "control_code_inventory.py",
         EXP / "src" / "harness.py",
         EXP / "src" / "io_utils.py",
+        EXP / "src" / "model_provenance.py",
         EXP / "src" / "state_replay.py",
         EXP / "src" / "vllm_runner.py",
         *gym_paths,

@@ -43,6 +43,16 @@ separate no-clobber controls authorization reuses the benchmark audit, proves a
 stable recursive inventory of runner/trainer/builder/auditor code before and
 after the audit, and runs before any sealed confirmation model is loaded.
 
+`model_provenance.py` is the shared checkpoint-byte authenticator for controls,
+confirmation, and benchmark execution. It permits exactly the seven root files
+emitted by this pipeline, rejects every symlink, nested entry, and non-regular
+artifact, authenticates the complete weight and inference inventories, and
+accepts only the frozen source or local tokenizer load profile. The committed
+quick/deep/soup receipt and its ancestor commit are trust roots. Before
+confirmation, the controls authorizer seals one exact 13-arm map; orchestration
+rehashes it before and after global `ADMISSION`, and each evaluator rehashes its
+one authorized arm immediately before `STARTED` and after generation.
+
 Sealed confirmation adds two isolated modules without changing the shared
 acquisition runner or harness. `confirmation_protocol.py` fingerprints the
 exact pinned vLLM/Python/package/lock/GPU/CUDA and engine protocol, proves live

@@ -39,6 +39,12 @@ from confirmation_artifacts import (  # noqa: E402
 )
 from io_utils import canonical_hash, sha256_file  # noqa: E402
 from confirmation_protocol import capacity_receipt  # noqa: E402
+from model_provenance import (  # noqa: E402
+    CONFIRMATION_ARM_NAMES,
+    SOURCE_RECEIPT,
+    SOURCE_RECEIPT_COMMIT,
+    confirmation_arm_map_sha256,
+)
 
 
 class ConfirmationArtifactTests(unittest.TestCase):
@@ -1060,6 +1066,17 @@ class ConfirmationArtifactTests(unittest.TestCase):
             "file_count": len(files),
             "sha256": canonical_hash(files),
         }
+        arms = {
+            name: {
+                "model": f"/models/{'soup' if name == 'soup_best8' else name}",
+                "model_merge_receipt_sha256": "a" * 64,
+                "model_config_sha256": "b" * 64,
+                "model_inference_inventory_sha256": "c" * 64,
+                "decode": "sample8" if name == "soup_best8" else "greedy",
+            }
+            for name in CONFIRMATION_ARM_NAMES
+        }
+        arms["soup_best8"] = {**arms["soup"], "decode": "sample8"}
         authorization_path = analysis / "controls_authorization.json"
         authorization_path.write_text(
             json.dumps(
@@ -1071,6 +1088,13 @@ class ConfirmationArtifactTests(unittest.TestCase):
                     "control_code_inventory_sha256": canonical_hash(inventory),
                     "control_code_inventory_before_sha256": inventory["sha256"],
                     "control_code_inventory_after_sha256": inventory["sha256"],
+                    "source_checkpoint_receipt": {
+                        "path": str(SOURCE_RECEIPT),
+                        "sha256": sha256_file(SOURCE_RECEIPT),
+                        "commit": SOURCE_RECEIPT_COMMIT,
+                    },
+                    "confirmation_arms": arms,
+                    "confirmation_arms_sha256": confirmation_arm_map_sha256(arms),
                     "gate": {"passed": True},
                     "downstream_authorization": "sealed_confirmation_evaluation",
                 }
@@ -1097,13 +1121,7 @@ class ConfirmationArtifactTests(unittest.TestCase):
             )
             admission_path = score_root / "ADMISSION.json"
             admission_path.parent.mkdir(parents=True)
-            model = {
-                "model": "/models/a",
-                "model_merge_receipt_sha256": "m" * 64,
-                "model_config_sha256": "d" * 64,
-                "model_inference_inventory_sha256": "i" * 64,
-                "decode": "greedy",
-            }
+            model = arms["quick"]
             admission_path.write_text(
                 json.dumps(
                     {
@@ -1112,7 +1130,7 @@ class ConfirmationArtifactTests(unittest.TestCase):
                         "config_sha256": "c" * 64,
                         "controls_authorization": authorization,
                         "blocks": [98700],
-                        "arms": {"arm": model},
+                        "arms": arms,
                         "evaluator_sha256": sha256_file(evaluator),
                         "evaluator_source_inventory": evaluator_source,
                     }
@@ -1124,11 +1142,41 @@ class ConfirmationArtifactTests(unittest.TestCase):
                 admission_path,
                 expected_config_sha256="c" * 64,
                 expected_controls_authorization=authorization,
-                expected_tag="block_0_arm",
+                expected_tag="block_0_quick",
                 expected_block_seed=98700,
                 expected_model=model,
             )
             self.assertEqual(admission["controls_authorization_sha256"], authorization["sha256"])
+            admission_payload = json.loads(admission_path.read_text())
+            admission_payload["arms"]["deep"]["model"] = "/models/mutated"
+            admission_path.write_text(
+                json.dumps(admission_payload) + "\n", encoding="utf-8"
+            )
+            with self.assertRaisesRegex(ValueError, "global admission is stale"):
+                confirmation_admission_binding(
+                    admission_path,
+                    expected_config_sha256="c" * 64,
+                    expected_controls_authorization=authorization,
+                )
+            admission_payload["arms"] = arms
+            admission_path.write_text(
+                json.dumps(admission_payload) + "\n", encoding="utf-8"
+            )
+            authorization_payload = json.loads(authorization_path.read_text())
+            authorization_payload["confirmation_arms"]["deep"]["model"] = (
+                "/models/mutated"
+            )
+            authorization_path.write_text(
+                json.dumps(authorization_payload) + "\n", encoding="utf-8"
+            )
+            with self.assertRaisesRegex(ValueError, "arm|stale"):
+                controls_authorization_binding(
+                    authorization_path, expected_config_sha256="c" * 64
+                )
+            authorization_payload["confirmation_arms"] = arms
+            authorization_path.write_text(
+                json.dumps(authorization_payload) + "\n", encoding="utf-8"
+            )
             (root / "scripts" / "a.py").write_text("changed\n", encoding="utf-8")
             with self.assertRaisesRegex(ValueError, "inventory is stale"):
                 controls_authorization_binding(

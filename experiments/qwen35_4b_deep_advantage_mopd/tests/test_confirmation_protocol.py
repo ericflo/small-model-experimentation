@@ -824,6 +824,7 @@ class ConfirmationProtocolTests(unittest.TestCase):
                 "src/control_code_inventory.py",
                 "src/harness.py",
                 "src/io_utils.py",
+                "src/model_provenance.py",
                 "src/state_replay.py",
                 "src/vllm_runner.py",
                 "src/gym/safe.py",

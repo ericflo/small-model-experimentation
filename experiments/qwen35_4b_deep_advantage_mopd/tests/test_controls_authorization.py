@@ -15,6 +15,22 @@ sys.path.insert(0, str(EXP / "scripts"))
 import authorize_controls  # noqa: E402
 import run as run_script  # noqa: E402
 from control_code_inventory import control_code_inventory  # noqa: E402
+from model_provenance import CONFIRMATION_ARM_NAMES  # noqa: E402
+
+
+def _confirmation_arms() -> dict:
+    arms = {
+        name: {
+            "model": f"/models/{'soup' if name == 'soup_best8' else name}",
+            "model_merge_receipt_sha256": "a" * 64,
+            "model_config_sha256": "b" * 64,
+            "model_inference_inventory_sha256": "c" * 64,
+            "decode": "sample8" if name == "soup_best8" else "greedy",
+        }
+        for name in CONFIRMATION_ARM_NAMES
+    }
+    arms["soup_best8"] = {**arms["soup"], "decode": "sample8"}
+    return arms
 
 
 class ControlsAuthorizationTests(unittest.TestCase):
@@ -32,6 +48,7 @@ class ControlsAuthorizationTests(unittest.TestCase):
                 "control_rematch.py",
                 "control_receipts.py",
                 "control_code_inventory.py",
+                "model_provenance.py",
             }.issubset(names)
         )
         self.assertEqual(inventory["file_count"], len(inventory["files"]))
@@ -45,6 +62,7 @@ class ControlsAuthorizationTests(unittest.TestCase):
             model.mkdir()
             (model / "merge_receipt.json").write_text("{}\n", encoding="utf-8")
             config = {"seeds": {"integration_training": [42, 43, 44]}}
+            confirmation_arms = {"synthetic": {"model": str(model)}}
             with mock.patch.object(
                 authorize_controls,
                 "_audit_preregistration",
@@ -67,7 +85,15 @@ class ControlsAuthorizationTests(unittest.TestCase):
                     {"path": "controls", "sha256": "controls-sha"},
                     {"non_advantage_route": model},
                 ),
-            ) as controls:
+            ) as controls, mock.patch.object(
+                authorize_controls,
+                "canonical_confirmation_arm_map",
+                return_value=confirmation_arms,
+            ), mock.patch.object(
+                authorize_controls,
+                "confirmation_arm_map_sha256",
+                return_value="arms-sha",
+            ):
                 result = authorize_controls._build_authorization(config, config_path)
             self.assertTrue(result["gate"]["passed"])
             self.assertEqual(
@@ -147,6 +173,7 @@ class ControlsAuthorizationTests(unittest.TestCase):
             **inventory,
             "sha256": "c" * 64,
         }
+        confirmation_arms = {"synthetic": {"model": "/model"}}
         with mock.patch.object(
             authorize_controls,
             "control_code_inventory",
@@ -159,6 +186,14 @@ class ControlsAuthorizationTests(unittest.TestCase):
             return_value={"design_commit": "design"},
         ), mock.patch.object(
             authorize_controls, "_audit_controls", return_value=({}, {})
+        ), mock.patch.object(
+            authorize_controls,
+            "canonical_confirmation_arm_map",
+            return_value=confirmation_arms,
+        ), mock.patch.object(
+            authorize_controls,
+            "confirmation_arm_map_sha256",
+            return_value="arms-sha",
         ):
             with self.assertRaisesRegex(ValueError, "changed during"):
                 authorize_controls._build_authorization(config, Path("config.yaml"))
@@ -175,9 +210,132 @@ class ControlsAuthorizationTests(unittest.TestCase):
             return_value={"design_commit": "design"},
         ), mock.patch.object(
             authorize_controls, "_audit_controls", return_value=({}, {})
+        ), mock.patch.object(
+            authorize_controls,
+            "canonical_confirmation_arm_map",
+            return_value=confirmation_arms,
+        ), mock.patch.object(
+            authorize_controls,
+            "confirmation_arm_map_sha256",
+            return_value="arms-sha",
         ):
             with self.assertRaisesRegex(ValueError, "changed after"):
                 authorize_controls._build_authorization(config, Path("config.yaml"))
+
+    def test_authorizer_reauthenticates_exact_arm_map_before_publication(self):
+        arms = _confirmation_arms()
+        changed = {**arms, "deep": {**arms["deep"], "model": "/mutated"}}
+        result = {
+            "gate": {"passed": True},
+            "control_code_inventory": {"sha256": "inventory"},
+            "confirmation_arms": arms,
+        }
+        with mock.patch.object(
+            authorize_controls, "load_config", return_value=({}, Path("config"))
+        ), mock.patch.object(
+            authorize_controls, "_build_authorization", return_value=result
+        ), mock.patch.object(
+            authorize_controls,
+            "control_code_inventory",
+            return_value=result["control_code_inventory"],
+        ), mock.patch.object(
+            authorize_controls,
+            "canonical_confirmation_arm_map",
+            return_value=changed,
+        ), mock.patch.object(
+            authorize_controls, "_publish_no_clobber"
+        ) as publish, mock.patch.object(
+            authorize_controls.sys,
+            "argv",
+            ["authorize_controls.py", "--out", "authorization.json"],
+        ), mock.patch.object(
+            authorize_controls, "sha256_file", return_value="hash"
+        ), mock.patch(
+            "builtins.print"
+        ):
+            self.assertEqual(authorize_controls.main(), 4)
+        publish.assert_not_called()
+
+    def test_confirmation_stops_on_mutation_before_admission_publication(self):
+        arms = _confirmation_arms()
+        changed = {**arms, "deep": {**arms["deep"], "model": "/mutated"}}
+        binding = {
+            "confirmation_arms": arms,
+            "confirmation_arms_sha256": "arms-sha",
+        }
+        config = {
+            "seeds": {
+                "integration_training": [42, 43, 44],
+                "confirmatory_blocks": [98700, 98800],
+            }
+        }
+        with mock.patch.object(
+            run_script, "_require_gate", return_value={"gate": {"passed": True}}
+        ), mock.patch.object(
+            run_script,
+            "_authorize_confirmation_inputs",
+            return_value={"confirmation_arms": arms},
+        ), mock.patch.object(
+            run_script, "controls_authorization_binding", return_value=binding
+        ), mock.patch.object(
+            run_script,
+            "canonical_confirmation_arm_map",
+            side_effect=[arms, changed],
+        ), mock.patch.object(
+            run_script, "configured_confirmation_raw_root", return_value=Path("/raw")
+        ), mock.patch.object(
+            run_script, "sha256_file", return_value="c" * 64
+        ), mock.patch.object(
+            run_script,
+            "confirmation_evaluator_source_inventory",
+            return_value={"sha256": "e" * 64},
+        ), mock.patch.object(
+            run_script, "_publish_global_json_no_clobber"
+        ) as publish, self.assertRaisesRegex(SystemExit, "before admission"):
+            run_script._confirm(config, Path("config.yaml"))
+        publish.assert_not_called()
+
+    def test_confirmation_stops_on_mutation_after_admission_before_started(self):
+        arms = _confirmation_arms()
+        changed = {**arms, "deep": {**arms["deep"], "model": "/mutated"}}
+        binding = {
+            "confirmation_arms": arms,
+            "confirmation_arms_sha256": "arms-sha",
+        }
+        config = {
+            "seeds": {
+                "integration_training": [42, 43, 44],
+                "confirmatory_blocks": [98700, 98800],
+            }
+        }
+        with mock.patch.object(
+            run_script, "_require_gate", return_value={"gate": {"passed": True}}
+        ), mock.patch.object(
+            run_script,
+            "_authorize_confirmation_inputs",
+            return_value={"confirmation_arms": arms},
+        ), mock.patch.object(
+            run_script, "controls_authorization_binding", return_value=binding
+        ), mock.patch.object(
+            run_script,
+            "canonical_confirmation_arm_map",
+            side_effect=[arms, arms, changed],
+        ), mock.patch.object(
+            run_script, "configured_confirmation_raw_root", return_value=Path("/raw")
+        ), mock.patch.object(
+            run_script, "sha256_file", return_value="c" * 64
+        ), mock.patch.object(
+            run_script,
+            "confirmation_evaluator_source_inventory",
+            return_value={"sha256": "e" * 64},
+        ), mock.patch.object(
+            run_script, "_publish_global_json_no_clobber"
+        ) as publish, mock.patch.object(
+            run_script, "prepare_confirmation_output"
+        ) as prepare, self.assertRaisesRegex(SystemExit, "after admission"):
+            run_script._confirm(config, Path("config.yaml"))
+        publish.assert_called_once()
+        prepare.assert_not_called()
 
     def test_authorization_publication_is_no_clobber_and_exact_rerun_is_read_only(self):
         with tempfile.TemporaryDirectory() as temporary:

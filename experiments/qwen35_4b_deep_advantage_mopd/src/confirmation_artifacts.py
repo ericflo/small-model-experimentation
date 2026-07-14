@@ -33,6 +33,12 @@ from io_utils import (
     load_config,
     sha256_file,
 )
+from model_provenance import (  # noqa: E402
+    SOURCE_RECEIPT,
+    SOURCE_RECEIPT_COMMIT,
+    confirmation_arm_map_sha256,
+    validate_confirmation_arm_map,
+)
 
 
 EXP = Path(__file__).resolve().parents[1]
@@ -176,6 +182,9 @@ def controls_authorization_binding(
         label="controls authorization",
     )
     payload = _read_json_object(path, label="controls authorization receipt")
+    confirmation_arms = validate_confirmation_arm_map(
+        payload.get("confirmation_arms")
+    )
     inventory = payload.get("control_code_inventory")
     if not isinstance(inventory, dict) or set(inventory) != {
         "files",
@@ -221,6 +230,15 @@ def controls_authorization_binding(
         != inventory["sha256"]
         or payload.get("control_code_inventory_after_sha256")
         != inventory["sha256"]
+        or payload.get("source_checkpoint_receipt")
+        != {
+            "path": str(SOURCE_RECEIPT),
+            "sha256": sha256_file(SOURCE_RECEIPT),
+            "commit": SOURCE_RECEIPT_COMMIT,
+        }
+        or payload.get("confirmation_arms") != confirmation_arms
+        or payload.get("confirmation_arms_sha256")
+        != confirmation_arm_map_sha256(confirmation_arms)
         or payload.get("gate") != {"passed": True}
         or payload.get("downstream_authorization")
         != "sealed_confirmation_evaluation"
@@ -232,6 +250,10 @@ def controls_authorization_binding(
         "payload_sha256": canonical_hash(payload),
         "control_code_inventory": inventory,
         "control_code_inventory_sha256": canonical_hash(inventory),
+        "confirmation_arms": confirmation_arms,
+        "confirmation_arms_sha256": confirmation_arm_map_sha256(
+            confirmation_arms
+        ),
     }
 
 
@@ -253,6 +275,9 @@ def confirmation_admission_binding(
         label="global admission",
     )
     payload = _read_json_object(path, label="global confirmation admission")
+    authorized_arms = validate_confirmation_arm_map(
+        expected_controls_authorization.get("confirmation_arms")
+    )
     if (
         payload.get("schema_version") != 1
         or payload.get("stage") != "sealed_confirmation_admission"
@@ -260,7 +285,9 @@ def confirmation_admission_binding(
         or payload.get("controls_authorization")
         != dict(expected_controls_authorization)
         or not isinstance(payload.get("blocks"), list)
-        or not isinstance(payload.get("arms"), dict)
+        or payload.get("arms") != authorized_arms
+        or expected_controls_authorization.get("confirmation_arms_sha256")
+        != confirmation_arm_map_sha256(authorized_arms)
         or payload.get("evaluator_sha256")
         != sha256_file(EXP / "scripts" / "eval_policy.py")
         or payload.get("evaluator_source_inventory")

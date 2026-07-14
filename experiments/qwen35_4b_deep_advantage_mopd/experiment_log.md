@@ -300,3 +300,31 @@
   establish capability gain, causal routing, superiority to any comparison,
   retention, transfer, or composability; sealed confirmation remains
   mandatory.
+
+## 2026-07-14 — confirmation model-byte boundary hardened before controls
+
+- A fail-closed pre-control review found two related gaps: semantic controls
+  authorization did not reauthenticate the frozen quick/deep/soup source
+  checkpoints, and the prior confirmation path could recompute and adopt model
+  bytes after authorization when it created global `ADMISSION`. No controls
+  authorization, admission, or confirmation output existed when found.
+- `model_provenance.py` now authenticates the committed source receipt at
+  ancestor commit `37dc74ef`, the exact seven-file model root, the exhaustive
+  weight/inference inventory, and only the frozen source or local tokenizer
+  profile. Symlinked leaves/directories/ancestors, nested extras, non-regular
+  files, and mutated/missing/extra config, generation, chat-template,
+  tokenizer, receipt, or weight artifacts fail closed.
+- The semantic controls authorizer now seals one canonical 13-arm map: three
+  sources, three primary seeds, three trained controls, three parameter soups,
+  and the exact soup alias under sample-best-of-8 decoding. It recomputes this
+  map immediately before no-clobber publication. Confirmation requires exact
+  arm-map equality, rehashes all arms immediately before and after global
+  `ADMISSION`, and rehashes each selected arm before `STARTED` and after
+  generation. Admission is built only from the authorized map.
+- The independent integration/control/benchmark audits and benchmark runner
+  now use the same model authenticator. Future LoRA merges record the exhaustive
+  inference inventory; legacy source and completed primary receipts remain
+  admissible only because every byte matches a fixed canonical profile.
+- All 209 experiment tests pass, including explicit mutation transitions after
+  authorization and after admission. This is evidence-pipeline hardening only;
+  it changes no treatment, gate, or capability conclusion.

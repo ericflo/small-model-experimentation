@@ -37,6 +37,7 @@ import authorize_benchmark  # noqa: E402
 import bench  # noqa: E402
 from authorize_benchmark import _audit_integration, _audit_merge_receipt  # noqa: E402
 from io_utils import (  # noqa: E402
+    canonical_hash,
     confirmation_evaluator_source_inventory,
     sha256_file,
 )
@@ -467,7 +468,27 @@ class BenchmarkAnalysisTests(unittest.TestCase):
             + "\n",
             encoding="utf-8",
         )
-        return model_provenance(model)
+        weight_inventory = [
+            {"name": weights.name, "sha256": sha256_file(weights)}
+        ]
+        inference_inventory = [
+            {
+                "path": path.relative_to(model).as_posix(),
+                "sha256": sha256_file(path),
+            }
+            for path in sorted(model.iterdir())
+        ]
+        return {
+            "model": str(model.resolve()),
+            "model_merge_receipt_sha256": sha256_file(
+                model / "merge_receipt.json"
+            ),
+            "model_weight_inventory_sha256": canonical_hash(weight_inventory),
+            "model_config_sha256": sha256_file(model / "config.json"),
+            "model_inference_inventory_sha256": canonical_hash(
+                inference_inventory
+            ),
+        }
 
     def _run(
         self,
@@ -779,6 +800,11 @@ class BenchmarkAnalysisTests(unittest.TestCase):
             mock.patch.object(analyze_benchmark, "EXP", experiment),
             mock.patch.object(
                 analyze_benchmark,
+                "model_provenance",
+                return_value=provenance,
+            ),
+            mock.patch.object(
+                analyze_benchmark,
                 "_authorization",
                 side_effect=authorization_then_mutate,
             ),
@@ -820,21 +846,12 @@ class BenchmarkAnalysisTests(unittest.TestCase):
     def tearDown(self):
         self.temporary.cleanup()
 
-    def test_model_provenance_binds_nonweight_inference_files(self):
+    def test_model_provenance_rejects_incomplete_checkpoint_shapes(self):
         root = Path(self.temporary.name) / "model_inventory"
         root.mkdir()
-        before = self._model(root)
-        tokenizer = root / "model" / "tokenizer.json"
-        tokenizer.write_text('{"synthetic":false}\n', encoding="utf-8")
-        after = model_provenance(root / "model")
-        self.assertEqual(
-            before["model_weight_inventory_sha256"],
-            after["model_weight_inventory_sha256"],
-        )
-        self.assertNotEqual(
-            before["model_inference_inventory_sha256"],
-            after["model_inference_inventory_sha256"],
-        )
+        self._model(root)
+        with self.assertRaisesRegex(ValueError, "tokenizer configuration"):
+            model_provenance(root / "model")
 
     def test_round_merge_audit_hashes_exact_intermediate_weights(self):
         root = Path(self.temporary.name) / "round_merge"
@@ -870,12 +887,17 @@ class BenchmarkAnalysisTests(unittest.TestCase):
             + "\n",
             encoding="utf-8",
         )
-        self.assertEqual(
-            _audit_merge_receipt(merged, base, adapter), sha256_file(receipt)
-        )
-        model_weights.write_bytes(b"after")
-        with self.assertRaises(ValueError):
-            _audit_merge_receipt(merged, base, adapter)
+        with mock.patch.object(
+            authorize_benchmark,
+            "validate_model_checkpoint",
+            return_value={"model_merge_receipt_sha256": sha256_file(receipt)},
+        ):
+            self.assertEqual(
+                _audit_merge_receipt(merged, base, adapter), sha256_file(receipt)
+            )
+            model_weights.write_bytes(b"after")
+            with self.assertRaises(ValueError):
+                _audit_merge_receipt(merged, base, adapter)
 
     def test_replicate_audit_reuses_only_primary_round_zero_online_data(self):
         root = Path(self.temporary.name) / "shared_round_zero"

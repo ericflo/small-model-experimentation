@@ -76,6 +76,10 @@ from io_utils import (  # noqa: E402
     resolve_repo_path,
     sha256_file,
 )
+from model_provenance import (  # noqa: E402
+    validate_model_checkpoint,
+    validate_source_checkpoint_receipts,
+)
 
 
 def _load(path: Path) -> dict:
@@ -305,6 +309,7 @@ def _same_path(value: object, expected: Path) -> bool:
 def _audit_merge_receipt(merged: Path, base_model: Path, adapter: Path) -> str:
     """Authenticate the semantic inputs recorded for one LoRA merge."""
 
+    provenance = validate_model_checkpoint(merged, profile="local")
     receipt_path = merged / "merge_receipt.json"
     receipt = _load(receipt_path)
     adapter_config = adapter / "adapter_config.json"
@@ -349,7 +354,9 @@ def _audit_merge_receipt(merged: Path, base_model: Path, adapter: Path) -> str:
         or sorted(recorded_names) != actual_names
     ):
         raise ValueError("round merge weight inventory is incomplete")
-    return sha256_file(receipt_path)
+    if provenance["model_merge_receipt_sha256"] != sha256_file(receipt_path):
+        raise ValueError("round merge model inventory changed during audit")
+    return provenance["model_merge_receipt_sha256"]
 
 
 def _audit_mopd_training_receipt(
@@ -1064,6 +1071,7 @@ def _audit_confirmation(
 def _build_authorization(config: dict, config_path: Path) -> dict:
     code_before = _code_provenance()
     preregistration = _audit_preregistration()
+    validate_source_checkpoint_receipts(config)
     integration_artifacts = []
     integration_models: dict[str, Path] = {}
     for seed_value in config["seeds"]["integration_training"]:

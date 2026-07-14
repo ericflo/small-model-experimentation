@@ -38,11 +38,11 @@ from confirmation_protocol import (  # noqa: E402
 from gym.families import load as load_family  # noqa: E402
 from io_utils import (  # noqa: E402
     all_families,
-    canonical_hash,
     confirmation_evaluator_source_inventory,
     load_config,
     sha256_file,
 )
+from model_provenance import reauthenticate_confirmation_arm  # noqa: E402
 
 
 def _counts(config: dict, scope: str) -> tuple[int, int]:
@@ -121,20 +121,6 @@ def _sampled_token_count(atom_rows: list[dict], episode_rows: list[dict]) -> int
     return atom_tokens + episode_tokens
 
 
-def _model_inference_inventory_sha256(model: Path) -> str:
-    rows = [
-        {
-            "path": path.relative_to(model).as_posix(),
-            "sha256": sha256_file(path),
-        }
-        for path in sorted(model.rglob("*"))
-        if path.is_file()
-    ]
-    if not rows:
-        raise ValueError("local evaluation model has no inference files")
-    return canonical_hash(rows)
-
-
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path)
@@ -154,6 +140,15 @@ def main() -> int:
         args.controls_authorization,
         expected_config_sha256=sha256_file(config_path),
     )
+    try:
+        arm_name = args.tag.split("_", 2)[2]
+    except IndexError as exc:
+        raise SystemExit("confirmation tag does not identify an arm") from exc
+    expected_model_admission = authorization_before["confirmation_arms"].get(
+        arm_name
+    )
+    if not isinstance(expected_model_admission, dict):
+        raise SystemExit(f"confirmation arm is not authorized: {arm_name}")
     raw_root = configured_confirmation_raw_root(config)
     families = all_families(config)
     atom_n, episode_n = _counts(config, args.scope)
@@ -164,19 +159,26 @@ def main() -> int:
     )
     out_dir = args.out_dir
     score_path = out_dir / "scores.json"
-    model_path = Path(args.model).resolve()
+    model_path = Path(args.model)
+    try:
+        observed_model_admission = reauthenticate_confirmation_arm(
+            config,
+            name=arm_name,
+            expected=expected_model_admission,
+        )
+    except ValueError as exc:
+        raise SystemExit(f"confirmation model provenance failed: {exc}") from exc
+    if (
+        str(model_path.resolve()) != observed_model_admission["model"]
+        or args.decode != observed_model_admission["decode"]
+    ):
+        raise SystemExit("confirmation invocation differs from its authorized arm")
+    model_path = Path(observed_model_admission["model"])
     merge_receipt = model_path / "merge_receipt.json"
-    if not merge_receipt.is_file():
-        raise SystemExit(f"local evaluation model has no merge receipt: {model_path}")
-    model_config_sha256 = sha256_file(model_path / "config.json")
-    model_inference_inventory_sha256 = _model_inference_inventory_sha256(model_path)
-    expected_model_admission = {
-        "model": str(model_path),
-        "model_merge_receipt_sha256": sha256_file(merge_receipt),
-        "model_config_sha256": model_config_sha256,
-        "model_inference_inventory_sha256": model_inference_inventory_sha256,
-        "decode": args.decode,
-    }
+    model_config_sha256 = observed_model_admission["model_config_sha256"]
+    model_inference_inventory_sha256 = observed_model_admission[
+        "model_inference_inventory_sha256"
+    ]
     admission_before = confirmation_admission_binding(
         args.confirmation_admission,
         expected_config_sha256=sha256_file(config_path),
@@ -292,6 +294,14 @@ def main() -> int:
         top_p=None if greedy else float(config["confirmation"]["sample_more_top_p"]),
         top_k=None if greedy else int(config["confirmation"]["sample_more_top_k"]),
     )
+    try:
+        reauthenticate_confirmation_arm(
+            config,
+            name=arm_name,
+            expected=expected_model_admission,
+        )
+    except ValueError as exc:
+        raise SystemExit(f"confirmation model changed before STARTED: {exc}") from exc
     base_runner = harness.make_runner(config["engine"], model_override=str(model_path))
     try:
         capacity_preflight = live_cache_capacity(base_runner)
@@ -319,6 +329,11 @@ def main() -> int:
         "confirmation_admission": admission_before,
     }
     try:
+        reauthenticate_confirmation_arm(
+            config,
+            name=arm_name,
+            expected=expected_model_admission,
+        )
         begin_confirmation_transaction(score_path, begin_context, raw_root=raw_root)
     except Exception:
         base_runner.close()
@@ -394,12 +409,15 @@ def main() -> int:
             raw_root=raw_root,
         )
         evaluator_source_after = confirmation_evaluator_source_inventory()
+        observed_after = reauthenticate_confirmation_arm(
+            config,
+            name=arm_name,
+            expected=expected_model_admission,
+        )
         if (
             sha256_file(Path(__file__)) != evaluator_sha256
             or evaluator_source_after != evaluator_source_before
-            or sha256_file(model_path / "config.json") != model_config_sha256
-            or _model_inference_inventory_sha256(model_path)
-            != model_inference_inventory_sha256
+            or observed_after != expected_model_admission
             or controls_authorization_binding(
                 args.controls_authorization,
                 expected_config_sha256=sha256_file(config_path),
