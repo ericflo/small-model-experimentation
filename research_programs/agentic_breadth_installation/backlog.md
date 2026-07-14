@@ -187,10 +187,13 @@
   LoRA modules and produced composite weight hash `4933f2dd...eb373`. The separately
   checkpointed parent event then completed 288/288 rollouts and 170252 sampled tokens
   at 849.9 tokens/s; rollout/receipt hashes are `8010632f...3b17f` /
-  `c6b98b79...74fa`, with no generation rerun during wrapper recovery. No outcome has
-  been graded yet. Model-free prefix mining is next, and training stays sealed until
-  observed prefix lengths support exact-token replay streams and a second adversarial
-  compute review.
+  `c6b98b79...74fa`, with no generation rerun during wrapper recovery. Model-free
+  mining found 230 reachable failures and cleared every fixed class quota with
+  availability 46/48/35/24/36/41, selecting 10 each. Inventory/source hashes are
+  `7230af52...dfe7` / `30141538...d84b8`; the selected prefixes contain 47123 masked
+  tokens and are dominated by cap boundaries. Training stays sealed until exact-token
+  replay streams, zero skips, and a second adversarial compute review are committed
+  and green.
 
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.

@@ -7593,40 +7593,46 @@
    ]
   },
   "qwen35_4b_universal_on_policy_prefix_repair_token_match": {
-   "verdict_tag": "Parent rollout collected; no repair result",
+   "verdict_tag": "Every repair quota clears; training still sealed",
    "concept_primer": "A repair lesson can start from the exact point where a worker went wrong, instead of showing a perfect solution from the beginning.",
    "plain_question": "Can corrections attached to the model's own fresh mistakes teach it to reason, stop, and answer more reliably than equal extra practice?",
-   "plain_answer": "Not known yet. The authenticated parent completed all 288 fresh prompts in one frozen run, but those outputs have not been graded or turned into repair lessons. No training or capability test has run.",
+   "plain_answer": "The data test passed: 230 of 288 fresh parent answers met a frozen failure rule, every failed answer had a usable prefix, and all six classes supplied at least 24 candidates for a quota of ten. The 60 repair lessons are frozen, but no model has trained on them or passed a capability test.",
    "why_it_matters": "If this works, future training can target real failure states instead of inventing cleaner demonstrations that the deployed model never visits.",
    "verdict_tone": "neutral",
    "key_numbers": [
     {
-     "label": "Parent outputs",
-     "value": "288 of 288",
-     "sub": "one completion for every frozen fresh prompt"
+     "label": "Rows needing repair",
+     "value": "230 of 288",
+     "sub": "all 230 have a usable parent prefix"
     },
     {
-     "label": "Generated tokens",
-     "value": "170,252",
-     "sub": "natural thinking from the authenticated parent"
+     "label": "Frozen repair lessons",
+     "value": "60",
+     "sub": "exactly ten from each of six classes"
     },
     {
-     "label": "Generation speed",
-     "value": "849.9 tokens/s",
-     "sub": "model output only; loading is reported separately"
+     "label": "Smallest candidate pool",
+     "value": "24 vs 10",
+     "sub": "probe scoring still more than doubles its quota"
     },
     {
      "label": "Completed stages",
-     "value": "4 of 8",
-     "sub": "grading and compute review are the next checkpoint"
+     "value": "5 of 9",
+     "sub": "exact token matching is the next checkpoint"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "The authenticated parent rollout is complete",
-     "chart_read": "The groups run from intake and design through parent deployment, parent rollout, grading and compute review, training, local testing, and broad testing. A bar at one means that checkpoint is complete.",
-     "chart_takeaway": "The parent completed every fresh prompt; the outputs remain ungraded, so no repair curriculum or capability result exists yet."
+     "chart_plain_title": "Failure mining reaches the fifth checkpoint",
+     "chart_read": "The groups run from intake and design through parent deployment, parent rollout, failure mining, exact token matching, training, local testing, and broad testing. A bar at one means that checkpoint is complete.",
+     "chart_takeaway": "The repair source is frozen; exact token matching and independent review still block all training and capability claims."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "Every failure class clears the frozen quota",
+     "chart_read": "Each group is one kind of failure. The taller bar is the number of usable parent failures found, and the shorter bar is the fixed requirement of ten.",
+     "chart_takeaway": "Even the smallest pool has 24 usable failures, so data availability will not stop this trial; this says nothing yet about whether training helps."
     }
    ]
   },

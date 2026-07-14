@@ -3,9 +3,9 @@
 ## Summary
 
 Model-free design, explicit parent deployment, and authenticated rollout collection
-are complete. This result-separated successor freezes fresh procedural tasks,
-failure-only prefix mining, and exact loss masking. No failure grading or capability
-result exists yet.
+are complete, and the failure-only miner satisfied every fixed class quota. This
+result-separated successor now has a frozen 60-row masked-prefix repair source. No
+training or capability result exists yet.
 
 ## Research Program Fit
 
@@ -18,10 +18,10 @@ the universal line's exact-token replay and strict promotion contract.
 Construction seed 77,113 produces 288 truth-audited tasks balanced across six failure
 classes. The authenticated `close_xi` adapter is explicitly merged because runtime
 vLLM LoRA is a verified silent no-op. One greedy natural-thinking vLLM event collected
-288 parent outputs at seed 66,113 and cap 1,024. A frozen model-free miner will next
-select ten reachable failures per class and mask every generated parent-prefix token
-from loss. Exact-token replay materialization is deferred until the actual prefixes
-are graded.
+288 parent outputs at seed 66,113 and cap 1,024. The frozen model-free miner selected
+ten reachable failures per class and masks every generated parent-prefix token from
+loss. Exact-token replay materialization is deferred to the separately gated compute
+freeze.
 
 ## Results
 
@@ -34,8 +34,18 @@ rollouts with 170,252 sampled tokens at 849.923 tokens/s. Rollout/metadata/log h
 are `8010632f...3b17f` / `9fe81276...664` / `ed0d4fc4...26b7` and the authenticated
 receipt is `c6b98b79...74fa`. The initial postvalidator rejected only its own
 post-open dirty-tree condition; explicit recovery reran no generation and bound the
-completed event to commit `21e1eb59`. No failure grading, training, capability
-measurement, or benchmark event ran.
+completed event to commit `21e1eb59`. At that rollout checkpoint, no failure grading
+or downstream event had run.
+
+The separately published rollout then opened model-free grading. Of 288 rows, 230
+failed at least one registered condition and 58 passed; all 230 failures had a clean
+reachable prefix. Available failures by bounded-induction/commit/declaration/probe/
+repair/state class were 46/48/35/24/36/41, clearing every quota of ten. The 60-row
+repair source is `30141538...d84b8`; full inventory is `7230af52...dfe7`.
+Selected prefixes contain 47,123 masked tokens, with min/mean/max
+33/785.383/1,024. Forty-two cut at the generation-cap boundary, ten at the first
+token beyond the commit budget, and eight at the answer boundary. No stream
+materialization, training, capability measurement, or benchmark event ran.
 
 ## Controls
 
@@ -54,20 +64,21 @@ stays sealed.
 
 ## Interpretation
 
-The design is feasible, the vLLM parent-deployment footgun is closed by an
-authenticated composite, and the collection wrapper now distinguishes clean preflight
-state from artifacts it creates. This is not evidence for on-policy correction, and
-“first failure” means the first machine-observable boundary rather than an
+The parent supplies enough failures in every registered class to run the test. That
+closes the substrate-availability risk, not the mechanism claim. The selected set is
+dominated by long capped prefixes; the compute review must prove exact sequence fit,
+zero skips, masked/loss-bearing exposure, and a true forward-token replay match.
+“First failure” still means the first machine-observable boundary rather than an
 unobservable latent error.
 
 ## Next Experiments
 
-Publish this rollout receipt. Then mine prefixes model-free and publish either the
-complete quota or insufficient-quota result. Do not train until the second compute
-review is committed and green.
+Publish this quota-satisfying inventory. Then materialize both exact-token streams and
+perform the second adversarial compute review as a separate model-free checkpoint. Do
+not train until that review is committed and green.
 
 ## Artifact Manifest
 
 Parent identity, frozen task hashes, replay hashes, the staged external merged
 checkpoint, and parent-rollout hashes are recorded in `artifact_manifest.yaml`; no
-graded or capability result exists.
+capability result exists.

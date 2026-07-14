@@ -1,6 +1,6 @@
 # On-Policy Failure-Prefix Universal Curriculum
 
-**Status:** in-progress · since 2026-07-14 · authenticated parent rollout collected; prefix mining is next
+**Status:** in-progress · since 2026-07-14 · all six prefix quotas satisfied; exact-compute freeze is next
 
 This result-separated successor tests whether training corrective continuations from
 the model's own fresh procedural failure prefixes installs a reusable reasoning and
@@ -63,17 +63,17 @@ Model-free design smoke:
 PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --smoke
 ```
 
-The design, parent-merge, and parent-rollout checkpoints are published separately.
-After the rollout receipt is pushed and both required workflows are green, run exactly
-one model-free stage:
+The design, parent merge, parent rollout, and failure inventory are separate published
+checkpoints. Verify the committed inventory and repair source with:
 
 ```bash
-PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --stage mine-prefixes
+PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/mine_prefix_repairs.py --check
 ```
 
-Publish the resulting failure inventory before any further stage. Training remains
-unavailable until actual prefix lengths support exact-token streams, a zero-skip
-receipt, and a second adversarial compute review.
+No training command is authorized. After this checkpoint is pushed and both required
+workflows are green, materialize exact-token candidate/control streams and write the
+second adversarial compute review as their own model-free checkpoint. Training remains
+unavailable until that review records exact forward-token equality and zero skips.
 
 ## Results
 
@@ -91,20 +91,31 @@ tokens at 849.9 tokens/s. Rollout/metadata/log/receipt hashes are
 `c6b98b79...74fa`. The original postvalidator rejected only an impossible
 post-open `git_dirty=false` assertion; an explicit no-generation recovery path
 authenticated every other frozen field and wrote the receipt without rerunning the
-model. Failure outcomes have not been graded. No training, capability measurement,
-local evaluation, or benchmark event exists.
+model.
+
+The frozen miner has now graded the experiment-owned substrate. It found 230 failed
+and 58 passing parent rows; all 230 failures had a reachable clean prefix. Available
+failures by bounded-induction/commit/declaration/probe/repair/state class were
+46/48/35/24/36/41, so every fixed quota cleared without borrowing. It selected
+exactly ten per class. The 60-row repair source and complete inventory hashes are
+`30141538...d84b8` / `7230af52...dfe7`. Selected prefixes contain 47,123 masked
+tokens total (33 minimum, 785.4 mean, 1,024 maximum); 42 selections cut at the
+generation cap, ten at the immediate-commit boundary, and eight at the answer
+boundary. This is a data-availability result only. No stream materialization,
+training, capability measurement, local evaluation, or benchmark event exists.
 
 ## Interpretation
 
-This is a collection-authentication result, not evidence that on-policy correction
-works. The explicit merge closes vLLM's runtime-LoRA silent no-op and the rollout is
-complete, but failure quotas may still prove unreachable; that outcome stops training
-and will be preserved.
+The parent visits every registered failure class often enough to test the mechanism,
+but this is not evidence that on-policy correction works. Selection is dominated by
+long severe prefixes, so the exact-compute review must prove sequence fit, zero skips,
+and a genuine forward-token replay match before training.
 
 ## Knowledgebase Update
 
-- Program evidence: unchanged until a result exists.
-- Program backlog: records this active result-separated intake.
+- Program evidence: unchanged until a capability result exists.
+- Program backlog: records the quota-satisfying failure inventory and compute-review
+  risk.
 - Claim ledger and shared synthesis: unchanged.
 
 ## Artifacts
@@ -116,7 +127,10 @@ and will be preserved.
 - `scripts/mine_prefix_repairs.py`
 - `data/design_receipt.json`
 - `data/rollout_task_manifest.json`
+- `data/prefix_failure_inventory.json`
+- `data/prefix_repair_source.jsonl`
 - `runs/parent_rollout/seed66113.receipt.json`
+- `analysis/prefix_failure_inventory.md`
 - `reports/design_review.md`
 - `reports/preregistration.md`
 - `reports/report.md`

@@ -48344,13 +48344,14 @@
    {
      "headline": true,
      "kind": "bar",
-     "title": "Authenticated parent rollout reaches the fourth checkpoint",
+     "title": "Failure mining reaches the fifth checkpoint",
      "categories": [
       "intake",
       "CPU design",
       "parent deploy",
       "parent rollout",
-      "prefix + compute",
+      "prefix mine",
+      "compute freeze",
       "training",
       "local gate",
       "broad gate"
@@ -48359,6 +48360,7 @@
       {
        "label": "completed checkpoint",
        "values": [
+        1,
         1,
         1,
         1,
@@ -48373,8 +48375,36 @@
      "x_label": "preregistered experiment stage",
      "y_label": "completion indicator",
      "y_format": "integer",
-     "note": "The authenticated parent receipt records 288 rows, 170252 sampled tokens, and 849.923 sampled tokens/s. Failure grading, exact-compute review, training, capability, and benchmark stages remain incomplete.",
-     "source": "experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/runs/parent_rollout/seed66113.receipt.json"
+     "note": "Failure mining selected 60 rows after all six quotas passed. Exact-compute review, training, capability, and benchmark stages remain incomplete.",
+     "source": "experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/data/prefix_failure_inventory.json"
+    },
+    {
+     "headline": false,
+     "kind": "bar",
+     "title": "Every failure class exceeds its quota",
+     "categories": [
+      "declaration",
+      "state transition",
+      "bounded induction",
+      "probe scoring",
+      "repair propagation",
+      "commit serialization"
+     ],
+     "series": [
+      {
+       "label": "reachable failures",
+       "values": [35, 41, 46, 24, 36, 48]
+      },
+      {
+       "label": "required quota",
+       "values": [10, 10, 10, 10, 10, 10]
+      }
+     ],
+     "x_label": "registered failure class",
+     "y_label": "parent rows",
+     "y_format": "integer",
+     "note": "The frozen miner selected exactly 10 rows per class from 230 total reachable failures. Availability passing is substrate evidence only; no training or capability event exists.",
+     "source": "experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/data/prefix_failure_inventory.json"
     }
    ]
   },

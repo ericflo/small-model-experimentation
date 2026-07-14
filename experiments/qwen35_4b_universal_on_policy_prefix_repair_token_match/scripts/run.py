@@ -87,7 +87,7 @@ def smoke() -> None:
         f"model_revision: {MODEL_REVISION}",
         f"parent_weights_sha256: {PARENT_WEIGHTS_SHA256}",
         f"parent_config_sha256: {PARENT_CONFIG_SHA256}",
-        "status: parent_rollout_collected_prefix_mining_next",
+        "status: prefix_quota_satisfied_compute_freeze_next",
     )
     missing = [entry for entry in required if entry not in config]
     if missing:
@@ -118,11 +118,12 @@ def smoke() -> None:
             "-q",
         ]
     )
+    run([str(PYTHON), "-B", str(SCRIPTS / "mine_prefix_repairs.py"), "--check"])
     design = json.loads(DESIGN_RECEIPT.read_text(encoding="utf-8"))
     print(
-        "design smoke passed: "
+        "design and prefix-mining smoke passed: "
         f"{design['rollout_tasks']['rows']} fresh tasks, six balanced failure classes, "
-        "masked-prefix and merged-parent gates frozen"
+        "60 quota-satisfying masked repairs frozen"
     )
 
 

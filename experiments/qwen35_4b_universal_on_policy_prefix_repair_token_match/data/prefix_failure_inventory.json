@@ -1,0 +1,3966 @@
+{
+  "available_reachable_failures": {
+    "bounded_induction": 46,
+    "commit_serialization": 48,
+    "declaration_operation": 35,
+    "probe_scoring": 24,
+    "repair_propagation": 36,
+    "state_transition": 41
+  },
+  "experiment_id": "qwen35_4b_universal_on_policy_prefix_repair_token_match",
+  "quota_per_failure_class": 10,
+  "quota_satisfied": true,
+  "rollout_seed": 66113,
+  "schema_version": 1,
+  "selected": {
+    "bounded_induction": 10,
+    "commit_serialization": 10,
+    "declaration_operation": 10,
+    "probe_scoring": 10,
+    "repair_propagation": 10,
+    "state_transition": 10
+  },
+  "selection_seed": 77113,
+  "source_path": "data/prefix_repair_source.jsonl",
+  "source_rows": 60,
+  "source_sha256": "301415384c941e158c7d97e0368e5026533648c01d7af8540d9ae791ba4d84b8",
+  "task_outcomes": [
+    {
+      "expected": "pov-gim-cor-nix-cor-nix",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_bounded_induction_00000",
+      "truncated": true
+    },
+    {
+      "expected": "13-79-12-34-13",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 21,
+      "n_thinking_tokens": 926,
+      "parsed": "68-68-68-13-24",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_bounded_induction_00001",
+      "truncated": false
+    },
+    {
+      "expected": "W ~ H ~ J ~ W ~ J",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_bounded_induction_00002",
+      "truncated": true
+    },
+    {
+      "expected": "46 ~ 46 ~ 13 ~ 13 ~ 46 ~ 12 ~ 13",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_bounded_induction_00003",
+      "truncated": true
+    },
+    {
+      "expected": "XII · II · XI · V · II · VI",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_bounded_induction_00004",
+      "truncated": true
+    },
+    {
+      "expected": "git-bix-bot-nik-vim-vim",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 16,
+      "n_thinking_tokens": 879,
+      "parsed": "nok-nik-vim-bot-bix-nok",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_bounded_induction_00005",
+      "truncated": false
+    },
+    {
+      "expected": "ruz / lem / hup / jor / ruz / lem",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_bounded_induction_00006",
+      "truncated": true
+    },
+    {
+      "expected": "ochre / pearl / jade / amber / jade",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_bounded_induction_00007",
+      "truncated": true
+    },
+    {
+      "expected": "cor / dun / bex / cor / ruz / fal",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_bounded_induction_00008",
+      "truncated": true
+    },
+    {
+      "expected": "teal ~ rust ~ pearl ~ fawn ~ lilac ~ fawn",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_bounded_induction_00009",
+      "truncated": true
+    },
+    {
+      "expected": "zit / zam / dit / vok / zet",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_bounded_induction_00010",
+      "truncated": true
+    },
+    {
+      "expected": "X · X · II · XII · V · II",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 17,
+      "n_thinking_tokens": 778,
+      "parsed": "X · XII · V · II · X · X",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_bounded_induction_00011",
+      "truncated": false
+    },
+    {
+      "expected": "80 ~ 68 ~ 57 ~ 13 ~ 13 ~ 79 ~ 80",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_bounded_induction_00012",
+      "truncated": true
+    },
+    {
+      "expected": "zik / mix / mix / zik / mer",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_bounded_induction_00013",
+      "truncated": true
+    },
+    {
+      "expected": "III / XII / I / VIII / I / VI",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_bounded_induction_00014",
+      "truncated": true
+    },
+    {
+      "expected": "vom ~ ton ~ bot ~ vom ~ ton ~ ton ~ vom",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 19,
+      "n_thinking_tokens": 648,
+      "parsed": "vom ~ ton ~ bot ~ vom ~ vom ~ vom ~ vom",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_bounded_induction_00015",
+      "truncated": false
+    },
+    {
+      "expected": "13-24-57-24-02-24-02",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_bounded_induction_00016",
+      "truncated": true
+    },
+    {
+      "expected": "teal / lilac / rust / fawn / rust / indigo",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_bounded_induction_00017",
+      "truncated": true
+    },
+    {
+      "expected": "lat · nor · tox · nor · max · max",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_bounded_induction_00018",
+      "truncated": true
+    },
+    {
+      "expected": "pearl / umber / pearl / pearl / jade",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_bounded_induction_00019",
+      "truncated": true
+    },
+    {
+      "expected": "violet ~ pearl ~ cobalt ~ jade ~ jade ~ violet ~ jade",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_bounded_induction_00020",
+      "truncated": true
+    },
+    {
+      "expected": "W ~ K ~ R ~ W ~ R",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_bounded_induction_00021",
+      "truncated": true
+    },
+    {
+      "expected": "nix / bex / bex / cor / cor",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 18,
+      "n_thinking_tokens": 701,
+      "parsed": "nix / bex / cor / ruz / cor",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_bounded_induction_00022",
+      "truncated": false
+    },
+    {
+      "expected": "XII-IX-IV-I-XI-V-IV",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_bounded_induction_00023",
+      "truncated": true
+    },
+    {
+      "expected": "F-F-M-F-W-T",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_bounded_induction_00024",
+      "truncated": true
+    },
+    {
+      "expected": "pearl / pearl / cobalt / amber / lilac / cobalt / ochre",
+      "failed": false,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 23,
+      "n_thinking_tokens": 965,
+      "parsed": "pearl / pearl / cobalt / amber / lilac / cobalt / ochre",
+      "reasons": [],
+      "task_id": "uop_bounded_induction_00025",
+      "truncated": false
+    },
+    {
+      "expected": "68 · 35 · 35 · 91 · 57 · 24",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_bounded_induction_00026",
+      "truncated": true
+    },
+    {
+      "expected": "gim-hup-jor-gim-ruz-hup-cor",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_bounded_induction_00027",
+      "truncated": true
+    },
+    {
+      "expected": "VII-VI-I-III-II",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_bounded_induction_00028",
+      "truncated": true
+    },
+    {
+      "expected": "rux / mom / mom / nut / vin / ron / rux",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_bounded_induction_00029",
+      "truncated": true
+    },
+    {
+      "expected": "rust / teal / amber / fawn / jade",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_bounded_induction_00030",
+      "truncated": true
+    },
+    {
+      "expected": "zik-pin-zik-ram-vun-mek",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_bounded_induction_00031",
+      "truncated": true
+    },
+    {
+      "expected": "13 · 24 · 57 · 80 · 79",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_bounded_induction_00032",
+      "truncated": true
+    },
+    {
+      "expected": "teal ~ rust ~ jade ~ ochre ~ rust ~ teal",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 18,
+      "n_thinking_tokens": 521,
+      "parsed": "teal ~ amber ~ amber ~ fawn ~ amber ~ teal",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_bounded_induction_00033",
+      "truncated": false
+    },
+    {
+      "expected": "indigo / indigo / violet / cobalt / amber",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_bounded_induction_00034",
+      "truncated": true
+    },
+    {
+      "expected": "cobalt-cobalt-indigo-violet-cobalt-indigo",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 19,
+      "n_thinking_tokens": 698,
+      "parsed": "jade-pearl-pearl-amber-jade-umber",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_bounded_induction_00035",
+      "truncated": false
+    },
+    {
+      "expected": "XII ~ XI ~ IX ~ V ~ IX",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 15,
+      "n_thinking_tokens": 700,
+      "parsed": "XII ~ XI ~ VI ~ XI ~ VI",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_bounded_induction_00036",
+      "truncated": false
+    },
+    {
+      "expected": "ruz ~ lem ~ kav ~ jor ~ jor ~ hup",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_bounded_induction_00037",
+      "truncated": true
+    },
+    {
+      "expected": "J ~ A ~ J ~ A ~ T ~ C",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 17,
+      "n_thinking_tokens": 715,
+      "parsed": "C ~ W ~ A ~ W ~ R ~ H",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_bounded_induction_00038",
+      "truncated": false
+    },
+    {
+      "expected": "34-13-24-79-35-24-13",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 27,
+      "n_thinking_tokens": 934,
+      "parsed": "80-13-24-35-13-35-35",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_bounded_induction_00039",
+      "truncated": false
+    },
+    {
+      "expected": "13-13-12-34-34-34",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_bounded_induction_00040",
+      "truncated": true
+    },
+    {
+      "expected": "fawn · amber · violet · umber · teal · fawn",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_bounded_induction_00041",
+      "truncated": true
+    },
+    {
+      "expected": "XII-VIII-VII-I-XII-XI",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_bounded_induction_00042",
+      "truncated": true
+    },
+    {
+      "expected": "nir ~ tam ~ min ~ tek ~ min ~ pak ~ pak",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 19,
+      "n_thinking_tokens": 962,
+      "parsed": "nir ~ tam ~ pak ~ bek ~ min ~ pak ~ min",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_bounded_induction_00043",
+      "truncated": false
+    },
+    {
+      "expected": "kav-ruz-bex-jor-gim-gim",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_bounded_induction_00044",
+      "truncated": true
+    },
+    {
+      "expected": "teal / rust / fawn / umber / jade / lilac",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_bounded_induction_00045",
+      "truncated": true
+    },
+    {
+      "expected": "bex / fal / bex / ruz / fal",
+      "failed": false,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 18,
+      "n_thinking_tokens": 375,
+      "parsed": "bex / fal / bex / ruz / fal",
+      "reasons": [],
+      "task_id": "uop_bounded_induction_00046",
+      "truncated": false
+    },
+    {
+      "expected": "cobalt-jade-pearl-umber-ochre-violet-jade",
+      "failed": true,
+      "failure_class": "bounded_induction",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_bounded_induction_00047",
+      "truncated": true
+    },
+    {
+      "expected": "ochre · lilac · violet · pearl · teal · teal · indigo",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 22,
+      "n_thinking_tokens": 719,
+      "parsed": "ochre · lilac · violet · pearl · teal · teal · indigo",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00000",
+      "truncated": false
+    },
+    {
+      "expected": "24-79-68-46-35-46",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 24,
+      "n_thinking_tokens": 851,
+      "parsed": "24-79-68-46-35-46",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00001",
+      "truncated": false
+    },
+    {
+      "expected": "pov / ruz / kav / hup / ruz / gim / pov",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 22,
+      "n_thinking_tokens": 614,
+      "parsed": "pov / ruz / kav / hup / ruz / gim / pov",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00002",
+      "truncated": false
+    },
+    {
+      "expected": "12 ~ 68 ~ 34 ~ 68 ~ 24 ~ 68 ~ 35",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 33,
+      "n_thinking_tokens": 800,
+      "parsed": "12 ~ 68 ~ 34 ~ 68 ~ 24 ~ 68 ~ 35",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00003",
+      "truncated": false
+    },
+    {
+      "expected": "79 · 79 · 46 · 35 · 46 · 46",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 29,
+      "n_thinking_tokens": 364,
+      "parsed": "79 · 79 · 46 · 35 · 46 · 46",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00004",
+      "truncated": false
+    },
+    {
+      "expected": "lem · den · den · dim · den",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 15,
+      "n_thinking_tokens": 884,
+      "parsed": "lem · den · den · dim · den",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00005",
+      "truncated": false
+    },
+    {
+      "expected": "lilac · pearl · ochre · lilac · amber · amber · lilac",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 23,
+      "n_thinking_tokens": 714,
+      "parsed": "lilac · pearl · ochre · lilac · amber · amber · lilac",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00006",
+      "truncated": false
+    },
+    {
+      "expected": "lilac · lilac · ochre · indigo · violet · pearl",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 21,
+      "n_thinking_tokens": 551,
+      "parsed": "lilac · lilac · ochre · indigo · violet · pearl",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00007",
+      "truncated": false
+    },
+    {
+      "expected": "lut ~ sum ~ pir ~ sem ~ nem ~ ser",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 17,
+      "n_thinking_tokens": 484,
+      "parsed": "lut ~ sum ~ pir ~ sem ~ nem ~ ser",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00008",
+      "truncated": false
+    },
+    {
+      "expected": "VII / XII / XII / II / VII / VIII / XI",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 19,
+      "n_thinking_tokens": 611,
+      "parsed": "VII / XII / XII / II / VII / VIII / XI",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00009",
+      "truncated": false
+    },
+    {
+      "expected": "bex ~ pov ~ bex ~ gim ~ gim",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 17,
+      "n_thinking_tokens": 563,
+      "parsed": "bex ~ pov ~ bex ~ gim ~ gim",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00010",
+      "truncated": false
+    },
+    {
+      "expected": "IV / I / IV / IV / IV / IV",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 17,
+      "n_thinking_tokens": 584,
+      "parsed": "IV / I / IV / IV / IV / IV",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00011",
+      "truncated": false
+    },
+    {
+      "expected": "F · R · K · H · C",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 15,
+      "n_thinking_tokens": 462,
+      "parsed": "F · R · K · H · C",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00012",
+      "truncated": false
+    },
+    {
+      "expected": "pox / vom / buk / lit / pox / bur",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 19,
+      "n_thinking_tokens": 684,
+      "parsed": "pox / vom / buk / lit / pox / bur",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00013",
+      "truncated": false
+    },
+    {
+      "expected": "F · P · C · P · W",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 15,
+      "n_thinking_tokens": 603,
+      "parsed": "F · P · C · P · W",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00014",
+      "truncated": false
+    },
+    {
+      "expected": "46 · 12 · 34 · 46 · 79",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 25,
+      "n_thinking_tokens": 661,
+      "parsed": "46 · 12 · 34 · 46 · 79",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00015",
+      "truncated": false
+    },
+    {
+      "expected": "jade ~ jade ~ rust ~ jade ~ amber",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 15,
+      "n_thinking_tokens": 458,
+      "parsed": "jade ~ jade ~ rust ~ jade ~ amber",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00016",
+      "truncated": false
+    },
+    {
+      "expected": "IX / VII / II / II / XI",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 15,
+      "n_thinking_tokens": 622,
+      "parsed": "IX / VII / II / II / XI",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00017",
+      "truncated": false
+    },
+    {
+      "expected": "K ~ D ~ A ~ C ~ C",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 15,
+      "n_thinking_tokens": 565,
+      "parsed": "K ~ D ~ A ~ C ~ C",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00018",
+      "truncated": false
+    },
+    {
+      "expected": "teal ~ fawn ~ amber ~ cobalt ~ umber ~ lilac ~ lilac",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer",
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00019",
+      "truncated": true
+    },
+    {
+      "expected": "pet · pet · kom · kom · kok · kok · kam",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 19,
+      "n_thinking_tokens": 664,
+      "parsed": "pet · pet · kom · kom · kok · kok · kam",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00020",
+      "truncated": false
+    },
+    {
+      "expected": "jade-ochre-rust-amber-rust-pearl-fawn",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 21,
+      "n_thinking_tokens": 240,
+      "parsed": "jade-ochre-rust-amber-rust-pearl-fawn",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00021",
+      "truncated": false
+    },
+    {
+      "expected": "amber-rust-rust-lilac-lilac-lilac-rust",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 22,
+      "n_thinking_tokens": 646,
+      "parsed": "amber-rust-rust-lilac-lilac-lilac-rust",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00022",
+      "truncated": false
+    },
+    {
+      "expected": "hup ~ cor ~ fal ~ jor ~ nix ~ jor ~ nix",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 24,
+      "n_thinking_tokens": 254,
+      "parsed": "hup ~ cor ~ fal ~ jor ~ nix ~ jor ~ nix",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00023",
+      "truncated": false
+    },
+    {
+      "expected": "X / V / III / IV / IV / V / IX",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 19,
+      "n_thinking_tokens": 978,
+      "parsed": "X / V / III / IV / IV / V / IX",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00024",
+      "truncated": false
+    },
+    {
+      "expected": "57 ~ 02 ~ 68 ~ 46 ~ 12 ~ 13 ~ 79",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 33,
+      "n_thinking_tokens": 787,
+      "parsed": "57 ~ 02 ~ 68 ~ 46 ~ 12 ~ 13 ~ 79",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00025",
+      "truncated": false
+    },
+    {
+      "expected": "ten / ten / dex / rat / mix / lot / lot",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 19,
+      "n_thinking_tokens": 900,
+      "parsed": "ten / ten / dex / rat / mix / lot / lot",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00026",
+      "truncated": false
+    },
+    {
+      "expected": "02 / 57 / 02 / 46 / 46",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 25,
+      "n_thinking_tokens": 576,
+      "parsed": "02 / 57 / 02 / 46 / 46",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00027",
+      "truncated": false
+    },
+    {
+      "expected": "zan · lix · zan · por · lan · pix",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 18,
+      "n_thinking_tokens": 614,
+      "parsed": "zan · lix · zan · por · lan · pix",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00028",
+      "truncated": false
+    },
+    {
+      "expected": "dun ~ ruz ~ jor ~ ruz ~ nix",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 19,
+      "n_thinking_tokens": 498,
+      "parsed": "dun ~ ruz ~ jor ~ ruz ~ nix",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00029",
+      "truncated": false
+    },
+    {
+      "expected": "kav ~ nix ~ ruz ~ hup ~ ruz",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 19,
+      "n_thinking_tokens": 544,
+      "parsed": "kav ~ nix ~ ruz ~ hup ~ ruz",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00030",
+      "truncated": false
+    },
+    {
+      "expected": "91 ~ 57 ~ 46 ~ 80 ~ 34",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 25,
+      "n_thinking_tokens": 611,
+      "parsed": "91 ~ 57 ~ 46 ~ 80 ~ 34",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00031",
+      "truncated": false
+    },
+    {
+      "expected": "fawn ~ cobalt ~ fawn ~ teal ~ fawn ~ ochre",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer",
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00032",
+      "truncated": true
+    },
+    {
+      "expected": "hup ~ hup ~ hup ~ nix ~ fal",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 19,
+      "n_thinking_tokens": 473,
+      "parsed": "hup ~ hup ~ hup ~ nix ~ fal",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00033",
+      "truncated": false
+    },
+    {
+      "expected": "mux-pax-pax-sax-pax",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 15,
+      "n_thinking_tokens": 879,
+      "parsed": "mux-pax-pax-sax-pax",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00034",
+      "truncated": false
+    },
+    {
+      "expected": "80-46-46-80-35-80-13",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 27,
+      "n_thinking_tokens": 642,
+      "parsed": "80-46-46-80-35-80-13",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00035",
+      "truncated": false
+    },
+    {
+      "expected": "bex / jor / lem / hup / bex",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 19,
+      "n_thinking_tokens": 726,
+      "parsed": "bex / jor / lem / hup / bex",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00036",
+      "truncated": false
+    },
+    {
+      "expected": "F ~ D ~ T ~ P ~ F ~ C ~ T",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 19,
+      "n_thinking_tokens": 778,
+      "parsed": "F ~ D ~ T ~ P ~ F ~ C ~ T",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00037",
+      "truncated": false
+    },
+    {
+      "expected": "bur / nem / vat / bur / pax / zux / tak",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 21,
+      "n_thinking_tokens": 569,
+      "parsed": "bur / nem / vat / bur / pax / zux / tak",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00038",
+      "truncated": false
+    },
+    {
+      "expected": "46 / 46 / 02 / 57 / 57 / 79",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer",
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00039",
+      "truncated": true
+    },
+    {
+      "expected": "lilac-lilac-amber-violet-lilac",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 18,
+      "n_thinking_tokens": 789,
+      "parsed": "lilac-lilac-amber-violet-lilac",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00040",
+      "truncated": false
+    },
+    {
+      "expected": "lem-dun-kav-ruz-dun-jor",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 17,
+      "n_thinking_tokens": 816,
+      "parsed": "lem-dun-kav-ruz-dun-jor",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00041",
+      "truncated": false
+    },
+    {
+      "expected": "pearl-jade-violet-jade-indigo-indigo-fawn",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer",
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00042",
+      "truncated": true
+    },
+    {
+      "expected": "cor · kav · kav · jor · nix",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 17,
+      "n_thinking_tokens": 686,
+      "parsed": "cor · kav · kav · jor · nix",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00043",
+      "truncated": false
+    },
+    {
+      "expected": "jor-nix-fal-jor-lem-lem-kav",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer",
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00044",
+      "truncated": true
+    },
+    {
+      "expected": "46 ~ 13 ~ 34 ~ 91 ~ 46",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 2,
+      "n_thinking_tokens": 1021,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer",
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00045",
+      "truncated": true
+    },
+    {
+      "expected": "pur · pur · lek · dux · rum · non · rum",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 20,
+      "n_thinking_tokens": 522,
+      "parsed": "pur · pur · lek · dux · rum · non · rum",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00046",
+      "truncated": false
+    },
+    {
+      "expected": "D / H / T / F / K / K",
+      "failed": true,
+      "failure_class": "commit_serialization",
+      "n_answer_tokens": 17,
+      "n_thinking_tokens": 748,
+      "parsed": "D / H / T / F / K / K",
+      "reachable_prefix": true,
+      "reasons": [
+        "delayed_commit"
+      ],
+      "task_id": "uop_commit_serialization_00047",
+      "truncated": false
+    },
+    {
+      "expected": "fawn · rust · violet · violet · cobalt",
+      "failed": true,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 17,
+      "n_thinking_tokens": 138,
+      "parsed": "rust · violet · cobalt · violet · fawn",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_declaration_operation_00000",
+      "truncated": false
+    },
+    {
+      "expected": "dak · tam · dor · pir · don · dor",
+      "failed": true,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_declaration_operation_00001",
+      "truncated": true
+    },
+    {
+      "expected": "dom ~ det ~ dom ~ det ~ mox ~ zor ~ gom",
+      "failed": true,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 19,
+      "n_thinking_tokens": 177,
+      "parsed": "gom ~ zor ~ dom ~ det ~ dom ~ det ~ dom",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_declaration_operation_00002",
+      "truncated": false
+    },
+    {
+      "expected": "mem · lir · lax · git · lax · git",
+      "failed": false,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 17,
+      "n_thinking_tokens": 143,
+      "parsed": "mem · lir · lax · git · lax · git",
+      "reasons": [],
+      "task_id": "uop_declaration_operation_00003",
+      "truncated": false
+    },
+    {
+      "expected": "nix · fal · nix · gim · ruz",
+      "failed": true,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 18,
+      "n_thinking_tokens": 137,
+      "parsed": "ruz · gim · bex · fal · nix",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_declaration_operation_00004",
+      "truncated": false
+    },
+    {
+      "expected": "violet-pearl-violet-jade-umber",
+      "failed": false,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 16,
+      "n_thinking_tokens": 209,
+      "parsed": "violet-pearl-violet-jade-umber",
+      "reasons": [],
+      "task_id": "uop_declaration_operation_00005",
+      "truncated": false
+    },
+    {
+      "expected": "lir-mot-lir-ban-nik-dix",
+      "failed": true,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 17,
+      "n_thinking_tokens": 128,
+      "parsed": "lir-mot-lir-ban-nik-dix",
+      "reachable_prefix": true,
+      "reasons": [
+        "declaration_executed_as_operation"
+      ],
+      "task_id": "uop_declaration_operation_00006",
+      "truncated": false
+    },
+    {
+      "expected": "ror / nik / zam / pon / nik / dex / zam",
+      "failed": false,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 20,
+      "n_thinking_tokens": 140,
+      "parsed": "ror / nik / zam / pon / nik / dex / zam",
+      "reasons": [],
+      "task_id": "uop_declaration_operation_00007",
+      "truncated": false
+    },
+    {
+      "expected": "34 ~ 80 ~ 12 ~ 34 ~ 02 ~ 57 ~ 35",
+      "failed": false,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 33,
+      "n_thinking_tokens": 216,
+      "parsed": "34 ~ 80 ~ 12 ~ 34 ~ 02 ~ 57 ~ 35",
+      "reasons": [],
+      "task_id": "uop_declaration_operation_00008",
+      "truncated": false
+    },
+    {
+      "expected": "H · F · T · W · K · C",
+      "failed": true,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_declaration_operation_00009",
+      "truncated": true
+    },
+    {
+      "expected": "dun-kav-cor-jor-jor",
+      "failed": true,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 15,
+      "n_thinking_tokens": 113,
+      "parsed": "dun-kav-jor-kav-jor",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_declaration_operation_00010",
+      "truncated": false
+    },
+    {
+      "expected": "D / J / D / D / A",
+      "failed": true,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_declaration_operation_00011",
+      "truncated": true
+    },
+    {
+      "expected": "vix / tox / tox / ret / lor / vir / vix",
+      "failed": true,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 21,
+      "n_thinking_tokens": 173,
+      "parsed": "vix / ret / tox / vix / tox / lor / vir",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_declaration_operation_00012",
+      "truncated": false
+    },
+    {
+      "expected": "violet-violet-pearl-pearl-ochre-teal",
+      "failed": true,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 19,
+      "n_thinking_tokens": 255,
+      "parsed": "violet-violet-lilac-lilac-indigo-teal",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_declaration_operation_00013",
+      "truncated": false
+    },
+    {
+      "expected": "vix / vix / bom / don / nik / tik / tik",
+      "failed": false,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 21,
+      "n_thinking_tokens": 253,
+      "parsed": "vix / vix / bom / don / nik / tik / tik",
+      "reasons": [],
+      "task_id": "uop_declaration_operation_00014",
+      "truncated": false
+    },
+    {
+      "expected": "bin / mem / kox / dex / mem / bin / bin",
+      "failed": true,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 20,
+      "n_thinking_tokens": 145,
+      "parsed": "bin / kox / bin / mem / mem / bin / dex",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_declaration_operation_00015",
+      "truncated": false
+    },
+    {
+      "expected": "D ~ T ~ J ~ A ~ K ~ D ~ D",
+      "failed": true,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_declaration_operation_00016",
+      "truncated": true
+    },
+    {
+      "expected": "jor / kav / ruz / cor / dun",
+      "failed": false,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 17,
+      "n_thinking_tokens": 168,
+      "parsed": "jor / kav / ruz / cor / dun",
+      "reasons": [],
+      "task_id": "uop_declaration_operation_00017",
+      "truncated": false
+    },
+    {
+      "expected": "79-35-34-35-79-35-57",
+      "failed": true,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 27,
+      "n_thinking_tokens": 213,
+      "parsed": "79-35-34-35-79-57-35",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_declaration_operation_00018",
+      "truncated": false
+    },
+    {
+      "expected": "V · X · VII · IX · IX · V",
+      "failed": true,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 17,
+      "n_thinking_tokens": 213,
+      "parsed": "V · V · IX · IX · X · VII",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_declaration_operation_00019",
+      "truncated": false
+    },
+    {
+      "expected": "91 ~ 12 ~ 35 ~ 13 ~ 91",
+      "failed": true,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 25,
+      "n_thinking_tokens": 245,
+      "parsed": "91 ~ 12 ~ 46 ~ 13 ~ 91",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_declaration_operation_00020",
+      "truncated": false
+    },
+    {
+      "expected": "68 · 35 · 79 · 34 · 34 · 24 · 34",
+      "failed": true,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 33,
+      "n_thinking_tokens": 449,
+      "parsed": "34 · 34 · 24 · 35 · 79 · 68 · 34",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_declaration_operation_00021",
+      "truncated": false
+    },
+    {
+      "expected": "fal-fal-pov-gim-bex-pov-fal",
+      "failed": true,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 17,
+      "n_thinking_tokens": 137,
+      "parsed": "fal-dun-pov-bex-pov-fal",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_declaration_operation_00022",
+      "truncated": false
+    },
+    {
+      "expected": "68 · 02 · 68 · 12 · 68 · 80",
+      "failed": true,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_declaration_operation_00023",
+      "truncated": true
+    },
+    {
+      "expected": "pearl-violet-fawn-jade-violet-teal",
+      "failed": true,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 18,
+      "n_thinking_tokens": 269,
+      "parsed": "teal-pearl-jade-fawn-jade-violet",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_declaration_operation_00024",
+      "truncated": false
+    },
+    {
+      "expected": "II ~ VII ~ III ~ III ~ II ~ X ~ VII",
+      "failed": true,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 19,
+      "n_thinking_tokens": 226,
+      "parsed": "II ~ III ~ III ~ III ~ X ~ II ~ VII",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_declaration_operation_00025",
+      "truncated": false
+    },
+    {
+      "expected": "F-C-J-R-C-W",
+      "failed": false,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 12,
+      "n_thinking_tokens": 797,
+      "parsed": "F-C-J-R-C-W",
+      "reasons": [],
+      "task_id": "uop_declaration_operation_00026",
+      "truncated": false
+    },
+    {
+      "expected": "pum ~ don ~ san ~ zor ~ zan",
+      "failed": true,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 16,
+      "n_thinking_tokens": 126,
+      "parsed": "san ~ don ~ zan ~ zor ~ pum",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_declaration_operation_00027",
+      "truncated": false
+    },
+    {
+      "expected": "mur / nux / sim / kak / pax / nux",
+      "failed": true,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 20,
+      "n_thinking_tokens": 149,
+      "parsed": "nux / nux / sim / kak / pax / mur",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_declaration_operation_00028",
+      "truncated": false
+    },
+    {
+      "expected": "24-79-91-24-91-91",
+      "failed": true,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_declaration_operation_00029",
+      "truncated": true
+    },
+    {
+      "expected": "VII ~ V ~ VI ~ XII ~ II",
+      "failed": true,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_declaration_operation_00030",
+      "truncated": true
+    },
+    {
+      "expected": "gor · rot · bur · dat · gor",
+      "failed": true,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 17,
+      "n_thinking_tokens": 163,
+      "parsed": "gor · dat · rot · bur · zat · mit",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_declaration_operation_00031",
+      "truncated": false
+    },
+    {
+      "expected": "teal · jade · teal · violet · teal · violet",
+      "failed": true,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 17,
+      "n_thinking_tokens": 233,
+      "parsed": "teal · jade · violet · teal · teal · violet",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_declaration_operation_00032",
+      "truncated": false
+    },
+    {
+      "expected": "XI / III / XI / XII / I",
+      "failed": true,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 15,
+      "n_thinking_tokens": 245,
+      "parsed": "XI / III / XII / XII / I",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_declaration_operation_00033",
+      "truncated": false
+    },
+    {
+      "expected": "hup / dun / lem / hup / ruz",
+      "failed": false,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 18,
+      "n_thinking_tokens": 202,
+      "parsed": "hup / dun / lem / hup / ruz",
+      "reasons": [],
+      "task_id": "uop_declaration_operation_00034",
+      "truncated": false
+    },
+    {
+      "expected": "don / tin / tat / don / pot",
+      "failed": false,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 15,
+      "n_thinking_tokens": 157,
+      "parsed": "don / tin / tat / don / pot",
+      "reasons": [],
+      "task_id": "uop_declaration_operation_00035",
+      "truncated": false
+    },
+    {
+      "expected": "X / X / IV / IV / VI",
+      "failed": false,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 15,
+      "n_thinking_tokens": 205,
+      "parsed": "X / X / IV / IV / VI",
+      "reasons": [],
+      "task_id": "uop_declaration_operation_00036",
+      "truncated": false
+    },
+    {
+      "expected": "M / W / A / T / H / A",
+      "failed": true,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 17,
+      "n_thinking_tokens": 180,
+      "parsed": "T / W / A / T / H / A",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_declaration_operation_00037",
+      "truncated": false
+    },
+    {
+      "expected": "V ~ V ~ VI ~ VII ~ V",
+      "failed": true,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_declaration_operation_00038",
+      "truncated": true
+    },
+    {
+      "expected": "pur-net-pur-net-sok-pur",
+      "failed": true,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 14,
+      "n_thinking_tokens": 172,
+      "parsed": "pur-net-pur-sok-pur",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_declaration_operation_00039",
+      "truncated": false
+    },
+    {
+      "expected": "XI ~ VII ~ VI ~ III ~ I",
+      "failed": true,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 15,
+      "n_thinking_tokens": 284,
+      "parsed": "III ~ X ~ XI ~ VII ~ I",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_declaration_operation_00040",
+      "truncated": false
+    },
+    {
+      "expected": "IX-VIII-II-VIII-II",
+      "failed": true,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 13,
+      "n_thinking_tokens": 187,
+      "parsed": "VIII-II-VIII-VIII-II",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_declaration_operation_00041",
+      "truncated": false
+    },
+    {
+      "expected": "46 / 13 / 35 / 02 / 79",
+      "failed": false,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 25,
+      "n_thinking_tokens": 277,
+      "parsed": "46 / 13 / 35 / 02 / 79",
+      "reasons": [],
+      "task_id": "uop_declaration_operation_00042",
+      "truncated": false
+    },
+    {
+      "expected": "net · tum · net · lem · rix · rix",
+      "failed": false,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 19,
+      "n_thinking_tokens": 147,
+      "parsed": "net · tum · net · lem · rix · rix",
+      "reasons": [],
+      "task_id": "uop_declaration_operation_00043",
+      "truncated": false
+    },
+    {
+      "expected": "jade-umber-teal-rust-jade-jade-indigo",
+      "failed": true,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 18,
+      "n_thinking_tokens": 200,
+      "parsed": "umber-jade-teal-rust-indigo-jade",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_declaration_operation_00044",
+      "truncated": false
+    },
+    {
+      "expected": "lilac ~ pearl ~ fawn ~ violet ~ fawn ~ jade",
+      "failed": true,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 20,
+      "n_thinking_tokens": 148,
+      "parsed": "jade ~ pearl ~ lilac ~ violet ~ fawn ~ fawn",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_declaration_operation_00045",
+      "truncated": false
+    },
+    {
+      "expected": "F-W-D-D-W",
+      "failed": false,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 11,
+      "n_thinking_tokens": 124,
+      "parsed": "F-W-D-D-W",
+      "reasons": [],
+      "task_id": "uop_declaration_operation_00046",
+      "truncated": false
+    },
+    {
+      "expected": "W ~ H ~ F ~ W ~ H",
+      "failed": true,
+      "failure_class": "declaration_operation",
+      "n_answer_tokens": 15,
+      "n_thinking_tokens": 255,
+      "parsed": "W ~ H ~ W ~ F ~ H",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_declaration_operation_00047",
+      "truncated": false
+    },
+    {
+      "expected": "P3",
+      "failed": true,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_probe_scoring_00000",
+      "truncated": true
+    },
+    {
+      "expected": "P1",
+      "failed": true,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 457,
+      "parsed": "P2",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_probe_scoring_00001",
+      "truncated": false
+    },
+    {
+      "expected": "P1",
+      "failed": true,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 605,
+      "parsed": "P2",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_probe_scoring_00002",
+      "truncated": false
+    },
+    {
+      "expected": "P2",
+      "failed": false,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 433,
+      "parsed": "P2",
+      "reasons": [],
+      "task_id": "uop_probe_scoring_00003",
+      "truncated": false
+    },
+    {
+      "expected": "P3",
+      "failed": false,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 594,
+      "parsed": "P3",
+      "reasons": [],
+      "task_id": "uop_probe_scoring_00004",
+      "truncated": false
+    },
+    {
+      "expected": "P2",
+      "failed": false,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 762,
+      "parsed": "P2",
+      "reasons": [],
+      "task_id": "uop_probe_scoring_00005",
+      "truncated": false
+    },
+    {
+      "expected": "P3",
+      "failed": true,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_probe_scoring_00006",
+      "truncated": true
+    },
+    {
+      "expected": "P1",
+      "failed": false,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 271,
+      "parsed": "P1",
+      "reasons": [],
+      "task_id": "uop_probe_scoring_00007",
+      "truncated": false
+    },
+    {
+      "expected": "P3",
+      "failed": true,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 569,
+      "parsed": "P1",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_probe_scoring_00008",
+      "truncated": false
+    },
+    {
+      "expected": "P3",
+      "failed": true,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 181,
+      "parsed": "P1",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_probe_scoring_00009",
+      "truncated": false
+    },
+    {
+      "expected": "P1",
+      "failed": false,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 384,
+      "parsed": "P1",
+      "reasons": [],
+      "task_id": "uop_probe_scoring_00010",
+      "truncated": false
+    },
+    {
+      "expected": "P1",
+      "failed": false,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 783,
+      "parsed": "P1",
+      "reasons": [],
+      "task_id": "uop_probe_scoring_00011",
+      "truncated": false
+    },
+    {
+      "expected": "P1",
+      "failed": false,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 620,
+      "parsed": "P1",
+      "reasons": [],
+      "task_id": "uop_probe_scoring_00012",
+      "truncated": false
+    },
+    {
+      "expected": "P1",
+      "failed": true,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 258,
+      "parsed": "P3",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_probe_scoring_00013",
+      "truncated": false
+    },
+    {
+      "expected": "P3",
+      "failed": true,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_probe_scoring_00014",
+      "truncated": true
+    },
+    {
+      "expected": "P1",
+      "failed": true,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 905,
+      "parsed": "P3",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_probe_scoring_00015",
+      "truncated": false
+    },
+    {
+      "expected": "P2",
+      "failed": true,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 525,
+      "parsed": "P1",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_probe_scoring_00016",
+      "truncated": false
+    },
+    {
+      "expected": "P2",
+      "failed": true,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 308,
+      "parsed": "P1",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_probe_scoring_00017",
+      "truncated": false
+    },
+    {
+      "expected": "P1",
+      "failed": false,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 663,
+      "parsed": "P1",
+      "reasons": [],
+      "task_id": "uop_probe_scoring_00018",
+      "truncated": false
+    },
+    {
+      "expected": "P1",
+      "failed": true,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_probe_scoring_00019",
+      "truncated": true
+    },
+    {
+      "expected": "P1",
+      "failed": true,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 139,
+      "parsed": "P2",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_probe_scoring_00020",
+      "truncated": false
+    },
+    {
+      "expected": "P2",
+      "failed": false,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 334,
+      "parsed": "P2",
+      "reasons": [],
+      "task_id": "uop_probe_scoring_00021",
+      "truncated": false
+    },
+    {
+      "expected": "P1",
+      "failed": false,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 550,
+      "parsed": "P1",
+      "reasons": [],
+      "task_id": "uop_probe_scoring_00022",
+      "truncated": false
+    },
+    {
+      "expected": "P2",
+      "failed": true,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_probe_scoring_00023",
+      "truncated": true
+    },
+    {
+      "expected": "P3",
+      "failed": true,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 412,
+      "parsed": "P2",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_probe_scoring_00024",
+      "truncated": false
+    },
+    {
+      "expected": "P2",
+      "failed": true,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 366,
+      "parsed": "P1",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_probe_scoring_00025",
+      "truncated": false
+    },
+    {
+      "expected": "P2",
+      "failed": true,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 1011,
+      "parsed": "P3",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_probe_scoring_00026",
+      "truncated": false
+    },
+    {
+      "expected": "P3",
+      "failed": false,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 410,
+      "parsed": "P3",
+      "reasons": [],
+      "task_id": "uop_probe_scoring_00027",
+      "truncated": false
+    },
+    {
+      "expected": "P2",
+      "failed": false,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 567,
+      "parsed": "P2",
+      "reasons": [],
+      "task_id": "uop_probe_scoring_00028",
+      "truncated": false
+    },
+    {
+      "expected": "P2",
+      "failed": false,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 422,
+      "parsed": "P2",
+      "reasons": [],
+      "task_id": "uop_probe_scoring_00029",
+      "truncated": false
+    },
+    {
+      "expected": "P2",
+      "failed": true,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 342,
+      "parsed": "P1",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_probe_scoring_00030",
+      "truncated": false
+    },
+    {
+      "expected": "P3",
+      "failed": false,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 656,
+      "parsed": "P3",
+      "reasons": [],
+      "task_id": "uop_probe_scoring_00031",
+      "truncated": false
+    },
+    {
+      "expected": "P2",
+      "failed": false,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 467,
+      "parsed": "P2",
+      "reasons": [],
+      "task_id": "uop_probe_scoring_00032",
+      "truncated": false
+    },
+    {
+      "expected": "P1",
+      "failed": false,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 389,
+      "parsed": "P1",
+      "reasons": [],
+      "task_id": "uop_probe_scoring_00033",
+      "truncated": false
+    },
+    {
+      "expected": "P3",
+      "failed": true,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 311,
+      "parsed": "P1",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_probe_scoring_00034",
+      "truncated": false
+    },
+    {
+      "expected": "P3",
+      "failed": true,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 600,
+      "parsed": "P1",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_probe_scoring_00035",
+      "truncated": false
+    },
+    {
+      "expected": "P3",
+      "failed": true,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 442,
+      "parsed": "P1",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_probe_scoring_00036",
+      "truncated": false
+    },
+    {
+      "expected": "P3",
+      "failed": true,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_probe_scoring_00037",
+      "truncated": true
+    },
+    {
+      "expected": "P2",
+      "failed": false,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 389,
+      "parsed": "P2",
+      "reasons": [],
+      "task_id": "uop_probe_scoring_00038",
+      "truncated": false
+    },
+    {
+      "expected": "P1",
+      "failed": false,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 485,
+      "parsed": "P1",
+      "reasons": [],
+      "task_id": "uop_probe_scoring_00039",
+      "truncated": false
+    },
+    {
+      "expected": "P2",
+      "failed": false,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 368,
+      "parsed": "P2",
+      "reasons": [],
+      "task_id": "uop_probe_scoring_00040",
+      "truncated": false
+    },
+    {
+      "expected": "P3",
+      "failed": true,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 694,
+      "parsed": "P1",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_probe_scoring_00041",
+      "truncated": false
+    },
+    {
+      "expected": "P1",
+      "failed": true,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 256,
+      "parsed": "P3",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_probe_scoring_00042",
+      "truncated": false
+    },
+    {
+      "expected": "P2",
+      "failed": false,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 503,
+      "parsed": "P2",
+      "reasons": [],
+      "task_id": "uop_probe_scoring_00043",
+      "truncated": false
+    },
+    {
+      "expected": "P1",
+      "failed": false,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 622,
+      "parsed": "P1",
+      "reasons": [],
+      "task_id": "uop_probe_scoring_00044",
+      "truncated": false
+    },
+    {
+      "expected": "P3",
+      "failed": false,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 458,
+      "parsed": "P3",
+      "reasons": [],
+      "task_id": "uop_probe_scoring_00045",
+      "truncated": false
+    },
+    {
+      "expected": "P2",
+      "failed": false,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 358,
+      "parsed": "P2",
+      "reasons": [],
+      "task_id": "uop_probe_scoring_00046",
+      "truncated": false
+    },
+    {
+      "expected": "P2",
+      "failed": false,
+      "failure_class": "probe_scoring",
+      "n_answer_tokens": 8,
+      "n_thinking_tokens": 549,
+      "parsed": "P2",
+      "reasons": [],
+      "task_id": "uop_probe_scoring_00047",
+      "truncated": false
+    },
+    {
+      "expected": "jor-pov-lem-lem-pov-kav",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 18,
+      "n_thinking_tokens": 406,
+      "parsed": "jor-kav-lem-ruz-pov-kav",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_repair_propagation_00000",
+      "truncated": false
+    },
+    {
+      "expected": "XII-VIII-VII-VIII-III-I",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_repair_propagation_00001",
+      "truncated": true
+    },
+    {
+      "expected": "dun ~ zat ~ dum ~ mok ~ zit ~ dum",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_repair_propagation_00002",
+      "truncated": true
+    },
+    {
+      "expected": "80 / 80 / 80 / 34 / 79 / 13",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 29,
+      "n_thinking_tokens": 509,
+      "parsed": "79 / 80 / 02 / 13 / 13 / 79",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_repair_propagation_00003",
+      "truncated": false
+    },
+    {
+      "expected": "pex · lor · vom · lur · lit",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 17,
+      "n_thinking_tokens": 655,
+      "parsed": "pex · lor · pex · lur · lit",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_repair_propagation_00004",
+      "truncated": false
+    },
+    {
+      "expected": "XII / I / XI / XII / II",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 15,
+      "n_thinking_tokens": 252,
+      "parsed": "XII / VIII / XI / XII / II",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_repair_propagation_00005",
+      "truncated": false
+    },
+    {
+      "expected": "XI ~ IX ~ VIII ~ V ~ VIII ~ XI",
+      "failed": false,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 17,
+      "n_thinking_tokens": 695,
+      "parsed": "XI ~ IX ~ VIII ~ V ~ VIII ~ XI",
+      "reasons": [],
+      "task_id": "uop_repair_propagation_00006",
+      "truncated": false
+    },
+    {
+      "expected": "57 · 24 · 91 · 12 · 57 · 91",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 29,
+      "n_thinking_tokens": 630,
+      "parsed": "57 · 57 · 12 · 30 · 57 · 12",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_repair_propagation_00007",
+      "truncated": false
+    },
+    {
+      "expected": "II / I / VII / VII / II",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 15,
+      "n_thinking_tokens": 270,
+      "parsed": "II / I / VII / VII / IX",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_repair_propagation_00008",
+      "truncated": false
+    },
+    {
+      "expected": "rum / pum / ven / nat / son / nir",
+      "failed": false,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 18,
+      "n_thinking_tokens": 386,
+      "parsed": "rum / pum / ven / nat / son / nir",
+      "reasons": [],
+      "task_id": "uop_repair_propagation_00009",
+      "truncated": false
+    },
+    {
+      "expected": "violet / ochre / jade / ochre / lilac",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 18,
+      "n_thinking_tokens": 303,
+      "parsed": "jade / ochre / lilac / violet / ochre",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_repair_propagation_00010",
+      "truncated": false
+    },
+    {
+      "expected": "M ~ M ~ J ~ C ~ A ~ J",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 17,
+      "n_thinking_tokens": 119,
+      "parsed": "A ~ M ~ J ~ C ~ A ~ J",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_repair_propagation_00011",
+      "truncated": false
+    },
+    {
+      "expected": "VIII / XII / V / VIII / VI / VII",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_repair_propagation_00012",
+      "truncated": true
+    },
+    {
+      "expected": "dom / dux / det / tix / kom",
+      "failed": false,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 17,
+      "n_thinking_tokens": 431,
+      "parsed": "dom / dux / det / tix / kom",
+      "reasons": [],
+      "task_id": "uop_repair_propagation_00013",
+      "truncated": false
+    },
+    {
+      "expected": "kav / ruz / hup / fal / nix / jor",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 20,
+      "n_thinking_tokens": 440,
+      "parsed": "cor / ruz / bex / kav / nix / fal",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_repair_propagation_00014",
+      "truncated": false
+    },
+    {
+      "expected": "35-57-91-35-34",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 21,
+      "n_thinking_tokens": 282,
+      "parsed": "35-57-91-35-35",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_repair_propagation_00015",
+      "truncated": false
+    },
+    {
+      "expected": "bex / dun / nix / gim / gim",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 16,
+      "n_thinking_tokens": 284,
+      "parsed": "bex / dun / kav / gim / gim",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_repair_propagation_00016",
+      "truncated": false
+    },
+    {
+      "expected": "12-02-13-57-24-12",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 24,
+      "n_thinking_tokens": 531,
+      "parsed": "12-79-13-57-24-12",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_repair_propagation_00017",
+      "truncated": false
+    },
+    {
+      "expected": "24 / 79 / 02 / 91 / 02",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 25,
+      "n_thinking_tokens": 639,
+      "parsed": "02 / 79 / 68 / 24 / 68",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_repair_propagation_00018",
+      "truncated": false
+    },
+    {
+      "expected": "80 / 57 / 46 / 13 / 13",
+      "failed": false,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 25,
+      "n_thinking_tokens": 536,
+      "parsed": "80 / 57 / 46 / 13 / 13",
+      "reasons": [],
+      "task_id": "uop_repair_propagation_00019",
+      "truncated": false
+    },
+    {
+      "expected": "12 / 79 / 35 / 57 / 12",
+      "failed": false,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 25,
+      "n_thinking_tokens": 804,
+      "parsed": "12 / 79 / 35 / 57 / 12",
+      "reasons": [],
+      "task_id": "uop_repair_propagation_00020",
+      "truncated": false
+    },
+    {
+      "expected": "02-12-46-80-02",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 21,
+      "n_thinking_tokens": 384,
+      "parsed": "02-12-46-02-02",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_repair_propagation_00021",
+      "truncated": false
+    },
+    {
+      "expected": "80 ~ 80 ~ 68 ~ 13 ~ 79",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_repair_propagation_00022",
+      "truncated": true
+    },
+    {
+      "expected": "79 · 13 · 79 · 34 · 46",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 25,
+      "n_thinking_tokens": 422,
+      "parsed": "79 · 91 · 79 · 34 · 46",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_repair_propagation_00023",
+      "truncated": false
+    },
+    {
+      "expected": "W ~ K ~ W ~ K ~ M",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 15,
+      "n_thinking_tokens": 226,
+      "parsed": "K ~ W ~ W ~ K ~ M",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_repair_propagation_00024",
+      "truncated": false
+    },
+    {
+      "expected": "34-79-02-68-79",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 21,
+      "n_thinking_tokens": 406,
+      "parsed": "34-13-02-68-79",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_repair_propagation_00025",
+      "truncated": false
+    },
+    {
+      "expected": "ten ~ sar ~ ten ~ sar ~ mem",
+      "failed": false,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 15,
+      "n_thinking_tokens": 206,
+      "parsed": "ten ~ sar ~ ten ~ sar ~ mem",
+      "reasons": [],
+      "task_id": "uop_repair_propagation_00026",
+      "truncated": false
+    },
+    {
+      "expected": "bat · tuk · bok · kun · bok · dik",
+      "failed": false,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 17,
+      "n_thinking_tokens": 431,
+      "parsed": "bat · tuk · bok · kun · bok · dik",
+      "reasons": [],
+      "task_id": "uop_repair_propagation_00027",
+      "truncated": false
+    },
+    {
+      "expected": "V · XII · X · IX · I",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 15,
+      "n_thinking_tokens": 331,
+      "parsed": "XII · VI · IV · IX · II",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_repair_propagation_00028",
+      "truncated": false
+    },
+    {
+      "expected": "VII · V · I · VII · III",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 15,
+      "n_thinking_tokens": 107,
+      "parsed": "VII · V · I · XII · III",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_repair_propagation_00029",
+      "truncated": false
+    },
+    {
+      "expected": "II / III / II / X / I / X",
+      "failed": false,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 17,
+      "n_thinking_tokens": 429,
+      "parsed": "II / III / II / X / I / X",
+      "reasons": [],
+      "task_id": "uop_repair_propagation_00030",
+      "truncated": false
+    },
+    {
+      "expected": "amber ~ ochre ~ amber ~ ochre ~ indigo",
+      "failed": false,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 18,
+      "n_thinking_tokens": 852,
+      "parsed": "amber ~ ochre ~ amber ~ ochre ~ indigo",
+      "reasons": [],
+      "task_id": "uop_repair_propagation_00031",
+      "truncated": false
+    },
+    {
+      "expected": "V / VIII / II / I / XII / VII",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 17,
+      "n_thinking_tokens": 353,
+      "parsed": "I / IX / II / VIII / VII / V",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_repair_propagation_00032",
+      "truncated": false
+    },
+    {
+      "expected": "VIII ~ VIII ~ IX ~ IV ~ II",
+      "failed": false,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 15,
+      "n_thinking_tokens": 423,
+      "parsed": "VIII ~ VIII ~ IX ~ IV ~ II",
+      "reasons": [],
+      "task_id": "uop_repair_propagation_00033",
+      "truncated": false
+    },
+    {
+      "expected": "13 / 24 / 24 / 57 / 13 / 80",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 29,
+      "n_thinking_tokens": 378,
+      "parsed": "13 / 24 / 02 / 57 / 13 / 80",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_repair_propagation_00034",
+      "truncated": false
+    },
+    {
+      "expected": "13 · 13 · 68 · 13 · 91 · 80",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 29,
+      "n_thinking_tokens": 969,
+      "parsed": "13 · 13 · 13 · 80 · 13 · 68",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_repair_propagation_00035",
+      "truncated": false
+    },
+    {
+      "expected": "kav ~ fal ~ fal ~ hup ~ dun ~ pov",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 18,
+      "n_thinking_tokens": 247,
+      "parsed": "kav ~ pov ~ fal ~ hup ~ dun ~ pov",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_repair_propagation_00036",
+      "truncated": false
+    },
+    {
+      "expected": "pot-dum-dum-dum-tur-rin",
+      "failed": false,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 17,
+      "n_thinking_tokens": 690,
+      "parsed": "pot-dum-dum-dum-tur-rin",
+      "reasons": [],
+      "task_id": "uop_repair_propagation_00037",
+      "truncated": false
+    },
+    {
+      "expected": "A-C-H-W-A-C",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_repair_propagation_00038",
+      "truncated": true
+    },
+    {
+      "expected": "80 · 13 · 46 · 24 · 80 · 24",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_repair_propagation_00039",
+      "truncated": true
+    },
+    {
+      "expected": "nix / cor / nix / nix / nix / kav",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 20,
+      "n_thinking_tokens": 269,
+      "parsed": "gim / cor / nix / nix / nix / kav",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_repair_propagation_00040",
+      "truncated": false
+    },
+    {
+      "expected": "mex / tax / dox / nar / nar",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 16,
+      "n_thinking_tokens": 371,
+      "parsed": "gix / nar / tax / nar / nar",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_repair_propagation_00041",
+      "truncated": false
+    },
+    {
+      "expected": "umber-teal-lilac-amber-ochre",
+      "failed": false,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 18,
+      "n_thinking_tokens": 682,
+      "parsed": "umber-teal-lilac-amber-ochre",
+      "reasons": [],
+      "task_id": "uop_repair_propagation_00042",
+      "truncated": false
+    },
+    {
+      "expected": "gut-guk-nit-gan-guk-bon",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_repair_propagation_00043",
+      "truncated": true
+    },
+    {
+      "expected": "XI-IV-IX-X-VIII",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_repair_propagation_00044",
+      "truncated": true
+    },
+    {
+      "expected": "dux ~ rur ~ gin ~ tim ~ dor",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 16,
+      "n_thinking_tokens": 88,
+      "parsed": "dor ~ dux ~ tim ~ gin ~ tim",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_repair_propagation_00045",
+      "truncated": false
+    },
+    {
+      "expected": "nax ~ vir ~ dor ~ tuk ~ zan ~ dor",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 17,
+      "n_thinking_tokens": 329,
+      "parsed": "dor ~ vir ~ vir ~ tuk ~ zan ~ dor",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_repair_propagation_00046",
+      "truncated": false
+    },
+    {
+      "expected": "J-H-R-R-R-C",
+      "failed": true,
+      "failure_class": "repair_propagation",
+      "n_answer_tokens": 12,
+      "n_thinking_tokens": 290,
+      "parsed": "J-H-R-R-M-C",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_repair_propagation_00047",
+      "truncated": false
+    },
+    {
+      "expected": "pov-nix-jor-ruz-lem",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 15,
+      "n_thinking_tokens": 138,
+      "parsed": "fal-dun-lem-ruz-lem",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_state_transition_00000",
+      "truncated": false
+    },
+    {
+      "expected": "ochre ~ pearl ~ teal ~ ochre ~ teal ~ lilac",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 21,
+      "n_thinking_tokens": 148,
+      "parsed": "ochre ~ pearl ~ teal ~ ochre ~ ochre ~ lilac",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_state_transition_00001",
+      "truncated": false
+    },
+    {
+      "expected": "35 · 79 · 80 · 13 · 34 · 80 · 34",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_state_transition_00002",
+      "truncated": true
+    },
+    {
+      "expected": "P / T / D / C / C / F",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 17,
+      "n_thinking_tokens": 242,
+      "parsed": "A / T / F / F / T / A",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_state_transition_00003",
+      "truncated": false
+    },
+    {
+      "expected": "tek / sim / sam / som / sem / gut / mar",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 20,
+      "n_thinking_tokens": 193,
+      "parsed": "kax / gut / kim / sim / mar / sim / kim",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_state_transition_00004",
+      "truncated": false
+    },
+    {
+      "expected": "kit · kit · rak · per · dex · ran",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 17,
+      "n_thinking_tokens": 123,
+      "parsed": "tin · tin · per · bin · ran · gir",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_state_transition_00005",
+      "truncated": false
+    },
+    {
+      "expected": "III · IX · XI · III · XII",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 15,
+      "n_thinking_tokens": 204,
+      "parsed": "XI · X · XII · III · IX",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_state_transition_00006",
+      "truncated": false
+    },
+    {
+      "expected": "III · X · III · VIII · III",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 15,
+      "n_thinking_tokens": 261,
+      "parsed": "VI · IX · VIII · IX · III",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_state_transition_00007",
+      "truncated": false
+    },
+    {
+      "expected": "02-46-57-02-34-57",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 24,
+      "n_thinking_tokens": 229,
+      "parsed": "12-57-34-79-57-12",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_state_transition_00008",
+      "truncated": false
+    },
+    {
+      "expected": "68-13-68-79-13",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 21,
+      "n_thinking_tokens": 368,
+      "parsed": "68-12-35-79-35",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_state_transition_00009",
+      "truncated": false
+    },
+    {
+      "expected": "35 / 57 / 35 / 35 / 79 / 79 / 91",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_state_transition_00010",
+      "truncated": true
+    },
+    {
+      "expected": "IX / V / X / III / V",
+      "failed": false,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 15,
+      "n_thinking_tokens": 125,
+      "parsed": "IX / V / X / III / V",
+      "reasons": [],
+      "task_id": "uop_state_transition_00011",
+      "truncated": false
+    },
+    {
+      "expected": "79 · 35 · 57 · 57 · 79 · 24",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_state_transition_00012",
+      "truncated": true
+    },
+    {
+      "expected": "IV · III · V · VIII · V · II · II",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_state_transition_00013",
+      "truncated": true
+    },
+    {
+      "expected": "lilac · indigo · ochre · umber · cobalt · ochre · rust",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_state_transition_00014",
+      "truncated": true
+    },
+    {
+      "expected": "XI-III-I-V-X-I-I",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_state_transition_00015",
+      "truncated": true
+    },
+    {
+      "expected": "91 ~ 80 ~ 46 ~ 12 ~ 24 ~ 24 ~ 13",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 27,
+      "n_thinking_tokens": 252,
+      "parsed": "13 46 80 91 12 02 24",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_state_transition_00016",
+      "truncated": false
+    },
+    {
+      "expected": "A-C-C-C-R",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 19,
+      "n_thinking_tokens": 163,
+      "parsed": "C-C-C-R-C-P-J-K-R-D-C-F-A",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_state_transition_00017",
+      "truncated": false
+    },
+    {
+      "expected": "kur-dun-kur-mek-lur",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 15,
+      "n_thinking_tokens": 304,
+      "parsed": "kan-lur-kan-mek-lur",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_state_transition_00018",
+      "truncated": false
+    },
+    {
+      "expected": "F / W / D / W / K / H",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_state_transition_00019",
+      "truncated": true
+    },
+    {
+      "expected": "pearl / pearl / violet / violet / rust / jade / pearl",
+      "failed": false,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 19,
+      "n_thinking_tokens": 259,
+      "parsed": "pearl / pearl / violet / violet / rust / jade / pearl",
+      "reasons": [],
+      "task_id": "uop_state_transition_00020",
+      "truncated": false
+    },
+    {
+      "expected": "J / K / H / H / H",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 15,
+      "n_thinking_tokens": 138,
+      "parsed": "W / J / J / J / P",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_state_transition_00021",
+      "truncated": false
+    },
+    {
+      "expected": "R ~ J ~ W ~ R ~ A",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_state_transition_00022",
+      "truncated": true
+    },
+    {
+      "expected": "cor ~ fal ~ gim ~ bex ~ pov ~ fal ~ hup",
+      "failed": false,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 21,
+      "n_thinking_tokens": 166,
+      "parsed": "cor ~ fal ~ gim ~ bex ~ pov ~ fal ~ hup",
+      "reasons": [],
+      "task_id": "uop_state_transition_00023",
+      "truncated": false
+    },
+    {
+      "expected": "ochre-amber-teal-indigo-fawn-rust",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 18,
+      "n_thinking_tokens": 319,
+      "parsed": "teal-ochre-violet-indigo-teal-indigo",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_state_transition_00024",
+      "truncated": false
+    },
+    {
+      "expected": "sum / gir / gir / zek / zet / dox / dox",
+      "failed": false,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 22,
+      "n_thinking_tokens": 193,
+      "parsed": "sum / gir / gir / zek / zet / dox / dox",
+      "reasons": [],
+      "task_id": "uop_state_transition_00025",
+      "truncated": false
+    },
+    {
+      "expected": "rot / nen / rot / rot / vet / vet",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 17,
+      "n_thinking_tokens": 159,
+      "parsed": "kim / but / kim / kim / vet / vet",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_state_transition_00026",
+      "truncated": false
+    },
+    {
+      "expected": "pearl-jade-umber-amber-lilac-lilac-pearl",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 22,
+      "n_thinking_tokens": 189,
+      "parsed": "jade-ochre-lilac-pearl-teal-teal-jade",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_state_transition_00027",
+      "truncated": false
+    },
+    {
+      "expected": "R ~ J ~ R ~ J ~ J ~ T ~ C",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 19,
+      "n_thinking_tokens": 165,
+      "parsed": "R ~ J ~ J ~ T ~ C ~ R ~ J",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_state_transition_00028",
+      "truncated": false
+    },
+    {
+      "expected": "gek · tar · nen · guk · nen · nen",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 17,
+      "n_thinking_tokens": 180,
+      "parsed": "kir · ran · sir · mut · ran · ran",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_state_transition_00029",
+      "truncated": false
+    },
+    {
+      "expected": "C ~ R ~ J ~ C ~ J ~ R ~ R",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 19,
+      "n_thinking_tokens": 149,
+      "parsed": "R ~ R ~ J ~ C ~ C ~ R ~ R",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_state_transition_00030",
+      "truncated": false
+    },
+    {
+      "expected": "80 / 02 / 24 / 91 / 02 / 35",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 29,
+      "n_thinking_tokens": 208,
+      "parsed": "80 / 02 / 24 / 35 / 91 / 68",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_state_transition_00031",
+      "truncated": false
+    },
+    {
+      "expected": "kur · sur · lat · kur · sur · nan · zer",
+      "failed": false,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 19,
+      "n_thinking_tokens": 687,
+      "parsed": "kur · sur · lat · kur · sur · nan · zer",
+      "reasons": [],
+      "task_id": "uop_state_transition_00032",
+      "truncated": false
+    },
+    {
+      "expected": "M / H / J / M / H / C",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_state_transition_00033",
+      "truncated": true
+    },
+    {
+      "expected": "P ~ W ~ J ~ K ~ H",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 15,
+      "n_thinking_tokens": 149,
+      "parsed": "P ~ H ~ D ~ W ~ F",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_state_transition_00034",
+      "truncated": false
+    },
+    {
+      "expected": "pin ~ ron ~ vok ~ sun ~ nek",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 16,
+      "n_thinking_tokens": 182,
+      "parsed": "gox ~ lok ~ ron ~ sun ~ nek",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_state_transition_00035",
+      "truncated": false
+    },
+    {
+      "expected": "J / F / R / R / W",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 0,
+      "n_thinking_tokens": 1024,
+      "parsed": null,
+      "reachable_prefix": true,
+      "reasons": [
+        "generation_cap",
+        "missing_answer"
+      ],
+      "task_id": "uop_state_transition_00036",
+      "truncated": true
+    },
+    {
+      "expected": "vat-nor-tun-tak-nor",
+      "failed": false,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 15,
+      "n_thinking_tokens": 308,
+      "parsed": "vat-nor-tun-tak-nor",
+      "reasons": [],
+      "task_id": "uop_state_transition_00037",
+      "truncated": false
+    },
+    {
+      "expected": "nan · vun · nan · mat · nan · nan · gum",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 20,
+      "n_thinking_tokens": 596,
+      "parsed": "kim · vun · kim · kum · per · kim · per",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_state_transition_00038",
+      "truncated": false
+    },
+    {
+      "expected": "K-W-W-A-A-W",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 12,
+      "n_thinking_tokens": 138,
+      "parsed": "K-J-A-P-W-M",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_state_transition_00039",
+      "truncated": false
+    },
+    {
+      "expected": "fal / bex / cor / kav / fal / cor / nix",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 22,
+      "n_thinking_tokens": 262,
+      "parsed": "lem / fal / nix / bex / fal / cor / bex",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_state_transition_00040",
+      "truncated": false
+    },
+    {
+      "expected": "cor-jor-lem-hup-hup",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 16,
+      "n_thinking_tokens": 470,
+      "parsed": "jor-ruz-hup-lem-lem",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_state_transition_00041",
+      "truncated": false
+    },
+    {
+      "expected": "fawn · ochre · fawn · fawn · pearl",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 15,
+      "n_thinking_tokens": 195,
+      "parsed": "cobalt umber pearl fawn cobalt",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_state_transition_00042",
+      "truncated": false
+    },
+    {
+      "expected": "V · IX · XII · XII · I · V · XII",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 19,
+      "n_thinking_tokens": 264,
+      "parsed": "V · IX · XII · XII · XII · I · XII",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_state_transition_00043",
+      "truncated": false
+    },
+    {
+      "expected": "46-80-34-35-80-46-24",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 27,
+      "n_thinking_tokens": 231,
+      "parsed": "80-46-02-91-12-91-02",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_state_transition_00044",
+      "truncated": false
+    },
+    {
+      "expected": "net-ror-lon-kar-net-net",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 16,
+      "n_thinking_tokens": 184,
+      "parsed": "kom-ror-lon-kar-net-vat",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_state_transition_00045",
+      "truncated": false
+    },
+    {
+      "expected": "gim · nix · ruz · gim · nix · fal",
+      "failed": false,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 20,
+      "n_thinking_tokens": 275,
+      "parsed": "gim · nix · ruz · gim · nix · fal",
+      "reasons": [],
+      "task_id": "uop_state_transition_00046",
+      "truncated": false
+    },
+    {
+      "expected": "T ~ H ~ C ~ A ~ M ~ H",
+      "failed": true,
+      "failure_class": "state_transition",
+      "n_answer_tokens": 17,
+      "n_thinking_tokens": 199,
+      "parsed": "H ~ M ~ H ~ C ~ K ~ T",
+      "reachable_prefix": true,
+      "reasons": [
+        "wrong_answer"
+      ],
+      "task_id": "uop_state_transition_00047",
+      "truncated": false
+    }
+  ]
+}

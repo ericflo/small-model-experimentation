@@ -17,7 +17,7 @@ omitted_artifacts:
     reason: "registered merged parent is external above; future adapters/checkpoints remain large and gitignored"
 reproducibility:
   smoke_command: "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/run.py --smoke"
-  full_command: "next stage only: scripts/run.py --stage mine-prefixes; requires committed parent-rollout receipt"
+  full_command: "verification only: scripts/mine_prefix_repairs.py --check; no training stage is authorized before exact-token materialization and second review"
   required_external_artifacts:
     - "large_artifacts/qwen35_4b_universal_close_weight_token_match/adapters/close_xi"
     - "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/merged/close_xi_parent"
@@ -29,5 +29,8 @@ notes: >-
   merged-parent weight/receipt hashes are 4933f2dd...eb373 / 1fbc84b3...5557.
   The tracked 288-row parent rollout, metadata, normalized log, and receipt hashes are
   8010632f...3b17f / 9fe81276...664 / ed0d4fc4...26b7 / c6b98b79...74fa.
-  Recovery authenticated completed atomic output and reran no generation. No failure
-  grading, adapter training, capability, or benchmark receipt exists.
+  Recovery authenticated completed atomic output and reran no generation. Model-free
+  mining found 230 reachable failures, satisfied all six quotas at 10 each, and wrote
+  inventory/source hashes 7230af52...dfe7 / 30141538...d84b8. The selected 60
+  prefixes contain 47123 masked tokens. No exact-token stream, adapter training,
+  capability, or benchmark receipt exists.

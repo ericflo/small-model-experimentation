@@ -87,3 +87,30 @@ Next: publish and CI-verify this merge receipt, then run only `collect-parent`.
 Next: publish and CI-verify this rollout checkpoint, then run only the model-free
 `mine-prefixes` stage and preserve either the 60-repair inventory or the frozen
 insufficient-quota negative.
+
+## 2026-07-14 — Model-free prefix quota satisfied
+
+- Published rebased parent-rollout commit `dbd433e8` directly to `main`; Validate
+  Repository run `29346896317` and Publish Research Site run `29346896827` both
+  passed.
+- From that clean aligned checkpoint, ran only `--stage mine-prefixes`. The miner
+  authenticated the committed rollout receipt, metadata, runner, task source, and
+  hidden-field boundary, then made zero model calls.
+- Graded 288 experiment-owned procedural rows: 230 met at least one frozen failure
+  condition, 58 passed all registered conditions, and all 230 failed rows exposed a
+  reachable clean thinking-channel prefix.
+- Reachable failures for bounded induction, commit serialization, declaration /
+  operation, probe scoring, repair propagation, and state transition were
+  46/48/35/24/36/41. Every preregistered quota of ten passed without borrowing or
+  threshold changes; exactly 60 repair rows were selected.
+- Preserved inventory/source hashes `7230af52...dfe7` / `30141538...d84b8`.
+  Selected prefixes contain 47,123 masked tokens total (33 minimum, 785.383 mean,
+  1,024 maximum). Boundaries were 42 generation caps, ten first tokens beyond the
+  commit budget, and eight answer boundaries.
+- The severe-prefix mix is a compute-review risk, not a post-hoc reason to change
+  selection. No exact-token stream, adapter training, capability measurement, local
+  event, merge, or benchmark event ran.
+
+Next: publish and CI-verify this failure-inventory checkpoint. Then materialize
+exact-token candidate/control streams and perform the second adversarial compute
+review in a separate model-free checkpoint; do not expose training before it passes.
