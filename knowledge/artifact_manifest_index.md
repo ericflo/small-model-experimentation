@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 230
-- Manifest files: 548
+- Experiments with manifests: 231
+- Manifest files: 550
 
 ## Manifest Types
 
@@ -12,9 +12,9 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `checkpoint` | 83 |
 | `dataset` | 132 |
 | `large-artifact` | 50 |
-| `other` | 79 |
+| `other` | 80 |
 | `run-data` | 101 |
-| `standard-artifact` | 103 |
+| `standard-artifact` | 104 |
 
 ## Manifests
 
@@ -301,6 +301,8 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_universal_state_table_compiler_token_match` | `other` | [manifest](../experiments/qwen35_4b_universal_state_table_compiler_token_match/data/predecessor_stream_manifest.json) |
 | `qwen35_4b_universal_state_table_compiler_token_match` | `other` | [manifest](../experiments/qwen35_4b_universal_state_table_compiler_token_match/data/stream_manifest.json) |
 | `qwen35_4b_universal_state_table_compiler_token_match` | `standard-artifact` | [manifest](../experiments/qwen35_4b_universal_state_table_compiler_token_match/reports/artifact_manifest.yaml) |
+| `qwen35_4b_universal_successful_sibling_target_match` | `other` | [manifest](../experiments/qwen35_4b_universal_successful_sibling_target_match/data/collection_task_manifest.json) |
+| `qwen35_4b_universal_successful_sibling_target_match` | `standard-artifact` | [manifest](../experiments/qwen35_4b_universal_successful_sibling_target_match/reports/artifact_manifest.yaml) |
 | `qwen35_4b_unsaturated_frontier_active_bridge` | `dataset` | [manifest](../experiments/qwen35_4b_unsaturated_frontier_active_bridge/data/adaptive/dataset_manifest.json) |
 | `qwen35_4b_unsaturated_frontier_active_bridge` | `dataset` | [manifest](../experiments/qwen35_4b_unsaturated_frontier_active_bridge/data/dataset_manifest.json) |
 | `qwen35_4b_unsaturated_frontier_active_bridge` | `dataset` | [manifest](../experiments/qwen35_4b_unsaturated_frontier_active_bridge/data/seed_mined/dataset_manifest.json) |

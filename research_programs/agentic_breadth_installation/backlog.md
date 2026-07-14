@@ -259,14 +259,21 @@
   `4c381fbd...6759`, and aggregate seed 78140 remains sealed. Retire another
   hand-authored oracle restart surface: it improved termination while losing semantic
   target competence.
-- Next result-separated universal successor: mine fresh procedural tasks where the
-  deployed parent fails greedily but produces at least one short verifier-correct
-  sibling under prospectively fixed same-model sampling. Distill those
-  policy-supported successful sibling trajectories from the original prompt against
-  exact-exposure replay, with fresh collection/training/local/aggregate seeds. Include
-  an availability gate per skill and a matched-compute sample-more ceiling; do not
-  fall back to oracle traces on tasks with no successful sibling, lower the unchanged
-  local gate, or reuse this result directory.
+- Active result-separated universal successor:
+  `qwen35_4b_universal_successful_sibling_target_match` now claims the queued
+  policy-supported test. Its model-free freeze uses 624 fresh tasks (48 per each of
+  13 skills), greedy seed 66115, then a separately checkpointed same-parent `n=16`
+  event at seed 66116 only on committed hard failures. Four naturally closed,
+  verifier-correct tasks with at most 768 thinking tokens are mandatory per skill;
+  shortest qualified siblings win and oracle fallback is forbidden. Construction/
+  selection/training/local/aggregate seeds are 77115/55115/49/88011/78141. Source,
+  greedy-input, and design receipt hashes are `9071ce57...603e9` /
+  `313eb53c...2a53` / `2be0ac30...a0bc6`. Review verdict
+  `PASS_GREEDY_COLLECTION` authorizes one greedy event only after this design is
+  published green. Exact-exposure replay, the unchanged local gate, all-family
+  aggregate lift, higher-tier confirmation, and matched-compute sample-more remain
+  mandatory downstream; close this record immediately if either availability gate
+  fails.
 
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.

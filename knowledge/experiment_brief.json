@@ -7701,6 +7701,44 @@
     }
    ]
   },
+  "qwen35_4b_universal_successful_sibling_target_match": {
+   "verdict_tag": "Design frozen; first parent run pending",
+   "concept_primer": "When the model misses a fresh problem on its first try but solves it on another sampled try, that successful attempt may be a better lesson than a hand-written solution because it already uses reasoning the model can produce.",
+   "plain_question": "Can the model learn broadly useful behavior from its own shortest correct sampled attempts on fresh problems it first gets wrong?",
+   "plain_answer": "The test is ready but has not called the model yet. It freezes 624 fresh problems across 13 skills, one first-attempt run, and then 16 sampled attempts only for those first-attempt failures. Training may proceed only if every skill yields four short correct attempts from the same model.",
+   "why_it_matters": "The previous hand-written restart lessons made answers shorter and cleaner but less correct. This test asks whether using only solutions the model can already generate avoids that mismatch while still moving its usual first answer.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Fresh design pool",
+     "value": "624 tasks",
+     "sub": "48 for each of 13 skills"
+    },
+    {
+     "label": "Sampled tries per failed task",
+     "value": "16",
+     "sub": "fixed before the first model run"
+    },
+    {
+     "label": "Required supported lessons",
+     "value": "52",
+     "sub": "four short correct tasks per skill"
+    },
+    {
+     "label": "Model events completed",
+     "value": "zero",
+     "sub": "only model-free design evidence exists"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Only intake, fresh data, and review are complete",
+     "chart_read": "The groups follow the planned checkpoints from intake through two collection runs, training, local testing, and broad testing. A bar at one means that checkpoint is complete.",
+     "chart_takeaway": "The first three checkpoints are complete. Every model-facing stage remains gated, beginning with one authorized first-attempt collection."
+    }
+   ]
+  },
   "qwen35_4b_universal_replay_anchor": {
    "verdict_tag": "Designed mix loses; replay-only sets a stronger anchor",
    "concept_primer": "This experiment kept the model practicing broad tasks while adding a smaller set of abstract lessons. A replay-only comparison received the same number of updates, revealing whether any gain came from the designed lessons or simply from continuing broad practice.",

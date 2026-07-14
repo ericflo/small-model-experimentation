@@ -48490,6 +48490,39 @@
     }
    ]
   },
+  "qwen35_4b_universal_successful_sibling_target_match": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Successful-sibling design is frozen before any model event",
+     "categories": [
+      "intake",
+      "fresh source",
+      "design review",
+      "greedy collection",
+      "failure freeze",
+      "sibling collection",
+      "sibling selection",
+      "exposure freeze",
+      "paired training",
+      "local gate",
+      "broad gate"
+     ],
+     "series": [
+      {
+       "label": "completed checkpoint",
+       "values": [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]
+      }
+     ],
+     "x_label": "preregistered experiment stage",
+     "y_label": "completion indicator",
+     "y_format": "integer",
+     "note": "Intake, the 624-task source, and adversarial design review are complete. The first greedy collection is the only authorized model event; sibling sampling, selection, training, evaluation, and benchmark access remain gated.",
+     "source": "experiments/qwen35_4b_universal_successful_sibling_target_match/reports/report.md"
+    }
+   ]
+  },
   "qwen35_4b_counterfactual_plan_reflection_transfer": {
    "charts": [
     {
