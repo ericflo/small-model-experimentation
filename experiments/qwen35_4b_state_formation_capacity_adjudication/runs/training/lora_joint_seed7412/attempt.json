@@ -1,0 +1,42 @@
+{
+  "attempt_authorization": {
+    "attempt_identity_sha256": "8a5277f65332e458e28fced658c028174e1a72c65db3c3b924b6b270e8390a6e",
+    "attempt_index": 1,
+    "attempt_kind": "training",
+    "canonical_paths": [
+      "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/lora_joint_seed7412",
+      "experiments/qwen35_4b_state_formation_capacity_adjudication/runs/training/lora_joint_seed7412"
+    ],
+    "cell": {
+      "capacity": "lora",
+      "objective": "joint",
+      "seed": 7412,
+      "slug": "lora_joint_seed7412",
+      "stage": "A"
+    },
+    "context": {
+      "branch_authorization_lineage": null,
+      "prior_training_barrier_identity_sha256s": [],
+      "setup_barrier_identity_sha256": "eb1fa85a8cee3ee08aa47df8d23d0d97fe25840cb8a5619278c5c8c5103dbc77",
+      "training_launch_peer_vector": [
+        {
+          "cell": "lora_joint_seed7411",
+          "state": "COMPLETE"
+        },
+        {
+          "cell": "lora_joint_seed7413",
+          "state": "ABSENT"
+        }
+      ],
+      "training_launch_preflight_identity_sha256": "917216785fbfeb670689ebf608f1098ad1316335854f5ca397f29d2f7b9bdd3a"
+    },
+    "replay_archive": null,
+    "schema_version": 1,
+    "status": "ATTEMPT_AUTHORIZED"
+  },
+  "attempt_identity_sha256": "8a5277f65332e458e28fced658c028174e1a72c65db3c3b924b6b270e8390a6e",
+  "attempt_kind": "training",
+  "marker_identity_sha256": "bc25fc91667c081bcdee7a6cdfbc155ca6c0b21b0452cc5554cef24987c5d851",
+  "schema_version": 1,
+  "status": "ATTEMPT_OUTPUT_CREATED"
+}

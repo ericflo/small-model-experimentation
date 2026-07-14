@@ -44,7 +44,7 @@ external_artifacts:
   - name: "fixed-final LoRA joint checkpoints"
     storage: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/lora_joint_seed{7411,7412,7413}/"
     required_for: "primary LoRA state-formation adjudication and intact/disabled reevaluation"
-    checksum: "seed 7411 realized: run SHA256 19cac1e2ee4a4dbcb533630eb5687915f9709e264e2160c9c855acd1c247aa60 / run identity 6db22c2f736c7ef4e072894bbe87bafb03ad25e68a82c3241653b0f9655f81f1 / checkpoint identity 174f3c695d92f8cb981095c68695f1e0b859dca45398b0e6482c6c0974e4cf9e / adaptation state 9af359637965301597c1385ce3034c8a2436f9cec690628a988b441b06b9e71f / loop state 333f8c444fa5cab73bb47fcbfb3fcc3babb048071bba62481ea69816969850a5; seeds 7412 and 7413 not yet created"
+    checksum: "seed 7411 realized: run SHA256 19cac1e2ee4a4dbcb533630eb5687915f9709e264e2160c9c855acd1c247aa60 / run identity 6db22c2f736c7ef4e072894bbe87bafb03ad25e68a82c3241653b0f9655f81f1 / checkpoint identity 174f3c695d92f8cb981095c68695f1e0b859dca45398b0e6482c6c0974e4cf9e / adaptation state 9af359637965301597c1385ce3034c8a2436f9cec690628a988b441b06b9e71f / loop state 333f8c444fa5cab73bb47fcbfb3fcc3babb048071bba62481ea69816969850a5; seed 7412 realized: run SHA256 0bb1680e7f0032b633a0548fc88a0d2ff4032b0d3aca7ab801cc7bff69f81e05 / run identity f7d049c6ceff36a52a108c236ac6cb42070c8d24b55918dc31feb5efcb2fd0ca / checkpoint identity 90750967192e4bd394a08e85afbbf969b363ccfa1cb6fa961ff45a0af9550324 / adaptation state cba9fb8046c73c498b0191ab88d80b77486f93a9dca4e780c86bbd2111978c74 / loop state 03f4b811bec298b61367f9a649ad914703ded06089b3cd21de6fd67d2a788076; seed 7413 not yet created"
     regenerate: "run the three LoRA joint cells only after setup gates pass; never overwrite a realized attempt"
   - name: "conditional LoRA state-only checkpoints"
     storage: "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/lora_state_only_seed{7411,7412,7413}/"
@@ -88,6 +88,7 @@ reproducibility:
     - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed7413.pt"
     - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/initialization_seed7413.pt.json"
     - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/lora_joint_seed7411/"
+    - "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/lora_joint_seed7412/"
 notes: >-
   The frozen design receipt remains authoritative. Setup artifacts produced under source digests
   903f1914, 9fd420f5, and 3baa7b53 are invalid and preserved in separate content-hashed external

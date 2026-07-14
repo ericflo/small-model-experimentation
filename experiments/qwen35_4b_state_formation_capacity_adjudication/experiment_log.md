@@ -789,6 +789,31 @@ Only seed-7411 training-cell validation, commit, push, and workflow verification
 After both workflows pass, run Stage-A seed 7412. Evaluation, analysis, and conditional branches
 remain blocked on the complete Stage-A barrier.
 
+## 2026-07-14 — Stage-A seed-7412 LoRA joint training completes
+
+- Seed-7411 training commit `72d526d8` passed both required workflows before the second scientific
+  cell began. Source v11 remained exactly `5a8ed26d…6666`, local and remote `main` were identical,
+  and the sole RTX 6000 Ada was idle.
+- The authorized seed-7412 attempt reached terminal `COMPLETE` without retry or recovery. Exactly
+  1,500 fixed updates ran in 9,202.148542404175 seconds. Interim scientific metric values were not
+  inspected during execution.
+- The production classifier reopens the cell as `COMPLETE` with no errors. Run SHA-256 is
+  `0bb1680e…1e05`, run identity `f7d049c6…d0ca`, checkpoint-metadata SHA-256
+  `1b588d9f…e9fe`, and checkpoint identity `90750967…0324`.
+- Adaptation-state SHA-256 is `cba9fb80…8c74`; loop-state SHA-256 is `03f4b811…8076`; optimizer
+  journal SHA-256 is `32109aa7…948a`; metrics SHA-256 is `ce8e7d32…348a`. Each of the four tracked
+  mirrors is byte-identical to but inode-distinct from its external counterpart.
+- All 1,500 optimizer rows report finite gradients and zero base trainable parameters. The cell binds
+  setup barrier `eb1fa85a…bc77`, seed-7412 G0/control, source v11, and the exact initialization. It
+  opened only train, no benchmark or sealed contrast. It does not authorize evaluation until all
+  three Stage-A training cells are complete. The realized-artifact suite passes 363/363.
+
+## Current authorization
+
+Only seed-7412 training-cell validation, commit, push, and workflow verification are authorized.
+After both workflows pass, run Stage-A seed 7413. Evaluation, analysis, and conditional branches
+remain blocked on the complete Stage-A barrier.
+
 ## 2026-07-13 — source-v9 seed-7411 G0 stops before model load; cache proof repaired
 
 - Non-model setup commit `ff4a8b9b` passed both repository workflows before the exact seed-7411 LoRA
