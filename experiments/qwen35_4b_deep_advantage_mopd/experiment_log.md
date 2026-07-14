@@ -446,3 +446,19 @@
   regression, issuing fresh no-clobber authorization/admission, and rerunning
   both sealed blocks from an empty current tree. This is evidence-pipeline
   failure, not capability evidence or a scientific stop.
+
+## 2026-07-14 — ordinary-output journal schema repaired
+
+- The strict call-journal validator remains unchanged. The ordinary runner
+  path now emits `retained_thinking_token_ids: []`, exactly matching the
+  scoring harness's pre-existing projection for a path that never constructs a
+  forced-close continuation. The corrected runner hashes to
+  `1e065b9c3718e4d2353dc3215928b936ed3fdaeb0d1e04ce96f215d4c9331054`.
+- The change does not alter model calls, sampled IDs, decoded text, prompt
+  bytes, task seeds, token budgets, answer/action extraction, scores, engine
+  geometry, or model artifacts. A direct regression invokes the naturally
+  closed budget path and requires both retained and injected evidence fields.
+- All 212 experiment tests pass, including the full call-journal semantic
+  replay suite. Attempt 1 remains terminal and no archived byte will be reused.
+  A fresh no-clobber authorization/admission, bound to this corrected source
+  inventory, is required before any GPU rerun.

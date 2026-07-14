@@ -133,6 +133,36 @@ class ExactPromptIdTests(unittest.TestCase):
             runner._clamp_cudagraph_capture_sizes((), 15)
 
 
+class OutputSchemaTests(unittest.TestCase):
+    def test_naturally_closed_budget_output_emits_strict_retained_field(self) -> None:
+        instance = object.__new__(runner.VLLMRunner)
+        instance.hf_eos_id = 99
+        instance.think_close_id = 42
+        instance.tokenizer = SimpleNamespace(
+            decode=lambda ids, skip_special_tokens=False: "decoded"
+        )
+        completion = SimpleNamespace(
+            token_ids=[10, 42, 20, 99],
+            finish_reason="stop",
+            stop_reason=99,
+            cumulative_logprob=None,
+            logprobs=None,
+        )
+
+        output = instance._ordinary_output(
+            SimpleNamespace(prompt_token_ids=[1, 2, 3]),
+            completion,
+            sample_index=0,
+            seed=7,
+            thinking="budget",
+        )
+
+        self.assertTrue(output["thinking_closed"])
+        self.assertFalse(output["forced_close"])
+        self.assertEqual(output["retained_thinking_token_ids"], [])
+        self.assertEqual(output["injected_token_ids"], [])
+
+
 class CliRewriteTests(unittest.TestCase):
     def test_rewrite_replaces_every_split_and_equals_spelling(self) -> None:
         argv = [

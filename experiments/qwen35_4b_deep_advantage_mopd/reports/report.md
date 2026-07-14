@@ -135,6 +135,10 @@ field that the scoring projection had already defaulted to `[]`. No generated
 text, task semantics, score, or aggregate performance was inspected. Failure
 receipt `2e645322ead3fbbdf58760849fe17def81fd12b62cdfa4b6c58808e24612ed41`
 licenses only a contract repair, fresh authorization/admission, and full rerun.
+The repair now makes the ordinary runner emit the already-established `[]`
+projection explicitly while leaving the strict validator and every generated
+or scored semantic unchanged. A direct regression and all 212 experiment tests
+pass. Attempt-1 bytes remain terminal and will not be reused.
 
 Together, the three frozen optimizer seeds establish that the registered
 four-round update can complete safely and that strict-deep route supply

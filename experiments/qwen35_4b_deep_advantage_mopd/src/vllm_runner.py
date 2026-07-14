@@ -1093,6 +1093,10 @@ class VLLMRunner:
             "text": self._decode(token_ids),
             "token_ids": token_ids,
             "stage1_token_ids": sampled_ids,
+            # Ordinary outputs never construct a forced-close continuation.
+            # Keep the runner schema explicit and identical to harness._slim's
+            # established empty-list projection for this field.
+            "retained_thinking_token_ids": [],
             "injected_token_ids": [],
             "stage2_token_ids": [],
             "n_thinking_tokens": n_thinking,

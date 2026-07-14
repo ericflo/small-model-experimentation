@@ -87,3 +87,30 @@ waived because deep passed the predecessor.
 - all seeds, hashes, engine geometry, source identities, and absolute gates are
   reachable and frozen;
 - frozen design files are committed and hash-bound before any model loads.
+
+## Post-Quarantine Recovery Review
+
+Attempt 1 failed before score publication because ordinary runner outputs did
+not physically carry a field that the scoring harness already projected as an
+empty list. The following recovery constraints are mandatory:
+
+1. Keep the strict journal projection unchanged; repair the producer schema so
+   the validator is not weakened after observing a failure.
+2. Emit only the pre-existing empty-list value. Do not change sampled tokens,
+   decoded text, scoring semantics, task generation, seeds, or engine geometry.
+3. Cover the exact naturally closed budget path that produced 5,487 malformed
+   journal rows, not merely a synthetic validator fixture.
+4. Preserve the complete failed transaction, authorization, and admission as a
+   terminal archive. Do not finalize, copy, or resume its generated payload.
+5. Treat the sealed blocks as unpeeked only because inspection was restricted
+   to marker metadata, file hashes, and output key-presence counts. Any prompt,
+   gold, text, item score, or aggregate inspection would instead require fresh
+   block seeds.
+6. Remove the archived authorization/admission from their live no-clobber
+   paths, then issue fresh receipts bound to the corrected source inventory.
+7. Start the campaign from an empty current raw/score tree and rerun both blocks
+   in full. No archived generation receives compute credit or evidence status.
+
+The implemented repair satisfies items 1–3 and all 212 experiment tests pass.
+The terminal archive and no-peek boundary satisfy items 4–5. Fresh receipts and
+the empty-tree full rerun in items 6–7 remain runtime gates.

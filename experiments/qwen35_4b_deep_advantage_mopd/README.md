@@ -199,6 +199,13 @@ performance content was inspected. The failure receipt hashes to
 it authorizes only a schema-contract fix, fresh no-clobber authorization, and a
 full rerun from an empty current confirmation tree.
 
+The contract repair leaves the strict journal validator unchanged and adds the
+missing field as the established empty-list value on ordinary outputs. It does
+not alter sampled IDs, text, seeds, token budgets, scores, task geometry, or
+backend settings. All 212 experiment tests pass, including a direct naturally
+closed budget-output regression. The archived generation will not be reused;
+fresh authorization and admission remain mandatory before rerun.
+
 ## NF4/BF16 Interpretation Diagnostic
 
 The committed interpretation-only seed-42 diagnostic is valid over four fixed
