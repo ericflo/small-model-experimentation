@@ -9,6 +9,10 @@ import re
 import subprocess
 from pathlib import Path
 from typing import Any
+from urllib.parse import unquote, urlparse
+
+from packaging.requirements import Requirement
+from packaging.utils import canonicalize_name, parse_wheel_filename
 
 from eval_inputs import action_bundles, action_receipt, jsonl_payload, task_metadata
 from vllm_runner import EngineConfig, SamplingConfig
@@ -82,9 +86,31 @@ def _locked_versions(lock_path: Path) -> dict[str, str]:
     for line in lock_path.read_text().splitlines():
         match = LOCK_LINE.fullmatch(line)
         if match:
-            versions[match.group(1).lower().replace("_", "-")] = match.group(2)
+            versions[canonicalize_name(match.group(1))] = match.group(2)
+            continue
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#") or line[:1].isspace():
+            continue
+        requirement = Requirement(stripped)
+        if requirement.url is None:
+            continue
+        wheel_name = Path(unquote(urlparse(requirement.url).path)).name
+        try:
+            distribution, version, _build, _tags = parse_wheel_filename(wheel_name)
+        except ValueError as error:
+            raise ValueError(
+                f"direct-URL lock requirement is not an exact wheel pin: {stripped}"
+            ) from error
+        required_name = canonicalize_name(requirement.name)
+        if canonicalize_name(distribution) != required_name:
+            raise ValueError(
+                f"direct-URL wheel distribution differs from requirement: {stripped}"
+            )
+        versions[required_name] = str(version)
     if not versions:
         raise ValueError("vLLM lock contains no exact package pins")
+    if versions.get("vllm") != "0.24.0+cu129":
+        raise ValueError("vLLM lock lacks the exact 0.24.0+cu129 backend wheel pin")
     return versions
 
 

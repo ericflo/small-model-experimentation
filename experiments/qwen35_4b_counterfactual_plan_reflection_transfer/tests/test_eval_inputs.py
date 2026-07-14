@@ -107,5 +107,30 @@ class EvalInputTests(unittest.TestCase):
                     labels_path=labels_path,
                     expected_split="qualification",
                 )
+
+    def test_direct_url_vllm_pin_is_parsed_and_enforced(self) -> None:
+        lock = EXP.parents[1] / "requirements-vllm.lock.txt"
+        versions = P._locked_versions(lock)
+        self.assertEqual(versions["vllm"], "0.24.0+cu129")
+        runtime = {
+            "environment_lock": {"sha256": hashlib.sha256(lock.read_bytes()).hexdigest()},
+            "packages": versions,
+        }
+        P.validate_runtime_packages(runtime, lock)
+        runtime["packages"] = {**versions, "vllm": "999.0-forged"}
+        with self.assertRaisesRegex(ValueError, "installed packages"):
+            P.validate_runtime_packages(runtime, lock)
+
+    def test_missing_or_non_wheel_vllm_direct_pin_fails_closed(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            lock = Path(temporary) / "lock.txt"
+            lock.write_text("other==1.0\n")
+            with self.assertRaisesRegex(ValueError, "exact 0.24.0"):
+                P._locked_versions(lock)
+            lock.write_text("vllm @ https://example.invalid/vllm-source.tar.gz\n")
+            with self.assertRaisesRegex(ValueError, "exact wheel pin"):
+                P._locked_versions(lock)
+
+
 if __name__ == "__main__":
     unittest.main()
