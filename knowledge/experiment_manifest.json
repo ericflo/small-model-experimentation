@@ -5701,6 +5701,42 @@
   },
   {
     "file_counts": {
+      ".json": 3,
+      ".jsonl": 4,
+      ".md": 7,
+      ".py": 17,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_universal_close_weight_token_match",
+    "path": "experiments/qwen35_4b_universal_close_weight_token_match",
+    "primary_readme": "experiments/qwen35_4b_universal_close_weight_token_match/README.md",
+    "primary_report": "experiments/qwen35_4b_universal_close_weight_token_match/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation",
+      "benchmark_generalization",
+      "posttraining_and_adaptation"
+    ],
+    "source_track": "new",
+    "summary": "Can a short synthetic-curriculum adapter continuation that explicitly trains the model's autonomous `</think>` transition turn the designed160 local near-miss into a clean install, or is any improvement explained by targeted execute/induct data or replay alone?",
+    "tags": [
+      "curriculum",
+      "lora",
+      "small-model"
+    ],
+    "title": "Close-Weighted Universal Commit Seam",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 34,
+    "total_size_bytes": 10963187
+  },
+  {
+    "file_counts": {
       ".json": 17,
       ".jsonl": 3,
       ".log": 5,

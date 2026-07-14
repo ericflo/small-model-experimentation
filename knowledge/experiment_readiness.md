@@ -4,21 +4,21 @@ Generated from tracked experiment contents. Use this as a triage surface for tur
 
 Anchor-ready means the experiment has a human-authored README, a detected primary report, recognized local artifacts, and an assigned research program. It does not mean the result is correct or final.
 
-- Experiments: 248
-- Anchor-ready: 232
-- Human-authored READMEs: 235
+- Experiments: 249
+- Anchor-ready: 233
+- Human-authored READMEs: 236
 - Generated README stubs: 13
-- Primary reports: 247
-- Experiment logs: 151
-- Smoke commands: 116
-- Artifact manifests: 220
+- Primary reports: 248
+- Experiment logs: 152
+- Smoke commands: 117
+- Artifact manifests: 221
 
 ## Run Surface Counts
 
 | Run surface | Experiments |
 | --- | ---: |
 | `documented-command` | 38 |
-| `documented-scripts` | 135 |
+| `documented-scripts` | 136 |
 | `scripts-undocumented` | 22 |
 | `source-or-analysis` | 53 |
 
@@ -186,6 +186,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | yes | [`qwen35_4b_transaction_invariant_recovery_curriculum`](../experiments/qwen35_4b_transaction_invariant_recovery_curriculum/README.md) | agentic_breadth_installation, benchmark_generalization, evidence_conditioned_selection, interpretability_and_diagnostics, posttraining_and_adaptation, process_control_and_tool_use, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_transaction_invariant_recovery_curriculum/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_transform_abi_compiler_pilot`](../experiments/qwen35_4b_transform_abi_compiler_pilot/README.md) | benchmark_generalization, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_transform_abi_compiler_pilot/reports/report.md) | no | `documented-scripts` | no | large-artifact | add-experiment-log, add-smoke-command |
 | yes | [`qwen35_4b_typed_sketch_synthesis`](../experiments/qwen35_4b_typed_sketch_synthesis/README.md) | benchmark_generalization, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_typed_sketch_synthesis/reports/qwen35_4b_typed_sketch_synthesis_report.md) | no | `documented-scripts` | yes | dataset, large-artifact | add-experiment-log |
+| yes | [`qwen35_4b_universal_close_weight_token_match`](../experiments/qwen35_4b_universal_close_weight_token_match/README.md) | agentic_breadth_installation, benchmark_generalization, posttraining_and_adaptation | `human-authored` | [report](../experiments/qwen35_4b_universal_close_weight_token_match/reports/report.md) | yes | `documented-scripts` | yes | other, standard-artifact | none |
 | yes | [`qwen35_4b_universal_curriculum`](../experiments/qwen35_4b_universal_curriculum/README.md) | benchmark_generalization, evidence_conditioned_selection, interpretability_and_diagnostics, posttraining_and_adaptation, process_control_and_tool_use, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_universal_curriculum/reports/pilot_report.md) | no | `documented-scripts` | yes | standard-artifact | add-experiment-log |
 | yes | [`qwen35_4b_universal_low_density_token_match`](../experiments/qwen35_4b_universal_low_density_token_match/README.md) | agentic_breadth_installation, benchmark_generalization, evidence_conditioned_selection, posttraining_and_adaptation, process_control_and_tool_use, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_universal_low_density_token_match/reports/report.md) | yes | `documented-scripts` | yes | other, standard-artifact | none |
 | yes | [`qwen35_4b_universal_mid_density_token_match`](../experiments/qwen35_4b_universal_mid_density_token_match/README.md) | agentic_breadth_installation, benchmark_generalization, posttraining_and_adaptation, process_control_and_tool_use, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_universal_mid_density_token_match/reports/report.md) | yes | `documented-scripts` | yes | other, standard-artifact | none |

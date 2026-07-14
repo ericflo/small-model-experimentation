@@ -47754,6 +47754,51 @@
     }
    ]
   },
+  "qwen35_4b_universal_close_weight_token_match": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Three continuations hold total training rows fixed",
+     "categories": [
+      "shared replay",
+      "fresh execute/induct lessons",
+      "matched replay replacements"
+     ],
+     "series": [
+      {
+       "label": "replay_repeat",
+       "values": [
+        200,
+        0,
+        120
+       ]
+      },
+      {
+       "label": "standard_xi",
+       "values": [
+        200,
+        80,
+        40
+       ]
+      },
+      {
+       "label": "close_xi",
+       "values": [
+        200,
+        80,
+        40
+       ]
+      }
+     ],
+     "x_label": "frozen stream component",
+     "y_label": "training rows",
+     "y_format": "integer",
+     "note": "Every arm has 320 rows, 40 optimizer steps, exactly 286,814 forward tokens, and zero skips. standard_xi and close_xi use identical bytes; only the assigned close-span weight differs on the 80 fresh target rows. No model training result exists yet.",
+     "source": "experiments/qwen35_4b_universal_close_weight_token_match/data/stream_manifest.json"
+    }
+   ]
+  },
   "qwen35_4b_universal_curriculum": {
    "charts": [
     {

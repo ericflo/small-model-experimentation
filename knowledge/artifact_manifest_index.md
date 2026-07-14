@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 220
-- Manifest files: 526
+- Experiments with manifests: 221
+- Manifest files: 528
 
 ## Manifest Types
 
@@ -12,9 +12,9 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `checkpoint` | 83 |
 | `dataset` | 132 |
 | `large-artifact` | 50 |
-| `other` | 67 |
+| `other` | 68 |
 | `run-data` | 101 |
-| `standard-artifact` | 93 |
+| `standard-artifact` | 94 |
 
 ## Manifests
 
@@ -272,6 +272,8 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_transform_abi_compiler_pilot` | `large-artifact` | [manifest](../experiments/qwen35_4b_transform_abi_compiler_pilot/large_artifacts_manifest.md) |
 | `qwen35_4b_typed_sketch_synthesis` | `dataset` | [manifest](../experiments/qwen35_4b_typed_sketch_synthesis/data/dataset_manifest.json) |
 | `qwen35_4b_typed_sketch_synthesis` | `large-artifact` | [manifest](../experiments/qwen35_4b_typed_sketch_synthesis/large_artifacts_manifest.md) |
+| `qwen35_4b_universal_close_weight_token_match` | `other` | [manifest](../experiments/qwen35_4b_universal_close_weight_token_match/data/stream_manifest.json) |
+| `qwen35_4b_universal_close_weight_token_match` | `standard-artifact` | [manifest](../experiments/qwen35_4b_universal_close_weight_token_match/reports/artifact_manifest.yaml) |
 | `qwen35_4b_universal_curriculum` | `standard-artifact` | [manifest](../experiments/qwen35_4b_universal_curriculum/reports/artifact_manifest.yaml) |
 | `qwen35_4b_universal_low_density_token_match` | `other` | [manifest](../experiments/qwen35_4b_universal_low_density_token_match/data/dose_manifest.json) |
 | `qwen35_4b_universal_low_density_token_match` | `standard-artifact` | [manifest](../experiments/qwen35_4b_universal_low_density_token_match/reports/artifact_manifest.yaml) |

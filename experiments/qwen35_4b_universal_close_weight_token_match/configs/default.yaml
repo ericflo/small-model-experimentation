@@ -1,0 +1,45 @@
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+warm_start:
+  experiment: qwen35_4b_universal_mid_density_token_match
+  arm: designed160
+  adapter: large_artifacts/qwen35_4b_universal_mid_density_token_match/adapters/designed160
+  weights_sha256: f05c13ae66e19bbd29abbd2b62ae3c1a577642efefbdba435879012bf4494654
+  config_sha256: 0cd3ca7c710e48c264fd1d4c019c304ec0b9e5b13098b89a5b4aa0b171191e58
+arms:
+  replay_repeat:
+    data: data/replay_repeat.jsonl
+    close_loss_weight: 0.2
+  standard_xi:
+    data: data/targeted_standard.jsonl
+    close_loss_weight: 0.2
+  close_xi:
+    data: data/targeted_standard.jsonl
+    close_loss_weight: 0.2
+    target_close_kinds: [u_execute, u_induct]
+    target_close_loss_weight: 1.0
+exposure:
+  rows_per_arm: 320
+  forward_tokens_per_arm: 286814
+  optimizer_steps: 40
+  shared_replay_rows: 200
+  variable_rows: 120
+  target_rows: 80
+training:
+  epochs: 1.0
+  learning_rate: 1.0e-5
+  rank: 32
+  alpha: 64
+  batch_size: 1
+  gradient_accumulation: 8
+  max_length: 4096
+  think_loss_weight: 0.2
+  seed: 44
+local:
+  seed: 88006
+  max_new_tokens: 1024
+benchmark:
+  tier: quick
+  think_budget: 1024
+  seed: 78136

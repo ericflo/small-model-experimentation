@@ -1,0 +1,94 @@
+{
+  "arm_data": {
+    "close_xi": "experiments/qwen35_4b_universal_close_weight_token_match/data/targeted_standard.jsonl",
+    "replay_repeat": "experiments/qwen35_4b_universal_close_weight_token_match/data/replay_repeat.jsonl",
+    "standard_xi": "experiments/qwen35_4b_universal_close_weight_token_match/data/targeted_standard.jsonl"
+  },
+  "experiment_id": "qwen35_4b_universal_close_weight_token_match",
+  "files": [
+    {
+      "answer_target_tokens_per_epoch": 2727,
+      "close_target_tokens_per_epoch": 640,
+      "encoded_rows": 320,
+      "families": {
+        "burrowmaze": 43,
+        "caravan": 10,
+        "ferrier": 74,
+        "foundry_ledger": 5,
+        "gatepost": 17,
+        "glyphgate": 47,
+        "kilnrite": 71,
+        "loomfix": 23,
+        "packhouse": 6,
+        "patchwheel": 12,
+        "runeward": 3,
+        "stallwright": 9
+      },
+      "kinds": {
+        "atom": 32,
+        "atom_fc": 21,
+        "episode": 199,
+        "oracle_trace": 68
+      },
+      "max_sequence_tokens": 2991,
+      "min_sequence_tokens": 329,
+      "path": "experiments/qwen35_4b_universal_close_weight_token_match/data/replay_repeat.jsonl",
+      "prompt_tokens_per_epoch": 116036,
+      "rows": 320,
+      "sha256": "6ec82e2989eda5f37f51ba0b13e2c8326c8107110c4b193f3ac65621779e81d4",
+      "skipped": [],
+      "skipped_rows": 0,
+      "think_target_tokens_per_epoch": 167411,
+      "total_forward_tokens_per_epoch": 286814
+    },
+    {
+      "answer_target_tokens_per_epoch": 3614,
+      "close_target_tokens_per_epoch": 640,
+      "encoded_rows": 320,
+      "families": {
+        "burrowmaze": 24,
+        "caravan": 3,
+        "ferrier": 58,
+        "foundry_ledger": 4,
+        "gatepost": 13,
+        "glyphgate": 33,
+        "kilnrite": 56,
+        "loomfix": 19,
+        "packhouse": 7,
+        "patchwheel": 10,
+        "runeward": 2,
+        "stallwright": 11,
+        "universal": 80
+      },
+      "kinds": {
+        "atom": 12,
+        "atom_fc": 25,
+        "episode": 159,
+        "oracle_trace": 44,
+        "u_execute": 40,
+        "u_induct": 40
+      },
+      "max_sequence_tokens": 2991,
+      "min_sequence_tokens": 179,
+      "path": "experiments/qwen35_4b_universal_close_weight_token_match/data/targeted_standard.jsonl",
+      "prompt_tokens_per_epoch": 108986,
+      "rows": 320,
+      "sha256": "12fc613bb31a46bcea9acd49b26467656704aa3b3418dab8d920adf057d14f00",
+      "skipped": [],
+      "skipped_rows": 0,
+      "think_target_tokens_per_epoch": 173574,
+      "total_forward_tokens_per_epoch": 286814
+    }
+  ],
+  "forward_tokens_per_arm": 286814,
+  "max_length": 4096,
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "rows_per_arm": 320,
+  "schema_version": 1,
+  "skipped_rows": 0,
+  "standard_close_byte_identity": true,
+  "stream_manifest": "experiments/qwen35_4b_universal_close_weight_token_match/data/stream_manifest.json",
+  "stream_manifest_sha256": "abf8b5055e68c0fb2bb6e32a29f7be3b3677a0dd179e77397647777a2aa0966f",
+  "total_unique_file_rows": 640
+}

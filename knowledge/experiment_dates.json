@@ -1309,6 +1309,14 @@
    ],
    "caveat": "configs/experiment.json \"seed\": 20260701 is date-shaped but is a seed (and post-dates the 2026-06-28 import that added this dir in commit 42c23ac, so it cannot be a run date); metadata.yaml 2026-07-01 is the catalog sweep. Only bound: dir existed by 2026-06-28 (import commit)"
   },
+  "qwen35_4b_universal_close_weight_token_match": {
+   "start": "2026-07-13",
+   "end": "2026-07-14",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_universal_curriculum": {
    "start": "2026-07-13",
    "end": "2026-07-13",

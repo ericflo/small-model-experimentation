@@ -1,0 +1,36 @@
+schema_version: 1
+experiment_id: "qwen35_4b_universal_close_weight_token_match"
+external_artifacts:
+  - name: "designed160 parent adapter"
+    storage: "large_artifacts/qwen35_4b_universal_mid_density_token_match/adapters/designed160"
+    required_for: "common warm start and paired local parent control"
+    checksum: "weights f05c13ae66e19bbd29abbd2b62ae3c1a577642efefbdba435879012bf4494654; config 0cd3ca7c710e48c264fd1d4c019c304ec0b9e5b13098b89a5b4aa0b171191e58"
+    regenerate: ".venv/bin/python experiments/qwen35_4b_universal_mid_density_token_match/scripts/run.py --stage train-d160"
+  - name: "registered continuation adapters"
+    storage: "large_artifacts/qwen35_4b_universal_close_weight_token_match/adapters/"
+    required_for: "paired local evaluation"
+    checksum: "not created at design freeze; each training receipt will record exact hashes"
+    regenerate: ".venv/bin/python experiments/qwen35_4b_universal_close_weight_token_match/scripts/run.py --stage train"
+  - name: "conditional explicitly merged checkpoints"
+    storage: "large_artifacts/qwen35_4b_universal_close_weight_token_match/merged/"
+    required_for: "conditional same-backend aggregate evaluation"
+    checksum: "not created at design freeze; merge is sealed until a candidate passes locally"
+    regenerate: ".venv/bin/python experiments/qwen35_4b_universal_close_weight_token_match/scripts/run.py --stage merge"
+omitted_artifacts:
+  - path: "large_artifacts/qwen35_4b_universal_close_weight_token_match/"
+    reason: "large trained adapters and explicitly merged model weights are gitignored"
+reproducibility:
+  smoke_command: ".venv/bin/python experiments/qwen35_4b_universal_close_weight_token_match/scripts/run.py --smoke"
+  full_command: ".venv/bin/python experiments/qwen35_4b_universal_close_weight_token_match/scripts/run.py --stage all"
+  required_external_artifacts:
+    - "large_artifacts/qwen35_4b_universal_mid_density_token_match/adapters/designed160"
+    - "large_artifacts/qwen35_4b_universal_replay_anchor/merged/replay_refresh"
+    - "large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized"
+    - "large_artifacts/qwen35_4b_universal_curriculum/merged/blend"
+notes: >-
+  Checked-in source and derived data are bound by source_token_lengths.json
+  (064a1cce...f542f), stream_manifest.json (abf8b505...0966f), and
+  stream_token_receipt.json (e2e95429...2915b). The replay stream is
+  6ec82e29...e81d4 and the byte-identical standard/close stream is
+  12fc613b...14f00. All arms have 320 rows, 286814 forward tokens, 40 updates,
+  and zero tokenizer skips. No experiment-owned adapter exists at design freeze.

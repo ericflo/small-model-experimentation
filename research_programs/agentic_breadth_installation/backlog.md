@@ -141,12 +141,16 @@
   18/26 to 23/26 parse, and 9 to 3 cap contacts, but missed the parse and cap gates
   by one case each. The 240-row arm reversed the accuracy gain and worsened both
   emission metrics. No arm advanced; benchmark seed 78135 remains sealed.
-- Next universal-feature successor must be result-separated, use fresh seeds, hold
-  the 160-row capability mix fixed, and isolate concise answer commitment or
-  termination with an exact-token active control. Do not add another representative
-  dose, lower the observed gates, reuse seed 88005, or consume sealed seeds 78134 or
-  78135. Any arm that passes must still beat replay continuation on every family and
-  matched-compute sampling before a universal claim.
+- Active result-separated successor:
+  `qwen35_4b_universal_close_weight_token_match` is design-frozen before GPU work.
+  From the authenticated designed160 parent it compares exact-token replay, ordinary
+  fresh execute/induct continuation, and byte-identical continuation whose natural
+  close span is weighted like the answer. Every arm has 320 rows, 286,814 forward
+  tokens, and 40 updates; local seed 88006 and conditional aggregate seed 78136 are
+  fresh. Do not add another representative dose, lower the observed gates, reuse
+  seed 88005, or consume sealed seeds 78134/78135. No result exists yet. Any arm that
+  passes must still beat replay continuation on every family and matched-compute
+  sampling before a universal claim.
 
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.
