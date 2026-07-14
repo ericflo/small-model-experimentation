@@ -1,6 +1,6 @@
 # State-Formation Branch Authorization Recovery
 
-**Status:** in-progress · since 2026-07-14 · frozen downstream smoke passed and exact failed G0 pair archived; publish archive checkpoint before verified retirement and retry
+**Status:** in-progress · since 2026-07-14 · archive checkpoint green and exact failed G0 pair retired; publish retirement checkpoint before recovered producer retry
 
 This operational successor lets immutable source-v11 branch consumers reopen the authoritative
 LoRA-miss receipt through the same exact registered-prefix seam already validated for analysis. It
@@ -115,12 +115,20 @@ path and emitted `BRANCH_AUTHORIZATION_FAILURE_ARCHIVED` at archive-receipt SHA-
 byte-identical, and inode-distinct. The archive correctly authorizes no retry until this whole
 checkpoint is committed, pushed, and green.
 
+Archive commit `bdedabf4ea7d153d21a9b3a0cbe03cad66c8b6b2` passed both workflows. The
+retirement transaction re-read all four exact Git blobs from that commit, wrote a STARTED receipt,
+unlinked only the producer canonical/mirror failure paths while holding their verified inodes, and
+emitted `BRANCH_AUTHORIZATION_FAILURE_RETIRED`. Retirement-receipt file SHA-256 is
+`6e4c8ee3…53ad`, identity `c9abdc59…eae7`; the archived failure remains unchanged. It records no
+model load, training/evaluation, benchmark, or sealed contrast and authorizes recovered producer
+retry only after this retirement checkpoint is itself published and green.
+
 ## Interpretation
 
 This is a continuation mechanism, not a LoRA/full-rank result. The passing smoke establishes that
 immutable v11 can enforce its original branch evidence through the registered path. The producer's
 G0, controls, training, evaluation, and analysis receipts remain solely authoritative. Retry remains
-blocked until the published archive is used to retire only the two original failure paths.
+blocked until the retirement checkpoint passes both repository workflows.
 
 ## Knowledgebase Update
 

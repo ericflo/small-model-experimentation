@@ -41,3 +41,21 @@
 Only archive-checkpoint documentation, validation, commit, push, and workflow verification are
 authorized. After both workflows pass, retire exactly the canonical/mirror failure paths using that
 full commit SHA, then publish and validate the retirement before any model-bearing retry.
+
+## 2026-07-14 — green archive checkpoint proves and retires exact source pair
+
+- Archive commit `bdedabf4ea7d153d21a9b3a0cbe03cad66c8b6b2` passed Validate Repository and
+  Publish Research Site.
+- Retirement reopened the archive copy, archive receipt, producer canonical, and producer mirror
+  from that exact Git commit and required byte equality before mutation.
+- STARTED receipt SHA-256 is `90cf8dd1…380e`. Only the two producer failure paths were unlinked under
+  held-inode verification; the recovery archive remains at exact SHA-256 `47305826…2c71`.
+- Terminal retirement receipt SHA-256 is `6e4c8ee3…53ad`, identity `c9abdc59…eae7`. It records zero
+  model/training/evaluation/benchmark/sealed access and authorizes recovered producer retry only
+  after retirement publication.
+
+## Current authorization
+
+Only retirement documentation, validation, commit, push, and workflow verification are authorized.
+After both workflows are green, retry the exact full-rank seed-7411 G0 through the frozen wrapper.
+No positive control or result training is authorized until that G0 passes and is published.

@@ -6383,7 +6383,7 @@
    "verdict_tag": "Retry path passed its safety checks",
    "concept_primer": "A sealed calculator can produce the right decision but still have a plug that downstream equipment cannot use. This recovery repairs that one plug while keeping the calculator and decision unchanged.",
    "plain_question": "Can the frozen training runner verify the existing continue-to-controls decision after its strict file-path check blocked the first attempt?",
-   "plain_answer": "Yes for the no-model safety check: all six controls passed, and the failed first attempt now has a third preserved copy. The actual full-size model retry has not started and remains blocked until the archive and retirement commits pass both repository checks.",
+   "plain_answer": "Yes for the no-model safety check: all six controls passed, the failed first attempt has a third preserved copy, and the two retry-blocking source paths were retired only after that archive commit passed both checks. The actual full-size model retry still waits for the retirement commit to pass.",
    "why_it_matters": "This keeps the promised compact-versus-full-size comparison moving without silently changing its model, data, success rule, or training plan, while preserving the failed attempt before retry.",
    "verdict_tone": "neutral",
    "key_numbers": [

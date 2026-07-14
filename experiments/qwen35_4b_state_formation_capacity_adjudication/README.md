@@ -132,6 +132,11 @@ real downstream smoke at identity `d1135ea2…49b5` and has archived the exact f
 identity `ff478d40…0ec3`. Publish that checkpoint, then retire the original failure pair and publish
 the retirement before retrying through the frozen wrapper.
 
+Archive commit `bdedabf4…b6b2` passed both workflows. The recovery then verified all committed
+archive/source blobs and retired exactly the two producer failure paths at retirement identity
+`c9abdc59…eae7`, retaining the exact failure archive. Publish and require both workflows green on
+this retirement checkpoint before the recovered full-rank seed-7411 G0 retry.
+
 Historically, the integrated source-v10 review was `GO` for reviewed implementation
 `a5a494b7…6f1c4a` and full source contract `979a9012…f394b7`; the 360/360 suite and exact machine gate
 pass. Source-v9 seed-7411 G0 stopped before model load or wrapper construction because the general

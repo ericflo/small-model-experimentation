@@ -23,6 +23,11 @@ the failure at identity `ff478d40…0ec3`; archive publication and a separately 
 are required before retry. This mechanics event does not change the Stage-A negative or Stage-B
 scientific mandate.
 
+Archive commit `bdedabf4…b6b2` passed both workflows. The recovery then proved all four committed
+source/archive blobs, retired only the producer failure pair, and retained the archived failure.
+Retirement receipt SHA-256 is `6e4c8ee3…53ad`, identity `c9abdc59…eae7`; publish and validate this
+checkpoint before recovered G0 retry.
+
 **In progress; no scientific result exists.** Preregistration, adversarial design review, and the
 frozen design are complete. Source-v10 implementation authorization is `GO` at reviewed digest
 `a5a494b7…6f1c4a` and full source contract `979a9012…f394b7`, with 360/360 source-bound tests passing.

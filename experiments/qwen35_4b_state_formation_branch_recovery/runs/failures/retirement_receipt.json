@@ -1,0 +1,19 @@
+{
+  "archive_commit": "bdedabf4ea7d153d21a9b3a0cbe03cad66c8b6b2",
+  "archive_receipt_sha256": "4fcccea3c81cd371064d461bc29bf84dc7c1f56f3bf06280ce697336c9ab45ed",
+  "archived_failure_sha256": "47305826eb1f9b7e34a7edac8cb6c7ba0f5e34921037c02c7400921825ca2c71",
+  "authorizes_recovered_producer_retry": true,
+  "benchmark_paths_opened": 0,
+  "experiment_id": "qwen35_4b_state_formation_branch_recovery",
+  "model_loaded": false,
+  "receipt_identity_sha256": "c9abdc592669c3a2fb13388acdce9bde326b6960fe16175060eddea50612eae7",
+  "retired_paths": [
+    "experiments/qwen35_4b_state_formation_capacity_adjudication/runs/setup/g0_fullrank_seed7411.json",
+    "experiments/qwen35_4b_state_formation_capacity_adjudication/runs/failures/g0_fullrank_seed7411_source_5a8ed26ddb94.json"
+  ],
+  "retirement_started_sha256": "90cf8dd1906bd694185666e72700ff1759f80a0a990460f13bb8c53ea3d6380e",
+  "schema_version": 1,
+  "sealed_contrast_rows_opened": 0,
+  "status": "BRANCH_AUTHORIZATION_FAILURE_RETIRED",
+  "training_or_evaluation_started": false
+}

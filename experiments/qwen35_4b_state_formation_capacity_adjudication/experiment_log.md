@@ -971,6 +971,21 @@ Only recovery/archive documentation, validation, commit, push, and workflow veri
 authorized. After green CI, retire the exact producer failure pair through the frozen recovery,
 publish that retirement, and require both workflows green before retrying full-rank seed-7411 G0.
 
+## 2026-07-14 — branch failure archived and exact producer paths retired
+
+- Recovery/archive commit `bdedabf4…b6b2` passed both workflows.
+- The retirement transaction verified that commit contains the exact archive copy, archive receipt,
+  producer canonical, and producer mirror. It then removed only the two producer paths while holding
+  their exact inodes; the recovery archive remains unchanged at `47305826…2c71`.
+- Retirement receipt SHA-256 is `6e4c8ee3…53ad`, identity `c9abdc59…eae7`, with zero model,
+  training/evaluation, benchmark, or sealed access.
+
+## Current authorization
+
+Only retirement validation, documentation, commit, push, and workflow verification are authorized.
+After both workflows are green, retry full-rank seed-7411 G0 through the frozen branch-recovery
+wrapper. Positive control and result-bearing cells remain blocked on that passing G0 checkpoint.
+
 ## 2026-07-13 — source-v9 seed-7411 G0 stops before model load; cache proof repaired
 
 - Non-model setup commit `ff4a8b9b` passed both repository workflows before the exact seed-7411 LoRA

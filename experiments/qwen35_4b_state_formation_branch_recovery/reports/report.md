@@ -4,8 +4,9 @@
 
 Pre-retry. The first full-rank Stage-B G0 failed before model load while immutable v11 recomputed its
 LoRA-miss authorization through the already-known nonlexical external-prefix defect. The frozen
-downstream recovery smoke now passes, and the exact failure pair is archived but not yet retired.
-This is mechanics evidence, not a full-rank or LoRA result.
+downstream recovery smoke now passes, and the exact failure pair is durably archived. Archive commit
+`bdedabf4…b6b2` passed both workflows, and the exact producer pair is now retired under
+a terminal receipt awaiting publication. This is mechanics evidence, not a full-rank or LoRA result.
 
 ## Method
 
@@ -27,6 +28,8 @@ commit-backed failure archival/retirement precede retry.
   `55d0a455…56f3`; all six path/consumer/restoration controls pass.
 - Failure archive: file SHA-256 `4fcccea3…45ed`, identity `ff478d40…0ec3`; archive bytes match the
   source pair and occupy a third inode.
+- Retirement: file SHA-256 `6e4c8ee3…53ad`, identity `c9abdc59…eae7`; all four archive-commit blobs
+  revalidated, only the producer pair removed, and the recovery archive retained.
 
 ## Interpretation
 
@@ -36,6 +39,5 @@ prove the same seam at the consumer boundary without broadening it. No capacity 
 
 ## Next action
 
-Publish the exact smoke/archive checkpoint, retire the two producer failure paths using that green
-commit, publish the retirement, then retry the already-authorized full-rank seed-7411 G0 through the
-wrapper.
+Publish and validate the retirement checkpoint, then retry the already-authorized full-rank
+seed-7411 G0 through the wrapper.
