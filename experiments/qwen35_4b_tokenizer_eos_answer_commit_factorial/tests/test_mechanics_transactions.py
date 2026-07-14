@@ -248,6 +248,113 @@ class MechanicsTransactionTests(unittest.TestCase):
         self.assertEqual(self.calls, 2)
         self.assertEqual(tx.inventory_state(self.raw, "second"), "complete")
 
+    def test_predecessor_bundle_mutation_inside_generation_is_caught(self) -> None:
+        common = self.registration()
+        tx.run_transaction(
+            raw_dir=self.raw,
+            invocation="first",
+            invocation_order=("first", "second"),
+            generate=self.generate,
+            **common,
+        )
+        predecessor_bundle = tx.artifact_paths(self.raw, "first")["bundle"]
+
+        def mutate_bundle(rows, sampling):
+            generated = self.generate(rows, sampling)
+            value = tx.read_canonical(predecessor_bundle)
+            value["schema_version"] = True
+            self.rewrite(predecessor_bundle, value)
+            return generated
+
+        with self.assertRaisesRegex(RuntimeError, "changed after exact authentication"):
+            tx.run_transaction(
+                raw_dir=self.raw,
+                invocation="second",
+                invocation_order=("first", "second"),
+                generate=mutate_bundle,
+                **common,
+            )
+        self.assertEqual(self.calls, 2)
+        self.assertEqual(tx.inventory_state(self.raw, "second"), "started_only")
+
+    def test_predecessor_generated_mutation_during_publication_is_caught(self) -> None:
+        common = self.registration()
+        tx.run_transaction(
+            raw_dir=self.raw,
+            invocation="first",
+            invocation_order=("first", "second"),
+            generate=self.generate,
+            **common,
+        )
+        predecessor_generated = tx.artifact_paths(self.raw, "first")["generated"]
+        successor_complete = tx.artifact_paths(self.raw, "second")["complete"]
+        original_write = tx.write_exclusive_durable
+
+        def mutate_after_complete(path, value):
+            original_write(path, value)
+            if path == successor_complete:
+                predecessor_value = tx.read_canonical(predecessor_generated)
+                predecessor_value["schema_version"] = True
+                self.rewrite(predecessor_generated, predecessor_value)
+
+        with mock.patch.object(
+            tx, "write_exclusive_durable", side_effect=mutate_after_complete
+        ):
+            with self.assertRaisesRegex(
+                RuntimeError, "changed after exact authentication"
+            ):
+                tx.run_transaction(
+                    raw_dir=self.raw,
+                    invocation="second",
+                    invocation_order=("first", "second"),
+                    generate=self.generate,
+                    **common,
+                )
+        self.assertEqual(self.calls, 2)
+        self.assertEqual(tx.inventory_state(self.raw, "second"), "complete")
+
+    def test_predecessor_started_mutation_during_recovery_is_caught(self) -> None:
+        common = self.registration()
+        tx.run_transaction(
+            raw_dir=self.raw,
+            invocation="first",
+            invocation_order=("first", "second"),
+            generate=self.generate,
+            **common,
+        )
+        with self.assertRaisesRegex(RuntimeError, "after bundle"):
+            tx.run_transaction(
+                raw_dir=self.raw,
+                invocation="second",
+                invocation_order=("first", "second"),
+                generate=self.generate,
+                crash_after="bundle",
+                **common,
+            )
+        predecessor_started = tx.artifact_paths(self.raw, "first")["started"]
+        successor_bundle = tx.artifact_paths(self.raw, "second")["bundle"]
+        original_redurable = tx.redurable
+
+        def mutate_during_redurable(path):
+            original_redurable(path)
+            if path == successor_bundle:
+                predecessor_value = tx.read_canonical(predecessor_started)
+                predecessor_value["schema_version"] = True
+                self.rewrite(predecessor_started, predecessor_value)
+
+        with mock.patch.object(tx, "redurable", side_effect=mutate_during_redurable):
+            with self.assertRaisesRegex(
+                RuntimeError, "changed after exact authentication"
+            ):
+                tx.run_transaction(
+                    raw_dir=self.raw,
+                    invocation="second",
+                    invocation_order=("first", "second"),
+                    generate=self.fail_generate,
+                    **common,
+                )
+        self.assertEqual(self.calls, 2)
+
 
 if __name__ == "__main__":
     unittest.main()

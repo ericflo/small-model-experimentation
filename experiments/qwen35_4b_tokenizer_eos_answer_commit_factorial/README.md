@@ -1,6 +1,6 @@
 # Qwen3.5-4B Tokenizer-EOS Answer Commit Factorial
 
-**Status:** in-progress · since 2026-07-14 · `PASS_DESIGN` + calibration `PASS_IMPLEMENTATION`; fresh calibration: tokenizer-EOS-only interface qualified; four conditional-mechanics implementation reviews held and repaired, fresh rereview pending
+**Status:** in-progress · since 2026-07-14 · `PASS_DESIGN` + calibration `PASS_IMPLEMENTATION`; fresh calibration: tokenizer-EOS-only interface qualified; five conditional-mechanics implementation reviews held and repaired, fresh rereview pending
 
 This fresh successor tests whether the prior strict answer-seam failure was
 caused by waiting past Qwen3.5's tokenizer chat-end token. It registers the
@@ -285,6 +285,18 @@ New callbacks mutate the predecessor during generation and at COMPLETE
 publication; both are detected before bundle publication or successful return.
 The full model-free suite passes 136/136 with zero mechanics calls or protected
 reads. A fifth pushed-green exact-commit review is required.
+
+Round five confirmed every earlier regression family but found that the
+pre-return predecessor recheck covered only the terminal COMPLETE file. A
+concurrent change to an already-authenticated predecessor STARTED, bundle, or
+GENERATED artifact could therefore escape the primitive's successful return
+until final chain authentication. The primitive now reruns exact authentication
+over the entire predecessor prefix at each recheck and compares the resulting
+receipt with the original authenticated snapshot. New regressions change each
+non-terminal predecessor artifact during generation, publication, or recovery;
+all fail closed without a successful successor return or recovery resample.
+The model-free suite passes 139/139 with zero mechanics model/GPU calls or
+protected reads. A sixth pushed-green exact-commit review is required.
 
 ## Interpretation
 

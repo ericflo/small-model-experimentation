@@ -123,6 +123,15 @@
   the visible blob comparison and authorization receipt. Generation-time and
   COMPLETE-publication mutation regressions fail closed. The full model-free
   suite passes 136/136 pending a fifth exact-SHA review.
+- Round five passed all prior regression families but returned
+  `HOLD_IMPLEMENTATION` because the recheck hashed only predecessor COMPLETE;
+  concurrent STARTED, bundle, or GENERATED changes were deferred to later full-
+  chain rejection. The review ran 136/136 tests with zero model/GPU calls and
+  empty protected-read inventories.
+- Replaced the terminal-file recheck with full exact prefix reauthentication
+  and comparison against the original authenticated receipt. Added generation,
+  publication, and recovery regressions for each non-terminal predecessor
+  artifact. The suite passes 139/139 pending a sixth exact-SHA review.
 
 ## Scaffold
 

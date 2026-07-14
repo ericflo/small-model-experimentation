@@ -298,14 +298,15 @@ def run_transaction(
     audit_directory_inventory(raw_dir, invocation_order)
     position = list(invocation_order).index(invocation)
     predecessor_sha: str | None = None
+    predecessor_receipt: dict[str, Any] | None = None
     if position:
-        predecessor = _authenticate_complete_prefix(
+        predecessor_receipt = _authenticate_complete_prefix(
             raw_dir=raw_dir,
             invocation_order=invocation_order,
             completed_count=position,
             require_later_absent=False,
         )
-        predecessor_sha = predecessor["terminal_complete_sha256"]
+        predecessor_sha = predecessor_receipt["terminal_complete_sha256"]
     for later in invocation_order[position + 1 :]:
         if inventory_state(raw_dir, later) != "absent":
             raise RuntimeError("later invocation exists before its predecessor")
@@ -327,10 +328,20 @@ def run_transaction(
 
     def assert_predecessor_unchanged() -> None:
         if position:
-            predecessor_path = artifact_paths(
-                raw_dir, invocation_order[position - 1]
-            )["complete"]
-            if sha256_file(predecessor_path) != predecessor_sha:
+            if predecessor_receipt is None:
+                raise RuntimeError("predecessor authentication receipt is absent")
+            try:
+                observed = _authenticate_complete_prefix(
+                    raw_dir=raw_dir,
+                    invocation_order=invocation_order,
+                    completed_count=position,
+                    require_later_absent=False,
+                )
+            except RuntimeError as error:
+                raise RuntimeError(
+                    "predecessor changed after exact authentication"
+                ) from error
+            if not exact_json_equal(observed, predecessor_receipt):
                 raise RuntimeError("predecessor changed after exact authentication")
 
     state = inventory_state(raw_dir, invocation)
