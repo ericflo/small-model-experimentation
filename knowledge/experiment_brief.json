@@ -13250,10 +13250,10 @@
    ]
   },
   "qwen35_4b_universal_low_density_token_match": {
-   "verdict_tag": "Exact-token low-density ladder is frozen, not run",
+      "verdict_tag": "Replay control trained; transfer remains unmeasured",
    "concept_primer": "The previous designed mix may have been too dense, and its replay comparison also saw more tokens. This follow-up changes only a tiny number of rows while holding total training exposure exactly equal, so the later difference can be tied much more cleanly to curriculum content.",
    "plain_question": "Can a tiny dose of abstract skill lessons improve the replay-refreshed model without erasing any of its broad gains?",
-   "plain_answer": "Not measured yet. Three training streams are frozen: replay only, 40 designed lessons, and 80 designed lessons. They share 1,440 replay rows in the same positions, contain 1,520 rows each, and total exactly 1,429,053 forward tokens. Training begins only after this design is checked in.",
+      "plain_answer": "Not measured yet. The replay-only control finished all 190 updates with zero skipped rows. The 40- and 80-lesson streams, local screen, and broad evaluation remain pending, so this checkpoint says nothing yet about transfer.",
    "why_it_matters": "The prior comparison could reject its candidate but could not separate content from a 17% token-exposure gap. Exact matching removes that ambiguity and tests whether designed lessons help at a gentle density rather than overwhelming a strong broad policy.",
    "verdict_tone": "neutral",
    "key_numbers": [
@@ -13273,9 +13273,9 @@
      "sub": "both cover all 13 abstract skills"
     },
     {
-     "label": "model training so far",
-     "value": "zero",
-     "sub": "design, tokenization, and smoke checks only"
+          "label": "training streams complete",
+          "value": "one of three",
+          "sub": "replay-only control complete; designed streams pending"
     }
    ],
    "charts": [

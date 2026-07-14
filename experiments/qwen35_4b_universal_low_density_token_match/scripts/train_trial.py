@@ -42,6 +42,12 @@ def run_text(command: list[str]) -> str:
     return subprocess.run(command, cwd=ROOT, check=True, capture_output=True, text=True).stdout.strip()
 
 
+def normalize_log(path: Path) -> None:
+    """Remove progress-renderer trailing blanks before the durable log is hashed."""
+    lines = path.read_text(encoding="utf-8").splitlines()
+    path.write_text("\n".join(line.rstrip() for line in lines) + "\n", encoding="utf-8")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--name", required=True)
@@ -139,6 +145,7 @@ def main() -> int:
             log.flush()
         returncode = process.wait()
     elapsed = time.perf_counter() - started
+    normalize_log(log_path)
     if returncode != 0:
         failure_path.write_text(
             json.dumps({

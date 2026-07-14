@@ -5736,10 +5736,11 @@
   },
   {
     "file_counts": {
-      ".json": 3,
+      ".json": 4,
       ".jsonl": 5,
+      ".log": 1,
       ".md": 7,
-      ".py": 14,
+      ".py": 15,
       ".yaml": 3
     },
     "id": "qwen35_4b_universal_low_density_token_match",
@@ -5766,12 +5767,13 @@
       "configs",
       "data",
       "reports",
+      "runs",
       "scripts",
       "src",
       "tests"
     ],
-    "total_files": 32,
-    "total_size_bytes": 23344003
+    "total_files": 35,
+    "total_size_bytes": 23368783
   },
   {
     "file_counts": {

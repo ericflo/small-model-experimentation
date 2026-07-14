@@ -47852,7 +47852,7 @@
      "x_label": "frozen dose component",
      "y_label": "training rows",
      "y_format": "integer",
-     "note": "All arms share slot order, contain 1,520 rows, run 190 optimizer steps, and total exactly 1,429,053 forward tokens. This is a frozen design chart; model results are pending.",
+          "note": "All arms share slot order, contain 1,520 rows, run 190 optimizer steps, and total exactly 1,429,053 forward tokens. The replay-only control is trained; both designed streams and model comparisons are pending.",
      "source": "experiments/qwen35_4b_universal_low_density_token_match/data/dose_manifest.json"
     }
    ]

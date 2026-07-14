@@ -1,6 +1,6 @@
 # Low-Density Token-Matched Universal Curriculum
 
-**Status:** in-progress · since 2026-07-13 · training, local gates, and paired pilot remain
+**Status:** in-progress · since 2026-07-13 · replay control trained; designed arms, local gates, and paired pilot remain
 
 ## Research program
 
@@ -66,7 +66,12 @@ Full:
 
 ## Results
 
-Pending. No model training or new benchmark event has run.
+Training checkpoint only. `replay_repeat` completed all 190 updates over the
+authenticated 1,520-row, 1,429,053-forward-token stream with zero skips. Its final
+training loss was 0.4069 and its adapter weights hash is
+`bb4f0f8d35ce51e59fb06e8fc835ef043ac8960a5c178e6a511ec75c0a622a07`.
+The designed arms, local screen, and new benchmark event have not run, so there is
+no transfer result yet.
 
 ## Interpretation
 
