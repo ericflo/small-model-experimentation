@@ -5959,6 +5959,47 @@
   },
   {
     "file_counts": {
+      ".json": 2,
+      ".jsonl": 2,
+      ".md": 7,
+      ".py": 11,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_universal_failure_selected_restart_target_match",
+    "path": "experiments/qwen35_4b_universal_failure_selected_restart_target_match",
+    "primary_readme": "experiments/qwen35_4b_universal_failure_selected_restart_target_match/README.md",
+    "primary_report": "experiments/qwen35_4b_universal_failure_selected_restart_target_match/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation",
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "posttraining_and_adaptation",
+      "process_control_and_tool_use",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "This experiment tests whether selecting the stronger parent's fresh procedural failures and teaching clean verified restarts can beat exactly exposure-matched replay without conditioning on the parent's failed trajectory.",
+    "tags": [
+      "curriculum",
+      "small-model",
+      "verification"
+    ],
+    "title": "Failure-Selected Counterfactual Restart Curriculum",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 25,
+    "total_size_bytes": 1559218
+  },
+  {
+    "file_counts": {
       ".json": 11,
       ".jsonl": 5,
       ".log": 3,

@@ -220,6 +220,18 @@
   failure-prefix continuation. A successor must move to short pre-failure decision
   interventions and match supervised target exposure.
 
+- Active result-separated successor:
+  `qwen35_4b_universal_failure_selected_restart_target_match` uses the published
+  stronger replay composite on 624 fresh tasks, four prospective failures per each
+  of 13 universal skills, then removes the parent's failed trajectory and supervises
+  a clean executable restart from the original prompt. Construction/rollout/
+  selection/training/local/aggregate seeds are 77114/66114/55114/48/88010/78140.
+  Source/input hashes are `81edc9ea...de304` / `25382689...0f5b`; zero prompt
+  overlap was found against predecessor sources and prior local seeds. The design
+  requires exact equality of forward tokens, loss-bearing targets, and absolute loss
+  mass against same-parent replay. `PASS_PARENT_ROLLOUT` authorizes one parent event
+  only; no model event or capability result exists yet.
+
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.
 - Experiment: round 2 re-harvest with the round-1 adapter (does the frontier

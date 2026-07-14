@@ -3,14 +3,14 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 13
-- Experiments: 257
+- Experiments: 258
 
 ## Structured Execution And Compilers
 
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 188
+- Assigned experiments: 189
 
 ### Seed Evidence
 
@@ -128,6 +128,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_transform_abi_compiler_pilot` (track-z): [README](../experiments/qwen35_4b_transform_abi_compiler_pilot/README.md)
 - `qwen35_4b_typed_sketch_synthesis` (track-z): [README](../experiments/qwen35_4b_typed_sketch_synthesis/README.md)
 - `qwen35_4b_universal_curriculum` (new): [README](../experiments/qwen35_4b_universal_curriculum/README.md)
+- `qwen35_4b_universal_failure_selected_restart_target_match` (new): [README](../experiments/qwen35_4b_universal_failure_selected_restart_target_match/README.md)
 - `qwen35_4b_universal_low_density_token_match` (new): [README](../experiments/qwen35_4b_universal_low_density_token_match/README.md)
 - `qwen35_4b_universal_mid_density_token_match` (new): [README](../experiments/qwen35_4b_universal_mid_density_token_match/README.md)
 - `qwen35_4b_universal_replay_anchor` (new): [README](../experiments/qwen35_4b_universal_replay_anchor/README.md)
@@ -216,7 +217,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 Turn candidate-pool coverage into deployable decisions under visible evidence.
 
 - Charter: [evidence_conditioned_selection](../research_programs/evidence_conditioned_selection/charter.md)
-- Assigned experiments: 95
+- Assigned experiments: 96
 
 ### Seed Evidence
 
@@ -285,6 +286,7 @@ Turn candidate-pool coverage into deployable decisions under visible evidence.
 - `qwen35_4b_trained_vs_frozen_repair_mdp` (track-z): [README](../experiments/qwen35_4b_trained_vs_frozen_repair_mdp/README.md)
 - `qwen35_4b_transaction_invariant_recovery_curriculum` (new): [README](../experiments/qwen35_4b_transaction_invariant_recovery_curriculum/README.md)
 - `qwen35_4b_universal_curriculum` (new): [README](../experiments/qwen35_4b_universal_curriculum/README.md)
+- `qwen35_4b_universal_failure_selected_restart_target_match` (new): [README](../experiments/qwen35_4b_universal_failure_selected_restart_target_match/README.md)
 - `qwen35_4b_universal_low_density_token_match` (new): [README](../experiments/qwen35_4b_universal_low_density_token_match/README.md)
 - `qwen35_4b_universal_search_scaffold_token_match` (new): [README](../experiments/qwen35_4b_universal_search_scaffold_token_match/README.md)
 - `qwen35_4b_universal_state_table_compiler_token_match` (new): [README](../experiments/qwen35_4b_universal_state_table_compiler_token_match/README.md)
@@ -435,7 +437,7 @@ Grow, search, shortlist, compose, and stress-test reusable operator and skill ba
 Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and other update mechanisms.
 
 - Charter: [posttraining_and_adaptation](../research_programs/posttraining_and_adaptation/charter.md)
-- Assigned experiments: 88
+- Assigned experiments: 89
 
 ### Seed Evidence
 
@@ -504,6 +506,7 @@ Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and o
 - `qwen35_4b_transaction_invariant_recovery_curriculum` (new): [README](../experiments/qwen35_4b_transaction_invariant_recovery_curriculum/README.md)
 - `qwen35_4b_universal_close_weight_token_match` (new): [README](../experiments/qwen35_4b_universal_close_weight_token_match/README.md)
 - `qwen35_4b_universal_curriculum` (new): [README](../experiments/qwen35_4b_universal_curriculum/README.md)
+- `qwen35_4b_universal_failure_selected_restart_target_match` (new): [README](../experiments/qwen35_4b_universal_failure_selected_restart_target_match/README.md)
 - `qwen35_4b_universal_low_density_token_match` (new): [README](../experiments/qwen35_4b_universal_low_density_token_match/README.md)
 - `qwen35_4b_universal_mid_density_token_match` (new): [README](../experiments/qwen35_4b_universal_mid_density_token_match/README.md)
 - `qwen35_4b_universal_on_policy_prefix_repair_token_match` (new): [README](../experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/README.md)
@@ -540,7 +543,7 @@ Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and o
 Train or evaluate small models as controllers over tools, verifiers, budgets, and intermediate actions.
 
 - Charter: [process_control_and_tool_use](../research_programs/process_control_and_tool_use/charter.md)
-- Assigned experiments: 51
+- Assigned experiments: 52
 
 ### Seed Evidence
 
@@ -587,6 +590,7 @@ Train or evaluate small models as controllers over tools, verifiers, budgets, an
 - `qwen35_4b_trained_vs_frozen_repair_mdp` (track-z): [README](../experiments/qwen35_4b_trained_vs_frozen_repair_mdp/README.md)
 - `qwen35_4b_transaction_invariant_recovery_curriculum` (new): [README](../experiments/qwen35_4b_transaction_invariant_recovery_curriculum/README.md)
 - `qwen35_4b_universal_curriculum` (new): [README](../experiments/qwen35_4b_universal_curriculum/README.md)
+- `qwen35_4b_universal_failure_selected_restart_target_match` (new): [README](../experiments/qwen35_4b_universal_failure_selected_restart_target_match/README.md)
 - `qwen35_4b_universal_low_density_token_match` (new): [README](../experiments/qwen35_4b_universal_low_density_token_match/README.md)
 - `qwen35_4b_universal_mid_density_token_match` (new): [README](../experiments/qwen35_4b_universal_mid_density_token_match/README.md)
 - `qwen35_4b_universal_on_policy_prefix_repair_token_match` (new): [README](../experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/README.md)
@@ -608,7 +612,7 @@ Train or evaluate small models as controllers over tools, verifiers, budgets, an
 Stress whether mechanisms transfer across substrates, families, lengths, distributions, and real tasks.
 
 - Charter: [benchmark_generalization](../research_programs/benchmark_generalization/charter.md)
-- Assigned experiments: 119
+- Assigned experiments: 120
 
 ### Seed Evidence
 
@@ -678,6 +682,7 @@ Stress whether mechanisms transfer across substrates, families, lengths, distrib
 - `qwen35_4b_typed_sketch_synthesis` (track-z): [README](../experiments/qwen35_4b_typed_sketch_synthesis/README.md)
 - `qwen35_4b_universal_close_weight_token_match` (new): [README](../experiments/qwen35_4b_universal_close_weight_token_match/README.md)
 - `qwen35_4b_universal_curriculum` (new): [README](../experiments/qwen35_4b_universal_curriculum/README.md)
+- `qwen35_4b_universal_failure_selected_restart_target_match` (new): [README](../experiments/qwen35_4b_universal_failure_selected_restart_target_match/README.md)
 - `qwen35_4b_universal_low_density_token_match` (new): [README](../experiments/qwen35_4b_universal_low_density_token_match/README.md)
 - `qwen35_4b_universal_mid_density_token_match` (new): [README](../experiments/qwen35_4b_universal_mid_density_token_match/README.md)
 - `qwen35_4b_universal_on_policy_prefix_repair_token_match` (new): [README](../experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/README.md)
@@ -744,7 +749,7 @@ Stress whether mechanisms transfer across substrates, families, lengths, distrib
 Measure why methods work or fail through attribution, probes, pressure audits, and controlled ablations.
 
 - Charter: [interpretability_and_diagnostics](../research_programs/interpretability_and_diagnostics/charter.md)
-- Assigned experiments: 79
+- Assigned experiments: 80
 
 ### Seed Evidence
 
@@ -802,6 +807,7 @@ Measure why methods work or fail through attribution, probes, pressure audits, a
 - `qwen35_4b_thinking_separability_probe` (new): [README](../experiments/qwen35_4b_thinking_separability_probe/README.md)
 - `qwen35_4b_transaction_invariant_recovery_curriculum` (new): [README](../experiments/qwen35_4b_transaction_invariant_recovery_curriculum/README.md)
 - `qwen35_4b_universal_curriculum` (new): [README](../experiments/qwen35_4b_universal_curriculum/README.md)
+- `qwen35_4b_universal_failure_selected_restart_target_match` (new): [README](../experiments/qwen35_4b_universal_failure_selected_restart_target_match/README.md)
 - `qwen35_4b_universal_state_table_compiler_token_match` (new): [README](../experiments/qwen35_4b_universal_state_table_compiler_token_match/README.md)
 - `qwen35_4b_validation_policy_counterexample_curriculum` (new): [README](../experiments/qwen35_4b_validation_policy_counterexample_curriculum/README.md)
 - `qwen35_4b_verified_algorithm_retrieval_adaptation` (track-z): [README](../experiments/qwen35_4b_verified_algorithm_retrieval_adaptation/README.md)
@@ -840,7 +846,7 @@ Measure why methods work or fail through attribution, probes, pressure audits, a
 Improve precision, abstention, robustness, reproducibility, and safe artifact handling.
 
 - Charter: [reliability_and_safety](../research_programs/reliability_and_safety/charter.md)
-- Assigned experiments: 73
+- Assigned experiments: 74
 
 ### Seed Evidence
 
@@ -889,6 +895,7 @@ Improve precision, abstention, robustness, reproducibility, and safe artifact ha
 - `qwen35_4b_thinking_separability_probe` (new): [README](../experiments/qwen35_4b_thinking_separability_probe/README.md)
 - `qwen35_4b_transaction_invariant_recovery_curriculum` (new): [README](../experiments/qwen35_4b_transaction_invariant_recovery_curriculum/README.md)
 - `qwen35_4b_universal_curriculum` (new): [README](../experiments/qwen35_4b_universal_curriculum/README.md)
+- `qwen35_4b_universal_failure_selected_restart_target_match` (new): [README](../experiments/qwen35_4b_universal_failure_selected_restart_target_match/README.md)
 - `qwen35_4b_universal_low_density_token_match` (new): [README](../experiments/qwen35_4b_universal_low_density_token_match/README.md)
 - `qwen35_4b_universal_search_scaffold_token_match` (new): [README](../experiments/qwen35_4b_universal_search_scaffold_token_match/README.md)
 - `qwen35_4b_universal_state_table_compiler_token_match` (new): [README](../experiments/qwen35_4b_universal_state_table_compiler_token_match/README.md)
@@ -983,7 +990,7 @@ Study the native thinking-token budget as a first-class controllable test-time-c
 Install general agentic capability in Qwen3.5-4B via breadth-first expert iteration on a firewall-clean multi-family gym, arbitrated by the blackbox menagerie instrument.
 
 - Charter: [agentic_breadth_installation](../research_programs/agentic_breadth_installation/charter.md)
-- Assigned experiments: 25
+- Assigned experiments: 26
 
 ### Assigned Experiments
 
@@ -1004,6 +1011,7 @@ Install general agentic capability in Qwen3.5-4B via breadth-first expert iterat
 - `qwen35_4b_think_ftpo_round2` (new): [README](../experiments/qwen35_4b_think_ftpo_round2/README.md)
 - `qwen35_4b_transaction_invariant_recovery_curriculum` (new): [README](../experiments/qwen35_4b_transaction_invariant_recovery_curriculum/README.md)
 - `qwen35_4b_universal_close_weight_token_match` (new): [README](../experiments/qwen35_4b_universal_close_weight_token_match/README.md)
+- `qwen35_4b_universal_failure_selected_restart_target_match` (new): [README](../experiments/qwen35_4b_universal_failure_selected_restart_target_match/README.md)
 - `qwen35_4b_universal_low_density_token_match` (new): [README](../experiments/qwen35_4b_universal_low_density_token_match/README.md)
 - `qwen35_4b_universal_mid_density_token_match` (new): [README](../experiments/qwen35_4b_universal_mid_density_token_match/README.md)
 - `qwen35_4b_universal_on_policy_prefix_repair_token_match` (new): [README](../experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/README.md)
