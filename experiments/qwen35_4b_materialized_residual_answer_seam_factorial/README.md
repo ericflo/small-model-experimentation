@@ -1,11 +1,16 @@
 # Qwen3.5-4B Materialized Residual Answer-Seam Factorial
 
-**Status:** in-progress · since 2026-07-13 · fresh construction complete; adversarial review holds every model stage sealed pending independent implementation review and a published calibration lock
+**Status:** finished
 
-This fresh successor isolates the failure that made the durable materialized-
-residual generation result uninterpretable: the model never entered a reliable
-short answer ABI. It must qualify an answer seam on known-answer echo tasks
-before any disjoint residual-mechanics task can be opened.
+Terminal 2026-07-14: `NO_VALID_RESIDUAL_ANSWER_SEAM`; mechanics remained sealed.
+
+The registered answer interface failed before residual mechanics opened. All
+240 calibration outputs authenticated, but every arm scored 0/48 strict parses
+and exact echoes. After removing only the terminal `<|im_end|>` plus newline,
+the two no-think arms pass the frozen exact parser on 48/48 rows. Thinking arms
+remain partly invalid because some emit another `</think>` boundary. This is
+evidence for a fresh native answer-stage commit-boundary experiment, not
+permission to repair this result in place.
 
 ## Research Program
 
@@ -77,41 +82,49 @@ python experiments/qwen35_4b_materialized_residual_answer_seam_factorial/scripts
 Full:
 
 ```bash
-sealed pending implementation review and published calibration lock
+.venv-vllm/bin/python experiments/qwen35_4b_materialized_residual_answer_seam_factorial/scripts/run_calibration.py --stage lock
+.venv-vllm/bin/python experiments/qwen35_4b_materialized_residual_answer_seam_factorial/scripts/run_calibration.py --stage run
 ```
 
 ## Results
 
-The immutable scaffold-v1 receipt still passes. V2 construction also passes
-twice byte-identically: 72 unique public instances, zero overlap with 264
-authenticated parent instances, exact live-sibling strata, 4,104 prepared rows,
-2,952 unique canonical request IDs, balanced A-X calibration positions, zero
-model calls, and empty forbidden-read receipts. Append-only real-tokenizer
-receipts also authenticate all answer compositions, context fit, zero rendered
-parent overlap, and the current shared-thought/physical-compute runner.
-Eighty-two model-free
-tests pass, including adversarial durable transaction/recovery mutations and
-exact persisted-token thought forking. A calibration-only loader is byte-
-identical with every mechanics artifact absent, and a fake-runner integration
-passes all five durable invocations plus analysis/restart. This remains
-registration and implementation evidence only. The complete mechanics path is
-now pre-outcome frozen behind a second lock, transport gate, visible-only
-selection/resource plans, and a committed-green pre-hidden gate. The
-lock/live-preflight code is present but no authorization receipt has been
-minted.
+The exact reviewed implementation received `PASS_RELEASE_LIVE_CALLS`; its
+calibration lock was committed and passed both workflows before the live run.
+The five durable transactions then authenticated 240/240 outputs with exact
+shared-thought and answer-seed pairing. The fixed gate returned
+`NO_VALID_RESIDUAL_ANSWER_SEAM`:
+
+- all four arms: 0/48 strict parses and 0/48 exact echoes;
+- `think512_freeform`: 48/48 thought-cap and 18/48 answer-cap contacts;
+- `think512_program_slot`: 48/48 thought-cap and 0/48 answer-cap contacts; and
+- both no-think arms: zero thought/answer-cap contacts.
+
+Mechanics, qualification, confirmation, hidden, and benchmark reads stayed
+empty. A frozen post-decision diagnostic removed only the exact decoded
+`<|im_end|>\n` terminal suffix. The frozen parser then accepted 24/48
+think/freeform, 38/48 think/`PROGRAM:`, and 48/48 in each no-think arm. A looser
+expected-answer-tail diagnostic was 29/48, 48/48, 48/48, and 48/48 respectively,
+but it hides five/ten additional thinking-close boundaries and is not full-
+string exactness. Neither diagnostic changes the registered zero-parse result.
 
 ## Interpretation
 
-No capability belief changes. Adversarial review materially strengthened the
-design and still holds live execution: independent implementation review,
-publication of the exact green implementation lock, its separately green lock
-commit, and committed outcome boundaries remain mandatory.
+The tested strict HF-model-EOS interface is invalid, so residualization remains
+unadjudicated. The negative is not evidence that the no-think model lacked the
+requested program: both no-think arms became 48/48 full-string exact after one
+post hoc terminal-suffix removal. Thinking has an additional close-boundary
+failure. The only warranted continuation is a new experiment that registers
+first tokenizer EOS as the answer-stage deployment commit event on fresh tasks,
+keeps strict parsing, and reruns matched HF-EOS and malformed-terminator
+controls. No mechanics stage from this experiment may be opened.
 
 ## Knowledgebase Update
 
-- Program evidence updated: no; no model result.
-- Program backlog updated: successor identity reserved.
-- Claim ledger updated: no.
+- Program evidence updated: yes; strict interface failure and tokenizer-EOS
+  diagnostic recorded.
+- Program backlog updated: yes; fresh commit-boundary successor required.
+- Claim ledger updated: no; this is a single terminal interface result, not a
+  capability claim.
 
 ## Artifacts
 
@@ -119,6 +132,8 @@ commit, and committed outcome boundaries remain mandatory.
 - `scripts/`
 - `configs/`
 - `runs/`
+- `runs/calibration/decision.json`
+- `analysis/calibration_terminal_diagnostic.json`
 - `runs/smoke/summary.json`
 - `reports/`
 - `reports/artifact_manifest.yaml`

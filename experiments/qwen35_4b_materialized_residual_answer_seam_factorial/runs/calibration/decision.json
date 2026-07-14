@@ -1,0 +1,219 @@
+{
+  "benchmark_files_read": [],
+  "calibration_read_receipt": {
+    "configs/default.yaml": {
+      "bytes": 3466,
+      "sha256": "0f4d4e7fce5ae132879f49633b111a477c51dbb3860f7360fa7d5de1e21301e2"
+    },
+    "runs/prepared/calibration_requests.jsonl": {
+      "bytes": 79559,
+      "sha256": "f984962e5585ddafd4d229e68b751d1584a6b406dc82aa5954fa7bda4a8c54df"
+    },
+    "runs/prepared/preoutcome_receipt.json": {
+      "bytes": 2098,
+      "sha256": "a73b5a0a8fa65700a5ddc8e4a4aa7a50355d7e1826ee63d27a0f790a2c8b350e"
+    },
+    "runs/tokenizer/receipt_v3.json": {
+      "bytes": 9893,
+      "sha256": "dc9a4d225d36c5b000fe2d036dffe5e7998b5bdbedff9cbc8dd8b2e5df341cbf"
+    }
+  },
+  "confirmation_files_read": [],
+  "decision": "NO_VALID_RESIDUAL_ANSWER_SEAM",
+  "fixed_priority": [
+    "think512_freeform",
+    "think512_program_slot",
+    "no_think_freeform",
+    "no_think_program_slot"
+  ],
+  "hidden_files_read": [],
+  "implementation_lock_sha256": "6b02cb10b0c60f252f86990256ab8324bcd65a91d32e5494563afcb404b2545c",
+  "live_preflight_sha256": "60a721d37999e28c3e6b06bb8e66eefe8971c2ee6f03e3716ed2b54522400bf2",
+  "metrics": {
+    "no_think_freeform": {
+      "answer_cap_contacts": 0,
+      "arity_counts": {
+        "2": 24,
+        "3": 24
+      },
+      "by_arity": {
+        "2": {
+          "answer_cap_contacts": 0,
+          "exact_echo_successes": 0,
+          "parse_successes": 0,
+          "rows": 24,
+          "thinking_cap_contacts": 0
+        },
+        "3": {
+          "answer_cap_contacts": 0,
+          "exact_echo_successes": 0,
+          "parse_successes": 0,
+          "rows": 24,
+          "thinking_cap_contacts": 0
+        }
+      },
+      "exact_echo_successes": 0,
+      "parse_successes": 0,
+      "rows": 48,
+      "thinking_cap_contacts": 0
+    },
+    "no_think_program_slot": {
+      "answer_cap_contacts": 0,
+      "arity_counts": {
+        "2": 24,
+        "3": 24
+      },
+      "by_arity": {
+        "2": {
+          "answer_cap_contacts": 0,
+          "exact_echo_successes": 0,
+          "parse_successes": 0,
+          "rows": 24,
+          "thinking_cap_contacts": 0
+        },
+        "3": {
+          "answer_cap_contacts": 0,
+          "exact_echo_successes": 0,
+          "parse_successes": 0,
+          "rows": 24,
+          "thinking_cap_contacts": 0
+        }
+      },
+      "exact_echo_successes": 0,
+      "parse_successes": 0,
+      "rows": 48,
+      "thinking_cap_contacts": 0
+    },
+    "think512_freeform": {
+      "answer_cap_contacts": 18,
+      "arity_counts": {
+        "2": 24,
+        "3": 24
+      },
+      "by_arity": {
+        "2": {
+          "answer_cap_contacts": 8,
+          "exact_echo_successes": 0,
+          "parse_successes": 0,
+          "rows": 24,
+          "thinking_cap_contacts": 24
+        },
+        "3": {
+          "answer_cap_contacts": 10,
+          "exact_echo_successes": 0,
+          "parse_successes": 0,
+          "rows": 24,
+          "thinking_cap_contacts": 24
+        }
+      },
+      "exact_echo_successes": 0,
+      "parse_successes": 0,
+      "rows": 48,
+      "thinking_cap_contacts": 48
+    },
+    "think512_program_slot": {
+      "answer_cap_contacts": 0,
+      "arity_counts": {
+        "2": 24,
+        "3": 24
+      },
+      "by_arity": {
+        "2": {
+          "answer_cap_contacts": 0,
+          "exact_echo_successes": 0,
+          "parse_successes": 0,
+          "rows": 24,
+          "thinking_cap_contacts": 24
+        },
+        "3": {
+          "answer_cap_contacts": 0,
+          "exact_echo_successes": 0,
+          "parse_successes": 0,
+          "rows": 24,
+          "thinking_cap_contacts": 24
+        }
+      },
+      "exact_echo_successes": 0,
+      "parse_successes": 0,
+      "rows": 48,
+      "thinking_cap_contacts": 48
+    }
+  },
+  "model": "Qwen/Qwen3.5-4B",
+  "pairing": {
+    "exact_answer_seed_pairing": true,
+    "exact_stage1_token_pairing": true,
+    "physical_and_reused_sampled_token_accounting": true,
+    "registered_prefix_assignment": true,
+    "rows": 48,
+    "shared_thought_source_sha256": "096155ebf7eb40378dfc4e04ddb94dac860df8cff6d4cfa2cdf4f1ecd1702b92"
+  },
+  "qualification": {
+    "no_think_freeform": false,
+    "no_think_program_slot": false,
+    "think512_freeform": false,
+    "think512_program_slot": false
+  },
+  "qualification_files_read": [],
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "schema_version": 1,
+  "scored_rows_sha256": {
+    "no_think_freeform": "3e51a29b61b833091296ee53b19dffdb321043eb5f16b9d80e3a01f21cde1f3c",
+    "no_think_program_slot": "8a5e981810bee31cc35f440a9d33b39461dd05071a6e036349f168bcd4744df5",
+    "think512_freeform": "71c287c27bc3837e46b8b70180b3f0a3ee7bd75bc9dcca43cb6205d5539e96a0",
+    "think512_program_slot": "e54f5e04926018c55d9644e6488c70e88e88f1e5abedea3d82c673921895ddc1"
+  },
+  "selection_uses_metric_ranking": false,
+  "stage": "interface_calibration",
+  "transaction_chain": {
+    "authenticated_invocations": [
+      "calibration_thoughts",
+      "think512_freeform",
+      "think512_program_slot",
+      "no_think_freeform",
+      "no_think_program_slot"
+    ],
+    "complete_files": {
+      "calibration_thoughts": {
+        "chain_sha256": "5e5e07e7b35f9eb94338c52fb148d0bdcd78fc24e9bcfae0bbc0cff531703008",
+        "complete_sha256": "99a947a6144adc43aedf324c42d0896358a19dbbb4c432b624b2a0282d93f2fa"
+      },
+      "no_think_freeform": {
+        "chain_sha256": "e4b38d0ccbb591b2fb9ddde9129327b817cbfca0883b61643a974cf9a4e69de5",
+        "complete_sha256": "ec1b37015f92283c671878738f434a92f9574f1a48121dc737f23ac59247bc2e"
+      },
+      "no_think_program_slot": {
+        "chain_sha256": "c67a4a3475bf1a34f31a71201e06c124fc4fdf3e57830e6cdb421396001b6093",
+        "complete_sha256": "4e6e283b40540be4bc3ad84f6fd8bbc0bae76b0a9619be09d5c69e65b6e5b4e3"
+      },
+      "think512_freeform": {
+        "chain_sha256": "53f9fc6906da4f49b5c5b3c7c7c5b86554b78e5601ca6e366c434190a52f746e",
+        "complete_sha256": "90c1cc78aba3525e00780a17dcc9792a20a5dbeb3ea47ed8d1528ef201e2240f"
+      },
+      "think512_program_slot": {
+        "chain_sha256": "78e03744a01357025350cda70007b6548c0e1b71f26b83e572824d1ff299fd95",
+        "complete_sha256": "3a129afaa8e49cb53434a8accb6d2f1a45111af43c6e5391bb56b431dd8fb4b2"
+      }
+    },
+    "decision": "REGISTERED_TRANSACTION_CHAIN_AUTHENTICATED",
+    "invocation_order": [
+      "calibration_thoughts",
+      "think512_freeform",
+      "think512_program_slot",
+      "no_think_freeform",
+      "no_think_program_slot"
+    ],
+    "registered_invocations": [
+      "calibration_thoughts",
+      "think512_freeform",
+      "think512_program_slot",
+      "no_think_freeform",
+      "no_think_program_slot"
+    ],
+    "rows": 240,
+    "sampled_outputs": 240,
+    "schema_version": 1,
+    "terminal_complete_sha256": "4e6e283b40540be4bc3ad84f6fd8bbc0bae76b0a9619be09d5c69e65b6e5b4e3"
+  },
+  "winner": null
+}

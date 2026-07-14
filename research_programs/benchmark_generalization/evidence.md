@@ -50,3 +50,14 @@ The imported tracks include strong shift probes. Future work should make shift e
   closure. This is not an accuracy comparison; it demonstrates that termination
   calibration itself is a workload-specific interface property. Future
   thought-state mechanisms must calibrate on their actual task/prompt/backend.
+
+- [qwen35_4b_materialized_residual_answer_seam_factorial](../../experiments/qwen35_4b_materialized_residual_answer_seam_factorial/reports/report.md)
+  (unclaimed interface negative): termination identity also matters within one
+  pinned backend. All 240 calibration outputs authenticated and every arm
+  scored 0/48 strict parse. Tokenizer EOS plus newline before registered HF EOS
+  completely explains the two no-think cells: suffix-only removal yields 48/48
+  frozen-parser exactness in both. It does not completely explain thinking:
+  suffix-only scores were 38/48 and 24/48, ten/five rows had extra closes, and
+  18 think/freeform rows capped without tokenizer EOS. None of this changes the
+  terminal gate. Every workload/interface must register and test its actual
+  token-native commit boundary; “EOS” is not a fungible label.

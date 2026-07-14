@@ -60,14 +60,18 @@
   parse/cap ABI by a wide margin, so it cannot adjudicate residualization. The
   parse-immune cheap materialized ranker was a clean negative: recall@4 0.257,
   below name-only 0.281, shuffled 0.323, listwise 0.271, and surface 0.375.
-  Retire that ranker and top-four branch. If residual generation continues,
-  first run a new fresh echo-gated answer-seam factorial (current control,
-  short no-think structured output, autonomous commit slot), freeze an
-  interface with >=90% echo/parse and <=5% cap contact on calibration tasks,
-  then open disjoint mechanics. Do not increase cap or relax parsing in place.
-  That successor identity is now reserved as
-  `qwen35_4b_materialized_residual_answer_seam_factorial`; its model-free
-  scaffold passes and adversarial design review remains pending.
+  Retire that ranker and top-four branch. The fresh echo-gated answer-seam
+  factorial has now completed under a reviewed lock: all four arms scored 0/48
+  strict parse/exact echo and mechanics stayed sealed. A post-decision
+  diagnostic isolated the mismatch cleanly only for no-think: both no-think
+  arms became 48/48 frozen-parser exact after terminal `<|im_end|>\n` removal;
+  think/`PROGRAM:` and think/freeform were only 38/48 and 24/48 because of
+  extra close boundaries. Do not relax this result's parser. If residual
+  generation continues, create one fresh answer-stage commit-boundary successor
+  that stops at first tokenizer EOS, trims only that terminal token, retains
+  current HF EOS as a control, uses new tasks/IDs/seeds, tests malformed/extra
+  pre-commit bytes, and must independently clear the same >=90% echo/parse and
+  <=5% cap gates before fresh transport and disjoint mechanics.
 - Measure the exact behavioral quotient at fresh depth 6 before assuming model-guided pruning is economically
   needed; record wall time, memory, physical transitions, coverage, and selector success.
 - If a real search wall appears, test a residualized partial state (feasible parameter domains, materialized

@@ -81,3 +81,25 @@ Created as a new experiment scaffold.
   authorization before the gold path can open. Standard-library bootstrap
   checks and process audit hooks now precede every local live import. All 76
   tests pass; the adversarial HOLD remains until fresh review of final hashes.
+- 2026-07-14: Five exact-hash adversarial reviews successively found and closed
+  arm-derived parser semantics, shallow winner/transport/hidden checks,
+  generation prompt/seed/token/cost gaps, cap/finish ambiguity, and impossible
+  post-EOS accounting. Two independent archive audits finally returned
+  `PASS_RELEASE_LIVE_CALLS` on the exact green shared-main tree.
+- 2026-07-14: Published calibration implementation lock `6b02cb10...` in its own
+  commit and waited for both lock-bearing workflows to pass. The lock recorded
+  zero prior model requests/outputs and empty benchmark, mechanics, hidden,
+  qualification, and confirmation reads.
+- 2026-07-14: Ran the registered five-invocation calibration. All 240 outputs
+  and exact thought/answer pairings authenticated. Every interface scored 0/48
+  strict parse and exact echo, so the fixed decision was
+  `NO_VALID_RESIDUAL_ANSWER_SEAM`; mechanics remained sealed.
+- 2026-07-14: A report-only post-decision diagnostic found expected answer-tail
+  matches after terminal `<|im_end|>\n` removal on 48/48 rows in both no-think
+  arms, 48/48 think/`PROGRAM:` rows, and 29/48 think/freeform rows. Adversarial
+  review caught that this was not full-string exactness: suffix-only frozen-
+  parser scores were 48/48, 48/48, 38/48, and 24/48, because the thinking arms
+  included ten/five additional `</think>` boundaries. The sampled terminal
+  sequence was tokenizer EOS 248046, newline 198, then registered HF EOS
+  248044. This cannot retroactively qualify the run; it licenses only a fresh
+  answer-stage tokenizer-EOS successor with malformed-terminator controls.

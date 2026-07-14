@@ -20,6 +20,13 @@
   answer-seam guarantee. Calibrate termination on every new workload; the next
   forced-commit experiment must keep selection and confirmation tasks fresh and
   treat the commit action as part of the interface under test.
+- Completed termination-identity negative:
+  `qwen35_4b_materialized_residual_answer_seam_factorial` authenticated exact
+  no-think outputs and expected thinking answer tails followed by tokenizer
+  EOS/newline, but its HF-EOS interface correctly failed strict parsing. Test
+  tokenizer EOS versus HF EOS explicitly on fresh calibration rows; never
+  inherit a termination token by name alone or repair a result after observing
+  which boundary the model used.
 - Build a common shift taxonomy: length, family, primitive, composition, prompt, format, and real-task shift.
 - Re-run top mechanisms on at least one non-original substrate.
 - Add bridge-composition and held-out-primitive splits to new experiments by default.

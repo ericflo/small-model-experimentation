@@ -282,6 +282,25 @@ Qualification and confirmation stayed sealed. Retire this cheap ranker and
 top-four branch; any remaining residual-generation test must first freeze an
 echo-qualified answer seam on separate calibration tasks.
 
+## Answer-seam factorial result (2026-07-14)
+
+[qwen35_4b_materialized_residual_answer_seam_factorial](../../experiments/qwen35_4b_materialized_residual_answer_seam_factorial/reports/report.md)
+then tested that prerequisite under a reviewed, committed-green calibration
+lock. All five transactions and 240 outputs authenticated, but every one of the
+four think/no-think x freeform/`PROGRAM:` arms scored 0/48 strict parse and
+exact echo, yielding terminal `NO_VALID_RESIDUAL_ANSWER_SEAM`; mechanics and all
+protected reads stayed sealed. The failure is diagnostic rather than a broad
+copying miss. After the decision, removing only the exact terminal
+`<|im_end|>\n` suffix let the frozen parser accept 48/48 rows in both no-think
+arms, but only 38/48 think/`PROGRAM:` and 24/48 think/freeform because ten/five
+thinking rows had another close boundary. A looser expected-tail diagnostic was
+48/48 for think/`PROGRAM:` and 29/48 think/freeform, but is not exact output.
+Sampled tokens showed tokenizer EOS 248046, newline 198, then registered HF EOS
+248044. This does not repair the gate. It isolates a fresh next experiment:
+register first tokenizer EOS as the answer-stage deployment commit boundary,
+use fresh identities, retain strict pre-commit grammar and an HF-EOS control,
+and stop if that interface does not independently qualify.
+
 ## Materialized residual mechanics incident (2026-07-13)
 
 [qwen35_4b_materialized_residual_sibling_search](../../experiments/qwen35_4b_materialized_residual_sibling_search/reports/report.md)

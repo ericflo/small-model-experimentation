@@ -6,7 +6,7 @@ omitted_artifacts: []
 reproducibility:
   smoke_command: "python scripts/run.py --smoke && python scripts/run.py --design-smoke"
   construction_command: "python scripts/construct.py"
-  full_command: "sealed pending implementation review and published calibration lock"
+  full_command: ".venv-vllm/bin/python experiments/qwen35_4b_materialized_residual_answer_seam_factorial/scripts/run_calibration.py --stage run"
   required_external_artifacts: []
 local_receipts:
   scaffold_smoke:
@@ -30,7 +30,20 @@ local_receipts:
   physical_compute_tokenizer_receipt:
     path: "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/tokenizer/receipt_v3.json"
     sha256: "dc9a4d225d36c5b000fe2d036dffe5e7998b5bdbedff9cbc8dd8b2e5df341cbf"
+  calibration_implementation_lock:
+    path: "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/calibration/implementation_lock.json"
+    sha256: "6b02cb10b0c60f252f86990256ab8324bcd65a91d32e5494563afcb404b2545c"
+  calibration_live_preflight:
+    path: "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/calibration/live_preflight.json"
+    sha256: "60a721d37999e28c3e6b06bb8e66eefe8971c2ee6f03e3716ed2b54522400bf2"
+  calibration_decision:
+    path: "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/calibration/decision.json"
+    sha256: "04fbb844d177ee168411cf8bd252e932f9f766dec281ac8128204fa9eefb0b15"
+  calibration_terminal_chain:
+    path: "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/calibration/raw/no_think_program_slot.complete.json"
+    sha256: "4e6e283b40540be4bc3ad84f6fd8bbc0bae76b0a9619be09d5c69e65b6e5b4e3"
 notes: >-
-  Model-free v2 construction plus append-only tokenizer/shared-thought/physical-
-  compute preparation only. Six tracked prepared request files total about 5.9
-  MB and are bound by the preoutcome receipt. No model/GPU stage is authorized.
+  The terminal calibration is tracked in full, including five append-only raw
+  transaction chains (about 4.7 MB). The authenticated decision is
+  NO_VALID_RESIDUAL_ANSWER_SEAM, so mechanics and all protected downstream
+  stages remain sealed.

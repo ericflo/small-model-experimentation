@@ -5,15 +5,14 @@ source_track: "new"
 path: "experiments/qwen35_4b_materialized_residual_answer_seam_factorial"
 primary_readme: "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/README.md"
 primary_report: "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/reports/report.md"
-summary: "This fresh successor isolates the failure that made the durable materialized- residual generation result uninterpretable: the model never entered a reliable short answer ABI. It must qualify an answer seam on known-answer echo tasks before any disjoint residual-mechanics task can be opened."
+summary: "Terminal 2026-07-14: `NO_VALID_RESIDUAL_ANSWER_SEAM`; mechanics remained sealed."
 tags:
-  - "abi"
   - "small-model"
-  - "table-transform"
 research_programs:
   - "benchmark_generalization"
   - "structured_execution_and_compilers"
 top_level_dirs:
+  - "analysis"
   - "configs"
   - "data"
   - "reports"
@@ -22,10 +21,10 @@ top_level_dirs:
   - "src"
   - "tests"
 file_counts:
-  json: 8
+  json: 31
   jsonl: 10
-  md: 8
+  md: 9
   py: 30
   yaml: 3
-total_files: 59
-total_size_bytes: 6850246
+total_files: 83
+total_size_bytes: 11588511

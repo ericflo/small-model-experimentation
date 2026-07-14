@@ -526,6 +526,23 @@ generator must first pass a disjoint, known-answer echo calibration at >=90%
 parse/exact echo and <=5% cap contact; more cap, parser relaxation, and post-hoc
 threshold changes are not evidence.
 
+That calibration has now failed cleanly while revealing a narrower interface
+hypothesis. All 240 outputs authenticated in
+[qwen35_4b_materialized_residual_answer_seam_factorial](../experiments/qwen35_4b_materialized_residual_answer_seam_factorial/reports/report.md),
+but every think/no-think x freeform/`PROGRAM:` arm was 0/48 strict parse and
+exact echo under the registered HF-model-EOS boundary, so mechanics stayed
+sealed. Post-decision, removing only an exact `<|im_end|>\n` suffix recovered
+48/48 frozen-parser exact outputs in both no-think arms. Thinking retained extra
+close-boundary failures: 38/48 think/`PROGRAM:` and 24/48 think/freeform after
+suffix removal, although their final expected-answer segments matched 48/48 and
+29/48. The sampled boundary was tokenizer EOS 248046, newline 198, then HF EOS
+248044. This is not a license to repair the parser after seeing the result. It
+is evidence that **termination identity is part of the interface**: run one
+fresh successor that registers first tokenizer EOS as the answer-stage commit
+event, retains HF EOS and malformed terminators as controls, and must
+independently qualify before residual mechanics. If it fails, retire this
+residual-generation branch.
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.

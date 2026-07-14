@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "status": "post_decision_report_only",
+  "registered_decision": "NO_VALID_RESIDUAL_ANSWER_SEAM",
+  "registered_decision_sha256": "04fbb844d177ee168411cf8bd252e932f9f766dec281ac8128204fa9eefb0b15",
+  "rows_per_arm": 48,
+  "diagnostic": {
+    "description": "After the registered decision, remove only the exact decoded terminal suffix <|im_end|> followed by newline. Report both the frozen full-string parser result after that suffix-only removal and, separately for diagnosis, whether the last answer segment after a thinking close equals the registered expected answer. The latter can hide an additional </think> boundary and is not full-string exactness. Neither diagnostic alters the registered parse or qualification result.",
+    "sampled_terminal_token_ids": [
+      248046,
+      198,
+      248044
+    ],
+    "token_meanings": {
+      "248046": "tokenizer EOS <|im_end|>",
+      "198": "newline",
+      "248044": "registered HF model EOS <|endoftext|>"
+    },
+    "arms": {
+      "think512_freeform": {
+        "strict_parse_successes": 0,
+        "strict_exact_echo_successes": 0,
+        "expected_answer_tail_matches_after_terminal_suffix_removal": 29,
+        "frozen_parser_exact_after_terminal_suffix_removal": 24,
+        "additional_think_close_boundaries": 5,
+        "outputs_containing_tokenizer_eos": 30,
+        "answer_cap_contacts": 18,
+        "thinking_cap_contacts": 48
+      },
+      "think512_program_slot": {
+        "strict_parse_successes": 0,
+        "strict_exact_echo_successes": 0,
+        "expected_answer_tail_matches_after_terminal_suffix_removal": 48,
+        "frozen_parser_exact_after_terminal_suffix_removal": 38,
+        "additional_think_close_boundaries": 10,
+        "outputs_containing_tokenizer_eos": 48,
+        "answer_cap_contacts": 0,
+        "thinking_cap_contacts": 48
+      },
+      "no_think_freeform": {
+        "strict_parse_successes": 0,
+        "strict_exact_echo_successes": 0,
+        "expected_answer_tail_matches_after_terminal_suffix_removal": 48,
+        "frozen_parser_exact_after_terminal_suffix_removal": 48,
+        "additional_think_close_boundaries": 0,
+        "outputs_containing_tokenizer_eos": 48,
+        "answer_cap_contacts": 0,
+        "thinking_cap_contacts": 0
+      },
+      "no_think_program_slot": {
+        "strict_parse_successes": 0,
+        "strict_exact_echo_successes": 0,
+        "expected_answer_tail_matches_after_terminal_suffix_removal": 48,
+        "frozen_parser_exact_after_terminal_suffix_removal": 48,
+        "additional_think_close_boundaries": 0,
+        "outputs_containing_tokenizer_eos": 48,
+        "answer_cap_contacts": 0,
+        "thinking_cap_contacts": 0
+      }
+    }
+  },
+  "interpretation_limit": "The strict registered interface failed and mechanics remains sealed. The diagnostic motivates a fresh tokenizer-EOS commit-boundary experiment; it cannot retroactively qualify this experiment."
+}

@@ -41,40 +41,40 @@
    ]
   },
   "qwen35_4b_materialized_residual_answer_seam_factorial": {
-   "verdict_tag": "Answer-interface firewall registered; no model run is open",
+   "verdict_tag": "Strict answer seam failed; native commit token isolates one fresh repair",
    "concept_primer": "Before asking whether concrete intermediate states help solve a puzzle, this test first checks whether the model can reliably enter a short, machine-readable answer mode. A bad output format must not be mistaken for a reasoning failure.",
-   "plain_question": "Which of three answer styles can reliably emit a two-step program before a fresh materialized-state test begins?",
-   "plain_answer": "No model result exists yet. The scaffold freezes three answer styles and keeps the 24 mechanics tasks sealed behind 48 separate known-answer checks. An answer style must reach at least 90% exact copying and parsing while hitting its length limit on at most 5% of rows.",
-   "why_it_matters": "The durable parent capped every reasoning trace, so its generation failure could not cleanly judge the materialized-state idea. This firewall either establishes a usable answer mode before spending on mechanics or stops the branch without another ambiguous null.",
-   "verdict_tone": "neutral",
+   "plain_question": "Can any think/no-think and freeform/program-prefix answer style reliably emit a two-step program before the materialized-state test begins?",
+   "plain_answer": "No registered style qualified: all four scored zero strict parses out of 48, so mechanics stayed sealed. Removing only the final chat-end marker and newline made both no-think styles exact on all 48 rows; thinking still had extra close markers. That post-run clue motivates a fresh answer-stage commit-boundary test, not a retroactive pass.",
+   "why_it_matters": "The firewall prevented a token-boundary mismatch from being mistaken for failed reasoning or a residual-state result. The next test can now change one registered thing—stop at the first tokenizer chat-end token during the answer stage—while preserving strict parsing and every matched control.",
+   "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Candidate answer styles",
-     "value": "3",
-     "sub": "current control, short no-think output, and a program slot"
+     "label": "Authenticated outputs",
+     "value": "240",
+     "sub": "five durable calibration transactions"
     },
     {
-     "label": "Known-answer checks",
-     "value": "48",
-     "sub": "kept separate from the mechanics tasks"
+     "label": "Strictly qualified styles",
+     "value": "0 / 4",
+     "sub": "every style had zero strict parses"
     },
     {
-     "label": "Exact-copy and parse floors",
-     "value": "90%",
-     "sub": "both must pass before mechanics can open"
+     "label": "No-think exact after suffix removal",
+     "value": "48 / 48",
+     "sub": "both paired no-think styles; post-decision only"
     },
     {
-     "label": "Model calls so far",
+     "label": "Mechanics rows opened",
      "value": "zero",
-     "sub": "model and GPU stages remain sealed"
+     "sub": "the interface firewall stopped the branch"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "All three answer styles face one strict launch bar",
-     "chart_read": "The bars show the minimum acceptable rate for exact copying, parsing, and avoiding the length cap. Every candidate answer style is judged by these same thresholds on separate known-answer tasks.",
-     "chart_takeaway": "Mechanics cannot begin unless one answer style clears 90% exact copying, 90% parsing, and 95% cap avoidance."
+     "chart_plain_title": "The requested answers were often present before an unregistered terminal suffix",
+     "chart_read": "For each style, the strict bar is the registered rate. The frozen-parser diagnostic removes only final chat end plus newline; the separate expected-tail diagnostic takes the last segment after a thinking close and can hide extra close markers. Both are explanatory, not rescored results.",
+     "chart_takeaway": "All registered bars are zero. Suffix-only removal fully repairs no-think but not thinking, so the next fresh test should register the native answer-stage chat-end boundary and retain strict grammar."
     }
    ]
   },

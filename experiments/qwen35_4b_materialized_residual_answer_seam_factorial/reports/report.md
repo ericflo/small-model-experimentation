@@ -2,25 +2,29 @@
 
 ## Summary
 
-Model-free construction and design-v2 implementation are in progress. No model
-result exists, and adversarial review explicitly holds all live calls.
+The registered calibration terminated at `NO_VALID_RESIDUAL_ANSWER_SEAM`, so
+mechanics never opened. All 240 outputs in five durable transactions
+authenticated, but every arm scored 0/48 strict parses and exact echoes.
 
-The main advance over the original scaffold is a causally complete 2x2 answer
-interface, a strict emitted-program event, a fresh exact-depth-three substrate,
-and a staged calibration -> transport -> generation -> visible selection ->
-hidden scoring firewall.
+This is a clean interface negative, not a residual-mechanics result. A frozen
+post-decision diagnostic found that both no-think arms became 48/48 exact under
+the frozen parser after removal of only tokenizer EOS `<|im_end|>` plus newline.
+Thinking arms retained additional close-boundary failures. The runner
+intentionally waited for the later HF model EOS, so the registered parser
+correctly rejected the extra terminal bytes. This licenses a fresh answer-stage
+tokenizer-EOS experiment; it does not change this experiment's decision.
 
 ## Research Program Fit
 
 The closest parent cleanly falsified its cheap viability ranker but could not
 adjudicate materialized residual generation because every thought hit cap and
-the answer ABI failed. This experiment tests that prerequisite on separate
+the answer ABI failed. This experiment tested that prerequisite on separate
 known-answer tasks before reopening composition. It neither revives the failed
 ranker nor treats echo as a capability result.
 
 ## Method
 
-Fresh construction uses the same 24-operation list DSL but new namespace and
+Fresh construction uses the same 24-operation list DSL but a new namespace and
 seeds. Exact common-panel functions exclude depth <=2 behavior. Every accepted
 task exhaustively enumerates 24 first operations x 576 two-operation suffixes,
 giving exact public-live labels. The 72 tasks are split 48 calibration / 24
@@ -32,11 +36,10 @@ Calibration crosses think@512/no-think with freeform/`PROGRAM:` prefill. It uses
 All aliases remain autonomously sampled. The fixed winner is the first gate
 passer in preregistered least-departure order.
 
-If authorized later, mechanics will generate all 24 residual siblings under
-materialized, name-only, and shuffled evidence plus a frozen 96-sample direct
-pool per task. A visible-only consensus selector is the deployable primary;
-hidden proposal coverage is oracle-only. Direct baselines use conservative
-taskwise sampled- and logical-token first-over prefixes.
+Mechanics would have generated all 24 residual siblings under materialized,
+name-only, and shuffled evidence plus a frozen 96-sample direct pool per task.
+The calibration gate failed, so none of those prepared mechanics requests or
+protected labels were opened.
 
 ## Results
 
@@ -54,46 +57,99 @@ Construction summary SHA-256:
 - real-tokenizer receipt `61ff7292...` authenticates `PROGRAM:` `[78041,25]`,
   close `[248069,271]`, all 14,400 canonical answer compositions, 1,396-token
   worst-case context, and zero overlap with 1,984 parent rendered prompts;
-- zero model loads, calls, or sampled outputs; and
-- 82/82 current model-free tests pass, including append-only transaction and
-  crash-recovery mutations.
+- a reviewed implementation lock with zero prior model calls/outputs and empty
+  protected-read receipts; and
+- 82/82 model-free tests before execution, including append-only transaction
+  and crash-recovery mutations.
 
-The first random-order constructor attempt was interrupted after 3m35s before
-writing artifacts. An exact common-function index reduced construction to about
-25 seconds without changing acceptance or labels. Two complete builds were
-byte-identical.
+After five exact-hash adversarial reviews, two independent archive audits
+returned `PASS_RELEASE_LIVE_CALLS`. The lock-bearing commit passed both GitHub
+workflows before calibration. The live run then authenticated:
+
+- five registered invocations and 240/240 sampled outputs;
+- exact shared thought-token pairing across the two thinking continuations;
+- exact answer-seed pairing and registered prefix assignment; and
+- empty benchmark, mechanics, qualification, confirmation, and hidden reads.
+
+The frozen gate metrics were:
+
+| arm | strict parse | exact echo | thought cap | answer cap |
+|---|---:|---:|---:|---:|
+| think@512, freeform | 0/48 | 0/48 | 48/48 | 18/48 |
+| think@512, `PROGRAM:` | 0/48 | 0/48 | 48/48 | 0/48 |
+| no-think, freeform | 0/48 | 0/48 | 0/48 | 0/48 |
+| no-think, `PROGRAM:` | 0/48 | 0/48 | 0/48 | 0/48 |
+
+No arm approached the registered >=44/48 exact/parse gates. The fixed winner is
+therefore null and `NO_VALID_RESIDUAL_ANSWER_SEAM` is terminal.
+
+### Post-decision terminal-boundary diagnostic
+
+This diagnostic is report-only and cannot change qualification. It first
+removes only an exact final decoded `<|im_end|>\n`, then reruns the frozen full-
+string parser. A separate expected-tail diagnostic takes the final segment
+after a thinking close and can therefore hide an additional `</think>`; it is
+reported only to locate the requested answer, not as exact output. The sampled
+terminal sequence is tokenizer EOS 248046, newline 198, and registered HF model
+EOS 248044.
+
+| arm | frozen parser after suffix-only removal | expected-tail match | extra `</think>` |
+|---|---:|---:|---:|
+| think@512, freeform | 24/48 | 29/48 | 5/48 |
+| think@512, `PROGRAM:` | 38/48 | 48/48 | 10/48 |
+| no-think, freeform | 48/48 | 48/48 | 0/48 |
+| no-think, `PROGRAM:` | 48/48 | 48/48 | 0/48 |
+
+Thus tokenizer-EOS stopping is a complete post hoc explanation only for the two
+no-think cells. The thinking cells also have extra close boundaries; freeform
+thinking adds 18 answer-cap contacts. A fresh successor must treat thinking as
+a control rather than assume that one stop-token change repairs it.
 
 ## Controls
 
 The model boundary is exact `Qwen/Qwen3.5-4B` revision
 `851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a`. Prepared arms freeze backend,
 requests, ordering, seeds, caps, and direct-pool ceiling. Forbidden benchmark,
-qualification, confirmation, and hidden-read receipts are empty. These are
-application-level receipts, not OS syscall telemetry.
+mechanics, qualification, confirmation, and hidden-read receipts are empty.
+These are application-level receipts, not OS syscall telemetry. The
+post-decision diagnostic was computed only from already opened calibration
+outputs.
 
 ## Oracle Versus Deployable Evidence
 
-No outcome exists. The preregistration distinguishes the future deployable
-primary—hidden accuracy of the selector frozen without hidden outputs—from
-oracle proposal coverage and exhaustive CPU ceilings.
+No mechanics outcome exists. The deployable selector, hidden proposal coverage,
+and exhaustive CPU ceiling all remain unopened because the interface gate
+failed.
 
 ## Interpretation
 
-No capability belief changes. The model-free evidence shows that a stronger
-experiment is constructible and that the answer-slot intervention can be
-represented as exact injected token IDs without answer identity or
-decode/re-tokenize. It does not show that any interface will qualify or that
-materialized residuals help.
+The strict HF-model-EOS answer ABI is invalid for this workload, and residual
+generation remains unadjudicated. The result should not be summarized as “the
+model could not copy a program”: both no-think arms became 48/48 exact after
+removal of one terminal suffix. Nor should the expected-tail diagnostic for
+thinking be called full-string exactness, or any diagnostic be called a
+successful interface after the fact: parser, stopping policy, cap accounting,
+and transaction semantics were registered around the later HF EOS.
+
+The narrow causal hypothesis for the successor is now concrete. Treat
+tokenizer EOS as an explicit answer-stage deployment commit event, stop at its
+first sampled occurrence, remove only that registered terminal token, and
+require every preceding byte to pass the same exact grammar. Fresh tasks,
+record IDs, and seeds must be used. Controls must include the current HF-EOS
+boundary, freeform versus literal `PROGRAM:` prefix, think versus no-think,
+early/interior/missing terminators, extra pre-commit bytes, exact stop/token/cost
+authentication, fresh transport, and the same mechanics firewall. The paired
+no-think cells share rows/seeds and are not independent replications. Only a
+newly qualified interface may reopen residual mechanics.
 
 ## Remaining Work
 
-Before calibration: finish the model-free authentication audit, obtain an
-independent PASS over the exact final pushed hashes, and only then publish the
-calibration implementation lock after both required workflows are green. The
-fifth implementation review remained HOLD; no live call is authorized.
+This experiment is complete and terminal. Publish the authenticated negative
+and create a separate fresh tokenizer-EOS commit-boundary successor. Do not run
+the existing mechanics lock, transport, generation, visible, or hidden stages.
 
 ## Artifact Manifest
 
-All current construction and prepared artifacts are tracked locally. The
-manifest records their controlling summary/preoutcome receipts. There are no
+All construction, calibration transactions, decision, and derived diagnostic
+are tracked. The manifest records their controlling hashes. There are no
 external or omitted artifacts.

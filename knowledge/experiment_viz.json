@@ -38,27 +38,47 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "Every candidate answer seam faces the same frozen interface bar",
+     "title": "Strict parsing failed even where the exact answer preceded chat end",
      "categories": [
-      "exact echo",
-      "parse",
-      "one minus cap contact"
+      "think freeform",
+      "think PROGRAM:",
+      "no-think freeform",
+      "no-think PROGRAM:"
      ],
      "series": [
       {
-       "label": "minimum acceptable rate",
+       "label": "registered strict exact/parse",
        "values": [
-        0.9,
-        0.9,
-        0.95
+        0.0,
+        0.0,
+        0.0,
+        0.0
+       ]
+      },
+      {
+       "label": "expected answer-tail match (post hoc)",
+       "values": [
+        0.6041666667,
+        1.0,
+        1.0,
+        1.0
+       ]
+      },
+      {
+       "label": "frozen parser after suffix-only removal (post hoc)",
+       "values": [
+        0.5,
+        0.7916666667,
+        1.0,
+        1.0
        ]
       }
      ],
-     "x_label": "known-answer calibration criterion",
-     "y_label": "required success rate",
+     "x_label": "registered answer style",
+     "y_label": "fraction of 48 known-answer rows",
      "y_format": "percent",
-     "note": "Model-free registration only. Mechanics stays sealed unless one of three predeclared interfaces clears all criteria on 48 disjoint calibration tasks.",
-     "source": "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/runs/smoke/summary.json"
+     "note": "The expected-tail series takes the last segment after a thinking close and is not full-string exactness. The frozen-parser series removes only final <|im_end|> plus newline. Neither changes terminal NO_VALID_RESIDUAL_ANSWER_SEAM or opens mechanics.",
+     "source": "experiments/qwen35_4b_materialized_residual_answer_seam_factorial/analysis/calibration_terminal_diagnostic.json"
     }
    ]
   },
