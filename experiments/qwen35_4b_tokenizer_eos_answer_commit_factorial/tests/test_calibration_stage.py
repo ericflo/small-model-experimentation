@@ -290,6 +290,11 @@ class CalibrationStageTests(unittest.TestCase):
             "engine_args_sha256": canonical_sha256(engine_args),
             "resolved_cudagraph": resolved,
             "resolved_logprobs_mode": "raw_logprobs",
+            "adapter": None,
+            "rng_isolation": {
+                "engine_seed": 0,
+                "caller_global_rng_state_restored": True,
+            },
             "runtime": runtime,
         }
         bundle = {
@@ -298,7 +303,12 @@ class CalibrationStageTests(unittest.TestCase):
                 "engine_args": copy.deepcopy(engine_args),
                 "resolved_cudagraph": copy.deepcopy(resolved),
                 "resolved_logprobs_mode": "raw_logprobs",
-                "runtime": copy.deepcopy(runtime),
+                "adapter": None,
+                "rng_isolation": {
+                    "engine_seed": 0,
+                    "caller_global_rng_state_restored": True,
+                },
+                "runtime": {**copy.deepcopy(runtime), "git_dirty": True},
             }
         }
         authenticate_bundle_engine_preflight(bundle, preflight)
@@ -310,6 +320,23 @@ class CalibrationStageTests(unittest.TestCase):
         bad["runner_metadata"]["runtime"]["gpu"] = "different"
         with self.assertRaisesRegex(BoundaryAuthenticationError, "live runtime"):
             authenticate_bundle_engine_preflight(bad, preflight)
+        bad = copy.deepcopy(bundle)
+        bad["runner_metadata"]["runtime"]["git_dirty"] = False
+        with self.assertRaisesRegex(BoundaryAuthenticationError, "live runtime"):
+            authenticate_bundle_engine_preflight(bad, preflight)
+        for field, value in (
+            ("adapter", {"path": "forged"}),
+            (
+                "rng_isolation",
+                {"engine_seed": 1, "caller_global_rng_state_restored": False},
+            ),
+        ):
+            bad = copy.deepcopy(bundle)
+            bad["runner_metadata"][field] = value
+            with self.subTest(field=field), self.assertRaisesRegex(
+                BoundaryAuthenticationError, "live engine"
+            ):
+                authenticate_bundle_engine_preflight(bad, preflight)
 
 
 if __name__ == "__main__":

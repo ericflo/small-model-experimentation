@@ -106,8 +106,16 @@ python3 -B experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/c
 Full:
 
 ```bash
-sealed pending implementation release review, implementation lock, and green publication boundary
+# Still sealed pending implementation review and the published-green lock.
+# Once those gates pass, these are the only supported entry points:
+.venv-vllm/bin/python -I experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/run_calibration.py --stage lock
+.venv-vllm/bin/python -I experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/run_calibration.py --stage run
+.venv-vllm/bin/python -I experiments/qwen35_4b_tokenizer_eos_answer_commit_factorial/scripts/run_calibration.py --stage analyze
 ```
+
+The isolated-mode guard executes immediately after importing Python's built-in
+`sys` module and before any shadowable import. Invocations without `-I`, with a
+missing stage, or with a malformed stage fail before repository-local imports.
 
 ## Results
 

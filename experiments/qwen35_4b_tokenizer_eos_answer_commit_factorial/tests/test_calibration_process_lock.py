@@ -9,19 +9,19 @@ from pathlib import Path
 
 
 EXP = Path(__file__).resolve().parents[1]
-SCRIPT = EXP / "scripts/run_calibration.py"
+MODULE = EXP / "src/process_lock.py"
 HELPER = r"""
 import importlib.util
 import sys
 from pathlib import Path
 
-spec = importlib.util.spec_from_file_location("run_calibration_lock_test", sys.argv[1])
+spec = importlib.util.spec_from_file_location("calibration_process_lock_test", sys.argv[1])
 module = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(module)
-module.RUN_LOCK = Path(sys.argv[2])
+lock_path = Path(sys.argv[2])
 mode = sys.argv[3]
 try:
-    with module.calibration_process_lock():
+    with module.calibration_process_lock(lock_path):
         if mode == "holder":
             Path(sys.argv[4]).write_text("ready")
             sys.stdin.readline()
@@ -44,9 +44,10 @@ class CalibrationProcessLockTests(unittest.TestCase):
                 [
                     sys.executable,
                     "-B",
+                    "-I",
                     "-c",
                     HELPER,
-                    str(SCRIPT),
+                    str(MODULE),
                     str(lock_path),
                     "holder",
                     str(ready),
@@ -69,9 +70,10 @@ class CalibrationProcessLockTests(unittest.TestCase):
                 command = [
                     sys.executable,
                     "-B",
+                    "-I",
                     "-c",
                     HELPER,
-                    str(SCRIPT),
+                    str(MODULE),
                     str(lock_path),
                     "contender",
                 ]

@@ -3,6 +3,7 @@ from __future__ import annotations
 import copy
 import sys
 import unittest
+from unittest import mock
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -156,6 +157,7 @@ class CalibrationLockTests(unittest.TestCase):
         commit = "a" * 40
         runtime = {key: f"value-{key}" for key in lock.RUNTIME_METADATA_KEYS}
         runtime["git_dirty"] = False
+        runtime["git_commit"] = commit
         value = {
             "schema_version": 1,
             "decision": "CALIBRATION_LIVE_ENGINE_PREFLIGHT_PASS",
@@ -171,6 +173,11 @@ class CalibrationLockTests(unittest.TestCase):
             "engine_args_sha256": "b" * 64,
             "resolved_cudagraph": {"has_full_cudagraphs": True},
             "resolved_logprobs_mode": "raw_logprobs",
+            "adapter": None,
+            "rng_isolation": {
+                "engine_seed": 0,
+                "caller_global_rng_state_restored": True,
+            },
             "prompt_receipt": {},
             "runtime": runtime,
             "invocation_order": list(lock.INVOCATION_ORDER),
@@ -191,18 +198,48 @@ class CalibrationLockTests(unittest.TestCase):
             implementation_lock_sha256="f" * 64,
         )
         self.assertEqual(validate(value)["live_head"], commit)
-        for mutation in ("extra_key", "runtime_key", "engine"):
+        for mutation in (
+            "extra_key",
+            "runtime_key",
+            "runtime_commit",
+            "runtime_dirty",
+            "engine",
+        ):
             bad = copy.deepcopy(value)
             if mutation == "extra_key":
                 bad["unexpected"] = True
             elif mutation == "runtime_key":
                 bad["runtime"].pop("gpu")
+            elif mutation == "runtime_commit":
+                bad["runtime"]["git_commit"] = "c" * 40
+            elif mutation == "runtime_dirty":
+                bad["runtime"]["git_dirty"] = True
             else:
                 bad["engine"]["max_model_len"] += 1
             with self.subTest(mutation=mutation), self.assertRaisesRegex(
                 RuntimeError, "preflight boundary changed"
             ):
                 validate(bad)
+
+    def test_live_preflight_must_descend_from_lock_and_precede_current_head(self) -> None:
+        commits = {name: character * 40 for name, character in (
+            ("lock", "a"), ("live", "b"), ("head", "c")
+        )}
+        with mock.patch.object(lock, "_ancestor", side_effect=(True, True)):
+            lock.authenticate_live_preflight_ancestry(
+                lock_commit=commits["lock"],
+                live_head=commits["live"],
+                current_head=commits["head"],
+            )
+        for ancestry in ((False, True), (True, False)):
+            with self.subTest(ancestry=ancestry), mock.patch.object(
+                lock, "_ancestor", side_effect=ancestry
+            ), self.assertRaisesRegex(RuntimeError, "Git ancestry changed"):
+                lock.authenticate_live_preflight_ancestry(
+                    lock_commit=commits["lock"],
+                    live_head=commits["live"],
+                    current_head=commits["head"],
+                )
 
 
 if __name__ == "__main__":

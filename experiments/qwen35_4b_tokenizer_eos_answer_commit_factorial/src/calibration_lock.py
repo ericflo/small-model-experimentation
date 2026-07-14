@@ -66,6 +66,8 @@ LIVE_PREFLIGHT_KEYS = {
     "engine_args_sha256",
     "resolved_cudagraph",
     "resolved_logprobs_mode",
+    "adapter",
+    "rng_isolation",
     "prompt_receipt",
     "runtime",
     "invocation_order",
@@ -95,6 +97,7 @@ CRITICAL_FILES = (
     PREFIX + "src/calibration_stage.py",
     PREFIX + "src/identity.py",
     PREFIX + "src/interface_analysis.py",
+    PREFIX + "src/process_lock.py",
     PREFIX + "src/protocol.py",
     PREFIX + "src/task_data.py",
     PREFIX + "src/transactions.py",
@@ -121,6 +124,7 @@ CALIBRATION_RUNTIME_FILES = (
     PREFIX + "src/calibration_stage.py",
     PREFIX + "src/identity.py",
     PREFIX + "src/interface_analysis.py",
+    PREFIX + "src/process_lock.py",
     PREFIX + "src/protocol.py",
     PREFIX + "src/task_data.py",
     PREFIX + "src/transactions.py",
@@ -736,6 +740,11 @@ def live_preflight_value(
     lock = verify_calibration_lock(lock_path)
     loaded = _validate_loaded_runner(runner, inputs)
     head = _commit_id(_git("rev-parse", "HEAD"))
+    if (
+        loaded["runtime"].get("git_commit") != head
+        or loaded["runtime"].get("git_dirty") is not False
+    ):
+        raise RuntimeError("live preflight requires the clean current Git commit")
     return {
         "schema_version": 1,
         "decision": "CALIBRATION_LIVE_ENGINE_PREFLIGHT_PASS",
@@ -749,6 +758,11 @@ def live_preflight_value(
         "engine_args_sha256": canonical_sha256(_normalized(runner.engine_args)),
         "resolved_cudagraph": _normalized(runner.resolved_cudagraph),
         "resolved_logprobs_mode": runner.resolved_logprobs_mode,
+        "adapter": runner.adapter_info,
+        "rng_isolation": {
+            "engine_seed": runner.engine_args["seed"],
+            "caller_global_rng_state_restored": True,
+        },
         "prompt_receipt": loaded["prompts"],
         "runtime": loaded["runtime"],
         "invocation_order": list(INVOCATION_ORDER),
@@ -791,9 +805,14 @@ def validate_live_preflight_value(
         )
         or not isinstance(value.get("resolved_cudagraph"), dict)
         or value.get("resolved_logprobs_mode") != "raw_logprobs"
+        or value.get("adapter") is not None
+        or value.get("rng_isolation")
+        != {"engine_seed": 0, "caller_global_rng_state_restored": True}
         or not isinstance(value.get("prompt_receipt"), dict)
         or not isinstance(value.get("runtime"), dict)
         or set(value["runtime"]) != RUNTIME_METADATA_KEYS
+        or value["runtime"].get("git_commit") != value.get("live_head")
+        or value["runtime"].get("git_dirty") is not False
         or value.get("invocation_order") != list(INVOCATION_ORDER)
         or value.get("expected_source_rows") != 48
         or value.get("expected_answer_pairs") != 192
@@ -816,6 +835,18 @@ def validate_live_preflight_value(
     return value
 
 
+def authenticate_live_preflight_ancestry(
+    *, lock_commit: str, live_head: str, current_head: str
+) -> None:
+    lock_commit = _commit_id(lock_commit)
+    live_head = _commit_id(live_head)
+    current_head = _commit_id(current_head)
+    if not _ancestor(lock_commit, live_head) or not _ancestor(
+        live_head, current_head
+    ):
+        raise RuntimeError("live preflight Git ancestry changed")
+
+
 def verify_recorded_live_preflight(
     *,
     inputs: CalibrationInputs,
@@ -831,8 +862,13 @@ def verify_recorded_live_preflight(
         implementation_lock_sha256=sha256_file(lock_path),
     )
     live_head = _commit_id(value["live_head"])
-    if not _ancestor(lock["implementation_commit"], live_head):
-        raise RuntimeError("live preflight predates implementation")
+    lock_commit = _tracked_commit(str(lock_path.relative_to(ROOT)))
+    current_head = _commit_id(_git("rev-parse", "HEAD"))
+    authenticate_live_preflight_ancestry(
+        lock_commit=lock_commit,
+        live_head=live_head,
+        current_head=current_head,
+    )
     _validate_ci_evidence(live_head, value["live_head_ci"], label="live preflight")
     verify_recorded_ci(live_head, value["live_head_ci"])
     if runner is not None:
@@ -842,11 +878,19 @@ def verify_recorded_live_preflight(
             value["engine_args_sha256"]
             != canonical_sha256(_normalized(runner.engine_args))
             or value["resolved_cudagraph"] != _normalized(runner.resolved_cudagraph)
+            or value["adapter"] != runner.adapter_info
+            or value["rng_isolation"]
+            != {
+                "engine_seed": runner.engine_args["seed"],
+                "caller_global_rng_state_restored": True,
+            }
             or value["prompt_receipt"] != loaded["prompts"]
             or any(
                 value["runtime"].get(key) != loaded["runtime"].get(key)
                 for key in stable_runtime_keys
             )
+            or value["runtime"].get("git_dirty") is not False
+            or loaded["runtime"].get("git_dirty") is not True
         ):
             raise RuntimeError("current runner differs from live preflight")
     return value

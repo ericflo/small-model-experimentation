@@ -2,7 +2,7 @@
 
 ## Status
 
-`HOLD_LIVE_CALLS` pending a second independent adversarial review of the exact
+`HOLD_LIVE_CALLS` pending a third independent adversarial review of the exact
 pushed, green repair commit. No model load or generation is authorized.
 
 ## First adversarial review
@@ -41,3 +41,24 @@ exact reviewed commit; reviewed runtime bytes must remain unchanged; the
 receipt commit, release commit, and eventual lock commit must all be published
 and green. Until those conditions are machine-authenticated, this report is a
 hold, not an authorization.
+
+## Second adversarial review
+
+The second review examined exact published-green commit
+`462bd06922a338f841f7f20e365638f8709d64e4`. Its boundary/scoring audit passed,
+but the combined verdict was `HOLD_IMPLEMENTATION` on four additional release
+blockers:
+
+1. Shadowable standard-library imports ran before the bootstrap under normal
+   script-directory and `PYTHONPATH` semantics.
+2. Lock, missing, and malformed stages could reach local imports without the
+   review/release bootstrap.
+3. Live-preflight runtime omitted exact Git dirty-state transition and tracked
+   lock-to-live-to-current ancestry checks.
+4. Absolute bundle attestation omitted adapter and RNG-isolation metadata.
+
+The prospective repair requires isolated `-I` execution before shadowable
+imports, a review-authenticated lock-publication bootstrap, exact clean-to-dirty
+runtime transition plus lock ancestry, and adapter/RNG binding for all five
+bundles. A third review must test these paths without reading construction,
+mechanics, ciphertext, key, benchmark, or hidden artifacts.

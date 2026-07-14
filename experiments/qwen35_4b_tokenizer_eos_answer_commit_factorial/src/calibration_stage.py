@@ -738,11 +738,18 @@ def authenticate_bundle_engine_preflight(
         != live_preflight.get("resolved_cudagraph")
         or metadata.get("resolved_logprobs_mode")
         != live_preflight.get("resolved_logprobs_mode")
+        or metadata.get("adapter") != live_preflight.get("adapter")
+        or metadata.get("rng_isolation") != live_preflight.get("rng_isolation")
     ):
         raise BoundaryAuthenticationError("bundle differs from live engine preflight")
     stable_keys = RUNTIME_METADATA_KEYS - {"git_dirty"}
-    if any(
-        bundle_runtime.get(key) != preflight_runtime.get(key) for key in stable_keys
+    if (
+        preflight_runtime.get("git_dirty") is not False
+        or bundle_runtime.get("git_dirty") is not True
+        or any(
+            bundle_runtime.get(key) != preflight_runtime.get(key)
+            for key in stable_keys
+        )
     ):
         raise BoundaryAuthenticationError("bundle differs from live runtime preflight")
 

@@ -3,18 +3,27 @@
 
 from __future__ import annotations
 
+import sys
+
+
+if not (
+    sys.flags.isolated == 1
+    and sys.flags.ignore_environment == 1
+    and sys.flags.safe_path
+):
+    raise RuntimeError(
+        "sealed calibration requires isolated Python; invoke .venv-vllm/bin/python -I"
+    )
+
 import argparse
-import fcntl
 import hashlib
 import importlib.metadata
 import json
 import os
 import re
 import subprocess
-import sys
-from contextlib import contextmanager
 from pathlib import Path
-from typing import Any, Iterator
+from typing import Any
 
 
 EXP = Path(__file__).resolve().parents[1]
@@ -27,6 +36,7 @@ _BOOTSTRAP_IMPORT_FILES = (
     str(EXP_REL / "src/calibration_stage.py"),
     str(EXP_REL / "src/identity.py"),
     str(EXP_REL / "src/interface_analysis.py"),
+    str(EXP_REL / "src/process_lock.py"),
     str(EXP_REL / "src/protocol.py"),
     str(EXP_REL / "src/task_data.py"),
     str(EXP_REL / "src/transactions.py"),
@@ -297,13 +307,85 @@ def _bootstrap_validate_environment() -> None:
         raise RuntimeError(f"live calibration package versions changed: {observed}")
 
 
+def _bootstrap_authenticate_review_release() -> dict[str, Any]:
+    if any(EXP.rglob("__pycache__")):
+        raise RuntimeError("pre-import calibration refuses local Python caches")
+    review_path = EXP / "reports/calibration_implementation_review.json"
+    report_path = EXP / "reports/calibration_implementation_review.md"
+    review = _bootstrap_strict_json(review_path)
+    implementation = _bootstrap_commit(
+        review.get("reviewed_commit"), label="reviewed implementation commit"
+    )
+    if (
+        set(review) != _BOOTSTRAP_REVIEW_KEYS
+        or review.get("schema_version") != 1
+        or review.get("verdict") != "PASS_IMPLEMENTATION"
+        or not isinstance(review.get("reviewer"), str)
+        or not review["reviewer"].strip()
+        or not isinstance(review.get("adversarial_review_rounds"), int)
+        or isinstance(review.get("adversarial_review_rounds"), bool)
+        or review["adversarial_review_rounds"] < 1
+        or review.get("experimental_model_requests_reviewed") != 0
+        or review.get("sampled_model_outputs_reviewed") != 0
+        or any(
+            review.get(field) != []
+            for field in (
+                "hidden_files_read", "qualification_files_read",
+                "confirmation_files_read", "benchmark_files_read",
+            )
+        )
+    ):
+        raise RuntimeError("pre-import implementation review changed")
+    review_relative = str(review_path.relative_to(ROOT))
+    report_relative = str(report_path.relative_to(ROOT))
+    review_commit = _bootstrap_tracked_commit(review_relative)
+    head = _bootstrap_commit(_bootstrap_git("rev-parse", "HEAD"), label="HEAD")
+    if (
+        review_path.read_bytes()
+        != _bootstrap_git_bytes("show", f"{review_commit}:{review_relative}")
+        or _bootstrap_sha256(report_path) != review.get("review_report_sha256")
+        or report_path.read_bytes()
+        != _bootstrap_git_bytes("show", f"{review_commit}:{report_relative}")
+        or not _bootstrap_ancestor(implementation, review_commit)
+        or not _bootstrap_ancestor(review_commit, head)
+    ):
+        raise RuntimeError("pre-import review provenance changed")
+    for relative in _BOOTSTRAP_RUNTIME_FILES:
+        implementation_blob = _bootstrap_git_bytes(
+            "show", f"{implementation}:{relative}"
+        )
+        if _bootstrap_sha256(ROOT / relative) != hashlib.sha256(
+            implementation_blob
+        ).hexdigest():
+            raise RuntimeError(f"pre-import reviewed runtime changed: {relative}")
+    subprocess.run(["git", "fetch", "--quiet", "origin", "main"], cwd=ROOT, check=True)
+    origin = _bootstrap_commit(
+        _bootstrap_git("rev-parse", "origin/main"), label="origin/main"
+    )
+    if not _bootstrap_ancestor(head, origin):
+        raise RuntimeError("pre-import live HEAD is not published on main")
+    _bootstrap_validate_ci(implementation, review.get("reviewed_ci"))
+    for published_commit in dict.fromkeys((review_commit, head)):
+        _bootstrap_validate_ci(published_commit)
+    _bootstrap_validate_environment()
+    _install_calibration_path_audit(list(_BOOTSTRAP_AUDIT_FILES))
+    return {
+        "value": review,
+        "implementation_commit": implementation,
+        "review_commit": review_commit,
+        "receipt_sha256": _bootstrap_sha256(review_path),
+        "head": head,
+    }
+
+
 def _bootstrap_verify_before_local_imports() -> None:
     sys.dont_write_bytecode = True
     stage = _bootstrap_stage()
-    if stage not in {"run", "analyze"}:
+    if stage not in {"lock", "run", "analyze"}:
+        raise RuntimeError("pre-import calibration stage is invalid or absent")
+    review_release = _bootstrap_authenticate_review_release()
+    if stage == "lock":
         return
-    if any(EXP.rglob("__pycache__")):
-        raise RuntimeError("pre-import calibration refuses local Python caches")
     lock_path = EXP / "runs/calibration/implementation_lock.json"
     lock = _bootstrap_strict_json(lock_path)
     critical = lock.get("critical_files")
@@ -347,7 +429,12 @@ def _bootstrap_verify_before_local_imports() -> None:
     review_commit = _bootstrap_commit(
         review_binding["receipt_commit"], label="review receipt commit"
     )
-    if review_binding["reviewed_commit"] != implementation:
+    if (
+        implementation != review_release["implementation_commit"]
+        or review_commit != review_release["review_commit"]
+        or review_binding["reviewed_commit"] != implementation
+        or review_binding.get("receipt_sha256") != review_release["receipt_sha256"]
+    ):
         raise RuntimeError("pre-import review names another implementation")
     review_path = EXP / "reports/calibration_implementation_review.json"
     review = _bootstrap_strict_json(review_path)
@@ -386,7 +473,8 @@ def _bootstrap_verify_before_local_imports() -> None:
     lock_commit = _bootstrap_tracked_commit(lock_relative)
     head = _bootstrap_commit(_bootstrap_git("rev-parse", "HEAD"), label="HEAD")
     if (
-        lock_path.read_bytes()
+        head != review_release["head"]
+        or lock_path.read_bytes()
         != _bootstrap_git_bytes("show", f"{lock_commit}:{lock_relative}")
         or not _bootstrap_ancestor(implementation, review_commit)
         or not _bootstrap_ancestor(review_commit, release)
@@ -412,18 +500,8 @@ def _bootstrap_verify_before_local_imports() -> None:
     for relative in _BOOTSTRAP_FROZEN_MECHANICS:
         if _bootstrap_git("rev-parse", f"{head}:{relative}") != frozen[relative]:
             raise RuntimeError(f"pre-import frozen mechanics changed: {relative}")
-    subprocess.run(["git", "fetch", "--quiet", "origin", "main"], cwd=ROOT, check=True)
-    origin = _bootstrap_commit(
-        _bootstrap_git("rev-parse", "origin/main"), label="origin/main"
-    )
-    if not _bootstrap_ancestor(head, origin):
-        raise RuntimeError("pre-import live HEAD is not published on main")
-    _bootstrap_validate_ci(implementation, lock.get("implementation_ci"))
     _bootstrap_validate_ci(release, lock.get("release_ci"))
-    for published_commit in dict.fromkeys((review_commit, lock_commit, head)):
-        _bootstrap_validate_ci(published_commit)
-    _bootstrap_validate_environment()
-    _install_calibration_path_audit(list(_BOOTSTRAP_AUDIT_FILES))
+    _bootstrap_validate_ci(lock_commit)
 
 
 _bootstrap_verify_before_local_imports()
@@ -448,6 +526,7 @@ from calibration_stage import (  # noqa: E402
     load_calibration_inputs,
     run_calibration_transactions,
 )
+from process_lock import calibration_process_lock  # noqa: E402
 from transactions import (  # noqa: E402
     inventory_state,
     read_canonical,
@@ -458,24 +537,6 @@ from vllm_runner import VLLMRunner  # noqa: E402
 
 RUN_LOCK = EXP / "runs/calibration/run.lock"
 RUNNER_PATH = SRC / "vllm_runner.py"
-
-
-@contextmanager
-def calibration_process_lock() -> Iterator[None]:
-    RUN_LOCK.parent.mkdir(parents=True, exist_ok=True)
-    descriptor = os.open(RUN_LOCK, os.O_CREAT | os.O_RDWR, 0o644)
-    acquired = False
-    try:
-        try:
-            fcntl.flock(descriptor, fcntl.LOCK_EX | fcntl.LOCK_NB)
-            acquired = True
-        except BlockingIOError as error:
-            raise RuntimeError("another calibration process holds the live lock") from error
-        yield
-    finally:
-        if acquired:
-            fcntl.flock(descriptor, fcntl.LOCK_UN)
-        os.close(descriptor)
 
 
 def _write_or_verify_decision(value: dict[str, Any]) -> dict[str, Any]:
@@ -526,7 +587,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.stage == "lock":
         value = publish_calibration_lock()
     else:
-        with calibration_process_lock():
+        with calibration_process_lock(RUN_LOCK):
             value = run_live() if args.stage == "run" else analyze()
     print(json.dumps(value, indent=2, sort_keys=True))
     return 0

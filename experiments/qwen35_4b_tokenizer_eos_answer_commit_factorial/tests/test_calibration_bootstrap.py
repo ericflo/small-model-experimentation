@@ -1,7 +1,11 @@
 from __future__ import annotations
 
 import ast
-import importlib.util
+import os
+import shutil
+import subprocess
+import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -13,9 +17,12 @@ class CalibrationBootstrapTests(unittest.TestCase):
     def test_firewall_is_installed_before_every_local_runtime_import(self) -> None:
         source = (EXP / "scripts/run_calibration.py").read_text()
         ast.parse(source)
+        isolated_guard = source.index("sys.flags.isolated == 1")
+        first_shadowable_import = source.index("import argparse")
         bootstrap = source.index("_bootstrap_verify_before_local_imports()")
         path_insert = source.index("sys.path.insert(0, str(SRC))")
         local_import = source.index("from calibration_lock import")
+        self.assertLess(isolated_guard, first_shadowable_import)
         self.assertLess(bootstrap, path_insert)
         self.assertLess(bootstrap, local_import)
         preimport = source[:local_import]
@@ -24,6 +31,8 @@ class CalibrationBootstrapTests(unittest.TestCase):
         self.assertIn("forbids unregistered repository access", preimport)
         self.assertIn("pre-import calibration refuses local Python caches", source)
         self.assertIn("requires the pinned .venv-vllm interpreter", source)
+        self.assertIn("review_release = _bootstrap_authenticate_review_release()", source)
+        self.assertIn('if stage == "lock":', source)
 
     def test_bootstrap_binds_exact_model_and_runtime_import_inventory(self) -> None:
         source = (EXP / "scripts/run_calibration.py").read_text()
@@ -36,6 +45,7 @@ class CalibrationBootstrapTests(unittest.TestCase):
             "src/calibration_lock.py",
             "src/calibration_stage.py",
             "src/interface_analysis.py",
+            "src/process_lock.py",
             "src/protocol.py",
             "src/transactions.py",
             "src/vllm_runner.py",
@@ -51,36 +61,44 @@ class CalibrationBootstrapTests(unittest.TestCase):
         self.assertIn("pre-import frozen mechanics changed", source)
         self.assertIn("for published_commit in dict.fromkeys", source)
 
-    def test_compiled_bootstrap_inventories_equal_runtime_lock_inventories(self) -> None:
-        script = EXP / "scripts/run_calibration.py"
-        spec = importlib.util.spec_from_file_location(
-            "run_calibration_bootstrap_test", script
-        )
-        module = importlib.util.module_from_spec(spec)
-        assert spec.loader is not None
-        spec.loader.exec_module(module)
-        import calibration_lock
-
-        self.assertEqual(
-            tuple(module._BOOTSTRAP_RUNTIME_FILES),
-            calibration_lock.CALIBRATION_RUNTIME_FILES,
-        )
-        self.assertEqual(
-            set(module._BOOTSTRAP_AUDIT_FILES)
-            - set(module._BOOTSTRAP_RUNTIME_FILES),
-            {
-                str(module.EXP_REL / "reports/calibration_implementation_review.md"),
-                str(module.EXP_REL / "reports/calibration_implementation_review.json"),
-            },
-        )
-        self.assertEqual(
-            set(module._BOOTSTRAP_CRITICAL_FILES),
-            set(calibration_lock.CRITICAL_FILES),
-        )
-        self.assertEqual(
-            set(module._BOOTSTRAP_FROZEN_MECHANICS),
-            set(calibration_lock.FROZEN_MECHANICS_FILES),
-        )
+    def test_isolated_mode_guard_precedes_shadowable_imports(self) -> None:
+        source_script = EXP / "scripts/run_calibration.py"
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            script = root / "workspace/experiment/scripts/run_calibration.py"
+            script.parent.mkdir(parents=True)
+            sentinel = root / "shadow-executed"
+            shutil.copyfile(source_script, script)
+            (script.parent / "json.py").write_text(
+                f"open({str(sentinel)!r}, 'w').write('executed')\n"
+            )
+            environment = dict(os.environ)
+            environment["PYTHONPATH"] = str(script.parent)
+            unsafe = subprocess.run(
+                [sys.executable, "-B", str(script), "--stage", "invalid"],
+                env=environment,
+                capture_output=True,
+                text=True,
+            )
+            self.assertNotEqual(unsafe.returncode, 0)
+            self.assertIn("requires isolated Python", unsafe.stderr)
+            self.assertFalse(sentinel.exists())
+            isolated = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    "-I",
+                    str(script),
+                    "--stage",
+                    "invalid",
+                ],
+                env=environment,
+                capture_output=True,
+                text=True,
+            )
+            self.assertNotEqual(isolated.returncode, 0)
+            self.assertIn("pre-import calibration stage is invalid", isolated.stderr)
+            self.assertFalse(sentinel.exists())
 
 
 if __name__ == "__main__":
