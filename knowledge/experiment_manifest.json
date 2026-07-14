@@ -6255,8 +6255,9 @@
   },
   {
     "file_counts": {
-      ".json": 2,
-      ".jsonl": 2,
+      ".json": 4,
+      ".jsonl": 3,
+      ".log": 1,
       ".md": 7,
       ".py": 14,
       ".yaml": 3
@@ -6287,12 +6288,13 @@
       "configs",
       "data",
       "reports",
+      "runs",
       "scripts",
       "src",
       "tests"
     ],
-    "total_files": 28,
-    "total_size_bytes": 1588857
+    "total_files": 32,
+    "total_size_bytes": 5621650
   },
   {
     "file_counts": {

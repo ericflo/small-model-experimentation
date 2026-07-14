@@ -7702,10 +7702,10 @@
    ]
   },
   "qwen35_4b_universal_successful_sibling_target_match": {
-   "verdict_tag": "Design frozen; first parent run pending",
+   "verdict_tag": "First parent run sealed; grading pending",
    "concept_primer": "When the model misses a fresh problem on its first try but solves it on another sampled try, that successful attempt may be a better lesson than a hand-written solution because it already uses reasoning the model can produce.",
    "plain_question": "Can the model learn broadly useful behavior from its own shortest correct sampled attempts on fresh problems it first gets wrong?",
-   "plain_answer": "The test is ready but has not called the model yet. It freezes 624 fresh problems across 13 skills, one first-attempt run, and then 16 sampled attempts only for those first-attempt failures. Training may proceed only if every skill yields four short correct attempts from the same model.",
+   "plain_answer": "The first-attempt run is complete on all 624 fresh problems, but its answers have not yet been graded. After that sealed run is published, only its failed problems may receive 16 sampled attempts. Training may proceed only if every skill yields four short correct attempts from the same model.",
    "why_it_matters": "The previous hand-written restart lessons made answers shorter and cleaner but less correct. This test asks whether using only solutions the model can already generate avoids that mismatch while still moving its usual first answer.",
    "verdict_tone": "neutral",
    "key_numbers": [
@@ -7725,9 +7725,9 @@
      "sub": "four short correct tasks per skill"
     },
     {
-     "label": "Model events completed",
-     "value": "zero",
-     "sub": "only model-free design evidence exists"
+     "label": "First attempts collected",
+     "value": "624 of 624",
+     "sub": "296,259 sampled tokens; grading remains gated"
     }
    ],
    "charts": [
@@ -7735,7 +7735,7 @@
      "index": 0,
      "chart_plain_title": "Only intake, fresh data, and review are complete",
      "chart_read": "The groups follow the planned checkpoints from intake through two collection runs, training, local testing, and broad testing. A bar at one means that checkpoint is complete.",
-     "chart_takeaway": "The first three checkpoints are complete. Every model-facing stage remains gated, beginning with one authorized first-attempt collection."
+     "chart_takeaway": "The first four checkpoints are complete, including the sealed first-attempt run. Failure grading is next; every later model-facing stage remains gated."
     }
    ]
   },

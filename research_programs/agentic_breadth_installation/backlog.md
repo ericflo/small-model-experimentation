@@ -270,7 +270,11 @@
   greedy-input, and design receipt hashes are `9071ce57...603e9` /
   `313eb53c...2a53` / `2be0ac30...a0bc6`. Review verdict
   `PASS_GREEDY_COLLECTION` authorizes one greedy event only after this design is
-  published green. Exact-exposure replay, the unchanged local gate, all-family
+  published green. From green commit `0038fba1`, that event completed 624/624 rows
+  and 296259 sampled tokens at 859.6 tok/s with no recovery or rerun. Raw/receipt
+  hashes are `e91313c0...f556` / `cee1f19d...4962`. Grade and publish the frozen
+  failure inventory next; sibling sampling is still unauthorized. Exact-exposure
+  replay, the unchanged local gate, all-family
   aggregate lift, higher-tier confirmation, and matched-compute sample-more remain
   mandatory downstream; close this record immediately if either availability gate
   fails.

@@ -48512,13 +48512,13 @@
      "series": [
       {
        "label": "completed checkpoint",
-       "values": [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]
+       "values": [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0]
       }
      ],
      "x_label": "preregistered experiment stage",
      "y_label": "completion indicator",
      "y_format": "integer",
-     "note": "Intake, the 624-task source, and adversarial design review are complete. The first greedy collection is the only authorized model event; sibling sampling, selection, training, evaluation, and benchmark access remain gated.",
+     "note": "Intake, the 624-task source, adversarial design review, and the complete 624-row greedy collection are done. Failure freezing is next; sibling sampling, selection, training, evaluation, and benchmark access remain gated.",
      "source": "experiments/qwen35_4b_universal_successful_sibling_target_match/reports/report.md"
     }
    ]

@@ -11,3 +11,11 @@
 - Added adversarial review verdict `PASS_GREEDY_COLLECTION`; no later event is authorized.
 - Experiment test suite: 27/27 passes under `.venv` with bytecode disabled.
 - No model, GPU, training, local, or benchmark event ran during this stage.
+
+## 2026-07-14 — Authenticated greedy collection
+
+- Launched only after design commit `0038fba1` passed Validate Repository `29371704674` and Publish Research Site `29371704828`.
+- The frozen parent completed 624/624 rows and 296,259 sampled tokens at 859.6 tok/s in 392.0 wrapper seconds.
+- Raw/metadata/log/receipt hashes are `e91313c0...f556` / `0e82ae73...15ce` / `f1657151...ca4` / `cee1f19d...4962`.
+- Recovery was unused and generation was not rerun. Benchmark data was not read; aggregate remains sealed.
+- Failure grading and the oracle-free sibling input remain unopened until this collection checkpoint is published green.

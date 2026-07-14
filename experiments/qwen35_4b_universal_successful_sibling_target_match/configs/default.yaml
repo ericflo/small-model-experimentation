@@ -1,5 +1,5 @@
 experiment_id: qwen35_4b_universal_successful_sibling_target_match
-status: design_frozen_greedy_collection_pending
+status: greedy_collection_complete_failure_freeze_pending
 model:
   id: Qwen/Qwen3.5-4B
   revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
@@ -24,6 +24,13 @@ collection:
     samples_per_task: 1
     max_tokens: 1024
     max_model_len: 4096
+    completed: true
+    rows: 624
+    sampled_tokens: 296259
+    sampled_tokens_per_second: 859.5791363510751
+    source_git_head: 0038fba17bb08c63fe1239a225fff1ee905367f9
+    rollout_sha256: e91313c04fb851bc760f7b080e3411b120fdf78b8a6e89fafbd9a9011a10f556
+    receipt_sha256: cee1f19d1319e01a9aa69cedb1e9261de29a3c24d9e07477b77a1f5d9cc94962
   siblings:
     conditional_on_published_greedy_failures: true
     thinking: natural

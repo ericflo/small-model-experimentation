@@ -19,4 +19,4 @@ reproducibility:
   full_command: checkpointed scripts/run.py stages only
   required_external_artifacts:
     - authenticated replay parent composite
-notes: Model-free source/input/manifest/design artifacts are tracked. Collection outputs and small receipts will be tracked after each isolated event. No benchmark artifact exists.
+notes: Model-free source/input/manifest/design artifacts and the complete 624-row greedy output/metadata/log/receipt are tracked. Sibling collection has not run. No benchmark artifact exists.

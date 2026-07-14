@@ -2,7 +2,7 @@
 
 Test whether the deployed parent’s own short verifier-correct sampled trajectories can turn fresh greedy failures into transferable supervision under exact-exposure replay.
 
-**Status:** in-progress · since 2026-07-14 · model-free design is frozen; the first authenticated greedy collection is the only next model event
+**Status:** in-progress · since 2026-07-14 · greedy collection is complete; model-free failure freezing is the next gated stage
 
 ## Research Program
 
@@ -52,15 +52,15 @@ Every stage requires its prerequisite receipt committed on clean, synchronized `
 
 ## Results
 
-Model-free construction is complete. The 624 source rows and oracle-free greedy input regenerate byte-for-byte, contain 48 rows for every skill, and have zero message overlap with the two closest predecessors or reserved local seeds 88,000–88,011. No model event, training, local evaluation, or benchmark event has run in this experiment yet.
+Model-free construction and the sole greedy event are complete. The 624 source rows and oracle-free input regenerate byte-for-byte, contain 48 rows for every skill, and have zero message overlap with the two closest predecessors or reserved local seeds 88,000–88,011. From pushed-green commit `0038fba1`, the authenticated parent produced 624/624 rows and 296,259 sampled tokens at 859.6 tok/s in 392.0 wrapper seconds. Raw/metadata/log/receipt hashes are `e91313c0...f556` / `0e82ae73...15ce` / `f1657151...ca4` / `cee1f19d...4962`; no recovery or rerun occurred. Failure grading, sibling sampling, training, local evaluation, and benchmark access remain unopened.
 
 ## Interpretation
 
-No capability inference exists yet. The current evidence is design provenance only: the two collection events, selection rule, availability stop, and oracle-fallback prohibition are fixed before observing this trial’s parent output.
+No capability inference exists yet. The current evidence is design provenance plus an authenticated ungraded greedy collection. The sibling pool, selection rule, availability stop, and oracle-fallback prohibition were fixed before this parent output and cannot now change.
 
 ## Knowledgebase Update
 
-- Program evidence updated: pending a collection or terminal gate result.
+- Program evidence updated: operational collection evidence is recorded in the backlog; capability evidence remains pending.
 - Program backlog updated: this trial claims the queued successful-sibling successor.
 - Claim ledger updated: no; no capability result exists.
 
