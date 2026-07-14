@@ -48164,6 +48164,43 @@
      "source": "experiments/qwen35_4b_universal_replay_anchor/data/dose_manifest.json"
     }
    ]
+  },
+  "qwen35_4b_universal_search_scaffold_token_match": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Planned exact-token arms isolate staged search lessons",
+     "categories": [
+      "common replay",
+      "staged search lessons",
+      "matched replay filler"
+     ],
+     "series": [
+      {
+       "label": "replay after close",
+       "values": [
+        200,
+        0,
+        120
+       ]
+      },
+      {
+       "label": "search scaffold after close",
+       "values": [
+        200,
+        80,
+        40
+       ]
+      }
+     ],
+     "x_label": "prospective stream component",
+     "y_label": "training rows",
+     "y_format": "integer",
+     "note": "Design-stage plan only. Feasibility must also make both arms exactly 286,814 forward tokens and 40 updates before scientific work is authorized.",
+     "source": "experiments/qwen35_4b_universal_search_scaffold_token_match/configs/default.yaml"
+    }
+   ]
   }
  }
 }

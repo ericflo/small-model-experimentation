@@ -1,0 +1,21 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_universal_search_scaffold_token_match"
+external_artifacts:
+  - name: "prospective close_xi parent adapter"
+    storage: "large_artifacts/qwen35_4b_universal_close_weight_token_match/adapters/close_xi"
+    required_for: "prospective common warm start after design review"
+    checksum: "weights 16e9dc75a0e33e182e916600ff6e1d75fc46dfa45e870216e2c149a41253c179; config de953bd57502ff728a12d1627d5aacab6284b045428ec7b83026388afd8c47ff"
+    regenerate: ".venv/bin/python experiments/qwen35_4b_universal_close_weight_token_match/scripts/run.py --stage train-close"
+omitted_artifacts:
+  - path: "large_artifacts/qwen35_4b_universal_search_scaffold_token_match/"
+    reason: "planned adapters and merged checkpoints are large and gitignored; none exist at intake"
+reproducibility:
+  smoke_command: "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_search_scaffold_token_match/scripts/run.py --smoke"
+  full_command: "locked until feasibility, preregistration, and adversarial review pass"
+  required_external_artifacts:
+    - "large_artifacts/qwen35_4b_universal_close_weight_token_match/adapters/close_xi"
+notes: >-
+  Intake only. Planned construction seed 77111, training seed 45, fresh local seed
+  88007, and conditional aggregate seed 78137. No stream, adapter, merge, local
+  receipt, or benchmark receipt exists yet.

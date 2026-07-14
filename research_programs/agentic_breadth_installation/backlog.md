@@ -156,6 +156,12 @@
   control, and a prospective formatting/termination audit. It must pass the unchanged
   local gate before merge, then beat replay continuation on every benchmark family
   and matched-compute sampling before any universal claim.
+- Active intake: `qwen35_4b_universal_search_scaffold_token_match` decomposes
+  two-step search into five independently scored executable lesson stages before a
+  bounded full-search ledger. It prospectively starts from the authenticated
+  close-weight near-miss, trains a new same-parent replay continuation, and reserves
+  fresh local seed 88007 and conditional aggregate seed 78137. Only CPU feasibility
+  is authorized until adversarial design review passes.
 
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.

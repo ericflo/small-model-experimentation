@@ -1361,6 +1361,15 @@
     "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
    ]
   },
+  "qwen35_4b_universal_search_scaffold_token_match": {
+   "start": "2026-07-14",
+   "end": "2026-07-14",
+   "confidence": "high",
+   "sources": [
+    "experiments/qwen35_4b_universal_search_scaffold_token_match/experiment_log.md: dated intake heading"
+   ],
+   "caveat": "Only intake and CPU design smoke exist at this boundary; no scientific model run has started."
+  },
   "qwen35_4b_unsaturated_frontier_active_bridge": {
    "start": "2026-06-22",
    "end": "2026-06-22",

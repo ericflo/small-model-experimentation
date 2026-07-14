@@ -5938,6 +5938,45 @@
   },
   {
     "file_counts": {
+      ".md": 5,
+      ".py": 3,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_universal_search_scaffold_token_match",
+    "path": "experiments/qwen35_4b_universal_search_scaffold_token_match",
+    "primary_readme": "experiments/qwen35_4b_universal_search_scaffold_token_match/README.md",
+    "primary_report": "experiments/qwen35_4b_universal_search_scaffold_token_match/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation",
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "posttraining_and_adaptation",
+      "process_control_and_tool_use",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "This experiment tests whether independently supervised, executable search substates compose into a bounded general reasoning procedure better than an exact-token replay continuation from the same parent.",
+    "tags": [
+      "curriculum",
+      "execution",
+      "latent-state",
+      "small-model",
+      "table-transform"
+    ],
+    "title": "Search-Scaffold Universal Curriculum",
+    "top_level_dirs": [
+      "configs",
+      "reports",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 11,
+    "total_size_bytes": 97342
+  },
+  {
+    "file_counts": {
       ".json": 16,
       ".jsonl": 11,
       ".log": 19,
