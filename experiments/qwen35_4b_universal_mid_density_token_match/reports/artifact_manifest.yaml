@@ -22,10 +22,10 @@ external_artifacts:
     required_for: "240-row candidate evaluation"
     checksum: "weights 9b159156a7fd59f259454427371e7eb6f72dc2bb1f4e51d6cb6c9dc169af0116; config 66fb435d789ce43a741a04cdbceca1f3c133f157310e2751cbead79d7e51531c"
     regenerate: ".venv/bin/python experiments/qwen35_4b_universal_mid_density_token_match/scripts/run.py --stage train-d240"
-  - name: "eligible merged checkpoints (planned)"
+  - name: "eligible merged checkpoints (not created)"
     storage: "large_artifacts/qwen35_4b_universal_mid_density_token_match/merged/"
     required_for: "same-backend aggregate evaluation"
-    checksum: "pending local gates and explicit merge"
+    checksum: "not created; no arm passed local seed 88005"
     regenerate: ".venv/bin/python experiments/qwen35_4b_universal_mid_density_token_match/scripts/run.py --stage merge"
 omitted_artifacts:
   - path: "large_artifacts/qwen35_4b_universal_mid_density_token_match/"
@@ -54,4 +54,8 @@ notes: >-
   8bc2f0528f75766c0954ec55455cf9873e4396324c55707f8b1a617af707d82d) and its
   normalized log is runs/training/designed240.log (SHA-256
   3c2e0692742ac13f3712a0825d86fb728ef561eca22c3a551b1d8923aca77838).
-  Update the remaining planned merge checksums after each successful stage.
+  The local receipt is runs/local/seed88005.json (SHA-256
+  ca1a33612ba7dcd430c05a90ee3953358b1137b345101ec78e829e64137bffb3);
+  its empty promotion receipt is runs/local/seed88005_promotion.json (SHA-256
+  3bdad3e9e7536972e7d6178484d02098503d5c77a7a14cb530f46af0173ea41a).
+  No merged checkpoint or benchmark artifact exists.

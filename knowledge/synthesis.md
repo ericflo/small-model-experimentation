@@ -576,6 +576,20 @@ magnified. Residual mechanics and hidden labels stayed sealed. The next result
 must come from the frozen winner behind a second committed-green lock and must
 beat every structured and taskwise matched-compute direct control.
 
+**Exact-token universal dose interpolation exposes a narrow answer-commit seam
+(2026-07-13, local mechanism evidence).** The contamination-free
+[qwen35_4b_universal_mid_density_token_match](../experiments/qwen35_4b_universal_mid_density_token_match/reports/report.md)
+bridge fixes row count, slot order, optimizer steps, parent, and forward-token
+exposure while replacing zero, 160, or 240 replay rows with truth-audited abstract
+skills. Fresh local seed 88005 gives a sharp nonmonotonic result: replay is 17/26
+accurate, 18/26 parsed, with nine cap contacts; 160 rows reach 19/26, 23/26, and
+three; 240 rows fall to 17/26, 22/26, and five. The 160-row arm misses the frozen
+parse and cap bars by one case each, so benchmark promotion is correctly empty.
+**More generic curriculum is not the next lever:** keep the 160-row capability mix
+and target the remaining commit/termination seam under a fresh exact-token control.
+This is local mechanism evidence only; broad retention and universality remain
+unmeasured.
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.

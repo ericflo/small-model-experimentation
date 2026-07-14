@@ -2,8 +2,9 @@
 
 ## Summary
 
-Prepared, not run. This experiment tests a representative nested 0/160/240-row
-designed-dose ladder from replay refresh with exact forward-token matching.
+Completed local negative. A representative nested 0/160/240-row designed-dose
+ladder was trained from replay refresh with exact forward-token matching; no arm
+passed the fresh local gate, so merge and benchmark remained sealed.
 
 ## Research Program Fit
 
@@ -21,11 +22,12 @@ and B, and `designed240` replaces A, B, and C. Every arm contains 1,520 rows,
 
 ## Results
 
-Training checkpoint only. All three exact-token arms completed 190/190 updates over
-1,520 rows with zero skips. Final training losses were 0.4199, 0.6606, and 0.7284;
-wall times were 1,396.686, 1,390.190, and 1,373.185 seconds for replay, 160-row, and
-240-row arms respectively. The local screen and paired benchmark remain pending, so
-no generalized-transfer comparison is available yet.
+All three exact-token arms completed 190/190 updates over 1,520 rows with zero skips.
+On fresh local seed 88,005, anchor and replay repeat each scored 17/26 accuracy,
+18/26 parse, and 9 cap contacts. `designed160` scored 19/26, 23/26, and 3;
+`designed240` scored 17/26, 22/26, and 5. Every arm passed accuracy ≥0.65 and the
+route check, but none passed parse ≥0.90 and cap contacts ≤2. Promotion was empty,
+so no merge or paired benchmark occurred.
 
 ## Controls
 
@@ -43,12 +45,23 @@ training signal.
 
 ## Interpretation
 
-Pending. Local success alone will not be interpreted as generalized transfer.
+The 160-row dose is a real near-threshold local improvement: versus exact-token
+replay it adds two correct cases, five parsed answers, removes six cap contacts, and
+shortens mean output by about 218 tokens. The effect is not monotonic: 240 rows lose
+the accuracy gain and regress parse/cap behavior relative to 160. This rejects
+representative dose interpolation as sufficient, not the curriculum signal. The
+remaining local bottleneck is concise answer commitment at the 160-row capability
+mix. There is no broad-transfer evidence because the benchmark correctly stayed
+sealed.
 
 ## Next Experiments
 
-A passing pilot requires independent quick replication, medium@2,048, paired
-uncertainty, and matched-compute sampling in a new confirmation experiment.
+Use a new experiment and fresh local seed to hold the 160-row capability mix fixed
+while adding a small truth-audited answer-commit/termination intervention with an
+exact-token active control. Do not add more representative dose, lower the observed
+gate, reuse seed 88,005, or spend aggregate seed 78,135. Any later pilot pass still
+requires independent quick replication, medium@2,048, paired uncertainty, and
+matched-compute sampling.
 
 ## Artifact Manifest
 

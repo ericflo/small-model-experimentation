@@ -71,3 +71,23 @@
   `3c2e0692742ac13f3712a0825d86fb728ef561eca22c3a551b1d8923aca77838`.
 - All three exact-token arms are now trained. No local or benchmark evaluation was
   performed at this checkpoint.
+
+## 2026-07-13 — fresh local gate negative
+
+- Ran `scripts/run.py --stage local` from published all-arms checkpoint `68667bea`.
+- Consumed the single registered experiment-owned seed 88,005 event across the
+  inherited anchor and all three arms at greedy decode and 1,024 generated tokens.
+- Anchor and `replay_repeat` each scored 17/26 accuracy, 18/26 parse, and 9 cap
+  contacts. `designed160` scored 19/26, 23/26, and 3; `designed240` scored 17/26,
+  22/26, and 5. All candidates had zero feasible-route abstentions.
+- Every arm passed accuracy ≥0.65 and the route check. Every arm failed parse ≥0.90
+  and cap contacts ≤2. The 160-row arm missed each remaining bar by one case.
+- Full receipt: `runs/local/seed88005.json`, SHA-256
+  `ca1a33612ba7dcd430c05a90ee3953358b1137b345101ec78e829e64137bffb3`.
+  Promotion receipt: `runs/local/seed88005_promotion.json`, SHA-256
+  `3bdad3e9e7536972e7d6178484d02098503d5c77a7a14cb530f46af0173ea41a`.
+- Gate receipt hashes: replay
+  `5e2861186d11a454695a47b9e806391d58950fd12d1dfacc3b8fc7c6a8f39279`,
+  160 rows `ee70d0fd88400a4909b4e0b7b45537f2bfe4697ed47521126a56f971bcba03b0`,
+  and 240 rows `7fca078a2050586f91d0eaa233932f9991704315175a98fa5a48b3830082dbd8`.
+- Eligible list was empty. No merge or benchmark ran; seed 78,135 remains sealed.

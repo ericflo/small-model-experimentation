@@ -13294,32 +13294,32 @@
    ]
   },
   "qwen35_4b_universal_mid_density_token_match": {
-   "verdict_tag": "All streams trained; transfer remains unmeasured",
+   "verdict_tag": "160 lessons nearly pass; benchmark stays sealed",
    "concept_primer": "Very small doses of abstract lessons did not install reliable execution, while a much larger earlier dose learned locally but displaced broad behavior. This experiment tests two doses between those endpoints while keeping training exposure exactly equal to replay-only practice.",
    "plain_question": "Can a middle-sized dose of abstract skill lessons cross the local installation threshold without sacrificing the replay practice that protects broad capability?",
-   "plain_answer": "Not measured yet. Replay-only, 160-lesson, and 240-lesson streams each finished all 190 updates with zero skipped rows. The fresh local screen and broad evaluation remain pending, so this checkpoint says nothing yet about transfer.",
-   "why_it_matters": "This is the shortest direct test of the remaining dose gap. A strict fresh local screen prevents weak candidates from consuming a broad evaluation event, while a successful candidate would still have to beat replay continuation and every family before advancing.",
-   "verdict_tone": "neutral",
+   "plain_answer": "The 160-lesson stream improved fresh local accuracy from 17 to 19 of 26 cases, raised readable answers from 18 to 23, and cut answer-limit contacts from nine to three. It still missed the readability and length gates by one case each. Adding 80 more lessons erased the accuracy gain, so no model advanced to broad evaluation.",
+   "why_it_matters": "The middle dose moved the right behaviors and came close, while the larger dose moved backward. That narrows the next intervention to concise answer commitment at the 160-lesson mix instead of adding more generic lessons or weakening the gate.",
+   "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "training streams complete",
-     "value": "three of three",
-     "sub": "all exact-exposure streams complete"
+     "label": "best local accuracy",
+     "value": "19 of 26",
+     "sub": "160 lessons versus 17 for replay only"
     },
     {
-     "label": "designed lesson doses",
-     "value": "160 / 240",
-     "sub": "both frozen before training"
+     "label": "best readable answers",
+     "value": "23 of 26",
+     "sub": "one case short of the registered gate"
     },
     {
-     "label": "rows per stream",
-     "value": "1,520",
-     "sub": "position aligned across every arm"
+     "label": "fewest answer-limit contacts",
+     "value": "three",
+     "sub": "one above the registered ceiling"
     },
     {
-     "label": "forward tokens per stream",
-     "value": "1,405,510",
-     "sub": "exactly matched with zero skipped rows"
+     "label": "broad events consumed",
+     "value": "zero",
+     "sub": "promotion receipt was empty"
     }
    ],
    "charts": [
@@ -13327,7 +13327,13 @@
      "index": 0,
      "chart_plain_title": "Two middle doses replace matched replay blocks",
      "chart_read": "Every bar totals 1,520 rows. The designed streams replace two or three token-matched 80-row replay blocks while the 1,280-row replay core stays fixed.",
-     "chart_takeaway": "The frozen ladder isolates lesson density at equal token exposure; all streams are trained and await the same fresh local screen."
+     "chart_takeaway": "The frozen ladder isolates lesson density at equal token exposure; all three streams trained cleanly."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "The 160-lesson stream misses two local bars narrowly",
+     "chart_read": "Each model has bars for exact-answer accuracy and readable-answer rate on the same 26 fresh cases. The 160-lesson stream leads both, but readable answers remain one case short; its three answer-limit contacts are also one above the ceiling.",
+     "chart_takeaway": "A middle dose improves correctness and concise completion, while 240 lessons reverse part of the gain; no arm is eligible for broad evaluation."
     }
    ]
   },

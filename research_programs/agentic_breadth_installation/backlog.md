@@ -134,16 +134,19 @@
   1,520 rows, and 190 steps per arm. On fresh seed 88004 every arm missed the
   0.65 accuracy, 0.90 parse, and at-most-two cap bars; the best 80-row arm was
   0.538/0.615/10 and benchmark seed 78134 remained sealed.
-- Active exact-token bridge: `qwen35_4b_universal_mid_density_token_match` freezes
-  representative 0/160/240-row doses from authenticated replay refresh. Every arm
-  has a common 1,280-row replay core, 1,520 total rows, 190 updates, and exactly
-  1,405,510 forward tokens. The initially considered 320-row dose was removed
-  before registration because representative rows could not be token-matched to
-  320 replay rows without a new length bias. Fresh local seed 88005 gates any
-  conditional aggregate-only seed 78135 event. Do not adapt doses from partial
-  outputs, rerun 40/80 rows, lower the local bars, or spend sealed seed 78134.
-  Any pilot pass still requires result-separated confirmation, medium-tier
-  evaluation, uncertainty, and matched-compute sampling before a universal claim.
+- Completed exact-token mid-density negative:
+  `qwen35_4b_universal_mid_density_token_match` trained representative 0/160/240
+  doses with 1,520 rows, 190 updates, and exactly 1,405,510 forward tokens per arm.
+  On fresh seed 88005, the 160-row arm improved replay from 17/26 to 19/26 accuracy,
+  18/26 to 23/26 parse, and 9 to 3 cap contacts, but missed the parse and cap gates
+  by one case each. The 240-row arm reversed the accuracy gain and worsened both
+  emission metrics. No arm advanced; benchmark seed 78135 remains sealed.
+- Next universal-feature successor must be result-separated, use fresh seeds, hold
+  the 160-row capability mix fixed, and isolate concise answer commitment or
+  termination with an exact-token active control. Do not add another representative
+  dose, lower the observed gates, reuse seed 88005, or consume sealed seeds 78134 or
+  78135. Any arm that passes must still beat replay continuation on every family and
+  matched-compute sampling before a universal claim.
 
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.

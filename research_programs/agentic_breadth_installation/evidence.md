@@ -527,3 +527,28 @@ anchor's accuracy and remains far outside the gate. This does not measure broad
 retention and does not reject intermediate doses or termination-focused mechanisms.
 A successor must use a new directory and fresh seeds, preserve exact-token replay
 controls, and pass a prospectively frozen local gate before any benchmark event.
+
+## qwen35_4b_universal_mid_density_token_match (2026-07-13 — 160-row near miss; 240-row reversal)
+
+Three 1,520-row continuations started from the authenticated replay-refresh adapter
+and each received 190 effective-batch-8 updates and exactly 1,405,510 forward tokens
+with zero skips. A common 1,280-row replay core occupied identical slots. Replay
+repeat retained three token-matched replay blocks; the designed arms replaced two
+or three 80-row blocks, each covering all 13 truth-audited skills.
+
+Fresh local seed 88005 rejected every arm before merge or benchmark. Anchor and
+replay repeat each scored 17/26 accuracy, 18/26 parse, and 9 cap contacts.
+`designed160` improved to 19/26 accuracy, 23/26 parse, and 3 cap contacts;
+`designed240` fell back to 17/26, 22/26, and 5. Every candidate passed accuracy
+≥0.65 and had zero feasible-route abstentions, but none met parse ≥0.90 and cap
+contacts ≤2. The 160-row arm missed each remaining bar by one case. Promotion was
+empty, and aggregate seed 78135 remained unconsumed.
+
+Read: representative designed density has a nonmonotonic local optimum near 160
+rows. Relative to exact-token replay, that arm adds two correct cases, five parsed
+answers, removes six cap contacts, and shortens mean output by about 218 tokens.
+Another 80 generic designed rows reverses the accuracy gain and worsens parse/cap
+behavior, so further dose interpolation is not the warranted next move. A new
+experiment should hold the 160-row capability mix fixed and isolate concise answer
+commitment or termination with an exact-token active control and fresh local seed.
+This result contains no broad-retention evidence and does not license a lower gate.

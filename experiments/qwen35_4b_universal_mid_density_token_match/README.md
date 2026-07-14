@@ -1,6 +1,6 @@
 # Mid-Density Token-Matched Universal Curriculum
 
-**Status:** in-progress · since 2026-07-13 · all three exact-token arms trained; fresh local gates and conditional paired pilot remain
+**Status:** finished · 2026-07-13 · no arm passed the fresh local gate; benchmark remained sealed
 
 ## Research program
 
@@ -67,21 +67,35 @@ Smoke and staged run:
 
 ## Results
 
-Training checkpoint only. All three arms completed all 190 updates over their
-authenticated 1,520-row, 1,405,510-forward-token streams with zero skips. Final
-training losses were 0.4199 (`replay_repeat`), 0.6606 (`designed160`), and 0.7284
-(`designed240`). The local screen and new benchmark event have not run, so there is
-no transfer result yet.
+All three arms completed 190/190 updates over their authenticated 1,520-row,
+1,405,510-forward-token streams with zero skips. Fresh local seed 88,005 produced:
+
+- inherited anchor: 17/26 accuracy, 18/26 parsed, 9 cap contacts;
+- `replay_repeat`: 17/26 accuracy, 18/26 parsed, 9 cap contacts;
+- `designed160`: 19/26 accuracy, 23/26 parsed, 3 cap contacts;
+- `designed240`: 17/26 accuracy, 22/26 parsed, 5 cap contacts.
+
+Every arm cleared the 0.65 accuracy bar and feasible-route abstention check. No arm
+simultaneously cleared parse ≥0.90 and cap contacts ≤2. `designed160` was one parsed
+case and one cap contact short; `designed240` was worse on all three primary metrics.
+The promotion receipt is empty, no model was merged, and aggregate seed 78,135
+remained sealed.
 
 ## Interpretation
 
-No result interpretation before the frozen stages complete. Local success is only a
-mechanism gate and will not be described as generalized transfer.
+Representative dose interpolation has a sharp, nonmonotonic local effect. The
+160-row dose adds two correct cases over exact-token replay and cuts missing answers
+from eight to three, cap contacts from nine to three, and mean generation from 729 to
+511 tokens. Adding another 80 designed rows reverses the accuracy gain and worsens
+parse and cap behavior. The next result-separated experiment should keep the
+160-row capability mix fixed and target the remaining answer-commit/termination
+seam with exact-token controls; it must not lower these observed gates or spend the
+sealed benchmark seed.
 
 ## Knowledgebase Update
 
-- Program evidence: pending result.
-- Program backlog: this mid-density bridge is active.
+- Program evidence: exact-token 160-row near-miss and 240-row reversal recorded.
+- Program backlog: termination-focused successor queued with fresh seeds.
 - Claim ledger: unchanged; a single pilot cannot establish a universal-feature claim.
 
 ## Artifacts
@@ -92,3 +106,5 @@ mechanism gate and will not be described as generalized transfer.
 - `scripts/materialize_doses.py`: deterministic nested exact-token constructor.
 - `reports/design_review.md` and `reports/preregistration.md`: frozen threats and gates.
 - `reports/artifact_manifest.yaml`: external adapter and merged-model locations.
+- `runs/local/seed88005.json`: complete experiment-owned local receipt.
+- `runs/local/seed88005_promotion.json`: empty promotion decision; benchmark sealed.

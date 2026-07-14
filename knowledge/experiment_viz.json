@@ -47943,6 +47943,50 @@
      "y_format": "integer",
      "note": "All arms share slot order, contain 1,520 rows, ran 190 optimizer steps, and totaled exactly 1,405,510 forward tokens. All three trained with zero skips; the fresh local comparison is pending.",
      "source": "experiments/qwen35_4b_universal_mid_density_token_match/data/dose_manifest.json"
+    },
+    {
+     "headline": false,
+     "kind": "bar",
+     "title": "The 160-row dose nearly clears the fresh local gate",
+     "categories": [
+      "accuracy",
+      "parse rate"
+     ],
+     "series": [
+      {
+       "label": "inherited anchor",
+       "values": [
+        0.6538461538461539,
+        0.6923076923076923
+       ]
+      },
+      {
+       "label": "replay_repeat",
+       "values": [
+        0.6538461538461539,
+        0.6923076923076923
+       ]
+      },
+      {
+       "label": "designed160",
+       "values": [
+        0.7307692307692307,
+        0.8846153846153846
+       ]
+      },
+      {
+       "label": "designed240",
+       "values": [
+        0.6538461538461539,
+        0.8461538461538461
+       ]
+      }
+     ],
+     "x_label": "fresh local metric",
+     "y_label": "rate",
+     "y_format": "percent",
+     "note": "Frozen gates required at least 65% accuracy, at least 90% parse rate, and at most two cap contacts. Cap contacts were 9, 9, 3, and 5 respectively; no arm was eligible.",
+     "source": "experiments/qwen35_4b_universal_mid_density_token_match/runs/local/seed88005_promotion.json"
     }
    ]
   },
