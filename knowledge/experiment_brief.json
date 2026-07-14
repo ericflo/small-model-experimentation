@@ -7429,40 +7429,40 @@
    ]
   },
   "qwen35_4b_universal_close_weight_token_match": {
-   "verdict_tag": "Design frozen; model runs are pending",
+   "verdict_tag": "Close weighting missed the local gate",
    "concept_primer": "The previous training recipe nearly learned to finish fresh puzzles, but a few answers ran out of space before the model stopped reasoning. This follow-up teaches the exact transition from reasoning to a final answer while keeping the amount of practice equal across comparisons.",
    "plain_question": "Does putting extra teaching weight on the moment reasoning ends help the model finish reliably, beyond simply adding targeted lessons or more replay practice?",
-   "plain_answer": "The comparison is ready, but the model has not run yet. Three versions will start from the same near-miss model and receive 320 examples apiece. One gets replay only, one gets 80 fresh execution and rule-finding lessons, and the third gets those exact same lessons with extra weight only on the two-piece closing marker.",
-   "why_it_matters": "This separates three explanations that earlier work could not: benefit from another short training pass, benefit from task-targeted lessons, and benefit from teaching the model when to stop reasoning. Equal example counts and equal processed text make the comparison unusually clean.",
-   "verdict_tone": "neutral",
+   "plain_answer": "No. On 26 fresh procedural cases, ordinary and close-weighted target training both produced 23 well-formed answers and three response-limit contacts. Close weighting scored 16 correct versus 15 for ordinary training, but only by gaining one unrelated abstention case; both remained zero for four targeted execution and rule-finding cases. The best arm missed each frozen numeric gate by one case or contact, so the benchmark stayed sealed.",
+   "why_it_matters": "The byte-identical comparison separates the effect of fresh target lessons from the effect of emphasizing the reasoning-to-answer marker. Fresh lessons improved answer emission, but extra marker weight did not. That retires close-weight tuning and redirects the search toward teaching a bounded search procedure itself.",
+   "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Examples per version",
-     "value": "320",
-     "sub": "the same total in all three comparisons"
+     "label": "Best fresh accuracy",
+     "value": "16 of 26",
+     "sub": "tied the immediate parent and missed the gate by one"
     },
     {
-     "label": "Training pieces per version",
-     "value": "286,814",
-     "sub": "exactly equal processed text"
+     "label": "Well-formed answers",
+     "value": "23 of 26",
+     "sub": "identical for ordinary and close-weighted training"
     },
     {
-     "label": "Fresh targeted lessons",
-     "value": "80",
-     "sub": "40 execution and 40 rule-finding examples"
+     "label": "Response-limit contacts",
+     "value": "3",
+     "sub": "identical for ordinary and close-weighted training"
     },
     {
-     "label": "Model evaluations so far",
-     "value": "zero",
-     "sub": "only design and integrity checks have run"
+     "label": "Targeted cases solved",
+     "value": "0 of 4",
+     "sub": "execution and rule-finding remained unsolved"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Three equal training streams isolate the closing lesson",
-     "chart_read": "Each stacked bar totals 320 examples. Replay-only keeps all 120 variable examples as replay; the other two replace 80 of them with fresh targeted lessons while sharing the same 200-example core.",
-     "chart_takeaway": "The two targeted versions use identical examples, so any difference between them comes from emphasizing the reasoning-to-answer transition."
+     "chart_plain_title": "Fresh target lessons improve finishing; close weight adds no finishing gain",
+     "chart_read": "Each group shows counts out of the same 26 fresh cases. Higher correct and parsed bars are better; lower response-limit contacts are better.",
+     "chart_takeaway": "Ordinary and close-weighted target arms tie at 23 parsed answers and three limit contacts, while close weight adds only one correct case and still misses promotion."
     }
    ]
   },
@@ -7592,6 +7592,44 @@
     }
    ]
   },
+  "qwen35_4b_universal_on_policy_prefix_repair_token_match": {
+   "verdict_tag": "Intake only; no model result",
+   "concept_primer": "A repair lesson can start from the exact point where a worker went wrong, instead of showing a perfect solution from the beginning.",
+   "plain_question": "Can corrections attached to the model's own fresh mistakes teach it to reason, stop, and answer more reliably than equal extra practice?",
+   "plain_answer": "Not known yet. This checkpoint only reserves five fresh identities, authenticates one parent, and blocks every collection or training step until the design is reviewed.",
+   "why_it_matters": "If this works, future training can target real failure states instead of inventing cleaner demonstrations that the deployed model never visits.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Scientific runs",
+     "value": "zero",
+     "sub": "intake and parent authentication only"
+    },
+    {
+     "label": "Reserved identities",
+     "value": "five",
+     "sub": "construction, parent collection, training, local, and broad"
+    },
+    {
+     "label": "Proposed parents",
+     "value": "one",
+     "sub": "the failed successors are not inherited"
+    },
+    {
+     "label": "Completed stages",
+     "value": "1 of 6",
+     "sub": "only intake is marked complete"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Only intake is complete",
+     "chart_read": "The groups are intake, design, parent collection, training, local testing, and broad testing. A bar at one means complete; more completed stages are better.",
+     "chart_takeaway": "Only the first bar is present; every scientific stage remains blocked pending design review."
+    }
+   ]
+  },
   "qwen35_4b_universal_replay_anchor": {
    "verdict_tag": "Designed mix loses; replay-only sets a stronger anchor",
    "concept_primer": "This experiment kept the model practicing broad tasks while adding a smaller set of abstract lessons. A replay-only comparison received the same number of updates, revealing whether any gain came from the designed lessons or simply from continuing broad practice.",
@@ -7633,6 +7671,92 @@
      "chart_plain_title": "Both training streams shared the same broad core",
      "chart_read": "Each bar totals 1,520 rows. Both streams share 1,120 replay rows; the candidate adds 400 designed lessons while the comparison adds 400 more replay examples.",
      "chart_takeaway": "The matched construction isolates designed lessons from the benefit of simply continuing broad practice."
+    }
+   ]
+  },
+  "qwen35_4b_universal_search_scaffold_token_match": {
+   "verdict_tag": "Staged search fails its local mechanism gate",
+   "concept_primer": "Earlier lessons showed a complete worked search trace, but the model still wandered among candidates and ran out of room. This design turns the missing intermediate moves—apply, fit, reject, and execute—into separately graded practice before recombining them.",
+   "plain_question": "Can teaching each step of a bounded two-operation search help the model solve and finish fresh abstract tasks better than another equal replay update?",
+   "plain_answer": "No. On 26 fresh paired cases, the staged-search model tied replay at 16 correct and trailed its parent at 18. All three parsed 23 answers and hit the limit three times; the candidate solved none of four execute/induct cases and neither probe-selection case.",
+   "why_it_matters": "Separately grading search substates was not enough to make them reusable. The candidate often reached a correct execution state but failed to commit, while its hypothesis simulation regressed. The next mechanism must match the natural-language variable-depth deployment interface rather than add more canonical two-operation lessons.",
+   "verdict_tone": "negative",
+   "key_numbers": [
+    {
+     "label": "Candidate local accuracy",
+     "value": "16 of 26",
+     "sub": "ties replay and trails the parent at 18"
+    },
+    {
+     "label": "Readable answers",
+     "value": "23 of 26",
+     "sub": "identical across all arms; one short of the gate"
+    },
+    {
+     "label": "Execute plus induct",
+     "value": "0 of 4",
+     "sub": "the parent solves two of four"
+    },
+    {
+     "label": "Probe selection",
+     "value": "0 of 2",
+     "sub": "both controls solve both cases"
+    },
+    {
+     "label": "Broad events consumed",
+     "value": "zero",
+     "sub": "promotion was empty; seed 78,137 stays sealed"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Staged search ties replay and trails the parent locally",
+     "chart_read": "The parent solves 18 of 26 fresh cases; replay and scaffold solve 16. All three parse 23 answers and finish within the cap on 23 cases, so the scaffold does not improve the registered emission seam.",
+     "chart_takeaway": "The candidate fails five gates and loses all execute, induction, and probe-selection cases; broad evaluation remains sealed."
+    }
+   ]
+  },
+  "qwen35_4b_universal_state_table_compiler_token_match": {
+   "verdict_tag": "Design frozen; no model result",
+   "concept_primer": "A state table is a compact scratchpad: after each instruction, it records exactly what changed. This trial pairs that scratchpad with a separate scorecard for competing explanations, then asks for one short verified answer.",
+   "plain_question": "Can explicit natural-language state tracking and hypothesis scoring teach a small model to execute, compare, and finish more reliably than another equal replay update?",
+   "plain_answer": "Not known yet. CPU construction produced 80 truth-checked lessons and two 320-row streams with exactly 286,814 tokens each. All 48 smoke tests pass, but no model has been trained or evaluated.",
+   "why_it_matters": "The preceding staged-search curriculum often computed the right state but failed to answer, and it damaged branch selection. This successor changes the training interface to match those observed deployment failures while keeping benchmark data sealed.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Model results",
+     "value": "zero",
+     "sub": "CPU design only; training waits for a green checkpoint"
+    },
+    {
+     "label": "Truth-audited lessons",
+     "value": "80",
+     "sub": "20 each execute, score, repair, and commit"
+    },
+    {
+     "label": "Tokens per arm",
+     "value": "286,814",
+     "sub": "exact match, zero skips, 40 planned updates"
+    },
+    {
+     "label": "Aligned replay rows",
+     "value": "200",
+     "sub": "byte-identical and in the same positions"
+    },
+    {
+     "label": "Broad access",
+     "value": "sealed",
+     "sub": "unavailable until every local gate passes"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Intake and CPU design are complete",
+     "chart_read": "Bars at one mark completed admission stages. Training, local evaluation, and broad evaluation remain at zero.",
+     "chart_takeaway": "The generator, exact-compute control, gates, and adversarial review are frozen without creating a model result or consuming an evaluation event."
     }
    ]
   },
@@ -13563,486 +13687,6 @@
      "chart_plain_title": "Give the model enough room to write the whole fix",
      "chart_read": "Two runs of the trained model differ only in how much output length it may produce. Bars show whether the edit applies and whether it fixes the code, on a small five-task pilot. Taller is better. The tight-limit run is flat; the roomier one fills up.",
      "chart_takeaway": "With too little output room the model cannot finish a usable edit at all, but doubling the room flips it to fully fixing the pilot cases."
-    }
-   ]
-  },
-  "qwen35_4b_deep_advantage_mopd": {
-   "verdict_tag": "Five updates stayed local",
-   "concept_primer": "Imagine a strong all-round apprentice and two specialists standing at the same half-finished job. The deep specialist is copied only when separate trial runs show that it finishes that exact job better than both the apprentice and the other specialist.",
-   "plain_question": "Can carefully chosen lessons from the deep specialist improve one already blended small model without sacrificing its faster skills?",
-   "plain_answer": "The teacher choice and the small safety update both passed. Deep won on two fresh groups, and five training steps changed unrelated logits only slightly while improving the lesson-matching loss. That authorizes the full four-round trial; no improved-capability result exists yet.",
-   "why_it_matters": "The study has cleared the two common false starts: choosing a teacher that does not really help and making a weight edit that immediately spills everywhere. The remaining test is the important one: whether the full update creates one checkpoint that beats the specialists, runtime switching, controls, and eight tries.",
-   "verdict_tone": "neutral",
-   "key_numbers": [
-    {
-     "label": "Unrelated-logit drift after five steps",
-     "value": "0.0276",
-     "sub": "well below the frozen 0.10 safety ceiling on 20 exact probes"
-    },
-    {
-     "label": "Output uncertainty lost",
-     "value": "3.1%",
-     "sub": "below the frozen 10% collapse ceiling"
-    },
-    {
-     "label": "Exact lesson-matching loss",
-     "value": "0.0129 → 0.0117",
-     "sub": "improved rather than merely staying under the safety ceiling"
-    },
-    {
-     "label": "Deep wins available online",
-     "value": "90",
-     "sub": "enough to freeze 60 lessons plus 20 reminders and 60 matched controls"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Five update steps barely moved unrelated logits",
-     "chart_read": "Two short bars show the average unrelated-logit movement and the relative loss of output uncertainty on 20 exact before-and-after probes. Smaller is safer; both are far below one tenth.",
-     "chart_takeaway": "The small pilot cleared its safety gate, and its exact lesson-matching loss also improved, so the full four-round test may proceed."
-    },
-    {
-     "index": 1,
-     "chart_plain_title": "Deep wins on separate check runs in both fresh blocks",
-     "chart_read": "Each block has two positive bars: deep's score edge over the starting blend and over the quick specialist. Taller is better, but merely staying above zero in both untouched blocks is the key replication test.",
-     "chart_takeaway": "Deep's local teaching advantage repeated against both alternatives, so the experiment may now test whether that signal can be installed safely into one checkpoint."
-    },
-    {
-     "index": 2,
-     "chart_plain_title": "The proposed training and its two sharp controls receive identical lesson counts",
-     "chart_read": "Each group has a tall 60-unit capability bar and a shorter 20-unit reminder bar. Only the source of the 60 capability lessons changes: verified deep wins, matched places where deep did not win, or the wrong specialist on the verified-win states.",
-     "chart_takeaway": "Because all three arms get the same 80 lessons, a primary win can be attributed to choosing both the right state and the right specialist rather than to extra training."
-    }
-   ]
-  },
-  "qwen35_4b_validation_policy_counterexample_curriculum": {
-   "verdict_tag": "The lesson was already mastered",
-   "concept_primer": "A training experiment needs room to improve. If the starting model already fixes every practice case, even a perfect trained model cannot prove that the new lessons helped.",
-   "plain_question": "Can a tiny set of almost-correct failed-test revisions teach that exact distinction without erasing the coding loop already learned?",
-   "plain_answer": "The test could not answer the question. Before the newly trained model was allowed to run, the starting model and the equal-size old-lesson control each fixed all 48 practice cases. The required gains were therefore impossible, so the run stopped before transfer or the external benchmark.",
-   "why_it_matters": "Turning the old failure into a clear instruction plus an almost-correct program also made it easy. Future curricula must first prove that the starting model still fails the exact new practice distribution; failure forensics alone do not guarantee useful training headroom.",
-   "verdict_tone": "negative",
-   "key_numbers": [
-    {
-     "label": "Starting model practice score",
-     "value": "48 of 48",
-     "sub": "no room for the required fifteen-point gain"
-    },
-    {
-     "label": "Equal extra-training control",
-     "value": "48 of 48",
-     "sub": "no room for the required ten-point gain"
-    },
-    {
-     "label": "Unrelated-behavior drift",
-     "value": "0.109",
-     "sub": "the trained candidate stayed below the 0.15 safety ceiling"
-    },
-    {
-     "label": "External benchmark calls",
-     "value": "zero",
-     "sub": "stopped before candidate behavior and transfer"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Both controls already sit at the maximum score",
-     "chart_read": "The first two bars show practice success for the starting model and the equal extra-training control; the third is the best score any candidate could possibly achieve. All bars reach the same ceiling.",
-     "chart_takeaway": "With both controls at 100 percent, the promised improvement cannot be measured and the candidate must remain unopened."
-    },
-    {
-     "index": 1,
-     "chart_plain_title": "The small update stayed inside its unrelated-behavior limit",
-     "chart_read": "The first bar is measured drift from the older reference model; the second is the largest allowed drift. Shorter is better, and the measured bar remains below the limit.",
-     "chart_takeaway": "The narrow training update was local enough, but locality cannot rescue an evaluation set the parent already solves perfectly."
-    }
-   ]
-  },
-  "qwen35_4b_semantic_policy_headroom_tournament": {
-   "verdict_tag": "The gap is before the failed test",
-   "concept_primer": "A coding agent can know how to fix a clearly reported failure yet still patch too early when the requirement is ambiguous. The missing skill can be gathering the decisive evidence before writing code.",
-   "plain_question": "Which malformed-input rules still challenge the transaction-trained model after a visible failure, and where in the coding loop does the remaining difficulty actually appear?",
-   "plain_answer": "No rule produced a stable training target after a failed test: every one of 72 cases reached a correct patch. But before seeing test output, the model got zero of 54 ambiguous first patches fully right and never opened the visible tests first. The run formally stopped because answers also exceeded their length allowance too often.",
-   "why_it_matters": "More post-failure practice would teach behavior the model already has. The promising strategy is to teach it to inspect the evidence that distinguishes two plausible requirements, then make its first patch follow what it found.",
-   "verdict_tone": "negative",
-   "key_numbers": [
-    {
-     "label": "Correct after failure",
-     "value": "72 of 72",
-     "sub": "every case reached a fully correct patch"
-    },
-    {
-     "label": "Ambiguous first patches",
-     "value": "0 of 54",
-     "sub": "fully correct without test output"
-    },
-    {
-     "label": "Tests read before patching",
-     "value": "0 of 72",
-     "sub": "in rejected-patch trajectories"
-    },
-    {
-     "label": "Answer-limit contacts",
-     "value": "12% / 13%",
-     "sub": "both blocks exceeded the 5% stop"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Most rules were already repaired after a visible failure",
-     "chart_read": "Each group is one hidden rule, with one bar for each fresh block. Taller means the model ended with the correct behavior more often after seeing the failed test.",
-     "chart_takeaway": "Negative and non-integer handling were perfect in both blocks; blank-resource misses moved between data shapes and did not form a stable lesson."
-    },
-    {
-     "index": 1,
-     "chart_plain_title": "The sharp gap appears before the first patch",
-     "chart_read": "The first bar asks whether a correct patch ever appeared after test output. The other bars ask whether the model got an ambiguous first patch right or read the tests before making it.",
-     "chart_takeaway": "The model can act on decisive failure evidence, but it does not seek that evidence before committing to a guess."
-    },
-    {
-     "index": 2,
-     "chart_plain_title": "Both blocks exceeded the answer-length stop",
-     "chart_read": "The first two bars are the share of tool turns that filled the answer allowance; the last bar is the maximum allowed rate. Shorter is better.",
-     "chart_takeaway": "The formal result remains an instrument failure even though most long answers contained a usable tool call."
-    }
-   ]
-  },
-  "qwen35_4b_confidence_policy": {
-   "verdict_tag": "Verifier-free SELECT + ABSTAIN work; selectively escalating hard tasks to more think budget is a null result at n=400",
-   "concept_primer": "Picture the model answering a coding problem several times. A cheap read of its own confidence (one logit: 'is this right?') picks the best try and flags the ones it is unsure about. A tempting extra step is to let the model think LONGER on the flagged-hard problems instead of drawing more tries. This experiment tests all three moves at matched compute — and powers up the shakiest one until the answer is trustworthy.",
-   "plain_question": "Can the model's own confidence be turned into one deployable policy — pick the best answer, abstain when unsure, and spend extra compute wisely — with no test-execution or grader?",
-   "plain_answer": "Partly. Picking the answer with the highest single-token P(True) confidence is the best grader-free selector at every compute level, and abstaining below a confidence threshold trades coverage for accuracy cleanly — both robust. But the appealing third move — spending compute on more THINKING for the flagged-hard tasks rather than more samples — showed no benefit once powered up to 400 tasks: an early small-sample win did not replicate (every 95% interval now includes zero). Thinking longer helps a little across the board, just not selectively on the hard tail — because these coding tasks nearly saturate the model's thinking budget already.",
-   "why_it_matters": "It gives a shippable, verifier-free recipe (select + abstain from one logit) AND a methodological lesson: a pre-registered, under-powered subset win was flagged as shaky and then REVERSED on the larger sample — power up before you claim. No grader, no bigger model, just the fixed 4B's own logits.",
-   "verdict_tone": "neutral",
-   "key_numbers": [
-    {
-     "label": "P(True)-select accuracy @k=9",
-     "value": "0.762",
-     "sub": "best verifier-free selector; majority-vote 0.742, mean-logprob 0.725, greedy 0.701"
-    },
-    {
-     "label": "Abstention: accuracy at 68% coverage",
-     "value": "0.866",
-     "sub": "up from 0.757 at full coverage; solvability AUROC 0.72"
-    },
-    {
-     "label": "Escalate vs breadth (n=400)",
-     "value": "CIs span 0",
-     "sub": "esc-minus-breadth +0.004..+0.022 across abstain fractions — a null; the n=24-60 win did not replicate"
-    },
-    {
-     "label": "MBPP tasks powered up to",
-     "value": "400",
-     "sub": "regenerated on vLLM (~10x faster than the initial HF pass) with bootstrap CIs"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "P(True) confidence-select is the best verifier-free selector",
-     "chart_read": "Bars are MBPP accuracy at nine candidates for each selection rule. Single-token P(True)-select leads the verifier-free rules; the execution line and oracle need a grader."
-    },
-    {
-     "index": 1,
-     "chart_plain_title": "Escalating hard tasks to more think budget: a null result at n=400",
-     "chart_read": "Each group is the hardest X% of tasks by confidence. Escalating them to a bigger think budget (left) barely differs from spending the same compute on more samples (right) — every 95% interval on the difference includes zero."
-    }
-   ]
-  },
-  "qwen35_4b_universal_close_weight_token_match": {
-   "verdict_tag": "Close weighting missed the local gate",
-   "concept_primer": "The previous training recipe nearly learned to finish fresh puzzles, but a few answers ran out of space before the model stopped reasoning. This follow-up teaches the exact transition from reasoning to a final answer while keeping the amount of practice equal across comparisons.",
-   "plain_question": "Does putting extra teaching weight on the moment reasoning ends help the model finish reliably, beyond simply adding targeted lessons or more replay practice?",
-   "plain_answer": "No. On 26 fresh procedural cases, ordinary and close-weighted target training both produced 23 well-formed answers and three response-limit contacts. Close weighting scored 16 correct versus 15 for ordinary training, but only by gaining one unrelated abstention case; both remained zero for four targeted execution and rule-finding cases. The best arm missed each frozen numeric gate by one case or contact, so the benchmark stayed sealed.",
-   "why_it_matters": "The byte-identical comparison separates the effect of fresh target lessons from the effect of emphasizing the reasoning-to-answer marker. Fresh lessons improved answer emission, but extra marker weight did not. That retires close-weight tuning and redirects the search toward teaching a bounded search procedure itself.",
-   "verdict_tone": "negative",
-   "key_numbers": [
-    {
-     "label": "Best fresh accuracy",
-     "value": "16 of 26",
-     "sub": "tied the immediate parent and missed the gate by one"
-    },
-    {
-     "label": "Well-formed answers",
-     "value": "23 of 26",
-     "sub": "identical for ordinary and close-weighted training"
-    },
-    {
-     "label": "Response-limit contacts",
-     "value": "3",
-     "sub": "identical for ordinary and close-weighted training"
-    },
-    {
-     "label": "Targeted cases solved",
-     "value": "0 of 4",
-     "sub": "execution and rule-finding remained unsolved"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Fresh target lessons improve finishing; close weight adds no finishing gain",
-     "chart_read": "Each group shows counts out of the same 26 fresh cases. Higher correct and parsed bars are better; lower response-limit contacts are better.",
-     "chart_takeaway": "Ordinary and close-weighted target arms tie at 23 parsed answers and three limit contacts, while close weight adds only one correct case and still misses promotion."
-    }
-   ]
-  },
-  "qwen35_4b_universal_curriculum": {
-   "verdict_tag": "Synthetic skills installed locally but displaced broad behavior",
-   "concept_primer": "The curriculum teaches abstract procedures with invented symbols that do not resemble the benchmark. The crucial test is not whether the model learns those exercises, but whether the same update improves every unrelated family without erasing behavior it already had.",
-   "plain_question": "Can carefully checked synthetic lessons add general procedures that improve every unseen benchmark family while preserving a strong starting policy?",
-   "plain_answer": "Not with either tested training geometry. Continuing from the strong policy raised fresh synthetic accuracy from 50% to 69% and beat the untrained base overall, but it scored 31% aggregate versus 45% for the strong starting policy and fell below base on three of ten families. A second mixture trained from base with broad replay also reached 69% local accuracy, yet only 85% of its answers were well formed and it hit the response limit four times, so its broad test stayed sealed.",
-   "why_it_matters": "The lessons clearly changed the model, but local learning was not a universal gain. The result narrows the search toward gentler joint training that keeps mature broad behavior active during every update, with a replay-only comparison to separate designed-skill transfer from ordinary continued practice.",
-   "verdict_tone": "negative",
-   "key_numbers": [
-    {
-     "label": "fresh synthetic accuracy",
-     "value": "69%",
-     "sub": "up from 50% for the strong starting policy"
-    },
-    {
-     "label": "aggregate benchmark score",
-     "value": "31%",
-     "sub": "versus 17% for base and 45% for the strong starting policy"
-    },
-    {
-     "label": "families below base",
-     "value": "3 of 10",
-     "sub": "the update specialized instead of lifting every family"
-    },
-    {
-     "label": "from-base replay mixture",
-     "value": "local gate failed",
-     "sub": "85% well-formed answers and four response-limit contacts"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Designed continuation trades broad gains across families",
-     "chart_read": "For each family, compare the strong starting policy's change from base with the designed continuation's change from base. Bars below zero mark regressions.",
-     "chart_takeaway": "The designed lessons create large wins in two families but regress three below base and lose overall to the strong starting policy."
-    }
-   ]
-  },
-  "qwen35_4b_universal_low_density_token_match": {
-      "verdict_tag": "Low-density doses failed the local gate",
-   "concept_primer": "The previous designed mix may have been too dense, and its replay comparison also saw more tokens. This follow-up changes only a tiny number of rows while holding total training exposure exactly equal, so the later difference can be tied much more cleanly to curriculum content.",
-   "plain_question": "Can a tiny dose of abstract skill lessons improve the replay-refreshed model without erasing any of its broad gains?",
-      "plain_answer": "No. Neither 40 nor 80 abstract lessons passed the fresh local screen. The stronger 80-lesson stream matched the inherited anchor at 54% accuracy and parsed 62% of answers, but still hit the answer cap 10 times; broad evaluation stayed sealed.",
-   "why_it_matters": "Exact exposure removes the prior compute ambiguity: these gentle lesson doses were too small to install reliable concise execution. The next attempt must bridge the dose gap or target answer commitment directly, while keeping a replay-only comparison and fresh evaluation seeds.",
-   "verdict_tone": "negative",
-   "key_numbers": [
-    {
-     "label": "best local accuracy",
-     "value": "54%",
-     "sub": "80-lesson stream tied the inherited anchor"
-    },
-    {
-     "label": "best answer parse rate",
-     "value": "62%",
-     "sub": "below the registered 90% gate"
-    },
-    {
-     "label": "fewest answer-cap contacts",
-     "value": "10 of 26",
-     "sub": "the registered ceiling was two"
-    },
-    {
-          "label": "broad events consumed",
-          "value": "zero",
-          "sub": "all arms stopped at the local screen"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Only the final 80 training slots change",
-     "chart_read": "Every bar totals 1,520 rows. Moving from replay only to the 40- and 80-lesson doses replaces one or both token-matched replay blocks while the 1,440-row core stays fixed.",
-     "chart_takeaway": "The ladder isolates a very small designed-content increment at exactly equal forward-token exposure."
-    },
-    {
-     "index": 1,
-     "chart_plain_title": "Every exact-exposure stream missed the local gate",
-     "chart_read": "Two bars per model show exact-answer accuracy and answer parse rate on the same 26 fresh cases. The 80-lesson stream is best among the new streams, but neither bar reaches its registered threshold.",
-     "chart_takeaway": "Adding 80 lessons modestly improves readable answers over replay alone, yet accuracy only ties the inherited anchor and answer-cap failures remain frequent."
-    }
-   ]
-  },
-  "qwen35_4b_universal_mid_density_token_match": {
-   "verdict_tag": "160 lessons nearly pass; benchmark stays sealed",
-   "concept_primer": "Very small doses of abstract lessons did not install reliable execution, while a much larger earlier dose learned locally but displaced broad behavior. This experiment tests two doses between those endpoints while keeping training exposure exactly equal to replay-only practice.",
-   "plain_question": "Can a middle-sized dose of abstract skill lessons cross the local installation threshold without sacrificing the replay practice that protects broad capability?",
-   "plain_answer": "The 160-lesson stream improved fresh local accuracy from 17 to 19 of 26 cases, raised readable answers from 18 to 23, and cut answer-limit contacts from nine to three. It still missed the readability and length gates by one case each. Adding 80 more lessons erased the accuracy gain, so no model advanced to broad evaluation.",
-   "why_it_matters": "The middle dose moved the right behaviors and came close, while the larger dose moved backward. That narrows the next intervention to concise answer commitment at the 160-lesson mix instead of adding more generic lessons or weakening the gate.",
-   "verdict_tone": "negative",
-   "key_numbers": [
-    {
-     "label": "best local accuracy",
-     "value": "19 of 26",
-     "sub": "160 lessons versus 17 for replay only"
-    },
-    {
-     "label": "best readable answers",
-     "value": "23 of 26",
-     "sub": "one case short of the registered gate"
-    },
-    {
-     "label": "fewest answer-limit contacts",
-     "value": "three",
-     "sub": "one above the registered ceiling"
-    },
-    {
-     "label": "broad events consumed",
-     "value": "zero",
-     "sub": "promotion receipt was empty"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Two middle doses replace matched replay blocks",
-     "chart_read": "Every bar totals 1,520 rows. The designed streams replace two or three token-matched 80-row replay blocks while the 1,280-row replay core stays fixed.",
-     "chart_takeaway": "The frozen ladder isolates lesson density at equal token exposure; all three streams trained cleanly."
-    },
-    {
-     "index": 1,
-     "chart_plain_title": "The 160-lesson stream misses two local bars narrowly",
-     "chart_read": "Each model has bars for exact-answer accuracy and readable-answer rate on the same 26 fresh cases. The 160-lesson stream leads both, but readable answers remain one case short; its three answer-limit contacts are also one above the ceiling.",
-     "chart_takeaway": "A middle dose improves correctness and concise completion, while 240 lessons reverse part of the gain; no arm is eligible for broad evaluation."
-    }
-   ]
-  },
-  "qwen35_4b_universal_replay_anchor": {
-   "verdict_tag": "Designed mix loses; replay-only sets a stronger anchor",
-   "concept_primer": "This experiment kept the model practicing broad tasks while adding a smaller set of abstract lessons. A replay-only comparison received the same number of updates, revealing whether any gain came from the designed lessons or simply from continuing broad practice.",
-   "plain_question": "Can gentle joint practice add designed general skills without erasing the broad behavior the model already learned?",
-   "plain_answer": "No at this dose. The designed mix passed its fresh synthetic screen but scored about 42% overall, below both the 44% mature policy and the 49% replay-only comparison. It also fell below base on one family. Replay-only was the useful surprise: it improved eight of ten families, tied the other two, and regressed none.",
-   "why_it_matters": "Broad replay was not merely protecting old behavior; it was still adding capability. Future designed curricula must beat another replay continuation, not just the older starting policy. The next search should begin from this stronger replay-refreshed model, use far fewer designed rows, and match token exposure as well as update count.",
-   "verdict_tone": "mixed",
-   "key_numbers": [
-    {
-     "label": "designed-mix aggregate",
-     "value": "42.4%",
-     "sub": "below both the 44% mature policy and 49% replay-only comparison"
-    },
-    {
-     "label": "replay-only aggregate",
-     "value": "48.5%",
-     "sub": "about four points above the mature policy"
-    },
-    {
-     "label": "replay-only family lift",
-     "value": "8 of 10",
-     "sub": "two ties and zero regressions versus base"
-    },
-    {
-     "label": "fresh synthetic accuracy",
-     "value": "73%",
-     "sub": "the local pass did not predict broad transfer"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Replay-only protects every family and wins overall",
-     "chart_read": "For each family, compare the replay-only and designed-mix changes from base. Bars below zero are regressions; replay-only has none while the designed mix has one.",
-     "chart_takeaway": "The designed mix trails replay-only by about six aggregate points; replay saw 17% more token exposure, so the next test must token-match."
-    },
-    {
-     "index": 1,
-     "chart_plain_title": "Both training streams shared the same broad core",
-     "chart_read": "Each bar totals 1,520 rows. Both streams share 1,120 replay rows; the candidate adds 400 designed lessons while the comparison adds 400 more replay examples.",
-     "chart_takeaway": "The matched construction isolates designed lessons from the benefit of simply continuing broad practice."
-    }
-   ]
-  },
-  "qwen35_4b_universal_search_scaffold_token_match": {
-    "verdict_tag": "Staged search fails its local mechanism gate",
-   "concept_primer": "Earlier lessons showed a complete worked search trace, but the model still wandered among candidates and ran out of room. This design turns the missing intermediate moves—apply, fit, reject, and execute—into separately graded practice before recombining them.",
-   "plain_question": "Can teaching each step of a bounded two-operation search help the model solve and finish fresh abstract tasks better than another equal replay update?",
-    "plain_answer": "No. On 26 fresh paired cases, the staged-search model tied replay at 16 correct and trailed its parent at 18. All three parsed 23 answers and hit the limit three times; the candidate solved none of four execute/induct cases and neither probe-selection case.",
-   "why_it_matters": "Separately grading search substates was not enough to make them reusable. The candidate often reached a correct execution state but failed to commit, while its hypothesis simulation regressed. The next mechanism must match the natural-language variable-depth deployment interface rather than add more canonical two-operation lessons.",
-   "verdict_tone": "negative",
-   "key_numbers": [
-    {
-        "label": "Candidate local accuracy",
-     "value": "16 of 26",
-     "sub": "ties replay and trails the parent at 18"
-    },
-    {
-        "label": "Readable answers",
-     "value": "23 of 26",
-        "sub": "identical across all arms; one short of the gate"
-      },
-      {
-        "label": "Execute plus induct",
-        "value": "0 of 4",
-        "sub": "the parent solves two of four"
-    },
-    {
-     "label": "Probe selection",
-     "value": "0 of 2",
-     "sub": "both controls solve both cases"
-    },
-    {
-     "label": "Broad events consumed",
-     "value": "zero",
-        "sub": "promotion was empty; seed 78,137 stays sealed"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Staged search ties replay and trails the parent locally",
-      "chart_read": "The parent solves 18 of 26 fresh cases; replay and scaffold solve 16. All three parse 23 answers and finish within the cap on 23 cases, so the scaffold does not improve the registered emission seam.",
-     "chart_takeaway": "The candidate fails five gates and loses all execute, induction, and probe-selection cases; broad evaluation remains sealed."
-    }
-   ]
-  },
-  "qwen35_4b_universal_state_table_compiler_token_match": {
-   "verdict_tag": "Design frozen; no model result",
-   "concept_primer": "A state table is a compact scratchpad: after each instruction, it records exactly what changed. This trial pairs that scratchpad with a separate scorecard for competing explanations, then asks for one short verified answer.",
-   "plain_question": "Can explicit natural-language state tracking and hypothesis scoring teach a small model to execute, compare, and finish more reliably than another equal replay update?",
-   "plain_answer": "Not known yet. CPU construction produced 80 truth-checked lessons and two 320-row streams with exactly 286,814 tokens each. All 48 smoke tests pass, but no model has been trained or evaluated.",
-   "why_it_matters": "The preceding staged-search curriculum often computed the right state but failed to answer, and it damaged branch selection. This successor changes the training interface to match those observed deployment failures while keeping benchmark data sealed.",
-   "verdict_tone": "neutral",
-   "key_numbers": [
-    {
-     "label": "Model results",
-     "value": "zero",
-     "sub": "CPU design only; training waits for a green checkpoint"
-    },
-    {
-     "label": "Truth-audited lessons",
-     "value": "80",
-     "sub": "20 each execute, score, repair, and commit"
-    },
-    {
-     "label": "Tokens per arm",
-     "value": "286,814",
-     "sub": "exact match, zero skips, 40 planned updates"
-    },
-    {
-     "label": "Aligned replay rows",
-     "value": "200",
-     "sub": "byte-identical and in the same positions"
-    },
-    {
-     "label": "Broad access",
-     "value": "sealed",
-     "sub": "unavailable until every local gate passes"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Intake and CPU design are complete",
-     "chart_read": "Bars at one mark completed admission stages. Training, local evaluation, and broad evaluation remain at zero.",
-     "chart_takeaway": "The generator, exact-compute control, gates, and adversarial review are frozen without creating a model result or consuming an evaluation event."
     }
    ]
   }

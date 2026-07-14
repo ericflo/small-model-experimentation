@@ -48338,6 +48338,41 @@
      "source": "experiments/qwen35_4b_universal_state_table_compiler_token_match/data/design_receipt.json"
     }
    ]
+  },
+  "qwen35_4b_universal_on_policy_prefix_repair_token_match": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "On-policy prefix repair is intake-only",
+     "categories": [
+      "intake",
+      "CPU design",
+      "parent rollout",
+      "training",
+      "local gate",
+      "broad gate"
+     ],
+     "series": [
+      {
+       "label": "completed checkpoint",
+       "values": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+       ]
+      }
+     ],
+     "x_label": "prospective experiment stage",
+     "y_label": "completion indicator",
+     "y_format": "integer",
+     "note": "Only related-work intake, fresh seed reservation, and parent authentication are complete. No rollout, curriculum, training, capability, merge, or benchmark event exists.",
+     "source": "experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/idea_intake.md"
+    }
+   ]
   }
  }
 }

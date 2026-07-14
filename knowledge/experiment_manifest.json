@@ -6008,6 +6008,41 @@
   },
   {
     "file_counts": {
+      ".md": 5,
+      ".py": 3,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_universal_on_policy_prefix_repair_token_match",
+    "path": "experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match",
+    "primary_readme": "experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/README.md",
+    "primary_report": "experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation",
+      "benchmark_generalization",
+      "posttraining_and_adaptation",
+      "process_control_and_tool_use"
+    ],
+    "source_track": "new",
+    "summary": "This result-separated successor tests whether training corrective continuations from the model's own fresh procedural failure prefixes installs a reusable reasoning and commit policy better than another idealized trace curriculum or exact-token replay.",
+    "tags": [
+      "curriculum",
+      "policy",
+      "repair",
+      "small-model"
+    ],
+    "title": "On-Policy Failure-Prefix Universal Curriculum",
+    "top_level_dirs": [
+      "configs",
+      "reports",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 11,
+    "total_size_bytes": 102445
+  },
+  {
+    "file_counts": {
       ".json": 13,
       ".jsonl": 5,
       ".log": 4,

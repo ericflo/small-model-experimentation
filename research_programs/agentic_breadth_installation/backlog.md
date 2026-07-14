@@ -178,13 +178,15 @@
   candidate 19/16/16 correct, 23/21/22 parsed, and 3/5/5 caps; target subtotals were
   4/2/1 of six. Candidate failed five absolute gates and every relative gate, so seed
   78138 remains sealed. Retire another idealized trace surface.
-- Next result-separated universal-curriculum experiment: collect the authenticated
-  parent's own rollouts on fresh procedural tasks, locate the first observable
-  failure prefix, and train executable-oracle corrective continuations for commit,
-  declaration/operator parsing, bounded induction, probe scoring, and exact
-  serialization. Exclude all prior local gate instances. Match same-parent replay on
-  exact forward tokens and steps, use fresh seeds, and keep the unchanged strict gate
-  before any merge or benchmark event.
+- Active intake: `qwen35_4b_universal_on_policy_prefix_repair_token_match` proposes
+  collecting authenticated `close_xi` rollouts on fresh procedural tasks, locating
+  the first observable failure prefix, and training masked executable-oracle
+  corrective continuations for commit, declaration/operator parsing, bounded
+  induction, probe scoring, repair propagation, and exact serialization. Reserved
+  construction/rollout/training/local/aggregate seeds are
+  77113/66113/47/88009/78139. Intake only: CPU feasibility and adversarial review
+  must freeze same-backend collection, prefix provenance/masking, failure-class
+  balance, exact-token replay, and unchanged promotion gates before any model event.
 
 - Experiment: `qwen35_4b_gauntlet_breadth_round1` — build the 12-family gym,
   run round-1 expert iteration, first-ever menagerie-arbitrated install.
